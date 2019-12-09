@@ -228,12 +228,12 @@ SlateportCity_BattleTentLobby_EventScript_208A90:: @ 8208A90
 
 SlateportCity_BattleTentLobby_EventScript_208A99:: @ 8208A99
 	lockall
-	msgbox SlateportCity_BattleTentLobby_Text_259721, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
 	goto SlateportCity_BattleTentLobby_EventScript_208AA8
 	end
 
 SlateportCity_BattleTentLobby_EventScript_208AA8:: @ 8208AA8
-	message SlateportCity_BattleTentLobby_Text_259743
+	message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 0, MULTI_SLATEPORT_TENT_RULES, 0
 	switch VAR_RESULT
