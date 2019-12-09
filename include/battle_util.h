@@ -21,6 +21,7 @@
 #define ABILITYEFFECT_INTIMIDATE2                0xA
 #define ABILITYEFFECT_TRACE1                     0xB
 #define ABILITYEFFECT_TRACE2                     0xC
+#define ABILITYEFFECT_MOVE_END_OTHER             0xD
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0

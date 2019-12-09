@@ -5621,7 +5621,7 @@ BattleScript_MoveUsedIsTaunted::
 BattleScript_SelectingNotAllowedMoveTauntInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVETAUNT
 	goto BattleScript_SelectingUnusableMoveInPalace
-    
+
 BattleScript_SelectingNotAllowedMoveThroatChop::
 	printselectionstring STRINGID_PKMNCANTUSEMOVETHROATCHOP
 	endselectionscript
@@ -6756,6 +6756,14 @@ BattleScript_AbilityStatusEffect::
 	call BattleScript_AbilityPopUp
 	seteffectsecondary
 	return
+
+BattleScript_DancerActivates::
+	call BattleScript_AbilityPopUp
+	waitmessage 0x20
+	setbyte sB_ANIM_TURN, 0x0
+	setbyte sB_ANIM_TARGETS_HIT, 0x0
+	orword gHitMarker, HITMARKER_x800000
+	jumptocalledmove TRUE
 
 BattleScript_SynchronizeActivates::
 	waitstate

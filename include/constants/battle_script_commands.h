@@ -22,7 +22,7 @@
 #define sBATTLE_STYLE gBattleScripting + 0x1D
 #define sLVLBOX_STATE gBattleScripting + 0x1E
 #define sLEARNMOVE_STATE gBattleScripting + 0x1F
-#define sFIELD_20 gBattleScripting + 0x20
+#define sSAVED_BATTLER gBattleScripting + 0x20
 #define sRESHOW_MAIN_STATE gBattleScripting + 0x21
 #define sRESHOW_HELPER_STATE gBattleScripting + 0x22
 #define sFIELD_23 gBattleScripting + 0x23
@@ -188,8 +188,9 @@
 #define MOVEEND_MIRROR_MOVE 17
 #define MOVEEND_NEXT_TARGET 18
 #define MOVEEND_LIFE_ORB 19
-#define MOVEEND_CLEAR_BITS 20
-#define MOVEEND_COUNT 21
+#define MOVEEND_DANCER 20
+#define MOVEEND_CLEAR_BITS 21
+#define MOVEEND_COUNT 22
 
 // stat flags for Cmd_playstatchangeanimation
 #define BIT_HP                      0x1

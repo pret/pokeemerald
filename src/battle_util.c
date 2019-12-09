@@ -1351,6 +1351,7 @@ enum
 	ENDTURN_WRAP,
 	ENDTURN_UPROAR,
 	ENDTURN_THRASH,
+	ENDTURN_FLINCH,
 	ENDTURN_DISABLE,
 	ENDTURN_ENCORE,
 	ENDTURN_MAGNET_RISE,
@@ -1660,6 +1661,9 @@ u8 DoBattlerEndTurnEffects(void)
             }
             gBattleStruct->turnEffectsTracker++;
             break;
+        case ENDTURN_FLINCH:  // reset flinch
+            gBattleMons[gActiveBattler].status2 &= ~(STATUS2_FLINCHED);
+            gBattleStruct->turnEffectsTracker++;
         case ENDTURN_DISABLE:  // disable
             if (gDisableStructs[gActiveBattler].disableTimer != 0)
             {
@@ -2183,7 +2187,6 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_FLINCH: // flinch
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_FLINCHED)
             {
-                gBattleMons[gBattlerAttacker].status2 &= ~(STATUS2_FLINCHED);
                 gProtectStructs[gBattlerAttacker].flinchImmobility = 1;
                 CancelMultiTurnMoves(gBattlerAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedFlinched;
@@ -3442,6 +3445,35 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_IllusionOff;
+                effect++;
+            }
+            break;
+        }
+        break;
+    case ABILITYEFFECT_MOVE_END_OTHER: // Abilities that activate on *another* battler's moveend: Dancer, Soul-Heart, Receiver, Symbiosis
+        switch (GetBattlerAbility(battler))
+        {
+        case ABILITY_DANCER:
+            if (IsBattlerAlive(battler)
+             && (gBattleMoves[gCurrentMove].flags & FLAG_DANCE)
+             && !gSpecialStatuses[battler].dancerUsedMove
+             && gBattlerAttacker != battler)
+            {
+                // Set bit and save Dancer mon's original target
+                gSpecialStatuses[battler].dancerUsedMove = 1;
+                gSpecialStatuses[battler].dancerOriginalTarget = *(gBattleStruct->moveTarget + battler) | 0x4;
+				gBattleStruct->atkCancellerTracker = 0;
+                gBattlerAttacker = gBattlerAbility = battler;
+                gCalledMove = gCurrentMove;
+                
+                // Set the target to the original target of the mon that first used a Dance move
+                gBattlerTarget = gBattleScripting.savedBattler & 0x3;
+                
+                // Make sure that the target isn't an ally - if it is, target the original user
+                if (GetBattlerSide(gBattlerTarget) == GetBattlerSide(gBattlerAttacker))
+                    gBattlerTarget = (gBattleScripting.savedBattler & 0xF0) >> 4;
+                gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+                BattleScriptExecute(BattleScript_DancerActivates);
                 effect++;
             }
             break;
