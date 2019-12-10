@@ -778,8 +778,8 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_8571730[] =
     sSpriteAffineAnim_8571720
 };
 
-static const u8 gUnknown_08571734[] = {4, 0xF, 0xE};
-static const u8 gUnknown_08571737[] = _("/30");
+static const u8 sBoxInfoTextColors[] = {TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
+static const u8 sText_OutOf30[] = _("/30");
 
 static const u16 gBoxSelectionPopupPalette[] = INCBIN_U16("graphics/unknown/unknown_57173C.gbapal");
 static const u8 gBoxSelectionPopupCenterTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
@@ -2090,7 +2090,7 @@ static void sub_80C7BB4(void)
 
 static void sub_80C7BE4(void)
 {
-    u8 text[16];
+    u8 numBoxMonsText[16];
     struct WindowTemplate winTemplate;
     u8 windowId;
     u8 *boxName = GetBoxNamePtr(gUnknown_02039D04->curBox);
@@ -2106,12 +2106,12 @@ static void sub_80C7BE4(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(4));
 
     center = GetStringCenterAlignXOffset(1, boxName, 64);
-    AddTextPrinterParameterized3(windowId, 1, center, 1, gUnknown_08571734, TEXT_SPEED_FF, boxName);
+    AddTextPrinterParameterized3(windowId, 1, center, 1, sBoxInfoTextColors, TEXT_SPEED_FF, boxName);
 
-    ConvertIntToDecimalStringN(text, nPokemonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringAppend(text, gUnknown_08571737);
-    center = GetStringCenterAlignXOffset(1, text, 64);
-    AddTextPrinterParameterized3(windowId, 1, center, 17, gUnknown_08571734, TEXT_SPEED_FF, text);
+    ConvertIntToDecimalStringN(numBoxMonsText, nPokemonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    StringAppend(numBoxMonsText, sText_OutOf30);
+    center = GetStringCenterAlignXOffset(1, numBoxMonsText, 64);
+    AddTextPrinterParameterized3(windowId, 1, center, 17, sBoxInfoTextColors, TEXT_SPEED_FF, numBoxMonsText);
 
     winTileData = GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 0x100 + (GetSpriteTileStartByTag(gUnknown_02039D04->unk_0240) * 32), 0x400);

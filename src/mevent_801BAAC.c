@@ -63,9 +63,9 @@ void sub_801C61C(void);
 
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
 
-const u8 gUnknown_082F0E10[][3] = {
-    {0, 2, 3},
-    {0, 1, 2}
+const u8 sTextColorTable[][3] = {
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY}
 };
 const u8 ALIGNED(4) gUnknown_082F0E18[3] = {7, 4, 7};
 const struct WindowTemplate gUnknown_082F0E1C[] = {
@@ -371,28 +371,28 @@ void sub_801C178(u8 whichWindow)
         case 0:
         {
             s32 x;
-            AddTextPrinterParameterized3(windowId, 3, 0, 1, gUnknown_082F0E10[sWonderCardData->unk_0170->textPal1], 0, sWonderCardData->unk_018B);
+            AddTextPrinterParameterized3(windowId, 3, 0, 1, sTextColorTable[sWonderCardData->unk_0170->textPal1], 0, sWonderCardData->unk_018B);
             x = 160 - GetStringWidth(3, sWonderCardData->unk_01B4, GetFontAttribute(3, 2));
             if (x < 0)
                 x = 0;
-            AddTextPrinterParameterized3(windowId, 3, x, 17, gUnknown_082F0E10[sWonderCardData->unk_0170->textPal1], 0, sWonderCardData->unk_01B4);
+            AddTextPrinterParameterized3(windowId, 3, x, 17, sTextColorTable[sWonderCardData->unk_0170->textPal1], 0, sWonderCardData->unk_01B4);
             if (sWonderCardData->unk_0000.unk_04 != 0)
             {
-                AddTextPrinterParameterized3(windowId, 1, 166, 17, gUnknown_082F0E10[sWonderCardData->unk_0170->textPal1], 0, sWonderCardData->unk_01DD);
+                AddTextPrinterParameterized3(windowId, 1, 166, 17, sTextColorTable[sWonderCardData->unk_0170->textPal1], 0, sWonderCardData->unk_01DD);
             }
             break;
         }
         case 1:
             for (; sp0C < 4; sp0C++)
             {
-                AddTextPrinterParameterized3(windowId, 3, 0, 16 * sp0C + 2, gUnknown_082F0E10[sWonderCardData->unk_0170->textPal2], 0, sWonderCardData->unk_01E4[sp0C]);
+                AddTextPrinterParameterized3(windowId, 3, 0, 16 * sp0C + 2, sTextColorTable[sWonderCardData->unk_0170->textPal2], 0, sWonderCardData->unk_01E4[sp0C]);
             }
             break;
         case 2:
-            AddTextPrinterParameterized3(windowId, 3, 0, gUnknown_082F0E18[sWonderCardData->unk_0000.unk_08_0], gUnknown_082F0E10[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_0288);
+            AddTextPrinterParameterized3(windowId, 3, 0, gUnknown_082F0E18[sWonderCardData->unk_0000.unk_08_0], sTextColorTable[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_0288);
             if (sWonderCardData->unk_0000.unk_08_0 != 2)
             {
-                AddTextPrinterParameterized3(windowId, 3, 0, 16 + gUnknown_082F0E18[sWonderCardData->unk_0000.unk_08_0], gUnknown_082F0E10[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_02B1);
+                AddTextPrinterParameterized3(windowId, 3, 0, 16 + gUnknown_082F0E18[sWonderCardData->unk_0000.unk_08_0], sTextColorTable[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_02B1);
             }
             else
             {
@@ -401,11 +401,11 @@ void sub_801C178(u8 whichWindow)
                 s32 spacing = GetFontAttribute(3, 2);
                 for (; sp0C < sWonderCardData->unk_0175; sp0C++)
                 {
-                    AddTextPrinterParameterized3(windowId, 3, x, y, gUnknown_082F0E10[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_02DC[sp0C].unk_01);
+                    AddTextPrinterParameterized3(windowId, 3, x, y, sTextColorTable[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_02DC[sp0C].unk_01);
                     if (sWonderCardData->unk_02DC[sp0C].unk_42[0] != EOS)
                     {
                         x += GetStringWidth(3, sWonderCardData->unk_02DC[sp0C].unk_01, spacing);
-                        AddTextPrinterParameterized3(windowId, 3, x, y, gUnknown_082F0E10[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_02DC[sp0C].unk_42);
+                        AddTextPrinterParameterized3(windowId, 3, x, y, sTextColorTable[sWonderCardData->unk_0170->textPal3], 0, sWonderCardData->unk_02DC[sp0C].unk_42);
                         x += GetStringWidth(3, sWonderCardData->unk_02DC[sp0C].unk_42, spacing) + sWonderCardData->unk_02DC[sp0C].unk_00;
                     }
                 }

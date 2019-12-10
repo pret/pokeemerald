@@ -130,9 +130,9 @@ const u8 *const sHelpBarTexts[12] =
     gText_PokenavRibbons_RibbonCheckButtons,
 };
 
-const u8 gMenuButtonReminderColor[3] =
+static const u8 sHelpBarTextColors[3] =
 {
-    4, 1, 2
+    TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY
 };
 
 static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
@@ -692,7 +692,7 @@ void sub_81C7BA4(u32 helpBarIndex)
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
     sub_81C7BF8(structPtr->unk10);
-    AddTextPrinterParameterized3(structPtr->unk10, 1, 0, 1, gMenuButtonReminderColor, 0, sHelpBarTexts[helpBarIndex]);
+    AddTextPrinterParameterized3(structPtr->unk10, 1, 0, 1, sHelpBarTextColors, 0, sHelpBarTexts[helpBarIndex]);
 }
 
 bool32 IsDma3ManagerBusyWithBgCopy_(void)

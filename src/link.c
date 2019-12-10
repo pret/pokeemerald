@@ -213,10 +213,9 @@ const struct WindowTemplate gUnknown_082ED204[] = {
     {0x00, 0x00, 0x0D, 0x1E, 0x07, 0x0F, 0x016A},
     DUMMY_WIN_TEMPLATE
 };
-const u8 gUnknown_082ED224[] = {
-    0x00, 0x01, 0x02, 0x00,
-    0xff, 0xfe, 0xff, 0x00
-};
+
+static const u8 sTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
+static const u8 sUnused_082ED224[] = {0x00, 0xff, 0xfe, 0xff, 0x00};
 
 // .text
 
@@ -1688,8 +1687,8 @@ static void sub_800B080(void)
     LoadPalette(gWirelessLinkDisplayPal, 0, 0x20);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(0, 3, 2, 6, gUnknown_082ED224, 0, gText_CommErrorEllipsis);
-    AddTextPrinterParameterized3(2, 3, 2, 1, gUnknown_082ED224, 0, gText_MoveCloserToLinkPartner);
+    AddTextPrinterParameterized3(0, 3, 2, 6, sTextColors, 0, gText_CommErrorEllipsis);
+    AddTextPrinterParameterized3(2, 3, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
     PutWindowTilemap(0);
     PutWindowTilemap(2);
     CopyWindowToVram(0, 0);
@@ -1701,7 +1700,7 @@ static void sub_800B138(void)
     LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(1, 3, 2, 0, gUnknown_082ED224, 0, gText_CommErrorCheckConnections);
+    AddTextPrinterParameterized3(1, 3, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
     PutWindowTilemap(1);
     PutWindowTilemap(2);
     CopyWindowToVram(1, 0);
@@ -1741,11 +1740,11 @@ static void CB2_PrintErrorMessage(void)
         case 130:
             if (gWirelessCommType == 2)
             {
-                AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnTitleScreen);
+                AddTextPrinterParameterized3(0, 3, 2, 20, sTextColors, 0, gText_ABtnTitleScreen);
             }
             else if (gWirelessCommType == 1)
             {
-                AddTextPrinterParameterized3(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnRegistrationCounter);
+                AddTextPrinterParameterized3(0, 3, 2, 20, sTextColors, 0, gText_ABtnRegistrationCounter);
             }
             break;
     }
