@@ -620,6 +620,7 @@ AI_CBM_Toxic: @ 82DC48C
 	if_equal TYPE_POISON, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_IMMUNITY, Score_Minus10
+	if_equal ABILITY_TOXIC_BOOST, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
