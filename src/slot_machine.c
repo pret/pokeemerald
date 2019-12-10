@@ -453,7 +453,7 @@ const struct WindowTemplate gUnknown_085A7444 =
     0, 1, 3, 20, 13, 13, 1
 };
 
-const u8 gColors_ReeltimeHelp[] = {3, 1, 2, 0};
+static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
 
 bool8 (*const SlotActions[])(struct Task *task) =
 {
@@ -3126,7 +3126,7 @@ static void InfoBox_8104B80(struct Task *task)
 
 static void InfoBox_AddText(struct Task *task)
 {
-    AddTextPrinterParameterized3(1, 1, 2, 5, gColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
+    AddTextPrinterParameterized3(1, 1, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
     CopyWindowToVram(1, 3);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     task->data[0]++;

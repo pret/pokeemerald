@@ -158,10 +158,10 @@ static const struct WindowTemplate sUnknown_0859F29C[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sUnknown_0859F2AC[] = {
-     0,
-    10,
-    11
+static const u8 sTextColors[] = {
+    TEXT_COLOR_TRANSPARENT,
+    TEXT_DYNAMIC_COLOR_1,
+    TEXT_DYNAMIC_COLOR_2
 };
 
 static const u16 sUnknown_0859F2B0[][2] = {
@@ -486,14 +486,14 @@ static void sub_8121B1C(void)
         {
             continue;
         }
-        AddTextPrinterParameterized3(0, 1, sMailRead->layout->var8[i].xOffset + sMailRead->layout->wordsYPos, y + sMailRead->layout->wordsXPos, sUnknown_0859F2AC, 0, sMailRead->strbuf[i]);
+        AddTextPrinterParameterized3(0, 1, sMailRead->layout->var8[i].xOffset + sMailRead->layout->wordsYPos, y + sMailRead->layout->wordsXPos, sTextColors, 0, sMailRead->strbuf[i]);
         y += sMailRead->layout->var8[i].lineHeight;
     }
     bufptr = StringCopy(strbuf, gText_FromSpace);
     StringCopy(bufptr, sMailRead->playerName);
     box_x = GetStringCenterAlignXOffset(1, strbuf, sMailRead->signatureWidth) + 0x68;
     box_y = sMailRead->layout->signatureYPos + 0x58;
-    AddTextPrinterParameterized3(0, 1, box_x, box_y, sUnknown_0859F2AC, 0, strbuf);
+    AddTextPrinterParameterized3(0, 1, box_x, box_y, sTextColors, 0, strbuf);
     CopyWindowToVram(0, 3);
     CopyWindowToVram(1, 3);
 }

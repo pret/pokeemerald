@@ -3466,7 +3466,7 @@ static void sub_802DB18(u16 left, u16 top, u8 cursorPos)
 
 static void sub_802DB8C(void)
 {
-    u8 color[] = {0, 2, 3};
+    u8 color[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -3666,7 +3666,7 @@ static void sub_802DF70(bool32 arg0)
     if (!arg0)
     {
         for (i = 0; i < playersCount; i++)
-            sub_802DED8(i, 0, 2, 3);
+            sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     }
     else
     {
@@ -3674,9 +3674,9 @@ static void sub_802DF70(bool32 arg0)
         for (i = 0; i < playersCount; i++)
         {
             if (var != i)
-                sub_802DED8(i, 0, 2, 3);
+                sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
             else
-                sub_802DED8(i, 0, 4, 5);
+                sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED);
         }
     }
 }
