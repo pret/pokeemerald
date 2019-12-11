@@ -199,12 +199,13 @@ const struct WindowTemplate gUnknown_086227E0 =
 
 const u8 *const gUnknown_086227E8[] = 
 {
-    gUnknown_085EC017,
-    gUnknown_085EC01C,
-    gUnknown_085EC022
+    gText_Call,
+    gText_Check,
+    gText_Cancel6
 };
 
-const u8 gUnknown_086227F4[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
+// The series of 5 dots that appear when someone is called with Match Call
+static const u8 sText_CallingDots[] = _("·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p");
 
 const struct WindowTemplate gUnknown_08622808 = 
 {
@@ -1100,7 +1101,7 @@ static bool32 sub_81CC0D0(struct Pokenav4Struct *state)
 
 static void sub_81CC0E0(struct Pokenav4Struct *state)
 {
-    AddTextPrinterParameterized(state->unk14, 1, gUnknown_086227F4, 32, 1, 1, NULL);
+    AddTextPrinterParameterized(state->unk14, 1, sText_CallingDots, 32, 1, 1, NULL);
 }
 
 static bool32 sub_81CC104(struct Pokenav4Struct *state)

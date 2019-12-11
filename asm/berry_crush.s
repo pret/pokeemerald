@@ -296,7 +296,7 @@ _08021C5E:
 	lsrs r2, 24
 	mov r1, r10
 	lsrs r3, r1, 24
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
@@ -338,7 +338,7 @@ _08021CC8:
 	ldrb r0, [r0]
 	mov r4, r10
 	lsrs r3, r4, 24
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
@@ -402,7 +402,7 @@ sub_8021D34: @ 8021D34
 	ldrh r1, [r2, 0x4]
 	bl sub_8021944
 	ldrb r0, [r4]
-	ldr r4, =gUnknown_082F32D8
+	ldr r4, =sBerryCrushTextColors1
 	str r4, [sp]
 	str r6, [sp, 0x4]
 	ldr r1, =gText_TimeColon
@@ -423,7 +423,7 @@ sub_8021D34: @ 8021D34
 	lsrs r6, r0, 24
 	mov r2, r9
 	ldrb r0, [r2]
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	mov r2, r10
 	str r2, [sp, 0x4]
@@ -464,7 +464,7 @@ sub_8021D34: @ 8021D34
 	lsrs r6, r0, 24
 	mov r4, r9
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	mov r2, r10
 	str r2, [sp, 0x4]
@@ -484,7 +484,7 @@ sub_8021D34: @ 8021D34
 	lsrs r6, r0, 24
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r2, =gUnknown_082F32D8
+	ldr r2, =sBerryCrushTextColors1
 	str r2, [sp]
 	mov r1, r10
 	str r1, [sp, 0x4]
@@ -515,7 +515,7 @@ sub_8021D34: @ 8021D34
 	lsrs r6, r0, 24
 	mov r4, r9
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	mov r2, r10
 	str r2, [sp, 0x4]
@@ -529,7 +529,7 @@ sub_8021D34: @ 8021D34
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r4]
-	ldr r4, =gUnknown_082F32D8
+	ldr r4, =sBerryCrushTextColors1
 	str r4, [sp]
 	mov r1, r10
 	str r1, [sp, 0x4]
@@ -552,7 +552,7 @@ sub_8021D34: @ 8021D34
 	lsrs r6, r0, 24
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r2, =gUnknown_082F32D8
+	ldr r2, =sBerryCrushTextColors1
 	str r2, [sp]
 	mov r1, r10
 	str r1, [sp, 0x4]
@@ -633,7 +633,7 @@ _08021F0A:
 	lsls r0, 1
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_082F32E7
+	ldr r1, =sBerryCrushTextColors4
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
@@ -649,7 +649,7 @@ _08021FC4:
 	lsls r0, 1
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	str r2, [sp, 0x4]
 	str r4, [sp, 0x8]
@@ -667,7 +667,7 @@ _08021FDE:
 	add r8, r4
 	mov r1, r8
 	ldrb r0, [r1]
-	ldr r2, =gUnknown_082F32D8
+	ldr r2, =sBerryCrushTextColors1
 	mov r9, r2
 	str r2, [sp]
 	movs r5, 0
@@ -1019,7 +1019,7 @@ _080222D0:
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r6, 0x2]
-	ldr r5, =gUnknown_082F32E1
+	ldr r5, =sBerryCrushTextColorTable
 	str r5, [sp]
 	mov r1, r9
 	str r1, [sp, 0x4]
@@ -1062,7 +1062,7 @@ _08022336:
 	ldr r1, =gText_Var1Players
 	bl StringExpandPlaceholders
 	ldrb r0, [r6, 0x2]
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
@@ -1082,7 +1082,7 @@ _08022336:
 	lsls r1, 24
 	lsrs r7, r1, 24
 	ldrb r0, [r6, 0x2]
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
@@ -1155,7 +1155,7 @@ _080223CA:
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r6, 0x2]
-	ldr r1, =gUnknown_082F32D8
+	ldr r1, =sBerryCrushTextColors1
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
@@ -1405,7 +1405,7 @@ _08022616:
 	mov r1, r8
 	str r1, [sp]
 	str r1, [sp, 0x4]
-	ldr r1, =gUnknown_082F32DB
+	ldr r1, =sBerryCrushTextColors2
 	str r1, [sp, 0x8]
 	mov r1, r8
 	str r1, [sp, 0xC]
@@ -1432,7 +1432,7 @@ _08022668:
 	mov r1, r8
 	str r1, [sp]
 	str r1, [sp, 0x4]
-	ldr r1, =gUnknown_082F32DE
+	ldr r1, =sBerryCrushTextColors3
 	str r1, [sp, 0x8]
 	mov r1, r8
 	str r1, [sp, 0xC]

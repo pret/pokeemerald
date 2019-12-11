@@ -705,7 +705,7 @@ void sub_81C8C64(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1)
 
 void sub_81C8CB4(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1)
 {
-    u8 colors[3] = {0, 2, 5};
+    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_RED};
 
     a1->unk34(a0->unk10 + a0->unkC * a0->windowTopIndex, a1->unkTextBuffer);
     a1->unk38(a1->unk0.windowId, a0->windowTopIndex, a1->unk0.unkA);
@@ -727,7 +727,7 @@ void sub_81C8D4C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *
 void PrintMatchCallFieldNames(struct PokenavSub17Substruct *a0, u32 fieldId)
 {
     const u8 *fieldNames[] = {gText_PokenavMatchCall_Strategy, gText_PokenavMatchCall_TrainerPokemon, gText_PokenavMatchCall_SelfIntroduction};
-    u8 colors[3] = {1, 4, 5};
+    u8 colors[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
     u32 top = (a0->unk0.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(a0->unk0.windowId, PIXEL_FILL(1), 0, top << 4, a0->unk0.unk4, 16);

@@ -46,7 +46,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	battletent_getopponentintro
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
-	call VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7
+	call BattleFrontier_BattlePalaceBattleRoom_EventScript_DoPalaceBattle
 	switch VAR_RESULT
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8
 
@@ -68,7 +68,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	applymovement 3, Common_Movement_WalkInPlaceFastestDown
 	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox VerdanturfTown_BattleTentBattleRoom_Text_24FF00, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_LetMeRestoreYourMons, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
@@ -89,14 +89,14 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	case 2, VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20248A:: @ 820248A
-	msgbox VerdanturfTown_BattleTentBattleRoom_Text_250030, MSGBOX_YESNO
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 	case YES, VerdanturfTown_BattleTentBattleRoom_EventScript_20251F
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8:: @ 82024B8
-	message VerdanturfTown_BattleTentBattleRoom_Text_25005A
+	message BattleFrontier_BattlePalaceBattleRoom_Text_WishToQuitChallenge
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
@@ -118,7 +118,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202501:: @ 8202501
 	waitstate
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20251F:: @ 820251F
-	message VerdanturfTown_BattleTentBattleRoom_Text_25007E
+	message BattleFrontier_BattlePalaceBattleRoom_Text_SavingData
 	waitmessage
 	verdanturftent_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
@@ -140,12 +140,12 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20254B:: @ 820254B
 	end
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202565:: @ 8202565
-	message VerdanturfTown_BattleTentBattleRoom_Text_24FF28
+	message BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor2ndOpponent
 	waitmessage
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20256C:: @ 820256C
-	message VerdanturfTown_BattleTentBattleRoom_Text_24FF54
+	message BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor3rdOpponent
 	waitmessage
 	return
 

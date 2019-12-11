@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908",
+      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -77,7 +77,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_3",
       "var_value": "1",
-      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_2C406D"
+      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack"
     },
     {
       "type": "trigger",
@@ -86,7 +86,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_3",
       "var_value": "1",
-      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_2C406D"
+      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack"
     },
     {
       "type": "trigger",
@@ -95,7 +95,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4062"
+      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom"
     },
     {
       "type": "trigger",
@@ -104,7 +104,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4062"
+      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom"
     },
     {
       "type": "trigger",
@@ -113,7 +113,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4062"
+      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom"
     },
     {
       "type": "trigger",
@@ -122,7 +122,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_3",
       "var_value": "1",
-      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_2C406D"
+      "script": "BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack"
     }
   ],
   "bg_events": []
