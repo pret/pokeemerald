@@ -209,7 +209,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
-	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
+	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	frontier_checkineligible
 	compare VAR_0x8004, TRUE
@@ -276,7 +276,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
-	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
+	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	frontier_checkineligible
 	compare VAR_0x8004, TRUE
@@ -344,7 +344,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
-	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
+	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	frontier_checkineligible
 	compare VAR_0x8004, TRUE
@@ -411,7 +411,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, 0
 	switch VAR_RESULT
-	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
+	case FRONTIER_LVL_TENT, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	frontier_checkineligible
 	compare VAR_0x8004, TRUE

@@ -371,8 +371,6 @@ extern const u8 SecretBase_Text_Trainer7Defeated[];
 extern const u8 SecretBase_Text_Trainer8Defeated[];
 extern const u8 SecretBase_Text_Trainer9Defeated[];
 
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
-
 //field effects
 extern const u8 EventScript_FldEffStrength[];
 extern const u8 EventScript_FailSweetScent[];
@@ -543,7 +541,6 @@ extern const u8 EventScript_CannotUseWaterfall[];
 extern const u8 EventScript_UseDive[];
 extern const u8 EventScript_UseDiveUnderwater[];
 extern const u8 EventScript_FallDownHole[];
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8[];
 extern const u8 EventScript_FieldPoison[];
 extern const u8 EventScript_EggHatch[];
 extern const u8 AbnormalWeather_EventScript_EndEventAndCleanup_1[];
@@ -572,7 +569,8 @@ extern const u8 SecretBase_EventScript_PutAwayDecoration[];
 extern const u8 SecretBase_EventScript_SetDecoration[];
 
 // Battle Pyramid.
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
+extern const u8 BattlePyramid_Retire[];
+extern const u8 BattlePyramid_WarpToNextFloor[];
 extern const u8 BattlePyramid_TrainerBattle[];
 extern const u8 BattlePyramid_FindItemBall[];
 
