@@ -1078,7 +1078,7 @@ extern const u8 gTrickHouse_Mechadoll_Seven2[];
 extern const u8 gTrickHouse_Mechadoll_Eight2[];
 
 // Pokedex strings
-extern const u8 gText_SeachForPkmnBasedOnParameters[];
+extern const u8 gText_SearchForPkmnBasedOnParameters[];
 extern const u8 gText_SwitchPokedexListings[];
 extern const u8 gText_ReturnToPokedex[];
 extern const u8 gText_SelectPokedexMode[];
