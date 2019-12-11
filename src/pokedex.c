@@ -934,7 +934,7 @@ static const u8 gUnknown_0856ED08[][4] =
 static const struct UnknownStruct3 gUnknown_0856ED30[] =
 {
     {
-        .text = gText_SeachForPkmnBasedOnParameters,
+        .text = gText_SearchForPkmnBasedOnParameters,
         .unk4 = 0,
         .unk5 = 0,
         .unk6 = 5,

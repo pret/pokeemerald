@@ -79,7 +79,7 @@ static const u8 *const sPlayersNeededOrModeTexts[][5] = {
 };
 
 ALIGNED(4) const u8 sText_BButtonCancel[] = _("{B_BUTTON}CANCEL");
-ALIGNED(4) const u8 sJPText_InvitationSentToPlayer[] = _("ため\nさんかしゃ ぼしゅうちゅう です！"); // Unused
+ALIGNED(4) const u8 sJPText_SearchingForParticipants[] = _("ため\nさんかしゃ ぼしゅうちゅう です！"); // Unused, may have been cut off
 ALIGNED(4) const u8 sText_PlayerContactedYouForXAccept[] = _("{STR_VAR_2} contacted you for\n{STR_VAR_1}. Accept?");
 ALIGNED(4) const u8 sText_PlayerContactedYouShareX[] = _("{STR_VAR_2} contacted you.\nWill you share {STR_VAR_1}?");
 ALIGNED(4) const u8 sText_PlayerContactedYouAddToMembers[] = _("{STR_VAR_2} contacted you.\nAdd to the members?");
