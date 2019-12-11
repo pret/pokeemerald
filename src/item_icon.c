@@ -16,10 +16,10 @@ EWRAM_DATA void *gItemIcon4x4Buffer = NULL;
 static const struct OamData sOamData_ItemIcon =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,

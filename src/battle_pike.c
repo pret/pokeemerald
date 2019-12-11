@@ -44,7 +44,7 @@ struct PikeWildMon
 // IWRAM bss
 static u8 sRoomType;
 static u8 sStatusMon;
-static bool8 sUnknown_0300128E;
+static bool8 sInWildMonRoom;
 static u32 sStatusFlags;
 static u8 sNpcId;
 
@@ -55,27 +55,27 @@ static void SetBattlePikeData(void);
 static void IsNextRoomFinal(void);
 static void SetupRoomEventObjects(void);
 static void GetRoomType(void);
-static void sub_81A7400(void);
-static void sub_81A740C(void);
-static void sub_81A7418(void);
+static void SetInWildMonRoom(void);
+static void ClearInWildMonRoom(void);
+static void SavePikeChallenge(void);
 static void nullsub_76(void);
 static void nullsub_124(void);
 static void GetRoomInflictedStatus(void);
 static void GetRoomInflictedStatusMon(void);
 static void HealOneOrTwoMons(void);
 static void BufferNPCMessage(void);
-static void StatusInflictionScreenFade(void);
+static void StatusInflictionScreenFlash(void);
 static void GetInBattlePike(void);
 static void SetHintedRoom(void);
 static void GetHintedRoomIndex(void);
 static void GetRoomTypeHint(void);
 static void ClearPikeTrainerIds(void);
-static void BufferRecordMixingTrainerMessage(void);
+static void BufferTrainerIntro(void);
 static void GetCurrentRoomPikeQueenFightType(void);
 static void HealSomeMonsBeforePikeQueen(void);
 static void SetHealingroomTypesDisabled(void);
 static void IsPartyFullHealed(void);
-static void BackupMonHeldItems(void);
+static void SaveMonHeldItems(void);
 static void RestoreMonHeldItems(void);
 static void InitPikeChallenge(void);
 static u8 GetNextRoomType(void);
@@ -83,7 +83,7 @@ static void PrepareOneTrainer(bool8 difficult);
 static u16 GetNPCRoomGraphicsId(void);
 static void PrepareTwoTrainers(void);
 static void TryHealMons(u8 healCount);
-static void Task_DoStatusInflictionScreenFade(u8 taskId);
+static void Task_DoStatusInflictionScreenFlash(u8 taskId);
 static bool8 AtLeastTwoAliveMons(void);
 static u8 SpeciesToPikeMonId(u16 species);
 static bool8 CanEncounterWildMon(u8 monLevel);
@@ -480,35 +480,35 @@ static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
 
 static void (* const sBattlePikeFunctions[])(void) =
 {
-    [BATTLE_PIKE_FUNC_SET_ROOM_TYPE] = SetRoomType,
-    [BATTLE_PIKE_FUNC_GET_DATA] = GetBattlePikeData,
-    [BATTLE_PIKE_FUNC_SET_DATA] = SetBattlePikeData,
-    [BATTLE_PIKE_FUNC_IS_FINAL_ROOM] = IsNextRoomFinal,
-    [BATTLE_PIKE_FUNC_SET_ROOM_OBJECTS] = SetupRoomEventObjects,
-    [BATTLE_PIKE_FUNC_GET_ROOM_TYPE] = GetRoomType,
-    [BATTLE_PIKE_FUNC_6] = sub_81A7400,
-    [BATTLE_PIKE_FUNC_7] = sub_81A740C,
-    [BATTLE_PIKE_FUNC_8] = sub_81A7418,
-    [BATTLE_PIKE_FUNC_NULL_9] = nullsub_76,
-    [BATTLE_PIKE_FUNC_NULL_10] = nullsub_124,
-    [BATTLE_PIKE_FUNC_GET_ROOM_STATUS] = GetRoomInflictedStatus,
-    [BATTLE_PIKE_FUNC_GET_ROOM_STATUS_MON] = GetRoomInflictedStatusMon,
-    [BATTLE_PIKE_FUNC_HEAL_ONE_TWO_MONS] = HealOneOrTwoMons,
-    [BATTLE_PIKE_FUNC_BUFFER_NPC_MSG] = BufferNPCMessage,
-    [BATTLE_PIKE_FUNC_STATUS_SCREEN_FADE] = StatusInflictionScreenFade,
-    [BATTLE_PIKE_FUNC_IS_IN] = GetInBattlePike,
-    [BATTLE_PIKE_FUNC_SET_HINT_ROOM] = SetHintedRoom,
-    [BATTLE_PIKE_FUNC_GET_HINT_ROOM_ID] = GetHintedRoomIndex,
-    [BATTLE_PIKE_FUNC_GET_ROOM_TYPE_HINT] = GetRoomTypeHint,
-    [BATTLE_PIKE_FUNC_CLEAR_TRAINER_IDS] = ClearPikeTrainerIds,
-    [BATTLE_PIKE_FUNC_BUFFER_RECORD_MIX_MSG] = BufferRecordMixingTrainerMessage,
-    [BATTLE_PIKE_FUNC_GET_QUEEN_FIGHT_TYPE] = GetCurrentRoomPikeQueenFightType,
-    [BATTLE_PIKE_FUNC_HEAL_MONS_BEFORE_QUEEN] = HealSomeMonsBeforePikeQueen,
-    [BATTLE_PIKE_FUNC_SET_HEALING_ROOMS_DISABLED] = SetHealingroomTypesDisabled,
-    [BATTLE_PIKE_FUNC_IS_PARTY_FULL_HEALTH] = IsPartyFullHealed,
-    [BATTLE_PIKE_FUNC_SAVE_MON_HELD_ITEMS] = BackupMonHeldItems,
-    [BATTLE_PIKE_FUNC_LOAD_MON_HELD_ITEMS] = RestoreMonHeldItems,
-    [BATTLE_PIKE_FUNC_INIT_CHALLENGE] = InitPikeChallenge
+    [BATTLE_PIKE_FUNC_SET_ROOM_TYPE]           = SetRoomType,
+    [BATTLE_PIKE_FUNC_GET_DATA]                = GetBattlePikeData,
+    [BATTLE_PIKE_FUNC_SET_DATA]                = SetBattlePikeData,
+    [BATTLE_PIKE_FUNC_IS_FINAL_ROOM]           = IsNextRoomFinal,
+    [BATTLE_PIKE_FUNC_SET_ROOM_OBJECTS]        = SetupRoomEventObjects,
+    [BATTLE_PIKE_FUNC_GET_ROOM_TYPE]           = GetRoomType,
+    [BATTLE_PIKE_FUNC_SET_IN_WILD_MON_ROOM]    = SetInWildMonRoom,
+    [BATTLE_PIKE_FUNC_CLEAR_IN_WILD_MON_ROOM]  = ClearInWildMonRoom,
+    [BATTLE_PIKE_FUNC_SAVE]                    = SavePikeChallenge,
+    [BATTLE_PIKE_FUNC_NULL_9]                  = nullsub_76,
+    [BATTLE_PIKE_FUNC_NULL_10]                 = nullsub_124,
+    [BATTLE_PIKE_FUNC_GET_ROOM_STATUS]         = GetRoomInflictedStatus,
+    [BATTLE_PIKE_FUNC_GET_ROOM_STATUS_MON]     = GetRoomInflictedStatusMon,
+    [BATTLE_PIKE_FUNC_HEAL_ONE_TWO_MONS]       = HealOneOrTwoMons,
+    [BATTLE_PIKE_FUNC_BUFFER_NPC_MSG]          = BufferNPCMessage,
+    [BATTLE_PIKE_FUNC_STATUS_SCREEN_FLASH]     = StatusInflictionScreenFlash,
+    [BATTLE_PIKE_FUNC_IS_IN]                   = GetInBattlePike,
+    [BATTLE_PIKE_FUNC_SET_HINT_ROOM]           = SetHintedRoom,
+    [BATTLE_PIKE_FUNC_GET_HINT_ROOM_ID]        = GetHintedRoomIndex,
+    [BATTLE_PIKE_FUNC_GET_ROOM_TYPE_HINT]      = GetRoomTypeHint,
+    [BATTLE_PIKE_FUNC_CLEAR_TRAINER_IDS]       = ClearPikeTrainerIds,
+    [BATTLE_PIKE_FUNC_GET_TRAINER_INTRO]       = BufferTrainerIntro,
+    [BATTLE_PIKE_FUNC_GET_QUEEN_FIGHT_TYPE]    = GetCurrentRoomPikeQueenFightType,
+    [BATTLE_PIKE_FUNC_HEAL_MONS_BEFORE_QUEEN]  = HealSomeMonsBeforePikeQueen,
+    [BATTLE_PIKE_FUNC_SET_HEAL_ROOMS_DISABLED] = SetHealingroomTypesDisabled,
+    [BATTLE_PIKE_FUNC_IS_PARTY_FULL_HEALTH]    = IsPartyFullHealed,
+    [BATTLE_PIKE_FUNC_SAVE_HELD_ITEMS]         = SaveMonHeldItems,
+    [BATTLE_PIKE_FUNC_RESET_HELD_ITEMS]        = RestoreMonHeldItems,
+    [BATTLE_PIKE_FUNC_INIT]                    = InitPikeChallenge
 };
 
 static const u8 sRoomTypeHints[] = {
@@ -533,7 +533,7 @@ static const u8 sNumMonsToHealBeforePikeQueen[][3] =
     {0, 1, 2},
 };
 
-static bool8 (* const sStatusInflictionScreenFadeFuncs[])(struct Task *) =
+static bool8 (* const sStatusInflictionScreenFlashFuncs[])(struct Task *) =
 {
     StatusInflictionFadeOut, StatusInflictionFadeIn
 };
@@ -579,7 +579,7 @@ static void SetupRoomEventObjects(void)
         break;
     case PIKE_ROOM_STATUS:
         objGfx1 = EVENT_OBJ_GFX_GENTLEMAN;
-        if (sStatusMon == PIKE_STATUS_DUSCLOPS)
+        if (sStatusMon == PIKE_STATUSMON_DUSCLOPS)
             objGfx2 = EVENT_OBJ_GFX_DUSCLOPS;
         else
             objGfx2 = EVENT_OBJ_GFX_KIRLIA;
@@ -623,19 +623,19 @@ static void GetBattlePikeData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E02;
+    case PIKE_DATA_PRIZE:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikePrize;
         break;
-    case 1:
+    case PIKE_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikeWinStreaks[gSaveBlock2Ptr->frontier.lvlMode];
         break;
-    case 2:
+    case PIKE_DATA_RECORD_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode];
         break;
-    case 3:
+    case PIKE_DATA_TOTAL_STREAKS:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikeTotalStreaks[gSaveBlock2Ptr->frontier.lvlMode];
         break;
-    case 4:
+    case PIKE_DATA_WIN_STREAK_ACTIVE:
         if (lvlMode != FRONTIER_LVL_50)
             gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PIKE_OPEN;
         else
@@ -650,22 +650,22 @@ static void SetBattlePikeData(void)
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
-        gSaveBlock2Ptr->frontier.field_E02 = gSpecialVar_0x8006;
+    case PIKE_DATA_PRIZE:
+        gSaveBlock2Ptr->frontier.pikePrize = gSpecialVar_0x8006;
         break;
-    case 1:
+    case PIKE_DATA_WIN_STREAK:
         if (gSpecialVar_0x8006 <= MAX_STREAK)
             gSaveBlock2Ptr->frontier.pikeWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
         break;
-    case 2:
+    case PIKE_DATA_RECORD_STREAK:
         if (gSpecialVar_0x8006 <= MAX_STREAK && gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] < gSpecialVar_0x8006)
             gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
         break;
-    case 3:
+    case PIKE_DATA_TOTAL_STREAKS:
         if (gSpecialVar_0x8006 <= MAX_STREAK)
             gSaveBlock2Ptr->frontier.pikeTotalStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
         break;
-    case 4:
+    case PIKE_DATA_WIN_STREAK_ACTIVE:
         if (lvlMode != FRONTIER_LVL_50)
         {
             if (gSpecialVar_0x8006)
@@ -697,17 +697,17 @@ static void GetRoomType(void)
     gSpecialVar_Result = sRoomType;
 }
 
-static void sub_81A7400(void)
+static void SetInWildMonRoom(void)
 {
-    sUnknown_0300128E = TRUE;
+    sInWildMonRoom = TRUE;
 }
 
-static void sub_81A740C(void)
+static void ClearInWildMonRoom(void)
 {
-    sUnknown_0300128E = FALSE;
+    sInWildMonRoom = FALSE;
 }
 
-static void sub_81A7418(void)
+static void SavePikeChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -731,19 +731,19 @@ static void GetRoomInflictedStatus(void)
     switch (sStatusFlags)
     {
     case STATUS1_FREEZE:
-        gSpecialVar_Result = 0;
+        gSpecialVar_Result = PIKE_STATUS_FREEZE;
         break;
     case STATUS1_BURN:
-        gSpecialVar_Result = 1;
+        gSpecialVar_Result = PIKE_STATUS_BURN;
         break;
     case STATUS1_TOXIC_POISON:
-        gSpecialVar_Result = 2;
+        gSpecialVar_Result = PIKE_STATUS_TOXIC;
         break;
     case STATUS1_PARALYSIS:
-        gSpecialVar_Result = 3;
+        gSpecialVar_Result = PIKE_STATUS_PARALYSIS;
         break;
     case STATUS1_SLEEP:
-        gSpecialVar_Result = 4;
+        gSpecialVar_Result = PIKE_STATUS_SLEEP;
         break;
     }
 }
@@ -774,9 +774,9 @@ static void BufferNPCMessage(void)
     FrontierSpeechToString(sNPCSpeeches[speechId]);
 }
 
-static void StatusInflictionScreenFade(void)
+static void StatusInflictionScreenFlash(void)
 {
-    CreateTask(Task_DoStatusInflictionScreenFade, 2);
+    CreateTask(Task_DoStatusInflictionScreenFlash, 2);
 }
 
 static void HealMon(struct Pokemon *mon)
@@ -946,19 +946,19 @@ static bool8 TryInflictRandomStatus(void)
     switch (sStatusFlags)
     {
     case STATUS1_FREEZE:
-        sStatusMon = PIKE_STATUS_DUSCLOPS;
+        sStatusMon = PIKE_STATUSMON_DUSCLOPS;
         break;
     case STATUS1_BURN:
         if (Random() % 2 != 0)
-            sStatusMon = PIKE_STATUS_DUSCLOPS;
+            sStatusMon = PIKE_STATUSMON_DUSCLOPS;
         else
-            sStatusMon = PIKE_STATUS_KIRLIA;
+            sStatusMon = PIKE_STATUSMON_KIRLIA;
         break;
     case STATUS1_PARALYSIS:
     case STATUS1_SLEEP:
     case STATUS1_TOXIC_POISON:
     default:
-        sStatusMon = PIKE_STATUS_KIRLIA;
+        sStatusMon = PIKE_STATUSMON_KIRLIA;
         break;
     }
 
@@ -1100,9 +1100,9 @@ static u16 GetNPCRoomGraphicsId(void)
 }
 
 // Unused
-static u8 sub_81A7B84(void)
+static u8 GetInWildMonRoom(void)
 {
-    return sUnknown_0300128E;
+    return sInWildMonRoom;
 }
 
 bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
@@ -1172,9 +1172,9 @@ u8 GetBattlePikeWildMonHeaderId(void)
     return headerId;
 }
 
-static void DoStatusInflictionScreenFade(u8 taskId)
+static void DoStatusInflictionScreenFlash(u8 taskId)
 {
-    while (sStatusInflictionScreenFadeFuncs[gTasks[taskId].data[0]](&gTasks[taskId]));
+    while (sStatusInflictionScreenFlashFuncs[gTasks[taskId].data[0]](&gTasks[taskId]));
 }
 
 static bool8 StatusInflictionFadeOut(struct Task *task)
@@ -1211,7 +1211,7 @@ static bool8 StatusInflictionFadeIn(struct Task *task)
     {
         if (--task->data[3] == 0)
         {
-            DestroyTask(FindTaskIdByFunc(DoStatusInflictionScreenFade));
+            DestroyTask(FindTaskIdByFunc(DoStatusInflictionScreenFlash));
         }
         else
         {
@@ -1222,9 +1222,9 @@ static bool8 StatusInflictionFadeIn(struct Task *task)
     return FALSE;
 }
 
-static void StartStatusInflictionScreenFade(s16 fadeOutDelay, s16 fadeInDelay, s16 numFades, s16 fadeOutSpeed, s16 fadeInSpped)
+static void StartStatusInflictionScreenFlash(s16 fadeOutDelay, s16 fadeInDelay, s16 numFades, s16 fadeOutSpeed, s16 fadeInSpped)
 {
-    u8 taskId = CreateTask(DoStatusInflictionScreenFade, 3);
+    u8 taskId = CreateTask(DoStatusInflictionScreenFlash, 3);
 
     gTasks[taskId].data[1] = fadeOutDelay;
     gTasks[taskId].data[2] = fadeInDelay;
@@ -1234,24 +1234,24 @@ static void StartStatusInflictionScreenFade(s16 fadeOutDelay, s16 fadeInDelay, s
     gTasks[taskId].data[6] = fadeOutDelay;
 }
 
-static bool8 IsStatusInflictionScreenFadeTaskFinished(void)
+static bool8 IsStatusInflictionScreenFlashTaskFinished(void)
 {
-    if (FindTaskIdByFunc(DoStatusInflictionScreenFade) == 0xFF)
+    if (FindTaskIdByFunc(DoStatusInflictionScreenFlash) == 0xFF)
         return TRUE;
     else
         return FALSE;
 }
 
-static void Task_DoStatusInflictionScreenFade(u8 taskId)
+static void Task_DoStatusInflictionScreenFlash(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
         gTasks[taskId].data[0]++;
-        StartStatusInflictionScreenFade(0, 0, 3, 2, 2);
+        StartStatusInflictionScreenFlash(0, 0, 3, 2, 2);
     }
     else
     {
-        if (IsStatusInflictionScreenFadeTaskFinished())
+        if (IsStatusInflictionScreenFlashTaskFinished())
         {
             EnableBothScriptContexts();
             DestroyTask(taskId);
@@ -1335,10 +1335,10 @@ static void SetHintedRoom(void)
     u8 i, count, id;
     u8 *roomCandidates;
 
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
     if (GetPikeQueenFightType(1))
     {
-        gSpecialVar_Result = 1;
+        gSpecialVar_Result = TRUE;
         gSaveBlock2Ptr->frontier.pikeHintedRoomIndex = Random() % 6;
         gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_BRAIN;
     }
@@ -1462,7 +1462,7 @@ static void ClearPikeTrainerIds(void)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 
-static void BufferRecordMixingTrainerMessage(void)
+static void BufferTrainerIntro(void)
 {
     if (gSpecialVar_0x8005 == 0)
     {
@@ -1500,7 +1500,7 @@ static u8 GetPikeQueenFightType(u8 nextRoom)
     u8 numPikeSymbols;
 
     u8 facility = FRONTIER_FACILITY_PIKE;
-    u8 ret = 0;
+    u8 ret = FRONTIER_BRAIN_NOT_READY;
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
     winStreak += nextRoom;
@@ -1511,16 +1511,16 @@ static u8 GetPikeQueenFightType(u8 nextRoom)
     case 0:
     case 1:
         if (winStreak == sFrontierBrainStreakAppearances[facility][numPikeSymbols] - sFrontierBrainStreakAppearances[facility][3])
-            ret = numPikeSymbols + 1;
+            ret = numPikeSymbols + 1; // FRONTIER_BRAIN_SILVER and FRONTIER_BRAIN_GOLD
         break;
     case 2:
     default:
         if (winStreak == sFrontierBrainStreakAppearances[facility][0] - sFrontierBrainStreakAppearances[facility][3])
-            ret = 3;
+            ret = FRONTIER_BRAIN_STREAK;
         else if (winStreak == sFrontierBrainStreakAppearances[facility][1] - sFrontierBrainStreakAppearances[facility][3]
                  || (winStreak > sFrontierBrainStreakAppearances[facility][1]
                      && (winStreak - sFrontierBrainStreakAppearances[facility][1] + sFrontierBrainStreakAppearances[facility][3]) % sFrontierBrainStreakAppearances[facility][2] == 0))
-            ret = 4;
+            ret = FRONTIER_BRAIN_STREAK_LONG;
         break;
     }
 
@@ -1584,7 +1584,7 @@ static void IsPartyFullHealed(void)
     }
 }
 
-static void BackupMonHeldItems(void)
+static void SaveMonHeldItems(void)
 {
     u8 i;
 

@@ -144,9 +144,9 @@ const struct WindowTemplate gUnknown_08623110 =
 const struct OamData gUnknown_086231C8 = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .size = SPRITE_SIZE(32x8),

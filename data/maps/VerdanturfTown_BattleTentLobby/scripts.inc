@@ -26,7 +26,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201719:: @ 8201719
 
 VerdanturfTown_BattleTentLobby_EventScript_201722:: @ 8201722
 	lockall
-	msgbox VerdanturfTown_BattleTentLobby_Text_24E636, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge, MSGBOX_DEFAULT
 	closemessage
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
@@ -39,19 +39,15 @@ VerdanturfTown_BattleTentLobby_EventScript_201757:: @ 8201757
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5731, MSGBOX_DEFAULT
 	message VerdanturfTown_BattleTentLobby_Text_2C5791
 	waitmessage
-	setvar VAR_0x8004, 6
-	special CallVerdanturfTentFunction
+	verdanturftent_setrandomprize
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 0
-	special CallVerdanturfTentFunction
+	verdanturftent_save 0
 	playse SE_SAVE
 	waitse
 
 VerdanturfTown_BattleTentLobby_EventScript_201791:: @ 8201791
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C57CD, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 7
-	special CallVerdanturfTentFunction
+	verdanturftent_giveprize
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_2017DD
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
@@ -66,7 +62,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201791:: @ 8201791
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_2017DD:: @ 82017DD
-	msgbox VerdanturfTown_BattleTentLobby_Text_24E57B, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	setvar VAR_TEMP_0, 255
@@ -84,9 +80,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2017FD:: @ 82017FD
 	message VerdanturfTown_BattleTentLobby_Text_2C56B8
 	waitmessage
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 0
-	special CallVerdanturfTentFunction
+	verdanturftent_save 0
 	playse SE_SAVE
 	waitse
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C539A, MSGBOX_DEFAULT
@@ -97,12 +91,10 @@ VerdanturfTown_BattleTentLobby_EventScript_2017FD:: @ 82017FD
 
 VerdanturfTown_BattleTentLobby_EventScript_201837:: @ 8201837
 	lockall
-	msgbox VerdanturfTown_BattleTentLobby_Text_24E5D8, MSGBOX_DEFAULT
-	message VerdanturfTown_BattleTentLobby_Text_24E5F6
+	msgbox BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting, MSGBOX_DEFAULT
+	message BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge
 	waitmessage
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 1
-	special CallVerdanturfTentFunction
+	verdanturftent_save CHALLENGE_STATUS_SAVING
 	playse SE_SAVE
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
@@ -112,8 +104,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201837:: @ 8201837
 VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	special CallVerdanturfTentFunction
+	verdanturftent_getprize
 	compare VAR_RESULT, 0
 	goto_if_ne VerdanturfTown_BattleTentLobby_EventScript_2017EE
 	special SavePlayerParty
@@ -154,8 +145,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, 0
-	special CallVerdanturfTentFunction
+	verdanturftent_init
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	special LoadPlayerParty
@@ -292,7 +282,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201B02:: @ 8201B02
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201B11:: @ 8201B11
-	message VerdanturfTown_BattleTentLobby_Text_24EF88
+	message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
 	special ShowScrollableMultichoice
@@ -314,27 +304,27 @@ VerdanturfTown_BattleTentLobby_EventScript_201B7E:: @ 8201B7E
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201B8C:: @ 8201B8C
-	msgbox VerdanturfTown_BattleTentLobby_Text_24EFAB, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_201B11
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201B9A:: @ 8201B9A
-	msgbox VerdanturfTown_BattleTentLobby_Text_24F049, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_201B11
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201BA8:: @ 8201BA8
-	msgbox VerdanturfTown_BattleTentLobby_Text_24F190, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_201B11
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201BB6:: @ 8201BB6
-	msgbox VerdanturfTown_BattleTentLobby_Text_24F2E8, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_201B11
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201BC4:: @ 8201BC4
-	msgbox VerdanturfTown_BattleTentLobby_Text_24F3F4, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger, MSGBOX_DEFAULT
 	goto VerdanturfTown_BattleTentLobby_EventScript_201B11
 	end
 

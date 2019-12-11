@@ -227,9 +227,9 @@ const struct SpritePalette gUnknown_08622818[2] =
 static const struct OamData sOptionsCursorOamData = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
     .x = 0,
     .size = SPRITE_SIZE(8x16),
@@ -252,9 +252,9 @@ static const struct SpriteTemplate sOptionsCursorSpriteTemplate =
 static const struct OamData sTrainerPicOamData = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .size = SPRITE_SIZE(64x64),

@@ -153,7 +153,7 @@ extern const u16 gUnknown_082F41E8[];
 extern const s8 gUnknown_082F41CC[][2];
 extern const s8 gUnknown_082F41D2[][2];
 extern const u32 gUnknown_082F334C[];
-extern const u8 gUnknown_082F32D8[][3];
+extern const u8 sBerryCrushTextColors1[][3];
 
 struct BerryCrushGame *sub_8020C00(void)
 {
@@ -821,5 +821,5 @@ void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
 void sub_80219C8(u8 windowId, u8 left, u8 colorId, const u8 *string)
 {
     left = (left * 4) - (GetStringWidth(2, string, -1) / 2u);
-    AddTextPrinterParameterized3(windowId, 2, left, 0, gUnknown_082F32D8[colorId], 0, string);
+    AddTextPrinterParameterized3(windowId, 2, left, 0, sBerryCrushTextColors1[colorId], 0, string);
 }

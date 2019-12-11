@@ -755,7 +755,7 @@ void sub_81D0E60(struct PokenavSub14 *structPtr)
 
 void sub_81D0E84(struct PokenavSub14 *structPtr)
 {
-    u8 color[] = {4, 2, 3};
+    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
     ConvertIntToDecimalStringN(gStringVar1, GetCurrMonRibbonCount(), STR_CONV_MODE_LEFT_ALIGN, 2);
     DynamicPlaceholderTextUtil_Reset();
@@ -770,7 +770,7 @@ void sub_81D0EFC(struct PokenavSub14 *structPtr)
 {
     s32 i;
     u32 ribbonId = sub_81D0954();
-    u8 color[] = {4, 2, 3};
+    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
     FillWindowPixelBuffer(structPtr->field_A, PIXEL_FILL(4));
     if (ribbonId < 25)
@@ -1060,10 +1060,10 @@ static const struct SpritePalette gUnknown_08624C80[] =
 static const struct OamData sOamData_8624CB0 =
 {
     .y = 0,
-    .affineMode = 1,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,

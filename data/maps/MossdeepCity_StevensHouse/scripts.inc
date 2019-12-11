@@ -189,7 +189,8 @@ MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum: @ 8222B9E
 MossdeepCity_StevensHouse_Text_ObtainedBeldum: @ 8222BED
 	.string "{PLAYER} obtained a BELDUM.$"
 
-MossdeepCity_StevensHouse_Text_222C03: @ 8222C03
+@ Unused
+MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon: @ 8222C03
 	.string "There is no space for another POKéMON.$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas: @ 8222C2A

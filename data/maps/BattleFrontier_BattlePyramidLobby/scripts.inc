@@ -31,14 +31,8 @@ BattleFrontier_BattlePyramidLobby_EventScript_250768:: @ 8250768
 	playse SE_EXPMAX
 	waitse
 	closemessage
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_DATA
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 0
-	special CallBattlePyramidFunction
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_DATA
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattlePyramidFunction
+	pyramid_set PYRAMID_DATA_WIN_STREAK, 0
+	pyramid_set PYRAMID_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -61,8 +55,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	clearflag FLAG_STORING_ITEMS_IN_PYRAMID_BAG
 	frontier_checkairshow
 	special LoadPlayerParty
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_CLEAR_HELD_ITEMS
-	special CallBattlePyramidFunction
+	pyramid_clearhelditems
 	special HealPlayerParty
 	message BattleFrontier_BattlePyramidLobby_Text_2519F8
 	waitmessage
@@ -73,11 +66,8 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	message BattleFrontier_BattlePyramidLobby_Text_251A77
 	waitmessage
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_REWARD
-	special CallBattlePyramidFunction
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_3
-	setvar VAR_0x8005, 0
-	special CallBattlePyramidFunction
+	pyramid_setprize
+	pyramid_save 0
 	playse SE_SAVE
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, MSGBOX_DEFAULT
@@ -89,8 +79,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 BattleFrontier_BattlePyramidLobby_EventScript_250852:: @ 8250852
 	frontier_checkairshow
 	special LoadPlayerParty
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_CLEAR_HELD_ITEMS
-	special CallBattlePyramidFunction
+	pyramid_clearhelditems
 	special HealPlayerParty
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_251B5A
@@ -99,13 +88,8 @@ BattleFrontier_BattlePyramidLobby_EventScript_250852:: @ 8250852
 	waitse
 	message BattleFrontier_BattlePyramidLobby_Text_251A77
 	waitmessage
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_DATA
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special CallBattlePyramidFunction
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_3
-	setvar VAR_0x8005, 0
-	special CallBattlePyramidFunction
+	pyramid_set PYRAMID_DATA_WIN_STREAK_ACTIVE, FALSE
+	pyramid_save 0
 	playse SE_SAVE
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, MSGBOX_DEFAULT
@@ -164,18 +148,12 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
 	setvar VAR_TEMP_0, 0
 	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_INIT_CHALLENGE
-	special CallBattlePyramidFunction
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SET_DATA
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 1
-	special CallBattlePyramidFunction
+	pyramid_init
+	pyramid_set PYRAMID_DATA_WIN_STREAK_ACTIVE, TRUE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_SEED_FLOOR
-	special CallBattlePyramidFunction
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_INIT_TRAINERS
-	special CallBattlePyramidFunction
+	pyramid_seedfloor
+	pyramid_inittrainers
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -251,37 +229,29 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B27:: @ 8250B27
 
 BattleFrontier_BattlePyramidLobby_EventScript_250B28:: @ 8250B28
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251C8A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_GET_DATA
-	setvar VAR_0x8005, 5
-	special CallBattlePyramidFunction
-	compare VAR_RESULT, 0
+	pyramid_get PYRAMID_DATA_WIN_STREAK_ACTIVE_50
+	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePyramidLobby_EventScript_250B53
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250B53:: @ 8250B53
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_GET_DATA
-	setvar VAR_0x8005, 3
-	special CallBattlePyramidFunction
+	pyramid_get PYRAMID_DATA_WIN_STREAK_50
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250B66:: @ 8250B66
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251C8A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_GET_DATA
-	setvar VAR_0x8005, 6
-	special CallBattlePyramidFunction
-	compare VAR_RESULT, 0
+	pyramid_get PYRAMID_DATA_WIN_STREAK_ACTIVE_OPEN
+	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePyramidLobby_EventScript_250B91
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250B91:: @ 8250B91
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_GET_DATA
-	setvar VAR_0x8005, 4
-	special CallBattlePyramidFunction
+	pyramid_get PYRAMID_DATA_WIN_STREAK_OPEN
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
 	return
 
@@ -404,9 +374,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D56:: @ 8250D56
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_250DCD
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251569, MSGBOX_DEFAULT
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_GET_DATA
-	setvar VAR_0x8005, 1
-	special CallBattlePyramidFunction
+	pyramid_get PYRAMID_DATA_WIN_STREAK
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250D94
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2515AD, MSGBOX_DEFAULT

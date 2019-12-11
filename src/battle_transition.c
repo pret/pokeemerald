@@ -760,10 +760,10 @@ static const struct SpriteTemplate gUnknown_085C8E68 =
 static const struct OamData gOamData_85C8E80 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -1672,7 +1672,7 @@ bool8 FldEff_Pokeball(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&gUnknown_085C8E68, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     gSprites[spriteId].oam.priority = 0;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].data[0] = gFieldEffectArguments[2];
     gSprites[spriteId].data[1] = gFieldEffectArguments[3];
     gSprites[spriteId].data[2] = -1;
@@ -2394,20 +2394,20 @@ static void Mugshots_CreateOpponentPlayerSprites(struct Task *task)
     opponentSprite->callback = sub_8148380;
     playerSprite->callback = sub_8148380;
 
-    opponentSprite->oam.affineMode = 3;
-    playerSprite->oam.affineMode = 3;
+    opponentSprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+    playerSprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
 
     opponentSprite->oam.matrixNum = AllocOamMatrix();
     playerSprite->oam.matrixNum = AllocOamMatrix();
 
-    opponentSprite->oam.shape = 1;
-    playerSprite->oam.shape = 1;
+    opponentSprite->oam.shape = SPRITE_SHAPE(64x32);
+    playerSprite->oam.shape = SPRITE_SHAPE(64x32);
 
-    opponentSprite->oam.size = 3;
-    playerSprite->oam.size = 3;
+    opponentSprite->oam.size = SPRITE_SIZE(64x32);
+    playerSprite->oam.size = SPRITE_SIZE(64x32);
 
-    CalcCenterToCornerVec(opponentSprite, 1, 3, 3);
-    CalcCenterToCornerVec(playerSprite, 1, 3, 3);
+    CalcCenterToCornerVec(opponentSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
+    CalcCenterToCornerVec(playerSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
 
     SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, sMugshotsOpponentRotationScales[mugshotId][0], sMugshotsOpponentRotationScales[mugshotId][1], 0);
     SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 512, 0);

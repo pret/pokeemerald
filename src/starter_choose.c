@@ -112,16 +112,16 @@ static const struct WindowTemplate gUnknown_085B1DE4 =
 
 static const u8 sPokeballCoords[STARTER_MON_COUNT][2] =
 {
-    {0x3c, 0x40},
-    {0x78, 0x58},
-    {0xb4, 0x40},
+    {60, 64},
+    {120, 88},
+    {180, 64},
 };
 
-static const u8 gStarterChoose_LabelCoords[][2] =
+static const u8 sStarterLabelCoords[][2] =
 {
-    {0x00, 0x09},
-    {0x10, 0x0a},
-    {0x08, 0x04},
+    {0, 9},
+    {16, 10},
+    {8, 4},
 };
 
 static const u16 sStarterMon[STARTER_MON_COUNT] =
@@ -162,15 +162,15 @@ static const struct BgTemplate gUnknown_085B1E00[3] =
     },
 };
 
-static const u8 gUnknown_085B1E0C[] = {0x00, 0x01, 0x03};
+static const u8 sTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY};
 
 static const struct OamData gOamData_85B1E10 =
 {
     .y = 160,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
@@ -184,10 +184,10 @@ static const struct OamData gOamData_85B1E10 =
 static const struct OamData gOamData_85B1E18 =
 {
     .y = 160,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
@@ -201,10 +201,10 @@ static const struct OamData gOamData_85B1E18 =
 static const struct OamData gOamData_85B1E20 =
 {
     .y = 160,
-    .affineMode = 3,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -215,11 +215,11 @@ static const struct OamData gOamData_85B1E20 =
     .affineParam = 0,
 };
 
-static const u8 gUnknown_085B1E28[][2] =
+static const u8 sCursorCoords[][2] =
 {
-    {0x3c, 0x20},
-    {0x78, 0x38},
-    {0xb4, 0x20},
+    {60, 32},
+    {120, 56},
+    {180, 32},
 };
 
 static const union AnimCmd gSpriteAnim_85B1E30[] =
@@ -579,36 +579,36 @@ static void Task_StarterChoose6(u8 taskId)
 
 static void CreateStarterPokemonLabel(u8 selection)
 {
-    u8 text[32];
+    u8 categoryText[32];
     struct WindowTemplate winTemplate;
     const u8 *speciesName;
     s32 width;
     u8 labelLeft, labelRight, labelTop, labelBottom;
 
     u16 species = GetStarterPokemon(selection);
-    CopyMonCategoryText(SpeciesToNationalPokedexNum(species), text);
+    CopyMonCategoryText(SpeciesToNationalPokedexNum(species), categoryText);
     speciesName = gSpeciesNames[species];
 
     winTemplate = gUnknown_085B1DE4;
-    winTemplate.tilemapLeft = gStarterChoose_LabelCoords[selection][0];
-    winTemplate.tilemapTop = gStarterChoose_LabelCoords[selection][1];
+    winTemplate.tilemapLeft = sStarterLabelCoords[selection][0];
+    winTemplate.tilemapTop = sStarterLabelCoords[selection][1];
 
     sStarterChooseWindowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(sStarterChooseWindowId, PIXEL_FILL(0));
 
-    width = GetStringCenterAlignXOffset(7, text, 0x68);
-    AddTextPrinterParameterized3(sStarterChooseWindowId, 7, width, 1, gUnknown_085B1E0C, 0, text);
+    width = GetStringCenterAlignXOffset(7, categoryText, 0x68);
+    AddTextPrinterParameterized3(sStarterChooseWindowId, 7, width, 1, sTextColors, 0, categoryText);
 
     width = GetStringCenterAlignXOffset(1, speciesName, 0x68);
-    AddTextPrinterParameterized3(sStarterChooseWindowId, 1, width, 0x11, gUnknown_085B1E0C, 0, speciesName);
+    AddTextPrinterParameterized3(sStarterChooseWindowId, 1, width, 0x11, sTextColors, 0, speciesName);
 
     PutWindowTilemap(sStarterChooseWindowId);
     schedule_bg_copy_tilemap_to_vram(0);
 
-    labelLeft = gStarterChoose_LabelCoords[selection][0] * 8 - 4;
-    labelRight = (gStarterChoose_LabelCoords[selection][0] + 13) * 8 + 4;
-    labelTop = gStarterChoose_LabelCoords[selection][1] * 8;
-    labelBottom = (gStarterChoose_LabelCoords[selection][1] + 4) * 8;
+    labelLeft = sStarterLabelCoords[selection][0] * 8 - 4;
+    labelRight = (sStarterLabelCoords[selection][0] + 13) * 8 + 4;
+    labelTop = sStarterLabelCoords[selection][1] * 8;
+    labelBottom = (sStarterLabelCoords[selection][1] + 4) * 8;
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(labelLeft, labelRight));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(labelTop, labelBottom));
 }
@@ -647,8 +647,8 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 
 void sub_81346DC(struct Sprite *sprite)
 {
-    sprite->pos1.x = gUnknown_085B1E28[gTasks[sprite->data[0]].tStarterSelection][0];
-    sprite->pos1.y = gUnknown_085B1E28[gTasks[sprite->data[0]].tStarterSelection][1];
+    sprite->pos1.x = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][0];
+    sprite->pos1.y = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][1];
     sprite->pos2.y = Sin(sprite->data[1], 8);
     sprite->data[1] = (u8)(sprite->data[1]) + 4;
 }

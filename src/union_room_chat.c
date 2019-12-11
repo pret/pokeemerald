@@ -461,8 +461,8 @@ const struct SpritePalette gUnknown_082F315C = {
 };
 
 const struct OamData gUnknown_082F3164 = {
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3,
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
     .priority = 1
 };
 
@@ -504,8 +504,8 @@ const struct SpriteTemplate gUnknown_082F319C = {
 };
 
 const struct OamData gUnknown_082F31B4 = {
-    .shape = ST_OAM_V_RECTANGLE,
-    .size = 0,
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 2
 };
 
@@ -530,14 +530,14 @@ const struct SpriteTemplate gUnknown_082F31D4 = {
 };
 
 const struct OamData gUnknown_082F31EC = {
-    .shape = ST_OAM_SQUARE,
-    .size = 1,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
 const struct OamData gUnknown_082F31F4 = {
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 2
 };
 
@@ -1705,7 +1705,7 @@ void copy_strings_to_sav1(void)
     StringCopy(gSaveBlock1Ptr->unk3C88[4], gText_Lets);
     StringCopy(gSaveBlock1Ptr->unk3C88[5], gText_Ok);
     StringCopy(gSaveBlock1Ptr->unk3C88[6], gText_Sorry);
-    StringCopy(gSaveBlock1Ptr->unk3C88[7], gText_YayUnkF9F9);
+    StringCopy(gSaveBlock1Ptr->unk3C88[7], gText_YaySmileEmoji);
     StringCopy(gSaveBlock1Ptr->unk3C88[8], gText_ThankYou);
     StringCopy(gSaveBlock1Ptr->unk3C88[9], gText_ByeBye);
 }
@@ -2583,9 +2583,9 @@ static void sub_80201A4(void)
 
     FillWindowPixelBuffer(2, PIXEL_FILL(15));
     page = GetCurrentKeyboardPage();
-    sp[0] = 0;
-    sp[1] = 14;
-    sp[2] = 13;
+    sp[0] = TEXT_COLOR_TRANSPARENT;
+    sp[1] = TEXT_DYNAMIC_COLOR_5;
+    sp[2] = TEXT_DYNAMIC_COLOR_4;
     if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
         str = &sp[4];
@@ -2688,7 +2688,7 @@ static void sub_802040C(void)
 static void sub_8020420(u16 row, u8 *str, u8 arg2)
 {
     u8 color[3];
-    color[0] = 1;
+    color[0] = TEXT_COLOR_WHITE;
     color[1] = arg2 * 2 + 2;
     color[2] = arg2 * 2 + 3;
     FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);

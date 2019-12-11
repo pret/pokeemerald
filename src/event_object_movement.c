@@ -1121,13 +1121,13 @@ void ResetEventObjects(void)
 static void CreateReflectionEffectSprites(void)
 {
     u8 spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
     gSprites[spriteId].invisible = TRUE;
 
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 1);
     gSprites[spriteId].invisible = TRUE;
@@ -1199,8 +1199,6 @@ static u8 GetEventObjectIdByLocalId(u8 localId)
     return EVENT_OBJECTS_COUNT;
 }
 
-// This function has the same nonmatching quirk as in Ruby/Sapphire.
-#ifdef NONMATCHING
 static u8 InitEventObjectStateFromTemplate(struct EventObjectTemplate *template, u8 mapNum, u8 mapGroup)
 {
     struct EventObject *eventObject;
@@ -1208,11 +1206,8 @@ static u8 InitEventObjectStateFromTemplate(struct EventObjectTemplate *template,
     s16 x;
     s16 y;
 
-    // mapNum and mapGroup are in the wrong registers (r7/r6 instead of r6/r7)
     if (GetAvailableEventObjectId(template->localId, mapNum, mapGroup, &eventObjectId))
-    {
         return EVENT_OBJECTS_COUNT;
-    }
     eventObject = &gEventObjects[eventObjectId];
     ClearEventObject(eventObject);
     x = template->x + 7;
@@ -1223,6 +1218,7 @@ static u8 InitEventObjectStateFromTemplate(struct EventObjectTemplate *template,
     eventObject->movementType = template->movementType;
     eventObject->localId = template->localId;
     eventObject->mapNum = mapNum;
+    eventObject++; eventObject--;
     eventObject->mapGroup = mapGroup;
     eventObject->initialCoords.x = x;
     eventObject->initialCoords.y = y;
@@ -1232,7 +1228,6 @@ static u8 InitEventObjectStateFromTemplate(struct EventObjectTemplate *template,
     eventObject->previousCoords.y = y;
     eventObject->currentElevation = template->elevation;
     eventObject->previousElevation = template->elevation;
-    // For some reason, 0x0F is placed in r9, to be used later
     eventObject->range.as_nybbles.x = template->movementRangeX;
     eventObject->range.as_nybbles.y = template->movementRangeY;
     eventObject->trainerType = template->trainerType;
@@ -1240,177 +1235,22 @@ static u8 InitEventObjectStateFromTemplate(struct EventObjectTemplate *template,
     eventObject->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
     SetEventObjectDirection(eventObject, eventObject->previousMovementDirection);
     SetEventObjectDynamicGraphicsId(eventObject);
-
+#ifndef NONMATCHING
+    asm("":::"r5", "r6");
+#endif
     if (gRangedMovementTypes[eventObject->movementType])
     {
-        if ((eventObject->range.as_nybbles.x) == 0)
+        if (eventObject->range.as_nybbles.x == 0)
         {
-            // r9 is invoked here
             eventObject->range.as_nybbles.x++;
         }
-        if ((eventObject->range.as_nybbles.y) == 0)
+        if (eventObject->range.as_nybbles.y == 0)
         {
             eventObject->range.as_nybbles.y++;
         }
     }
     return eventObjectId;
 }
-#else
-static NAKED u8 InitEventObjectStateFromTemplate(struct EventObjectTemplate *template, u8 mapId, u8 mapGroupId)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r9\n"
-                "\tmov r6, r8\n"
-                "\tpush {r6,r7}\n"
-                "\tsub sp, 0x4\n"
-                "\tadds r5, r0, 0\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r6, r1, 24\n"
-                "\tlsls r2, 24\n"
-                "\tlsrs r7, r2, 24\n"
-                "\tldrb r0, [r5]\n"
-                "\tadds r1, r6, 0\n"
-                "\tadds r2, r7, 0\n"
-                "\tmov r3, sp\n"
-                "\tbl GetAvailableEventObjectId\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0808D66E\n"
-                "\tmovs r0, 0x10\n"
-                "\tb _0808D762\n"
-                "_0808D66E:\n"
-                "\tmov r0, sp\n"
-                "\tldrb r1, [r0]\n"
-                "\tlsls r0, r1, 3\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, =gEventObjects\n"
-                "\tadds r4, r0, r1\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl ClearEventObject\n"
-                "\tldrh r3, [r5, 0x4]\n"
-                "\tadds r3, 0x7\n"
-                "\tlsls r3, 16\n"
-                "\tlsrs r3, 16\n"
-                "\tldrh r2, [r5, 0x6]\n"
-                "\tadds r2, 0x7\n"
-                "\tlsls r2, 16\n"
-                "\tlsrs r2, 16\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x1\n"
-                "\torrs r0, r1\n"
-                "\tmovs r1, 0x4\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4]\n"
-                "\tldrb r0, [r5, 0x1]\n"
-                "\tstrb r0, [r4, 0x5]\n"
-                "\tldrb r0, [r5, 0x9]\n"
-                "\tstrb r0, [r4, 0x6]\n"
-                "\tldrb r0, [r5]\n"
-                "\tstrb r0, [r4, 0x8]\n"
-                "\tstrb r6, [r4, 0x9]\n"
-                "\tstrb r7, [r4, 0xA]\n"
-                "\tstrh r3, [r4, 0xC]\n"
-                "\tstrh r2, [r4, 0xE]\n"
-                "\tstrh r3, [r4, 0x10]\n"
-                "\tstrh r2, [r4, 0x12]\n"
-                "\tstrh r3, [r4, 0x14]\n"
-                "\tstrh r2, [r4, 0x16]\n"
-                "\tldrb r0, [r5, 0x8]\n"
-                "\tmovs r7, 0xF\n"
-                "\tadds r1, r7, 0\n"
-                "\tands r1, r0\n"
-                "\tldrb r2, [r4, 0xB]\n"
-                "\tmovs r0, 0x10\n"
-                "\tnegs r0, r0\n"
-                "\tmov r8, r0\n"
-                "\tands r0, r2\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4, 0xB]\n"
-                "\tldrb r1, [r5, 0x8]\n"
-                "\tlsls r1, 4\n"
-                "\tands r0, r7\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4, 0xB]\n"
-                "\tldrb r1, [r5, 0xA]\n"
-                "\tlsls r1, 28\n"
-                "\tmovs r0, 0xF\n"
-                "\tmov r9, r0\n"
-                "\tlsrs r1, 28\n"
-                "\tldrb r2, [r4, 0x19]\n"
-                "\tmov r0, r8\n"
-                "\tands r0, r2\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4, 0x19]\n"
-                "\tldrb r1, [r5, 0xA]\n"
-                "\tlsrs r1, 4\n"
-                "\tlsls r1, 4\n"
-                "\tands r0, r7\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4, 0x19]\n"
-                "\tldrh r0, [r5, 0xC]\n"
-                "\tstrb r0, [r4, 0x7]\n"
-                "\tldrh r0, [r5, 0xE]\n"
-                "\tstrb r0, [r4, 0x1D]\n"
-                "\tldr r1, =gInitialMovementTypeFacingDirections\n"
-                "\tldrb r0, [r5, 0x9]\n"
-                "\tadds r0, r1\n"
-                "\tldrb r1, [r0]\n"
-                "\tadds r0, r4, 0\n"
-                "\tadds r0, 0x20\n"
-                "\tstrb r1, [r0]\n"
-                "\tldrb r1, [r0]\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl SetEventObjectDirection\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl SetEventObjectDynamicGraphicsId\n"
-                "\tldr r1, =gRangedMovementTypes\n"
-                "\tldrb r0, [r4, 0x6]\n"
-                "\tadds r0, r1\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0808D75E\n"
-                "\tldrb r2, [r4, 0x19]\n"
-                "\tadds r0, r7, 0\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0808D746\n"
-                "\tlsls r0, r2, 28\n"
-                "\tlsrs r0, 28\n"
-                "\tadds r0, 0x1\n"
-                "\tmov r1, r9\n"
-                "\tands r0, r1\n"
-                "\tmov r1, r8\n"
-                "\tands r1, r2\n"
-                "\torrs r1, r0\n"
-                "\tstrb r1, [r4, 0x19]\n"
-                "_0808D746:\n"
-                "\tldrb r2, [r4, 0x19]\n"
-                "\tmovs r0, 0xF0\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0808D75E\n"
-                "\tlsrs r1, r2, 4\n"
-                "\tadds r1, 0x1\n"
-                "\tlsls r1, 4\n"
-                "\tadds r0, r7, 0\n"
-                "\tands r0, r2\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4, 0x19]\n"
-                "_0808D75E:\n"
-                "\tmov r0, sp\n"
-                "\tldrb r0, [r0]\n"
-                "_0808D762:\n"
-                "\tadd sp, 0x4\n"
-                "\tpop {r3,r4}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1\n"
-                ".pool");
-}
-#endif
 
 u8 Unref_TryInitLocalEventObject(u8 localId)
 {
@@ -1676,7 +1516,7 @@ u8 AddPseudoEventObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
     {
         sprite = &gSprites[spriteId];
         SetSubspriteTables(sprite, subspriteTables);
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     }
     return spriteId;
 }
@@ -1721,7 +1561,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
         if (subspriteTables != NULL)
         {
             SetSubspriteTables(sprite, subspriteTables);
-            sprite->subspriteMode = 2;
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
         InitObjectPriorityByZCoord(sprite, z);
         SetObjectSubpriorityByZCoord(z, sprite, 1);
@@ -4586,7 +4426,7 @@ void MovementType_Hidden(struct Sprite *sprite)
     if (!sprite->data[7])
     {
         gEventObjects[sprite->data[0]].fixedPriority = TRUE;
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         sprite->oam.priority = 3;
         sprite->data[7]++;
     }
@@ -6814,7 +6654,7 @@ bool8 MovementAction_InitAffineAnim_Step0(struct EventObject *eventObject, struc
     sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     InitSpriteAffineAnim(sprite);
     sprite->affineAnimPaused = TRUE;
-    sprite->subspriteMode = 0;
+    sprite->subspriteMode = SUBSPRITES_OFF;
     return TRUE;
 }
 
@@ -8844,12 +8684,12 @@ void sub_8097BB4(u8 var1, u8 graphicsId)
         {
             sprite->subspriteTables = NULL;
             sprite->subspriteTableNum = 0;
-            sprite->subspriteMode = 0;
+            sprite->subspriteMode = SUBSPRITES_OFF;
         }
         else
         {
             SetSubspriteTables(sprite, graphicsInfo->subspriteTables);
-            sprite->subspriteMode = 2;
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
         StartSpriteAnim(sprite, 0);
     }

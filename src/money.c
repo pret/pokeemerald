@@ -20,10 +20,10 @@ EWRAM_DATA static u8 sMoneyLabelSpriteId = 0;
 static const struct OamData sOamData_MoneyLabel =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,

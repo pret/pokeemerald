@@ -4,7 +4,7 @@ Route130_MapScripts:: @ 81F735F
 
 Route130_OnTransition: @ 81F7365
 	compare VAR_SOOTOPOLIS_CITY_STATE, 4
-	call_if_ge Route130_EventScript_CheckSetAlternatingWeather
+	call_if_ge Route130_EventScript_CheckSetAbnormalWeather
 	specialvar VAR_RESULT, IsMirageIslandPresent
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route130_EventScript_SetMirageIslandLayout
@@ -30,8 +30,8 @@ Route130_EventScript_SetMirageIslandLayout:: @ 81F73B1
 	setmaplayoutindex LAYOUT_ROUTE130_MIRAGE_ISLAND
 	end
 
-Route130_EventScript_CheckSetAlternatingWeather:: @ 81F73B5
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
+Route130_EventScript_CheckSetAbnormalWeather:: @ 81F73B5
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	return
 
 Route130_EventScript_Rodney:: @ 81F73BF

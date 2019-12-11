@@ -6,8 +6,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScripts:: @ 8243D92
 	.byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7: @ 8243DA7
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_RESTORE_PARTY
-	special CallBattlePyramidFunction
+	pyramid_healparty
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0

@@ -136,8 +136,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8596BA0 =
 
 const struct Subsprite gUnknown_08596BB8[] =
 {
-    {.x = -16, .y = 0, .shape = ST_OAM_H_RECTANGLE, .size = 2, .tileOffset = 0, .priority = 1},
-    {.x =  16, .y = 0, .shape = ST_OAM_H_RECTANGLE, .size = 2, .tileOffset = 8, .priority = 1},
+    {.x = -16, .y = 0, .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16), .tileOffset = 0, .priority = 1},
+    {.x =  16, .y = 0, .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16), .tileOffset = 8, .priority = 1},
 };
 
 const struct SubspriteTable gUnknown_08596BC0[] =

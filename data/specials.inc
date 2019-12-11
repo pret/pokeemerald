@@ -499,8 +499,8 @@ gSpecials:: @ 81DBA64
 	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
 	def_special sub_8175280
-	def_special CreateUnusualWeatherEvent
-	def_special GetUnusualWeatherMapNameAndType
+	def_special CreateAbnormalWeatherEvent
+	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny

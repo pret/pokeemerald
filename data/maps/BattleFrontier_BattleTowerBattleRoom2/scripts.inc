@@ -58,8 +58,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D:: @ 8248F4D
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_CHOOSE_TRAINER
-	special CallBattleTowerFunc
+	tower_setopponent
 	addobject 1
 	addobject 4
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249528
@@ -67,17 +66,13 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249026
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
-	setvar VAR_0x8005, 0
-	special CallBattleTowerFunc
+	tower_getopponentintro 0
 	delay 15
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
-	setvar VAR_0x8005, 1
-	special CallBattleTowerFunc
+	tower_getopponentintro 1
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -85,21 +80,17 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249069
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249026:: @ 8249026
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
-	setvar VAR_0x8005, 0
-	special CallBattleTowerFunc
+	tower_getopponentintro 0
 	delay 15
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	messageautoscroll 0x2021fc4
+	messageautoscroll gStringVar4
 	waitmessage
 	delay 48
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_7
-	setvar VAR_0x8005, 1
-	special CallBattleTowerFunc
+	tower_getopponentintro 1
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	messageautoscroll 0x2021fc4
+	messageautoscroll gStringVar4
 	waitmessage
 	delay 48
 
@@ -110,17 +101,14 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249069:: @ 8249069
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_24907E:: @ 824907E
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 3
-	special CallBattleTowerFunc
+	tower_set TOWER_DATA_LVL_MODE
 	setvar VAR_0x8004, 3
 	special Script_TryGainNewFanFromCounter
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_2421B8
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2490AA:: @ 82490AA
 	call BattleFrontier_EventScript_IncrementWinStreak
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_4
-	special CallBattleTowerFunc
+	tower_setbattlewon
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattleTowerBattleRoom2_EventScript_2492AF
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249534
@@ -220,9 +208,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249283:: @ 8249283
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2492AF:: @ 82492AF
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_2
-	setvar VAR_0x8005, 3
-	special CallBattleTowerFunc
+	tower_set TOWER_DATA_LVL_MODE
 	setvar VAR_0x8004, 3
 	special Script_TryGainNewFanFromCounter
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_2421B8
@@ -230,9 +216,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2492AF:: @ 82492AF
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB:: @ 82492DB
 	message BattleFrontier_BattleTowerBattleRoom2_Text_242426
 	waitmessage
-	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SAVE
-	setvar VAR_0x8005, CHALLENGE_STATUS_PAUSED
-	special CallBattleTowerFunc
+	tower_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
 	fadescreen 1

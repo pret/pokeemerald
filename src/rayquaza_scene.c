@@ -101,10 +101,10 @@ static const TaskFunc sTasksForAnimations[] =
 static const struct OamData sOamData_862A6BC =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -118,10 +118,10 @@ static const struct OamData sOamData_862A6BC =
 static const struct OamData sOamData_862A6C4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
@@ -135,10 +135,10 @@ static const struct OamData sOamData_862A6C4 =
 static const struct OamData sOamData_862A6CC =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
@@ -152,10 +152,10 @@ static const struct OamData sOamData_862A6CC =
 static const struct OamData sOamData_862A6D4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
@@ -169,10 +169,10 @@ static const struct OamData sOamData_862A6D4 =
 static const struct OamData sOamData_862A6DC =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
     .x = 0,
     .matrixNum = 0,
@@ -186,10 +186,10 @@ static const struct OamData sOamData_862A6DC =
 static const struct OamData sOamData_862A6E4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x32),
     .x = 0,
     .matrixNum = 0,
@@ -203,10 +203,10 @@ static const struct OamData sOamData_862A6E4 =
 static const struct OamData sOamData_862A6EC =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
@@ -220,10 +220,10 @@ static const struct OamData sOamData_862A6EC =
 static const struct OamData sOamData_862A6F4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
@@ -2045,8 +2045,8 @@ static void sub_81D81A4(u8 taskId)
                                    (sUnknown_0862AAB8[data[0]][1] * 4) + 80,
                                    0);
         gSprites[spriteId].data[0] = (s8)(data[0]);
-        gSprites[spriteId].oam.objMode = 1;
-        gSprites[spriteId].oam.affineMode = 3;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
         gSprites[spriteId].oam.priority = 2;
         InitSpriteAffineAnim(&gSprites[spriteId]);
         if (data[0] == 9)
