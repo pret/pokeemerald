@@ -1415,13 +1415,13 @@ void sub_802222C(struct BerryCrushGame *r4)
     sub_8022600(r4);
 }
 
-#ifdef NONMATCHING
 void sub_8022250(u8 r4)
 {
     u8 r9 = 0, r2, r7, r10;
     u32 sp0C = 0;
     s16 *r6 = gTasks[r4].data;
-
+    const u8 *r10_; // r5/sl register swap
+    
     switch (r6[0])
     {
     case 0:
@@ -1432,8 +1432,12 @@ void sub_8022250(u8 r4)
         DrawStdFrameWithCustomTileAndPalette((u8)r6[1], 0, 541, 13);
         break;
     case 1:
-        // r5/r10 register swap
-        r7 = 96 - GetStringWidth(1, gText_BerryCrush2, -1) / 2u;
+        r10_ = gText_BerryCrush2;
+        ++r10_; --r10_;
+    #ifndef NONMATCHING
+        asm("":::"r8");
+    #endif
+        r7 = 96 - GetStringWidth(1, r10_, -1) / 2u;
         AddTextPrinterParameterized3(
             (u8)r6[1],
             1,
@@ -1441,9 +1445,10 @@ void sub_8022250(u8 r4)
             1,
             sBerryCrushTextColorTable[0],
             0,
-            gText_BerryCrush2
+            r10_
         );
-        r7 = 96 - GetStringWidth(1, gText_PressingSpeedRankings, -1) / 2u;
+        r10_ = gText_PressingSpeedRankings;
+        r7 = 96 - GetStringWidth(1, r10_, -1) / 2u;
         AddTextPrinterParameterized3(
             (u8)r6[1],
             1,
@@ -1451,10 +1456,10 @@ void sub_8022250(u8 r4)
             17,
             sBerryCrushTextColorTable[0],
             0,
-            gText_PressingSpeedRankings
+            r10_
         );
-        
-        for (r10 = 41; r9 < 4; ++r9)
+        r10 = 41;
+        for (; r9 < 4; ++r9)
         {
             ConvertIntToDecimalStringN(gStringVar1, r9 + 2, 0, 1);
             StringExpandPlaceholders(gStringVar4, gText_Var1Players);
@@ -1515,290 +1520,6 @@ void sub_8022250(u8 r4)
     }
     ++r6[0];
 }
-#else
-NAKED
-void sub_8022250(u8 r4)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x14\n\
-        lsls r0, 24\n\
-        lsrs r4, r0, 24\n\
-        movs r0, 0\n\
-        mov r9, r0\n\
-        movs r1, 0\n\
-        str r1, [sp, 0xC]\n\
-        lsls r0, r4, 2\n\
-        adds r0, r4\n\
-        lsls r0, 3\n\
-        ldr r1, =gTasks + 0x8\n\
-        adds r6, r0, r1\n\
-        movs r1, 0\n\
-        ldrsh r0, [r6, r1]\n\
-        cmp r0, 0x1\n\
-        beq _080222D0_case_1\n\
-        cmp r0, 0x1\n\
-        bgt _08022288\n\
-        cmp r0, 0\n\
-        beq _08022296_case_0\n\
-        b _080224BA_case_def\n\
-        .pool\n\
-    _08022288:\n\
-        cmp r0, 0x2\n\
-        bne _0802228E\n\
-        b _08022480_case_2\n\
-    _0802228E:\n\
-        cmp r0, 0x3\n\
-        bne _08022294\n\
-        b _08022494_case_3\n\
-    _08022294:\n\
-        b _080224BA_case_def\n\
-    _08022296_case_0:\n\
-        ldr r0, =gUnknown_082F32EC\n\
-        bl AddWindow\n\
-        strh r0, [r6, 0x2]\n\
-        lsls r0, 24\n\
-        lsrs r0, 24\n\
-        bl PutWindowTilemap\n\
-        ldrb r0, [r6, 0x2]\n\
-        movs r1, 0\n\
-        bl FillWindowPixelBuffer\n\
-        ldrb r0, [r6, 0x2]\n\
-        ldr r4, =0x0000021d\n\
-        adds r1, r4, 0\n\
-        movs r2, 0xD0\n\
-        bl LoadUserWindowBorderGfx_\n\
-        ldrb r0, [r6, 0x2]\n\
-        movs r1, 0\n\
-        adds r2, r4, 0\n\
-        movs r3, 0xD\n\
-        bl DrawStdFrameWithCustomTileAndPalette\n\
-        b _080224BA_case_def\n\
-        .pool\n\
-    _080222D0_case_1:\n\
-        ldr r0, =gText_BerryCrush2\n\
-        mov r10, r0\n\
-        movs r1, 0x1\n\
-        negs r1, r1\n\
-        mov r8, r1\n\
-        movs r0, 0x1\n\
-        mov r1, r10\n\
-        mov r2, r8\n\
-        bl GetStringWidth\n\
-        lsrs r0, 1\n\
-        movs r4, 0x60\n\
-        subs r0, r4, r0\n\
-        lsls r0, 24\n\
-        lsrs r7, r0, 24\n\
-        ldrb r0, [r6, 0x2]\n\
-        ldr r5, =sBerryCrushTextColorTable\n\
-        str r5, [sp]\n\
-        mov r1, r9\n\
-        str r1, [sp, 0x4]\n\
-        mov r1, r10\n\
-        str r1, [sp, 0x8]\n\
-        movs r1, 0x1\n\
-        adds r2, r7, 0\n\
-        movs r3, 0x1\n\
-        bl AddTextPrinterParameterized3\n\
-        ldr r0, =gText_PressingSpeedRankings\n\
-        mov r10, r0\n\
-        movs r0, 0x1\n\
-        mov r1, r10\n\
-        mov r2, r8\n\
-        bl GetStringWidth\n\
-        lsrs r0, 1\n\
-        subs r4, r0\n\
-        lsls r4, 24\n\
-        lsrs r7, r4, 24\n\
-        ldrb r0, [r6, 0x2]\n\
-        str r5, [sp]\n\
-        mov r1, r9\n\
-        str r1, [sp, 0x4]\n\
-        mov r1, r10\n\
-        str r1, [sp, 0x8]\n\
-        movs r1, 0x1\n\
-        adds r2, r7, 0\n\
-        movs r3, 0x11\n\
-        bl AddTextPrinterParameterized3\n\
-        movs r0, 0x29\n\
-        mov r10, r0\n\
-    _08022336:\n\
-        mov r1, r9\n\
-        adds r1, 0x2\n\
-        ldr r0, =gStringVar1\n\
-        movs r2, 0\n\
-        movs r3, 0x1\n\
-        bl ConvertIntToDecimalStringN\n\
-        ldr r0, =gStringVar4\n\
-        ldr r1, =gText_Var1Players\n\
-        bl StringExpandPlaceholders\n\
-        ldrb r0, [r6, 0x2]\n\
-        ldr r1, =sBerryCrushTextColors1\n\
-        str r1, [sp]\n\
-        movs r1, 0\n\
-        str r1, [sp, 0x4]\n\
-        ldr r1, =gStringVar4\n\
-        str r1, [sp, 0x8]\n\
-        movs r1, 0x1\n\
-        movs r2, 0\n\
-        mov r3, r10\n\
-        bl AddTextPrinterParameterized3\n\
-        movs r0, 0x1\n\
-        ldr r1, =gText_TimesPerSec\n\
-        movs r2, 0x1\n\
-        negs r2, r2\n\
-        bl GetStringWidth\n\
-        movs r1, 0xC0\n\
-        subs r1, r0\n\
-        lsls r1, 24\n\
-        lsrs r7, r1, 24\n\
-        ldrb r0, [r6, 0x2]\n\
-        ldr r1, =sBerryCrushTextColors1\n\
-        str r1, [sp]\n\
-        movs r1, 0\n\
-        str r1, [sp, 0x4]\n\
-        ldr r1, =gText_TimesPerSec\n\
-        str r1, [sp, 0x8]\n\
-        movs r1, 0x1\n\
-        adds r2, r7, 0\n\
-        mov r3, r10\n\
-        bl AddTextPrinterParameterized3\n\
-        movs r2, 0\n\
-        mov r0, r9\n\
-        lsls r4, r0, 1\n\
-        mov r1, r10\n\
-        adds r1, 0x10\n\
-        str r1, [sp, 0x10]\n\
-        movs r0, 0x1\n\
-        add r9, r0\n\
-        adds r0, r4, r6\n\
-        ldrb r3, [r0, 0x4]\n\
-        movs r1, 0x7\n\
-        mov r12, r1\n\
-        movs r0, 0x1\n\
-        mov r8, r0\n\
-        ldr r5, =gUnknown_082F334C\n\
-    _080223AE:\n\
-        mov r0, r12\n\
-        subs r1, r0, r2\n\
-        adds r0, r3, 0\n\
-        asrs r0, r1\n\
-        mov r1, r8\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _080223CA\n\
-        lsls r0, r2, 2\n\
-        adds r0, r5\n\
-        ldr r0, [r0]\n\
-        ldr r1, [sp, 0xC]\n\
-        adds r1, r0\n\
-        str r1, [sp, 0xC]\n\
-    _080223CA:\n\
-        adds r0, r2, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r2, r0, 24\n\
-        cmp r2, 0x7\n\
-        bls _080223AE\n\
-        adds r0, r4, r6\n\
-        ldrh r1, [r0, 0x4]\n\
-        lsrs r1, 8\n\
-        ldr r0, =gStringVar1\n\
-        movs r2, 0x1\n\
-        movs r3, 0x3\n\
-        bl ConvertIntToDecimalStringN\n\
-        ldr r0, [sp, 0xC]\n\
-        ldr r1, =0x000f4240\n\
-        bl __udivsi3\n\
-        adds r1, r0, 0\n\
-        ldr r0, =gStringVar2\n\
-        movs r2, 0x2\n\
-        movs r3, 0x2\n\
-        bl ConvertIntToDecimalStringN\n\
-        ldr r0, =gStringVar4\n\
-        ldr r1, =gText_XDotY3\n\
-        bl StringExpandPlaceholders\n\
-        movs r0, 0x1\n\
-        ldr r1, =gStringVar4\n\
-        movs r2, 0x1\n\
-        negs r2, r2\n\
-        bl GetStringWidth\n\
-        subs r0, r7, r0\n\
-        lsls r0, 24\n\
-        lsrs r7, r0, 24\n\
-        ldrb r0, [r6, 0x2]\n\
-        ldr r1, =sBerryCrushTextColors1\n\
-        str r1, [sp]\n\
-        movs r1, 0\n\
-        str r1, [sp, 0x4]\n\
-        ldr r1, =gStringVar4\n\
-        str r1, [sp, 0x8]\n\
-        movs r1, 0x1\n\
-        adds r2, r7, 0\n\
-        mov r3, r10\n\
-        bl AddTextPrinterParameterized3\n\
-        ldr r1, [sp, 0x10]\n\
-        lsls r0, r1, 24\n\
-        lsrs r0, 24\n\
-        mov r10, r0\n\
-        movs r0, 0\n\
-        str r0, [sp, 0xC]\n\
-        mov r1, r9\n\
-        lsls r0, r1, 24\n\
-        lsrs r0, 24\n\
-        mov r9, r0\n\
-        cmp r0, 0x3\n\
-        bhi _08022444\n\
-        b _08022336\n\
-    _08022444:\n\
-        ldrb r0, [r6, 0x2]\n\
-        movs r1, 0x3\n\
-        bl CopyWindowToVram\n\
-        b _080224BA_case_def\n\
-        .pool\n\
-    _08022480_case_2:\n\
-        ldr r0, =gMain\n\
-        ldrh r1, [r0, 0x2E]\n\
-        movs r0, 0x3\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        bne _080224BA_case_def\n\
-        b _080224C0\n\
-        .pool\n\
-    _08022494_case_3:\n\
-        ldrb r0, [r6, 0x2]\n\
-        movs r1, 0x1\n\
-        bl ClearStdWindowAndFrameToTransparent\n\
-        ldrb r0, [r6, 0x2]\n\
-        bl ClearWindowTilemap\n\
-        ldrb r0, [r6, 0x2]\n\
-        bl RemoveWindow\n\
-        adds r0, r4, 0\n\
-        bl DestroyTask\n\
-        bl EnableBothScriptContexts\n\
-        bl ScriptContext2_Disable\n\
-        mov r0, r9\n\
-        b _080224BE\n\
-    _080224BA_case_def:\n\
-        ldrh r0, [r6]\n\
-        adds r0, 0x1\n\
-    _080224BE:\n\
-        strh r0, [r6]\n\
-    _080224C0:\n\
-        add sp, 0x14\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0");
-}
-#endif
 
 void ShowBerryCrushRankings(void)
 {
@@ -2052,7 +1773,6 @@ void sub_8022B28(struct Sprite *sprite)
     s32 r2;
     u32 r8 = 0;
 
-    r7 = sprite->data;
     r2 = 640;
     r7[1] = r2;
     r7[2] = 32;
