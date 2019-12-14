@@ -76,8 +76,8 @@ BattleFrontier_BattleFactoryLobby_EventScript_258506:: @ 8258506
 	waitse
 
 BattleFrontier_BattleFactoryLobby_EventScript_25853B:: @ 825853B
-	call BattleFrontier_BattleFactoryLobby_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_258582
 	message BattleFrontier_BattleFactoryLobby_Text_259388
 	waitmessage

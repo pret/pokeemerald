@@ -3892,24 +3892,24 @@
       "blockdata_filepath": "data/layouts/DesertUnderpass/map.bin"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM",
-      "name": "BattleFrontier_BattleTowerMultiBattleRoom_Layout",
+      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM",
+      "name": "BattleFrontier_BattleTowerMultiPartnerRoom_Layout",
       "width": 21,
       "height": 15,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattleFrontier",
-      "border_filepath": "data/layouts/BattleFrontier_BattleTowerMultiBattleRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleTowerMultiBattleRoom/map.bin"
+      "border_filepath": "data/layouts/BattleFrontier_BattleTowerMultiPartnerRoom/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_BattleTowerMultiPartnerRoom/map.bin"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2",
-      "name": "BattleFrontier_BattleTowerCorridor2_Layout",
+      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR",
+      "name": "BattleFrontier_BattleTowerMultiCorridor_Layout",
       "width": 17,
       "height": 5,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattleFrontier",
-      "border_filepath": "data/layouts/BattleFrontier_BattleTowerCorridor2/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleTowerCorridor2/map.bin"
+      "border_filepath": "data/layouts/BattleFrontier_BattleTowerMultiCorridor/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_BattleTowerMultiCorridor/map.bin"
     },
     {
       "id": "LAYOUT_ROUTE111_NO_MIRAGE_TOWER",

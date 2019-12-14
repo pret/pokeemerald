@@ -19,7 +19,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7
-	frontier_set FRONTIER_DATA_6, 1
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	setvar VAR_TEMP_0, 1
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
 	waitmovement 0
@@ -29,8 +29,8 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F:: @ 824B24F
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B4FB
 	waitmessage
 	switch VAR_RESULT
-	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1
 	multichoice 16, 0, MULTI_TOURNEY_WITH_RECORD, 1
 	switch VAR_RESULT

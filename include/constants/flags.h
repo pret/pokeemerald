@@ -1632,11 +1632,11 @@
 #define FLAG_0x95F                                  (SYSTEM_FLAGS + 0xFF)
 
 // Special Flags (Unknown)
-#define SPECIAL_FLAGS_START                                        0x4000
-#define FLAG_HIDE_MAP_NAME_POPUP                                   0x4000
-#define FLAG_DONT_TRANSITION_MUSIC                                 0x4001
-#define FLAG_SPECIAL_FLAG_0x4002                                   0x4002
-#define FLAG_SPECIAL_FLAG_0x4003                                   0x4003
-#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG                          0x4004
+#define SPECIAL_FLAGS_START                  0x4000
+#define FLAG_HIDE_MAP_NAME_POPUP             0x4000
+#define FLAG_DONT_TRANSITION_MUSIC           0x4001
+#define FLAG_ENABLE_MULTI_CORRIDOR_DOOR      0x4002
+#define FLAG_SPECIAL_FLAG_0x4003             0x4003
+#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG    0x4004
 
 #endif // GUARD_CONSTANTS_FLAGS_H

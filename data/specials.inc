@@ -513,7 +513,7 @@ gSpecials:: @ 81DBA64
 	def_special TurnOnTVScreen
 	def_special sub_81D4A90
 	def_special ShouldDistributeEonTicket
-	def_special sub_813B568
+	def_special LinkRetireStatusWithBattleTowerPartner
 	def_special sub_813B534
 	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene @ Listed twice

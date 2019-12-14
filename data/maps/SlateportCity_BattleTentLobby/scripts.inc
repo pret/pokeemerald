@@ -49,7 +49,7 @@ SlateportCity_BattleTentLobby_EventScript_2087E9:: @ 82087E9
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentLobby_EventScript_20882A
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
-	message SlateportCity_BattleTentLobby_Text_23F68C
+	message BattleFrontier_BattleTowerLobby_Text_ReceivedPrize
 	waitmessage
 	playfanfare MUS_FANFA4
 	waitfanfare
