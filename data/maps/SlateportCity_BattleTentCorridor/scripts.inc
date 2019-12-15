@@ -34,7 +34,7 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	slateporttent_generaterentalmons
 	slateporttent_generateopponentmons
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	slateporttent_rentmons
 	waitstate
 SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
@@ -97,7 +97,7 @@ SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_208EB4
 
 SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	slateporttent_swapmons
 	waitstate
 	compare VAR_RESULT, 1
@@ -121,7 +121,7 @@ SlateportCity_BattleTentCorridor_EventScript_209022:: @ 8209022
 	slateporttent_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	frontier_reset
 	end
 

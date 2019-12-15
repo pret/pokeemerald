@@ -581,7 +581,7 @@ static bool8 HandleStartMenuInput(void)
             && gMenuCallback != StartMenuSafariZoneRetireCallback
             && gMenuCallback != StartMenuBattlePyramidRetireCallback)
         {
-           FadeScreen(1, 0);
+           FadeScreen(FADE_TO_BLACK, 0);
         }
 
         return FALSE;

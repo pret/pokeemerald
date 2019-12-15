@@ -1341,7 +1341,7 @@ static void CB2_QuizLadyQuestion(void)
     switch (gMain.state)
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         break;
     case 1:
         if (!gPaletteFade.active)

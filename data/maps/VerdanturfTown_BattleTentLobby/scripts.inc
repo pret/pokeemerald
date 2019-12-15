@@ -129,7 +129,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_2019E8
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5633, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier

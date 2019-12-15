@@ -166,7 +166,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C15
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A26E, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
@@ -367,7 +367,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249D84:: @ 8249D84
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DDB
 	compare VAR_RESULT, 3
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DE4
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	dome_showresultstree
 	waitstate
 	end
