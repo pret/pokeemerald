@@ -33,12 +33,12 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_209044
 	slateporttent_generaterentalmons
 	slateporttent_generateopponentmons
-	msgbox SlateportCity_BattleTentCorridor_Text_25A1C8, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection, MSGBOX_DEFAULT
 	fadescreen 1
 	slateporttent_rentmons
 	waitstate
 SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
-	msgbox SlateportCity_BattleTentCorridor_Text_25AB96, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
@@ -56,7 +56,7 @@ SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
 SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	factory_setopponentmons
 	factory_resethelditems
-	msgbox SlateportCity_BattleTentCorridor_Text_25A22D, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -73,14 +73,14 @@ SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 	case 2, SlateportCity_BattleTentCorridor_EventScript_208F89
 
 SlateportCity_BattleTentCorridor_EventScript_208F5B:: @ 8208F5B
-	msgbox SlateportCity_BattleTentCorridor_Text_25A350, MSGBOX_YESNO
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, SlateportCity_BattleTentCorridor_EventScript_208F0D
 	case YES, SlateportCity_BattleTentCorridor_EventScript_209022
 	case MULTI_B_PRESSED, SlateportCity_BattleTentCorridor_EventScript_208F0D
 
 SlateportCity_BattleTentCorridor_EventScript_208F89:: @ 8208F89
-	message SlateportCity_BattleTentCorridor_Text_25A37A
+	message BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
@@ -90,7 +90,7 @@ SlateportCity_BattleTentCorridor_EventScript_208F89:: @ 8208F89
 
 SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 	slateporttent_generateopponentmons
-	msgbox SlateportCity_BattleTentCorridor_Text_25AB2E, MSGBOX_YESNO
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, SlateportCity_BattleTentCorridor_EventScript_208EB4
 	case YES, SlateportCity_BattleTentCorridor_EventScript_208FF1
@@ -102,21 +102,21 @@ SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
 	waitstate
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_208EB4
-	msgbox SlateportCity_BattleTentCorridor_Text_25AB6C, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete, MSGBOX_DEFAULT
 	goto SlateportCity_BattleTentCorridor_EventScript_208EB4
 
 SlateportCity_BattleTentCorridor_EventScript_209014:: @ 8209014
-	message SlateportCity_BattleTentCorridor_Text_25A263
+	message BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor2ndOpponent
 	waitmessage
 	return
 
 SlateportCity_BattleTentCorridor_EventScript_20901B:: @ 820901B
-	message SlateportCity_BattleTentCorridor_Text_25A289
+	message BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor3rdOpponent
 	waitmessage
 	return
 
 SlateportCity_BattleTentCorridor_EventScript_209022:: @ 8209022
-	message SlateportCity_BattleTentCorridor_Text_25ABAE
+	message BattleFrontier_BattleFactoryPreBattleRoom_Text_SavingDataPleaseWait
 	waitmessage
 	slateporttent_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE

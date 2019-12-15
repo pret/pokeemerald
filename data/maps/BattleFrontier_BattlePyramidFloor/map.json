@@ -1,7 +1,7 @@
 {
-  "id": "MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE",
-  "name": "BattleFrontier_BattlePyramidEmptySquare",
-  "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE",
+  "id": "MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR",
+  "name": "BattleFrontier_BattlePyramidFloor",
+  "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR",
   "music": "MUS_NONE",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,

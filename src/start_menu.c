@@ -512,14 +512,14 @@ static bool8 sub_809FA00(void)
     return TRUE;
 }
 
-void sub_809FA18(void) // Called from field_screen.s
+void sub_809FA18(void)
 {
     sUnknown_02037619[0] = 0;
     sUnknown_02037619[1] = 0;
     gFieldCallback2 = sub_809FA00;
 }
 
-void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
+void Task_ShowStartMenu(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
 
@@ -539,7 +539,7 @@ void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
     }
 }
 
-void ShowStartMenu(void) // Called from overworld.c and field_control_avatar.s
+void ShowStartMenu(void)
 {
     if (!IsUpdateLinkStateCBActive())
     {
@@ -547,7 +547,7 @@ void ShowStartMenu(void) // Called from overworld.c and field_control_avatar.s
         sub_808B864();
         sub_808BCF4();
     }
-    CreateStartMenuTask(sub_809FA34);
+    CreateStartMenuTask(Task_ShowStartMenu);
     ScriptContext2_Enable();
 }
 
@@ -743,11 +743,12 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
     return FALSE;
 }
 
-void sub_809FDD4(void)
+// Functionally unused
+void ShowBattlePyramidStartMenu(void)
 {
     ClearDialogWindowAndFrameToTransparent(0, FALSE);
     ScriptUnfreezeObjectEvents();
-    CreateStartMenuTask(sub_809FA34);
+    CreateStartMenuTask(Task_ShowStartMenu);
     ScriptContext2_Enable();
 }
 
@@ -827,7 +828,7 @@ static bool8 BattlePyramidRetireCallback(void)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
         ScriptContext2_Disable();
-        ScriptContext1_SetupScript(BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88);
+        ScriptContext1_SetupScript(BattlePyramid_Retire);
         return TRUE;
     }
 
@@ -853,7 +854,7 @@ static u8 RunSaveCallback(void)
     return sSaveDialogCallback();
 }
 
-void SaveGame(void) // Called from cable_club.s
+void SaveGame(void)
 {
     InitSave();
     CreateTask(SaveGameTask, 0x50);
@@ -1048,7 +1049,7 @@ static u8 SaveDoSaveCallback(void)
     u8 saveStatus;
 
     IncrementGameStat(GAME_STAT_SAVED_GAME);
-    sub_81A9E90();
+    PausePyramidChallenge();
 
     if (gDifferentSaveFile == TRUE)
     {
@@ -1202,7 +1203,7 @@ static bool32 sub_80A03E4(u8 *par1)
     return FALSE;
 }
 
-void sub_80A0514(void) // Called from cable_club.s
+void sub_80A0514(void)
 {
     if (sub_80A03E4(&gMain.state))
     {
@@ -1371,7 +1372,7 @@ static void sub_80A08A4(u8 taskId)
     }
 }
 
-void sub_80A08CC(void) // Referenced in data/specials.inc and data/scripts/maps/BattleFrontier_BattleTowerLobby.inc
+void sub_80A08CC(void)
 {
     u8 taskId = CreateTask(sub_8153688, 0x5);
     gTasks[taskId].data[2] = 1;
@@ -1386,7 +1387,7 @@ static void HideStartMenuWindow(void)
     ScriptContext2_Disable();
 }
 
-void HideStartMenu(void) // Called from map_name_popup.s
+void HideStartMenu(void)
 {
     PlaySE(SE_SELECT);
     HideStartMenuWindow();

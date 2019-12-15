@@ -9,7 +9,7 @@ void GenerateBattlePyramidWildMon(void);
 u8 GetPyramidRunMultiplier(void);
 u8 InBattlePyramid(void);
 bool8 InBattlePyramid_(void);
-void sub_81A9E90(void);
+void PausePyramidChallenge(void);
 void SoftResetInBattlePyramid(void);
 void CopyPyramidTrainerSpeechBefore(u16 trainerId);
 void CopyPyramidTrainerWinSpeech(u16 trainerId);

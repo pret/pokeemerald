@@ -2423,7 +2423,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 23:
-        if (!FuncIsActiveTask(sub_809FA34))
+        if (!FuncIsActiveTask(Task_ShowStartMenu))
         {
             sub_8011090(0x40, 0, 0);
             data->state = 4;

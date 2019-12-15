@@ -428,7 +428,7 @@ static void sub_80AF660(u8 taskId)
     if (WaitForWeatherFadeIn() == TRUE)
     {
         DestroyTask(taskId);
-        CreateTask(sub_809FA34, 80);
+        CreateTask(Task_ShowStartMenu, 80);
     }
 }
 

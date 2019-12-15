@@ -1665,10 +1665,16 @@
 	callstd \type
 	.endm
 
-	.macro giveitem_std item:req, amount=1, function=0
+	.macro giveitem_std item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
-	callstd \function
+	callstd STD_OBTAIN_ITEM
+	.endm
+
+	.macro finditem_std item:req, amount=1
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
+	callstd STD_FIND_ITEM
 	.endm
 
 	.macro givedecoration_std decoration:req

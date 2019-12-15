@@ -4,9 +4,9 @@
 extern bool8 (*gMenuCallback)(void);
 
 void sub_809FA18(void);
-void sub_809FA34(u8 taskId);
+void Task_ShowStartMenu(u8 taskId);
 void ShowStartMenu(void);
-void sub_809FDD4(void);
+void ShowBattlePyramidStartMenu(void);
 void SaveGame(void);
 void sub_80A0514(void);
 void sub_80A08CC(void);
