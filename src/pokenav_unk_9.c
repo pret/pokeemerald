@@ -8,9 +8,6 @@
 #include "international_string_util.h"
 #include "constants/songs.h"
 
-#define boxId id1 // naming multi-purpose field
-#define monId id2 // naming multi-purpose field
-
 struct PokenavSub9
 {
     u32 (*unk0)(struct PokenavSub9*);
@@ -668,8 +665,8 @@ static void sub_81D02B0(s32 windowId, s32 val1, s32 val2)
 
 static void sub_81D0304(void)
 {
-    struct MatchCallListTemplate template;
-    template.unk0 = sub_81CFB28();
+    struct PokenavListTemplate template;
+    template.list.monList = sub_81CFB28();
     template.unk4 = sub_81CFB38();
     template.unk8 = 4;
     template.unk6 = sub_81CFB64();
@@ -679,7 +676,7 @@ static void sub_81D0304(void)
     template.unkC = 8;
     template.unkD = 2;
     template.unkE = 1;
-    template.unk10 = sub_81D035C;
+    template.listFunc.unk10_1 = sub_81D035C;
     template.unk14 = NULL;
     sub_81C81D4(&gUnknown_086237B0[1], &template, 0);
 }

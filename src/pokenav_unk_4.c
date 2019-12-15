@@ -865,8 +865,8 @@ u32 ExitMatchCall(s32 taskState)
 
 static void sub_81CBBB8(void)
 {
-    struct MatchCallListTemplate template;
-    template.unk0 = sub_81CAE94();
+    struct PokenavListTemplate template;
+    template.list.matchCallEntries = sub_81CAE94();
     template.unk4 = GetNumberRegistered();
     template.unk8 = 4;
     template.unk6 = 0;
@@ -876,7 +876,7 @@ static void sub_81CBBB8(void)
     template.unkC = 8;
     template.unkD = 3;
     template.unkE = 7;
-    template.unk10 = BufferMatchCallNameAndDesc;
+    template.listFunc.unk10_2 = BufferMatchCallNameAndDesc;
     template.unk14 = TryDrawRematchPokeballIcon;
     sub_81C81D4(&gUnknown_0862278C[2], &template, 2);
     CreateTask(sub_81CBC64, 7);

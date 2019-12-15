@@ -15,11 +15,6 @@
 #include "constants/flags.h"
 #include "constants/songs.h"
 
-// naming multi-purpose fields
-#define isSpecialTrainer  id1  // Entries with their own match call header in pokenav_match_call_data.c
-#define mapSec            id2  
-#define headerId          data 
-
 struct Pokenav3Struct
 {
     u16 optionCursorPos;
@@ -31,7 +26,7 @@ struct Pokenav3Struct
     u32 unk10;
     u32 unk14;
     u32 (*callback)(struct Pokenav3Struct*);
-    struct PokenavMonList matchCallEntries[MAX_REMATCH_ENTRIES - 1];
+    struct PokenavMatchCallEntries matchCallEntries[MAX_REMATCH_ENTRIES - 1];
 };
 
 static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *);
@@ -304,7 +299,7 @@ int unref_sub_81CAE6C(int arg0)
     return state->matchCallEntries[arg0].headerId;
 }
 
-struct PokenavMonList *sub_81CAE94(void)
+struct PokenavMatchCallEntries *sub_81CAE94(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     return state->matchCallEntries;
@@ -400,7 +395,7 @@ u16 GetMatchCallOptionId(int optionId)
     return state->matchCallOptions[optionId];
 }
 
-void BufferMatchCallNameAndDesc(struct PokenavMonList *matchCallEntry, u8 *str)
+void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntries *matchCallEntry, u8 *str)
 {
     const u8 *trainerName;
     const u8 *className;

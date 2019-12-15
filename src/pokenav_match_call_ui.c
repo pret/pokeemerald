@@ -46,7 +46,7 @@ struct PokenavSub17Substruct
     u32 unk28;
     s32 unk2C;
     u32 unk30;
-    void (*unk34)(struct PokenavMonList *, u8*);
+    void (*unk34)(struct PokenavMatchCallEntries *, u8*);
     void (*unk38)(u16, u32, u32);
     struct Sprite *rightArrow;
     struct Sprite *upArrow;
@@ -67,8 +67,8 @@ struct PokenavSub17
 extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
 
 void sub_81C82E4(struct PokenavSub17 *a0);
-bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct MatchCallListTemplate *a2, s32 a3);
-void sub_81C9160(struct MatchCallWindowState *a0, struct MatchCallListTemplate *a1);
+bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3);
+void sub_81C9160(struct MatchCallWindowState *a0, struct PokenavListTemplate *a1);
 void SpriteCB_MatchCallUpArrow(struct Sprite *sprite);
 void SpriteCB_MatchCallDownArrow(struct Sprite *sprite);
 void SpriteCB_MatchCallRightArrow(struct Sprite *sprite);
@@ -98,7 +98,7 @@ static const u32 sMatchcallArrowSpriteSheetData[] = INCBIN_U32("graphics/pokenav
 
 EWRAM_DATA u32 gUnknown_0203CF44 = 0;
 
-bool32 sub_81C81D4(const struct BgTemplate *arg0, struct MatchCallListTemplate *arg1, s32 arg2)
+bool32 sub_81C81D4(const struct BgTemplate *arg0, struct PokenavListTemplate *arg1, s32 arg2)
 {
     struct PokenavSub17 *structPtr = AllocSubstruct(17, sizeof(struct PokenavSub17));
     if (structPtr == NULL)
@@ -934,9 +934,9 @@ void ToggleMatchCallVerticalArrows(bool32 shouldHide)
     structPtr->unk0.downArrow->data[7] = shouldHide;
 }
 
-void sub_81C9160(struct MatchCallWindowState *a0, struct MatchCallListTemplate *a1)
+void sub_81C9160(struct MatchCallWindowState *a0, struct PokenavListTemplate *a1)
 {
-    a0->unk10 = a1->unk0;
+    a0->unk10 = a1->list.matchCallEntries;
     a0->windowTopIndex = a1->unk6;
     a0->listLength = a1->unk4;
     a0->unkC = a1->unk8;
@@ -962,13 +962,13 @@ void sub_81C9160(struct MatchCallWindowState *a0, struct MatchCallListTemplate *
     }
 }
 
-bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct MatchCallListTemplate *a2, s32 a3)
+bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3)
 {
     struct WindowTemplate window;
 
     a0->unk0.bg = a1->bg;
     a0->unk0.unk6 = a3;
-    a0->unk34 = a2->unk10;
+    a0->unk34 = a2->listFunc.unk10_2;
     a0->unk38 = a2->unk14;
     a0->unk0.unk1 = a2->unkD;
     a0->unk0.unk2 = a2->unk9;

@@ -7,12 +7,40 @@
 
 typedef u32 (*LoopedTask)(s32 state);
 
-// TODO: This struct is also used generally by Match Call, should probably be renamed
 struct PokenavMonList
 {
-    u8 id1;
-    u8 id2;
+    u8 boxId;
+    u8 monId;
     u16 data;
+};
+
+struct PokenavMatchCallEntries
+{
+    bool8 isSpecialTrainer;
+    u8 mapSec;
+    u16 headerId;
+};
+
+struct PokenavListTemplate
+{
+    union {
+        struct PokenavMonList *monList;
+        struct PokenavMatchCallEntries *matchCallEntries;
+    } list;
+    u16 unk4;
+    u16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    union {
+        void (*unk10_1)(struct PokenavMonList *, u8 *a1);
+        void (*unk10_2)(struct PokenavMatchCallEntries *, u8 *a1);
+    } listFunc;
+    void (*unk14)(u16 a0, u32 a1, u32 a2);
 };
 
 struct PokenavSub18
@@ -161,22 +189,6 @@ void SetPokenavVBlankCallback(void);
 void SetVBlankCallback_(IntrCallback callback);
 
 // pokenav_match_call_ui.c
-struct MatchCallListTemplate
-{
-    struct PokenavMonList * unk0;
-    u16 unk4;
-    u16 unk6;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    void (*unk10)(struct PokenavMonList *, u8 *a1);
-    void (*unk14)(u16 a0, u32 a1, u32 a2);
-};
-
 u32 GetSelectedMatchCall(void);
 bool32 sub_81C8224(void);
 int MatchCall_MoveCursorUp(void);
@@ -191,7 +203,7 @@ bool32 sub_81C8820(void);
 void PrintCheckPageInfo(s16 a0);
 u32 GetMatchCallListTopIndex(void);
 void sub_81C87F0(void);
-bool32 sub_81C81D4(const struct BgTemplate *arg0, struct MatchCallListTemplate *arg1, s32 arg2);
+bool32 sub_81C81D4(const struct BgTemplate *arg0, struct PokenavListTemplate *arg1, s32 arg2);
 void sub_81C8234(void);
 
 // pokenav_match_call_data.c
@@ -263,7 +275,7 @@ void sub_81CAB38(void);
 int sub_81CAE28(void);
 int GetNumberRegistered(void);
 int sub_81CAE48(void);
-struct PokenavMonList *sub_81CAE94(void);
+struct PokenavMatchCallEntries *sub_81CAE94(void);
 u16 GetMatchCallMapSec(int);
 bool32 ShouldDrawRematchPokeballIcon(int index);
 void ClearRematchPokeballIcon(u16 windowId, u32 a1);
@@ -272,7 +284,7 @@ const u8 *GetMatchCallFlavorText(int index, int textType);
 const u8 *GetMatchCallMessageText(int index, u8 *arg1);
 u16 GetMatchCallOptionCursorPos(void);
 u16 GetMatchCallOptionId(int arg0);
-void BufferMatchCallNameAndDesc(struct PokenavMonList * arg0, u8 *str);
+void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntries * arg0, u8 *str);
 u8 sub_81CB0C8(int rematchIndex);
 int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);

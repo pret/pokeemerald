@@ -14,9 +14,6 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-#define boxId id1 // naming multi-purpose field
-#define monId id2 // naming multi-purpose field
-
 struct PokenavSub11
 {
     u32 monPal[3][0x20];
