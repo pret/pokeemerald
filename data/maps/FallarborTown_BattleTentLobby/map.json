@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_BattleTentLobby_EventScript_200001",
+      "script": "FallarborTown_BattleTentLobby_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_BattleTentLobby_EventScript_20020D",
+      "script": "FallarborTown_BattleTentLobby_EventScript_Hiker",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_BattleTentLobby_EventScript_200216",
+      "script": "FallarborTown_BattleTentLobby_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_BattleTentLobby_EventScript_20021F",
+      "script": "FallarborTown_BattleTentLobby_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FallarborTown_BattleTentLobby_EventScript_200228",
+      "script": "FallarborTown_BattleTentLobby_EventScript_Scott",
       "flag": "FLAG_HIDE_FALLARBOR_TOWN_BATTLE_TENT_SCOTT"
     }
   ],
@@ -104,7 +104,7 @@
       "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FallarborTown_BattleTentLobby_EventScript_20024F"
+      "script": "FallarborTown_BattleTentLobby_EventScript_RulesBoard"
     }
   ]
 }
