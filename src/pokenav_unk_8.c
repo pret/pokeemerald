@@ -227,7 +227,7 @@ static s32 sub_81CF0F0(void)
 {
     struct PokenavSub7 * ptr = GetSubstructPtr(7);
     s32 i = GetSelectedMatchCall();
-    return ptr->unkPtr->unk4[i].unk6;
+    return ptr->unkPtr->unk4[i].data;
 }
 
 static u16 sub_81CF10C(void)
@@ -258,7 +258,7 @@ static u32 sub_81CF134(s32 state)
         if (!GetMonData(pokemon, MON_DATA_SANITY_IS_EGG))
         {
             item.monId = i;
-            item.unk6 = GetMonData(pokemon, ptr->unk14);
+            item.data = GetMonData(pokemon, ptr->unk14);
             sub_81CF2C4(ptr, &item);
         }
     }
@@ -290,7 +290,7 @@ static u32 sub_81CF1D8(s32 state)
             {
                 item.boxId = boxId;
                 item.monId = monId;
-                item.unk6 = GetBoxMonDataAt(boxId, monId, ptr->unk14);
+                item.data = GetBoxMonDataAt(boxId, monId, ptr->unk14);
                 sub_81CF2C4(ptr, &item);
             }
             boxCount++;
@@ -313,19 +313,19 @@ static u32 sub_81CF278(s32 state)
 {
     struct PokenavSub7 * ptr = GetSubstructPtr(7);
     s32 r6 = ptr->unkPtr->unk0;
-    s32 r4 = ptr->unkPtr->unk4[0].unk6;
+    s32 r4 = ptr->unkPtr->unk4[0].data;
     s32 i;
-    ptr->unkPtr->unk4[0].unk6 = 1;
+    ptr->unkPtr->unk4[0].data = 1;
     for (i = 1; i < r6; i++)
     {
-        if (ptr->unkPtr->unk4[i].unk6 == r4)
+        if (ptr->unkPtr->unk4[i].data == r4)
         {
-            ptr->unkPtr->unk4[i].unk6 = ptr->unkPtr->unk4[i - 1].unk6;
+            ptr->unkPtr->unk4[i].data = ptr->unkPtr->unk4[i - 1].data;
         }
         else
         {
-            r4 = ptr->unkPtr->unk4[i].unk6;
-            ptr->unkPtr->unk4[i].unk6 = i + 1;
+            r4 = ptr->unkPtr->unk4[i].data;
+            ptr->unkPtr->unk4[i].data = i + 1;
         }
     }
     ptr->unk18 = 1;
@@ -340,7 +340,7 @@ static void sub_81CF2C4(struct PokenavSub7 *structPtr, struct PokenavMonList *it
 
     while (right != insertionIdx)
     {
-        if (item->unk6 > structPtr->unkPtr->unk4[insertionIdx].unk6)
+        if (item->data > structPtr->unkPtr->unk4[insertionIdx].data)
             right = insertionIdx;
         else
             left = insertionIdx + 1;
@@ -431,7 +431,7 @@ static u32 sub_81CF418(s32 state)
         if (sub_81C8224())
             return LT_PAUSE;
         sub_81CF7C8(unk);
-        sub_81C7BA4(3);
+        PrintHelpBarText(HELPBAR_CONDITION_MON_LIST);
         return LT_INC_AND_PAUSE;
     case 4:
         if (free_temp_tile_data_buffers_if_possible())
@@ -651,8 +651,8 @@ static void sub_81CF7F4(struct PokenavSub8 * ptr)
 
 static void sub_81CF88C(void)
 {
-    struct MatchCallListTemplate template;
-    template.unk0 = sub_81CF0D0();
+    struct PokenavListTemplate template;
+    template.list.monList = sub_81CF0D0();
     template.unk4 = sub_81CF0E0();
     template.unk8 = 4;
     template.unk6 = sub_81CF10C();
@@ -662,7 +662,7 @@ static void sub_81CF88C(void)
     template.unkC = 8;
     template.unkD = 2;
     template.unkE = 1;
-    template.unk10 = sub_81CF8E4;
+    template.listFunc.unk10_1 = sub_81CF8E4;
     template.unk14 = NULL;
     sub_81C81D4(&gUnknown_08623590[1], &template, 0);
 }

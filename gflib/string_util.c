@@ -1,6 +1,7 @@
 #include "global.h"
 #include "string_util.h"
 #include "text.h"
+#include "strings.h"
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};
@@ -23,21 +24,6 @@ static const s32 sPowersOfTen[] =
      100000000,
     1000000000,
 };
-
-extern const u8 gExpandedPlaceholder_Empty[];
-extern const u8 gExpandedPlaceholder_Kun[];
-extern const u8 gExpandedPlaceholder_Chan[];
-extern const u8 gExpandedPlaceholder_Sapphire[];
-extern const u8 gExpandedPlaceholder_Ruby[];
-extern const u8 gExpandedPlaceholder_Emerald[];
-extern const u8 gExpandedPlaceholder_Aqua[];
-extern const u8 gExpandedPlaceholder_Magma[];
-extern const u8 gExpandedPlaceholder_Archie[];
-extern const u8 gExpandedPlaceholder_Maxie[];
-extern const u8 gExpandedPlaceholder_Kyogre[];
-extern const u8 gExpandedPlaceholder_Groudon[];
-extern const u8 gExpandedPlaceholder_Brendan[];
-extern const u8 gExpandedPlaceholder_May[];
 
 u8 *StringCopy10(u8 *dest, const u8 *src)
 {
@@ -451,52 +437,52 @@ static const u8 *ExpandPlaceholder_StringVar3(void)
 static const u8 *ExpandPlaceholder_KunChan(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-        return gExpandedPlaceholder_Kun;
+        return gText_ExpandedPlaceholder_Kun;
     else
-        return gExpandedPlaceholder_Chan;
+        return gText_ExpandedPlaceholder_Chan;
 }
 
 static const u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-        return gExpandedPlaceholder_May;
+        return gText_ExpandedPlaceholder_May;
     else
-        return gExpandedPlaceholder_Brendan;
+        return gText_ExpandedPlaceholder_Brendan;
 }
 
 static const u8 *ExpandPlaceholder_Version(void)
 {
-    return gExpandedPlaceholder_Emerald;
+    return gText_ExpandedPlaceholder_Emerald;
 }
 
 static const u8 *ExpandPlaceholder_Aqua(void)
 {
-    return gExpandedPlaceholder_Aqua;
+    return gText_ExpandedPlaceholder_Aqua;
 }
 
 static const u8 *ExpandPlaceholder_Magma(void)
 {
-    return gExpandedPlaceholder_Magma;
+    return gText_ExpandedPlaceholder_Magma;
 }
 
 static const u8 *ExpandPlaceholder_Archie(void)
 {
-    return gExpandedPlaceholder_Archie;
+    return gText_ExpandedPlaceholder_Archie;
 }
 
 static const u8 *ExpandPlaceholder_Maxie(void)
 {
-    return gExpandedPlaceholder_Maxie;
+    return gText_ExpandedPlaceholder_Maxie;
 }
 
 static const u8 *ExpandPlaceholder_Kyogre(void)
 {
-    return gExpandedPlaceholder_Kyogre;
+    return gText_ExpandedPlaceholder_Kyogre;
 }
 
 static const u8 *ExpandPlaceholder_Groudon(void)
 {
-    return gExpandedPlaceholder_Groudon;
+    return gText_ExpandedPlaceholder_Groudon;
 }
 
 const u8 *GetExpandedPlaceholder(u32 id)
@@ -522,7 +508,7 @@ const u8 *GetExpandedPlaceholder(u32 id)
     };
 
     if (id >= ARRAY_COUNT(funcs))
-        return gExpandedPlaceholder_Empty;
+        return gText_ExpandedPlaceholder_Empty;
     else
         return funcs[id]();
 }
