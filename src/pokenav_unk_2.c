@@ -323,7 +323,7 @@ static bool32 sub_81C98D4(void)
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
         if (sub_81CB0C8(i) == gMapHeader.regionMapSectionId
-            && sub_81CAE08(i)
+            && IsRematchEntryRegistered(i)
             && gSaveBlock1Ptr->trainerRematches[i])
             return TRUE;
     }
@@ -706,10 +706,10 @@ static u32 sub_81C9F28(s32 state)
     switch (state)
     {
     case 0:
-        sub_81C7BA4(sub_81C98C4());
+        PrintHelpBarText(GetHelpBarTextId());
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsDma3ManagerBusyWithBgCopy_())
+        if (WaitForHelpBar())
             return LT_PAUSE;
         sub_81C7880();
         sub_81CA9C8();

@@ -463,14 +463,14 @@ void sub_81CD970(void)
         {
             unkPtr->unk4[count].boxId = TOTAL_BOXES_COUNT;
             unkPtr->unk4[count].monId = i;
-            unkPtr->unk4[count].unk6 = 0;
+            unkPtr->unk4[count].data = 0;
             count++;
         }
     }
 
     unkPtr->unk4[count].boxId = 0;
     unkPtr->unk4[count].monId = 0;
-    unkPtr->unk4[count].unk6 = 0;
+    unkPtr->unk4[count].data = 0;
     unkPtr->unk2 = 0;
     unkPtr->unk0 = count + 1;
     structPtr->unk678A = 0;
@@ -597,7 +597,7 @@ u8 *sub_81CDD24(u8 id)
 u16 sub_81CDD48(void)
 {
     struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
-    return unkPtr->unk4[unkPtr->unk2].unk6;
+    return unkPtr->unk4[unkPtr->unk2].data;
 }
 
 bool32 sub_81CDD5C(void)

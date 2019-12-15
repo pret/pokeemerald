@@ -357,12 +357,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall:: @ 8224175
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall:: @ 8224193
-	pokenavcall MossdeepCity_SpaceCenter_2F_Text_MayRayquazaCall
+	pokenavcall MatchCall_Text_MayRayquazaCall
 	waitmessage
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall:: @ 822419A
-	pokenavcall MossdeepCity_SpaceCenter_2F_Text_BrendanRayquazaCall
+	pokenavcall MatchCall_Text_BrendanRayquazaCall
 	waitmessage
 	return
 
