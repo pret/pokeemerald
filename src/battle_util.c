@@ -1731,7 +1731,8 @@ u8 DoBattlerEndTurnEffects(void)
                 gStatuses3[gActiveBattler] -= 0x800;
                 if (!(gStatuses3[gActiveBattler] & STATUS3_YAWN) && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY)
                  && gBattleMons[gActiveBattler].ability != ABILITY_VITAL_SPIRIT
-                 && gBattleMons[gActiveBattler].ability != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBattler))
+                 && gBattleMons[gActiveBattler].ability != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBattler)
+                 && !IsLeafGuardProtected(gActiveBattler))
                 {
                     CancelMultiTurnMoves(gActiveBattler);
                     gBattleMons[gActiveBattler].status1 |= (Random() & 3) + 2;
@@ -3346,6 +3347,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                  && GetBattlerAbility(gBattlerAttacker) != ABILITY_VITAL_SPIRIT
                  && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
                  && !IsFlowerVeilProtected(gBattlerAttacker)
+                 && !IsLeafGuardProtected(gBattlerAttacker)
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
                  && (Random() % 3) == 0)
                 {
@@ -3369,6 +3371,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_IMMUNITY
              && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
              && !IsFlowerVeilProtected(gBattlerAttacker)
+             && !IsLeafGuardProtected(gBattlerAttacker)
              && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
              && (Random() % 3) == 0)
             {
@@ -3390,6 +3393,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_LIMBER
              && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
              && !IsFlowerVeilProtected(gBattlerAttacker)
+             && !IsLeafGuardProtected(gBattlerAttacker)
              && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
              && (Random() % 3) == 0)
             {
@@ -3410,6 +3414,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && GetBattlerAbility(gBattlerAttacker) != ABILITY_WATER_VEIL
              && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
              && !IsFlowerVeilProtected(gBattlerAttacker)
+             && !IsLeafGuardProtected(gBattlerAttacker)
              && (Random() % 3) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
