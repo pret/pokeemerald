@@ -2864,6 +2864,27 @@ extern const u8 gText_JumpsInARow[];
 extern const u8 gText_BestScore2[];
 extern const u8 gText_ExcellentsInARow[];
 
+// Berry crush
+extern const u8 gText_Var1Berry[];
+extern const u8 gText_XDotY[];
+extern const u8 gText_1DotBlueF700[];
+extern const u8 gText_1DotF700[];
+extern const u8 gText_TimeColon[];
+extern const u8 gText_SpaceSec[];
+extern const u8 gText_XDotY2[];
+extern const u8 gText_SpaceMin[];
+extern const u8 gText_StrVar1[];
+extern const u8 gText_PressingSpeed[];
+extern const u8 gText_TimesPerSec[];
+extern const u8 gText_XDotY3[];
+extern const u8 gText_Silkiness[];
+extern const u8 gText_Var1Percent[];
+extern const u8 gText_PressesRankings[];
+extern const u8 gText_CrushingResults[];
+extern const u8 gText_BerryCrush2[];
+extern const u8 gText_PressingSpeedRankings[];
+extern const u8 gText_Var1Players[];
+
 // Lilycove Lady
 extern const u8 gText_ContestLady_Handsome[];
 extern const u8 gText_ContestLady_Vinny[];

@@ -21,6 +21,7 @@
 #include "pokemon_jump.h"
 #include "random.h"
 #include "rom_8034C54.h"
+#include "save.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
@@ -50,7 +51,8 @@ struct BerryCrushGame_Player
 
 struct __attribute__((packed, aligned(2))) BerryCrushGame_4E
 {
-    u8 filler0[0x4];
+    u16 unk0;
+    u16 filler2;
     u8 unk4_0:1;
     u8 unk4_1:1;
     s8 unk5;
@@ -112,7 +114,6 @@ struct BerryCrushGame_138_C
     u8 unk0;
     u8 unk1;
     u8 unk2;
-    u8 filler3;
     u16 unk4;
     u16 unk6;
     s16 unk8;
@@ -149,12 +150,12 @@ struct BerryCrushGame
     u8 unkA;
     u8 unkB;
     u8 unkC;
-    u8 fillerD[0x1];
+    u8 unkD;
     u8 unkE;
     u8 unkF;
     u16 unk10;
     u16 unk12;
-    u8 filler14[0x2];
+    u16 unk14;
     u16 unk16;
     s16 unk18;
     s16 unk1A;
@@ -191,7 +192,7 @@ static void sub_8020F88(void);
 static void sub_8020FA0(u8);
 void sub_8020FC4(struct BerryCrushGame *);
 void sub_8022BEC(u16, u8, u8 *);
-void sub_8024604(u8 *, u8, s8, u8, u8, u8, u8);
+void sub_8024604(u8 *, u32, s32, u32, u32, u32, u32);
 static int sub_8021450(struct BerryCrushGame *);
 void sub_8022588(struct BerryCrushGame *);
 void sub_8022600(struct BerryCrushGame *);
@@ -217,30 +218,11 @@ extern const s8 gUnknown_082F41D2[][2];
 extern const u32 gUnknown_082F334C[];
 extern const u8 sBerryCrushTextColors1[][3];
 extern const u8 *gUnknown_082F43B4[];
-extern const u8 gText_Var1Berry[];
-extern const u8 gText_XDotY[];
-extern const u8 gText_1DotBlueF700[];
-extern const u8 gText_1DotF700[];
-extern const u8 gText_TimeColon[];
-extern const u8 gText_SpaceSec[];
-extern const u8 gText_XDotY2[];
-extern const u8 gText_SpaceMin[];
-extern const u8 gText_StrVar1[];
-extern const u8 gText_PressingSpeed[];
-extern const u8 gText_TimesPerSec[];
-extern const u8 gText_XDotY3[];
 extern const u8 sBerryCrushTextColors4[];
-extern const u8 gText_Silkiness[];
-extern const u8 gText_Var1Percent[];
 extern const struct WindowTemplate gUnknown_082F32CC[];
 extern const u8 gUnknown_082F3344[][4];
-extern const u8 gText_PressesRankings[];
-extern const u8 gText_CrushingResults[];
 extern const struct WindowTemplate gUnknown_082F32EC;
-extern const u8 gText_BerryCrush2[];
 extern const u8 sBerryCrushTextColorTable[][3];
-extern const u8 gText_PressingSpeedRankings[];
-extern const u8 gText_Var1Players[];
 extern const struct WindowTemplate gUnknown_082F32F4[];
 extern const u8 gUnknown_082F417C[][5];
 extern const struct BerryCrushGame_138_C gUnknown_082F4190[];
@@ -269,7 +251,7 @@ struct BerryCrushGame *sub_8020C00(void)
     return gUnknown_02022C90;
 }
 
-int sub_8020C0C(MainCallback callback)
+u32 sub_8020C0C(MainCallback callback)
 {
     if (!gUnknown_02022C90)
         return 2;
@@ -282,7 +264,7 @@ int sub_8020C0C(MainCallback callback)
     SetMainCallback2(callback);
     if (callback == CB2_ReturnToField)
     {
-        gTextFlags.autoScroll = 1;
+        gTextFlags.autoScroll = TRUE;
         PlayNewMapMusic(MUS_POKECEN);
         SetMainCallback1(CB1_Overworld);
     }
@@ -537,7 +519,7 @@ int sub_802104C(void)
         sub_8197200();
         sub_8022588(var0);
         sub_8022600(var0);
-        gPaletteFade.bufferTransferDisabled = 1;
+        gPaletteFade.bufferTransferDisabled = TRUE;
         break;
     case 7:
         LoadPalette(gUnknown_08DE3398, 0, 0x180);
@@ -558,7 +540,7 @@ int sub_802104C(void)
         ChangeBgY(1, 0, 0);
         break;
     case 9:
-        gPaletteFade.bufferTransferDisabled = 0;
+        gPaletteFade.bufferTransferDisabled = FALSE;
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
@@ -904,7 +886,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
             );
             StringAppend(gStringVar4, gUnknown_082F43B4[sp10]);
             r4 = sp14 - 4;
-            r10 = r6; // shift right should happen after the switch
+            r10 = r6;
             r9 = sp1C + 0xA2;
             r8 = sp18;
             r6 += 14;
@@ -2825,4 +2807,377 @@ u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
     }
     ++r7->unkC;
     return 0;
+}
+
+u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
+{
+    switch (r5->unkC)
+    {
+    case 0:
+        if (!sub_8022070(r5, &r5->unk138))
+            return 0;
+        break;
+    case 1:
+        CopyBgTilemapBufferToVram(0);
+        r5->unk138.unk0 = 30;
+        break;
+    case 2:
+        if (r5->unk138.unk0 != 0)
+        {
+            --r5->unk138.unk0;
+            return 0;
+        }
+        if (!(gMain.newKeys & A_BUTTON))
+            return 0;
+        PlaySE(SE_SELECT);
+        sub_802222C(r5);
+        break;
+    case 3:
+        if (r5->unk12 <= 12)
+        {
+            ++r5->unk12;
+            r5->unkC = 0;
+            return 0;
+        }
+        break;
+    case 4:
+        ConvertIntToDecimalStringN(gStringVar1, r5->unk1C, 0, 6);
+        ConvertIntToDecimalStringN(gStringVar2, GetBerryPowder(), 0, 6);
+        sub_8024644(r6, 2, 3, 0, 0);
+        r5->unkE = 19;
+        sub_8022BEC(3, 1, NULL);
+        r5->unkC = 0;
+        return 0;
+    }
+    ++r5->unkC;
+    return 0;
+}
+
+u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
+{
+    switch (r5->unkC)
+    {
+    case 0:
+        if (r5->unk28 >= 36000)
+            sub_8022554(&r5->unk138);
+        sub_8024644(r4, 8, 0, 0, 1);
+        r5->unkE = 19;
+        sub_8022BEC(3, 1, NULL);
+        r5->unkC = 0;
+        return 0;
+    case 1:
+        sub_8010434();
+        break;
+    case 2:
+        if (!IsLinkTaskFinished())
+            return 0;
+        DrawDialogueFrame(0, 0);
+        AddTextPrinterParameterized2(0, 1, gText_SavingDontTurnOffPower, 0, 0, 2, 1, 3);
+        CopyWindowToVram(0, 3);
+        CreateTask(sub_8153688, 0);
+        break;
+    case 3:
+        if (FuncIsActiveTask(sub_8153688))
+            return 0;
+        break;
+    case 4:
+        sub_8022BEC(20, 1, NULL);
+        r5->unk12 = 15;
+        r5->unkC = 0;
+        return 0;
+    }
+    ++r5->unkC;
+    return 0;
+}
+
+u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
+{
+    s32 r4;
+#ifndef NONMATCHING
+    register s32 r0 asm("r0");
+#else
+    s32 r0;
+#endif
+
+    switch (r5->unkC)
+    {
+    case 0:
+        sub_8024644(r6, 4, 0, 0, 1);
+        r5->unkE = 20;
+        sub_8022BEC(3, 1, NULL);
+        r0 = 0;
+        r5->unkC = r0; // dunno what it's doing because it's already in case 0
+        return 0;
+    case 1:
+        DisplayYesNoMenuDefaultYes();
+        break;
+    case 2:
+        if ((r4 = Menu_ProcessInputNoWrapClearOnChoose()) != -2)
+        {
+            memset(r5->unk40.unk2, 0, sizeof(r5->unk40.unk2));
+            if (r4 == 0)
+            {
+                if (HasAtLeastOneBerry())
+                    r5->unk14 = 0;
+                else
+                    r5->unk14 = 3;
+            }
+            else
+            {
+                r5->unk14 = 1;
+            }
+            ClearDialogWindowAndFrame(0, 1);
+            sub_8024644(r6, 8, 0, 0, 0);
+            r5->unkE = 21;
+            sub_8022BEC(3, 1, NULL);
+            r5->unkC = 0;
+        }
+        return 0;
+    }
+    ++r5->unkC;
+    return 0;
+}
+
+u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+{
+    u8 r5 = 0;
+
+    switch (r4->unkC)
+    {
+    case 0:
+        sub_8010434();
+        break;
+    case 1:
+        if (!IsLinkTaskFinished())
+            return 0;
+        r4->unk40.unk2[0] = r4->unk14;
+        r4->unk40.unkE.unk0 = 0;
+        SendBlock(0, r4->unk40.unk2, sizeof(u16));
+        break;
+    case 2:
+        if (!IsLinkTaskFinished())
+            return 0;
+        r4->unk10 = 0;
+        break;
+    case 3:
+        if (GetBlockReceivedStatus() != gUnknown_082F4448[r4->unk9 - 2])
+            return 0;
+        for (; r5 < r4->unk9; ++r5)
+            r4->unk40.unkE.unk0 += gBlockRecvBuffer[r5][0];
+        if (r4->unk40.unkE.unk0 != 0)
+            sub_8022BEC(23, 1, NULL);
+        else
+            sub_8022BEC(22, 1, NULL);
+        ResetBlockReceivedFlags();
+        r4->unk40.unk2[0] = 0;
+        r4->unk40.unkE.unk0 = 0;
+        r4->unk10 = 0;
+        r4->unkC = 0;
+        return 0;
+    }
+    ++r4->unkC;
+    return 0;
+}
+
+u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+{
+    switch (r5->unkC)
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 0x10, RGB_BLACK);
+        UpdatePaletteFade();
+        break;
+    case 1:
+        if (UpdatePaletteFade())
+            return 0;
+        break;
+    case 2:
+        ClearDialogWindowAndFrame(0, 1);
+        sub_8021488(r5);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        UpdatePaletteFade();
+        break;
+    case 3:
+        if (UpdatePaletteFade())
+            return 0;
+        sub_8022BEC(7, 1, NULL);
+        r5->unk12 = 3;
+        r5->unkC = 0;
+        return 0;
+    }
+    ++r5->unkC;
+    return 0;
+}
+
+u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+{
+    switch (r5->unkC)
+    {
+    case 0:
+        DrawDialogueFrame(0, 0);
+        if (r5->unk14 == 3)
+            AddTextPrinterParameterized2(0, 1, gUnknown_082F32A4[5], r5->unkB, 0, 2, 1, 3);
+        else
+            AddTextPrinterParameterized2(0, 1, gUnknown_082F32A4[6], r5->unkB, 0, 2, 1, 3);
+        CopyWindowToVram(0, 3);
+        break;
+    case 1:
+        if (IsTextPrinterActive(0))
+            return 0;
+        r5->unk138.unk0 = 120;
+        break;
+    case 2:
+        if (r5->unk138.unk0 != 0)
+            --r5->unk138.unk0;
+        else
+        {
+            sub_8022BEC(24, 1, NULL);
+            r5->unkC = 0;
+        }
+        return 0;
+    }
+    ++r5->unkC;
+    return 0;
+}
+
+u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+{
+    switch (r5->unkC)
+    {
+    case 0:
+        sub_8010434();
+        break;
+    case 1:
+        if (!IsLinkTaskFinished())
+            return 0;
+        sub_800AC34();
+        break;
+    case 2:
+        if (gReceivedRemoteLinkPlayers != 0)
+            return 0;
+        r5->unkE = 25;
+        sub_8022BEC(5, 1, NULL);
+        r5->unkC = 2; // ???
+        return 0;
+    }
+    ++r5->unkC;
+    return 0;
+}
+
+u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
+{
+    sub_8020C0C(NULL);
+    return 0;
+}
+
+void sub_8024578(struct BerryCrushGame *r4)
+{
+    u8 r5 = 0;
+
+    IncrementGameStat(GAME_STAT_51);
+    r4->unkD = 0;
+    r4->unk10 = 0;
+    r4->unk12 = 2;
+    r4->unk14 = 0;
+    r4->unk1C = 0;
+    r4->unk18 = 0;
+    r4->unk1A = 0;
+    r4->unk20 = 0;
+    r4->unk24 = 0;
+    r4->unk25_0 = 0;
+    r4->unk25_1 = 0;
+    r4->unk25_2 = 0;
+    r4->unk25_3 = 0;
+    r4->unk25_4 = 0;
+    r4->unk25_5 = 0;
+    r4->unk26 = 0;
+    r4->unk28 = 0;
+    r4->unk2E = 0;
+    r4->unk32 = -1;
+    r4->unk30 = 0;
+    r4->unk34 = 0;
+    for (; r5 < 5; ++r5) // why is it 5 instead of 4? fillerBC isn't sufficient for one player
+    {
+        r4->unk68.as_four_players.others[r5].unk0 = -1;
+        r4->unk68.as_four_players.others[r5].unk2 = 0;
+        r4->unk68.as_four_players.others[r5].unk4.as_hwords[0] = 0;
+        r4->unk68.as_four_players.others[r5].unk4.as_hwords[1] = 1;
+        r4->unk68.as_four_players.others[r5].unk4.as_hwords[2] = 0;
+        r4->unk68.as_four_players.others[r5].unk4.as_hwords[3] = 0;
+        r4->unk68.as_four_players.others[r5].unk4.as_hwords[4] = 0;
+        r4->unk68.as_four_players.others[r5].unk4.as_hwords[5] = 0;
+        r4->unk68.as_four_players.others[r5].unk4.as_2d_bytes[1][4] = 0;
+        r4->unk68.as_four_players.others[r5].unk4.as_2d_bytes[1][5] = 0;
+    }
+}
+
+#ifdef NONMATCHING
+void sub_8024604(u8 *r0, u32 r1, s32 r2, u32 r3, u32 r5, u32 r6, u32 r4)
+{
+    u8 sp[8];
+    u8 *p;
+
+    1[(u32 *)sp] = r2;
+    0[(u16 *)sp] = r4;
+    p = &sp[4];
+    r0[0] = p[0];
+    r0[1] = p[1];
+    r0[2] = p[2];
+    r0[3] = p[3];
+    r0[4] = r3;
+    r0[5] = r5;
+    r0[6] = r6;
+    r0[7] = sp[0];
+    r0[8] = sp[1];
+    r0[9] = r1;
+}
+#else
+NAKED
+void sub_8024604(u8 *r0, u32 r1, s32 r2, u32 r3, u32 r5, u32 r6, u32 r4)
+{
+    asm_unified("\n\
+        push {r4-r6,lr}\n\
+        sub sp, 0x8\n\
+        str r2, [sp, 0x4]\n\
+        ldr r5, [sp, 0x18]\n\
+        ldr r6, [sp, 0x1C]\n\
+        ldr r4, [sp, 0x20]\n\
+        mov r2, sp\n\
+        strh r4, [r2]\n\
+        add r4, sp, 0x4\n\
+        ldrb r2, [r4]\n\
+        strb r2, [r0]\n\
+        ldrb r2, [r4, 0x1]\n\
+        strb r2, [r0, 0x1]\n\
+        ldrb r2, [r4, 0x2]\n\
+        strb r2, [r0, 0x2]\n\
+        ldrb r2, [r4, 0x3]\n\
+        strb r2, [r0, 0x3]\n\
+        strb r3, [r0, 0x4]\n\
+        strb r5, [r0, 0x5]\n\
+        strb r6, [r0, 0x6]\n\
+        mov r2, sp\n\
+        ldrb r2, [r2]\n\
+        strb r2, [r0, 0x7]\n\
+        mov r2, sp\n\
+        ldrb r2, [r2, 0x1]\n\
+        strb r2, [r0, 0x8]\n\
+        strb r1, [r0, 0x9]\n\
+        add sp, 0x8\n\
+        pop {r4-r6}\n\
+        pop {r0}\n\
+        bx r0");
+}
+#endif
+
+void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
+{
+    u8 sp[4];
+
+    0[(u16 *)sp] = r3;
+    r0[0] = r1;
+    r0[1] = r2;
+    r0[2] = sp[0];
+    r0[3] = sp[1];
+    r0[4] = r5;
 }
