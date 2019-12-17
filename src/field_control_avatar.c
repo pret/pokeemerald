@@ -710,22 +710,22 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
         SetupWarp(&gMapHeader, warpEventId, position);
         if (MetatileBehavior_IsEscalator(metatileBehavior) == TRUE)
         {
-            sub_80AF80C(metatileBehavior);
+            DoEscalatorWarp(metatileBehavior);
             return TRUE;
         }
         if (MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) == TRUE)
         {
-            sub_80AF828();
+            DoLavaridgeGymB1FWarp();
             return TRUE;
         }
         if (MetatileBehavior_IsLavaridge1FWarp(metatileBehavior) == TRUE)
         {
-            sub_80AF838();
+            DoLavaridgeGym1FWarp();
             return TRUE;
         }
         if (MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) == TRUE)
         {
-            sub_80AF848();
+            DoTeleportWarp();
             return TRUE;
         }
         if (MetatileBehavior_IsWarpOrBridge(metatileBehavior) == TRUE)

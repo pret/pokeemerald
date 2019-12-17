@@ -470,7 +470,7 @@ static void Task_EggHatch(u8 taskID)
     {
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_EggHatch_0);
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskID);
     }
 }

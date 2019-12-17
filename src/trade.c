@@ -4942,7 +4942,7 @@ static void Task_InGameTrade(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_InGameTrade);
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
 }

@@ -369,7 +369,7 @@ static void Task_RecordMixing_Main(u8 taskId)
             sub_808729C();
             if (gWirelessCommType != 0)
             {
-                CreateTask(sub_80AF2B4, 10);
+                CreateTask(Task_ReturnToFieldRecordMixing, 10);
             }
             ClearDialogWindowAndFrame(0, 1);
             DestroyTask(taskId);

@@ -1855,7 +1855,7 @@ static void FieldCb_ReturnToPcMenu(void)
     gTasks[taskId].data[1] = sPreviousBoxOption;
     Task_PokemonStorageSystemPC(taskId);
     SetVBlankCallback(vblankCb);
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)

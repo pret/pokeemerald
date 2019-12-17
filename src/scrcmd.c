@@ -809,7 +809,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF848();
+    DoTeleportWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -2285,7 +2285,7 @@ void SetMovingNpcId(u16 npcId)
     sMovingNpcId = npcId;
 }
 
-bool8 ScrCmd_warpE0(struct ScriptContext *ctx)
+bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -2294,7 +2294,7 @@ bool8 ScrCmd_warpE0(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF79C();
+    DoSootopolisLegendWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
