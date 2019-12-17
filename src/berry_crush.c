@@ -655,7 +655,7 @@ void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
             arg0->unk68.as_four_players.others[i].unk0 + 133);
         arg1->unk38[i] = &gSprites[spriteId];
         arg1->unk38[i]->oam.priority = 3;
-        arg1->unk38[i]->affineAnimPaused = 1;
+        arg1->unk38[i]->affineAnimPaused = TRUE;
         arg1->unk38[i]->pos1.x = arg1->unkC[i]->unk8 + 120;
         arg1->unk38[i]->pos1.y = -16;
         data = arg1->unk38[i]->data;
@@ -742,8 +742,8 @@ void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
             else
                 StartSpriteAnim(arg1->unk24[i], 0);
 
-            arg1->unk24[i]->invisible = 0;
-            arg1->unk24[i]->animPaused = 0;
+            arg1->unk24[i]->invisible = FALSE;
+            arg1->unk24[i]->animPaused = FALSE;
             arg1->unk24[i]->pos2.x = gUnknown_082F41CC[(var % 4) - 1][0];
             arg1->unk24[i]->pos2.y = gUnknown_082F41CC[(var % 4) - 1][1];
         }
@@ -881,7 +881,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
             ConvertIntToDecimalStringN(
                 gStringVar4,
                 sp20->as_four_players.unk00.unk0C[sp10][i],
-                1,
+                STR_CONV_MODE_RIGHT_ALIGN,
                 4
             );
             StringAppend(gStringVar4, gUnknown_082F43B4[sp10]);
@@ -899,7 +899,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
             ConvertIntToDecimalStringN(
                 gStringVar1,
                 sp20->as_four_players.unk00.unk0C[sp10][i] >> 4,
-                1,
+                STR_CONV_MODE_RIGHT_ALIGN,
                 3
             );
             j = 0;
@@ -916,7 +916,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
             ConvertIntToDecimalStringN(
                 gStringVar2,
                 (u8)(r7 / 1000000),
-                2,
+                STR_CONV_MODE_LEADING_ZEROS,
                 2
             );
             StringExpandPlaceholders(gStringVar4, gText_XDotY);
@@ -1342,14 +1342,14 @@ void sub_8021D34(struct BerryCrushGame *r8)
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gText_TimeColon);
     r6 = 176 - (u8)GetStringWidth(2, gText_SpaceSec, -1);
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gText_SpaceSec);
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk6, 2, 2);
-    ConvertIntToDecimalStringN(gStringVar2, r8->unk138.unk8, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk6, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar2, r8->unk138.unk8, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY2);
     r6 -= GetStringWidth(2, gStringVar4, -1);
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
     r6 -= GetStringWidth(2, gText_SpaceMin, -1);
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gText_SpaceMin);
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk4, 2, 1);
+    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk4, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringExpandPlaceholders(gStringVar4, gText_StrVar1);
     r6 -= GetStringWidth(2, gStringVar4, -1);
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
@@ -1360,8 +1360,8 @@ void sub_8021D34(struct BerryCrushGame *r8)
     for (; r10 < 8; ++r10)
         if (((u8)r8->unk16 >> (7 - r10)) & 1)
             sp0C += *(r10 + gUnknown_082F334C); // It's accessed in a different way here for unknown reason
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk16 >> 8, 1, 3);
-    ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, r8->unk16 >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY3);
     r6 -= GetStringWidth(2, gStringVar4, -1);
     if (r8->unk25_1)
@@ -1370,7 +1370,7 @@ void sub_8021D34(struct BerryCrushGame *r8)
         AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
     r7 += 14;
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, 0, r7, sBerryCrushTextColors1[0], 0, gText_Silkiness);
-    ConvertIntToDecimalStringN(gStringVar1, sp10->as_four_players.unk00.unk08, 1, 3);
+    ConvertIntToDecimalStringN(gStringVar1, sp10->as_four_players.unk00.unk08, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
     r6 = 176 - (u8)GetStringWidth(2, gStringVar4, -1);
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
@@ -1486,7 +1486,7 @@ void sub_8022250(u8 r4)
         r10 = 41;
         for (; r9 < 4; ++r9)
         {
-            ConvertIntToDecimalStringN(gStringVar1, r9 + 2, 0, 1);
+            ConvertIntToDecimalStringN(gStringVar1, r9 + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
             StringExpandPlaceholders(gStringVar4, gText_Var1Players);
             AddTextPrinterParameterized3(
                 (u8)r6[1],
@@ -1510,8 +1510,8 @@ void sub_8022250(u8 r4)
             for (r2 = 0; r2 < 8; ++r2)
                 if (((u8)r6[r9 + 2] >> (7 - r2)) & 1)
                     sp0C += gUnknown_082F334C[r2];
-            ConvertIntToDecimalStringN(gStringVar1, (u16)r6[r9 + 2] >> 8, 1, 3);
-            ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, 2, 2);
+            ConvertIntToDecimalStringN(gStringVar1, (u16)r6[r9 + 2] >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gText_XDotY3);
             r7 -= GetStringWidth(1, gStringVar4, -1);
             AddTextPrinterParameterized3(
@@ -2607,7 +2607,7 @@ u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     case 3:
         if (!IsLinkTaskFinished())
             return 0;
-        ConvertIntToDecimalStringN(gStringVar1, r5->unk1C, 0, 6);
+        ConvertIntToDecimalStringN(gStringVar1, r5->unk1C, STR_CONV_MODE_LEFT_ALIGN, 6);
         sub_8024644(r6, 7, 1, 0, 0);
         r5->unkE = 19;
         sub_8022BEC(3, 1, NULL);
@@ -2841,8 +2841,8 @@ u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
         }
         break;
     case 4:
-        ConvertIntToDecimalStringN(gStringVar1, r5->unk1C, 0, 6);
-        ConvertIntToDecimalStringN(gStringVar2, GetBerryPowder(), 0, 6);
+        ConvertIntToDecimalStringN(gStringVar1, r5->unk1C, STR_CONV_MODE_LEFT_ALIGN, 6);
+        ConvertIntToDecimalStringN(gStringVar2, GetBerryPowder(), STR_CONV_MODE_LEFT_ALIGN, 6);
         sub_8024644(r6, 2, 3, 0, 0);
         r5->unkE = 19;
         sub_8022BEC(3, 1, NULL);
