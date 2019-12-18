@@ -1,21 +1,21 @@
 VerdanturfTown_BattleTentCorridor_MapScripts:: @ 820208A
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentCorridor_MapScript2_202090
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentCorridor_OnFrame
 	.byte 0
 
-VerdanturfTown_BattleTentCorridor_MapScript2_202090: @ 8202090
-	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentCorridor_EventScript_20209A
+VerdanturfTown_BattleTentCorridor_OnFrame: @ 8202090
+	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentCorridor_EventScript_EnterCorridor
 	.2byte 0
 
-VerdanturfTown_BattleTentCorridor_EventScript_20209A:: @ 820209A
+VerdanturfTown_BattleTentCorridor_EventScript_EnterCorridor:: @ 820209A
 	lockall
 	setvar VAR_TEMP_0, 1
-	applymovement 1, VerdanturfTown_BattleTentCorridor_Movement_2020DE
-	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentCorridor_Movement_2020DE
+	applymovement 1, VerdanturfTown_BattleTentCorridor_Movement_WalkToDoor
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentCorridor_Movement_WalkToDoor
 	waitmovement 0
 	opendoor 2, 1
 	waitdooranim
-	applymovement 1, VerdanturfTown_BattleTentCorridor_Movement_2020E4
-	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentCorridor_Movement_2020E3
+	applymovement 1, VerdanturfTown_BattleTentCorridor_Movement_AttendantEnterDoor
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentCorridor_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 2, 1
 	waitdooranim
@@ -25,22 +25,24 @@ VerdanturfTown_BattleTentCorridor_EventScript_20209A:: @ 820209A
 	releaseall
 	end
 
-VerdanturfTown_BattleTentCorridor_Movement_2020DE: @ 82020DE
+VerdanturfTown_BattleTentCorridor_Movement_WalkToDoor: @ 82020DE
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-VerdanturfTown_BattleTentCorridor_Movement_2020E3: @ 82020E3
+VerdanturfTown_BattleTentCorridor_Movement_PlayerEnterDoor: @ 82020E3
 	walk_up
-
-VerdanturfTown_BattleTentCorridor_Movement_2020E4: @ 82020E4
+VerdanturfTown_BattleTentCorridor_Movement_AttendantEnterDoor: @ 82020E4
 	walk_up
 	set_invisible
 	step_end
 
-VerdanturfTown_BattleTentCorridor_Text_2020E7: @ 82020E7
+
+@ Leftover text from when this was a Contest Hall in R/S
+@ Unused
+VerdanturfTown_ContestHall_Text_WhichContestYouEntering: @ 82020E7
 	.string "Which CONTEST are you entering?\n"
 	.string "Want a piece of advice?\p"
 	.string "In any CONTEST, for example, a CUTE\n"
@@ -49,21 +51,24 @@ VerdanturfTown_BattleTentCorridor_Text_2020E7: @ 82020E7
 	.string "You need to work out ways for raising\n"
 	.string "POKéMON better.$"
 
-VerdanturfTown_BattleTentCorridor_Text_2021C4: @ 82021C4
+@ Unused
+VerdanturfTown_ContestHall_Text_RaisedMonToBeCute: @ 82021C4
 	.string "I raised my POKéMON to be cute.\p"
 	.string "I found out you can put POKéMON in\n"
 	.string "a CONTEST for cuteness!\p"
 	.string "I'm so glad I raised my POKéMON with\n"
 	.string "loving care…$"
 
-VerdanturfTown_BattleTentCorridor_Text_202251: @ 8202251
+@ Unused
+VerdanturfTown_ContestHall_Text_MyMonRules: @ 8202251
 	.string "My POKéMON rules!\p"
 	.string "It's cool, tough yet beautiful, cute,\n"
 	.string "and smart. It's complete!\p"
 	.string "I may as well go for wins in every\n"
 	.string "single CONTEST.$"
 
-VerdanturfTown_BattleTentCorridor_Text_2022D6: @ 82022D6
+@ Unused
+VerdanturfTown_ContestHall_Text_NormalRankStage: @ 82022D6
 	.string "POKéMON CONTESTS\n"
 	.string "NORMAL RANK STAGE!$"
 

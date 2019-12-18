@@ -1101,16 +1101,16 @@
 	.2byte \index
 	.endm
 
-	@ Fades the screen to and from black and white. Mode 0x00 fades from black, mode 0x01 fades out to black, mode 0x2 fades in from white, and mode 0x3 fades out to white.
-	.macro fadescreen effect:req
+	@ Fades the screen to and from black and white. Modes are FADE_(TO/FROM)_(WHITE/BLACK)
+	.macro fadescreen mode:req
 	.byte 0x97
-	.byte \effect
+	.byte \mode
 	.endm
 
-	@ Fades the screen to and from black and white. Mode 0x00 fades from black, mode 0x01 fades out to black, mode 0x2 fades in from white, and mode 0x3 fades out to white. Other modes may exist.
-	.macro fadescreenspeed effect:req, speed:req
+	@ Fades the screen to and from black and white. Modes are FADE_(TO/FROM)_(WHITE/BLACK)
+	.macro fadescreenspeed mode:req, speed:req
 	.byte 0x98
-	.byte \effect
+	.byte \mode
 	.byte \speed
 	.endm
 
@@ -1517,9 +1517,9 @@
 	.4byte \pointer
 	.endm
 
-	.macro fadescreenswapbuffers byte:req
+	.macro fadescreenswapbuffers mode:req
 	.byte 0xdc
-	.byte \byte
+	.byte \mode
 	.endm
 
 	.macro buffertrainerclassname out:req, class:req
@@ -1665,10 +1665,16 @@
 	callstd \type
 	.endm
 
-	.macro giveitem_std item:req, amount=1, function=0
+	.macro giveitem_std item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
-	callstd \function
+	callstd STD_OBTAIN_ITEM
+	.endm
+
+	.macro finditem_std item:req, amount=1
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
+	callstd STD_FIND_ITEM
 	.endm
 
 	.macro givedecoration_std decoration:req

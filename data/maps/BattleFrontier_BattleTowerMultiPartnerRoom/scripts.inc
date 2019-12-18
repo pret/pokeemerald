@@ -6,7 +6,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_MapScripts:: @ 8243D92
 	.byte 0
 
 BattleFrontier_BattleTowerMultiPartnerRoom_OnResume: @ 8243DA7
-	pyramid_healparty
+	pyramid_resetparty
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition: @ 8243DB0

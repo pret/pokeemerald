@@ -219,7 +219,7 @@ TrainerHill_Entrance_Movement_PlayerExitElevator: @ 8268385
 
 TrainerHill_Entrance_EventScript_Records:: @ 8268388
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ShowTrainerHillRecords
 	waitstate
 	releaseall

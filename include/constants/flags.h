@@ -5,37 +5,39 @@
 // These temporary flags are are cleared every time a map is loaded. They are used
 // for things like shortening an NPCs introduction text if the player already spoke
 // to them once.
-#define FLAG_TEMP_1      0x1
-#define FLAG_TEMP_2      0x2
-#define FLAG_TEMP_3      0x3
-#define FLAG_TEMP_4      0x4
-#define FLAG_TEMP_5      0x5 // Unused Flag
-#define FLAG_TEMP_6      0x6 // Unused Flag
-#define FLAG_TEMP_7      0x7 // Unused Flag
-#define FLAG_TEMP_8      0x8 // Unused Flag
-#define FLAG_TEMP_9      0x9 // Unused Flag
-#define FLAG_TEMP_A      0xA // Unused Flag
-#define FLAG_TEMP_B      0xB // Unused Flag
-#define FLAG_TEMP_C      0xC // Unused Flag
-#define FLAG_TEMP_D      0xD // Unused Flag
-#define FLAG_TEMP_E      0xE // Unused Flag
-#define FLAG_TEMP_F      0xF // Unused Flag
-#define FLAG_TEMP_10    0x10 // Unused Flag
-#define FLAG_TEMP_11    0x11
-#define FLAG_TEMP_12    0x12
-#define FLAG_TEMP_13    0x13
-#define FLAG_TEMP_14    0x14
-#define FLAG_TEMP_15    0x15
-#define FLAG_TEMP_16    0x16
-#define FLAG_TEMP_17    0x17
-#define FLAG_TEMP_18    0x18
-#define FLAG_TEMP_19    0x19
-#define FLAG_TEMP_1A    0x1A
-#define FLAG_TEMP_1B    0x1B
-#define FLAG_TEMP_1C    0x1C
-#define FLAG_TEMP_1D    0x1D
-#define FLAG_TEMP_1E    0x1E
-#define FLAG_TEMP_1F    0x1F
+#define TEMP_FLAGS_START 0x0
+#define FLAG_TEMP_1      (TEMP_FLAGS_START + 0x1)
+#define FLAG_TEMP_2      (TEMP_FLAGS_START + 0x2)
+#define FLAG_TEMP_3      (TEMP_FLAGS_START + 0x3)
+#define FLAG_TEMP_4      (TEMP_FLAGS_START + 0x4)
+#define FLAG_TEMP_5      (TEMP_FLAGS_START + 0x5)  // Unused Flag
+#define FLAG_TEMP_6      (TEMP_FLAGS_START + 0x6)  // Unused Flag
+#define FLAG_TEMP_7      (TEMP_FLAGS_START + 0x7)  // Unused Flag
+#define FLAG_TEMP_8      (TEMP_FLAGS_START + 0x8)  // Unused Flag
+#define FLAG_TEMP_9      (TEMP_FLAGS_START + 0x9)  // Unused Flag
+#define FLAG_TEMP_A      (TEMP_FLAGS_START + 0xA)  // Unused Flag
+#define FLAG_TEMP_B      (TEMP_FLAGS_START + 0xB)  // Unused Flag
+#define FLAG_TEMP_C      (TEMP_FLAGS_START + 0xC)  // Unused Flag
+#define FLAG_TEMP_D      (TEMP_FLAGS_START + 0xD)  // Unused Flag
+#define FLAG_TEMP_E      (TEMP_FLAGS_START + 0xE)  // Unused Flag
+#define FLAG_TEMP_F      (TEMP_FLAGS_START + 0xF)  // Unused Flag
+#define FLAG_TEMP_10     (TEMP_FLAGS_START + 0x10) // Unused Flag
+#define FLAG_TEMP_11     (TEMP_FLAGS_START + 0x11)
+#define FLAG_TEMP_12     (TEMP_FLAGS_START + 0x12)
+#define FLAG_TEMP_13     (TEMP_FLAGS_START + 0x13)
+#define FLAG_TEMP_14     (TEMP_FLAGS_START + 0x14)
+#define FLAG_TEMP_15     (TEMP_FLAGS_START + 0x15)
+#define FLAG_TEMP_16     (TEMP_FLAGS_START + 0x16)
+#define FLAG_TEMP_17     (TEMP_FLAGS_START + 0x17)
+#define FLAG_TEMP_18     (TEMP_FLAGS_START + 0x18)
+#define FLAG_TEMP_19     (TEMP_FLAGS_START + 0x19)
+#define FLAG_TEMP_1A     (TEMP_FLAGS_START + 0x1A)
+#define FLAG_TEMP_1B     (TEMP_FLAGS_START + 0x1B)
+#define FLAG_TEMP_1C     (TEMP_FLAGS_START + 0x1C)
+#define FLAG_TEMP_1D     (TEMP_FLAGS_START + 0x1D)
+#define FLAG_TEMP_1E     (TEMP_FLAGS_START + 0x1E)
+#define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
+#define TEMP_FLAGS_END   FLAG_TEMP_1F
 
 #define FLAG_UNUSED_0x020    0x20 // Unused Flag
 #define FLAG_UNUSED_0x021    0x21 // Unused Flag
@@ -1566,77 +1568,82 @@
 #define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF) // Unused Flag
 
 // Daily Flags
-#define FLAG_DAILY_0x920                            (SYSTEM_FLAGS + 0xC0)
-#define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (SYSTEM_FLAGS + 0xC1)
-#define FLAG_DAILY_SECRET_BASE                      (SYSTEM_FLAGS + 0xC2)
-#define FLAG_DAILY_0x923                            (SYSTEM_FLAGS + 0xC3)
-#define FLAG_DAILY_0x924                            (SYSTEM_FLAGS + 0xC4)
-#define FLAG_DAILY_0x925                            (SYSTEM_FLAGS + 0xC5)
-#define FLAG_DAILY_0x926                            (SYSTEM_FLAGS + 0xC6)
-#define FLAG_DAILY_0x927                            (SYSTEM_FLAGS + 0xC7)
-#define FLAG_DAILY_0x928                            (SYSTEM_FLAGS + 0xC8)
-#define FLAG_DAILY_0x929                            (SYSTEM_FLAGS + 0xC9)
-#define FLAG_DAILY_PICKED_LOTO_TICKET               (SYSTEM_FLAGS + 0xCA)
-#define FLAG_DAILY_ROUTE_114_RECEIVED_BERRY         (SYSTEM_FLAGS + 0xCB)
-#define FLAG_DAILY_ROUTE_111_RECEIVED_BERRY         (SYSTEM_FLAGS + 0xCC)
-#define FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY      (SYSTEM_FLAGS + 0xCD)
-#define FLAG_DAILY_ROUTE_120_RECEIVED_BERRY         (SYSTEM_FLAGS + 0xCE)
-#define FLAG_DAILY_LILYCOVE_RECEIVED_BERRY          (SYSTEM_FLAGS + 0xCF)
-#define FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY       (SYSTEM_FLAGS + 0xD0)
-#define FLAG_DAILY_BERRY_MASTERS_WIFE               (SYSTEM_FLAGS + 0xD1)
-#define FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY        (SYSTEM_FLAGS + 0xD2)
-#define FLAG_DAILY_0x933                            (SYSTEM_FLAGS + 0xD3)
-#define FLAG_DAILY_APPRENTICE_LEAVES                (SYSTEM_FLAGS + 0xD4)
-#define FLAG_0x935                                  (SYSTEM_FLAGS + 0xD5)
-#define FLAG_0x936                                  (SYSTEM_FLAGS + 0xD6)
-#define FLAG_0x937                                  (SYSTEM_FLAGS + 0xD7)
-#define FLAG_0x938                                  (SYSTEM_FLAGS + 0xD8)
-#define FLAG_0x939                                  (SYSTEM_FLAGS + 0xD9)
-#define FLAG_0x93A                                  (SYSTEM_FLAGS + 0xDA)
-#define FLAG_0x93B                                  (SYSTEM_FLAGS + 0xDB)
-#define FLAG_0x93C                                  (SYSTEM_FLAGS + 0xDC)
-#define FLAG_0x93D                                  (SYSTEM_FLAGS + 0xDD)
-#define FLAG_0x93E                                  (SYSTEM_FLAGS + 0xDE)
-#define FLAG_0x93F                                  (SYSTEM_FLAGS + 0xDF)
-#define FLAG_0x940                                  (SYSTEM_FLAGS + 0xE0)
-#define FLAG_0x941                                  (SYSTEM_FLAGS + 0xE1)
-#define FLAG_0x942                                  (SYSTEM_FLAGS + 0xE2)
-#define FLAG_0x943                                  (SYSTEM_FLAGS + 0xE3)
-#define FLAG_0x944                                  (SYSTEM_FLAGS + 0xE4)
-#define FLAG_0x945                                  (SYSTEM_FLAGS + 0xE5)
-#define FLAG_0x946                                  (SYSTEM_FLAGS + 0xE6)
-#define FLAG_0x947                                  (SYSTEM_FLAGS + 0xE7)
-#define FLAG_0x948                                  (SYSTEM_FLAGS + 0xE8)
-#define FLAG_0x949                                  (SYSTEM_FLAGS + 0xE9)
-#define FLAG_0x94A                                  (SYSTEM_FLAGS + 0xEA)
-#define FLAG_0x94B                                  (SYSTEM_FLAGS + 0xEB)
-#define FLAG_0x94C                                  (SYSTEM_FLAGS + 0xEC)
-#define FLAG_0x94D                                  (SYSTEM_FLAGS + 0xED)
-#define FLAG_0x94E                                  (SYSTEM_FLAGS + 0xEE)
-#define FLAG_0x94F                                  (SYSTEM_FLAGS + 0xEF)
-#define FLAG_0x950                                  (SYSTEM_FLAGS + 0xF0)
-#define FLAG_0x951                                  (SYSTEM_FLAGS + 0xF1)
-#define FLAG_0x952                                  (SYSTEM_FLAGS + 0xF2)
-#define FLAG_0x953                                  (SYSTEM_FLAGS + 0xF3)
-#define FLAG_0x954                                  (SYSTEM_FLAGS + 0xF4)
-#define FLAG_0x955                                  (SYSTEM_FLAGS + 0xF5)
-#define FLAG_0x956                                  (SYSTEM_FLAGS + 0xF6)
-#define FLAG_0x957                                  (SYSTEM_FLAGS + 0xF7)
-#define FLAG_0x958                                  (SYSTEM_FLAGS + 0xF8)
-#define FLAG_0x959                                  (SYSTEM_FLAGS + 0xF9)
-#define FLAG_0x95A                                  (SYSTEM_FLAGS + 0xFA)
-#define FLAG_0x95B                                  (SYSTEM_FLAGS + 0xFB)
-#define FLAG_0x95C                                  (SYSTEM_FLAGS + 0xFC)
-#define FLAG_0x95D                                  (SYSTEM_FLAGS + 0xFD)
-#define FLAG_0x95E                                  (SYSTEM_FLAGS + 0xFE)
-#define FLAG_0x95F                                  (SYSTEM_FLAGS + 0xFF)
+#define DAILY_FLAGS_START                           0x920
+#define FLAG_UNUSED_0x920                           (DAILY_FLAGS_START + 0x0)  // Unused Flag
+#define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
+#define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
+#define FLAG_UNUSED_0x923                           (DAILY_FLAGS_START + 0x3)  // Unused Flag
+#define FLAG_UNUSED_0x924                           (DAILY_FLAGS_START + 0x4)  // Unused Flag
+#define FLAG_UNUSED_0x925                           (DAILY_FLAGS_START + 0x5)  // Unused Flag
+#define FLAG_UNUSED_0x926                           (DAILY_FLAGS_START + 0x6)  // Unused Flag
+#define FLAG_UNUSED_0x927                           (DAILY_FLAGS_START + 0x7)  // Unused Flag
+#define FLAG_UNUSED_0x928                           (DAILY_FLAGS_START + 0x8)  // Unused Flag
+#define FLAG_UNUSED_0x929                           (DAILY_FLAGS_START + 0x9)  // Unused Flag
+#define FLAG_DAILY_PICKED_LOTO_TICKET               (DAILY_FLAGS_START + 0xA)
+#define FLAG_DAILY_ROUTE_114_RECEIVED_BERRY         (DAILY_FLAGS_START + 0xB)
+#define FLAG_DAILY_ROUTE_111_RECEIVED_BERRY         (DAILY_FLAGS_START + 0xC)
+#define FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY      (DAILY_FLAGS_START + 0xD)
+#define FLAG_DAILY_ROUTE_120_RECEIVED_BERRY         (DAILY_FLAGS_START + 0xE)
+#define FLAG_DAILY_LILYCOVE_RECEIVED_BERRY          (DAILY_FLAGS_START + 0xF)
+#define FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY       (DAILY_FLAGS_START + 0x10)
+#define FLAG_DAILY_BERRY_MASTERS_WIFE               (DAILY_FLAGS_START + 0x11)
+#define FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY        (DAILY_FLAGS_START + 0x12)
+#define FLAG_UNUSED_0x933                           (DAILY_FLAGS_START + 0x13) // Unused Flag
+#define FLAG_DAILY_APPRENTICE_LEAVES                (DAILY_FLAGS_START + 0x14)
 
-// Special Flags (Unknown)
-#define SPECIAL_FLAGS_START                  0x4000
-#define FLAG_HIDE_MAP_NAME_POPUP             0x4000
-#define FLAG_DONT_TRANSITION_MUSIC           0x4001
-#define FLAG_ENABLE_MULTI_CORRIDOR_DOOR      0x4002
-#define FLAG_SPECIAL_FLAG_0x4003             0x4003
-#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG    0x4004
+#define FLAG_UNUSED_0x935                           (DAILY_FLAGS_START + 0x15) // Unused Flag
+#define FLAG_UNUSED_0x936                           (DAILY_FLAGS_START + 0x16) // Unused Flag
+#define FLAG_UNUSED_0x937                           (DAILY_FLAGS_START + 0x17) // Unused Flag
+#define FLAG_UNUSED_0x938                           (DAILY_FLAGS_START + 0x18) // Unused Flag
+#define FLAG_UNUSED_0x939                           (DAILY_FLAGS_START + 0x19) // Unused Flag
+#define FLAG_UNUSED_0x93A                           (DAILY_FLAGS_START + 0x1A) // Unused Flag
+#define FLAG_UNUSED_0x93B                           (DAILY_FLAGS_START + 0x1B) // Unused Flag
+#define FLAG_UNUSED_0x93C                           (DAILY_FLAGS_START + 0x1C) // Unused Flag
+#define FLAG_UNUSED_0x93D                           (DAILY_FLAGS_START + 0x1D) // Unused Flag
+#define FLAG_UNUSED_0x93E                           (DAILY_FLAGS_START + 0x1E) // Unused Flag
+#define FLAG_UNUSED_0x93F                           (DAILY_FLAGS_START + 0x1F) // Unused Flag
+#define FLAG_UNUSED_0x940                           (DAILY_FLAGS_START + 0x20) // Unused Flag
+#define FLAG_UNUSED_0x941                           (DAILY_FLAGS_START + 0x21) // Unused Flag
+#define FLAG_UNUSED_0x942                           (DAILY_FLAGS_START + 0x22) // Unused Flag
+#define FLAG_UNUSED_0x943                           (DAILY_FLAGS_START + 0x23) // Unused Flag
+#define FLAG_UNUSED_0x944                           (DAILY_FLAGS_START + 0x24) // Unused Flag
+#define FLAG_UNUSED_0x945                           (DAILY_FLAGS_START + 0x25) // Unused Flag
+#define FLAG_UNUSED_0x946                           (DAILY_FLAGS_START + 0x26) // Unused Flag
+#define FLAG_UNUSED_0x947                           (DAILY_FLAGS_START + 0x27) // Unused Flag
+#define FLAG_UNUSED_0x948                           (DAILY_FLAGS_START + 0x28) // Unused Flag
+#define FLAG_UNUSED_0x949                           (DAILY_FLAGS_START + 0x29) // Unused Flag
+#define FLAG_UNUSED_0x94A                           (DAILY_FLAGS_START + 0x2A) // Unused Flag
+#define FLAG_UNUSED_0x94B                           (DAILY_FLAGS_START + 0x2B) // Unused Flag
+#define FLAG_UNUSED_0x94C                           (DAILY_FLAGS_START + 0x2C) // Unused Flag
+#define FLAG_UNUSED_0x94D                           (DAILY_FLAGS_START + 0x2D) // Unused Flag
+#define FLAG_UNUSED_0x94E                           (DAILY_FLAGS_START + 0x2E) // Unused Flag
+#define FLAG_UNUSED_0x94F                           (DAILY_FLAGS_START + 0x2F) // Unused Flag
+#define FLAG_UNUSED_0x950                           (DAILY_FLAGS_START + 0x30) // Unused Flag
+#define FLAG_UNUSED_0x951                           (DAILY_FLAGS_START + 0x31) // Unused Flag
+#define FLAG_UNUSED_0x952                           (DAILY_FLAGS_START + 0x32) // Unused Flag
+#define FLAG_UNUSED_0x953                           (DAILY_FLAGS_START + 0x33) // Unused Flag
+#define FLAG_UNUSED_0x954                           (DAILY_FLAGS_START + 0x34) // Unused Flag
+#define FLAG_UNUSED_0x955                           (DAILY_FLAGS_START + 0x35) // Unused Flag
+#define FLAG_UNUSED_0x956                           (DAILY_FLAGS_START + 0x36) // Unused Flag
+#define FLAG_UNUSED_0x957                           (DAILY_FLAGS_START + 0x37) // Unused Flag
+#define FLAG_UNUSED_0x958                           (DAILY_FLAGS_START + 0x38) // Unused Flag
+#define FLAG_UNUSED_0x959                           (DAILY_FLAGS_START + 0x39) // Unused Flag
+#define FLAG_UNUSED_0x95A                           (DAILY_FLAGS_START + 0x3A) // Unused Flag
+#define FLAG_UNUSED_0x95B                           (DAILY_FLAGS_START + 0x3B) // Unused Flag
+#define FLAG_UNUSED_0x95C                           (DAILY_FLAGS_START + 0x3C) // Unused Flag
+#define FLAG_UNUSED_0x95D                           (DAILY_FLAGS_START + 0x3D) // Unused Flag
+#define FLAG_UNUSED_0x95E                           (DAILY_FLAGS_START + 0x3E) // Unused Flag
+#define FLAG_UNUSED_0x95F                           (DAILY_FLAGS_START + 0x3F) // Unused Flag
+#define DAILY_FLAGS_END                             FLAG_UNUSED_0x95F
+
+// Special Flags (Stored in EWRAM (gSpecialFlags), not in the SaveBlock)
+#define SPECIAL_FLAGS_START                     0x4000
+#define FLAG_HIDE_MAP_NAME_POPUP                (SPECIAL_FLAGS_START + 0x0)
+#define FLAG_DONT_TRANSITION_MUSIC              (SPECIAL_FLAGS_START + 0x1)
+#define FLAG_ENABLE_MULTI_CORRIDOR_DOOR         (SPECIAL_FLAGS_START + 0x2)
+#define FLAG_SPECIAL_FLAG_UNUSED_0x4003         (SPECIAL_FLAGS_START + 0x3) // Unused Flag
+#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG       (SPECIAL_FLAGS_START + 0x4)
+// FLAG_SPECIAL_FLAG_0x4005 - 0x407F also exist and are unused
+#define SPECIAL_FLAGS_END                       (SPECIAL_FLAGS_START + 0x7F)
 
 #endif // GUARD_CONSTANTS_FLAGS_H

@@ -39,7 +39,7 @@ EWRAM_DATA struct PyramidBagCursorData gPyramidBagCursorData = {0};
 
 // This file's functions.
 static void Task_HandlePyramidBagInput(u8 taskId);
-static void sub_81C4F44(u8 taskId);
+static void Task_ChooseItemsToTossFromPyramidBag(u8 taskId);
 static void sub_81C5B4C(u8 taskId);
 static void Task_BeginItemSwap(u8 taskId);
 static void sub_81C5D20(u8 taskId);
@@ -354,14 +354,14 @@ static void sub_81C4F10(void)
     GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
-void sub_81C4F24(void)
+void ChooseItemsToTossFromPyramidBag(void)
 {
     ScriptContext2_Enable();
-    FadeScreen(1, 0);
-    CreateTask(sub_81C4F44, 10);
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(Task_ChooseItemsToTossFromPyramidBag, 10);
 }
 
-static void sub_81C4F44(u8 taskId)
+static void Task_ChooseItemsToTossFromPyramidBag(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
