@@ -540,11 +540,12 @@ BattleFrontier_BattleDomeLobby_Text_24A51D: @ 824A51D
 	.string "Here is your prize for your Battle\n"
 	.string "Tournament victory.$"
 
-VerdanturfTown_BattleTentLobby_Text_24A554: @ 824A554
+BattleFrontier_BattleDomeLobby_Text_ReceivedPrize: @ 824A554
 	.string "{PLAYER} received the prize\n"
 	.string "{STR_VAR_1}.$"
 
-VerdanturfTown_BattleTentLobby_Text_24A56E: @ 824A56E
+@ Unused
+BattleFrontier_BattleDomeLobby_Text_BagFullMakeRoom: @ 824A56E
 	.string "Oh, your BAG appears to be full.\p"
 	.string "Please make room in your BAG, then come\n"
 	.string "see me.$"
