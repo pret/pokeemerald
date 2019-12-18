@@ -225,10 +225,10 @@ Route120_EventScript_StevenBattleKecleon:: @ 81F568B
 	end
 
 Route120_EventScript_RemoveBridgeKecleonPostBattle:: @ 81F571C
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject 30 @ Invisible Bridge Kecleon
 	removeobject 36 @ Visible Bridge Kecleon
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	goto Route120_EventScript_StevenGiveDeconScope
 	end
 

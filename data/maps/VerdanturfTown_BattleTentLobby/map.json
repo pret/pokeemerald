@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_BattleTentLobby_EventScript_201873",
+      "script": "VerdanturfTown_BattleTentLobby_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_BattleTentLobby_EventScript_201A7B",
+      "script": "VerdanturfTown_BattleTentLobby_EventScript_AttractGiver",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_BattleTentLobby_EventScript_201ABC",
+      "script": "VerdanturfTown_BattleTentLobby_EventScript_Boy1",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_BattleTentLobby_EventScript_201AC5",
+      "script": "VerdanturfTown_BattleTentLobby_EventScript_Boy2",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_BattleTentLobby_EventScript_201AD0",
+      "script": "VerdanturfTown_BattleTentLobby_EventScript_Scott",
       "flag": "FLAG_HIDE_VERDANTURF_TOWN_SCOTT"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_BattleTentLobby_EventScript_201AF7",
+      "script": "VerdanturfTown_BattleTentLobby_EventScript_LittleBoy",
       "flag": "0"
     }
   ],
@@ -117,7 +117,7 @@
       "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "VerdanturfTown_BattleTentLobby_EventScript_201B02"
+      "script": "VerdanturfTown_BattleTentLobby_EventScript_RulesBoard"
     }
   ]
 }

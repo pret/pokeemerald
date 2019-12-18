@@ -45,7 +45,7 @@ MtPyre_Summit_EventScript_TeamAquaExits:: @ 823203C
 	call_if_eq MtPyre_Summit_EventScript_ArchieFacePlayer2
 	msgbox MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo, MSGBOX_DEFAULT
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 4
 	removeobject 5
@@ -54,7 +54,7 @@ MtPyre_Summit_EventScript_TeamAquaExits:: @ 823203C
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA
 	fadedefaultbgm
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	delay 20
 	setvar VAR_MT_PYRE_STATE, 1
 	compare VAR_0x8008, 0

@@ -1790,7 +1790,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             }
             else
             {
-                FadeScreen(1, 0);
+                FadeScreen(FADE_TO_BLACK, 0);
                 task->data[0] = 4;
             }
             break;

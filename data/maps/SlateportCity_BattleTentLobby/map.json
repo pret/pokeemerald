@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_BattleTentLobby_EventScript_2088AA",
+      "script": "SlateportCity_BattleTentLobby_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_BattleTentLobby_EventScript_208A3D",
+      "script": "SlateportCity_BattleTentLobby_EventScript_TormentGiver",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_BattleTentLobby_EventScript_208A7E",
+      "script": "SlateportCity_BattleTentLobby_EventScript_Man",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_BattleTentLobby_EventScript_208A87",
+      "script": "SlateportCity_BattleTentLobby_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_BattleTentLobby_EventScript_208A90",
+      "script": "SlateportCity_BattleTentLobby_EventScript_Woman",
       "flag": "0"
     }
   ],
@@ -104,7 +104,7 @@
       "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SlateportCity_BattleTentLobby_EventScript_208A99"
+      "script": "SlateportCity_BattleTentLobby_EventScript_RulesBoard"
     }
   ]
 }

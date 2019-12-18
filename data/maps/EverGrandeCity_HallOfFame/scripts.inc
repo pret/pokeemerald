@@ -52,7 +52,7 @@ EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: @ 8229850
 
 EverGrandeCity_HallOfFame_EventScript_GameClearMale:: @ 82298E9
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
-	fadescreenspeed 1, 24
+	fadescreenspeed FADE_TO_BLACK, 24
 	special GameClear
 	waitstate
 	releaseall
@@ -60,7 +60,7 @@ EverGrandeCity_HallOfFame_EventScript_GameClearMale:: @ 82298E9
 
 EverGrandeCity_HallOfFame_EventScript_GameClearFemale:: @ 82298F5
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
-	fadescreenspeed 1, 24
+	fadescreenspeed FADE_TO_BLACK, 24
 	special GameClear
 	waitstate
 	releaseall

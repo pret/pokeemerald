@@ -1583,7 +1583,7 @@ void sub_8014790(u8 taskId)
     case 1:
         if (!ScriptContext1_IsScriptSetUp())
         {
-            FadeScreen(1, 0);
+            FadeScreen(FADE_TO_BLACK, 0);
             data[0] = 2;
         }
         break;

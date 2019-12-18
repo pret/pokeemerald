@@ -182,35 +182,35 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy:: @ 821999C
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting:: @ 82199A5
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 9
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting:: @ 82199B3
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 10
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting:: @ 82199C1
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 11
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting:: @ 82199CF
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 12
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting:: @ 82199DD
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 13
 	releaseall
 	end

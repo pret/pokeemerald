@@ -91,20 +91,20 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB:: @ 824B3BB
 	dome_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	frontier_reset
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD:: @ 824B3DD
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B9B5, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	dome_showopponentinfo
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5:: @ 824B3F5
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B40A
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	dome_showtourneytree
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
@@ -138,7 +138,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	message BattleFrontier_BattleDomePreBattleRoom_Text_24B70C
 	waitmessage
 	waitbuttonpress
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, 2  @ 2 of the 3 party mons are selected for battle
@@ -227,7 +227,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	waitfanfare
 	special HealPlayerParty
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	dome_showstatictourneytree
 	waitstate
 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F

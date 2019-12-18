@@ -62,14 +62,14 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	setvar VAR_SLATEPORT_CITY_STATE, 1
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
 	setvar VAR_SLATEPORT_HARBOR_STATE, 1
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 6
 	removeobject 2
 	removeobject 3
 	removeobject 4
 	removeobject 5
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
 

@@ -39,7 +39,7 @@ BerryTree_EventScript_WantToPlant:: @ 8274374
 	end
 
 BerryTree_EventScript_ChooseBerryToPlant:: @ 8274393
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	closemessage
 	special Bag_ChooseBerry
 	waitstate

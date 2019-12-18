@@ -357,7 +357,7 @@ static void sub_81C4F10(void)
 void ChooseItemsToTossFromPyramidBag(void)
 {
     ScriptContext2_Enable();
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     CreateTask(Task_ChooseItemsToTossFromPyramidBag, 10);
 }
 

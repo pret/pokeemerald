@@ -42,7 +42,7 @@ LilycoveCity_ContestLobby_EventScript_ContestArtist:: @ 821A264
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
@@ -216,7 +216,7 @@ LilycoveCity_ContestLobby_EventScript_LinkContestArtist:: @ 821A436
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -504,42 +504,42 @@ LilycoveCity_ContestLobby_EventScript_NinjaBoy:: @ 821A735
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner1:: @ 821A73E
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 1
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner2:: @ 821A745
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 2
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner3:: @ 821A74C
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 3
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner4:: @ 821A753
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 4
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner5:: @ 821A75A
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 5
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner6:: @ 821A761
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	showcontestwinner 6
 	releaseall
 	end
