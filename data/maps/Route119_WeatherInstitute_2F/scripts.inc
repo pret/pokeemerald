@@ -64,7 +64,7 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated:: @ 826FFC8
 	setvar VAR_WEATHER_INSTITUTE_STATE, 1
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_2F_WORKERS
 	fadedefaultbgm
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setflag FLAG_HIDE_ROUTE_119_TEAM_AQUA
 	setflag FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M
 	removeobject 1
@@ -74,7 +74,7 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated:: @ 826FFC8
 	removeobject 7
 	applymovement EVENT_OBJ_ID_PLAYER, Route119_WeatherInstitute_2F_Movement_PlayerReturnToPosition
 	waitmovement 0
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	applymovement 5, Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer
 	waitmovement 0
 	copyobjectxytoperm 5

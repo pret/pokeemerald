@@ -608,7 +608,7 @@ static void DecorationMenuAction_PutAway(u8 taskId)
     {
         RemoveDecorationWindow(0);
         ClearDialogWindowAndFrame(0, 0);
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8129ABC;
     }
@@ -1292,7 +1292,7 @@ void sub_8127F68(u8 taskId)
     {
         if (sub_8127F38() == TRUE)
         {
-            FadeScreen(1, 0);
+            FadeScreen(FADE_TO_BLACK, 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].func = sub_8128060;
         }
@@ -1682,7 +1682,7 @@ void CancelDecorating(u8 taskId)
 
 void sub_8128BBC(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
 }
@@ -2551,7 +2551,7 @@ void ReturnDecorationPrompt(u8 taskId)
 
 void PutAwayDecoration(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81298EC;
 }
@@ -2570,7 +2570,7 @@ void StopPuttingAwayDecorations(u8 taskId)
 
 void sub_812A22C(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_812A25C;
 }

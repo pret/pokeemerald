@@ -216,7 +216,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattleTowerLobby_Text_2407A6, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
@@ -283,7 +283,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattleTowerLobby_Text_240A50, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_DOUBLES_PARTY_SIZE
@@ -351,7 +351,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattleTowerLobby_Text_240DDB, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE
@@ -418,7 +418,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattleTowerLobby_Text_24115E, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE

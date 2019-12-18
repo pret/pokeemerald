@@ -165,7 +165,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_PauseChallenge:: @ 8200B51
 	fallarbortent_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	frontier_reset
 	end
 

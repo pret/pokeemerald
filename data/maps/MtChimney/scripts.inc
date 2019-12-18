@@ -47,13 +47,13 @@ MtChimney_EventScript_Maxie:: @ 822EE0B
 	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 29
 	removeobject 3
 	removeobject 22
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	setobjectxyperm 1, 10, 12
 	addobject 1
 	compare VAR_FACING, DIR_EAST

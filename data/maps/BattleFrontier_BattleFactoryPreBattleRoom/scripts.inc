@@ -39,7 +39,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterRoom:: @ 8259AF9
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentType
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentStyle
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	factory_setswapped
 	factory_rentmons
 	waitstate
@@ -163,7 +163,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskSwapMon:: @ 8259D98
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterBattleRoom
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_SwapMons:: @ 8259DF2
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	factory_swapmons
 	waitstate
 	compare VAR_RESULT, 1
@@ -208,7 +208,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_PauseChallenge:: @ 8259E47
 	factory_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	frontier_reset
 	end
 

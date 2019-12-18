@@ -206,10 +206,10 @@ Route113_GlassWorkshop_EventScript_ChooseDifferentItem:: @ 826F003
 Route113_GlassWorkshop_EventScript_MakeGlassItem:: @ 826F00F
 	msgbox Route113_GlassWorkshop_Text_IllMakeItemForYou, MSGBOX_DEFAULT
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playse SE_SELECT
 	delay 30
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	msgbox Route113_GlassWorkshop_Text_IveFinishedGlassItem, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
 	call_if_eq Route113_GlassWorkshop_EventScript_GiveGlassFlute

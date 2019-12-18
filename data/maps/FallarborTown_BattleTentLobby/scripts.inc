@@ -127,7 +127,7 @@ FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 820005D
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
 	msgbox FallarborTown_BattleTentLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
