@@ -498,7 +498,7 @@ gSpecials:: @ 81DBA64
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
-	def_special sub_8175280
+	def_special DoConfettiEffect
 	def_special CreateAbnormalWeatherEvent
 	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId

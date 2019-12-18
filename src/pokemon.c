@@ -5085,8 +5085,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             }
                             if (friendship < 0)
                                 friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
+                            if (friendship > MAX_FRIENDSHIP)
+                                friendship = MAX_FRIENDSHIP;
                             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                             retVal = FALSE;
                         }
@@ -5111,8 +5111,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             }
                             if (friendship < 0)
                                 friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
+                            if (friendship > MAX_FRIENDSHIP)
+                                friendship = MAX_FRIENDSHIP;
                             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                             retVal = FALSE;
                         }
@@ -5136,8 +5136,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             }
                             if (friendship < 0)
                                 friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
+                            if (friendship > MAX_FRIENDSHIP)
+                                friendship = MAX_FRIENDSHIP;
                             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                             retVal = FALSE;
                         }
@@ -5786,8 +5786,8 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             }
             if (friendship < 0)
                 friendship = 0;
-            if (friendship > 255)
-                friendship = 255;
+            if (friendship > MAX_FRIENDSHIP)
+                friendship = MAX_FRIENDSHIP;
             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
         }
     }

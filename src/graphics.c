@@ -967,17 +967,17 @@ const u32 gVsLettersGfx[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz")
 const u32 gUnknown_08D82F10[] = INCBIN_U32("graphics/battle_frontier/tourney_bg.4bpp.lz");
 const u32 gUnknown_08D834FC[] = INCBIN_U32("graphics/battle_frontier/tourney_line.4bpp.lz"); // the red glow mask for the tourney advancement lines
 
-const u32 gUnknown_08D83900[] = INCBIN_U32("graphics/unknown/unknown_D83900.bin.lz"); // tilemaps likely
+const u32 gUnknown_08D83900[] = INCBIN_U32("graphics/battle_frontier/unknown_D83900.bin.lz"); // tilemaps likely
 
-const u32 gUnknown_08D83B2C[] = INCBIN_U32("graphics/unknown/unknown_D83B2C.bin.lz");
+const u32 gUnknown_08D83B2C[] = INCBIN_U32("graphics/battle_frontier/unknown_D83B2C.bin.lz");
 
-const u32 gUnknown_08D83C3C[] = INCBIN_U32("graphics/unknown/unknown_D83C3C.bin.lz");
+const u32 gUnknown_08D83C3C[] = INCBIN_U32("graphics/battle_frontier/unknown_D83C3C.bin.lz");
 
 const u32 gUnknown_08D83D50[] = INCBIN_U32("graphics/battle_frontier/misc1.4bpp.lz");
 
-const u32 gUnknown_08D84970[] = INCBIN_U32("graphics/unknown/unknown_D84970.bin.lz");
+const u32 gUnknown_08D84970[] = INCBIN_U32("graphics/battle_frontier/unknown_D84970.bin.lz");
 
-const u32 gUnknown_08D84F00[] = INCBIN_U32("graphics/unknown/unknown_D84F00.bin.lz");
+const u32 gUnknown_08D84F00[] = INCBIN_U32("graphics/battle_frontier/unknown_D84F00.bin.lz");
 
 const u32 gBattleFrontierGfx_DomeOptions[] = INCBIN_U32("graphics/battle_frontier/options.4bpp.lz");
 const u32 gUnknown_08D85358[] = INCBIN_U32("graphics/battle_frontier/options_pal1.gbapal.lz");

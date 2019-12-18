@@ -101,7 +101,7 @@ static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite);
 static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unused2);
 static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2);
 static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2);
-static void sub_8175364(u8 taskId);
+static void Task_DoConfettiEffect(u8 taskId);
 static void sub_81751A4(struct Sprite* sprite);
 
 // const rom data
@@ -1387,12 +1387,13 @@ static bool8 sub_81751FC(void)
     return FALSE;
 }
 
-void sub_8175280(void)
+// Used when a Battle Dome tourney is won
+void DoConfettiEffect(void)
 {
     u8 taskId;
 
     gSpecialVar_0x8004 = 180;
-    taskId = CreateTask(sub_8175364, 0);
+    taskId = CreateTask(Task_DoConfettiEffect, 0);
     if (taskId != 0xFF)
     {
         gTasks[taskId].data[1] = gSpecialVar_0x8004;
@@ -1400,11 +1401,11 @@ void sub_8175280(void)
     }
 }
 
-static void sub_81752C0(void)
+static void StopConfettiEffect(void)
 {
     u8 taskId;
 
-    if ((taskId = FindTaskIdByFunc(sub_8175364)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_DoConfettiEffect)) != 0xFF)
         DestroyTask(taskId);
 
     sub_8152254();
@@ -1437,7 +1438,7 @@ static void sub_81752F4(struct UnkStruct_81520A8 *structPtr)
     }
 }
 
-static void sub_8175364(u8 taskId)
+static void Task_DoConfettiEffect(u8 taskId)
 {
     u32 var = 0;
     u16 *data = gTasks[taskId].data;
@@ -1475,7 +1476,7 @@ static void sub_8175364(u8 taskId)
             data[0] = 0xFF;
         break;
     case 0xFF:
-        sub_81752C0();
+        StopConfettiEffect();
         gSpecialVar_0x8004 = var;
         gSpecialVar_0x8005 = 0xFFFF;
         break;

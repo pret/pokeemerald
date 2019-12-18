@@ -1104,6 +1104,7 @@ static const u8 sBattleTowerPartySizes2[] =
     [FRONTIER_MODE_LINK_MULTIS] = FRONTIER_MULTI_PARTY_SIZE,
 };
 
+// min/max trainer id
 static const u16 gUnknown_085DF9FA[][2] =
 {
     {0x0000, 0x0063},
@@ -1116,6 +1117,7 @@ static const u16 gUnknown_085DF9FA[][2] =
     {0x00c8, 0x012b},
 };
 
+// min/max trainer id
 static const u16 gUnknown_085DFA1A[][2] =
 {
     {0x0064, 0x0077},
@@ -1878,7 +1880,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 {
     s32 i, j;
     u16 chosenMonIndices[4];
-    u8 friendship = 0xFF;
+    u8 friendship = MAX_FRIENDSHIP;
     u8 level = SetFacilityPtrsGetLevel();
     u8 fixedIV = 0;
     u8 bfMonCount;
@@ -1977,7 +1979,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
                                              gFacilityTrainerMons[monSetId].evSpread,
                                              otID);
 
-        friendship = 255;
+        friendship = MAX_FRIENDSHIP;
         // Give the chosen pokemon its specified moves.
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
@@ -1999,7 +2001,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
 {
     s32 i, j;
-    u8 friendship = 0xFF;
+    u8 friendship = MAX_FRIENDSHIP;
     u8 level = 0;
     u8 fixedIV = 0;
     struct Apprentice *apprentice = &gSaveBlock2Ptr->apprentices[0];
@@ -2017,7 +2019,7 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
     for (i = 0; i != 3; i++)
     {
         CreateMonWithEVSpread(&gEnemyParty[firstMonId + i], apprentice->party[i].species, level, fixedIV, 8);
-        friendship = 0xFF;
+        friendship = MAX_FRIENDSHIP;
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             if (apprentice->party[i].moves[j] == MOVE_FRUSTRATION)
@@ -3227,7 +3229,7 @@ static void FillPartnerParty(u16 trainerId)
                                                  ivs,
                                                  gFacilityTrainerMons[monSetId].evSpread,
                                                  otID);
-            friendship = 0xFF;
+            friendship = MAX_FRIENDSHIP;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 SetMonMoveSlot(&gPlayerParty[3 + i], gFacilityTrainerMons[monSetId].moves[j], j);
@@ -3532,19 +3534,19 @@ static u16 sub_8165D40(void)
 static u8 SetTentPtrsGetLevel(void)
 {
     u8 level = 30;
-    u32 tentFacility = VarGet(VAR_FRONTIER_FACILITY);
+    u32 facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    if (tentFacility == TENT_SLATEPORT)
+    if (facility == FRONTIER_FACILITY_FACTORY)
     {
         gFacilityTrainers = gSlateportBattleTentTrainers;
         gFacilityTrainerMons = gSlateportBattleTentMons;
     }
-    else if (tentFacility == TENT_VERDANTURF)
+    else if (facility == FRONTIER_FACILITY_PALACE)
     {
         gFacilityTrainers = gVerdanturfBattleTentTrainers;
         gFacilityTrainerMons = gVerdanturfBattleTentMons;
     }
-    else if (tentFacility == TENT_FALLARBOR)
+    else if (facility == FRONTIER_FACILITY_ARENA)
     {
         gFacilityTrainers = gFallarborBattleTentTrainers;
         gFacilityTrainerMons = gFallarborBattleTentMons;
@@ -3653,7 +3655,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
                                              gFacilityTrainerMons[monSetId].evSpread,
                                              otID);
 
-        friendship = 255;
+        friendship = MAX_FRIENDSHIP;
         // Give the chosen pokemon its specified moves.
         for (j = 0; j < MAX_MON_MOVES; j++)
         {

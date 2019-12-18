@@ -1,6 +1,21 @@
 #ifndef GUARD_CONSTANTS_BATTLE_DOME_H
 #define GUARD_CONSTANTS_BATTLE_DOME_H
 
+#define DOME_ROUND1        0
+#define DOME_ROUND2        1
+#define DOME_SEMIFINAL     2
+#define DOME_FINAL         3
+#define DOME_ROUNDS_COUNT  4
+
+//#define DOME_TOURNAMENT_TRAINERS_COUNT 16 : defined in global
+#define DOME_TOURNAMENT_MATCHES_COUNT  DOME_TOURNAMENT_TRAINERS_COUNT - 1
+
+#define DOME_BATTLE_PARTY_SIZE  2
+
+#define DOME_PLAYER_WON_MATCH  1
+#define DOME_PLAYER_LOST_MATCH 2
+#define DOME_PLAYER_RETIRED    9
+
 #define BATTLE_DOME_FUNC_INIT                       0
 #define BATTLE_DOME_FUNC_GET_DATA                   1
 #define BATTLE_DOME_FUNC_SET_DATA                   2
@@ -22,24 +37,18 @@
 #define BATTLE_DOME_FUNC_REDUCE_PARTY               18
 #define BATTLE_DOME_FUNC_COMPARE_SEEDS              19
 #define BATTLE_DOME_FUNC_GET_WINNER_NAME            20
-#define BATTLE_DOME_FUNC_21                         21
+#define BATTLE_DOME_FUNC_INIT_RESULTS_TREE          21
 #define BATTLE_DOME_FUNC_INIT_TRAINERS              22
 
-#define DOME_DATA_WIN_STREAK 0
-#define DOME_DATA_WIN_STREAK_ACTIVE 1
-#define DOME_DATA_2 2
-#define DOME_DATA_3 3
-#define DOME_DATA_4 4
-#define DOME_DATA_5 5
-#define DOME_DATA_6 6
-#define DOME_DATA_7 7
-#define DOME_DATA_8 8
-#define DOME_DATA_9 9
-
-#define DOME_ROUND1       0
-#define DOME_ROUND2       1
-#define DOME_SEMIFINAL    2
-#define DOME_FINAL        3
-#define DOME_ROUNDS_COUNT 4
+#define DOME_DATA_WIN_STREAK              0
+#define DOME_DATA_WIN_STREAK_ACTIVE       1
+#define DOME_DATA_ATTEMPTED_SINGLES_50    2
+#define DOME_DATA_ATTEMPTED_SINGLES_OPEN  3
+#define DOME_DATA_HAS_WON_SINGLES_50      4
+#define DOME_DATA_HAS_WON_SINGLES_OPEN    5
+#define DOME_DATA_ATTEMPTED_CHALLENGE     6
+#define DOME_DATA_HAS_WON_CHALLENGE       7
+#define DOME_DATA_SELECTED_MONS           8
+#define DOME_DATA_LAST_TOURNEY_TYPE       9
 
 #endif //GUARD_CONSTANTS_BATTLE_DOME_H

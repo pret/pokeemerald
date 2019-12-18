@@ -300,7 +300,7 @@ struct BattleTowerEReaderTrainer
 struct FrontierMonData
 {
     u16 moves[MAX_MON_MOVES];
-    u8 evs[6];
+    u8 evs[NUM_STATS];
     u8 nature;
 };
 
@@ -317,7 +317,7 @@ struct BattleDomeTrainer
     u16 trainerId:10;
     u16 isEliminated:1;
     u16 eliminatedAt:2;
-    u16 unk3:3;
+    u16 forfeited:3;
 };
 
 #define DOME_TOURNAMENT_TRAINERS_COUNT 16
@@ -332,10 +332,6 @@ struct BattleFrontier
     /*0xCA9*/ u8 lvlMode:2;
     /*0xCA9*/ u8 challengePaused:1;
     /*0xCA9*/ u8 field_CA9_b:1;
-    /*0xCA9*/ u8 unused_CA9_c:1;
-    /*0xCA9*/ u8 unused_CA9_d:1;
-    /*0xCA9*/ u8 unused_CA9_e:1;
-    /*0xCA9*/ u8 unused_CA9_f:1;
     /*0xCAA*/ u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
     /*0xCB2*/ u16 curChallengeBattleNum; // Battle number / room number (Pike) / floor number (Pyramid)
     /*0xCB4*/ u16 trainerIds[20];
@@ -347,17 +343,17 @@ struct BattleFrontier
     /*0xD04*/ u16 towerNumWins; // Increments to MAX_STREAK but never read otherwise
     /*0xD06*/ u8 towerBattleOutcome;
     /*0xD07*/ u8 towerLvlMode;
-    /*0xD08*/ u8 field_D08_0:1;
-    /*0xD08*/ u8 field_D08_1:1;
-    /*0xD08*/ u8 field_D08_2:1;
-    /*0xD08*/ u8 field_D08_3:1;
-    /*0xD08*/ u8 field_D08_4:1;
-    /*0xD08*/ u8 field_D08_5:1;
-    /*0xD08*/ u8 field_D08_6:1;
-    /*0xD08*/ u8 field_D08_7:1;
-    /*0xD09*/ u8 filler_D09;
-    /*0xD0A*/ u8 field_D0A;
-    /*0xD0B*/ u8 field_D0B;
+    /*0xD08*/ u8 domeAttemptedSingles50:1;
+    /*0xD08*/ u8 domeAttemptedSinglesOpen:1;
+    /*0xD08*/ u8 domeHasWonSingles50:1;
+    /*0xD08*/ u8 domeHasWonSinglesOpen:1;
+    /*0xD08*/ u8 domeAttemptedDoubles50:1;
+    /*0xD08*/ u8 domeAttemptedDoublesOpen:1;
+    /*0xD08*/ u8 domeHasWonDoubles50:1;
+    /*0xD08*/ u8 domeHasWonDoublesOpen:1;
+    /*0xD09*/ u8 domeUnused;
+    /*0xD0A*/ u8 domeLvlMode;
+    /*0xD0B*/ u8 domeBattleMode;
     /*0xD0C*/ u16 domeWinStreaks[2][2];
     /*0xD14*/ u16 domeRecordWinStreaks[2][2];
     /*0xD1C*/ u16 domeTotalChampionships[2][2];
@@ -396,7 +392,7 @@ struct BattleFrontier
     /*0xEB8*/ u16 battlePoints;
     /*0xEBA*/ u16 cardBattlePoints;
     /*0xEBC*/ u32 battlesCount;
-    /*0xEC0*/ u16 field_EC0[16];
+    /*0xEC0*/ u16 domeWinningMoves[DOME_TOURNAMENT_TRAINERS_COUNT];
     /*0xEE0*/ u8 trainerFlags;
     /*0xEE1*/ u8 opponentNames[2][PLAYER_NAME_LENGTH + 1];
     /*0xEF1*/ u8 opponentTrainerIds[2][TRAINER_ID_LENGTH];

@@ -23,13 +23,13 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@
+	@ Buffer the name of the current round to gStringVar1
 	.macro dome_getroundtext
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_ROUND_TEXT
 	special CallBattleDomeFunction
 	.endm
 
-	@
+	@ Buffer the name of the opponent to gStringVar2 and the name of the round to gStringVar1
 	.macro dome_getopponentname
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_GET_OPPONENT_NAME
 	special CallBattleDomeFunction
@@ -41,7 +41,7 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@
+	@ Show the page that gives information on the next opponent
 	.macro dome_showopponentinfo
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_SHOW_OPPONENT_INFO
 	special CallBattleDomeFunction
@@ -65,7 +65,7 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@
+	@ Set the object event gfx id for the opponent
 	.macro dome_setopponentgfx
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_OPPONENT_GFX
 	special CallBattleDomeFunction
@@ -77,10 +77,10 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@
-	.macro dome_resolvewinners arg:req
+	@ Decides the winners of NPC vs NPC matches, and eliminates either the player or their opponent depending on the playerStatus (DOME_PLAYER_*)
+	.macro dome_resolvewinners playerStatus:req
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESOLVE_WINNERS
-	setvar VAR_0x8005, \arg
+	setvar VAR_0x8005, \playerStatus
 	special CallBattleDomeFunction
 	.endm
 
@@ -109,13 +109,13 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@
+	@ Reset the held items of the mons that just battled to what they were prior to battling
 	.macro dome_restorehelditems
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_RESTORE_HELD_ITEMS
 	special CallBattleDomeFunction
 	.endm
 
-	@
+	@ Reduce the players party to the selected mons, used to reduce down to the 2 selected for battle
 	.macro dome_reduceparty
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_REDUCE_PARTY
 	special CallBattleDomeFunction
@@ -133,9 +133,9 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@ TODO: Document this macro and its function
-	.macro dome_21
-	setvar VAR_0x8004, BATTLE_DOME_FUNC_21
+	@ Performs a random tourney to initialize the results board before the player has entered a challenge
+	.macro dome_initresultstree
+	setvar VAR_0x8004, BATTLE_DOME_FUNC_INIT_RESULTS_TREE
 	special CallBattleDomeFunction
 	.endm
 
