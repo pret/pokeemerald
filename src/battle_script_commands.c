@@ -4262,7 +4262,8 @@ static void Cmd_playstatchangeanimation(void)
                         && ability != ABILITY_CLEAR_BODY
                         && ability != ABILITY_WHITE_SMOKE
                         && !(ability == ABILITY_KEEN_EYE && currStat == STAT_ACC)
-                        && !(ability == ABILITY_HYPER_CUTTER && currStat == STAT_ATK))
+                        && !(ability == ABILITY_HYPER_CUTTER && currStat == STAT_ATK)
+                        && !(ability == ABILITY_BIG_PECKS && currStat == STAT_DEF))
                 {
                     if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
                     {
