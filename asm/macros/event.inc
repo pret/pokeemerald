@@ -235,7 +235,7 @@
 	@ Generic compare macro which attempts to deduce argument types based on their values
 	@ Any values between 0x4000 to 0x40FF and 0x8000 to 0x8015 are considered event variable identifiers
 	.macro compare var:req, arg:req
-		.if (\arg >= VARS_START && \arg <= VARS_END) || (\arg >= SPECIAL_VARS_START && \arg <= SPECIAL_VARS_END)
+		.if ((\arg >= VARS_START && \arg <= VARS_END) || (\arg >= SPECIAL_VARS_START && \arg <= SPECIAL_VARS_END))
 			compare_var_to_var \var, \arg
 		.else
 			compare_var_to_value \var, \arg
