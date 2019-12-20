@@ -1104,32 +1104,37 @@ static const u8 sBattleTowerPartySizes2[] =
     [FRONTIER_MODE_LINK_MULTIS] = FRONTIER_MULTI_PARTY_SIZE,
 };
 
-// min/max trainer id
-static const u16 gUnknown_085DF9FA[][2] =
+// Trainer ID ranges for possible frontier trainers to encounter on particular challenges
+// Trainers are scaled by difficulty, so higher trainer IDs have better teams
+static const u16 sFrontierTrainerIdRanges[][2] =
 {
-    {0x0000, 0x0063},
-    {0x0050, 0x0077},
-    {0x0064, 0x008b},
-    {0x0078, 0x009f},
-    {0x008c, 0x00b3},
-    {0x00a0, 0x00c7},
-    {0x00b4, 0x00db},
-    {0x00c8, 0x012b},
+    {FRONTIER_TRAINER_BRADY,   FRONTIER_TRAINER_JILL},   //   0 -  99
+    {FRONTIER_TRAINER_TREVIN,  FRONTIER_TRAINER_CHLOE},  //  80 - 119
+    {FRONTIER_TRAINER_ERIK,    FRONTIER_TRAINER_SOFIA},  // 100 - 139
+    {FRONTIER_TRAINER_NORTON,  FRONTIER_TRAINER_JAZLYN}, // 120 - 159
+    {FRONTIER_TRAINER_BRADEN,  FRONTIER_TRAINER_ALISON}, // 140 - 179
+    {FRONTIER_TRAINER_ZACHERY, FRONTIER_TRAINER_LAMAR},  // 160 - 199
+    {FRONTIER_TRAINER_HANK,    FRONTIER_TRAINER_TESS},   // 180 - 219
+    {FRONTIER_TRAINER_JAXON,   FRONTIER_TRAINER_GRETEL}, // 200 - 299
 };
 
-// min/max trainer id
-static const u16 gUnknown_085DFA1A[][2] =
+static const u16 sFrontierTrainerIdRangesHard[][2] =
 {
-    {0x0064, 0x0077},
-    {0x0078, 0x008b},
-    {0x008c, 0x009f},
-    {0x00a0, 0x00b3},
-    {0x00b4, 0x00c7},
-    {0x00c8, 0x00db},
-    {0x00dc, 0x00ef},
-    {0x00c8, 0x012b},
-    {0x00b3, 0x008d},
-    {0x00c8, 0x00b7},
+    {FRONTIER_TRAINER_ERIK,    FRONTIER_TRAINER_CHLOE},  // 100 - 119
+    {FRONTIER_TRAINER_NORTON,  FRONTIER_TRAINER_SOFIA},  // 120 - 139
+    {FRONTIER_TRAINER_BRADEN,  FRONTIER_TRAINER_JAZLYN}, // 140 - 159
+    {FRONTIER_TRAINER_ZACHERY, FRONTIER_TRAINER_ALISON}, // 160 - 179
+    {FRONTIER_TRAINER_HANK,    FRONTIER_TRAINER_LAMAR},  // 180 - 199
+    {FRONTIER_TRAINER_JAXON,   FRONTIER_TRAINER_TESS},   // 200 - 219
+    {FRONTIER_TRAINER_LEON,    FRONTIER_TRAINER_RAUL},   // 220 - 239
+    {FRONTIER_TRAINER_JAXON,   FRONTIER_TRAINER_GRETEL}, // 200 - 299
+};
+
+// Trainer IDs? Don't make sense as part of previous array, min/max relationship reversed and never accessed
+static const u16 sUnused_085DFA1A[][2] =
+{
+    {179, 141}, // FRONTIER_TRAINER_ALISON - FRONTIER_TRAINER_KAYDEN
+    {200, 183}, // FRONTIER_TRAINER_JAXON  - FRONTIER_TRAINER_HUNTER
 };
 
 static const u8 sBattleTowerPartySizes[FRONTIER_MODE_COUNT] =
@@ -1334,7 +1339,7 @@ static void SetNextFacilityOpponent(void)
             s32 i;
             while (1)
             {
-                id = sub_8162548(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
+                id = GetRandomScaledFrontierTrainerId(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
                 // Ensure trainer wasn't previously fought in this challenge.
                 for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
@@ -1354,7 +1359,7 @@ static void SetNextFacilityOpponent(void)
     }
 }
 
-u16 sub_8162548(u8 challengeNum, u8 battleNum)
+u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
 {
     u16 trainerId;
 
@@ -1362,49 +1367,54 @@ u16 sub_8162548(u8 challengeNum, u8 battleNum)
     {
         if (battleNum == 6)
         {
-            trainerId = (gUnknown_085DFA1A[challengeNum][1] - gUnknown_085DFA1A[challengeNum][0]) + 1;
-            trainerId = gUnknown_085DFA1A[challengeNum][0] + (Random() % trainerId);
+            // The last battle in each challenge has a jump in difficulty, pulls from a table with higher ranges
+            trainerId = (sFrontierTrainerIdRangesHard[challengeNum][1] - sFrontierTrainerIdRangesHard[challengeNum][0]) + 1;
+            trainerId = sFrontierTrainerIdRangesHard[challengeNum][0] + (Random() % trainerId);
         }
         else
         {
-            trainerId = (gUnknown_085DF9FA[challengeNum][1] - gUnknown_085DF9FA[challengeNum][0]) + 1;
-            trainerId = gUnknown_085DF9FA[challengeNum][0] + (Random() % trainerId);
+            trainerId = (sFrontierTrainerIdRanges[challengeNum][1] - sFrontierTrainerIdRanges[challengeNum][0]) + 1;
+            trainerId = sFrontierTrainerIdRanges[challengeNum][0] + (Random() % trainerId);
         }
     }
     else
     {
-        trainerId = (gUnknown_085DF9FA[7][1] - gUnknown_085DF9FA[7][0]) + 1;
-        trainerId = gUnknown_085DF9FA[7][0] + (Random() % trainerId);
+        // After challenge 7, trainer IDs always come from the last, hardest range, which is the same for both trainer ID tables
+        trainerId = (sFrontierTrainerIdRanges[7][1] - sFrontierTrainerIdRanges[7][0]) + 1;
+        trainerId = sFrontierTrainerIdRanges[7][0] + (Random() % trainerId);
     }
 
     return trainerId;
 }
 
-static void sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3) // Unused
+// Unused
+static void GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *rangePtr)
 {
-    u16 trainerId, count;
+    u16 trainerId, range;
 
     if (challengeNum <= 7)
     {
         if (battleNum == 6)
         {
-            count = (gUnknown_085DFA1A[challengeNum][1] - gUnknown_085DFA1A[challengeNum][0]) + 1;
-            trainerId = gUnknown_085DFA1A[challengeNum][0];
+            // The last battle in each challenge has a jump in difficulty, pulls from a table with higher ranges
+            range = (sFrontierTrainerIdRangesHard[challengeNum][1] - sFrontierTrainerIdRangesHard[challengeNum][0]) + 1;
+            trainerId = sFrontierTrainerIdRangesHard[challengeNum][0];
         }
         else
         {
-            count = (gUnknown_085DF9FA[challengeNum][1] - gUnknown_085DF9FA[challengeNum][0]) + 1;
-            trainerId = gUnknown_085DF9FA[challengeNum][0];
+            range = (sFrontierTrainerIdRanges[challengeNum][1] - sFrontierTrainerIdRanges[challengeNum][0]) + 1;
+            trainerId = sFrontierTrainerIdRanges[challengeNum][0];
         }
     }
     else
     {
-        count = (gUnknown_085DF9FA[7][1] - gUnknown_085DF9FA[7][0]) + 1;
-        trainerId = gUnknown_085DF9FA[7][0];
+        // After challenge 7, trainer IDs always come from the last, hardest range, which is the same for both trainer ID tables
+        range = (sFrontierTrainerIdRanges[7][1] - sFrontierTrainerIdRanges[7][0]) + 1;
+        trainerId = sFrontierTrainerIdRanges[7][0];
     }
 
     *trainerIdPtr = trainerId;
-    *arg3 = count;
+    *rangePtr = range;
 }
 
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
@@ -1423,7 +1433,7 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
         SetFrontierBrainEventObjGfx_2();
         return;
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         facilityClass = gFacilityTrainers[trainerId].facilityClass;
     }
@@ -1515,7 +1525,7 @@ u8 GetBattleFacilityTrainerGfxId(u16 trainerId)
     {
         facilityClass = gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass;
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         facilityClass = gFacilityTrainers[trainerId].facilityClass;
     }
@@ -1657,7 +1667,7 @@ u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
     {
         return GetFrontierBrainTrainerPicIndex();
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         return gFacilityClassToPicIndex[gFacilityTrainers[trainerId].facilityClass];
     }
@@ -1694,7 +1704,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     {
         trainerClass = gTrainers[TRAINER_STEVEN].trainerClass;
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         trainerClass = gFacilityClassToTrainerClass[gFacilityTrainers[trainerId].facilityClass];
     }
@@ -1735,7 +1745,7 @@ static u8 GetFrontierTrainerFacilityClass(u16 trainerId)
     {
         facilityClass = gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass;
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         facilityClass = gFacilityTrainers[trainerId].facilityClass;
     }
@@ -1777,7 +1787,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
         for (i = 0; i < PLAYER_NAME_LENGTH; i++)
             dst[i] = gTrainers[TRAINER_STEVEN].trainerName[i];
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         for (i = 0; i < PLAYER_NAME_LENGTH; i++)
             dst[i] = gFacilityTrainers[trainerId].trainerName[i];
@@ -1832,7 +1842,7 @@ static bool8 IsFrontierTrainerFemale(u16 trainerId)
     {
         return IsFrontierBrainFemale();
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         facilityClass = gFacilityTrainers[trainerId].facilityClass;
     }
@@ -1887,7 +1897,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
     const u16 *monSets = NULL;
     u32 otID = 0;
 
-    if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         // Normal battle frontier trainer.
         fixedIV = GetFrontierTrainerFixedIvs(trainerId);
@@ -2070,7 +2080,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     u8 fixedIV;
     u32 otID;
 
-    if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode; // Unused variable.
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2179,7 +2189,7 @@ static void GetOpponentIntroSpeech(void)
 
     if (trainerId == TRAINER_EREADER)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
         FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
@@ -2407,7 +2417,7 @@ static void sub_8163EE4(void)
     StringCopy7(playerRecord->name, gSaveBlock2Ptr->playerName);
     playerRecord->winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
     {
         playerRecord->greeting[i] = gSaveBlock1Ptr->easyChatBattleStart[i];
         playerRecord->speechWon[i] = gSaveBlock1Ptr->easyChatBattleWon[i];
@@ -2529,7 +2539,7 @@ static void sub_81642A0(void)
     {
         do
         {
-            trainerId = sub_8162548(challengeNum, 0);
+            trainerId = GetRandomScaledFrontierTrainerId(challengeNum, 0);
             for (i = 0; i < j; i++)
             {
                 if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -2657,7 +2667,7 @@ static void sub_81646BC(u16 trainerId, u16 monSetId)
 
     if (trainerId != TRAINER_EREADER)
     {
-        if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             move = gFacilityTrainerMons[monSetId].moves[0];
             species = gFacilityTrainerMons[monSetId].species;
@@ -2705,7 +2715,7 @@ static void sub_8164828(void)
     case 0:
         if (trainerId == TRAINER_EREADER)
             return;
-        if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             GetFrontierTrainerName(gStringVar1, trainerId);
         }
@@ -2734,7 +2744,7 @@ static void sub_8164828(void)
         break;
     case 3:
         gPartnerTrainerId = trainerId;
-        if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             gSaveBlock2Ptr->frontier.trainerIds[18] = gSaveBlock2Ptr->frontier.trainerIds[8 + k * 2];
             gSaveBlock2Ptr->frontier.trainerIds[19] = gSaveBlock2Ptr->frontier.trainerIds[9 + k * 2];
@@ -2753,7 +2763,7 @@ static void sub_8164828(void)
         {
             while (1)
             {
-                i = sub_8162548(challengeNum, k / 2);
+                i = GetRandomScaledFrontierTrainerId(challengeNum, k / 2);
                 if (gPartnerTrainerId == i)
                     continue;
 
@@ -2776,7 +2786,7 @@ static void sub_8164828(void)
     if (trainerId == TRAINER_EREADER)
         return;
 
-    if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         ShowFieldMessage(gUnknown_085DD500[arrId].strings[gSpecialVar_0x8005]);
     }
@@ -2830,7 +2840,7 @@ static void sub_8164B74(void)
             {
                 do
                 {
-                    trainerId = sub_8162548(challengeNum, i / 2);
+                    trainerId = GetRandomScaledFrontierTrainerId(challengeNum, i / 2);
                     for (j = 0; j < i; j++)
                     {
                         if (gSaveBlock2Ptr->frontier.trainerIds[j] == trainerId)
@@ -3214,7 +3224,7 @@ static void FillPartnerParty(u16 trainerId)
         // Scrapped, lol.
         trainerName[0] = gGameLanguage;
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         level = SetFacilityPtrsGetLevel();
         ivs = GetFrontierTrainerFixedIvs(trainerId);
@@ -3418,7 +3428,7 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
     {
         *dst = gGameLanguage;
     }
-    else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+    else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         *dst = gGameLanguage;
     }
@@ -3491,28 +3501,30 @@ s32 GetHighestLevelInPlayerParty(void)
     return highestLevel;
 }
 
+// Frontier Trainer parties are roughly scaled in difficulty with higher trainer IDs, so scale IVs as well
+// Duplicated in Battle Dome as GetDomeTrainerMonIvs
 static u8 GetFrontierTrainerFixedIvs(u16 trainerId)
 {
-    u8 fixedIV = 0;
+    u8 fixedIv;
 
-    if (trainerId < 100)
-        fixedIV = 3;
-    else if (trainerId < 120)
-        fixedIV = 6;
-    else if (trainerId < 140)
-        fixedIV = 9;
-    else if (trainerId < 160)
-        fixedIV = 12;
-    else if (trainerId < 180)
-        fixedIV = 15;
-    else if (trainerId < 200)
-        fixedIV = 18;
-    else if (trainerId < 220)
-        fixedIV = 21;
-    else
-        fixedIV = 31;
+    if (trainerId <= FRONTIER_TRAINER_JILL)         // 0 - 99
+        fixedIv = 3;
+    else if (trainerId <= FRONTIER_TRAINER_CHLOE)   // 100 - 119
+        fixedIv = 6;
+    else if (trainerId <= FRONTIER_TRAINER_SOFIA)   // 120 - 139
+        fixedIv = 9;
+    else if (trainerId <= FRONTIER_TRAINER_JAZLYN)  // 140 - 159
+        fixedIv = 12;
+    else if (trainerId <= FRONTIER_TRAINER_ALISON)  // 160 - 179
+        fixedIv = 15;
+    else if (trainerId <= FRONTIER_TRAINER_LAMAR)   // 180 - 199
+        fixedIv = 18;
+    else if (trainerId <= FRONTIER_TRAINER_TESS)    // 200 - 219
+        fixedIv = 21;
+    else                                            // 220+ (- 299)
+        fixedIv = 31;
 
-    return fixedIV;
+    return fixedIv;
 }
 
 static u16 sub_8165D40(void)

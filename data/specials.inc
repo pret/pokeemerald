@@ -271,8 +271,8 @@ gSpecials:: @ 81DBA64
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket
 	def_special ShowBerryBlenderRecordWindow
-	def_special ResetTrickHouseEndRoomFlag
-	def_special SetTrickHouseEndRoomFlag
+	def_special ResetTrickHouseNuggetFlag
+	def_special SetTrickHouseNuggetFlag
 	def_special ScriptMenu_CreatePCMultichoice
 	def_special AccessHallOfFamePC
 	def_special Special_ShowDiploma

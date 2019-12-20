@@ -2454,7 +2454,7 @@ static void InitDomeTrainers(void)
         {
             do
             {
-                trainerId = sub_8162548(GetCurrentFacilityWinStreak(), 0);
+                trainerId = GetRandomScaledFrontierTrainerId(GetCurrentFacilityWinStreak(), 0);
                 for (j = 1; j < i; j++)
                 {
                     if (DOME_TRAINERS[j].trainerId == trainerId)
@@ -2467,7 +2467,7 @@ static void InitDomeTrainers(void)
         {
             do
             {
-                trainerId = sub_8162548(GetCurrentFacilityWinStreak() + 1, 0);
+                trainerId = GetRandomScaledFrontierTrainerId(GetCurrentFacilityWinStreak() + 1, 0);
                 for (j = 1; j < i; j++)
                 {
                     if (DOME_TRAINERS[j].trainerId == trainerId)
@@ -3250,24 +3250,27 @@ _08190156:\n\
 }
 #endif // NONMATCHING
 
+// Duplicate of GetFrontierTrainerFixedIvs
+// NOTE: In CreateDomeOpponentMon a tournament trainer ID (0-15) is passed instead, resulting in all IVs of 3
 static u8 GetDomeTrainerMonIvs(u16 trainerId)
 {
     u8 fixedIv;
-    if (trainerId <= 99)
+
+    if (trainerId <= FRONTIER_TRAINER_JILL)         // 0 - 99
         fixedIv = 3;
-    else if (trainerId <= 119)
+    else if (trainerId <= FRONTIER_TRAINER_CHLOE)   // 100 - 119
         fixedIv = 6;
-    else if (trainerId <= 139)
+    else if (trainerId <= FRONTIER_TRAINER_SOFIA)   // 120 - 139
         fixedIv = 9;
-    else if (trainerId <= 159)
+    else if (trainerId <= FRONTIER_TRAINER_JAZLYN)  // 140 - 159
         fixedIv = 12;
-    else if (trainerId <= 179)
+    else if (trainerId <= FRONTIER_TRAINER_ALISON)  // 160 - 179
         fixedIv = 15;
-    else if (trainerId <= 199)
+    else if (trainerId <= FRONTIER_TRAINER_LAMAR)   // 180 - 199
         fixedIv = 18;
-    else if (trainerId <= 219)
+    else if (trainerId <= FRONTIER_TRAINER_TESS)    // 200 - 219
         fixedIv = 21;
-    else
+    else                                            // 220+ (- 299)
         fixedIv = 31;
 
     return fixedIv;
@@ -6304,7 +6307,7 @@ static void CopyDomeTrainerName(u8 *str, u16 trainerId)
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 str[i] = gSaveBlock2Ptr->playerName[i];
         }
-        else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        else if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 str[i] = gFacilityTrainers[trainerId].trainerName[i];

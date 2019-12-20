@@ -304,7 +304,7 @@ static void GenerateOpponentMons(void)
 
     do
     {
-        trainerId = sub_8162548(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
+        trainerId = GetRandomScaledFrontierTrainerId(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
         {
             if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
