@@ -1988,73 +1988,28 @@ static void DrawTradeMenuPartyMonInfo(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 w
     sTradeMenuData->tilemapBuffer[(y - 1) * 32 + x + 1] = symbolTile;
 }
 
-// Very close but loop preamble not working.
-#ifdef NONMATCHING
 static void DrawTradeMenuPartyInfo(u8 whichParty)
 {
-    int i;
-
+    s32 i;
     for (i = 0; i < sTradeMenuData->partyCounts[whichParty]; i++)
     {
-        DrawTradeMenuPartyMonInfo(whichParty, i, 
-            sTradeMonLevelCoords[whichParty][i][0], 
-            sTradeMonLevelCoords[whichParty][i][1], 
-            sTradeMonBoxCoords[whichParty][i][0], 
-            sTradeMonBoxCoords[whichParty][i][1]);
+        const u8 (*r5)[2];
+        const u8 (*r4)[2];
+        u32 r0 = 3 * whichParty;
+        const u8 (*r1)[2][2] = sTradeMonLevelCoords;
+
+        r5 = r1[r0];
+        r4 = sTradeMonBoxCoords[r0];
+        DrawTradeMenuPartyMonInfo(
+            whichParty,
+            i,
+            r5[i][0],
+            r5[i][1],
+            r4[i][0],
+            r4[i][1]
+        );
     }
 }
-#else
-NAKED
-static void DrawTradeMenuPartyInfo(u8 whichParty)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    sub sp, 0x8\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    movs r7, 0\n\
-    ldr r0, =sTradeMenuData\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x36\n\
-    adds r0, r6\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    bge _08079E94\n\
-    lsls r0, r6, 1\n\
-    adds r0, r6\n\
-    ldr r1, =sTradeMonLevelCoords\n\
-    lsls r0, 2\n\
-    adds r5, r0, r1\n\
-    ldr r1, =sTradeMonBoxCoords\n\
-    adds r4, r0, r1\n\
-_08079E6A:\n\
-    lsls r1, r7, 24\n\
-    lsrs r1, 24\n\
-    ldrb r2, [r5]\n\
-    ldrb r3, [r5, 0x1]\n\
-    ldrb r0, [r4]\n\
-    str r0, [sp]\n\
-    ldrb r0, [r4, 0x1]\n\
-    str r0, [sp, 0x4]\n\
-    adds r0, r6, 0\n\
-    bl DrawTradeMenuPartyMonInfo\n\
-    adds r5, 0x2\n\
-    adds r4, 0x2\n\
-    adds r7, 0x1\n\
-    ldr r0, =sTradeMenuData\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x36\n\
-    adds r0, r6\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    blt _08079E6A\n\
-_08079E94:\n\
-    add sp, 0x8\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void ResetTradeMenuPartyPositions(u8 whichParty)
 {
