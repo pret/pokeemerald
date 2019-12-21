@@ -273,7 +273,9 @@
 #define VAR_UNUSED_0x40FE                    0x40FE // Unused Var
 #define VAR_UNUSED_0x40FF                    0x40FF // Unused Var
 
-#define SPECIAL_VARS_START 0x8000
+#define VARS_END                             0x40FF
+
+#define SPECIAL_VARS_START            0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
 #define VAR_0x8000                    0x8000
@@ -298,5 +300,7 @@
 #define VAR_MON_BOX_POS               0x8013
 #define VAR_UNUSED_0x8014             0x8014
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
+
+#define SPECIAL_VARS_END              0x8015
 
 #endif // GUARD_CONSTANTS_VARS_H
