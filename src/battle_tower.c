@@ -2044,20 +2044,20 @@ u16 RandomizeFacilityTrainerMonSet(u16 trainerId)
 {
     u8 level = SetFacilityPtrsGetLevel();
     const u16 *monSets = gFacilityTrainers[trainerId].monSets;
-    u8 bfMonCount = 0;
-    u32 monSetId = monSets[bfMonCount];
+    u8 numMonSets = 0;
+    u32 monSetId = monSets[numMonSets];
 
     while (monSetId != 0xFFFF)
     {
-        bfMonCount++;
-        monSetId = monSets[bfMonCount];
+        numMonSets++;
+        monSetId = monSets[numMonSets];
         if (monSetId == 0xFFFF)
             break;
     }
 
     do
     {
-        monSetId = monSets[Random() % bfMonCount];
+        monSetId = monSets[Random() % numMonSets];
     } while((level == 50 || level == 20) && monSetId > 849);
 
     return monSetId;

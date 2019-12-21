@@ -46,7 +46,7 @@ struct BattleDomeStruct
 {
     u8 arr[DOME_TOURNAMENT_TRAINERS_COUNT];
     u8 unk_10;
-    u8 unk_11[3];
+    u8 unk_11[2];
 };
 
 struct UnkStruct_860DD10
@@ -71,7 +71,7 @@ static int SelectOpponentMonsFromParty(int *arr, bool8 arg1);
 static void Task_ShowOpponentInfo(u8 taskId);
 static void sub_8190CD4(u8 taskId);
 static u8 sub_819221C(u8 taskId);
-static void InitDomeFacilityTrainersAndMons(void);
+static void SetFacilityTrainerAndMonPtrs(void);
 static int TrainerIdToTournamentId(u16 trainerId);
 static u16 TrainerIdOfPlayerOpponent(void);
 static void Task_ShowTourneyTree(u8 taskId);
@@ -80,7 +80,7 @@ static void CB2_BattleDome(void);
 static void VblankCb0_BattleDome(void);
 static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo);
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId);
-static int sub_8192F08(u8, u8*);
+static int BufferDomeWinString(u8, u8*);
 static u8 GetDomeBrainTrainerPicId(void);
 static u8 GetDomeBrainTrainerClass(void);
 static void CopyDomeBrainTrainerName(u8 *str);
@@ -122,399 +122,402 @@ static EWRAM_DATA u32 sPlayerPartyMaxHP = 0; // never read
 static EWRAM_DATA struct BattleDomeStruct *sBattleDomeStruct = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
 
-// Const rom data.
-static const u8 sMovePointsForDomeTrainers[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS_COUNT] =
+// Each move has an array of flags for different move qualities which contribute to a tourney trainers listed battle style (see sBattleStyleThresholds)
+static const u8 sBattleStyleMoveQualities[MOVES_COUNT][NUM_MOVE_QUALITIES] =
 {
-    [MOVE_NONE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_POUND] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_KARATE_CHOP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_DOUBLE_SLAP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_COMET_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_MEGA_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_PAY_DAY] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_FIRE_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_ICE_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_THUNDER_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SCRATCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_VICE_GRIP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_GUILLOTINE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_RAZOR_WIND] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SWORDS_DANCE] = {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    [MOVE_CUT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_GUST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_WING_ATTACK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_WHIRLWIND] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FLY] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BIND] = {0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SLAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_VINE_WHIP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_STOMP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_DOUBLE_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_MEGA_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_JUMP_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROLLING_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SAND_ATTACK] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_HEADBUTT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_HORN_ATTACK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FURY_ATTACK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_HORN_DRILL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_TACKLE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BODY_SLAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_WRAP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_TAKE_DOWN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_THRASH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_DOUBLE_EDGE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_TAIL_WHIP] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_POISON_STING] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_TWINEEDLE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_PIN_MISSILE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_LEER] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_BITE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_GROWL] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROAR] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SING] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SUPERSONIC] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SONIC_BOOM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_DISABLE] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ACID] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_EMBER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_FLAMETHROWER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    [MOVE_MIST] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_WATER_GUN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_HYDRO_PUMP] = {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0},
-    [MOVE_SURF] = {1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0},
-    [MOVE_ICE_BEAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    [MOVE_BLIZZARD] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1},
-    [MOVE_PSYBEAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_BUBBLE_BEAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_AURORA_BEAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_HYPER_BEAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0},
-    [MOVE_PECK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_DRILL_PECK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SUBMISSION] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_LOW_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_COUNTER] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0},
-    [MOVE_SEISMIC_TOSS] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_STRENGTH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ABSORB] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_MEGA_DRAIN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_LEECH_SEED] = {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_GROWTH] = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_RAZOR_LEAF] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SOLAR_BEAM] = {1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0},
-    [MOVE_POISON_POWDER] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_STUN_SPORE] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SLEEP_POWDER] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_PETAL_DANCE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_STRING_SHOT] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_DRAGON_RAGE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FIRE_SPIN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_THUNDER_SHOCK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_THUNDERBOLT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    [MOVE_THUNDER_WAVE] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_THUNDER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1},
-    [MOVE_ROCK_THROW] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_EARTHQUAKE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0},
-    [MOVE_FISSURE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0},
-    [MOVE_DIG] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_TOXIC] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_CONFUSION] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_PSYCHIC] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    [MOVE_HYPNOSIS] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_MEDITATE] = {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_AGILITY] = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_QUICK_ATTACK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_RAGE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_TELEPORT] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_NIGHT_SHADE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_MIMIC] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SCREECH] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_DOUBLE_TEAM] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_RECOVER] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_HARDEN] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_MINIMIZE] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SMOKESCREEN] = {0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_CONFUSE_RAY] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_WITHDRAW] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_DEFENSE_CURL] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BARRIER] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_LIGHT_SCREEN] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_HAZE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_REFLECT] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_FOCUS_ENERGY] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BIDE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_METRONOME] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    [MOVE_MIRROR_MOVE] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    [MOVE_SELF_DESTRUCT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0},
-    [MOVE_EGG_BOMB] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0},
-    [MOVE_LICK] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SMOG] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SLUDGE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_BONE_CLUB] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_FIRE_BLAST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1},
-    [MOVE_WATERFALL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_CLAMP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SWIFT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SKULL_BASH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0},
-    [MOVE_SPIKE_CANNON] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_CONSTRICT] = {0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_AMNESIA] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_KINESIS] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SOFT_BOILED] = {0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_HI_JUMP_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_GLARE] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_DREAM_EATER] = {1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0},
-    [MOVE_POISON_GAS] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BARRAGE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_LEECH_LIFE] = {0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_LOVELY_KISS] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SKY_ATTACK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1},
-    [MOVE_TRANSFORM] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BUBBLE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_DIZZY_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SPORE] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FLASH] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_PSYWAVE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SPLASH] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ACID_ARMOR] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_CRABHAMMER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0},
-    [MOVE_EXPLOSION] = {0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0},
-    [MOVE_FURY_SWIPES] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BONEMERANG] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_REST] = {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROCK_SLIDE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_HYPER_FANG] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SHARPEN] = {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_CONVERSION] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_TRI_ATTACK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SUPER_FANG] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SLASH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SUBSTITUTE] = {0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_STRUGGLE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_SKETCH] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
-    [MOVE_TRIPLE_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_THIEF] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SPIDER_WEB] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_MIND_READER] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_NIGHTMARE] = {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FLAME_WHEEL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SNORE] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_CURSE] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_FLAIL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_CONVERSION_2] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_AEROBLAST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0},
-    [MOVE_COTTON_SPORE] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_REVERSAL] = {1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SPITE] = {0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_POWDER_SNOW] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_PROTECT] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0},
-    [MOVE_MACH_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SCARY_FACE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_FAINT_ATTACK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SWEET_KISS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BELLY_DRUM] = {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SLUDGE_BOMB] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1},
-    [MOVE_MUD_SLAP] = {0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_OCTAZOOKA] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SPIKES] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ZAP_CANNON] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1},
-    [MOVE_FORESIGHT] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_DESTINY_BOND] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_PERISH_SONG] = {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_ICY_WIND] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_DETECT] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_BONE_RUSH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_LOCK_ON] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_OUTRAGE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1},
-    [MOVE_SANDSTORM] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_GIGA_DRAIN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_ENDURE] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_CHARM] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROLLOUT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_FALSE_SWIPE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SWAGGER] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_MILK_DRINK] = {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SPARK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_FURY_CUTTER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_STEEL_WING] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_MEAN_LOOK] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_ATTRACT] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SLEEP_TALK] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    [MOVE_HEAL_BELL] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_RETURN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_PRESENT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
-    [MOVE_FRUSTRATION] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SAFEGUARD] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_PAIN_SPLIT] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SACRED_FIRE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},
-    [MOVE_MAGNITUDE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_DYNAMIC_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1},
-    [MOVE_MEGAHORN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0},
-    [MOVE_DRAGON_BREATH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_BATON_PASS] = {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ENCORE] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_PURSUIT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_RAPID_SPIN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SWEET_SCENT] = {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_IRON_TAIL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1},
-    [MOVE_METAL_CLAW] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_VITAL_THROW] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_MORNING_SUN] = {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_SYNTHESIS] = {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_MOONLIGHT] = {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_HIDDEN_POWER] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_CROSS_CHOP] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0},
-    [MOVE_TWISTER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_RAIN_DANCE] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_SUNNY_DAY] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_CRUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_MIRROR_COAT] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_PSYCH_UP] = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_EXTREME_SPEED] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_ANCIENT_POWER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1},
-    [MOVE_SHADOW_BALL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_FUTURE_SIGHT] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROCK_SMASH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_WHIRLPOOL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_BEAT_UP] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FAKE_OUT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_UPROAR] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_STOCKPILE] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SPIT_UP] = {1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0},
-    [MOVE_SWALLOW] = {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_HEAT_WAVE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-    [MOVE_HAIL] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_TORMENT] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FLATTER] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_WILL_O_WISP] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_MEMENTO] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FACADE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FOCUS_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0},
-    [MOVE_SMELLING_SALT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FOLLOW_ME] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_NATURE_POWER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_CHARGE] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_TAUNT] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_HELPING_HAND] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_TRICK] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROLE_PLAY] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_WISH] = {0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ASSIST] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
-    [MOVE_INGRAIN] = {1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_SUPERPOWER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0},
-    [MOVE_MAGIC_COAT] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0},
-    [MOVE_RECYCLE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_REVENGE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0},
-    [MOVE_BRICK_BREAK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_YAWN] = {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_KNOCK_OFF] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_ENDEAVOR] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_ERUPTION] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0},
-    [MOVE_SKILL_SWAP] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_IMPRISON] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
-    [MOVE_REFRESH] = {0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_GRUDGE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_SNATCH] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
-    [MOVE_SECRET_POWER] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_DIVE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ARM_THRUST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_CAMOUFLAGE] = {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_TAIL_GLOW] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_LUSTER_PURGE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1},
-    [MOVE_MIST_BALL] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1},
-    [MOVE_FEATHER_DANCE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_TEETER_DANCE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_BLAZE_KICK] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_MUD_SPORT] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ICE_BALL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_NEEDLE_ARM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SLACK_OFF] = {0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_HYPER_VOICE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0},
-    [MOVE_POISON_FANG] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_CRUSH_CLAW] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_BLAST_BURN] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0},
-    [MOVE_HYDRO_CANNON] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0},
-    [MOVE_METEOR_MASH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1},
-    [MOVE_ASTONISH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_WEATHER_BALL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_AROMATHERAPY] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    [MOVE_FAKE_TEARS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_AIR_CUTTER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_OVERHEAT] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},
-    [MOVE_ODOR_SLEUTH] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROCK_TOMB] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SILVER_WIND] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1},
-    [MOVE_METAL_SOUND] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_GRASS_WHISTLE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_TICKLE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_COSMIC_POWER] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_WATER_SPOUT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0},
-    [MOVE_SIGNAL_BEAM] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SHADOW_PUNCH] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_EXTRASENSORY] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_SKY_UPPERCUT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SAND_TOMB] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_SHEER_COLD] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0},
-    [MOVE_MUDDY_WATER] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1},
-    [MOVE_BULLET_SEED] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_AERIAL_ACE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ICICLE_SPEAR] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_IRON_DEFENSE] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BLOCK] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-    [MOVE_HOWL] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_DRAGON_CLAW] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_FRENZY_PLANT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0},
-    [MOVE_BULK_UP] = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_BOUNCE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1},
-    [MOVE_MUD_SHOT] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    [MOVE_POISON_TAIL] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_COVET] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_VOLT_TACKLE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0},
-    [MOVE_MAGICAL_LEAF] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_WATER_SPORT] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_CALM_MIND] = {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_LEAF_BLADE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
-    [MOVE_DRAGON_DANCE] = {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_ROCK_BLAST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_SHOCK_WAVE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    [MOVE_WATER_PULSE] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-    [MOVE_DOOM_DESIRE] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0},
-    [MOVE_PSYCHO_BOOST] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1},
+    [MOVE_NONE]          = {0},
+    [MOVE_POUND]         = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_KARATE_CHOP]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_DOUBLE_SLAP]   = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_COMET_PUNCH]   = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_MEGA_PUNCH]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_PAY_DAY]       = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_FIRE_PUNCH]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_ICE_PUNCH]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_THUNDER_PUNCH] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SCRATCH]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_VICE_GRIP]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_GUILLOTINE]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_RAZOR_WIND]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SWORDS_DANCE]  = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_POPULAR] = 1},
+    [MOVE_CUT]           = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_GUST]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_WING_ATTACK]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_WHIRLWIND]     = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FLY]           = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_BIND]          = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SLAM]          = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_VINE_WHIP]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_STOMP]         = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_DOUBLE_KICK]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_MEGA_KICK]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_JUMP_KICK]     = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_ROLLING_KICK]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SAND_ATTACK]   = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_HEADBUTT]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_HORN_ATTACK]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FURY_ATTACK]   = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_HORN_DRILL]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_TACKLE]        = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_BODY_SLAM]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_WRAP]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_TAKE_DOWN]     = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_THRASH]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_DOUBLE_EDGE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_TAIL_WHIP]     = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_POISON_STING]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_TWINEEDLE]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_PIN_MISSILE]   = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_LEER]          = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_BITE]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_GROWL]         = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ROAR]          = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SING]          = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_SUPERSONIC]    = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_SONIC_BOOM]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_DISABLE]       = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_ACID]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_EMBER]         = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_FLAMETHROWER]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MIST]          = {0},
+    [MOVE_WATER_GUN]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_HYDRO_PUMP]    = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_SURF]          = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_ICE_BEAM]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_BLIZZARD]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_PSYBEAM]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_BUBBLE_BEAM]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_AURORA_BEAM]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_HYPER_BEAM]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_PECK]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_DRILL_PECK]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SUBMISSION]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_LOW_KICK]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_COUNTER]       = {[MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_SEISMIC_TOSS]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_STRENGTH]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ABSORB]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_MEGA_DRAIN]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_LEECH_SEED]    = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STATUS] = 1},
+    [MOVE_GROWTH]        = {[MOVE_QUALITY_STAT_RAISE] = 1},
+    [MOVE_RAZOR_LEAF]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_SOLAR_BEAM]    = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_POISON_POWDER] = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_STUN_SPORE]    = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_SLEEP_POWDER]  = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_PETAL_DANCE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_STRING_SHOT]   = {[MOVE_QUALITY_STAT_LOWER] = 1},
+    [MOVE_DRAGON_RAGE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FIRE_SPIN]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_THUNDER_SHOCK] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_THUNDERBOLT]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_THUNDER_WAVE]  = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_THUNDER]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_ROCK_THROW]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_EARTHQUAKE]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_FISSURE]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LUCK] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_DIG]           = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_TOXIC]         = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_CONFUSION]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_PSYCHIC]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_HYPNOSIS]      = {[MOVE_QUALITY_COMBO] = 1},
+    [MOVE_MEDITATE]      = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STAT_RAISE] = 1},
+    [MOVE_AGILITY]       = {[MOVE_QUALITY_STAT_RAISE] = 1},
+    [MOVE_QUICK_ATTACK]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_RAGE]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_TELEPORT]      = {0},
+    [MOVE_NIGHT_SHADE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_MIMIC]         = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SCREECH]       = {[MOVE_QUALITY_STAT_LOWER] = 1},
+    [MOVE_DOUBLE_TEAM]   = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_RECOVER]       = {0},
+    [MOVE_HARDEN]        = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_MINIMIZE]      = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_SMOKESCREEN]   = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_CONFUSE_RAY]   = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_WITHDRAW]      = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_DEFENSE_CURL]  = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_BARRIER]       = {[MOVE_QUALITY_DEF] = 1},
+    [MOVE_LIGHT_SCREEN]  = {[MOVE_QUALITY_DEF] = 1},
+    [MOVE_HAZE]          = {0},
+    [MOVE_REFLECT]       = {[MOVE_QUALITY_DEF] = 1},
+    [MOVE_FOCUS_ENERGY]  = {[MOVE_QUALITY_COMBO] = 1},
+    [MOVE_BIDE]          = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_METRONOME]     = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_MIRROR_MOVE]   = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_SELF_DESTRUCT] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_EGG_BOMB]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_LICK]          = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SMOG]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SLUDGE]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_BONE_CLUB]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_FIRE_BLAST]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_WATERFALL]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_CLAMP]         = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SWIFT]         = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_SKULL_BASH]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_SPIKE_CANNON]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_CONSTRICT]     = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_AMNESIA]       = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_KINESIS]       = {[MOVE_QUALITY_STAT_LOWER] = 1},
+    [MOVE_SOFT_BOILED]   = {[MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_HI_JUMP_KICK]  = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_GLARE]         = {[MOVE_QUALITY_STAT_LOWER] = 1},
+    [MOVE_DREAM_EATER]   = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_POISON_GAS]    = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_BARRAGE]       = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_LEECH_LIFE]    = {[MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_LOVELY_KISS]   = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_SKY_ATTACK]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_TRANSFORM]     = {[MOVE_QUALITY_RARE] = 1},
+    [MOVE_BUBBLE]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_DIZZY_PUNCH]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SPORE]         = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FLASH]         = {0},
+    [MOVE_PSYWAVE]       = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_SPLASH]        = {[MOVE_QUALITY_RARE] = 1},
+    [MOVE_ACID_ARMOR]    = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_CRABHAMMER]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_EXPLOSION]     = {[MOVE_QUALITY_RISKY] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_FURY_SWIPES]   = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_BONEMERANG]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_REST]          = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_HEAL] = 1},
+    [MOVE_ROCK_SLIDE]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_HYPER_FANG]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SHARPEN]       = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_CONVERSION]    = {[MOVE_QUALITY_DEF] = 1},
+    [MOVE_TRI_ATTACK]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SUPER_FANG]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_SLASH]         = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SUBSTITUTE]    = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_DEF] = 1},
+    [MOVE_STRUGGLE]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1}, // Odd that this is assigned qualities
+    [MOVE_SKETCH]        = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_LUCK] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_TRIPLE_KICK]   = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_THIEF]         = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SPIDER_WEB]    = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_MIND_READER]   = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_NIGHTMARE]     = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FLAME_WHEEL]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SNORE]         = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_CURSE]         = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_FLAIL]         = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_CONVERSION_2]  = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_AEROBLAST]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_COTTON_SPORE]  = {[MOVE_QUALITY_STAT_LOWER] = 1},
+    [MOVE_REVERSAL]      = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SPITE]         = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_RISKY] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_POWDER_SNOW]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_PROTECT]       = {[MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_POPULAR] = 1},
+    [MOVE_MACH_PUNCH]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SCARY_FACE]    = {0},
+    [MOVE_FAINT_ATTACK]  = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_SWEET_KISS]    = {0},
+    [MOVE_BELLY_DRUM]    = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STAT_RAISE] = 1},
+    [MOVE_SLUDGE_BOMB]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MUD_SLAP]      = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_OCTAZOOKA]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SPIKES]        = {[MOVE_QUALITY_COMBO] = 1},
+    [MOVE_ZAP_CANNON]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_LUCK] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_FORESIGHT]     = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_DESTINY_BOND]  = {[MOVE_QUALITY_RISKY] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_PERISH_SONG]   = {[MOVE_QUALITY_RISKY] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_ICY_WIND]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_DETECT]        = {[MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_BONE_RUSH]     = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_LOCK_ON]       = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_OUTRAGE]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SANDSTORM]     = {0},
+    [MOVE_GIGA_DRAIN]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_ENDURE]        = {[MOVE_QUALITY_DEF] = 1},
+    [MOVE_CHARM]         = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ROLLOUT]       = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_FALSE_SWIPE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SWAGGER]       = {[MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MILK_DRINK]    = {[MOVE_QUALITY_HEAL] = 1},
+    [MOVE_SPARK]         = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_FURY_CUTTER]   = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_STEEL_WING]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MEAN_LOOK]     = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_ATTRACT]       = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SLEEP_TALK]    = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_HEAL_BELL]     = {[MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_RETURN]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_PRESENT]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_FRUSTRATION]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SAFEGUARD]     = {[MOVE_QUALITY_DEF] = 1},
+    [MOVE_PAIN_SPLIT]    = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SACRED_FIRE]   = {[MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MAGNITUDE]     = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_DYNAMIC_PUNCH] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LUCK] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MEGAHORN]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_DRAGON_BREATH] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_BATON_PASS]    = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_RARE] = 1},
+    [MOVE_ENCORE]        = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_PURSUIT]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_RAPID_SPIN]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SWEET_SCENT]   = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_IRON_TAIL]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_METAL_CLAW]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_VITAL_THROW]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_MORNING_SUN]   = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_SYNTHESIS]     = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_MOONLIGHT]     = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_HIDDEN_POWER]  = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_CROSS_CHOP]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_TWISTER]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_RAIN_DANCE]    = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_SUNNY_DAY]     = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_CRUNCH]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MIRROR_COAT]   = {[MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_PSYCH_UP]      = {[MOVE_QUALITY_STAT_RAISE] = 1},
+    [MOVE_EXTREME_SPEED] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_ANCIENT_POWER] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SHADOW_BALL]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_FUTURE_SIGHT]  = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_DMG] = 1},
+    [MOVE_ROCK_SMASH]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_WHIRLPOOL]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_BEAT_UP]       = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FAKE_OUT]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_UPROAR]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_STOCKPILE]     = {[MOVE_QUALITY_COMBO] = 1},
+    [MOVE_SPIT_UP]       = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_SWALLOW]       = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_HEAL] = 1},
+    [MOVE_HEAT_WAVE]     = {[MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_HAIL]          = {0},
+    [MOVE_TORMENT]       = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FLATTER]       = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_WILL_O_WISP]   = {[MOVE_QUALITY_STATUS] = 1},
+    [MOVE_MEMENTO]       = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FACADE]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FOCUS_PUNCH]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_SMELLING_SALT] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FOLLOW_ME]     = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_NATURE_POWER]  = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_CHARGE]        = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_TAUNT]         = {[MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_HELPING_HAND]  = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_TRICK]         = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ROLE_PLAY]     = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_WISH]          = {[MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ASSIST]        = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_INGRAIN]       = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_SUPERPOWER]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_MAGIC_COAT]    = {[MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_RECYCLE]       = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_REVENGE]       = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_BRICK_BREAK]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_YAWN]          = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_KNOCK_OFF]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_ENDEAVOR]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_ERUPTION]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_SKILL_SWAP]    = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_IMPRISON]      = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_REFRESH]       = {[MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_GRUDGE]        = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_SNATCH]        = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LUCK] = 1},
+    [MOVE_SECRET_POWER]  = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_DIVE]          = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ARM_THRUST]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_CAMOUFLAGE]    = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_TAIL_GLOW]     = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_LUSTER_PURGE]  = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MIST_BALL]     = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_FEATHER_DANCE] = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_TEETER_DANCE]  = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_BLAZE_KICK]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MUD_SPORT]     = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ICE_BALL]      = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_NEEDLE_ARM]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SLACK_OFF]     = {[MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_HYPER_VOICE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_POISON_FANG]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_CRUSH_CLAW]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_BLAST_BURN]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_HYDRO_CANNON]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_METEOR_MASH]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_ASTONISH]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_WEATHER_BALL]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_AROMATHERAPY]  = {[MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_FAKE_TEARS]    = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_AIR_CUTTER]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_OVERHEAT]      = {[MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_ODOR_SLEUTH]   = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_ROCK_TOMB]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SILVER_WIND]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_METAL_SOUND]   = {0},
+    [MOVE_GRASS_WHISTLE] = {0},
+    [MOVE_TICKLE]        = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_COSMIC_POWER]  = {0},
+    [MOVE_WATER_SPOUT]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_SIGNAL_BEAM]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SHADOW_PUNCH]  = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_EXTRASENSORY]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SKY_UPPERCUT]  = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_SAND_TOMB]     = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_SHEER_COLD]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LUCK] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_MUDDY_WATER]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_BULLET_SEED]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_AERIAL_ACE]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_ICICLE_SPEAR]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_IRON_DEFENSE]  = {[MOVE_QUALITY_DEF] = 1},
+    [MOVE_BLOCK]         = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_HOWL]          = {0},
+    [MOVE_DRAGON_CLAW]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_FRENZY_PLANT]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_BULK_UP]       = {[MOVE_QUALITY_COMBO] = 1},
+    [MOVE_BOUNCE]        = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_MUD_SHOT]      = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_POISON_TAIL]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_COVET]         = {[MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_VOLT_TACKLE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [MOVE_MAGICAL_LEAF]  = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_WATER_SPORT]   = {[MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_CALM_MIND]     = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STAT_RAISE] = 1},
+    [MOVE_LEAF_BLADE]    = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1},
+    [MOVE_DRAGON_DANCE]  = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STAT_RAISE] = 1},
+    [MOVE_ROCK_BLAST]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_SHOCK_WAVE]    = {[MOVE_QUALITY_DMG] = 1},
+    [MOVE_WATER_PULSE]   = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_ACCURATE] = 1, [MOVE_QUALITY_EFFECT] = 1},
+    [MOVE_DOOM_DESIRE]   = {[MOVE_QUALITY_RARE] = 1, [MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1},
+    [MOVE_PSYCHO_BOOST]  = {[MOVE_QUALITY_DMG] = 1, [MOVE_QUALITY_POWERFUL] = 1, [MOVE_QUALITY_STRONG] = 1, [MOVE_QUALITY_LOW_PP] = 1, [MOVE_QUALITY_EFFECT] = 1},
 };
 
-static const u8 gUnknown_0860C988[][DOME_TOURNAMENT_TRAINERS_COUNT] =
+// This array is searched in-order to determine what battle style a tourney trainer uses. 
+// If the sum of the quality flags for the party's moves meets/exceeds all the point totals of an element, then they use that battle style
+static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_QUALITIES] =
 {
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0},
-    {1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0},
-    {0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0},
-    {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0},
-    {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    [DOME_BATTLE_STYLE_RISKY]           = {[MOVE_QUALITY_RISKY] = 1},
+    [DOME_BATTLE_STYLE_STALL]           = {[MOVE_QUALITY_HEAL] = 2, [MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_DEF] = 2},
+    [DOME_BATTLE_STYLE_VARIED]          = {[MOVE_QUALITY_COMBO] = 1, [MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_STATUS] = 1, [MOVE_QUALITY_DEF] = 1},
+    [DOME_BATTLE_STYLE_COMBO_HIGH]      = {[MOVE_QUALITY_COMBO] = 3},
+    [DOME_BATTLE_STYLE_RARE_MOVES]      = {[MOVE_QUALITY_RARE] = 2},
+    [DOME_BATTLE_STYLE_RARE_MOVE]       = {[MOVE_QUALITY_RARE] = 1},
+    [DOME_BATTLE_STYLE_HP]              = {[MOVE_QUALITY_HEAL] = 3},
+    [DOME_BATTLE_STYLE_STORE_POWER]     = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_HEAL] = 1},
+    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = {[MOVE_QUALITY_STAT_LOWER] = 1, [MOVE_QUALITY_STATUS] = 1},
+    [DOME_BATTLE_STYLE_LUCK]            = {[MOVE_QUALITY_LUCK] = 2},
+    [DOME_BATTLE_STYLE_10]              = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_DEF] = 1, [MOVE_QUALITY_POPULAR] = 1, [MOVE_QUALITY_STRONG] = 1},
+    [DOME_BATTLE_STYLE_LOW_PP]          = {[MOVE_QUALITY_LOW_PP] = 3},
+    [DOME_BATTLE_STYLE_STATUS_ATK]      = {[MOVE_QUALITY_STAT_RAISE] = 1, [MOVE_QUALITY_STATUS] = 1},
+    [DOME_BATTLE_STYLE_ENDURE]          = {[MOVE_QUALITY_HEAL] = 2, [MOVE_QUALITY_DEF] = 2},
+    [DOME_BATTLE_STYLE_STATUS]          = {[MOVE_QUALITY_STATUS] = 2},
+    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = {[MOVE_QUALITY_ACCURATE] = 3, [MOVE_QUALITY_STRONG] = 3},
+    [DOME_BATTLE_STYLE_AGGRESSIVE]      = {[MOVE_QUALITY_STRONG] = 4},
+    [DOME_BATTLE_STYLE_DEF]             = {[MOVE_QUALITY_DEF] = 3},
+    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = {[MOVE_QUALITY_STAT_LOWER] = 2, [MOVE_QUALITY_STATUS] = 2}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_ENFEEBLE_LOW will always succeed before it
+    [DOME_BATTLE_STYLE_POPULAR_POWER]   = {[MOVE_QUALITY_POWERFUL] = 3, [MOVE_QUALITY_POPULAR] = 3},
+    [DOME_BATTLE_STYLE_COMBO_LOW]       = {[MOVE_QUALITY_COMBO] = 2},
+    [DOME_BATTLE_STYLE_ACCURATE]        = {[MOVE_QUALITY_HEAL] = 1, [MOVE_QUALITY_ACCURATE] = 3},
+    [DOME_BATTLE_STYLE_POWERFUL]        = {[MOVE_QUALITY_POWERFUL] = 4},
+    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = {[MOVE_QUALITY_DMG] = 7},
+    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = {[MOVE_QUALITY_DEF] = 4}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_DEF will always succeed before it
+    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = {[MOVE_QUALITY_POPULAR] = 2, [MOVE_QUALITY_STRONG] = 4},
+    [DOME_BATTLE_STYLE_EFFECTS]         = {[MOVE_QUALITY_EFFECT] = 4},
+    [DOME_BATTLE_STYLE_BALANCED]        = {0}, // If no other thresholds are met, this battle style is used
+    [DOME_BATTLE_STYLE_UNUSED1]         = {0}, // Here below is unreachable
+    [DOME_BATTLE_STYLE_UNUSED2]         = {0},
+    [DOME_BATTLE_STYLE_UNUSED3]         = {0},
+  //[DOME_BATTLE_STYLE_UNUSED4]         = {0}, // Excluded here, presumably was meant to be a style just for Dome Ace Tucker
 };
 static const u8 sUnusedArray[] =
 {
@@ -564,7 +567,7 @@ static const u8 sTourneyTreeCursorMovementMap[][5][4]=
     {{0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}, {0x0f, 0x08, 0x08, 0x00}},
 };
 
-static const struct BgTemplate gUnknown_0860CE74[4] =
+static const struct BgTemplate sTourneyTreeBgTemplates[4] =
 {
     {
         .bg = 0,
@@ -644,7 +647,7 @@ static const struct BgTemplate sOpponentInfoBgTemplates[4] =
     },
 };
 
-static const struct WindowTemplate gUnknown_0860CE94[] =
+static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -1074,7 +1077,17 @@ static const struct SpriteTemplate gUnknown_0860D068 =
     .callback = sub_8190C6C
 };
 
-static const u8 sTourneyTreeTrainerIds[] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
+// Organized by seed starting position, i.e. seed 0 battles seed 8 first
+static const u8 sTourneyTreeTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] = 
+{
+     0,  8, 
+    12,  4, 
+     7, 15, 
+    11,  3, 
+     2, 10, 
+    14,  6, 
+     5, 13, 
+     9, 1};
 
 static void (* const sBattleDomeFunctions[])(void) =
 {
@@ -1093,7 +1106,7 @@ static void (* const sBattleDomeFunctions[])(void) =
     [BATTLE_DOME_FUNC_RESOLVE_WINNERS]          = ResolveDomeRoundWinners,
     [BATTLE_DOME_FUNC_SAVE]                     = SaveDomeChallenge,
     [BATTLE_DOME_FUNC_INCREMENT_STREAK]         = IncrementDomeStreaks,
-    [BATTLE_DOME_FUNC_SET_TRAINERS]             = InitDomeFacilityTrainersAndMons,
+    [BATTLE_DOME_FUNC_SET_TRAINERS]             = SetFacilityTrainerAndMonPtrs,
     [BATTLE_DOME_FUNC_RESET_SKETCH]             = ResetSketchedMoves,
     [BATTLE_DOME_FUNC_RESTORE_HELD_ITEMS]       = RestoreDomePlayerPartyHeldItems,
     [BATTLE_DOME_FUNC_REDUCE_PARTY]             = ReduceDomePlayerPartyToSelectedMons,
@@ -1135,7 +1148,24 @@ static const u8 sIdToOpponentId[DOME_TOURNAMENT_TRAINERS_COUNT][DOME_ROUNDS_COUN
     [15] = {7,  4,  0, 8},
 };
 
-static const u8 gUnknown_0860D14C[] = {0x00, 0x08, 0x04, 0x0c, 0x07, 0x0f, 0x03, 0x0b, 0x02, 0x0a, 0x06, 0x0e, 0x05, 0x0d, 0x01, 0x09};
+static const u8 gUnknown_0860D14C[DOME_TOURNAMENT_TRAINERS_COUNT] = 
+{
+    0, 
+    8, 
+    4, 
+    12, 
+    7, 
+    15, 
+    3, 
+    11, 
+    2, 
+    10, 
+    6, 
+    14, 
+    5, 
+    13, 
+    1, 
+    9};
 
 static const u8 gUnknown_0860D15C[][4] =
 {
@@ -1165,84 +1195,86 @@ static const u8 gUnknown_0860D19C[DOME_ROUNDS_COUNT] =
     [DOME_FINAL]     = 30
 };
 
-static const u8 gUnknown_0860D1A0[][4] =
+static const u8 gUnknown_0860D1A0[][DOME_ROUNDS_COUNT] =
 {
-    {0x10, 0x18, 0x1c, 0x1e},
-    {0x11, 0x18, 0x1c, 0x1e},
-    {0x12, 0x19, 0x1c, 0x1e},
-    {0x13, 0x19, 0x1c, 0x1e},
-    {0x14, 0x1a, 0x1d, 0x1e},
-    {0x15, 0x1a, 0x1d, 0x1e},
-    {0x16, 0x1b, 0x1d, 0x1e},
-    {0x17, 0x1b, 0x1d, 0x1e},
+    {16, 24, 28, 30},
+    {17, 24, 28, 30},
+    {18, 25, 28, 30},
+    {19, 25, 28, 30},
+    {20, 26, 29, 30},
+    {21, 26, 29, 30},
+    {22, 27, 29, 30},
+    {23, 27, 29, 30},
 };
 
-static const u8 gUnknown_0860D1C0[] = {0x00, 0x0f, 0x08, 0x07, 0x03, 0x0c, 0x0b, 0x04, 0x01, 0x0e, 0x09, 0x06, 0x02, 0x0d, 0x0a, 0x05};
+static const u8 gUnknown_0860D1C0[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 15, 8, 7, 3, 12, 11, 4, 1, 14, 9, 6, 2, 13, 10, 5};
 
-static const u8 *const sBattleDomePotentialTexts[] =
+// Each tourney trainer has a text describing their potential, depending on their seed ranking for the current tourney
+// Dome Ace Tucker has their own separate potential text
+static const u8 *const sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT + 1] =
 {
-    gBattleDomeOpponentPotentialText1,
-    gBattleDomeOpponentPotentialText2,
-    gBattleDomeOpponentPotentialText3,
-    gBattleDomeOpponentPotentialText4,
-    gBattleDomeOpponentPotentialText5,
-    gBattleDomeOpponentPotentialText6,
-    gBattleDomeOpponentPotentialText7,
-    gBattleDomeOpponentPotentialText8,
-    gBattleDomeOpponentPotentialText9,
-    gBattleDomeOpponentPotentialText10,
-    gBattleDomeOpponentPotentialText11,
-    gBattleDomeOpponentPotentialText12,
-    gBattleDomeOpponentPotentialText13,
-    gBattleDomeOpponentPotentialText14,
-    gBattleDomeOpponentPotentialText15,
-    gBattleDomeOpponentPotentialText16,
-    gBattleDomeOpponentPotentialText17,
+    BattleDome_Text_Potential1, // Highest potential
+    BattleDome_Text_Potential2,
+    BattleDome_Text_Potential3,
+    BattleDome_Text_Potential4,
+    BattleDome_Text_Potential5,
+    BattleDome_Text_Potential6,
+    BattleDome_Text_Potential7,
+    BattleDome_Text_Potential8,
+    BattleDome_Text_Potential9,
+    BattleDome_Text_Potential10,
+    BattleDome_Text_Potential11,
+    BattleDome_Text_Potential12,
+    BattleDome_Text_Potential13,
+    BattleDome_Text_Potential14,
+    BattleDome_Text_Potential15,
+    BattleDome_Text_Potential16, // Lowest potential
+    BattleDome_Text_PotentialDomeAceTucker,
 };
 
-static const u8 *const sBattleDomeOpponentStyleTexts[] =
+static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
 {
-    gBattleDomeOpponentStyleText1,
-    gBattleDomeOpponentStyleText2,
-    gBattleDomeOpponentStyleText3,
-    gBattleDomeOpponentStyleText4,
-    gBattleDomeOpponentStyleText5,
-    gBattleDomeOpponentStyleText6,
-    gBattleDomeOpponentStyleText7,
-    gBattleDomeOpponentStyleText8,
-    gBattleDomeOpponentStyleText9,
-    gBattleDomeOpponentStyleText10,
-    gBattleDomeOpponentStyleText11,
-    gBattleDomeOpponentStyleText12,
-    gBattleDomeOpponentStyleText13,
-    gBattleDomeOpponentStyleText14,
-    gBattleDomeOpponentStyleText15,
-    gBattleDomeOpponentStyleText16,
-    gBattleDomeOpponentStyleText17,
-    gBattleDomeOpponentStyleText18,
-    gBattleDomeOpponentStyleText19,
-    gBattleDomeOpponentStyleText20,
-    gBattleDomeOpponentStyleText21,
-    gBattleDomeOpponentStyleText22,
-    gBattleDomeOpponentStyleText23,
-    gBattleDomeOpponentStyleText24,
-    gBattleDomeOpponentStyleText25,
-    gBattleDomeOpponentStyleText26,
-    gBattleDomeOpponentStyleText27,
-    gBattleDomeOpponentStyleText28,
-    gBattleDomeOpponentStyleTextUnused1,
-    gBattleDomeOpponentStyleTextUnused2,
-    gBattleDomeOpponentStyleTextUnused3,
-    gBattleDomeOpponentStyleTextUnused4,
+    [DOME_BATTLE_STYLE_RISKY]           = BattleDome_Text_StyleRiskDisaster,
+    [DOME_BATTLE_STYLE_STALL]           = BattleDome_Text_StyleEndureLongBattles,
+    [DOME_BATTLE_STYLE_VARIED]          = BattleDome_Text_StyleVariesTactics,
+    [DOME_BATTLE_STYLE_COMBO_HIGH]      = BattleDome_Text_StyleToughWinningPattern,
+    [DOME_BATTLE_STYLE_RARE_MOVES]      = BattleDome_Text_StyleUsesVeryRareMove,   // Seems like the text for these two was swapped
+    [DOME_BATTLE_STYLE_RARE_MOVE]       = BattleDome_Text_StyleUsesStartlingMoves, //
+    [DOME_BATTLE_STYLE_HP]              = BattleDome_Text_StyleConstantlyWatchesHP,
+    [DOME_BATTLE_STYLE_STORE_POWER]     = BattleDome_Text_StyleStoresAndLoosesPower,
+    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = BattleDome_Text_StyleEnfeeblesFoes,
+    [DOME_BATTLE_STYLE_LUCK]            = BattleDome_Text_StylePrefersLuckTactics,
+    [DOME_BATTLE_STYLE_10]              = BattleDome_Text_StyleRegalAtmosphere,
+    [DOME_BATTLE_STYLE_LOW_PP]          = BattleDome_Text_StylePowerfulLowPPMoves,
+    [DOME_BATTLE_STYLE_STATUS_ATK]      = BattleDome_Text_StyleEnfeebleThenAttack,
+    [DOME_BATTLE_STYLE_ENDURE]          = BattleDome_Text_StyleBattlesWhileEnduring,
+    [DOME_BATTLE_STYLE_STATUS]          = BattleDome_Text_StyleUpsetsFoesEmotionally,
+    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = BattleDome_Text_StyleStrongAndStraightforward,
+    [DOME_BATTLE_STYLE_AGGRESSIVE]      = BattleDome_Text_StyleAggressivelyStrongMoves,
+    [DOME_BATTLE_STYLE_DEF]             = BattleDome_Text_StyleCleverlyDodgesAttacks,
+    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = BattleDome_Text_StyleUsesUpsettingMoves,
+    [DOME_BATTLE_STYLE_POPULAR_POWER]   = BattleDome_Text_StyleUsesPopularMoves,
+    [DOME_BATTLE_STYLE_COMBO_LOW]       = BattleDome_Text_StyleHasPowerfulComboMoves,
+    [DOME_BATTLE_STYLE_ACCURATE]        = BattleDome_Text_StyleUsesHighProbabilityMoves,
+    [DOME_BATTLE_STYLE_POWERFUL]        = BattleDome_Text_StyleAggressivelySpectacularMoves,
+    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = BattleDome_Text_StyleEmphasizesOffenseOverDefense,
+    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = BattleDome_Text_StyleEmphasizesDefenseOverOffense,
+    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = BattleDome_Text_StyleAttacksQuicklyStrongMoves,
+    [DOME_BATTLE_STYLE_EFFECTS]         = BattleDome_Text_StyleUsesAddedEffectMoves,
+    [DOME_BATTLE_STYLE_BALANCED]        = BattleDome_Text_StyleUsesBalancedMixOfMoves,
+    [DOME_BATTLE_STYLE_UNUSED1]         = BattleDome_Text_StyleSampleMessage1,
+    [DOME_BATTLE_STYLE_UNUSED2]         = BattleDome_Text_StyleSampleMessage2,
+    [DOME_BATTLE_STYLE_UNUSED3]         = BattleDome_Text_StyleSampleMessage3,
+    [DOME_BATTLE_STYLE_UNUSED4]         = BattleDome_Text_StyleSampleMessage4,
 };
 
 static const u8 *const sBattleDomeOpponentStatsTexts[] =
 {
-    gBattleDomeOpponentStatsText1,
-    gBattleDomeOpponentStatsText2,
-    gBattleDomeOpponentStatsText3,
-    gBattleDomeOpponentStatsText4,
-    gBattleDomeOpponentStatsText5,
+    BattleDome_Text_EmphasizesHPAndAtk,
+    BattleDome_Text_EmphasizesHPAndDef,
+    BattleDome_Text_EmphasizesHPAndSpeed,
+    BattleDome_Text_EmphasizesHPAndSpAtk,
+    BattleDome_Text_EmphasizesHPAndSpDef,
     gBattleDomeOpponentStatsText6,
     gBattleDomeOpponentStatsText7,
     gBattleDomeOpponentStatsText8,
@@ -1253,13 +1285,13 @@ static const u8 *const sBattleDomeOpponentStatsTexts[] =
     gBattleDomeOpponentStatsText13,
     gBattleDomeOpponentStatsText14,
     gBattleDomeOpponentStatsText15,
-    gBattleDomeOpponentStatsText16,
+    BattleDome_Text_EmphasizesHP,
     gBattleDomeOpponentStatsText17,
     gBattleDomeOpponentStatsText18,
     gBattleDomeOpponentStatsText19,
     gBattleDomeOpponentStatsText20,
     gBattleDomeOpponentStatsText21,
-    gBattleDomeOpponentStatsText22,
+    BattleDome_Text_NeglectsHPAndAtk,
     gBattleDomeOpponentStatsText23,
     gBattleDomeOpponentStatsText24,
     gBattleDomeOpponentStatsText25,
@@ -1274,13 +1306,13 @@ static const u8 *const sBattleDomeOpponentStatsTexts[] =
     gBattleDomeOpponentStatsText34,
     gBattleDomeOpponentStatsText35,
     gBattleDomeOpponentStatsText36,
-    gBattleDomeOpponentStatsText37,
+    BattleDome_Text_NeglectsHP,
     gBattleDomeOpponentStatsText38,
     gBattleDomeOpponentStatsText39,
     gBattleDomeOpponentStatsText40,
     gBattleDomeOpponentStatsText41,
     gBattleDomeOpponentStatsText42,
-    gBattleDomeOpponentStatsText43,
+    BattleDome_Text_RaisesMonsWellBalanced,
 };
 
 static const u8 sInfoTrainerMonX[] = {0x68, 0x88, 0x68};
@@ -1289,7 +1321,7 @@ static const u8 sSpeciesNameTextYCoords[] = {0, 4, 0};
 
 static const u8 gUnknown_0860D349[] = {0x00, 0x05, 0x09, 0x0c, 0x0e, 0x00, 0x00};
 
-static const u8 *const sBattleDomeMatchNumberTexts[] =
+static const u8 *const sBattleDomeMatchNumberTexts[DOME_TOURNAMENT_MATCHES_COUNT] =
 {
     gBattleDomeMatchNumberText1,
     gBattleDomeMatchNumberText2,
@@ -1324,7 +1356,7 @@ static const u8 sFirstTrainerMonY[] = {0x38, 0x50, 0x68};
 static const u8 sSecondTrainerMonX[] = {0x90, 0x90, 0x90};
 static const u8 sSecondTrainerMonY[] = {0x38, 0x50, 0x68};
 
-static const u8 gUnknown_0860D3B4[] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
+static const u8 gUnknown_0860D3B4[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
 
 static const u8 gUnknown_0860D3C4[DOME_TOURNAMENT_MATCHES_COUNT][3] =
 {
@@ -2216,7 +2248,7 @@ static const struct UnkStruct_860DD10 gUnknown_0860dcdc[] =
     {.src = 0x602e, .y = 0x0b, .x = 0x0f},
 };
 
-static const struct UnkStruct_860DD10 * const gUnknown_0860DD10[DOME_TOURNAMENT_TRAINERS_COUNT][4] =
+static const struct UnkStruct_860DD10 * const gUnknown_0860DD10[DOME_TOURNAMENT_TRAINERS_COUNT][DOME_ROUNDS_COUNT] =
 {
     {gUnknown_0860d450, gUnknown_0860d460, gUnknown_0860d47c, gUnknown_0860d4a8},
     {gUnknown_0860dc84, gUnknown_0860dc94, gUnknown_0860dcb0, gUnknown_0860dcdc},
@@ -2236,7 +2268,7 @@ static const struct UnkStruct_860DD10 * const gUnknown_0860DD10[DOME_TOURNAMENT_
     {gUnknown_0860d70c, gUnknown_0860d71c, gUnknown_0860d738, gUnknown_0860d764},
 };
 
-static const u8 gUnknown_0860DE10[DOME_TOURNAMENT_TRAINERS_COUNT][4] =
+static const u8 gUnknown_0860DE10[DOME_TOURNAMENT_TRAINERS_COUNT][DOME_ROUNDS_COUNT] =
 {
     {0x04, 0x07, 0x0b, 0x0d},
     {0x04, 0x07, 0x0b, 0x0d},
@@ -2420,14 +2452,14 @@ static void InitDomeTrainers(void)
     int monTypesBits, monTypesCount;
     int trainerId;
     int monSetId;
-    u16 *statSums;
+    u16 *rankingScores;
     int *statValues;
     u8 ivs = 0;
 
     species[0] = 0;
     species[1] = 0;
     species[2] = 0;
-    statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
 
     gSaveBlock2Ptr->frontier.domeLvlMode = gSaveBlock2Ptr->frontier.lvlMode + 1;
@@ -2437,19 +2469,22 @@ static void InitDomeTrainers(void)
     DOME_TRAINERS[0].eliminatedAt = 0;
     DOME_TRAINERS[0].forfeited = FALSE;
 
+    // Store the data used to display party information on the player's tourney page
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         DOME_MONS[0][i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_SPECIES, NULL);
         for (j = 0; j < MAX_MON_MOVES; j++)
-            gSaveBlock2Ptr->frontier.field_EFC[i].moves[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + j, NULL);
+            gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + j, NULL);
         for (j = 0; j < NUM_STATS; j++)
-            gSaveBlock2Ptr->frontier.field_EFC[i].evs[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HP_EV + j, NULL);
+            gSaveBlock2Ptr->frontier.domePlayerPartyData[i].evs[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HP_EV + j, NULL);
 
-        gSaveBlock2Ptr->frontier.field_EFC[i].nature = GetNature(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1]);
+        gSaveBlock2Ptr->frontier.domePlayerPartyData[i].nature = GetNature(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1]);
     }
 
+    // Populate the tourney roster with random frontier trainers (dependent on streak)
     for (i = 1; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
+        // First 5/16 trainers are easier than the rest
         if (i > 5)
         {
             do
@@ -2503,21 +2538,27 @@ static void InitDomeTrainers(void)
         DOME_TRAINERS[i].forfeited = FALSE;
     }
 
+    // rankingScores is used to determine the seed (ranking) of the trainers
+    // rankingScores[0] is for the player, rankingScores[1-15] are for the opponent trainers
+
+    // Calculate player's ranking score
     monTypesBits = 0;
-    statSums[0] = 0;
+    rankingScores[0] = 0;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
+        // trainerId var re-used here as index of selected mons
         trainerId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
-        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_ATK, NULL);
-        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_DEF, NULL);
-        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPATK, NULL);
-        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPDEF, NULL);
-        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPEED, NULL);
-        statSums[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_MAX_HP, NULL);
+        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_ATK, NULL);
+        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_DEF, NULL);
+        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPATK, NULL);
+        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPDEF, NULL);
+        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPEED, NULL);
+        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_MAX_HP, NULL);
         monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type1];
         monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type2];
     }
 
+    // Count the number of types in the players party, to factor into the ranking
     for (monTypesCount = 0, j = 0; j < 32; j++)
     {
         if (monTypesBits & 1)
@@ -2526,12 +2567,13 @@ static void InitDomeTrainers(void)
     }
 
     monLevel = SetFacilityPtrsGetLevel();
-    statSums[0] += (monTypesCount * monLevel) / 20;
+    rankingScores[0] += (monTypesCount * monLevel) / 20;
 
+    // Calculate rankingScores for the opponent trainers
     for (i = 1; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         monTypesBits = 0;
-        statSums[i] = 0;
+        rankingScores[i] = 0;
         ivs = GetDomeTrainerMonIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
@@ -2541,12 +2583,12 @@ static void InitDomeTrainers(void)
                              gFacilityTrainerMons[DOME_MONS[i][j]].nature,
                              statValues);
 
-            statSums[i] += statValues[STAT_ATK];
-            statSums[i] += statValues[STAT_DEF];
-            statSums[i] += statValues[STAT_SPATK];
-            statSums[i] += statValues[STAT_SPDEF];
-            statSums[i] += statValues[STAT_SPEED];
-            statSums[i] += statValues[STAT_HP];
+            rankingScores[i] += statValues[STAT_ATK];
+            rankingScores[i] += statValues[STAT_DEF];
+            rankingScores[i] += statValues[STAT_SPATK];
+            rankingScores[i] += statValues[STAT_SPDEF];
+            rankingScores[i] += statValues[STAT_SPEED];
+            rankingScores[i] += statValues[STAT_HP];
             monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type1];
             monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type2];
         }
@@ -2557,30 +2599,32 @@ static void InitDomeTrainers(void)
                 monTypesCount++;
             monTypesBits >>= 1;
         }
-        statSums[i] += (monTypesCount * monLevel) / 20;
+        rankingScores[i] += (monTypesCount * monLevel) / 20;
     }
 
+    // Seed tourney trainers according to their ranking 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT - 1; i++)
     {
         for (j = i + 1; j < DOME_TOURNAMENT_TRAINERS_COUNT; j++)
         {
-            if (statSums[i] < statSums[j])
+            if (rankingScores[i] < rankingScores[j])
             {
-                SwapDomeTrainers(i, j, statSums);
+                SwapDomeTrainers(i, j, rankingScores);
             }
             else
             {
-                if (statSums[i] == statSums[j])
+                if (rankingScores[i] == rankingScores[j])
                 {
                     if (DOME_TRAINERS[j].trainerId == TRAINER_PLAYER)
-                        SwapDomeTrainers(i, j, statSums);
+                        SwapDomeTrainers(i, j, rankingScores);
                     else if (DOME_TRAINERS[i].trainerId > DOME_TRAINERS[j].trainerId)
-                        SwapDomeTrainers(i, j, statSums);
+                        SwapDomeTrainers(i, j, rankingScores);
                 }
             }
         }
     }
 
+    // Add Frontier Brain to the tourney if they should be fought at the end of it
     if (GetFrontierBrainStatus() != FRONTIER_BRAIN_NOT_READY)
     {
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -2589,6 +2633,7 @@ static void InitDomeTrainers(void)
                 break;
         }
 
+        // if i != 0, the below conditional is always TRUE
         if (gUnknown_0860D3F1[i][0] != 0)
         {
             j = 0;
@@ -2604,7 +2649,7 @@ static void InitDomeTrainers(void)
             DOME_MONS[j][i] = GetFrontierBrainMonSpecies(i);
     }
 
-    Free(statSums);
+    Free(rankingScores);
     Free(statValues);
 }
 
@@ -3276,6 +3321,7 @@ static u8 GetDomeTrainerMonIvs(u16 trainerId)
     return fixedIv;
 }
 
+// TODO: if 0xFF is returned, overflow in TrainerIdOfPlayerOpponent
 static int TournamentIdOfOpponent(int roundId, int trainerId)
 {
     int i, j, val;
@@ -3845,7 +3891,7 @@ static void sub_8190CD4(u8 taskId)
                 if (sBattleDomeStruct->unk_10 == 0)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
+                    BufferDomeWinString(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
                     trainerTournamentId = sBattleDomeStruct->unk_11[0];
@@ -3854,7 +3900,7 @@ static void sub_8190CD4(u8 taskId)
                 else if (sBattleDomeStruct->unk_10 == 2)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
+                    BufferDomeWinString(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
                     trainerTournamentId = sBattleDomeStruct->unk_11[1];
@@ -3961,7 +4007,7 @@ static void sub_8190CD4(u8 taskId)
                 if (sBattleDomeStruct->unk_10 == 0)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
+                    BufferDomeWinString(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
                     trainerTournamentId = sBattleDomeStruct->unk_11[0];
@@ -3970,7 +4016,7 @@ static void sub_8190CD4(u8 taskId)
                 else if (sBattleDomeStruct->unk_10 == 2)
                 {
                     matchNo = gTasks[taskId2].data[1] - 16;
-                    sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
+                    BufferDomeWinString(matchNo, sBattleDomeStruct->unk_11);
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
                     trainerTournamentId = sBattleDomeStruct->unk_11[1];
@@ -4488,14 +4534,14 @@ static u8 sub_819221C(u8 taskId)
         if (gMain.newKeys & DPAD_UP && sBattleDomeStruct->unk_10 == 0)
         {
             if (r5 == 0)
-                r5 = 15;
+                r5 = DOME_TOURNAMENT_TRAINERS_COUNT - 1;
             else
                 r5--;
             retVal = 1;
         }
         else if (gMain.newKeys & DPAD_DOWN && sBattleDomeStruct->unk_10 == 0)
         {
-            if (r5 == 15)
+            if (r5 == DOME_TOURNAMENT_TRAINERS_COUNT - 1)
                 r5 = 0;
             else
                 r5++;
@@ -4532,7 +4578,7 @@ static u8 sub_819221C(u8 taskId)
     {
         if (gMain.newKeys & DPAD_UP && sBattleDomeStruct->unk_10 == 1)
         {
-            if (r5 == 16)
+            if (r5 == DOME_TOURNAMENT_TRAINERS_COUNT)
                 r5 = gUnknown_0860D19C[roundId];
             else
                 r5--;
@@ -4541,7 +4587,7 @@ static u8 sub_819221C(u8 taskId)
         else if (gMain.newKeys & DPAD_DOWN && sBattleDomeStruct->unk_10 == 1)
         {
             if (r5 == gUnknown_0860D19C[roundId])
-                r5 = 16;
+                r5 = DOME_TOURNAMENT_TRAINERS_COUNT;
             else
                 r5++;
             retVal = 6;
@@ -4602,6 +4648,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     if (flags & 0x10)
         y = -160;
 
+    // Create trainer pic sprite
     if (trainerId == TRAINER_PLAYER)
         sBattleDomeStruct->arr[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
@@ -4612,7 +4659,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     if (flags & 0x1E)
         gSprites[sBattleDomeStruct->arr[arrId]].invisible = TRUE;
 
-    for (i = 0; i < 3; i++)
+    // Create party mon icons
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerId == TRAINER_PLAYER)
         {
@@ -4645,6 +4693,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         if (flags & 0x1E)
             gSprites[sBattleDomeStruct->arr[2 + i + arrId]].invisible = TRUE;
     }
+    
+    // Initialize the text printer
     textPrinter.fontId = 2;
     textPrinter.x = 0;
     textPrinter.y = 0;
@@ -4657,6 +4707,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
 
+    // Get class and trainer name
     i = 0;
     if (trainerId == TRAINER_PLAYER)
         j = gFacilityClassToTrainerClass[FACILITY_CLASS_BRENDAN];
@@ -4685,6 +4736,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         StringAppend(gStringVar1, gStringVar2);
     }
 
+    // Print class and trainer name
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, gStringVar1, 0xD0, textPrinter.letterSpacing);
     textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId;
@@ -4693,7 +4745,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     AddTextPrinter(&textPrinter, 0, NULL);
     textPrinter.letterSpacing = 0;
 
-    for (i = 0; i < 3; i++)
+    // Print names of the party mons
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         textPrinter.currentY = sSpeciesNameTextYCoords[i];
         if (trainerId == TRAINER_PLAYER)
@@ -4716,8 +4769,10 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
 
     PutWindowTilemap(windowId + 4);
     CopyWindowToVram(windowId + 4, 3);
+
+    // Print text about trainers potential in the tourney
     if (trainerId == TRAINER_FRONTIER_BRAIN)
-        textPrinter.currentChar = sBattleDomePotentialTexts[16];
+        textPrinter.currentChar = sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT];
     else
         textPrinter.currentChar = sBattleDomePotentialTexts[trainerTournamentId];
 
@@ -4728,39 +4783,44 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     textPrinter.currentY = 4;
     AddTextPrinter(&textPrinter, 0, NULL);
 
+    // Calculate move scores to determine the trainers battle style
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            for (k = 0; k < DOME_TOURNAMENT_TRAINERS_COUNT; k++)
+            for (k = 0; k < NUM_MOVE_QUALITIES; k++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    allocatedArray[k] += sMovePointsForDomeTrainers[GetFrontierBrainMonMove(i, j)][k];
+                    allocatedArray[k] += sBattleStyleMoveQualities[GetFrontierBrainMonMove(i, j)][k];
                 else if (trainerId == TRAINER_PLAYER)
-                    allocatedArray[k] += sMovePointsForDomeTrainers[gSaveBlock2Ptr->frontier.field_EFC[i].moves[j]][k];
+                    allocatedArray[k] += sBattleStyleMoveQualities[gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j]][k];
                 else
-                    allocatedArray[k] += sMovePointsForDomeTrainers[gFacilityTrainerMons[DOME_MONS[trainerTournamentId][i]].moves[j]][k];
+                    allocatedArray[k] += sBattleStyleMoveQualities[gFacilityTrainerMons[DOME_MONS[trainerTournamentId][i]].moves[j]][k];
             }
         }
     }
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_0860C988); i++)
+    // Get the battle style the trainer uses
+    // Each element of sBattleStyleThresholds is an array of point thresholds for particular move qualities
+    // If all the point thresholds in the array are satisfied, the player is considered to be using that battle style
+    for (i = 0; i < ARRAY_COUNT(sBattleStyleThresholds); i++)
     {
-        int r4 = 0;
+        int thresholdStatCount = 0;
 
-        for (k = 0, j = 0; j < DOME_TOURNAMENT_TRAINERS_COUNT; j++)
+        for (k = 0, j = 0; j < NUM_MOVE_QUALITIES; j++)
         {
-            if (gUnknown_0860C988[i][j] != 0)
+            if (sBattleStyleThresholds[i][j] != 0)
             {
-                r4++;
-                if (allocatedArray[j] != 0 && allocatedArray[j] >= gUnknown_0860C988[i][j])
-                    k++;
+                thresholdStatCount++;
+                if (allocatedArray[j] != 0 && allocatedArray[j] >= sBattleStyleThresholds[i][j])
+                    k++; // number of point thresholds met/exceeded
             }
         }
-        if (r4 == k)
-            break;
+        if (thresholdStatCount == k)
+            break; // All thresholds for battle style met/exceeded, player uses this battle style
     }
 
+    // Print the trainers battle style
     textPrinter.currentChar = sBattleDomeOpponentStyleTexts[i];
     textPrinter.y = 20;
     textPrinter.currentY = 20;
@@ -4769,6 +4829,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     for (i = 0; i < 18; i++)
         allocatedArray[i] = 0;
 
+    // Calculate EV/nature points for the stat portion of battle style
     if (trainerId == TRAINER_FRONTIER_BRAIN || trainerId == TRAINER_PLAYER)
     {
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -4778,15 +4839,15 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
                     allocatedArray[j] = GetFrontierBrainMonEvs(i, j);
                 else
-                    allocatedArray[j] = gSaveBlock2Ptr->frontier.field_EFC[i].evs[j];
+                    allocatedArray[j] = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].evs[j];
             }
-            allocatedArray[6] += allocatedArray[0];
+            allocatedArray[NUM_STATS] += allocatedArray[0];
             for (j = 0; j < 5; j++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
                     nature = GetFrontierBrainMonNature(i);
                 else
-                    nature = gSaveBlock2Ptr->frontier.field_EFC[i].nature;
+                    nature = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].nature;
 
                 if (gNatureStatTable[nature][j] > 0)
                 {
@@ -4803,14 +4864,14 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
                 }
             }
         }
-        for (j = 0, i = 0; i < 6; i++)
-            j += allocatedArray[6 + i];
-        for (i = 0; i < 6; i++)
-            allocatedArray[i] = (allocatedArray[6 + i] * 100) / j;
+        for (j = 0, i = 0; i < NUM_STATS; i++)
+            j += allocatedArray[NUM_STATS + i];
+        for (i = 0; i < NUM_STATS; i++)
+            allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
     }
     else
     {
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
             int evBits = gFacilityTrainerMons[DOME_MONS[trainerTournamentId][i]].evSpread;
             for (k = 0, j = 0; j < NUM_STATS; j++)
@@ -4829,7 +4890,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
                 evBits >>= 1;
             }
 
-            allocatedArray[6] += allocatedArray[0];
+            allocatedArray[NUM_STATS] += allocatedArray[0];
             for (j = 0; j < 5; j++)
             {
                 nature = gFacilityTrainerMons[DOME_MONS[trainerTournamentId][i]].nature;
@@ -4848,10 +4909,10 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
                 }
             }
         }
-        for (j = 0, i = 0; i < 6; i++)
-            j += allocatedArray[i + 6];
-        for (i = 0; i < 6; i++)
-            allocatedArray[i] = (allocatedArray[6 + i] * 100) / j;
+        for (j = 0, i = 0; i < NUM_STATS; i++)
+            j += allocatedArray[i + NUM_STATS];
+        for (i = 0; i < NUM_STATS; i++)
+            allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
     }
 
     for (i = 0, j = 0, k = 0; k < 6; k++)
@@ -4931,7 +4992,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     else if (j == 1)
         i = allocatedArray[8] + 36;
     else
-        i = 42;
+        i = DOME_STATTEXT_WELL_BALANCED;
 
     textPrinter.currentChar = sBattleDomeOpponentStatsTexts[i];
     textPrinter.y = 36;
@@ -4940,11 +5001,12 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     Free(allocatedArray);
 }
 
-static int sub_8192F08(u8 matchNum, u8 *arg1)
+// TODO:
+static int BufferDomeWinString(u8 matchNum, u8 *arg1)
 {
     int i;
     u8 tournamentId;
-    int retVal = 0;
+    int winStringId = 0;
     int count = 0;
 
     for (i = gUnknown_0860D3C4[matchNum][0]; i < gUnknown_0860D3C4[matchNum][0] + gUnknown_0860D3C4[matchNum][1]; i++)
@@ -4963,6 +5025,7 @@ static int sub_8192F08(u8 matchNum, u8 *arg1)
         }
     }
 
+    // Neither trainer has been eliminated, battle hasn't occurred yet
     if (count == 2)
         return 0;
 
@@ -4977,9 +5040,10 @@ static int sub_8192F08(u8 matchNum, u8 *arg1)
             if (DOME_TRAINERS[tournamentId].eliminatedAt == gUnknown_0860D3C4[matchNum][2])
             {
                 StringCopy(gStringVar2, gMoveNames[gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]]);
-                retVal = DOME_TRAINERS[tournamentId].forfeited * 2;
+                winStringId = DOME_TRAINERS[tournamentId].forfeited * 2;
+
                 if (gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId] == MOVE_NONE && DOME_TRAINERS[tournamentId].forfeited == FALSE)
-                    retVal = 4;
+                    winStringId = 4;
             }
             else
             {
@@ -4997,9 +5061,9 @@ static int sub_8192F08(u8 matchNum, u8 *arg1)
     }
 
     if (matchNum == 14)
-        return retVal + 2;
+        return winStringId + 2;
     else
-        return retVal + 1;
+        return winStringId + 1;
 }
 
 static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
@@ -5027,7 +5091,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         y = -160;
 
     // Copy trainers information to handy arrays.
-    winStringId = sub_8192F08(matchNo, sBattleDomeStruct->unk_11);
+    winStringId = BufferDomeWinString(matchNo, sBattleDomeStruct->unk_11);
     for (i = 0; i < 2; i++)
     {
         tournamentIds[i] = sBattleDomeStruct->unk_11[i];
@@ -5066,7 +5130,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         gSprites[sBattleDomeStruct->arr[1 + arrId]].oam.paletteNum = 3;
 
     // Draw first trainer's pokemon icons.
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[0] == TRAINER_PLAYER)
         {
@@ -5106,7 +5170,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     }
 
     // Draw second trainer's pokemon icons.
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[1] == TRAINER_PLAYER)
         {
@@ -5153,9 +5217,9 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
     textPrinter.unk = 0;
-    textPrinter.fgColor = 14;
-    textPrinter.bgColor = 0;
-    textPrinter.shadowColor = 13;
+    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
+    textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
+    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
     StringExpandPlaceholders(gStringVar4, sBattleDomeWinTexts[winStringId]);
     textPrinter.currentChar = gStringVar4;
     textPrinter.windowId = windowId + 8;
@@ -5225,7 +5289,7 @@ static void ShowPreviousDomeResultsTourneyTree(void)
 {
     u8 taskId;
 
-    InitDomeFacilityTrainersAndMons();
+    SetFacilityTrainerAndMonPtrs();
     gSaveBlock2Ptr->frontier.lvlMode = gSaveBlock2Ptr->frontier.domeLvlMode - 1;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = DOME_FINAL;
     taskId = CreateTask(Task_ShowTourneyTree, 0);
@@ -5537,8 +5601,8 @@ static void Task_ShowTourneyTree(u8 taskId)
         EnableInterrupts(INTR_FLAG_HBLANK | INTR_FLAG_VBLANK);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_0860CE74, ARRAY_COUNT(gUnknown_0860CE74));
-        InitWindows(gUnknown_0860CE94);
+        InitBgsFromTemplates(0, sTourneyTreeBgTemplates, ARRAY_COUNT(sTourneyTreeBgTemplates));
+        InitWindows(sTourneyTreeWindowTemplates);
         DeactivateAllTextPrinters();
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
@@ -5589,7 +5653,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         LoadCompressedSpriteSheet(sDomeOptionsSpriteSheet);
         if (r10 == 0)
         {
-            for (i = 0; i < (unsigned) 31; i++)
+            for (i = 0; i < ARRAY_COUNT(gUnknown_0860D411); i++)
                 CreateSprite(&gUnknown_0860CFA8, gUnknown_0860D411[i][0], gUnknown_0860D411[i][1], 0);
             if (gTasks[taskId].data[4])
                 CreateSprite(&gUnknown_0860D008, 218, 12, 0);
@@ -5611,9 +5675,9 @@ static void Task_ShowTourneyTree(u8 taskId)
         textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x70, textPrinter.letterSpacing);
         textPrinter.currentY = 1;
         textPrinter.unk = 0;
-        textPrinter.fgColor = 14;
-        textPrinter.bgColor = 0;
-        textPrinter.shadowColor = 13;
+        textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
+        textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
+        textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
         AddTextPrinter(&textPrinter, 0, NULL);
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
         {
@@ -5624,7 +5688,7 @@ static void Task_ShowTourneyTree(u8 taskId)
             {
                 if (DOME_TRAINERS[i].isEliminated)
                 {
-                    if (DOME_TRAINERS[i].eliminatedAt != 0)
+                    if (DOME_TRAINERS[i].eliminatedAt != DOME_ROUND1)
                     {
                         var2 = DOME_TRAINERS[i].eliminatedAt - 1;
                         sub_81948EC(i, var2);
@@ -5639,7 +5703,7 @@ static void Task_ShowTourneyTree(u8 taskId)
             {
                 if (DOME_TRAINERS[i].isEliminated)
                 {
-                    if (DOME_TRAINERS[i].eliminatedAt != 0)
+                    if (DOME_TRAINERS[i].eliminatedAt != DOME_ROUND1)
                     {
                         var2 = DOME_TRAINERS[i].eliminatedAt - 1;
                         sub_81948EC(i, var2);
@@ -5666,26 +5730,26 @@ static void Task_ShowTourneyTree(u8 taskId)
             {
                 if (DOME_TRAINERS[i].trainerId == TRAINER_PLAYER)
                 {
-                    textPrinter.fgColor = 3;
-                    textPrinter.shadowColor = 4;
+                    textPrinter.fgColor = TEXT_COLOR_LIGHT_GREY;
+                    textPrinter.shadowColor = TEXT_COLOR_RED;
                 }
                 else
                 {
-                    textPrinter.fgColor = 11;
-                    textPrinter.shadowColor = 13;
+                    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
+                    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
                 }
             }
             else
             {
                 if (DOME_TRAINERS[i].trainerId == TRAINER_PLAYER)
                 {
-                    textPrinter.fgColor = 3;
-                    textPrinter.shadowColor = 4;
+                    textPrinter.fgColor = TEXT_COLOR_LIGHT_GREY;
+                    textPrinter.shadowColor = TEXT_COLOR_RED;
                 }
                 else
                 {
-                    textPrinter.fgColor = 14;
-                    textPrinter.shadowColor = 13;
+                    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
+                    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
                 }
             }
 
@@ -5785,9 +5849,9 @@ static void sub_8194950(u8 taskId)
             textPrinter.letterSpacing = 2;
             textPrinter.lineSpacing = 0;
             textPrinter.unk = 0;
-            textPrinter.fgColor = 11;
-            textPrinter.bgColor = 0;
-            textPrinter.shadowColor = 13;
+            textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
+            textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
+            textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
             {
                 CopyDomeTrainerName(gDisplayedStringBattle, DOME_TRAINERS[i].trainerId);
@@ -5940,7 +6004,7 @@ static void VblankCb1_BattleDome(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void InitDomeFacilityTrainersAndMons(void)
+static void SetFacilityTrainerAndMonPtrs(void)
 {
     gFacilityTrainerMons = gBattleFrontierMons;
     gFacilityTrainers = gBattleFrontierTrainers;
@@ -6001,7 +6065,7 @@ static void BufferLastDomeWinnerName(void)
 {
     int i;
 
-    InitDomeFacilityTrainersAndMons();
+    SetFacilityTrainerAndMonPtrs();
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         if (!DOME_TRAINERS[i].isEliminated)
@@ -6174,7 +6238,7 @@ int TrainerIdToDomeTournamentId(u16 trainerId)
 static u8 sub_81953E8(u8 tournamentId, u8 round)
 {
     u8 arr[2];
-    sub_8192F08(gUnknown_0860D1A0[gUnknown_0860D1C0[tournamentId] / 2][round] - 16, arr);
+    BufferDomeWinString(gUnknown_0860D1A0[gUnknown_0860D1C0[tournamentId] / 2][round] - 16, arr);
     if (tournamentId == arr[0])
         return arr[1];
     else

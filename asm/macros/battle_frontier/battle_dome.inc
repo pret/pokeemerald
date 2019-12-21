@@ -97,7 +97,7 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@
+	@ Sets the facility trainer/mon set pointers
 	.macro dome_settrainers
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_TRAINERS
 	special CallBattleDomeFunction

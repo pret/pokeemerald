@@ -297,7 +297,8 @@ struct BattleTowerEReaderTrainer
     /*0xB8*/ u32 checksum;
 };
 
-struct FrontierMonData
+// For displaying party information on the player's Battle Dome tourney page 
+struct DomeMonData
 {
     u16 moves[MAX_MON_MOVES];
     u8 evs[NUM_STATS];
@@ -388,7 +389,7 @@ struct BattleFrontier
     /*0xE6A*/ u16 verdanturfTentPrize;
     /*0xE6C*/ u16 fallarborTentPrize;
     /*0xE6E*/ u16 slateportTentPrize;
-    /*0xE70*/ struct RentalMon rentalMons[PARTY_SIZE];
+    /*0xE70*/ struct RentalMon rentalMons[FRONTIER_PARTY_SIZE * 2];
     /*0xEB8*/ u16 battlePoints;
     /*0xEBA*/ u16 cardBattlePoints;
     /*0xEBC*/ u32 battlesCount;
@@ -400,7 +401,7 @@ struct BattleFrontier
     /*0xEF9*/ u8 savedGame:1;
     /*0xEFA*/ u8 unused_EFA;
     /*0xEFB*/ u8 unused_EFB;
-    /*0xEFC*/ struct FrontierMonData field_EFC[FRONTIER_PARTY_SIZE];
+    /*0xEFC*/ struct DomeMonData domePlayerPartyData[FRONTIER_PARTY_SIZE];
 };
 
 struct ApprenticeQuestion
@@ -930,13 +931,13 @@ struct SaveBlock1
     /*0x271C*/ u8 playerRoomDecor[DECOR_MAX_PLAYERS_HOUSE];
     /*0x2728*/ u8 playerRoomDecorPos[DECOR_MAX_PLAYERS_HOUSE];
     /*0x2734*/ u8 decorDesk[10];
-    /*0x????*/ u8 decorChair[10];
-    /*0x????*/ u8 decorPlant[10];
-    /*0x????*/ u8 decorOrnament[30];
-    /*0x????*/ u8 decorMat[30];
-    /*0x????*/ u8 decorPoster[10];
-    /*0x????*/ u8 decorDoll[40];
-    /*0x????*/ u8 decorCushion[10];
+    /*0x273E*/ u8 decorChair[10];
+    /*0x2748*/ u8 decorPlant[10];
+    /*0x2752*/ u8 decorOrnament[30];
+    /*0x2770*/ u8 decorMat[30];
+    /*0x278E*/ u8 decorPoster[10];
+    /*0x2798*/ u8 decorDoll[40];
+    /*0x27C0*/ u8 decorCushion[10];
     /*0x27CA*/ u8 padding_27CA[2];
     /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
     /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];

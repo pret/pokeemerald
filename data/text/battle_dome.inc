@@ -1,163 +1,163 @@
-gBattleDomeOpponentPotentialText1::
+BattleDome_Text_Potential1::
 	.string "The best candidate to be a champ!$"
 
-gBattleDomeOpponentPotentialText2::
+BattleDome_Text_Potential2::
 	.string "A sure-finalist team.$"
 
-gBattleDomeOpponentPotentialText3::
+BattleDome_Text_Potential3::
 	.string "A likely top-three finisher.$"
 
-gBattleDomeOpponentPotentialText4::
+BattleDome_Text_Potential4::
 	.string "A candidate to finish first.$"
 
-gBattleDomeOpponentPotentialText5::
+BattleDome_Text_Potential5::
 	.string "A team with top-class potential.$"
 
-gBattleDomeOpponentPotentialText6::
+BattleDome_Text_Potential6::
 	.string "The dark horse team this tournament.$"
 
-gBattleDomeOpponentPotentialText7::
+BattleDome_Text_Potential7::
 	.string "A better-than-average team.$"
 
-gBattleDomeOpponentPotentialText8::
+BattleDome_Text_Potential8::
 	.string "This tournament's average team.$"
 
-gBattleDomeOpponentPotentialText9::
+BattleDome_Text_Potential9::
 	.string "A team with average potential.$"
 
-gBattleDomeOpponentPotentialText10::
+BattleDome_Text_Potential10::
 	.string "A weaker-than-average team.$"
 
-gBattleDomeOpponentPotentialText11::
+BattleDome_Text_Potential11::
 	.string "A team looking for its first win.$"
 
-gBattleDomeOpponentPotentialText12::
+BattleDome_Text_Potential12::
 	.string "One win will make this team proud.$"
 
-gBattleDomeOpponentPotentialText13::
+BattleDome_Text_Potential13::
 	.string "Overall, a weak team.$"
 
-gBattleDomeOpponentPotentialText14::
+BattleDome_Text_Potential14::
 	.string "A team with very low potential.$"
 
-gBattleDomeOpponentPotentialText15::
+BattleDome_Text_Potential15::
 	.string "A team unlikely to win the tournament.$"
 
-gBattleDomeOpponentPotentialText16::
+BattleDome_Text_Potential16::
 	.string "The team most unlikely to win.$"
 
-gBattleDomeOpponentPotentialText17::
+BattleDome_Text_PotentialDomeAceTucker::
 	.string "The perfect, invincible superstar!$"
 
-gBattleDomeOpponentStyleText1::
+BattleDome_Text_StyleRiskDisaster::
 	.string "Willing to risk total disaster at times.$"
 
-gBattleDomeOpponentStyleText2::
+BattleDome_Text_StyleEndureLongBattles::
 	.string "Skilled at enduring long battles.$"
 
-gBattleDomeOpponentStyleText3::
+BattleDome_Text_StyleVariesTactics::
 	.string "Varies tactics to suit the opponent.$"
 
-gBattleDomeOpponentStyleText4::
+BattleDome_Text_StyleToughWinningPattern::
 	.string "Has a tough winning pattern.$"
 
-gBattleDomeOpponentStyleText5::
+BattleDome_Text_StyleUsesVeryRareMove::
 	.string "Occasionally uses a very rare move.$"
 
-gBattleDomeOpponentStyleText6::
+BattleDome_Text_StyleUsesStartlingMoves::
 	.string "Uses startling and disruptive moves.$"
 
-gBattleDomeOpponentStyleText7::
+BattleDome_Text_StyleConstantlyWatchesHP::
 	.string "Constantly watches HP in battle.$"
 
-gBattleDomeOpponentStyleText8::
+BattleDome_Text_StyleStoresAndLoosesPower::
 	.string "Good at storing then loosing power.$"
 
-gBattleDomeOpponentStyleText9::
+BattleDome_Text_StyleEnfeeblesFoes::
 	.string "Skilled at enfeebling foes.$"
 
-gBattleDomeOpponentStyleText10::
+BattleDome_Text_StylePrefersLuckTactics::
 	.string "Prefers tactics that rely on luck.$"
 
-gBattleDomeOpponentStyleText11::
+BattleDome_Text_StyleRegalAtmosphere::
 	.string "Attacks with a regal atmosphere.$"
 
-gBattleDomeOpponentStyleText12::
+BattleDome_Text_StylePowerfulLowPPMoves::
 	.string "Attacks with powerful, low-PP moves.$"
 
-gBattleDomeOpponentStyleText13::
+BattleDome_Text_StyleEnfeebleThenAttack::
 	.string "Skilled at enfeebling, then attacking.$"
 
-gBattleDomeOpponentStyleText14::
+BattleDome_Text_StyleBattlesWhileEnduring::
 	.string "Battles while enduring all attacks.$"
 
-gBattleDomeOpponentStyleText15::
+BattleDome_Text_StyleUpsetsFoesEmotionally::
 	.string "Skilled at upsetting foes emotionally.$"
 
-gBattleDomeOpponentStyleText16::
+BattleDome_Text_StyleStrongAndStraightforward::
 	.string "Uses strong and straightforward moves.$"
 
-gBattleDomeOpponentStyleText17::
+BattleDome_Text_StyleAggressivelyStrongMoves::
 	.string "Aggressively uses strong moves.$"
 
-gBattleDomeOpponentStyleText18::
+BattleDome_Text_StyleCleverlyDodgesAttacks::
 	.string "Battles while cleverly dodging attacks.$"
 
-gBattleDomeOpponentStyleText19::
+BattleDome_Text_StyleUsesUpsettingMoves::
 	.string "Skilled at using upsetting attacks.$"
 
-gBattleDomeOpponentStyleText20::
+BattleDome_Text_StyleUsesPopularMoves::
 	.string "Uses many popular moves.$"
 
-gBattleDomeOpponentStyleText21::
+BattleDome_Text_StyleHasPowerfulComboMoves::
 	.string "Has moves for powerful combinations.$"
 
-gBattleDomeOpponentStyleText22::
+BattleDome_Text_StyleUsesHighProbabilityMoves::
 	.string "Uses high-probability attacks.$"
 
-gBattleDomeOpponentStyleText23::
+BattleDome_Text_StyleAggressivelySpectacularMoves::
 	.string "Aggressively uses spectacular moves.$"
 
-gBattleDomeOpponentStyleText24::
+BattleDome_Text_StyleEmphasizesOffenseOverDefense::
 	.string "Emphasizes offense over defense.$"
 
-gBattleDomeOpponentStyleText25::
+BattleDome_Text_StyleEmphasizesDefenseOverOffense::
 	.string "Emphasizes defense over offense.$"
 
-gBattleDomeOpponentStyleText26::
+BattleDome_Text_StyleAttacksQuicklyStrongMoves::
 	.string "Attacks quickly with strong moves.$"
 
-gBattleDomeOpponentStyleText27::
+BattleDome_Text_StyleUsesAddedEffectMoves::
 	.string "Often uses moves with added effects.$"
 
-gBattleDomeOpponentStyleText28::
+BattleDome_Text_StyleUsesBalancedMixOfMoves::
 	.string "Uses a well-balanced mix of moves.$"
 
-gBattleDomeOpponentStyleTextUnused1::
+BattleDome_Text_StyleSampleMessage1::
 	.string "This is sample message 1.$"
 
-gBattleDomeOpponentStyleTextUnused2::
+BattleDome_Text_StyleSampleMessage2::
 	.string "This is sample message 2.$"
 
-gBattleDomeOpponentStyleTextUnused3::
+BattleDome_Text_StyleSampleMessage3::
 	.string "This is sample message 3.$"
 
-gBattleDomeOpponentStyleTextUnused4::
+BattleDome_Text_StyleSampleMessage4::
 	.string "This is sample message 4.$"
 
-gBattleDomeOpponentStatsText1::
+BattleDome_Text_EmphasizesHPAndAtk::
 	.string "Emphasizes HP and ATTACK.$"
 
-gBattleDomeOpponentStatsText2::
+BattleDome_Text_EmphasizesHPAndDef::
 	.string "Emphasizes HP and DEFENSE.$"
 
-gBattleDomeOpponentStatsText3::
+BattleDome_Text_EmphasizesHPAndSpeed::
 	.string "Emphasizes HP and SPEED.$"
 
-gBattleDomeOpponentStatsText4::
+BattleDome_Text_EmphasizesHPAndSpAtk::
 	.string "Emphasizes HP and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText5::
+BattleDome_Text_EmphasizesHPAndSpDef::
 	.string "Emphasizes HP and SP. DEFENSE.$"
 
 gBattleDomeOpponentStatsText6::
@@ -190,7 +190,7 @@ gBattleDomeOpponentStatsText14::
 gBattleDomeOpponentStatsText15::
 	.string "Emphasizes SP. ATTACK and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText16::
+BattleDome_Text_EmphasizesHP::
 	.string "Emphasizes HP.$"
 
 gBattleDomeOpponentStatsText17::
@@ -208,7 +208,7 @@ gBattleDomeOpponentStatsText20::
 gBattleDomeOpponentStatsText21::
 	.string "Emphasizes SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText22::
+BattleDome_Text_NeglectsHPAndAtk::
 	.string "Neglects HP and ATTACK.$"
 
 gBattleDomeOpponentStatsText23::
@@ -253,7 +253,7 @@ gBattleDomeOpponentStatsText35::
 gBattleDomeOpponentStatsText36::
 	.string "Neglects SP. ATTACK and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText37::
+BattleDome_Text_NeglectsHP::
 	.string "Neglects HP.$"
 
 gBattleDomeOpponentStatsText38::
@@ -271,7 +271,7 @@ gBattleDomeOpponentStatsText41::
 gBattleDomeOpponentStatsText42::
 	.string "Neglects SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText43::
+BattleDome_Text_RaisesMonsWellBalanced::
 	.string "Raises POKéMON in a well-balanced way.$"
 
 gBattleDomeWinText1::
