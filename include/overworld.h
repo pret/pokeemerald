@@ -136,7 +136,7 @@ void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
 void sub_8086024(void);
-void sub_8086074(void);
+void CB2_ReturnToFieldCableClub(void);
 void CB2_ReturnToField(void);
 void CB2_ReturnToFieldLocal(void);
 void CB2_ReturnToFieldLink(void);

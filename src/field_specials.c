@@ -366,7 +366,7 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
     }
     *mapGroup = MAP_GROUP(ROUTE132);
     *y = 20;
-    return SS_TIDAL_LOCATION_OTHER;
+    return SS_TIDAL_LOCATION_CURRENTS;
 }
 
 bool32 ShouldDoWallyCall(void)

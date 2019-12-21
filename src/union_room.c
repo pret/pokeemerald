@@ -1424,7 +1424,7 @@ void sub_8014384(void)
         break;
     case 1:
         if (!FuncIsActiveTask(sub_80140E0))
-            SetMainCallback2(sub_8086074);
+            SetMainCallback2(CB2_ReturnToFieldCableClub);
         break;
     }
 
@@ -2880,7 +2880,7 @@ void sub_80156E0(u8 taskId)
         if (!gPaletteFade.active)
         {
             sUnionRoomTrade.field_0 = 1;
-            gFieldCallback = sub_80AF128;
+            gFieldCallback = FieldCB_ContinueScriptUnionRoom;
             ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_REGISTER, CB2_ReturnToField);
         }
         break;
@@ -2992,7 +2992,7 @@ void sub_80156E0(u8 taskId)
             memcpy(&gUnknown_02022C38, &data->field_0->arr[taskData[1]].unk.field_0.unk_00, sizeof(gUnknown_02022C38));
             gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].unk.field_0.type;
             gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].unk.field_0.species;
-            gFieldCallback = sub_80AF128;
+            gFieldCallback = FieldCB_ContinueScriptUnionRoom;
             ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_TRADE, CB2_ReturnToField);
             sub_80156B0(data);
             sUnionRoomTrade.field_8 = taskData[1];

@@ -391,7 +391,7 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	goto_if_eq CableClub_EventScript_WarpTo4PColosseum
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -404,7 +404,7 @@ CableClub_EventScript_PlayerApproachLinkRoomRight:: @ 827702B
 CableClub_EventScript_WarpTo4PColosseum:: @ 8277036
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -494,7 +494,7 @@ CableClub_EventScript_EnterTradeCenter:: @ 827713A
 	release
 	special SetCableClubWarp
 	setwarp MAP_TRADE_CENTER, 255, 5, 8
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -569,7 +569,7 @@ CableClub_EventScript_EnterRecordCorner:: @ 827724C
 	release
 	special SetCableClubWarp
 	setwarp MAP_RECORD_CORNER, 255, 8, 9
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -618,7 +618,7 @@ MossdeepCity_GameCorner_1F_EventScript_AbortMinigame:: @ 82772F9
 @ Unused
 CableClub_EventScript_CableClubWarp:: @ 8277306
 	special SetCableClubWarp
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 

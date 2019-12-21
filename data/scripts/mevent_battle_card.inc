@@ -4,7 +4,7 @@ MysteryEventScript_BattleCard:: @ 867513C
 	vgoto_if_eq MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, GET_CARD_BATTLES_WON
 	specialvar VAR_0x8008, GetMysteryEventCardVal
-	compare_var_to_value VAR_0x8008, REQUIRED_CARD_BATTLES
+	compare VAR_0x8008, REQUIRED_CARD_BATTLES
 	vgoto_if_ne MysteryEventScript_BattleCardInfo
 	lock
 	faceplayer
