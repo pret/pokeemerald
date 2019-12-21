@@ -1537,7 +1537,7 @@
 	.4byte \pointer
 	.endm
 
-	.macro warp8 map:req, byte:req, word1:req, word2:req
+	.macro warpsootopolislegend map:req, byte:req, word1:req, word2:req
 	.byte 0xe0
 	map \map
 	.byte \byte

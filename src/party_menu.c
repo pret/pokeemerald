@@ -3745,7 +3745,7 @@ static void Task_HandleFieldMoveExitAreaYesNoInput(u8 taskId)
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(Task_FieldMoveWaitForFade, 8);
     return TRUE;
 }
@@ -6143,7 +6143,7 @@ static void BufferMonSelection(void)
 
 bool8 CB2_FadeFromPartyMenu(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(Task_PartyMenuWaitForFade, 10);
     return TRUE;
 }
@@ -6268,7 +6268,7 @@ static void Task_BattlePyramidChooseMonHeldItems(u8 taskId)
 void MoveDeleterChooseMoveToForget(void)
 {
     ShowPokemonSummaryScreen(PSS_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
-    gFieldCallback = FieldCallback_ReturnToEventScript2;
+    gFieldCallback = FieldCB_ContinueScriptHandleMusic;
 }
 
 void GetNumMovesSelectedMonHas(void)
