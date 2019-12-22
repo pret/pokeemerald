@@ -2678,6 +2678,17 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     {
                         gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
                         gBattleMons[gBattlerTarget].item = 0;
+                        
+                        
+
+                        if (GetBattlerAbility(gBattlerTarget) == ABILITY_UNBURDEN)
+                        {
+                            gBattleResources->flags->flags[gBattlerTarget] |= RESOURCE_FLAG_UNBURDEN;
+                            RecordAbilityBattle(gBattlerTarget, ABILITY_UNBURDEN);
+                        }
+
+                        if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNBURDEN && gBattleResources->flags->flags[gBattlerAttacker] & RESOURCE_FLAG_UNBURDEN)
+                            gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
 
                         gActiveBattler = gBattlerAttacker;
                         BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
@@ -2795,6 +2806,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
                     gBattleMons[gEffectBattler].item = 0;
                     gWishFutureKnock.knockedOffMons[side] |= gBitTable[gBattlerPartyIndexes[gEffectBattler]];
+                    if (GetBattlerAbility(gEffectBattler) == ABILITY_UNBURDEN)
+                    {
+                        gBattleResources->flags->flags[gEffectBattler] |= RESOURCE_FLAG_UNBURDEN;
+                        RecordAbilityBattle(gEffectBattler, ABILITY_UNBURDEN);
+                    }
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_KnockedOff;
@@ -2929,6 +2945,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
                     gBattleMons[gEffectBattler].item = 0;
+
+                    if (GetBattlerAbility(gEffectBattler) == ABILITY_UNBURDEN)
+                    {
+                        gBattleResources->flags->flags[gEffectBattler] |= RESOURCE_FLAG_UNBURDEN;
+                        RecordAbilityBattle(gEffectBattler, ABILITY_UNBURDEN);
+                    }
+
                     gActiveBattler = gEffectBattler;
                     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gEffectBattler].item);
                     MarkBattlerForControllerExec(gActiveBattler);
@@ -2942,6 +2965,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
                     gBattleMons[gEffectBattler].item = 0;
+
+                    if (GetBattlerAbility(gEffectBattler) == ABILITY_UNBURDEN)
+                    {
+                        gBattleResources->flags->flags[gEffectBattler] |= RESOURCE_FLAG_UNBURDEN;
+                        RecordAbilityBattle(gEffectBattler, ABILITY_UNBURDEN);
+                    }
+
                     gActiveBattler = gEffectBattler;
                     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gEffectBattler].item);
                     MarkBattlerForControllerExec(gActiveBattler);
@@ -6118,6 +6148,12 @@ static void Cmd_removeitem(void)
         gBattleStruct->usedHeldItems[gActiveBattler] = gBattleMons[gActiveBattler].item;
 
     gBattleMons[gActiveBattler].item = 0;
+    
+    if (GetBattlerAbility(gActiveBattler) == ABILITY_UNBURDEN)
+    {
+        gBattleResources->flags->flags[gActiveBattler] |= RESOURCE_FLAG_UNBURDEN;
+        RecordAbilityBattle(gActiveBattler, ABILITY_UNBURDEN);
+    }
 
     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
     MarkBattlerForControllerExec(gActiveBattler);
@@ -10484,9 +10520,22 @@ static void Cmd_tryswapitems(void) // trick
             if (oldItemAtk != 0 && *newItemAtk != 0)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2; // attacker's item -> <- target's item
             else if (oldItemAtk == 0 && *newItemAtk != 0)
-                gBattleCommunication[MULTISTRING_CHOOSER] = 0; // nothing -> <- target's item
+                {
+                    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNBURDEN && gBattleResources->flags->flags[gBattlerAttacker] & RESOURCE_FLAG_UNBURDEN)
+                        gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
+
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0; // nothing -> <- target's item
+                }
             else
+            {
+                if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNBURDEN)
+                {
+                    gBattleResources->flags->flags[gBattlerAttacker] |= RESOURCE_FLAG_UNBURDEN;
+                    RecordAbilityBattle(gBattlerAttacker, ABILITY_UNBURDEN);
+                }
+
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1; // attacker's item -> <- nothing
+            }
         }
     }
 }
