@@ -582,4 +582,9 @@ extern const u8 SecretBase_EventScript_ShrubUseSecretPower[];
 // trainer hill
 extern const u8 TrainerHill_EventScript_TrainerBattle[];
 
+// Item Use
+extern u8 BerryTree_EventScript_ItemUsePlantBerry[];
+extern u8 BerryTree_EventScript_ItemUseWailmerPail[];
+extern u8 BattleFrontier_OutsideEast_EventScript_WaterSudowoodo[];
+
 #endif // GUARD_EVENT_SCRIPTS_H
