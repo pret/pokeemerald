@@ -852,7 +852,7 @@ static void mli0_load_map(u32 a1)
     LoadCurrentMapData();
     if (!(sUnknown_020322D8 & 1))
     {
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
             LoadBattlePyramidEventObjectTemplates();
         else if (InTrainerHill())
             LoadTrainerHillEventObjectTemplates();
@@ -880,7 +880,7 @@ static void mli0_load_map(u32 a1)
     RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
         InitTrainerHillMap();
@@ -1526,7 +1526,7 @@ static bool8 map_post_load_hook_exec(void)
         if (gFieldCallback)
             gFieldCallback();
         else
-            mapldr_default();
+            FieldCB_DefaultWarpExit();
 
         gFieldCallback = NULL;
     }
@@ -1565,7 +1565,7 @@ void CB2_WhiteOut(void)
         ResetInitialPlayerAvatarState();
         ScriptContext1_Init();
         ScriptContext2_Disable();
-        gFieldCallback = sub_80AF3C8;
+        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
         val = 0;
         do_load_map_stuff_loop(&val);
         SetFieldVBlankCallback();
@@ -1609,10 +1609,10 @@ void sub_8086024(void)
     }
 }
 
-void sub_8086074(void)
+void CB2_ReturnToFieldCableClub(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = sub_80AF314;
+    gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
     SetMainCallback2(c2_80567AC);
 }
 
@@ -1663,9 +1663,9 @@ void CB2_ReturnToFieldFromMultiplayer(void)
     ResetAllMultiplayerState();
 
     if (gWirelessCommType != 0)
-        gFieldCallback = sub_80AF314;
+        gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
     else
-        gFieldCallback = sub_80AF214;
+        gFieldCallback = FieldCB_ReturnToFieldCableLink;
 
     ScriptContext1_Init();
     ScriptContext2_Disable();
@@ -1675,28 +1675,28 @@ void CB2_ReturnToFieldFromMultiplayer(void)
 void CB2_ReturnToFieldWithOpenMenu(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback2 = sub_80AF6A4;
+    gFieldCallback2 = FieldCB_ReturnToFieldOpenStartMenu;
     CB2_ReturnToField();
 }
 
 void CB2_ReturnToFieldContinueScript(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = sub_80AF188;
+    gFieldCallback = FieldCB_ContinueScript;
     CB2_ReturnToField();
 }
 
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = FieldCallback_ReturnToEventScript2;
+    gFieldCallback = FieldCB_ContinueScriptHandleMusic;
     CB2_ReturnToField();
 }
 
 void sub_80861E8(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = sub_80AF3C8;
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     CB2_ReturnToField();
 }
 
@@ -1704,7 +1704,7 @@ static void sub_8086204(void)
 {
     if ((gMapHeader.flags & 0xF8) == 8 && SecretBaseMapPopupEnabled() == TRUE)
         ShowMapNamePopup();
-    sub_80AF3C8();
+    FieldCB_WarpExitFadeFromBlack();
 }
 
 void CB2_ContinueSavedGame(void)
@@ -1720,7 +1720,7 @@ void CB2_ContinueSavedGame(void)
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();
     trainerHillMapId = GetCurrentTrainerHillMapId();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         LoadBattlePyramidFloorEventObjectScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
         LoadTrainerHillFloorEventObjectScripts();
@@ -1730,7 +1730,7 @@ void CB2_ContinueSavedGame(void)
     UnfreezeEventObjects();
     DoTimeBasedEvents();
     sub_8084788();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(TRUE);
     else if (trainerHillMapId != 0)
         InitTrainerHillMap();

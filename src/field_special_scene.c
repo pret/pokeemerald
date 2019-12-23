@@ -179,7 +179,7 @@ void Task_HandleTruckSequence(u8 taskId)
         data[1]++;
         if (data[1] == SECONDS(2.5))
         {
-            pal_fill_black();
+            FadeInFromBlack();
             data[1] = 0;
             data[0] = 2;
         }
@@ -249,12 +249,12 @@ void EndTruckSequence(u8 taskId)
     }
 }
 
-bool8 sub_80FB59C(void)
+bool8 TrySetPortholeWarpDestination(void)
 {
     s8 mapGroup, mapNum;
     s16 x, y;
 
-    if (GetSSTidalLocation(&mapGroup, &mapNum, &x, &y))
+    if (GetSSTidalLocation(&mapGroup, &mapNum, &x, &y) != SS_TIDAL_LOCATION_CURRENTS)
     {
         return FALSE;
     }
@@ -336,11 +336,11 @@ static void ShowSSTidalWhileSailing(void)
         StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(DIR_WEST));
 }
 
-void sub_80FB768(void)
+void FieldCB_ShowPortholeView(void)
 {
     ShowSSTidalWhileSailing();
     gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();
 }
@@ -351,6 +351,6 @@ void LookThroughPorthole(void)
     FlagSet(FLAG_DONT_TRANSITION_MUSIC);
     FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
-    sub_80FB59C();
-    sub_80AF8B8();
+    TrySetPortholeWarpDestination();
+    DoPortholeWarp();
 }

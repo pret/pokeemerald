@@ -302,7 +302,7 @@ BerryBlender_EventScript_TryUseBerryBlender1: @ 8293CEE
 @ VAR_0x8009 here is the Blender number. 1 is top right, 2 is bottom right, 3 is bottom left
 BerryBlender_EventScript_DoBerryBlending: @ 8293D2C
 	copyvar VAR_0x8004, VAR_0x8009
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special DoBerryBlending
 	waitstate
 	releaseall
@@ -629,7 +629,7 @@ BerryBlender_EventScript_FourPlayerLink: @ 8294139
 
 BerryBlender_EventScript_DoLinkBerryBlending: @ 8294147
 	setvar VAR_0x8004, 0
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 240
 	removeobject 239
 	removeobject 238
@@ -678,7 +678,7 @@ BerryBlender_EventScript_LinkError: @ 829419D
 	end
 
 BerryBlender_EventScript_SpawnLinkPartners: @ 82941AA
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	specialvar VAR_RESULT, GetLinkPartnerNames
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_0x8008
@@ -687,7 +687,7 @@ BerryBlender_EventScript_SpawnLinkPartners: @ 82941AA
 	end
 
 BerryBlender_EventScript_LinkPlayersArrived: @ 82941C4
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	switch VAR_0x8008
 	case 2, BerryBlender_EventScript_TwoPlayerLink
 	case 3, BerryBlender_EventScript_ThreePlayerLink

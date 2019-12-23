@@ -892,19 +892,28 @@ const union AnimCmd *const gFieldEffectObjectImageAnimTable_JumpOutOfAsh[] =
     gFieldEffectObjectImageAnim_850D54C,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_JumpOutOfAsh = {0xFFFF, 0x100D, &gEventObjectBaseOam_16x16, gFieldEffectObjectImageAnimTable_JumpOutOfAsh, gFieldEffectObjectPicTable_JumpOutOfAsh, gDummySpriteAffineAnimTable, sub_80B7CAC};
+const struct SpriteTemplate gFieldEffectObjectTemplate_JumpOutOfAsh = 
+{
+    .tileTag = 0xFFFF, 
+    .paletteTag = 0x100D, 
+    .oam = &gEventObjectBaseOam_16x16, 
+    .anims = gFieldEffectObjectImageAnimTable_JumpOutOfAsh, 
+    .images = gFieldEffectObjectPicTable_JumpOutOfAsh, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCB_PopOutOfAsh
+};
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo2 = {gFieldEffectObjectPalette2, 0x100D};
 
-const struct SpriteFrameImage gFieldEffectObjectPicTable_Unknown33[] = {
-    overworld_frame(gFieldEffectObjectPic_Unknown33, 2, 2, 0),
-    overworld_frame(gFieldEffectObjectPic_Unknown33, 2, 2, 1),
-    overworld_frame(gFieldEffectObjectPic_Unknown33, 2, 2, 2),
-    overworld_frame(gFieldEffectObjectPic_Unknown33, 2, 2, 3),
-    overworld_frame(gFieldEffectObjectPic_Unknown33, 2, 2, 4),
+const struct SpriteFrameImage gFieldEffectObjectPicTable_LavaridgeGymWarp[] = {
+    overworld_frame(gFieldEffectObjectPic_LavaridgeGymWarp, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_LavaridgeGymWarp, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_LavaridgeGymWarp, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_LavaridgeGymWarp, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_LavaridgeGymWarp, 2, 2, 4),
 };
 
-const union AnimCmd gFieldEffectObjectImageAnim_850D5B0[] =
+const union AnimCmd gFieldEffectObjectImageAnim_LavaridgeGymWarp[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(1, 6),
@@ -914,12 +923,21 @@ const union AnimCmd gFieldEffectObjectImageAnim_850D5B0[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gFieldEffectObjectImageAnimTable_Unknown33[] =
+const union AnimCmd *const gFieldEffectObjectImageAnimTable_LavaridgeGymWarp[] =
 {
-    gFieldEffectObjectImageAnim_850D5B0,
+    gFieldEffectObjectImageAnim_LavaridgeGymWarp,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_Unknown33 = {0xFFFF, 0x100D, &gEventObjectBaseOam_16x16, gFieldEffectObjectImageAnimTable_Unknown33, gFieldEffectObjectPicTable_Unknown33, gDummySpriteAffineAnimTable, sub_80B7A58};
+const struct SpriteTemplate gFieldEffectObjectTemplate_LavaridgeGymWarp = 
+{
+    .tileTag = 0xFFFF, 
+    .paletteTag = 0x100D, 
+    .oam = &gEventObjectBaseOam_16x16, 
+    .anims = gFieldEffectObjectImageAnimTable_LavaridgeGymWarp, 
+    .images = gFieldEffectObjectPicTable_LavaridgeGymWarp, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCB_LavaridgeGymWarp
+};
 
 const struct SpriteFrameImage gFieldEffectObjectPicTable_Bubbles[] = {
     overworld_frame(gFieldEffectObjectPic_Bubbles, 2, 4, 0),

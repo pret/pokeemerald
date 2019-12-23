@@ -7,13 +7,13 @@ MysteryEventScript_OldSeaMap:: @ 86757F4
 	checkflag FLAG_CAUGHT_MEW
 	vgoto_if_eq OldSeaMap_Obtained
 	checkitem ITEM_OLD_SEA_MAP, 1
-	compare_var_to_value VAR_RESULT, TRUE
+	compare VAR_RESULT, TRUE
 	vgoto_if_eq OldSeaMap_Obtained
 	vmessage sText_MysteryGiftOldSeaMapForYou
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_OLD_SEA_MAP, 1
-	compare_var_to_value VAR_RESULT, FALSE
+	compare VAR_RESULT, FALSE
 	vgoto_if_eq OldSeaMap_NoBagSpace
 	giveitem_std ITEM_OLD_SEA_MAP
 	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND

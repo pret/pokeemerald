@@ -33,7 +33,6 @@ EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
 
 // extern text
-extern const u8 gExpandedPlaceholder_Empty[];
 extern const u8 gText_MoveOkBack[];
 extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
@@ -55,7 +54,7 @@ static const u8 *const sTransferredToPCMessages[] =
     gText_PkmnTransferredLanettesPCBoxFull
 };
 
-static const u8 gUnknown_0858BDC8[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
+static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
 
 static const struct BgTemplate gUnknown_0858BE00[] =
 {
@@ -222,7 +221,7 @@ static void NamingScreen_TurnOffScreen(void);
 static void NamingScreen_InitDisplayMode(void);
 static void VBlankCB_NamingScreen(void);
 static void sub_80E501C(void);
-static bool8 sub_80E503C(u8);
+static bool8 IsLetter(u8);
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
@@ -1527,8 +1526,8 @@ static void TaskDummy3(void)
 
 static const u8 sGenderColors[2][3] =
 {
-    {0, 9, 8},
-    {0, 5, 4}
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_BLUE},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED}
 };
 
 static void sub_80E49BC(void)
@@ -1679,8 +1678,8 @@ static void sub_80E4D10(void)
     for (i = 0; i < maxChars; i++)
     {
         temp[0] = gNamingScreenData->textBuffer[i];
-        temp[1] = gExpandedPlaceholder_Empty[0];
-        unk2 = (sub_80E503C(temp[0]) == 1) ? 2 : 0;
+        temp[1] = gText_ExpandedPlaceholder_Empty[0];
+        unk2 = (IsLetter(temp[0]) == TRUE) ? 2 : 0;
 
         AddTextPrinterParameterized(gNamingScreenData->windows[2], 1, temp, i * 8 + unk + unk2, 1, 0xFF, NULL);
     }
@@ -1690,17 +1689,17 @@ static void sub_80E4D10(void)
     PutWindowTilemap(gNamingScreenData->windows[2]);
 }
 
-struct TextColorThing   // needed because of alignment... it's so stupid
+struct TextColor   // Needed because of alignment
 {
     u8 colors[3][4];
 };
 
-static const struct TextColorThing sUnkColorStruct =
+static const struct TextColor sTextColorStruct =
 {
     {
-        {13, 1, 2},
-        {14, 1, 2},
-        {15, 1, 2}
+        {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY},
+        {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY},
+        {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY}
     }
 };
 
@@ -1711,11 +1710,11 @@ static const u8 sFillValues[KBPAGE_COUNT] =
     [KBPAGE_SYMBOLS] = PIXEL_FILL(0xF)
 };
 
-static const u8 *const sUnkColors[KBPAGE_COUNT] =
+static const u8 *const sKeyboardTextColors[KBPAGE_COUNT] =
 {
-    [KBPAGE_LETTERS_LOWER] = sUnkColorStruct.colors[1],
-    [KBPAGE_LETTERS_UPPER] = sUnkColorStruct.colors[0],
-    [KBPAGE_SYMBOLS] = sUnkColorStruct.colors[2]
+    [KBPAGE_LETTERS_LOWER] = sTextColorStruct.colors[1],
+    [KBPAGE_LETTERS_UPPER] = sTextColorStruct.colors[0],
+    [KBPAGE_SYMBOLS] = sTextColorStruct.colors[2]
 };
 
 static void sub_80E4DE4(u8 window, u8 page)
@@ -1726,7 +1725,7 @@ static void sub_80E4DE4(u8 window, u8 page)
 
     for (i = 0; i < KBROW_COUNT; i++)
     {
-        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sUnkColors[page], 0, sNamingScreenKeyboardText[page][i]);
+        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
     }
 
     PutWindowTilemap(window);
@@ -1768,7 +1767,7 @@ static void sub_80E4E5C(void)
 
 static void sub_80E4EF0(void)
 {
-    const u8 color[3] = { 15, 1, 2 };
+    const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
 
     FillWindowPixelBuffer(gNamingScreenData->windows[4], PIXEL_FILL(15));
     AddTextPrinterParameterized3(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
@@ -1816,13 +1815,13 @@ static void sub_80E501C(void)
     ShowBg(3);
 }
 
-static bool8 sub_80E503C(u8 character)
+static bool8 IsLetter(u8 character)
 {
     u8 i;
 
-    for (i = 0; gUnknown_0858BDC8[i] != EOS; i++)
+    for (i = 0; sText_AlphabetUpperLower[i] != EOS; i++)
     {
-        if (character == gUnknown_0858BDC8[i])
+        if (character == sText_AlphabetUpperLower[i])
             return FALSE;
     }
     return FALSE;

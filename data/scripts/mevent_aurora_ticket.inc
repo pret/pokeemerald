@@ -7,13 +7,13 @@ MysteryEventScript_AuroraTicket:: @ 867533C
 	checkflag FLAG_BATTLED_DEOXYS
 	vgoto_if_eq AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
-	compare_var_to_value VAR_RESULT, TRUE
+	compare VAR_RESULT, TRUE
 	vgoto_if_eq AuroraTicket_Obtained
 	vmessage sText_AuroraTicketForYou
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_AURORA_TICKET, 1
-	compare_var_to_value VAR_RESULT, FALSE
+	compare VAR_RESULT, FALSE
 	vgoto_if_eq AuroraTicket_NoBagSpace
 	giveitem_std ITEM_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND

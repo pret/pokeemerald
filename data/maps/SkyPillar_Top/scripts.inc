@@ -76,16 +76,16 @@ SkyPillar_Top_EventScript_RanFromRayquaza:: @ 8239771
 	end
 
 SkyPillar_Top_EventScript_DefeatedRayquaza2:: @ 823977C
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	releaseall
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza2:: @ 8239785
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	bufferspeciesname 0, VAR_0x8004
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	releaseall
