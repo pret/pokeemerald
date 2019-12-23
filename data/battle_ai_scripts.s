@@ -554,6 +554,8 @@ AI_CBM_AttackDown: @ 82DC387
 
 AI_CBM_DefenseDown: @ 82DC39C
 	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus10
+	get_ability AI_TARGET
+	if_equal ABILITY_BIG_PECKS, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpeedDown: @ 82DC3A9

@@ -3082,9 +3082,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
             effect = 1;
         }
-        else if ((gLastUsedAbility == ABILITY_DAZZLING
+        else if (((gLastUsedAbility == ABILITY_DAZZLING
                    || (IsBattlerAlive(battler ^= BIT_FLANK) && GetBattlerAbility(battler) == ABILITY_DAZZLING)
                    )
+                   || (gLastUsedAbility == ABILITY_QUEENLY_MAJESTY
+                   || (IsBattlerAlive(battler ^= BIT_FLANK) && GetBattlerAbility(battler) == ABILITY_QUEENLY_MAJESTY)
+                   ))
                  && GetChosenMovePriority(battler) > 0
                  && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
         {
@@ -3308,6 +3311,22 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ColorChangeActivates;
+                effect++;
+            }
+            break;
+        case ABILITY_GOOEY:
+        case ABILITY_TANGLING_HAIR:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerAttacker].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && TARGET_TURN_DAMAGED
+             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_SPD_MINUS_1;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
             break;
