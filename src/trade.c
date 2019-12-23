@@ -1988,73 +1988,28 @@ static void DrawTradeMenuPartyMonInfo(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 w
     sTradeMenuData->tilemapBuffer[(y - 1) * 32 + x + 1] = symbolTile;
 }
 
-// Very close but loop preamble not working.
-#ifdef NONMATCHING
 static void DrawTradeMenuPartyInfo(u8 whichParty)
 {
-    int i;
-
+    s32 i;
     for (i = 0; i < sTradeMenuData->partyCounts[whichParty]; i++)
     {
-        DrawTradeMenuPartyMonInfo(whichParty, i, 
-            sTradeMonLevelCoords[whichParty][i][0], 
-            sTradeMonLevelCoords[whichParty][i][1], 
-            sTradeMonBoxCoords[whichParty][i][0], 
-            sTradeMonBoxCoords[whichParty][i][1]);
+        const u8 (*r5)[2];
+        const u8 (*r4)[2];
+        u32 r0 = 3 * whichParty;
+        const u8 (*r1)[2][2] = sTradeMonLevelCoords;
+
+        r5 = r1[r0];
+        r4 = sTradeMonBoxCoords[r0];
+        DrawTradeMenuPartyMonInfo(
+            whichParty,
+            i,
+            r5[i][0],
+            r5[i][1],
+            r4[i][0],
+            r4[i][1]
+        );
     }
 }
-#else
-NAKED
-static void DrawTradeMenuPartyInfo(u8 whichParty)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    sub sp, 0x8\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    movs r7, 0\n\
-    ldr r0, =sTradeMenuData\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x36\n\
-    adds r0, r6\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    bge _08079E94\n\
-    lsls r0, r6, 1\n\
-    adds r0, r6\n\
-    ldr r1, =sTradeMonLevelCoords\n\
-    lsls r0, 2\n\
-    adds r5, r0, r1\n\
-    ldr r1, =sTradeMonBoxCoords\n\
-    adds r4, r0, r1\n\
-_08079E6A:\n\
-    lsls r1, r7, 24\n\
-    lsrs r1, 24\n\
-    ldrb r2, [r5]\n\
-    ldrb r3, [r5, 0x1]\n\
-    ldrb r0, [r4]\n\
-    str r0, [sp]\n\
-    ldrb r0, [r4, 0x1]\n\
-    str r0, [sp, 0x4]\n\
-    adds r0, r6, 0\n\
-    bl DrawTradeMenuPartyMonInfo\n\
-    adds r5, 0x2\n\
-    adds r4, 0x2\n\
-    adds r7, 0x1\n\
-    ldr r0, =sTradeMenuData\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x36\n\
-    adds r0, r6\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    blt _08079E6A\n\
-_08079E94:\n\
-    add sp, 0x8\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void ResetTradeMenuPartyPositions(u8 whichParty)
 {
@@ -2541,10 +2496,8 @@ int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct rfuP
     return CANT_REGISTER_MON;
 }
 
-// r6/r7 flip. Ugh.
 // Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade
 // Unlike later generations, this version of Spin Trade isnt only for Eggs
-#ifdef NONMATCHING
 int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
 {
     int i, version, versions, canTradeAnyMon, numMonsLeft;
@@ -2560,8 +2513,8 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
         }
     }
 
-    canTradeAnyMon = TRUE;
     versions = 0;
+    canTradeAnyMon = TRUE;
     for (i = 0; i < GetLinkPlayerCount(); i++)
     {
         version = gLinkPlayers[i].version & 0xFF;
@@ -2581,11 +2534,14 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
         struct LinkPlayer *player = &gLinkPlayers[i];
 
         // Does player not have National Dex
-        if (!(player->progressFlags & 0xF))
-            canTradeAnyMon = FALSE;
+        do
+        {
+            if (!(player->progressFlags & 0xF))
+                canTradeAnyMon = FALSE;
 
-        if (versions && (player->progressFlags / 16))
-            canTradeAnyMon = FALSE;
+            if (versions && (player->progressFlags / 16))
+                canTradeAnyMon = FALSE;
+        } while (0);
     }
 
     if (canTradeAnyMon == FALSE)
@@ -2611,154 +2567,6 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
     else
         return CAN_TRADE_MON;
 }
-#else
-NAKED
-int CanSpinTradeMon(struct Pokemon *mon, u16 a1)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0x18\n\
-	adds r6, r0, 0\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	mov r8, r1\n\
-	movs r5, 0\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	cmp r5, r0\n\
-	bge _0807A95A\n\
-	mov r4, sp\n\
-_0807A934:\n\
-	movs r0, 0x64\n\
-	muls r0, r5\n\
-	adds r0, r6, r0\n\
-	movs r1, 0x41\n\
-	bl GetMonData\n\
-	str r0, [r4]\n\
-	movs r1, 0xCE\n\
-	lsls r1, 1\n\
-	cmp r0, r1\n\
-	bne _0807A94E\n\
-	movs r0, 0\n\
-	str r0, [r4]\n\
-_0807A94E:\n\
-	adds r4, 0x4\n\
-	adds r5, 0x1\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	cmp r5, r0\n\
-	blt _0807A934\n\
-_0807A95A:\n\
-	movs r7, 0\n\
-	movs r6, 0x1\n\
-	movs r5, 0\n\
-	ldr r4, =gLinkPlayers\n\
-	b _0807A980\n\
-	.pool\n\
-_0807A96C:\n\
-	ldrb r0, [r4]\n\
-	subs r0, 0x4\n\
-	cmp r0, 0x1\n\
-	bhi _0807A978\n\
-	movs r7, 0\n\
-	b _0807A97C\n\
-_0807A978:\n\
-	movs r0, 0x1\n\
-	orrs r7, r0\n\
-_0807A97C:\n\
-	adds r4, 0x1C\n\
-	adds r5, 0x1\n\
-_0807A980:\n\
-	bl GetLinkPlayerCount\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r5, r0\n\
-	blt _0807A96C\n\
-	movs r5, 0\n\
-	movs r4, 0\n\
-	b _0807A9B4\n\
-_0807A992:\n\
-	ldr r0, =gLinkPlayers\n\
-	adds r2, r4, r0\n\
-	ldrb r1, [r2, 0x10]\n\
-	movs r0, 0xF\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _0807A9A2\n\
-	movs r6, 0\n\
-_0807A9A2:\n\
-	cmp r7, 0\n\
-	beq _0807A9B0\n\
-	ldrb r0, [r2, 0x10]\n\
-	lsrs r0, 4\n\
-	cmp r0, 0\n\
-	beq _0807A9B0\n\
-	movs r6, 0\n\
-_0807A9B0:\n\
-	adds r4, 0x1C\n\
-	adds r5, 0x1\n\
-_0807A9B4:\n\
-	bl GetLinkPlayerCount\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r5, r0\n\
-	blt _0807A992\n\
-	cmp r6, 0\n\
-	bne _0807A9EA\n\
-	mov r1, r8\n\
-	lsls r0, r1, 2\n\
-	mov r1, sp\n\
-	adds r4, r1, r0\n\
-	ldrh r0, [r4]\n\
-	bl IsSpeciesInHoennDex\n\
-	cmp r0, 0\n\
-	bne _0807A9E0\n\
-	movs r0, 0x2\n\
-	b _0807AA1A\n\
-	.pool\n\
-_0807A9E0:\n\
-	ldr r0, [r4]\n\
-	cmp r0, 0\n\
-	bne _0807A9EA\n\
-	movs r0, 0x3\n\
-	b _0807AA1A\n\
-_0807A9EA:\n\
-	movs r2, 0\n\
-	movs r5, 0\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	cmp r2, r0\n\
-	bge _0807AA0A\n\
-	adds r3, r0, 0\n\
-	mov r1, sp\n\
-_0807A9FA:\n\
-	cmp r8, r5\n\
-	beq _0807AA02\n\
-	ldr r0, [r1]\n\
-	adds r2, r0\n\
-_0807AA02:\n\
-	adds r1, 0x4\n\
-	adds r5, 0x1\n\
-	cmp r5, r3\n\
-	blt _0807A9FA\n\
-_0807AA0A:\n\
-	cmp r2, 0\n\
-	beq _0807AA18\n\
-	movs r0, 0\n\
-	b _0807AA1A\n\
-	.pool\n\
-_0807AA18:\n\
-	movs r0, 0x1\n\
-_0807AA1A:\n\
-	add sp, 0x18\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1");
-}
-#endif // NONMATCHING
 
 static void sub_807AA28(struct Sprite *sprite)
 {
@@ -4942,7 +4750,7 @@ static void Task_InGameTrade(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_InGameTrade);
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
 }

@@ -96,7 +96,7 @@ Apprentice_EventScript_UseWhatHeldItem: @ 82B6ACF
 	apprentice_msg TRUE, APPRENTICE_MSG_WHAT_HELD_ITEM
 	apprentice_freequestion
 Apprentice_EventScript_ChooseHoldItem: @ 82B6B09
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_RESULT, 0
 	apprentice_openbag
 	compare VAR_RESULT, FALSE

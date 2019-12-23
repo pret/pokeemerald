@@ -2823,7 +2823,7 @@ static void PrintNotEggInfo(void)
     u16 dexNum = SpeciesToPokedexNum(summary->species);
     if (dexNum != 0xFFFF)
     {
-        StringCopy(gStringVar1, &gText_UnkCtrlF908Clear01[0]);
+        StringCopy(gStringVar1, &gText_NumberClear01[0]);
         ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
         StringAppend(gStringVar1, gStringVar2);
         if (!IsMonShiny(mon))
@@ -3165,7 +3165,7 @@ static void PrintMonOTID(void)
     int xPos;
     if (InBattleFactory() != TRUE && InSlateportBattleTent() != TRUE)
     {
-        ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_UnkCtrlF907F908), (u16)sMonSummaryScreen->summary.OTID, STR_CONV_MODE_LEADING_ZEROS, 5);
+        ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_IDNumber2), (u16)sMonSummaryScreen->summary.OTID, STR_CONV_MODE_LEADING_ZEROS, 5);
         xPos = GetStringRightAlignXOffset(1, gStringVar1, 56);
         SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ID), gStringVar1, xPos, 1, 0, 1);
     }
@@ -3319,7 +3319,7 @@ static void PrintEggOTName(void)
 static void PrintEggOTID(void)
 {
     int x;
-    StringCopy(gStringVar1, gText_UnkCtrlF907F908);
+    StringCopy(gStringVar1, gText_IDNumber2);
     StringAppend(gStringVar1, gText_FiveMarks);
     x = GetStringRightAlignXOffset(1, gStringVar1, 56);
     SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ID), gStringVar1, x, 1, 0, 1);

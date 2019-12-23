@@ -72,7 +72,6 @@ SECTIONS {
         src/mevent_news.o(.text);
         src/union_room_chat.o(.text);
         src/berry_crush.o(.text);
-        asm/berry_crush.o(.text);
         src/berry_powder.o(.text);
         src/dodrio_berry_picking.o(.text);
         src/pokemon_jump.o(.text);

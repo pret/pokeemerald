@@ -89,7 +89,7 @@ extern const struct CompressedSpriteSheet gUnknown_0858D878[];
 extern const struct CompressedSpritePalette gUnknown_0858D880[];
 extern const struct SpriteSheet gUnknown_0858D8E0;
 extern const struct SpriteTemplate gSpriteTemplate_858D8C8;
-extern const u8 gUnknown_0858D8E8[];
+extern const u8 sContestLinkTextColors[];
 extern const u8 gUnknown_0858D6D0[];
 extern const struct SpriteTemplate gSpriteTemplate_858D7F8;
 extern const struct SpriteSheet gUnknown_0858D810[];
@@ -935,7 +935,7 @@ s32 sub_80F6B78(const u8 *text, u8 spriteId)
     if (strWidth > 30)
      strWidth = 30;
 
-    AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, gUnknown_0858D8E8, -1, text);
+    AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
     windowTilesPtr = (u8 *)(GetWindowAttribute(windowId, WINDOW_TILE_DATA));
     src = (u8 *)(gUnknown_0858D6D0);
 
@@ -1029,7 +1029,7 @@ _080F6BD0:\n\
     asrs r2, 1\n\
     lsls r2, 24\n\
     lsrs r2, 24\n\
-    ldr r0, =gUnknown_0858D8E8\n\
+    ldr r0, =sContestLinkTextColors\n\
     str r0, [sp]\n\
     movs r0, 0x1\n\
     negs r0, r0\n\

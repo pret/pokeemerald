@@ -1588,7 +1588,7 @@ static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u
     s32 i;
     bool32 ret = FALSE;
 
-    for (i = 0; i <= REMATCH_WALLY_3; i++)
+    for (i = 0; i <= REMATCH_SPECIAL_TRAINER_START; i++)
     {
         if (table[i].mapGroup == mapGroup && table[i].mapNum == mapNum && !sub_80B1D94(i))
         {
@@ -1647,7 +1647,7 @@ static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table,
 
     if (tableId == -1)
         return FALSE;
-    if (tableId >= 100)
+    if (tableId >= MAX_REMATCH_ENTRIES)
         return FALSE;
     if (gSaveBlock1Ptr->trainerRematches[tableId] == 0)
         return FALSE;
@@ -1661,7 +1661,7 @@ static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 t
 
     if (tableId == -1)
         return FALSE;
-    if (tableId >= 100)
+    if (tableId >= MAX_REMATCH_ENTRIES)
         return FALSE;
     if (gSaveBlock1Ptr->trainerRematches[tableId] == 0)
         return FALSE;

@@ -179,7 +179,7 @@ AbnormalWeather_EventScript_EndEventAndCleanup_1:: @ 8273D1F
 
 AbnormalWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	closemessage
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	setweather WEATHER_SUNNY
 	doweather
 	call AbnormalWeather_EventScript_CleanupMapTiles
@@ -187,7 +187,7 @@ AbnormalWeather_EventScript_EndEventAndCleanup_2:: @ 8273D31
 	setvar VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 0
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	releaseall
 	end
 

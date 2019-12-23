@@ -145,7 +145,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent:: @ 82576B0
 	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor7thOpponent
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ProceedChallengeNoRecord
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponentNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge
@@ -154,7 +154,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent:: @ 82576B0
 	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent
 
-BattleFrontier_BattleArenaBattleRoom_EventScript_ProceedChallengeNoRecord:: @ 8257768
+BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponentNoRecord:: @ 8257768
 	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_ContinueChallenge
@@ -240,7 +240,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_PauseChallenge:: @ 825789A
 	arena_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	frontier_reset
 	end
 
@@ -254,7 +254,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon:: @ 82578D4
 	waitmessage
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ProceedChallengeGretaNoRecord
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoonNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta
@@ -263,7 +263,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon:: @ 82578D4
 	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_AskRetireChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon
 
-BattleFrontier_BattleArenaBattleRoom_EventScript_ProceedChallengeGretaNoRecord:: @ 825792B
+BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoonNoRecord:: @ 825792B
 	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta

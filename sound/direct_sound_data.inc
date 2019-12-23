@@ -23,8 +23,8 @@ DirectSoundWaveData_sc88_timpani::
 	.incbin "sound/direct_sound_samples/sc88_timpani.bin"
 
 	.align 2
-DirectSoundWaveData_advanced_orchestra_voice_ahhs::
-	.incbin "sound/direct_sound_samples/advanced_orchestra_voice_ahhs.bin"
+DirectSoundWaveData_classical_choir_voice_ahhs::
+	.incbin "sound/direct_sound_samples/classical_choir_voice_ahhs.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_classical_oboe::
@@ -59,16 +59,16 @@ DirectSoundWaveData_sc88_standard_kick::
 	.incbin "sound/direct_sound_samples/sc88_standard_kick.bin"
 
 	.align 2
-DirectSoundWaveData_sc88_standard_snare1::
-	.incbin "sound/direct_sound_samples/sc88_standard_snare1.bin"
+DirectSoundWaveData_sc88_standard3_snare::
+	.incbin "sound/direct_sound_samples/sc88_standard3_snare.bin"
 
 	.align 2
 DirectSoundWaveData_sc88_standard_hand_clap::
 	.incbin "sound/direct_sound_samples/sc88_standard_hand_clap.bin"
 
 	.align 2
-DirectSoundWaveData_sc88_standard_snare2::
-	.incbin "sound/direct_sound_samples/sc88_standard_snare2.bin"
+DirectSoundWaveData_sc88_orchestra_snare::
+	.incbin "sound/direct_sound_samples/sc88_orchestra_snare.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_tom::
@@ -91,12 +91,12 @@ DirectSoundWaveData_unknown_tambourine::
 	.incbin "sound/direct_sound_samples/unknown_tambourine.bin"
 
 	.align 2
-DirectSoundWaveData_unknown_cymbal_crash::
-	.incbin "sound/direct_sound_samples/unknown_cymbal_crash.bin"
+DirectSoundWaveData_trinity_cymbal_crash::
+	.incbin "sound/direct_sound_samples/trinity_cymbal_crash.bin"
 
 	.align 2
-DirectSoundWaveData_sc88_standard_cymbal_crash::
-	.incbin "sound/direct_sound_samples/sc88_standard_cymbal_crash.bin"
+DirectSoundWaveData_sc88_orchestra_cymbal_crash::
+	.incbin "sound/direct_sound_samples/sc88_orchestra_cymbal_crash.bin"
 
 	.align 2
 DirectSoundWaveData_sc88_bongo::
@@ -251,20 +251,20 @@ DirectSoundWaveData_emu_ii_pipe_organ::
 	.incbin "sound/direct_sound_samples/emu_ii_pipe_organ.bin"
 
 	.align 2
-DirectSoundWaveData_unused_unknown_female_voice::
-	.incbin "sound/direct_sound_samples/unused_unknown_female_voice.bin"
+DirectSoundWaveData_unknown_female_voice::
+	.incbin "sound/direct_sound_samples/unknown_female_voice.bin"
 
 	.align 2
 DirectSoundWaveData_unused_unknown_male_voice::
 	.incbin "sound/direct_sound_samples/unused_unknown_male_voice.bin"
 
 	.align 2
-DirectSoundWaveData_unknown_e_piano_low::
-	.incbin "sound/direct_sound_samples/unknown_e_piano_low.bin"
+DirectSoundWaveData_sd90_classical_detuned_ep1_low::
+	.incbin "sound/direct_sound_samples/sd90_classical_detuned_ep1_low.bin"
 
 	.align 2
-DirectSoundWaveData_unknown_e_piano_high::
-	.incbin "sound/direct_sound_samples/unknown_e_piano_high.bin"
+DirectSoundWaveData_sd90_classical_detuned_ep1_high::
+	.incbin "sound/direct_sound_samples/sd90_classical_detuned_ep1_high.bin"
 
 	.align 2
 DirectSoundWaveData_sc88_timpani_with_snare::
@@ -275,8 +275,8 @@ DirectSoundWaveData_unknown_synth_snare::
 	.incbin "sound/direct_sound_samples/unknown_synth_snare.bin"
 
 	.align 2
-DirectSoundWaveData_unused_sc88_square::
-	.incbin "sound/direct_sound_samples/unused_sc88_square.bin"
+DirectSoundWaveData_sc88_square_wave::
+	.incbin "sound/direct_sound_samples/sc88_square_wave.bin"
 
 	.align 2
 DirectSoundWaveData_bicycle_bell::
@@ -1951,8 +1951,8 @@ DirectSoundWaveData_sc88_nylon_str_guitar::
 	.incbin "sound/direct_sound_samples/sc88_nylon_str_guitar.bin"
 
 	.align 2
-DirectSoundWaveData_sd90_classical_guitar_harmonics::
-	.incbin "sound/direct_sound_samples/sd90_classical_guitar_harmonics.bin"
+DirectSoundWaveData_sd90_special_scream_drive::
+	.incbin "sound/direct_sound_samples/sd90_special_scream_drive.bin"
 
 	.align 2
 DirectSoundWaveData_88DBBC0::

@@ -1396,11 +1396,11 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_5 | PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
-void sub_808C0A8(u8 a)
+void SetPlayerInvisibility(bool8 invisible)
 {
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = a;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = invisible;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-        gSprites[gEventObjects[gPlayerAvatar.eventObjectId].fieldEffectSpriteId].invisible = a;
+        gSprites[gEventObjects[gPlayerAvatar.eventObjectId].fieldEffectSpriteId].invisible = invisible;
 }
 
 void sub_808C114(void)

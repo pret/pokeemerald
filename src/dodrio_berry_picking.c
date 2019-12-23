@@ -2704,17 +2704,17 @@ static const u16 gUnknown_082F7B50[][4] =
     {9999, 9999, 9999, 0},
 };
 
-static const u8 gUnknown_082F7B78[] = _("あいうえおかき");
-static const u8 gUnknown_082F7B80[] = _("ABCDEFG");
-static const u8 gUnknown_082F7B88[] = _("0123456");
+static const u8 sJPText_Vowels[] = _("あいうえおかき");
+static const u8 sText_ABCDEFG[] = _("ABCDEFG");
+static const u8 sText_0123456[] = _("0123456");
 
-static const u8 *const gUnknown_082F7B90[] =
+static const u8 *const sPlaceholderPlayerNames[] =
 {
-    gUnknown_082F7B78,
-    gUnknown_082F7B78,
-    gUnknown_082F7B78,
-    gUnknown_082F7B80,
-    gUnknown_082F7B88
+    sJPText_Vowels,
+    sJPText_Vowels,
+    sJPText_Vowels,
+    sText_ABCDEFG,
+    sText_0123456
 };
 
 static void sub_8027D20(void)
@@ -2726,8 +2726,8 @@ static void sub_8027D38(void)
 {
     u8 i, playerId;
 
-    for (playerId = gUnknown_02022C98->unk24; playerId < 5; playerId++)
-        StringCopy(gLinkPlayers[playerId].name, gUnknown_082F7B90[playerId]);
+    for (playerId = gUnknown_02022C98->unk24; playerId < ARRAY_COUNT(sPlaceholderPlayerNames); playerId++)
+        StringCopy(gLinkPlayers[playerId].name, sPlaceholderPlayerNames[playerId]);
 
     gUnknown_02022C98->unk24 = 5;
     for (i = 0; i < 4; i++)
@@ -4386,12 +4386,12 @@ struct WinCoords
     u8 top;
 };
 
-static const u8 gUnknown_082FB380[][3] =
+static const u8 sTextColorTable[][3] =
 {
-    {1, 2, 3},
-    {1, 4, 5},
-    {1, 8, 9},
-    {1, 6, 7},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_BLUE},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN},
 };
 
 static const struct WinCoords gUnknown_082FB38C[] = {{12, 6}};
@@ -4525,7 +4525,7 @@ static void sub_8029440(void)
             if (id == GetMultiplayerId())
                 colorsId = 2;
             name = sub_8027660(id);
-            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[i], 1, left, 1, gUnknown_082FB380[colorsId], -1, name);
+            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[i], 1, left, 1, sTextColorTable[colorsId], -1, name);
             CopyWindowToVram(gUnknown_02022CF8->unk3008[i], 2);
             window.baseBlock += 0xE;
             sub_8029174(&window);
@@ -4609,7 +4609,7 @@ static void sub_80296A8(u8 playersCount_)
         if (id == GetMultiplayerId())
             colorsId = 2;
         name = sub_8027660(id);
-        AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 28, gUnknown_082FB402[i], gUnknown_082FB380[colorsId], -1, name);
+        AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 28, gUnknown_082FB402[i], sTextColorTable[colorsId], -1, name);
         ConvertIntToDecimalStringN(numString, points, STR_CONV_MODE_LEFT_ALIGN, 7);
         numWidth = GetStringWidth(1, numString, -1);
         AddTextPrinterParameterized(gUnknown_02022CF8->unk3008[1], 1, numString, x - numWidth, gUnknown_082FB402[i], -1, NULL);
@@ -4653,7 +4653,7 @@ static void sub_802988C(void)
                 colorsId = 2;
 
             name = sub_8027660(i);
-            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 0, gUnknown_082FB3F8[i], gUnknown_082FB380[colorsId], -1, name);
+            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 0, gUnknown_082FB3F8[i], sTextColorTable[colorsId], -1, name);
             for (j = 0; j < 4; j++)
             {
                 u32 width;
@@ -4663,7 +4663,7 @@ static void sub_802988C(void)
                 ConvertIntToDecimalStringN(gStringVar4, result1, STR_CONV_MODE_LEFT_ALIGN, 4);
                 width = GetStringWidth(1, gStringVar4, -1);
                 if (result2 == result1 && result2 != 0)
-                    AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, gUnknown_082FB3F0[j] - width, gUnknown_082FB3F8[i], gUnknown_082FB380[1], -1, gStringVar4);
+                    AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, gUnknown_082FB3F0[j] - width, gUnknown_082FB3F8[i], sTextColorTable[1], -1, gStringVar4);
                 else
                     AddTextPrinterParameterized(gUnknown_02022CF8->unk3008[1], 1, gStringVar4, gUnknown_082FB3F0[j] - width, gUnknown_082FB3F8[i], -1, NULL);
             }

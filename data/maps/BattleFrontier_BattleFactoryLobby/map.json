@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_2585CB",
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_258813",
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_25881C",
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_Camper",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_258825",
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_Picnicker",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_258830",
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_2585DD",
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant",
       "flag": "0"
     }
   ],
@@ -117,7 +117,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_2587E1"
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults"
     },
     {
       "type": "sign",
@@ -125,7 +125,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_2587FA"
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults"
     },
     {
       "type": "sign",
@@ -133,7 +133,7 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattleFactoryLobby_EventScript_258839"
+      "script": "BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard"
     }
   ]
 }

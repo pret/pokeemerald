@@ -10,7 +10,7 @@
 gSpecials:: @ 81DBA64
 	def_special HealPlayerParty
 	def_special SetCableClubWarp
-	def_special sub_80AF948
+	def_special DoCableClubWarp
 	def_special ReturnFromLinkRoom
 	def_special CleanupLinkRoomState
 	def_special ExitLinkRoom
@@ -458,7 +458,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813A630
 	def_special BufferBattleTowerElevatorFloors
 	def_special TryStoreHeldItemsInPyramidBag
-	def_special sub_81C4F24
+	def_special ChooseItemsToTossFromPyramidBag
 	def_special DoBattlePyramidMonsHaveHeldItem
 	def_special BattlePyramidChooseMonHeldItems
 	def_special SetBattleTowerLinkPlayerGfx
