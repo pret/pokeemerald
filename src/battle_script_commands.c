@@ -2195,7 +2195,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
-            if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY 
+            if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2234,7 +2234,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             }
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_FIRE))
                 break;
-            if (GetBattlerAbility(gEffectBattler) == ABILITY_WATER_VEIL 
+            if (GetBattlerAbility(gEffectBattler) == ABILITY_WATER_VEIL
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2252,7 +2252,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (noSunCanFreeze == 0)
                 break;
-            if (GetBattlerAbility(gEffectBattler) == ABILITY_MAGMA_ARMOR 
+            if (GetBattlerAbility(gEffectBattler) == ABILITY_MAGMA_ARMOR
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2297,7 +2297,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             }
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_ELECTRIC))
                 break;
-            if (GetBattlerAbility(gEffectBattler) == ABILITY_LIMBER 
+            if (GetBattlerAbility(gEffectBattler) == ABILITY_LIMBER
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2340,7 +2340,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (!IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) && !IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
             {
-                if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY 
+                if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY
                     || IsFlowerVeilProtected(gEffectBattler)
                     || IsLeafGuardProtected(gEffectBattler))
                     break;
@@ -7640,7 +7640,8 @@ static void Cmd_various(void)
         }
         break;
     case VARIOUS_SET_AURORA_VEIL:
-        if (gSideStatuses[GET_BATTLER_SIDE(gActiveBattler)] & SIDE_STATUS_AURORA_VEIL)
+        if (gSideStatuses[GET_BATTLER_SIDE(gActiveBattler)] & SIDE_STATUS_AURORA_VEIL
+            || !(WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_HAIL_ANY))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
