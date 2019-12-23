@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25B868",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BAAB",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Hiker",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BAB4",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Twin",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BABD",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Beauty",
       "flag": "0"
     }
   ],
@@ -98,7 +98,7 @@
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BA80"
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_ShowResults"
     },
     {
       "type": "sign",
@@ -106,7 +106,7 @@
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BAC6"
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_RulesBoard"
     }
   ]
 }

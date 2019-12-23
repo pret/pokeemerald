@@ -126,7 +126,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle:: @ 8227AE2
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_ChooseParty:: @ 8227AEF
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_KeepItTo3On3, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	return

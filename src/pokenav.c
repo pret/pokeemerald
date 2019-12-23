@@ -320,7 +320,7 @@ void CB2_InitPokeNav(void)
 void OpenPokenavForTutorial(void)
 {
     SetMainCallback2(CB2_InitPokenavForTutorial);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 static void CB2_InitPokenavForTutorial(void)
@@ -337,7 +337,7 @@ static void CB2_InitPokenavForTutorial(void)
     else
     {
         InitPokenavResources(gPokenavResources);
-        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_1;
+        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_READY;
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();

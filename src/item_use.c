@@ -138,7 +138,7 @@ void SetUpItemUseOnFieldCallback(u8 taskId)
 
 void MapPostLoadHook_UseItem(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(Task_CallItemUseOnFieldCallback, 8);
 }
 
@@ -601,7 +601,7 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
     else
     {
         gFieldCallback = sub_80AF6D4;
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = sub_80FDC00;
     }
 }

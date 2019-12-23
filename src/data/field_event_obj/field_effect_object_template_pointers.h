@@ -31,7 +31,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Unknown29;
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShortGrass;
 const struct SpriteTemplate gFieldEffectObjectTemplate_HotSpringsWater;
 const struct SpriteTemplate gFieldEffectObjectTemplate_JumpOutOfAsh;
-const struct SpriteTemplate gFieldEffectObjectTemplate_Unknown33;
+const struct SpriteTemplate gFieldEffectObjectTemplate_LavaridgeGymWarp;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Unknown35;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza;
@@ -70,7 +70,7 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     &gFieldEffectObjectTemplate_ShortGrass,
     &gFieldEffectObjectTemplate_HotSpringsWater,
     &gFieldEffectObjectTemplate_JumpOutOfAsh,
-    &gFieldEffectObjectTemplate_Unknown33,
+    &gFieldEffectObjectTemplate_LavaridgeGymWarp,
     &gFieldEffectObjectTemplate_Bubbles,
     &gFieldEffectObjectTemplate_Unknown35,
     &gFieldEffectObjectTemplate_Rayquaza,

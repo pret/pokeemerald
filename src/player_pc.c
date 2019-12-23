@@ -484,7 +484,7 @@ static void ItemStorageMenuProcessInput(u8 taskId)
 static void ItemStorage_Deposit(u8 taskId)
 {
     gTasks[taskId].func = Task_ItemStorage_Deposit;
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 static void Task_ItemStorage_Deposit(u8 taskId)
@@ -508,7 +508,7 @@ void Mailbox_DoRedrawMailboxMenuAfterReturn(void)
     sub_81973A4();
     DrawDialogueFrame(0, 1);
     InitItemStorageMenu(CreateTask(ItemStorage_HandleReturnToProcessInput, 0), 1);
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 static void ItemStorage_HandleReturnToProcessInput(u8 taskId)
@@ -714,7 +714,7 @@ static void Mailbox_MailOptionsProcessInput(u8 taskId)
 
 static void Mailbox_DoMailRead(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Mailbox_FadeAndReadMail;
 }
 
@@ -745,7 +745,7 @@ static void pal_fill_for_maplights_or_black(void)
         Mailbox_DrawMailboxMenu(taskId);
     else
         DestroyTask(taskId);
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 static void Mailbox_HandleReturnToProcessInput(u8 taskId)
@@ -813,7 +813,7 @@ static void Mailbox_Give(u8 taskId)
         Mailbox_NoPokemonForMail(taskId);
     else
     {
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Mailbox_DoGiveMailPokeMenu;
     }
 }
@@ -852,7 +852,7 @@ static void Mailbox_UpdateMailListAfterDeposit(void)
         Mailbox_DrawMailboxMenu(taskId);
     else
         DestroyTask(taskId);
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 static void Mailbox_NoPokemonForMail(u8 taskId)

@@ -96,7 +96,7 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
 };
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
+const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
 
 // Table of move info icon offsets in graphics/interface_fr/menu.png
 const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
@@ -825,7 +825,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
                   0,
                   0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
                   1,
-                  gUnknown_0860F0D0,
+                  sTextColors,
                   0,
                   string);
         if (copyToVram)
@@ -842,15 +842,15 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
     {
         if (a3 != 0)
         {
-            color[0] = 0;
-            color[1] = 1;
-            color[2] = 2;
+            color[0] = TEXT_COLOR_TRANSPARENT;
+            color[1] = TEXT_COLOR_WHITE;
+            color[2] = TEXT_COLOR_DARK_GREY;
         }
         else
         {
-            color[0] = 15;
-            color[1] = 1;
-            color[2] = 2;
+            color[0] = TEXT_DYNAMIC_COLOR_6;
+            color[1] = TEXT_COLOR_WHITE;
+            color[2] = TEXT_COLOR_DARK_GREY;
         }
         PutWindowTilemap(sWindowId);
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));

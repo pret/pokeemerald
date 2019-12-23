@@ -25,9 +25,9 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget:: @ 821EA3B
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special MoveDeleterChooseMoveToForget
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	compare VAR_0x8005, MAX_MON_MOVES
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
 	special BufferMoveDeleterNicknameAndMove

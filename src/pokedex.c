@@ -934,19 +934,19 @@ static const u8 gUnknown_0856ED08[][4] =
 static const struct UnknownStruct3 gUnknown_0856ED30[] =
 {
     {
-        .text = gUnknown_085E87A5,
+        .text = gText_SearchForPkmnBasedOnParameters,
         .unk4 = 0,
         .unk5 = 0,
         .unk6 = 5,
     },
     {
-        .text = gUnknown_085E87D6,
+        .text = gText_SwitchPokedexListings,
         .unk4 = 6,
         .unk5 = 0,
         .unk6 = 5,
     },
     {
-        .text = gUnknown_085E87EF,
+        .text = gText_ReturnToPokedex,
         .unk4 = 12,
         .unk5 = 0,
         .unk6 = 5,
@@ -956,7 +956,7 @@ static const struct UnknownStruct3 gUnknown_0856ED30[] =
 static const struct UnknownStruct4 gUnknown_0856ED48[] =
 {
     {
-        .text = gUnknown_085E8840,
+        .text = gText_ListByFirstLetter,
         .unk4 = 0,
         .unk5 = 2,
         .unk6 = 5,
@@ -965,7 +965,7 @@ static const struct UnknownStruct4 gUnknown_0856ED48[] =
         .unk9 = 12,
     },
     {
-        .text = gUnknown_085E887C,
+        .text = gText_ListByBodyColor,
         .unk4 = 0,
         .unk5 = 4,
         .unk6 = 5,
@@ -974,7 +974,7 @@ static const struct UnknownStruct4 gUnknown_0856ED48[] =
         .unk9 = 12,
     },
     {
-        .text = gUnknown_085E88A6,
+        .text = gText_ListByType,
         .unk4 = 0,
         .unk5 = 6,
         .unk6 = 5,
@@ -983,7 +983,7 @@ static const struct UnknownStruct4 gUnknown_0856ED48[] =
         .unk9 = 6,
     },
     {
-        .text = gUnknown_085E88A6,
+        .text = gText_ListByType,
         .unk4 = 0,
         .unk5 = 6,
         .unk6 = 5,
@@ -992,7 +992,7 @@ static const struct UnknownStruct4 gUnknown_0856ED48[] =
         .unk9 = 6,
     },
     {
-        .text = gUnknown_085E881F,
+        .text = gText_SelectPokedexListingMode,
         .unk4 = 0,
         .unk5 = 8,
         .unk6 = 5,
@@ -1001,7 +1001,7 @@ static const struct UnknownStruct4 gUnknown_0856ED48[] =
         .unk9 = 12,
     },
     {
-        .text = gUnknown_085E8806,
+        .text = gText_SelectPokedexMode,
         .unk4 = 0,
         .unk5 = 10,
         .unk6 = 5,
@@ -1010,7 +1010,7 @@ static const struct UnknownStruct4 gUnknown_0856ED48[] =
         .unk9 = 12,
     },
     {
-        .text = gUnknown_085E88C8,
+        .text = gText_ExecuteSearchSwitch,
         .unk4 = 0,
         .unk5 = 12,
         .unk6 = 5,
@@ -3895,7 +3895,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         value = NationalToHoennOrder(num);
     else
         value = num;
-    ConvertIntToDecimalStringN(StringCopy(str, gText_UnkCtrlF908Clear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
     PrintInfoPageText(str, 0x60, 0x19);
     natNum = NationalPokedexNumToSpecies(num);
     if (natNum)
@@ -5037,7 +5037,7 @@ void sub_80C1A4C(u8 taskId)
         else
         {
             PlaySE(SE_HAZURE);
-            sub_80C2618(gUnknown_085E8785);
+            sub_80C2618(gText_NoMatchingPkmnWereFound);
         }
         gTasks[taskId].func = sub_80C1AB8;
         CopyWindowToVram(0, 2);

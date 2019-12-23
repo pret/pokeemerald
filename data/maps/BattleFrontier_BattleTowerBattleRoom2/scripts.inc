@@ -219,7 +219,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB:: @ 82492DB
 	tower_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	frontier_reset
 	end
 

@@ -391,7 +391,7 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	goto_if_eq CableClub_EventScript_WarpTo4PColosseum
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -404,7 +404,7 @@ CableClub_EventScript_PlayerApproachLinkRoomRight:: @ 827702B
 CableClub_EventScript_WarpTo4PColosseum:: @ 8277036
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -494,7 +494,7 @@ CableClub_EventScript_EnterTradeCenter:: @ 827713A
 	release
 	special SetCableClubWarp
 	setwarp MAP_TRADE_CENTER, 255, 5, 8
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -569,7 +569,7 @@ CableClub_EventScript_EnterRecordCorner:: @ 827724C
 	release
 	special SetCableClubWarp
 	setwarp MAP_RECORD_CORNER, 255, 8, 9
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -618,7 +618,7 @@ MossdeepCity_GameCorner_1F_EventScript_AbortMinigame:: @ 82772F9
 @ Unused
 CableClub_EventScript_CableClubWarp:: @ 8277306
 	special SetCableClubWarp
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -723,7 +723,7 @@ EventScript_BattleColosseum2P_PlayerSpot1:: @ 827737E
 	end
 
 EventScript_BattleColosseum4P_PlayerSpot0:: @ 8277388
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
@@ -734,7 +734,7 @@ EventScript_BattleColosseum4P_PlayerSpot0:: @ 8277388
 	end
 
 EventScript_BattleColosseum4P_PlayerSpot1:: @ 82773A3
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
@@ -745,7 +745,7 @@ EventScript_BattleColosseum4P_PlayerSpot1:: @ 82773A3
 	end
 
 EventScript_BattleColosseum4P_PlayerSpot2:: @ 82773BE
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
@@ -756,7 +756,7 @@ EventScript_BattleColosseum4P_PlayerSpot2:: @ 82773BE
 	end
 
 EventScript_BattleColosseum4P_PlayerSpot3:: @ 82773D9
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
@@ -838,14 +838,14 @@ RecordCorner_EventScript_ReceivedGiftItem:: @ 8277471
 
 CableClub_EventScript_ReadTrainerCard:: @ 827747E
 	msgbox CableClub_Text_GotToLookAtTrainerCard, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
 	waitstate
 	end
 
 CableClub_EventScript_ReadTrainerCardColored:: @ 827748D
 	msgbox CableClub_Text_GotToLookAtColoredTrainerCard, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
 	waitstate
 	end
@@ -1309,7 +1309,7 @@ EventScript_WirelessBoxResults:: @ 8277B8A
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_AdapterNotConnected
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_801A42C
 	waitstate
 	msgbox CableClub_Text_ParticipantsStepUpToCounter, MSGBOX_DEFAULT
@@ -1408,7 +1408,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump:: @ 8277CE9
 	compare VAR_RESULT, FALSE
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
 	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8005, 0
 	special ChooseMonForWirelessMinigame
 	waitstate
@@ -1427,7 +1427,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking:: @ 8277D35
 	compare VAR_RESULT, FALSE
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
 	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8005, 1
 	special ChooseMonForWirelessMinigame
 	waitstate

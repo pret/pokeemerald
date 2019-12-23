@@ -220,25 +220,24 @@ static const struct WindowTemplate gUnknown_086202CC =
 
 static const u8 *const gUnknown_086202D4[] =
 {
-    gUnknown_085EBCC5,
-    gUnknown_085EBCE8,
-    gUnknown_085EBD01,
-    gUnknown_085EBD1C,
-    gUnknown_085EBD34,
-    gUnknown_085EBD83,
-    gUnknown_085EBDA2,
-    gUnknown_085EBDBF,
-    gUnknown_085EBDDB,
-    gUnknown_085EBDEE,
-    gUnknown_085EBE06,
-    gUnknown_085EBE19,
-    gUnknown_085EBE2D,
-    gUnknown_085EBE41
+    gText_CheckMapOfHoenn,
+    gText_CheckPokemonInDetail,
+    gText_CallRegisteredTrainer,
+    gText_CheckObtainedRibbons,
+    gText_PutAwayPokenav,
+    gText_CheckPartyPokemonInDetail,
+    gText_CheckAllPokemonInDetail,
+    gText_ReturnToPokenavMenu,
+    gText_FindCoolPokemon,
+    gText_FindBeautifulPokemon,
+    gText_FindCutePokemon,
+    gText_FindSmartPokemon,
+    gText_FindToughPokemon,
+    gText_ReturnToConditionMenu
 };
 
-static const u8 gUnknown_0862030C[] = {6, 8, 7};
-
-static const u8 gUnknown_0862030F[] = {6, 8, 7, 0, 0};
+static const u8 sOptionDescTextColors[] = {TEXT_COLOR_GREEN, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_GREEN};
+static const u8 sOptionDescTextColors2[] = {TEXT_COLOR_GREEN, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_GREEN};
 
 static const struct OamData gUnknown_08620314 =
 {
@@ -324,7 +323,7 @@ static bool32 sub_81C98D4(void)
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
         if (sub_81CB0C8(i) == gMapHeader.regionMapSectionId
-            && sub_81CAE08(i)
+            && IsRematchEntryRegistered(i)
             && gSaveBlock1Ptr->trainerRematches[i])
             return TRUE;
     }
@@ -707,10 +706,10 @@ static u32 sub_81C9F28(s32 state)
     switch (state)
     {
     case 0:
-        sub_81C7BA4(sub_81C98C4());
+        PrintHelpBarText(GetHelpBarTextId());
         return LT_INC_AND_PAUSE;
     case 1:
-        if (IsDma3ManagerBusyWithBgCopy_())
+        if (WaitForHelpBar())
             return LT_PAUSE;
         sub_81C7880();
         sub_81CA9C8();
@@ -1130,7 +1129,7 @@ static void sub_81CA714(void)
     const u8 * s = gUnknown_086202D4[i];
     u32 width = GetStringWidth(1, s, -1);
     FillWindowPixelBuffer(ptr->optionDescriptionWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescriptionWindowId, 1, (192 - width) / 2, 1, gUnknown_0862030C, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescriptionWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors, 0, s);
 }
 
 
@@ -1140,7 +1139,7 @@ static void sub_81CA770(void)
     const u8 * s = gText_NoRibbonWinners;
     u32 width = GetStringWidth(1, s, -1);
     FillWindowPixelBuffer(ptr->optionDescriptionWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(ptr->optionDescriptionWindowId, 1, (192 - width) / 2, 1, gUnknown_0862030F, 0, s);
+    AddTextPrinterParameterized3(ptr->optionDescriptionWindowId, 1, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
 }
 
 static bool32 sub_81CA7C4(void)
