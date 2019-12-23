@@ -1520,6 +1520,8 @@ u8 DoBattlerEndTurnEffects(void)
                 && ability != ABILITY_MAGIC_GUARD)
             {
                 gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                if (ability == ABILITY_HEATPROOF)
+                    gBattleMoveDamage /= 2;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 BattleScriptExecute(BattleScript_BurnTurnDmg);
