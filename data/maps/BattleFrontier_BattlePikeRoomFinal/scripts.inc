@@ -4,12 +4,12 @@ BattleFrontier_BattlePikeRoomFinal_MapScripts:: @ 825E392
 	.byte 0
 
 BattleFrontier_BattlePikeRoomFinal_OnFrame: @ 825E39D
-	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeRoomFinal_EventScript_25E3A7
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeRoomFinal_EventScript_EnterRoom
 	.2byte 0
 
-BattleFrontier_BattlePikeRoomFinal_EventScript_25E3A7:: @ 825E3A7
+BattleFrontier_BattlePikeRoomFinal_EventScript_EnterRoom:: @ 825E3A7
 	delay 16
-	applymovement 1, BattleFrontier_BattlePikeRoomFinal_Movement_25E3DB
+	applymovement 1, BattleFrontier_BattlePikeRoomFinal_Movement_AttendantApproachPlayer
 	waitmovement 0
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	lockall
@@ -20,7 +20,7 @@ BattleFrontier_BattlePikeRoomFinal_EventScript_25E3A7:: @ 825E3A7
 	waitstate
 	end
 
-BattleFrontier_BattlePikeRoomFinal_Movement_25E3DB: @ 825E3DB
+BattleFrontier_BattlePikeRoomFinal_Movement_AttendantApproachPlayer: @ 825E3DB
 	walk_down
 	walk_down
 	step_end

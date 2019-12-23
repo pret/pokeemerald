@@ -214,7 +214,7 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
+	fadescreenspeed FADE_TO_BLACK, 8
 	setweather WEATHER_ABNORMAL
 	doweather
 	setvar VAR_0x8004, 0
@@ -314,7 +314,7 @@ SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
+	fadescreenspeed FADE_TO_BLACK, 8
 	setweather WEATHER_ABNORMAL
 	doweather
 	setvar VAR_0x8004, 0
@@ -505,7 +505,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
+	fadescreenspeed FADE_TO_BLACK, 8
 	call SootopolisCity_EventScript_SetRoughWater
 	removeobject 9
 	removeobject 10
@@ -547,7 +547,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	fadenewbgm MUS_RUNECITY
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warp8 MAP_SOOTOPOLIS_CITY, 255, 43, 32
+	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 43, 32
 	waitstate
 	end
 
@@ -558,7 +558,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
+	fadescreenspeed FADE_TO_BLACK, 8
 	call SootopolisCity_EventScript_SetRoughWater
 	removeobject 9
 	removeobject 10
@@ -600,7 +600,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	fadenewbgm MUS_NAMINORI
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warp8 MAP_SOOTOPOLIS_CITY, 255, 29, 53
+	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 29, 53
 	waitstate
 	end
 

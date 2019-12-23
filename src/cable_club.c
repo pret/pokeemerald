@@ -816,7 +816,7 @@ static void sub_80B32B4(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
         task->data[0]++;
@@ -862,7 +862,7 @@ static void sub_80B33BC(u8 taskId)
     switch (data[0])
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
         data[0] = 1;
@@ -1077,7 +1077,7 @@ static void sub_80B37FC(u8 taskId)
     {
     case 0:
         ScriptContext2_Enable();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkCallback_2();
         task->data[0]++;
         break;
@@ -1110,7 +1110,7 @@ static void sub_80B3894(u8 taskId)
     {
     case 0:
         ScriptContext2_Enable();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkRfuCallback();
         data[0]++;
         break;

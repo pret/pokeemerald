@@ -5,23 +5,23 @@ BattleFrontier_BattlePikeThreePathRoom_MapScripts:: @ 825C843
 	.byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_OnFrame: @ 825C853
-	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_CheckChallengeStatus
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_GetChallengeStatus
 	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpToLobby
-	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4
-	map_script_2 VAR_TEMP_5, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78
-	map_script_2 VAR_TEMP_5, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_ResumeChallenge
+	map_script_2 VAR_TEMP_5, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_SetHintRoom
+	map_script_2 VAR_TEMP_5, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_GivePikeQueenHint
 	.2byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_OnWarp: @ 825C87D
-	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887
+	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth
 	.2byte 0
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
+BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth:: @ 825C887
 	setvar VAR_TEMP_4, 1
 	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_CheckChallengeStatus:: @ 825C891
+BattleFrontier_BattlePikeThreePathRoom_EventScript_GetChallengeStatus:: @ 825C891
 	frontier_getstatus
 	end
 
@@ -30,7 +30,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpToLobby:: @ 825C89A
 	waitstate
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
+BattleFrontier_BattlePikeThreePathRoom_EventScript_ResumeChallenge:: @ 825C8A4
 	lockall
 	message BattleFrontier_BattlePikeThreePathRoom_Text_AwaitingReturnSaveBeforeResume
 	waitmessage
@@ -48,76 +48,76 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 99
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908:: @ 825C908
+BattleFrontier_BattlePikeThreePathRoom_EventScript_Attendant:: @ 825C908
 	frontier_get FRONTIER_DATA_BATTLE_NUM  @ Room number
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C968
-	case 3, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C978
-	case 5, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C988
-	case 7, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C998
-	case 9, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9A8
-	case 11, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9B8
-	case 13, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9C8
+	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom1
+	case 3, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom3
+	case 5, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom5
+	case 7, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom7
+	case 9, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom9
+	case 11, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom11
+	case 13, BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom13
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C968:: @ 825C968
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom1:: @ 825C968
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom1, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
+	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C978:: @ 825C978
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom3:: @ 825C978
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom3, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
+	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C988:: @ 825C988
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom5:: @ 825C988
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom5, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
+	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C998:: @ 825C998
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom7:: @ 825C998
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom7, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
+	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9A8:: @ 825C9A8
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom9:: @ 825C9A8
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom9, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
+	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9B8:: @ 825C9B8
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom11:: @ 825C9B8
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom11, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
+	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9C8:: @ 825C9C8
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AttendantRoom13:: @ 825C9C8
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom13, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
+	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8:: @ 825C9D8
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AskContinueChallenge:: @ 825C9D8
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_ContinueWithChallenge, MSGBOX_YESNO
 	switch VAR_RESULT
-	case NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
-	case MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
+	case NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge
 	release
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
+BattleFrontier_BattlePikeThreePathRoom_EventScript_PauseChallenge:: @ 825C9FD
 	frontier_saveparty
 	message BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData
 	waitmessage
@@ -125,20 +125,20 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	pike_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	frontier_reset
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A:: @ 825CA2A
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AskSaveChallenge:: @ 825CA2A
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_SaveChallengeAndQuit, MSGBOX_YESNO
 	switch VAR_RESULT
-	case YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD
-	case NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A
-	case MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A
+	case YES, BattleFrontier_BattlePikeThreePathRoom_EventScript_PauseChallenge
+	case NO, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge
 	release
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A:: @ 825CA5A
+BattleFrontier_BattlePikeThreePathRoom_EventScript_AskRetireChallenge:: @ 825CA5A
 	message BattleFrontier_BattlePikeThreePathRoom_Text_RetireFromChallenge
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
@@ -147,24 +147,24 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A:: @ 825CA5A
 	release
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78:: @ 825CA78
+BattleFrontier_BattlePikeThreePathRoom_EventScript_SetHintRoom:: @ 825CA78
 	pike_sethintroom
 	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
+	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_SetPikeQueenHint
 	setvar VAR_TEMP_5, 255
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91:: @ 825CA91
+BattleFrontier_BattlePikeThreePathRoom_EventScript_SetPikeQueenHint:: @ 825CA91
 	setvar VAR_TEMP_5, 1
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
-	applymovement 2, BattleFrontier_BattlePikeThreePathRoom_Movement_25CBCE
+BattleFrontier_BattlePikeThreePathRoom_EventScript_GivePikeQueenHint:: @ 825CA97
+	applymovement 2, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverApproachPlayer
 	waitmovement 0
 	lockall
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_TerrifyingEvent, MSGBOX_DEFAULT
 	releaseall
-	applymovement 2, BattleFrontier_BattlePikeThreePathRoom_Movement_25CBD5
+	applymovement 2, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos
 	waitmovement 0
 	setvar VAR_TEMP_5, 255
 	end
@@ -244,7 +244,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_GiveBrainHint:: @ 825CBC2
 	release
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_Movement_25CBCE: @ 825CBCE
+BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverApproachPlayer: @ 825CBCE
 	walk_left
 	walk_left
 	walk_down
@@ -253,7 +253,7 @@ BattleFrontier_BattlePikeThreePathRoom_Movement_25CBCE: @ 825CBCE
 	walk_down
 	step_end
 
-BattleFrontier_BattlePikeThreePathRoom_Movement_25CBD5: @ 825CBD5
+BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos: @ 825CBD5
 	walk_up
 	walk_up
 	walk_up

@@ -36,16 +36,16 @@ static void berry_fix_bg_hide(void);
 
 // .rodata
 
-static const u8 sUnknown_08617E78[] = _("Berry Program Update");
-static const u8 sUnknown_08617E8D[] = _("Ruby/Sapphire");
-static const u8 sUnknown_08617E9B[] = _("Emerald");
+static const u8 sText_BerryProgramUpdate[] = _("Berry Program Update");
+static const u8 sText_RubySapphire[] = _("Ruby/Sapphire");
+static const u8 sText_Emerald[] = _("Emerald");
 
-static const u8 Unknown_08617EA3[] = _("The Berry Program on your POKéMON\nRuby/Sapphire Game Pak will be updated.\n{COLOR RED}{SHADOW LIGHT_RED}Press the A Button.");
-static const u8 Unknown_08617F07[] = _("Please ensure the connection of your\nGame Boy Advance system matches this.\n{COLOR RED}{SHADOW LIGHT_RED}YES: Press the A Button.\nNO: Turn off the power and try again.");
-static const u8 Unknown_08617F97[] = _("Please turn on the power of POKéMON\nRuby/Sapphire while holding START and\nSELECT simultaneously. Then, ensure\nthe picture above appears.");
-static const u8 Unknown_08618020[] = _("Transmitting. Please wait.\n{COLOR RED}{SHADOW LIGHT_RED}Please do not turn off the power or\nunplug the Game Boy Advance Game\nLink Cable.");
-static const u8 Unknown_08618092[] = _("Please follow the instructions on your\nPOKéMON Ruby/Sapphire screen.");
-static const u8 Unknown_086180D7[] = _("Transmission failure.\n{COLOR RED}{SHADOW LIGHT_RED}Please try again.");
+static const u8 sText_BerryProgramWillBeUpdatedPressA[] = _("The Berry Program on your POKéMON\nRuby/Sapphire Game Pak will be updated.\n{COLOR RED}{SHADOW LIGHT_RED}Press the A Button.");
+static const u8 sText_EnsureGBAConnectionMatches[] = _("Please ensure the connection of your\nGame Boy Advance system matches this.\n{COLOR RED}{SHADOW LIGHT_RED}YES: Press the A Button.\nNO: Turn off the power and try again.");
+static const u8 sText_TurnOffPowerHoldingStartSelect[] = _("Please turn on the power of POKéMON\nRuby/Sapphire while holding START and\nSELECT simultaneously. Then, ensure\nthe picture above appears.");
+static const u8 sText_TransmittingPleaseWait[] = _("Transmitting. Please wait.\n{COLOR RED}{SHADOW LIGHT_RED}Please do not turn off the power or\nunplug the Game Boy Advance Game\nLink Cable.");
+static const u8 sText_PleaseFollowInstructionsOnScreen[] = _("Please follow the instructions on your\nPOKéMON Ruby/Sapphire screen.");
+static const u8 sText_TransmissionFailureTryAgain[] = _("Transmission failure.\n{COLOR RED}{SHADOW LIGHT_RED}Please try again.");
 
 static const struct BgTemplate gUnknown_08618108[] = {
     {
@@ -70,16 +70,16 @@ static const u16 sUnknown_08618138[] = {
     0x675a, 0, 0, 0
 };
 
-static const u8 sUnknown_08618158[] = {10, 11, 12};
-static const u8 sUnknown_0861815B[] = { 0, 10, 13};
+static const u8 sBerryProgramTextColors[] = {TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_2, TEXT_DYNAMIC_COLOR_3};
+static const u8 sGameTitleTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_4};
 
-static const u8 *const gUnknown_08618160[] = {
-    Unknown_08617F07,
-    Unknown_08617F97,
-    Unknown_08618020,
-    Unknown_08618092,
-    Unknown_086180D7,
-    Unknown_08617EA3
+static const u8 *const sBerryProgramTexts[] = {
+    sText_EnsureGBAConnectionMatches,
+    sText_TurnOffPowerHoldingStartSelect,
+    sText_TransmittingPleaseWait,
+    sText_PleaseFollowInstructionsOnScreen,
+    sText_TransmissionFailureTryAgain,
+    sText_BerryProgramWillBeUpdatedPressA
 };
 
 static const void *const gUnknown_08618178[][3] = {
@@ -230,21 +230,21 @@ static void berry_fix_gpu_set(void)
     FillWindowPixelBuffer(3, PIXEL_FILL(0));
     FillWindowPixelBuffer(0, PIXEL_FILL(0xA));
 
-    width = GetStringWidth(0, sUnknown_08617E9B, 0);
+    width = GetStringWidth(0, sText_Emerald, 0);
     left = (0x78 - width) / 2;
-    AddTextPrinterParameterized3(2, 0, left, 3, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E9B);
+    AddTextPrinterParameterized3(2, 0, left, 3, sGameTitleTextColors, TEXT_SPEED_FF, sText_Emerald);
 
-    width = GetStringWidth(0, sUnknown_08617E8D, 0);
+    width = GetStringWidth(0, sText_RubySapphire, 0);
     left = (0x78 - width) / 2 + 0x78;
-    AddTextPrinterParameterized3(2, 0, left, 3, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E8D);
+    AddTextPrinterParameterized3(2, 0, left, 3, sGameTitleTextColors, TEXT_SPEED_FF, sText_RubySapphire);
 
-    width = GetStringWidth(0, sUnknown_08617E8D, 0);
+    width = GetStringWidth(0, sText_RubySapphire, 0);
     left = (0x70 - width) / 2;
-    AddTextPrinterParameterized3(3, 0, left, 0, sUnknown_0861815B, TEXT_SPEED_FF, sUnknown_08617E8D);
+    AddTextPrinterParameterized3(3, 0, left, 0, sGameTitleTextColors, TEXT_SPEED_FF, sText_RubySapphire);
 
-    width = GetStringWidth(1, sUnknown_08617E78, 0);
+    width = GetStringWidth(1, sText_BerryProgramUpdate, 0);
     left = (0xD0 - width) / 2;
-    AddTextPrinterParameterized3(0, 1, left, 2, sUnknown_08618158, TEXT_SPEED_FF, sUnknown_08617E78);
+    AddTextPrinterParameterized3(0, 1, left, 2, sBerryProgramTextColors, TEXT_SPEED_FF, sText_BerryProgramUpdate);
 
     CopyWindowToVram(2, 2);
     CopyWindowToVram(3, 2);
@@ -274,7 +274,7 @@ static void berry_fix_text_print(int scene)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     FillWindowPixelBuffer(1, PIXEL_FILL(0xA));
-    AddTextPrinterParameterized3(1, 1, 0, 0, sUnknown_08618158, -1, gUnknown_08618160[scene]);
+    AddTextPrinterParameterized3(1, 1, 0, 0, sBerryProgramTextColors, -1, sBerryProgramTexts[scene]);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
     switch (scene)

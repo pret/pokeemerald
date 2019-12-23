@@ -9,13 +9,13 @@ MysteryEventScript_MysticTicket:: @ 867550B
 	checkflag FLAG_CAUGHT_HO_OH
 	vgoto_if_eq MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
-	compare_var_to_value VAR_RESULT, TRUE
+	compare VAR_RESULT, TRUE
 	vgoto_if_eq MysticTicket_Obtained
 	vmessage sText_MysticTicketForYou
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_MYSTIC_TICKET, 1
-	compare_var_to_value VAR_RESULT, FALSE
+	compare VAR_RESULT, FALSE
 	vgoto_if_eq MysticTicket_NoBagSpace
 	giveitem_std ITEM_MYSTIC_TICKET
 	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK

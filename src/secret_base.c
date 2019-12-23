@@ -413,7 +413,7 @@ static void Task_EnterSecretBase(u8 taskId)
 
         SetSecretBaseWarpDestination();
         WarpIntoMap();
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskId);
         break;
@@ -423,7 +423,7 @@ static void Task_EnterSecretBase(u8 taskId)
 void EnterSecretBase(void)
 {
     CreateTask(Task_EnterSecretBase, 0);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
@@ -456,7 +456,7 @@ static void EnterNewlyCreatedSecretBase_StartFadeIn(void)
     y += 7;
     MapGridSetMetatileIdAt(x, y, 0x220 | METATILE_COLLISION_MASK);
     CurrentMapDrawMetatileAt(x, y);
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(EnterNewlyCreatedSecretBase_WaitFadeIn, 0);
 }
 
@@ -678,7 +678,7 @@ static void Task_WarpOutOfSecretBase(u8 taskId)
     case 2:
         SetWarpDestinationToDynamicWarp(0x7e);
         WarpIntoMap();
-        gFieldCallback = mapldr_default;
+        gFieldCallback = FieldCB_DefaultWarpExit;
         SetMainCallback2(CB2_LoadMap);
         ScriptContext2_Disable();
         DestroyTask(taskId);

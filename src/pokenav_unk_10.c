@@ -573,7 +573,7 @@ u32 sub_81D0A6C(s32 state)
         return LT_PAUSE;
     case 7:
         sub_81D12D8(structPtr);
-        sub_81C7BA4(10);
+        PrintHelpBarText(HELPBAR_RIBBONS_LIST);
         return LT_INC_AND_PAUSE;
     case 8:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -667,7 +667,7 @@ u32 sub_81D0D2C(s32 state)
         if (!sub_81D1524(structPtr))
         {
             sub_81D0EFC(structPtr);
-            sub_81C7BA4(11);
+            PrintHelpBarText(HELPBAR_RIBBONS_CHECK);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -721,7 +721,7 @@ u32 sub_81D0E00(s32 state)
         if (!sub_81D1524(structPtr))
         {
             sub_81D0E84(structPtr);
-            sub_81C7BA4(10);
+            PrintHelpBarText(HELPBAR_RIBBONS_LIST);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -752,7 +752,7 @@ void sub_81D0E60(struct PokenavSub14 *structPtr)
 
 void sub_81D0E84(struct PokenavSub14 *structPtr)
 {
-    u8 color[] = {4, 2, 3};
+    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
     ConvertIntToDecimalStringN(gStringVar1, GetCurrMonRibbonCount(), STR_CONV_MODE_LEFT_ALIGN, 2);
     DynamicPlaceholderTextUtil_Reset();
@@ -767,7 +767,7 @@ void sub_81D0EFC(struct PokenavSub14 *structPtr)
 {
     s32 i;
     u32 ribbonId = sub_81D0954();
-    u8 color[] = {4, 2, 3};
+    u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
     FillWindowPixelBuffer(structPtr->field_A, PIXEL_FILL(4));
     if (ribbonId < 25)

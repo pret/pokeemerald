@@ -1,7 +1,7 @@
 MysteryEventScript_VisitingTrainer:: @ 8674EC1
 	setvaddress MysteryEventScript_VisitingTrainer
 	special ValidateEReaderTrainer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	vgoto_if_eq MysteryEventScript_VisitingTrainerArrived
 	lock
 	faceplayer

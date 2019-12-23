@@ -214,10 +214,10 @@ SecretBase_EventScript_AlreadyHasSecretBase:: @ 8275BE8
 	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	special MoveOutOfSecretBaseFromOutside
 	closemessage
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	msgbox SecretBase_Text_MovingCompletedUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance

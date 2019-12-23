@@ -46,7 +46,7 @@ struct PokenavSub17Substruct
     u32 unk28;
     s32 unk2C;
     u32 unk30;
-    void (*unk34)(struct PokenavMonList *, u8*);
+    void (*unk34)(struct PokenavMatchCallEntries *, u8*);
     void (*unk38)(u16, u32, u32);
     struct Sprite *rightArrow;
     struct Sprite *upArrow;
@@ -67,8 +67,8 @@ struct PokenavSub17
 extern void sub_81DB620(u32 windowId, u32 a1, u32 a2, u32 a3, u32 a4);
 
 void sub_81C82E4(struct PokenavSub17 *a0);
-bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct MatchCallListTemplate *a2, s32 a3);
-void sub_81C9160(struct MatchCallWindowState *a0, struct MatchCallListTemplate *a1);
+bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3);
+void sub_81C9160(struct MatchCallWindowState *a0, struct PokenavListTemplate *a1);
 void SpriteCB_MatchCallUpArrow(struct Sprite *sprite);
 void SpriteCB_MatchCallDownArrow(struct Sprite *sprite);
 void SpriteCB_MatchCallRightArrow(struct Sprite *sprite);
@@ -76,7 +76,7 @@ void ToggleMatchCallArrows(struct PokenavSub17Substruct *a0, u32 a1);
 void sub_81C8FE0(struct PokenavSub17Substruct *a0);
 void sub_81C8EF8(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
 void sub_81C8ED0(void);
-void sub_81C8E54(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 a2);
+static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 a2);
 void PrintMatchCallFieldNames(struct PokenavSub17Substruct *a0, u32 a1);
 void sub_81C8D4C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
 void sub_81C8CB4(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1);
@@ -91,14 +91,14 @@ u32 LoopedTask_sub_81C83F0(s32 state);
 u32 LoopedTask_sub_81C85A0(s32 state);
 u32 LoopedTask_sub_81C8870(s32 state);
 u32 LoopedTask_sub_81C8A28(s32 state);
-u32 LoopedTask_sub_81C8958(s32 state);
+u32 LoopedTask_PrintCheckPageInfo(s32 state);
 
 static const u16 sMatchcallArrowPaletteData[] = INCBIN_U16("graphics/pokenav/arrows_matchcall.gbapal");
 static const u32 sMatchcallArrowSpriteSheetData[] = INCBIN_U32("graphics/pokenav/arrows_matchcall.4bpp.lz");
 
 EWRAM_DATA u32 gUnknown_0203CF44 = 0;
 
-bool32 sub_81C81D4(const struct BgTemplate *arg0, struct MatchCallListTemplate *arg1, s32 arg2)
+bool32 sub_81C81D4(const struct BgTemplate *arg0, struct PokenavListTemplate *arg1, s32 arg2)
 {
     struct PokenavSub17 *structPtr = AllocSubstruct(17, sizeof(struct PokenavSub17));
     if (structPtr == NULL)
@@ -467,12 +467,12 @@ void sub_81C877C(void)
     structPtr->unk8A0 = CreateLoopedTask(LoopedTask_sub_81C8870, 6);
 }
 
-void sub_81C87AC(s16 a0)
+void PrintCheckPageInfo(s16 a0)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(17);
     structPtr->unk888.windowTopIndex += a0;
     structPtr->unk89C = 0;
-    structPtr->unk8A0 = CreateLoopedTask(LoopedTask_sub_81C8958, 6);
+    structPtr->unk8A0 = CreateLoopedTask(LoopedTask_PrintCheckPageInfo, 6);
 }
 
 void sub_81C87F0(void)
@@ -496,6 +496,7 @@ void sub_81C8838(void)
     CopyWindowToVram(structPtr->unk0.unk0.windowId, 1);
 }
 
+// TODO:
 u32 LoopedTask_sub_81C8870(s32 state)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(17);
@@ -543,7 +544,7 @@ u32 LoopedTask_sub_81C8870(s32 state)
     return LT_FINISH;
 }
 
-u32 LoopedTask_sub_81C8958(s32 state)
+u32 LoopedTask_PrintCheckPageInfo(s32 state)
 {
     struct PokenavSub17 *structPtr = GetSubstructPtr(17);
     if (IsDma3ManagerBusyWithBgCopy())
@@ -558,22 +559,22 @@ u32 LoopedTask_sub_81C8958(s32 state)
         PrintMatchCallFieldNames(&structPtr->unk0, 0);
         break;
     case 2:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 0);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_STRATEGY);
         break;
     case 3:
         PrintMatchCallFieldNames(&structPtr->unk0, 1);
         break;
     case 4:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 1);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_POKEMON);
         break;
     case 5:
         PrintMatchCallFieldNames(&structPtr->unk0, 2);
         break;
     case 6:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 2);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_INTRO_1);
         break;
     case 7:
-        sub_81C8E54(&structPtr->unk888, &structPtr->unk0, 3);
+        PrintMatchCallFlavorText(&structPtr->unk888, &structPtr->unk0, CHECK_PAGE_INTRO_2);
         break;
     default:
         return LT_FINISH;
@@ -683,7 +684,7 @@ void sub_81C8B70(struct UnknownSubSubStruct_0203CF40 *a0, s32 a1, s32 a2)
     }
 
     for (a2--; a2 != -1; a1 = (a1 + 1) & 0xF, a2--)
-        sub_81CBD48(a0->windowId, a1);
+        ClearRematchPokeballIcon(a0->windowId, a1);
 
     CopyWindowToVram(a0->windowId, 1);
 }
@@ -705,7 +706,7 @@ void sub_81C8C64(struct UnknownSubSubStruct_0203CF40 *a0, u32 a1)
 
 void sub_81C8CB4(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1)
 {
-    u8 colors[3] = {0, 2, 5};
+    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_RED};
 
     a1->unk34(a0->unk10 + a0->unkC * a0->windowTopIndex, a1->unkTextBuffer);
     a1->unk38(a1->unk0.windowId, a0->windowTopIndex, a1->unk0.unkA);
@@ -727,7 +728,7 @@ void sub_81C8D4C(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *
 void PrintMatchCallFieldNames(struct PokenavSub17Substruct *a0, u32 fieldId)
 {
     const u8 *fieldNames[] = {gText_PokenavMatchCall_Strategy, gText_PokenavMatchCall_TrainerPokemon, gText_PokenavMatchCall_SelfIntroduction};
-    u8 colors[3] = {1, 4, 5};
+    u8 colors[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
     u32 top = (a0->unk0.unkA + 1 + (fieldId * 2)) & 0xF;
 
     FillWindowPixelRect(a0->unk0.windowId, PIXEL_FILL(1), 0, top << 4, a0->unk0.unk4, 16);
@@ -735,11 +736,19 @@ void PrintMatchCallFieldNames(struct PokenavSub17Substruct *a0, u32 fieldId)
     CopyWindowRectToVram(a0->unk0.windowId, 2, 0, top << 1, a0->unk0.unk4, 2);
 }
 
-void sub_81C8E54(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 a2)
+static void PrintMatchCallFlavorText(struct MatchCallWindowState *a0, struct PokenavSub17Substruct *a1, u32 checkPageEntry)
 {
-    static const u8 array[] = {2, 4, 6, 7};
-    u32 r6 = (a1->unk0.unkA + array[a2]) & 0xF;
-    const u8 *str = sub_81CAFD8(a0->windowTopIndex, a2);
+    // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
+    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = 
+    {
+        [CHECK_PAGE_STRATEGY] = 2, 
+        [CHECK_PAGE_POKEMON]  = 4, 
+        [CHECK_PAGE_INTRO_1]  = 6, 
+        [CHECK_PAGE_INTRO_2]  = 7
+    };
+
+    u32 r6 = (a1->unk0.unkA + lineOffsets[checkPageEntry]) & 0xF;
+    const u8 *str = GetMatchCallFlavorText(a0->windowTopIndex, checkPageEntry);
 
     if (str != NULL)
     {
@@ -925,9 +934,9 @@ void ToggleMatchCallVerticalArrows(bool32 shouldHide)
     structPtr->unk0.downArrow->data[7] = shouldHide;
 }
 
-void sub_81C9160(struct MatchCallWindowState *a0, struct MatchCallListTemplate *a1)
+void sub_81C9160(struct MatchCallWindowState *a0, struct PokenavListTemplate *a1)
 {
-    a0->unk10 = a1->unk0;
+    a0->unk10 = a1->list.matchCallEntries;
     a0->windowTopIndex = a1->unk6;
     a0->listLength = a1->unk4;
     a0->unkC = a1->unk8;
@@ -953,13 +962,13 @@ void sub_81C9160(struct MatchCallWindowState *a0, struct MatchCallListTemplate *
     }
 }
 
-bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct MatchCallListTemplate *a2, s32 a3)
+bool32 sub_81C91AC(struct PokenavSub17Substruct *a0, const struct BgTemplate *a1, struct PokenavListTemplate *a2, s32 a3)
 {
     struct WindowTemplate window;
 
     a0->unk0.bg = a1->bg;
     a0->unk0.unk6 = a3;
-    a0->unk34 = a2->unk10;
+    a0->unk34 = a2->listFunc.unk10_2;
     a0->unk38 = a2->unk14;
     a0->unk0.unk1 = a2->unkD;
     a0->unk0.unk2 = a2->unk9;

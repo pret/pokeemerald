@@ -72,9 +72,9 @@ static const struct WindowTemplate sUnknown_086253E8[] =
     }
 };
 
-static const u8 sUnknown_08625400[] =
+static const u8 sPlayerNameTextColors[] =
 {
-    1, 2, 3
+    TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY
 };
 
 static const u8 sEmptyItemName[] = _("");
@@ -267,7 +267,7 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     length = StringLength(buffer);
     if (length <= 5)
         ConvertInternationalString(buffer, LANGUAGE_JAPANESE);
-    AddTextPrinterParameterized4(windowId, 1, 8, y, 0, 0, sUnknown_08625400, -1, buffer);
+    AddTextPrinterParameterized4(windowId, 1, 8, y, 0, 0, sPlayerNameTextColors, -1, buffer);
 }
 
 u8 sub_81D1DC0(struct PlayerPCItemPageStruct *page)
@@ -1476,14 +1476,14 @@ static void sub_81D35E8(struct Sprite *sprite)
     }
 }
 
-static const u8 *const sLvlUpStatStrings[] =
+static const u8 *const sLvlUpStatStrings[NUM_STATS] =
 {
-    gUnknown_085EEA46,
-    gUnknown_085EEA4E,
-    gUnknown_085EEA55,
-    gUnknown_085EEA63,
-    gUnknown_085EEA6B,
-    gUnknown_085EEA5D
+    gText_MaxHP,
+    gText_Attack,
+    gText_Defense,
+    gText_SpAtk,
+    gText_SpDef,
+    gText_Speed
 };
 
 void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr)
@@ -1517,7 +1517,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      -1,
                                      sLvlUpStatStrings[i]);
 
-        StringCopy(text, (statsDiff[i] >= 0) ? gText_UnkCtrlF904 : gText_Dash);
+        StringCopy(text, (statsDiff[i] >= 0) ? gText_Plus : gText_Dash);
         AddTextPrinterParameterized3(windowId,
                                      1,
                                      56,

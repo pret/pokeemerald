@@ -1341,7 +1341,7 @@ static void CB2_QuizLadyQuestion(void)
     switch (gMain.state)
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         break;
     case 1:
         if (!gPaletteFade.active)
@@ -3703,7 +3703,7 @@ static void sub_811CFCC(void)
 
     xOffset = GetStringCenterAlignXOffset(1, titleText, 144);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    sub_811D058(0, 1, titleText, xOffset, 1, 0xFF, 0, 2, 3);
+    sub_811D058(0, 1, titleText, xOffset, 1, 0xFF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
@@ -3713,12 +3713,12 @@ void sub_811D028(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, vo
     AddTextPrinterParameterized(windowId, fontId, str, x, y, speed, callback);
 }
 
-static void sub_811D058(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 red, u8 green, u8 blue)
+static void sub_811D058(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 bg, u8 fg, u8 shadow)
 {
     u8 color[3];
-    color[0] = red;
-    color[1] = green;
-    color[2] = blue;
+    color[0] = bg;
+    color[1] = fg;
+    color[2] = shadow;
     AddTextPrinterParameterized3(windowId, fontId, left, top, color, speed, str);
 }
 
@@ -4089,7 +4089,7 @@ static void sub_811D864(u8 arg0, u8 arg1)
                 if (!sub_811BF88(easyChatWord))
                     sub_811D028(2, 1, sUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, NULL);
                 else
-                    sub_811D058(2, 1, sUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, 1, 5, 3);
+                    sub_811D058(2, 1, sUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GREY);
             }
         }
 

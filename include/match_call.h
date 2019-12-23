@@ -15,7 +15,7 @@ void InitMatchCallCounters(void);
 bool32 TryStartMatchCall(void);
 bool32 IsMatchCallTaskActive(void);
 void StartMatchCallFromScript(u8 *message);
-void sub_8197080(u8 *destStr);
+void BufferPokedexRatingForMatchCall(u8 *destStr);
 bool32 SelectMatchCallMessage(int, u8 *);
 void sub_8197184(u32 windowId, u32 destOffset, u32 paletteId);
 void sub_81971C4(u32 windowId, u32 tileOffset, u32 paletteId);
