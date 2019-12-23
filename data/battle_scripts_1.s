@@ -5865,6 +5865,8 @@ BattleScript_IllusionOff::
 	return
 
 BattleScript_AftermathDmg::
+	pause 0x20
+	call BattleScript_AbilityPopUp
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
