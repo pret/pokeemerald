@@ -451,7 +451,7 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void))
         sPokeblockMenu->pokeblockOptionsIds = sActionsWhenGivingToLady;
         sPokeblockMenu->optionsNo = ARRAY_COUNT(sActionsWhenGivingToLady);
         break;
-    default:
+    default: // PBLOCK_CASE_FIELD
         sPokeblockMenu->pokeblockOptionsIds = sActionsOnField;
         sPokeblockMenu->optionsNo = ARRAY_COUNT(sActionsOnField);
         break;
