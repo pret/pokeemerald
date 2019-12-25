@@ -465,7 +465,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C436:: @ 824C436
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BDF7
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C440:: @ 824C440
-	frontier_set FRONTIER_DATA_6, 0
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, FALSE
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_DOME
 	setvar VAR_0x8005, 0

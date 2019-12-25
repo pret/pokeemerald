@@ -1509,8 +1509,8 @@ void BtlController_EmitCmd55(u8 bufferId, u8 battleOutcome)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_55;
     sBattleBuffersTransferData[1] = battleOutcome;
-    sBattleBuffersTransferData[2] = gSaveBlock2Ptr->frontier.field_CA9_b;
-    sBattleBuffersTransferData[3] = gSaveBlock2Ptr->frontier.field_CA9_b;
+    sBattleBuffersTransferData[2] = gSaveBlock2Ptr->frontier.disableRecordBattle;
+    sBattleBuffersTransferData[3] = gSaveBlock2Ptr->frontier.disableRecordBattle;
     sBattleBuffersTransferData[5] = sBattleBuffersTransferData[4] = sub_81850DC(&sBattleBuffersTransferData[6]);
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, sBattleBuffersTransferData[4] + 6);
 }

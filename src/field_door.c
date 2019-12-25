@@ -9,7 +9,7 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 
-bool8 sub_808A964(void);
+static bool8 ShouldUseMultiCorridorDoor(void);
 
 const u8 DoorAnimTiles_04[][0x100] =
 {
@@ -698,14 +698,14 @@ static void DrawDoor(const struct DoorGraphics *gfx, const struct DoorAnimFrame 
     if (frame->offset == 0xFFFF)
     {
         DrawClosedDoorTiles(gfx, x, y);
-        if (sub_808A964())
+        if (ShouldUseMultiCorridorDoor())
             DrawClosedDoorTiles(gfx, gSpecialVar_0x8004 + 7, gSpecialVar_0x8005 + 7);
     }
     else
     {
         CopyDoorTilesToVram(gfx, frame);
         DrawCurrentDoorAnimFrame(gfx, x, y, gfx->palette);
-        if (sub_808A964())
+        if (ShouldUseMultiCorridorDoor())
             DrawCurrentDoorAnimFrame(gfx, gSpecialVar_0x8004 + 7, gSpecialVar_0x8005 + 7, gfx->palette);
     }
 }
@@ -885,11 +885,13 @@ u32 GetDoorSoundEffect(u32 x, u32 y)
         return SE_DOOR;
 }
 
-bool8 sub_808A964(void)
+// Opens the Battle Tower multi partner's door in sync with the player's door
+static bool8 ShouldUseMultiCorridorDoor(void)
 {
-    if (FlagGet(FLAG_SPECIAL_FLAG_0x4002))
+    if (FlagGet(FLAG_ENABLE_MULTI_CORRIDOR_DOOR))
     {
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2))
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR) 
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR))
         {
             return TRUE;
         }
