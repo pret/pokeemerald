@@ -2686,12 +2686,10 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     else
                     {
                         gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
-                        gBattleMons[gBattlerTarget].item = 0;                        
+                        gBattleMons[gBattlerTarget].item = 0;
 
                         CheckSetUnburden(gBattlerTarget);
-
-                        if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNBURDEN && gBattleResources->flags->flags[gBattlerAttacker] & RESOURCE_FLAG_UNBURDEN)
-                            gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
+                        gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
 
                         gActiveBattler = gBattlerAttacker;
                         BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
@@ -2944,7 +2942,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
                     gBattleMons[gEffectBattler].item = 0;
-
                     CheckSetUnburden(gEffectBattler);
 
                     gActiveBattler = gEffectBattler;
@@ -2960,7 +2957,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
                     gBattleMons[gEffectBattler].item = 0;
-
                     CheckSetUnburden(gEffectBattler);
 
                     gActiveBattler = gEffectBattler;
@@ -6140,7 +6136,6 @@ static void Cmd_removeitem(void)
         gBattleStruct->usedHeldItems[gActiveBattler] = gBattleMons[gActiveBattler].item;
 
     gBattleMons[gActiveBattler].item = 0;
-    
     CheckSetUnburden(gActiveBattler);
 
     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
@@ -7608,11 +7603,13 @@ static void Cmd_various(void)
             gBattleMons[gActiveBattler].item = ITEM_NONE;
             BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
             MarkBattlerForControllerExec(gActiveBattler);
+            CheckSetUnburden(gBattlerAttacker);
 
             gActiveBattler = gBattlerTarget;
             gBattleMons[gActiveBattler].item = gLastUsedItem;
             BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
             MarkBattlerForControllerExec(gActiveBattler);
+            gBattleResources->flags->flags[gBattlerTarget] &= ~(RESOURCE_FLAG_UNBURDEN);
 
             gBattlescriptCurrInstr += 7;
         }
@@ -10518,7 +10515,6 @@ static void Cmd_tryswapitems(void) // trick
             else
             {
                 CheckSetUnburden(gBattlerAttacker);
-
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1; // attacker's item -> <- nothing
             }
         }
