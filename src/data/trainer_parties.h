@@ -12419,7 +12419,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Leaf[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Brendan16[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_BrendanLinkPlaceholder[] = {
     {
     .iv = 0,
     .lvl = 5,
@@ -12427,7 +12427,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Brendan16[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_May16[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_MayLinkPlaceholder[] = {
     {
     .iv = 0,
     .lvl = 5,
