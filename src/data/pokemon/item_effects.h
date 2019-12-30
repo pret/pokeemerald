@@ -236,7 +236,7 @@ const u8 gItemEffect_PPMax[9] = {
 };
 
 const u8 gItemEffect_GuardSpec[8] = {
-    [3] = ITEM3_MIST,
+    [3] = ITEM3_GUARD_SPEC,
     [5] = ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID,
     [6] = 1,
     [7] = 1,

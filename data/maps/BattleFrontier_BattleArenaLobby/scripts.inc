@@ -77,8 +77,8 @@ BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge:: @ 8255D59
 	arena_save 0
 	playse SE_SAVE
 	waitse
-	call BattleFrontier_BattleArenaLobby_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattleArenaLobby_Text_RecordLastMatch
 	waitmessage
