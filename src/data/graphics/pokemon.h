@@ -845,6 +845,8 @@ const u32 gMonFrontPic_Naganadel[] = INCBIN_U32("graphics/pokemon/naganadel/fron
 const u32 gMonFrontPic_Stakataka[] = INCBIN_U32("graphics/pokemon/stakataka/front.4bpp.lz");
 const u32 gMonFrontPic_Blacephalon[] = INCBIN_U32("graphics/pokemon/blacephalon/front.4bpp.lz");
 const u32 gMonFrontPic_Zeraora[] = INCBIN_U32("graphics/pokemon/zeraora/front.4bpp.lz");
+const u32 gMonFrontPic_Meltan[] = INCBIN_U32("graphics/pokemon/meltan/front.4bpp.lz");
+const u32 gMonFrontPic_Melmetal[] = INCBIN_U32("graphics/pokemon/melmetal/front.4bpp.lz");
 
 const u32 gMonBackPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/back.4bpp.lz");
 const u32 gMonBackPic_Bulbasaur[] = INCBIN_U32("graphics/pokemon/bulbasaur/back.4bpp.lz");
@@ -1692,6 +1694,8 @@ const u32 gMonBackPic_Naganadel[] = INCBIN_U32("graphics/pokemon/naganadel/back.
 const u32 gMonBackPic_Stakataka[] = INCBIN_U32("graphics/pokemon/stakataka/back.4bpp.lz");
 const u32 gMonBackPic_Blacephalon[] = INCBIN_U32("graphics/pokemon/blacephalon/back.4bpp.lz");
 const u32 gMonBackPic_Zeraora[] = INCBIN_U32("graphics/pokemon/zeraora/back.4bpp.lz");
+const u32 gMonBackPic_Meltan[] = INCBIN_U32("graphics/pokemon/meltan/back.4bpp.lz");
+const u32 gMonBackPic_Melmetal[] = INCBIN_U32("graphics/pokemon/melmetal/back.4bpp.lz");
 
 const u32 gMonPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/normal.gbapal.lz");
 const u32 gMonPalette_Bulbasaur[] = INCBIN_U32("graphics/pokemon/bulbasaur/normal.gbapal.lz");
@@ -2513,6 +2517,8 @@ const u32 gMonPalette_Naganadel[] = INCBIN_U32("graphics/pokemon/naganadel/norma
 const u32 gMonPalette_Stakataka[] = INCBIN_U32("graphics/pokemon/stakataka/normal.gbapal.lz");
 const u32 gMonPalette_Blacephalon[] = INCBIN_U32("graphics/pokemon/blacephalon/normal.gbapal.lz");
 const u32 gMonPalette_Zeraora[] = INCBIN_U32("graphics/pokemon/zeraora/normal.gbapal.lz");
+const u32 gMonPalette_Meltan[] = INCBIN_U32("graphics/pokemon/meltan/normal.gbapal.lz");
+const u32 gMonPalette_Melmetal[] = INCBIN_U32("graphics/pokemon/melmetal/normal.gbapal.lz");
 
 const u32 gMonShinyPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/shiny.gbapal.lz");
 const u32 gMonShinyPalette_Bulbasaur[] = INCBIN_U32("graphics/pokemon/bulbasaur/shiny.gbapal.lz");
@@ -3333,6 +3339,8 @@ const u32 gMonShinyPalette_Naganadel[] = INCBIN_U32("graphics/pokemon/naganadel/
 const u32 gMonShinyPalette_Stakataka[] = INCBIN_U32("graphics/pokemon/stakataka/shiny.gbapal.lz");
 const u32 gMonShinyPalette_Blacephalon[] = INCBIN_U32("graphics/pokemon/blacephalon/shiny.gbapal.lz");
 const u32 gMonShinyPalette_Zeraora[] = INCBIN_U32("graphics/pokemon/zeraora/shiny.gbapal.lz");
+const u32 gMonShinyPalette_Meltan[] = INCBIN_U32("graphics/pokemon/meltan/shiny.gbapal.lz");
+const u32 gMonShinyPalette_Melmetal[] = INCBIN_U32("graphics/pokemon/melmetal/shiny.gbapal.lz");
 
 const u32 gMonFrontPic_MegaVenusaur[] = INCBIN_U32("graphics/pokemon/mega_venusaur/front.4bpp.lz");
 const u32 gMonBackPic_MegaVenusaur[] = INCBIN_U32("graphics/pokemon/mega_venusaur/back.4bpp.lz");
@@ -4454,6 +4462,8 @@ const u8 gMonIcon_Naganadel[] = INCBIN_U8("graphics/pokemon/naganadel/icon.4bpp"
 const u8 gMonIcon_Stakataka[] = INCBIN_U8("graphics/pokemon/stakataka/icon.4bpp");
 const u8 gMonIcon_Blacephalon[] = INCBIN_U8("graphics/pokemon/blacephalon/icon.4bpp");
 const u8 gMonIcon_Zeraora[] = INCBIN_U8("graphics/pokemon/zeraora/icon.4bpp");
+const u8 gMonIcon_Meltan[] = INCBIN_U8("graphics/pokemon/meltan/icon.4bpp");
+const u8 gMonIcon_Melmetal[] = INCBIN_U8("graphics/pokemon/melmetal/icon.4bpp");
 const u8 gMonIcon_MegaVenusaur[] = INCBIN_U8("graphics/pokemon/mega_venusaur/icon.4bpp");
 const u8 gMonIcon_MegaCharizardX[] = INCBIN_U8("graphics/pokemon/mega_charizard_x/icon.4bpp");
 const u8 gMonIcon_MegaCharizardY[] = INCBIN_U8("graphics/pokemon/mega_charizard_y/icon.4bpp");

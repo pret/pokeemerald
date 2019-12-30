@@ -9695,4 +9695,28 @@ const struct PokedexEntry gPokedexEntries[] =
 		.trainerScale = 256,
 		.trainerOffset = 0,
 	},
+
+	[NATIONAL_DEX_MELTAN] =
+	{
+		.categoryName = _("Hex Nut"),
+		.height = 2,
+		.weight = 80,
+		.description = gMeltanPokedexText,
+		.pokemonScale = 640,
+		.pokemonOffset = 23,
+		.trainerScale = 256,
+		.trainerOffset = 0,
+	},
+
+	[NATIONAL_DEX_MELMETAL] =
+	{
+		.categoryName = _("Hex Nut"),
+		.height = 25,
+		.weight = 800,
+		.description = gMelmetalPokedexText,
+		.pokemonScale = 255,
+		.pokemonOffset = 1,
+		.trainerScale = 387,
+		.trainerOffset = 2,
+	},
 };

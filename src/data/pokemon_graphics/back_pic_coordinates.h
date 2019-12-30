@@ -4036,6 +4036,16 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = 0x64,
         .y_offset = 0x0B,
     },
+    [SPECIES_MELTAN] =
+    {
+        .size = 0x66,
+        .y_offset = 0x0C,
+    },
+    [SPECIES_MELMETAL] =
+    {
+        .size = 0x66,
+        .y_offset = 0x0D,
+    },
     // Eggs + Unown
     [SPECIES_EGG] =
     {
