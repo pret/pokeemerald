@@ -53,7 +53,36 @@
 	special CallBattleTowerFunc
 	.endm
 
-	@ TODO: Document and add macros for BATTLE_TOWER_FUNC_10 - BATTLE_TOWER_FUNC_14 
+	@ Load the parties, gfx, and other data (like Apprentice id) for the multi partner candidates
+	.macro tower_loadpartners
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_LOAD_PARTNERS
+	special CallBattleTowerFunc
+	.endm
+
+	@ Print message from potential multi partner. msgId is any PARTNER_MSGID_*
+	.macro tower_dopartnermsg msgId:req
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_PARTNER_MSG
+	setvar VAR_0x8005, \msgId
+	special CallBattleTowerFunc
+	.endm
+
+	@ Receives/loads the opponent data for a link multi challenge. Returns 6 when finished, and finishes immediately if not doing a link multi battle.
+	.macro tower_loadlinkopponents
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_LOAD_LINK_OPPONENTS
+	special CallBattleTowerFunc
+	.endm
+
+	@ Unknown. Destroys some link task if using wireless link. Wait for link?
+	.macro tower_unklink
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_13
+	special CallBattleTowerFunc
+	.endm
+
+	@ Set VAR_OBJ_GFX_ID_E to the gfx id of the selected multi partner
+	.macro tower_setpartnergfx
+	setvar VAR_0x8004, BATTLE_TOWER_FUNC_SET_PARTNER_GFX
+	special CallBattleTowerFunc
+	.endm
 
 	@ Set the data used for the post-challenge Battle Tower interview
 	.macro tower_setinterviewdata
