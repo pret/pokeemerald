@@ -4652,14 +4652,23 @@ void HandleAction_RunBattleScript(void) // identical to RunBattleScriptCommands
 
 u32 SetRandomTarget(u32 battlerId)
 {
+    u32 target;
     static const u8 targets[2][2] =
     {
         [B_SIDE_PLAYER] = {B_POSITION_OPPONENT_LEFT, B_POSITION_OPPONENT_RIGHT},
         [B_SIDE_OPPONENT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT},
     };
-    u32 target = GetBattlerAtPosition(targets[GetBattlerSide(battlerId)][Random() % 2]);
-    if (!IsBattlerAlive(target))
-        target ^= BIT_FLANK;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        target = GetBattlerAtPosition(targets[GetBattlerSide(battlerId)][Random() % 2]);
+        if (!IsBattlerAlive(target))
+            target ^= BIT_FLANK;
+    }
+    else
+    {
+        target = GetBattlerAtPosition(targets[GetBattlerSide(battlerId)][0]);
+    }
 
     return target;
 }
