@@ -20599,6 +20599,52 @@ const struct BaseStats gBaseStats[] =
         .bodyColor = BODY_COLOR_YELLOW,
     },
 
+    [SPECIES_MELTAN] =
+    {
+        .baseHP        = 46, 
+        .baseAttack    = 65,
+        .baseDefense   = 65,
+        .baseSpeed     = 34,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 35,
+        .type1 = TYPE_STEEL,
+        .type2 = TYPE_STEEL,
+        .catchRate = 3,
+        .expYield = 135,
+        .evYield_Attack = 1,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroup1 = EGG_GROUP_UNDISCOVERED,
+        .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+        .abilities = {ABILITY_MAGNET_PULL, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GRAY,
+    },
+    
+    [SPECIES_MELMETAL] =
+    {
+        .baseHP        = 135, 
+        .baseAttack    = 143,
+        .baseDefense   = 143,
+        .baseSpeed     = 34,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 65,
+        .type1 = TYPE_STEEL,
+        .type2 = TYPE_STEEL,
+        .catchRate = 3,
+        .expYield = 270,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroup1 = EGG_GROUP_UNDISCOVERED,
+        .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+        .abilities = {ABILITY_IRON_FIST, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_GRAY,
+    },
+
     [SPECIES_MEGA_GENGAR] =
     {
         .baseHP        = 60,
