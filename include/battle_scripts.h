@@ -328,5 +328,6 @@ extern const u8 BattleScript_MoveEffectBugBite[];
 extern const u8 BattleScript_IllusionOff[];
 extern const u8 BattleScript_DancerActivates[];
 extern const u8 BattleScript_AftermathDmg[];
+extern const u8 BattleScript_StanceChangeActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

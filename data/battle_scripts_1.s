@@ -5881,6 +5881,18 @@ BattleScript_MegaEvolution::
 	printstring STRINGID_MEGAEVOEVOLVED
 	waitmessage 0x40
 	end2
+	
+BattleScript_StanceChangeActivates::
+	pause 0x5
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 0x1
+	handleformchange BS_ATTACKER, 0
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	handleformchange BS_ATTACKER, 2 
+	return
 
 BattleScript_IllusionOff::
 	spriteignore0hp TRUE

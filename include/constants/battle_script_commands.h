@@ -145,6 +145,7 @@
 #define VARIOUS_UPDATE_NICK                     82
 #define VARIOUS_TRY_ILLUSION_OFF                83
 #define VARIOUS_SET_SPRITEIGNORE0HP             84
+#define VARIOUS_HANDLE_FORM_CHANGE              85
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0

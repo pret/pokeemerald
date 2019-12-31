@@ -407,6 +407,7 @@
 #define B_ANIM_TERRAIN_ELECTRIC         0x1A
 #define B_ANIM_TERRAIN_PSYCHIC          0x1B
 #define B_ANIM_ILLUSION_OFF             0x1C
+#define B_ANIM_FORM_CHANGE              0x1D
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0

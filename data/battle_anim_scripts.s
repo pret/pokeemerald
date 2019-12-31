@@ -683,6 +683,7 @@ gBattleAnims_General::
 	.4byte General_TerrainElectric
 	.4byte General_TerrainPsychic
 	.4byte General_IllusionOff
+	.4byte General_FormChange
 
 	.align 2
 gBattleAnims_Special::
@@ -14762,6 +14763,13 @@ General_IllusionOff:
 	createvisualtask AnimTask_TransformMon, 2, 0, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
+	end
+	
+General_FormChange:
+	monbg ANIM_ATTACKER
+	createvisualtask AnimTask_TransformMon, 2, 0, 1
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
 	end
 
 General_MegaEvolution:

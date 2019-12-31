@@ -1531,6 +1531,11 @@
 	.byte \case
 	.endm
 	
+	.macro handleformchange battler:req, case:req
+	various \battler, VARIOUS_HANDLE_FORM_CHANGE
+	.byte \case
+	.endm
+	
 	.macro jumpifcantuselastresort battler:req, ptr:req
 	various \battler, VARIOUS_TRY_LAST_RESORT
 	.4byte \ptr

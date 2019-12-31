@@ -970,6 +970,32 @@ static bool32 NoTargetPresent(u32 move)
     return FALSE;
 }
 
+static bool32 TryAegiFormChange(void)
+{
+    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STANCE_CHANGE)
+        return FALSE;
+
+    switch (gBattleMons[gBattlerAttacker].species)
+    {
+    default:
+        return FALSE;
+    case SPECIES_AEGISLASH: // Shield -> Blade
+        if (gBattleMoves[gCurrentMove].power == 0)
+            return FALSE;
+        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_BLADE;
+        break;
+    case SPECIES_AEGISLASH_BLADE: // Blade -> Shield
+        if (gCurrentMove != MOVE_KING_S_SHIELD)
+            return FALSE;
+        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH;
+        break;
+    }
+
+    BattleScriptPushCursor();
+    gBattlescriptCurrInstr = BattleScript_StanceChangeActivates;
+    return TRUE;
+}
+
 static void Cmd_attackcanceler(void)
 {
     s32 i, moveType;
@@ -985,6 +1011,10 @@ static void Cmd_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_MoveEnd;
         return;
     }
+    #if (B_STANCE_CHANGE_FAIL <= GEN_6)
+    if (TryAegiFormChange())
+        return;
+    #endif
     if (AtkCanceller_UnableToUseMove())
         return;
 
@@ -1014,6 +1044,10 @@ static void Cmd_attackcanceler(void)
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         return;
     }
+    #if (B_STANCE_CHANGE_FAIL >= GEN_7)
+    if (TryAegiFormChange())
+        return;
+    #endif
 
     gHitMarker &= ~(HITMARKER_x800000);
     if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
@@ -4141,6 +4175,7 @@ static void Cmd_playanimation(void)
         || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
         || gBattlescriptCurrInstr[2] == B_ANIM_MEGA_EVOLUTION
         || gBattlescriptCurrInstr[2] == B_ANIM_ILLUSION_OFF
+        || gBattlescriptCurrInstr[2] == B_ANIM_FORM_CHANGE
         || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
@@ -4186,6 +4221,7 @@ static void Cmd_playanimation2(void) // animation Id is stored in the first poin
         || *animationIdPtr == B_ANIM_SNATCH_MOVE
         || *animationIdPtr == B_ANIM_MEGA_EVOLUTION
         || *animationIdPtr == B_ANIM_ILLUSION_OFF
+        || *animationIdPtr == B_ANIM_FORM_CHANGE
         || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE)
     {
         BtlController_EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
@@ -6676,6 +6712,22 @@ u32 IsLeafGuardProtected(u32 battler)
         return 0;
 }
 
+static void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
+{
+    CalculateMonStats(mon);
+    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
+    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
+    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
+    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
+    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
+    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
+    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+    gBattleMons[battler].ability = GetMonAbility(mon);
+    gBattleMons[battler].type1 = gBaseStats[gBattleMons[battler].species].type1;
+    gBattleMons[battler].type2 = gBaseStats[gBattleMons[battler].species].type2;
+}
+
 static void Cmd_various(void)
 {
     struct Pokemon *mon;
@@ -7297,19 +7349,7 @@ static void Cmd_various(void)
         // Change stats.
         else if (gBattlescriptCurrInstr[3] == 1)
         {
-            CalculateMonStats(mon);
-            gBattleMons[gActiveBattler].level = GetMonData(mon, MON_DATA_LEVEL);
-            gBattleMons[gActiveBattler].hp = GetMonData(mon, MON_DATA_HP);
-            gBattleMons[gActiveBattler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
-            gBattleMons[gActiveBattler].attack = GetMonData(mon, MON_DATA_ATK);
-            gBattleMons[gActiveBattler].defense = GetMonData(mon, MON_DATA_DEF);
-            gBattleMons[gActiveBattler].speed = GetMonData(mon, MON_DATA_SPEED);
-            gBattleMons[gActiveBattler].spAttack = GetMonData(mon, MON_DATA_SPATK);
-            gBattleMons[gActiveBattler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
-            gBattleMons[gActiveBattler].ability = GetMonAbility(mon);
-            gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
-            gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
-
+            RecalcBattlerStats(gActiveBattler, mon);
             gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;
             gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
         }
@@ -7318,6 +7358,31 @@ static void Cmd_various(void)
         {
             UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
             CreateMegaIndicatorSprite(gActiveBattler, 0);
+        }
+        gBattlescriptCurrInstr += 4;
+        return;
+    case VARIOUS_HANDLE_FORM_CHANGE:
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
+            mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
+        else
+            mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
+
+        // Change species.
+        if (gBattlescriptCurrInstr[3] == 0)
+        {
+            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
+            BtlController_EmitSetMonData(0, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], 2, &gBattleMons[gActiveBattler].species);
+            MarkBattlerForControllerExec(gActiveBattler);
+        }
+        // Change stats.
+        else if (gBattlescriptCurrInstr[3] == 1)
+        {
+            RecalcBattlerStats(gActiveBattler, mon);
+        }
+        // Update healthbox.
+        else
+        {
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
         }
         gBattlescriptCurrInstr += 4;
         return;

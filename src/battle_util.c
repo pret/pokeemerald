@@ -6276,13 +6276,34 @@ bool32 CanMegaEvolve(u8 battlerId)
     return TRUE;
 }
 
-void UndoMegaEvolution(u8 monId)
+void UndoMegaEvolution(u32 monId)
 {
     if (gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] & gBitTable[monId])
     {
         gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
         SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->mega.playerEvolvedSpecies);
         CalculateMonStats(&gPlayerParty[monId]);
+    }
+}
+
+void UndoFormChange(u32 monId, u32 side)
+{
+    u32 i, currSpecies;
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    static const u16 species[][2] = // changed form id, default form id
+    {
+        {SPECIES_AEGISLASH_BLADE, SPECIES_AEGISLASH},
+    };
+
+    currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
+    for (i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        if (currSpecies == species[i][0])
+        {
+            SetMonData(&party[monId], MON_DATA_SPECIES, &species[i][1]);
+            CalculateMonStats(&party[monId]);
+            break;
+        }
     }
 }
 

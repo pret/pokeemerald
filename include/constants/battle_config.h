@@ -9,6 +9,8 @@
 #define SPECIES_ARCEUS 0
 #define SPECIES_SILVALLY 0
 #define SPECIES_GENESECT 0
+#define SPECIES_AEGISLASH 0
+#define SPECIES_AEGISLASH_BLADE 10000
 
 // Items with peculiar battle effects. Remove them if they're properly placed in constant/items.h
 #define ITEM_GRISEOUS_ORB 0
@@ -50,6 +52,7 @@
 #define B_SOUND_SUBSTITUTE          GEN_6 // Starting from gen6 sound moves bypass Substitute.
 #define B_EXP_CATCH                 GEN_6 // Starting from gen6, pokemon get experience from catching.
 #define B_ABILITY_POP_UP            GEN_6 // Starting from gen5, the pokemon abilities are displayed in a pop-up, when they activate in battle.
+#define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7, Aegislash's form change does not happen, if the pokemon cannot use a move, because of confusion, paralysis, etc. In gen6, the form change occurs despite not being able to move.
 
 #define B_FAST_INTRO                TRUE // If set to TRUE, battle intro texts print at the same time as animation of a pokemon, as opposing to waiting for the animation to end.
 
