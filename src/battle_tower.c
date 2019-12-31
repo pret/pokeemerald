@@ -2125,16 +2125,16 @@ void DoSpecialTrainerBattle(void)
         BattleTransition_StartOnField(B_TRANSITION_MAGMA);
         break;
     case SPECIAL_BATTLE_MULTI:
-        if (gSpecialVar_0x8005 & 1) // Player + AI against wild mon
+        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD) // Player + AI against wild mon
         {
             gBattleTypeFlags = BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         }
-        else if (gSpecialVar_0x8005 & 2) // Player + AI against one trainer
+        else if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_1) // Player + AI against one trainer
         {
             gTrainerBattleOpponent_B = 0xFFFF;
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         }
-        else
+        else // MULTI_BATTLE_2_VS_2
         {
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         }
@@ -2144,12 +2144,12 @@ void DoSpecialTrainerBattle(void)
         gPartnerTrainerId = gSpecialVar_0x8006 + TRAINER_CUSTOM_PARTNER;
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        if (gSpecialVar_0x8005 & 1)
+        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD)
             BattleTransition_StartOnField(GetWildBattleTransition());
         else
             BattleTransition_StartOnField(GetTrainerBattleTransition());
 
-        if (gSpecialVar_0x8005 & 0x80) // Skip mons restoring(done in the script)
+        if (gSpecialVar_0x8005 & MULTI_BATTLE_CHOOSE_MONS) // Skip mons restoring(done in the script)
             gBattleScripting.specialTrainerBattleType = 0xFF;
         break;
     }
@@ -2678,7 +2678,7 @@ static void sub_8164DCC(void)
 static void SetMultiPartnerGfx(void)
 {
     // 0xF below means use VAR_OBJ_GFX_ID_E
-    SetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[17], 0xF); 
+    SetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[17], 0xF);
 }
 
 static void SetTowerInterviewData(void)
