@@ -2148,7 +2148,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 for (gActiveBattler = 0;
                     gActiveBattler < gBattlersCount && !(gBattleMons[gActiveBattler].status2 & STATUS2_UPROAR);
                     gActiveBattler++)
-                {}
+                    ;
             }
             else
                 gActiveBattler = gBattlersCount;
@@ -2159,6 +2159,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_VITAL_SPIRIT
                 || GetBattlerAbility(gEffectBattler) == ABILITY_INSOMNIA
+                || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
                 || IsAbilityOnSide(gEffectBattler, ABILITY_SWEET_VEIL)
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
@@ -2205,6 +2206,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             if (gBattleMons[gEffectBattler].status1)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY
+                || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2244,6 +2246,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_FIRE))
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_WATER_VEIL
+                || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2262,6 +2265,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             if (noSunCanFreeze == 0)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_MAGMA_ARMOR
+                || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2307,6 +2311,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             if (IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_ELECTRIC))
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_LIMBER
+                || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
                 || IsFlowerVeilProtected(gEffectBattler)
                 || IsLeafGuardProtected(gEffectBattler))
                 break;
@@ -2350,6 +2355,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             if (!IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_POISON) && !IS_BATTLER_OF_TYPE(gEffectBattler, TYPE_STEEL))
             {
                 if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY
+                    || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
                     || IsFlowerVeilProtected(gEffectBattler)
                     || IsLeafGuardProtected(gEffectBattler))
                     break;
@@ -11674,7 +11680,8 @@ static void Cmd_trygetbaddreamstarget(void)
     {
         if (GetBattlerSide(gBattlerTarget) == badDreamsMonSide)
             continue;
-        if (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP && IsBattlerAlive(gBattlerTarget))
+        if ((gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP || GetBattlerAbility(gBattlerTarget) == ABILITY_COMATOSE)
+            && IsBattlerAlive(gBattlerTarget))
             break;
     }
 
