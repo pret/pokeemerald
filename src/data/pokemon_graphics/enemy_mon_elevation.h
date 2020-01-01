@@ -118,5 +118,8 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_MEGA_GYARADOS] = 6,
     [SPECIES_MEGA_PINSIR] = 4,
     [SPECIES_MEGA_ALAKAZAM] = 7,
+    // Forms
+    [SPECIES_GIRATINA_ORIGIN] = 7,
+    [SPECIES_THUNDURUS_THERIAN] = 7,
 };
 

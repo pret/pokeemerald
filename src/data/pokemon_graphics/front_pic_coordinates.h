@@ -4432,6 +4432,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = 0,
         .y_offset = 6,
     },
+    // Alolan Forms
     [SPECIES_ALOLAN_RATTATA] =
     {
         .size = 0x44,
@@ -4521,5 +4522,71 @@ const struct MonCoords gMonFrontPicCoords[] =
     {
         .size = 0x76,
         .y_offset = 0x8,
+    },
+    // Forms
+    [SPECIES_SHAYMIN_SKY] =
+    {
+        .size = 0x87,
+        .y_offset = 0x7,
+    },
+    [SPECIES_GIRATINA_ORIGIN] =
+    {
+        .size = 0x87,
+        .y_offset = 0x2,
+    },
+    [SPECIES_DARMANITAN_ZEN] =
+    {
+        .size = 0x87,
+        .y_offset = 0x9,
+    },
+    [SPECIES_TORNADUS_THERIAN] =
+    {
+        .size = 0x87,
+        .y_offset = 0x2,
+    },
+    [SPECIES_THUNDURUS_THERIAN] =
+    {
+        .size = 0x87,
+        .y_offset = 0x0,
+    },
+    [SPECIES_LANDORUS_THERIAN] =
+    {
+        .size = 0x87,
+        .y_offset = 0x2,
+    },
+    [SPECIES_MELOETTA_PIROUETTE] =
+    {
+        .size = 0x87,
+        .y_offset = 0x3,
+    },
+    [SPECIES_AEGISLASH_BLADE] =
+    {
+        .size = 0x87,
+        .y_offset = 0x1,
+    },
+    [SPECIES_HOOPA_UNBOUND] =
+    {
+        .size = 0x87,
+        .y_offset = 0x1,
+    },
+    [SPECIES_MINIOR_CORE] =
+    {
+        .size = 0x87,
+        .y_offset = 0x9,
+    },
+    [SPECIES_WISHIWASHI_SCHOOL] =
+    {
+        .size = 0x87,
+        .y_offset = 0x3,
+    },
+    [SPECIES_KYUREM_BLACK] =
+    {
+        .size = 0x87,
+        .y_offset = 0x0,
+    },
+    [SPECIES_KYUREM_WHITE] =
+    {
+        .size = 0x87,
+        .y_offset = 0x0,
     },
 };

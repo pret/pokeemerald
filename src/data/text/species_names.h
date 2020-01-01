@@ -891,4 +891,16 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_ALOLAN_MUK] = _("Muk"),
     [SPECIES_ALOLAN_EXEGGUTOR] = _("Exeggutor"),
     [SPECIES_ALOLAN_MAROWAK] = _("Marowak"),
+
+    [SPECIES_SHAYMIN_SKY] = _("Shaymin"),
+    [SPECIES_GIRATINA_ORIGIN] = _("Giratina"),
+    [SPECIES_DARMANITAN_ZEN] = _("Darmanitan"),
+    [SPECIES_TORNADUS_THERIAN] = _("Tornadus"),
+    [SPECIES_THUNDURUS_THERIAN] = _("Thundurus"),
+    [SPECIES_LANDORUS_THERIAN] = _("Landorus"),
+    [SPECIES_MELOETTA_PIROUETTE] = _("Meloetta"),
+    [SPECIES_AEGISLASH_BLADE] = _("Aegislash"),
+    [SPECIES_HOOPA_UNBOUND] = _("Hoopa"),
+    [SPECIES_MINIOR_CORE] = _("Minior"),
+    [SPECIES_WISHIWASHI_SCHOOL] = _("Wishiwashi"),
 };
