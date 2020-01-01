@@ -2973,8 +2973,10 @@ Move_DISCHARGE:
 Move_LAVA_PLUME:
 	loadspritegfx ANIM_TAG_FIRE_PLUME 
 	loopsewithpan 152, SOUND_PAN_ATTACKER, 9, 2
-	createvisualtask sub_8115A04, 2, 2, 2, 2, 0, 11, 31 
-	createvisualtask AnimTask_ShakeMon2 2, 5, 0, 1, 0, 32, 1  
+	createvisualtask sub_8115A04, 2, 2, 2, 2, 0, 11, RGB_RED 
+	createvisualtask AnimTask_ShakeMon2 2, ANIM_TARGET, 1, 0, 32, 1
+	createvisualtask AnimTask_ShakeMon2 2, ANIM_DEF_PARTNER, 1, 0, 32, 1
+	createvisualtask AnimTask_ShakeMon2 2, ANIM_ATK_PARTNER, 1, 0, 32, 1
 	waitforvisualfinish 
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 0
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 32
@@ -2982,7 +2984,7 @@ Move_LAVA_PLUME:
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 96  
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 128  
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 160  
-	createsprite gLavaPlumeSpriteTemplate, 130, 1, SOUND_PAN_ATTACKER  
+	createsprite gLavaPlumeSpriteTemplate, 130, 1, 192 
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 224
 	playsewithpan SE_W221, SOUND_PAN_ATTACKER
 	waitforvisualfinish 
