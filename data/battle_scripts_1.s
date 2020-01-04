@@ -6017,11 +6017,13 @@ BattleScript_TryActivateSteadFast:
 	setstatchanger STAT_SPEED, 1, FALSE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_MoveUsedFlinchedEnd
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_MoveUsedFlinchedEnd
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
 	setgraphicalstatchangevalues
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	setbyte gBattleCommunication STAT_SPEED
 	stattextbuffer BS_ATTACKER
-	printstring STRINGID_TARGETABILITYSTATRAISE
+	printstring STRINGID_ATTACKERABILITYSTATRAISE
 	waitmessage 0x40
 	goto BattleScript_MoveUsedFlinchedEnd
 
