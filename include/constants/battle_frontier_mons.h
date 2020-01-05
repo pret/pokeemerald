@@ -859,6 +859,8 @@
 #define FRONTIER_MON_LATIOS_7       848
 #define FRONTIER_MON_LATIOS_8       849
 
+#define FRONTIER_MONS_HIGH_TIER     849 // Mons above this point can only appear > level 50
+
 #define FRONTIER_MON_DRAGONITE_1    850
 #define FRONTIER_MON_DRAGONITE_2    851
 #define FRONTIER_MON_DRAGONITE_3    852

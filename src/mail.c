@@ -542,7 +542,7 @@ static void CB2_ExitMailReadFreeVars(void)
             case 1:
             case 2:
                 FreeMonIconPalette(sub_80D2E84(sMailRead->mail->species));
-                sub_80D2EF8(&gSprites[sMailRead->monIconSprite]);
+                FreeAndDestroyMonIconSprite(&gSprites[sMailRead->monIconSprite]);
         }
         memset(sMailRead, 0, sizeof(*sMailRead));
         ResetPaletteFade();

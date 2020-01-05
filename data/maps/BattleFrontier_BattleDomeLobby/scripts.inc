@@ -352,35 +352,35 @@ BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults:: @ 8249D6B
 	releaseall
 	end
 
-BattleFrontier_BattleDomeLobby_EventScript_ShowLastTourneyTree:: @ 8249D84
-	dome_get DOME_DATA_LAST_TOURNEY_TYPE
+BattleFrontier_BattleDomeLobby_EventScript_ShowPrevTourneyTree:: @ 8249D84
+	dome_get DOME_DATA_PREV_TOURNEY_TYPE
 	compare VAR_RESULT, 0
-	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsSinglesLv50
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50
 	compare VAR_RESULT, 1
-	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsDoublesLv50
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50
 	compare VAR_RESULT, 2
-	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsSinglesLvOpen
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen
 	compare VAR_RESULT, 3
-	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsDoublesLvOpen
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen
 	fadescreen FADE_TO_BLACK
-	dome_showresultstree
+	dome_showprevtourneytree
 	waitstate
 	end
 
-BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsSinglesLv50:: @ 8249DC9
-	msgbox BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsSinglesLv50, MSGBOX_SIGN
+BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50:: @ 8249DC9
+	msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLv50, MSGBOX_SIGN
 	return
 
-BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsDoublesLv50:: @ 8249DD2
-	msgbox BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsDoublesLv50, MSGBOX_SIGN
+BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50:: @ 8249DD2
+	msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLv50, MSGBOX_SIGN
 	return
 
-BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsSinglesLvOpen:: @ 8249DDB
-	msgbox BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsSinglesLvOpen, MSGBOX_SIGN
+BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen:: @ 8249DDB
+	msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLvOpen, MSGBOX_SIGN
 	return
 
-BattleFrontier_BattleDomeLobby_EventScript_LastTourneyResultsDoublesLvOpen:: @ 8249DE4
-	msgbox BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsDoublesLvOpen, MSGBOX_SIGN
+BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen:: @ 8249DE4
+	msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen, MSGBOX_SIGN
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_Maniac:: @ 8249DED
@@ -595,19 +595,19 @@ BattleFrontier_BattleDomeLobby_Text_ExplainDoublesChallenge: @ 824A721
 	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
-BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsSinglesLv50: @ 824A966
+BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLv50: @ 824A966
 	.string "They're the results of the last\n"
 	.string "Level 50 SINGLE BATTLE Tournament.$"
 
-BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsDoublesLv50: @ 824A9A9
+BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLv50: @ 824A9A9
 	.string "They're the results of the last\n"
 	.string "Level 50 DOUBLE BATTLE Tournament.$"
 
-BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsSinglesLvOpen: @ 824A9EC
+BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLvOpen: @ 824A9EC
 	.string "They're the results of the last\n"
 	.string "Open Level SINGLE BATTLE Tournament.$"
 
-BattleFrontier_BattleDomeLobby_Text_LastTourneyResultsDoublesLvOpen: @ 824AA31
+BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen: @ 824AA31
 	.string "They're the results of the last\n"
 	.string "Open Level DOUBLE BATTLE Tournament.$"
 

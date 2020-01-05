@@ -80,7 +80,8 @@
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_BATTLE_STATS 8
+#define NUM_EV_STATS     NUM_STATS - 1 // excludes HP
+#define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
 
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536

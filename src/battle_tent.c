@@ -353,10 +353,10 @@ static void GenerateOpponentMons(void)
 {
     u16 trainerId;
     s32 i, j, k;
-    register const u16 *monSets asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
+    register const u16 *monSet asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
     u16 species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
-    s32 setsCount = 0;
+    s32 monId = 0;
 
     gFacilityTrainers = gSlateportBattleTentTrainers;
     gFacilityTrainerMons = gSlateportBattleTentMons;
@@ -374,21 +374,21 @@ static void GenerateOpponentMons(void)
         } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
         gTrainerBattleOpponent_A = trainerId;
-        while (gFacilityTrainers[gTrainerBattleOpponent_A].monSets[setsCount] != 0xFFFF)
-            setsCount++;
-        if (setsCount > 8)
+        while (gFacilityTrainers[gTrainerBattleOpponent_A].monSet[monId] != 0xFFFF)
+            monId++;
+        if (monId > 8)
             break;
-        setsCount = 0;
+        monId = 0;
     }
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 2)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
 
-    monSets = gFacilityTrainers[gTrainerBattleOpponent_A].monSets;
+    monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
     i = 0;
     while (i != FRONTIER_PARTY_SIZE)
     {
-        sRandMonSetId = monSets[Random() % setsCount];
+        sRandMonSetId = monSet[Random() % monId];
         for (j = 0; j < 6; j++)
         {
             if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)

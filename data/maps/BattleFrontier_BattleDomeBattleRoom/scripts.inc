@@ -116,7 +116,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent:: @ 824BE4F
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
-BattleFrontier_BattleDomeBattleRoom_EventScript_24BE8D:: @ 824BE8D
+BattleFrontier_BattleDomeBattleRoom_EventScript_LostTourney:: @ 824BE8D
 	dome_resolvewinners DOME_PLAYER_LOST_MATCH
 BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobbyLost:: @ 824BE9A
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
@@ -452,7 +452,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker:: @ 824C420
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BE8D
+	goto BattleFrontier_BattleDomeBattleRoom_EventScript_LostTourney
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerDraw:: @ 824C436
 	setvar VAR_TEMP_2, DRAW_TUCKER

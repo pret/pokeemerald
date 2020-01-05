@@ -160,182 +160,182 @@ BattleDome_Text_EmphasizesHPAndSpAtk::
 BattleDome_Text_EmphasizesHPAndSpDef::
 	.string "Emphasizes HP and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText6::
+BattleDome_Text_EmphasizesAtkAndDef::
 	.string "Emphasizes ATTACK and DEFENSE.$"
 
-gBattleDomeOpponentStatsText7::
+BattleDome_Text_EmphasizesAtkAndSpeed::
 	.string "Emphasizes ATTACK and SPEED.$"
 
-gBattleDomeOpponentStatsText8::
+BattleDome_Text_EmphasizesAtkAndSpAtk::
 	.string "Emphasizes ATTACK and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText9::
+BattleDome_Text_EmphasizesAtkAndSpDef::
 	.string "Emphasizes ATTACK and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText10::
+BattleDome_Text_EmphasizesDefAndSpeed::
 	.string "Emphasizes DEFENSE and SPEED.$"
 
-gBattleDomeOpponentStatsText11::
+BattleDome_Text_EmphasizesDefAndSpAtk::
 	.string "Emphasizes DEFENSE and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText12::
+BattleDome_Text_EmphasizesDefAndSpDef::
 	.string "Emphasizes DEFENSE and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText13::
+BattleDome_Text_EmphasizesSpeedAndSpAtk::
 	.string "Emphasizes SPEED and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText14::
+BattleDome_Text_EmphasizesSpeedAndSpDef::
 	.string "Emphasizes SPEED and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText15::
+BattleDome_Text_EmphasizesSpAtkAndSpDef::
 	.string "Emphasizes SP. ATTACK and SP. DEFENSE.$"
 
 BattleDome_Text_EmphasizesHP::
 	.string "Emphasizes HP.$"
 
-gBattleDomeOpponentStatsText17::
+BattleDome_Text_EmphasizesAtk::
 	.string "Emphasizes ATTACK.$"
 
-gBattleDomeOpponentStatsText18::
+BattleDome_Text_EmphasizesDef::
 	.string "Emphasizes DEFENSE.$"
 
-gBattleDomeOpponentStatsText19::
+BattleDome_Text_EmphasizesSpeed::
 	.string "Emphasizes SPEED.$"
 
-gBattleDomeOpponentStatsText20::
+BattleDome_Text_EmphasizesSpAtk::
 	.string "Emphasizes SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText21::
+BattleDome_Text_EmphasizesSpDef::
 	.string "Emphasizes SP. DEFENSE.$"
 
 BattleDome_Text_NeglectsHPAndAtk::
 	.string "Neglects HP and ATTACK.$"
 
-gBattleDomeOpponentStatsText23::
+BattleDome_Text_NeglectsHPAndDef::
 	.string "Neglects HP and DEFENSE.$"
 
-gBattleDomeOpponentStatsText24::
+BattleDome_Text_NeglectsHPAndSpeed::
 	.string "Neglects HP and SPEED.$"
 
-gBattleDomeOpponentStatsText25::
+BattleDome_Text_NeglectsHPAndSpAtk::
 	.string "Neglects HP and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText26::
+BattleDome_Text_NeglectsHPAndSpDef::
 	.string "Neglects HP and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText27::
+BattleDome_Text_NeglectsAtkAndDef::
 	.string "Neglects ATTACK and DEFENSE.$"
 
-gBattleDomeOpponentStatsText28::
+BattleDome_Text_NeglectsAtkAndSpeed::
 	.string "Neglects ATTACK and SPEED.$"
 
-gBattleDomeOpponentStatsText29::
+BattleDome_Text_NeglectsAtkAndSpAtk::
 	.string "Neglects ATTACK and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText30::
+BattleDome_Text_NeglectsAtkAndSpDef::
 	.string "Neglects ATTACK and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText31::
+BattleDome_Text_NeglectsDefAndSpeed::
 	.string "Neglects DEFENSE and SPEED.$"
 
-gBattleDomeOpponentStatsText32::
+BattleDome_Text_NeglectsDefAndSpAtk::
 	.string "Neglects DEFENSE and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText33::
+BattleDome_Text_NeglectsDefAndSpDef::
 	.string "Neglects DEFENSE and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText34::
+BattleDome_Text_NeglectsSpeedAndSpAtk::
 	.string "Neglects SPEED and SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText35::
+BattleDome_Text_NeglectsSpeedAndSpDef::
 	.string "Neglects SPEED and SP. DEFENSE.$"
 
-gBattleDomeOpponentStatsText36::
+BattleDome_Text_NeglectsSpAtkAndSpDef::
 	.string "Neglects SP. ATTACK and SP. DEFENSE.$"
 
 BattleDome_Text_NeglectsHP::
 	.string "Neglects HP.$"
 
-gBattleDomeOpponentStatsText38::
+BattleDome_Text_NeglectsAtk::
 	.string "Neglects ATTACK.$"
 
-gBattleDomeOpponentStatsText39::
+BattleDome_Text_NeglectsDef::
 	.string "Neglects DEFENSE.$"
 
-gBattleDomeOpponentStatsText40::
+BattleDome_Text_NeglectsSpeed::
 	.string "Neglects SPEED.$"
 
-gBattleDomeOpponentStatsText41::
+BattleDome_Text_NeglectsSpAtk::
 	.string "Neglects SP. ATTACK.$"
 
-gBattleDomeOpponentStatsText42::
+BattleDome_Text_NeglectsSpDef::
 	.string "Neglects SP. DEFENSE.$"
 
 BattleDome_Text_RaisesMonsWellBalanced::
 	.string "Raises POKéMON in a well-balanced way.$"
 
-gBattleDomeWinText1::
+BattleDome_Text_LetTheBattleBegin::
 	.string "Let the battle begin!$"
 
-gBattleDomeWinText2::
+BattleDome_Text_TrainerWonUsingMove::
 	.string "{STR_VAR_1} won using {STR_VAR_2}!$"
 
-gBattleDomeWinText3::
+BattleDome_Text_TrainerBecameChamp::
 	.string "{STR_VAR_1} became the champ!$"
 
-gBattleDomeWinText4::
+BattleDome_Text_TrainerWonByDefault::
 	.string "{STR_VAR_1} won by default!$"
 
-gBattleDomeWinText5::
+BattleDome_Text_TrainerWonOutrightByDefault::
 	.string "{STR_VAR_1} won outright by default!$"
 
-gBattleDomeWinText6::
+BattleDome_Text_TrainerWonNoMoves::
 	.string "{STR_VAR_1} won without using a move!$"
 
-gBattleDomeWinText7::
+BattleDome_Text_TrainerWonOutrightNoMoves::
 	.string "{STR_VAR_1} won outright with no moves!$"
 
-gBattleDomeMatchNumberText1::
+BattleDome_Text_Round1Match1::
 	.string "Round 1, Match 1$"
 
-gBattleDomeMatchNumberText2::
+BattleDome_Text_Round1Match2::
 	.string "Round 1, Match 2$"
 
-gBattleDomeMatchNumberText3::
+BattleDome_Text_Round1Match3::
 	.string "Round 1, Match 3$"
 
-gBattleDomeMatchNumberText4::
+BattleDome_Text_Round1Match4::
 	.string "Round 1, Match 4$"
 
-gBattleDomeMatchNumberText5::
+BattleDome_Text_Round1Match5::
 	.string "Round 1, Match 5$"
 
-gBattleDomeMatchNumberText6::
+BattleDome_Text_Round1Match6::
 	.string "Round 1, Match 6$"
 
-gBattleDomeMatchNumberText7::
+BattleDome_Text_Round1Match7::
 	.string "Round 1, Match 7$"
 
-gBattleDomeMatchNumberText8::
+BattleDome_Text_Round1Match8::
 	.string "Round 1, Match 8$"
 
-gBattleDomeMatchNumberText9::
+BattleDome_Text_Round2Match1::
 	.string "Round 2, Match 1$"
 
-gBattleDomeMatchNumberText10::
+BattleDome_Text_Round2Match2::
 	.string "Round 2, Match 2$"
 
-gBattleDomeMatchNumberText11::
+BattleDome_Text_Round2Match3::
 	.string "Round 2, Match 3$"
 
-gBattleDomeMatchNumberText12::
+BattleDome_Text_Round2Match4::
 	.string "Round 2, Match 4$"
 
-gBattleDomeMatchNumberText13::
+BattleDome_Text_SemifinalMatch1::
 	.string "Semifinal Match 1$"
 
-gBattleDomeMatchNumberText14::
+BattleDome_Text_SemifinalMatch2::
 	.string "Semifinal Match 2$"
 
-gBattleDomeMatchNumberText15::
+BattleDome_Text_FinalMatch::
 	.string "Final Match$"

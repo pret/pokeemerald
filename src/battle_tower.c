@@ -1895,14 +1895,14 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
     u8 level = SetFacilityPtrsGetLevel();
     u8 fixedIV = 0;
     u8 bfMonCount;
-    const u16 *monSets = NULL;
+    const u16 *monSet = NULL;
     u32 otID = 0;
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         // Normal battle frontier trainer.
         fixedIV = GetFrontierTrainerFixedIvs(trainerId);
-        monSets = gFacilityTrainers[gTrainerBattleOpponent_A].monSets;
+        monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
     }
     else if (trainerId == TRAINER_EREADER)
     {
@@ -1940,20 +1940,20 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
     // successfully chosen. The trainer's party may not have duplicate pokemon species
     // or duplicate held items.
-    for (bfMonCount = 0; monSets[bfMonCount] != 0xFFFF; bfMonCount++)
+    for (bfMonCount = 0; monSet[bfMonCount] != 0xFFFF; bfMonCount++)
         ;
     i = 0;
     otID = Random32();
     while (i != monCount)
     {
-        u16 monSetId = monSets[Random() % bfMonCount];
-        if ((level == 50 || level == 20) && monSetId > 849)
+        u16 monId = monSet[Random() % bfMonCount];
+        if ((level == 50 || level == 20) && monId > FRONTIER_MONS_HIGH_TIER)
             continue;
 
         // Ensure this pokemon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monSetId].species)
+            if (GetMonData(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monId].species)
                 break;
         }
         if (j != i + firstMonId)
@@ -1963,7 +1963,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
         for (j = 0; j < i + firstMonId; j++)
         {
             if (GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) != 0
-             && GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+             && GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId])
                 break;
         }
         if (j != i + firstMonId)
@@ -1973,34 +1973,34 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
         // because the species and held items were already checked directly above.
         for (j = 0; j < i; j++)
         {
-            if (chosenMonIndices[j] == monSetId)
+            if (chosenMonIndices[j] == monId)
                 break;
         }
         if (j != i)
             continue;
 
-        chosenMonIndices[i] = monSetId;
+        chosenMonIndices[i] = monId;
 
         // Place the chosen pokemon into the trainer's party.
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[i + firstMonId],
-                                             gFacilityTrainerMons[monSetId].species,
+                                             gFacilityTrainerMons[monId].species,
                                              level,
-                                             gFacilityTrainerMons[monSetId].nature,
+                                             gFacilityTrainerMons[monId].nature,
                                              fixedIV,
-                                             gFacilityTrainerMons[monSetId].evSpread,
+                                             gFacilityTrainerMons[monId].evSpread,
                                              otID);
 
         friendship = MAX_FRIENDSHIP;
         // Give the chosen pokemon its specified moves.
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monSetId].moves[j], j);
-            if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
+            SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monId].moves[j], j);
+            if (gFacilityTrainerMons[monId].moves[j] == MOVE_FRUSTRATION)
                 friendship = 0;  // Frustration is more powerful the lower the pokemon's friendship is.
         }
 
         SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_FRIENDSHIP, &friendship);
-        SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
+        SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
 
         // The pokemon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
@@ -2041,27 +2041,27 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
     }
 }
 
-u16 RandomizeFacilityTrainerMonSet(u16 trainerId)
+u16 GetRandomFrontierMonFromSet(u16 trainerId)
 {
     u8 level = SetFacilityPtrsGetLevel();
-    const u16 *monSets = gFacilityTrainers[trainerId].monSets;
-    u8 numMonSets = 0;
-    u32 monSetId = monSets[numMonSets];
+    const u16 *monSet = gFacilityTrainers[trainerId].monSet;
+    u8 numMons = 0;
+    u32 monId = monSet[numMons];
 
-    while (monSetId != 0xFFFF)
+    while (monId != 0xFFFF)
     {
-        numMonSets++;
-        monSetId = monSets[numMonSets];
-        if (monSetId == 0xFFFF)
+        numMons++;
+        monId = monSet[numMons];
+        if (monId == 0xFFFF)
             break;
     }
 
     do
     {
-        monSetId = monSets[Random() % numMonSets];
-    } while((level == 50 || level == 20) && monSetId > 849);
+        monId = monSet[Random() % numMons];
+    } while((level == 50 || level == 20) && monId > FRONTIER_MONS_HIGH_TIER);
 
-    return monSetId;
+    return monId;
 }
 
 static void FillFactoryTrainerParty(void)
@@ -2111,21 +2111,21 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     otID = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        u16 monSetId = gUnknown_03006298[i];
+        u16 monId = gUnknown_03006298[i];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[firstMonId + i],
-                                             gFacilityTrainerMons[monSetId].species,
+                                             gFacilityTrainerMons[monId].species,
                                              level,
-                                             gFacilityTrainerMons[monSetId].nature,
+                                             gFacilityTrainerMons[monId].nature,
                                              fixedIV,
-                                             gFacilityTrainerMons[monSetId].evSpread,
+                                             gFacilityTrainerMons[monId].evSpread,
                                              otID);
 
         friendship = 0;
         for (j = 0; j < MAX_MON_MOVES; j++)
-            SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monSetId].moves[j], j);
+            SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monId].moves[j], j);
 
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_FRIENDSHIP, &friendship);
-        SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
+        SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
     }
 }
 
@@ -2139,25 +2139,25 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        u16 monSetId = gUnknown_03006298[i];
+        u16 monId = gUnknown_03006298[i];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[firstMonId + i],
-                                             gFacilityTrainerMons[monSetId].species,
+                                             gFacilityTrainerMons[monId].species,
                                              level,
-                                             gFacilityTrainerMons[monSetId].nature,
+                                             gFacilityTrainerMons[monId].nature,
                                              fixedIV,
-                                             gFacilityTrainerMons[monSetId].evSpread,
+                                             gFacilityTrainerMons[monId].evSpread,
                                              otID);
 
         friendship = 0;
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monSetId].moves[j], j);
-            if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
+            SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monId].moves[j], j);
+            if (gFacilityTrainerMons[monId].moves[j] == MOVE_FRUSTRATION)
                 friendship = 0;
         }
 
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_FRIENDSHIP, &friendship);
-        SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
+        SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
     }
 }
 
@@ -2520,7 +2520,7 @@ static void sub_81642A0(void)
     u32 spArray[5];
     s32 r10;
     u16 trainerId;
-    u16 monSetId;
+    u16 monId;
     u32 lvlMode, battleMode;
     s32 challengeNum;
     u32 species1, species2;
@@ -2562,24 +2562,24 @@ static void sub_81642A0(void)
         {
             while (1)
             {
-                monSetId = RandomizeFacilityTrainerMonSet(trainerId);
-                if (j % 2 != 0 && gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[r10 - 1]].itemTableId == gFacilityTrainerMons[monSetId].itemTableId)
+                monId = GetRandomFrontierMonFromSet(trainerId);
+                if (j % 2 != 0 && gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[r10 - 1]].itemTableId == gFacilityTrainerMons[monId].itemTableId)
                     continue;
 
                 for (k = 8; k < r10; k++)
                 {
-                    if (gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[k]].species == gFacilityTrainerMons[monSetId].species)
+                    if (gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[k]].species == gFacilityTrainerMons[monId].species)
                         break;
-                    if (species1 == gFacilityTrainerMons[monSetId].species)
+                    if (species1 == gFacilityTrainerMons[monId].species)
                         break;
-                    if (species2 == gFacilityTrainerMons[monSetId].species)
+                    if (species2 == gFacilityTrainerMons[monId].species)
                         break;
                 }
                 if (k == r10)
                     break;
             }
 
-            gSaveBlock2Ptr->frontier.trainerIds[r10] = monSetId;
+            gSaveBlock2Ptr->frontier.trainerIds[r10] = monId;
             r10++;
         }
     }
@@ -2660,7 +2660,7 @@ static void sub_81642A0(void)
     }
 }
 
-static void sub_81646BC(u16 trainerId, u16 monSetId)
+static void sub_81646BC(u16 trainerId, u16 monId)
 {
     u16 move = 0;
     u16 species = 0;
@@ -2670,8 +2670,8 @@ static void sub_81646BC(u16 trainerId, u16 monSetId)
     {
         if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
-            move = gFacilityTrainerMons[monSetId].moves[0];
-            species = gFacilityTrainerMons[monSetId].species;
+            move = gFacilityTrainerMons[monId].moves[0];
+            species = gFacilityTrainerMons[monId].species;
         }
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         {
@@ -2698,7 +2698,7 @@ static void sub_81646BC(u16 trainerId, u16 monSetId)
 static void sub_8164828(void)
 {
     s32 i, j, arrId;
-    s32 monSetId;
+    s32 monId;
     s32 level = SetFacilityPtrsGetLevel();
     u16 winStreak = GetCurrentFacilityWinStreak();
     s32 challengeNum = winStreak / 7;
@@ -2736,12 +2736,12 @@ static void sub_8164828(void)
         }
         break;
     case 1:
-        monSetId = gSaveBlock2Ptr->frontier.trainerIds[8 + k * 2];
-        sub_81646BC(trainerId, monSetId);
+        monId = gSaveBlock2Ptr->frontier.trainerIds[8 + k * 2];
+        sub_81646BC(trainerId, monId);
         break;
     case 2:
-        monSetId = gSaveBlock2Ptr->frontier.trainerIds[9 + k * 2];
-        sub_81646BC(trainerId, monSetId);
+        monId = gSaveBlock2Ptr->frontier.trainerIds[9 + k * 2];
+        sub_81646BC(trainerId, monId);
         break;
     case 3:
         gPartnerTrainerId = trainerId;
@@ -3191,7 +3191,7 @@ static void FillPartnerParty(u16 trainerId)
     s32 i, j;
     u32 ivs, level;
     u32 friendship;
-    u16 monSetId;
+    u16 monId;
     u32 otID;
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
     SetFacilityPtrsGetLevel();
@@ -3232,23 +3232,23 @@ static void FillPartnerParty(u16 trainerId)
         otID = Random32();
         for (i = 0; i < 2; i++)
         {
-            monSetId = gSaveBlock2Ptr->frontier.trainerIds[i + 18];
+            monId = gSaveBlock2Ptr->frontier.trainerIds[i + 18];
             CreateMonWithEVSpreadNatureOTID(&gPlayerParty[3 + i],
-                                                 gFacilityTrainerMons[monSetId].species,
+                                                 gFacilityTrainerMons[monId].species,
                                                  level,
-                                                 gFacilityTrainerMons[monSetId].nature,
+                                                 gFacilityTrainerMons[monId].nature,
                                                  ivs,
-                                                 gFacilityTrainerMons[monSetId].evSpread,
+                                                 gFacilityTrainerMons[monId].evSpread,
                                                  otID);
             friendship = MAX_FRIENDSHIP;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
-                SetMonMoveSlot(&gPlayerParty[3 + i], gFacilityTrainerMons[monSetId].moves[j], j);
-                if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
+                SetMonMoveSlot(&gPlayerParty[3 + i], gFacilityTrainerMons[monId].moves[j], j);
+                if (gFacilityTrainerMons[monId].moves[j] == MOVE_FRUSTRATION)
                     friendship = 0;
             }
             SetMonData(&gPlayerParty[3 + i], MON_DATA_FRIENDSHIP, &friendship);
-            SetMonData(&gPlayerParty[3 + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
+            SetMonData(&gPlayerParty[3 + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
             for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
                 trainerName[j] = gFacilityTrainers[trainerId].trainerName[j];
             SetMonData(&gPlayerParty[3 + i], MON_DATA_OT_NAME, &trainerName);
@@ -3606,19 +3606,19 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
     u8 level = SetTentPtrsGetLevel();
     u8 fixedIV = 0;
     u8 bfMonCount;
-    const u16 *monSets = NULL;
+    const u16 *monSet = NULL;
     u32 otID = 0;
-    u16 monSetId;
+    u16 monId;
 
-    monSets = gFacilityTrainers[gTrainerBattleOpponent_A].monSets;
+    monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
 
     bfMonCount = 0;
-    monSetId = monSets[bfMonCount];
-    while (monSetId != 0xFFFF)
+    monId = monSet[bfMonCount];
+    while (monId != 0xFFFF)
     {
         bfMonCount++;
-        monSetId = monSets[bfMonCount];
-        if (monSetId == 0xFFFF)
+        monId = monSet[bfMonCount];
+        if (monId == 0xFFFF)
             break;
     }
 
@@ -3626,12 +3626,12 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
     otID = Random32();
     while (i != monCount)
     {
-        u16 monSetId = monSets[Random() % bfMonCount];
+        u16 monId = monSet[Random() % bfMonCount];
 
         // Ensure this pokemon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monSetId].species)
+            if (GetMonData(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monId].species)
                 break;
         }
         if (j != i + firstMonId)
@@ -3641,7 +3641,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
         for (j = 0; j < i + firstMonId; j++)
         {
             if (GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) != 0
-             && GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+             && GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId])
                 break;
         }
         if (j != i + firstMonId)
@@ -3651,34 +3651,34 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
         // because the species and held items were already checked directly above.
         for (j = 0; j < i; j++)
         {
-            if (chosenMonIndices[j] == monSetId)
+            if (chosenMonIndices[j] == monId)
                 break;
         }
         if (j != i)
             continue;
 
-        chosenMonIndices[i] = monSetId;
+        chosenMonIndices[i] = monId;
 
         // Place the chosen pokemon into the trainer's party.
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[i + firstMonId],
-                                             gFacilityTrainerMons[monSetId].species,
+                                             gFacilityTrainerMons[monId].species,
                                              level,
-                                             gFacilityTrainerMons[monSetId].nature,
+                                             gFacilityTrainerMons[monId].nature,
                                              fixedIV,
-                                             gFacilityTrainerMons[monSetId].evSpread,
+                                             gFacilityTrainerMons[monId].evSpread,
                                              otID);
 
         friendship = MAX_FRIENDSHIP;
         // Give the chosen pokemon its specified moves.
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monSetId].moves[j], j);
-            if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
+            SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monId].moves[j], j);
+            if (gFacilityTrainerMons[monId].moves[j] == MOVE_FRUSTRATION)
                 friendship = 0;  // Frustration is more powerful the lower the pokemon's friendship is.
         }
 
         SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_FRIENDSHIP, &friendship);
-        SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
+        SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
 
         // The pokemon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
