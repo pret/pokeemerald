@@ -4457,10 +4457,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 break;
             }
 
-            if (effect == ITEM_STATUS_CHANGE)
+            if (effect)
             {
-                gBattleScripting.battler = battlerId;
-                gPotentialItemEffectBattler = battlerId;
+                gPotentialItemEffectBattler = gBattleScripting.battler = battlerId;
                 gActiveBattler = battlerId;
                 BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                 MarkBattlerForControllerExec(gActiveBattler);
