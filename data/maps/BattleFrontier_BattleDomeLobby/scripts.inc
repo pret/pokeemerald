@@ -84,7 +84,7 @@ BattleFrontier_BattleDomeLobby_EventScript_AskRecordBattle:: @ 8249991
 	dome_save 0
 	playse SE_SAVE
 	waitse
-	call BattleFrontier_BattleDomeLobby_EventScript_23E8E0
+	call BattleFrontier_EventScript_GetCantRecordBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_EndChallenge
 	message BattleFrontier_BattleDomeLobby_Text_RecordLastMatch

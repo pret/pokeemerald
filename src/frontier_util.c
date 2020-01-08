@@ -840,8 +840,8 @@ static void GetFrontierData(void)
         gSpecialVar_Result = gBattleOutcome;
         gBattleOutcome = 0;
         break;
-    case FRONTIER_DATA_6:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CA9_b;
+    case FRONTIER_DATA_RECORD_DISABLED:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.disableRecordBattle;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.battledBrainFlags & sBattledBrainBitFlags[facility][hasSymbol];
@@ -875,8 +875,8 @@ static void SetFrontierData(void)
         for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
             gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
         break;
-    case FRONTIER_DATA_6:
-        gSaveBlock2Ptr->frontier.field_CA9_b = gSpecialVar_0x8006;
+    case FRONTIER_DATA_RECORD_DISABLED:
+        gSaveBlock2Ptr->frontier.disableRecordBattle = gSpecialVar_0x8006;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSaveBlock2Ptr->frontier.battledBrainFlags |= sBattledBrainBitFlags[facility][hasSymbol];
@@ -2173,7 +2173,7 @@ static void RestoreHeldItems(void)
 static void SaveRecordBattle(void)
 {
     gSpecialVar_Result = MoveRecordedBattleToSaveData();
-    gSaveBlock2Ptr->frontier.field_CA9_b = 1;
+    gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
 }
 
 static void BufferFrontierTrainerName(void)

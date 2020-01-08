@@ -48,7 +48,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom:: @ 82574DC
 	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceDown
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceLeft
 	setvar VAR_TEMP_2, 1
-	frontier_set FRONTIER_DATA_6, 1
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers:: @ 825752E
@@ -143,8 +143,8 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent:: @ 82576B0
 	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor6thOpponent
 	compare VAR_RESULT, 6
 	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_ReadyFor7thOpponent
-	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponentNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
@@ -252,8 +252,8 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_TycoonUpNext:: @ 82578BC
 BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoon:: @ 82578D4
 	message BattleFrontier_BattleArenaBattleRoom_Text_PreparedForTycoon
 	waitmessage
-	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForTycoonNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
@@ -380,7 +380,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_StartArenaBattle:: @ 8257B5E
 BattleFrontier_BattleArenaBattleRoom_EventScript_DoArenaBattle:: @ 8257B6C
 	closemessage
 	setvar VAR_TEMP_2, 0
-	frontier_set FRONTIER_DATA_6, 0
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, FALSE
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_ARENA
 	setvar VAR_0x8005, 0

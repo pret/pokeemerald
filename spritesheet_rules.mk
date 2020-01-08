@@ -653,7 +653,7 @@ $(EVENTOBJGFXDIR)/effects/unknown_20.4bpp: %.4bpp: %.png
 $(EVENTOBJGFXDIR)/effects/unknown_29.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(EVENTOBJGFXDIR)/effects/unknown_33.4bpp: %.4bpp: %.png
+$(EVENTOBJGFXDIR)/effects/lavaridge_gym_warp.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
 $(EVENTOBJGFXDIR)/effects/unknown_35.4bpp: %.4bpp: %.png

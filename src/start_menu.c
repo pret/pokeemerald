@@ -83,7 +83,7 @@ EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
 EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
-EWRAM_DATA static u8 sUnknown_02037619[2] = {0};
+EWRAM_DATA static u8 sInitStartMenuData[2] = {0};
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
@@ -135,9 +135,7 @@ static void StartMenuTask(u8 taskId);
 static void SaveGameTask(u8 taskId);
 static void sub_80A0550(u8 taskId);
 static void sub_80A08A4(u8 taskId);
-
-// Some other callback
-static bool8 sub_809FA00(void);
+static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
 static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
 
@@ -203,7 +201,7 @@ static void BuildLinkModeStartMenu(void);
 static void BuildUnionRoomStartMenu(void);
 static void BuildBattlePikeStartMenu(void);
 static void BuildBattlePyramidStartMenu(void);
-static void BuildMultiBattleRoomStartMenu(void);
+static void BuildMultiPartnerRoomStartMenu(void);
 static void ShowSafariBallsWindow(void);
 static void ShowPyramidFloorWindow(void);
 static void RemoveExtraStartMenuWindows(void);
@@ -258,9 +256,9 @@ static void BuildStartMenuActions(void)
     {
         BuildBattlePyramidStartMenu();
     }
-    else if (InMultiBattleRoom())
+    else if (InMultiPartnerRoom())
     {
-        BuildMultiBattleRoomStartMenu();
+        BuildMultiPartnerRoomStartMenu();
     }
     else
     {
@@ -358,7 +356,7 @@ static void BuildBattlePyramidStartMenu(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildMultiBattleRoomStartMenu(void)
+static void BuildMultiPartnerRoomStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -440,33 +438,33 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 
 static bool32 InitStartMenuStep(void)
 {
-    s8 value = sUnknown_02037619[0];
+    s8 state = sInitStartMenuData[0];
 
-    switch (value)
+    switch (state)
     {
     case 0:
-        sUnknown_02037619[0]++;
+        sInitStartMenuData[0]++;
         break;
     case 1:
         BuildStartMenuActions();
-        sUnknown_02037619[0]++;
+        sInitStartMenuData[0]++;
         break;
     case 2:
         sub_81973A4();
         DrawStdWindowFrame(sub_81979C4(sNumStartMenuActions), FALSE);
-        sUnknown_02037619[1] = 0;
-        sUnknown_02037619[0]++;
+        sInitStartMenuData[1] = 0;
+        sInitStartMenuData[0]++;
         break;
     case 3:
         if (GetSafariZoneFlag())
             ShowSafariBallsWindow();
         if (InBattlePyramid())
             ShowPyramidFloorWindow();
-        sUnknown_02037619[0]++;
+        sInitStartMenuData[0]++;
         break;
     case 4:
-        if (PrintStartMenuActions(&sUnknown_02037619[1], 2))
-            sUnknown_02037619[0]++;
+        if (PrintStartMenuActions(&sInitStartMenuData[1], 2))
+            sInitStartMenuData[0]++;
         break;
     case 5:
         sStartMenuCursorPos = sub_81983AC(GetStartMenuWindowId(), 1, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
@@ -479,8 +477,8 @@ static bool32 InitStartMenuStep(void)
 
 static void InitStartMenu(void)
 {
-    sUnknown_02037619[0] = 0;
-    sUnknown_02037619[1] = 0;
+    sInitStartMenuData[0] = 0;
+    sInitStartMenuData[1] = 0;
     while (!InitStartMenuStep())
         ;
 }
@@ -495,28 +493,28 @@ static void CreateStartMenuTask(TaskFunc followupFunc)
 {
     u8 taskId;
 
-    sUnknown_02037619[0] = 0;
-    sUnknown_02037619[1] = 0;
+    sInitStartMenuData[0] = 0;
+    sInitStartMenuData[1] = 0;
     taskId = CreateTask(StartMenuTask, 0x50);
     SetTaskFuncWithFollowupFunc(taskId, StartMenuTask, followupFunc);
 }
 
-static bool8 sub_809FA00(void)
+static bool8 FieldCB_ReturnToFieldStartMenu(void)
 {
     if (InitStartMenuStep() == FALSE)
     {
         return FALSE;
     }
 
-    sub_80AF688();
+    ReturnToFieldOpenStartMenu();
     return TRUE;
 }
 
-void sub_809FA18(void)
+void ShowReturnToFieldStartMenu(void)
 {
-    sUnknown_02037619[0] = 0;
-    sUnknown_02037619[1] = 0;
-    gFieldCallback2 = sub_809FA00;
+    sInitStartMenuData[0] = 0;
+    sInitStartMenuData[1] = 0;
+    gFieldCallback2 = FieldCB_ReturnToFieldStartMenu;
 }
 
 void Task_ShowStartMenu(u8 taskId)

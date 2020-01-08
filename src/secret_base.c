@@ -16,6 +16,7 @@
 #include "fldeff.h"
 #include "fldeff_misc.h"
 #include "international_string_util.h"
+#include "item_menu.h"
 #include "link.h"
 #include "list_menu.h"
 #include "main.h"
@@ -413,7 +414,7 @@ static void Task_EnterSecretBase(u8 taskId)
 
         SetSecretBaseWarpDestination();
         WarpIntoMap();
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskId);
         break;
@@ -456,7 +457,7 @@ static void EnterNewlyCreatedSecretBase_StartFadeIn(void)
     y += 7;
     MapGridSetMetatileIdAt(x, y, 0x220 | METATILE_COLLISION_MASK);
     CurrentMapDrawMetatileAt(x, y);
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(EnterNewlyCreatedSecretBase_WaitFadeIn, 0);
 }
 
@@ -678,7 +679,7 @@ static void Task_WarpOutOfSecretBase(u8 taskId)
     case 2:
         SetWarpDestinationToDynamicWarp(0x7e);
         WarpIntoMap();
-        gFieldCallback = mapldr_default;
+        gFieldCallback = FieldCB_DefaultWarpExit;
         SetMainCallback2(CB2_LoadMap);
         ScriptContext2_Disable();
         DestroyTask(taskId);

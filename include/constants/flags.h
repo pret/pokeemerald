@@ -1641,13 +1641,13 @@
 #define DAILY_FLAGS_END                             FLAG_UNUSED_0x95F
 
 // Special Flags (Stored in EWRAM (gSpecialFlags), not in the SaveBlock)
-#define SPECIAL_FLAGS_START                                        0x4000
-#define FLAG_HIDE_MAP_NAME_POPUP                                   (SPECIAL_FLAGS_START + 0x0)
-#define FLAG_DONT_TRANSITION_MUSIC                                 (SPECIAL_FLAGS_START + 0x1)
-#define FLAG_SPECIAL_FLAG_0x4002                                   (SPECIAL_FLAGS_START + 0x2)
-#define FLAG_SPECIAL_FLAG_UNUSED_0x4003                            (SPECIAL_FLAGS_START + 0x3) // Unused Flag
-#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG                          (SPECIAL_FLAGS_START + 0x4)
+#define SPECIAL_FLAGS_START                     0x4000
+#define FLAG_HIDE_MAP_NAME_POPUP                (SPECIAL_FLAGS_START + 0x0)
+#define FLAG_DONT_TRANSITION_MUSIC              (SPECIAL_FLAGS_START + 0x1)
+#define FLAG_ENABLE_MULTI_CORRIDOR_DOOR         (SPECIAL_FLAGS_START + 0x2)
+#define FLAG_SPECIAL_FLAG_UNUSED_0x4003         (SPECIAL_FLAGS_START + 0x3) // Unused Flag
+#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG       (SPECIAL_FLAGS_START + 0x4)
 // FLAG_SPECIAL_FLAG_0x4005 - 0x407F also exist and are unused
-#define SPECIAL_FLAGS_END                                          (SPECIAL_FLAGS_START + 0x7F)
+#define SPECIAL_FLAGS_END                       (SPECIAL_FLAGS_START + 0x7F)
 
 #endif // GUARD_CONSTANTS_FLAGS_H

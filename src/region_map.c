@@ -997,7 +997,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             break;
         case MAP_TYPE_UNDERGROUND:
         case MAP_TYPE_UNUSED_2:
-            if (gMapHeader.flags & 0x02)
+            if (gMapHeader.flags & MAP_ALLOW_ESCAPE_ROPE)
             {
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
@@ -1158,7 +1158,7 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
             gRegionMap->mapSecId = MAPSEC_ROUTE_131;
             break;
         default:
-        case SS_TIDAL_LOCATION_OTHER:
+        case SS_TIDAL_LOCATION_CURRENTS:
             mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;

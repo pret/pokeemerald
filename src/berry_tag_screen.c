@@ -527,7 +527,7 @@ static void Task_CloseBerryTagScreen(u8 taskId)
         DestroyFlavorCircleSprites();
         Free(sBerryTag);
         FreeAllWindowBuffers();
-        SetMainCallback2(bag_menu_mail_related);
+        SetMainCallback2(CB2_ReturnToBagMenuPocket);
         DestroyTask(taskId);
     }
 }

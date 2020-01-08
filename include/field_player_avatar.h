@@ -61,7 +61,8 @@ void sub_808D194(void);
 void sub_808D1C8(void);
 bool32 sub_808D1B4(void);
 bool32 sub_808D1E8(void);
-void sub_808C0A8(u8 a);
+void SetPlayerInvisibility(bool8 invisible);
 u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y);
+void StartFishing(u8 taskId);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H
