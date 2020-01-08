@@ -784,7 +784,8 @@ static void sub_80B3220(u8 taskId)
     }
 }
 
-void sub_80B3254(void)
+// Unused
+void CableClubSaveGame(void)
 {
     SaveGame();
 }
@@ -1298,10 +1299,10 @@ void sub_80B3AF8(u8 taskId)
     }
 }
 
-void sub_80B3BC4(void)
+void TrySetBattleTowerLinkType(void)
 {
     if (gWirelessCommType == 0)
     {
-        gLinkType = LINKTYPE_0x2288;
+        gLinkType = LINKTYPE_BATTLE_TOWER;
     }
 }

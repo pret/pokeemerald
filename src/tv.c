@@ -637,50 +637,51 @@ static const u8 *const sTVWhatsNo1InHoennTodayTextGroup[] = {
     gTVWhatsNo1InHoennTodayText08
 };
 
-static const u8 *const sTVSecretBaseSecretsTextGroup[] = {
-    gTVSecretBaseSecretsText00,
-    gTVSecretBaseSecretsText01,
-    gTVSecretBaseSecretsText02,
-    gTVSecretBaseSecretsText03,
-    gTVSecretBaseSecretsText04,
-    gTVSecretBaseSecretsText05,
-    gTVSecretBaseSecretsText06,
-    gTVSecretBaseSecretsText07,
-    gTVSecretBaseSecretsText08,
-    gTVSecretBaseSecretsText09,
-    gTVSecretBaseSecretsText10,
-    gTVSecretBaseSecretsText11,
-    gTVSecretBaseSecretsText12,
-    gTVSecretBaseSecretsText13,
-    gTVSecretBaseSecretsText14,
-    gTVSecretBaseSecretsText15,
-    gTVSecretBaseSecretsText16,
-    gTVSecretBaseSecretsText17,
-    gTVSecretBaseSecretsText18,
-    gTVSecretBaseSecretsText19,
-    gTVSecretBaseSecretsText20,
-    gTVSecretBaseSecretsText21,
-    gTVSecretBaseSecretsText22,
-    gTVSecretBaseSecretsText23,
-    gTVSecretBaseSecretsText24,
-    gTVSecretBaseSecretsText25,
-    gTVSecretBaseSecretsText26,
-    gTVSecretBaseSecretsText27,
-    gTVSecretBaseSecretsText28,
-    gTVSecretBaseSecretsText29,
-    gTVSecretBaseSecretsText30,
-    gTVSecretBaseSecretsText31,
-    gTVSecretBaseSecretsText32,
-    gTVSecretBaseSecretsText33,
-    gTVSecretBaseSecretsText34,
-    gTVSecretBaseSecretsText35,
-    gTVSecretBaseSecretsText36,
-    gTVSecretBaseSecretsText37,
-    gTVSecretBaseSecretsText38,
-    gTVSecretBaseSecretsText39,
-    gTVSecretBaseSecretsText40,
-    gTVSecretBaseSecretsText41,
-    gTVSecretBaseSecretsText42
+static const u8 *const sTVSecretBaseSecretsTextGroup[SBSECRETS_NUM_STATES] = 
+{
+    [SBSECRETS_STATE_INTRO]               = TVSecretBaseSecrets_Text_Intro, 
+    [SBSECRETS_STATE_DO_NEXT1]            = TVSecretBaseSecrets_Text_WhatWillPlayerDoNext1,
+    [SBSECRETS_STATE_DO_NEXT2]            = TVSecretBaseSecrets_Text_WhatWillPlayerDoNext2,
+    [SBSECRETS_STATE_TOOK_X_STEPS]        = TVSecretBaseSecrets_Text_TookXStepsBeforeLeaving,
+    [SBSECRETS_STATE_BASE_INTEREST_LOW]   = TVSecretBaseSecrets_Text_BaseFailedToInterestPlayer, 
+    [SBSECRETS_STATE_BASE_INTEREST_MED]   = TVSecretBaseSecrets_Text_PlayerEnjoyedBase, 
+    [SBSECRETS_STATE_BASE_INTEREST_HIGH]  = TVSecretBaseSecrets_Text_PlayerHugeFanOfBase,
+    [SBSECRETS_STATE_OUTRO]               = TVSecretBaseSecrets_Text_Outro, 
+    [SBSECRETS_STATE_NOTHING_USED1]       = TVSecretBaseSecrets_Text_StoppedMoving1, 
+    [SBSECRETS_STATE_NOTHING_USED2]       = TVSecretBaseSecrets_Text_StoppedMoving2, 
+    [SBSECRETS_STATE_USED_CHAIR]          = TVSecretBaseSecrets_Text_UsedChair, 
+    [SBSECRETS_STATE_USED_BALLOON]        = TVSecretBaseSecrets_Text_UsedBalloon, 
+    [SBSECRETS_STATE_USED_TENT]           = TVSecretBaseSecrets_Text_UsedTent, 
+    [SBSECRETS_STATE_USED_PLANT]          = TVSecretBaseSecrets_Text_UsedPlant, 
+    [SBSECRETS_STATE_USED_GOLD_SHIELD]    = TVSecretBaseSecrets_Text_UsedGoldShield, 
+    [SBSECRETS_STATE_USED_SILVER_SHIELD]  = TVSecretBaseSecrets_Text_UsedSilverShield, 
+    [SBSECRETS_STATE_USED_GLASS_ORNAMENT] = TVSecretBaseSecrets_Text_UsedGlassOrnament, 
+    [SBSECRETS_STATE_USED_TV]             = TVSecretBaseSecrets_Text_UsedTV, 
+    [SBSECRETS_STATE_USED_MUD_BALL]       = TVSecretBaseSecrets_Text_UsedMudBall, 
+    [SBSECRETS_STATE_USED_BAG]            = TVSecretBaseSecrets_Text_UsedBag, 
+    [SBSECRETS_STATE_USED_CUSHION]        = TVSecretBaseSecrets_Text_UsedCushion, 
+    [SBSECRETS_STATE_HIT_CUSHION]         = TVSecretBaseSecrets_Text_HitCushion, 
+    [SBSECRETS_STATE_HUGGED_CUSHION]      = TVSecretBaseSecrets_Text_HuggedCushion, 
+    [SBSECRETS_STATE_BATTLED_WON]         = TVSecretBaseSecrets_Text_BattledWon, 
+    [SBSECRETS_STATE_BATTLED_LOST]        = TVSecretBaseSecrets_Text_BattledLost, 
+    [SBSECRETS_STATE_DECLINED_BATTLE]     = TVSecretBaseSecrets_Text_DeclinedBattle, 
+    [SBSECRETS_STATE_USED_POSTER]         = TVSecretBaseSecrets_Text_UsedPoster, 
+    [SBSECRETS_STATE_USED_NOTE_MAT]       = TVSecretBaseSecrets_Text_UsedNoteMat, 
+    [SBSECRETS_STATE_BATTLED_DRAW]        = TVSecretBaseSecrets_Text_BattledDraw, 
+    [SBSECRETS_STATE_USED_SPIN_MAT]       = TVSecretBaseSecrets_Text_UsedSpinMat, 
+    [SBSECRETS_STATE_USED_SAND_ORNAMENT]  = TVSecretBaseSecrets_Text_UsedSandOrnament, 
+    [SBSECRETS_STATE_USED_DESK]           = TVSecretBaseSecrets_Text_UsedDesk, 
+    [SBSECRETS_STATE_USED_BRICK]          = TVSecretBaseSecrets_Text_UsedBrick, 
+    [SBSECRETS_STATE_USED_SOLID_BOARD]    = TVSecretBaseSecrets_Text_UsedSolidBoard, 
+    [SBSECRETS_STATE_USED_FENCE]          = TVSecretBaseSecrets_Text_UsedFence, 
+    [SBSECRETS_STATE_USED_GLITTER_MAT]    = TVSecretBaseSecrets_Text_UsedGlitterMat, 
+    [SBSECRETS_STATE_USED_TIRE]           = TVSecretBaseSecrets_Text_UsedTire, 
+    [SBSECRETS_STATE_USED_STAND]          = TVSecretBaseSecrets_Text_UsedStand, 
+    [SBSECRETS_STATE_USED_BREAKABLE_DOOR] = TVSecretBaseSecrets_Text_BrokeDoor,
+    [SBSECRETS_STATE_USED_DOLL]           = TVSecretBaseSecrets_Text_UsedDoll, 
+    [SBSECRETS_STATE_USED_SLIDE]          = TVSecretBaseSecrets_Text_UsedSlide, 
+    [SBSECRETS_STATE_DECLINED_SLIDE]      = TVSecretBaseSecrets_Text_UsedSlideButDidntGoDown, 
+    [SBSECRETS_STATE_USED_JUMP_MAT]       = TVSecretBaseSecrets_Text_UsedJumpMat
 };
 
 static const u8 *const sTVSafariFanClubTextGroup[] = {
@@ -709,39 +710,42 @@ static const u8 *const sTVInSearchOfTrainersTextGroup[] = {
     gTVInSearchOfTrainersText08
 };
 
-const u8 sTVSecretBaseSecretsStateLookup[] = {
-    0x0a,
-    0x0b,
-    0x0c,
-    0x0d,
-    0x0e,
-    0x0f,
-    0x10,
-    0x11,
-    0x12,
-    0x13,
-    0x14,
-    0x17,
-    0x18,
-    0x19,
-    0x1a,
-    0x1b,
-    0x1c,
-    0x1d,
-    0x1e,
-    0x1f,
-    0x20,
-    0x21,
-    0x22,
-    0x23,
-    0x24,
-    0x25,
-    0x26,
-    0x27,
-    0x28,
-    0x29,
-    0x2a,
-    0x2b
+// Secret Base Secrets TV Show states for actions that can be taken in a secret base
+// The flags that determine whether or not the action was taken are commented 
+const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] = 
+{
+    SBSECRETS_STATE_USED_CHAIR,             // SECRET_BASE_USED_CHAIR
+    SBSECRETS_STATE_USED_BALLOON,           // SECRET_BASE_USED_BALLOON
+    SBSECRETS_STATE_USED_TENT,              // SECRET_BASE_USED_TENT
+    SBSECRETS_STATE_USED_PLANT,             // SECRET_BASE_USED_PLANT
+    SBSECRETS_STATE_USED_GOLD_SHIELD,       // SECRET_BASE_USED_GOLD_SHIELD
+    SBSECRETS_STATE_USED_SILVER_SHIELD,     // SECRET_BASE_USED_SILVER_SHIELD
+    SBSECRETS_STATE_USED_GLASS_ORNAMENT,    // SECRET_BASE_USED_GLASS_ORNAMENT
+    SBSECRETS_STATE_USED_TV,                // SECRET_BASE_USED_TV
+    SBSECRETS_STATE_USED_MUD_BALL,          // SECRET_BASE_USED_MUD_BALL
+    SBSECRETS_STATE_USED_BAG,               // SECRET_BASE_USED_BAG
+    SBSECRETS_STATE_USED_CUSHION,           // SECRET_BASE_USED_CUSHION
+    SBSECRETS_STATE_BATTLED_WON,            // SECRET_BASE_BATTLED_WON
+    SBSECRETS_STATE_BATTLED_LOST,           // SECRET_BASE_BATTLED_LOST
+    SBSECRETS_STATE_DECLINED_BATTLE,        // SECRET_BASE_DECLINED_BATTLE
+    SBSECRETS_STATE_USED_POSTER,            // SECRET_BASE_USED_POSTER
+    SBSECRETS_STATE_USED_NOTE_MAT,          // SECRET_BASE_USED_NOTE_MAT
+    SBSECRETS_STATE_BATTLED_DRAW,           // SECRET_BASE_BATTLED_DRAW
+    SBSECRETS_STATE_USED_SPIN_MAT,          // SECRET_BASE_USED_SPIN_MAT
+    SBSECRETS_STATE_USED_SAND_ORNAMENT,     // SECRET_BASE_USED_SAND_ORNAMENT
+    SBSECRETS_STATE_USED_DESK,              // SECRET_BASE_USED_DESK
+    SBSECRETS_STATE_USED_BRICK,             // SECRET_BASE_USED_BRICK
+    SBSECRETS_STATE_USED_SOLID_BOARD,       // SECRET_BASE_USED_SOLID_BOARD
+    SBSECRETS_STATE_USED_FENCE,             // SECRET_BASE_USED_FENCE
+    SBSECRETS_STATE_USED_GLITTER_MAT,       // SECRET_BASE_USED_GLITTER_MAT
+    SBSECRETS_STATE_USED_TIRE,              // SECRET_BASE_USED_TIRE
+    SBSECRETS_STATE_USED_STAND,             // SECRET_BASE_USED_STAND
+    SBSECRETS_STATE_USED_BREAKABLE_DOOR,    // SECRET_BASE_USED_BREAKABLE_DOOR
+    SBSECRETS_STATE_USED_DOLL,              // SECRET_BASE_USED_DOLL
+    SBSECRETS_STATE_USED_SLIDE,             // SECRET_BASE_USED_SLIDE
+    SBSECRETS_STATE_DECLINED_SLIDE,         // SECRET_BASE_DECLINED_SLIDE
+    SBSECRETS_STATE_USED_JUMP_MAT,          // SECRET_BASE_USED_JUMP_MAT
+    SBSECRETS_NUM_STATES                    // SECRET_BASE_UNUSED_FLAG. Odd that this is included, if it were used it would overflow sTVSecretBaseSecretsTextGroup
 };
 
 // .text
@@ -2544,7 +2548,7 @@ void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode)
     }
 }
 
-void sub_80EEA70(void)
+void TryPutSecretBaseSecretsOnAir(void)
 {
     TVShow *show;
     u8 strbuf[32];
@@ -3591,7 +3595,7 @@ void GetMomOrDadStringForTVMessage(void)
     }
 }
 
-void sub_80F01B8(void)
+void HideBattleTowerReporter(void)
 {
     VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
     RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
@@ -7340,35 +7344,32 @@ static void DoTVShowWhatsNo1InHoennToday(void)
     ShowFieldMessage(sTVWhatsNo1InHoennTodayTextGroup[state]);
 }
 
-u8 TVShowGetFlagCount(TVShow *show)
+u8 SecretBaseSecrets_GetNumActionsTaken(TVShow *show)
 {
     u8 i;
-    u8 tot;
+    u8 flagsSet;
 
-    for (i = 0, tot = 0; i < 32; i ++)
+    for (i = 0, flagsSet = 0; i < NUM_SECRET_BASE_FLAGS; i ++)
     {
         if ((show->secretBaseSecrets.flags >> i) & 1)
-        {
-            tot ++;
-        }
+            flagsSet++;
     }
-    return tot;
+    return flagsSet;
 }
 
-static u8 SecretBaseSecrets_GetStateForFlagNumber(TVShow *show, u8 a1)
+static u8 SecretBaseSecrets_GetStateByFlagNumber(TVShow *show, u8 flagId)
 {
     u8 i;
-    u8 tot;
+    u8 flagsSet;
 
-    for (i = 0, tot = 0; i < 32; i ++)
+    for (i = 0, flagsSet = 0; i < NUM_SECRET_BASE_FLAGS; i ++)
     {
         if ((show->secretBaseSecrets.flags >> i) & 1)
         {
-            if (tot == a1)
-            {
-                return sTVSecretBaseSecretsStateLookup[i];
-            }
-            tot ++;
+            if (flagsSet == flagId)
+                return sTVSecretBaseSecretsActions[i];
+
+            flagsSet++;
         }
     }
     return 0;
@@ -7378,7 +7379,7 @@ static void DoTVShowSecretBaseSecrets(void)
 {
     TVShow *show;
     u8 state;
-    u8 bitCount;
+    u8 numActions;
     u16 i;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
@@ -7386,226 +7387,128 @@ static void DoTVShowSecretBaseSecrets(void)
     state = sTVShowState;
     switch (state)
     {
-        case 0:
+        case SBSECRETS_STATE_INTRO:
             TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            bitCount = TVShowGetFlagCount(show);
-            if (bitCount == 0)
+            numActions = SecretBaseSecrets_GetNumActionsTaken(show);
+            if (numActions == 0)
             {
-                sTVShowState = 8;
+                sTVShowState = SBSECRETS_STATE_NOTHING_USED1;
             }
             else
             {
-                show->secretBaseSecrets.savedState = 1;
-                sTVSecretBaseSecretsRandomValues[0] = Random() % bitCount;
-                sTVShowState = SecretBaseSecrets_GetStateForFlagNumber(show, sTVSecretBaseSecretsRandomValues[0]);
+                show->secretBaseSecrets.savedState = SBSECRETS_STATE_DO_NEXT1;
+                sTVSecretBaseSecretsRandomValues[0] = Random() % numActions;
+                sTVShowState = SecretBaseSecrets_GetStateByFlagNumber(show, sTVSecretBaseSecretsRandomValues[0]);
             }
             break;
-        case 1:
+        case SBSECRETS_STATE_DO_NEXT1:
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            bitCount = TVShowGetFlagCount(show);
-            switch (bitCount)
+            numActions = SecretBaseSecrets_GetNumActionsTaken(show);
+            switch (numActions)
             {
                 case 1:
-                    sTVShowState = 9;
+                    sTVShowState = SBSECRETS_STATE_NOTHING_USED2;
                     break;
                 case 2:
-                    show->secretBaseSecrets.savedState = 2;
+                    show->secretBaseSecrets.savedState = SBSECRETS_STATE_DO_NEXT2;
                     if (sTVSecretBaseSecretsRandomValues[0] == 0)
                     {
-                        sTVShowState = SecretBaseSecrets_GetStateForFlagNumber(show, 1);
+                        sTVShowState = SecretBaseSecrets_GetStateByFlagNumber(show, 1);
                     }
                     else
                     {
-                        sTVShowState = SecretBaseSecrets_GetStateForFlagNumber(show, 0);
+                        sTVShowState = SecretBaseSecrets_GetStateByFlagNumber(show, 0);
                     }
                     break;
                 default:
                     for (i = 0; i < 0xFFFF; i ++)
                     {
-                        sTVSecretBaseSecretsRandomValues[1] = Random() % bitCount;
+                        sTVSecretBaseSecretsRandomValues[1] = Random() % numActions;
                         if (sTVSecretBaseSecretsRandomValues[1] != sTVSecretBaseSecretsRandomValues[0])
                         {
                             break;
                         }
                     }
-                    show->secretBaseSecrets.savedState = 2;
-                    sTVShowState = SecretBaseSecrets_GetStateForFlagNumber(show, sTVSecretBaseSecretsRandomValues[1]);
+                    show->secretBaseSecrets.savedState = SBSECRETS_STATE_DO_NEXT2;
+                    sTVShowState = SecretBaseSecrets_GetStateByFlagNumber(show, sTVSecretBaseSecretsRandomValues[1]);
                     break;
             }
             break;
-        case 2:
+        case SBSECRETS_STATE_DO_NEXT2:
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            bitCount = TVShowGetFlagCount(show);
-            if (bitCount == 2)
+            numActions = SecretBaseSecrets_GetNumActionsTaken(show);
+            if (numActions == 2)
             {
-                sTVShowState = 9;
+                sTVShowState = SBSECRETS_STATE_NOTHING_USED2;
             }
             else
             {
                 for (i = 0; i < 0xFFFF; i ++)
                 {
-                    sTVSecretBaseSecretsRandomValues[2] = Random() % bitCount;
+                    sTVSecretBaseSecretsRandomValues[2] = Random() % numActions;
                     if (sTVSecretBaseSecretsRandomValues[2] != sTVSecretBaseSecretsRandomValues[0] && sTVSecretBaseSecretsRandomValues[2] != sTVSecretBaseSecretsRandomValues[1])
                     {
                         break;
                     }
                 }
-                show->secretBaseSecrets.savedState = 3;
-                sTVShowState = SecretBaseSecrets_GetStateForFlagNumber(show, sTVSecretBaseSecretsRandomValues[2]);
+                show->secretBaseSecrets.savedState = SBSECRETS_STATE_TOOK_X_STEPS;
+                sTVShowState = SecretBaseSecrets_GetStateByFlagNumber(show, sTVSecretBaseSecretsRandomValues[2]);
             }
             break;
-        case 3:
+        case SBSECRETS_STATE_TOOK_X_STEPS:
             TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
             TV_PrintIntToStringVar(2, show->secretBaseSecrets.stepsInBase);
             if (show->secretBaseSecrets.stepsInBase <= 30)
             {
-                sTVShowState = 4;
+                sTVShowState = SBSECRETS_STATE_BASE_INTEREST_LOW;
             }
             else if (show->secretBaseSecrets.stepsInBase <= 100)
             {
-                sTVShowState = 5;
+                sTVShowState = SBSECRETS_STATE_BASE_INTEREST_MED;
             }
             else
             {
-                sTVShowState = 6;
+                sTVShowState = SBSECRETS_STATE_BASE_INTEREST_HIGH;
             }
             break;
-        case 4:
+        case SBSECRETS_STATE_BASE_INTEREST_LOW ... SBSECRETS_STATE_BASE_INTEREST_HIGH:
             TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            sTVShowState = 7;
+            sTVShowState = SBSECRETS_STATE_OUTRO;
             break;
-        case 5:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
-            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            sTVShowState = 7;
-            break;
-        case 6:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
-            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            sTVShowState = 7;
-            break;
-        case 7:
+        case SBSECRETS_STATE_OUTRO:
             TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
             TVShowDone();
             break;
-        case 8:
-            sTVShowState = 3;
+        // All below states are descriptions of what the player interacted with while in the secret base
+        case SBSECRETS_STATE_NOTHING_USED1:
+            sTVShowState = SBSECRETS_STATE_TOOK_X_STEPS;
             break;
-        case 9:
-            sTVShowState = 3;
+        case SBSECRETS_STATE_NOTHING_USED2:
+            sTVShowState = SBSECRETS_STATE_TOOK_X_STEPS;
             break;
-        case 10:
+        case SBSECRETS_STATE_USED_CHAIR ... SBSECRETS_STATE_USED_MUD_BALL:
             sTVShowState = show->secretBaseSecrets.savedState;
             break;
-        case 11:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 12:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 13:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 14:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 15:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 16:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 17:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 18:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 19:
+        case SBSECRETS_STATE_USED_BAG:
             StringCopy(gStringVar2, ItemId_GetName(show->secretBaseSecrets.item));
             sTVShowState = show->secretBaseSecrets.savedState;
             break;
-        case 20:
+        case SBSECRETS_STATE_USED_CUSHION:
+            // Randomly decide based on trainer ID if the player hugged or hit the cushion
             if (show->common.trainerIdLo & 1)
             {
-                sTVShowState = 22;
+                sTVShowState = SBSECRETS_STATE_HUGGED_CUSHION;
             }
             else
             {
-                sTVShowState = 21;
+                sTVShowState = SBSECRETS_STATE_HIT_CUSHION;
             }
             break;
-        case 21:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 22:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 23:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 24:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 25:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 26:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 27:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 28:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 29:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 30:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 31:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 32:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 33:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 34:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 35:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 36:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 37:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 38:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 39:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 40:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 41:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 42:
-            sTVShowState = show->secretBaseSecrets.savedState;
-            break;
-        case 43:
+        case SBSECRETS_STATE_HIT_CUSHION ... SBSECRETS_NUM_STATES:
             sTVShowState = show->secretBaseSecrets.savedState;
             break;
     }

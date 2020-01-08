@@ -2154,7 +2154,8 @@ void sub_8129708(void)
     }
 }
 
-void sub_81297AC(void)
+// Unused
+void GetEventObjectLocalIdByFlag(void)
 {
     u8 i;
 
