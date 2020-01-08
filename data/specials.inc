@@ -38,7 +38,7 @@ gSpecials:: @ 81DBA64
 	def_special RecordMixingPlayerSpotTriggered
 	def_special TryBattleLinkup
 	def_special TryTradeLinkup
-	def_special sub_80B2E74
+	def_special TryRecordMixLinkup
 	def_special sub_80B2EA8
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered

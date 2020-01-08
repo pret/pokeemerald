@@ -592,7 +592,7 @@ void TryTradeLinkup(void)
     sub_80B236C(2, 2);
 }
 
-void sub_80B2E74(void)
+void TryRecordMixLinkup(void)
 {
     gSpecialVar_Result = 0;
     gLinkType = LINKTYPE_0x3311;
