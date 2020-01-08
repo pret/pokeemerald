@@ -29,7 +29,7 @@ DewfordTown_Hall_EventScript_Man:: @ 81FD50A
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
-	special sub_811EF6C
+	special BufferDeepLinkPhrase
 	msgbox DewfordTown_Hall_Text_DeepLinkBetweenXAndY, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_Hall_EventScript_ConfirmTrendLink
