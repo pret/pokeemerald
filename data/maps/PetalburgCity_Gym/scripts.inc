@@ -673,8 +673,7 @@ PetalburgCity_Gym_Movement_WallysUncleApproachPlayerWest: @ 82050D0
 	walk_up
 	step_end
 
-@ Unused
-PetalburgCity_Gym_Movement_2050D8: @ 82050D8
+PetalburgCity_Gym_Movement_Unused: @ 82050D8
 	walk_in_place_fastest_up
 	delay_16
 	delay_16

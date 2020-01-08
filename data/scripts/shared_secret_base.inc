@@ -157,33 +157,33 @@ SecretBase_EventScript_PCTurnOff:: @ 823B66E
     end
 
 @ Unused
-SecretBase_EventScript_23B674:: @ 823B674
-    special SetSecretBaseSecretsTvFlags_Poster
+SecretBase_EventScript_Poster:: @ 823B674
+    special CheckInteractedWithFriendsPosterDecor
     end
 
 @ Unused
-SecretBase_EventScript_23B678:: @ 823B678
-    special SetSecretBaseSecretsTvFlags_MiscFurnature
+SecretBase_EventScript_FurnitureBottom:: @ 823B678
+    special CheckInteractedWithFriendsFurnitureBottom
     end
 
 @ Unused
-SecretBase_EventScript_23B67C:: @ 823B67C
-    special SetSecretBaseSecretsTvFlags_LargeDecorationSpot
+SecretBase_EventScript_FurnitureMiddle:: @ 823B67C
+    special CheckInteractedWithFriendsFurnitureMiddle
     end
 
 @ Unused
-SecretBase_EventScript_23B680:: @ 823B680
-    special SetSecretBaseSecretsTvFlags_SmallDecorationSpot
+SecretBase_EventScript_FurnitureTop:: @ 823B680
+    special CheckInteractedWithFriendsFurnitureTop
     end
 
 SecretBase_EventScript_SandOrnament:: @ 823B684
-    special SetSecretBaseSecretsTvFlags_SandOrnament
+    special CheckInteractedWithFriendsSandOrnament
     dofieldeffect FLDEFF_SAND_PILLAR
     waitstate
     end
 
 SecretBase_EventScript_ShieldOrToyTV:: @ 823B68C
-    special GetShieldToyTVDecorationInfo
+    special InteractWithShieldOrTVDecoration
     compare VAR_RESULT, 0
     goto_if_eq SecretBase_EventScript_BattleTowerShield
     compare VAR_RESULT, 1
