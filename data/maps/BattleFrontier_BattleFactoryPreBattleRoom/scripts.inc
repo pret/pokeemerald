@@ -100,8 +100,8 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForRegularOpponent
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor6thOpponent
 	compare VAR_RESULT, 6
 	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReadyFor7thOpponent
-	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponentNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
@@ -215,7 +215,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_PauseChallenge:: @ 8259E47
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ResumeChallenge:: @ 8259E69
 	special SavePlayerParty
 	factory_setparties 0
-	frontier_set FRONTIER_DATA_6, 1
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	special CalculatePlayerPartyCount
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForOpponent
 
@@ -391,8 +391,8 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_StyleFlexible:: @ 825A0B0
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHead:: @ 825A0B9
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_PreparedToFaceHead
 	waitmessage
-	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_AskReadyForHeadNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT

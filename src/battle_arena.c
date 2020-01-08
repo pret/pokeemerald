@@ -791,7 +791,7 @@ static void InitArenaChallenge(void)
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
-    gSaveBlock2Ptr->frontier.field_CA9_b = 0;
+    gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
     if (lvlMode != FRONTIER_LVL_50)
         isCurrent = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_ARENA_OPEN;
     else

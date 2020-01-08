@@ -45,7 +45,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_EnterRoom:: @ 824F86B
 	waitmovement 0
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
 	setvar VAR_TEMP_2, 1
-	frontier_set FRONTIER_DATA_6, 1
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponent
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_BeginChallenge:: @ 824F8B5
@@ -104,8 +104,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponent:: @ 824F98
 	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor6thOpponent
 	compare VAR_RESULT, 6
 	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor7thOpponent
-	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponentNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
@@ -180,8 +180,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_MavenUpNext:: @ 824FB61
 BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForMaven:: @ 824FB79
 	message BattleFrontier_BattlePalaceBattleRoom_Text_ReadyForPalaceMaven
 	waitmessage
-	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForMavenNoRecord
 	multichoice 19, 4, MULTI_GO_ON_RECORD_REST_RETIRE, 1
 	switch VAR_RESULT
@@ -290,7 +290,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserGold:: @ 824FD8
 BattleFrontier_BattlePalaceBattleRoom_EventScript_DoPalaceBattle:: @ 824FDF7
 	closemessage
 	setvar VAR_TEMP_2, 0
-	frontier_set FRONTIER_DATA_6, 0
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, FALSE
 	special HealPlayerParty
 	setvar VAR_0x8004, SPECIAL_BATTLE_PALACE
 	setvar VAR_0x8005, 0

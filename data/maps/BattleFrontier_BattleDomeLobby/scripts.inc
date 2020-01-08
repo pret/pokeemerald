@@ -86,8 +86,8 @@ BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
 	dome_save 0
 	playse SE_SAVE
 	waitse
-	call BattleFrontier_BattleDomeLobby_EventScript_23E8E0
-	compare VAR_RESULT, 1
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_2499E9
 	message BattleFrontier_BattleDomeLobby_Text_24AE17
 	waitmessage

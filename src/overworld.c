@@ -978,7 +978,7 @@ static u16 GetCenterScreenMetatileBehavior(void)
 
 bool32 Overworld_IsBikingAllowed(void)
 {
-    if (!(gMapHeader.flags & 1))
+    if (!(gMapHeader.flags & MAP_ALLOW_BIKE))
         return FALSE;
     else
         return TRUE;
@@ -1702,7 +1702,7 @@ void sub_80861E8(void)
 
 static void sub_8086204(void)
 {
-    if ((gMapHeader.flags & 0xF8) == 8 && SecretBaseMapPopupEnabled() == TRUE)
+    if (SHOW_MAP_NAME_ENABLED && SecretBaseMapPopupEnabled() == TRUE)
         ShowMapNamePopup();
     FieldCB_WarpExitFadeFromBlack();
 }
@@ -1948,7 +1948,7 @@ static bool32 load_map_stuff(u8 *state, u32 a2)
         (*state)++;
         break;
     case 11:
-        if ((gMapHeader.flags & 0xF8) == 8 && SecretBaseMapPopupEnabled() == TRUE)
+        if (SHOW_MAP_NAME_ENABLED && SecretBaseMapPopupEnabled() == TRUE)
             ShowMapNamePopup();
         (*state)++;
         break;

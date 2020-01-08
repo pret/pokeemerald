@@ -331,7 +331,7 @@ struct BattleFrontier
     /*0xCA8*/ u8 challengeStatus;
     /*0xCA9*/ u8 lvlMode:2;
     /*0xCA9*/ u8 challengePaused:1;
-    /*0xCA9*/ u8 field_CA9_b:1;
+    /*0xCA9*/ u8 disableRecordBattle:1;
     /*0xCA9*/ u8 unused_CA9_c:1;
     /*0xCA9*/ u8 unused_CA9_d:1;
     /*0xCA9*/ u8 unused_CA9_e:1;
