@@ -896,19 +896,19 @@ RustboroCity_EventScript_RestoreBgm:: @ 81E10D6
 	return
 
 RustboroCity_EventScript_BattleMayTreecko:: @ 81E10DB
-	trainerbattle_no_intro TRAINER_MAY_14, RustboroCity_Text_MayDefeat
+	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayTorchic:: @ 81E10EE
-	trainerbattle_no_intro TRAINER_MAY_15, RustboroCity_Text_MayDefeat
+	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayMudkip:: @ 81E1101
-	trainerbattle_no_intro TRAINER_MAY_10, RustboroCity_Text_MayDefeat
+	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
@@ -960,19 +960,19 @@ RustboroCity_EventScript_BrendanBrineyHint:: @ 81E11C0
 	end
 
 RustboroCity_EventScript_BattleBrendanTreecko:: @ 81E11D5
-	trainerbattle_no_intro TRAINER_BRENDAN_10, RustboroCity_Text_BrendanDefeat
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanTorchic:: @ 81E11E8
-	trainerbattle_no_intro TRAINER_BRENDAN_12, RustboroCity_Text_BrendanDefeat
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanMudkip:: @ 81E11FB
-	trainerbattle_no_intro TRAINER_BRENDAN_11, RustboroCity_Text_BrendanDefeat
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end

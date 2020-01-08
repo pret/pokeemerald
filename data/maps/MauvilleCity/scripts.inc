@@ -204,7 +204,7 @@ MauvilleCity_EventScript_ScottExitEast:: @ 81DF628
 
 MauvilleCity_EventScript_BattleWally:: @ 81DF63A
 	msgbox MauvilleCity_Text_WallyHereICome, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_WALLY_2, MauvilleCity_Text_WallyDefeat
+	trainerbattle_no_intro TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
 	applymovement 6, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_WallyIllGoBackToVerdanturf, MSGBOX_DEFAULT

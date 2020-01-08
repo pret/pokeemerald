@@ -43,7 +43,7 @@ MtChimney_EventScript_Maxie:: @ 822EE0B
 	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MtChimney_Text_MaxieIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_MAXIE_2, MtChimney_Text_MaxieDefeat
+	trainerbattle_no_intro TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat
 	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -415,7 +415,7 @@ MtChimney_EventScript_BusyAquaGrunt3:: @ 822F065
 	end
 
 MtChimney_EventScript_Tabitha:: @ 822F06E
-	trainerbattle_single TRAINER_TABITHA_2, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
+	trainerbattle_single TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 

@@ -337,11 +337,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest:: @ 8224152
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer:: @ 8224157
-	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, TRAINER_MAXIE_3, 0, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand
+	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, TRAINER_MAXIE_MOSSDEEP, 0, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer:: @ 8224166
-	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, TRAINER_TABITHA_1, 0, MossdeepCity_SpaceCenter_Text_TabithaDefeat, MossdeepCity_SpaceCenter_Text_TabithaDefeat
+	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, TRAINER_TABITHA_MOSSDEEP, 0, MossdeepCity_SpaceCenter_Text_TabithaDefeat, MossdeepCity_SpaceCenter_Text_TabithaDefeat
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall:: @ 8224175
