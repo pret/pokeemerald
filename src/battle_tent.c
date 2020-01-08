@@ -12,6 +12,8 @@
 #include "frontier_util.h"
 #include "string_util.h"
 #include "constants/battle_tent.h"
+#include "constants/battle_tent_trainers.h"
+#include "constants/battle_tent_mons.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
@@ -311,7 +313,7 @@ static void GenerateInitialRentalMons(void)
     while (i != PARTY_SIZE)
     {
         // Cannot have two pokemon of the same species.
-        monSetId = Random() % 70;
+        monSetId = Random() % NUM_SLATEPORT_TENT_MONS;
         for (j = firstMonId; j < firstMonId + i; j++)
         {
             u16 monId = monIds[j];
@@ -365,7 +367,7 @@ static void GenerateOpponentMons(void)
     {
         do
         {
-            trainerId = Random() % 30;
+            trainerId = Random() % NUM_BATTLE_TENT_TRAINERS;
             for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
             {
                 if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)

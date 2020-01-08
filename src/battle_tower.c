@@ -25,6 +25,8 @@
 #include "battle_factory.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
+#include "constants/battle_tent_mons.h"
+#include "constants/battle_tent_trainers.h"
 #include "constants/battle_tower.h"
 #include "constants/frontier_util.h"
 #include "constants/items.h"

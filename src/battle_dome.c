@@ -6155,7 +6155,6 @@ int TrainerIdToDomeTournamentId(u16 trainerId)
     return i;
 }
 
-// TODO:
 static u8 sub_81953E8(u8 tournamentId, u8 round)
 {
     u8 tournamentIds[2];
