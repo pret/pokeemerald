@@ -2700,7 +2700,7 @@ GabbyAndTy_Text_GabbyPreFirstBattle: @ 0828AF05
 	.string "Okay, roll camera!\n"
 	.string "Let's get this interview.$"
 
-GabbyAndTy_Text_GabbyPreBattle: @ 0828AF7D
+GabbyAndTy_Text_GabbyIntro: @ 0828AF7D
 	.string "GABBY: Oh! You're {PLAYER}! Hi!\n"
 	.string "Do you remember us from last time?\p"
 	.string "Can you show us how much stronger\n"
@@ -2806,7 +2806,7 @@ GabbyAndTy_Text_TyPreFirstBattle: @ 0828B75C
 	.string "TRAINER here, of all places!\l"
 	.string "Camera's rolling!$"
 
-GabbyAndTy_Text_TyPreBattle: @ 0828B7B1
+GabbyAndTy_Text_TyIntro: @ 0828B7B1
 	.string "TY: Hey, lookie here!\n"
 	.string "I remember you!\p"
 	.string "I'll get this battle all on this\n"

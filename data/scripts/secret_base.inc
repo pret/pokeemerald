@@ -346,7 +346,7 @@ SecretBase_EventScript_Trainer0:: @ 8275DD6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer0PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer0PostBattle
-	msgbox SecretBase_Text_Trainer0PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer0Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer0DeclineBattle
 	setvar VAR_RESULT, 1
@@ -383,7 +383,7 @@ SecretBase_EventScript_Trainer1:: @ 8275E4E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer1PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer1PostBattle
-	msgbox SecretBase_Text_Trainer1PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer1Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer1DeclineBattle
 	setvar VAR_RESULT, 1
@@ -420,7 +420,7 @@ SecretBase_EventScript_Trainer2:: @ 8275EC6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer2PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer2PostBattle
-	msgbox SecretBase_Text_Trainer2PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer2Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer2DeclineBattle
 	setvar VAR_RESULT, 1
@@ -457,7 +457,7 @@ SecretBase_EventScript_Trainer3:: @ 8275F3E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer3PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer3PostBattle
-	msgbox SecretBase_Text_Trainer3PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer3Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer3DeclineBattle
 	setvar VAR_RESULT, 1
@@ -494,7 +494,7 @@ SecretBase_EventScript_Trainer4:: @ 8275FB6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer4PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer4PostBattle
-	msgbox SecretBase_Text_Trainer4PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer4Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer4DeclineBattle
 	setvar VAR_RESULT, 1
@@ -531,7 +531,7 @@ SecretBase_EventScript_Trainer5:: @ 827602E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer5PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer5PostBattle
-	msgbox SecretBase_Text_Trainer5PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer5Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer5DeclineBattle
 	setvar VAR_RESULT, 1
@@ -568,7 +568,7 @@ SecretBase_EventScript_Trainer6:: @ 82760A6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer6PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer6PostBattle
-	msgbox SecretBase_Text_Trainer6PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer6Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer6DeclineBattle
 	setvar VAR_RESULT, 1
@@ -605,7 +605,7 @@ SecretBase_EventScript_Trainer7:: @ 827611E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer7PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer7PostBattle
-	msgbox SecretBase_Text_Trainer7PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer7Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer7DeclineBattle
 	setvar VAR_RESULT, 1
@@ -642,7 +642,7 @@ SecretBase_EventScript_Trainer8:: @ 8276196
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer8PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer8PostBattle
-	msgbox SecretBase_Text_Trainer8PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer8Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer8DeclineBattle
 	setvar VAR_RESULT, 1
@@ -679,7 +679,7 @@ SecretBase_EventScript_Trainer9:: @ 827620E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer9PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer9PostBattle
-	msgbox SecretBase_Text_Trainer9PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer9Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer9DeclineBattle
 	setvar VAR_RESULT, 1
