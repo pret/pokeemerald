@@ -107,7 +107,7 @@ gSpecials:: @ 81DBA64
 	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
 	def_special ShowEasyChatScreen
-	def_special sub_811EECC
+	def_special ShowEasyChatProfile
 	def_special ScrSpecial_GetCurrentMauvilleMan
 	def_special ScrSpecial_HasBardSongBeenChanged
 	def_special ScrSpecial_SaveBardSongLyrics
@@ -139,7 +139,7 @@ gSpecials:: @ 81DBA64
 	def_special IsMonOTIDNotPlayers
 	def_special BufferTrendyPhraseString
 	def_special TrendyPhraseIsOld
-	def_special sub_811EF6C
+	def_special BufferDeepLinkPhrase
 	def_special GetDewfordHallPaintingNameIndex
 	def_special SwapRegisteredBike
 	def_special CalculatePlayerPartyCount
