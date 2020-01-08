@@ -217,7 +217,7 @@ static void sub_807E55C(struct Sprite *sprite);
 static void sub_807E5D8(struct Sprite *sprite);
 static void sub_807E64C(struct Sprite *sprite);
 static void sub_807E6AC(struct Sprite *sprite);
-static void BuffeInGameTradeMonName(void);
+static void BufferInGameTradeMonName(void);
 static void SetInGameTradeMail(struct MailStruct *mail, const struct InGameTrade *trade);
 static void CB2_UpdateLinkTrade(void);
 static void CB2_TryFinishTrade(void);
@@ -3761,7 +3761,7 @@ static bool8 AnimateTradeSequenceCable(void)
                 FREE_AND_SET_NULL(sTradeData);
             }
             SetMainCallback2(CB2_ReturnToField);
-            BuffeInGameTradeMonName();
+            BufferInGameTradeMonName();
         }
         break;
     }
@@ -4276,7 +4276,7 @@ static bool8 AnimateTradeSequenceWireless(void)
                 FREE_AND_SET_NULL(sTradeData);
             }
             SetMainCallback2(CB2_ReturnToField);
-            BuffeInGameTradeMonName();
+            BufferInGameTradeMonName();
         }
         break;
     }
@@ -4418,7 +4418,7 @@ u16 GetInGameTradeSpeciesInfo(void)
     return inGameTrade->requestedSpecies;
 }
 
-static void BuffeInGameTradeMonName(void)
+static void BufferInGameTradeMonName(void)
 {
     u8 nickname[32];
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
