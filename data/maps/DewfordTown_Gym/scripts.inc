@@ -7,8 +7,7 @@ DewfordTown_Gym_OnTransition: @ 81FC642
 	end
 
 DewfordTown_Gym_EventScript_SetFlashRadius:: @ 81FC648
-	checktrainerflag TRAINER_BRAWLY_1
-	goto_if_eq DewfordTown_Gym_EventScript_SetLightsOn
+	goto_if_defeated TRAINER_BRAWLY_1, DewfordTown_Gym_EventScript_SetLightsOn
 	call DewfordTown_Gym_EventScript_CountTrainersDefeated
 	copyvar VAR_0x8001, VAR_0x8000
 	compare VAR_0x8000, 0
@@ -124,28 +123,22 @@ DewfordTown_Gym_EventScript_AnimateFlashFullBrightness:: @ 81FC75D
 
 DewfordTown_Gym_EventScript_CountTrainersDefeated:: @ 81FC768
 	setvar VAR_0x8000, 0
-	checktrainerflag TRAINER_TAKAO
-	goto_if_lt DewfordTown_Gym_EventScript_CheckJocelyn
+	goto_if_undefeated TRAINER_TAKAO, DewfordTown_Gym_EventScript_CheckJocelyn
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckJocelyn:: @ 81FC77B
-	checktrainerflag TRAINER_JOCELYN
-	goto_if_lt DewfordTown_Gym_EventScript_CheckLaura
+	goto_if_undefeated TRAINER_JOCELYN, DewfordTown_Gym_EventScript_CheckLaura
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckLaura:: @ 81FC789
-	checktrainerflag TRAINER_LAURA
-	goto_if_lt DewfordTown_Gym_EventScript_CheckBrenden
+	goto_if_undefeated TRAINER_LAURA, DewfordTown_Gym_EventScript_CheckBrenden
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckBrenden:: @ 81FC797
-	checktrainerflag TRAINER_BRENDEN
-	goto_if_lt DewfordTown_Gym_EventScript_CheckCristian
+	goto_if_undefeated TRAINER_BRENDEN, DewfordTown_Gym_EventScript_CheckCristian
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckCristian:: @ 81FC7A5
-	checktrainerflag TRAINER_CRISTIAN
-	goto_if_lt DewfordTown_Gym_EventScript_CheckLilith
+	goto_if_undefeated TRAINER_CRISTIAN, DewfordTown_Gym_EventScript_CheckLilith
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckLilith:: @ 81FC7B3
-	checktrainerflag TRAINER_LILITH
-	goto_if_lt DewfordTown_Gym_EventScript_StopCountingTrainers
+	goto_if_undefeated TRAINER_LILITH, DewfordTown_Gym_EventScript_StopCountingTrainers
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 	return
@@ -188,7 +181,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	end
 
 DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
-	giveitem_std ITEM_TM08
+	giveitem ITEM_TM08
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -196,7 +189,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
 	return
 
 DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
-	giveitem_std ITEM_TM08
+	giveitem ITEM_TM08
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT

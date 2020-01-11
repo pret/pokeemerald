@@ -31,7 +31,7 @@ FortreeCity_House4_EventScript_WingullReturned:: @ 8217CD8
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
-	giveitem_std ITEM_MENTAL_HERB
+	giveitem ITEM_MENTAL_HERB
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MENTAL_HERB

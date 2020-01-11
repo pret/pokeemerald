@@ -9,7 +9,7 @@ MossdeepCity_House3_EventScript_SuperRodFisherman:: @ 82225C3
 	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_House3_EventScript_DeclineSuperRod
 	msgbox MossdeepCity_House3_Text_SuperRodIsSuper, MSGBOX_DEFAULT
-	giveitem_std ITEM_SUPER_ROD
+	giveitem ITEM_SUPER_ROD
 	setflag FLAG_RECEIVED_SUPER_ROD
 	msgbox MossdeepCity_House3_Text_TryDroppingRodInWater, MSGBOX_DEFAULT
 	release

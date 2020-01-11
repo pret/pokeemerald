@@ -14,39 +14,31 @@ LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars:: @ 81FE705
 	setvar VAR_TEMP_D, 0
 	setvar VAR_TEMP_E, 0
 	setvar VAR_TEMP_F, 0
-	checktrainerflag TRAINER_COLE
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_SetGeraldTempVar
+	goto_if_defeated TRAINER_COLE LavaridgeTown_Gym_1F_EventScript_SetGeraldTempVar
 	setvar VAR_TEMP_B, 1
 LavaridgeTown_Gym_1F_EventScript_SetGeraldTempVar:: @ 81FE72C
-	checktrainerflag TRAINER_GERALD
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_SetAxleTempVar
+	goto_if_defeated TRAINER_GERALD, LavaridgeTown_Gym_1F_EventScript_SetAxleTempVar
 	setvar VAR_TEMP_C, 1
 LavaridgeTown_Gym_1F_EventScript_SetAxleTempVar:: @ 81FE73A
-	checktrainerflag TRAINER_AXLE
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_SetDanielleTempVar
+	goto_if_defeated TRAINER_AXLE, LavaridgeTown_Gym_1F_EventScript_SetDanielleTempVar
 	setvar VAR_TEMP_D, 1
 LavaridgeTown_Gym_1F_EventScript_SetDanielleTempVar:: @ 81FE748
-	checktrainerflag TRAINER_DANIELLE
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_EndSetTrainerTempVars
+	goto_if_defeated TRAINER_DANIELLE, LavaridgeTown_Gym_1F_EventScript_EndSetTrainerTempVars
 	setvar VAR_TEMP_E, 1
 LavaridgeTown_Gym_1F_EventScript_EndSetTrainerTempVars:: @ 81FE756
 	return
 
 LavaridgeTown_Gym_1F_EventScript_CheckHideTrainers:: @ 81FE757
-	checktrainerflag TRAINER_COLE
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_CheckHideGerald
+	goto_if_defeated TRAINER_COLE, LavaridgeTown_Gym_1F_EventScript_CheckHideGerald
 	setobjectmovementtype 2, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_1F_EventScript_CheckHideGerald:: @ 81FE764
-	checktrainerflag TRAINER_GERALD
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_CheckHideAxle
+	goto_if_defeated TRAINER_GERALD, LavaridgeTown_Gym_1F_EventScript_CheckHideAxle
 	setobjectmovementtype 3, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_1F_EventScript_CheckHideAxle:: @ 81FE771
-	checktrainerflag TRAINER_AXLE
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_CheckHideDanielle
+	goto_if_defeated TRAINER_AXLE, LavaridgeTown_Gym_1F_EventScript_CheckHideDanielle
 	setobjectmovementtype 4, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_1F_EventScript_CheckHideDanielle:: @ 81FE77E
-	checktrainerflag TRAINER_DANIELLE
-	goto_if_eq LavaridgeTown_Gym_1F_EventScript_EndCheckHideTrainers
+	goto_if_defeated TRAINER_DANIELLE, LavaridgeTown_Gym_1F_EventScript_EndCheckHideTrainers
 	setobjectmovementtype 5, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_1F_EventScript_EndCheckHideTrainers:: @ 81FE78B
 	return
@@ -89,7 +81,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated:: @ 81FE7C1
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2:: @ 81FE81D
-	giveitem_std ITEM_TM50
+	giveitem ITEM_TM50
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
@@ -98,7 +90,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2:: @ 81FE81D
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
-	giveitem_std ITEM_TM50
+	giveitem ITEM_TM50
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT

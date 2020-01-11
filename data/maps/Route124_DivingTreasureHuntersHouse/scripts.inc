@@ -259,7 +259,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_TryTradeShard:: @ 8270EC0
 
 Route124_DivingTreasureHuntersHouse_EventScript_TradeShard:: @ 8270F01
 	takeitem VAR_0x8008, 1
-	giveitem_std VAR_0x8009
+	giveitem VAR_0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_ItsADeal, MSGBOX_DEFAULT
 	call Route124_DivingTreasureHuntersHouse_EventScript_GetPlayersShards
 	compare VAR_TEMP_1, 0

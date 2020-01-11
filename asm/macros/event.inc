@@ -469,14 +469,14 @@
 	.endm
 
 	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and VAR_RESULT will be set to TRUE; otherwise, VAR_RESULT is set to FALSE.
-	.macro giveitem index:req, quantity:req
+	.macro additem index:req, quantity=1
 	.byte 0x44
 	.2byte \index
 	.2byte \quantity
 	.endm
 
 	@ Removes quantity of item index from the player's Bag.
-	.macro takeitem index:req, quantity:req
+	.macro takeitem index:req, quantity=1
 	.byte 0x45
 	.2byte \index
 	.2byte \quantity
@@ -517,7 +517,7 @@
 	.endm
 
 	@ Adds decoration to the player's PC. In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro givedecoration decoration:req
+	.macro adddecoration decoration:req
 	.byte 0x4b
 	.2byte \decoration
 	.endm
@@ -1564,12 +1564,12 @@
 
 	.macro goto_if_unset flag:req, dest:req
 	checkflag \flag
-	goto_if 0, \dest
+	goto_if FALSE, \dest
 	.endm
 
 	.macro goto_if_set flag:req, dest:req
 	checkflag \flag
-	goto_if 1, \dest
+	goto_if TRUE, \dest
 	.endm
 
 	.macro goto_if_lt dest:req @ LESS THAN
@@ -1598,12 +1598,12 @@
 
 	.macro call_if_unset flag:req, dest:req
 	checkflag \flag
-	call_if 0, \dest
+	call_if FALSE, \dest
 	.endm
 
 	.macro call_if_set flag:req, dest:req
 	checkflag \flag
-	call_if 1, \dest
+	call_if TRUE, \dest
 	.endm
 
 	.macro call_if_lt dest:req @ LESS THAN
@@ -1631,11 +1631,41 @@
 	.endm
 
 	.macro vgoto_if_eq dest:req
-	vgoto_if 1, \dest
+	vgoto_if TRUE, \dest
 	.endm
 
 	.macro vgoto_if_ne dest:req
-	vgoto_if 0, \dest
+	vgoto_if FALSE, \dest
+	.endm
+
+	.macro vgoto_if_unset flag:req, dest:req
+	checkflag \flag
+	vgoto_if FALSE, \dest
+	.endm
+
+	.macro vgoto_if_set flag:req, dest:req
+	checkflag \flag
+	vgoto_if TRUE, \dest
+	.endm
+
+	.macro goto_if_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	goto_if TRUE, \dest
+	.endm
+
+	.macro goto_if_undefeated trainer:req, dest:req
+	checktrainerflag \trainer
+	goto_if FALSE, \dest
+	.endm
+
+	.macro call_if_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	call_if TRUE, \dest
+	.endm
+
+	.macro call_if_undefeated trainer:req, dest:req
+	checktrainerflag \trainer
+	call_if FALSE, \dest
 	.endm
 
 	.macro switch var:req
@@ -1663,19 +1693,19 @@
 	callstd \type
 	.endm
 
-	.macro giveitem_std item:req, amount=1
+	.macro giveitem item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
 	callstd STD_OBTAIN_ITEM
 	.endm
 
-	.macro finditem_std item:req, amount=1
+	.macro finditem item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
 	callstd STD_FIND_ITEM
 	.endm
 
-	.macro givedecoration_std decoration:req
+	.macro givedecoration decoration:req
 	setorcopyvar VAR_0x8000, \decoration
 	callstd STD_OBTAIN_DECORATION
 	.endm

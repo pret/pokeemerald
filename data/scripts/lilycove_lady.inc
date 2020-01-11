@@ -129,7 +129,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize:: @ 82A8510
     setvar VAR_0x8004, 0
     specialvar VAR_0x8004, FavorLadyGetPrize
     msgbox LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn, MSGBOX_DEFAULT
-    giveitem_std VAR_0x8004
+    giveitem VAR_0x8004
     compare VAR_RESULT, 0
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoRoomForFavorPrize
     compare VAR_RESULT, 1
@@ -297,7 +297,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_GivePrize:: @ 82A8724
     setvar VAR_0x8005, 0
     special BufferQuizPrizeItem
     special SetQuizLadyState_Complete
-    giveitem_std VAR_0x8005
+    giveitem VAR_0x8005
     compare VAR_RESULT, FALSE
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize
     goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
