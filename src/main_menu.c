@@ -649,7 +649,7 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
                     tMenuType++;
                 gTasks[taskId].func = Task_MainMenuCheckBattery;
                 break;
-            case 2:
+            case SAVE_STATUS_CORRUPT:
                 CreateMainMenuErrorWindow(gText_SaveFileErased);
                 tMenuType = HAS_NO_SAVED_GAME;
                 gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;
