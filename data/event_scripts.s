@@ -823,7 +823,7 @@ Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
-	takeitem VAR_0x8004, 1
+	removeitem VAR_0x8004
 	return
 
 	.include "data/scripts/elite_four.inc"

@@ -89,7 +89,7 @@ MauvilleCity_BikeShop_EventScript_KeepBike:: @ 820ECE5
 MauvilleCity_BikeShop_EventScript_SwitchAcroForMach:: @ 820ECEF
 	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_ExchangedAcroForMach, MSGBOX_DEFAULT
-	takeitem ITEM_ACRO_BIKE, 1
+	removeitem ITEM_ACRO_BIKE
 	giveitem ITEM_MACH_BIKE
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end
@@ -97,7 +97,7 @@ MauvilleCity_BikeShop_EventScript_SwitchAcroForMach:: @ 820ECEF
 MauvilleCity_BikeShop_EventScript_SwitchMachForAcro:: @ 820ED10
 	incrementgamestat GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_ExchangedMachForAcro, MSGBOX_DEFAULT
-	takeitem ITEM_MACH_BIKE, 1
+	removeitem ITEM_MACH_BIKE
 	giveitem ITEM_ACRO_BIKE
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end

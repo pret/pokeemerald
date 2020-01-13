@@ -54,7 +54,7 @@ Route109_SeashoreHouse_EventScript_BuySodaPop:: @ 8269484
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route109_SeashoreHouse_EventScript_NotEnoughSpace
 	msgbox Route109_SeashoreHouse_Text_HereYouGo, MSGBOX_DEFAULT
-	takemoney 300, 0
+	removemoney 300, 0
 	updatemoneybox 0, 0
 	giveitem ITEM_SODA_POP
 	hidemoneybox
