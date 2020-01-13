@@ -823,7 +823,7 @@ PetalburgCity_Gym_EventScript_AccuracyRoomDoor:: @ 8205187
 
 PetalburgCity_Gym_EventScript_ConfusionRoomDoor:: @ 82051BC
 	lockall
-	goto_if_undefeated TRAINER_RANDALL, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_RANDALL, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 46
 	msgbox PetalburgCity_Gym_Text_EnterConfusionRoom, MSGBOX_YESNO
@@ -835,7 +835,7 @@ PetalburgCity_Gym_EventScript_ConfusionRoomDoor:: @ 82051BC
 
 PetalburgCity_Gym_EventScript_LeftDefenseRoomDoor:: @ 82051EF
 	lockall
-	goto_if_undefeated TRAINER_RANDALL, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_RANDALL, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 59
 	msgbox PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO
@@ -847,7 +847,7 @@ PetalburgCity_Gym_EventScript_LeftDefenseRoomDoor:: @ 82051EF
 
 PetalburgCity_Gym_EventScript_RightDefenseRoomDoor:: @ 8205222
 	lockall
-	goto_if_undefeated TRAINER_MARY, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_MARY, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 59
 	msgbox PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO
@@ -859,7 +859,7 @@ PetalburgCity_Gym_EventScript_RightDefenseRoomDoor:: @ 8205222
 
 PetalburgCity_Gym_EventScript_RecoveryRoomDoor:: @ 8205255
 	lockall
-	goto_if_undefeated TRAINER_MARY, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_MARY, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 72
 	msgbox PetalburgCity_Gym_Text_EnterRecoveryRoom, MSGBOX_YESNO
@@ -871,7 +871,7 @@ PetalburgCity_Gym_EventScript_RecoveryRoomDoor:: @ 8205255
 
 PetalburgCity_Gym_EventScript_LeftStrengthRoomDoor:: @ 8205288
 	lockall
-	goto_if_undefeated TRAINER_PARKER, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_PARKER, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 20
 	msgbox PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO
@@ -883,7 +883,7 @@ PetalburgCity_Gym_EventScript_LeftStrengthRoomDoor:: @ 8205288
 
 PetalburgCity_Gym_EventScript_RightStrengthRoomDoor:: @ 82052BB
 	lockall
-	goto_if_undefeated TRAINER_ALEXIA, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_ALEXIA, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 20
 	msgbox PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO
@@ -895,7 +895,7 @@ PetalburgCity_Gym_EventScript_RightStrengthRoomDoor:: @ 82052BB
 
 PetalburgCity_Gym_EventScript_LeftOHKORoomDoor:: @ 82052EE
 	lockall
-	goto_if_undefeated TRAINER_ALEXIA, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_ALEXIA, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 33
 	msgbox PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO
@@ -907,7 +907,7 @@ PetalburgCity_Gym_EventScript_LeftOHKORoomDoor:: @ 82052EE
 
 PetalburgCity_Gym_EventScript_RightOHKORoomDoor:: @ 8205321
 	lockall
-	goto_if_undefeated TRAINER_GEORGE, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_GEORGE, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 33
 	msgbox PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO
@@ -919,7 +919,7 @@ PetalburgCity_Gym_EventScript_RightOHKORoomDoor:: @ 8205321
 
 PetalburgCity_Gym_EventScript_LeftGymLeadersRoomDoor:: @ 8205354
 	lockall
-	goto_if_undefeated TRAINER_JODY, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_JODY, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, 7
 	msgbox PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO
@@ -931,7 +931,7 @@ PetalburgCity_Gym_EventScript_LeftGymLeadersRoomDoor:: @ 8205354
 
 PetalburgCity_Gym_EventScript_RightGymLeadersRoomDoor:: @ 8205387
 	lockall
-	goto_if_undefeated TRAINER_BERKE, PetalburgCity_Gym_EventScript_DoorLocked
+	goto_if_not_defeated TRAINER_BERKE, PetalburgCity_Gym_EventScript_DoorLocked
 	setvar VAR_0x8008, 7
 	setvar VAR_0x8009, 7
 	msgbox PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO

@@ -1653,7 +1653,7 @@
 	goto_if TRUE, \dest
 	.endm
 
-	.macro goto_if_undefeated trainer:req, dest:req
+	.macro goto_if_not_defeated trainer:req, dest:req
 	checktrainerflag \trainer
 	goto_if FALSE, \dest
 	.endm
@@ -1663,7 +1663,7 @@
 	call_if TRUE, \dest
 	.endm
 
-	.macro call_if_undefeated trainer:req, dest:req
+	.macro call_if_not_defeated trainer:req, dest:req
 	checktrainerflag \trainer
 	call_if FALSE, \dest
 	.endm

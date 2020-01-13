@@ -48,7 +48,7 @@ Route111_OnTransition: @ 81F0D87
 	call_if_eq Route111_EventScript_SetMirageTowerGone
 	call Route111_EventScript_CheckSetSandstorm
 	call GabbyAndTy_EventScript_UpdateLocation
-	goto_if_undefeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
+	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
 	end
 
 Route111_EventScript_SetFallingPlayerGfx:: @ 81F0DC2

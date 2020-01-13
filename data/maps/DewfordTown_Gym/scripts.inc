@@ -123,22 +123,22 @@ DewfordTown_Gym_EventScript_AnimateFlashFullBrightness:: @ 81FC75D
 
 DewfordTown_Gym_EventScript_CountTrainersDefeated:: @ 81FC768
 	setvar VAR_0x8000, 0
-	goto_if_undefeated TRAINER_TAKAO, DewfordTown_Gym_EventScript_CheckJocelyn
+	goto_if_not_defeated TRAINER_TAKAO, DewfordTown_Gym_EventScript_CheckJocelyn
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckJocelyn:: @ 81FC77B
-	goto_if_undefeated TRAINER_JOCELYN, DewfordTown_Gym_EventScript_CheckLaura
+	goto_if_not_defeated TRAINER_JOCELYN, DewfordTown_Gym_EventScript_CheckLaura
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckLaura:: @ 81FC789
-	goto_if_undefeated TRAINER_LAURA, DewfordTown_Gym_EventScript_CheckBrenden
+	goto_if_not_defeated TRAINER_LAURA, DewfordTown_Gym_EventScript_CheckBrenden
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckBrenden:: @ 81FC797
-	goto_if_undefeated TRAINER_BRENDEN, DewfordTown_Gym_EventScript_CheckCristian
+	goto_if_not_defeated TRAINER_BRENDEN, DewfordTown_Gym_EventScript_CheckCristian
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckCristian:: @ 81FC7A5
-	goto_if_undefeated TRAINER_CRISTIAN, DewfordTown_Gym_EventScript_CheckLilith
+	goto_if_not_defeated TRAINER_CRISTIAN, DewfordTown_Gym_EventScript_CheckLilith
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckLilith:: @ 81FC7B3
-	goto_if_undefeated TRAINER_LILITH, DewfordTown_Gym_EventScript_StopCountingTrainers
+	goto_if_not_defeated TRAINER_LILITH, DewfordTown_Gym_EventScript_StopCountingTrainers
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 	return
