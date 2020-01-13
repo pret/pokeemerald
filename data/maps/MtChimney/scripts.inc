@@ -184,8 +184,7 @@ MtChimney_Movement_ArchieExitNorth: @ 822EF9C
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFA6: @ 822EFA6
+MtChimney_Movement_Unused1: @ 822EFA6
 	walk_down
 	walk_down
 	walk_down
@@ -205,8 +204,7 @@ MtChimney_Movement_22EFA6: @ 822EFA6
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFB8: @ 822EFB8
+MtChimney_Movement_Unused2: @ 822EFB8
 	walk_down
 	walk_down
 	walk_down
@@ -217,8 +215,7 @@ MtChimney_Movement_22EFB8: @ 822EFB8
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFC1: @ 822EFC1
+MtChimney_Movement_Unused3: @ 822EFC1
 	walk_right
 	walk_down
 	walk_down
@@ -235,8 +232,7 @@ MtChimney_Movement_22EFC1: @ 822EFC1
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFD0: @ 822EFD0
+MtChimney_Movement_Unused4: @ 822EFD0
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
@@ -263,8 +259,7 @@ MtChimney_Movement_22EFD0: @ 822EFD0
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFE9: @ 822EFE9
+MtChimney_Movement_Unused5: @ 822EFE9
 	delay_16
 	delay_16
 	delay_16
@@ -277,8 +272,7 @@ MtChimney_Movement_22EFE9: @ 822EFE9
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFF4: @ 822EFF4
+MtChimney_Movement_Unused6: @ 822EFF4
 	delay_16
 	walk_left
 	walk_down
@@ -296,8 +290,7 @@ MtChimney_Movement_22EFF4: @ 822EFF4
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F004: @ 822F004
+MtChimney_Movement_Unused7: @ 822F004
 	delay_16
 	walk_left
 	walk_left
@@ -316,8 +309,7 @@ MtChimney_Movement_22F004: @ 822F004
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F015: @ 822F015
+MtChimney_Movement_Unused8: @ 822F015
 	delay_16
 	walk_down
 	walk_left
@@ -327,8 +319,7 @@ MtChimney_Movement_22F015: @ 822F015
 	walk_in_place_fastest_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F01D: @ 822F01D
+MtChimney_Movement_Unused9: @ 822F01D
 	walk_down
 	walk_down
 	walk_down
@@ -344,13 +335,11 @@ MtChimney_Movement_22F01D: @ 822F01D
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F02B: @ 822F02B
+MtChimney_Movement_Unused10: @ 822F02B
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F02D: @ 822F02D
+MtChimney_Movement_Unused11: @ 822F02D
 	walk_down
 	walk_down
 	walk_down
@@ -360,8 +349,7 @@ MtChimney_Movement_22F02D: @ 822F02D
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F035: @ 822F035
+MtChimney_Movement_Unused12: @ 822F035
 	delay_16
 	delay_16
 	walk_in_place_fastest_left
@@ -373,8 +361,7 @@ MtChimney_Movement_22F035: @ 822F035
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F03F: @ 822F03F
+MtChimney_Movement_Unused13: @ 822F03F
 	delay_16
 	delay_16
 	delay_16
@@ -387,16 +374,14 @@ MtChimney_Movement_22F03F: @ 822F03F
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F04A: @ 822F04A
+MtChimney_Movement_Unused14: @ 822F04A
 	lock_facing_direction
 	walk_fast_left
 	unlock_facing_direction
 	face_right
 	step_end
 
-@ Unused
-MtChimney_Movement_22F04F: @ 822F04F
+MtChimney_Movement_Unused15: @ 822F04F
 	walk_left
 	walk_in_place_fastest_right
 	delay_16

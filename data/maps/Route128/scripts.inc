@@ -78,13 +78,11 @@ Route128_EventScript_KyogreAwakenedScene:: @ 81F6B57
 	releaseall
 	end
 
-@ Unused
-Route128_Movement_1F6C76: @ 81F6C76
+Route128_Movement_Unused1: @ 81F6C76
 	walk_fast_left
 	step_end
 
-@ Unused
-Route128_Movement_1F6C78: @ 81F6C78
+Route128_Movement_Unused2: @ 81F6C78
 	walk_left
 	walk_left
 	walk_left

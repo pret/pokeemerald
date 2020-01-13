@@ -129,8 +129,7 @@ SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest: @ 820BCC2
 	walk_in_place_fastest_left
 	step_end
 
-@ Unused
-SlateportCity_OceanicMuseum_2F_Movement_20BCC8: @ 820BCC8
+SlateportCity_OceanicMuseum_2F_Movement_Unused: @ 820BCC8
 	walk_up
 	walk_left
 	walk_left

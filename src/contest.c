@@ -5093,7 +5093,7 @@ static void sub_80DE864(u8 a)
         gContestResources->field_18->unk4_0 = 1;
         break;
     case MOVE_RETURN:
-        gAnimFriendship = 0xFF;
+        gAnimFriendship = MAX_FRIENDSHIP;
         break;
     case MOVE_FRUSTRATION:
         gAnimFriendship = 0;

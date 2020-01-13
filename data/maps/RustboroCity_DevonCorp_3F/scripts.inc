@@ -72,8 +72,7 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident:: @ 821246E
 	releaseall
 	end
 
-@ Unused
-RustboroCity_DevonCorp_3F_Movement_21252F: @ 821252F
+RustboroCity_DevonCorp_3F_Movement_Unused: @ 821252F
 	walk_up
 	walk_up
 	walk_up

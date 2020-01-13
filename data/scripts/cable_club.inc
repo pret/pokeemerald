@@ -525,7 +525,7 @@ CableClub_EventScript_RecordCorner:: @ 82771DB
 	goto_if_eq CableClub_EventScript_AbortLink
 	message gText_PleaseWaitForLink
 	waitmessage
-	special sub_80B2E74
+	special TryRecordMixLinkup
 	waitstate
 	special sub_80B2EA8
 	waitstate

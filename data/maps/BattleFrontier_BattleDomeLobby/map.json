@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249A35",
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendant",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249E10",
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_Man",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249DFE",
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249E07",
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249DED",
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_Maniac",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249A47",
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendant",
       "flag": "0"
     }
   ],
@@ -117,7 +117,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249D52"
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_ShowSinglesResults"
     },
     {
       "type": "sign",
@@ -125,7 +125,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249D84"
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_ShowPrevTourneyTree"
     },
     {
       "type": "sign",
@@ -133,7 +133,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249D6B"
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults"
     },
     {
       "type": "sign",
@@ -141,7 +141,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattleDomeLobby_EventScript_249E34"
+      "script": "BattleFrontier_BattleDomeLobby_EventScript_RulesBoard"
     }
   ]
 }

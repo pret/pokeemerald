@@ -643,30 +643,30 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
             tWirelessAdapterConnected = TRUE;
         switch (gSaveFileStatus)
         {
-            case 1:
+            case SAVE_STATUS_OK:
                 tMenuType = HAS_SAVED_GAME;
                 if (IsMysteryGiftEnabled())
                     tMenuType++;
                 gTasks[taskId].func = Task_MainMenuCheckBattery;
                 break;
-            case 2:
+            case SAVE_STATUS_CORRUPT:
                 CreateMainMenuErrorWindow(gText_SaveFileErased);
                 tMenuType = HAS_NO_SAVED_GAME;
                 gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;
                 break;
-            case 0xFF:
+            case SAVE_STATUS_ERROR:
                 CreateMainMenuErrorWindow(gText_SaveFileCorrupted);
                 gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;
                 tMenuType = HAS_SAVED_GAME;
                 if (IsMysteryGiftEnabled() == TRUE)
                     tMenuType++;
                 break;
-            case 0:
+            case SAVE_STATUS_EMPTY:
             default:
                 tMenuType = HAS_NO_SAVED_GAME;
                 gTasks[taskId].func = Task_MainMenuCheckBattery;
                 break;
-            case 4:
+            case SAVE_STATUS_NO_FLASH:
                 CreateMainMenuErrorWindow(gJPText_No1MSubCircuit);
                 gTasks[taskId].tMenuType = HAS_NO_SAVED_GAME;
                 gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;

@@ -457,8 +457,7 @@ LilycoveCity_Harbor_Movement_PlayerBoardFerryNorth: @ 821E633
 	walk_up
 	step_end
 
-@ Unused
-LilycoveCity_Harbor_Movement_21E635: @ 821E635
+LilycoveCity_Harbor_Movement_UnusedBoardFerry: @ 821E635
 	walk_up
 	step_end
 

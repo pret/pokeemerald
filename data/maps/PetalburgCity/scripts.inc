@@ -351,7 +351,8 @@ PetalburgCity_EventScript_LeadPlayerToGym3:: @ 81DC5FF
 	waitmovement 0
 	return
 
-PetalburgCity_Movement_1DC611:: @ 81DC611
+@ Unused
+PetalburgCity_Movement_Delay48:: @ 81DC611
 	delay_16
 	delay_16
 	delay_16

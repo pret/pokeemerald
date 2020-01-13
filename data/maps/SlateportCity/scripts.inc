@@ -668,8 +668,7 @@ SlateportCity_Movement_TyExit: @ 81DD326
 	walk_left
 	step_end
 
-@ Unused
-SlateportCity_Movement_1DD334: @ 81DD334
+SlateportCity_Movement_Unused: @ 81DD334
 	walk_down
 	walk_in_place_fastest_up
 	step_end

@@ -360,7 +360,7 @@ static void InitGiddyTaleList(void)
                     break;
             if (r1 == 6)
                 r1 = 0;
-            giddy->randomWords[i] = sub_811EE90(arr[r1][0]);
+            giddy->randomWords[i] = GetRandomEasyChatWordFromUnlockedGroup(arr[r1][0]);
         }
     }
 }

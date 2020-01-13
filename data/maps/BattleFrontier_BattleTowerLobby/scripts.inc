@@ -6,7 +6,7 @@ BattleFrontier_BattleTowerLobby_MapScripts:: @ 823E67B
 	.byte 0
 
 BattleFrontier_BattleTowerLobby_OnResume: @ 823E690
-	special sub_81653CC
+	special TryHideBattleTowerReporter
 	end
 
 BattleFrontier_BattleTowerLobby_OnTransition: @ 823E694
@@ -857,7 +857,7 @@ BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful:: @ 823F3AF
 	waitstate
 	playse SE_SAVE
 	waitse
-	special sub_80B3BC4
+	special TrySetBattleTowerLinkType
 	goto BattleFrontier_BattleTowerLobby_EventScript_EnterElevator
 	end
 

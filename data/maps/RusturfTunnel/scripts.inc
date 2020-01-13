@@ -184,22 +184,19 @@ RusturfTunnel_Movement_PlayerWatchWandaExit: @ 822D02F
 	walk_in_place_fastest_right
 	step_end
 
-@ Unused
-RusturfTunnel_Movement_22D035: @ 822D035
+RusturfTunnel_Movement_Unused1: @ 822D035
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-@ Unused
-RusturfTunnel_Movement_22D038: @ 822D038
+RusturfTunnel_Movement_Unused2: @ 822D038
 	walk_down
 	walk_in_place_fastest_up
 	delay_8
 	walk_in_place_fastest_right
 	step_end
 
-@ Unused
-RusturfTunnel_Movement_22D03D: @ 822D03D
+RusturfTunnel_Movement_Unused3: @ 822D03D
 	walk_up
 	walk_in_place_fastest_down
 	delay_8

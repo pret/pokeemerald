@@ -1334,7 +1334,7 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
 
 #include "data/pokemon/item_effects.h"
 
-const s8 gNatureStatTable[][5] =
+const s8 gNatureStatTable[][NUM_EV_STATS] =
 {
     // Atk Def Spd Sp.Atk Sp.Def
     {    0,  0,  0,     0,     0}, // Hardy
@@ -5086,8 +5086,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             }
                             if (friendship < 0)
                                 friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
+                            if (friendship > MAX_FRIENDSHIP)
+                                friendship = MAX_FRIENDSHIP;
                             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                             retVal = FALSE;
                         }
@@ -5112,8 +5112,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             }
                             if (friendship < 0)
                                 friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
+                            if (friendship > MAX_FRIENDSHIP)
+                                friendship = MAX_FRIENDSHIP;
                             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                             retVal = FALSE;
                         }
@@ -5137,8 +5137,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             }
                             if (friendship < 0)
                                 friendship = 0;
-                            if (friendship > 255)
-                                friendship = 255;
+                            if (friendship > MAX_FRIENDSHIP)
+                                friendship = MAX_FRIENDSHIP;
                             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
                             retVal = FALSE;
                         }
@@ -5717,7 +5717,8 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 
 u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 {
-    if (statIndex < 1 || statIndex > 5)
+    // Dont modify HP, Accuracy, or Evasion by nature
+    if (statIndex <= STAT_HP || statIndex > NUM_EV_STATS)
     {
         // Should just be "return n", but it wouldn't match without this.
         u16 retVal = n;
@@ -5788,8 +5789,8 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             }
             if (friendship < 0)
                 friendship = 0;
-            if (friendship > 255)
-                friendship = 255;
+            if (friendship > MAX_FRIENDSHIP)
+                friendship = MAX_FRIENDSHIP;
             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
         }
     }

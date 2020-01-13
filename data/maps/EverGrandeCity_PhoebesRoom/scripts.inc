@@ -42,7 +42,7 @@ EverGrandeCity_PhoebesRoom_EventScript_Phoebe:: @ 82281CB
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech
 	playbgm MUS_SITENNOU, 0
-	msgbox EverGrandeCity_PhoebesRoom_Text_PreBattleSpeech, MSGBOX_DEFAULT
+	msgbox EverGrandeCity_PhoebesRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_Defeat
 	goto EverGrandeCity_PhoebesRoom_EventScript_Defeated
 	end
@@ -59,7 +59,7 @@ EverGrandeCity_PhoebesRoom_EventScript_Defeated:: @ 82281FC
 	release
 	end
 
-EverGrandeCity_PhoebesRoom_Text_PreBattleSpeech: @ 822820E
+EverGrandeCity_PhoebesRoom_Text_IntroSpeech: @ 822820E
 	.string "Ahahaha!\p"
 	.string "I'm PHOEBE of the ELITE FOUR.\n"
 	.string "I did my training on MT. PYRE.\p"

@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
+#include "constants/opponents.h"
+
 // Temporary Flags
 // These temporary flags are are cleared every time a map is loaded. They are used
 // for things like shortening an NPCs introduction text if the player already spoke
@@ -532,8 +534,6 @@
 #define FLAG_MYSTERY_EVENT_13                0x1F1
 #define FLAG_MYSTERY_EVENT_14                0x1F2
 #define FLAG_MYSTERY_EVENT_15                0x1F3
-
-#define FLAG_TRICK_HOUSE_END_ROOM            0x1F5 // Trick House End Room Flag
 
 // Hidden Items -- sorted by location
 #define FLAG_HIDDEN_ITEMS_START                                                         0x1F4
@@ -1342,12 +1342,16 @@
 
 #define FLAG_UNUSED_0x4FF                                           0x4FF // Unused Flag
 
-#define FLAG_TRAINER_FLAG_START                                     0x500
-#define TRAINERS_FLAG_NO                                            0x356
+// Trainer Flags
+// Trainer flags occupy 0x500 - 0x85F, the last 9 of which are unused
+// See constants/opponents.h. The values there + FLAG_TRAINER_FLAG_START are the flag IDs
 
-#define SYSTEM_FLAGS   (FLAG_TRAINER_FLAG_START + TRAINERS_FLAG_NO + 0xA) // 0x860
+#define TRAINER_FLAGS_START                                         0x500
+#define TRAINER_FLAGS_END                                           (TRAINER_FLAGS_START + MAX_TRAINERS_COUNT - 1) // 0x85F
 
 // System Flags
+
+#define SYSTEM_FLAGS                                   (TRAINER_FLAGS_END + 1) // 0x860
 
 #define FLAG_SYS_POKEMON_GET                           (SYSTEM_FLAGS + 0) // FLAG_0x860
 #define FLAG_SYS_POKEDEX_GET                           (SYSTEM_FLAGS + 1)
