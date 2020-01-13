@@ -297,10 +297,11 @@ struct BattleTowerEReaderTrainer
     /*0xB8*/ u32 checksum;
 };
 
-struct FrontierMonData
+// For displaying party information on the player's Battle Dome tourney page 
+struct DomeMonData
 {
     u16 moves[MAX_MON_MOVES];
-    u8 evs[6];
+    u8 evs[NUM_STATS];
     u8 nature;
 };
 
@@ -317,7 +318,7 @@ struct BattleDomeTrainer
     u16 trainerId:10;
     u16 isEliminated:1;
     u16 eliminatedAt:2;
-    u16 unk3:3;
+    u16 forfeited:3;
 };
 
 #define DOME_TOURNAMENT_TRAINERS_COUNT 16
@@ -332,10 +333,6 @@ struct BattleFrontier
     /*0xCA9*/ u8 lvlMode:2;
     /*0xCA9*/ u8 challengePaused:1;
     /*0xCA9*/ u8 disableRecordBattle:1;
-    /*0xCA9*/ u8 unused_CA9_c:1;
-    /*0xCA9*/ u8 unused_CA9_d:1;
-    /*0xCA9*/ u8 unused_CA9_e:1;
-    /*0xCA9*/ u8 unused_CA9_f:1;
     /*0xCAA*/ u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
     /*0xCB2*/ u16 curChallengeBattleNum; // Battle number / room number (Pike) / floor number (Pyramid)
     /*0xCB4*/ u16 trainerIds[20];
@@ -347,17 +344,17 @@ struct BattleFrontier
     /*0xD04*/ u16 towerNumWins; // Increments to MAX_STREAK but never read otherwise
     /*0xD06*/ u8 towerBattleOutcome;
     /*0xD07*/ u8 towerLvlMode;
-    /*0xD08*/ u8 field_D08_0:1;
-    /*0xD08*/ u8 field_D08_1:1;
-    /*0xD08*/ u8 field_D08_2:1;
-    /*0xD08*/ u8 field_D08_3:1;
-    /*0xD08*/ u8 field_D08_4:1;
-    /*0xD08*/ u8 field_D08_5:1;
-    /*0xD08*/ u8 field_D08_6:1;
-    /*0xD08*/ u8 field_D08_7:1;
-    /*0xD09*/ u8 filler_D09;
-    /*0xD0A*/ u8 field_D0A;
-    /*0xD0B*/ u8 field_D0B;
+    /*0xD08*/ u8 domeAttemptedSingles50:1;
+    /*0xD08*/ u8 domeAttemptedSinglesOpen:1;
+    /*0xD08*/ u8 domeHasWonSingles50:1;
+    /*0xD08*/ u8 domeHasWonSinglesOpen:1;
+    /*0xD08*/ u8 domeAttemptedDoubles50:1;
+    /*0xD08*/ u8 domeAttemptedDoublesOpen:1;
+    /*0xD08*/ u8 domeHasWonDoubles50:1;
+    /*0xD08*/ u8 domeHasWonDoublesOpen:1;
+    /*0xD09*/ u8 domeUnused;
+    /*0xD0A*/ u8 domeLvlMode;
+    /*0xD0B*/ u8 domeBattleMode;
     /*0xD0C*/ u16 domeWinStreaks[2][2];
     /*0xD14*/ u16 domeRecordWinStreaks[2][2];
     /*0xD1C*/ u16 domeTotalChampionships[2][2];
@@ -392,11 +389,11 @@ struct BattleFrontier
     /*0xE6A*/ u16 verdanturfTentPrize;
     /*0xE6C*/ u16 fallarborTentPrize;
     /*0xE6E*/ u16 slateportTentPrize;
-    /*0xE70*/ struct RentalMon rentalMons[PARTY_SIZE];
+    /*0xE70*/ struct RentalMon rentalMons[FRONTIER_PARTY_SIZE * 2];
     /*0xEB8*/ u16 battlePoints;
     /*0xEBA*/ u16 cardBattlePoints;
     /*0xEBC*/ u32 battlesCount;
-    /*0xEC0*/ u16 field_EC0[16];
+    /*0xEC0*/ u16 domeWinningMoves[DOME_TOURNAMENT_TRAINERS_COUNT];
     /*0xEE0*/ u8 trainerFlags;
     /*0xEE1*/ u8 opponentNames[2][PLAYER_NAME_LENGTH + 1];
     /*0xEF1*/ u8 opponentTrainerIds[2][TRAINER_ID_LENGTH];
@@ -404,7 +401,7 @@ struct BattleFrontier
     /*0xEF9*/ u8 savedGame:1;
     /*0xEFA*/ u8 unused_EFA;
     /*0xEFB*/ u8 unused_EFB;
-    /*0xEFC*/ struct FrontierMonData field_EFC[FRONTIER_PARTY_SIZE];
+    /*0xEFC*/ struct DomeMonData domePlayerPartyData[FRONTIER_PARTY_SIZE];
 };
 
 struct ApprenticeQuestion
@@ -934,13 +931,13 @@ struct SaveBlock1
     /*0x271C*/ u8 playerRoomDecor[DECOR_MAX_PLAYERS_HOUSE];
     /*0x2728*/ u8 playerRoomDecorPos[DECOR_MAX_PLAYERS_HOUSE];
     /*0x2734*/ u8 decorDesk[10];
-    /*0x????*/ u8 decorChair[10];
-    /*0x????*/ u8 decorPlant[10];
-    /*0x????*/ u8 decorOrnament[30];
-    /*0x????*/ u8 decorMat[30];
-    /*0x????*/ u8 decorPoster[10];
-    /*0x????*/ u8 decorDoll[40];
-    /*0x????*/ u8 decorCushion[10];
+    /*0x273E*/ u8 decorChair[10];
+    /*0x2748*/ u8 decorPlant[10];
+    /*0x2752*/ u8 decorOrnament[30];
+    /*0x2770*/ u8 decorMat[30];
+    /*0x278E*/ u8 decorPoster[10];
+    /*0x2798*/ u8 decorDoll[40];
+    /*0x27C0*/ u8 decorCushion[10];
     /*0x27CA*/ u8 padding_27CA[2];
     /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
     /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];
