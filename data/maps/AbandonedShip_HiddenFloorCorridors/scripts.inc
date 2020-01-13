@@ -73,7 +73,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_Room2Door:: @ 8238A50
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_Rm2IsLocked
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT
 	playse SE_PIN
-	removeitem ITEM_ROOM_2_KEY, 1
+	removeitem ITEM_ROOM_2_KEY
 	setflag FLAG_USED_ROOM_2_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom2
 	special DrawWholeMapView
