@@ -89,16 +89,16 @@ extern const u8 EventScript_DoLinkRoomExit[];
 extern const u8 CableClub_EventScript_TooBusyToNotice[];
 extern const u8 CableClub_EventScript_ReadTrainerCard[];
 extern const u8 CableClub_EventScript_ReadTrainerCardColored[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot0[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot1[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot2[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot3[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot1[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot2[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot3[];
 extern const u8 EventScript_RecordCenter_Spot0[];
 extern const u8 EventScript_RecordCenter_Spot1[];
 extern const u8 EventScript_RecordCenter_Spot2[];
 extern const u8 EventScript_RecordCenter_Spot3[];
-extern const u8 EventScript_BattleColosseum2P_PlayerSpot0[];
-extern const u8 EventScript_BattleColosseum2P_PlayerSpot1[];
+extern const u8 EventScript_BattleColosseum_2P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum_2P_PlayerSpot1[];
 extern const u8 EventScript_TradeCenter_Chair1[];
 extern const u8 EventScript_TradeCenter_Chair0[];
 extern const u8 EventScript_ConfirmLeaveTradeRoom[];
@@ -2782,13 +2782,13 @@ static const u8 *TryInteractWithPlayer(struct TradeRoomPlayer *player)
 // these event scripts runs.
 static u16 GetDirectionForEventScript(const u8 *script)
 {
-    if (script == EventScript_BattleColosseum4P_PlayerSpot0)
+    if (script == EventScript_BattleColosseum_4P_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum4P_PlayerSpot1)
+    else if (script == EventScript_BattleColosseum_4P_PlayerSpot1)
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_BattleColosseum4P_PlayerSpot2)
+    else if (script == EventScript_BattleColosseum_4P_PlayerSpot2)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum4P_PlayerSpot3)
+    else if (script == EventScript_BattleColosseum_4P_PlayerSpot3)
         return FACING_FORCED_LEFT;
     else if (script == EventScript_RecordCenter_Spot0)
         return FACING_FORCED_RIGHT;
@@ -2798,9 +2798,9 @@ static u16 GetDirectionForEventScript(const u8 *script)
         return FACING_FORCED_RIGHT;
     else if (script == EventScript_RecordCenter_Spot3)
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_BattleColosseum2P_PlayerSpot0)
+    else if (script == EventScript_BattleColosseum_2P_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum2P_PlayerSpot1)
+    else if (script == EventScript_BattleColosseum_2P_PlayerSpot1)
         return FACING_FORCED_LEFT;
     else if (script == EventScript_TradeCenter_Chair0)
         return FACING_FORCED_RIGHT;

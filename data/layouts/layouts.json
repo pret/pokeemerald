@@ -2203,13 +2203,13 @@
     },
     {
       "id": "LAYOUT_BATTLE_COLOSSEUM_2P",
-      "name": "BattleColosseum2P_Layout",
+      "name": "BattleColosseum_2P_Layout",
       "width": 14,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_CableClub",
-      "border_filepath": "data/layouts/BattleColosseum2P/border.bin",
-      "blockdata_filepath": "data/layouts/BattleColosseum2P/map.bin"
+      "border_filepath": "data/layouts/BattleColosseum_2P/border.bin",
+      "blockdata_filepath": "data/layouts/BattleColosseum_2P/map.bin"
     },
     {
       "id": "LAYOUT_TRADE_CENTER",
@@ -2233,13 +2233,13 @@
     },
     {
       "id": "LAYOUT_BATTLE_COLOSSEUM_4P",
-      "name": "BattleColosseum4P_Layout",
+      "name": "BattleColosseum_4P_Layout",
       "width": 14,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_CableClub",
-      "border_filepath": "data/layouts/BattleColosseum4P/border.bin",
-      "blockdata_filepath": "data/layouts/BattleColosseum4P/map.bin"
+      "border_filepath": "data/layouts/BattleColosseum_4P/border.bin",
+      "blockdata_filepath": "data/layouts/BattleColosseum_4P/map.bin"
     },
     {
       "id": "LAYOUT_CONTEST_HALL",
