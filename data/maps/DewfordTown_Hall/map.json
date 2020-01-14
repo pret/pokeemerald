@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD4D0",
+      "script": "DewfordTown_Hall_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD4F9",
+      "script": "DewfordTown_Hall_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD50A",
+      "script": "DewfordTown_Hall_EventScript_Man",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD547",
+      "script": "DewfordTown_Hall_EventScript_ExpertM",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD563",
+      "script": "DewfordTown_Hall_EventScript_Twin",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD57F",
+      "script": "DewfordTown_Hall_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD62F",
+      "script": "DewfordTown_Hall_EventScript_SchoolKidM",
       "flag": "0"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD63B",
+      "script": "DewfordTown_Hall_EventScript_PsychicM",
       "flag": "0"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_Hall_EventScript_1FD7DA",
+      "script": "DewfordTown_Hall_EventScript_SludgeBombMan",
       "flag": "FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN"
     }
   ],
@@ -156,7 +156,7 @@
       "y": 1,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "DewfordTown_Hall_EventScript_1FD590"
+      "script": "DewfordTown_Hall_EventScript_Bookshelf"
     },
     {
       "type": "sign",
@@ -164,7 +164,7 @@
       "y": 1,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "DewfordTown_Hall_EventScript_1FD5A0"
+      "script": "DewfordTown_Hall_EventScript_Painting"
     }
   ]
 }

@@ -7,12 +7,13 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "constants/party_menu.h"
 #include "constants/songs.h"
 
-static void sub_816166C(u8 taskId);
-static void sub_81616C0(u8 taskId);
-static void sub_8161724(u8 taskId);
-static void sub_81617B8(u8 taskId);
+static void Task_SoftboiledRestoreHealth(u8 taskId);
+static void Task_DisplayHPRestoredMessage(u8 taskId);
+static void Task_FinishSoftboiled(u8 taskId);
+static void CantUseSoftboiledOnMon(u8 taskId);
 
 bool8 SetUpFieldMove_SoftBoiled(void)
 {
@@ -29,81 +30,82 @@ bool8 SetUpFieldMove_SoftBoiled(void)
     return FALSE;
 }
 
-void sub_8161560(u8 taskId)
+void ChooseMonForSoftboiled(u8 taskId)
 {
-    gUnknown_0203CEC8.unkB = 0xA;
-    gUnknown_0203CEC8.unkA =  gUnknown_0203CEC8.slotId;
-    sub_81B0FCC(GetCursorSelectionMonId(), 0x1);
-    display_pokemon_menu_message(0x5);
-    gTasks[taskId].func = sub_81B1370;
+    gPartyMenu.action = PARTY_ACTION_SOFTBOILED;
+    gPartyMenu.slotId2 =  gPartyMenu.slotId;
+    AnimatePartySlot(GetCursorSelectionMonId(), 1);
+    DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
+    gTasks[taskId].func = Task_HandleChooseMonInput;
 }
 
-void sub_81615A8(u8 taskId)
+void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
 {
     u16 hp;
 
-    u8 slotId = gUnknown_0203CEC8.slotId;
-    u8 pokemonIndex = gUnknown_0203CEC8.unkA;
-    if(pokemonIndex > 6)
+    u8 userPartyId = gPartyMenu.slotId;
+    u8 recipientPartyId = gPartyMenu.slotId2;
+    if(recipientPartyId > PARTY_SIZE)
     {
-        gUnknown_0203CEC8.unkB = 0;
-        display_pokemon_menu_message(0x0);
-        gTasks[taskId].func = sub_81B1370;
+        gPartyMenu.action = 0;
+        DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+        gTasks[taskId].func = Task_HandleChooseMonInput;
         return;
     }
 
-    hp = GetMonData(&gPlayerParty[pokemonIndex], MON_DATA_HP);
-    if(hp == 0 || slotId == pokemonIndex || GetMonData(&gPlayerParty[pokemonIndex], MON_DATA_MAX_HP) == hp)
+    hp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_HP);
+    if(hp == 0 || userPartyId == recipientPartyId || GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_MAX_HP) == hp)
     {
-        sub_81617B8(taskId);
+        CantUseSoftboiledOnMon(taskId);
         return;
     }
 
+    // Take away Softboiled user's health first (-1)
     PlaySE(SE_KAIFUKU);
-    sub_81B1F18(taskId, slotId, -1, GetMonData(&gPlayerParty[slotId], MON_DATA_MAX_HP)/5, sub_816166C);
+    PartyMenuModifyHP(taskId, userPartyId, -1, GetMonData(&gPlayerParty[userPartyId], MON_DATA_MAX_HP)/5, Task_SoftboiledRestoreHealth);
 }
 
-static void sub_816166C(u8 taskId)
+static void Task_SoftboiledRestoreHealth(u8 taskId)
 {
     PlaySE(SE_KAIFUKU);
-    sub_81B1F18(taskId, gUnknown_0203CEC8.unkA, 1, GetMonData(&gPlayerParty[gUnknown_0203CEC8.slotId], MON_DATA_MAX_HP)/5, sub_81616C0);
+    PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MAX_HP)/5, Task_DisplayHPRestoredMessage);
 }
 
-static void sub_81616C0(u8 taskId)
+static void Task_DisplayHPRestoredMessage(u8 taskId)
 {
-    GetMonNickname(&gPlayerParty[gUnknown_0203CEC8.unkA], gStringVar1);
+    GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
-    sub_81B1B5C(gStringVar4, 0);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
     schedule_bg_copy_tilemap_to_vram(2);
-    gTasks[taskId].func = sub_8161724;
+    gTasks[taskId].func = Task_FinishSoftboiled;
 }
 
-static void sub_8161724(u8 taskId)
+static void Task_FinishSoftboiled(u8 taskId)
 {
-    if(sub_81B1BD4() == 1)
+    if(IsPartyMenuTextPrinterActive() == TRUE)
         return;
-    gUnknown_0203CEC8.unkB = 0x0;
-    sub_81B0FCC(gUnknown_0203CEC8.slotId, 0);
-    gUnknown_0203CEC8.slotId = gUnknown_0203CEC8.unkA;
-    sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
-    ClearStdWindowAndFrameToTransparent(0x6, FALSE);
-    ClearWindowTilemap(0x6);
-    display_pokemon_menu_message(0);
-    gTasks[taskId].func = sub_81B1370;
+    gPartyMenu.action = 0;
+    AnimatePartySlot(gPartyMenu.slotId, 0);
+    gPartyMenu.slotId = gPartyMenu.slotId2;
+    AnimatePartySlot(gPartyMenu.slotId2, 1);
+    ClearStdWindowAndFrameToTransparent(6, FALSE);
+    ClearWindowTilemap(6);
+    DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+    gTasks[taskId].func = Task_HandleChooseMonInput;
 }
 
-static void sub_8161784(u8 taskId)
+static void Task_ChooseNewMonForSoftboiled(u8 taskId)
 {
-    if(sub_81B1BD4() == 1)
+    if(IsPartyMenuTextPrinterActive() == TRUE)
         return;
-    display_pokemon_menu_message(0x5);
-    gTasks[taskId].func = sub_81B1370;
+    DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
+    gTasks[taskId].func = Task_HandleChooseMonInput;
 }
 
-static void sub_81617B8(u8 taskId)
+static void CantUseSoftboiledOnMon(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    sub_81B1B5C(gText_CantBeUsedOnPkmn, 0);
+    DisplayPartyMenuMessage(gText_CantBeUsedOnPkmn, FALSE);
     schedule_bg_copy_tilemap_to_vram(2);
-    gTasks[taskId].func = sub_8161784;
+    gTasks[taskId].func = Task_ChooseNewMonForSoftboiled;
 }

@@ -9,7 +9,7 @@
 #include "gpu_regs.h"
 #include "move_relearner.h"
 #include "list_menu.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "menu_specialized.h"
@@ -154,7 +154,7 @@ static EWRAM_DATA struct
 {
     u8 state;
     u8 heartSpriteIds[16];              /*0x001*/
-    u16 movesToLearn[4];                /*0x012*/
+    u16 movesToLearn[MAX_MON_MOVES];    /*0x012*/
     u8 filler1A[0x44 - 0x1A];           /*0x01A*/
     u8 partyMon;                        /*0x044*/
     u8 moveSlot;                        /*0x045*/
@@ -183,14 +183,14 @@ static const u8 sMoveRelearnerSpriteSheetData[] = INCBIN_U8("graphics/interface/
 static const struct OamData sHeartSpriteOamData =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_SQUARE,
+    .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -200,14 +200,14 @@ static const struct OamData sHeartSpriteOamData =
 static const struct OamData sUnusedOam1 =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_V_RECTANGLE,
+    .shape = SPRITE_SHAPE(8x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(8x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -217,14 +217,14 @@ static const struct OamData sUnusedOam1 =
 static const struct OamData sUnusedOam2 =
 {
     .y = 0,
-    .affineMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
     .bpp = ST_OAM_4BPP,
-    .shape = ST_OAM_H_RECTANGLE,
+    .shape = SPRITE_SHAPE(16x8),
     .x = 0,
     .matrixNum = 0,
-    .size = 0,
+    .size = SPRITE_SIZE(16x8),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -376,7 +376,7 @@ static void Task_WaitForFadeOut(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_InitLearnMove);
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
 }
@@ -513,7 +513,7 @@ static void DoMoveRelearnerMain(void)
 
             if (selection == 0)
             {
-                if (GiveMoveToMon(&gPlayerParty[sMoveRelearnerStruct->partyMon], GetCurrentSelectedMove()) != 0xFFFF)
+                if (GiveMoveToMon(&gPlayerParty[sMoveRelearnerStruct->partyMon], GetCurrentSelectedMove()) != MON_HAS_MAX_MOVES)
                 {
                     FormatAndPrintText(gText_MoveRelearnerPkmnLearnedMove);
                     gSpecialVar_0x8004 = TRUE;
@@ -778,7 +778,7 @@ static void HandleInput(bool8 showContest)
     switch (itemId)
     {
     case LIST_NOTHING_CHOSEN:
-        if (!(gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysState())
+        if (!(gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
         {
             break;
         }

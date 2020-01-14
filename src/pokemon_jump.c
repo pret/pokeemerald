@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle_anim.h"
 #include "bg.h"
 #include "data.h"
@@ -158,7 +158,7 @@ static void sub_802AA60(struct PokemonJump1 *);
 static void sub_802AA94(struct PokemonJump1 *);
 static void sub_802AB20(void);
 static void sub_802AB98(void);
-static s16 sub_802AC00(u16 species);
+static s16 GetPokemonJumpSpeciesIdx(u16 species);
 static void sub_802AC2C(struct PokemonJump1_MonInfo *monInfo, struct Pokemon *mon);
 static void sub_802AC6C(void);
 static void sub_802ACA0(u8 taskId);
@@ -288,7 +288,7 @@ static void sub_802D598(void);
 static void sub_802D5E4(void);
 static void sub_802D72C(void);
 static void sub_802D688(void);
-static void sub_802E3E4(u8 taskId);
+static void Task_ShowPokemonJumpRecords(u8 taskId);
 static void sub_802E6D0(u8 taskId);
 static void sub_802EB98(u8 taskId);
 static void sub_802E500(u16 windowId, int width);
@@ -501,7 +501,7 @@ static void sub_802AB20(void)
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        index = sub_802AC00(gUnknown_02022CFC->unk82A8[i].species);
+        index = GetPokemonJumpSpeciesIdx(gUnknown_02022CFC->unk82A8[i].species);
         gUnknown_02022CFC->unk82E4[i].unkC = gPkmnJumpSpecies[index].unk2;
     }
 
@@ -524,7 +524,7 @@ static void sub_802AB98(void)
     }
 }
 
-static s16 sub_802AC00(u16 species)
+static s16 GetPokemonJumpSpeciesIdx(u16 species)
 {
     u32 i;
     for (i = 0; i < ARRAY_COUNT(gPkmnJumpSpecies); i++)
@@ -533,7 +533,7 @@ static s16 sub_802AC00(u16 species)
             return i;
     }
 
-    return -1;
+    return -1; // species isnt allowed
 }
 
 static void sub_802AC2C(struct PokemonJump1_MonInfo *monInfo, struct Pokemon *mon)
@@ -2204,12 +2204,12 @@ static u8 *sub_802C8E8(u8 multiplayerId)
     return gUnknown_02022CFC->unk82E4[multiplayerId].unk1C;
 }
 
-bool32 sub_802C908(u16 species)
+bool32 IsSpeciesAllowedInPokemonJump(u16 species)
 {
-    return sub_802AC00(species) > -1;
+    return GetPokemonJumpSpeciesIdx(species) > -1;
 }
 
-void sub_802C920(void)
+void IsPokemonJumpSpeciesInParty(void)
 {
     int i;
 
@@ -2218,15 +2218,15 @@ void sub_802C920(void)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
         {
             u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-            if (sub_802C908(species))
+            if (IsSpeciesAllowedInPokemonJump(species))
             {
-                gSpecialVar_Result = 1;
+                gSpecialVar_Result = TRUE;
                 return;
             }
         }
     }
 
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
 }
 
 // Large group of data.
@@ -2294,14 +2294,14 @@ static const struct SpriteTemplate *const gUnknown_082FBEB8[] =
 static const struct OamData sOamData_82FBEC8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2311,14 +2311,14 @@ static const struct OamData sOamData_82FBEC8 =
 static const struct OamData sOamData_82FBED0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 2,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(16x32),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2328,14 +2328,14 @@ static const struct OamData sOamData_82FBED0 =
 static const struct OamData sOamData_82FBED8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2345,14 +2345,14 @@ static const struct OamData sOamData_82FBED8 =
 static const struct OamData sOamData_82FBEE0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x16),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2498,14 +2498,14 @@ static const struct SpriteTemplate gUnknown_082FBFC0 =
 static const struct OamData sOamData_82FBFD8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -3466,7 +3466,7 @@ static void sub_802DB18(u16 left, u16 top, u8 cursorPos)
 
 static void sub_802DB8C(void)
 {
-    u8 color[] = {0, 2, 3};
+    u8 color[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -3557,8 +3557,8 @@ static void sub_802DD08(void)
     struct UnkStruct3 unkStruct;
     struct UnkStruct3 *ptr = &unkStruct; // This temp variable is needed to match, don't ask me why.
 
-    ptr->shape = 0;
-    ptr->size = 0;
+    ptr->shape = SPRITE_SHAPE(8x8);
+    ptr->size = SPRITE_SIZE(8x8);
     ptr->field_0_0 = 0;
     ptr->priority = 1;
     ptr->field_1 = 5;
@@ -3666,7 +3666,7 @@ static void sub_802DF70(bool32 arg0)
     if (!arg0)
     {
         for (i = 0; i < playersCount; i++)
-            sub_802DED8(i, 0, 2, 3);
+            sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     }
     else
     {
@@ -3674,9 +3674,9 @@ static void sub_802DF70(bool32 arg0)
         for (i = 0; i < playersCount; i++)
         {
             if (var != i)
-                sub_802DED8(i, 0, 2, 3);
+                sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
             else
-                sub_802DED8(i, 0, 4, 5);
+                sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED);
         }
     }
 }
@@ -3922,10 +3922,10 @@ static void sub_802E3A8(void)
         pokeJump->field6++;
 }
 
-void sub_802E3C4(void)
+void ShowPokemonJumpRecords(void)
 {
-    u8 taskId = CreateTask(sub_802E3E4, 0);
-    sub_802E3E4(taskId);
+    u8 taskId = CreateTask(Task_ShowPokemonJumpRecords, 0);
+    Task_ShowPokemonJumpRecords(taskId);
 }
 
 static const struct WindowTemplate gUnknown_082FE270 =
@@ -3941,7 +3941,7 @@ static const struct WindowTemplate gUnknown_082FE270 =
 
 static const u8 *const gUnknown_082FE278[] = {gText_JumpsInARow, gText_BestScore2, gText_ExcellentsInARow};
 
-static void sub_802E3E4(u8 taskId)
+static void Task_ShowPokemonJumpRecords(u8 taskId)
 {
     struct WindowTemplate window;
     int i, width, widthCurr;
@@ -4093,7 +4093,7 @@ static const struct SpriteTemplate gUnknown_082FE730[] =
     {
         .tileTag = 0x2000,
         .paletteTag = 0x2000,
-        .oam = &gUnknown_08524914,
+        .oam = &gOamData_AffineOff_ObjNormal_32x32,
         .anims = sSpriteAnimTable_82FE718,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -4483,14 +4483,14 @@ static void sub_802EF50(u16 tileTag, u16 palTag)
 static const struct OamData sOamData_82FEBDC =
 {
     .y = 0,
-    .affineMode = 3,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -4500,14 +4500,14 @@ static const struct OamData sOamData_82FEBDC =
 static const struct OamData sOamData_82FEBE4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,

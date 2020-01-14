@@ -1004,38 +1004,36 @@ const union AffineAnimCmd *const sMonIconAffineAnims[] =
 
 const u16 sSpriteImageSizes[3][4] =
 {
-    // square
+    [ST_OAM_SQUARE] = 
     {
-         0x20, // 1×1
-         0x80, // 2×2
-        0x200, // 4×4
-        0x800, // 8×8
+        [SPRITE_SIZE(8x8)]   =  0x20,
+        [SPRITE_SIZE(16x16)] =  0x80,
+        [SPRITE_SIZE(32x32)] = 0x200,
+        [SPRITE_SIZE(64x64)] = 0x800,
     },
-
-    // horizontal rectangle
+    [ST_OAM_H_RECTANGLE] = 
     {
-         0x40, // 2×1
-         0x80, // 4×1
-        0x100, // 4×2
-        0x400, // 8×4
+        [SPRITE_SIZE(16x8)]  =  0x40,
+        [SPRITE_SIZE(32x8)]  =  0x80,
+        [SPRITE_SIZE(32x16)] = 0x100,
+        [SPRITE_SIZE(64x32)] = 0x400,
     },
-
-    // vertical rectangle
+    [ST_OAM_V_RECTANGLE] = 
     {
-         0x40, // 1×2
-         0x80, // 1×4
-        0x100, // 2×4
-        0x400, // 4×8
+        [SPRITE_SIZE(8x16)]  =  0x40,
+        [SPRITE_SIZE(8x32)]  =  0x80,
+        [SPRITE_SIZE(16x32)] = 0x100,
+        [SPRITE_SIZE(32x64)] = 0x400,
     },
 };
 
-u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality, bool32 extra)
+u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality, bool32 handleDeoxys)
 {
     u8 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
     {
         .oam = &sMonIconOamData,
-        .image = GetMonIconPtr(species, personality, extra),
+        .image = GetMonIconPtr(species, personality, handleDeoxys),
         .anims = sMonIconAnims,
         .affineAnims = sMonIconAffineAnims,
         .callback = callback,
@@ -1125,12 +1123,12 @@ u16 sub_80D2E84(u16 species)
     }
 }
 
-const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 extra)
+const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 handleDeoxys)
 {
-    return GetMonIconTiles(GetIconSpecies(species, personality), extra);
+    return GetMonIconTiles(GetIconSpecies(species, personality), handleDeoxys);
 }
 
-void sub_80D2EF8(struct Sprite *sprite)
+void FreeAndDestroyMonIconSprite(struct Sprite *sprite)
 {
     sub_80D328C(sprite);
 }
@@ -1184,17 +1182,17 @@ void FreeMonIconPalette(u16 species)
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
 }
 
-void sub_80D3014(struct Sprite *sprite)
+void SpriteCB_MonIcon(struct Sprite *sprite)
 {
     UpdateMonIconFrame(sprite);
 }
 
-const u8* GetMonIconTiles(u16 species, bool32 extra)
+const u8* GetMonIconTiles(u16 species, bool32 handleDeoxys)
 {
     const u8* iconSprite = gMonIconTable[species];
-    if (species == SPECIES_DEOXYS && extra == TRUE)
+    if (species == SPECIES_DEOXYS && handleDeoxys == TRUE)
     {
-        iconSprite = (const u8*)(0x400 + (u32)iconSprite); //WTF?
+        iconSprite = (const u8*)(0x400 + (u32)iconSprite); // use the specific Deoxys form icon (Speed in this case)
     }
     return iconSprite;
 }
@@ -1302,7 +1300,7 @@ void sub_80D328C(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_80D32C8(struct Sprite *sprite, u8 animNum)
+void SetPartyHPBarSprite(struct Sprite *sprite, u8 animNum)
 {
     sprite->animNum = animNum;
     sprite->animDelayCounter = 0;

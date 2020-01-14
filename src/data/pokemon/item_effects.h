@@ -236,7 +236,7 @@ const u8 gItemEffect_PPMax[9] = {
 };
 
 const u8 gItemEffect_GuardSpec[8] = {
-    [3] = ITEM3_MIST,
+    [3] = ITEM3_GUARD_SPEC,
     [5] = ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID,
     [6] = 1,
     [7] = 1,
@@ -377,7 +377,7 @@ const u8 gItemEffect_QualotBerry[10] = {
     [9] = 2,
 };
 
-const u8 gItemEffect_HondrewBerry[10] = {
+const u8 gItemEffect_HondewBerry[10] = {
     [5] = ITEM5_EV_SPATK | ITEM5_FRIENDSHIP_ALL,
     [6] = -10,
     [7] = 10,
@@ -469,7 +469,7 @@ const u8 *const gItemEffectTable[] =
     [ITEM_POMEG_BERRY - ITEM_POTION] = gItemEffect_PomegBerry,
     [ITEM_KELPSY_BERRY - ITEM_POTION] = gItemEffect_KelpsyBerry,
     [ITEM_QUALOT_BERRY - ITEM_POTION] = gItemEffect_QualotBerry,
-    [ITEM_HONDEW_BERRY - ITEM_POTION] = gItemEffect_HondrewBerry,
+    [ITEM_HONDEW_BERRY - ITEM_POTION] = gItemEffect_HondewBerry,
     [ITEM_GREPA_BERRY - ITEM_POTION] = gItemEffect_GrepaBerry,
     [ITEM_TAMATO_BERRY - ITEM_POTION] = gItemEffect_TamatoBerry,
     [LAST_BERRY_INDEX - ITEM_POTION] = NULL

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "ereader_helpers.h"
 #include "link.h"
@@ -448,7 +448,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     AGB_ASSERT_EX(ttdata->id == 0, "cereader_tool.c", 452);
 
     memset(buffer2, 0, 0x1000);
-    buffer2->unkField_0 = ttdata->count;
+    buffer2->numTrainers = ttdata->count;
     buffer2->unused1 = sub_81D38D4();
     buffer2->numFloors = (ttdata->count + 1) / 2;
 
@@ -456,13 +456,13 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     {
         if (!(i & 1))
         {
-            buffer2->floors[i / 2].unk0 = ttdata->unk_8[i].unk0;
+            buffer2->floors[i / 2].trainerNum1 = ttdata->unk_8[i].unk0;
             buffer2->floors[i / 2].display = ttdata->unk_8[i].unk14C;
             buffer2->floors[i / 2].trainers[0] = ttdata->unk_8[i].unk4;
         }
         else
         {
-            buffer2->floors[i / 2].unk1 = ttdata->unk_8[i].unk0;
+            buffer2->floors[i / 2].trainerNum2 = ttdata->unk_8[i].unk0;
             buffer2->floors[i / 2].trainers[1] = ttdata->unk_8[i].unk4;
         }
     }
@@ -473,7 +473,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     }
 
     buffer2->checksum = CalcByteArraySum((u8 *)buffer2->floors, 4 * sizeof(struct TrHillFloor));
-    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != 1)
+    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != SAVE_STATUS_OK)
         return FALSE;
 
     return TRUE;
@@ -487,13 +487,13 @@ bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0)
     return result;
 }
 
-static bool32 TryReadTrainerHill_r(struct EReaderTrainerHillSet *arg0, u8 *arg1)
+static bool32 TryReadTrainerHill_r(struct EReaderTrainerHillSet *dst, u8 *buffer)
 {
-    if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, arg1) != 1)
+    if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
         return FALSE;
 
-    memcpy(arg0, arg1, sizeof(struct EReaderTrainerHillSet));
-    if (!TrainerHill_VerifyChecksum(arg0))
+    memcpy(dst, buffer, sizeof(struct EReaderTrainerHillSet));
+    if (!TrainerHill_VerifyChecksum(dst))
         return FALSE;
 
     return TRUE;

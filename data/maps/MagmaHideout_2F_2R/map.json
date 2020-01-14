@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "7",
-      "script": "MagmaHideout_2F_2R_EventScript_239E4D",
+      "script": "MagmaHideout_2F_2R_EventScript_Grunt8",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MagmaHideout_2F_2R_EventScript_239E36",
+      "script": "MagmaHideout_2F_2R_EventScript_Grunt7",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "MagmaHideout_2F_2R_EventScript_239E1F",
+      "script": "MagmaHideout_2F_2R_EventScript_Grunt6",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MagmaHideout_2F_2R_EventScript_239E08",
+      "script": "MagmaHideout_2F_2R_EventScript_Grunt15",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {

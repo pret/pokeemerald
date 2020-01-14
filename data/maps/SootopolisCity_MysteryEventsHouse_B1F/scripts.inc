@@ -1,19 +1,19 @@
 SootopolisCity_MysteryEventsHouse_B1F_MapScripts:: @ 8227E4F
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_B1F_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_B1F_OnFrame
 	.byte 0
 
 SootopolisCity_MysteryEventsHouse_B1F_OnTransition: @ 8227E5A
 	special SetEReaderTrainerGfxId
 	end
 
-SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E: @ 8227E5E
-	map_script_2 VAR_TEMP_1, 0, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68
+SootopolisCity_MysteryEventsHouse_B1F_OnFrame: @ 8227E5E
+	map_script_2 VAR_TEMP_1, 0, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer
 	.2byte 0
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer:: @ 8227E68
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerEnterBasement
 	waitmovement 0
 	special CopyEReaderTrainerGreeting
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -23,14 +23,14 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, 3
-	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF
+	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie
 	compare VAR_RESULT, 1
-	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD
+	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon
 	compare VAR_RESULT, 2
-	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8
+	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost
 	closemessage
 	special HealPlayerParty
-	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1
@@ -39,26 +39,26 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	releaseall
 	end
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF:: @ 8227ECF
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie:: @ 8227ECF
 	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 3
-	msgbox SootopolisCity_MysteryEventsHouse_B1F_Text_227D40, MSGBOX_DEFAULT
+	msgbox SootopolisCity_MysteryEventsHouse_B1F_Text_MatchEndedUpDraw, MSGBOX_DEFAULT
 	return
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD:: @ 8227EDD
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon:: @ 8227EDD
 	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8:: @ 8227EE8
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost:: @ 8227EE8
 	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 2
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
-SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3: @ 8227EF3
+SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerEnterBasement: @ 8227EF3
 	walk_down
 	walk_down
 	walk_down
@@ -66,7 +66,7 @@ SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3: @ 8227EF3
 	walk_right
 	step_end
 
-SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9: @ 8227EF9
+SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement: @ 8227EF9
 	walk_left
 	walk_left
 	walk_up

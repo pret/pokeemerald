@@ -1,6 +1,6 @@
 #include "global.h"
 #include "constants/decorations.h"
-#include "constants/mauville_man.h"
+#include "constants/mauville_old_man.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"
@@ -71,7 +71,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         if (curWidth > windowWidth)
             windowWidth = curWidth;
     }
-    windowTemplate.width = convert_pixel_width_to_tile_width(windowWidth);
+    windowTemplate.width = ConvertPixelWidthToTileWidth(windowWidth);
     data[3] = AddWindow(&windowTemplate);
     DrawStdFrameWithCustomTileAndPalette(data[3], FALSE, 0x214, 14);
     for (i = 0; i < 4; i++)
@@ -86,7 +86,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
-void sub_8133BE4(u8 taskId, u8 decorationId)
+void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
 {
     s16 * data = gTasks[taskId].data;
     if (decorationId > NUM_DECORATIONS)
@@ -118,14 +118,14 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
         case MENU_B_PRESSED:
         case 4:
             PlaySE(SE_SELECT);
-            sub_8133BE4(taskId, 0);
+            Task_BufferDecorSelectionAndCloseWindow(taskId, 0);
             break;
         default:
             PlaySE(SE_SELECT);
             gSpecialVar_0x8005 = input;
             StringCopy(gStringVar1, trader->playerNames[input]);
             ConvertInternationalString(gStringVar1, trader->language[input]);
-            sub_8133BE4(taskId, trader->decorIds[input]);
+            Task_BufferDecorSelectionAndCloseWindow(taskId, trader->decorIds[input]);
             break;
     }
 }

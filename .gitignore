@@ -30,3 +30,5 @@ build/
 .idea/
 porymap.project.cfg
 .vscode/
+*.a
+.fuse_hidden*

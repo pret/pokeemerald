@@ -14,7 +14,7 @@
 #include "list_menu.h"
 #include "mail.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
@@ -419,12 +419,12 @@ static void PlayerPC_Decoration(u8 taskId)
 
 static void PlayerPC_TurnOff(u8 taskId)
 {
-    if (gPcItemMenuOptionsNum == 4) // if the option count is 4, we are at the bedroom PC and not player PC, so do gender specific handling.
+    if (gPcItemMenuOptionsNum == 4) // if the option count is 4, we are at the bedroom PC, so do gender specific handling.
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
-            ScriptContext1_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_1F863F);
+            ScriptContext1_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
         else
-            ScriptContext1_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_1F958F);
+            ScriptContext1_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC);
     }
     else
     {
@@ -484,7 +484,7 @@ static void ItemStorageMenuProcessInput(u8 taskId)
 static void ItemStorage_Deposit(u8 taskId)
 {
     gTasks[taskId].func = Task_ItemStorage_Deposit;
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 static void Task_ItemStorage_Deposit(u8 taskId)
@@ -508,7 +508,7 @@ void Mailbox_DoRedrawMailboxMenuAfterReturn(void)
     sub_81973A4();
     DrawDialogueFrame(0, 1);
     InitItemStorageMenu(CreateTask(ItemStorage_HandleReturnToProcessInput, 0), 1);
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 static void ItemStorage_HandleReturnToProcessInput(u8 taskId)
@@ -714,7 +714,7 @@ static void Mailbox_MailOptionsProcessInput(u8 taskId)
 
 static void Mailbox_DoMailRead(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Mailbox_FadeAndReadMail;
 }
 
@@ -745,7 +745,7 @@ static void pal_fill_for_maplights_or_black(void)
         Mailbox_DrawMailboxMenu(taskId);
     else
         DestroyTask(taskId);
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 static void Mailbox_HandleReturnToProcessInput(u8 taskId)
@@ -813,7 +813,7 @@ static void Mailbox_Give(u8 taskId)
         Mailbox_NoPokemonForMail(taskId);
     else
     {
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Mailbox_DoGiveMailPokeMenu;
     }
 }
@@ -824,7 +824,7 @@ static void Mailbox_DoGiveMailPokeMenu(u8 taskId)
     {
         sub_81D1EC0();
         CleanupOverworldWindowsAndTilemaps();
-        sub_81B8448();
+        ChooseMonToGiveMailFromMailbox();
         DestroyTask(taskId);
     }
 }
@@ -852,7 +852,7 @@ static void Mailbox_UpdateMailListAfterDeposit(void)
         Mailbox_DrawMailboxMenu(taskId);
     else
         DestroyTask(taskId);
-    pal_fill_black();
+    FadeInFromBlack();
 }
 
 static void Mailbox_NoPokemonForMail(u8 taskId)

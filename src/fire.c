@@ -65,7 +65,7 @@ const struct SpriteTemplate gUnknown_08595368 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08595360,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -76,7 +76,7 @@ const struct SpriteTemplate gUnknown_08595380 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08595360,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -132,7 +132,7 @@ const struct SpriteTemplate gUnknown_085953F8 =
 {
     .tileTag = ANIM_TAG_FIRE,
     .paletteTag = ANIM_TAG_FIRE,
-    .oam = &gUnknown_08524974,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gUnknown_085953BC,
     .images = NULL,
     .affineAnims = gUnknown_085953F4,
@@ -143,7 +143,7 @@ const struct SpriteTemplate gUnknown_08595410 =
 {
     .tileTag = ANIM_TAG_FIRE,
     .paletteTag = ANIM_TAG_FIRE,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085953BC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -154,7 +154,7 @@ const struct SpriteTemplate gUnknown_08595428 =
 {
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085953D8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -165,7 +165,7 @@ const struct SpriteTemplate gUnknown_08595440 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085953D8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -189,7 +189,7 @@ const struct SpriteTemplate gUnknown_0859546C =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08595468,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -212,7 +212,7 @@ const struct SpriteTemplate gUnknown_085954A0 =
 {
     .tileTag = ANIM_TAG_SUNLIGHT,
     .paletteTag = ANIM_TAG_SUNLIGHT,
-    .oam = &gUnknown_08524A94,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_0859549C,
@@ -238,7 +238,7 @@ const struct SpriteTemplate gEmberSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -249,7 +249,7 @@ const struct SpriteTemplate gEmberFlareSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085954D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -260,7 +260,7 @@ const struct SpriteTemplate gUnknown_08595504 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085954D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -271,7 +271,7 @@ const struct SpriteTemplate gUnknown_0859551C =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085954D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -312,7 +312,7 @@ const struct SpriteTemplate gUnknown_0859556C =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08595540,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -323,7 +323,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8595584 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085954D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -334,7 +334,7 @@ const struct SpriteTemplate gUnknown_0859559C =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085954D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -345,7 +345,7 @@ const struct SpriteTemplate gUnknown_085955B4 =
 {
     .tileTag = ANIM_TAG_WARM_ROCK,
     .paletteTag = ANIM_TAG_WARM_ROCK,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -368,7 +368,7 @@ const struct SpriteTemplate gUnknown_085955E8 =
 {
     .tileTag = ANIM_TAG_WARM_ROCK,
     .paletteTag = ANIM_TAG_WARM_ROCK,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -414,7 +414,7 @@ const struct SpriteTemplate gUnknown_0859563C =
 {
     .tileTag = ANIM_TAG_WISP_ORB,
     .paletteTag = ANIM_TAG_WISP_ORB,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gUnknown_0859562C,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -439,7 +439,7 @@ const struct SpriteTemplate gUnknown_0859566C =
 {
     .tileTag = ANIM_TAG_WISP_FIRE,
     .paletteTag = ANIM_TAG_WISP_FIRE,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_08595668,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -622,7 +622,7 @@ static void AnimEmberFlare(struct Sprite *sprite)
             || gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
-    sprite->callback = sub_80A7938;
+    sprite->callback = AnimSnoreZ;
     sprite->callback(sprite);
 }
 
@@ -631,7 +631,7 @@ static void sub_8109200(struct Sprite *sprite)
     gBattleAnimArgs[0] = -gBattleAnimArgs[0];
     gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
-    sprite->callback = sub_80A7938;
+    sprite->callback = AnimSnoreZ;
 }
 
 // Animates the a fire sprite in the first-half of the MOVE_FIRE_BLAST

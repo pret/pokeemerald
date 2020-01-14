@@ -83,6 +83,6 @@ gUnknown_0858D8E0:: @ 858D8E0
 	obj_tiles gMiscBlank_Gfx, 0x0200, 0x56ce
 
 	.align 2
-gUnknown_0858D8E8:: @ 858D8E8
-	.byte 0x01, 0x0f, 0x0e, 0x00
+sContestLinkTextColors:: @ 858D8E8
+	.byte 0x01, 0x0f, 0x0e, 0x00  @ TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5
 

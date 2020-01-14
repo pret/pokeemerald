@@ -97,16 +97,16 @@ struct HpAndStatus
 
 struct MovePpInfo
 {
-    u16 moves[4];
-    u8 pp[4];
+    u16 moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
     u8 ppBonuses;
 };
 
 struct ChooseMoveStruct
 {
-    u16 moves[4];
-    u8 currentPp[4];
-    u8 maxPp[4];
+    u16 moves[MAX_MON_MOVES];
+    u8 currentPp[MAX_MON_MOVES];
+    u8 maxPp[MAX_MON_MOVES];
     u16 species;
     u8 monType1;
     u8 monType2;
@@ -248,8 +248,8 @@ void nullsub_21(void);
 void PlayerHandleGetRawMonData(void);
 void sub_80587B0(void);
 void sub_805CC00(struct Sprite *sprite);
-void SetCB2ToReshowScreenAfterMenu(void);
-void SetCB2ToReshowScreenAfterMenu2(void);
+void CB2_SetUpReshowBattleScreenAfterMenu(void);
+void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void c3_0802FDF4(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);

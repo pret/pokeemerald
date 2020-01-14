@@ -5,22 +5,24 @@
 
 // temporary vars
 // The first 0x10 vars are are temporary--they are cleared every time a map is loaded.
-#define VAR_TEMP_0                 0x4000
-#define VAR_TEMP_1                 0x4001
-#define VAR_TEMP_2                 0x4002
-#define VAR_TEMP_3                 0x4003
-#define VAR_TEMP_4                 0x4004
-#define VAR_TEMP_5                 0x4005
-#define VAR_TEMP_6                 0x4006
-#define VAR_TEMP_7                 0x4007
-#define VAR_TEMP_8                 0x4008
-#define VAR_TEMP_9                 0x4009
-#define VAR_TEMP_A                 0x400A
-#define VAR_TEMP_B                 0x400B
-#define VAR_TEMP_C                 0x400C
-#define VAR_TEMP_D                 0x400D
-#define VAR_TEMP_E                 0x400E
-#define VAR_TEMP_F                 0x400F
+#define TEMP_VARS_START            0x4000
+#define VAR_TEMP_0                 (TEMP_VARS_START + 0x0)
+#define VAR_TEMP_1                 (TEMP_VARS_START + 0x1)
+#define VAR_TEMP_2                 (TEMP_VARS_START + 0x2)
+#define VAR_TEMP_3                 (TEMP_VARS_START + 0x3)
+#define VAR_TEMP_4                 (TEMP_VARS_START + 0x4)
+#define VAR_TEMP_5                 (TEMP_VARS_START + 0x5)
+#define VAR_TEMP_6                 (TEMP_VARS_START + 0x6)
+#define VAR_TEMP_7                 (TEMP_VARS_START + 0x7)
+#define VAR_TEMP_8                 (TEMP_VARS_START + 0x8)
+#define VAR_TEMP_9                 (TEMP_VARS_START + 0x9)
+#define VAR_TEMP_A                 (TEMP_VARS_START + 0xA)
+#define VAR_TEMP_B                 (TEMP_VARS_START + 0xB)
+#define VAR_TEMP_C                 (TEMP_VARS_START + 0xC)
+#define VAR_TEMP_D                 (TEMP_VARS_START + 0xD)
+#define VAR_TEMP_E                 (TEMP_VARS_START + 0xE)
+#define VAR_TEMP_F                 (TEMP_VARS_START + 0xF)
+#define TEMP_VARS_END              VAR_TEMP_F
 
 // object gfx id vars
 // These 0x10 vars are used to dynamically control a map object's sprite.
@@ -61,26 +63,26 @@
 #define VAR_0x402E                           0x402E
 
 #define VAR_FRONTIER_MANIAC_FACILITY         0x402F
-#define VAR_FRONTIER_GAMBLER_FACILITY        0x4030
-#define VAR_FRONTIER_GAMBLER_SET_FACILITY_F  0x4031
+#define VAR_FRONTIER_GAMBLER_CHALLENGE       0x4030
+#define VAR_FRONTIER_GAMBLER_SET_CHALLENGE   0x4031
 #define VAR_FRONTIER_GAMBLER_AMOUNT_BET      0x4032
-#define VAR_FRONTIER_GAMBLER_PLACED_BET_F    0x4033
+#define VAR_FRONTIER_GAMBLER_STATE           0x4033
 
 #define VAR_DEOXYS_ROCK_STEP_COUNT           0x4034
 #define VAR_DEOXYS_ROCK_LEVEL                0x4035
-#define VAR_STORAGE_UNKNOWN                  0x4036
-#define VAR_UNUSUAL_WEATHER_LOCATION         0x4037
-#define VAR_UNUSUAL_WEATHER_STEP_COUNTER     0x4038
-#define VAR_SHOULD_END_UNUSUAL_WEATHER       0x4039
+#define VAR_PC_BOX_TO_SEND_MON               0x4036
+#define VAR_ABNORMAL_WEATHER_LOCATION        0x4037
+#define VAR_ABNORMAL_WEATHER_STEP_COUNTER    0x4038
+#define VAR_SHOULD_END_ABNORMAL_WEATHER      0x4039
 #define VAR_FARAWAY_ISLAND_STEP_COUNTER      0x403A
 #define VAR_REGICE_STEPS_1                   0x403B
 #define VAR_REGICE_STEPS_2                   0x403C
 #define VAR_REGICE_STEPS_3                   0x403D
 #define VAR_ALTERING_CAVE_WILD_SET           0x403E
-#define VAR_ALWAYS_ZERO_0x403F               0x403F // This var is read and written, but is always zero.
+#define VAR_DISTRIBUTE_EON_TICKET            0x403F // This var is read and written, but is always zero. The only way to obtain the Eon Ticket in Emerald is via Record Mixing
 #define VAR_DAYS                             0x4040
-#define VAR_FANCLUB_UNKNOWN_1                0x4041
-#define VAR_FANCLUB_UNKNOWN_2                0x4042
+#define VAR_FANCLUB_FAN_COUNTER              0x4041
+#define VAR_FANCLUB_LOSE_FAN_TIMER           0x4042
 #define VAR_DEPT_STORE_FLOOR                 0x4043
 #define VAR_TRICK_HOUSE_LEVEL                0x4044
 #define VAR_POKELOT_PRIZE_ITEM               0x4045
@@ -144,17 +146,17 @@
 #define VAR_ROUTE132_STATE                   0x407F // Unused Var
 #define VAR_ROUTE133_STATE                   0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                   0x4081 // Unused Var
-#define VAR_LITTLEROOT_HOUSES_STATE          0x4082
+#define VAR_LITTLEROOT_HOUSES_STATE_MAY      0x4082
 #define VAR_UNUSED_0x4083                    0x4083 // Unused Var
 #define VAR_BIRCH_LAB_STATE                  0x4084
-#define VAR_PETALBURG_GYM_STATE              0x4085
-#define VAR_LINK_CONTEST_ROOM_STATE          0x4086
+#define VAR_PETALBURG_GYM_STATE              0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman 
+#define VAR_CONTEST_HALL_STATE               0x4086
 #define VAR_CABLE_CLUB_STATE                 0x4087
-#define VAR_CONTEST_LOCATION                 0x4088
+#define VAR_CONTEST_TYPE                     0x4088
 #define VAR_SECRET_BASE_INITIALIZED          0x4089
 #define VAR_CONTEST_PRIZE_PICKUP             0x408A
 #define VAR_UNUSED_0x408B                    0x408B // Unused Var
-#define VAR_LITTLEROOT_HOUSES_STATE_2        0x408C
+#define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN  0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE           0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE          0x408E
 #define VAR_DEVON_CORP_3F_STATE              0x408F
@@ -172,16 +174,16 @@
 #define VAR_UNUSED_0x409B                    0x409B // Unused Var
 #define VAR_ELITE_4_STATE                    0x409C
 #define VAR_UNUSED_0x409D                    0x409D // Unused Var
-#define VAR_MOSSDEEP_SPACE_CENTER_STATE_1    0x409E
-#define VAR_MOSSDEEP_SPACE_CENTER_STATE_2    0x409F
+#define VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE    0x409E
+#define VAR_MOSSDEEP_SPACE_CENTER_STATE      0x409F
 #define VAR_SLATEPORT_HARBOR_STATE           0x40A0
 #define VAR_UNUSED_0x40A1                    0x40A1 // Unused var
 #define VAR_SEAFLOOR_CAVERN_STATE            0x40A2
 #define VAR_CABLE_CAR_STATION_STATE          0x40A3
-#define VAR_SAFARI_ZONE_STATE                0x40A4
-#define VAR_TRICK_HOUSE_ENTRANCE_STATE_1     0x40A5
-#define VAR_TRICK_HOUSE_ENTRANCE_STATE_2     0x40A6
-#define VAR_TRICK_HOUSE_ENTRANCE_STATE_3     0x40A7
+#define VAR_SAFARI_ZONE_STATE                0x40A4  // 0: In or out of SZ, 1: Player exiting SZ, 2: Player entering SZ
+#define VAR_TRICK_HOUSE_BEING_WATCHED_STATE  0x40A5
+#define VAR_TRICK_HOUSE_FOUND_TRICK_MASTER   0x40A6
+#define VAR_TRICK_HOUSE_ENTRANCE_STATE       0x40A7
 #define VAR_UNUSED_0x40A8                    0x40A8 // Unused Var
 #define VAR_CYCLING_CHALLENGE_STATE          0x40A9
 #define VAR_SLATEPORT_MUSEUM_1F_STATE        0x40AA
@@ -194,9 +196,9 @@
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE       0x40B1
 #define VAR_TRICK_HOUSE_PUZZLE_8_STATE       0x40B2
 #define VAR_WEATHER_INSTITUTE_STATE          0x40B3
-#define VAR_PORTHOLE_STATE                   0x40B4
-#define VAR_TRICK_HOUSE_STATE                0x40B5 // TODO: needs some further investigation
-#define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2     0x40B6
+#define VAR_SS_TIDAL_STATE                   0x40B4
+#define VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR  0x40B5
+#define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2     0x40B6 // Leftover from RS, never set
 #define VAR_SLATEPORT_FAN_CLUB_STATE         0x40B7
 #define VAR_UNUSED_0x40B8                    0x40B8 // Unused Var
 #define VAR_MT_PYRE_STATE                    0x40B9
@@ -257,9 +259,9 @@
 #define VAR_SECRET_BASE_IS_NOT_LOCAL         0x40F0 // Set to TRUE while in another player's secret base.
 #define VAR_DAILY_BP                         0x40F1
 #define VAR_WALLY_CALL_STEP_COUNTER          0x40F2
-#define VAR_WINONA_CALL_STEP_COUNTER         0x40F3
+#define VAR_SCOTT_FORTREE_CALL_STEP_COUNTER  0x40F3
 #define VAR_ROXANNE_CALL_STEP_COUNTER        0x40F4
-#define VAR_SCOTT_CALL_STEP_COUNTER          0x40F5
+#define VAR_SCOTT_BF_CALL_STEP_COUNTER       0x40F5
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER 0x40F6
 #define VAR_UNUSED_0x40F7                    0x40F7 // Unused Var
 #define VAR_UNUSED_0x40F8                    0x40F8 // Unused Var
@@ -271,7 +273,9 @@
 #define VAR_UNUSED_0x40FE                    0x40FE // Unused Var
 #define VAR_UNUSED_0x40FF                    0x40FF // Unused Var
 
-#define SPECIAL_VARS_START 0x8000
+#define VARS_END                             0x40FF
+
+#define SPECIAL_VARS_START            0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
 #define VAR_0x8000                    0x8000
@@ -296,5 +300,7 @@
 #define VAR_MON_BOX_POS               0x8013
 #define VAR_UNUSED_0x8014             0x8014
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
+
+#define SPECIAL_VARS_END              0x8015
 
 #endif // GUARD_CONSTANTS_VARS_H

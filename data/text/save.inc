@@ -1,3 +1,4 @@
+	.align 2
 gText_ConfirmSave:: @ 82C87B4
 	.string "Would you like to save the game?$"
 

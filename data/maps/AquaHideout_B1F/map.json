@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AquaHideout_B1F_EventScript_233A85",
+      "script": "AquaHideout_B1F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "AquaHideout_B1F_EventScript_233AB0",
+      "script": "AquaHideout_B1F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AquaHideout_B1F_EventScript_233AD5",
+      "script": "AquaHideout_B1F_EventScript_Grunt5",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AquaHideout_B1F_EventScript_2339EB",
+      "script": "AquaHideout_B1F_EventScript_Electrode1",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AquaHideout_B1F_EventScript_233A38",
+      "script": "AquaHideout_B1F_EventScript_Electrode2",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AquaHideout_B1F_EventScript_233AEC",
+      "script": "AquaHideout_B1F_EventScript_Grunt7",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     }
   ],

@@ -17,7 +17,7 @@
 #include "item_menu.h"
 #include "list_menu.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "money.h"
@@ -38,6 +38,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/tv.h"
 
 EWRAM_DATA struct MartInfo gMartInfo = {0};
 EWRAM_DATA struct ShopData *gShopDataPtr = NULL;
@@ -347,7 +348,7 @@ static void Task_HandleShopMenuBuy(u8 taskId)
     data[8] = (u32)CB2_InitBuyMenu >> 16;
     data[9] = (u32)CB2_InitBuyMenu;
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 static void Task_HandleShopMenuSell(u8 taskId)
@@ -356,7 +357,7 @@ static void Task_HandleShopMenuSell(u8 taskId)
     data[8] = (u32)CB2_GoToSellMenu >> 16;
     data[9] = (u32)CB2_GoToSellMenu;
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 void CB2_ExitSellMenu(void)
@@ -389,7 +390,7 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
 
 static void MapPostLoadHook_ReturnToShopMenu(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(Task_ReturnToShopMenu, 8);
 }
 
@@ -438,7 +439,7 @@ static void CB2_InitBuyMenu(void)
     {
     case 0:
         SetVBlankHBlankCallbacksToNull();
-        CpuFastFill(0, (void *)OAM, 0x400);
+        CpuFastFill(0, (void *)OAM, OAM_SIZE);
         ScanlineEffect_Stop();
         reset_temp_tile_data_buffers();
         FreeAllSpritePalettes();
@@ -560,7 +561,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
         {
             ConvertIntToDecimalStringN(
                 gStringVar1,
-                ItemId_GetPrice(item) >> GetPriceReduction(1),
+                ItemId_GetPrice(item) >> GetPriceReduction(POKENEWS_SLATEPORT),
                 STR_CONV_MODE_LEFT_ALIGN,
                 5);
         }
@@ -855,7 +856,7 @@ static void BuyMenuDrawEventObjects(void)
         if (BuyMenuCheckIfEventObjectOverlapsMenuBg(gShopDataPtr->viewportObjects[i]) == TRUE)
         {
             gSprites[spriteId].subspriteTableNum = 4;
-            gSprites[spriteId].subspriteMode = 1;
+            gSprites[spriteId].subspriteMode = SUBSPRITES_ON;
         }
 
         StartSpriteAnim(&gSprites[spriteId], gShopDataPtr->viewportObjects[i][ANIM_NUM]);
@@ -932,7 +933,7 @@ static void Task_BuyMenu(u8 taskId)
 
             if (gMartInfo.martType == MART_TYPE_NORMAL)
             {
-                gShopDataPtr->totalCost = (ItemId_GetPrice(itemId) >> GetPriceReduction(1));
+                gShopDataPtr->totalCost = (ItemId_GetPrice(itemId) >> GetPriceReduction(POKENEWS_SLATEPORT));
             }
             else
             {
@@ -1011,7 +1012,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, gShopDataPtr->maxQuantity) == TRUE)
     {
-        gShopDataPtr->totalCost = (ItemId_GetPrice(tItemId) >> GetPriceReduction(1)) * tItemCount;
+        gShopDataPtr->totalCost = (ItemId_GetPrice(tItemId) >> GetPriceReduction(POKENEWS_SLATEPORT)) * tItemCount;
         BuyMenuPrintItemQuantityAndPrice(taskId);
     }
     else
@@ -1147,7 +1148,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 
     FillWindowPixelBuffer(4, PIXEL_FILL(1));
     PrintMoneyAmount(4, 38, 1, gShopDataPtr->totalCost, TEXT_SPEED_FF);
-    ConvertIntToDecimalStringN(gStringVar1, tItemCount, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(4, gStringVar4, 0, 1, 0, 0);
 }

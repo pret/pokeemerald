@@ -37,7 +37,6 @@
 #define B_ACTION_NONE                   0xFF
 
 #define MAX_TRAINER_ITEMS 4
-#define MAX_MON_MOVES 4
 
 // array entries for battle communication
 #define MULTIUSE_STATE          0x0
@@ -180,19 +179,19 @@ struct AI_ThinkingStruct
     u8 aiState;
     u8 movesetIndex;
     u16 moveConsidered;
-    s8 score[4];
+    s8 score[MAX_MON_MOVES];
     u32 funcResult;
     u32 aiFlags;
     u8 aiAction;
     u8 aiLogicId;
     u8 filler12[6];
-    u8 simulatedRNG[4];
+    u8 simulatedRNG[MAX_MON_MOVES];
 };
 
 struct UsedMoves
 {
-    u16 moves[MAX_BATTLERS_COUNT];
-    u16 unknown[MAX_BATTLERS_COUNT];
+    u16 moves[MAX_MON_MOVES];
+    u16 unknown[MAX_MON_MOVES];
 };
 
 struct BattleHistory
@@ -479,7 +478,7 @@ struct BattleScripting
     u8 animArg1;
     u8 animArg2;
     u16 tripleKickPower;
-    u8 atk49_state;
+    u8 moveendState;
     u8 battlerWithAbility;
     u8 multihitMoveEffect;
     u8 battler;
@@ -487,9 +486,9 @@ struct BattleScripting
     u8 animTargetsHit;
     u8 statChanger;
     bool8 statAnimPlayed;
-    u8 atk23_state;
+    u8 getexpState;
     u8 battleStyle;
-    u8 atk6C_state;
+    u8 drawlvlupboxState;
     u8 learnMoveState;
     u8 field_20;
     u8 reshowMainState;

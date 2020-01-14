@@ -64,7 +64,7 @@ bool32 PokenavCallback_Init_0(void)
     state->menuType = GetPokenavMainMenuType();
     state->cursorPos = 0;
     state->descriptionId = 0;
-    state->helpBarIndex = 0;
+    state->helpBarIndex = HELPBAR_NONE;
     sub_81C939C(state);
     return TRUE;
 }
@@ -78,7 +78,7 @@ bool32 PokenavCallback_Init_4(void)
     state->menuType = GetPokenavMainMenuType();
     state->cursorPos = 2;
     state->descriptionId = 2;
-    state->helpBarIndex = 0;
+    state->helpBarIndex = HELPBAR_NONE;
     sub_81C939C(state);
     return TRUE;
 }
@@ -105,7 +105,7 @@ bool32 PokenavCallback_Init_2(void)
     state->menuType = 3;
     state->cursorPos = 0;
     state->descriptionId = 5;
-    state->helpBarIndex = 0;
+    state->helpBarIndex = HELPBAR_NONE;
     sub_81C939C(state);
     return TRUE;
 }
@@ -119,7 +119,7 @@ bool32 PokenavCallback_Init_3(void)
     state->menuType = 4;
     state->cursorPos = sub_81C76AC();
     state->descriptionId = state->cursorPos + 8;
-    state->helpBarIndex = 0;
+    state->helpBarIndex = HELPBAR_NONE;
     sub_81C939C(state);
     return TRUE;
 }
@@ -151,9 +151,9 @@ static u32 (*sub_81C93EC(void))(struct Pokenav1Struct*)
     default:
     case POKENAV_MODE_NORMAL:
         return sub_81C943C;
-    case POKENAV_MODE_FORCE_CALL_1:
+    case POKENAV_MODE_FORCE_CALL_READY:
         return sub_81C9520;
-    case POKENAV_MODE_FORCE_CALL_2:
+    case POKENAV_MODE_FORCE_CALL_EXIT:
         return sub_81C9588;
     }
 }
@@ -179,7 +179,7 @@ static u32 sub_81C943C(struct Pokenav1Struct *a0)
         switch (sDescriptionIds[a0->menuType][a0->cursorPos])
         {
         case 0:
-            a0->helpBarIndex = gSaveBlock2Ptr->regionMapZoom ? 2 : 1;
+            a0->helpBarIndex = gSaveBlock2Ptr->regionMapZoom ? HELPBAR_MAP_ZOOMED_IN : HELPBAR_MAP_ZOOMED_OUT;
             sub_81C97B0(a0, POKENAV_MENU_6);
             return 8;
         case 1:
@@ -189,13 +189,13 @@ static u32 sub_81C943C(struct Pokenav1Struct *a0)
             a0->callback = sub_81C963C;
             return 2;
         case 2:
-            a0->helpBarIndex = 6;
+            a0->helpBarIndex = HELPBAR_MC_TRAINER_LIST;
             sub_81C97B0(a0, POKENAV_MENU_B);
             return 8;
         case 3:
             if (CanViewRibbonsMenu())
             {
-                a0->helpBarIndex = 9;
+                a0->helpBarIndex = HELPBAR_RIBBONS_MON_LIST;
                 sub_81C97B0(a0, POKENAV_MENU_C);
                 return 8;
             }
@@ -224,7 +224,7 @@ static u32 sub_81C9520(struct Pokenav1Struct *a0)
     {
         if (sDescriptionIds[a0->menuType][a0->cursorPos] == 2)
         {
-            a0->helpBarIndex = 6;
+            a0->helpBarIndex = HELPBAR_MC_TRAINER_LIST;
             sub_81C97B0(a0, POKENAV_MENU_B);
             return 8;
         }
@@ -259,7 +259,7 @@ static u32 sub_81C9588(struct Pokenav1Struct *a0)
         }
         else if (v0 == 2)
         {
-            a0->helpBarIndex = 6;
+            a0->helpBarIndex = HELPBAR_MC_TRAINER_LIST;
             sub_81C97B0(a0, POKENAV_MENU_B);
             return 8;
         }
@@ -349,7 +349,7 @@ static u32 sub_81C96FC(struct Pokenav1Struct *a0)
         {
             sub_81C7694(v0 - 8);
             sub_81C97B0(a0, POKENAV_MENU_8);
-            a0->helpBarIndex = 3;
+            a0->helpBarIndex = HELPBAR_CONDITION_MON_LIST;
             return 8;
         }
         else
@@ -459,7 +459,7 @@ int sub_81C98B4(void)
     return state->descriptionId;
 }
 
-u16 sub_81C98C4(void)
+u16 GetHelpBarTextId(void)
 {
     struct Pokenav1Struct *state = GetSubstructPtr(1);
     return state->helpBarIndex;

@@ -28,8 +28,8 @@ bool8 sub_80E1584(void);
 
 // soft-boiled
 bool8 SetUpFieldMove_SoftBoiled(void);
-void sub_81615A8(u8 taskId);
-void sub_8161560(u8 taskId);
+void Task_TryUseSoftboiledOnPartyMon(u8 taskId);
+void ChooseMonForSoftboiled(u8 taskId);
 
 // flash
 bool8 SetUpFieldMove_Flash(void);

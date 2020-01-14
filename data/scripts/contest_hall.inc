@@ -1,498 +1,509 @@
-LilycoveCity_ContestLobby_EventScript_279CC5:: @ 8279CC5
+@ Either ends or returns to EventScript_ContestReceptionist after submitting a contest entry
+LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist:: @ 8279CC5
 	lock
 	faceplayer
 	compare VAR_CONTEST_PRIZE_PICKUP, 0
-	goto_if_ne LilycoveCity_ContestLobby_EventScript_279D13
-	call_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_279CEA
-	call_if_unset FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_279CF3
-	goto LilycoveCity_ContestLobby_EventScript_279D5A
+	goto_if_ne LilycoveCity_ContestLobby_EventScript_PickUpPrize
+	call_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_ReceptionWelcome
+	call_if_unset FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_GivePokeblockCase
+	goto LilycoveCity_ContestLobby_EventScript_AskEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_279CEA:: @ 8279CEA
-	msgbox LilycoveCity_ContestLobby_Text_27AEA8, MSGBOX_DEFAULT
+LilycoveCity_ContestLobby_EventScript_ReceptionWelcome:: @ 8279CEA
+	msgbox LilycoveCity_ContestLobby_Text_ContestReception, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_ContestLobby_EventScript_279CF3:: @ 8279CF3
-	msgbox LilycoveCity_ContestLobby_Text_27ADA7, MSGBOX_DEFAULT
-	giveitem_std ITEM_POKEBLOCK_CASE
+LilycoveCity_ContestLobby_EventScript_GivePokeblockCase:: @ 8279CF3
+	msgbox LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase, MSGBOX_DEFAULT
+	giveitem ITEM_POKEBLOCK_CASE
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
-	msgbox LilycoveCity_ContestLobby_Text_27AE47, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_ContestLobby_EventScript_279D13:: @ 8279D13
-	msgbox LilycoveCity_ContestLobby_Text_27B67B, MSGBOX_DEFAULT
+LilycoveCity_ContestLobby_EventScript_PickUpPrize:: @ 8279D13
+	msgbox LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize, MSGBOX_DEFAULT
 	switch VAR_CONTEST_PRIZE_PICKUP
-	case 4, LilycoveCity_ContestLobby_EventScript_279D2C
+	case 4, LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter
 	end
 
-LilycoveCity_ContestLobby_EventScript_279D2C:: @ 8279D2C
-	giveitem_std ITEM_LUXURY_BALL
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_279D4B
+LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter:: @ 8279D2C
+	giveitem ITEM_LUXURY_BALL
+	compare VAR_RESULT, FALSE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
 	setvar VAR_CONTEST_PRIZE_PICKUP, 0
 	closemessage
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_279D4B:: @ 8279D4B
+LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter:: @ 8279D4B
 	call Common_EventScript_BagIsFull
-	msgbox LilycoveCity_ContestLobby_Text_27B6E7, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_279D5A:: @ 8279D5A
-	message LilycoveCity_ContestLobby_Text_27AF28
+LilycoveCity_ContestLobby_EventScript_AskEnterContest:: @ 8279D5A
+	message LilycoveCity_ContestLobby_Text_EnterContest1
 	waitmessage
-	multichoice 0, 0, 2, 0
+	multichoice 0, 0, MULTI_ENTERINFO, 0
 	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_279E62
-	case 1, LilycoveCity_ContestLobby_EventScript_279D97
-	case 2, LilycoveCity_ContestLobby_EventScript_279E09
-	case 127, LilycoveCity_ContestLobby_EventScript_279E09
+	case 0, LilycoveCity_ContestLobby_EventScript_ChooseContestRank
+	case 1, LilycoveCity_ContestLobby_EventScript_ContestInfo
+	case 2, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_279D97:: @ 8279D97
-	message LilycoveCity_ContestLobby_Text_27AF5E
+LilycoveCity_ContestLobby_EventScript_ContestInfo:: @ 8279D97
+	message LilycoveCity_ContestLobby_Text_WhichTopic1
 	waitmessage
-	multichoice 0, 0, 3, 0
+	multichoice 0, 0, MULTI_CONTEST_INFO, 0
 	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_279DDF
-	case 1, LilycoveCity_ContestLobby_EventScript_279DED
-	case 2, LilycoveCity_ContestLobby_EventScript_279DFB
-	case 3, LilycoveCity_ContestLobby_EventScript_279D5A
-	case 127, LilycoveCity_ContestLobby_EventScript_279D5A
+	case 0, LilycoveCity_ContestLobby_EventScript_ExplainContests
+	case 1, LilycoveCity_ContestLobby_EventScript_ExplainContestTypes
+	case 2, LilycoveCity_ContestLobby_EventScript_ExplainContestRanks
+	case 3, LilycoveCity_ContestLobby_EventScript_AskEnterContest
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_AskEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_279DDF:: @ 8279DDF
-	msgbox LilycoveCity_ContestLobby_Text_27AF7A, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_279D97
+LilycoveCity_ContestLobby_EventScript_ExplainContests:: @ 8279DDF
+	msgbox LilycoveCity_ContestLobby_Text_ExplainContests, MSGBOX_DEFAULT
+	goto LilycoveCity_ContestLobby_EventScript_ContestInfo
 	end
 
-LilycoveCity_ContestLobby_EventScript_279DED:: @ 8279DED
-	msgbox LilycoveCity_ContestLobby_Text_27B17D, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_279D97
+LilycoveCity_ContestLobby_EventScript_ExplainContestTypes:: @ 8279DED
+	msgbox LilycoveCity_ContestLobby_Text_ExplainContestTypes, MSGBOX_DEFAULT
+	goto LilycoveCity_ContestLobby_EventScript_ContestInfo
 	end
 
-LilycoveCity_ContestLobby_EventScript_279DFB:: @ 8279DFB
-	msgbox LilycoveCity_ContestLobby_Text_27B221, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_279D97
+LilycoveCity_ContestLobby_EventScript_ExplainContestRanks:: @ 8279DFB
+	msgbox LilycoveCity_ContestLobby_Text_ExplainContestRanks, MSGBOX_DEFAULT
+	goto LilycoveCity_ContestLobby_EventScript_ContestInfo
 	end
 
-LilycoveCity_ContestLobby_EventScript_279E09:: @ 8279E09
-	msgbox LilycoveCity_ContestLobby_Text_27BD4F, MSGBOX_DEFAULT
+LilycoveCity_ContestLobby_EventScript_CancelEnterContest:: @ 8279E09
+	msgbox LilycoveCity_ContestLobby_Text_ParticipateAnotherTime, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_279E13:: @ 8279E13
-	msgbox LilycoveCity_ContestLobby_Text_27B44A, MSGBOX_DEFAULT
+LilycoveCity_ContestLobby_EventScript_ChooseContestMon:: @ 8279E13
+	msgbox LilycoveCity_ContestLobby_Text_EnterWhichPokemon1, MSGBOX_DEFAULT
 	choosecontestmon
 	compare VAR_0x8004, 255
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_279E09
-	special sub_80F7F30
-	compare VAR_RESULT, 0
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_279F12
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_279F87
-	compare VAR_RESULT, 2
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_279F45
-	compare VAR_RESULT, 3
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_279F69
-	compare VAR_RESULT, 4
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_279F78
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	special TryEnterContestMon
+	compare VAR_RESULT, CANT_ENTER_CONTEST
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
+	compare VAR_RESULT, CAN_ENTER_CONTEST_EQUAL_RANK
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_EnterMon
+	compare VAR_RESULT, CAN_ENTER_CONTEST_HIGH_RANK
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon
+	compare VAR_RESULT, CANT_ENTER_CONTEST_EGG
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterEgg
+	compare VAR_RESULT, CANT_ENTER_CONTEST_FAINTED
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterFainted
 	end
 
-LilycoveCity_ContestLobby_EventScript_279E62:: @ 8279E62
-	message LilycoveCity_ContestLobby_Text_27B3FF
+LilycoveCity_ContestLobby_EventScript_ChooseContestRank:: @ 8279E62
+	message LilycoveCity_ContestLobby_Text_EnterWhichRank
 	waitmessage
-	multichoice 0, 0, 82, 0
+	multichoice 0, 0, MULTI_CONTEST_RANK, 0
 	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_279EB5
-	case 1, LilycoveCity_ContestLobby_EventScript_279EC0
-	case 2, LilycoveCity_ContestLobby_EventScript_279ECB
-	case 3, LilycoveCity_ContestLobby_EventScript_279ED6
-	case 4, LilycoveCity_ContestLobby_EventScript_279E09
-	case 127, LilycoveCity_ContestLobby_EventScript_279E09
+	case 0, LilycoveCity_ContestLobby_EventScript_EnterNormalRank
+	case 1, LilycoveCity_ContestLobby_EventScript_EnterSuperRank
+	case 2, LilycoveCity_ContestLobby_EventScript_EnterHyperRank
+	case 3, LilycoveCity_ContestLobby_EventScript_EnterMasterRank
+	case 4, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	end
 
-LilycoveCity_ContestLobby_EventScript_279EB5:: @ 8279EB5
-	setvar VAR_CONTEST_RANK, 0
-	goto LilycoveCity_ContestLobby_EventScript_279EE1
+LilycoveCity_ContestLobby_EventScript_EnterNormalRank:: @ 8279EB5
+	setvar VAR_CONTEST_RANK, CONTEST_RANK_NORMAL
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
-LilycoveCity_ContestLobby_EventScript_279EC0:: @ 8279EC0
-	setvar VAR_CONTEST_RANK, 1
-	goto LilycoveCity_ContestLobby_EventScript_279EE1
+LilycoveCity_ContestLobby_EventScript_EnterSuperRank:: @ 8279EC0
+	setvar VAR_CONTEST_RANK, CONTEST_RANK_SUPER
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
-LilycoveCity_ContestLobby_EventScript_279ECB:: @ 8279ECB
-	setvar VAR_CONTEST_RANK, 2
-	goto LilycoveCity_ContestLobby_EventScript_279EE1
+LilycoveCity_ContestLobby_EventScript_EnterHyperRank:: @ 8279ECB
+	setvar VAR_CONTEST_RANK, CONTEST_RANK_HYPER
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
-LilycoveCity_ContestLobby_EventScript_279ED6:: @ 8279ED6
-	setvar VAR_CONTEST_RANK, 3
-	goto LilycoveCity_ContestLobby_EventScript_279EE1
+LilycoveCity_ContestLobby_EventScript_EnterMasterRank:: @ 8279ED6
+	setvar VAR_CONTEST_RANK, CONTEST_RANK_MASTER
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
-LilycoveCity_ContestLobby_EventScript_279EE1:: @ 8279EE1
-	message LilycoveCity_ContestLobby_Text_27B423
+@ The multichoice selection IDs are equal to the CATEGORY values
+@ So rather than list the cases they just copy VAR_RESULT for a valid selection into VAR_CONTEST_CATEGORY
+LilycoveCity_ContestLobby_EventScript_ChooseContestType:: @ 8279EE1
+	message LilycoveCity_ContestLobby_Text_EnterWhichContest1
 	waitmessage
-	multichoice 0, 0, 4, 0
+	multichoice 0, 0, MULTI_CONTEST_TYPE, 0
 	switch VAR_RESULT
-	case 5, LilycoveCity_ContestLobby_EventScript_279E09
-	case 127, LilycoveCity_ContestLobby_EventScript_279E09
+	case 5, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	copyvar VAR_CONTEST_CATEGORY, VAR_RESULT
-	goto LilycoveCity_ContestLobby_EventScript_279E13
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	end
 
-LilycoveCity_ContestLobby_EventScript_279F12:: @ 8279F12
-	msgbox LilycoveCity_ContestLobby_Text_27B471, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_279E13
+LilycoveCity_ContestLobby_EventScript_CantEnterLowRank:: @ 8279F12
+	msgbox LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank, MSGBOX_DEFAULT
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_279F21:: @ 8279F21
-	msgbox LilycoveCity_ContestLobby_Text_27B5C4, MSGBOX_YESNO
+@ Unused
+LilycoveCity_ContestLobby_EventScript_ConfirmEntry:: @ 8279F21
+	msgbox LilycoveCity_ContestLobby_Text_ConfirmContestMon, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_279E13
-	case 1, LilycoveCity_ContestLobby_EventScript_279F87
+	case NO, LilycoveCity_ContestLobby_EventScript_ChooseContestMon
+	case YES, LilycoveCity_ContestLobby_EventScript_EnterMon
 	end
 
-LilycoveCity_ContestLobby_EventScript_279F45:: @ 8279F45
-	msgbox LilycoveCity_ContestLobby_Text_27B547, MSGBOX_YESNO
+LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon:: @ 8279F45
+	msgbox LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_279E13
-	case 1, LilycoveCity_ContestLobby_EventScript_279F87
+	case NO, LilycoveCity_ContestLobby_EventScript_ChooseContestMon
+	case YES, LilycoveCity_ContestLobby_EventScript_EnterMon
 	end
 
-LilycoveCity_ContestLobby_EventScript_279F69:: @ 8279F69
-	msgbox LilycoveCity_ContestLobby_Text_27B4C4, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_279E13
+LilycoveCity_ContestLobby_EventScript_CantEnterEgg:: @ 8279F69
+	msgbox LilycoveCity_ContestLobby_Text_EggCannotTakePart, MSGBOX_DEFAULT
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_279F78:: @ 8279F78
-	msgbox LilycoveCity_ContestLobby_Text_27B501, MSGBOX_DEFAULT
-	goto LilycoveCity_ContestLobby_EventScript_279E13
+LilycoveCity_ContestLobby_EventScript_CantEnterFainted:: @ 8279F78
+	msgbox LilycoveCity_ContestLobby_Text_MonInNoConditionForContest, MSGBOX_DEFAULT
+	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_279F87:: @ 8279F87
-	msgbox LilycoveCity_ContestLobby_Text_27B5E2, MSGBOX_DEFAULT
+@ The return here is back to LilycoveCity_ContestLobby_EventScript_ContestReceptionist
+LilycoveCity_ContestLobby_EventScript_EnterMon:: @ 8279F87
+	msgbox LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4, MSGBOX_DEFAULT
 	closemessage
 	releaseall
-	setvar VAR_LINK_CONTEST_ROOM_STATE, 1
+	setvar VAR_CONTEST_HALL_STATE, 1
 	return
 
-LinkContestRoom1_EventScript_279F97:: @ 8279F97
-	special sub_80F90DC
+ContestHall_EventScript_DoContest:: @ 8279F97
+	special LinkContestTryShowWirelessIndicator
 	setvar VAR_0x8006, 0
 	lockall
-	applymovement 14, LinkContestRoom1_Movement_27AD43
+	applymovement 14, ContestHall_Movement_Player4FaceUp
 	waitmovement 0
-	applymovement 1, LinkContestRoom1_Movement_27AD09
+	applymovement 1, ContestHall_Movement_MCWalkDown
 	waitmovement 0
 	releaseall
-	call LinkContestRoom1_EventScript_27A133
-	call LinkContestRoom1_EventScript_279FF2
-	call LinkContestRoom1_EventScript_27A03C
-	call LinkContestRoom1_EventScript_27A097
-	call LinkContestRoom1_EventScript_27A0F5
-	call LinkContestRoom1_EventScript_27A801
-	call LinkContestRoom1_EventScript_27A8A5
-	call LinkContestRoom1_EventScript_27A987
-	call LinkContestRoom1_EventScript_27A9D4
-	call LinkContestRoom1_EventScript_27AA1B
-	call LinkContestRoom1_EventScript_27AB36
-	setvar VAR_LINK_CONTEST_ROOM_STATE, 2
+	call ContestHall_EventScript_TryWaitForLink
+	call ContestHall_EventScript_GetContestRankStringId
+	call ContestHall_EventScript_GetContestCategory
+	call ContestHall_EventScript_ContestGettingStarted
+	call ContestHall_EventScript_ShowContestMons
+	call ContestHall_EventScript_DoContestAppeals
+	call ContestHall_EventScript_ContestResults
+	call ContestHall_EventScript_GetWinnerObjEventId
+	call ContestHall_EventScript_CongratulateWinner
+	call ContestHall_EventScript_AudienceLookAround
+	call ContestHall_EventScript_GiveWinnerPrize
+	setvar VAR_CONTEST_HALL_STATE, 2
 	return
 
-LinkContestRoom1_EventScript_279FF2:: @ 8279FF2
+ContestHall_EventScript_GetContestRankStringId:: @ 8279FF2
 	switch VAR_CONTEST_RANK
-	case 0, LinkContestRoom1_EventScript_27A024
-	case 1, LinkContestRoom1_EventScript_27A02A
-	case 2, LinkContestRoom1_EventScript_27A030
-	case 3, LinkContestRoom1_EventScript_27A036
+	case CONTEST_RANK_NORMAL, ContestHall_EventScript_GetNormalStringId
+	case CONTEST_RANK_SUPER, ContestHall_EventScript_GetSuperStringId
+	case CONTEST_RANK_HYPER, ContestHall_EventScript_GetHyperStringId
+	case CONTEST_RANK_MASTER, ContestHall_EventScript_GetMasterStringId
 	return
 
-LinkContestRoom1_EventScript_27A024:: @ 827A024
-	setvar VAR_0x8009, 5
+ContestHall_EventScript_GetNormalStringId:: @ 827A024
+	setvar VAR_0x8009, STDSTRING_NORMAL
 	return
 
-LinkContestRoom1_EventScript_27A02A:: @ 827A02A
-	setvar VAR_0x8009, 6
+ContestHall_EventScript_GetSuperStringId:: @ 827A02A
+	setvar VAR_0x8009, STDSTRING_SUPER
 	return
 
-LinkContestRoom1_EventScript_27A030:: @ 827A030
-	setvar VAR_0x8009, 7
+ContestHall_EventScript_GetHyperStringId:: @ 827A030
+	setvar VAR_0x8009, STDSTRING_HYPER
 	return
 
-LinkContestRoom1_EventScript_27A036:: @ 827A036
-	setvar VAR_0x8009, 8
+ContestHall_EventScript_GetMasterStringId:: @ 827A036
+	setvar VAR_0x8009, STDSTRING_MASTER
 	return
 
-LinkContestRoom1_EventScript_27A03C:: @ 827A03C
+@ This whole switch is equivalent to copyvar VAR_0x8008, VAR_CONTEST_CATEGORY
+ContestHall_EventScript_GetContestCategory:: @ 827A03C
 	switch VAR_CONTEST_CATEGORY
-	case 0, LinkContestRoom1_EventScript_27A079
-	case 1, LinkContestRoom1_EventScript_27A07F
-	case 2, LinkContestRoom1_EventScript_27A085
-	case 3, LinkContestRoom1_EventScript_27A08B
-	case 4, LinkContestRoom1_EventScript_27A091
+	case CONTEST_CATEGORY_COOL, ContestHall_EventScript_GetCategoryCool
+	case CONTEST_CATEGORY_BEAUTY, ContestHall_EventScript_GetCategoryBeauty
+	case CONTEST_CATEGORY_CUTE, ContestHall_EventScript_GetCategoryCute
+	case CONTEST_CATEGORY_SMART, ContestHall_EventScript_GetCategorySmart
+	case CONTEST_CATEGORY_TOUGH, ContestHall_EventScript_GetCategoryTough
 	return
 
-LinkContestRoom1_EventScript_27A079:: @ 827A079
-	setvar VAR_0x8008, 0
+ContestHall_EventScript_GetCategoryCool:: @ 827A079
+	setvar VAR_0x8008, CONTEST_CATEGORY_COOL
 	return
 
-LinkContestRoom1_EventScript_27A07F:: @ 827A07F
-	setvar VAR_0x8008, 1
+ContestHall_EventScript_GetCategoryBeauty:: @ 827A07F
+	setvar VAR_0x8008, CONTEST_CATEGORY_BEAUTY
 	return
 
-LinkContestRoom1_EventScript_27A085:: @ 827A085
-	setvar VAR_0x8008, 2
+ContestHall_EventScript_GetCategoryCute:: @ 827A085
+	setvar VAR_0x8008, CONTEST_CATEGORY_CUTE
 	return
 
-LinkContestRoom1_EventScript_27A08B:: @ 827A08B
-	setvar VAR_0x8008, 3
+ContestHall_EventScript_GetCategorySmart:: @ 827A08B
+	setvar VAR_0x8008, CONTEST_CATEGORY_SMART
 	return
 
-LinkContestRoom1_EventScript_27A091:: @ 827A091
-	setvar VAR_0x8008, 4
+ContestHall_EventScript_GetCategoryTough:: @ 827A091
+	setvar VAR_0x8008, CONTEST_CATEGORY_TOUGH
 	return
 
-LinkContestRoom1_EventScript_27A097:: @ 827A097
-	buffercontesttypestring 1, 32776
+ContestHall_EventScript_ContestGettingStarted:: @ 827A097
+	buffercontesttypestring 1, VAR_0x8008
 	bufferstdstring 2, VAR_0x8009
-	call LinkContestRoom1_EventScript_27A0B1
+	call ContestHall_EventScript_GettingStarted
 	lockall
-	applymovement 1, LinkContestRoom1_Movement_27AD0B
+	applymovement 1, ContestHall_Movement_MCBackUp
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27A0B1:: @ 827A0B1
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A0C7
+ContestHall_EventScript_GettingStarted:: @ 827A0B1
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_GettingStartedLink
 	lockall
-	msgbox LinkContestRoom1_Text_27B711, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_GettingStartedParticipantsAsFollows, MSGBOX_DEFAULT
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27A0C7:: @ 827A0C7
-	specialvar VAR_RESULT, sub_80F9160
-	compare VAR_RESULT, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A0DE
-	messageautoscroll LinkContestRoom1_Text_27B78F
+ContestHall_EventScript_GettingStartedLink:: @ 827A0C7
+	specialvar VAR_RESULT, IsWirelessContest
+	compare VAR_RESULT, TRUE
+	goto_if_eq ContestHall_EventScript_GettingStartedWireless
+	messageautoscroll ContestHall_Text_GettingStartedParticipantsAsFollowsLink
 	waitmessage
 	return
 
-LinkContestRoom1_EventScript_27A0DE:: @ 827A0DE
-	messageautoscroll LinkContestRoom1_Text_27C929
+ContestHall_EventScript_GettingStartedWireless:: @ 827A0DE
+	messageautoscroll ContestHall_Text_GettingStartedWireless
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27C972
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_ParticipantsAsFollows
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
+	call ContestHall_EventScript_TryWaitForLink
 	return
 
-LinkContestRoom1_EventScript_27A0F5:: @ 827A0F5
-	call LinkContestRoom1_EventScript_27A149
-	call LinkContestRoom1_EventScript_27A1D2
-	call LinkContestRoom1_EventScript_27A34F
-	call LinkContestRoom1_EventScript_27A2D5
-	call LinkContestRoom1_EventScript_27A77A
-	call LinkContestRoom1_EventScript_27A133
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_ShowContestMons:: @ 827A0F5
+	call ContestHall_EventScript_ContestantWalkToCenter
+	call ContestHall_EventScript_ShowContestMonPic
+	call ContestHall_EventScript_AudienceHeartEmotes
+	call ContestHall_EventScript_AudienceReactToContestant
+	call ContestHall_EventScript_ContestantReturn
+	call ContestHall_EventScript_TryWaitForLink
+	call ContestHall_EventScript_TryWaitForLink
 	addvar VAR_0x8006, 1
-	compare VAR_0x8006, 4
-	goto_if_ne LinkContestRoom1_EventScript_27A0F5
-	call LinkContestRoom1_EventScript_27A230
+	compare VAR_0x8006, CONTESTANT_COUNT
+	goto_if_ne ContestHall_EventScript_ShowContestMons
+	call ContestHall_EventScript_AudienceVote
 	setvar VAR_TEMP_1, 6
 	return
 
-LinkContestRoom1_EventScript_27A133:: @ 827A133
-	specialvar VAR_RESULT, sub_80F9160
-	compare VAR_RESULT, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A144
+ContestHall_EventScript_TryWaitForLink:: @ 827A133
+	specialvar VAR_RESULT, IsWirelessContest
+	compare VAR_RESULT, TRUE
+	goto_if_eq ContestHall_EventScript_WaitForLink
 	return
 
-LinkContestRoom1_EventScript_27A144:: @ 827A144
-	special sub_80F905C
+ContestHall_EventScript_WaitForLink:: @ 827A144
+	special LinkContestWaitForConnection
 	waitstate
 	return
 
-LinkContestRoom1_EventScript_27A149:: @ 827A149
+ContestHall_EventScript_ContestantWalkToCenter:: @ 827A149
 	compare VAR_0x8006, 0
-	goto_if_eq LinkContestRoom1_EventScript_27A176
+	goto_if_eq ContestHall_EventScript_Player1WalkToCenter
 	compare VAR_0x8006, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A18D
+	goto_if_eq ContestHall_EventScript_Player2WalkToCenter
 	compare VAR_0x8006, 2
-	goto_if_eq LinkContestRoom1_EventScript_27A1A4
+	goto_if_eq ContestHall_EventScript_Player3WalkToCenter
 	compare VAR_0x8006, 3
-	goto_if_eq LinkContestRoom1_EventScript_27A1BB
+	goto_if_eq ContestHall_EventScript_Player4WalkToCenter
 	return
 
-LinkContestRoom1_EventScript_27A176:: @ 827A176
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player1WalkToCenter:: @ 827A176
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement 3, LinkContestRoom1_Movement_27AD52
+	applymovement 3, ContestHall_Movement_Player1WalkToCenter
 	waitmovement 0
 	releaseall
 	setvar VAR_0x800B, 3
 	return
 
-LinkContestRoom1_EventScript_27A18D:: @ 827A18D
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player2WalkToCenter:: @ 827A18D
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement 4, LinkContestRoom1_Movement_27AD5E
+	applymovement 4, ContestHall_Movement_Player2WalkToCenter
 	waitmovement 0
 	releaseall
 	setvar VAR_0x800B, 4
 	return
 
-LinkContestRoom1_EventScript_27A1A4:: @ 827A1A4
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player3WalkToCenter:: @ 827A1A4
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement 5, LinkContestRoom1_Movement_27AD66
+	applymovement 5, ContestHall_Movement_Player3WalkToCenter
 	waitmovement 0
 	releaseall
 	setvar VAR_0x800B, 5
 	return
 
-LinkContestRoom1_EventScript_27A1BB:: @ 827A1BB
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player4WalkToCenter:: @ 827A1BB
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement 14, LinkContestRoom1_Movement_27AD6E
+	applymovement 14, ContestHall_Movement_Player4WalkToCenter
 	waitmovement 0
 	releaseall
 	setvar VAR_0x800B, 14
 	return
 
-LinkContestRoom1_EventScript_27A1D2:: @ 827A1D2
-	special sub_80F8850
+ContestHall_EventScript_ShowContestMonPic:: @ 827A1D2
+	special BufferContestTrainerAndMonNames
 	addvar VAR_0x8006, 1
 	buffernumberstring 1, VAR_0x8006
 	lockall
-	applymovement VAR_0x800B, LinkContestRoom1_Movement_27AD20
+	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	waitmovement 0
 	releaseall
-	call LinkContestRoom1_EventScript_27A133
-	call LinkContestRoom1_EventScript_27AD80
-	addobject 13
+	call ContestHall_EventScript_TryWaitForLink
+	call ContestHall_EventScript_CheckIfContestWithRSPlayer
+	addobject 13  @ Place Poke Ball down
 	playse SE_DANSA
 	lockall
-	applymovement VAR_0x800B, LinkContestRoom1_Movement_27AD20
+	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	waitmovement 0
 	releaseall
-	addvar VAR_0x8006, 65535
+	addvar VAR_0x8006, -1
 	playse SE_BOWA2
 	special ShowContestEntryMonPic
-	call LinkContestRoom1_EventScript_27A217
+	call ContestHall_EventScript_EntryXTrainersMon
 	return
 
-LinkContestRoom1_EventScript_27A217:: @ 827A217
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A229
-	message LinkContestRoom1_Text_27B815
+ContestHall_EventScript_EntryXTrainersMon:: @ 827A217
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_EntryXTrainersMonLink
+	message ContestHall_Text_EntryXTrainersMon
 	waitmessage
 	return
 
-LinkContestRoom1_EventScript_27A229:: @ 827A229
-	messageautoscroll LinkContestRoom1_Text_27B815
+ContestHall_EventScript_EntryXTrainersMonLink:: @ 827A229
+	messageautoscroll ContestHall_Text_EntryXTrainersMon
 	waitmessage
 	return
 
-LinkContestRoom1_EventScript_27A230:: @ 827A230
-	call LinkContestRoom1_EventScript_27A26C
-	call LinkContestRoom1_EventScript_27A2B9
+ContestHall_EventScript_AudienceVote:: @ 827A230
+	call ContestHall_EventScript_AudienceWillVote
+	call ContestHall_EventScript_VotingUnderWay
 	playse SE_W227B
 	waitmessage
-	call LinkContestRoom1_EventScript_27AA1B
-	applymovement 1, LinkContestRoom1_Movement_27AD23
+	call ContestHall_EventScript_AudienceLookAround
+	applymovement 1, ContestHall_Movement_MCFaceJudge2
 	waitmovement 0
-	applymovement 2, LinkContestRoom1_Movement_27AD25
+	applymovement 2, ContestHall_Movement_JudgeFaceMC
 	waitmovement 0
 	delay 20
-	applymovement 1, LinkContestRoom1_Movement_27AD13
-	applymovement 2, LinkContestRoom1_Movement_27AD13
+	applymovement 1, ContestHall_Movement_FaceContestants
+	applymovement 2, ContestHall_Movement_FaceContestants
 	waitmovement 0
 	return
 
-LinkContestRoom1_EventScript_27A26C:: @ 827A26C
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A280
-	msgbox LinkContestRoom1_Text_27B830, MSGBOX_DEFAULT
+ContestHall_EventScript_AudienceWillVote:: @ 827A26C
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_AudienceWillVoteLink
+	msgbox ContestHall_Text_SeenContestantsAudienceWillVote, MSGBOX_DEFAULT
 	return
 
-LinkContestRoom1_EventScript_27A280:: @ 827A280
-	specialvar VAR_RESULT, sub_80F9160
-	compare VAR_RESULT, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A297
-	messageautoscroll LinkContestRoom1_Text_27B830
+ContestHall_EventScript_AudienceWillVoteLink:: @ 827A280
+	specialvar VAR_RESULT, IsWirelessContest
+	compare VAR_RESULT, TRUE
+	goto_if_eq ContestHall_EventScript_AudienceWillVoteWireless
+	messageautoscroll ContestHall_Text_SeenContestantsAudienceWillVote
 	waitmessage
 	return
 
-LinkContestRoom1_EventScript_27A297:: @ 827A297
-	messageautoscroll LinkContestRoom1_Text_27C9AF
+ContestHall_EventScript_AudienceWillVoteWireless:: @ 827A297
+	messageautoscroll ContestHall_Text_WeveSeenContestants
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27CA04
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_AudienceWillVote
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27CA42
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_LetVotingBegin
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
+	call ContestHall_EventScript_TryWaitForLink
 	return
 
-LinkContestRoom1_EventScript_27A2B9:: @ 827A2B9
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A2CA
-	message LinkContestRoom1_Text_27B8F2
+ContestHall_EventScript_VotingUnderWay:: @ 827A2B9
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_VotingUnderWayLink
+	message ContestHall_Text_VotingUnderWay
 	return
 
-LinkContestRoom1_EventScript_27A2CA:: @ 827A2CA
-	messageautoscroll LinkContestRoom1_Text_27B8F2
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_VotingUnderWayLink:: @ 827A2CA
+	messageautoscroll ContestHall_Text_VotingUnderWay
+	call ContestHall_EventScript_TryWaitForLink
 	return
 
-LinkContestRoom1_EventScript_27A2D5:: @ 827A2D5
-	call LinkContestRoom1_EventScript_27A133
-	applymovement 1, LinkContestRoom1_Movement_27AD33
+ContestHall_EventScript_AudienceReactToContestant:: @ 827A2D5
+	call ContestHall_EventScript_TryWaitForLink
+	applymovement 1, ContestHall_Movement_AudienceMemberLookLeft
 	waitmovement 0
 	playse SE_W227B
-	call LinkContestRoom1_EventScript_27AA6F
-	applymovement 9, LinkContestRoom1_Movement_27AD3B
-	applymovement 12, LinkContestRoom1_Movement_27AD3F
-	applymovement 7, LinkContestRoom1_Movement_27AD3B
+	call ContestHall_EventScript_VObjectAudienceLookAround
+	applymovement 9, ContestHall_Movement_AudienceMemberLookRight
+	applymovement 12, ContestHall_Movement_AudienceMemberLookDown
+	applymovement 7, ContestHall_Movement_AudienceMemberLookRight
 	waitmovement 0
-	applymovement 1, LinkContestRoom1_Movement_27AD3B
+	applymovement 1, ContestHall_Movement_AudienceMemberLookRight
 	waitmovement 0
-	applymovement 10, LinkContestRoom1_Movement_27AD33
-	applymovement 11, LinkContestRoom1_Movement_27AD3F
-	applymovement 6, LinkContestRoom1_Movement_27AD37
-	applymovement 8, LinkContestRoom1_Movement_27AD33
+	applymovement 10, ContestHall_Movement_AudienceMemberLookLeft
+	applymovement 11, ContestHall_Movement_AudienceMemberLookDown
+	applymovement 6, ContestHall_Movement_AudienceMemberLookUp
+	applymovement 8, ContestHall_Movement_AudienceMemberLookLeft
 	waitmovement 0
-	applymovement 1, LinkContestRoom1_Movement_27AD45
+	applymovement 1, ContestHall_Movement_MCLookAtJudge
 	waitmovement 0
-	applymovement 1, LinkContestRoom1_Movement_27AD4E
-	applymovement 2, LinkContestRoom1_Movement_27AD49
+	applymovement 1, ContestHall_Movement_MCWalkInPlaceDown
+	applymovement 2, ContestHall_Movement_JudgeLookAtMC
 	waitmovement 0
 	releaseall
-	call LinkContestRoom1_EventScript_27A133
+	call ContestHall_EventScript_TryWaitForLink
 	return
 
-LinkContestRoom1_EventScript_27A34F:: @ 827A34F
-	special sub_80F82FC
-	compare VAR_CONTEST_LOCATION, 1
-	call_if_eq LinkContestRoom1_EventScript_27A454
-	compare VAR_CONTEST_LOCATION, 2
-	call_if_eq LinkContestRoom1_EventScript_27A4B2
-	compare VAR_CONTEST_LOCATION, 3
-	call_if_eq LinkContestRoom1_EventScript_27A510
-	compare VAR_CONTEST_LOCATION, 4
-	call_if_eq LinkContestRoom1_EventScript_27A56E
-	compare VAR_CONTEST_LOCATION, 5
-	call_if_eq LinkContestRoom1_EventScript_27A5CC
+@ For below VAR_TEMP_0 is the number of heart emotes to try to display in the audience
+@ The number of hearts to try to display is based on the condition of the presented pokemon and the rank
+@ For each heart to display a random audience member is chosen, and a new one chosen if they already displayed a heart
+@ VAR_TEMP_1 through VAR_TEMP_8 represent each of the 8 audience members that are actual event objects
+@    and are set to 9 if they havent displayed a heart yet, and 1 if they have
+ContestHall_EventScript_AudienceHeartEmotes:: @ 827A34F
+	special GetContestMonCondition
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL
+	call_if_eq ContestHall_EventScript_GetNumberOfHeartsNormal
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER
+	call_if_eq ContestHall_EventScript_GetNumberOfHeartsSuper
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_HYPER
+	call_if_eq ContestHall_EventScript_GetNumberOfHeartsHyper
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_MASTER
+	call_if_eq ContestHall_EventScript_GetNumberOfHeartsMaster
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	call_if_eq ContestHall_EventScript_GetNumberOfHeartsLink
 	setvar VAR_TEMP_1, 9
 	setvar VAR_TEMP_2, 9
 	setvar VAR_TEMP_3, 9
@@ -502,7 +513,7 @@ LinkContestRoom1_EventScript_27A34F:: @ 827A34F
 	setvar VAR_TEMP_7, 9
 	setvar VAR_TEMP_8, 9
 	compare VAR_TEMP_0, 0
-	call_if_gt LinkContestRoom1_EventScript_27A3E5
+	call_if_gt ContestHall_EventScript_DisplayHearts
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0
@@ -513,800 +524,803 @@ LinkContestRoom1_EventScript_27A34F:: @ 827A34F
 	setvar VAR_TEMP_8, 0
 	return
 
-LinkContestRoom1_EventScript_27A3E5:: @ 827A3E5
+ContestHall_EventScript_DisplayHearts:: @ 827A3E5
 	setvar VAR_RESULT, 8
 	special ScriptRandom
 	compare VAR_RESULT, 0
-	call_if_eq LinkContestRoom1_EventScript_27A65A
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember1
 	compare VAR_RESULT, 1
-	call_if_eq LinkContestRoom1_EventScript_27A67E
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember2
 	compare VAR_RESULT, 2
-	call_if_eq LinkContestRoom1_EventScript_27A6A2
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember3
 	compare VAR_RESULT, 3
-	call_if_eq LinkContestRoom1_EventScript_27A6C6
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember4
 	compare VAR_RESULT, 4
-	call_if_eq LinkContestRoom1_EventScript_27A6EA
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember5
 	compare VAR_RESULT, 5
-	call_if_eq LinkContestRoom1_EventScript_27A70E
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember6
 	compare VAR_RESULT, 6
-	call_if_eq LinkContestRoom1_EventScript_27A732
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember7
 	compare VAR_RESULT, 7
-	call_if_eq LinkContestRoom1_EventScript_27A756
-	compare VAR_TEMP_0, 0
-	goto_if_gt LinkContestRoom1_EventScript_27A3E5
+	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember8
+	compare VAR_TEMP_0, 0  @ Still more hearts to display
+	goto_if_gt ContestHall_EventScript_DisplayHearts
 	waitmovement 0
 	return
 
-LinkContestRoom1_EventScript_27A454:: @ 827A454
+ContestHall_EventScript_GetNumberOfHeartsNormal:: @ 827A454
 	compare VAR_0x8004, 80
-	goto_if_gt LinkContestRoom1_EventScript_27A654
+	goto_if_gt ContestHall_EventScript_Set8Hearts
 	compare VAR_0x8004, 70
-	goto_if_gt LinkContestRoom1_EventScript_27A64E
+	goto_if_gt ContestHall_EventScript_Set7Hearts
 	compare VAR_0x8004, 60
-	goto_if_gt LinkContestRoom1_EventScript_27A648
+	goto_if_gt ContestHall_EventScript_Set6Hearts
 	compare VAR_0x8004, 50
-	goto_if_gt LinkContestRoom1_EventScript_27A642
+	goto_if_gt ContestHall_EventScript_Set5Hearts
 	compare VAR_0x8004, 40
-	goto_if_gt LinkContestRoom1_EventScript_27A63C
+	goto_if_gt ContestHall_EventScript_Set4Hearts
 	compare VAR_0x8004, 30
-	goto_if_gt LinkContestRoom1_EventScript_27A636
+	goto_if_gt ContestHall_EventScript_Set3Hearts
 	compare VAR_0x8004, 20
-	goto_if_gt LinkContestRoom1_EventScript_27A630
+	goto_if_gt ContestHall_EventScript_Set2Hearts
 	compare VAR_0x8004, 10
-	goto_if_gt LinkContestRoom1_EventScript_27A62A
+	goto_if_gt ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-LinkContestRoom1_EventScript_27A4B2:: @ 827A4B2
+ContestHall_EventScript_GetNumberOfHeartsSuper:: @ 827A4B2
 	compare VAR_0x8004, 230
-	goto_if_gt LinkContestRoom1_EventScript_27A654
+	goto_if_gt ContestHall_EventScript_Set8Hearts
 	compare VAR_0x8004, 210
-	goto_if_gt LinkContestRoom1_EventScript_27A64E
+	goto_if_gt ContestHall_EventScript_Set7Hearts
 	compare VAR_0x8004, 190
-	goto_if_gt LinkContestRoom1_EventScript_27A648
+	goto_if_gt ContestHall_EventScript_Set6Hearts
 	compare VAR_0x8004, 170
-	goto_if_gt LinkContestRoom1_EventScript_27A642
+	goto_if_gt ContestHall_EventScript_Set5Hearts
 	compare VAR_0x8004, 150
-	goto_if_gt LinkContestRoom1_EventScript_27A63C
+	goto_if_gt ContestHall_EventScript_Set4Hearts
 	compare VAR_0x8004, 130
-	goto_if_gt LinkContestRoom1_EventScript_27A636
+	goto_if_gt ContestHall_EventScript_Set3Hearts
 	compare VAR_0x8004, 110
-	goto_if_gt LinkContestRoom1_EventScript_27A630
+	goto_if_gt ContestHall_EventScript_Set2Hearts
 	compare VAR_0x8004, 90
-	goto_if_gt LinkContestRoom1_EventScript_27A62A
+	goto_if_gt ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-LinkContestRoom1_EventScript_27A510:: @ 827A510
+ContestHall_EventScript_GetNumberOfHeartsHyper:: @ 827A510
 	compare VAR_0x8004, 380
-	goto_if_gt LinkContestRoom1_EventScript_27A654
+	goto_if_gt ContestHall_EventScript_Set8Hearts
 	compare VAR_0x8004, 350
-	goto_if_gt LinkContestRoom1_EventScript_27A64E
+	goto_if_gt ContestHall_EventScript_Set7Hearts
 	compare VAR_0x8004, 320
-	goto_if_gt LinkContestRoom1_EventScript_27A648
+	goto_if_gt ContestHall_EventScript_Set6Hearts
 	compare VAR_0x8004, 290
-	goto_if_gt LinkContestRoom1_EventScript_27A642
+	goto_if_gt ContestHall_EventScript_Set5Hearts
 	compare VAR_0x8004, 260
-	goto_if_gt LinkContestRoom1_EventScript_27A63C
+	goto_if_gt ContestHall_EventScript_Set4Hearts
 	compare VAR_0x8004, 230
-	goto_if_gt LinkContestRoom1_EventScript_27A636
+	goto_if_gt ContestHall_EventScript_Set3Hearts
 	compare VAR_0x8004, 200
-	goto_if_gt LinkContestRoom1_EventScript_27A630
+	goto_if_gt ContestHall_EventScript_Set2Hearts
 	compare VAR_0x8004, 170
-	goto_if_gt LinkContestRoom1_EventScript_27A62A
+	goto_if_gt ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-LinkContestRoom1_EventScript_27A56E:: @ 827A56E
+ContestHall_EventScript_GetNumberOfHeartsMaster:: @ 827A56E
 	compare VAR_0x8004, 600
-	goto_if_gt LinkContestRoom1_EventScript_27A654
+	goto_if_gt ContestHall_EventScript_Set8Hearts
 	compare VAR_0x8004, 560
-	goto_if_gt LinkContestRoom1_EventScript_27A64E
+	goto_if_gt ContestHall_EventScript_Set7Hearts
 	compare VAR_0x8004, 520
-	goto_if_gt LinkContestRoom1_EventScript_27A648
+	goto_if_gt ContestHall_EventScript_Set6Hearts
 	compare VAR_0x8004, 480
-	goto_if_gt LinkContestRoom1_EventScript_27A642
+	goto_if_gt ContestHall_EventScript_Set5Hearts
 	compare VAR_0x8004, 440
-	goto_if_gt LinkContestRoom1_EventScript_27A63C
+	goto_if_gt ContestHall_EventScript_Set4Hearts
 	compare VAR_0x8004, 400
-	goto_if_gt LinkContestRoom1_EventScript_27A636
+	goto_if_gt ContestHall_EventScript_Set3Hearts
 	compare VAR_0x8004, 360
-	goto_if_gt LinkContestRoom1_EventScript_27A630
+	goto_if_gt ContestHall_EventScript_Set2Hearts
 	compare VAR_0x8004, 320
-	goto_if_gt LinkContestRoom1_EventScript_27A62A
+	goto_if_gt ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-LinkContestRoom1_EventScript_27A5CC:: @ 827A5CC
+ContestHall_EventScript_GetNumberOfHeartsLink:: @ 827A5CC
 	compare VAR_0x8004, 600
-	goto_if_gt LinkContestRoom1_EventScript_27A654
+	goto_if_gt ContestHall_EventScript_Set8Hearts
 	compare VAR_0x8004, 550
-	goto_if_gt LinkContestRoom1_EventScript_27A64E
+	goto_if_gt ContestHall_EventScript_Set7Hearts
 	compare VAR_0x8004, 500
-	goto_if_gt LinkContestRoom1_EventScript_27A648
+	goto_if_gt ContestHall_EventScript_Set6Hearts
 	compare VAR_0x8004, 450
-	goto_if_gt LinkContestRoom1_EventScript_27A642
+	goto_if_gt ContestHall_EventScript_Set5Hearts
 	compare VAR_0x8004, 400
-	goto_if_gt LinkContestRoom1_EventScript_27A63C
+	goto_if_gt ContestHall_EventScript_Set4Hearts
 	compare VAR_0x8004, 300
-	goto_if_gt LinkContestRoom1_EventScript_27A636
+	goto_if_gt ContestHall_EventScript_Set3Hearts
 	compare VAR_0x8004, 200
-	goto_if_gt LinkContestRoom1_EventScript_27A630
+	goto_if_gt ContestHall_EventScript_Set2Hearts
 	compare VAR_0x8004, 100
-	goto_if_gt LinkContestRoom1_EventScript_27A62A
+	goto_if_gt ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
-LinkContestRoom1_EventScript_27A62A:: @ 827A62A
+ContestHall_EventScript_Set1Heart:: @ 827A62A
 	setvar VAR_TEMP_0, 1
 	return
 
-LinkContestRoom1_EventScript_27A630:: @ 827A630
+ContestHall_EventScript_Set2Hearts:: @ 827A630
 	setvar VAR_TEMP_0, 2
 	return
 
-LinkContestRoom1_EventScript_27A636:: @ 827A636
+ContestHall_EventScript_Set3Hearts:: @ 827A636
 	setvar VAR_TEMP_0, 3
 	return
 
-LinkContestRoom1_EventScript_27A63C:: @ 827A63C
+ContestHall_EventScript_Set4Hearts:: @ 827A63C
 	setvar VAR_TEMP_0, 4
 	return
 
-LinkContestRoom1_EventScript_27A642:: @ 827A642
+ContestHall_EventScript_Set5Hearts:: @ 827A642
 	setvar VAR_TEMP_0, 5
 	return
 
-LinkContestRoom1_EventScript_27A648:: @ 827A648
+ContestHall_EventScript_Set6Hearts:: @ 827A648
 	setvar VAR_TEMP_0, 6
 	return
 
-LinkContestRoom1_EventScript_27A64E:: @ 827A64E
+ContestHall_EventScript_Set7Hearts:: @ 827A64E
 	setvar VAR_TEMP_0, 7
 	return
 
-LinkContestRoom1_EventScript_27A654:: @ 827A654
+ContestHall_EventScript_Set8Hearts:: @ 827A654
 	setvar VAR_TEMP_0, 8
 	return
 
-LinkContestRoom1_EventScript_27A65A:: @ 827A65A
+ContestHall_EventScript_TryDisplayHeartAudienceMember1:: @ 827A65A
 	compare VAR_TEMP_1, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A67D
-	applymovement 6, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_AudienceMember1AlreadyEmoted
+	applymovement 6, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_1, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A67D:: @ 827A67D
+ContestHall_EventScript_AudienceMember1AlreadyEmoted:: @ 827A67D
 	return
 
-LinkContestRoom1_EventScript_27A67E:: @ 827A67E
+ContestHall_EventScript_TryDisplayHeartAudienceMember2:: @ 827A67E
 	compare VAR_TEMP_2, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A6A1
-	applymovement 12, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_AudienceMember2AlreadyEmoted
+	applymovement 12, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_2, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A6A1:: @ 827A6A1
+ContestHall_EventScript_AudienceMember2AlreadyEmoted:: @ 827A6A1
 	return
 
-LinkContestRoom1_EventScript_27A6A2:: @ 827A6A2
+ContestHall_EventScript_TryDisplayHeartAudienceMember3:: @ 827A6A2
 	compare VAR_TEMP_3, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A6C5
-	applymovement 7, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_AudienceMember3AlreadyEmoted
+	applymovement 7, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_3, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A6C5:: @ 827A6C5
+ContestHall_EventScript_AudienceMember3AlreadyEmoted:: @ 827A6C5
 	return
 
-LinkContestRoom1_EventScript_27A6C6:: @ 827A6C6
+ContestHall_EventScript_TryDisplayHeartAudienceMember4:: @ 827A6C6
 	compare VAR_TEMP_4, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A6E9
-	applymovement 8, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_Audience4MemberAlreadyEmoted
+	applymovement 8, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_4, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A6E9:: @ 827A6E9
+ContestHall_EventScript_Audience4MemberAlreadyEmoted:: @ 827A6E9
 	return
 
-LinkContestRoom1_EventScript_27A6EA:: @ 827A6EA
+ContestHall_EventScript_TryDisplayHeartAudienceMember5:: @ 827A6EA
 	compare VAR_TEMP_5, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A70D
-	applymovement 9, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_AudienceMember5AlreadyEmoted
+	applymovement 9, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_5, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A70D:: @ 827A70D
+ContestHall_EventScript_AudienceMember5AlreadyEmoted:: @ 827A70D
 	return
 
-LinkContestRoom1_EventScript_27A70E:: @ 827A70E
+ContestHall_EventScript_TryDisplayHeartAudienceMember6:: @ 827A70E
 	compare VAR_TEMP_6, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A731
-	applymovement 10, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_AudienceMember6AlreadyEmoted
+	applymovement 10, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_6, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A731:: @ 827A731
+ContestHall_EventScript_AudienceMember6AlreadyEmoted:: @ 827A731
 	return
 
-LinkContestRoom1_EventScript_27A732:: @ 827A732
+ContestHall_EventScript_TryDisplayHeartAudienceMember7:: @ 827A732
 	compare VAR_TEMP_7, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A755
-	applymovement 11, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_AudienceMember7AlreadyEmoted
+	applymovement 11, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_7, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A755:: @ 827A755
+ContestHall_EventScript_AudienceMember7AlreadyEmoted:: @ 827A755
 	return
 
-LinkContestRoom1_EventScript_27A756:: @ 827A756
+ContestHall_EventScript_TryDisplayHeartAudienceMember8:: @ 827A756
 	compare VAR_TEMP_8, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A779
-	applymovement 15, LinkContestRoom1_Movement_27AD11
+	goto_if_eq ContestHall_EventScript_AudienceMember8AlreadyEmoted
+	applymovement 15, ContestHall_Movement_Heart
 	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_8, 1
-	addvar VAR_TEMP_0, 65535
+	addvar VAR_TEMP_0, -1
 	return
 
-LinkContestRoom1_EventScript_27A779:: @ 827A779
+ContestHall_EventScript_AudienceMember8AlreadyEmoted:: @ 827A779
 	return
 
-LinkContestRoom1_EventScript_27A77A:: @ 827A77A
+ContestHall_EventScript_ContestantReturn:: @ 827A77A
 	closemessage
 	release
-	removeobject 13
-	special sub_80F8EB8
-	call LinkContestRoom1_EventScript_27A133
+	removeobject 13  @ Poke Ball
+	special HideContestEntryMonPic
+	call ContestHall_EventScript_TryWaitForLink
 	switch VAR_0x8006
-	case 0, LinkContestRoom1_EventScript_27A7B9
-	case 1, LinkContestRoom1_EventScript_27A7CB
-	case 2, LinkContestRoom1_EventScript_27A7DD
-	case 3, LinkContestRoom1_EventScript_27A7EF
+	case 0, ContestHall_EventScript_Player1WalkBack
+	case 1, ContestHall_EventScript_Player2WalkBack
+	case 2, ContestHall_EventScript_Player3WalkBack
+	case 3, ContestHall_EventScript_Player4WalkBack
 	return
 
-LinkContestRoom1_EventScript_27A7B9:: @ 827A7B9
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player1WalkBack:: @ 827A7B9
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, LinkContestRoom1_Movement_27AD58
+	applymovement VAR_0x800B, ContestHall_Movement_Player1WalkBack
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27A7CB:: @ 827A7CB
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player2WalkBack:: @ 827A7CB
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, LinkContestRoom1_Movement_27AD62
+	applymovement VAR_0x800B, ContestHall_Movement_Player2WalkBack
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27A7DD:: @ 827A7DD
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player3WalkBack:: @ 827A7DD
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, LinkContestRoom1_Movement_27AD6A
+	applymovement VAR_0x800B, ContestHall_Movement_Player3WalkBack
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27A7EF:: @ 827A7EF
-	call LinkContestRoom1_EventScript_27A133
+ContestHall_EventScript_Player4WalkBack:: @ 827A7EF
+	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, LinkContestRoom1_Movement_27AD74
+	applymovement VAR_0x800B, ContestHall_Movement_Player4WalkBack
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27A801:: @ 827A801
+ContestHall_EventScript_DoContestAppeals:: @ 827A801
 	lockall
-	applymovement 1, LinkContestRoom1_Movement_27AD27
+	applymovement 1, ContestHall_Movement_FaceContestants2
 	waitmovement 0
-	call LinkContestRoom1_EventScript_27A133
-	call LinkContestRoom1_EventScript_27A853
+	call ContestHall_EventScript_TryWaitForLink
+	call ContestHall_EventScript_LetsAppeal
 	waitmessage
-	applymovement 1, LinkContestRoom1_Movement_27AD15
-	applymovement 2, LinkContestRoom1_Movement_27AD19
+	applymovement 1, ContestHall_Movement_WalkStageLeft
+	applymovement 2, ContestHall_Movement_WalkStageRight
 	waitmovement 0
 	releaseall
-	call LinkContestRoom1_EventScript_27A133
+	call ContestHall_EventScript_TryWaitForLink
 	setvar VAR_TEMP_9, 1
-	special sub_80F910C
+	special LinkContestTryHideWirelessIndicator
 	startcontest
-	special sub_80F90DC
+	special LinkContestTryShowWirelessIndicator
 	setvar VAR_TEMP_9, 0
 	lockall
-	applymovement 1, LinkContestRoom1_Movement_27AD19
-	applymovement 2, LinkContestRoom1_Movement_27AD15
+	applymovement 1, ContestHall_Movement_WalkStageRight
+	applymovement 2, ContestHall_Movement_WalkStageLeft
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27A853:: @ 827A853
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A867
-	msgbox LinkContestRoom1_Text_27B904, MSGBOX_DEFAULT
+ContestHall_EventScript_LetsAppeal:: @ 827A853
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_LetsAppealLink
+	msgbox ContestHall_Text_VotingCompleteLetsAppeal, MSGBOX_DEFAULT
 	return
 
-LinkContestRoom1_EventScript_27A867:: @ 827A867
-	specialvar VAR_RESULT, sub_80F9160
-	compare VAR_RESULT, 1
-	goto_if_eq LinkContestRoom1_EventScript_27A87E
-	messageautoscroll LinkContestRoom1_Text_27B904
+ContestHall_EventScript_LetsAppealLink:: @ 827A867
+	specialvar VAR_RESULT, IsWirelessContest
+	compare VAR_RESULT, TRUE
+	goto_if_eq ContestHall_EventScript_LetsAppealWireless
+	messageautoscroll ContestHall_Text_VotingCompleteLetsAppeal
 	waitmessage
 	return
 
-LinkContestRoom1_EventScript_27A87E:: @ 827A87E
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27CA71
+ContestHall_EventScript_LetsAppealWireless:: @ 827A87E
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_VotingComplete
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27CAD0
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_SecondStageOfJudging
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27CB55
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_LetsAppeal
 	waitmessage
-	call LinkContestRoom1_EventScript_27A133
+	call ContestHall_EventScript_TryWaitForLink
 	return
 
-LinkContestRoom1_EventScript_27A8A5:: @ 827A8A5
-	call LinkContestRoom1_EventScript_27A133
-	call LinkContestRoom1_EventScript_27A8FB
-	call LinkContestRoom1_EventScript_27A133
-	call LinkContestRoom1_EventScript_27A91E
-	call LinkContestRoom1_EventScript_27A133
-	applymovement 1, LinkContestRoom1_Movement_27AD0F
+ContestHall_EventScript_ContestResults:: @ 827A8A5
+	call ContestHall_EventScript_TryWaitForLink
+	call ContestHall_EventScript_ThatsItForJudging
+	call ContestHall_EventScript_TryWaitForLink
+	call ContestHall_EventScript_ThankYouForAppeals
+	call ContestHall_EventScript_TryWaitForLink
+	applymovement 1, ContestHall_Movement_MCFaceJudge
 	waitmovement 0
-	call LinkContestRoom1_EventScript_27A941
-	call LinkContestRoom1_EventScript_27A133
-	call LinkContestRoom1_EventScript_27A964
-	call LinkContestRoom1_EventScript_27A133
-	applymovement 1, LinkContestRoom1_Movement_27AD13
+	call ContestHall_EventScript_JudgeLooksReady
+	call ContestHall_EventScript_TryWaitForLink
+	call ContestHall_EventScript_WeWillDeclareWinner
+	call ContestHall_EventScript_TryWaitForLink
+	applymovement 1, ContestHall_Movement_FaceContestants
 	waitmovement 0
 	closemessage
 	releaseall
-	special sub_80F910C
+	special LinkContestTryHideWirelessIndicator
 	setvar VAR_TEMP_9, 1
 	showcontestresults
 	setvar VAR_TEMP_9, 0
 	playbgm MUS_CON_FAN, 0
 	return
 
-LinkContestRoom1_EventScript_27A8FB:: @ 827A8FB
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A90F
-	msgbox LinkContestRoom1_Text_27BA15, MSGBOX_DEFAULT
+ContestHall_EventScript_ThatsItForJudging:: @ 827A8FB
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_ThatsItForJudgingLink
+	msgbox ContestHall_Text_ThatsItForJudging, MSGBOX_DEFAULT
 	return
 
-LinkContestRoom1_EventScript_27A90F:: @ 827A90F
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27BA15
+ContestHall_EventScript_ThatsItForJudgingLink:: @ 827A90F
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_ThatsItForJudging
 	waitmessage
 	delay 30
 	return
 
-LinkContestRoom1_EventScript_27A91E:: @ 827A91E
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A932
-	msgbox LinkContestRoom1_Text_27BA30, MSGBOX_DEFAULT
+ContestHall_EventScript_ThankYouForAppeals:: @ 827A91E
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_ThankYouForAppealsLink
+	msgbox ContestHall_Text_ThankYouForAppeals, MSGBOX_DEFAULT
 	return
 
-LinkContestRoom1_EventScript_27A932:: @ 827A932
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27BA30
+ContestHall_EventScript_ThankYouForAppealsLink:: @ 827A932
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_ThankYouForAppeals
 	waitmessage
 	delay 30
 	return
 
-LinkContestRoom1_EventScript_27A941:: @ 827A941
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A955
-	msgbox LinkContestRoom1_Text_27BAAC, MSGBOX_DEFAULT
+ContestHall_EventScript_JudgeLooksReady:: @ 827A941
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_JudgeLooksReadyLink
+	msgbox ContestHall_Text_JudgeLooksReady, MSGBOX_DEFAULT
 	return
 
-LinkContestRoom1_EventScript_27A955:: @ 827A955
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27BAAC
+ContestHall_EventScript_JudgeLooksReadyLink:: @ 827A955
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_JudgeLooksReady
 	waitmessage
 	delay 30
 	return
 
-LinkContestRoom1_EventScript_27A964:: @ 827A964
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27A978
-	msgbox LinkContestRoom1_Text_27BB25, MSGBOX_DEFAULT
+ContestHall_EventScript_WeWillDeclareWinner:: @ 827A964
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_WeWillDeclareWinnerLink
+	msgbox ContestHall_Text_WeWillNowDeclareWinner, MSGBOX_DEFAULT
 	return
 
-LinkContestRoom1_EventScript_27A978:: @ 827A978
-	call LinkContestRoom1_EventScript_27A133
-	messageautoscroll LinkContestRoom1_Text_27BB25
+ContestHall_EventScript_WeWillDeclareWinnerLink:: @ 827A978
+	call ContestHall_EventScript_TryWaitForLink
+	messageautoscroll ContestHall_Text_WeWillNowDeclareWinner
 	waitmessage
 	delay 30
 	return
 
-LinkContestRoom1_EventScript_27A987:: @ 827A987
-	special sub_80F831C
+ContestHall_EventScript_GetWinnerObjEventId:: @ 827A987
+	special GetContestWinnerId
 	switch VAR_0x8005
-	case 0, LinkContestRoom1_EventScript_27A9BC
-	case 1, LinkContestRoom1_EventScript_27A9C2
-	case 2, LinkContestRoom1_EventScript_27A9C8
-	case 3, LinkContestRoom1_EventScript_27A9CE
+	case 0, ContestHall_EventScript_GetPlayer1ObjEventId
+	case 1, ContestHall_EventScript_GetPlayer2ObjEventId
+	case 2, ContestHall_EventScript_GetPlayer3ObjEventId
+	case 3, ContestHall_EventScript_GetPlayer4ObjEventId
 	return
 
-LinkContestRoom1_EventScript_27A9BC:: @ 827A9BC
+ContestHall_EventScript_GetPlayer1ObjEventId:: @ 827A9BC
 	setvar VAR_TEMP_3, 3
 	return
 
-LinkContestRoom1_EventScript_27A9C2:: @ 827A9C2
+ContestHall_EventScript_GetPlayer2ObjEventId:: @ 827A9C2
 	setvar VAR_TEMP_3, 4
 	return
 
-LinkContestRoom1_EventScript_27A9C8:: @ 827A9C8
+ContestHall_EventScript_GetPlayer3ObjEventId:: @ 827A9C8
 	setvar VAR_TEMP_3, 5
 	return
 
-LinkContestRoom1_EventScript_27A9CE:: @ 827A9CE
+ContestHall_EventScript_GetPlayer4ObjEventId:: @ 827A9CE
 	setvar VAR_TEMP_3, 14
 	return
 
-LinkContestRoom1_EventScript_27A9D4:: @ 827A9D4
-	special sub_80F834C
-	special sub_80F8390
+ContestHall_EventScript_CongratulateWinner:: @ 827A9D4
+	special BufferContestWinnerTrainerName
+	special BufferContestWinnerMonName
 	addvar VAR_0x8005, 1
 	buffernumberstring 1, VAR_0x8005
-	addvar VAR_0x8005, 65535
-	call LinkContestRoom1_EventScript_27AA00
-	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD1D
+	addvar VAR_0x8005, -1
+	call ContestHall_EventScript_CongratsWinner
+	applymovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp
 	waitmovement 0
 	playse SE_W227B
 	setvar VAR_TEMP_1, 0
 	return
 
-LinkContestRoom1_EventScript_27AA00:: @ 827AA00
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27AA14
-	msgbox LinkContestRoom1_Text_27BB4C, MSGBOX_DEFAULT
+ContestHall_EventScript_CongratsWinner:: @ 827AA00
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_CongratsWinnerLink
+	msgbox ContestHall_Text_CongratsTrainerXandMon, MSGBOX_DEFAULT
 	return
 
-LinkContestRoom1_EventScript_27AA14:: @ 827AA14
-	messageautoscroll LinkContestRoom1_Text_27BB4C
+ContestHall_EventScript_CongratsWinnerLink:: @ 827AA14
+	messageautoscroll ContestHall_Text_CongratsTrainerXandMon
 	waitmessage
 	return
 
-LinkContestRoom1_EventScript_27AA1B:: @ 827AA1B
+ContestHall_EventScript_AudienceLookAround:: @ 827AA1B
 	addvar VAR_TEMP_1, 1
 	lockall
-	compare VAR_CONTEST_LOCATION, 1
-	call_if_gt LinkContestRoom1_EventScript_27AA6F
-	applymovement 9, LinkContestRoom1_Movement_27AD3B
-	applymovement 12, LinkContestRoom1_Movement_27AD3F
-	applymovement 7, LinkContestRoom1_Movement_27AD3B
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL
+	call_if_gt ContestHall_EventScript_VObjectAudienceLookAround
+	applymovement 9, ContestHall_Movement_AudienceMemberLookRight
+	applymovement 12, ContestHall_Movement_AudienceMemberLookDown
+	applymovement 7, ContestHall_Movement_AudienceMemberLookRight
 	delay 30
-	applymovement 10, LinkContestRoom1_Movement_27AD33
-	applymovement 11, LinkContestRoom1_Movement_27AD3F
-	applymovement 6, LinkContestRoom1_Movement_27AD37
-	applymovement 8, LinkContestRoom1_Movement_27AD33
+	applymovement 10, ContestHall_Movement_AudienceMemberLookLeft
+	applymovement 11, ContestHall_Movement_AudienceMemberLookDown
+	applymovement 6, ContestHall_Movement_AudienceMemberLookUp
+	applymovement 8, ContestHall_Movement_AudienceMemberLookLeft
 	compare VAR_TEMP_1, 4
-	goto_if_ne LinkContestRoom1_EventScript_27AA1B
+	goto_if_ne ContestHall_EventScript_AudienceLookAround
 	delay 30
 	return
 
-LinkContestRoom1_EventScript_27AA6F:: @ 827AA6F
-	turnvobject 0, 1
-	turnvobject 2, 1
-	turnvobject 4, 4
-	turnvobject 6, 1
-	turnvobject 8, 1
-	turnvobject 10, 1
-	turnvobject 12, 1
-	turnvobject 14, 1
-	turnvobject 16, 1
-	turnvobject 18, 1
-	turnvobject 20, 4
-	turnvobject 22, 4
-	turnvobject 25, 4
-	turnvobject 27, 3
-	turnvobject 28, 4
+ContestHall_EventScript_VObjectAudienceLookAround:: @ 827AA6F
+	turnvobject 0, DIR_SOUTH
+	turnvobject 2, DIR_SOUTH
+	turnvobject 4, DIR_EAST
+	turnvobject 6, DIR_SOUTH
+	turnvobject 8, DIR_SOUTH
+	turnvobject 10, DIR_SOUTH
+	turnvobject 12, DIR_SOUTH
+	turnvobject 14, DIR_SOUTH
+	turnvobject 16, DIR_SOUTH
+	turnvobject 18, DIR_SOUTH
+	turnvobject 20, DIR_EAST
+	turnvobject 22, DIR_EAST
+	turnvobject 25, DIR_EAST
+	turnvobject 27, DIR_WEST
+	turnvobject 28, DIR_EAST
 	delay 10
-	turnvobject 0, 4
-	turnvobject 2, 4
-	turnvobject 4, 4
-	turnvobject 6, 4
-	turnvobject 8, 4
-	turnvobject 10, 3
-	turnvobject 12, 3
-	turnvobject 14, 3
-	turnvobject 16, 3
-	turnvobject 18, 3
-	turnvobject 20, 1
-	turnvobject 22, 1
-	turnvobject 25, 2
-	turnvobject 27, 2
-	turnvobject 28, 2
+	turnvobject 0, DIR_EAST
+	turnvobject 2, DIR_EAST
+	turnvobject 4, DIR_EAST
+	turnvobject 6, DIR_EAST
+	turnvobject 8, DIR_EAST
+	turnvobject 10, DIR_WEST
+	turnvobject 12, DIR_WEST
+	turnvobject 14, DIR_WEST
+	turnvobject 16, DIR_WEST
+	turnvobject 18, DIR_WEST
+	turnvobject 20, DIR_SOUTH
+	turnvobject 22, DIR_SOUTH
+	turnvobject 25, DIR_NORTH
+	turnvobject 27, DIR_NORTH
+	turnvobject 28, DIR_NORTH
 	delay 10
-	turnvobject 1, 2
-	turnvobject 3, 2
-	turnvobject 5, 2
-	turnvobject 7, 2
-	turnvobject 9, 4
-	turnvobject 11, 2
-	turnvobject 15, 2
-	turnvobject 13, 2
-	turnvobject 17, 2
-	turnvobject 19, 2
-	turnvobject 21, 3
-	turnvobject 23, 3
-	turnvobject 24, 3
-	turnvobject 26, 4
-	turnvobject 29, 3
-	turnvobject 30, 3
+	turnvobject 1, DIR_NORTH
+	turnvobject 3, DIR_NORTH
+	turnvobject 5, DIR_NORTH
+	turnvobject 7, DIR_NORTH
+	turnvobject 9, DIR_EAST
+	turnvobject 11, DIR_NORTH
+	turnvobject 15, DIR_NORTH
+	turnvobject 13, DIR_NORTH
+	turnvobject 17, DIR_NORTH
+	turnvobject 19, DIR_NORTH
+	turnvobject 21, DIR_WEST
+	turnvobject 23, DIR_WEST
+	turnvobject 24, DIR_WEST
+	turnvobject 26, DIR_EAST
+	turnvobject 29, DIR_WEST
+	turnvobject 30, DIR_WEST
 	delay 10
-	turnvobject 1, 4
-	turnvobject 3, 4
-	turnvobject 5, 4
-	turnvobject 7, 4
-	turnvobject 9, 4
-	turnvobject 11, 3
-	turnvobject 15, 3
-	turnvobject 13, 3
-	turnvobject 17, 3
-	turnvobject 19, 3
-	turnvobject 21, 1
-	turnvobject 23, 1
-	turnvobject 24, 1
-	turnvobject 26, 2
-	turnvobject 29, 2
-	turnvobject 30, 2
+	turnvobject 1, DIR_EAST
+	turnvobject 3, DIR_EAST
+	turnvobject 5, DIR_EAST
+	turnvobject 7, DIR_EAST
+	turnvobject 9, DIR_EAST
+	turnvobject 11, DIR_WEST
+	turnvobject 15, DIR_WEST
+	turnvobject 13, DIR_WEST
+	turnvobject 17, DIR_WEST
+	turnvobject 19, DIR_WEST
+	turnvobject 21, DIR_SOUTH
+	turnvobject 23, DIR_SOUTH
+	turnvobject 24, DIR_SOUTH
+	turnvobject 26, DIR_NORTH
+	turnvobject 29, DIR_NORTH
+	turnvobject 30, DIR_NORTH
 	delay 10
 	return
 
-LinkContestRoom1_EventScript_27AB36:: @ 827AB36
-	compare VAR_CONTEST_LOCATION, 5
-	goto_if_eq LinkContestRoom1_EventScript_27ABD8
-	call LinkContestRoom1_EventScript_27AB9E
-	goto_if_set FLAG_TEMP_2, LinkContestRoom1_EventScript_27AB82
+ContestHall_EventScript_GiveWinnerPrize:: @ 827AB36
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_eq ContestHall_EventScript_EndLinkContest
+	call ContestHall_EventScript_CheckShouldSkipPrize
+	goto_if_set FLAG_TEMP_2, ContestHall_EventScript_SkipPrize
 	lockall
-	msgbox LinkContestRoom1_Text_27BBA8, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_AcceptYourPrize, MSGBOX_DEFAULT
 	releaseall
-	call LinkContestRoom1_EventScript_27ABF8
-	call LinkContestRoom1_EventScript_27AC5E
+	call ContestHall_EventScript_WinnerApproachForPrize
+	call ContestHall_EventScript_GivePrizeIfWinner
 	playse SE_W227B
 	setvar VAR_TEMP_1, 0
-	call LinkContestRoom1_EventScript_27AA1B
+	call ContestHall_EventScript_AudienceLookAround
 	delay 30
-	special sub_80F88E8
-	compare VAR_0x8004, 1
-	goto_if_eq LinkContestRoom1_EventScript_27ABD2
+	special ShouldReadyContestArtist
+	compare VAR_0x8004, TRUE
+	goto_if_eq ContestHall_EventScript_SetReadyForContestArtist
 	return
 
-LinkContestRoom1_EventScript_27AB82:: @ 827AB82
+ContestHall_EventScript_SkipPrize:: @ 827AB82
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	delay 90
-	special sub_80F88E8
-	compare VAR_0x8004, 1
-	goto_if_eq LinkContestRoom1_EventScript_27ABD2
+	special ShouldReadyContestArtist
+	compare VAR_0x8004, TRUE
+	goto_if_eq ContestHall_EventScript_SetReadyForContestArtist
 	return
 
-LinkContestRoom1_EventScript_27AB9E:: @ 827AB9E
-	specialvar VAR_RESULT, sub_80F7F7C
-	compare VAR_RESULT, 1
-	goto_if_eq LinkContestRoom1_EventScript_27ABAF
+ContestHall_EventScript_CheckShouldSkipPrize:: @ 827AB9E
+	specialvar VAR_RESULT, HasMonWonThisContestBefore
+	compare VAR_RESULT, TRUE
+	goto_if_eq ContestHall_EventScript_CheckPlayerWon
 	return
 
-LinkContestRoom1_EventScript_27ABAF:: @ 827ABAF
-	special sub_80F831C
+ContestHall_EventScript_CheckPlayerWon:: @ 827ABAF
+	special GetContestWinnerId
 	compare VAR_0x8005, 3
-	goto_if_eq LinkContestRoom1_EventScript_27ABBE
+	goto_if_eq ContestHall_EventScript_CheckRankIsMaster
 	return
 
-LinkContestRoom1_EventScript_27ABBE:: @ 827ABBE
-	compare VAR_CONTEST_RANK, 3
-	goto_if_eq LinkContestRoom1_EventScript_27ABCD
+ContestHall_EventScript_CheckRankIsMaster:: @ 827ABBE
+	compare VAR_CONTEST_RANK, CONTEST_RANK_MASTER
+	goto_if_eq ContestHall_EventScript_DontSkipPrize
 	setflag FLAG_TEMP_2
 	return
 
-LinkContestRoom1_EventScript_27ABCD:: @ 827ABCD
+ContestHall_EventScript_DontSkipPrize:: @ 827ABCD
 	return
 
-LinkContestRoom1_EventScript_27ABCE:: @ 827ABCE
+@ This flag is never read
+ContestHall_EventScript_SetSketchFlag:: @ 827ABCE
 	setflag FLAG_CONTEST_SKETCH_CREATED
 	return
 
-LinkContestRoom1_EventScript_27ABD2:: @ 827ABD2
+ContestHall_EventScript_SetReadyForContestArtist:: @ 827ABD2
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
 	return
 
-LinkContestRoom1_EventScript_27ABD8:: @ 827ABD8
+ContestHall_EventScript_EndLinkContest:: @ 827ABD8
 	delay 60
-	special sub_80F84B0
-	special sub_80F831C
-	special sub_80F88E8
-	compare VAR_0x8004, 1
-	goto_if_eq LinkContestRoom1_EventScript_27ABF1
+	special GetContestPlayerId
+	special GetContestWinnerId
+	special ShouldReadyContestArtist
+	compare VAR_0x8004, TRUE
+	goto_if_eq ContestHall_EventScript_SetReadyForLinkContestArtist
 	closemessage
 	return
 
-LinkContestRoom1_EventScript_27ABF1:: @ 827ABF1
+ContestHall_EventScript_SetReadyForLinkContestArtist:: @ 827ABF1
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 2
 	return
 
-LinkContestRoom1_EventScript_27ABF7:: @ 827ABF7
+@ Unused
+ContestHall_EventScript_Ret:: @ 827ABF7
 	return
 
-LinkContestRoom1_EventScript_27ABF8:: @ 827ABF8
+ContestHall_EventScript_WinnerApproachForPrize:: @ 827ABF8
 	switch VAR_0x8005
-	case 0, LinkContestRoom1_EventScript_27AC2A
-	case 1, LinkContestRoom1_EventScript_27AC37
-	case 2, LinkContestRoom1_EventScript_27AC44
-	case 3, LinkContestRoom1_EventScript_27AC51
+	case 0, ContestHall_EventScript_Player1ApproachForPrize
+	case 1, ContestHall_EventScript_Player2ApproachForPrize
+	case 2, ContestHall_EventScript_Player3ApproachForPrize
+	case 3, ContestHall_EventScript_Player4ApproachForPrize
 	return
 
-LinkContestRoom1_EventScript_27AC2A:: @ 827AC2A
+ContestHall_EventScript_Player1ApproachForPrize:: @ 827AC2A
 	lockall
-	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD7A
+	applymovement VAR_TEMP_3, ContestHall_Movement_Player1ApproachForPrize
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27AC37:: @ 827AC37
+ContestHall_EventScript_Player2ApproachForPrize:: @ 827AC37
 	lockall
-	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD7E
+	applymovement VAR_TEMP_3, ContestHall_Movement_Player2ApproachForPrize
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27AC44:: @ 827AC44
+ContestHall_EventScript_Player3ApproachForPrize:: @ 827AC44
 	lockall
-	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD29
+	applymovement VAR_TEMP_3, ContestHall_Movement_Player3ApproachForPrize
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27AC51:: @ 827AC51
+ContestHall_EventScript_Player4ApproachForPrize:: @ 827AC51
 	lockall
-	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_27AD2D
+	applymovement VAR_TEMP_3, ContestHall_Movement_Player4ApproachForPrize
 	waitmovement 0
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27AC5E:: @ 827AC5E
-	special sub_80F831C
+@ In NPC Contests, the player is always entry 4 (id number 3)
+ContestHall_EventScript_GivePrizeIfWinner:: @ 827AC5E
+	special GetContestWinnerId
 	compare VAR_0x8005, 3
-	goto_if_eq LinkContestRoom1_EventScript_27AC77
+	goto_if_eq ContestHall_EventScript_GiveContestPrizes
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27AC77:: @ 827AC77
-	compare VAR_CONTEST_LOCATION, 2
-	call_if_eq LinkContestRoom1_EventScript_27ABCE
-	specialvar VAR_RESULT, sub_80F7F7C
-	compare VAR_RESULT, 0
-	goto_if_eq LinkContestRoom1_EventScript_27ACDF
-	compare VAR_CONTEST_RANK, 3
-	goto_if_eq LinkContestRoom1_EventScript_27ACBD
+ContestHall_EventScript_GiveContestPrizes:: @ 827AC77
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER
+	call_if_eq ContestHall_EventScript_SetSketchFlag
+	specialvar VAR_RESULT, HasMonWonThisContestBefore
+	compare VAR_RESULT, FALSE
+	goto_if_eq ContestHall_EventScript_ReceiveContestRibbon
+	compare VAR_CONTEST_RANK, CONTEST_RANK_MASTER
+	goto_if_eq ContestHall_EventScript_GiveLuxuryBall
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27ACA8:: @ 827ACA8
+ContestHall_EventScript_NoRoomForLuxuryBall:: @ 827ACA8
 	lockall
 	call Common_EventScript_BagIsFull
-	msgbox LinkContestRoom1_Text_27BC2F, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_PickUpPrizeAtCounterLater, MSGBOX_DEFAULT
 	releaseall
 	setvar VAR_CONTEST_PRIZE_PICKUP, 4
 	return
 
-LinkContestRoom1_EventScript_27ACBD:: @ 827ACBD
-	giveitem_std ITEM_LUXURY_BALL
-	compare VAR_RESULT, 0
-	goto_if_eq LinkContestRoom1_EventScript_27ACA8
+ContestHall_EventScript_GiveLuxuryBall:: @ 827ACBD
+	giveitem ITEM_LUXURY_BALL
+	compare VAR_RESULT, FALSE
+	goto_if_eq ContestHall_EventScript_NoRoomForLuxuryBall
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
-LinkContestRoom1_EventScript_27ACDF:: @ 827ACDF
-	special sub_80F7FFC
-	incrementgamestat 42
+ContestHall_EventScript_ReceiveContestRibbon:: @ 827ACDF
+	special GiveMonContestRibbon
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
-	msgbox LinkContestRoom1_Text_27BBD4, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_ConferRibbonAsPrize, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
-	msgbox LinkContestRoom1_Text_27BC00, MSGBOX_DEFAULT
+	msgbox ContestHall_Text_ReceivedRibbon, MSGBOX_DEFAULT
 	waitfanfare
-	special sub_80F8390
-	msgbox LinkContestRoom1_Text_27BC16, MSGBOX_DEFAULT
+	special BufferContestWinnerMonName
+	msgbox ContestHall_Text_PutRibbonOnMon, MSGBOX_DEFAULT
 	releaseall
 	return
 
-LinkContestRoom1_Movement_27AD09: @ 827AD09
+ContestHall_Movement_MCWalkDown: @ 827AD09
 	walk_down
 	step_end
 
-LinkContestRoom1_Movement_27AD0B: @ 827AD0B
+ContestHall_Movement_MCBackUp: @ 827AD0B
 	lock_facing_direction
 	walk_up
 	unlock_facing_direction
 	step_end
 
-LinkContestRoom1_Movement_27AD0F: @ 827AD0F
+ContestHall_Movement_MCFaceJudge: @ 827AD0F
 	walk_in_place_fastest_right
 	step_end
 
-LinkContestRoom1_Movement_27AD11: @ 827AD11
+ContestHall_Movement_Heart: @ 827AD11
 	emote_heart
 	step_end
 
-LinkContestRoom1_Movement_27AD13: @ 827AD13
+ContestHall_Movement_FaceContestants: @ 827AD13
 	walk_in_place_fastest_down
 	step_end
 
-LinkContestRoom1_Movement_27AD15: @ 827AD15
+ContestHall_Movement_WalkStageLeft: @ 827AD15
 	walk_left
 	walk_left
 	walk_in_place_fastest_down
 	step_end
 
-LinkContestRoom1_Movement_27AD19: @ 827AD19
+ContestHall_Movement_WalkStageRight: @ 827AD19
 	walk_right
 	walk_right
 	walk_in_place_fastest_down
 	step_end
 
-LinkContestRoom1_Movement_27AD1D: @ 827AD1D
+ContestHall_Movement_WinningPlayerWalkUp: @ 827AD1D
 	walk_up
 	walk_in_place_fastest_down
 	step_end
 
-LinkContestRoom1_Movement_27AD20: @ 827AD20
+ContestHall_Movement_ContestantDelay32: @ 827AD20
 	delay_16
 	delay_16
 	step_end
 
-LinkContestRoom1_Movement_27AD23: @ 827AD23
+ContestHall_Movement_MCFaceJudge2: @ 827AD23
 	walk_in_place_fastest_right
 	step_end
 
-LinkContestRoom1_Movement_27AD25: @ 827AD25
+ContestHall_Movement_JudgeFaceMC: @ 827AD25
 	walk_in_place_fastest_left
 	step_end
 
-LinkContestRoom1_Movement_27AD27: @ 827AD27
+ContestHall_Movement_FaceContestants2: @ 827AD27
 	walk_in_place_fastest_down
 	step_end
 
-LinkContestRoom1_Movement_27AD29: @ 827AD29
+ContestHall_Movement_Player3ApproachForPrize: @ 827AD29
 	walk_left
 	walk_left
 	walk_up
 	step_end
 
-LinkContestRoom1_Movement_27AD2D: @ 827AD2D
+ContestHall_Movement_Player4ApproachForPrize: @ 827AD2D
 	walk_left
 	walk_left
 	walk_left
@@ -1314,54 +1328,54 @@ LinkContestRoom1_Movement_27AD2D: @ 827AD2D
 	walk_up
 	step_end
 
-LinkContestRoom1_Movement_27AD33: @ 827AD33
+ContestHall_Movement_AudienceMemberLookLeft: @ 827AD33
 	face_left
 	delay_16
 	face_original_direction
 	step_end
 
-LinkContestRoom1_Movement_27AD37: @ 827AD37
+ContestHall_Movement_AudienceMemberLookUp: @ 827AD37
 	face_up
 	delay_16
 	face_original_direction
 	step_end
 
-LinkContestRoom1_Movement_27AD3B: @ 827AD3B
+ContestHall_Movement_AudienceMemberLookRight: @ 827AD3B
 	face_right
 	delay_16
 	face_original_direction
 	step_end
 
-LinkContestRoom1_Movement_27AD3F: @ 827AD3F
+ContestHall_Movement_AudienceMemberLookDown: @ 827AD3F
 	face_down
 	delay_16
 	face_original_direction
 	step_end
 
-LinkContestRoom1_Movement_27AD43: @ 827AD43
+ContestHall_Movement_Player4FaceUp: @ 827AD43
 	face_up
 	step_end
 
-LinkContestRoom1_Movement_27AD45: @ 827AD45
+ContestHall_Movement_MCLookAtJudge: @ 827AD45
 	face_up
 	delay_16
 	walk_in_place_fastest_right
 	step_end
 
-LinkContestRoom1_Movement_27AD49: @ 827AD49
+ContestHall_Movement_JudgeLookAtMC: @ 827AD49
 	walk_in_place_fastest_left
 	delay_16
 	delay_16
 	walk_in_place_fastest_down
 	step_end
 
-LinkContestRoom1_Movement_27AD4E: @ 827AD4E
+ContestHall_Movement_MCWalkInPlaceDown: @ 827AD4E
 	delay_16
 	delay_16
 	walk_in_place_fastest_down
 	step_end
 
-LinkContestRoom1_Movement_27AD52: @ 827AD52
+ContestHall_Movement_Player1WalkToCenter: @ 827AD52
 	walk_up
 	walk_right
 	walk_right
@@ -1369,7 +1383,7 @@ LinkContestRoom1_Movement_27AD52: @ 827AD52
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD58: @ 827AD58
+ContestHall_Movement_Player1WalkBack: @ 827AD58
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
@@ -1377,31 +1391,31 @@ LinkContestRoom1_Movement_27AD58: @ 827AD58
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD5E: @ 827AD5E
+ContestHall_Movement_Player2WalkToCenter: @ 827AD5E
 	walk_up
 	walk_right
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD62: @ 827AD62
+ContestHall_Movement_Player2WalkBack: @ 827AD62
 	walk_fast_left
 	walk_fast_down
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD66: @ 827AD66
+ContestHall_Movement_Player3WalkToCenter: @ 827AD66
 	walk_up
 	walk_left
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD6A: @ 827AD6A
+ContestHall_Movement_Player3WalkBack: @ 827AD6A
 	walk_fast_right
 	walk_fast_down
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD6E: @ 827AD6E
+ContestHall_Movement_Player4WalkToCenter: @ 827AD6E
 	walk_up
 	walk_left
 	walk_left
@@ -1409,7 +1423,7 @@ LinkContestRoom1_Movement_27AD6E: @ 827AD6E
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD74: @ 827AD74
+ContestHall_Movement_Player4WalkBack: @ 827AD74
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -1417,36 +1431,37 @@ LinkContestRoom1_Movement_27AD74: @ 827AD74
 	walk_in_place_fastest_up
 	step_end
 
-LinkContestRoom1_Movement_27AD7A: @ 827AD7A
+ContestHall_Movement_Player1ApproachForPrize: @ 827AD7A
 	walk_right
 	walk_right
 	walk_up
 	step_end
 
-LinkContestRoom1_Movement_27AD7E: @ 827AD7E
+ContestHall_Movement_Player2ApproachForPrize: @ 827AD7E
 	walk_up
 	step_end
 
-LinkContestRoom1_EventScript_27AD80:: @ 827AD80
-	specialvar VAR_RESULT, sub_80F9134
-	compare VAR_RESULT, 1
-	goto_if_eq LinkContestRoom1_EventScript_27AD91
+@ IsContestWithRSPlayer has no side effect, so this is nop
+ContestHall_EventScript_CheckIfContestWithRSPlayer:: @ 827AD80
+	specialvar VAR_RESULT, IsContestWithRSPlayer
+	compare VAR_RESULT, TRUE
+	goto_if_eq ContestHall_EventScript_RetRSPlayer
 	return
 
-LinkContestRoom1_EventScript_27AD91:: @ 827AD91
+ContestHall_EventScript_RetRSPlayer:: @ 827AD91
 	return
 
-LilycoveCity_ContestLobby_EventScript_27AD92:: @ 827AD92
-	specialvar VAR_RESULT, sub_80F9134
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_27ADA3
+LilycoveCity_ContestLobby_EventScript_DelayIfContestWithRSPlayer:: @ 827AD92
+	specialvar VAR_RESULT, IsContestWithRSPlayer
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer
 	return
 
-LilycoveCity_ContestLobby_EventScript_27ADA3:: @ 827ADA3
+LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer:: @ 827ADA3
 	delay 9
 	return
 
-LilycoveCity_ContestLobby_Text_27ADA7: @ 827ADA7
+LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase: @ 827ADA7
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.\p"
@@ -1455,31 +1470,32 @@ LilycoveCity_ContestLobby_Text_27ADA7: @ 827ADA7
 	.string "In that case, we need to provide you\n"
 	.string "with this!$"
 
-LilycoveCity_ContestLobby_Text_27AE47: @ 827AE47
+LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp: @ 827AE47
 	.string "Okay, now that we've cleared that\n"
 	.string "up…\p"
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.$"
 
-LilycoveCity_ContestLobby_Text_27AEA8: @ 827AEA8
+LilycoveCity_ContestLobby_Text_ContestReception: @ 827AEA8
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.$"
 
-LilycoveCity_ContestLobby_Text_27AEE3: @ 827AEE3
+@ Unused
+LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests: @ 827AEE3
 	.string "Hello!\p"
 	.string "This reception counter is only\n"
 	.string "for 4-player POKéMON CONTESTS.$"
 
-LilycoveCity_ContestLobby_Text_27AF28: @ 827AF28
+LilycoveCity_ContestLobby_Text_EnterContest1: @ 827AF28
 	.string "Would you like to enter your POKéMON\n"
 	.string "in our CONTESTS?$"
 
-LilycoveCity_ContestLobby_Text_27AF5E: @ 827AF5E
+LilycoveCity_ContestLobby_Text_WhichTopic1: @ 827AF5E
 	.string "Which topic would you like?$"
 
-LilycoveCity_ContestLobby_Text_27AF7A: @ 827AF7A
+LilycoveCity_ContestLobby_Text_ExplainContests: @ 827AF7A
 	.string "A POKéMON CONTEST involves four\n"
 	.string "TRAINERS entering one POKéMON each\l"
 	.string "in competitive judging.\p"
@@ -1498,14 +1514,14 @@ LilycoveCity_ContestLobby_Text_27AF7A: @ 827AF7A
 	.string "The POKéMON garnering the highest\n"
 	.string "score is declared the winner.$"
 
-LilycoveCity_ContestLobby_Text_27B17D: @ 827B17D
+LilycoveCity_ContestLobby_Text_ExplainContestTypes: @ 827B17D
 	.string "There are five kinds of CONTESTS.\p"
 	.string "COOL, BEAUTY, CUTE, SMART, and\n"
 	.string "TOUGH are the five categories.\p"
 	.string "Choose the CONTEST that is right for\n"
 	.string "the POKéMON you plan to enter.$"
 
-LilycoveCity_ContestLobby_Text_27B221: @ 827B221
+LilycoveCity_ContestLobby_Text_ExplainContestRanks: @ 827B221
 	.string "There are four ranks of POKéMON\n"
 	.string "CONTESTS.\p"
 	.string "NORMAL, SUPER, HYPER, and MASTER\n"
@@ -1523,77 +1539,77 @@ LilycoveCity_ContestLobby_Text_27B221: @ 827B221
 	.string "may compete in the MASTER Rank as\l"
 	.string "often as its TRAINER wants.$"
 
-LilycoveCity_ContestLobby_Text_27B3FF: @ 827B3FF
+LilycoveCity_ContestLobby_Text_EnterWhichRank: @ 827B3FF
 	.string "Which Rank would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_27B423: @ 827B423
+LilycoveCity_ContestLobby_Text_EnterWhichContest1: @ 827B423
 	.string "Which CONTEST would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_27B44A: @ 827B44A
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon1: @ 827B44A
 	.string "Which POKéMON would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_27B471: @ 827B471
+LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank: @ 827B471
 	.string "I'm terribly sorry, but your POKéMON\n"
 	.string "is not qualified to compete at this\l"
 	.string "Rank yet…$"
 
-LilycoveCity_ContestLobby_Text_27B4C4: @ 827B4C4
+LilycoveCity_ContestLobby_Text_EggCannotTakePart: @ 827B4C4
 	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
-LilycoveCity_ContestLobby_Text_27B501: @ 827B501
+LilycoveCity_ContestLobby_Text_MonInNoConditionForContest: @ 827B501
 	.string "Your POKéMON appears to be in no\n"
 	.string "condition to take part in a CONTEST…$"
 
-LilycoveCity_ContestLobby_Text_27B547: @ 827B547
+LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway: @ 827B547
 	.string "Oh, but that RIBBON…\p"
 	.string "Your POKéMON has won this CONTEST\n"
 	.string "before, hasn't it?\p"
 	.string "Would you like to enter it in this\n"
 	.string "CONTEST anyway?$"
 
-LilycoveCity_ContestLobby_Text_27B5C4: @ 827B5C4
+LilycoveCity_ContestLobby_Text_ConfirmContestMon: @ 827B5C4
 	.string "Is that your CONTEST POKéMON?$"
 
-LilycoveCity_ContestLobby_Text_27B5E2: @ 827B5E2
+LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4: @ 827B5E2
 	.string "Okay, your POKéMON will be entered\n"
 	.string "in this CONTEST.\p"
 	.string "Your POKéMON is Entry No. 4.\n"
 	.string "The CONTEST will begin shortly.$"
 
-LilycoveCity_ContestLobby_Text_27B653: @ 827B653
+LilycoveCity_ContestLobby_Text_ComeThroughHere: @ 827B653
 	.string "Please come in through here.\n"
 	.string "Good luck!$"
 
-LilycoveCity_ContestLobby_Text_27B67B: @ 827B67B
+LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize: @ 827B67B
 	.string "Congratulations! Your POKéMON is the\n"
 	.string "CONTEST winner!\p"
 	.string "We have your prize right here.\n"
 	.string "Please, right this way!$"
 
-LilycoveCity_ContestLobby_Text_27B6E7: @ 827B6E7
+LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater: @ 827B6E7
 	.string "Please come back for your prize\n"
 	.string "later on.$"
 
-LinkContestRoom1_Text_27B711: @ 827B711
+ContestHall_Text_GettingStartedParticipantsAsFollows: @ 827B711
 	.string "MC: Hello! We're just getting started\n"
 	.string "with a {STR_VAR_3} Rank POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
-LinkContestRoom1_Text_27B78F: @ 827B78F
+ContestHall_Text_GettingStartedParticipantsAsFollowsLink: @ 827B78F
 	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
-LinkContestRoom1_Text_27B815: @ 827B815
+ContestHall_Text_EntryXTrainersMon: @ 827B815
 	.string "MC: Entry No. {STR_VAR_2}!\n"
 	.string "{STR_VAR_1}'s {STR_VAR_3}!$"
 
-LinkContestRoom1_Text_27B830: @ 827B830
+ContestHall_Text_SeenContestantsAudienceWillVote: @ 827B830
 	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
 	.string "Now it's time for primary judging!\p"
@@ -1602,10 +1618,10 @@ LinkContestRoom1_Text_27B830: @ 827B830
 	.string "Without any further ado, let the\n"
 	.string "voting begin!$"
 
-LinkContestRoom1_Text_27B8F2: @ 827B8F2
+ContestHall_Text_VotingUnderWay: @ 827B8F2
 	.string "Voting under way…$"
 
-LinkContestRoom1_Text_27B904: @ 827B904
+ContestHall_Text_VotingCompleteLetsAppeal: @ 827B904
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
 	.string "let's move on to secondary judging!\p"
@@ -1616,72 +1632,75 @@ LinkContestRoom1_Text_27B904: @ 827B904
 	.string "Let's see a little enthusiasm!\n"
 	.string "Let's appeal!$"
 
-LinkContestRoom1_Text_27BA15: @ 827BA15
+ContestHall_Text_ThatsItForJudging: @ 827BA15
 	.string "MC: That's it for judging!$"
 
-LinkContestRoom1_Text_27BA30: @ 827BA30
+ContestHall_Text_ThankYouForAppeals: @ 827BA30
 	.string "Thank you all for a most wonderful\n"
 	.string "display of quality appeals!\p"
 	.string "This concludes all judging!\n"
 	.string "Thank you for your fine efforts!$"
 
-LinkContestRoom1_Text_27BAAC: @ 827BAAC
+ContestHall_Text_JudgeLooksReady: @ 827BAAC
 	.string "Now, all that remains is the pulse-\n"
 	.string "pounding proclamation of the winner.\p"
 	.string "The JUDGE looks ready to make\n"
 	.string "the announcement!$"
 
-LinkContestRoom1_Text_27BB25: @ 827BB25
+ContestHall_Text_WeWillNowDeclareWinner: @ 827BB25
 	.string "JUDGE: We will now declare the winner!$"
 
-LinkContestRoom1_Text_27BB4C: @ 827BB4C
+ContestHall_Text_CongratsTrainerXandMon: @ 827BB4C
 	.string "MC: Entry No. {STR_VAR_2}!\p"
 	.string "{STR_VAR_3} and {STR_VAR_1},\n"
 	.string "congratulations!$"
 
-LinkContestRoom1_Text_27BB7A: @ 827BB7A
+ContestHall_Text_CongratsPleaseCompeteAgain: @ 827BB7A
 	.string "MC: Congratulations!\n"
 	.string "Please do compete again!$"
 
-LinkContestRoom1_Text_27BBA8: @ 827BBA8
+ContestHall_Text_AcceptYourPrize: @ 827BBA8
 	.string "MC: Here you are!\n"
 	.string "Please accept your prize!$"
 
-LinkContestRoom1_Text_27BBD4: @ 827BBD4
+ContestHall_Text_ConferRibbonAsPrize: @ 827BBD4
 	.string "We confer on you this RIBBON\n"
 	.string "as your prize!$"
 
-LinkContestRoom1_Text_27BC00: @ 827BC00
+ContestHall_Text_ReceivedRibbon: @ 827BC00
 	.string "{PLAYER} received a RIBBON.$"
 
-LinkContestRoom1_Text_27BC16: @ 827BC16
+ContestHall_Text_PutRibbonOnMon: @ 827BC16
 	.string "{PLAYER} put the RIBBON on\n"
 	.string "{STR_VAR_1}.$"
 
-LinkContestRoom1_Text_27BC2F: @ 827BC2F
+ContestHall_Text_PickUpPrizeAtCounterLater: @ 827BC2F
 	.string "Please pick up your prize at\n"
 	.string "the reception counter later.\l"
 	.string "Please do compete again!$"
 
-LinkContestRoom1_Text_27BC82: @ 827BC82
+@ Unused
+ContestHall_Text_OnlyRegister4Players: @ 827BC82
 	.string "I only register four players for\n"
 	.string "POKéMON CONTESTS.\p"
 	.string "If three other players link up, all\n"
 	.string "four may enter the same CONTEST.\p"
 	.string "Would you like to take part?$"
 
-LilycoveCity_ContestLobby_Text_27BD17: @ 827BD17
+LilycoveCity_ContestLobby_Text_ProgressWillBeSaved: @ 827BD17
 	.string "Before entering a CONTEST, your\n"
 	.string "progress will be saved.$"
 
-LilycoveCity_ContestLobby_Text_27BD4F: @ 827BD4F
+LilycoveCity_ContestLobby_Text_ParticipateAnotherTime: @ 827BD4F
 	.string "We hope you will participate another\n"
 	.string "time.$"
 
-LilycoveCity_ContestLobby_Text_27BD7A: @ 827BD7A
+@ Unused
+LilycoveCity_ContestLobby_Text_EnterContest2: @ 827BD7A
 	.string "Would you like to enter a CONTEST?$"
 
-LilycoveCity_ContestLobby_Text_27BD9D: @ 827BD9D
+@ Unused
+LilycoveCity_ContestLobby_Text_Explain4PlayerContest: @ 827BD9D
 	.string "When four players are ready, connect\n"
 	.string "over a Game Link cable, and register\l"
 	.string "with me, please.\p"
@@ -1692,79 +1711,83 @@ LilycoveCity_ContestLobby_Text_27BD9D: @ 827BD9D
 	.string "After that, the usual CONTEST rules\n"
 	.string "apply.$"
 
-LilycoveCity_ContestLobby_Text_27BE9E: @ 827BE9E
+@ Unused
+LilycoveCity_ContestLobby_Text_EnterWhichContest2: @ 827BE9E
 	.string "Which CONTEST would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_27BEC5: @ 827BEC5
+@ Unused
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon2: @ 827BEC5
 	.string "Which POKéMON would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_27BEEC: @ 827BEEC
+LilycoveCity_ContestLobby_Text_Transmitting: @ 827BEEC
 	.string "Transmitting…$"
 
-LilycoveCity_ContestLobby_Text_27BEFA: @ 827BEFA
+LilycoveCity_ContestLobby_Text_TransmissionError: @ 827BEFA
 	.string "Transmission error…$"
 
-LilycoveCity_ContestLobby_Text_27BF0E: @ 827BF0E
+LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest: @ 827BF0E
 	.string "You may have chosen a different\n"
 	.string "CONTEST than another player.$"
 
-LilycoveCity_ContestLobby_Text_27BF4B: @ 827BF4B
+LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice: @ 827BF4B
 	.string "You may have made a different\n"
 	.string "choice than another player.$"
 
-LilycoveCity_ContestLobby_Text_27BF85: @ 827BF85
+LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel: @ 827BF85
 	.string "Please wait.\n"
 	.string "… … B Button: Cancel$"
 
-LilycoveCity_ContestLobby_Text_27BFA7: @ 827BFA7
+@ Unused
+LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2: @ 827BFA7
 	.string "We hope you will participate another\n"
 	.string "time.$"
 
-LilycoveCity_ContestLobby_Text_27BFD2: @ 827BFD2
+@ Unused
+LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain: @ 827BFD2
 	.string "Transmission error.\n"
 	.string "Please try again.$"
 
-LilycoveCity_ContestLobby_Text_27BFF8: @ 827BFF8
+LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX: @ 827BFF8
 	.string "Your POKéMON will be entered in\n"
 	.string "the CONTEST.\p"
 	.string "Your POKéMON is Entry No. {STR_VAR_2}.$"
 
-LilycoveCity_ContestLobby_Text_27C043: @ 827C043
+LilycoveCity_ContestLobby_Text_ContestBeginShortly: @ 827C043
 	.string "The CONTEST will begin shortly.$"
 
-LilycoveCity_ContestLobby_Text_27C063: @ 827C063
+LilycoveCity_ContestLobby_Text_LinkContestReception: @ 827C063
 	.string "Welcome! This is the POKéMON CONTEST\n"
 	.string "link reception counter.\p"
 	.string "You may enter CONTESTS together with\n"
 	.string "one or more friends.$"
 
-LilycoveCity_ContestLobby_Text_27C0DA: @ 827C0DA
+LilycoveCity_ContestLobby_Text_WhichTopic2: @ 827C0DA
 	.string "Which topic would you like?$"
 
-LilycoveCity_ContestLobby_Text_27C0F6: @ 827C0F6
+LilycoveCity_ContestLobby_Text_EnterContest3: @ 827C0F6
 	.string "Would you like to enter a CONTEST?$"
 
-LilycoveCity_ContestLobby_Text_27C119: @ 827C119
+LilycoveCity_ContestLobby_Text_EnterWhichContest3: @ 827C119
 	.string "Which CONTEST would you like to enter?$"
 
-LilycoveCity_ContestLobby_Text_27C140: @ 827C140
+LilycoveCity_ContestLobby_Text_MonInNoCondition2: @ 827C140
 	.string "Your POKéMON appears to be in no\n"
 	.string "condition to take part in a CONTEST…$"
 
-LilycoveCity_ContestLobby_Text_27C186: @ 827C186
+LilycoveCity_ContestLobby_Text_EggCannotTakePart2: @ 827C186
 	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
-LilycoveCity_ContestLobby_Text_27C1C3: @ 827C1C3
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon3: @ 827C1C3
 	.string "Which POKéMON would you like to enter?$"
 
-Text_DecideLinkLeader: @ 827C1EA
+LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader: @ 827C1EA
 	.string "Please decide which of you will\n"
 	.string "become the GROUP LEADER.\p"
 	.string "The other players must then choose\n"
 	.string "“JOIN GROUP.”$"
 
-LilycoveCity_ContestLobby_Text_27C254: @ 827C254
+LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode: @ 827C254
 	.string "At least one player has entered using\n"
 	.string "the 4-player reception counter.\p"
 	.string "There must be four players connected\n"
@@ -1773,7 +1796,7 @@ LilycoveCity_ContestLobby_Text_27C254: @ 827C254
 	.string "select G-MODE (GLOBAL MODE),\l"
 	.string "then register to enter again, please.$"
 
-LilycoveCity_ContestLobby_Text_27C340: @ 827C340
+LilycoveCity_ContestLobby_Text_ExplainLinkContest: @ 827C340
 	.string "This is a CONTEST for two to four\n"
 	.string "players linked using a Wireless\l"
 	.string "Adapter or a GBA Game Link cable.\p"
@@ -1794,7 +1817,7 @@ LilycoveCity_ContestLobby_Text_27C340: @ 827C340
 	.string "After that, a CONTEST will start in\n"
 	.string "the usual manner.$"
 
-LilycoveCity_ContestLobby_Text_27C5B1: @ 827C5B1
+LilycoveCity_ContestLobby_Text_ExplainEMode: @ 827C5B1
 	.string "In E-MODE (EMERALD MODE),\n"
 	.string "a LINK CONTEST can be held with\l"
 	.string "two to four players. Each player must\l"
@@ -1808,7 +1831,7 @@ LilycoveCity_ContestLobby_Text_27C5B1: @ 827C5B1
 	.string "Please be aware that E-MODE is not\n"
 	.string "available in POKéMON Ruby or Sapphire.$"
 
-LilycoveCity_ContestLobby_Text_27C742: @ 827C742
+LilycoveCity_ContestLobby_Text_ExplainGMode: @ 827C742
 	.string "G-MODE (GLOBAL MODE) is specifically\n"
 	.string "for four players who are linked using\l"
 	.string "GBA Game Link cables.\p"
@@ -1819,50 +1842,50 @@ LilycoveCity_ContestLobby_Text_27C742: @ 827C742
 	.string "enter through the 4-player reception\l"
 	.string "counter (POKéMON Ruby or Sapphire).$"
 
-LilycoveCity_ContestLobby_Text_27C879: @ 827C879
+LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode: @ 827C879
 	.string "I'm terribly sorry.\p"
 	.string "G-MODE does not function\n"
 	.string "with Wireless Adapters.\p"
 	.string "Please select E-MODE or try\n"
 	.string "again using a GBA Game Link cable.$"
 
-LilycoveCity_ContestLobby_Text_27C8FD: @ 827C8FD
+LilycoveCity_ContestLobby_Text_WhichContestMode: @ 827C8FD
 	.string "Which CONTEST MODE would you like\n"
 	.string "to enter?$"
 
-LinkContestRoom1_Text_27C929: @ 827C929
+ContestHall_Text_GettingStartedWireless: @ 827C929
 	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!$"
 
-LinkContestRoom1_Text_27C972: @ 827C972
+ContestHall_Text_ParticipantsAsFollows: @ 827C972
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
-LinkContestRoom1_Text_27C9AF: @ 827C9AF
+ContestHall_Text_WeveSeenContestants: @ 827C9AF
 	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
 	.string "Now it's time for primary judging!$"
 
-LinkContestRoom1_Text_27CA04: @ 827CA04
+ContestHall_Text_AudienceWillVote: @ 827CA04
 	.string "The audience will vote on their\n"
 	.string "favorite POKéMON contestants.$"
 
-LinkContestRoom1_Text_27CA42: @ 827CA42
+ContestHall_Text_LetVotingBegin: @ 827CA42
 	.string "Without any further ado,\n"
 	.string "let the voting begin!$"
 
-LinkContestRoom1_Text_27CA71: @ 827CA71
+ContestHall_Text_VotingComplete: @ 827CA71
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
 	.string "let's move on to secondary judging!$"
 
-LinkContestRoom1_Text_27CAD0: @ 827CAD0
+ContestHall_Text_SecondStageOfJudging: @ 827CAD0
 	.string "The second stage of judging is\n"
 	.string "the much-anticipated appeal time!\p"
 	.string "May the contestants amaze us with\n"
 	.string "superb appeals of dazzling moves!$"
 
-LinkContestRoom1_Text_27CB55: @ 827CB55
+ContestHall_Text_LetsAppeal: @ 827CB55
 	.string "Let's see a little enthusiasm!\n"
 	.string "Let's appeal!$"

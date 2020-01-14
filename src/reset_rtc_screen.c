@@ -105,10 +105,10 @@ static const struct ResetRtcStruct sUnknown_08510428[5] =
 static const struct OamData sOamData_08510464 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
@@ -300,19 +300,19 @@ static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u
 {
     u8 *dest = gStringVar4;
 
-    ConvertIntToDecimalStringN(gStringVar1, days, 1, 4);
+    ConvertIntToDecimalStringN(gStringVar1, days, STR_CONV_MODE_RIGHT_ALIGN, 4);
     dest = StringCopy(dest, gStringVar1);
     dest = StringCopy(dest, gText_Day);
 
-    ConvertIntToDecimalStringN(gStringVar1, hours, 1, 3);
+    ConvertIntToDecimalStringN(gStringVar1, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
     dest = StringCopy(dest, gStringVar1);
     dest = StringCopy(dest, gText_Colon3);
 
-    ConvertIntToDecimalStringN(gStringVar1, minutes, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     dest = StringCopy(dest, gStringVar1);
     dest = StringCopy(dest, gText_Colon3);
 
-    ConvertIntToDecimalStringN(gStringVar1, seconds, 2, 2);
+    ConvertIntToDecimalStringN(gStringVar1, seconds, STR_CONV_MODE_LEADING_ZEROS, 2);
     dest = StringCopy(dest, gStringVar1);
 
     AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, TEXT_SPEED_FF, NULL);
@@ -559,7 +559,7 @@ static void Task_ResetRtcScreen(u8 taskId)
     case 1:
         if (!gPaletteFade.active)
         {
-            if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
+            if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             {
                 ShowMessage(gText_NoSaveFileCantSetTime);
                 data[0] = 5;
@@ -608,7 +608,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         }
         break;
     case 4:
-        if (TrySavingData(0) == 1)
+        if (TrySavingData(SAVE_NORMAL) == SAVE_STATUS_OK)
         {
             ShowMessage(gText_SaveCompleted);
             PlaySE(SE_PINPON);

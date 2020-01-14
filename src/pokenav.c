@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "task.h"
 #include "main.h"
 #include "overworld.h"
@@ -48,8 +48,8 @@ static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
 static void Task_RunLoopedTask_LinkMode(u8 a0);
 static void Task_RunLoopedTask(u8 taskId);
-static void sub_81C742C(u8 taskId);
-static void sub_81C72BC(void);
+static void Task_Pokenav(u8 taskId);
+static void CB2_InitPokenavForTutorial(void);
 
 const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
 {
@@ -311,19 +311,19 @@ void CB2_InitPokeNav(void)
         InitPokenavResources(gPokenavResources);
         ResetTasks();
         SetVBlankCallback(NULL);
-        CreateTask(sub_81C742C, 0);
+        CreateTask(Task_Pokenav, 0);
         SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VBlankCB_Pokenav);
     }
 }
 
-void sub_81C72A4(void)
+void OpenPokenavForTutorial(void)
 {
-    SetMainCallback2(sub_81C72BC);
-    FadeScreen(1, 0);
+    SetMainCallback2(CB2_InitPokenavForTutorial);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
-static void sub_81C72BC(void)
+static void CB2_InitPokenavForTutorial(void)
 {
     UpdatePaletteFade();
     if (gPaletteFade.active)
@@ -337,12 +337,12 @@ static void sub_81C72BC(void)
     else
     {
         InitPokenavResources(gPokenavResources);
-        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_1;
+        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_READY;
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
         SetVBlankCallback(NULL);
-        CreateTask(sub_81C742C, 0);
+        CreateTask(Task_Pokenav, 0);
         SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VBlankCB_Pokenav);
     }
@@ -416,7 +416,7 @@ static void VBlankCB_Pokenav(void)
     ProcessSpriteCopyRequests();
 }
 
-static void sub_81C742C(u8 taskId)
+static void Task_Pokenav(u8 taskId)
 {
     u32 v1;
     s16 *data = gTasks[taskId].data;

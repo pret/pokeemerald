@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MagmaHideout_3F_2R_EventScript_23A3D5",
+      "script": "MagmaHideout_3F_2R_EventScript_Grunt10",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {

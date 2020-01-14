@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "dodrio_berry_picking.h"
 #include "dynamic_placeholder_text_util.h"
@@ -245,7 +245,7 @@ static u32 sub_8027DFC(u32 arg0);
 static u32 IncrementWithLimit(u32 arg0, u32 arg1);
 static u32 Min(u32 arg0, u32 arg1);
 static u32 sub_80276C0(u8 arg0);
-static void sub_8027ACC(u8 taskId);
+static void Task_ShowDodrioBerryPickingRecords(u8 taskId);
 static void sub_8029314(u8 taskId);
 static void sub_8027BEC(u8 windowId, s32 width);
 static void nullsub_15(struct Sprite *sprite);
@@ -2580,7 +2580,7 @@ static u8 sub_8027A48(u8 id)
     return gUnknown_02022C98->unk34[id];
 }
 
-void sub_8027A5C(void)
+void IsDodrioInParty(void)
 {
     int i;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -2588,18 +2588,18 @@ void sub_8027A5C(void)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES)
             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_DODRIO)
         {
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = TRUE;
             return;
         }
     }
 
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
 }
 
-void sub_8027AAC(void)
+void ShowDodrioBerryPickingRecords(void)
 {
-    u8 taskId = CreateTask(sub_8027ACC, 0);
-    sub_8027ACC(taskId);
+    u8 taskId = CreateTask(Task_ShowDodrioBerryPickingRecords, 0);
+    Task_ShowDodrioBerryPickingRecords(taskId);
 }
 
 // Data related to printing saved results.
@@ -2621,7 +2621,7 @@ ALIGNED(4)
 static const u8 gUnknown_082F7B44[][2] = {{25}, {41}, {57}};
 static const u8 gUnknown_082F7B4A[][2] = {{25}, {41}, {73}};
 
-static void sub_8027ACC(u8 taskId)
+static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
 {
     struct WindowTemplate window;
     s32 i, width, widthCurr;
@@ -2704,17 +2704,17 @@ static const u16 gUnknown_082F7B50[][4] =
     {9999, 9999, 9999, 0},
 };
 
-static const u8 gUnknown_082F7B78[] = _("あいうえおかき");
-static const u8 gUnknown_082F7B80[] = _("ABCDEFG");
-static const u8 gUnknown_082F7B88[] = _("0123456");
+static const u8 sJPText_Vowels[] = _("あいうえおかき");
+static const u8 sText_ABCDEFG[] = _("ABCDEFG");
+static const u8 sText_0123456[] = _("0123456");
 
-static const u8 *const gUnknown_082F7B90[] =
+static const u8 *const sPlaceholderPlayerNames[] =
 {
-    gUnknown_082F7B78,
-    gUnknown_082F7B78,
-    gUnknown_082F7B78,
-    gUnknown_082F7B80,
-    gUnknown_082F7B88
+    sJPText_Vowels,
+    sJPText_Vowels,
+    sJPText_Vowels,
+    sText_ABCDEFG,
+    sText_0123456
 };
 
 static void sub_8027D20(void)
@@ -2726,8 +2726,8 @@ static void sub_8027D38(void)
 {
     u8 i, playerId;
 
-    for (playerId = gUnknown_02022C98->unk24; playerId < 5; playerId++)
-        StringCopy(gLinkPlayers[playerId].name, gUnknown_082F7B90[playerId]);
+    for (playerId = gUnknown_02022C98->unk24; playerId < ARRAY_COUNT(sPlaceholderPlayerNames); playerId++)
+        StringCopy(gLinkPlayers[playerId].name, sPlaceholderPlayerNames[playerId]);
 
     gUnknown_02022C98->unk24 = 5;
     for (i = 0; i < 4; i++)
@@ -3555,14 +3555,14 @@ static const u32 gDodrioBerryBgTilemap2Left[] = INCBIN_U32("graphics/link_games/
 static const struct OamData sOamData_82FB1E0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -3572,14 +3572,14 @@ static const struct OamData sOamData_82FB1E0 =
 static const struct OamData sOamData_82FB1E8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -3589,14 +3589,14 @@ static const struct OamData sOamData_82FB1E8 =
 static const struct OamData sOamData_82FB1F0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -3606,14 +3606,14 @@ static const struct OamData sOamData_82FB1F0 =
 static const struct OamData sOamData_82FB1F8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 3,
     .paletteNum = 0,
@@ -4386,12 +4386,12 @@ struct WinCoords
     u8 top;
 };
 
-static const u8 gUnknown_082FB380[][3] =
+static const u8 sTextColorTable[][3] =
 {
-    {1, 2, 3},
-    {1, 4, 5},
-    {1, 8, 9},
-    {1, 6, 7},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_BLUE},
+    {TEXT_COLOR_WHITE, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN},
 };
 
 static const struct WinCoords gUnknown_082FB38C[] = {{12, 6}};
@@ -4525,7 +4525,7 @@ static void sub_8029440(void)
             if (id == GetMultiplayerId())
                 colorsId = 2;
             name = sub_8027660(id);
-            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[i], 1, left, 1, gUnknown_082FB380[colorsId], -1, name);
+            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[i], 1, left, 1, sTextColorTable[colorsId], -1, name);
             CopyWindowToVram(gUnknown_02022CF8->unk3008[i], 2);
             window.baseBlock += 0xE;
             sub_8029174(&window);
@@ -4609,7 +4609,7 @@ static void sub_80296A8(u8 playersCount_)
         if (id == GetMultiplayerId())
             colorsId = 2;
         name = sub_8027660(id);
-        AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 28, gUnknown_082FB402[i], gUnknown_082FB380[colorsId], -1, name);
+        AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 28, gUnknown_082FB402[i], sTextColorTable[colorsId], -1, name);
         ConvertIntToDecimalStringN(numString, points, STR_CONV_MODE_LEFT_ALIGN, 7);
         numWidth = GetStringWidth(1, numString, -1);
         AddTextPrinterParameterized(gUnknown_02022CF8->unk3008[1], 1, numString, x - numWidth, gUnknown_082FB402[i], -1, NULL);
@@ -4653,7 +4653,7 @@ static void sub_802988C(void)
                 colorsId = 2;
 
             name = sub_8027660(i);
-            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 0, gUnknown_082FB3F8[i], gUnknown_082FB380[colorsId], -1, name);
+            AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, 0, gUnknown_082FB3F8[i], sTextColorTable[colorsId], -1, name);
             for (j = 0; j < 4; j++)
             {
                 u32 width;
@@ -4663,7 +4663,7 @@ static void sub_802988C(void)
                 ConvertIntToDecimalStringN(gStringVar4, result1, STR_CONV_MODE_LEFT_ALIGN, 4);
                 width = GetStringWidth(1, gStringVar4, -1);
                 if (result2 == result1 && result2 != 0)
-                    AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, gUnknown_082FB3F0[j] - width, gUnknown_082FB3F8[i], gUnknown_082FB380[1], -1, gStringVar4);
+                    AddTextPrinterParameterized3(gUnknown_02022CF8->unk3008[1], 1, gUnknown_082FB3F0[j] - width, gUnknown_082FB3F8[i], sTextColorTable[1], -1, gStringVar4);
                 else
                     AddTextPrinterParameterized(gUnknown_02022CF8->unk3008[1], 1, gStringVar4, gUnknown_082FB3F0[j] - width, gUnknown_082FB3F8[i], -1, NULL);
             }

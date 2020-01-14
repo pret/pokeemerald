@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_Gym_EventScript_20DEEB",
+      "script": "MauvilleCity_Gym_EventScript_Wattson",
       "flag": "FLAG_HIDE_MAUVILLE_GYM_WATTSON"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MauvilleCity_Gym_EventScript_20E0D0",
+      "script": "MauvilleCity_Gym_EventScript_Shawn",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MauvilleCity_Gym_EventScript_20E0FE",
+      "script": "MauvilleCity_Gym_EventScript_Vivian",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MauvilleCity_Gym_EventScript_20E0E7",
+      "script": "MauvilleCity_Gym_EventScript_Ben",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "MauvilleCity_Gym_EventScript_20E0B9",
+      "script": "MauvilleCity_Gym_EventScript_Kirk",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_Gym_EventScript_20E12C",
+      "script": "MauvilleCity_Gym_EventScript_GymGuide",
       "flag": "0"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MauvilleCity_Gym_EventScript_20E115",
+      "script": "MauvilleCity_Gym_EventScript_Angelo",
       "flag": "0"
     }
   ],
@@ -130,7 +130,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "MauvilleCity_Gym_EventScript_20E01E"
+      "script": "MauvilleCity_Gym_EventScript_Switch2"
     },
     {
       "type": "trigger",
@@ -139,7 +139,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "MauvilleCity_Gym_EventScript_20E043"
+      "script": "MauvilleCity_Gym_EventScript_Switch3"
     },
     {
       "type": "trigger",
@@ -148,7 +148,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "MauvilleCity_Gym_EventScript_20DFF9"
+      "script": "MauvilleCity_Gym_EventScript_Switch1"
     },
     {
       "type": "trigger",
@@ -157,7 +157,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "MauvilleCity_Gym_EventScript_20E068"
+      "script": "MauvilleCity_Gym_EventScript_Switch4"
     }
   ],
   "bg_events": [
@@ -167,7 +167,7 @@
       "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MauvilleCity_Gym_EventScript_20E14B"
+      "script": "MauvilleCity_Gym_EventScript_LeftGymStatue"
     },
     {
       "type": "sign",
@@ -175,7 +175,7 @@
       "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MauvilleCity_Gym_EventScript_20E15B"
+      "script": "MauvilleCity_Gym_EventScript_RightGymStatue"
     }
   ]
 }

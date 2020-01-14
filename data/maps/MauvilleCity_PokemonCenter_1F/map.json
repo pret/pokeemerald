@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_PokemonCenter_1F_EventScript_210E78",
+      "script": "MauvilleCity_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_PokemonCenter_1F_EventScript_28E066",
+      "script": "MauvilleCity_PokemonCenter_1F_EventScript_MauvilleOldMan",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_PokemonCenter_1F_EventScript_210E86",
+      "script": "MauvilleCity_PokemonCenter_1F_EventScript_Woman1",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_PokemonCenter_1F_EventScript_210E8F",
+      "script": "MauvilleCity_PokemonCenter_1F_EventScript_Woman2",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MauvilleCity_PokemonCenter_1F_EventScript_210E98",
+      "script": "MauvilleCity_PokemonCenter_1F_EventScript_Youngster",
       "flag": "0"
     }
   ],

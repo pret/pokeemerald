@@ -30,7 +30,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_EventScript_1EA73B",
+      "script": "LavaridgeTown_EventScript_ExpertF",
       "flag": "0"
     },
     {
@@ -43,7 +43,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_EventScript_1EA70E",
+      "script": "LavaridgeTown_EventScript_ExpertM",
       "flag": "0"
     },
     {
@@ -56,7 +56,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_EventScript_1EA717",
+      "script": "LavaridgeTown_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -69,7 +69,7 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_EventScript_1EA720",
+      "script": "LavaridgeTown_EventScript_Twin",
       "flag": "0"
     },
     {
@@ -82,7 +82,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_EventScript_1EA729",
+      "script": "LavaridgeTown_EventScript_HotSpringsOldWoman1",
       "flag": "0"
     },
     {
@@ -95,7 +95,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_EventScript_1EA732",
+      "script": "LavaridgeTown_EventScript_HotSpringsOldWoman2",
       "flag": "0"
     },
     {
@@ -109,7 +109,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2"
+      "flag": "FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_ON_BIKE"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_VAR_0",
@@ -122,7 +122,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1"
+      "flag": "FLAG_HIDE_LAVARIDGE_TOWN_RIVAL"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_EXPERT_F",
@@ -134,7 +134,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LavaridgeTown_EventScript_1EA744",
+      "script": "LavaridgeTown_EventScript_EggWoman",
       "flag": "0"
     }
   ],
@@ -190,7 +190,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "LavaridgeTown_EventScript_1EA6FA"
+      "script": "LavaridgeTown_EventScript_HotSpringsTrigger"
     }
   ],
   "bg_events": [
@@ -200,7 +200,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LavaridgeTown_EventScript_1EA7B7"
+      "script": "LavaridgeTown_EventScript_HerbShopSign"
     },
     {
       "type": "sign",
@@ -208,7 +208,7 @@
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LavaridgeTown_EventScript_1EA7AE"
+      "script": "LavaridgeTown_EventScript_GymSign"
     },
     {
       "type": "sign",
@@ -224,7 +224,7 @@
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "LavaridgeTown_EventScript_1EA7A5"
+      "script": "LavaridgeTown_EventScript_TownSign"
     },
     {
       "type": "sign",

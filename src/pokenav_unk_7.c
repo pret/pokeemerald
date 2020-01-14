@@ -195,8 +195,8 @@ u32 sub_81CDE94(s32 state)
     {
     case 0:
         if (sub_81CD3C4() != TRUE)
-            return 2;
-        return 0;
+            return LT_PAUSE;
+        return LT_INC_AND_PAUSE;
     case 1:
         InitBgTemplates(gUnknown_08623358, ARRAY_COUNT(gUnknown_08623358));
         ChangeBgX(1, 0, 0);
@@ -209,15 +209,15 @@ u32 sub_81CDE94(s32 state)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
         decompress_and_copy_tile_data_to_vram(3, gPokenavCondition_Gfx, 0, 0, 0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 2:
         if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
         decompress_and_copy_tile_data_to_vram(2, gUnknown_08623228, 0, 0, 0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 3:
          if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
 
         LZ77UnCompVram(gPokenavCondition_Tilemap, structPtr->tilemapBuffers[0]);
         SetBgTilemapBuffer(3, structPtr->tilemapBuffers[0]);
@@ -228,26 +228,26 @@ u32 sub_81CDE94(s32 state)
         CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, 0x10, 0x20);
         CopyPaletteIntoBufferUnfaded(gUnknown_08623208, 0xF0, 0x20);
         structPtr->unk1814 = -80;
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 4:
         if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
 
         LZ77UnCompVram(gUnknown_0862323C, structPtr->tilemapBuffers[2]);
         SetBgTilemapBuffer(2, structPtr->tilemapBuffers[2]);
         CopyBgTilemapBufferToVram(2);
         CopyPaletteIntoBufferUnfaded(gUnknown_086231E8, 0x30, 0x20);
         sub_81D21DC(2);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 5:
         sub_8199DF0(1, 0, 0, 1);
         sub_8199DF0(1, 17, 1, 1);
         CpuFill32(0, structPtr->tilemapBuffers[1], BG_SCREEN_SIZE);
         SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 6:
         if (free_temp_tile_data_buffers_if_possible())
-            return 2;
+            return LT_PAUSE;
 
         structPtr->unk1820 = AddWindow(&gUnknown_08623364);
         if (sub_81CDD5C() == TRUE)
@@ -257,29 +257,29 @@ u32 sub_81CDE94(s32 state)
             structPtr->unk1823 = AddWindow(&gUnknown_0862337C);
         }
         DeactivateAllTextPrinters();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 7:
         sub_81CED30(0);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 8:
         sub_81CE9E4();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 9:
         if (sub_81CDD5C() == TRUE)
             sub_81CE934();
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 10:
         sub_81CE754(0, sub_81CDC84(), TRUE);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 11:
         sub_81CE754(1, sub_81CDC84(), TRUE);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 12:
         sub_81CE754(2, sub_81CDC84(), TRUE);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 13:
         if (sub_81CE754(3, sub_81CDC84(), TRUE) != TRUE)
-            return 2;
+            return LT_PAUSE;
         PutWindowTilemap(structPtr->unk1820);
         if (sub_81CDD5C() == TRUE)
         {
@@ -287,14 +287,14 @@ u32 sub_81CDE94(s32 state)
             PutWindowTilemap(structPtr->unk1822);
             PutWindowTilemap(structPtr->unk1823);
         }
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 14:
         ShowBg(1);
         HideBg(2);
         ShowBg(3);
         if (sub_81CDD5C() == TRUE)
-            sub_81C7BA4(4);
-        return 0;
+            PrintHelpBarText(HELPBAR_CONDITION_MON_STATUS);
+        return LT_INC_AND_PAUSE;
     case 15:
         sub_81C7AC0(1);
         if (!sub_81CDD5C())
@@ -303,25 +303,25 @@ u32 sub_81CDE94(s32 state)
             sub_81C7FA0(1, TRUE, 0);
             sub_81C7FA0(6, TRUE, 0);
         }
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 16:
         if (IsPaletteFadeActive())
-            return 2;
+            return LT_PAUSE;
         if (!sub_81CDD5C() && sub_81C8010())
-            return 2;
+            return LT_PAUSE;
         SetVBlankCallback_(sub_81CEE44);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 17:
         sub_81CEE90();
         sub_81D20AC(sub_81CDC70());
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 18:
         if (sub_81D20BC(sub_81CDC70()))
-            return 2;
-        return 0;
+            return LT_PAUSE;
+        return LT_INC_AND_PAUSE;
     case 19:
         sub_81CEE74(TRUE);
-        return 0;
+        return LT_INC_AND_PAUSE;
     case 20:
         if (!sub_81D3178(sub_81CDC70(), &structPtr->unk1814))
         {
@@ -329,12 +329,12 @@ u32 sub_81CDE94(s32 state)
             if (sub_81CDD5C() == TRUE || sub_81CDC60() != sub_81CDC50())
                 sub_81D3480(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
 
-            return 4;
+            return LT_FINISH;
         }
-        return 2;
+        return LT_PAUSE;
     }
 
-    return 4;
+    return LT_FINISH;
 }
 
 u32 sub_81CE2D0(s32 state)
@@ -367,7 +367,7 @@ u32 sub_81CE2D0(s32 state)
         return 1;
     }
 
-    return 4;
+    return LT_FINISH;
 }
 
 u32 sub_81CE37C(s32 state)
@@ -424,7 +424,7 @@ u32 sub_81CE37C(s32 state)
         return 2;
     }
 
-    return 4;
+    return LT_FINISH;
 }
 
 u32 sub_81CE4D8(s32 state)
@@ -468,7 +468,7 @@ u32 sub_81CE4D8(s32 state)
         return 2;
     }
 
-    return 4;
+    return LT_FINISH;
 }
 
 u32 sub_81CE5E4(s32 state)
@@ -506,7 +506,7 @@ u32 sub_81CE5E4(s32 state)
         return 2;
     }
 
-    return 4;
+    return LT_FINISH;
 }
 
 u32 sub_81CE6BC(s32 state)
@@ -514,18 +514,18 @@ u32 sub_81CE6BC(s32 state)
     switch (state)
     {
     case 0:
-        sub_811FAA4(sub_81CDD7C(), 0xb0, 0x20);
+        sub_811FAA4(sub_81CDD7C(), 176, 32);
         return 1;
     case 1:
-        sub_81C7BA4(5);
+        PrintHelpBarText(HELPBAR_CONDITION_MARKINGS);
         return 1;
     case 2:
-        if (IsDma3ManagerBusyWithBgCopy_() == TRUE)
+        if (WaitForHelpBar() == TRUE)
             return 2;
         return 1;
     }
 
-    return 4;
+    return LT_FINISH;
 }
 
 u32 sub_81CE700(s32 state)
@@ -536,18 +536,18 @@ u32 sub_81CE700(s32 state)
         sub_811FAF8();
         return 1;
     case 1:
-        sub_81C7BA4(4);
+        PrintHelpBarText(HELPBAR_CONDITION_MON_STATUS);
         return 1;
     case 2:
-        if (IsDma3ManagerBusyWithBgCopy_() == TRUE)
+        if (WaitForHelpBar() == TRUE)
             return 2;
         return 1;
     }
 
-    return 4;
+    return LT_FINISH;
 }
 
-u8 *sub_81CE738(u8 *dst, u16 num)
+static u8 *UnusedPrintNumberString(u8 *dst, u16 num)
 {
     u8 *txtPtr = ConvertIntToDecimalStringN(dst, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     txtPtr = StringCopy(txtPtr, gText_Number2);
@@ -719,8 +719,8 @@ void sub_81CE9E4(void)
         if (spriteId != MAX_SPRITES)
         {
             structPtr->unk1806[i] = spriteId;
-            gSprites[spriteId].oam.shape = 1;
-            gSprites[spriteId].oam.size = 2;
+            gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
+            gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
         }
         else
         {

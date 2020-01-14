@@ -1,7 +1,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "window.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "constants/species.h"
 #include "palette.h"
 #include "decompress.h"
@@ -41,7 +41,7 @@ static const struct OamData gUnknown_0860B064 =
 
 static const struct OamData gUnknown_0860B06C =
 {
-    .affineMode = 1,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64)
 };

@@ -1,3 +1,7 @@
+EventScript_271354:: @ 8271354
+	cmdD8
+	cmdD9
+
 EventScript_ShowSecondTrainerIntro:: @ 8271356
 	special SetUpTrainerEncounterMusic
 	special EndTrainerApproach
@@ -26,7 +30,7 @@ EventScript_TryDoDoubleTrainerBattle:: @ 827138A
 	compare VAR_RESULT, 0
 	goto_if_ne EventScript_NoDoubleTrainerBattle
 	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne EventScript_NotEnoughMonsForDoubleBattle
 	special SetUpTrainerEncounterMusic
 	special SetUpTrainerMovement
@@ -69,7 +73,7 @@ EventScript_TryDoDoubleRematchBattle:: @ 82713F8
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_NoDoubleRematchTrainerBattle
 	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne EventScript_NotEnoughMonsForDoubleRematchBattle
 	special SetUpTrainerEncounterMusic
 	special SetUpTrainerMovement
@@ -126,3 +130,10 @@ EventScript_EndTrainerBattle:: @ 8271491
 	gotobeatenscript
 	releaseall
 	end
+
+Std_MsgboxAutoclose:: @ 8271494
+	message 0x0
+	waitmessage
+	waitbuttonpress
+	release
+	return

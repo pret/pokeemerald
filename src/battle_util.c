@@ -1,30 +1,30 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "constants/battle_script_commands.h"
-#include "constants/abilities.h"
-#include "constants/moves.h"
-#include "constants/hold_effects.h"
-#include "constants/battle_anim.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "item.h"
-#include "constants/items.h"
 #include "util.h"
-#include "constants/battle_move_effects.h"
 #include "battle_scripts.h"
 #include "random.h"
 #include "text.h"
 #include "string_util.h"
 #include "battle_message.h"
-#include "constants/battle_string_ids.h"
-#include "constants/weather.h"
 #include "battle_ai_script_commands.h"
 #include "battle_controllers.h"
 #include "event_data.h"
 #include "link.h"
-#include "berry.h"
 #include "field_weather.h"
+#include "constants/abilities.h"
+#include "constants/battle_anim.h"
+#include "constants/battle_move_effects.h"
+#include "constants/battle_script_commands.h"
+#include "constants/battle_string_ids.h"
+#include "constants/berry.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
+#include "constants/weather.h"
 
 // rom const data
 static const u16 sSoundMovesTable[] =
@@ -1830,9 +1830,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     switch (GetCurrentWeather())
                     {
-                    case WEATHER_RAIN_LIGHT:
-                    case WEATHER_RAIN_MED:
-                    case WEATHER_RAIN_HEAVY:
+                    case WEATHER_RAIN:
+                    case WEATHER_RAIN_THUNDERSTORM:
+                    case WEATHER_DOWNPOUR:
                         if (!(gBattleWeather & WEATHER_RAIN_ANY))
                         {
                             gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
@@ -2084,7 +2084,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
-        case ABILITYEFFECT_MOVE_END: // Think contact abilities.
+        case ABILITYEFFECT_ON_DAMAGE: // Contact abilities and Color Change
             switch (gLastUsedAbility)
             {
             case ABILITY_COLOR_CHANGE:

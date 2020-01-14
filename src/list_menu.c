@@ -8,7 +8,7 @@
 #include "trig.h"
 #include "decompress.h"
 #include "palette.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "strings.h"
 #include "sound.h"
 #include "constants/songs.h"
@@ -125,10 +125,10 @@ static const struct
 static const struct OamData sOamData_ScrollArrowIndicator =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
@@ -265,10 +265,10 @@ static const struct Subsprite sSubsprite_RedOutline8 =
 static const struct OamData sOamData_RedArrowCursor =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "blit.h"
 #include "dma3.h"
@@ -62,7 +62,13 @@ static EWRAM_DATA u16 gUnknown_0203CDA8 = 0;
 static EWRAM_DATA void *gUnknown_0203CDAC[0x20] = {NULL};
 
 const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
-static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
+
+static const u8 sTextSpeedFrameDelays[] = 
+{ 
+    [OPTIONS_TEXT_SPEED_SLOW] = 8, 
+    [OPTIONS_TEXT_SPEED_MID]  = 4, 
+    [OPTIONS_TEXT_SPEED_FAST] = 1 
+};
 
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
 {
@@ -90,7 +96,7 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
 };
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const u8 gUnknown_0860F0D0[] = { 15, 1, 2 };
+const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
 
 // Table of move info icon offsets in graphics/interface_fr/menu.png
 const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
@@ -480,7 +486,7 @@ u8 GetPlayerTextSpeedDelay(void)
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
         gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     speed = GetPlayerTextSpeed();
-    return gUnknown_0860F094[speed];
+    return sTextSpeedFrameDelays[speed];
 }
 
 u8 sub_81979C4(u8 a1)
@@ -819,7 +825,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
                   0,
                   0xEC - (GetWindowAttribute(sWindowId, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
                   1,
-                  gUnknown_0860F0D0,
+                  sTextColors,
                   0,
                   string);
         if (copyToVram)
@@ -836,15 +842,15 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
     {
         if (a3 != 0)
         {
-            color[0] = 0;
-            color[1] = 1;
-            color[2] = 2;
+            color[0] = TEXT_COLOR_TRANSPARENT;
+            color[1] = TEXT_COLOR_WHITE;
+            color[2] = TEXT_COLOR_DARK_GREY;
         }
         else
         {
-            color[0] = 15;
-            color[1] = 1;
-            color[2] = 2;
+            color[0] = TEXT_DYNAMIC_COLOR_6;
+            color[1] = TEXT_COLOR_WHITE;
+            color[2] = TEXT_COLOR_DARK_GREY;
         }
         PutWindowTilemap(sWindowId);
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
@@ -1433,13 +1439,13 @@ s8 sub_8199284(void)
         sub_8199134(0, 1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         sub_8199134(-1, 0);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         sub_8199134(1, 0);
@@ -1474,13 +1480,13 @@ s8 Menu_ProcessInputGridLayout(void)
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         if (oldPos != sub_81991F8(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         if (oldPos != sub_81991F8(1, 0))
             PlaySE(SE_SELECT);
@@ -1513,13 +1519,13 @@ s8 sub_81993D8(void)
         sub_8199134(0, 1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || sub_812210C() == 1)
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         sub_8199134(-1, 0);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || sub_812210C() == 2)
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         sub_8199134(1, 0);
@@ -1554,13 +1560,13 @@ s8 sub_8199484(void)
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || sub_812210C() == 1)
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         if (oldPos != sub_81991F8(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || sub_812210C() == 2)
+    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         if (oldPos != sub_81991F8(1, 0))
             PlaySE(SE_SELECT);
@@ -1868,7 +1874,7 @@ u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 
     }
 }
 
-void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
+void SetBgTilemapPalette(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
 {
     u8 i;
     u8 j;
@@ -1883,7 +1889,7 @@ void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette)
     }
 }
 
-void sub_8199CBC(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height)
+void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i;
     u8 j;
@@ -2148,18 +2154,18 @@ void sub_819A344(u8 a0, u8 *dest, u8 color)
             break;
         case 1:
             if (IsNationalPokedexEnabled())
-                string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(1), 0, 3);
+                string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 3);
             else
-                string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(1), 0, 3);
+                string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 3);
             *string = EOS;
             break;
         case 2:
-            string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, 0, 3);
+            string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
             *(string++) = CHAR_COLON;
-            ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, 2, 2);
+            ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
             break;
         case 3:
-            sub_81245DC(string, gMapHeader.regionMapSectionId);
+            GetMapNameGeneric(string, gMapHeader.regionMapSectionId);
             break;
         case 4:
             for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 1; curFlag <= FLAG_BADGE08_GET; curFlag++)

@@ -7,7 +7,7 @@
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
@@ -26,11 +26,11 @@
 
 #define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
 
-extern const struct OamData gUnknown_0852497C;
+extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
 static void sub_80A6FB4(struct Sprite *sprite);
 static void sub_80A7144(struct Sprite *sprite);
-static void sub_80A791C(struct Sprite *sprite);
+static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void sub_80A8DFC(struct Sprite *sprite);
 static void sub_80A8E88(struct Sprite *sprite);
 static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId);
@@ -92,7 +92,7 @@ static const struct SpriteTemplate sUnknown_08525F90[] =
     {
         .tileTag = 55125,
         .paletteTag = 55125,
-        .oam = &gUnknown_0852497C,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -101,7 +101,7 @@ static const struct SpriteTemplate sUnknown_08525F90[] =
     {
         .tileTag = 55126,
         .paletteTag = 55126,
-        .oam = &gUnknown_0852497C,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -966,7 +966,7 @@ void sub_80A6D60(struct BattleAnimBgData *unk, const void *src, u32 arg2)
     CopyBgTilemapBufferToVram(unk->bgId);
 }
 
-u8 sub_80A6D94(void)
+u8 GetBattleBgPaletteNum(void)
 {
     if (IsContest())
         return 1;
@@ -988,7 +988,7 @@ void sub_80A6DAC(bool8 arg0)
     }
 }
 
-void sub_80A6DEC(struct Sprite *sprite)
+void TradeMenuBouncePartySprites(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -1253,7 +1253,7 @@ void ResetSpriteRotScale(u8 spriteId)
 {
     SetSpriteRotScale(spriteId, 0x100, 0x100, 0);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    gSprites[spriteId].oam.objMode = 0;
+    gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
     gSprites[spriteId].affineAnimPaused = FALSE;
     CalcCenterToCornerVec(&gSprites[spriteId], gSprites[spriteId].oam.shape, gSprites[spriteId].oam.size, gSprites[spriteId].oam.affineMode);
 }
@@ -1353,7 +1353,7 @@ u32 sub_80A75AC(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner,
         if (!IsContest())
             selectedPalettes = 0xe;
         else
-            selectedPalettes = 1 << sub_80A6D94();
+            selectedPalettes = 1 << GetBattleBgPaletteNum();
     }
     if (attacker)
     {
@@ -1456,7 +1456,7 @@ static u8 GetBattlerAtPosition_(u8 position)
     return GetBattlerAtPosition(position);
 }
 
-void sub_80A77C8(struct Sprite *sprite)
+void AnimSpriteOnMonPos(struct Sprite *sprite)
 {
     bool8 var;
 
@@ -1513,7 +1513,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_80A78AC(struct Sprite *sprite)
+void AnimThrowProjectile(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -1523,16 +1523,16 @@ void sub_80A78AC(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
-    sprite->callback = sub_80A791C;
+    sprite->callback = AnimThrowProjectile_Step;
 }
 
-static void sub_80A791C(struct Sprite *sprite)
+static void AnimThrowProjectile_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
 }
 
-void sub_80A7938(struct Sprite *sprite)
+void AnimSnoreZ(struct Sprite *sprite)
 {
     bool8 r4;
     u8 battlerId, coordType;
@@ -2267,7 +2267,7 @@ u8 sub_80A89C8(int battlerId, u8 spriteId, int species)
     gSprites[newSpriteId] = gSprites[spriteId];
     gSprites[newSpriteId].usingSheet = TRUE;
     gSprites[newSpriteId].oam.priority = 0;
-    gSprites[newSpriteId].oam.objMode = 2;
+    gSprites[newSpriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
     gSprites[newSpriteId].oam.tileNum = gSprites[spriteId].oam.tileNum;
     gSprites[newSpriteId].callback = SpriteCallbackDummy;
     return newSpriteId;

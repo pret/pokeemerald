@@ -165,7 +165,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F57D7",
+      "script": "Route120_EventScript_Colin",
       "flag": "0"
     },
     {
@@ -178,7 +178,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F57EE",
+      "script": "Route120_EventScript_Robert",
       "flag": "0"
     },
     {
@@ -191,7 +191,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "7",
-      "script": "Route120_EventScript_1F5850",
+      "script": "Route120_EventScript_Lorenzo",
       "flag": "0"
     },
     {
@@ -204,7 +204,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route120_EventScript_1F5867",
+      "script": "Route120_EventScript_Jenna",
       "flag": "0"
     },
     {
@@ -217,7 +217,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F587E",
+      "script": "Route120_EventScript_Jeffrey",
       "flag": "0"
     },
     {
@@ -243,7 +243,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_28CE76",
+      "script": "GabbyAndTy_EventScript_TyBattle3",
       "flag": "FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1"
     },
     {
@@ -256,7 +256,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_28CE56",
+      "script": "GabbyAndTy_EventScript_GabbyBattle3",
       "flag": "FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1"
     },
     {
@@ -269,7 +269,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_28CF16",
+      "script": "GabbyAndTy_EventScript_GabbyBattle6",
       "flag": "FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2"
     },
     {
@@ -282,7 +282,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_28CF36",
+      "script": "GabbyAndTy_EventScript_TyBattle6",
       "flag": "FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2"
     },
     {
@@ -321,7 +321,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_1F5527",
+      "script": "Route120_EventScript_BerryBeauty",
       "flag": "0"
     },
     {
@@ -334,7 +334,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route120_EventScript_1F58E0",
+      "script": "Route120_EventScript_Jennifer",
       "flag": "0"
     },
     {
@@ -347,7 +347,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route120_EventScript_1F58F7",
+      "script": "Route120_EventScript_Chip",
       "flag": "0"
     },
     {
@@ -360,7 +360,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route120_EventScript_1F590E",
+      "script": "Route120_EventScript_Clarissa",
       "flag": "0"
     },
     {
@@ -373,7 +373,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F5925",
+      "script": "Route120_EventScript_Angelica",
       "flag": "0"
     },
     {
@@ -412,8 +412,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_1F57BC",
-      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_1"
+      "script": "Route120_EventScript_InvisibleBridgeKecleon",
+      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_INVISIBLE"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_STEVEN",
@@ -425,7 +425,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_1F5641",
+      "script": "Route120_EventScript_Steven",
       "flag": "FLAG_HIDE_ROUTE_120_STEVEN"
     },
     {
@@ -464,7 +464,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F593C",
+      "script": "Route120_EventScript_Keigo",
       "flag": "0"
     },
     {
@@ -477,7 +477,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F5953",
+      "script": "Route120_EventScript_Riley",
       "flag": "0"
     },
     {
@@ -491,7 +491,7 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE"
+      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_VISIBLE"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_KECLEON_1",
@@ -503,8 +503,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_2722DB",
-      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_2"
+      "script": "Route120_EventScript_Kecleon1",
+      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_1"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_KECLEON_1",
@@ -516,8 +516,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_2722E8",
-      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_3"
+      "script": "Route120_EventScript_Kecleon2",
+      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_2"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_KECLEON_1",
@@ -529,8 +529,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_2722F5",
-      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_4"
+      "script": "Route120_EventScript_Kecleon3",
+      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_3"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_KECLEON_1",
@@ -542,8 +542,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_27230F",
-      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_6"
+      "script": "Route120_EventScript_Kecleon5",
+      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_5"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_KECLEON_1",
@@ -555,8 +555,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_272302",
-      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_5"
+      "script": "Route120_EventScript_Kecleon4",
+      "flag": "FLAG_HIDE_ROUTE_120_KECLEON_4"
     },
     {
       "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
@@ -568,7 +568,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F5981",
+      "script": "Route120_EventScript_Callie",
       "flag": "0"
     },
     {
@@ -581,7 +581,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route120_EventScript_1F596A",
+      "script": "Route120_EventScript_Leonel",
       "flag": "0"
     },
     {
@@ -620,63 +620,63 @@
       "x": 7,
       "y": 15,
       "elevation": 0,
-      "weather": "COORD_EVENT_WEATHER_RAIN_LIGHT"
+      "weather": "COORD_EVENT_WEATHER_RAIN"
     },
     {
       "type": "weather",
       "x": 7,
       "y": 16,
       "elevation": 0,
-      "weather": "COORD_EVENT_WEATHER_RAIN_LIGHT"
+      "weather": "COORD_EVENT_WEATHER_RAIN"
     },
     {
       "type": "weather",
       "x": 22,
       "y": 61,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_RAIN_LIGHT"
+      "weather": "COORD_EVENT_WEATHER_RAIN"
     },
     {
       "type": "weather",
       "x": 12,
       "y": 64,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_RAIN_LIGHT"
+      "weather": "COORD_EVENT_WEATHER_RAIN"
     },
     {
       "type": "weather",
       "x": 35,
       "y": 63,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 36,
       "y": 63,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 37,
       "y": 63,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 38,
       "y": 63,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 32,
       "y": 88,
       "elevation": 5,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
@@ -704,49 +704,49 @@
       "x": 32,
       "y": 89,
       "elevation": 5,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 32,
       "y": 90,
       "elevation": 5,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 32,
       "y": 91,
       "elevation": 5,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 10,
       "y": 75,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 11,
       "y": 75,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 12,
       "y": 75,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     },
     {
       "type": "weather",
       "x": 13,
       "y": 75,
       "elevation": 3,
-      "weather": "COORD_EVENT_WEATHER_CLOUDS"
+      "weather": "COORD_EVENT_WEATHER_SUNNY_CLOUDS"
     }
   ],
   "bg_events": [
@@ -756,7 +756,7 @@
       "y": 3,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route120_EventScript_1F57C5"
+      "script": "Route120_EventScript_RouteSignFortree"
     },
     {
       "type": "sign",
@@ -764,7 +764,7 @@
       "y": 88,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route120_EventScript_1F57CE"
+      "script": "Route120_EventScript_RouteSign121"
     },
     {
       "type": "secret_base",

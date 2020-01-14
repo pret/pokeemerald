@@ -41,7 +41,7 @@ struct PokenavMainMenuResources
     u32 (*unk4)(void);
     u32 unk8;
     u32 currentTaskId;
-    u32 unk10;
+    u32 helpBarWindowId;
     u32 unk14;
     struct Sprite *spinningPokenav;
     struct Sprite *leftHeaderSprites[2];
@@ -68,10 +68,10 @@ static void MoveLeftHeader(struct Sprite *sprite, s32 startX, s32 endX, s32 dura
 static void SpriteCB_MoveLeftHeader(struct Sprite *sprite);
 static void InitPokenavMainMenuResources(void);
 static void InitHoennMapHeaderSprites(void);
-static void sub_81C7B74(void);
+static void InitHelpBar(void);
 static u32 LoopedTask_ScrollMenuHeaderDown(s32 a0);
 static u32 LoopedTask_ScrollMenuHeaderUp(s32 a0);
-static void sub_81C7BF8(u32 a0);
+static void DrawHelpBar(u32 windowId);
 static void SpriteCB_SpinningPokenav(struct Sprite* sprite);
 static u32 LoopedTask_InitPokenavMenu(s32 a0);
 
@@ -92,7 +92,7 @@ const struct BgTemplate gPokenavMainMenuBgTemplates[] =
     }
 };
 
-const struct WindowTemplate gUnknown_0861FA08[2] =
+static const struct WindowTemplate sHelpBarWindowTemplate[] =
 {
     {
         .bg = 0,
@@ -103,36 +103,28 @@ const struct WindowTemplate gUnknown_0861FA08[2] =
         .paletteNum = 0,
         .baseBlock = 0x36,
     },
-    {
-        .bg = 0xFF,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 0,
-        .height = 0,
-        .paletteNum = 0,
-        .baseBlock = 0,
-    },
+    DUMMY_WIN_TEMPLATE
 };
 
-const u8 *const sHelpBarTexts[12] =
+static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
 {
-    gText_Pokenav_ClearButtonList,
-    gText_PokenavMap_ZoomedOutButtons,
-    gText_PokenavMap_ZoomedInButtons,
-    gText_PokenavCondition_MonListButtons,
-    gText_PokenavCondition_MonStatusButtons,
-    gText_PokenavCondition_MarkingButtons,
-    gText_PokenavMatchCall_TrainerListButtons,
-    gText_PokenavMatchCall_CallMenuButtons,
-    gText_PokenavMatchCall_CheckTrainerButtons,
-    gText_PokenavRibbons_MonListButtons,
-    gText_PokenavRibbons_RibbonListButtons,
-    gText_PokenavRibbons_RibbonCheckButtons,
+    [HELPBAR_NONE]                 = gText_Pokenav_ClearButtonList,
+    [HELPBAR_MAP_ZOOMED_OUT]       = gText_PokenavMap_ZoomedOutButtons,
+    [HELPBAR_MAP_ZOOMED_IN]        = gText_PokenavMap_ZoomedInButtons,
+    [HELPBAR_CONDITION_MON_LIST]   = gText_PokenavCondition_MonListButtons,
+    [HELPBAR_CONDITION_MON_STATUS] = gText_PokenavCondition_MonStatusButtons,
+    [HELPBAR_CONDITION_MARKINGS]   = gText_PokenavCondition_MarkingButtons,
+    [HELPBAR_MC_TRAINER_LIST]      = gText_PokenavMatchCall_TrainerListButtons,
+    [HELPBAR_MC_CALL_MENU]         = gText_PokenavMatchCall_CallMenuButtons,
+    [HELPBAR_MC_CHECK_PAGE]        = gText_PokenavMatchCall_CheckTrainerButtons,
+    [HELPBAR_RIBBONS_MON_LIST]     = gText_PokenavRibbons_MonListButtons,
+    [HELPBAR_RIBBONS_LIST]         = gText_PokenavRibbons_RibbonListButtons,
+    [HELPBAR_RIBBONS_CHECK]        = gText_PokenavRibbons_RibbonCheckButtons,
 };
 
-const u8 gMenuButtonReminderColor[3] =
+static const u8 sHelpBarTextColors[3] =
 {
-    4, 1, 2
+    TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY
 };
 
 static const struct CompressedSpriteSheet gSpinningPokenavSpriteSheet[] =
@@ -288,7 +280,7 @@ static const struct OamData sUnknown_0861FB24 =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
@@ -386,7 +378,7 @@ static u32 LoopedTask_InitPokenavMenu(s32 a0)
         if (free_temp_tile_data_buffers_if_possible())
             return LT_PAUSE;
 
-        sub_81C7B74();
+        InitHelpBar();
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -676,31 +668,31 @@ void InitBgTemplates(const struct BgTemplate *templates, int count)
         InitBgFromTemplate(templates++);
 }
 
-static void sub_81C7B74(void)
+static void InitHelpBar(void)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    InitWindows(&gUnknown_0861FA08[0]);
-    structPtr->unk10 = 0;
-    sub_81C7BF8(structPtr->unk10);
-    PutWindowTilemap(structPtr->unk10);
-    CopyWindowToVram(structPtr->unk10, 3); // TODO: Use a defined constant here.
+    InitWindows(&sHelpBarWindowTemplate[0]);
+    structPtr->helpBarWindowId = 0;
+    DrawHelpBar(structPtr->helpBarWindowId);
+    PutWindowTilemap(structPtr->helpBarWindowId);
+    CopyWindowToVram(structPtr->helpBarWindowId, 3); // TODO: Use a defined constant here.
 }
 
-void sub_81C7BA4(u32 helpBarIndex)
+void PrintHelpBarText(u32 textId)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    sub_81C7BF8(structPtr->unk10);
-    AddTextPrinterParameterized3(structPtr->unk10, 1, 0, 1, gMenuButtonReminderColor, 0, sHelpBarTexts[helpBarIndex]);
+    DrawHelpBar(structPtr->helpBarWindowId);
+    AddTextPrinterParameterized3(structPtr->helpBarWindowId, 1, 0, 1, sHelpBarTextColors, 0, sHelpBarTexts[textId]);
 }
 
-bool32 IsDma3ManagerBusyWithBgCopy_(void)
+bool32 WaitForHelpBar(void)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-static void sub_81C7BF8(u32 windowId)
+static void DrawHelpBar(u32 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(4));
     FillWindowPixelRect(windowId, PIXEL_FILL(5), 0, 0, 0x80, 1);
