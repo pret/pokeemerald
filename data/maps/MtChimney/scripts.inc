@@ -110,8 +110,8 @@ MtChimney_EventScript_LavaCookieLady:: @ 822EEF3
 	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare VAR_RESULT, TRUE
-	call_if_eq MtChimney_EventScript_TakeMoney
-	giveitem_std ITEM_LAVA_COOKIE
+	call_if_eq MtChimney_EventScript_RemoveMoney
+	giveitem ITEM_LAVA_COOKIE
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_BagIsFull
 	hidemoneybox
@@ -124,8 +124,8 @@ MtChimney_EventScript_BagIsFull:: @ 822EF51
 	release
 	end
 
-MtChimney_EventScript_TakeMoney:: @ 822EF5E
-	takemoney 200, 0
+MtChimney_EventScript_RemoveMoney:: @ 822EF5E
+	removemoney 200, 0
 	updatemoneybox 0, 0
 	return
 
@@ -449,7 +449,7 @@ MtChimney_EventScript_MeteoriteMachine:: @ 822F0E4
 	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_EventScript_LeaveMeteoriteAlone
 	msgbox MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT
-	giveitem_std ITEM_METEORITE
+	giveitem ITEM_METEORITE
 	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end

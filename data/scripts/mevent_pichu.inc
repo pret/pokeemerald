@@ -1,7 +1,6 @@
 MysteryEventScript_SurfPichu:: @ 8674D3D
 	setvaddress MysteryEventScript_SurfPichu
-	checkflag FLAG_MYSTERY_EVENT_DONE
-	vgoto_if_ne SurfPichu_GiveIfPossible
+	vgoto_if_unset FLAG_MYSTERY_EVENT_DONE, SurfPichu_GiveIfPossible
 	returnram
 
 SurfPichu_GiveIfPossible: @ 8674D4C

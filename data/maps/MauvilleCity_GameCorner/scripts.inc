@@ -49,8 +49,8 @@ MauvilleCity_GameCorner_EventScript_Buy50Coins:: @ 820FC33
 	checkmoney COINS_PRICE_50, 0
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NotEnoughMoney
-	givecoins 50
-	takemoney COINS_PRICE_50, 0
+	addcoins 50
+	removemoney COINS_PRICE_50, 0
 	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_REGI
@@ -67,8 +67,8 @@ MauvilleCity_GameCorner_EventScript_Buy500Coins:: @ 820FC75
 	checkmoney COINS_PRICE_500, 0
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NotEnoughMoney
-	givecoins 500
-	takemoney COINS_PRICE_500, 0
+	addcoins 500
+	removemoney COINS_PRICE_500, 0
 	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_REGI
@@ -169,8 +169,8 @@ MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll:: @ 820FDCB
 	checkdecorspace DECOR_TREECKO_DOLL
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForDoll
-	takecoins DOLL_COINS
-	givedecoration DECOR_TREECKO_DOLL
+	removecoins DOLL_COINS
+	adddecoration DECOR_TREECKO_DOLL
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_SendToYourHomePC, MSGBOX_DEFAULT
@@ -185,8 +185,8 @@ MauvilleCity_GameCorner_EventScript_BuyTorchicDoll:: @ 820FE05
 	checkdecorspace DECOR_TORCHIC_DOLL
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForDoll
-	takecoins DOLL_COINS
-	givedecoration DECOR_TORCHIC_DOLL
+	removecoins DOLL_COINS
+	adddecoration DECOR_TORCHIC_DOLL
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_SendToYourHomePC, MSGBOX_DEFAULT
@@ -201,8 +201,8 @@ MauvilleCity_GameCorner_EventScript_BuyMudkipDoll:: @ 820FE3F
 	checkdecorspace DECOR_MUDKIP_DOLL
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForDoll
-	takecoins DOLL_COINS
-	givedecoration DECOR_MUDKIP_DOLL
+	removecoins DOLL_COINS
+	adddecoration DECOR_MUDKIP_DOLL
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_SendToYourHomePC, MSGBOX_DEFAULT
@@ -309,8 +309,8 @@ MauvilleCity_GameCorner_EventScript_BuyTM32:: @ 820FFDD
 	checkitemspace ITEM_TM32, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForTM
-	takecoins TM32_COINS
-	giveitem ITEM_TM32, 1
+	removecoins TM32_COINS
+	additem ITEM_TM32
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
@@ -324,8 +324,8 @@ MauvilleCity_GameCorner_EventScript_BuyTM29:: @ 8210017
 	checkitemspace ITEM_TM29, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForTM
-	takecoins TM29_COINS
-	giveitem ITEM_TM29, 1
+	removecoins TM29_COINS
+	additem ITEM_TM29
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
@@ -339,8 +339,8 @@ MauvilleCity_GameCorner_EventScript_BuyTM35:: @ 8210051
 	checkitemspace ITEM_TM35, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForTM
-	takecoins TM35_COINS
-	giveitem ITEM_TM35, 1
+	removecoins TM35_COINS
+	additem ITEM_TM35
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
@@ -354,8 +354,8 @@ MauvilleCity_GameCorner_EventScript_BuyTM24:: @ 821008B
 	checkitemspace ITEM_TM24, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForTM
-	takecoins TM24_COINS
-	giveitem ITEM_TM24, 1
+	removecoins TM24_COINS
+	additem ITEM_TM24
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
@@ -369,8 +369,8 @@ MauvilleCity_GameCorner_EventScript_BuyTM13:: @ 82100C5
 	checkitemspace ITEM_TM13, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForTM
-	takecoins TM13_COINS
-	giveitem ITEM_TM13, 1
+	removecoins TM13_COINS
+	additem ITEM_TM13
 	updatecoinsbox 1, 1
 	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
@@ -420,7 +420,7 @@ MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll:: @ 821017C
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo2, MSGBOX_DEFAULT
-	givedecoration_std DECOR_TREECKO_DOLL
+	givedecoration DECOR_TREECKO_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll
 	end
@@ -431,7 +431,7 @@ MauvilleCity_GameCorner_EventScript_GiveTorchicDoll:: @ 82101A6
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo2, MSGBOX_DEFAULT
-	givedecoration_std DECOR_TORCHIC_DOLL
+	givedecoration DECOR_TORCHIC_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll
 	end
@@ -442,7 +442,7 @@ MauvilleCity_GameCorner_EventScript_GiveMudkipDoll:: @ 82101D0
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo2, MSGBOX_DEFAULT
-	givedecoration_std DECOR_MUDKIP_DOLL
+	givedecoration DECOR_MUDKIP_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll
 	end
@@ -479,7 +479,7 @@ MauvilleCity_GameCorner_EventScript_TryGive20Coins:: @ 821023D
 	compare VAR_TEMP_1, 1  @ Only give 20 coins if player has no coins
 	goto_if_ge MauvilleCity_GameCorner_EventScript_PokefanMNormal
 	setflag FLAG_RECEIVED_20_COINS
-	givecoins 20
+	addcoins 20
 	msgbox MauvilleCity_GameCorner_Text_LuckOnlyLastSoLongTakeCoins, MSGBOX_DEFAULT
 	playse SE_REGI
 	goto MauvilleCity_GameCorner_EventScript_PokefanMNormal

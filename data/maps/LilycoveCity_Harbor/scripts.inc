@@ -364,7 +364,7 @@ LilycoveCity_Harbor_EventScript_BoardFerryWithSailor:: @ 821E514
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	setvar VAR_0x8004, 2
 	call Common_EventScript_FerryDepart
 	return
@@ -428,7 +428,7 @@ LilycoveCity_Harbor_EventScript_BoardFerry:: @ 821E5CC
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	setvar VAR_0x8004, 2
 	call Common_EventScript_FerryDepart
 	return

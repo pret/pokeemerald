@@ -66,7 +66,7 @@ Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone:: @ 822BC48
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_NotEnoughMoney
 	playse SE_REGI
 	msgbox Route121_SafariZoneEntrance_Text_ThatWillBe500Please, MSGBOX_DEFAULT
-	takemoney 500, 0
+	removemoney 500, 0
 	updatemoneybox 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
