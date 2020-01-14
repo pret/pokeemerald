@@ -61,7 +61,7 @@ static const struct FlashStruct sTransitionTypes[] =
     {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNUSED_2,    FALSE,  TRUE, DoExitCaveTransition},
     {MAP_TYPE_UNDERGROUND, MAP_TYPE_INDOOR,      FALSE,  TRUE, DoExitCaveTransition},
     {MAP_TYPE_UNDERGROUND, MAP_TYPE_SECRET_BASE, FALSE,  TRUE, DoExitCaveTransition},
-    {0, 0, FALSE, FALSE, NULL},
+    {},
 };
 
 static const u16 gCaveTransitionPalette_White[] = INCBIN_U16("graphics/misc/cave_transition_white.gbapal");
