@@ -570,65 +570,8 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/Route119_House/scripts.inc"
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc"
 
-@ Below could be split as std_msgbox.inc but autoclose straddles trainer_battle.inc
-Std_MsgboxNPC: @ 8271315
-	lock
-	faceplayer
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	release
-	return
-
-Std_MsgboxSign: @ 8271320
-	lockall
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	releaseall
-	return
-
-Std_MsgboxDefault: @ 827132A
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	return
-
-Std_MsgboxYesNo: @ 8271332
-	message 0x0
-	waitmessage
-	yesnobox 20, 8
-	return
-
-Std_MsgboxGetPoints: @ 827133C
-	message 0x0
-	playfanfare MUS_ME_POINTGET
-	waitfanfare
-	waitmessage
-	return
-
-Std_10: @ 8271347
-	pokenavcall 0x0
-	waitmessage
-	return
-
-EventScript_UnusedReturn: @ 827134E
-	return
-
-Common_EventScript_SaveGame:: @ 827134F
-	special SaveGame
-	waitstate
-	return
-
+	.include "data/scripts/std_msgbox.inc"
 	.include "data/scripts/trainer_battle.inc"
-
-Std_MsgboxAutoclose:: @ 8271494
-	message 0x0
-	waitmessage
-	waitbuttonpress
-	release
-	return
-
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
 
@@ -844,7 +787,7 @@ EventScript_UnusedBoardFerry:: @ 827222B
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	showobjectat 255, MAP_PETALBURG_CITY
+	showobjectat OBJ_EVENT_ID_PLAYER, 0
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_UnusedBoardFerry
 	waitmovement 0
@@ -861,7 +804,7 @@ Common_EventScript_FerryDepartIsland:: @ 8272250
 	compare VAR_FACING, DIR_WEST
 	call_if_eq Ferry_EventScript_DepartIslandWest
 	delay 30
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	call Common_EventScript_FerryDepart
 	return
 
@@ -880,7 +823,7 @@ Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
-	takeitem VAR_0x8004, 1
+	removeitem VAR_0x8004
 	return
 
 	.include "data/scripts/elite_four.inc"

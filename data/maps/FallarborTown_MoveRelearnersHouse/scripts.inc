@@ -42,7 +42,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove:: @ 820140C
 	compare VAR_0x8004, 0
 	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	msgbox FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale, MSGBOX_DEFAULT
-	takeitem ITEM_HEART_SCALE, 1
+	removeitem ITEM_HEART_SCALE
 	goto FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
 	end
 

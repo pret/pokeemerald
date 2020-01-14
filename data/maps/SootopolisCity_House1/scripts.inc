@@ -6,7 +6,7 @@ SootopolisCity_House1_EventScript_BrickBreakBlackBelt:: @ 822694D
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM31, SootopolisCity_House1_EventScript_ReceivedBrickBreak
 	msgbox SootopolisCity_House1_Text_DevelopedThisTM, MSGBOX_DEFAULT
-	giveitem_std ITEM_TM31
+	giveitem ITEM_TM31
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM31

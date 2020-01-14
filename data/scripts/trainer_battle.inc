@@ -130,3 +130,10 @@ EventScript_EndTrainerBattle:: @ 8271491
 	gotobeatenscript
 	releaseall
 	end
+
+Std_MsgboxAutoclose:: @ 8271494
+	message 0x0
+	waitmessage
+	waitbuttonpress
+	release
+	return

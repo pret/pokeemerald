@@ -41,7 +41,7 @@ CableClub_EventScript_DistributeEonTicket:: @ 8276B23
 	goto_if_eq CableClub_EventScript_AlreadyGotEonTicket
 	goto_if_set FLAG_SYS_HAS_EON_TICKET, CableClub_EventScript_AlreadyGotEonTicket
 	msgbox Mevent_Text_TheresATicketForYou, MSGBOX_DEFAULT
-	giveitem_std ITEM_EON_TICKET
+	giveitem ITEM_EON_TICKET
 	setflag FLAG_SYS_HAS_EON_TICKET
 	setvar VAR_DISTRIBUTE_EON_TICKET, 0
 	msgbox Mevent_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
@@ -383,7 +383,7 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -488,7 +488,7 @@ CableClub_EventScript_EnterTradeCenter:: @ 827713A
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -563,7 +563,7 @@ CableClub_EventScript_EnterRecordCorner:: @ 827724C
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -965,7 +965,7 @@ CableClub_EventScript_EnterUnionRoom:: @ 827759F
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 5, 1
 	waitdooranim
 	special Script_ResetUnionRoomTrade
@@ -1296,7 +1296,7 @@ CableClub_EventScript_EnterWirelessLinkRoom:: @ 8277B3A
 	waitdooranim
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -1488,7 +1488,7 @@ MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom:: @ 8277E0E
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterMinigameRoom
 	waitmovement 0
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	release
 	waitstate
 	end

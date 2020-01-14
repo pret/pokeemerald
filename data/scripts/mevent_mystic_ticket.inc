@@ -2,12 +2,9 @@ MysteryEventScript_MysticTicket:: @ 867550B
 	setvaddress MysteryEventScript_MysticTicket
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_MYSTIC_TICKET
-	vgoto_if_eq MysticTicket_Obtained
-	checkflag FLAG_CAUGHT_LUGIA
-	vgoto_if_eq MysticTicket_Obtained
-	checkflag FLAG_CAUGHT_HO_OH
-	vgoto_if_eq MysticTicket_Obtained
+	vgoto_if_set FLAG_RECEIVED_MYSTIC_TICKET, MysticTicket_Obtained
+	vgoto_if_set FLAG_CAUGHT_LUGIA, MysticTicket_Obtained
+	vgoto_if_set FLAG_CAUGHT_HO_OH, MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, TRUE
 	vgoto_if_eq MysticTicket_Obtained
@@ -17,7 +14,7 @@ MysteryEventScript_MysticTicket:: @ 867550B
 	checkitemspace ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, FALSE
 	vgoto_if_eq MysticTicket_NoBagSpace
-	giveitem_std ITEM_MYSTIC_TICKET
+	giveitem ITEM_MYSTIC_TICKET
 	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
 	setflag FLAG_RECEIVED_MYSTIC_TICKET
 	vmessage sText_MysticTicketUseAtPort

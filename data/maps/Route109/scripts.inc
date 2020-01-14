@@ -330,7 +330,7 @@ Route109_EventScript_SoftSandGirl:: @ 81EE9B5
 	special GetPlayerBigGuyGirlString
 	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_AlreadyReceivedSoftSand
 	msgbox Route109_Text_YouCanHaveThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_SOFT_SAND
+	giveitem ITEM_SOFT_SAND
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage

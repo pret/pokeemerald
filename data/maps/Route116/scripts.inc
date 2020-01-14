@@ -58,7 +58,7 @@ Route116_EventScript_DevonEmployee:: @ 81F2CA2
 
 Route116_EventScript_GiveRepeatBall:: @ 81F2CBB
 	setflag FLAG_MET_DEVON_EMPLOYEE
-	giveitem_std ITEM_REPEAT_BALL
+	giveitem ITEM_REPEAT_BALL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route116_EventScript_NoRoomForRepeatBall
 	msgbox Route116_Text_NewBallAvailableAtMart, MSGBOX_DEFAULT

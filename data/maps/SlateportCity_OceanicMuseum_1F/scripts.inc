@@ -36,7 +36,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee:: @ 820ADE8
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney
 	playse SE_REGI
-	takemoney 50, 0
+	removemoney 50, 0
 	updatemoneybox 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
@@ -151,7 +151,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt:: @ 820AEF8
 	applymovement 13, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_TM46
+	giveitem ITEM_TM46
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
 	setflag FLAG_RECEIVED_TM46

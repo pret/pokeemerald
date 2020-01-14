@@ -35,9 +35,9 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert:: @ 8236DD9
 	compare VAR_RESULT, 2
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
 	msgbox ShoalCave_LowTideEntranceRoom_Text_MakeShellBellRightAway, MSGBOX_DEFAULT
-	takeitem ITEM_SHOAL_SALT, 4
-	takeitem ITEM_SHOAL_SHELL, 4
-	giveitem_std ITEM_SHELL_BELL
+	removeitem ITEM_SHOAL_SALT, 4
+	removeitem ITEM_SHOAL_SHELL, 4
+	giveitem ITEM_SHELL_BELL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox ShoalCave_LowTideEntranceRoom_Text_ExplainShellBell, MSGBOX_DEFAULT

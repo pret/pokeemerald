@@ -145,7 +145,7 @@ Route120_EventScript_GiveIapapaBerry:: @ 81F55F6
 	end
 
 Route120_EventScript_GiveBerry:: @ 81F5601
-	giveitem_std VAR_0x8004
+	giveitem VAR_0x8004
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_120_RECEIVED_BERRY
@@ -237,7 +237,7 @@ Route120_EventScript_StevenGiveDeconScope:: @ 81F572C
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
-	giveitem_std ITEM_DEVON_SCOPE
+	giveitem ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage

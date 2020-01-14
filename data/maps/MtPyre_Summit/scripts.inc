@@ -64,7 +64,7 @@ MtPyre_Summit_EventScript_TeamAquaExits:: @ 823203C
 	compare VAR_0x8008, 2
 	call_if_eq MtPyre_Summit_EventScript_OldLadyApproachPlayer2
 	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_MAGMA_EMBLEM
+	giveitem ITEM_MAGMA_EMBLEM
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall

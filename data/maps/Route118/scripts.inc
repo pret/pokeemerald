@@ -38,7 +38,7 @@ Route118_EventScript_GoodRodFisherman:: @ 81F3E14
 
 Route118_EventScript_ReceiveGoodRod:: @ 81F3E3E
 	msgbox Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_GOOD_ROD
+	giveitem ITEM_GOOD_ROD
 	setflag FLAG_RECEIVED_GOOD_ROD
 	msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT
 	release

@@ -45,7 +45,7 @@ BerryTree_EventScript_ChooseBerryToPlant:: @ 8274393
 	waitstate
 	compare VAR_ITEM_ID, 0
 	goto_if_eq BerryTree_EventScript_CancelPlanting
-	takeitem VAR_ITEM_ID, 1
+	removeitem VAR_ITEM_ID
 	call BerryTree_EventScript_PlantBerry
 
 BerryTree_EventScript_CancelPlanting:: @ 82743AF
