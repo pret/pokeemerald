@@ -4,13 +4,10 @@ static void Sio32IDIntr(void);
 static void Sio32IDInit(void);
 static s32 Sio32IDMain(void);
 
-//struct RfuSIO32Id gRfuSIO32Id;
+struct RfuSIO32Id gRfuSIO32Id;
 
-//static const u16 Sio32ConnectionData[] = { 0x494e, 0x544e, 0x4e45, 0x4f44 }; // NINTENDO
-//static const char Sio32IDLib_Var[] = "Sio32ID_030820";
-
-extern const u16 Sio32ConnectionData[];
-extern const char Sio32IDLib_Var[];
+static const u16 Sio32ConnectionData[] = { 0x494e, 0x544e, 0x4e45, 0x4f44 }; // NINTENDO
+static const char Sio32IDLib_Var[] = "Sio32ID_030820";
 
 s32 AgbRFU_checkID(u8 r5)
 {
