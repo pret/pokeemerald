@@ -640,7 +640,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 {
     u8 spriteId;
 
-    spriteId = CreatePicSprite2(species, 8, 0, 1, x, y, 0xE, 0xFFFF);
+    spriteId = CreatePicSprite2(species, SHINY_ODDS, 0, 1, x, y, 0xE, 0xFFFF);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }
