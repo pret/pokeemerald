@@ -14,53 +14,54 @@
 #include "sprite.h"
 #include "task.h"
 #include "constants/songs.h"
+#include "constants/map_types.h"
 
 // structures
 struct FlashStruct
 {
-    u8 unk0;
-    u8 unk1;
-    bool8 unk2;
-    bool8 unk3;
+    u8 fromType;
+    u8 toType;
+    bool8 isEnter;
+    bool8 isExit;
     void (*func)(void);
 };
 
 // static functions
 static void FieldCallback_Flash(void);
 static void FldEff_UseFlash(void);
-static bool8 sub_8137304(void);
-static void sub_81373F0(void);
-static void sub_8137404(u8 taskId);
-static void sub_8137420(u8 taskId);
-static void sub_81374C4(u8 taskId);
-static void sub_813750C(u8 taskId);
-static void sub_8137574(u8 taskId);
-static void sub_81375A8(void);
-static void sub_81375BC(u8 taskId);
-static void sub_81375D8(u8 taskId);
-static void sub_8137678(u8 taskId);
-static void sub_81376DC(u8 taskId);
+static bool8 TryDoMapTransition(void);
+static void DoExitCaveTransition(void);
+static void Task_ExitCaveTransition1(u8 taskId);
+static void Task_ExitCaveTransition2(u8 taskId);
+static void Task_ExitCaveTransition3(u8 taskId);
+static void Task_ExitCaveTransition4(u8 taskId);
+static void Task_ExitCaveTransition5(u8 taskId);
+static void DoEnterCaveTransition(void);
+static void Task_EnterCaveTransition1(u8 taskId);
+static void Task_EnterCaveTransition2(u8 taskId);
+static void Task_EnterCaveTransition3(u8 taskId);
+static void Task_EnterCaveTransition4(u8 taskId);
 
 // rodata
-static const struct FlashStruct gUnknown_085B27C8[] =
+static const struct FlashStruct sTransitionTypes[] =
 {
-    {1, 4, 1, 0, sub_81375A8},
-    {2, 4, 1, 0, sub_81375A8},
-    {3, 4, 1, 0, sub_81375A8},
-    {5, 4, 1, 0, sub_81375A8},
-    {6, 4, 1, 0, sub_81375A8},
-    {7, 4, 1, 0, sub_81375A8},
-    {8, 4, 1, 0, sub_81375A8},
-    {9, 4, 1, 0, sub_81375A8},
-    {4, 1, 0, 1, sub_81373F0},
-    {4, 2, 0, 1, sub_81373F0},
-    {4, 3, 0, 1, sub_81373F0},
-    {4, 5, 0, 1, sub_81373F0},
-    {4, 6, 0, 1, sub_81373F0},
-    {4, 7, 0, 1, sub_81373F0},
-    {4, 8, 0, 1, sub_81373F0},
-    {4, 9, 0, 1, sub_81373F0},
-    {0, 0, 0, 0, NULL},
+    {MAP_TYPE_TOWN,        MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_CITY,        MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_ROUTE,       MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_UNDERWATER,  MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_OCEAN_ROUTE, MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_UNUSED_2,    MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_INDOOR,      MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_SECRET_BASE, MAP_TYPE_UNDERGROUND,  TRUE, FALSE, DoEnterCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_TOWN,        FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_CITY,        FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_ROUTE,       FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNDERWATER,  FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_OCEAN_ROUTE, FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNUSED_2,    FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_INDOOR,      FALSE,  TRUE, DoExitCaveTransition},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_SECRET_BASE, FALSE,  TRUE, DoExitCaveTransition},
+    {},
 };
 
 static const u16 gCaveTransitionPalette_White[] = INCBIN_U16("graphics/misc/cave_transition_white.gbapal");
@@ -108,7 +109,7 @@ static void FldEff_UseFlash(void)
     ScriptContext1_SetupScript(EventScript_FldEffFlash);
 }
 
-static void sub_81371D4(void)
+static void CB2_ChangeMapMain(void)
 {
     RunTasks();
     AnimateSprites();
@@ -116,14 +117,14 @@ static void sub_81371D4(void)
     UpdatePaletteFade();
 }
 
-static void sub_81371EC(void)
+static void VBC_ChangeMapVBlank(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void c2_change_map(void)
+void CB2_DoChangeMap(void)
 {
     u16 ime;
 
@@ -148,23 +149,23 @@ void c2_change_map(void)
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
     REG_IME = ime;
-    SetVBlankCallback(sub_81371EC);
-    SetMainCallback2(sub_81371D4);
-    if (!sub_8137304())
+    SetVBlankCallback(VBC_ChangeMapVBlank);
+    SetMainCallback2(CB2_ChangeMapMain);
+    if (!TryDoMapTransition())
         SetMainCallback2(gMain.savedCallback);
 }
 
-static bool8 sub_8137304(void)
+static bool8 TryDoMapTransition(void)
 {
     u8 i;
-    u8 v0 = GetLastUsedWarpMapType();
-    u8 v1 = GetCurrentMapType();
+    u8 fromType = GetLastUsedWarpMapType();
+    u8 toType = GetCurrentMapType();
 
-    for (i = 0; gUnknown_085B27C8[i].unk0; i++)
+    for (i = 0; sTransitionTypes[i].fromType; i++)
     {
-        if (gUnknown_085B27C8[i].unk0 == v0 && gUnknown_085B27C8[i].unk1 == v1)
+        if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            gUnknown_085B27C8[i].func();
+            sTransitionTypes[i].func();
             return TRUE;
         }
     }
@@ -172,51 +173,51 @@ static bool8 sub_8137304(void)
     return FALSE;
 }
 
-bool8 GetMapPairFadeToType(u8 a1, u8 a2)
+bool8 GetMapPairFadeToType(u8 _fromType, u8 _toType)
 {
     u8 i;
-    u8 v0 = a1;
-    u8 v1 = a2;
+    u8 fromType = _fromType;
+    u8 toType = _toType;
 
-    for (i = 0; gUnknown_085B27C8[i].unk0; i++)
+    for (i = 0; sTransitionTypes[i].fromType; i++)
     {
-        if (gUnknown_085B27C8[i].unk0 == v0 && gUnknown_085B27C8[i].unk1 == v1)
+        if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            return gUnknown_085B27C8[i].unk2;
+            return sTransitionTypes[i].isEnter;
         }
     }
 
     return FALSE;
 }
 
-bool8 GetMapPairFadeFromType(u8 a1, u8 a2)
+bool8 GetMapPairFadeFromType(u8 _fromType, u8 _toType)
 {
     u8 i;
-    u8 v0 = a1;
-    u8 v1 = a2;
+    u8 fromType = _fromType;
+    u8 toType = _toType;
 
-    for (i = 0; gUnknown_085B27C8[i].unk0; i++)
+    for (i = 0; sTransitionTypes[i].fromType; i++)
     {
-        if (gUnknown_085B27C8[i].unk0 == v0 && gUnknown_085B27C8[i].unk1 == v1)
+        if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            return gUnknown_085B27C8[i].unk3;
+            return sTransitionTypes[i].isExit;
         }
     }
 
     return FALSE;
 }
 
-static void sub_81373F0(void)
+static void DoExitCaveTransition(void)
 {
-    CreateTask(sub_8137404, 0);
+    CreateTask(Task_ExitCaveTransition1, 0);
 }
 
-static void sub_8137404(u8 taskId)
+static void Task_ExitCaveTransition1(u8 taskId)
 {
-    gTasks[taskId].func = sub_8137420;
+    gTasks[taskId].func = Task_ExitCaveTransition2;
 }
 
-static void sub_8137420(u8 taskId)
+static void Task_ExitCaveTransition2(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
@@ -241,12 +242,12 @@ static void sub_8137420(u8 taskId)
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON
                                 | DISPCNT_OBJ_ON);
-    gTasks[taskId].func = sub_81374C4;
+    gTasks[taskId].func = Task_ExitCaveTransition3;
     gTasks[taskId].data[0] = 16;
     gTasks[taskId].data[1] = 0;
 }
 
-static void sub_81374C4(u8 taskId)
+static void Task_ExitCaveTransition3(u8 taskId)
 {
     u16 count = gTasks[taskId].data[1];
     u16 blend = count + 0x1000;
@@ -259,11 +260,11 @@ static void sub_81374C4(u8 taskId)
     else
     {
         gTasks[taskId].data[2] = 0;
-        gTasks[taskId].func = sub_813750C;
+        gTasks[taskId].func = Task_ExitCaveTransition4;
     }
 }
 
-static void sub_813750C(u8 taskId)
+static void Task_ExitCaveTransition4(u8 taskId)
 {
     u16 count;
 
@@ -278,12 +279,12 @@ static void sub_813750C(u8 taskId)
     else
     {
         LoadPalette(gCaveTransitionPalette_White, 0, 0x20);
-        gTasks[taskId].func = sub_8137574;
+        gTasks[taskId].func = Task_ExitCaveTransition5;
         gTasks[taskId].data[2] = 8;
     }
 }
 
-static void sub_8137574(u8 taskId)
+static void Task_ExitCaveTransition5(u8 taskId)
 {
     if (gTasks[taskId].data[2])
         gTasks[taskId].data[2]--;
@@ -291,17 +292,17 @@ static void sub_8137574(u8 taskId)
         SetMainCallback2(gMain.savedCallback);
 }
 
-static void sub_81375A8(void)
+static void DoEnterCaveTransition(void)
 {
-    CreateTask(sub_81375BC, 0);
+    CreateTask(Task_EnterCaveTransition1, 0);
 }
 
-static void sub_81375BC(u8 taskId)
+static void Task_EnterCaveTransition1(u8 taskId)
 {
-    gTasks[taskId].func = sub_81375D8;
+    gTasks[taskId].func = Task_EnterCaveTransition2;
 }
 
-static void sub_81375D8(u8 taskId)
+static void Task_EnterCaveTransition2(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(gCaveTransitionTiles, (void *)(VRAM + 0xC000));
@@ -320,13 +321,13 @@ static void sub_81375D8(u8 taskId)
                                 | DISPCNT_OBJ_ON);
     LoadPalette(gCaveTransitionPalette_White, 0xE0, 0x20);
     LoadPalette(gCaveTransitionPalette_Black, 0, 0x20);
-    gTasks[taskId].func = sub_8137678;
+    gTasks[taskId].func = Task_EnterCaveTransition3;
     gTasks[taskId].data[0] = 16;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = 0;
 }
 
-static void sub_8137678(u8 taskId)
+static void Task_EnterCaveTransition3(u8 taskId)
 {
     u16 count = gTasks[taskId].data[2];
 
@@ -346,11 +347,11 @@ static void sub_8137678(u8 taskId)
                                     | BLDCNT_TGT2_BG3
                                     | BLDCNT_TGT2_OBJ
                                     | BLDCNT_TGT2_BD);
-        gTasks[taskId].func = sub_81376DC;
+        gTasks[taskId].func = Task_EnterCaveTransition4;
     }
 }
 
-static void sub_81376DC(u8 taskId)
+static void Task_EnterCaveTransition4(u8 taskId)
 {
     u16 count = 16 - gTasks[taskId].data[1];
     u16 blend = count + 0x1000;
