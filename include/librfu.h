@@ -1,6 +1,7 @@
 #ifndef GUARD_LIBRFU_H
 #define GUARD_LIBRFU_H
 
+#include "global.h"
 #include "main.h"
 
 enum
@@ -70,34 +71,7 @@ union RfuPacket
     struct RfuPacket8 rfuPacket8;
 };
 
-struct UnkLinkRfuStruct_02022B14Substruct
-{
-    u16 unk_00_0:4;
-    u16 unk_00_4:1;
-    u16 unk_00_5:1;
-    u16 unk_00_6:1;
-    u16 isChampion:1;
-    u16 hasNationalDex:1;
-    u16 gameClear:1; // never read, redundant with isChampion
-    u16 unk_01_2:4;  // always 3?
-    u16 unk_01_6:2;
-    u8 playerTrainerId[2];
-};
-
-struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
-{
-    struct UnkLinkRfuStruct_02022B14Substruct unk_00;
-    u8 unk_04[4];
-    u16 species:10;
-    u16 type:6;
-    u8 unk_0a_0:7;
-    u8 unk_0a_7:1;
-    u8 playerGender:1;
-    u8 level:7;
-    u8 unk_0c;
-};
-
-struct RfuStruct
+struct STWIStatus
 {
     vs32 unk_0;
     u8 txParams;
@@ -133,7 +107,7 @@ struct RfuIntrStruct
     u8 block2[0x30];
 };
 
-struct RfuUnk1
+struct RfuSlotStatusUNI
 {
     u16 unk_0;
     u8 unk_2;
@@ -145,7 +119,7 @@ struct RfuUnk1
     struct RfuIntrStruct unk_1c;
 };
 
-struct RfuUnk2
+struct RfuSlotStatusNI
 {
     u16 unk_0;
     u16 unk_2;
@@ -164,7 +138,7 @@ struct RfuUnk2
     u8 unk_70[0x70];
 };
 
-struct RfuUnk3
+struct RfuFixed
 {
     u32 unk_0;
     u32 unk_4;
@@ -172,17 +146,19 @@ struct RfuUnk3
     u32 unk_dc;
 };
 
+#define RFU_GAME_NAME_LENGTH            13                 // Possible length of game name set by rfu_REQB_configGameData
+#define RFU_USER_NAME_LENGTH            8     
+
 struct RfuUnk5Sub
 {
     u16 unk_00;
     u8 unk_02;
     u16 unk_04;
-    struct UnkLinkRfuStruct_02022B14 unk_06;
-    u8 fill_13[1];
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
+    u8  gname[RFU_GAME_NAME_LENGTH + 2];       // Game name of parent candidate                          Game name of connection partner
+    u8  uname[RFU_USER_NAME_LENGTH + 1];       // User name for parent candidate                         User name for connection partner
 };
 
-struct RfuUnk5
+struct RfuLinkStatus
 {
     u8 unk_00;
     u8 unk_01;
@@ -196,16 +172,16 @@ struct RfuUnk5
     u8 filler_09[1];
     u8 unk_0a[4];
     u8 filler_0e[6];
-    struct RfuUnk5Sub unk_14[4];
+    struct RfuUnk5Sub unk_14[5];
 };
 
-extern struct RfuStruct *gRfuState;
+extern struct STWIStatus *gSTWIStatus;
 
-extern struct RfuUnk5 *gUnknown_03007890;
-extern u32 *gUnknown_03007894;
-extern struct RfuUnk3* gUnknown_03007898;
-extern struct RfuUnk2* gUnknown_03007880[4];
-extern struct RfuUnk1* gUnknown_03007870[4];
+extern struct RfuLinkStatus *gRfuLinkStatus;
+extern u32 *gRfuStatic;
+extern struct RfuFixed* gRfuFixed;
+extern struct RfuSlotStatusNI* gRfuSlotStatusNI[4];
+extern struct RfuSlotStatusUNI* gRfuSlotStatusUNI[4];
 extern void* sub_82E53F4;
 extern void rfu_STC_clearAPIVariables(void);
 
@@ -221,7 +197,7 @@ void rfu_REQBN_watchLink(u16 a0, u8 *a1, u8 *a2, u8 *a3);
 bool16 rfu_syncVBlank(void);
 void rfu_REQ_reset(void);
 void rfu_REQ_configSystem(u16, u8, u8);
-void rfu_REQ_configGameData(u8, u16, struct UnkLinkRfuStruct_02022B14 *, u8 *);
+void rfu_REQ_configGameData(u8, u16, const u8 *gname, const u8 *uname);
 void rfu_REQ_startSearchChild(void);
 void rfu_REQ_pollSearchChild(void);
 void rfu_REQ_endSearchChild(void);
