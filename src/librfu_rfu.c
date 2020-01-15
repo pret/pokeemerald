@@ -36,33 +36,33 @@
         if (unk1 < num)
             return 1;
     }
-    gUnknown_03007890 = unk0;
-    gUnknown_03007894 = unk0 + (0xB4 / sizeof(u32));
-    gUnknown_03007898 = (struct RfuUnk3*)(unk0 + (0xDC / sizeof(u32)));
-    gUnknown_03007880[0] = (struct RfuUnk2*)(unk0 + (0x1BC / sizeof(u32)));
-    gUnknown_03007870[0] = (struct RfuUnk1*)(unk0 + (0x37C / sizeof(u32)));
+    gRfuLinkStatus = unk0;
+    gRfuStatic = unk0 + (0xB4 / sizeof(u32));
+    gRfuFixed = (struct RfuFixed*)(unk0 + (0xDC / sizeof(u32)));
+    gRfuSlotStatusNI[0] = (struct RfuSlotStatusNI*)(unk0 + (0x1BC / sizeof(u32)));
+    gRfuSlotStatusUNI[0] = (struct RfuSlotStatusUNI*)(unk0 + (0x37C / sizeof(u32)));
 
     for (i = 1; i < 4; i++, num)
     {
-        gUnknown_03007880[i] = (struct RfuUnk2*)&gUnknown_03007880[i-1]->unk_70;
-        gUnknown_03007870[i] = (struct RfuUnk1*)&gUnknown_03007870[i-1]->unk_1c;
+        gRfuSlotStatusNI[i] = (struct RfuSlotStatusNI*)&gRfuSlotStatusNI[i-1]->unk_70;
+        gRfuSlotStatusUNI[i] = (struct RfuSlotStatusUNI*)&gRfuSlotStatusUNI[i-1]->unk_1c;
     }
     
-    gUnknown_03007898->unk_dc = (u32)&gUnknown_03007870[3]->unk_1c;
-    STWI_init_all(&gUnknown_03007870[3]->unk_1c, interrupt, copyInterruptToRam);
+    gRfuFixed->unk_dc = (u32)&gRfuSlotStatusUNI[3]->unk_1c;
+    STWI_init_all(&gRfuSlotStatusUNI[3]->unk_1c, interrupt, copyInterruptToRam);
     rfu_STC_clearAPIVariables();
 
     for (i = 0; i < 4; i++)
     {
-        gUnknown_03007880[i]->unk_68 = 0;
-        gUnknown_03007880[i]->unk_6c = 0;
-        gUnknown_03007870[i]->unk_14 = 0;
-        gUnknown_03007870[i]->unk_18 = 0;
+        gRfuSlotStatusNI[i]->unk_68 = 0;
+        gRfuSlotStatusNI[i]->unk_6c = 0;
+        gRfuSlotStatusUNI[i]->unk_14 = 0;
+        gRfuSlotStatusUNI[i]->unk_18 = 0;
     }
 
     // Not matching, register differences
     v12 = (u16*)((u32)&sub_82E53F4 & ~1);
-    v13 = (u16*)gUnknown_03007898->unk_8;
+    v13 = (u16*)gRfuFixed->unk_8;
         
     for (i = 47; i != 0xFFFF; i--)
     {
@@ -71,7 +71,7 @@
         ++v13;
     }
         
-    gUnknown_03007898->unk_4 = (u32)(&gUnknown_03007898->unk_8[1]);
+    gRfuFixed->unk_4 = (u32)(&gRfuFixed->unk_8[1]);
         
     return 0;
 }*/

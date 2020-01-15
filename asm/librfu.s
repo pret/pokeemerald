@@ -47,21 +47,21 @@ _082E3EEE:
 	.align 2, 0
 	.pool
 _082E3EFC:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	str r4, [r0]
-	ldr r1, =gUnknown_03007894
+	ldr r1, =gRfuStatic
 	adds r0, r4, 0
 	adds r0, 0xB4
 	str r0, [r1]
-	ldr r1, =gUnknown_03007898
+	ldr r1, =gRfuFixed
 	adds r0, 0x28
 	str r0, [r1]
-	ldr r2, =gUnknown_03007880
+	ldr r2, =gRfuSlotStatusNI
 	movs r1, 0xDE
 	lsls r1, 1
 	adds r0, r4, r1
 	str r0, [r2]
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	movs r3, 0xDF
 	lsls r3, 2
 	adds r0, r4, r3
@@ -88,10 +88,10 @@ _082E3F28:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _082E3F28
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r1, [r0]
 	adds r1, 0xDC
-	ldr r4, =gUnknown_03007870
+	ldr r4, =gRfuSlotStatusUNI
 	ldr r0, [r4, 0xC]
 	adds r0, 0x1C
 	str r0, [r1]
@@ -100,7 +100,7 @@ _082E3F28:
 	bl STWI_init_all
 	bl rfu_STC_clearAPIVariables
 	movs r5, 0
-	ldr r3, =gUnknown_03007880
+	ldr r3, =gRfuSlotStatusNI
 	movs r2, 0
 _082E3F6C:
 	lsls r1, r5, 2
@@ -121,7 +121,7 @@ _082E3F6C:
 	movs r0, 0x2
 	negs r0, r0
 	ands r4, r0
-	ldr r1, =gUnknown_03007898
+	ldr r1, =gRfuFixed
 	ldr r0, [r1]
 	adds r2, r0, 0
 	adds r2, 0x8
@@ -159,7 +159,7 @@ rfu_STC_clearAPIVariables: @ 82E3FDC
 	adds r7, r0, 0
 	movs r6, 0
 	strh r6, [r1]
-	ldr r5, =gUnknown_03007894
+	ldr r5, =gRfuStatic
 	ldr r1, [r5]
 	ldrb r4, [r1]
 	mov r0, sp
@@ -174,7 +174,7 @@ rfu_STC_clearAPIVariables: @ 82E3FDC
 	mov r0, sp
 	adds r0, 0x2
 	strh r1, [r0]
-	ldr r4, =gUnknown_03007890
+	ldr r4, =gRfuLinkStatus
 	ldr r1, [r4]
 	ldr r2, =0x0100005a
 	bl CpuSet
@@ -230,7 +230,7 @@ rfu_UNI_PARENT_getDRAC_ACK: @ 82E4078
 	adds r4, r0, 0
 	movs r0, 0
 	strb r0, [r4]
-	ldr r5, =gUnknown_03007890
+	ldr r5, =gRfuLinkStatus
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -284,7 +284,7 @@ rfu_setTimerInterrupt: @ 82E40C0
 
 	thumb_func_start rfu_getSTWIRecvBuffer
 rfu_getSTWIRecvBuffer: @ 82E40D4
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -305,7 +305,7 @@ rfu_setMSCCallback: @ 82E40E4
 rfu_setREQCallback: @ 82E40F0
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	str r1, [r0]
 	negs r0, r1
@@ -324,7 +324,7 @@ rfu_enableREQCallback: @ 82E410C
 	lsls r0, 24
 	cmp r0, 0
 	beq _082E4124
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0x8
@@ -333,7 +333,7 @@ rfu_enableREQCallback: @ 82E410C
 	.align 2, 0
 	.pool
 _082E4124:
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0xF7
@@ -355,7 +355,7 @@ rfu_STC_REQ_callback: @ 82E4138
 	lsrs r4, r1, 16
 	ldr r0, =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	strh r4, [r0, 0x1C]
 	ldrb r1, [r0]
@@ -363,7 +363,7 @@ rfu_STC_REQ_callback: @ 82E4138
 	ands r0, r1
 	cmp r0, 0
 	beq _082E4166
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	ldr r2, [r0]
 	adds r0, r5, 0
@@ -386,21 +386,21 @@ rfu_CB_defaultCallback: @ 82E4178
 	lsrs r3, r1, 16
 	cmp r0, 0xFF
 	bne _082E41D4
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
 	cmp r0, 0
 	beq _082E41A2
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	ldr r2, [r0]
 	movs r0, 0xFF
 	adds r1, r3, 0
 	bl _call_via_r2
 _082E41A2:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -422,7 +422,7 @@ _082E41C2:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _082E41B0
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -438,7 +438,7 @@ _082E41D4:
 rfu_waitREQComplete: @ 82E41E8
 	push {lr}
 	bl STWI_poll_CommandEnd
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x1C]
 	pop {r1}
@@ -463,7 +463,7 @@ rfu_REQ_RFUStatus: @ 82E41FC
 rfu_getRFUStatus: @ 82E4210
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, =gUnknown_03007898
+	ldr r5, =gRfuFixed
 	ldr r0, [r5]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -495,18 +495,15 @@ _082E4246:
 	bx r1
 	thumb_func_end rfu_getRFUStatus
 
-	thumb_func_start sub_82E424C
-sub_82E424C: @ 82E424C
+	thumb_func_start rfu_MBOOT_CHILD_inheritanceLinkStatus
+rfu_MBOOT_CHILD_inheritanceLinkStatus: @ 82E424C
 	push {lr}
-	ldr r2, =gUnknown_089A324C
+	ldr r2, =str_checkMbootLL
 	ldr r3, =gDma3Requests + 0xE0
 	b _082E4266
 	.align 2, 0
 	.pool
-	thumb_func_end sub_82E424C
-
-	thumb_func_start sub_82E425C
-sub_82E425C: @ 82E425C
+_082E425C:
 	ldrb r0, [r3]
 	adds r3, 0x1
 	adds r2, 0x1
@@ -515,7 +512,7 @@ sub_82E425C: @ 82E425C
 _082E4266:
 	ldrb r1, [r2]
 	cmp r1, 0
-	bne sub_82E425C
+	bne _082E425C
 	movs r2, 0xC0
 	lsls r2, 18
 	movs r3, 0
@@ -537,11 +534,11 @@ _082E4274:
 	bne _082E42BC
 	movs r0, 0xC0
 	lsls r0, 18
-	ldr r1, =gUnknown_03007890
+	ldr r1, =gRfuLinkStatus
 	ldr r1, [r1]
 	movs r2, 0x5A
 	bl CpuSet
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0x80
@@ -556,7 +553,7 @@ _082E42BC:
 _082E42BE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_82E425C
+	thumb_func_end rfu_MBOOT_CHILD_inheritanceLinkStatus
 
 	thumb_func_start rfu_REQ_stopMode
 rfu_REQ_stopMode: @ 82E42C4
@@ -568,7 +565,7 @@ rfu_REQ_stopMode: @ 82E42C4
 	movs r0, 0x3D
 	movs r1, 0x6
 	bl rfu_STC_REQ_callback
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x12]
 	movs r0, 0x6
@@ -580,11 +577,11 @@ _082E42EC:
 	bl AgbRFU_SoftReset
 	bl rfu_STC_clearAPIVariables
 	movs r0, 0x8
-	bl sub_82E6D6C
+	bl AgbRFU_checkID
 	ldr r1, =0x00008001
 	cmp r0, r1
 	bne _082E4350
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
 	lsls r0, 2
@@ -673,7 +670,7 @@ _082E43AC:
 	bl AgbRFU_SoftReset
 	bl rfu_STC_clearAPIVariables
 	movs r0, 0x1E
-	bl sub_82E6D6C
+	bl AgbRFU_checkID
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _082E43CA
@@ -746,7 +743,7 @@ rfu_REQ_configSystem: @ 82E440C
 	bl STWI_send_SystemConfigREQ
 	cmp r6, 0
 	bne _082E444C
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0x1
 	strh r0, [r1, 0x1A]
@@ -762,7 +759,7 @@ _082E444C:
 	lsls r0, 2
 	adds r1, r6, 0
 	bl Div
-	ldr r1, =gUnknown_03007894
+	ldr r1, =gRfuStatic
 	ldr r1, [r1]
 	strh r0, [r1, 0x1A]
 	strh r4, [r5]
@@ -860,10 +857,10 @@ rfu_CB_configGameData: @ 82E4500
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _082E458A
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	ldr r1, [r0, 0x24]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r6, [r0]
 	ldrb r2, [r1, 0x4]
 	adds r5, r6, 0
@@ -895,7 +892,7 @@ _082E454C:
 _082E4552:
 	strb r0, [r1]
 	movs r2, 0
-	ldr r3, =gUnknown_03007890
+	ldr r3, =gRfuLinkStatus
 _082E4558:
 	ldr r0, [r3]
 	adds r0, 0x9A
@@ -910,7 +907,7 @@ _082E4558:
 	bls _082E4558
 	adds r4, 0x1
 	movs r2, 0
-	ldr r3, =gUnknown_03007890
+	ldr r3, =gRfuLinkStatus
 _082E4574:
 	ldr r0, [r3]
 	adds r0, 0xA9
@@ -939,7 +936,7 @@ rfu_REQ_startSearchChild: @ 82E459C
 	push {r4,lr}
 	movs r1, 0
 	ldr r4, =rfu_CB_defaultCallback
-	ldr r3, =gUnknown_03007894
+	ldr r3, =gRfuStatic
 	movs r2, 0
 _082E45A6:
 	ldr r0, [r3]
@@ -959,7 +956,7 @@ _082E45A6:
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _082E45F0
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -995,7 +992,7 @@ rfu_CB_startSearchChild: @ 82E460C
 	adds r2, r1, 0
 	cmp r2, 0
 	bne _082E4624
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0x1
 	strb r0, [r1, 0x9]
@@ -1022,7 +1019,7 @@ rfu_STC_clearLinkStatus: @ 82E4634
 	mov r0, sp
 	movs r5, 0
 	strh r5, [r0]
-	ldr r4, =gUnknown_03007890
+	ldr r4, =gRfuLinkStatus
 	ldr r1, [r4]
 	adds r1, 0x14
 	ldr r2, =0x01000040
@@ -1031,7 +1028,7 @@ rfu_STC_clearLinkStatus: @ 82E4634
 	strb r5, [r0, 0x8]
 _082E465C:
 	movs r1, 0
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	adds r4, r2, 0
 	movs r3, 0
 _082E4664:
@@ -1098,7 +1095,7 @@ rfu_CB_pollAndEndSearchChild: @ 82E46C0
 _082E46D2:
 	cmp r4, 0x1A
 	bne _082E4714
-	ldr r5, =gUnknown_03007890
+	ldr r5, =gRfuLinkStatus
 	ldr r0, [r5]
 	adds r0, 0x94
 	ldrh r0, [r0]
@@ -1112,7 +1109,7 @@ _082E46D2:
 	cmp r0, 0
 	bne _082E4730
 	ldr r1, [r5]
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1125,7 +1122,7 @@ _082E46D2:
 _082E4714:
 	cmp r4, 0x1B
 	bne _082E4730
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	cmp r0, 0xFF
@@ -1134,7 +1131,7 @@ _082E4714:
 	movs r0, 0
 	strh r0, [r1]
 _082E4728:
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0
 	strb r0, [r1, 0x9]
@@ -1154,7 +1151,7 @@ rfu_STC_readChildList: @ 82E4748
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1162,9 +1159,9 @@ rfu_STC_readChildList: @ 82E4748
 	adds r6, r0, 0x4
 	cmp r7, 0
 	beq _082E47EE
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	mov r8, r0
-	ldr r1, =gUnknown_03007890
+	ldr r1, =gRfuLinkStatus
 	mov r12, r1
 _082E4766:
 	ldrb r4, [r6, 0x2]
@@ -1332,12 +1329,12 @@ rfu_STC_readParentCandidateList: @ 82E4888
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r5, =gUnknown_03007890
+	ldr r5, =gRfuLinkStatus
 	ldr r1, [r5]
 	adds r1, 0x14
 	ldr r2, =0x01000040
 	bl CpuSet
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -1471,7 +1468,7 @@ rfu_REQ_startConnectParent: @ 82E4998
 	lsrs r4, r0, 16
 	movs r3, 0
 	movs r2, 0
-	ldr r1, =gUnknown_03007890
+	ldr r1, =gRfuLinkStatus
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x14]
 	cmp r0, r4
@@ -1497,7 +1494,7 @@ _082E49C4:
 _082E49CC:
 	cmp r3, 0
 	bne _082E49F0
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	strh r4, [r0, 0x1E]
 	ldr r0, =rfu_STC_REQ_callback
@@ -1545,7 +1542,7 @@ rfu_CB_pollConnectParent: @ 82E4A14
 	str r1, [sp, 0x28]
 	cmp r1, 0
 	bne _082E4B16
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1559,7 +1556,7 @@ rfu_CB_pollConnectParent: @ 82E4A14
 	lsls r0, 17
 	lsls r0, r1
 	lsrs r2, r0, 24
-	ldr r4, =gUnknown_03007890
+	ldr r4, =gRfuLinkStatus
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x2]
 	adds r0, r2, 0
@@ -1583,7 +1580,7 @@ rfu_CB_pollConnectParent: @ 82E4A14
 	strb r0, [r1, 0x1]
 	ldr r0, [r4]
 	strb r2, [r0]
-	ldr r3, =gUnknown_03007894
+	ldr r3, =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0x80
@@ -1641,7 +1638,7 @@ _082E4AEA:
 _082E4AF4:
 	cmp r5, 0x3
 	bhi _082E4B16
-	ldr r4, =gUnknown_03007890
+	ldr r4, =gRfuLinkStatus
 	mov r0, r10
 	lsls r5, r0, 5
 	adds r0, r5, 0
@@ -1677,7 +1674,7 @@ rfu_getConnectParentStatus: @ 82E4B34
 	adds r3, r0, 0
 	movs r0, 0xFF
 	strb r0, [r3]
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -1709,14 +1706,14 @@ rfu_REQ_endConnectParent: @ 82E4B68
 	ldr r0, =rfu_CB_pollConnectParent
 	bl STWI_set_Callback_M
 	bl STWI_send_CP_EndREQ
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0x3
 	bhi _082E4B90
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	adds r0, 0xA
 	ldrb r1, [r1, 0x6]
@@ -1734,12 +1731,12 @@ _082E4B90:
 rfu_syncVBlank: @ 82E4BA0
 	push {r4,r5,lr}
 	bl rfu_NI_checkCommFailCounter
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	beq _082E4C78
-	ldr r4, =gUnknown_03007894
+	ldr r4, =gRfuStatic
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
@@ -1778,7 +1775,7 @@ _082E4BFA:
 	cmp r3, 0
 	beq _082E4C10
 _082E4BFE:
-	ldr r3, =gUnknown_03007894
+	ldr r3, =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0xFD
@@ -1787,7 +1784,7 @@ _082E4BFE:
 	.align 2, 0
 	.pool
 _082E4C10:
-	ldr r3, =gUnknown_03007894
+	ldr r3, =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0x2
@@ -1806,7 +1803,7 @@ _082E4C1A:
 	movs r0, 0xFB
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -1828,7 +1825,7 @@ _082E4C54:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _082E4C42
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -1874,21 +1871,21 @@ rfu_REQBN_watchLink: @ 82E4C80
 	ldrb r0, [r2, 0xC]
 	ldr r2, [sp, 0x4]
 	strb r0, [r2]
-	ldr r5, =gUnknown_03007890
+	ldr r5, =gRfuLinkStatus
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	bne _082E4CBE
 	b _082E504E
 _082E4CBE:
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0
 	bne _082E4CCA
 	b _082E504E
 _082E4CCA:
-	ldr r3, =gUnknown_03007894
+	ldr r3, =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r4, 0x4
@@ -1912,7 +1909,7 @@ _082E4CEE:
 	lsrs r0, 24
 	cmp r0, 0x29
 	bne _082E4D30
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -1940,7 +1937,7 @@ _082E4D30:
 	lsls r0, 1
 	cmp r6, r0
 	bne _082E4D80
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1963,7 +1960,7 @@ _082E4D56:
 	ands r0, r1
 	cmp r0, 0
 	beq _082E4D76
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r0, r5
@@ -1983,7 +1980,7 @@ _082E4D80:
 	bne _082E4D88
 	b _082E504E
 _082E4D88:
-	ldr r4, =gUnknown_03007898
+	ldr r4, =gRfuFixed
 	ldr r0, [r4]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2005,7 +2002,7 @@ _082E4D88:
 	ldr r0, [r0]
 	adds r2, r0, 0x4
 	movs r5, 0
-	ldr r3, =gUnknown_03007890
+	ldr r3, =gRfuLinkStatus
 _082E4DBC:
 	ldr r0, [r3]
 	adds r0, 0xA
@@ -2031,7 +2028,7 @@ _082E4DE8:
 	ldr r0, [sp, 0xC]
 	b _082E5050
 _082E4DF4:
-	ldr r1, =gUnknown_03007894
+	ldr r1, =gRfuStatic
 	ldr r0, [r1]
 	adds r0, 0xE
 	adds r2, r0, r5
@@ -2041,7 +2038,7 @@ _082E4DF4:
 	beq _082E4E1A
 	subs r0, 0x4
 	strb r0, [r2]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r1, r0, r5
@@ -2065,7 +2062,7 @@ _082E4E2E:
 	ldr r2, [sp, 0x8]
 	cmp r2, 0x1
 	bne _082E4F10
-	ldr r4, =gUnknown_03007890
+	ldr r4, =gRfuLinkStatus
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x2]
 	ands r0, r6
@@ -2109,7 +2106,7 @@ _082E4E84:
 	lsls r0, 16
 	cmp r0, 0
 	bne _082E4F10
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2128,7 +2125,7 @@ _082E4E84:
 	.align 2, 0
 	.pool
 _082E4EB8:
-	ldr r2, =gUnknown_03007894
+	ldr r2, =gRfuStatic
 	ldr r1, [r2]
 	adds r1, 0xA
 	adds r1, r5
@@ -2173,7 +2170,7 @@ _082E4F04:
 _082E4F0E:
 	strb r1, [r0]
 _082E4F10:
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	mov r12, r2
 	ldr r1, [r2]
 	ldrb r7, [r1]
@@ -2215,7 +2212,7 @@ _082E4F10:
 	ldrb r0, [r1, 0x1]
 	adds r0, 0x1
 	strb r0, [r1, 0x1]
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r0, r5
@@ -2235,7 +2232,7 @@ _082E4F7E:
 	bne _082E5002
 	bl STWI_send_SlotStatusREQ
 	bl STWI_poll_CommandEnd
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -2250,7 +2247,7 @@ _082E4F7E:
 	ldrb r0, [r2, 0x2]
 	cmp r0, r5
 	bne _082E4FD0
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	lsls r1, r5, 1
 	adds r0, 0x12
@@ -2276,7 +2273,7 @@ _082E4FD0:
 	ldrb r0, [r2, 0x2]
 	cmp r0, r5
 	bne _082E4FD0
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	lsls r1, r5, 1
 	adds r0, 0x12
@@ -2293,7 +2290,7 @@ _082E4FFE:
 	lsrs r0, 24
 	mov r9, r0
 _082E5002:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	mov r2, r8
@@ -2320,7 +2317,7 @@ _082E5028:
 	bl STWI_send_DisconnectREQ
 	bl STWI_poll_CommandEnd
 _082E5038:
-	ldr r1, =gUnknown_03007898
+	ldr r1, =gRfuFixed
 	ldr r0, [r1]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2361,13 +2358,13 @@ rfu_STC_removeLinkData: @ 82E506C
 	lsls r0, 17
 	lsls r0, r7
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	adds r0, 0xE
 	adds r0, r7
 	movs r1, 0
 	strb r1, [r0]
-	ldr r1, =gUnknown_03007890
+	ldr r1, =gRfuLinkStatus
 	ldr r4, [r1]
 	ldrb r0, [r4, 0x2]
 	ands r0, r6
@@ -2447,7 +2444,7 @@ rfu_REQ_disconnect: @ 82E512C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -2455,7 +2452,7 @@ rfu_REQ_disconnect: @ 82E512C
 	ands r0, r4
 	cmp r0, 0
 	beq _082E51B0
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r1, [r0]
 	strb r4, [r1, 0x5]
 	ldr r2, [r2]
@@ -2519,7 +2516,7 @@ rfu_CB_disconnect: @ 82E51BC
 	lsrs r5, r1, 16
 	cmp r5, 0x3
 	bne _082E51F8
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2531,7 +2528,7 @@ rfu_CB_disconnect: @ 82E51BC
 	lsls r0, 16
 	cmp r0, 0
 	bne _082E51F8
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2540,9 +2537,9 @@ rfu_CB_disconnect: @ 82E51BC
 	bne _082E51F8
 	movs r5, 0
 _082E51F8:
-	ldr r3, =gUnknown_03007894
+	ldr r3, =gRfuStatic
 	ldr r2, [r3]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -2550,7 +2547,7 @@ _082E51F8:
 	ldrb r1, [r2, 0x5]
 	ands r0, r1
 	strb r0, [r2, 0x5]
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -2565,7 +2562,7 @@ _082E5220:
 	lsls r0, 17
 	lsls r0, r4
 	lsrs r0, 24
-	ldr r1, =gUnknown_03007894
+	ldr r1, =gRfuStatic
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x5]
 	ands r0, r1
@@ -2581,7 +2578,7 @@ _082E523C:
 	cmp r4, 0x3
 	bls _082E5220
 _082E5246:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x2]
 	ldrb r0, [r2, 0x3]
@@ -2594,7 +2591,7 @@ _082E5258:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl rfu_STC_REQ_callback
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0
@@ -2622,7 +2619,7 @@ rfu_REQ_CHILD_startConnectRecovery: @ 82E529C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	strb r5, [r0, 0x5]
 	movs r4, 0
@@ -2646,7 +2643,7 @@ _082E52B6:
 _082E52CA:
 	adds r0, r2, 0
 	bl STWI_set_Callback_M
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	lsls r0, r4, 5
 	adds r0, r1, r0
@@ -2686,20 +2683,20 @@ rfu_CB_CHILD_pollConnectRecovery: @ 82E530C
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _082E5390
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	bne _082E5390
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x5]
 	adds r6, r0, 0
 	cmp r1, 0
 	beq _082E5390
-	ldr r1, =gUnknown_03007890
+	ldr r1, =gRfuLinkStatus
 	ldr r0, [r1]
 	strb r7, [r0]
 	movs r4, 0
@@ -2763,7 +2760,7 @@ rfu_CHILD_getConnectRecoveryStatus: @ 82E53B0
 	adds r2, r0, 0
 	movs r0, 0xFF
 	strb r0, [r2]
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -2863,7 +2860,7 @@ rfu_getMasterSlave: @ 82E5450
 	lsrs r2, r0, 24
 	cmp r2, 0x1
 	bne _082E547E
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x2C
@@ -2906,7 +2903,7 @@ rfu_clearAllSlot: @ 82E5488
 _082E54A4:
 	mov r0, sp
 	strh r7, [r0]
-	ldr r0, =gUnknown_03007880
+	ldr r0, =gRfuSlotStatusNI
 	lsls r4, r5, 2
 	adds r0, r4, r0
 	ldr r1, [r0]
@@ -2914,13 +2911,13 @@ _082E54A4:
 	ldr r2, =0x01000034
 	bl CpuSet
 	strh r7, [r6]
-	ldr r0, =gUnknown_03007870
+	ldr r0, =gRfuSlotStatusUNI
 	adds r4, r0
 	ldr r1, [r4]
 	adds r0, r6, 0
 	ldr r2, =0x0100000a
 	bl CpuSet
-	ldr r3, =gUnknown_03007890
+	ldr r3, =gRfuLinkStatus
 	ldr r0, [r3]
 	adds r0, 0x10
 	adds r0, r5
@@ -2941,7 +2938,7 @@ _082E54A4:
 	strb r1, [r0, 0x5]
 	ldr r0, [r3]
 	strb r1, [r0, 0x6]
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	strb r1, [r0, 0x2]
 	ldr r0, =0x04000208
@@ -2966,14 +2963,14 @@ rfu_STC_releaseFrame: @ 82E5528
 	adds r5, r2, 0
 	lsls r1, 24
 	lsrs r3, r1, 24
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _082E5568
-	ldr r6, =gUnknown_03007890
+	ldr r6, =gRfuLinkStatus
 	cmp r3, 0
 	bne _082E5554
 	ldr r1, [r6]
@@ -2990,7 +2987,7 @@ _082E5554:
 	.align 2, 0
 	.pool
 _082E5568:
-	ldr r6, =gUnknown_03007890
+	ldr r6, =gRfuLinkStatus
 	cmp r3, 0
 	bne _082E557C
 	ldr r1, [r6]
@@ -3054,7 +3051,7 @@ _082E55C4:
 	cmp r0, 0
 	beq _082E568C
 	movs r3, 0
-	ldr r1, =gUnknown_03007880
+	ldr r1, =gRfuSlotStatusNI
 	lsls r0, r7, 2
 	adds r0, r1
 	mov r9, r0
@@ -3069,7 +3066,7 @@ _082E55E2:
 	beq _082E5634
 	mov r2, r9
 	ldr r4, [r2]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r0, 0x2C
@@ -3090,7 +3087,7 @@ _082E5614:
 	ldr r0, [r2]
 	adds r4, r0, 0
 	adds r4, 0x34
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	movs r1, 0x1
 	lsls r1, r7
@@ -3150,7 +3147,7 @@ _082E568C:
 	ands r0, r4
 	cmp r0, 0
 	beq _082E5702
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r3, [r0]
@@ -3160,14 +3157,14 @@ _082E568C:
 	ands r0, r1
 	cmp r0, 0
 	beq _082E56F4
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _082E56D8
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r1, [r2]
 	ldrb r0, [r1, 0xF]
 	adds r0, 0x3
@@ -3178,7 +3175,7 @@ _082E568C:
 	.align 2, 0
 	.pool
 _082E56D8:
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r1, [r2]
 	adds r1, 0x10
 	adds r1, r7
@@ -3209,7 +3206,7 @@ _082E5702:
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -3256,7 +3253,7 @@ _082E576C:
 	ands r0, r3
 	cmp r0, 0
 	beq _082E5788
-	ldr r0, =gUnknown_03007880
+	ldr r0, =gRfuSlotStatusNI
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -3274,7 +3271,7 @@ _082E5788:
 	lsls r0, 3
 	b _082E57A4
 _082E5796:
-	ldr r0, =gUnknown_03007870
+	ldr r0, =gRfuSlotStatusUNI
 	lsls r1, r4, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -3324,7 +3321,7 @@ rfu_UNI_setSendData: @ 82E57DC
 	lsrs r1, r0, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -3362,7 +3359,7 @@ rfu_NI_CHILD_setSendGameName: @ 82E5818
 	lsls r1, 17
 	lsls r1, r0
 	lsrs r1, 24
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r3, [r0]
 	adds r3, 0x98
 	movs r0, 0x1A
@@ -3394,7 +3391,7 @@ rfu_STC_setSendData_org: @ 82E584C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	mov r10, r0
@@ -3444,7 +3441,7 @@ _082E58C0:
 	movs r2, 0
 	movs r0, 0x1
 	ands r0, r3
-	ldr r4, =gUnknown_089A3220
+	ldr r4, =llsf_struct
 	cmp r0, 0
 	bne _082E58E2
 	movs r1, 0x1
@@ -3509,7 +3506,7 @@ _082E591E:
 	cmp r6, 0x40
 	bne _082E59F4
 _082E5938:
-	ldr r1, =gUnknown_03007880
+	ldr r1, =gRfuSlotStatusNI
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -3568,7 +3565,7 @@ _082E5998:
 	bls _082E5998
 	movs r2, 0
 	movs r5, 0x1
-	ldr r4, =gUnknown_03007880
+	ldr r4, =gRfuSlotStatusNI
 	movs r1, 0
 _082E59B2:
 	adds r0, r3, 0
@@ -3608,7 +3605,7 @@ _082E59F4:
 	ands r0, r6
 	cmp r0, 0
 	beq _082E5A2C
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -3674,7 +3671,7 @@ rfu_changeSendTarget: @ 82E5A54
 _082E5A78:
 	cmp r0, 0x20
 	bne _082E5B18
-	ldr r0, =gUnknown_03007880
+	ldr r0, =gRfuSlotStatusNI
 	mov r12, r0
 	lsls r0, r7, 2
 	add r0, r12
@@ -3725,7 +3722,7 @@ _082E5AD2:
 	lsrs r2, r0, 24
 	cmp r2, 0x3
 	bls _082E5ABE
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	ldr r2, [sp]
@@ -3751,7 +3748,7 @@ _082E5AFE:
 _082E5B18:
 	cmp r3, 0x10
 	bne _082E5BA4
-	ldr r3, =gUnknown_03007870
+	ldr r3, =gRfuSlotStatusUNI
 	lsls r1, r7, 2
 	adds r0, r1, r3
 	ldr r0, [r0]
@@ -3797,7 +3794,7 @@ _082E5B70:
 	ldrh r0, [r3]
 	mov r8, r0
 	strh r2, [r3]
-	ldr r4, =gUnknown_03007890
+	ldr r4, =gRfuLinkStatus
 	ldr r2, [r4]
 	adds r5, r1, r5
 	ldr r0, [r5]
@@ -3845,7 +3842,7 @@ rfu_NI_stopReceivingData: @ 82E5BBC
 	lsls r0, 3
 	b _082E5C26
 _082E5BCC:
-	ldr r1, =gUnknown_03007880
+	ldr r1, =gRfuSlotStatusNI
 	lsls r0, r3, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -3873,7 +3870,7 @@ _082E5C04:
 	movs r0, 0x47
 _082E5C06:
 	strh r0, [r2, 0x34]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	movs r1, 0x1
 	lsls r1, r3
@@ -3911,7 +3908,7 @@ rfu_UNI_changeAndReadySendData: @ 82E5C34
 	lsls r0, 3
 	b _082E5CC0
 _082E5C4C:
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -3924,7 +3921,7 @@ _082E5C4C:
 	.align 2, 0
 	.pool
 _082E5C6C:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -3981,7 +3978,7 @@ rfu_UNI_readySendData: @ 82E5CC8
 	lsrs r0, 24
 	cmp r0, 0x3
 	bhi _082E5CE6
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -4005,7 +4002,7 @@ rfu_UNI_clearRecvNewDataFlag: @ 82E5CF4
 	lsrs r0, 24
 	cmp r0, 0x3
 	bhi _082E5D0A
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -4023,7 +4020,7 @@ rfu_REQ_sendData: @ 82E5D14
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	adds r4, r0, 0
@@ -4041,7 +4038,7 @@ _082E5D28:
 	orrs r3, r0
 	cmp r3, 0
 	bne _082E5DB8
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x3]
 	adds r4, r0, 0
@@ -4076,7 +4073,7 @@ _082E5D6E:
 	cmp r0, 0
 	bne _082E5E12
 _082E5D80:
-	ldr r4, =gUnknown_03007898
+	ldr r4, =gRfuFixed
 	ldr r1, [r4]
 	movs r0, 0x1
 	str r0, [r1, 0x68]
@@ -4114,10 +4111,10 @@ _082E5DC4:
 	bl STWI_set_Callback_M
 	cmp r5, 0
 	beq _082E5DFC
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0x68
-	ldr r1, =gUnknown_03007894
+	ldr r1, =gRfuStatic
 	ldr r1, [r1]
 	ldr r1, [r1, 0x24]
 	adds r1, 0x4
@@ -4128,10 +4125,10 @@ _082E5DC4:
 	.align 2, 0
 	.pool
 _082E5DFC:
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0x68
-	ldr r1, =gUnknown_03007894
+	ldr r1, =gRfuStatic
 	ldr r1, [r1]
 	ldr r1, [r1, 0x24]
 	adds r1, 0x4
@@ -4141,12 +4138,12 @@ _082E5DFC:
 _082E5E12:
 	cmp r5, 0
 	beq _082E5E4E
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _082E5E44
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	ldr r1, [r0, 0x1C]
 	cmp r1, 0
@@ -4181,7 +4178,7 @@ rfu_CB_sendData: @ 82E5E58
 	ldr r0, =0x00008020
 	mov r8, r0
 _082E5E6C:
-	ldr r0, =gUnknown_03007870
+	ldr r0, =gRfuSlotStatusUNI
 	lsls r2, r6, 2
 	adds r0, r2, r0
 	ldr r1, [r0]
@@ -4191,7 +4188,7 @@ _082E5E6C:
 	movs r0, 0
 	strb r0, [r1, 0x2]
 _082E5E7E:
-	ldr r0, =gUnknown_03007880
+	ldr r0, =gRfuSlotStatusNI
 	adds r0, r2, r0
 	ldr r4, [r0]
 	ldrh r0, [r4]
@@ -4201,7 +4198,7 @@ _082E5E7E:
 	movs r1, 0
 	adds r2, r4, 0
 	bl rfu_STC_releaseFrame
-	ldr r5, =gUnknown_03007890
+	ldr r5, =gRfuLinkStatus
 	ldr r2, [r5]
 	ldrb r1, [r4, 0x1A]
 	ldrb r0, [r2, 0x4]
@@ -4227,7 +4224,7 @@ _082E5EB8:
 	cmp r6, 0x3
 	bls _082E5E6C
 _082E5EC2:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1, 0xE]
 	movs r0, 0
@@ -4286,7 +4283,7 @@ rfu_constructSendLLFrame: @ 82E5F28
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	cmp r0, 0xFF
@@ -4304,7 +4301,7 @@ _082E5F40:
 	movs r0, 0
 	strb r0, [r2, 0xE]
 	mov r8, r0
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0x6C
 	str r0, [sp]
@@ -4316,7 +4313,7 @@ _082E5F40:
 	mov r10, r1
 _082E5F6A:
 	movs r5, 0
-	ldr r0, =gUnknown_03007880
+	ldr r0, =gRfuSlotStatusNI
 	lsls r7, r6, 2
 	adds r4, r7, r0
 	ldr r2, [r4]
@@ -4345,7 +4342,7 @@ _082E5F8A:
 	lsrs r0, 16
 	adds r5, r0
 _082E5FA6:
-	ldr r0, =gUnknown_03007870
+	ldr r0, =gRfuSlotStatusUNI
 	adds r0, r7, r0
 	ldr r0, [r0]
 	ldrh r0, [r0]
@@ -4360,7 +4357,7 @@ _082E5FA6:
 _082E5FC0:
 	cmp r5, 0
 	beq _082E5FF4
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4382,15 +4379,15 @@ _082E5FF4:
 	lsrs r6, r0, 24
 	cmp r6, 0x3
 	bls _082E5F6A
-	ldr r6, =gUnknown_03007894
+	ldr r6, =gRfuStatic
 	mov r0, r8
 	cmp r0, 0
 	beq _082E603E
 	ldr r2, [sp]
 	movs r0, 0x3
 	ands r0, r2
-	ldr r5, =gUnknown_03007890
-	ldr r1, =gUnknown_03007898
+	ldr r5, =gRfuLinkStatus
+	ldr r1, =gRfuFixed
 	cmp r0, 0
 	beq _082E6026
 	movs r4, 0
@@ -4446,11 +4443,11 @@ rfu_STC_NI_constructLLSF: @ 82E6060
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	lsls r0, 4
-	ldr r1, =gUnknown_089A3220
+	ldr r1, =llsf_struct
 	adds r0, r1
 	mov r8, r0
 	ldrh r1, [r4]
@@ -4570,7 +4567,7 @@ _082E6130:
 	orrs r3, r0
 	orrs r3, r5
 	str r3, [sp]
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4611,7 +4608,7 @@ _082E61A2:
 	adds r0, r1
 	ldr r0, [r0]
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	ldr r3, [r1, 0x4]
@@ -4633,7 +4630,7 @@ _082E61C2:
 	movs r0, 0
 	strb r0, [r6]
 _082E61DC:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	cmp r1, 0x1
@@ -4677,7 +4674,7 @@ rfu_STC_UNI_constructLLSF: @ 82E6220
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, =gUnknown_03007870
+	ldr r1, =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -4693,11 +4690,11 @@ _082E6244:
 	.align 2, 0
 	.pool
 _082E624C:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	lsls r0, 4
-	ldr r1, =gUnknown_089A3220
+	ldr r1, =llsf_struct
 	adds r5, r0, r1
 	ldrh r0, [r4]
 	movs r1, 0xF
@@ -4717,7 +4714,7 @@ _082E624C:
 _082E6276:
 	mov r2, sp
 	movs r3, 0
-	ldr r1, =gUnknown_03007898
+	ldr r1, =gRfuFixed
 	mov r12, r1
 	add r7, sp, 0x4
 	ldrb r0, [r5]
@@ -4746,7 +4743,7 @@ _082E629E:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl _call_via_r3
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	cmp r0, 0x1
@@ -4782,12 +4779,12 @@ _082E62E8:
 	thumb_func_start rfu_REQ_recvData
 rfu_REQ_recvData: @ 82E62F4
 	push {r4,lr}
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r4, [r0]
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _082E6320
-	ldr r2, =gUnknown_03007894
+	ldr r2, =gRfuStatic
 	ldr r3, [r2]
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
@@ -4823,17 +4820,17 @@ rfu_CB_recvData: @ 82E6334
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _082E63F8
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	beq _082E63F8
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	strb r7, [r0, 0x1]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4848,16 +4845,16 @@ _082E6380:
 	movs r6, 0
 	ldr r0, =0x00008043
 	mov r8, r0
-	ldr r3, =gUnknown_03007890
+	ldr r3, =gRfuLinkStatus
 _082E6388:
-	ldr r0, =gUnknown_03007880
+	ldr r0, =gRfuSlotStatusNI
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r4, [r1]
 	ldrh r0, [r4, 0x34]
 	cmp r0, r8
 	bne _082E63DA
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	asrs r0, r6
@@ -4897,7 +4894,7 @@ _082E63DA:
 	lsrs r6, r0, 24
 	cmp r6, 0x3
 	bls _082E6388
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0
@@ -4926,7 +4923,7 @@ _082E63F8:
 rfu_STC_PARENT_analyzeRecvPacket: @ 82E6420
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_03007898
+	ldr r1, =gRfuFixed
 	ldr r0, [r1]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -4935,7 +4932,7 @@ rfu_STC_PARENT_analyzeRecvPacket: @ 82E6420
 	movs r5, 0
 	mov r12, r1
 	movs r7, 0x1F
-	ldr r4, =gUnknown_03007894
+	ldr r4, =gRfuStatic
 	movs r6, 0x1
 _082E643A:
 	mov r0, sp
@@ -5007,7 +5004,7 @@ _082E64A0:
 	thumb_func_start rfu_STC_CHILD_analyzeRecvPacket
 rfu_STC_CHILD_analyzeRecvPacket: @ 82E64B8
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -5018,7 +5015,7 @@ rfu_STC_CHILD_analyzeRecvPacket: @ 82E64B8
 	adds r5, 0x8
 	cmp r4, 0
 	bne _082E64D8
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0xF
 	strb r0, [r1, 0x1]
@@ -5065,14 +5062,14 @@ rfu_STC_analyzeLLSF: @ 82E6510
 	mov r12, r0
 	lsls r2, 16
 	lsrs r3, r2, 16
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	mvns r0, r0
 	movs r1, 0x1
 	ands r0, r1
 	lsls r0, 4
-	ldr r1, =gUnknown_089A3220
+	ldr r1, =llsf_struct
 	adds r6, r0, r1
 	ldrb r0, [r6]
 	cmp r3, r0
@@ -5188,7 +5185,7 @@ _082E6574:
 	beq _082E661A
 	b _082E673C
 _082E661A:
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r3, [r2]
 	ldrb r2, [r3]
 	cmp r2, 0x1
@@ -5226,7 +5223,7 @@ _082E6664:
 	b _082E673C
 _082E6678:
 	movs r4, 0
-	ldr r1, =gUnknown_03007880
+	ldr r1, =gRfuSlotStatusNI
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x1A]
 	mov r5, r12
@@ -5254,7 +5251,7 @@ _082E6694:
 	ands r0, r2
 	cmp r0, 0
 	beq _082E6694
-	ldr r3, =gUnknown_03007890
+	ldr r3, =gRfuLinkStatus
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x4]
 	mov r5, r12
@@ -5307,7 +5304,7 @@ _082E6706:
 	bl rfu_STC_NI_receive_Receiver
 	b _082E6732
 _082E6718:
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	asrs r0, r4
@@ -5348,7 +5345,7 @@ rfu_STC_UNI_receive: @ 82E6754
 	str r2, [sp]
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r2, =gUnknown_03007870
+	ldr r2, =gRfuSlotStatusUNI
 	lsls r1, r7, 2
 	adds r1, r2
 	ldr r3, [r1]
@@ -5401,7 +5398,7 @@ _082E67B4:
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	add r1, sp, 0x4
 	ldr r3, [r0, 0x4]
@@ -5414,7 +5411,7 @@ _082E67DE:
 	ldrh r0, [r5, 0x2]
 	cmp r0, 0
 	beq _082E67F2
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r2, [r0]
 	movs r0, 0x10
 	lsls r0, r7
@@ -5443,7 +5440,7 @@ rfu_STC_NI_receive_Sender: @ 82E6808
 	lsls r1, 24
 	lsrs r1, 24
 	mov r10, r1
-	ldr r1, =gUnknown_03007880
+	ldr r1, =gRfuSlotStatusNI
 	lsrs r0, 22
 	adds r0, r1
 	ldr r0, [r0]
@@ -5645,7 +5642,7 @@ _082E69A8:
 	ldrh r2, [r4]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r3, [r0]
 	movs r0, 0x10
 	mov r7, r10
@@ -5655,7 +5652,7 @@ _082E69A8:
 	movs r1, 0
 	strb r0, [r3, 0x2]
 	lsls r0, r7, 2
-	ldr r3, =gUnknown_03007880
+	ldr r3, =gRfuSlotStatusNI
 	adds r0, r3
 	ldr r0, [r0]
 	strh r1, [r0, 0x2]
@@ -5687,7 +5684,7 @@ rfu_STC_NI_receive_Receiver: @ 82E69F4
 	lsrs r0, 24
 	mov r8, r0
 	movs r7, 0
-	ldr r1, =gUnknown_03007880
+	ldr r1, =gRfuSlotStatusNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -5704,7 +5701,7 @@ rfu_STC_NI_receive_Receiver: @ 82E69F4
 	ldrb r0, [r6, 0x2]
 	cmp r0, 0x3
 	bne _082E6A64
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r2, [r0]
 	movs r0, 0x1
 	mov r1, r8
@@ -5773,7 +5770,7 @@ _082E6AAE:
 	ands r0, r1
 	cmp r2, r0
 	bne _082E6B04
-	ldr r0, =gUnknown_03007898
+	ldr r0, =gRfuFixed
 	ldr r0, [r0]
 	lsls r1, r3, 2
 	adds r1, 0x4
@@ -5831,7 +5828,7 @@ _082E6B2C:
 	ldrh r2, [r3]
 	movs r0, 0
 	strh r0, [r3]
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r4, [r0]
 	movs r0, 0x1
 	mov r1, r8
@@ -5861,7 +5858,7 @@ rfu_STC_NI_initSlot_asRecvControllData: @ 82E6B70
 	adds r2, r1, 0
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r3, [r0]
 	ldrb r1, [r3]
 	mov r12, r0
@@ -5895,7 +5892,7 @@ _082E6B98:
 	strh r0, [r2]
 	ldr r0, =0x00000702
 	strh r0, [r2, 0x18]
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x4]
 	adds r0, r6, 0
@@ -5943,7 +5940,7 @@ rfu_STC_NI_initSlot_asRecvDataEntity: @ 82E6C00
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _082E6C24
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	lsls r1, r5, 5
 	adds r1, 0x14
 	ldr r0, [r0]
@@ -5953,7 +5950,7 @@ rfu_STC_NI_initSlot_asRecvDataEntity: @ 82E6C00
 	.align 2, 0
 	.pool
 _082E6C24:
-	ldr r1, =gUnknown_03007880
+	ldr r1, =gRfuSlotStatusNI
 	lsls r0, r5, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -5965,13 +5962,13 @@ _082E6C24:
 	lsls r1, 17
 	lsls r1, r5
 	lsrs r1, 24
-	ldr r0, =gUnknown_03007894
+	ldr r0, =gRfuStatic
 	ldr r3, [r0]
 	ldrb r2, [r3, 0x4]
 	adds r0, r1, 0
 	orrs r0, r2
 	strb r0, [r3, 0x4]
-	ldr r0, =gUnknown_03007890
+	ldr r0, =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x5]
 	bics r0, r1
@@ -6027,7 +6024,7 @@ _082E6CAC:
 	thumb_func_start rfu_NI_checkCommFailCounter
 rfu_NI_checkCommFailCounter: @ 82E6CB8
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03007890
+	ldr r2, =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r1, [r0, 0x4]
 	ldrb r0, [r0, 0x5]
@@ -6039,14 +6036,14 @@ rfu_NI_checkCommFailCounter: @ 82E6CB8
 	mov r12, r0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_03007894
+	ldr r1, =gRfuStatic
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x2]
 	lsrs r7, r0, 4
 	movs r3, 0
 	adds r6, r1, 0
 	adds r5, r2, 0
-	ldr r4, =gUnknown_03007880
+	ldr r4, =gRfuSlotStatusNI
 _082E6CE2:
 	movs r0, 0x80
 	lsls r0, 17
@@ -6118,8 +6115,8 @@ rfu_REQ_noise: @ 82E6D54
 	.pool
 	thumb_func_end rfu_REQ_noise
 
-	thumb_func_start sub_82E6D6C
-sub_82E6D6C: @ 82E6D6C
+	thumb_func_start AgbRFU_checkID
+AgbRFU_checkID: @ 82E6D6C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -6138,13 +6135,13 @@ _082E6D88:
 	ldr r0, =0x04000200
 	ldrh r0, [r0]
 	mov r8, r0
-	ldr r4, =gRfuState
+	ldr r4, =gSTWIStatus
 	ldr r1, [r4]
 	movs r0, 0xA
 	str r0, [r1]
-	ldr r0, =sub_82E6F88
+	ldr r0, =Sio32IDIntr
 	bl STWI_set_Callback_ID
-	bl sub_82E6E20
+	bl Sio32IDInit
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
 	lsls r0, 2
@@ -6173,7 +6170,7 @@ _082E6DD6:
 	lsrs r5, r0, 24
 	cmp r5, 0xFF
 	beq _082E6DEA
-	bl sub_82E6E94
+	bl Sio32IDMain
 	adds r6, r0, 0
 	cmp r6, 0
 	beq _082E6DC4
@@ -6186,7 +6183,7 @@ _082E6DEA:
 	strh r2, [r0]
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r1, [r0]
 	movs r0, 0
 	str r0, [r1]
@@ -6200,17 +6197,17 @@ _082E6E08:
 	bx r1
 	.align 2, 0
 	.pool
-	thumb_func_end sub_82E6D6C
+	thumb_func_end AgbRFU_checkID
 
-	thumb_func_start sub_82E6E20
-sub_82E6E20: @ 82E6E20
+	thumb_func_start Sio32IDInit
+Sio32IDInit: @ 82E6E20
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r3, =0x04000208
 	movs r4, 0
 	strh r4, [r3]
 	ldr r2, =0x04000200
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	movs r1, 0x8
 	ldrb r0, [r0, 0xA]
@@ -6237,7 +6234,7 @@ sub_82E6E20: @ 82E6E20
 	strh r0, [r2]
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =gUnknown_030078A0
+	ldr r1, =gRfuSIO32Id
 	ldr r2, =0x05000003
 	mov r0, sp
 	bl CpuSet
@@ -6249,12 +6246,12 @@ sub_82E6E20: @ 82E6E20
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end sub_82E6E20
+	thumb_func_end Sio32IDInit
 
-	thumb_func_start sub_82E6E94
-sub_82E6E94: @ 82E6E94
+	thumb_func_start Sio32IDMain
+Sio32IDMain: @ 82E6E94
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_030078A0
+	ldr r0, =gRfuSIO32Id
 	ldrb r1, [r0, 0x1]
 	mov r12, r1
 	adds r7, r0, 0
@@ -6364,14 +6361,14 @@ _082E6F82:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_82E6E94
+	thumb_func_end Sio32IDMain
 
-	thumb_func_start sub_82E6F88
-sub_82E6F88: @ 82E6F88
+	thumb_func_start Sio32IDIntr
+Sio32IDIntr: @ 82E6F88
 	push {r4,r5,lr}
 	ldr r0, =0x04000120
 	ldr r5, [r0]
-	ldr r0, =gUnknown_030078A0
+	ldr r0, =gRfuSIO32Id
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x1
@@ -6381,7 +6378,7 @@ sub_82E6F88: @ 82E6F88
 	movs r2, 0x80
 	orrs r1, r2
 	strh r1, [r0]
-	thumb_func_end sub_82E6F88
+	thumb_func_end Sio32IDIntr
 
 	non_word_aligned_thumb_func_start sub_82E6FA2
 sub_82E6FA2: @ 82E6FA2
@@ -6429,7 +6426,7 @@ _082E6FF6:
 	cmp r0, 0x3
 	bhi _082E700C
 	lsls r0, 1
-	ldr r1, =gUnknown_089A3258
+	ldr r1, =Sio32ConnectionData
 	adds r0, r1
 	ldrh r0, [r0]
 	b _082E700E
