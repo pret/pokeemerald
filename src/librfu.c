@@ -4,6 +4,6 @@
 struct RfuSlotStatusUNI* gRfuSlotStatusUNI[4];
 struct RfuSlotStatusNI* gRfuSlotStatusNI[4];
 struct RfuLinkStatus *gRfuLinkStatus;
-u32 *gRfuStatic;
+struct RfuStatic *gRfuStatic;
 struct RfuFixed* gRfuFixed;
-u8 gRfuSIO32Id[12];
+struct RfuSIO32Id gRfuSIO32Id;
