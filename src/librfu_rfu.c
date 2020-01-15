@@ -67,13 +67,13 @@ static void rfu_STC_NI_receive_Sender(u8, u8, const struct RfuLocalStruct *, __a
 static void rfu_STC_NI_initSlot_asRecvDataEntity(u8, struct NIComm *);
 static void rfu_STC_NI_initSlot_asRecvControllData(u8, struct NIComm *);
 
-//struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
-//struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
-//struct RfuLinkStatus *gRfuLinkStatus;
-//struct RfuStatic *gRfuStatic;
-//struct RfuFixed *gRfuFixed;
+struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
+struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
+struct RfuLinkStatus *gRfuLinkStatus;
+struct RfuStatic *gRfuStatic;
+struct RfuFixed *gRfuFixed;
 
-/*static const struct LLSFStruct llsf_struct[2] = {
+static const struct LLSFStruct llsf_struct[2] = {
   {
     2, 14, 0, 10, 9, 5, 7, 2,
     0, 15, 1, 3, 3, 0x1f
@@ -83,16 +83,9 @@ static void rfu_STC_NI_initSlot_asRecvControllData(u8, struct NIComm *);
   }
 };
 
-#ifdef EMERALD
 static const char lib_ver[] = "RFU_V1026";
-#else
-static const char lib_ver[] = "RFU_V1024";
-#endif
 
 static const char str_checkMbootLL[] = "RFU-MBOOT";
-*/
-extern const struct LLSFStruct llsf_struct[2];
-extern const char str_checkMbootLL[];// = "RFU-MBOOT";
 
 u16 rfu_initializeAPI(struct RfuAPIBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
 {
@@ -2031,6 +2024,7 @@ static void rfu_STC_NI_receive_Sender(u8 r0, u8 r10, const struct RfuLocalStruct
                 }
             }
         _081E30AE:
+            ;
         }
         else if (r12->state == SLOT_STATE_SEND_LAST)
         {

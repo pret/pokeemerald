@@ -5,7 +5,6 @@
 #include "main.h"
 
 /* TODOs: 
- * - split files
  * - documentation
  * - decompile librfu_intr.s once arm support is back again
  (for internal structs not documented in SDK)

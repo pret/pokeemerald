@@ -3,4 +3,3 @@ gRfuSlotStatusNI
 gRfuLinkStatus
 gRfuStatic
 gRfuFixed
-gRfuSIO32Id
