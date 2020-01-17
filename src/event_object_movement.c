@@ -1861,27 +1861,30 @@ const struct EventObjectGraphicsInfo *GetEventObjectGraphicsInfo(u8 graphicsId)
 {
     u8 bard;
 
-    if (graphicsId >= SPRITE_VAR)
+    if (graphicsId >= OBJ_EVENT_GFX_VARS)
     {
-        graphicsId = VarGetEventObjectGraphicsId(graphicsId - SPRITE_VAR);
+        graphicsId = VarGetEventObjectGraphicsId(graphicsId - OBJ_EVENT_GFX_VARS);
     }
+
     if (graphicsId == EVENT_OBJ_GFX_BARD)
     {
         bard = GetCurrentMauvilleOldMan();
         return gMauvilleOldManGraphicsInfoPointers[bard];
     }
-    if (graphicsId >= NUM_OBJECT_GRAPHICS_INFO)
+
+    if (graphicsId >= NUM_OBJ_EVENT_GFX)
     {
         graphicsId = EVENT_OBJ_GFX_NINJA_BOY;
     }
+    
     return gEventObjectGraphicsInfoPointers[graphicsId];
 }
 
 static void SetEventObjectDynamicGraphicsId(struct EventObject *eventObject)
 {
-    if (eventObject->graphicsId >= SPRITE_VAR)
+    if (eventObject->graphicsId >= OBJ_EVENT_GFX_VARS)
     {
-        eventObject->graphicsId = VarGetEventObjectGraphicsId(eventObject->graphicsId - SPRITE_VAR);
+        eventObject->graphicsId = VarGetEventObjectGraphicsId(eventObject->graphicsId - OBJ_EVENT_GFX_VARS);
     }
 }
 
