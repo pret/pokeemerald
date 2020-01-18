@@ -5885,6 +5885,7 @@ BattleScript_MegaEvolution::
 	
 BattleScript_StanceChangeActivates::
 	pause 0x5
+	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 0x1
