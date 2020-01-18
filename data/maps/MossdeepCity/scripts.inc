@@ -229,7 +229,7 @@ MossdeepCity_EventScript_KingsRockBoy:: @ 81E4C26
 	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_EventScript_DeclineKingsRock
 	msgbox MossdeepCity_Text_YouCanKeepIt, MSGBOX_DEFAULT
-	giveitem_std ITEM_KINGS_ROCK
+	giveitem ITEM_KINGS_ROCK
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_KINGS_ROCK

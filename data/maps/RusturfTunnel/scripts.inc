@@ -62,7 +62,7 @@ RusturfTunnel_EventScript_ClearTunnelScene:: @ 822CEAE
 	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
 	compare VAR_TEMP_1, 3
 	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
-	giveitem_std ITEM_HM04
+	giveitem ITEM_HM04
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_ExplainStrength, MSGBOX_DEFAULT
 	closemessage
@@ -184,22 +184,19 @@ RusturfTunnel_Movement_PlayerWatchWandaExit: @ 822D02F
 	walk_in_place_fastest_right
 	step_end
 
-@ Unused
-RusturfTunnel_Movement_22D035: @ 822D035
+RusturfTunnel_Movement_Unused1: @ 822D035
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-@ Unused
-RusturfTunnel_Movement_22D038: @ 822D038
+RusturfTunnel_Movement_Unused2: @ 822D038
 	walk_down
 	walk_in_place_fastest_up
 	delay_8
 	walk_in_place_fastest_right
 	step_end
 
-@ Unused
-RusturfTunnel_Movement_22D03D: @ 822D03D
+RusturfTunnel_Movement_Unused3: @ 822D03D
 	walk_up
 	walk_in_place_fastest_down
 	delay_8
@@ -317,7 +314,7 @@ RusturfTunnel_EventScript_Grunt:: @ 822D0C2
 	msgbox RusturfTunnel_Text_GruntIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat
 	msgbox RusturfTunnel_Text_GruntTakePackage, MSGBOX_DEFAULT
-	giveitem_std ITEM_DEVON_GOODS
+	giveitem ITEM_DEVON_GOODS
 	closemessage
 	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_PushPlayerAsideForGrunt
 	applymovement 6, RusturfTunnel_Movement_GruntEscape

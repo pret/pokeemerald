@@ -1400,7 +1400,7 @@ static void PrepareOneTrainer(bool8 difficult)
     challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
     do
     {
-        trainerId = sub_8162548(challengeNum, battleNum);
+        trainerId = GetRandomScaledFrontierTrainerId(challengeNum, battleNum);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
         {
             if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -1425,7 +1425,7 @@ static void PrepareTwoTrainers(void)
     gFacilityTrainers = gBattleFrontierTrainers;
     do
     {
-        trainerId = sub_8162548(challengeNum, 1);
+        trainerId = GetRandomScaledFrontierTrainerId(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
         {
             if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -1440,7 +1440,7 @@ static void PrepareTwoTrainers(void)
 
     do
     {
-        trainerId = sub_8162548(challengeNum, 1);
+        trainerId = GetRandomScaledFrontierTrainerId(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
         {
             if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -1466,12 +1466,12 @@ static void BufferTrainerIntro(void)
 {
     if (gSpecialVar_0x8005 == 0)
     {
-        if (gTrainerBattleOpponent_A < TRAINER_RECORD_MIXING_FRIEND)
+        if (gTrainerBattleOpponent_A < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
     }
     else if (gSpecialVar_0x8005 == 1)
     {
-        if (gTrainerBattleOpponent_B < TRAINER_RECORD_MIXING_FRIEND)
+        if (gTrainerBattleOpponent_B < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_B].speechBefore);
     }
 }

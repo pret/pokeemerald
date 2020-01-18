@@ -12,6 +12,7 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_frontier_mons.h"
 #include "constants/frontier_util.h"
 #include "constants/layouts.h"
 #include "constants/trainers.h"
@@ -193,7 +194,7 @@ static void InitFactoryChallenge(void)
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
-    gSaveBlock2Ptr->frontier.field_CA9_b = 0;
+    gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
     if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
     {
         gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] = 0;
@@ -304,7 +305,7 @@ static void GenerateOpponentMons(void)
 
     do
     {
-        trainerId = sub_8162548(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
+        trainerId = GetRandomScaledFrontierTrainerId(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
         {
             if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -331,7 +332,7 @@ static void GenerateOpponentMons(void)
         if (j != 6)
             continue;
 
-        if (lvlMode == FRONTIER_LVL_50 && monSetId > 849)
+        if (lvlMode == FRONTIER_LVL_50 && monSetId > FRONTIER_MONS_HIGH_TIER)
             continue;
 
         for (k = firstMonId; k < firstMonId + i; k++)
@@ -727,7 +728,7 @@ void FillFactoryBrainParty(void)
 
         if (gFacilityTrainerMons[monSetId].species == SPECIES_UNOWN)
             continue;
-        if (monLevel == 50 && monSetId > 849)
+        if (monLevel == 50 && monSetId > FRONTIER_MONS_HIGH_TIER)
             continue;
 
         for (j = 0; j < 6; j++)

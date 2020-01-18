@@ -201,7 +201,7 @@ static void BuildLinkModeStartMenu(void);
 static void BuildUnionRoomStartMenu(void);
 static void BuildBattlePikeStartMenu(void);
 static void BuildBattlePyramidStartMenu(void);
-static void BuildMultiBattleRoomStartMenu(void);
+static void BuildMultiPartnerRoomStartMenu(void);
 static void ShowSafariBallsWindow(void);
 static void ShowPyramidFloorWindow(void);
 static void RemoveExtraStartMenuWindows(void);
@@ -256,9 +256,9 @@ static void BuildStartMenuActions(void)
     {
         BuildBattlePyramidStartMenu();
     }
-    else if (InMultiBattleRoom())
+    else if (InMultiPartnerRoom())
     {
-        BuildMultiBattleRoomStartMenu();
+        BuildMultiPartnerRoomStartMenu();
     }
     else
     {
@@ -356,7 +356,7 @@ static void BuildBattlePyramidStartMenu(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
-static void BuildMultiBattleRoomStartMenu(void)
+static void BuildMultiPartnerRoomStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -966,8 +966,8 @@ static u8 SaveConfirmInputCallback(void)
     case 0: // Yes
         switch (gSaveFileStatus)
         {
-        case 0:
-        case 2:
+        case SAVE_STATUS_EMPTY:
+        case SAVE_STATUS_CORRUPT:
             if (gDifferentSaveFile == FALSE)
             {
                 sSaveDialogCallback = SaveFileExistsCallback;
@@ -1059,14 +1059,10 @@ static u8 SaveDoSaveCallback(void)
         saveStatus = TrySavingData(SAVE_NORMAL);
     }
 
-    if (saveStatus == 1) // Save succeded
-    {
+    if (saveStatus == SAVE_STATUS_OK)
         ShowSaveMessage(gText_PlayerSavedGame, SaveSuccessCallback);
-    }
-    else                 // Save error
-    {
+    else
         ShowSaveMessage(gText_SaveError, SaveErrorCallback);
-    }
 
     SaveStartTimer();
     return SAVE_IN_PROGRESS;

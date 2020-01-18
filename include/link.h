@@ -84,7 +84,7 @@
 #define LINKTYPE_MULTI_BATTLE        0x2255
 #define LINKTYPE_BATTLE_TOWER_50     0x2266
 #define LINKTYPE_BATTLE_TOWER_OPEN   0x2277 
-#define LINKTYPE_0x2288              0x2288  // battle?
+#define LINKTYPE_BATTLE_TOWER        0x2288
 #define LINKTYPE_0x3311              0x3311
 #define LINKTYPE_0x3322              0x3322
 #define LINKTYPE_BERRY_BLENDER_SETUP 0x4411

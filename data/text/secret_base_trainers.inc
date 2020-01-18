@@ -1,4 +1,4 @@
-SecretBase_Text_Trainer0PreBattle: @ 82748A0
+SecretBase_Text_Trainer0Intro: @ 82748A0
     .string "Have you made a SECRET BASE already?\p"
     .string "I went here, there, everywhere before\n"
     .string "choosing this place.\p"
@@ -27,7 +27,7 @@ SecretBase_Text_Trainer0PreChampion: @ 82749ED
     .string "choosing this place.\p"
     .string "Feel free to hang out!$"
 
-SecretBase_Text_Trainer5PreBattle: @ 8274A64
+SecretBase_Text_Trainer5Intro: @ 8274A64
     .string "There're a lot of places where\n"
     .string "you can make a SECRET BASE.\p"
     .string "But I like this spot best.\n"
@@ -56,7 +56,7 @@ SecretBase_Text_Trainer5PreChampion: @ 8274BA2
     .string "But I like this spot best.\n"
     .string "Don't you think it's nice?$"
 
-SecretBase_Text_Trainer1PreBattle: @ 8274C13
+SecretBase_Text_Trainer1Intro: @ 8274C13
     .string "This is a popular spot.\n"
     .string "It's always taken.\p"
     .string "Oh! Were you thinking about\n"
@@ -86,7 +86,7 @@ SecretBase_Text_Trainer1PreChampion: @ 8274D69
     .string "I waited a long time for it to open.\n"
     .string "I finally got to use it!$"
 
-SecretBase_Text_Trainer6PreBattle: @ 8274DD2
+SecretBase_Text_Trainer6Intro: @ 8274DD2
     .string "Welcome to my POKéMON LAB.\p"
     .string "I carry out research on battling in\n"
     .string "secrecy.\p"
@@ -112,7 +112,7 @@ SecretBase_Text_Trainer6PreChampion: @ 8274EF1
     .string "I carry out research on battling in\n"
     .string "secrecy.$"
 
-SecretBase_Text_Trainer2PreBattle: @ 8274F39
+SecretBase_Text_Trainer2Intro: @ 8274F39
     .string "A big mansion is nice, but I like this\n"
     .string "sort of place more.\p"
     .string "I like it because all kinds of people\n"
@@ -141,7 +141,7 @@ SecretBase_Text_Trainer2PreChampion: @ 82750A4
     .string "I like it because all kinds of people\n"
     .string "come visit me.$"
 
-SecretBase_Text_Trainer7PreBattle: @ 8275114
+SecretBase_Text_Trainer7Intro: @ 8275114
     .string "I simply adore shopping for decorations\n"
     .string "and furniture.\p"
     .string "I also love raising POKéMON just\n"
@@ -170,7 +170,7 @@ SecretBase_Text_Trainer7PreChampion: @ 8275226
     .string "I also love raising POKéMON just\n"
     .string "as much.$"
 
-SecretBase_Text_Trainer3PreBattle: @ 8275287
+SecretBase_Text_Trainer3Intro: @ 8275287
     .string "Some people make their SECRET BASES in\n"
     .string "hard-to-find places.\l"
     .string "Do they want to just lie low?\p"
@@ -196,7 +196,7 @@ SecretBase_Text_Trainer3PreChampion: @ 82753AB
     .string "hard-to-find places.\l"
     .string "Do they want to just lie low?$"
 
-SecretBase_Text_Trainer8PreBattle: @ 8275405
+SecretBase_Text_Trainer8Intro: @ 8275405
     .string "People have told me that you can get\n"
     .string "decorations in several ways.\p"
     .string "We should have a race to see who can\n"
@@ -224,7 +224,7 @@ SecretBase_Text_Trainer8PreChampion: @ 8275546
     .string "We should have a race to see who can\n"
     .string "get nicer decorations and furniture!$"
 
-SecretBase_Text_Trainer4PreBattle: @ 82755D2
+SecretBase_Text_Trainer4Intro: @ 82755D2
     .string "I found a spot I liked, and I did it up\n"
     .string "with my favorite decorations.\p"
     .string "I raise my favorite POKéMON and grow\n"
@@ -253,7 +253,7 @@ SecretBase_Text_Trainer4PreChampion: @ 827571E
     .string "stronger with it.\p"
     .string "Every day is a great day.$"
 
-SecretBase_Text_Trainer9PreBattle: @ 82757B5
+SecretBase_Text_Trainer9Intro: @ 82757B5
     .string "You can learn a lot about the taste\n"
     .string "and sense of people by the kinds of\l"
     .string "decorations they have, and how they\l"

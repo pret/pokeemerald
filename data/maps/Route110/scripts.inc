@@ -421,17 +421,17 @@ Route110_EventScript_MayBattle:: @ 81EF7EB
 	end
 
 Route110_EventScript_MayBattleTreecko:: @ 81EF81A
-	trainerbattle_no_intro TRAINER_MAY_5, Route110_Text_MayDefeated
+	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_TREECKO, Route110_Text_MayDefeated
 	goto Route110_EventScript_MayDefeated
 	end
 
 Route110_EventScript_MayBattleTorchic:: @ 81EF82A
-	trainerbattle_no_intro TRAINER_MAY_8, Route110_Text_MayDefeated
+	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_TORCHIC, Route110_Text_MayDefeated
 	goto Route110_EventScript_MayDefeated
 	end
 
 Route110_EventScript_MayBattleMudkip:: @ 81EF83A
-	trainerbattle_no_intro TRAINER_MAY_2, Route110_Text_MayDefeated
+	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_MUDKIP, Route110_Text_MayDefeated
 	goto Route110_EventScript_MayDefeated
 	end
 
@@ -451,17 +451,17 @@ Route110_EventScript_BrendanBattle:: @ 81EF865
 	end
 
 Route110_EventScript_BrendanBattleTreecko:: @ 81EF894
-	trainerbattle_no_intro TRAINER_BRENDAN_5, Route110_Text_BrendanDefeated
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_TREECKO, Route110_Text_BrendanDefeated
 	goto Route110_EventScript_BrendanDefeated
 	end
 
 Route110_EventScript_BrendanBattleTorchic:: @ 81EF8A4
-	trainerbattle_no_intro TRAINER_BRENDAN_8, Route110_Text_BrendanDefeated
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_TORCHIC, Route110_Text_BrendanDefeated
 	goto Route110_EventScript_BrendanDefeated
 	end
 
 Route110_EventScript_BrendanBattleMudkip:: @ 81EF8B4
-	trainerbattle_no_intro TRAINER_BRENDAN_2, Route110_Text_BrendanDefeated
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_MUDKIP, Route110_Text_BrendanDefeated
 	goto Route110_EventScript_BrendanDefeated
 	end
 
@@ -473,7 +473,7 @@ Route110_EventScript_BrendanDefeated:: @ 81EF8C4
 	end
 
 Route110_EventScript_GiveItemfinder:: @ 81EF8DF
-	giveitem_std ITEM_ITEMFINDER
+	giveitem ITEM_ITEMFINDER
 	return
 
 Route110_EventScript_RivalExit:: @ 81EF8EC

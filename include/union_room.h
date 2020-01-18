@@ -1,7 +1,7 @@
 #ifndef GUARD_UNION_ROOM_H
 #define GUARD_UNION_ROOM_H
 
-#include "librfu.h"
+#include "link_rfu.h"
 
 // Exported type declarations
 

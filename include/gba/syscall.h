@@ -45,4 +45,6 @@ void RLUnCompVram(const void *src, void *dest);
 
 int MultiBoot(struct MultiBootParam *mp);
 
+s32 Div(s32 num, s32 denom);
+
 #endif // GUARD_GBA_SYSCALL_H

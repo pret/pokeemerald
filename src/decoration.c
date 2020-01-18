@@ -14,6 +14,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item_icon.h"
+#include "item_menu.h"
 #include "list_menu.h"
 #include "main.h"
 #include "menu.h"
@@ -2153,7 +2154,8 @@ void sub_8129708(void)
     }
 }
 
-void sub_81297AC(void)
+// Unused
+void GetEventObjectLocalIdByFlag(void)
 {
     u8 i;
 

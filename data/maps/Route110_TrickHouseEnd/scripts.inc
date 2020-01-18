@@ -13,7 +13,7 @@ Route110_TrickHouseEnd_OnResume: @ 826ACC4
 Route110_TrickHouseEnd_OnTransition: @ 826ACD0
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
-	special SetTrickHouseEndRoomFlag
+	special SetTrickHouseNuggetFlag
 	end
 
 Route110_TrickHouseEnd_OnWarp: @ 826ACDE
@@ -60,7 +60,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle1:: @ 826AD84
 	msgbox Route110_TrickHouseEnd_Text_AllNightToPlantTrees, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_RARE_CANDY
+	giveitem ITEM_RARE_CANDY
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -73,7 +73,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle2:: @ 826ADC0
 	msgbox Route110_TrickHouseEnd_Text_AllNightToMakeMaze, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_TIMER_BALL
+	giveitem ITEM_TIMER_BALL
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -86,7 +86,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle3:: @ 826ADFC
 	msgbox Route110_TrickHouseEnd_Text_AllNightToPreparePanels, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_HARD_STONE
+	giveitem ITEM_HARD_STONE
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -99,7 +99,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle4:: @ 826AE38
 	msgbox Route110_TrickHouseEnd_Text_AllNightToShoveBoulders, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_SMOKE_BALL
+	giveitem ITEM_SMOKE_BALL
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -112,7 +112,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle5:: @ 826AE74
 	msgbox Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_TM12
+	giveitem ITEM_TM12
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -125,7 +125,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle6:: @ 826AEB0
 	msgbox Route110_TrickHouseEnd_Text_AllNightToInstallDoors, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_MAGNET
+	giveitem ITEM_MAGNET
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -138,7 +138,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle7:: @ 826AEEC
 	msgbox Route110_TrickHouseEnd_Text_AllNightSettingUpArrows, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_PP_MAX
+	giveitem ITEM_PP_MAX
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -171,7 +171,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle8:: @ 826AF28
 	call_if_eq Route110_TrickHouseEnd_EventScript_NoRoomForTent
 	msgbox Route110_TrickHouseEnd_Text_LeavingOnJourney, MSGBOX_DEFAULT
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
-	special ResetTrickHouseEndRoomFlag
+	special ResetTrickHouseNuggetFlag
 	release
 	end
 
@@ -182,11 +182,11 @@ Route110_TrickHouseEnd_EventScript_ChooseTent:: @ 826AFA5
 	goto Route110_TrickHouseEnd_EventScript_GiveBlueTent
 
 Route110_TrickHouseEnd_EventScript_GiveRedTent:: @ 826AFBF
-	givedecoration_std DECOR_RED_TENT
+	givedecoration DECOR_RED_TENT
 	return
 
 Route110_TrickHouseEnd_EventScript_GiveBlueTent:: @ 826AFC7
-	givedecoration_std DECOR_BLUE_TENT
+	givedecoration DECOR_BLUE_TENT
 	return
 
 Route110_TrickHouseEnd_EventScript_TrickMasterExit:: @ 826AFCF

@@ -48,7 +48,7 @@ void SetCoins(u16 coinAmount)
     gSaveBlock1Ptr->coins = coinAmount ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-bool8 GiveCoins(u16 toAdd)
+bool8 AddCoins(u16 toAdd)
 {
     u16 newAmount;
     u16 ownedCoins = GetCoins();
@@ -70,7 +70,7 @@ bool8 GiveCoins(u16 toAdd)
     return TRUE;
 }
 
-bool8 TakeCoins(u16 toSub)
+bool8 RemoveCoins(u16 toSub)
 {
     u16 ownedCoins = GetCoins();
     if (ownedCoins >= toSub)

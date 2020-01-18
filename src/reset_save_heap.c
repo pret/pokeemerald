@@ -21,8 +21,8 @@ void sub_81700F8(void)
     SetSaveBlocksPointers(sub_815355C());
     ResetMenuAndMonGlobals();
     Save_ResetSaveCounters();
-    Save_LoadGameData(0);
-    if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
+    Save_LoadGameData(SAVE_NORMAL);
+    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         Sav2_ClearSetDefault();
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     InitHeap(gHeap, HEAP_SIZE);

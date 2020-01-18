@@ -16,7 +16,7 @@ FortreeCity_Gym_EventScript_InitRotatingGates:: @ 82165C4
 	end
 
 FortreeCity_Gym_EventScript_Winona:: @ 82165C8
-	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaPreBattle, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq FortreeCity_Gym_EventScript_WinonaRematch
@@ -49,7 +49,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 	end
 
 FortreeCity_Gym_EventScript_GiveAerialAce2:: @ 8216646
-	giveitem_std ITEM_TM40
+	giveitem ITEM_TM40
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
@@ -58,7 +58,7 @@ FortreeCity_Gym_EventScript_GiveAerialAce2:: @ 8216646
 	end
 
 FortreeCity_Gym_EventScript_GiveAerialAce:: @ 821666A
-	giveitem_std ITEM_TM40
+	giveitem ITEM_TM40
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
@@ -71,32 +71,32 @@ FortreeCity_Gym_EventScript_WinonaRematch:: @ 821668D
 	end
 
 FortreeCity_Gym_EventScript_Jared:: @ 82166A8
-	trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_JaredPreBattle, FortreeCity_Gym_Text_JaredDefeat
+	trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_JaredIntro, FortreeCity_Gym_Text_JaredDefeat
 	msgbox FortreeCity_Gym_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Edwardo:: @ 82166BF
-	trainerbattle_single TRAINER_EDWARDO, FortreeCity_Gym_Text_EdwardoPreBattle, FortreeCity_Gym_Text_EdwardoDefeat
+	trainerbattle_single TRAINER_EDWARDO, FortreeCity_Gym_Text_EdwardoIntro, FortreeCity_Gym_Text_EdwardoDefeat
 	msgbox FortreeCity_Gym_Text_EdwardoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Flint:: @ 82166D6
-	trainerbattle_single TRAINER_FLINT, FortreeCity_Gym_Text_FlintPreBattle, FortreeCity_Gym_Text_FlintDefeat
+	trainerbattle_single TRAINER_FLINT, FortreeCity_Gym_Text_FlintIntro, FortreeCity_Gym_Text_FlintDefeat
 	msgbox FortreeCity_Gym_Text_FlintPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Ashley:: @ 82166ED
-	trainerbattle_single TRAINER_ASHLEY, FortreeCity_Gym_Text_AshleyPreBattle, FortreeCity_Gym_Text_AshleyDefeat
+	trainerbattle_single TRAINER_ASHLEY, FortreeCity_Gym_Text_AshleyIntro, FortreeCity_Gym_Text_AshleyDefeat
 	msgbox FortreeCity_Gym_Text_AshleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Humberto:: @ 8216704
-	trainerbattle_single TRAINER_HUMBERTO, FortreeCity_Gym_Text_HumbertoPreBattle, FortreeCity_Gym_Text_HumbertoDefeat
+	trainerbattle_single TRAINER_HUMBERTO, FortreeCity_Gym_Text_HumbertoIntro, FortreeCity_Gym_Text_HumbertoDefeat
 	msgbox FortreeCity_Gym_Text_HumbertoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Darius:: @ 821671B
-	trainerbattle_single TRAINER_DARIUS, FortreeCity_Gym_Text_DariusPreBattle, FortreeCity_Gym_Text_DariusDefeat
+	trainerbattle_single TRAINER_DARIUS, FortreeCity_Gym_Text_DariusIntro, FortreeCity_Gym_Text_DariusDefeat
 	msgbox FortreeCity_Gym_Text_DariusPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -150,7 +150,7 @@ FortreeCity_Gym_Text_GymGuidePostVictory: @ 821687D
 	.string "You did it!\n"
 	.string "You've achieved liftoff!$"
 
-FortreeCity_Gym_Text_JaredPreBattle: @ 82168A2
+FortreeCity_Gym_Text_JaredIntro: @ 82168A2
 	.string "Behold the elegant battle style of\n"
 	.string "BIRD POKéMON!$"
 
@@ -164,7 +164,7 @@ FortreeCity_Gym_Text_JaredPostBattle: @ 82168E7
 	.string "Do you have the smarts to get to\n"
 	.string "our LEADER?$"
 
-FortreeCity_Gym_Text_EdwardoPreBattle: @ 821695A
+FortreeCity_Gym_Text_EdwardoIntro: @ 821695A
 	.string "The lovers of BIRD POKéMON aspire\n"
 	.string "to join this GYM.\p"
 	.string "As a member of the FORTREE GYM,\n"
@@ -180,7 +180,7 @@ FortreeCity_Gym_Text_EdwardoPostBattle: @ 82169F1
 	.string "I'm going to keep training and make\n"
 	.string "myself even stronger.$"
 
-FortreeCity_Gym_Text_FlintPreBattle: @ 8216A66
+FortreeCity_Gym_Text_FlintIntro: @ 8216A66
 	.string "There's no need for WINONA, our GYM\n"
 	.string "LEADER, to deal with you!\p"
 	.string "I'm plenty good enough for you!$"
@@ -194,7 +194,7 @@ FortreeCity_Gym_Text_FlintPostBattle: @ 8216AD7
 	.string "She's the ultimate LEADER!\p"
 	.string "Blush…$"
 
-FortreeCity_Gym_Text_AshleyPreBattle: @ 8216B1A
+FortreeCity_Gym_Text_AshleyIntro: @ 8216B1A
 	.string "WINONA taught me personally!\n"
 	.string "You can't beat me easily!$"
 
@@ -205,7 +205,7 @@ FortreeCity_Gym_Text_AshleyPostBattle: @ 8216B5F
 	.string "Thanks to WINONA, the people of\n"
 	.string "FORTREE can live without fear.$"
 
-FortreeCity_Gym_Text_HumbertoPreBattle: @ 8216B9E
+FortreeCity_Gym_Text_HumbertoIntro: @ 8216B9E
 	.string "When WINONA takes to battle, her face\n"
 	.string "shines with beautiful determination…\p"
 	.string "I'm not letting you witness that\n"
@@ -220,7 +220,7 @@ FortreeCity_Gym_Text_HumbertoPostBattle: @ 8216C32
 	.string "Don't get distracted staring at WINONA\l"
 	.string "or you'll go crashing down in a heap!$"
 
-FortreeCity_Gym_Text_DariusPreBattle: @ 8216C96
+FortreeCity_Gym_Text_DariusIntro: @ 8216C96
 	.string "You'd better know that there are all\n"
 	.string "sorts of FLYING-type POKéMON.\p"
 	.string "You do know that, right?$"
@@ -233,7 +233,7 @@ FortreeCity_Gym_Text_DariusPostBattle: @ 8216D0F
 	.string "But you'd better watch it! Our LEADER\l"
 	.string "WINONA's POKéMON are all business.$"
 
-FortreeCity_Gym_Text_WinonaPreBattle: @ 8216D75
+FortreeCity_Gym_Text_WinonaIntro: @ 8216D75
 	.string "I am WINONA. I am the LEADER of\n"
 	.string "the FORTREE POKéMON GYM.\p"
 	.string "I have become one with BIRD POKéMON\n"

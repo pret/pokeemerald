@@ -42,7 +42,7 @@ void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout);
 void copy_map_tileset1_to_vram(const struct MapLayout *);
 void copy_map_tileset2_to_vram(const struct MapLayout *);
 struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *connection);
-struct MapConnection *sub_8088A8C(s16 x, s16 y);
+struct MapConnection *GetConnectionAtCoords(s16 x, s16 y);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);

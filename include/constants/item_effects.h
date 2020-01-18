@@ -3,7 +3,7 @@
 
 // field 0 masks
 #define ITEM0_X_ATTACK          0x0F
-#define ITEM0_HIGH_CRIT         0x30 // For Dire Hit, works the same way as move Focus Energy.
+#define ITEM0_DIRE_HIT          0x30 // Works the same way as the move Focus Energy.
 #define ITEM0_SACRED_ASH        0x40
 #define ITEM0_INFATUATION       0x80
 
@@ -23,7 +23,7 @@
 #define ITEM3_POISON            0x10
 #define ITEM3_SLEEP             0x20
 #define ITEM3_LEVEL_UP          0x40
-#define ITEM3_MIST              0x80 // For Guard Specs, works the same way as move Mist.
+#define ITEM3_GUARD_SPEC        0x80 // Works the same way as the move Mist.   
 
 #define ITEM3_STATUS_ALL        (ITEM3_CONFUSION | ITEM3_PARALYSIS | ITEM3_FREEZE | ITEM3_BURN | ITEM3_POISON | ITEM3_SLEEP)
 
