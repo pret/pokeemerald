@@ -5111,6 +5111,7 @@ BattleScript_DamagingWeatherLoop::
 	hitanimation BS_ATTACKER
 	goto BattleScript_DamagingWeatherHpChange
 BattleScript_DamagingWeatherHeal:
+	call BattleScript_AbilityPopUp
 	printstring STRINGID_ICEBODYHPGAIN
 	waitmessage 0x40
 BattleScript_DamagingWeatherHpChange:
