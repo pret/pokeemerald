@@ -9,7 +9,7 @@ SootopolisCity_House6_EventScript_Woman:: @ 8226F5C
 	compare VAR_RESULT, NO
 	call_if_eq SootopolisCity_House6_EventScript_DeclineWailmerDoll
 	msgbox SootopolisCity_House6_Text_TakeGoodCareOfIt, MSGBOX_DEFAULT
-	givedecoration_std DECOR_WAILMER_DOLL
+	givedecoration DECOR_WAILMER_DOLL
 	compare VAR_RESULT, FALSE
 	goto_if_eq SootopolisCity_House6_EventScript_NoRoomForWailmerDoll
 	setflag FLAG_RECEIVED_WAILMER_DOLL

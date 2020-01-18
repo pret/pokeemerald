@@ -2079,7 +2079,7 @@ gTVWhatsNo1InHoennTodayText08:: @ 0828858B
 	.string "Viewers, take heart from {STR_VAR_1}!\n"
 	.string "You, too, can be no. 1 every day!$"
 
-gTVSecretBaseSecretsText00:: @ 08288608
+TVSecretBaseSecrets_Text_Intro:: @ 08288608
 	.string "SECRET BASE SECRETS!\p"
 	.string "What do TRAINERS do in the secrecy\n"
 	.string "of SECRET BASES?\p"
@@ -2090,88 +2090,88 @@ gTVSecretBaseSecretsText00:: @ 08288608
 	.string "Let's have a peek!\p"
 	.string "What will {STR_VAR_2} do?$"
 
-gTVSecretBaseSecretsText01:: @ 082886C8
+TVSecretBaseSecrets_Text_WhatWillPlayerDoNext1:: @ 082886C8
 	.string "What will {STR_VAR_2} do next?$"
 
-gTVSecretBaseSecretsText02:: @ 082886DE
+TVSecretBaseSecrets_Text_WhatWillPlayerDoNext2:: @ 082886DE
 	.string "And now, what will {STR_VAR_2} do?$"
 
-gTVSecretBaseSecretsText03:: @ 082886F8
+TVSecretBaseSecrets_Text_TookXStepsBeforeLeaving:: @ 082886F8
 	.string "In the end, {STR_VAR_2} took {STR_VAR_3} steps\n"
 	.string "in {STR_VAR_1}'s SECRET BASE before\l"
 	.string "leaving.$"
 
-gTVSecretBaseSecretsText04:: @ 08288739
+TVSecretBaseSecrets_Text_BaseFailedToInterestPlayer:: @ 08288739
 	.string "Hmm…\p"
 	.string "It appears as if {STR_VAR_1}'s SECRET\n"
 	.string "BASE failed to interest {STR_VAR_2}…$"
 
-gTVSecretBaseSecretsText05:: @ 08288777
+TVSecretBaseSecrets_Text_PlayerEnjoyedBase:: @ 08288777
 	.string "{STR_VAR_2} appears to have enjoyed\n"
 	.string "{STR_VAR_1}'s SECRET BASE thoroughly.$"
 
-gTVSecretBaseSecretsText06:: @ 082887AF
+TVSecretBaseSecrets_Text_PlayerHugeFanOfBase:: @ 082887AF
 	.string "{STR_VAR_2} appears to have become\n"
 	.string "a huge fan of {STR_VAR_1}'s\l"
 	.string "SECRET BASE.$"
 
-gTVSecretBaseSecretsText07:: @ 082887E9
+TVSecretBaseSecrets_Text_Outro:: @ 082887E9
 	.string "Viewers may want to check out\n"
 	.string "{STR_VAR_1}'s SECRET BASE, too.\p"
 	.string "Tune in next time as we visit another\n"
 	.string "SECRET BASE! Thanks for joining us!$"
 
-gTVSecretBaseSecretsText08:: @ 08288868
+TVSecretBaseSecrets_Text_StoppedMoving1:: @ 08288868
 	.string "The visitor has stopped!\p"
 	.string "The visitor isn't moving at all!\p"
 	.string "Was {STR_VAR_1}'s SECRET BASE\n"
 	.string "that unimpressive?$"
 
-gTVSecretBaseSecretsText09:: @ 082888CA
+TVSecretBaseSecrets_Text_StoppedMoving2:: @ 082888CA
 	.string "The visitor has stopped!\p"
 	.string "The visitor isn't moving at all!\p"
 	.string "Is it fatigue?\n"
 	.string "Has the visitor grown weary?$"
 
-gTVSecretBaseSecretsText10:: @ 08288930
+TVSecretBaseSecrets_Text_UsedChair:: @ 08288930
 	.string "The visitor sat down on a chair!\n"
 	.string "The visitor is seated!\p"
 	.string "Look at that look of delight!\p"
 	.string "That chair must be very comfortable\n"
 	.string "to get that response!$"
 
-gTVSecretBaseSecretsText11:: @ 082889C0
+TVSecretBaseSecrets_Text_UsedBalloon:: @ 082889C0
 	.string "The visitor charged at a balloon!\p"
 	.string "It burst!\n"
 	.string "Oh, my goodness, it popped!\p"
 	.string "The visitor appears startled by\n"
 	.string "the sudden noise!$"
 
-gTVSecretBaseSecretsText12:: @ 08288A3A
+TVSecretBaseSecrets_Text_UsedTent:: @ 08288A3A
 	.string "The visitor entered a TENT!\p"
 	.string "The visitor is running around!\p"
 	.string "Oh, my, the visitor is frolicking!\p"
 	.string "The visitor appears surprised by\n"
 	.string "the TENT's size!$"
 
-gTVSecretBaseSecretsText13:: @ 08288ACA
+TVSecretBaseSecrets_Text_UsedPlant:: @ 08288ACA
 	.string "The visitor is examining\n"
 	.string "a potted plant!\p"
 	.string "The visitor has surprisingly\n"
 	.string "mature taste!$"
 
-gTVSecretBaseSecretsText14:: @ 08288B1E
+TVSecretBaseSecrets_Text_UsedGoldShield:: @ 08288B1E
 	.string "The visitor is examining\n"
 	.string "a GOLD SHIELD!\p"
 	.string "The visitor's eyes appear to be\n"
 	.string "lit up with wonder!$"
 
-gTVSecretBaseSecretsText15:: @ 08288B7A
+TVSecretBaseSecrets_Text_UsedSilverShield:: @ 08288B7A
 	.string "The visitor is examining\n"
 	.string "a SILVER SHIELD!\p"
 	.string "The visitor appears to be wide-eyed!$"
 
-gTVSecretBaseSecretsText16:: @ 08288BC9
+TVSecretBaseSecrets_Text_UsedGlassOrnament:: @ 08288BC9
 	.string "The visitor is examining\n"
 	.string "a GLASS ORNAMENT!\p"
 	.string "Oh, no!\p"
@@ -2179,15 +2179,15 @@ gTVSecretBaseSecretsText16:: @ 08288BC9
 	.string "It's getting covered with\n"
 	.string "fingerprints…$"
 
-gTVSecretBaseSecretsText17:: @ 08288C40
+TVSecretBaseSecrets_Text_UsedTV:: @ 08288C40
 	.string "The visitor is watching television!\p"
 	.string "Looks like we have a big fan of TV!$"
 
-gTVSecretBaseSecretsText18:: @ 08288C88
+TVSecretBaseSecrets_Text_UsedMudBall:: @ 08288C88
 	.string "The visitor stomped on a MUD BALL!\p"
 	.string "The visitor looks delighted!$"
 
-gTVSecretBaseSecretsText19:: @ 08288CC8
+TVSecretBaseSecrets_Text_UsedBag:: @ 08288CC8
 	.string "…Oh?\p"
 	.string "The visitor is reaching for their own\n"
 	.string "BAG and rummaging about in it!\p"
@@ -2197,19 +2197,19 @@ gTVSecretBaseSecretsText19:: @ 08288CC8
 	.string "holding up the {STR_VAR_2}!\p"
 	.string "It's like a TV commercial!$"
 
-gTVSecretBaseSecretsText20:: @ 08288D7F
+TVSecretBaseSecrets_Text_UsedCushion:: @ 08288D7F
 	.string "The visitor grabs a cushion and…$"
 
-gTVSecretBaseSecretsText21:: @ 08288DA0
+TVSecretBaseSecrets_Text_HitCushion:: @ 08288DA0
 	.string "…begins hitting it!\p"
 	.string "Is the visitor under a lot of stress?$"
 
-gTVSecretBaseSecretsText22:: @ 08288DDA
+TVSecretBaseSecrets_Text_HuggedCushion:: @ 08288DDA
 	.string "…hugs it tight!\p"
 	.string "Could the visitor be feeling happy\n"
 	.string "about something?$"
 
-gTVSecretBaseSecretsText23:: @ 08288E1E
+TVSecretBaseSecrets_Text_BattledWon:: @ 08288E1E
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2220,7 +2220,7 @@ gTVSecretBaseSecretsText23:: @ 08288E1E
 	.string "The visitor is doing\n"
 	.string "a victory dance!$"
 
-gTVSecretBaseSecretsText24:: @ 08288EC9
+TVSecretBaseSecrets_Text_BattledLost:: @ 08288EC9
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2230,7 +2230,7 @@ gTVSecretBaseSecretsText24:: @ 08288EC9
 	.string "The visitor has lost!\p"
 	.string "The visitor looks dejected!$"
 
-gTVSecretBaseSecretsText25:: @ 08288F58
+TVSecretBaseSecrets_Text_DeclinedBattle:: @ 08288F58
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2241,7 +2241,7 @@ gTVSecretBaseSecretsText25:: @ 08288F58
 	.string "Did the visitor find {STR_VAR_1}\n"
 	.string "unappealing?$"
 
-gTVSecretBaseSecretsText26:: @ 08289011
+TVSecretBaseSecrets_Text_UsedPoster:: @ 08289011
 	.string "The visitor is staring intently\n"
 	.string "at a poster!\p"
 	.string "Is the poster to the visitor's\n"
@@ -2249,12 +2249,12 @@ gTVSecretBaseSecretsText26:: @ 08289011
 	.string "…But… There's something disturbing\n"
 	.string "about the visitor's stares.$"
 
-gTVSecretBaseSecretsText27:: @ 082890A4
+TVSecretBaseSecrets_Text_UsedNoteMat:: @ 082890A4
 	.string "The visitor stepped on a NOTE MAT!\p"
 	.string "…Hmm…\n"
 	.string "The visitor composed a funny tune!$"
 
-gTVSecretBaseSecretsText28:: @ 082890F0
+TVSecretBaseSecrets_Text_BattledDraw:: @ 082890F0
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2265,14 +2265,14 @@ gTVSecretBaseSecretsText28:: @ 082890F0
 	.string "Both TRAINERS appear to be very\n"
 	.string "disappointed!$"
 
-gTVSecretBaseSecretsText29:: @ 08289193
+TVSecretBaseSecrets_Text_UsedSpinMat:: @ 08289193
 	.string "The visitor stepped on\n"
 	.string "a SPIN MAT!\p"
 	.string "It looks like the visitor is dizzy!\p"
 	.string "The visitor is tottering about!\n"
 	.string "Look out!$"
 
-gTVSecretBaseSecretsText30:: @ 08289204
+TVSecretBaseSecrets_Text_UsedSandOrnament:: @ 08289204
 	.string "The visitor is reaching for\n"
 	.string "a SAND ORNAMENT!\p"
 	.string "Oh!\p"
@@ -2281,7 +2281,7 @@ gTVSecretBaseSecretsText30:: @ 08289204
 	.string "The visitor looks sheepish\n"
 	.string "and guilty!$"
 
-gTVSecretBaseSecretsText31:: @ 0828927C
+TVSecretBaseSecrets_Text_UsedDesk:: @ 0828927C
 	.string "The visitor is rubbing a desktop\n"
 	.string "with their finger!\p"
 	.string "Apparently, the visitor disapproves\n"
@@ -2289,25 +2289,25 @@ gTVSecretBaseSecretsText31:: @ 0828927C
 	.string "The visitor is surprisingly concerned\n"
 	.string "about neatness!$"
 
-gTVSecretBaseSecretsText32:: @ 08289313
+TVSecretBaseSecrets_Text_UsedBrick:: @ 08289313
 	.string "The visitor is staring at a BRICK!\p"
 	.string "Perhaps the visitor is thinking about\n"
 	.string "the object on the BRICK.$"
 
-gTVSecretBaseSecretsText33:: @ 08289375
+TVSecretBaseSecrets_Text_UsedSolidBoard:: @ 08289375
 	.string "The visitor is walking across\n"
 	.string "the SOLID BOARD.\p"
 	.string "The visitor keeps looking down.\p"
 	.string "The visitor appears to be surprisingly\n"
 	.string "timid and cautious!$"
 
-gTVSecretBaseSecretsText34:: @ 082893FF
+TVSecretBaseSecrets_Text_UsedFence:: @ 082893FF
 	.string "The visitor is looking intently\n"
 	.string "at a FENCE!\p"
 	.string "Has a new idea for a trap popped\n"
 	.string "into the visitor's head?$"
 
-gTVSecretBaseSecretsText35:: @ 08289465
+TVSecretBaseSecrets_Text_UsedGlitterMat:: @ 08289465
 	.string "The visitor stepped on\n"
 	.string "a GLITTER MAT!\p"
 	.string "The visitor is striking a variety\n"
@@ -2315,13 +2315,13 @@ gTVSecretBaseSecretsText35:: @ 08289465
 	.string "The visitor appears to be fantasizing\n"
 	.string "about being an idol!$"
 
-gTVSecretBaseSecretsText36:: @ 082894F2
+TVSecretBaseSecrets_Text_UsedTire:: @ 082894F2
 	.string "The visitor is staring intently\n"
 	.string "at a TIRE!\p"
 	.string "Could the visitor be thinking about\n"
 	.string "the kind of car that would use it?$"
 
-gTVSecretBaseSecretsText37:: @ 08289564
+TVSecretBaseSecrets_Text_UsedStand:: @ 08289564
 	.string "The visitor climbed a STAND!\p"
 	.string "The visitor is looking out across\n"
 	.string "{STR_VAR_1}'s BASE from high up!\p"
@@ -2329,16 +2329,16 @@ gTVSecretBaseSecretsText37:: @ 08289564
 	.string "Lets loose a roar!\n"
 	.string "The visitor is roaring!$"
 
-gTVSecretBaseSecretsText38:: @ 082895EB
+TVSecretBaseSecrets_Text_BrokeDoor:: @ 082895EB
 	.string "The visitor charged headlong into\n"
 	.string "a BREAKABLE DOOR!\p"
 	.string "The visitor is laughing uproariously!$"
 
-gTVSecretBaseSecretsText39:: @ 08289645
+TVSecretBaseSecrets_Text_UsedDoll:: @ 08289645
 	.string "The visitor is talking to a DOLL!\p"
 	.string "…It's a little creepy…$"
 
-gTVSecretBaseSecretsText40:: @ 0828967E
+TVSecretBaseSecrets_Text_UsedSlide:: @ 0828967E
 	.string "The visitor is climbing the ladder\n"
 	.string "on a SLIDE!\p"
 	.string "And…\p"
@@ -2346,7 +2346,7 @@ gTVSecretBaseSecretsText40:: @ 0828967E
 	.string "Looks like the visitor is having\n"
 	.string "a grand old time!$"
 
-gTVSecretBaseSecretsText41:: @ 082896FC
+TVSecretBaseSecrets_Text_UsedSlideButDidntGoDown:: @ 082896FC
 	.string "The visitor is climbing the ladder\n"
 	.string "on a SLIDE!\p"
 	.string "And…\p"
@@ -2354,7 +2354,7 @@ gTVSecretBaseSecretsText41:: @ 082896FC
 	.string "the ladder!\p"
 	.string "Did the visitor suddenly chicken out?$"
 
-gTVSecretBaseSecretsText42:: @ 0828977D
+TVSecretBaseSecrets_Text_UsedJumpMat:: @ 0828977D
 	.string "The visitor stepped on\n"
 	.string "a JUMP MAT!\p"
 	.string "The visitor jumped once!\p"
@@ -2700,7 +2700,7 @@ GabbyAndTy_Text_GabbyPreFirstBattle: @ 0828AF05
 	.string "Okay, roll camera!\n"
 	.string "Let's get this interview.$"
 
-GabbyAndTy_Text_GabbyPreBattle: @ 0828AF7D
+GabbyAndTy_Text_GabbyIntro: @ 0828AF7D
 	.string "GABBY: Oh! You're {PLAYER}! Hi!\n"
 	.string "Do you remember us from last time?\p"
 	.string "Can you show us how much stronger\n"
@@ -2806,7 +2806,7 @@ GabbyAndTy_Text_TyPreFirstBattle: @ 0828B75C
 	.string "TRAINER here, of all places!\l"
 	.string "Camera's rolling!$"
 
-GabbyAndTy_Text_TyPreBattle: @ 0828B7B1
+GabbyAndTy_Text_TyIntro: @ 0828B7B1
 	.string "TY: Hey, lookie here!\n"
 	.string "I remember you!\p"
 	.string "I'll get this battle all on this\n"

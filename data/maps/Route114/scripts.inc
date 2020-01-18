@@ -33,7 +33,7 @@ Route114_EventScript_Man:: @ 81F2582
 	random NUM_ROUTE_114_MAN_BERRIES
 	addvar VAR_RESULT, NUM_ROUTE_114_MAN_BERRIES_SKIPPED
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem_std VAR_RESULT
+	giveitem VAR_RESULT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_114_RECEIVED_BERRY
@@ -51,7 +51,7 @@ Route114_EventScript_RoarGentleman:: @ 81F25D1
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedRoar
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_TM05
+	giveitem ITEM_TM05
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05

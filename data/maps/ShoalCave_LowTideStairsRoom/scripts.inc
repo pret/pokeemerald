@@ -17,7 +17,7 @@ ShoalCave_LowTideStairsRoom_EventScript_SetShoalItemMetatilesEnd:: @ 8237119
 ShoalCave_LowTideStairsRoom_EventScript_ShoalSalt3:: @ 823711A
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_3, ShoalCave_LowTideStairsRoom_EventScript_ReceivedShoalSalt
-	giveitem_std ITEM_SHOAL_SALT
+	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 11, 11, METATILE_Cave_ShoalCave_DirtPile_Small, 0

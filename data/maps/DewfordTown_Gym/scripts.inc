@@ -7,8 +7,7 @@ DewfordTown_Gym_OnTransition: @ 81FC642
 	end
 
 DewfordTown_Gym_EventScript_SetFlashRadius:: @ 81FC648
-	checktrainerflag TRAINER_BRAWLY_1
-	goto_if_eq DewfordTown_Gym_EventScript_SetLightsOn
+	goto_if_defeated TRAINER_BRAWLY_1, DewfordTown_Gym_EventScript_SetLightsOn
 	call DewfordTown_Gym_EventScript_CountTrainersDefeated
 	copyvar VAR_0x8001, VAR_0x8000
 	compare VAR_0x8000, 0
@@ -124,34 +123,28 @@ DewfordTown_Gym_EventScript_AnimateFlashFullBrightness:: @ 81FC75D
 
 DewfordTown_Gym_EventScript_CountTrainersDefeated:: @ 81FC768
 	setvar VAR_0x8000, 0
-	checktrainerflag TRAINER_TAKAO
-	goto_if_lt DewfordTown_Gym_EventScript_CheckJocelyn
+	goto_if_not_defeated TRAINER_TAKAO, DewfordTown_Gym_EventScript_CheckJocelyn
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckJocelyn:: @ 81FC77B
-	checktrainerflag TRAINER_JOCELYN
-	goto_if_lt DewfordTown_Gym_EventScript_CheckLaura
+	goto_if_not_defeated TRAINER_JOCELYN, DewfordTown_Gym_EventScript_CheckLaura
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckLaura:: @ 81FC789
-	checktrainerflag TRAINER_LAURA
-	goto_if_lt DewfordTown_Gym_EventScript_CheckBrenden
+	goto_if_not_defeated TRAINER_LAURA, DewfordTown_Gym_EventScript_CheckBrenden
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckBrenden:: @ 81FC797
-	checktrainerflag TRAINER_BRENDEN
-	goto_if_lt DewfordTown_Gym_EventScript_CheckCristian
+	goto_if_not_defeated TRAINER_BRENDEN, DewfordTown_Gym_EventScript_CheckCristian
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckCristian:: @ 81FC7A5
-	checktrainerflag TRAINER_CRISTIAN
-	goto_if_lt DewfordTown_Gym_EventScript_CheckLilith
+	goto_if_not_defeated TRAINER_CRISTIAN, DewfordTown_Gym_EventScript_CheckLilith
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_CheckLilith:: @ 81FC7B3
-	checktrainerflag TRAINER_LILITH
-	goto_if_lt DewfordTown_Gym_EventScript_StopCountingTrainers
+	goto_if_not_defeated TRAINER_LILITH, DewfordTown_Gym_EventScript_StopCountingTrainers
 	addvar VAR_0x8000, 1
 DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 	return
 
 DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
-	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyPreBattle, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq DewfordTown_Gym_EventScript_BrawlyRematch
@@ -188,7 +181,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	end
 
 DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
-	giveitem_std ITEM_TM08
+	giveitem ITEM_TM08
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -196,7 +189,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
 	return
 
 DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
-	giveitem_std ITEM_TM08
+	giveitem ITEM_TM08
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -210,7 +203,7 @@ DewfordTown_Gym_EventScript_BrawlyRematch:: @ 81FC89C
 	end
 
 DewfordTown_Gym_EventScript_Takao:: @ 81FC8B7
-	trainerbattle_single TRAINER_TAKAO, DewfordTown_Gym_Text_TakaoPreBattle, DewfordTown_Gym_Text_TakaoDefeat, DewfordTown_Gym_EventScript_TakaoBrightenRoom
+	trainerbattle_single TRAINER_TAKAO, DewfordTown_Gym_Text_TakaoIntro, DewfordTown_Gym_Text_TakaoDefeat, DewfordTown_Gym_EventScript_TakaoBrightenRoom
 	msgbox DewfordTown_Gym_Text_TakaoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -220,7 +213,7 @@ DewfordTown_Gym_EventScript_TakaoBrightenRoom:: @ 81FC8D2
 	end
 
 DewfordTown_Gym_EventScript_Jocelyn:: @ 81FC8D9
-	trainerbattle_single TRAINER_JOCELYN, DewfordTown_Gym_Text_JocelynPreBattle, DewfordTown_Gym_Text_JocelynDefeat, DewfordTown_Gym_EventScript_JocelynBrightenRoom
+	trainerbattle_single TRAINER_JOCELYN, DewfordTown_Gym_Text_JocelynIntro, DewfordTown_Gym_Text_JocelynDefeat, DewfordTown_Gym_EventScript_JocelynBrightenRoom
 	msgbox DewfordTown_Gym_Text_JocelynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -230,7 +223,7 @@ DewfordTown_Gym_EventScript_JocelynBrightenRoom:: @ 81FC8F4
 	end
 
 DewfordTown_Gym_EventScript_Laura:: @ 81FC8FB
-	trainerbattle_single TRAINER_LAURA, DewfordTown_Gym_Text_LauraPreBattle, DewfordTown_Gym_Text_LauraDefeat, DewfordTown_Gym_EventScript_LauraBrightenRoom
+	trainerbattle_single TRAINER_LAURA, DewfordTown_Gym_Text_LauraIntro, DewfordTown_Gym_Text_LauraDefeat, DewfordTown_Gym_EventScript_LauraBrightenRoom
 	msgbox DewfordTown_Gym_Text_LauraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -240,7 +233,7 @@ DewfordTown_Gym_EventScript_LauraBrightenRoom:: @ 81FC916
 	end
 
 DewfordTown_Gym_EventScript_Brenden:: @ 81FC91D
-	trainerbattle_single TRAINER_BRENDEN, DewfordTown_Gym_Text_BrendenPreBattle, DewfordTown_Gym_Text_BrendenDefeat, DewfordTown_Gym_EventScript_BrendenBrightenRoom
+	trainerbattle_single TRAINER_BRENDEN, DewfordTown_Gym_Text_BrendenIntro, DewfordTown_Gym_Text_BrendenDefeat, DewfordTown_Gym_EventScript_BrendenBrightenRoom
 	msgbox DewfordTown_Gym_Text_BrendenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -250,7 +243,7 @@ DewfordTown_Gym_EventScript_BrendenBrightenRoom:: @ 81FC938
 	end
 
 DewfordTown_Gym_EventScript_Cristian:: @ 81FC93F
-	trainerbattle_single TRAINER_CRISTIAN, DewfordTown_Gym_Text_CristianPreBattle, DewfordTown_Gym_Text_CristianDefeat, DewfordTown_Gym_EventScript_CristianBrightenRoom
+	trainerbattle_single TRAINER_CRISTIAN, DewfordTown_Gym_Text_CristianIntro, DewfordTown_Gym_Text_CristianDefeat, DewfordTown_Gym_EventScript_CristianBrightenRoom
 	msgbox DewfordTown_Gym_Text_CristianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -260,7 +253,7 @@ DewfordTown_Gym_EventScript_CristianBrightenRoom:: @ 81FC95A
 	end
 
 DewfordTown_Gym_EventScript_Lilith:: @ 81FC961
-	trainerbattle_single TRAINER_LILITH, DewfordTown_Gym_Text_LilithPreBattle, DewfordTown_Gym_Text_LilithDefeat, DewfordTown_Gym_EventScript_LilithBrightenRoom
+	trainerbattle_single TRAINER_LILITH, DewfordTown_Gym_Text_LilithIntro, DewfordTown_Gym_Text_LilithDefeat, DewfordTown_Gym_EventScript_LilithBrightenRoom
 	msgbox DewfordTown_Gym_Text_LilithPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -324,7 +317,7 @@ DewfordTown_Gym_Text_GymGuidePostVictory: @ 81FCB5C
 	.string "Whoah! It's turned too bright in here!\p"
 	.string "Your future is bright, too!$"
 
-DewfordTown_Gym_Text_TakaoPreBattle: @ 81FCB9F
+DewfordTown_Gym_Text_TakaoIntro: @ 81FCB9F
 	.string "Might is right!\n"
 	.string "Come on!$"
 
@@ -335,7 +328,7 @@ DewfordTown_Gym_Text_TakaoPostBattle: @ 81FCBCA
 	.string "Your skill overcame my strength!\n"
 	.string "Your technique is commendable!$"
 
-DewfordTown_Gym_Text_JocelynPreBattle: @ 81FCC0A
+DewfordTown_Gym_Text_JocelynIntro: @ 81FCC0A
 	.string "There's no need for BRAWLY to be\n"
 	.string "involved!\p"
 	.string "I'll crush you!$"
@@ -351,7 +344,7 @@ DewfordTown_Gym_Text_JocelynPostBattle: @ 81FCC6B
 	.string "No, I'll become the POKéMON LEAGUE\n"
 	.string "CHAMPION!$"
 
-DewfordTown_Gym_Text_LauraPreBattle: @ 81FCD01
+DewfordTown_Gym_Text_LauraIntro: @ 81FCD01
 	.string "Don't you dare brush me off!\n"
 	.string "It's not my fault if you cry!$"
 
@@ -365,7 +358,7 @@ DewfordTown_Gym_Text_LauraPostBattle: @ 81FCD4F
 	.string "But because it's so dark, I can never\n"
 	.string "see BRAWLY's face…$"
 
-DewfordTown_Gym_Text_LilithPreBattle: @ 81FCDB8
+DewfordTown_Gym_Text_LilithIntro: @ 81FCDB8
 	.string "Ufufu…\n"
 	.string "Are you stumbling around in the dark?$"
 
@@ -377,7 +370,7 @@ DewfordTown_Gym_Text_LilithPostBattle: @ 81FCE08
 	.string "You deserve to stay lost and end up\n"
 	.string "back at the entrance again!$"
 
-DewfordTown_Gym_Text_BrendenPreBattle: @ 81FCE48
+DewfordTown_Gym_Text_BrendenIntro: @ 81FCE48
 	.string "I'll show you the gumption of\n"
 	.string "a sailing man!$"
 
@@ -389,7 +382,7 @@ DewfordTown_Gym_Text_BrendenPostBattle: @ 81FCEAB
 	.string "Oh, aye! You're worthy of seeing\n"
 	.string "our GYM LEADER.$"
 
-DewfordTown_Gym_Text_CristianPreBattle: @ 81FCEDC
+DewfordTown_Gym_Text_CristianIntro: @ 81FCEDC
 	.string "If you mean to pass, it has to be\n"
 	.string "through me!$"
 
@@ -401,7 +394,7 @@ DewfordTown_Gym_Text_CristianPostBattle: @ 81FCF26
 	.string "You win!\n"
 	.string "Go after that BADGE!$"
 
-DewfordTown_Gym_Text_BrawlyPreBattle: @ 81FCF44
+DewfordTown_Gym_Text_BrawlyIntro: @ 81FCF44
 	.string "I'm BRAWLY!\n"
 	.string "DEWFORD's GYM LEADER!\p"
 	.string "I've been churned in the rough waves\n"

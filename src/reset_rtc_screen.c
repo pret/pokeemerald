@@ -559,7 +559,7 @@ static void Task_ResetRtcScreen(u8 taskId)
     case 1:
         if (!gPaletteFade.active)
         {
-            if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
+            if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             {
                 ShowMessage(gText_NoSaveFileCantSetTime);
                 data[0] = 5;
@@ -608,7 +608,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         }
         break;
     case 4:
-        if (TrySavingData(SAVE_NORMAL) == 1)
+        if (TrySavingData(SAVE_NORMAL) == SAVE_STATUS_OK)
         {
             ShowMessage(gText_SaveCompleted);
             PlaySE(SE_PINPON);

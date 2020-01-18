@@ -8,8 +8,8 @@ struct RSBattleTowerRecord
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
-    /*0x10*/ u16 greeting[6];
-    /*0x1C*/ struct BattleTowerPokemon party[3];
+    /*0x10*/ u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x1C*/ struct BattleTowerPokemon party[FRONTIER_PARTY_SIZE];
     /*0xA0*/ u32 checksum;
 };
 
@@ -18,10 +18,10 @@ struct BattleFrontierTrainer
     u8 facilityClass;
     u8 filler1[3];
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
-    u16 speechBefore[6];
-    u16 speechWin[6];
-    u16 speechLose[6];
-    const u16 *monSets;
+    u16 speechBefore[EASY_CHAT_BATTLE_WORDS_COUNT];
+    u16 speechWin[EASY_CHAT_BATTLE_WORDS_COUNT];
+    u16 speechLose[EASY_CHAT_BATTLE_WORDS_COUNT];
+    const u16 *monSet;
 };
 
 struct FacilityMon
@@ -49,7 +49,7 @@ extern const struct BattleFrontierTrainer *gFacilityTrainers;
 extern const struct FacilityMon *gFacilityTrainerMons;
 
 void CallBattleTowerFunc(void);
-u16 sub_8162548(u8 challengeNum, u8 battleNum);
+u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum);
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId);
 void SetEReaderTrainerGfxId(void);
 u8 GetBattleFacilityTrainerGfxId(u16 trainerId);
@@ -59,7 +59,7 @@ u8 GetFrontierOpponentClass(u16 trainerId);
 void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 void FillFrontierTrainerParty(u8 monsCount);
 void FillFrontierTrainersParties(u8 monsCount);
-u16 RandomizeFacilityTrainerMonSet(u16 trainerId);
+u16 GetRandomFrontierMonFromSet(u16 trainerId);
 void FrontierSpeechToString(const u16 *words);
 void DoSpecialTrainerBattle(void);
 void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *record);
@@ -71,7 +71,7 @@ void GetEreaderTrainerName(u8 *dst);
 void ValidateEReaderTrainer(void);
 void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer);
 void CopyEReaderTrainerGreeting(void);
-void sub_81653CC(void);
+void TryHideBattleTowerReporter(void);
 bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst);
 bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, struct RSBattleTowerRecord *dst);
 void CalcApprenticeChecksum(struct Apprentice *apprentice);

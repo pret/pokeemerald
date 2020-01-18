@@ -2,7 +2,7 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 	.byte 0
 
 RustboroCity_Gym_EventScript_Roxanne:: @ 8212F31
-	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxannePreBattle, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq RustboroCity_Gym_EventScript_RoxanneRematch
@@ -28,7 +28,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
-	giveitem_std ITEM_TM39
+	giveitem ITEM_TM39
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
@@ -42,17 +42,17 @@ RustboroCity_Gym_EventScript_RoxanneRematch:: @ 8212FC8
 	end
 
 RustboroCity_Gym_EventScript_Josh:: @ 8212FE3
-	trainerbattle_single TRAINER_JOSH, RustboroCity_Gym_Text_JoshPreBattle, RustboroCity_Gym_Text_JoshDefeat
+	trainerbattle_single TRAINER_JOSH, RustboroCity_Gym_Text_JoshIntro, RustboroCity_Gym_Text_JoshDefeat
 	msgbox RustboroCity_Gym_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_Tommy:: @ 8212FFA
-	trainerbattle_single TRAINER_TOMMY, RustboroCity_Gym_Text_TommyPreBattle, RustboroCity_Gym_Text_TommyDefeat
+	trainerbattle_single TRAINER_TOMMY, RustboroCity_Gym_Text_TommyIntro, RustboroCity_Gym_Text_TommyDefeat
 	msgbox RustboroCity_Gym_Text_TommyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_Marc:: @ 8213011
-	trainerbattle_single TRAINER_MARC, RustboroCity_Gym_Text_MarcPreBattle, RustboroCity_Gym_Text_MarcDefeat
+	trainerbattle_single TRAINER_MARC, RustboroCity_Gym_Text_MarcIntro, RustboroCity_Gym_Text_MarcDefeat
 	msgbox RustboroCity_Gym_Text_MarcPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -140,7 +140,7 @@ RustboroCity_Gym_Text_GymGuidePostVictory: @ 82132E2
 	.string "the stairs to the CHAMPIONSHIP!\p"
 	.string "That's got to feel awesome!$"
 
-RustboroCity_Gym_Text_JoshPreBattle: @ 82133E9
+RustboroCity_Gym_Text_JoshIntro: @ 82133E9
 	.string "Don't take us GYM TRAINERS lightly!\n"
 	.string "I'll show you why we're better!$"
 
@@ -151,7 +151,7 @@ RustboroCity_Gym_Text_JoshPostBattle: @ 8213447
 	.string "You haven't seen anything of the ROCK\n"
 	.string "type's terrifying power!$"
 
-RustboroCity_Gym_Text_TommyPreBattle: @ 8213486
+RustboroCity_Gym_Text_TommyIntro: @ 8213486
 	.string "If you can't beat me, you won't stand\n"
 	.string "a chance against ROXANNE!$"
 
@@ -163,7 +163,7 @@ RustboroCity_Gym_Text_TommyPostBattle: @ 82134E6
 	.string "several times.\p"
 	.string "You'd better be on your guard!$"
 
-RustboroCity_Gym_Text_MarcPreBattle: @ 8213533
+RustboroCity_Gym_Text_MarcIntro: @ 8213533
 	.string "We might be in the middle of town,\n"
 	.string "but so what?\p"
 	.string "My ROCK POKéMON need room to\n"
@@ -178,7 +178,7 @@ RustboroCity_Gym_Text_MarcPostBattle: @ 82135C0
 	.string "It took smarts and sense for her to\n"
 	.string "pick the ROCK type at her young age.$"
 
-RustboroCity_Gym_Text_RoxannePreBattle: @ 821362A
+RustboroCity_Gym_Text_RoxanneIntro: @ 821362A
 	.string "Hello, I am ROXANNE, the RUSTBORO\n"
 	.string "POKéMON GYM LEADER.\p"
 	.string "I became a GYM LEADER so that I might\n"

@@ -81,8 +81,8 @@
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_STATS 6
-#define NUM_BATTLE_STATS 8
+#define NUM_EV_STATS     NUM_STATS - 1 // excludes HP
+#define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
 
 // Move flags.
 #define FLAG_MAKES_CONTACT          0x1
@@ -242,6 +242,8 @@
 #define FRIENDSHIP_EVENT_FAINT_SMALL          6
 #define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 7
 #define FRIENDSHIP_EVENT_FAINT_LARGE          8
+
+#define MAX_FRIENDSHIP  0xFF
 
 #define STATUS_PRIMARY_NONE      0
 #define STATUS_PRIMARY_POISON    1

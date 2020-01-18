@@ -21,7 +21,7 @@ void ShatterSecretBaseBreakableDoor(s16 x, s16 y);
 void PlaySecretBaseMusicNoteMatSound(s16 metatileId);
 void DoSecretBaseGlitterMatSparkle(void);
 bool8 FldEff_SandPillar(void);
-void GetShieldToyTVDecorationInfo(void);
+void InteractWithShieldOrTVDecoration(void);
 bool8 sub_80FADE4(u16 arg0, u8 arg1);
 void FldEffPoison_Start(void);
 bool32 FldEffPoison_IsActive(void);

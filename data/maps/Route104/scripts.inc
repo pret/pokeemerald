@@ -269,7 +269,7 @@ Route104_EventScript_ExpertF:: @ 81ECF8C
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104, Route104_EventScript_ReceivedBerry
 	msgbox Route104_Text_PlantBerriesInSoilTakeThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_CHESTO_BERRY
+	giveitem ITEM_CHESTO_BERRY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
@@ -287,7 +287,7 @@ Route104_EventScript_WhiteHerbFlorist:: @ 81ECFCD
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_ReceivedWhiteHerb
 	msgbox Route104_Text_DontNeedThisTakeIt, MSGBOX_DEFAULT
-	giveitem_std ITEM_WHITE_HERB
+	giveitem ITEM_WHITE_HERB
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WHITE_HERB
@@ -340,7 +340,7 @@ Route104_EventScript_Boy2:: @ 81ED057
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_TM09
+	giveitem ITEM_TM09
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09

@@ -83,7 +83,7 @@ RustboroCity_PokemonSchool_EventScript_Teacher:: @ 8213F95
 	compare VAR_FACING, DIR_WEST
 	call_if_eq RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
 	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT
-	giveitem_std ITEM_QUICK_CLAW
+	giveitem ITEM_QUICK_CLAW
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage

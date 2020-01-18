@@ -2,9 +2,11 @@
 #define GUARD_TRAINERS_H
 
 #include "constants/opponents.h"
+#include "constants/battle_frontier_trainers.h"
 
 // Special Trainer Ids.
-#define TRAINER_RECORD_MIXING_FRIEND        300
+//      0-299 are frontier trainers
+#define TRAINER_RECORD_MIXING_FRIEND        FRONTIER_TRAINERS_COUNT
 #define TRAINER_RECORD_MIXING_APPRENTICE    400
 #define TRAINER_EREADER                     500
 #define TRAINER_FRONTIER_BRAIN              1022

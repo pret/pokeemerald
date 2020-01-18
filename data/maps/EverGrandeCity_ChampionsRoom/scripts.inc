@@ -39,7 +39,7 @@ EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace: @ 8228A42
 
 EverGrandeCity_ChampionsRoom_EventScript_Wallace:: @ 8228A45
 	playbgm MUS_DAIGO, 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_PreBattleSpeech, MSGBOX_DEFAULT
+	msgbox EverGrandeCity_ChampionsRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat
 	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
 	end
@@ -225,7 +225,7 @@ EverGrandeCity_ChampionsRoom_Movement_BirchArrives: @ 8228C43
 	walk_in_place_fastest_left
 	step_end
 
-EverGrandeCity_ChampionsRoom_Text_PreBattleSpeech: @ 8228C4C
+EverGrandeCity_ChampionsRoom_Text_IntroSpeech: @ 8228C4C
 	.string "WALLACE: Welcome, {PLAYER}{KUN}.\p"
 	.string "That incident in SOOTOPOLIS CITY…\n"
 	.string "That was superb work, putting an end\l"

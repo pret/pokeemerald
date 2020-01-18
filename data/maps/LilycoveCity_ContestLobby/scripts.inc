@@ -360,7 +360,7 @@ LilycoveCity_ContestLobby_EventScript_SetMasterContestType:: @ 821A5C9
 LilycoveCity_ContestLobby_EventScript_SetDebug:: @ 821A5CF
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
-	giveitem ITEM_CONTEST_PASS, 1
+	additem ITEM_CONTEST_PASS
 	setvar VAR_0x800B, 8
 	setvar VAR_CONTEST_RANK, CONTEST_RANK_MASTER
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1

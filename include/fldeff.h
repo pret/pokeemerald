@@ -33,7 +33,7 @@ void ChooseMonForSoftboiled(u8 taskId);
 
 // flash
 bool8 SetUpFieldMove_Flash(void);
-void c2_change_map(void);
+void CB2_DoChangeMap(void);
 bool8 GetMapPairFadeToType(u8 a1, u8 a2);
 bool8 GetMapPairFadeFromType(u8 a1, u8 a2);
 

@@ -167,7 +167,7 @@ LittlerootTown_EventScript_GoInsideWithMom:: @ 81E7F17
 	waitmovement 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN

@@ -46,4 +46,92 @@
 // Number of ribbons to put Spot the Cuties on air
 #define NUM_CUTIES_RIBBONS  4
 
+// TV Show states for Secret Base Secrets
+#define SBSECRETS_STATE_INTRO                   0
+#define SBSECRETS_STATE_DO_NEXT1                1
+#define SBSECRETS_STATE_DO_NEXT2                2
+#define SBSECRETS_STATE_TOOK_X_STEPS            3
+#define SBSECRETS_STATE_BASE_INTEREST_LOW       4
+#define SBSECRETS_STATE_BASE_INTEREST_MED       5
+#define SBSECRETS_STATE_BASE_INTEREST_HIGH      6
+#define SBSECRETS_STATE_OUTRO                   7
+#define SBSECRETS_STATE_NOTHING_USED1           8
+#define SBSECRETS_STATE_NOTHING_USED2           9
+#define SBSECRETS_STATE_USED_CHAIR              10
+#define SBSECRETS_STATE_USED_BALLOON            11
+#define SBSECRETS_STATE_USED_TENT               12
+#define SBSECRETS_STATE_USED_PLANT              13
+#define SBSECRETS_STATE_USED_GOLD_SHIELD        14
+#define SBSECRETS_STATE_USED_SILVER_SHIELD      15
+#define SBSECRETS_STATE_USED_GLASS_ORNAMENT     16
+#define SBSECRETS_STATE_USED_TV                 17
+#define SBSECRETS_STATE_USED_MUD_BALL           18
+#define SBSECRETS_STATE_USED_BAG                19
+#define SBSECRETS_STATE_USED_CUSHION            20
+#define SBSECRETS_STATE_HIT_CUSHION             21
+#define SBSECRETS_STATE_HUGGED_CUSHION          22
+#define SBSECRETS_STATE_BATTLED_WON             23
+#define SBSECRETS_STATE_BATTLED_LOST            24
+#define SBSECRETS_STATE_DECLINED_BATTLE         25
+#define SBSECRETS_STATE_USED_POSTER             26
+#define SBSECRETS_STATE_USED_NOTE_MAT           27
+#define SBSECRETS_STATE_BATTLED_DRAW            28
+#define SBSECRETS_STATE_USED_SPIN_MAT           29
+#define SBSECRETS_STATE_USED_SAND_ORNAMENT      30
+#define SBSECRETS_STATE_USED_DESK               31
+#define SBSECRETS_STATE_USED_BRICK              32
+#define SBSECRETS_STATE_USED_SOLID_BOARD        33
+#define SBSECRETS_STATE_USED_FENCE              34
+#define SBSECRETS_STATE_USED_GLITTER_MAT        35
+#define SBSECRETS_STATE_USED_TIRE               36
+#define SBSECRETS_STATE_USED_STAND              37
+#define SBSECRETS_STATE_USED_BREAKABLE_DOOR     38
+#define SBSECRETS_STATE_USED_DOLL               39
+#define SBSECRETS_STATE_USED_SLIDE              40
+#define SBSECRETS_STATE_DECLINED_SLIDE          41
+#define SBSECRETS_STATE_USED_JUMP_MAT           42
+#define SBSECRETS_NUM_STATES                    43
+
+// The below flags are set when interacting with objects in a friends secret base
+// Theyre set as bits in a var, and with 32 flags they're spread across 2 vars
+
+// VAR_SECRET_BASE_LOW_TV_FLAGS
+#define SECRET_BASE_USED_CHAIR          (1 << 0)
+#define SECRET_BASE_USED_BALLOON        (1 << 1)
+#define SECRET_BASE_USED_TENT           (1 << 2)
+#define SECRET_BASE_USED_PLANT          (1 << 3)
+#define SECRET_BASE_USED_GOLD_SHIELD    (1 << 4)
+#define SECRET_BASE_USED_SILVER_SHIELD  (1 << 5)
+#define SECRET_BASE_USED_GLASS_ORNAMENT (1 << 6)
+#define SECRET_BASE_USED_TV             (1 << 7)
+#define SECRET_BASE_USED_MUD_BALL       (1 << 8)
+#define SECRET_BASE_USED_BAG            (1 << 9)
+#define SECRET_BASE_USED_CUSHION        (1 << 10)
+#define SECRET_BASE_BATTLED_WON         (1 << 11)
+#define SECRET_BASE_BATTLED_LOST        (1 << 12)
+#define SECRET_BASE_DECLINED_BATTLE     (1 << 13)
+#define SECRET_BASE_USED_POSTER         (1 << 14)
+#define SECRET_BASE_USED_NOTE_MAT       (1 << 15)
+
+// VAR_SECRET_BASE_HIGH_TV_FLAGS
+#define SECRET_BASE_BATTLED_DRAW        (1 << 0)
+#define SECRET_BASE_USED_SPIN_MAT       (1 << 1)
+#define SECRET_BASE_USED_SAND_ORNAMENT  (1 << 2)
+#define SECRET_BASE_USED_DESK           (1 << 3)
+#define SECRET_BASE_USED_BRICK          (1 << 4)
+#define SECRET_BASE_USED_SOLID_BOARD    (1 << 5)
+#define SECRET_BASE_USED_FENCE          (1 << 6)
+#define SECRET_BASE_USED_GLITTER_MAT    (1 << 7)
+#define SECRET_BASE_USED_TIRE           (1 << 8)
+#define SECRET_BASE_USED_STAND          (1 << 9)
+#define SECRET_BASE_USED_BREAKABLE_DOOR (1 << 10)
+#define SECRET_BASE_USED_DOLL           (1 << 11)
+#define SECRET_BASE_USED_SLIDE          (1 << 12)
+#define SECRET_BASE_DECLINED_SLIDE      (1 << 13)
+#define SECRET_BASE_USED_JUMP_MAT       (1 << 14)
+#define SECRET_BASE_UNUSED_FLAG         (1 << 15)
+
+#define NUM_SECRET_BASE_FLAGS  32  // by definition, bitfield of 2 u16s
+
+
 #endif //GUARD_CONSTANTS_TV_H

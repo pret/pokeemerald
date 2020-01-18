@@ -2917,10 +2917,10 @@ AI_CV_Sandstorm_AbilityPlus:
 AI_CV_Sandstorm_End:
 	end
 
+@ BUG: Facade score is increased if the target is statused, but should be if the user is. Replace AI_TARGET with AI_USER
 AI_CV_Facade:
 	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
 	score +1
-
 AI_CV_Facade_End:
 	end
 
