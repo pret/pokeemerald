@@ -6716,6 +6716,7 @@ BattleScript_WeakArmorActivatesEnd:
 	
 BattleScript_AttackerAbilityStatRaise::
 	setgraphicalstatchangevalues
+	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
