@@ -220,6 +220,7 @@ static const u8 sPsychicSurgeDescription[] = _("Field becomes weird.");
 static const u8 sMistySurgeDescription[] = _("Field becomes misty.");
 static const u8 sGrassySurgeDescription[] = _("Field becomes grassy.");
 static const u8 sFullMetalBodyDescription[] = _("Prevents stat reduction.");
+static const u8 sNeuroforceDescription[] = _("Ups “super effective.“.");
 
 const u8 gAbilityNames[ABILITIES_COUNT_GEN7][ABILITY_NAME_LENGTH + 1] =
 {
@@ -457,6 +458,7 @@ const u8 gAbilityNames[ABILITIES_COUNT_GEN7][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_FULL_METAL_BODY] = _("FullMetalBod"),
     [ABILITY_SHADOW_SHIELD] = _("ShadowShield"),
     [ABILITY_PRISM_ARMOR] = _("Prism Armor"),
+    [ABILITY_NEUROFORCE] = _("Neuroforce"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT_GEN7] =
@@ -695,4 +697,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT_GEN7] =
     [ABILITY_FULL_METAL_BODY] = sFullMetalBodyDescription,
     [ABILITY_SHADOW_SHIELD] = sMultiscaleDescription,
     [ABILITY_PRISM_ARMOR] = sFilterDescription,
+    [ABILITY_NEUROFORCE] = sNeuroforceDescription,
 };

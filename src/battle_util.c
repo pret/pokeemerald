@@ -5913,6 +5913,10 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         if (isCrit)
             MulModifier(&finalModifier, UQ_4_12(1.5));
         break;
+    case ABILITY_NEUROFORCE:
+        if (typeEffectivenessModifier >= UQ_4_12(2.0))
+            MulModifier(&finalModifier, UQ_4_12(1.25));
+        break;
     }
 
     // target's abilities
