@@ -6645,14 +6645,11 @@ bool32 CanUseLastResort(u8 battlerId)
     {
         if (gBattleMons[battlerId].moves[i] != MOVE_NONE)
             knownMovesCount++;
-        if (gDisableStructs[battlerId].usedMoves & gBitTable[i])
+        if (i != gCurrMovePos && gDisableStructs[battlerId].usedMoves & gBitTable[i]) // Increment used move count for all moves except current Last Resort.
             usedMovesCount++;
     }
 
-    if (knownMovesCount >= 2 && usedMovesCount >= knownMovesCount - 1)
-        return TRUE;
-    else
-        return FALSE;
+    return (knownMovesCount >= 2 && usedMovesCount >= knownMovesCount - 1);
 }
 
 #define DEFOG_CLEAR(status, structField, battlescript, move)\
