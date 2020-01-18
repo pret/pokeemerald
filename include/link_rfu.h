@@ -6,6 +6,33 @@
 
 // Exported type declarations
 
+struct UnkLinkRfuStruct_02022B14Substruct
+{
+    u16 unk_00_0:4;
+    u16 unk_00_4:1;
+    u16 unk_00_5:1;
+    u16 unk_00_6:1;
+    u16 isChampion:1;
+    u16 hasNationalDex:1;
+    u16 gameClear:1; // never read, redundant with isChampion
+    u16 unk_01_2:4;  // always 3?
+    u16 unk_01_6:2;
+    u8 playerTrainerId[2];
+};
+
+struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
+{
+    struct UnkLinkRfuStruct_02022B14Substruct unk_00;
+    u8 unk_04[4];
+    u16 species:10;
+    u16 type:6;
+    u8 unk_0a_0:7;
+    u8 unk_0a_7:1;
+    u8 playerGender:1;
+    u8 level:7;
+    u8 unk_0c;
+};
+
 struct UnkLinkRfuStruct_02022B2C
 {
     u8 unk_00;

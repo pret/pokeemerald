@@ -70,7 +70,7 @@ SECTIONS {
         src/librfu_intr.o(.text);
         asm/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
-        asm/librfu.o(.text);
+        src/librfu_sio32id.o(.text);
         *libagbsyscall.a:*.o(.text*);
         *libgcc.a:*.o(.text*);
         *libc.a:*.o(.text*);
@@ -100,7 +100,8 @@ SECTIONS {
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
         src/siirtc.o(.rodata);
-        data/librfu_rodata.o(.rodata);
+        src/librfu_rfu.o(.rodata);
+        src/librfu_sio32id.o(.rodata);
         *libgcc.a:*.o(.rodata*);
         *libc.a:*.o(.rodata*);
         *libc.a:*.o(.data*);

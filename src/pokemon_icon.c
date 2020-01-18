@@ -2071,7 +2071,7 @@ const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 handleDeoxys)
     return GetMonIconTiles(GetIconSpecies(species, personality), handleDeoxys);
 }
 
-void sub_80D2EF8(struct Sprite *sprite)
+void FreeAndDestroyMonIconSprite(struct Sprite *sprite)
 {
     sub_80D328C(sprite);
 }

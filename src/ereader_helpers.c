@@ -473,7 +473,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
     }
 
     buffer2->checksum = CalcByteArraySum((u8 *)buffer2->floors, 4 * sizeof(struct TrHillFloor));
-    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != 1)
+    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)buffer2) != SAVE_STATUS_OK)
         return FALSE;
 
     return TRUE;
@@ -487,13 +487,13 @@ bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0)
     return result;
 }
 
-static bool32 TryReadTrainerHill_r(struct EReaderTrainerHillSet *arg0, u8 *arg1)
+static bool32 TryReadTrainerHill_r(struct EReaderTrainerHillSet *dst, u8 *buffer)
 {
-    if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, arg1) != 1)
+    if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
         return FALSE;
 
-    memcpy(arg0, arg1, sizeof(struct EReaderTrainerHillSet));
-    if (!TrainerHill_VerifyChecksum(arg0))
+    memcpy(dst, buffer, sizeof(struct EReaderTrainerHillSet));
+    if (!TrainerHill_VerifyChecksum(dst))
         return FALSE;
 
     return TRUE;

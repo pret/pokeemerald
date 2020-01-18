@@ -123,7 +123,7 @@ CableClub_Text_GotToLookAtColoredTrainerCard: @ 827847B
 	.string "TRAINER CARD!\p"
 	.string "It's a {STR_VAR_2} card!$"
 
-BattleColosseum2P_Text_TakePlaceStartBattle: @ 82784B4
+BattleColosseum_2P_Text_TakePlaceStartBattle: @ 82784B4
 	.string "Please take your place and start\n"
 	.string "your battle.$"
 

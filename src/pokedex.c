@@ -4644,7 +4644,7 @@ u32 sub_80C0E68(u16 a)
 u16 CreateMonSpriteFromNationalDexNumber(u16 nationalNum, s16 x, s16 y, u16 paletteSlot)
 {
     nationalNum = NationalPokedexNumToSpecies(nationalNum);
-    return CreateMonPicSprite_HandleDeoxys(nationalNum, 8, sub_80C0E68(nationalNum), TRUE, x, y, paletteSlot, 0xFFFF);
+    return CreateMonPicSprite_HandleDeoxys(nationalNum, SHINY_ODDS, sub_80C0E68(nationalNum), TRUE, x, y, paletteSlot, 0xFFFF);
 }
 
 u16 sub_80C0EF8(u16 species, s16 x, s16 y, s8 paletteSlot)

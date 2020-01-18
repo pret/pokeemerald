@@ -323,7 +323,7 @@ static bool32 RecordedBattleToSave(struct RecordedBattleSave *battleSave, struct
 
     saveSection->checksum = CalcByteArraySum((void*)(saveSection), sizeof(*saveSection) - 4);
 
-    if (TryWriteSpecialSaveSection(SECTOR_ID_RECORDED_BATTLE, (void*)(saveSection)) != 1)
+    if (TryWriteSpecialSaveSection(SECTOR_ID_RECORDED_BATTLE, (void*)(saveSection)) != SAVE_STATUS_OK)
         return FALSE;
     else
         return TRUE;
@@ -492,7 +492,7 @@ bool32 MoveRecordedBattleToSaveData(void)
 
 static bool32 TryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst, struct SaveSection *saveBuffer)
 {
-    if (TryReadSpecialSaveSection(SECTOR_ID_RECORDED_BATTLE, (void*)(saveBuffer)) != 1)
+    if (TryReadSpecialSaveSection(SECTOR_ID_RECORDED_BATTLE, (void*)(saveBuffer)) != SAVE_STATUS_OK)
         return FALSE;
 
     memcpy(dst, saveBuffer, sizeof(struct RecordedBattleSave));

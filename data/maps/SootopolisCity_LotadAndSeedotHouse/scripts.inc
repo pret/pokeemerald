@@ -38,7 +38,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot:: @ 8227286
 
 SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot:: @ 8227290
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad, MSGBOX_DEFAULT
-	giveitem_std ITEM_ELIXIR
+	giveitem ITEM_ELIXIR
 	compare VAR_RESULT, FALSE
 	goto_if_eq SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1
 	closemessage
@@ -87,7 +87,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad:: @ 8227317
 
 SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad:: @ 8227321
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot, MSGBOX_DEFAULT
-	giveitem_std ITEM_ELIXIR
+	giveitem ITEM_ELIXIR
 	compare VAR_RESULT, FALSE
 	goto_if_eq SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2
 	closemessage

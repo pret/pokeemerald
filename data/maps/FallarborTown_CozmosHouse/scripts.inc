@@ -18,7 +18,7 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite:: @ 8200F38
 	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_PleaseUseThisTM, MSGBOX_DEFAULT
-	giveitem_std ITEM_TM27
+	giveitem ITEM_TM27
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, ITEM_METEORITE

@@ -49,7 +49,7 @@ MossdeepCity_Gym_EventScript_SetSwitch4Metatiles:: @ 8220885
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLiza:: @ 8220898
-	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaPreBattle, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
+	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq MossdeepCity_Gym_EventScript_TateAndLizaRematch
@@ -91,7 +91,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated:: @ 82208D1
 	end
 
 MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
-	giveitem_std ITEM_TM04
+	giveitem ITEM_TM04
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
@@ -100,7 +100,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
 	end
 
 MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
-	giveitem_std ITEM_TM04
+	giveitem ITEM_TM04
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
@@ -207,62 +207,62 @@ MossdeepCity_Gym_EventScript_WarpToEntrance:: @ 8220AF1
 	end
 
 MossdeepCity_Gym_EventScript_Preston:: @ 8220AFD
-	trainerbattle_single TRAINER_PRESTON, MossdeepCity_Gym_Text_PrestonPreBattle, MossdeepCity_Gym_Text_PrestonDefeat
+	trainerbattle_single TRAINER_PRESTON, MossdeepCity_Gym_Text_PrestonIntro, MossdeepCity_Gym_Text_PrestonDefeat
 	msgbox MossdeepCity_Gym_Text_PrestonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Virgil:: @ 8220B14
-	trainerbattle_single TRAINER_VIRGIL, MossdeepCity_Gym_Text_VirgilPreBattle, MossdeepCity_Gym_Text_VirgilDefeat
+	trainerbattle_single TRAINER_VIRGIL, MossdeepCity_Gym_Text_VirgilIntro, MossdeepCity_Gym_Text_VirgilDefeat
 	msgbox MossdeepCity_Gym_Text_VirgilPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Blake:: @ 8220B2B
-	trainerbattle_single TRAINER_BLAKE, MossdeepCity_Gym_Text_BlakePreBattle, MossdeepCity_Gym_Text_BlakeDefeat
+	trainerbattle_single TRAINER_BLAKE, MossdeepCity_Gym_Text_BlakeIntro, MossdeepCity_Gym_Text_BlakeDefeat
 	msgbox MossdeepCity_Gym_Text_BlakePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Hannah:: @ 8220B42
-	trainerbattle_single TRAINER_HANNAH, MossdeepCity_Gym_Text_HannahPreBattle, MossdeepCity_Gym_Text_HannahDefeat
+	trainerbattle_single TRAINER_HANNAH, MossdeepCity_Gym_Text_HannahIntro, MossdeepCity_Gym_Text_HannahDefeat
 	msgbox MossdeepCity_Gym_Text_HannahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Samantha:: @ 8220B59
-	trainerbattle_single TRAINER_SAMANTHA, MossdeepCity_Gym_Text_SamanthaPreBattle, MossdeepCity_Gym_Text_SamanthaDefeat
+	trainerbattle_single TRAINER_SAMANTHA, MossdeepCity_Gym_Text_SamanthaIntro, MossdeepCity_Gym_Text_SamanthaDefeat
 	msgbox MossdeepCity_Gym_Text_SamanthaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Maura:: @ 8220B70
-	trainerbattle_single TRAINER_MAURA, MossdeepCity_Gym_Text_MauraPreBattle, MossdeepCity_Gym_Text_MauraDefeat
+	trainerbattle_single TRAINER_MAURA, MossdeepCity_Gym_Text_MauraIntro, MossdeepCity_Gym_Text_MauraDefeat
 	msgbox MossdeepCity_Gym_Text_MauraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Sylvia:: @ 8220B87
-	trainerbattle_single TRAINER_SYLVIA, MossdeepCity_Gym_Text_SylviaPreBattle, MossdeepCity_Gym_Text_SylviaDefeat
+	trainerbattle_single TRAINER_SYLVIA, MossdeepCity_Gym_Text_SylviaIntro, MossdeepCity_Gym_Text_SylviaDefeat
 	msgbox MossdeepCity_Gym_Text_SylviaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Nate:: @ 8220B9E
-	trainerbattle_single TRAINER_NATE, MossdeepCity_Gym_Text_NatePreBattle, MossdeepCity_Gym_Text_NateDefeat
+	trainerbattle_single TRAINER_NATE, MossdeepCity_Gym_Text_NateIntro, MossdeepCity_Gym_Text_NateDefeat
 	msgbox MossdeepCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Macey:: @ 8220BB5
-	trainerbattle_single TRAINER_MACEY, MossdeepCity_Gym_Text_MaceyPreBattle, MossdeepCity_Gym_Text_MaceyDefeat
+	trainerbattle_single TRAINER_MACEY, MossdeepCity_Gym_Text_MaceyIntro, MossdeepCity_Gym_Text_MaceyDefeat
 	msgbox MossdeepCity_Gym_Text_MaceyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Clifford:: @ 8220BCC
-	trainerbattle_single TRAINER_CLIFFORD, MossdeepCity_Gym_Text_CliffordPreBattle, MossdeepCity_Gym_Text_CliffordDefeat
+	trainerbattle_single TRAINER_CLIFFORD, MossdeepCity_Gym_Text_CliffordIntro, MossdeepCity_Gym_Text_CliffordDefeat
 	msgbox MossdeepCity_Gym_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Nicholas:: @ 8220BE3
-	trainerbattle_single TRAINER_NICHOLAS, MossdeepCity_Gym_Text_NicholasPreBattle, MossdeepCity_Gym_Text_NicholasDefeat
+	trainerbattle_single TRAINER_NICHOLAS, MossdeepCity_Gym_Text_NicholasIntro, MossdeepCity_Gym_Text_NicholasDefeat
 	msgbox MossdeepCity_Gym_Text_NicholasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_Kathleen:: @ 8220BFA
-	trainerbattle_single TRAINER_KATHLEEN, MossdeepCity_Gym_Text_KathleenPreBattle, MossdeepCity_Gym_Text_KathleenDefeat
+	trainerbattle_single TRAINER_KATHLEEN, MossdeepCity_Gym_Text_KathleenIntro, MossdeepCity_Gym_Text_KathleenDefeat
 	msgbox MossdeepCity_Gym_Text_KathleenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -385,7 +385,7 @@ MossdeepCity_Gym_Text_GymGuidePostVictory: @ 8220E2A
 	.string "Wow, you're astounding!\n"
 	.string "You're one great TRAINER!$"
 
-MossdeepCity_Gym_Text_PrestonPreBattle: @ 8220E5C
+MossdeepCity_Gym_Text_PrestonIntro: @ 8220E5C
 	.string "Battles hinge on the strength of your\n"
 	.string "spirit! The weak-spirited will never win!$"
 
@@ -397,7 +397,7 @@ MossdeepCity_Gym_Text_PrestonPostBattle: @ 8220ED3
 	.string "The indecisive lose.\n"
 	.string "That's my warning to you.$"
 
-MossdeepCity_Gym_Text_VirgilPreBattle: @ 8220F02
+MossdeepCity_Gym_Text_VirgilIntro: @ 8220F02
 	.string "Let me see your talent!$"
 
 MossdeepCity_Gym_Text_VirgilDefeat: @ 8220F1A
@@ -409,7 +409,7 @@ MossdeepCity_Gym_Text_VirgilPostBattle: @ 8220F3A
 	.string "However, you may be even more talented\n"
 	.string "than them…$"
 
-MossdeepCity_Gym_Text_BlakePreBattle: @ 8220FB0
+MossdeepCity_Gym_Text_BlakeIntro: @ 8220FB0
 	.string "Fufufufu… Watch me levitate a POKé\n"
 	.string "BALL telekinetically!\p"
 	.string "Wrooooooooaaaar!\n"
@@ -428,7 +428,7 @@ MossdeepCity_Gym_Text_BlakePostBattle: @ 8221055
 	.string "No, I'm not cheating!\n"
 	.string "I didn't blow on it! Honestly!$"
 
-MossdeepCity_Gym_Text_HannahPreBattle: @ 82210EE
+MossdeepCity_Gym_Text_HannahIntro: @ 82210EE
 	.string "When you lose to me, don't be too hard\n"
 	.string "on yourself.\p"
 	.string "It's not that you're weak--I'm just\n"
@@ -443,7 +443,7 @@ MossdeepCity_Gym_Text_HannahPostBattle: @ 822116A
 	.string "Positive thinking--that's my strong\n"
 	.string "point!$"
 
-MossdeepCity_Gym_Text_SamanthaPreBattle: @ 82211E2
+MossdeepCity_Gym_Text_SamanthaIntro: @ 82211E2
 	.string "I see it…\n"
 	.string "I see your future…\p"
 	.string "If you can beat me, I will tell you\n"
@@ -458,7 +458,7 @@ MossdeepCity_Gym_Text_SamanthaPostBattle: @ 822123D
 	.string "The result…\n"
 	.string "You won't hear it from me!$"
 
-MossdeepCity_Gym_Text_MauraPreBattle: @ 82212A6
+MossdeepCity_Gym_Text_MauraIntro: @ 82212A6
 	.string "The roads you have traveled…\n"
 	.string "What you have experienced…\p"
 	.string "Come at me with everything you've\n"
@@ -474,7 +474,7 @@ MossdeepCity_Gym_Text_MauraPostBattle: @ 822132E
 	.string "only despair at the end.\p"
 	.string "What goes around comes around…$"
 
-MossdeepCity_Gym_Text_SylviaPreBattle: @ 82213C2
+MossdeepCity_Gym_Text_SylviaIntro: @ 82213C2
 	.string "Even at the risk of life, I will win\n"
 	.string "this battle!$"
 
@@ -487,7 +487,7 @@ MossdeepCity_Gym_Text_SylviaPostBattle: @ 8221412
 	.string "It won't be my fault if something\n"
 	.string "horrible befalls you…$"
 
-MossdeepCity_Gym_Text_NatePreBattle: @ 8221460
+MossdeepCity_Gym_Text_NateIntro: @ 8221460
 	.string "Hohoho.\p"
 	.string "You need me to show you how tenacious\n"
 	.string "the PSYCHIC type can be.$"
@@ -500,7 +500,7 @@ MossdeepCity_Gym_Text_NatePostBattle: @ 82214D3
 	.string "I… I don't let defeat rattle m-me,\n"
 	.string "however b-badly.$"
 
-MossdeepCity_Gym_Text_KathleenPreBattle: @ 8221507
+MossdeepCity_Gym_Text_KathleenIntro: @ 8221507
 	.string "Let me show you a perfectly awful,\n"
 	.string "horrifying time!$"
 
@@ -511,7 +511,7 @@ MossdeepCity_Gym_Text_KathleenPostBattle: @ 8221545
 	.string "Your vitality is contagious!\n"
 	.string "Get away from me quickly!$"
 
-MossdeepCity_Gym_Text_CliffordPreBattle: @ 822157C
+MossdeepCity_Gym_Text_CliffordIntro: @ 822157C
 	.string "I may be past my prime, but I suggest\n"
 	.string "you not patronize me.$"
 
@@ -523,7 +523,7 @@ MossdeepCity_Gym_Text_CliffordPostBattle: @ 82215E2
 	.string "It seems that I could not overcome\n"
 	.string "your youthful energy.$"
 
-MossdeepCity_Gym_Text_MaceyPreBattle: @ 822161B
+MossdeepCity_Gym_Text_MaceyIntro: @ 822161B
 	.string "You're not getting through to the end!\n"
 	.string "Not if I can help it!$"
 
@@ -536,7 +536,7 @@ MossdeepCity_Gym_Text_MaceyPostBattle: @ 8221680
 	.string "not suitable for the PSYCHIC type!\p"
 	.string "The way you battle is somehow brutal!$"
 
-MossdeepCity_Gym_Text_NicholasPreBattle: @ 82216EE
+MossdeepCity_Gym_Text_NicholasIntro: @ 82216EE
 	.string "Wroooar! Have a taste of my super\n"
 	.string "POKéMON hard-battling power!$"
 
@@ -548,7 +548,7 @@ MossdeepCity_Gym_Text_NicholasPostBattle: @ 822173A
 	.string "All right! I think I'll develop a special\n"
 	.string "invincible POKéMON power next.$"
 
-MossdeepCity_Gym_Text_TateAndLizaPreBattle: @ 8221783
+MossdeepCity_Gym_Text_TateAndLizaIntro: @ 8221783
 	.string "TATE: Hehehe… Were you surprised?\p"
 	.string "LIZA: Fufufu… Were you surprised?\p"
 	.string "TATE: That there are two GYM LEADERS?\n"

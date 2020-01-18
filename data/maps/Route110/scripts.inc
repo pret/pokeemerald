@@ -473,7 +473,7 @@ Route110_EventScript_BrendanDefeated:: @ 81EF8C4
 	end
 
 Route110_EventScript_GiveItemfinder:: @ 81EF8DF
-	giveitem_std ITEM_ITEMFINDER
+	giveitem ITEM_ITEMFINDER
 	return
 
 Route110_EventScript_RivalExit:: @ 81EF8EC

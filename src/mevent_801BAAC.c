@@ -445,7 +445,7 @@ void sub_801C61C(void)
 {
     u8 r6 = 0;
     if (sWonderCardData->unk_017C != 0xFF)
-        sub_80D2EF8(&gSprites[sWonderCardData->unk_017C]);
+        FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->unk_017C]);
     if (sWonderCardData->unk_0000.unk_09 != 0 && sWonderCardData->unk_0000.unk_08_0 == 1)
     {
         for (; r6 < sWonderCardData->unk_0000.unk_09; r6++)
@@ -456,7 +456,7 @@ void sub_801C61C(void)
             }
             if (sWonderCardData->unk_017D[r6][1] != 0xFF)
             {
-                sub_80D2EF8(&gSprites[sWonderCardData->unk_017D[r6][1]]);
+                FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->unk_017D[r6][1]]);
             }
         }
         FreeSpriteTilesByTag(0x8000);

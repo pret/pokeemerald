@@ -150,7 +150,7 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
-    if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
+    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
 
     gDifferentSaveFile = 1;

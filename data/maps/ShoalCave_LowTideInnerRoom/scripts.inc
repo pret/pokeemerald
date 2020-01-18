@@ -62,7 +62,7 @@ ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd:: @ 8236FB9
 ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1:: @ 8236FBA
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
-	giveitem_std ITEM_SHOAL_SHELL
+	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 41, 20, METATILE_Cave_ShoalCave_BlueStone_Small, 0
@@ -79,7 +79,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell:: @ 8236FEC
 ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2:: @ 8236FF6
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
-	giveitem_std ITEM_SHOAL_SHELL
+	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 41, 10, METATILE_Cave_ShoalCave_BlueStone_Small, 0
@@ -91,7 +91,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2:: @ 8236FF6
 ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3:: @ 8237028
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
-	giveitem_std ITEM_SHOAL_SHELL
+	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 6, 9, METATILE_Cave_ShoalCave_BlueStone_Small, 0
@@ -103,7 +103,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3:: @ 8237028
 ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4:: @ 823705A
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
-	giveitem_std ITEM_SHOAL_SHELL
+	giveitem ITEM_SHOAL_SHELL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 16, 13, METATILE_Cave_ShoalCave_BlueStone_Small, 0
@@ -115,7 +115,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4:: @ 823705A
 ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1:: @ 823708C
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt
-	giveitem_std ITEM_SHOAL_SALT
+	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 31, 8, METATILE_Cave_ShoalCave_DirtPile_Small, 0
@@ -132,7 +132,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt:: @ 82370BE
 ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2:: @ 82370C8
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt
-	giveitem_std ITEM_SHOAL_SALT
+	giveitem ITEM_SHOAL_SALT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setmetatile 14, 26, METATILE_Cave_ShoalCave_DirtPile_Small, 0
