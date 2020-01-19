@@ -2852,7 +2852,13 @@ AI_CV_Fly_TypesToEncourage:
     .byte -1
 
 AI_CV_FakeOut:
+	if_ability AI_TARGET, ABILITY_INNER_FOCUS, AI_CV_FakeOut_End
+	if_double_battle AI_CV_FakeOut_Double
+	score +5
+	end
+AI_CV_FakeOut_Double:
 	score +2
+AI_CV_FakeOut_End:
 	end
 
 AI_CV_SpitUp:
@@ -2917,9 +2923,8 @@ AI_CV_Sandstorm_AbilityPlus:
 AI_CV_Sandstorm_End:
 	end
 
-@ BUG: Facade score is increased if the target is statused, but should be if the user is. Replace AI_TARGET with AI_USER
 AI_CV_Facade:
-	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
+	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
 	score +1
 AI_CV_Facade_End:
 	end
