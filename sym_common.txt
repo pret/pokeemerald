@@ -77,4 +77,5 @@ gReservedSpritePaletteCount:
 	.include "m4a.o"
 	.include "agb_flash.o"
 	.include "librfu_stwi.o"
-	.include "librfu.o"
+	.include "librfu_rfu.o"
+	.include "librfu_sio32id.o"

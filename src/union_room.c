@@ -4077,7 +4077,7 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
         StringCopy(arg3->field_58 + 0x10, gSpeciesNames[sUnionRoomTrade.playerSpecies]);
         for (i = 0; i < 4; i++)
         {
-            if (gUnknown_03007890->unk_14[i].unk_04 == 2)
+            if (gRfuLinkStatus->partner[i].serialNo == 2)
             {
                 ConvertIntToDecimalStringN(arg3->field_58 + 0x20, arg2[2], STR_CONV_MODE_LEFT_ALIGN, 3);
                 StringCopy(arg3->field_58 + 0x30, gSpeciesNames[arg2[1]]);

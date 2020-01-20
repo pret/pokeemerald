@@ -74,7 +74,7 @@ u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void))
         return 1;
 
     sTimerNum = timerNum;
-    sTimerReg = &REG_TMCNT(sTimerNum);
+    sTimerReg = &REG_TMCNT_L(sTimerNum);
     *intrFunc = FlashTimerIntr;
     return 0;
 }

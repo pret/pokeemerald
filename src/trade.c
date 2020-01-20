@@ -254,7 +254,7 @@ static bool32 sub_80771BC(void)
 {
     if (gUnknown_02022C2C == 29)
     {
-        if (gUnknown_03007880[sub_800E87C(gUnknown_03004140.unk_00)]->unk_0 == 0)
+        if (gRfuSlotStatusNI[sub_800E87C(gUnknown_03004140.unk_00)]->send.state == 0)
             return TRUE;
         else
             return FALSE;
