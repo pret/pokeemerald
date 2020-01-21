@@ -31,479 +31,107 @@ struct DoorAnimFrame
 
 static bool8 ShouldUseMultiCorridorDoor(void);
 
-const u8 sDoorAnimTiles_Littleroot[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/littleroot/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/littleroot/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/littleroot/2.4bpp"),
-};
-
-// TODO: Make these blank palette includes?
+static const u8 sDoorAnimTiles_Littleroot[] = INCBIN_U8("graphics/door_anims/littleroot.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BirchsLab[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/birchs_lab/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/birchs_lab/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/birchs_lab/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BirchsLab[] = INCBIN_U8("graphics/door_anims/birchs_lab.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_FallarborLightRoof[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/fallarbor_light_roof/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/fallarbor_light_roof/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/fallarbor_light_roof/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_FallarborLightRoof[] = INCBIN_U8("graphics/door_anims/fallarbor_light_roof.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Lilycove[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/lilycove/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Lilycove[] = INCBIN_U8("graphics/door_anims/lilycove.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_LilycoveWooden[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/lilycove_wooden/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove_wooden/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove_wooden/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_LilycoveWooden[] = INCBIN_U8("graphics/door_anims/lilycove_wooden.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_General[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/general/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/general/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/general/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_General[] = INCBIN_U8("graphics/door_anims/general.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_PokeCenter[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/poke_center/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/poke_center/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/poke_center/2.4bpp"),
-};
-
-const u8 sDoorAnimTiles_Gym[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/gym/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/gym/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/gym/2.4bpp"),
-};
-
-const u8 sDoorAnimTiles_PokeMart[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/poke_mart/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/poke_mart/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/poke_mart/2.4bpp"),
-};
-
-const u8 sDoorAnimTiles_RustboroTan[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/rustboro_tan/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/rustboro_tan/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/rustboro_tan/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_PokeCenter[] = INCBIN_U8("graphics/door_anims/poke_center.4bpp");
+static const u8 sDoorAnimTiles_Gym[] = INCBIN_U8("graphics/door_anims/gym.4bpp");
+static const u8 sDoorAnimTiles_PokeMart[] = INCBIN_U8("graphics/door_anims/poke_mart.4bpp");
+static const u8 sDoorAnimTiles_RustboroTan[] = INCBIN_U8("graphics/door_anims/rustboro_tan.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_RustboroGray[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/rustboro_gray/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/rustboro_gray/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/rustboro_gray/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_RustboroGray[] = INCBIN_U8("graphics/door_anims/rustboro_gray.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Oldale[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/oldale/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/oldale/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/oldale/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Oldale[] = INCBIN_U8("graphics/door_anims/oldale.4bpp");
 asm(".space 0x5900");
-
-const u8 sDoorAnimTiles_UnusedTops[][0x40] =
-{
-    INCBIN_U8("graphics/door_anims/unused_848EDEC/0_top.4bpp"),
-    INCBIN_U8("graphics/door_anims/unused_848EDEC/1_top.4bpp"),
-    INCBIN_U8("graphics/door_anims/unused_848EDEC/2_top.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_UnusedTops[] = INCBIN_U8("graphics/door_anims/unused_top.4bpp");
 asm(".space 0x140");
-
-const u8 sDoorAnimTiles_UnusedBottoms[][0x40] =
-{
-    INCBIN_U8("graphics/door_anims/unused_848EDEC/0_bottom.4bpp"),
-    INCBIN_U8("graphics/door_anims/unused_848EDEC/1_bottom.4bpp"),
-    INCBIN_U8("graphics/door_anims/unused_848EDEC/2_bottom.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_UnusedBottoms[] = INCBIN_U8("graphics/door_anims/unused_bottom.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Mauville[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/mauville/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/mauville/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/mauville/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Mauville[] = INCBIN_U8("graphics/door_anims/mauville.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Verdanturf[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/verdanturf/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/verdanturf/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/verdanturf/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Verdanturf[] = INCBIN_U8("graphics/door_anims/verdanturf.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Slateport[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/slateport/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/slateport/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/slateport/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Slateport[] = INCBIN_U8("graphics/door_anims/slateport.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Dewford[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/dewford/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/dewford/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/dewford/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Dewford[] = INCBIN_U8("graphics/door_anims/dewford.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Contest[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/contest/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/contest/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/contest/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Contest[] = INCBIN_U8("graphics/door_anims/contest.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Mossdeep[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/mossdeep/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/mossdeep/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/mossdeep/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Mossdeep[] = INCBIN_U8("graphics/door_anims/mossdeep.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_SootopolisPeakedRoof[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/sootopolis_peaked_roof/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/sootopolis_peaked_roof/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/sootopolis_peaked_roof/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_SootopolisPeakedRoof[] = INCBIN_U8("graphics/door_anims/sootopolis_peaked_roof.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Sootopolis[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/sootopolis/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/sootopolis/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/sootopolis/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Sootopolis[] = INCBIN_U8("graphics/door_anims/sootopolis.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_PokemonLeague[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/pokemon_league/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/pokemon_league/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/pokemon_league/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_PokemonLeague[] = INCBIN_U8("graphics/door_anims/pokemon_league.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_Pacifidlog[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/pacifidlog/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/pacifidlog/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/pacifidlog/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_Pacifidlog[] = INCBIN_U8("graphics/door_anims/pacifidlog.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleTowerCorridor[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_tower_corridor/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_corridor/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_corridor/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleTowerCorridor[] = INCBIN_U8("graphics/door_anims/battle_tower_corridor.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_CyclingRoad[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/cycling_road/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/cycling_road/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/cycling_road/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_CyclingRoad[] = INCBIN_U8("graphics/door_anims/cycling_road.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_LilycoveDeptStore[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/lilycove_dept_store/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove_dept_store/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove_dept_store/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_LilycoveDeptStore[] = INCBIN_U8("graphics/door_anims/lilycove_dept_store.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_SafariZone[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/safari_zone/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/safari_zone/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/safari_zone/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_SafariZone[] = INCBIN_U8("graphics/door_anims/safari_zone.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_MossdeepSpaceCenter[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/mossdeep_space_center/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/mossdeep_space_center/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/mossdeep_space_center/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_MossdeepSpaceCenter[] = INCBIN_U8("graphics/door_anims/mossdeep_space_center.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_CableClub[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/cable_club/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/cable_club/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/cable_club/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_CableClub[] = INCBIN_U8("graphics/door_anims/cable_club.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_AbandonedShip[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/abandoned_ship/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/abandoned_ship/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/abandoned_ship/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_AbandonedShip[] = INCBIN_U8("graphics/door_anims/abandoned_ship.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_FallarborDarkRoof[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/fallarbor_dark_roof/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/fallarbor_dark_roof/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/fallarbor_dark_roof/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_FallarborDarkRoof[] = INCBIN_U8("graphics/door_anims/fallarbor_dark_roof.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_AbandonedShipRoom[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/abandoned_ship_room/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/abandoned_ship_room/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/abandoned_ship_room/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_AbandonedShipRoom[] = INCBIN_U8("graphics/door_anims/abandoned_ship_room.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_LilycoveDeptStoreElevator[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/lilycove_dept_store_elevator/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove_dept_store_elevator/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/lilycove_dept_store_elevator/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_LilycoveDeptStoreElevator[] = INCBIN_U8("graphics/door_anims/lilycove_dept_store_elevator.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleTowerOld[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_tower_old/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_old/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_old/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleTowerOld[] = INCBIN_U8("graphics/door_anims/battle_tower_old.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleTowerElevator[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_tower_elevator/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_elevator/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_elevator/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleTowerElevator[] = INCBIN_U8("graphics/door_anims/battle_tower_elevator.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_34[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/unknown/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/unknown/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/unknown/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_34[] = INCBIN_U8("graphics/door_anims/unknown.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleDome[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_dome/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleDome[] = INCBIN_U8("graphics/door_anims/battle_dome.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleFactory[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_factory/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_factory/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_factory/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleFactory[] = INCBIN_U8("graphics/door_anims/battle_factory.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleTower[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_tower/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleTower[] = INCBIN_U8("graphics/door_anims/battle_tower.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleArena[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_arena/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_arena/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_arena/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleArena[] = INCBIN_U8("graphics/door_anims/battle_arena.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleArenaLobby[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_arena_lobby/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_arena_lobby/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_arena_lobby/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleArenaLobby[] = INCBIN_U8("graphics/door_anims/battle_arena_lobby.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleDomeLobby[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_dome_lobby/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome_lobby/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome_lobby/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleDomeLobby[] = INCBIN_U8("graphics/door_anims/battle_dome_lobby.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattlePalaceLobby[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_palace_lobby/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_palace_lobby/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_palace_lobby/2.4bpp"),
-};
-
-const u8 sDoorAnimTiles_BattleTent[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_tent/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tent/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tent/2.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tent/3.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattlePalaceLobby[] = INCBIN_U8("graphics/door_anims/battle_palace_lobby.4bpp");
+static const u8 sDoorAnimTiles_BattleTent[] = INCBIN_U8("graphics/door_anims/battle_tent.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleDomeCorridor[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_dome_corridor/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome_corridor/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome_corridor/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleDomeCorridor[] = INCBIN_U8("graphics/door_anims/battle_dome_corridor.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleTowerMultiCorridor[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_tower_multi_corridor/0_left.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_multi_corridor/0_right.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_multi_corridor/1_left.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_multi_corridor/1_right.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_multi_corridor/2_left.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tower_multi_corridor/2_right.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleTowerMultiCorridor[] = INCBIN_U8("graphics/door_anims/battle_tower_multi_corridor.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleFrontier[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_frontier/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_frontier/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_frontier/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleFrontier[] = INCBIN_U8("graphics/door_anims/battle_frontier.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleFrontierSliding[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_frontier_sliding/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_frontier_sliding/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_frontier_sliding/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleFrontierSliding[] = INCBIN_U8("graphics/door_anims/battle_frontier_sliding.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleDomePreBattleRoom[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_dome_pre_battle_room/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome_pre_battle_room/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_dome_pre_battle_room/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleDomePreBattleRoom[] = INCBIN_U8("graphics/door_anims/battle_dome_pre_battle_room.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_BattleTentInterior[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/battle_tent_interior/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tent_interior/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tent_interior/2.4bpp"),
-    INCBIN_U8("graphics/door_anims/battle_tent_interior/3.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_BattleTentInterior[] = INCBIN_U8("graphics/door_anims/battle_tent_interior.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_TrainerHillLobbyElevator[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/trainer_hill_lobby_elevator/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/trainer_hill_lobby_elevator/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/trainer_hill_lobby_elevator/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_TrainerHillLobbyElevator[] = INCBIN_U8("graphics/door_anims/trainer_hill_lobby_elevator.4bpp");
 asm(".space 32");
-
-const u8 sDoorAnimTiles_TrainerHillRoofElevator[][0x100] =
-{
-    INCBIN_U8("graphics/door_anims/trainer_hill_roof_elevator/0.4bpp"),
-    INCBIN_U8("graphics/door_anims/trainer_hill_roof_elevator/1.4bpp"),
-    INCBIN_U8("graphics/door_anims/trainer_hill_roof_elevator/2.4bpp"),
-};
-
+static const u8 sDoorAnimTiles_TrainerHillRoofElevator[] = INCBIN_U8("graphics/door_anims/trainer_hill_roof_elevator.4bpp");
 asm(".space 32");
 
 static const struct DoorAnimFrame sDoorOpenAnimFrames[] =
