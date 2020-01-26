@@ -491,6 +491,10 @@
 #define NUM_TECHNICAL_MACHINES 50
 #define NUM_HIDDEN_MACHINES     8
 
+#define MAX_BAG_ITEM_CAPACITY  99
+#define MAX_PC_ITEM_CAPACITY   999
+#define MAX_BERRY_CAPACITY     999
+
 // Check if the item is one that can be used on a Pokemon.
 #define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
 
