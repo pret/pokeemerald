@@ -24,6 +24,7 @@
 #include "main_menu.h"
 #include "bg.h"
 #include "window.h"
+#include "constants/coins.h"
 
 // Text
 extern const u8 gText_YouDontHaveThreeCoins[];
@@ -974,7 +975,7 @@ static bool8 SlotAction4(struct Task *task)
 {
     sub_8104CAC(0);
     sSlotMachine->state = 5;
-    if (sSlotMachine->coins >= 9999)
+    if (sSlotMachine->coins >= MAX_COINS)
         sSlotMachine->state = 23;
     return TRUE;
 }
@@ -1186,8 +1187,8 @@ static bool8 SlotAction_CheckMatches(struct Task *task)
     {
         sub_8104CAC(3);
         sSlotMachine->state = 20;
-        if ((sSlotMachine->netCoinLoss += sSlotMachine->bet) > 9999)
-            sSlotMachine->netCoinLoss = 9999;
+        if ((sSlotMachine->netCoinLoss += sSlotMachine->bet) > MAX_COINS)
+            sSlotMachine->netCoinLoss = MAX_COINS;
     }
     return FALSE;
 }
@@ -1693,7 +1694,7 @@ static bool8 AwardPayoutAction_GivePayoutToPlayer(struct Task *task)
         if (IsFanfareTaskInactive())
             PlaySE(SE_PIN);
         sSlotMachine->payout--;
-        if (sSlotMachine->coins < 9999)
+        if (sSlotMachine->coins < MAX_COINS)
             sSlotMachine->coins++;
         task->data[1] = 8;
         if (gMain.heldKeys & A_BUTTON)
@@ -1703,8 +1704,8 @@ static bool8 AwardPayoutAction_GivePayoutToPlayer(struct Task *task)
     {
         PlaySE(SE_PIN);
         sSlotMachine->coins += sSlotMachine->payout;
-        if (sSlotMachine->coins > 9999)
-            sSlotMachine->coins = 9999;
+        if (sSlotMachine->coins > MAX_COINS)
+            sSlotMachine->coins = MAX_COINS;
         sSlotMachine->payout = 0;
     }
     if (sSlotMachine->payout == 0)
@@ -3291,9 +3292,9 @@ static void sub_8104F8C(void)
     s16 i;
     s16 x;
 
-    for (x = 203, i = 1; i < 10000; i *= 10, x -= 7)
+    for (x = 203, i = 1; i <= MAX_COINS; i *= 10, x -= 7)
         sub_8104FF4(x, 23, 0, i);
-    for (x = 235, i = 1; i < 10000; i *= 10, x -= 7)
+    for (x = 235, i = 1; i <= MAX_COINS; i *= 10, x -= 7)
         sub_8104FF4(x, 23, 1, i);
 }
 
