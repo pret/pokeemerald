@@ -286,7 +286,7 @@ bool32 sub_81CB260(void)
     return TRUE;
 }
 
-void sub_81CB29C(s32 index)
+void CreateMatchCallLoopedTask(s32 index)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     state->unk4 = CreateLoopedTask(sMatchCallLoopTaskFuncs[index], 1);

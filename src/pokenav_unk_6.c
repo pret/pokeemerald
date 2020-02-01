@@ -402,7 +402,7 @@ u8 *sub_81CD624(u8 *str, u16 id, bool8 arg3)
     *(str_++) = 9;
     *(str_++) = CHAR_SLASH;
     *(str_++) = CHAR_SPECIAL_F9;
-    *(str_++) = 5;
+    *(str_++) = CHAR_LV_2;
     txtPtr = str_;
     str_ = ConvertIntToDecimalStringN(str_, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     lvlDigits = str_ - txtPtr;
