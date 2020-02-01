@@ -6351,7 +6351,7 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     txtPtr = gStringVar4;
     gStringVar4[0] = CHAR_SPECIAL_F9;
     txtPtr++;
-    txtPtr[0] = 5;
+    txtPtr[0] = CHAR_LV_2;
     txtPtr++;
 
     var = (u32)(txtPtr);
