@@ -297,7 +297,7 @@ bool32 WaitForPokenavShutdownFade(void);
 void sub_81C7834(void *func1, void *func2);
 void ShutdownPokenav(void);
 
-// pokenav_unk_1.c
+// pokenav_menu_handler_1.c
 bool32 PokenavCallback_Init_0(void);
 bool32 PokenavCallback_Init_4(void);
 bool32 PokenavCallback_Init_5(void);
@@ -310,7 +310,7 @@ int GetPokenavCursorPos(void);
 int GetCurrentMenuItemId(void);
 u16 GetHelpBarTextId(void);
 
-// pokenav_unk_2.c
+// pokenav_menu_handler_2.c
 bool32 sub_81C9924(void);
 bool32 sub_81C9940(void);
 void CreateMenuHandlerLoopedTask(s32 ltIdx);
@@ -318,7 +318,7 @@ bool32 sub_81C99C0(void);
 void sub_81C99D4(void);
 void sub_81CAADC(void);
 
-// pokenav_unk_3.c
+// pokenav_match_call_1.c
 bool32 PokenavCallback_Init_11(void);
 u32 sub_81CAB24(void);
 void sub_81CAB38(void);
@@ -340,13 +340,13 @@ int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);
 bool32 IsRematchEntryRegistered(int index);
 
-// pokenav_unk_4.c
+// pokenav_match_call_2.c
 bool32 sub_81CB260(void);
 void CreateMatchCallLoopedTask(s32 index);
 u32 sub_81CB2CC(void);
 void sub_81CB2E0(void);
 
-// pokenav_unk_5.c
+// pokenav_region_map.c
 u32 PokenavCallback_Init_6(void);
 void sub_81CC524(void);
 u32 sub_81CC554(void);
@@ -355,7 +355,7 @@ void sub_81CC62C(s32);
 u32 sub_81CC65C(void);
 void sub_81CC670(void);
 
-// pokenav_unk_6.c
+// pokenav_conditions_1.c
 u32 PokenavCallback_Init_7(void);
 u32 PokenavCallback_Init_9(void);
 u32 sub_81CD070(void);
@@ -374,14 +374,14 @@ u16 sub_81CDD48(void);
 void *sub_81CDCB4(u8 id);
 void *sub_81CDCD4(u8 id);
 
-// pokenav_unk_7.c
+// pokenav_conditions_2.c
 bool32 sub_81CDDD4(void);
 void sub_81CDE2C(s32);
 u32 sub_81CDE64(void);
 void sub_81CECA0(void);
 u8 sub_81CEF14(void);
 
-// pokenav_unk_8.c
+// pokenav_conditions_3.c
 u32 PokenavCallback_Init_8(void);
 u32 PokenavCallback_Init_10(void);
 u32 sub_81CEFDC(void);
@@ -392,7 +392,7 @@ void sub_81CF3A0(s32);
 u32 sub_81CF3D0(void);
 void sub_81CF3F8(void);
 
-// pokenav_unk_9.c
+// pokenav_ribbons_1.c
 u32 PokenavCallback_Init_12(void);
 u32 PokenavCallback_Init_14(void);
 u32 sub_81CFA34(void);
@@ -403,7 +403,7 @@ void sub_81CFE40(s32);
 u32 sub_81CFE70(void);
 void sub_81CFE98(void);
 
-// pokenav_unk_10.c
+// pokenav_ribbons_2.c
 u32 PokenavCallback_Init_13(void);
 u32 sub_81D04A0(void);
 void sub_81D04B8(void);
