@@ -5,7 +5,7 @@ As the disassembly continues to develop, I'll try to keep up this branch as upda
 
 It builds the following ROM:
 
-* pokeemerald.gba `sha1: a6d33bdf3356607f17beff442deed29e6a4b3fb3`
+* pokeemerald.gba `sha1: 8C19F2555E10DFF32A9914CEAC360B018AF42E6C`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
