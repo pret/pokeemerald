@@ -18,7 +18,7 @@ IntrSIO32: @ 82E3554
 	cmp r0, 0
 	ldmdbeq r11, {r11,sp,lr}
 	bxeq lr
-	bl sub_82E3EB0
+	bl Callback_Dummy_ID
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 _082E3590:
@@ -33,7 +33,7 @@ _082E35A8:
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_082E35B4: .4byte gRfuState
+_082E35B4: .4byte gSTWIStatus
 	arm_func_end IntrSIO32
 
 	arm_func_start sio32intr_clock_master
@@ -204,10 +204,10 @@ _082E3800:
 	beq _082E3840
 	ldrh r1, [r0, 0x12]
 	ldrb r0, [r0, 0x6]
-	bl sub_82E3EA8
+	bl Callback_Dummy_M
 	b _082E3840
 	.align 2, 0
-_082E382C: .4byte gRfuState
+_082E382C: .4byte gSTWIStatus
 _082E3830:
 	add r3, r5, 0x3
 	strh r3, [r4]
@@ -423,7 +423,7 @@ _082E3AD4:
 	beq _082E3C4C
 	mov r0, 0x1EC
 	add r0, r0, 0x2
-	bl sub_82E3EAC
+	bl Callback_Dummy_S
 	b _082E3C4C
 _082E3B48:
 	mov r3, 0x120
@@ -445,7 +445,7 @@ _082E3B48:
 	ldrb r0, [r0, 0x6]
 	mov r1, r2
 	orr r0, r0, r3, lsl 8
-	bl sub_82E3EAC
+	bl Callback_Dummy_S
 	b _082E3C4C
 _082E3B9C:
 	mov r3, 0x208
@@ -472,7 +472,7 @@ _082E3BE4:
 	bhi _082E3BE4
 	b _082E3C20
 	.align 2, 0
-_082E3BF4: .4byte gRfuState
+_082E3BF4: .4byte gSTWIStatus
 _082E3BF8: .4byte 0x996601ee
 _082E3BFC:
 	mov r2, 0xFF00
@@ -532,7 +532,7 @@ _082E3CA4:
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_082E3CB8: .4byte gRfuState
+_082E3CB8: .4byte gSTWIStatus
 	arm_func_end handshake_wait
 
 	arm_func_start STWI_set_timer_in_RAM
@@ -588,7 +588,7 @@ _082E3D5C:
 	mov r3, 0x3
 	b _082E3D8C
 	.align 2, 0
-_082E3D74: .4byte gRfuState
+_082E3D74: .4byte gSTWIStatus
 _082E3D78:
 	mvn r3, 0x850
 	sub r3, r3, 0x2
@@ -637,7 +637,7 @@ STWI_stop_timer_in_RAM: @ 82E3DCC
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_082E3E18: .4byte gRfuState
+_082E3E18: .4byte gSTWIStatus
 	arm_func_end STWI_stop_timer_in_RAM
 
 	arm_func_start STWI_init_slave
@@ -677,20 +677,20 @@ STWI_init_slave: @ 82E3E1C
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_082E3EA4: .4byte gRfuState
+_082E3EA4: .4byte gSTWIStatus
 	arm_func_end STWI_init_slave
 
-	arm_func_start sub_82E3EA8
-sub_82E3EA8: @ 82E3EA8
+	arm_func_start Callback_Dummy_M
+Callback_Dummy_M: @ 82E3EA8
 	bx r2
-	arm_func_end sub_82E3EA8
+	arm_func_end Callback_Dummy_M
 
-	arm_func_start sub_82E3EAC
-sub_82E3EAC: @ 82E3EAC
+	arm_func_start Callback_Dummy_S
+Callback_Dummy_S: @ 82E3EAC
 	bx r1
-	arm_func_end sub_82E3EAC
+	arm_func_end Callback_Dummy_S
 
-	arm_func_start sub_82E3EB0
-sub_82E3EB0: @ 82E3EB0
+	arm_func_start Callback_Dummy_ID
+Callback_Dummy_ID: @ 82E3EB0
 	bx r0
-	arm_func_end sub_82E3EB0
+	arm_func_end Callback_Dummy_ID

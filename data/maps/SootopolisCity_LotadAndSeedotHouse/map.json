@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_2272BC",
+      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_LotadBrother",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_22722B",
+      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotBrother",
       "flag": "0"
     }
   ],
@@ -65,7 +65,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_22734D"
+      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotSizeRecord"
     },
     {
       "type": "sign",
@@ -73,7 +73,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_22735B"
+      "script": "SootopolisCity_LotadAndSeedotHouse_EventScript_LotadSizeRecord"
     }
   ]
 }

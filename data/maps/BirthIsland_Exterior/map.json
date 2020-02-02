@@ -24,7 +24,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BirthIsland_Exterior_EventScript_267F83",
+      "script": "BirthIsland_Exterior_EventScript_Triangle",
       "flag": "FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE"
     },
     {

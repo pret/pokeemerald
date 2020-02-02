@@ -251,7 +251,7 @@ static void sub_81D5084(u8 taskId)
     switch (data->unk8)
     {
     case 0:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EDFD6))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ReceiveMysteryGiftWithEReader))
             data->unk8 = 1;
         break;
     case 1:
@@ -275,9 +275,9 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 4:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EDFF5))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_SelectConnectFromEReaderMenu))
         {
-            AddTextPrinterToWindow1(gUnknown_085EE014);
+            AddTextPrinterToWindow1(gJPText_SelectConnectWithGBA);
             sub_81D505C(&data->unk0);
             data->unk8 = 5;
         }
@@ -324,11 +324,11 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 7:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE05C))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_LinkIsIncorrect))
             data->unk8 = 4;
         break;
     case 8:
-        AddTextPrinterToWindow1(gUnknown_085EE097);
+        AddTextPrinterToWindow1(gJPText_Connecting);
         // XXX: This (u32*) cast is discarding the const qualifier from gUnknown_089A3470
         sub_81D4D50(&gUnknown_03006370, gMultiBootProgram_BerryGlitchFix_Start - gUnknown_089A3470, (u32*)gUnknown_089A3470);
         data->unk8 = 9;
@@ -347,7 +347,7 @@ static void sub_81D5084(u8 taskId)
         else if (data->unkE == 1)
         {
             sub_81D505C(&data->unk0);
-            AddTextPrinterToWindow1(gUnknown_085EE120);
+            AddTextPrinterToWindow1(gJPText_PleaseWaitAMoment);
             data->unk8 = 11;
         }
         else
@@ -361,7 +361,7 @@ static void sub_81D5084(u8 taskId)
         break;
     case 12:
         sub_81D4E30();
-        AddTextPrinterToWindow1(gUnknown_085EE0DC);
+        AddTextPrinterToWindow1(gJPText_AllowEReaderToLoadCard);
         data->unk8 = 13;
         break;
     case 13:
@@ -370,7 +370,7 @@ static void sub_81D5084(u8 taskId)
             case 0:
                 break;
             case 2:
-                AddTextPrinterToWindow1(gUnknown_085EE097);
+                AddTextPrinterToWindow1(gJPText_Connecting);
                 data->unk8 = 14;
                 break;
             case 1:
@@ -418,7 +418,7 @@ static void sub_81D5084(u8 taskId)
     case 17:
         if (TryWriteTrainerHill((struct EReaderTrainerHillSet *)&gDecompressionBuffer))
         {
-            AddTextPrinterToWindow1(gUnknown_085EE0FA);
+            AddTextPrinterToWindow1(gJPText_ConnectionComplete);
             sub_81D505C(&data->unk0);
             data->unk8 = 18;
         }
@@ -430,7 +430,7 @@ static void sub_81D5084(u8 taskId)
     case 18:
         if (sub_81D5064(&data->unk0, 120))
         {
-            AddTextPrinterToWindow1(gUnknown_085EE107);
+            AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
             PlayFanfare(MUS_FANFA4);
             data->unk8 = 19;
         }
@@ -440,19 +440,19 @@ static void sub_81D5084(u8 taskId)
             data->unk8 = 26;
         break;
     case 23:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9,gUnknown_085EE06B))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_CardReadingHasBeenHalted))
             data->unk8 = 26;
         break;
     case 20:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE0A3))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ConnectionErrorCheckLink))
             data->unk8 = 0;
         break;
     case 21:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE0BF))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ConnectionErrorTryAgain))
             data->unk8 = 0;
         break;
     case 22:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gUnknown_085EE12D))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_WriteErrorUnableToSaveData))
             data->unk8 = 0;
         break;
     case 26:

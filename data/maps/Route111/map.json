@@ -40,7 +40,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_1F0FC5",
+      "script": "Route111_EventScript_Victor",
       "flag": "FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE"
     },
     {
@@ -92,7 +92,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route111_EventScript_1F121B",
+      "script": "Route111_EventScript_Heidi",
       "flag": "0"
     },
     {
@@ -131,7 +131,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_1F1189",
+      "script": "Route111_EventScript_Man1",
       "flag": "0"
     },
     {
@@ -144,7 +144,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route111_EventScript_1F1204",
+      "script": "Route111_EventScript_Drew",
       "flag": "0"
     },
     {
@@ -157,7 +157,7 @@
       "movement_range_y": 2,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route111_EventScript_1F1260",
+      "script": "Route111_EventScript_Dusty",
       "flag": "0"
     },
     {
@@ -170,7 +170,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route111_EventScript_1F1232",
+      "script": "Route111_EventScript_Beau",
       "flag": "0"
     },
     {
@@ -183,7 +183,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route111_EventScript_1F1249",
+      "script": "Route111_EventScript_Becky",
       "flag": "0"
     },
     {
@@ -196,7 +196,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CDF6",
+      "script": "GabbyAndTy_EventScript_TyBattle1",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1"
     },
     {
@@ -209,7 +209,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CDD6",
+      "script": "GabbyAndTy_EventScript_GabbyBattle1",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1"
     },
     {
@@ -248,7 +248,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_1F0EB9",
+      "script": "Route111_EventScript_Girl",
       "flag": "0"
     },
     {
@@ -300,7 +300,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CE96",
+      "script": "GabbyAndTy_EventScript_GabbyBattle4",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
@@ -313,7 +313,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CEB6",
+      "script": "GabbyAndTy_EventScript_TyBattle4",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
@@ -326,7 +326,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CF16",
+      "script": "GabbyAndTy_EventScript_GabbyBattle6",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
@@ -339,7 +339,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_28CF36",
+      "script": "GabbyAndTy_EventScript_TyBattle6",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
@@ -391,7 +391,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route111_EventScript_1F12D9",
+      "script": "Route111_EventScript_Irene",
       "flag": "0"
     },
     {
@@ -404,7 +404,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route111_EventScript_1F12C2",
+      "script": "Route111_EventScript_Travis",
       "flag": "0"
     },
     {
@@ -417,7 +417,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route111_EventScript_1F12F0",
+      "script": "Route111_EventScript_Daisuke",
       "flag": "0"
     },
     {
@@ -430,7 +430,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route111_EventScript_1F1369",
+      "script": "Route111_EventScript_Brooke",
       "flag": "0"
     },
     {
@@ -443,7 +443,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route111_EventScript_1F1307",
+      "script": "Route111_EventScript_Wilton",
       "flag": "0"
     },
     {
@@ -456,7 +456,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_2765FF",
+      "script": "Route111_EventScript_SecretPowerMan",
       "flag": "FLAG_HIDE_ROUTE_111_SECRET_POWER_MAN"
     },
     {
@@ -469,7 +469,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_1F1192",
+      "script": "Route111_EventScript_Man2",
       "flag": "0"
     },
     {
@@ -482,7 +482,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route111_EventScript_1F13F9",
+      "script": "Route111_EventScript_Tyron",
       "flag": "0"
     },
     {
@@ -495,7 +495,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route111_EventScript_1F1410",
+      "script": "Route111_EventScript_Celina",
       "flag": "0"
     },
     {
@@ -508,7 +508,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route111_EventScript_1F13E2",
+      "script": "Route111_EventScript_Bianca",
       "flag": "0"
     },
     {
@@ -521,7 +521,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route111_EventScript_1F13CB",
+      "script": "Route111_EventScript_Hayden",
       "flag": "0"
     },
     {
@@ -534,7 +534,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "7",
-      "script": "Route111_EventScript_1F143E",
+      "script": "Route111_EventScript_Bryan",
       "flag": "0"
     },
     {
@@ -547,7 +547,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "6",
-      "script": "Route111_EventScript_1F1427",
+      "script": "Route111_EventScript_Celia",
       "flag": "0"
     },
     {
@@ -560,7 +560,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "7",
-      "script": "Route111_EventScript_1F1455",
+      "script": "Route111_EventScript_Branden",
       "flag": "0"
     },
     {
@@ -586,7 +586,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_1F119B",
+      "script": "Route111_EventScript_Hiker",
       "flag": "0"
     },
     {
@@ -625,7 +625,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_1F11E4",
+      "script": "Route111_EventScript_RockSmashTipFatMan",
       "flag": "FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY"
     }
   ],
@@ -674,7 +674,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -683,7 +683,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F0A"
+      "script": "Route111_EventScript_ViciousSandstormTriggerDown"
     },
     {
       "type": "trigger",
@@ -692,7 +692,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F0A"
+      "script": "Route111_EventScript_ViciousSandstormTriggerDown"
     },
     {
       "type": "trigger",
@@ -701,7 +701,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F0A"
+      "script": "Route111_EventScript_ViciousSandstormTriggerDown"
     },
     {
       "type": "trigger",
@@ -710,7 +710,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -719,7 +719,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F16"
+      "script": "Route111_EventScript_ViciousSandstormTriggerLeft"
     },
     {
       "type": "trigger",
@@ -728,7 +728,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F16"
+      "script": "Route111_EventScript_ViciousSandstormTriggerLeft"
     },
     {
       "type": "trigger",
@@ -737,7 +737,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F16"
+      "script": "Route111_EventScript_ViciousSandstormTriggerLeft"
     },
     {
       "type": "trigger",
@@ -746,7 +746,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F16"
+      "script": "Route111_EventScript_ViciousSandstormTriggerLeft"
     },
     {
       "type": "trigger",
@@ -755,7 +755,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F0A"
+      "script": "Route111_EventScript_ViciousSandstormTriggerDown"
     },
     {
       "type": "trigger",
@@ -764,7 +764,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -773,7 +773,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -782,7 +782,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -791,7 +791,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -800,7 +800,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F16"
+      "script": "Route111_EventScript_ViciousSandstormTriggerLeft"
     },
     {
       "type": "trigger",
@@ -809,7 +809,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0F16"
+      "script": "Route111_EventScript_ViciousSandstormTriggerLeft"
     },
     {
       "type": "trigger",
@@ -818,7 +818,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -827,7 +827,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -836,7 +836,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -845,7 +845,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -854,7 +854,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -863,7 +863,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -872,7 +872,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FB0"
+      "script": "Route111_EventScript_SunTrigger"
     },
     {
       "type": "trigger",
@@ -881,7 +881,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -890,7 +890,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -899,7 +899,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -908,7 +908,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -917,7 +917,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -926,7 +926,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -935,7 +935,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -944,7 +944,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -953,7 +953,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -962,7 +962,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     },
     {
       "type": "trigger",
@@ -971,7 +971,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "Route111_EventScript_1F0FBD"
+      "script": "Route111_EventScript_SandstormTrigger"
     }
   ],
   "bg_events": [
@@ -981,7 +981,7 @@
       "y": 114,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route111_EventScript_1F115C"
+      "script": "Route111_EventScript_WinstrateHouseSign"
     },
     {
       "type": "sign",
@@ -989,7 +989,7 @@
       "y": 126,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route111_EventScript_1F1153"
+      "script": "Route111_EventScript_RouteSignMauville"
     },
     {
       "type": "sign",
@@ -997,7 +997,7 @@
       "y": 66,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route111_EventScript_1F1165"
+      "script": "Route111_EventScript_RouteSign112"
     },
     {
       "type": "sign",
@@ -1005,7 +1005,7 @@
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route111_EventScript_1F116E"
+      "script": "Route111_EventScript_RouteSign113"
     },
     {
       "type": "secret_base",
@@ -1034,7 +1034,7 @@
       "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route111_EventScript_1F1177"
+      "script": "Route111_EventScript_OldLadysRestStopSign"
     },
     {
       "type": "secret_base",
@@ -1071,7 +1071,7 @@
       "y": 84,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route111_EventScript_1F1180"
+      "script": "Route111_EventScript_TrainerTipsSpAtkSpDef"
     },
     {
       "type": "secret_base",
@@ -1109,7 +1109,7 @@
       "y": 116,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route111_EventScript_1F146C"
+      "script": "Route111_EventScript_TrainerHillSign"
     }
   ]
 }

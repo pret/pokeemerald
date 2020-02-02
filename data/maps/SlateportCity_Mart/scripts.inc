@@ -1,17 +1,17 @@
 SlateportCity_Mart_MapScripts:: @ 820DC48
 	.byte 0
 
-SlateportCity_Mart_EventScript_20DC49:: @ 820DC49
+SlateportCity_Mart_EventScript_Clerk:: @ 820DC49
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart SlateportCity_Mart_Pokemart_20DC60
+	pokemart SlateportCity_Mart_Pokemart
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_Mart_Pokemart_20DC60: @ 820DC60
+SlateportCity_Mart_Pokemart: @ 820DC60
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_POTION
@@ -25,21 +25,21 @@ SlateportCity_Mart_Pokemart_20DC60: @ 820DC60
 	release
 	end
 
-SlateportCity_Mart_EventScript_20DC76:: @ 820DC76
-	msgbox SlateportCity_Mart_Text_20DC88, MSGBOX_NPC
+SlateportCity_Mart_EventScript_BlackBelt:: @ 820DC76
+	msgbox SlateportCity_Mart_Text_SomeItemsOnlyAtMart, MSGBOX_NPC
 	end
 
-SlateportCity_Mart_EventScript_20DC7F:: @ 820DC7F
-	msgbox SlateportCity_Mart_Text_20DCF8, MSGBOX_NPC
+SlateportCity_Mart_EventScript_Man:: @ 820DC7F
+	msgbox SlateportCity_Mart_Text_GreatBallIsBetter, MSGBOX_NPC
 	end
 
-SlateportCity_Mart_Text_20DC88: @ 820DC88
+SlateportCity_Mart_Text_SomeItemsOnlyAtMart: @ 820DC88
 	.string "The MARKET does have some interesting\n"
 	.string "merchandise.\p"
 	.string "But there are some items you can only\n"
 	.string "get at a POKéMON MART.$"
 
-SlateportCity_Mart_Text_20DCF8: @ 820DCF8
+SlateportCity_Mart_Text_GreatBallIsBetter: @ 820DCF8
 	.string "A GREAT BALL is better than a POKé BALL\n"
 	.string "at catching POKéMON.\p"
 	.string "With this, I should be able to get that\n"

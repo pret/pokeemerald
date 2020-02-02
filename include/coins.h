@@ -6,7 +6,7 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y);
 void HideCoinsWindow(void);
 u16 GetCoins(void);
 void SetCoins(u16 coinAmount);
-bool8 GiveCoins(u16 toAdd);
-bool8 TakeCoins(u16 toSub);
+bool8 AddCoins(u16 toAdd);
+bool8 RemoveCoins(u16 toSub);
 
 #endif // GUARD_COINS_H

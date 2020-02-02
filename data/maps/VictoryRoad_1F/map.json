@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "VictoryRoad_1F_EventScript_235E73",
+      "script": "VictoryRoad_1F_EventScript_Edgar",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "VictoryRoad_1F_EventScript_235EA1",
+      "script": "VictoryRoad_1F_EventScript_Hope",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "VictoryRoad_1F_EventScript_235E8A",
+      "script": "VictoryRoad_1F_EventScript_Albert",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_1F_EventScript_235E2C",
+      "script": "VictoryRoad_1F_EventScript_EntranceWally",
       "flag": "FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_1F_EventScript_235E35",
+      "script": "VictoryRoad_1F_EventScript_ExitWally",
       "flag": "FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_1F_EventScript_235ECF",
+      "script": "VictoryRoad_1F_EventScript_Katelynn",
       "flag": "0"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_1F_EventScript_235EB8",
+      "script": "VictoryRoad_1F_EventScript_Quincy",
       "flag": "0"
     }
   ],
@@ -177,7 +177,7 @@
       "elevation": 4,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
       "var_value": "0",
-      "script": "VictoryRoad_1F_EventScript_235DAF"
+      "script": "VictoryRoad_1F_EventScript_WallyBattleTrigger1"
     },
     {
       "type": "trigger",
@@ -186,7 +186,7 @@
       "elevation": 4,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
       "var_value": "0",
-      "script": "VictoryRoad_1F_EventScript_235DC8"
+      "script": "VictoryRoad_1F_EventScript_WallyBattleTrigger2"
     }
   ],
   "bg_events": [

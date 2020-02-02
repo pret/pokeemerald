@@ -1,17 +1,17 @@
 LilycoveCity_DepartmentStore_3F_MapScripts:: @ 821FC64
 	.byte 0
 
-LilycoveCity_DepartmentStore_3F_EventScript_21FC65:: @ 821FC65
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft:: @ 821FC65
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_21FC7C
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_Pokemart_21FC7C: @ 821FC7C
+LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins: @ 821FC7C
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_IRON
@@ -22,18 +22,18 @@ LilycoveCity_DepartmentStore_3F_Pokemart_21FC7C: @ 821FC7C
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_21FC8C:: @ 821FC8C
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight:: @ 821FC8C
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_21FCA4
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_21FCA4: @ 821FCA4
+LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters: @ 821FCA4
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_X_ATTACK
@@ -45,31 +45,31 @@ LilycoveCity_DepartmentStore_3F_Pokemart_21FCA4: @ 821FCA4
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_21FCB6:: @ 821FCB6
-	msgbox LilycoveCity_DepartmentStore_3F_Text_21FCD1, MSGBOX_NPC
+LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM:: @ 821FCB6
+	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_21FCBF:: @ 821FCBF
-	msgbox LilycoveCity_DepartmentStore_3F_Text_21FD3B, MSGBOX_NPC
+LilycoveCity_DepartmentStore_3F_EventScript_PokefanM:: @ 821FCBF
+	msgbox LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_21FCC8:: @ 821FCC8
-	msgbox LilycoveCity_DepartmentStore_3F_Text_21FDB4, MSGBOX_NPC
+LilycoveCity_DepartmentStore_3F_EventScript_Woman:: @ 821FCC8
+	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_Text_21FCD1: @ 821FCD1
+LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon: @ 821FCD1
 	.string "For quickly toughening up POKéMON,\n"
 	.string "items are the best.\p"
 	.string "PROTEIN boosts ATTACK,\n"
 	.string "and CALCIUM raises SP. ATK.$"
 
-LilycoveCity_DepartmentStore_3F_Text_21FD3B: @ 821FD3B
+LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance: @ 821FD3B
 	.string "I want my POKéMON to have more\n"
 	.string "endurance.\p"
 	.string "I'm trying to decide whether to raise\n"
 	.string "DEFENSE with IRON, or SP. DEF with ZINC.$"
 
-LilycoveCity_DepartmentStore_3F_Text_21FDB4: @ 821FDB4
+LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon: @ 821FDB4
 	.string "I gave a CARBOS to my POKéMON,\n"
 	.string "and its SPEED went up.$"
 

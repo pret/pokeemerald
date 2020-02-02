@@ -39,16 +39,16 @@
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
 #define BS_BATTLER_0                7
-#define BS_ATTACKER_WITH_PARTNER    4 // for atk98_status_icon_update
-#define BS_ATTACKER_SIDE            8 // for atk1E_jumpifability
-#define BS_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
+#define BS_ATTACKER_WITH_PARTNER    4 // for Cmd_updatestatusicon
+#define BS_ATTACKER_SIDE            8 // for Cmd_jumpifability
+#define BS_NOT_ATTACKER_SIDE        9 // for Cmd_jumpifability
 #define BS_SCRIPTING                10
 #define BS_PLAYER1                  11
 #define BS_OPPONENT1                12
 #define BS_PLAYER2                  13
 #define BS_OPPONENT2                14
 
-// atk 01, accuracy calc
+// Cmd_accuracycheck
 #define NO_ACC_CALC 0xFFFE
 #define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
 #define ACC_CURR_MOVE 0
@@ -61,7 +61,7 @@
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
-// atk76, various
+// Cmd_various
 #define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
 #define VARIOUS_SET_MAGIC_COAT_TARGET           1
 #define VARIOUS_IS_RUNNING_IMPOSSIBLE           2
@@ -84,44 +84,25 @@
 #define VARIOUS_SET_TELEPORT_OUTCOME            25
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
 
-// atk80, dmg manipulation
-#define ATK80_DMG_CHANGE_SIGN                               0
-#define ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP     1
-#define ATK80_DMG_DOUBLED                                   2
+// Cmd_manipulatedmg
+#define DMG_CHANGE_SIGN            0
+#define DMG_RECOIL_FROM_MISS       1
+#define DMG_DOUBLED                2
 
-// atk4F, a flag used for the jumpifcantswitch command
-#define ATK4F_DONT_CHECK_STATUSES   0x80
+// Cmd_jumpifcantswitch
+#define SWITCH_IGNORE_ESCAPE_PREVENTION   0x80
 
-// statchange defines
-#define STAT_CHANGE_BS_PTR                  0x1
-#define STAT_CHANGE_NOT_PROTECT_AFFECTED    0x20
+// Cmd_statbuffchange
+#define STAT_BUFF_ALLOW_PTR                 0x1   // If set, allow use of jumpptr. Set in every use of statbuffchange
+#define STAT_BUFF_NOT_PROTECT_AFFECTED      0x20
 
-// atk48
-#define ATK48_STAT_NEGATIVE         0x1
-#define ATK48_STAT_BY_TWO           0x2
-#define ATK48_ONLY_MULTIPLE         0x4
-#define ATK48_DONT_CHECK_LOWER      0x8
+// stat change flags for Cmd_playstatchangeanimation
+#define STAT_CHANGE_NEGATIVE             0x1
+#define STAT_CHANGE_BY_TWO               0x2
+#define STAT_CHANGE_MULTIPLE_STATS       0x4
+#define STAT_CHANGE_CANT_PREVENT         0x8
 
-// atk49, moveend cases
-#define ATK49_RAGE                              0
-#define ATK49_DEFROST                           1
-#define ATK49_SYNCHRONIZE_TARGET                2
-#define ATK49_MOVE_END_ABILITIES                3
-#define ATK49_STATUS_IMMUNITY_ABILITIES         4
-#define ATK49_SYNCHRONIZE_ATTACKER              5
-#define ATK49_CHOICE_MOVE                       6
-#define ATK49_CHANGED_ITEMS                     7
-#define ATK49_ATTACKER_INVISIBLE                8
-#define ATK49_ATTACKER_VISIBLE                  9
-#define ATK49_TARGET_VISIBLE                    10
-#define ATK49_ITEM_EFFECTS_ALL                  11
-#define ATK49_KINGSROCK_SHELLBELL               12
-#define ATK49_SUBSTITUTE                        13
-#define ATK49_UPDATE_LAST_MOVES                 14
-#define ATK49_MIRROR_MOVE                       15
-#define ATK49_NEXT_TARGET                       16
-#define ATK49_COUNT                             17
-
+// stat flags for Cmd_playstatchangeanimation
 #define BIT_HP                      0x1
 #define BIT_ATK                     0x2
 #define BIT_DEF                     0x4
@@ -130,5 +111,25 @@
 #define BIT_SPDEF                   0x20
 #define BIT_ACC                     0x40
 #define BIT_EVASION                 0x80
+
+// cases for Cmd_moveend
+#define MOVEEND_RAGE                              0
+#define MOVEEND_DEFROST                           1
+#define MOVEEND_SYNCHRONIZE_TARGET                2
+#define MOVEEND_ON_DAMAGE_ABILITIES               3
+#define MOVEEND_IMMUNITY_ABILITIES                4
+#define MOVEEND_SYNCHRONIZE_ATTACKER              5
+#define MOVEEND_CHOICE_MOVE                       6
+#define MOVEEND_CHANGED_ITEMS                     7
+#define MOVEEND_ATTACKER_INVISIBLE                8
+#define MOVEEND_ATTACKER_VISIBLE                  9
+#define MOVEEND_TARGET_VISIBLE                    10
+#define MOVEEND_ITEM_EFFECTS_ALL                  11
+#define MOVEEND_KINGSROCK_SHELLBELL               12
+#define MOVEEND_SUBSTITUTE                        13
+#define MOVEEND_UPDATE_LAST_MOVES                 14
+#define MOVEEND_MIRROR_MOVE                       15
+#define MOVEEND_NEXT_TARGET                       16
+#define MOVEEND_COUNT                             17
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

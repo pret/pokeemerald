@@ -3,13 +3,25 @@
 ## for wild_encounter_group in wild_encounter_groups
 {% if wild_encounter_group.for_maps %}
 ## for wild_encounter_field in wild_encounter_group.fields
+{% if not existsIn(wild_encounter_field, "groups") %}
 ## for encounter_rate in wild_encounter_field.encounter_rates
-{% if trackVar(encounter_rate, 100) %}
+{% if loop.index == 0 %}
 #define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} {{ encounter_rate }} {% else %}#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ loop.index }} ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ subtract(loop.index, 1) }} + {{ encounter_rate }}{% endif %} {{ setVarInt(wild_encounter_field.type, loop.index) }}
 ## endfor
 #define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ getVar(wild_encounter_field.type) }})
+{% else %}
+## for field_subgroup_key, field_subgroup_subarray in wild_encounter_field.groups
+## for field_subgroup_index in field_subgroup_subarray
+{% if loop.index == 0 %}
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_SLOT_{{ field_subgroup_index }} {{ at(wild_encounter_field.encounter_rates, field_subgroup_index) }} {% else %}#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_SLOT_{{ field_subgroup_index }} ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_SLOT_{{ getVar("previous_slot") }} + {{ at(wild_encounter_field.encounter_rates, field_subgroup_index) }}{% endif %}{{ setVarInt(concat(wild_encounter_field.type, field_subgroup_key), field_subgroup_index) }}{{ setVarInt("previous_slot", field_subgroup_index) }}
+## endfor
+#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_SLOT_{{ getVar(concat(wild_encounter_field.type, field_subgroup_key)) }})
 ## endfor
 {% endif %}
+## endfor
+{% endif %}
+
+
 
 ## for encounter in wild_encounter_group.encounters
 {% if existsIn(encounter, "land_mons") %}

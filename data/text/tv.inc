@@ -1,4 +1,4 @@
-LilycoveCity_ContestLobby_Text_27EF15: @ 827EF15
+LilycoveCity_ContestLobby_Text_InterviewRequest: @ 827EF15
 	.string "Oh, hello! You were in a POKéMON\n"
 	.string "CONTEST, weren't you?\l"
 	.string "It's easy to tell from your POKéMON.\p"
@@ -7,13 +7,13 @@ LilycoveCity_ContestLobby_Text_27EF15: @ 827EF15
 	.string "If I may, would you be willing to answer\n"
 	.string "a few questions?$"
 
-LilycoveCity_ContestLobby_Text_27EFE7: @ 827EFE7
+LilycoveCity_ContestLobby_Text_DescribeContest: @ 827EFE7
 	.string "Oh, you will?\n"
 	.string "Thank you.\p"
 	.string "Briefly, how would you describe the\n"
 	.string "CONTEST you just entered?$"
 
-LilycoveCity_ContestLobby_Text_27F03E: @ 827F03E
+LilycoveCity_ContestLobby_Text_WhatImageWhenYouHearX: @ 827F03E
 	.string "Ah, I see.\n"
 	.string "That's a very edifying comment.\p"
 	.string "You get a good feel for what\n"
@@ -22,7 +22,7 @@ LilycoveCity_ContestLobby_Text_27F03E: @ 827F03E
 	.string "When you hear the word “{STR_VAR_2},”\n"
 	.string "what image do you get?$"
 
-LilycoveCity_ContestLobby_Text_27F0EC: @ 827F0EC
+LilycoveCity_ContestLobby_Text_ThatsAllForInterview: @ 827F0EC
 	.string "I see!\p"
 	.string "So that's how you imagine the concept\n"
 	.string "of “{STR_VAR_2}” to be.\p"
@@ -34,12 +34,12 @@ LilycoveCity_ContestLobby_Text_27F0EC: @ 827F0EC
 	.string "make it to television.\l"
 	.string "I hope you'll look forward to it!$"
 
-LilycoveCity_ContestLobby_Text_27F1EF: @ 827F1EF
+LilycoveCity_ContestLobby_Text_PleaseDoShareStoryWithMe: @ 827F1EF
 	.string "Oh, too bad…\p"
 	.string "Well, if you come across a good story,\n"
 	.string "please do share it with me.$"
 
-LilycoveCity_ContestLobby_Text_27F23F: @ 827F23F
+LilycoveCity_ContestLobby_Text_LookingForwardToNextContest: @ 827F23F
 	.string "I'll be looking forward to your next\n"
 	.string "POKéMON CONTEST.$"
 
@@ -108,7 +108,7 @@ gTVBravoTrainerText07:: @ 0827F65C
 gTVBravoTrainerText08:: @ 0827F6E6
 	.string "Introducing the TRAINER's {STR_VAR_1}!$"
 
-BattleFrontier_BattleTowerLobby_Text_27F704:: @ 0827F704
+BattleFrontier_BattleTowerLobby_Text_InterviewRequest:: @ 0827F704
 	.string "Hello! You're the TRAINER who just had\n"
 	.string "a battle, right?\p"
 	.string "I'm gathering interviews with TRAINERS\n"
@@ -116,7 +116,7 @@ BattleFrontier_BattleTowerLobby_Text_27F704:: @ 0827F704
 	.string "May I get a few words from you about\n"
 	.string "your impressions on battling?$"
 
-BattleFrontier_BattleTowerLobby_Text_27F7BA:: @ 0827F7BA
+BattleFrontier_BattleTowerLobby_Text_HowDidBattleTowerTurnOut:: @ 0827F7BA
 	.string "You will? Really?\n"
 	.string "Thank you!\l"
 	.string "Then, uh…\p"
@@ -125,44 +125,44 @@ BattleFrontier_BattleTowerLobby_Text_27F7BA:: @ 0827F7BA
 	.string "Were you satisfied with the battle?\n"
 	.string "Or are you unhappy?$"
 
-BattleFrontier_BattleTowerLobby_Text_27F84C:: @ 0827F84C
+BattleFrontier_BattleTowerLobby_Text_SorryWeDisturbedYou:: @ 0827F84C
 	.string "Oh…\n"
 	.string "Sorry we disturbed you.\p"
 	.string "Please give us an interview the next\n"
 	.string "time you visit the BATTLE TOWER.$"
 
-BattleFrontier_BattleTowerLobby_Text_27F8AE:: @ 0827F8AE
+BattleFrontier_BattleTowerLobby_Text_ObviousYouHadGreatBattle:: @ 0827F8AE
 	.string "Well, of course!\p"
 	.string "That unmistakable look of satisfaction\n"
 	.string "on your face…\p"
 	.string "It's obvious that you've had a great\n"
 	.string "battle.$"
 
-BattleFrontier_BattleTowerLobby_Text_27F921:: @ 0827F921
+BattleFrontier_BattleTowerLobby_Text_DifficultToMakeBattleTurnOutAsPlanned:: @ 0827F921
 	.string "Oh, I see…\p"
 	.string "Well, it certainly is difficult to make a\n"
 	.string "battle turn out exactly as planned.$"
 
-BattleFrontier_BattleTowerLobby_Text_27F97A:: @ 0827F97A
+BattleFrontier_BattleTowerLobby_Text_DescribeYourBattle:: @ 0827F97A
 	.string "Oh, oh, may I ask one more question?\p"
 	.string "If you were to describe your\n"
 	.string "impressions about this battle with\l"
 	.string "one saying, what would it be?$"
 
-BattleFrontier_BattleTowerLobby_Text_27F9FD:: @ 0827F9FD
+BattleFrontier_BattleTowerLobby_Text_ThatsGreatLine:: @ 0827F9FD
 	.string "Oh, that is stunningly cool!\p"
 	.string "That's a great line!\n"
 	.string "I hope you'll do great next time, too.\p"
 	.string "I hope to see you again!$"
 
-BattleFrontier_BattleTowerLobby_Text_27FA6F:: @ 0827FA6F
+BattleFrontier_BattleTowerLobby_Text_SilentType:: @ 0827FA6F
 	.string "Oh, I see…\p"
 	.string "Still, being the silent type is also\n"
 	.string "cool, isn't it?\p"
 	.string "I hope you'll give me the opportunity\n"
 	.string "to share your thoughts again!$"
 
-BattleFrontier_BattleTowerLobby_Text_27FAF3:: @ 0827FAF3
+BattleFrontier_BattleTowerLobby_Text_LookingForwardToNextBattle:: @ 0827FAF3
 	.string "I'll be looking forward to your\n"
 	.string "next battle!$"
 
@@ -269,7 +269,7 @@ gTVBravoTrainerBattleTowerText14:: @ 082801E6
 	.string "That's all the time we have!\n"
 	.string "Until next time, see you!$"
 
-SlateportCity_PokemonFanClub_Text_280270: @ 08280270
+SlateportCity_PokemonFanClub_Text_InterviewRequestHasName: @ 08280270
 	.string "Wow!\p"
 	.string "It's plain to see that you lavish your\n"
 	.string "love on your {STR_VAR_1}.\p"
@@ -280,36 +280,36 @@ SlateportCity_PokemonFanClub_Text_280270: @ 08280270
 	.string "Would you be willing to answer a few\n"
 	.string "simple questions for me?$"
 
-SlateportCity_PokemonFanClub_Text_28034F: @ 0828034F
+SlateportCity_PokemonFanClub_Text_HereGoesQuickAnswers: @ 0828034F
 	.string "Great! Thank you!\p"
 	.string "Okay, here goes.\n"
 	.string "I just need quick answers, okay?$"
 
-SlateportCity_PokemonFanClub_Text_280393: @ 08280393
+SlateportCity_PokemonFanClub_Text_DescribeFeelingsFirstMetMon: @ 08280393
 	.string "When you first met {STR_VAR_1},\n"
 	.string "what did you feel?\p"
 	.string "How would you describe your feelings\n"
 	.string "at the time?$"
 
-SlateportCity_PokemonFanClub_Text_2803EF: @ 082803EF
+SlateportCity_PokemonFanClub_Text_LikenMonToSomethingYouLike: @ 082803EF
 	.string "Your {STR_VAR_1} is cared for lovingly.\p"
 	.string "If you were to liken it to something\n"
 	.string "that you like, what would it be?$"
 
-SlateportCity_PokemonFanClub_Text_280454: @ 08280454
+SlateportCity_PokemonFanClub_Text_WhatAttractedYouAboutMon: @ 08280454
 	.string "This question also relates to your\n"
 	.string "beloved {STR_VAR_1}.\p"
 	.string "What was it about {STR_VAR_1} that\n"
 	.string "attracted you?$"
 
-SlateportCity_PokemonFanClub_Text_2804AC: @ 082804AC
+SlateportCity_PokemonFanClub_Text_WhatDoPokemonMeanToYou: @ 082804AC
 	.string "Okay, that makes sense.\p"
 	.string "The next question might be a little\n"
 	.string "on the tough side.\p"
 	.string "Here goes…\p"
 	.string "What do POKéMON mean to you?$"
 
-SlateportCity_PokemonFanClub_Text_280523: @ 08280523
+SlateportCity_PokemonFanClub_Text_ThatsAllForInterview: @ 08280523
 	.string "I see!\p"
 	.string "Hmhm…\p"
 	.string "Okay!\n"
@@ -321,16 +321,16 @@ SlateportCity_PokemonFanClub_Text_280523: @ 08280523
 	.string "Okay, that's all.\n"
 	.string "Bye-bye!$"
 
-SlateportCity_PokemonFanClub_Text_2805E2: @ 082805E2
+SlateportCity_PokemonFanClub_Text_HereIfYouGetUrgeToTellMe: @ 082805E2
 	.string "Oh, okay…\p"
 	.string "Well, if you get the urge to tell me\n"
 	.string "about POKéMON, I'll be here!$"
 
-SlateportCity_PokemonFanClub_Text_28062E: @ 0828062E
+SlateportCity_PokemonFanClub_Text_EnjoyDoingInterviews: @ 0828062E
 	.string "I enjoy this job--you get to learn\n"
 	.string "about POKéMON by doing interviews.$"
 
-SlateportCity_PokemonFanClub_Text_280674: @ 08280674
+SlateportCity_PokemonFanClub_Text_InterviewRequest: @ 08280674
 	.string "Hi, you seem to be very close to your\n"
 	.string "{STR_VAR_1}.\p"
 	.string "Do you know what?\n"
@@ -340,12 +340,12 @@ SlateportCity_PokemonFanClub_Text_280674: @ 08280674
 	.string "I'm wondering if you'd be willing to tell\n"
 	.string "me a little about your {STR_VAR_1}?$"
 
-SlateportCity_PokemonFanClub_Text_28073B: @ 0828073B
+SlateportCity_PokemonFanClub_Text_TellMeAnythingAboutYourMon: @ 0828073B
 	.string "Wow, thank you!\p"
 	.string "Okay, then, please tell me anything\n"
 	.string "you'd like about your {STR_VAR_1}.$"
 
-SlateportCity_PokemonFanClub_Text_280789: @ 08280789
+SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2: @ 08280789
 	.string "Wow…\n"
 	.string "That's an interesting account.\p"
 	.string "You really are tight with {STR_VAR_1},\n"
@@ -479,7 +479,7 @@ gTVFanClubText07:: @ 082810E7
 	.string "A-whoops, will you look at the time?\n"
 	.string "Time to say good-bye until next time!$"
 
-SlateportCity_OceanicMuseum_1F_Text_2811A0: @ 082811A0
+SlateportCity_OceanicMuseum_1F_Text_InterviewRequest: @ 082811A0
 	.string "Oh?\n"
 	.string "Do you perhaps like POKéMON?\p"
 	.string "I'm on assignment with the TV network.\p"
@@ -488,32 +488,32 @@ SlateportCity_OceanicMuseum_1F_Text_2811A0: @ 082811A0
 	.string "If you don't mind, could you tell me\n"
 	.string "something about yourself?$"
 
-SlateportCity_OceanicMuseum_1F_Text_28126D: @ 0828126D
+SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort: @ 0828126D
 	.string "I'm gathering stories on POKéMON and\n"
 	.string "TRAINERS that occurred recently.\p"
 	.string "If you don't mind, could you tell me\n"
 	.string "something about yourself?$"
 
-SlateportCity_OceanicMuseum_1F_Text_2812F2: @ 082812F2
+SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon: @ 082812F2
 	.string "Oh, you will?\n"
 	.string "Thank you!\p"
 	.string "Then, please, tell me anything of\n"
 	.string "interest that you experienced recently\l"
 	.string "involving POKéMON.$"
 
-SlateportCity_OceanicMuseum_1F_Text_281367: @ 08281367
+SlateportCity_OceanicMuseum_1F_Text_LetMeKnowIfYouHaveStory: @ 08281367
 	.string "Oh, I see…\p"
 	.string "Well, if you do have an interesting\n"
 	.string "story to tell, please let me know.$"
 
-SlateportCity_OceanicMuseum_1F_Text_2813B9: @ 082813B9
+SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview: @ 082813B9
 	.string "Oh, what an uplifting story!\p"
 	.string "I'll be sure to get your story told\n"
 	.string "on television.\p"
 	.string "It should be aired sometime, I think,\n"
 	.string "so please look forward to it.$"
 
-SlateportCity_OceanicMuseum_1F_Text_28144D: @ 0828144D
+SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory: @ 0828144D
 	.string "Hmmm…\n"
 	.string "I've got a good story for a TV program.\p"
 	.string "I'd better write it up in a hurry!$"
@@ -612,44 +612,44 @@ gTV3CheersForPokeblocksText05:: @ 08281B93
 	.string "Tune in next time!\n"
 	.string "Our slogan is “3 CHEERS FOR {POKEBLOCK}S!”$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281BCB:: @ 8281BCB
+LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer:: @ 8281BCB
 	.string "Hi, there!\p"
 	.string "I'm a big fan of {STR_VAR_1}.\n"
 	.string "What's your opinion of {STR_VAR_1}?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281C06:: @ 8281C06
+LilycoveCity_PokemonTrainerFanClub_Text_ThatsWhatYouThink:: @ 8281C06
 	.string "I see, I see. That's what you think\n"
 	.string "about the TRAINER.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281C3D:: @ 8281C3D
+LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer:: @ 8281C3D
 	.string "Have you completely forgotten\n"
 	.string "about {STR_VAR_1}?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281C65:: @ 8281C65
+LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer2:: @ 8281C65
 	.string "I'm a big fan of {STR_VAR_1}.\n"
 	.string "What's your opinion of {STR_VAR_1}?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281C95:: @ 8281C95
+LilycoveCity_PokemonTrainerFanClub_Text_HowStrongRateTrainer:: @ 8281C95
 	.string "How strong would you rate {STR_VAR_1}\n"
 	.string "on a scale of one hundred?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281CCD:: @ 8281CCD
+LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer2:: @ 8281CCD
 	.string "Have you completely forgotten\n"
 	.string "about {STR_VAR_1}?$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281CF5:: @ 8281CF5
+LilycoveCity_PokemonTrainerFanClub_Text_YouShouldMeetTrainer:: @ 8281CF5
 	.string "Oh, I see!\n"
 	.string "You should meet {STR_VAR_1} sometime.\l"
 	.string "I'm sure you'll become a fan, too!$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281D40:: @ 8281D40
+LilycoveCity_PokemonTrainerFanClub_Text_ThankYouIllShareThisInfo:: @ 8281D40
 	.string "I see, I see.\p"
 	.string "Thank you!\n"
 	.string "That's very useful to know.\p"
 	.string "I'll share this information with other\n"
 	.string "{STR_VAR_1} fans and discuss it.$"
 
-LilycoveCity_PokemonTrainerFanClub_Text_281DB4:: @ 8281DB4
+LilycoveCity_PokemonTrainerFanClub_HopeYouCatchTVSpecial:: @ 8281DB4
 	.string "There's going to be a TV special on\n"
 	.string "{STR_VAR_1} very soon.\p"
 	.string "I hope you catch it!$"
@@ -2079,7 +2079,7 @@ gTVWhatsNo1InHoennTodayText08:: @ 0828858B
 	.string "Viewers, take heart from {STR_VAR_1}!\n"
 	.string "You, too, can be no. 1 every day!$"
 
-gTVSecretBaseSecretsText00:: @ 08288608
+TVSecretBaseSecrets_Text_Intro:: @ 08288608
 	.string "SECRET BASE SECRETS!\p"
 	.string "What do TRAINERS do in the secrecy\n"
 	.string "of SECRET BASES?\p"
@@ -2090,88 +2090,88 @@ gTVSecretBaseSecretsText00:: @ 08288608
 	.string "Let's have a peek!\p"
 	.string "What will {STR_VAR_2} do?$"
 
-gTVSecretBaseSecretsText01:: @ 082886C8
+TVSecretBaseSecrets_Text_WhatWillPlayerDoNext1:: @ 082886C8
 	.string "What will {STR_VAR_2} do next?$"
 
-gTVSecretBaseSecretsText02:: @ 082886DE
+TVSecretBaseSecrets_Text_WhatWillPlayerDoNext2:: @ 082886DE
 	.string "And now, what will {STR_VAR_2} do?$"
 
-gTVSecretBaseSecretsText03:: @ 082886F8
+TVSecretBaseSecrets_Text_TookXStepsBeforeLeaving:: @ 082886F8
 	.string "In the end, {STR_VAR_2} took {STR_VAR_3} steps\n"
 	.string "in {STR_VAR_1}'s SECRET BASE before\l"
 	.string "leaving.$"
 
-gTVSecretBaseSecretsText04:: @ 08288739
+TVSecretBaseSecrets_Text_BaseFailedToInterestPlayer:: @ 08288739
 	.string "Hmm…\p"
 	.string "It appears as if {STR_VAR_1}'s SECRET\n"
 	.string "BASE failed to interest {STR_VAR_2}…$"
 
-gTVSecretBaseSecretsText05:: @ 08288777
+TVSecretBaseSecrets_Text_PlayerEnjoyedBase:: @ 08288777
 	.string "{STR_VAR_2} appears to have enjoyed\n"
 	.string "{STR_VAR_1}'s SECRET BASE thoroughly.$"
 
-gTVSecretBaseSecretsText06:: @ 082887AF
+TVSecretBaseSecrets_Text_PlayerHugeFanOfBase:: @ 082887AF
 	.string "{STR_VAR_2} appears to have become\n"
 	.string "a huge fan of {STR_VAR_1}'s\l"
 	.string "SECRET BASE.$"
 
-gTVSecretBaseSecretsText07:: @ 082887E9
+TVSecretBaseSecrets_Text_Outro:: @ 082887E9
 	.string "Viewers may want to check out\n"
 	.string "{STR_VAR_1}'s SECRET BASE, too.\p"
 	.string "Tune in next time as we visit another\n"
 	.string "SECRET BASE! Thanks for joining us!$"
 
-gTVSecretBaseSecretsText08:: @ 08288868
+TVSecretBaseSecrets_Text_StoppedMoving1:: @ 08288868
 	.string "The visitor has stopped!\p"
 	.string "The visitor isn't moving at all!\p"
 	.string "Was {STR_VAR_1}'s SECRET BASE\n"
 	.string "that unimpressive?$"
 
-gTVSecretBaseSecretsText09:: @ 082888CA
+TVSecretBaseSecrets_Text_StoppedMoving2:: @ 082888CA
 	.string "The visitor has stopped!\p"
 	.string "The visitor isn't moving at all!\p"
 	.string "Is it fatigue?\n"
 	.string "Has the visitor grown weary?$"
 
-gTVSecretBaseSecretsText10:: @ 08288930
+TVSecretBaseSecrets_Text_UsedChair:: @ 08288930
 	.string "The visitor sat down on a chair!\n"
 	.string "The visitor is seated!\p"
 	.string "Look at that look of delight!\p"
 	.string "That chair must be very comfortable\n"
 	.string "to get that response!$"
 
-gTVSecretBaseSecretsText11:: @ 082889C0
+TVSecretBaseSecrets_Text_UsedBalloon:: @ 082889C0
 	.string "The visitor charged at a balloon!\p"
 	.string "It burst!\n"
 	.string "Oh, my goodness, it popped!\p"
 	.string "The visitor appears startled by\n"
 	.string "the sudden noise!$"
 
-gTVSecretBaseSecretsText12:: @ 08288A3A
+TVSecretBaseSecrets_Text_UsedTent:: @ 08288A3A
 	.string "The visitor entered a TENT!\p"
 	.string "The visitor is running around!\p"
 	.string "Oh, my, the visitor is frolicking!\p"
 	.string "The visitor appears surprised by\n"
 	.string "the TENT's size!$"
 
-gTVSecretBaseSecretsText13:: @ 08288ACA
+TVSecretBaseSecrets_Text_UsedPlant:: @ 08288ACA
 	.string "The visitor is examining\n"
 	.string "a potted plant!\p"
 	.string "The visitor has surprisingly\n"
 	.string "mature taste!$"
 
-gTVSecretBaseSecretsText14:: @ 08288B1E
+TVSecretBaseSecrets_Text_UsedGoldShield:: @ 08288B1E
 	.string "The visitor is examining\n"
 	.string "a GOLD SHIELD!\p"
 	.string "The visitor's eyes appear to be\n"
 	.string "lit up with wonder!$"
 
-gTVSecretBaseSecretsText15:: @ 08288B7A
+TVSecretBaseSecrets_Text_UsedSilverShield:: @ 08288B7A
 	.string "The visitor is examining\n"
 	.string "a SILVER SHIELD!\p"
 	.string "The visitor appears to be wide-eyed!$"
 
-gTVSecretBaseSecretsText16:: @ 08288BC9
+TVSecretBaseSecrets_Text_UsedGlassOrnament:: @ 08288BC9
 	.string "The visitor is examining\n"
 	.string "a GLASS ORNAMENT!\p"
 	.string "Oh, no!\p"
@@ -2179,15 +2179,15 @@ gTVSecretBaseSecretsText16:: @ 08288BC9
 	.string "It's getting covered with\n"
 	.string "fingerprints…$"
 
-gTVSecretBaseSecretsText17:: @ 08288C40
+TVSecretBaseSecrets_Text_UsedTV:: @ 08288C40
 	.string "The visitor is watching television!\p"
 	.string "Looks like we have a big fan of TV!$"
 
-gTVSecretBaseSecretsText18:: @ 08288C88
+TVSecretBaseSecrets_Text_UsedMudBall:: @ 08288C88
 	.string "The visitor stomped on a MUD BALL!\p"
 	.string "The visitor looks delighted!$"
 
-gTVSecretBaseSecretsText19:: @ 08288CC8
+TVSecretBaseSecrets_Text_UsedBag:: @ 08288CC8
 	.string "…Oh?\p"
 	.string "The visitor is reaching for their own\n"
 	.string "BAG and rummaging about in it!\p"
@@ -2197,19 +2197,19 @@ gTVSecretBaseSecretsText19:: @ 08288CC8
 	.string "holding up the {STR_VAR_2}!\p"
 	.string "It's like a TV commercial!$"
 
-gTVSecretBaseSecretsText20:: @ 08288D7F
+TVSecretBaseSecrets_Text_UsedCushion:: @ 08288D7F
 	.string "The visitor grabs a cushion and…$"
 
-gTVSecretBaseSecretsText21:: @ 08288DA0
+TVSecretBaseSecrets_Text_HitCushion:: @ 08288DA0
 	.string "…begins hitting it!\p"
 	.string "Is the visitor under a lot of stress?$"
 
-gTVSecretBaseSecretsText22:: @ 08288DDA
+TVSecretBaseSecrets_Text_HuggedCushion:: @ 08288DDA
 	.string "…hugs it tight!\p"
 	.string "Could the visitor be feeling happy\n"
 	.string "about something?$"
 
-gTVSecretBaseSecretsText23:: @ 08288E1E
+TVSecretBaseSecrets_Text_BattledWon:: @ 08288E1E
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2220,7 +2220,7 @@ gTVSecretBaseSecretsText23:: @ 08288E1E
 	.string "The visitor is doing\n"
 	.string "a victory dance!$"
 
-gTVSecretBaseSecretsText24:: @ 08288EC9
+TVSecretBaseSecrets_Text_BattledLost:: @ 08288EC9
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2230,7 +2230,7 @@ gTVSecretBaseSecretsText24:: @ 08288EC9
 	.string "The visitor has lost!\p"
 	.string "The visitor looks dejected!$"
 
-gTVSecretBaseSecretsText25:: @ 08288F58
+TVSecretBaseSecrets_Text_DeclinedBattle:: @ 08288F58
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2241,7 +2241,7 @@ gTVSecretBaseSecretsText25:: @ 08288F58
 	.string "Did the visitor find {STR_VAR_1}\n"
 	.string "unappealing?$"
 
-gTVSecretBaseSecretsText26:: @ 08289011
+TVSecretBaseSecrets_Text_UsedPoster:: @ 08289011
 	.string "The visitor is staring intently\n"
 	.string "at a poster!\p"
 	.string "Is the poster to the visitor's\n"
@@ -2249,12 +2249,12 @@ gTVSecretBaseSecretsText26:: @ 08289011
 	.string "…But… There's something disturbing\n"
 	.string "about the visitor's stares.$"
 
-gTVSecretBaseSecretsText27:: @ 082890A4
+TVSecretBaseSecrets_Text_UsedNoteMat:: @ 082890A4
 	.string "The visitor stepped on a NOTE MAT!\p"
 	.string "…Hmm…\n"
 	.string "The visitor composed a funny tune!$"
 
-gTVSecretBaseSecretsText28:: @ 082890F0
+TVSecretBaseSecrets_Text_BattledDraw:: @ 082890F0
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
 	.string "It looks like they're going to\n"
@@ -2265,14 +2265,14 @@ gTVSecretBaseSecretsText28:: @ 082890F0
 	.string "Both TRAINERS appear to be very\n"
 	.string "disappointed!$"
 
-gTVSecretBaseSecretsText29:: @ 08289193
+TVSecretBaseSecrets_Text_UsedSpinMat:: @ 08289193
 	.string "The visitor stepped on\n"
 	.string "a SPIN MAT!\p"
 	.string "It looks like the visitor is dizzy!\p"
 	.string "The visitor is tottering about!\n"
 	.string "Look out!$"
 
-gTVSecretBaseSecretsText30:: @ 08289204
+TVSecretBaseSecrets_Text_UsedSandOrnament:: @ 08289204
 	.string "The visitor is reaching for\n"
 	.string "a SAND ORNAMENT!\p"
 	.string "Oh!\p"
@@ -2281,7 +2281,7 @@ gTVSecretBaseSecretsText30:: @ 08289204
 	.string "The visitor looks sheepish\n"
 	.string "and guilty!$"
 
-gTVSecretBaseSecretsText31:: @ 0828927C
+TVSecretBaseSecrets_Text_UsedDesk:: @ 0828927C
 	.string "The visitor is rubbing a desktop\n"
 	.string "with their finger!\p"
 	.string "Apparently, the visitor disapproves\n"
@@ -2289,25 +2289,25 @@ gTVSecretBaseSecretsText31:: @ 0828927C
 	.string "The visitor is surprisingly concerned\n"
 	.string "about neatness!$"
 
-gTVSecretBaseSecretsText32:: @ 08289313
+TVSecretBaseSecrets_Text_UsedBrick:: @ 08289313
 	.string "The visitor is staring at a BRICK!\p"
 	.string "Perhaps the visitor is thinking about\n"
 	.string "the object on the BRICK.$"
 
-gTVSecretBaseSecretsText33:: @ 08289375
+TVSecretBaseSecrets_Text_UsedSolidBoard:: @ 08289375
 	.string "The visitor is walking across\n"
 	.string "the SOLID BOARD.\p"
 	.string "The visitor keeps looking down.\p"
 	.string "The visitor appears to be surprisingly\n"
 	.string "timid and cautious!$"
 
-gTVSecretBaseSecretsText34:: @ 082893FF
+TVSecretBaseSecrets_Text_UsedFence:: @ 082893FF
 	.string "The visitor is looking intently\n"
 	.string "at a FENCE!\p"
 	.string "Has a new idea for a trap popped\n"
 	.string "into the visitor's head?$"
 
-gTVSecretBaseSecretsText35:: @ 08289465
+TVSecretBaseSecrets_Text_UsedGlitterMat:: @ 08289465
 	.string "The visitor stepped on\n"
 	.string "a GLITTER MAT!\p"
 	.string "The visitor is striking a variety\n"
@@ -2315,13 +2315,13 @@ gTVSecretBaseSecretsText35:: @ 08289465
 	.string "The visitor appears to be fantasizing\n"
 	.string "about being an idol!$"
 
-gTVSecretBaseSecretsText36:: @ 082894F2
+TVSecretBaseSecrets_Text_UsedTire:: @ 082894F2
 	.string "The visitor is staring intently\n"
 	.string "at a TIRE!\p"
 	.string "Could the visitor be thinking about\n"
 	.string "the kind of car that would use it?$"
 
-gTVSecretBaseSecretsText37:: @ 08289564
+TVSecretBaseSecrets_Text_UsedStand:: @ 08289564
 	.string "The visitor climbed a STAND!\p"
 	.string "The visitor is looking out across\n"
 	.string "{STR_VAR_1}'s BASE from high up!\p"
@@ -2329,16 +2329,16 @@ gTVSecretBaseSecretsText37:: @ 08289564
 	.string "Lets loose a roar!\n"
 	.string "The visitor is roaring!$"
 
-gTVSecretBaseSecretsText38:: @ 082895EB
+TVSecretBaseSecrets_Text_BrokeDoor:: @ 082895EB
 	.string "The visitor charged headlong into\n"
 	.string "a BREAKABLE DOOR!\p"
 	.string "The visitor is laughing uproariously!$"
 
-gTVSecretBaseSecretsText39:: @ 08289645
+TVSecretBaseSecrets_Text_UsedDoll:: @ 08289645
 	.string "The visitor is talking to a DOLL!\p"
 	.string "…It's a little creepy…$"
 
-gTVSecretBaseSecretsText40:: @ 0828967E
+TVSecretBaseSecrets_Text_UsedSlide:: @ 0828967E
 	.string "The visitor is climbing the ladder\n"
 	.string "on a SLIDE!\p"
 	.string "And…\p"
@@ -2346,7 +2346,7 @@ gTVSecretBaseSecretsText40:: @ 0828967E
 	.string "Looks like the visitor is having\n"
 	.string "a grand old time!$"
 
-gTVSecretBaseSecretsText41:: @ 082896FC
+TVSecretBaseSecrets_Text_UsedSlideButDidntGoDown:: @ 082896FC
 	.string "The visitor is climbing the ladder\n"
 	.string "on a SLIDE!\p"
 	.string "And…\p"
@@ -2354,7 +2354,7 @@ gTVSecretBaseSecretsText41:: @ 082896FC
 	.string "the ladder!\p"
 	.string "Did the visitor suddenly chicken out?$"
 
-gTVSecretBaseSecretsText42:: @ 0828977D
+TVSecretBaseSecrets_Text_UsedJumpMat:: @ 0828977D
 	.string "The visitor stepped on\n"
 	.string "a JUMP MAT!\p"
 	.string "The visitor jumped once!\p"
@@ -2694,25 +2694,23 @@ gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "This concludes this episode of\n"
 	.string "“POKéMON BATTLE UPDATE!”$"
 
-Route111_Text_28AF05: @ 0828AF05
+GabbyAndTy_Text_GabbyPreFirstBattle: @ 0828AF05
 	.string "GABBY: Oh! We've just spotted a tough-\n"
 	.string "looking TRAINER here of all places!\p"
 	.string "Okay, roll camera!\n"
 	.string "Let's get this interview.$"
 
-Route111_Text_28AF7D: @ 0828AF7D
-Route118_Text_28AF7D: @ 0828AF7D
-Route120_Text_28AF7D: @ 0828AF7D
+GabbyAndTy_Text_GabbyIntro: @ 0828AF7D
 	.string "GABBY: Oh! You're {PLAYER}! Hi!\n"
 	.string "Do you remember us from last time?\p"
 	.string "Can you show us how much stronger\n"
 	.string "you've become? Okay, cue interview!$"
 
-Route111_Text_28B000: @ 0828B000
+GabbyAndTy_Text_GabbyDefeatFirstTime: @ 0828B000
 	.string "GABBY: My eyes didn't lie!\n"
 	.string "I did discover an astonishing TRAINER!$"
 
-Route111_Text_28B042: @ 0828B042
+GabbyAndTy_Text_WhoAreYouInterview: @ 0828B042
 	.string "GABBY: Awesome! Awesome!\n"
 	.string "Who are you?!\p"
 	.string "I knew we were onto something wild\n"
@@ -2723,19 +2721,19 @@ Route111_Text_28B042: @ 0828B042
 	.string "So, would you give us a bit of your time\n"
 	.string "for an interview?$"
 
-Route111_Text_28B137: @ 0828B137
+GabbyAndTy_Text_QuoteFromLastInterview: @ 0828B137
 	.string "GABBY: “{STR_VAR_1}!”\p"
 	.string "Remember? That's the quote you gave\n"
 	.string "us as the battle clincher last time.\p"
 	.string "I never, ever forget stuff like that!$"
 
-Route111_Text_28B1B3: @ 0828B1B3
+GabbyAndTy_Text_YouStompedUsInterviewAgain: @ 0828B1B3
 	.string "The last time we battled, you stomped\n"
 	.string "us before we could brace ourselves…\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B23D: @ 0828B23D
+GabbyAndTy_Text_YouThrewABallAtUsInterviewAgain: @ 0828B23D
 	.string "The last time we battled, didn't you\n"
 	.string "throw a POKé BALL at us?\p"
 	.string "We were shocked! So we told everyone,\n"
@@ -2743,30 +2741,30 @@ Route111_Text_28B23D: @ 0828B23D
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B2FA: @ 0828B2FA
+GabbyAndTy_Text_CleverItemSkillsInterviewAgain: @ 0828B2FA
 	.string "The last time we battled, your item\n"
 	.string "skills cleverly did us in.\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B379: @ 0828B379
+GabbyAndTy_Text_WeLookedRespectableInterviewAgain: @ 0828B379
 	.string "The last time we battled, we managed\n"
 	.string "to look respectable.\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B3F3: @ 0828B3F3
+GabbyAndTy_Text_InterviewAgain: @ 0828B3F3
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
-Route111_Text_28B433: @ 0828B433
+GabbyAndTy_Text_DescribeYourFeelings: @ 0828B433
 	.string "You will?\n"
 	.string "Thank you!\p"
 	.string "Okay, I need you to describe your\n"
 	.string "feelings about our battle, but it\l"
 	.string "has to be short and sweet. Go!$"
 
-Route111_Text_28B4AB: @ 0828B4AB
+GabbyAndTy_Text_PerfectWellBeSeeingYou: @ 0828B4AB
 	.string "GABBY: Mmm, yeah!\n"
 	.string "That's the perfect clincher!\p"
 	.string "I get the feeling that this will make\n"
@@ -2776,24 +2774,20 @@ Route111_Text_28B4AB: @ 0828B4AB
 	.string "Okay!\n"
 	.string "We'll be seeing you!$"
 
-Route111_Text_28B577: @ 0828B577
+GabbyAndTy_Text_DontGiveUpKeepingEyeOut: @ 0828B577
 	.string "GABBY: Oh…\p"
 	.string "Okay, but don't give up!\n"
 	.string "We'll be keeping an eye out for you!$"
 
-Route111_Text_28B5C0: @ 0828B5C0
-Route118_Text_28B5C0: @ 0828B5C0
-Route120_Text_28B5C0: @ 0828B5C0
+GabbyAndTy_Text_KeepingAnEyeOutForYou: @ 0828B5C0
 	.string "GABBY: We'll be keeping an eye out\n"
 	.string "for you!$"
 
-Route111_Text_28B5EC: @ 0828B5EC
-Route118_Text_28B5EC: @ 0828B5EC
-Route120_Text_28B5EC: @ 0828B5EC
+GabbyAndTy_Text_GabbyNotEnoughMons: @ 0828B5EC
 	.string "GABBY: Is there a strong TRAINER\n"
 	.string "anywhere with a lot of POKéMON?$"
 
-Route111_Text_28B62D: @ 0828B62D
+GabbyAndTy_Text_GiveUsAnInterviewThisTime: @ 0828B62D
 	.string "GABBY: Wow, you are something!\p"
 	.string "You've gotten a lot stronger--a lot--\n"
 	.string "since we last battled.\p"
@@ -2803,46 +2797,36 @@ Route111_Text_28B62D: @ 0828B62D
 	.string "Are you willing to give us an interview\l"
 	.string "this time?$"
 
-Route111_Text_28B719: @ 0828B719
-Route118_Text_28B719: @ 0828B719
-Route120_Text_28B719: @ 0828B719
+GabbyAndTy_Text_GabbyDefeat: @ 0828B719
 	.string "GABBY: That was an intense battle!\n"
 	.string "Did you get all that on camera?$"
 
-Route111_Text_28B75C: @ 0828B75C
+GabbyAndTy_Text_TyPreFirstBattle: @ 0828B75C
 	.string "TY: Hey, lookie here! A tough-looking\n"
 	.string "TRAINER here, of all places!\l"
 	.string "Camera's rolling!$"
 
-Route111_Text_28B7B1: @ 0828B7B1
-Route118_Text_28B7B1: @ 0828B7B1
-Route120_Text_28B7B1: @ 0828B7B1
+GabbyAndTy_Text_TyIntro: @ 0828B7B1
 	.string "TY: Hey, lookie here!\n"
 	.string "I remember you!\p"
 	.string "I'll get this battle all on this\n"
 	.string "here camera!$"
 
-Route111_Text_28B805: @ 0828B805
-Route118_Text_28B805: @ 0828B805
-Route120_Text_28B805: @ 0828B805
+GabbyAndTy_Text_TyPostBattle: @ 0828B805
 	.string "TY: You're a natural!\n"
 	.string "Got me some prime footage right here!$"
 
-Route111_Text_28B841: @ 0828B841
-Route118_Text_28B841: @ 0828B841
-Route120_Text_28B841: @ 0828B841
+GabbyAndTy_Text_TyNotEnoughMons: @ 0828B841
 	.string "TY: Do you only have the one POKéMON\n"
 	.string "and that's it?\p"
 	.string "If you had more POKéMON, it'd make for\n"
 	.string "better footage, but…$"
 
-Route111_Text_28B8B1: @ 0828B8B1
+GabbyAndTy_Text_TyDefeatFirstTime: @ 0828B8B1
 	.string "TY: Yep, we sure spotted a hot TRAINER.\n"
 	.string "This is a huge scoop for us!$"
 
-Route111_Text_28B8F6: @ 0828B8F6
-Route118_Text_28B8F6: @ 0828B8F6
-Route120_Text_28B8F6: @ 0828B8F6
+GabbyAndTy_Text_TyDefeat: @ 0828B8F6
 	.string "TY: Yep, I got it all.\n"
 	.string "That whole battle's on camera.$"
 

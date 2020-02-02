@@ -6,9 +6,9 @@ Common_EventScript_PkmnCenterNurse:: @ 827191E
     compare VAR_RESULT, 4
     goto_if_eq EventScript_PkmnCenterNurse_GoldCard
     msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, NO
     goto_if_eq EventScript_PkmnCenterNurse_Goodbye
     end
 
@@ -38,11 +38,11 @@ EventScript_PkmnCenterNurse_IllTakeYourPkmn2:: @ 827198D
     return
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 8271993
-    applymovement VAR_0x800B, Common_Movement_WalkInPlaceLeft
+    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestLeft
     waitmovement 0
     dofieldeffect FLDEFF_POKECENTER_HEAL
     waitfieldeffect FLDEFF_POKECENTER_HEAL
-    applymovement VAR_0x800B, Common_Movement_WalkInPlaceDown
+    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestDown
     waitmovement 0
     special HealPlayerParty
     return
@@ -91,9 +91,9 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom:: @ 8271A19
 
 EventScript_PkmnCenterNurse_CheckPokerus:: @ 8271A43
     specialvar VAR_RESULT, IsPokerusInParty
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, TRUE
     goto_if_eq EventScript_PkmnCenterNurse_ExplainPokerus
-    compare VAR_RESULT, 0
+    compare VAR_RESULT, FALSE
     goto_if_eq EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom
     end
 
@@ -112,14 +112,14 @@ EventScript_PkmnCenterNurse_GoldCard:: @ 8271A68
     applymovement VAR_0x800B, Common_Movement_Delay48
     waitmovement 0
     msgbox gText_NoticesGoldCard, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq EventScript_PkmnCenterNurse_GoldCardHealPkmn
     message gText_WeHopeToSeeYouAgain2
     return
 
 EventScript_PkmnCenterNurse_AskForUsual:: @ 8271AAC
     msgbox gText_YouWantTheUsual, MSGBOX_YESNO
-    compare VAR_RESULT, 1
+    compare VAR_RESULT, YES
     goto_if_eq EventScript_PkmnCenterNurse_GoldCardHealPkmn
     message gText_WeHopeToSeeYouAgain2
     return

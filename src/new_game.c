@@ -122,8 +122,8 @@ static void ClearFrontierRecord(void)
 {
     CpuFill32(0, &gSaveBlock2Ptr->frontier, sizeof(gSaveBlock2Ptr->frontier));
 
-    gSaveBlock2Ptr->frontier.opponentName[0][0] = EOS;
-    gSaveBlock2Ptr->frontier.opponentName[1][0] = EOS;
+    gSaveBlock2Ptr->frontier.opponentNames[0][0] = EOS;
+    gSaveBlock2Ptr->frontier.opponentNames[1][0] = EOS;
 }
 
 static void WarpToTruck(void)
@@ -150,7 +150,7 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
-    if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
+    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
 
     gDifferentSaveFile = 1;

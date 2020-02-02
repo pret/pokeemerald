@@ -40,3 +40,4 @@ porymap.project.cfg
 *.ss8
 *.ss9
 *.a
+.fuse_hidden*

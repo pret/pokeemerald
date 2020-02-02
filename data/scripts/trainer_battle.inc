@@ -1,3 +1,7 @@
+EventScript_271354:: @ 8271354
+	cmdD8
+	cmdD9
+
 EventScript_ShowSecondTrainerIntro:: @ 8271356
 	special SetUpTrainerEncounterMusic
 	special EndTrainerApproach
@@ -126,3 +130,10 @@ EventScript_EndTrainerBattle:: @ 8271491
 	gotobeatenscript
 	releaseall
 	end
+
+Std_MsgboxAutoclose:: @ 8271494
+	message 0x0
+	waitmessage
+	waitbuttonpress
+	release
+	return

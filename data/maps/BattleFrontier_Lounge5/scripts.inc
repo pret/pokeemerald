@@ -5,9 +5,9 @@ BattleFrontier_Lounge5_EventScript_NatureGirl:: @ 82645C6
 	lock
 	faceplayer
 	msgbox BattleFrontier_Lounge5_Text_NatureGirlGreeting, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown
-	special sub_81B94B0
+	special ChoosePartyMon
 	waitstate
 	lock
 	faceplayer
@@ -32,16 +32,16 @@ BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown:: @ 826460D
 	release
 	end
 
-BattleFrontier_Lounge5_EventScript_264617:: @ 8264617
-	msgbox BattleFrontier_Lounge5_Text_264F22, MSGBOX_NPC
+BattleFrontier_Lounge5_EventScript_Gentleman:: @ 8264617
+	msgbox BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon, MSGBOX_NPC
 	end
 
-BattleFrontier_Lounge5_EventScript_264620:: @ 8264620
-	msgbox BattleFrontier_Lounge5_Text_264F64, MSGBOX_NPC
+BattleFrontier_Lounge5_EventScript_BlackBelt:: @ 8264620
+	msgbox BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound, MSGBOX_NPC
 	end
 
-BattleFrontier_Lounge5_EventScript_264629:: @ 8264629
-	msgbox BattleFrontier_Lounge5_Text_264FAB, MSGBOX_NPC
+BattleFrontier_Lounge5_EventScript_LittleBoy:: @ 8264629
+	msgbox BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge5_Text_NatureGirlGreeting:: @ 8264632
@@ -190,16 +190,16 @@ BattleFrontier_Lounge5_Text_NatureGirlEgg:: @ 8264EEE
 	.string "That's silly! An EGG is asleep!\n"
 	.string "I can't talk to it!$"
 
-BattleFrontier_Lounge5_Text_264F22:: @ 8264F22
+BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon:: @ 8264F22
 	.string "How charming!\n"
 	.string "That little lady claims she can\l"
 	.string "understand POKéMON!$"
 
-BattleFrontier_Lounge5_Text_264F64:: @ 8264F64
+BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound:: @ 8264F64
 	.string "I have this feeling that the little girl\n"
 	.string "is saying something profound.$"
 
-BattleFrontier_Lounge5_Text_264FAB:: @ 8264FAB
+BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot:: @ 8264FAB
 	.string "I know something!\p"
 	.string "That little girl plays at the red house\n"
 	.string "a lot!$"

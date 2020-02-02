@@ -276,48 +276,65 @@ static const u8 sTradeMonSpriteCoords[(PARTY_SIZE * 2) + 1][2] =
     {23, 18} // CANCEL
 };
 
-static const u8 sTradeMonLevelCoords[][PARTY_SIZE][2] =
+static const u8 sTradeMonLevelCoords[][2][2] =
 {
+    // Your party
     {
-        // Your party
         {5, 4},
         {12, 4},
+    },
+    {
         {5, 9},
         {12, 9},
+    },
+    {
         {5, 14},
         {12, 14},
     },
+    // Friend's party
     {
-        // Friend's party
+
         {20, 4},
         {27, 4},
+    },
+    {
         {20, 9},
         {27, 9},
+    },
+    {
         {20, 14},
-        {27, 14}
-    }
+        {27, 14},
+    },
 };
 
-static const u8 sTradeMonBoxCoords[][PARTY_SIZE][2] =
+static const u8 sTradeMonBoxCoords[][2][2] =
 {
+    // Your party
     {
-        // Your party
         {1, 3},
         {8, 3},
+    },
+    {
         {1, 8},
         {8, 8},
+    },
+    {
         {1, 13},
         {8, 13},
     },
+    // Friend's party
     {
-        // Friend's party
         {16, 3},
         {23, 3},
+    },
+    {
         {16, 8},
         {23, 8},
+    },
+    {
         {16, 13},
-        {23, 13}
-    }
+        {23, 13},
+    },
 };
 
 static const u8 sUnref_0832DE6E[] =
@@ -633,7 +650,7 @@ static const u32 sTradeTilemap_WirelessSignal[] = INCBIN_U32("graphics/trade/wir
 
 static const struct OamData sTradeOamData_16x16 =
 {
-    .affineMode = 1,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16)
 };
@@ -735,8 +752,8 @@ static const struct SpriteTemplate gSpriteTemplate_8338D28 =
 
 static const struct OamData sTradeOamData_32x32 =
 {
-    .affineMode = 1,
-    .objMode = 1,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_BLEND,
     .shape = SPRITE_SHAPE(32x32),
     .size = SPRITE_SIZE(32x32),
     .priority = 1

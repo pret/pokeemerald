@@ -201,14 +201,6 @@ enum
 };
 
 enum {
-    CONTEST_RANK_NORMAL,
-    CONTEST_RANK_SUPER,
-    CONTEST_RANK_HYPER,
-    CONTEST_RANK_MASTER,
-    CONTEST_RANK_LINK
-};
-
-enum {
     CONTEST_FILTER_NONE,
     CONTEST_FILTER_NO_POSTGAME,
     CONTEST_FILTER_ONLY_POSTGAME
@@ -436,15 +428,15 @@ struct ContestResources
 #define eContestDebugMode (gHeap[0x1a000])
 #define eUnknownHeap1A004 (*(struct Shared1A004 *)(gHeap + 0x1a004))
 
-extern struct ContestPokemon gContestMons[4];
-extern s16 gContestMonConditions[4];
-extern s16 gUnknown_02039F08[4];
-extern s16 gUnknown_02039F10[4];
-extern s16 gUnknown_02039F18[4];
-extern u8 gContestFinalStandings[4];
+extern struct ContestPokemon gContestMons[CONTESTANT_COUNT];
+extern s16 gContestMonConditions[CONTESTANT_COUNT];
+extern s16 gUnknown_02039F08[CONTESTANT_COUNT];
+extern s16 gUnknown_02039F10[CONTESTANT_COUNT];
+extern s16 gUnknown_02039F18[CONTESTANT_COUNT];
+extern u8 gContestFinalStandings[CONTESTANT_COUNT];
 extern u8 gContestMonPartyIndex;
 extern u8 gContestPlayerMonIndex;
-extern u8 gContestantTurnOrder[4];
+extern u8 gContestantTurnOrder[CONTESTANT_COUNT];
 extern u8 gLinkContestFlags;
 extern u8 gUnknown_02039F2B;
 extern u16 gSpecialVar_ContestCategory;
@@ -453,7 +445,7 @@ extern u8 gNumLinkContestPlayers;
 extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
 extern u8 sContestBgCopyFlags;
-extern struct ContestWinner gUnknown_02039F3C;
+extern struct ContestWinner gCurContestWinner;
 extern u8 gUnknown_02039F5C;
 extern u8 gUnknown_02039F5D;
 
@@ -466,7 +458,7 @@ void CB2_StartContest(void);
 void sub_80DA8C8(u8 partyIndex);
 void sub_80DAB8C(u8 contestType, u8 rank);
 void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);
-u8 sub_80DAE0C(struct Pokemon *pkmn);
+u8 GetContestEntryEligibility(struct Pokemon *pkmn);
 void sub_80DB09C(u8 contestCategory);
 bool8 IsSpeciesNotUnown(u16 species);
 bool8 Contest_IsMonsTurnDisabled(u8 a);

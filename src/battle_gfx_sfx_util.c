@@ -811,7 +811,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *battlerId)
         break;
     case 6:
         LoadAndCreateEnemyShadowSprites();
-        sub_81B8C68();
+        BufferBattlePartyCurrentOrder();
         retVal = TRUE;
         break;
     }
@@ -1061,8 +1061,8 @@ void HandleBattleLowHpMusicChange(void)
     {
         u8 playerBattler1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
         u8 playerBattler2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-        u8 battler1PartyId = pokemon_order_func(gBattlerPartyIndexes[playerBattler1]);
-        u8 battler2PartyId = pokemon_order_func(gBattlerPartyIndexes[playerBattler2]);
+        u8 battler1PartyId = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[playerBattler1]);
+        u8 battler2PartyId = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[playerBattler2]);
 
         if (GetMonData(&gPlayerParty[battler1PartyId], MON_DATA_HP) != 0)
             HandleLowHpMusicChange(&gPlayerParty[battler1PartyId], playerBattler1);

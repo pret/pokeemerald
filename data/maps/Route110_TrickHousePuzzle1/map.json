@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "6",
-      "script": "Route110_TrickHousePuzzle1_EventScript_26B948",
+      "script": "Route110_TrickHousePuzzle1_EventScript_Sally",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route110_TrickHousePuzzle1_EventScript_26B95F",
+      "script": "Route110_TrickHousePuzzle1_EventScript_Eddie",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route110_TrickHousePuzzle1_EventScript_26B976",
+      "script": "Route110_TrickHousePuzzle1_EventScript_Robin",
       "flag": "0"
     },
     {
@@ -241,7 +241,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route110_TrickHousePuzzle1_EventScript_26B92B"
+      "script": "Route110_TrickHousePuzzle1_EventScript_Scroll"
     }
   ]
 }

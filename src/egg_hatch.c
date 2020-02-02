@@ -83,10 +83,10 @@ static const u8 sEggShardTiles[] = INCBIN_U8("graphics/misc/egg_shard.4bpp");
 static const struct OamData sOamData_EggHatch =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
@@ -163,10 +163,10 @@ static const struct SpriteTemplate sSpriteTemplate_EggHatch =
 static const struct OamData sOamData_EggShard =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
@@ -461,7 +461,7 @@ void EggHatch(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_EggHatch, 10);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 static void Task_EggHatch(u8 taskID)
@@ -470,7 +470,7 @@ static void Task_EggHatch(u8 taskID)
     {
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_EggHatch_0);
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskID);
     }
 }

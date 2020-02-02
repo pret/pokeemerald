@@ -35,7 +35,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route101_EventScript_1EBDFB",
+      "script": "Route101_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -61,7 +61,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route101_EventScript_1EBE16",
+      "script": "Route101_EventScript_BirchsBag",
       "flag": "FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG"
     },
     {
@@ -87,7 +87,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route101_EventScript_272141",
+      "script": "ProfBirch_EventScript_RatePokedexOrRegister",
       "flag": "FLAG_HIDE_ROUTE_101_BIRCH"
     },
     {
@@ -100,7 +100,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route101_EventScript_1EBE04",
+      "script": "Route101_EventScript_Boy",
       "flag": "FLAG_HIDE_ROUTE_101_BOY"
     }
   ],
@@ -113,7 +113,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "1",
-      "script": "Route101_EventScript_1EBCDE"
+      "script": "Route101_EventScript_StartBirchRescue"
     },
     {
       "type": "trigger",
@@ -122,7 +122,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "1",
-      "script": "Route101_EventScript_1EBCDE"
+      "script": "Route101_EventScript_StartBirchRescue"
     },
     {
       "type": "trigger",
@@ -131,7 +131,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
-      "script": "Route101_EventScript_1EBD4E"
+      "script": "Route101_EventScript_PreventExitSouth"
     },
     {
       "type": "trigger",
@@ -140,7 +140,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
-      "script": "Route101_EventScript_1EBD4E"
+      "script": "Route101_EventScript_PreventExitSouth"
     },
     {
       "type": "trigger",
@@ -149,7 +149,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
-      "script": "Route101_EventScript_1EBD64"
+      "script": "Route101_EventScript_PreventExitWest"
     },
     {
       "type": "trigger",
@@ -158,7 +158,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
-      "script": "Route101_EventScript_1EBD64"
+      "script": "Route101_EventScript_PreventExitWest"
     },
     {
       "type": "trigger",
@@ -167,7 +167,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
-      "script": "Route101_EventScript_1EBD64"
+      "script": "Route101_EventScript_PreventExitWest"
     },
     {
       "type": "trigger",
@@ -176,7 +176,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
-      "script": "Route101_EventScript_1EBD64"
+      "script": "Route101_EventScript_PreventExitWest"
     },
     {
       "type": "trigger",
@@ -185,7 +185,7 @@
       "elevation": 3,
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
-      "script": "Route101_EventScript_1EBD7A"
+      "script": "Route101_EventScript_PreventExitNorth"
     }
   ],
   "bg_events": [
@@ -195,7 +195,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route101_EventScript_1EBE0D"
+      "script": "Route101_EventScript_RouteSign"
     }
   ]
 }

@@ -22,1052 +22,117 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "constants/apprentice.h"
+#include "constants/battle_frontier.h"
+#include "constants/easy_chat.h"
 #include "constants/items.h"
+#include "constants/pokemon.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/trainers.h"
 #include "constants/moves.h"
 
+/* Summary of Apprentice, because (as of writing at least) its not very well documented online
+ *
+ * ## Basic info
+ * In the Battle Tower lobby there is an NPC which asks to be taught by the player
+ * They can be any 1 of 16 NPC trainers, each with their own name, class, and set of possible party species
+ * They ask the player a series of questions once per day, and eventually depart the lobby to be replaced by a new Apprentice
+ *
+ * ## Initial Questions
+ * The first question they always ask is a request to be taught, which cannot be rejected
+ * The second question (which follows immediately after) is whether they should participate in Battle Tower Lv 50 or Open Lv
+ * After these opening questions they always ask the player to choose between 2 mons, which they repeat 3 times
+ *
+ * ## Random Questions
+ * After choosing 3 mons for them, the Apprentice will randomly ask between 1 and 8 questions of 4 different types, as follows
+ * - Asking which mon to lead with, which they will only ask at most once
+ * - Asking which move a mon should use, which they will ask at most 5 times
+ * - Asking what held item to give to a mon, which they will ask at most 3 times (once for each mon)
+ * - Asking what they should say when they win a battle, which will always be their final question before departing
+ * 
+ * ## After departing
+ * After telling them what they should say when they win a battle they will leave the lobby for a final time
+ * They will then be replaced by a new random Apprentice (they can repeat)
+ * Up to 4 old Apprentices are saved and can be encountered (or partnered with) during challenges of the mode they were told to battle in
+ * They can also be record mixed to and from other Emerald games
+ * Old/record mixed Apprentices are stored in struct Apprentice apprentices of SaveBlock2
+ *   and the current Apprentice is stored in struct PlayersApprentice playerApprentice of SaveBlock2
+ */
+
 #define PLAYER_APPRENTICE gSaveBlock2Ptr->playerApprentice
+#define CURRENT_QUESTION_NUM  PLAYER_APPRENTICE.questionsAnswered - NUM_WHICH_MON_QUESTIONS
 
-struct Unk030062ECStruct
+struct ApprenticePartyMovesData
 {
-    u8 unk0;
-    u16 unk2[3][5];
-    u8 unk20[3][5];
+    u8 moveCounter;
+    u16 moves[MULTI_PARTY_SIZE][NUM_WHICH_MOVE_QUESTIONS];
+    u8 moveSlots[MULTI_PARTY_SIZE][NUM_WHICH_MOVE_QUESTIONS];
 };
 
-struct Unk030062F0Struct
+struct ApprenticeQuestionData
 {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
+    u16 speciesId;
+    u16 altSpeciesId;
+    u16 moveId1;
+    u16 moveId2;
 };
-
-// data/scripts/apprentice.inc
-extern const u8 gText_082B7229[];
-extern const u8 gText_082B731C[];
-extern const u8 gText_082B735B[];
-extern const u8 gText_082B7423[];
-extern const u8 gText_082B74C1[];
-extern const u8 gText_082B756F[];
-extern const u8 gText_082B75B2[];
-extern const u8 gText_082B763F[];
-extern const u8 gText_082B76AC[];
-extern const u8 gText_082B7772[];
-extern const u8 gText_082B77CE[];
-extern const u8 gText_082B7871[];
-extern const u8 gText_082B78D4[];
-extern const u8 gText_082B7B1A[];
-extern const u8 gText_082B7C13[];
-extern const u8 gText_082B7D18[];
-extern const u8 gText_082B7DD4[];
-extern const u8 gText_082B7EE5[];
-extern const u8 gText_082B7F35[];
-extern const u8 gText_082B7FE8[];
-extern const u8 gText_082B8087[];
-extern const u8 gText_082B822B[];
-extern const u8 gText_082B8286[];
-extern const u8 gText_082B8356[];
-extern const u8 gText_082B83CE[];
-extern const u8 gText_082B84FC[];
-extern const u8 gText_082B8559[];
-extern const u8 gText_082B8656[];
-extern const u8 gText_082B86EA[];
-extern const u8 gText_082B87DA[];
-extern const u8 gText_082B887C[];
-extern const u8 gText_082B8957[];
-extern const u8 gText_082B89C6[];
-extern const u8 gText_082B8ACF[];
-extern const u8 gText_082B8B66[];
-extern const u8 gText_082B8C20[];
-extern const u8 gText_082B8CAA[];
-extern const u8 gText_082B8DD3[];
-extern const u8 gText_082B8E24[];
-extern const u8 gText_082B8ED5[];
-extern const u8 gText_082B8F45[];
-extern const u8 gText_082B905F[];
-extern const u8 gText_082B910E[];
-extern const u8 gText_082B9204[];
-extern const u8 gText_082B929C[];
-extern const u8 gText_082B9438[];
-extern const u8 gText_082B9488[];
-extern const u8 gText_082B9564[];
-extern const u8 gText_082B95D8[];
-extern const u8 gText_082B9763[];
-extern const u8 gText_082B97E5[];
-extern const u8 gText_082B989A[];
-extern const u8 gText_082B992D[];
-extern const u8 gText_082B9A84[];
-extern const u8 gText_082B9AB9[];
-extern const u8 gText_082B9B76[];
-extern const u8 gText_082B9BF2[];
-extern const u8 gText_082B9D83[];
-extern const u8 gText_082B9DF9[];
-extern const u8 gText_082B9EAA[];
-extern const u8 gText_082B9F55[];
-extern const u8 gText_082BA084[];
-extern const u8 gText_082BA11D[];
-extern const u8 gText_082BA1F3[];
-
-extern const u8 gText_082BE50D[];
-extern const u8 gText_082BE5F5[];
-extern const u8 gText_082BE679[];
-extern const u8 gText_082BE71E[];
-extern const u8 gText_082BE762[];
-extern const u8 gText_082BE7F8[];
-extern const u8 gText_082BE850[];
-extern const u8 gText_082BE99C[];
-extern const u8 gText_082BEA1B[];
-extern const u8 gText_082BEAE9[];
-extern const u8 gText_082BEB72[];
-extern const u8 gText_082BEC8E[];
-extern const u8 gText_082BED16[];
-extern const u8 gText_082BEE29[];
-extern const u8 gText_082BEEB4[];
-extern const u8 gText_082BEFE2[];
-extern const u8 gText_082BF04E[];
-extern const u8 gText_082BF11D[];
-extern const u8 gText_082BF1A8[];
-extern const u8 gText_082BF268[];
-extern const u8 gText_082BF2D1[];
-extern const u8 gText_082BF3CF[];
-extern const u8 gText_082BF46A[];
-extern const u8 gText_082BF551[];
-extern const u8 gText_082BF5C3[];
-extern const u8 gText_082BF6E5[];
-extern const u8 gText_082BF773[];
-extern const u8 gText_082BF869[];
-extern const u8 gText_082BF8DD[];
-extern const u8 gText_082BF9BA[];
-extern const u8 gText_082BFA5A[];
-extern const u8 gText_082BFB4E[];
-
-extern const u8 gText_082BA2A3[];
-extern const u8 gText_082BA34E[];
-extern const u8 gText_082BA380[];
-extern const u8 gText_082BA3D2[];
-extern const u8 gText_082BA448[];
-extern const u8 gText_082BA4D3[];
-extern const u8 gText_082BA58C[];
-extern const u8 gText_082BA5BF[];
-extern const u8 gText_082BA5F3[];
-extern const u8 gText_082BA635[];
-extern const u8 gText_082BA6E6[];
-extern const u8 gText_082BA742[];
-extern const u8 gText_082BA770[];
-extern const u8 gText_082BA78F[];
-extern const u8 gText_082BA7D8[];
-extern const u8 gText_082BA867[];
-extern const u8 gText_082BA96B[];
-extern const u8 gText_082BA9B7[];
-extern const u8 gText_082BAA1B[];
-extern const u8 gText_082BAA81[];
-extern const u8 gText_082BAB22[];
-extern const u8 gText_082BAC43[];
-extern const u8 gText_082BAC78[];
-extern const u8 gText_082BAD17[];
-extern const u8 gText_082BADB6[];
-extern const u8 gText_082BAE36[];
-extern const u8 gText_082BAF4E[];
-extern const u8 gText_082BAF8F[];
-extern const u8 gText_082BAFDB[];
-extern const u8 gText_082BB05F[];
-extern const u8 gText_082BB0D4[];
-extern const u8 gText_082BB18C[];
-extern const u8 gText_082BB1CE[];
-extern const u8 gText_082BB242[];
-extern const u8 gText_082BB2D9[];
-extern const u8 gText_082BB370[];
-extern const u8 gText_082BB4C3[];
-extern const u8 gText_082BB4FB[];
-extern const u8 gText_082BB575[];
-extern const u8 gText_082BB5E1[];
-extern const u8 gText_082BB656[];
-extern const u8 gText_082BB6E5[];
-extern const u8 gText_082BB72C[];
-extern const u8 gText_082BB7A2[];
-extern const u8 gText_082BB84A[];
-extern const u8 gText_082BB8CD[];
-extern const u8 gText_082BB970[];
-extern const u8 gText_082BB9AE[];
-extern const u8 gText_082BBA05[];
-extern const u8 gText_082BBA6C[];
-extern const u8 gText_082BBB01[];
-extern const u8 gText_082BBC1C[];
-extern const u8 gText_082BBC4B[];
-extern const u8 gText_082BBCF6[];
-extern const u8 gText_082BBD90[];
-extern const u8 gText_082BBE0B[];
-extern const u8 gText_082BBEE5[];
-extern const u8 gText_082BBF25[];
-extern const u8 gText_082BBFA4[];
-extern const u8 gText_082BC024[];
-extern const u8 gText_082BC0C8[];
-extern const u8 gText_082BC213[];
-extern const u8 gText_082BC247[];
-extern const u8 gText_082BC2DD[];
-extern const u8 gText_082BC373[];
-extern const u8 gText_082BC40E[];
-extern const u8 gText_082BC514[];
-extern const u8 gText_082BC555[];
-extern const u8 gText_082BC5CE[];
-extern const u8 gText_082BC666[];
-extern const u8 gText_082BC714[];
-extern const u8 gText_082BC808[];
-extern const u8 gText_082BC84D[];
-extern const u8 gText_082BC8EA[];
-extern const u8 gText_082BC984[];
-extern const u8 gText_082BCA4D[];
-extern const u8 gText_082BCB75[];
-extern const u8 gText_082BCBA6[];
-extern const u8 gText_082BCBFC[];
-extern const u8 gText_082BCCA4[];
-
-extern const u8 gText_082BFBF2[];
-extern const u8 gText_082BFCAE[];
-extern const u8 gText_082BFD26[];
-extern const u8 gText_082BFDB1[];
-extern const u8 gText_082BFE24[];
-extern const u8 gText_082BFEAD[];
-extern const u8 gText_082BFF0A[];
-extern const u8 gText_082C0032[];
-extern const u8 gText_082C0090[];
-extern const u8 gText_082C016E[];
-extern const u8 gText_082C01F7[];
-extern const u8 gText_082C034C[];
-extern const u8 gText_082C03CA[];
-extern const u8 gText_082C046E[];
-extern const u8 gText_082C04F9[];
-extern const u8 gText_082C0598[];
-extern const u8 gText_082C0602[];
-extern const u8 gText_082C06D8[];
-extern const u8 gText_082C074A[];
-extern const u8 gText_082C0809[];
-extern const u8 gText_082C086E[];
-extern const u8 gText_082C0982[];
-extern const u8 gText_082C0A1D[];
-extern const u8 gText_082C0AFD[];
-extern const u8 gText_082C0B6F[];
-extern const u8 gText_082C0C7D[];
-extern const u8 gText_082C0D0B[];
-extern const u8 gText_082C0DFE[];
-extern const u8 gText_082C0E71[];
-extern const u8 gText_082C0F6D[];
-extern const u8 gText_082C1003[];
-extern const u8 gText_082C1122[];
-
-extern const u8 gText_082BCD68[];
-extern const u8 gText_082BCE64[];
-extern const u8 gText_082BCEF2[];
-extern const u8 gText_082BCF61[];
-extern const u8 gText_082BCFA1[];
-extern const u8 gText_082BD03C[];
-extern const u8 gText_082BD06D[];
-extern const u8 gText_082BD18A[];
-extern const u8 gText_082BD222[];
-extern const u8 gText_082BD325[];
-extern const u8 gText_082BD3B1[];
-extern const u8 gText_082BD493[];
-extern const u8 gText_082BD51C[];
-extern const u8 gText_082BD609[];
-extern const u8 gText_082BD697[];
-extern const u8 gText_082BD797[];
-extern const u8 gText_082BD806[];
-extern const u8 gText_082BD8F5[];
-extern const u8 gText_082BD9BE[];
-extern const u8 gText_082BDAE1[];
-extern const u8 gText_082BDB4E[];
-extern const u8 gText_082BDC6B[];
-extern const u8 gText_082BDD0D[];
-extern const u8 gText_082BDDEC[];
-extern const u8 gText_082BDE68[];
-extern const u8 gText_082BDF4D[];
-extern const u8 gText_082BDFD8[];
-extern const u8 gText_082BE0FD[];
-extern const u8 gText_082BE189[];
-extern const u8 gText_082BE2A5[];
-extern const u8 gText_082BE33E[];
-extern const u8 gText_082BE46C[];
-
-extern const u8 gText_082C11D1[];
-extern const u8 gText_082C12D5[];
-extern const u8 gText_082C13AB[];
-extern const u8 gText_082C1444[];
-extern const u8 gText_082C1501[];
-extern const u8 gText_082C15B6[];
-extern const u8 gText_082C165E[];
-extern const u8 gText_082C174F[];
-extern const u8 gText_082C1862[];
-extern const u8 gText_082C19A0[];
-extern const u8 gText_082C1A76[];
-extern const u8 gText_082C1C16[];
-extern const u8 gText_082C1CF5[];
-extern const u8 gText_082C1DC1[];
-extern const u8 gText_082C1EDC[];
-extern const u8 gText_082C1FEC[];
-extern const u8 gText_082C20D1[];
-extern const u8 gText_082C21FF[];
-extern const u8 gText_082C231C[];
-extern const u8 gText_082C2407[];
-extern const u8 gText_082C24B5[];
-extern const u8 gText_082C25B1[];
-extern const u8 gText_082C2707[];
-extern const u8 gText_082C27D4[];
-extern const u8 gText_082C28D6[];
-extern const u8 gText_082C2A0B[];
-extern const u8 gText_082C2B50[];
-extern const u8 gText_082C2C77[];
-extern const u8 gText_082C2D67[];
-extern const u8 gText_082C2E41[];
-extern const u8 gText_082C2EF5[];
-extern const u8 gText_082C3023[];
-
-extern const u8 gText_082B6EA5[];
-extern const u8 gText_082B6EEC[];
-extern const u8 gText_082B6F16[];
-extern const u8 gText_082B6F4C[];
-extern const u8 gText_082B6F92[];
-extern const u8 gText_082B6FC9[];
-extern const u8 gText_082B700C[];
-extern const u8 gText_082B703A[];
-extern const u8 gText_082B706A[];
-extern const u8 gText_082B709C[];
-extern const u8 gText_082B70CC[];
-extern const u8 gText_082B710A[];
-extern const u8 gText_082B714D[];
-extern const u8 gText_082B7185[];
-extern const u8 gText_082B71C1[];
-extern const u8 gText_082B71F9[];
 
 // IWRAM common
-struct Unk030062ECStruct *gUnknown_030062EC;
-struct Unk030062F0Struct *gUnknown_030062F0;
-void (*gUnknown_030062F4)(void);
+struct ApprenticePartyMovesData *gApprenticePartyMovesData;
+struct ApprenticeQuestionData *gApprenticeQuestionData;
+void (*gApprenticeFunc)(void);
 
 // This file's functions.
-static u16 sub_819FF98(u8 arg0);
-static bool8 sub_81A0194(u8 arg0, u16 moveId);
+static u16 GetRandomAlternateMove(u8 monId);
+static bool8 TrySetMove(u8 monId, u16 moveId);
 static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId);
 static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
 static void RemoveAndHideWindow(u8 windowId);
 static void ExecuteFuncAfterButtonPress(void (*func)(void));
 
-static void Script_IsPlayersApprenticeActive(void);
-static void Script_SetPlayersApprenticeLvlMode(void);
-static void sub_81A0978(void);
-static void sub_819FC60(void);
-static void sub_81A0984(void);
-static void sub_81A0990(void);
-static void sub_81A09D0(void);
+static void Script_GivenApprenticeLvlMode(void);
+static void Script_SetApprenticeLvlMode(void);
+static void Script_SetApprenticeId(void);
+static void ShuffleApprenticeSpecies(void);
+static void Script_SetRandomQuestionData(void);
+static void IncrementQuestionsAnswered(void);
+static void IsFinalQuestion(void);
 static void Script_CreateApprenticeMenu(void);
-static void Script_PrintMessage(void);
+static void Script_PrintApprenticeMessage(void);
 static void Script_ResetPlayerApprentice(void);
-static void sub_81A1638(void);
-static void sub_81A0CC0(void);
-static void sub_81A09B4(void);
-static void sub_81A0D40(void);
-static void sub_81A0DD4(void);
-static void sub_81A0FE4(void);
-static void sub_81A0FFC(void);
-static void sub_81A0D80(void);
-static void sub_81A11F8(void);
-static void sub_81A1218(void);
-static void sub_81A1224(void);
-static void sub_81A1438(void);
-static void sub_81A150C(void);
-static void Script_SetPlayerApprenticeTrainerGfxId(void);
-static void sub_81A1644(void);
-static void sub_81A1370(void);
+static void GetShouldCheckApprenticeGone(void);
+static void ApprenticeGetQuestion(void);
+static void GetNumApprenticePartyMonsAssigned(void);
+static void SetApprenticePartyMon(void);
+static void InitQuestionData(void);
+static void FreeQuestionData(void);
+static void ApprenticeBufferString(void);
+static void SetApprenticeMonMove(void);
+static void SetLeadApprenticeMon(void);
+static void Script_ApprenticeOpenBagMenu(void);
+static void TrySetApprenticeHeldItem(void);
+static void SaveApprentice(void);
+static void SetSavedApprenticeTrainerGfxId(void);
+static void SetPlayerApprenticeTrainerGfxId(void);
+static void GetShouldApprenticeLeave(void);
+static void ShiftSavedApprentices(void);
 
-// rodata
+#include "data/battle_frontier/apprentice.h"
 
-const struct ApprenticeTrainer gApprentices[] =
+void BufferApprenticeChallengeText(u8 saveApprenticeId)
 {
-    {
-        .name = {_("サダヒロ"), _("ALANN"), _("ALAIN"), _("ADELFO"), _("CLAUS"), _("TEO")},
-        .otId = 0xBDC9,
-        .facilityClass = 0x43,
-        .species = {SPECIES_BEAUTIFLY, SPECIES_DUSTOX, SPECIES_ILLUMISE, SPECIES_SHIFTRY, SPECIES_BRELOOM, SPECIES_NINJASK, SPECIES_SHEDINJA, SPECIES_PINSIR, SPECIES_HERACROSS, SPECIES_VOLBEAT},
-        .id = 0,
-        .easyChatWords = {0x81D, 0x143E, 0xC00, 0xA01, 0x630, 0x1444},
-    },
-    {
-        .name = {_("ヒロオ"), _("LIONEL"), _("LIONEL"), _("CAIO"), _("LUDWIG"), _("LEO")},
-        .otId = 0xCF09,
-        .facilityClass = 0x2B,
-        .species = {SPECIES_SWELLOW, SPECIES_SWALOT, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_TORKOAL, SPECIES_HARIYAMA, SPECIES_MIGHTYENA, SPECIES_LUDICOLO, SPECIES_CRAWDAUNT, SPECIES_WHISCASH},
-        .id = 1,
-        .easyChatWords = {0xC38, 0xA01, 0x630, 0xA06, 0x1020, 0x2213},
-    },
-    {
-        .name = {_("ケイジ"), _("SONNY"), _("HERVE"), _("FEDRO"), _("WENZEL"), _("SANTI")},
-        .otId = 0x2E34,
-        .facilityClass = 0x26,
-        .species = {SPECIES_LINOONE, SPECIES_MIGHTYENA, SPECIES_WHISCASH, SPECIES_ZANGOOSE, SPECIES_SEVIPER, SPECIES_NINETALES, SPECIES_KECLEON, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_MACHAMP},
-        .id = 2,
-        .easyChatWords = {0xA01, 0x160A, 0xE15, 0x630, 0xC3B, 0xC04},
-    },
-    {
-        .name = {_("ユラ"), _("LAYLA"), _("LAYLA"), _("ASTRID"), _("SONJA"), _("LOLA")},
-        .otId = 0x84EF,
-        .facilityClass = 0x47,
-        .species = {SPECIES_SWALOT, SPECIES_XATU, SPECIES_ALTARIA, SPECIES_GOLDUCK, SPECIES_FLYGON, SPECIES_ALAKAZAM, SPECIES_GARDEVOIR, SPECIES_WAILORD, SPECIES_GRUMPIG, SPECIES_MIGHTYENA},
-        .id = 3,
-        .easyChatWords = {0x100B, 0x1E0F, 0x1039, 0x1421, 0xC03, 0xFFFF},
-    },
-    {
-        .name = {_("ヨウカ"), _("MACY"), _("AMELIE"), _("CLEO"), _("MARIA"), _("ELISA")},
-        .otId = 0x1E43,
-        .facilityClass = 0x27,
-        .species = {SPECIES_WIGGLYTUFF, SPECIES_LINOONE, SPECIES_KINGDRA, SPECIES_DELCATTY, SPECIES_RAICHU, SPECIES_FEAROW, SPECIES_STARMIE, SPECIES_MEDICHAM, SPECIES_SHIFTRY, SPECIES_BEAUTIFLY},
-        .id = 4,
-        .easyChatWords = {0x1E0F, 0x1014, 0x1006, 0x280F, 0x1C1C, 0x1C13},
-    },
-    {
-        .name = {_("ヤスシ"), _("DONTE"), _("BRAHIM"), _("GLAUCO"), _("JOSEF"), _("ROQUE")},
-        .otId = 0x379F,
-        .facilityClass = 0x30,
-        .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_AGGRON, SPECIES_MAGNETON, SPECIES_MACHAMP, SPECIES_ARMALDO, SPECIES_HERACROSS, SPECIES_NOSEPASS, SPECIES_EXPLOUD, SPECIES_MIGHTYENA},
-        .id = 5,
-        .easyChatWords = {0xA29, 0x1408, 0x102F, 0x1638, 0x820, 0xC00},
-    },
-    {
-        .name = {_("ミサオ"), _("AMIRA"), _("LAURE"), _("DAFNE"), _("AMELIE"), _("LARA")},
-        .otId = 0xF555,
-        .facilityClass = 0x31,
-        .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_MAGNETON, SPECIES_MEDICHAM, SPECIES_MIGHTYENA, SPECIES_GLALIE, SPECIES_GOLEM, SPECIES_ELECTRODE, SPECIES_PELIPPER, SPECIES_SHARPEDO},
-        .id = 6,
-        .easyChatWords = {0xC0B, 0x123E, 0xC00, 0xA31, 0x1430, 0xC00},
-    },
-    {
-        .name = {_("カズサ"), _("KALI"), _("JODIE"), _("ILENIA"), _("KARO"), _("ELSA")},
-        .otId = 0x8D26,
-        .facilityClass = 0x14,
-        .species = {SPECIES_NINETALES, SPECIES_ALAKAZAM, SPECIES_SCEPTILE, SPECIES_SALAMENCE, SPECIES_GOLDUCK, SPECIES_MAWILE, SPECIES_WEEZING, SPECIES_LANTURN, SPECIES_GARDEVOIR, SPECIES_MILOTIC},
-        .id = 7,
-        .easyChatWords = {0xA06, 0x620, 0xA1F, 0xA02, 0xC03, 0xFFFF},
-    },
-    {
-        .name = {_("スミレ"), _("ANNIE"), _("ANNIE"), _("IMELDA"), _("INES"), _("ROSA")},
-        .otId = 0x800C,
-        .facilityClass = 0xD,
-        .species = {SPECIES_SCEPTILE, SPECIES_VILEPLUME, SPECIES_BELLOSSOM, SPECIES_ROSELIA, SPECIES_CORSOLA, SPECIES_FLYGON, SPECIES_BRELOOM, SPECIES_MILOTIC, SPECIES_ALTARIA, SPECIES_CRADILY},
-        .id = 8,
-        .easyChatWords = {0x1E22, 0x433, 0x20E, 0xA02, 0x101E, 0xC00},
-    },
-    {
-        .name = {_("アキノリ"), _("DILLEN"), _("RENE"), _("INDRO"), _("DETLEF"), _("PEDRO")},
-        .otId = 0x469f,
-        .facilityClass = 0,
-        .species = {SPECIES_SKARMORY, SPECIES_GOLEM, SPECIES_BLAZIKEN, SPECIES_CAMERUPT, SPECIES_DONPHAN, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_TROPIUS, SPECIES_SOLROCK, SPECIES_RHYDON},
-        .id = 9,
-        .easyChatWords = {0xA3D, 0x1011, 0xE1E, 0x201C, 0xC04, 0xFFFF},
-    },
-    {
-        .name = {_("トウゾウ"), _("DALLAS"), _("BRUNO"), _("LEARCO"), _("ANSGAR"), _("MANOLO")},
-        .otId = 0x71FC,
-        .facilityClass = 0x2D,
-        .species = {SPECIES_SEAKING, SPECIES_STARMIE, SPECIES_GOLDUCK, SPECIES_TENTACRUEL, SPECIES_OCTILLERY, SPECIES_GOREBYSS, SPECIES_GLALIE, SPECIES_WAILORD, SPECIES_SHARPEDO, SPECIES_KINGDRA},
-        .id = 10,
-        .easyChatWords = {0xA05, 0x606, 0x160E, 0xA14, 0xC00, 0xFFFF},
-    },
-    {
-        .name = {_("セイヤ"), _("FRANK"), _("FRANK"), _("OLINDO"), _("FRANK"), _("MAURO")},
-        .otId = 0xA39E,
-        .facilityClass = 0x3A,
-        .species = {SPECIES_QUAGSIRE, SPECIES_STARMIE, SPECIES_PELIPPER, SPECIES_CRAWDAUNT, SPECIES_WAILORD, SPECIES_GYARADOS, SPECIES_SWAMPERT, SPECIES_LANTURN, SPECIES_WHISCASH, SPECIES_SHUCKLE},
-        .id = 11,
-        .easyChatWords = {0x280E, 0x103D, 0x240F, 0xA14, 0x1E23, 0x1024},
-    },
-    {
-        .name = {_("リュウジ"), _("LAMONT"), _("XAV"), _("ORFEO"), _("JÜRGEN"), _("JORGE")},
-        .otId = 0xE590,
-        .facilityClass = 0x19,
-        .species = {SPECIES_ABSOL, SPECIES_CROBAT, SPECIES_EXPLOUD, SPECIES_MAGNETON, SPECIES_SHARPEDO, SPECIES_MANECTRIC, SPECIES_METAGROSS, SPECIES_ELECTRODE, SPECIES_NOSEPASS, SPECIES_WEEZING},
-        .id = 12,
-        .easyChatWords = {0x1020, 0x62E, 0x100B, 0x1E22, 0x1E0F, 0x100B},
-    },
-    {
-        .name = {_("カツアキ"), _("TYRESE"), _("ANDY"), _("PARIDE"), _("DAVID"), _("CHICHO")},
-        .otId = 0xD018,
-        .facilityClass = 10,
-        .species = {SPECIES_BLAZIKEN, SPECIES_GOLEM, SPECIES_MACHAMP, SPECIES_RHYDON, SPECIES_HARIYAMA, SPECIES_AGGRON, SPECIES_MEDICHAM, SPECIES_ZANGOOSE, SPECIES_VIGOROTH, SPECIES_SLAKING},
-        .id = 13,
-        .easyChatWords = {0xA29, 0x63A, 0xE15, 0x1435, 0x1034, 0x61E},
-    },
-    {
-        .name = {_("トシミツ"), _("DANTE"), _("DANTE"), _("RAOUL"), _("LOTHAR"), _("PABLO")},
-        .otId = 0xBC75,
-        .facilityClass = 14,
-        .species = {SPECIES_SCEPTILE, SPECIES_SANDSLASH, SPECIES_FLYGON, SPECIES_CLAYDOL, SPECIES_ARMALDO, SPECIES_CROBAT, SPECIES_CRADILY, SPECIES_SOLROCK, SPECIES_LUNATONE, SPECIES_GOLEM},
-        .id = 14,
-        .easyChatWords = {0xA01, 0x1017, 0x1243, 0x1E22, 0x100B, 0x280F},
-    },
-    {
-        .name = {_("ローウェン"), _("ARTURO"), _("ARTURO"), _("ROMOLO"), _("BRIAN"), _("ARTURO")},
-        .otId = 0xFA02,
-        .facilityClass = 0x20,
-        .species = {SPECIES_ABSOL, SPECIES_MIGHTYENA, SPECIES_ALAKAZAM, SPECIES_BANETTE, SPECIES_NINETALES, SPECIES_CLAYDOL, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_WALREIN, SPECIES_DUSCLOPS},
-        .id = 15,
-        .easyChatWords = {0x1E0F, 0x1404, 0x102F, 0x1006, 0x1020, 0xE03},
-    },
-};
+    u8 i, num;
+    const u8 *challengeText;
 
-static const u8 *const gUnknown_08610EF0[][4] =
-{
-    {gText_082B7229, gText_082B731C, gText_082B735B, gText_082B7423},
-    {gText_082B74C1, gText_082B756F, gText_082B75B2, gText_082B763F},
-    {gText_082B76AC, gText_082B7772, gText_082B77CE, gText_082B7871},
-    {gText_082B78D4, gText_082B7B1A, gText_082B7C13, gText_082B7D18},
-    {gText_082B7DD4, gText_082B7EE5, gText_082B7F35, gText_082B7FE8},
-    {gText_082B8087, gText_082B822B, gText_082B8286, gText_082B8356},
-    {gText_082B83CE, gText_082B84FC, gText_082B8559, gText_082B8656},
-    {gText_082B86EA, gText_082B87DA, gText_082B887C, gText_082B8957},
-    {gText_082B89C6, gText_082B8ACF, gText_082B8B66, gText_082B8C20},
-    {gText_082B8CAA, gText_082B8DD3, gText_082B8E24, gText_082B8ED5},
-    {gText_082B8F45, gText_082B905F, gText_082B910E, gText_082B9204},
-    {gText_082B929C, gText_082B9438, gText_082B9488, gText_082B9564},
-    {gText_082B95D8, gText_082B9763, gText_082B97E5, gText_082B989A},
-    {gText_082B992D, gText_082B9A84, gText_082B9AB9, gText_082B9B76},
-    {gText_082B9BF2, gText_082B9D83, gText_082B9DF9, gText_082B9EAA},
-    {gText_082B9F55, gText_082BA084, gText_082BA11D, gText_082BA1F3},
-};
-
-static const u8 *const gUnknown_08610FF0[][2] =
-{
-    {gText_082BE50D, gText_082BE5F5},
-    {gText_082BE679, gText_082BE71E},
-    {gText_082BE762, gText_082BE7F8},
-    {gText_082BE850, gText_082BE99C},
-    {gText_082BEA1B, gText_082BEAE9},
-    {gText_082BEB72, gText_082BEC8E},
-    {gText_082BED16, gText_082BEE29},
-    {gText_082BEEB4, gText_082BEFE2},
-    {gText_082BF04E, gText_082BF11D},
-    {gText_082BF1A8, gText_082BF268},
-    {gText_082BF2D1, gText_082BF3CF},
-    {gText_082BF46A, gText_082BF551},
-    {gText_082BF5C3, gText_082BF6E5},
-    {gText_082BF773, gText_082BF869},
-    {gText_082BF8DD, gText_082BF9BA},
-    {gText_082BFA5A, gText_082BFB4E},
-};
-
-static const u8 *const gUnknown_08611070[][5] =
-{
-    {gText_082BA2A3, gText_082BA34E, gText_082BA380, gText_082BA3D2, gText_082BA448},
-    {gText_082BA4D3, gText_082BA58C, gText_082BA5BF, gText_082BA5F3, gText_082BA635},
-    {gText_082BA6E6, gText_082BA742, gText_082BA770, gText_082BA78F, gText_082BA7D8},
-    {gText_082BA867, gText_082BA96B, gText_082BA9B7, gText_082BAA1B, gText_082BAA81},
-    {gText_082BAB22, gText_082BAC43, gText_082BAC78, gText_082BAD17, gText_082BADB6},
-    {gText_082BAE36, gText_082BAF4E, gText_082BAF8F, gText_082BAFDB, gText_082BB05F},
-    {gText_082BB0D4, gText_082BB18C, gText_082BB1CE, gText_082BB242, gText_082BB2D9},
-    {gText_082BB370, gText_082BB4C3, gText_082BB4FB, gText_082BB575, gText_082BB5E1},
-    {gText_082BB656, gText_082BB6E5, gText_082BB72C, gText_082BB7A2, gText_082BB84A},
-    {gText_082BB8CD, gText_082BB970, gText_082BB9AE, gText_082BBA05, gText_082BBA6C},
-    {gText_082BBB01, gText_082BBC1C, gText_082BBC4B, gText_082BBCF6, gText_082BBD90},
-    {gText_082BBE0B, gText_082BBEE5, gText_082BBF25, gText_082BBFA4, gText_082BC024},
-    {gText_082BC0C8, gText_082BC213, gText_082BC247, gText_082BC2DD, gText_082BC373},
-    {gText_082BC40E, gText_082BC514, gText_082BC555, gText_082BC5CE, gText_082BC666},
-    {gText_082BC714, gText_082BC808, gText_082BC84D, gText_082BC8EA, gText_082BC984},
-    {gText_082BCA4D, gText_082BCB75, gText_082BCBA6, gText_082BCBFC, gText_082BCCA4},
-};
-
-static const u8 *const gUnknown_086111B0[][2] =
-{
-    {gText_082BFBF2, gText_082BFCAE},
-    {gText_082BFD26, gText_082BFDB1},
-    {gText_082BFE24, gText_082BFEAD},
-    {gText_082BFF0A, gText_082C0032},
-    {gText_082C0090, gText_082C016E},
-    {gText_082C01F7, gText_082C034C},
-    {gText_082C03CA, gText_082C046E},
-    {gText_082C04F9, gText_082C0598},
-    {gText_082C0602, gText_082C06D8},
-    {gText_082C074A, gText_082C0809},
-    {gText_082C086E, gText_082C0982},
-    {gText_082C0A1D, gText_082C0AFD},
-    {gText_082C0B6F, gText_082C0C7D},
-    {gText_082C0D0B, gText_082C0DFE},
-    {gText_082C0E71, gText_082C0F6D},
-    {gText_082C1003, gText_082C1122},
-};
-
-static const u8 *const gUnknown_08611230[][2] =
-{
-    {gText_082BCD68, gText_082BCE64},
-    {gText_082BCEF2, gText_082BCF61},
-    {gText_082BCFA1, gText_082BD03C},
-    {gText_082BD06D, gText_082BD18A},
-    {gText_082BD222, gText_082BD325},
-    {gText_082BD3B1, gText_082BD493},
-    {gText_082BD51C, gText_082BD609},
-    {gText_082BD697, gText_082BD797},
-    {gText_082BD806, gText_082BD8F5},
-    {gText_082BD9BE, gText_082BDAE1},
-    {gText_082BDB4E, gText_082BDC6B},
-    {gText_082BDD0D, gText_082BDDEC},
-    {gText_082BDE68, gText_082BDF4D},
-    {gText_082BDFD8, gText_082BE0FD},
-    {gText_082BE189, gText_082BE2A5},
-    {gText_082BE33E, gText_082BE46C},
-};
-
-static const u8 *const gUnknown_086112B0[][2] =
-{
-    {gText_082C11D1, gText_082C12D5},
-    {gText_082C13AB, gText_082C1444},
-    {gText_082C1501, gText_082C15B6},
-    {gText_082C165E, gText_082C174F},
-    {gText_082C1862, gText_082C19A0},
-    {gText_082C1A76, gText_082C1C16},
-    {gText_082C1CF5, gText_082C1DC1},
-    {gText_082C1EDC, gText_082C1FEC},
-    {gText_082C20D1, gText_082C21FF},
-    {gText_082C231C, gText_082C2407},
-    {gText_082C24B5, gText_082C25B1},
-    {gText_082C2707, gText_082C27D4},
-    {gText_082C28D6, gText_082C2A0B},
-    {gText_082C2B50, gText_082C2C77},
-    {gText_082C2D67, gText_082C2E41},
-    {gText_082C2EF5, gText_082C3023},
-};
-
-static const u8 *const gUnknown_08611330[] =
-{
-    gText_082B6EA5,
-    gText_082B6EEC,
-    gText_082B6F16,
-    gText_082B6F4C,
-    gText_082B6F92,
-    gText_082B6FC9,
-    gText_082B700C,
-    gText_082B703A,
-    gText_082B706A,
-    gText_082B709C,
-    gText_082B70CC,
-    gText_082B710A,
-    gText_082B714D,
-    gText_082B7185,
-    gText_082B71C1,
-    gText_082B71F9,
-};
-
-static const bool8 gUnknown_08611370[MOVES_COUNT] =
-{
-    [MOVE_NONE] = FALSE,
-    [MOVE_POUND] = FALSE,
-    [MOVE_KARATE_CHOP] = TRUE,
-    [MOVE_DOUBLE_SLAP] = TRUE,
-    [MOVE_COMET_PUNCH] = FALSE,
-    [MOVE_MEGA_PUNCH] = TRUE,
-    [MOVE_PAY_DAY] = FALSE,
-    [MOVE_FIRE_PUNCH] = TRUE,
-    [MOVE_ICE_PUNCH] = TRUE,
-    [MOVE_THUNDER_PUNCH] = TRUE,
-    [MOVE_SCRATCH] = FALSE,
-    [MOVE_VICE_GRIP] = FALSE,
-    [MOVE_GUILLOTINE] = TRUE,
-    [MOVE_RAZOR_WIND] = FALSE,
-    [MOVE_SWORDS_DANCE] = TRUE,
-    [MOVE_CUT] = FALSE,
-    [MOVE_GUST] = FALSE,
-    [MOVE_WING_ATTACK] = FALSE,
-    [MOVE_WHIRLWIND] = TRUE,
-    [MOVE_FLY] = TRUE,
-    [MOVE_BIND] = TRUE,
-    [MOVE_SLAM] = TRUE,
-    [MOVE_VINE_WHIP] = FALSE,
-    [MOVE_STOMP] = TRUE,
-    [MOVE_DOUBLE_KICK] = TRUE,
-    [MOVE_MEGA_KICK] = TRUE,
-    [MOVE_JUMP_KICK] = TRUE,
-    [MOVE_ROLLING_KICK] = TRUE,
-    [MOVE_SAND_ATTACK] = TRUE,
-    [MOVE_HEADBUTT] = TRUE,
-    [MOVE_HORN_ATTACK] = FALSE,
-    [MOVE_FURY_ATTACK] = FALSE,
-    [MOVE_HORN_DRILL] = TRUE,
-    [MOVE_TACKLE] = FALSE,
-    [MOVE_BODY_SLAM] = TRUE,
-    [MOVE_WRAP] = TRUE,
-    [MOVE_TAKE_DOWN] = TRUE,
-    [MOVE_THRASH] = TRUE,
-    [MOVE_DOUBLE_EDGE] = TRUE,
-    [MOVE_TAIL_WHIP] = FALSE,
-    [MOVE_POISON_STING] = FALSE,
-    [MOVE_TWINEEDLE] = TRUE,
-    [MOVE_PIN_MISSILE] = FALSE,
-    [MOVE_LEER] = FALSE,
-    [MOVE_BITE] = TRUE,
-    [MOVE_GROWL] = FALSE,
-    [MOVE_ROAR] = TRUE,
-    [MOVE_SING] = TRUE,
-    [MOVE_SUPERSONIC] = TRUE,
-    [MOVE_SONIC_BOOM] = TRUE,
-    [MOVE_DISABLE] = TRUE,
-    [MOVE_ACID] = FALSE,
-    [MOVE_EMBER] = FALSE,
-    [MOVE_FLAMETHROWER] = TRUE,
-    [MOVE_MIST] = TRUE,
-    [MOVE_WATER_GUN] = FALSE,
-    [MOVE_HYDRO_PUMP] = TRUE,
-    [MOVE_SURF] = TRUE,
-    [MOVE_ICE_BEAM] = TRUE,
-    [MOVE_BLIZZARD] = TRUE,
-    [MOVE_PSYBEAM] = TRUE,
-    [MOVE_BUBBLE_BEAM] = FALSE,
-    [MOVE_AURORA_BEAM] = FALSE,
-    [MOVE_HYPER_BEAM] = TRUE,
-    [MOVE_PECK] = FALSE,
-    [MOVE_DRILL_PECK] = TRUE,
-    [MOVE_SUBMISSION] = TRUE,
-    [MOVE_LOW_KICK] = TRUE,
-    [MOVE_COUNTER] = TRUE,
-    [MOVE_SEISMIC_TOSS] = TRUE,
-    [MOVE_STRENGTH] = TRUE,
-    [MOVE_ABSORB] = FALSE,
-    [MOVE_MEGA_DRAIN] = FALSE,
-    [MOVE_LEECH_SEED] = TRUE,
-    [MOVE_GROWTH] = TRUE,
-    [MOVE_RAZOR_LEAF] = TRUE,
-    [MOVE_SOLAR_BEAM] = TRUE,
-    [MOVE_POISON_POWDER] = TRUE,
-    [MOVE_STUN_SPORE] = TRUE,
-    [MOVE_SLEEP_POWDER] = TRUE,
-    [MOVE_PETAL_DANCE] = TRUE,
-    [MOVE_STRING_SHOT] = FALSE,
-    [MOVE_DRAGON_RAGE] = TRUE,
-    [MOVE_FIRE_SPIN] = TRUE,
-    [MOVE_THUNDER_SHOCK] = FALSE,
-    [MOVE_THUNDERBOLT] = TRUE,
-    [MOVE_THUNDER_WAVE] = TRUE,
-    [MOVE_THUNDER] = TRUE,
-    [MOVE_ROCK_THROW] = FALSE,
-    [MOVE_EARTHQUAKE] = TRUE,
-    [MOVE_FISSURE] = TRUE,
-    [MOVE_DIG] = TRUE,
-    [MOVE_TOXIC] = TRUE,
-    [MOVE_CONFUSION] = FALSE,
-    [MOVE_PSYCHIC] = TRUE,
-    [MOVE_HYPNOSIS] = TRUE,
-    [MOVE_MEDITATE] = TRUE,
-    [MOVE_AGILITY] = TRUE,
-    [MOVE_QUICK_ATTACK] = TRUE,
-    [MOVE_RAGE] = FALSE,
-    [MOVE_TELEPORT] = FALSE,
-    [MOVE_NIGHT_SHADE] = TRUE,
-    [MOVE_MIMIC] = TRUE,
-    [MOVE_SCREECH] = TRUE,
-    [MOVE_DOUBLE_TEAM] = TRUE,
-    [MOVE_RECOVER] = TRUE,
-    [MOVE_HARDEN] = TRUE,
-    [MOVE_MINIMIZE] = TRUE,
-    [MOVE_SMOKESCREEN] = TRUE,
-    [MOVE_CONFUSE_RAY] = TRUE,
-    [MOVE_WITHDRAW] = TRUE,
-    [MOVE_DEFENSE_CURL] = TRUE,
-    [MOVE_BARRIER] = TRUE,
-    [MOVE_LIGHT_SCREEN] = TRUE,
-    [MOVE_HAZE] = TRUE,
-    [MOVE_REFLECT] = TRUE,
-    [MOVE_FOCUS_ENERGY] = TRUE,
-    [MOVE_BIDE] = FALSE,
-    [MOVE_METRONOME] = TRUE,
-    [MOVE_MIRROR_MOVE] = TRUE,
-    [MOVE_SELF_DESTRUCT] = TRUE,
-    [MOVE_EGG_BOMB] = TRUE,
-    [MOVE_LICK] = TRUE,
-    [MOVE_SMOG] = FALSE,
-    [MOVE_SLUDGE] = FALSE,
-    [MOVE_BONE_CLUB] = FALSE,
-    [MOVE_FIRE_BLAST] = TRUE,
-    [MOVE_WATERFALL] = TRUE,
-    [MOVE_CLAMP] = TRUE,
-    [MOVE_SWIFT] = TRUE,
-    [MOVE_SKULL_BASH] = TRUE,
-    [MOVE_SPIKE_CANNON] = FALSE,
-    [MOVE_CONSTRICT] = FALSE,
-    [MOVE_AMNESIA] = TRUE,
-    [MOVE_KINESIS] = TRUE,
-    [MOVE_SOFT_BOILED] = TRUE,
-    [MOVE_HI_JUMP_KICK] = TRUE,
-    [MOVE_GLARE] = TRUE,
-    [MOVE_DREAM_EATER] = TRUE,
-    [MOVE_POISON_GAS] = FALSE,
-    [MOVE_BARRAGE] = FALSE,
-    [MOVE_LEECH_LIFE] = FALSE,
-    [MOVE_LOVELY_KISS] = TRUE,
-    [MOVE_SKY_ATTACK] = TRUE,
-    [MOVE_TRANSFORM] = TRUE,
-    [MOVE_BUBBLE] = FALSE,
-    [MOVE_DIZZY_PUNCH] = TRUE,
-    [MOVE_SPORE] = TRUE,
-    [MOVE_FLASH] = TRUE,
-    [MOVE_PSYWAVE] = TRUE,
-    [MOVE_SPLASH] = FALSE,
-    [MOVE_ACID_ARMOR] = TRUE,
-    [MOVE_CRABHAMMER] = TRUE,
-    [MOVE_EXPLOSION] = TRUE,
-    [MOVE_FURY_SWIPES] = FALSE,
-    [MOVE_BONEMERANG] = TRUE,
-    [MOVE_REST] = TRUE,
-    [MOVE_ROCK_SLIDE] = TRUE,
-    [MOVE_HYPER_FANG] = TRUE,
-    [MOVE_SHARPEN] = TRUE,
-    [MOVE_CONVERSION] = TRUE,
-    [MOVE_TRI_ATTACK] = TRUE,
-    [MOVE_SUPER_FANG] = TRUE,
-    [MOVE_SLASH] = TRUE,
-    [MOVE_SUBSTITUTE] = TRUE,
-    [MOVE_STRUGGLE] = TRUE,
-    [MOVE_SKETCH] = TRUE,
-    [MOVE_TRIPLE_KICK] = TRUE,
-    [MOVE_THIEF] = TRUE,
-    [MOVE_SPIDER_WEB] = TRUE,
-    [MOVE_MIND_READER] = TRUE,
-    [MOVE_NIGHTMARE] = TRUE,
-    [MOVE_FLAME_WHEEL] = FALSE,
-    [MOVE_SNORE] = TRUE,
-    [MOVE_CURSE] = TRUE,
-    [MOVE_FLAIL] = TRUE,
-    [MOVE_CONVERSION_2] = TRUE,
-    [MOVE_AEROBLAST] = TRUE,
-    [MOVE_COTTON_SPORE] = TRUE,
-    [MOVE_REVERSAL] = TRUE,
-    [MOVE_SPITE] = TRUE,
-    [MOVE_POWDER_SNOW] = FALSE,
-    [MOVE_PROTECT] = TRUE,
-    [MOVE_MACH_PUNCH] = TRUE,
-    [MOVE_SCARY_FACE] = TRUE,
-    [MOVE_FAINT_ATTACK] = TRUE,
-    [MOVE_SWEET_KISS] = TRUE,
-    [MOVE_BELLY_DRUM] = TRUE,
-    [MOVE_SLUDGE_BOMB] = TRUE,
-    [MOVE_MUD_SLAP] = TRUE,
-    [MOVE_OCTAZOOKA] = TRUE,
-    [MOVE_SPIKES] = TRUE,
-    [MOVE_ZAP_CANNON] = TRUE,
-    [MOVE_FORESIGHT] = TRUE,
-    [MOVE_DESTINY_BOND] = TRUE,
-    [MOVE_PERISH_SONG] = TRUE,
-    [MOVE_ICY_WIND] = TRUE,
-    [MOVE_DETECT] = TRUE,
-    [MOVE_BONE_RUSH] = FALSE,
-    [MOVE_LOCK_ON] = TRUE,
-    [MOVE_OUTRAGE] = TRUE,
-    [MOVE_SANDSTORM] = TRUE,
-    [MOVE_GIGA_DRAIN] = TRUE,
-    [MOVE_ENDURE] = TRUE,
-    [MOVE_CHARM] = TRUE,
-    [MOVE_ROLLOUT] = TRUE,
-    [MOVE_FALSE_SWIPE] = TRUE,
-    [MOVE_SWAGGER] = TRUE,
-    [MOVE_MILK_DRINK] = TRUE,
-    [MOVE_SPARK] = FALSE,
-    [MOVE_FURY_CUTTER] = TRUE,
-    [MOVE_STEEL_WING] = TRUE,
-    [MOVE_MEAN_LOOK] = TRUE,
-    [MOVE_ATTRACT] = TRUE,
-    [MOVE_SLEEP_TALK] = TRUE,
-    [MOVE_HEAL_BELL] = TRUE,
-    [MOVE_RETURN] = TRUE,
-    [MOVE_PRESENT] = TRUE,
-    [MOVE_FRUSTRATION] = TRUE,
-    [MOVE_SAFEGUARD] = TRUE,
-    [MOVE_PAIN_SPLIT] = TRUE,
-    [MOVE_SACRED_FIRE] = TRUE,
-    [MOVE_MAGNITUDE] = FALSE,
-    [MOVE_DYNAMIC_PUNCH] = TRUE,
-    [MOVE_MEGAHORN] = TRUE,
-    [MOVE_DRAGON_BREATH] = TRUE,
-    [MOVE_BATON_PASS] = TRUE,
-    [MOVE_ENCORE] = TRUE,
-    [MOVE_PURSUIT] = TRUE,
-    [MOVE_RAPID_SPIN] = TRUE,
-    [MOVE_SWEET_SCENT] = TRUE,
-    [MOVE_IRON_TAIL] = TRUE,
-    [MOVE_METAL_CLAW] = TRUE,
-    [MOVE_VITAL_THROW] = TRUE,
-    [MOVE_MORNING_SUN] = TRUE,
-    [MOVE_SYNTHESIS] = TRUE,
-    [MOVE_MOONLIGHT] = TRUE,
-    [MOVE_HIDDEN_POWER] = TRUE,
-    [MOVE_CROSS_CHOP] = TRUE,
-    [MOVE_TWISTER] = FALSE,
-    [MOVE_RAIN_DANCE] = TRUE,
-    [MOVE_SUNNY_DAY] = TRUE,
-    [MOVE_CRUNCH] = TRUE,
-    [MOVE_MIRROR_COAT] = TRUE,
-    [MOVE_PSYCH_UP] = TRUE,
-    [MOVE_EXTREME_SPEED] = TRUE,
-    [MOVE_ANCIENT_POWER] = TRUE,
-    [MOVE_SHADOW_BALL] = TRUE,
-    [MOVE_FUTURE_SIGHT] = TRUE,
-    [MOVE_ROCK_SMASH] = TRUE,
-    [MOVE_WHIRLPOOL] = TRUE,
-    [MOVE_BEAT_UP] = TRUE,
-    [MOVE_FAKE_OUT] = TRUE,
-    [MOVE_UPROAR] = TRUE,
-    [MOVE_STOCKPILE] = TRUE,
-    [MOVE_SPIT_UP] = TRUE,
-    [MOVE_SWALLOW] = TRUE,
-    [MOVE_HEAT_WAVE] = TRUE,
-    [MOVE_HAIL] = TRUE,
-    [MOVE_TORMENT] = TRUE,
-    [MOVE_FLATTER] = TRUE,
-    [MOVE_WILL_O_WISP] = TRUE,
-    [MOVE_MEMENTO] = TRUE,
-    [MOVE_FACADE] = TRUE,
-    [MOVE_FOCUS_PUNCH] = TRUE,
-    [MOVE_SMELLING_SALT] = TRUE,
-    [MOVE_FOLLOW_ME] = TRUE,
-    [MOVE_NATURE_POWER] = TRUE,
-    [MOVE_CHARGE] = TRUE,
-    [MOVE_TAUNT] = TRUE,
-    [MOVE_HELPING_HAND] = TRUE,
-    [MOVE_TRICK] = TRUE,
-    [MOVE_ROLE_PLAY] = TRUE,
-    [MOVE_WISH] = TRUE,
-    [MOVE_ASSIST] = TRUE,
-    [MOVE_INGRAIN] = TRUE,
-    [MOVE_SUPERPOWER] = TRUE,
-    [MOVE_MAGIC_COAT] = TRUE,
-    [MOVE_RECYCLE] = TRUE,
-    [MOVE_REVENGE] = TRUE,
-    [MOVE_BRICK_BREAK] = TRUE,
-    [MOVE_YAWN] = TRUE,
-    [MOVE_KNOCK_OFF] = TRUE,
-    [MOVE_ENDEAVOR] = TRUE,
-    [MOVE_ERUPTION] = TRUE,
-    [MOVE_SKILL_SWAP] = TRUE,
-    [MOVE_IMPRISON] = TRUE,
-    [MOVE_REFRESH] = TRUE,
-    [MOVE_GRUDGE] = TRUE,
-    [MOVE_SNATCH] = TRUE,
-    [MOVE_SECRET_POWER] = TRUE,
-    [MOVE_DIVE] = TRUE,
-    [MOVE_ARM_THRUST] = FALSE,
-    [MOVE_CAMOUFLAGE] = TRUE,
-    [MOVE_TAIL_GLOW] = TRUE,
-    [MOVE_LUSTER_PURGE] = TRUE,
-    [MOVE_MIST_BALL] = TRUE,
-    [MOVE_FEATHER_DANCE] = TRUE,
-    [MOVE_TEETER_DANCE] = TRUE,
-    [MOVE_BLAZE_KICK] = TRUE,
-    [MOVE_MUD_SPORT] = TRUE,
-    [MOVE_ICE_BALL] = FALSE,
-    [MOVE_NEEDLE_ARM] = TRUE,
-    [MOVE_SLACK_OFF] = TRUE,
-    [MOVE_HYPER_VOICE] = TRUE,
-    [MOVE_POISON_FANG] = FALSE,
-    [MOVE_CRUSH_CLAW] = TRUE,
-    [MOVE_BLAST_BURN] = TRUE,
-    [MOVE_HYDRO_CANNON] = TRUE,
-    [MOVE_METEOR_MASH] = TRUE,
-    [MOVE_ASTONISH] = TRUE,
-    [MOVE_WEATHER_BALL] = TRUE,
-    [MOVE_AROMATHERAPY] = TRUE,
-    [MOVE_FAKE_TEARS] = TRUE,
-    [MOVE_AIR_CUTTER] = TRUE,
-    [MOVE_OVERHEAT] = TRUE,
-    [MOVE_ODOR_SLEUTH] = TRUE,
-    [MOVE_ROCK_TOMB] = TRUE,
-    [MOVE_SILVER_WIND] = TRUE,
-    [MOVE_METAL_SOUND] = TRUE,
-    [MOVE_GRASS_WHISTLE] = TRUE,
-    [MOVE_TICKLE] = TRUE,
-    [MOVE_COSMIC_POWER] = TRUE,
-    [MOVE_WATER_SPOUT] = TRUE,
-    [MOVE_SIGNAL_BEAM] = TRUE,
-    [MOVE_SHADOW_PUNCH] = TRUE,
-    [MOVE_EXTRASENSORY] = TRUE,
-    [MOVE_SKY_UPPERCUT] = TRUE,
-    [MOVE_SAND_TOMB] = TRUE,
-    [MOVE_SHEER_COLD] = TRUE,
-    [MOVE_MUDDY_WATER] = TRUE,
-    [MOVE_BULLET_SEED] = FALSE,
-    [MOVE_AERIAL_ACE] = TRUE,
-    [MOVE_ICICLE_SPEAR] = FALSE,
-    [MOVE_IRON_DEFENSE] = TRUE,
-    [MOVE_BLOCK] = TRUE,
-    [MOVE_HOWL] = TRUE,
-    [MOVE_DRAGON_CLAW] = TRUE,
-    [MOVE_FRENZY_PLANT] = TRUE,
-    [MOVE_BULK_UP] = TRUE,
-    [MOVE_BOUNCE] = TRUE,
-    [MOVE_MUD_SHOT] = FALSE,
-    [MOVE_POISON_TAIL] = TRUE,
-    [MOVE_COVET] = TRUE,
-    [MOVE_VOLT_TACKLE] = TRUE,
-    [MOVE_MAGICAL_LEAF] = TRUE,
-    [MOVE_WATER_SPORT] = TRUE,
-    [MOVE_CALM_MIND] = TRUE,
-    [MOVE_LEAF_BLADE] = TRUE,
-    [MOVE_DRAGON_DANCE] = TRUE,
-    [MOVE_ROCK_BLAST] = FALSE,
-    [MOVE_SHOCK_WAVE] = TRUE,
-    [MOVE_WATER_PULSE] = TRUE,
-    [MOVE_DOOM_DESIRE] = TRUE,
-    [MOVE_PSYCHO_BOOST] = TRUE,
-};
-
-static const u8 gUnknown_086114D3[] = {0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x03, 0x00, 0x00, 0x00, 0x00};
-
-static void (* const sApprenticeFunctions[])(void) =
-{
-    Script_IsPlayersApprenticeActive,
-    Script_SetPlayersApprenticeLvlMode,
-    sub_81A0978,
-    sub_819FC60,
-    sub_81A0984,
-    sub_81A0990,
-    sub_81A09D0,
-    Script_CreateApprenticeMenu,
-    Script_PrintMessage,
-    Script_ResetPlayerApprentice,
-    sub_81A1638,
-    sub_81A0CC0,
-    sub_81A09B4,
-    sub_81A0D40,
-    sub_81A0DD4,
-    sub_81A0FE4,
-    sub_81A0FFC,
-    sub_81A0D80,
-    sub_81A11F8,
-    sub_81A1218,
-    sub_81A1224,
-    sub_81A1438,
-    sub_81A150C,
-    Script_SetPlayerApprenticeTrainerGfxId,
-    sub_81A1644,
-    sub_81A1370,
-};
-
-static const u8 gUnknown_08611548[8] = {0x00, 0x01, 0x02, 0x03, 0x06, 0x07, 0x08, 0x09};
-
-// text
-extern const u8 gText_Give[];
-extern const u8 gText_NoNeed[];
-extern const u8 gText_Yes[];
-extern const u8 gText_No[];
-
-void CopyFriendsApprenticeChallengeText(u8 saveblockApprenticeId)
-{
-    u8 i, var;
-    const u8 *str;
-
-    var = gSaveBlock2Ptr->apprentices[saveblockApprenticeId].number;
-    for (i = 0; var != 0 && i < 4; var /= 10, i++)
+    num = gSaveBlock2Ptr->apprentices[saveApprenticeId].number;
+    for (i = 0; num != 0 && i < APPRENTICE_COUNT; num /= 10, i++)
         ;
 
-    StringCopy7(gStringVar1, gSaveBlock2Ptr->apprentices[saveblockApprenticeId].playerName);
-    ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->apprentices[saveblockApprenticeId].language);
-    ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->apprentices[saveblockApprenticeId].number, STR_CONV_MODE_RIGHT_ALIGN, i);
-    str = gUnknown_08611330[gSaveBlock2Ptr->apprentices[saveblockApprenticeId].id];
-    StringExpandPlaceholders(gStringVar4, str);
+    StringCopy7(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].playerName);
+    ConvertInternationalString(gStringVar1, gSaveBlock2Ptr->apprentices[saveApprenticeId].language);
+    ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->apprentices[saveApprenticeId].number, STR_CONV_MODE_RIGHT_ALIGN, i);
+    challengeText = sApprenticeChallengeTexts[gSaveBlock2Ptr->apprentices[saveApprenticeId].id];
+    StringExpandPlaceholders(gStringVar4, challengeText);
 }
 
 void Apprentice_EnableBothScriptContexts(void)
@@ -1079,27 +144,27 @@ void ResetApprenticeStruct(struct Apprentice *apprentice)
 {
     u8 i;
 
-    for (i = 0; i < 6; i++)
-        apprentice->easyChatWords[i] = 0xFFFF;
+    for (i = 0; i < ARRAY_COUNT(apprentice->speechWon); i++)
+        apprentice->speechWon[i] = 0xFFFF;
 
     apprentice->playerName[0] = EOS;
-    apprentice->id = 16;
+    apprentice->id = NUM_APPRENTICES;
 }
 
 void ResetAllApprenticeData(void)
 {
     u8 i, j;
 
-    PLAYER_APPRENTICE.field_B2_1 = 0;
-    for (i = 0; i < 4; i++)
+    PLAYER_APPRENTICE.saveId = 0;
+    for (i = 0; i < APPRENTICE_COUNT; i++)
     {
-        for (j = 0; j < 6; j++)
-            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] = 0xFFFF;
-        gSaveBlock2Ptr->apprentices[i].id = 16;
+        for (j = 0; j < ARRAY_COUNT(gSaveBlock2Ptr->apprentices[i].speechWon); j++)
+            gSaveBlock2Ptr->apprentices[i].speechWon[j] = 0xFFFF;
+        gSaveBlock2Ptr->apprentices[i].id = NUM_APPRENTICES;
         gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
         gSaveBlock2Ptr->apprentices[i].number = 0;
-        gSaveBlock2Ptr->apprentices[i].field_1 = 0;
+        gSaveBlock2Ptr->apprentices[i].numQuestions = 0;
         for (j = 0; j < TRAINER_ID_LENGTH; j++)
             gSaveBlock2Ptr->apprentices[i].playerId[j] = 0;
         gSaveBlock2Ptr->apprentices[i].language = gGameLanguage;
@@ -1109,174 +174,184 @@ void ResetAllApprenticeData(void)
     Script_ResetPlayerApprentice();
 }
 
-static bool8 IsPlayersApprenticeActive(void)
+static bool8 GivenApprenticeLvlMode(void)
 {
-    return (PLAYER_APPRENTICE.activeLvlMode != 0);
+    return (PLAYER_APPRENTICE.lvlMode != 0);
 }
 
-static void sub_819FBC8(void)
+static void SetApprenticeId(void)
 {
     if (gSaveBlock2Ptr->apprentices[0].number == 0)
     {
         do
         {
-            PLAYER_APPRENTICE.id = gUnknown_08611548[Random() % ARRAY_COUNT(gUnknown_08611548)];
+            PLAYER_APPRENTICE.id = sInitialApprenticeIds[Random() % ARRAY_COUNT(sInitialApprenticeIds)];
         } while (PLAYER_APPRENTICE.id == gSaveBlock2Ptr->apprentices[0].id);
     }
     else
     {
         do
         {
-            PLAYER_APPRENTICE.id = Random() % 16;
+            PLAYER_APPRENTICE.id = Random() % (NUM_APPRENTICES);
         } while (PLAYER_APPRENTICE.id == gSaveBlock2Ptr->apprentices[0].id);
     }
 }
 
 static void SetPlayersApprenticeLvlMode(u8 mode)
 {
-    PLAYER_APPRENTICE.activeLvlMode = mode;
+    PLAYER_APPRENTICE.lvlMode = mode;
 }
 
-static void sub_819FC60(void)
+static void ShuffleApprenticeSpecies(void)
 {
-    u8 array[APPRENTICE_SPECIES_COUNT];
+    u8 species[APPRENTICE_SPECIES_COUNT];
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(array); i++)
-        array[i] = i;
+    for (i = 0; i < ARRAY_COUNT(species); i++)
+        species[i] = i;
 
+    // Shuffle the possible species an arbitrary 50 times
     for (i = 0; i < 50; i++)
     {
         u8 temp;
-        u8 var1 = Random() % ARRAY_COUNT(array);
-        u8 var2 = Random() % ARRAY_COUNT(array);
-        SWAP(array[var1], array[var2], temp);
+        u8 rand1 = Random() % ARRAY_COUNT(species);
+        u8 rand2 = Random() % ARRAY_COUNT(species);
+        SWAP(species[rand1], species[rand2], temp);
     }
 
-    for (i = 0; i < 3; i++)
-        PLAYER_APPRENTICE.monIds[i] = ((array[i * 2] & 0xF) << 4) | ((array[i * 2 + 1]) & 0xF);
+    for (i = 0; i < MULTI_PARTY_SIZE; i++)
+        PLAYER_APPRENTICE.speciesIds[i] = ((species[i * 2] & 0xF) << 4) | ((species[i * 2 + 1]) & 0xF);
 }
 
-static u8 sub_819FCF8(u8 val, u8 *arg1, u8 *arg2)
+// Pick one of the Apprentice's mons to ask the question about
+// Picking a move chooses a random mon, picking a held item is sequential (so that none are repeated)
+static u8 GetMonIdForQuestion(u8 questionId, u8 *party, u8 *partySlot)
 {
     u8 i, count;
-    u8 ret = 0;
+    u8 monId = 0;
 
-    if (val == 2)
+    if (questionId == QUESTION_ID_WHICH_MOVE)
     {
         do
         {
-            ret = Random() % 3;
-            for (count = 0, i = 0; i < 5; i++)
+            monId = Random() % (MULTI_PARTY_SIZE);
+            for (count = 0, i = 0; i < NUM_WHICH_MOVE_QUESTIONS; i++)
             {
-                if (gUnknown_030062EC->unk2[ret][i] != 0)
+                if (gApprenticePartyMovesData->moves[monId][i] != MOVE_NONE)
                     count++;
             }
-        } while (count > 3);
+        } while (count > MULTI_PARTY_SIZE);
     }
-    else if (val == 1)
+    else if (questionId == QUESTION_ID_WHAT_ITEM)
     {
-        ret = arg1[*arg2];
-        (*arg2)++;
+        monId = party[*partySlot];
+        (*partySlot)++;
     }
 
-    return ret;
+    return monId;
 }
 
-static void sub_819FD64(void)
+// Sets the random order and data for the remaining questions after the initial "choose mon" questions
+static void SetRandomQuestionData(void)
 {
-    u8 sp_0[10];
-    u8 sp_C[3];
-    u8 sp_10;
+    u8 questionOrder[APPRENTICE_MAX_QUESTIONS + 1];
+    u8 partyOrder[MULTI_PARTY_SIZE];
+    u8 partySlot;
     u8 i, j;
     u8 rand1, rand2;
     u8 id;
 
-    for (i = 0; i < 3; i++)
-        sp_C[i] = i;
+    for (i = 0; i < ARRAY_COUNT(partyOrder); i++)
+        partyOrder[i] = i;
+
+    // Shuffle the party an arbitrary 10 times
     for (i = 0; i < 10; i++)
     {
         u8 temp;
-        rand1 = Random() % ARRAY_COUNT(sp_C);
-        rand2 = Random() % ARRAY_COUNT(sp_C);
-        SWAP(sp_C[rand1], sp_C[rand2], temp);
+        rand1 = Random() % ARRAY_COUNT(partyOrder);
+        rand2 = Random() % ARRAY_COUNT(partyOrder);
+        SWAP(partyOrder[rand1], partyOrder[rand2], temp);
     }
 
-    for (i = 0; i < 10; i++)
-        sp_0[i] = gUnknown_086114D3[i];
+    for (i = 0; i < ARRAY_COUNT(questionOrder); i++)
+        questionOrder[i] = sQuestionPossibilities[i];
+    
+    // Shuffle the questions an arbitrary 50 times
     for (i = 0; i < 50; i++)
     {
         u8 temp;
-        rand1 = Random() % ARRAY_COUNT(sp_0);
-        rand2 = Random() % ARRAY_COUNT(sp_0);
-        SWAP(sp_0[rand1], sp_0[rand2], temp);
+        rand1 = Random() % ARRAY_COUNT(questionOrder);
+        rand2 = Random() % ARRAY_COUNT(questionOrder);
+        SWAP(questionOrder[rand1], questionOrder[rand2], temp);
     }
 
-    gUnknown_030062EC = AllocZeroed(sizeof(*gUnknown_030062EC));
-    gUnknown_030062EC->unk0 = 0;
-    for (i = 0; i < 5; i++)
+    gApprenticePartyMovesData = AllocZeroed(sizeof(*gApprenticePartyMovesData));
+    gApprenticePartyMovesData->moveCounter = 0;
+    for (i = 0; i < NUM_WHICH_MOVE_QUESTIONS; i++)
     {
-        for (j = 0; j < 3; j++)
-            gUnknown_030062EC->unk20[j][i] = 4;
+        for (j = 0; j < MULTI_PARTY_SIZE; j++)
+            gApprenticePartyMovesData->moveSlots[j][i] = MAX_MON_MOVES;
     }
 
-    sp_10 = 0;
-    for (i = 0; i < 9; i++)
+    partySlot = 0;
+    for (i = 0; i < APPRENTICE_MAX_QUESTIONS; i++)
     {
-        PLAYER_APPRENTICE.field_B8[i].unk0_0 = sp_0[i];
-        if (sp_0[i] != 3)
+        PLAYER_APPRENTICE.questions[i].questionId = questionOrder[i];
+        if (questionOrder[i] != QUESTION_ID_WHICH_FIRST)
         {
-            PLAYER_APPRENTICE.field_B8[i].unk0_1 = sub_819FCF8(sp_0[i], sp_C, &sp_10);
-            id = PLAYER_APPRENTICE.field_B8[i].unk0_1;
-            if (sp_0[i] == 2)
+            PLAYER_APPRENTICE.questions[i].monId = GetMonIdForQuestion(questionOrder[i], partyOrder, &partySlot);
+            id = PLAYER_APPRENTICE.questions[i].monId;
+            if (questionOrder[i] == QUESTION_ID_WHICH_MOVE)
             {
                 do
                 {
-                    rand1 = Random() % 4;
-                    for (j = 0; j < gUnknown_030062EC->unk0 + 1; j++)
+                    rand1 = Random() % MAX_MON_MOVES;
+                    for (j = 0; j < gApprenticePartyMovesData->moveCounter + 1; j++)
                     {
-                        if (gUnknown_030062EC->unk20[id][j] == rand1)
+                        if (gApprenticePartyMovesData->moveSlots[id][j] == rand1)
                             break;
                     }
-                } while (j != gUnknown_030062EC->unk0 + 1);
+                } while (j != gApprenticePartyMovesData->moveCounter + 1);
 
-                gUnknown_030062EC->unk20[id][gUnknown_030062EC->unk0] = rand1;
-                PLAYER_APPRENTICE.field_B8[i].unk0_2 = rand1;
-                PLAYER_APPRENTICE.field_B8[i].unk2 = sub_819FF98(PLAYER_APPRENTICE.field_B8[i].unk0_1);
+                gApprenticePartyMovesData->moveSlots[id][gApprenticePartyMovesData->moveCounter] = rand1;
+                PLAYER_APPRENTICE.questions[i].moveSlot = rand1;
+                PLAYER_APPRENTICE.questions[i].data = GetRandomAlternateMove(PLAYER_APPRENTICE.questions[i].monId);
             }
         }
     }
 
-    FREE_AND_SET_NULL(gUnknown_030062EC);
+    FREE_AND_SET_NULL(gApprenticePartyMovesData);
 }
 
 // No idea why a do-while loop is needed, but it will not match without it.
 
-#define APPRENTICE_SPECIES_ID(speciesArrId, monId) speciesArrId = (PLAYER_APPRENTICE.monIds[monId] >> \
-                                                                  (((PLAYER_APPRENTICE.field_B2_0 >> monId) & 1) << 2)) & 0xF; \
+#define APPRENTICE_SPECIES_ID(speciesArrId, monId) speciesArrId = (PLAYER_APPRENTICE.speciesIds[monId] >> \
+                                                                  (((PLAYER_APPRENTICE.party >> monId) & 1) << 2)) & 0xF; \
                                                    do {} while (0)
 
 // Why the need to have two macros do the exact thing differently?
-#define APPRENTICE_SPECIES_ID_2(speciesArrId, monId) {  u8 a0 = ((PLAYER_APPRENTICE.field_B2_0 >> monId) & 1);\
-                                                        speciesArrId = PLAYER_APPRENTICE.monIds[monId];     \
+#define APPRENTICE_SPECIES_ID_2(speciesArrId, monId) {  u8 a0 = ((PLAYER_APPRENTICE.party >> monId) & 1);\
+                                                        speciesArrId = PLAYER_APPRENTICE.speciesIds[monId];     \
                                                         speciesArrId = ((speciesArrId) >> (a0 << 2)) & 0xF; \
                                                      }
 
-static u16 sub_819FF98(u8 arg0)
+// Get the second move choice for the "Which move" question
+// Unlike the first move choice, this can be either a level up move or a TM/HM move
+static u16 GetRandomAlternateMove(u8 monId)
 {
     u8 i, j;
     u8 id;
-    u8 knownMovesCount;
+    u8 numLearnsetMoves;
     u16 species;
     const u16 *learnset;
-    bool32 var_24 = FALSE;
-    u16 moveId = 0;
-    bool32 valid;
+    bool32 needTMs = FALSE;
+    u16 moveId = MOVE_NONE;
+    bool32 shouldUseMove;
     u8 level;
 
-    if (arg0 < 3)
+    if (monId < MULTI_PARTY_SIZE)
     {
-        APPRENTICE_SPECIES_ID(id, arg0);
+        APPRENTICE_SPECIES_ID(id, monId);
     }
     else
     {
@@ -1286,207 +361,224 @@ static u16 sub_819FF98(u8 arg0)
     species = gApprentices[PLAYER_APPRENTICE.id].species[id];
     learnset = gLevelUpLearnsets[species];
     j = 0;
-    if (PLAYER_APPRENTICE.activeLvlMode == 1)
+
+    // Despite being open level, level up moves are only read up to level 60
+    if (PLAYER_APPRENTICE.lvlMode == APPRENTICE_LVL_MODE_50)
         level = 50;
-    else
+    else // == APPRENTICE_LVL_MODE_OPEN
         level = 60;
 
-    for (j = 0; learnset[j] != 0xFFFF; j++)
+    for (j = 0; learnset[j] != LEVEL_UP_END; j++)
     {
-        if ((learnset[j] & 0xFE00) > (level << 9))
+        if ((learnset[j] & LEVEL_UP_MOVE_LV) > (level << 9))
             break;
     }
 
-    knownMovesCount = j;
+    numLearnsetMoves = j;
     i = 0;
-    while (i <= MAX_MON_MOVES)
+
+    // i < 5 here is arbitrary, i isnt used and is only incremented when the selected move isnt in sValidApprenticeMoves
+    // This while loop contains 3 potential infinite loops, though none of them would occur in the base game
+    while (i < 5)
     {
-        if (Random() % 2 == 0 || var_24 == TRUE)
+        if (Random() % 2 == 0 || needTMs == TRUE)
         {
+            // Get TM move
+            // NOTE: Below is an infinite loop if a species that only learns TMs for moves
+            //       that are also in its level up learnset is assigned to an Apprentice
             do
             {
+                // NOTE: Below is an infinite loop if a species which cannot learn TMs is assigned to an Apprentice
                 do
                 {
                     id = Random() % (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES);
-                    valid = CanSpeciesLearnTMHM(species, id);
+                    shouldUseMove = CanSpeciesLearnTMHM(species, id);
                 }
-                while (!valid);
+                while (!shouldUseMove);
 
                 moveId = ItemIdToBattleMoveId(ITEM_TM01 + id);
-                valid = TRUE;
+                shouldUseMove = TRUE;
 
-                if (knownMovesCount < 5)
+                if (numLearnsetMoves <= MAX_MON_MOVES)
                     j = 0;
                 else
-                    j = knownMovesCount - MAX_MON_MOVES;
+                    j = numLearnsetMoves - MAX_MON_MOVES;
 
-                for (; j < knownMovesCount; j++)
+                for (; j < numLearnsetMoves; j++)
                 {
-                    if ((learnset[j] & 0x1FF) == moveId)
+                    // Keep looking for TMs until one not in the level up learnset is found
+                    if ((learnset[j] & LEVEL_UP_MOVE_ID) == moveId)
                     {
-                        valid = FALSE;
+                        shouldUseMove = FALSE;
                         break;
                     }
                 }
-            } while (valid != TRUE);
+            } while (shouldUseMove != TRUE);
         }
         else
         {
-            if (knownMovesCount <= MAX_MON_MOVES)
+            if (numLearnsetMoves <= MAX_MON_MOVES)
             {
-                var_24 = TRUE;
+                needTMs = TRUE;
                 continue;
             }
             else
             {
+                // Get level up move
+                // NOTE: Below is an infinite loop if a mon whose last 4 moves contain
+                //       all the moves in the rest of its learnset is assigned to an Apprentice
                 do
                 {
-                    u8 learnsetId = Random() % (knownMovesCount - MAX_MON_MOVES);
-                    moveId = learnset[learnsetId] & 0x1FF;
-                    valid = TRUE;
-                    for (j = knownMovesCount - MAX_MON_MOVES; j < knownMovesCount; j++)
+                    // Get a random move excluding the 4 it would know at max level
+                    u8 learnsetId = Random() % (numLearnsetMoves - MAX_MON_MOVES);
+                    moveId = learnset[learnsetId] & LEVEL_UP_MOVE_ID;
+                    shouldUseMove = TRUE;
+
+                    for (j = numLearnsetMoves - MAX_MON_MOVES; j < numLearnsetMoves; j++)
                     {
-                        if ((learnset[j] & 0x1FF) == moveId)
+                        // Keep looking for moves until one not in the last 4 is found
+                        if ((learnset[j] & LEVEL_UP_MOVE_ID) == moveId)
                         {
-                            valid = FALSE;
+                            shouldUseMove = FALSE;
                             break;
                         }
                     }
-                } while (valid != TRUE);
+                } while (shouldUseMove != TRUE);
             }
         }
 
-        if (sub_81A0194(arg0, moveId))
+        if (TrySetMove(monId, moveId))
         {
-            if (gUnknown_08611370[moveId])
+            if (sValidApprenticeMoves[moveId])
                 break;
             i++;
         }
     }
 
-    gUnknown_030062EC->unk0++;
+    gApprenticePartyMovesData->moveCounter++;
     return moveId;
 }
 
-static bool8 sub_81A0194(u8 arg0, u16 moveId)
+static bool8 TrySetMove(u8 monId, u16 moveId)
 {
     u8 i;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < NUM_WHICH_MOVE_QUESTIONS; i++)
     {
-        if (gUnknown_030062EC->unk2[arg0][i] == moveId)
+        if (gApprenticePartyMovesData->moves[monId][i] == moveId)
             return FALSE;
     }
 
-    gUnknown_030062EC->unk2[arg0][gUnknown_030062EC->unk0] = moveId;
+    gApprenticePartyMovesData->moves[monId][gApprenticePartyMovesData->moveCounter] = moveId;
     return TRUE;
 }
 
 static void GetLatestLearnedMoves(u16 species, u16 *moves)
 {
     u8 i, j;
-    u8 level, knownMovesCount;
+    u8 level, numLearnsetMoves;
     const u16 *learnset;
 
-    if (PLAYER_APPRENTICE.activeLvlMode == 1)
+    if (PLAYER_APPRENTICE.lvlMode == APPRENTICE_LVL_MODE_50)
         level = 50;
-    else
+    else // == APPRENTICE_LVL_MODE_OPEN
         level = 60;
 
     learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i] != 0xFFFF; i++)
+    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
     {
-        if ((learnset[i] & 0xFE00) > (level << 9))
+        if ((learnset[i] & LEVEL_UP_MOVE_LV) > (level << 9))
             break;
     }
 
-    knownMovesCount = i;
-    if (knownMovesCount > MAX_MON_MOVES)
-        knownMovesCount = MAX_MON_MOVES;
+    numLearnsetMoves = i;
+    if (numLearnsetMoves > MAX_MON_MOVES)
+        numLearnsetMoves = MAX_MON_MOVES;
 
-    for (j = 0; j < knownMovesCount; j++)
-        moves[j] = learnset[(i - 1) - j] & 0x1FF;
+    for (j = 0; j < numLearnsetMoves; j++)
+        moves[j] = learnset[(i - 1) - j] & LEVEL_UP_MOVE_ID;
 }
 
-static u16 sub_81A0284(u8 arg0, u8 speciesTableId, u8 arg2)
+// Get the level up move or previously suggested move to be the first move choice
+// Compare to GetRandomAlternateMove, which gets the move that will be the second choice
+static u16 GetDefaultMove(u8 monId, u8 speciesArrayId, u8 moveSlot)
 {
     u16 moves[MAX_MON_MOVES];
-    u8 i, count;
+    u8 i, numQuestions;
 
-    if (PLAYER_APPRENTICE.field_B1_1 < 3)
-        return 0;
+    if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
+        return MOVE_NONE;
 
-    count = 0;
-    for (i = 0; i < 9; i++)
+    numQuestions = 0;
+    for (i = 0; i < APPRENTICE_MAX_QUESTIONS && PLAYER_APPRENTICE.questions[i].questionId != QUESTION_ID_WIN_SPEECH; i++)
+        numQuestions++;
+
+    GetLatestLearnedMoves(gApprentices[PLAYER_APPRENTICE.id].species[speciesArrayId], moves);
+    for (i = 0; i < numQuestions && i < CURRENT_QUESTION_NUM; i++)
     {
-        if (PLAYER_APPRENTICE.field_B8[i].unk0_0 == 0)
-            break;
-        count++;
-    }
-
-    GetLatestLearnedMoves(gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId], moves);
-    for (i = 0; i < count && i < PLAYER_APPRENTICE.field_B1_1 - 3; i++)
-    {
-        if (PLAYER_APPRENTICE.field_B8[i].unk0_0 == 2
-            && PLAYER_APPRENTICE.field_B8[i].unk0_1 == arg0
-            && PLAYER_APPRENTICE.field_B8[i].unk0_3 != 0)
+        if (PLAYER_APPRENTICE.questions[i].questionId == QUESTION_ID_WHICH_MOVE
+            && PLAYER_APPRENTICE.questions[i].monId == monId
+            && PLAYER_APPRENTICE.questions[i].suggestedChange)
         {
-            moves[PLAYER_APPRENTICE.field_B8[i].unk0_2] = PLAYER_APPRENTICE.field_B8[i].unk2;
+            moves[PLAYER_APPRENTICE.questions[i].moveSlot] = PLAYER_APPRENTICE.questions[i].data;
         }
     }
 
-    return moves[arg2];
+    return moves[moveSlot];
 }
 
-static void sub_81A0390(u8 arg0)
+static void SaveApprenticeParty(u8 numQuestions)
 {
-    struct ApprenticeMon *apprenticeMons[3];
+    struct ApprenticeMon *apprenticeMons[MULTI_PARTY_SIZE];
     u8 i, j;
     u32 speciesTableId;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
-        gSaveBlock2Ptr->apprentices[0].party[i].species = 0;
-        gSaveBlock2Ptr->apprentices[0].party[i].item = 0;
+        gSaveBlock2Ptr->apprentices[0].party[i].species = SPECIES_NONE;
+        gSaveBlock2Ptr->apprentices[0].party[i].item = ITEM_NONE;
         for (j = 0; j < MAX_MON_MOVES; j++)
-            gSaveBlock2Ptr->apprentices[0].party[i].moves[j] = 0;
+            gSaveBlock2Ptr->apprentices[0].party[i].moves[j] = MOVE_NONE;
     }
 
-    j = PLAYER_APPRENTICE.field_B1_2;
-    for (i = 0; i < 3; i++)
+    // Save party order
+    j = PLAYER_APPRENTICE.leadMonId;
+    for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
         apprenticeMons[j] = &gSaveBlock2Ptr->apprentices[0].party[i];
-        j = (j + 1) % 3;
+        j = (j + 1) % (MULTI_PARTY_SIZE);
     }
 
-    for (i = 0; i < 3; i++)
+    // Save party species
+    for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
         APPRENTICE_SPECIES_ID(speciesTableId, i);
         apprenticeMons[i]->species = gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId];
         GetLatestLearnedMoves(apprenticeMons[i]->species, apprenticeMons[i]->moves);
     }
 
-    for (i = 0; i < arg0; i++)
+    // Update party based on response to held item / move choice questions
+    for (i = 0; i < numQuestions; i++)
     {
-        u8 var1 = PLAYER_APPRENTICE.field_B8[i].unk0_0;
-        u8 monId = PLAYER_APPRENTICE.field_B8[i].unk0_1;
-        if (var1 == 1)
+        u8 questionId = PLAYER_APPRENTICE.questions[i].questionId;
+        u8 monId = PLAYER_APPRENTICE.questions[i].monId;
+        if (questionId == QUESTION_ID_WHAT_ITEM)
         {
-            if (PLAYER_APPRENTICE.field_B8[i].unk0_3 != 0)
-                apprenticeMons[monId]->item = PLAYER_APPRENTICE.field_B8[i].unk2;
+            if (PLAYER_APPRENTICE.questions[i].suggestedChange)
+                apprenticeMons[monId]->item = PLAYER_APPRENTICE.questions[i].data;
         }
-        else if (var1 == 2)
+        else if (questionId == QUESTION_ID_WHICH_MOVE)
         {
-            if (PLAYER_APPRENTICE.field_B8[i].unk0_3 != 0)
+            if (PLAYER_APPRENTICE.questions[i].suggestedChange)
             {
-                u32 moveSlot = PLAYER_APPRENTICE.field_B8[i].unk0_2;
-                apprenticeMons[monId]->moves[moveSlot] = PLAYER_APPRENTICE.field_B8[i].unk2;
+                u32 moveSlot = PLAYER_APPRENTICE.questions[i].moveSlot;
+                apprenticeMons[monId]->moves[moveSlot] = PLAYER_APPRENTICE.questions[i].data;
             }
         }
     }
 }
 
-static void CreateMenuWithAnswers(u8 arg0)
+static void CreateApprenticeMenu(u8 menu)
 {
     u8 i;
     u8 windowId;
@@ -1497,19 +589,19 @@ static void CreateMenuWithAnswers(u8 arg0)
     u8 top;
     s32 pixelWidth;
 
-    switch (arg0)
+    switch (menu)
     {
     case APPRENTICE_ASK_WHICH_LEVEL:
-        left = 0x12;
+        left = 18;
         top = 8;
         strings[0] = gText_Lv50;
         strings[1] = gText_OpenLevel;
         break;
     case APPRENTICE_ASK_3SPECIES:
-        count = 3;
-        left = 0x12;
+        count = MULTI_PARTY_SIZE;
+        left = 18;
         top = 6;
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < MULTI_PARTY_SIZE; i++)
         {
             u16 species;
             u32 speciesTableId;
@@ -1520,27 +612,27 @@ static void CreateMenuWithAnswers(u8 arg0)
         }
         break;
     case APPRENTICE_ASK_2SPECIES:
-        left = 0x12;
+        left = 18;
         top = 8;
-        if (PLAYER_APPRENTICE.field_B1_1 > 2)
+        if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS)
             return;
-        strings[1] = gSpeciesNames[gUnknown_030062F0->unk2];
-        strings[0] = gSpeciesNames[gUnknown_030062F0->unk0];
+        strings[1] = gSpeciesNames[gApprenticeQuestionData->altSpeciesId];
+        strings[0] = gSpeciesNames[gApprenticeQuestionData->speciesId];
         break;
     case APPRENTICE_ASK_MOVES:
-        left = 0x11;
+        left = 17;
         top = 8;
-        strings[0] = gMoveNames[gUnknown_030062F0->unk4];
-        strings[1] = gMoveNames[gUnknown_030062F0->unk6];
+        strings[0] = gMoveNames[gApprenticeQuestionData->moveId1];
+        strings[1] = gMoveNames[gApprenticeQuestionData->moveId2];
         break;
     case APPRENTICE_ASK_GIVE:
-        left = 0x12;
+        left = 18;
         top = 8;
         strings[0] = gText_Give;
         strings[1] = gText_NoNeed;
         break;
     case APPRENTICE_ASK_YES_NO:
-        left = 0x14;
+        left = 20;
         top = 8;
         strings[0] = gText_Yes;
         strings[1] = gText_No;
@@ -1623,12 +715,12 @@ static void RemoveAndHideWindow(u8 windowId)
     RemoveWindow(windowId);
 }
 
-static void CreateChooseAnswerTask(bool8 noBButton, u8 itemsCount, u8 windowId)
+static void CreateChooseAnswerTask(bool8 noBButton, u8 answers, u8 windowId)
 {
     u8 taskId = CreateTask(Task_ChooseAnswer, 80);
     gTasks[taskId].tNoBButton = noBButton;
 
-    if (itemsCount > 3)
+    if (answers > 3)
         gTasks[taskId].tWrapAround = TRUE;
     else
         gTasks[taskId].tWrapAround = FALSE;
@@ -1649,71 +741,79 @@ static void Script_ResetPlayerApprentice(void)
 {
     u8 i;
 
-    sub_819FBC8();
-    PLAYER_APPRENTICE.activeLvlMode = 0;
-    PLAYER_APPRENTICE.field_B1_1 = 0;
-    PLAYER_APPRENTICE.field_B1_2 = 0;
-    PLAYER_APPRENTICE.field_B2_0 = 0;
+    SetApprenticeId();
+    PLAYER_APPRENTICE.lvlMode = 0;
+    PLAYER_APPRENTICE.questionsAnswered = 0;
+    PLAYER_APPRENTICE.leadMonId = 0;
+    PLAYER_APPRENTICE.party = 0;
 
-    for (i = 0; i < 3; i++)
-        PLAYER_APPRENTICE.monIds[i] = 0;
+    for (i = 0; i < MULTI_PARTY_SIZE; i++)
+        PLAYER_APPRENTICE.speciesIds[i] = 0;
 
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < APPRENTICE_MAX_QUESTIONS; i++)
     {
-        PLAYER_APPRENTICE.field_B8[i].unk0_0 = 0;
-        PLAYER_APPRENTICE.field_B8[i].unk0_1 = 0;
-        PLAYER_APPRENTICE.field_B8[i].unk0_2 = 0;
-        PLAYER_APPRENTICE.field_B8[i].unk0_3 = 0;
-        PLAYER_APPRENTICE.field_B8[i].unk2 = 0;
+        PLAYER_APPRENTICE.questions[i].questionId = 0;
+        PLAYER_APPRENTICE.questions[i].monId = 0;
+        PLAYER_APPRENTICE.questions[i].moveSlot = 0;
+        PLAYER_APPRENTICE.questions[i].suggestedChange = 0;
+        PLAYER_APPRENTICE.questions[i].data = 0;
     }
 }
 
-static void Script_IsPlayersApprenticeActive(void)
+static void Script_GivenApprenticeLvlMode(void)
 {
-    if (!IsPlayersApprenticeActive())
+    if (!GivenApprenticeLvlMode())
         gSpecialVar_Result = FALSE;
     else
         gSpecialVar_Result = TRUE;
 }
 
-static void Script_SetPlayersApprenticeLvlMode(void)
+// VAR_0x8005 is 1 + the selection value from the multichoice APPRENTICE_ASK_WHICH_LEVEL
+// i.e. APPRENTICE_LVL_MODE_50 or APPRENTICE_LVL_MODE_OPEN
+static void Script_SetApprenticeLvlMode(void)
 {
     SetPlayersApprenticeLvlMode(gSpecialVar_0x8005);
 }
 
-static void sub_81A0978(void)
+// Never called, APPRENTICE_FUNC_SET_ID is unused
+static void Script_SetApprenticeId(void)
 {
-    sub_819FBC8();
+    SetApprenticeId();
 }
 
-static void sub_81A0984(void)
+static void Script_SetRandomQuestionData(void)
 {
-    sub_819FD64();
+    SetRandomQuestionData();
 }
 
-static void sub_81A0990(void)
+static void IncrementQuestionsAnswered(void)
 {
-    PLAYER_APPRENTICE.field_B1_1++;
+    PLAYER_APPRENTICE.questionsAnswered++;
 }
 
-static void sub_81A09B4(void)
+// The first 3 questions answered after meeting the Apprentice are always selecting party mons
+//  after which this is never called
+static void GetNumApprenticePartyMonsAssigned(void)
 {
-    gSpecialVar_Result = PLAYER_APPRENTICE.field_B1_1;
+    gSpecialVar_Result = PLAYER_APPRENTICE.questionsAnswered;
 }
 
-static void sub_81A09D0(void)
+// Never called, APPRENTICE_FUNC_IS_FINAL_QUESTION is unused
+static void IsFinalQuestion(void)
 {
-    s32 var = PLAYER_APPRENTICE.field_B1_1 - 3;
-    if (var < 0)
+    s32 questionNum = CURRENT_QUESTION_NUM;
+    
+    if (questionNum < 0)
     {
+        // Not finished asking initial questions
         gSpecialVar_Result = FALSE;
     }
     else
     {
-        if (var > 8)
+        if (questionNum > APPRENTICE_MAX_QUESTIONS - 1)
             gSpecialVar_Result = TRUE;
 
-        if (!PLAYER_APPRENTICE.field_B8[var].unk0_0)
+        if (PLAYER_APPRENTICE.questions[questionNum].questionId == QUESTION_ID_WIN_SPEECH)
             gSpecialVar_Result = TRUE;
         else
             gSpecialVar_Result = FALSE;
@@ -1722,7 +822,7 @@ static void sub_81A09D0(void)
 
 static void Script_CreateApprenticeMenu(void)
 {
-    CreateMenuWithAnswers(gSpecialVar_0x8005);
+    CreateApprenticeMenu(gSpecialVar_0x8005);
 }
 
 static void Task_WaitForPrintingMessage(u8 taskId)
@@ -1737,77 +837,77 @@ static void Task_WaitForPrintingMessage(u8 taskId)
     }
 }
 
-static void PrintMessage(void)
+static void PrintApprenticeMessage(void)
 {
     const u8 *string;
 
-    if (gSpecialVar_0x8006 == 6)
+    if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MON)
     {
-        string = gUnknown_08610FF0[PLAYER_APPRENTICE.id][0];
+        string = sApprenticeWhichMonTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 7)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MON)
     {
-        string = gUnknown_08610FF0[PLAYER_APPRENTICE.id][1];
+        string = sApprenticeWhichMonTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 8)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MOVE)
     {
-        string = gUnknown_086111B0[PLAYER_APPRENTICE.id][0];
+        string = sApprenticeWhichMoveTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 9)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MOVE)
     {
-        string = gUnknown_086111B0[PLAYER_APPRENTICE.id][1];
+        string = sApprenticeWhichMoveTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 4)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MON_FIRST)
     {
-        string = gUnknown_08611230[PLAYER_APPRENTICE.id][0];
+        string = sApprenticeWhichMonFirstTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 5)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MON_FIRST)
     {
-        string = gUnknown_08611230[PLAYER_APPRENTICE.id][1];
+        string = sApprenticeWhichMonFirstTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 10)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHAT_HELD_ITEM)
     {
-        string = gUnknown_08611070[PLAYER_APPRENTICE.id][0];
+        string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 11)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_PICK_WIN_SPEECH)
     {
-        string = gUnknown_086112B0[PLAYER_APPRENTICE.id][0];
+        string = sApprenticePickWinSpeechTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 12)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_HELD_ITEM)
     {
-        string = gUnknown_08611070[PLAYER_APPRENTICE.id][3];
+        string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][3];
     }
-    else if (gSpecialVar_0x8006 == 13)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_HOLD_NOTHING)
     {
-        string = gUnknown_08611070[PLAYER_APPRENTICE.id][1];
+        string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 16)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_ITEM_ALREADY_SUGGESTED)
     {
-        string = gUnknown_08611070[PLAYER_APPRENTICE.id][4];
+        string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][4];
     }
-    else if (gSpecialVar_0x8006 == 14)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_NO_HELD_ITEM)
     {
-        string = gUnknown_08611070[PLAYER_APPRENTICE.id][2];
+        string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][2];
     }
-    else if (gSpecialVar_0x8006 == 15)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_WIN_SPEECH)
     {
-        string = gUnknown_086112B0[PLAYER_APPRENTICE.id][1];
+        string = sApprenticePickWinSpeechTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 0)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_PLEASE_TEACH)
     {
-        string = gUnknown_08610EF0[PLAYER_APPRENTICE.id][0];
+        string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == 1)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_REJECT)
     {
-        string = gUnknown_08610EF0[PLAYER_APPRENTICE.id][1];
+        string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == 2)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_LVL_MODE)
     {
-        string = gUnknown_08610EF0[PLAYER_APPRENTICE.id][2];
+        string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][2];
     }
-    else if (gSpecialVar_0x8006 == 3)
+    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_LVL_MODE)
     {
-        string = gUnknown_08610EF0[PLAYER_APPRENTICE.id][3];
+        string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][3];
     }
     else
     {
@@ -1820,121 +920,129 @@ static void PrintMessage(void)
     CreateTask(Task_WaitForPrintingMessage, 1);
 }
 
-static void Script_PrintMessage(void)
+static void Script_PrintApprenticeMessage(void)
 {
     ScriptContext2_Enable();
     FreezeEventObjects();
     sub_808B864();
     sub_808BCF4();
     DrawDialogueFrame(0, 1);
-    PrintMessage();
+    PrintApprenticeMessage();
 }
 
-static void sub_81A0CC0(void)
+static void ApprenticeGetQuestion(void)
 {
-    if (PLAYER_APPRENTICE.field_B1_1 < 3)
+    if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
     {
-        gSpecialVar_Result = 2;
+        gSpecialVar_Result = APPRENTICE_QUESTION_WHICH_MON;
     }
-    else if (PLAYER_APPRENTICE.field_B1_1 > 11)
+    else if (PLAYER_APPRENTICE.questionsAnswered > (APPRENTICE_MAX_QUESTIONS + NUM_WHICH_MON_QUESTIONS - 1))
     {
-        gSpecialVar_Result = 5;
+        gSpecialVar_Result = APPRENTICE_QUESTION_WIN_SPEECH;
     }
     else
     {
-        s32 id = PLAYER_APPRENTICE.field_B1_1 - 3;
-        switch (PLAYER_APPRENTICE.field_B8[id].unk0_0)
+        s32 id = CURRENT_QUESTION_NUM;
+        switch (PLAYER_APPRENTICE.questions[id].questionId)
         {
-        case 1:
-            gSpecialVar_Result = 4;
+        case QUESTION_ID_WHAT_ITEM:
+            gSpecialVar_Result = APPRENTICE_QUESTION_WHAT_ITEM;
             break;
-        case 2:
-            gSpecialVar_Result = 3;
+        case QUESTION_ID_WHICH_MOVE:
+            gSpecialVar_Result = APPRENTICE_QUESTION_WHICH_MOVE;
             break;
-        case 3:
-            gSpecialVar_Result = 1;
+        case QUESTION_ID_WHICH_FIRST:
+            gSpecialVar_Result = APPRENTICE_QUESTION_WHICH_FIRST;
             break;
         default:
-            gSpecialVar_Result = 5;
+      //case QUESTION_ID_WIN_SPEECH:  
+            gSpecialVar_Result = APPRENTICE_QUESTION_WIN_SPEECH;
             break;
         }
     }
 }
 
-static void sub_81A0D40(void)
+// gSpecialVar_0x8005 is 0 or 1 for the mon selection (0 is already on the team)
+// gSpecialVar_0x8006 is 0-2 for the number of party mons selected so far
+static void SetApprenticePartyMon(void)
 {
     if (gSpecialVar_0x8005)
     {
-        u8 bitNo = gSpecialVar_0x8006;
-        PLAYER_APPRENTICE.field_B2_0 |= 1 << bitNo;
+        u8 partySlot = gSpecialVar_0x8006;
+        PLAYER_APPRENTICE.party |= 1 << partySlot;
     }
 }
 
-static void sub_81A0D80(void)
+// gSpecialVar_0x8005 is 0 or 1 for the move selection
+// Selection 0 is implicitly the default move assigned
+static void SetApprenticeMonMove(void)
 {
-    if (PLAYER_APPRENTICE.field_B1_1 >= 3)
+    if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS)
     {
-        u8 id = PLAYER_APPRENTICE.field_B1_1 - 3;
+        u8 id = CURRENT_QUESTION_NUM;
         if (gSpecialVar_0x8005)
-            PLAYER_APPRENTICE.field_B8[id].unk0_3 = 1;
+            PLAYER_APPRENTICE.questions[id].suggestedChange = TRUE;
         else
-            PLAYER_APPRENTICE.field_B8[id].unk0_3 = 0;
+            PLAYER_APPRENTICE.questions[id].suggestedChange = FALSE;
     }
 }
 
-static void sub_81A0DD4(void)
+static void InitQuestionData(void)
 {
     u8 i;
     u8 count = 0;
     u8 id1, id2;
 
-    for (i = 0; i < 9 && PLAYER_APPRENTICE.field_B8[i].unk0_0; count++, i++)
+    for (i = 0; i < APPRENTICE_MAX_QUESTIONS && (PLAYER_APPRENTICE.questions[i].questionId != QUESTION_ID_WIN_SPEECH); count++, i++)
         ;
 
-    gUnknown_030062F0 = AllocZeroed(sizeof(*gUnknown_030062F0));
-    if (gSpecialVar_0x8005 == 2)
+    gApprenticeQuestionData = AllocZeroed(sizeof(*gApprenticeQuestionData));
+    if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHICH_MON)
     {
-        if (PLAYER_APPRENTICE.field_B1_1 < 3)
+        if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
         {
-            id1 = PLAYER_APPRENTICE.monIds[PLAYER_APPRENTICE.field_B1_1] >> 4;
-            gUnknown_030062F0->unk2 = gApprentices[PLAYER_APPRENTICE.id].species[id1];
+            // For the first MULTI_PARTY_SIZE (3) questions, a mon is asked to be selected for the Apprentice's party
+            id1 = PLAYER_APPRENTICE.speciesIds[PLAYER_APPRENTICE.questionsAnswered] >> 4;
+            gApprenticeQuestionData->altSpeciesId = gApprentices[PLAYER_APPRENTICE.id].species[id1];
 
-            id2 = PLAYER_APPRENTICE.monIds[PLAYER_APPRENTICE.field_B1_1] & 0xF;
-            gUnknown_030062F0->unk0 = gApprentices[PLAYER_APPRENTICE.id].species[id2];
+            id2 = PLAYER_APPRENTICE.speciesIds[PLAYER_APPRENTICE.questionsAnswered] & 0xF;
+            gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id2];
         }
     }
-    else if (gSpecialVar_0x8005 == 3)
+    else if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHICH_MOVE)
     {
-        if (PLAYER_APPRENTICE.field_B1_1 >= 3
-            && PLAYER_APPRENTICE.field_B1_1 < count + 3
-            && PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_0 == 2)
+        if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS
+            && PLAYER_APPRENTICE.questionsAnswered < count + NUM_WHICH_MON_QUESTIONS
+            && PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].questionId == QUESTION_ID_WHICH_MOVE)
         {
-            count = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_1;
+            // count re-used as monId
+            count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
             APPRENTICE_SPECIES_ID_2(id1, count);
-            gUnknown_030062F0->unk0 = gApprentices[PLAYER_APPRENTICE.id].species[id1];
-            gUnknown_030062F0->unk4 = sub_81A0284(count, id1, PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_2);
-            gUnknown_030062F0->unk6 = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2;
+            gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id1];
+            gApprenticeQuestionData->moveId1 = GetDefaultMove(count, id1, PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].moveSlot);
+            gApprenticeQuestionData->moveId2 = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data;
         }
     }
-    else if (gSpecialVar_0x8005 == 4)
+    else if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHAT_ITEM)
     {
-        if (PLAYER_APPRENTICE.field_B1_1 >= 3
-            && PLAYER_APPRENTICE.field_B1_1 < count + 3
-            && PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_0 == 1)
+        if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS
+            && PLAYER_APPRENTICE.questionsAnswered < count + NUM_WHICH_MON_QUESTIONS
+            && PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].questionId == QUESTION_ID_WHAT_ITEM)
         {
-            count = PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_1;
+            // count re-used as monId
+            count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
             APPRENTICE_SPECIES_ID_2(id2, count);
-            gUnknown_030062F0->unk0 = gApprentices[PLAYER_APPRENTICE.id].species[id2];
+            gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id2];
         }
     }
 }
 
-static void sub_81A0FE4(void)
+static void FreeQuestionData(void)
 {
-    FREE_AND_SET_NULL(gUnknown_030062F0);
+    FREE_AND_SET_NULL(gApprenticeQuestionData);
 }
 
-static void sub_81A0FFC(void)
+static void ApprenticeBufferString(void)
 {
     u8 *stringDst;
     u8 text[16];
@@ -1958,41 +1066,41 @@ static void sub_81A0FFC(void)
     switch (gSpecialVar_0x8006)
     {
     case APPRENTICE_BUFF_SPECIES1:
-        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
+        StringCopy(stringDst, gSpeciesNames[gApprenticeQuestionData->speciesId]);
         break;
     case APPRENTICE_BUFF_SPECIES2:
-        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk2]);
+        StringCopy(stringDst, gSpeciesNames[gApprenticeQuestionData->altSpeciesId]);
         break;
     case APPRENTICE_BUFF_SPECIES3:
-        StringCopy(stringDst, gSpeciesNames[gUnknown_030062F0->unk0]);
+        StringCopy(stringDst, gSpeciesNames[gApprenticeQuestionData->speciesId]);
         break;
     case APPRENTICE_BUFF_MOVE1:
-        StringCopy(stringDst, gMoveNames[gUnknown_030062F0->unk4]);
+        StringCopy(stringDst, gMoveNames[gApprenticeQuestionData->moveId1]);
         break;
     case APPRENTICE_BUFF_MOVE2:
-        StringCopy(stringDst, gMoveNames[gUnknown_030062F0->unk6]);
+        StringCopy(stringDst, gMoveNames[gApprenticeQuestionData->moveId2]);
         break;
     case APPRENTICE_BUFF_ITEM:
-        StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2));
+        StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data));
         break;
     case APPRENTICE_BUFF_NAME:
         TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(PLAYER_APPRENTICE.id, LANGUAGE_ENGLISH), LANGUAGE_ENGLISH);
         StringCopy(stringDst, text);
         break;
     case APPRENTICE_BUFF_LEVEL:
-        if (PLAYER_APPRENTICE.activeLvlMode == 1)
+        if (PLAYER_APPRENTICE.lvlMode == APPRENTICE_LVL_MODE_50)
             StringCopy(stringDst, gText_Lv50);
-        else
+        else // == APPRENTICE_LVL_MODE_OPEN
             StringCopy(stringDst, gText_OpenLevel);
         break;
-    case APPRENTICE_BUFF_EASY_CHAT:
-        FrontierSpeechToString(gSaveBlock2Ptr->apprentices[0].easyChatWords);
+    case APPRENTICE_BUFF_WIN_SPEECH:
+        FrontierSpeechToString(gSaveBlock2Ptr->apprentices[0].speechWon);
         StringCopy(stringDst, gStringVar4);
         break;
-    case APPRENTICE_BUFF_SPECIES4:
-        if (PLAYER_APPRENTICE.field_B1_2 < 3)
+    case APPRENTICE_BUFF_LEAD_MON_SPECIES:
+        if (PLAYER_APPRENTICE.leadMonId < MULTI_PARTY_SIZE)
         {
-            APPRENTICE_SPECIES_ID(speciesArrayId, PLAYER_APPRENTICE.field_B1_2);
+            APPRENTICE_SPECIES_ID(speciesArrayId, PLAYER_APPRENTICE.leadMonId);
         }
         else
         {
@@ -2003,56 +1111,57 @@ static void sub_81A0FFC(void)
     }
 }
 
-static void sub_81A11F8(void)
+static void SetLeadApprenticeMon(void)
 {
-    PLAYER_APPRENTICE.field_B1_2 = gSpecialVar_0x8005;
+    PLAYER_APPRENTICE.leadMonId = gSpecialVar_0x8005;
 }
 
-static void sub_81A1218(void)
+static void Script_ApprenticeOpenBagMenu(void)
 {
-    sub_81AAC28();
+    ApprenticeOpenBagMenu();
 }
 
-static void sub_81A1224(void)
+static void TrySetApprenticeHeldItem(void)
 {
     u8 i, j;
     u8 count;
 
-    if (PLAYER_APPRENTICE.field_B1_1 < 3)
+    if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
         return;
 
-    for (count = 0, j = 0; j < 9 && PLAYER_APPRENTICE.field_B8[j].unk0_0; count++, j++)
+    for (count = 0, j = 0; j < APPRENTICE_MAX_QUESTIONS && PLAYER_APPRENTICE.questions[j].questionId != QUESTION_ID_WIN_SPEECH; count++, j++)
         ;
 
-    for (i = 0; i < count && i < PLAYER_APPRENTICE.field_B1_1 - 3; i++)
+    // Make sure the item hasnt already been suggested in previous questions
+    for (i = 0; i < count && i < CURRENT_QUESTION_NUM; i++)
     {
         do {} while(0);
-        if (PLAYER_APPRENTICE.field_B8[i].unk0_0 == 1
-            && PLAYER_APPRENTICE.field_B8[i].unk0_3
-            && PLAYER_APPRENTICE.field_B8[i].unk2 == gSpecialVar_0x8005)
+        if (PLAYER_APPRENTICE.questions[i].questionId == QUESTION_ID_WHAT_ITEM
+            && PLAYER_APPRENTICE.questions[i].suggestedChange
+            && PLAYER_APPRENTICE.questions[i].data == gSpecialVar_0x8005)
         {
-            PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_3 = 0;
-            PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2 = gSpecialVar_0x8005;
-            gSpecialVar_Result = 0;
+            PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].suggestedChange = FALSE;
+            PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_0x8005;
+            gSpecialVar_Result = FALSE;
             return;
         }
     }
 
-    PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk0_3 = 1;
-    PLAYER_APPRENTICE.field_B8[PLAYER_APPRENTICE.field_B1_1 - 3].unk2 = gSpecialVar_0x8005;
-    gSpecialVar_Result = 1;
+    PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].suggestedChange = TRUE;
+    PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_0x8005;
+    gSpecialVar_Result = TRUE;
 }
 
-static void sub_81A1370(void)
+static void ShiftSavedApprentices(void)
 {
     s32 i;
-    s32 r10;
-    s32 r9;
+    s32 apprenticeNum;
+    s32 apprenticeIdx;
 
     if (gSaveBlock2Ptr->apprentices[0].playerName[0] == EOS)
         return;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < APPRENTICE_COUNT - 1; i++)
     {
         if (gSaveBlock2Ptr->apprentices[i + 1].playerName[0] == EOS)
         {
@@ -2061,37 +1170,39 @@ static void sub_81A1370(void)
         }
     }
 
-    r10 = 0xFFFF;
-    r9 = -1;
-    for (i = 1; i < TRAINER_ID_LENGTH; i++)
+    apprenticeNum = 0xFFFF;
+    apprenticeIdx = -1;
+    for (i = 1; i < APPRENTICE_COUNT; i++)
     {
         if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)
-            && gSaveBlock2Ptr->apprentices[i].number < r10)
+            && gSaveBlock2Ptr->apprentices[i].number < apprenticeNum)
         {
-            r10 = gSaveBlock2Ptr->apprentices[i].number;
-            r9 = i;
+            apprenticeNum = gSaveBlock2Ptr->apprentices[i].number;
+            apprenticeIdx = i;
         }
     }
 
-    if (r9 > 0)
-        gSaveBlock2Ptr->apprentices[r9] = gSaveBlock2Ptr->apprentices[0];
+    if (apprenticeIdx > 0)
+        gSaveBlock2Ptr->apprentices[apprenticeIdx] = gSaveBlock2Ptr->apprentices[0];
 }
 
-static void sub_81A1438(void)
+// Apprentice is always saved in the first slot. Pre-existing Apprentices are moved by ShiftSavedApprentices
+static void SaveApprentice(void)
 {
     u8 i;
 
     gSaveBlock2Ptr->apprentices[0].id = PLAYER_APPRENTICE.id;
-    gSaveBlock2Ptr->apprentices[0].lvlMode = PLAYER_APPRENTICE.activeLvlMode;
+    gSaveBlock2Ptr->apprentices[0].lvlMode = PLAYER_APPRENTICE.lvlMode;
 
-    for (i = 0; i < 9 && PLAYER_APPRENTICE.field_B8[i].unk0_0; i++)
+    // Count questions asked until the final (win speech) question was reached
+    for (i = 0; i < APPRENTICE_MAX_QUESTIONS && (PLAYER_APPRENTICE.questions[i].questionId != QUESTION_ID_WIN_SPEECH); i++)
         ;
 
-    gSaveBlock2Ptr->apprentices[0].field_1 = i;
+    gSaveBlock2Ptr->apprentices[0].numQuestions = i;
     if (gSaveBlock2Ptr->apprentices[0].number < 255)
         gSaveBlock2Ptr->apprentices[0].number++;
 
-    sub_81A0390(gSaveBlock2Ptr->apprentices[0].field_1);
+    SaveApprenticeParty(gSaveBlock2Ptr->apprentices[0].numQuestions);
     for (i = 0; i < TRAINER_ID_LENGTH; i++)
         gSaveBlock2Ptr->apprentices[0].playerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
@@ -2100,13 +1211,13 @@ static void sub_81A1438(void)
     CalcApprenticeChecksum(&gSaveBlock2Ptr->apprentices[0]);
 }
 
-static void sub_81A150C(void)
+// Never called, APPRENTICE_FUNC_SET_GFX_SAVED is unused
+static void SetSavedApprenticeTrainerGfxId(void)
 {
     u8 i;
     u8 mapObjectGfxId;
     u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
 
-    // Search male classes.
     for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
     if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
@@ -2125,7 +1236,7 @@ static void sub_81A150C(void)
     }
 }
 
-static void Script_SetPlayerApprenticeTrainerGfxId(void)
+static void SetPlayerApprenticeTrainerGfxId(void)
 {
     u8 i;
     u8 mapObjectGfxId;
@@ -2149,14 +1260,16 @@ static void Script_SetPlayerApprenticeTrainerGfxId(void)
     }
 }
 
-static void sub_81A1638(void)
+// Both of the below functions may have been dummied / used for debug
+// In all cases theres a conditional for VAR_0x8004 right after the call to these functions
+static void GetShouldCheckApprenticeGone(void)
 {
-    gSpecialVar_0x8004 = 1;
+    gSpecialVar_0x8004 = TRUE;
 }
 
-static void sub_81A1644(void)
+static void GetShouldApprenticeLeave(void)
 {
-    gSpecialVar_0x8004 = 1;
+    gSpecialVar_0x8004 = TRUE;
 }
 
 const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
@@ -2181,7 +1294,8 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
     }
 }
 
-static void sub_81A16B4(u8 taskId)
+// Functionally unused
+static void Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
         SwitchTaskToFollowupFunc(taskId);
@@ -2191,8 +1305,8 @@ static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
-        gUnknown_030062F4 = (void*)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 0x10)));
-        gUnknown_030062F4();
+        gApprenticeFunc = (void*)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
+        gApprenticeFunc();
         DestroyTask(taskId);
     }
 }
@@ -2204,8 +1318,9 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void))
     gTasks[taskId].data[1] = (u32)(func) >> 16;
 }
 
-static void sub_81A175C(TaskFunc taskFunc)
+// Unused
+static void ExecuteFollowupFuncAfterButtonPress(TaskFunc task)
 {
-    u8 taskId = CreateTask(sub_81A16B4, 1);
-    SetTaskFuncWithFollowupFunc(taskId, sub_81A16B4, taskFunc);
+    u8 taskId = CreateTask(Task_SwitchToFollowupFuncAfterButtonPress, 1);
+    SetTaskFuncWithFollowupFunc(taskId, Task_SwitchToFollowupFuncAfterButtonPress, task);
 }

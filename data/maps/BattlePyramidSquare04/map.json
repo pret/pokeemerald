@@ -13,6 +13,7 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_GYM",
   "connections": null,
+  "shared_scripts_map": "BattlePyramidSquare01",
   "object_events": [
     {
       "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",

@@ -8,7 +8,8 @@ FallarborTown_PokemonCenter_1F_OnTransition: @ 8200BD8
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-FallarborTown_PokemonCenter_1F_EventScript_200BE1:: @ 8200BE1
+@ VAR_0x800B is the Nurse's object event id
+FallarborTown_PokemonCenter_1F_EventScript_Nurse:: @ 8200BE1
 	setvar VAR_0x800B, 1
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
@@ -16,44 +17,44 @@ FallarborTown_PokemonCenter_1F_EventScript_200BE1:: @ 8200BE1
 	release
 	end
 
-FallarborTown_PokemonCenter_1F_EventScript_200BEF:: @ 8200BEF
-	msgbox FallarborTown_PokemonCenter_1F_Text_200E22, MSGBOX_NPC
+FallarborTown_PokemonCenter_1F_EventScript_Girl:: @ 8200BEF
+	msgbox FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown, MSGBOX_NPC
 	end
 
-FallarborTown_PokemonCenter_1F_EventScript_200BF8:: @ 8200BF8
-	msgbox FallarborTown_PokemonCenter_1F_Text_200E8B, MSGBOX_NPC
+FallarborTown_PokemonCenter_1F_EventScript_ExpertM:: @ 8200BF8
+	msgbox FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees, MSGBOX_NPC
 	end
 
-FallarborTown_PokemonCenter_1F_EventScript_200C01:: @ 8200C01
+FallarborTown_PokemonCenter_1F_EventScript_Lanette:: @ 8200C01
 	lock
 	faceplayer
-	msgbox FallarborTown_PokemonCenter_1F_Text_200C6B, MSGBOX_DEFAULT
+	msgbox FallarborTown_PokemonCenter_1F_Text_LanetteGreeting, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
-	case DIR_NORTH, FallarborTown_PokemonCenter_1F_EventScript_200C28
-	case DIR_WEST, FallarborTown_PokemonCenter_1F_EventScript_200C38
+	case DIR_NORTH, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth
+	case DIR_WEST, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest
 	end
 
-FallarborTown_PokemonCenter_1F_EventScript_200C28:: @ 8200C28
-	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_200C53
+FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth:: @ 8200C28
+	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth
 	waitmovement 0
-	goto FallarborTown_PokemonCenter_1F_EventScript_200C48
+	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
 
-FallarborTown_PokemonCenter_1F_EventScript_200C38:: @ 8200C38
-	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_200C60
+FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest:: @ 8200C38
+	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest
 	waitmovement 0
-	goto FallarborTown_PokemonCenter_1F_EventScript_200C48
+	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
 
-FallarborTown_PokemonCenter_1F_EventScript_200C48:: @ 8200C48
+FallarborTown_PokemonCenter_1F_EventScript_LanetteExited:: @ 8200C48
 	playse SE_JIDO_DOA
 	removeobject 4
 	clearflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
 	release
 	end
 
-FallarborTown_PokemonCenter_1F_Movement_200C53: @ 8200C53
+FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth: @ 8200C53
 	walk_right
 	walk_down
 	walk_down
@@ -68,7 +69,7 @@ FallarborTown_PokemonCenter_1F_Movement_200C53: @ 8200C53
 	delay_8
 	step_end
 
-FallarborTown_PokemonCenter_1F_Movement_200C60: @ 8200C60
+FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest: @ 8200C60
 	walk_down
 	walk_down
 	walk_left
@@ -81,7 +82,7 @@ FallarborTown_PokemonCenter_1F_Movement_200C60: @ 8200C60
 	delay_8
 	step_end
 
-FallarborTown_PokemonCenter_1F_Text_200C6B: @ 8200C6B
+FallarborTown_PokemonCenter_1F_Text_LanetteGreeting: @ 8200C6B
 	.string "Oh, hello.\n"
 	.string "You are?\p"
 	.string "Okay, your name's {PLAYER}{KUN}.\n"
@@ -98,13 +99,13 @@ FallarborTown_PokemonCenter_1F_Text_200C6B: @ 8200C6B
 	.string "If you could, please visit me at home.\n"
 	.string "My house is on ROUTE 114.$"
 
-FallarborTown_PokemonCenter_1F_Text_200E22: @ 8200E22
+FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown: @ 8200E22
 	.string "I wonder what POKéMON looked like\n"
 	.string "long, long ago?\p"
 	.string "Maybe the FOSSIL MANIAC at the edge\n"
 	.string "of town will know.$"
 
-FallarborTown_PokemonCenter_1F_Text_200E8B: @ 8200E8B
+FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees: @ 8200E8B
 	.string "In the fields of FALLARBOR, we plant\n"
 	.string "seedlings of hardy trees that thrive\l"
 	.string "even in volcanic ash.$"

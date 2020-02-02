@@ -1,70 +1,71 @@
-MauvilleCity_GameCorner_EventScript_2A5AB1:: @ 82A5AB1
+Roulette_EventScript_Table1:: @ 82A5AB1
 	checkitem ITEM_COIN_CASE, 1
-	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_210456
+	compare VAR_RESULT, FALSE
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 0
-	getpricereduction 2
-	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_2A5B0D
+	getpricereduction POKENEWS_GAME_CORNER
+	compare VAR_RESULT, FALSE
+	goto_if_eq Roulette_EventScript_Play
 	addvar VAR_0x8004, 128
-	goto MauvilleCity_GameCorner_EventScript_2A5B0D
+	goto Roulette_EventScript_Play
 	end
 
-MauvilleCity_GameCorner_EventScript_2A5ADF:: @ 82A5ADF
+Roulette_EventScript_Table2:: @ 82A5ADF
 	checkitem ITEM_COIN_CASE, 1
-	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_210456
+	compare VAR_RESULT, FALSE
+	goto_if_eq MauvilleCity_GameCorner_EventScript_NoCoinCase
 	setvar VAR_0x8004, 1
-	getpricereduction 2
-	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_GameCorner_EventScript_2A5B0D
+	getpricereduction POKENEWS_GAME_CORNER
+	compare VAR_RESULT, FALSE
+	goto_if_eq Roulette_EventScript_Play
 	addvar VAR_0x8004, 128
-	goto MauvilleCity_GameCorner_EventScript_2A5B0D
+	goto Roulette_EventScript_Play
 	end
 
-MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
+Roulette_EventScript_Play:: @ 82A5B0D
 	special PlayRoulette
 	waitstate
 	end
 	
-gUnknown_082A5B12:: @ 82A5B12
+Roulette_Text_PlayMinimumWagerIsX:: @ 82A5B12
 	.string "The minimum wager at this table\n"
 	.string "is {STR_VAR_1}. Do you want to play?$"
 
-gUnknown_082A5B4E:: @ 82A5B4E
+Roulette_Text_NotEnoughCoins:: @ 82A5B4E
 	.string "You don't have enough COINS.$"
 
-gUnknown_082A5B6B:: @ 82A5B6B
+Roulette_Text_SpecialRateTable:: @ 82A5B6B
 	.string "Special rate table right now!$"
 
-gUnknown_082A5B89:: @ 82A5B89
+Roulette_Text_ControlsInstruction:: @ 82A5B89
 	.string "Place your wager with the + Control\n"
 	.string "Pad, then press the A Button.$"
 
-gUnknown_082A5BCB:: @ 82A5BCB
+Roulette_Text_ItsAHit:: @ 82A5BCB
 	.string "It's a hit!$"
 
-gUnknown_082A5BD7:: @ 82A5BD7
+Roulette_Text_Jackpot:: @ 82A5BD7
 	.string "Jackpot!$"
 
-gUnknown_082A5BE0:: @ 82A5BE0
+Roulette_Text_NothingDoing:: @ 82A5BE0
 	.string "Nothing doing!$"
 
-gUnknown_082A5BEF:: @ 82A5BEF
+Roulette_Text_YouveWonXCoins:: @ 82A5BEF
 	.string "You've won {STR_VAR_1} COINS!$"
 
-gUnknown_082A5C04:: @ 82A5C04
+Roulette_Text_NoCoinsLeft:: @ 82A5C04
 	.string "No COINS left…$"
 
-gUnknown_082A5C13:: @ 82A5C13
+Roulette_Text_KeepPlaying:: @ 82A5C13
 	.string "Keep playing?$"
 
-gUnknown_082A5C21:: @ 82A5C21
+Roulette_Text_BoardWillBeCleared:: @ 82A5C21
 	.string "The ROULETTE board will be cleared.$"
 
-gUnknown_082A5C45:: @ 82A5C45
+@ Unused
+Roulette_Text_YouDontHaveACoinCase:: @ 82A5C45
 	.string "You don't have a COIN CASE.$"
 
-gUnknown_082A5C61:: @ 82A5C61
+Roulette_Text_CoinCaseIsFull:: @ 82A5C61
 	.string "Your COIN CASE is full!\n"
 	.string "Coins can be exchanged for prizes.$"

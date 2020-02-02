@@ -72,7 +72,6 @@ SECTIONS {
         src/mevent_news.o(.text);
         src/union_room_chat.o(.text);
         src/berry_crush.o(.text);
-        asm/berry_crush.o(.text);
         src/berry_powder.o(.text);
         src/dodrio_berry_picking.o(.text);
         src/pokemon_jump.o(.text);
@@ -204,7 +203,7 @@ SECTIONS {
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
-        src/contest_painting_effects.o(.text);
+        src/image_processing_effects.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
@@ -287,7 +286,7 @@ SECTIONS {
         src/battle_arena.o(.text);
         src/battle_factory.o(.text);
         src/battle_pike.o(.text);
-        src/mossdeep_gym.o(.text);
+        src/rotating_tile_puzzle.o(.text);
         src/battle_pyramid.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
@@ -359,7 +358,7 @@ SECTIONS {
         src/librfu_intr.o(.text);
         asm/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
-        asm/librfu.o(.text);
+        src/librfu_sio32id.o(.text);
         src/libisagbprn.o(.text);
         *libagbsyscall.a:ArcTan2.o(.text);
         *libagbsyscall.a:BgAffineSet.o(.text);
@@ -575,8 +574,8 @@ SECTIONS {
         src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
-        src/contest_painting_effects.o(.rodata);
-        data/contest_painting_effects.o(.rodata);
+        src/image_processing_effects.o(.rodata);
+        data/image_processing_effects.o(.rodata);
         src/decoration.o(.rodata);
         src/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
@@ -644,8 +643,8 @@ SECTIONS {
         src/battle_arena.o(.rodata);
         src/battle_factory.o(.rodata);
         src/battle_pike.o(.rodata);
-        src/mossdeep_gym.o(.rodata);
-        data/mossdeep_gym.o(.rodata);
+        src/rotating_tile_puzzle.o(.rodata);
+        data/rotating_tile_puzzle.o(.rodata);
         src/battle_pyramid.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);
@@ -687,7 +686,7 @@ SECTIONS {
         data/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
-        data/mystery_event_msg.o(.rodata);
+        data/mystery_event.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
@@ -1236,7 +1235,8 @@ SECTIONS {
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
         src/siirtc.o(.rodata);
-        data/librfu_rodata.o(.rodata);
+        src/librfu_rfu.o(.rodata);
+        src/librfu_sio32id.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);
         *libc.a(.rodata);

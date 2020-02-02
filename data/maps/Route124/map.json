@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route124_EventScript_1F6585",
+      "script": "Route124_EventScript_Spencer",
       "flag": "0"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 3,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "7",
-      "script": "Route124_EventScript_1F659C",
+      "script": "Route124_EventScript_Roland",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route124_EventScript_1F65B3",
+      "script": "Route124_EventScript_Jenny",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 8,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route124_EventScript_1F6615",
+      "script": "Route124_EventScript_Grace",
       "flag": "0"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route124_EventScript_1F662C",
+      "script": "Route124_EventScript_Chad",
       "flag": "0"
     },
     {
@@ -154,7 +154,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route124_EventScript_1F6643",
+      "script": "Route124_EventScript_Lila",
       "flag": "0"
     },
     {
@@ -167,7 +167,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route124_EventScript_1F66A7",
+      "script": "Route124_EventScript_Roy",
       "flag": "0"
     },
     {
@@ -180,7 +180,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route124_EventScript_1F670B",
+      "script": "Route124_EventScript_Declan",
       "flag": "0"
     },
     {
@@ -193,7 +193,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "7",
-      "script": "Route124_EventScript_1F6722",
+      "script": "Route124_EventScript_Isabella",
       "flag": "0"
     }
   ],
@@ -214,7 +214,7 @@
       "y": 48,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route124_EventScript_1F657C"
+      "script": "Route124_EventScript_HuntersHouseSign"
     }
   ]
 }

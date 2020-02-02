@@ -777,8 +777,8 @@ const u32 gBattleAnimSpriteGfx_Roots[] = INCBIN_U32("graphics/battle_anims/sprit
 const u32 gBattleAnimSpritePal_ItemBag[] = INCBIN_U32("graphics/battle_anims/sprites/item_bag.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_ItemBag[] = INCBIN_U32("graphics/battle_anims/sprites/item_bag.4bpp.lz");
 
-const u32 gBattleAnimSpritePal_TriForceTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_force_triangle.gbapal.lz");
-const u32 gBattleAnimSpriteGfx_TriForceTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_force_triangle.4bpp.lz");
+const u32 gBattleAnimSpritePal_TriAttackTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_attack_triangle.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_TriAttackTriangle[] = INCBIN_U32("graphics/battle_anims/sprites/tri_attack_triangle.4bpp.lz");
 
 const u32 gBattleAnimSpritePal_LetterZ[] = INCBIN_U32("graphics/battle_anims/sprites/letter_z.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_LetterZ[] = INCBIN_U32("graphics/battle_anims/sprites/letter_z.4bpp.lz");
@@ -960,34 +960,28 @@ const u32 gUnknown_08D778F0[] = INCBIN_U32("graphics/battle_transitions/vs_frame
 const u32 gUnknown_08D779D8[] = INCBIN_U32("graphics/battle_transitions/vs_frame.bin.lz");
 const u32 gUnknown_08D77AE4[] = INCBIN_U32("graphics/battle_transitions/vs_frame.gbapal.lz");
 
-const u32 gUnknown_08D77B0C[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz");
+const u32 gVsLettersGfx[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz");
 
 #include "data/graphics/battle_terrain.h"
 
-const u32 gUnknown_08D82F10[] = INCBIN_U32("graphics/battle_frontier/tourney_bg.4bpp.lz");
-const u32 gUnknown_08D834FC[] = INCBIN_U32("graphics/battle_frontier/tourney_line.4bpp.lz"); // the red glow mask for the tourney advancement lines
-
-const u32 gUnknown_08D83900[] = INCBIN_U32("graphics/unknown/unknown_D83900.bin.lz"); // tilemaps likely
-
-const u32 gUnknown_08D83B2C[] = INCBIN_U32("graphics/unknown/unknown_D83B2C.bin.lz");
-
-const u32 gUnknown_08D83C3C[] = INCBIN_U32("graphics/unknown/unknown_D83C3C.bin.lz");
-
-const u32 gUnknown_08D83D50[] = INCBIN_U32("graphics/battle_frontier/misc1.4bpp.lz");
-
-const u32 gUnknown_08D84970[] = INCBIN_U32("graphics/unknown/unknown_D84970.bin.lz");
-
-const u32 gUnknown_08D84F00[] = INCBIN_U32("graphics/unknown/unknown_D84F00.bin.lz");
-
-const u32 gBattleFrontierGfx_DomeOptions[] = INCBIN_U32("graphics/battle_frontier/options.4bpp.lz");
-const u32 gUnknown_08D85358[] = INCBIN_U32("graphics/battle_frontier/options_pal1.gbapal.lz");
-const u32 gUnknown_08D85444[] = INCBIN_U32("graphics/battle_frontier/options_pal2.gbapal.lz"); // pokeball pal
-const u32 gUnknown_08D854C8[] = INCBIN_U32("graphics/battle_frontier/options_pal3.gbapal.lz"); // arrow pal
+// Battle Dome
+const u32 gDomeTourneyBg_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_bg.4bpp.lz");
+const u32 gDomeTourneyLine_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_line.4bpp.lz"); // the red glow mask for the tourney advancement lines
+const u32 gDomeTourneyLineMask_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_line_mask_map.bin.lz");
+const u32 gDomeTourneyLineDown_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_line_down_map.bin.lz");
+const u32 gDomeTourneyLineUp_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_line_up_map.bin.lz");
+const u32 gDomeTourneyInfoCard_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_info_card.4bpp.lz");
+const u32 gDomeTourneyInfoCard_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_info_card_tilemap.bin.lz");
+const u32 gDomeTourneyInfoCardBg_Tilemap[] = INCBIN_U32("graphics/battle_frontier/tourney_info_card_bg.bin.lz");
+const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_buttons.4bpp.lz"); // exit/cancel and pokeball buttons
+const u32 gDomeTourneyTree_Pal[] = INCBIN_U32("graphics/battle_frontier/tourney.gbapal.lz");
+const u32 gDomeTourneyTreeButtons_Pal[] = INCBIN_U32("graphics/battle_frontier/tourney_buttons.gbapal.lz");
+const u32 gDomeTourneyMatchCardBg_Pal[] = INCBIN_U32("graphics/battle_frontier/tourney_match_card_bg.gbapal.lz");
 
 const u32 gBattleArenaJudgementSymbolsGfx[] = INCBIN_U32("graphics/battle_frontier/arena_judgement_symbols.4bpp.lz");
 const u32 gBattleArenaJudgementSymbolsPalette[] = INCBIN_U32("graphics/battle_frontier/arena_judgement_symbols.gbapal.lz");
 
-const u32 gUnknown_08D85600[] = INCBIN_U32("graphics/battle_frontier/text.gbapal.lz");
+const u32 gBattleWindowTextPalette[] = INCBIN_U32("graphics/battle_interface/text.gbapal.lz");
 const u16 gUnknown_08D85620[] = INCBIN_U16("graphics/battle_frontier/text_pp.gbapal");
 
 const u16 gTilesetAnims_BattleDomePals0_0[] = INCBIN_U16("graphics/battle_frontier/dome_anim1.gbapal");
@@ -1138,9 +1132,9 @@ const u32 gBattleAnimSpritePal_Slash2[] = INCBIN_U32("graphics/battle_anims/spri
 const u32 gBattleAnimSpriteGfx_WhiteShadow[] = INCBIN_U32("graphics/battle_anims/sprites/white_shadow.4bpp.lz");
 const u32 gBattleAnimSpritePal_WhiteShadow[] = INCBIN_U32("graphics/battle_anims/sprites/white_shadow.gbapal.lz");
 
-const u32 gPartyMenuMisc_Gfx[] = INCBIN_U32("graphics/interface/party_menu_misc.4bpp.lz");
-const u32 gPartyMenuMisc_Pal[] = INCBIN_U32("graphics/interface/party_menu_misc.gbapal.lz");
-const u32 gPartyMenuMisc_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_misc.bin.lz");
+const u32 gPartyMenuBg_Gfx[] = INCBIN_U32("graphics/interface/party_menu_bg.4bpp.lz");
+const u32 gPartyMenuBg_Pal[] = INCBIN_U32("graphics/interface/party_menu_bg.gbapal.lz");
+const u32 gPartyMenuBg_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_bg.bin.lz");
 
 const u32 gPartyMenuPokeball_Gfx[] = INCBIN_U32("graphics/interface/party_menu_pokeball.4bpp.lz");
 const u32 gPartyMenuPokeballSmall_Gfx[] = INCBIN_U32("graphics/interface/party_menu_pokeball_small.4bpp.lz"); //unused

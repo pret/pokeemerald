@@ -47,21 +47,21 @@ gUnknown_082F32CC:: @ 82F32CC struct BgTemplate? not sure
 	.byte 0xb3, 0x30, 0x00, 0x00
 
 	.align 2
-gUnknown_082F32D8:: @ 82F32D8
-	.byte 0x01, 0x02, 0x03
+sBerryCrushTextColors1:: @ 82F32D8
+	.byte 0x01, 0x02, 0x03  @ TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY
 
-gUnknown_082F32DB:: @ 82F32DB
-	.byte 0x00, 0x01, 0x02
+sBerryCrushTextColors2:: @ 82F32DB
+	.byte 0x00, 0x01, 0x02  @ TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY
 
-gUnknown_082F32DE:: @ 82F32DE
-	.byte 0x00, 0x03, 0x04
+sBerryCrushTextColors3:: @ 82F32DE
+	.byte 0x00, 0x03, 0x04  @ TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_RED
 
-gUnknown_082F32E1:: @ 82F32E1
-	.byte 0x01, 0x08, 0x09
-	.byte 0x01, 0x06, 0x07
+sBerryCrushTextColorTable:: @ 82F32E1
+	.byte 0x01, 0x08, 0x09  @ TEXT_COLOR_WHITE, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_BLUE
+	.byte 0x01, 0x06, 0x07  @ TEXT_COLOR_WHITE, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN
 
-gUnknown_082F32E7:: @ 82F32E7
-	.byte 0x01, 0x04, 0x05
+sBerryCrushTextColors4:: @ 82F32E7
+	.byte 0x01, 0x04, 0x05  @ TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED
 
 	.align 2
 gUnknown_082F32EC:: @ 82F32EC
@@ -281,23 +281,23 @@ gUnknown_082F4304:: @ 82F4304
 
 	.align 2
 gUnknown_082F430C:: @ 82F430C
-	spr_template 0x0001, 0x0001, gUnknown_0852491C, gUnknown_082F42E8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x0001, 0x0001, gOamData_AffineOff_ObjNormal_64x64, gUnknown_082F42E8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F4324:: @ 82F4324
-	spr_template 0x0002, 0x0002, gUnknown_08524914, gUnknown_082F42EC, NULL, gDummySpriteAffineAnimTable, sub_8022A20
+	spr_template 0x0002, 0x0002, gOamData_AffineOff_ObjNormal_32x32, gUnknown_082F42EC, NULL, gDummySpriteAffineAnimTable, sub_8022A20
 
 	.align 2
 gUnknown_082F433C:: @ 82F433C
-	spr_template 0x0003, 0x0002, gUnknown_0852490C, gUnknown_082F42F4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x0003, 0x0002, gOamData_AffineOff_ObjNormal_16x16, gUnknown_082F42F4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F4354:: @ 82F4354
-	spr_template 0x0004, 0x0004, gUnknown_08524944, gUnknown_082F42FC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x0004, 0x0004, gOamData_AffineOff_ObjNormal_8x16, gUnknown_082F42FC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F436C:: @ 82F436C
-	spr_template 0x0005, 0x0005, gUnknown_085249D4, gUnknown_082F4300, NULL, gUnknown_082F4304, SpriteCallbackDummy
+	spr_template 0x0005, 0x0005, gOamData_AffineDouble_ObjNormal_32x32, gUnknown_082F4300, NULL, gUnknown_082F4304, SpriteCallbackDummy
 
 	.align 2
 gUnknown_082F4384:: @ 82F4384

@@ -787,9 +787,9 @@ static u8 GetAI_ItemType(u8 itemId, const u8 *itemEffect) // NOTE: should take u
         return AI_ITEM_HEAL_HP;
     else if (itemEffect[3] & ITEM3_STATUS_ALL)
         return AI_ITEM_CURE_CONDITION;
-    else if (itemEffect[0] & (ITEM0_HIGH_CRIT | ITEM0_X_ATTACK) || itemEffect[1] != 0 || itemEffect[2] != 0)
+    else if (itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK) || itemEffect[1] != 0 || itemEffect[2] != 0)
         return AI_ITEM_X_STAT;
-    else if (itemEffect[3] & ITEM3_MIST)
+    else if (itemEffect[3] & ITEM3_GUARD_SPEC)
         return AI_ITEM_GUARD_SPECS;
     else
         return AI_ITEM_NOT_RECOGNIZABLE;
@@ -907,7 +907,7 @@ static bool8 ShouldUseItem(void)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x8;
             if (itemEffects[2] & ITEM2_X_ACCURACY)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x20;
-            if (itemEffects[0] & ITEM0_HIGH_CRIT)
+            if (itemEffects[0] & ITEM0_DIRE_HIT)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x80;
             shouldUse = TRUE;
             break;

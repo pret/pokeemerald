@@ -32,10 +32,10 @@ static const u16 gCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal
 static const struct OamData sBagOamData =
 {
     .y = 0,
-    .affineMode = 1,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -163,10 +163,10 @@ static const struct SpriteTemplate gBagSpriteTemplate =
 static const struct OamData sRotatingBallOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 4,
@@ -234,10 +234,10 @@ static const struct SpriteTemplate gRotatingBallSpriteTemplate =
 static const struct OamData sBerryPicOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -251,10 +251,10 @@ static const struct OamData sBerryPicOamData =
 static const struct OamData sBerryPicRotatingOamData =
 {
     .y = 0,
-    .affineMode = 3,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -391,10 +391,10 @@ const struct CompressedSpritePalette gBerryCheckCirclePaletteTable =
 static const struct OamData sBerryCheckCircleOamData =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -514,7 +514,7 @@ static void UpdateSwitchPocketRotatingBallCoords(struct Sprite *sprite)
 
 static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite)
 {
-    sprite->oam.affineMode = 1;
+    sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
     if (sprite->data[0] == -1)
         sprite->affineAnims = sRotatingBallAnimCmds;
     else

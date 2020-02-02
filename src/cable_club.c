@@ -203,7 +203,7 @@ static void sub_80B2634(u8 taskId)
     if (data[0] == 0)
     {
         OpenLinkTimed();
-        sub_800AB98();
+        ResetLinkPlayerCount();
         ResetLinkPlayers();
         data[5] = AddWindow(&gUnknown_08550594);
     }
@@ -592,7 +592,7 @@ void TryTradeLinkup(void)
     sub_80B236C(2, 2);
 }
 
-void sub_80B2E74(void)
+void TryRecordMixLinkup(void)
 {
     gSpecialVar_Result = 0;
     gLinkType = LINKTYPE_0x3311;
@@ -678,23 +678,23 @@ static void sub_80B2EE4(u8 taskId)
     }
 }
 
-void sub_80B2FD8(void)
+void TryBerryBlenderLinkup(void)
 {
-    gLinkType = LINKTYPE_0x4411;
+    gLinkType = LINKTYPE_BERRY_BLENDER_SETUP;
     gBattleTypeFlags = 0;
     sub_80B236C(2, 4);
 }
 
-void sub_80B3000(void)
+void TryContestGModeLinkup(void)
 {
-    gLinkType = LINKTYPE_0x6601;
+    gLinkType = LINKTYPE_CONTEST_GMODE;
     gBattleTypeFlags = 0;
     sub_80B236C(4, 4);
 }
 
-void sub_80B3028(void)
+void TryContestEModeLinkup(void)
 {
-    gLinkType = LINKTYPE_0x6602;
+    gLinkType = LINKTYPE_CONTEST_EMODE;
     gBattleTypeFlags = 0;
     sub_80B236C(2, 4);
 }
@@ -784,7 +784,8 @@ static void sub_80B3220(u8 taskId)
     }
 }
 
-void sub_80B3254(void)
+// Unused
+void CableClubSaveGame(void)
 {
     SaveGame();
 }
@@ -816,7 +817,7 @@ static void sub_80B32B4(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
         task->data[0]++;
@@ -862,7 +863,7 @@ static void sub_80B33BC(u8 taskId)
     switch (data[0])
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
         data[0] = 1;
@@ -970,7 +971,7 @@ void sub_80B360C(void)
     Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();
-    sub_813BF10();
+    UpdateTrainerFansAfterLinkBattle();
 
     if (gSpecialVar_0x8004 == USING_SINGLE_BATTLE || gSpecialVar_0x8004 == USING_DOUBLE_BATTLE)
     {
@@ -1077,7 +1078,7 @@ static void sub_80B37FC(u8 taskId)
     {
     case 0:
         ScriptContext2_Enable();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkCallback_2();
         task->data[0]++;
         break;
@@ -1110,7 +1111,7 @@ static void sub_80B3894(u8 taskId)
     {
     case 0:
         ScriptContext2_Enable();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkRfuCallback();
         data[0]++;
         break;
@@ -1298,10 +1299,10 @@ void sub_80B3AF8(u8 taskId)
     }
 }
 
-void sub_80B3BC4(void)
+void TrySetBattleTowerLinkType(void)
 {
     if (gWirelessCommType == 0)
     {
-        gLinkType = LINKTYPE_0x2288;
+        gLinkType = LINKTYPE_BATTLE_TOWER;
     }
 }

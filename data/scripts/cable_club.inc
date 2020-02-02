@@ -41,7 +41,7 @@ CableClub_EventScript_DistributeEonTicket:: @ 8276B23
 	goto_if_eq CableClub_EventScript_AlreadyGotEonTicket
 	goto_if_set FLAG_SYS_HAS_EON_TICKET, CableClub_EventScript_AlreadyGotEonTicket
 	msgbox Mevent_Text_TheresATicketForYou, MSGBOX_DEFAULT
-	giveitem_std ITEM_EON_TICKET
+	giveitem ITEM_EON_TICKET
 	setflag FLAG_SYS_HAS_EON_TICKET
 	setvar VAR_DISTRIBUTE_EON_TICKET, 0
 	msgbox Mevent_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
@@ -49,7 +49,7 @@ CableClub_EventScript_DistributeEonTicket:: @ 8276B23
 	end
 
 @ Unused?
-OldaleTown_PokemonCenter_2F_EventScript_276B62:: @ 8276B62
+CableClub_EventScript_MysteryGiftThankYou2:: @ 8276B62
 	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_DEFAULT
 	release
 	end
@@ -245,7 +245,7 @@ CableClub_EventScript_PlayerExitLinkRoom:: @ 8276DD5
 
 CableClub_EventScript_Tutorial:: @ 8276DE0
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox CableClub_Text_FirstTimeRightThisWay, MSGBOX_DEFAULT
 	closemessage
@@ -301,7 +301,7 @@ CableClub_EventScript_Colosseum:: @ 8276EB7
 	end
 
 CableClub_EventScript_SelectBattleMode:: @ 8276EC2
-	message CableClub_Text_WhichBattleMode
+	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, 0
 	switch VAR_RESULT
@@ -383,15 +383,15 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
 	compare VAR_0x8004, USING_MULTI_BATTLE
-	goto_if_eq CableClub_EventScript_WarpToDoubleColosseum
+	goto_if_eq CableClub_EventScript_WarpTo4PColosseum
 	special SetCableClubWarp
-	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
-	special sub_80AF948
+	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -401,10 +401,10 @@ CableClub_EventScript_PlayerApproachLinkRoomRight:: @ 827702B
 	waitmovement 0
 	return
 
-CableClub_EventScript_WarpToDoubleColosseum:: @ 8277036
+CableClub_EventScript_WarpTo4PColosseum:: @ 8277036
 	special SetCableClubWarp
-	warp MAP_DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
-	special sub_80AF948
+	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -488,13 +488,13 @@ CableClub_EventScript_EnterTradeCenter:: @ 827713A
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
 	special SetCableClubWarp
 	setwarp MAP_TRADE_CENTER, 255, 5, 8
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -525,7 +525,7 @@ CableClub_EventScript_RecordCorner:: @ 82771DB
 	goto_if_eq CableClub_EventScript_AbortLink
 	message gText_PleaseWaitForLink
 	waitmessage
-	special sub_80B2E74
+	special TryRecordMixLinkup
 	waitstate
 	special sub_80B2EA8
 	waitstate
@@ -563,13 +563,13 @@ CableClub_EventScript_EnterRecordCorner:: @ 827724C
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
 	special SetCableClubWarp
 	setwarp MAP_RECORD_CORNER, 255, 8, 9
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -618,7 +618,7 @@ MossdeepCity_GameCorner_1F_EventScript_AbortMinigame:: @ 82772F9
 @ Unused
 CableClub_EventScript_CableClubWarp:: @ 8277306
 	special SetCableClubWarp
-	special sub_80AF948
+	special DoCableClubWarp
 	waitstate
 	end
 
@@ -710,63 +710,63 @@ EventScript_CableBoxResults:: @ 8277365
 	releaseall
 	end
 
-EventScript_SingleBattleColosseum_PlayerSpot0:: @ 8277374
+EventScript_BattleColosseum_2P_PlayerSpot0:: @ 8277374
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_SingleBattleColosseum_PlayerSpot1:: @ 827737E
+EventScript_BattleColosseum_2P_PlayerSpot1:: @ 827737E
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot0:: @ 8277388
-	fadescreen 1
+EventScript_BattleColosseum_4P_PlayerSpot0:: @ 8277388
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot1:: @ 82773A3
-	fadescreen 1
+EventScript_BattleColosseum_4P_PlayerSpot1:: @ 82773A3
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot2:: @ 82773BE
-	fadescreen 1
+EventScript_BattleColosseum_4P_PlayerSpot2:: @ 82773BE
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 2
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_PlayerSpot3:: @ 82773D9
-	fadescreen 1
+EventScript_BattleColosseum_4P_PlayerSpot3:: @ 82773D9
+	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 3
 	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-EventScript_DoubleBattleColosseum_CancelSpotTrigger:: @ 82773F4
+EventScript_BattleColosseum_4P_CancelSpotTrigger:: @ 82773F4
 	end
 
 EventScript_TradeCenter_Chair0:: @ 82773F5
@@ -795,39 +795,40 @@ EventScript_TradeCenter_Chair3:: @ 8277413
 	waitstate
 	end
 
+@ VAR_TEMP_1 for below scripts set by ReceiveGiftItem
 EventScript_RecordCenter_Spot0:: @ 827741D
 	setvar VAR_0x8005, 0
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot1:: @ 8277432
 	setvar VAR_0x8005, 1
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot2:: @ 8277447
 	setvar VAR_0x8005, 2
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot3:: @ 827745C
 	setvar VAR_0x8005, 3
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	compare VAR_TEMP_1, 0
-	goto_if_ne RecordCorner_EventScript_277471
+	compare VAR_TEMP_1, ITEM_NONE
+	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
 
-RecordCorner_EventScript_277471:: @ 8277471
+RecordCorner_EventScript_ReceivedGiftItem:: @ 8277471
 	bufferitemname 1, VAR_TEMP_1
 	message RecordCorner_Text_PlayerSentOverOneX
 	waitmessage
@@ -837,14 +838,14 @@ RecordCorner_EventScript_277471:: @ 8277471
 
 CableClub_EventScript_ReadTrainerCard:: @ 827747E
 	msgbox CableClub_Text_GotToLookAtTrainerCard, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
 	waitstate
 	end
 
 CableClub_EventScript_ReadTrainerCardColored:: @ 827748D
 	msgbox CableClub_Text_GotToLookAtColoredTrainerCard, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
 	waitstate
 	end
@@ -854,9 +855,9 @@ CableClub_EventScript_TooBusyToNotice:: @ 827749C
 	closemessage
 	end
 
-SingleBattleColosseum_EventScript_Attendant:: @ 82774A6
+BattleColosseum_2P_EventScript_Attendant:: @ 82774A6
 	special Script_FacePlayer
-	msgbox SingleBattleColosseum_Text_TakePlaceStartBattle, MSGBOX_DEFAULT
+	msgbox BattleColosseum_2P_Text_TakePlaceStartBattle, MSGBOX_DEFAULT
 	special Script_ClearHeldMovement
 	closemessage
 	end
@@ -868,7 +869,7 @@ TradeCenter_EventScript_Attendant:: @ 82774B6
 	closemessage
 	end
 
-RecordCorner_EventScript_2774C6:: @ 82774C6
+RecordCorner_EventScript_Attendant:: @ 82774C6
 	compare VAR_TEMP_0, 0
 	goto_if_ne RecordCorner_EventScript_AlreadyMixed
 	special Script_FacePlayer
@@ -890,7 +891,7 @@ RecordCorner_EventScript_AlreadyMixed:: @ 82774E0
 
 EventScript_ConfirmLeaveTradeRoom:: @ 82774EF
 	msgbox Text_TerminateLinkConfirmation, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_TerminateLink
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -911,7 +912,7 @@ EventScript_DoLinkRoomExit:: @ 8277513
 CableClub_EventScript_UnionRoomAttendant:: @ 827751B
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 8
+	setvar VAR_FRONTIER_FACILITY, FACILITY_UNION_ROOM
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
@@ -964,7 +965,7 @@ CableClub_EventScript_EnterUnionRoom:: @ 827759F
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	closedoor 5, 1
 	waitdooranim
 	special Script_ResetUnionRoomTrade
@@ -1005,7 +1006,7 @@ CableClub_EventScript_WirelessClubAttendant:: @ 8277672
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	msgbox CableClub_Text_AskAboutLinking, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_DontAskAboutLinking
 	msgbox CableClub_Text_ExplainWirelessClub, MSGBOX_DEFAULT
 	release
@@ -1019,7 +1020,7 @@ CableClub_EventScript_DontAskAboutLinking:: @ 827769A
 CableClub_EventScript_DirectCornerAttendant:: @ 82776A4
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, 9
+	setvar VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER  @ Set preemptively for multi battles, ignored otherwise
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
@@ -1080,17 +1081,17 @@ CableClub_EventScript_DirectCornerHasRecordMix:: @ 82777CB
 
 CableClub_EventScript_WirelessTrade:: @ 827780D
 	msgbox CableClub_Text_TradePokemon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	call CableClub_EventScript_CheckPartyTradeRequirements
 	compare VAR_RESULT, 0
 	goto_if_eq CableClub_EventScript_AbortLink
-	setvar VAR_0x8004, 3
+	setvar VAR_0x8004, LINK_GROUP_TRADE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
 CableClub_EventScript_WirelessBattleSelect:: @ 827783B
-	message CableClub_Text_WhichBattleMode
+	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, 0
 	switch VAR_RESULT
@@ -1103,7 +1104,7 @@ CableClub_EventScript_WirelessBattleSelect:: @ 827783B
 	end
 
 CableClub_EventScript_WirelessSingleBattle:: @ 827788E
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, LINK_GROUP_SINGLE_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1111,7 +1112,7 @@ CableClub_EventScript_WirelessDoubleBattle:: @ 8277899
 	special HasEnoughMonsForDoubleBattle
 	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, LINK_GROUP_DOUBLE_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1121,7 +1122,7 @@ CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle:: @ 82778B2
 	end
 
 CableClub_EventScript_WirelessMultiBattle:: @ 82778C0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, LINK_GROUP_MULTI_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1132,20 +1133,20 @@ CableClub_EventScript_WirelessBattleInfo:: @ 82778CB
 
 CableClub_EventScript_WirelessRecordMix:: @ 82778D9
 	msgbox CableClub_Text_AccessRecordCorner, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
-	setvar VAR_0x8004, 12
+	setvar VAR_0x8004, LINK_GROUP_RECORD_CORNER
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
 CableClub_EventScript_WirelessBerryCrush:: @ 82778F7
 	msgbox CableClub_Text_UseBerryCrush, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq CableClub_EventScript_AbortLink
 	special HasAtLeastOneBerry
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_NeedBerryForBerryCrush
-	setvar VAR_0x8004, 5
+	setvar VAR_0x8004, LINK_GROUP_BERRY_CRUSH
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
@@ -1159,12 +1160,12 @@ CableClub_EventScript_SaveAndChooseLinkLeader:: @ 8277931
 	compare VAR_RESULT, 0
 	goto_if_eq CableClub_EventScript_AbortLink
 	switch VAR_0x8004
-	case 3, CableClub_EventScript_ChooseLinkLeaderFrom2
-	case 0, CableClub_EventScript_ChooseLinkLeaderFrom2
-	case 1, CableClub_EventScript_ChooseLinkLeaderFrom2
-	case 2, CableClub_EventScript_ChooseLinkLeaderFrom4
-	case 5, CableClub_EventScript_ChooseLinkLeader
-	case 12, CableClub_EventScript_ChooseLinkLeader
+	case LINK_GROUP_TRADE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_SINGLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_DOUBLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_MULTI_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom4
+	case LINK_GROUP_BERRY_CRUSH, CableClub_EventScript_ChooseLinkLeader
+	case LINK_GROUP_RECORD_CORNER, CableClub_EventScript_ChooseLinkLeader
 	end
 
 CableClub_EventScript_ChooseLinkLeaderFrom2:: @ 8277989
@@ -1295,7 +1296,7 @@ CableClub_EventScript_EnterWirelessLinkRoom:: @ 8277B3A
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -1308,7 +1309,7 @@ EventScript_WirelessBoxResults:: @ 8277B8A
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_AdapterNotConnected
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_801A42C
 	waitstate
 	msgbox CableClub_Text_ParticipantsStepUpToCounter, MSGBOX_DEFAULT
@@ -1407,7 +1408,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump:: @ 8277CE9
 	compare VAR_RESULT, FALSE
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
 	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8005, 0
 	special ChooseMonForWirelessMinigame
 	waitstate
@@ -1416,7 +1417,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump:: @ 8277CE9
 	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	setvar VAR_0x8004, 4
+	setvar VAR_0x8004, LINK_GROUP_POKEMON_JUMP
 	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
 	end
 
@@ -1426,7 +1427,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking:: @ 8277D35
 	compare VAR_RESULT, FALSE
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
 	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8005, 1
 	special ChooseMonForWirelessMinigame
 	waitstate
@@ -1435,7 +1436,7 @@ MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking:: @ 8277D35
 	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, LINK_GROUP_BERRY_PICKING
 	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
 	end
 
@@ -1487,7 +1488,7 @@ MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom:: @ 8277E0E
 	closemessage
 	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterMinigameRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, 0
 	release
 	waitstate
 	end
@@ -1500,7 +1501,7 @@ MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected:: @ 8277E48
 
 MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon:: @ 8277E55
 	msgbox MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	compare VAR_0x8005, 0
 	call_if_eq MossdeepCity_GameCorner_1F_EventScript_ExplainPokemonJumpRequirements

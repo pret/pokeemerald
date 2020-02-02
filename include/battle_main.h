@@ -77,20 +77,20 @@ void sub_803B3AC(void); // unused
 void sub_803B598(void); // unused
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
-void sub_803BDA0(u8 battlerId);
+void SwitchPartyOrder(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
 u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 
-extern struct UnknownPokemonStruct4 gUnknown_02022FF8[3];
+extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
 
 extern const struct SpriteTemplate gUnknown_0831AC88;
 extern const struct OamData gOamData_831ACA8;
 extern const struct OamData gOamData_831ACB0;
 extern const u8 gTypeEffectiveness[336];
-extern const u8 gTypeNames[][TYPE_NAME_LENGTH + 1];
+extern const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1];
 extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 extern const u8 *const gAbilityDescriptionPointers[];

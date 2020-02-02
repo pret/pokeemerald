@@ -54,8 +54,8 @@ static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 // which is copied to VAR_0x8004 and used as an index for GetDaycareCost
 static const struct ListMenuItem sLevelMenuItems[] =
 {
-    {gExpandedPlaceholder_Empty, 0},
-    {gExpandedPlaceholder_Empty, 1},
+    {gText_ExpandedPlaceholder_Empty, 0},
+    {gText_ExpandedPlaceholder_Empty, 1},
     {gText_Exit, DAYCARE_LEVEL_MENU_EXIT}
 };
 
@@ -231,11 +231,8 @@ static void ApplyDaycareExperience(struct Pokemon *mon)
             while ((learnedMove = MonTryLearningNewMove(mon, firstMove)) != 0)
             {
                 firstMove = FALSE;
-                if (learnedMove == 0xFFFF)
-                {
-                    // Mon already knows 4 moves.
+                if (learnedMove == MON_HAS_MAX_MOVES)
                     DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
-                }
             }
         }
         else
@@ -666,7 +663,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == sHatchedEggEggMoves[j])
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xFFFF)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == MON_HAS_MAX_MOVES)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                     break;
                 }
@@ -685,7 +682,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xFFFF)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == MON_HAS_MAX_MOVES)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                 }
             }
@@ -710,7 +707,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             if (sHatchedEggLevelUpMoves[j] != MOVE_NONE && sHatchedEggFinalMoves[i] == sHatchedEggLevelUpMoves[j])
             {
-                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == 0xFFFF)
+                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == MON_HAS_MAX_MOVES)
                     DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFinalMoves[i]);
                 break;
             }
@@ -755,7 +752,7 @@ static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *dayca
 
     if (motherItem == ITEM_LIGHT_BALL || fatherItem == ITEM_LIGHT_BALL)
     {
-        if (GiveMoveToMon(mon, MOVE_VOLT_TACKLE) == 0xFFFF)
+        if (GiveMoveToMon(mon, MOVE_VOLT_TACKLE) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToMon(mon, MOVE_VOLT_TACKLE);
     }
 }
@@ -1295,6 +1292,6 @@ void ShowDaycareLevelMenu(void)
 
 void ChooseSendDaycareMon(void)
 {
-    sub_81B9328();
+    ChooseMonForDaycare();
     gMain.savedCallback = CB2_ReturnToField;
 }

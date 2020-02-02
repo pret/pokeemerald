@@ -238,7 +238,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_POKEBALL,
         .paletteTag = TAG_PARTICLES_POKEBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -247,7 +247,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_GREATBALL,
         .paletteTag = TAG_PARTICLES_GREATBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -256,7 +256,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_SAFARIBALL,
         .paletteTag = TAG_PARTICLES_SAFARIBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -265,7 +265,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_ULTRABALL,
         .paletteTag = TAG_PARTICLES_ULTRABALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -274,7 +274,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_MASTERBALL,
         .paletteTag = TAG_PARTICLES_MASTERBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -283,7 +283,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_NETBALL,
         .paletteTag = TAG_PARTICLES_NETBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -292,7 +292,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_DIVEBALL,
         .paletteTag = TAG_PARTICLES_DIVEBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -301,7 +301,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_NESTBALL,
         .paletteTag = TAG_PARTICLES_NESTBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -310,7 +310,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_REPEATBALL,
         .paletteTag = TAG_PARTICLES_REPEATBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -319,7 +319,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_TIMERBALL,
         .paletteTag = TAG_PARTICLES_TIMERBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -328,7 +328,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_LUXURYBALL,
         .paletteTag = TAG_PARTICLES_LUXURYBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -337,7 +337,7 @@ const struct SpriteTemplate gBallParticlesSpriteTemplates[] =
     {
         .tileTag = TAG_PARTICLES_PREMIERBALL,
         .paletteTag = TAG_PARTICLES_PREMIERBALL,
-        .oam = &gUnknown_08524904,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
         .anims = gAnims_BallParticles,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -375,7 +375,7 @@ const struct SpriteTemplate gPokeblockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POKEBLOCK,
     .paletteTag = ANIM_TAG_POKEBLOCK,
-    .oam = &gUnknown_0852490C,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -396,14 +396,14 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_085E535C =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gUnknown_08524914,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_085E5358,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_817330C,
 };
 
-extern const struct SpriteTemplate gUnknown_085CE388;
+extern const struct SpriteTemplate gWishStarSpriteTemplate;
 extern const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate;
 
 void unref_sub_8170478(u8 taskId)
@@ -2081,7 +2081,7 @@ static void sub_8172FEC(u8 taskId)
     state = gTasks[taskId].data[11];
     if (state == 0)
     {
-        spriteId = CreateSprite(&gUnknown_085CE388, x, y, 5);
+        spriteId = CreateSprite(&gWishStarSpriteTemplate, x, y, 5);
     }
     else if (state >= 0 && gTasks[taskId].data[11] < 4)
     {
