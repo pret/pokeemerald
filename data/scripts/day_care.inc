@@ -102,7 +102,7 @@ Route117_PokemonDayCare_EventScript_GiveMonToRaise:: @ 8291D56
 	compare VAR_RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons
 	msgbox Route117_PokemonDayCare_Text_WhichMonShouldWeRaise, MSGBOX_DEFAULT
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseSendDaycareMon
 	waitstate
 	compare VAR_0x8004, 255

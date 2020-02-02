@@ -41,7 +41,7 @@ MysteryEventClub_EventScript_CancelShowProfile:: @ 82915CB
 
 MysteryEventClub_EventScript_ShowProfile:: @ 82915D5
 	setvar VAR_0x8004, 0
-	special sub_811EECC
+	special ShowEasyChatProfile
 	waitmessage
 	delay 80
 	msgbox MysteryEventClub_Text_FantasticProfile, MSGBOX_DEFAULT

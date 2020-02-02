@@ -2294,14 +2294,14 @@ static const struct SpriteTemplate *const gUnknown_082FBEB8[] =
 static const struct OamData sOamData_82FBEC8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2311,14 +2311,14 @@ static const struct OamData sOamData_82FBEC8 =
 static const struct OamData sOamData_82FBED0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 2,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(16x32),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2328,14 +2328,14 @@ static const struct OamData sOamData_82FBED0 =
 static const struct OamData sOamData_82FBED8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2345,14 +2345,14 @@ static const struct OamData sOamData_82FBED8 =
 static const struct OamData sOamData_82FBEE0 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x16),
     .tileNum = 0,
     .priority = 2,
     .paletteNum = 0,
@@ -2498,14 +2498,14 @@ static const struct SpriteTemplate gUnknown_082FBFC0 =
 static const struct OamData sOamData_82FBFD8 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = 1,
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -3466,7 +3466,7 @@ static void sub_802DB18(u16 left, u16 top, u8 cursorPos)
 
 static void sub_802DB8C(void)
 {
-    u8 color[] = {0, 2, 3};
+    u8 color[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -3557,8 +3557,8 @@ static void sub_802DD08(void)
     struct UnkStruct3 unkStruct;
     struct UnkStruct3 *ptr = &unkStruct; // This temp variable is needed to match, don't ask me why.
 
-    ptr->shape = 0;
-    ptr->size = 0;
+    ptr->shape = SPRITE_SHAPE(8x8);
+    ptr->size = SPRITE_SIZE(8x8);
     ptr->field_0_0 = 0;
     ptr->priority = 1;
     ptr->field_1 = 5;
@@ -3666,7 +3666,7 @@ static void sub_802DF70(bool32 arg0)
     if (!arg0)
     {
         for (i = 0; i < playersCount; i++)
-            sub_802DED8(i, 0, 2, 3);
+            sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     }
     else
     {
@@ -3674,9 +3674,9 @@ static void sub_802DF70(bool32 arg0)
         for (i = 0; i < playersCount; i++)
         {
             if (var != i)
-                sub_802DED8(i, 0, 2, 3);
+                sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
             else
-                sub_802DED8(i, 0, 4, 5);
+                sub_802DED8(i, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED);
         }
     }
 }
@@ -4483,14 +4483,14 @@ static void sub_802EF50(u16 tileTag, u16 palTag)
 static const struct OamData sOamData_82FEBDC =
 {
     .y = 0,
-    .affineMode = 3,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 2,
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -4500,14 +4500,14 @@ static const struct OamData sOamData_82FEBDC =
 static const struct OamData sOamData_82FEBE4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = 3,
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,

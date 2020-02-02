@@ -3,7 +3,7 @@ EverGrandeCity_MapScripts:: @ 81E7D1B
 	.byte 0
 
 EverGrandeCity_OnTransition: @ 81E7D21
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	end
 
 EverGrandeCity_EventScript_VictoryRoadSign:: @ 81E7D2B

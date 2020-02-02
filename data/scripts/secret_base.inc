@@ -214,10 +214,10 @@ SecretBase_EventScript_AlreadyHasSecretBase:: @ 8275BE8
 	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	special MoveOutOfSecretBaseFromOutside
 	closemessage
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	msgbox SecretBase_Text_MovingCompletedUseSecretPower, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_CancelOnEntrance
@@ -346,7 +346,7 @@ SecretBase_EventScript_Trainer0:: @ 8275DD6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer0PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer0PostBattle
-	msgbox SecretBase_Text_Trainer0PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer0Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer0DeclineBattle
 	setvar VAR_RESULT, 1
@@ -364,7 +364,7 @@ SecretBase_EventScript_Trainer0PreChampion:: @ 8275E25
 	end
 
 SecretBase_EventScript_Trainer0DeclineBattle:: @ 8275E2F
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer0DeclineBattle, MSGBOX_DEFAULT
@@ -383,7 +383,7 @@ SecretBase_EventScript_Trainer1:: @ 8275E4E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer1PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer1PostBattle
-	msgbox SecretBase_Text_Trainer1PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer1Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer1DeclineBattle
 	setvar VAR_RESULT, 1
@@ -401,7 +401,7 @@ SecretBase_EventScript_Trainer1PreChampion:: @ 8275E9D
 	end
 
 SecretBase_EventScript_Trainer1DeclineBattle:: @ 8275EA7
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer1DeclineBattle, MSGBOX_DEFAULT
@@ -420,7 +420,7 @@ SecretBase_EventScript_Trainer2:: @ 8275EC6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer2PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer2PostBattle
-	msgbox SecretBase_Text_Trainer2PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer2Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer2DeclineBattle
 	setvar VAR_RESULT, 1
@@ -438,7 +438,7 @@ SecretBase_EventScript_Trainer2PreChampion:: @ 8275F15
 	end
 
 SecretBase_EventScript_Trainer2DeclineBattle:: @ 8275F1F
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer2DeclineBattle, MSGBOX_DEFAULT
@@ -457,7 +457,7 @@ SecretBase_EventScript_Trainer3:: @ 8275F3E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer3PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer3PostBattle
-	msgbox SecretBase_Text_Trainer3PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer3Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer3DeclineBattle
 	setvar VAR_RESULT, 1
@@ -475,7 +475,7 @@ SecretBase_EventScript_Trainer3PreChampion:: @ 8275F8D
 	end
 
 SecretBase_EventScript_Trainer3DeclineBattle:: @ 8275F97
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer3DeclineBattle, MSGBOX_DEFAULT
@@ -494,7 +494,7 @@ SecretBase_EventScript_Trainer4:: @ 8275FB6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer4PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer4PostBattle
-	msgbox SecretBase_Text_Trainer4PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer4Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer4DeclineBattle
 	setvar VAR_RESULT, 1
@@ -512,7 +512,7 @@ SecretBase_EventScript_Trainer4PreChampion:: @ 8276005
 	end
 
 SecretBase_EventScript_Trainer4DeclineBattle:: @ 827600F
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer4DeclineBattle, MSGBOX_DEFAULT
@@ -531,7 +531,7 @@ SecretBase_EventScript_Trainer5:: @ 827602E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer5PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer5PostBattle
-	msgbox SecretBase_Text_Trainer5PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer5Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer5DeclineBattle
 	setvar VAR_RESULT, 1
@@ -549,7 +549,7 @@ SecretBase_EventScript_Trainer5PreChampion:: @ 827607D
 	end
 
 SecretBase_EventScript_Trainer5DeclineBattle:: @ 8276087
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer5DeclineBattle, MSGBOX_DEFAULT
@@ -568,7 +568,7 @@ SecretBase_EventScript_Trainer6:: @ 82760A6
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer6PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer6PostBattle
-	msgbox SecretBase_Text_Trainer6PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer6Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer6DeclineBattle
 	setvar VAR_RESULT, 1
@@ -586,7 +586,7 @@ SecretBase_EventScript_Trainer6PreChampion:: @ 82760F5
 	end
 
 SecretBase_EventScript_Trainer6DeclineBattle:: @ 82760FF
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer6DeclineBattle, MSGBOX_DEFAULT
@@ -605,7 +605,7 @@ SecretBase_EventScript_Trainer7:: @ 827611E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer7PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer7PostBattle
-	msgbox SecretBase_Text_Trainer7PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer7Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer7DeclineBattle
 	setvar VAR_RESULT, 1
@@ -623,7 +623,7 @@ SecretBase_EventScript_Trainer7PreChampion:: @ 827616D
 	end
 
 SecretBase_EventScript_Trainer7DeclineBattle:: @ 8276177
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer7DeclineBattle, MSGBOX_DEFAULT
@@ -642,7 +642,7 @@ SecretBase_EventScript_Trainer8:: @ 8276196
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer8PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer8PostBattle
-	msgbox SecretBase_Text_Trainer8PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer8Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer8DeclineBattle
 	setvar VAR_RESULT, 1
@@ -660,7 +660,7 @@ SecretBase_EventScript_Trainer8PreChampion:: @ 82761E5
 	end
 
 SecretBase_EventScript_Trainer8DeclineBattle:: @ 82761EF
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer8DeclineBattle, MSGBOX_DEFAULT
@@ -679,7 +679,7 @@ SecretBase_EventScript_Trainer9:: @ 827620E
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer9PreChampion
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_Trainer9PostBattle
-	msgbox SecretBase_Text_Trainer9PreBattle, MSGBOX_YESNO
+	msgbox SecretBase_Text_Trainer9Intro, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SecretBase_EventScript_Trainer9DeclineBattle
 	setvar VAR_RESULT, 1
@@ -697,7 +697,7 @@ SecretBase_EventScript_Trainer9PreChampion:: @ 827625D
 	end
 
 SecretBase_EventScript_Trainer9DeclineBattle:: @ 8276267
-	special sub_80EB300
+	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
 	msgbox SecretBase_Text_Trainer9DeclineBattle, MSGBOX_DEFAULT
@@ -716,35 +716,35 @@ SecretBase_EventScript_BattleTrainer:: @ 8276286
 	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, B_OUTCOME_DREW
-	call_if_eq SecretBase_EventScript_2762BD
+	call_if_eq SecretBase_EventScript_DrewSecretBaseBattle
 	compare VAR_RESULT, B_OUTCOME_WON
-	call_if_eq SecretBase_EventScript_2762C1
+	call_if_eq SecretBase_EventScript_WonSecretBaseBattle
 	compare VAR_RESULT, B_OUTCOME_LOST
-	call_if_eq SecretBase_EventScript_2762C5
+	call_if_eq SecretBase_EventScript_LostSecretBaseBattle
 	special HealPlayerParty
 	release
 	end
 
-SecretBase_EventScript_2762BD:: @ 82762BD
-	special sub_80EB438
+SecretBase_EventScript_DrewSecretBaseBattle:: @ 82762BD
+	special DrewSecretBaseBattle
 	return
 
-SecretBase_EventScript_2762C1:: @ 82762C1
-	special sub_80EB368
+SecretBase_EventScript_WonSecretBaseBattle:: @ 82762C1
+	special WonSecretBaseBattle
 	return
 
-SecretBase_EventScript_2762C5:: @ 82762C5
-	special sub_80EB3D0
+SecretBase_EventScript_LostSecretBaseBattle:: @ 82762C5
+	special LostSecretBaseBattle
 	return
 
 	.include "data/scripts/secret_power_tm.inc"
 
 SecretBase_EventScript_DollInteract:: @ 82766A2
-	special sub_80EB290
+	special CheckInteractedWithFriendsDollDecor
 	end
 
 SecretBase_EventScript_CushionInteract:: @ 82766A6
-	special sub_80EB2C8
+	special CheckInteractedWithFriendsCushionDecor
 	end
 
 SecretBase_Text_AllDecorationsWillBeReturned: @ 82766AA

@@ -61,11 +61,11 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	closemessage
 	savebgm MUS_DUMMY
 	fadedefaultbgm
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 3
 	removeobject 4
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	delay 30
 	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
@@ -75,7 +75,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	call Common_EventScript_PlayerHandedOverTheItem
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo, MSGBOX_DEFAULT
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -87,7 +87,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	release
 	end
 
@@ -129,8 +129,7 @@ SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest: @ 820BCC2
 	walk_in_place_fastest_left
 	step_end
 
-@ Unused
-SlateportCity_OceanicMuseum_2F_Movement_20BCC8: @ 820BCC8
+SlateportCity_OceanicMuseum_2F_Movement_Unused: @ 820BCC8
 	walk_up
 	walk_left
 	walk_left

@@ -74,7 +74,7 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 	end
 
 MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
-	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonPreBattle, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
+	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq MauvilleCity_Gym_EventScript_WattsonRematch
@@ -115,7 +115,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	end
 
 MauvilleCity_Gym_EventScript_GiveShockWave2:: @ 820DF8D
-	giveitem_std ITEM_TM34
+	giveitem ITEM_TM34
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
@@ -124,7 +124,7 @@ MauvilleCity_Gym_EventScript_GiveShockWave2:: @ 820DF8D
 	end
 
 MauvilleCity_Gym_EventScript_GiveShockWave:: @ 820DFB1
-	giveitem_std ITEM_TM34
+	giveitem ITEM_TM34
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
@@ -206,27 +206,27 @@ MauvilleCity_Gym_EventScript_ClearBarriersAltState:: @ 820E0B4
 	end
 
 MauvilleCity_Gym_EventScript_Kirk:: @ 820E0B9
-	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_KirkPreBattle, MauvilleCity_Gym_Text_KirkDefeat
+	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_KirkIntro, MauvilleCity_Gym_Text_KirkDefeat
 	msgbox MauvilleCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_Shawn:: @ 820E0D0
-	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_ShawnPreBattle, MauvilleCity_Gym_Text_ShawnDefeat
+	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_ShawnIntro, MauvilleCity_Gym_Text_ShawnDefeat
 	msgbox MauvilleCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_Ben:: @ 820E0E7
-	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_BenPreBattle, MauvilleCity_Gym_Text_BenDefeat
+	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat
 	msgbox MauvilleCity_Gym_Text_BenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_Vivian:: @ 820E0FE
-	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_VivianPreBattle, MauvilleCity_Gym_Text_VivianDefeat
+	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_VivianIntro, MauvilleCity_Gym_Text_VivianDefeat
 	msgbox MauvilleCity_Gym_Text_VivianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_Angelo:: @ 820E115
-	trainerbattle_single TRAINER_ANGELO, MauvilleCity_Gym_Text_AngeloPreBattle, MauvilleCity_Gym_Text_AngeloDefeat
+	trainerbattle_single TRAINER_ANGELO, MauvilleCity_Gym_Text_AngeloIntro, MauvilleCity_Gym_Text_AngeloDefeat
 	msgbox MauvilleCity_Gym_Text_AngeloPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -280,7 +280,7 @@ MauvilleCity_Gym_Text_GymGuidePostVictory: @ 820E283
 	.string "Whoa, you're electrifying!\n"
 	.string "You've powered the door open!$"
 
-MauvilleCity_Gym_Text_KirkPreBattle: @ 820E2BC
+MauvilleCity_Gym_Text_KirkIntro: @ 820E2BC
 	.string "My electric soul, it'll shatter your\n"
 	.string "dreams whole, whoa-yeahah!$"
 
@@ -292,7 +292,7 @@ MauvilleCity_Gym_Text_KirkPostBattle: @ 820E336
 	.string "Pokémon and rock, it's all about heart,\n"
 	.string "whoa-yeah!$"
 
-MauvilleCity_Gym_Text_ShawnPreBattle: @ 820E369
+MauvilleCity_Gym_Text_ShawnIntro: @ 820E369
 	.string "I trained under Wattson!\n"
 	.string "There ain't no way I'll lose easily!$"
 
@@ -305,7 +305,7 @@ MauvilleCity_Gym_Text_ShawnPostBattle: @ 820E3C1
 	.string "He was battling even before your\n"
 	.string "daddy was born, that tough coot.$"
 
-MauvilleCity_Gym_Text_BenPreBattle: @ 820E443
+MauvilleCity_Gym_Text_BenIntro: @ 820E443
 	.string "This Gym's got puzzles!\n"
 	.string "Isn't it fun?$"
 
@@ -316,7 +316,7 @@ MauvilleCity_Gym_Text_BenPostBattle: @ 820E47E
 	.string "Wattson says he likes setting up\n"
 	.string "little traps with switches.$"
 
-MauvilleCity_Gym_Text_VivianPreBattle: @ 820E4BB
+MauvilleCity_Gym_Text_VivianIntro: @ 820E4BB
 	.string "With my charm and my Pokémon's moves,\n"
 	.string "you'll be shocked!$"
 
@@ -330,7 +330,7 @@ MauvilleCity_Gym_Text_VivianPostBattle: @ 820E50F
 	.string "became Trainers.\l"
 	.string "He must know all sorts of things!$"
 
-MauvilleCity_Gym_Text_AngeloPreBattle: @ 820E593
+MauvilleCity_Gym_Text_AngeloIntro: @ 820E593
 	.string "I love shiny things!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat: @ 820E5A8
@@ -341,7 +341,7 @@ MauvilleCity_Gym_Text_AngeloPostBattle: @ 820E5C2
 	.string "Mauville Gym's Wattson has a shiny\n"
 	.string "forehead. It makes me happy!$"
 
-MauvilleCity_Gym_Text_WattsonPreBattle: @ 820E602
+MauvilleCity_Gym_Text_WattsonIntro: @ 820E602
 	.string "I've given up on my plans to convert\n"
 	.string "the city, I have.\p"
 	.string "And so, I put my time into making\n"

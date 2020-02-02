@@ -12,6 +12,8 @@
 #include "frontier_util.h"
 #include "string_util.h"
 #include "constants/battle_tent.h"
+#include "constants/battle_tent_trainers.h"
+#include "constants/battle_tent_mons.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
@@ -134,7 +136,7 @@ static void SetVerdanturfTentTrainerGfx(void)
 
 static void BufferVerdanturfTentTrainerIntro(void)
 {
-    if (gTrainerBattleOpponent_A < TRAINER_RECORD_MIXING_FRIEND)
+    if (gTrainerBattleOpponent_A < FRONTIER_TRAINERS_COUNT)
         FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
 }
 
@@ -311,7 +313,7 @@ static void GenerateInitialRentalMons(void)
     while (i != PARTY_SIZE)
     {
         // Cannot have two pokemon of the same species.
-        monSetId = Random() % 70;
+        monSetId = Random() % NUM_SLATEPORT_TENT_MONS;
         for (j = firstMonId; j < firstMonId + i; j++)
         {
             u16 monId = monIds[j];
@@ -353,10 +355,10 @@ static void GenerateOpponentMons(void)
 {
     u16 trainerId;
     s32 i, j, k;
-    register const u16 *monSets asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
+    register const u16 *monSet asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
     u16 species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
-    s32 setsCount = 0;
+    s32 monId = 0;
 
     gFacilityTrainers = gSlateportBattleTentTrainers;
     gFacilityTrainerMons = gSlateportBattleTentMons;
@@ -365,7 +367,7 @@ static void GenerateOpponentMons(void)
     {
         do
         {
-            trainerId = Random() % 30;
+            trainerId = Random() % NUM_BATTLE_TENT_TRAINERS;
             for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
             {
                 if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
@@ -374,21 +376,21 @@ static void GenerateOpponentMons(void)
         } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
         gTrainerBattleOpponent_A = trainerId;
-        while (gFacilityTrainers[gTrainerBattleOpponent_A].monSets[setsCount] != 0xFFFF)
-            setsCount++;
-        if (setsCount > 8)
+        while (gFacilityTrainers[gTrainerBattleOpponent_A].monSet[monId] != 0xFFFF)
+            monId++;
+        if (monId > 8)
             break;
-        setsCount = 0;
+        monId = 0;
     }
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 2)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
 
-    monSets = gFacilityTrainers[gTrainerBattleOpponent_A].monSets;
+    monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
     i = 0;
     while (i != FRONTIER_PARTY_SIZE)
     {
-        sRandMonSetId = monSets[Random() % setsCount];
+        sRandMonSetId = monSet[Random() % monId];
         for (j = 0; j < 6; j++)
         {
             if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)

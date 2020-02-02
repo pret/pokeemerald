@@ -668,8 +668,7 @@ SlateportCity_Movement_TyExit: @ 81DD326
 	walk_left
 	step_end
 
-@ Unused
-SlateportCity_Movement_1DD334: @ 81DD334
+SlateportCity_Movement_Unused: @ 81DD334
 	walk_down
 	walk_in_place_fastest_up
 	step_end
@@ -727,7 +726,7 @@ SlateportCity_EventScript_BerryPowderClerk:: @ 81DD36E
 	faceplayer
 	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_ReceivedPowderJar
 	msgbox SlateportCity_Text_ExplainBerries, MSGBOX_DEFAULT
-	giveitem_std ITEM_POWDER_JAR
+	giveitem ITEM_POWDER_JAR
 	setflag FLAG_RECEIVED_POWDER_JAR
 	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
 	release
@@ -861,7 +860,7 @@ SlateportCity_EventScript_TryBuyBerryPowderItem:: @ 81DD557
 	specialvar VAR_RESULT, HasEnoughBerryPowder
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_EventScript_NotEnoughBerryPowder
-	giveitem_std VAR_0x8008
+	giveitem VAR_0x8008
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_EventScript_NoRoomForBerryPowderItem
 	copyvar VAR_0x8004, VAR_0x8009

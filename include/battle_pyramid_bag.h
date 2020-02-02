@@ -41,10 +41,10 @@ void sub_81C5924(void);
 void sub_81C59BC(void);
 void sub_81C4EFC(void);
 void GoToBattlePyramidBagMenu(u8 a0, void (*callback)(void));
-void sub_81C6714(u8 taskId);
+void Task_CloseBattlePyramidBagMessage(u8 taskId);
 void TryStoreHeldItemsInPyramidBag(void);
-void sub_81C4F24(void);
-void sub_81C5B14(u8 taskId);
+void ChooseItemsToTossFromPyramidBag(void);
+void CloseBattlePyramidBagAndSetCallback(u8 taskId);
 void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, void (*callback)(u8 taskId));
 
 #endif // GUARD_BATTLE_PYRAMID_BAG_H

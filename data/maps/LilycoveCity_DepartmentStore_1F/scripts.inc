@@ -48,7 +48,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk:: @ 821F69C
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch
 	compare VAR_0x8004, 4
 	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_FullMatch
-	giveitem_std VAR_0x8005
+	giveitem VAR_0x8005
 	compare VAR_RESULT, FALSE
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom
 	special TryPutLotteryWinnerReportOnAir
@@ -112,7 +112,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize:: @ 821F7ED
 
 LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier:: @ 821F7F7
 	msgbox LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding, MSGBOX_DEFAULT
-	giveitem_std VAR_POKELOT_PRIZE_ITEM
+	giveitem VAR_POKELOT_PRIZE_ITEM
 	compare VAR_RESULT, FALSE
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
 	copyvar VAR_0x8004, VAR_POKELOT_PRIZE_PLACE

@@ -54,7 +54,7 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_MaxieOhItWasYou, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro TRAINER_MAXIE_1, MagmaHideout_4F_Text_MaxieDefeat
+	trainerbattle_no_intro TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat
 	msgbox MagmaHideout_4F_Text_MaxieImGoingAfterGroudon, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
@@ -62,14 +62,14 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	setvar VAR_SLATEPORT_CITY_STATE, 1
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
 	setvar VAR_SLATEPORT_HARBOR_STATE, 1
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 6
 	removeobject 2
 	removeobject 3
 	removeobject 4
 	removeobject 5
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
 
@@ -121,7 +121,7 @@ MagmaHideout_4F_EventScript_Grunt13:: @ 823A6BA
 	end
 
 MagmaHideout_4F_EventScript_Tabitha:: @ 823A6D1
-	trainerbattle_single TRAINER_TABITHA_3, MagmaHideout_4F_Text_TabithaIntro, MagmaHideout_4F_Text_TabithaDefeat
+	trainerbattle_single TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_Text_TabithaIntro, MagmaHideout_4F_Text_TabithaDefeat
 	msgbox MagmaHideout_4F_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 

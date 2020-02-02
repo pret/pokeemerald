@@ -8,7 +8,7 @@
 #include "trainer_see.h"
 #include "constants/event_objects.h"
 
-bool8 walkrun_is_standing_still(void)
+bool8 IsPlayerStandingStill(void)
 {
     if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         return FALSE;
@@ -18,7 +18,7 @@ bool8 walkrun_is_standing_still(void)
 
 static void sub_80983A4(u8 taskId)
 {
-    if (walkrun_is_standing_still())
+    if (IsPlayerStandingStill())
     {
         sub_808B864();
         DestroyTask(taskId);
@@ -49,7 +49,7 @@ static void sub_8098400(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (!task->data[0] && walkrun_is_standing_still() == TRUE)
+    if (!task->data[0] && IsPlayerStandingStill() == TRUE)
     {
         sub_808B864();
         task->data[0] = 1;
@@ -123,7 +123,7 @@ static void sub_80985BC(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u8 eventObjectId = task->data[2];
 
-    if (!task->data[0] && walkrun_is_standing_still() == TRUE)
+    if (!task->data[0] && IsPlayerStandingStill() == TRUE)
     {
         sub_808B864();
         task->data[0] = 1;

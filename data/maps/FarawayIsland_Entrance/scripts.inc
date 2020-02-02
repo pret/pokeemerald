@@ -7,7 +7,7 @@ FarawayIsland_Entrance_OnTransition: @ 8267C94
 	end
 
 FarawayIsland_Entrance_EventScript_SetCloudsWeather:: @ 8267C98
-	setweather WEATHER_CLOUDS
+	setweather WEATHER_SUNNY_CLOUDS
 	doweather
 	end
 

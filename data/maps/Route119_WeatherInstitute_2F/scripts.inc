@@ -41,7 +41,7 @@ Route119_WeatherInstitute_2F_EventScript_Grunt3:: @ 826FF96
 	end
 
 Route119_WeatherInstitute_2F_EventScript_Shelly:: @ 826FFAD
-	trainerbattle_single TRAINER_SHELLY_1, Route119_WeatherInstitute_2F_Text_ShellyIntro, Route119_WeatherInstitute_2F_Text_ShellyDefeat, Route119_WeatherInstitute_2F_EventScript_ShellyDefeated
+	trainerbattle_single TRAINER_SHELLY_WEATHER_INSTITUTE, Route119_WeatherInstitute_2F_Text_ShellyIntro, Route119_WeatherInstitute_2F_Text_ShellyDefeat, Route119_WeatherInstitute_2F_EventScript_ShellyDefeated
 	msgbox Route119_WeatherInstitute_2F_Text_ShellyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -64,7 +64,7 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated:: @ 826FFC8
 	setvar VAR_WEATHER_INSTITUTE_STATE, 1
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_2F_WORKERS
 	fadedefaultbgm
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setflag FLAG_HIDE_ROUTE_119_TEAM_AQUA
 	setflag FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M
 	removeobject 1
@@ -74,7 +74,7 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated:: @ 826FFC8
 	removeobject 7
 	applymovement EVENT_OBJ_ID_PLAYER, Route119_WeatherInstitute_2F_Movement_PlayerReturnToPosition
 	waitmovement 0
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	applymovement 5, Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer
 	waitmovement 0
 	copyobjectxytoperm 5
@@ -131,19 +131,19 @@ Route119_WeatherInstitute_2F_EventScript_ExplainCastform:: @ 82700EA
 	end
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather:: @ 82700F7
-	goto_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_TryStartUnusualWeather
+	goto_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
 	msgbox Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT
 	release
 	end
 
-Route119_WeatherInstitute_2F_EventScript_TryStartUnusualWeather:: @ 827010A
+Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather:: @ 827010A
 	setvar VAR_0x8004, 0
 	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
 	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
 	compare VAR_0x8004, 2  @ Both defeated
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather
-	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_CreateUnusualWeather
-	specialvar VAR_RESULT, GetUnusualWeatherMapNameAndType
+	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather
+	specialvar VAR_RESULT, GetAbnormalWeatherMapNameAndType
 	compare VAR_RESULT, 1
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_KyogreWeather
 	msgbox Route119_WeatherInstitute_2F_Text_GroudonWeather, MSGBOX_DEFAULT
@@ -155,8 +155,8 @@ Route119_WeatherInstitute_2F_EventScript_KyogreWeather:: @ 827014F
 	release
 	end
 
-Route119_WeatherInstitute_2F_EventScript_CreateUnusualWeather:: @ 8270159
-	special CreateUnusualWeatherEvent
+Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather:: @ 8270159
+	special CreateAbnormalWeatherEvent
 	setflag FLAG_TEMP_2
 	return
 

@@ -219,10 +219,10 @@ static const u8 sContestStatsMonData[] = {MON_DATA_COOL, MON_DATA_BEAUTY, MON_DA
 static const struct OamData sOamData_PokeblockCase =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -451,7 +451,7 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void))
         sPokeblockMenu->pokeblockOptionsIds = sActionsWhenGivingToLady;
         sPokeblockMenu->optionsNo = ARRAY_COUNT(sActionsWhenGivingToLady);
         break;
-    default:
+    default: // PBLOCK_CASE_FIELD
         sPokeblockMenu->pokeblockOptionsIds = sActionsOnField;
         sPokeblockMenu->optionsNo = ARRAY_COUNT(sActionsOnField);
         break;
@@ -928,7 +928,7 @@ static void sub_8136470(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->oam.affineMode = 1;
+        sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
         sprite->affineAnims = sSpriteAffineAnimTable_85B26F0;
         InitSpriteAffineAnim(sprite);
         sprite->data[0] = 1;
@@ -937,7 +937,7 @@ static void sub_8136470(struct Sprite *sprite)
     case 1:
         if (++sprite->data[1] > 11)
         {
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             sprite->data[0] = 0;
             sprite->data[1] = 0;
             FreeOamMatrix(sprite->oam.matrixNum);
@@ -960,7 +960,7 @@ static void Task_FreeDataAndExitPokeblockCase(u8 taskId)
     if (!gPaletteFade.active)
     {
         if (sPokeblockMenu->caseId == PBLOCK_CASE_FEEDER || sPokeblockMenu->caseId == PBLOCK_CASE_GIVE)
-            gFieldCallback = FieldCallback_ReturnToEventScript2;
+            gFieldCallback = FieldCB_ContinueScriptHandleMusic;
 
         DestroyListMenuTask(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         sub_8136418();

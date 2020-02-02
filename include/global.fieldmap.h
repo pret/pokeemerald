@@ -59,8 +59,8 @@ struct EventObjectTemplate
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ u8 movementRangeX:4;
-             u8 movementRangeY:4;
+    /*0x0A*/ u16 movementRangeX:4;
+             u16 movementRangeY:4;
     /*0x0C*/ u16 trainerType;
     /*0x0E*/ u16 trainerRange_berryTreeId;
     /*0x10*/ const u8 *script;
@@ -142,6 +142,16 @@ struct MapHeader
     /* 0x1A */ u8 flags;
     /* 0x1B */ u8 battleType;
 };
+
+// Flags for gMapHeader.flags, as defined in the map_header_flags macro
+#define MAP_ALLOW_BIKE         (1 << 0)
+#define MAP_ALLOW_ESCAPE_ROPE  (1 << 1)
+#define MAP_ALLOW_RUN          (1 << 2)
+#define MAP_SHOW_MAP_NAME      (1 << 3)
+#define UNUSED_MAP_FLAGS       (1 << 4 | 1 << 5 | 1 << 6 | 1 << 7)
+
+#define SHOW_MAP_NAME_ENABLED  ((gMapHeader.flags & (MAP_SHOW_MAP_NAME | UNUSED_MAP_FLAGS)) == MAP_SHOW_MAP_NAME)
+
 
 struct EventObject
 {

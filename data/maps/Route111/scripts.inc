@@ -48,8 +48,7 @@ Route111_OnTransition: @ 81F0D87
 	call_if_eq Route111_EventScript_SetMirageTowerGone
 	call Route111_EventScript_CheckSetSandstorm
 	call GabbyAndTy_EventScript_UpdateLocation
-	checktrainerflag TRAINER_VICKY
-	goto_if_lt Route111_EventScript_SetWinstratesNotDefeated
+	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
 	end
 
 Route111_EventScript_SetFallingPlayerGfx:: @ 81F0DC2
@@ -162,7 +161,7 @@ Route111_EventScript_Girl:: @ 81F0EB9
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_111_RECEIVED_BERRY, Route111_EventScript_ReceivedBerry
 	msgbox Route111_Text_WateredPlantsEveryDayTakeBerry, MSGBOX_DEFAULT
-	giveitem_std ITEM_RAZZ_BERRY
+	giveitem ITEM_RAZZ_BERRY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_111_RECEIVED_BERRY

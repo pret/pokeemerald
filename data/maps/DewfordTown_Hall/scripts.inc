@@ -29,7 +29,7 @@ DewfordTown_Hall_EventScript_Man:: @ 81FD50A
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
-	special sub_811EF6C
+	special BufferDeepLinkPhrase
 	msgbox DewfordTown_Hall_Text_DeepLinkBetweenXAndY, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_Hall_EventScript_ConfirmTrendLink
@@ -254,7 +254,7 @@ DewfordTown_Hall_EventScript_SludgeBombMan:: @ 81FD7DA
 	call Common_EventScript_BufferTrendyPhrase
 	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
 	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
-	giveitem_std ITEM_TM36
+	giveitem ITEM_TM36
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36

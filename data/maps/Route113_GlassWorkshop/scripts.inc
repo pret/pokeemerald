@@ -31,7 +31,7 @@ Route113_GlassWorkshop_EventScript_GlassWorker:: @ 826ED1E
 	compare VAR_GLASS_WORKSHOP_STATE, 1
 	goto_if_eq Route113_GlassWorkshop_EventScript_ExplainSootSack
 	msgbox Route113_GlassWorkshop_Text_GoCollectAshWithThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_SOOT_SACK
+	giveitem ITEM_SOOT_SACK
 	setvar VAR_GLASS_WORKSHOP_STATE, 1
 	msgbox Route113_GlassWorkshop_Text_ExplainSootSack, MSGBOX_DEFAULT
 	release
@@ -206,10 +206,10 @@ Route113_GlassWorkshop_EventScript_ChooseDifferentItem:: @ 826F003
 Route113_GlassWorkshop_EventScript_MakeGlassItem:: @ 826F00F
 	msgbox Route113_GlassWorkshop_Text_IllMakeItemForYou, MSGBOX_DEFAULT
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playse SE_SELECT
 	delay 30
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	msgbox Route113_GlassWorkshop_Text_IveFinishedGlassItem, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
 	call_if_eq Route113_GlassWorkshop_EventScript_GiveGlassFlute
@@ -220,13 +220,13 @@ Route113_GlassWorkshop_EventScript_MakeGlassItem:: @ 826F00F
 	end
 
 Route113_GlassWorkshop_EventScript_GiveGlassFlute:: @ 826F047
-	giveitem_std VAR_0x8008
+	giveitem VAR_0x8008
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route113_GlassWorkshop_EventScript_NoRoomForFlute
 	return
 
 Route113_GlassWorkshop_EventScript_GiveGlassDecor:: @ 826F05F
-	givedecoration_std VAR_0x8008
+	givedecoration VAR_0x8008
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route113_GlassWorkshop_EventScript_NoRoomForDecor
 	return

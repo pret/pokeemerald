@@ -14,6 +14,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item_icon.h"
+#include "item_menu.h"
 #include "list_menu.h"
 #include "main.h"
 #include "menu.h"
@@ -608,7 +609,7 @@ static void DecorationMenuAction_PutAway(u8 taskId)
     {
         RemoveDecorationWindow(0);
         ClearDialogWindowAndFrame(0, 0);
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8129ABC;
     }
@@ -1292,7 +1293,7 @@ void sub_8127F68(u8 taskId)
     {
         if (sub_8127F38() == TRUE)
         {
-            FadeScreen(1, 0);
+            FadeScreen(FADE_TO_BLACK, 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].func = sub_8128060;
         }
@@ -1332,7 +1333,7 @@ void sub_8128060(u8 taskId)
             ConfigureCameraObjectForPlacingDecoration(&sPlaceDecorationGraphicsDataBuffer, gCurDecorationItems[gCurDecorationIndex]);
             sub_812826C(taskId);
             SetUpPlacingDecorationPlayerAvatar(taskId, &sPlaceDecorationGraphicsDataBuffer);
-            pal_fill_black();
+            FadeInFromBlack();
             gPaletteFade.bufferTransferDisabled = FALSE;
             gTasks[taskId].data[2] = 2;
             break;
@@ -1682,7 +1683,7 @@ void CancelDecorating(u8 taskId)
 
 void sub_8128BBC(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
 }
@@ -1738,7 +1739,7 @@ void sub_8128CD4(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    pal_fill_black();
+    FadeInFromBlack();
     taskId = CreateTask(sub_8128C64, 8);
     sub_8127580(taskId);
     gTasks[taskId].data[2] = 0;
@@ -2153,7 +2154,8 @@ void sub_8129708(void)
     }
 }
 
-void sub_81297AC(void)
+// Unused
+void GetEventObjectLocalIdByFlag(void)
 {
     u8 i;
 
@@ -2215,7 +2217,7 @@ void sub_81298EC(u8 taskId)
     case 2:
         ScriptContext2_Enable();
         IdentifyOwnedDecorationsCurrentlyInUseInternal(taskId);
-        pal_fill_black();
+        FadeInFromBlack();
         gTasks[taskId].data[2] = 3;
         break;
     case 3:
@@ -2278,7 +2280,7 @@ void sub_8129ABC(u8 taskId)
         break;
     case 1:
         SetUpPuttingAwayDecorationPlayerAvatar();
-        pal_fill_black();
+        FadeInFromBlack();
         data[2] = 2;
         break;
     case 2:
@@ -2551,7 +2553,7 @@ void ReturnDecorationPrompt(u8 taskId)
 
 void PutAwayDecoration(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81298EC;
 }
@@ -2570,7 +2572,7 @@ void StopPuttingAwayDecorations(u8 taskId)
 
 void sub_812A22C(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_812A25C;
 }
@@ -2623,7 +2625,7 @@ void sub_812A334(void)
 {
     u8 taskId;
 
-    pal_fill_black();
+    FadeInFromBlack();
     DrawDialogueFrame(0, 1);
     InitDecorationActionsWindow();
     taskId = CreateTask(sub_812A2C4, 8);

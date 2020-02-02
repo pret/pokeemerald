@@ -52,7 +52,7 @@ EventScript_PokeBlockFeeder:: @ 82A4BAC
 	end
 
 SafariZone_EventScript_ChoosePokeblock:: @ 82A4BD0
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special OpenPokeblockCaseOnFeeder
 	waitstate
 	compare VAR_RESULT, 0xFFFF

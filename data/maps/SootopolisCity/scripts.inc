@@ -106,18 +106,18 @@ SootopolisCity_EventScript_SetWeather:: @ 81E5805
 	compare VAR_SOOTOPOLIS_CITY_STATE, 6
 	goto_if_ge SootopolisCity_EventScript_SetNormalWeather
 	compare VAR_SOOTOPOLIS_CITY_STATE, 1
-	goto_if_eq SootopolisCity_EventScript_SetHeavyRain
+	goto_if_eq SootopolisCity_EventScript_SetDownpour
 	compare VAR_SKY_PILLAR_STATE, 1
-	goto_if_eq SootopolisCity_EventScript_SetHeavyRain
+	goto_if_eq SootopolisCity_EventScript_SetDownpour
 	compare VAR_SKY_PILLAR_STATE, 1
-	goto_if_le Common_EventScript_SetAlternatingWeather
+	goto_if_le Common_EventScript_SetAbnormalWeather
 	return
 
 SootopolisCity_EventScript_SetNormalWeather:: @ 81E583D
 	return
 
-SootopolisCity_EventScript_SetHeavyRain:: @ 81E583E
-	setweather WEATHER_RAIN_HEAVY
+SootopolisCity_EventScript_SetDownpour:: @ 81E583E
+	setweather WEATHER_DOWNPOUR
 	return
 
 SootopolisCity_EventScript_CheckSetEnterCaveOfOriginObjPos:: @ 81E5842
@@ -214,8 +214,8 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
-	setweather WEATHER_ALTERNATING
+	fadescreenspeed FADE_TO_BLACK, 8
+	setweather WEATHER_ABNORMAL
 	doweather
 	setvar VAR_0x8004, 0
 	special Script_DoRayquazaScene
@@ -314,8 +314,8 @@ SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
-	setweather WEATHER_ALTERNATING
+	fadescreenspeed FADE_TO_BLACK, 8
+	setweather WEATHER_ABNORMAL
 	doweather
 	setvar VAR_0x8004, 0
 	special Script_DoRayquazaScene
@@ -505,7 +505,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
+	fadescreenspeed FADE_TO_BLACK, 8
 	call SootopolisCity_EventScript_SetRoughWater
 	removeobject 9
 	removeobject 10
@@ -547,7 +547,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	fadenewbgm MUS_RUNECITY
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warp8 MAP_SOOTOPOLIS_CITY, 255, 43, 32
+	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 43, 32
 	waitstate
 	end
 
@@ -558,7 +558,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed 1, 8
+	fadescreenspeed FADE_TO_BLACK, 8
 	call SootopolisCity_EventScript_SetRoughWater
 	removeobject 9
 	removeobject 10
@@ -600,7 +600,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	fadenewbgm MUS_NAMINORI
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warp8 MAP_SOOTOPOLIS_CITY, 255, 29, 53
+	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 29, 53
 	waitstate
 	end
 
@@ -755,7 +755,7 @@ SootopolisCity_EventScript_KiriGiveBerry:: @ 81E5F1B
 	random NUM_KIRI_BERRIES
 	addvar VAR_RESULT, NUM_KIRI_BERRIES_SKIPPED
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem_std VAR_RESULT
+	giveitem VAR_RESULT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
@@ -768,7 +768,7 @@ SootopolisCity_EventScript_KiriGiveBerry:: @ 81E5F1B
 	end
 
 SootopolisCity_EventScript_GiveFigyBerry:: @ 81E5F79
-	giveitem_std ITEM_FIGY_BERRY
+	giveitem ITEM_FIGY_BERRY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
@@ -776,7 +776,7 @@ SootopolisCity_EventScript_GiveFigyBerry:: @ 81E5F79
 	end
 
 SootopolisCity_EventScript_GiveIapapaBerry:: @ 81E5F9A
-	giveitem_std ITEM_IAPAPA_BERRY
+	giveitem ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
@@ -1356,7 +1356,7 @@ SootopolisCity_EventScript_Wallace:: @ 81E6446
 
 SootopolisCity_EventScript_GiveWaterfall:: @ 81E646F
 	msgbox SootopolisCity_Text_ThankYouForHelpAcceptThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_HM07
+	giveitem ITEM_HM07
 	setflag FLAG_RECEIVED_HM07
 	msgbox SootopolisCity_Text_ExplainWaterfallGoToGym, MSGBOX_DEFAULT
 	closemessage

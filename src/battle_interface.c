@@ -202,10 +202,10 @@ static void sub_8074F88(struct TestingBar *barInfo, s32 *arg1, u16 *arg2);
 static const struct OamData sUnknown_0832C138 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
@@ -274,10 +274,10 @@ static const struct SpriteTemplate sHealthboxSafariSpriteTemplate =
 static const struct OamData sOamData_Healthbar =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
@@ -330,45 +330,178 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
 
 static const struct Subsprite sUnknown_0832C220[] =
 {
-    {240,   0,  1,  3,  0,      1},
-    {48,    0,  0,  2,  32,     1},
-    {240,   32, 1,  1,  48,     1},
-    {16,    32, 1,  1,  52,     1},
-    {48,    32, 1,  1,  56,     1}
+    {
+        .x = 240,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(64x32),  
+        .size = SPRITE_SIZE(64x32),  
+        .tileOffset = 0,      
+        .priority = 1
+    },
+    {
+        .x = 48,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x32),  
+        .size = SPRITE_SIZE(32x32),  
+        .tileOffset = 32,     
+        .priority = 1
+    },
+    {
+        .x = 240,   
+        .y = 32, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 48,     
+        .priority = 1
+    },
+    {
+        .x = 16,    
+        .y = 32, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 52,     
+        .priority = 1
+    },
+    {
+        .x = 48,    
+        .y = 32, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 56,     
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C234[] =
 {
-    {240,   0,  1,  3,  64,     1},
-    {48,    0,  0,  2,  96,     1},
-    {240,   32, 1,  1,  112,    1},
-    {16,    32, 1,  1,  116,    1},
-    {48,    32, 1,  1,  120,    1}
+    {
+        .x = 240,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(64x32),  
+        .size = SPRITE_SIZE(64x32),  
+        .tileOffset = 64,     
+        .priority = 1
+    },
+    {
+        .x = 48,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x32),  
+        .size = SPRITE_SIZE(32x32),  
+        .tileOffset = 96,     
+        .priority = 1
+    },
+    {
+        .x = 240,   
+        .y = 32, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 112,    
+        .priority = 1
+    },
+    {
+        .x = 16,    
+        .y = 32, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 116,    
+        .priority = 1
+    },
+    {
+        .x = 48,    
+        .y = 32, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 120,    
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C248[] =
 {
-    {240,   0,  1,  3,  0,      1},
-    {48,    0,  0,  2,  32,     1}
+    {
+        .x = 240,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(64x32),  
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 0,      
+        .priority = 1
+    },
+    {
+        .x = 48,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x32),  
+        .size = SPRITE_SIZE(32x32),  
+        .tileOffset = 32,     
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C250[] =
 {
-    {240,   0,  1,  3,  0,      1},
-    {48,    0,  0,  2,  32,     1}
+    {
+        .x = 240,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(64x32),  
+        .size = SPRITE_SIZE(64x32),
+        .tileOffset = 0,      
+        .priority = 1
+    },
+    {
+        .x = 48,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x32),  
+        .size = SPRITE_SIZE(32x32),  
+        .tileOffset = 32,     
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C258[] =
 {
-    {240,   0,  1,  1,  0,      1},
-    {16,    0,  1,  1,  4,      1}
+    {
+        .x = 240,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 0,      
+        .priority = 1
+    },
+    {
+        .x = 16,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 4,      
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C260[] =
 {
-    {240,   0,  1,  1,  0,      1},
-    {16,    0,  1,  1,  4,      1},
-    {224,   0,  0,  0,  8,      1}
+    {
+        .x = 240,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 0,      
+        .priority = 1
+    },
+    {
+        .x = 16,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 4,      
+        .priority = 1
+    },
+    {
+        .x = 224,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8),  
+        .tileOffset = 8,      
+        .priority = 1
+    }
 };
 
 // unused subsprite table
@@ -388,20 +521,90 @@ static const struct SubspriteTable sUnknown_0832C28C[] =
 
 static const struct Subsprite sStatusSummaryBar_Subsprites_0[] =
 {
-    {160,   0,  1,  1,  0,      1},
-    {192,   0,  1,  1,  4,      1},
-    {224,   0,  1,  1,  8,      1},
-    {0,     0,  1,  1,  12,     1}
+    {
+        .x = 160,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 0,      
+        .priority = 1
+    },
+    {
+        .x = 192,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 4,     
+        .priority = 1
+    },
+    {
+        .x = 224,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 8,      
+        .priority = 1
+    },
+    {
+        .x = 0,     
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 12,     
+        .priority = 1
+    }
 };
 
 static const struct Subsprite sUnknown_0832C2AC[] =
 {
-    {160,   0,  1,  1,  0,      1},
-    {192,   0,  1,  1,  4,      1},
-    {224,   0,  1,  1,  8,      1},
-    {0,     0,  1,  1,  8,      1},
-    {32,    0,  1,  1,  8,      1},
-    {64,    0,  1,  1,  12,     1}
+    {
+        .x = 160,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 0,      
+        .priority = 1
+    },
+    {
+        .x = 192,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 4,      
+        .priority = 1
+    },
+    {
+        .x = 224,   
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 8,      
+        .priority = 1
+    },
+    {
+        .x = 0,     
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 8,      
+        .priority = 1
+    },
+    {
+        .x = 32,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 8,      
+        .priority = 1
+    },
+    {
+        .x = 64,    
+        .y = 0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 12,     
+        .priority = 1
+    }
 };
 
 static const struct SubspriteTable sStatusSummaryBar_SubspriteTable[] =
@@ -441,10 +644,10 @@ static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
 static const struct OamData sUnknown_0832C354 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
@@ -458,10 +661,10 @@ static const struct OamData sUnknown_0832C354 =
 static const struct OamData sOamData_StatusSummaryBalls =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
     .matrixNum = 0,
@@ -558,62 +761,52 @@ static s32 DummiedOutFunction(s16 unused1, s16 unused2, s32 unused3)
 {
     return 9;
 }
-
-#ifdef NONMATCHING
-static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
+void sub_8072308(s16 number, u16 *dest, bool8 unk)
 {
     s8 i, j;
-    u8 array[4];
-    u8 *arrayPtr;
-    s32 r9, vaaa;
+    u8 buff[4];
 
     for (i = 0; i < 4; i++)
-        array[i] = 0;
-
-    i = 3;
-    r9 = -1;
-    arrayPtr = array;
-    while (1)
     {
-        if (arg0 > 0)
+        buff[i] = 0;
+    }
+
+    for (i = 3; ; i--)
+    {
+        if (number > 0)
         {
-            array[i] = arg0 % 10;
-            arg0 = arg0 / 10;
-            i--;
+            buff[i] = number % 10;
+            number /= 10;
         }
         else
         {
+            for (; i > -1; i--)
+            {
+                buff[i] = 0xFF;
+            }
+            if (buff[3] == 0xFF)
+                buff[3] = 0;
             break;
         }
     }
 
-    for (; i > -1; i--)
-    {
-        array[i] = 0xFF;
-    }
-
-    if (arrayPtr[3] == 0xFF)
-        arrayPtr[3] = 0;
-
-    if (arg2 == 0)
+    if (!unk)
     {
         for (i = 0, j = 0; i < 4; i++)
         {
-            if (array[j] == 0xFF)
+            if (buff[j] == 0xFF)
             {
-                arg1[j] &= 0xFC00;
-                arg1[j] |= 0x1E;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= 0x1E;
+                dest[j + 0x00] &= 0xFC00;
+                dest[j + 0x00] |= 0x1E;
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x1E;
             }
             else
             {
-                arg1[j] &= 0xFC00;
-                arg1[j] |= array[j] + 0x14;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= array[i] + 0x34;
+                dest[j + 0x00] &= 0xFC00;
+                dest[j + 0x00] |= 0x14 + buff[j];
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x34 + buff[i];
             }
             j++;
         }
@@ -622,254 +815,24 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
     {
         for (i = 0; i < 4; i++)
         {
-            if (array[i] == 0xFF)
+            if (buff[i] == 0xFF)
             {
-                arg1[i] &= 0xFC00;
-                arg1[i] |= 0x1E;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= 0x1E;
+                dest[i + 0x00] &= 0xFC00;
+                dest[i + 0x00] |= 0x1E;
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x1E;
             }
             else
             {
-                arg1[i] &= 0xFC00;
-                arg1[i] |= array[i] + 0x14;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= array[i] + 0x34;
+                dest[i + 0x00] &= 0xFC00;
+                dest[i + 0x00] |= 0x14 + buff[i];
+                dest[i + 0x20] &= 0xFC00;
+                dest[i + 0x20] |= 0x34 + buff[i];
             }
         }
     }
 }
 
-#else
-NAKED
-static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
-{
-    asm(".syntax unified\n\
-            push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    adds r7, r1, 0\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    mov r10, r2\n\
-    movs r3, 0\n\
-    movs r2, 0\n\
-_08072324:\n\
-    lsls r0, r3, 24\n\
-    asrs r0, 24\n\
-    mov r3, sp\n\
-    adds r1, r3, r0\n\
-    strb r2, [r1]\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _08072324\n\
-    movs r3, 0x3\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    mov r9, r0\n\
-    mov r8, sp\n\
-_08072344:\n\
-    lsls r0, r5, 16\n\
-    asrs r6, r0, 16\n\
-    cmp r6, 0\n\
-    ble _08072372\n\
-    lsls r4, r3, 24\n\
-    asrs r4, 24\n\
-    mov r1, sp\n\
-    adds r5, r1, r4\n\
-    adds r0, r6, 0\n\
-    movs r1, 0xA\n\
-    bl __modsi3\n\
-    strb r0, [r5]\n\
-    adds r0, r6, 0\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    subs r4, 0x1\n\
-    lsls r4, 24\n\
-    lsrs r3, r4, 24\n\
-    b _08072344\n\
-_08072372:\n\
-    lsls r1, r3, 24\n\
-    asrs r0, r1, 24\n\
-    cmp r0, r9\n\
-    ble _08072396\n\
-    movs r4, 0xFF\n\
-    movs r3, 0x1\n\
-    negs r3, r3\n\
-_08072380:\n\
-    asrs r2, r1, 24\n\
-    mov r5, sp\n\
-    adds r1, r5, r2\n\
-    ldrb r0, [r1]\n\
-    orrs r0, r4\n\
-    strb r0, [r1]\n\
-    subs r2, 0x1\n\
-    lsls r1, r2, 24\n\
-    asrs r0, r1, 24\n\
-    cmp r0, r3\n\
-    bgt _08072380\n\
-_08072396:\n\
-    mov r1, r8\n\
-    ldrb r0, [r1, 0x3]\n\
-    cmp r0, 0xFF\n\
-    bne _080723A2\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x3]\n\
-_080723A2:\n\
-    mov r2, r10\n\
-    cmp r2, 0\n\
-    bne _08072432\n\
-    movs r3, 0\n\
-    movs r1, 0\n\
-    movs r6, 0xFC\n\
-    lsls r6, 8\n\
-    movs r5, 0x1E\n\
-    mov r12, r5\n\
-_080723B4:\n\
-    lsls r1, 24\n\
-    asrs r2, r1, 24\n\
-    mov r0, sp\n\
-    adds r5, r0, r2\n\
-    ldrb r0, [r5]\n\
-    mov r8, r1\n\
-    cmp r0, 0xFF\n\
-    bne _080723EA\n\
-    lsls r1, r2, 1\n\
-    adds r1, r7\n\
-    ldrh r2, [r1]\n\
-    adds r0, r6, 0\n\
-    ands r0, r2\n\
-    mov r2, r12\n\
-    orrs r0, r2\n\
-    strh r0, [r1]\n\
-    lsls r3, 24\n\
-    asrs r1, r3, 23\n\
-    adds r1, r7\n\
-    adds r1, 0x40\n\
-    ldrh r2, [r1]\n\
-    adds r0, r6, 0\n\
-    ands r0, r2\n\
-    mov r5, r12\n\
-    orrs r0, r5\n\
-    strh r0, [r1]\n\
-    b _0807241A\n\
-_080723EA:\n\
-    lsls r2, 1\n\
-    adds r2, r7\n\
-    ldrh r0, [r2]\n\
-    adds r1, r6, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x14\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    lsls r4, r3, 24\n\
-    asrs r3, r4, 24\n\
-    lsls r2, r3, 1\n\
-    adds r2, r7\n\
-    adds r2, 0x40\n\
-    ldrh r0, [r2]\n\
-    adds r1, r6, 0\n\
-    ands r1, r0\n\
-    mov r5, sp\n\
-    adds r0, r5, r3\n\
-    ldrb r0, [r0]\n\
-    adds r0, 0x34\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    adds r3, r4, 0\n\
-_0807241A:\n\
-    movs r0, 0x80\n\
-    lsls r0, 17\n\
-    add r0, r8\n\
-    lsrs r1, r0, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r3, r2\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _080723B4\n\
-    b _08072496\n\
-_08072432:\n\
-    movs r3, 0\n\
-    movs r4, 0xFC\n\
-    lsls r4, 8\n\
-    movs r6, 0x1E\n\
-_0807243A:\n\
-    lsls r1, r3, 24\n\
-    asrs r2, r1, 24\n\
-    mov r3, sp\n\
-    adds r5, r3, r2\n\
-    ldrb r0, [r5]\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0xFF\n\
-    bne _08072466\n\
-    lsls r1, r2, 1\n\
-    adds r1, r7\n\
-    ldrh r2, [r1]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    adds r1, 0x40\n\
-    ldrh r2, [r1]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    b _08072488\n\
-_08072466:\n\
-    lsls r2, 1\n\
-    adds r2, r7\n\
-    ldrh r0, [r2]\n\
-    adds r1, r4, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x14\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    adds r2, 0x40\n\
-    ldrh r0, [r2]\n\
-    adds r1, r4, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x34\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-_08072488:\n\
-    movs r5, 0x80\n\
-    lsls r5, 17\n\
-    adds r0, r3, r5\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _0807243A\n\
-_08072496:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 void sub_80724A8(s16 arg0, s16 arg1, u16 *arg2)
 {
@@ -910,9 +873,9 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
             healthboxLeftSpriteId = CreateSprite(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
             healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
 
-            gSprites[healthboxLeftSpriteId].oam.shape = 0;
+            gSprites[healthboxLeftSpriteId].oam.shape = ST_OAM_SQUARE;
 
-            gSprites[healthboxRightSpriteId].oam.shape = 0;
+            gSprites[healthboxRightSpriteId].oam.shape = ST_OAM_SQUARE;
             gSprites[healthboxRightSpriteId].oam.tileNum += 64;
         }
         else
@@ -962,7 +925,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     healthbarSpriteId = CreateSpriteAtEnd(&sHealthbarSpriteTemplates[gBattlerPositions[battlerId]], 140, 60, 0);
     healthBarSpritePtr = &gSprites[healthbarSpriteId];
     SetSubspriteTables(healthBarSpritePtr, &sUnknown_0832C28C[GetBattlerSide(battlerId)]);
-    healthBarSpritePtr->subspriteMode = 2;
+    healthBarSpritePtr->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     healthBarSpritePtr->oam.priority = 1;
 
     CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_1), (void*)(OBJ_VRAM0 + healthBarSpritePtr->oam.tileNum * TILE_SIZE_4BPP), 64);
@@ -987,8 +950,8 @@ u8 CreateSafariPlayerHealthboxSprites(void)
     healthboxLeftSpriteId = CreateSprite(&sHealthboxSafariSpriteTemplate, 240, 160, 1);
     healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxSafariSpriteTemplate, 240, 160, 1);
 
-    gSprites[healthboxLeftSpriteId].oam.shape = 0;
-    gSprites[healthboxRightSpriteId].oam.shape = 0;
+    gSprites[healthboxLeftSpriteId].oam.shape = ST_OAM_SQUARE;
+    gSprites[healthboxRightSpriteId].oam.shape = ST_OAM_SQUARE;
 
     gSprites[healthboxRightSpriteId].oam.tileNum += 64;
 
@@ -1711,9 +1674,9 @@ void Task_HidePartyStatusSummary(u8 taskId)
     gTasks[taskId].tData15 = 16;
 
     for (i = 0; i < PARTY_SIZE; i++)
-        gSprites[ballIconSpriteIds[i]].oam.objMode = 1;
+        gSprites[ballIconSpriteIds[i]].oam.objMode = ST_OAM_OBJ_BLEND;
 
-    gSprites[summaryBarSpriteId].oam.objMode = 1;
+    gSprites[summaryBarSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
 
     if (isBattleStart)
     {

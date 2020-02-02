@@ -5,23 +5,23 @@ Route115_MapScripts:: @ 81F2920
 	.byte 0
 
 Route115_OnLoad: @ 81F2930
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_WEST
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute115West
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_EAST
-	call_if_eq UnusualWeather_EventScript_PlaceTilesRoute115East
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_WEST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute115West
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_EAST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute115East
 	end
 
 Route115_OnTransition: @ 81F2947
-	compare VAR_SHOULD_END_UNUSUAL_WEATHER, 1
-	call_if_eq UnusualWeather_EventScript_HideMapNamePopup
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_WEST
-	call_if_eq UnusualWeather_StartGroudonWeather
-	compare VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_ROUTE_115_EAST
-	call_if_eq UnusualWeather_StartGroudonWeather
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	call_if_eq AbnormalWeather_EventScript_HideMapNamePopup
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_WEST
+	call_if_eq AbnormalWeather_StartGroudonWeather
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_EAST
+	call_if_eq AbnormalWeather_StartGroudonWeather
 	end
 
 Route115_OnFrame: @ 81F2969
-	map_script_2 VAR_SHOULD_END_UNUSUAL_WEATHER, 1, UnusualWeather_EventScript_EndEventAndCleanup_1
+	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
 Route115_EventScript_Woman:: @ 81F2973

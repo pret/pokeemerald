@@ -403,7 +403,7 @@ static void PrintBerryNumberAndName(void)
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringCopy(gStringVar2, berry->name);
-    StringExpandPlaceholders(gStringVar4, gText_UnkF908Var1Var2);
+    StringExpandPlaceholders(gStringVar4, gText_NumberVar1Var2);
     PrintTextInBerryTagScreen(WIN_BERRY_NAME, gStringVar4, 0, 1, 0, 0);
 }
 
@@ -527,7 +527,7 @@ static void Task_CloseBerryTagScreen(u8 taskId)
         DestroyFlavorCircleSprites();
         Free(sBerryTag);
         FreeAllWindowBuffers();
-        SetMainCallback2(bag_menu_mail_related);
+        SetMainCallback2(CB2_ReturnToBagMenuPocket);
         DestroyTask(taskId);
     }
 }

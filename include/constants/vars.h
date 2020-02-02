@@ -5,22 +5,24 @@
 
 // temporary vars
 // The first 0x10 vars are are temporary--they are cleared every time a map is loaded.
-#define VAR_TEMP_0                 0x4000
-#define VAR_TEMP_1                 0x4001
-#define VAR_TEMP_2                 0x4002
-#define VAR_TEMP_3                 0x4003
-#define VAR_TEMP_4                 0x4004
-#define VAR_TEMP_5                 0x4005
-#define VAR_TEMP_6                 0x4006
-#define VAR_TEMP_7                 0x4007
-#define VAR_TEMP_8                 0x4008
-#define VAR_TEMP_9                 0x4009
-#define VAR_TEMP_A                 0x400A
-#define VAR_TEMP_B                 0x400B
-#define VAR_TEMP_C                 0x400C
-#define VAR_TEMP_D                 0x400D
-#define VAR_TEMP_E                 0x400E
-#define VAR_TEMP_F                 0x400F
+#define TEMP_VARS_START            0x4000
+#define VAR_TEMP_0                 (TEMP_VARS_START + 0x0)
+#define VAR_TEMP_1                 (TEMP_VARS_START + 0x1)
+#define VAR_TEMP_2                 (TEMP_VARS_START + 0x2)
+#define VAR_TEMP_3                 (TEMP_VARS_START + 0x3)
+#define VAR_TEMP_4                 (TEMP_VARS_START + 0x4)
+#define VAR_TEMP_5                 (TEMP_VARS_START + 0x5)
+#define VAR_TEMP_6                 (TEMP_VARS_START + 0x6)
+#define VAR_TEMP_7                 (TEMP_VARS_START + 0x7)
+#define VAR_TEMP_8                 (TEMP_VARS_START + 0x8)
+#define VAR_TEMP_9                 (TEMP_VARS_START + 0x9)
+#define VAR_TEMP_A                 (TEMP_VARS_START + 0xA)
+#define VAR_TEMP_B                 (TEMP_VARS_START + 0xB)
+#define VAR_TEMP_C                 (TEMP_VARS_START + 0xC)
+#define VAR_TEMP_D                 (TEMP_VARS_START + 0xD)
+#define VAR_TEMP_E                 (TEMP_VARS_START + 0xE)
+#define VAR_TEMP_F                 (TEMP_VARS_START + 0xF)
+#define TEMP_VARS_END              VAR_TEMP_F
 
 // object gfx id vars
 // These 0x10 vars are used to dynamically control a map object's sprite.
@@ -69,9 +71,9 @@
 #define VAR_DEOXYS_ROCK_STEP_COUNT           0x4034
 #define VAR_DEOXYS_ROCK_LEVEL                0x4035
 #define VAR_PC_BOX_TO_SEND_MON               0x4036
-#define VAR_UNUSUAL_WEATHER_LOCATION         0x4037
-#define VAR_UNUSUAL_WEATHER_STEP_COUNTER     0x4038
-#define VAR_SHOULD_END_UNUSUAL_WEATHER       0x4039
+#define VAR_ABNORMAL_WEATHER_LOCATION        0x4037
+#define VAR_ABNORMAL_WEATHER_STEP_COUNTER    0x4038
+#define VAR_SHOULD_END_ABNORMAL_WEATHER      0x4039
 #define VAR_FARAWAY_ISLAND_STEP_COUNTER      0x403A
 #define VAR_REGICE_STEPS_1                   0x403B
 #define VAR_REGICE_STEPS_2                   0x403C
@@ -271,7 +273,9 @@
 #define VAR_UNUSED_0x40FE                    0x40FE // Unused Var
 #define VAR_UNUSED_0x40FF                    0x40FF // Unused Var
 
-#define SPECIAL_VARS_START 0x8000
+#define VARS_END                             0x40FF
+
+#define SPECIAL_VARS_START            0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.
 #define VAR_0x8000                    0x8000
@@ -296,5 +300,7 @@
 #define VAR_MON_BOX_POS               0x8013
 #define VAR_UNUSED_0x8014             0x8014
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
+
+#define SPECIAL_VARS_END              0x8015
 
 #endif // GUARD_CONSTANTS_VARS_H

@@ -96,7 +96,7 @@ RustboroCity_DevonCorp_2F_EventScript_NoticeRootFossil:: @ 8211933
 RustboroCity_DevonCorp_2F_EventScript_GiveRootFossil:: @ 8211974
 	bufferitemname 0, ITEM_ROOT_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher, MSGBOX_DEFAULT
-	takeitem ITEM_ROOT_FOSSIL, 1
+	removeitem ITEM_ROOT_FOSSIL
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 1
 	setvar VAR_WHICH_FOSSIL_REVIVED, 1
 	release
@@ -121,7 +121,7 @@ RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil:: @ 8211991
 RustboroCity_DevonCorp_2F_EventScript_GiveClawFossil:: @ 82119D2
 	bufferitemname 0, ITEM_CLAW_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher, MSGBOX_DEFAULT
-	takeitem ITEM_CLAW_FOSSIL, 1
+	removeitem ITEM_CLAW_FOSSIL
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 1
 	setvar VAR_WHICH_FOSSIL_REVIVED, 2
 	release

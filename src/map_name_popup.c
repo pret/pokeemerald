@@ -371,7 +371,7 @@ static void LoadMapNamePopUpWindowBg(void)
     LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), gMapPopUp_Outline_Table[popUpThemeId], 0x400, 0x21D);
     CallWindowFunction(popupWindowId, sub_80D4A78);
     PutWindowTilemap(popupWindowId);
-    if(gMapHeader.weather == WEATHER_BUBBLES)
+    if (gMapHeader.weather == WEATHER_UNDERWATER_BUBBLES)
         LoadPalette(&gUnknown_0857F444, 0xE0, 0x20);
     else
         LoadPalette(gMapPopUp_Palette_Table[popUpThemeId], 0xE0, 0x20);

@@ -4709,7 +4709,7 @@ void AnimTask_MonToSubstitute(u8 taskId)
 
     if (gTasks[taskId].data[0] == 0)
     {
-        PrepareBattlerSpriteForRotScale(spriteId, FALSE);
+        PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         gTasks[taskId].data[1] = 0x100;
         gTasks[taskId].data[2] = 0x100;
         gTasks[taskId].data[0]++;

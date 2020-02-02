@@ -30,7 +30,7 @@ LavaridgeTown_HerbShop_EventScript_OldMan:: @ 81FE505
 	faceplayer
 	goto_if_set FLFLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_ExplainCharcoal
 	msgbox LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine, MSGBOX_DEFAULT
-	giveitem_std ITEM_CHARCOAL
+	giveitem ITEM_CHARCOAL
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLFLAG_RECEIVED_CHARCOAL

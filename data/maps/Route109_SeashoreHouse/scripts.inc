@@ -24,7 +24,7 @@ Route109_SeashoreHouse_EventScript_AlreadyGaveIntroduction:: @ 8269428
 
 Route109_SeashoreHouse_EventScript_DefeatedTrainers:: @ 8269432
 	msgbox Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles, MSGBOX_DEFAULT
-	giveitem_std ITEM_SODA_POP, 6
+	giveitem ITEM_SODA_POP, 6
 	compare VAR_RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_BagFull
 	setflag FLAG_RECEIVED_6_SODA_POP
@@ -54,9 +54,9 @@ Route109_SeashoreHouse_EventScript_BuySodaPop:: @ 8269484
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route109_SeashoreHouse_EventScript_NotEnoughSpace
 	msgbox Route109_SeashoreHouse_Text_HereYouGo, MSGBOX_DEFAULT
-	takemoney 300, 0
+	removemoney 300, 0
 	updatemoneybox 0, 0
-	giveitem_std ITEM_SODA_POP
+	giveitem ITEM_SODA_POP
 	hidemoneybox
 	release
 	end
@@ -89,12 +89,9 @@ Route109_SeashoreHouse_EventScript_Simon:: @ 8269518
 	end
 
 Route109_SeashoreHouse_EventScript_CheckTrainersCompletion:: @ 8269533
-	checktrainerflag TRAINER_DWAYNE
-	goto_if_lt Route109_SeashoreHouse_EventScript_TrainersNotCompleted
-	checktrainerflag TRAINER_JOHANNA
-	goto_if_lt Route109_SeashoreHouse_EventScript_TrainersNotCompleted
-	checktrainerflag TRAINER_SIMON
-	goto_if_lt Route109_SeashoreHouse_EventScript_TrainersNotCompleted
+	goto_if_not_defeated TRAINER_DWAYNE, Route109_SeashoreHouse_EventScript_TrainersNotCompleted
+	goto_if_not_defeated TRAINER_JOHANNA, Route109_SeashoreHouse_EventScript_TrainersNotCompleted
+	goto_if_not_defeated TRAINER_SIMON, Route109_SeashoreHouse_EventScript_TrainersNotCompleted
 	setflag FLAG_DEFEATED_SEASHORE_HOUSE
 	release
 	end

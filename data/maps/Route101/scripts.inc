@@ -220,7 +220,7 @@ Route101_EventScript_BirchsBag:: @ 81EBE16
 	faceplayer
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_RESCUED_BIRCH
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 4
 	setobjectxy EVENT_OBJ_ID_PLAYER, 6, 13
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft

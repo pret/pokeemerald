@@ -56,7 +56,7 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
 static void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
 static bool8 FadeInScreen_RainShowShade(void);
 static bool8 FadeInScreen_Drought(void);
-static bool8 FadeInScreen_Fog1(void);
+static bool8 FadeInScreen_FogHorizontal(void);
 static void FadeInScreenWithWeather(void);
 static void DoNothing(void);
 static void Task_WeatherInit(u8 taskId);
@@ -89,29 +89,29 @@ struct Weather *const gWeatherPtr = &gWeather;
 
 static const struct WeatherCallbacks sWeatherFuncs[] =
 {
-    {None_Init,          None_Main,      None_Init,         None_Finish},
-    {Clouds_InitVars,    Clouds_Main,    Clouds_InitAll,    Clouds_Finish},
-    {Sunny_InitVars,     Sunny_Main,     Sunny_InitAll,     Sunny_Finish},
-    {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},
-    {Snow_InitVars,      Snow_Main,      Snow_InitAll,      Snow_Finish},
-    {MedRain_InitVars,   Rain_Main,      MedRain_InitAll,   Rain_Finish},
-    {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
-    {Ash_InitVars,       Ash_Main,       Ash_InitAll,       Ash_Finish},
-    {Sandstorm_InitVars, Sandstorm_Main, Sandstorm_InitAll, Sandstorm_Finish},
-    {Fog2_InitVars,      Fog2_Main,      Fog2_InitAll,      Fog2_Finish},
-    {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
-    {Shade_InitVars,     Shade_Main,     Shade_InitAll,     Shade_Finish},
-    {Drought_InitVars,   Drought_Main,   Drought_InitAll,   Drought_Finish},
-    {HeavyRain_InitVars, Rain_Main,      HeavyRain_InitAll, Rain_Finish},
-    {Bubbles_InitVars,   Bubbles_Main,   Bubbles_InitAll,   Bubbles_Finish},
+    [WEATHER_NONE]               = {None_Init,              None_Main,          None_Init,             None_Finish},
+    [WEATHER_SUNNY_CLOUDS]       = {Clouds_InitVars,        Clouds_Main,        Clouds_InitAll,        Clouds_Finish},
+    [WEATHER_SUNNY]              = {Sunny_InitVars,         Sunny_Main,         Sunny_InitAll,         Sunny_Finish},
+    [WEATHER_RAIN]               = {Rain_InitVars,          Rain_Main,          Rain_InitAll,          Rain_Finish},
+    [WEATHER_SNOW]               = {Snow_InitVars,          Snow_Main,          Snow_InitAll,          Snow_Finish},
+    [WEATHER_RAIN_THUNDERSTORM]  = {Thunderstorm_InitVars,  Thunderstorm_Main,  Thunderstorm_InitAll,  Thunderstorm_Finish},
+    [WEATHER_FOG_HORIZONTAL]     = {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
+    [WEATHER_VOLCANIC_ASH]       = {Ash_InitVars,           Ash_Main,           Ash_InitAll,           Ash_Finish},
+    [WEATHER_SANDSTORM]          = {Sandstorm_InitVars,     Sandstorm_Main,     Sandstorm_InitAll,     Sandstorm_Finish},
+    [WEATHER_FOG_DIAGONAL]       = {FogDiagonal_InitVars,   FogDiagonal_Main,   FogDiagonal_InitAll,   FogDiagonal_Finish},
+    [WEATHER_UNDERWATER]         = {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
+    [WEATHER_SHADE]              = {Shade_InitVars,         Shade_Main,         Shade_InitAll,         Shade_Finish},
+    [WEATHER_DROUGHT]            = {Drought_InitVars,       Drought_Main,       Drought_InitAll,       Drought_Finish},
+    [WEATHER_DOWNPOUR]           = {Downpour_InitVars,      Thunderstorm_Main,  Downpour_InitAll,      Thunderstorm_Finish},
+    [WEATHER_UNDERWATER_BUBBLES] = {Bubbles_InitVars,       Bubbles_Main,       Bubbles_InitAll,       Bubbles_Finish},
 };
 
 void (*const gWeatherPalStateFuncs[])(void) =
 {
-    UpdateWeatherGammaShift, // WEATHER_PAL_STATE_CHANGING_WEATHER
-    FadeInScreenWithWeather, // WEATHER_PAL_STATE_SCREEN_FADING_IN
-    DoNothing,               // WEATHER_PAL_STATE_SCREEN_FADING_OUT
-    DoNothing,               // WEATHER_PAL_STATE_IDLE
+    [WEATHER_PAL_STATE_CHANGING_WEATHER]  = UpdateWeatherGammaShift,
+    [WEATHER_PAL_STATE_SCREEN_FADING_IN]  = FadeInScreenWithWeather,
+    [WEATHER_PAL_STATE_SCREEN_FADING_OUT] = DoNothing,               
+    [WEATHER_PAL_STATE_IDLE]              = DoNothing,             
 };
 
 // This table specifies which of the gamma shift tables should be
@@ -171,8 +171,8 @@ void StartWeather(void)
         gWeatherPtr->cloudSpritesCreated = 0;
         gWeatherPtr->snowflakeSpriteCount = 0;
         gWeatherPtr->ashSpritesCreated = 0;
-        gWeatherPtr->fog1SpritesCreated = 0;
-        gWeatherPtr->fog2SpritesCreated = 0;
+        gWeatherPtr->fogHSpritesCreated = 0;
+        gWeatherPtr->fogDSpritesCreated = 0;
         gWeatherPtr->sandstormSpritesCreated = 0;
         gWeatherPtr->sandstormSwirlSpritesCreated = 0;
         gWeatherPtr->bubblesSpritesCreated = 0;
@@ -188,7 +188,7 @@ void StartWeather(void)
 
 void SetNextWeather(u8 weather)
 {
-    if (weather != WEATHER_RAIN_LIGHT && weather != WEATHER_RAIN_MED && weather != WEATHER_RAIN_HEAVY)
+    if (weather != WEATHER_RAIN && weather != WEATHER_RAIN_THUNDERSTORM && weather != WEATHER_DOWNPOUR)
     {
         PlayRainStoppingSoundEffect();
     }
@@ -371,9 +371,9 @@ static void FadeInScreenWithWeather(void)
 
     switch (gWeatherPtr->currWeather)
     {
-    case WEATHER_RAIN_LIGHT:
-    case WEATHER_RAIN_MED:
-    case WEATHER_RAIN_HEAVY:
+    case WEATHER_RAIN:
+    case WEATHER_RAIN_THUNDERSTORM:
+    case WEATHER_DOWNPOUR:
     case WEATHER_SNOW:
     case WEATHER_SHADE:
         if (FadeInScreen_RainShowShade() == FALSE)
@@ -389,17 +389,17 @@ static void FadeInScreenWithWeather(void)
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
         }
         break;
-    case WEATHER_FOG_1:
-        if (FadeInScreen_Fog1() == FALSE)
+    case WEATHER_FOG_HORIZONTAL:
+        if (FadeInScreen_FogHorizontal() == FALSE)
         {
             gWeatherPtr->gammaIndex = 0;
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
         }
         break;
-    case WEATHER_ASH:
+    case WEATHER_VOLCANIC_ASH:
     case WEATHER_SANDSTORM:
-    case WEATHER_FOG_2:
-    case WEATHER_FOG_3:
+    case WEATHER_FOG_DIAGONAL:
+    case WEATHER_UNDERWATER:
     default:
         if (!gPaletteFade.active)
         {
@@ -442,7 +442,7 @@ static bool8 FadeInScreen_Drought(void)
     return TRUE;
 }
 
-static bool8 FadeInScreen_Fog1(void)
+static bool8 FadeInScreen_FogHorizontal(void)
 {
     if (gWeatherPtr->fadeScreenCounter == 16)
         return FALSE;
@@ -763,11 +763,11 @@ void FadeScreen(u8 mode, s8 delay)
 
     switch (gWeatherPtr->currWeather)
     {
-    case WEATHER_RAIN_LIGHT:
-    case WEATHER_RAIN_MED:
-    case WEATHER_RAIN_HEAVY:
+    case WEATHER_RAIN:
+    case WEATHER_RAIN_THUNDERSTORM:
+    case WEATHER_DOWNPOUR:
     case WEATHER_SNOW:
-    case WEATHER_FOG_1:
+    case WEATHER_FOG_HORIZONTAL:
     case WEATHER_SHADE:
     case WEATHER_DROUGHT:
         useWeatherPal = TRUE;
@@ -816,7 +816,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
     case WEATHER_PAL_STATE_SCREEN_FADING_IN:
         if (gWeatherPtr->unknown_6CA != 0)
         {
-            if (gWeatherPtr->currWeather == WEATHER_FOG_1)
+            if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL)
                 MarkFogSpritePalToLighten(paletteIndex);
             paletteIndex *= 16;
             for (i = 0; i < 16; i++)
@@ -831,7 +831,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
     // WEATHER_PAL_STATE_CHANGING_WEATHER
     // WEATHER_PAL_STATE_CHANGING_IDLE
     default:
-        if (gWeatherPtr->currWeather != WEATHER_FOG_1)
+        if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL)
         {
             ApplyGammaShift(paletteIndex, 1, gWeatherPtr->gammaIndex);
         }
@@ -995,28 +995,28 @@ void sub_80AC274(u8 a)
     switch (a)
     {
     case 1:
-        SetWeather(WEATHER_CLOUDS);
+        SetWeather(WEATHER_SUNNY_CLOUDS);
         break;
     case 2:
         SetWeather(WEATHER_SUNNY);
         break;
     case 3:
-        SetWeather(WEATHER_RAIN_LIGHT);
+        SetWeather(WEATHER_RAIN);
         break;
     case 4:
         SetWeather(WEATHER_SNOW);
         break;
     case 5:
-        SetWeather(WEATHER_RAIN_MED);
+        SetWeather(WEATHER_RAIN_THUNDERSTORM);
         break;
     case 6:
-        SetWeather(WEATHER_FOG_1);
+        SetWeather(WEATHER_FOG_HORIZONTAL);
         break;
     case 7:
-        SetWeather(WEATHER_FOG_2);
+        SetWeather(WEATHER_FOG_DIAGONAL);
         break;
     case 8:
-        SetWeather(WEATHER_ASH);
+        SetWeather(WEATHER_VOLCANIC_ASH);
         break;
     case 9:
         SetWeather(WEATHER_SANDSTORM);

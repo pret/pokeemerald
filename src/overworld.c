@@ -89,16 +89,16 @@ extern const u8 EventScript_DoLinkRoomExit[];
 extern const u8 CableClub_EventScript_TooBusyToNotice[];
 extern const u8 CableClub_EventScript_ReadTrainerCard[];
 extern const u8 CableClub_EventScript_ReadTrainerCardColored[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot0[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot1[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot2[];
-extern const u8 EventScript_BattleColosseum4P_PlayerSpot3[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot1[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot2[];
+extern const u8 EventScript_BattleColosseum_4P_PlayerSpot3[];
 extern const u8 EventScript_RecordCenter_Spot0[];
 extern const u8 EventScript_RecordCenter_Spot1[];
 extern const u8 EventScript_RecordCenter_Spot2[];
 extern const u8 EventScript_RecordCenter_Spot3[];
-extern const u8 EventScript_BattleColosseum2P_PlayerSpot0[];
-extern const u8 EventScript_BattleColosseum2P_PlayerSpot1[];
+extern const u8 EventScript_BattleColosseum_2P_PlayerSpot0[];
+extern const u8 EventScript_BattleColosseum_2P_PlayerSpot1[];
 extern const u8 EventScript_TradeCenter_Chair1[];
 extern const u8 EventScript_TradeCenter_Chair0[];
 extern const u8 EventScript_ConfirmLeaveTradeRoom[];
@@ -432,11 +432,11 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
     // If you were defeated by Kyogre/Groudon and the step counter has
-    // maxed out, end the unusual weather.
-    if (VarGet(VAR_SHOULD_END_UNUSUAL_WEATHER) == 1)
+    // maxed out, end the abnormal weather.
+    if (VarGet(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1)
     {
-        VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 0);
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE);
+        VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 0);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
     }
 }
 
@@ -852,7 +852,7 @@ static void mli0_load_map(u32 a1)
     LoadCurrentMapData();
     if (!(sUnknown_020322D8 & 1))
     {
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
             LoadBattlePyramidEventObjectTemplates();
         else if (InTrainerHill())
             LoadTrainerHillEventObjectTemplates();
@@ -863,7 +863,7 @@ static void mli0_load_map(u32 a1)
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
     isIndoors = IsMapTypeIndoors(gMapHeader.mapType);
 
-    sub_80EB218();
+    CheckLeftFriendsSecretBase();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
@@ -880,7 +880,7 @@ static void mli0_load_map(u32 a1)
     RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
         InitTrainerHillMap();
@@ -978,7 +978,7 @@ static u16 GetCenterScreenMetatileBehavior(void)
 
 bool32 Overworld_IsBikingAllowed(void)
 {
-    if (!(gMapHeader.flags & 1))
+    if (!(gMapHeader.flags & MAP_ALLOW_BIKE))
         return FALSE;
     else
         return TRUE;
@@ -1526,7 +1526,7 @@ static bool8 map_post_load_hook_exec(void)
         if (gFieldCallback)
             gFieldCallback();
         else
-            mapldr_default();
+            FieldCB_DefaultWarpExit();
 
         gFieldCallback = NULL;
     }
@@ -1565,7 +1565,7 @@ void CB2_WhiteOut(void)
         ResetInitialPlayerAvatarState();
         ScriptContext1_Init();
         ScriptContext2_Disable();
-        gFieldCallback = sub_80AF3C8;
+        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
         val = 0;
         do_load_map_stuff_loop(&val);
         SetFieldVBlankCallback();
@@ -1580,7 +1580,7 @@ void CB2_LoadMap(void)
     ScriptContext1_Init();
     ScriptContext2_Disable();
     SetMainCallback1(NULL);
-    SetMainCallback2(c2_change_map);
+    SetMainCallback2(CB2_DoChangeMap);
     gMain.savedCallback = CB2_LoadMap2;
 }
 
@@ -1609,10 +1609,10 @@ void sub_8086024(void)
     }
 }
 
-void sub_8086074(void)
+void CB2_ReturnToFieldCableClub(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = sub_80AF314;
+    gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
     SetMainCallback2(c2_80567AC);
 }
 
@@ -1663,9 +1663,9 @@ void CB2_ReturnToFieldFromMultiplayer(void)
     ResetAllMultiplayerState();
 
     if (gWirelessCommType != 0)
-        gFieldCallback = sub_80AF314;
+        gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
     else
-        gFieldCallback = sub_80AF214;
+        gFieldCallback = FieldCB_ReturnToFieldCableLink;
 
     ScriptContext1_Init();
     ScriptContext2_Disable();
@@ -1675,36 +1675,36 @@ void CB2_ReturnToFieldFromMultiplayer(void)
 void CB2_ReturnToFieldWithOpenMenu(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback2 = sub_80AF6A4;
+    gFieldCallback2 = FieldCB_ReturnToFieldOpenStartMenu;
     CB2_ReturnToField();
 }
 
 void CB2_ReturnToFieldContinueScript(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = sub_80AF188;
+    gFieldCallback = FieldCB_ContinueScript;
     CB2_ReturnToField();
 }
 
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = FieldCallback_ReturnToEventScript2;
+    gFieldCallback = FieldCB_ContinueScriptHandleMusic;
     CB2_ReturnToField();
 }
 
 void sub_80861E8(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = sub_80AF3C8;
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     CB2_ReturnToField();
 }
 
 static void sub_8086204(void)
 {
-    if ((gMapHeader.flags & 0xF8) == 8 && SecretBaseMapPopupEnabled() == TRUE)
+    if (SHOW_MAP_NAME_ENABLED && SecretBaseMapPopupEnabled() == TRUE)
         ShowMapNamePopup();
-    sub_80AF3C8();
+    FieldCB_WarpExitFadeFromBlack();
 }
 
 void CB2_ContinueSavedGame(void)
@@ -1714,13 +1714,13 @@ void CB2_ContinueSavedGame(void)
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
-    if (gSaveFileStatus == 0xFF)
+    if (gSaveFileStatus == SAVE_STATUS_ERROR)
         ResetWinStreaks();
 
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();
     trainerHillMapId = GetCurrentTrainerHillMapId();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         LoadBattlePyramidFloorEventObjectScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
         LoadTrainerHillFloorEventObjectScripts();
@@ -1730,7 +1730,7 @@ void CB2_ContinueSavedGame(void)
     UnfreezeEventObjects();
     DoTimeBasedEvents();
     sub_8084788();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(TRUE);
     else if (trainerHillMapId != 0)
         InitTrainerHillMap();
@@ -1948,7 +1948,7 @@ static bool32 load_map_stuff(u8 *state, u32 a2)
         (*state)++;
         break;
     case 11:
-        if ((gMapHeader.flags & 0xF8) == 8 && SecretBaseMapPopupEnabled() == TRUE)
+        if (SHOW_MAP_NAME_ENABLED && SecretBaseMapPopupEnabled() == TRUE)
             ShowMapNamePopup();
         (*state)++;
         break;
@@ -2782,13 +2782,13 @@ static const u8 *TryInteractWithPlayer(struct TradeRoomPlayer *player)
 // these event scripts runs.
 static u16 GetDirectionForEventScript(const u8 *script)
 {
-    if (script == EventScript_BattleColosseum4P_PlayerSpot0)
+    if (script == EventScript_BattleColosseum_4P_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum4P_PlayerSpot1)
+    else if (script == EventScript_BattleColosseum_4P_PlayerSpot1)
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_BattleColosseum4P_PlayerSpot2)
+    else if (script == EventScript_BattleColosseum_4P_PlayerSpot2)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum4P_PlayerSpot3)
+    else if (script == EventScript_BattleColosseum_4P_PlayerSpot3)
         return FACING_FORCED_LEFT;
     else if (script == EventScript_RecordCenter_Spot0)
         return FACING_FORCED_RIGHT;
@@ -2798,9 +2798,9 @@ static u16 GetDirectionForEventScript(const u8 *script)
         return FACING_FORCED_RIGHT;
     else if (script == EventScript_RecordCenter_Spot3)
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_BattleColosseum2P_PlayerSpot0)
+    else if (script == EventScript_BattleColosseum_2P_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum2P_PlayerSpot1)
+    else if (script == EventScript_BattleColosseum_2P_PlayerSpot1)
         return FACING_FORCED_LEFT;
     else if (script == EventScript_TradeCenter_Chair0)
         return FACING_FORCED_RIGHT;

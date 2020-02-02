@@ -64,7 +64,7 @@ my $undoc_cmd = "grep '[Uu]nknown_[0-9a-fA-F]*\\|sub_[0-9a-fA-F]*'";
 # This looks for every symbol with an address at the end of it. Some things are
 # given a name based on their type / location, but still have an unknown purpose.
 # For example, FooMap_EventScript_FFFFFFF.
-my $partial_doc_cmd = "grep '[0-9a-fA-F]\\{6,7\\}'";
+my $partial_doc_cmd = "grep '_[0-28][0-9a-fA-F]\\{5,6\\}'";
 
 my $count_cmd = "wc -l";
 

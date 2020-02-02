@@ -70,7 +70,7 @@ static void CB2_HandleGivenWaldaPhrase(void)
     }
 
     StringCopy(gStringVar1, GetWaldaPhrasePtr());
-    gFieldCallback = FieldCallback_ReturnToEventScript2;
+    gFieldCallback = FieldCB_ContinueScriptHandleMusic;
     SetMainCallback2(CB2_ReturnToField);
 }
 

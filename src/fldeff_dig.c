@@ -57,7 +57,7 @@ static void sub_8135780(void)
     }
     else
     {
-        taskId = CreateTask(task08_080A1C44, 8);
+        taskId = CreateTask(Task_UseDigEscapeRopeOnField, 8);
         gTasks[taskId].data[0] = 0;
     }
 }

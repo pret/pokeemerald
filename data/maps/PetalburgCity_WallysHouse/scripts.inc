@@ -19,7 +19,7 @@ PetalburgCity_WallysHouse_OnFrame: @ 8204247
 PetalburgCity_WallysHouse_EventScript_GiveHM03Surf:: @ 8204251
 	lockall
 	msgbox PetalburgCity_WallysHouse_Text_PleaseExcuseUs, MSGBOX_DEFAULT
-	giveitem_std ITEM_HM03
+	giveitem ITEM_HM03
 	setflag FLAG_RECEIVED_HM03
 	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
 	setvar VAR_PETALBURG_CITY_STATE, 5

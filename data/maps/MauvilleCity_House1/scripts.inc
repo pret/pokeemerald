@@ -6,7 +6,7 @@ MauvilleCity_House1_EventScript_RockSmashDude:: @ 820F976
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM06, MauvilleCity_House1_EventScript_ReceivedRockSmash
 	msgbox MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT
-	giveitem_std ITEM_HM06
+	giveitem ITEM_HM06
 	setflag FLAG_RECEIVED_HM06
 	setflag FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
 	msgbox MauvilleCity_House1_Text_ExplainRockSmash, MSGBOX_DEFAULT

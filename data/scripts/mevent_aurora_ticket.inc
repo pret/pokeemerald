@@ -2,20 +2,18 @@ MysteryEventScript_AuroraTicket:: @ 867533C
 	setvaddress MysteryEventScript_AuroraTicket
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_AURORA_TICKET
-	vgoto_if_eq AuroraTicket_Obtained
-	checkflag FLAG_BATTLED_DEOXYS
-	vgoto_if_eq AuroraTicket_Obtained
+	vgoto_if_set FLAG_RECEIVED_AURORA_TICKET, AuroraTicket_Obtained
+	vgoto_if_set FLAG_BATTLED_DEOXYS, AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
-	compare_var_to_value VAR_RESULT, TRUE
+	compare VAR_RESULT, TRUE
 	vgoto_if_eq AuroraTicket_Obtained
 	vmessage sText_AuroraTicketForYou
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_AURORA_TICKET, 1
-	compare_var_to_value VAR_RESULT, FALSE
+	compare VAR_RESULT, FALSE
 	vgoto_if_eq AuroraTicket_NoBagSpace
-	giveitem_std ITEM_AURORA_TICKET
+	giveitem ITEM_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	setflag FLAG_RECEIVED_AURORA_TICKET
 	vmessage sText_AuroraTicketUseAtPort

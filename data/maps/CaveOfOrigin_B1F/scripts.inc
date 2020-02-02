@@ -50,12 +50,12 @@ CaveOfOrigin_B1F_EventScript_AtSkyPillar:: @ 823584D
 	msgbox CaveOfOrigin_B1F_Text_WellHeadToSkyPillar, MSGBOX_DEFAULT
 	closemessage
 	playse SE_KAIDAN
-	fadescreenspeed 1, 4
+	fadescreenspeed FADE_TO_BLACK, 4
 	setflag FLAG_WALLACE_GOES_TO_SKY_PILLAR
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 3
 	removeobject 1
 	clearflag FLAG_HIDE_SKY_PILLAR_WALLACE
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	release
 	end
 

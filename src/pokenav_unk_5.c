@@ -144,9 +144,9 @@ const struct WindowTemplate gUnknown_08623110 =
 const struct OamData gUnknown_086231C8 = 
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .bpp = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .size = SPRITE_SIZE(32x8),
@@ -401,10 +401,10 @@ u32 sub_81CC878(s32 taskState)
         if (sub_8123514() || sub_81CCC88())
             return 2;
 
-        sub_81C7BA4(1);
+        PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT);
         return 0;
     case 2:
-        if (IsDma3ManagerBusyWithBgCopy_())
+        if (WaitForHelpBar())
             return 2;
 
         sub_81C7E14(4);
@@ -434,10 +434,10 @@ u32 sub_81CC8D8(s32 taskState)
         if (sub_8123514() || sub_81CCC88())
             return 2;
 
-        sub_81C7BA4(2);
+        PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN);
         return 0;
     case 3:
-        if (IsDma3ManagerBusyWithBgCopy_())
+        if (WaitForHelpBar())
             return 2;
 
         sub_81C7E14(5);

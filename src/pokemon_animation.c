@@ -970,7 +970,7 @@ static void SetAffineData(struct Sprite *sprite, s16 xScale, s16 yScale, u16 rot
 
 static void HandleStartAffineAnim(struct Sprite *sprite)
 {
-    sprite->oam.affineMode = 3;
+    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     sprite->affineAnims = sSpriteAffineAnimTable_860AD68;
 
     if (sUnknown_03001274 == TRUE)
@@ -1028,7 +1028,7 @@ static u8 sub_817F758(void)
 
 static void sub_817F77C(struct Sprite *sprite)
 {
-    sprite->oam.affineMode = 1;
+    sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 
     if (sUnknown_03001274 == TRUE)
@@ -1040,7 +1040,7 @@ static void sub_817F77C(struct Sprite *sprite)
 
         FreeOamMatrix(sprite->oam.matrixNum);
         sprite->oam.matrixNum |= (sprite->hFlip << 3);
-        sprite->oam.affineMode = 0;
+        sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
     }
 }
 

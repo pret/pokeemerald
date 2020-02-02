@@ -1,12 +1,11 @@
 MysteryEventScript_SurfPichu:: @ 8674D3D
 	setvaddress MysteryEventScript_SurfPichu
-	checkflag FLAG_MYSTERY_EVENT_DONE
-	vgoto_if_ne SurfPichu_GiveIfPossible
+	vgoto_if_unset FLAG_MYSTERY_EVENT_DONE, SurfPichu_GiveIfPossible
 	returnram
 
 SurfPichu_GiveIfPossible: @ 8674D4C
 	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, PARTY_SIZE
+	compare VAR_EVENT_PICHU_SLOT, PARTY_SIZE
 	vgoto_if_eq SurfPichu_FullParty
 	setflag FLAG_MYSTERY_EVENT_DONE
 	vcall SurfPichu_GiveEgg
@@ -33,15 +32,15 @@ SurfPichu_GiveEgg: @ 8674D7E
 	giveegg SPECIES_PICHU
 	setmonobedient VAR_EVENT_PICHU_SLOT
 	setmonmetlocation VAR_EVENT_PICHU_SLOT, METLOC_FATEFUL_ENCOUNTER
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 1
+	compare VAR_EVENT_PICHU_SLOT, 1
 	vgoto_if_eq SurfPichu_Slot1
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 2
+	compare VAR_EVENT_PICHU_SLOT, 2
 	vgoto_if_eq SurfPichu_Slot2
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 3
+	compare VAR_EVENT_PICHU_SLOT, 3
 	vgoto_if_eq SurfPichu_Slot3
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 4
+	compare VAR_EVENT_PICHU_SLOT, 4
 	vgoto_if_eq SurfPichu_Slot4
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 5
+	compare VAR_EVENT_PICHU_SLOT, 5
 	vgoto_if_eq SurfPichu_Slot5
 	return
 

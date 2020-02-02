@@ -288,9 +288,9 @@ static const struct WindowTemplate sMapWindowTemplates[] =
 
 static const u8 sTextColors[][3] =
 {
-    {0, 2, 3},
-    {0, 1, 9},
-    {0, 4, 5},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_BLUE},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED},
 };
 
 struct
@@ -483,21 +483,21 @@ static const struct SpriteTemplate sSpriteTemplate_Head =
 
 static const u8 *const sPassAreaDescriptions[] =
 {
-    gUnknown_085EDA96,
-    gUnknown_085ED932,
-    gUnknown_085ED94D,
-    gUnknown_085ED961,
-    gUnknown_085ED977,
-    gUnknown_085ED993,
-    gUnknown_085ED9AF,
-    gUnknown_085ED9C7,
-    gUnknown_085ED9E5,
-    gUnknown_085EDA02,
-    gUnknown_085EDA21,
-    gUnknown_085EDA3C,
-    gUnknown_085EDA5E,
-    gUnknown_085EDA78,
-    gUnknown_085ED931,
+    gText_ThereIsNoBattleRecord,
+    gText_CheckFrontierMap,
+    gText_CheckTrainerCard,
+    gText_ViewRecordedBattle,
+    gText_PutAwayFrontierPass,
+    gText_CurrentBattlePoints,
+    gText_CollectedSymbols,
+    gText_BattleTowerAbilitySymbol,
+    gText_BattleDomeTacticsSymbol,
+    gText_BattlePalaceSpiritsSymbol,
+    gText_BattleArenaGutsSymbol,
+    gText_BattleFactoryKnowledgeSymbol,
+    gText_BattlePikeLuckSymbol,
+    gText_BattlePyramidBraveSymbol,
+    gText_EmptyString7,
 };
 
 struct
@@ -509,13 +509,13 @@ struct
     u8 animNum;
 } static const sMapLandmarks[] =
 {
-    {gUnknown_085EDAB1, gUnknown_085EDB0F, 0x59, 0x28, 1},
-    {gUnknown_085EDABE, gUnknown_085EDB4E, 0x21, 0x2A, 1},
-    {gUnknown_085EDACA, gUnknown_085EDB8B, 0x78, 0x56, 0},
-    {gUnknown_085EDAD8, gUnknown_085EDBC2, 0x72, 0x3B, 0},
-    {gUnknown_085EDAE5, gUnknown_085EDC00, 0x19, 0x43, 0},
-    {gUnknown_085EDAF4, gUnknown_085EDC45, 0x39, 0x39, 1},
-    {gUnknown_085EDB00, gUnknown_085EDC84, 0x86, 0x29, 1},
+    {gText_BattleTower3,   gText_BattleTowerDesc,   0x59, 0x28, 1},
+    {gText_BattleDome2,    gText_BattleDomeDesc,    0x21, 0x2A, 1},
+    {gText_BattlePalace2,  gText_BattlePalaceDesc,  0x78, 0x56, 0},
+    {gText_BattleArena2,   gText_BattleArenaDesc,   0x72, 0x3B, 0},
+    {gText_BattleFactory2, gText_BattleFactoryDesc, 0x19, 0x43, 0},
+    {gText_BattlePike2,    gText_BattlePikeDesc,    0x39, 0x39, 1},
+    {gText_BattlePyramid2, gText_BattlePyramidDesc, 0x86, 0x29, 1},
 };
 
 // code
@@ -1531,7 +1531,7 @@ static void Task_HandleFrontierMap(u8 taskId)
 static u8 MapNumToFrontierFacilityId(u16 mapNum) // id + 1, zero means not a frontier map number
 {
     if ((mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_LOBBY) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM))
-        || (mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM2)))
+        || (mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM)))
         return FRONTIER_FACILITY_TOWER + 1;
     else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_LOBBY)
              || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR)
@@ -1558,7 +1558,7 @@ static u8 MapNumToFrontierFacilityId(u16 mapNum) // id + 1, zero means not a fro
              || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS))
         return FRONTIER_FACILITY_PIKE + 1;
     else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_TOP))
         return FRONTIER_FACILITY_PYRAMID + 1;
     else

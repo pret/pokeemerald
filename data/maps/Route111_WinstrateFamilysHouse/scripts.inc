@@ -15,7 +15,7 @@ Route111_WinstrateFamilysHouse_EventScript_Victoria:: @ 822A4A2
 	setvar VAR_0x8008, 3
 	goto_if_set FLAG_RECEIVED_MACHO_BRACE, Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace
 	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace, MSGBOX_DEFAULT
-	giveitem_std ITEM_MACHO_BRACE
+	giveitem ITEM_MACHO_BRACE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MACHO_BRACE

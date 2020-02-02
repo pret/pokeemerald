@@ -73,7 +73,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_AcceptFavor:: @ 82A845E
     end
 
 LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem:: @ 82A846C
-    fadescreen 1
+    fadescreen FADE_TO_BLACK
     setvar VAR_RESULT, 0
     special Script_FavorLadyOpenBagMenu
     waitstate
@@ -129,7 +129,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize:: @ 82A8510
     setvar VAR_0x8004, 0
     specialvar VAR_0x8004, FavorLadyGetPrize
     msgbox LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn, MSGBOX_DEFAULT
-    giveitem_std VAR_0x8004
+    giveitem VAR_0x8004
     compare VAR_RESULT, 0
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoRoomForFavorPrize
     compare VAR_RESULT, 1
@@ -297,7 +297,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_GivePrize:: @ 82A8724
     setvar VAR_0x8005, 0
     special BufferQuizPrizeItem
     special SetQuizLadyState_Complete
-    giveitem_std VAR_0x8005
+    giveitem VAR_0x8005
     compare VAR_RESULT, FALSE
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize
     goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
@@ -326,7 +326,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz:: @ 82A8778
 LilycoveCity_PokemonCenter_1F_EventScript_MakeQuiz:: @ 82A8785
     msgbox LilycoveCity_PokemonCenter_1F_Text_PickYourPrize, MSGBOX_DEFAULT
 LilycoveCity_PokemonCenter_1F_EventScript_PickPrize:: @ 82A878D
-    fadescreen 1
+    fadescreen FADE_TO_BLACK
     setvar VAR_RESULT, 0
     special Script_QuizLadyOpenBagMenu
     waitstate
@@ -350,7 +350,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_WriteQuiz:: @ 82A87CE
     special ClearQuizLadyPlayerAnswer
     setvar VAR_0x8004, EASY_CHAT_TYPE_QUIZ_QUESTION
 LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion:: @ 82A87E1
-    fadescreen 1
+    fadescreen FADE_TO_BLACK
     special QuizLadySetCustomQuestion
     waitstate
     compare VAR_RESULT, 0
@@ -418,7 +418,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock:: @ 82A88B0
     end
 
 LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock:: @ 82A88BA
-    fadescreen 1
+    fadescreen FADE_TO_BLACK
     special OpenPokeblockCaseForContestLady
     waitstate
     compare VAR_RESULT, 0xFFFF

@@ -1,17 +1,16 @@
 MysteryEventScript_BattleCard:: @ 867513C
 	setvaddress MysteryEventScript_BattleCard
-	checkflag FLAG_MYSTERY_EVENT_DONE
-	vgoto_if_eq MysteryEventScript_BattleCardInfo
+	vgoto_if_set FLAG_MYSTERY_EVENT_DONE, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, GET_CARD_BATTLES_WON
 	specialvar VAR_0x8008, GetMysteryEventCardVal
-	compare_var_to_value VAR_0x8008, REQUIRED_CARD_BATTLES
+	compare VAR_0x8008, REQUIRED_CARD_BATTLES
 	vgoto_if_ne MysteryEventScript_BattleCardInfo
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftBattleCountCard_WonPrize
 	waitmessage
 	waitbuttonpress
-	giveitem_std ITEM_POTION
+	giveitem ITEM_POTION
 	release
 	setflag FLAG_MYSTERY_EVENT_DONE
 	end

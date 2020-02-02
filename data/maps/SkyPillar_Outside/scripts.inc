@@ -8,15 +8,15 @@ SkyPillar_Outside_OnTransition: @ 82392B8
 	compare VAR_SOOTOPOLIS_CITY_STATE, 3
 	call_if_eq SkyPillar_Outside_EventScript_HideMapNamePopup
 	compare VAR_SOOTOPOLIS_CITY_STATE, 4
-	call_if_ge SkyPillar_Outside_EventScript_CheckSetAlternatingWeather
+	call_if_ge SkyPillar_Outside_EventScript_CheckSetAbnormalWeather
 	end
 
 SkyPillar_Outside_EventScript_HideMapNamePopup:: @ 82392CF
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
-SkyPillar_Outside_EventScript_CheckSetAlternatingWeather:: @ 82392D3
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAlternatingWeather
+SkyPillar_Outside_EventScript_CheckSetAbnormalWeather:: @ 82392D3
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	return
 
 SkyPillar_Outside_OnLoad: @ 82392DD
@@ -72,7 +72,7 @@ SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
 	msgbox SkyPillar_Outside_Text_SituationGettingWorse, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_SYS_WEATHER_CTRL
-	setweather WEATHER_ALTERNATING
+	setweather WEATHER_ABNORMAL
 	doweather
 	special WaitWeather
 	waitstate
@@ -80,12 +80,12 @@ SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
 	msgbox SkyPillar_Outside_Text_GotToGoBackForSootopolis, MSGBOX_DEFAULT
 	closemessage
 	playse SE_KAIDAN
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 4
 	removeobject 1
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	releaseall
 	end
 

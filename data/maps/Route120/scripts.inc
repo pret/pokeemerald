@@ -76,7 +76,7 @@ Route120_EventScript_SetWeather:: @ 81F54D8
 	return
 
 Route120_EventScript_SetCloudyWeather:: @ 81F54FF
-	setweather WEATHER_CLOUDS
+	setweather WEATHER_SUNNY_CLOUDS
 	return
 
 Route120_EventScript_SetSunnyWeather:: @ 81F5503
@@ -92,7 +92,7 @@ Route120_EventScript_TrySetRainyWeather:: @ 81F5507
 	end
 
 Route120_EventScript_SetRainyWeather:: @ 81F5523
-	setweather WEATHER_RAIN_LIGHT
+	setweather WEATHER_RAIN
 	return
 
 Route120_EventScript_BerryBeauty:: @ 81F5527
@@ -145,7 +145,7 @@ Route120_EventScript_GiveIapapaBerry:: @ 81F55F6
 	end
 
 Route120_EventScript_GiveBerry:: @ 81F5601
-	giveitem_std VAR_0x8004
+	giveitem VAR_0x8004
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_120_RECEIVED_BERRY
@@ -225,10 +225,10 @@ Route120_EventScript_StevenBattleKecleon:: @ 81F568B
 	end
 
 Route120_EventScript_RemoveBridgeKecleonPostBattle:: @ 81F571C
-	fadescreenswapbuffers 1
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject 30 @ Invisible Bridge Kecleon
 	removeobject 36 @ Visible Bridge Kecleon
-	fadescreenswapbuffers 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	goto Route120_EventScript_StevenGiveDeconScope
 	end
 
@@ -237,7 +237,7 @@ Route120_EventScript_StevenGiveDeconScope:: @ 81F572C
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
-	giveitem_std ITEM_DEVON_SCOPE
+	giveitem ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage

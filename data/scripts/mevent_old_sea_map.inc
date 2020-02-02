@@ -2,20 +2,18 @@ MysteryEventScript_OldSeaMap:: @ 86757F4
 	setvaddress MysteryEventScript_OldSeaMap
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_OLD_SEA_MAP
-	vgoto_if_eq OldSeaMap_Obtained
-	checkflag FLAG_CAUGHT_MEW
-	vgoto_if_eq OldSeaMap_Obtained
+	vgoto_if_set FLAG_RECEIVED_OLD_SEA_MAP, OldSeaMap_Obtained
+	vgoto_if_set FLAG_CAUGHT_MEW, OldSeaMap_Obtained
 	checkitem ITEM_OLD_SEA_MAP, 1
-	compare_var_to_value VAR_RESULT, TRUE
+	compare VAR_RESULT, TRUE
 	vgoto_if_eq OldSeaMap_Obtained
 	vmessage sText_MysteryGiftOldSeaMapForYou
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_OLD_SEA_MAP, 1
-	compare_var_to_value VAR_RESULT, FALSE
+	compare VAR_RESULT, FALSE
 	vgoto_if_eq OldSeaMap_NoBagSpace
-	giveitem_std ITEM_OLD_SEA_MAP
+	giveitem ITEM_OLD_SEA_MAP
 	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
 	setflag FLAG_RECEIVED_OLD_SEA_MAP
 	vmessage sText_MysteryGiftOldSeaMapUseAtPort

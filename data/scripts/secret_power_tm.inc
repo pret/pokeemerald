@@ -44,7 +44,7 @@ Route111_EventScript_SecretPowerMan:: @ 82765FF
 	end
 
 Route111_EventScript_GiveSecretPower:: @ 827661E
-	giveitem_std ITEM_TM43
+	giveitem ITEM_TM43
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route111_EventScript_NoRoomForSecretPower
 	msgbox Route111_Text_ExplainSecretPower, MSGBOX_DEFAULT

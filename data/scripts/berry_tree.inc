@@ -39,13 +39,13 @@ BerryTree_EventScript_WantToPlant:: @ 8274374
 	end
 
 BerryTree_EventScript_ChooseBerryToPlant:: @ 8274393
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	closemessage
 	special Bag_ChooseBerry
 	waitstate
 	compare VAR_ITEM_ID, 0
 	goto_if_eq BerryTree_EventScript_CancelPlanting
-	takeitem VAR_ITEM_ID, 1
+	removeitem VAR_ITEM_ID
 	call BerryTree_EventScript_PlantBerry
 
 BerryTree_EventScript_CancelPlanting:: @ 82743AF

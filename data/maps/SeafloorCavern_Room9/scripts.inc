@@ -153,8 +153,7 @@ SeafloorCavern_Room9_Movement_ArchieApproachPlayer: @ 823502A
 	walk_right
 	step_end
 
-@ Unused
-SeafloorCavern_Room9_Movement_235032: @ 8235032
+SeafloorCavern_Room9_Movement_Unused1: @ 8235032
 	walk_left
 	walk_left
 	step_end
@@ -164,8 +163,7 @@ SeafloorCavern_Room9_Movement_ArchieListenMessage: @ 8235035
 	delay_16
 	step_end
 
-@ Unused
-SeafloorCavern_Room9_Movement_235038: @ 8235038
+SeafloorCavern_Room9_Movement_Unused2: @ 8235038
 	walk_right
 	step_end
 

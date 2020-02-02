@@ -47,21 +47,21 @@ gUnknown_082F32CC:: @ 82F32CC struct BgTemplate? not sure
 	.byte 0xb3, 0x30, 0x00, 0x00
 
 	.align 2
-gUnknown_082F32D8:: @ 82F32D8
-	.byte 0x01, 0x02, 0x03
+sBerryCrushTextColors1:: @ 82F32D8
+	.byte 0x01, 0x02, 0x03  @ TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY
 
-gUnknown_082F32DB:: @ 82F32DB
-	.byte 0x00, 0x01, 0x02
+sBerryCrushTextColors2:: @ 82F32DB
+	.byte 0x00, 0x01, 0x02  @ TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY
 
-gUnknown_082F32DE:: @ 82F32DE
-	.byte 0x00, 0x03, 0x04
+sBerryCrushTextColors3:: @ 82F32DE
+	.byte 0x00, 0x03, 0x04  @ TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_RED
 
-gUnknown_082F32E1:: @ 82F32E1
-	.byte 0x01, 0x08, 0x09
-	.byte 0x01, 0x06, 0x07
+sBerryCrushTextColorTable:: @ 82F32E1
+	.byte 0x01, 0x08, 0x09  @ TEXT_COLOR_WHITE, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_BLUE
+	.byte 0x01, 0x06, 0x07  @ TEXT_COLOR_WHITE, TEXT_COLOR_GREEN, TEXT_COLOR_LIGHT_GREEN
 
-gUnknown_082F32E7:: @ 82F32E7
-	.byte 0x01, 0x04, 0x05
+sBerryCrushTextColors4:: @ 82F32E7
+	.byte 0x01, 0x04, 0x05  @ TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED
 
 	.align 2
 gUnknown_082F32EC:: @ 82F32EC

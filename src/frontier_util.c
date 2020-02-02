@@ -840,8 +840,8 @@ static void GetFrontierData(void)
         gSpecialVar_Result = gBattleOutcome;
         gBattleOutcome = 0;
         break;
-    case FRONTIER_DATA_6:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CA9_b;
+    case FRONTIER_DATA_RECORD_DISABLED:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.disableRecordBattle;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.battledBrainFlags & sBattledBrainBitFlags[facility][hasSymbol];
@@ -875,8 +875,8 @@ static void SetFrontierData(void)
         for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
             gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
         break;
-    case FRONTIER_DATA_6:
-        gSaveBlock2Ptr->frontier.field_CA9_b = gSpecialVar_0x8006;
+    case FRONTIER_DATA_RECORD_DISABLED:
+        gSaveBlock2Ptr->frontier.disableRecordBattle = gSpecialVar_0x8006;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSaveBlock2Ptr->frontier.battledBrainFlags |= sBattledBrainBitFlags[facility][hasSymbol];
@@ -1701,7 +1701,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
             CopyFrontierBrainText(FALSE);
-        else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        else if (trainerId < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
@@ -1717,7 +1717,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         {
             CopyFrontierBrainText(FALSE);
         }
-        else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        else if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechWin);
         }
@@ -1745,7 +1745,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         {
             CopyFrontierBrainText(TRUE);
         }
-        else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        else if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
         }
@@ -2173,7 +2173,7 @@ static void RestoreHeldItems(void)
 static void SaveRecordBattle(void)
 {
     gSpecialVar_Result = MoveRecordedBattleToSaveData();
-    gSaveBlock2Ptr->frontier.field_CA9_b = 1;
+    gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
 }
 
 static void BufferFrontierTrainerName(void)
@@ -2490,7 +2490,7 @@ void SetFrontierBrainEventObjGfx_2(void)
 void CreateFrontierBrainPokemon(void)
 {
     s32 i, j;
-    s32 monCountInBits;
+    s32 selectedMonBits;
     s32 monPartyId;
     s32 monLevel = 0;
     u8 friendship;
@@ -2498,16 +2498,16 @@ void CreateFrontierBrainPokemon(void)
     s32 symbol = GetFronterBrainSymbol();
 
     if (facility == FRONTIER_FACILITY_DOME)
-        monCountInBits = GetDomeTrainerMonCountInBits(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
+        selectedMonBits = GetDomeTrainerSelectedMons(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
     else
-        monCountInBits = 7;
+        selectedMonBits = (1 << FRONTIER_PARTY_SIZE) - 1; // all 3 mons selected
 
     ZeroEnemyPartyMons();
     monPartyId = 0;
     monLevel = SetFacilityPtrsGetLevel();
-    for (i = 0; i < 3; monCountInBits >>= 1, i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; selectedMonBits >>= 1, i++)
     {
-        if (!(monCountInBits & 1))
+        if (!(selectedMonBits & 1))
             continue;
 
         do
@@ -2523,7 +2523,7 @@ void CreateFrontierBrainPokemon(void)
         SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM, &sFrontierBrainsMons[facility][symbol][i].heldItem);
         for (j = 0; j < NUM_STATS; j++)
             SetMonData(&gEnemyParty[monPartyId], MON_DATA_HP_EV + j, &sFrontierBrainsMons[facility][symbol][i].evs[j]);
-        friendship = 0xFF;
+        friendship = MAX_FRIENDSHIP;
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[monPartyId], sFrontierBrainsMons[facility][symbol][i].moves[j], j);
@@ -2560,7 +2560,7 @@ void CreateFrontierBrainPokemon(void)
     bl TrainerIdToDomeTournamentId\n\
     lsls r0, 16\n\
     lsrs r0, 16\n\
-    bl GetDomeTrainerMonCountInBits\n\
+    bl GetDomeTrainerSelectedMons\n\
     adds r4, r0, 0\n\
     b _081A4E46\n\
     .pool\n\

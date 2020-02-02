@@ -43,17 +43,17 @@ MtChimney_EventScript_Maxie:: @ 822EE0B
 	applymovement 2, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MtChimney_Text_MaxieIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_MAXIE_2, MtChimney_Text_MaxieDefeat
+	trainerbattle_no_intro TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat
 	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 29
 	removeobject 3
 	removeobject 22
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	setobjectxyperm 1, 10, 12
 	addobject 1
 	compare VAR_FACING, DIR_EAST
@@ -110,8 +110,8 @@ MtChimney_EventScript_LavaCookieLady:: @ 822EEF3
 	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare VAR_RESULT, TRUE
-	call_if_eq MtChimney_EventScript_TakeMoney
-	giveitem_std ITEM_LAVA_COOKIE
+	call_if_eq MtChimney_EventScript_RemoveMoney
+	giveitem ITEM_LAVA_COOKIE
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_BagIsFull
 	hidemoneybox
@@ -124,8 +124,8 @@ MtChimney_EventScript_BagIsFull:: @ 822EF51
 	release
 	end
 
-MtChimney_EventScript_TakeMoney:: @ 822EF5E
-	takemoney 200, 0
+MtChimney_EventScript_RemoveMoney:: @ 822EF5E
+	removemoney 200, 0
 	updatemoneybox 0, 0
 	return
 
@@ -184,8 +184,7 @@ MtChimney_Movement_ArchieExitNorth: @ 822EF9C
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFA6: @ 822EFA6
+MtChimney_Movement_Unused1: @ 822EFA6
 	walk_down
 	walk_down
 	walk_down
@@ -205,8 +204,7 @@ MtChimney_Movement_22EFA6: @ 822EFA6
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFB8: @ 822EFB8
+MtChimney_Movement_Unused2: @ 822EFB8
 	walk_down
 	walk_down
 	walk_down
@@ -217,8 +215,7 @@ MtChimney_Movement_22EFB8: @ 822EFB8
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFC1: @ 822EFC1
+MtChimney_Movement_Unused3: @ 822EFC1
 	walk_right
 	walk_down
 	walk_down
@@ -235,8 +232,7 @@ MtChimney_Movement_22EFC1: @ 822EFC1
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFD0: @ 822EFD0
+MtChimney_Movement_Unused4: @ 822EFD0
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
@@ -263,8 +259,7 @@ MtChimney_Movement_22EFD0: @ 822EFD0
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFE9: @ 822EFE9
+MtChimney_Movement_Unused5: @ 822EFE9
 	delay_16
 	delay_16
 	delay_16
@@ -277,8 +272,7 @@ MtChimney_Movement_22EFE9: @ 822EFE9
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22EFF4: @ 822EFF4
+MtChimney_Movement_Unused6: @ 822EFF4
 	delay_16
 	walk_left
 	walk_down
@@ -296,8 +290,7 @@ MtChimney_Movement_22EFF4: @ 822EFF4
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F004: @ 822F004
+MtChimney_Movement_Unused7: @ 822F004
 	delay_16
 	walk_left
 	walk_left
@@ -316,8 +309,7 @@ MtChimney_Movement_22F004: @ 822F004
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F015: @ 822F015
+MtChimney_Movement_Unused8: @ 822F015
 	delay_16
 	walk_down
 	walk_left
@@ -327,8 +319,7 @@ MtChimney_Movement_22F015: @ 822F015
 	walk_in_place_fastest_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F01D: @ 822F01D
+MtChimney_Movement_Unused9: @ 822F01D
 	walk_down
 	walk_down
 	walk_down
@@ -344,13 +335,11 @@ MtChimney_Movement_22F01D: @ 822F01D
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F02B: @ 822F02B
+MtChimney_Movement_Unused10: @ 822F02B
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F02D: @ 822F02D
+MtChimney_Movement_Unused11: @ 822F02D
 	walk_down
 	walk_down
 	walk_down
@@ -360,8 +349,7 @@ MtChimney_Movement_22F02D: @ 822F02D
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F035: @ 822F035
+MtChimney_Movement_Unused12: @ 822F035
 	delay_16
 	delay_16
 	walk_in_place_fastest_left
@@ -373,8 +361,7 @@ MtChimney_Movement_22F035: @ 822F035
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F03F: @ 822F03F
+MtChimney_Movement_Unused13: @ 822F03F
 	delay_16
 	delay_16
 	delay_16
@@ -387,16 +374,14 @@ MtChimney_Movement_22F03F: @ 822F03F
 	walk_down
 	step_end
 
-@ Unused
-MtChimney_Movement_22F04A: @ 822F04A
+MtChimney_Movement_Unused14: @ 822F04A
 	lock_facing_direction
 	walk_fast_left
 	unlock_facing_direction
 	face_right
 	step_end
 
-@ Unused
-MtChimney_Movement_22F04F: @ 822F04F
+MtChimney_Movement_Unused15: @ 822F04F
 	walk_left
 	walk_in_place_fastest_right
 	delay_16
@@ -415,7 +400,7 @@ MtChimney_EventScript_BusyAquaGrunt3:: @ 822F065
 	end
 
 MtChimney_EventScript_Tabitha:: @ 822F06E
-	trainerbattle_single TRAINER_TABITHA_2, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
+	trainerbattle_single TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -464,7 +449,7 @@ MtChimney_EventScript_MeteoriteMachine:: @ 822F0E4
 	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_EventScript_LeaveMeteoriteAlone
 	msgbox MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT
-	giveitem_std ITEM_METEORITE
+	giveitem ITEM_METEORITE
 	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end

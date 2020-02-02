@@ -2,7 +2,7 @@ SeafloorCavern_Room3_MapScripts:: @ 8234937
 	.byte 0
 
 SeafloorCavern_Room3_EventScript_Shelly:: @ 8234938
-	trainerbattle_single TRAINER_SHELLY_2, SeafloorCavern_Room3_Text_ShellyIntro, SeafloorCavern_Room3_Text_ShellyDefeat
+	trainerbattle_single TRAINER_SHELLY_SEAFLOOR_CAVERN, SeafloorCavern_Room3_Text_ShellyIntro, SeafloorCavern_Room3_Text_ShellyDefeat
 	msgbox SeafloorCavern_Room3_Text_ShellyPostBattle, MSGBOX_AUTOCLOSE
 	end
 

@@ -6,7 +6,7 @@ MtPyre_1F_EventScript_CleanseTagWoman:: @ 8230F3F
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CLEANSE_TAG, MtPyre_1F_EventScript_ReceivedCleanseTag
 	msgbox MtPyre_1F_Text_TakeThisForYourOwnGood, MSGBOX_DEFAULT
-	giveitem_std ITEM_CLEANSE_TAG
+	giveitem ITEM_CLEANSE_TAG
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CLEANSE_TAG
