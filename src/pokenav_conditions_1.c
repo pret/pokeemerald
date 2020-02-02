@@ -147,9 +147,9 @@ u32 sub_81CD110(struct PokenavSub11 *structPtr)
 u32 sub_81CD19C(struct PokenavSub11 *structPtr)
 {
     if (structPtr->unk6300 == 0)
-        return 100002;
+        return POKENAV_MENU_2;
     else
-        return 100010;
+        return POKENAV_MENU_A;
 }
 
 void sub_81CD1C0(void)
