@@ -2917,8 +2917,11 @@ extern const u8 gText_NumberRegistered[];
 extern const u8 gText_NumberOfBattles[];
 extern const u8 gText_Unknown[];
 extern const u8 gText_TrainerCloseBy[];
+extern const u8 gText_Call[];
+extern const u8 gText_Check[];
+extern const u8 gText_Cancel6[];
 
-// pokenav_unk_2
+// Pokenav Menu Handler
 extern const u8 gText_CheckMapOfHoenn[];
 extern const u8 gText_CheckPokemonInDetail[];
 extern const u8 gText_CallRegisteredTrainer[];
@@ -2935,15 +2938,8 @@ extern const u8 gText_FindToughPokemon[];
 extern const u8 gText_ReturnToConditionMenu[];
 extern const u8 gText_NoRibbonWinners[];
 
-// pokenav_unk_4
-extern const u8 gText_Call[];
-extern const u8 gText_Check[];
-extern const u8 gText_Cancel6[];
-
-// pokenav_unk_8
+// Pokenav Ribbons
 extern const u8 gText_NumberF700[];
-
-// pokenav_unk_10
 extern const u8 gText_RibbonsF700[];
 
 // use_pokeblock

@@ -106,6 +106,9 @@ enum LanguageId
 #define BAG_POKEBALLS_COUNT 16
 #define BAG_TMHM_COUNT      64
 #define BAG_BERRIES_COUNT   46
+#define BAG_MEDICINE_COUNT      34
+#define BAG_BATTLEITEMS_COUNT   47
+#define BAG_POWERUP_COUNT       18
 
 enum
 {
