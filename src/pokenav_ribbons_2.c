@@ -122,8 +122,8 @@ static const u16 gUnknown_08624038[] = INCBIN_U16("graphics/pokenav/ribbons_icon
 static const u16 gUnknown_08624058[] = INCBIN_U16("graphics/pokenav/ribbons_icon4.gbapal");
 static const u16 gUnknown_08624078[] = INCBIN_U16("graphics/pokenav/ribbons_icon5.gbapal");
 static const u16 gUnknown_08624098[] = INCBIN_U16("graphics/pokenav/8624098.gbapal");
-static const u32 gUnknown_086240B8[] = INCBIN_U32("graphics/pokenav/ribbons_icon.4bpp.lz");
-static const u32 gUnknown_08624280[] = INCBIN_U32("graphics/pokenav/ribbons_icon_big.4bpp.lz");
+static const u32 sRibbonIconsSmall_Gfx[] = INCBIN_U32("graphics/pokenav/ribbons_icon.4bpp.lz");
+static const u32 sRibbonIconsBig_Gfx[] = INCBIN_U32("graphics/pokenav/ribbons_icon_big.4bpp.lz");
 
 static const struct BgTemplate gUnknown_08624B98[] =
 {
@@ -235,7 +235,7 @@ u32 sub_81D0548(struct PokenavSub13 *structPtr)
 
 u32 sub_81D05D4(struct PokenavSub13 *structPtr)
 {
-    return 100014;
+    return POKENAV_MENU_E;
 }
 
 bool32 sub_81D05DC(struct PokenavSub13 *structPtr)
@@ -527,7 +527,7 @@ u32 sub_81D0A6C(s32 state)
         if (!free_temp_tile_data_buffers_if_possible())
         {
             sub_8199DF0(1, 0, 0, 1);
-            decompress_and_copy_tile_data_to_vram(1, gUnknown_086240B8, 0, 1, 0);
+            decompress_and_copy_tile_data_to_vram(1, sRibbonIconsSmall_Gfx, 0, 1, 0);
             SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
             FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
             CopyPaletteIntoBufferUnfaded(gUnknown_08623FF8, 0x20, 0xA0);
@@ -837,7 +837,7 @@ void sub_81D0FF0(struct PokenavSub14 *structPtr)
     txtPtr = StringCopy(gStringVar1, genderTxt);
     *(txtPtr++) = CHAR_SLASH;
     *(txtPtr++) = CHAR_SPECIAL_F9;
-    *(txtPtr++) = 5;
+    *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized(windowId, 1, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(windowId, 2);
@@ -1041,7 +1041,7 @@ void sub_81D13BC(u16 *dst, u32 id)
 
 static const struct CompressedSpriteSheet gUnknown_08624C78 =
 {
-    gUnknown_08624280, 0x1800, 9
+    sRibbonIconsBig_Gfx, 0x1800, 9
 };
 
 static const struct SpritePalette gUnknown_08624C80[] =

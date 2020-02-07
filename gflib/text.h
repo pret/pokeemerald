@@ -91,6 +91,18 @@
 #define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
 
+// Special F9 chars
+#define CHAR_UP_ARROW_2    0x00
+#define CHAR_DOWN_ARROW_2  0x01
+#define CHAR_LEFT_ARROW_2  0x02
+#define CHAR_RIGHT_ARROW_2 0x03
+#define CHAR_PLUS_2        0x04
+#define CHAR_LV_2          0x05
+#define CHAR_PP            0x06
+#define CHAR_ID            0x07
+#define CHAR_NO            0x08
+#define CHAR_UNDERSCORE    0x09
+
 #define EXT_CTRL_CODE_COLOR     0x1
 #define EXT_CTRL_CODE_HIGHLIGHT 0x2
 #define EXT_CTRL_CODE_SHADOW    0x3

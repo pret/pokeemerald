@@ -50,7 +50,7 @@ static void sub_81D02B0(s32 windowId, s32 val1, s32 val2);
 static void sub_81D024C(struct PokenavSub10 *ptr);
 static void sub_81D0288(struct PokenavSub10 *ptr);
 static void sub_81D0304(void);
-static void sub_81D035C(struct PokenavMonList *, u8 *);
+static void BufferRibbonMonInfoText(struct PokenavMonList *, u8 *);
 
 static const LoopedTask gUnknown_086235D8[] =
 {
@@ -107,9 +107,9 @@ static const struct WindowTemplate gUnknown_086237D4 =
     .baseBlock = 20
 };
 
-static const u8 gUnknown_086237DC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-static const u8 gUnknown_086237E8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-static const u8 gUnknown_086237F4[] = _("{UNK_SPACER}");
+static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
 
 bool32 PokenavCallback_Init_12(void)
 {
@@ -188,12 +188,12 @@ static u32 sub_81CFA88(struct PokenavSub9 *structPtr)
 
 static u32 sub_81CFB08(struct PokenavSub9 *structPtr)
 {
-    return 100005;
+    return POKENAV_MENU_5;
 }
 
 static u32 sub_81CFB10(struct PokenavSub9 *structPtr)
 {
-    return 100013;
+    return POKENAV_MENU_D;
 }
 
 static u32 sub_81CFB18(void)
@@ -660,7 +660,7 @@ static void sub_81D02B0(s32 windowId, s32 val1, s32 val2)
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, val2, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(1, strbuf, 56);
-    AddTextPrinterParameterized(windowId, 1, strbuf,x, 1, 0xFF, NULL);
+    AddTextPrinterParameterized(windowId, 1, strbuf, x, 1, 0xFF, NULL);
 }
 
 static void sub_81D0304(void)
@@ -676,18 +676,21 @@ static void sub_81D0304(void)
     template.unkC = 8;
     template.unkD = 2;
     template.unkE = 1;
-    template.listFunc.unk10_1 = sub_81D035C;
+    template.listFunc.unk10_1 = BufferRibbonMonInfoText;
     template.unk14 = NULL;
     sub_81C81D4(&gUnknown_086237B0[1], &template, 0);
 }
 
-static void sub_81D035C(struct PokenavMonList * item0, u8 * dest)
+// Buffers the "Nickname gender/level" text for the ribbon mon list
+static void BufferRibbonMonInfoText(struct PokenavMonList * item0, u8 * dest)
 {
     u8 gender;
     u8 level;
     u8 * s;
     const u8 * genderStr;
     struct PokenavMonList * item = item0;
+
+    // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)
     {
         struct Pokemon * mon = &gPlayerParty[item->monId];
@@ -695,6 +698,7 @@ static void sub_81D035C(struct PokenavMonList * item0, u8 * dest)
         level = GetLevelFromMonExp(mon);
         GetMonData(mon, MON_DATA_NICKNAME, gStringVar3);
     }
+    // Mon is in PC
     else
     {
         struct BoxPokemon * mon = GetBoxedMonPtr(item->boxId, item->monId);
@@ -702,24 +706,26 @@ static void sub_81D035C(struct PokenavMonList * item0, u8 * dest)
         level = GetLevelFromBoxMonExp(mon);
         GetBoxMonData(mon, MON_DATA_NICKNAME, gStringVar3);
     }
+
     StringGetEnd10(gStringVar3);
     dest = sub_81DB494(dest, 1, gStringVar3, 60);
     switch (gender)
     {
     default:
-        genderStr = gUnknown_086237F4;
+        genderStr = sText_NoGenderSymbol;
         break;
     case MON_MALE:
-        genderStr = gUnknown_086237DC;
+        genderStr = sText_MaleSymbol;
         break;
     case MON_FEMALE:
-        genderStr = gUnknown_086237E8;
+        genderStr = sText_FemaleSymbol;
         break;
     }
+
     s = StringCopy(gStringVar1, genderStr);
     *s++ = CHAR_SLASH;
     *s++ = CHAR_SPECIAL_F9;
-    *s++ = 5; // LV
+    *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     dest = sub_81DB494(dest, 1, gStringVar1, 54);
     ConvertIntToDecimalStringN(dest, item->data, STR_CONV_MODE_RIGHT_ALIGN, 2);

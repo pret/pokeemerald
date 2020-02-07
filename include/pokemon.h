@@ -413,7 +413,6 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 const u8 *GetTrainerClassNameFromId(u16 trainerId);
 const u8 *GetTrainerNameFromId(u16 trainerId);
 bool8 HasTwoFramesAnimation(u16 species);
-bool8 sub_806F104(void);
 struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1);
 void sub_806F47C(u8 id);
 u8 *sub_806F4F8(u8 id, u8 arg1);
