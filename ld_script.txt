@@ -297,7 +297,7 @@ SECTIONS {
         src/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
-        src/unk_81BAD84.o(.text);
+        src/berry_fix_graphics.o(.text);
         src/battle_controller_player_partner.o(.text);
         src/mirage_tower.o(.text);
         src/berry_fix_program.o(.text);
@@ -654,7 +654,7 @@ SECTIONS {
         src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         src/multiboot.o(.rodata);
-        src/unk_81BAD84.o(.rodata);
+        src/berry_fix_graphics.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
         src/mirage_tower.o(.rodata);
         src/berry_fix_program.o(.rodata);
