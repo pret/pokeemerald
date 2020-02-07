@@ -1,11 +1,12 @@
 #include "global.h"
 #include "graphics.h"
 
-const struct {
+// Duplicate of sBerryFixGraphics in berry_fix_program.c
+static const struct {
     const u32 *gfx;
-    const u32 *tileMap;
+    const u32 *tilemap;
     const u16 *pltt;
-} gUnknown_08617128[] = {
+} sBerryFixGraphics[] = {
     {
         gBerryFixGameboy_Gfx,
         gBerryFixGameboy_Tilemap,
@@ -33,15 +34,16 @@ const struct {
     }
 };
 
-void sub_81BAD84(u32 idx)
+// Unused. See berry_fix_program.c
+static void LoadBerryFixGraphics(u32 idx)
 {
-    REG_DISPCNT = 0x0000;
-    REG_BG0HOFS = 0x0000;
-    REG_BG0VOFS = 0x0000;
-    REG_BLDCNT = 0x0000;
-    LZ77UnCompVram(gUnknown_08617128[idx].gfx, (void *)BG_CHAR_ADDR(0));
-    LZ77UnCompVram(gUnknown_08617128[idx].tileMap, (void *)BG_SCREEN_ADDR(31));
-    CpuCopy16(gUnknown_08617128[idx].pltt, (void *)PLTT, 0x200);
+    REG_DISPCNT = 0;
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+    REG_BLDCNT = 0;
+    LZ77UnCompVram(sBerryFixGraphics[idx].gfx, (void *)BG_CHAR_ADDR(0));
+    LZ77UnCompVram(sBerryFixGraphics[idx].tilemap, (void *)BG_SCREEN_ADDR(31));
+    CpuCopy16(sBerryFixGraphics[idx].pltt, (void *)PLTT, 0x200);
     REG_BG0CNT = 0x1f00;
     REG_DISPCNT = DISPCNT_BG0_ON;
 }
