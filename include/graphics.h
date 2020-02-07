@@ -4895,18 +4895,18 @@ extern const u16 gUnknown_08DC64FC[];
 extern const u16 gUnknown_08DC6510[];
 
 // Trainer Card.
-extern const u16 gEmeraldTrainerCard0Star_Pal[];
-extern const u32 gEmeraldTrainerCard_Gfx[];
-extern const u16 gFireRedTrainerCard0Star_Pal[];
-extern const u32 gFireRedTrainerCard_Gfx[];
-extern const u32 gUnknown_08DD2AE0[];
-extern const u32 gUnknown_08DD21B0[];
-extern const u32 gUnknown_08DD2D30[];
-extern const u32 gUnknown_08DD2010[];
-extern const u32 gUnknown_08DD2B78[];
-extern const u32 gUnknown_08DD228C[];
-extern const u32 gUnknown_08DD2E5C[];
-extern const u32 gUnknown_08DD1F78[];
+extern const u16 gHoennTrainerCard0Star_Pal[];
+extern const u32 gHoennTrainerCard_Gfx[];
+extern const u16 gKantoTrainerCard0Star_Pal[];
+extern const u32 gKantoTrainerCard_Gfx[];
+extern const u32 gKantoTrainerCardBg_Tilemap[];
+extern const u32 gHoennTrainerCardBack_Tilemap[];
+extern const u32 gKantoTrainerCardBack_Tilemap[];
+extern const u32 gHoennTrainerCardFront_Tilemap[];
+extern const u32 gKantoTrainerCardFront_Tilemap[];
+extern const u32 gHoennTrainerCardFrontLink_Tilemap[];
+extern const u32 gKantoTrainerCardFrontLink_Tilemap[];
+extern const u32 gHoennTrainerCardBg_Tilemap[];
 
 // Frontier Pass
 extern const u32 gUnknown_08DE08C8[];

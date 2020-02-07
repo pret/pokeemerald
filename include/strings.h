@@ -2514,11 +2514,11 @@ extern const u8 gText_WinsLosses[];
 extern const u8 gText_PokemonTrades[];
 extern const u8 gText_BerryCrush[];
 extern const u8 gText_UnionTradesAndBattles[];
-extern const u8 gText_Var1DarkGreyShadowLightGrey[];
+extern const u8 gText_NumPokeblocks[];
 extern const u8 gText_PokeblocksWithFriends[];
 extern const u8 gText_WonContestsWFriends[];
-extern const u8 gText_WSlashStraightSlash[];
-extern const u8 gText_Var1DarkLightGreyBP[];
+extern const u8 gText_WinsStraight[];
+extern const u8 gText_NumBP[];
 extern const u8 gText_BattleTower[];
 extern const u8 gText_BattlePtsWon[];
 

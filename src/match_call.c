@@ -1287,7 +1287,7 @@ static bool32 sub_81963F0(u8 taskId)
         ChangeBgY(0, 0, 0);
         if (!gMatchCallState.triggeredFromScript)
         {
-            sub_81973A4();
+            LoadMessageBoxAndBorderGfx();
             playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
             EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
             ScriptMovement_UnfreezeEventObjects();
@@ -1746,7 +1746,7 @@ static void PopulateBattleFrontierStreak(int matchCallId, u8 *destStr)
     ConvertIntToDecimalStringN(destStr, gBattleFrontierStreakInfo.streak, STR_CONV_MODE_LEFT_ALIGN, i);
 }
 
-static const u16 sBadgeFlags[] =
+static const u16 sBadgeFlags[NUM_BADGES] =
 {
     FLAG_BADGE01_GET,
     FLAG_BADGE02_GET,
@@ -1762,7 +1762,7 @@ static int GetNumOwnedBadges(void)
 {
     u32 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < NUM_BADGES; i++)
     {
         if (!FlagGet(sBadgeFlags[i]))
             break;
