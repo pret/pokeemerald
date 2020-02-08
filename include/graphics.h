@@ -3705,6 +3705,10 @@ extern const u32 gMonFrontPic_KyuremWhite[];
 extern const u32 gMonBackPic_KyuremWhite[];
 extern const u32 gMonPalette_KyuremWhite[];
 extern const u32 gMonShinyPalette_KyuremWhite[];
+extern const u32 gMonFrontPic_MimikyuBusted[];
+extern const u32 gMonBackPic_MimikyuBusted[];
+extern const u32 gMonPalette_MimikyuBusted[];
+extern const u32 gMonShinyPalette_MimikyuBusted[];
 
 extern const u8 gMonIcon_QuestionMark[];
 extern const u8 gMonIcon_Bulbasaur[];
@@ -4637,6 +4641,7 @@ extern const u8 gMonIcon_MiniorCore[];
 extern const u8 gMonIcon_WishiwashiSchool[];
 extern const u8 gMonIcon_KyuremBlack[];
 extern const u8 gMonIcon_KyuremWhite[];
+extern const u8 gMonIcon_MimikyuBusted[];
 
 extern const u8 gMonFootprint_QuestionMark[];
 extern const u8 gMonFootprint_Bulbasaur[];

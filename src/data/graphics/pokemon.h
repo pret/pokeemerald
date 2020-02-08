@@ -3668,6 +3668,10 @@ const u32 gMonFrontPic_KyuremWhite[] = INCBIN_U32("graphics/pokemon/kyurem/anim_
 const u32 gMonBackPic_KyuremWhite[] = INCBIN_U32("graphics/pokemon/kyurem/back_white.4bpp.lz");
 const u32 gMonPalette_KyuremWhite[] = INCBIN_U32("graphics/pokemon/kyurem/normal_white.gbapal.lz");
 const u32 gMonShinyPalette_KyuremWhite[] = INCBIN_U32("graphics/pokemon/kyurem/shiny_white.gbapal.lz");
+const u32 gMonFrontPic_MimikyuBusted[] = INCBIN_U32("graphics/pokemon/mimikyu/front_busted.4bpp.lz");
+const u32 gMonBackPic_MimikyuBusted[] = INCBIN_U32("graphics/pokemon/mimikyu/back_busted.4bpp.lz");
+const u32 gMonPalette_MimikyuBusted[] = INCBIN_U32("graphics/pokemon/mimikyu/normal_busted.gbapal.lz");
+const u32 gMonShinyPalette_MimikyuBusted[] = INCBIN_U32("graphics/pokemon/mimikyu/shiny_busted.gbapal.lz");
 
 const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/icon.4bpp");
 const u8 gMonIcon_Bulbasaur[] = INCBIN_U8("graphics/pokemon/bulbasaur/icon.4bpp");
@@ -4600,6 +4604,7 @@ const u8 gMonIcon_MiniorCore[] = INCBIN_U8("graphics/pokemon/minior/icon_core.4b
 const u8 gMonIcon_WishiwashiSchool[] = INCBIN_U8("graphics/pokemon/wishiwashi/icon_school.4bpp");
 const u8 gMonIcon_KyuremBlack[] = INCBIN_U8("graphics/pokemon/kyurem/icon_black.4bpp");
 const u8 gMonIcon_KyuremWhite[] = INCBIN_U8("graphics/pokemon/kyurem/icon_white.4bpp");
+const u8 gMonIcon_MimikyuBusted[] = INCBIN_U8("graphics/pokemon/mimikyu/icon_busted.4bpp");
 
 const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/footprint.1bpp");
 const u8 gMonFootprint_Bulbasaur[] = INCBIN_U8("graphics/pokemon/bulbasaur/footprint.1bpp");

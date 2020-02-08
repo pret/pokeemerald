@@ -904,4 +904,5 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_HOOPA_UNBOUND] = sHoopaLevelUpLearnset,
     [SPECIES_MINIOR_CORE] = sMiniorLevelUpLearnset,
     [SPECIES_WISHIWASHI_SCHOOL] = sWishiwashiLevelUpLearnset,
+    [SPECIES_MIMIKYU_BUSTED] = sMimikyuLevelUpLearnset,
 };

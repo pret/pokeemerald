@@ -903,4 +903,5 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_HOOPA_UNBOUND] = _("Hoopa"),
     [SPECIES_MINIOR_CORE] = _("Minior"),
     [SPECIES_WISHIWASHI_SCHOOL] = _("Wishiwashi"),
+    [SPECIES_MIMIKYU_BUSTED] = _("Mimikyu"),
 };

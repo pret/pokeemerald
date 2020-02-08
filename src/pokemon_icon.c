@@ -927,6 +927,7 @@ const u8 *const gMonIconTable[] =
     [SPECIES_WISHIWASHI_SCHOOL] = gMonIcon_WishiwashiSchool,
     [SPECIES_KYUREM_BLACK] = gMonIcon_KyuremBlack,
     [SPECIES_KYUREM_WHITE] = gMonIcon_KyuremWhite,
+    [SPECIES_MIMIKYU_BUSTED] = gMonIcon_MimikyuBusted,
     [SPECIES_UNOWN_A] = gMonIcon_UnownA,
     [SPECIES_UNOWN_B] = gMonIcon_UnownB,
     [SPECIES_UNOWN_C] = gMonIcon_UnownC,
@@ -1860,6 +1861,7 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_WISHIWASHI_SCHOOL] = 0,
     [SPECIES_KYUREM_BLACK] = 0,
     [SPECIES_KYUREM_WHITE] = 0,
+    [SPECIES_MIMIKYU_BUSTED] = 1,
     [SPECIES_UNOWN_A ... SPECIES_UNOWN_QMARK] = 0,
     [SPECIES_EGG] = 1,
 };
