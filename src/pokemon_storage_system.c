@@ -6898,7 +6898,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
         *(txtPtr++) = 3;
         *(txtPtr++) = 0;
         *(txtPtr++) = CHAR_SPECIAL_F9;
-        *(txtPtr++) = 5;
+        *(txtPtr++) = CHAR_LV_2;
 
         txtPtr = ConvertIntToDecimalStringN(txtPtr, sPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
         txtPtr[0] = CHAR_SPACE;
