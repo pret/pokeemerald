@@ -644,7 +644,6 @@ SECTIONS {
         src/battle_factory.o(.rodata);
         src/battle_pike.o(.rodata);
         src/rotating_tile_puzzle.o(.rodata);
-        data/rotating_tile_puzzle.o(.rodata);
         src/battle_pyramid.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);
