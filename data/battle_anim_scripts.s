@@ -3429,58 +3429,56 @@ Move_BUG_BITE:
 	end
 	
 Move_CHARGE_BEAM:
-	loadspritegfx ANIM_TAG_IMPACT 
-	loadspritegfx ANIM_TAG_SPARK_2 
-	delay 0 
-	createvisualtask sub_8115A04, 2, 3, -31, 1, 5, 5, RGB(31, 31, 20)  
-	playsewithpan SE_W085B, SOUND_PAN_ATTACKER 
-	createsprite gBattleAnimSpriteTemplate_859574C, 0, 7, 32, 24, 190, 12, 0, 1, 0  
-	delay 0 
-	createsprite gBattleAnimSpriteTemplate_859574C, 0, 7, 80, 24, 22, 12, 0, 1, 0  
-	createsprite gBattleAnimSpriteTemplate_859574C, 0, 7, 156, 24, 121, 13, 0, 1, 1  
-	delay 0 
-	createvisualtask sub_8115A04, 2, 3, -31, 1, 0, 0, RGB(31, 31, 20)   
-	delay 10 
-	createvisualtask sub_8115A04, 2, 3, -31, 1, 5, 5, RGB(31, 31, 20)   
-	playsewithpan SE_W085B, SOUND_PAN_ATTACKER 
-	createsprite gBattleAnimSpriteTemplate_859574C, 0, 7, 100, 24, 60, 10, 0, 1, 0  
-	createsprite gBattleAnimSpriteTemplate_859574C, 0, 7, 170, 24, 42, 11, 0, 1, 1  
-	delay 0 
-	createsprite gBattleAnimSpriteTemplate_859574C, 0, 7, 238, 24, 165, 10, 0, 1, 1  
-	delay 0 
-	createvisualtask sub_8115A04, 2, 3, -31, 1, 0, 0, RGB(31, 31, 20)   
-	delay 20 
-	playsewithpan SE_W085B, SOUND_PAN_ATTACKER 
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 32, 12, 0, 20, 0, 0  
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 32, 12, 64, 20, 1, 0  
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 32, 12, 128, 20, 0, 0  
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 32, 12, SOUND_PAN_ATTACKER, 20, 2, 0  
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 16, 12, 32, 20, 0, 0  
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 16, 12, 96, 20, 1, 0  
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 16, 12, 160, 20, 0, 0  
-	createsprite gBattleAnimSpriteTemplate_85957F8, 4, 8, 0, 0, 16, 12, 224, 20, 2, 0  
+	loadspritegfx ANIM_TAG_BLACK_BALL_2
+	loadspritegfx ANIM_TAG_SPARK_2
+	delay 0
+	createvisualtask sub_8115A04, 2, 3, -31, 1, 5, 5, RGB(31, 31, 22)
+	playsewithpan SE_W085B, SOUND_PAN_ATTACKER
+	createsprite gBattleAnimSpriteTemplate_859574C, ANIM_ATTACKER, 0, 32, 24, 190, 12, 0, 1, 0
+	delay 0
+	createsprite gBattleAnimSpriteTemplate_859574C, ANIM_ATTACKER, 0, 80, 24, 22, 12, 0, 1, 0
+	createsprite gBattleAnimSpriteTemplate_859574C, ANIM_ATTACKER, 0, 156, 24, 121, 13, 0, 1, 1
+	delay 0
+	createvisualtask sub_8115A04, 2, 3, -31, 1, 0, 0, RGB(31, 31, 22)
+	delay 10
+	createvisualtask sub_8115A04, 2, 3, -31, 1, 5, 5, RGB(31, 31, 22)
+	playsewithpan SE_W085B, SOUND_PAN_ATTACKER
+	createsprite gBattleAnimSpriteTemplate_859574C, ANIM_ATTACKER, 0, 100, 24, 60, 10, 0, 1, 0
+	createsprite gBattleAnimSpriteTemplate_859574C, ANIM_ATTACKER, 0, 170, 24, 42, 11, 0, 1, 1
+	delay 0
+	createsprite gBattleAnimSpriteTemplate_859574C, ANIM_ATTACKER, 0, 238, 24, 165, 10, 0, 1, 1
+	delay 0
+	createvisualtask sub_8115A04, 2, 3, -31, 1, 0, 0, RGB(31, 31, 22)
+	delay 20
+	createvisualtask sub_8115A04, 2, 3, -31, 1, 7, 7, RGB(31, 31, 22)
+	playsewithpan SE_W085B, SOUND_PAN_ATTACKER
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 32, 12, 0, 20, 0, 0
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 32, 12, 64, 20, 1, 0
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 32, 12, 128, 20, 0, 0
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 32, 12, 192, 20, 2, 0
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 16, 12, 32, 20, 0, 0
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 16, 12, 96, 20, 1, 0
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 16, 12, 160, 20, 0, 0
+	createsprite gBattleAnimSpriteTemplate_85957F8, ANIM_ATTACKER, 4, 0, 0, 16, 12, 224, 20, 2, 0
 	delay 4
-	waitforvisualfinish 
-	createvisualtask sub_8115A04, 2, 3, -31, 1, 0, 0, RGB(31, 31, 20)   
-	waitforvisualfinish 
-	loadspritegfx ANIM_TAG_BLACK_BALL_2 
-	loadspritegfx ANIM_TAG_SPARK_2 
-	playsewithpan SE_W086, SOUND_PAN_ATTACKER 
-	createsprite gUnknown_08595764, 131, 6, 10, 0, 0, 0, 30, 0  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 16, 30, 0, 40, 0  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 16, 30, 64, 40, 1  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 16, 30, 128, 40, 0  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 16, 30, SOUND_PAN_ATTACKER, 40, 2  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 8, 30, 32, 40, 0  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 8, 30, 96, 40, 1  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 8, 30, 160, 40, 0  
-	createsprite gUnknown_08595790, 132, 7, 10, 0, 8, 30, 224, 40, 2  
-	waitforvisualfinish 
-	createvisualtask AnimTask_ShakeMon2, 2, 5, 1, 4, 0, 5, 1  
-	delay 15 
-	waitplaysewithpan SE_W085B, SOUND_PAN_TARGET 19 
-	call ElectricityEffect 
-	waitforvisualfinish 
+	waitforvisualfinish
+	createvisualtask sub_8115A04, 2, 3, -31, 1, 0, 0, RGB(31, 31, 22)
+	playsewithpan SE_W086, SOUND_PAN_ATTACKER
+	createsprite gUnknown_08595764, ANIM_TARGET, 3, 10, 0, 0, 0, 30, 0
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 16, 30, 0, 40, 0
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 16, 30, 64, 40, 1
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 16, 30, 128, 40, 0
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 16, 30, 192, 40, 2
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 8, 30, 32, 40, 0
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 8, 30, 96, 40, 1
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 8, 30, 160, 40, 0
+	createsprite gUnknown_08595790, ANIM_TARGET, 4, 10, 0, 8, 30, 224, 40, 2
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	delay 15
+	waitplaysewithpan SE_W085B, SOUND_PAN_TARGET, 19
+	call ElectricityEffect
+	waitforvisualfinish
 	end
 	
 Move_WOOD_HAMMER:
