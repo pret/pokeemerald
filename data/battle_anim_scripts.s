@@ -2533,28 +2533,29 @@ Move_ICE_SHARD:
 	end
 	
 Move_SHADOW_CLAW:
-	createsprite gSimplePaletteBlendSpriteTemplate 2, 5, 1, 1, 0, 7, 0  
-	waitforvisualfinish 
 	loadspritegfx ANIM_TAG_BLUE_LIGHT_WALL 
 	loadspritegfx ANIM_TAG_CLAW_SLASH 
 	loadspritegfx ANIM_TAG_TORN_METAL 
+	fadetobg BG_GHOST
+	waitbgfadein
 	monbg ANIM_TARGET 
 	setalpha 12, 8 
-	createsprite gHorizontalLungeSpriteTemplate 2, 2, 6, 4  
+	createsprite gHorizontalLungeSpriteTemplate ANIM_ATTACKER, 2, 6, 4  
 	delay 4
-	createvisualtask AnimTask_ShakeMon2 2, 5, 1, 2, 0, 18, 1  
-	createsprite gBattleAnimSpriteTemplate_8597138, 130, 3, -10, -10, 0  
-	createsprite gBattleAnimSpriteTemplate_8597138, 130, 3, -10, 10, 0 
-	playsewithpan 136, SOUND_PAN_TARGET 
+	createvisualtask AnimTask_ShakeMon2 2, ANIM_TARGET, 2, 0, 18, 1  
+	createsprite gBattleAnimSpriteTemplate_8597138, ANIM_TARGET, 2, -10, -10, 0  
+	createsprite gBattleAnimSpriteTemplate_8597138, ANIM_TARGET, 2, -10, 10, 0 
+	playsewithpan SE_W013, SOUND_PAN_TARGET 
 	delay 12,
-	createsprite gBattleAnimSpriteTemplate_8597138, 130, 3, 10, -10, 1 
-	createsprite gBattleAnimSpriteTemplate_8597138, 130, 3, 10, 10, 1  
-	playsewithpan 136, SOUND_PAN_TARGET 
+	createsprite gBattleAnimSpriteTemplate_8597138, ANIM_TARGET, 2, 10, -10, 1 
+	createsprite gBattleAnimSpriteTemplate_8597138, ANIM_TARGET, 2, 10, 10, 1  
+	playsewithpan SE_W013, SOUND_PAN_TARGET 
 	waitforvisualfinish 
-	createsprite gSimplePaletteBlendSpriteTemplate 2, 5, 1, 1, 7, 0, 0  
+	restorebg
+	waitbgfadein 
 	waitforvisualfinish 
-	clearmonbg ANIM_DEF_PARTNER 
 	blendoff 
+	clearmonbg ANIM_TARGET 
 	end
 	
 Move_THUNDER_FANG:
