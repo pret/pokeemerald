@@ -972,7 +972,9 @@ static bool32 NoTargetPresent(u32 move)
 
 static bool32 TryAegiFormChange(void)
 {
-    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STANCE_CHANGE)
+    // Only Aegislash with Stance Change can transform, transformed mons cannot.
+    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STANCE_CHANGE
+        || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
         return FALSE;
 
     switch (gBattleMons[gBattlerAttacker].species)
