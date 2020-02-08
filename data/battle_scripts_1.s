@@ -5903,6 +5903,19 @@ BattleScript_StanceChangeActivates::
 	waitanimation
 	handleformchange BS_ATTACKER, 2 
 	return
+	
+BattleScript_DisguiseBustedActivates::
+	pause 0x5
+	copybyte gBattlerAbility, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 0x1
+	handleformchange BS_TARGET, 0
+	handleformchange BS_TARGET, 1
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	handleformchange BS_TARGET, 2 
+	return
 
 BattleScript_IllusionOff::
 	spriteignore0hp TRUE

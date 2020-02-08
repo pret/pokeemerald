@@ -6314,6 +6314,7 @@ void UndoFormChange(u32 monId, u32 side)
     static const u16 species[][2] = // changed form id, default form id
     {
         {SPECIES_AEGISLASH_BLADE, SPECIES_AEGISLASH},
+        {SPECIES_MIMIKYU_BUSTED, SPECIES_MIMIKYU},
     };
 
     currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);

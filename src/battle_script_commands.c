@@ -1532,6 +1532,8 @@ static void Cmd_adjustdamage(void)
 
     if (DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
         goto END;
+    if (DoesDisguiseBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
+        goto END;
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
         goto END;
 
@@ -1709,17 +1711,9 @@ static void Cmd_healthbarupdate(void)
         {
             PrepareStringBattle(STRINGID_SUBSTITUTEDAMAGED, gActiveBattler);
         }
-        else
+        else if (!DoesDisguiseBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove))
         {
-            s16 healthValue;
-
-            s32 currDmg = gBattleMoveDamage;
-            s32 maxPossibleDmgValue = 10000; // not present in R/S, ensures that huge damage values don't change sign
-
-            if (currDmg <= maxPossibleDmgValue)
-                healthValue = currDmg;
-            else
-                healthValue = maxPossibleDmgValue;
+            s16 healthValue = min(gBattleMoveDamage, 10000); // Max damage (10000) not present in R/S, ensures that huge damage values don't change sign
 
             BtlController_EmitHealthBarUpdate(0, healthValue);
             MarkBattlerForControllerExec(gActiveBattler);
@@ -1773,6 +1767,12 @@ static void Cmd_datahpupdate(void)
                 gBattlescriptCurrInstr = BattleScript_SubstituteFade;
                 return;
             }
+        }
+        else if (DoesDisguiseBlockMove(gBattlerAttacker, gActiveBattler, gCurrentMove))
+        {
+            gBattleMons[gActiveBattler].species = SPECIES_MIMIKYU_BUSTED;
+            BattleScriptPush(gBattlescriptCurrInstr + 2);
+            gBattlescriptCurrInstr = BattleScript_DisguiseBustedActivates;
         }
         else
         {
@@ -7132,6 +7132,7 @@ static void Cmd_various(void)
         case ABILITY_SIMPLE:
         case ABILITY_TRUANT:
         case ABILITY_STANCE_CHANGE:
+        case ABILITY_DISGUISE:
         case ABILITY_MULTITYPE:
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
             break;
@@ -10570,16 +10571,18 @@ static void Cmd_tryswapitems(void) // trick
 
 static void Cmd_trycopyability(void) // role play
 {
-    if (gBattleMons[gBattlerTarget].ability != 0
-        && gBattleMons[gBattlerTarget].ability != ABILITY_WONDER_GUARD)
+    switch (gBattleMons[gBattlerTarget].ability)
     {
-        gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
-        gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
-        gBattlescriptCurrInstr += 5;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        case ABILITY_NONE:
+        case ABILITY_WONDER_GUARD:
+        case ABILITY_DISGUISE:
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+            break;
+        default:
+            gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
+            gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
+            gBattlescriptCurrInstr += 5;
+            break;
     }
 }
 
@@ -10718,14 +10721,28 @@ static void Cmd_setroom(void)
 
 static void Cmd_tryswapabilities(void) // skill swap
 {
-    if ((gBattleMons[gBattlerAttacker].ability == 0
-         && gBattleMons[gBattlerTarget].ability == 0)
-     || gBattleMons[gBattlerAttacker].ability == ABILITY_WONDER_GUARD
-     || gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD
-     || gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-     {
-         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-     }
+    switch (gBattleMons[gBattlerAttacker].ability)
+    {
+    case ABILITY_NONE:
+    case ABILITY_WONDER_GUARD:
+    case ABILITY_DISGUISE:
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        return;
+    }
+
+    switch (gBattleMons[gBattlerTarget].ability)
+    {
+    case ABILITY_NONE:
+    case ABILITY_WONDER_GUARD:
+    case ABILITY_DISGUISE:
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        return;
+    }
+
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    }
     else
     {
         u8 abilityAtk = gBattleMons[gBattlerAttacker].ability;
@@ -11128,6 +11145,17 @@ bool32 DoesSubstituteBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
     else if (gBattleMoves[move].flags & FLAG_SOUND && B_SOUND_SUBSTITUTE >= GEN_6)
         return FALSE;
     else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool32 DoesDisguiseBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
+{
+    if (GetBattlerAbility(battlerDef) != ABILITY_DISGUISE
+        || gBattleMons[battlerDef].species != SPECIES_MIMIKYU
+        || gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED
+        || gBattleMoves[move].power == 0)
         return FALSE;
     else
         return TRUE;
@@ -11740,6 +11768,7 @@ static void Cmd_tryworryseed(void)
     case ABILITY_MULTITYPE:
     case ABILITY_TRUANT:
     case ABILITY_STANCE_CHANGE:
+    case ABILITY_DISGUISE:
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         break;
     default:

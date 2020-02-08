@@ -11,6 +11,8 @@
 #define SPECIES_GENESECT 0
 #define SPECIES_AEGISLASH 0
 #define SPECIES_AEGISLASH_BLADE 10000
+#define SPECIES_MIMIKYU 0
+#define SPECIES_MIMIKYU_BUSTED 10001
 
 // Items with peculiar battle effects. Remove them if they're properly placed in constant/items.h
 #define ITEM_GRISEOUS_ORB 0
