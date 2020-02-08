@@ -800,7 +800,7 @@ const u8 gEeveePokedexText[] = _(
     "An Eevee has an unstable genetic makeup\n"
     "that suddenly mutates due to its\n"
     "environment. Radiation from various\n"
-    "StoneS causes this Pokémon to evolve.");
+    "Stones causes this Pokémon to evolve.");
 
 const u8 gVaporeonPokedexText[] = _(
     "Vaporeon underwent a spontaneous\n"
@@ -905,7 +905,7 @@ const u8 gMewtwoPokedexText[] = _(
     "they failed to give it a warm heart.");
 
 const u8 gMewPokedexText[] = _(
-    "A MEW is said to possess the genes of all\n"
+    "A Mew is said to possess the genes of all\n"
     "Pokémon. It is capable of making itself\n"
     "invisible at will, so it entirely avoids\n"
     "notice even if it approaches people.");
