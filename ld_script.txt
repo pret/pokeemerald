@@ -539,7 +539,6 @@ SECTIONS {
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         src/contest_link_80F57C4.o(.rodata);
-        data/contest_link_80F57C4.o(.rodata);
         src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         src/fldeff_misc.o(.rodata);
