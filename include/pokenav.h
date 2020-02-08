@@ -87,6 +87,39 @@ enum
 
 enum
 {
+    POKENAV_MENU_TYPE_DEFAULT,
+    POKENAV_MENU_TYPE_UNLOCK_MC,
+    POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS,
+    POKENAV_MENU_TYPE_CONDITION,
+    POKENAV_MENU_TYPE_CONDITION_SEARCH,
+    POKENAV_MENU_TYPE_COUNT
+};
+
+// Global IDs for menu selections
+// As opposed to the cursor position, which is only relative to the number of options for the current menu
+enum
+{
+    POKENAV_MENUITEM_MAP,
+    POKENAV_MENUITEM_CONDITION,
+    POKENAV_MENUITEM_MATCH_CALL,
+    POKENAV_MENUITEM_RIBBONS,
+    POKENAV_MENUITEM_SWITCH_OFF,
+    POKENAV_MENUITEM_CONDITION_PARTY,
+    POKENAV_MENUITEM_CONDITION_SEARCH,
+    POKENAV_MENUITEM_CONDITION_CANCEL,
+    POKENAV_MENUITEM_CONDITION_SEARCH_COOL,
+    POKENAV_MENUITEM_CONDITION_SEARCH_BEAUTY,
+    POKENAV_MENUITEM_CONDITION_SEARCH_CUTE,
+    POKENAV_MENUITEM_CONDITION_SEARCH_SMART,
+    POKENAV_MENUITEM_CONDITION_SEARCH_TOUGH,
+    POKENAV_MENUITEM_CONDITION_SEARCH_CANCEL,
+};
+
+// Max menu options (condition search uses 6)
+#define MAX_POKENAV_MENUITEMS 6
+
+enum
+{
     HELPBAR_NONE,
     HELPBAR_MAP_ZOOMED_OUT,
     HELPBAR_MAP_ZOOMED_IN,
@@ -150,6 +183,23 @@ enum
                         [CHECK_PAGE_INTRO_1]  = gText_MatchCall##name##_Intro1,   \
                         [CHECK_PAGE_INTRO_2]  = gText_MatchCall##name##_Intro2}
 
+
+// Pokenav Function IDs
+// Indices into the LoopedTask tables for each of the main Pokenav features
+
+enum
+{
+    POKENAV_MENU_FUNC_NONE,
+    POKENAV_MENU_FUNC_MOVE_CURSOR,
+    POKENAV_MENU_FUNC_OPEN_CONDITION,
+    POKENAV_MENU_FUNC_RETURN_TO_MAIN,
+    POKENAV_MENU_FUNC_OPEN_CONDITION_SEARCH,
+    POKENAV_MENU_FUNC_RETURN_TO_CONDITION,
+    POKENAV_MENU_FUNC_NO_RIBBON_WINNERS,
+    POKENAV_MENU_FUNC_RESHOW_DESCRIPTION,
+    POKENAV_MENU_FUNC_OPEN_FEATURE,
+};
+
 enum
 {
     POKENAV_MC_FUNC_NONE,
@@ -171,8 +221,8 @@ enum
 };
 
 // pokenav.c
-void sub_81C7694(u32);
-u32 sub_81C76AC(void);
+void SetSelectedConditionSearch(u32);
+u32 GetSelectedConditionSearch(void);
 
 void CB2_InitPokeNav(void);
 u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority);
@@ -247,7 +297,7 @@ bool32 WaitForPokenavShutdownFade(void);
 void sub_81C7834(void *func1, void *func2);
 void ShutdownPokenav(void);
 
-// pokenav_unk_1.c
+// pokenav_menu_handler_1.c
 bool32 PokenavCallback_Init_0(void);
 bool32 PokenavCallback_Init_4(void);
 bool32 PokenavCallback_Init_5(void);
@@ -255,20 +305,20 @@ bool32 PokenavCallback_Init_2(void);
 bool32 PokenavCallback_Init_3(void);
 u32 sub_81C941C(void);
 void sub_81C9430(void);
-int sub_81C9894(void);
-int sub_81C98A4(void);
-int sub_81C98B4(void);
+int GetPokenavMenuType(void);
+int GetPokenavCursorPos(void);
+int GetCurrentMenuItemId(void);
 u16 GetHelpBarTextId(void);
 
-// pokenav_unk_2.c
+// pokenav_menu_handler_2.c
 bool32 sub_81C9924(void);
 bool32 sub_81C9940(void);
-void sub_81C9990(s32 ltIdx);
+void CreateMenuHandlerLoopedTask(s32 ltIdx);
 bool32 sub_81C99C0(void);
 void sub_81C99D4(void);
 void sub_81CAADC(void);
 
-// pokenav_unk_3.c
+// pokenav_match_call_1.c
 bool32 PokenavCallback_Init_11(void);
 u32 sub_81CAB24(void);
 void sub_81CAB38(void);
@@ -290,13 +340,13 @@ int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);
 bool32 IsRematchEntryRegistered(int index);
 
-// pokenav_unk_4.c
+// pokenav_match_call_2.c
 bool32 sub_81CB260(void);
-void sub_81CB29C(s32 index);
+void CreateMatchCallLoopedTask(s32 index);
 u32 sub_81CB2CC(void);
 void sub_81CB2E0(void);
 
-// pokenav_unk_5.c
+// pokenav_region_map.c
 u32 PokenavCallback_Init_6(void);
 void sub_81CC524(void);
 u32 sub_81CC554(void);
@@ -305,7 +355,7 @@ void sub_81CC62C(s32);
 u32 sub_81CC65C(void);
 void sub_81CC670(void);
 
-// pokenav_unk_6.c
+// pokenav_conditions_1.c
 u32 PokenavCallback_Init_7(void);
 u32 PokenavCallback_Init_9(void);
 u32 sub_81CD070(void);
@@ -324,14 +374,14 @@ u16 sub_81CDD48(void);
 void *sub_81CDCB4(u8 id);
 void *sub_81CDCD4(u8 id);
 
-// pokenav_unk_7.c
+// pokenav_conditions_2.c
 bool32 sub_81CDDD4(void);
 void sub_81CDE2C(s32);
 u32 sub_81CDE64(void);
 void sub_81CECA0(void);
 u8 sub_81CEF14(void);
 
-// pokenav_unk_8.c
+// pokenav_conditions_3.c
 u32 PokenavCallback_Init_8(void);
 u32 PokenavCallback_Init_10(void);
 u32 sub_81CEFDC(void);
@@ -342,7 +392,7 @@ void sub_81CF3A0(s32);
 u32 sub_81CF3D0(void);
 void sub_81CF3F8(void);
 
-// pokenav_unk_9.c
+// pokenav_ribbons_1.c
 u32 PokenavCallback_Init_12(void);
 u32 PokenavCallback_Init_14(void);
 u32 sub_81CFA34(void);
@@ -353,7 +403,7 @@ void sub_81CFE40(s32);
 u32 sub_81CFE70(void);
 void sub_81CFE98(void);
 
-// pokenav_unk_10.c
+// pokenav_ribbons_2.c
 u32 PokenavCallback_Init_13(void);
 u32 sub_81D04A0(void);
 void sub_81D04B8(void);

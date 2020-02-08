@@ -113,9 +113,9 @@ static const struct WindowTemplate gUnknown_086235B4 =
     .baseBlock = 20
 };
 
-static const u8 gUnknown_086235BC[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-static const u8 gUnknown_086235C8[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
-static const u8 gUnknown_086235D4[] = _("{UNK_SPACER}");
+static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
+static const u8 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
 
 bool32 PokenavCallback_Init_8(void)
 {
@@ -130,7 +130,7 @@ bool32 PokenavCallback_Init_8(void)
     structPtr->unk0 = sub_81CF010;
     structPtr->loopedTaskId = CreateLoopedTask(sub_81CF11C, 1);
     structPtr->unk18 = 0;
-    structPtr->unk14 = gUnknown_086233A0[sub_81C76AC()];
+    structPtr->unk14 = gUnknown_086233A0[GetSelectedConditionSearch()];
     return TRUE;
 }
 
@@ -143,7 +143,7 @@ bool32 PokenavCallback_Init_10(void)
     structPtr->unkPtr = GetSubstructPtr(18);
     structPtr->unk0 = sub_81CF030;
     structPtr->unk18 = 1;
-    structPtr->unk14 = gUnknown_086233A0[sub_81C76AC()];
+    structPtr->unk14 = gUnknown_086233A0[GetSelectedConditionSearch()];
     return TRUE;
 }
 
@@ -443,7 +443,7 @@ static u32 sub_81CF418(s32 state)
         HideBg(3);
         if (!unk->unkC)
         {
-            u8 r4 = sub_81C76AC() + 8;
+            u8 r4 = GetSelectedConditionSearch() + POKENAV_MENUITEM_CONDITION_SEARCH_COOL;
             LoadLeftHeaderGfxForIndex(r4);
             sub_81C7FA0(r4, 1, 0);
             sub_81C7FA0(1, 1, 0);
@@ -673,13 +673,16 @@ static void sub_81CF8E4(struct PokenavMonList * item, u8 * dest)
     u8 level;
     u8 * s;
     const u8 * genderStr;
-    if (item->boxId == 14)
+
+    // Mon is in party
+    if (item->boxId == TOTAL_BOXES_COUNT)
     {
         struct Pokemon * mon = &gPlayerParty[item->monId];
         gender = GetMonGender(mon);
         level = GetLevelFromMonExp(mon);
         GetMonData(mon, MON_DATA_NICKNAME, gStringVar3);
     }
+    // Mon is in PC
     else
     {
         struct BoxPokemon * mon = GetBoxedMonPtr(item->boxId, item->monId);
@@ -687,24 +690,25 @@ static void sub_81CF8E4(struct PokenavMonList * item, u8 * dest)
         level = GetLevelFromBoxMonExp(mon);
         GetBoxMonData(mon, MON_DATA_NICKNAME, gStringVar3);
     }
+
     StringGetEnd10(gStringVar3);
     dest = sub_81DB494(dest, 1, gStringVar3, 60);
     switch (gender)
     {
     default:
-        genderStr = gUnknown_086235D4;
+        genderStr = sText_NoGenderSymbol;
         break;
     case MON_MALE:
-        genderStr = gUnknown_086235BC;
+        genderStr = sText_MaleSymbol;
         break;
     case MON_FEMALE:
-        genderStr = gUnknown_086235C8;
+        genderStr = sText_FemaleSymbol;
         break;
     }
     s = StringCopy(gStringVar1, genderStr);
     *s++ = CHAR_SLASH;
     *s++ = CHAR_SPECIAL_F9;
-    *s++ = 5; // LV
+    *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     sub_81DB494(dest, 1, gStringVar1, 40);
 }
