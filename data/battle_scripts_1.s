@@ -4200,6 +4200,14 @@ BattleScript_EffectCharge::
 	setcharge
 	attackanimation
 	waitanimation
+	setstatchanger STAT_SPDEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_EffectChargeString
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_EffectChargeString
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_EffectChargeString:
 	printstring STRINGID_PKMNCHARGINGPOWER
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
