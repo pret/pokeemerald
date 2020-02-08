@@ -62,6 +62,7 @@
 #define B_ABILITY_WEATHER           GEN_6 // Up to gen5 - weather induced by abilities such as Drought or Drizzle lasted till the battle's end or weather change by a move. From Gen6 onwards, weather caused by abilities lasts the same amount of turns as induced from a move.
 #define B_GALE_WINGS                GEN_6 // Gen7 requires full hp.
 #define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7, Aegislash's form change does not happen, if the pokemon cannot use a move, because of confusion, paralysis, etc. In gen6, the form change occurs despite not being able to move.
+#define B_GHOSTS_ESCAPE             GEN_6 // From Gen6 onwards, ghosts can escape even when blocked by abilities such as Shadow Tag.
 
 // Other
 #define B_FAST_INTRO                TRUE // If set to TRUE, battle intro texts print at the same time as animation of a pokemon, as opposing to waiting for the animation to end.
