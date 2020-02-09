@@ -290,9 +290,9 @@
 #define EVO_MAP              0x0019 // Pokémon levels up on specified map
 #define EVO_ITEM_MALE        0x001A // specified item is used on a male Pokémon
 #define EVO_ITEM_FEMALE      0x001B // specified item is used on a female Pokémon
-#define EVO_LEVEL_RAIN       0x001B // Pokémon reaches the specified level while it's raining
-#define EVO_SPECIFIC_MON_IN_PARTY  0x001C // Pokémon levels up with a specified Pokémon in party
-#define EVO_LEVEL_SPECIFIC_MON_TYPE_IN_PARTY  0x001D // Pokémon reaches the specified level with a specified Pokémon in party
+#define EVO_LEVEL_RAIN       0x001C // Pokémon reaches the specified level while it's raining
+#define EVO_SPECIFIC_MON_IN_PARTY  0x001D // Pokémon levels up with a specified Pokémon in party
+#define EVO_LEVEL_SPECIFIC_MON_TYPE_IN_PARTY  0x001E // Pokémon reaches the specified level with a specified Pokémon in party
 
 #define EVOS_PER_MON 8
 
