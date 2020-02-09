@@ -1418,10 +1418,6 @@ const u16 gUsePokeblockNatureWin_Pal[] = INCBIN_U16("graphics/pokeblock/use_scre
 
 #include "data/graphics/slot_machine.h"
 
-const u16 gUnknown_08DD19F8[] = INCBIN_U16("graphics/unknown/unknown_DD19F8.bin");
-
-const u8 gUnknown_08DD1A18[] = INCBIN_U8("graphics/unknown/unknown_DD1A18.4bpp");
-
 // trainer card
 
 const u16 gHoennTrainerCard0Star_Pal[] = INCBIN_U16("graphics/trainer_card/0star.gbapal");
