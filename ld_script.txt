@@ -457,7 +457,6 @@ SECTIONS {
         src/mevent_scripts.o(.rodata);
         src/union_room_chat.o(.rodata);
         src/berry_crush.o(.rodata);
-        data/berry_crush.o(.rodata);
         src/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/pokemon_jump.o(.rodata);
