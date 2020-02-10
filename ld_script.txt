@@ -297,7 +297,7 @@ SECTIONS {
         src/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
-        src/unk_81BAD84.o(.text);
+        src/berry_fix_graphics.o(.text);
         src/battle_controller_player_partner.o(.text);
         src/mirage_tower.o(.text);
         src/berry_fix_program.o(.text);
@@ -455,7 +455,7 @@ SECTIONS {
         src/union_room_chat.o(.rodata);
         src/berry_crush.o(.rodata);
         data/berry_crush.o(.rodata);
-        data/berry_powder.o(.rodata);
+        src/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/pokemon_jump.o(.rodata);
         src/rtc.o(.rodata);
@@ -539,7 +539,6 @@ SECTIONS {
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         src/contest_link_80F57C4.o(.rodata);
-        data/contest_link_80F57C4.o(.rodata);
         src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         src/fldeff_misc.o(.rodata);
@@ -578,7 +577,6 @@ SECTIONS {
         data/image_processing_effects.o(.rodata);
         src/decoration.o(.rodata);
         src/slot_machine.o(.rodata);
-        data/slot_machine.o(.rodata);
         src/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         src/trader.o(.rodata);
@@ -644,7 +642,6 @@ SECTIONS {
         src/battle_factory.o(.rodata);
         src/battle_pike.o(.rodata);
         src/rotating_tile_puzzle.o(.rodata);
-        data/rotating_tile_puzzle.o(.rodata);
         src/battle_pyramid.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);
@@ -654,7 +651,7 @@ SECTIONS {
         src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         src/multiboot.o(.rodata);
-        src/unk_81BAD84.o(.rodata);
+        src/berry_fix_graphics.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
         src/mirage_tower.o(.rodata);
         src/berry_fix_program.o(.rodata);

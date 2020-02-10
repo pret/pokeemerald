@@ -47,20 +47,65 @@ static const u8 sText_TransmittingPleaseWait[] = _("Transmitting. Please wait.\n
 static const u8 sText_PleaseFollowInstructionsOnScreen[] = _("Please follow the instructions on your\nPokémon Ruby/Sapphire screen.");
 static const u8 sText_TransmissionFailureTryAgain[] = _("Transmission failure.\n{COLOR RED}{SHADOW LIGHT_RED}Please try again.");
 
-static const struct BgTemplate gUnknown_08618108[] = {
+static const struct BgTemplate sBerryFixBgTemplates[] = {
     {
-        0, 0, 30, 0, 0, 0
-    }, {
-        1, 1, 31, 0, 0, 1
+        .bg = 0, 
+        .charBaseIndex = 0, 
+        .mapBaseIndex = 30, 
+        .screenSize = 0, 
+        .paletteMode = 0, 
+        .priority = 0,
+        .baseTile = 0
+    }, 
+    {
+        .bg = 1, 
+        .charBaseIndex = 1, 
+        .mapBaseIndex = 31, 
+        .screenSize = 0, 
+        .paletteMode = 0, 
+        .priority = 1,
+        .baseTile = 0
     }
 };
 
-static const struct WindowTemplate gUnknown_08618110[] = {
-    {0, 2,  4, 26, 2, 15, 0x001},
-    {0, 1, 11, 28, 8, 15, 0x035},
-    {0, 0,  8, 30, 2, 15, 0x115},
-    {0, 8,  0, 14, 2, 15, 0x151},
-    {-1}
+static const struct WindowTemplate sBerryFixWindowTemplates[] = {
+    {
+        .bg = 0, 
+        .tilemapLeft = 2,  
+        .tilemapTop = 4, 
+        .width = 26, 
+        .height = 2, 
+        .paletteNum = 15, 
+        .baseBlock = 1
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 1, 
+        .tilemapTop = 11, 
+        .width = 28, 
+        .height = 8, 
+        .paletteNum = 15, 
+        .baseBlock = 53
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 0,  
+        .tilemapTop = 8, 
+        .width = 30, 
+        .height = 2, 
+        .paletteNum = 15, 
+        .baseBlock = 277
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 8,  
+        .tilemapTop = 0, 
+        .width = 14, 
+        .height = 2, 
+        .paletteNum = 15, 
+        .baseBlock = 337
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const u16 sUnknown_08618138[] = {
@@ -82,7 +127,12 @@ static const u8 *const sBerryProgramTexts[] = {
     sText_BerryProgramWillBeUpdatedPressA
 };
 
-static const void *const gUnknown_08618178[][3] = {
+
+static const struct {
+    const u32 *gfx;
+    const u32 *tilemap;
+    const u16 *pltt;
+} sBerryFixGraphics[] = {
     {
         gBerryFixGameboy_Gfx,
         gBerryFixGameboy_Tilemap,
@@ -117,8 +167,8 @@ extern const u8 gMultiBootProgram_BerryGlitchFix_End[];
 
 void CB2_InitBerryFixProgram(void)
 {
-    DisableInterrupts(0xFFFF);
-    EnableInterrupts(0x0001);
+    DisableInterrupts(0xFFFF); // all
+    EnableInterrupts(INTR_FLAG_VBLANK);
     m4aSoundVSyncOff();
     SetVBlankCallback(NULL);
     ResetSpriteData();
@@ -216,12 +266,12 @@ static void berry_fix_gpu_set(void)
     DmaFill32(3, 0, PLTT, PLTT_SIZE);
     ResetBgsAndClearDma3BusyFlags(0);
 
-    InitBgsFromTemplates(0, gUnknown_08618108, ARRAY_COUNT(gUnknown_08618108));
+    InitBgsFromTemplates(0, sBerryFixBgTemplates, ARRAY_COUNT(sBerryFixBgTemplates));
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
     ChangeBgY(1, 0, 0);
-    InitWindows(gUnknown_08618110);
+    InitWindows(sBerryFixWindowTemplates);
     DeactivateAllTextPrinters();
 
     DmaCopy32(3, sUnknown_08618138, BG_PLTT + 0x1E0, 0x20);
@@ -293,9 +343,9 @@ static void berry_fix_text_print(int scene)
             break;
     }
     CopyBgTilemapBufferToVram(0);
-    LZ77UnCompVram(gUnknown_08618178[scene][0], (void *)BG_CHAR_ADDR(1));
-    LZ77UnCompVram(gUnknown_08618178[scene][1], (void *)BG_SCREEN_ADDR(31));
-    CpuCopy32(gUnknown_08618178[scene][2], (void *)BG_PLTT, 0x100);
+    LZ77UnCompVram(sBerryFixGraphics[scene].gfx, (void *)BG_CHAR_ADDR(1));
+    LZ77UnCompVram(sBerryFixGraphics[scene].tilemap, (void *)BG_SCREEN_ADDR(31));
+    CpuCopy32(sBerryFixGraphics[scene].pltt, (void *)BG_PLTT, 0x100);
     ShowBg(0);
     ShowBg(1);
 }
