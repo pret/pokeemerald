@@ -1059,3 +1059,9 @@ static void ExtremSpeedMoveTarget_Step(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void AnimTask_IsDoubleBattle(u8 taskId)
+{
+    gBattleAnimArgs[7] = (IsDoubleBattle() && !IsContest());
+    DestroyAnimVisualTask(taskId);
+}

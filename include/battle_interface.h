@@ -39,10 +39,16 @@ enum
 #define TAG_STATUS_SUMMARY_BAR_TILE     0xD70C
 #define TAG_STATUS_SUMMARY_BALLS_TILE   0xD714
 
+#define TAG_MEGA_TRIGGER_TILE			0xD777
+#define TAG_MEGA_INDICATOR_TILE         0xD778
+
 #define TAG_HEALTHBOX_PAL               0xD6FF
 #define TAG_HEALTHBAR_PAL               0xD704
 #define TAG_STATUS_SUMMARY_BAR_PAL      0xD710
 #define TAG_STATUS_SUMMARY_BALLS_PAL    0xD712
+
+#define TAG_MEGA_TRIGGER_PAL			0xD777
+#define TAG_MEGA_INDICATOR_PAL			0xD778
 
 enum
 {
@@ -71,11 +77,19 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority);
 void InitBattlerHealthboxCoords(u8 battler);
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 void SwapHpBarsWithHpText(void);
+void ChangeMegaTriggerSprite(u8 spriteId, u8 animId);
+void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
+bool32 IsMegaTriggerSpriteActive(void);
+void HideMegaTriggerSprite(void);
+void DestroyMegaTriggerSprite(void);
+u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which);
+void DestroyMegaIndicatorSprite(u8 battlerId);
 u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart);
 void Task_HidePartyStatusSummary(u8 taskId);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);
 s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u8 GetHPBarLevel(s16 hp, s16 maxhp);
+void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle);
 
 #endif // GUARD_BATTLE_INTERFACE_H

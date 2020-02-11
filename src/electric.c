@@ -1137,6 +1137,7 @@ static void sub_810B23C(struct Sprite *sprite)
 void sub_810B29C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    u8 target = GetAnimBattlerId(gBattleAnimArgs[0]);
 
     switch (task->data[0])
     {
@@ -1144,7 +1145,7 @@ void sub_810B29C(u8 taskId)
         task->data[6] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         task->data[7] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
         task->data[8] = 4;
-        task->data[10] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        task->data[10] = GetBattlerSpriteCoord(target, BATTLER_COORD_X_2);
         task->data[9] = (task->data[10] - task->data[6]) / 5;
         task->data[4] = 7;
         task->data[5] = -1;
@@ -1261,19 +1262,20 @@ static void sub_810B51C(struct Sprite *sprite)
 void sub_810B55C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    u8 target = GetAnimBattlerId(gBattleAnimArgs[0]);
 
     switch (task->data[0])
     {
     case 0:
-        task->data[15] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 32;
+        task->data[15] = GetBattlerSpriteCoord(target, BATTLER_COORD_Y) + 32;
         task->data[14] = task->data[15];
         while (task->data[14] > 16)
         {
             task->data[14] -= 32;
         }
 
-        task->data[13] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-        task->data[12] = GetBattlerSpriteSubpriority(gBattleAnimTarget) - 2;
+        task->data[13] = GetBattlerSpriteCoord(target, BATTLER_COORD_X_2);
+        task->data[12] = GetBattlerSpriteSubpriority(target) - 2;
         task->data[0]++;
         break;
     case 1:
@@ -1294,7 +1296,7 @@ void sub_810B55C(u8 taskId)
 bool8 sub_810B614(struct Task *task, u8 taskId)
 {
     u8 spriteId = CreateSprite(&gUnknown_085956C0, task->data[13], task->data[14], task->data[12]);
-    
+
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].callback = sub_810B684;

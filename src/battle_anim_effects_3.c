@@ -258,6 +258,17 @@ const struct SpriteTemplate gSpikesSpriteTemplate =
     .callback = AnimSpikes,
 };
 
+const struct SpriteTemplate gToxicSpikesSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_TOXIC_SPIKES,
+    .paletteTag = ANIM_TAG_TOXIC_SPIKES,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpikes,
+};
+
 const union AnimCmd gLeerAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
@@ -1177,6 +1188,39 @@ const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =
     AFFINEANIMCMD_FRAME(0, 0, 0, 24),
     AFFINEANIMCMD_FRAME(1, -5, 0, 16),
     AFFINEANIMCMD_END,
+};
+
+const struct SpriteTemplate gMegaStoneSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_STONE,
+    .paletteTag = ANIM_TAG_MEGA_STONE,
+    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gUnknown_08596894,
+    .callback = AnimSpriteOnMonPos,
+};
+
+const struct SpriteTemplate gMegaParticlesSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_PARTICLES,
+    .paletteTag = ANIM_TAG_MEGA_PARTICLES,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
+    .anims = gPowerAbsorptionOrbAnimTable,
+    .images = NULL,
+    .affineAnims = gPowerAbsorptionOrbAffineAnimTable,
+    .callback = AnimPowerAbsorptionOrb,
+};
+
+const struct SpriteTemplate gMegaSymbolSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_SYMBOL,
+    .paletteTag = ANIM_TAG_MEGA_SYMBOL,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8112B78,
 };
 
 void AnimBlackSmoke(struct Sprite *sprite)
@@ -2282,7 +2326,7 @@ void AnimTask_TransformMon(u8 taskId)
         }
         break;
     case 2:
-        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
+        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10], gBattleAnimArgs[1]);
         sub_80A6BFC(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
@@ -2369,7 +2413,7 @@ void AnimTask_IsMonInvisible(u8 taskId)
 
 void AnimTask_CastformGfxChange(u8 taskId)
 {
-    HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, TRUE);
+    HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, TRUE, FALSE);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -4653,6 +4697,17 @@ static void AnimForesightMagnifyingGlassStep(struct Sprite *sprite)
         break;
     }
 }
+
+const struct SpriteTemplate gDracoMeteorSmashSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMeteorMashStar,
+};
 
 static void AnimMeteorMashStarStep(struct Sprite *sprite)
 {

@@ -980,6 +980,28 @@ const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
     .callback = AnimOrbitScatter,
 };
 
+const struct SpriteTemplate gPowerGemOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gHiddenPowerOrbAffineAnimTable,
+    .callback = AnimOrbitFast,
+};
+
+const struct SpriteTemplate gPowerGemOrbScatterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gHiddenPowerOrbAffineAnimTable,
+    .callback = AnimOrbitScatter,
+};
+
 const union AffineAnimCmd gSpitUpOrbAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),

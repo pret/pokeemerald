@@ -765,6 +765,11 @@ void AnimTask_SwayMon(u8 taskId)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[4]);
+    if (spriteId == 0xff)
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
