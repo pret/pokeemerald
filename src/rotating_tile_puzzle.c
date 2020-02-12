@@ -8,15 +8,6 @@
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 
-extern const u8 RotatingTilePuzzle_Movement_ShiftRight[];
-extern const u8 RotatingTilePuzzle_Movement_ShiftDown[];
-extern const u8 RotatingTilePuzzle_Movement_ShiftLeft[];
-extern const u8 RotatingTilePuzzle_Movement_ShiftUp[];
-extern const u8 RotatingTilePuzzle_Movement_FaceRight[];
-extern const u8 RotatingTilePuzzle_Movement_FaceDown[];
-extern const u8 RotatingTilePuzzle_Movement_FaceLeft[];
-extern const u8 RotatingTilePuzzle_Movement_FaceUp[];
-
 #define ROTATE_COUNTERCLOCKWISE 0
 #define ROTATE_CLOCKWISE        1
 #define ROTATE_NONE             2 
@@ -32,6 +23,62 @@ struct RotatingTilePuzzle
     struct RotatingTileObject objects[OBJECT_EVENTS_COUNT];
     u8 numObjects;
     bool8 isTrickHouse;
+};
+
+static const u8 sMovement_ShiftRight[] =
+{
+    MOVEMENT_ACTION_STORE_AND_LOCK_ANIM,
+    MOVEMENT_ACTION_WALK_NORMAL_RIGHT,
+    MOVEMENT_ACTION_FREE_AND_UNLOCK_ANIM,
+    MOVEMENT_ACTION_STEP_END
+};
+
+static const u8 sMovement_ShiftDown[] =
+{
+    MOVEMENT_ACTION_STORE_AND_LOCK_ANIM,
+    MOVEMENT_ACTION_WALK_NORMAL_DOWN,
+    MOVEMENT_ACTION_FREE_AND_UNLOCK_ANIM,
+    MOVEMENT_ACTION_STEP_END
+};
+
+static const u8 sMovement_ShiftLeft[] =
+{
+    MOVEMENT_ACTION_STORE_AND_LOCK_ANIM,
+    MOVEMENT_ACTION_WALK_NORMAL_LEFT,
+    MOVEMENT_ACTION_FREE_AND_UNLOCK_ANIM,
+    MOVEMENT_ACTION_STEP_END
+};
+
+static const u8 sMovement_ShiftUp[] =
+{
+    MOVEMENT_ACTION_STORE_AND_LOCK_ANIM,
+    MOVEMENT_ACTION_WALK_NORMAL_UP,
+    MOVEMENT_ACTION_FREE_AND_UNLOCK_ANIM,
+    MOVEMENT_ACTION_STEP_END
+};
+
+static const u8 sMovement_FaceRight[] =
+{
+    MOVEMENT_ACTION_FACE_RIGHT,
+    MOVEMENT_ACTION_STEP_END
+};
+
+static const u8 sMovement_FaceDown[] =
+{
+    MOVEMENT_ACTION_FACE_DOWN,
+    MOVEMENT_ACTION_STEP_END
+};
+
+static const u8 sMovement_FaceLeft[] =
+{
+    MOVEMENT_ACTION_FACE_LEFT,
+    MOVEMENT_ACTION_STEP_END
+};
+
+static const u8 sMovement_FaceUp[] =
+{
+    MOVEMENT_ACTION_FACE_UP,
+    MOVEMENT_ACTION_STEP_END
 };
 
 // This file's functions.
@@ -106,19 +153,19 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
             switch (puzzleTileNum)
             {
             case 0: // Right Arrow
-                movementScript = RotatingTilePuzzle_Movement_ShiftRight;
+                movementScript = sMovement_ShiftRight;
                 x = 1;
                 break;
             case 1: // Down Arrow
-                movementScript = RotatingTilePuzzle_Movement_ShiftDown;
+                movementScript = sMovement_ShiftDown;
                 y = 1;
                 break;
             case 2: // Left Arrow
-                movementScript = RotatingTilePuzzle_Movement_ShiftLeft;
+                movementScript = sMovement_ShiftLeft;
                 x = -1;
                 break;
             case 3: // Up Arrow
-                movementScript = RotatingTilePuzzle_Movement_ShiftUp;
+                movementScript = sMovement_ShiftUp;
                 y = -1;
                 break;
             default:
@@ -204,19 +251,19 @@ void TurnRotatingTileObjects(void)
                 switch (direction)
                 {
                 case DIR_EAST:
-                    movementScript = RotatingTilePuzzle_Movement_FaceUp;
+                    movementScript = sMovement_FaceUp;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_SOUTH:
-                    movementScript = RotatingTilePuzzle_Movement_FaceRight;
+                    movementScript = sMovement_FaceRight;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 case DIR_WEST:
-                    movementScript = RotatingTilePuzzle_Movement_FaceDown;
+                    movementScript = sMovement_FaceDown;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_NORTH:
-                    movementScript = RotatingTilePuzzle_Movement_FaceLeft;
+                    movementScript = sMovement_FaceLeft;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 default:
@@ -233,19 +280,19 @@ void TurnRotatingTileObjects(void)
                 switch (direction)
                 {
                 case DIR_EAST:
-                    movementScript = RotatingTilePuzzle_Movement_FaceDown;
+                    movementScript = sMovement_FaceDown;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_SOUTH:
-                    movementScript = RotatingTilePuzzle_Movement_FaceLeft;
+                    movementScript = sMovement_FaceLeft;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 case DIR_WEST:
-                    movementScript = RotatingTilePuzzle_Movement_FaceUp;
+                    movementScript = sMovement_FaceUp;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_NORTH:
-                    movementScript = RotatingTilePuzzle_Movement_FaceRight;
+                    movementScript = sMovement_FaceRight;
                     objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 default:

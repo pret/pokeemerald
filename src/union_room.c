@@ -3376,7 +3376,7 @@ u8 sub_8016FF0(struct UnkStruct_Main4 * a0, u32 a1)
 
 bool32 sub_8017020(const u8 *src)
 {
-    sub_81973A4();
+    LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
     StringExpandPlaceholders(gStringVar4, src);
     AddTextPrinterWithCustomSpeedForMessage(FALSE, 1);
@@ -3400,7 +3400,7 @@ bool8 PrintOnTextbox(u8 *textState, const u8 *str)
     switch (*textState)
     {
     case 0:
-        sub_81973A4();
+        LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 1);
         StringExpandPlaceholders(gStringVar4, str);
         AddTextPrinterForMessage_2(TRUE);
@@ -4316,9 +4316,9 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
     ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
     {
-        CopyEasyChatWord(arg1->field_C0[i + 3], trainerCard->var_28[i]);
+        CopyEasyChatWord(arg1->field_C0[i + 3], trainerCard->easyChatProfile[i]);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, arg1->field_C0[i + 3]);
     }
 
