@@ -18,14 +18,14 @@ BattleFrontier_BattleTowerBattleRoom_OnFrame: @ 8241B62
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_EnterRoom:: @ 8241B6C
 	setvar VAR_TEMP_0, 1
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerEnter
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant
 	waitmovement 0
 	setvar VAR_TEMP_2, 1
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
@@ -62,7 +62,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedOpponent:: @ 8241C2F
 	call_if_ne BattleFrontier_BattleTowerBattleRoom_EventScript_SecondAttendantEnter
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
@@ -125,7 +125,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskRetireChallenge:: @ 8241DAA
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_ContinueChallenge:: @ 8241DDC
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceBattle
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceBattle
 	waitmovement 0
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantReturnToPos
 	waitmovement 0
@@ -239,7 +239,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForMaidenNoRecord:: @ 8
 BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabel:: @ 8241FAF
 	call BattleFrontier_EventScript_SetBrainObjectGfx
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceBattle
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceBattle
 	waitmovement 0
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantReturnToPos
 	waitmovement 0

@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "rotating_tile_puzzle.h"
 #include "script_movement.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 
@@ -20,7 +20,7 @@ struct RotatingTileObject
 
 struct RotatingTilePuzzle
 {
-    struct RotatingTileObject objects[EVENT_OBJECTS_COUNT];
+    struct RotatingTileObject objects[OBJECT_EVENTS_COUNT];
     u8 numObjects;
     bool8 isTrickHouse;
 };
@@ -104,23 +104,23 @@ void FreeRotatingTilePuzzle(void)
     if (sRotatingTilePuzzle != NULL)
         FREE_AND_SET_NULL(sRotatingTilePuzzle);
 
-    id = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[id]);
-    ScriptMovement_UnfreezeEventObjects();
+    id = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[id]);
+    ScriptMovement_UnfreezeObjectEvents();
 }
 
 u16 MoveRotatingTileObjects(u8 puzzleNumber)
 {
     u8 i;
-    struct EventObjectTemplate *eventObjects = gSaveBlock1Ptr->eventObjectTemplates;
+    struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
     u16 localId = 0;
 
-    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
         s32 puzzleTileStart;
         u8 puzzleTileNum;
-        s16 x = eventObjects[i].x + 7;
-        s16 y = eventObjects[i].y + 7;
+        s16 x = objectEvents[i].x + 7;
+        s16 y = objectEvents[i].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         if (!sRotatingTilePuzzle->isTrickHouse)
@@ -172,12 +172,12 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
                 continue;
             }
 
-            eventObjects[i].x += x;
-            eventObjects[i].y += y;
-            if (GetEventObjectIdByLocalIdAndMap(eventObjects[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) != EVENT_OBJECTS_COUNT)
+            objectEvents[i].x += x;
+            objectEvents[i].y += y;
+            if (GetObjectEventIdByLocalIdAndMap(objectEvents[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) != OBJECT_EVENTS_COUNT)
             {
                 SaveRotatingTileObject(i, puzzleTileNum);
-                localId = eventObjects[i].localId;
+                localId = objectEvents[i].localId;
                 ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
             }
             // Never reached in normal gameplay
@@ -195,7 +195,7 @@ void TurnRotatingTileObjects(void)
 {
     u8 i;
     s32 puzzleTileStart;
-    struct EventObjectTemplate *eventObjects;
+    struct ObjectEventTemplate *objectEvents;
 
     if (sRotatingTilePuzzle == NULL)
         return;
@@ -205,14 +205,14 @@ void TurnRotatingTileObjects(void)
     else
         puzzleTileStart = METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right;
 
-    eventObjects = gSaveBlock1Ptr->eventObjectTemplates;
+    objectEvents = gSaveBlock1Ptr->objectEventTemplates;
     for (i = 0; i < sRotatingTilePuzzle->numObjects; i++)
     {
         s32 rotation;
         s8 tileDifference;
-        u8 eventObjectId;
-        s16 x = eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].x + 7;
-        s16 y = eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].y + 7;
+        u8 objectEventId;
+        s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + 7;
+        s16 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         // NOTE: The following 2 assignments and if else could all be replaced with rotation = ROTATE_COUNTERCLOCKWISE
@@ -241,35 +241,35 @@ void TurnRotatingTileObjects(void)
                 rotation = ROTATE_NONE;
         }
 
-        eventObjectId = GetEventObjectIdByLocalIdAndMap(eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-        if (eventObjectId != EVENT_OBJECTS_COUNT)
+        objectEventId = GetObjectEventIdByLocalIdAndMap(objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        if (objectEventId != OBJECT_EVENTS_COUNT)
         {
             const u8 *movementScript;
-            u8 direction = gEventObjects[eventObjectId].facingDirection;
+            u8 direction = gObjectEvents[objectEventId].facingDirection;
             if (rotation == ROTATE_COUNTERCLOCKWISE)
             {
                 switch (direction)
                 {
                 case DIR_EAST:
                     movementScript = sMovement_FaceUp;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_SOUTH:
                     movementScript = sMovement_FaceRight;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 case DIR_WEST:
                     movementScript = sMovement_FaceDown;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_NORTH:
                     movementScript = sMovement_FaceLeft;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -281,24 +281,24 @@ void TurnRotatingTileObjects(void)
                 {
                 case DIR_EAST:
                     movementScript = sMovement_FaceDown;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_SOUTH:
                     movementScript = sMovement_FaceLeft;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 case DIR_WEST:
                     movementScript = sMovement_FaceUp;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_NORTH:
                     movementScript = sMovement_FaceRight;
-                    eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(eventObjects[sRotatingTilePuzzle->objects[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -321,9 +321,9 @@ static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
     s32 rotation;
     s32 puzzleTileStart;
     u16 movementType;
-    struct EventObjectTemplate *eventObjects = gSaveBlock1Ptr->eventObjectTemplates;
-    s16 x = eventObjects[eventTemplateId].x + 7;
-    s16 y = eventObjects[eventTemplateId].y + 7;
+    struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
+    s16 x = objectEvents[eventTemplateId].x + 7;
+    s16 y = objectEvents[eventTemplateId].y + 7;
     u16 metatile = MapGridGetMetatileIdAt(x, y);
 
     if (!sRotatingTilePuzzle->isTrickHouse)
@@ -341,22 +341,22 @@ static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
     else
         rotation = ROTATE_NONE;
 
-    movementType = eventObjects[eventTemplateId].movementType;
+    movementType = objectEvents[eventTemplateId].movementType;
     if (rotation == ROTATE_COUNTERCLOCKWISE)
     {
         switch (movementType)
         {
         case MOVEMENT_TYPE_FACE_RIGHT:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
             break;
         case MOVEMENT_TYPE_FACE_DOWN:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
             break;
         case MOVEMENT_TYPE_FACE_LEFT:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
             break;
         case MOVEMENT_TYPE_FACE_UP:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
             break;
         default:
             break;
@@ -367,16 +367,16 @@ static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
         switch (movementType)
         {
         case MOVEMENT_TYPE_FACE_RIGHT:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
             break;
         case MOVEMENT_TYPE_FACE_DOWN:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
             break;
         case MOVEMENT_TYPE_FACE_LEFT:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
             break;
         case MOVEMENT_TYPE_FACE_UP:
-            eventObjects[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+            objectEvents[eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
             break;
         default:
             break;

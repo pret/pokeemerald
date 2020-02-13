@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 7,
       "y": 17,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 9,
       "y": 19,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 12,
       "y": 7,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 11,
       "y": 9,
       "elevation": 0,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 5,
       "y": 6,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 7,
       "y": 8,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 4,
       "y": 8,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 9,
       "y": 7,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 6,
       "y": 13,
       "elevation": 3,
@@ -132,7 +132,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 10,
       "y": 13,
       "elevation": 3,

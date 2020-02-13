@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MART_EMPLOYEE",
+      "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 1,
       "y": 3,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 5,
       "y": 3,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_M",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SKITTY",
+      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
       "x": 2,
       "y": 5,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 7,
       "y": 2,
       "elevation": 3,

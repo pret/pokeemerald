@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_1",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 4,
       "y": 8,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 3,
       "y": 2,
       "elevation": 0,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 5,
       "y": 1,
       "elevation": 3,

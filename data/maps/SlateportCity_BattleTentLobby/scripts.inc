@@ -9,7 +9,7 @@ SlateportCity_BattleTentLobby_OnWarp: @ 820873B
 
 SlateportCity_BattleTentLobby_EventScript_TurnPlayerNorth:: @ 8208745
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 SlateportCity_BattleTentLobby_OnFrame: @ 820874F
@@ -139,12 +139,12 @@ SlateportCity_BattleTentLobby_EventScript_EnterChallenge:: @ 82089AC
 
 SlateportCity_BattleTentLobby_EventScript_WalkToDoor:: @ 82089C9
 	applymovement 1, SlateportCity_BattleTentLobby_Movement_AttendantWalkToDoor
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_PlayerWalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_PlayerWalkToDoor
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, SlateportCity_BattleTentLobby_Movement_AttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim

@@ -21,13 +21,13 @@ FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfx:: @ 82008AF
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale:: @ 82008C7
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale:: @ 82008D2
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_OnFrame: @ 82008DD
@@ -236,7 +236,7 @@ FallarborTown_BattleTentBattleRoom_OnWarp: @ 8200BB0
 	.2byte 0
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetUpObjects:: @ 8200BBA
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	hideobjectat 1, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	removeobject 3
 	setvar VAR_TEMP_1, 1

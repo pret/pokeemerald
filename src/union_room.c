@@ -10,7 +10,7 @@
 #include "dynamic_placeholder_text_util.h"
 #include "easy_chat.h"
 #include "event_data.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -4249,7 +4249,7 @@ void sub_801818C(bool32 arg0)
 void sub_80181CC(void)
 {
     ScriptContext2_Enable();
-    ScriptFreezeEventObjects();
+    ScriptFreezeObjectEvents();
 }
 
 u8 sub_80181DC(struct UnkStruct_URoom *arg0)

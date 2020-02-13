@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_REGISTEEL",
+      "graphics_id": "OBJ_EVENT_GFX_REGISTEEL",
       "x": 8,
       "y": 7,
       "elevation": 3,

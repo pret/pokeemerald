@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 13,
       "y": 11,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 14,
       "y": 11,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 20,
       "y": 4,
       "elevation": 3,

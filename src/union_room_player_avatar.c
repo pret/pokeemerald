@@ -7,7 +7,7 @@
 #include "task.h"
 #include "union_room.h"
 #include "constants/event_objects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/flags.h"
 
 EWRAM_DATA struct UnkStruct_8019BA8 * gUnknown_02022C64 = NULL;
@@ -124,30 +124,30 @@ static void SetUnionRoomPlayerGfx(u32 playerIdx, u32 gfxId)
     VarSet(VAR_OBJ_GFX_ID_0 + playerIdx, gfxId);
 }
 
-static void CreateUnionRoomPlayerEventObject(u32 playerIdx)
+static void CreateUnionRoomPlayerObjectEvent(u32 playerIdx)
 {
-    TrySpawnEventObject(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    TrySpawnObjectEvent(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
-static void RemoveUnionRoomPlayerEventObject(u32 playerIdx)
+static void RemoveUnionRoomPlayerObjectEvent(u32 playerIdx)
 {
-    RemoveEventObjectByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 static bool32 SetUnionRoomPlayerEnterExitMovement(u32 playerIdx, const u8 * movement)
 {
     u8 objectId;
-    struct EventObject * object;
-    if (TryGetEventObjectIdByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
+    struct ObjectEvent * object;
+    if (TryGetObjectEventIdByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
     {
         return FALSE;
     }
-    object = &gEventObjects[objectId];
-    if (EventObjectIsMovementOverridden(object))
+    object = &gObjectEvents[objectId];
+    if (ObjectEventIsMovementOverridden(object))
     {
         return FALSE;
     }
-    if (EventObjectSetHeldMovement(object, *movement))
+    if (ObjectEventSetHeldMovement(object, *movement))
     {
         return FALSE;
     }
@@ -157,23 +157,23 @@ static bool32 SetUnionRoomPlayerEnterExitMovement(u32 playerIdx, const u8 * move
 static bool32 sub_8019B3C(u32 playerIdx)
 {
     u8 objectId;
-    struct EventObject * object;
-    if (TryGetEventObjectIdByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
+    struct ObjectEvent * object;
+    if (TryGetObjectEventIdByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
     {
         return TRUE;
     }
-    object = &gEventObjects[objectId];
-    if (!EventObjectClearHeldMovementIfFinished(object))
+    object = &gObjectEvents[objectId];
+    if (!ObjectEventClearHeldMovementIfFinished(object))
     {
         return FALSE;
     }
     if (!ScriptContext2_IsEnabled())
     {
-        UnfreezeEventObject(object);
+        UnfreezeObjectEvent(object);
     }
     else
     {
-        FreezeEventObject(object);
+        FreezeObjectEvent(object);
     }
     return TRUE;
 }
@@ -208,7 +208,7 @@ static bool32 sub_8019BDC(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr
     case 1:
         if (sub_8019B3C(playerIdx))
         {
-            RemoveUnionRoomPlayerEventObject(playerIdx);
+            RemoveUnionRoomPlayerObjectEvent(playerIdx);
             HideUnionRoomPlayer(playerIdx);
             *a0 = 0;
             return TRUE;
@@ -240,7 +240,7 @@ static bool32 sub_8019C38(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr
             break;
         }
         SetUnionRoomPlayerGfx(playerIdx, ptr->field_1);
-        CreateUnionRoomPlayerEventObject(playerIdx);
+        CreateUnionRoomPlayerObjectEvent(playerIdx);
         ShowUnionRoomPlayer(playerIdx);
         (*a0)++;
         // fallthrough
@@ -310,7 +310,7 @@ static void sub_8019D44(u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
         {
             ptr->field_0 = 0;
             ptr->field_2 = 0;
-            RemoveUnionRoomPlayerEventObject(playerIdx);
+            RemoveUnionRoomPlayerObjectEvent(playerIdx);
             HideUnionRoomPlayer(playerIdx);
         }
         else if (sub_8019C38(&ptr->field_2, playerIdx, ptr) == 1)
@@ -376,7 +376,7 @@ void sub_8019E3C(void)
     {
         if (!IsUnionRoomPlayerHidden(i))
         {
-            RemoveUnionRoomPlayerEventObject(i);
+            RemoveUnionRoomPlayerObjectEvent(i);
             HideUnionRoomPlayer(i);
         }
     }
@@ -391,7 +391,7 @@ void sub_8019E70(u8 * sp8, s32 r9)
     for (r7 = 0; r7 < 5; r7++)
     {
         s32 r5 = 5 * r9 + r7;
-        sp8[r5] = sprite_new(EVENT_OBJ_GFX_MAN_4, r5 - 0x38, gUnknown_082F0740[r9][0] + gUnknown_082F0760[r7][0], gUnknown_082F0740[r9][1] + gUnknown_082F0760[r7][1], 3, 1);
+        sp8[r5] = sprite_new(OBJ_EVENT_GFX_MAN_4, r5 - 0x38, gUnknown_082F0740[r9][0] + gUnknown_082F0760[r7][0], gUnknown_082F0740[r9][1] + gUnknown_082F0760[r7][1], 3, 1);
         sub_8097C44(r5 - 0x38, TRUE);
     }
 }

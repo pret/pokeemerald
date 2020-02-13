@@ -16,7 +16,7 @@ BattleFrontier_BattlePyramidTop_OnWarp: @ 82550CE
 
 BattleFrontier_BattlePyramidTop_EventScript_SetUpObjects:: @ 82550D8
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	compare VAR_TEMP_C, 0
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_EndSetUpObjects
 	setobjectxyperm 2, 0, 0
@@ -79,7 +79,7 @@ BattleFrontier_BattlePyramidTop_EventScript_Attendant:: @ 82551D0
 	closemessage
 	applymovement 1, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidTop_Movement_PlayerClimbToTop
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidTop_Movement_PlayerClimbToTop
 	waitmovement 0
 	applymovement 1, BattleFrontier_BattlePyramidTop_Movement_AttendantBlockPath
 	waitmovement 0
@@ -116,7 +116,7 @@ BattleFrontier_BattlePyramidTop_EventScript_BattleBrandon:: @ 8255256
 	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp
+	applymovement OBJ_EVENT_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_ExplorationsAreGrandestAdventure, MSGBOX_DEFAULT
 	closemessage
@@ -156,7 +156,7 @@ BattleFrontier_BattlePyramidTop_EventScript_BrandonIntroGold:: @ 8255335
 	compare VAR_RESULT, FALSE
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp
+	applymovement OBJ_EVENT_ID_CAMERA, BattleFrontier_BattlePyramidTop_Movement_CameraPanUp
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_BrandonYouveReturned, MSGBOX_DEFAULT
 	closemessage

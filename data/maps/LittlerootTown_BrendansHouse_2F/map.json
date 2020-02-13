@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL",
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
       "x": 7,
       "y": 1,
       "elevation": 0,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 0,
       "y": 0,
       "elevation": 0,
@@ -41,7 +41,7 @@
       "flag": "FLAG_DECORATION_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_1",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 0,
       "y": 1,
       "elevation": 0,
@@ -54,7 +54,7 @@
       "flag": "FLAG_DECORATION_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_2",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_2",
       "x": 0,
       "y": 2,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_DECORATION_3"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_3",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_3",
       "x": 0,
       "y": 3,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_DECORATION_4"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_4",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_4",
       "x": 0,
       "y": 4,
       "elevation": 0,
@@ -93,7 +93,7 @@
       "flag": "FLAG_DECORATION_5"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_5",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_5",
       "x": 0,
       "y": 5,
       "elevation": 4,
@@ -106,7 +106,7 @@
       "flag": "FLAG_DECORATION_6"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_6",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_6",
       "x": 1,
       "y": 0,
       "elevation": 0,
@@ -119,7 +119,7 @@
       "flag": "FLAG_DECORATION_7"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_7",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_7",
       "x": 1,
       "y": 1,
       "elevation": 0,
@@ -132,7 +132,7 @@
       "flag": "FLAG_DECORATION_8"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_8",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_8",
       "x": 1,
       "y": 2,
       "elevation": 3,
@@ -145,7 +145,7 @@
       "flag": "FLAG_DECORATION_9"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_9",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_9",
       "x": 1,
       "y": 3,
       "elevation": 3,
@@ -158,7 +158,7 @@
       "flag": "FLAG_DECORATION_10"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_A",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_A",
       "x": 1,
       "y": 4,
       "elevation": 3,
@@ -171,7 +171,7 @@
       "flag": "FLAG_DECORATION_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_B",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_B",
       "x": 1,
       "y": 5,
       "elevation": 0,
@@ -184,7 +184,7 @@
       "flag": "FLAG_DECORATION_12"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MOM",
+      "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 7,
       "y": 1,
       "elevation": 3,
@@ -197,7 +197,7 @@
       "flag": "FLAG_HIDE_LITTLE_ROOT_TOWN_PLAYERS_BEDROOM_MOM"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 4,
       "elevation": 0,
@@ -210,7 +210,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWABLU_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_SWABLU_DOLL",
       "x": 5,
       "y": 5,
       "elevation": 3,

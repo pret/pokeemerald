@@ -8,7 +8,7 @@ PetalburgCity_WallysHouse_OnWarp: @ 8204234
 	.2byte 0
 
 PetalburgCity_WallysHouse_EventScript_PlayerUncleFaceEachOther:: @ 820423E
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_EAST
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
 	turnobject 1, DIR_WEST
 	end
 
