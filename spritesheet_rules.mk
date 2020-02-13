@@ -1,4 +1,5 @@
 OBJEVENTGFXDIR := graphics/object_events/pics
+FLDEFFGFXDIR := graphics/field_effects/pics
 
 $(OBJEVENTGFXDIR)/people/brendan/walking.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
@@ -575,89 +576,89 @@ $(OBJEVENTGFXDIR)/misc/mr_brineys_boat.4bpp: %.4bpp: %.png
 
 
 
-$(OBJEVENTGFXDIR)/effects/arrow.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/arrow.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/ash.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/ash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/berry_tree_growth_sparkle.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/berry_tree_growth_sparkle.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/bike_hop_big_splash.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/bike_hop_big_splash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/bike_hop_small_splash.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/bike_hop_small_splash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(OBJEVENTGFXDIR)/effects/bike_hop_tall_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/bike_hop_tall_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(OBJEVENTGFXDIR)/effects/bike_tire_tracks.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/bike_tire_tracks.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/bubbles.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/bubbles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/effects/deep_sand_footprints.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/deep_sand_footprints.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/ground_impact_dust.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/ground_impact_dust.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(OBJEVENTGFXDIR)/effects/jump_out_of_ash.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/jump_out_of_ash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/long_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/long_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/mountain_disguise.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/mountain_disguise.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/effects/ripple.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/ripple.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/sand_disguise_placeholder.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/sand_disguise_placeholder.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/effects/sand_footprints.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/sand_footprints.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/short_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/short_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/surf_blob.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/surf_blob.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/effects/tall_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/tall_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/tree_disguise.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/tree_disguise.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/effects/unknown_16.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unknown_16.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/unknown_17.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unknown_17.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/unknown_18.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unknown_18.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/unknown_19.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unknown_19.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/unknown_20.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unknown_20.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/unknown_29.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unknown_29.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
-$(OBJEVENTGFXDIR)/effects/lavaridge_gym_warp.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/lavaridge_gym_warp.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/unknown_35.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unknown_35.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(OBJEVENTGFXDIR)/effects/unused_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unused_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
