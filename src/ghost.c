@@ -10,11 +10,11 @@
 #include "trig.h"
 #include "util.h"
 
-static void sub_811160C(struct Sprite *);
+static void AnimConfuseRayBallBounce(struct Sprite *);
 static void sub_8111674(struct Sprite *);
 static void sub_81116E8(struct Sprite *);
 static void sub_8111764(struct Sprite *);
-static void sub_81117F4(struct Sprite *);
+static void AnimConfuseRayBallSpiral(struct Sprite *);
 static void sub_8111814(struct Sprite *);
 static void sub_8111914(u8 taskId);
 static void sub_811196C(u8 taskId);
@@ -54,7 +54,7 @@ const union AffineAnimCmd *const gUnknown_08596D10[] =
     gUnknown_08596CF8,
 };
 
-const struct SpriteTemplate gUnknown_08596D14 =
+const struct SpriteTemplate gConfuseRayBallBounceSpriteTemplate =
 {
     .tileTag = ANIM_TAG_YELLOW_BALL,
     .paletteTag = ANIM_TAG_YELLOW_BALL,
@@ -62,10 +62,10 @@ const struct SpriteTemplate gUnknown_08596D14 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596D10,
-    .callback = sub_811160C,
+    .callback = AnimConfuseRayBallBounce,
 };
 
-const struct SpriteTemplate gUnknown_08596D2C =
+const struct SpriteTemplate gConfuseRayBallSpiralSpriteTemplate =
 {
     .tileTag = ANIM_TAG_YELLOW_BALL,
     .paletteTag = ANIM_TAG_YELLOW_BALL,
@@ -73,7 +73,7 @@ const struct SpriteTemplate gUnknown_08596D2C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81117F4,
+    .callback = AnimConfuseRayBallSpiral,
 };
 
 const union AffineAnimCmd gUnknown_08596D44[] =
@@ -215,7 +215,7 @@ const struct SpriteTemplate gUnknown_08596E48 =
     .callback = sub_8112F60,
 };
 
-static void sub_811160C(struct Sprite *sprite)
+static void AnimConfuseRayBallBounce(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
@@ -311,7 +311,7 @@ static void sub_8111764(struct Sprite *sprite)
     }
 }
 
-static void sub_81117F4(struct Sprite *sprite)
+static void AnimConfuseRayBallSpiral(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->callback = sub_8111814;

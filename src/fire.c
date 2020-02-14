@@ -8,7 +8,7 @@
 #include "trig.h"
 
 static void sub_8108EC8(struct Sprite *);
-static void sub_8108F08(struct Sprite *);
+static void AnimFireSpread(struct Sprite *);
 static void sub_8108F4C(struct Sprite *);
 static void sub_8108FBC(struct Sprite *);
 static void sub_8109028(struct Sprite *);
@@ -72,7 +72,7 @@ const struct SpriteTemplate gUnknown_08595368 =
     .callback = sub_8108EC8,
 };
 
-const struct SpriteTemplate gUnknown_08595380 =
+const struct SpriteTemplate gFireSpreadSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -80,7 +80,7 @@ const struct SpriteTemplate gUnknown_08595380 =
     .anims = gUnknown_08595360,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8108F08,
+    .callback = AnimFireSpread,
 };
 
 const union AnimCmd gUnknown_08595398[] =
@@ -150,7 +150,7 @@ const struct SpriteTemplate gUnknown_08595410 =
     .callback = sub_8108FBC,
 };
 
-const struct SpriteTemplate gUnknown_08595428 =
+const struct SpriteTemplate gFirePlumeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
@@ -267,7 +267,7 @@ const struct SpriteTemplate gUnknown_08595504 =
     .callback = sub_8109200,
 };
 
-const struct SpriteTemplate gUnknown_0859551C =
+const struct SpriteTemplate gFireBlastRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -308,7 +308,7 @@ const union AffineAnimCmd *const gUnknown_08595564[] =
     gUnknown_08595554,
 };
 
-const struct SpriteTemplate gUnknown_0859556C =
+const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -470,7 +470,8 @@ static void sub_8108EC8(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-static void sub_8108F08(struct Sprite *sprite)
+// For the impact spread of fire sprites for moves like Blaze Kick or Fire Punch
+static void AnimFireSpread(struct Sprite *sprite)
 {
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
 

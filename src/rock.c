@@ -199,7 +199,7 @@ const union AnimCmd *const gUnknown_08596C08[] =
     gUnknown_08596BF0,
 };
 
-const struct SpriteTemplate gUnknown_08596C10 =
+const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,

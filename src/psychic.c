@@ -8,10 +8,10 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-void sub_810F1EC(struct Sprite *);
+static void AnimDefensiveWall(struct Sprite *);
 void sub_810F58C(struct Sprite *);
 void sub_810F634(struct Sprite *);
-void sub_810F6B0(struct Sprite *);
+static void AnimQuestionMark(struct Sprite *);
 void sub_810FBA8(struct Sprite *);
 void sub_810FDF0(struct Sprite *);
 void sub_8110240(struct Sprite *);
@@ -60,7 +60,7 @@ const struct SpriteTemplate gUnknown_08596560 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F1EC,
+    .callback = AnimDefensiveWall,
 };
 
 const struct SpriteTemplate gUnknown_08596578 =
@@ -71,7 +71,7 @@ const struct SpriteTemplate gUnknown_08596578 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F1EC,
+    .callback = AnimDefensiveWall,
 };
 
 const struct SpriteTemplate gUnknown_08596590 =
@@ -82,10 +82,10 @@ const struct SpriteTemplate gUnknown_08596590 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F1EC,
+    .callback = AnimDefensiveWall,
 };
 
-const struct SpriteTemplate gUnknown_085965A8 =
+const struct SpriteTemplate gBarrierWallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GRAY_LIGHT_WALL,
     .paletteTag = ANIM_TAG_GRAY_LIGHT_WALL,
@@ -93,7 +93,7 @@ const struct SpriteTemplate gUnknown_085965A8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F1EC,
+    .callback = AnimDefensiveWall,
 };
 
 const struct SpriteTemplate gUnknown_085965C0 =
@@ -104,7 +104,7 @@ const struct SpriteTemplate gUnknown_085965C0 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F1EC,
+    .callback = AnimDefensiveWall,
 };
 
 const union AnimCmd gUnknown_085965D8[] =
@@ -257,7 +257,7 @@ const union AffineAnimCmd *const gUnknown_08596740[] =
     gUnknown_08596718,
 };
 
-const struct SpriteTemplate gUnknown_08596744 =
+const struct SpriteTemplate gAmnesiaQuestionMarkSpriteTemplate =
 {
     .tileTag = ANIM_TAG_AMNESIA,
     .paletteTag = ANIM_TAG_AMNESIA,
@@ -265,7 +265,7 @@ const struct SpriteTemplate gUnknown_08596744 =
     .anims = gUnknown_08596714,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F6B0,
+    .callback = AnimQuestionMark,
 };
 
 const union AffineAnimCmd gUnknown_0859675C[] =
@@ -419,7 +419,8 @@ const struct SpriteTemplate gUnknown_08596920 =
     .callback = sub_8110240,
 };
 
-void sub_810F1EC(struct Sprite *sprite)
+// For the rectangular wall sprite used by Reflect, Mirror Coat, etc
+static void AnimDefensiveWall(struct Sprite *sprite)
 {
     u8 isContest = IsContest();
 
@@ -639,7 +640,7 @@ void sub_810F634(struct Sprite *sprite)
     sprite->callback = RunStoredCallbackWhenAnimEnds;
 }
 
-void sub_810F6B0(struct Sprite *sprite)
+static void AnimQuestionMark(struct Sprite *sprite)
 {
     s16 x = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) /  2;
     s16 y = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_HEIGHT) / -2;

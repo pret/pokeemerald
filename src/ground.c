@@ -49,7 +49,7 @@ const union AffineAnimCmd *const gUnknown_08597174[] =
     gUnknown_08597160,
 };
 
-const struct SpriteTemplate gUnknown_08597178 =
+const struct SpriteTemplate gBonemerangSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,
@@ -60,7 +60,7 @@ const struct SpriteTemplate gUnknown_08597178 =
     .callback = AnimBonemerangProjectile,
 };
 
-const struct SpriteTemplate gUnknown_08597190 =
+const struct SpriteTemplate gSpinningBoneSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BONE,
     .paletteTag = ANIM_TAG_BONE,

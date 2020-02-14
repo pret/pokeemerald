@@ -21,7 +21,7 @@ void sub_810D4F4(struct Sprite *);
 void sub_810D608(struct Sprite *);
 void sub_810D714(struct Sprite *);
 void sub_810D874(struct Sprite *);
-void sub_810D984(struct Sprite *);
+static void AnimArmThrustHit(struct Sprite *);
 void sub_810DA10(struct Sprite *);
 void sub_810DA7C(struct Sprite *);
 static void sub_810D0B8(struct Sprite *);
@@ -174,7 +174,8 @@ const union AffineAnimCmd *const gUnknown_08595F10[] =
     gUnknown_08595EF8,
 };
 
-const struct SpriteTemplate gUnknown_08595F14 =
+// Blaze Kick / Meteor Mash
+const struct SpriteTemplate gSpinningHandOrFootSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -299,7 +300,7 @@ const struct SpriteTemplate gUnknown_0859601C =
     .callback = sub_810D874,
 };
 
-const struct SpriteTemplate gUnknown_08596034 =
+const struct SpriteTemplate gArmThrustHandSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -307,7 +308,7 @@ const struct SpriteTemplate gUnknown_08596034 =
     .anims = gUnknown_08595E54,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810D984,
+    .callback = AnimArmThrustHit,
 };
 
 const union AnimCmd gUnknown_0859604C[] =
@@ -935,7 +936,7 @@ static void sub_810D960(struct Sprite *sprite)
     sprite->data[0]++;
 }
 
-void sub_810D984(struct Sprite *sprite)
+static void AnimArmThrustHit(struct Sprite *sprite)
 {
     u8 turn;
 

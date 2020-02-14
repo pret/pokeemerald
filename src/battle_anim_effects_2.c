@@ -3114,7 +3114,7 @@ static void FakeOutStep2(u8 taskId)
     }
 }
 
-void sub_8106020(u8 taskId)
+void AnimTask_StretchTargetUp(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     if (++gTasks[taskId].data[0] == 1)

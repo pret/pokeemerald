@@ -4,9 +4,9 @@
 #include "constants/rgb.h"
 
 void sub_810DBAC(struct Sprite *);
-void sub_810DC2C(struct Sprite *);
+void AnimAcidPoisonBubble(struct Sprite *);
 void sub_810DCD0(struct Sprite *);
-void sub_810DD50(struct Sprite *);
+void AnimAcidPoisonDroplet(struct Sprite *);
 void AnimBubbleEffect(struct Sprite *);
 static void sub_810DC10(struct Sprite *);
 static void sub_810DCB4(struct Sprite *);
@@ -108,7 +108,7 @@ const struct SpriteTemplate gUnknown_085961A8 =
     .callback = sub_810DBAC,
 };
 
-const struct SpriteTemplate gUnknown_085961C0 =
+const struct SpriteTemplate gAcidPoisonBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
@@ -116,7 +116,7 @@ const struct SpriteTemplate gUnknown_085961C0 =
     .anims = gUnknown_08596164,
     .images = NULL,
     .affineAnims = gUnknown_085961A0,
-    .callback = sub_810DC2C,
+    .callback = AnimAcidPoisonBubble,
 };
 
 const struct SpriteTemplate gUnknown_085961D8 =
@@ -142,7 +142,7 @@ const union AffineAnimCmd *const gUnknown_08596208[] =
     gUnknown_085961F0,
 };
 
-const struct SpriteTemplate gUnknown_0859620C =
+const struct SpriteTemplate gAcidPoisonDropletSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
@@ -150,7 +150,7 @@ const struct SpriteTemplate gUnknown_0859620C =
     .anims = gUnknown_08596168,
     .images = NULL,
     .affineAnims = gUnknown_08596208,
-    .callback = sub_810DD50,
+    .callback = AnimAcidPoisonDroplet,
 };
 
 const union AffineAnimCmd gUnknown_08596224[] =
@@ -210,7 +210,7 @@ static void sub_810DC10(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_810DC2C(struct Sprite *sprite)
+void AnimAcidPoisonBubble(struct Sprite *sprite)
 {
     s16 l1, l2;
     if (!gBattleAnimArgs[3])
@@ -265,7 +265,7 @@ static void sub_810DD24(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_810DD50(struct Sprite *sprite)
+void AnimAcidPoisonDroplet(struct Sprite *sprite)
 {
     SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 

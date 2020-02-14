@@ -219,7 +219,7 @@ const union AffineAnimCmd *const gUnknown_08595B64[] =
     gUnknown_08595B44,
 };
 
-const struct SpriteTemplate gUnknown_08595B68 =
+const struct SpriteTemplate gIceCrystalHitLargeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -230,7 +230,7 @@ const struct SpriteTemplate gUnknown_08595B68 =
     .callback = AnimIceEffectParticle,
 };
 
-const struct SpriteTemplate gUnknown_08595B80 =
+const struct SpriteTemplate gIceCrystalHitSmallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -241,7 +241,7 @@ const struct SpriteTemplate gUnknown_08595B80 =
     .callback = AnimIceEffectParticle,
 };
 
-const struct SpriteTemplate gUnknown_08595B98 =
+const struct SpriteTemplate gSwirlingSnowballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -252,7 +252,7 @@ const struct SpriteTemplate gUnknown_08595B98 =
     .callback = AnimSwirlingSnowball_Step1,
 };
 
-const struct SpriteTemplate gUnknown_08595BB0 =
+const struct SpriteTemplate gBlizzardIceCrystalSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -1452,7 +1452,7 @@ void AnimHailBegin(struct Sprite *sprite)
 
     if (sprite->data[0] == 1 && sprite->data[5] == 0)
     {
-        spriteId = CreateSprite(&gUnknown_08595B68,
+        spriteId = CreateSprite(&gIceCrystalHitLargeSpriteTemplate,
                                 sprite->data[3], sprite->data[4], sprite->subpriority);
 
         sprite->data[0] = spriteId;

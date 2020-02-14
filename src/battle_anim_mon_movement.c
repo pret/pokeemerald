@@ -870,7 +870,7 @@ void AnimTask_ScaleMonAndRestoreStep(u8 taskId)
     }
 }
 
-void sub_80D6134(u8 taskId)
+void AminTask_DipMonSpriteToSide(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
