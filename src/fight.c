@@ -8,14 +8,14 @@
 
 void unc_080B08A0(struct Sprite *);
 void sub_810CE68(struct Sprite *);
-void sub_810CEB4(struct Sprite *);
-void AnimBasicFistOrFoot(struct Sprite *);
-void sub_810CF30(struct Sprite *);
-void sub_810D10C(struct Sprite *);
+static void AnimJumpKick(struct Sprite *);
+static void AnimBasicFistOrFoot(struct Sprite *);
+static void AnimFistOrFootRandomPos(struct Sprite *);
+static void AnimCrossChopHand(struct Sprite *);
 void sub_810D1B4(struct Sprite *);
-void AnimSpinningKickOrPunch(struct Sprite *);
-void AnimStompFoot(struct Sprite *);
-void sub_810D37C(struct Sprite *);
+static void AnimSpinningKickOrPunch(struct Sprite *);
+static void AnimStompFoot(struct Sprite *);
+static void AnimDizzyPunchDuck(struct Sprite *);
 void sub_810D40C(struct Sprite *);
 void sub_810D4F4(struct Sprite *);
 void sub_810D608(struct Sprite *);
@@ -23,7 +23,7 @@ void sub_810D714(struct Sprite *);
 void sub_810D874(struct Sprite *);
 static void AnimArmThrustHit(struct Sprite *);
 void sub_810DA10(struct Sprite *);
-void sub_810DA7C(struct Sprite *);
+static void AnimFocusPunchFist(struct Sprite *);
 static void sub_810D0B8(struct Sprite *);
 static void sub_810D164(struct Sprite *);
 static void sub_810D240(struct Sprite *);
@@ -107,7 +107,7 @@ const struct SpriteTemplate gUnknown_08595E68 =
     .callback = sub_810CE68,
 };
 
-const struct SpriteTemplate gUnknown_08595E80 =
+const struct SpriteTemplate gJumpKickSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -115,7 +115,7 @@ const struct SpriteTemplate gUnknown_08595E80 =
     .anims = gUnknown_08595E54,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810CEB4,
+    .callback = AnimJumpKick,
 };
 
 const struct SpriteTemplate gFistFootSpriteTemplate =
@@ -129,7 +129,7 @@ const struct SpriteTemplate gFistFootSpriteTemplate =
     .callback = AnimBasicFistOrFoot,
 };
 
-const struct SpriteTemplate gUnknown_08595EB0 =
+const struct SpriteTemplate gFistFootRandomPosSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -137,10 +137,10 @@ const struct SpriteTemplate gUnknown_08595EB0 =
     .anims = gUnknown_08595E54,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810CF30,
+    .callback = AnimFistOrFootRandomPos,
 };
 
-const struct SpriteTemplate gUnknown_08595EC8 =
+const struct SpriteTemplate gCrossChopHandSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -148,7 +148,7 @@ const struct SpriteTemplate gUnknown_08595EC8 =
     .anims = gUnknown_08595E60,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810D10C,
+    .callback = AnimCrossChopHand,
 };
 
 const struct SpriteTemplate gUnknown_08595EE0 =
@@ -220,7 +220,7 @@ const struct SpriteTemplate gUnknown_08595F60 =
     .callback = AnimStompFoot,
 };
 
-const struct SpriteTemplate gUnknown_08595F78 =
+const struct SpriteTemplate gDizzyPunchDuckSpriteTemplate =
 {
     .tileTag = ANIM_TAG_DUCK,
     .paletteTag = ANIM_TAG_DUCK,
@@ -228,7 +228,7 @@ const struct SpriteTemplate gUnknown_08595F78 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810D37C,
+    .callback = AnimDizzyPunchDuck,
 };
 
 const struct SpriteTemplate gUnknown_08595F90 =
@@ -404,7 +404,7 @@ const union AffineAnimCmd *const gUnknown_08596100[] =
     gUnknown_085960E8,
 };
 
-const struct SpriteTemplate gUnknown_08596104 =
+const struct SpriteTemplate gFocusPunchFistSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -412,7 +412,7 @@ const struct SpriteTemplate gUnknown_08596104 =
     .anims = gUnknown_08595E54,
     .images = NULL,
     .affineAnims = gUnknown_08596100,
-    .callback = sub_810DA7C,
+    .callback = AnimFocusPunchFist,
 };
 
 void unc_080B08A0(struct Sprite *sprite)
@@ -434,10 +434,10 @@ void sub_810CE68(struct Sprite *sprite)
 
     StartSpriteAnim(sprite, gBattleAnimArgs[6]);
     gBattleAnimArgs[6] = 0;
-    AnimSnoreZ(sprite);
+    AnimTravelDiagonally(sprite);
 }
 
-void sub_810CEB4(struct Sprite *sprite)
+static void AnimJumpKick(struct Sprite *sprite)
 {
     if (IsContest())
     {
@@ -455,7 +455,7 @@ void sub_810CEB4(struct Sprite *sprite)
 // arg 2: duration
 // arg 3: ? (todo: related to initial pixel offsets)
 // arg 4: anim num
-void AnimBasicFistOrFoot(struct Sprite *sprite)
+static void AnimBasicFistOrFoot(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
 
@@ -469,7 +469,7 @@ void AnimBasicFistOrFoot(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_810CF30(struct Sprite *sprite)
+static void AnimFistOrFootRandomPos(struct Sprite *sprite)
 {
     u8 battler;
     s16 xMod, yMod;
@@ -533,7 +533,7 @@ static void sub_810D0B8(struct Sprite *sprite)
     }
 }
 
-void sub_810D10C(struct Sprite *sprite)
+static void AnimCrossChopHand(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->data[0] = 30;
@@ -614,7 +614,7 @@ static void sub_810D240(struct Sprite *sprite)
 // arg 1: initial y pixel offset
 // arg 2: anim num
 // arg 3: spin duration
-void AnimSpinningKickOrPunch(struct Sprite *sprite)
+static void AnimSpinningKickOrPunch(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     StartSpriteAnim(sprite, gBattleAnimArgs[2]);
@@ -638,7 +638,7 @@ static void AnimSpinningKickOrPunchFinish(struct Sprite *sprite)
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: initial wait duration
-void AnimStompFoot(struct Sprite *sprite)
+static void AnimStompFoot(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];
@@ -667,7 +667,7 @@ static void AnimStompFootEnd(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_810D37C(struct Sprite *sprite)
+static void AnimDizzyPunchDuck(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -983,7 +983,8 @@ void sub_810DA10(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_810DA7C(struct Sprite *sprite)
+// Fist shrinks toward target and shakes
+static void AnimFocusPunchFist(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {

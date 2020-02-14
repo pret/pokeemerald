@@ -21,13 +21,13 @@ void sub_8107408(struct Sprite *);
 void sub_8107430(struct Sprite *);
 static void AnimAuroraBeamRings(struct Sprite *);
 void sub_81074E4(struct Sprite *);
-void sub_81075EC(struct Sprite *);
+static void AnimToTargetInSinWave(struct Sprite *);
 void sub_8107674(struct Sprite *);
-void sub_8107730(struct Sprite *);
-void sub_81077A4(struct Sprite *);
-void sub_81077C0(struct Sprite *);
+static void AnimHydroCannonCharge(struct Sprite *);
+static void AnimWaitForHydroCannonChargeEnd(struct Sprite *);
+static void AnimHydroCannonBeam(struct Sprite *);
 void sub_8107894(struct Sprite *);
-void sub_81078D0(struct Sprite *);
+static void AnimSmallBubblePair(struct Sprite *);
 void sub_810790C(struct Sprite *);
 void sub_8108034(struct Sprite *);
 void sub_8108098(struct Sprite *);
@@ -41,7 +41,7 @@ void sub_8108C08(struct Sprite *);
 void sub_8108C54(struct Sprite *);
 void AnimWaterPulseRing_Step(struct Sprite *);
 void sub_810756C(u8);
-void sub_81076F4(u8);
+static void AnimTask_RunSinAnimTimer(u8);
 void sub_8107B84(u8);
 void sub_8107CC4(u8);
 void sub_8107D58(u8);
@@ -181,7 +181,7 @@ const union AnimCmd *const gUnknown_085950E0[] =
     gUnknown_085950CC,
 };
 
-const struct SpriteTemplate gUnknown_085950E4 =
+const struct SpriteTemplate gHydroPumpOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
@@ -189,7 +189,7 @@ const struct SpriteTemplate gUnknown_085950E4 =
     .anims = gUnknown_085950E0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
 const struct SpriteTemplate gUnknown_085950FC =
@@ -200,7 +200,7 @@ const struct SpriteTemplate gUnknown_085950FC =
     .anims = gUnknown_085950E0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
 const struct SpriteTemplate gUnknown_08595114 =
@@ -211,7 +211,7 @@ const struct SpriteTemplate gUnknown_08595114 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
 const struct SpriteTemplate gUnknown_0859512C =
@@ -222,7 +222,7 @@ const struct SpriteTemplate gUnknown_0859512C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
 const union AnimCmd gUnknown_08595144[] =
@@ -238,7 +238,7 @@ const union AnimCmd *const gUnknown_08595154[] =
     gUnknown_08595144,
 };
 
-const struct SpriteTemplate gUnknown_08595158 =
+const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -246,7 +246,7 @@ const struct SpriteTemplate gUnknown_08595158 =
     .anims = gUnknown_08595154,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
 const struct SpriteTemplate gUnknown_08595170 =
@@ -257,7 +257,7 @@ const struct SpriteTemplate gUnknown_08595170 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gGrowingRingAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
 const union AffineAnimCmd gUnknown_08595188[] =
@@ -284,7 +284,7 @@ const union AffineAnimCmd *const gUnknown_085951BC[] =
     gUnknown_085951A8,
 };
 
-const struct SpriteTemplate gUnknown_085951C0 =
+const struct SpriteTemplate gHydroCannonChargeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
@@ -292,10 +292,10 @@ const struct SpriteTemplate gUnknown_085951C0 =
     .anims = gUnknown_085950E0,
     .images = NULL,
     .affineAnims = gUnknown_085951B8,
-    .callback = sub_8107730,
+    .callback = AnimHydroCannonCharge,
 };
 
-const struct SpriteTemplate gUnknown_085951D8 =
+const struct SpriteTemplate gHydroCannonBeamSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
@@ -303,7 +303,7 @@ const struct SpriteTemplate gUnknown_085951D8 =
     .anims = gUnknown_085950E0,
     .images = NULL,
     .affineAnims = gUnknown_085951BC,
-    .callback = sub_81077C0,
+    .callback = AnimHydroCannonBeam,
 };
 
 const union AnimCmd gUnknown_085951F0[] =
@@ -352,16 +352,16 @@ const struct SpriteTemplate gUnknown_08595220 =
 
 const struct SpriteTemplate gSmallBubblePairSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS, // Little confusing. ice_crystals_4, which are basically bubbles. TODO: rename?
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gUnknown_08595AB8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81078D0,
+    .callback = AnimSmallBubblePair,
 };
 
-const struct SpriteTemplate gUnknown_08595250 =
+const struct SpriteTemplate gSmallDriftingBubblesSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -721,7 +721,8 @@ _081075DE:\n\
 }
 #endif
 
-void sub_81075EC(struct Sprite *sprite)
+// For animating undulating beam attacks (e.g. Flamethrower, Hydro Pump, Signal Beam)
+static void AnimToTargetInSinWave(struct Sprite *sprite)
 {
     u16 retArg;
 
@@ -764,21 +765,22 @@ void sub_8107674(struct Sprite *sprite)
     }
 }
 
-void sub_81076C8(u8 taskId)
+void AnimTask_StartSinAnimTimer(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gBattleAnimArgs[ARG_RET_ID] = 0;
-    gTasks[taskId].func = sub_81076F4;
+    gTasks[taskId].func = AnimTask_RunSinAnimTimer;
 }
 
-void sub_81076F4(u8 taskId)
+static void AnimTask_RunSinAnimTimer(u8 taskId)
 {
     gBattleAnimArgs[ARG_RET_ID] = (gBattleAnimArgs[ARG_RET_ID] + 3) & 0xFF;
     if (--gTasks[taskId].data[0] == 0)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_8107730(struct Sprite *sprite)
+// Flashing blue orbs grow in size near the attacker. First stage of Hydro Cannon
+static void AnimHydroCannonCharge(struct Sprite *sprite)
 {
     u8 priority;
 
@@ -804,16 +806,17 @@ void sub_8107730(struct Sprite *sprite)
         sprite->pos2.x = -10;
         sprite->subpriority = priority + 2;
     }
-    sprite->callback = sub_81077A4;
+    sprite->callback = AnimWaitForHydroCannonChargeEnd;
 }
 
-void sub_81077A4(struct Sprite *sprite)
+static void AnimWaitForHydroCannonChargeEnd(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81077C0(struct Sprite *sprite)
+// Flashing blue orbs move from the attacker to the target. Second stage of Hydro Cannon
+static void AnimHydroCannonBeam(struct Sprite *sprite)
 {
     bool8 animType;
     u8 coordType;
@@ -851,9 +854,9 @@ void sub_8107894(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_81078D0(struct Sprite *sprite)
+static void AnimSmallBubblePair(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[3])
+    if (gBattleAnimArgs[3] != ANIM_ATTACKER)
         InitSpritePosToAnimTarget(sprite, TRUE);
     else
         InitSpritePosToAnimAttacker(sprite, TRUE);
@@ -1719,17 +1722,17 @@ void sub_810862C(u8 taskId)
         }
         if (task->data[10] != 0 && task->data[13] == 0)
         {
-            gBattleAnimArgs[0] = 1;
+            gBattleAnimArgs[0] = ANIM_TARGET;
             gBattleAnimArgs[1] = 0;
             gBattleAnimArgs[2] = 12;
-            taskId2 = CreateTask(sub_81152DC, 80);
+            taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
             if (taskId2 != 0xFF)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;
             }
-            gBattleAnimArgs[0] = 3;
-            taskId2 = CreateTask(sub_81152DC, 80);
+            gBattleAnimArgs[0] = ANIM_DEF_PARTNER;
+            taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
             if (taskId2 != 0xFF)
             {
                 gTasks[taskId2].func(taskId2);

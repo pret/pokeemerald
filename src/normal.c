@@ -12,12 +12,12 @@ u32 UnpackSelectedBattleAnimPalettes(s16);
 void sub_81158A4(struct Sprite *);
 void sub_81159B4(struct Sprite *);
 void sub_81160A4(struct Sprite *);
-void sub_8116388(struct Sprite *);
+static void AnimBasicHitSplat(struct Sprite *);
 void sub_8116420(struct Sprite *);
-void sub_8116458(struct Sprite *);
-void sub_81164F0(struct Sprite *);
+static void AnimHitSplatRandom(struct Sprite *);
+static void AnimExtremeSpeedHitSplat(struct Sprite *);
 void sub_8116560(struct Sprite *);
-void sub_81165A8(struct Sprite *);
+static void AnimFlashingHitSplat(struct Sprite *);
 static void AnimConfusionDuckStep(struct Sprite *);
 static void AnimSimplePaletteBlendStep(struct Sprite *);
 static void sub_81158F8(struct Sprite *);
@@ -173,7 +173,7 @@ const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
-    .callback = sub_8116388,
+    .callback = AnimBasicHitSplat,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_8597370 =
@@ -195,10 +195,10 @@ const struct SpriteTemplate gWaterHitSplatSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
-    .callback = sub_8116388,
+    .callback = AnimBasicHitSplat,
 };
 
-const struct SpriteTemplate gUnknown_085973A0 =
+const struct SpriteTemplate gRandomPosHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -206,10 +206,10 @@ const struct SpriteTemplate gUnknown_085973A0 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
-    .callback = sub_8116458,
+    .callback = AnimHitSplatRandom,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_85973B8 =
+const struct SpriteTemplate gExtremeSpeedHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -217,10 +217,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_85973B8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
-    .callback = sub_81164F0,
+    .callback = AnimExtremeSpeedHitSplat,
 };
 
-const struct SpriteTemplate gUnknown_085973D0 =
+const struct SpriteTemplate gCrossImpactSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CROSS_IMPACT,
     .paletteTag = ANIM_TAG_CROSS_IMPACT,
@@ -231,7 +231,7 @@ const struct SpriteTemplate gUnknown_085973D0 =
     .callback = sub_8116560,
 };
 
-const struct SpriteTemplate gUnknown_085973E8 =
+const struct SpriteTemplate gFlashingHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -239,7 +239,7 @@ const struct SpriteTemplate gUnknown_085973E8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597348,
-    .callback = sub_81165A8,
+    .callback = AnimFlashingHitSplat,
 };
 
 const struct SpriteTemplate gUnknown_08597400 =
@@ -414,12 +414,12 @@ void sub_81159B4(struct Sprite *sprite)
 }
 
 // Task data for AnimTask_BlendCycleMonColor
-#define tPalSelector   data[0]
-#define tDelay         data[1]
-#define tNumBlends     data[2]
-#define tInitialBlendY data[3]
-#define tTargetBlendY  data[4]
-#define tBlendColor    data[5]
+#define tPalSelector   data[0] // arg0
+#define tDelay         data[1] // arg1
+#define tNumBlends     data[2] // arg2
+#define tInitialBlendY data[3] // arg3
+#define tTargetBlendY  data[4] // arg4
+#define tBlendColor    data[5] // arg5
 #define tRestoreBlend  data[8]
 
 // Blends mon sprite to designated color or back alternately tNumBlends times 
@@ -703,7 +703,7 @@ static void sub_8115EB8(u8 taskId)
     }
 }
 
-void sub_8115F10(u8 taskId)
+void AnimTask_InvertScreenColor(u8 taskId)
 {
     u32 selectedPalettes = 0;
     u8 attackerBattler = gBattleAnimAttacker;
@@ -895,10 +895,10 @@ static void sub_81162F8(u8 taskId)
     }
 }
 
-void sub_8116388(struct Sprite *sprite)
+static void AnimBasicHitSplat(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
-    if (gBattleAnimArgs[2] == 0)
+    if (gBattleAnimArgs[2] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 1);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
@@ -910,7 +910,7 @@ void sub_8116388(struct Sprite *sprite)
 static void sub_81163D0(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
-    if (gBattleAnimArgs[2] == 0)
+    if (gBattleAnimArgs[2] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 1);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
@@ -925,16 +925,16 @@ void sub_8116420(struct Sprite *sprite)
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER && !IsContest())
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     
-    sub_8116388(sprite);
+    AnimBasicHitSplat(sprite);
 }
 
-void sub_8116458(struct Sprite *sprite)
+static void AnimHitSplatRandom(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[1] == -1)
         gBattleAnimArgs[1] = Random2() & 3;
 
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[1]);
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 0);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
@@ -946,7 +946,7 @@ void sub_8116458(struct Sprite *sprite)
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
 }
 
-void sub_81164F0(struct Sprite *sprite)
+static void AnimExtremeSpeedHitSplat(struct Sprite *sprite)
 {
     sprite->data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
     sprite->pos1.x = gSprites[sprite->data[0]].pos1.x + gSprites[sprite->data[0]].pos2.x;
@@ -960,7 +960,7 @@ void sub_81164F0(struct Sprite *sprite)
 
 void sub_8116560(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[2] == 0)
+    if (gBattleAnimArgs[2] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 1);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
@@ -970,10 +970,10 @@ void sub_8116560(struct Sprite *sprite)
     sprite->callback = WaitAnimForDuration;
 }
 
-void sub_81165A8(struct Sprite *sprite)
+static void AnimFlashingHitSplat(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
-    if (gBattleAnimArgs[2] == 0)
+    if (gBattleAnimArgs[2] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 1);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);

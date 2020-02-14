@@ -393,7 +393,7 @@
 #define B_ANIM_STATUS_WRAPPED           0x9 // does not actually exist
 
 // Most tasks return a value to gBattleAnimArgs[7].
-#define ARG_RET_ID 0x7
+#define ARG_RET_ID 7
 
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0

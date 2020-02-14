@@ -158,7 +158,7 @@ const struct SpriteTemplate gUnknown_08596624 =
     .callback = sub_810F58C,
 };
 
-const struct SpriteTemplate gUnknown_0859663C =
+const struct SpriteTemplate gGoldRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GOLD_RING,
     .paletteTag = ANIM_TAG_GOLD_RING,
@@ -947,7 +947,9 @@ void sub_810FDF0(struct Sprite *sprite)
     }
 }
 
-void sub_810FE14(u8 taskId)
+// The scanline effect that distorts the target during Extrasensory by segmenting the mon vertically and shifting the slices
+// arg0: Stage. Stage 0 is a slight right distortion, 1 is a medium left distortion, and 2 is a severe right distortion
+void AnimTask_ExtrasensoryDistortion(u8 taskId)
 {
     s16 i;
     u8 yOffset;
@@ -1045,7 +1047,9 @@ static void sub_810FF34(u8 taskId)
     }
 }
 
-void sub_8110034(u8 taskId)
+// Creates a cloned transparent sprite of the battler that grows and then shrinks back to original size. Used by Extrasensory
+// arg0: battler
+void AnimTask_TransparentCloneGrowAndShrink(u8 taskId)
 {
     s16 spriteId;
     s16 matrixNum;

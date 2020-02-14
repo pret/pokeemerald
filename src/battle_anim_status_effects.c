@@ -112,7 +112,7 @@ static const union AnimCmd *const sSpriteAnimTable_853EE80[] =
     sSpriteAnim_853EE68
 };
 
-const struct SpriteTemplate gUnknown_0853EE84 =
+const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
@@ -120,7 +120,7 @@ const struct SpriteTemplate gUnknown_0853EE84 =
     .anims = sSpriteAnimTable_853EE80,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8B64,
+    .callback = AnimSpinningSparkle,
 };
 
 const struct SpriteTemplate gUnknown_0853EE9C =

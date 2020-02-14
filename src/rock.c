@@ -14,7 +14,7 @@ extern const union AnimCmd *const gUnknown_085954D0[];
 
 void sub_81109F0(struct Sprite *);
 void sub_8110AB4(struct Sprite *);
-void AnimDirtParticleAcrossScreen(struct Sprite *);
+static void AnimDirtParticleAcrossScreen(struct Sprite *);
 void AnimRaiseSprite(struct Sprite *);
 void sub_81110A4(u8 taskId);
 void sub_811131C(struct Sprite *);
@@ -112,7 +112,7 @@ const struct SpriteTemplate gUnknown_08596B70 =
     .callback = sub_8110B38,
 };
 
-const struct SpriteTemplate gUnknown_08596B88 =
+const struct SpriteTemplate gFireSpinSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -123,7 +123,7 @@ const struct SpriteTemplate gUnknown_08596B88 =
     .callback = sub_8110B38,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8596BA0 =
+const struct SpriteTemplate gFlyingDirtSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FLYING_DIRT,
     .paletteTag = ANIM_TAG_FLYING_DIRT,
@@ -499,7 +499,7 @@ static void sub_8110CB0(u8 taskId)
 // arg 1: projectile speed
 // arg 2: y pixel drop
 // arg 3: ??? unknown (possibly a color bit)
-void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
+static void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
