@@ -127,12 +127,9 @@ static bool8 CheckFeebas(void)
     return FALSE;
 }
 
-// The number 1103515245 comes from the example implementation of rand and srand
-// in the ISO C standard.
-
 static u16 FeebasRandom(void)
 {
-    sFeebasRngValue = (1103515245 * sFeebasRngValue) + 12345;
+    sFeebasRngValue = ISO_RANDOMIZE2(sFeebasRngValue);
     return sFeebasRngValue >> 16;
 }
 

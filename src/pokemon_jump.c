@@ -1674,8 +1674,7 @@ static void sub_802BF7C(void)
 
 static int sub_802C098(void)
 {
-    // The number 1103515245 comes from the example implementation of rand and srand
-    gUnknown_02022CFC->unk24 = gUnknown_02022CFC->unk24 * 1103515245 + 24691;
+    gUnknown_02022CFC->unk24 = ISO_RANDOMIZE1(gUnknown_02022CFC->unk24);
     return gUnknown_02022CFC->unk24 >> 16;
 }
 
