@@ -10,6 +10,8 @@ u16 Random2(void);
 
 //Returns a 32-bit pseudorandom number
 #define Random32() (Random() | (Random() << 16))
+#define ISO_RANDOMIZE1(val)(1103515245 * (val) + 24691)
+#define ISO_RANDOMIZE2(val)(1103515245 * (val) + 12345)
 
 //Sets the initial seed value of the pseudorandom number generator
 void SeedRng(u16 seed);

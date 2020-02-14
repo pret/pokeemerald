@@ -10,7 +10,7 @@
 #include "constants/rgb.h"
 
 void sub_81138D4(struct Sprite *);
-void sub_81139DC(struct Sprite *);
+static void AnimBite(struct Sprite *);
 void sub_8113A90(struct Sprite *);
 void sub_81144BC(struct Sprite *);
 static void sub_811375C(u8);
@@ -96,7 +96,7 @@ const union AffineAnimCmd *const gUnknown_08597060[] =
     gUnknown_08597050,
 };
 
-const struct SpriteTemplate gUnknown_08597080 =
+const struct SpriteTemplate gSharpTeethSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SHARP_TEETH,
     .paletteTag = ANIM_TAG_SHARP_TEETH,
@@ -104,10 +104,10 @@ const struct SpriteTemplate gUnknown_08597080 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597060,
-    .callback = sub_81139DC,
+    .callback = AnimBite,
 };
 
-const struct SpriteTemplate gUnknown_08597098 =
+const struct SpriteTemplate gClampJawSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CLAMP,
     .paletteTag = ANIM_TAG_CLAMP,
@@ -115,7 +115,7 @@ const struct SpriteTemplate gUnknown_08597098 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08597060,
-    .callback = sub_81139DC,
+    .callback = AnimBite,
 };
 
 const union AffineAnimCmd gUnknown_085970B0[] =
@@ -186,7 +186,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8597138 =
     .callback = sub_81144BC,
 };
 
-void sub_81136E8(u8 taskId)
+void AnimTask_AttackerFadeToInvisible(u8 taskId)
 {
     int battler;
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
@@ -224,7 +224,7 @@ static void sub_811375C(u8 taskId)
     }
 }
 
-void sub_81137E4(u8 taskId)
+void AnimTask_AttackerFadeFromInvisible(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = BLDALPHA_BLEND(0, 16);
@@ -310,7 +310,8 @@ static void sub_8113950(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81139DC(struct Sprite *sprite)
+// Move sprite inward for Bite/Crunch and Clamp
+static void AnimBite(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];

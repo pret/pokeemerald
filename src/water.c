@@ -15,11 +15,11 @@
 
 void sub_810721C(struct Sprite *);
 void sub_8107228(struct Sprite *);
-void sub_8107260(struct Sprite *);
+static void AnimMovingWaterBubble(struct Sprite *);
 void sub_8107380(struct Sprite *);
 void sub_8107408(struct Sprite *);
 void sub_8107430(struct Sprite *);
-void sub_810744C(struct Sprite *);
+static void AnimAuroraBeamRings(struct Sprite *);
 void sub_81074E4(struct Sprite *);
 void sub_81075EC(struct Sprite *);
 void sub_8107674(struct Sprite *);
@@ -115,7 +115,7 @@ const union AnimCmd *const gUnknown_08595064[] =
     gUnknown_08595054,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8595068 =
+const struct SpriteTemplate gMovingWaterBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BUBBLE,
     .paletteTag = ANIM_TAG_BUBBLE,
@@ -123,7 +123,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8595068 =
     .anims = gUnknown_08595064,
     .images = NULL,
     .affineAnims = gUnknown_08595050,
-    .callback = sub_8107260,
+    .callback = AnimMovingWaterBubble,
 };
 
 const union AnimCmd gUnknown_08595080[] =
@@ -156,8 +156,7 @@ const union AffineAnimCmd *const gUnknown_085950B0[] =
     gUnknown_08595098,
 };
 
-// Multi-colored rings used in Aurora Beam.
-const struct SpriteTemplate gUnknown_085950B4 =
+const struct SpriteTemplate gAuroraBeamRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RAINBOW_RINGS,
     .paletteTag = ANIM_TAG_RAINBOW_RINGS,
@@ -165,7 +164,7 @@ const struct SpriteTemplate gUnknown_085950B4 =
     .anims = gUnknown_08595090,
     .images = NULL,
     .affineAnims = gUnknown_085950B0,
-    .callback = sub_810744C,
+    .callback = AnimAuroraBeamRings,
 };
 
 const union AnimCmd gUnknown_085950CC[] =
@@ -351,7 +350,7 @@ const struct SpriteTemplate gUnknown_08595220 =
     .callback = sub_8107894,
 };
 
-const struct SpriteTemplate gUnknown_08595238 =
+const struct SpriteTemplate gSmallBubblePairSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -478,7 +477,7 @@ const struct SpriteTemplate gUnknown_08595328 =
     .callback = sub_80A8EE4,
 };
 
-extern const struct SpriteTemplate gUnknown_08597388;
+extern const struct SpriteTemplate gWaterHitSplatSpriteTemplate;
 
 void AnimTask_CreateRaindrops(u8 taskId)
 {
@@ -517,7 +516,8 @@ void sub_8107228(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-void sub_8107260(struct Sprite *sprite)
+// For water bubbles that move to a dest, as in Bubble/Bubblebeam
+static void AnimMovingWaterBubble(struct Sprite *sprite)
 {
     u8 spriteId;
 
@@ -590,7 +590,7 @@ void sub_8107430(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
-void sub_810744C(struct Sprite *sprite)
+static void AnimAuroraBeamRings(struct Sprite *sprite)
 {
     s16 unkArg;
 
@@ -1762,7 +1762,7 @@ void sub_810871C(struct Task *task, u8 taskId)
     }
     task->data[11]++;
     task->data[8] = (task->data[8] + 39) & 0xFF;
-    task->data[7] = ((task->data[7] * 0x41c64e6d + 0x3039) % task->data[5]) + task->data[4];
+    task->data[7] = ((task->data[7] * 1103515245 + 12345) % task->data[5]) + task->data[4];
 }
 
 void sub_81087C0(struct Sprite *sprite)
@@ -1773,7 +1773,7 @@ void sub_81087C0(struct Sprite *sprite)
         if (sprite->pos1.y >= sprite->data[5])
         {
             gTasks[sprite->data[6]].data[10] = 1;
-            sprite->data[1] = CreateSprite(&gUnknown_08597388, sprite->pos1.x, sprite->pos1.y, 1);
+            sprite->data[1] = CreateSprite(&gWaterHitSplatSpriteTemplate, sprite->pos1.x, sprite->pos1.y, 1);
             if (sprite->data[1] != MAX_SPRITES)
             {
                 StartSpriteAffineAnim(&gSprites[sprite->data[1]], 3);

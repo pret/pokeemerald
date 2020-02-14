@@ -3863,7 +3863,8 @@ static void AnimTask_FacadeColorBlendStep(u8 taskId)
     }
 }
 
-void sub_815DFCC(u8 taskId)
+// The sliding circle effect used by Refresh and Aromatherapy
+void AnimTask_StatusClearedEffect(u8 taskId)
 {
     sub_8117854(
         taskId,

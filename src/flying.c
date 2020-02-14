@@ -24,13 +24,12 @@ void sub_810ED28(struct Sprite *);
 void sub_810ED70(struct Sprite *);
 void sub_810EDD0(struct Sprite *);
 void sub_810EE14(struct Sprite *);
-void sub_810EEF8(struct Sprite *);
+static void AnimSprayWaterDroplet(struct Sprite *);
 void sub_810EFA8(struct Sprite *);
 void sub_810F004(struct Sprite *);
 void sub_810F018(struct Sprite *);
 void sub_810F084(struct Sprite *);
 void sub_810F140(struct Sprite *);
-
 static void sub_810DE98(struct Sprite *);
 static void sub_810DF18(u8);
 static void sub_810E028(struct Sprite *);
@@ -86,7 +85,7 @@ const union AnimCmd *const gUnknown_085962D0[] =
     gUnknown_085962BC,
 };
 
-const struct SpriteTemplate gUnknown_085962D4 =
+const struct SpriteTemplate gAirWaveCrescentSpriteTemplate =
 {
     .tileTag = ANIM_TAG_AIR_WAVE_2,
     .paletteTag = ANIM_TAG_AIR_WAVE_2,
@@ -232,7 +231,7 @@ const union AffineAnimCmd *const gUnknown_0859641C[] =
     gUnknown_085963EC,
 };
 
-const struct SpriteTemplate gUnknown_08596420 =
+const struct SpriteTemplate gBounceBallShrinkSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROUND_SHADOW,
     .paletteTag = ANIM_TAG_ROUND_SHADOW,
@@ -254,7 +253,7 @@ const union AffineAnimCmd *const gUnknown_08596448[] =
     gUnknown_08596438,
 };
 
-const struct SpriteTemplate gUnknown_0859644C =
+const struct SpriteTemplate gBounceBallLandSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROUND_SHADOW,
     .paletteTag = ANIM_TAG_ROUND_SHADOW,
@@ -314,7 +313,7 @@ const struct SpriteTemplate gUnknown_085964CC =
     .callback = sub_810EE14,
 };
 
-const struct SpriteTemplate gUnknown_085964E4 =
+const struct SpriteTemplate gSprayWaterDropletSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SWEAT_BEAD,
     .paletteTag = ANIM_TAG_SWEAT_BEAD,
@@ -322,7 +321,7 @@ const struct SpriteTemplate gUnknown_085964E4 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810EEF8,
+    .callback = AnimSprayWaterDroplet,
 };
 
 const struct SpriteTemplate gUnknown_085964FC =
@@ -1111,7 +1110,8 @@ void sub_810EE14(struct Sprite *sprite)
     }
 }
 
-void sub_810EEF8(struct Sprite *sprite)
+// Launches a water droplet away from the specified battler. Used by Astonish and Dive
+static void AnimSprayWaterDroplet(struct Sprite *sprite)
 {
     int v1 = 0x1ff & Random2();
     int v2 = 0x7f & Random2();

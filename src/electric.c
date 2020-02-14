@@ -25,8 +25,8 @@ static void sub_810AAB0(struct Sprite *);
 static void sub_810AB78(u8 taskId);
 static void sub_810AC8C(struct Sprite *);
 static void sub_810ACC0(struct Sprite *);
-static void sub_810ACD8(struct Sprite *);
-static void sub_810AD30(struct Sprite *);
+static void AnimGrowingElectricOrb(struct Sprite *);
+static void AnimElectricPuff(struct Sprite *);
 static void sub_810AD98(struct Sprite *);
 static void sub_810ADF8(struct Sprite *);
 static bool8 sub_810B154(struct Task *task, u8 taskId);
@@ -331,7 +331,7 @@ const union AffineAnimCmd *const gUnknown_08595950[] =
     gUnknown_08595930,
 };
 
-const struct SpriteTemplate gUnknown_0859595C =
+const struct SpriteTemplate gGrowingElectricOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
@@ -339,7 +339,7 @@ const struct SpriteTemplate gUnknown_0859595C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08595950,
-    .callback = sub_810ACD8,
+    .callback = AnimGrowingElectricOrb,
 };
 
 const union AnimCmd gUnknown_08595974[] =
@@ -356,7 +356,7 @@ const union AnimCmd *const gUnknown_08595988[] =
     gUnknown_08595974,
 };
 
-const struct SpriteTemplate gUnknown_0859598C =
+const struct SpriteTemplate gElectricPuffSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ELECTRICITY,
     .paletteTag = ANIM_TAG_ELECTRICITY,
@@ -364,7 +364,7 @@ const struct SpriteTemplate gUnknown_0859598C =
     .anims = gUnknown_08595988,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810AD30,
+    .callback = AnimElectricPuff,
 };
 
 const struct SpriteTemplate gUnknown_085959A4 =
@@ -794,11 +794,12 @@ static void sub_810AAB0(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_810AAFC(u8 taskId)
+// Animates small electric orbs moving from around the battler inward. For Charge/Shock Wave
+void AnimTask_ElectricChargingParticles(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (!gBattleAnimArgs[0])
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         task->data[14] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         task->data[15] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -882,9 +883,10 @@ static void sub_810ACC0(struct Sprite *sprite)
     sprite->callback = sub_810AC8C;
 }
 
-static void sub_810ACD8(struct Sprite *sprite)
+// The growing orb for Charge
+static void AnimGrowingElectricOrb(struct Sprite *sprite)
 {
-    if (!gBattleAnimArgs[0])
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -899,9 +901,10 @@ static void sub_810ACD8(struct Sprite *sprite)
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
 }
 
-static void sub_810AD30(struct Sprite *sprite)
+// The quick electric burst at the end of Charge / during the Volt Tackle hit
+static void AnimElectricPuff(struct Sprite *sprite)
 {
-    if (!gBattleAnimArgs[0])
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);

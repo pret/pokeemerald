@@ -211,7 +211,8 @@ static void sub_81169A0(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_81169C0(u8 taskId)
+// Used to leave blended traces of a mon, usually to imply speed as in Agility or Aerial Ace
+void AnimTask_TraceMonBlended(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -681,7 +682,7 @@ static void sub_81175C4(u32 selectedPalettes, u16 color)
     }
 }
 
-void sub_8117610(u8 taskId)
+void AnimTask_BlendAllBattlerPalettesButAttacker(u8 taskId)
 {
     u32 battler;
     int j;
@@ -699,7 +700,7 @@ void sub_8117610(u8 taskId)
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
 }
 
-void sub_8117660(u8 taskId)
+void AnimTask_StartSlidingBg(u8 taskId)
 {
     u8 newTaskId;
 
@@ -754,18 +755,23 @@ void AnimTask_GetTargetIsAttackerPartner(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_81177E4(u8 taskId)
+#define tInvisible gBattleAnimArgs[0];
+
+// For hiding or subsequently revealing all other battlers
+void AnimTask_SetAllBattlersButAttackerInvisiblity(u8 taskId)
 {
     u16 battler;
 
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
         if (battler != gBattleAnimAttacker && IsBattlerSpriteVisible(battler))
-            gSprites[gBattlerSpriteIds[battler]].invisible = gBattleAnimArgs[0];
+            gSprites[gBattlerSpriteIds[battler]].invisible = tInvisible;
     }
 
     DestroyAnimVisualTask(taskId);
 }
+
+#undef tInvisible
 
 
 void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *gfx, const u32 *tilemap, const u32 *palette)
