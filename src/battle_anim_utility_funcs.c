@@ -45,7 +45,7 @@ const u16 gUnknown_08597418 = RGB(31, 31, 31);
 const u8 gUnknown_0859741A[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 const u8 gUnknown_0859741E[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
-void sub_8116620(u8 taskId)
+void AnimTask_BlendMonColor(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     selectedPalettes |= sub_80A76C4((gBattleAnimArgs[0] >>  7) & 1,
@@ -193,7 +193,7 @@ static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
     }
 }
 
-void sub_8116960(u8 taskId)
+void AnimTask_HardwarePaletteFade(u8 taskId)
 {
     BeginHardwarePaletteFade(
         gBattleAnimArgs[0],
@@ -271,7 +271,8 @@ static void sub_8116AD0(struct Sprite *sprite)
     }
 }
 
-void sub_8116B14(u8 taskId)
+// Only used by Curse for non-Ghost mons
+void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
 {
     u16 species;
     int spriteId, newSpriteId;
@@ -600,7 +601,7 @@ static void sub_81172EC(u8 taskId)
     }
 }
 
-void sub_8117494(u8 taskId)
+void AnimTask_Flash(u8 taskId)
 {
     u32 selectedPalettes = sub_80A76C4(1, 1, 1, 1);
     sub_81175C4(selectedPalettes, 0);
@@ -772,7 +773,6 @@ void AnimTask_SetAllBattlersButAttackerInvisiblity(u8 taskId)
 }
 
 #undef tInvisible
-
 
 void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *gfx, const u32 *tilemap, const u32 *palette)
 {
@@ -1005,9 +1005,9 @@ void sub_8117DD8(u8 taskId)
 void AnimTask_IsContest(u8 taskId)
 {
     if (IsContest())
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[7] = TRUE;
     else
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[7] = FALSE;
 
     DestroyAnimVisualTask(taskId);
 }
@@ -1022,14 +1022,14 @@ void sub_8117E94(u8 taskId)
 void AnimTask_IsTargetSameSide(u8 taskId)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[7] = TRUE;
     else
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[7] = FALSE;
 
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117F10(u8 taskId)
+void AnimTask_SetAnimTargetToBattlerTarget(u8 taskId)
 {
     gBattleAnimTarget = gBattlerTarget;
     DestroyAnimVisualTask(taskId);
@@ -1042,6 +1042,7 @@ void sub_8117F30(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
+// TODO: Rename. Also used by Faint Attack
 void AnimTask_ExtremeSpeedMoveTarget(u8 taskId)
 {
     if (IsContest())
@@ -1051,7 +1052,7 @@ void AnimTask_ExtremeSpeedMoveTarget(u8 taskId)
     else
     {
         gTasks[taskId].data[0] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible;
-        gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = 1;
+        gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = TRUE;
         gTasks[taskId].func = ExtremSpeedMoveTarget_Step;
         gAnimVisualTaskCount--;
     }

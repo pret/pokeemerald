@@ -31,14 +31,14 @@ static void sub_8112384(struct Sprite *);
 static void sub_81125E0(u8 taskId);
 static void sub_811280C(u8 taskId);
 static void sub_8112994(u8 taskId);
-static void sub_81129F0(struct Sprite *);
+static void AnimCurseNail(struct Sprite *);
 static void sub_8112A4C(struct Sprite *);
 static void sub_8112ACC(struct Sprite *);
 static void sub_8112B44(struct Sprite *);
 static void sub_8112B78(struct Sprite *);
 static void sub_8112C4C(struct Sprite *);
 static void sub_8112D10(u8 taskId);
-static void sub_8112E9C(struct Sprite *);
+static void AnimGrudgeFlame(struct Sprite *);
 static void sub_8112F60(struct Sprite *);
 static void sub_8112FB8(struct Sprite *);
 
@@ -135,7 +135,7 @@ const union AffineAnimCmd *const gUnknown_08596DB4[] =
     gUnknown_08596DA4,
 };
 
-const struct SpriteTemplate gUnknown_08596DB8 =
+const struct SpriteTemplate gWhiteShadowSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WHITE_SHADOW,
     .paletteTag = ANIM_TAG_WHITE_SHADOW,
@@ -146,7 +146,7 @@ const struct SpriteTemplate gUnknown_08596DB8 =
     .callback = sub_8112264,
 };
 
-const struct SpriteTemplate gUnknown_08596DD0 =
+const struct SpriteTemplate gCurseNailSpriteTemplate =
 {
     .tileTag = ANIM_TAG_NAIL,
     .paletteTag = ANIM_TAG_NAIL,
@@ -154,10 +154,10 @@ const struct SpriteTemplate gUnknown_08596DD0 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81129F0,
+    .callback = AnimCurseNail,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8596DE8 =
+const struct SpriteTemplate gCurseGhostSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GHOSTLY_SPIRIT,
     .paletteTag = ANIM_TAG_GHOSTLY_SPIRIT,
@@ -193,7 +193,7 @@ const union AnimCmd *const gUnknown_08596E2C[] =
     gUnknown_08596E18,
 };
 
-const struct SpriteTemplate gUnknown_08596E30 =
+const struct SpriteTemplate gGrudgeFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_FLAME,
     .paletteTag = ANIM_TAG_PURPLE_FLAME,
@@ -201,7 +201,7 @@ const struct SpriteTemplate gUnknown_08596E30 =
     .anims = gUnknown_08596E2C,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8112E9C,
+    .callback = AnimGrudgeFlame,
 };
 
 const struct SpriteTemplate gUnknown_08596E48 =
@@ -789,7 +789,7 @@ static void sub_8112384(struct Sprite *sprite)
     }
 }
 
-void sub_81123C4(u8 taskId)
+void AnimTask_DestinyBondWhiteShadow(u8 taskId)
 {
     struct Task *task;
     s16 battler;
@@ -811,13 +811,13 @@ void sub_81123C4(u8 taskId)
     baseY = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM);
     if (!IsContest())
     {
-        for (battler = 0; battler < 4; battler++)
+        for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
         {
             if (battler != gBattleAnimAttacker
              && battler != (gBattleAnimAttacker ^ 2)
              && IsBattlerSpriteVisible(battler))
             {
-                spriteId = CreateSprite(&gUnknown_08596DB8, baseX, baseY, 55);
+                spriteId = CreateSprite(&gWhiteShadowSpriteTemplate, baseX, baseY, 55);
                 if (spriteId != MAX_SPRITES)
                 {
                     x = GetBattlerSpriteCoord(battler, 2);
@@ -839,7 +839,7 @@ void sub_81123C4(u8 taskId)
     }
     else
     {
-        spriteId = CreateSprite(&gUnknown_08596DB8, baseX, baseY, 55);
+        spriteId = CreateSprite(&gWhiteShadowSpriteTemplate, baseX, baseY, 55);
         if (spriteId != MAX_SPRITES)
         {
             x = 48;
@@ -1029,7 +1029,7 @@ static void sub_8112994(u8 taskId)
     }
 }
 
-static void sub_81129F0(struct Sprite *sprite)
+static void AnimCurseNail(struct Sprite *sprite)
 {
     s16 xDelta;
     s16 xDelta2;
@@ -1169,7 +1169,7 @@ static void sub_8112C4C(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_8112C6C(u8 taskId)
+void AnimTask_GrudgeFlames(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1200,7 +1200,7 @@ static void sub_8112D10(u8 taskId)
     case 0:
         for (i = 0; i < 6; i++)
         {
-            spriteId = CreateSprite(&gUnknown_08596E30, task->data[9], task->data[10], task->data[6]);
+            spriteId = CreateSprite(&gGrudgeFlameSpriteTemplate, task->data[9], task->data[10], task->data[6]);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].data[0] = taskId;
@@ -1274,7 +1274,7 @@ static void sub_8112D10(u8 taskId)
     }
 }
 
-static void sub_8112E9C(struct Sprite *sprite)
+static void AnimGrudgeFlame(struct Sprite *sprite)
 {
     u16 index;
 

@@ -6,9 +6,9 @@
 #include "constants/rgb.h"
 
 void sub_8113064(struct Sprite *);
-void sub_81131B4(struct Sprite *);
-void sub_8113224(struct Sprite *);
-void sub_8113250(struct Sprite *);
+static void AnimDragonRageFirePlume(struct Sprite *);
+static void AnimDragonFireToTarget(struct Sprite *);
+static void AnimDragonDanceOrb(struct Sprite *);
 void sub_81135EC(struct Sprite *);
 static void sub_81132E0(struct Sprite *);
 static void sub_81134B8(u8);
@@ -85,7 +85,7 @@ const union AffineAnimCmd *const gUnknown_08596EEC[] =
     gUnknown_08596ED4,
 };
 
-const struct SpriteTemplate gUnknown_08596EF4 =
+const struct SpriteTemplate gDragonBreathFireSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -93,7 +93,7 @@ const struct SpriteTemplate gUnknown_08596EF4 =
     .anims = gUnknown_08596EB4,
     .images = NULL,
     .affineAnims = gUnknown_08596EEC,
-    .callback = sub_8113224,
+    .callback = AnimDragonFireToTarget,
 };
 
 const union AnimCmd gUnknown_08596F0C[] =
@@ -111,7 +111,7 @@ const union AnimCmd *const gUnknown_08596F24[] =
     gUnknown_08596F0C,
 };
 
-const struct SpriteTemplate gUnknown_08596F28 =
+const struct SpriteTemplate gDragonRageFirePlumeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
@@ -119,7 +119,7 @@ const struct SpriteTemplate gUnknown_08596F28 =
     .anims = gUnknown_08596F24,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81131B4,
+    .callback = AnimDragonRageFirePlume,
 };
 
 const union AnimCmd gUnknown_08596F40[] =
@@ -154,7 +154,7 @@ const union AffineAnimCmd *const gUnknown_08596F78[] =
     gUnknown_08596F68,
 };
 
-const struct SpriteTemplate gUnknown_08596F80 =
+const struct SpriteTemplate gDragonRageFireSpitSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -162,10 +162,10 @@ const struct SpriteTemplate gUnknown_08596F80 =
     .anims = gUnknown_08596F50,
     .images = NULL,
     .affineAnims = gUnknown_08596F78,
-    .callback = sub_8113224,
+    .callback = AnimDragonFireToTarget,
 };
 
-const struct SpriteTemplate gUnknown_08596F98 =
+const struct SpriteTemplate gDragonDanceOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HOLLOW_ORB,
     .paletteTag = ANIM_TAG_HOLLOW_ORB,
@@ -173,7 +173,7 @@ const struct SpriteTemplate gUnknown_08596F98 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8113250,
+    .callback = AnimDragonDanceOrb,
 };
 
 const struct SpriteTemplate gUnknown_08596FB0 =
@@ -238,7 +238,7 @@ static void sub_8113100(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
-void sub_81131B4(struct Sprite *sprite)
+static void AnimDragonRageFirePlume(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
@@ -257,7 +257,7 @@ void sub_81131B4(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
-void sub_8113224(struct Sprite *sprite)
+static void AnimDragonFireToTarget(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         StartSpriteAffineAnim(sprite, 1);
@@ -265,7 +265,7 @@ void sub_8113224(struct Sprite *sprite)
     sub_8113100(sprite);
 }
 
-void sub_8113250(struct Sprite *sprite)
+static void AnimDragonDanceOrb(struct Sprite *sprite)
 {
     u16 r5;
     u16 r0;

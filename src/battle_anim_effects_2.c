@@ -87,7 +87,7 @@ static void AnimSoftBoiledEgg_Step3_Callback1(struct Sprite *);
 static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *);
 static void AnimSoftBoiledEgg_Step4(struct Sprite *);
 static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *);
-static void StretchAttacker_Step(u8);
+static void AttackerStretchAndDisappear_Step(u8);
 static void ExtremeSpeedImpact_Step(u8);
 static void ExtremeSpeedMonReappear_Step(u8);
 static void SpeedDust_Step1(u8);
@@ -632,7 +632,7 @@ const struct SpriteTemplate gSnoreZSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSnoreZ,
+    .callback = AnimTravelDiagonally,
 };
 
 const union AnimCmd gExplosionAnimCmds[] =
@@ -877,7 +877,9 @@ const struct SpriteTemplate gBellSpriteTemplate =
     .callback = AnimSpriteOnMonPos,
 };
 
-const u16 gMusicNotePaletteTagsTable[] =
+#define NUM_MUSIC_NOTE_PAL_TAGS  3
+
+static const u16 sMusicNotePaletteTagsTable[NUM_MUSIC_NOTE_PAL_TAGS] =
 {
     ANIM_TAG_MUSIC_NOTES_2,
     ANIM_SPRITES_START - 1,
@@ -2773,22 +2775,23 @@ static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void AnimTask_StretchAttacker(u8 taskId)
+// Used by Extremespeed
+void AnimTask_AttackerStretchAndDisappear(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[0] = spriteId;
     PrepareAffineAnimInTaskData(task, spriteId, gStretchAttackerAffineAnimCmds);
-    task->func = StretchAttacker_Step;
+    task->func = AttackerStretchAndDisappear_Step;
 }
 
-static void StretchAttacker_Step(u8 taskId)
+static void AttackerStretchAndDisappear_Step(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     if (!RunAffineAnimFromTaskData(task))
     {
         gSprites[task->data[0]].pos2.y = 0;
-        gSprites[task->data[0]].invisible = 1;
+        gSprites[task->data[0]].invisible = TRUE;
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -2998,29 +3001,29 @@ void AnimSpeedDust(struct Sprite *sprite)
     }
 }
 
-void sub_8105CB4(u8 taskId)
+void AnimTask_LoadMusicNotesPal(u8 taskId)
 {
     int i;
-    u8 paletteNums[3];
+    u8 paletteNums[NUM_MUSIC_NOTE_PAL_TAGS];
 
     paletteNums[0] = IndexOfSpritePaletteTag(ANIM_TAG_MUSIC_NOTES_2);
-    for (i = 1; i < 3; i++)
+    for (i = 1; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
         paletteNums[i] = AllocSpritePalette(ANIM_SPRITES_START - i);
 
     gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
     LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->field_17C);
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
         LoadPalette(&gMonSpritesGfxPtr->field_17C[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
 
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8105D60(u8 taskId)
+void AnimTask_FreeMusicNotesPal(u8 taskId)
 {
     int i;
-    for (i = 0; i < 3; i++)
-        FreeSpritePaletteByTag(gMusicNotePaletteTagsTable[i]);
+    for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
+        FreeSpritePaletteByTag(sMusicNotePaletteTagsTable[i]);
 
     DestroyAnimVisualTask(taskId);
 }
@@ -3031,7 +3034,7 @@ static void SetMusicNotePalette(struct Sprite *sprite, u8 a, u8 b)
     tile = (b & 1);
     tile = ((-tile | tile) >> 31) & 32;
     sprite->oam.tileNum += tile + (a << 2);
-    sprite->oam.paletteNum = IndexOfSpritePaletteTag(gMusicNotePaletteTagsTable[b >> 1]);
+    sprite->oam.paletteNum = IndexOfSpritePaletteTag(sMusicNotePaletteTagsTable[b >> 1]);
 }
 
 void AnimHealBellMusicNote(struct Sprite *sprite)

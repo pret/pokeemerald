@@ -67,18 +67,18 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 void sub_80A4720(u16 a, u16 *b, u32 c, u8 d);
 void sub_80A477C(bool8);
 
-// battle_intro.s
+// battle_intro.c
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
 void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *arg5, u16 *arg6, u16 arg7);
 void HandleIntroSlide(u8 terrainId);
 int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
-// battle_anim_mons.s
+// battle_anim_mons.c
 void TranslateSpriteInEllipseOverDuration(struct Sprite *sprite);
 void sub_80A8AEC(struct Sprite *sprite);
 void sub_80A8A6C(struct Sprite *sprite);
 void sub_80A8E30(struct Sprite *sprite);
-void sub_80A8B64(struct Sprite *sprite);
+void AnimSpinningSparkle(struct Sprite *sprite);
 void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x, s16 *y);
 void DestroySpriteAndMatrix(struct Sprite *sprite);
 void TranslateSpriteLinearFixedPoint(struct Sprite *sprite);
@@ -101,7 +101,7 @@ void SetAnimSpriteInitialXOffset(struct Sprite *sprite, s16 a2);
 s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 a2);
 u8 GetBattlerYCoordWithElevation(u8 battlerId);
 void WaitAnimForDuration(struct Sprite *sprite);
-void AnimSnoreZ(struct Sprite *sprite);
+void AnimTravelDiagonally(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
 void sub_80A6F98(struct Sprite *sprite);
 u8 GetBattlerSpriteBGPriority(u8 battlerId);
@@ -208,7 +208,7 @@ void sub_80A718C(struct Sprite *sprite);
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
 // ground.c
-void sub_81152DC(u8 taskId);
+void AnimTask_HorizontalShake(u8 taskId);
 
 // battle_anim_special.c
 void sub_8172EF0(u8 battler, struct Pokemon *mon);

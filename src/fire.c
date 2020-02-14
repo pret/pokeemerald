@@ -7,7 +7,7 @@
 #include "task.h"
 #include "trig.h"
 
-static void sub_8108EC8(struct Sprite *);
+static void AnimFireSpiralInward(struct Sprite *);
 static void AnimFireSpread(struct Sprite *);
 static void sub_8108F4C(struct Sprite *);
 static void sub_8108FBC(struct Sprite *);
@@ -23,7 +23,7 @@ static void AnimFireRingStep2(struct Sprite *);
 static void AnimFireRingStep3(struct Sprite *);
 static void UpdateFireRingCircleOffset(struct Sprite *);
 static void AnimFireCross(struct Sprite *);
-static void sub_81093A4(struct Sprite *);
+static void AnimFireSpiralOutward(struct Sprite *);
 static void sub_81093E4(struct Sprite *);
 static void sub_810940C(struct Sprite *);
 static void sub_81094D0(u8 taskId);
@@ -32,7 +32,7 @@ static void sub_81098EC(struct Sprite *);
 static u16 sub_8109930(u8 spriteId);
 static void sub_8109984(struct Sprite *sprite, s16 x, s16 y);
 static void sub_81099A0(struct Sprite *);
-static void sub_8109A10(struct Sprite *);
+static void AnimEruptionFallingRock(struct Sprite *);
 static void sub_8109A64(struct Sprite *);
 static void sub_8109AFC(struct Sprite *);
 static void sub_8109C4C(struct Sprite *);
@@ -61,7 +61,7 @@ const union AnimCmd *const gUnknown_08595360[] =
     gUnknown_08595350,
 };
 
-const struct SpriteTemplate gUnknown_08595368 =
+const struct SpriteTemplate gFireSpiralInwardSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -69,7 +69,7 @@ const struct SpriteTemplate gUnknown_08595368 =
     .anims = gUnknown_08595360,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8108EC8,
+    .callback = AnimFireSpiralInward,
 };
 
 const struct SpriteTemplate gFireSpreadSpriteTemplate =
@@ -319,7 +319,7 @@ const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
     .callback = AnimFireCross,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8595584 =
+const struct SpriteTemplate gFireSpiralOutwardSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -327,7 +327,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8595584 =
     .anims = gUnknown_085954D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81093A4,
+    .callback = AnimFireSpiralOutward,
 };
 
 const struct SpriteTemplate gUnknown_0859559C =
@@ -364,7 +364,7 @@ const s16 gUnknown_085955CC[][2] =
     { 4, -7},
 };
 
-const struct SpriteTemplate gUnknown_085955E8 =
+const struct SpriteTemplate gEruptionFallingRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WARM_ROCK,
     .paletteTag = ANIM_TAG_WARM_ROCK,
@@ -372,7 +372,7 @@ const struct SpriteTemplate gUnknown_085955E8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8109A10,
+    .callback = AnimEruptionFallingRock,
 };
 
 const union AnimCmd gUnknown_08595600[] =
@@ -456,7 +456,8 @@ const s8 gUnknown_08595694[16] =
     -1, 0, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 1,
 };
 
-static void sub_8108EC8(struct Sprite *sprite)
+// For the first stage of Fire Punch
+static void AnimFireSpiralInward(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = 0x3C;
@@ -623,7 +624,7 @@ static void AnimEmberFlare(struct Sprite *sprite)
             || gBattleAnimAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
-    sprite->callback = AnimSnoreZ;
+    sprite->callback = AnimTravelDiagonally;
     sprite->callback(sprite);
 }
 
@@ -632,7 +633,7 @@ static void sub_8109200(struct Sprite *sprite)
     gBattleAnimArgs[0] = -gBattleAnimArgs[0];
     gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
-    sprite->callback = AnimSnoreZ;
+    sprite->callback = AnimTravelDiagonally;
 }
 
 // Animates the a fire sprite in the first-half of the MOVE_FIRE_BLAST
@@ -730,7 +731,7 @@ static void AnimFireCross(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinear;
 }
 
-static void sub_81093A4(struct Sprite *sprite)
+static void AnimFireSpiralOutward(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
 
@@ -766,11 +767,12 @@ static void sub_810940C(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8109460(u8 taskId) // initialize animation task for Move_ERUPTION?
+// Animates first stage of Eruption where the attacker squishes and launches rocks away from themself
+void AnimTask_EruptionLaunchRocks(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[15] = GetAnimBattlerSpriteId(0);
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
     task->data[0] = 0;
     task->data[1] = 0;
@@ -992,7 +994,7 @@ static void sub_81099A0(struct Sprite *sprite)
         sprite->invisible = TRUE;
 }
 
-static void sub_8109A10(struct Sprite *sprite)
+static void AnimEruptionFallingRock(struct Sprite *sprite)
 {
     sprite->pos1.x = gBattleAnimArgs[0];
     sprite->pos1.y = gBattleAnimArgs[1];
@@ -1178,14 +1180,14 @@ void sub_8109CB0(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8109DBC(u8 taskId)
+void AnimTask_MoveHeatWaveTargets(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     task->data[12] = !GetBattlerSide(gBattleAnimAttacker) ? 1 : -1;
     task->data[13] = IsBattlerSpriteVisible(gBattleAnimTarget ^ 2) + 1;
-    task->data[14] = GetAnimBattlerSpriteId(1);
-    task->data[15] = GetAnimBattlerSpriteId(3);
+    task->data[14] = GetAnimBattlerSpriteId(ANIM_TARGET);
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_DEF_PARTNER);
 
     task->func = sub_8109E2C;
 }

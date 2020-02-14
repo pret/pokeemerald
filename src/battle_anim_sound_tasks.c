@@ -261,7 +261,7 @@ static void sub_8158FF4(u8 taskId)
 }
 // task end
 
-void sub_8159078(u8 taskId)
+void SoundTask_WaitForCry(u8 taskId)
 {
     if (gTasks[taskId].data[9] < 2)
     {
@@ -332,7 +332,7 @@ static void sub_815913C(u8 taskId)
 }
 // task end
 
-void sub_8159210(u8 taskId)
+void SoundTask_PlaySE1WithPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
@@ -341,7 +341,7 @@ void sub_8159210(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8159244(u8 taskId)
+void SoundTask_PlaySE2WithPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);

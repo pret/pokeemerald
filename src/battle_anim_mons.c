@@ -1532,7 +1532,7 @@ static void AnimThrowProjectile_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimSnoreZ(struct Sprite *sprite)
+void AnimTravelDiagonally(struct Sprite *sprite)
 {
     bool8 r4;
     u8 battlerId, coordType;
@@ -1547,7 +1547,7 @@ void AnimSnoreZ(struct Sprite *sprite)
         r4 = FALSE;
         coordType = BATTLER_COORD_Y;
     }
-    if (!gBattleAnimArgs[5])
+    if (gBattleAnimArgs[5] == ANIM_ATTACKER)
     {
         InitSpritePosToAnimAttacker(sprite, r4);
         battlerId = gBattleAnimAttacker;
@@ -2316,7 +2316,8 @@ void sub_80A8AEC(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
-void sub_80A8B64(struct Sprite *sprite)
+// Used by Detect/Disable
+void AnimSpinningSparkle(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker))

@@ -979,8 +979,8 @@ void AnimSwirlingFogAnim(struct Sprite *sprite)
     }
 }
 
-// Fades mons to black and places foggy overlay in Haze.
-void AnimTask_Haze1(u8 taskId)
+// Adds moving foggy overlay. Used by Haze.
+void AnimTask_HazeScrollingFog(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -1330,7 +1330,7 @@ void MovePoisonGasCloud(struct Sprite *sprite)
 }
 
 // Creates Hail.
-void AnimTask_Hail1(u8 taskId)
+void AnimTask_HailStart(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 

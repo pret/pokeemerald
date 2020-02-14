@@ -11,8 +11,8 @@
 
 void sub_81138D4(struct Sprite *);
 static void AnimBite(struct Sprite *);
-void sub_8113A90(struct Sprite *);
-void sub_81144BC(struct Sprite *);
+static void AnimTearDrop(struct Sprite *);
+static void AnimClawSlash(struct Sprite *);
 static void sub_811375C(u8);
 static void sub_811381C(u8);
 static void sub_8113950(struct Sprite *);
@@ -138,7 +138,7 @@ const union AffineAnimCmd *const gUnknown_085970E0[] =
     gUnknown_085970C8,
 };
 
-const struct SpriteTemplate gUnknown_085970E8 =
+const struct SpriteTemplate gTearDropSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -146,7 +146,7 @@ const struct SpriteTemplate gUnknown_085970E8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_085970E0,
-    .callback = sub_8113A90,
+    .callback = AnimTearDrop,
 };
 
 const union AnimCmd gUnknown_08597100[] =
@@ -175,7 +175,7 @@ const union AnimCmd *const gUnknown_08597130[] =
     gUnknown_08597118,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8597138 =
+const struct SpriteTemplate gClawSlashSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CLAW_SLASH,
     .paletteTag = ANIM_TAG_CLAW_SLASH,
@@ -183,7 +183,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8597138 =
     .anims = gUnknown_08597130,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81144BC,
+    .callback = AnimClawSlash,
 };
 
 void AnimTask_AttackerFadeToInvisible(u8 taskId)
@@ -214,7 +214,7 @@ static void sub_811375C(u8 taskId)
         gTasks[taskId].data[2] = 0;
         if (blendA == 16)
         {
-            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = 1;
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = TRUE;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -342,12 +342,13 @@ static void sub_8113A58(struct Sprite *sprite)
         DestroySpriteAndMatrix(sprite);
 }
 
-void sub_8113A90(struct Sprite *sprite)
+// Launches a tear drop away from the battler. Used by Fake Tears
+static void AnimTearDrop(struct Sprite *sprite)
 {
     u8 battler;
     s8 xOffset;
 
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
         battler = gBattleAnimAttacker;
     else
         battler = gBattleAnimTarget;
@@ -773,12 +774,12 @@ void sub_81143C0(u8 taskId)
 {
     u8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? 1 : 0;
     MoveBattlerSpriteToBG(gBattleAnimAttacker, toBG2, TRUE);
-    gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = 0;
+    gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = FALSE;
 
     if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
     {
         MoveBattlerSpriteToBG(gBattleAnimAttacker ^ 2, toBG2 ^ 1, TRUE);
-        gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].invisible = 0;
+        gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].invisible = FALSE;
     }
 
     DestroyAnimVisualTask(taskId);
@@ -795,7 +796,8 @@ void sub_8114470(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_81144BC(struct Sprite *sprite)
+// Animates a deep slash from a claw. Used by Metal Claw, Dragon Claw, and Crush Claw
+static void AnimClawSlash(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
