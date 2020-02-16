@@ -5889,6 +5889,7 @@ BattleScript_MegaEvolution::
 	handlemegaevo BS_ATTACKER, 2
 	printstring STRINGID_MEGAEVOEVOLVED
 	waitmessage 0x40
+	switchinabilities BS_ATTACKER
 	end2
 
 BattleScript_StanceChangeActivates::
