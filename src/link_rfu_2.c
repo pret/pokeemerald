@@ -2811,3 +2811,8 @@ u32 GetRfuRecvQueueLength(void)
 {
     return Rfu.unk_124.unk_8c2;
 }
+
+void nullsub_89(u8 taskId)
+{
+
+}

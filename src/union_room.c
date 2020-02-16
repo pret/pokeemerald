@@ -147,11 +147,6 @@ void nullsub_14(u8 windowId, s32 itemId, u8 y);
 #include "data/union_room.h"
 
 // code
-void nullsub_89(u8 taskId)
-{
-
-}
-
 void sub_80124EC(u8 windowId, u8 arg1, u8 stringId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));

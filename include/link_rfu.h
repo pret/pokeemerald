@@ -196,6 +196,8 @@ struct UnkRfuStruct_8010A14
 
 // Exported RAM declarations
 
+extern struct GFtgtGname gUnknown_02022B14;
+extern u8 gUnknown_02022B22[];
 extern struct UnkRfuStruct_2 Rfu;
 extern u8 gWirelessStatusIndicatorSpriteId;
 
