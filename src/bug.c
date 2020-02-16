@@ -4,8 +4,8 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-void sub_8110368(struct Sprite *);
-void sub_8110438(struct Sprite *);
+static void AnimMegahornHorn(struct Sprite *);
+static void AnimLeechLifeNeedle(struct Sprite *);
 void AnimTranslateWebThread(struct Sprite *);
 void sub_81105B4(struct Sprite *);
 void sub_811067C(struct Sprite *);
@@ -43,7 +43,7 @@ const union AffineAnimCmd *const gUnknown_08596968[] =
     gUnknown_08596958,
 };
 
-const struct SpriteTemplate gUnknown_08596974 =
+const struct SpriteTemplate gMegahornHornSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HORN_HIT_2,
     .paletteTag = ANIM_TAG_HORN_HIT_2,
@@ -51,7 +51,7 @@ const struct SpriteTemplate gUnknown_08596974 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596968,
-    .callback = sub_8110368,
+    .callback = AnimMegahornHorn,
 };
 
 const union AffineAnimCmd gUnknown_0859698C[] =
@@ -79,7 +79,7 @@ const union AffineAnimCmd *const gUnknown_085969BC[] =
     gUnknown_085969AC,
 };
 
-const struct SpriteTemplate gUnknown_085969C8 =
+const struct SpriteTemplate gLeechLifeNeedleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_NEEDLE,
     .paletteTag = ANIM_TAG_NEEDLE,
@@ -87,7 +87,7 @@ const struct SpriteTemplate gUnknown_085969C8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_085969BC,
-    .callback = sub_8110438,
+    .callback = AnimLeechLifeNeedle,
 };
 
 const struct SpriteTemplate gWebThreadSpriteTemplate =
@@ -195,7 +195,7 @@ const struct SpriteTemplate gUnknown_08596AC8 =
     .callback = sub_8110994,
 };
 
-void sub_8110368(struct Sprite *sprite)
+static void AnimMegahornHorn(struct Sprite *sprite)
 {
     if (IsContest())
     {
@@ -223,7 +223,7 @@ void sub_8110368(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_8110438(struct Sprite *sprite)
+static void AnimLeechLifeNeedle(struct Sprite *sprite)
 {
     if (IsContest())
     {

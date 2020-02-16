@@ -1522,9 +1522,9 @@ void AnimFang(struct Sprite *sprite)
 void AnimTask_IsTargetPlayerSide(u8 taskId)
 {
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[7] = FALSE;
     else
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[7] = TRUE;
 
     DestroyAnimVisualTask(taskId);
 }
@@ -1532,9 +1532,9 @@ void AnimTask_IsTargetPlayerSide(u8 taskId)
 void AnimTask_IsHealingMove(u8 taskId)
 {
     if (gAnimMoveDmg > 0)
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[7] = FALSE;
     else
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[7] = TRUE;
 
     DestroyAnimVisualTask(taskId);
 }

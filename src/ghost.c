@@ -20,7 +20,7 @@ static void sub_8111914(u8 taskId);
 static void sub_811196C(u8 taskId);
 static void InitAnimShadowBall(struct Sprite *);
 static void AnimShadowBallStep(struct Sprite *);
-static void sub_8111B9C(struct Sprite *);
+static void AnimLick(struct Sprite *);
 static void sub_8111BB4(struct Sprite *);
 static void sub_8111D78(u8 taskId);
 static void sub_8111E78(u8 taskId);
@@ -35,7 +35,7 @@ static void AnimCurseNail(struct Sprite *);
 static void sub_8112A4C(struct Sprite *);
 static void sub_8112ACC(struct Sprite *);
 static void sub_8112B44(struct Sprite *);
-static void sub_8112B78(struct Sprite *);
+static void AnimGhostStatusSprite(struct Sprite *);
 static void sub_8112C4C(struct Sprite *);
 static void sub_8112D10(u8 taskId);
 static void AnimGrudgeFlame(struct Sprite *);
@@ -113,7 +113,7 @@ const union AnimCmd *const gUnknown_08596D88[] =
     gUnknown_08596D70,
 };
 
-const struct SpriteTemplate gUnknown_08596D8C =
+const struct SpriteTemplate gLickSpriteTemplate =
 {
     .tileTag = ANIM_TAG_LICK,
     .paletteTag = ANIM_TAG_LICK,
@@ -121,7 +121,7 @@ const struct SpriteTemplate gUnknown_08596D8C =
     .anims = gUnknown_08596D88,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8111B9C,
+    .callback = AnimLick,
 };
 
 const union AffineAnimCmd gUnknown_08596DA4[] =
@@ -165,10 +165,10 @@ const struct SpriteTemplate gCurseGhostSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8112B78,
+    .callback = AnimGhostStatusSprite,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8596E00 =
+const struct SpriteTemplate gNightmareDevilSpriteTemplate =
 {
     .tileTag = ANIM_TAG_DEVIL,
     .paletteTag = ANIM_TAG_DEVIL,
@@ -176,7 +176,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8596E00 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8112B78,
+    .callback = AnimGhostStatusSprite,
 };
 
 const union AnimCmd gUnknown_08596E18[] =
@@ -336,12 +336,13 @@ static void sub_8111814(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_811188C(u8 taskId)
+// Creates a large transparent clone of the attacker centered on their position which shrinks to original size
+void AnimTask_NightShadeClone(u8 taskId)
 {
     u8 spriteId;
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0x10));
-    spriteId = GetAnimBattlerSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_BLEND);
     SetSpriteRotScale(spriteId, 128, 128, 0);
     gSprites[spriteId].invisible = FALSE;
@@ -377,7 +378,7 @@ static void sub_811196C(u8 taskId)
         return;
     }
 
-    spriteId = GetAnimBattlerSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     gTasks[taskId].data[0] += 8;
     if (gTasks[taskId].data[0] <= 0xFF)
     {
@@ -459,7 +460,7 @@ static void AnimShadowBallStep(struct Sprite *sprite)
     }
 }
 
-static void sub_8111B9C(struct Sprite *sprite)
+static void AnimLick(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->callback = sub_8111BB4;
@@ -512,12 +513,13 @@ static void sub_8111BB4(struct Sprite *sprite)
     }
 }
 
-void sub_8111C50(u8 taskId)
+// Creates a transparent clone of the target which drifts up and away to the side
+void AnimTask_NightmareClone(u8 taskId)
 {
     struct Task *task;
 
     task = &gTasks[taskId];
-    task->data[0] = CloneBattlerSpriteWithBlend(1);
+    task->data[0] = CloneBattlerSpriteWithBlend(ANIM_TARGET);
     if (task->data[0] < 0)
     {
         DestroyAnimVisualTask(taskId);
@@ -610,7 +612,7 @@ static void sub_8111E78(u8 taskId)
         }
         else
         {
-            task->data[0] = CloneBattlerSpriteWithBlend(1);
+            task->data[0] = CloneBattlerSpriteWithBlend(ANIM_TARGET);
             if (task->data[0] < 0)
             {
                 FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
@@ -626,7 +628,7 @@ static void sub_8111E78(u8 taskId)
                 task->data[1] = 0;
                 task->data[2] = 0;
                 task->data[3] = 16;
-                task->data[13] = GetAnimBattlerSpriteId(1);
+                task->data[13] = GetAnimBattlerSpriteId(ANIM_TARGET);
                 task->data[4] = (gSprites[task->data[13]].oam.paletteNum + 16) * 16;
                 if (position == 1) {
                     u16 mask = DISPCNT_BG1_ON;
@@ -712,7 +714,7 @@ static void sub_8112170(u8 taskId)
     {
     case 0:
         gScanlineEffect.state = 3;
-        task->data[14] = GetAnimBattlerSpriteId(1);
+        task->data[14] = GetAnimBattlerSpriteId(ANIM_TARGET);
         if (rank == 1)
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
         else
@@ -1120,7 +1122,7 @@ static void sub_8112B44(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-static void sub_8112B78(struct Sprite *sprite)
+static void AnimGhostStatusSprite(struct Sprite *sprite)
 {
     u16 coeffB;
     u16 coeffA;

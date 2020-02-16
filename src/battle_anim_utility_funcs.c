@@ -45,7 +45,7 @@ const u16 gUnknown_08597418 = RGB(31, 31, 31);
 const u8 gUnknown_0859741A[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 const u8 gUnknown_0859741E[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
-void AnimTask_BlendMonColor(u8 taskId)
+void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     selectedPalettes |= sub_80A76C4((gBattleAnimArgs[0] >>  7) & 1,

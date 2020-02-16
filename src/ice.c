@@ -36,7 +36,7 @@ void AnimWaveFromCenterOfTarget(struct Sprite *);
 void InitSwirlingFogAnim(struct Sprite *);
 void AnimSwirlingFogAnim(struct Sprite *);
 void AnimThrowMistBall(struct Sprite *);
-void InitPoisonGasCloudAnim(struct Sprite *);
+static void InitPoisonGasCloudAnim(struct Sprite *);
 void MovePoisonGasCloud(struct Sprite *);
 void AnimHailBegin(struct Sprite *);
 void AnimHailContinue(struct Sprite *);
@@ -151,7 +151,7 @@ const union AffineAnimCmd *const gUnknown_08595ACC[] =
     gUnknown_08595ABC,
 };
 
-const struct SpriteTemplate gUnknown_08595AD0 =
+const struct SpriteTemplate gIceCrystalSpiralInwardLarge =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -162,7 +162,7 @@ const struct SpriteTemplate gUnknown_08595AD0 =
     .callback = AnimIcePunchSwirlingParticle,
 };
 
-const struct SpriteTemplate gUnknown_08595AE8 =
+const struct SpriteTemplate gIceCrystalSpiralInwardSmall =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -184,7 +184,7 @@ const union AffineAnimCmd *const gUnknown_08595B10[] =
     gUnknown_08595B00,
 };
 
-const struct SpriteTemplate gUnknown_08595B14 =
+const struct SpriteTemplate gIceBeamInnerCrystalSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -195,7 +195,7 @@ const struct SpriteTemplate gUnknown_08595B14 =
     .callback = AnimIceBeamParticle,
 };
 
-const struct SpriteTemplate gUnknown_08595B2C =
+const struct SpriteTemplate gIceBeamOuterCrystalSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -263,7 +263,7 @@ const struct SpriteTemplate gBlizzardIceCrystalSpriteTemplate =
     .callback = AnimMoveParticleBeyondTarget,
 };
 
-const struct SpriteTemplate gUnknown_08595BC8 =
+const struct SpriteTemplate gPowderSnowSnowballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -291,7 +291,7 @@ const union AnimCmd *const gUnknown_08595C00[] =
     gUnknown_08595BE0,
 };
 
-const struct SpriteTemplate gUnknown_08595C04 =
+const struct SpriteTemplate gIceGroundSpikesSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_SPIKES,
     .paletteTag = ANIM_TAG_ICE_SPIKES,
@@ -314,7 +314,7 @@ const union AnimCmd *const gUnknown_08595C28[] =
     gUnknown_08595C1C,
 };
 
-const struct SpriteTemplate gUnknown_08595C2C =
+const struct SpriteTemplate gMistCloudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MIST_CLOUD,
     .paletteTag = ANIM_TAG_MIST_CLOUD,
@@ -341,7 +341,7 @@ const u8 gUnknown_08595C5C[] =
     0, 1, 2, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6, 6, 6, 7, 8, 8, 8, 9,
 };
 
-const struct SpriteTemplate gUnknown_08595C70 =
+const struct SpriteTemplate gMistBallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -357,7 +357,7 @@ const u8 gUnknown_08595C88[] =
     0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5,
 };
 
-const struct SpriteTemplate gUnknown_08595C9C =
+const struct SpriteTemplate gPoisonGasCloudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
@@ -500,7 +500,7 @@ const union AffineAnimCmd *const gUnknown_08595DD0[] =
     gUnknown_08595DC0,
 };
 
-const struct SpriteTemplate gUnknown_08595DE4 =
+const struct SpriteTemplate gIceBallChunkSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CHUNK,
     .paletteTag = ANIM_TAG_ICE_CHUNK,
@@ -511,7 +511,7 @@ const struct SpriteTemplate gUnknown_08595DE4 =
     .callback = InitIceBallAnim,
 };
 
-const struct SpriteTemplate gUnknown_08595DFC =
+const struct SpriteTemplate gIceBallImpactShardSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CRYSTALS,
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
@@ -1183,7 +1183,7 @@ void AnimTask_OverlayFogTiles(u8 taskId)
 // arg 5: ??? unknown
 // arg 6: ??? unknown
 // arg 7: ??? unknown boolean
-void InitPoisonGasCloudAnim(struct Sprite *sprite)
+static void InitPoisonGasCloudAnim(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
 
@@ -1562,8 +1562,7 @@ void AnimIceBallParticle(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-// Counter for Ice Ball.
-void AnimTask_GetRolloutCounter(u8 taskId)
+void AnimTask_GetIceBallCounter(u8 taskId)
 {
     u8 arg = gBattleAnimArgs[0];
 

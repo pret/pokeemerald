@@ -78,7 +78,7 @@ static void AnimTask_SplashStep(u8);
 static void AnimTask_GrowAndShrinkStep(u8);
 static void ThrashMoveMonStep(u8);
 static void ThrashMoveMon(u8);
-static void AnimTask_SketchDrawMon(u8);
+static void AnimTask_SketchDrawMonStep(u8);
 static void AnimPencil_Step(struct Sprite *);
 static void AnimSoftBoiledEgg_Step1(struct Sprite *);
 static void AnimSoftBoiledEgg_Step2(struct Sprite *);
@@ -307,7 +307,7 @@ const union AffineAnimCmd *const gWaterPulseRingAffineAnimTable[] =
     gWaterPulseRingAffineAnimCmds,
 };
 
-const struct SpriteTemplate gSupersonicWaveSpriteTemplate =
+const struct SpriteTemplate gSupersonicRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GOLD_RING,
     .paletteTag = ANIM_TAG_GOLD_RING,
@@ -318,7 +318,7 @@ const struct SpriteTemplate gSupersonicWaveSpriteTemplate =
     .callback = TranslateAnimSpriteToTargetMonLocation,
 };
 
-const struct SpriteTemplate gScreechWaveSpriteTemplate =
+const struct SpriteTemplate gScreechRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_RING,
     .paletteTag = ANIM_TAG_PURPLE_RING,
@@ -2374,7 +2374,7 @@ static void ThrashMoveMon(u8 taskId)
     }
 }
 
-void sub_8104E74(u8 taskId)
+void AnimTask_SketchDrawMon(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     struct ScanlineEffectParams params;
@@ -2412,10 +2412,10 @@ void sub_8104E74(u8 taskId)
     params.initState = 1;
     params.unused9 = 0;
     ScanlineEffect_SetParams(params);
-    task->func = AnimTask_SketchDrawMon;
+    task->func = AnimTask_SketchDrawMonStep;
 }
 
-static void AnimTask_SketchDrawMon(u8 taskId)
+static void AnimTask_SketchDrawMonStep(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
 

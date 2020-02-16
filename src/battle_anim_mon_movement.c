@@ -589,7 +589,7 @@ static void sub_80D5B48(struct Sprite *sprite)
     u8 spriteId;
     u8 battlerId;
     sprite->invisible = TRUE;
-    if (!gBattleAnimArgs[0])
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         battlerId = gBattleAnimAttacker;
     }
@@ -698,16 +698,17 @@ void AnimTask_WindUpLungePart2(u8 taskId)
     }
 }
 
-void sub_80D5DB0(u8 taskId)
+// To move a mon off-screen when pushed out by Roar/Whirlwind
+void AnimTask_SlideOffScreen(u8 taskId)
 {
     u8 spriteId;
     switch (gBattleAnimArgs[0])
     {
-    case 0:
-    case 1:
+    case ANIM_ATTACKER:
+    case ANIM_TARGET:
         spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
         break;
-    case 2:
+    case ANIM_ATK_PARTNER:
         if (!IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
         {
             DestroyAnimVisualTask(taskId);
@@ -715,7 +716,7 @@ void sub_80D5DB0(u8 taskId)
         }
         spriteId = gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)];
         break;
-    case 3:
+    case ANIM_DEF_PARTNER:
         if (!IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimTarget)))
         {
             DestroyAnimVisualTask(taskId);

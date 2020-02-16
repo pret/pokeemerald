@@ -245,7 +245,7 @@ static const struct SubspriteTable gUnknown_0853EF40[] =
     {ARRAY_COUNT(gUnknown_0853EF30), gUnknown_0853EF30},
 };
 
-static const struct SpriteTemplate gUnknown_0853EF48 =
+static const struct SpriteTemplate gFrozenIceCubeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CUBE,
     .paletteTag = ANIM_TAG_ICE_CUBE,
@@ -376,7 +376,7 @@ static void sub_80A9E78(struct Sprite *sprite)
     }
 }
 
-void sub_80A9EF4(u8 taskId)
+void AnimTask_FrozenIceCube(u8 taskId)
 {
     s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 32;
     s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;
@@ -386,7 +386,7 @@ void sub_80A9EF4(u8 taskId)
         x -= 6;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-    spriteId = CreateSprite(&gUnknown_0853EF48, x, y, 4);
+    spriteId = CreateSprite(&gFrozenIceCubeSpriteTemplate, x, y, 4);
     if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
         gSprites[spriteId].invisible = TRUE;
     SetSubspriteTables(&gSprites[spriteId], gUnknown_0853EF40);

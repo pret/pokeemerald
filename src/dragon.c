@@ -5,11 +5,11 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-void sub_8113064(struct Sprite *);
+static void AnimOutrageFlame(struct Sprite *);
 static void AnimDragonRageFirePlume(struct Sprite *);
 static void AnimDragonFireToTarget(struct Sprite *);
 static void AnimDragonDanceOrb(struct Sprite *);
-void sub_81135EC(struct Sprite *);
+static void AnimOverheatFlame(struct Sprite *);
 static void sub_81132E0(struct Sprite *);
 static void sub_81134B8(u8);
 static void sub_8113574(struct Task *);
@@ -32,7 +32,7 @@ const union AnimCmd *const gUnknown_08596E78[] =
     gUnknown_08596E60,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8596E7C =
+const struct SpriteTemplate gOutrageFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -40,7 +40,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8596E7C =
     .anims = gUnknown_08596E78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8113064,
+    .callback = AnimOutrageFlame,
 };
 
 const union AnimCmd gUnknown_08596E94[] =
@@ -176,7 +176,7 @@ const struct SpriteTemplate gDragonDanceOrbSpriteTemplate =
     .callback = AnimDragonDanceOrb,
 };
 
-const struct SpriteTemplate gUnknown_08596FB0 =
+const struct SpriteTemplate gOverheatFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -184,10 +184,10 @@ const struct SpriteTemplate gUnknown_08596FB0 =
     .anims = gUnknown_08596E78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81135EC,
+    .callback = AnimOverheatFlame,
 };
 
-void sub_8113064(struct Sprite *sprite)
+static void AnimOutrageFlame(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
@@ -207,7 +207,7 @@ void sub_8113064(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];
     sprite->data[5] = gBattleAnimArgs[5];
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
     sprite->callback = TranslateSpriteLinearAndFlicker;
 }
@@ -410,7 +410,7 @@ static void sub_8113574(struct Task *task)
     task->data[5] = (task->data[5] + 9) & 0xFF;
 }
 
-void sub_81135EC(struct Sprite *sprite)
+static void AnimOverheatFlame(struct Sprite *sprite)
 {
     int r6 = (gBattleAnimArgs[2] * 3) / 5;
     int i;

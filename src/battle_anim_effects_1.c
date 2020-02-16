@@ -1328,7 +1328,7 @@ const struct SpriteTemplate gUnknown_08592AC4 =
     .callback = sub_8100E1C,
 };
 
-const struct SpriteTemplate gUnknown_08592ADC =
+const struct SpriteTemplate gProtectSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PROTECT,
     .paletteTag = ANIM_TAG_PROTECT,
@@ -2791,7 +2791,7 @@ static void AnimConstrictBindingStep2(struct Sprite* sprite)
     }
 }
 
-void sub_80FF458(u8 taskId)
+void AnimTask_ShrinkTargetCopy(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     if (gSprites[spriteId].invisible)
@@ -3627,7 +3627,7 @@ static void AnimFlyingParticleStep(struct Sprite* sprite)
     DestroySpriteAndMatrix(sprite);
 }
 
-void sub_81007C4(u8 taskId)
+void AnimTask_CycleMagicalLeafPal(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     switch (task->data[0])

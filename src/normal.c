@@ -209,6 +209,7 @@ const struct SpriteTemplate gRandomPosHitSplatSpriteTemplate =
     .callback = AnimHitSplatRandom,
 };
 
+// TODO: Needs generic descriptive name, what distinguishes this hit splat
 const struct SpriteTemplate gExtremeSpeedHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
@@ -242,7 +243,8 @@ const struct SpriteTemplate gFlashingHitSplatSpriteTemplate =
     .callback = AnimFlashingHitSplat,
 };
 
-const struct SpriteTemplate gUnknown_08597400 =
+// TODO: Needs generic descriptive name, what distinguishes this hit splat
+const struct SpriteTemplate gRevengeHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -413,7 +415,7 @@ void sub_81159B4(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-// Task data for AnimTask_BlendCycleMonColor
+// Task data for AnimTask_BlendColorCycle
 #define tPalSelector   data[0] // arg0
 #define tDelay         data[1] // arg1
 #define tNumBlends     data[2] // arg2
@@ -422,9 +424,9 @@ void sub_81159B4(struct Sprite *sprite)
 #define tBlendColor    data[5] // arg5
 #define tRestoreBlend  data[8]
 
-// Blends mon sprite to designated color or back alternately tNumBlends times 
+// Blends mon/screen to designated color or back alternately tNumBlends times 
 // Many uses of this task only set a tNumBlends of 2, which has the effect of blending to a color and back once
-void AnimTask_BlendCycleMonColor(u8 taskId)
+void AnimTask_BlendColorCycle(u8 taskId)
 {
     gTasks[taskId].tPalSelector = gBattleAnimArgs[0];
     gTasks[taskId].tDelay = gBattleAnimArgs[1];
@@ -854,13 +856,25 @@ static void sub_81161F4(void)
     }
 }
 
-void sub_81162A4(u8 taskId)
+// Task data for AnimTask_ShakeBattleTerrain
+#define tXOffset     data[0]
+#define tYOffset     data[1]
+#define tNumShakes   data[2]
+#define tTimer       data[3]
+#define tShakeDelay  data[8]
+
+// Can shake battle terrain back and forth on the X or down and back to original pos on Y (cant shake up from orig pos)
+// arg0: x offset of shake
+// arg1: y offset of shake
+// arg2: number of shakes
+// arg3: time between shakes
+void AnimTask_ShakeBattleTerrain(u8 taskId)
 {
-    gTasks[taskId].data[0] = gBattleAnimArgs[0];
-    gTasks[taskId].data[1] = gBattleAnimArgs[1];
-    gTasks[taskId].data[2] = gBattleAnimArgs[2];
-    gTasks[taskId].data[3] = gBattleAnimArgs[3];
-    gTasks[taskId].data[8] = gBattleAnimArgs[3];
+    gTasks[taskId].tXOffset = gBattleAnimArgs[0];
+    gTasks[taskId].tYOffset = gBattleAnimArgs[1];
+    gTasks[taskId].tNumShakes = gBattleAnimArgs[2];
+    gTasks[taskId].tTimer = gBattleAnimArgs[3];
+    gTasks[taskId].tShakeDelay = gBattleAnimArgs[3];
     gBattle_BG3_X = gBattleAnimArgs[0];
     gBattle_BG3_Y = gBattleAnimArgs[1];
     gTasks[taskId].func = sub_81162F8;
@@ -869,20 +883,20 @@ void sub_81162A4(u8 taskId)
 
 static void sub_81162F8(u8 taskId)
 {
-    if (gTasks[taskId].data[3] == 0)
+    if (gTasks[taskId].tTimer == 0)
     {
-        if (gBattle_BG3_X == gTasks[taskId].data[0])
-            gBattle_BG3_X = -gTasks[taskId].data[0];
+        if (gBattle_BG3_X == gTasks[taskId].tXOffset)
+            gBattle_BG3_X = -gTasks[taskId].tXOffset;
         else
-            gBattle_BG3_X = gTasks[taskId].data[0];
+            gBattle_BG3_X = gTasks[taskId].tXOffset;
 
-        if (gBattle_BG3_Y == -gTasks[taskId].data[1])
+        if (gBattle_BG3_Y == -gTasks[taskId].tYOffset)
             gBattle_BG3_Y = 0;
         else
-            gBattle_BG3_Y = -gTasks[taskId].data[1];
+            gBattle_BG3_Y = -gTasks[taskId].tYOffset;
 
-        gTasks[taskId].data[3] = gTasks[taskId].data[8];
-        if (--gTasks[taskId].data[2] == 0)
+        gTasks[taskId].tTimer = gTasks[taskId].tShakeDelay;
+        if (--gTasks[taskId].tNumShakes == 0)
         {
             gBattle_BG3_X = 0;
             gBattle_BG3_Y = 0;
@@ -891,9 +905,15 @@ static void sub_81162F8(u8 taskId)
     }
     else
     {
-        gTasks[taskId].data[3]--;
+        gTasks[taskId].tTimer--;
     }
 }
+
+#undef tXOffset
+#undef tYOffset
+#undef tNumShakes
+#undef tTimer
+#undef tShakeDelay
 
 static void AnimBasicHitSplat(struct Sprite *sprite)
 {
