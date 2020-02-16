@@ -71,7 +71,7 @@ const struct SpriteTemplate gSpinningBoneSpriteTemplate =
     .callback = AnimBoneHitProjectile,
 };
 
-const struct SpriteTemplate gUnknown_085971A8 =
+const struct SpriteTemplate gSandAttackDirtSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
@@ -93,7 +93,7 @@ const union AnimCmd *const gUnknown_085971C8[] =
     gUnknown_085971C0,
 };
 
-const struct SpriteTemplate gUnknown_085971CC =
+const struct SpriteTemplate gMudSlapMudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
@@ -104,7 +104,7 @@ const struct SpriteTemplate gUnknown_085971CC =
     .callback = AnimDirtScatter,
 };
 
-const struct SpriteTemplate gUnknown_085971E4 =
+const struct SpriteTemplate gMudsportMudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,

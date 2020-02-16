@@ -28,7 +28,7 @@ static void AnimSprayWaterDroplet(struct Sprite *);
 void sub_810EFA8(struct Sprite *);
 void sub_810F004(struct Sprite *);
 void sub_810F018(struct Sprite *);
-void sub_810F084(struct Sprite *);
+static void AnimSkyAttackBird(struct Sprite *);
 void sub_810F140(struct Sprite *);
 static void sub_810DE98(struct Sprite *);
 static void sub_810DF18(u8);
@@ -335,7 +335,7 @@ const struct SpriteTemplate gUnknown_085964FC =
     .callback = sub_810F004,
 };
 
-const struct SpriteTemplate gUnknown_08596514 =
+const struct SpriteTemplate gSkyAttackBirdSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BIRD,
     .paletteTag = ANIM_TAG_BIRD,
@@ -343,7 +343,7 @@ const struct SpriteTemplate gUnknown_08596514 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F084,
+    .callback = AnimSkyAttackBird,
 };
 
 
@@ -1195,7 +1195,7 @@ void sub_810F018(struct Sprite *sprite)
     }
 }
 
-void sub_810F084(struct Sprite *sprite)
+static void AnimSkyAttackBird(struct Sprite *sprite)
 {
     u16 rotation;
     s16 posx = sprite->pos1.x;

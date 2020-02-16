@@ -96,7 +96,7 @@ const union AnimCmd *const gUnknown_08595E60[] =
     gUnknown_08595E4C,
 };
 
-const struct SpriteTemplate gUnknown_08595E68 =
+const struct SpriteTemplate gKarateChopSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -151,7 +151,7 @@ const struct SpriteTemplate gCrossChopHandSpriteTemplate =
     .callback = AnimCrossChopHand,
 };
 
-const struct SpriteTemplate gUnknown_08595EE0 =
+const struct SpriteTemplate gSlidingKickSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -342,7 +342,7 @@ const union AnimCmd *const gUnknown_0859607C[] =
     gUnknown_0859606C,
 };
 
-const struct SpriteTemplate gUnknown_08596088 =
+const struct SpriteTemplate gRevengeSmallScratchSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_SCRATCH,
     .paletteTag = ANIM_TAG_PURPLE_SCRATCH,
@@ -381,7 +381,7 @@ const union AnimCmd *const gUnknown_085960C4[] =
     gUnknown_085960B8,
 };
 
-const struct SpriteTemplate gUnknown_085960D0 =
+const struct SpriteTemplate gRevengeBigScratchSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_SWIPE,
     .paletteTag = ANIM_TAG_PURPLE_SWIPE,
@@ -995,7 +995,7 @@ static void AnimFocusPunchFist(struct Sprite *sprite)
     }
 }
 
-void sub_810DABC(u8 taskId)
+void AnimTask_MoveSkyUppercutBg(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 

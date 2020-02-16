@@ -9,12 +9,12 @@
 #include "constants/songs.h"
 
 static void AnimDefensiveWall(struct Sprite *);
-void sub_810F58C(struct Sprite *);
+static void AnimWallSparkle(struct Sprite *);
 void sub_810F634(struct Sprite *);
 static void AnimQuestionMark(struct Sprite *);
-void sub_810FBA8(struct Sprite *);
+static void AnimRedX(struct Sprite *);
 void sub_810FDF0(struct Sprite *);
-void sub_8110240(struct Sprite *);
+static void AnimPsychoBoost(struct Sprite *);
 static void sub_810F340(struct Sprite *);
 static void sub_810F3C8(struct Sprite *);
 static void sub_810F400(struct Sprite *);
@@ -41,7 +41,7 @@ const union AffineAnimCmd *const gUnknown_08596544[] =
     gUnknown_0859652C,
 };
 
-const struct SpriteTemplate gUnknown_08596548 =
+const struct SpriteTemplate gPsychUpSpiralSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPIRAL,
     .paletteTag = ANIM_TAG_SPIRAL,
@@ -52,7 +52,7 @@ const struct SpriteTemplate gUnknown_08596548 =
     .callback = AnimSpriteOnMonPos,
 };
 
-const struct SpriteTemplate gUnknown_08596560 =
+const struct SpriteTemplate gLightScreenWallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GREEN_LIGHT_WALL,
     .paletteTag = ANIM_TAG_GREEN_LIGHT_WALL,
@@ -63,7 +63,7 @@ const struct SpriteTemplate gUnknown_08596560 =
     .callback = AnimDefensiveWall,
 };
 
-const struct SpriteTemplate gUnknown_08596578 =
+const struct SpriteTemplate gReflectWallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_LIGHT_WALL,
     .paletteTag = ANIM_TAG_BLUE_LIGHT_WALL,
@@ -74,7 +74,7 @@ const struct SpriteTemplate gUnknown_08596578 =
     .callback = AnimDefensiveWall,
 };
 
-const struct SpriteTemplate gUnknown_08596590 =
+const struct SpriteTemplate gMirrorCoatWallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RED_LIGHT_WALL,
     .paletteTag = ANIM_TAG_RED_LIGHT_WALL,
@@ -96,7 +96,7 @@ const struct SpriteTemplate gBarrierWallSpriteTemplate =
     .callback = AnimDefensiveWall,
 };
 
-const struct SpriteTemplate gUnknown_085965C0 =
+const struct SpriteTemplate gMagicCoatWallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ORANGE_LIGHT_WALL,
     .paletteTag = ANIM_TAG_ORANGE_LIGHT_WALL,
@@ -122,7 +122,7 @@ const union AnimCmd *const gUnknown_085965F0[] =
     gUnknown_085965D8,
 };
 
-const struct SpriteTemplate gUnknown_085965F4 =
+const struct SpriteTemplate gReflectSparkleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
@@ -130,7 +130,7 @@ const struct SpriteTemplate gUnknown_085965F4 =
     .anims = gUnknown_085965F0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F58C,
+    .callback = AnimWallSparkle,
 };
 
 const union AnimCmd gUnknown_0859660C[] =
@@ -147,7 +147,7 @@ const union AnimCmd *const gUnknown_08596620[] =
     gUnknown_0859660C,
 };
 
-const struct SpriteTemplate gUnknown_08596624 =
+const struct SpriteTemplate gSpecialScreenSparkleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARKLE_3,
     .paletteTag = ANIM_TAG_SPARKLE_3,
@@ -155,7 +155,7 @@ const struct SpriteTemplate gUnknown_08596624 =
     .anims = gUnknown_08596620,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810F58C,
+    .callback = AnimWallSparkle,
 };
 
 const struct SpriteTemplate gGoldRingSpriteTemplate =
@@ -215,7 +215,7 @@ const union AnimCmd *const gUnknown_085966D4[] =
     gUnknown_08596694,
 };
 
-const struct SpriteTemplate gUnknown_085966DC =
+const struct SpriteTemplate gBentSpoonSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BENT_SPOON,
     .paletteTag = ANIM_TAG_BENT_SPOON,
@@ -294,15 +294,15 @@ const struct SpriteTemplate gUnknown_08596794 =
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_085967AC =
+const struct SpriteTemplate gRedXSpriteTemplate =
 {
-    .tileTag = 10250,
-    .paletteTag = 10250,
+    .tileTag = ANIM_TAG_X_SIGN,
+    .paletteTag = ANIM_TAG_X_SIGN,
     .oam = &gOamData_AffineOff_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810FBA8,
+    .callback = AnimRedX,
 };
 
 const union AffineAnimCmd gUnknown_085967C4[] =
@@ -370,7 +370,7 @@ const union AffineAnimCmd *const gUnknown_08596894[] =
     gUnknown_0859687C,
 };
 
-const struct SpriteTemplate gUnknown_08596898 =
+const struct SpriteTemplate gLusterPurgeCircleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WHITE_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_WHITE_CIRCLE_OF_LIGHT,
@@ -408,7 +408,7 @@ const union AffineAnimCmd *const gUnknown_08596918[] =
     gUnknown_08596908,
 };
 
-const struct SpriteTemplate gUnknown_08596920 =
+const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
@@ -416,7 +416,7 @@ const struct SpriteTemplate gUnknown_08596920 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596918,
-    .callback = sub_8110240,
+    .callback = AnimPsychoBoost,
 };
 
 // For the rectangular wall sprite used by Reflect, Mirror Coat, etc
@@ -578,7 +578,8 @@ static void sub_810F524(struct Sprite *sprite)
     sprite->callback = DestroyAnimSprite;
 }
 
-void sub_810F58C(struct Sprite *sprite)
+// Animates the sparkle that appears during Reflect or Light Screen/Mirror Coat
+static void AnimWallSparkle(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -602,7 +603,7 @@ void sub_810F58C(struct Sprite *sprite)
         }
         else
         {
-            if (gBattleAnimArgs[2] == 0)
+            if (gBattleAnimArgs[2] == ANIM_ATTACKER)
                 InitSpritePosToAnimAttacker(sprite, respectMonPicOffsets);
             else
                 InitSpritePosToAnimTarget(sprite, respectMonPicOffsets);
@@ -687,7 +688,7 @@ static void sub_810F774(struct Sprite *sprite)
     }
 }
 
-void sub_810F7D4(u8 taskId)
+void AnimTask_MeditateStretchAttacker(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
@@ -845,9 +846,9 @@ static void sub_810FB60(struct Sprite *sprite)
     sprite->data[1]++;
 }
 
-void sub_810FBA8(struct Sprite *sprite)
+static void AnimRedX(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -857,13 +858,13 @@ void sub_810FBA8(struct Sprite *sprite)
     sprite->callback = sub_810FB60;
 }
 
-void sub_810FBF0(u8 taskId)
+void AnimTask_SkillSwap(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     if (IsContest())
     {
-        if (gBattleAnimArgs[0] == 1)
+        if (gBattleAnimArgs[0] == ANIM_TARGET)
         {
             task->data[10] = -10;
             task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_RIGHT) - 8;
@@ -1116,7 +1117,7 @@ static void sub_8110134(u8 taskId)
     }
 }
 
-void sub_8110240(struct Sprite *sprite)
+static void AnimPsychoBoost(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {

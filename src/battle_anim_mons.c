@@ -2329,7 +2329,10 @@ void AnimSpinningSparkle(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_80A8BC4(u8 taskId)
+// Slides attacker to right and back with a cloned trace of the specified color
+// arg0: Trace palette blend color
+// arg1: Trace palette blend coeff
+void AnimTask_AttackerPunchWithTrace(u8 taskId)
 {
     u16 src;
     u16 dest;

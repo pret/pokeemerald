@@ -192,7 +192,7 @@ const struct SpriteTemplate gHydroPumpOrbSpriteTemplate =
     .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_085950FC =
+const struct SpriteTemplate gMudShotOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BROWN_ORB,
     .paletteTag = ANIM_TAG_BROWN_ORB,
@@ -203,7 +203,7 @@ const struct SpriteTemplate gUnknown_085950FC =
     .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_08595114 =
+const struct SpriteTemplate gSignalBeamRedOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GLOWY_RED_ORB,
     .paletteTag = ANIM_TAG_GLOWY_RED_ORB,
@@ -214,7 +214,7 @@ const struct SpriteTemplate gUnknown_08595114 =
     .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_0859512C =
+const struct SpriteTemplate gSignalBeamGreenOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GLOWY_GREEN_ORB,
     .paletteTag = ANIM_TAG_GLOWY_GREEN_ORB,
@@ -249,7 +249,7 @@ const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
     .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_08595170 =
+const struct SpriteTemplate gPsywaveRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_RING,
     .paletteTag = ANIM_TAG_BLUE_RING,

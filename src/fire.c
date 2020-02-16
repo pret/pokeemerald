@@ -128,7 +128,7 @@ const union AffineAnimCmd *const gUnknown_085953F4[] =
     gUnknown_085953DC,
 };
 
-const struct SpriteTemplate gUnknown_085953F8 =
+const struct SpriteTemplate gLargeFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FIRE,
     .paletteTag = ANIM_TAG_FIRE,
@@ -139,7 +139,7 @@ const struct SpriteTemplate gUnknown_085953F8 =
     .callback = sub_8108FBC,
 };
 
-const struct SpriteTemplate gUnknown_08595410 =
+const struct SpriteTemplate gLargeFlameScatterSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FIRE,
     .paletteTag = ANIM_TAG_FIRE,

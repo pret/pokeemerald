@@ -395,7 +395,7 @@ static void sub_8113B90(struct Sprite *sprite)
         DestroySpriteAndMatrix(sprite);
 }
 
-void sub_8113BAC(u8 taskId)
+void AnimTask_MoveAttackerMementoShadow(u8 taskId)
 {
     struct ScanlineEffectParams scanlineParams;
     struct BattleAnimBgData animBg;
@@ -524,7 +524,7 @@ static void sub_8113D60(u8 taskId)
     }
 }
 
-void sub_8113E78(u8 taskId)
+void AnimTask_MoveTargetMementoShadow(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     struct ScanlineEffectParams scanlineParams;
@@ -770,7 +770,7 @@ static void sub_8114374(u8 priority)
     }
 }
 
-void sub_81143C0(u8 taskId)
+void AnimTask_InitMementoShadow(u8 taskId)
 {
     u8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? 1 : 0;
     MoveBattlerSpriteToBG(gBattleAnimAttacker, toBG2, TRUE);
