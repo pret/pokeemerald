@@ -951,7 +951,8 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, Task_CloseBattlePyramidBagMessage);
     }
-    else if (gBattlerInMenuId == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)) // Attempting to throw a ball with the second pokemon.
+    else if (gBattlerInMenuId == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
+             && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))) // Attempting to throw a ball with the second pokemon while both are alive.
     {
         static const u8 textCantThrowPokeBall[] = _("Cannot throw a ball!\p");
 
