@@ -103,6 +103,28 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
     [ABILITY_WATER_BUBBLE] = 1,
 };
 
+static const u8 sAbilitiesNotTraced[ABILITIES_COUNT] =
+{
+    [ABILITY_BATTLE_BOND] = 1,
+    [ABILITY_COMATOSE] = 1,
+    [ABILITY_DISGUISE] = 1,
+    [ABILITY_FLOWER_GIFT] = 1,
+    [ABILITY_FORECAST] = 1,
+    [ABILITY_ILLUSION] = 1,
+    [ABILITY_IMPOSTER] = 1,
+    [ABILITY_MULTITYPE] = 1,
+    [ABILITY_NONE] = 1,
+    [ABILITY_POWER_CONSTRUCT] = 1,
+    [ABILITY_POWER_OF_ALCHEMY] = 1,
+    [ABILITY_RECEIVER] = 1,
+    [ABILITY_RKS_SYSTEM] = 1,
+    [ABILITY_SCHOOLING] = 1,
+    [ABILITY_SHIELDS_DOWN] = 1,
+    [ABILITY_STANCE_CHANGE] = 1,
+    [ABILITY_TRACE] = 1,
+    [ABILITY_ZEN_MODE] = 1,
+};
+
 static const u8 sHoldEffectToType[][2] =
 {
     {HOLD_EFFECT_BUG_POWER, TYPE_BUG},
@@ -3697,17 +3719,17 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 
                 if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 {
-                    if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0
-                     && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
+                    if (!sAbilitiesNotTraced[gBattleMons[target1].ability] && gBattleMons[target1].hp != 0
+                     && !sAbilitiesNotTraced[gBattleMons[target2].ability] && gBattleMons[target2].hp != 0)
                         gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side), effect++;
-                    else if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0)
+                    else if (!sAbilitiesNotTraced[gBattleMons[target1].ability] && gBattleMons[target1].hp != 0)
                         gActiveBattler = target1, effect++;
-                    else if (gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
+                    else if (!sAbilitiesNotTraced[gBattleMons[target2].ability] && gBattleMons[target2].hp != 0)
                         gActiveBattler = target2, effect++;
                 }
                 else
                 {
-                    if (gBattleMons[target1].ability && gBattleMons[target1].hp)
+                    if (!sAbilitiesNotTraced[gBattleMons[target1].ability] && gBattleMons[target1].hp != 0)
                         gActiveBattler = target1, effect++;
                 }
 
