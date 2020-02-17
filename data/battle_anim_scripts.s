@@ -2065,15 +2065,17 @@ Move_BUG_BUZZ:
 	end
 	
 Move_DRAGON_PULSE:
-	createsprite gSimplePaletteBlendSpriteTemplate, 2, 5, 1, 1, 0, 7, 0  
+	loadspritegfx ANIM_TAG_DRAGON_PULSE
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 7, RGB_BLACK
 	waitforvisualfinish 
-	loadspritegfx ANIM_TAG_DRAGON_PULSE 
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER 
-	createsoundtask sub_8158C58, 7, 200, -64, SOUND_PAN_TARGET, 3, 4, 0, 15  
+	createsoundtask sub_8158C58, SE_W060B, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 4, 0, 15  
 	call DragonPulseParticle 
 	call DragonPulseParticle 
-	createvisualtask AnimTask_SwayMon, 5, 5, 0, 6, 51200, 4, 1  
-	createvisualtask sub_8115A04, 2, 6, 4, 2, 2, 0, 12, RGB(30, 10, 13)  
+	createvisualtask AnimTask_SwayMon, 5, 0, 6, 51200, 4, ANIM_TARGET  
+	createvisualtask sub_8115A04, 2, 4, 2, 2, 0, 12, RGB(30, 10, 13)  
 	call DragonPulseParticle 
 	call DragonPulseParticle 
 	call DragonPulseParticle 
@@ -2085,10 +2087,10 @@ Move_DRAGON_PULSE:
 	call DragonPulseParticle 
 	waitforvisualfinish 
 	delay 1 
-	createsprite gSimplePaletteBlendSpriteTemplate, 2, 5, 1, 1, 7, 0, 0  
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 7, 0, RGB_BLACK  
 	waitforvisualfinish 
-	clearmonbg ANIM_DEF_PARTNER 
-	blendoff 
+	blendoff
+	clearmonbg ANIM_TARGET  
 	end 
 DragonPulseParticle:
 	createsprite gDragonPulseSpriteTemplate, 130, 6, 16, 0, 0, 0, 13, 0  
@@ -2387,7 +2389,7 @@ Move_NASTY_PLOT:
 NastyPlotAction:
 	fadetobg BG_DARK 
 	waitbgfadeout 
-	createvisualtask AnimTask_FadeScreenToWhite, 5, 0
+	createvisualtask AnimTask_FadeScreenToWhite, 5
 	waitbgfadein 
 	return
 	
@@ -3830,20 +3832,21 @@ ShadowForceWaitEnd:
 	waitforvisualfinish 
 	end 
 ShadowForcePrep:
-	playsewithpan 190, SOUND_PAN_ATTACKER, 
-	createsprite gSimplePaletteBlendSpriteTemplate 2, 5, 1, 3, 0, 16, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 0
-	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, 0, 18, 6, 1, 3
-	createvisualtask sub_81136E8, 2, 1, 1
+	monbg ANIM_ATTACKER
+	playsewithpan SE_W185, SOUND_PAN_ATTACKER, 
+	createsprite gSimplePaletteBlendSpriteTemplate ANIM_ATTACKER, 2, 1, 3, 0, 16, RGB_BLACK
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_TARGET, 0
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 0
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATK_PARTNER, 0
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_DEF_PARTNER, 0
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 18, 6, 1, 3
+	createvisualtask sub_81136E8, 2, 1
 	delay 80
-	createsprite gSimplePaletteBlendSpriteTemplate 2, 5, 1, 3, 16, 0, 0
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 1 
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 1 
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 1
-	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, 2, 1
+	createsprite gSimplePaletteBlendSpriteTemplate ANIM_ATTACKER, 2, 1, 3, 16, 0, RGB_BLACK
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_TARGET, 1 
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATTACKER, 1 
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_ATK_PARTNER, 1
+	createvisualtask AnimTask_SetGreyscaleOrOriginalPal, 5, ANIM_DEF_PARTNER, 1
 	waitforvisualfinish 
 	clearmonbg ANIM_ATTACKER 
 	invisible 0
@@ -3857,10 +3860,10 @@ ShadowForceAttack:
 	waitbgfadein 
 	delay 10 
 	playsewithpan SOUND_PAN_ATTACKER, 192
-	createvisualtask sub_811188C, 5, 1, 85
+	createvisualtask sub_811188C, 5, 85
 	delay 70 
-	createvisualtask AnimTask_ShakeMon2 2, 5, 1, 2, 0, 12, 1
-	createvisualtask sub_8115A04 2, 6, 4, 0, 2, 0, 13, 0
+	createvisualtask AnimTask_ShakeMon2 2, 1, 2, 0, 12, 1
+	createvisualtask sub_8115A04 2, 4, 0, 2, 0, 13, 0
 	waitforvisualfinish 
 	clearmonbg ANIM_ATTACKER 
 	delay 1
@@ -3870,7 +3873,7 @@ ShadowForceAttack:
 ShadowForceBg:
 	fadetobg BG_DARK 
 	waitbgfadeout 
-	createvisualtask AnimTask_FadeScreenToWhite, 5, 0
+	createvisualtask AnimTask_FadeScreenToWhite, 5
 	waitbgfadein 
 	return
 	
