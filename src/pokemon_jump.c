@@ -2040,7 +2040,7 @@ static int sub_802C6B0(void)
 
 static bool32 sub_802C70C(void)
 {
-    return !gUnknown_03005000.unk_124.unk_8c2 && !gUnknown_03005000.unk_9e8.unk_232;
+    return !Rfu.unk_124.unk_8c2 && !Rfu.unk_9e8.unk_232;
 }
 
 static int sub_802C73C(u8 *arg0)

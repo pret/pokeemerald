@@ -280,9 +280,9 @@ void sub_8020C70(MainCallback callback)
     if (!gReceivedRemoteLinkPlayers || gWirelessCommType == 0)
     {
         SetMainCallback2(callback);
-        gUnknown_03005000.unk_10 = 0;
-        gUnknown_03005000.unk_12 = 0;
-        gUnknown_03005000.unk_ee = 1;
+        Rfu.unk_10 = 0;
+        Rfu.unk_12 = 0;
+        Rfu.unk_ee = 1;
         return;
     }
 
@@ -291,9 +291,9 @@ void sub_8020C70(MainCallback callback)
     if (playerCount < 2 || multiplayerId >= playerCount)
     {
         SetMainCallback2(callback);
-        gUnknown_03005000.unk_10 = 0;
-        gUnknown_03005000.unk_12 = 0;
-        gUnknown_03005000.unk_ee = 1;
+        Rfu.unk_10 = 0;
+        Rfu.unk_12 = 0;
+        Rfu.unk_ee = 1;
         return;
     }
 
@@ -301,9 +301,9 @@ void sub_8020C70(MainCallback callback)
     if (!gUnknown_02022C90)
     {
         SetMainCallback2(callback);
-        gUnknown_03005000.unk_10 = 0;
-        gUnknown_03005000.unk_12 = 0;
-        gUnknown_03005000.unk_ee = 1;
+        Rfu.unk_10 = 0;
+        Rfu.unk_12 = 0;
+        Rfu.unk_ee = 1;
         return;
     }
 
