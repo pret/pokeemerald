@@ -1144,12 +1144,7 @@ static u8 ReformatItemDescription(u16 item, u8 *dest)
     u8 count = 0;
     u8 numLines = 1;
     u8 maxChars = 32;
-    u8 *desc;
-    
-    if (ItemId_GetPocket(item) == POCKET_TM_HM)
-        desc = (u8 *)gMoveDescriptionPointers[ItemIdToBattleMoveId(item) - 1];
-    else
-        desc = (u8 *)gItems[item].description;
+    u8 *desc = (u8 *)gItems[item].description;
     
     while (*desc != EOS)
     {        
