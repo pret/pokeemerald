@@ -272,13 +272,8 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			unsigned short loop_type = (aif->data[pos++] << 8);
 			loop_type |= (uint8_t)aif->data[pos++];
 
-			if (loop_type)
+			if (loop_type && markers)
 			{
-				if (!markers)
-				{
-					FATAL_ERROR("INST chunk loop without MARK chunk in file!\n");
-				}
-			
 				unsigned short marker_id = (aif->data[pos++] << 8);
 				marker_id |= (uint8_t)aif->data[pos++];
 
@@ -317,7 +312,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			else
 			{
 				// Skip NoLooping sustain loop.
-				pos += 6;
+				pos += 4;
 			}
 			
 			// Skip release loop, we don't need it.
