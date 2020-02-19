@@ -34,8 +34,8 @@ double ieee754_read_extended (uint8_t*);
 #define FATAL_ERROR(format, ...)           \
 do                                         \
 {                                          \
-    fprintf(stderr, format, __VA_ARGS__);  \
-    exit(1);                               \
+	fprintf(stderr, format, __VA_ARGS__);  \
+	exit(1);                               \
 } while (0)
 
 #else
@@ -43,8 +43,8 @@ do                                         \
 #define FATAL_ERROR(format, ...)            \
 do                                          \
 {                                           \
-    fprintf(stderr, format, ##__VA_ARGS__); \
-    exit(1);                                \
+	fprintf(stderr, format, ##__VA_ARGS__); \
+	exit(1);                                \
 } while (0)
 
 #endif // _MSC_VER
@@ -65,8 +65,8 @@ struct Bytes {
 };
 
 struct Marker {
-	uint16_t id;
-	uint32_t position;
+	unsigned short id;
+	unsigned long position;
 	// don't care about the name
 };
 
@@ -174,7 +174,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 	}
 
 	struct Marker *markers = NULL;
-	unsigned short num_markers = 0;
+	unsigned short num_markers = 0, loop_start = 0, loop_end = 0;
 	unsigned long num_sample_frames = 0;
 
 	// Read all the Chunks to populate the AifData struct.
@@ -272,42 +272,13 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			unsigned short loop_type = (aif->data[pos++] << 8);
 			loop_type |= (uint8_t)aif->data[pos++];
 
-			if (loop_type && markers)
+			if (loop_type)
 			{
-				unsigned short marker_id = (aif->data[pos++] << 8);
-				marker_id |= (uint8_t)aif->data[pos++];
+				loop_start = (aif->data[pos++] << 8);
+				loop_start |= (uint8_t)aif->data[pos++];
 
-				struct Marker *cur_marker = markers;
-				
-				// Grab loop start point.
-				for (int i = 0; i < num_markers; i++, cur_marker++)
-				{
-					if (cur_marker->id == marker_id)
-					{
-						aif_data->loop_offset = cur_marker->position;
-						aif_data->has_loop = true;
-						break;
-					}
-				}
-
-				marker_id = (aif->data[pos++] << 8);
-				marker_id |= (uint8_t)aif->data[pos++];
-
-				cur_marker = markers;
-
-				// Grab loop end point.
-				for (int i = 0; i < num_markers; i++, cur_marker++)
-				{
-					if (cur_marker->id == marker_id)
-					{
-						if (cur_marker->position < aif_data->loop_offset) {
-							aif_data->loop_offset = cur_marker->position;
-							aif_data->has_loop = true;
-						}
-						aif_data->num_samples = cur_marker->position;
-						break;
-					}
-				}
+				loop_end = (aif->data[pos++] << 8);
+				loop_end |= (uint8_t)aif->data[pos++];
 			}
 			else
 			{
@@ -337,8 +308,41 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			pos += chunk_size;
 		}
 	}
+	
+	if (markers)
+	{
+		// Resolve loop points.
+		struct Marker *cur_marker = markers;
+	
+		// Grab loop start point.
+		for (int i = 0; i < num_markers; i++, cur_marker++)
+		{
+			if (cur_marker->id == loop_start)
+			{
+				aif_data->loop_offset = cur_marker->position;
+				aif_data->has_loop = true;
+				break;
+			}
+		}
 
-	free(markers);
+		cur_marker = markers;
+
+		// Grab loop end point.
+		for (int i = 0; i < num_markers; i++, cur_marker++)
+		{
+			if (cur_marker->id == loop_end)
+			{
+				if (cur_marker->position < aif_data->loop_offset) {
+					aif_data->loop_offset = cur_marker->position;
+					aif_data->has_loop = true;
+				}
+				aif_data->num_samples = cur_marker->position;
+				break;
+			}
+		}
+
+		free(markers);
+	}
 }
 
 // This is a table of deltas between sample values in compressed PCM data.
