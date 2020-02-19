@@ -274,6 +274,11 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 
 			if (loop_type)
 			{
+				if (!markers)
+				{
+					FATAL_ERROR("INST chunk loop without MARK chunk in file!\n");
+				}
+			
 				unsigned short marker_id = (aif->data[pos++] << 8);
 				marker_id |= (uint8_t)aif->data[pos++];
 
