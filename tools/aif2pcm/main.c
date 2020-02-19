@@ -238,18 +238,17 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 				char *marker_name = (char *)malloc((marker_name_size + 1) * sizeof(char));
 				memcpy(marker_name, &aif->data[pos], marker_name_size);
 				marker_name[marker_name_size] = '\0';
-				pos += marker_name_size;
+				pos += marker_name_size + !(marker_name_size & 1);
 
-				if (strcmp(marker_name, "START") == 0)
+				if (i == 0)
 				{
 					aif_data->loop_offset = marker_position;
 					aif_data->has_loop = true;
 				}
-				else if (strcmp(marker_name, "END") == 0)
+				else if (i == 1)
 				{
-					if (!aif_data->has_loop) {
+					if (marker_position < aif_data->loop_offset) {
 						aif_data->loop_offset = marker_position;
-						aif_data->has_loop = true;
 					}
 					aif_data->num_samples = marker_position;
 				}
