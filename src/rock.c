@@ -827,11 +827,11 @@ static void sub_811149C(struct Sprite *sprite)
 void AnimTask_GetSeismicTossDamageLevel(u8 taskId)
 {
     if (gAnimMoveDmg < 33)
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[ARG_RET_ID] = 0;
     if ((u32)gAnimMoveDmg - 33 < 33)
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[ARG_RET_ID] = 1;
     if (gAnimMoveDmg > 65)
-        gBattleAnimArgs[7] = 2;
+        gBattleAnimArgs[ARG_RET_ID] = 2;
 
     DestroyAnimVisualTask(taskId);
 }
@@ -869,7 +869,7 @@ void sub_8111590(u8 taskId)
     gTasks[taskId].data[1] &= 0xFF;
     gBattle_BG3_Y = gTasks[taskId].data[2] + Cos(4, gTasks[taskId].data[1]);
 
-    if (gBattleAnimArgs[7] == 0xFFF)
+    if (gBattleAnimArgs[ARG_RET_ID] == 0xFFF)
     {
         gBattle_BG3_Y = 0;
         sub_80A6DAC(TRUE);

@@ -7703,7 +7703,7 @@ Move_HEAL_BELL:
 	loadspritegfx ANIM_TAG_THIN_RING
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, 10, 0, 0, 10, RGB_WHITE
 	waitforvisualfinish
-	createvisualtask AnimTask_LoadMusicNotesPal, 5
+	createvisualtask AnimTask_LoadMusicNotesPals, 5
 	createsprite gBellSpriteTemplate, ANIM_ATTACKER, 2, 0, -24, 0, 1
 	delay 12
 	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 48, -18, 35, 0, 0
@@ -7724,7 +7724,7 @@ Move_HEAL_BELL:
 	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, -36, -18, 30, 6, 1
 	call HealBellRing
 	waitforvisualfinish
-	createvisualtask AnimTask_FreeMusicNotesPal, 5
+	createvisualtask AnimTask_FreeMusicNotesPals, 5
 	waitforvisualfinish
 	unloadspritegfx ANIM_TAG_BELL
 	unloadspritegfx ANIM_TAG_MUSIC_NOTES_2
@@ -9053,7 +9053,7 @@ Move_COSMIC_POWER:
 	loadspritegfx ANIM_TAG_SPARKLE_2
 	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_W322, 0
 	playsewithpan SE_W322, 0
-	createvisualtask AnimTask_BlendAllBattlerPalettesButAttacker, 2, 0, 0, 15, RGB_BLACK
+	createvisualtask AnimTask_BlendNonAttackerPalettes, 2, 0, 0, 15, RGB_BLACK
 	waitforvisualfinish
 	fadetobg BG_COSMIC
 	waitbgfadeout
@@ -9065,7 +9065,7 @@ Move_COSMIC_POWER:
 	delay 8
 	createsprite gGrantingStarsSpriteTemplate, ANIM_ATTACKER, 2, 12, -5, 0, 0, 32, 60
 	delay 40
-	createvisualtask AnimTask_BlendAllBattlerPalettesButAttacker, 2, 0, 15, 0, RGB_BLACK
+	createvisualtask AnimTask_BlendNonAttackerPalettes, 2, 0, 15, 0, RGB_BLACK
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout

@@ -1944,7 +1944,7 @@ void AnimTask_GetFrustrationPowerLevel(u8 taskId)
         powerLevel = 2;
     else
         powerLevel = 3;
-    gBattleAnimArgs[7] = powerLevel;
+    gBattleAnimArgs[ARG_RET_ID] = powerLevel;
     DestroyAnimVisualTask(taskId);
 }
 
