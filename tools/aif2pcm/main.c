@@ -64,6 +64,12 @@ struct Bytes {
 	uint8_t *data;
 };
 
+struct Marker {
+	uint16_t id;
+	uint32_t position;
+	// don't care about the name
+};
+
 struct Bytes *read_bytearray(const char *filename)
 {
 	struct Bytes *bytes = malloc(sizeof(struct Bytes));
@@ -167,6 +173,8 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 		FATAL_ERROR("FORM Type is '%s', but it must be AIFF!", chunk_type);
 	}
 
+	struct Marker *markers = NULL;
+	unsigned short num_markers = 0;
 	unsigned long num_sample_frames = 0;
 
 	// Read all the Chunks to populate the AifData struct.
@@ -219,10 +227,17 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 		}
 		else if (strcmp(chunk_name, "MARK") == 0)
 		{
-			unsigned short num_markers = (aif->data[pos++] << 8);
+			num_markers = (aif->data[pos++] << 8);
 			num_markers |= (uint8_t)aif->data[pos++];
 
-			// Read each marker and look for the "START" marker.
+			if (markers)
+			{
+				FATAL_ERROR("More than one MARK Chunk in file!\n");
+			}
+			
+			markers = calloc(num_markers, sizeof(struct Marker));
+
+			// Read each marker.
 			for (int i = 0; i < num_markers; i++)
 			{
 				unsigned short marker_id = (aif->data[pos++] << 8);
@@ -233,28 +248,16 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 				marker_position |= (aif->data[pos++] << 8);
 				marker_position |=  (uint8_t)aif->data[pos++];
 
-				// Marker id is a pascal-style string.
+				// Marker name is a Pascal-style string.
 				uint8_t marker_name_size = aif->data[pos++];
-				char *marker_name = (char *)malloc((marker_name_size + 1) * sizeof(char));
+				// We don't actually need the marker name for anything anymore.
+				/*char *marker_name = (char *)malloc((marker_name_size + 1) * sizeof(char));
 				memcpy(marker_name, &aif->data[pos], marker_name_size);
-				marker_name[marker_name_size] = '\0';
-				pos += marker_name_size;
+				marker_name[marker_name_size] = '\0';*/
+				pos += marker_name_size + !(marker_name_size & 1);
 
-				if (strcmp(marker_name, "START") == 0)
-				{
-					aif_data->loop_offset = marker_position;
-					aif_data->has_loop = true;
-				}
-				else if (strcmp(marker_name, "END") == 0)
-				{
-					if (!aif_data->has_loop) {
-						aif_data->loop_offset = marker_position;
-						aif_data->has_loop = true;
-					}
-					aif_data->num_samples = marker_position;
-				}
-
-				free(marker_name);
+				markers[i].id = marker_id;
+				markers[i].position = marker_position;
 			}
 		}
 		else if (strcmp(chunk_name, "INST") == 0)
@@ -264,11 +267,60 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			aif_data->midi_note = midi_note;
 
 			// Skip over data we don't need.
-			pos += 19;
+			pos += 7;
+
+			unsigned short loop_type = (aif->data[pos++] << 8);
+			loop_type |= (uint8_t)aif->data[pos++];
+
+			if (loop_type && markers)
+			{
+				unsigned short marker_id = (aif->data[pos++] << 8);
+				marker_id |= (uint8_t)aif->data[pos++];
+
+				struct Marker *cur_marker = markers;
+				
+				// Grab loop start point.
+				for (int i = 0; i < num_markers; i++, cur_marker++)
+				{
+					if (cur_marker->id == marker_id)
+					{
+						aif_data->loop_offset = cur_marker->position;
+						aif_data->has_loop = true;
+						break;
+					}
+				}
+
+				marker_id = (aif->data[pos++] << 8);
+				marker_id |= (uint8_t)aif->data[pos++];
+
+				cur_marker = markers;
+
+				// Grab loop end point.
+				for (int i = 0; i < num_markers; i++, cur_marker++)
+				{
+					if (cur_marker->id == marker_id)
+					{
+						if (cur_marker->position < aif_data->loop_offset) {
+							aif_data->loop_offset = cur_marker->position;
+							aif_data->has_loop = true;
+						}
+						aif_data->num_samples = cur_marker->position;
+						break;
+					}
+				}
+			}
+			else
+			{
+				// Skip NoLooping sustain loop.
+				pos += 4;
+			}
+			
+			// Skip release loop, we don't need it.
+			pos += 6;
 		}
 		else if (strcmp(chunk_name, "SSND") == 0)
 		{
-			// SKip offset and blockSize
+			// Skip offset and blockSize
 			pos += 8;
 
 			unsigned long num_samples = chunk_size - 8;
@@ -285,6 +337,8 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			pos += chunk_size;
 		}
 	}
+
+	free(markers);
 }
 
 // This is a table of deltas between sample values in compressed PCM data.
