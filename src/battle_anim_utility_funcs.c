@@ -683,7 +683,7 @@ static void sub_81175C4(u32 selectedPalettes, u16 color)
     }
 }
 
-void AnimTask_BlendAllBattlerPalettesButAttacker(u8 taskId)
+void AnimTask_BlendNonAttackerPalettes(u8 taskId)
 {
     u32 battler;
     int j;
@@ -729,7 +729,7 @@ static void sub_81176D8(u8 taskId)
     gTasks[taskId].data[10] &= 0xFF;
     gTasks[taskId].data[11] &= 0xFF;
 
-    if (gBattleAnimArgs[7] == gTasks[taskId].data[3])
+    if (gBattleAnimArgs[ARG_RET_ID] == gTasks[taskId].data[3])
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
@@ -740,19 +740,19 @@ static void sub_81176D8(u8 taskId)
 
 void AnimTask_GetAttackerSide(u8 taskId)
 {
-    gBattleAnimArgs[7] = GetBattlerSide(gBattleAnimAttacker);
+    gBattleAnimArgs[ARG_RET_ID] = GetBattlerSide(gBattleAnimAttacker);
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_GetTargetSide(u8 taskId)
 {
-    gBattleAnimArgs[7] = GetBattlerSide(gBattleAnimTarget);
+    gBattleAnimArgs[ARG_RET_ID] = GetBattlerSide(gBattleAnimTarget);
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_GetTargetIsAttackerPartner(u8 taskId)
 {
-    gBattleAnimArgs[7] = BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget;
+    gBattleAnimArgs[ARG_RET_ID] = BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -1005,9 +1005,9 @@ void sub_8117DD8(u8 taskId)
 void AnimTask_IsContest(u8 taskId)
 {
     if (IsContest())
-        gBattleAnimArgs[7] = TRUE;
+        gBattleAnimArgs[ARG_RET_ID] = TRUE;
     else
-        gBattleAnimArgs[7] = FALSE;
+        gBattleAnimArgs[ARG_RET_ID] = FALSE;
 
     DestroyAnimVisualTask(taskId);
 }
@@ -1022,9 +1022,9 @@ void sub_8117E94(u8 taskId)
 void AnimTask_IsTargetSameSide(u8 taskId)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
-        gBattleAnimArgs[7] = TRUE;
+        gBattleAnimArgs[ARG_RET_ID] = TRUE;
     else
-        gBattleAnimArgs[7] = FALSE;
+        gBattleAnimArgs[ARG_RET_ID] = FALSE;
 
     DestroyAnimVisualTask(taskId);
 }
@@ -1060,7 +1060,7 @@ void AnimTask_ExtremeSpeedMoveTarget(u8 taskId)
 
 static void ExtremSpeedMoveTarget_Step(u8 taskId)
 {
-    if (gBattleAnimArgs[7] == 0x1000)
+    if (gBattleAnimArgs[ARG_RET_ID] == 0x1000)
     {
         gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = (u8)gTasks[taskId].data[0] & 1;
         DestroyTask(taskId);

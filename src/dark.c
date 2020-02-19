@@ -983,10 +983,10 @@ void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
 void sub_8114960(u8 taskId)
 {
     if (gAnimMoveTurn < 2)
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[ARG_RET_ID] = 0;
 
     if (gAnimMoveTurn == 2)
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[ARG_RET_ID] = 1;
 
     DestroyAnimVisualTask(taskId);
 }

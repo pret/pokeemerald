@@ -22,8 +22,8 @@ static void AnimConfusionDuckStep(struct Sprite *);
 static void AnimSimplePaletteBlendStep(struct Sprite *);
 static void sub_81158F8(struct Sprite *);
 static void sub_8115984(struct Sprite *);
-static void BlendMonColorInCycle(u8, u8, u8);
-static void AnimTask_BlendCycleMonColorLoop(u8);
+static void BlendColorInCycle(u8, u8, u8);
+static void AnimTask_BlendColorInCycleLoop(u8);
 static void sub_8115BC8(u8, u8, u8);
 static void sub_8115C18(u8);
 static void sub_8115CD0(u8, u8, u8);
@@ -416,12 +416,12 @@ void sub_81159B4(struct Sprite *sprite)
 }
 
 // Task data for AnimTask_BlendColorCycle
-#define tPalSelector   data[0] // arg0
-#define tDelay         data[1] // arg1
-#define tNumBlends     data[2] // arg2
-#define tInitialBlendY data[3] // arg3
-#define tTargetBlendY  data[4] // arg4
-#define tBlendColor    data[5] // arg5
+#define tPalSelector   data[0]
+#define tDelay         data[1]
+#define tNumBlends     data[2]
+#define tInitialBlendY data[3]
+#define tTargetBlendY  data[4]
+#define tBlendColor    data[5]
 #define tRestoreBlend  data[8]
 
 // Blends mon/screen to designated color or back alternately tNumBlends times 
@@ -435,11 +435,11 @@ void AnimTask_BlendColorCycle(u8 taskId)
     gTasks[taskId].tTargetBlendY = gBattleAnimArgs[4];
     gTasks[taskId].tBlendColor = gBattleAnimArgs[5];
     gTasks[taskId].tRestoreBlend = FALSE;
-    BlendMonColorInCycle(taskId, 0, gTasks[taskId].tTargetBlendY);
-    gTasks[taskId].func = AnimTask_BlendCycleMonColorLoop;
+    BlendColorInCycle(taskId, 0, gTasks[taskId].tTargetBlendY);
+    gTasks[taskId].func = AnimTask_BlendColorInCycleLoop;
 }
 
-static void BlendMonColorInCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
+static void BlendColorInCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gTasks[taskId].tPalSelector);
     BeginNormalPaletteFade(
@@ -453,7 +453,7 @@ static void BlendMonColorInCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendA
     gTasks[taskId].tRestoreBlend ^= 1;
 }
 
-static void AnimTask_BlendCycleMonColorLoop(u8 taskId)
+static void AnimTask_BlendColorInCycleLoop(u8 taskId)
 {
     u8 startBlendAmount, targetBlendAmount;
     if (!gPaletteFade.active)
@@ -476,7 +476,7 @@ static void AnimTask_BlendCycleMonColorLoop(u8 taskId)
             if (gTasks[taskId].tNumBlends == 1)
                 targetBlendAmount = 0;
 
-            BlendMonColorInCycle(taskId, startBlendAmount, targetBlendAmount);
+            BlendColorInCycle(taskId, startBlendAmount, targetBlendAmount);
         }
         else
         {

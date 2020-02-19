@@ -2758,7 +2758,7 @@ static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *sprite)
 
 static void AnimSoftBoiledEgg_Step4(struct Sprite *sprite)
 {
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
     {
         sprite->invisible = 1;
         if (sprite->data[7] == 0)
@@ -3001,7 +3001,7 @@ void AnimSpeedDust(struct Sprite *sprite)
     }
 }
 
-void AnimTask_LoadMusicNotesPal(u8 taskId)
+void AnimTask_LoadMusicNotesPals(u8 taskId)
 {
     int i;
     u8 paletteNums[NUM_MUSIC_NOTE_PAL_TAGS];
@@ -3019,7 +3019,7 @@ void AnimTask_LoadMusicNotesPal(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_FreeMusicNotesPal(u8 taskId)
+void AnimTask_FreeMusicNotesPals(u8 taskId)
 {
     int i;
     for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
@@ -3441,7 +3441,7 @@ static void AnimOrbitFastStep(struct Sprite *sprite)
         break;
     }
 
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
         DestroyAnimSprite(sprite);
 }
 
@@ -3814,12 +3814,12 @@ void AnimGuardRing(struct Sprite *sprite)
 
 void AnimTask_IsFuryCutterHitRight(u8 taskId)
 {
-    gBattleAnimArgs[7] = gAnimDisableStructPtr->furyCutterCounter & 1;
+    gBattleAnimArgs[ARG_RET_ID] = gAnimDisableStructPtr->furyCutterCounter & 1;
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_GetFuryCutterHitCount(u8 taskId)
 {
-    gBattleAnimArgs[7] = gAnimDisableStructPtr->furyCutterCounter;
+    gBattleAnimArgs[ARG_RET_ID] = gAnimDisableStructPtr->furyCutterCounter;
     DestroyAnimVisualTask(taskId);
 }
