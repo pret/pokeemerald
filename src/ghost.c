@@ -586,7 +586,8 @@ static void sub_8111D78(u8 taskId)
     }
 }
 
-void sub_8111E50(u8 taskId)
+// Creates a blended copy of the target that wavers in front of them
+void AnimTask_SpiteTargetShadow(u8 taskId)
 {
     struct Task *task;
 

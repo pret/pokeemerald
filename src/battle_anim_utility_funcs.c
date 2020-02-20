@@ -759,7 +759,7 @@ void AnimTask_GetTargetIsAttackerPartner(u8 taskId)
 #define tInvisible gBattleAnimArgs[0];
 
 // For hiding or subsequently revealing all other battlers
-void AnimTask_SetAllBattlersButAttackerInvisiblity(u8 taskId)
+void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
 {
     u16 battler;
 

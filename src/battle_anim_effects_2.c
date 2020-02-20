@@ -3122,7 +3122,7 @@ void AnimTask_StretchTargetUp(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     if (++gTasks[taskId].data[0] == 1)
     {
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(1), gUnknown_08593988);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_TARGET), gUnknown_08593988);
         gSprites[spriteId].pos2.x = 4;
     }
     else
@@ -3137,12 +3137,12 @@ void AnimTask_StretchTargetUp(u8 taskId)
     }
 }
 
-void sub_81060B0(u8 taskId)
+void AnimTask_StretchAttackerUp(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     if (++gTasks[taskId].data[0] == 1)
     {
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(0), gUnknown_08593988);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gUnknown_08593988);
         gSprites[spriteId].pos2.x = 4;
     }
     else

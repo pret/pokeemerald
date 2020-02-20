@@ -26,7 +26,7 @@ void sub_8107674(struct Sprite *);
 static void AnimHydroCannonCharge(struct Sprite *);
 static void AnimWaitForHydroCannonChargeEnd(struct Sprite *);
 static void AnimHydroCannonBeam(struct Sprite *);
-void sub_8107894(struct Sprite *);
+static void AnimWaterGunDroplet(struct Sprite *);
 static void AnimSmallBubblePair(struct Sprite *);
 void sub_810790C(struct Sprite *);
 void sub_8108034(struct Sprite *);
@@ -36,7 +36,7 @@ void sub_81087C0(struct Sprite *);
 void sub_810886C(struct Sprite *);
 void sub_8108B2C(struct Sprite *);
 void sub_8108B94(struct Sprite *);
-void sub_8108BE0(struct Sprite *);
+static void AnimWaterPulseBubble(struct Sprite *);
 void sub_8108C08(struct Sprite *);
 void sub_8108C54(struct Sprite *);
 void AnimWaterPulseRing_Step(struct Sprite *);
@@ -328,7 +328,7 @@ const union AnimCmd *const gUnknown_08595204[] =
     gUnknown_085951F8,
 };
 
-const struct SpriteTemplate gUnknown_08595208 =
+const struct SpriteTemplate gWaterGunProjectileSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -339,7 +339,7 @@ const struct SpriteTemplate gUnknown_08595208 =
     .callback = AnimThrowProjectile,
 };
 
-const struct SpriteTemplate gUnknown_08595220 =
+const struct SpriteTemplate gWaterGunDropletSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -347,7 +347,7 @@ const struct SpriteTemplate gUnknown_08595220 =
     .anims = gUnknown_08595204,
     .images = NULL,
     .affineAnims = gUnknown_08596208,
-    .callback = sub_8107894,
+    .callback = AnimWaterGunDroplet,
 };
 
 const struct SpriteTemplate gSmallBubblePairSpriteTemplate =
@@ -444,7 +444,7 @@ const union AffineAnimCmd *const gUnknown_085952F4[] =
     gUnknown_085952D4,
 };
 
-const struct SpriteTemplate gUnknown_085952F8 =
+const struct SpriteTemplate gWaterPulseBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -452,7 +452,7 @@ const struct SpriteTemplate gUnknown_085952F8 =
     .anims = gUnknown_08595298,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8108BE0,
+    .callback = AnimWaterPulseBubble,
 };
 
 const struct SpriteTemplate gUnknown_08595310 =
@@ -466,7 +466,7 @@ const struct SpriteTemplate gUnknown_08595310 =
     .callback = sub_8108C54,
 };
 
-const struct SpriteTemplate gUnknown_08595328 =
+const struct SpriteTemplate gWeatherBallWaterDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -474,7 +474,7 @@ const struct SpriteTemplate gUnknown_08595328 =
     .anims = gUnknown_085952A0,
     .images = NULL,
     .affineAnims = gUnknown_085952F4,
-    .callback = sub_80A8EE4,
+    .callback = AnimWeatherBallDown,
 };
 
 extern const struct SpriteTemplate gWaterHitSplatSpriteTemplate;
@@ -844,7 +844,8 @@ static void AnimHydroCannonBeam(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_8107894(struct Sprite *sprite)
+// Water droplet appears and drips down. Used by Water Gun on impact
+static void AnimWaterGunDroplet(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[4];
@@ -1503,7 +1504,7 @@ void sub_8108098(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81080E4(u8 taskId)
+void AnimTask_WaterSpoutLaunch(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1686,7 +1687,7 @@ void sub_810851C(struct Sprite *sprite)
     }
 }
 
-void sub_81085C8(u8 taskId)
+void AnimTask_WaterSpoutRain(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1804,7 +1805,7 @@ void sub_810886C(struct Sprite *sprite)
     }
 }
 
-void sub_81088E4(u8 taskId)
+void AnimTask_WaterSport(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1944,7 +1945,7 @@ void sub_8108B94(struct Sprite *sprite)
     }
 }
 
-void sub_8108BE0(struct Sprite *sprite)
+static void AnimWaterPulseBubble(struct Sprite *sprite)
 {
     sprite->pos1.x = gBattleAnimArgs[0];
     sprite->pos1.y = gBattleAnimArgs[1];

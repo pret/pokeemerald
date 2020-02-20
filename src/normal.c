@@ -176,7 +176,8 @@ const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
     .callback = AnimBasicHitSplat,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8597370 =
+// TODO: Needs generic descriptive name, what distinguishes this hit splat
+const struct SpriteTemplate gSpikeHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -625,7 +626,8 @@ static void sub_8115D2C(u8 taskId)
     }
 }
 
-void sub_8115D94(u8 taskId)
+// Flashes the specified anim tag with given color. Used e.g. to flash the particles in Hyper Beam red
+void AnimTask_FlashAnimTagWithColor(u8 taskId)
 {
     u8 paletteIndex;
 

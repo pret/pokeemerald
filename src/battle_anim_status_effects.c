@@ -75,7 +75,7 @@ static const union AnimCmd *const sSpriteAnimTable_853EE34[] =
     sSpriteAnim_853EE2C
 };
 
-const struct SpriteTemplate gUnknown_0853EE38 =
+const struct SpriteTemplate gWeatherBallUpSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
@@ -83,10 +83,10 @@ const struct SpriteTemplate gUnknown_0853EE38 =
     .anims = sSpriteAnimTable_853EE34,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8E30,
+    .callback = AnimWeatherBallUp,
 };
 
-const struct SpriteTemplate gUnknown_0853EE50 =
+const struct SpriteTemplate gWeatherBallNormalDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
@@ -94,7 +94,7 @@ const struct SpriteTemplate gUnknown_0853EE50 =
     .anims = sSpriteAnimTable_853EE34,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8EE4,
+    .callback = AnimWeatherBallDown,
 };
 
 static const union AnimCmd sSpriteAnim_853EE68[] =

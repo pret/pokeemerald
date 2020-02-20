@@ -17,7 +17,7 @@ static void AnimFallingFeather(struct Sprite *);
 void sub_810E520(struct Sprite *);
 void sub_810EB40(struct Sprite *);
 void sub_810EA4C(struct Sprite *);
-void sub_810EAA0(struct Sprite *);
+static void AnimWhirlwindLine(struct Sprite *);
 void sub_810EC34(struct Sprite *);
 void sub_810EC94(struct Sprite *);
 static void AnimDiveBall(struct Sprite *);
@@ -205,7 +205,7 @@ const union AnimCmd *const gUnknown_085963D0[] =
     gUnknown_085963B8,
 };
 
-const struct SpriteTemplate gUnknown_085963D4 =
+const struct SpriteTemplate gWhirlwindLineSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WHIRLWIND_LINES,
     .paletteTag = ANIM_TAG_WHIRLWIND_LINES,
@@ -213,7 +213,7 @@ const struct SpriteTemplate gUnknown_085963D4 =
     .anims = gUnknown_085963D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810EAA0,
+    .callback = AnimWhirlwindLine,
 };
 
 const union AffineAnimCmd gUnknown_085963EC[] =
@@ -911,18 +911,18 @@ void sub_810EA4C(struct Sprite *sprite)
     sprite->callback = TranslateAnimSpriteToTargetMonLocation;
 }
 
-void sub_810EAA0(struct Sprite * sprite)
+static void AnimWhirlwindLine(struct Sprite * sprite)
 {
     u16 arg;
     u8 mult;
 
-    if (!gBattleAnimArgs[2])
+    if (gBattleAnimArgs[2] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 0);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
 
-    if ((!gBattleAnimArgs[2] && !GetBattlerSide(gBattleAnimAttacker))
-        || (gBattleAnimArgs[2] == 1 && !GetBattlerSide(gBattleAnimTarget)))
+    if ((gBattleAnimArgs[2] == ANIM_ATTACKER && !GetBattlerSide(gBattleAnimAttacker))
+        || (gBattleAnimArgs[2] == ANIM_TARGET && !GetBattlerSide(gBattleAnimTarget)))
     {
         sprite->pos1.x += 8;
     }
