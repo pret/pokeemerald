@@ -514,7 +514,7 @@ static void sub_8170660(u8 taskId)
     }
 }
 
-static void sub_8170834(u8 *paletteId1, u8 *paletteId2, u8 battler)
+static void LoadHealthboxPalsForLevelUp(u8 *paletteId1, u8 *paletteId2, u8 battler)
 {
     u8 healthBoxSpriteId;
     u8 spriteId1, spriteId2;
@@ -536,14 +536,14 @@ static void sub_8170834(u8 *paletteId1, u8 *paletteId2, u8 battler)
     gSprites[spriteId2].oam.paletteNum = *paletteId2;
 }
 
-void sub_8170920(u8 taskId)
+void AnimTask_LoadHealthboxPalsForLevelUp(u8 taskId)
 {
     u8 paletteId1, paletteId2;
-    sub_8170834(&paletteId1, &paletteId2, gBattleAnimAttacker);
+    LoadHealthboxPalsForLevelUp(&paletteId1, &paletteId2, gBattleAnimAttacker);
     DestroyAnimVisualTask(taskId);
 }
 
-static void sub_817094C(u8 battler)
+static void FreeHealthboxPalsForLevelUp(u8 battler)
 {
     u8 healthBoxSpriteId;
     u8 spriteId1, spriteId2;
@@ -562,13 +562,13 @@ static void sub_817094C(u8 battler)
     gSprites[spriteId2].oam.paletteNum = paletteId2;
 }
 
-void sub_81709EC(u8 taskId)
+void AnimTask_FreeHealthboxPalsForLevelUp(u8 taskId)
 {
-    sub_817094C(gBattleAnimAttacker);
+    FreeHealthboxPalsForLevelUp(gBattleAnimAttacker);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8170A0C(u8 taskId)
+void AnimTask_FlashHealthboxOnLevelUp(u8 taskId)
 {
     gTasks[taskId].data[10] = gBattleAnimArgs[0];
     gTasks[taskId].data[11] = gBattleAnimArgs[1];
@@ -612,7 +612,7 @@ static void sub_8170A38(u8 taskId)
     }
 }
 
-void sub_8170B04(u8 taskId)
+void AnimTask_SwitchOutShrinkMon(u8 taskId)
 {
     u8 spriteId;
 
@@ -639,7 +639,7 @@ void sub_8170B04(u8 taskId)
     }
 }
 
-void sub_8170BB0(u8 taskId)
+void AnimTask_SwitchOutBallEffect(u8 taskId)
 {
     u8 spriteId;
     u16 ball;
@@ -674,14 +674,14 @@ void sub_8170BB0(u8 taskId)
     }
 }
 
-void sub_8170CFC(u8 taskId)
+void AnimTask_LoadBallGfx(u8 taskId)
 {
     u8 ballId = ItemIdToBallId(gLastUsedItem);
     LoadBallGfx(ballId);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8170D24(u8 taskId)
+void AnimTask_FreeBallGfx(u8 taskId)
 {
     u8 ballId = ItemIdToBallId(gLastUsedItem);
     FreeBallGfx(ballId);
@@ -730,7 +730,7 @@ u8 ItemIdToBallId(u16 ballItem)
     }
 }
 
-void sub_8170E04(u8 taskId)
+void AnimTask_ThrowBall(u8 taskId)
 {
     u8 ballId;
     u8 spriteId;
@@ -753,7 +753,8 @@ static void sub_8170EF0(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_8170F2C(u8 taskId)
+// Safari Ball / Wally's ball throw
+void AnimTask_ThrowBallSpecial(u8 taskId)
 {
     int x, y;
     u8 ballId;
@@ -1910,7 +1911,8 @@ static void sub_8172B90(u8 taskId)
     }
 }
 
-void sub_8172BF0(u8 taskId)
+// arg0: TRUE to swap to mon, FALSE to swap to substitute
+void AnimTask_SwapMonSpriteToFromSubstitute(u8 taskId)
 {
     u8 spriteId;
     u32 x;
@@ -1968,7 +1970,7 @@ void sub_8172BF0(u8 taskId)
     }
 }
 
-void sub_8172D98(u8 taskId)
+void AnimTask_SubstituteFadeToInvisible(u8 taskId)
 {
     u8 spriteId;
 
@@ -2230,7 +2232,7 @@ static void sub_8173400(struct Sprite *sprite)
     }
 }
 
-void sub_817345C(u8 taskId)
+void AnimTask_SetAttackerTargetLeftPos(u8 taskId)
 {
     switch (gBattleAnimArgs[0])
     {

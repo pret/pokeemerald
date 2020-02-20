@@ -1329,8 +1329,7 @@ void MovePoisonGasCloud(struct Sprite *sprite)
     }
 }
 
-// Creates Hail.
-void AnimTask_HailStart(u8 taskId)
+void AnimTask_Hail(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 

@@ -922,7 +922,7 @@ static void AnimElectricPuff(struct Sprite *sprite)
     sprite->callback = RunStoredCallbackWhenAnimEnds;
 }
 
-// Creates an orb of electricity that grwos then slides off-screen. The attacker slides with it
+// Creates an orb of electricity that grows then slides off-screen. The attacker slides with it
 static void AnimVoltTackleOrbSlide(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, 1);

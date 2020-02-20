@@ -626,7 +626,7 @@ static void sub_8115D2C(u8 taskId)
     }
 }
 
-// Flashes the specified anim tag with given color. Used e.g. to flash the particles in Hyper Beam red
+// Flashes the specified anim tag with given color. Used e.g. to flash the particles red in Hyper Beam
 void AnimTask_FlashAnimTagWithColor(u8 taskId)
 {
     u8 paletteIndex;

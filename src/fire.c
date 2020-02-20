@@ -16,7 +16,7 @@ static void sub_8109064(struct Sprite *);
 static void sub_81090D8(struct Sprite *);
 static void AnimSunlight(struct Sprite *);
 static void AnimEmberFlare(struct Sprite *);
-static void sub_8109200(struct Sprite *);
+static void AnimBurnFlame(struct Sprite *);
 static void AnimFireRing(struct Sprite *);
 static void AnimFireRingStep1(struct Sprite *);
 static void AnimFireRingStep2(struct Sprite *);
@@ -208,7 +208,7 @@ const union AffineAnimCmd *const gUnknown_0859549C[] =
     gUnknown_08595484,
 };
 
-const struct SpriteTemplate gSunnyDayLightRaySpriteTemplate =
+const struct SpriteTemplate gSunlightRaySpriteTemplate =
 {
     .tileTag = ANIM_TAG_SUNLIGHT,
     .paletteTag = ANIM_TAG_SUNLIGHT,
@@ -256,7 +256,7 @@ const struct SpriteTemplate gEmberFlareSpriteTemplate =
     .callback = AnimEmberFlare,
 };
 
-const struct SpriteTemplate gUnknown_08595504 =
+const struct SpriteTemplate gBurnFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -264,7 +264,7 @@ const struct SpriteTemplate gUnknown_08595504 =
     .anims = gUnknown_085954D0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8109200,
+    .callback = AnimBurnFlame,
 };
 
 const struct SpriteTemplate gFireBlastRingSpriteTemplate =
@@ -594,7 +594,7 @@ static void sub_81090D8(struct Sprite *sprite)
     }
 }
 
-// Sunlight from Sunny Day
+// Sunlight from Sunny Day / sunny weather
 static void AnimSunlight(struct Sprite *sprite)
 {
     sprite->pos1.x = 0;
@@ -628,7 +628,7 @@ static void AnimEmberFlare(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-static void sub_8109200(struct Sprite *sprite)
+static void AnimBurnFlame(struct Sprite *sprite)
 {
     gBattleAnimArgs[0] = -gBattleAnimArgs[0];
     gBattleAnimArgs[2] = -gBattleAnimArgs[2];
