@@ -6,34 +6,34 @@
 #include "sound.h"
 
 static void AnimLightning(struct Sprite *);
-static void sub_810A1F8(struct Sprite *);
+static void AnimLightning_Step(struct Sprite *);
 static void sub_810A214(struct Sprite *);
 static void sub_810A258(struct Sprite *);
 static void sub_810A274(struct Sprite *);
 static void AnimSparkElectricity(struct Sprite *);
 static void AnimZapCannonSpark(struct Sprite *);
-static void sub_810A4F4(struct Sprite *);
-static void sub_810A56C(struct Sprite *);
-static void AnimThunderboltOrbSpriteTemplate(struct Sprite *);
+static void AnimZapCannonSpark_Step(struct Sprite *);
+static void AnimThunderboltOrb(struct Sprite *);
+static void AnimThunderboltOrb_Step(struct Sprite *);
 static void AnimSparkElectricityFlashing(struct Sprite *);
-static void sub_810A6EC(struct Sprite *);
-static void sub_810A75C(struct Sprite *);
-static void sub_810A834(u8 taskId);
-static void sub_810A9DC(struct Sprite *);
+static void AnimSparkElectricityFlashing_Step(struct Sprite *);
+static void AnimElectricity(struct Sprite *);
+static void AnimTask_ElectricBolt_Step(u8 taskId);
+static void AnimElectricBoltSegment(struct Sprite *);
 static void AnimThunderWave(struct Sprite *);
-static void sub_810AAB0(struct Sprite *);
+static void AnimThunderWave_Step(struct Sprite *);
 static void sub_810AB78(u8 taskId);
 static void sub_810AC8C(struct Sprite *);
 static void sub_810ACC0(struct Sprite *);
 static void AnimGrowingChargeOrb(struct Sprite *);
 static void AnimElectricPuff(struct Sprite *);
 static void AnimVoltTackleOrbSlide(struct Sprite *);
-static void sub_810ADF8(struct Sprite *);
+static void AnimVoltTackleOrbSlide_Step(struct Sprite *);
 static bool8 sub_810B154(struct Task *task, u8 taskId);
 static void sub_810B1F0(struct Sprite *);
 static void AnimGrowingShockWaveOrb(struct Sprite *);
 static bool8 sub_810B430(struct Task *task, u8 taskId);
-static void sub_810B51C(struct Sprite *);
+static void AnimShockWaveProgressingBolt(struct Sprite *);
 static bool8 sub_810B614(struct Task *task, u8 taskId);
 static void sub_810B684(struct Sprite *sprite);
 
@@ -192,7 +192,7 @@ const struct SpriteTemplate gThunderboltOrbSpriteTemplate =
     .anims = gUnknown_085957B8,
     .images = NULL,
     .affineAnims = gUnknown_085957DC,
-    .callback = AnimThunderboltOrbSpriteTemplate,
+    .callback = AnimThunderboltOrb,
 };
 
 const struct SpriteTemplate gSparkElectricityFlashingSpriteTemplate =
@@ -214,10 +214,10 @@ const struct SpriteTemplate gElectricitySpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810A75C,
+    .callback = AnimElectricity,
 };
 
-const struct SpriteTemplate gUnknown_08595828 =
+const struct SpriteTemplate gElectricBoltSegmentSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARK,
     .paletteTag = ANIM_TAG_SPARK,
@@ -225,7 +225,7 @@ const struct SpriteTemplate gUnknown_08595828 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810A9DC,
+    .callback = AnimElectricBoltSegment,
 };
 
 const struct SpriteTemplate gThunderWaveSpriteTemplate =
@@ -451,7 +451,7 @@ const struct SpriteTemplate gShockWaveProgressingBoltSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810B51C,
+    .callback = AnimShockWaveProgressingBolt,
 };
 
 static void AnimLightning(struct Sprite *sprite)
@@ -462,10 +462,10 @@ static void AnimLightning(struct Sprite *sprite)
         sprite->pos1.x += gBattleAnimArgs[0];
 
     sprite->pos1.y += gBattleAnimArgs[1];
-    sprite->callback = sub_810A1F8;
+    sprite->callback = AnimLightning_Step;
 }
 
-static void sub_810A1F8(struct Sprite *sprite)
+static void AnimLightning_Step(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         DestroyAnimSprite(sprite);
@@ -580,11 +580,11 @@ static void AnimZapCannonSpark(struct Sprite *sprite)
     sprite->data[6] = gBattleAnimArgs[5];
     sprite->data[7] = gBattleAnimArgs[4];
     sprite->oam.tileNum += gBattleAnimArgs[6] * 4;
-    sprite->callback = sub_810A4F4;
-    sub_810A4F4(sprite);
+    sprite->callback = AnimZapCannonSpark_Step;
+    AnimZapCannonSpark_Step(sprite);
 }
 
-static void sub_810A4F4(struct Sprite *sprite)
+static void AnimZapCannonSpark_Step(struct Sprite *sprite)
 {
     if (!AnimTranslateLinear(sprite))
     {
@@ -598,7 +598,7 @@ static void sub_810A4F4(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_810A56C(struct Sprite *sprite)
+static void AnimThunderboltOrb_Step(struct Sprite *sprite)
 {
     if (--sprite->data[5] == -1)
     {
@@ -609,7 +609,7 @@ static void sub_810A56C(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void AnimThunderboltOrbSpriteTemplate(struct Sprite *sprite)
+static void AnimThunderboltOrb(struct Sprite *sprite)
 {
     if (IsContest() || GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -619,7 +619,7 @@ static void AnimThunderboltOrbSpriteTemplate(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[0];
     sprite->data[4] = gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[3];
-    sprite->callback = sub_810A56C;
+    sprite->callback = AnimThunderboltOrb_Step;
 }
 
 static void AnimSparkElectricityFlashing(struct Sprite *sprite)
@@ -644,11 +644,11 @@ static void AnimSparkElectricityFlashing(struct Sprite *sprite)
     sprite->data[7] = gBattleAnimArgs[4];
 
     sprite->oam.tileNum += gBattleAnimArgs[6] * 4;
-    sprite->callback = sub_810A6EC;
+    sprite->callback = AnimSparkElectricityFlashing_Step;
     sprite->callback(sprite);
 }
 
-static void sub_810A6EC(struct Sprite *sprite)
+static void AnimSparkElectricityFlashing_Step(struct Sprite *sprite)
 {
     sprite->pos2.x = Sin(sprite->data[7], sprite->data[5]);
     sprite->pos2.y = Cos(sprite->data[7], sprite->data[5]);
@@ -661,7 +661,8 @@ static void sub_810A6EC(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_810A75C(struct Sprite *sprite)
+// Electricity arcs around the target. Used for Paralysis and various electric move hits
+static void AnimElectricity(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.tileNum += gBattleAnimArgs[3] * 4;
@@ -682,10 +683,10 @@ void AnimTask_ElectricBolt(u8 taskId)
     gTasks[taskId].data[0] = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[0];
     gTasks[taskId].data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
-    gTasks[taskId].func = sub_810A834;
+    gTasks[taskId].func = AnimTask_ElectricBolt_Step;
 }
 
-static void sub_810A834(u8 taskId)
+static void AnimTask_ElectricBolt_Step(u8 taskId)
 {
     u16 r8;
     u16 r2;
@@ -713,30 +714,30 @@ static void sub_810A834(u8 taskId)
     {
     case 0:
         r12 *= 1;
-        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
+        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         r7++;
         break;
     case 2:
         r12 *= 2;
         r8 += r2;
-        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
+        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         r7++;
         break;
     case 4:
         r12 *= 3;
         r8 += r2 * 2;
-        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
+        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         r7++;
         break;
     case 6:
         r12 *= 4;
         r8 += r2 * 3;
-        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
+        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         r7++;
         break;
     case 8:
         r12 *= 5;
-        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
+        spriteId = CreateSprite(&gElectricBoltSegmentSpriteTemplate, x, y + r12, 2);
         r7++;
         break;
     case 10:
@@ -754,7 +755,7 @@ static void sub_810A834(u8 taskId)
     gTasks[taskId].data[10]++;
 }
 
-static void sub_810A9DC(struct Sprite *sprite)
+static void AnimElectricBoltSegment(struct Sprite *sprite)
 {
     if (!sprite->data[0])
     {
@@ -780,11 +781,11 @@ static void AnimThunderWave(struct Sprite *sprite)
     spriteId = CreateSprite(&gThunderWaveSpriteTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
     gSprites[spriteId].oam.tileNum += 8;
     gAnimVisualTaskCount++;
-    gSprites[spriteId].callback = sub_810AAB0;
-    sprite->callback = sub_810AAB0;
+    gSprites[spriteId].callback = AnimThunderWave_Step;
+    sprite->callback = AnimThunderWave_Step;
 }
 
-static void sub_810AAB0(struct Sprite *sprite)
+static void AnimThunderWave_Step(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 3)
     {
@@ -823,7 +824,7 @@ void AnimTask_ElectricChargingParticles(u8 taskId)
     task->func = sub_810AB78;
 }
 
-void sub_810AB78(u8 taskId)
+static void sub_810AB78(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -934,10 +935,10 @@ static void AnimVoltTackleOrbSlide(struct Sprite *sprite)
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         sprite->data[7] *= -1;
 
-    sprite->callback = sub_810ADF8;
+    sprite->callback = AnimVoltTackleOrbSlide_Step;
 }
 
-static void sub_810ADF8(struct Sprite *sprite)
+static void AnimVoltTackleOrbSlide_Step(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -1003,7 +1004,7 @@ void AnimTask_VoltTackleAttackerReappear(u8 taskId)
         }
         break;
     case 3:
-        gSprites[task->data[15]].invisible = 0;
+        gSprites[task->data[15]].invisible = FALSE;
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -1256,7 +1257,8 @@ static bool8 sub_810B430(struct Task *task, u8 taskId)
     }
 }
 
-static void sub_810B51C(struct Sprite *sprite)
+// Just runs timer for sprite. See AnimTask_ShockWaveProgressingBolt
+static void AnimShockWaveProgressingBolt(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 12)
     {

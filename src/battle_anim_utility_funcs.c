@@ -328,7 +328,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
             species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     }
 
-    spriteId = GetAnimBattlerSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = sub_80A89C8(gBattleAnimAttacker, spriteId, species);
     sub_80A6B30(&unknownStruct);
     sub_80A6D60(&unknownStruct, gUnknown_08C20684, 0);

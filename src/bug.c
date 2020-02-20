@@ -7,16 +7,16 @@
 static void AnimMegahornHorn(struct Sprite *);
 static void AnimLeechLifeNeedle(struct Sprite *);
 static void AnimTranslateWebThread(struct Sprite *);
+static void AnimTranslateWebThread_Step(struct Sprite *);
 static void AnimStringWrap(struct Sprite *);
-void sub_811067C(struct Sprite *);
-void AnimTranslateStinger(struct Sprite *);
-void AnimMissileArc(struct Sprite *);
+static void AnimStringWrap_Step(struct Sprite *);
+static void AnimSpiderWeb(struct Sprite *);
+static void AnimSpiderWeb_Step(struct Sprite *);
+static void AnimSpiderWeb_End(struct Sprite *);
+static void AnimTranslateStinger(struct Sprite *);
+static void AnimMissileArc(struct Sprite *);
+static void AnimMissileArc_Step(struct Sprite *);
 static void AnimTailGlowOrb(struct Sprite *);
-static void sub_811057C(struct Sprite *);
-static void sub_8110630(struct Sprite *);
-static void sub_81106A4(struct Sprite *);
-static void sub_8110700(struct Sprite *);
-static void AnimMissileArcStep(struct Sprite *);
 
 const union AffineAnimCmd gUnknown_08596938[] =
 {
@@ -132,7 +132,7 @@ const struct SpriteTemplate gSpiderWebSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596A28,
-    .callback = sub_811067C,
+    .callback = AnimSpiderWeb,
 };
 
 const struct SpriteTemplate gLinearStingerSpriteTemplate =
@@ -276,10 +276,10 @@ static void AnimTranslateWebThread(struct Sprite *sprite)
 
     sub_80A6FD4(sprite);
     sprite->data[5] = gBattleAnimArgs[3];
-    sprite->callback = sub_811057C;
+    sprite->callback = AnimTranslateWebThread_Step;
 }
 
-static void sub_811057C(struct Sprite *sprite)
+static void AnimTranslateWebThread_Step(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
     {
@@ -304,10 +304,10 @@ static void AnimStringWrap(struct Sprite *sprite)
     if (!GetBattlerSide(gBattleAnimTarget))
         sprite->pos1.y += 8;
 
-    sprite->callback = sub_8110630;
+    sprite->callback = AnimStringWrap_Step;
 }
 
-static void sub_8110630(struct Sprite *sprite)
+static void AnimStringWrap_Step(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 3)
     {
@@ -321,16 +321,16 @@ static void sub_8110630(struct Sprite *sprite)
     }
 }
 
-void sub_811067C(struct Sprite *sprite)
+static void AnimSpiderWeb(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
 
     sprite->data[0] = 16;
-    sprite->callback = sub_81106A4;
+    sprite->callback = AnimSpiderWeb_Step;
 }
 
-static void sub_81106A4(struct Sprite *sprite)
+static void AnimSpiderWeb_Step(struct Sprite *sprite)
 {
     if (sprite->data[2] < 20)
     {
@@ -344,12 +344,12 @@ static void sub_81106A4(struct Sprite *sprite)
         if (sprite->data[0] == 0)
         {
             sprite->invisible = TRUE;
-            sprite->callback = sub_8110700;
+            sprite->callback = AnimSpiderWeb_End;
         }
     }
 }
 
-static void sub_8110700(struct Sprite *sprite)
+static void AnimSpiderWeb_End(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -363,7 +363,7 @@ static void sub_8110700(struct Sprite *sprite)
 // arg 2: target x pixel offset
 // arg 3: target y pixel offset
 // arg 4: duration
-void AnimTranslateStinger(struct Sprite *sprite)
+static void AnimTranslateStinger(struct Sprite *sprite)
 {
     s16 lVarX, lVarY;
     u16 rot;
@@ -420,7 +420,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
 // arg 3: target y pixel offset
 // arg 4: duration
 // arg 5: wave amplitude
-void AnimMissileArc(struct Sprite *sprite)
+static void AnimMissileArc(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
 
@@ -433,11 +433,11 @@ void AnimMissileArc(struct Sprite *sprite)
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
 
-    sprite->callback = AnimMissileArcStep;
+    sprite->callback = AnimMissileArc_Step;
     sprite->invisible = TRUE;
 }
 
-static void AnimMissileArcStep(struct Sprite *sprite)
+static void AnimMissileArc_Step(struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
 

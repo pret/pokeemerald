@@ -9,21 +9,21 @@
 #include "util.h"
 #include "constants/rgb.h"
 
-void sub_81138D4(struct Sprite *);
+static void sub_81138D4(struct Sprite *);
 static void AnimBite(struct Sprite *);
 static void AnimTearDrop(struct Sprite *);
 static void AnimClawSlash(struct Sprite *);
-static void sub_811375C(u8);
-static void sub_811381C(u8);
+static void AnimTask_AttackerFadeToInvisible_Step(u8);
+static void AnimTask_AttackerFadeFromInvisible_Step(u8);
 static void sub_8113950(struct Sprite *);
-static void sub_8113A18(struct Sprite *);
-static void sub_8113A58(struct Sprite *);
-static void sub_8113B90(struct Sprite *);
-static void sub_8113D60(u8);
-static void sub_81140C8(u8);
+static void AnimBite_Step1(struct Sprite *);
+static void AnimBite_Step2(struct Sprite *);
+static void AnimTearDrop_Step(struct Sprite *);
+static void AnimTask_MoveAttackerMementoShadow_Step(u8);
+static void AnimTask_MoveTargetMementoShadow_Step(u8);
 static void sub_8114244(struct Task *);
 static void sub_8114374(u8);
-static void sub_8114748(u8);
+static void AnimTask_MetallicShine_Step(u8);
 
 const struct SpriteTemplate gUnknown_08596FC8 =
 {
@@ -198,10 +198,10 @@ void AnimTask_AttackerFadeToInvisible(u8 taskId)
     else
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
 
-    gTasks[taskId].func = sub_811375C;
+    gTasks[taskId].func = AnimTask_AttackerFadeToInvisible_Step;
 }
 
-static void sub_811375C(u8 taskId)
+static void AnimTask_AttackerFadeToInvisible_Step(u8 taskId)
 {
     u8 blendA = gTasks[taskId].data[1] >> 8;
     u8 blendB = gTasks[taskId].data[1];
@@ -228,11 +228,11 @@ void AnimTask_AttackerFadeFromInvisible(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = BLDALPHA_BLEND(0, 16);
-    gTasks[taskId].func = sub_811381C;
+    gTasks[taskId].func = AnimTask_AttackerFadeFromInvisible_Step;
     SetGpuReg(REG_OFFSET_BLDALPHA, gTasks[taskId].data[1]);
 }
 
-static void sub_811381C(u8 taskId)
+static void AnimTask_AttackerFadeFromInvisible_Step(u8 taskId)
 {
     u8 blendA = gTasks[taskId].data[1] >> 8;
     u8 blendB = gTasks[taskId].data[1];
@@ -267,7 +267,7 @@ void AnimTask_InitAttackerFadeFromInvisible(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_81138D4(struct Sprite *sprite)
+static void sub_81138D4(struct Sprite *sprite)
 {
     sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
@@ -319,20 +319,20 @@ static void AnimBite(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = gBattleAnimArgs[4];
     sprite->data[2] = gBattleAnimArgs[5];
-    sprite->callback = sub_8113A18;
+    sprite->callback = AnimBite_Step1;
 }
 
-static void sub_8113A18(struct Sprite *sprite)
+static void AnimBite_Step1(struct Sprite *sprite)
 {
     sprite->data[4] += sprite->data[0];
     sprite->data[5] += sprite->data[1];
     sprite->pos2.x = sprite->data[4] >> 8;
     sprite->pos2.y = sprite->data[5] >> 8;
     if (++sprite->data[3] == sprite->data[2])
-        sprite->callback = sub_8113A58;
+        sprite->callback = AnimBite_Step2;
 }
 
-static void sub_8113A58(struct Sprite *sprite)
+static void AnimBite_Step2(struct Sprite *sprite)
 {
     sprite->data[4] -= sprite->data[0];
     sprite->data[5] -= sprite->data[1];
@@ -386,10 +386,10 @@ static void AnimTearDrop(struct Sprite *sprite)
     sprite->data[5] = -12;
 
     InitAnimArcTranslation(sprite);
-    sprite->callback = sub_8113B90;
+    sprite->callback = AnimTearDrop_Step;
 }
 
-static void sub_8113B90(struct Sprite *sprite)
+static void AnimTearDrop_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroySpriteAndMatrix(sprite);
@@ -463,10 +463,10 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     gBattle_WIN0H = (task->data[14] << 8) | task->data[15];
     gBattle_WIN0V = 160;
 
-    task->func = sub_8113D60;
+    task->func = AnimTask_MoveAttackerMementoShadow_Step;
 }
 
-static void sub_8113D60(u8 taskId)
+static void AnimTask_MoveAttackerMementoShadow_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -627,12 +627,12 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
         task->data[1] = 0;
         task->data[2] = 0;
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 8));
-        task->func = sub_81140C8;
+        task->func = AnimTask_MoveTargetMementoShadow_Step;
         break;
     }
 }
 
-static void sub_81140C8(u8 taskId)
+static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
 {
     u8 pos;
     u16 i;
@@ -880,10 +880,10 @@ void AnimTask_MetallicShine(u8 taskId)
     gTasks[taskId].data[2] = gBattleAnimArgs[1];
     gTasks[taskId].data[3] = gBattleAnimArgs[2];
     gTasks[taskId].data[6] = priorityChanged;
-    gTasks[taskId].func = sub_8114748;
+    gTasks[taskId].func = AnimTask_MetallicShine_Step;
 }
 
-static void sub_8114748(u8 taskId)
+static void AnimTask_MetallicShine_Step(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u16 paletteNum;

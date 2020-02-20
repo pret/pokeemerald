@@ -9,11 +9,11 @@ static void AnimOutrageFlame(struct Sprite *);
 static void AnimDragonRageFirePlume(struct Sprite *);
 static void AnimDragonFireToTarget(struct Sprite *);
 static void AnimDragonDanceOrb(struct Sprite *);
+static void AnimDragonDanceOrb_Step(struct Sprite *);
 static void AnimOverheatFlame(struct Sprite *);
-static void sub_81132E0(struct Sprite *);
-static void sub_81134B8(u8);
+static void AnimOverheatFlame_Step(struct Sprite *);
+static void AnimTask_DragonDanceWaver_Step(u8);
 static void sub_8113574(struct Task *);
-static void sub_811369C(struct Sprite *);
 
 EWRAM_DATA static u16 gUnknown_0203A100[7] = {0};
 
@@ -283,10 +283,10 @@ static void AnimDragonDanceOrb(struct Sprite *sprite)
         sprite->data[7] = r0 / 2;
     sprite->pos2.x = Cos(sprite->data[6], sprite->data[7]);
     sprite->pos2.y = Sin(sprite->data[6], sprite->data[7]);
-    sprite->callback = sub_81132E0;
+    sprite->callback = AnimDragonDanceOrb_Step;
 }
 
-static void sub_81132E0(struct Sprite *sprite)
+static void AnimDragonDanceOrb_Step(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -359,10 +359,10 @@ void AnimTask_DragonDanceWaver(u8 taskId)
     }
 
     ScanlineEffect_SetParams(sp);
-    task->func = sub_81134B8;
+    task->func = AnimTask_DragonDanceWaver_Step;
 }
 
-static void sub_81134B8(u8 taskId)
+static void AnimTask_DragonDanceWaver_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -424,12 +424,12 @@ static void AnimOverheatFlame(struct Sprite *sprite)
     sprite->pos1.x += sprite->data[1] * gBattleAnimArgs[0];
     sprite->pos1.y += sprite->data[2] * gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[3];
-    sprite->callback = sub_811369C;
+    sprite->callback = AnimOverheatFlame_Step;
     for (i = 0; i < 7; i++)
         gUnknown_0203A100[i] = sprite->data[i];
 }
 
-static void sub_811369C(struct Sprite *sprite)
+static void AnimOverheatFlame_Step(struct Sprite *sprite)
 {
     sprite->data[4] += sprite->data[1];
     sprite->data[5] += sprite->data[2];

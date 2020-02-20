@@ -633,7 +633,7 @@ void AnimTask_SwitchOutShrinkMon(u8 taskId)
         break;
     case 2:
         ResetSpriteRotScale(spriteId);
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
         DestroyAnimVisualTask(taskId);
         break;
     }
@@ -896,7 +896,7 @@ static void sub_8171240(struct Sprite *sprite)
         break;
     case 2:
         ResetSpriteRotScale(spriteId);
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
     default:
@@ -1229,7 +1229,7 @@ static void sub_81718D8(struct Sprite *sprite)
         }
         break;
     case 2:
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->data[0]++;
         break;
     default:
@@ -1313,7 +1313,7 @@ static void sub_8171AE4(struct Sprite *sprite)
         break;
     }
 
-    gSprites[gBattlerSpriteIds[gBattleAnimTarget]].invisible = 0;
+    gSprites[gBattlerSpriteIds[gBattleAnimTarget]].invisible = FALSE;
     StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], 1);
     AnimateSprite(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]]);
     gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] = 0x1000;
@@ -1324,7 +1324,7 @@ static void sub_8171BAC(struct Sprite *sprite)
     int next = FALSE;
 
     if (sprite->animEnded)
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
 
     if (gSprites[gBattlerSpriteIds[gBattleAnimTarget]].affineAnimEnded)
     {
@@ -2105,7 +2105,7 @@ static void sub_8172FEC(u8 taskId)
         gSprites[spriteId].callback = sub_8173250;
         gSprites[spriteId].pos2.x = -32;
         gSprites[spriteId].pos2.y = 32;
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
         if (gTasks[taskId].data[11] == 0)
         {
             if (GetBattlerSide(battler) == B_SIDE_PLAYER)
@@ -2163,7 +2163,7 @@ static void sub_8173250(struct Sprite *sprite)
     }
     else
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         sprite->pos2.x += 5;
         sprite->pos2.y -= 5;
         if (sprite->pos2.x > 32)
@@ -2215,7 +2215,7 @@ static void sub_81733D4(struct Sprite *sprite)
     if (TranslateAnimHorizontalArc(sprite))
     {
         sprite->data[0] = 0;
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = sub_8173400;
     }
 }

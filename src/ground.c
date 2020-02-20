@@ -11,9 +11,10 @@ static void AnimBoneHitProjectile(struct Sprite *);
 static void AnimDirtScatter(struct Sprite *);
 static void AnimMudSportDirt(struct Sprite *);
 static void AnimDirtPlumeParticle(struct Sprite *);
+static void AnimDirtPlumeParticle_Step(struct Sprite *);
 static void AnimDigDirtMound(struct Sprite *);
-static void AnimBonemerangProjectileStep(struct Sprite *);
-static void AnimBonemerangProjectileEnd(struct Sprite *);
+static void AnimBonemerangProjectile_Step(struct Sprite *);
+static void AnimBonemerangProjectile_End(struct Sprite *);
 static void AnimMudSportDirtRising(struct Sprite *);
 static void AnimMudSportDirtFalling(struct Sprite *);
 static void AnimTask_DigBounceMovement(u8);
@@ -21,7 +22,6 @@ static void AnimTask_DigEndBounceMovementSetInvisible(u8);
 static void AnimTask_DigSetVisibleUnderground(u8);
 static void AnimTask_DigRiseUpFromHole(u8);
 static void sub_81150E0(u8, s16, s16);
-static void AnimDirtPlumeParticleStep(struct Sprite *);
 static void AnimTask_ShakeTerrain(u8);
 static void AnimTask_ShakeBattlers(u8);
 static void SetBattlersXOffsetForShake(struct Task *);
@@ -148,10 +148,10 @@ static void AnimBonemerangProjectile(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     sprite->data[5] = -40;
     InitAnimArcTranslation(sprite);
-    sprite->callback = AnimBonemerangProjectileStep;
+    sprite->callback = AnimBonemerangProjectile_Step;
 }
 
-static void AnimBonemerangProjectileStep(struct Sprite *sprite)
+static void AnimBonemerangProjectile_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
@@ -164,11 +164,11 @@ static void AnimBonemerangProjectileStep(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
         sprite->data[5] = 40;
         InitAnimArcTranslation(sprite);
-        sprite->callback = AnimBonemerangProjectileEnd;
+        sprite->callback = AnimBonemerangProjectile_End;
     }
 }
 
-static void AnimBonemerangProjectileEnd(struct Sprite *sprite)
+static void AnimBonemerangProjectile_End(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
@@ -324,7 +324,7 @@ static void AnimTask_DigBounceMovement(u8 taskId)
         if (task->data[14] < 0)
             task->data[14] = 0;
 
-        gSprites[task->data[10]].invisible = 1;
+        gSprites[task->data[10]].invisible = TRUE;
         task->data[0]++;
         break;
     case 1:
@@ -363,7 +363,7 @@ static void AnimTask_DigBounceMovement(u8 taskId)
         break;
     case 4:
         DestroyAnimVisualTask(taskId);
-        gSprites[task->data[10]].invisible = 1;
+        gSprites[task->data[10]].invisible = TRUE;
         break;
     }
 }
@@ -525,10 +525,10 @@ void AnimDirtPlumeParticle(struct Sprite *sprite)
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[4];
     InitAnimArcTranslation(sprite);
-    sprite->callback = AnimDirtPlumeParticleStep;
+    sprite->callback = AnimDirtPlumeParticle_Step;
 }
 
-static void AnimDirtPlumeParticleStep(struct Sprite *sprite)
+static void AnimDirtPlumeParticle_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
