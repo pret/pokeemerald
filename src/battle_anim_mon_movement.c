@@ -18,7 +18,7 @@ static void ReverseVerticalDipDirection(struct Sprite* sprite);
 static void SlideMonToOriginalPos(struct Sprite *sprite);
 static void SlideMonToOriginalPosStep(struct Sprite *sprite);
 static void SlideMonToOffset(struct Sprite *sprite);
-static void sub_80D5B48(struct Sprite *sprite);
+static void SlideMonToOffsetAndBack(struct Sprite *sprite);
 static void sub_80D5C20(struct Sprite *sprite);
 void AnimTask_WindUpLungePart1(u8 taskId);
 void AnimTask_WindUpLungePart2(u8 taskId);
@@ -72,7 +72,7 @@ const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
     .callback = SlideMonToOffset,
 };
 
-const struct SpriteTemplate gUnknown_0857FE88 =
+const struct SpriteTemplate gSlideMonToOffsetAndBackSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -80,7 +80,7 @@ const struct SpriteTemplate gUnknown_0857FE88 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5B48,
+    .callback = SlideMonToOffsetAndBack,
 };
 
 // Task to facilitate simple shaking of a pokemon's picture in battle.
@@ -584,19 +584,17 @@ static void SlideMonToOffset(struct Sprite *sprite)
     sprite->callback = TranslateMonSpriteLinearFixedPoint;
 }
 
-static void sub_80D5B48(struct Sprite *sprite)
+static void SlideMonToOffsetAndBack(struct Sprite *sprite)
 {
     u8 spriteId;
     u8 battlerId;
     sprite->invisible = TRUE;
+
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-    {
         battlerId = gBattleAnimAttacker;
-    }
     else
-    {
         battlerId = gBattleAnimTarget;
-    }
+
     spriteId = gBattlerSpriteIds[battlerId];
     if (GetBattlerSide(battlerId))
     {

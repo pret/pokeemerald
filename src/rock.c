@@ -836,7 +836,7 @@ void AnimTask_GetSeismicTossDamageLevel(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_811152C(u8 taskId)
+void AnimTask_MoveSeismicTossBg(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
@@ -856,7 +856,7 @@ void sub_811152C(u8 taskId)
     gTasks[taskId].data[0]++;
 }
 
-void sub_8111590(u8 taskId)
+void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {

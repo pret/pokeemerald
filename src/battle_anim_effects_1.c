@@ -78,6 +78,7 @@ void AnimThoughtBubble(struct Sprite *);
 void AnimMetronomeFinger(struct Sprite *);
 void AnimFollowMeFinger(struct Sprite *);
 void AnimTauntFinger(struct Sprite *);
+static void AnimTask_MoonlightEndFadeStep(u8 taskId);
 static void AnimMovePowderParticleStep(struct Sprite *);
 static void AnimSolarbeamSmallOrbStep(struct Sprite *);
 static void AnimAbsorptionOrbStep(struct Sprite *);
@@ -4987,10 +4988,7 @@ static void AnimMoonlightSparkleStep(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimTask_FadeScreenBlueStep(u8);
-
-
-void AnimTask_FadeScreenBlue(u8 taskId)
+void AnimTask_MoonlightEndFade(u8 taskId)
 {
     int a = sub_80A75AC(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
     int b;
@@ -5013,11 +5011,11 @@ void AnimTask_FadeScreenBlue(u8 taskId)
     b = b | (0x10000 << IndexOfSpritePaletteTag(ANIM_TAG_MOON));
     d = IndexOfSpritePaletteTag(ANIM_TAG_GREEN_SPARKLE);
     BeginNormalPaletteFade((0x10000 << d) | b, 0, 0, 16, RGB(27, 29, 31));
-    gTasks[taskId].func = AnimTask_FadeScreenBlueStep;
+    gTasks[taskId].func = AnimTask_MoonlightEndFadeStep;
     gTasks[taskId].func(taskId);
 }
 
-void AnimTask_FadeScreenBlueStep(u8 taskId)
+static void AnimTask_MoonlightEndFadeStep(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     switch (task->data[0])

@@ -16,8 +16,8 @@ void sub_810D1B4(struct Sprite *);
 static void AnimSpinningKickOrPunch(struct Sprite *);
 static void AnimStompFoot(struct Sprite *);
 static void AnimDizzyPunchDuck(struct Sprite *);
-void sub_810D40C(struct Sprite *);
-void sub_810D4F4(struct Sprite *);
+static void AnimBrickBreakWall(struct Sprite *);
+static void AnimBrickBreakWallShard(struct Sprite *);
 static void AnimSuperpowerOrb(struct Sprite *);
 static void AnimSuperpowerRock(struct Sprite *);
 static void AnimSuperpowerFireball(struct Sprite *);
@@ -231,7 +231,7 @@ const struct SpriteTemplate gDizzyPunchDuckSpriteTemplate =
     .callback = AnimDizzyPunchDuck,
 };
 
-const struct SpriteTemplate gUnknown_08595F90 =
+const struct SpriteTemplate gBrickBreakWallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_LIGHT_WALL,
     .paletteTag = ANIM_TAG_BLUE_LIGHT_WALL,
@@ -239,10 +239,10 @@ const struct SpriteTemplate gUnknown_08595F90 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810D40C,
+    .callback = AnimBrickBreakWall,
 };
 
-const struct SpriteTemplate gUnknown_08595FA8 =
+const struct SpriteTemplate gBrickBreakWallShardSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TORN_METAL,
     .paletteTag = ANIM_TAG_TORN_METAL,
@@ -250,7 +250,7 @@ const struct SpriteTemplate gUnknown_08595FA8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810D4F4,
+    .callback = AnimBrickBreakWallShard,
 };
 
 const union AffineAnimCmd gUnknown_08595FC0[] =
@@ -691,9 +691,10 @@ static void AnimDizzyPunchDuck(struct Sprite *sprite)
     }
 }
 
-void sub_810D40C(struct Sprite *sprite)
+// The wall that appears when Brick Break is going to shatter the target's defensive wall
+static void AnimBrickBreakWall(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
@@ -744,9 +745,10 @@ static void sub_810D47C(struct Sprite *sprite)
     }
 }
 
-void sub_810D4F4(struct Sprite *sprite)
+// Piece of shattered defensive wall flies off. Used by Brick Break when the target has a defensive wall
+static void AnimBrickBreakWallShard(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[2];
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[3];

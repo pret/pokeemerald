@@ -744,7 +744,7 @@ static void sub_810F898(u8 taskId)
     }
 }
 
-void sub_810F940(u8 taskId)
+void AnimTask_ImprisonOrbs(u8 taskId)
 {
     u16 var0, var1;
 

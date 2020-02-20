@@ -55,7 +55,7 @@ void AnimTask_BlendBattleAnimPal(u8 taskId)
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
 }
 
-void sub_8116664(u8 taskId)
+void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
 {
     u8 battler;
     u32 selectedPalettes;
@@ -68,13 +68,13 @@ void sub_8116664(u8 taskId)
     case 2:
         selectedPalettes = 0;
         // fall through
-    case 0:
+    case ANIM_ATTACKER:
         animBattlers[0] = gBattleAnimAttacker;
         break;
     case 3:
         selectedPalettes = 0;
         // fall through
-    case 1:
+    case ANIM_TARGET:
         animBattlers[0] = gBattleAnimTarget;
         break;
     case 4:
@@ -908,47 +908,19 @@ void AnimTask_GetBattleTerrain(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117C44(u8 taskId)
+void AnimTask_AllocBackupPalBuffer(u8 taskId)
 {
-    gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
+    gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117C70(u8 taskId)
+void AnimTask_FreeBackupPalBuffer(u8 taskId)
 {
-    Free(gMonSpritesGfxPtr->field_17C);
-    gMonSpritesGfxPtr->field_17C = NULL;
+    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117CA0(u8 taskId)
-{
-    u32 selectedPalettes;
-    int paletteIndex = 0;
-
-    if (gBattleAnimArgs[0] == 0)
-    {
-        selectedPalettes = sub_80A75AC(1, 0, 0, 0, 0, 0, 0);
-        while ((selectedPalettes & 1) == 0)
-        {
-            selectedPalettes >>= 1;
-            paletteIndex++;
-        }
-    }
-    else if (gBattleAnimArgs[0] == 1)
-    {
-        paletteIndex = gBattleAnimAttacker + 16;
-    }
-    else if (gBattleAnimArgs[0] == 2)
-    {
-        paletteIndex = gBattleAnimTarget + 16;
-    }
-
-    memcpy(&gMonSpritesGfxPtr->field_17C[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[paletteIndex * 16], 32);
-    DestroyAnimVisualTask(taskId);
-}
-
-void sub_8117D3C(u8 taskId)
+void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
 {
     u32 selectedPalettes;
     int paletteIndex = 0;
@@ -971,11 +943,38 @@ void sub_8117D3C(u8 taskId)
         paletteIndex = gBattleAnimTarget + 16;
     }
 
-    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gMonSpritesGfxPtr->field_17C[gBattleAnimArgs[1] * 16], 32);
+    memcpy(&gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[paletteIndex * 16], 32);
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117DD8(u8 taskId)
+void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
+{
+    u32 selectedPalettes;
+    int paletteIndex = 0;
+
+    if (gBattleAnimArgs[0] == 0)
+    {
+        selectedPalettes = sub_80A75AC(1, 0, 0, 0, 0, 0, 0);
+        while ((selectedPalettes & 1) == 0)
+        {
+            selectedPalettes >>= 1;
+            paletteIndex++;
+        }
+    }
+    else if (gBattleAnimArgs[0] == 1)
+    {
+        paletteIndex = gBattleAnimAttacker + 16;
+    }
+    else if (gBattleAnimArgs[0] == 2)
+    {
+        paletteIndex = gBattleAnimTarget + 16;
+    }
+
+    memcpy(&gPlttBufferUnfaded[paletteIndex * 16], &gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], 32);
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
 {
     u32 selectedPalettes;
     int paletteIndex = 0;
@@ -1012,7 +1011,7 @@ void AnimTask_IsContest(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117E94(u8 taskId)
+void AnimTask_SetAnimAttackerAndTargetForEffectTgt(u8 taskId)
 {
     gBattleAnimAttacker = gBattlerTarget;
     gBattleAnimTarget = gEffectBattler;
@@ -1035,7 +1034,7 @@ void AnimTask_SetAnimTargetToBattlerTarget(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117F30(u8 taskId)
+void AnimTask_SetAnimAttackerAndTargetForEffectAtk(u8 taskId)
 {
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gEffectBattler;

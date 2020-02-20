@@ -73,7 +73,7 @@ static void sub_8158C04(u8 taskId)
 // task end
 
 // task start
-void sub_8158C58(u8 taskId)
+void SoundTask_LoopSEAdjustPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 targetPan = gBattleAnimArgs[2];
@@ -119,7 +119,7 @@ static void sub_8158D08(u8 taskId)
         u16 dPan, oldPan;
         gTasks[taskId].data[10] = 0;
         dPan = gTasks[taskId].data[3];
-        oldPan = gTasks[taskId].data[11] ;
+        oldPan = gTasks[taskId].data[11];
         gTasks[taskId].data[11] = dPan + oldPan;
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
@@ -127,7 +127,7 @@ static void sub_8158D08(u8 taskId)
 // task end
 
 // task start
-void sub_8158D8C(u8 taskId)
+void SoundTask_PlayCryHighPitch(u8 taskId)
 {
     u16 species = 0;
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
@@ -173,7 +173,7 @@ void sub_8158D8C(u8 taskId)
 // task end
 
 // task start
-void sub_8158E9C(u8 taskId)
+void SoundTask_PlayDoubleCry(u8 taskId)
 {
     u16 species = 0;
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
@@ -275,7 +275,7 @@ void SoundTask_WaitForCry(u8 taskId)
 }
 
 // task start
-void sub_81590B8(u8 taskId)
+void SoundTask_PlayCryWithEcho(u8 taskId)
 {
     u16 species;
     s8 pan;
@@ -350,7 +350,9 @@ void SoundTask_PlaySE2WithPanning(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8159278(u8 taskId)
+// Adjusts panning and assigns it to gAnimCustomPanning. Doesnt play sound. 
+// Used by Confuse Ray and Will-O-Wisp (see uses of gAnimCustomPanning)
+void SoundTask_AdjustPanningVar(u8 taskId)
 {
     s8 targetPan = gBattleAnimArgs[1];
     s8 panIncrement = gBattleAnimArgs[2];
@@ -384,7 +386,7 @@ void sub_8159308(u8 taskId)
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
 
-    gUnknown_02038440 = gTasks[taskId].data[11];
+    gAnimCustomPanning = gTasks[taskId].data[11];
     if (gTasks[taskId].data[11] == gTasks[taskId].data[2])
         DestroyAnimVisualTask(taskId);
 }

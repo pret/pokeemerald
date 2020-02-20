@@ -621,7 +621,8 @@ void sub_81074E4(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8107528(u8 taskId)
+// Updates the palette on the rainbow rings used in Aurora Beam to make them appear to be rotating counterclockwise
+void AnimTask_RotateAuroraRingColors(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[2] = IndexOfSpritePaletteTag(ANIM_TAG_RAINBOW_RINGS) * 16 + 256;

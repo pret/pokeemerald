@@ -6,7 +6,7 @@
 
 static void AnimMegahornHorn(struct Sprite *);
 static void AnimLeechLifeNeedle(struct Sprite *);
-void AnimTranslateWebThread(struct Sprite *);
+static void AnimTranslateWebThread(struct Sprite *);
 static void AnimStringWrap(struct Sprite *);
 void sub_811067C(struct Sprite *);
 void AnimTranslateStinger(struct Sprite *);
@@ -254,7 +254,7 @@ static void AnimLeechLifeNeedle(struct Sprite *sprite)
 // arg 2: controls the left-to-right movement
 // arg 3: amplitude
 // arg 4: if targets both opponents
-void AnimTranslateWebThread(struct Sprite *sprite)
+static void AnimTranslateWebThread(struct Sprite *sprite)
 {
     if (IsContest())
         gBattleAnimArgs[2] /= 2;

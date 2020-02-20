@@ -3010,12 +3010,12 @@ void AnimTask_LoadMusicNotesPals(u8 taskId)
     for (i = 1; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
         paletteNums[i] = AllocSpritePalette(ANIM_SPRITES_START - i);
 
-    gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
-    LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->field_17C);
+    gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
+    LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->buffer);
     for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
-        LoadPalette(&gMonSpritesGfxPtr->field_17C[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
+        LoadPalette(&gMonSpritesGfxPtr->buffer[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
 
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
     DestroyAnimVisualTask(taskId);
 }
 

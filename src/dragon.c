@@ -324,7 +324,9 @@ static void sub_81132E0(struct Sprite *sprite)
     }
 }
 
-void sub_81133E8(u8 taskId)
+// Wavers the attacker back and forth. Progressing vertical wave of scanline shifts
+// Used by Dragon Dance
+void AnimTask_DragonDanceWaver(u8 taskId)
 {
     struct ScanlineEffectParams sp;
     struct Task *task = &gTasks[taskId];
