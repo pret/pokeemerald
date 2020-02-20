@@ -11,7 +11,7 @@ void AnimSimplePaletteBlend(struct Sprite *);
 u32 UnpackSelectedBattleAnimPalettes(s16);
 void sub_81158A4(struct Sprite *);
 void sub_81159B4(struct Sprite *);
-void sub_81160A4(struct Sprite *);
+static void AnimShakeMonOrBattleTerrain(struct Sprite *);
 static void AnimBasicHitSplat(struct Sprite *);
 void sub_8116420(struct Sprite *);
 static void AnimHitSplatRandom(struct Sprite *);
@@ -22,12 +22,12 @@ static void AnimConfusionDuckStep(struct Sprite *);
 static void AnimSimplePaletteBlendStep(struct Sprite *);
 static void sub_81158F8(struct Sprite *);
 static void sub_8115984(struct Sprite *);
-static void BlendColorInCycle(u8, u8, u8);
-static void AnimTask_BlendColorInCycleLoop(u8);
-static void sub_8115BC8(u8, u8, u8);
-static void sub_8115C18(u8);
-static void sub_8115CD0(u8, u8, u8);
-static void sub_8115D2C(u8);
+static void BlendColorCycle(u8, u8, u8);
+static void AnimTask_BlendColorCycleLoop(u8);
+static void BlendColorCycleExclude(u8, u8, u8);
+static void AnimTask_BlendColorCycleExcludeLoop(u8);
+static void BlendColorCycleByTag(u8, u8, u8);
+static void AnimTask_BlendColorCycleByTagLoop(u8);
 static void sub_8115E00(u8);
 static void sub_8115EB8(u8);
 static void sub_8116148(struct Sprite *);
@@ -119,7 +119,7 @@ const struct SpriteTemplate gUnknown_085972C0 =
     .callback = sub_81159B4,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_85972D8 =
+const struct SpriteTemplate gShakeMonOrTerrainSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -127,7 +127,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_85972D8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81160A4,
+    .callback = AnimShakeMonOrBattleTerrain,
 };
 
 const union AffineAnimCmd gUnknown_085972F0[] =
@@ -416,14 +416,17 @@ void sub_81159B4(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-// Task data for AnimTask_BlendColorCycle
-#define tPalSelector   data[0]
+// Task data for AnimTask_BlendColorCycle, AnimTask_BlendColorCycleExclude, and AnimTask_BlendColorCycleByTag
+#define tPalSelector   data[0]  // AnimTask_BlendColorCycle
+#define tPalTag        data[0]  // AnimTask_BlendColorCycleByTag
 #define tDelay         data[1]
 #define tNumBlends     data[2]
 #define tInitialBlendY data[3]
 #define tTargetBlendY  data[4]
 #define tBlendColor    data[5]
 #define tRestoreBlend  data[8]
+#define tPalSelectorHi data[9]
+#define tPalSelectorLo data[10]
 
 // Blends mon/screen to designated color or back alternately tNumBlends times 
 // Many uses of this task only set a tNumBlends of 2, which has the effect of blending to a color and back once
@@ -436,11 +439,11 @@ void AnimTask_BlendColorCycle(u8 taskId)
     gTasks[taskId].tTargetBlendY = gBattleAnimArgs[4];
     gTasks[taskId].tBlendColor = gBattleAnimArgs[5];
     gTasks[taskId].tRestoreBlend = FALSE;
-    BlendColorInCycle(taskId, 0, gTasks[taskId].tTargetBlendY);
-    gTasks[taskId].func = AnimTask_BlendColorInCycleLoop;
+    BlendColorCycle(taskId, 0, gTasks[taskId].tTargetBlendY);
+    gTasks[taskId].func = AnimTask_BlendColorCycleLoop;
 }
 
-static void BlendColorInCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
+static void BlendColorCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gTasks[taskId].tPalSelector);
     BeginNormalPaletteFade(
@@ -454,14 +457,14 @@ static void BlendColorInCycle(u8 taskId, u8 startBlendAmount, u8 targetBlendAmou
     gTasks[taskId].tRestoreBlend ^= 1;
 }
 
-static void AnimTask_BlendColorInCycleLoop(u8 taskId)
+static void AnimTask_BlendColorCycleLoop(u8 taskId)
 {
     u8 startBlendAmount, targetBlendAmount;
     if (!gPaletteFade.active)
     {
         if (gTasks[taskId].tNumBlends > 0)
         {
-            if (gTasks[taskId].tRestoreBlend == FALSE)
+            if (!gTasks[taskId].tRestoreBlend)
             {
                 // Blend to designated color
                 startBlendAmount = gTasks[taskId].tInitialBlendY;
@@ -477,7 +480,7 @@ static void AnimTask_BlendColorInCycleLoop(u8 taskId)
             if (gTasks[taskId].tNumBlends == 1)
                 targetBlendAmount = 0;
 
-            BlendColorInCycle(taskId, startBlendAmount, targetBlendAmount);
+            BlendColorCycle(taskId, startBlendAmount, targetBlendAmount);
         }
         else
         {
@@ -486,26 +489,19 @@ static void AnimTask_BlendColorInCycleLoop(u8 taskId)
     }
 }
 
-#undef tPalSelector
-#undef tDelay
-#undef tNumBlends
-#undef tInitialBlendY
-#undef tTargetBlendY
-#undef tBlendColor
-#undef tFirstBlendDone
-
-void sub_8115B0C(u8 taskId)
+// See AnimTask_BlendColorCycle. Same, but excludes Attacker and Target
+void AnimTask_BlendColorCycleExclude(u8 taskId)
 {
     int battler;
     u32 selectedPalettes = 0;
 
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
-    gTasks[taskId].data[1] = gBattleAnimArgs[1];
-    gTasks[taskId].data[2] = gBattleAnimArgs[2];
-    gTasks[taskId].data[3] = gBattleAnimArgs[3];
-    gTasks[taskId].data[4] = gBattleAnimArgs[4];
-    gTasks[taskId].data[5] = gBattleAnimArgs[5];
-    gTasks[taskId].data[8] = 0;
+    gTasks[taskId].tDelay = gBattleAnimArgs[1];
+    gTasks[taskId].tNumBlends = gBattleAnimArgs[2];
+    gTasks[taskId].tInitialBlendY = gBattleAnimArgs[3];
+    gTasks[taskId].tTargetBlendY = gBattleAnimArgs[4];
+    gTasks[taskId].tBlendColor = gBattleAnimArgs[5];
+    gTasks[taskId].tRestoreBlend = 0;
 
     for (battler = 0; battler < gBattlersCount; battler++)
     {
@@ -516,48 +512,50 @@ void sub_8115B0C(u8 taskId)
     if (gBattleAnimArgs[0] == 1)
         selectedPalettes |= 0xE;
 
-    gTasks[taskId].data[9] = selectedPalettes >> 16;
-    gTasks[taskId].data[10] = selectedPalettes & 0xFF;
-    sub_8115BC8(taskId, 0, gTasks[taskId].data[4]);
-    gTasks[taskId].func = sub_8115C18;
+    gTasks[taskId].tPalSelectorHi = selectedPalettes >> 16;
+    gTasks[taskId].tPalSelectorLo = selectedPalettes & 0xFF;
+    BlendColorCycleExclude(taskId, 0, gTasks[taskId].tTargetBlendY);
+    gTasks[taskId].func = AnimTask_BlendColorCycleExcludeLoop;
 }
 
-static void sub_8115BC8(u8 taskId, u8 initialBlendAmount, u8 targetBlendAmount)
+static void BlendColorCycleExclude(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
-    u32 selectedPalettes = ((u16)gTasks[taskId].data[9] << 16) | (u16)gTasks[taskId].data[10];
+    u32 selectedPalettes = ((u16)gTasks[taskId].tPalSelectorHi << 16) | (u16)gTasks[taskId].tPalSelectorLo;
     BeginNormalPaletteFade(
         selectedPalettes,
-        gTasks[taskId].data[1],
-        initialBlendAmount,
+        gTasks[taskId].tDelay,
+        startBlendAmount,
         targetBlendAmount,
-        gTasks[taskId].data[5]);
+        gTasks[taskId].tBlendColor);
 
-    gTasks[taskId].data[2]--;
-    gTasks[taskId].data[8] ^= 1;
+    gTasks[taskId].tNumBlends--;
+    gTasks[taskId].tRestoreBlend ^= 1;
 }
 
-static void sub_8115C18(u8 taskId)
+static void AnimTask_BlendColorCycleExcludeLoop(u8 taskId)
 {
-    u8 initialBlendAmount, targetBlendAmount;
+    u8 startBlendAmount, targetBlendAmount;
     if (!gPaletteFade.active)
     {
-        if (gTasks[taskId].data[2] > 0)
+        if (gTasks[taskId].tNumBlends > 0)
         {
-            if (gTasks[taskId].data[8] == 0)
+            if (!gTasks[taskId].tRestoreBlend)
             {
-                initialBlendAmount = gTasks[taskId].data[3];
-                targetBlendAmount = gTasks[taskId].data[4];
+                // Blend to designated color
+                startBlendAmount = gTasks[taskId].tInitialBlendY;
+                targetBlendAmount = gTasks[taskId].tTargetBlendY;
             }
             else
             {
-                initialBlendAmount = gTasks[taskId].data[4];
-                targetBlendAmount = gTasks[taskId].data[3];
+                // Blend back to original color
+                startBlendAmount = gTasks[taskId].tTargetBlendY;
+                targetBlendAmount = gTasks[taskId].tInitialBlendY;
             }
 
-            if (gTasks[taskId].data[2] == 1)
+            if (gTasks[taskId].tNumBlends == 1)
                 targetBlendAmount = 0;
 
-            sub_8115BC8(taskId, initialBlendAmount, targetBlendAmount);
+            BlendColorCycleExclude(taskId, startBlendAmount, targetBlendAmount);
         }
         else
         {
@@ -566,58 +564,61 @@ static void sub_8115C18(u8 taskId)
     }
 }
 
-void sub_8115C80(u8 taskId)
+// See AnimTask_BlendColorCycle. Same, but selects palette by ANIM_TAG_*
+void AnimTask_BlendColorCycleByTag(u8 taskId)
 {
     u8 paletteIndex;
 
-    gTasks[taskId].data[0] = gBattleAnimArgs[0];
-    gTasks[taskId].data[1] = gBattleAnimArgs[1];
-    gTasks[taskId].data[2] = gBattleAnimArgs[2];
-    gTasks[taskId].data[3] = gBattleAnimArgs[3];
-    gTasks[taskId].data[4] = gBattleAnimArgs[4];
-    gTasks[taskId].data[5] = gBattleAnimArgs[5];
-    gTasks[taskId].data[8] = 0;
+    gTasks[taskId].tPalTag = gBattleAnimArgs[0];
+    gTasks[taskId].tDelay = gBattleAnimArgs[1];
+    gTasks[taskId].tNumBlends = gBattleAnimArgs[2];
+    gTasks[taskId].tInitialBlendY = gBattleAnimArgs[3];
+    gTasks[taskId].tTargetBlendY = gBattleAnimArgs[4];
+    gTasks[taskId].tBlendColor = gBattleAnimArgs[5];
+    gTasks[taskId].tRestoreBlend = FALSE;
 
-    sub_8115CD0(taskId, 0, gTasks[taskId].data[4]);
-    gTasks[taskId].func = sub_8115D2C;
+    BlendColorCycleByTag(taskId, 0, gTasks[taskId].tTargetBlendY);
+    gTasks[taskId].func = AnimTask_BlendColorCycleByTagLoop;
 }
 
-static void sub_8115CD0(u8 taskId, u8 initialBlendAmount, u8 targetBlendAmount)
+static void BlendColorCycleByTag(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
-    u8 paletteIndex = IndexOfSpritePaletteTag(gTasks[taskId].data[0]);
+    u8 paletteIndex = IndexOfSpritePaletteTag(gTasks[taskId].tPalTag);
     BeginNormalPaletteFade(
         1 << (paletteIndex + 16),
-        gTasks[taskId].data[1],
-        initialBlendAmount,
+        gTasks[taskId].tDelay,
+        startBlendAmount,
         targetBlendAmount,
-        gTasks[taskId].data[5]);
+        gTasks[taskId].tBlendColor);
 
-    gTasks[taskId].data[2]--;
-    gTasks[taskId].data[8] ^= 1;
+    gTasks[taskId].tNumBlends--;
+    gTasks[taskId].tRestoreBlend ^= 1;
 }
 
-static void sub_8115D2C(u8 taskId)
+static void AnimTask_BlendColorCycleByTagLoop(u8 taskId)
 {
-    u8 initialBlendAmount, targetBlendAmount;
+    u8 startBlendAmount, targetBlendAmount;
     if (!gPaletteFade.active)
     {
-        if (gTasks[taskId].data[2] > 0)
+        if (gTasks[taskId].tNumBlends > 0)
         {
-            if (gTasks[taskId].data[8] == 0)
+            if (!gTasks[taskId].tRestoreBlend)
             {
-                initialBlendAmount = gTasks[taskId].data[3];
-                targetBlendAmount = gTasks[taskId].data[4];
+                // Blend to designated color
+                startBlendAmount = gTasks[taskId].tInitialBlendY;
+                targetBlendAmount = gTasks[taskId].tTargetBlendY;
             }
             else
             {
-                initialBlendAmount = gTasks[taskId].data[4];
-                targetBlendAmount = gTasks[taskId].data[3];
+                // Blend back to original color
+                startBlendAmount = gTasks[taskId].tTargetBlendY;
+                targetBlendAmount = gTasks[taskId].tInitialBlendY;
             }
 
-            if (gTasks[taskId].data[2] == 1)
+            if (gTasks[taskId].tNumBlends == 1)
                 targetBlendAmount = 0;
 
-            sub_8115CD0(taskId, initialBlendAmount, targetBlendAmount);
+            BlendColorCycleByTag(taskId, startBlendAmount, targetBlendAmount);
         }
         else
         {
@@ -625,6 +626,17 @@ static void sub_8115D2C(u8 taskId)
         }
     }
 }
+
+#undef tPalSelector
+#undef tPalTag
+#undef tDelay
+#undef tNumBlends
+#undef tInitialBlendY
+#undef tTargetBlendY
+#undef tBlendColor
+#undef tRestoreBlend
+#undef tPalSelectorHi
+#undef tPalSelectorLo
 
 // Flashes the specified anim tag with given color. Used e.g. to flash the particles red in Hyper Beam
 void AnimTask_FlashAnimTagWithColor(u8 taskId)
@@ -771,7 +783,7 @@ void sub_8115F94(u8 taskId)
     }
 }
 
-void sub_81160A4(struct Sprite *sprite)
+static void AnimShakeMonOrBattleTerrain(struct Sprite *sprite)
 {
     u16 var0;
 

@@ -737,12 +737,12 @@ void AnimTask_IsPowerOver99(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8115628(u8 taskId)
+void AnimTask_PositionFissureBgOnBattler(u8 taskId)
 {
     struct Task *newTask;
-    u8 battler = (gBattleAnimArgs[0] & 1) ? gBattleAnimTarget : gBattleAnimAttacker;
+    u8 battler = (gBattleAnimArgs[0] & ANIM_TARGET) ? gBattleAnimTarget : gBattleAnimAttacker;
 
-    if (gBattleAnimArgs[0] > 1)
+    if (gBattleAnimArgs[0] > ANIM_TARGET)
         battler ^= 2;
 
     newTask = &gTasks[CreateTask(sub_81156D0, gBattleAnimArgs[1])];

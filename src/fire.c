@@ -446,12 +446,15 @@ const struct SpriteTemplate gWillOWispFireSpriteTemplate =
     .callback = AnimWillOWispFire,
 };
 
-const s8 gUnknown_08595684[16] =
+// Directions for shaking up/down or left/right in AnimTask_ShakeTargetInPattern
+// Only first 10 values are ever accessed.
+// First pattern results in larger shakes, second results in faster oscillation
+static const s8 sShakeDirsPattern0[16] =
 {
     -1, -1, 0, 1, 1, 0, 0, -1, -1, 1, 1, 0, 0, -1, 0, 1,
 };
 
-const s8 gUnknown_08595694[16] =
+static const s8 sShakeDirsPattern1[16] =
 {
     -1, 0, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 1,
 };
@@ -1131,7 +1134,7 @@ static void sub_8109C4C(struct Sprite *sprite)
 
         if ((initialData5 == 0 || initialData5 > 196) && newData5 > 0 && sprite->data[7] == 0)
         {
-            PlaySE12WithPanning(SE_W172, gUnknown_02038440);
+            PlaySE12WithPanning(SE_W172, gAnimCustomPanning);
         }
     }
     else
@@ -1288,33 +1291,40 @@ void AnimTask_BlendBackground(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_810A094(u8 taskId)
+#define tShakeNum    data[0]
+#define tMaxShakes   data[1]
+#define tShakeOffset data[2] // Never read, gBattleAnimArgs[1] is used directly instead
+#define tVertical    data[3]
+#define tPatternId   data[4]
+
+// Shakes target horizontally or vertically tMaxShakes times, following a set pattern of alternations
+void AnimTask_ShakeTargetInPattern(u8 taskId)
 {
-    s8 unk;
+    s8 dir;
     u8 spriteId;
 
-    if (gTasks[taskId].data[0] == 0)
+    if (gTasks[taskId].tShakeNum == 0)
     {
-        gTasks[taskId].data[1] = gBattleAnimArgs[0];
-        gTasks[taskId].data[2] = gBattleAnimArgs[1];
-        gTasks[taskId].data[3] = gBattleAnimArgs[2];
-        gTasks[taskId].data[4] = gBattleAnimArgs[3];
+        gTasks[taskId].tMaxShakes = gBattleAnimArgs[0];
+        gTasks[taskId].tShakeOffset = gBattleAnimArgs[1];
+        gTasks[taskId].tVertical = gBattleAnimArgs[2];
+        gTasks[taskId].tPatternId = gBattleAnimArgs[3];
     }
-    gTasks[taskId].data[0]++;
+    gTasks[taskId].tShakeNum++;
 
     spriteId = gBattlerSpriteIds[gBattleAnimTarget];
 
-    if (!gTasks[taskId].data[4])
-        unk = gUnknown_08595684[gTasks[taskId].data[0] % 10];
+    if (gTasks[taskId].tPatternId == 0)
+        dir = sShakeDirsPattern0[gTasks[taskId].tShakeNum % 10];
     else
-        unk = gUnknown_08595694[gTasks[taskId].data[0] % 10];
+        dir = sShakeDirsPattern1[gTasks[taskId].tShakeNum % 10];
 
-    if (gTasks[taskId].data[3] == 1)
-        gSprites[spriteId].pos2.y = gBattleAnimArgs[1] * unk < 0 ? -(gBattleAnimArgs[1] * unk) : gBattleAnimArgs[1] * unk;
+    if (gTasks[taskId].tVertical == TRUE)
+        gSprites[spriteId].pos2.y = gBattleAnimArgs[1] * dir < 0 ? -(gBattleAnimArgs[1] * dir) : gBattleAnimArgs[1] * dir;
     else
-        gSprites[spriteId].pos2.x = gBattleAnimArgs[1] * unk;
+        gSprites[spriteId].pos2.x = gBattleAnimArgs[1] * dir;
 
-    if (gTasks[taskId].data[0] == gTasks[taskId].data[1])
+    if (gTasks[taskId].tShakeNum == gTasks[taskId].tMaxShakes)
     {
         gSprites[spriteId].pos2.x = 0;
         gSprites[spriteId].pos2.y = 0;

@@ -250,7 +250,7 @@ static void sub_8111674(struct Sprite *sprite)
         return;
     if (r0 <= 0)
         return;
-    PlaySE12WithPanning(SE_W109, gUnknown_02038440);
+    PlaySE12WithPanning(SE_W109, gAnimCustomPanning);
 }
 
 static void sub_81116E8(struct Sprite *sprite)
@@ -941,7 +941,7 @@ static void sub_81125E0(u8 taskId)
     }
 }
 
-void sub_8112758(u8 taskId)
+void AnimTask_CurseStretchingBlackBg(u8 taskId)
 {
     s16 startX, startY;
     s16 leftDistance, topDistance, bottomDistance, rightDistance;

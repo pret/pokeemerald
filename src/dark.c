@@ -256,7 +256,7 @@ static void sub_811381C(u8 taskId)
     }
 }
 
-void sub_8113888(u8 taskId)
+void AnimTask_InitAttackerFadeFromInvisible(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
@@ -901,7 +901,7 @@ static void sub_8114748(u8 taskId)
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
             paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
             if (gTasks[taskId].data[1] == 0)
-                SetGreyscaleOrOriginalPalette(paletteNum, 1);
+                SetGreyscaleOrOriginalPalette(paletteNum, TRUE);
 
             DestroySprite(&gSprites[gTasks[taskId].data[0]]);
             sub_80A6B30(&animBg);
@@ -928,7 +928,7 @@ static void sub_8114748(u8 taskId)
 
 // Changes battler's palette to either greyscale or original.
 // arg0: which battler
-// arg1: 0 grayscale, 1 original
+// arg1: FALSE grayscale, TRUE original
 void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
 {
     u8 spriteId;
@@ -938,10 +938,10 @@ void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
 
     switch (gBattleAnimArgs[0])
     {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
+    case ANIM_ATTACKER:
+    case ANIM_TARGET:
+    case ANIM_ATK_PARTNER:
+    case ANIM_DEF_PARTNER:
         spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
         break;
     case 4:
@@ -980,13 +980,13 @@ void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8114960(u8 taskId)
+void GetIsDoomDesireHitTurn(u8 taskId)
 {
     if (gAnimMoveTurn < 2)
-        gBattleAnimArgs[ARG_RET_ID] = 0;
+        gBattleAnimArgs[ARG_RET_ID] = FALSE;
 
     if (gAnimMoveTurn == 2)
-        gBattleAnimArgs[ARG_RET_ID] = 1;
+        gBattleAnimArgs[ARG_RET_ID] = TRUE;
 
     DestroyAnimVisualTask(taskId);
 }
