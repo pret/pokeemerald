@@ -7,11 +7,11 @@
 static void AnimMegahornHorn(struct Sprite *);
 static void AnimLeechLifeNeedle(struct Sprite *);
 void AnimTranslateWebThread(struct Sprite *);
-void sub_81105B4(struct Sprite *);
+static void AnimStringWrap(struct Sprite *);
 void sub_811067C(struct Sprite *);
 void AnimTranslateStinger(struct Sprite *);
 void AnimMissileArc(struct Sprite *);
-void sub_8110994(struct Sprite *);
+static void AnimTailGlowOrb(struct Sprite *);
 static void sub_811057C(struct Sprite *);
 static void sub_8110630(struct Sprite *);
 static void sub_81106A4(struct Sprite *);
@@ -101,7 +101,7 @@ const struct SpriteTemplate gWebThreadSpriteTemplate =
     .callback = AnimTranslateWebThread,
 };
 
-const struct SpriteTemplate gUnknown_085969F8 =
+const struct SpriteTemplate gStringWrapSpriteTemplate =
 {
     .tileTag = ANIM_TAG_STRING,
     .paletteTag = ANIM_TAG_STRING,
@@ -109,7 +109,7 @@ const struct SpriteTemplate gUnknown_085969F8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81105B4,
+    .callback = AnimStringWrap,
 };
 
 const union AffineAnimCmd gUnknown_08596A10[] =
@@ -184,7 +184,7 @@ const union AffineAnimCmd *const gUnknown_08596AC4[] =
     gUnknown_08596A8C,
 };
 
-const struct SpriteTemplate gUnknown_08596AC8 =
+const struct SpriteTemplate gTailGlowOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
@@ -192,7 +192,7 @@ const struct SpriteTemplate gUnknown_08596AC8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08596AC4,
-    .callback = sub_8110994,
+    .callback = AnimTailGlowOrb,
 };
 
 static void AnimMegahornHorn(struct Sprite *sprite)
@@ -291,7 +291,8 @@ static void sub_811057C(struct Sprite *sprite)
     sprite->data[6] = (sprite->data[6] + 13) & 0xFF;
 }
 
-void sub_81105B4(struct Sprite *sprite)
+// Second stage of String Shot
+static void AnimStringWrap(struct Sprite *sprite)
 {
     SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -473,9 +474,9 @@ static void AnimMissileArcStep(struct Sprite *sprite)
     }
 }
 
-void sub_8110994(struct Sprite *sprite)
+static void AnimTailGlowOrb(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + 18;

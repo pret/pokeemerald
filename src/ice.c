@@ -325,7 +325,7 @@ const struct SpriteTemplate gMistCloudSpriteTemplate =
     .callback = InitSwirlingFogAnim,
 };
 
-const struct SpriteTemplate gUnknown_08595C44 =
+const struct SpriteTemplate gSmogCloudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
@@ -429,7 +429,7 @@ const struct SpriteTemplate gUnknown_08595D2C =
     .callback = AnimHailBegin,
 };
 
-const struct SpriteTemplate gUnknown_08595D44 =
+const struct SpriteTemplate gWeatherBallIceDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HAIL,
     .paletteTag = ANIM_TAG_HAIL,
@@ -437,7 +437,7 @@ const struct SpriteTemplate gUnknown_08595D44 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08595D28,
-    .callback = sub_80A8EE4,
+    .callback = AnimWeatherBallDown,
 };
 
 const union AnimCmd gUnknown_08595D5C[] =

@@ -20,7 +20,7 @@ void sub_81110A4(u8 taskId);
 static void AnimRolloutParticle(struct Sprite *);
 static void AnimRockTomb(struct Sprite *);
 static void AnimRockBlastRock(struct Sprite *);
-void sub_8111444(struct Sprite *);
+static void AnimRockScatter(struct Sprite *);
 static void AnimParticleInVortex(struct Sprite *);
 static void sub_8110A70(struct Sprite *);
 static void sub_8110B80(struct Sprite *sprite);
@@ -280,10 +280,10 @@ const struct SpriteTemplate gRockScatterSpriteTemplate =
     .anims = gUnknown_08596BF8,
     .images = NULL,
     .affineAnims = gUnknown_08596C90,
-    .callback = sub_8111444,
+    .callback = AnimRockScatter,
 };
 
-const struct SpriteTemplate gUnknown_08596CC8 =
+const struct SpriteTemplate gTwisterRockParticleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
@@ -294,7 +294,7 @@ const struct SpriteTemplate gUnknown_08596CC8 =
     .callback = AnimMoveTwisterParticle,
 };
 
-const struct SpriteTemplate gUnknown_08596CE0 =
+const struct SpriteTemplate gWeatherBallRockDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
@@ -302,7 +302,7 @@ const struct SpriteTemplate gUnknown_08596CE0 =
     .anims = gUnknown_08596C00,
     .images = NULL,
     .affineAnims = gUnknown_08596C90,
-    .callback = sub_80A8EE4,
+    .callback = AnimWeatherBallDown,
 };
 
 static void AnimFallingRock(struct Sprite *sprite)
@@ -796,7 +796,7 @@ static void AnimRockBlastRock(struct Sprite *sprite)
     TranslateAnimSpriteToTargetMonLocation(sprite);
 }
 
-void sub_8111444(struct Sprite *sprite)
+static void AnimRockScatter(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);

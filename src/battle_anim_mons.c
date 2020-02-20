@@ -2416,7 +2416,7 @@ static void sub_80A8DFC(struct Sprite *sprite)
     }
 }
 
-void sub_80A8E30(struct Sprite *sprite)
+void AnimWeatherBallUp(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -2440,7 +2440,7 @@ static void sub_80A8E88(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_80A8EE4(struct Sprite *sprite)
+void AnimWeatherBallDown(struct Sprite *sprite)
 {
     int x;
     sprite->data[0] = gBattleAnimArgs[2];

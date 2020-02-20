@@ -703,7 +703,7 @@ static void sub_810F810(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_810F83C(u8 taskId)
+void AnimTask_Teleport(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);

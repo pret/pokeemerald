@@ -18,9 +18,9 @@ static void AnimStompFoot(struct Sprite *);
 static void AnimDizzyPunchDuck(struct Sprite *);
 void sub_810D40C(struct Sprite *);
 void sub_810D4F4(struct Sprite *);
-void sub_810D608(struct Sprite *);
-void sub_810D714(struct Sprite *);
-void sub_810D874(struct Sprite *);
+static void AnimSuperpowerOrb(struct Sprite *);
+static void AnimSuperpowerRock(struct Sprite *);
+static void AnimSuperpowerFireball(struct Sprite *);
 static void AnimArmThrustHit(struct Sprite *);
 void sub_810DA10(struct Sprite *);
 static void AnimFocusPunchFist(struct Sprite *);
@@ -209,7 +209,7 @@ const struct SpriteTemplate gMegaPunchKickSpriteTemplate =
     .callback = AnimSpinningKickOrPunch,
 };
 
-const struct SpriteTemplate gUnknown_08595F60 =
+const struct SpriteTemplate gStompFootSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
@@ -267,7 +267,7 @@ const union AffineAnimCmd *const gUnknown_08595FE8[] =
     gUnknown_08595FC0,
 };
 
-const struct SpriteTemplate gUnknown_08595FEC =
+const struct SpriteTemplate gSuperpowerOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
@@ -275,10 +275,10 @@ const struct SpriteTemplate gUnknown_08595FEC =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_08595FE8,
-    .callback = sub_810D608,
+    .callback = AnimSuperpowerOrb,
 };
 
-const struct SpriteTemplate gUnknown_08596004 =
+const struct SpriteTemplate gSuperpowerRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FLAT_ROCK,
     .paletteTag = ANIM_TAG_FLAT_ROCK,
@@ -286,10 +286,10 @@ const struct SpriteTemplate gUnknown_08596004 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810D714,
+    .callback = AnimSuperpowerRock,
 };
 
-const struct SpriteTemplate gUnknown_0859601C =
+const struct SpriteTemplate gSuperpowerFireballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_METEOR,
     .paletteTag = ANIM_TAG_METEOR,
@@ -297,7 +297,7 @@ const struct SpriteTemplate gUnknown_0859601C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810D874,
+    .callback = AnimSuperpowerFireball,
 };
 
 const struct SpriteTemplate gArmThrustHandSpriteTemplate =
@@ -795,9 +795,9 @@ static void sub_810D5DC(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_810D608(struct Sprite *sprite)
+static void AnimSuperpowerOrb(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattlerAttacker, 2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattlerAttacker, 3);
@@ -834,7 +834,8 @@ static void sub_810D6A8(struct Sprite *sprite)
     }
 }
 
-void sub_810D714(struct Sprite *sprite)
+// Floating rock that flies off to hit the target. Used by Superpower
+static void AnimSuperpowerRock(struct Sprite *sprite)
 {
     sprite->pos1.x = gBattleAnimArgs[0];
     sprite->pos1.y = 120;
@@ -895,11 +896,11 @@ static void sub_810D830(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_810D874(struct Sprite *sprite)
+static void AnimSuperpowerFireball(struct Sprite *sprite)
 {
     u8 battler;
 
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattlerAttacker, 2);
         sprite->pos1.y = GetBattlerSpriteCoord(gBattlerAttacker, 3);
