@@ -799,14 +799,14 @@ Move_DOUBLE_EDGE:
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 4, -10, 0, ANIM_TARGET, 0
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -32, 0, 0, 3
 	waitforvisualfinish
-	createvisualtask AminTask_DipMonSpriteToSide, 2, 8, -256, 0, 0
-	createvisualtask AminTask_DipMonSpriteToSide, 2, 8, -256, 1, 0
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 0, 0
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 1, 0
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 4, 0, 12, 1
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 16, 0, RGB_WHITE
 	waitforvisualfinish
-	createvisualtask AminTask_DipMonSpriteToSide, 2, 8, -256, 0, 1
-	createvisualtask AminTask_DipMonSpriteToSide, 2, 8, -256, 1, 1
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 0, 1
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, 1, 1
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 5
 	delay 3
@@ -2442,7 +2442,7 @@ Move_HORN_ATTACK:
 Move_FURY_ATTACK:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HORN_HIT
-	createvisualtask AminTask_DipMonSpriteToSide, 2, 4, 256, 0, 2
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 4, 256, 0, 2
 	choosetwoturnanim FuryAttackRight, FuryAttackLeft
 FuryAttackContinue:
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 6, 1
@@ -2591,7 +2591,7 @@ Move_LOW_KICK:
 	createsprite gSlidingKickSpriteTemplate, ANIM_TARGET, 2, -24, 28, 40, 8, 160, 0
 	delay 4
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, -8, 8, ANIM_TARGET, 2
-	createvisualtask AminTask_DipMonSpriteToSide, 2, 6, 384, 1, 2
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 6, 384, 1, 2
 	playsewithpan SE_W233B, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 4
@@ -2836,7 +2836,7 @@ SkullBashSetUpHeadDown:
 	createsprite gSlideMonToOffsetAndBackSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, -24, 0, 0, 10, 0
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	createvisualtask AminTask_DipMonSpriteToSide, 2, 16, 96, 0, 2
+	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 16, 96, 0, 2
 	waitforvisualfinish
 	createsprite gSlideMonToOffsetAndBackSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 24, 0, 0, 10, 1
 	waitforvisualfinish
@@ -3405,13 +3405,13 @@ ExtremeSpeedContinue:
 	createvisualtask AnimTask_ExtremeSpeedImpact, 2
 	delay 2
 	playsewithpan SE_W004, SOUND_PAN_TARGET
-	createsprite gExtremeSpeedHitSplatSpriteTemplate, ANIM_TARGET, 2, 1, 0, -12, 3
+	createsprite gExtremeSpeedHitSplatSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET, 0, -12, 3
 	delay 10
 	playsewithpan SE_W004, SOUND_PAN_TARGET
-	createsprite gExtremeSpeedHitSplatSpriteTemplate, ANIM_TARGET, 2, 1, 0, 12, 3
+	createsprite gExtremeSpeedHitSplatSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET, 0, 12, 3
 	delay 10
 	playsewithpan SE_W233B, SOUND_PAN_TARGET
-	createsprite gExtremeSpeedHitSplatSpriteTemplate, ANIM_TARGET, 2, 1, 0, 0, 3
+	createsprite gExtremeSpeedHitSplatSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET, 0, 0, 3
 	waitforvisualfinish
 	createvisualtask AnimTask_SpeedDust, 2
 	delay 10
@@ -8570,14 +8570,14 @@ Move_ARM_THRUST:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbgprio_28 ANIM_TARGET
 	setalpha 12, 8
-	createvisualtask AminTask_DipMonSpriteToSide, 5, 8, 5, 0, 0
+	createvisualtask AnimTask_RotateMonSpriteToSide, 5, 8, 5, 0, 0
 	delay 6
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 3
 	delay 4
 	playsewithpan SE_W207, SOUND_PAN_TARGET
 	createsprite gArmThrustHandSpriteTemplate, ANIM_TARGET, 2, 10, -8, 14, 3
 	waitforvisualfinish
-	createvisualtask AminTask_DipMonSpriteToSide, 5, 8, 5, 0, 1
+	createvisualtask AnimTask_RotateMonSpriteToSide, 5, 8, 5, 0, 1
 	playsewithpan SE_W003, SOUND_PAN_TARGET
 	choosetwoturnanim ArmThrustRight, ArmThrustLeft
 ArmThrustContinue:

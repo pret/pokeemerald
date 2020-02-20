@@ -6,27 +6,27 @@
 #include "trig.h"
 
 // This file's functions.
-void AnimTask_ShakeMonStep(u8 taskId);
-void AnimTask_ShakeMon2Step(u8 taskId);
-void AnimTask_ShakeMonInPlaceStep(u8 taskId);
-void AnimTask_ShakeAndSinkMonStep(u8 taskId);
-void sub_80D57B8(u8 taskId);
+static void AnimTask_ShakeMon_Step(u8 taskId);
+static void AnimTask_ShakeMon2_Step(u8 taskId);
+static void AnimTask_ShakeMonInPlace_Step(u8 taskId);
+static void AnimTask_ShakeAndSinkMon_Step(u8 taskId);
+static void AnimTask_TranslateMonElliptical_Step(u8 taskId);
 static void DoHorizontalLunge(struct Sprite *sprite);
 static void ReverseHorizontalLungeDirection(struct Sprite *sprite);
 static void DoVerticalDip(struct Sprite *sprite);
 static void ReverseVerticalDipDirection(struct Sprite* sprite);
 static void SlideMonToOriginalPos(struct Sprite *sprite);
-static void SlideMonToOriginalPosStep(struct Sprite *sprite);
+static void SlideMonToOriginalPos_Step(struct Sprite *sprite);
 static void SlideMonToOffset(struct Sprite *sprite);
 static void SlideMonToOffsetAndBack(struct Sprite *sprite);
-static void sub_80D5C20(struct Sprite *sprite);
-void AnimTask_WindUpLungePart1(u8 taskId);
-void AnimTask_WindUpLungePart2(u8 taskId);
-void AnimTask_SwayMonStep(u8 taskId);
-void AnimTask_ScaleMonAndRestoreStep(u8 taskId);
-void sub_80D6308(u8 taskId);
-void sub_80D646C(u8 taskId);
-void sub_80A8B3C(u8 taskId);
+static void SlideMonToOffsetAndBack_End(struct Sprite *sprite);
+static void AnimTask_WindUpLunge_Step1(u8 taskId);
+static void AnimTask_WindUpLunge_Step2(u8 taskId);
+static void AnimTask_SwayMonStep(u8 taskId);
+static void AnimTask_ScaleMonAndRestore_Step(u8 taskId);
+static void AnimTask_RotateMonSpriteToSide_Step(u8 taskId);
+static void AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step(u8 taskId);
+static void AnimTask_SlideOffScreen_Step(u8 taskId);
 
 const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
 {
@@ -107,11 +107,11 @@ void AnimTask_ShakeMon(u8 taskId)
     gTasks[taskId].data[3] = gBattleAnimArgs[4];
     gTasks[taskId].data[4] = gBattleAnimArgs[1];
     gTasks[taskId].data[5] = gBattleAnimArgs[2];
-    gTasks[taskId].func = AnimTask_ShakeMonStep;
-    AnimTask_ShakeMonStep(taskId);
+    gTasks[taskId].func = AnimTask_ShakeMon_Step;
+    AnimTask_ShakeMon_Step(taskId);
 }
 
-void AnimTask_ShakeMonStep(u8 taskId)
+static void AnimTask_ShakeMon_Step(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
@@ -211,11 +211,11 @@ void AnimTask_ShakeMon2(u8 taskId)
     gTasks[taskId].data[3] = gBattleAnimArgs[4];
     gTasks[taskId].data[4] = gBattleAnimArgs[1];
     gTasks[taskId].data[5] = gBattleAnimArgs[2];
-    gTasks[taskId].func = AnimTask_ShakeMon2Step;
+    gTasks[taskId].func = AnimTask_ShakeMon2_Step;
     gTasks[taskId].func(taskId);
 }
 
-void AnimTask_ShakeMon2Step(u8 taskId)
+static void AnimTask_ShakeMon2_Step(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
@@ -270,11 +270,11 @@ void AnimTask_ShakeMonInPlace(u8 taskId)
     gTasks[taskId].data[4] = gBattleAnimArgs[4];
     gTasks[taskId].data[5] = gBattleAnimArgs[1] * 2;
     gTasks[taskId].data[6] = gBattleAnimArgs[2] * 2;
-    gTasks[taskId].func = AnimTask_ShakeMonInPlaceStep;
+    gTasks[taskId].func = AnimTask_ShakeMonInPlace_Step;
     gTasks[taskId].func(taskId);
 }
 
-void AnimTask_ShakeMonInPlaceStep(u8 taskId)
+static void AnimTask_ShakeMonInPlace_Step(u8 taskId)
 {
     if (gTasks[taskId].data[3] == 0)
     {
@@ -326,11 +326,11 @@ void AnimTask_ShakeAndSinkMon(u8 taskId)
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
     gTasks[taskId].data[3] = gBattleAnimArgs[3];
     gTasks[taskId].data[4] = gBattleAnimArgs[4];
-    gTasks[taskId].func = AnimTask_ShakeAndSinkMonStep;
+    gTasks[taskId].func = AnimTask_ShakeAndSinkMon_Step;
     gTasks[taskId].func(taskId);
 }
 
-void AnimTask_ShakeAndSinkMonStep(u8 taskId)
+static void AnimTask_ShakeAndSinkMon_Step(u8 taskId)
 {
     s16 x;
     u8 spriteId;
@@ -383,11 +383,11 @@ void AnimTask_TranslateMonElliptical(u8 taskId)
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
     gTasks[taskId].data[3] = gBattleAnimArgs[3];
     gTasks[taskId].data[4] = wavePeriod;
-    gTasks[taskId].func = sub_80D57B8;
+    gTasks[taskId].func = AnimTask_TranslateMonElliptical_Step;
     gTasks[taskId].func(taskId);
 }
 
-void sub_80D57B8(u8 taskId)
+static void AnimTask_TranslateMonElliptical_Step(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[0];
     gSprites[spriteId].pos2.x = Sin(gTasks[taskId].data[5], gTasks[taskId].data[1]);
@@ -511,10 +511,10 @@ static void SlideMonToOriginalPos(struct Sprite *sprite)
 
     sprite->data[7] = gBattleAnimArgs[1];
     sprite->data[7] |= monSpriteId << 8;
-    sprite->callback = SlideMonToOriginalPosStep;
+    sprite->callback = SlideMonToOriginalPos_Step;
 }
 
-static void SlideMonToOriginalPosStep(struct Sprite *sprite)
+static void SlideMonToOriginalPos_Step(struct Sprite *sprite)
 {
     s8 monSpriteId;
     u8 lo;
@@ -620,13 +620,13 @@ static void SlideMonToOffsetAndBack(struct Sprite *sprite)
     }
     else
     {
-        StoreSpriteCallbackInData6(sprite, sub_80D5C20);
+        StoreSpriteCallbackInData6(sprite, SlideMonToOffsetAndBack_End);
     }
     sprite->callback = TranslateMonSpriteLinearFixedPoint;
 }
 
 
-static void sub_80D5C20(struct Sprite *sprite)
+static void SlideMonToOffsetAndBack_End(struct Sprite *sprite)
 {
     gSprites[sprite->data[5]].pos2.x = 0;
     gSprites[sprite->data[5]].pos2.y = 0;
@@ -659,10 +659,10 @@ void AnimTask_WindUpLunge(u8 taskId)
     gTasks[taskId].data[5] = (gBattleAnimArgs[5] << 8) / gBattleAnimArgs[6];
     gTasks[taskId].data[6] = gBattleAnimArgs[6];
     gTasks[taskId].data[7] = wavePeriod;
-    gTasks[taskId].func = AnimTask_WindUpLungePart1;
+    gTasks[taskId].func = AnimTask_WindUpLunge_Step1;
 }
 
-void AnimTask_WindUpLungePart1(u8 taskId)
+static void AnimTask_WindUpLunge_Step1(u8 taskId)
 {
     u8 spriteId;
     spriteId = gTasks[taskId].data[0];
@@ -672,11 +672,11 @@ void AnimTask_WindUpLungePart1(u8 taskId)
     gTasks[taskId].data[10] += gTasks[taskId].data[7];
     if (--gTasks[taskId].data[3] == 0)
     {
-        gTasks[taskId].func = AnimTask_WindUpLungePart2;
+        gTasks[taskId].func = AnimTask_WindUpLunge_Step2;
     }
 }
 
-void AnimTask_WindUpLungePart2(u8 taskId)
+static void AnimTask_WindUpLunge_Step2(u8 taskId)
 {
     u8 spriteId;
     if (gTasks[taskId].data[4] > 0)
@@ -735,10 +735,10 @@ void AnimTask_SlideOffScreen(u8 taskId)
     {
         gTasks[taskId].data[1] = -gBattleAnimArgs[1];
     }
-    gTasks[taskId].func = sub_80A8B3C;
+    gTasks[taskId].func = AnimTask_SlideOffScreen_Step;
 }
 
-void sub_80A8B3C(u8 taskId)
+static void AnimTask_SlideOffScreen_Step(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[0];
     gSprites[spriteId].pos2.x += gTasks[taskId].data[1];
@@ -779,7 +779,7 @@ void AnimTask_SwayMon(u8 taskId)
     gTasks[taskId].func = AnimTask_SwayMonStep;
 }
 
-void AnimTask_SwayMonStep(u8 taskId)
+static void AnimTask_SwayMonStep(u8 taskId)
 {
     s16 sineValue;
     u8 spriteId;
@@ -841,10 +841,10 @@ void AnimTask_ScaleMonAndRestore(u8 taskId)
     gTasks[taskId].data[4] = spriteId;
     gTasks[taskId].data[10] = 0x100;
     gTasks[taskId].data[11] = 0x100;
-    gTasks[taskId].func = AnimTask_ScaleMonAndRestoreStep;
+    gTasks[taskId].func = AnimTask_ScaleMonAndRestore_Step;
 }
 
-void AnimTask_ScaleMonAndRestoreStep(u8 taskId)
+static void AnimTask_ScaleMonAndRestore_Step(u8 taskId)
 {
     u8 spriteId;
     gTasks[taskId].data[10] += gTasks[taskId].data[0];
@@ -869,7 +869,7 @@ void AnimTask_ScaleMonAndRestoreStep(u8 taskId)
     }
 }
 
-void AminTask_DipMonSpriteToSide(u8 taskId)
+void AnimTask_RotateMonSpriteToSide(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
@@ -910,7 +910,7 @@ void AminTask_DipMonSpriteToSide(u8 taskId)
             gTasks[taskId].data[4] *= -1;
         }
     }
-    gTasks[taskId].func = sub_80D6308;
+    gTasks[taskId].func = AnimTask_RotateMonSpriteToSide_Step;
 }
 
 // Rotates mon to side and back to original position. For Peck and when a held item activates
@@ -949,10 +949,10 @@ void AnimTask_RotateMonToSideAndRestore(u8 taskId)
     gTasks[taskId].data[7] = 1;
     gTasks[taskId].data[3] *= -1;
     gTasks[taskId].data[4] *= -1;
-    gTasks[taskId].func = sub_80D6308;
+    gTasks[taskId].func = AnimTask_RotateMonSpriteToSide_Step;
 }
 
-void sub_80D6308(u8 taskId)
+static void AnimTask_RotateMonSpriteToSide_Step(u8 taskId)
 {
     gTasks[taskId].data[3] += gTasks[taskId].data[4];
     SetSpriteRotScale(gTasks[taskId].data[5], 0x100, 0x100, gTasks[taskId].data[3]);
@@ -1016,10 +1016,10 @@ void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
-    gTasks[taskId].func = sub_80D646C;
+    gTasks[taskId].func = AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step;
 }
 
-void sub_80D646C(u8 taskId)
+static void AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     if (++task->data[0] > task->data[1])

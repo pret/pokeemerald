@@ -13,46 +13,46 @@
 #include "constants/battle.h"
 #include "constants/rgb.h"
 
-void sub_810721C(struct Sprite *);
-void sub_8107228(struct Sprite *);
+static void sub_810721C(struct Sprite *);
+static void sub_8107228(struct Sprite *);
 static void AnimMovingWaterBubble(struct Sprite *);
-void sub_8107380(struct Sprite *);
-void sub_8107408(struct Sprite *);
-void sub_8107430(struct Sprite *);
+static void AnimMovingWaterBubble_Step1(struct Sprite *);
+static void AnimMovingWaterBubble_Step2(struct Sprite *);
+static void AnimMovingWaterBubble_Step3(struct Sprite *);
 static void AnimAuroraBeamRings(struct Sprite *);
-void sub_81074E4(struct Sprite *);
+static void AnimAuroraBeamRings_Step(struct Sprite *);
 static void AnimToTargetInSinWave(struct Sprite *);
-void sub_8107674(struct Sprite *);
+static void AnimToTargetInSinWave_Step(struct Sprite *);
 static void AnimHydroCannonCharge(struct Sprite *);
-static void AnimWaitForHydroCannonChargeEnd(struct Sprite *);
+static void AnimHydroCannonCharge_Step(struct Sprite *);
 static void AnimHydroCannonBeam(struct Sprite *);
 static void AnimWaterGunDroplet(struct Sprite *);
 static void AnimSmallBubblePair(struct Sprite *);
-void sub_810790C(struct Sprite *);
-void sub_8108034(struct Sprite *);
-void sub_8108098(struct Sprite *);
-void sub_810851C(struct Sprite *);
-void sub_81087C0(struct Sprite *);
-void sub_810886C(struct Sprite *);
-void sub_8108B2C(struct Sprite *);
-void sub_8108B94(struct Sprite *);
+static void AnimSmallBubblePair_Step(struct Sprite *);
+static void AnimSmallDriftingBubbles(struct Sprite *);
+static void AnimSmallDriftingBubbles_Step(struct Sprite *);
+static void sub_810851C(struct Sprite *);
+static void sub_81087C0(struct Sprite *);
+static void sub_810886C(struct Sprite *);
+static void sub_8108B2C(struct Sprite *);
+static void sub_8108B94(struct Sprite *);
 static void AnimWaterPulseBubble(struct Sprite *);
-void sub_8108C08(struct Sprite *);
-void sub_8108C54(struct Sprite *);
-void AnimWaterPulseRing_Step(struct Sprite *);
-void sub_810756C(u8);
+static void AnimWaterPulseBubble_Step(struct Sprite *);
+static void sub_8108C54(struct Sprite *);
+static void AnimWaterPulseRing_Step(struct Sprite *);
+static void sub_810756C(u8);
 static void AnimTask_RunSinAnimTimer(u8);
-void sub_8107B84(u8);
-void sub_8107CC4(u8);
-void sub_8107D58(u8);
-void sub_8108140(u8);
-void sub_810862C(u8);
-void sub_8108978(u8);
-u8 sub_8108384(void);
-void sub_8108408(struct Task*, u8);
-void sub_810871C(struct Task*, u8);
-void sub_8108AC0(struct Task*);
-void sub_8108D54(struct Sprite*, int, int);
+static void sub_8107B84(u8);
+static void sub_8107CC4(u8);
+static void sub_8107D58(u8);
+static void AnimTask_WaterSpoutLaunch_Step(u8);
+static void AnimTask_WaterSpoutRain_Step(u8);
+static void sub_8108978(u8);
+static u8 sub_8108384(void);
+static void sub_8108408(struct Task*, u8);
+static void sub_810871C(struct Task*, u8);
+static void sub_8108AC0(struct Task*);
+static void sub_8108D54(struct Sprite*, int, int);
 
 extern const union AffineAnimCmd *const gGrowingRingAffineAnimTable[];
 extern const union AffineAnimCmd *const gUnknown_08596208[];
@@ -369,7 +369,7 @@ const struct SpriteTemplate gSmallDriftingBubblesSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8108034,
+    .callback = AnimSmallDriftingBubbles,
 };
 
 const struct SpriteTemplate gUnknown_08595268 =
@@ -500,12 +500,12 @@ void AnimTask_CreateRaindrops(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_810721C(struct Sprite *sprite)
+static void sub_810721C(struct Sprite *sprite)
 {
     sprite->callback = sub_8107228;
 }
 
-void sub_8107228(struct Sprite *sprite)
+static void sub_8107228(struct Sprite *sprite)
 {
     if (++sprite->data[0] <= 13)
     {
@@ -550,11 +550,11 @@ static void AnimMovingWaterBubble(struct Sprite *sprite)
     gSprites[spriteId].data[2] = gBattleAnimArgs[5];
     gSprites[spriteId].data[3] = (u8)gBattleAnimArgs[4] * 256;
     gSprites[spriteId].data[4] = gBattleAnimArgs[6];
-    sprite->callback = sub_8107380;
+    sprite->callback = AnimMovingWaterBubble_Step1;
     sprite->callback(sprite);
 }
 
-void sub_8107380(struct Sprite *sprite)
+static void AnimMovingWaterBubble_Step1(struct Sprite *sprite)
 {
     u8 otherSpriteId = sprite->data[5];
     u8 timer = gSprites[otherSpriteId].data[4];
@@ -571,19 +571,19 @@ void sub_8107380(struct Sprite *sprite)
     }
     else
     {
-        sprite->callback = sub_8107408;
+        sprite->callback = AnimMovingWaterBubble_Step2;
         DestroySprite(&gSprites[otherSpriteId]);
     }
 }
 
-void sub_8107408(struct Sprite *sprite)
+static void AnimMovingWaterBubble_Step2(struct Sprite *sprite)
 {
     sprite->animPaused = FALSE;
     sprite->callback = RunStoredCallbackWhenAnimEnds;
-    StoreSpriteCallbackInData6(sprite, sub_8107430);
+    StoreSpriteCallbackInData6(sprite, AnimMovingWaterBubble_Step3);
 }
 
-void sub_8107430(struct Sprite *sprite)
+static void AnimMovingWaterBubble_Step3(struct Sprite *sprite)
 {
     sprite->data[0] = 10;
     sprite->callback = WaitAnimForDuration;
@@ -605,12 +605,12 @@ static void AnimAuroraBeamRings(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_81074E4;
+    sprite->callback = AnimAuroraBeamRings_Step;
     sprite->affineAnimPaused = TRUE;
     sprite->callback(sprite);
 }
 
-void sub_81074E4(struct Sprite *sprite)
+static void AnimAuroraBeamRings_Step(struct Sprite *sprite)
 {
     if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
     {
@@ -630,7 +630,7 @@ void AnimTask_RotateAuroraRingColors(u8 taskId)
 }
 
 #ifdef NONMATCHING
-void sub_810756C(u8 taskId)
+static void sub_810756C(u8 taskId)
 {
     int i;
     u16 palIndex;
@@ -654,7 +654,7 @@ void sub_810756C(u8 taskId)
 }
 #else
 NAKED
-void sub_810756C(u8 taskId)
+static void sub_810756C(u8 taskId)
 {
     asm_unified("push {r4-r7,lr}\n\
 	lsls r0, 24\n\
@@ -746,11 +746,11 @@ static void AnimToTargetInSinWave(struct Sprite *sprite)
     {
         sprite->data[6] = retArg * 256;
     }
-    sprite->callback = sub_8107674;
+    sprite->callback = AnimToTargetInSinWave_Step;
     sprite->callback(sprite);
 }
 
-void sub_8107674(struct Sprite *sprite)
+static void AnimToTargetInSinWave_Step(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         DestroyAnimSprite(sprite);
@@ -807,10 +807,10 @@ static void AnimHydroCannonCharge(struct Sprite *sprite)
         sprite->pos2.x = -10;
         sprite->subpriority = priority + 2;
     }
-    sprite->callback = AnimWaitForHydroCannonChargeEnd;
+    sprite->callback = AnimHydroCannonCharge_Step;
 }
 
-static void AnimWaitForHydroCannonChargeEnd(struct Sprite *sprite)
+static void AnimHydroCannonCharge_Step(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
         DestroyAnimSprite(sprite);
@@ -863,10 +863,10 @@ static void AnimSmallBubblePair(struct Sprite *sprite)
     else
         InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[7] = gBattleAnimArgs[2];
-    sprite->callback = sub_810790C;
+    sprite->callback = AnimSmallBubblePair_Step;
 }
 
-void sub_810790C(struct Sprite *sprite)
+static void AnimSmallBubblePair_Step(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 11) & 0xFF;
     sprite->pos2.x = Sin(sprite->data[0], 4);
@@ -1177,7 +1177,7 @@ _08107B58:\n\
 #endif
 
 #ifdef NONMATCHING
-void sub_8107B84(u8 taskId)
+static void sub_8107B84(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 i;
@@ -1227,7 +1227,7 @@ void sub_8107B84(u8 taskId)
 }
 #else
 NAKED
-void sub_8107B84(u8 taskId)
+static void sub_8107B84(u8 taskId)
 {
     asm_unified("push {r4-r7,lr}\n\
 	sub sp, 0x10\n\
@@ -1387,7 +1387,7 @@ _08107CA8:\n\
 }
 #endif
 
-void sub_8107CC4(u8 taskId)
+static void sub_8107CC4(u8 taskId)
 {
     u16 *BGptrX = &gBattle_BG1_X;
     u16 *BGptrY = &gBattle_BG1_Y;
@@ -1410,7 +1410,7 @@ void sub_8107CC4(u8 taskId)
     }
 }
 
-void sub_8107D58(u8 taskId)
+static void sub_8107D58(u8 taskId)
 {
     s16 i;
     struct ScanlineEffectParams params;
@@ -1476,7 +1476,7 @@ void sub_8107D58(u8 taskId)
     }
 }
 
-void sub_8108034(struct Sprite *sprite)
+static void AnimSmallDriftingBubbles(struct Sprite *sprite)
 {
     s16 randData;
     s16 randData2;
@@ -1489,10 +1489,10 @@ void sub_8108034(struct Sprite *sprite)
         randData2 = 256 - randData2;
     sprite->data[1] = randData;
     sprite->data[2] = randData2;
-    sprite->callback = sub_8108098;
+    sprite->callback = AnimSmallDriftingBubbles_Step;
 }
 
-void sub_8108098(struct Sprite *sprite)
+static void AnimSmallDriftingBubbles_Step(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
@@ -1513,10 +1513,10 @@ void AnimTask_WaterSpoutLaunch(u8 taskId)
     task->data[5] = gSprites[task->data[15]].pos1.y;
     task->data[1] = sub_8108384();
     PrepareBattlerSpriteForRotScale(task->data[15], ST_OAM_OBJ_NORMAL);
-    task->func = sub_8108140;
+    task->func = AnimTask_WaterSpoutLaunch_Step;
 }
 
-void sub_8108140(u8 taskId)
+static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1601,7 +1601,7 @@ void sub_8108140(u8 taskId)
     }
 }
 
-u8 sub_8108384(void)
+static u8 sub_8108384(void)
 {
     u8 i;
     u16 hp;
@@ -1633,7 +1633,7 @@ u8 sub_8108384(void)
     return 3;
 }
 
-void sub_8108408(struct Task *task, u8 taskId)
+static void sub_8108408(struct Task *task, u8 taskId)
 {
     s16 i;
     s16 attackerCoordX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
@@ -1666,7 +1666,7 @@ void sub_8108408(struct Task *task, u8 taskId)
     }
 }
 
-void sub_810851C(struct Sprite *sprite)
+static void sub_810851C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -1706,10 +1706,10 @@ void AnimTask_WaterSpoutRain(u8 taskId)
     task->data[5] = 98;
     task->data[7] = task->data[4] + 49;
     task->data[12] = task->data[1] * 5 + 5;
-    task->func = sub_810862C;
+    task->func = AnimTask_WaterSpoutRain_Step;
 }
 
-void sub_810862C(u8 taskId)
+static void AnimTask_WaterSpoutRain_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 taskId2;
@@ -1752,7 +1752,7 @@ void sub_810862C(u8 taskId)
     }
 }
 
-void sub_810871C(struct Task *task, u8 taskId)
+static void sub_810871C(struct Task *task, u8 taskId)
 {
     u16 yPosArg = ((gSineTable[task->data[8]] + 3) >> 4) + task->data[6];
     u8 spriteId = CreateSprite(&gUnknown_08595268, task->data[7], 0, 0);
@@ -1770,7 +1770,7 @@ void sub_810871C(struct Task *task, u8 taskId)
     task->data[7] = (ISO_RANDOMIZE2(task->data[7]) % task->data[5]) + task->data[4];
 }
 
-void sub_81087C0(struct Sprite *sprite)
+static void sub_81087C0(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -1791,7 +1791,7 @@ void sub_81087C0(struct Sprite *sprite)
     }
 }
 
-void sub_810886C(struct Sprite *sprite)
+static void sub_810886C(struct Sprite *sprite)
 {
     if (++sprite->data[1] > 1)
     {
@@ -1823,7 +1823,7 @@ void AnimTask_WaterSport(u8 taskId)
     task->func = sub_8108978;
 }
 
-void sub_8108978(u8 taskId)
+static void sub_8108978(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1892,7 +1892,7 @@ void sub_8108978(u8 taskId)
     }
 }
 
-void sub_8108AC0(struct Task *task)
+static void sub_8108AC0(struct Task *task)
 {
     u8 spriteId;
 
@@ -1913,7 +1913,7 @@ void sub_8108AC0(struct Task *task)
     }
 }
 
-void sub_8108B2C(struct Sprite *sprite)
+static void sub_8108B2C(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
@@ -1928,7 +1928,7 @@ void sub_8108B2C(struct Sprite *sprite)
     }
 }
 
-void sub_8108B94(struct Sprite *sprite)
+static void sub_8108B94(struct Sprite *sprite)
 {
     u16 i;
 
@@ -1954,10 +1954,10 @@ static void AnimWaterPulseBubble(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[4];
     sprite->data[3] = gBattleAnimArgs[5];
-    sprite->callback = sub_8108C08;
+    sprite->callback = AnimWaterPulseBubble_Step;
 }
 
-void sub_8108C08(struct Sprite *sprite)
+static void AnimWaterPulseBubble_Step(struct Sprite *sprite)
 {
     sprite->data[4] -= sprite->data[0];
     sprite->pos2.y = sprite->data[4] / 10;
@@ -1967,7 +1967,7 @@ void sub_8108C08(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8108C54(struct Sprite *sprite)
+static void sub_8108C54(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
@@ -1990,7 +1990,7 @@ void AnimWaterPulseRing(struct Sprite *sprite)
     sprite->callback = AnimWaterPulseRing_Step;
 }
 
-void AnimWaterPulseRing_Step(struct Sprite *sprite)
+static void AnimWaterPulseRing_Step(struct Sprite *sprite)
 {
     int xDiff = sprite->data[1] - sprite->pos1.x;
     int yDiff = sprite->data[2] - sprite->pos1.y;
@@ -2008,7 +2008,7 @@ void AnimWaterPulseRing_Step(struct Sprite *sprite)
 }
 
 #ifdef NONMATCHING
-void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
+static void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
 {
     s16 something = sprite->data[0] / 2;
     s16 combinedX = sprite->pos1.x + sprite->pos2.x;
@@ -2043,7 +2043,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
 }
 #else
 NAKED
-void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
+static void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r10\n\

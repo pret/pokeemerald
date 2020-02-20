@@ -4,14 +4,14 @@
 #include "constants/rgb.h"
 
 static void AnimSludgeProjectile(struct Sprite *);
+static void AnimSludgeProjectile_Step(struct Sprite *);
 static void AnimAcidPoisonBubble(struct Sprite *);
+static void AnimAcidPoisonBubble_Step(struct Sprite *);
 static void AnimSludgeBombHitParticle(struct Sprite *);
+static void AnimSludgeBombHitParticle_Step(struct Sprite *);
 static void AnimAcidPoisonDroplet(struct Sprite *);
 static void AnimBubbleEffect(struct Sprite *);
-static void sub_810DC10(struct Sprite *);
-static void sub_810DCB4(struct Sprite *);
-static void sub_810DD24(struct Sprite *);
-static void AnimBubbleEffectStep(struct Sprite *);
+static void AnimBubbleEffect_Step(struct Sprite *);
 
 extern const union AnimCmd *const gUnknown_08595200[];
 
@@ -201,10 +201,10 @@ static void AnimSludgeProjectile(struct Sprite *sprite)
 
     InitAnimArcTranslation(sprite);
 
-    sprite->callback = sub_810DC10;
+    sprite->callback = AnimSludgeProjectile_Step;
 }
 
-static void sub_810DC10(struct Sprite *sprite)
+static void AnimSludgeProjectile_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
@@ -229,10 +229,10 @@ static void AnimAcidPoisonBubble(struct Sprite *sprite)
 
     InitAnimArcTranslation(sprite);
 
-    sprite->callback = sub_810DCB4;
+    sprite->callback = AnimAcidPoisonBubble_Step;
 }
 
-static void sub_810DCB4(struct Sprite *sprite)
+static void AnimAcidPoisonBubble_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
@@ -251,10 +251,10 @@ static void AnimSludgeBombHitParticle(struct Sprite *sprite)
     sprite->data[5] = sprite->data[1] / gBattleAnimArgs[2];
     sprite->data[6] = sprite->data[2] / gBattleAnimArgs[2];
 
-    sprite->callback = sub_810DD24;
+    sprite->callback = AnimSludgeBombHitParticle_Step;
 }
 
-static void sub_810DD24(struct Sprite *sprite)
+static void AnimSludgeBombHitParticle_Step(struct Sprite *sprite)
 {
     TranslateSpriteLinearFixedPoint(sprite);
 
@@ -306,10 +306,10 @@ static void AnimBubbleEffect(struct Sprite *sprite)
         sprite->pos1.y += gBattleAnimArgs[1];
     }
 
-    sprite->callback = AnimBubbleEffectStep;
+    sprite->callback = AnimBubbleEffect_Step;
 }
 
-static void AnimBubbleEffectStep(struct Sprite *sprite)
+static void AnimBubbleEffect_Step(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 0xB) & 0xFF;
     sprite->pos2.x = Sin(sprite->data[0], 4);

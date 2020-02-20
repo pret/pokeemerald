@@ -222,6 +222,7 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 // battle_anim_effects_1.c
 void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
+void AnimParticleBurst(struct Sprite *);
 
 // water.c
 void AnimWaterPulseRing(struct Sprite *sprite);
