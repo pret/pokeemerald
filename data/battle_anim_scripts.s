@@ -395,9 +395,9 @@ gBattleAnims_General::
 	.4byte General_PokeblockThrow
 	.4byte General_ItemKnockoff
 	.4byte General_TurnTrap
-	.4byte General_ItemEffect
+	.4byte General_HeldItemEffect
 	.4byte General_SmokeballEscape
-	.4byte General_HangedOn
+	.4byte General_FocusBand
 	.4byte General_Rain
 	.4byte General_Sun
 	.4byte General_Sandstorm
@@ -414,13 +414,13 @@ gBattleAnims_General::
 
 	.align 2
 gBattleAnims_Special::
-	.4byte Special_LevelUp
-	.4byte Special_SwitchOutPlayerMon
-	.4byte Special_SwitchOutOpponentMon
-	.4byte Special_BallThrow
-	.4byte Special_SafariBallThrow
-	.4byte Special_SubstituteToMon
-	.4byte Special_MonToSubstitute
+	.4byte Special_LevelUp                  @ B_ANIM_LVL_UP
+	.4byte Special_SwitchOutPlayerMon       @ B_ANIM_SWITCH_OUT_PLAYER_MON
+	.4byte Special_SwitchOutOpponentMon     @ B_ANIM_SWITCH_OUT_OPPONENT_MON
+	.4byte Special_BallThrow                @ B_ANIM_BALL_THROW
+	.4byte Special_SafariBallThrow          @ B_ANIM_SAFARI_BALL_THROW
+	.4byte Special_SubstituteToMon          @ B_ANIM_SUBSTITUTE_TO_MON
+	.4byte Special_MonToSubstitute          @ B_ANIM_MON_TO_SUBSTITUTE
 
 Move_NONE:
 Move_MIRROR_MOVE:
@@ -3481,12 +3481,13 @@ Move_HEAT_WAVE:
 	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 60, 2560, 96, 1
 	end
 
+@ Also used by Hail weather
 Move_HAIL:
 	loadspritegfx ANIM_TAG_HAIL
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, 1, 3, 0, 6, RGB_BLACK
 	waitforvisualfinish
-	createvisualtask AnimTask_HailStart, 5
+	createvisualtask AnimTask_Hail, 5
 	loopsewithpan SE_W258, 0, 8, 10
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, 1, 3, 6, 0, RGB_BLACK
@@ -6188,7 +6189,7 @@ Move_WING_ATTACK:
 Move_PECK:
 	loadspritegfx ANIM_TAG_IMPACT
 	playsewithpan SE_W030, SOUND_PAN_TARGET
-	createvisualtask sub_80D622C, 2, 3, -768, 1, 2
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 3, -768, ANIM_TARGET, 2
 	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, -12, 0, ANIM_TARGET, 3
 	waitforvisualfinish
 	end
@@ -6335,6 +6336,7 @@ FlamethrowerCreateFlames:
 	delay 2
 	return
 
+@ Also used by Sandstorm weather
 Move_SANDSTORM:
 	loadspritegfx ANIM_TAG_FLYING_DIRT
 	playsewithpan SE_W201, 0
@@ -6715,6 +6717,7 @@ SubmissionHit:
 	delay 8
 	return
 
+@ Also used by Sunny weather
 Move_SUNNY_DAY:
 	loadspritegfx ANIM_TAG_SUNLIGHT
 	monbg ANIM_ATK_PARTNER
@@ -6734,7 +6737,7 @@ Move_SUNNY_DAY:
 	end
 
 SunnyDayLightRay:
-	createsprite gSunnyDayLightRaySpriteTemplate, ANIM_ATTACKER, 40
+	createsprite gSunlightRaySpriteTemplate, ANIM_ATTACKER, 40
 	delay 6
 	return
 
@@ -10226,13 +10229,13 @@ Status_Confusion:
 Status_Burn:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_W172, SOUND_PAN_TARGET
-	call Burn1
-	call Burn1
-	call Burn1
+	call BurnFlame
+	call BurnFlame
+	call BurnFlame
 	waitforvisualfinish
 	end
-Burn1:
-	createsprite gUnknown_08595504, ANIM_TARGET, 2, -24, 24, 24, 24, 20, 1, 1
+BurnFlame:
+	createsprite gBurnFlameSpriteTemplate, ANIM_TARGET, 2, -24, 24, 24, 24, 20, 1, 1
 	delay 4
 	return
 
@@ -10295,9 +10298,9 @@ Status_Nightmare:
 
 General_CastformChange:
 	createvisualtask AnimTask_IsMonInvisible, 2
-	jumpreteq 1, AnimScript_82D7ECA
-	goto AnimScript_82D7EB2
-AnimScript_82D7EB2:
+	jumpreteq 1, CastformChangeSkipAnim
+	goto CastformChangeContinue
+CastformChangeContinue:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W107, SOUND_PAN_ATTACKER, 48
@@ -10305,8 +10308,8 @@ AnimScript_82D7EB2:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-AnimScript_82D7ECA:
-	createvisualtask AnimTask_CastformGfxChange, 2, 1
+CastformChangeSkipAnim:
+	createvisualtask AnimTask_CastformGfxDataChange, 2, 1
 	end
 
 General_StatsChange:
@@ -10316,7 +10319,7 @@ General_StatsChange:
 
 General_SubstituteFade:
 	monbg ANIM_ATTACKER
-	createvisualtask sub_8172D98, 5
+	createvisualtask AnimTask_SubstituteFadeToInvisible, 5
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, 2, 0, 0, 16, RGB_WHITE
 	waitforvisualfinish
 	delay 1
@@ -10324,7 +10327,7 @@ General_SubstituteFade:
 	delay 2
 	blendoff
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, 2, 0, 0, 0, RGB_WHITE
-	createvisualtask sub_8172BF0, 2, 1
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
 	end
 
 General_SubstituteAppear:
@@ -10332,7 +10335,7 @@ General_SubstituteAppear:
 	end
 
 General_PokeblockThrow:
-	createvisualtask sub_817345C, 2, 0
+	createvisualtask AnimTask_SetAttackerTargetLeftPos, 2, 0
 	createvisualtask AnimTask_LoadPokeblockGfx, 2
 	delay 0
 	waitplaysewithpan SE_W026, SOUND_PAN_ATTACKER, 22
@@ -10352,8 +10355,8 @@ General_ItemKnockoff:
 General_TurnTrap:
 	createvisualtask AnimTask_GetTrappedMoveAnimId, 5
 	jumpargeq 0, TRAP_ANIM_FIRE_SPIN, Status_FireSpin
-	jumpargeq 0, TRAP_ANIM_WHIRLPOOL, Status_Whrilpool
-	jumpargeq 0, TRAP_ANIM_CLAMP, Status_Clamp
+	jumpargeq 0, TRAP_ANIM_WHIRLPOOL, Status_Whirlpool
+	jumpargeq 0, TRAP_ANIM_CLAMP,     Status_Clamp
 	jumpargeq 0, TRAP_ANIM_SAND_TOMB, Status_SandTomb
 	goto Status_BindWrap
 Status_BindWrap:
@@ -10380,7 +10383,7 @@ Status_FireSpin:
 	stopsound
 	end
 
-Status_Whrilpool:
+Status_Whirlpool:
 	loadspritegfx ANIM_TAG_WATER_ORB
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
@@ -10428,18 +10431,18 @@ Status_SandTomb:
 	stopsound
 	end
 
-General_ItemEffect:
+General_HeldItemEffect:
 	loadspritegfx ANIM_TAG_THIN_RING
 	loadspritegfx ANIM_TAG_SPARKLE_2
 	delay 0
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
-	createvisualtask sub_80D622C, 2, 16, 128, 0, 2
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 128, ANIM_ATTACKER, 2
 	waitforvisualfinish
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
-	createvisualtask sub_80D622C, 2, 16, 128, 0, 2
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 128, ANIM_ATTACKER, 2
 	waitforvisualfinish
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
-	createvisualtask sub_80D622C, 2, 16, 128, 0, 2
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 128, ANIM_ATTACKER, 2
 	waitforvisualfinish
 	playsewithpan SE_W234, SOUND_PAN_ATTACKER
 	call GrantingStarsEffect
@@ -10488,10 +10491,10 @@ General_SmokeballEscape:
 	blendoff
 	end
 
-General_HangedOn:
+General_FocusBand:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 2, 7, 0, 9, RGB_RED
 	playsewithpan SE_W082, SOUND_PAN_ATTACKER
-	createvisualtask sub_815DB90, 5, 30, 128, 0, 1, 2, 0, 1
+	createvisualtask AnimTask_SlideMonForFocusBand, 5, 30, 128, 0, 1, 2, 0, 1
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 2, 4, 9, 0, RGB_RED
 	waitforvisualfinish
@@ -10549,7 +10552,7 @@ General_ItemSteal:
 General_SnatchMove:
 	loadspritegfx ANIM_TAG_ITEM_BAG
 	createvisualtask sub_8117E94, 2
-	call AnimScript_82D85A3
+	call SnatchMoveTrySwapFromSubstitute
 	delay 1
 	createvisualtask AnimTask_SwayMon, 2, 0, 5, 5120, 4, ANIM_TARGET
 	waitforvisualfinish
@@ -10558,7 +10561,7 @@ General_SnatchMove:
 	goto SnatchPartnerMonMove
 SnatchMoveContinue:
 	waitforvisualfinish
-	call AnimScript_82D85C3
+	call SnatchMoveTrySwapToSubstitute
 	end
 SnatchOpposingMonMove:
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
@@ -10669,59 +10672,60 @@ General_WishHeal:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 10, 0, RGB_BLACK
 	end
 
-AnimScript_82D85A3:
+SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
-	jumprettrue AnimScript_82D85B4
-AnimScript_82D85B2:
+	jumprettrue SnatchMoveSwapSubstituteForMon
+SnatchMoveTrySwapFromSubstituteEnd:
 	waitforvisualfinish
 	return
-AnimScript_82D85B4:
-	createvisualtask sub_8172BF0, 2, 1
+SnatchMoveSwapSubstituteForMon:
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
 	waitforvisualfinish
-	goto AnimScript_82D85B2
+	goto SnatchMoveTrySwapFromSubstituteEnd
 
-AnimScript_82D85C3:
+SnatchMoveTrySwapToSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
-	jumprettrue AnimScript_82D85D4
-AnimScript_82D85D2:
+	jumprettrue SnatchMoveSwapMonForSubstitute
+SnatchMoveTrySwapToSubstituteEnd:
 	waitforvisualfinish
 	return
-AnimScript_82D85D4:
-	createvisualtask sub_8172BF0, 2, 0
+SnatchMoveSwapMonForSubstitute:
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	waitforvisualfinish
-	goto AnimScript_82D85D2
+	goto SnatchMoveTrySwapToSubstituteEnd
 
+@ Healthbox blue flash effect on level up
 Special_LevelUp:
 	playsewithpan SE_EXPMAX, 0
-	createvisualtask sub_8170920, 2
+	createvisualtask AnimTask_LoadHealthboxPalsForLevelUp, 2
 	delay 0
-	createvisualtask sub_8170A0C, 5, 0, 0
+	createvisualtask AnimTask_FlashHealthboxOnLevelUp, 5, 0, 0
 	waitforvisualfinish
-	createvisualtask sub_81709EC, 2
+	createvisualtask AnimTask_FreeHealthboxPalsForLevelUp, 2
 	end
 
 Special_SwitchOutPlayerMon:
-	createvisualtask sub_8170BB0, 2
+	createvisualtask AnimTask_SwitchOutBallEffect, 2
 	delay 10
-	createvisualtask sub_8170B04, 2
+	createvisualtask AnimTask_SwitchOutShrinkMon, 2
 	end
 
 Special_SwitchOutOpponentMon:
-	createvisualtask sub_8170BB0, 2
+	createvisualtask AnimTask_SwitchOutBallEffect, 2
 	delay 10
-	createvisualtask sub_8170B04, 2
+	createvisualtask AnimTask_SwitchOutShrinkMon, 2
 	end
 
 Special_BallThrow:
-	createvisualtask sub_8170CFC, 2
+	createvisualtask AnimTask_LoadBallGfx, 2
 	delay 0
 	playsewithpan SE_NAGERU, 0
-	createvisualtask sub_8170E04, 2
+	createvisualtask AnimTask_ThrowBall, 2
 	createvisualtask AnimTask_IsBallBlockedByTrainer, 2
 	jumpreteq -1, BallThrowTrainerBlock
 BallThrowEnd:
 	waitforvisualfinish
-	createvisualtask sub_8170D24, 2
+	createvisualtask AnimTask_FreeBallGfx, 2
 	end
 BallThrowTrainerBlock:
 	loadspritegfx ANIM_TAG_IMPACT
@@ -10737,17 +10741,17 @@ BallThrowTrainerBlock:
 	goto BallThrowEnd
 
 Special_SafariBallThrow:
-	createvisualtask sub_8170CFC, 2
+	createvisualtask AnimTask_LoadBallGfx, 2
 	delay 0
-	createvisualtask sub_8170F2C, 2
+	createvisualtask AnimTask_ThrowBallSpecial, 2
 	waitforvisualfinish
-	createvisualtask sub_8170D24, 2
+	createvisualtask AnimTask_FreeBallGfx, 2
 	end
 
 Special_SubstituteToMon:
-	createvisualtask sub_8172BF0, 2, 1
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
 	end
 
 Special_MonToSubstitute:
-	createvisualtask sub_8172BF0, 2, 0
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	end

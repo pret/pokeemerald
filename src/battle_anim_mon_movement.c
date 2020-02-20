@@ -915,14 +915,15 @@ void AminTask_DipMonSpriteToSide(u8 taskId)
     gTasks[taskId].func = sub_80D6308;
 }
 
-void sub_80D622C(u8 taskId)
+// Rotates mon to side and back to original position. For Peck and when a held item activates
+void AnimTask_RotateMonToSideAndRestore(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = gBattleAnimArgs[0];
-    if (gBattleAnimArgs[2] == 0)
+    if (gBattleAnimArgs[2] == ANIM_ATTACKER)
     {
         if (GetBattlerSide(gBattleAnimAttacker))
         {

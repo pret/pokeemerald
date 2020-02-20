@@ -2367,7 +2367,7 @@ void AnimTask_IsMonInvisible(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_CastformGfxChange(u8 taskId)
+void AnimTask_CastformGfxDataChange(u8 taskId)
 {
     HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, TRUE);
     DestroyAnimVisualTask(taskId);
@@ -3683,7 +3683,7 @@ static void sub_815DA20(u8 taskId)
     }
 }
 
-void sub_815DB90(u8 taskId)
+void AnimTask_SlideMonForFocusBand(u8 taskId)
 {
     gTasks[taskId].data[15] = gBattlerSpriteIds[gBattleAnimAttacker];
     gTasks[taskId].data[14] = gBattleAnimArgs[0];
