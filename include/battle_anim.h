@@ -228,7 +228,7 @@ void AnimParticleBurst(struct Sprite *);
 void AnimWaterPulseRing(struct Sprite *sprite);
 
 // flying.c
-void sub_810E2C8(struct Sprite *sprite);
+void DestroyAnimSpriteAfterTimer(struct Sprite *sprite);
 
 // smokescreen.c
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3);

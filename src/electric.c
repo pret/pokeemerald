@@ -566,7 +566,7 @@ static void AnimSparkElectricity(struct Sprite *sprite)
     gOamMatrices[matrixNum].c = -sineVal;
 
     sprite->data[0] = gBattleAnimArgs[3];
-    sprite->callback = sub_810E2C8;
+    sprite->callback = DestroyAnimSpriteAfterTimer;
 }
 
 static void AnimZapCannonSpark(struct Sprite *sprite)

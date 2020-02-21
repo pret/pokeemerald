@@ -25,18 +25,18 @@ static EWRAM_DATA struct AnimStatsChangeData *sAnimStatsChangeData = {0};
 
 static void StartBlendAnimSpriteColor(u8, u32);
 static void AnimTask_BlendSpriteColor_Step2(u8);
-static void sub_81169A0(u8);
-static void sub_81169F8(u8);
-static void sub_8116AD0(struct Sprite*);
-static void sub_8116D64(u8);
+static void AnimTask_HardwarePaletteFade_Step(u8);
+static void AnimTask_TraceMonBlended_Step(u8);
+static void AnimMonTrace(struct Sprite*);
+static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8);
 static void sub_8116F04(u8);
 static void sub_81170EC(u8);
 static void sub_81172EC(u8);
-static void sub_8117500(u8);
+static void AnimTask_Flash_Step(u8);
 static void sub_81175C4(u32, u16);
-static void sub_81176D8(u8);
+static void AnimTask_UpdateSlidingBg(u8);
 static void sub_8117A60(u8);
-static void ExtremSpeedMoveTarget_Step(u8);
+static void AnimTask_WaitAndRestoreVisibility(u8);
 
 const u16 gUnknown_08597418 = RGB(31, 31, 31);
 
@@ -202,10 +202,10 @@ void AnimTask_HardwarePaletteFade(u8 taskId)
         gBattleAnimArgs[3],
         gBattleAnimArgs[4]);
 
-    gTasks[taskId].func = sub_81169A0;
+    gTasks[taskId].func = AnimTask_HardwarePaletteFade_Step;
 }
 
-static void sub_81169A0(u8 taskId)
+static void AnimTask_HardwarePaletteFade_Step(u8 taskId)
 {
     if (!gPaletteFade.active)
         DestroyAnimVisualTask(taskId);
@@ -222,10 +222,10 @@ void AnimTask_TraceMonBlended(u8 taskId)
     task->data[3] = gBattleAnimArgs[2];
     task->data[4] = gBattleAnimArgs[3];
     task->data[5] = 0;
-    task->func = sub_81169F8;
+    task->func = AnimTask_TraceMonBlended_Step;
 }
 
-static void sub_81169F8(u8 taskId)
+static void AnimTask_TraceMonBlended_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -244,7 +244,7 @@ static void sub_81169F8(u8 taskId)
                 gSprites[task->data[6]].data[0] = task->data[3];
                 gSprites[task->data[6]].data[1] = taskId;
                 gSprites[task->data[6]].data[2] = 5;
-                gSprites[task->data[6]].callback = sub_8116AD0;
+                gSprites[task->data[6]].callback = AnimMonTrace;
                 task->data[5]++;
             }
 
@@ -258,7 +258,7 @@ static void sub_81169F8(u8 taskId)
     }
 }
 
-static void sub_8116AD0(struct Sprite *sprite)
+static void AnimMonTrace(struct Sprite *sprite)
 {
     if (sprite->data[0])
     {
@@ -339,10 +339,10 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
     gTasks[taskId].data[0] = newSpriteId;
     gTasks[taskId].data[6] = var0;
-    gTasks[taskId].func = sub_8116D64;
+    gTasks[taskId].func = AnimTask_DrawFallingWhiteLinesOnAttacker_Step;
 }
 
-static void sub_8116D64(u8 taskId)
+static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
 {
     struct BattleAnimBgData unknownStruct;
     struct Sprite *sprite;
@@ -613,10 +613,10 @@ void AnimTask_Flash(u8 taskId)
 
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
-    gTasks[taskId].func = sub_8117500;
+    gTasks[taskId].func = AnimTask_Flash_Step;
 }
 
-static void sub_8117500(u8 taskId)
+static void AnimTask_Flash_Step(u8 taskId)
 {
     u16 i;
     struct Task *task = &gTasks[taskId];
@@ -706,7 +706,7 @@ void AnimTask_StartSlidingBg(u8 taskId)
     u8 newTaskId;
 
     sub_80A6DAC(0);
-    newTaskId = CreateTask(sub_81176D8, 5);
+    newTaskId = CreateTask(AnimTask_UpdateSlidingBg, 5);
     if (gBattleAnimArgs[2] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -720,7 +720,7 @@ void AnimTask_StartSlidingBg(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-static void sub_81176D8(u8 taskId)
+static void AnimTask_UpdateSlidingBg(u8 taskId)
 {
     gTasks[taskId].data[10] += gTasks[taskId].data[1];
     gTasks[taskId].data[11] += gTasks[taskId].data[2];
@@ -1041,8 +1041,7 @@ void AnimTask_SetAnimAttackerAndTargetForEffectAtk(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-// TODO: Rename. Also used by Faint Attack
-void AnimTask_ExtremeSpeedMoveTarget(u8 taskId)
+void AnimTask_SetAttackerInvisibleWaitForSignal(u8 taskId)
 {
     if (IsContest())
     {
@@ -1052,12 +1051,12 @@ void AnimTask_ExtremeSpeedMoveTarget(u8 taskId)
     {
         gTasks[taskId].data[0] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible;
         gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = TRUE;
-        gTasks[taskId].func = ExtremSpeedMoveTarget_Step;
+        gTasks[taskId].func = AnimTask_WaitAndRestoreVisibility;
         gAnimVisualTaskCount--;
     }
 }
 
-static void ExtremSpeedMoveTarget_Step(u8 taskId)
+static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
 {
     if (gBattleAnimArgs[ARG_RET_ID] == 0x1000)
     {

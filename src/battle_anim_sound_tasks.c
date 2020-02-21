@@ -10,10 +10,10 @@
 // this file's functions
 static void sub_8158B98(u8 taskId);
 static void sub_8158C04(u8 taskId);
-static void sub_8158D08(u8 taskId);
-static void sub_8158FF4(u8 taskId);
-static void sub_815913C(u8 taskId);
-static void sub_8159308(u8 taskId);
+static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId);
+static void SoundTask_PlayDoubleCry_Step(u8 taskId);
+static void SoundTask_PlayCryWithEcho_Step(u8 taskId);
+static void SoundTask_AdjustPanningVar_Step(u8 taskId);
 
 // task start
 void sub_8158B30(u8 taskId)
@@ -97,11 +97,11 @@ void SoundTask_LoopSEAdjustPanning(u8 taskId)
     gTasks[taskId].data[11] = sourcePan;
     gTasks[taskId].data[12] = r9;
 
-    gTasks[taskId].func = sub_8158D08;
-    sub_8158D08(taskId);
+    gTasks[taskId].func = SoundTask_LoopSEAdjustPanning_Step;
+    SoundTask_LoopSEAdjustPanning_Step(taskId);
 }
 
-static void sub_8158D08(u8 taskId)
+static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId)
 {
     if (gTasks[taskId].data[12]++ == gTasks[taskId].data[6])
     {
@@ -222,7 +222,7 @@ void SoundTask_PlayDoubleCry(u8 taskId)
         else
             PlayCry3(species, pan, 7);
 
-        gTasks[taskId].func = sub_8158FF4;
+        gTasks[taskId].func = SoundTask_PlayDoubleCry_Step;
     }
     else
     {
@@ -230,7 +230,7 @@ void SoundTask_PlayDoubleCry(u8 taskId)
     }
 }
 
-static void sub_8158FF4(u8 taskId)
+static void SoundTask_PlayDoubleCry_Step(u8 taskId)
 {
     u16 species = gTasks[taskId].data[1];
     s8 pan = gTasks[taskId].data[2];
@@ -292,12 +292,12 @@ void SoundTask_PlayCryWithEcho(u8 taskId)
     gTasks[taskId].data[2] = pan;
 
     if (species != SPECIES_NONE)
-        gTasks[taskId].func = sub_815913C;
+        gTasks[taskId].func = SoundTask_PlayCryWithEcho_Step;
     else
         DestroyAnimVisualTask(taskId);
 }
 
-static void sub_815913C(u8 taskId)
+static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 {
     u16 species = gTasks[taskId].data[1];
     s8 pan = gTasks[taskId].data[2];
@@ -369,11 +369,11 @@ void SoundTask_AdjustPanningVar(u8 taskId)
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].data[11] = sourcePan;
 
-    gTasks[taskId].func = sub_8159308;
-    sub_8159308(taskId);
+    gTasks[taskId].func = SoundTask_AdjustPanningVar_Step;
+    SoundTask_AdjustPanningVar_Step(taskId);
 }
 
-void sub_8159308(u8 taskId)
+static void SoundTask_AdjustPanningVar_Step(u8 taskId)
 {
     u16 panIncrement = gTasks[taskId].data[3];
 
