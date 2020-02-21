@@ -16,10 +16,11 @@ static void sub_81159B4(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain_Step(struct Sprite *);
 static void AnimShakeMonOrBattleTerrain_UpdateCoordOffsetEnabled(void);
-static void AnimBasicHitSplat(struct Sprite *);
-static void sub_8116420(struct Sprite *);
+static void AnimHitSplatBasic(struct Sprite *);
+static void AnimHitSplatPersistent(struct Sprite *);
+static void AnimHitSplatHandleInvert(struct Sprite *);
 static void AnimHitSplatRandom(struct Sprite *);
-static void AnimExtremeSpeedHitSplat(struct Sprite *);
+static void AnimHitSplatOnMonEdge(struct Sprite *);
 static void AnimCrossImpact(struct Sprite *);
 static void AnimFlashingHitSplat(struct Sprite *);
 static void AnimFlashingHitSplat_Step(struct Sprite *);
@@ -33,7 +34,6 @@ static void AnimTask_BlendColorCycleByTagLoop(u8);
 static void AnimTask_FlashAnimTagWithColor_Step1(u8);
 static void AnimTask_FlashAnimTagWithColor_Step2(u8);
 static void AnimTask_ShakeBattleTerrain_Step(u8);
-static void sub_81163D0(struct Sprite *);
 
 static const union AnimCmd sAnim_ConfusionDuck_0[] =
 {
@@ -173,11 +173,10 @@ const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = sAffineAnims_HitSplat,
-    .callback = AnimBasicHitSplat,
+    .callback = AnimHitSplatBasic,
 };
 
-// TODO: Needs generic descriptive name, what distinguishes this hit splat
-const struct SpriteTemplate gSpikeHitSplatSpriteTemplate =
+const struct SpriteTemplate gHandleInvertHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -185,7 +184,7 @@ const struct SpriteTemplate gSpikeHitSplatSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = sAffineAnims_HitSplat,
-    .callback = sub_8116420,
+    .callback = AnimHitSplatHandleInvert,
 };
 
 const struct SpriteTemplate gWaterHitSplatSpriteTemplate =
@@ -196,7 +195,7 @@ const struct SpriteTemplate gWaterHitSplatSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = sAffineAnims_HitSplat,
-    .callback = AnimBasicHitSplat,
+    .callback = AnimHitSplatBasic,
 };
 
 const struct SpriteTemplate gRandomPosHitSplatSpriteTemplate =
@@ -210,8 +209,7 @@ const struct SpriteTemplate gRandomPosHitSplatSpriteTemplate =
     .callback = AnimHitSplatRandom,
 };
 
-// TODO: Needs generic descriptive name, what distinguishes this hit splat
-const struct SpriteTemplate gExtremeSpeedHitSplatSpriteTemplate =
+const struct SpriteTemplate gMonEdgeHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -219,7 +217,7 @@ const struct SpriteTemplate gExtremeSpeedHitSplatSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = sAffineAnims_HitSplat,
-    .callback = AnimExtremeSpeedHitSplat,
+    .callback = AnimHitSplatOnMonEdge,
 };
 
 const struct SpriteTemplate gCrossImpactSpriteTemplate =
@@ -244,8 +242,7 @@ const struct SpriteTemplate gFlashingHitSplatSpriteTemplate =
     .callback = AnimFlashingHitSplat,
 };
 
-// TODO: Needs generic descriptive name, what distinguishes this hit splat
-const struct SpriteTemplate gRevengeHitSplatSpriteTemplate =
+const struct SpriteTemplate gPersistHitSplatSpriteTemplate =
 {
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_IMPACT,
@@ -253,7 +250,7 @@ const struct SpriteTemplate gRevengeHitSplatSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = sAffineAnims_HitSplat,
-    .callback = sub_81163D0,
+    .callback = AnimHitSplatPersistent,
 };
 
 // Moves a spinning duck around the mon's head.
@@ -929,7 +926,7 @@ static void AnimTask_ShakeBattleTerrain_Step(u8 taskId)
 #undef tTimer
 #undef tShakeDelay
 
-static void AnimBasicHitSplat(struct Sprite *sprite)
+static void AnimHitSplatBasic(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
@@ -941,7 +938,8 @@ static void AnimBasicHitSplat(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-static void sub_81163D0(struct Sprite *sprite)
+// Same as basic hit splat but takes a length of time to persist for (arg4)
+static void AnimHitSplatPersistent(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
@@ -951,15 +949,17 @@ static void sub_81163D0(struct Sprite *sprite)
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
-    StoreSpriteCallbackInData6(sprite, sub_810E2C8);
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSpriteAfterTimer);
 }
 
-static void sub_8116420(struct Sprite *sprite)
+// For paired hit splats whose position is inverted when used by the opponent on the player.
+// Used by Twineedle and Spike Cannon
+static void AnimHitSplatHandleInvert(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER && !IsContest())
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     
-    AnimBasicHitSplat(sprite);
+    AnimHitSplatBasic(sprite);
 }
 
 static void AnimHitSplatRandom(struct Sprite *sprite)
@@ -980,7 +980,7 @@ static void AnimHitSplatRandom(struct Sprite *sprite)
     sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
 }
 
-static void AnimExtremeSpeedHitSplat(struct Sprite *sprite)
+static void AnimHitSplatOnMonEdge(struct Sprite *sprite)
 {
     sprite->data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
     sprite->pos1.x = gSprites[sprite->data[0]].pos1.x + gSprites[sprite->data[0]].pos2.x;

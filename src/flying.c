@@ -534,7 +534,7 @@ static void AnimFlyBallAttack_Step(struct Sprite *sprite)
     }
 }
 
-void sub_810E2C8(struct Sprite *sprite)
+void DestroyAnimSpriteAfterTimer(struct Sprite *sprite)
 {
     if (sprite->data[0]-- <= 0)
     {
@@ -899,7 +899,7 @@ static void sub_810E520(struct Sprite *sprite)
         if (sprite->pos1.y + sprite->pos2.y >= data->unkE_1)
         {
             sprite->data[0] = 0;
-            sprite->callback = sub_810E2C8;
+            sprite->callback = DestroyAnimSpriteAfterTimer;
         }
     }
 }

@@ -3568,7 +3568,7 @@ static void AnimYawnCloud_Step(struct Sprite *sprite)
 // arg 0: ?
 // arg 1: initial x pixel offset
 // arg 2: initial y pixel offset
-// arg 3: ?
+// arg 3: time until destroyed
 static void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[3];
@@ -3578,7 +3578,7 @@ static void AnimSmokeBallEscapeCloud(struct Sprite *sprite)
 
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
-    sprite->callback = sub_810E2C8;
+    sprite->callback = DestroyAnimSpriteAfterTimer;
 }
 
 static void sub_815D8D8(u8 taskId)
