@@ -27,11 +27,11 @@ static void AnimFireSpiralOutward(struct Sprite *);
 static void AnimFireSpiralOutward_Step1(struct Sprite *);
 static void AnimFireSpiralOutward_Step2(struct Sprite *);
 static void AnimTask_EruptionLaunchRocks_Step(u8 taskId);
-static void sub_81097B4(u8 spriteId, u8 taskId, u8 a3);
-static void sub_81098EC(struct Sprite *);
-static u16 sub_8109930(u8 spriteId);
-static void sub_8109984(struct Sprite *sprite, s16 x, s16 y);
-static void sub_81099A0(struct Sprite *);
+static void CreateEruptionLaunchRocks(u8 spriteId, u8 taskId, u8 a3);
+static void AnimEruptionLaunchRock(struct Sprite *);
+static u16 GetEruptionLaunchRockInitialYPos(u8 spriteId);
+static void InitEruptionLaunchRockCoordData(struct Sprite *sprite, s16 x, s16 y);
+static void UpdateEruptionLaunchRockPos(struct Sprite *);
 static void AnimEruptionFallingRock(struct Sprite *);
 static void AnimEruptionFallingRock_Step(struct Sprite *);
 static void AnimWillOWispOrb(struct Sprite *);
@@ -39,7 +39,7 @@ static void AnimWillOWispOrb_Step(struct Sprite *);
 static void AnimWillOWispFire(struct Sprite *);
 static void AnimTask_MoveHeatWaveTargets_Step(u8 taskId);
 
-const union AnimCmd gUnknown_08595340[] =
+static const union AnimCmd sAnim_FireSpiralSpread_0[] =
 {
     ANIMCMD_FRAME(16, 4),
     ANIMCMD_FRAME(32, 4),
@@ -47,7 +47,7 @@ const union AnimCmd gUnknown_08595340[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_08595350[] =
+static const union AnimCmd sAnim_FireSpiralSpread_1[] =
 {
     ANIMCMD_FRAME(16, 4, .vFlip = TRUE, .hFlip = TRUE),
     ANIMCMD_FRAME(32, 4, .vFlip = TRUE, .hFlip = TRUE),
@@ -55,10 +55,10 @@ const union AnimCmd gUnknown_08595350[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08595360[] =
+static const union AnimCmd *const sAnims_FireSpiralSpread[] =
 {
-    gUnknown_08595340,
-    gUnknown_08595350,
+    sAnim_FireSpiralSpread_0,
+    sAnim_FireSpiralSpread_1,
 };
 
 const struct SpriteTemplate gFireSpiralInwardSpriteTemplate =
@@ -66,7 +66,7 @@ const struct SpriteTemplate gFireSpiralInwardSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08595360,
+    .anims = sAnims_FireSpiralSpread,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFireSpiralInward,
@@ -77,13 +77,13 @@ const struct SpriteTemplate gFireSpreadSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08595360,
+    .anims = sAnims_FireSpiralSpread,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFireSpread,
 };
 
-const union AnimCmd gUnknown_08595398[] =
+static const union AnimCmd sAnim_LargeFlame[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -96,12 +96,12 @@ const union AnimCmd gUnknown_08595398[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_085953BC[] =
+static const union AnimCmd *const sAnims_LargeFlame[] =
 {
-    gUnknown_08595398,
+    sAnim_LargeFlame,
 };
 
-const union AnimCmd gUnknown_085953C0[] =
+static const union AnimCmd sAnim_FirePlume[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -111,21 +111,21 @@ const union AnimCmd gUnknown_085953C0[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_085953D8[] =
+static const union AnimCmd *const sAnims_FirePlume[] =
 {
-    gUnknown_085953C0,
+    sAnim_FirePlume,
 };
 
-const union AffineAnimCmd gUnknown_085953DC[] =
+static const union AffineAnimCmd sAffineAnim_LargeFlame[] =
 {
     AFFINEANIMCMD_FRAME(0x32, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x20, 0x0, 0, 7),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085953F4[] =
+static const union AffineAnimCmd *const sAffineAnims_LargeFlame[] =
 {
-    gUnknown_085953DC,
+    sAffineAnim_LargeFlame,
 };
 
 const struct SpriteTemplate gLargeFlameSpriteTemplate =
@@ -133,9 +133,9 @@ const struct SpriteTemplate gLargeFlameSpriteTemplate =
     .tileTag = ANIM_TAG_FIRE,
     .paletteTag = ANIM_TAG_FIRE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gUnknown_085953BC,
+    .anims = sAnims_LargeFlame,
     .images = NULL,
-    .affineAnims = gUnknown_085953F4,
+    .affineAnims = sAffineAnims_LargeFlame,
     .callback = AnimLargeFlame,
 };
 
@@ -144,7 +144,7 @@ const struct SpriteTemplate gLargeFlameScatterSpriteTemplate =
     .tileTag = ANIM_TAG_FIRE,
     .paletteTag = ANIM_TAG_FIRE,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085953BC,
+    .anims = sAnims_LargeFlame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimLargeFlame,
@@ -155,24 +155,25 @@ const struct SpriteTemplate gFirePlumeSpriteTemplate =
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085953D8,
+    .anims = sAnims_FirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFirePlume,
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_08595440 =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085953D8,
+    .anims = sAnims_FirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFirePlume,
 };
 
-const union AnimCmd gUnknown_08595458[] =
+static const union AnimCmd gUnknown_08595458[] =
 {
     ANIMCMD_FRAME(16, 6),
     ANIMCMD_FRAME(32, 6),
@@ -180,11 +181,12 @@ const union AnimCmd gUnknown_08595458[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08595468[] =
+static const union AnimCmd *const gUnknown_08595468[] =
 {
     gUnknown_08595458,
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_0859546C =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
@@ -196,16 +198,16 @@ const struct SpriteTemplate gUnknown_0859546C =
     .callback = sub_8109064,
 };
 
-const union AffineAnimCmd gUnknown_08595484[] =
+static const union AffineAnimCmd sAffineAnim_SunlightRay[] =
 {
     AFFINEANIMCMD_FRAME(0x50, 0x50, 0, 0),
     AFFINEANIMCMD_FRAME(0x2, 0x2, 10, 1),
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd *const gUnknown_0859549C[] =
+static const union AffineAnimCmd *const sAffineAnims_SunlightRay[] =
 {
-    gUnknown_08595484,
+    sAffineAnim_SunlightRay,
 };
 
 const struct SpriteTemplate gSunlightRaySpriteTemplate =
@@ -215,11 +217,11 @@ const struct SpriteTemplate gSunlightRaySpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_0859549C,
+    .affineAnims = sAffineAnims_SunlightRay,
     .callback = AnimSunlight,
 };
 
-const union AnimCmd gUnknown_085954B8[] =
+static const union AnimCmd sAnim_BasicFire[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -229,9 +231,9 @@ const union AnimCmd gUnknown_085954B8[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_085954D0[] =
+const union AnimCmd *const gAnims_BasicFire[] =
 {
-    gUnknown_085954B8,
+    sAnim_BasicFire,
 };
 
 const struct SpriteTemplate gEmberSpriteTemplate =
@@ -250,7 +252,7 @@ const struct SpriteTemplate gEmberFlareSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085954D0,
+    .anims = gAnims_BasicFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimEmberFlare,
@@ -261,7 +263,7 @@ const struct SpriteTemplate gBurnFlameSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085954D0,
+    .anims = gAnims_BasicFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimBurnFlame,
@@ -272,37 +274,38 @@ const struct SpriteTemplate gFireBlastRingSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085954D0,
+    .anims = gAnims_BasicFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFireRing,
 };
 
-const union AnimCmd gUnknown_08595534[] =
+static const union AnimCmd sAnim_FireBlastCross[] =
 {
     ANIMCMD_FRAME(32, 6),
     ANIMCMD_FRAME(48, 6),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08595540[] =
+static const union AnimCmd *const sAnims_FireBlastCross[] =
 {
-    gUnknown_08595534,
+    sAnim_FireBlastCross,
 };
 
-const union AffineAnimCmd gUnknown_08595544[] =
+static const union AffineAnimCmd gUnknown_08595544[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08595554[] =
+static const union AffineAnimCmd gUnknown_08595554[] =
 {
     AFFINEANIMCMD_FRAME(0xA0, 0xA0, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08595564[] =
+// Unused
+static const union AffineAnimCmd *const gUnknown_08595564[] =
 {
     gUnknown_08595544,
     gUnknown_08595554,
@@ -313,7 +316,7 @@ const struct SpriteTemplate gFireBlastCrossSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08595540,
+    .anims = sAnims_FireBlastCross,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFireCross,
@@ -324,7 +327,7 @@ const struct SpriteTemplate gFireSpiralOutwardSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085954D0,
+    .anims = gAnims_BasicFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFireSpiralOutward,
@@ -335,13 +338,13 @@ const struct SpriteTemplate gWeatherBallFireDownSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085954D0,
+    .anims = gAnims_BasicFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWeatherBallDown,
 };
 
-const struct SpriteTemplate gUnknown_085955B4 =
+const struct SpriteTemplate gEruptionLaunchRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WARM_ROCK,
     .paletteTag = ANIM_TAG_WARM_ROCK,
@@ -349,11 +352,10 @@ const struct SpriteTemplate gUnknown_085955B4 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81098EC,
+    .callback = AnimEruptionLaunchRock,
 };
 
-// gHeatedRockCoords
-const s16 gUnknown_085955CC[][2] =
+static const s16 sEruptionLaunchRockCoords[][2] =
 {
     {-2, -5},
     {-1, -1},
@@ -375,7 +377,7 @@ const struct SpriteTemplate gEruptionFallingRockSpriteTemplate =
     .callback = AnimEruptionFallingRock,
 };
 
-const union AnimCmd gUnknown_08595600[] =
+static const union AnimCmd sAnim_WillOWispOrb_0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 5),
@@ -384,30 +386,30 @@ const union AnimCmd gUnknown_08595600[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_08595614[] =
+static const union AnimCmd sAnim_WillOWispOrb_1[] =
 {
     ANIMCMD_FRAME(16, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_0859561C[] =
+static const union AnimCmd sAnim_WillOWispOrb_2[] =
 {
     ANIMCMD_FRAME(20, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08595624[] =
+static const union AnimCmd sAnim_WillOWispOrb_3[] =
 {
     ANIMCMD_FRAME(20, 5),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_0859562C[] =
+static const union AnimCmd *const sAnims_WillOWispOrb[] =
 {
-    gUnknown_08595600,
-    gUnknown_08595614,
-    gUnknown_0859561C,
-    gUnknown_08595624,
+    sAnim_WillOWispOrb_0,
+    sAnim_WillOWispOrb_1,
+    sAnim_WillOWispOrb_2,
+    sAnim_WillOWispOrb_3,
 };
 
 const struct SpriteTemplate gWillOWispOrbSpriteTemplate =
@@ -415,13 +417,13 @@ const struct SpriteTemplate gWillOWispOrbSpriteTemplate =
     .tileTag = ANIM_TAG_WISP_ORB,
     .paletteTag = ANIM_TAG_WISP_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_0859562C,
+    .anims = sAnims_WillOWispOrb,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWillOWispOrb,
 };
 
-const union AnimCmd gUnknown_08595654[] =
+static const union AnimCmd sAnim_WillOWispFire[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -430,9 +432,9 @@ const union AnimCmd gUnknown_08595654[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08595668[] =
+static const union AnimCmd *const sAnims_WillOWispFire[] =
 {
-    gUnknown_08595654,
+    sAnim_WillOWispFire,
 };
 
 const struct SpriteTemplate gWillOWispFireSpriteTemplate =
@@ -440,7 +442,7 @@ const struct SpriteTemplate gWillOWispFireSpriteTemplate =
     .tileTag = ANIM_TAG_WISP_FIRE,
     .paletteTag = ANIM_TAG_WISP_FIRE,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08595668,
+    .anims = sAnims_WillOWispFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWillOWispFire,
@@ -846,7 +848,7 @@ static void AnimTask_EruptionLaunchRocks_Step(u8 taskId) // animate Move_ERUPTIO
     case 3:
         if (!sub_80A80C8(task))
         {
-            sub_81097B4(task->data[15], taskId, 6);
+            CreateEruptionLaunchRocks(task->data[15], taskId, 6);
 
             task->data[0]++;
         }
@@ -901,12 +903,12 @@ static void AnimTask_EruptionLaunchRocks_Step(u8 taskId) // animate Move_ERUPTIO
     }
 }
 
-static void sub_81097B4(u8 spriteId, u8 taskId, u8 a3)
+static void CreateEruptionLaunchRocks(u8 spriteId, u8 taskId, u8 a3)
 {
     u16 i, j;
     s8 sign;
 
-    u16 y = sub_8109930(spriteId);
+    u16 y = GetEruptionLaunchRockInitialYPos(spriteId);
     u16 x = gSprites[spriteId].pos1.x;
 
     if(!GetBattlerSide(gBattleAnimAttacker))
@@ -922,7 +924,7 @@ static void sub_81097B4(u8 spriteId, u8 taskId, u8 a3)
 
     for (i = 0, j = 0; i <= 6; i++)
     {
-        u8 spriteId = CreateSprite(&gUnknown_085955B4, x, y, 2);
+        u8 spriteId = CreateSprite(&gEruptionLaunchRockSpriteTemplate, x, y, 2);
 
         if (spriteId != 0x40)
         {
@@ -930,8 +932,8 @@ static void sub_81097B4(u8 spriteId, u8 taskId, u8 a3)
 
             if (++j >= 5)
                 j = 0;
-            //gHeatedRockCoords
-            sub_8109984(&gSprites[spriteId], gUnknown_085955CC[i][0] * sign, gUnknown_085955CC[i][1]);
+
+            InitEruptionLaunchRockCoordData(&gSprites[spriteId], sEruptionLaunchRockCoords[i][0] * sign, sEruptionLaunchRockCoords[i][1]);
             gSprites[spriteId].data[6] = taskId;
             gSprites[spriteId].data[7] = a3;
 
@@ -940,9 +942,9 @@ static void sub_81097B4(u8 spriteId, u8 taskId, u8 a3)
     }
 }
 
-static void sub_81098EC(struct Sprite *sprite)
+static void AnimEruptionLaunchRock(struct Sprite *sprite)
 {
-    sub_81099A0(sprite);
+    UpdateEruptionLaunchRockPos(sprite);
 
     if (sprite->invisible)
     {
@@ -951,23 +953,23 @@ static void sub_81098EC(struct Sprite *sprite)
     }
 }
 
-static u16 sub_8109930(u8 spriteId)
+static u16 GetEruptionLaunchRockInitialYPos(u8 spriteId)
 {
-    u16 var1 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y + gSprites[spriteId].centerToCornerVecY;
+    u16 y = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y + gSprites[spriteId].centerToCornerVecY;
 
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
-        var1 = ((var1 << 16) + 0x4A0000) >> 16;
+        y = ((y << 16) + 0x4A0000) >> 16;
     }
     else
     {
-        var1 = ((var1 << 16) + 0x2C0000) >> 16;
+        y = ((y << 16) + 0x2C0000) >> 16;
     }
 
-    return var1;
+    return y;
 }
 
-static void sub_8109984(struct Sprite *sprite, s16 x, s16 y)
+static void InitEruptionLaunchRockCoordData(struct Sprite *sprite, s16 x, s16 y)
 {
     sprite->data[0] = 0;
     sprite->data[1] = 0;
@@ -977,7 +979,7 @@ static void sub_8109984(struct Sprite *sprite, s16 x, s16 y)
     sprite->data[5] = y * 8;
 }
 
-static void sub_81099A0(struct Sprite *sprite)
+static void UpdateEruptionLaunchRockPos(struct Sprite *sprite)
 {
     int var1;
     if (++sprite->data[0] > 2)

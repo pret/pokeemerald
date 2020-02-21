@@ -25,6 +25,7 @@ static void sub_8114244(struct Task *);
 static void sub_8114374(u8);
 static void AnimTask_MetallicShine_Step(u8);
 
+// Unused
 const struct SpriteTemplate gUnknown_08596FC8 =
 {
     .tileTag = ANIM_TAG_TIED_BAG,
@@ -36,64 +37,64 @@ const struct SpriteTemplate gUnknown_08596FC8 =
     .callback = sub_81138D4,
 };
 
-const union AffineAnimCmd gUnknown_08596FE0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596FF0[] =
+static const union AffineAnimCmd sAffineAnim_Bite_1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 32, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597000[] =
+static const union AffineAnimCmd sAffineAnim_Bite_2[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 64, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597010[] =
+static const union AffineAnimCmd sAffineAnim_Bite_3[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 96, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597020[] =
+static const union AffineAnimCmd sAffineAnim_Bite_4[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -128, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597030[] =
+static const union AffineAnimCmd sAffineAnim_Bite_5[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -96, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597040[] =
+static const union AffineAnimCmd sAffineAnim_Bite_6[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -64, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597050[] =
+static const union AffineAnimCmd sAffineAnim_Bite_7[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -32, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08597060[] =
+const union AffineAnimCmd *const gAffineAnims_Bite[] =
 {
-    gUnknown_08596FE0,
-    gUnknown_08596FF0,
-    gUnknown_08597000,
-    gUnknown_08597010,
-    gUnknown_08597020,
-    gUnknown_08597030,
-    gUnknown_08597040,
-    gUnknown_08597050,
+    sAffineAnim_Bite_0,
+    sAffineAnim_Bite_1,
+    sAffineAnim_Bite_2,
+    sAffineAnim_Bite_3,
+    sAffineAnim_Bite_4,
+    sAffineAnim_Bite_5,
+    sAffineAnim_Bite_6,
+    sAffineAnim_Bite_7,
 };
 
 const struct SpriteTemplate gSharpTeethSpriteTemplate =
@@ -103,7 +104,7 @@ const struct SpriteTemplate gSharpTeethSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08597060,
+    .affineAnims = gAffineAnims_Bite,
     .callback = AnimBite,
 };
 
@@ -114,28 +115,28 @@ const struct SpriteTemplate gClampJawSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08597060,
+    .affineAnims = gAffineAnims_Bite,
     .callback = AnimBite,
 };
 
-const union AffineAnimCmd gUnknown_085970B0[] =
+static const union AffineAnimCmd sAffineAnim_TearDrop_0[] =
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 80, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, -2, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_085970C8[] =
+static const union AffineAnimCmd sAffineAnim_TearDrop_1[] =
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, -80, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 2, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085970E0[] =
+static const union AffineAnimCmd *const sAffineAnims_TearDrop[] =
 {
-    gUnknown_085970B0,
-    gUnknown_085970C8,
+    sAffineAnim_TearDrop_0,
+    sAffineAnim_TearDrop_1,
 };
 
 const struct SpriteTemplate gTearDropSpriteTemplate =
@@ -145,11 +146,11 @@ const struct SpriteTemplate gTearDropSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_085970E0,
+    .affineAnims = sAffineAnims_TearDrop,
     .callback = AnimTearDrop,
 };
 
-const union AnimCmd gUnknown_08597100[] =
+static const union AnimCmd sAnim_ClawSlash_0[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -159,7 +160,7 @@ const union AnimCmd gUnknown_08597100[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08597118[] =
+static const union AnimCmd sAnim_ClawSlash_1[] =
 {
     ANIMCMD_FRAME(0, 4, .hFlip = TRUE),
     ANIMCMD_FRAME(16, 4, .hFlip = TRUE),
@@ -169,10 +170,10 @@ const union AnimCmd gUnknown_08597118[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08597130[] =
+static const union AnimCmd *const sAnims_ClawSlash[] =
 {
-    gUnknown_08597100,
-    gUnknown_08597118,
+    sAnim_ClawSlash_0,
+    sAnim_ClawSlash_1,
 };
 
 const struct SpriteTemplate gClawSlashSpriteTemplate =
@@ -180,7 +181,7 @@ const struct SpriteTemplate gClawSlashSpriteTemplate =
     .tileTag = ANIM_TAG_CLAW_SLASH,
     .paletteTag = ANIM_TAG_CLAW_SLASH,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08597130,
+    .anims = sAnims_ClawSlash,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimClawSlash,

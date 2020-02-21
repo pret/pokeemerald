@@ -35,7 +35,7 @@ static void AnimTask_FlashAnimTagWithColor_Step2(u8);
 static void AnimTask_ShakeBattleTerrain_Step(u8);
 static void sub_81163D0(struct Sprite *);
 
-const union AnimCmd gUnknown_0859722C[] =
+static const union AnimCmd sAnim_ConfusionDuck_0[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(4, 8),
@@ -44,7 +44,7 @@ const union AnimCmd gUnknown_0859722C[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_08597240[] =
+static const union AnimCmd sAnim_ConfusionDuck_1[] =
 {
     ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(4, 8),
@@ -53,10 +53,10 @@ const union AnimCmd gUnknown_08597240[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnimTable_ConfusionDuck[] =
+static const union AnimCmd *const sAnims_ConfusionDuck[] =
 {
-    gUnknown_0859722C,
-    gUnknown_08597240,
+    sAnim_ConfusionDuck_0,
+    sAnim_ConfusionDuck_1,
 };
 
 const struct SpriteTemplate gConfusionDuckSpriteTemplate =
@@ -64,7 +64,7 @@ const struct SpriteTemplate gConfusionDuckSpriteTemplate =
     .tileTag = ANIM_TAG_DUCK,
     .paletteTag = ANIM_TAG_DUCK,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = sAnimTable_ConfusionDuck,
+    .anims = sAnims_ConfusionDuck,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimConfusionDuck,
@@ -92,7 +92,7 @@ const struct SpriteTemplate gComplexPaletteBlendSpriteTemplate =
     .callback = AnimComplexPaletteBlend,
 };
 
-const union AnimCmd gUnknown_085972A4[] =
+static const union AnimCmd gUnknown_085972A4[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -102,11 +102,12 @@ const union AnimCmd gUnknown_085972A4[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_085972BC[] =
+static const union AnimCmd *const gUnknown_085972BC[] =
 {
     gUnknown_085972A4,
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_085972C0 =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
@@ -129,39 +130,39 @@ const struct SpriteTemplate gShakeMonOrTerrainSpriteTemplate =
     .callback = AnimShakeMonOrBattleTerrain,
 };
 
-const union AffineAnimCmd gUnknown_085972F0[] =
+static const union AffineAnimCmd sAffineAnim_HitSplat_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597300[] =
+static const union AffineAnimCmd sAffineAnim_HitSplat_1[] =
 {
     AFFINEANIMCMD_FRAME(0xD8, 0xD8, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597318[] =
+static const union AffineAnimCmd sAffineAnim_HitSplat_2[] =
 {
     AFFINEANIMCMD_FRAME(0xB0, 0xB0, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08597330[] =
+static const union AffineAnimCmd sAffineAnim_HitSplat_3[] =
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const sAffineAnims_HitSplat[] =
+static const union AffineAnimCmd *const sAffineAnims_HitSplat[] =
 {
-    gUnknown_085972F0,
-    gUnknown_08597300,
-    gUnknown_08597318,
-    gUnknown_08597330,
+    sAffineAnim_HitSplat_0,
+    sAffineAnim_HitSplat_1,
+    sAffineAnim_HitSplat_2,
+    sAffineAnim_HitSplat_3,
 };
 
 const struct SpriteTemplate gBasicHitSplatSpriteTemplate =

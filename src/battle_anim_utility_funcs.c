@@ -331,7 +331,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = sub_80A89C8(gBattleAnimAttacker, spriteId, species);
     sub_80A6B30(&unknownStruct);
-    sub_80A6D60(&unknownStruct, gUnknown_08C20684, 0);
+    AnimLoadCompressedBgTilemapHandleContest(&unknownStruct, gUnknown_08C20684, 0);
     AnimLoadCompressedBgGfx(unknownStruct.bgId, gUnknown_08C20668, unknownStruct.tilesOffset);
     LoadPalette(&gUnknown_08597418, unknownStruct.paletteId * 16 + 1, 2);
 
@@ -470,9 +470,9 @@ static void sub_81170EC(u8 taskId)
 
     sub_80A6B30(&unknownStruct);
     if (sAnimStatsChangeData->data[0] == 0)
-        sub_80A6D60(&unknownStruct, gBattleStatMask1_Tilemap, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&unknownStruct, gBattleStatMask1_Tilemap, 0);
     else
-        sub_80A6D60(&unknownStruct, gBattleStatMask2_Tilemap, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&unknownStruct, gBattleStatMask2_Tilemap, 0);
 
     AnimLoadCompressedBgGfx(unknownStruct.bgId, gBattleStatMask_Gfx, unknownStruct.tilesOffset);
     switch (sAnimStatsChangeData->data[1])
@@ -825,7 +825,7 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
         spriteId2 = sub_80A89C8(battler2, gBattlerSpriteIds[battler2], species);
 
     sub_80A6B30(&unknownStruct);
-    sub_80A6D60(&unknownStruct, tilemap, 0);
+    AnimLoadCompressedBgTilemapHandleContest(&unknownStruct, tilemap, 0);
     AnimLoadCompressedBgGfx(unknownStruct.bgId, gfx, unknownStruct.tilesOffset);
     LoadCompressedPalette(palette, unknownStruct.paletteId * 16, 32);
 

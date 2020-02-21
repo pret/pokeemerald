@@ -48,16 +48,16 @@ const struct SpriteTemplate gEllipticalGustSpriteTemplate =
     .callback = AnimEllipticalGust,
 };
 
-const union AffineAnimCmd gUnknown_08596288[] =
+static const union AffineAnimCmd sAffineAnim_GustToTarget[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0xA, 0x0, 0, 24),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085962A0[] =
+static const union AffineAnimCmd *const sAffineAnims_GustToTarget[] =
 {
-    gUnknown_08596288,
+    sAffineAnim_GustToTarget,
 };
 
 const struct SpriteTemplate gGustToTargetSpriteTemplate =
@@ -67,11 +67,11 @@ const struct SpriteTemplate gGustToTargetSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_32x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_085962A0,
+    .affineAnims = sAffineAnims_GustToTarget,
     .callback = AnimGustToTarget,
 };
 
-const union AnimCmd gUnknown_085962BC[] =
+static const union AnimCmd sAffineAnim_AirWaveCrescent[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(0, 3, .hFlip = TRUE),
@@ -80,9 +80,9 @@ const union AnimCmd gUnknown_085962BC[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_085962D0[] =
+static const union AnimCmd *const sAffineAnims_AirWaveCrescent[] =
 {
-    gUnknown_085962BC,
+    sAffineAnim_AirWaveCrescent,
 };
 
 const struct SpriteTemplate gAirWaveCrescentSpriteTemplate =
@@ -90,13 +90,13 @@ const struct SpriteTemplate gAirWaveCrescentSpriteTemplate =
     .tileTag = ANIM_TAG_AIR_WAVE_2,
     .paletteTag = ANIM_TAG_AIR_WAVE_2,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
-    .anims = gUnknown_085962D0,
+    .anims = sAffineAnims_AirWaveCrescent,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimAirWaveCrescent,
 };
 
-const union AffineAnimCmd gUnknown_085962EC[] =
+static const union AffineAnimCmd sAffineAnim_FlyBallUp[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x28, 0x0, 0, 6),
@@ -105,27 +105,27 @@ const union AffineAnimCmd gUnknown_085962EC[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596314[] =
+static const union AffineAnimCmd *const sAffineAnims_FlyBallUp[] =
 {
-    gUnknown_085962EC,
+    sAffineAnim_FlyBallUp,
 };
 
-const union AffineAnimCmd gUnknown_08596318[] =
+static const union AffineAnimCmd sAffineAnim_FlyBallAttack_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 50, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596328[] =
+static const union AffineAnimCmd sAffineAnim_FlyBallAttack_1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -40, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596338[] =
+static const union AffineAnimCmd *const sAffineAnims_FlyBallAttack[] =
 {
-    gUnknown_08596318,
-    gUnknown_08596328,
+    sAffineAnim_FlyBallAttack_0,
+    sAffineAnim_FlyBallAttack_1,
 };
 
 const struct SpriteTemplate gFlyBallUpSpriteTemplate =
@@ -135,7 +135,7 @@ const struct SpriteTemplate gFlyBallUpSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596314,
+    .affineAnims = sAffineAnims_FlyBallUp,
     .callback = AnimFlyBallUp,
 };
 
@@ -146,26 +146,26 @@ const struct SpriteTemplate gFlyBallAttackSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596338,
+    .affineAnims = sAffineAnims_FlyBallAttack,
     .callback = AnimFlyBallAttack,
 };
 
-const union AnimCmd gUnknown_08596370[] =
+static const union AnimCmd sAnim_FallingFeather_0[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596378[] =
+static const union AnimCmd sAnim_FallingFeather_1[] =
 {
     ANIMCMD_FRAME(16, 0, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596380[] =
+static const union AnimCmd *const sAnims_FallingFeather[] =
 {
-    gUnknown_08596370,
-    gUnknown_08596378,
+    sAnim_FallingFeather_0,
+    sAnim_FallingFeather_1,
 };
 
 const struct SpriteTemplate gFallingFeatherSpriteTemplate =
@@ -173,7 +173,7 @@ const struct SpriteTemplate gFallingFeatherSpriteTemplate =
     .tileTag = ANIM_TAG_WHITE_FEATHER,
     .paletteTag = ANIM_TAG_WHITE_FEATHER,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gUnknown_08596380,
+    .anims = sAnims_FallingFeather,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFallingFeather,
@@ -190,7 +190,7 @@ const struct SpriteTemplate gUnknown_085963A0 =
     .callback = sub_810EA4C,
 };
 
-const union AnimCmd gUnknown_085963B8[] =
+static const union AnimCmd sAnim_WhirlwindLines[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(8, 1),
@@ -200,9 +200,9 @@ const union AnimCmd gUnknown_085963B8[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085963D0[] =
+static const union AnimCmd *const sAnims_WhirlwindLines[] =
 {
-    gUnknown_085963B8,
+    sAnim_WhirlwindLines,
 };
 
 const struct SpriteTemplate gWhirlwindLineSpriteTemplate =
@@ -210,13 +210,13 @@ const struct SpriteTemplate gWhirlwindLineSpriteTemplate =
     .tileTag = ANIM_TAG_WHIRLWIND_LINES,
     .paletteTag = ANIM_TAG_WHIRLWIND_LINES,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
-    .anims = gUnknown_085963D0,
+    .anims = sAnims_WhirlwindLines,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWhirlwindLine,
 };
 
-const union AffineAnimCmd gUnknown_085963EC[] =
+static const union AffineAnimCmd sAffineAnim_BounceBallShrink[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x28, 0x0, 0, 6),
@@ -226,9 +226,9 @@ const union AffineAnimCmd gUnknown_085963EC[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_0859641C[] =
+static const union AffineAnimCmd *const sAffineAnims_BounceBallShrink[] =
 {
-    gUnknown_085963EC,
+    sAffineAnim_BounceBallShrink,
 };
 
 const struct SpriteTemplate gBounceBallShrinkSpriteTemplate =
@@ -238,19 +238,19 @@ const struct SpriteTemplate gBounceBallShrinkSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_0859641C,
+    .affineAnims = sAffineAnims_BounceBallShrink,
     .callback = AnimBounceBallShrink,
 };
 
-const union AffineAnimCmd gUnknown_08596438[] =
+static const union AffineAnimCmd sAffineAnim_BounceBallLand[] =
 {
     AFFINEANIMCMD_FRAME(0xA0, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596448[] =
+static const union AffineAnimCmd *const sAffineAnims_BounceBallLand[] =
 {
-    gUnknown_08596438,
+    sAffineAnim_BounceBallLand,
 };
 
 const struct SpriteTemplate gBounceBallLandSpriteTemplate =
@@ -260,11 +260,11 @@ const struct SpriteTemplate gBounceBallLandSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596448,
+    .affineAnims = sAffineAnims_BounceBallLand,
     .callback = AnimBounceBallLand,
 };
 
-const union AffineAnimCmd gUnknown_08596464[] =
+static const union AffineAnimCmd sAffineAnim_DiveBall[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x28, 0x0, 0, 6),
@@ -273,9 +273,9 @@ const union AffineAnimCmd gUnknown_08596464[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_0859648C[] =
+static const union AffineAnimCmd *const sAffineAnims_DiveBall[] =
 {
-    gUnknown_08596464,
+    sAffineAnim_DiveBall,
 };
 
 const struct SpriteTemplate gDiveBallSpriteTemplate =
@@ -285,11 +285,11 @@ const struct SpriteTemplate gDiveBallSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_0859648C,
+    .affineAnims = sAffineAnims_DiveBall,
     .callback = AnimDiveBall,
 };
 
-const union AffineAnimCmd gUnknown_085964A8[] =
+static const union AffineAnimCmd gUnknown_085964A8[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x0, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x20, 0, 12),
@@ -297,7 +297,8 @@ const union AffineAnimCmd gUnknown_085964A8[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085964C8[] =
+// Unused
+static const union AffineAnimCmd *const gUnknown_085964C8[] =
 {
     gUnknown_085964A8,
 };
