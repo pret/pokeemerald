@@ -958,7 +958,7 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const void *src)
     CopyBgTilemapBufferToVram(bgId);
 }
 
-void sub_80A6D60(struct BattleAnimBgData *unk, const void *src, u32 arg2)
+void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *unk, const void *src, u32 arg2)
 {
     InitAnimBgTilemapBuffer(unk->bgId, src);
     if (IsContest() == TRUE)

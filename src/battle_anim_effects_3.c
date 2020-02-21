@@ -2389,7 +2389,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
         sub_80A6B30(&animBg);
-        sub_80A6D60(&animBg, &gUnknown_08C2A6EC, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
         if (IsContest())
         {
             gBattle_BG1_X = -56;
@@ -2405,8 +2405,8 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
             gBattle_BG1_Y = 0;
         }
 
-        AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C2A634, animBg.tilesOffset);
-        LoadCompressedPalette(gUnknown_08C2A6D4, animBg.paletteId * 16, 32);
+        AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimMaskImage_LightBeam, animBg.tilesOffset);
+        LoadCompressedPalette(gBattleAnimMaskPalette_LightBeam, animBg.paletteId * 16, 32);
 
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
@@ -2570,7 +2570,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
         sub_80A6B30(&animBg);
-        sub_80A6D60(&animBg, &gUnknown_08C2A6EC, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimMaskTilemap_LightBeam, 0);
         if (IsContest())
         {
             gBattle_BG1_X = -56;
@@ -2601,8 +2601,8 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
             gBattle_BG1_Y = 0;
         }
 
-        AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C2A634, animBg.tilesOffset);
-        LoadCompressedPalette(gUnknown_08C2A6D4, animBg.paletteId * 16, 32);
+        AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimMaskImage_LightBeam, animBg.tilesOffset);
+        LoadCompressedPalette(gBattleAnimMaskPalette_LightBeam, animBg.paletteId * 16, 32);
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
         gTasks[taskId].data[0]++;

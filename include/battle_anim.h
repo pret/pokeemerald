@@ -125,7 +125,7 @@ u8 sub_80A77AC(u8 a1);
 s16 CloneBattlerSpriteWithBlend(u8);
 void obj_delete_but_dont_free_vram(struct Sprite*);
 u8 sub_80A89C8(int, u8, int);
-void sub_80A6D60(struct BattleAnimBgData*, const void*, u32);
+void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData*, const void*, u32);
 void AnimLoadCompressedBgGfx(u32, const u32*, u32);
 void sub_80A6DAC(bool8);
 void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *);
@@ -284,5 +284,15 @@ extern const struct OamData gOamData_AffineOff_ObjBlend_16x32;
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
+
+extern const struct SpriteTemplate gWaterHitSplatSpriteTemplate;
+
+extern const union AnimCmd *const gAnims_WaterMudOrb[];
+extern const union AnimCmd *const gAnims_BasicFire[];
+extern const union AffineAnimCmd *const gGrowingRingAffineAnimTable[];
+extern const union AffineAnimCmd *const gAffineAnims_Droplet[];
+extern const union AnimCmd *const gAnims_SmallBubblePair[];
+extern const union AnimCmd *const gAnims_WaterBubble[];
+extern const union AffineAnimCmd *const gAffineAnims_Bite[];
 
 #endif // GUARD_BATTLE_ANIM_H

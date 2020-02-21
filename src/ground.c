@@ -27,26 +27,26 @@ static void AnimTask_ShakeBattlers(u8);
 static void SetBattlersXOffsetForShake(struct Task *);
 static void sub_81156D0(u8);
 
-const union AffineAnimCmd gUnknown_08597150[] =
+static const union AffineAnimCmd sAffineAnim_Bonemerang[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 15, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gUnknown_08597160[] =
+static const union AffineAnimCmd sAffineAnim_SpinningBone[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 20, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gUnknown_08597170[] =
+static const union AffineAnimCmd *const sAffineAnims_Bonemerang[] =
 {
-    gUnknown_08597150,
+    sAffineAnim_Bonemerang,
 };
 
-const union AffineAnimCmd *const gUnknown_08597174[] =
+static const union AffineAnimCmd *const sAffineAnims_SpinningBone[] =
 {
-    gUnknown_08597160,
+    sAffineAnim_SpinningBone,
 };
 
 const struct SpriteTemplate gBonemerangSpriteTemplate =
@@ -56,7 +56,7 @@ const struct SpriteTemplate gBonemerangSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08597170,
+    .affineAnims = sAffineAnims_Bonemerang,
     .callback = AnimBonemerangProjectile,
 };
 
@@ -67,7 +67,7 @@ const struct SpriteTemplate gSpinningBoneSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08597174,
+    .affineAnims = sAffineAnims_SpinningBone,
     .callback = AnimBoneHitProjectile,
 };
 
@@ -82,15 +82,15 @@ const struct SpriteTemplate gSandAttackDirtSpriteTemplate =
     .callback = AnimDirtScatter,
 };
 
-const union AnimCmd gUnknown_085971C0[] =
+static const union AnimCmd sAnim_MudSlapMud[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085971C8[] =
+static const union AnimCmd *const sAnims_MudSlapMud[] =
 {
-    gUnknown_085971C0,
+    sAnim_MudSlapMud,
 };
 
 const struct SpriteTemplate gMudSlapMudSpriteTemplate =
@@ -98,7 +98,7 @@ const struct SpriteTemplate gMudSlapMudSpriteTemplate =
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_085971C8,
+    .anims = sAnims_MudSlapMud,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDirtScatter,

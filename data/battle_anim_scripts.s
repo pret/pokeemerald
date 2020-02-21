@@ -2206,22 +2206,22 @@ Move_BUBBLE_BEAM:
 	blendoff
 	end
 BulbblebeamCreateBubbles:
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 35, 70, 0, 256, 50
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 35, 70, 0, 256, 50
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	delay 3
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 20, 40, -10, 256, 50
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 20, 40, -10, 256, 50
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	delay 3
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 10, -60, 0, 256, 50
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 10, -60, 0, 256, 50
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	delay 3
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 15, -15, 10, 256, 50
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 15, -15, 10, 256, 50
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	delay 3
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 30, 10, -10, 256, 50
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 30, 10, -10, 256, 50
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	delay 3
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 25, -30, 10, 256, 50
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 25, -30, 10, 256, 50
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	delay 3
 	return
@@ -2860,7 +2860,7 @@ Move_AMNESIA:
 	loadspritegfx ANIM_TAG_AMNESIA
 	call SetPsychicBackground
 	delay 8
-	createsprite gAmnesiaQuestionMarkSpriteTemplate, ANIM_ATTACKER, 20
+	createsprite gQuestionMarkSpriteTemplate, ANIM_ATTACKER, 20
 	playsewithpan SE_W118, SOUND_PAN_ATTACKER
 	delay 54
 	loopsewithpan SE_W118, SOUND_PAN_ATTACKER, 16, 3
@@ -5091,27 +5091,27 @@ Move_BUBBLE:
 	monbg ANIM_TARGET
 	setalpha 12, 8
 	delay 1
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 15, -15, 10, 128, 100
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 15, -15, 10, 128, 100
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W145B, SOUND_PAN_TARGET, 100
 	delay 6
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 35, 37, 40, 128, 100
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 35, 37, 40, 128, 100
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W145B, SOUND_PAN_TARGET, 100
 	delay 6
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 10, -37, 30, 128, 100
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 10, -37, 30, 128, 100
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W145B, SOUND_PAN_TARGET, 100
 	delay 6
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 30, 10, 15, 128, 100
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 30, 10, 15, 128, 100
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W145B, SOUND_PAN_TARGET, 100
 	delay 6
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 20, 33, 20, 128, 100
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 20, 33, 20, 128, 100
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W145B, SOUND_PAN_TARGET, 100
 	delay 6
-	createsprite gMovingWaterBubbleSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 25, -30, 10, 128, 100
+	createsprite gWaterBubbleProjectileSpriteTemplate, ANIM_ATTACKER, 2, 18, 0, 25, -30, 10, 128, 100
 	playsewithpan SE_W145, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W145B, SOUND_PAN_TARGET, 100
 	waitforvisualfinish
@@ -9654,26 +9654,26 @@ Move_TWISTER:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	playsewithpan SE_W239, SOUND_PAN_TARGET
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 120, 70, 5, 70, 30
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 120, 70, 5, 70, 30
 	delay 1
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 115, 55, 6, 60, 25
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 115, 55, 6, 60, 25
 	delay 1
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 115, 60, 7, 60, 30
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 115, 55, 10, 60, 30
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 115, 60, 7, 60, 30
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 115, 55, 10, 60, 30
 	delay 3
-	createsprite gTwisterRockParticleSpriteTemplate, ANIM_TARGET, 2, 100, 50, 4, 50, 26
+	createsprite gTwisterRockSpriteTemplate, ANIM_TARGET, 2, 100, 50, 4, 50, 26
 	delay 1
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 105, 25, 8, 60, 20
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 105, 25, 8, 60, 20
 	delay 1
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 115, 40, 10, 48, 30
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 115, 40, 10, 48, 30
 	delay 3
-	createsprite gTwisterRockParticleSpriteTemplate, ANIM_TARGET, 2, 120, 30, 6, 45, 25
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 115, 35, 10, 60, 30
+	createsprite gTwisterRockSpriteTemplate, ANIM_TARGET, 2, 120, 30, 6, 45, 25
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 115, 35, 10, 60, 30
 	delay 3
-	createsprite gTwisterRockParticleSpriteTemplate, ANIM_TARGET, 2, 105, 20, 8, 40, 0
+	createsprite gTwisterRockSpriteTemplate, ANIM_TARGET, 2, 105, 20, 8, 40, 0
 	delay 3
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 20, 255, 15, 32, 0
-	createsprite gTwisterLeafParticleSpriteTemplate, ANIM_TARGET, 2, 110, 10, 8, 32, 20
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 20, 255, 15, 32, 0
+	createsprite gTwisterLeafSpriteTemplate, ANIM_TARGET, 2, 110, 10, 8, 32, 20
 	waitforvisualfinish
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -32, -16, ANIM_TARGET, 3
 	playsewithpan SE_W004, SOUND_PAN_TARGET
@@ -9993,42 +9993,42 @@ IceCrystalEffectLong:
 
 IceSpikesEffectShort: @ Unused
 	loopsewithpan SE_W196, SOUND_PAN_TARGET, 6, 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 0, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 0, 24, 0
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 8, 24, 0
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -8, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 8, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -8, 24, 0
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 16, 24, 0
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -16, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 16, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -16, 24, 0
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 24, 24, 0
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -24, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 24, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -24, 24, 0
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 32, 24, 0
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -32, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 32, 24, 0
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -32, 24, 0
 	return
 
 IceSpikesEffectLong:
 	loopsewithpan SE_W196, SOUND_PAN_TARGET, 6, 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 0, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 0, 24, 1
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 8, 24, 1
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -8, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 8, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -8, 24, 1
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 16, 24, 1
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -16, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 16, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -16, 24, 1
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 24, 24, 1
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -24, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 24, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -24, 24, 1
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 32, 24, 1
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -32, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 32, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -32, 24, 1
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 40, 24, 1
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -40, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 40, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -40, 24, 1
 	delay 4
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, 48, 24, 1
-	createsprite gIceGroundSpikesSpriteTemplate, ANIM_TARGET, 2, -48, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, 48, 24, 1
+	createsprite gIceGroundSpikeSpriteTemplate, ANIM_TARGET, 2, -48, 24, 1
 	return
 
 GrantingStarsEffect:

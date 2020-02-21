@@ -42,16 +42,16 @@ static void AnimGrudgeFlame(struct Sprite *);
 static void sub_8112F60(struct Sprite *);
 static void sub_8112FB8(struct Sprite *);
 
-const union AffineAnimCmd gUnknown_08596CF8[] =
+static const union AffineAnimCmd sAffineAnim_ConfuseRayBallBounce[] =
 {
     AFFINEANIMCMD_FRAME(0x1E, 0x1E, 10, 5),
     AFFINEANIMCMD_FRAME(0xFFE2, 0xFFE2, 10, 5),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gUnknown_08596D10[] =
+static const union AffineAnimCmd *const sAffineAnims_ConfuseRayBallBounce[] =
 {
-    gUnknown_08596CF8,
+    sAffineAnim_ConfuseRayBallBounce,
 };
 
 const struct SpriteTemplate gConfuseRayBallBounceSpriteTemplate =
@@ -61,7 +61,7 @@ const struct SpriteTemplate gConfuseRayBallBounceSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596D10,
+    .affineAnims = sAffineAnims_ConfuseRayBallBounce,
     .callback = AnimConfuseRayBallBounce,
 };
 
@@ -76,15 +76,15 @@ const struct SpriteTemplate gConfuseRayBallSpiralSpriteTemplate =
     .callback = AnimConfuseRayBallSpiral,
 };
 
-const union AffineAnimCmd gUnknown_08596D44[] =
+static const union AffineAnimCmd sAffineAnim_ShadowBall[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 10, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gUnknown_08596D54[] =
+static const union AffineAnimCmd *const sAffineAnims_ShadowBall[] =
 {
-    gUnknown_08596D44,
+    sAffineAnim_ShadowBall,
 };
 
 const struct SpriteTemplate gShadowBallSpriteTemplate =
@@ -94,11 +94,11 @@ const struct SpriteTemplate gShadowBallSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596D54,
+    .affineAnims = sAffineAnims_ShadowBall,
     .callback = AnimShadowBall,
 };
 
-const union AnimCmd gUnknown_08596D70[] =
+static const union AnimCmd sAnim_Lick[] =
 {
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(8, 2),
@@ -108,9 +108,9 @@ const union AnimCmd gUnknown_08596D70[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596D88[] =
+static const union AnimCmd *const sAnims_Lick[] =
 {
-    gUnknown_08596D70,
+    sAnim_Lick,
 };
 
 const struct SpriteTemplate gLickSpriteTemplate =
@@ -118,19 +118,20 @@ const struct SpriteTemplate gLickSpriteTemplate =
     .tileTag = ANIM_TAG_LICK,
     .paletteTag = ANIM_TAG_LICK,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
-    .anims = gUnknown_08596D88,
+    .anims = sAnims_Lick,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimLick,
 };
 
-const union AffineAnimCmd gUnknown_08596DA4[] =
+static const union AffineAnimCmd gUnknown_08596DA4[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596DB4[] =
+// Unused
+static const union AffineAnimCmd *const gUnknown_08596DB4[] =
 {
     gUnknown_08596DA4,
 };
@@ -179,7 +180,7 @@ const struct SpriteTemplate gNightmareDevilSpriteTemplate =
     .callback = AnimGhostStatusSprite,
 };
 
-const union AnimCmd gUnknown_08596E18[] =
+static const union AnimCmd sAnim_GrudgeFlame[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(8, 4),
@@ -188,9 +189,9 @@ const union AnimCmd gUnknown_08596E18[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08596E2C[] =
+static const union AnimCmd *const sAnims_GrudgeFlame[] =
 {
-    gUnknown_08596E18,
+    sAnim_GrudgeFlame,
 };
 
 const struct SpriteTemplate gGrudgeFlameSpriteTemplate =
@@ -198,12 +199,13 @@ const struct SpriteTemplate gGrudgeFlameSpriteTemplate =
     .tileTag = ANIM_TAG_PURPLE_FLAME,
     .paletteTag = ANIM_TAG_PURPLE_FLAME,
     .oam = &gOamData_AffineOff_ObjBlend_16x32,
-    .anims = gUnknown_08596E2C,
+    .anims = sAnims_GrudgeFlame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimGrudgeFlame,
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_08596E48 =
 {
     .tileTag = 0,

@@ -126,6 +126,7 @@ const union AnimCmd gUnknown_0859327C[] =
     ANIMCMD_END,
 };
 
+// Unused
 const union AnimCmd *const gUnknown_08593284[] =
 {
     gUnknown_0859327C,
@@ -155,7 +156,6 @@ const struct SpriteTemplate gUnknown_085932A0 =
     .callback = sub_810358C,
 };
 
-extern const union AffineAnimCmd *const gUnknown_08597060[];
 // Unused
 const struct SpriteTemplate gUnknown_085932B8 =
 {
@@ -164,7 +164,7 @@ const struct SpriteTemplate gUnknown_085932B8 =
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08597060,
+    .affineAnims = gAffineAnims_Bite,
     .callback = sub_8103620,
 };
 
@@ -911,7 +911,7 @@ const struct SpriteTemplate gMagentaHeartSpriteTemplate =
     .callback = AnimMagentaHeart,
 };
 
-const union AffineAnimCmd gUnknown_08593988[] =
+static const union AffineAnimCmd sAffineAnims_StretchBattlerUp[] =
 {
     AFFINEANIMCMD_FRAME(0x000A, 0xFFF3, 0x00, 0x0A),
     AFFINEANIMCMD_FRAME(0xFFF6, 0x000D, 0x00, 0x0A),
@@ -1166,7 +1166,7 @@ const struct SpriteTemplate gMovementWavesSpriteTemplate =
     .callback = AnimMovmentWaves,
 };
 
-const union AffineAnimCmd gUnknown_08593B98[] =
+static const union AffineAnimCmd sAffineAnims_UproarDistortion[] =
 {
     AFFINEANIMCMD_FRAME(-12, 8, 0, 4),
     AFFINEANIMCMD_FRAME(20, -20, 0, 4),
@@ -3125,7 +3125,7 @@ void AnimTask_StretchTargetUp(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
     if (++gTasks[taskId].data[0] == 1)
     {
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_TARGET), gUnknown_08593988);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_TARGET), sAffineAnims_StretchBattlerUp);
         gSprites[spriteId].pos2.x = 4;
     }
     else
@@ -3145,7 +3145,7 @@ void AnimTask_StretchAttackerUp(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     if (++gTasks[taskId].data[0] == 1)
     {
-        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), gUnknown_08593988);
+        PrepareAffineAnimInTaskData(&gTasks[taskId], GetAnimBattlerSpriteId(ANIM_ATTACKER), sAffineAnims_StretchBattlerUp);
         gSprites[spriteId].pos2.x = 4;
     }
     else
@@ -3249,9 +3249,9 @@ void AnimTask_HeartsBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80A6B30(&animBg);
-    AnimLoadCompressedBgGfx(animBg.bgId, &gUnknown_08C232E0, animBg.tilesOffset);
-    sub_80A6D60(&animBg, &gUnknown_08C23D78, 0);
-    LoadCompressedPalette(&gUnknown_08C23D50, animBg.paletteId * 16, 32);
+    AnimLoadCompressedBgGfx(animBg.bgId, &gBattleAnimBgImage_Attract, animBg.tilesOffset);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_Attract, 0);
+    LoadCompressedPalette(&gBattleAnimBgPalette_Attract, animBg.paletteId * 16, 32);
     gTasks[taskId].func = AnimTask_HeartsBackground_Step;
 }
 
@@ -3328,14 +3328,14 @@ void AnimTask_ScaryFace(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80A6B30(&animBg);
     if (IsContest())
-        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, 0);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, 0);
     else
-        sub_80A6D60(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, 0);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, 0);
 
-    AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C249F8, animBg.tilesOffset);
-    LoadCompressedPalette(gUnknown_08C249D0, animBg.paletteId * 16, 32);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_ScaryFace, animBg.tilesOffset);
+    LoadCompressedPalette(gBattleAnimBgPalette_ScaryFace, animBg.paletteId * 16, 32);
     gTasks[taskId].func = AnimTask_ScaryFace_Step;
 }
 
@@ -3652,7 +3652,7 @@ void AnimTask_UproarDistortion(u8 taskId)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
 
-    PrepareAffineAnimInTaskData(&gTasks[taskId], spriteId, gUnknown_08593B98);
+    PrepareAffineAnimInTaskData(&gTasks[taskId], spriteId, sAffineAnims_UproarDistortion);
     gTasks[taskId].func = AnimTask_UproarDistortion_Step;
 }
 

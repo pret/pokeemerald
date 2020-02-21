@@ -20,7 +20,7 @@ static void AnimQuestionMark(struct Sprite *);
 static void AnimQuestionMark_Step1(struct Sprite *);
 static void AnimQuestionMark_Step2(struct Sprite *);
 static void AnimRedX(struct Sprite *);
-static void sub_810FDF0(struct Sprite *);
+static void AnimSkillSwapOrb(struct Sprite *);
 static void AnimPsychoBoost(struct Sprite *);
 static void AnimTask_MeditateStretchAttacker_Step(u8);
 static void AnimTask_Teleport_Step(u8);
@@ -29,16 +29,16 @@ static void AnimTask_SkillSwap_Step(u8);
 static void AnimTask_ExtrasensoryDistortion_Step(u8);
 static void AnimTask_TransparentCloneGrowAndShrink_Step(u8);
 
-const union AffineAnimCmd gUnknown_0859652C[] =
+static const union AffineAnimCmd sAffineAnim_PsychUpSpiral[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFFE, 0xFFFE, -10, 120),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596544[] =
+static const union AffineAnimCmd *const sAffineAnims_PsychUpSpiral[] =
 {
-    gUnknown_0859652C,
+    sAffineAnim_PsychUpSpiral,
 };
 
 const struct SpriteTemplate gPsychUpSpiralSpriteTemplate =
@@ -48,7 +48,7 @@ const struct SpriteTemplate gPsychUpSpiralSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596544,
+    .affineAnims = sAffineAnims_PsychUpSpiral,
     .callback = AnimSpriteOnMonPos,
 };
 
@@ -107,7 +107,7 @@ const struct SpriteTemplate gMagicCoatWallSpriteTemplate =
     .callback = AnimDefensiveWall,
 };
 
-const union AnimCmd gUnknown_085965D8[] =
+static const union AnimCmd sAnim_ReflectSparkle[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -117,9 +117,9 @@ const union AnimCmd gUnknown_085965D8[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085965F0[] =
+static const union AnimCmd *const sAnims_ReflectSparkle[] =
 {
-    gUnknown_085965D8,
+    sAnim_ReflectSparkle,
 };
 
 const struct SpriteTemplate gReflectSparkleSpriteTemplate =
@@ -127,13 +127,13 @@ const struct SpriteTemplate gReflectSparkleSpriteTemplate =
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085965F0,
+    .anims = sAnims_ReflectSparkle,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWallSparkle,
 };
 
-const union AnimCmd gUnknown_0859660C[] =
+static const union AnimCmd sAnim_SpecialScreenSparkle[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 5),
@@ -142,9 +142,9 @@ const union AnimCmd gUnknown_0859660C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596620[] =
+static const union AnimCmd *const sAnims_SpecialScreenSparkle[] =
 {
-    gUnknown_0859660C,
+    sAnim_SpecialScreenSparkle,
 };
 
 const struct SpriteTemplate gSpecialScreenSparkleSpriteTemplate =
@@ -152,7 +152,7 @@ const struct SpriteTemplate gSpecialScreenSparkleSpriteTemplate =
     .tileTag = ANIM_TAG_SPARKLE_3,
     .paletteTag = ANIM_TAG_SPARKLE_3,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gUnknown_08596620,
+    .anims = sAnims_SpecialScreenSparkle,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWallSparkle,
@@ -169,7 +169,7 @@ const struct SpriteTemplate gGoldRingSpriteTemplate =
     .callback = TranslateAnimSpriteToTargetMonLocation,
 };
 
-const union AnimCmd gUnknown_08596654[] =
+static const union AnimCmd sAnim_BentSpoon_0[] =
 {
     ANIMCMD_FRAME(8, 60, .hFlip = TRUE),
     ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
@@ -189,7 +189,7 @@ const union AnimCmd gUnknown_08596654[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596694[] =
+static const union AnimCmd sAnim_BentSpoon_1[] =
 {
     ANIMCMD_FRAME(8, 60),
     ANIMCMD_FRAME(16, 5),
@@ -209,10 +209,10 @@ const union AnimCmd gUnknown_08596694[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_085966D4[] =
+static const union AnimCmd *const sAnims_BentSpoon[] =
 {
-    gUnknown_08596654,
-    gUnknown_08596694,
+    sAnim_BentSpoon_0,
+    sAnim_BentSpoon_1,
 };
 
 const struct SpriteTemplate gBentSpoonSpriteTemplate =
@@ -220,13 +220,13 @@ const struct SpriteTemplate gBentSpoonSpriteTemplate =
     .tileTag = ANIM_TAG_BENT_SPOON,
     .paletteTag = ANIM_TAG_BENT_SPOON,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
-    .anims = gUnknown_085966D4,
+    .anims = sAnims_BentSpoon,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimBentSpoon,
 };
 
-const union AnimCmd gUnknown_085966F4[] =
+static const union AnimCmd sAnim_QuestionMark[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(16, 6),
@@ -238,12 +238,12 @@ const union AnimCmd gUnknown_085966F4[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596714[] =
+static const union AnimCmd *const sAnims_QuestionMark[] =
 {
-    gUnknown_085966F4,
+    sAnim_QuestionMark,
 };
 
-const union AffineAnimCmd gUnknown_08596718[] =
+static const union AffineAnimCmd sAffineAnim_QuestionMark[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, 4, 4),
     AFFINEANIMCMD_FRAME(0, 0, -4, 8),
@@ -252,23 +252,23 @@ const union AffineAnimCmd gUnknown_08596718[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596740[] =
+static const union AffineAnimCmd *const sAffineAnims_QuestionMark[] =
 {
-    gUnknown_08596718,
+    sAffineAnim_QuestionMark,
 };
 
-const struct SpriteTemplate gAmnesiaQuestionMarkSpriteTemplate =
+const struct SpriteTemplate gQuestionMarkSpriteTemplate =
 {
     .tileTag = ANIM_TAG_AMNESIA,
     .paletteTag = ANIM_TAG_AMNESIA,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596714,
+    .anims = sAnims_QuestionMark,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimQuestionMark,
 };
 
-const union AffineAnimCmd gUnknown_0859675C[] =
+static const union AffineAnimCmd sAffineAnim_MeditateStretchAttacker[] =
 {
     AFFINEANIMCMD_FRAME(-8, 10, 0, 16),
     AFFINEANIMCMD_FRAME(18, -18, 0, 16),
@@ -276,14 +276,14 @@ const union AffineAnimCmd gUnknown_0859675C[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_0859677C[] =
+static const union AffineAnimCmd sAffineAnim_Teleport[] =
 {
     AFFINEANIMCMD_FRAME(64, -4, 0, 20),
     AFFINEANIMCMD_FRAME(0, 0, 0, -56),
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gUnknown_08596794 =
+const struct SpriteTemplate gImprisonOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HOLLOW_ORB,
     .paletteTag = ANIM_TAG_HOLLOW_ORB,
@@ -305,14 +305,14 @@ const struct SpriteTemplate gRedXSpriteTemplate =
     .callback = AnimRedX,
 };
 
-const union AffineAnimCmd gUnknown_085967C4[] =
+static const union AffineAnimCmd sAffineAnim_SkillSwapOrb_0[] =
 {
     AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 8),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gUnknown_085967DC[] =
+static const union AffineAnimCmd sAffineAnim_SkillSwapOrb_1[] =
 {
     AFFINEANIMCMD_FRAME(0xF0, 0xF0, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 6),
@@ -321,7 +321,7 @@ const union AffineAnimCmd gUnknown_085967DC[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd gUnknown_08596804[] =
+static const union AffineAnimCmd sAffineAnim_SkillSwapOrb_2[] =
 {
     AFFINEANIMCMD_FRAME(0xD0, 0xD0, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 4),
@@ -330,7 +330,7 @@ const union AffineAnimCmd gUnknown_08596804[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd gUnknown_0859682C[] =
+static const union AffineAnimCmd sAffineAnim_SkillSwapOrb_3[] =
 {
     AFFINEANIMCMD_FRAME(0xB0, 0xB0, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 2),
@@ -339,35 +339,35 @@ const union AffineAnimCmd gUnknown_0859682C[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd *const gUnknown_08596854[] =
+static const union AffineAnimCmd *const sAffineAnims_SkillSwapOrb[] =
 {
-    gUnknown_085967C4,
-    gUnknown_085967DC,
-    gUnknown_08596804,
-    gUnknown_0859682C,
+    sAffineAnim_SkillSwapOrb_0,
+    sAffineAnim_SkillSwapOrb_1,
+    sAffineAnim_SkillSwapOrb_2,
+    sAffineAnim_SkillSwapOrb_3,
 };
 
-const struct SpriteTemplate gUnknown_08596864 =
+const struct SpriteTemplate gSkillSwapOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUEGREEN_ORB,
     .paletteTag = ANIM_TAG_BLUEGREEN_ORB,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596854,
-    .callback = sub_810FDF0,
+    .affineAnims = sAffineAnims_SkillSwapOrb,
+    .callback = AnimSkillSwapOrb,
 };
 
-const union AffineAnimCmd gUnknown_0859687C[] =
+static const union AffineAnimCmd sAffineAnim_LusterPurgeCircle[] =
 {
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 0),
     AFFINEANIMCMD_FRAME(0x4, 0x4, 0, 120),
     AFFINEANIMCMD_END_ALT(1),
 };
 
-const union AffineAnimCmd *const gUnknown_08596894[] =
+static const union AffineAnimCmd *const sAffineAnims_LusterPurgeCircle[] =
 {
-    gUnknown_0859687C,
+    sAffineAnim_LusterPurgeCircle,
 };
 
 const struct SpriteTemplate gLusterPurgeCircleSpriteTemplate =
@@ -377,11 +377,11 @@ const struct SpriteTemplate gLusterPurgeCircleSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596894,
+    .affineAnims = sAffineAnims_LusterPurgeCircle,
     .callback = AnimSpriteOnMonPos,
 };
 
-const union AffineAnimCmd gUnknown_085968B0[] =
+static const union AffineAnimCmd sAffineAnim_PsychoBoostOrb_0[] =
 {
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 17),
@@ -396,16 +396,16 @@ const union AffineAnimCmd gUnknown_085968B0[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596908[] =
+static const union AffineAnimCmd sAffineAnim_PsychoBoostOrb_1[] =
 {
     AFFINEANIMCMD_FRAME(0xFFEC, 0x18, 0, 15),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596918[] =
+static const union AffineAnimCmd *const sAffineAnims_PsychoBoostOrb[] =
 {
-    gUnknown_085968B0,
-    gUnknown_08596908,
+    sAffineAnim_PsychoBoostOrb_0,
+    sAffineAnim_PsychoBoostOrb_1,
 };
 
 const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
@@ -415,7 +415,7 @@ const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596918,
+    .affineAnims = sAffineAnims_PsychoBoostOrb,
     .callback = AnimPsychoBoost,
 };
 
@@ -641,6 +641,7 @@ static void AnimBentSpoon(struct Sprite *sprite)
     sprite->callback = RunStoredCallbackWhenAnimEnds;
 }
 
+// Used by Amnesia
 static void AnimQuestionMark(struct Sprite *sprite)
 {
     s16 x = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) /  2;
@@ -662,7 +663,7 @@ static void AnimQuestionMark(struct Sprite *sprite)
 static void AnimQuestionMark_Step1(struct Sprite *sprite)
 {
     sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    sprite->affineAnims = gUnknown_08596740;
+    sprite->affineAnims = sAffineAnims_QuestionMark;
     sprite->data[0] = 0;
     InitSpriteAffineAnim(sprite);
     sprite->callback = AnimQuestionMark_Step2;
@@ -693,7 +694,7 @@ void AnimTask_MeditateStretchAttacker(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[0] = spriteId;
-    PrepareAffineAnimInTaskData(task, spriteId, gUnknown_0859675C);
+    PrepareAffineAnimInTaskData(task, spriteId, sAffineAnim_MeditateStretchAttacker);
     task->func = AnimTask_MeditateStretchAttacker_Step;
 }
 
@@ -712,7 +713,7 @@ void AnimTask_Teleport(u8 taskId)
     task->data[2] = 0;
     task->data[3] = GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER ? 4 : 8;
 
-    PrepareAffineAnimInTaskData(task, task->data[0], gUnknown_0859677C);
+    PrepareAffineAnimInTaskData(task, task->data[0], sAffineAnim_Teleport);
     task->func = AnimTask_Teleport_Step;
 }
 
@@ -777,7 +778,7 @@ static void AnimTask_ImprisonOrbs_Step(u8 taskId)
         if (++task->data[1] > 8)
         {
             task->data[1] = 0;
-            spriteId = CreateSprite(&gUnknown_08596794, task->data[13], task->data[14], 0);
+            spriteId = CreateSprite(&gImprisonOrbSpriteTemplate, task->data[13], task->data[14], 0);
             task->data[task->data[2] + 8] = spriteId;
             if (spriteId != MAX_SPRITES)
             {
@@ -916,7 +917,7 @@ static void AnimTask_SkillSwap_Step(u8 taskId)
         if (++task->data[1] > 6)
         {
             task->data[1] = 0;
-            spriteId = CreateSprite(&gUnknown_08596864, task->data[11], task->data[12], 0);
+            spriteId = CreateSprite(&gSkillSwapOrbSpriteTemplate, task->data[11], task->data[12], 0);
             if (spriteId != 64)
             {
                 gSprites[spriteId].data[0] = 16;
@@ -939,7 +940,7 @@ static void AnimTask_SkillSwap_Step(u8 taskId)
     }
 }
 
-static void sub_810FDF0(struct Sprite *sprite)
+static void AnimSkillSwapOrb(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {

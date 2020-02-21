@@ -515,7 +515,7 @@ const struct SpriteTemplate gRazorLeafParticleSpriteTemplate =
     .callback = AnimRazorLeafParticle,
 };
 
-const struct SpriteTemplate gTwisterLeafParticleSpriteTemplate =
+const struct SpriteTemplate gTwisterLeafSpriteTemplate =
 {
     .tileTag = ANIM_TAG_LEAF,
     .paletteTag = ANIM_TAG_LEAF,

@@ -18,29 +18,29 @@ static void AnimMissileArc(struct Sprite *);
 static void AnimMissileArc_Step(struct Sprite *);
 static void AnimTailGlowOrb(struct Sprite *);
 
-const union AffineAnimCmd gUnknown_08596938[] =
+static const union AffineAnimCmd sAffineAnim_MegahornHorn_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 30, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596948[] =
+static const union AffineAnimCmd sAffineAnim_MegahornHorn_1[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -99, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596958[] =
+static const union AffineAnimCmd sAffineAnim_MegahornHorn_2[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 94, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596968[] =
+static const union AffineAnimCmd *const sAffineAnims_MegahornHorn[] =
 {
-    gUnknown_08596938,
-    gUnknown_08596948,
-    gUnknown_08596958,
+    sAffineAnim_MegahornHorn_0,
+    sAffineAnim_MegahornHorn_1,
+    sAffineAnim_MegahornHorn_2,
 };
 
 const struct SpriteTemplate gMegahornHornSpriteTemplate =
@@ -50,33 +50,33 @@ const struct SpriteTemplate gMegahornHornSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596968,
+    .affineAnims = sAffineAnims_MegahornHorn,
     .callback = AnimMegahornHorn,
 };
 
-const union AffineAnimCmd gUnknown_0859698C[] =
+static const union AffineAnimCmd sAffineAnim_LeechLifeNeedle_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -33, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_0859699C[] =
+static const union AffineAnimCmd sAffineAnim_LeechLifeNeedle_1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 96, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_085969AC[] =
+static const union AffineAnimCmd sAffineAnim_LeechLifeNeedle_2[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -96, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085969BC[] =
+static const union AffineAnimCmd *const sAffineAnims_LeechLifeNeedle[] =
 {
-    gUnknown_0859698C,
-    gUnknown_0859699C,
-    gUnknown_085969AC,
+    sAffineAnim_LeechLifeNeedle_0,
+    sAffineAnim_LeechLifeNeedle_1,
+    sAffineAnim_LeechLifeNeedle_2,
 };
 
 const struct SpriteTemplate gLeechLifeNeedleSpriteTemplate =
@@ -86,7 +86,7 @@ const struct SpriteTemplate gLeechLifeNeedleSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_085969BC,
+    .affineAnims = sAffineAnims_LeechLifeNeedle,
     .callback = AnimLeechLifeNeedle,
 };
 
@@ -112,16 +112,16 @@ const struct SpriteTemplate gStringWrapSpriteTemplate =
     .callback = AnimStringWrap,
 };
 
-const union AffineAnimCmd gUnknown_08596A10[] =
+static const union AffineAnimCmd sAffineAnim_SpiderWeb[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x6, 0x6, 0, 1),
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd *const gUnknown_08596A28[] =
+static const union AffineAnimCmd *const sAffineAnims_SpiderWeb[] =
 {
-    gUnknown_08596A10,
+    sAffineAnim_SpiderWeb,
 };
 
 const struct SpriteTemplate gSpiderWebSpriteTemplate =
@@ -131,7 +131,7 @@ const struct SpriteTemplate gSpiderWebSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596A28,
+    .affineAnims = sAffineAnims_SpiderWeb,
     .callback = AnimSpiderWeb,
 };
 
@@ -168,7 +168,7 @@ const struct SpriteTemplate gIcicleSpearSpriteTemplate =
     .callback = AnimMissileArc,
 };
 
-const union AffineAnimCmd gUnknown_08596A8C[] =
+static const union AffineAnimCmd sAffineAnim_TailGlowOrb[] =
 {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 18),
@@ -179,9 +179,9 @@ const union AffineAnimCmd gUnknown_08596A8C[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596AC4[] =
+static const union AffineAnimCmd *const sAffineAnims_TailGlowOrb[] =
 {
-    gUnknown_08596A8C,
+    sAffineAnim_TailGlowOrb,
 };
 
 const struct SpriteTemplate gTailGlowOrbSpriteTemplate =
@@ -191,7 +191,7 @@ const struct SpriteTemplate gTailGlowOrbSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_08596AC4,
+    .affineAnims = sAffineAnims_TailGlowOrb,
     .callback = AnimTailGlowOrb,
 };
 

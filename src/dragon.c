@@ -17,7 +17,7 @@ static void sub_8113574(struct Task *);
 
 EWRAM_DATA static u16 gUnknown_0203A100[7] = {0};
 
-const union AnimCmd gUnknown_08596E60[] =
+static const union AnimCmd gUnknown_08596E60[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -27,7 +27,7 @@ const union AnimCmd gUnknown_08596E60[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08596E78[] =
+static const union AnimCmd *const gUnknown_08596E78[] =
 {
     gUnknown_08596E60,
 };
@@ -43,7 +43,7 @@ const struct SpriteTemplate gOutrageFlameSpriteTemplate =
     .callback = AnimOutrageFlame,
 };
 
-const union AnimCmd gUnknown_08596E94[] =
+static const union AnimCmd sAnim_DragonBreathFire_0[] =
 {
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_FRAME(32, 3),
@@ -51,7 +51,7 @@ const union AnimCmd gUnknown_08596E94[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_08596EA4[] =
+static const union AnimCmd sAnim_DragonBreathFire_1[] =
 {
     ANIMCMD_FRAME(16, 3, .vFlip = TRUE, .hFlip = TRUE),
     ANIMCMD_FRAME(32, 3, .vFlip = TRUE, .hFlip = TRUE),
@@ -59,30 +59,30 @@ const union AnimCmd gUnknown_08596EA4[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08596EB4[] =
+static const union AnimCmd *const sAnims_DragonBreathFire[] =
 {
-    gUnknown_08596E94,
-    gUnknown_08596EA4,
+    sAnim_DragonBreathFire_0,
+    sAnim_DragonBreathFire_1,
 };
 
-const union AffineAnimCmd gUnknown_08596EBC[] =
+static const union AffineAnimCmd sAffineAnim_DragonBreathFire_0[] =
 {
     AFFINEANIMCMD_FRAME(0x50, 0x50, 127, 0),
     AFFINEANIMCMD_FRAME(0xD, 0xD, 0, 100),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596ED4[] =
+static const union AffineAnimCmd sAffineAnim_DragonBreathFire_1[] =
 {
     AFFINEANIMCMD_FRAME(0x50, 0x50, 0, 0),
     AFFINEANIMCMD_FRAME(0xD, 0xD, 0, 100),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596EEC[] =
+static const union AffineAnimCmd *const sAffineAnims_DragonBreathFire[] =
 {
-    gUnknown_08596EBC,
-    gUnknown_08596ED4,
+    sAffineAnim_DragonBreathFire_0,
+    sAffineAnim_DragonBreathFire_1,
 };
 
 const struct SpriteTemplate gDragonBreathFireSpriteTemplate =
@@ -90,13 +90,13 @@ const struct SpriteTemplate gDragonBreathFireSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = gUnknown_08596EB4,
+    .anims = sAnims_DragonBreathFire,
     .images = NULL,
-    .affineAnims = gUnknown_08596EEC,
+    .affineAnims = sAffineAnims_DragonBreathFire,
     .callback = AnimDragonFireToTarget,
 };
 
-const union AnimCmd gUnknown_08596F0C[] =
+static const union AnimCmd sAnim_DragonRageFirePlume[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -106,9 +106,9 @@ const union AnimCmd gUnknown_08596F0C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596F24[] =
+static const union AnimCmd *const sAnims_DragonRageFirePlume[] =
 {
-    gUnknown_08596F0C,
+    sAnim_DragonRageFirePlume,
 };
 
 const struct SpriteTemplate gDragonRageFirePlumeSpriteTemplate =
@@ -116,13 +116,13 @@ const struct SpriteTemplate gDragonRageFirePlumeSpriteTemplate =
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596F24,
+    .anims = sAnims_DragonRageFirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDragonRageFirePlume,
 };
 
-const union AnimCmd gUnknown_08596F40[] =
+static const union AnimCmd sAnim_DragonRageFire[] =
 {
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_FRAME(32, 3),
@@ -130,28 +130,28 @@ const union AnimCmd gUnknown_08596F40[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08596F50[] =
+static const union AnimCmd *const sAnims_DragonRageFire[] =
 {
-    gUnknown_08596F40,
-    gUnknown_08596F40,
+    sAnim_DragonRageFire,
+    sAnim_DragonRageFire,
 };
 
-const union AffineAnimCmd gUnknown_08596F58[] =
+static const union AffineAnimCmd sAffineAnim_DragonRageFire_0[] =
 {
     AFFINEANIMCMD_FRAME(0x64, 0x64, 127, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596F68[] =
+static const union AffineAnimCmd sAffineAnim_DragonRageFire_1[] =
 {
     AFFINEANIMCMD_FRAME(0x64, 0x64, 0, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596F78[] =
+static const union AffineAnimCmd *const sAffineAnims_DragonRageFire[] =
 {
-    gUnknown_08596F58,
-    gUnknown_08596F68,
+    sAffineAnim_DragonRageFire_0,
+    sAffineAnim_DragonRageFire_1,
 };
 
 const struct SpriteTemplate gDragonRageFireSpitSpriteTemplate =
@@ -159,9 +159,9 @@ const struct SpriteTemplate gDragonRageFireSpitSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = gUnknown_08596F50,
+    .anims = sAnims_DragonRageFire,
     .images = NULL,
-    .affineAnims = gUnknown_08596F78,
+    .affineAnims = sAffineAnims_DragonRageFire,
     .callback = AnimDragonFireToTarget,
 };
 
