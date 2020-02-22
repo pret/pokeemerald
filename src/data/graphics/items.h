@@ -925,6 +925,183 @@ const u32 gItemIconPalette_IronPlate[] = INCBIN_U32("graphics/items/icon_palette
 const u32 gItemIcon_Honey[] = INCBIN_U32("graphics/items/icons/honey.4bpp.lz");
 const u32 gItemIconPalette_Honey[] = INCBIN_U32("graphics/items/icon_palettes/honey.gbapal.lz");
 
+const u32 gItemIcon_OldGateau[] = INCBIN_U32("graphics/items/icons/old_gateau.4bpp.lz");
+const u32 gItemIconPalette_OldGateau[] = INCBIN_U32("graphics/items/icon_palettes/old_gateau.gbapal.lz");
+
+const u32 gItemIcon_XSpecialDefense[] = INCBIN_U32("graphics/items/icons/x_special_defense.4bpp.lz");
+const u32 gItemIconPalette_XSpecialDefense[] = INCBIN_U32("graphics/items/icon_palettes/x_special_defense.gbapal.lz");
+
+const u32 gItemIcon_DawnStone[] = INCBIN_U32("graphics/items/icons/dawn_stone.4bpp.lz");
+const u32 gItemIconPalette_DawnStone[] = INCBIN_U32("graphics/items/icon_palettes/dawn_stone.gbapal.lz");
+
+const u32 gItemIcon_DuskStone[] = INCBIN_U32("graphics/items/icons/dusk_stone.4bpp.lz");
+const u32 gItemIconPalette_DuskStone[] = INCBIN_U32("graphics/items/icon_palettes/dusk_stone.gbapal.lz");
+
+const u32 gItemIcon_ShinyStone[] = INCBIN_U32("graphics/items/icons/shiny_stone.4bpp.lz");
+const u32 gItemIconPalette_ShinyStone[] = INCBIN_U32("graphics/items/icon_palettes/shiny_stone.gbapal.lz");
+
+const u32 gItemIcon_RedApricorn[] = INCBIN_U32("graphics/items/icons/red_apricorn.4bpp.lz");
+const u32 gItemIconPalette_RedApricorn[] = INCBIN_U32("graphics/items/icon_palettes/red_apricorn.gbapal.lz");
+
+const u32 gItemIcon_BlueApricorn[] = INCBIN_U32("graphics/items/icons/blue_apricorn.4bpp.lz");
+const u32 gItemIconPalette_BlueApricorn[] = INCBIN_U32("graphics/items/icon_palettes/blue_apricorn.gbapal.lz");
+
+const u32 gItemIcon_YellowApricorn[] = INCBIN_U32("graphics/items/icons/yellow_apricorn.4bpp.lz");
+const u32 gItemIconPalette_YellowApricorn[] = INCBIN_U32("graphics/items/icon_palettes/yellow_apricorn.gbapal.lz");
+
+const u32 gItemIcon_GreenApricorn[] = INCBIN_U32("graphics/items/icons/green_apricorn.4bpp.lz");
+const u32 gItemIconPalette_GreenApricorn[] = INCBIN_U32("graphics/items/icon_palettes/green_apricorn.gbapal.lz");
+
+const u32 gItemIcon_PinkApricorn[] = INCBIN_U32("graphics/items/icons/pink_apricorn.4bpp.lz");
+const u32 gItemIconPalette_PinkApricorn[] = INCBIN_U32("graphics/items/icon_palettes/pink_apricorn.gbapal.lz");
+
+const u32 gItemIcon_WhiteApricorn[] = INCBIN_U32("graphics/items/icons/white_apricorn.4bpp.lz");
+const u32 gItemIconPalette_WhiteApricorn[] = INCBIN_U32("graphics/items/icon_palettes/white_apricorn.gbapal.lz");
+
+const u32 gItemIcon_BlackApricorn[] = INCBIN_U32("graphics/items/icons/black_apricorn.4bpp.lz");
+const u32 gItemIconPalette_BlackApricorn[] = INCBIN_U32("graphics/items/icon_palettes/black_apricorn.gbapal.lz");
+
+const u32 gItemIcon_RareBone[] = INCBIN_U32("graphics/items/icons/rare_bone.4bpp.lz");
+const u32 gItemIconPalette_RareBone[] = INCBIN_U32("graphics/items/icon_palettes/rare_bone.gbapal.lz");
+
+const u32 gItemIcon_OccaBerry[] = INCBIN_U32("graphics/items/icons/occa_berry.4bpp.lz");
+const u32 gItemIconPalette_OccaBerry[] = INCBIN_U32("graphics/items/icon_palettes/occa_berry.gbapal.lz");
+
+const u32 gItemIcon_PasshoBerry[] = INCBIN_U32("graphics/items/icons/passho_berry.4bpp.lz");
+const u32 gItemIconPalette_PasshoBerry[] = INCBIN_U32("graphics/items/icon_palettes/passho_berry.gbapal.lz");
+
+const u32 gItemIcon_WacanBerry[] = INCBIN_U32("graphics/items/icons/wacan_berry.4bpp.lz");
+const u32 gItemIconPalette_WacanBerry[] = INCBIN_U32("graphics/items/icon_palettes/wacan_berry.gbapal.lz");
+
+const u32 gItemIcon_RindoBerry[] = INCBIN_U32("graphics/items/icons/rindo_berry.4bpp.lz");
+const u32 gItemIconPalette_RindoBerry[] = INCBIN_U32("graphics/items/icon_palettes/rindo_berry.gbapal.lz");
+
+const u32 gItemIcon_YacheBerry[] = INCBIN_U32("graphics/items/icons/yache_berry.4bpp.lz");
+const u32 gItemIconPalette_YacheBerry[] = INCBIN_U32("graphics/items/icon_palettes/yache_berry.gbapal.lz");
+
+const u32 gItemIcon_ChopleBerry[] = INCBIN_U32("graphics/items/icons/chople_berry.4bpp.lz");
+const u32 gItemIconPalette_ChopleBerry[] = INCBIN_U32("graphics/items/icon_palettes/chople_berry.gbapal.lz");
+
+const u32 gItemIcon_KebiaBerry[] = INCBIN_U32("graphics/items/icons/kebia_berry.4bpp.lz");
+const u32 gItemIconPalette_KebiaBerry[] = INCBIN_U32("graphics/items/icon_palettes/kebia_berry.gbapal.lz");
+
+const u32 gItemIcon_ShucaBerry[] = INCBIN_U32("graphics/items/icons/shuca_berry.4bpp.lz");
+const u32 gItemIconPalette_ShucaBerry[] = INCBIN_U32("graphics/items/icon_palettes/shuca_berry.gbapal.lz");
+
+const u32 gItemIcon_CobaBerry[] = INCBIN_U32("graphics/items/icons/coba_berry.4bpp.lz");
+const u32 gItemIconPalette_CobaBerry[] = INCBIN_U32("graphics/items/icon_palettes/coba_berry.gbapal.lz");
+
+const u32 gItemIcon_PayapaBerry[] = INCBIN_U32("graphics/items/icons/payapa_berry.4bpp.lz");
+const u32 gItemIconPalette_PayapaBerry[] = INCBIN_U32("graphics/items/icon_palettes/payapa_berry.gbapal.lz");
+
+const u32 gItemIcon_TangaBerry[] = INCBIN_U32("graphics/items/icons/tanga_berry.4bpp.lz");
+const u32 gItemIconPalette_TangaBerry[] = INCBIN_U32("graphics/items/icon_palettes/tanga_berry.gbapal.lz");
+
+const u32 gItemIcon_ChartiBerry[] = INCBIN_U32("graphics/items/icons/charti_berry.4bpp.lz");
+const u32 gItemIconPalette_ChartiBerry[] = INCBIN_U32("graphics/items/icon_palettes/charti_berry.gbapal.lz");
+
+const u32 gItemIcon_KasibBerry[] = INCBIN_U32("graphics/items/icons/kasib_berry.4bpp.lz");
+const u32 gItemIconPalette_KasibBerry[] = INCBIN_U32("graphics/items/icon_palettes/kasib_berry.gbapal.lz");
+
+const u32 gItemIcon_HabanBerry[] = INCBIN_U32("graphics/items/icons/haban_berry.4bpp.lz");
+const u32 gItemIconPalette_HabanBerry[] = INCBIN_U32("graphics/items/icon_palettes/haban_berry.gbapal.lz");
+
+const u32 gItemIcon_ColburBerry[] = INCBIN_U32("graphics/items/icons/colbur_berry.4bpp.lz");
+const u32 gItemIconPalette_ColburBerry[] = INCBIN_U32("graphics/items/icon_palettes/colbur_berry.gbapal.lz");
+
+const u32 gItemIcon_BabiriBerry[] = INCBIN_U32("graphics/items/icons/babiri_berry.4bpp.lz");
+const u32 gItemIconPalette_BabiriBerry[] = INCBIN_U32("graphics/items/icon_palettes/babiri_berry.gbapal.lz");
+
+const u32 gItemIcon_ChilanBerry[] = INCBIN_U32("graphics/items/icons/chilan_berry.4bpp.lz");
+const u32 gItemIconPalette_ChilanBerry[] = INCBIN_U32("graphics/items/icon_palettes/chilan_berry.gbapal.lz");
+
+const u32 gItemIcon_MicleBerry[] = INCBIN_U32("graphics/items/icons/micle_berry.4bpp.lz");
+const u32 gItemIconPalette_MicleBerry[] = INCBIN_U32("graphics/items/icon_palettes/micle_berry.gbapal.lz");
+
+const u32 gItemIcon_CustapBerry[] = INCBIN_U32("graphics/items/icons/custap_berry.4bpp.lz");
+const u32 gItemIconPalette_CustapBerry[] = INCBIN_U32("graphics/items/icon_palettes/custap_berry.gbapal.lz");
+
+const u32 gItemIcon_JabocaBerry[] = INCBIN_U32("graphics/items/icons/jaboca_berry.4bpp.lz");
+const u32 gItemIconPalette_JabocaBerry[] = INCBIN_U32("graphics/items/icon_palettes/jaboca_berry.gbapal.lz");
+
+const u32 gItemIcon_RowapBerry[] = INCBIN_U32("graphics/items/icons/rowap_berry.4bpp.lz");
+const u32 gItemIconPalette_RowapBerry[] = INCBIN_U32("graphics/items/icon_palettes/rowap_berry.gbapal.lz");
+
+const u32 gItemIcon_OvalStone[] = INCBIN_U32("graphics/items/icons/oval_stone.4bpp.lz");
+const u32 gItemIconPalette_OvalStone[] = INCBIN_U32("graphics/items/icon_palettes/oval_stone.gbapal.lz");
+
+const u32 gItemIcon_Protector[] = INCBIN_U32("graphics/items/icons/protector.4bpp.lz");
+const u32 gItemIconPalette_Protector[] = INCBIN_U32("graphics/items/icon_palettes/protector.gbapal.lz");
+
+const u32 gItemIcon_Electirizer[] = INCBIN_U32("graphics/items/icons/electirizer.4bpp.lz");
+const u32 gItemIconPalette_Electirizer[] = INCBIN_U32("graphics/items/icon_palettes/electirizer.gbapal.lz");
+
+const u32 gItemIcon_Magmarizer[] = INCBIN_U32("graphics/items/icons/magmarizer.4bpp.lz");
+const u32 gItemIconPalette_Magmarizer[] = INCBIN_U32("graphics/items/icon_palettes/magmarizer.gbapal.lz");
+
+const u32 gItemIcon_DubiousDisc[] = INCBIN_U32("graphics/items/icons/dubious_disc.4bpp.lz");
+const u32 gItemIconPalette_DubiousDisc[] = INCBIN_U32("graphics/items/icon_palettes/dubious_disc.gbapal.lz");
+
+const u32 gItemIcon_ReaperCloth[] = INCBIN_U32("graphics/items/icons/reaper_cloth.4bpp.lz");
+const u32 gItemIconPalette_ReaperCloth[] = INCBIN_U32("graphics/items/icon_palettes/reaper_cloth.gbapal.lz");
+
+const u32 gItemIcon_RazorClaw[] = INCBIN_U32("graphics/items/icons/razor_claw.4bpp.lz");
+const u32 gItemIconPalette_RazorClaw[] = INCBIN_U32("graphics/items/icon_palettes/razor_claw.gbapal.lz");
+
+const u32 gItemIcon_RazorFang[] = INCBIN_U32("graphics/items/icons/razor_fang.4bpp.lz");
+const u32 gItemIconPalette_RazorFang[] = INCBIN_U32("graphics/items/icon_palettes/razor_fang.gbapal.lz");
+
+const u32 gItemIcon_PowerBracer[] = INCBIN_U32("graphics/items/icons/power_bracer.4bpp.lz");
+const u32 gItemIconPalette_PowerBracer[] = INCBIN_U32("graphics/items/icon_palettes/power_bracer.gbapal.lz");
+
+const u32 gItemIcon_PowerBelt[] = INCBIN_U32("graphics/items/icons/power_belt.4bpp.lz");
+const u32 gItemIconPalette_PowerBelt[] = INCBIN_U32("graphics/items/icon_palettes/power_belt.gbapal.lz");
+
+const u32 gItemIcon_PowerLens[] = INCBIN_U32("graphics/items/icons/power_lens.4bpp.lz");
+const u32 gItemIconPalette_PowerLens[] = INCBIN_U32("graphics/items/icon_palettes/power_lens.gbapal.lz");
+
+const u32 gItemIcon_PowerBand[] = INCBIN_U32("graphics/items/icons/power_band.4bpp.lz");
+const u32 gItemIconPalette_PowerBand[] = INCBIN_U32("graphics/items/icon_palettes/power_band.gbapal.lz");
+
+const u32 gItemIcon_PowerAnklet[] = INCBIN_U32("graphics/items/icons/power_anklet.4bpp.lz");
+const u32 gItemIconPalette_PowerAnklet[] = INCBIN_U32("graphics/items/icon_palettes/power_anklet.gbapal.lz");
+
+const u32 gItemIcon_PowerWeight[] = INCBIN_U32("graphics/items/icons/power_weight.4bpp.lz");
+const u32 gItemIconPalette_PowerWeight[] = INCBIN_U32("graphics/items/icon_palettes/power_weight.gbapal.lz");
+
+const u32 gItemIcon_OddIncense[] = INCBIN_U32("graphics/items/icons/odd_incense.4bpp.lz");
+const u32 gItemIconPalette_OddIncense[] = INCBIN_U32("graphics/items/icon_palettes/odd_incense.gbapal.lz");
+
+const u32 gItemIcon_RockIncense[] = INCBIN_U32("graphics/items/icons/rock_incense.4bpp.lz");
+const u32 gItemIconPalette_RockIncense[] = INCBIN_U32("graphics/items/icon_palettes/rock_incense.gbapal.lz");
+
+const u32 gItemIcon_FullIncense[] = INCBIN_U32("graphics/items/icons/full_incense.4bpp.lz");
+const u32 gItemIconPalette_FullIncense[] = INCBIN_U32("graphics/items/icon_palettes/full_incense.gbapal.lz");
+
+const u32 gItemIcon_WaveIncense[] = INCBIN_U32("graphics/items/icons/wave_incense.4bpp.lz");
+const u32 gItemIconPalette_WaveIncense[] = INCBIN_U32("graphics/items/icon_palettes/wave_incense.gbapal.lz");
+
+const u32 gItemIcon_RoseIncense[] = INCBIN_U32("graphics/items/icons/rose_incense.4bpp.lz");
+const u32 gItemIconPalette_RoseIncense[] = INCBIN_U32("graphics/items/icon_palettes/rose_incense.gbapal.lz");
+
+const u32 gItemIcon_LuckIncense[] = INCBIN_U32("graphics/items/icons/luck_incense.4bpp.lz");
+const u32 gItemIconPalette_LuckIncense[] = INCBIN_U32("graphics/items/icon_palettes/luck_incense.gbapal.lz");
+
+const u32 gItemIcon_PureIncense[] = INCBIN_U32("graphics/items/icons/pure_incense.4bpp.lz");
+const u32 gItemIconPalette_PureIncense[] = INCBIN_U32("graphics/items/icon_palettes/pure_incense.gbapal.lz");
+
+const u32 gItemIcon_OddKeystone[] = INCBIN_U32("graphics/items/icons/odd_keystone.4bpp.lz");
+const u32 gItemIconPalette_OddKeystone[] = INCBIN_U32("graphics/items/icon_palettes/odd_keystone.gbapal.lz");
+
+const u32 gItemIcon_Gracidea[] = INCBIN_U32("graphics/items/icons/gracidea.4bpp.lz");
+const u32 gItemIconPalette_Gracidea[] = INCBIN_U32("graphics/items/icon_palettes/gracidea.gbapal.lz");
+
+const u32 gItemIcon_ArmorFossil[] = INCBIN_U32("graphics/items/icons/armor_fossil.4bpp.lz");
+const u32 gItemIconPalette_ArmorFossil[] = INCBIN_U32("graphics/items/icon_palettes/armor_fossil.gbapal.lz");
+
+const u32 gItemIcon_SkullFossil[] = INCBIN_U32("graphics/items/icons/skull_fossil.4bpp.lz");
+const u32 gItemIconPalette_SkullFossil[] = INCBIN_U32("graphics/items/icon_palettes/skull_fossil.gbapal.lz");
+
 // Gen 5 Items
 
 const u32 gItemIcon_Eviolite[] = INCBIN_U32("graphics/items/icons/eviolite.4bpp.lz");
@@ -1002,6 +1179,59 @@ const u32 gItemIconPalette_NormalGem[] = INCBIN_U32("graphics/items/icon_palette
 const u32 gItemIcon_FairyGem[] = INCBIN_U32("graphics/items/icons/fairy_gem.4bpp.lz");
 const u32 gItemIconPalette_FairyGem[] = INCBIN_U32("graphics/items/icon_palettes/fairy_gem.gbapal.lz");
 
+const u32 gItemIcon_SweetHeart[] = INCBIN_U32("graphics/items/icons/sweet_heart.4bpp.lz");
+const u32 gItemIconPalette_SweetHeart[] = INCBIN_U32("graphics/items/icon_palettes/sweet_heart.gbapal.lz");
+
+const u32 gItemIcon_PrismScale[] = INCBIN_U32("graphics/items/icons/prism_scale.4bpp.lz");
+const u32 gItemIconPalette_PrismScale[] = INCBIN_U32("graphics/items/icon_palettes/prism_scale.gbapal.lz");
+
+const u32 gItemIcon_RockyHelmet[] = INCBIN_U32("graphics/items/icons/rocky_helmet.4bpp.lz");
+const u32 gItemIconPalette_RockyHelmet[] = INCBIN_U32("graphics/items/icon_palettes/rocky_helmet.gbapal.lz");
+
+const u32 gItemIcon_AirBalloon[] = INCBIN_U32("graphics/items/icons/air_balloon.4bpp.lz");
+const u32 gItemIconPalette_AirBalloon[] = INCBIN_U32("graphics/items/icon_palettes/air_balloon.gbapal.lz");
+
+const u32 gItemIcon_RedCard[] = INCBIN_U32("graphics/items/icons/red_card.4bpp.lz");
+const u32 gItemIconPalette_RedCard[] = INCBIN_U32("graphics/items/icon_palettes/red_card.gbapal.lz");
+
+const u32 gItemIcon_RingTarget[] = INCBIN_U32("graphics/items/icons/ring_target.4bpp.lz");
+const u32 gItemIconPalette_RingTarget[] = INCBIN_U32("graphics/items/icon_palettes/ring_target.gbapal.lz");
+
+const u32 gItemIcon_EjectButton[] = INCBIN_U32("graphics/items/icons/eject_button.4bpp.lz");
+const u32 gItemIconPalette_EjectButton[] = INCBIN_U32("graphics/items/icon_palettes/eject_button.gbapal.lz");
+
+const u32 gItemIcon_AbsorbBulb[] = INCBIN_U32("graphics/items/icons/absorb_bulb.4bpp.lz");
+const u32 gItemIconPalette_AbsorbBulb[] = INCBIN_U32("graphics/items/icon_palettes/absorb_bulb.gbapal.lz");
+
+const u32 gItemIcon_CellBattery[] = INCBIN_U32("graphics/items/icons/cell_battery.4bpp.lz");
+const u32 gItemIconPalette_CellBattery[] = INCBIN_U32("graphics/items/icon_palettes/cell_battery.gbapal.lz");
+
+const u32 gItemIcon_CoverFossil[] = INCBIN_U32("graphics/items/icons/cover_fossil.4bpp.lz");
+const u32 gItemIconPalette_CoverFossil[] = INCBIN_U32("graphics/items/icon_palettes/cover_fossil.gbapal.lz");
+
+const u32 gItemIcon_PlumeFossil[] = INCBIN_U32("graphics/items/icons/plume_fossil.4bpp.lz");
+const u32 gItemIconPalette_PlumeFossil[] = INCBIN_U32("graphics/items/icon_palettes/plume_fossil.gbapal.lz");
+
+const u32 gItemIcon_HealthWing[] = INCBIN_U32("graphics/items/icons/health_wing.4bpp.lz");
+const u32 gItemIconPalette_HealthWing[] = INCBIN_U32("graphics/items/icon_palettes/health_wing.gbapal.lz");
+
+const u32 gItemIcon_MuscleWing[] = INCBIN_U32("graphics/items/icons/muscle_wing.4bpp.lz");
+const u32 gItemIconPalette_MuscleWing[] = INCBIN_U32("graphics/items/icon_palettes/muscle_wing.gbapal.lz");
+
+const u32 gItemIcon_ResistWing[] = INCBIN_U32("graphics/items/icons/resist_wing.4bpp.lz");
+const u32 gItemIconPalette_ResistWing[] = INCBIN_U32("graphics/items/icon_palettes/resist_wing.gbapal.lz");
+
+const u32 gItemIcon_GeniusWing[] = INCBIN_U32("graphics/items/icons/genius_wing.4bpp.lz");
+const u32 gItemIconPalette_GeniusWing[] = INCBIN_U32("graphics/items/icon_palettes/genius_wing.gbapal.lz");
+
+const u32 gItemIcon_CleverWing[] = INCBIN_U32("graphics/items/icons/clever_wing.4bpp.lz");
+const u32 gItemIconPalette_CleverWing[] = INCBIN_U32("graphics/items/icon_palettes/clever_wing.gbapal.lz");
+
+const u32 gItemIcon_SwiftWing[] = INCBIN_U32("graphics/items/icons/swift_wing.4bpp.lz");
+const u32 gItemIconPalette_SwiftWing[] = INCBIN_U32("graphics/items/icon_palettes/swift_wing.gbapal.lz");
+
+const u32 gItemIcon_PrettyWing[] = INCBIN_U32("graphics/items/icons/pretty_wing.4bpp.lz");
+const u32 gItemIconPalette_PrettyWing[] = INCBIN_U32("graphics/items/icon_palettes/pretty_wing.gbapal.lz");
 const u32 gItemIcon_ShinyCharm[] = INCBIN_U32("graphics/items/icons/shiny_charm.4bpp.lz");
 const u32 gItemIconPalette_ShinyCharm[] = INCBIN_U32("graphics/items/icon_palettes/shiny_charm.gbapal.lz");
 
@@ -1160,6 +1390,39 @@ const u32 gItemIconPalette_Beedrillite[] = INCBIN_U32("graphics/items/icon_palet
 const u32 gItemIcon_MegaBracelet[] = INCBIN_U32("graphics/items/icons/mega_bracelet.4bpp.lz");
 const u32 gItemIconPalette_MegaBracelet[] = INCBIN_U32("graphics/items/icon_palettes/mega_bracelet.gbapal.lz");
 
+const u32 gItemIcon_AbilityCapsule[] = INCBIN_U32("graphics/items/icons/ability_capsule.4bpp.lz");
+const u32 gItemIconPalette_AbilityCapsule[] = INCBIN_U32("graphics/items/icon_palettes/ability_capsule.gbapal.lz");
+
+const u32 gItemIcon_RoseliBerry[] = INCBIN_U32("graphics/items/icons/roseli_berry.4bpp.lz");
+const u32 gItemIconPalette_RoseliBerry[] = INCBIN_U32("graphics/items/icon_palettes/roseli_berry.gbapal.lz");
+
+const u32 gItemIcon_KeeBerry[] = INCBIN_U32("graphics/items/icons/kee_berry.4bpp.lz");
+const u32 gItemIconPalette_KeeBerry[] = INCBIN_U32("graphics/items/icon_palettes/kee_berry.gbapal.lz");
+
+const u32 gItemIcon_MarangaBerry[] = INCBIN_U32("graphics/items/icons/maranga_berry.4bpp.lz");
+const u32 gItemIconPalette_MarangaBerry[] = INCBIN_U32("graphics/items/icon_palettes/maranga_berry.gbapal.lz");
+
+const u32 gItemIcon_WhippedDream[] = INCBIN_U32("graphics/items/icons/whipped_dream.4bpp.lz");
+const u32 gItemIconPalette_WhippedDream[] = INCBIN_U32("graphics/items/icon_palettes/whipped_dream.gbapal.lz");
+
+const u32 gItemIcon_Sachet[] = INCBIN_U32("graphics/items/icons/sachet.4bpp.lz");
+const u32 gItemIconPalette_Sachet[] = INCBIN_U32("graphics/items/icon_palettes/sachet.gbapal.lz");
+
+const u32 gItemIcon_LuminousMoss[] = INCBIN_U32("graphics/items/icons/luminous_moss.4bpp.lz");
+const u32 gItemIconPalette_LuminousMoss[] = INCBIN_U32("graphics/items/icon_palettes/luminous_moss.gbapal.lz");
+
+const u32 gItemIcon_Snowball[] = INCBIN_U32("graphics/items/icons/snowball.4bpp.lz");
+const u32 gItemIconPalette_Snowball[] = INCBIN_U32("graphics/items/icon_palettes/snowball.gbapal.lz");
+
+const u32 gItemIcon_WeaknessPolicy[] = INCBIN_U32("graphics/items/icons/weakness_policy.4bpp.lz");
+const u32 gItemIconPalette_WeaknessPolicy[] = INCBIN_U32("graphics/items/icon_palettes/weakness_policy.gbapal.lz");
+
+const u32 gItemIcon_JawFossil[] = INCBIN_U32("graphics/items/icons/jaw_fossil.4bpp.lz");
+const u32 gItemIconPalette_JawFossil[] = INCBIN_U32("graphics/items/icon_palettes/jaw_fossil.gbapal.lz");
+
+const u32 gItemIcon_SailFossil[] = INCBIN_U32("graphics/items/icons/sail_fossil.4bpp.lz");
+const u32 gItemIconPalette_SailFossil[] = INCBIN_U32("graphics/items/icon_palettes/sail_fossil.gbapal.lz");
+
 // Gen 7 Items
 
 const u32 gItemIcon_ProtectivePads[] = INCBIN_U32("graphics/items/icons/protective_pads.4bpp.lz");
@@ -1183,55 +1446,11 @@ const u32 gItemIconPalette_PsychicSeed[] = INCBIN_U32("graphics/items/icon_palet
 const u32 gItemIcon_AdrenalineOrb[] = INCBIN_U32("graphics/items/icons/adrenaline_orb.4bpp.lz");
 const u32 gItemIconPalette_AdrenalineOrb[] = INCBIN_U32("graphics/items/icon_palettes/adrenaline_orb.gbapal.lz");
 
-// Unordered
-
-const u32 gItemIcon_SweetHeart[] = INCBIN_U32("graphics/items/icons/sweet_heart.4bpp.lz");
-const u32 gItemIconPalette_SweetHeart[] = INCBIN_U32("graphics/items/icon_palettes/sweet_heart.gbapal.lz");
-
 const u32 gItemIcon_BigMalasada[] = INCBIN_U32("graphics/items/icons/big_malasada.4bpp.lz");
 const u32 gItemIconPalette_BigMalasada[] = INCBIN_U32("graphics/items/icon_palettes/big_malasada.gbapal.lz");
 
-const u32 gItemIcon_OldGateau[] = INCBIN_U32("graphics/items/icons/old_gateau.4bpp.lz");
-const u32 gItemIconPalette_OldGateau[] = INCBIN_U32("graphics/items/icon_palettes/old_gateau.gbapal.lz");
-
-const u32 gItemIcon_XSpecialDefense[] = INCBIN_U32("graphics/items/icons/x_special_defense.4bpp.lz");
-const u32 gItemIconPalette_XSpecialDefense[] = INCBIN_U32("graphics/items/icon_palettes/x_special_defense.gbapal.lz");
-
-const u32 gItemIcon_AbilityCapsule[] = INCBIN_U32("graphics/items/icons/ability_capsule.4bpp.lz");
-const u32 gItemIconPalette_AbilityCapsule[] = INCBIN_U32("graphics/items/icon_palettes/ability_capsule.gbapal.lz");
-
-const u32 gItemIcon_DawnStone[] = INCBIN_U32("graphics/items/icons/dawn_stone.4bpp.lz");
-const u32 gItemIconPalette_DawnStone[] = INCBIN_U32("graphics/items/icon_palettes/dawn_stone.gbapal.lz");
-
-const u32 gItemIcon_DuskStone[] = INCBIN_U32("graphics/items/icons/dusk_stone.4bpp.lz");
-const u32 gItemIconPalette_DuskStone[] = INCBIN_U32("graphics/items/icon_palettes/dusk_stone.gbapal.lz");
-
-const u32 gItemIcon_ShinyStone[] = INCBIN_U32("graphics/items/icons/shiny_stone.4bpp.lz");
-const u32 gItemIconPalette_ShinyStone[] = INCBIN_U32("graphics/items/icon_palettes/shiny_stone.gbapal.lz");
-
 const u32 gItemIcon_IceStone[] = INCBIN_U32("graphics/items/icons/ice_stone.4bpp.lz");
 const u32 gItemIconPalette_IceStone[] = INCBIN_U32("graphics/items/icon_palettes/ice_stone.gbapal.lz");
-
-const u32 gItemIcon_RedApricorn[] = INCBIN_U32("graphics/items/icons/red_apricorn.4bpp.lz");
-const u32 gItemIconPalette_RedApricorn[] = INCBIN_U32("graphics/items/icon_palettes/red_apricorn.gbapal.lz");
-
-const u32 gItemIcon_BlueApricorn[] = INCBIN_U32("graphics/items/icons/blue_apricorn.4bpp.lz");
-const u32 gItemIconPalette_BlueApricorn[] = INCBIN_U32("graphics/items/icon_palettes/blue_apricorn.gbapal.lz");
-
-const u32 gItemIcon_YellowApricorn[] = INCBIN_U32("graphics/items/icons/yellow_apricorn.4bpp.lz");
-const u32 gItemIconPalette_YellowApricorn[] = INCBIN_U32("graphics/items/icon_palettes/yellow_apricorn.gbapal.lz");
-
-const u32 gItemIcon_GreenApricorn[] = INCBIN_U32("graphics/items/icons/green_apricorn.4bpp.lz");
-const u32 gItemIconPalette_GreenApricorn[] = INCBIN_U32("graphics/items/icon_palettes/green_apricorn.gbapal.lz");
-
-const u32 gItemIcon_PinkApricorn[] = INCBIN_U32("graphics/items/icons/pink_apricorn.4bpp.lz");
-const u32 gItemIconPalette_PinkApricorn[] = INCBIN_U32("graphics/items/icon_palettes/pink_apricorn.gbapal.lz");
-
-const u32 gItemIcon_WhiteApricorn[] = INCBIN_U32("graphics/items/icons/white_apricorn.4bpp.lz");
-const u32 gItemIconPalette_WhiteApricorn[] = INCBIN_U32("graphics/items/icon_palettes/white_apricorn.gbapal.lz");
-
-const u32 gItemIcon_BlackApricorn[] = INCBIN_U32("graphics/items/icons/black_apricorn.4bpp.lz");
-const u32 gItemIconPalette_BlackApricorn[] = INCBIN_U32("graphics/items/icon_palettes/black_apricorn.gbapal.lz");
 
 const u32 gItemIcon_RedNectar[] = INCBIN_U32("graphics/items/icons/red_nectar.4bpp.lz");
 const u32 gItemIconPalette_RedNectar[] = INCBIN_U32("graphics/items/icon_palettes/red_nectar.gbapal.lz");
@@ -1244,189 +1463,6 @@ const u32 gItemIconPalette_PinkNectar[] = INCBIN_U32("graphics/items/icon_palett
 
 const u32 gItemIcon_PurpleNectar[] = INCBIN_U32("graphics/items/icons/purple_nectar.4bpp.lz");
 const u32 gItemIconPalette_PurpleNectar[] = INCBIN_U32("graphics/items/icon_palettes/purple_nectar.gbapal.lz");
-
-const u32 gItemIcon_RareBone[] = INCBIN_U32("graphics/items/icons/rare_bone.4bpp.lz");
-const u32 gItemIconPalette_RareBone[] = INCBIN_U32("graphics/items/icon_palettes/rare_bone.gbapal.lz");
-
-const u32 gItemIcon_OccaBerry[] = INCBIN_U32("graphics/items/icons/occa_berry.4bpp.lz");
-const u32 gItemIconPalette_OccaBerry[] = INCBIN_U32("graphics/items/icon_palettes/occa_berry.gbapal.lz");
-
-const u32 gItemIcon_PasshoBerry[] = INCBIN_U32("graphics/items/icons/passho_berry.4bpp.lz");
-const u32 gItemIconPalette_PasshoBerry[] = INCBIN_U32("graphics/items/icon_palettes/passho_berry.gbapal.lz");
-
-const u32 gItemIcon_WacanBerry[] = INCBIN_U32("graphics/items/icons/wacan_berry.4bpp.lz");
-const u32 gItemIconPalette_WacanBerry[] = INCBIN_U32("graphics/items/icon_palettes/wacan_berry.gbapal.lz");
-
-const u32 gItemIcon_RindoBerry[] = INCBIN_U32("graphics/items/icons/rindo_berry.4bpp.lz");
-const u32 gItemIconPalette_RindoBerry[] = INCBIN_U32("graphics/items/icon_palettes/rindo_berry.gbapal.lz");
-
-const u32 gItemIcon_YacheBerry[] = INCBIN_U32("graphics/items/icons/yache_berry.4bpp.lz");
-const u32 gItemIconPalette_YacheBerry[] = INCBIN_U32("graphics/items/icon_palettes/yache_berry.gbapal.lz");
-
-const u32 gItemIcon_ChopleBerry[] = INCBIN_U32("graphics/items/icons/chople_berry.4bpp.lz");
-const u32 gItemIconPalette_ChopleBerry[] = INCBIN_U32("graphics/items/icon_palettes/chople_berry.gbapal.lz");
-
-const u32 gItemIcon_KebiaBerry[] = INCBIN_U32("graphics/items/icons/kebia_berry.4bpp.lz");
-const u32 gItemIconPalette_KebiaBerry[] = INCBIN_U32("graphics/items/icon_palettes/kebia_berry.gbapal.lz");
-
-const u32 gItemIcon_ShucaBerry[] = INCBIN_U32("graphics/items/icons/shuca_berry.4bpp.lz");
-const u32 gItemIconPalette_ShucaBerry[] = INCBIN_U32("graphics/items/icon_palettes/shuca_berry.gbapal.lz");
-
-const u32 gItemIcon_CobaBerry[] = INCBIN_U32("graphics/items/icons/coba_berry.4bpp.lz");
-const u32 gItemIconPalette_CobaBerry[] = INCBIN_U32("graphics/items/icon_palettes/coba_berry.gbapal.lz");
-
-const u32 gItemIcon_PayapaBerry[] = INCBIN_U32("graphics/items/icons/payapa_berry.4bpp.lz");
-const u32 gItemIconPalette_PayapaBerry[] = INCBIN_U32("graphics/items/icon_palettes/payapa_berry.gbapal.lz");
-
-const u32 gItemIcon_TangaBerry[] = INCBIN_U32("graphics/items/icons/tanga_berry.4bpp.lz");
-const u32 gItemIconPalette_TangaBerry[] = INCBIN_U32("graphics/items/icon_palettes/tanga_berry.gbapal.lz");
-
-const u32 gItemIcon_ChartiBerry[] = INCBIN_U32("graphics/items/icons/charti_berry.4bpp.lz");
-const u32 gItemIconPalette_ChartiBerry[] = INCBIN_U32("graphics/items/icon_palettes/charti_berry.gbapal.lz");
-
-const u32 gItemIcon_KasibBerry[] = INCBIN_U32("graphics/items/icons/kasib_berry.4bpp.lz");
-const u32 gItemIconPalette_KasibBerry[] = INCBIN_U32("graphics/items/icon_palettes/kasib_berry.gbapal.lz");
-
-const u32 gItemIcon_HabanBerry[] = INCBIN_U32("graphics/items/icons/haban_berry.4bpp.lz");
-const u32 gItemIconPalette_HabanBerry[] = INCBIN_U32("graphics/items/icon_palettes/haban_berry.gbapal.lz");
-
-const u32 gItemIcon_ColburBerry[] = INCBIN_U32("graphics/items/icons/colbur_berry.4bpp.lz");
-const u32 gItemIconPalette_ColburBerry[] = INCBIN_U32("graphics/items/icon_palettes/colbur_berry.gbapal.lz");
-
-const u32 gItemIcon_BabiriBerry[] = INCBIN_U32("graphics/items/icons/babiri_berry.4bpp.lz");
-const u32 gItemIconPalette_BabiriBerry[] = INCBIN_U32("graphics/items/icon_palettes/babiri_berry.gbapal.lz");
-
-const u32 gItemIcon_ChilanBerry[] = INCBIN_U32("graphics/items/icons/chilan_berry.4bpp.lz");
-const u32 gItemIconPalette_ChilanBerry[] = INCBIN_U32("graphics/items/icon_palettes/chilan_berry.gbapal.lz");
-
-const u32 gItemIcon_MicleBerry[] = INCBIN_U32("graphics/items/icons/micle_berry.4bpp.lz");
-const u32 gItemIconPalette_MicleBerry[] = INCBIN_U32("graphics/items/icon_palettes/micle_berry.gbapal.lz");
-
-const u32 gItemIcon_CustapBerry[] = INCBIN_U32("graphics/items/icons/custap_berry.4bpp.lz");
-const u32 gItemIconPalette_CustapBerry[] = INCBIN_U32("graphics/items/icon_palettes/custap_berry.gbapal.lz");
-
-const u32 gItemIcon_JabocaBerry[] = INCBIN_U32("graphics/items/icons/jaboca_berry.4bpp.lz");
-const u32 gItemIconPalette_JabocaBerry[] = INCBIN_U32("graphics/items/icon_palettes/jaboca_berry.gbapal.lz");
-
-const u32 gItemIcon_RowapBerry[] = INCBIN_U32("graphics/items/icons/rowap_berry.4bpp.lz");
-const u32 gItemIconPalette_RowapBerry[] = INCBIN_U32("graphics/items/icon_palettes/rowap_berry.gbapal.lz");
-
-const u32 gItemIcon_RoseliBerry[] = INCBIN_U32("graphics/items/icons/roseli_berry.4bpp.lz");
-const u32 gItemIconPalette_RoseliBerry[] = INCBIN_U32("graphics/items/icon_palettes/roseli_berry.gbapal.lz");
-
-const u32 gItemIcon_KeeBerry[] = INCBIN_U32("graphics/items/icons/kee_berry.4bpp.lz");
-const u32 gItemIconPalette_KeeBerry[] = INCBIN_U32("graphics/items/icon_palettes/kee_berry.gbapal.lz");
-
-const u32 gItemIcon_MarangaBerry[] = INCBIN_U32("graphics/items/icons/maranga_berry.4bpp.lz");
-const u32 gItemIconPalette_MarangaBerry[] = INCBIN_U32("graphics/items/icon_palettes/maranga_berry.gbapal.lz");
-
-const u32 gItemIcon_OvalStone[] = INCBIN_U32("graphics/items/icons/oval_stone.4bpp.lz");
-const u32 gItemIconPalette_OvalStone[] = INCBIN_U32("graphics/items/icon_palettes/oval_stone.gbapal.lz");
-
-const u32 gItemIcon_Protector[] = INCBIN_U32("graphics/items/icons/protector.4bpp.lz");
-const u32 gItemIconPalette_Protector[] = INCBIN_U32("graphics/items/icon_palettes/protector.gbapal.lz");
-
-const u32 gItemIcon_Electirizer[] = INCBIN_U32("graphics/items/icons/electirizer.4bpp.lz");
-const u32 gItemIconPalette_Electirizer[] = INCBIN_U32("graphics/items/icon_palettes/electirizer.gbapal.lz");
-
-const u32 gItemIcon_Magmarizer[] = INCBIN_U32("graphics/items/icons/magmarizer.4bpp.lz");
-const u32 gItemIconPalette_Magmarizer[] = INCBIN_U32("graphics/items/icon_palettes/magmarizer.gbapal.lz");
-
-const u32 gItemIcon_DubiousDisc[] = INCBIN_U32("graphics/items/icons/dubious_disc.4bpp.lz");
-const u32 gItemIconPalette_DubiousDisc[] = INCBIN_U32("graphics/items/icon_palettes/dubious_disc.gbapal.lz");
-
-const u32 gItemIcon_ReaperCloth[] = INCBIN_U32("graphics/items/icons/reaper_cloth.4bpp.lz");
-const u32 gItemIconPalette_ReaperCloth[] = INCBIN_U32("graphics/items/icon_palettes/reaper_cloth.gbapal.lz");
-
-const u32 gItemIcon_RazorClaw[] = INCBIN_U32("graphics/items/icons/razor_claw.4bpp.lz");
-const u32 gItemIconPalette_RazorClaw[] = INCBIN_U32("graphics/items/icon_palettes/razor_claw.gbapal.lz");
-
-const u32 gItemIcon_RazorFang[] = INCBIN_U32("graphics/items/icons/razor_fang.4bpp.lz");
-const u32 gItemIconPalette_RazorFang[] = INCBIN_U32("graphics/items/icon_palettes/razor_fang.gbapal.lz");
-
-const u32 gItemIcon_PrismScale[] = INCBIN_U32("graphics/items/icons/prism_scale.4bpp.lz");
-const u32 gItemIconPalette_PrismScale[] = INCBIN_U32("graphics/items/icon_palettes/prism_scale.gbapal.lz");
-
-const u32 gItemIcon_WhippedDream[] = INCBIN_U32("graphics/items/icons/whipped_dream.4bpp.lz");
-const u32 gItemIconPalette_WhippedDream[] = INCBIN_U32("graphics/items/icon_palettes/whipped_dream.gbapal.lz");
-
-const u32 gItemIcon_Sachet[] = INCBIN_U32("graphics/items/icons/sachet.4bpp.lz");
-const u32 gItemIconPalette_Sachet[] = INCBIN_U32("graphics/items/icon_palettes/sachet.gbapal.lz");
-
-const u32 gItemIcon_PowerBracer[] = INCBIN_U32("graphics/items/icons/power_bracer.4bpp.lz");
-const u32 gItemIconPalette_PowerBracer[] = INCBIN_U32("graphics/items/icon_palettes/power_bracer.gbapal.lz");
-
-const u32 gItemIcon_PowerBelt[] = INCBIN_U32("graphics/items/icons/power_belt.4bpp.lz");
-const u32 gItemIconPalette_PowerBelt[] = INCBIN_U32("graphics/items/icon_palettes/power_belt.gbapal.lz");
-
-const u32 gItemIcon_PowerLens[] = INCBIN_U32("graphics/items/icons/power_lens.4bpp.lz");
-const u32 gItemIconPalette_PowerLens[] = INCBIN_U32("graphics/items/icon_palettes/power_lens.gbapal.lz");
-
-const u32 gItemIcon_PowerBand[] = INCBIN_U32("graphics/items/icons/power_band.4bpp.lz");
-const u32 gItemIconPalette_PowerBand[] = INCBIN_U32("graphics/items/icon_palettes/power_band.gbapal.lz");
-
-const u32 gItemIcon_PowerAnklet[] = INCBIN_U32("graphics/items/icons/power_anklet.4bpp.lz");
-const u32 gItemIconPalette_PowerAnklet[] = INCBIN_U32("graphics/items/icon_palettes/power_anklet.gbapal.lz");
-
-const u32 gItemIcon_PowerWeight[] = INCBIN_U32("graphics/items/icons/power_weight.4bpp.lz");
-const u32 gItemIconPalette_PowerWeight[] = INCBIN_U32("graphics/items/icon_palettes/power_weight.gbapal.lz");
-
-const u32 gItemIcon_RockyHelmet[] = INCBIN_U32("graphics/items/icons/rocky_helmet.4bpp.lz");
-const u32 gItemIconPalette_RockyHelmet[] = INCBIN_U32("graphics/items/icon_palettes/rocky_helmet.gbapal.lz");
-
-const u32 gItemIcon_AirBalloon[] = INCBIN_U32("graphics/items/icons/air_balloon.4bpp.lz");
-const u32 gItemIconPalette_AirBalloon[] = INCBIN_U32("graphics/items/icon_palettes/air_balloon.gbapal.lz");
-
-const u32 gItemIcon_RedCard[] = INCBIN_U32("graphics/items/icons/red_card.4bpp.lz");
-const u32 gItemIconPalette_RedCard[] = INCBIN_U32("graphics/items/icon_palettes/red_card.gbapal.lz");
-
-const u32 gItemIcon_RingTarget[] = INCBIN_U32("graphics/items/icons/ring_target.4bpp.lz");
-const u32 gItemIconPalette_RingTarget[] = INCBIN_U32("graphics/items/icon_palettes/ring_target.gbapal.lz");
-
-const u32 gItemIcon_EjectButton[] = INCBIN_U32("graphics/items/icons/eject_button.4bpp.lz");
-const u32 gItemIconPalette_EjectButton[] = INCBIN_U32("graphics/items/icon_palettes/eject_button.gbapal.lz");
-
-const u32 gItemIcon_AbsorbBulb[] = INCBIN_U32("graphics/items/icons/absorb_bulb.4bpp.lz");
-const u32 gItemIconPalette_AbsorbBulb[] = INCBIN_U32("graphics/items/icon_palettes/absorb_bulb.gbapal.lz");
-
-const u32 gItemIcon_CellBattery[] = INCBIN_U32("graphics/items/icons/cell_battery.4bpp.lz");
-const u32 gItemIconPalette_CellBattery[] = INCBIN_U32("graphics/items/icon_palettes/cell_battery.gbapal.lz");
-
-const u32 gItemIcon_LuminousMoss[] = INCBIN_U32("graphics/items/icons/luminous_moss.4bpp.lz");
-const u32 gItemIconPalette_LuminousMoss[] = INCBIN_U32("graphics/items/icon_palettes/luminous_moss.gbapal.lz");
-
-const u32 gItemIcon_Snowball[] = INCBIN_U32("graphics/items/icons/snowball.4bpp.lz");
-const u32 gItemIconPalette_Snowball[] = INCBIN_U32("graphics/items/icon_palettes/snowball.gbapal.lz");
-
-const u32 gItemIcon_WeaknessPolicy[] = INCBIN_U32("graphics/items/icons/weakness_policy.4bpp.lz");
-const u32 gItemIconPalette_WeaknessPolicy[] = INCBIN_U32("graphics/items/icon_palettes/weakness_policy.gbapal.lz");
-
-const u32 gItemIcon_OddIncense[] = INCBIN_U32("graphics/items/icons/odd_incense.4bpp.lz");
-const u32 gItemIconPalette_OddIncense[] = INCBIN_U32("graphics/items/icon_palettes/odd_incense.gbapal.lz");
-
-const u32 gItemIcon_RockIncense[] = INCBIN_U32("graphics/items/icons/rock_incense.4bpp.lz");
-const u32 gItemIconPalette_RockIncense[] = INCBIN_U32("graphics/items/icon_palettes/rock_incense.gbapal.lz");
-
-const u32 gItemIcon_FullIncense[] = INCBIN_U32("graphics/items/icons/full_incense.4bpp.lz");
-const u32 gItemIconPalette_FullIncense[] = INCBIN_U32("graphics/items/icon_palettes/full_incense.gbapal.lz");
-
-const u32 gItemIcon_WaveIncense[] = INCBIN_U32("graphics/items/icons/wave_incense.4bpp.lz");
-const u32 gItemIconPalette_WaveIncense[] = INCBIN_U32("graphics/items/icon_palettes/wave_incense.gbapal.lz");
-
-const u32 gItemIcon_RoseIncense[] = INCBIN_U32("graphics/items/icons/rose_incense.4bpp.lz");
-const u32 gItemIconPalette_RoseIncense[] = INCBIN_U32("graphics/items/icon_palettes/rose_incense.gbapal.lz");
-
-const u32 gItemIcon_LuckIncense[] = INCBIN_U32("graphics/items/icons/luck_incense.4bpp.lz");
-const u32 gItemIconPalette_LuckIncense[] = INCBIN_U32("graphics/items/icon_palettes/luck_incense.gbapal.lz");
-
-const u32 gItemIcon_PureIncense[] = INCBIN_U32("graphics/items/icons/pure_incense.4bpp.lz");
-const u32 gItemIconPalette_PureIncense[] = INCBIN_U32("graphics/items/icon_palettes/pure_incense.gbapal.lz");
-
-const u32 gItemIcon_OddKeystone[] = INCBIN_U32("graphics/items/icons/odd_keystone.4bpp.lz");
-const u32 gItemIconPalette_OddKeystone[] = INCBIN_U32("graphics/items/icon_palettes/odd_keystone.gbapal.lz");
-
-const u32 gItemIcon_Gracidea[] = INCBIN_U32("graphics/items/icons/gracidea.4bpp.lz");
-const u32 gItemIconPalette_Gracidea[] = INCBIN_U32("graphics/items/icon_palettes/gracidea.gbapal.lz");
 
 const u32 gItemIcon_BugMemory[] = INCBIN_U32("graphics/items/icons/bug_memory.4bpp.lz");
 const u32 gItemIconPalette_BugMemory[] = INCBIN_U32("graphics/items/icon_palettes/bug_memory.gbapal.lz");
@@ -1478,42 +1514,3 @@ const u32 gItemIconPalette_SteelMemory[] = INCBIN_U32("graphics/items/icon_palet
 
 const u32 gItemIcon_WaterMemory[] = INCBIN_U32("graphics/items/icons/water_memory.4bpp.lz");
 const u32 gItemIconPalette_WaterMemory[] = INCBIN_U32("graphics/items/icon_palettes/water_memory.gbapal.lz");
-
-const u32 gItemIcon_ArmorFossil[] = INCBIN_U32("graphics/items/icons/armor_fossil.4bpp.lz");
-const u32 gItemIconPalette_ArmorFossil[] = INCBIN_U32("graphics/items/icon_palettes/armor_fossil.gbapal.lz");
-
-const u32 gItemIcon_SkullFossil[] = INCBIN_U32("graphics/items/icons/skull_fossil.4bpp.lz");
-const u32 gItemIconPalette_SkullFossil[] = INCBIN_U32("graphics/items/icon_palettes/skull_fossil.gbapal.lz");
-
-const u32 gItemIcon_CoverFossil[] = INCBIN_U32("graphics/items/icons/cover_fossil.4bpp.lz");
-const u32 gItemIconPalette_CoverFossil[] = INCBIN_U32("graphics/items/icon_palettes/cover_fossil.gbapal.lz");
-
-const u32 gItemIcon_PlumeFossil[] = INCBIN_U32("graphics/items/icons/plume_fossil.4bpp.lz");
-const u32 gItemIconPalette_PlumeFossil[] = INCBIN_U32("graphics/items/icon_palettes/plume_fossil.gbapal.lz");
-
-const u32 gItemIcon_JawFossil[] = INCBIN_U32("graphics/items/icons/jaw_fossil.4bpp.lz");
-const u32 gItemIconPalette_JawFossil[] = INCBIN_U32("graphics/items/icon_palettes/jaw_fossil.gbapal.lz");
-
-const u32 gItemIcon_SailFossil[] = INCBIN_U32("graphics/items/icons/sail_fossil.4bpp.lz");
-const u32 gItemIconPalette_SailFossil[] = INCBIN_U32("graphics/items/icon_palettes/sail_fossil.gbapal.lz");
-
-const u32 gItemIcon_HealthWing[] = INCBIN_U32("graphics/items/icons/health_wing.4bpp.lz");
-const u32 gItemIconPalette_HealthWing[] = INCBIN_U32("graphics/items/icon_palettes/health_wing.gbapal.lz");
-
-const u32 gItemIcon_MuscleWing[] = INCBIN_U32("graphics/items/icons/muscle_wing.4bpp.lz");
-const u32 gItemIconPalette_MuscleWing[] = INCBIN_U32("graphics/items/icon_palettes/muscle_wing.gbapal.lz");
-
-const u32 gItemIcon_ResistWing[] = INCBIN_U32("graphics/items/icons/resist_wing.4bpp.lz");
-const u32 gItemIconPalette_ResistWing[] = INCBIN_U32("graphics/items/icon_palettes/resist_wing.gbapal.lz");
-
-const u32 gItemIcon_GeniusWing[] = INCBIN_U32("graphics/items/icons/genius_wing.4bpp.lz");
-const u32 gItemIconPalette_GeniusWing[] = INCBIN_U32("graphics/items/icon_palettes/genius_wing.gbapal.lz");
-
-const u32 gItemIcon_CleverWing[] = INCBIN_U32("graphics/items/icons/clever_wing.4bpp.lz");
-const u32 gItemIconPalette_CleverWing[] = INCBIN_U32("graphics/items/icon_palettes/clever_wing.gbapal.lz");
-
-const u32 gItemIcon_SwiftWing[] = INCBIN_U32("graphics/items/icons/swift_wing.4bpp.lz");
-const u32 gItemIconPalette_SwiftWing[] = INCBIN_U32("graphics/items/icon_palettes/swift_wing.gbapal.lz");
-
-const u32 gItemIcon_PrettyWing[] = INCBIN_U32("graphics/items/icons/pretty_wing.4bpp.lz");
-const u32 gItemIconPalette_PrettyWing[] = INCBIN_U32("graphics/items/icon_palettes/pretty_wing.gbapal.lz");
