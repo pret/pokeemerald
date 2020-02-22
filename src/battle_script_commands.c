@@ -2828,7 +2828,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_KNOCK_OFF:
-                if (GetBattlerAbility(gEffectBattler) == ABILITY_STICKY_HOLD)
+                if (!CanBattlerGetOrLoseItem(gEffectBattler, gBattleMons[gEffectBattler].item))
+                {
+                    gBattlescriptCurrInstr++;
+                }
+                else if (GetBattlerAbility(gEffectBattler) == ABILITY_STICKY_HOLD)
                 {
                     if (gBattleMons[gEffectBattler].item == 0)
                     {
@@ -2840,9 +2844,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                         gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
                         RecordAbilityBattle(gEffectBattler, ABILITY_STICKY_HOLD);
                     }
-                    break;
                 }
-                if (gBattleMons[gEffectBattler].item)
+                else if (gBattleMons[gEffectBattler].item)
                 {
                     side = GetBattlerSide(gEffectBattler);
 

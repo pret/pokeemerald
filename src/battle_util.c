@@ -6383,7 +6383,9 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
         return FALSE;
     else if (species == SPECIES_GROUDON && itemId == ITEM_RED_ORB)
         return FALSE;
-    else if (ItemId_GetHoldEffect(itemId) == HOLD_EFFECT_MEGA_STONE && GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE)
+    // Mega stone cannot be lost if pokemon can mega evolve with it or is already mega evolved.
+    else if (ItemId_GetHoldEffect(itemId) == HOLD_EFFECT_MEGA_STONE
+             && ((GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE) || gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]]))
         return FALSE;
     else if (species == SPECIES_GIRATINA && itemId == ITEM_GRISEOUS_ORB)
         return FALSE;
