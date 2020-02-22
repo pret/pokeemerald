@@ -76,7 +76,7 @@ CheckIfSoundproofCancelsMove:
 
 CheckIfVoltAbsorbCancelsElectric: @ 82DBFBD
 	get_curr_move_type
-	if_equal TYPE_ELECTRIC, AI_CheckBadMove_CheckEffect
+	if_equal TYPE_ELECTRIC, Score_Minus12
 	goto AI_CheckBadMove_CheckEffect
 
 CheckIfWaterAbsorbCancelsWater: @ 82DBFCA
@@ -91,6 +91,7 @@ CheckIfFlashFireCancelsFire: @ 82DBFD7
 
 CheckIfWonderGuardCancelsMove: @ 82DBFE4
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CheckBadMove_CheckEffect
+	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_CheckBadMove_CheckEffect
 	goto Score_Minus10
 
 CheckIfLevitateCancelsGroundMove: @ 82DBFEF
