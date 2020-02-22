@@ -2109,6 +2109,8 @@ BattleScript_EffectAbsorb::
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	goto BattleScript_AbsorbUpdateHp
 BattleScript_AbsorbLiquidOoze::
+	copybyte gBattlerAbility, gBattlerTarget
+	call BattleScript_AbilityPopUp
 	manipulatedamage DMG_CHANGE_SIGN
 	setbyte cMULTISTRING_CHOOSER, 0x1
 BattleScript_AbsorbUpdateHp::
@@ -5251,6 +5253,8 @@ BattleScript_LeechSeedTurnDrain::
 	setbyte cMULTISTRING_CHOOSER, 0x3
 	goto BattleScript_LeechSeedTurnPrintAndUpdateHp
 BattleScript_LeechSeedTurnPrintLiquidOoze::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
 	setbyte cMULTISTRING_CHOOSER, 0x4
 BattleScript_LeechSeedTurnPrintAndUpdateHp::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
@@ -6513,6 +6517,7 @@ BattleScript_MoveHPDrain_PPLoss::
 BattleScript_MoveHPDrain::
 	attackstring
 	pause 0x20
+	call BattleScript_AbilityPopUp
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
@@ -6526,6 +6531,7 @@ BattleScript_MoveStatDrain_PPLoss::
 BattleScript_MoveStatDrain::
 	attackstring
 	pause 0x20
+	call BattleScript_AbilityPopUp
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
