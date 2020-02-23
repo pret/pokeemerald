@@ -629,7 +629,7 @@ static void AnimSparkElectricityFlashing(struct Sprite *sprite)
     u8 battler;
 
     sprite->data[0] = gBattleAnimArgs[3];
-    if (gBattleAnimArgs[ARG_RET_ID] & 0x8000)
+    if (gBattleAnimArgs[7] & 0x8000)
         battler = gBattleAnimTarget;
     else
         battler = gBattleAnimAttacker;
@@ -640,7 +640,7 @@ static void AnimSparkElectricityFlashing(struct Sprite *sprite)
     sprite->pos1.x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2) + gBattleAnimArgs[0];
     sprite->pos1.y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[1];
 
-    sprite->data[4] = gBattleAnimArgs[ARG_RET_ID] & 0x7FFF;
+    sprite->data[4] = gBattleAnimArgs[7] & 0x7FFF;
     sprite->data[5] = gBattleAnimArgs[2];
     sprite->data[6] = gBattleAnimArgs[5];
     sprite->data[7] = gBattleAnimArgs[4];

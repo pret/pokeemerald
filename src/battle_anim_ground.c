@@ -758,7 +758,7 @@ static void sub_81156D0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (gBattleAnimArgs[ARG_RET_ID] == task->data[3])
+    if (gBattleAnimArgs[7] == task->data[3])
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;

@@ -157,6 +157,8 @@ void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
 u8 GetBattlerSide(u8 battler);
 u8 GetBattlerPosition(u8 battler);
 u8 GetBattlerAtPosition(u8 position);
+void sub_80A64EC(struct Sprite *sprite);
+void sub_80A718C(struct Sprite *sprite);
 
 enum
 {
@@ -191,11 +193,7 @@ void SetSpritePrimaryCoordsFromSecondaryCoords(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 
-// battle_anim_80A64EC.c
-void sub_80A64EC(struct Sprite *sprite);
-void sub_80A718C(struct Sprite *sprite);
-
-// battle_anim_status_effects.s
+// battle_anim_status_effects.c
 #define STAT_ANIM_PLUS1  15
 #define STAT_ANIM_PLUS2  39
 #define STAT_ANIM_MINUS1 22
@@ -206,7 +204,7 @@ void sub_80A718C(struct Sprite *sprite);
 #define STAT_ANIM_MULTIPLE_MINUS2 58
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
-// ground.c
+// battle_anim_ground.c
 void AnimTask_HorizontalShake(u8 taskId);
 
 // battle_anim_special.c
@@ -215,7 +213,7 @@ u8 ItemIdToBallId(u16 itemId);
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);
 
-// battle_anim_utility_funcs.s
+// battle_anim_utility_funcs.c
 void sub_8116EB4(u8);
 void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette);
 
@@ -224,13 +222,13 @@ void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
 void AnimMoveTwisterParticle(struct Sprite* sprite);
 void AnimParticleBurst(struct Sprite *);
 
-// water.c
+// battle_anim_water.c
 void AnimWaterPulseRing(struct Sprite *sprite);
 
-// flying.c
+// battle_anim_flying.c
 void DestroyAnimSpriteAfterTimer(struct Sprite *sprite);
 
-// smokescreen.c
+// battle_anim_smokescreen.c
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 
 u32 UnpackSelectedBattleAnimPalettes(s16);

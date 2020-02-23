@@ -1392,7 +1392,7 @@ static void SetPsychicBackground_Step(u8 taskId)
         gTasks[taskId].data[5] = 0;
     }
 
-    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
         DestroyTask(taskId);
 }
 
@@ -1423,7 +1423,7 @@ static void FadeScreenToWhite_Step(u8 taskId)
         gTasks[taskId].data[5] = 0;
     }
 
-    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
         DestroyTask(taskId);
 }
 
@@ -5092,7 +5092,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 if (x < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[ARG_RET_ID] = 0xFFFF;
+                    gBattleAnimArgs[7] = 0xFFFF;
                 }
             }
             else
@@ -5100,7 +5100,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 if (x > GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[ARG_RET_ID] = 0xFFFF;
+                    gBattleAnimArgs[7] = 0xFFFF;
                 }
             }
         }
@@ -5150,7 +5150,7 @@ static void sub_815FE80(struct Sprite *sprite)
     switch (sprite->data[7])
     {
     case 0:
-        if (gBattleAnimArgs[ARG_RET_ID] == -1)
+        if (gBattleAnimArgs[7] == -1)
         {
             PlaySE12WithPanning(SE_W233, BattleAnimAdjustPanning(63));
             sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 16;

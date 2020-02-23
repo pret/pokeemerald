@@ -1228,7 +1228,7 @@ Move_HIDDEN_POWER:
 	createsprite gHiddenPowerOrbSpriteTemplate, ANIM_ATTACKER, 2, 26, 168
 	createsprite gHiddenPowerOrbSpriteTemplate, ANIM_ATTACKER, 2, 26, 210
 	delay 52
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	playsewithpan SE_W115, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
 	createsprite gHiddenPowerOrbScatterSpriteTemplate, ANIM_TARGET, 2, 0
@@ -2075,7 +2075,7 @@ Move_LOCK_ON:
 	createsprite gLockOnMoveTargetSpriteTemplate, ANIM_ATTACKER, 40, 3
 	createsprite gLockOnMoveTargetSpriteTemplate, ANIM_ATTACKER, 40, 4  @ Also transitions to red target
 	delay 120
-	setarg 7, -1  @ Signal target to flash/disappear
+	setarg 7, 0xFFFF  @ Signal target to flash/disappear
 	waitforvisualfinish
 	end
 
@@ -2518,7 +2518,7 @@ HornDrillContinue:
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	end
 
@@ -2628,7 +2628,7 @@ Move_FISSURE:
 	delay 40
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	end
 
@@ -3146,7 +3146,7 @@ MachPunchContinue:
 	blendoff
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	end
 MachPunchAgainstPlayer:
@@ -3418,7 +3418,7 @@ ExtremeSpeedContinue:
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -4814,7 +4814,7 @@ Move_THUNDER:
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	end
 
@@ -5403,7 +5403,7 @@ Move_AURORA_BEAM:
 	call AuroraBeamCreateRings
 	call AuroraBeamCreateRings
 	call AuroraBeamCreateRings
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	createsoundtask SoundTask_LoopSEAdjustPanning, SE_W062B, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 6, 0, 10
 	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 40, 1
 	call AuroraBeamCreateRings
@@ -5537,7 +5537,7 @@ BlizzardContinue:
 	delay 20
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -6133,7 +6133,7 @@ MegahornContinue:
 	blendoff
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	end
 MegahornInContest:
@@ -7604,7 +7604,7 @@ Move_MIMIC:
 	delay 15
 	createsprite gMimicOrbSpriteTemplate, ANIM_TARGET, 2, -12, 24
 	delay 10
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitforvisualfinish
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendColorCycle, 2, 2, 0, 2, 0, 11, RGB_WHITE
@@ -7626,7 +7626,7 @@ Move_CONSTRICT:
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 6, 1
 	delay 20
 	playsewithpan SE_W020, SOUND_PAN_TARGET
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitforvisualfinish
 	end
 
@@ -7692,7 +7692,7 @@ Move_SOFT_BOILED:
 	delay 8
 	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 31, 16, 0, 1
 	delay 60
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	call HealingEffect2
@@ -9070,7 +9070,7 @@ Move_COSMIC_POWER:
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	waitforvisualfinish
 	end
@@ -9200,7 +9200,7 @@ SilverWindContinue:
 	restorebg
 	waitbgfadeout
 	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, ANIM_TARGET, 0, 4, 0, RGB_BLACK
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	end
 SilverWindOnPlayer:
@@ -9628,7 +9628,7 @@ Move_SKY_UPPERCUT:
 	blendoff
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	end
 
@@ -9729,7 +9729,7 @@ Move_MAGICAL_LEAF:
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 4, 10, 4, ANIM_TARGET, 2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
 	delay 20
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -10164,7 +10164,7 @@ SetPsychicBackground:
 UnsetPsychicBackground:
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	return
 
@@ -10185,7 +10185,7 @@ SetSkyBgContest:
 UnsetSkyBg:
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	waitbgfadein
 	return
 
@@ -10366,7 +10366,7 @@ Status_BindWrap:
 	delay 3
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
 	delay 20
-	setarg 7, -1
+	setarg 7, 0xFFFF
 	playsewithpan SE_W020, SOUND_PAN_TARGET
 	waitforvisualfinish
 	end

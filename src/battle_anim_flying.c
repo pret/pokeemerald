@@ -574,7 +574,7 @@ static void AnimFallingFeather(struct Sprite *sprite)
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
 
-    if (gBattleAnimArgs[ARG_RET_ID] & 0x100)
+    if (gBattleAnimArgs[7] & 0x100)
         battler = gBattleAnimAttacker;
     else
         battler = gBattleAnimTarget;
