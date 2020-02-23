@@ -607,7 +607,7 @@ static void AnimAuroraBeamRings(struct Sprite *sprite)
 
 static void AnimAuroraBeamRings_Step(struct Sprite *sprite)
 {
-    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = FALSE;
@@ -731,8 +731,8 @@ static void AnimToTargetInSinWave(struct Sprite *sprite)
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0xD200 / sprite->data[0];
     sprite->data[7] = gBattleAnimArgs[3];
-    retArg = gBattleAnimArgs[ARG_RET_ID];
-    if (gBattleAnimArgs[ARG_RET_ID] > 127)
+    retArg = gBattleAnimArgs[7];
+    if (gBattleAnimArgs[7] > 127)
     {
         sprite->data[6] = (retArg - 127) * 256;
         sprite->data[7] = -sprite->data[7];
@@ -764,13 +764,13 @@ static void AnimToTargetInSinWave_Step(struct Sprite *sprite)
 void AnimTask_StartSinAnimTimer(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
-    gBattleAnimArgs[ARG_RET_ID] = 0;
+    gBattleAnimArgs[7] = 0;
     gTasks[taskId].func = AnimTask_RunSinAnimTimer;
 }
 
 static void AnimTask_RunSinAnimTimer(u8 taskId)
 {
-    gBattleAnimArgs[ARG_RET_ID] = (gBattleAnimArgs[ARG_RET_ID] + 3) & 0xFF;
+    gBattleAnimArgs[7] = (gBattleAnimArgs[7] + 3) & 0xFF;
     if (--gTasks[taskId].data[0] == 0)
         DestroyAnimVisualTask(taskId);
 }

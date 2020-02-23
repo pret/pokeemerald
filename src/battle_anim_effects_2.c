@@ -2761,7 +2761,7 @@ static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *sprite)
 
 static void AnimSoftBoiledEgg_Step4(struct Sprite *sprite)
 {
-    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
         sprite->invisible = TRUE;
         if (sprite->data[7] == 0)
@@ -3444,7 +3444,7 @@ static void AnimOrbitFast_Step(struct Sprite *sprite)
         break;
     }
 
-    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
         DestroyAnimSprite(sprite);
 }
 

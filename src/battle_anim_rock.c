@@ -866,7 +866,7 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
     gTasks[taskId].data[1] &= 0xFF;
     gBattle_BG3_Y = gTasks[taskId].data[2] + Cos(4, gTasks[taskId].data[1]);
 
-    if (gBattleAnimArgs[ARG_RET_ID] == 0xFFF)
+    if (gBattleAnimArgs[7] == 0xFFF)
     {
         gBattle_BG3_Y = 0;
         sub_80A6DAC(TRUE);

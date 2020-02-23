@@ -428,7 +428,7 @@ static void unc_080B08A0(struct Sprite *sprite)
 
 static void AnimSlideHandOrFootToTarget(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[ARG_RET_ID] == 1 && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    if (gBattleAnimArgs[7] == 1 && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
@@ -1033,7 +1033,7 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId)
     task->data[9] &= 0xFF;
     task->data[10] &= 0xFF;
 
-    if (gBattleAnimArgs[ARG_RET_ID] == -1)
+    if (gBattleAnimArgs[7] == -1)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;

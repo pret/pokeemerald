@@ -729,7 +729,7 @@ static void AnimTask_UpdateSlidingBg(u8 taskId)
     gTasks[taskId].data[10] &= 0xFF;
     gTasks[taskId].data[11] &= 0xFF;
 
-    if (gBattleAnimArgs[ARG_RET_ID] == gTasks[taskId].data[3])
+    if (gBattleAnimArgs[7] == gTasks[taskId].data[3])
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
@@ -1058,7 +1058,7 @@ void AnimTask_SetAttackerInvisibleWaitForSignal(u8 taskId)
 
 static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
 {
-    if (gBattleAnimArgs[ARG_RET_ID] == 0x1000)
+    if (gBattleAnimArgs[7] == 0x1000)
     {
         gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = (u8)gTasks[taskId].data[0] & 1;
         DestroyTask(taskId);
