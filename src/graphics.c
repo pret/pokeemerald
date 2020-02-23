@@ -4,10 +4,10 @@ const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.
 const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox.gbapal.lz");
 const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox_map.bin.lz");
 
-const u32 gMonStillFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/front.4bpp.lz");
-const u32 gMonBackPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/back.4bpp.lz");
-const u32 gMonPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/normal.gbapal.lz");
-const u32 gMonShinyPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/front.4bpp.lz");
+const u32 gMonBackPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/back.4bpp.lz");
+const u32 gMonPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/normal.gbapal.lz");
+const u32 gMonShinyPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/shiny.gbapal.lz");
 
 const u32 gUnusedGfx_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.4bpp.lz"); // japanese table and bunch of stuff
 const u32 gUnusedTimemap_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.bin.lz");
