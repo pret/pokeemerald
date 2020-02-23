@@ -505,7 +505,7 @@ void sub_816B31C(void)
 
 void Mailbox_DoRedrawMailboxMenuAfterReturn(void)
 {
-    sub_81973A4();
+    LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
     InitItemStorageMenu(CreateTask(ItemStorage_HandleReturnToProcessInput, 0), 1);
     FadeInFromBlack();
@@ -739,7 +739,7 @@ static void pal_fill_for_maplights_or_black(void)
 {
     u8 taskId;
 
-    sub_81973A4();
+    LoadMessageBoxAndBorderGfx();
     taskId = CreateTask(Mailbox_HandleReturnToProcessInput, 0);
     if (sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
         Mailbox_DrawMailboxMenu(taskId);
@@ -847,7 +847,7 @@ static void Mailbox_UpdateMailListAfterDeposit(void)
        && playerPCItemPageInfo.itemsAbove != 0)
         playerPCItemPageInfo.itemsAbove--;
     ItemStorage_SetItemAndMailCount(taskId);
-    sub_81973A4();
+    LoadMessageBoxAndBorderGfx();
     if (sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
         Mailbox_DrawMailboxMenu(taskId);
     else

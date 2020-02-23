@@ -21,7 +21,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 16,
       "y": 10,
       "elevation": 3,
@@ -34,7 +34,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 12,
       "y": 13,
       "elevation": 3,
@@ -47,7 +47,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_2",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
       "x": 14,
       "y": 17,
       "elevation": 3,
@@ -60,7 +60,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MOM",
+      "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 5,
       "y": 8,
       "elevation": 3,
@@ -73,7 +73,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TRUCK",
+      "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 2,
       "y": 10,
       "elevation": 4,
@@ -86,7 +86,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TRUCK",
+      "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 11,
       "y": 10,
       "elevation": 4,
@@ -99,7 +99,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 13,
       "y": 10,
       "elevation": 3,
@@ -112,7 +112,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_RIVAL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PROF_BIRCH",
+      "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
       "x": 14,
       "y": 10,
       "elevation": 3,

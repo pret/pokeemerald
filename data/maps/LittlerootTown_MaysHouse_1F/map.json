@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MOM",
+      "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 8,
       "y": 6,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VIGOROTH_FACING_AWAY",
+      "graphics_id": "OBJ_EVENT_GFX_VIGOROTH_FACING_AWAY",
       "x": 6,
       "y": 5,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VIGOROTH_CARRYING_BOX",
+      "graphics_id": "OBJ_EVENT_GFX_VIGOROTH_CARRYING_BOX",
       "x": 9,
       "y": 3,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 8,
       "y": 7,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_MOM"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_NORMAN",
+      "graphics_id": "OBJ_EVENT_GFX_NORMAN",
       "x": 5,
       "y": 6,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_HIDE_PLAYERS_HOUSE_DAD"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_NINJA_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 9,
       "y": 5,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_SIBLING"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_RIVAL_MAY_NORMAL",
+      "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
       "x": 2,
       "y": 8,
       "elevation": 3,

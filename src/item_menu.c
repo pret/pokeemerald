@@ -432,8 +432,8 @@ struct ListBuffer2 {
 };
 
 struct TempWallyStruct {
-    struct ItemSlot bagPocket_Items[30];
-    struct ItemSlot bagPocket_PokeBalls[16];
+    struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     u16 cursorPosition[POCKETS_COUNT];
     u16 scrollPosition[POCKETS_COUNT];
     u8 filler[0x2];
@@ -445,7 +445,7 @@ EWRAM_DATA struct BagStruct gBagPositionStruct = {0};
 static EWRAM_DATA struct ListBuffer1 *sListBuffer1 = 0;
 static EWRAM_DATA struct ListBuffer2 *sListBuffer2 = 0;
 EWRAM_DATA u16 gSpecialVar_ItemId = 0;
-static EWRAM_DATA struct TempWallyStruct *gUnknown_0203CE80 = 0;
+static EWRAM_DATA struct TempWallyStruct *sTempWallyBag = 0;
 
 extern u8 *const gPocketNamesStringsTable[];
 extern u8* gReturnToXStringsTable[];
@@ -1893,7 +1893,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
         {
             ScriptContext2_Enable();
-            FreezeEventObjects();
+            FreezeObjectEvents();
             sub_808B864();
             sub_808BCF4();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
@@ -2130,17 +2130,17 @@ void PrepareBagForWallyTutorial(void)
 {
     u32 i;
 
-    gUnknown_0203CE80 = AllocZeroed(sizeof(struct TempWallyStruct));
-    memcpy(gUnknown_0203CE80->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
-    memcpy(gUnknown_0203CE80->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
-    gUnknown_0203CE80->pocket = gBagPositionStruct.pocket;
+    sTempWallyBag = AllocZeroed(sizeof(struct TempWallyStruct));
+    memcpy(sTempWallyBag->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
+    memcpy(sTempWallyBag->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
+    sTempWallyBag->pocket = gBagPositionStruct.pocket;
     for (i = 0; i <= 4; i++)
     {
-        gUnknown_0203CE80->cursorPosition[i] = gBagPositionStruct.cursorPosition[i];
-        gUnknown_0203CE80->scrollPosition[i] = gBagPositionStruct.scrollPosition[i];
+        sTempWallyBag->cursorPosition[i] = gBagPositionStruct.cursorPosition[i];
+        sTempWallyBag->scrollPosition[i] = gBagPositionStruct.scrollPosition[i];
     }
-    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Items, 30);
-    ClearItemSlots(gSaveBlock1Ptr->bagPocket_PokeBalls, 16);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Items, BAG_ITEMS_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT);
     ResetBagScrollPositions();
 }
 
@@ -2148,15 +2148,15 @@ void RestoreBagAfterWallyTutorial(void)
 {
     u32 i;
 
-    memcpy(gSaveBlock1Ptr->bagPocket_Items, gUnknown_0203CE80->bagPocket_Items, sizeof(gUnknown_0203CE80->bagPocket_Items));
-    memcpy(gSaveBlock1Ptr->bagPocket_PokeBalls, gUnknown_0203CE80->bagPocket_PokeBalls, sizeof(gUnknown_0203CE80->bagPocket_PokeBalls));
-    gBagPositionStruct.pocket = gUnknown_0203CE80->pocket;
+    memcpy(gSaveBlock1Ptr->bagPocket_Items, sTempWallyBag->bagPocket_Items, sizeof(sTempWallyBag->bagPocket_Items));
+    memcpy(gSaveBlock1Ptr->bagPocket_PokeBalls, sTempWallyBag->bagPocket_PokeBalls, sizeof(sTempWallyBag->bagPocket_PokeBalls));
+    gBagPositionStruct.pocket = sTempWallyBag->pocket;
     for (i = 0; i <= 4; i++)
     {
-        gBagPositionStruct.cursorPosition[i] = gUnknown_0203CE80->cursorPosition[i];
-        gBagPositionStruct.scrollPosition[i] = gUnknown_0203CE80->scrollPosition[i];
+        gBagPositionStruct.cursorPosition[i] = sTempWallyBag->cursorPosition[i];
+        gBagPositionStruct.scrollPosition[i] = sTempWallyBag->scrollPosition[i];
     }
-    Free(gUnknown_0203CE80);
+    Free(sTempWallyBag);
 }
 
 void DoWallyTutorialBagMenu(void)

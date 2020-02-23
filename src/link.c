@@ -223,7 +223,7 @@ bool8 IsWirelessAdapterConnected(void)
 {
     sub_800B488();
     sub_800E700();
-    if (sub_800BEC0() == 0x8001)
+    if (rfu_LMAN_REQBN_softReset_and_checkID() == 0x8001)
     {
         rfu_REQ_stopMode();
         rfu_waitREQComplete();

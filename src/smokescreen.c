@@ -1,14 +1,156 @@
 #include "global.h"
+#include "battle_gfx_sfx_util.h"
 #include "data.h"
 #include "decompress.h"
+#include "graphics.h"
 #include "sprite.h"
 #include "util.h"
+#include "constants/pokemon.h"
 
 static void SmokescreenImpact_Callback(struct Sprite *);
+static void SpriteCB_DestroySprite(struct Sprite *sprite);
 
-extern const struct CompressedSpriteSheet gSmokescreenImpactSpriteSheet;
-extern const struct CompressedSpritePalette gSmokescreenlImpactSpritePalette;
-extern const struct SpriteTemplate gSmokescreenImpactSpriteTemplate;
+// The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
+
+const u8 gUnknown_0831C604[] = 
+{
+    [NATURE_HARDY]   = 0, 
+    [NATURE_LONELY]  = 0, 
+    [NATURE_BRAVE]   = 1, 
+    [NATURE_ADAMANT] = 0, 
+    [NATURE_NAUGHTY] = 1, 
+    [NATURE_BOLD]    = 1, 
+    [NATURE_DOCILE]  = 2, 
+    [NATURE_RELAXED] = 0,
+    [NATURE_IMPISH]  = 0, 
+    [NATURE_LAX]     = 0, 
+    [NATURE_TIMID]   = 1, 
+    [NATURE_HASTY]   = 1, 
+    [NATURE_SERIOUS] = 1, 
+    [NATURE_JOLLY]   = 0, 
+    [NATURE_NAIVE]   = 2, 
+    [NATURE_MODEST]  = 1,
+    [NATURE_MILD]    = 0, 
+    [NATURE_QUIET]   = 1, 
+    [NATURE_BASHFUL] = 1, 
+    [NATURE_RASH]    = 0, 
+    [NATURE_CALM]    = 0, 
+    [NATURE_GENTLE]  = 0, 
+    [NATURE_SASSY]   = 1, 
+    [NATURE_CAREFUL] = 1,
+    [NATURE_QUIRKY]  = 0, 
+};
+
+static const struct CompressedSpriteSheet gSmokescreenImpactSpriteSheet =
+{
+    .data = gSmokescreenImpactTiles, .size = 0x180, .tag = 55019
+};
+
+static const struct CompressedSpritePalette gSmokescreenlImpactSpritePalette =
+{
+    .data = gSmokescreenImpactPalette, .tag = 55019
+};
+
+static const struct OamData gUnknown_0831C630 =
+{
+    .y = 0, 
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd gUnknown_0831C638[] =
+{
+    ANIMCMD_FRAME(0, 4), 
+    ANIMCMD_FRAME(4, 4), 
+    ANIMCMD_FRAME(8, 4), 
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_0831C648[] =
+{
+    ANIMCMD_FRAME(0, 4, .hFlip = TRUE), 
+    ANIMCMD_FRAME(4, 4, .hFlip = TRUE), 
+    ANIMCMD_FRAME(8, 4, .hFlip = TRUE), 
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_0831C658[] =
+{
+    ANIMCMD_FRAME(0, 4, .vFlip = TRUE), 
+    ANIMCMD_FRAME(4, 4, .vFlip = TRUE), 
+    ANIMCMD_FRAME(8, 4, .vFlip = TRUE), 
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_0831C668[] =
+{
+    ANIMCMD_FRAME(0, 4, .hFlip = TRUE, .vFlip = TRUE), 
+    ANIMCMD_FRAME(4, 4, .hFlip = TRUE, .vFlip = TRUE), 
+    ANIMCMD_FRAME(8, 4, .hFlip = TRUE, .vFlip = TRUE), 
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const gUnknown_0831C678[] =
+{
+    gUnknown_0831C638,
+    gUnknown_0831C648,
+    gUnknown_0831C658,
+    gUnknown_0831C668,
+};
+
+static const struct SpriteTemplate gSmokescreenImpactSpriteTemplate =
+{
+    .tileTag = 55019, 
+    .paletteTag = 55019, 
+    .oam = &gUnknown_0831C630, 
+    .anims = gUnknown_0831C678, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCB_DestroySprite
+};
+
+const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow =
+{
+    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = 55129
+};
+
+static const struct OamData gUnknown_0831C6A8 =
+{
+    .y = 0, 
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x8),
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct SpriteTemplate gSpriteTemplate_EnemyShadow =
+{
+    .tileTag = 55129, 
+    .paletteTag = 55039, 
+    .oam = &gUnknown_0831C6A8, 
+    .anims = gDummySpriteAnimTable, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCB_SetInvisible
+};
 
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3)
 {
@@ -65,7 +207,7 @@ static void SmokescreenImpact_Callback(struct Sprite *sprite)
     }
 }
 
-void SpriteCB_DestroySprite(struct Sprite *sprite)
+static void SpriteCB_DestroySprite(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {

@@ -331,7 +331,7 @@ static u16 sub_818D65C(u16 species, u32 otId, u32 personality, bool8 isFrontPic,
     return 0;
 }
 
-static u16 sub_818D6CC(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId, bool8 isTrainer)
+static u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
     u8 *framePics;
 
@@ -366,9 +366,10 @@ u16 sub_818D834(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 pal
     return sub_818D65C(species, otId, personality, isFrontPic, paletteSlot, windowId, FALSE);
 }
 
-u16 sub_818D864(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
+// Unused, FRLG only
+u16 CreateTrainerCardMonIconSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
 {
-    return sub_818D6CC(species, otId, personality, isFrontPic, destX, destY, paletteSlot, windowId, FALSE);
+    return CreateTrainerCardSprite(species, otId, personality, isFrontPic, destX, destY, paletteSlot, windowId, FALSE);
 }
 
 u16 CreateTrainerPicSprite(u16 species, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
@@ -386,9 +387,9 @@ u16 sub_818D904(u16 species, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
     return sub_818D65C(species, 0, 0, isFrontPic, paletteSlot, windowId, TRUE);
 }
 
-u16 sub_818D938(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
+u16 CreateTrainerCardTrainerPicSprite(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
 {
-    return sub_818D6CC(species, 0, 0, isFrontPic, destX, destY, paletteSlot, windowId, TRUE);
+    return CreateTrainerCardSprite(species, 0, 0, isFrontPic, destX, destY, paletteSlot, windowId, TRUE);
 }
 
 u16 PlayerGenderToFrontTrainerPicId_Debug(u8 gender, bool8 getClass)
