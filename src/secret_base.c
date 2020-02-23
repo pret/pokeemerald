@@ -543,23 +543,23 @@ void InitSecretBaseDecorationSprites(void)
     objectEventId = 0;
     if (!CurMapIsSecretBase())
     {
-        decorations = gSaveBlock1Ptr->playerRoomDecor;
-        decorationPositions = gSaveBlock1Ptr->playerRoomDecorPos;
-        numDecorations = 12;
+        decorations = gSaveBlock1Ptr->playerRoomDecorations;
+        decorationPositions = gSaveBlock1Ptr->playerRoomDecorationPositions;
+        numDecorations = DECOR_MAX_PLAYERS_HOUSE;
     }
     else
     {
         u16 secretBaseId = VarGet(VAR_CURRENT_SECRET_BASE);
         decorations = gSaveBlock1Ptr->secretBases[secretBaseId].decorations;
         decorationPositions = gSaveBlock1Ptr->secretBases[secretBaseId].decorationPositions;
-        numDecorations = 16;
+        numDecorations = DECOR_MAX_SECRET_BASE;
     }
 
     for (i = 0; i < numDecorations; i++)
     {
         if (decorations[i] == DECOR_NONE)
             continue;
-        
+
         permission = gDecorations[decorations[i]].permission;
         category = gDecorations[decorations[i]].category;
         if (permission == DECORPERM_SPRITE)
