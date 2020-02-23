@@ -29,7 +29,7 @@ void PlayerAcroTurnJump(u8 a);
 void PlayerSetAnimId(u8 a, u8 b);
 bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction);
 void PlayerOnBikeCollideWithFarawayIslandMew(u8 direction);
-u8 CheckForEventObjectCollision(struct EventObject *a, s16 b, s16 c, u8 d, u8 e);
+u8 CheckForObjectEventCollision(struct ObjectEvent *a, s16 b, s16 c, u8 d, u8 e);
 u8 PlayerGetZCoord(void);
 void SetPlayerAvatarTransitionFlags(u16 a);
 void sub_808BCE8(void);
@@ -63,6 +63,6 @@ bool32 sub_808D1B4(void);
 bool32 sub_808D1E8(void);
 void SetPlayerInvisibility(bool8 invisible);
 u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y);
-void StartFishing(u8 taskId);
+void StartFishing(u8 rod);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

@@ -31,7 +31,7 @@ BattleFrontier_BattlePikeRoomFinal_OnWarp: @ 825E3DE
 
 BattleFrontier_BattlePikeRoomFinal_EventScript_TurnPlayerNorth:: @ 825E3E8
 	setvar VAR_TEMP_4, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeRoomFinal_Text_CongratsThisWayPlease: @ 825E3F2

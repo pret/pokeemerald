@@ -1171,7 +1171,7 @@ static void NamingScreen_CreatePlayerIcon(void)
     u8 spriteId;
 
     rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gNamingScreenData->monSpecies);
-    spriteId = AddPseudoEventObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
+    spriteId = AddPseudoObjectEvent(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }
@@ -1198,7 +1198,7 @@ static void NamingScreen_CreateWandaDadIcon(void)
 {
     u8 spriteId;
 
-    spriteId = AddPseudoEventObject(EVENT_OBJ_GFX_MAN_1, SpriteCallbackDummy, 0x38, 0x25, 0);
+    spriteId = AddPseudoObjectEvent(OBJ_EVENT_GFX_MAN_1, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }

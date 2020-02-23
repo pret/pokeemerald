@@ -93,11 +93,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendan:: @ 81F8497
 LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanNorth:: @ 81F8507
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerNorth
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanNorth
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanNorth
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCNorth
 	waitmovement 0
 	return
@@ -105,11 +105,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanNorth:: @ 81F8507
 LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanSouth:: @ 81F8536
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerSouth
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanSouth
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanSouth
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCSouth
 	waitmovement 0
 	return
@@ -117,11 +117,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanSouth:: @ 81F8536
 LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanWest:: @ 81F8565
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerWest
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanWest
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanWest
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCWest
 	waitmovement 0
 	return
@@ -129,7 +129,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanWest:: @ 81F8565
 LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanEast:: @ 81F8594
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_BrendanApproachPlayerEast
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
 	closemessage

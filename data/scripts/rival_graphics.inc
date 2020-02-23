@@ -7,11 +7,11 @@ Common_EventScript_SetupRivalGfxId:: @ 8271ED7
 	end
 
 EventScript_SetupRivalGfxIdFemale:: @ 8271EEF
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 EventScript_SetupRivalGfxIdMale:: @ 8271EF5
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 Common_EventScript_SetupRivalOnBikeGfxId:: @ 8271EFB
@@ -23,11 +23,11 @@ Common_EventScript_SetupRivalOnBikeGfxId:: @ 8271EFB
 	end
 
 EventScript_SetupRivalOnBikeGfxIdFemale:: @ 8271F13
-	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE
+	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE
 	return
 
 EventScript_SetupRivalOnBikeGfxIdMale:: @ 8271F19
-	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE
+	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE
 	return
 
 @ Unused
@@ -40,9 +40,9 @@ Common_EventScript_SetupRivalGfxIdSameGender:: @ 8271F1F
 	end
 
 EventScript_SetupRivalGfxIdMale2:: @ 8271F37
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 EventScript_SetupRivalGfxIdFemale2:: @ 8271F3D
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return

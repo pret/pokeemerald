@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 6,
       "y": 5,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 23,
       "y": 5,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 17,
       "y": 8,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 15,
       "y": 9,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_REPORTER_F",
+      "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 11,
       "y": 9,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_HIDE_BATTLE_TOWER_REPORTER"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 1,
       "y": 5,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_HIDE_APPRENTICE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 10,
       "y": 5,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 14,
       "y": 5,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 18,
       "y": 5,
       "elevation": 3,

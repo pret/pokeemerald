@@ -17,7 +17,7 @@ static void sub_8145E74(void);
 // text
 bool8 SetUpFieldMove_Strength(void)
 {
-    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_PUSHABLE_BOULDER) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) == TRUE)
     {
         gSpecialVar_Result = GetCursorSelectionMonId();
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;

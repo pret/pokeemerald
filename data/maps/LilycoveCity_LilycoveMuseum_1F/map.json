@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 5,
       "y": 12,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 16,
       "y": 2,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 13,
       "y": 7,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ARTIST",
+      "graphics_id": "OBJ_EVENT_GFX_ARTIST",
       "x": 13,
       "y": 10,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_NINJA_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 2,
       "y": 8,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 3,
       "y": 8,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 11,
       "y": 3,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ARTIST",
+      "graphics_id": "OBJ_EVENT_GFX_ARTIST",
       "x": 19,
       "y": 3,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_4"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 2,
       "y": 2,
       "elevation": 3,
@@ -132,7 +132,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PSYCHIC_M",
+      "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",
       "x": 6,
       "y": 2,
       "elevation": 3,

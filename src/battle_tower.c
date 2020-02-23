@@ -212,60 +212,60 @@ const u8 gTowerFemaleFacilityClasses[20] =
 
 const u8 gTowerMaleTrainerGfxIds[30] =
 {
-    EVENT_OBJ_GFX_HIKER,
-    EVENT_OBJ_GFX_TUBER_M,
-    EVENT_OBJ_GFX_MAN_3,
-    EVENT_OBJ_GFX_RICH_BOY,
-    EVENT_OBJ_GFX_MANIAC,
-    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_M,
-    EVENT_OBJ_GFX_BLACK_BELT,
-    EVENT_OBJ_GFX_MAN_5,
-    EVENT_OBJ_GFX_MAN_5,
-    EVENT_OBJ_GFX_CAMPER,
-    EVENT_OBJ_GFX_MANIAC,
-    EVENT_OBJ_GFX_PSYCHIC_M,
-    EVENT_OBJ_GFX_GENTLEMAN,
-    EVENT_OBJ_GFX_SCHOOL_KID_M,
-    EVENT_OBJ_GFX_POKEFAN_M,
-    EVENT_OBJ_GFX_EXPERT_M,
-    EVENT_OBJ_GFX_YOUNGSTER,
-    EVENT_OBJ_GFX_FISHERMAN,
-    EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M,
-    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_M,
-    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_M,
-    EVENT_OBJ_GFX_MAN_3,
-    EVENT_OBJ_GFX_MAN_5,
-    EVENT_OBJ_GFX_NINJA_BOY,
-    EVENT_OBJ_GFX_SAILOR,
-    EVENT_OBJ_GFX_MANIAC,
-    EVENT_OBJ_GFX_MAN_4,
-    EVENT_OBJ_GFX_CAMPER,
-    EVENT_OBJ_GFX_BUG_CATCHER,
-    EVENT_OBJ_GFX_HIKER
+    OBJ_EVENT_GFX_HIKER,
+    OBJ_EVENT_GFX_TUBER_M,
+    OBJ_EVENT_GFX_MAN_3,
+    OBJ_EVENT_GFX_RICH_BOY,
+    OBJ_EVENT_GFX_MANIAC,
+    OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M,
+    OBJ_EVENT_GFX_BLACK_BELT,
+    OBJ_EVENT_GFX_MAN_5,
+    OBJ_EVENT_GFX_MAN_5,
+    OBJ_EVENT_GFX_CAMPER,
+    OBJ_EVENT_GFX_MANIAC,
+    OBJ_EVENT_GFX_PSYCHIC_M,
+    OBJ_EVENT_GFX_GENTLEMAN,
+    OBJ_EVENT_GFX_SCHOOL_KID_M,
+    OBJ_EVENT_GFX_POKEFAN_M,
+    OBJ_EVENT_GFX_EXPERT_M,
+    OBJ_EVENT_GFX_YOUNGSTER,
+    OBJ_EVENT_GFX_FISHERMAN,
+    OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M,
+    OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M,
+    OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M,
+    OBJ_EVENT_GFX_MAN_3,
+    OBJ_EVENT_GFX_MAN_5,
+    OBJ_EVENT_GFX_NINJA_BOY,
+    OBJ_EVENT_GFX_SAILOR,
+    OBJ_EVENT_GFX_MANIAC,
+    OBJ_EVENT_GFX_MAN_4,
+    OBJ_EVENT_GFX_CAMPER,
+    OBJ_EVENT_GFX_BUG_CATCHER,
+    OBJ_EVENT_GFX_HIKER
 };
 
 const u8 gTowerFemaleTrainerGfxIds[20] =
 {
-    EVENT_OBJ_GFX_WOMAN_2,
-    EVENT_OBJ_GFX_TUBER_F,
-    EVENT_OBJ_GFX_WOMAN_5,
-    EVENT_OBJ_GFX_HEX_MANIAC,
-    EVENT_OBJ_GFX_WOMAN_2,
-    EVENT_OBJ_GFX_BEAUTY,
-    EVENT_OBJ_GFX_LASS,
-    EVENT_OBJ_GFX_GIRL_3,
-    EVENT_OBJ_GFX_POKEFAN_F,
-    EVENT_OBJ_GFX_EXPERT_F,
-    EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F,
-    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F,
-    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F,
-    EVENT_OBJ_GFX_GIRL_3,
-    EVENT_OBJ_GFX_WOMAN_5,
-    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F,
-    EVENT_OBJ_GFX_PICNICKER,
-    EVENT_OBJ_GFX_WOMAN_2,
-    EVENT_OBJ_GFX_PICNICKER,
-    EVENT_OBJ_GFX_LASS
+    OBJ_EVENT_GFX_WOMAN_2,
+    OBJ_EVENT_GFX_TUBER_F,
+    OBJ_EVENT_GFX_WOMAN_5,
+    OBJ_EVENT_GFX_HEX_MANIAC,
+    OBJ_EVENT_GFX_WOMAN_2,
+    OBJ_EVENT_GFX_BEAUTY,
+    OBJ_EVENT_GFX_LASS,
+    OBJ_EVENT_GFX_GIRL_3,
+    OBJ_EVENT_GFX_POKEFAN_F,
+    OBJ_EVENT_GFX_EXPERT_F,
+    OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F,
+    OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F,
+    OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F,
+    OBJ_EVENT_GFX_GIRL_3,
+    OBJ_EVENT_GFX_WOMAN_5,
+    OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F,
+    OBJ_EVENT_GFX_PICNICKER,
+    OBJ_EVENT_GFX_WOMAN_2,
+    OBJ_EVENT_GFX_PICNICKER,
+    OBJ_EVENT_GFX_LASS
 };
 
 // Excludes the unused RS_FACILITY_CLASS_BOARDER_1 and _2
@@ -1178,7 +1178,7 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
     }
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        SetFrontierBrainEventObjGfx_2();
+        SetFrontierBrainObjEventGfx_2();
         return;
     }
     else if (trainerId < FRONTIER_TRAINERS_COUNT)
@@ -1246,13 +1246,13 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
     {
     case 0:
     default:
-        VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BOY_1);
+        VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BOY_1);
         return;
     case 1:
-        VarSet(VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_BOY_1);
+        VarSet(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_BOY_1);
         return;
     case 15:
-        VarSet(VAR_OBJ_GFX_ID_E, EVENT_OBJ_GFX_BOY_1);
+        VarSet(VAR_OBJ_GFX_ID_E, OBJ_EVENT_GFX_BOY_1);
         return;
     }
 }
@@ -1311,7 +1311,7 @@ u8 GetBattleFacilityTrainerGfxId(u16 trainerId)
     }
     else
     {
-        return EVENT_OBJ_GFX_BOY_1;
+        return OBJ_EVENT_GFX_BOY_1;
     }
 }
 
@@ -2316,9 +2316,9 @@ static void LoadMultiPartnerCandidatesData(void)
     s32 challengeNum;
     u32 species1, species2;
     u32 level;
-    struct EventObjectTemplate *eventObjTemplates;
+    struct ObjectEventTemplate *objEventTemplates;
 
-    eventObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
+    objEventTemplates = gSaveBlock1Ptr->objectEventTemplates;
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7;
@@ -2348,7 +2348,7 @@ static void LoadMultiPartnerCandidatesData(void)
     for (i = 0; i < 6; i++)
     {
         trainerId = gSaveBlock2Ptr->frontier.trainerIds[i];
-        eventObjTemplates[i + 1].graphicsId = GetBattleFacilityTrainerGfxId(trainerId);
+        objEventTemplates[i + 1].graphicsId = GetBattleFacilityTrainerGfxId(trainerId);
         for (j = 0; j < 2; j++)
         {
             while (1)
@@ -2402,7 +2402,7 @@ static void LoadMultiPartnerCandidatesData(void)
     if (r10 != 0)
     {
         gSaveBlock2Ptr->frontier.trainerIds[6] = spArray[Random() % r10];
-        eventObjTemplates[7].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[6]);
+        objEventTemplates[7].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[6]);
         FlagClear(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1);
         GetApprenticeMultiPartnerParty(gSaveBlock2Ptr->frontier.trainerIds[6]);
     }
@@ -2445,7 +2445,7 @@ static void LoadMultiPartnerCandidatesData(void)
     if (r10 != 0)
     {
         gSaveBlock2Ptr->frontier.trainerIds[7] = spArray[Random() % r10];
-        eventObjTemplates[8].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[7]);
+        objEventTemplates[8].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[7]);
         FlagClear(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2);
         GetRecordMixFriendMultiPartnerParty(gSaveBlock2Ptr->frontier.trainerIds[7]);
     }
@@ -3576,7 +3576,7 @@ u8 FacilityClassToGraphicsId(u8 facilityClass)
     }
     else
     {
-        return EVENT_OBJ_GFX_BOY_1;
+        return OBJ_EVENT_GFX_BOY_1;
     }
 }
 

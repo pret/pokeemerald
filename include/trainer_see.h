@@ -3,7 +3,7 @@
 
 struct ApproachingTrainer
 {
-    u8 eventObjectId;
+    u8 objectEventId;
     u8 radius; // plus 1
     const u8 *trainerScriptPtr;
     u8 taskId;
@@ -17,14 +17,14 @@ extern bool8 gTrainerApproachedPlayer;
 extern u8 gApproachingTrainerId;
 
 bool8 CheckForTrainersWantingBattle(void);
-void sub_80B4578(struct EventObject *var);
+void sub_80B4578(struct ObjectEvent *var);
 void EndTrainerApproach(void);
 void TryPrepareSecondApproachingTrainer(void);
 u8 FldEff_ExclamationMarkIcon(void);
 u8 FldEff_QuestionMarkIcon(void);
 u8 FldEff_HeartIcon(void);
-u8 GetCurrentApproachingTrainerEventObjectId(void);
-u8 GetChosenApproachingTrainerEventObjectId(u8 arrayId);
+u8 GetCurrentApproachingTrainerObjectEventId(void);
+u8 GetChosenApproachingTrainerObjectEventId(u8 arrayId);
 void PlayerFaceTrainerAfterBattle(void);
 
 #endif // GUARD_TRAINER_SEE_H

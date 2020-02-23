@@ -9,7 +9,7 @@ EverGrandeCity_GlaciasRoom_OnWarp: @ 8228422
 	.2byte 0
 
 EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth:: @ 822842C
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_GlaciasRoom_OnFrame: @ 8228431

@@ -83,19 +83,6 @@ struct ContestLink80F57C4
 
 EWRAM_DATA struct ContestLink80F57C4 *gUnknown_0203A034 = NULL;
 
-extern const struct BgTemplate gUnknown_0858D888[4];
-extern const struct WindowTemplate gUnknown_0858D898[];
-extern const struct CompressedSpriteSheet gUnknown_0858D878[];
-extern const struct CompressedSpritePalette gUnknown_0858D880[];
-extern const struct SpriteSheet gUnknown_0858D8E0;
-extern const struct SpriteTemplate gSpriteTemplate_858D8C8;
-extern const u8 sContestLinkTextColors[];
-extern const u8 gUnknown_0858D6D0[];
-extern const struct SpriteTemplate gSpriteTemplate_858D7F8;
-extern const struct SpriteSheet gUnknown_0858D810[];
-extern const struct SpritePalette gUnknown_0858D850;
-extern const struct SpriteTemplate gSpriteTemplate_858D860;
-
 static void sub_80F6A9C(void);
 static void sub_80F71C8(void);
 u8 sub_80F7310(u8, u8);
@@ -152,6 +139,219 @@ static void sub_80F85BC(u8);
 static void sub_80F86B8(u8);
 static void sub_80F878C(u8);
 static void sub_80F87B4(u8);
+static void sub_80F7768(struct Sprite *sprite);
+
+static const u16 sUnknown_0858D6B0[] = INCBIN_U16("graphics/unknown/unknown_58D6B0.gbapal");
+static const u8 sUnknown_0858D6D0[] = INCBIN_U8("graphics/unknown/unknown_58D6D0.4bpp");
+static const u16 sMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
+
+static const struct OamData sOamData_858D7F0 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 2,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_858D7F8 = 
+{
+    .tileTag = 3009, 
+    .paletteTag = 3009, 
+    .oam = &sOamData_858D7F0, 
+    .anims = gDummySpriteAnimTable, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteSheet sUnknown_0858D810[] = 
+{
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3009 },
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3010 },
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3011 },
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3012 },
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3013 },
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3014 },
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3015 },
+    { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3016 },
+};
+
+static const struct SpritePalette sUnknown_0858D850 =
+{
+     .data = sMiscBlank_Pal,
+     .tag = 3009,
+};
+
+static const struct OamData sOamData_858D858 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_858D860 =
+{
+    .tileTag = 3017, 
+    .paletteTag = 3017, 
+    .oam = &sOamData_858D858, 
+    .anims = gDummySpriteAnimTable, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = sub_80F7768
+};
+
+static const struct CompressedSpriteSheet sUnknown_0858D878 =
+{
+    .data = gContestConfetti_Gfx, 
+    .size = 0x220, 
+    .tag = 3017
+};
+
+
+static const struct CompressedSpritePalette sUnknown_0858D880 =
+{
+    .data = gContestConfetti_Pal, 
+    .tag = 3017
+};
+
+static const struct BgTemplate sUnknown_0858D888[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0,
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 24,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0,
+    }, 
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0,
+    }, 
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 26,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0,
+    }
+};
+
+static const struct WindowTemplate sUnknown_0858D898[] =
+{
+    {
+        .bg = 1, 
+        .tilemapLeft = 7, 
+        .tilemapTop = 4, 
+        .width = 12, 
+        .height = 2, 
+        .paletteNum = 15, 
+        .baseBlock = 770
+    },
+    {
+        .bg = 1, 
+        .tilemapLeft = 7, 
+        .tilemapTop = 7, 
+        .width = 12, 
+        .height = 2, 
+        .paletteNum = 15, 
+        .baseBlock = 794
+    },
+    {
+        .bg = 1, 
+        .tilemapLeft = 7, 
+        .tilemapTop = 10, 
+        .width = 12, 
+        .height = 2, 
+        .paletteNum = 15, 
+        .baseBlock = 818
+    },
+    {
+        .bg = 1, 
+        .tilemapLeft = 7, 
+        .tilemapTop = 13, 
+        .width = 12, 
+        .height = 2, 
+        .paletteNum = 15, 
+        .baseBlock = 842
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+static const struct OamData sUnknown_0858D8C0 =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = 0,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+
+static const struct SpriteTemplate sSpriteTemplate_858D8C8 =
+{
+    .tileTag = 22222, 
+    .paletteTag = 0, 
+    .oam = &sUnknown_0858D8C0, 
+    .anims = gDummySpriteAnimTable, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteSheet sUnknown_0858D8E0 = 
+{
+    .data = gMiscBlank_Gfx, 
+    .size = 0x200, 
+    .tag = 22222
+};
+
+static const u8 sContestLinkTextColors[4] = {TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
+
 
 void sub_80F57C4(void)
 {
@@ -159,11 +359,11 @@ void sub_80F57C4(void)
 
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_0858D888, ARRAY_COUNT(gUnknown_0858D888));
+    InitBgsFromTemplates(0, sUnknown_0858D888, ARRAY_COUNT(sUnknown_0858D888));
     for (i = 0; i < 4; i++)
         SetBgTilemapBuffer(i, gUnknown_0203A034->unkC[i]);
 
-    InitWindows(gUnknown_0858D898);
+    InitWindows(sUnknown_0858D898);
     DeactivateAllTextPrinters();
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
@@ -210,7 +410,7 @@ void sub_80F591C(void)
     CopyToBgTilemapBuffer(0, gUnknown_08C19EEC, 0, 0);
     sub_80F71C8();
     LoadCompressedPalette(gUnknown_08C1A2B4, 0, 0x200);
-    LoadPalette(gUnknown_0858D6B0, 0xF0, 0x20);
+    LoadPalette(sUnknown_0858D6B0, 0xF0, 0x20);
 
     for (i = 0; i < 4; i++)
     {
@@ -669,8 +869,8 @@ static void sub_80F6404(u8 taskId)
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].callback = sub_80F75A8;
         gUnknown_0203A034->unk0->spriteId = spriteId;
-        LoadCompressedSpriteSheet(gUnknown_0858D878);
-        LoadCompressedSpritePalette(gUnknown_0858D880);
+        LoadCompressedSpriteSheet(&sUnknown_0858D878);
+        LoadCompressedSpritePalette(&sUnknown_0858D880);
         CreateTask(sub_80F7670, 10);
         gTasks[taskId].data[0]++;
         break;
@@ -900,9 +1100,9 @@ static void sub_80F6AE8(void)
         LoadWirelessStatusIndicatorSpriteGfx();
         CreateWirelessStatusIndicatorSprite(8, 8);
         gSprites[gWirelessStatusIndicatorSpriteId].subpriority = 1;
-        sheet = LoadSpriteSheet(&gUnknown_0858D8E0);
+        sheet = LoadSpriteSheet(&sUnknown_0858D8E0);
         RequestDma3Fill(0xFFFFFFFF, (void *)BG_CHAR_ADDR(4) + sheet * 0x20, 0x80, 1);
-        spriteId = CreateSprite(&gSpriteTemplate_858D8C8, 8, 8, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_858D8C8, 8, 8, 0);
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
     }
 }
@@ -937,7 +1137,7 @@ s32 sub_80F6B78(const u8 *text, u8 spriteId)
 
     AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
     windowTilesPtr = (u8 *)(GetWindowAttribute(windowId, WINDOW_TILE_DATA));
-    src = (u8 *)(gUnknown_0858D6D0);
+    src = (u8 *)(sUnknown_0858D6D0);
 
     sprite = &gSprites[spriteId];
     spriteTilePtrs[0] = (u8 *)(sprite->oam.tileNum * 32 + VRAM + 0x10000);
@@ -1043,7 +1243,7 @@ _080F6BD0:\n\
     movs r1, 0x7\n\
     bl GetWindowAttribute\n\
     mov r9, r0\n\
-    ldr r2, =gUnknown_0858D6D0\n\
+    ldr r2, =sUnknown_0858D6D0\n\
     mov r8, r2\n\
     lsls r1, r7, 4\n\
     adds r1, r7\n\
@@ -1257,11 +1457,11 @@ static void sub_80F6DC0(void)
     struct SpriteTemplate template;
     u8 spriteIds[8];
 
-    template = gSpriteTemplate_858D7F8;
-    for (i = 0; i < 8; i++)
-        LoadSpriteSheet(&gUnknown_0858D810[i]);
+    template = sSpriteTemplate_858D7F8;
+    for (i = 0; i < (int)ARRAY_COUNT(sUnknown_0858D810); i++)
+        LoadSpriteSheet(&sUnknown_0858D810[i]);
 
-    LoadSpritePalette(&gUnknown_0858D850);
+    LoadSpritePalette(&sUnknown_0858D850);
     for (i = 0; i < 8; i++)
     {
         spriteIds[i] = CreateSprite(&template, 272, 144, 10);
@@ -1629,7 +1829,7 @@ static void sub_80F7670(u8 taskId)
         gTasks[taskId].data[0] = 0;
         if (gUnknown_0203A034->unk0->unk7 < 40)
         {
-            u8 spriteId = CreateSprite(&gSpriteTemplate_858D860, (Random() % 240) - 20, 44, 5);
+            u8 spriteId = CreateSprite(&sSpriteTemplate_858D860, (Random() % 240) - 20, 44, 5);
             gSprites[spriteId].data[0] = Random() % 512;
             gSprites[spriteId].data[1] = (Random() % 24) + 16;
             gSprites[spriteId].data[2] = (Random() % 256) + 48;
@@ -1642,7 +1842,7 @@ static void sub_80F7670(u8 taskId)
         DestroyTask(taskId);
 }
 
-void sub_80F7768(struct Sprite *sprite)
+static void sub_80F7768(struct Sprite *sprite)
 {
     s16 delta;
 

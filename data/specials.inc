@@ -28,7 +28,7 @@ gSpecials:: @ 81DBA64
 	def_special GetSecretBaseOwnerAndState
 	def_special InitSecretBaseDecorationSprites
 	def_special SetDecoration
-	def_special GetEventObjectLocalIdByFlag
+	def_special GetObjectEventLocalIdByFlag
 	def_special GetSecretBaseTypeInFrontOfPlayer
 	def_special SetSecretBaseOwnerGfxId
 	def_special sub_8129708
@@ -47,19 +47,19 @@ gSpecials:: @ 81DBA64
 	def_special CableClubSaveGame
 	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
-	def_special SpawnLinkPartnerEventObject
+	def_special SpawnLinkPartnerObjectEvent
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
 	def_special Script_ShowLinkTrainerCard
-	def_special EventObjectInteractionGetBerryTreeData
-	def_special EventObjectInteractionGetBerryName
-	def_special EventObjectInteractionGetBerryCountString
+	def_special ObjectEventInteractionGetBerryTreeData
+	def_special ObjectEventInteractionGetBerryName
+	def_special ObjectEventInteractionGetBerryCountString
 	def_special Bag_ChooseBerry
-	def_special EventObjectInteractionPlantBerryTree
-	def_special EventObjectInteractionPickBerryTree
-	def_special EventObjectInteractionRemoveBerryTree
-	def_special EventObjectInteractionWaterBerryTree
+	def_special ObjectEventInteractionPlantBerryTree
+	def_special ObjectEventInteractionPickBerryTree
+	def_special ObjectEventInteractionRemoveBerryTree
+	def_special ObjectEventInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special GetTrainerBattleMode
@@ -115,7 +115,7 @@ gSpecials:: @ 81DBA64
 	def_special ScrSpecial_SetHipsterSpokenFlag
 	def_special ScrSpecial_HipsterTeachWord
 	def_special ScrSpecial_PlayBardSong
-	def_special ScrSpecial_SetMauvilleOldManEventObjGfx
+	def_special ScrSpecial_SetMauvilleOldManObjEventGfx
 	def_special ScrSpecial_GenerateGiddyLine
 	def_special ScrSpecial_GiddyShouldTellAnotherTale
 	def_special ScrSpecial_StorytellerGetFreeStorySlot
@@ -190,7 +190,7 @@ gSpecials:: @ 81DBA64
 	def_special IsTVShowInSearchOfTrainersAiring
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToEventObjectLocalIds
+	def_special GabbyAndTySetScriptVarsToObjectEventLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -339,7 +339,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
-	def_special TryInitBattleTowerAwardManEventObject
+	def_special TryInitBattleTowerAwardManObjectEvent
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
 	def_special Script_FadeOutMapMusic

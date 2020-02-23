@@ -26,11 +26,11 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfx:: @ 82574AE
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxMale:: @ 82574C6
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxFemale:: @ 82574CC
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 BattleFrontier_BattleArenaBattleRoom_OnFrame: @ 82574D2
@@ -482,7 +482,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_SetUpRoomObjects:: @ 8257C16
 	hideobjectat 8, MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
 	removeobject 7
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisible
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisible
 	setvar VAR_TEMP_1, 1
 	end
 

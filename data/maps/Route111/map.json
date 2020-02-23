@@ -31,7 +31,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 13,
       "y": 114,
       "elevation": 3,
@@ -44,7 +44,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 13,
       "y": 113,
       "elevation": 0,
@@ -57,7 +57,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 13,
       "y": 113,
       "elevation": 0,
@@ -70,7 +70,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_F",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 13,
       "y": 113,
       "elevation": 0,
@@ -83,7 +83,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VICKY_WINSTRATE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 28,
       "y": 51,
       "elevation": 3,
@@ -96,7 +96,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 22,
       "y": 5,
       "elevation": 3,
@@ -109,7 +109,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 23,
       "y": 5,
       "elevation": 3,
@@ -122,7 +122,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 8,
       "y": 91,
       "elevation": 3,
@@ -135,7 +135,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 29,
       "y": 37,
       "elevation": 3,
@@ -148,7 +148,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 27,
       "y": 69,
       "elevation": 3,
@@ -161,7 +161,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 21,
       "y": 47,
       "elevation": 3,
@@ -174,7 +174,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 32,
       "y": 66,
       "elevation": 3,
@@ -187,7 +187,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMERAMAN",
+      "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
       "elevation": 3,
@@ -200,7 +200,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_REPORTER_F",
+      "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
       "elevation": 3,
@@ -213,7 +213,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 18,
       "y": 101,
       "elevation": 3,
@@ -226,7 +226,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 19,
       "y": 100,
       "elevation": 3,
@@ -239,7 +239,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_1",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 23,
       "y": 8,
       "elevation": 3,
@@ -252,7 +252,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 33,
       "y": 104,
       "elevation": 3,
@@ -265,7 +265,7 @@
       "flag": "FLAG_ITEM_ROUTE_111_TM_37"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 18,
       "y": 5,
       "elevation": 3,
@@ -278,7 +278,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 19,
       "y": 5,
       "elevation": 3,
@@ -291,7 +291,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_REPORTER_F",
+      "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
       "elevation": 3,
@@ -304,7 +304,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMERAMAN",
+      "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
       "elevation": 3,
@@ -317,7 +317,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_REPORTER_F",
+      "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
       "elevation": 3,
@@ -330,7 +330,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMERAMAN",
+      "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
       "elevation": 3,
@@ -343,7 +343,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 54,
       "elevation": 3,
@@ -356,7 +356,7 @@
       "flag": "FLAG_ITEM_ROUTE_111_STARDUST"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 114,
       "elevation": 3,
@@ -369,7 +369,7 @@
       "flag": "FLAG_ITEM_ROUTE_111_HP_UP"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CUTTABLE_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 22,
       "y": 21,
       "elevation": 3,
@@ -382,7 +382,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 10,
       "y": 82,
       "elevation": 3,
@@ -395,7 +395,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 11,
       "y": 71,
       "elevation": 3,
@@ -408,7 +408,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 32,
       "y": 29,
       "elevation": 3,
@@ -421,7 +421,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 11,
       "y": 11,
       "elevation": 3,
@@ -434,7 +434,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 9,
       "y": 27,
       "elevation": 3,
@@ -447,7 +447,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 13,
       "y": 20,
       "elevation": 3,
@@ -460,7 +460,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_SECRET_POWER_MAN"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 20,
       "y": 114,
       "elevation": 3,
@@ -473,7 +473,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 26,
       "y": 132,
       "elevation": 3,
@@ -486,7 +486,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 20,
       "y": 132,
       "elevation": 3,
@@ -499,7 +499,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 19,
       "y": 121,
       "elevation": 3,
@@ -512,7 +512,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 16,
       "y": 119,
       "elevation": 3,
@@ -525,7 +525,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 29,
       "y": 77,
       "elevation": 3,
@@ -538,7 +538,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 22,
       "y": 77,
       "elevation": 3,
@@ -551,7 +551,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 37,
       "y": 77,
       "elevation": 3,
@@ -564,7 +564,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 19,
       "y": 118,
       "elevation": 3,
@@ -577,7 +577,7 @@
       "flag": "FLAG_ITEM_ROUTE_111_ELIXIR"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 14,
       "y": 56,
       "elevation": 3,
@@ -590,7 +590,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FOSSIL",
+      "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
       "x": 20,
       "y": 53,
       "elevation": 3,
@@ -603,7 +603,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_DESERT_FOSSIL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 19,
       "y": 53,
       "elevation": 3,
@@ -616,7 +616,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_PLAYER_DESCENT"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 19,
       "y": 101,
       "elevation": 3,

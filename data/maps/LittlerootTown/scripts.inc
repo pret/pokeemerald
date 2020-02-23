@@ -143,7 +143,7 @@ LittlerootTown_EventScript_StepOffTruckFemale:: @ 81E7EF9
 LittlerootTown_EventScript_GoInsideWithMom:: @ 81E7F17
 	delay 15
 	playse SE_DANSA
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_PlayerStepOffTruck
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerStepOffTruck
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
@@ -158,16 +158,16 @@ LittlerootTown_EventScript_GoInsideWithMom:: @ 81E7F17
 	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LittlerootTown_Movement_MomApproachDoor
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_MomEnterHouse
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_PlayerEnterHouse
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerEnterHouse
 	waitmovement 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
@@ -307,7 +307,7 @@ LittlerootTown_EventScript_DangerousWithoutPokemon:: @ 81E80AD
 	msgbox LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_TwinPushPlayerFromRoute
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute
 	waitmovement 0
 	msgbox LittlerootTown_Text_DangerousIfYouDontHavePokemon, MSGBOX_DEFAULT
 	closemessage
@@ -389,7 +389,7 @@ LittlerootTown_EventScript_GoSaveBirchTrigger:: @ 81E811F
 	lockall
 	applymovement 1, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_CanYouGoSeeWhatsHappening, MSGBOX_DEFAULT
@@ -560,70 +560,70 @@ LittlerootTown_EventScript_MomApproachPlayerFemale:: @ 81E82F0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayer0:: @ 81E8333
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayer0
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayer1:: @ 81E8348
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayer1
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerMale2:: @ 81E835D
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerMale2
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerMale3:: @ 81E8372
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerMale3
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerMale4:: @ 81E8387
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerMale4
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerMale5:: @ 81E839C
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerMale5
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerFemale2:: @ 81E83B1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerFemale2
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerFemale3:: @ 81E83C6
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerFemale3
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerFemale4:: @ 81E83DB
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerFemale4
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_MomApproachPlayerFemale5:: @ 81E83F0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_MomApproachPlayerFemale5
 	waitmovement 0

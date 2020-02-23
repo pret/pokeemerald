@@ -42,13 +42,13 @@ GraniteCave_StevensRoom_EventScript_StevenExitNorth:: @ 822DD0D
 	return
 
 GraniteCave_StevensRoom_EventScript_StevenExitWestEast:: @ 822DD18
-	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_StevenExitSouth:: @ 822DD2A
-	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
 	return

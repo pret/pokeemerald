@@ -25,7 +25,7 @@ TerraCave_End_EventScript_ShowGroudon:: @ 823B0E3
 
 TerraCave_End_EventScript_Groudon:: @ 823B0EC
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement 1, TerraCave_End_Movement_GroudonApproach
 	waitmovement 0

@@ -927,8 +927,8 @@ struct SaveBlock1
     /*0x9C2*/ u8 field_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
-    /*0xA30*/ struct EventObject eventObjects[EVENT_OBJECTS_COUNT];
-    /*0xC70*/ struct EventObjectTemplate eventObjectTemplates[EVENT_OBJECT_TEMPLATES_COUNT];
+    /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
+    /*0xC70*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     /*0x1270*/ u8 flags[FLAGS_COUNT];
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
