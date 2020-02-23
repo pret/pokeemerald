@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_RAYQUAZA_2",
+      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_2",
       "x": 14,
       "y": 7,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_RAYQUAZA_1",
+      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_1",
       "x": 14,
       "y": 6,
       "elevation": 3,

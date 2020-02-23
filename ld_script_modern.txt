@@ -68,7 +68,6 @@ SECTIONS {
         src/siirtc.o(.text);
         src/librfu_stwi.o(.text);
         src/librfu_intr.o(.text);
-        asm/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
         src/librfu_sio32id.o(.text);
         *libagbsyscall.a:*.o(.text*);

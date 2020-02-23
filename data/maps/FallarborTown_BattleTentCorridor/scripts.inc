@@ -10,12 +10,12 @@ FallarborTown_BattleTentCorridor_EventScript_EnterCorridor:: @ 82006B7
 	lockall
 	setvar VAR_TEMP_0, 1
 	applymovement 1, FallarborTown_BattleTentCorridor_Movement_WalkToDoor
-	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentCorridor_Movement_WalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentCorridor_Movement_WalkToDoor
 	waitmovement 0
 	opendoor 2, 1
 	waitdooranim
 	applymovement 1, FallarborTown_BattleTentCorridor_Movement_AttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentCorridor_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentCorridor_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 2, 1
 	waitdooranim

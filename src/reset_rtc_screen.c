@@ -475,7 +475,7 @@ static void sub_809F048(void)
     ShowBg(0);
     InitWindows(sUnknown_08510408);
     DeactivateAllTextPrinters();
-    sub_81973A4();
+    LoadMessageBoxAndBorderGfx();
 }
 
 static void CB2_ResetRtcScreen(void)

@@ -19,7 +19,7 @@ MtChimney_CableCarStation_OnFrame: @ 822AC1D
 
 MtChimney_CableCarStation_EventScript_ExitCableCar:: @ 822AC27
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_CableCarStation_Movement_ExitCableCar
+	applymovement OBJ_EVENT_ID_PLAYER, MtChimney_CableCarStation_Movement_ExitCableCar
 	applymovement 1, MtChimney_CableCarStation_Movement_FollowPlayerOutFromCableCar
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
@@ -42,7 +42,7 @@ MtChimney_CableCarStation_EventScript_RideCableCar:: @ 822AC6C
 	msgbox MtChimney_CableCarStation_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, MtChimney_CableCarStation_Movement_LeadPlayerToCableCar
-	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_CableCarStation_Movement_BoardCableCar
+	applymovement OBJ_EVENT_ID_PLAYER, MtChimney_CableCarStation_Movement_BoardCableCar
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_CABLE_CAR_STATION_STATE, 2

@@ -1,8 +1,8 @@
 #include "global.h"
 #include "event_data.h"
+#include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "event_obj_lock.h"
 #include "script_movement.h"
 #include "task.h"
 #include "trainer_see.h"
@@ -39,9 +39,9 @@ bool8 sub_80983C4(void)
 }
 
 
-void ScriptFreezeEventObjects(void)
+void ScriptFreezeObjectEvents(void)
 {
-    FreezeEventObjects();
+    FreezeObjectEvents();
     CreateTask(sub_80983A4, 80);
 }
 
@@ -54,9 +54,9 @@ static void sub_8098400(u8 taskId)
         sub_808B864();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gEventObjects[gSelectedEventObject].singleMovementActive)
+    if (!task->data[1] && !gObjectEvents[gSelectedObjectEvent].singleMovementActive)
     {
-        FreezeEventObject(&gEventObjects[gSelectedEventObject]);
+        FreezeObjectEvent(&gObjectEvents[gSelectedObjectEvent]);
         task->data[1] = 1;
     }
     if (task->data[0] && task->data[1])
@@ -76,61 +76,61 @@ bool8 sub_809847C(void)
     }
 }
 
-void LockSelectedEventObject(void)
+void LockSelectedObjectEvent(void)
 {
     u8 taskId;
-    FreezeEventObjectsExceptOne(gSelectedEventObject);
+    FreezeObjectEventsExceptOne(gSelectedObjectEvent);
     taskId = CreateTask(sub_8098400, 80);
-    if (!gEventObjects[gSelectedEventObject].singleMovementActive)
+    if (!gObjectEvents[gSelectedObjectEvent].singleMovementActive)
     {
-        FreezeEventObject(&gEventObjects[gSelectedEventObject]);
+        FreezeObjectEvent(&gObjectEvents[gSelectedObjectEvent]);
         gTasks[taskId].data[1] = 1;
     }
 }
 
-void ScriptUnfreezeEventObjects(void)
+void ScriptUnfreezeObjectEvents(void)
 {
-    u8 playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
-    ScriptMovement_UnfreezeEventObjects();
-    UnfreezeEventObjects();
+    u8 playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
+    ScriptMovement_UnfreezeObjectEvents();
+    UnfreezeObjectEvents();
 }
 
 void sub_8098524(void)
 {
     u8 playerObjectId;
 
-    if (gEventObjects[gSelectedEventObject].active)
-        EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
-    playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
-    ScriptMovement_UnfreezeEventObjects();
-    UnfreezeEventObjects();
+    if (gObjectEvents[gSelectedObjectEvent].active)
+        ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
+    ScriptMovement_UnfreezeObjectEvents();
+    UnfreezeObjectEvents();
 }
 
 void Script_FacePlayer(void)
 {
-    EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject], gSpecialVar_Facing);
+    ObjectEventFaceOppositeDirection(&gObjectEvents[gSelectedObjectEvent], gSpecialVar_Facing);
 }
 
 void Script_ClearHeldMovement(void)
 {
-    EventObjectClearHeldMovementIfActive(&gEventObjects[gSelectedEventObject]);
+    ObjectEventClearHeldMovementIfActive(&gObjectEvents[gSelectedObjectEvent]);
 }
 
 static void sub_80985BC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 eventObjectId = task->data[2];
+    u8 objectEventId = task->data[2];
 
     if (!task->data[0] && IsPlayerStandingStill() == TRUE)
     {
         sub_808B864();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gEventObjects[eventObjectId].singleMovementActive)
+    if (!task->data[1] && !gObjectEvents[objectEventId].singleMovementActive)
     {
-        FreezeEventObject(&gEventObjects[eventObjectId]);
+        FreezeObjectEvent(&gObjectEvents[objectEventId]);
         task->data[1] = 1;
     }
     if (task->data[0] && task->data[1])
@@ -140,34 +140,34 @@ static void sub_80985BC(u8 taskId)
 void sub_8098630(void)
 {
     u8 trainerObjectId1, trainerObjectId2, taskId;
-    trainerObjectId1 = GetChosenApproachingTrainerEventObjectId(0);
+    trainerObjectId1 = GetChosenApproachingTrainerObjectEventId(0);
     if(gNoOfApproachingTrainers == 2)
     {
-        trainerObjectId2 = GetChosenApproachingTrainerEventObjectId(1);
+        trainerObjectId2 = GetChosenApproachingTrainerObjectEventId(1);
         sub_8098074(trainerObjectId1, trainerObjectId2);
         taskId = CreateTask(sub_80985BC, 80);
         gTasks[taskId].data[2] = trainerObjectId1;
-        if(!gEventObjects[trainerObjectId1].singleMovementActive)
+        if(!gObjectEvents[trainerObjectId1].singleMovementActive)
         {
-            FreezeEventObject(&gEventObjects[trainerObjectId1]);
+            FreezeObjectEvent(&gObjectEvents[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;
         }
         taskId = CreateTask(sub_80985BC, 81);
         gTasks[taskId].data[2] = trainerObjectId2;
-        if(!gEventObjects[trainerObjectId2].singleMovementActive)
+        if(!gObjectEvents[trainerObjectId2].singleMovementActive)
         {
-            FreezeEventObject(&gEventObjects[trainerObjectId2]);
+            FreezeObjectEvent(&gObjectEvents[trainerObjectId2]);
             gTasks[taskId].data[1] = 1;
         }
     }
     else
     {
-        FreezeEventObjectsExceptOne(trainerObjectId1);
+        FreezeObjectEventsExceptOne(trainerObjectId1);
         taskId = CreateTask(sub_80985BC, 80);
         gTasks[taskId].data[2] = trainerObjectId1;
-        if(!gEventObjects[trainerObjectId1].singleMovementActive)
+        if(!gObjectEvents[trainerObjectId1].singleMovementActive)
         {
-            FreezeEventObject(&gEventObjects[trainerObjectId1]);
+            FreezeObjectEvent(&gObjectEvents[trainerObjectId1]);
             gTasks[taskId].data[1] = 1;
         }
     }

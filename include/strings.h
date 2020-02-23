@@ -2514,11 +2514,11 @@ extern const u8 gText_WinsLosses[];
 extern const u8 gText_PokemonTrades[];
 extern const u8 gText_BerryCrush[];
 extern const u8 gText_UnionTradesAndBattles[];
-extern const u8 gText_Var1DarkGreyShadowLightGrey[];
+extern const u8 gText_NumPokeblocks[];
 extern const u8 gText_PokeblocksWithFriends[];
 extern const u8 gText_WonContestsWFriends[];
-extern const u8 gText_WSlashStraightSlash[];
-extern const u8 gText_Var1DarkLightGreyBP[];
+extern const u8 gText_WinsStraight[];
+extern const u8 gText_NumBP[];
 extern const u8 gText_BattleTower[];
 extern const u8 gText_BattlePtsWon[];
 
@@ -2882,6 +2882,21 @@ extern const u8 gText_CrushingResults[];
 extern const u8 gText_BerryCrush2[];
 extern const u8 gText_PressingSpeedRankings[];
 extern const u8 gText_Var1Players[];
+extern const u8 gText_ReadyToBerryCrush[];
+extern const u8 gText_WaitForAllChooseBerry[];
+extern const u8 gText_EndedWithXUnitsPowder[];
+extern const u8 gText_RecordingGameResults[];
+extern const u8 gText_PlayBerryCrushAgain[];
+extern const u8 gText_YouHaveNoBerries[];
+extern const u8 gText_MemberDroppedOut[];
+extern const u8 gText_TimesUpNoGoodPowder[];
+extern const u8 gText_CommunicationStandby2[];
+extern const u8 gText_SpaceTimes2[];
+extern const u8 gText_XDotY[];
+extern const u8 gText_Var1Berry[];
+extern const u8 gText_NeatnessRankings[];
+extern const u8 gText_CoopRankings[];
+extern const u8 gText_PressingPowerRankings[];
 
 // Lilycove Lady
 extern const u8 gText_ContestLady_Handsome[];

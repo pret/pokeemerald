@@ -9,11 +9,11 @@
 u8 CreateWarpArrowSprite(void);
 u8 sub_8155800(u8 oldSpriteId);
 void sub_81555AC(u8, u8);
-bool8 sub_8155DA0(struct EventObject *);
-void sub_8155D78(struct EventObject *);
+bool8 sub_8155DA0(struct ObjectEvent *);
+void sub_8155D78(struct ObjectEvent *);
 void StartAshFieldEffect(s16, s16, u16, s16);
-void SetUpReflection(struct EventObject*, struct Sprite*, u8);
-u32 StartFieldEffectForEventObject(u8, struct EventObject*);
+void SetUpReflection(struct ObjectEvent*, struct Sprite*, u8);
+u32 StartFieldEffectForObjectEvent(u8, struct ObjectEvent*);
 u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void sub_8155F80(struct Sprite*);
 void UpdateShadowFieldEffect(struct Sprite*);

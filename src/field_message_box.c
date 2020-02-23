@@ -27,7 +27,7 @@ static void sub_8098154(u8 taskId)
     switch (task->data[0])
     {
         case 0:
-           sub_81973A4();
+           LoadMessageBoxAndBorderGfx();
            task->data[0]++;
            break;
         case 1:

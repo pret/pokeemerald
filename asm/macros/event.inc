@@ -763,7 +763,7 @@
 	.2byte \y
 	.endm
 
-	@ Copies a live event object's xy position to its template, so that if the sprite goes off screen, it'll still be there when it comes back on screen.
+	@ Copies a live object event's xy position to its template, so that if the sprite goes off screen, it'll still be there when it comes back on screen.
 	.macro copyobjectxytoperm index:req
 	.byte 0x64
 	.2byte \index

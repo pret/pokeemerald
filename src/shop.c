@@ -67,13 +67,13 @@ static void BuyMenuRemoveItemIcon(u16, u8);
 static void BuyMenuPrint(u8 windowId, const u8 *text, u8 x, u8 y, s8 speed, u8 colorSet);
 static void BuyMenuDrawMapGraphics(void);
 static void BuyMenuCopyMenuBgToBg1TilemapBuffer(void);
-static void BuyMenuCollectEventObjectData(void);
-static void BuyMenuDrawEventObjects(void);
+static void BuyMenuCollectObjectEventData(void);
+static void BuyMenuDrawObjectEvents(void);
 static void BuyMenuDrawMapBg(void);
 static bool8 BuyMenuCheckForOverlapWithMenuBg(int, int);
 static void BuyMenuDrawMapMetatile(s16, s16, const u16*, u8);
 static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src);
-static bool8 BuyMenuCheckIfEventObjectOverlapsMenuBg(s16 *);
+static bool8 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *);
 static void ExitBuyMenu(u8 taskId);
 static void Task_ExitBuyMenu(u8 taskId);
 static void BuyMenuTryMakePurchase(u8 taskId);
@@ -714,8 +714,8 @@ static void BuyMenuDrawGraphics(void)
 
 static void BuyMenuDrawMapGraphics(void)
 {
-    BuyMenuCollectEventObjectData();
-    BuyMenuDrawEventObjects();
+    BuyMenuCollectObjectEventData();
+    BuyMenuDrawObjectEvents();
     BuyMenuDrawMapBg();
 }
 
@@ -787,7 +787,7 @@ static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, con
     dest[offset1 + offset2 + 33] = src[3]; // bottom right
 }
 
-static void BuyMenuCollectEventObjectData(void)
+static void BuyMenuCollectObjectEventData(void)
 {
     s16 facingX;
     s16 facingY;
@@ -797,21 +797,21 @@ static void BuyMenuCollectEventObjectData(void)
 
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     for (y = 0; y < 16; y++)
-        gShopDataPtr->viewportObjects[y][EVENT_OBJ_ID] = 16;
+        gShopDataPtr->viewportObjects[y][OBJ_EVENT_ID] = 16;
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 eventObjId = GetEventObjectIdByXY(facingX - 4 + x, facingY - 2 + y);
+            u8 objEventId = GetObjectEventIdByXY(facingX - 4 + x, facingY - 2 + y);
 
-            if (eventObjId != 16)
+            if (objEventId != 16)
             {
-                gShopDataPtr->viewportObjects[r8][EVENT_OBJ_ID] = eventObjId;
+                gShopDataPtr->viewportObjects[r8][OBJ_EVENT_ID] = objEventId;
                 gShopDataPtr->viewportObjects[r8][X_COORD] = x;
                 gShopDataPtr->viewportObjects[r8][Y_COORD] = y;
                 gShopDataPtr->viewportObjects[r8][LAYER_TYPE] = MapGridGetMetatileLayerTypeAt(facingX - 4 + x, facingY - 2 + y);
 
-                switch (gEventObjects[eventObjId].facingDirection)
+                switch (gObjectEvents[objEventId].facingDirection)
                 {
                     case DIR_SOUTH:
                         gShopDataPtr->viewportObjects[r8][ANIM_NUM] = 0;
@@ -833,27 +833,27 @@ static void BuyMenuCollectEventObjectData(void)
     }
 }
 
-static void BuyMenuDrawEventObjects(void)
+static void BuyMenuDrawObjectEvents(void)
 {
     u8 i;
     u8 spriteId;
-    const struct EventObjectGraphicsInfo *graphicsInfo;
+    const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     for (i = 0; i < 16; i++) // max objects?
     {
-        if (gShopDataPtr->viewportObjects[i][EVENT_OBJ_ID] == 16)
+        if (gShopDataPtr->viewportObjects[i][OBJ_EVENT_ID] == 16)
             continue;
 
-        graphicsInfo = GetEventObjectGraphicsInfo(gEventObjects[gShopDataPtr->viewportObjects[i][EVENT_OBJ_ID]].graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[gShopDataPtr->viewportObjects[i][OBJ_EVENT_ID]].graphicsId);
 
-        spriteId = AddPseudoEventObject(
-            gEventObjects[gShopDataPtr->viewportObjects[i][EVENT_OBJ_ID]].graphicsId,
+        spriteId = AddPseudoObjectEvent(
+            gObjectEvents[gShopDataPtr->viewportObjects[i][OBJ_EVENT_ID]].graphicsId,
             SpriteCallbackDummy,
             (u16)gShopDataPtr->viewportObjects[i][X_COORD] * 16 + 8,
             (u16)gShopDataPtr->viewportObjects[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
             2);
 
-        if (BuyMenuCheckIfEventObjectOverlapsMenuBg(gShopDataPtr->viewportObjects[i]) == TRUE)
+        if (BuyMenuCheckIfObjectEventOverlapsMenuBg(gShopDataPtr->viewportObjects[i]) == TRUE)
         {
             gSprites[spriteId].subspriteTableNum = 4;
             gSprites[spriteId].subspriteMode = SUBSPRITES_ON;
@@ -863,7 +863,7 @@ static void BuyMenuDrawEventObjects(void)
     }
 }
 
-static bool8 BuyMenuCheckIfEventObjectOverlapsMenuBg(s16 *object)
+static bool8 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *object)
 {
     if (!BuyMenuCheckForOverlapWithMenuBg(object[X_COORD], object[Y_COORD] + 2) && object[LAYER_TYPE] != MB_SECRET_BASE_WALL)
     {

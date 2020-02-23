@@ -154,15 +154,13 @@ static EWRAM_DATA struct
 {
     u8 state;
     u8 heartSpriteIds[16];              /*0x001*/
-    u16 movesToLearn[MAX_MON_MOVES];    /*0x012*/
-    u8 filler1A[0x44 - 0x1A];           /*0x01A*/
+    u16 movesToLearn[25];               /*0x01A*/
     u8 partyMon;                        /*0x044*/
     u8 moveSlot;                        /*0x045*/
-    struct ListMenuItem menuItems[20];  /*0x048*/
-    u8 fillerE8[0x110 - 0xE8];          /*0x0E8*/
+    struct ListMenuItem menuItems[25];  /*0x0E8*/
     u8 numMenuChoices;                  /*0x110*/
     u8 numToShowAtOnce;                 /*0x111*/
-    u8 moveListMenuTask;                    /*0x112*/
+    u8 moveListMenuTask;                /*0x112*/
     u8 moveListScrollArrowTask;         /*0x113*/
     u8 moveDisplayArrowTask;            /*0x114*/
     u16 scrollOffset;                   /*0x116*/

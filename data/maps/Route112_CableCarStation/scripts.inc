@@ -20,7 +20,7 @@ Route112_CableCarStation_OnFrame: @ 822AAE9
 
 Route112_CableCarStation_EventScript_ExitCableCar:: @ 822AAF3
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Route112_CableCarStation_Movement_ExitCableCar
+	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_ExitCableCar
 	applymovement 1, Route112_CableCarStation_Movement_FollowPlayerOutFromCableCar
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
@@ -43,7 +43,7 @@ Route112_CableCarStation_EventScript_RideCableCar:: @ 822AB38
 	msgbox Route112_CableCarStation_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route112_CableCarStation_Movement_LeadPlayerToCableCar
-	applymovement EVENT_OBJ_ID_PLAYER, Route112_CableCarStation_Movement_BoardCableCar
+	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_BoardCableCar
 	waitmovement 0
 	setvar VAR_0x8004, 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 1

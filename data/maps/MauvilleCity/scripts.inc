@@ -114,19 +114,19 @@ MauvilleCity_EventScript_BattleWallyPrompt:: @ 81DF4AD
 	end
 
 MauvilleCity_EventScript_WallyAndUncleExitNorth:: @ 81DF4E0
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitNorth1
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitNorth1
 	applymovement 6, MauvilleCity_Movement_WallyExitNorth1
 	applymovement 7, MauvilleCity_Movement_WallysUncleExitNorth1
 	waitmovement 0
 	applymovement 6, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 30
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_PlayerFaceUncleNorth
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerFaceUncleNorth
 	applymovement 7, MauvilleCity_Movement_WallysUncleApproachPlayerNorth
 	waitmovement 0
 	msgbox MauvilleCity_Text_UncleVisitUsSometime, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitNorth2
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitNorth2
 	applymovement 7, MauvilleCity_Movement_WallysUncleExitNorth2
 	applymovement 6, MauvilleCity_Movement_WallyExitNorth2
 	waitmovement 0
@@ -134,7 +134,7 @@ MauvilleCity_EventScript_WallyAndUncleExitNorth:: @ 81DF4E0
 	end
 
 MauvilleCity_EventScript_WallyAndUncleExitEast:: @ 81DF53D
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitEast1
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitEast1
 	applymovement 6, MauvilleCity_Movement_WallyExitEast1
 	applymovement 7, MauvilleCity_Movement_WallysUncleExitEast1
 	waitmovement 0
@@ -145,7 +145,7 @@ MauvilleCity_EventScript_WallyAndUncleExitEast:: @ 81DF53D
 	waitmovement 0
 	msgbox MauvilleCity_Text_UncleVisitUsSometime, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitEast2
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitEast2
 	applymovement 7, MauvilleCity_Movement_WallysUncleExitEast2
 	applymovement 6, MauvilleCity_Movement_WallyExitEast2
 	waitmovement 0
@@ -164,7 +164,7 @@ MauvilleCity_EventScript_DefeatedWally:: @ 81DF593
 	call_if_eq MauvilleCity_EventScript_ScottApproachPlayerNorth
 	compare VAR_FACING, DIR_EAST
 	call_if_eq MauvilleCity_EventScript_ScottApproachPlayerEast
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_ScottYouDidntHoldBack, MSGBOX_DEFAULT
 	closemessage
@@ -191,13 +191,13 @@ MauvilleCity_EventScript_ScottApproachPlayerEast:: @ 81DF601
 	return
 
 MauvilleCity_EventScript_ScottExitNorth:: @ 81DF616
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_PlayerWatchScottExitNorth
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchScottExitNorth
 	applymovement 11, MauvilleCity_Movement_ScottExitNorth
 	waitmovement 0
 	return
 
 MauvilleCity_EventScript_ScottExitEast:: @ 81DF628
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_PlayerWatchScottExitEast
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchScottExitEast
 	applymovement 11, MauvilleCity_Movement_ScottExitEast
 	waitmovement 0
 	return
