@@ -426,7 +426,7 @@ u8 *GetSavedRamScriptIfValid(void)
     }
 }
 
-void InitRamScript_NoEventObject(u8 *script, u16 scriptSize)
+void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
 {
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);

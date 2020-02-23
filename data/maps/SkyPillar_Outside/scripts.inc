@@ -36,7 +36,7 @@ SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
 	lockall
 	applymovement 1, SkyPillar_Outside_Movement_WallaceApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox SkyPillar_Outside_Text_OpenedDoorToSkyPillar, MSGBOX_DEFAULT
 	closemessage
@@ -50,7 +50,7 @@ SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
 	delay 40
 	msgbox SkyPillar_Outside_Text_EarthquakeNotMomentToWaste, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, SkyPillar_Outside_Movement_PlayerClimbSkyPillar
+	applymovement OBJ_EVENT_ID_PLAYER, SkyPillar_Outside_Movement_PlayerClimbSkyPillar
 	applymovement 1, SkyPillar_Outside_Movement_WallaceClimbSkyPillar
 	waitmovement 0
 	setvar VAR_0x8004, 1   @ vertical pan

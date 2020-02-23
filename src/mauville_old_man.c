@@ -137,7 +137,7 @@ void SetMauvilleOldMan(void)
             SetupGiddy();
             break;
     }
-    ScrSpecial_SetMauvilleOldManEventObjGfx();
+    ScrSpecial_SetMauvilleOldManObjEventGfx();
 }
 
 u8 GetCurrentMauvilleOldMan(void)
@@ -407,7 +407,7 @@ void ResetMauvilleOldManFlag(void)
         case MAUVILLE_MAN_GIDDY:
             break;
     }
-    ScrSpecial_SetMauvilleOldManEventObjGfx();
+    ScrSpecial_SetMauvilleOldManObjEventGfx();
 }
 
 
@@ -674,9 +674,9 @@ static void Task_BardSong(u8 taskId)
     RunTextPrintersAndIsPrinter0Active();
 }
 
-void ScrSpecial_SetMauvilleOldManEventObjGfx(void)
+void ScrSpecial_SetMauvilleOldManObjEventGfx(void)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BARD);
+    VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BARD);
 }
 
 // Language fixers?

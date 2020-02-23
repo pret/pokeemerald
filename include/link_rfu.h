@@ -3,35 +3,40 @@
 
 #include "librfu.h"
 #include "link.h"
+#include "AgbRfu_LinkManager.h"
 
 // Exported type declarations
 
-struct UnkLinkRfuStruct_02022B14Substruct
+// RfuTgtData.gname is read as these structs.
+struct GFtgtGnameSub
 {
-    u16 unk_00_0:4;
-    u16 unk_00_4:1;
-    u16 unk_00_5:1;
+    u16 language:4;
+    u16 hasNews:1;
+    u16 hasCard:1;
     u16 unk_00_6:1;
     u16 isChampion:1;
     u16 hasNationalDex:1;
-    u16 gameClear:1; // never read, redundant with isChampion
-    u16 unk_01_2:4;  // always 3?
+    u16 gameClear:1;
+    u16 version:4;
     u16 unk_01_6:2;
     u8 playerTrainerId[2];
 };
 
-struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
+struct __attribute__((packed, aligned(2))) GFtgtGname
 {
-    struct UnkLinkRfuStruct_02022B14Substruct unk_00;
-    u8 unk_04[4];
+    struct GFtgtGnameSub unk_00;
+    u8 child_sprite_gender[RFU_CHILD_MAX]; // u8 sprite_idx:3;
+    // u8 gender:1;
+    // u8 unk_4:3
+    // u8 active:1
     u16 species:10;
     u16 type:6;
-    u8 unk_0a_0:7;
-    u8 unk_0a_7:1;
+    u8 activity:7;
+    u8 started:1;
     u8 playerGender:1;
     u8 level:7;
-    u8 unk_0c;
-};
+    u8 padding;
+}; // size: RFU_GNAME_SIZE
 
 struct UnkLinkRfuStruct_02022B2C
 {
@@ -40,7 +45,7 @@ struct UnkLinkRfuStruct_02022B2C
     u16 unk_02;
     u8 unk_04;
     u16 unk_06;
-    struct UnkLinkRfuStruct_02022B14 *unk_08;
+    struct GFtgtGname *unk_08;
     u8 *unk_0c;
     u8 unk_10;
     u8 unk_11;
@@ -60,50 +65,6 @@ struct UnkLinkRfuStruct_02022B44
     u8 fill_66[0x1d];
     u8 unk_83;
     u8 fill_84[0x58];
-};
-
-struct UnkRfuStruct_1
-{
-    /* 0x000 */ u8 unk_00;
-    /* 0x001 */ u8 unk_01;
-    /* 0x002 */ vu8 unk_02;
-    /* 0x003 */ vu8 unk_03;
-    /* 0x004 */ u8 unk_04;
-    /* 0x005 */ u8 unk_05;
-    /* 0x006 */ u8 unk_06;
-    /* 0x007 */ u8 unk_07;
-    /* 0x008 */ u8 unk_08;
-    /* 0x009 */ u8 unk_09;
-    /* 0x00a */ u8 unk_0a;
-    /* 0x00b */ u8 unk_0b;
-    /* 0x00c */ u8 unk_0c;
-    /* 0x00d */ u8 unk_0d;
-    /* 0x00e */ u8 unk_0e;
-    /* 0x00f */ u8 unk_0f;
-    /* 0x010 */ u8 unk_10;
-    /* 0x011 */ u8 unk_11;
-    /* 0x012 */ u8 unk_12;
-    // aligned
-    /* 0x014 */ u16 unk_14;
-    /* 0x016 */ u16 unk_16;
-    /* 0x018 */ u16 unk_18;
-    /* 0x01a */ u16 unk_1a;
-    /* 0x01c */ u16 unk_1c;
-    /* 0x01e */ u16 unk_1e;
-    /* 0x020 */ const u16 *unk_20;
-    /* 0x024 */ u8 unk_24;
-    /* 0x026 */ u16 unk_26;
-    /* 0x028 */ u16 unk_28[4];
-    /* 0x030 */ u8 unk_30;
-    // aligned
-    /* 0x032 */ u16 unk_32;
-    /* 0x034 */ u16 unk_34[4];
-    /* 0x03c */ const struct UnkLinkRfuStruct_02022B2C *unk_3c;
-    /* 0x040 */ void (*unk_40)(u8, u8);
-    /* 0x044 */ void (*unk_44)(u16);
-    /* 0x048 */ u8 filler_48[8];
-    /* 0x050 */ u32 unk_50[0x399];
-    /* 0xeb4 */ u8 filler_e64[12];
 };
 
 struct UnkRfuStruct_2_Sub_6c
@@ -187,7 +148,7 @@ struct UnkRfuStruct_2
     /* 0x100 */ u16 unk_100;
     /* 0x102 */ u8 unk_102;
     /* 0x103 */ u8 filler_103[0x10A - 0x103];
-    /* 0x10A */ struct UnkLinkRfuStruct_02022B14 unk_10A;
+    /* 0x10A */ struct GFtgtGname unk_10A;
     u8 filler_;
     u8 playerName[PLAYER_NAME_LENGTH + 1];
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
@@ -235,13 +196,13 @@ struct UnkRfuStruct_8010A14
 
 // Exported RAM declarations
 
-extern struct UnkRfuStruct_1 gUnknown_03004140;
-extern struct UnkRfuStruct_2 gUnknown_03005000;
+extern struct GFtgtGname gUnknown_02022B14;
+extern u8 gUnknown_02022B22[];
+extern struct UnkRfuStruct_2 Rfu;
 extern u8 gWirelessStatusIndicatorSpriteId;
 
 // Exported ROM declarations
 void WipeTrainerNameRecords(void);
-u32 sub_800BEC0(void);
 void sub_800E700(void);
 void sub_800EDD4(void);
 void sub_800F6FC(u8 who);
@@ -270,12 +231,12 @@ u32 GetRfuRecvQueueLength(void);
 void RfuVSync(void);
 void sub_80111B0(bool32 a0);
 u8 sub_8011A74(void);
-struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
+struct GFtgtGname *sub_800F7DC(void);
 void sub_8011068(u8 a0);
 void sub_8011170(u32 a0);
 void sub_8011A64(u8 a0, u16 a1);
 u8 sub_801048C(bool32 a0);
-void sub_800DF90(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2);
+void sub_800DF90(struct GFtgtGname *buff1, u8 *buff2);
 void sub_8010F84(u8 a0, u32 a1, u32 a2);
 void sub_8011C10(u32 a0);
 bool32 sub_8012240(void);
@@ -300,15 +261,15 @@ void sub_8010FA0(bool32 a0, bool32 a1);
 void sub_8010F60(void);
 void sub_8010FCC(u32 a0, u32 a1, u32 a2);
 void sub_8011C84(void);
-void sub_8012188(const u8 *name, struct UnkLinkRfuStruct_02022B14 *structPtr, u8 a2);
+void sub_8012188(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
 bool32 sub_8011B90(void);
 void sub_800FE50(void *a0);
 bool32 sub_800E540(u16 id, u8 *name);
 void sub_8011DE0(u32 arg0);
 u8 sub_801100C(s32 a0);
 void sub_800EF7C(void);
-bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
-bool8 sub_800DF34(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
+bool8 sub_800DE7C(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
+bool8 sub_800DF34(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
 s32 sub_800E87C(u8 idx);
 void sub_8011BA4(void);
 void sub_8010198(void);
@@ -318,5 +279,65 @@ bool32 sub_8011A9C(void);
 void sub_80104B0(void);
 void sub_8011A50(void);
 void sub_80110B8(u32 a0);
+bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
+void sub_800EAB4(void);
+void sub_800EAFC(void);
+void sub_800ED34(u16 unused);
+void sub_800EDBC(u16 unused);
+void sub_800F048(void);
+void sub_800F86C(u8 unused);
+void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
+void sub_800FD14(u16 command);
+void rfufunc_80F9F44(void);
+void sub_800FFB0(void);
+void rfufunc_80FA020(void);
+bool32 sub_8010454(u32 a0);
+void sub_8010528(void);
+void sub_8010750(void);
+s32 sub_80107A0(void);
+void sub_801084C(u8 taskId);
+void sub_80109E8(u16 a0);
+void sub_8010A70(void *a0);
+void sub_8010AAC(u8 taskId);
+void sub_8010D0C(u8 taskId);
+void sub_80115EC(s32 a0);
+u8 sub_8011CE4(const u8 *a0, u16 a1);
+void sub_8011D6C(u32 a0);
+void sub_8011E94(u32 a0, u32 a1);
+bool8 sub_8012224(void);
+void sub_801227C(void);
+void sub_801209C(u8 taskId);
+void sub_8011BF8(void);
+void sub_8011BA4(void);
+void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr);
+void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr);
+void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr);
+void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
+void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
+bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
+bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
+void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
+bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
+void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2);
+bool8 sub_800DB84(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2);
+void sub_800DBF8(u8 *q1, u8 mode);
+void PkmnStrToASCII(u8 *q1, const u8 *q2);
+void ASCIIToPkmnStr(u8 *q1, const u8 *q2);
+u8 sub_800DD1C(u8 maxFlags);
+void sub_800DD94(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3);
+bool8 sub_800DE7C(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
+bool8 sub_800DF34(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
+void sub_800DF90(struct GFtgtGname *buff1, u8 *buff2);
+void CreateWirelessStatusIndicatorSprite(u8 x, u8 y);
+void DestroyWirelessStatusIndicatorSprite(void);
+void LoadWirelessStatusIndicatorSpriteGfx(void);
+u8 sub_800E124(void);
+void sub_800E15C(struct Sprite *sprite, s32 signalStrengthAnimNum);
+void sub_800E174(void);
+void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name);
+bool32 NameIsNotEmpty(const u8 *name);
+void RecordMixTrainerNames(void);
+bool32 sub_800E540(u16 id, u8 *name);
+void WipeTrainerNameRecords(void);
 
 #endif //GUARD_LINK_RFU_H

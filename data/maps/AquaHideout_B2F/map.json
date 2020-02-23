@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 23,
       "y": 19,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 23,
       "y": 10,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 13,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B2F_NEST_BALL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SUBMARINE_SHADOW",
+      "graphics_id": "OBJ_EVENT_GFX_SUBMARINE_SHADOW",
       "x": 19,
       "y": 20,
       "elevation": 1,
@@ -67,7 +67,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B2F_SUBMARINE_SHADOW"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
       "x": 7,
       "y": 5,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 13,
       "y": 5,
       "elevation": 3,

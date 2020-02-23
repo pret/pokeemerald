@@ -10,7 +10,7 @@ BattleFrontier_BattlePyramidLobby_OnWarp: @ 8250721
 
 BattleFrontier_BattlePyramidLobby_EventScript_TurnPlayerNorth: @ 825072B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePyramidLobby_OnFrame: @ 8250735
@@ -371,7 +371,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_ShowResults:: @ 8250D42
 
 BattleFrontier_BattlePyramidLobby_EventScript_WalkToPanelAndReceiveBag:: @ 8250D56
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_AttendantWalkToPanel
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerWalkToPanel
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerWalkToPanel
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping, MSGBOX_DEFAULT
 	pyramid_get PYRAMID_DATA_WIN_STREAK
@@ -391,7 +391,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_ReceiveBattleBag:: @ 8250D9C
 	closemessage
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_AttendantMoveAside
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerStepOnPanel
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerStepOnPanel
 	waitmovement 0
 	return
 

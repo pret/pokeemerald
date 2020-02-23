@@ -110,7 +110,7 @@ Route103_EventScript_RivalExit:: @ 81EC50A
 	end
 
 Route103_EventScript_RivalExitFacingNorth:: @ 81EC53D
-	applymovement EVENT_OBJ_ID_PLAYER, Route103_Movement_WatchRivalExitFacingNorth
+	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingNorth
 	applymovement 2, Route103_Movement_RivalExitFacingNorth1
 	waitmovement 0
 	playse SE_DANSA
@@ -120,7 +120,7 @@ Route103_EventScript_RivalExitFacingNorth:: @ 81EC53D
 	end
 
 Route103_EventScript_RivalExitFacingEastOrWest:: @ 81EC561
-	applymovement EVENT_OBJ_ID_PLAYER, Route103_Movement_WatchRivalExitFacingEastOrWest
+	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingEastOrWest
 	applymovement 2, Route103_Movement_RivalExit1
 	waitmovement 0
 	playse SE_DANSA

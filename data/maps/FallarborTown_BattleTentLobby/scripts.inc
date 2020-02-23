@@ -9,7 +9,7 @@ FallarborTown_BattleTentLobby_OnWarp: @ 81FFE71
 
 FallarborTown_BattleTentLobby_EventScript_TurnPlayerNorth:: @ 81FFE7B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 FallarborTown_BattleTentLobby_OnFrame: @ 81FFE85
@@ -194,12 +194,12 @@ FallarborTown_BattleTentLobby_EventScript_EndCancelChallenge:: @ 82001CD
 
 FallarborTown_BattleTentLobby_EventScript_WalkToDoor:: @ 82001CF
 	applymovement 1, FallarborTown_BattleTentLobby_Movement_AttendantWalkToDoor
-	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_PlayerWalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_PlayerWalkToDoor
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, FallarborTown_BattleTentLobby_Movement_AttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim

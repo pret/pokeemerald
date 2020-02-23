@@ -682,7 +682,7 @@ BerryBlender_EventScript_SpawnLinkPartners: @ 82941AA
 	specialvar VAR_RESULT, GetLinkPartnerNames
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_0x8008
-	special SpawnLinkPartnerEventObject
+	special SpawnLinkPartnerObjectEvent
 	goto BerryBlender_EventScript_LinkPlayersArrived
 	end
 

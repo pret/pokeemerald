@@ -4142,6 +4142,9 @@ extern const u32 gBattleWindowTextPalette[];
 
 extern const u32 gContest2Pal[];
 
+extern const u32 gSmokescreenImpactTiles[];
+extern const u32 gSmokescreenImpactPalette[];
+
 extern const u32 gBattleAnimSpriteGfx_Bone[];
 extern const u32 gBattleAnimSpriteGfx_Spark[];
 extern const u32 gBattleAnimSpriteGfx_Pencil[];
@@ -4800,6 +4803,8 @@ extern const u32 gBattleAnimBgImage_Surf[];
 extern const u32 gBattleAnimBgPalette_Surf[];
 extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
 
+extern const u32 gEnemyMonShadow_Gfx[];
+
 extern const u32 gBattleAnimFogTilemap[];
 
 extern const u32 gUsePokeblockGraph_Gfx[];
@@ -5001,6 +5006,7 @@ extern const u16 gUsePokeblockCondition_Pal[];
 // Berry Crush
 extern const u32 gUnknown_08DE34B8[];
 extern const u16 gUnknown_08DE3398[];
+extern const u32 gUnknown_08DE3FD4[];
 
 // Pokenav
 extern const u32 gPokenavMessageBox_Gfx[];

@@ -60,11 +60,11 @@ Route111_EventScript_SetFallingPlayerGfx:: @ 81F0DC2
 	return
 
 Route111_EventScript_SetFallingPlayerGfxMale:: @ 81F0DDA
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 Route111_EventScript_SetFallingPlayerGfxFemale:: @ 81F0DE0
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 Route111_EventScript_CheckSetSandstorm:: @ 81F0DE6
@@ -107,7 +107,7 @@ Route111_OnWarp: @ 81F0E46
 	.2byte 0
 
 Route111_EventScript_HidePlayerForMirageTower:: @ 81F0E50
-	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	end
 
 Route111_OnFrame: @ 81F0E56
@@ -123,10 +123,10 @@ Route111_EventScript_MirageTowerDisappear:: @ 81F0E60
 	addobject 45
 	special StartPlayerDescendMirageTower
 	waitstate
-	showobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
+	showobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	removeobject 45
 	delay 16
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	delay 16
 	special StartMirageTowerDisintegration
 	waitstate
@@ -224,22 +224,22 @@ Route111_EventScript_PreventRouteAccess:: @ 81F0F45
 	end
 
 Route111_EventScript_PushUpFromRoute:: @ 81F0F7C
-	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_PushUpFromRoute
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushUpFromRoute
 	waitmovement 0
 	return
 
 Route111_EventScript_PushDownFromRoute:: @ 81F0F87
-	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_PushDownFromRoute
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushDownFromRoute
 	waitmovement 0
 	return
 
 Route111_EventScript_PushLeftFromRoute:: @ 81F0F92
-	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_PushLeftFromRoute
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushLeftFromRoute
 	waitmovement 0
 	return
 
 Route111_EventScript_PushRightFromRoute:: @ 81F0F9D
-	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_PushRightFromRoute
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushRightFromRoute
 	waitmovement 0
 	return
 
@@ -295,7 +295,7 @@ Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	waitmovement 0
 	removeobject 1
 	call Route111_EventScript_CloseWinstrateDoor
-	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
 	addobject 2
@@ -313,7 +313,7 @@ Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	waitmovement 0
 	removeobject 2
 	call Route111_EventScript_CloseWinstrateDoor
-	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
 	addobject 3
@@ -331,7 +331,7 @@ Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	waitmovement 0
 	removeobject 3
 	call Route111_EventScript_CloseWinstrateDoor
-	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
 	addobject 4

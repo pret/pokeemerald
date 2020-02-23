@@ -51,7 +51,7 @@ Route119_EventScript_RivalEncounter:: @ 81F4488
 	call_if_eq Route119_EventScript_RivalEnter1
 	compare VAR_TEMP_1, 2
 	call_if_eq Route119_EventScript_RivalEnter2
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1
@@ -207,13 +207,13 @@ Route119_EventScript_RivalEnter2:: @ 81F46D1
 	return
 
 Route119_EventScript_RivalExit1:: @ 81F46DC
-	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_PlayerWatchRivalExit1
+	applymovement OBJ_EVENT_ID_PLAYER, Route119_Movement_PlayerWatchRivalExit1
 	applymovement 25, Route119_Movement_RivalExit1
 	waitmovement 0
 	return
 
 Route119_EventScript_RivalExit2:: @ 81F46EE
-	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_PlayerWatchRivalExit2
+	applymovement OBJ_EVENT_ID_PLAYER, Route119_Movement_PlayerWatchRivalExit2
 	applymovement 25, Route119_Movement_RivalExit2
 	waitmovement 0
 	return

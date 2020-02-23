@@ -1,5 +1,5 @@
 #include "global.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "faraway_island.h"
 #include "field_camera.h"
@@ -145,7 +145,7 @@ bool8 SetUpFieldMove_Cut(void)
     bool8 cutTiles[CUT_NORMAL_AREA];
     bool8 ret;
 
-    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) == TRUE)
     {
         // Standing in front of cuttable tree.
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
@@ -580,7 +580,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
 
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     FREE_AND_SET_NULL(sCutGrassSpriteArrayPtr);
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
 
     if (IsMewPlayingHideAndSeek() == TRUE)

@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_DEOXYS_TRIANGLE",
+      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
       "x": 15,
       "y": 12,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_DEOXYS",
+      "graphics_id": "OBJ_EVENT_GFX_DEOXYS",
       "x": 15,
       "y": 3,
       "elevation": 0,

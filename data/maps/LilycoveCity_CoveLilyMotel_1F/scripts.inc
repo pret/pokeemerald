@@ -44,11 +44,11 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_BlockingTV:: @ 8218211
 	waitmovement 0
 	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_CantSeeTheTV, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_CoveLilyMotel_1F_Movement_PlayerPushFromTV
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_CoveLilyMotel_1F_Movement_PlayerPushFromTV
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_OwnerPushPlayer
 	waitmovement 0
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_OwnerReturn

@@ -359,10 +359,10 @@ static void LoadMapNamePopUpWindowBg(void)
     u8 popupWindowId = GetMapNamePopUpWindowId();
     u16 regionMapSectionId = gMapHeader.regionMapSectionId;
 
-    if (regionMapSectionId > MAPSEC_DYNAMIC)
+    if (regionMapSectionId >= KANTO_MAPSEC_START)
     {
-        if (regionMapSectionId > MAPSEC_SPECIAL_AREA)
-            regionMapSectionId -= (MAPSEC_SPECIAL_AREA - MAPSEC_DYNAMIC);
+        if (regionMapSectionId > KANTO_MAPSEC_END)
+            regionMapSectionId -= KANTO_MAPSEC_COUNT;
         else
             regionMapSectionId = 0; // Discard kanto region sections;
     }

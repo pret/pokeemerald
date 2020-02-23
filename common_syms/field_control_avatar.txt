@@ -1,1 +1,1 @@
-gSelectedEventObject
+gSelectedObjectEvent

@@ -369,7 +369,7 @@ static void sub_801A8B0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 m
 u32 sub_801A960(struct UnkStruct_x20 * a0, u32 * a1)
 {
     s32 i, j, r2;
-    u32 result = a0->unk.field_0.unk_0a_0;
+    u32 result = a0->unk.field_0.activity;
 
     for (i = 0; i < (unsigned)ARRAY_COUNT(gUnknown_082F0D70); i++)
     {
@@ -386,7 +386,7 @@ u32 sub_801A960(struct UnkStruct_x20 * a0, u32 * a1)
             r2 = 0;
             for (j = 0; j < 4; j++)
             {
-                if (a0->unk.field_0.unk_04[j] != 0)
+                if (a0->unk.field_0.child_sprite_gender[j] != 0)
                 {
                     r2++;
                 }

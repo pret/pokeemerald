@@ -16,7 +16,7 @@ SlateportCity_BattleTentCorridor_EventScript_SetUpObjects:: @ 8208E3B
 	setobjectxy 1, 2, 2
 	turnobject 1, DIR_SOUTH
 SlateportCity_BattleTentCorridor_EventScript_TurnPlayerNorth:: @ 8208E56
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 SlateportCity_BattleTentCorridor_OnFrame: @ 8208E5B
@@ -28,7 +28,7 @@ SlateportCity_BattleTentCorridor_EventScript_EnterCorridor:: @ 8208E65
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_ReturnToRoomFromBattle
 	setvar VAR_TEMP_0, 1
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_AttendantEnter
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentCorridor_Movement_PlayerEnter
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_BattleTentCorridor_Movement_PlayerEnter
 	waitmovement 0
 	compare VAR_0x8006, 2
 	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_ResumeChallenge
@@ -46,7 +46,7 @@ SlateportCity_BattleTentCorridor_EventScript_EnterBattleRoom:: @ 8208EB4
 	opendoor 2, 1
 	waitdooranim
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_AttendantExit
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentCorridor_Movement_PlayerExit
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_BattleTentCorridor_Movement_PlayerExit
 	waitmovement 0
 	closedoor 2, 1
 	waitdooranim

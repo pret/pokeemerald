@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_anim.h"
 #include "berry.h"
 #include "berry_powder.h"
 #include "bg.h"
@@ -114,10 +115,10 @@ struct BerryCrushGame_138_C
     u8 unk0;
     u8 unk1;
     u8 unk2;
-    u16 unk4;
-    u16 unk6;
+    s16 unk4;
+    s16 unk6;
     s16 unk8;
-    u16 unkA;
+    s16 unkA;
 };
 
 struct BerryCrushGame_138
@@ -204,47 +205,606 @@ void sub_8022B28(struct Sprite *);
 void sub_8022554(struct BerryCrushGame_138 *r0);
 void sub_8024578(struct BerryCrushGame *);
 void sub_8024644(u8 *, u32, u32, u32, u32);
+static void sub_8022A20(struct Sprite *sprite);
+static u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1);
+static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5);
+static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5);
+static u32 sub_8022E1C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 sub_8022E3C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5);
+static u32 sub_8022F04(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
+static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2);
+static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6);
+static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1);
+static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6);
+static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4);
+static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6);
+static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
 
 static EWRAM_DATA struct BerryCrushGame *gUnknown_02022C90 = NULL;
 
-extern const struct BgTemplate gUnknown_082F32C8[4];
-extern const u8 gBerryCrushGrinderTopTilemap[];
-extern const u8 gBerryCrushContainerCapTilemap[];
-extern const u8 gBerryCrushBackgroundTilemap[];
-extern const struct SpriteTemplate gUnknown_082F436C;
-extern const u16 gUnknown_082F41E8[];
-extern const s8 gUnknown_082F41CC[][2];
-extern const s8 gUnknown_082F41D2[][2];
-extern const u32 gUnknown_082F334C[];
-extern const u8 sBerryCrushTextColors1[][3];
-extern const u8 *gUnknown_082F43B4[];
-extern const u8 sBerryCrushTextColors4[];
-extern const struct WindowTemplate gUnknown_082F32CC[];
-extern const u8 gUnknown_082F3344[][4];
-extern const struct WindowTemplate gUnknown_082F32EC;
-extern const u8 sBerryCrushTextColorTable[][3];
-extern const struct WindowTemplate gUnknown_082F32F4[];
-extern const u8 gUnknown_082F417C[][5];
-extern const struct BerryCrushGame_138_C gUnknown_082F4190[];
-extern const u8 sBerryCrushTextColors2[][3];
-extern const u8 sBerryCrushTextColors3[][3];
-extern const u32 gUnknown_08DE3FD4[];
-extern const struct CompressedSpriteSheet gUnknown_082F41F4[];
-extern const struct SpritePalette gUnknown_082F421C;
-extern const struct SpriteTemplate gUnknown_082F430C;
-extern const struct SpriteTemplate gUnknown_082F4324;
-extern const struct SpriteTemplate gUnknown_082F433C;
-extern const struct SpriteTemplate gUnknown_082F4354;
-extern const struct UnkStruct3 gUnknown_082F4384[];
-extern u32 (*const gUnknown_082F43CC[])(struct BerryCrushGame *, u8 *);
-extern const u8 *const gUnknown_082F32A4[];
-extern const u8 gUnknown_082F4448[];
-extern const s8 gUnknown_082F326C[][7];
-extern const u8 gUnknown_082F325C[];
-extern const u8 gUnknown_082F3264[];
-extern const u8 gUnknown_082F3290[][4];
-extern const u8 gUnknown_082F4434[][4];
-extern const u8 gUnknown_082F4444[];
+static const u8 gUnknown_082F325C[] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+static const u8 gUnknown_082F3264[] = { 0, 1, 2, 3, 5, 0, 0, 0 };
+
+static const s8 gUnknown_082F326C[][7] = 
+{
+    { 4, 1, 0, -1,  0,  0, 0}, 
+    { 4, 2, 0, -1,  0,  0, 0}, 
+    { 4, 2, 0, -2,  0,  0, 0}, 
+    { 6, 3, 1, -1, -3, -1, 0}, 
+    { 6, 4, 1, -2, -4, -2, 0},
+};
+
+static const u8 sUnusedZero = 0;
+
+static const u8 gUnknown_082F3290[][4] = 
+{
+    {3, 2, 1, 0}, 
+    {3, 3, 1, 0},
+    {3, 3, 2, 0},
+    {3, 4, 2, 0},
+    {3, 5, 3, 0},
+};
+
+static const u8 *const gUnknown_082F32A4[] =
+{
+    gText_ReadyToBerryCrush,
+    gText_WaitForAllChooseBerry,
+    gText_EndedWithXUnitsPowder,
+    gText_RecordingGameResults,
+    gText_PlayBerryCrushAgain,
+    gText_YouHaveNoBerries,
+    gText_MemberDroppedOut,
+    gText_TimesUpNoGoodPowder,
+    gText_CommunicationStandby2,
+};
+
+static const struct BgTemplate gUnknown_082F32C8[4] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 15,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0,
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 13,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0, 
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 12,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0, 
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 11,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0, 
+    },
+};
+
+
+static const u8 sBerryCrushTextColorTable[][3] =
+{
+    {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GREY,  TEXT_COLOR_LIGHT_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_RED},
+    {TEXT_COLOR_WHITE,       TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_BLUE},
+    {TEXT_COLOR_WHITE,       TEXT_COLOR_GREEN,      TEXT_COLOR_LIGHT_GREEN},
+    {TEXT_COLOR_WHITE,       TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_RED},
+};
+
+
+static const struct WindowTemplate gUnknown_082F32EC =
+{
+    .bg = 0, 
+    .tilemapLeft = 3, 
+    .tilemapTop = 4, 
+    .width = 24, 
+    .height = 13, 
+    .paletteNum = 15,
+    .baseBlock = 1
+};
+
+static const struct WindowTemplate gUnknown_082F32F4[] =
+{
+    {
+        .bg = 0, 
+        .tilemapLeft = 0, 
+        .tilemapTop = 0, 
+        .width = 9, 
+        .height = 2, 
+        .paletteNum = 8, 
+        .baseBlock = 1005
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 0, 
+        .tilemapTop = 3, 
+        .width = 9, 
+        .height = 2, 
+        .paletteNum = 8, 
+        .baseBlock = 987
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 0, 
+        .tilemapTop = 6, 
+        .width = 9, 
+        .height = 2, 
+        .paletteNum = 8, 
+        .baseBlock = 969
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 21, 
+        .tilemapTop = 3, 
+        .width = 9, 
+        .height = 2, 
+        .paletteNum = 8, 
+        .baseBlock = 951
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 21, 
+        .tilemapTop = 6, 
+        .width = 9, 
+        .height = 2, 
+        .paletteNum = 8, 
+        .baseBlock = 933
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+static const struct WindowTemplate gUnknown_082F3324[] =
+{
+    {
+        .bg = 0, 
+        .tilemapLeft = 5, 
+        .tilemapTop = 2, 
+        .width = 20, 
+        .height = 16, 
+        .paletteNum = 15, 
+        .baseBlock = 1
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 5, 
+        .tilemapTop = 2, 
+        .width = 20, 
+        .height = 16, 
+        .paletteNum = 15, 
+        .baseBlock = 1
+    },
+    {
+        .bg = 0, 
+        .tilemapLeft = 4, 
+        .tilemapTop = 2, 
+        .width = 22, 
+        .height = 16, 
+        .paletteNum = 15, 
+        .baseBlock = 1
+    },
+    DUMMY_WIN_TEMPLATE,
+};
+
+static const u8 gUnknown_082F3344[][4] =
+{
+    {6, 8, 9, 11}, 
+    {12, 14, 15, 16},
+};
+
+static const u32 gUnknown_082F334C[] = 
+{
+    50000000 / (1 << 0), 
+    50000000 / (1 << 1), 
+    50000000 / (1 << 2), 
+    50000000 / (1 << 3), 
+    50000000 / (1 << 4), 
+    50000000 / (1 << 5), 
+    50000000 / (1 << 6), 
+    50000000 / (1 << 7),
+};
+
+static const u16 gBerryCrushGrinderBasePal[] = INCBIN_U16("graphics/link_games/berrycrush_grinder_base.gbapal");
+static const u16 gBerryCrushMiscSpritesPal[] = INCBIN_U16("graphics/link_games/berrycrush_misc.gbapal");
+static const u16 gBerryCrushTimerDigitsPal[] = INCBIN_U16("graphics/link_games/berrycrush_timerdigits.gbapal");
+static const u32 gBerryCrushGrinderBaseGfx[] = INCBIN_U32("graphics/link_games/berrycrush_grinder_base.4bpp.lz");
+static const u32 gBerryCrushBtnPressGfx[] = INCBIN_U32("graphics/link_games/berrycrush_btnpress.4bpp.lz");
+static const u32 gBerryCrushSparkleGfx[] = INCBIN_U32("graphics/link_games/berrycrush_sparkle.4bpp.lz");
+static const u8 gBerryCrushTimerDigitsGfx[] = INCBIN_U8("graphics/link_games/berrycrush_timerdigits.4bpp.lz");
+static const u8 gBerryCrushGrinderTopTilemap[] = INCBIN_U8("graphics/link_games/berrycrush_grinder_top.bin.lz");
+static const u8 gBerryCrushContainerCapTilemap[] = INCBIN_U8("graphics/link_games/berrycrush_container_cap.bin.lz");
+static const u8 gBerryCrushBackgroundTilemap[] = INCBIN_U8("graphics/link_games/berrycrush_background.bin.lz");
+
+static const u8 gUnknown_082F417C[][5] = 
+{
+    {1, 3, 0, 0, 0}, 
+    {0, 1, 3, 0, 0}, 
+    {1, 3, 2, 4, 0},
+    {0, 1, 3, 2, 4},
+};
+
+static const struct BerryCrushGame_138_C gUnknown_082F4190[] =
+{
+    {
+        .unk0 = 0,
+        .unk1 = 0,
+        .unk2 = 0,
+        .unk4 = 0,
+        .unk6 = -16,
+        .unk8 = 0,
+        .unkA = 0,
+    },
+    {
+        .unk0 = 1,
+        .unk1 = 0,
+        .unk2 = 3,
+        .unk4 = -28,
+        .unk6 = -4,
+        .unk8 = -24,
+        .unkA = 16,
+    },
+    {
+        .unk0 = 2,
+        .unk1 = 0,
+        .unk2 = 6,
+        .unk4 = -16,
+        .unk6 = 20,
+        .unk8 = -8,
+        .unkA = 16,
+    },
+    {
+        .unk0 = 3,
+        .unk1 = 20,
+        .unk2 = 3,
+        .unk4 = 28,
+        .unk6 = -4,
+        .unk8 = 32,
+        .unkA = -8,
+    },
+    {
+        .unk0 = 4,
+        .unk1 = 20,
+        .unk2 = 6,
+        .unk4 = 16,
+        .unk6 = 20,
+        .unk8 = 16,
+        .unkA = -8,
+    }
+};
+
+
+static const s8 gUnknown_082F41CC[][2] =
+{
+    { 0, 0},
+    {-1, 0},
+    { 1, 1},
+};
+
+static const s8 gUnknown_082F41D2[][2] =
+{
+    {  0,   0},
+    {-16,  -4},
+    { 16,  -4},
+    { -8,  -2},
+    {  8,  -2},
+    {-24,  -8},
+    { 24,  -8},
+    {-32, -12},
+    { 32, -12},
+    {-40, -16},
+    { 40, -16},
+};
+
+static const u16 gUnknown_082F41E8[] = {5, 6, 7, 8, 9, 0};
+
+static const struct CompressedSpriteSheet gUnknown_082F41F4[] = 
+{
+    { .data = gBerryCrushGrinderBaseGfx, .size = 0x800, .tag = 1 },
+    { .data = gBerryCrushBtnPressGfx,    .size = 0xE00, .tag = 2 },
+    { .data = gBerryCrushSparkleGfx,     .size = 0x700, .tag = 3 },
+};
+
+static const struct SpriteSheet gUnknown_082F420C[] =
+{
+    { .data = gBerryCrushTimerDigitsGfx, .size = 0x2C0, .tag = 4 },
+    {}
+};
+
+
+static const struct SpritePalette gUnknown_082F421C[] =
+{
+    { .data = gBerryCrushGrinderBasePal, .tag = 1 },
+    { .data = gBerryCrushMiscSpritesPal, .tag = 2 },
+};
+
+static const struct SpritePalette gUnknown_082F422C[] =
+{
+    { .data = gBerryCrushTimerDigitsPal, .tag = 4 },
+    {}
+};
+
+static const union AnimCmd gUnknown_082F423C[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_082F4244[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_082F4254[] =
+{
+    ANIMCMD_FRAME(48, 2),
+    ANIMCMD_FRAME(64, 2),
+    ANIMCMD_FRAME(80, 2),
+    ANIMCMD_FRAME(96, 2),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_082F4268[] =
+{
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(4, 2), 
+    ANIMCMD_FRAME(8, 2),
+    ANIMCMD_FRAME(12, 2),
+    ANIMCMD_FRAME(16, 2), 
+    ANIMCMD_FRAME(20, 2), 
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd gUnknown_082F4284[] =
+{
+    ANIMCMD_FRAME(24, 4), 
+    ANIMCMD_FRAME(28, 4), 
+    ANIMCMD_FRAME(32, 4), 
+    ANIMCMD_FRAME(36, 4),
+    ANIMCMD_FRAME(40, 4), 
+    ANIMCMD_FRAME(44, 4), 
+    ANIMCMD_FRAME(48, 4), 
+    ANIMCMD_FRAME(52, 4),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd gUnknown_082F42A8[] =
+{
+    ANIMCMD_FRAME(20, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_082F42B0[] =
+{
+    ANIMCMD_FRAME(0, 0), 
+    ANIMCMD_END
+};
+
+
+static const union AffineAnimCmd gUnknown_082F42B8[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 2, 1),
+    AFFINEANIMCMD_JUMP(1)
+};
+
+static const union AffineAnimCmd gUnknown_082F42D0[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, -2, 1),
+    AFFINEANIMCMD_JUMP(1)
+};
+
+static const union AnimCmd *const gUnknown_082F42E8[] =
+{
+    gUnknown_082F423C
+};
+
+static const union AnimCmd *const gUnknown_082F42EC[] =
+{
+    gUnknown_082F4244,
+    gUnknown_082F4254,
+};
+
+static const union AnimCmd *const gUnknown_082F42F4[] =
+{
+    gUnknown_082F4268,
+    gUnknown_082F4284,
+};
+
+static const union AnimCmd *const gUnknown_082F42FC[] =
+{
+    gUnknown_082F42A8
+};
+
+static const union AnimCmd *const gUnknown_082F4300[] =
+{
+    gUnknown_082F42B0
+};
+
+static const union AffineAnimCmd *const gUnknown_082F4304[] =
+{
+    gUnknown_082F42B8,
+    gUnknown_082F42D0,
+};
+
+static const struct SpriteTemplate gUnknown_082F430C =
+{
+    .tileTag = 1, 
+    .paletteTag = 1, 
+    .oam = &gOamData_AffineOff_ObjNormal_64x64, 
+    .anims = gUnknown_082F42E8, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_082F4324 =
+{
+    .tileTag = 2, 
+    .paletteTag = 2, 
+    .oam = &gOamData_AffineOff_ObjNormal_32x32, 
+    .anims = gUnknown_082F42EC, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = sub_8022A20
+};
+
+static const struct SpriteTemplate gUnknown_082F433C =
+{
+    .tileTag = 3, 
+    .paletteTag = 2, 
+    .oam = &gOamData_AffineOff_ObjNormal_16x16, 
+    .anims = gUnknown_082F42F4, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_082F4354 =
+{
+    .tileTag = 4, 
+    .paletteTag = 4, 
+    .oam = &gOamData_AffineOff_ObjNormal_8x16, 
+    .anims = gUnknown_082F42FC, 
+    .images = NULL, 
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate gUnknown_082F436C =
+{
+    .tileTag = 5, 
+    .paletteTag = 5, 
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32, 
+    .anims = gUnknown_082F4300, 
+    .images = NULL, 
+    .affineAnims = gUnknown_082F4304, 
+    .callback = SpriteCallbackDummy
+};
+
+static const struct UnkStruct3 gUnknown_082F4384[] = 
+{
+    {
+        .field_0_0 = 1,
+        .shape = 2,
+        .size = 0,
+        .priority = 0,
+        .field_1 = 2, 
+        .xDelta = 8, 
+        .x = 156,
+        .y = 0,
+        .spriteSheet = gUnknown_082F420C,
+        .spritePal = gUnknown_082F422C,
+    },
+    {
+        .field_0_0 = 0,
+        .shape = 2,
+        .size = 0,
+        .priority = 0,
+        .field_1 = 2, 
+        .xDelta = 8, 
+        .x = 180,
+        .y = 0,
+        .spriteSheet = gUnknown_082F420C,
+        .spritePal = gUnknown_082F422C,
+    },
+    {
+        .field_0_0 = 0,
+        .shape = 2,
+        .size = 0,
+        .priority = 0,
+        .field_1 = 2, 
+        .xDelta = 8, 
+        .x = 204,
+        .y = 0,
+        .spriteSheet = gUnknown_082F420C,
+        .spritePal = gUnknown_082F422C,
+    }
+};
+
+static const u8 *const gUnknown_082F43B4[] =
+{
+    gText_SpaceTimes2,
+    gText_XDotY,
+    gText_Var1Berry,
+    gText_NeatnessRankings,
+    gText_CoopRankings,
+    gText_PressingPowerRankings,
+};
+
+static u32 (*const gUnknown_082F43CC[])(struct BerryCrushGame *, u8 *) =
+{
+    NULL,
+    sub_8022C58,
+    sub_8022CB0,
+    sub_8022D14,
+    sub_8022E1C,
+    sub_8022E3C,
+    sub_8022E5C,
+    sub_8022EAC,
+    sub_8022F04,
+    sub_8022F1C,
+    sub_8023070,
+    sub_80231B8,
+    sub_80232EC,
+    sub_80238F0,
+    sub_8023998,
+    sub_8023A30,
+    sub_8023BC0,
+    sub_8023CAC,
+    sub_8024048,
+    sub_8024134,
+    sub_8024228,
+    sub_80242E0,
+    sub_80243BC,
+    sub_8024444,
+    sub_8024508,
+    sub_8024568,
+};
+
+static const u8 gUnknown_082F4434[][4] =
+{
+    {2,  4,  6,  7}, 
+    {3,  5,  8, 11},
+    {3,  7, 11, 15},
+    {4,  8, 12, 17},
+};
+
+static const u8 gUnknown_082F4444[] = {5, 7, 9, 12};
+static const u8 gUnknown_082F4448[] = {3, 7, 15, 31};
+
 
 struct BerryCrushGame *sub_8020C00(void)
 {
@@ -280,9 +840,9 @@ void sub_8020C70(MainCallback callback)
     if (!gReceivedRemoteLinkPlayers || gWirelessCommType == 0)
     {
         SetMainCallback2(callback);
-        gUnknown_03005000.unk_10 = 0;
-        gUnknown_03005000.unk_12 = 0;
-        gUnknown_03005000.unk_ee = 1;
+        Rfu.unk_10 = 0;
+        Rfu.unk_12 = 0;
+        Rfu.unk_ee = 1;
         return;
     }
 
@@ -291,9 +851,9 @@ void sub_8020C70(MainCallback callback)
     if (playerCount < 2 || multiplayerId >= playerCount)
     {
         SetMainCallback2(callback);
-        gUnknown_03005000.unk_10 = 0;
-        gUnknown_03005000.unk_12 = 0;
-        gUnknown_03005000.unk_ee = 1;
+        Rfu.unk_10 = 0;
+        Rfu.unk_12 = 0;
+        Rfu.unk_ee = 1;
         return;
     }
 
@@ -301,9 +861,9 @@ void sub_8020C70(MainCallback callback)
     if (!gUnknown_02022C90)
     {
         SetMainCallback2(callback);
-        gUnknown_03005000.unk_10 = 0;
-        gUnknown_03005000.unk_12 = 0;
-        gUnknown_03005000.unk_ee = 1;
+        Rfu.unk_10 = 0;
+        Rfu.unk_12 = 0;
+        Rfu.unk_ee = 1;
         return;
     }
 
@@ -837,7 +1397,7 @@ void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
 void sub_80219C8(u8 windowId, u8 left, u8 colorId, const u8 *string)
 {
     left = (left * 4) - (GetStringWidth(2, string, -1) / 2u);
-    AddTextPrinterParameterized3(windowId, 2, left, 0, sBerryCrushTextColors1[colorId], 0, string);
+    AddTextPrinterParameterized3(windowId, 2, left, 0, sBerryCrushTextColorTable[colorId], 0, string);
 }
 
 #ifdef NONMATCHING
@@ -943,7 +1503,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
             2,
             xOffset,
             r10,
-            sBerryCrushTextColors1[0],
+            sBerryCrushTextColorTable[0],
             0,
             gStringVar4
         );
@@ -959,7 +1519,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
             2,
             4,
             r10,
-            sBerryCrushTextColors1[0],
+            sBerryCrushTextColorTable[0],
             0,
             gStringVar4
         );
@@ -1259,7 +1819,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
         lsrs r2, 24\n\
         mov r1, r10\n\
         lsrs r3, r1, 24\n\
-        ldr r1, =sBerryCrushTextColors1\n\
+        ldr r1, =sBerryCrushTextColorTable\n\
         str r1, [sp]\n\
         movs r4, 0\n\
         str r4, [sp, 0x4]\n\
@@ -1301,7 +1861,7 @@ void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
         ldrb r0, [r0]\n\
         mov r4, r10\n\
         lsrs r3, r4, 24\n\
-        ldr r1, =sBerryCrushTextColors1\n\
+        ldr r1, =sBerryCrushTextColorTable\n\
         str r1, [sp]\n\
         movs r1, 0\n\
         str r1, [sp, 0x4]\n\
@@ -1339,24 +1899,24 @@ void sub_8021D34(struct BerryCrushGame *r8)
     u8 r7 = GetWindowAttribute(r8->unk138.unk82, WINDOW_HEIGHT) * 8 - 42;
 
     sub_8021944(&r8->unk138, sp10->as_four_players.unk00.unk04);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gText_TimeColon);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimeColon);
     r6 = 176 - (u8)GetStringWidth(2, gText_SpaceSec, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gText_SpaceSec);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceSec);
     ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk6, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar2, r8->unk138.unk8, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY2);
     r6 -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
     r6 -= GetStringWidth(2, gText_SpaceMin, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gText_SpaceMin);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceMin);
     ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk4, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringExpandPlaceholders(gStringVar4, gText_StrVar1);
     r6 -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
     r7 += 14;
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 0, r7, sBerryCrushTextColors1[0], 0, gText_PressingSpeed);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 0, r7, sBerryCrushTextColorTable[0], 0, gText_PressingSpeed);
     r6 = 176 - (u8)GetStringWidth(2, gText_TimesPerSec, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gText_TimesPerSec);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimesPerSec);
     for (; r10 < 8; ++r10)
         if (((u8)r8->unk16 >> (7 - r10)) & 1)
             sp0C += *(r10 + gUnknown_082F334C); // It's accessed in a different way here for unknown reason
@@ -1365,15 +1925,15 @@ void sub_8021D34(struct BerryCrushGame *r8)
     StringExpandPlaceholders(gStringVar4, gText_XDotY3);
     r6 -= GetStringWidth(2, gStringVar4, -1);
     if (r8->unk25_1)
-        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors4, 0, gStringVar4);
+        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[5], 0, gStringVar4);
     else
-        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
+        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
     r7 += 14;
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 0, r7, sBerryCrushTextColors1[0], 0, gText_Silkiness);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 0, r7, sBerryCrushTextColorTable[0], 0, gText_Silkiness);
     ConvertIntToDecimalStringN(gStringVar1, sp10->as_four_players.unk00.unk08, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
     r6 = 176 - (u8)GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColors1[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
 }
 
 bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
@@ -1386,7 +1946,7 @@ bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
     case 0:
         r5 = r4->unk9 - 2;
         sub_8022554(r6);
-        memcpy(&template, &gUnknown_082F32CC[r4->unk12], sizeof(struct WindowTemplate));
+        memcpy(&template, &gUnknown_082F3324[r4->unk12 - 11], sizeof(struct WindowTemplate));
         if (r4->unk12 == 13)
             template.height = gUnknown_082F3344[1][r5];
         else
@@ -1468,7 +2028,7 @@ void sub_8022250(u8 r4)
             1,
             r7,
             1,
-            sBerryCrushTextColorTable[0],
+            sBerryCrushTextColorTable[3],
             0,
             r10_
         );
@@ -1479,7 +2039,7 @@ void sub_8022250(u8 r4)
             1,
             r7,
             17,
-            sBerryCrushTextColorTable[0],
+            sBerryCrushTextColorTable[3],
             0,
             r10_
         );
@@ -1493,7 +2053,7 @@ void sub_8022250(u8 r4)
                 1,
                 0,
                 r10,
-                sBerryCrushTextColors1[0],
+                sBerryCrushTextColorTable[0],
                 0,
                 gStringVar4
             );
@@ -1503,7 +2063,7 @@ void sub_8022250(u8 r4)
                 1,
                 r7,
                 r10,
-                sBerryCrushTextColors1[0],
+                sBerryCrushTextColorTable[0],
                 0,
                 gText_TimesPerSec
             );
@@ -1519,7 +2079,7 @@ void sub_8022250(u8 r4)
                 1,
                 r7,
                 r10,
-                sBerryCrushTextColors1[0],
+                sBerryCrushTextColorTable[0],
                 0,
                 gStringVar4
             );
@@ -1605,7 +2165,7 @@ void sub_8022600(struct BerryCrushGame *r6)
                 1,
                 0,
                 0,
-                sBerryCrushTextColors2[0],
+                sBerryCrushTextColorTable[1],
                 0,
                 PLAYER_UNK14(r6, r7)
             );
@@ -1619,7 +2179,7 @@ void sub_8022600(struct BerryCrushGame *r6)
                 1,
                 0,
                 0,
-                sBerryCrushTextColors3[0],
+                sBerryCrushTextColorTable[2],
                 0,
                 PLAYER_UNK14(r6, r7)
             );
@@ -1668,7 +2228,7 @@ void sub_8022730(struct BerryCrushGame *r6)
     gSpriteCoordOffsetY = -104;
     for (; r5 < 4; ++r5)
         LoadCompressedSpriteSheet(&gUnknown_082F41F4[r5]);
-    LoadSpritePalettes(&gUnknown_082F421C);
+    LoadSpritePalettes(gUnknown_082F421C);
     r2 = CreateSprite(&gUnknown_082F430C, 120, 88, 5);
     r6->unk138.unk20 = &gSprites[r2];
     r6->unk138.unk20->oam.priority = 3;
@@ -1746,7 +2306,7 @@ void sub_8022960(struct BerryCrushGame *r5)
         DestroySprite(r5->unk138.unk20);
 }
 
-void sub_8022A20(struct Sprite *sprite)
+static void sub_8022A20(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -1839,7 +2399,7 @@ void sub_8022BEC(u16 r5, u8 r4, u8 *r7)
     }
 }
 
-u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1)
+static u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1)
 {
     u16 r4;
     u32 r0;
@@ -1875,7 +2435,7 @@ u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1)
     return 0;
 }
 
-u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5)
+static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5)
 {
     switch (r4->unkC)
     {
@@ -1908,7 +2468,7 @@ u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5)
     }
 }
 
-u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5)
+static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5)
 {
     u16 r4 = r5[3];
 
@@ -1952,21 +2512,21 @@ u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5)
     return 0;
 }
 
-u32 sub_8022E1C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 sub_8022E1C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     if (sub_802104C() != 0)
         sub_8022BEC(r4->unkE, 0, r4->unk36);
     return 0;
 }
 
-u32 sub_8022E3C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 sub_8022E3C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     if (sub_802130C() != 0)
         sub_8022BEC(r4->unkE, 0, r4->unk36);
     return 0;
 }
 
-u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -1987,7 +2547,7 @@ u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5)
+static u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5)
 {
     switch (r4->unkC)
     {
@@ -2009,14 +2569,14 @@ u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5)
     return 0;
 }
 
-u32 sub_8022F04(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
+static u32 sub_8022F04(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
 {
     r0->unk4 = NULL;
     SetMainCallback2(sub_8020E1C);
     return 0;
 }
 
-u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
+static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
 {
     u8 r3;
 
@@ -2068,7 +2628,7 @@ u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
     return 0;
 }
 
-u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2123,7 +2683,7 @@ u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2170,7 +2730,7 @@ u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4-> unkC)
     {
@@ -2459,7 +3019,7 @@ void sub_802385C(struct BerryCrushGame *r5)
     }
 }
 
-u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     memset(&r4->unk5C, 0, sizeof(r4->unk5C));
     memset(&r4->unk40.unkE, 0, sizeof(r4->unk40.unkE));
@@ -2492,7 +3052,7 @@ u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
     }
 }
 
-u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     memset(&r4->unk5C, 0, sizeof(r4->unk5C));
     memset(&r4->unk40.unkE, 0, sizeof(r4->unk40.unkE));
@@ -2522,7 +3082,7 @@ u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
     }
 }
 
-u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2579,7 +3139,7 @@ u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
+static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
 {
     switch (r5->unkC)
     {
@@ -2619,7 +3179,7 @@ u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
+static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
 {
     u8 r8, r4_;
     s32 r2;
@@ -2809,7 +3369,7 @@ u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
+static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
 {
     switch (r5->unkC)
     {
@@ -2853,7 +3413,7 @@ u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
+static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
 {
     switch (r5->unkC)
     {
@@ -2890,7 +3450,7 @@ u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
     return 0;
 }
 
-u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
+static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
 {
     s32 r4;
 #ifndef NONMATCHING
@@ -2938,7 +3498,7 @@ u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     u8 r5 = 0;
 
@@ -2979,7 +3539,7 @@ u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3009,7 +3569,7 @@ u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3040,7 +3600,7 @@ u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3064,7 +3624,7 @@ u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
     return 0;
 }
 
-u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
+static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
 {
     sub_8020C0C(NULL);
     return 0;

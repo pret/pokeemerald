@@ -200,7 +200,7 @@ DewfordTown_Hall_EventScript_DebateReact1:: @ 81FD73A
 DewfordTown_Hall_EventScript_PlayerReactWest:: @ 81FD75B
 	compare VAR_FACING, DIR_EAST
 	goto_if_eq DewfordTown_Hall_EventScript_DontMovePlayer1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -224,19 +224,19 @@ DewfordTown_Hall_EventScript_PlayerReactNorthSouth:: @ 81FD793
 	return
 
 DewfordTown_Hall_EventScript_PlayerWalkInPlaceUp:: @ 81FD7AA
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_PlayerWalkInPlaceDown:: @ 81FD7B5
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_PlayerReactEast:: @ 81FD7C0
 	compare VAR_FACING, DIR_WEST
 	goto_if_eq DewfordTown_Hall_EventScript_DontMovePlayer1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

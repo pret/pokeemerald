@@ -21,7 +21,7 @@ BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering:: @ 82661F3
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter
 	waitmovement 0
 	goto BattleFrontier_ReceptionGate_EventScript_ScottScene
 	end
@@ -40,18 +40,18 @@ BattleFrontier_ReceptionGate_EventScript_ScottScene:: @ 8266229
 	closemessage
 	applymovement 1, Common_Movement_WalkInPlaceFastestUp
 	applymovement 2, Common_Movement_WalkInPlaceFastestUp
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	playse SE_PIN
 	applymovement 1, Common_Movement_ExclamationMark
 	applymovement 2, Common_Movement_ExclamationMark
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_ReceptionGate_Movement_GreeterFaceScott
 	applymovement 2, BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerFaceScott
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerFaceScott
 	applymovement 4, BattleFrontier_ReceptionGate_Movement_ScottEnter
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere, MSGBOX_DEFAULT

@@ -23,7 +23,7 @@ NewMauville_Entrance_OnTransition: @ 82372FB
 
 NewMauville_Entrance_EventScript_Door:: @ 82372FF
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox NewMauville_Entrance_Text_DoorIsLocked, MSGBOX_DEFAULT
 	checkitem ITEM_BASEMENT_KEY, 1

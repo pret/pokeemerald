@@ -10,7 +10,7 @@ EverGrandeCity_DrakesRoom_OnWarp: @ 82286AC
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth:: @ 82286B6
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_DrakesRoom_OnFrame: @ 82286BB
