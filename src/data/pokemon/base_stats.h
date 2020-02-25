@@ -1,5 +1,5 @@
-// Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
-// 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
+// Maximum value for a female PokÃ©mon is 254 (MON_FEMALE) which is 100% female.
+// 255 (MON_GENDERLESS) is reserved for genderless PokÃ©mon.
 #define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
 
 #define OLD_UNOWN_BASE_STATS                \
