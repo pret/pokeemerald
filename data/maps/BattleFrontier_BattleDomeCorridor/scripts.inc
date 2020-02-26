@@ -13,12 +13,12 @@ BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor:: @ 824B10E
 	compare VAR_RESULT, FRONTIER_LVL_OPEN
 	goto_if_eq BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen
 	applymovement 1, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLv50
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLv50
 	waitmovement 0
 	opendoor 13, 3
 	waitdooranim
 	applymovement 1, BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLv50
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLv50
 	waitmovement 0
 	closedoor 13, 3
 	waitdooranim
@@ -26,12 +26,12 @@ BattleFrontier_BattleDomeCorridor_EventScript_EnterCorridor:: @ 824B10E
 
 BattleFrontier_BattleDomeCorridor_EventScript_WalkToBattleRoomLvOpen:: @ 824B161
 	applymovement 1, BattleFrontier_BattleDomeCorridor_Movement_AttendantWalkToDoorLvOpen
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerWalkToDoorLvOpen
 	waitmovement 0
 	opendoor 37, 3
 	waitdooranim
 	applymovement 1, BattleFrontier_BattleDomeCorridor_Movement_AttendantEnterDoorLvOpen
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_PlayerEnterDoorLvOpen
 	waitmovement 0
 	closedoor 37, 3
 	waitdooranim

@@ -29,7 +29,7 @@ u8 *sub_80682A8(struct MapPosition *, u8, u8);
 void overworld_poison_timer_set(void);
 void RestartWildEncounterImmunitySteps(void);
 u8 *sub_8068E24(struct MapPosition *);
-const u8 *GetEventObjectScriptPointerPlayerFacing(void);
+const u8 *GetObjectEventScriptPointerPlayerFacing(void);
 bool8 sub_8068870(u16 a);
 bool8 sub_8068894(void);
 bool8 sub_8068A64(struct MapPosition *, u16);

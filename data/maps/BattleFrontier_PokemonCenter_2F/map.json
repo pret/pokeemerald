@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 6,
       "y": 2,
       "elevation": 0,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 2,
       "y": 2,
       "elevation": 0,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 10,
       "y": 2,
       "elevation": 0,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MYSTERY_GIFT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 1,
       "y": 2,
       "elevation": 0,

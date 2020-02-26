@@ -265,13 +265,13 @@ MossdeepCity_EventScript_Scott:: @ 81E4C85
 	end
 
 MossdeepCity_EventScript_ScottExitNorth:: @ 81E4CB0
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
+	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
 	applymovement 16, MossdeepCity_Movement_ScottExitNorth
 	waitmovement 0
 	return
 
 MossdeepCity_EventScript_ScottExitEast:: @ 81E4CC2
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
+	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
 	applymovement 16, MossdeepCity_Movement_ScottExitEast
 	waitmovement 0
 	return

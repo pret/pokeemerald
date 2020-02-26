@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 31,
       "y": 3,
       "elevation": 4,
@@ -39,7 +39,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_1",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 32,
       "y": 16,
       "elevation": 3,
@@ -52,7 +52,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 32,
       "y": 10,
       "elevation": 3,
@@ -65,7 +65,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 11,
       "y": 14,
       "elevation": 4,
@@ -78,7 +78,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_OLD_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
       "x": 8,
       "y": 10,
       "elevation": 3,
@@ -91,7 +91,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GAMEBOY_KID",
+      "graphics_id": "OBJ_EVENT_GFX_GAMEBOY_KID",
       "x": 9,
       "y": 16,
       "elevation": 3,
@@ -104,7 +104,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_KECLEON_1",
+      "graphics_id": "OBJ_EVENT_GFX_KECLEON_1",
       "x": 25,
       "y": 8,
       "elevation": 3,

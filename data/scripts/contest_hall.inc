@@ -490,7 +490,7 @@ ContestHall_EventScript_AudienceReactToContestant:: @ 827A2D5
 @ For below VAR_TEMP_0 is the number of heart emotes to try to display in the audience
 @ The number of hearts to try to display is based on the condition of the presented pokemon and the rank
 @ For each heart to display a random audience member is chosen, and a new one chosen if they already displayed a heart
-@ VAR_TEMP_1 through VAR_TEMP_8 represent each of the 8 audience members that are actual event objects
+@ VAR_TEMP_1 through VAR_TEMP_8 represent each of the 8 audience members that are actual object events
 @    and are set to 9 if they havent displayed a heart yet, and 1 if they have
 ContestHall_EventScript_AudienceHeartEmotes:: @ 827A34F
 	special GetContestMonCondition

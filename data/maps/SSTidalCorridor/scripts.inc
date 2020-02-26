@@ -193,11 +193,11 @@ SSTidalCorridor_EventScript_ScottScene:: @ 823C219
 	lockall
 	applymovement 5, SSTidalCorridor_Movement_ScottApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox SSTidalCorridor_Text_ScottBattleFrontierInvite, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, SSTidalCorridor_Movement_PlayerWatchScottExit
+	applymovement OBJ_EVENT_ID_PLAYER, SSTidalCorridor_Movement_PlayerWatchScottExit
 	applymovement 1, SSTidalCorridor_Movement_SailorMoveForScott
 	applymovement 5, SSTidalCorridor_Movement_ScottExit
 	waitmovement 0

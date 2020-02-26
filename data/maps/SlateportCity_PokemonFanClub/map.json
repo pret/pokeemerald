@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 11,
       "y": 4,
       "elevation": 0,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 1,
       "y": 5,
       "elevation": 0,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_REPORTER_F",
+      "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 11,
       "y": 5,
       "elevation": 0,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 6,
       "y": 5,
       "elevation": 4,
@@ -80,7 +80,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ZIGZAGOON_2",
+      "graphics_id": "OBJ_EVENT_GFX_ZIGZAGOON_2",
       "x": 3,
       "y": 9,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SKITTY",
+      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
       "x": 8,
       "y": 3,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AZUMARILL",
+      "graphics_id": "OBJ_EVENT_GFX_AZUMARILL",
       "x": 10,
       "y": 8,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 11,
       "y": 8,
       "elevation": 0,

@@ -4,10 +4,10 @@ const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.
 const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox.gbapal.lz");
 const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox_map.bin.lz");
 
-const u32 gMonStillFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/front.4bpp.lz");
-const u32 gMonBackPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/back.4bpp.lz");
-const u32 gMonPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/normal.gbapal.lz");
-const u32 gMonShinyPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/circled_question_mark/shiny.gbapal.lz");
+const u32 gMonStillFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/front.4bpp.lz");
+const u32 gMonBackPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/back.4bpp.lz");
+const u32 gMonPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/normal.gbapal.lz");
+const u32 gMonShinyPalette_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/shiny.gbapal.lz");
 
 const u32 gUnusedGfx_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.4bpp.lz"); // japanese table and bunch of stuff
 const u32 gUnusedTimemap_OldCharmap[] = INCBIN_U32("graphics/unused/old_charmap.bin.lz");
@@ -732,9 +732,9 @@ const u32 gBattleAnimSpritePal_PinkHeart[] = INCBIN_U32("graphics/battle_anims/s
 const u32 gBattleAnimSpritePal_MagentaHeart[] = INCBIN_U32("graphics/battle_anims/sprites/magenta_heart.gbapal.lz");
 const u32 gBattleAnimSpritePal_RedHeart[] = INCBIN_U32("graphics/battle_anims/sprites/red_heart.gbapal.lz");
 
-const u32 gUnknown_08C232E0[] = INCBIN_U32("graphics/battle_anims/backgrounds/attract.4bpp.lz");
-const u32 gUnknown_08C23D50[] = INCBIN_U32("graphics/battle_anims/backgrounds/attract.gbapal.lz");
-const u32 gUnknown_08C23D78[] = INCBIN_U32("graphics/battle_anims/backgrounds/attract.bin.lz");
+const u32 gBattleAnimBgImage_Attract[] = INCBIN_U32("graphics/battle_anims/backgrounds/attract.4bpp.lz");
+const u32 gBattleAnimBgPalette_Attract[] = INCBIN_U32("graphics/battle_anims/backgrounds/attract.gbapal.lz");
+const u32 gBattleAnimBgTilemap_Attract[] = INCBIN_U32("graphics/battle_anims/backgrounds/attract.bin.lz");
 
 const u32 gBattleAnimSpriteGfx_RedOrb[] = INCBIN_U32("graphics/battle_anims/sprites/red_orb.4bpp.lz");
 const u32 gBattleAnimSpritePal_RedOrb[] = INCBIN_U32("graphics/battle_anims/sprites/red_orb.gbapal.lz");
@@ -750,8 +750,8 @@ const u32 gBattleAnimSpriteGfx_Finger2[] = INCBIN_U32("graphics/battle_anims/spr
 const u32 gBattleAnimSpriteGfx_MovementWaves[] = INCBIN_U32("graphics/battle_anims/sprites/movement_waves.4bpp.lz");
 const u32 gBattleAnimSpritePal_MovementWaves[] = INCBIN_U32("graphics/battle_anims/sprites/movement_waves.gbapal.lz");
 
-const u32 gUnknown_08C249D0[] = INCBIN_U32("graphics/battle_anims/backgrounds/scary_face.gbapal.lz");
-const u32 gUnknown_08C249F8[] = INCBIN_U32("graphics/battle_anims/backgrounds/scary_face.4bpp.lz");
+const u32 gBattleAnimBgPalette_ScaryFace[] = INCBIN_U32("graphics/battle_anims/backgrounds/scary_face.gbapal.lz");
+const u32 gBattleAnimBgImage_ScaryFace[] = INCBIN_U32("graphics/battle_anims/backgrounds/scary_face.4bpp.lz");
 
 const u32 gBattleAnimSpritePal_EyeSparkle[] = INCBIN_U32("graphics/battle_anims/sprites/eye_sparkle.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_EyeSparkle[] = INCBIN_U32("graphics/battle_anims/sprites/eye_sparkle.4bpp.lz");
@@ -844,9 +844,9 @@ const u32 gBattleAnimBgPalette_Bug[] = INCBIN_U32("graphics/battle_anims/backgro
 const u32 gBattleAnimBgImage_Highspeed[] = INCBIN_U32("graphics/battle_anims/backgrounds/highspeed.4bpp.lz");
 const u32 gBattleAnimBgTilemap_HighspeedPlayer[] = INCBIN_U32("graphics/battle_anims/backgrounds/highspeed_player.bin.lz");
 
-const u32 gUnknown_08C2A634[] = INCBIN_U32("graphics/battle_anims/masks/morning_sun.4bpp.lz");
-const u32 gUnknown_08C2A6D4[] = INCBIN_U32("graphics/battle_anims/masks/morning_sun.gbapal.lz");
-const u32 gUnknown_08C2A6EC[] = INCBIN_U32("graphics/battle_anims/masks/morning_sun.bin.lz");
+const u32 gBattleAnimMaskImage_LightBeam[] = INCBIN_U32("graphics/battle_anims/masks/light_beam.4bpp.lz");
+const u32 gBattleAnimMaskPalette_LightBeam[] = INCBIN_U32("graphics/battle_anims/masks/light_beam.gbapal.lz");
+const u32 gBattleAnimMaskTilemap_LightBeam[] = INCBIN_U32("graphics/battle_anims/masks/light_beam.bin.lz");
 
 const u32 gBattleAnimBgTilemap_GuillotineOpponent[] = INCBIN_U32("graphics/battle_anims/backgrounds/guillotine_opponent.bin.lz");
 const u32 gBattleAnimBgTilemap_GuillotinePlayer[] = INCBIN_U32("graphics/battle_anims/backgrounds/guillotine_player.bin.lz");
@@ -1001,8 +1001,8 @@ const u32 gUnknown_08D85A1C[] = INCBIN_U32("graphics/battle_frontier/battle_tile
 
 const u32 gBattleAnimSpriteGfx_FlyingDirt[] = INCBIN_U32("graphics/battle_anims/sprites/flying_dirt.4bpp.lz");
 
-const u32 gUnknown_08D8D410[] = INCBIN_U32("graphics/battle_anims/backgrounds/sandstorm_brew.bin.lz");
-const u32 gUnknown_08D8D58C[] = INCBIN_U32("graphics/battle_anims/backgrounds/sandstorm_brew.4bpp.lz");
+const u32 gBattleAnimBgTilemap_Sandstorm[] = INCBIN_U32("graphics/battle_anims/backgrounds/sandstorm_brew.bin.lz");
+const u32 gBattleAnimBgImage_Sandstorm[] = INCBIN_U32("graphics/battle_anims/backgrounds/sandstorm_brew.4bpp.lz");
 
 const u32 gBattleAnimSpritePal_FlyingDirt[] = INCBIN_U32("graphics/battle_anims/sprites/flying_dirt.gbapal.lz");
 
@@ -1121,11 +1121,9 @@ const u32 gBattleAnimSpritePal_CrossImpact[] = INCBIN_U32("graphics/battle_anims
 const u32 gBattleAnimBgImage_Surf[] = INCBIN_U32("graphics/battle_anims/backgrounds/water.4bpp.lz");
 const u32 gBattleAnimBgPalette_Surf[] = INCBIN_U32("graphics/battle_anims/backgrounds/water.gbapal.lz");
 
-const u32 gUnknown_08D95E00[] = INCBIN_U32("graphics/unknown/unknown_D95E00.bin.lz");
-
-const u32 gUnknown_08D960D0[] = INCBIN_U32("graphics/unknown/unknown_D960D0.bin.lz");
-
-const u32 gUnknown_08D963A4[] = INCBIN_U32("graphics/unknown/unknown_D963A4.bin.lz");
+const u32 gBattleAnimBgTilemap_SurfOpponent[] = INCBIN_U32("graphics/battle_anims/backgrounds/water_opponent.bin.lz");
+const u32 gBattleAnimBgTilemap_SurfPlayer[] = INCBIN_U32("graphics/battle_anims/backgrounds/water_player.bin.lz");
+const u32 gBattleAnimBgTilemap_SurfContest[] = INCBIN_U32("graphics/battle_anims/backgrounds/water_contest.bin.lz");
 
 const u32 gBattleAnimSpritePal_Slash2[] = INCBIN_U32("graphics/battle_anims/sprites/slash_2.gbapal.lz");
 
@@ -1418,27 +1416,21 @@ const u16 gUsePokeblockNatureWin_Pal[] = INCBIN_U16("graphics/pokeblock/use_scre
 
 #include "data/graphics/slot_machine.h"
 
-const u16 gUnknown_08DD19F8[] = INCBIN_U16("graphics/unknown/unknown_DD19F8.bin");
-
-const u8 gUnknown_08DD1A18[] = INCBIN_U8("graphics/unknown/unknown_DD1A18.4bpp");
-
 // trainer card
 
-const u16 gEmeraldTrainerCard0Star_Pal[] = INCBIN_U16("graphics/trainer_card/0star.gbapal");
-const u32 gEmeraldTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card.4bpp.lz");
+const u16 gHoennTrainerCard0Star_Pal[] = INCBIN_U16("graphics/trainer_card/0star.gbapal");
+const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card.4bpp.lz");
+const u32 gHoennTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg.bin.lz");
+const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/front.bin.lz");
+const u32 gHoennTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back.bin.lz");
+const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_link.bin.lz");
 
-const u32 gUnknown_08DD1F78[] = INCBIN_U32("graphics/unknown/unknown_DD1F78.bin.lz");
-const u32 gUnknown_08DD2010[] = INCBIN_U32("graphics/unknown/unknown_DD2010.bin.lz");
-const u32 gUnknown_08DD21B0[] = INCBIN_U32("graphics/unknown/unknown_DD21B0.bin.lz");
-const u32 gUnknown_08DD228C[] = INCBIN_U32("graphics/unknown/unknown_DD228C.bin.lz");
-
-const u16 gFireRedTrainerCard0Star_Pal[] = INCBIN_U16("graphics/trainer_card/0star_fr.gbapal");
-const u32 gFireRedTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card_fr.4bpp.lz");
-
-const u32 gUnknown_08DD2AE0[] = INCBIN_U32("graphics/unknown/unknown_DD2AE0.bin.lz");
-const u32 gUnknown_08DD2B78[] = INCBIN_U32("graphics/unknown/unknown_DD2B78.bin.lz");
-const u32 gUnknown_08DD2D30[] = INCBIN_U32("graphics/unknown/unknown_DD2D30.bin.lz");
-const u32 gUnknown_08DD2E5C[] = INCBIN_U32("graphics/unknown/unknown_DD2E5C.bin.lz");
+const u16 gKantoTrainerCard0Star_Pal[] = INCBIN_U16("graphics/trainer_card/0star_fr.gbapal");
+const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card_fr.4bpp.lz");
+const u32 gKantoTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg_fr.bin.lz");
+const u32 gKantoTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_fr.bin.lz");
+const u32 gKantoTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back_fr.bin.lz");
+const u32 gKantoTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_link_fr.bin.lz");
 
 // pokemon storage system
 
@@ -1582,8 +1574,7 @@ const u32 gUnknown_08DE3060[] = INCBIN_U32("graphics/frontier_pass/tiles.bin.lz"
 const u16 gUnknown_08DE3350[] = INCBIN_U16("graphics/frontier_pass/tilemap1.bin");
 const u16 gUnknown_08DE3374[] = INCBIN_U16("graphics/frontier_pass/tilemap2.bin");
 
-// berry crusher
-
+// Berry Crush
 const u16 gUnknown_08DE3398[] = INCBIN_U16("graphics/berry_crusher/tiles.gbapal");
 const u32 gUnknown_08DE34B8[] = INCBIN_U32("graphics/berry_crusher/tiles.4bpp.lz");
 const u32 gUnknown_08DE3FD4[] = INCBIN_U32("graphics/berry_crusher/tiles.bin.lz");

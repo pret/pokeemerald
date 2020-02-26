@@ -31,7 +31,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 15,
       "y": 60,
       "elevation": 3,
@@ -44,7 +44,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 25,
       "y": 49,
       "elevation": 3,
@@ -57,7 +57,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 31,
       "y": 24,
       "elevation": 3,
@@ -70,7 +70,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 27,
       "y": 63,
       "elevation": 3,
@@ -83,7 +83,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 30,
       "y": 50,
       "elevation": 3,
@@ -96,7 +96,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 28,
       "y": 74,
       "elevation": 3,
@@ -109,7 +109,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MR_BRINEYS_BOAT",
+      "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
       "x": 12,
       "y": 54,
       "elevation": 1,
@@ -122,7 +122,7 @@
       "flag": "FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 12,
       "y": 51,
       "elevation": 4,
@@ -135,7 +135,7 @@
       "flag": "FLAG_HIDE_ROUTE_104_MR_BRINEY"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 29,
       "y": 8,
       "elevation": 3,
@@ -148,7 +148,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 34,
       "y": 6,
       "elevation": 3,
@@ -161,7 +161,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 35,
       "y": 6,
       "elevation": 3,
@@ -174,7 +174,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 36,
       "y": 6,
       "elevation": 3,
@@ -187,7 +187,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 22,
       "y": 41,
       "elevation": 3,
@@ -200,7 +200,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 23,
       "y": 41,
       "elevation": 3,
@@ -213,7 +213,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 24,
       "y": 41,
       "elevation": 3,
@@ -226,7 +226,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_F",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 37,
       "y": 8,
       "elevation": 3,
@@ -239,7 +239,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 22,
       "elevation": 3,
@@ -252,7 +252,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 23,
       "elevation": 3,
@@ -265,7 +265,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 24,
       "elevation": 3,
@@ -278,7 +278,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 3,
       "y": 25,
       "elevation": 3,
@@ -291,7 +291,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 39,
       "y": 15,
       "elevation": 3,
@@ -304,7 +304,7 @@
       "flag": "FLAG_ITEM_ROUTE_104_PP_UP"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 8,
       "y": 19,
       "elevation": 3,
@@ -317,7 +317,7 @@
       "flag": "FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 27,
       "y": 15,
       "elevation": 3,
@@ -330,7 +330,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 28,
       "y": 15,
       "elevation": 3,
@@ -343,7 +343,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_RICH_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
       "x": 21,
       "y": 25,
       "elevation": 3,
@@ -356,7 +356,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 11,
       "y": 44,
       "elevation": 3,
@@ -369,7 +369,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 29,
       "y": 53,
       "elevation": 3,
@@ -382,7 +382,7 @@
       "flag": "FLAG_ITEM_ROUTE_104_POKE_BALL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 18,
       "y": 67,
       "elevation": 3,
@@ -395,7 +395,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 37,
       "y": 22,
       "elevation": 3,
@@ -408,7 +408,7 @@
       "flag": "FLAG_ITEM_ROUTE_104_X_ACCURACY"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CUTTABLE_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 35,
       "y": 22,
       "elevation": 3,
@@ -421,7 +421,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 8,
       "elevation": 3,
@@ -434,7 +434,7 @@
       "flag": "FLAG_ITEM_ROUTE_104_POTION"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_2",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
       "x": 5,
       "y": 26,
       "elevation": 3,
@@ -447,7 +447,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 15,
       "y": 59,
       "elevation": 3,
@@ -460,7 +460,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 17,
       "y": 50,
       "elevation": 0,

@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 6,
       "y": 6,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 4,
       "y": 4,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 4,
       "y": 5,
       "elevation": 3,

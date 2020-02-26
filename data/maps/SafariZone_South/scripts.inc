@@ -9,7 +9,7 @@ SafariZone_South_OnFrame: @ 823D284
 
 SafariZone_South_EventScript_EnterSafariZone:: @ 823D28E
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, SafariZone_South_Movement_PlayerEnter
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_South_Movement_PlayerEnter
 	waitmovement 0
 	applymovement 1, SafariZone_South_Movement_ExitAttendantBlockDoor
 	waitmovement 0
@@ -76,7 +76,7 @@ SafariZone_South_EventScript_ExitEarly:: @ 823D31A
 SafariZone_South_EventScript_ExitEarlyNorth:: @ 823D33F
 	applymovement 1, SafariZone_South_Movement_MoveExitAttendantNorth
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SafariZone_South_Movement_PlayerExitNorth
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_South_Movement_PlayerExitNorth
 	waitmovement 0
 	goto SafariZone_South_EventScript_Exit
 	end
@@ -84,7 +84,7 @@ SafariZone_South_EventScript_ExitEarlyNorth:: @ 823D33F
 SafariZone_South_EventScript_ExitEarlyEast:: @ 823D359
 	applymovement 1, SafariZone_South_Movement_MoveExitAttendantEast
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SafariZone_South_Movement_PlayerExitEast
+	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_South_Movement_PlayerExitEast
 	waitmovement 0
 	goto SafariZone_South_EventScript_Exit
 	end

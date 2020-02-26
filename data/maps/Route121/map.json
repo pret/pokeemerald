@@ -31,7 +31,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 29,
       "y": 14,
       "elevation": 3,
@@ -44,7 +44,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 14,
       "y": 2,
       "elevation": 3,
@@ -57,7 +57,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 15,
       "y": 2,
       "elevation": 3,
@@ -70,7 +70,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 16,
       "y": 2,
       "elevation": 3,
@@ -83,7 +83,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 17,
       "y": 2,
       "elevation": 3,
@@ -96,7 +96,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 64,
       "y": 14,
       "elevation": 3,
@@ -109,7 +109,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 65,
       "y": 14,
       "elevation": 3,
@@ -122,7 +122,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 66,
       "y": 14,
       "elevation": 3,
@@ -135,7 +135,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BERRY_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 67,
       "y": 14,
       "elevation": 3,
@@ -148,7 +148,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 39,
       "y": 9,
       "elevation": 3,
@@ -161,7 +161,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 40,
       "y": 9,
       "elevation": 3,
@@ -174,7 +174,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 30,
       "y": 8,
       "elevation": 3,
@@ -187,7 +187,7 @@
       "flag": "FLAG_HIDE_ROUTE_121_TEAM_AQUA_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 30,
       "y": 7,
       "elevation": 3,
@@ -200,7 +200,7 @@
       "flag": "FLAG_HIDE_ROUTE_121_TEAM_AQUA_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 31,
       "y": 7,
       "elevation": 3,
@@ -213,7 +213,7 @@
       "flag": "FLAG_HIDE_ROUTE_121_TEAM_AQUA_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CUTTABLE_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 32,
       "y": 5,
       "elevation": 3,
@@ -226,7 +226,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CUTTABLE_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 65,
       "y": 4,
       "elevation": 3,
@@ -239,7 +239,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 63,
       "y": 5,
       "elevation": 3,
@@ -252,7 +252,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 55,
       "y": 8,
       "elevation": 3,
@@ -265,7 +265,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HEX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_HEX_MANIAC",
       "x": 11,
       "y": 11,
       "elevation": 3,
@@ -278,7 +278,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 22,
       "y": 5,
       "elevation": 3,
@@ -291,7 +291,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 55,
       "y": 10,
       "elevation": 3,
@@ -304,7 +304,7 @@
       "flag": "FLAG_ITEM_ROUTE_121_CARBOS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_CUTTABLE_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 26,
       "y": 12,
       "elevation": 3,
@@ -317,7 +317,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 11,
       "y": 6,
       "elevation": 3,
@@ -330,7 +330,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 59,
       "y": 8,
       "elevation": 3,
@@ -343,7 +343,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 59,
       "y": 13,
       "elevation": 3,
@@ -356,7 +356,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 65,
       "y": 9,
       "elevation": 3,
@@ -369,7 +369,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 72,
       "y": 9,
       "elevation": 3,
@@ -382,7 +382,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 60,
       "y": 10,
       "elevation": 3,
@@ -395,7 +395,7 @@
       "flag": "FLAG_ITEM_ROUTE_121_REVIVE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 38,
       "y": 13,
       "elevation": 3,

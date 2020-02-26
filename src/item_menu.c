@@ -1913,7 +1913,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
         {
             ScriptContext2_Enable();
-            FreezeEventObjects();
+            FreezeObjectEvents();
             sub_808B864();
             sub_808BCF4();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;

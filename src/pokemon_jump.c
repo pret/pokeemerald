@@ -1674,8 +1674,7 @@ static void sub_802BF7C(void)
 
 static int sub_802C098(void)
 {
-    // The number 1103515245 comes from the example implementation of rand and srand
-    gUnknown_02022CFC->unk24 = gUnknown_02022CFC->unk24 * 1103515245 + 24691;
+    gUnknown_02022CFC->unk24 = ISO_RANDOMIZE1(gUnknown_02022CFC->unk24);
     return gUnknown_02022CFC->unk24 >> 16;
 }
 
@@ -2040,7 +2039,7 @@ static int sub_802C6B0(void)
 
 static bool32 sub_802C70C(void)
 {
-    return !gUnknown_03005000.unk_124.unk_8c2 && !gUnknown_03005000.unk_9e8.unk_232;
+    return !Rfu.unk_124.unk_8c2 && !Rfu.unk_9e8.unk_232;
 }
 
 static int sub_802C73C(u8 *arg0)
@@ -2120,61 +2119,23 @@ static u16 sub_802C818(void)
     return gUnknown_082FB704[index];
 }
 
-#ifdef NONMATCHING
-// Impossible to match.
 static u16 sub_802C838(void)
 {
     u32 val, i;
 
     val = 0;
-    for (i = 0; i < 5; val = gUnknown_082FB714[i][1], i++)
+    for (i = 0; i < 5; i++)
     {
         if (gUnknown_02022CFC->unk70.unk8 < gUnknown_082FB714[i][0])
+            break;
+        else if (1)
+            val = gUnknown_082FB714[i][1];
+        else
             break;
     }
 
     return val;
 }
-#else
-NAKED
-static u16 sub_802C838(void)
-{
-    asm_unified("\n\
-    push {r4-r6,lr}\n\
-    movs r5, 0\n\
-    movs r4, 0\n\
-    ldr r3, =gUnknown_02022CFC\n\
-    ldr r0, [r3]\n\
-    ldr r2, =gUnknown_082FB714\n\
-    ldr r1, [r0, 0x78]\n\
-    ldr r0, [r2]\n\
-    cmp r1, r0\n\
-    bcc _0802C874\n\
-    ldr r5, [r2, 0x4]\n\
-    adds r6, r3, 0\n\
-    adds r3, r2, 0x4\n\
-_0802C852:\n\
-    adds r3, 0x8\n\
-    adds r2, 0x8\n\
-    adds r4, 0x1\n\
-    cmp r4, 0x4\n\
-    bhi _0802C874\n\
-    ldr r0, [r6]\n\
-    ldr r1, [r0, 0x78]\n\
-    ldr r0, [r2]\n\
-    cmp r1, r0\n\
-    bcc _0802C874\n\
-    ldr r5, [r3]\n\
-    b _0802C852\n\
-    .pool\n\
-_0802C874:\n\
-    lsls r0, r5, 16\n\
-    lsrs r0, 16\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1");
-}
-#endif
 
 static u16 sub_802C880(u16 item, u16 quantity)
 {

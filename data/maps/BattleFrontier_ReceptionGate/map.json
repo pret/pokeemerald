@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 0,
       "y": 11,
       "elevation": 0,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 8,
       "y": 11,
       "elevation": 0,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 8,
       "y": 4,
       "elevation": 0,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCOTT",
+      "graphics_id": "OBJ_EVENT_GFX_SCOTT",
       "x": 4,
       "y": 5,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_HIDE_BATTLE_FRONTIER_RECEPTION_GATE_SCOTT"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 0,
       "y": 4,
       "elevation": 0,

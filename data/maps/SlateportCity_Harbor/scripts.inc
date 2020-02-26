@@ -42,7 +42,7 @@ SlateportCity_Harbor_EventScript_AquaEscapeTrigger2:: @ 820C9D3
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger3:: @ 820C9DF
 	lockall
 	setvar VAR_0x8008, 3
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_PlayerWalkUp
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_PlayerWalkUp
 	waitmovement 0
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
 	end
@@ -51,7 +51,7 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene:: @ 820C9F5
 	applymovement 7, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement 6, Common_Movement_WalkInPlaceFastestDown
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove, MSGBOX_DEFAULT
 	closemessage
@@ -85,21 +85,21 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene:: @ 820C9F5
 SlateportCity_Harbor_EventScript_SternApproachPlayer0:: @ 820CA89
 	applymovement 4, SlateportCity_Harbor_Movement_SternApproachPlayer0
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_SternApproachPlayer1:: @ 820CA9E
 	applymovement 4, SlateportCity_Harbor_Movement_SternApproachPlayer1
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_SternApproachPlayer:: @ 820CAB3
 	applymovement 4, SlateportCity_Harbor_Movement_SternApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -237,7 +237,7 @@ SlateportCity_Harbor_EventScript_BoardFerry:: @ 820CBE9
 	compare VAR_FACING, DIR_EAST
 	call_if_eq SlateportCity_Harbor_EventScript_BoardFerryEast
 	delay 30
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	setvar VAR_0x8004, 5
 	call Common_EventScript_FerryDepart
 	return
@@ -248,12 +248,12 @@ SlateportCity_Harbor_EventScript_CancelDestinationSelect:: @ 820CC2D
 	end
 
 SlateportCity_Harbor_EventScript_BoardFerryEast:: @ 820CC37
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryEast
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryEast
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_BoardFerryNorth:: @ 820CC42
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryNorth
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_BoardFerryNorth
 	waitmovement 0
 	return
 

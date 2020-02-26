@@ -23,7 +23,7 @@
 #include "window.h"
 #include "util.h"
 #include "constants/battle_ai.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
@@ -251,9 +251,9 @@ static const u8 *const sTagMatchStrings[] =
     gText_ExpertTagMatch,
 };
 
-static const struct EventObjectTemplate sTrainerEventObjectTemplate =
+static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
 {
-    .graphicsId = EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
+    .graphicsId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
     .elevation = 3,
     .movementType = MOVEMENT_TYPE_LOOK_AROUND,
     .movementRangeX = 1,
@@ -629,25 +629,25 @@ static void SetTimerValue(u32 *dst, u32 val)
     *dst = val;
 }
 
-void LoadTrainerHillEventObjectTemplates(void)
+void LoadTrainerHillObjectEventTemplates(void)
 {
     u8 i, floorId;
-    struct EventObjectTemplate *eventTemplates = gSaveBlock1Ptr->eventObjectTemplates;
+    struct ObjectEventTemplate *eventTemplates = gSaveBlock1Ptr->objectEventTemplates;
 
-    if (!LoadTrainerHillFloorEventObjectScripts())
+    if (!LoadTrainerHillFloorObjectEventScripts())
         return;
 
     SetUpDataStruct();
     for (i = 0; i < 2; i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
-    CpuFill32(0, gSaveBlock1Ptr->eventObjectTemplates, sizeof(gSaveBlock1Ptr->eventObjectTemplates));
+    CpuFill32(0, gSaveBlock1Ptr->objectEventTemplates, sizeof(gSaveBlock1Ptr->objectEventTemplates));
 
     floorId = GetFloorId();
     for (i = 0; i < 2; i++)
     {
         u8 bits;
 
-        eventTemplates[i] = sTrainerEventObjectTemplate;
+        eventTemplates[i] = sTrainerObjectEventTemplate;
         eventTemplates[i].localId = i + 1;
         eventTemplates[i].graphicsId = FacilityClassToGraphicsId(sHillData->floors[floorId].trainers[i].facilityClass);
         eventTemplates[i].x = sHillData->floors[floorId].display.coords[i] & 0xF;
@@ -662,7 +662,7 @@ void LoadTrainerHillEventObjectTemplates(void)
     FreeDataStruct();
 }
 
-bool32 LoadTrainerHillFloorEventObjectScripts(void)
+bool32 LoadTrainerHillFloorObjectEventScripts(void)
 {
     SetUpDataStruct();
     // Something may have been dummied here
@@ -860,10 +860,10 @@ u16 LocalIdToHillTrainerId(u8 localId)
     return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
 }
 
-bool8 GetHillTrainerFlag(u8 eventObjectId)
+bool8 GetHillTrainerFlag(u8 objectEventId)
 {
     u32 floorId = GetFloorId() * 2;
-    u8 bitId = gEventObjects[eventObjectId].localId - 1 + floorId;
+    u8 bitId = gObjectEvents[objectEventId].localId - 1 + floorId;
 
     return gSaveBlock2Ptr->frontier.trainerFlags & gBitTable[bitId];
 }

@@ -923,7 +923,7 @@ static void PrintApprenticeMessage(void)
 static void Script_PrintApprenticeMessage(void)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     sub_808B864();
     sub_808BCF4();
     DrawDialogueFrame(0, 1);
@@ -1215,15 +1215,15 @@ static void SaveApprentice(void)
 static void SetSavedApprenticeTrainerGfxId(void)
 {
     u8 i;
-    u8 mapObjectGfxId;
+    u8 objectEventGfxId;
     u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
 
     for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
     if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerMaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
         return;
     }
 
@@ -1231,23 +1231,23 @@ static void SetSavedApprenticeTrainerGfxId(void)
         ;
     if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
     }
 }
 
 static void SetPlayerApprenticeTrainerGfxId(void)
 {
     u8 i;
-    u8 mapObjectGfxId;
+    u8 objectEventGfxId;
     u8 class = gApprentices[PLAYER_APPRENTICE.id].facilityClass;
 
     for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
     if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerMaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
         return;
     }
 
@@ -1255,8 +1255,8 @@ static void SetPlayerApprenticeTrainerGfxId(void)
         ;
     if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
     }
 }
 

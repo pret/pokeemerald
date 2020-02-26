@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_TEALA",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 24,
       "y": 13,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_NINJA_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 4,
       "y": 10,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_3",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_3",
       "x": 44,
       "y": 11,
       "elevation": 3,

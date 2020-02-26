@@ -21,13 +21,13 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx:: @ 8202310
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale:: @ 8202328
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale:: @ 8202333
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 VerdanturfTown_BattleTentBattleRoom_OnFrame: @ 820233E
@@ -137,7 +137,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects:: @ 820254B
 	hideobjectat 1, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx
 	setvar VAR_TEMP_1, 1
-	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible
+	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible
 	removeobject 2
 	end
 

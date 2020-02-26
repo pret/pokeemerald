@@ -5,7 +5,7 @@
 #include "bg.h"
 #include "event_data.h"
 #include "event_object_movement.h"
-#include "event_obj_lock.h"
+#include "event_object_lock.h"
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_effect.h"
@@ -450,7 +450,7 @@ static bool32 InitStartMenuStep(void)
         sInitStartMenuData[0]++;
         break;
     case 2:
-        sub_81973A4();
+        LoadMessageBoxAndBorderGfx();
         DrawStdWindowFrame(sub_81979C4(sNumStartMenuActions), FALSE);
         sInitStartMenuData[1] = 0;
         sInitStartMenuData[0]++;
@@ -541,7 +541,7 @@ void ShowStartMenu(void)
 {
     if (!IsUpdateLinkStateCBActive())
     {
-        FreezeEventObjects();
+        FreezeObjectEvents();
         sub_808B864();
         sub_808BCF4();
     }
@@ -745,7 +745,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
 void ShowBattlePyramidStartMenu(void)
 {
     ClearDialogWindowAndFrameToTransparent(0, FALSE);
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     CreateStartMenuTask(Task_ShowStartMenu);
     ScriptContext2_Enable();
 }
@@ -787,7 +787,7 @@ static bool8 SaveCallback(void)
     case SAVE_SUCCESS:
     case SAVE_ERROR:    // Close start menu
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        ScriptUnfreezeEventObjects();
+        ScriptUnfreezeObjectEvents();
         ScriptContext2_Disable();
         SoftResetInBattlePyramid();
         return TRUE;
@@ -824,7 +824,7 @@ static bool8 BattlePyramidRetireCallback(void)
         return FALSE;
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
-        ScriptUnfreezeEventObjects();
+        ScriptUnfreezeObjectEvents();
         ScriptContext2_Disable();
         ScriptContext1_SetupScript(BattlePyramid_Retire);
         return TRUE;
@@ -1314,37 +1314,37 @@ static void ShowSaveInfoWindow(void)
 
     // Print region name
     yOffset = 1;
-    sub_819A344(3, gStringVar4, TEXT_COLOR_GREEN);
+    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_GREEN);
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, 0, yOffset, 0xFF, NULL);
 
     // Print player name
-    yOffset = 0x11;
+    yOffset += 16;
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
-    sub_819A344(0, gStringVar4, color);
+    BufferSaveMenuText(SAVE_MENU_NAME, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
     PrintPlayerNameOnWindow(sSaveInfoWindowId, gStringVar4, xOffset, yOffset);
 
     // Print badge count
-    yOffset = 0x21;
+    yOffset += 16;
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
-    sub_819A344(4, gStringVar4, color);
+    BufferSaveMenuText(SAVE_MENU_BADGES, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         // Print pokedex count
-        yOffset = 0x31;
+        yOffset += 16;
         AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
-        sub_819A344(1, gStringVar4, color);
+        BufferSaveMenuText(SAVE_MENU_CAUGHT, gStringVar4, color);
         xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
         AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
     }
 
     // Print play time
-    yOffset += 0x10;
+    yOffset += 16;
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
-    sub_819A344(2, gStringVar4, color);
+    BufferSaveMenuText(SAVE_MENU_PLAY_TIME, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(1, gStringVar4, 0x70);
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar4, xOffset, yOffset, 0xFF, NULL);
 
@@ -1377,7 +1377,7 @@ static void HideStartMenuWindow(void)
 {
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
-    ScriptUnfreezeEventObjects();
+    ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
 }
 

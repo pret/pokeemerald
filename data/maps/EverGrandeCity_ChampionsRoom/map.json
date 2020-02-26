@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WALLACE",
+      "graphics_id": "OBJ_EVENT_GFX_WALLACE",
       "x": 6,
       "y": 5,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 6,
       "y": 12,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_CHAMPIONS_ROOM_RIVAL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PROF_BIRCH",
+      "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
       "x": 6,
       "y": 12,
       "elevation": 3,

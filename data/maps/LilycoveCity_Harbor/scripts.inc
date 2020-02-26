@@ -364,7 +364,7 @@ LilycoveCity_Harbor_EventScript_BoardFerryWithSailor:: @ 821E514
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	setvar VAR_0x8004, 2
 	call Common_EventScript_FerryDepart
 	return
@@ -428,18 +428,18 @@ LilycoveCity_Harbor_EventScript_BoardFerry:: @ 821E5CC
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	setvar VAR_0x8004, 2
 	call Common_EventScript_FerryDepart
 	return
 
 LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast:: @ 821E610
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryEast
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryEast
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_PlayerBoardFerryNorth:: @ 821E61B
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryNorth
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardFerryNorth
 	waitmovement 0
 	return
 
@@ -519,14 +519,14 @@ LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast:: @ 821E696
 
 LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorNorth:: @ 821E6A1
 	applymovement 5, LilycoveCity_Harbor_Movement_BrineyBoardFerry
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardWithBrineyNorth
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardWithBrineyNorth
 	applymovement 4, LilycoveCity_Harbor_Movement_SailorBoardWithBrineyNorth
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast:: @ 821E6BA
 	applymovement 5, LilycoveCity_Harbor_Movement_BrineyBoardFerry
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardWithBrineyEast
+	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardWithBrineyEast
 	applymovement 4, LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast
 	waitmovement 0
 	return

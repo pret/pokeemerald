@@ -58,3 +58,6 @@ const u8 gSlotMachineReelTimeExplosion1[] = INCBIN_U8("graphics/slot_machine/ree
 
 const u8 gSlotMachineReelTimeShadow[] = INCBIN_U8("graphics/slot_machine/shadow.4bpp");
 const u8 gSlotMachineReelTimePikaAura[] = INCBIN_U8("graphics/slot_machine/pika_aura.4bpp");
+
+const u8 gUnknown_08DD19F8[] = INCBIN_U8("graphics/unknown/unknown_DD19F8.bin");
+const u8 gUnknown_08DD1A18[] = INCBIN_U8("graphics/unknown/unknown_DD1A18.4bpp");

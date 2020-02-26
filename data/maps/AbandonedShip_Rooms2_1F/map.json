@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 7,
       "y": 13,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 6,
       "y": 13,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 4,
       "y": 4,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_1F_REVIVE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 3,
       "y": 2,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TUBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_TUBER_F",
       "x": 7,
       "y": 2,
       "elevation": 3,
