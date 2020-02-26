@@ -79,7 +79,7 @@
 	.include "src/safari_zone.o"
 	.include "src/item_use.o"
 	.include "src/battle_anim_effects_1.o"
-	.include "src/dragon.o"
+	.include "src/battle_anim_dragon.o"
 	.include "src/battle_anim_utility_funcs.o"
 	.include "src/battle_intro.o"
 	.include "src/easy_chat.o"

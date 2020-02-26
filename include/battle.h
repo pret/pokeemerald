@@ -590,7 +590,7 @@ struct MonSpritesGfx
     u8 field_F4[0x80];
     u8 *barFontGfx;
     void *field_178;
-    u16 *field_17C;
+    u16 *buffer;
 };
 
 // All battle variables are declared in battle_main.c
