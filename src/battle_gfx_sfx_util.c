@@ -1226,8 +1226,8 @@ void FreeMonSpritesGfx(void)
     if (gMonSpritesGfxPtr == NULL)
         return;
 
-    if (gMonSpritesGfxPtr->field_17C != NULL)
-        FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+    if (gMonSpritesGfxPtr->buffer != NULL)
+        FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
     if (gMonSpritesGfxPtr->field_178 != NULL)
         FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_178);
 

@@ -932,177 +932,47 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
     FreeAndDestroyMonPicSprite(spriteId);
 }
 
-#ifdef NONMATCHING
+// r, g, b are between 0 and 16
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     int curRed;
     int curGreen;
     int curBlue;
+    u16 outPal;
 
-    curRed = gPlttBufferUnfaded[i] & 0x1f;
-    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
-    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
     curRed += (((0x1f - curRed) * r) >> 4);
     curGreen += (((0x1f - curGreen) * g) >> 4);
     curBlue += (((0x1f - curBlue) * b) >> 4);
-    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
 }
 
+// r, g, b are between 0 and 16
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     int curRed;
     int curGreen;
     int curBlue;
+    u16 outPal;
 
-    curRed = gPlttBufferUnfaded[i] & 0x1f;
-    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
-    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
     curRed -= ((curRed * r) >> 4);
     curGreen -= ((curGreen * g) >> 4);
     curBlue -= ((curBlue * b) >> 4);
-    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
 }
-#else
-NAKED
-void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    asm(".syntax unified\n"
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tlsls r0, 16\n"
-    "\tlsls r1, 24\n"
-    "\tlsrs r1, 24\n"
-    "\tlsls r2, 24\n"
-    "\tlsrs r2, 24\n"
-    "\tlsls r3, 24\n"
-    "\tlsrs r3, 24\n"
-    "\tldr r4, _08085D00 @ =gPlttBufferUnfaded\n"
-    "\tlsrs r0, 15\n"
-    "\tadds r4, r0, r4\n"
-    "\tldrh r4, [r4]\n"
-    "\tmovs r5, 0x1F\n"
-    "\tmov r9, r5\n"
-    "\tmov r8, r4\n"
-    "\tmov r6, r8\n"
-    "\tands r6, r5\n"
-    "\tmov r8, r6\n"
-    "\tmovs r6, 0xF8\n"
-    "\tlsls r6, 2\n"
-    "\tands r6, r4\n"
-    "\tlsrs r6, 5\n"
-    "\tmovs r5, 0xF8\n"
-    "\tlsls r5, 7\n"
-    "\tands r4, r5\n"
-    "\tlsrs r4, 10\n"
-    "\tmov r7, r9\n"
-    "\tmov r5, r8\n"
-    "\tsubs r7, r5\n"
-    "\tmov r12, r7\n"
-    "\tmov r7, r12\n"
-    "\tmuls r7, r1\n"
-    "\tadds r1, r7, 0\n"
-    "\tasrs r1, 4\n"
-    "\tadd r8, r1\n"
-    "\tmov r5, r9\n"
-    "\tsubs r1, r5, r6\n"
-    "\tmuls r1, r2\n"
-    "\tasrs r1, 4\n"
-    "\tadds r6, r1\n"
-    "\tsubs r5, r4\n"
-    "\tmov r9, r5\n"
-    "\tmov r1, r9\n"
-    "\tmuls r1, r3\n"
-    "\tasrs r1, 4\n"
-    "\tadds r4, r1\n"
-    "\tmov r7, r8\n"
-    "\tlsls r7, 16\n"
-    "\tlsls r6, 21\n"
-    "\torrs r6, r7\n"
-    "\tlsls r4, 26\n"
-    "\torrs r4, r6\n"
-    "\tlsrs r4, 16\n"
-    "\tldr r1, _08085D04 @ =gPlttBufferFaded\n"
-    "\tadds r0, r1\n"
-    "\tstrh r4, [r0]\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-    "_08085D00: .4byte gPlttBufferUnfaded\n"
-    "_08085D04: .4byte gPlttBufferFaded\n"
-    ".syntax divided");
-}
-
-NAKED
-void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    asm(".syntax unified\n"
-    "\tpush {r4-r6,lr}\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6}\n"
-    "\tlsls r0, 16\n"
-    "\tlsls r1, 24\n"
-    "\tlsrs r1, 24\n"
-    "\tlsls r2, 24\n"
-    "\tlsrs r2, 24\n"
-    "\tlsls r3, 24\n"
-    "\tlsrs r3, 24\n"
-    "\tldr r4, _08085D78 @ =gPlttBufferUnfaded\n"
-    "\tlsrs r0, 15\n"
-    "\tadds r4, r0, r4\n"
-    "\tldrh r4, [r4]\n"
-    "\tmovs r5, 0x1F\n"
-    "\tmov r8, r5\n"
-    "\tmov r6, r8\n"
-    "\tands r6, r4\n"
-    "\tmov r8, r6\n"
-    "\tmovs r5, 0xF8\n"
-    "\tlsls r5, 2\n"
-    "\tands r5, r4\n"
-    "\tlsrs r5, 5\n"
-    "\tmovs r6, 0xF8\n"
-    "\tlsls r6, 7\n"
-    "\tands r4, r6\n"
-    "\tlsrs r4, 10\n"
-    "\tmov r6, r8\n"
-    "\tmuls r6, r1\n"
-    "\tadds r1, r6, 0\n"
-    "\tasrs r1, 4\n"
-    "\tmov r6, r8\n"
-    "\tsubs r6, r1\n"
-    "\tadds r1, r5, 0\n"
-    "\tmuls r1, r2\n"
-    "\tasrs r1, 4\n"
-    "\tsubs r5, r1\n"
-    "\tadds r1, r4, 0\n"
-    "\tmuls r1, r3\n"
-    "\tasrs r1, 4\n"
-    "\tsubs r4, r1\n"
-    "\tlsls r6, 16\n"
-    "\tlsls r5, 21\n"
-    "\torrs r5, r6\n"
-    "\tlsls r4, 26\n"
-    "\torrs r4, r5\n"
-    "\tlsrs r4, 16\n"
-    "\tldr r1, _08085D7C @ =gPlttBufferFaded\n"
-    "\tadds r0, r1\n"
-    "\tstrh r4, [r0]\n"
-    "\tpop {r3}\n"
-    "\tmov r8, r3\n"
-    "\tpop {r4-r6}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-    "_08085D78: .4byte gPlttBufferUnfaded\n"
-    "_08085D7C: .4byte gPlttBufferFaded\n"
-    ".syntax divided");
-}
-#endif
 
 bool8 FldEff_PokecenterHeal(void)
 {

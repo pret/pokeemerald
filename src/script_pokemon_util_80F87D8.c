@@ -434,7 +434,7 @@ void ScriptRandom(void)
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
-        gContestRngValue = 1103515245 * gContestRngValue + 24691;
+        gContestRngValue = ISO_RANDOMIZE1(gContestRngValue);
         random = gContestRngValue >> 16;
         scriptPtr = &gSpecialVar_Result;
     }
@@ -448,7 +448,7 @@ void ScriptRandom(void)
 
 u16 GetContestRand(void)
 {
-    gContestRngValue = 1103515245 * gContestRngValue + 24691;
+    gContestRngValue = ISO_RANDOMIZE1(gContestRngValue);
     return gContestRngValue >> 16;
 }
 
