@@ -90,7 +90,7 @@
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
-extern const struct SpriteTemplate gUnknown_08596C10[];
+extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
 //ewram
 EWRAM_DATA u16 gIntroCharacterGender = 0;
@@ -1782,7 +1782,7 @@ static void CreateGroudonRockSprites(u8 a0)
 
     for (i = 0; i < 6; i++)
     {
-        spriteId = CreateSprite(gUnknown_08596C10, gIntroGroudonRockData[i][0], 0xA0, i);
+        spriteId = CreateSprite(gAncientPowerRockSpriteTemplate, gIntroGroudonRockData[i][0], 0xA0, i);
         gSprites[spriteId].callback = SpriteCB_IntroGroudonRocks;
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].data[1] = i;
