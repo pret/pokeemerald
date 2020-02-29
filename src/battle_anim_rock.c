@@ -9,82 +9,75 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-extern const union AnimCmd *const gUnknown_085950E0[];
-extern const union AnimCmd *const gUnknown_085954D0[];
-
-void sub_81109F0(struct Sprite *);
-void sub_8110AB4(struct Sprite *);
-void AnimDirtParticleAcrossScreen(struct Sprite *);
-void AnimRaiseSprite(struct Sprite *);
-void sub_81110A4(u8 taskId);
-void sub_811131C(struct Sprite *);
-void sub_8111388(struct Sprite *);
-void sub_8111418(struct Sprite *);
-void sub_8111444(struct Sprite *);
-void sub_8110B38(struct Sprite *);
-static void sub_8110A70(struct Sprite *);
-static void sub_8110B80(struct Sprite *sprite);
-static void sub_8110CB0(u8 taskId);
+static void AnimFallingRock(struct Sprite *);
+static void AnimFallingRock_Step(struct Sprite *);
+static void AnimRockFragment(struct Sprite *);
+static void AnimFlyingSandCrescent(struct Sprite *);
+static void AnimRaiseSprite(struct Sprite *);
+static void AnimTask_Rollout_Step(u8 taskId);
+static void AnimRolloutParticle(struct Sprite *);
+static void AnimRockTomb(struct Sprite *);
+static void AnimRockTomb_Step(struct Sprite *sprite);
+static void AnimRockBlastRock(struct Sprite *);
+static void AnimRockScatter(struct Sprite *);
+static void AnimRockScatter_Step(struct Sprite *sprite);
+static void AnimParticleInVortex(struct Sprite *);
+static void AnimParticleInVortex_Step(struct Sprite *sprite);
+static void AnimTask_LoadSandstormBackground_Step(u8 taskId);
 static void sub_8111214(struct Task *task);
-static u8 sub_811135C(void);
-static void sub_81113C8(struct Sprite *sprite);
-static void sub_811149C(struct Sprite *sprite);
-static void AnimPowerGemOrbitFastStep(struct Sprite *sprite);
-void AnimPowerGemOrbitFast(struct Sprite *sprite);
-static void AnimPowerGemScatterStep(struct Sprite *sprite);
-void AnimPowerGemScatter(struct Sprite *sprite);
 static void AnimStealthRockStep2(struct Sprite *sprite);
 static void AnimStealthRockStep(struct Sprite *sprite);
-void AnimStealthRock(struct Sprite *sprite);
+static void AnimStealthRock(struct Sprite *sprite);
+static u8 GetRolloutCounter(void);
 
-const union AnimCmd gUnknown_08596AE0[] =
+static const union AnimCmd sAnim_FlyingRock_0[] =
 {
     ANIMCMD_FRAME(32, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596AE8[] =
+static const union AnimCmd sAnim_FlyingRock_1[] =
 {
     ANIMCMD_FRAME(48, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596AF0[] =
+static const union AnimCmd sAnim_FlyingRock_2[] =
 {
     ANIMCMD_FRAME(64, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596AF8[] =
+static const union AnimCmd *const sAnims_FlyingRock[] =
 {
-    gUnknown_08596AE0,
-    gUnknown_08596AE8,
-    gUnknown_08596AF0,
+    sAnim_FlyingRock_0,
+    sAnim_FlyingRock_1,
+    sAnim_FlyingRock_2,
 };
 
-const struct SpriteTemplate gUnknown_08596B04 =
-{
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596AF8,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81109F0,
-};
-
-const struct SpriteTemplate gUnknown_08596B1C =
+const struct SpriteTemplate gFallingRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596AF8,
+    .anims = sAnims_FlyingRock,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8110AB4,
+    .callback = AnimFallingRock,
 };
 
-const struct SpriteTemplate gUnknown_08596B34 =
+const struct SpriteTemplate gRockFragmentSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_FlyingRock,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimRockFragment,
+};
+
+const struct SpriteTemplate gSwirlingDirtSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
@@ -92,10 +85,10 @@ const struct SpriteTemplate gUnknown_08596B34 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8110B38,
+    .callback = AnimParticleInVortex,
 };
 
-const union AffineAnimCmd gUnknown_08596B4C[] =
+static const union AffineAnimCmd sAffineAnim_Whirlpool[] =
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
     AFFINEANIMCMD_FRAME(0x2, 0xFFFD, 0, 5),
@@ -103,34 +96,34 @@ const union AffineAnimCmd gUnknown_08596B4C[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd *const gUnknown_08596B6C[] =
+static const union AffineAnimCmd *const sAffineAnims_Whirlpool[] =
 {
-    gUnknown_08596B4C,
+    sAffineAnim_Whirlpool,
 };
 
-const struct SpriteTemplate gUnknown_08596B70 =
+const struct SpriteTemplate gWhirlpoolSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
-    .anims = gUnknown_085950E0,
+    .anims = gAnims_WaterMudOrb,
     .images = NULL,
-    .affineAnims = gUnknown_08596B6C,
-    .callback = sub_8110B38,
+    .affineAnims = sAffineAnims_Whirlpool,
+    .callback = AnimParticleInVortex,
 };
 
-const struct SpriteTemplate gUnknown_08596B88 =
+const struct SpriteTemplate gFireSpinSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085954D0,
+    .anims = gAnims_BasicFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8110B38,
+    .callback = AnimParticleInVortex,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8596BA0 =
+const struct SpriteTemplate gFlyingSandCrescentSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FLYING_DIRT,
     .paletteTag = ANIM_TAG_FLYING_DIRT,
@@ -138,86 +131,86 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8596BA0 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimDirtParticleAcrossScreen,
+    .callback = AnimFlyingSandCrescent,
 };
 
-const struct Subsprite gUnknown_08596BB8[] =
+static const struct Subsprite sFlyingSandSubsprites[] =
 {
     {.x = -16, .y = 0, .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16), .tileOffset = 0, .priority = 1},
     {.x =  16, .y = 0, .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16), .tileOffset = 8, .priority = 1},
 };
 
-const struct SubspriteTable gUnknown_08596BC0[] =
+static const struct SubspriteTable sFlyingSandSubspriteTable[] =
 {
-    {ARRAY_COUNT(gUnknown_08596BB8), gUnknown_08596BB8},
+    {ARRAY_COUNT(sFlyingSandSubsprites), sFlyingSandSubsprites},
 };
 
-const union AnimCmd gUnknown_08596BC8[] =
+static const union AnimCmd sAnim_BasicRock_0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596BD0[] =
+static const union AnimCmd sAnim_BasicRock_1[] =
 {
     ANIMCMD_FRAME(16, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596BD8[] =
+static const union AnimCmd sAnim_WeatherBallRockDown_0[] =
 {
     ANIMCMD_FRAME(32, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596BE0[] =
+static const union AnimCmd sAnim_WeatherBallRockDown_1[] =
 {
     ANIMCMD_FRAME(48, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596BE8[] =
+static const union AnimCmd sAnim_TwisterRock_0[] =
 {
     ANIMCMD_FRAME(64, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08596BF0[] =
+static const union AnimCmd sAnim_TwisterRock_1[] =
 {
     ANIMCMD_FRAME(80, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596BF8[] =
+static const union AnimCmd *const sAnims_BasicRock[] =
 {
-    gUnknown_08596BC8,
-    gUnknown_08596BD0,
+    sAnim_BasicRock_0,
+    sAnim_BasicRock_1,
 };
 
-const union AnimCmd *const gUnknown_08596C00[] =
+static const union AnimCmd *const sAnims_WeatherBallRockDown[] =
 {
-    gUnknown_08596BD8,
-    gUnknown_08596BE0,
+    sAnim_WeatherBallRockDown_0,
+    sAnim_WeatherBallRockDown_1,
 };
 
-const union AnimCmd *const gUnknown_08596C08[] =
+static const union AnimCmd *const sAnims_TwisterRock[] =
 {
-    gUnknown_08596BE8,
-    gUnknown_08596BF0,
+    sAnim_TwisterRock_0,
+    sAnim_TwisterRock_1,
 };
 
-const struct SpriteTemplate gUnknown_08596C10 =
+const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596BF8,
+    .anims = sAnims_BasicRock,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimRaiseSprite,
 };
 
-const struct SpriteTemplate gUnknown_08596C28 =
+const struct SpriteTemplate gRolloutMudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUD_SAND,
     .paletteTag = ANIM_TAG_MUD_SAND,
@@ -225,10 +218,10 @@ const struct SpriteTemplate gUnknown_08596C28 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_811131C,
+    .callback = AnimRolloutParticle,
 };
 
-const struct SpriteTemplate gUnknown_08596C40 =
+const struct SpriteTemplate gRolloutRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
@@ -236,80 +229,80 @@ const struct SpriteTemplate gUnknown_08596C40 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_811131C,
+    .callback = AnimRolloutParticle,
 };
 
-const struct SpriteTemplate gUnknown_08596C58 =
+const struct SpriteTemplate gRockTombRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596BF8,
+    .anims = sAnims_BasicRock,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8111388,
+    .callback = AnimRockTomb,
 };
 
-const union AffineAnimCmd gUnknown_08596C70[] =
+static const union AffineAnimCmd sAffineAnim_BasicRock_0[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -5, 5),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gUnknown_08596C80[] =
+static const union AffineAnimCmd sAffineAnim_BasicRock_1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 5, 5),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gUnknown_08596C90[] =
+static const union AffineAnimCmd *const sAffineAnims_BasicRock[] =
 {
-    gUnknown_08596C70,
-    gUnknown_08596C80,
+    sAffineAnim_BasicRock_0,
+    sAffineAnim_BasicRock_1,
 };
 
-const struct SpriteTemplate gUnknown_08596C98 =
-{
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gUnknown_08596BF8,
-    .images = NULL,
-    .affineAnims = gUnknown_08596C90,
-    .callback = sub_8111418,
-};
-
-const struct SpriteTemplate gUnknown_08596CB0 =
+const struct SpriteTemplate gRockBlastRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gUnknown_08596BF8,
+    .anims = sAnims_BasicRock,
     .images = NULL,
-    .affineAnims = gUnknown_08596C90,
-    .callback = sub_8111444,
+    .affineAnims = sAffineAnims_BasicRock,
+    .callback = AnimRockBlastRock,
 };
 
-const struct SpriteTemplate gUnknown_08596CC8 =
+const struct SpriteTemplate gRockScatterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = sAnims_BasicRock,
+    .images = NULL,
+    .affineAnims = sAffineAnims_BasicRock,
+    .callback = AnimRockScatter,
+};
+
+const struct SpriteTemplate gTwisterRockSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596C08,
+    .anims = sAnims_TwisterRock,
     .images = NULL,
-    .affineAnims = gUnknown_08596C90,
+    .affineAnims = sAffineAnims_BasicRock,
     .callback = AnimMoveTwisterParticle,
 };
 
-const struct SpriteTemplate gUnknown_08596CE0 =
+const struct SpriteTemplate gWeatherBallRockDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gUnknown_08596C00,
+    .anims = sAnims_WeatherBallRockDown,
     .images = NULL,
-    .affineAnims = gUnknown_08596C90,
-    .callback = sub_80A8EE4,
+    .affineAnims = sAffineAnims_BasicRock,
+    .callback = AnimWeatherBallDown,
 };
 
 const struct SpriteTemplate gStoneEdgeSpriteTemplate =
@@ -317,10 +310,10 @@ const struct SpriteTemplate gStoneEdgeSpriteTemplate =
     .tileTag = ANIM_TAG_STONE_EDGE,
     .paletteTag = ANIM_TAG_STONE_EDGE,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_085954D0,
+    .anims = gAnims_BasicFire,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8110B38,
+    .callback = AnimParticleInVortex,
 };
 
 const struct SpriteTemplate gStealthRockSpriteTemplate =
@@ -334,7 +327,7 @@ const struct SpriteTemplate gStealthRockSpriteTemplate =
     .callback = AnimStealthRock,
 };
 
-void AnimStealthRock(struct Sprite *sprite)
+static void AnimStealthRock(struct Sprite *sprite)
 {
     u16 x;
     u16 y;
@@ -374,7 +367,7 @@ static void AnimStealthRockStep2(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81109F0(struct Sprite *sprite)
+static void AnimFallingRock(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
         SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
@@ -392,12 +385,12 @@ void sub_81109F0(struct Sprite *sprite)
     sprite->data[4] = -70;
     sprite->data[5] = gBattleAnimArgs[2];
 
-    StoreSpriteCallbackInData6(sprite, sub_8110A70);
+    StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
     sprite->callback = TranslateSpriteInEllipseOverDuration;
     sprite->callback(sprite);
 }
 
-static void sub_8110A70(struct Sprite *sprite)
+static void AnimFallingRock_Step(struct Sprite *sprite)
 {
     sprite->pos1.x += sprite->data[5];
 
@@ -412,7 +405,8 @@ static void sub_8110A70(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void sub_8110AB4(struct Sprite *sprite)
+// Animates the rock particles that are shown on the impact for Rock Blast / Rock Smash
+static void AnimRockFragment(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[5]);
     AnimateSprite(sprite);
@@ -438,9 +432,10 @@ void sub_8110AB4(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
-void sub_8110B38(struct Sprite *sprite)
+// Swirls particle in vortex. Used for moves like Fire Spin or Sand Tomb
+static void AnimParticleInVortex(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[6] == 0)
+    if (gBattleAnimArgs[6] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 0);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
@@ -450,10 +445,10 @@ void sub_8110B38(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[4];
     sprite->data[3] = gBattleAnimArgs[5];
 
-    sprite->callback = sub_8110B80;
+    sprite->callback = AnimParticleInVortex_Step;
 }
 
-static void sub_8110B80(struct Sprite *sprite)
+static void AnimParticleInVortex_Step(struct Sprite *sprite)
 {
     sprite->data[4] += sprite->data[1];
     sprite->pos2.y = -(sprite->data[4] >> 8);
@@ -486,18 +481,18 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
     sub_80A6B30(&animBg);
-    AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08D8D58C, animBg.tilesOffset);
-    sub_80A6D60(&animBg, gUnknown_08D8D410, 0);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Sandstorm, animBg.tilesOffset);
+    AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_Sandstorm, 0);
     LoadCompressedPalette(gBattleAnimSpritePal_FlyingDirt, animBg.paletteId * 16, 32);
 
     if (gBattleAnimArgs[0] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         var0 = 1;
 
     gTasks[taskId].data[0] = var0;
-    gTasks[taskId].func = sub_8110CB0;
+    gTasks[taskId].func = AnimTask_LoadSandstormBackground_Step;
 }
 
-static void sub_8110CB0(u8 taskId)
+static void AnimTask_LoadSandstormBackground_Step(u8 taskId)
 {
     struct BattleAnimBgData animBg;
 
@@ -568,7 +563,7 @@ static void sub_8110CB0(u8 taskId)
 // arg 1: projectile speed
 // arg 2: y pixel drop
 // arg 3: ??? unknown (possibly a color bit)
-void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
+static void AnimFlyingSandCrescent(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -585,7 +580,7 @@ void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
         }
 
         sprite->pos1.y = gBattleAnimArgs[0];
-        SetSubspriteTables(sprite, gUnknown_08596BC0);
+        SetSubspriteTables(sprite, sFlyingSandSubspriteTable);
         sprite->data[1] = gBattleAnimArgs[1];
         sprite->data[2] = gBattleAnimArgs[2];
         sprite->data[0]++;
@@ -619,7 +614,7 @@ void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
 // arg 2: terminal y offset
 // arg 3: duration
 // arg 4: sprite size [1,5]
-void AnimRaiseSprite(struct Sprite *sprite)
+static void AnimRaiseSprite(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
     InitSpritePosToAnimAttacker(sprite, 0);
@@ -632,10 +627,10 @@ void AnimRaiseSprite(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_8110F74(u8 taskId)
+void AnimTask_Rollout(u8 taskId)
 {
     u16 var0, var1, var2, var3;
-    u8 var4;
+    u8 rolloutCounter;
     int var5;
     s16 pan1, pan2;
     struct Task *task;
@@ -650,11 +645,11 @@ void sub_8110F74(u8 taskId)
     if (BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget)
         var3 = var1;
 
-    var4 = sub_811135C();
-    if (var4 == 1)
+    rolloutCounter = GetRolloutCounter();
+    if (rolloutCounter == 1)
         task->data[8] = 32;
     else
-        task->data[8] = 48 - (var4 * 8);
+        task->data[8] = 48 - (rolloutCounter * 8);
 
     task->data[0] = 0;
     task->data[11] = 0;
@@ -679,13 +674,13 @@ void sub_8110F74(u8 taskId)
 
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];
-    task->data[1] = var4;
-    task->data[15] = GetAnimBattlerSpriteId(0);
+    task->data[1] = rolloutCounter;
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
-    task->func = sub_81110A4;
+    task->func = AnimTask_Rollout_Step;
 }
 
-void sub_81110A4(u8 taskId)
+static void AnimTask_Rollout_Step(u8 taskId)
 {
     struct Task *task;
 
@@ -753,28 +748,28 @@ void sub_81110A4(u8 taskId)
 static void sub_8111214(struct Task *task)
 {
     const struct SpriteTemplate *spriteTemplate;
-    int var0;
+    int tileOffset;
     u16 x, y;
     u8 spriteId;
 
     switch (task->data[1])
     {
     case 1:
-        spriteTemplate = &gUnknown_08596C28;
-        var0 = 0;
+        spriteTemplate = &gRolloutMudSpriteTemplate;
+        tileOffset = 0;
         break;
     case 2:
     case 3:
-        spriteTemplate = &gUnknown_08596C40;
-        var0 = 80;
+        spriteTemplate = &gRolloutRockSpriteTemplate;
+        tileOffset = 80;
         break;
     case 4:
-        spriteTemplate = &gUnknown_08596C40;
-        var0 = 64;
+        spriteTemplate = &gRolloutRockSpriteTemplate;
+        tileOffset = 64;
         break;
     case 5:
-        spriteTemplate = &gUnknown_08596C40;
-        var0 = 48;
+        spriteTemplate = &gRolloutRockSpriteTemplate;
+        tileOffset = 48;
         break;
     default:
         return;
@@ -791,7 +786,7 @@ static void sub_8111214(struct Task *task)
         gSprites[spriteId].data[2] = ((task->data[12] * 20) + x) + (task->data[1] * 3);
         gSprites[spriteId].data[4] = y;
         gSprites[spriteId].data[5] = -16 - (task->data[1] * 2);
-        gSprites[spriteId].oam.tileNum += var0;
+        gSprites[spriteId].oam.tileNum += tileOffset;
 
         InitAnimArcTranslation(&gSprites[spriteId]);
         task->data[11]++;
@@ -800,11 +795,11 @@ static void sub_8111214(struct Task *task)
     task->data[12] *= -1;
 }
 
-void sub_811131C(struct Sprite *sprite)
+static void AnimRolloutParticle(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
-        u8 taskId = FindTaskIdByFunc(sub_81110A4);
+        u8 taskId = FindTaskIdByFunc(AnimTask_Rollout_Step);
         if (taskId != 0xFF)
             gTasks[taskId].data[11]--;
 
@@ -812,7 +807,7 @@ void sub_811131C(struct Sprite *sprite)
     }
 }
 
-static u8 sub_811135C(void)
+static u8 GetRolloutCounter(void)
 {
     u8 retVal = gAnimDisableStructPtr->rolloutTimerStartValue - gAnimDisableStructPtr->rolloutTimer;
     u8 var0 = retVal - 1;
@@ -822,7 +817,7 @@ static u8 sub_811135C(void)
     return retVal;
 }
 
-void sub_8111388(struct Sprite *sprite)
+static void AnimRockTomb(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
 
@@ -831,13 +826,13 @@ void sub_8111388(struct Sprite *sprite)
     sprite->data[3] -= gBattleAnimArgs[2];
     sprite->data[0] = 3;
     sprite->data[1] = gBattleAnimArgs[3];
-    sprite->callback = sub_81113C8;
-    sprite->invisible = 1;
+    sprite->callback = AnimRockTomb_Step;
+    sprite->invisible = TRUE;
 }
 
-static void sub_81113C8(struct Sprite *sprite)
+static void AnimRockTomb_Step(struct Sprite *sprite)
 {
-    sprite->invisible = 0;
+    sprite->invisible = FALSE;
     if (sprite->data[3] != 0)
     {
         sprite->pos2.y = sprite->data[2] + sprite->data[3];
@@ -855,7 +850,7 @@ static void sub_81113C8(struct Sprite *sprite)
     }
 }
 
-void sub_8111418(struct Sprite *sprite)
+static void AnimRockBlastRock(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         StartSpriteAffineAnim(sprite, 1);
@@ -863,7 +858,7 @@ void sub_8111418(struct Sprite *sprite)
     TranslateAnimSpriteToTargetMonLocation(sprite);
 }
 
-void sub_8111444(struct Sprite *sprite)
+static void AnimRockScatter(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
@@ -875,10 +870,10 @@ void sub_8111444(struct Sprite *sprite)
     sprite->data[5] = gBattleAnimArgs[2];
 
     StartSpriteAnim(sprite, gBattleAnimArgs[3]);
-    sprite->callback = sub_811149C;
+    sprite->callback = AnimRockScatter_Step;
 }
 
-static void sub_811149C(struct Sprite *sprite)
+static void AnimRockScatter_Step(struct Sprite *sprite)
 {
     sprite->data[0] += 8;
     sprite->data[3] += sprite->data[1];
@@ -894,20 +889,20 @@ static void sub_811149C(struct Sprite *sprite)
 void AnimTask_GetSeismicTossDamageLevel(u8 taskId)
 {
     if (gAnimMoveDmg < 33)
-        gBattleAnimArgs[7] = 0;
+        gBattleAnimArgs[ARG_RET_ID] = 0;
     if ((u32)gAnimMoveDmg - 33 < 33)
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[ARG_RET_ID] = 1;
     if (gAnimMoveDmg > 65)
-        gBattleAnimArgs[7] = 2;
+        gBattleAnimArgs[ARG_RET_ID] = 2;
 
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_811152C(u8 taskId)
+void AnimTask_MoveSeismicTossBg(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        sub_80A6DAC(0);
+        sub_80A6DAC(FALSE);
         gTasks[taskId].data[1] = 200;
     }
 
@@ -916,18 +911,18 @@ void sub_811152C(u8 taskId)
 
     if (gTasks[taskId].data[0] == 120)
     {
-        sub_80A6DAC(1);
+        sub_80A6DAC(TRUE);
         DestroyAnimVisualTask(taskId);
     }
 
     gTasks[taskId].data[0]++;
 }
 
-void sub_8111590(u8 taskId)
+void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        sub_80A6DAC(0);
+        sub_80A6DAC(FALSE);
         gTasks[taskId].data[0]++;
         gTasks[taskId].data[2] = gBattle_BG3_Y;
     }
@@ -939,7 +934,7 @@ void sub_8111590(u8 taskId)
     if (gBattleAnimArgs[7] == 0xFFF)
     {
         gBattle_BG3_Y = 0;
-        sub_80A6DAC(1);
+        sub_80A6DAC(TRUE);
         DestroyAnimVisualTask(taskId);
     }
 }

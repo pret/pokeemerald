@@ -5,22 +5,22 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-void sub_8113064(struct Sprite *);
-void sub_81131B4(struct Sprite *);
-void sub_8113224(struct Sprite *);
-void sub_8113250(struct Sprite *);
-void sub_81135EC(struct Sprite *);
-static void sub_81132E0(struct Sprite *);
-static void sub_81134B8(u8);
+static void AnimOutrageFlame(struct Sprite *);
+static void AnimDragonRageFirePlume(struct Sprite *);
+static void AnimDragonFireToTarget(struct Sprite *);
+static void AnimDragonDanceOrb(struct Sprite *);
+static void AnimDragonDanceOrb_Step(struct Sprite *);
+static void AnimOverheatFlame(struct Sprite *);
+static void AnimOverheatFlame_Step(struct Sprite *);
+static void AnimTask_DragonDanceWaver_Step(u8);
 static void sub_8113574(struct Task *);
-static void sub_811369C(struct Sprite *);
 static void AnimDragonRushStep(struct Sprite *sprite);
-void AnimSpinningDracoMeteor(struct Sprite *sprite);
+static void AnimSpinningDracoMeteor(struct Sprite *sprite);
 static void AnimSpinningDracoMeteorFinish(struct Sprite *sprite);
 
 EWRAM_DATA static u16 gUnknown_0203A100[7] = {0};
 
-const union AnimCmd gUnknown_08596E60[] =
+static const union AnimCmd gUnknown_08596E60[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -30,12 +30,12 @@ const union AnimCmd gUnknown_08596E60[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08596E78[] =
+static const union AnimCmd *const gUnknown_08596E78[] =
 {
     gUnknown_08596E60,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8596E7C =
+const struct SpriteTemplate gOutrageFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -43,10 +43,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8596E7C =
     .anims = gUnknown_08596E78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8113064,
+    .callback = AnimOutrageFlame,
 };
 
-const union AnimCmd gUnknown_08596E94[] =
+static const union AnimCmd sAnim_DragonBreathFire_0[] =
 {
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_FRAME(32, 3),
@@ -54,7 +54,7 @@ const union AnimCmd gUnknown_08596E94[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gUnknown_08596EA4[] =
+static const union AnimCmd sAnim_DragonBreathFire_1[] =
 {
     ANIMCMD_FRAME(16, 3, .vFlip = TRUE, .hFlip = TRUE),
     ANIMCMD_FRAME(32, 3, .vFlip = TRUE, .hFlip = TRUE),
@@ -62,44 +62,44 @@ const union AnimCmd gUnknown_08596EA4[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08596EB4[] =
+static const union AnimCmd *const sAnims_DragonBreathFire[] =
 {
-    gUnknown_08596E94,
-    gUnknown_08596EA4,
+    sAnim_DragonBreathFire_0,
+    sAnim_DragonBreathFire_1,
 };
 
-const union AffineAnimCmd gUnknown_08596EBC[] =
+static const union AffineAnimCmd sAffineAnim_DragonBreathFire_0[] =
 {
     AFFINEANIMCMD_FRAME(0x50, 0x50, 127, 0),
     AFFINEANIMCMD_FRAME(0xD, 0xD, 0, 100),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596ED4[] =
+static const union AffineAnimCmd sAffineAnim_DragonBreathFire_1[] =
 {
     AFFINEANIMCMD_FRAME(0x50, 0x50, 0, 0),
     AFFINEANIMCMD_FRAME(0xD, 0xD, 0, 100),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596EEC[] =
+static const union AffineAnimCmd *const sAffineAnims_DragonBreathFire[] =
 {
-    gUnknown_08596EBC,
-    gUnknown_08596ED4,
+    sAffineAnim_DragonBreathFire_0,
+    sAffineAnim_DragonBreathFire_1,
 };
 
-const struct SpriteTemplate gUnknown_08596EF4 =
+const struct SpriteTemplate gDragonBreathFireSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = gUnknown_08596EB4,
+    .anims = sAnims_DragonBreathFire,
     .images = NULL,
-    .affineAnims = gUnknown_08596EEC,
-    .callback = sub_8113224,
+    .affineAnims = sAffineAnims_DragonBreathFire,
+    .callback = AnimDragonFireToTarget,
 };
 
-const union AnimCmd gUnknown_08596F0C[] =
+static const union AnimCmd sAnim_DragonRageFirePlume[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -109,23 +109,23 @@ const union AnimCmd gUnknown_08596F0C[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08596F24[] =
+static const union AnimCmd *const sAnims_DragonRageFirePlume[] =
 {
-    gUnknown_08596F0C,
+    sAnim_DragonRageFirePlume,
 };
 
-const struct SpriteTemplate gUnknown_08596F28 =
+const struct SpriteTemplate gDragonRageFirePlumeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08596F24,
+    .anims = sAnims_DragonRageFirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81131B4,
+    .callback = AnimDragonRageFirePlume,
 };
 
-const union AnimCmd gUnknown_08596F40[] =
+static const union AnimCmd sAnim_DragonRageFire[] =
 {
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_FRAME(32, 3),
@@ -133,42 +133,42 @@ const union AnimCmd gUnknown_08596F40[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08596F50[] =
+static const union AnimCmd *const sAnims_DragonRageFire[] =
 {
-    gUnknown_08596F40,
-    gUnknown_08596F40,
+    sAnim_DragonRageFire,
+    sAnim_DragonRageFire,
 };
 
-const union AffineAnimCmd gUnknown_08596F58[] =
+static const union AffineAnimCmd sAffineAnim_DragonRageFire_0[] =
 {
     AFFINEANIMCMD_FRAME(0x64, 0x64, 127, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_08596F68[] =
+static const union AffineAnimCmd sAffineAnim_DragonRageFire_1[] =
 {
     AFFINEANIMCMD_FRAME(0x64, 0x64, 0, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_08596F78[] =
+static const union AffineAnimCmd *const sAffineAnims_DragonRageFire[] =
 {
-    gUnknown_08596F58,
-    gUnknown_08596F68,
+    sAffineAnim_DragonRageFire_0,
+    sAffineAnim_DragonRageFire_1,
 };
 
-const struct SpriteTemplate gUnknown_08596F80 =
+const struct SpriteTemplate gDragonRageFireSpitSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = gUnknown_08596F50,
+    .anims = sAnims_DragonRageFire,
     .images = NULL,
-    .affineAnims = gUnknown_08596F78,
-    .callback = sub_8113224,
+    .affineAnims = sAffineAnims_DragonRageFire,
+    .callback = AnimDragonFireToTarget,
 };
 
-const struct SpriteTemplate gUnknown_08596F98 =
+const struct SpriteTemplate gDragonDanceOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_HOLLOW_ORB,
     .paletteTag = ANIM_TAG_HOLLOW_ORB,
@@ -176,10 +176,10 @@ const struct SpriteTemplate gUnknown_08596F98 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8113250,
+    .callback = AnimDragonDanceOrb,
 };
 
-const struct SpriteTemplate gUnknown_08596FB0 =
+const struct SpriteTemplate gOverheatFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
@@ -187,7 +187,7 @@ const struct SpriteTemplate gUnknown_08596FB0 =
     .anims = gUnknown_08596E78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81135EC,
+    .callback = AnimOverheatFlame,
 };
 
 const union AnimCmd gDragonRushAnimCmds[] =
@@ -310,7 +310,7 @@ static void AnimSpinningDracoMeteorFinish(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void AnimSpinningDracoMeteor(struct Sprite *sprite)
+static void AnimSpinningDracoMeteor(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     StartSpriteAnim(sprite, gBattleAnimArgs[2]);
@@ -320,7 +320,7 @@ void AnimSpinningDracoMeteor(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, AnimSpinningDracoMeteorFinish);
 }
 
-void sub_8113064(struct Sprite *sprite)
+static void AnimOutrageFlame(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
@@ -340,7 +340,7 @@ void sub_8113064(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[3] = gBattleAnimArgs[4];
     sprite->data[5] = gBattleAnimArgs[5];
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
     sprite->callback = TranslateSpriteLinearAndFlicker;
 }
@@ -371,7 +371,7 @@ static void sub_8113100(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
-void sub_81131B4(struct Sprite *sprite)
+static void AnimDragonRageFirePlume(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
@@ -390,7 +390,8 @@ void sub_81131B4(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
-void sub_8113224(struct Sprite *sprite)
+// For Dragon Breath and Dragon Rage
+static void AnimDragonFireToTarget(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         StartSpriteAffineAnim(sprite, 1);
@@ -398,7 +399,7 @@ void sub_8113224(struct Sprite *sprite)
     sub_8113100(sprite);
 }
 
-void sub_8113250(struct Sprite *sprite)
+static void AnimDragonDanceOrb(struct Sprite *sprite)
 {
     u16 r5;
     u16 r0;
@@ -415,10 +416,10 @@ void sub_8113250(struct Sprite *sprite)
         sprite->data[7] = r0 / 2;
     sprite->pos2.x = Cos(sprite->data[6], sprite->data[7]);
     sprite->pos2.y = Sin(sprite->data[6], sprite->data[7]);
-    sprite->callback = sub_81132E0;
+    sprite->callback = AnimDragonDanceOrb_Step;
 }
 
-static void sub_81132E0(struct Sprite *sprite)
+static void AnimDragonDanceOrb_Step(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -456,7 +457,9 @@ static void sub_81132E0(struct Sprite *sprite)
     }
 }
 
-void sub_81133E8(u8 taskId)
+// Wavers the attacker back and forth. Progressing vertical wave of scanline shifts
+// Used by Dragon Dance
+void AnimTask_DragonDanceWaver(u8 taskId)
 {
     struct ScanlineEffectParams sp;
     struct Task *task = &gTasks[taskId];
@@ -489,10 +492,10 @@ void sub_81133E8(u8 taskId)
     }
 
     ScanlineEffect_SetParams(sp);
-    task->func = sub_81134B8;
+    task->func = AnimTask_DragonDanceWaver_Step;
 }
 
-static void sub_81134B8(u8 taskId)
+static void AnimTask_DragonDanceWaver_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -543,7 +546,7 @@ static void sub_8113574(struct Task *task)
     task->data[5] = (task->data[5] + 9) & 0xFF;
 }
 
-void sub_81135EC(struct Sprite *sprite)
+static void AnimOverheatFlame(struct Sprite *sprite)
 {
     int r6 = (gBattleAnimArgs[2] * 3) / 5;
     int i;
@@ -554,12 +557,12 @@ void sub_81135EC(struct Sprite *sprite)
     sprite->pos1.x += sprite->data[1] * gBattleAnimArgs[0];
     sprite->pos1.y += sprite->data[2] * gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[3];
-    sprite->callback = sub_811369C;
+    sprite->callback = AnimOverheatFlame_Step;
     for (i = 0; i < 7; i++)
         gUnknown_0203A100[i] = sprite->data[i];
 }
 
-static void sub_811369C(struct Sprite *sprite)
+static void AnimOverheatFlame_Step(struct Sprite *sprite)
 {
     sprite->data[4] += sprite->data[1];
     sprite->data[5] += sprite->data[2];

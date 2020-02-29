@@ -13,59 +13,55 @@
 #include "constants/battle.h"
 #include "constants/rgb.h"
 
-void sub_810721C(struct Sprite *);
-void sub_8107228(struct Sprite *);
-void sub_8107260(struct Sprite *);
-void sub_8107380(struct Sprite *);
-void sub_8107408(struct Sprite *);
-void sub_8107430(struct Sprite *);
-void sub_810744C(struct Sprite *);
-void sub_81074E4(struct Sprite *);
-void sub_81075EC(struct Sprite *);
-void sub_8107674(struct Sprite *);
-void sub_8107730(struct Sprite *);
-void sub_81077A4(struct Sprite *);
-void sub_81077C0(struct Sprite *);
-void sub_8107894(struct Sprite *);
-void sub_81078D0(struct Sprite *);
-void sub_810790C(struct Sprite *);
-void sub_8108034(struct Sprite *);
-void sub_8108098(struct Sprite *);
-void sub_810851C(struct Sprite *);
-void sub_81087C0(struct Sprite *);
-void sub_810886C(struct Sprite *);
-void sub_8108B2C(struct Sprite *);
-void sub_8108B94(struct Sprite *);
-void sub_8108BE0(struct Sprite *);
-void sub_8108C08(struct Sprite *);
-void sub_8108C54(struct Sprite *);
-void AnimWaterPulseRing_Step(struct Sprite *);
-void sub_810756C(u8);
-void sub_81076F4(u8);
-void sub_8107B84(u8);
-void sub_8107CC4(u8);
-void sub_8107D58(u8);
-void sub_8108140(u8);
-void sub_810862C(u8);
-void sub_8108978(u8);
-u8 sub_8108384(void);
-void sub_8108408(struct Task*, u8);
-void sub_810871C(struct Task*, u8);
-void sub_8108AC0(struct Task*);
-void sub_8108D54(struct Sprite*, int, int);
-void AnimAquaTail(struct Sprite *sprite);
+static void AnimRainDrop(struct Sprite *);
+static void AnimRainDrop_Step(struct Sprite *);
+static void AnimWaterBubbleProjectile(struct Sprite *);
+static void AnimWaterBubbleProjectile_Step1(struct Sprite *);
+static void AnimWaterBubbleProjectile_Step2(struct Sprite *);
+static void AnimWaterBubbleProjectile_Step3(struct Sprite *);
+static void AnimAuroraBeamRings(struct Sprite *);
+static void AnimAuroraBeamRings_Step(struct Sprite *);
+static void AnimToTargetInSinWave(struct Sprite *);
+static void AnimToTargetInSinWave_Step(struct Sprite *);
+static void AnimHydroCannonCharge(struct Sprite *);
+static void AnimHydroCannonCharge_Step(struct Sprite *);
+static void AnimHydroCannonBeam(struct Sprite *);
+static void AnimWaterGunDroplet(struct Sprite *);
+static void AnimSmallBubblePair(struct Sprite *);
+static void AnimSmallBubblePair_Step(struct Sprite *);
+static void AnimSmallDriftingBubbles(struct Sprite *);
+static void AnimSmallDriftingBubbles_Step(struct Sprite *);
+static void AnimSmallWaterOrb(struct Sprite *);
+static void AnimWaterSpoutRain(struct Sprite *);
+static void AnimWaterSpoutRainHit(struct Sprite *);
+static void AnimWaterSportDroplet(struct Sprite *);
+static void AnimWaterSportDroplet_Step(struct Sprite *);
+static void AnimWaterPulseBubble(struct Sprite *);
+static void AnimWaterPulseBubble_Step(struct Sprite *);
+static void AnimWaterPulseRingBubble(struct Sprite *);
+static void AnimWaterPulseRing_Step(struct Sprite *);
+static void AnimTask_RotateAuroraRingColors_Step(u8);
+static void AnimTask_RunSinAnimTimer(u8);
+static void AnimTask_CreateSurfWave_Step1(u8);
+static void AnimTask_CreateSurfWave_Step2(u8);
+static void AnimTask_SurfWaveScanlineEffect(u8);
+static void AnimTask_WaterSpoutLaunch_Step(u8);
+static void AnimTask_WaterSpoutRain_Step(u8);
+static u8 GetWaterSpoutPowerForAnim(void);
+static void CreateWaterSpoutLaunchDroplets(struct Task*, u8);
+static void CreateWaterSpoutRainDroplet(struct Task*, u8);
+static void AnimTask_WaterSport_Step(u8);
+static void CreateWaterSportDroplet(struct Task*);
+static void CreateWaterPulseRingBubbles(struct Sprite*, int, int);
+static void AnimAquaTail(struct Sprite *sprite);
+static void AnimKnockOffAquaTail(struct Sprite *sprite);
 static void AnimKnockOffAquaTailStep(struct Sprite *sprite);
-void AnimKnockOffAquaTail(struct Sprite *sprite);
 
-extern const union AffineAnimCmd *const gGrowingRingAffineAnimTable[];
-extern const union AffineAnimCmd *const gUnknown_08596208[];
-extern const union AnimCmd *const gUnknown_08595AB8[];
-
-// what is this?
+// Both unused
 const u8 gUnknown_8593C80[] = INCBIN_U8("graphics/unknown/unknown_593C80.4bpp");
 const u8 gUnknown_8593FFC[] = INCBIN_U8("graphics/unknown/unknown_593FFC.bin");
 
-const union AnimCmd gUnknown_08594FFC[] =
+static const union AnimCmd sAnim_RainDrop[] =
 {
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(8, 2),
@@ -77,35 +73,35 @@ const union AnimCmd gUnknown_08594FFC[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_0859501C[] =
+static const union AnimCmd *const sAnims_RainDrop[] =
 {
-    gUnknown_08594FFC,
+    sAnim_RainDrop,
 };
 
-const struct SpriteTemplate gUnknown_08595020 =
+const struct SpriteTemplate gRainDropSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RAIN_DROPS,
     .paletteTag = ANIM_TAG_RAIN_DROPS,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
-    .anims = gUnknown_0859501C,
+    .anims = sAnims_RainDrop,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810721C,
+    .callback = AnimRainDrop,
 };
 
-const union AffineAnimCmd gUnknown_08595038[] =
+static const union AffineAnimCmd sAffineAnim_WaterBubbleProjectile[] =
 {
     AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 10),
     AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gUnknown_08595050[] =
+static const union AffineAnimCmd *const sAffineAnims_WaterBubbleProjectile[] =
 {
-    gUnknown_08595038,
+    sAffineAnim_WaterBubbleProjectile,
 };
 
-const union AnimCmd gUnknown_08595054[] =
+static const union AnimCmd sAnim_WaterBubbleProjectile[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(4, 5),
@@ -113,65 +109,64 @@ const union AnimCmd gUnknown_08595054[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08595064[] =
+static const union AnimCmd *const sAnims_WaterBubbleProjectile[] =
 {
-    gUnknown_08595054,
+    sAnim_WaterBubbleProjectile,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_8595068 =
+const struct SpriteTemplate gWaterBubbleProjectileSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BUBBLE,
     .paletteTag = ANIM_TAG_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
-    .anims = gUnknown_08595064,
+    .anims = sAnims_WaterBubbleProjectile,
     .images = NULL,
-    .affineAnims = gUnknown_08595050,
-    .callback = sub_8107260,
+    .affineAnims = sAffineAnims_WaterBubbleProjectile,
+    .callback = AnimWaterBubbleProjectile,
 };
 
-const union AnimCmd gUnknown_08595080[] =
+static const union AnimCmd sAnim_AuroraBeamRing_0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08595088[] =
+static const union AnimCmd sAnim_AuroraBeamRing_1[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08595090[] =
+static const union AnimCmd *const sAnims_AuroraBeamRing[] =
 {
-    gUnknown_08595080,
-    gUnknown_08595088,
+    sAnim_AuroraBeamRing_0,
+    sAnim_AuroraBeamRing_1,
 };
 
-const union AffineAnimCmd gUnknown_08595098[] =
+static const union AffineAnimCmd sAffineAnim_AuroraBeamRing[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
     AFFINEANIMCMD_FRAME(0x60, 0x60, 0, 1),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085950B0[] =
+static const union AffineAnimCmd *const sAffineAnims_AuroraBeamRing[] =
 {
-    gUnknown_08595098,
+    sAffineAnim_AuroraBeamRing,
 };
 
-// Multi-colored rings used in Aurora Beam.
-const struct SpriteTemplate gUnknown_085950B4 =
+const struct SpriteTemplate gAuroraBeamRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RAINBOW_RINGS,
     .paletteTag = ANIM_TAG_RAINBOW_RINGS,
     .oam = &gOamData_AffineDouble_ObjNormal_8x16,
-    .anims = gUnknown_08595090,
+    .anims = sAnims_AuroraBeamRing,
     .images = NULL,
-    .affineAnims = gUnknown_085950B0,
-    .callback = sub_810744C,
+    .affineAnims = sAffineAnims_AuroraBeamRing,
+    .callback = AnimAuroraBeamRings,
 };
 
-const union AnimCmd gUnknown_085950CC[] =
+static const union AnimCmd sAnim_WaterMudOrb[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(4, 1),
@@ -180,34 +175,34 @@ const union AnimCmd gUnknown_085950CC[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_085950E0[] =
+const union AnimCmd *const gAnims_WaterMudOrb[] =
 {
-    gUnknown_085950CC,
+    sAnim_WaterMudOrb,
 };
 
-const struct SpriteTemplate gUnknown_085950E4 =
+const struct SpriteTemplate gHydroPumpOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
-    .anims = gUnknown_085950E0,
+    .anims = gAnims_WaterMudOrb,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_085950FC =
+const struct SpriteTemplate gMudShotOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BROWN_ORB,
     .paletteTag = ANIM_TAG_BROWN_ORB,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
-    .anims = gUnknown_085950E0,
+    .anims = gAnims_WaterMudOrb,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_08595114 =
+const struct SpriteTemplate gSignalBeamRedOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GLOWY_RED_ORB,
     .paletteTag = ANIM_TAG_GLOWY_RED_ORB,
@@ -215,10 +210,10 @@ const struct SpriteTemplate gUnknown_08595114 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_0859512C =
+const struct SpriteTemplate gSignalBeamGreenOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GLOWY_GREEN_ORB,
     .paletteTag = ANIM_TAG_GLOWY_GREEN_ORB,
@@ -226,10 +221,10 @@ const struct SpriteTemplate gUnknown_0859512C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
-const union AnimCmd gUnknown_08595144[] =
+static const union AnimCmd sAnim_FlamethrowerFlame[] =
 {
     ANIMCMD_FRAME(16, 2),
     ANIMCMD_FRAME(32, 2),
@@ -237,23 +232,23 @@ const union AnimCmd gUnknown_08595144[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gUnknown_08595154[] =
+static const union AnimCmd *const sAnims_FlamethrowerFlame[] =
 {
-    gUnknown_08595144,
+    sAnim_FlamethrowerFlame,
 };
 
-const struct SpriteTemplate gUnknown_08595158 =
+const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gUnknown_08595154,
+    .anims = sAnims_FlamethrowerFlame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
-const struct SpriteTemplate gUnknown_08595170 =
+const struct SpriteTemplate gPsywaveRingSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_RING,
     .paletteTag = ANIM_TAG_BLUE_RING,
@@ -261,10 +256,10 @@ const struct SpriteTemplate gUnknown_08595170 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gGrowingRingAffineAnimTable,
-    .callback = sub_81075EC,
+    .callback = AnimToTargetInSinWave,
 };
 
-const union AffineAnimCmd gUnknown_08595188[] =
+static const union AffineAnimCmd sAffineAnim_HydroCannonCharge[] =
 {
     AFFINEANIMCMD_FRAME(0x3, 0x3, 10, 50),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 10),
@@ -272,100 +267,100 @@ const union AffineAnimCmd gUnknown_08595188[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_085951A8[] =
+static const union AffineAnimCmd sAffineAnim_HydroCannonBeam[] =
 {
     AFFINEANIMCMD_FRAME(0x150, 0x150, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085951B8[] =
+static const union AffineAnimCmd *const sAffineAnims_HydroCannonCharge[] =
 {
-    gUnknown_08595188,
+    sAffineAnim_HydroCannonCharge,
 };
 
-const union AffineAnimCmd *const gUnknown_085951BC[] =
+static const union AffineAnimCmd *const sAffineAnims_HydroCannonBeam[] =
 {
-    gUnknown_085951A8,
+    sAffineAnim_HydroCannonBeam,
 };
 
-const struct SpriteTemplate gUnknown_085951C0 =
-{
-    .tileTag = ANIM_TAG_WATER_ORB,
-    .paletteTag = ANIM_TAG_WATER_ORB,
-    .oam = &gOamData_AffineDouble_ObjBlend_16x16,
-    .anims = gUnknown_085950E0,
-    .images = NULL,
-    .affineAnims = gUnknown_085951B8,
-    .callback = sub_8107730,
-};
-
-const struct SpriteTemplate gUnknown_085951D8 =
+const struct SpriteTemplate gHydroCannonChargeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WATER_ORB,
     .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_AffineDouble_ObjBlend_16x16,
-    .anims = gUnknown_085950E0,
+    .anims = gAnims_WaterMudOrb,
     .images = NULL,
-    .affineAnims = gUnknown_085951BC,
-    .callback = sub_81077C0,
+    .affineAnims = sAffineAnims_HydroCannonCharge,
+    .callback = AnimHydroCannonCharge,
 };
 
-const union AnimCmd gUnknown_085951F0[] =
+const struct SpriteTemplate gHydroCannonBeamSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WATER_ORB,
+    .paletteTag = ANIM_TAG_WATER_ORB,
+    .oam = &gOamData_AffineDouble_ObjBlend_16x16,
+    .anims = gAnims_WaterMudOrb,
+    .images = NULL,
+    .affineAnims = sAffineAnims_HydroCannonBeam,
+    .callback = AnimHydroCannonBeam,
+};
+
+static const union AnimCmd sAnim_WaterBubble[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_085951F8[] =
+static const union AnimCmd sAnim_WaterGunDroplet[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08595200[] =
+const union AnimCmd *const gAnims_WaterBubble[] =
 {
-    gUnknown_085951F0,
+    sAnim_WaterBubble,
 };
 
-const union AnimCmd *const gUnknown_08595204[] =
+static const union AnimCmd *const sAnims_WaterGunDroplet[] =
 {
-    gUnknown_085951F8,
+    sAnim_WaterGunDroplet,
 };
 
-const struct SpriteTemplate gUnknown_08595208 =
+const struct SpriteTemplate gWaterGunProjectileSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
-    .anims = gUnknown_08595200,
+    .anims = gAnims_WaterBubble,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimThrowProjectile,
 };
 
-const struct SpriteTemplate gUnknown_08595220 =
+const struct SpriteTemplate gWaterGunDropletSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineDouble_ObjBlend_16x16,
-    .anims = gUnknown_08595204,
+    .anims = sAnims_WaterGunDroplet,
     .images = NULL,
-    .affineAnims = gUnknown_08596208,
-    .callback = sub_8107894,
+    .affineAnims = gAffineAnims_Droplet,
+    .callback = AnimWaterGunDroplet,
 };
 
-const struct SpriteTemplate gUnknown_08595238 =
+const struct SpriteTemplate gSmallBubblePairSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS, // ice_crystals_4, which are bubbles
     .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gUnknown_08595AB8,
+    .anims = gAnims_SmallBubblePair,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81078D0,
+    .callback = AnimSmallBubblePair,
 };
 
-const struct SpriteTemplate gUnknown_08595250 =
+const struct SpriteTemplate gSmallDriftingBubblesSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
@@ -373,10 +368,11 @@ const struct SpriteTemplate gUnknown_08595250 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8108034,
+    .callback = AnimSmallDriftingBubbles,
 };
 
-const struct SpriteTemplate gUnknown_08595268 =
+// Used by Water Spout / Water Sport
+const struct SpriteTemplate gSmallWaterOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GLOWY_BLUE_ORB,
     .paletteTag = ANIM_TAG_GLOWY_BLUE_ORB,
@@ -384,104 +380,102 @@ const struct SpriteTemplate gUnknown_08595268 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_810851C,
+    .callback = AnimSmallWaterOrb,
 };
 
-const union AnimCmd gUnknown_08595280[] =
+static const union AnimCmd sAnim_WaterPulseBubble_0[] =
 {
     ANIMCMD_FRAME(8, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08595288[] =
+static const union AnimCmd sAnim_WaterPulseBubble_1[] =
 {
     ANIMCMD_FRAME(9, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_08595290[] =
+static const union AnimCmd sAnim_WeatherBallWaterDown[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_08595298[] =
+static const union AnimCmd *const sAnims_WaterPulseBubble[] =
 {
-    gUnknown_08595280,
-    gUnknown_08595288,
+    sAnim_WaterPulseBubble_0,
+    sAnim_WaterPulseBubble_1,
 };
 
-const union AnimCmd *const gUnknown_085952A0[] =
+static const union AnimCmd *const sAnims_WeatherBallWaterDown[] =
 {
-    gUnknown_08595290,
+    sAnim_WeatherBallWaterDown,
 };
 
-const union AffineAnimCmd gUnknown_085952A4[] =
+static const union AffineAnimCmd sAffineAnim_WaterPulseRingBubble_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 15),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_085952BC[] =
+static const union AffineAnimCmd sAffineAnim_WaterPulseRingBubble_1[] =
 {
     AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
     AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 15),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gUnknown_085952D4[] =
+static const union AffineAnimCmd sAffineAnim_WeatherBallWaterDown[] =
 {
     AFFINEANIMCMD_FRAME(0x150, 0x150, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 15),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_085952EC[] =
+static const union AffineAnimCmd *const sAffineAnims_WaterPulseRingBubble[] =
 {
-    gUnknown_085952A4,
-    gUnknown_085952BC,
+    sAffineAnim_WaterPulseRingBubble_0,
+    sAffineAnim_WaterPulseRingBubble_1,
 };
 
-const union AffineAnimCmd *const gUnknown_085952F4[] =
+static const union AffineAnimCmd *const sAffineAnims_WeatherBallWaterDown[] =
 {
-    gUnknown_085952D4,
+    sAffineAnim_WeatherBallWaterDown,
 };
 
-const struct SpriteTemplate gUnknown_085952F8 =
+const struct SpriteTemplate gWaterPulseBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gUnknown_08595298,
+    .anims = sAnims_WaterPulseBubble,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8108BE0,
+    .callback = AnimWaterPulseBubble,
 };
 
-const struct SpriteTemplate gUnknown_08595310 =
+const struct SpriteTemplate gWaterPulseRingBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_8x8,
-    .anims = gUnknown_08595298,
+    .anims = sAnims_WaterPulseBubble,
     .images = NULL,
-    .affineAnims = gUnknown_085952EC,
-    .callback = sub_8108C54,
+    .affineAnims = sAffineAnims_WaterPulseRingBubble,
+    .callback = AnimWaterPulseRingBubble,
 };
 
-const struct SpriteTemplate gUnknown_08595328 =
+const struct SpriteTemplate gWeatherBallWaterDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
-    .anims = gUnknown_085952A0,
+    .anims = sAnims_WeatherBallWaterDown,
     .images = NULL,
-    .affineAnims = gUnknown_085952F4,
-    .callback = sub_80A8EE4,
+    .affineAnims = sAffineAnims_WeatherBallWaterDown,
+    .callback = AnimWeatherBallDown,
 };
-
-extern const struct SpriteTemplate gUnknown_08597388;
 
 const union AffineAnimCmd gAquaTailHitAffineAnimCmd_1[] =
 {
@@ -572,7 +566,7 @@ const struct SpriteTemplate gAquaTailHitSpriteTemplate =
     .callback = AnimAquaTail,
 };
 
-void AnimAquaTail(struct Sprite *sprite)
+static void AnimAquaTail(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     if (gBattleAnimArgs[2] == 0)
@@ -584,7 +578,7 @@ void AnimAquaTail(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void AnimKnockOffAquaTail(struct Sprite *sprite)
+static void AnimKnockOffAquaTail(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
@@ -632,18 +626,18 @@ void AnimTask_CreateRaindrops(u8 taskId)
     {
         x = Random2() % 240;
         y = Random2() % 80;
-        CreateSprite(&gUnknown_08595020, x, y, 4);
+        CreateSprite(&gRainDropSpriteTemplate, x, y, 4);
     }
     if (gTasks[taskId].data[0] == gTasks[taskId].data[3])
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_810721C(struct Sprite *sprite)
+static void AnimRainDrop(struct Sprite *sprite)
 {
-    sprite->callback = sub_8107228;
+    sprite->callback = AnimRainDrop_Step;
 }
 
-void sub_8107228(struct Sprite *sprite)
+static void AnimRainDrop_Step(struct Sprite *sprite)
 {
     if (++sprite->data[0] <= 13)
     {
@@ -654,7 +648,8 @@ void sub_8107228(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-void sub_8107260(struct Sprite *sprite)
+// For water bubbles that move to a dest, as in Bubble/Bubblebeam
+static void AnimWaterBubbleProjectile(struct Sprite *sprite)
 {
     u8 spriteId;
 
@@ -687,11 +682,11 @@ void sub_8107260(struct Sprite *sprite)
     gSprites[spriteId].data[2] = gBattleAnimArgs[5];
     gSprites[spriteId].data[3] = (u8)gBattleAnimArgs[4] * 256;
     gSprites[spriteId].data[4] = gBattleAnimArgs[6];
-    sprite->callback = sub_8107380;
+    sprite->callback = AnimWaterBubbleProjectile_Step1;
     sprite->callback(sprite);
 }
 
-void sub_8107380(struct Sprite *sprite)
+static void AnimWaterBubbleProjectile_Step1(struct Sprite *sprite)
 {
     u8 otherSpriteId = sprite->data[5];
     u8 timer = gSprites[otherSpriteId].data[4];
@@ -708,26 +703,26 @@ void sub_8107380(struct Sprite *sprite)
     }
     else
     {
-        sprite->callback = sub_8107408;
+        sprite->callback = AnimWaterBubbleProjectile_Step2;
         DestroySprite(&gSprites[otherSpriteId]);
     }
 }
 
-void sub_8107408(struct Sprite *sprite)
+static void AnimWaterBubbleProjectile_Step2(struct Sprite *sprite)
 {
     sprite->animPaused = FALSE;
     sprite->callback = RunStoredCallbackWhenAnimEnds;
-    StoreSpriteCallbackInData6(sprite, sub_8107430);
+    StoreSpriteCallbackInData6(sprite, AnimWaterBubbleProjectile_Step3);
 }
 
-void sub_8107430(struct Sprite *sprite)
+static void AnimWaterBubbleProjectile_Step3(struct Sprite *sprite)
 {
     sprite->data[0] = 10;
     sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
-void sub_810744C(struct Sprite *sprite)
+static void AnimAuroraBeamRings(struct Sprite *sprite)
 {
     s16 unkArg;
 
@@ -742,14 +737,14 @@ void sub_810744C(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_81074E4;
+    sprite->callback = AnimAuroraBeamRings_Step;
     sprite->affineAnimPaused = TRUE;
     sprite->callback(sprite);
 }
 
-void sub_81074E4(struct Sprite *sprite)
+static void AnimAuroraBeamRings_Step(struct Sprite *sprite)
 {
-    if ((u16)gBattleAnimArgs[ARG_RET_ID] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = FALSE;
@@ -758,15 +753,16 @@ void sub_81074E4(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8107528(u8 taskId)
+// Updates the palette on the rainbow rings used in Aurora Beam to make them appear to be rotating counterclockwise
+void AnimTask_RotateAuroraRingColors(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[2] = IndexOfSpritePaletteTag(ANIM_TAG_RAINBOW_RINGS) * 16 + 256;
-    gTasks[taskId].func = sub_810756C;
+    gTasks[taskId].func = AnimTask_RotateAuroraRingColors_Step;
 }
 
 #ifdef NONMATCHING
-void sub_810756C(u8 taskId)
+static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 {
     int i;
     u16 palIndex;
@@ -790,7 +786,7 @@ void sub_810756C(u8 taskId)
 }
 #else
 NAKED
-void sub_810756C(u8 taskId)
+static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 {
     asm_unified("push {r4-r7,lr}\n\
 	lsls r0, 24\n\
@@ -858,7 +854,8 @@ _081075DE:\n\
 }
 #endif
 
-void sub_81075EC(struct Sprite *sprite)
+// For animating undulating beam attacks (e.g. Flamethrower, Hydro Pump, Signal Beam)
+static void AnimToTargetInSinWave(struct Sprite *sprite)
 {
     u16 retArg;
 
@@ -871,8 +868,8 @@ void sub_81075EC(struct Sprite *sprite)
     InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0xD200 / sprite->data[0];
     sprite->data[7] = gBattleAnimArgs[3];
-    retArg = gBattleAnimArgs[ARG_RET_ID];
-    if (gBattleAnimArgs[ARG_RET_ID] > 127)
+    retArg = gBattleAnimArgs[7];
+    if (gBattleAnimArgs[7] > 127)
     {
         sprite->data[6] = (retArg - 127) * 256;
         sprite->data[7] = -sprite->data[7];
@@ -881,11 +878,11 @@ void sub_81075EC(struct Sprite *sprite)
     {
         sprite->data[6] = retArg * 256;
     }
-    sprite->callback = sub_8107674;
+    sprite->callback = AnimToTargetInSinWave_Step;
     sprite->callback(sprite);
 }
 
-void sub_8107674(struct Sprite *sprite)
+static void AnimToTargetInSinWave_Step(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         DestroyAnimSprite(sprite);
@@ -901,21 +898,22 @@ void sub_8107674(struct Sprite *sprite)
     }
 }
 
-void sub_81076C8(u8 taskId)
+void AnimTask_StartSinAnimTimer(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
-    gBattleAnimArgs[ARG_RET_ID] = 0;
-    gTasks[taskId].func = sub_81076F4;
+    gBattleAnimArgs[7] = 0;
+    gTasks[taskId].func = AnimTask_RunSinAnimTimer;
 }
 
-void sub_81076F4(u8 taskId)
+static void AnimTask_RunSinAnimTimer(u8 taskId)
 {
-    gBattleAnimArgs[ARG_RET_ID] = (gBattleAnimArgs[ARG_RET_ID] + 3) & 0xFF;
+    gBattleAnimArgs[7] = (gBattleAnimArgs[7] + 3) & 0xFF;
     if (--gTasks[taskId].data[0] == 0)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_8107730(struct Sprite *sprite)
+// Flashing blue orbs grow in size near the attacker. First stage of Hydro Cannon
+static void AnimHydroCannonCharge(struct Sprite *sprite)
 {
     u8 priority;
 
@@ -941,16 +939,17 @@ void sub_8107730(struct Sprite *sprite)
         sprite->pos2.x = -10;
         sprite->subpriority = priority + 2;
     }
-    sprite->callback = sub_81077A4;
+    sprite->callback = AnimHydroCannonCharge_Step;
 }
 
-void sub_81077A4(struct Sprite *sprite)
+static void AnimHydroCannonCharge_Step(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81077C0(struct Sprite *sprite)
+// Flashing blue orbs move from the attacker to the target. Second stage of Hydro Cannon
+static void AnimHydroCannonBeam(struct Sprite *sprite)
 {
     bool8 animType;
     u8 coordType;
@@ -978,7 +977,8 @@ void sub_81077C0(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_8107894(struct Sprite *sprite)
+// Water droplet appears and drips down. Used by Water Gun on impact
+static void AnimWaterGunDroplet(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[4];
@@ -988,17 +988,17 @@ void sub_8107894(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_81078D0(struct Sprite *sprite)
+static void AnimSmallBubblePair(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[3])
+    if (gBattleAnimArgs[3] != ANIM_ATTACKER)
         InitSpritePosToAnimTarget(sprite, TRUE);
     else
         InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[7] = gBattleAnimArgs[2];
-    sprite->callback = sub_810790C;
+    sprite->callback = AnimSmallBubblePair_Step;
 }
 
-void sub_810790C(struct Sprite *sprite)
+static void AnimSmallBubblePair_Step(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 11) & 0xFF;
     sprite->pos2.x = Sin(sprite->data[0], 4);
@@ -1023,20 +1023,20 @@ void AnimTask_CreateSurfWave(u8 taskId)
     {
         SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
-            AnimLoadCompressedBgTilemap(animBg.bgId, gUnknown_08D95E00);
+            AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBgTilemap_SurfOpponent);
         else
-            AnimLoadCompressedBgTilemap(animBg.bgId, gUnknown_08D960D0);
+            AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimBgTilemap_SurfPlayer);
     }
     else
     {
-        sub_80A6D60(&animBg, gUnknown_08D963A4, 1);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_SurfContest, 1);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)
         LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
     else
         LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
-    taskId2 = CreateTask(sub_8107D58, gTasks[taskId].priority + 1);
+    taskId2 = CreateTask(AnimTask_SurfWaveScanlineEffect, gTasks[taskId].priority + 1);
     gTasks[taskId].data[15] = taskId2;
     gTasks[taskId2].data[0] = 0;
     gTasks[taskId2].data[1] = 0x1000;
@@ -1078,7 +1078,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
         gTasks[taskId2].data[5] = 0;
     }
     gTasks[taskId].data[6] = 1;
-    gTasks[taskId].func = sub_8107B84;
+    gTasks[taskId].func = AnimTask_CreateSurfWave_Step1;
 }
 #else
 NAKED
@@ -1127,22 +1127,22 @@ void AnimTask_CreateSurfWave(u8 taskId)
 	bne _081079D0\n\
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gUnknown_08D95E00\n\
+	ldr r1, =gBattleAnimBgTilemap_SurfOpponent\n\
 	bl AnimLoadCompressedBgTilemap\n\
 	b _081079EA\n\
 	.pool\n\
 _081079D0:\n\
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gUnknown_08D960D0\n\
+	ldr r1, =gBattleAnimBgTilemap_SurfPlayer\n\
 	bl AnimLoadCompressedBgTilemap\n\
 	b _081079EA\n\
 	.pool\n\
 _081079E0:\n\
-	ldr r1, =gUnknown_08D963A4\n\
+	ldr r1, =gBattleAnimBgTilemap_SurfContest\n\
 	mov r0, sp\n\
 	movs r2, 0x1\n\
-	bl sub_80A6D60\n\
+	bl AnimLoadCompressedBgTilemapHandleContest\n\
 _081079EA:\n\
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
@@ -1171,7 +1171,7 @@ _08107A24:\n\
 	movs r2, 0x20\n\
 	bl LoadCompressedPalette\n\
 _08107A32:\n\
-	ldr r0, =sub_8107D58\n\
+	ldr r0, =AnimTask_SurfWaveScanlineEffect\n\
 	ldr r4, =gTasks\n\
 	mov r2, r10\n\
 	lsls r5, r2, 2\n\
@@ -1294,7 +1294,7 @@ _08107B58:\n\
 	adds r0, r1\n\
 	movs r1, 0x1\n\
 	strh r1, [r0, 0x14]\n\
-	ldr r1, =sub_8107B84\n\
+	ldr r1, =AnimTask_CreateSurfWave_Step1\n\
 	str r1, [r0]\n\
 	add sp, 0x10\n\
 	pop {r3-r5}\n\
@@ -1309,7 +1309,7 @@ _08107B58:\n\
 #endif
 
 #ifdef NONMATCHING
-void sub_8107B84(u8 taskId)
+static void AnimTask_CreateSurfWave_Step1(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 i;
@@ -1354,12 +1354,12 @@ void sub_8107B84(u8 taskId)
     if (!(gTasks[gTasks[taskId].data[15]].data[1] & 0x1F))
     {
         gTasks[taskId].data[0] = gTasks[gTasks[taskId].data[15]].data[1] & 0x1F;
-        gTasks[taskId].func = sub_8107CC4;
+        gTasks[taskId].func = AnimTask_CreateSurfWave_Step2;
     }
 }
 #else
 NAKED
-void sub_8107B84(u8 taskId)
+static void AnimTask_CreateSurfWave_Step1(u8 taskId)
 {
     asm_unified("push {r4-r7,lr}\n\
 	sub sp, 0x10\n\
@@ -1508,7 +1508,7 @@ _08107C86:\n\
 	cmp r3, 0\n\
 	bne _08107CA8\n\
 	strh r3, [r2, 0x8]\n\
-	ldr r0, =sub_8107CC4\n\
+	ldr r0, =AnimTask_CreateSurfWave_Step2\n\
 	str r0, [r2]\n\
 _08107CA8:\n\
 	add sp, 0x10\n\
@@ -1519,7 +1519,7 @@ _08107CA8:\n\
 }
 #endif
 
-void sub_8107CC4(u8 taskId)
+static void AnimTask_CreateSurfWave_Step2(u8 taskId)
 {
     u16 *BGptrX = &gBattle_BG1_X;
     u16 *BGptrY = &gBattle_BG1_Y;
@@ -1542,7 +1542,7 @@ void sub_8107CC4(u8 taskId)
     }
 }
 
-void sub_8107D58(u8 taskId)
+static void AnimTask_SurfWaveScanlineEffect(u8 taskId)
 {
     s16 i;
     struct ScanlineEffectParams params;
@@ -1608,7 +1608,7 @@ void sub_8107D58(u8 taskId)
     }
 }
 
-void sub_8108034(struct Sprite *sprite)
+static void AnimSmallDriftingBubbles(struct Sprite *sprite)
 {
     s16 randData;
     s16 randData2;
@@ -1621,10 +1621,10 @@ void sub_8108034(struct Sprite *sprite)
         randData2 = 256 - randData2;
     sprite->data[1] = randData;
     sprite->data[2] = randData2;
-    sprite->callback = sub_8108098;
+    sprite->callback = AnimSmallDriftingBubbles_Step;
 }
 
-void sub_8108098(struct Sprite *sprite)
+static void AnimSmallDriftingBubbles_Step(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
@@ -1637,18 +1637,18 @@ void sub_8108098(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_81080E4(u8 taskId)
+void AnimTask_WaterSpoutLaunch(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[5] = gSprites[task->data[15]].pos1.y;
-    task->data[1] = sub_8108384();
+    task->data[1] = GetWaterSpoutPowerForAnim();
     PrepareBattlerSpriteForRotScale(task->data[15], ST_OAM_OBJ_NORMAL);
-    task->func = sub_8108140;
+    task->func = AnimTask_WaterSpoutLaunch_Step;
 }
 
-void sub_8108140(u8 taskId)
+static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1697,7 +1697,7 @@ void sub_8108140(u8 taskId)
         }
         break;
     case 4:
-        sub_8108408(task, taskId);
+        CreateWaterSpoutLaunchDroplets(task, taskId);
         task->data[0]++;
     case 5:
         if (++task->data[3] > 1)
@@ -1733,7 +1733,9 @@ void sub_8108140(u8 taskId)
     }
 }
 
-u8 sub_8108384(void)
+// Returns a value 0-3 relative to which quarter HP the attacker is in
+// A higher number results in more water sprites during the Water Spout animation
+static u8 GetWaterSpoutPowerForAnim(void)
 {
     u8 i;
     u16 hp;
@@ -1765,7 +1767,7 @@ u8 sub_8108384(void)
     return 3;
 }
 
-void sub_8108408(struct Task *task, u8 taskId)
+static void CreateWaterSpoutLaunchDroplets(struct Task *task, u8 taskId)
 {
     s16 i;
     s16 attackerCoordX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
@@ -1779,7 +1781,7 @@ void sub_8108408(struct Task *task, u8 taskId)
         increment = 1;
     for (i = 0; i < 20; i += increment)
     {
-        spriteId = CreateSprite(&gUnknown_08595268, attackerCoordX, attackerCoordY, subpriority);
+        spriteId = CreateSprite(&gSmallWaterOrbSpriteTemplate, attackerCoordX, attackerCoordY, subpriority);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[1] = i;
@@ -1790,7 +1792,7 @@ void sub_8108408(struct Task *task, u8 taskId)
             gSprites[spriteId].data[6] = taskId;
             gSprites[spriteId].data[7] = 2;
             if (task->data[2] & 1)
-                sub_810851C(&gSprites[spriteId]);
+                AnimSmallWaterOrb(&gSprites[spriteId]);
             task->data[2]++;
         }
         trigIndex = (trigIndex + increment * 2);
@@ -1798,7 +1800,7 @@ void sub_8108408(struct Task *task, u8 taskId)
     }
 }
 
-void sub_810851C(struct Sprite *sprite)
+static void AnimSmallWaterOrb(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -1820,11 +1822,11 @@ void sub_810851C(struct Sprite *sprite)
     }
 }
 
-void sub_81085C8(u8 taskId)
+void AnimTask_WaterSpoutRain(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[1] = sub_8108384();
+    task->data[1] = GetWaterSpoutPowerForAnim();
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         task->data[4] = 136;
@@ -1838,10 +1840,10 @@ void sub_81085C8(u8 taskId)
     task->data[5] = 98;
     task->data[7] = task->data[4] + 49;
     task->data[12] = task->data[1] * 5 + 5;
-    task->func = sub_810862C;
+    task->func = AnimTask_WaterSpoutRain_Step;
 }
 
-void sub_810862C(u8 taskId)
+static void AnimTask_WaterSpoutRain_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     u8 taskId2;
@@ -1852,21 +1854,21 @@ void sub_810862C(u8 taskId)
         if (++task->data[2] > 2)
         {
             task->data[2] = 0;
-            sub_810871C(task, taskId);
+            CreateWaterSpoutRainDroplet(task, taskId);
         }
         if (task->data[10] != 0 && task->data[13] == 0)
         {
-            gBattleAnimArgs[0] = 1;
+            gBattleAnimArgs[0] = ANIM_TARGET;
             gBattleAnimArgs[1] = 0;
             gBattleAnimArgs[2] = 12;
-            taskId2 = CreateTask(sub_81152DC, 80);
+            taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
             if (taskId2 != 0xFF)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;
             }
-            gBattleAnimArgs[0] = 3;
-            taskId2 = CreateTask(sub_81152DC, 80);
+            gBattleAnimArgs[0] = ANIM_DEF_PARTNER;
+            taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
             if (taskId2 != 0xFF)
             {
                 gTasks[taskId2].func(taskId2);
@@ -1884,14 +1886,14 @@ void sub_810862C(u8 taskId)
     }
 }
 
-void sub_810871C(struct Task *task, u8 taskId)
+static void CreateWaterSpoutRainDroplet(struct Task *task, u8 taskId)
 {
     u16 yPosArg = ((gSineTable[task->data[8]] + 3) >> 4) + task->data[6];
-    u8 spriteId = CreateSprite(&gUnknown_08595268, task->data[7], 0, 0);
+    u8 spriteId = CreateSprite(&gSmallWaterOrbSpriteTemplate, task->data[7], 0, 0);
 
     if (spriteId != MAX_SPRITES)
     {
-        gSprites[spriteId].callback = sub_81087C0;
+        gSprites[spriteId].callback = AnimWaterSpoutRain;
         gSprites[spriteId].data[5] = yPosArg;
         gSprites[spriteId].data[6] = taskId;
         gSprites[spriteId].data[7] = 9;
@@ -1899,10 +1901,10 @@ void sub_810871C(struct Task *task, u8 taskId)
     }
     task->data[11]++;
     task->data[8] = (task->data[8] + 39) & 0xFF;
-    task->data[7] = ((task->data[7] * 0x41c64e6d + 0x3039) % task->data[5]) + task->data[4];
+    task->data[7] = (ISO_RANDOMIZE2(task->data[7]) % task->data[5]) + task->data[4];
 }
 
-void sub_81087C0(struct Sprite *sprite)
+static void AnimWaterSpoutRain(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -1910,20 +1912,20 @@ void sub_81087C0(struct Sprite *sprite)
         if (sprite->pos1.y >= sprite->data[5])
         {
             gTasks[sprite->data[6]].data[10] = 1;
-            sprite->data[1] = CreateSprite(&gUnknown_08597388, sprite->pos1.x, sprite->pos1.y, 1);
+            sprite->data[1] = CreateSprite(&gWaterHitSplatSpriteTemplate, sprite->pos1.x, sprite->pos1.y, 1);
             if (sprite->data[1] != MAX_SPRITES)
             {
                 StartSpriteAffineAnim(&gSprites[sprite->data[1]], 3);
                 gSprites[sprite->data[1]].data[6] = sprite->data[6];
                 gSprites[sprite->data[1]].data[7] = sprite->data[7];
-                gSprites[sprite->data[1]].callback = sub_810886C;
+                gSprites[sprite->data[1]].callback = AnimWaterSpoutRainHit;
             }
             DestroySprite(sprite);
         }
     }
 }
 
-void sub_810886C(struct Sprite *sprite)
+static void AnimWaterSpoutRainHit(struct Sprite *sprite)
 {
     if (++sprite->data[1] > 1)
     {
@@ -1938,7 +1940,7 @@ void sub_810886C(struct Sprite *sprite)
     }
 }
 
-void sub_81088E4(u8 taskId)
+void AnimTask_WaterSport(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1952,22 +1954,22 @@ void sub_81088E4(u8 taskId)
     task->data[9] = -32;
     task->data[1] = 0;
     task->data[0] = 0;
-    task->func = sub_8108978;
+    task->func = AnimTask_WaterSport_Step;
 }
 
-void sub_8108978(u8 taskId)
+static void AnimTask_WaterSport_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
     {
     case 0:
-        sub_8108AC0(task);
+        CreateWaterSportDroplet(task);
         if (task->data[10] != 0)
             task->data[0]++;
         break;
     case 1:
-        sub_8108AC0(task);
+        CreateWaterSportDroplet(task);
         if (++task->data[1] > 16)
         {
             task->data[1] = 0;
@@ -1975,7 +1977,7 @@ void sub_8108978(u8 taskId)
         }
         break;
     case 2:
-        sub_8108AC0(task);
+        CreateWaterSportDroplet(task);
         task->data[5] += task->data[7] * 6;
         if (!(task->data[5] >= -16 && task->data[5] <= 256))
         {
@@ -1993,13 +1995,13 @@ void sub_8108978(u8 taskId)
         }
         break;
     case 3:
-        sub_8108AC0(task);
+        CreateWaterSportDroplet(task);
         task->data[6] -= task->data[7] * 2;
         if (++task->data[1] > 7)
             task->data[0]++;
         break;
     case 4:
-        sub_8108AC0(task);
+        CreateWaterSportDroplet(task);
         task->data[5] -= task->data[7] * 6;
         if (!(task->data[5] >= -16 && task->data[5] <= 256))
         {
@@ -2009,7 +2011,7 @@ void sub_8108978(u8 taskId)
         }
         break;
     case 5:
-        sub_8108AC0(task);
+        CreateWaterSportDroplet(task);
         task->data[6] -= task->data[7] * 2;
         if (++task->data[1] > 7)
             task->data[0] = 2;
@@ -2024,14 +2026,14 @@ void sub_8108978(u8 taskId)
     }
 }
 
-void sub_8108AC0(struct Task *task)
+static void CreateWaterSportDroplet(struct Task *task)
 {
     u8 spriteId;
 
     if (++task->data[2] > 1)
     {
         task->data[2] = 0;
-        spriteId = CreateSprite(&gUnknown_08595268, task->data[3], task->data[4], 10);
+        spriteId = CreateSprite(&gSmallWaterOrbSpriteTemplate, task->data[3], task->data[4], 10);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[0] = 16;
@@ -2039,13 +2041,13 @@ void sub_8108AC0(struct Task *task)
             gSprites[spriteId].data[4] = task->data[6];
             gSprites[spriteId].data[5] = task->data[9];
             InitAnimArcTranslation(&gSprites[spriteId]);
-            gSprites[spriteId].callback = sub_8108B2C;
+            gSprites[spriteId].callback = AnimWaterSportDroplet;
             task->data[8]++;
         }
     }
 }
 
-void sub_8108B2C(struct Sprite *sprite)
+static void AnimWaterSportDroplet(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
@@ -2056,11 +2058,11 @@ void sub_8108B2C(struct Sprite *sprite)
         sprite->data[4] = (Random2() & 0x1F) - 16 + sprite->pos1.y;
         sprite->data[5] = ~(Random2() & 7);
         InitAnimArcTranslation(sprite);
-        sprite->callback = sub_8108B94;
+        sprite->callback = AnimWaterSportDroplet_Step;
     }
 }
 
-void sub_8108B94(struct Sprite *sprite)
+static void AnimWaterSportDroplet_Step(struct Sprite *sprite)
 {
     u16 i;
 
@@ -2068,7 +2070,7 @@ void sub_8108B94(struct Sprite *sprite)
     {
         for (i = 0; i < NUM_TASKS; i++)
         {
-            if (gTasks[i].func == sub_8108978)
+            if (gTasks[i].func == AnimTask_WaterSport_Step)
             {
                 gTasks[i].data[10] = 1;
                 gTasks[i].data[8]--;
@@ -2078,7 +2080,7 @@ void sub_8108B94(struct Sprite *sprite)
     }
 }
 
-void sub_8108BE0(struct Sprite *sprite)
+static void AnimWaterPulseBubble(struct Sprite *sprite)
 {
     sprite->pos1.x = gBattleAnimArgs[0];
     sprite->pos1.y = gBattleAnimArgs[1];
@@ -2086,10 +2088,10 @@ void sub_8108BE0(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[4];
     sprite->data[3] = gBattleAnimArgs[5];
-    sprite->callback = sub_8108C08;
+    sprite->callback = AnimWaterPulseBubble_Step;
 }
 
-void sub_8108C08(struct Sprite *sprite)
+static void AnimWaterPulseBubble_Step(struct Sprite *sprite)
 {
     sprite->data[4] -= sprite->data[0];
     sprite->pos2.y = sprite->data[4] / 10;
@@ -2099,7 +2101,7 @@ void sub_8108C08(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_8108C54(struct Sprite *sprite)
+static void AnimWaterPulseRingBubble(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
@@ -2122,7 +2124,7 @@ void AnimWaterPulseRing(struct Sprite *sprite)
     sprite->callback = AnimWaterPulseRing_Step;
 }
 
-void AnimWaterPulseRing_Step(struct Sprite *sprite)
+static void AnimWaterPulseRing_Step(struct Sprite *sprite)
 {
     int xDiff = sprite->data[1] - sprite->pos1.x;
     int yDiff = sprite->data[2] - sprite->pos1.y;
@@ -2132,7 +2134,7 @@ void AnimWaterPulseRing_Step(struct Sprite *sprite)
     if (++sprite->data[5] == sprite->data[4])
     {
         sprite->data[5] = 0;
-        sub_8108D54(sprite, xDiff, yDiff);
+        CreateWaterPulseRingBubbles(sprite, xDiff, yDiff);
     }
     if (sprite->data[3] == sprite->data[0])
         DestroyAnimSprite(sprite);
@@ -2140,7 +2142,7 @@ void AnimWaterPulseRing_Step(struct Sprite *sprite)
 }
 
 #ifdef NONMATCHING
-void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
+static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
 {
     s16 something = sprite->data[0] / 2;
     s16 combinedX = sprite->pos1.x + sprite->pos2.x;
@@ -2152,7 +2154,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
 
     for (i = 0; i <= 0; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY + something, 130);
+        spriteId = CreateSprite(&gWaterPulseRingBubbleSpriteTemplate, combinedX, combinedY + something, 130);
         gSprites[spriteId].data[0] = 20;
         gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
@@ -2163,7 +2165,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
     }
     for (i = 0; i <= 0; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY - something, 130);
+        spriteId = CreateSprite(&gWaterPulseRingBubbleSpriteTemplate, combinedX, combinedY - something, 130);
         gSprites[spriteId].data[0] = 20;
         gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
@@ -2175,7 +2177,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
 }
 #else
 NAKED
-void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
+static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2245,7 +2247,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
 	lsls r1, 16\n\
 	mov r10, r1\n\
 _08108DE2:\n\
-	ldr r0, =gUnknown_08595310\n\
+	ldr r0, =gWaterPulseRingBubbleSpriteTemplate\n\
 	mov r2, r8\n\
 	asrs r1, r2, 16\n\
 	mov r3, r10\n\
@@ -2300,7 +2302,7 @@ _08108E32:\n\
 	lsls r1, 16\n\
 	mov r10, r1\n\
 _08108E58:\n\
-	ldr r0, =gUnknown_08595310\n\
+	ldr r0, =gWaterPulseRingBubbleSpriteTemplate\n\
 	mov r2, r8\n\
 	asrs r1, r2, 16\n\
 	mov r3, r10\n\

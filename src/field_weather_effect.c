@@ -559,8 +559,7 @@ static void StartRainSpriteFall(struct Sprite *sprite)
     if (sprite->tRandom == 0)
         sprite->tRandom = 361;
 
-    // Standard RNG sequence.
-    rand = sprite->tRandom * 1103515245 + 12345;
+    rand = ISO_RANDOMIZE2(sprite->tRandom);
     sprite->tRandom = ((rand & 0x7FFF0000) >> 16) % 600;
 
     numFallingFrames = sRainSpriteFallingDurations[gWeatherPtr->isDownpour][0];
