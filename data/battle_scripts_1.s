@@ -6507,6 +6507,7 @@ BattleScript_SturdyPreventsOHKO::
 
 BattleScript_DampStopsExplosion::
 	pause 0x20
+	copybyte gBattlerAbility, gBattlerTarget
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNPREVENTSUSAGE
 	pause 0x40
