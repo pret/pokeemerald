@@ -112,7 +112,7 @@ static void MCB2_InitRegionMapRegisters(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(1, sFieldRegionMapBgTemplates, 2);
+    InitBgsFromTemplates(1, sFieldRegionMapBgTemplates, ARRAY_COUNT(sFieldRegionMapBgTemplates));
     InitWindows(sFieldRegionMapWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 0x27, 0xd0);
