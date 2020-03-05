@@ -1400,495 +1400,75 @@ void sub_80219C8(u8 windowId, u8 left, u8 colorId, const u8 *string)
     AddTextPrinterParameterized3(windowId, 2, left, 0, sBerryCrushTextColorTable[colorId], 0, string);
 }
 
-#ifdef NONMATCHING
-void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
+void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
 {
-    s32 r6;
-    u8 i, j;
-    u8 sp18 = 0;
+    u8 r8;
     u8 sp1C = 0;
-    union BerryCrushGame_68 *sp20 = &sp0C->unk68;
+    u8 sp20 = 0;
+    u8 r2;
+    s32 r3;
+    u8 r7;
+    union BerryCrushGame_68 * sp24 = &sp0C->unk68;
     u32 xOffset;
-    u32 r8, r9, r4, r7, r3_;
-    u8 r10, r2;    
+    s32 r6;
 
-    r3 -= 16;
+    sp18 -= 16;
     if (sp10 == 2)
-        r3 -= 42;
-    r6 = r3 - 14 * sp0C->unk9;
+        sp18 -= 42;
+    r6 = sp18 - 14 * sp0C->unk9;
     if (r6 > 0)
         r6 = r6 / 2 + 16;
     else
         r6 = 16;
-    i = 0;
-    while (i < sp0C->unk9)
+
+    for (r8 = 0; r8 < sp0C->unk9; r6 += 14, ++r8)
     {
         DynamicPlaceholderTextUtil_Reset();
         switch (sp10)
         {
-        default: // how can you write this twice??????
-            r4 = sp14 - 4;
-            r10 = r6;
-            r9 = sp1C + 0xA2;
-            r8 = sp18;
-            r6 += 14;
-            ++i;
-            break;
         case 0:
-            sp18 = sp20->as_five_players.unk1C[0].unk4.as_2d_bytes[0][i];
-            if (i != 0 && sp20->as_four_players.unk00.unk0C[0][i] != sp20->as_four_players.unk00.unk0C[0][i - 1])
-                sp1C = i;
-            ConvertIntToDecimalStringN(
-                gStringVar4,
-                sp20->as_four_players.unk00.unk0C[sp10][i],
-                STR_CONV_MODE_RIGHT_ALIGN,
-                4
-            );
+            sp1C = sp24->as_five_players.unk1C[0].unk4.as_2d_bytes[sp10][r8];
+            if (r8 != 0 && sp24->as_four_players.unk00.unk0C[sp10][r8] != sp24->as_four_players.unk00.unk0C[sp10][r8 - 1])
+                sp20 = r8;
+            ConvertIntToDecimalStringN(gStringVar4, sp24->as_four_players.unk00.unk0C[sp10][r8], STR_CONV_MODE_RIGHT_ALIGN, 4);
             StringAppend(gStringVar4, gUnknown_082F43B4[sp10]);
-            r4 = sp14 - 4;
-            r10 = r6;
-            r9 = sp1C + 0xA2;
-            r8 = sp18;
-            r6 += 14;
-            ++i;
             break;
         case 1:
-            sp18 = sp20->as_five_players.unk1C[0].unk4.as_2d_bytes[1][i];
-            if (i != 0 && sp20->as_four_players.unk00.unk0C[1][i] != sp20->as_four_players.unk00.unk0C[1][i - 1])
-                sp1C = i;
-            ConvertIntToDecimalStringN(
-                gStringVar1,
-                sp20->as_four_players.unk00.unk0C[sp10][i] >> 4,
-                STR_CONV_MODE_RIGHT_ALIGN,
-                3
-            );
-            j = 0;
-            r3_ = 15 & (u8)sp20->as_four_players.unk00.unk0C[sp10][i];
-            r4 = sp14 - 4;
-            r10 = r6;
-            r9 = sp1C + 0xA2;
-            r8 = sp18;
-            r6 += 14;
-            ++i;
-            for (; j < 4; ++j)
-                if (((r3_ >> (3 - j)) & 1) != 0) // why does it load constant 1 into r10? 
-                    r7 += gUnknown_082F334C[j];
-            ConvertIntToDecimalStringN(
-                gStringVar2,
-                (u8)(r7 / 1000000),
-                STR_CONV_MODE_LEADING_ZEROS,
-                2
-            );
-            StringExpandPlaceholders(gStringVar4, gText_XDotY);
+            sp1C = sp24->as_five_players.unk1C[0].unk4.as_2d_bytes[sp10][r8];
+            if (r8 != 0 && sp24->as_four_players.unk00.unk0C[sp10][r8] != sp24->as_four_players.unk00.unk0C[sp10][r8 - 1])
+                sp20 = r8;
+            ConvertIntToDecimalStringN(gStringVar1, sp24->as_four_players.unk00.unk0C[sp10][r8] >> 4, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            r3 = 0;
+            r7 = sp24->as_four_players.unk00.unk0C[sp10][r8] & 15;
+            for (r2 = 0; r2 < 4; ++r2)
+                if ((r7 >> (3 - r2)) & 1)
+                    r3 += gUnknown_082F334C[r2];
+            r7 = r3 / 1000000u;
+            ConvertIntToDecimalStringN(gStringVar2, r7, STR_CONV_MODE_LEADING_ZEROS, 2);
+            StringExpandPlaceholders(gStringVar4, gUnknown_082F43B4[sp10]);
             break;
         case 2:
-            sp18 = i;
-            sp1C = i;
-            r2 = sp0C->unk68.as_four_players.others[i].unk0;
-            if (r2 > 43)
+            sp1C = r8;
+            sp20 = r8;
+            r2 = sp0C->unk68.as_five_players.unk1C[r8].unk14[12];
+            if (r2 >= LAST_BERRY_INDEX - FIRST_BERRY_INDEX + 2)
                 r2 = 0;
-            StringCopy(gStringVar1,gBerries[r2].name);
-            StringExpandPlaceholders(gStringVar4, gText_Var1Berry);
-            r4 = sp14 - 4;
-            r10 = r6;
-            r9 = sp1C + 0xA2;
-            r8 = i;
-            r6 += 14;
-            ++i;
+            StringCopy(gStringVar1, gBerries[r2].name);
+            StringExpandPlaceholders(gStringVar4, gUnknown_082F43B4[2]);
             break;
         }
-        xOffset = GetStringRightAlignXOffset(2, gStringVar4, r4);
-        AddTextPrinterParameterized3(
-            sp0C->unk138.unk82,
-            2,
-            xOffset,
-            r10,
-            sBerryCrushTextColorTable[0],
-            0,
-            gStringVar4
-        );
-        if (sp18 == sp0C->unk8)
+        xOffset = GetStringRightAlignXOffset(2, gStringVar4, sp14 - 4);
+        AddTextPrinterParameterized3(sp0C->unk138.unk82, 2, xOffset, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
+        if (sp1C == sp0C->unk8)
             StringCopy(gStringVar3, gText_1DotBlueF700);
         else
             StringCopy(gStringVar3, gText_1DotF700);
-        gStringVar3[0] = r9;
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, PLAYER_UNK14(sp0C, r8));
+        gStringVar3[0] = sp20 + CHAR_1;
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, PLAYER_UNK14(sp0C, sp1C));
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gStringVar3);
-        AddTextPrinterParameterized3(
-            sp0C->unk138.unk82,
-            2,
-            4,
-            r10,
-            sBerryCrushTextColorTable[0],
-            0,
-            gStringVar4
-        );
+        AddTextPrinterParameterized3(sp0C->unk138.unk82, 2, 4, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
     }
 }
-#else
-NAKED
-void sub_8021A28(struct BerryCrushGame *sp0C, u8 sp10, u8 sp14, u8 r3)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x2C\n\
-        str r0, [sp, 0xC]\n\
-        lsls r1, 24\n\
-        lsrs r1, 24\n\
-        str r1, [sp, 0x10]\n\
-        lsls r2, 24\n\
-        lsrs r2, 24\n\
-        str r2, [sp, 0x14]\n\
-        lsls r3, 24\n\
-        movs r0, 0\n\
-        str r0, [sp, 0x18]\n\
-        movs r1, 0\n\
-        str r1, [sp, 0x1C]\n\
-        ldr r2, [sp, 0xC]\n\
-        adds r2, 0x68\n\
-        str r2, [sp, 0x20]\n\
-        movs r4, 0xF0\n\
-        lsls r4, 24\n\
-        adds r3, r4\n\
-        lsrs r3, 24\n\
-        ldr r0, [sp, 0x10]\n\
-        cmp r0, 0x2\n\
-        bne _08021A68\n\
-        adds r0, r3, 0\n\
-        subs r0, 0x2A\n\
-        lsls r0, 24\n\
-        lsrs r3, r0, 24\n\
-    _08021A68:\n\
-        ldr r2, [sp, 0xC]\n\
-        ldrb r1, [r2, 0x9]\n\
-        lsls r0, r1, 3\n\
-        subs r0, r1\n\
-        lsls r0, 1\n\
-        subs r6, r3, r0\n\
-        cmp r6, 0\n\
-        ble _08021A84\n\
-        lsrs r0, r6, 31\n\
-        adds r0, r6, r0\n\
-        asrs r0, 1\n\
-        adds r6, r0, 0\n\
-        adds r6, 0x10\n\
-        b _08021A86\n\
-    _08021A84:\n\
-        movs r6, 0x10\n\
-    _08021A86:\n\
-        movs r5, 0\n\
-        ldr r3, [sp, 0xC]\n\
-        ldrb r3, [r3, 0x9]\n\
-        cmp r5, r3\n\
-        bcc _08021A92\n\
-        b _08021D14\n\
-    _08021A92:\n\
-        ldr r4, [sp, 0x10]\n\
-        lsls r4, 2\n\
-        str r4, [sp, 0x24]\n\
-    _08021A98:\n\
-        bl DynamicPlaceholderTextUtil_Reset\n\
-        ldr r0, [sp, 0x10]\n\
-        cmp r0, 0x1\n\
-        beq _08021B48\n\
-        cmp r0, 0x1\n\
-        bgt _08021AC0\n\
-        cmp r0, 0\n\
-        beq _08021ADE\n\
-        ldr r4, [sp, 0x14]\n\
-        subs r4, 0x4\n\
-        lsls r1, r6, 24\n\
-        mov r10, r1\n\
-        ldr r2, [sp, 0x1C]\n\
-        adds r2, 0xA2\n\
-        mov r9, r2\n\
-        ldr r3, [sp, 0x18]\n\
-        lsls r3, 5\n\
-        mov r8, r3\n\
-        b _08021C5A\n\
-    _08021AC0:\n\
-        ldr r4, [sp, 0x10]\n\
-        cmp r4, 0x2\n\
-        bne _08021AC8\n\
-        b _08021C1C\n\
-    _08021AC8:\n\
-        ldr r4, [sp, 0x14]\n\
-        subs r4, 0x4\n\
-        lsls r0, r6, 24\n\
-        mov r10, r0\n\
-        ldr r1, [sp, 0x1C]\n\
-        adds r1, 0xA2\n\
-        mov r9, r1\n\
-        ldr r2, [sp, 0x18]\n\
-        lsls r2, 5\n\
-        mov r8, r2\n\
-        b _08021C5A\n\
-    _08021ADE:\n\
-        ldr r0, [sp, 0x20]\n\
-        adds r0, 0x20\n\
-        adds r0, r5\n\
-        ldrb r0, [r0]\n\
-        str r0, [sp, 0x18]\n\
-        lsls r3, r5, 1\n\
-        ldr r2, [sp, 0x20]\n\
-        adds r2, 0xC\n\
-        cmp r5, 0\n\
-        beq _08021B04\n\
-        adds r0, r2, r3\n\
-        subs r1, r5, 0x1\n\
-        lsls r1, 1\n\
-        adds r1, r2, r1\n\
-        ldrh r0, [r0]\n\
-        ldrh r1, [r1]\n\
-        cmp r0, r1\n\
-        beq _08021B04\n\
-        str r5, [sp, 0x1C]\n\
-    _08021B04:\n\
-        ldr r4, [sp, 0x24]\n\
-        ldr r1, [sp, 0x10]\n\
-        adds r0, r4, r1\n\
-        lsls r0, 1\n\
-        adds r0, r3, r0\n\
-        adds r0, r2, r0\n\
-        ldrh r1, [r0]\n\
-        ldr r0, =gStringVar4\n\
-        movs r2, 0x1\n\
-        movs r3, 0x4\n\
-        bl ConvertIntToDecimalStringN\n\
-        ldr r0, =gUnknown_082F43B4\n\
-        adds r0, r4, r0\n\
-        ldr r1, [r0]\n\
-        ldr r0, =gStringVar4\n\
-        bl StringAppend\n\
-        ldr r4, [sp, 0x14]\n\
-        subs r4, 0x4\n\
-        lsls r2, r6, 24\n\
-        mov r10, r2\n\
-        ldr r3, [sp, 0x1C]\n\
-        adds r3, 0xA2\n\
-        mov r9, r3\n\
-        ldr r0, [sp, 0x18]\n\
-        lsls r0, 5\n\
-        mov r8, r0\n\
-        b _08021C5A\n\
-        .pool\n\
-    _08021B48:\n\
-        ldr r1, [sp, 0x20]\n\
-        adds r0, r1, r5\n\
-        adds r0, 0x28\n\
-        ldrb r0, [r0]\n\
-        str r0, [sp, 0x18]\n\
-        lsls r3, r5, 1\n\
-        adds r2, r1, 0\n\
-        adds r2, 0xC\n\
-        cmp r5, 0\n\
-        beq _08021B72\n\
-        adds r0, r3, 0\n\
-        adds r0, 0xA\n\
-        adds r0, r2, r0\n\
-        adds r1, r3, 0\n\
-        adds r1, 0x8\n\
-        adds r1, r2, r1\n\
-        ldrh r0, [r0]\n\
-        ldrh r1, [r1]\n\
-        cmp r0, r1\n\
-        beq _08021B72\n\
-        str r5, [sp, 0x1C]\n\
-    _08021B72:\n\
-        ldr r0, [sp, 0x24]\n\
-        ldr r1, [sp, 0x10]\n\
-        adds r4, r0, r1\n\
-        lsls r4, 1\n\
-        adds r4, r3, r4\n\
-        adds r4, r2, r4\n\
-        ldrh r1, [r4]\n\
-        lsrs r1, 4\n\
-        ldr r0, =gStringVar1\n\
-        movs r2, 0x1\n\
-        movs r3, 0x3\n\
-        bl ConvertIntToDecimalStringN\n\
-        movs r7, 0\n\
-        ldrb r0, [r4]\n\
-        movs r3, 0xF\n\
-        ands r3, r0\n\
-        movs r2, 0\n\
-        ldr r4, [sp, 0x10]\n\
-        lsls r4, 2\n\
-        str r4, [sp, 0x28]\n\
-        ldr r4, [sp, 0x14]\n\
-        subs r4, 0x4\n\
-        lsls r0, r6, 24\n\
-        mov r10, r0\n\
-        ldr r1, [sp, 0x1C]\n\
-        adds r1, 0xA2\n\
-        mov r9, r1\n\
-        ldr r0, [sp, 0x18]\n\
-        lsls r0, 5\n\
-        mov r8, r0\n\
-        adds r6, 0xE\n\
-        adds r5, 0x1\n\
-        ldr r1, =gUnknown_082F334C\n\
-        mov r12, r1\n\
-    _08021BB8:\n\
-        movs r0, 0x3\n\
-        subs r1, r0, r2\n\
-        adds r0, r3, 0\n\
-        asrs r0, r1\n\
-        movs r1, 0x1\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _08021BD0\n\
-        lsls r0, r2, 2\n\
-        add r0, r12\n\
-        ldr r0, [r0]\n\
-        adds r7, r0\n\
-    _08021BD0:\n\
-        adds r0, r2, 0x1\n\
-        lsls r0, 24\n\
-        lsrs r2, r0, 24\n\
-        cmp r2, 0x3\n\
-        bls _08021BB8\n\
-        adds r0, r7, 0\n\
-        ldr r1, =0x000f4240\n\
-        bl __udivsi3\n\
-        lsls r0, 24\n\
-        lsrs r3, r0, 24\n\
-        ldr r0, =gStringVar2\n\
-        adds r1, r3, 0\n\
-        movs r2, 0x2\n\
-        movs r3, 0x2\n\
-        bl ConvertIntToDecimalStringN\n\
-        ldr r0, =gUnknown_082F43B4\n\
-        ldr r2, [sp, 0x28]\n\
-        adds r0, r2, r0\n\
-        ldr r1, [r0]\n\
-        ldr r0, =gStringVar4\n\
-        bl StringExpandPlaceholders\n\
-        b _08021C5E\n\
-        .pool\n\
-    _08021C1C:\n\
-        str r5, [sp, 0x18]\n\
-        str r5, [sp, 0x1C]\n\
-        lsls r7, r5, 5\n\
-        ldr r3, [sp, 0xC]\n\
-        adds r0, r3, r7\n\
-        adds r0, 0xA4\n\
-        ldrb r2, [r0]\n\
-        cmp r2, 0x2B\n\
-        bls _08021C30\n\
-        movs r2, 0\n\
-    _08021C30:\n\
-        lsls r1, r2, 3\n\
-        subs r1, r2\n\
-        lsls r1, 2\n\
-        ldr r0, =gBerries\n\
-        adds r1, r0\n\
-        ldr r0, =gStringVar1\n\
-        bl StringCopy\n\
-        ldr r0, =gUnknown_082F43B4\n\
-        ldr r1, [r0, 0x8]\n\
-        ldr r0, =gStringVar4\n\
-        bl StringExpandPlaceholders\n\
-        ldr r4, [sp, 0x14]\n\
-        subs r4, 0x4\n\
-        lsls r0, r6, 24\n\
-        mov r10, r0\n\
-        movs r1, 0xA2\n\
-        adds r1, r5\n\
-        mov r9, r1\n\
-        mov r8, r7\n\
-    _08021C5A:\n\
-        adds r6, 0xE\n\
-        adds r5, 0x1\n\
-    _08021C5E:\n\
-        movs r0, 0x2\n\
-        ldr r1, =gStringVar4\n\
-        adds r2, r4, 0\n\
-        bl GetStringRightAlignXOffset\n\
-        adds r2, r0, 0\n\
-        ldr r3, [sp, 0xC]\n\
-        movs r4, 0xDD\n\
-        lsls r4, 1\n\
-        adds r0, r3, r4\n\
-        ldrb r0, [r0]\n\
-        lsls r2, 24\n\
-        lsrs r2, 24\n\
-        mov r1, r10\n\
-        lsrs r3, r1, 24\n\
-        ldr r1, =sBerryCrushTextColorTable\n\
-        str r1, [sp]\n\
-        movs r4, 0\n\
-        str r4, [sp, 0x4]\n\
-        ldr r1, =gStringVar4\n\
-        str r1, [sp, 0x8]\n\
-        movs r1, 0x2\n\
-        bl AddTextPrinterParameterized3\n\
-        ldr r3, [sp, 0x18]\n\
-        ldr r2, [sp, 0xC]\n\
-        ldrb r2, [r2, 0x8]\n\
-        cmp r3, r2\n\
-        bne _08021CC0\n\
-        ldr r0, =gStringVar3\n\
-        ldr r1, =gText_1DotBlueF700\n\
-        bl StringCopy\n\
-        b _08021CC8\n\
-        .pool\n\
-    _08021CC0:\n\
-        ldr r0, =gStringVar3\n\
-        ldr r1, =gText_1DotF700\n\
-        bl StringCopy\n\
-    _08021CC8:\n\
-        ldr r4, =gStringVar3\n\
-        mov r3, r9\n\
-        strb r3, [r4]\n\
-        mov r1, r8\n\
-        adds r1, 0x98\n\
-        ldr r0, [sp, 0xC]\n\
-        adds r1, r0, r1\n\
-        movs r0, 0\n\
-        bl DynamicPlaceholderTextUtil_SetPlaceholderPtr\n\
-        ldr r0, =gStringVar4\n\
-        adds r1, r4, 0\n\
-        bl DynamicPlaceholderTextUtil_ExpandPlaceholders\n\
-        ldr r1, [sp, 0xC]\n\
-        movs r2, 0xDD\n\
-        lsls r2, 1\n\
-        adds r0, r1, r2\n\
-        ldrb r0, [r0]\n\
-        mov r4, r10\n\
-        lsrs r3, r4, 24\n\
-        ldr r1, =sBerryCrushTextColorTable\n\
-        str r1, [sp]\n\
-        movs r1, 0\n\
-        str r1, [sp, 0x4]\n\
-        ldr r2, =gStringVar4\n\
-        str r2, [sp, 0x8]\n\
-        movs r1, 0x2\n\
-        movs r2, 0x4\n\
-        bl AddTextPrinterParameterized3\n\
-        lsls r0, r5, 24\n\
-        lsrs r5, r0, 24\n\
-        ldr r3, [sp, 0xC]\n\
-        ldrb r3, [r3, 0x9]\n\
-        cmp r5, r3\n\
-        bcs _08021D14\n\
-        b _08021A98\n\
-    _08021D14:\n\
-        add sp, 0x2C\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .pool");
-}
-#endif
 
 void sub_8021D34(struct BerryCrushGame *r8)
 {
