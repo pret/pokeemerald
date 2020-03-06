@@ -108,12 +108,12 @@ LilycoveCity_Harbor_EventScript_GoToBattleFrontier:: @ 821E171
 
 LilycoveCity_Harbor_EventScript_GetEonTicketState:: @ 821E194
 	setvar VAR_TEMP_E, 0
-	goto_if_unset FLAG_SYS_HAS_EON_TICKET, Common_EventScript_NopReturn
+	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, Common_EventScript_NopReturn
 	checkitem ITEM_EON_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 1
-	goto_if_set FLAG_HAS_EON_TICKET, Common_EventScript_NopReturn
+	goto_if_set FLAG_SHOWN_EON_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 2
 	return
 
@@ -124,7 +124,7 @@ LilycoveCity_Harbor_EventScript_GetAuroraTicketState:: @ 821E1C6
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_D, 1
-	goto_if_set FLAG_HAS_AURORA_TICKET, Common_EventScript_NopReturn
+	goto_if_set FLAG_SHOWN_AURORA_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_D, 2
 	return
 
@@ -135,7 +135,7 @@ LilycoveCity_Harbor_EventScript_GetOldSeaMapState:: @ 821E1F8
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 1
-	goto_if_set FLAG_HAS_OLD_SEA_MAP, Common_EventScript_NopReturn
+	goto_if_set FLAG_SHOWN_OLD_SEA_MAP, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 2
 	return
 
@@ -146,7 +146,7 @@ LilycoveCity_Harbor_EventScript_GetMysticTicketState:: @ 821E22A
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 1
-	goto_if_set FLAG_HAS_MYSTIC_TICKET, Common_EventScript_NopReturn
+	goto_if_set FLAG_SHOWN_MYSTIC_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 2
 	return
 
@@ -207,7 +207,7 @@ LilycoveCity_Harbor_EventScript_SetHasMysticTicket:: @ 821E2EA
 	return
 
 LilycoveCity_Harbor_EventScript_EonTicketFirstTime:: @ 821E2F0
-	setflag FLAG_HAS_EON_TICKET
+	setflag FLAG_SHOWN_EON_TICKET
 	msgbox EventTicket_Text_ThatPass, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor
@@ -224,7 +224,7 @@ LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime:: @ 821E30F
 	end
 
 LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime:: @ 821E320
-	setflag FLAG_HAS_AURORA_TICKET
+	setflag FLAG_SHOWN_AURORA_TICKET
 	msgbox EventTicket_Text_ThatPass, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor
@@ -241,7 +241,7 @@ LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime:: @ 821E33F
 	end
 
 LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime:: @ 821E350
-	setflag FLAG_HAS_OLD_SEA_MAP
+	setflag FLAG_SHOWN_OLD_SEA_MAP
 	msgbox EventTicket_Text_ShowOldSeaMap, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor
@@ -290,7 +290,7 @@ LilycoveCity_Harbor_EventScript_GoToFarawayIslandFirstTime:: @ 821E40C
 	end
 
 LilycoveCity_Harbor_EventScript_MysticTicketFirstTime:: @ 821E41D
-	setflag FLAG_HAS_MYSTIC_TICKET
+	setflag FLAG_SHOWN_MYSTIC_TICKET
 	msgbox EventTicket_Text_ThatPass, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor
