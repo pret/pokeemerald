@@ -231,7 +231,7 @@ struct PokemonStorageSystemData
     struct Sprite *field_D94;
     struct Sprite *field_D98[2];
     u16 *field_DA0;
-    struct PokemonMarkMenu field_DA4;
+    struct PokemonMarkMenu monMarks;
     struct UnkPSSStruct_2002370 field_1E5C;
     struct Pokemon movingMon;
     struct Pokemon field_2108;
@@ -2321,9 +2321,9 @@ static void Cb_InitPSS(u8 taskId)
 
         if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         {
-            sPSSData->field_DA4.baseTileTag = TAG_TILE_D;
-            sPSSData->field_DA4.basePaletteTag = TAG_PAL_DACE;
-            sub_811F90C(&sPSSData->field_DA4);
+            sPSSData->monMarks.baseTileTag = TAG_TILE_D;
+            sPSSData->monMarks.basePaletteTag = TAG_PAL_DACE;
+            sub_811F90C(&sPSSData->monMarks);
             sub_811FA90();
         }
         else
@@ -3178,7 +3178,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_MARK_POKE);
-        sPSSData->field_DA4.markings = sPSSData->cursorMonMarkings;
+        sPSSData->monMarks.markings = sPSSData->cursorMonMarkings;
         sub_811FAA4(sPSSData->cursorMonMarkings, 0xb0, 0x10);
         sPSSData->state++;
         break;
@@ -3187,7 +3187,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
         {
             sub_811FAF8();
             ClearBottomWindow();
-            SetMonMarkings(sPSSData->field_DA4.markings);
+            SetMonMarkings(sPSSData->monMarks.markings);
             RefreshCursorMonData();
             SetPSSCallback(Cb_MainPSS);
         }
