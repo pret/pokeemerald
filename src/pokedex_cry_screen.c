@@ -29,14 +29,14 @@ struct PokedexCryScreen
     u8 unk1B;
 };
 
-static void sub_8145588(u16);
+static void PlayCryScreenCry(u16);
 static void sub_81455A8(void);
-static void sub_814560C(void);
+static void DrawWaveformFlatline(void);
 static void sub_8145648(u8);
-static void sub_81456A8(u8, u8);
+static void DrawWaveformSegment(u8, u8);
 static void sub_8145814(u8);
 static void sub_8145824(u8, s16, u8);
-static void sub_814596C(struct Sprite *);
+static void SpriteCB_CryMeterNeedle(struct Sprite *);
 static void sub_8145B24(s8);
 
 // IWRAM common
@@ -47,12 +47,12 @@ static EWRAM_DATA struct PokedexCryScreen *sDexCryScreen = NULL;
 static EWRAM_DATA u8 *sCryWaveformWindowTiledata = NULL;
 static EWRAM_DATA struct PokedexCryVolumeMeter *sCryVolumeMeter = NULL;
 
-const u16 CryMeterNeedlePalette[] = INCBIN_U16("graphics/pokedex/cry_meter_needle.gbapal");
-const u8 CryMeterNeedleTiles[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
+static const u16 sCryMeterNeedle_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter_needle.gbapal");
+static const u8 sCryMeterNeedle_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
 
-const u16 gUnknown_085B8378[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin");
-const u16 gUnknown_085B8418[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
-const u8 gUnknown_085B8438[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+static const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin"); // Unused
+static const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
+static const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
 
 const u16 gUnknown_085B8770[][72] =
 {
@@ -139,8 +139,8 @@ const u16 gUnknown_085B8770[][72] =
     }
 };
 
-const u16 gUnknown_085B8BF0[] = INCBIN_U16("graphics/pokedex/85B8C10.gbapal");
-const u8 gUnknown_085B8C10[] = INCBIN_U8("graphics/pokedex/85B8C10.4bpp");
+static const u16 sCryScreenBg_Pal[] = INCBIN_U16("graphics/pokedex/85B8C10.gbapal");
+static const u8 sCryScreenBg_Gfx[] = INCBIN_U8("graphics/pokedex/85B8C10.4bpp");
 
 const u8 gUnknown_085B8C30[] = {0xF0, 0x0F};
 const u8 gUnknown_085B8C32[][16] =
@@ -154,18 +154,18 @@ const u8 gUnknown_085B8C32[][16] =
     }
 };
 
-const union AnimCmd gSpriteAnim_85B8C54[] =
+static const union AnimCmd sSpriteAnim_CryMeterNeedle[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_85B8C5C[] =
+static const union AnimCmd *const sSpriteAnimTable_CryMeterNeedle[] =
 {
-    gSpriteAnim_85B8C54
+    sSpriteAnim_CryMeterNeedle
 };
 
-const struct OamData gOamData_85B8C60 =
+static const struct OamData sOamData_CryMeterNeedle =
 {
     .y = 160,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -179,33 +179,33 @@ const struct OamData gOamData_85B8C60 =
     .paletteNum = 0,
 };
 
-const struct SpriteTemplate gUnknown_085B8C68 =
+static const struct SpriteTemplate sCryMeterNeedleSpriteTemplate =
 {
-    0x2000,
-    0x2000,
-    &gOamData_85B8C60,
-    gSpriteAnimTable_85B8C5C,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    sub_814596C
+    .tileTag = 0x2000,
+    .paletteTag = 0x2000,
+    .oam = &sOamData_CryMeterNeedle,
+    .anims = sSpriteAnimTable_CryMeterNeedle,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_CryMeterNeedle
 };
 
-const struct SpriteSheet gCryMeterNeedleSpriteSheets[] =
+static const struct SpriteSheet sCryMeterNeedleSpriteSheets[] =
 {
-    {CryMeterNeedleTiles, 0x800, 0x2000},
+    {sCryMeterNeedle_Gfx, 0x800, 0x2000},
     {}
 };
 
-const struct SpritePalette gCryMeterNeedleSpritePalettes[] =
+static const struct SpritePalette sCryMeterNeedleSpritePalettes[] =
 {
-    {CryMeterNeedlePalette, 0x2000},
+    {sCryMeterNeedle_Pal, 0x2000},
     {}
 };
 
-bool8 sub_8145354(struct CryRelatedStruct *arg0, u8 windowId)
+bool8 LoadCryWaveformWindow(struct CryRelatedStruct *arg0, u8 windowId)
 {
     u8 i;
-    u8 retVal = FALSE;
+    u8 finished = FALSE;
 
     switch (gDexCryScreenState)
     {
@@ -225,27 +225,27 @@ bool8 sub_8145354(struct CryRelatedStruct *arg0, u8 windowId)
         sDexCryScreen->unk11 = 0;
         sub_8145824(windowId, -8 * arg0->xPos, 1);
         for (i = 0; i < 224; i++)
-            CopyToWindowPixelBuffer(windowId, gUnknown_085B8C10, TILE_SIZE_4BPP, i);
+            CopyToWindowPixelBuffer(windowId, sCryScreenBg_Gfx, TILE_SIZE_4BPP, i);
 
         gDexCryScreenState++;
         break;
     case 1:
         for (i = 0; i < sDexCryScreen->unk16 * 8; i++)
-            sub_81456A8(i, 0);
+            DrawWaveformSegment(i, 0);
         
         gDexCryScreenState++;
         break;
     case 2:
         sub_8145814(windowId);
-        LoadPalette(gUnknown_085B8BF0, arg0->paletteNo * 16, 32);
-        retVal = TRUE;
+        LoadPalette(sCryScreenBg_Pal, arg0->paletteNo * 16, 32);
+        finished = TRUE;
         break;
     }
 
-    return retVal;
+    return finished;
 }
 
-void sub_814545C(u8 windowId)
+void UpdateCryWaveformWindow(u8 windowId)
 {
     u8 var0;
 
@@ -259,15 +259,15 @@ void sub_814545C(u8 windowId)
         sDexCryScreen->unk1A--;
         if (!sDexCryScreen->unk1A)
         {
-            sub_8145588(sDexCryScreen->species);
-            sub_814560C();
+            PlayCryScreenCry(sDexCryScreen->species);
+            DrawWaveformFlatline();
             return;
         }
     }
 
     if (sDexCryScreen->unk10 == 0)
     {
-        sub_814560C();
+        DrawWaveformFlatline();
         return;
     }
     
@@ -279,7 +279,7 @@ void sub_814545C(u8 windowId)
     {
         if (!IsCryPlaying())
         {
-            sub_814560C();
+            DrawWaveformFlatline();
             sDexCryScreen->unk10 = 0;
             return;
         }
@@ -289,12 +289,12 @@ void sub_814545C(u8 windowId)
     }
 
     var0 = 2 * (sDexCryScreen->unk10 - 1);
-    sub_81456A8(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 2, sDexCryScreen->unk0[var0]);
-    sub_81456A8(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 1, sDexCryScreen->unk0[var0 + 1]);
+    DrawWaveformSegment(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 2, sDexCryScreen->unk0[var0]);
+    DrawWaveformSegment(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 1, sDexCryScreen->unk0[var0 + 1]);
     sDexCryScreen->unk10++;
 }
 
-void sub_8145534(u16 species)
+void CryScreenPlayButton(u16 species)
 {
     if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE && !sDexCryScreen->unk1A)
     {
@@ -309,13 +309,13 @@ void sub_8145534(u16 species)
             }
             else
             {
-                sub_8145588(species);
+                PlayCryScreenCry(species);
             }
         }
     }
 }
 
-static void sub_8145588(u16 species)
+static void PlayCryScreenCry(u16 species)
 {
     PlayCry2(species, 0, 0x7d, 10);
     sDexCryScreen->unk10 = 1;
@@ -333,14 +333,14 @@ static void sub_81455A8(void)
         baseBuffer = gSoundInfo.pcmBuffer + (gSoundInfo.pcmDmaPeriod + 1 - gPcmDmaCounter) * gSoundInfo.pcmSamplesPerVBlank;
 
     buffer = baseBuffer + 0x630;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < ARRAY_COUNT(sDexCryScreen->unk0); i++)
         sDexCryScreen->unk0[i] = buffer[i * 2] * 2;
 }
 
-static void sub_814560C(void)
+static void DrawWaveformFlatline(void)
 {
-    sub_81456A8(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 2, 0);
-    sub_81456A8(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 1, 0);
+    DrawWaveformSegment(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 2, 0);
+    DrawWaveformSegment(sDexCryScreen->unk16 * 8 + sDexCryScreen->unk11 - 1, 0);
 }
 
 static void sub_8145648(u8 windowId)
@@ -352,10 +352,10 @@ static void sub_8145648(u8 windowId)
     sDexCryScreen->unk11 += 2;
     offset = (sDexCryScreen->unk11 / 8 + sDexCryScreen->unk16 + 1) % 32;
     for (i = 0; i < 7; i++)
-        CopyToWindowPixelBuffer(windowId, gUnknown_085B8C10, TILE_SIZE_4BPP, offset + (i * TILE_SIZE_4BPP));
+        CopyToWindowPixelBuffer(windowId, sCryScreenBg_Gfx, TILE_SIZE_4BPP, offset + (i * TILE_SIZE_4BPP));
 }
 
-static void sub_81456A8(u8 a0, u8 a1)
+static void DrawWaveformSegment(u8 a0, u8 a1)
 {
     u8 sp0;
     u8 r6;
@@ -408,9 +408,9 @@ static void sub_8145824(u8 windowId, s16 arg1, u8 arg2)
     }
 }
 
-bool8 sub_8145850(struct CryRelatedStruct *arg0, u8 windowId)
+bool8 LoadCryMeter(struct CryRelatedStruct *arg0, u8 windowId)
 {
-    int retVal = FALSE;
+    bool8 finished = FALSE;
 
     switch (gDexCryScreenState)
     {
@@ -418,25 +418,25 @@ bool8 sub_8145850(struct CryRelatedStruct *arg0, u8 windowId)
         if (!sCryVolumeMeter)
             sCryVolumeMeter = AllocZeroed(sizeof(*sCryVolumeMeter));
 
-        CopyToWindowPixelBuffer(windowId, gUnknown_085B8438, 0, 0);
-        LoadPalette(gUnknown_085B8418, arg0->paletteNo * 16, 32);
+        CopyToWindowPixelBuffer(windowId, sCryMeter_Gfx, 0, 0);
+        LoadPalette(sCryMeter_Pal, arg0->paletteNo * 16, 32);
         gDexCryScreenState++;
         break;
     case 1:
-        LoadSpriteSheets(gCryMeterNeedleSpriteSheets);
-        LoadSpritePalettes(gCryMeterNeedleSpritePalettes);
-        sCryVolumeMeter->needleSpriteId = CreateSprite(&gUnknown_085B8C68, 40 + arg0->xPos * 8, 56 + arg0->yPos * 8, 1);
-        sCryVolumeMeter->unk0 = 0x20;
-        sCryVolumeMeter->unk1 = 0x20;
+        LoadSpriteSheets(sCryMeterNeedleSpriteSheets);
+        LoadSpritePalettes(sCryMeterNeedleSpritePalettes);
+        sCryVolumeMeter->needleSpriteId = CreateSprite(&sCryMeterNeedleSpriteTemplate, 40 + arg0->xPos * 8, 56 + arg0->yPos * 8, 1);
+        sCryVolumeMeter->unk0 = 32;
+        sCryVolumeMeter->unk1 = 32;
         sCryVolumeMeter->unk2 = 0;
-        retVal = TRUE;
+        finished = TRUE;
         break;
     }
 
-    return retVal;
+    return finished;
 }
 
-void sub_8145914(void)
+void FreeCryScreen(void)
 {
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[sCryVolumeMeter->needleSpriteId].oam.paletteNum));
     DestroySprite(gSprites + sCryVolumeMeter->needleSpriteId);
@@ -444,7 +444,7 @@ void sub_8145914(void)
     FREE_AND_SET_NULL(sCryVolumeMeter);
 }
 
-static void sub_814596C(struct Sprite *sprite)
+static void SpriteCB_CryMeterNeedle(struct Sprite *sprite)
 {
     u16 i;
     s8 r3;
@@ -458,29 +458,29 @@ static void sub_814596C(struct Sprite *sprite)
     gSprites[sCryVolumeMeter->needleSpriteId].oam.affineParam = 0;
     switch (sDexCryScreen->unk10)
     {
-        case 0:
-            sCryVolumeMeter->unk1 = 0x20;
-            if (sCryVolumeMeter->unk0 > 0)
-            {
-                if (sCryVolumeMeter->unk2 != 1)
-                    sCryVolumeMeter->unk2--;
-            }
-            else
-                sCryVolumeMeter->unk2 = 5;
-            break;
-        case 2:
-            r3 = 0;
-            for (i = 0; i < 16; i++)
-            {
-                if (r3 < sDexCryScreen->unk0[i])
-                    r3 = sDexCryScreen->unk0[i];
-            }
-            sub_8145B24(r3 * 0xd0 / 0x100);
-            break;
-        case 6:
-            var0 = &sDexCryScreen->unk0[10];
-            sub_8145B24(*var0 * 0xd0 / 0x100);
-            break;
+    case 0:
+        sCryVolumeMeter->unk1 = 32;
+        if (sCryVolumeMeter->unk0 > 0)
+        {
+            if (sCryVolumeMeter->unk2 != 1)
+                sCryVolumeMeter->unk2--;
+        }
+        else
+            sCryVolumeMeter->unk2 = 5;
+        break;
+    case 2:
+        r3 = 0;
+        for (i = 0; i < ARRAY_COUNT(sDexCryScreen->unk0); i++)
+        {
+            if (r3 < sDexCryScreen->unk0[i])
+                r3 = sDexCryScreen->unk0[i];
+        }
+        sub_8145B24(r3 * 0xd0 / 0x100);
+        break;
+    case 6:
+        var0 = &sDexCryScreen->unk0[10];
+        sub_8145B24(*var0 * 0xd0 / 0x100);
+        break;
     }
 
     if (sCryVolumeMeter->unk0 == sCryVolumeMeter->unk1)
@@ -512,7 +512,7 @@ static void sub_814596C(struct Sprite *sprite)
     ObjAffineSet(&affine, &matrix, 1, 2);
     SetOamMatrix(0, matrix.a, matrix.b, matrix.c, matrix.d);
     x = gSineTable[((sCryVolumeMeter->unk0 + 0x7F) & 0xFF)];
-    y = gSineTable[((sCryVolumeMeter->unk0 + 0x7F) & 0xFF) + 0x40];
+    y = gSineTable[((sCryVolumeMeter->unk0 + 0x7F) & 0xFF) + 64];
     sprite->pos2.x = x * 24 / 256;
     sprite->pos2.y = y * 24 / 256;
 }

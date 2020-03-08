@@ -3,8 +3,8 @@
 
 struct CryRelatedStruct
 {
-    u16 unk0;
-    u8 unk2;
+    u16 unk0; // Assigned to val that's never read
+    u8 unk2;  // Never read
     u8 paletteNo;
     u8 xPos;
     u8 yPos;
@@ -12,10 +12,10 @@ struct CryRelatedStruct
 
 extern u8 gDexCryScreenState;
 
-bool8 sub_8145354(struct CryRelatedStruct*, u8);
-void sub_814545C(u8);
-void sub_8145534(u16);
-bool8 sub_8145850(struct CryRelatedStruct*, u8);
-void sub_8145914(void);
+bool8 LoadCryWaveformWindow(struct CryRelatedStruct*, u8);
+void UpdateCryWaveformWindow(u8);
+void CryScreenPlayButton(u16);
+bool8 LoadCryMeter(struct CryRelatedStruct*, u8);
+void FreeCryScreen(void);
 
 #endif
