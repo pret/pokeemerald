@@ -367,7 +367,7 @@ enum
 {
     MODE_PARTY,
     MODE_BOX,
-    MODE_2,
+    MODE_MOVING,
 };
 
 enum
@@ -5077,7 +5077,7 @@ static void sub_80CBF14(u8 mode, u8 position)
     case MODE_BOX:
         sPSSData->field_B04 = &sPSSData->boxMonsSprites[position];
         break;
-    case MODE_2:
+    case MODE_MOVING:
         sPSSData->field_B04 = &sPSSData->movingMonSprite;
         break;
     default:
@@ -6388,7 +6388,7 @@ static void sub_80CE250(void)
     u8 mode;
 
     if (sIsMonBeingMoved)
-        mode = MODE_2;
+        mode = MODE_MOVING;
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
         mode = MODE_PARTY;
     else
@@ -6756,7 +6756,7 @@ static void sub_80CEB40(void)
             // fallthrough
         case CURSOR_AREA_BUTTONS:
         case CURSOR_AREA_BOX:
-            SetCursorMonData(NULL, MODE_2);
+            SetCursorMonData(NULL, MODE_MOVING);
             break;
         case CURSOR_AREA_IN_BOX:
             SetCursorMonData(GetBoxedMonPtr(StorageGetCurrentBox(), sBoxCursorPosition), MODE_BOX);
