@@ -2227,7 +2227,7 @@ static void sub_80C7F1C(void)
     gUnknown_02039D0E = 0;
 }
 
-static void sub_80C7F4C(void)
+static void SetMonIconTransparency(void)
 {
     if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
@@ -2333,7 +2333,7 @@ static void Cb_InitPSS(u8 taskId)
         }
         break;
     case 10:
-        sub_80C7F4C();
+        SetMonIconTransparency();
         if (!sPSSData->isReshowingPSS)
         {
             BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
