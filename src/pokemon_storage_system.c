@@ -454,7 +454,7 @@ EWRAM_DATA static u8 sCurrentBoxOption = 0;
 EWRAM_DATA static u8 gUnknown_02039D0E = 0;
 EWRAM_DATA static u8 sWhichToReshow = 0;
 EWRAM_DATA static u8 sLastUsedBox = 0;
-EWRAM_DATA static u16 gUnknown_02039D12 = 0;
+EWRAM_DATA static u16 sMovingItemId = 0;
 EWRAM_DATA static struct Pokemon gUnknown_02039D14 = {0};
 EWRAM_DATA static s8 sBoxCursorArea = 0;
 EWRAM_DATA static s8 sBoxCursorPosition = 0;
@@ -2165,7 +2165,7 @@ static void Cb2_EnterPSS(u8 boxOption)
     {
         sPSSData->boxOption = boxOption;
         sPSSData->isReshowingPSS = FALSE;
-        gUnknown_02039D12 = 0;
+        sMovingItemId = 0;
         sPSSData->state = 0;
         sPSSData->taskId = CreateTask(Cb_InitPSS, 3);
         sLastUsedBox = StorageGetCurrentBox();
@@ -3863,9 +3863,9 @@ static void Cb_ChangeScreen(u8 taskId)
     u8 screenChangeType = sPSSData->screenChangeType;
 
     if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS && IsActiveItemMoving() == TRUE)
-        gUnknown_02039D12 = GetMovingItem();
+        sMovingItemId = GetMovingItem();
     else
-        gUnknown_02039D12 = 0;
+        sMovingItemId = 0;
 
     switch (screenChangeType)
     {
@@ -4496,9 +4496,9 @@ static void sub_80CAEAC(void)
             sub_80D0D8C(CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
     }
 
-    if (gUnknown_02039D12 != 0)
+    if (sMovingItemId != 0)
     {
-        sub_80D0F38(gUnknown_02039D12);
+        sub_80D0F38(sMovingItemId);
         sub_80CFE54(3);
     }
 }
