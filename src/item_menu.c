@@ -2175,19 +2175,19 @@ void Task_WallyTutorialBagMenu(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        switch (tItemCount)
+        switch (data[8])
         {
             case 0x66:
                 PlaySE(SE_SELECT);
                 SwitchBagPocket(taskId, 1, 0);
-                tItemCount++;
+                data[8]++;
                 break;
             case 0xCC:
                 PlaySE(SE_SELECT);
                 BagMenu_PrintCursor_(data[0], 2);
                 gSpecialVar_ItemId = ITEM_POKE_BALL;
                 sub_81AC644(taskId);
-                tItemCount++;
+                data[8]++;
                 break;
             case 0x132:
                 PlaySE(SE_SELECT);
@@ -2197,7 +2197,7 @@ void Task_WallyTutorialBagMenu(u8 taskId)
                 Task_FadeAndCloseBagMenu(taskId);
                 break;
             default:
-                tItemCount++;
+                data[8]++;
                 break;
         }
     }
