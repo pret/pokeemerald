@@ -36,6 +36,7 @@
 #include "trig.h"
 #include "walda_phrase.h"
 #include "window.h"
+#include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
@@ -231,7 +232,7 @@ struct PokemonStorageSystemData
     struct Sprite *field_D94;
     struct Sprite *field_D98[2];
     u16 *field_DA0;
-    struct PokemonMarkMenu monMarks;
+    struct PokemonMarkMenu markMenu;
     struct UnkPSSStruct_2002370 field_1E5C;
     struct Pokemon movingMon;
     struct Pokemon field_2108;
@@ -367,7 +368,7 @@ enum
 {
     MODE_PARTY,
     MODE_BOX,
-    MODE_MOVING,
+    MODE_MOVE,
 };
 
 enum
@@ -2165,7 +2166,7 @@ static void Cb2_EnterPSS(u8 boxOption)
     {
         sPSSData->boxOption = boxOption;
         sPSSData->isReshowingPSS = FALSE;
-        sMovingItemId = 0;
+        sMovingItemId = ITEM_NONE;
         sPSSData->state = 0;
         sPSSData->taskId = CreateTask(Cb_InitPSS, 3);
         sLastUsedBox = StorageGetCurrentBox();
@@ -2321,9 +2322,9 @@ static void Cb_InitPSS(u8 taskId)
 
         if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         {
-            sPSSData->monMarks.baseTileTag = TAG_TILE_D;
-            sPSSData->monMarks.basePaletteTag = TAG_PAL_DACE;
-            sub_811F90C(&sPSSData->monMarks);
+            sPSSData->markMenu.baseTileTag = TAG_TILE_D;
+            sPSSData->markMenu.basePaletteTag = TAG_PAL_DACE;
+            sub_811F90C(&sPSSData->markMenu);
             sub_811FA90();
         }
         else
@@ -3178,7 +3179,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_MARK_POKE);
-        sPSSData->monMarks.markings = sPSSData->cursorMonMarkings;
+        sPSSData->markMenu.markings = sPSSData->cursorMonMarkings;
         sub_811FAA4(sPSSData->cursorMonMarkings, 0xb0, 0x10);
         sPSSData->state++;
         break;
@@ -3187,7 +3188,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
         {
             sub_811FAF8();
             ClearBottomWindow();
-            SetMonMarkings(sPSSData->monMarks.markings);
+            SetMonMarkings(sPSSData->markMenu.markings);
             RefreshCursorMonData();
             SetPSSCallback(Cb_MainPSS);
         }
@@ -3865,7 +3866,7 @@ static void Cb_ChangeScreen(u8 taskId)
     if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS && IsActiveItemMoving() == TRUE)
         sMovingItemId = GetMovingItem();
     else
-        sMovingItemId = 0;
+        sMovingItemId = ITEM_NONE;
 
     switch (screenChangeType)
     {
@@ -4496,7 +4497,7 @@ static void sub_80CAEAC(void)
             sub_80D0D8C(CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
     }
 
-    if (sMovingItemId != 0)
+    if (sMovingItemId != ITEM_NONE)
     {
         sub_80D0F38(sMovingItemId);
         sub_80CFE54(3);
@@ -5077,7 +5078,7 @@ static void sub_80CBF14(u8 mode, u8 position)
     case MODE_BOX:
         sPSSData->field_B04 = &sPSSData->boxMonsSprites[position];
         break;
-    case MODE_MOVING:
+    case MODE_MOVE:
         sPSSData->field_B04 = &sPSSData->movingMonSprite;
         break;
     default:
@@ -6388,7 +6389,7 @@ static void sub_80CE250(void)
     u8 mode;
 
     if (sIsMonBeingMoved)
-        mode = MODE_MOVING;
+        mode = MODE_MOVE;
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
         mode = MODE_PARTY;
     else
@@ -6756,7 +6757,7 @@ static void sub_80CEB40(void)
             // fallthrough
         case CURSOR_AREA_BUTTONS:
         case CURSOR_AREA_BOX:
-            SetCursorMonData(NULL, MODE_MOVING);
+            SetCursorMonData(NULL, MODE_MOVE);
             break;
         case CURSOR_AREA_IN_BOX:
             SetCursorMonData(GetBoxedMonPtr(StorageGetCurrentBox(), sBoxCursorPosition), MODE_BOX);
