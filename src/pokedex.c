@@ -3568,14 +3568,14 @@ static void Task_LoadCryScreen(u8 taskId)
         break;
     case 6:
         {
-            struct CryRelatedStruct sp4;
+            struct CryScreenWindow waveformWindow;
 
-            sp4.unk0 = 0x4020;
-            sp4.unk2 = 0x1F;
-            sp4.paletteNo = 8;
-            sp4.yPos = 0x1E;
-            sp4.xPos = 0xC;
-            if (LoadCryWaveformWindow(&sp4, 2))
+            waveformWindow.unk0 = 0x4020;
+            waveformWindow.unk2 = 31;
+            waveformWindow.paletteNo = 8;
+            waveformWindow.yPos = 30;
+            waveformWindow.xPos = 12;
+            if (LoadCryWaveformWindow(&waveformWindow, 2))
             {
                 gMain.state++;
                 gDexCryScreenState = 0;
@@ -3584,12 +3584,12 @@ static void Task_LoadCryScreen(u8 taskId)
         break;
     case 7:
         {
-            struct CryRelatedStruct spC;
+            struct CryScreenWindow cryMeter;
 
-            spC.paletteNo = 9;
-            spC.xPos = 0x12;
-            spC.yPos = 3;
-            if (LoadCryMeter(&spC, 3))
+            cryMeter.paletteNo = 9;
+            cryMeter.xPos = 18;
+            cryMeter.yPos = 3;
+            if (LoadCryMeter(&cryMeter, 3))
                 gMain.state++;
             CopyWindowToVram(WIN_VU_METER, 2);
             CopyWindowToVram(WIN_INFO, 3);
