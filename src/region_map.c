@@ -1004,7 +1004,7 @@ static void InitMapBasedOnPlayerLocation(void)
         break;
     case MAP_TYPE_UNDERGROUND:
     case MAP_TYPE_UNUSED_2:
-        if (gMapHeader.flags & MAP_ALLOW_ESCAPE_ROPE)
+        if (gMapHeader.flags & MAP_ALLOW_ESCAPING)
         {
             mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
