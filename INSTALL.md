@@ -14,7 +14,7 @@ Make sure that the `build-essential`, `git`, and `libpng-dev` packages are insta
 
 Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and add its environment variables. For Windows versions without the Linux subsystem, the devkitPro [graphical installer](https://github.com/devkitPro/installer/releases) includes a preconfigured MSYS2 environment, thus the steps below are not required.
 
-	export DEVKITPRO=/opt/devkitpro
+	export DEVKITPRO=/opt/devkitPro
 	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
 	export DEVKITARM=$DEVKITPRO/devkitARM
 	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
