@@ -45,10 +45,10 @@ const u8 gFontHalfRowOffsets[] =
     0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
 };
 
-const u8 gDownArrowTiles[] = INCBIN_U8("data/graphics/fonts/down_arrow.4bpp");
-const u8 gDarkDownArrowTiles[] = INCBIN_U8("data/graphics/fonts/down_arrow_RS.4bpp");
-const u8 gUnusedFRLGBlankedDownArrow[] = INCBIN_U8("data/graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
-const u8 gUnusedFRLGDownArrow[] = INCBIN_U8("data/graphics/fonts/unused_frlg_down_arrow.4bpp");
+const u8 gDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow.4bpp");
+const u8 gDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_RS.4bpp");
+const u8 gUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
+const u8 gUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 const u8 gDownArrowYCoords[] = { 0x0, 0x1, 0x2, 0x1 };
 const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x0 };
 
@@ -82,7 +82,7 @@ const struct KeypadIcon gKeypadIcons[] =
     { 0x22,  0x8, 0xC }
 };
 
-const u8 gKeypadIconTiles[] = INCBIN_U8("data/graphics/fonts/keypad_icons.4bpp");
+const u8 gKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
 
 const struct FontInfo gFontInfos[] =
 {
@@ -112,7 +112,7 @@ const u8 gMenuCursorDimensions[][2] =
     { 0x0,  0x0 }
 };
 
-const u16 gFont9JapaneseGlyphs[] = INCBIN_U16("data/graphics/fonts/font9.hwjpnfont");
+const u16 gFont9JapaneseGlyphs[] = INCBIN_U16("graphics/fonts/font9.hwjpnfont");
 
 extern const u16 gFont8LatinGlyphs[];
 extern const u8 gFont8LatinGlyphWidths[];
