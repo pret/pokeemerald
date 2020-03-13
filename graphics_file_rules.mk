@@ -1,7 +1,7 @@
 CASTFORMGFXDIR := graphics/pokemon/castform
 CHERRIMGFXDIR := graphics/pokemon/cherrim
 TILESETGFXDIR := data/tilesets
-FONTGFXDIR := data/graphics/fonts
+FONTGFXDIR := graphics/fonts
 INTERFACEGFXDIR := graphics/interface
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
