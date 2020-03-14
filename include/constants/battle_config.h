@@ -57,7 +57,8 @@
 
 // Move settings
 #define B_FELL_STINGER_STAT_RAISE   GEN_6 // Gen6 Atk+2, Gen7 Atk+3.
-#define B_SOUND_SUBSTITUTE          GEN_6 // Starting from gen6 sound moves bypass Substitute.
+#define B_SOUND_SUBSTITUTE          GEN_6 // Starting from Gen6 sound moves bypass Substitute.
+#define B_TOXIC_NEVER_MISS          GEN_6 // Starting from Gen6, if Toxic is used by a Poison type, it will never miss.
 
 // Ability settings
 #define B_ABILITY_POP_UP            GEN_6 // Starting from gen5, the pokemon abilities are displayed in a pop-up, when they activate in battle.
