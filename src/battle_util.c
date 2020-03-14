@@ -3618,8 +3618,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
-                gBattleScripting.battler = battler;
-                gActiveBattler = battler;
+                gBattleScripting.battler = gActiveBattler = gAbilityBattler = battler;
                 BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                 MarkBattlerForControllerExec(gActiveBattler);
                 return effect;
