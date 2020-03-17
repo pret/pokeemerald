@@ -301,7 +301,7 @@ SecretBase_EventScript_PutAwayDecoration:: @ 8275D2E
 	end
 
 SecretBase_EventScript_PutAwayDecorationLoop:: @ 8275D39
-	special sub_8129708
+	special PutAwayDecorationIteration
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_PutAwayDecorationEnd
 	addvar VAR_0x8004, 1
