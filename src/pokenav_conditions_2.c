@@ -296,7 +296,7 @@ u32 sub_81CDE94(s32 state)
             PrintHelpBarText(HELPBAR_CONDITION_MON_STATUS);
         return LT_INC_AND_PAUSE;
     case 15:
-        sub_81C7AC0(1);
+        PokenavFadeScreen(1);
         if (!sub_81CDD5C())
         {
             LoadLeftHeaderGfxForIndex(6);
@@ -353,7 +353,7 @@ u32 sub_81CE2D0(s32 state)
         sub_81CEE74(FALSE);
         return 1;
     case 2:
-        sub_81C7AC0(0);
+        PokenavFadeScreen(0);
         if (!sub_81CDD5C())
             sub_81C78A0();
         return 0;

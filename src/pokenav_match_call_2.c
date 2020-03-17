@@ -27,8 +27,8 @@
 
 struct Pokenav4Struct
 {
-    bool32 (*unk0)(void);
-    u32 unk4;
+    bool32 (*isTaskActiveCB)(void);
+    u32 loopTaskId;
     u8 filler8[0x6];
     u8 unkE;
     u8 unkF;
@@ -49,8 +49,8 @@ struct Pokenav4Struct
     u8 unk2028[0x20];
 };
 
-static bool32 sub_81CB310(void);
-static u32 sub_81CB324(s32);
+static bool32 GetCurrentLoopedTaskActive(void);
+static u32 LoopedTask_OpenMatchCall(s32);
 static void sub_81CBBB8(void);
 static void sub_81CBC1C(void);
 static void sub_81CC2B4(void);
@@ -274,32 +274,32 @@ static const struct SpriteTemplate sTrainerPicSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
-bool32 sub_81CB260(void)
+bool32 OpenMatchCall(void)
 {
     struct Pokenav4Struct *state = AllocSubstruct(6, sizeof(struct Pokenav4Struct));
     if (!state)
         return FALSE;
 
     state->unk19 = 0;
-    state->unk4 = CreateLoopedTask(sub_81CB324, 1);
-    state->unk0 = sub_81CB310;
+    state->loopTaskId = CreateLoopedTask(LoopedTask_OpenMatchCall, 1);
+    state->isTaskActiveCB = GetCurrentLoopedTaskActive;
     return TRUE;
 }
 
 void CreateMatchCallLoopedTask(s32 index)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
-    state->unk4 = CreateLoopedTask(sMatchCallLoopTaskFuncs[index], 1);
-    state->unk0 = sub_81CB310;
+    state->loopTaskId = CreateLoopedTask(sMatchCallLoopTaskFuncs[index], 1);
+    state->isTaskActiveCB = GetCurrentLoopedTaskActive;
 }
 
-u32 sub_81CB2CC(void)
+bool32 IsMatchCallLoopedTaskActive(void)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
-    return state->unk0();
+    return state->isTaskActiveCB();
 }
 
-void sub_81CB2E0(void)
+void FreeMatchCallSubstruct2(void)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     sub_81CC2B4();
@@ -310,13 +310,13 @@ void sub_81CB2E0(void)
     FreePokenavSubstruct(6);
 }
 
-static bool32 sub_81CB310(void)
+static bool32 GetCurrentLoopedTaskActive(void)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
-    return IsLoopedTaskActive(state->unk4);
+    return IsLoopedTaskActive(state->loopTaskId);
 }
 
-static u32 sub_81CB324(s32 taskState)
+static u32 LoopedTask_OpenMatchCall(s32 taskState)
 {
     struct Pokenav4Struct *state = GetSubstructPtr(6);
     switch (taskState)
@@ -376,7 +376,7 @@ static u32 sub_81CB324(s32 taskState)
         sub_81CC214();
         LoadLeftHeaderGfxForIndex(3);
         sub_81C7FA0(3, 1, 0);
-        sub_81C7AC0(1);
+        PokenavFadeScreen(1);
         return LT_INC_AND_PAUSE;
     case 7:
         if (IsPaletteFadeActive() || sub_81C8010())
@@ -849,7 +849,7 @@ u32 ExitMatchCall(s32 taskState)
     case 0:
         PlaySE(SE_SELECT);
         sub_81CBC38(0);
-        sub_81C7AC0(0);
+        PokenavFadeScreen(0);
         sub_81C78A0();
         return LT_INC_AND_PAUSE;
     case 1:
