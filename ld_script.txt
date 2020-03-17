@@ -304,7 +304,7 @@ SECTIONS {
         src/mirage_tower.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
-        src/unk_pokedex_area_screen_helper.o(.text);
+        src/pokedex_area_region_map.o(.text);
         src/battle_pyramid_bag.o(.text);
         src/pokenav.o(.text);
         src/pokenav_main_menu.o(.text);
@@ -658,7 +658,7 @@ SECTIONS {
         src/mirage_tower.o(.rodata);
         src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
-        src/unk_pokedex_area_screen_helper.o(.rodata);
+        src/pokedex_area_region_map.o(.rodata);
         src/battle_pyramid_bag.o(.rodata);
         src/pokenav.o(.rodata);
         src/pokenav_main_menu.o(.rodata);

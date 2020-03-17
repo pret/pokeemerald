@@ -3,7 +3,7 @@
   "name": "NavelRock_Harbor",
   "layout": "LAYOUT_ISLAND_HARBOR",
   "music": "MUS_RG_NANASHIMA",
-  "region_map_section": "MAPSEC_NAVEL_ROCK2",
+  "region_map_section": "MAPSEC_NAVEL_ROCK",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",

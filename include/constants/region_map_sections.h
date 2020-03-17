@@ -175,7 +175,7 @@
 #define MAPSEC_SEVII_ISLE_22                0xAB
 #define MAPSEC_SEVII_ISLE_23                0xAC
 #define MAPSEC_SEVII_ISLE_24                0xAD
-#define MAPSEC_NAVEL_ROCK                   0xAE
+#define MAPSEC_NAVEL_ROCK_FRLG              0xAE
 #define MAPSEC_MT_EMBER                     0xAF
 #define MAPSEC_BERRY_FOREST                 0xB0
 #define MAPSEC_ICEFALL_CAVE                 0xB1
@@ -184,11 +184,11 @@
 #define MAPSEC_DOTTED_HOLE                  0xB4
 #define MAPSEC_LOST_CAVE                    0xB5
 #define MAPSEC_PATTERN_BUSH                 0xB6
-#define MAPSEC_ALTERING_CAVE                0xB7
+#define MAPSEC_ALTERING_CAVE_FRLG           0xB7
 #define MAPSEC_TANOBY_CHAMBERS              0xB8
 #define MAPSEC_THREE_ISLE_PATH              0xB9
 #define MAPSEC_TANOBY_KEY                   0xBA
-#define MAPSEC_BIRTH_ISLAND                 0xBB
+#define MAPSEC_BIRTH_ISLAND_FRLG            0xBB
 #define MAPSEC_MONEAN_CHAMBER               0xBC
 #define MAPSEC_LIPTOO_CHAMBER               0xBD
 #define MAPSEC_WEEPTH_CHAMBER               0xBE
@@ -201,7 +201,7 @@
 #define MAPSEC_AQUA_HIDEOUT                 0xC5
 #define MAPSEC_MAGMA_HIDEOUT                0xC6
 #define MAPSEC_MIRAGE_TOWER                 0xC7
-#define MAPSEC_BIRTH_ISLAND_2               0xC8
+#define MAPSEC_BIRTH_ISLAND                 0xC8
 #define MAPSEC_FARAWAY_ISLAND               0xC9
 #define MAPSEC_ARTISAN_CAVE                 0xCA
 #define MAPSEC_MARINE_CAVE                  0xCB
@@ -211,8 +211,8 @@
 #define MAPSEC_UNDERWATER_UNK1              0xCF
 #define MAPSEC_UNDERWATER_129               0xD0
 #define MAPSEC_DESERT_UNDERPASS             0xD1
-#define MAPSEC_ALTERING_CAVE_2              0xD2
-#define MAPSEC_NAVEL_ROCK2                  0xD3
+#define MAPSEC_ALTERING_CAVE                0xD2
+#define MAPSEC_NAVEL_ROCK                   0xD3
 #define MAPSEC_TRAINER_HILL                 0xD4
 #define MAPSEC_NONE                         0xD5
 

@@ -3,7 +3,7 @@
   "name": "NavelRock_Down06",
   "layout": "LAYOUT_NAVEL_ROCK_LADDER_ROOM2",
   "music": "MUS_RG_NANADUNGEON",
-  "region_map_section": "MAPSEC_NAVEL_ROCK2",
+  "region_map_section": "MAPSEC_NAVEL_ROCK",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
