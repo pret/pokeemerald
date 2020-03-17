@@ -66,7 +66,7 @@ struct PokeDexAreaScreen
     /*0x6E0*/ u16 numAreaMarkerSprites;
     /*0x6E2*/ u16 unk6E2;
     /*0x6E4*/ u16 unk6E4;
-    /*0x6E8*/ u8 *errno;
+    /*0x6E8*/ u8 *screenSwitchState;
     /*0x6EC*/ struct RegionMap regionMap;
     /*0xF70*/ u8 charBuffer[0x40];
     /*0xFB0*/ struct Sprite * areaUnknownSprites[3];
@@ -83,11 +83,11 @@ static u16 GetRegionMapSectionId(u8, u8);
 static bool8 MapHasMon(const struct WildPokemonHeader *, u16);
 static bool8 MonListHasMon(const struct WildPokemonInfo *, u16, u16);
 static void DoAreaGlow(void);
-static void Task_PokedexAreaScreen_0(u8);
+static void Task_ShowPokedexAreaScreen(u8);
 static void CreateAreaMarkerSprites(void);
 static void LoadAreaUnknownGraphics(void);
 static void CreateAreaUnknownSprites(void);
-static void Task_PokedexAreaScreen_1(u8);
+static void Task_HandlePokedexAreaScreenInput(u8);
 static void sub_813D6B4(void);
 static void DestroyAreaMarkerSprites(void);
 
@@ -637,21 +637,23 @@ static void DoAreaGlow(void)
     }
 }
 
-void ShowPokedexAreaScreen(u16 species, u8 *errno)
+#define tState data[0]
+
+void ShowPokedexAreaScreen(u16 species, u8 *screenSwitchState)
 {
     u8 taskId;
 
     sPokedexAreaScreen = AllocZeroed(sizeof(*sPokedexAreaScreen));
     sPokedexAreaScreen->species = species;
-    sPokedexAreaScreen->errno = errno;
-    errno[0] = 0;
-    taskId = CreateTask(Task_PokedexAreaScreen_0, 0);
-    gTasks[taskId].data[0] = 0;
+    sPokedexAreaScreen->screenSwitchState = screenSwitchState;
+    screenSwitchState[0] = 0;
+    taskId = CreateTask(Task_ShowPokedexAreaScreen, 0);
+    gTasks[taskId].tState = 0;
 }
 
-static void Task_PokedexAreaScreen_0(u8 taskId)
+static void Task_ShowPokedexAreaScreen(u8 taskId)
 {
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
         case 0:
             ResetSpriteData();
@@ -702,21 +704,21 @@ static void Task_PokedexAreaScreen_0(u8 taskId)
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
             break;
         case 11:
-            gTasks[taskId].func = Task_PokedexAreaScreen_1;
-            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].func = Task_HandlePokedexAreaScreenInput;
+            gTasks[taskId].tState = 0;
             return;
     }
 
-    gTasks[taskId].data[0]++;
+    gTasks[taskId].tState++;
 }
 
-static void Task_PokedexAreaScreen_1(u8 taskId)
+static void Task_HandlePokedexAreaScreenInput(u8 taskId)
 {
     DoAreaGlow();
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     default:
-        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].tState = 0;
         // fall through
     case 0:
         if (gPaletteFade.active)
@@ -737,13 +739,13 @@ static void Task_PokedexAreaScreen_1(u8 taskId)
             return;
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
+        BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB_BLACK);
         break;
     case 3:
         if (gPaletteFade.active)
             return;
         DestroyAreaMarkerSprites();
-        sPokedexAreaScreen->errno[0] = gTasks[taskId].data[1];
+        sPokedexAreaScreen->screenSwitchState[0] = gTasks[taskId].data[1];
         sub_813D6B4();
         DestroyTask(taskId);
         FreePokedexAreaMapBgNum();
@@ -751,7 +753,7 @@ static void Task_PokedexAreaScreen_1(u8 taskId)
         return;
     }
 
-    gTasks[taskId].data[0]++;
+    gTasks[taskId].tState++;
 }
 
 static void sub_813D6B4(void)
