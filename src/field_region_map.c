@@ -13,23 +13,13 @@
 #include "window.h"
 #include "constants/rgb.h"
 
-/*
- *  This is the type of map shown when interacting with the metatiles for
- *  a wall-mounted Region Map (on the wall of the Pokemon Centers near the PC)
- *  It does not zoom, and pressing A or B closes the map
- *
- *  For the region map in the pokenav, see pokenav_region_map.c
- *  For the region map in the pokedex, see pokdex_area_screen.c/pokedex_area_region_map.c
- *  For the fly map, and utility functions all of the maps use, see region_map.c
- */
-
 // Static type declarations
 
 // Static RAM declarations
 
 static EWRAM_DATA struct {
     MainCallback callback;
-    u32 unused;
+    u32 filler_004;
     struct RegionMap regionMap;
     u16 state;
 } *sFieldRegionMapHandler = NULL;
@@ -44,7 +34,7 @@ static void PrintRegionMapSecName(void);
 
 // .rodata
 
-static const struct BgTemplate sFieldRegionMapBgTemplates[] = {
+static const struct BgTemplate gUnknown_085E5068[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -64,7 +54,7 @@ static const struct BgTemplate sFieldRegionMapBgTemplates[] = {
     }
 };
 
-static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
+static const struct WindowTemplate gUnknown_085E5070[] =
 {
     {
         .bg = 0,
@@ -112,8 +102,8 @@ static void MCB2_InitRegionMapRegisters(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(1, sFieldRegionMapBgTemplates, ARRAY_COUNT(sFieldRegionMapBgTemplates));
-    InitWindows(sFieldRegionMapWindowTemplates);
+    InitBgsFromTemplates(1, gUnknown_085E5068, 2);
+    InitWindows(gUnknown_085E5070);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 0x27, 0xd0);
     clear_scheduled_bg_copies_to_vram();
@@ -144,7 +134,7 @@ static void FieldUpdateRegionMap(void)
     switch (sFieldRegionMapHandler->state)
     {
         case 0:
-            InitRegionMap(&sFieldRegionMapHandler->regionMap, FALSE);
+            InitRegionMap(&sFieldRegionMapHandler->regionMap, 0);
             CreateRegionMapPlayerIcon(0, 0);
             CreateRegionMapCursor(1, 1);
             sFieldRegionMapHandler->state++;
@@ -172,13 +162,13 @@ static void FieldUpdateRegionMap(void)
             }
             break;
         case 4:
-            switch (DoRegionMapInputCallback())
+            switch (sub_81230AC())
             {
-                case MAP_INPUT_MOVE_END:
+                case INPUT_EVENT_MOVE_END:
                     PrintRegionMapSecName();
                     break;
-                case MAP_INPUT_A_BUTTON:
-                case MAP_INPUT_B_BUTTON:
+                case INPUT_EVENT_A_BUTTON:
+                case INPUT_EVENT_B_BUTTON:
                     sFieldRegionMapHandler->state++;
                     break;
             }
@@ -194,7 +184,8 @@ static void FieldUpdateRegionMap(void)
                 SetMainCallback2(sFieldRegionMapHandler->callback);
                 if (sFieldRegionMapHandler != NULL)
                 {
-                    FREE_AND_SET_NULL(sFieldRegionMapHandler);
+                    free(sFieldRegionMapHandler);
+                    sFieldRegionMapHandler = NULL;
                 }
                 FreeAllWindowBuffers();
             }
@@ -204,7 +195,7 @@ static void FieldUpdateRegionMap(void)
 
 static void PrintRegionMapSecName(void)
 {
-    if (sFieldRegionMapHandler->regionMap.mapSecType != MAPSECTYPE_NONE)
+    if (sFieldRegionMapHandler->regionMap.iconDrawType != MAPSECTYPE_NONE)
     {
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized(0, 1, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);

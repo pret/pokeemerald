@@ -26,18 +26,18 @@ struct PokenavResources
     void *field10[SUBSTRUCT_COUNT];
 };
 
-struct PokenavCallbacks
+struct UnknownPokenavCallbackStruct
 {
-    bool32 (*init)(void);
-    u32 (*callback)(void);
-    bool32 (*open)(void);
-    void (*createLoopTask)(s32);
-    bool32 (*isLoopTaskActive)(void);
-    void (*free1)(void);
-    void (*free2)(void);
+    bool32 (*unk0)(void);
+    u32 (*unk4)(void);
+    bool32 (*unk8)(void);
+    void (*unkC)(s32);
+    u32 (*unk10)(void);
+    void (*unk14)(void);
+    void (*unk18)(void);
 };
 
-static u32 GetCurrentMenuCB(void);
+static u32 sub_81C75E0(void);
 static u32 sub_81C75D4(void);
 static bool32 SetActivePokenavMenu(u32 menuId);
 static bool32 AnyMonHasRibbon(void);
@@ -51,158 +51,142 @@ static void Task_RunLoopedTask(u8 taskId);
 static void Task_Pokenav(u8 taskId);
 static void CB2_InitPokenavForTutorial(void);
 
-// TODO: Use MENU ids
-const struct PokenavCallbacks PokenavMenuCallbacks[15] =
+const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
 {
-    [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_MainMenuCursorOnMap,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
+        .unk0 = PokenavCallback_Init_0,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9924,
+        .unkC = CreateMenuHandlerLoopedTask,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_MainMenuCursorOnMap,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
+        .unk0 = PokenavCallback_Init_0,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = CreateMenuHandlerLoopedTask,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
-    [POKENAV_CONDITION_MENU - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_ConditionMenu,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
+        .unk0 = PokenavCallback_Init_2,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = CreateMenuHandlerLoopedTask,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
-    [POKENAV_CONDITION_SEARCH_MENU - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_ConditionSearchMenu,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
+        .unk0 = PokenavCallback_Init_3,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = CreateMenuHandlerLoopedTask,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_MainMenuCursorOnMatchCall,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
+        .unk0 = PokenavCallback_Init_4,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = CreateMenuHandlerLoopedTask,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
+        .unk0 = PokenavCallback_Init_5,
+        .unk4 = sub_81C941C,
+        .unk8 = sub_81C9940,
+        .unkC = CreateMenuHandlerLoopedTask,
+        .unk10 = sub_81C99C0,
+        .unk14 = sub_81C9430,
+        .unk18 = sub_81C99D4,
     },
-    [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_RegionMap,
-        .callback = GetRegionMapCallback,
-        .open = OpenPokenavRegionMap,
-        .createLoopTask = CreateRegionMapLoopedTask,
-        .isLoopTaskActive = IsRegionMapLoopedTaskActive,
-        .free1 = FreeRegionMapSubstruct1,
-        .free2 = FreeRegionMapSubstruct2,
+        .unk0 = PokenavCallback_Init_6,
+        .unk4 = sub_81CC554,
+        .unk8 = sub_81CC5F4,
+        .unkC = sub_81CC62C,
+        .unk10 = sub_81CC65C,
+        .unk14 = sub_81CC524,
+        .unk18 = sub_81CC670,
     },
-    [POKENAV_CONDITION_PARTY - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_7,
-        .callback = sub_81CD070,
-        .open = sub_81CDDD4,
-        .createLoopTask = sub_81CDE2C,
-        .isLoopTaskActive = sub_81CDE64,
-        .free1 = sub_81CD1C0,
-        .free2 = sub_81CECA0,
+        .unk0 = PokenavCallback_Init_7,
+        .unk4 = sub_81CD070,
+        .unk8 = sub_81CDDD4,
+        .unkC = sub_81CDE2C,
+        .unk10 = sub_81CDE64,
+        .unk14 = sub_81CD1C0,
+        .unk18 = sub_81CECA0,
     },
-    [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_8,
-        .callback = sub_81CEFDC,
-        .open = sub_81CF330,
-        .createLoopTask = sub_81CF3A0,
-        .isLoopTaskActive = sub_81CF3D0,
-        .free1 = sub_81CEFF0,
-        .free2 = sub_81CF3F8,
+        .unk0 = PokenavCallback_Init_8,
+        .unk4 = sub_81CEFDC,
+        .unk8 = sub_81CF330,
+        .unkC = sub_81CF3A0,
+        .unk10 = sub_81CF3D0,
+        .unk14 = sub_81CEFF0,
+        .unk18 = sub_81CF3F8,
     },
-    [POKENAV_MENU_9 - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_9,
-        .callback = sub_81CD070,
-        .open = sub_81CDDD4,
-        .createLoopTask = sub_81CDE2C,
-        .isLoopTaskActive = sub_81CDE64,
-        .free1 = sub_81CD1C0,
-        .free2 = sub_81CECA0,
+        .unk0 = PokenavCallback_Init_9,
+        .unk4 = sub_81CD070,
+        .unk8 = sub_81CDDD4,
+        .unkC = sub_81CDE2C,
+        .unk10 = sub_81CDE64,
+        .unk14 = sub_81CD1C0,
+        .unk18 = sub_81CECA0,
     },
-    [POKENAV_MENU_A - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_10,
-        .callback = sub_81CEFDC,
-        .open = sub_81CF368,
-        .createLoopTask = sub_81CF3A0,
-        .isLoopTaskActive = sub_81CF3D0,
-        .free1 = sub_81CEFF0,
-        .free2 = sub_81CF3F8,
+        .unk0 = PokenavCallback_Init_10,
+        .unk4 = sub_81CEFDC,
+        .unk8 = sub_81CF368,
+        .unkC = sub_81CF3A0,
+        .unk10 = sub_81CF3D0,
+        .unk14 = sub_81CEFF0,
+        .unk18 = sub_81CF3F8,
     },
-    [POKENAV_MATCH_CALL - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_MatchCall,
-        .callback = GetMatchCallCallback,
-        .open = OpenMatchCall,
-        .createLoopTask = CreateMatchCallLoopedTask,
-        .isLoopTaskActive = IsMatchCallLoopedTaskActive,
-        .free1 = FreeMatchCallSubstruct1,
-        .free2 = FreeMatchCallSubstruct2,
+        .unk0 = PokenavCallback_Init_11,
+        .unk4 = sub_81CAB24,
+        .unk8 = sub_81CB260,
+        .unkC = CreateMatchCallLoopedTask,
+        .unk10 = sub_81CB2CC,
+        .unk14 = sub_81CAB38,
+        .unk18 = sub_81CB2E0,
     },
-    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_12,
-        .callback = sub_81CFA34,
-        .open = sub_81CFDD0,
-        .createLoopTask = sub_81CFE40,
-        .isLoopTaskActive = sub_81CFE70,
-        .free1 = sub_81CFA48,
-        .free2 = sub_81CFE98,
+        .unk0 = PokenavCallback_Init_12,
+        .unk4 = sub_81CFA34,
+        .unk8 = sub_81CFDD0,
+        .unkC = sub_81CFE40,
+        .unk10 = sub_81CFE70,
+        .unk14 = sub_81CFA48,
+        .unk18 = sub_81CFE98,
     },
-    [POKENAV_MENU_D - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_13,
-        .callback = sub_81D04A0,
-        .open = sub_81D0978,
-        .createLoopTask = sub_81D09B0,
-        .isLoopTaskActive = sub_81D09E0,
-        .free1 = sub_81D04B8,
-        .free2 = sub_81D09F4,
+        .unk0 = PokenavCallback_Init_13,
+        .unk4 = sub_81D04A0,
+        .unk8 = sub_81D0978,
+        .unkC = sub_81D09B0,
+        .unk10 = sub_81D09E0,
+        .unk14 = sub_81D04B8,
+        .unk18 = sub_81D09F4,
     },
-    [POKENAV_MENU_E - POKENAV_MENU_IDS_START] = 
     {
-        .init = PokenavCallback_Init_14,
-        .callback = sub_81CFA34,
-        .open = sub_81CFE08,
-        .createLoopTask = sub_81CFE40,
-        .isLoopTaskActive = sub_81CFE70,
-        .free1 = sub_81CFA48,
-        .free2 = sub_81CFE98,
+        .unk0 = PokenavCallback_Init_14,
+        .unk4 = sub_81CFA34,
+        .unk8 = sub_81CFE08,
+        .unkC = sub_81CFE40,
+        .unk10 = sub_81CFE70,
+        .unk14 = sub_81CFA48,
+        .unk18 = sub_81CFE98,
     },
 };
 
@@ -432,68 +416,66 @@ static void VBlankCB_Pokenav(void)
     ProcessSpriteCopyRequests();
 }
 
-#define tState data[0]
-
 static void Task_Pokenav(u8 taskId)
 {
-    u32 menuId;
+    u32 v1;
     s16 *data = gTasks[taskId].data;
 
-    switch (tState)
+    switch (data[0])
     {
     case 0:
         InitPokenavMainMenu();
-        tState = 1;
+        data[0] = 1;
         break;
     case 1:
         // Wait for LoopedTask_InitPokenavMenu to finish
         if (PokenavMainMenuLoopedTaskIsActive())
             break;
-        SetActivePokenavMenu(POKENAV_MAIN_MENU);
-        tState = 4;
+        SetActivePokenavMenu(POKENAV_MENU_0);
+        data[0] = 4;
         break;
     case 2:
         if (sub_81C786C())
             break;
-        tState = 3;
+        data[0] = 3;
     case 3:
-        menuId = GetCurrentMenuCB();
-        if (menuId == -1)
+        v1 = sub_81C75E0();
+        if (v1 == -1)
         {
             ShutdownPokenav();
-            tState = 5;
+            data[0] = 5;
         }
-        else if (menuId >= POKENAV_MENU_IDS_START)
+        else if (v1 >= POKENAV_MENU_IDS_START)
         {
-            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free2();
-            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free1();
-            if (SetActivePokenavMenu(menuId))
+            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].unk18();
+            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].unk14();
+            if (SetActivePokenavMenu(v1))
             {
-                tState = 4;
+                data[0] = 4;
             }
             else
             {
                 ShutdownPokenav();
-                tState = 5;
+                data[0] = 5;
             }
         }
-        else if (menuId != 0)
+        else if (v1 != 0)
         {
-            sub_81C7850(menuId);
+            sub_81C7850(v1);
             if (sub_81C786C())
-                tState = 2;
+                data[0] = 2;
         }
         break;
     case 4:
         if (!sub_81C75D4())
-            tState = 3;
+            data[0] = 3;
         break;
     case 5:
         if (!WaitForPokenavShutdownFade())
         {
             bool32 calledFromScript = (gPokenavResources->mode != POKENAV_MODE_NORMAL);
 
-            FreeMenuHandlerSubstruct1();
+            sub_81C9430();
             FreePokenavResources();
             if (calledFromScript)
                 SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -504,20 +486,18 @@ static void Task_Pokenav(u8 taskId)
     }
 }
 
-#undef tState
-
 static bool32 SetActivePokenavMenu(u32 menuId)
 {
     u32 index = menuId - POKENAV_MENU_IDS_START;
 
     InitKeys_();
-    if (!PokenavMenuCallbacks[index].init())
+    if (!PokenavMenuCallbacks[index].unk0())
         return FALSE;
-    if (!PokenavMenuCallbacks[index].open())
+    if (!PokenavMenuCallbacks[index].unk8())
         return FALSE;
 
-    sub_81C7834(PokenavMenuCallbacks[index].createLoopTask, PokenavMenuCallbacks[index].isLoopTaskActive);
-    gPokenavResources->currentMenuCb1 = PokenavMenuCallbacks[index].callback;
+    sub_81C7834(PokenavMenuCallbacks[index].unkC, PokenavMenuCallbacks[index].unk10);
+    gPokenavResources->currentMenuCb1 = PokenavMenuCallbacks[index].unk4;
     gPokenavResources->currentMenuIndex = index;
     return TRUE;
 }
@@ -527,7 +507,7 @@ static u32 sub_81C75D4(void)
     return sub_81C786C();
 }
 
-static u32 GetCurrentMenuCB(void)
+static u32 sub_81C75E0(void)
 {
     return gPokenavResources->currentMenuCb1();
 }

@@ -7,8 +7,6 @@
 #include "menu.h"
 #include "decompress.h"
 
-// TODO: This UI isnt just for match call, seems to be the general pokenav list UI
-
 struct UnknownSubSubStruct_0203CF40 {
     u8 bg;
     u8 unk1;

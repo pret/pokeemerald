@@ -14,7 +14,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "trig.h"
-#include "pokedex_area_region_map.h"
+#include "unk_pokedex_area_screen_helper.h"
 #include "wild_encounter.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
@@ -113,7 +113,7 @@ static const u16 sLandmarkData[][2] =
 {
     {MAPSEC_SKY_PILLAR,       FLAG_LANDMARK_SKY_PILLAR},
     {MAPSEC_SEAFLOOR_CAVERN,  FLAG_LANDMARK_SEAFLOOR_CAVERN},
-    {MAPSEC_ALTERING_CAVE,    FLAG_LANDMARK_ALTERING_CAVE},
+    {MAPSEC_ALTERING_CAVE_2,  FLAG_LANDMARK_ALTERING_CAVE},
     {MAPSEC_MIRAGE_TOWER,     FLAG_LANDMARK_MIRAGE_TOWER},
     {MAPSEC_DESERT_UNDERPASS, FLAG_LANDMARK_DESERT_UNDERPASS},
     {MAPSEC_ARTISAN_CAVE,     FLAG_LANDMARK_ARTISAN_CAVE},
@@ -230,12 +230,12 @@ static const u8 sAreaGlowTilemapMapping[] = {
     0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
 };
 
-static const struct PokedexAreaMapTemplate sPokedexAreaMapTemplate =
+static const struct UnkStruct_1C4D70 sUnknown_085B4018 =
 {
     .bg = 3,
-    .offset = 0,
-    .mode = 0,
-    .unk = 2,
+    .unk2 = 0,
+    .unk10 = 0,
+    .unk12 = 2,
 };
 
 static const u8 sAreaMarkerTiles[];
@@ -456,7 +456,7 @@ static u16 GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
 
 static bool8 MapHasMon(const struct WildPokemonHeader *info, u16 species)
 {
-    if (GetRegionMapSectionId(info->mapGroup, info->mapNum) == MAPSEC_ALTERING_CAVE)
+    if (GetRegionMapSectionId(info->mapGroup, info->mapNum) == MAPSEC_ALTERING_CAVE_2)
     {
         sPokedexAreaScreen->unk6E2++;
         if (sPokedexAreaScreen->unk6E2 != sPokedexAreaScreen->unk6E4 + 1)
@@ -503,7 +503,7 @@ static void BuildAreaGlowTilemap(void)
         {
             for (x = 0; x < AREA_SCREEN_WIDTH; x++)
             {
-                if (GetRegionMapSecIdAt(x, y) == sPokedexAreaScreen->overworldAreasWithMons[i].regionMapSectionId)
+                if (GetRegionMapSectionIdAt(x, y) == sPokedexAreaScreen->overworldAreasWithMons[i].regionMapSectionId)
                     sPokedexAreaScreen->areaGlowTilemap[j] = GLOW_TILE_FULL;
 
                 j++;
@@ -664,13 +664,13 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
             break;
         case 1:
             SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 3);
-            LoadPokedexAreaMapGfx(&sPokedexAreaMapTemplate);
+            sub_81C4D70(&sUnknown_085B4018);
             StringFill(sPokedexAreaScreen->charBuffer, CHAR_SPACE, 16);
             break;
         case 2:
             if (sub_81C4E90() == TRUE)
                 return;
-            PokedexAreaMapChangeBgY(-8);
+            sub_81C4ED0(-8);
             break;
         case 3:
             ResetDrawAreaGlowState();
@@ -680,7 +680,7 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
                 return;
             break;
         case 5:
-            ShowRegionMapForPokedexAreaScreen(&sPokedexAreaScreen->regionMap);
+            sub_8122D88(&sPokedexAreaScreen->regionMap);
             CreateRegionMapPlayerIcon(1, 1);
             PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(0, -8);
             break;
@@ -748,7 +748,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
         sPokedexAreaScreen->screenSwitchState[0] = gTasks[taskId].data[1];
         sub_813D6B4();
         DestroyTask(taskId);
-        FreePokedexAreaMapBgNum();
+        sub_81C4EB4();
         FREE_AND_SET_NULL(sPokedexAreaScreen);
         return;
     }

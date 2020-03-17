@@ -17,24 +17,26 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
+// Top Menu
+
 struct Pokenav2Struct
 {
-    bool32 (*isTaskActiveCB)(void);
+    bool32 (*callback)(void);
     u32 loopedTaskId;
     u16 optionDescWindowId;
     u8 bg3ScrollTaskId;
     u8 cursorPos;
     bool8 otherIconsInMotion;
-    bool8 pokenavAlreadyOpen;
+    u8 field_00d;
     bool32 iconVisible[MAX_POKENAV_MENUITEMS];
     struct Sprite * field_028;
     struct Sprite * iconSprites[MAX_POKENAV_MENUITEMS][4];
     u16 bg1TilemapBuffer[0x400];
 };
 
-static struct Pokenav2Struct * OpenPokenavMenu(void);
-static bool32 GetCurrentLoopedTaskActive(void);
-static u32 LoopedTask_OpenMenu(s32 state);
+static struct Pokenav2Struct * sub_81C9958(void);
+static bool32 sub_81C99FC(void);
+static u32 sub_81C9A10(s32 state);
 static u32 LoopedTask_MoveMenuCursor(s32 state);
 static u32 LoopedTask_OpenConditionMenu(s32 state);
 static u32 LoopedTask_ReturnToMainMenu(s32 state);
@@ -335,56 +337,59 @@ static bool32 sub_81C98D4(void)
     return FALSE;
 }
 
-bool32 OpenPokenavMenuInitial(void)
+bool32 sub_81C9924(void)
 {
-    struct Pokenav2Struct * state = OpenPokenavMenu();
+    struct Pokenav2Struct * unk = sub_81C9958();
 
-    if (state == NULL)
+    if (unk == NULL)
         return FALSE;
     
-    state->pokenavAlreadyOpen = FALSE;
+    unk->field_00d = 0;
     return TRUE;
 }
 
-bool32 OpenPokenavMenuNotInitial(void)
+bool32 sub_81C9940(void)
 {
-    struct Pokenav2Struct * state = OpenPokenavMenu();
+    struct Pokenav2Struct * unk = sub_81C9958();
 
-    if (state == NULL)
+    if (unk == NULL)
         return FALSE;
 
-    state->pokenavAlreadyOpen = TRUE;
+    unk->field_00d = 1;
     return TRUE;
 }
 
-static struct Pokenav2Struct * OpenPokenavMenu(void)
+static struct Pokenav2Struct * sub_81C9958(void)
 {
-    struct Pokenav2Struct * state = AllocSubstruct(2, sizeof(struct Pokenav2Struct));
+    struct Pokenav2Struct * unk = AllocSubstruct(2, sizeof(struct Pokenav2Struct));
 
-    if (state != NULL)
+    if (unk != NULL)
     {
-        state->otherIconsInMotion = FALSE;
-        state->loopedTaskId = CreateLoopedTask(LoopedTask_OpenMenu, 1);
-        state->isTaskActiveCB = GetCurrentLoopedTaskActive;
+        unk->otherIconsInMotion = FALSE;
+        unk->loopedTaskId = CreateLoopedTask(sub_81C9A10, 1);
+        unk->callback = sub_81C99FC;
     }
 
-    return state;
+    return unk;
 }
+
 
 void CreateMenuHandlerLoopedTask(s32 ltIdx)
 {
-    struct Pokenav2Struct * state = GetSubstructPtr(2);
-    state->loopedTaskId = CreateLoopedTask(sMenuHandlerLoopTaskFuncs[ltIdx], 1);
-    state->isTaskActiveCB = GetCurrentLoopedTaskActive;
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+
+    unk->loopedTaskId = CreateLoopedTask(sMenuHandlerLoopTaskFuncs[ltIdx], 1);
+    unk->callback = sub_81C99FC;
 }
 
-bool32 IsMenuHandlerLoopedTaskActive(void)
+bool32 sub_81C99C0(void)
 {
-    struct Pokenav2Struct * state = GetSubstructPtr(2);
-    return state->isTaskActiveCB();
+    struct Pokenav2Struct * unk = GetSubstructPtr(2);
+
+    return unk->callback();
 }
 
-void FreeMenuHandlerSubstruct2(void)
+void sub_81C99D4(void)
 {
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
@@ -395,14 +400,14 @@ void FreeMenuHandlerSubstruct2(void)
     FreePokenavSubstruct(2);
 }
 
-static bool32 GetCurrentLoopedTaskActive(void)
+static bool32 sub_81C99FC(void)
 {
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
     return IsLoopedTaskActive(unk->loopedTaskId);
 }
 
-static u32 LoopedTask_OpenMenu(s32 state)
+static u32 sub_81C9A10(s32 state)
 {
     struct Pokenav2Struct * unk = GetSubstructPtr(2);
 
@@ -461,12 +466,12 @@ static u32 LoopedTask_OpenMenu(s32 state)
         ShowBg(1);
         ShowBg(2);
         ShowBg(3);
-        if (unk->pokenavAlreadyOpen)
-            PokenavFadeScreen(1);
+        if (unk->field_00d)
+            sub_81C7AC0(1);
         else
         {
             PlaySE(SE_PN_ON);
-            PokenavFadeScreen(3);
+            sub_81C7AC0(3);
         }
         switch (GetPokenavMenuType())
         {
@@ -736,7 +741,7 @@ static u32 LoopedTask_OpenPokenavFeature(s32 state)
             return LT_PAUSE;
         if (sub_81C8010())
             return LT_PAUSE;
-        PokenavFadeScreen(0);
+        sub_81C7AC0(0);
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsPaletteFadeActive())

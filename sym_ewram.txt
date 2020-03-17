@@ -139,7 +139,7 @@
 	.include "src/party_menu.o"
 	.include "src/mirage_tower.o"
 	.include "src/pokemon_summary_screen.o"
-	.include "src/pokedex_area_region_map.o"
+	.include "src/unk_pokedex_area_screen_helper.o"
 	.include "src/battle_pyramid_bag.o"
 	.include "src/pokenav.o"
 	.include "src/pokenav_match_call_ui.o"

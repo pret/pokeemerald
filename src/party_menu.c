@@ -3680,7 +3680,7 @@ static void CursorCb_FieldMove(u8 taskId)
                 sPartyMenuInternal->data[0] = fieldMove;
                 break;
             case FIELD_MOVE_FLY:
-                gPartyMenu.exitCallback = CB2_OpenFlyMap;
+                gPartyMenu.exitCallback = MCB2_FlyMap;
                 Task_ClosePartyMenu(taskId);
                 break;
             default:
