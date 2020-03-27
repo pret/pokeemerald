@@ -278,7 +278,7 @@ const struct SubspriteTable gObjectEventSpriteOamTables_32x32[] = {
     {2, gObjectEventSpriteOamTable_32x32_4}
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_Truck_0[] = {
+const struct Subsprite gObjectEventSpriteOamTable_48x48[] = {
     {
         .x = -24, 
         .y = -24, 
@@ -377,16 +377,16 @@ const struct Subsprite gObjectEventSpriteOamTable_Truck_0[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_Truck[] = {
-    {12, gObjectEventSpriteOamTable_Truck_0},
-    {12, gObjectEventSpriteOamTable_Truck_0},
-    {12, gObjectEventSpriteOamTable_Truck_0},
-    {12, gObjectEventSpriteOamTable_Truck_0},
-    {12, gObjectEventSpriteOamTable_Truck_0},
-    {12, gObjectEventSpriteOamTable_Truck_0}
+const struct SubspriteTable gObjectEventSpriteOamTables_48x48[] = {
+    {12, gObjectEventSpriteOamTable_48x48},
+    {12, gObjectEventSpriteOamTable_48x48},
+    {12, gObjectEventSpriteOamTable_48x48},
+    {12, gObjectEventSpriteOamTable_48x48},
+    {12, gObjectEventSpriteOamTable_48x48},
+    {12, gObjectEventSpriteOamTable_48x48}
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_Unused_0[] = {
+const struct Subsprite gObjectEventSpriteOamTable_64x32_0[] = {
     {
         .x = -32, 
         .y = -16, 
@@ -397,7 +397,7 @@ const struct Subsprite gObjectEventSpriteOamTable_Unused_0[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_Unused_1[] = {
+const struct Subsprite gObjectEventSpriteOamTable_64x32_1[] = {
     {
         .x = -32, 
         .y = -16, 
@@ -408,7 +408,7 @@ const struct Subsprite gObjectEventSpriteOamTable_Unused_1[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_Unused_2[] = {
+const struct Subsprite gObjectEventSpriteOamTable_64x32_2[] = {
     {
         .x = -32, 
         .y = -16, 
@@ -419,7 +419,7 @@ const struct Subsprite gObjectEventSpriteOamTable_Unused_2[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_Unused_3[] = {
+const struct Subsprite gObjectEventSpriteOamTable_64x32_3[] = {
     {
         .x = -32, 
         .y = -16, 
@@ -430,13 +430,14 @@ const struct Subsprite gObjectEventSpriteOamTable_Unused_3[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_Unused[] = {
+// Unused
+const struct SubspriteTable gObjectEventSpriteOamTables_64x32[] = {
     {0, NULL},
-    {1, gObjectEventSpriteOamTable_Unused_0},
-    {1, gObjectEventSpriteOamTable_Unused_1},
-    {1, gObjectEventSpriteOamTable_Unused_2},
-    {1, gObjectEventSpriteOamTable_Unused_3},
-    {1, gObjectEventSpriteOamTable_Unused_3}
+    {1, gObjectEventSpriteOamTable_64x32_0},
+    {1, gObjectEventSpriteOamTable_64x32_1},
+    {1, gObjectEventSpriteOamTable_64x32_2},
+    {1, gObjectEventSpriteOamTable_64x32_3},
+    {1, gObjectEventSpriteOamTable_64x32_3}
 };
 
 const struct Subsprite gObjectEventSpriteOamTable_64x64_0[] = {
@@ -492,7 +493,7 @@ const struct SubspriteTable gObjectEventSpriteOamTables_64x64[] = {
     {1, gObjectEventSpriteOamTable_64x64_3}
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SSTidal_0[] = {
+const struct Subsprite gObjectEventSpriteOamTable_96x40_0[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -615,7 +616,7 @@ const struct Subsprite gObjectEventSpriteOamTable_SSTidal_0[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SSTidal_1[] = {
+const struct Subsprite gObjectEventSpriteOamTable_96x40_1[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -738,7 +739,7 @@ const struct Subsprite gObjectEventSpriteOamTable_SSTidal_1[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SSTidal_2[] = {
+const struct Subsprite gObjectEventSpriteOamTable_96x40_2[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -861,7 +862,7 @@ const struct Subsprite gObjectEventSpriteOamTable_SSTidal_2[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SSTidal_3[] = {
+const struct Subsprite gObjectEventSpriteOamTable_96x40_3[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -984,16 +985,17 @@ const struct Subsprite gObjectEventSpriteOamTable_SSTidal_3[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_SSTidal[] = {
-    {15, gObjectEventSpriteOamTable_SSTidal_0},
-    {15, gObjectEventSpriteOamTable_SSTidal_0},
-    {15, gObjectEventSpriteOamTable_SSTidal_1},
-    {15, gObjectEventSpriteOamTable_SSTidal_2},
-    {15, gObjectEventSpriteOamTable_SSTidal_3},
-    {15, gObjectEventSpriteOamTable_SSTidal_3}
+// Used by SS Tidal
+const struct SubspriteTable gObjectEventSpriteOamTables_96x40[] = {
+    {15, gObjectEventSpriteOamTable_96x40_0},
+    {15, gObjectEventSpriteOamTable_96x40_0},
+    {15, gObjectEventSpriteOamTable_96x40_1},
+    {15, gObjectEventSpriteOamTable_96x40_2},
+    {15, gObjectEventSpriteOamTable_96x40_3},
+    {15, gObjectEventSpriteOamTable_96x40_3}
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_0[] = {
+const struct Subsprite gObjectEventSpriteOamTable_88x32_0[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -1124,7 +1126,7 @@ const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_0[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_1[] = {
+const struct Subsprite gObjectEventSpriteOamTable_88x32_1[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -1255,7 +1257,7 @@ const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_1[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_2[] = {
+const struct Subsprite gObjectEventSpriteOamTable_88x32_2[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -1386,7 +1388,7 @@ const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_2[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_3[] = {
+const struct Subsprite gObjectEventSpriteOamTable_88x32_3[] = {
     {
         .x = -48, 
         .y = -20, 
@@ -1517,11 +1519,12 @@ const struct Subsprite gObjectEventSpriteOamTable_SubmarineShadow_3[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_SubmarineShadow[] = {
-    {16, gObjectEventSpriteOamTable_SubmarineShadow_0},
-    {16, gObjectEventSpriteOamTable_SubmarineShadow_0},
-    {16, gObjectEventSpriteOamTable_SubmarineShadow_1},
-    {16, gObjectEventSpriteOamTable_SubmarineShadow_2},
-    {16, gObjectEventSpriteOamTable_SubmarineShadow_3},
-    {16, gObjectEventSpriteOamTable_SubmarineShadow_3}
+// Used by Submarine Shadow
+const struct SubspriteTable gObjectEventSpriteOamTables_88x32[] = {
+    {16, gObjectEventSpriteOamTable_88x32_0},
+    {16, gObjectEventSpriteOamTable_88x32_0},
+    {16, gObjectEventSpriteOamTable_88x32_1},
+    {16, gObjectEventSpriteOamTable_88x32_2},
+    {16, gObjectEventSpriteOamTable_88x32_3},
+    {16, gObjectEventSpriteOamTable_88x32_3}
 };
