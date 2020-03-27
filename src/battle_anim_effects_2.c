@@ -79,8 +79,8 @@ static void AnimAngel(struct Sprite *);
 static void AnimPinkHeart(struct Sprite *);
 static void AnimDevil(struct Sprite *);
 static void AnimFurySwipes(struct Sprite *);
-static void AnimMovmentWaves(struct Sprite *);
-static void AnimMovmentWaves_Step(struct Sprite *);
+static void AnimMovementWaves(struct Sprite *);
+static void AnimMovementWaves_Step(struct Sprite *);
 static void AnimJaggedMusicNote(struct Sprite *);
 static void AnimJaggedMusicNote_Step(struct Sprite *);
 static void AnimPerishSongMusicNote2(struct Sprite *);
@@ -1163,7 +1163,7 @@ const struct SpriteTemplate gMovementWavesSpriteTemplate =
     .anims = gMovementWavesAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimMovmentWaves,
+    .callback = AnimMovementWaves,
 };
 
 static const union AffineAnimCmd sAffineAnims_UproarDistortion[] =
@@ -3606,7 +3606,7 @@ static void AnimFurySwipes(struct Sprite *sprite)
     }
 }
 
-static void AnimMovmentWaves(struct Sprite *sprite)
+static void AnimMovementWaves(struct Sprite *sprite)
 {
     if (!gBattleAnimArgs[2])
     {
@@ -3633,11 +3633,11 @@ static void AnimMovmentWaves(struct Sprite *sprite)
         sprite->data[0] = gBattleAnimArgs[2];
         sprite->data[1] = gBattleAnimArgs[1];
         StartSpriteAnim(sprite, sprite->data[1]);
-        sprite->callback = AnimMovmentWaves_Step;
+        sprite->callback = AnimMovementWaves_Step;
     }
 }
 
-static void AnimMovmentWaves_Step(struct Sprite *sprite)
+static void AnimMovementWaves_Step(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
