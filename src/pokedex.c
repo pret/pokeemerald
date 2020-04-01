@@ -3859,9 +3859,7 @@ static void LoadScreenSelectBarSubmenu(u16 unused)
 {
     CopyToBgTilemapBuffer(1, gPokedexScreenSelectBarSubmenu_Tilemap, 0, 0);
 }
-#ifdef NONMATCHING
-// This doesn't match because gcc flips the naming of the r3 and r4
-// registers.
+
 static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
 {
     u8 i;
@@ -3874,7 +3872,7 @@ static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
         u16 newPalette = 0x4000;
 
         if (i == selectedScreen)
-            newPalette = 0x2000;
+            do newPalette = 0x2000; while (0);
 
         for (j = 0; j < 7; j++)
         {
@@ -3884,70 +3882,6 @@ static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
     }
     CopyBgTilemapBufferToVram(1);
 }
-#else
-__attribute__((naked))
-static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    movs r0, 0x1\n\
-    bl GetBgTilemapBuffer\n\
-    adds r7, r0, 0\n\
-    movs r1, 0\n\
-_080BFD22:\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    movs r3, 0x80\n\
-    lsls r3, 7\n\
-    cmp r1, r8\n\
-    bne _080BFD38\n\
-    movs r3, 0x80\n\
-    lsls r3, 6\n\
-_080BFD38:\n\
-    movs r2, 0\n\
-    adds r6, r1, 0x1\n\
-    ldr r4, =0x00000fff\n\
-_080BFD3E:\n\
-    adds r1, r5, r2\n\
-    lsls r1, 1\n\
-    adds r1, r7\n\
-    ldrh r0, [r1]\n\
-    ands r0, r4\n\
-    orrs r0, r3\n\
-    strh r0, [r1]\n\
-    adds r1, 0x40\n\
-    ldrh r0, [r1]\n\
-    ands r0, r4\n\
-    orrs r0, r3\n\
-    strh r0, [r1]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r2, 0x6\n\
-    bls _080BFD3E\n\
-    lsls r0, r6, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, 0x3\n\
-    bls _080BFD22\n\
-    movs r0, 0x1\n\
-    bl CopyBgTilemapBufferToVram\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 #ifdef NONMATCHING
 // This doesn't match because gcc flips the naming of the r3 and r4
