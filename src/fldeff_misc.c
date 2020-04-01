@@ -1260,7 +1260,7 @@ static void Task_WateringBerryTreeAnim_2(u8 taskId)
 
 static void Task_WateringBerryTreeAnim_3(u8 taskId)
 {
-    SetPlayerAvatarTransitionFlags(sub_808BCD0());
+    SetPlayerAvatarTransitionFlags(GetPlayerAvatarFlags());
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }

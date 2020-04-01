@@ -48,7 +48,7 @@ bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerFacingSurfableFishableWater(void);
 bool8 IsPlayerSurfingNorth(void);
 void sub_808C228(u8 direction);
-u8 sub_808BCD0(void);
+u8 GetPlayerAvatarFlags(void);
 void sub_808B578(void);
 u8 GetFRLGAvatarGraphicsIdByGender(u8);
 u8 GetRSAvatarGraphicsIdByGender(u8);
