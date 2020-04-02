@@ -3869,14 +3869,17 @@ static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
     for (i = 0; i < SCREEN_COUNT; i++)
     {
         u8 row = (i * 7) + 1;
-        u16 newPalette = 0x4000;
+        u16 newPalette;
 
-        if (i == selectedScreen)
-            do newPalette = 0x2000; while (0);
+        do
+        {
+            newPalette = 0x4000;
+            if (i == selectedScreen)
+                newPalette = 0x2000;
+        } while (0);
 
         for (j = 0; j < 7; j++)
         {
-            j++;j--;
             ptr[row + j] = (ptr[row + j] % 0x1000) | newPalette;
             ptr[row + j + 0x20] = (ptr[row + j + 0x20] % 0x1000) | newPalette;
         }
@@ -3905,7 +3908,6 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 
         for (j = 0; j < 7; j++)
         {
-            j++;j--;
             ptr[row + j] = (ptr[row + j] % 0x1000) | newPalette;
             ptr[row + j + 0x20] = (ptr[row + j + 0x20] % 0x1000) | newPalette;
         }
