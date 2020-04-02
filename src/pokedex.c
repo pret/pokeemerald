@@ -3876,6 +3876,7 @@ static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
 
         for (j = 0; j < 7; j++)
         {
+            j++;j--;
             ptr[row + j] = (ptr[row + j] % 0x1000) | newPalette;
             ptr[row + j + 0x20] = (ptr[row + j + 0x20] % 0x1000) | newPalette;
         }
@@ -3904,6 +3905,7 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 
         for (j = 0; j < 7; j++)
         {
+            j++;j--;
             ptr[row + j] = (ptr[row + j] % 0x1000) | newPalette;
             ptr[row + j + 0x20] = (ptr[row + j + 0x20] % 0x1000) | newPalette;
         }
