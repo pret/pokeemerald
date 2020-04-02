@@ -3884,9 +3884,6 @@ static void HighlightScreenSelectBarItem(u8 selectedScreen, u16 unused)
     CopyBgTilemapBufferToVram(1);
 }
 
-#ifdef NONMATCHING
-// This doesn't match because gcc flips the naming of the r3 and r4
-// registers.
 static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 {
     u8 i;
@@ -3905,81 +3902,13 @@ static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
 
         for (j = 0; j < 7; j++)
         {
+            j++;j--;
             ptr[row + j] = (ptr[row + j] % 0x1000) | newPalette;
             ptr[row + j + 0x20] = (ptr[row + j + 0x20] % 0x1000) | newPalette;
         }
     }
     CopyBgTilemapBufferToVram(1);
 }
-#else
-__attribute__((naked))
-static void HighlightSubmenuScreenSelectBarItem(u8 a, u16 b)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    movs r0, 0x1\n\
-    bl GetBgTilemapBuffer\n\
-    adds r7, r0, 0\n\
-    movs r1, 0\n\
-_080BFD92:\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    cmp r1, r8\n\
-    beq _080BFDA4\n\
-    cmp r1, 0x3\n\
-    bne _080BFDAA\n\
-_080BFDA4:\n\
-    movs r3, 0x80\n\
-    lsls r3, 6\n\
-    b _080BFDAE\n\
-_080BFDAA:\n\
-    movs r3, 0x80\n\
-    lsls r3, 7\n\
-_080BFDAE:\n\
-    movs r2, 0\n\
-    adds r5, r1, 0x1\n\
-    ldr r4, =0x00000fff\n\
-_080BFDB4:\n\
-    adds r1, r6, r2\n\
-    lsls r1, 1\n\
-    adds r1, r7\n\
-    ldrh r0, [r1]\n\
-    ands r0, r4\n\
-    orrs r0, r3\n\
-    strh r0, [r1]\n\
-    adds r1, 0x40\n\
-    ldrh r0, [r1]\n\
-    ands r0, r4\n\
-    orrs r0, r3\n\
-    strh r0, [r1]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r2, 0x6\n\
-    bls _080BFDB4\n\
-    lsls r0, r5, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, 0x3\n\
-    bls _080BFD92\n\
-    movs r0, 0x1\n\
-    bl CopyBgTilemapBufferToVram\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 #define tState         data[0]
 #define tDexNum        data[1]
