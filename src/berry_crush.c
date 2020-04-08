@@ -19,7 +19,7 @@
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
-#include "pokemon_jump.h"
+#include "minigame_countdown.h"
 #include "random.h"
 #include "digit_obj_util.h"
 #include "save.h"
@@ -2317,10 +2317,10 @@ static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        sub_802EB24(0x1000, 0x1000, 120, 80, 0);
+        StartMinigameCountdown(0x1000, 0x1000, 120, 80, 0);
         break;
     case 2:
-        if (sub_802EB84())
+        if (IsMinigameCountdownRunning())
             return 0;
         // fallthrough
     case 0:
