@@ -14,7 +14,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "random.h"
-#include "rom_8034C54.h"
+#include "digit_obj_util.h"
 #include "save.h"
 #include "script.h"
 #include "sound.h"
@@ -2831,7 +2831,7 @@ static void sub_802D074(struct PokemonJump2 *arg0)
 static void sub_802D0AC(void)
 {
     FreeAllWindowBuffers();
-    sub_8034CC8();
+    DigitObjUtil_Free();
 }
 
 static void sub_802D0BC(struct PokemonJump2 *arg0)
@@ -3515,37 +3515,37 @@ static int sub_802DCCC(u8 flags)
 
 static void sub_802DD08(void)
 {
-    struct UnkStruct3 unkStruct;
-    struct UnkStruct3 *ptr = &unkStruct; // This temp variable is needed to match, don't ask me why.
+    struct DigitObjUtilTemplate template;
+    struct DigitObjUtilTemplate *ptr = &template; // This temp variable is needed to match, don't ask me why.
 
     ptr->shape = SPRITE_SHAPE(8x8);
     ptr->size = SPRITE_SIZE(8x8);
-    ptr->field_0_0 = 0;
+    ptr->strConvMode = 0;
     ptr->priority = 1;
-    ptr->field_1 = 5;
+    ptr->oamCount = 5;
     ptr->xDelta = 8;
     ptr->x = 108;
     ptr->y = 6;
     ptr->spriteSheet = (void*) &gUnknown_082FE1EC;
     ptr->spritePal = &gUnknown_082FE1F4;
 
-    sub_8034C54(2);
-    sub_8034D14(0, 0, ptr);
+    DigitObjUtil_Init(2);
+    DigitObjUtil_CreatePrinter(0, 0, ptr);
 
-    unkStruct.field_1 = 4;
-    unkStruct.x = 30;
-    unkStruct.y = 6;
-    sub_8034D14(1, 0, &unkStruct);
+    template.oamCount = 4;
+    template.x = 30;
+    template.y = 6;
+    DigitObjUtil_CreatePrinter(1, 0, &template);
 }
 
 static void sub_802DD64(int arg0)
 {
-    sub_8035044(0, arg0);
+    DigitObjUtil_PrintNumOn(0, arg0);
 }
 
 static void sub_802DD74(u16 arg0)
 {
-    sub_8035044(1, arg0);
+    DigitObjUtil_PrintNumOn(1, arg0);
 }
 
 static void sub_802DD88(u8 multiplayerId)
