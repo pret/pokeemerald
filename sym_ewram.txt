@@ -23,7 +23,7 @@
 	.include "src/pokemon_jump.o"
 	.include "src/main_menu.o"
 	.include "src/battle_controllers.o"
-	.include "src/rom_8034C54.o"
+	.include "src/digit_obj_util.o"
 	.include "src/battle_main.o"
 	.include "src/pokemon.o"
 	.include "src/random.o"
