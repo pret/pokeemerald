@@ -2734,7 +2734,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     u32 speciesAtk, speciesDef;
     u32 pidAtk, pidDef;
     u32 moveType, move;
-    u32 i;
+    u32 i, j;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return 0;
@@ -2864,45 +2864,32 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITY_ANTICIPATION:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                bool16 shudders = FALSE;
-                u8 side = (GetBattlerPosition(battler) ^ BIT_SIDE) & BIT_SIDE; // side of the opposing pokemon
-                u8 target1 = GetBattlerAtPosition(side);
-                u8 target2 = GetBattlerAtPosition(side + BIT_FLANK);
-                
-                if (IsBattlerAlive(target1))
+                u32 side = GetBattlerSide(battler);
+
+                for (i = 0; i < MAX_BATTLERS_COUNT; i++)
                 {
-                    for(i = 0; i < MAX_MON_MOVES; i++)
+                    if (IsBattlerAlive(i) && side != GetBattlerSide(i))
                     {
-                        move = gBattleMons[target1].moves[i];
-                        GET_MOVE_TYPE(move, moveType);
-                        if(CalcTypeEffectivenessMultiplier(move, moveType, target1, battler, FALSE) >= UQ_4_12(2.0))
+                        for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            shudders = TRUE;
-                            break;
+                            move = gBattleMons[i].moves[j];
+                            GET_MOVE_TYPE(move, moveType);
+                            if (CalcTypeEffectivenessMultiplier(move, moveType, i, battler, FALSE) >= UQ_4_12(2.0))
+                            {
+                                effect++;
+                                break;
+                            }
                         }
                     }
                 }
 
-                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsBattlerAlive(target2))
-                {
-                    for(i = 0; i < MAX_MON_MOVES; i++)
-                    {
-                        move = gBattleMons[target2].moves[i];
-                        GET_MOVE_TYPE(move, moveType);
-                        if(CalcTypeEffectivenessMultiplier(move, moveType, target2, battler, FALSE) >= UQ_4_12(2.0))
-                        {
-                            shudders = TRUE;
-                            break;
-                        }
-                    }
-                }
-                if (!gSpecialStatuses[battler].switchInAbilityDone && shudders)
+                if (effect)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = 5;
                     gSpecialStatuses[battler].switchInAbilityDone = 1;
                     BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
-                    effect++;
                 }
             }
             break;
