@@ -19,9 +19,9 @@
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
-#include "pokemon_jump.h"
+#include "minigame_countdown.h"
 #include "random.h"
-#include "rom_8034C54.h"
+#include "digit_obj_util.h"
 #include "save.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -714,14 +714,14 @@ static const struct SpriteTemplate gUnknown_082F436C =
     .callback = SpriteCallbackDummy
 };
 
-static const struct UnkStruct3 gUnknown_082F4384[] = 
+static const struct DigitObjUtilTemplate gUnknown_082F4384[] = 
 {
     {
-        .field_0_0 = 1,
+        .strConvMode = 1,
         .shape = 2,
         .size = 0,
         .priority = 0,
-        .field_1 = 2, 
+        .oamCount = 2, 
         .xDelta = 8, 
         .x = 156,
         .y = 0,
@@ -729,11 +729,11 @@ static const struct UnkStruct3 gUnknown_082F4384[] =
         .spritePal = gUnknown_082F422C,
     },
     {
-        .field_0_0 = 0,
+        .strConvMode = 0,
         .shape = 2,
         .size = 0,
         .priority = 0,
-        .field_1 = 2, 
+        .oamCount = 2, 
         .xDelta = 8, 
         .x = 180,
         .y = 0,
@@ -741,11 +741,11 @@ static const struct UnkStruct3 gUnknown_082F4384[] =
         .spritePal = gUnknown_082F422C,
     },
     {
-        .field_0_0 = 0,
+        .strConvMode = 0,
         .shape = 2,
         .size = 0,
         .priority = 0,
-        .field_1 = 2, 
+        .oamCount = 2, 
         .xDelta = 8, 
         .x = 204,
         .y = 0,
@@ -1036,7 +1036,7 @@ int sub_802104C(void)
     case 1:
         CpuFill16(0, (void *)OAM, OAM_SIZE);
         gReservedSpritePaletteCount = 0;
-        sub_8034C54(3);
+        DigitObjUtil_Init(3);
         break;
     case 2:
         ResetPaletteFade();
@@ -1165,7 +1165,7 @@ int sub_802130C(void)
     case 6:
         DestroyWirelessStatusIndicatorSprite();
         sub_8022960(var0);
-        sub_8034CC8();
+        DigitObjUtil_Free();
         break;
     case 7:
         var0->unkC = 0;
@@ -1701,18 +1701,18 @@ void ShowBerryCrushRankings(void)
 void sub_8022524(struct BerryCrushGame_138 *r4, u16 r1)
 {
     sub_8021944(r4, r1);
-    sub_8035044(0, r4->unk4);
-    sub_8035044(1, r4->unk6);
-    sub_8035044(2, r4->unk8);
+    DigitObjUtil_PrintNumOn(0, r4->unk4);
+    DigitObjUtil_PrintNumOn(1, r4->unk6);
+    DigitObjUtil_PrintNumOn(2, r4->unk8);
 }
 
 void sub_8022554(struct BerryCrushGame_138 *r0)
 {
     r0->unk78[0]->invisible = TRUE;
     r0->unk78[1]->invisible = TRUE;
-    sub_803547C(2, 1);
-    sub_803547C(1, 1);
-    sub_803547C(0, 1);
+    DigitObjUtil_HideOrShow(2, 1);
+    DigitObjUtil_HideOrShow(1, 1);
+    DigitObjUtil_HideOrShow(0, 1);
 }
 
 void sub_8022588(struct BerryCrushGame *r5)
@@ -1855,9 +1855,9 @@ void sub_8022730(struct BerryCrushGame *r6)
         r6->unk138.unk78[r5]->invisible = FALSE;
         r6->unk138.unk78[r5]->animPaused = FALSE;
     }
-    sub_8034D14(0, 0, &gUnknown_082F4384[0]);
-    sub_8034D14(1, 0, &gUnknown_082F4384[1]);
-    sub_8034D14(2, 0, &gUnknown_082F4384[2]);
+    DigitObjUtil_CreatePrinter(0, 0, &gUnknown_082F4384[0]);
+    DigitObjUtil_CreatePrinter(1, 0, &gUnknown_082F4384[1]);
+    DigitObjUtil_CreatePrinter(2, 0, &gUnknown_082F4384[2]);
     if (r6->unk12 == 1)
         sub_8022554(&r6->unk138);
 }
@@ -1875,9 +1875,9 @@ void sub_8022960(struct BerryCrushGame *r5)
     FreeSpritePaletteByTag(1);
     for (; r4 < ARRAY_COUNT(r5->unk138.unk78); ++r4)
         DestroySprite(r5->unk138.unk78[r4]);
-    sub_80353DC(2);
-    sub_80353DC(1);
-    sub_80353DC(0);
+    DigitObjUtil_DeletePrinter(2);
+    DigitObjUtil_DeletePrinter(1);
+    DigitObjUtil_DeletePrinter(0);
     for (r4 = 0; r4 < ARRAY_COUNT(r5->unk138.unk4C); ++r4)
         DestroySprite(r5->unk138.unk4C[r4]);
     for (r4 = 0; r4 < r5->unk9; ++r4)
@@ -2317,10 +2317,10 @@ static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        sub_802EB24(0x1000, 0x1000, 120, 80, 0);
+        StartMinigameCountdown(0x1000, 0x1000, 120, 80, 0);
         break;
     case 2:
-        if (sub_802EB84())
+        if (IsMinigameCountdownRunning())
             return 0;
         // fallthrough
     case 0:

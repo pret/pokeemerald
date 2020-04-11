@@ -3,7 +3,7 @@
   "name": "BirthIsland_Exterior",
   "layout": "LAYOUT_BIRTH_ISLAND_EXTERIOR",
   "music": "MUS_NONE",
-  "region_map_section": "MAPSEC_BIRTH_ISLAND_2",
+  "region_map_section": "MAPSEC_BIRTH_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",

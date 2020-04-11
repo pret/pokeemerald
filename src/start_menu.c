@@ -603,7 +603,7 @@ static bool8 StartMenuPokedexCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_Pokedex);
+        SetMainCallback2(CB2_OpenPokedex);
 
         return TRUE;
     }

@@ -65,24 +65,44 @@ enum
     POKENAV_MODE_FORCE_CALL_EXIT,  // Pokenav tutorial after calling Mr. Stone
 };
 
+enum
+{
+    POKENAV_GFX_MAIN_MENU,
+    POKENAV_GFX_CONDITION_MENU,
+    POKENAV_GFX_RIBBONS_MENU,
+    POKENAV_GFX_MATCH_CALL_MENU,
+    POKENAV_GFX_MAP_MENU_ZOOMED_OUT,
+    POKENAV_GFX_MAP_MENU_ZOOMED_IN,
+    POKENAV_GFX_PARTY_MENU,
+    POKENAV_GFX_SEARCH_MENU,
+    POKENAV_GFX_COOL_MENU,
+    POKENAV_GFX_BEAUTY_MENU,
+    POKENAV_GFX_CUTE_MENU,
+    POKENAV_GFX_SMART_MENU,
+    POKENAV_GFX_TOUGH_MENU,
+    POKENAV_GFX_MENUS_END,
+};
+
+#define POKENAV_GFX_SUBMENUS_START POKENAV_GFX_PARTY_MENU
+
 #define POKENAV_MENU_IDS_START 100000
 enum
 {
-	POKENAV_MENU_0 = POKENAV_MENU_IDS_START,
-	POKENAV_MENU_1,
-	POKENAV_MENU_2,
-	POKENAV_MENU_3,
-	POKENAV_MENU_4,
-	POKENAV_MENU_5,
-	POKENAV_MENU_6,
-	POKENAV_MENU_7,
-	POKENAV_MENU_8,
-	POKENAV_MENU_9,
-	POKENAV_MENU_A,
-	POKENAV_MENU_B,
-	POKENAV_MENU_C,
-	POKENAV_MENU_D,
-	POKENAV_MENU_E,
+	POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START,
+	POKENAV_MAIN_MENU_CURSOR_ON_MAP,
+	POKENAV_CONDITION_MENU,
+	POKENAV_CONDITION_SEARCH_MENU,
+	POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL,
+	POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS,
+	POKENAV_REGION_MAP,
+	POKENAV_CONDITION_PARTY,
+	POKENAV_CONDITION_SEARCH_RESULTS,
+	POKENAV_MENU_9, // Condition
+	POKENAV_MENU_A, // Condition
+	POKENAV_MATCH_CALL,
+	POKENAV_RIBBONS_MON_LIST,
+	POKENAV_MENU_D, // Ribbons
+	POKENAV_MENU_E, // Ribbons
 };
 
 enum
@@ -220,6 +240,15 @@ enum
     POKENAV_MC_FUNC_EXIT
 };
 
+enum
+{
+    POKENAV_MAP_FUNC_NONE,
+    POKENAV_MAP_FUNC_CURSOR_MOVED,
+    POKENAV_MAP_FUNC_ZOOM_OUT,
+    POKENAV_MAP_FUNC_ZOOM_IN,
+    POKENAV_MAP_FUNC_EXIT,
+};
+
 // pokenav.c
 void SetSelectedConditionSearch(u32);
 u32 GetSelectedConditionSearch(void);
@@ -275,7 +304,7 @@ void sub_81C7850(u32 a0);
 u32 sub_81C786C(void);
 void LoadLeftHeaderGfxForIndex(u32 arg0);
 void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2);
-void sub_81C7AC0(s32 a0);
+void PokenavFadeScreen(s32 fadeType);
 bool32 sub_81C8010(void);
 void InitBgTemplates(const struct BgTemplate *templates, int count);
 bool32 IsPaletteFadeActive(void);
@@ -298,30 +327,30 @@ void sub_81C7834(void *func1, void *func2);
 void ShutdownPokenav(void);
 
 // pokenav_menu_handler_1.c
-bool32 PokenavCallback_Init_0(void);
-bool32 PokenavCallback_Init_4(void);
-bool32 PokenavCallback_Init_5(void);
-bool32 PokenavCallback_Init_2(void);
-bool32 PokenavCallback_Init_3(void);
-u32 sub_81C941C(void);
-void sub_81C9430(void);
+bool32 PokenavCallback_Init_MainMenuCursorOnMap(void);
+bool32 PokenavCallback_Init_MainMenuCursorOnMatchCall(void);
+bool32 PokenavCallback_Init_MainMenuCursorOnRibbons(void);
+bool32 PokenavCallback_Init_ConditionMenu(void);
+bool32 PokenavCallback_Init_ConditionSearchMenu(void);
+u32 GetMenuHandlerCallback(void);
+void FreeMenuHandlerSubstruct1(void);
 int GetPokenavMenuType(void);
 int GetPokenavCursorPos(void);
 int GetCurrentMenuItemId(void);
 u16 GetHelpBarTextId(void);
 
 // pokenav_menu_handler_2.c
-bool32 sub_81C9924(void);
-bool32 sub_81C9940(void);
+bool32 OpenPokenavMenuInitial(void);
+bool32 OpenPokenavMenuNotInitial(void);
 void CreateMenuHandlerLoopedTask(s32 ltIdx);
-bool32 sub_81C99C0(void);
-void sub_81C99D4(void);
+bool32 IsMenuHandlerLoopedTaskActive(void);
+void FreeMenuHandlerSubstruct2(void);
 void sub_81CAADC(void);
 
 // pokenav_match_call_1.c
-bool32 PokenavCallback_Init_11(void);
-u32 sub_81CAB24(void);
-void sub_81CAB38(void);
+bool32 PokenavCallback_Init_MatchCall(void);
+u32 GetMatchCallCallback(void);
+void FreeMatchCallSubstruct1(void);
 int sub_81CAE28(void);
 int GetNumberRegistered(void);
 int sub_81CAE48(void);
@@ -341,19 +370,19 @@ int GetIndexDeltaOfNextCheckPageUp(int index);
 bool32 IsRematchEntryRegistered(int index);
 
 // pokenav_match_call_2.c
-bool32 sub_81CB260(void);
+bool32 OpenMatchCall(void);
 void CreateMatchCallLoopedTask(s32 index);
-u32 sub_81CB2CC(void);
-void sub_81CB2E0(void);
+bool32 IsMatchCallLoopedTaskActive(void);
+void FreeMatchCallSubstruct2(void);
 
 // pokenav_region_map.c
-u32 PokenavCallback_Init_6(void);
-void sub_81CC524(void);
-u32 sub_81CC554(void);
-bool32 sub_81CC5F4(void);
-void sub_81CC62C(s32);
-u32 sub_81CC65C(void);
-void sub_81CC670(void);
+u32 PokenavCallback_Init_RegionMap(void);
+u32 GetRegionMapCallback(void);
+bool32 OpenPokenavRegionMap(void);
+void CreateRegionMapLoopedTask(s32);
+bool32 IsRegionMapLoopedTaskActive(void);
+void FreeRegionMapSubstruct1(void);
+void FreeRegionMapSubstruct2(void);
 
 // pokenav_conditions_1.c
 u32 PokenavCallback_Init_7(void);

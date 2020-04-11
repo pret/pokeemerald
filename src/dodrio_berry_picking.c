@@ -12,7 +12,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "palette.h"
-#include "pokemon_jump.h"
+#include "minigame_countdown.h"
 #include "random.h"
 #include "save.h"
 #include "script.h"
@@ -667,7 +667,7 @@ static void sub_8024E38(void)
     switch (gUnknown_02022C98->unk10)
     {
     case 0:
-        sub_802EB24(7, 8, 120, 80, 0);
+        StartMinigameCountdown(7, 8, 120, 80, 0);
         gUnknown_02022C98->unk10++;
         break;
     case 1:
@@ -682,7 +682,7 @@ static void sub_8024E38(void)
         }
         break;
     case 3:
-        if (!sub_802EB84())
+        if (!IsMinigameCountdownRunning())
         {
             gUnknown_02022C98->unk10++;
         }

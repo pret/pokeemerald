@@ -5,7 +5,7 @@
 #ifndef GUARD_TRADER_H
 #define GUARD_TRADER_H
 
-void sub_8133DA0(u8 taskId);
+void DecorationItemsMenuAction_Trade(u8 taskId);
 void ExitTraderMenu(u8 taskId);
 void TraderSetup(void);
 void Trader_ResetFlag(void);
