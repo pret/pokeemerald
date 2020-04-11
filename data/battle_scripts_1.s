@@ -5880,6 +5880,13 @@ BattleScript_IllusionOff::
 	waitmessage 0x40
 	return
 
+BattleScript_AnticipationActivates::
+	pause 0x5
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ANTICIPATIONACTIVATES
+	waitmessage 0x40
+	return
+
 BattleScript_AftermathDmg::
 	pause 0x20
 	call BattleScript_AbilityPopUp
