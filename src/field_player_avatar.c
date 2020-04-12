@@ -1095,7 +1095,7 @@ void PlayerWheelieMove(u8 direction)
     PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-void sub_808B9D4(u8 direction)
+void PlayerEndWheelieWhileMoving(u8 direction)
 {
     PlayerSetAnimId(GetAcroEndWheelieMoveDirectionMovementAction(direction), 2);
 }

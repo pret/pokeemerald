@@ -56,7 +56,7 @@ void PlayerWheelieInPlace(u8 direction);
 void PlayerWheelieMove(u8 direction);
 void PlayerPopWheelieWhileMoving(u8 direction);
 void sub_808C1B4(u8 direction);
-void sub_808B9D4(u8 direction);
+void PlayerEndWheelieWhileMoving(u8 direction);
 void sub_808D194(void);
 void sub_808D1C8(void);
 bool32 sub_808D1B4(void);
