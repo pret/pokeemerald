@@ -5068,7 +5068,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 
 static void HandleAction_UseMove(void)
 {
-    u32 side, moveType, var = 4;
+    u32 i, side, moveType, var = 4;
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     if (gBattleStruct->field_91 & gBitTable[gBattlerAttacker] || !IsBattlerAlive(gBattlerAttacker))
@@ -5315,6 +5315,10 @@ static void HandleAction_UseMove(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);
+
+    // Record HP of each battler
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }

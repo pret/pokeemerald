@@ -539,6 +539,7 @@ struct BattleStruct
     u8 lastMoveTarget[MAX_BATTLERS_COUNT]; // The last target on which each mon used a move, for the sake of Instruct
     u8 debugHoldEffects[MAX_BATTLERS_COUNT]; // These override actual items' hold effects.
     u8 tracedAbility[MAX_BATTLERS_COUNT];
+    u16 hpBefore[MAX_BATTLERS_COUNT]; // Hp of battlers before using a move. For Berserk
     bool8 spriteIgnore0Hp;
     struct Illusion illusion[MAX_BATTLERS_COUNT];
 };
