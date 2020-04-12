@@ -1415,7 +1415,7 @@ void sub_808C15C(u8 direction)
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingDirectionAnimNum(direction));
 }
 
-void sub_808C1B4(u8 direction)
+void PlayerUseAcroBikeOnBumpySlope(u8 direction)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetAcroWheelieDirectionAnimNum(direction));

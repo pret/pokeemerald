@@ -1049,7 +1049,7 @@ void Bike_HandleBumpySlopeJump(void)
         if (MetatileBehavior_IsBumpySlope(tileBehavior))
         {
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
-            sub_808C1B4(GetPlayerMovementDirection());
+            PlayerUseAcroBikeOnBumpySlope(GetPlayerMovementDirection());
         }
     }
 }

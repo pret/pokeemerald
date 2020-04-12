@@ -55,7 +55,7 @@ u8 GetRSAvatarGraphicsIdByGender(u8);
 void PlayerWheelieInPlace(u8 direction);
 void PlayerWheelieMove(u8 direction);
 void PlayerPopWheelieWhileMoving(u8 direction);
-void sub_808C1B4(u8 direction);
+void PlayerUseAcroBikeOnBumpySlope(u8 direction);
 void PlayerEndWheelieWhileMoving(u8 direction);
 void sub_808D194(void);
 void sub_808D1C8(void);
