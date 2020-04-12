@@ -1085,7 +1085,7 @@ void PlayerWheelieInPlace(u8 direction)
     PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
 }
 
-void sub_808B9A4(u8 direction)
+void PlayerPopWheelieWhileMoving(u8 direction)
 {
     PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
 }

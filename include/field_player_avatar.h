@@ -54,7 +54,7 @@ u8 GetFRLGAvatarGraphicsIdByGender(u8);
 u8 GetRSAvatarGraphicsIdByGender(u8);
 void PlayerWheelieInPlace(u8 direction);
 void PlayerWheelieMove(u8 direction);
-void sub_808B9A4(u8 direction);
+void PlayerPopWheelieWhileMoving(u8 direction);
 void sub_808C1B4(u8 direction);
 void sub_808B9D4(u8 direction);
 void sub_808D194(void);
