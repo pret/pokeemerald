@@ -52,7 +52,7 @@ u8 GetPlayerAvatarFlags(void);
 void sub_808B578(void);
 u8 GetFRLGAvatarGraphicsIdByGender(u8);
 u8 GetRSAvatarGraphicsIdByGender(u8);
-void sub_808B980(u8 direction);
+void PlayerWheelieInPlace(u8 direction);
 void sub_808B9BC(u8 direction);
 void sub_808B9A4(u8 direction);
 void sub_808C1B4(u8 direction);
