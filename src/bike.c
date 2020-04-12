@@ -700,7 +700,7 @@ static void AcroBikeTransition_WheelieMoving(u8 direction)
         }
         return;
     }
-    sub_808B9BC(direction);
+    PlayerWheelieMove(direction);
     gPlayerAvatar.runningState = MOVING;
 }
 
