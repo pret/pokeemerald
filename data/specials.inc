@@ -504,7 +504,7 @@ gSpecials:: @ 81DBA64
 	def_special GetMartEmployeeObjectEventId
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny
-	def_special sub_81AFDA0
+	def_special SetUnlockedPokedexFlags
 	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex
