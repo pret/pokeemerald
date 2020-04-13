@@ -1395,6 +1395,17 @@ enum
 	ENDTURN_BATTLER_COUNT
 };
 
+// Ingrain, Leech Seed, Strength Sap and Aqua Ring
+s32 GetDrainedBigRootHp(u32 battler, s32 hp)
+{
+    if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_BIG_ROOT)
+        hp = (hp * 1300) / 1000;
+    if (hp == 0)
+        hp = 1;
+
+    return hp * -1;
+}
+
 u8 DoBattlerEndTurnEffects(void)
 {
     u32 ability, effect = 0;
@@ -1418,10 +1429,7 @@ u8 DoBattlerEndTurnEffects(void)
              && !(gStatuses3[gActiveBattler] & STATUS3_HEAL_BLOCK)
              && gBattleMons[gActiveBattler].hp != 0)
             {
-                gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                gBattleMoveDamage *= -1;
+                gBattleMoveDamage = GetDrainedBigRootHp(gActiveBattler, gBattleMons[gActiveBattler].maxHP / 16);
                 BattleScriptExecute(BattleScript_IngrainTurnHeal);
                 effect++;
             }
@@ -1433,10 +1441,7 @@ u8 DoBattlerEndTurnEffects(void)
              && !(gStatuses3[gActiveBattler] & STATUS3_HEAL_BLOCK)
              && gBattleMons[gActiveBattler].hp != 0)
             {
-                gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                gBattleMoveDamage *= -1;
+                gBattleMoveDamage = GetDrainedBigRootHp(gActiveBattler, gBattleMons[gActiveBattler].maxHP / 16);
                 BattleScriptExecute(BattleScript_AquaRingHeal);
                 effect++;
             }

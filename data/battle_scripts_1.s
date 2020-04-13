@@ -355,6 +355,53 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectGearUp
 	.4byte BattleScript_EffectIncinerate
 	.4byte BattleScript_EffectBugBite
+	.4byte BattleScript_EffectStrengthSap
+	
+BattleScript_EffectStrengthSap:
+	setstatchanger STAT_ATK, 1, TRUE
+	attackcanceler
+	jumpifsubstituteblocks BattleScript_ButItFailedAtkStringPpReduce
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_ATK, 0, BattleScript_StrengthSapTryLower
+	pause 0x20
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_MoveEnd
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+BattleScript_StrengthSapTryLower:
+	getstatvalue BS_TARGET, STAT_ATK
+	jumpiffullhp BS_ATTACKER, BattleScript_StrengthSapMustLower
+	attackanimation
+	waitanimation
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_StrengthSapHp
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_StrengthSapHp
+BattleScript_StrengthSapLower:
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+	goto BattleScript_StrengthSapHp
+@ Drain HP without lowering a stat
+BattleScript_StrengthSapTryHp:
+	jumpiffullhp BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+BattleScript_StrengthSapHp:
+	jumpiffullhp BS_ATTACKER, BattleScript_MoveEnd
+	manipulatedamage DMG_BIG_ROOT
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_PKMNENERGYDRAINED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+BattleScript_StrengthSapMustLower:
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_MoveEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_MoveEnd
+	attackanimation
+	waitanimation
+	goto BattleScript_StrengthSapLower
 
 BattleScript_EffectBugBite:
 	setmoveeffect MOVE_EFFECT_BUG_BITE | MOVE_EFFECT_CERTAIN
@@ -5196,7 +5243,7 @@ BattleScript_LeechSeedTurnDrain::
 	datahpupdate BS_ATTACKER
 	copyword gBattleMoveDamage, gHpDealt
 	jumpifability BS_ATTACKER, ABILITY_LIQUID_OOZE, BattleScript_LeechSeedTurnPrintLiquidOoze
-	manipulatedamage DMG_CHANGE_SIGN
+	manipulatedamage DMG_BIG_ROOT
 	setbyte cMULTISTRING_CHOOSER, 0x3
 	goto BattleScript_LeechSeedTurnPrintAndUpdateHp
 BattleScript_LeechSeedTurnPrintLiquidOoze::

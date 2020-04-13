@@ -8858,7 +8858,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STRENGTH_SAP] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_STRENGTH_SAP,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 100,

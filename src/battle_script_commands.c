@@ -6789,6 +6789,19 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    case VARIOUS_GET_STAT_VALUE:
+        i = gBattlescriptCurrInstr[3];
+        gBattleMoveDamage = *(u16*)(&gBattleMons[gActiveBattler].attack) + (i - 1);
+        gBattleMoveDamage *= gStatStageRatios[gBattleMons[gActiveBattler].statStages[i]][0];
+        gBattleMoveDamage /= gStatStageRatios[gBattleMons[gActiveBattler].statStages[i]][1];
+        gBattlescriptCurrInstr += 4;
+        return;
+    case VARIOUS_JUMP_IF_FULL_HP:
+        if (BATTLER_MAX_HP(gActiveBattler))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     case VARIOUS_TRACE_ABILITY:
         gBattleMons[gActiveBattler].ability = gBattleStruct->tracedAbility[gActiveBattler];
         break;
@@ -8093,6 +8106,9 @@ static void Cmd_manipulatedamage(void)
         break;
     case DMG_CURR_ATTACKER_HP:
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp;
+        break;
+    case DMG_BIG_ROOT:
+        gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
         break;
     }
 
