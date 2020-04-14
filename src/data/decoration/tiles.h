@@ -1,463 +1,465 @@
+#define DECOR_TILE(name) (METATILE_SecretBase_##name - 0x200)
+
 const u16 DecorGfx_SMALL_DESK[] = {
-    0x87
+    DECOR_TILE(SmallDesk)
 };
 
 const u16 DecorGfx_POKEMON_DESK[] = {
-    0x8F
+    DECOR_TILE(PokemonDesk)
 };
 
 const u16 DecorGfx_HEAVY_DESK[] = {
-    0x90,
-    0x91,
-    0x92,
-    0x98,
-    0x99,
-    0x9A
+    DECOR_TILE(HeavyDesk_TopLeft),
+    DECOR_TILE(HeavyDesk_TopMid),
+    DECOR_TILE(HeavyDesk_TopRight),
+    DECOR_TILE(HeavyDesk_BottomLeft),
+    DECOR_TILE(HeavyDesk_BottomMid),
+    DECOR_TILE(HeavyDesk_BottomRight)
 };
 
 const u16 DecorGfx_RAGGED_DESK[] = {
-    0x93,
-    0x94,
-    0x95,
-    0x9B,
-    0x9C,
-    0x9D
+    DECOR_TILE(RaggedDesk_TopLeft),
+    DECOR_TILE(RaggedDesk_TopMid),
+    DECOR_TILE(RaggedDesk_TopRight),
+    DECOR_TILE(RaggedDesk_BottomLeft),
+    DECOR_TILE(RaggedDesk_BottomMid),
+    DECOR_TILE(RaggedDesk_BottomRight)
 };
 
 const u16 DecorGfx_COMFORT_DESK[] = {
-    0x96,
-    0x97,
-    0xA3,
-    0x9E,
-    0x9F,
-    0xAB
+    DECOR_TILE(ComfortDesk_TopLeft),
+    DECOR_TILE(ComfortDesk_TopMid),
+    DECOR_TILE(ComfortDesk_TopRight),
+    DECOR_TILE(ComfortDesk_BottomLeft),
+    DECOR_TILE(ComfortDesk_BottomMid),
+    DECOR_TILE(ComfortDesk_BottomRight)
 };
 
 const u16 DecorGfx_PRETTY_DESK[] = {
-    0xBD,
-    0xBE,
-    0xBF,
-    0xC5,
-    0xC6,
-    0xC7,
-    0xCD,
-    0xCE,
-    0xCF
+    DECOR_TILE(PrettyDesk_TopLeft),
+    DECOR_TILE(PrettyDesk_TopMid),
+    DECOR_TILE(PrettyDesk_TopRight),
+    DECOR_TILE(PrettyDesk_MidLeft),
+    DECOR_TILE(PrettyDesk_Center),
+    DECOR_TILE(PrettyDesk_MidRight),
+    DECOR_TILE(PrettyDesk_BottomLeft),
+    DECOR_TILE(PrettyDesk_BottomMid),
+    DECOR_TILE(PrettyDesk_BottomRight)
 };
 
 const u16 DecorGfx_BRICK_DESK[] = {
-    0xA0,
-    0xA1,
-    0xA2,
-    0xA8,
-    0xA9,
-    0xAA,
-    0xB0,
-    0xB1,
-    0xB2
+    DECOR_TILE(BrickDesk_TopLeft),
+    DECOR_TILE(BrickDesk_TopMid),
+    DECOR_TILE(BrickDesk_TopRight),
+    DECOR_TILE(BrickDesk_MidLeft),
+    DECOR_TILE(BrickDesk_Center),
+    DECOR_TILE(BrickDesk_MidRight),
+    DECOR_TILE(BrickDesk_BottomLeft),
+    DECOR_TILE(BrickDesk_BottomMid),
+    DECOR_TILE(BrickDesk_BottomRight)
 };
 
 const u16 DecorGfx_CAMP_DESK[] = {
-    0xA4,
-    0xA5,
-    0xA6,
-    0xAC,
-    0xAD,
-    0xAE,
-    0xB4,
-    0xB5,
-    0xB6
+    DECOR_TILE(CampDesk_TopLeft),
+    DECOR_TILE(CampDesk_TopMid),
+    DECOR_TILE(CampDesk_TopRight),
+    DECOR_TILE(CampDesk_MidLeft),
+    DECOR_TILE(CampDesk_Center),
+    DECOR_TILE(CampDesk_MidRight),
+    DECOR_TILE(CampDesk_BottomLeft),
+    DECOR_TILE(CampDesk_BottomMid),
+    DECOR_TILE(CampDesk_BottomRight)
 };
 
 const u16 DecorGfx_HARD_DESK[] = {
-    0xA7,
-    0xBB,
-    0xBC,
-    0xAF,
-    0xC3,
-    0xC4,
-    0xB7,
-    0xCB,
-    0xCC
+    DECOR_TILE(HardDesk_TopLeft),
+    DECOR_TILE(HardDesk_TopMid),
+    DECOR_TILE(HardDesk_TopRight),
+    DECOR_TILE(HardDesk_MidLeft),
+    DECOR_TILE(HardDesk_Center),
+    DECOR_TILE(HardDesk_MidRight),
+    DECOR_TILE(HardDesk_BottomLeft),
+    DECOR_TILE(HardDesk_BottomMid),
+    DECOR_TILE(HardDesk_BottomRight)
 };
 
 const u16 DecorGfx_SMALL_CHAIR[] = {
-    0xB8
+    DECOR_TILE(SmallChair)
 };
 
 const u16 DecorGfx_POKEMON_CHAIR[] = {
-    0xB9
+    DECOR_TILE(PokemonChair)
 };
 
 const u16 DecorGfx_HEAVY_CHAIR[] = {
-    0xBA
+    DECOR_TILE(HeavyChair)
 };
 
 const u16 DecorGfx_PRETTY_CHAIR[] = {
-    0xC0
+    DECOR_TILE(PrettyChair)
 };
 
 const u16 DecorGfx_COMFORT_CHAIR[] = {
-    0xC1
+    DECOR_TILE(ComfortChair)
 };
 
 const u16 DecorGfx_RAGGED_CHAIR[] = {
-    0xC2
+    DECOR_TILE(RaggedChair)
 };
 
 const u16 DecorGfx_BRICK_CHAIR[] = {
-    0xC8
+    DECOR_TILE(BrickChair)
 };
 
 const u16 DecorGfx_CAMP_CHAIR[] = {
-    0xC9
+    DECOR_TILE(CampChair)
 };
 
 const u16 DecorGfx_HARD_CHAIR[] = {
-    0xCA
+    DECOR_TILE(HardChair)
 };
 
 const u16 DecorGfx_RED_PLANT[] = {
-    0xD0,
-    0xD8
+    DECOR_TILE(RedPlant_Top),
+    DECOR_TILE(RedPlant_Base1)
 };
 
 const u16 DecorGfx_TROPICAL_PLANT[] = {
-    0xD2,
-    0xDA
+    DECOR_TILE(TropicalPlant_Top),
+    DECOR_TILE(TropicalPlant_Base1)
 };
 
 const u16 DecorGfx_PRETTY_FLOWERS[] = {
-    0xD4,
-    0xDC
+    DECOR_TILE(PrettyFlowers_Top),
+    DECOR_TILE(PrettyFlowers_Base1)
 };
 
 const u16 DecorGfx_COLORFUL_PLANT[] = {
-    0xE0,
-    0xE2,
-    0xE8,
-    0xE9
+    DECOR_TILE(ColorfulPlant_TopLeft),
+    DECOR_TILE(ColorfulPlant_TopRight),
+    DECOR_TILE(ColorfulPlant_BaseLeft1),
+    DECOR_TILE(ColorfulPlant_BaseRight1)
 };
 
 const u16 DecorGfx_BIG_PLANT[] = {
-    0xE4,
-    0xE6,
-    0xEC,
-    0xED
+    DECOR_TILE(BigPlant_TopLeft),
+    DECOR_TILE(BigPlant_TopRight),
+    DECOR_TILE(BigPlant_BaseLeft1),
+    DECOR_TILE(BigPlant_BaseRight1)
 };
 
 const u16 DecorGfx_GORGEOUS_PLANT[] = {
-    0xF0,
-    0xF2,
-    0xF8,
-    0xF9
+    DECOR_TILE(GorgeousPlant_TopLeft),
+    DECOR_TILE(GorgeousPlant_TopRight),
+    DECOR_TILE(GorgeousPlant_BaseLeft1),
+    DECOR_TILE(GorgeousPlant_BaseRight1)
 };
 
 const u16 DecorGfx_RED_BRICK[] = {
-    0x25,
-    0x2D
+    DECOR_TILE(RedBrick_Top),
+    DECOR_TILE(RedBrick_Bottom)
 };
 
 const u16 DecorGfx_YELLOW_BRICK[] = {
-    0x26,
-    0x2E
+    DECOR_TILE(YellowBrick_Top),
+    DECOR_TILE(YellowBrick_Bottom)
 };
 
 const u16 DecorGfx_BLUE_BRICK[] = {
-    0x27,
-    0x2F
+    DECOR_TILE(BlueBrick_Top),
+    DECOR_TILE(BlueBrick_Bottom)
 };
 
 const u16 DecorGfx_RED_BALLOON[] = {
-    0x138
+    DECOR_TILE(RedBalloon)
 };
 
 const u16 DecorGfx_BLUE_BALLOON[] = {
-    0x13C
+    DECOR_TILE(BlueBalloon)
 };
 
 const u16 DecorGfx_YELLOW_BALLOON[] = {
-    0x140
+    DECOR_TILE(YellowBalloon)
 };
 
 const u16 DecorGfx_RED_TENT[] = {
-    0x30,
-    0x31,
-    0x32,
-    0x38,
-    0x39,
-    0x3A,
-    0x40,
-    0x41,
-    0x3B
+    DECOR_TILE(RedTent_TopLeft),
+    DECOR_TILE(RedTent_TopMid),
+    DECOR_TILE(RedTent_TopRight),
+    DECOR_TILE(RedTent_MidLeft),
+    DECOR_TILE(RedTent_DoorTop),
+    DECOR_TILE(RedTent_MidRight),
+    DECOR_TILE(RedTent_BottomLeft),
+    DECOR_TILE(RedTent_Door),
+    DECOR_TILE(RedTent_BottomRight)
 };
 
 const u16 DecorGfx_BLUE_TENT[] = {
-    0x48,
-    0x49,
-    0x68,
-    0x50,
-    0x51,
-    0x70,
-    0x58,
-    0x59,
-    0x69
+    DECOR_TILE(BlueTent_TopLeft),
+    DECOR_TILE(BlueTent_TopMid),
+    DECOR_TILE(BlueTent_TopRight),
+    DECOR_TILE(BlueTent_MidLeft),
+    DECOR_TILE(BlueTent_DoorTop),
+    DECOR_TILE(BlueTent_MidRight),
+    DECOR_TILE(BlueTent_BottomLeft),
+    DECOR_TILE(BlueTent_Door),
+    DECOR_TILE(BlueTent_BottomRight)
 };
 
 const u16 DecorGfx_SOLID_BOARD[] = {
-    0x34,
-    0x3C
+    DECOR_TILE(SolidBoard_Top),
+    DECOR_TILE(SolidBoard_Bottom)
 };
 
 const u16 DecorGfx_SLIDE[] = {
-    0x35,
-    0x36,
-    0x3D,
-    0x3E,
-    0x63,
-    0x64,
-    0x6F,
-    0x77
+    DECOR_TILE(Slide_TopLeft),
+    DECOR_TILE(Slide_TopRight),
+    DECOR_TILE(Slide_StairLanding),
+    DECOR_TILE(Slide_SlideTop),
+    DECOR_TILE(Slide_Stairs),
+    DECOR_TILE(Slide_SlideBottom),
+    DECOR_TILE(Slide_MatLeft),
+    DECOR_TILE(Slide_MatRight)
 };
 
 const u16 DecorGfx_FENCE_LENGTH[] = {
-    0x33
+    DECOR_TILE(Fence_Vertical)
 };
 
 const u16 DecorGfx_FENCE_WIDTH[] = {
-    0x2C
+    DECOR_TILE(Fence_Horizontal)
 };
 
 const u16 DecorGfx_TIRE[] = {
-    0x80,
-    0x81,
-    0x88,
-    0x89
+    DECOR_TILE(Tire_TopLeft),
+    DECOR_TILE(Tire_TopRight),
+    DECOR_TILE(Tire_BottomLeft),
+    DECOR_TILE(Tire_BottomRight)
 };
 
 const u16 DecorGfx_STAND[] = {
-    0x6A,
-    0x6B,
-    0x6C,
-    0x6D,
-    0x72,
-    0x73,
-    0x74,
-    0x75
+    DECOR_TILE(Stand_CornerLeft),
+    DECOR_TILE(Stand_MidLeft),
+    DECOR_TILE(Stand_MidRight),
+    DECOR_TILE(Stand_CornerRight),
+    DECOR_TILE(Stand_StairsLeft),
+    DECOR_TILE(Stand_BaseLeft),
+    DECOR_TILE(Stand_BaseRight),
+    DECOR_TILE(Stand_StairsRight)
 };
 
 const u16 DecorGfx_MUD_BALL[] = {
-    0x28
+    DECOR_TILE(MudBall)
 };
 
 const u16 DecorGfx_BREAKABLE_DOOR[] = {
-    0x37,
-    0x3F
+    DECOR_TILE(BreakableDoor_TopClosed),
+    DECOR_TILE(BreakableDoor_BottomClosed)
 };
 
 const u16 DecorGfx_SAND_ORNAMENT[] = {
-    0x85,
-    0x8D
+    DECOR_TILE(SandOrnament_Top),
+    DECOR_TILE(SandOrnament_Base1)
 };
 
 const u16 DecorGfx_SILVER_SHIELD[] = {
-    0xD6,
-    0xDE
+    DECOR_TILE(SilverShield_Top),
+    DECOR_TILE(SilverShield_Base1)
 };
 
 const u16 DecorGfx_GOLD_SHIELD[] = {
-    0x12E,
-    0x136
+    DECOR_TILE(GoldShield_Top),
+    DECOR_TILE(GoldShield_Base1)
 };
 
 const u16 DecorGfx_GLASS_ORNAMENT[] = {
-    0x82,
-    0x8A
+    DECOR_TILE(GlassOrnament_Top),
+    DECOR_TILE(GlassOrnament_Base1)
 };
 
 const u16 DecorGfx_TV[] = {
-    0xF4
+    DECOR_TILE(TV)
 };
 
 const u16 DecorGfx_ROUND_TV[] = {
-    0xF5
+    DECOR_TILE(RoundTV)
 };
 
 const u16 DecorGfx_CUTE_TV[] = {
-    0xF6
+    DECOR_TILE(CuteTV)
 };
 
 const u16 DecorGfx_GLITTER_MAT[] = {
-    0x60
+    DECOR_TILE(GlitterMat)
 };
 
 const u16 DecorGfx_JUMP_MAT[] = {
-    0x61
+    DECOR_TILE(JumpMat)
 };
 
 const u16 DecorGfx_SPIN_MAT[] = {
-    0x62
+    DECOR_TILE(SpinMat)
 };
 
 const u16 DecorGfx_C_LOW_NOTE_MAT[] = {
-    0x78
+    DECOR_TILE(NoteMat_C_Low)
 };
 
 const u16 DecorGfx_D_NOTE_MAT[] = {
-    0x79
+    DECOR_TILE(NoteMat_D)
 };
 
 const u16 DecorGfx_E_NOTE_MAT[] = {
-    0x7A
+    DECOR_TILE(NoteMat_E)
 };
 
 const u16 DecorGfx_F_NOTE_MAT[] = {
-    0x7B
+    DECOR_TILE(NoteMat_F)
 };
 
 const u16 DecorGfx_G_NOTE_MAT[] = {
-    0x7C
+    DECOR_TILE(NoteMat_G)
 };
 
 const u16 DecorGfx_A_NOTE_MAT[] = {
-    0x7D
+    DECOR_TILE(NoteMat_A)
 };
 
 const u16 DecorGfx_B_NOTE_MAT[] = {
-    0x7E
+    DECOR_TILE(NoteMat_B)
 };
 
 const u16 DecorGfx_C_HIGH_NOTE_MAT[] = {
-    0xB3
+    DECOR_TILE(NoteMat_C_High)
 };
 
 const u16 DecorGfx_SURF_MAT[] = {
-    0x42,
-    0x43,
-    0x44,
-    0x4A,
-    0x4B,
-    0x4C,
-    0x52,
-    0x53,
-    0x54
+    DECOR_TILE(SurfMat_TopLeft),
+    DECOR_TILE(SurfMat_TopMid),
+    DECOR_TILE(SurfMat_TopRight),
+    DECOR_TILE(SurfMat_MidLeft),
+    DECOR_TILE(SurfMat_Center),
+    DECOR_TILE(SurfMat_MidRight),
+    DECOR_TILE(SurfMat_BottomLeft),
+    DECOR_TILE(SurfMat_BottomMid),
+    DECOR_TILE(SurfMat_BottomRight)
 };
 
 const u16 DecorGfx_THUNDER_MAT[] = {
-    0x45,
-    0x46,
-    0x47,
-    0x4D,
-    0x4E,
-    0x4F,
-    0x55,
-    0x56,
-    0x57
+    DECOR_TILE(ThunderMat_TopLeft),
+    DECOR_TILE(ThunderMat_TopMid),
+    DECOR_TILE(ThunderMat_TopRight),
+    DECOR_TILE(ThunderMat_MidLeft),
+    DECOR_TILE(ThunderMat_Center),
+    DECOR_TILE(ThunderMat_MidRight),
+    DECOR_TILE(ThunderMat_BottomLeft),
+    DECOR_TILE(ThunderMat_BottomMid),
+    DECOR_TILE(ThunderMat_BottomRight)
 };
 
 const u16 DecorGfx_FIRE_BLAST_MAT[] = {
-    0x5A,
-    0x5B,
-    0x5C,
-    0x5D,
-    0x5E,
-    0x5F,
-    0x65,
-    0x66,
-    0x67
+    DECOR_TILE(FireBlastMat_TopLeft),
+    DECOR_TILE(FireBlastMat_TopMid),
+    DECOR_TILE(FireBlastMat_TopRight),
+    DECOR_TILE(FireBlastMat_MidLeft),
+    DECOR_TILE(FireBlastMat_Center),
+    DECOR_TILE(FireBlastMat_MidRight),
+    DECOR_TILE(FireBlastMat_BottomLeft),
+    DECOR_TILE(FireBlastMat_BottomMid),
+    DECOR_TILE(FireBlastMat_BottomRight)
 };
 
 const u16 DecorGfx_POWDER_SNOW_MAT[] = {
-    0x100,
-    0x101,
-    0x102,
-    0x108,
-    0x109,
-    0x10A,
-    0x110,
-    0x111,
-    0x112
+    DECOR_TILE(PowderSnowMat_TopLeft),
+    DECOR_TILE(PowderSnowMat_TopMid),
+    DECOR_TILE(PowderSnowMat_TopRight),
+    DECOR_TILE(PowderSnowMat_MidLeft),
+    DECOR_TILE(PowderSnowMat_Center),
+    DECOR_TILE(PowderSnowMat_MidRight),
+    DECOR_TILE(PowderSnowMat_BottomLeft),
+    DECOR_TILE(PowderSnowMat_BottomMid),
+    DECOR_TILE(PowderSnowMat_BottomRight)
 };
 
 const u16 DecorGfx_ATTRACT_MAT[] = {
-    0x103,
-    0x104,
-    0x105,
-    0x10B,
-    0x10C,
-    0x10D,
-    0x113,
-    0x114,
-    0x115
+    DECOR_TILE(AttractMat_TopLeft),
+    DECOR_TILE(AttractMat_TopMid),
+    DECOR_TILE(AttractMat_TopRight),
+    DECOR_TILE(AttractMat_MidLeft),
+    DECOR_TILE(AttractMat_Center),
+    DECOR_TILE(AttractMat_MidRight),
+    DECOR_TILE(AttractMat_BottomLeft),
+    DECOR_TILE(AttractMat_BottomMid),
+    DECOR_TILE(AttractMat_BottomRight)
 };
 
 const u16 DecorGfx_FISSURE_MAT[] = {
-    0x106,
-    0x107,
-    0x118,
-    0x10E,
-    0x10F,
-    0x120,
-    0x116,
-    0x117,
-    0x128
+    DECOR_TILE(FissureMat_TopLeft),
+    DECOR_TILE(FissureMat_TopMid),
+    DECOR_TILE(FissureMat_TopRight),
+    DECOR_TILE(FissureMat_MidLeft),
+    DECOR_TILE(FissureMat_Center),
+    DECOR_TILE(FissureMat_MidRight),
+    DECOR_TILE(FissureMat_BottomLeft),
+    DECOR_TILE(FissureMat_BottomMid),
+    DECOR_TILE(FissureMat_BottomRight)
 };
 
 const u16 DecorGfx_SPIKES_MAT[] = {
-    0x119,
-    0x11A,
-    0x11B,
-    0x121,
-    0x122,
-    0x123,
-    0x129,
-    0x12A,
-    0x12B
+    DECOR_TILE(SpikesMat_TopLeft),
+    DECOR_TILE(SpikesMat_TopMid),
+    DECOR_TILE(SpikesMat_TopRight),
+    DECOR_TILE(SpikesMat_MidLeft),
+    DECOR_TILE(SpikesMat_Center),
+    DECOR_TILE(SpikesMat_MidRight),
+    DECOR_TILE(SpikesMat_BottomLeft),
+    DECOR_TILE(SpikesMat_BottomMid),
+    DECOR_TILE(SpikesMat_BottomRight)
 };
 
 const u16 DecorGfx_BALL_POSTER[] = {
-    0x130
+    DECOR_TILE(BallPoster)
 };
 
 const u16 DecorGfx_GREEN_POSTER[] = {
-    0x131
+    DECOR_TILE(GreenPoster)
 };
 
 const u16 DecorGfx_RED_POSTER[] = {
-    0x132
+    DECOR_TILE(RedPoster)
 };
 
 const u16 DecorGfx_BLUE_POSTER[] = {
-    0x133
+    DECOR_TILE(BluePoster)
 };
 
 const u16 DecorGfx_CUTE_POSTER[] = {
-    0x134
+    DECOR_TILE(CutePoster)
 };
 
 const u16 DecorGfx_PIKA_POSTER[] = {
-    0x11C,
-    0x11D
+    DECOR_TILE(PikaPoster_Left),
+    DECOR_TILE(PikaPoster_Right)
 };
 
 const u16 DecorGfx_LONG_POSTER[] = {
-    0x11E,
-    0x11F
+    DECOR_TILE(LongPoster_Left),
+    DECOR_TILE(LongPoster_Right)
 };
 
 const u16 DecorGfx_SEA_POSTER[] = {
-    0x124,
-    0x125
+    DECOR_TILE(SeaPoster_Left),
+    DECOR_TILE(SeaPoster_Right)
 };
 
 const u16 DecorGfx_SKY_POSTER[] = {
-    0x126,
-    0x127
+    DECOR_TILE(SkyPoster_Left),
+    DECOR_TILE(SkyPoster_Right)
 };
 
 const u16 DecorGfx_KISS_POSTER[] = {
-    0x12C,
-    0x12D
+    DECOR_TILE(KissPoster_Left),
+    DECOR_TILE(KissPoster_Right)
 };
 
 const u16 DecorGfx_PICHU_DOLL[] = {
