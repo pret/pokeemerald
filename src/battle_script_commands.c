@@ -10741,7 +10741,7 @@ static void Cmd_tryswapabilities(void) // skill swap
         return;
     }
 
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
