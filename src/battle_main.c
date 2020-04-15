@@ -5055,6 +5055,11 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
         gBattleStruct->dynamicMoveType = 0x80 | TYPE_NORMAL;
         gBattleStruct->ateBoost[battlerAtk] = 1;
     }
+    else if (gBattleMoves[move].flags & FLAG_SOUND
+             && attackerAbility == ABILITY_LIQUID_VOICE)
+    {
+        gBattleStruct->dynamicMoveType = 0x80 | TYPE_WATER;
+    }
 
     // Check if a gem should activate.
     GET_MOVE_TYPE(move, moveType);
