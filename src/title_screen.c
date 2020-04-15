@@ -22,6 +22,7 @@
 #include "graphics.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "sound_check_menu.h"
 
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
 #define VERSION_BANNER_LEFT_X 98
@@ -35,6 +36,9 @@
 #define BERRY_UPDATE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON)
 #define A_B_START_SELECT (A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
+// Sound test combo.
+#define SOUND_TEST_COMBO (B_BUTTON)
+
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 // this file's functions
@@ -47,6 +51,7 @@ static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
+static void CB2_GoToSoundCheckMenu(void);
 static void UpdateLegendaryMarkingColor(u8);
 
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
@@ -61,6 +66,8 @@ static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/r
 static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
+
+
 
 const u16 gIntroWaterDropAlphaBlend[] =
 {
@@ -744,6 +751,12 @@ static void Task_TitleScreenPhase3(u8 taskId)
         FadeOutBGM(4);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         SetMainCallback2(CB2_GoToBerryFixScreen);
+    }   
+    else if ((gMain.heldKeys & SOUND_TEST_COMBO) == SOUND_TEST_COMBO)
+    {
+        FadeOutBGM(4);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLUE);
+        SetMainCallback2(CB2_GoToSoundCheck);
     }
     else
     {
@@ -796,6 +809,12 @@ static void CB2_GoToBerryFixScreen(void)
         m4aMPlayAllStop();
         SetMainCallback2(CB2_InitBerryFixProgram);
     }
+}
+
+static void CB2_GoToSoundCheck(void)
+{
+    if (!UpdatePaletteFade())
+        SetMainCallback2(CB2_StartSoundCheckMenu);
 }
 
 static void UpdateLegendaryMarkingColor(u8 frameNum)
