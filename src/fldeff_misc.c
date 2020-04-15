@@ -948,7 +948,7 @@ static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
     {
         switch (gTasks[taskId].tMetatileID)
         {
-        case METATILE_SecretBase_NoteMat_C:
+        case METATILE_SecretBase_NoteMat_C_Low:
             PlaySE(SE_TOY_C);
             break;
         case METATILE_SecretBase_NoteMat_D:
@@ -969,7 +969,7 @@ static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
         case METATILE_SecretBase_NoteMat_B:
             PlaySE(SE_TOY_B);
             break;
-        case METATILE_SecretBase_NoteMat_C_Sharp:
+        case METATILE_SecretBase_NoteMat_C_High:
             PlaySE(SE_TOY_C1);
             break;
         }
@@ -1260,7 +1260,7 @@ static void Task_WateringBerryTreeAnim_2(u8 taskId)
 
 static void Task_WateringBerryTreeAnim_3(u8 taskId)
 {
-    SetPlayerAvatarTransitionFlags(sub_808BCD0());
+    SetPlayerAvatarTransitionFlags(GetPlayerAvatarFlags());
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }

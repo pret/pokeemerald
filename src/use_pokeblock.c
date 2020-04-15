@@ -937,62 +937,24 @@ void Pokeblock_MenuWindowTextPrint(const u8 *message)
     AddTextPrinterParameterized(2, 1, gStringVar4, 0, 1, 0, NULL);
 }
 
-// This function is a joke.
-#ifdef NONMATCHING
 void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
 {
-    if (a2 != 0)
+    switch (a2)
     {
+    case 1 ... 32767:
+        a2 = 0;
+        // fallthrough
+    case -32768 ... -1:
+        if (a2)
+            dest[(u16)a2] += 0; // something you can't imagine
         StringCopy(dest, sContestStatNames[statId]);
         StringAppend(dest, gText_WasEnhanced);
-    }
-    else
-    {
+        break;
+    case 0:
         StringCopy(dest, gText_NothingChanged);
+        break;
     }
 }
-#else
-NAKED
-void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
-{
-    asm(".syntax unified\n\
-push {r4,lr}\n\
-    adds r4, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r3, r1, 24\n\
-    lsls r2, 16\n\
-    lsrs r0, r2, 16\n\
-    asrs r2, 16\n\
-    cmp r2, 0\n\
-    beq _08167010\n\
-    cmp r2, 0\n\
-    ble _08166FEC\n\
-    movs r0, 0\n\
-_08166FEC:\n\
-    lsls r0, 16\n\
-    ldr r1, =sContestStatNames\n\
-    lsls r0, r3, 2\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    adds r0, r4, 0\n\
-    bl StringCopy\n\
-    ldr r1, =gText_WasEnhanced\n\
-    adds r0, r4, 0\n\
-    bl StringAppend\n\
-    b _08167018\n\
-    .pool\n\
-_08167010:\n\
-    ldr r1, =gText_NothingChanged\n\
-    adds r0, r4, 0\n\
-    bl StringCopy\n\
-_08167018:\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void Pokeblock_GetMonContestStats(struct Pokemon *mon, u8 *data)
 {

@@ -543,23 +543,23 @@ void InitSecretBaseDecorationSprites(void)
     objectEventId = 0;
     if (!CurMapIsSecretBase())
     {
-        decorations = gSaveBlock1Ptr->playerRoomDecor;
-        decorationPositions = gSaveBlock1Ptr->playerRoomDecorPos;
-        numDecorations = 12;
+        decorations = gSaveBlock1Ptr->playerRoomDecorations;
+        decorationPositions = gSaveBlock1Ptr->playerRoomDecorationPositions;
+        numDecorations = DECOR_MAX_PLAYERS_HOUSE;
     }
     else
     {
         u16 secretBaseId = VarGet(VAR_CURRENT_SECRET_BASE);
         decorations = gSaveBlock1Ptr->secretBases[secretBaseId].decorations;
         decorationPositions = gSaveBlock1Ptr->secretBases[secretBaseId].decorationPositions;
-        numDecorations = 16;
+        numDecorations = DECOR_MAX_SECRET_BASE;
     }
 
     for (i = 0; i < numDecorations; i++)
     {
         if (decorations[i] == DECOR_NONE)
             continue;
-        
+
         permission = gDecorations[decorations[i]].permission;
         category = gDecorations[decorations[i]].category;
         if (permission == DECORPERM_SPRITE)
@@ -1176,7 +1176,7 @@ void SecretBasePerStepCallback(u8 taskId)
             VarSet(VAR_SECRET_BASE_STEP_COUNTER, VarGet(VAR_SECRET_BASE_STEP_COUNTER) + 1);
             behavior = MapGridGetMetatileBehaviorAt(x, y);
             tileId = MapGridGetMetatileIdAt(x, y);
-            if (tileId == METATILE_SecretBase_Board_Top || tileId == METATILE_SecretBase_Board_Bottom)
+            if (tileId == METATILE_SecretBase_SolidBoard_Top || tileId == METATILE_SecretBase_SolidBoard_Bottom)
             {
                 if (sInFriendSecretBase == TRUE)
                 {
@@ -1204,13 +1204,13 @@ void SecretBasePerStepCallback(u8 taskId)
                 if (sInFriendSecretBase == TRUE)
                     VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_TENT);
             }
-            else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_RightCorner) 
-                  || (behavior == MB_IMPASSABLE_NORTHWEST && MapGridGetMetatileIdAt(x, y) == METATILE_SecretBase_Stand_LeftCorner))
+            else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_CornerRight) 
+                  || (behavior == MB_IMPASSABLE_NORTHWEST && MapGridGetMetatileIdAt(x, y) == METATILE_SecretBase_Stand_CornerLeft))
             {
                 if (sInFriendSecretBase == TRUE)
                     VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_STAND);
             }
-            else if (behavior == MB_IMPASSABLE_WEST_AND_EAST && tileId == METATILE_SecretBase_Slide_Stairs)
+            else if (behavior == MB_IMPASSABLE_WEST_AND_EAST && tileId == METATILE_SecretBase_Slide_StairLanding)
             {
                 if (sInFriendSecretBase == TRUE)
                 {
@@ -1218,7 +1218,7 @@ void SecretBasePerStepCallback(u8 taskId)
                     VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_DECLINED_SLIDE);
                 }
             }
-            else if (behavior == MB_SLIDE_SOUTH && tileId == METATILE_SecretBase_Slide)
+            else if (behavior == MB_SLIDE_SOUTH && tileId == METATILE_SecretBase_Slide_SlideTop)
             {
                 if (sInFriendSecretBase == TRUE)
                 {
@@ -1846,12 +1846,12 @@ void CheckInteractedWithFriendsFurnitureBottom(void)
         case METATILE_SecretBase_RedPlant_Base2:
         case METATILE_SecretBase_TropicalPlant_Base1:
         case METATILE_SecretBase_TropicalPlant_Base2:
-        case METATILE_SecretBase_PrettyFlower_Base1:
-        case METATILE_SecretBase_PrettyFlower_Base2:
-        case METATILE_SecretBase_ColorfulFlowers_BaseLeft1:
-        case METATILE_SecretBase_ColorfulFlowers_BaseRight1:
-        case METATILE_SecretBase_ColorfulFlowers_BaseLeft2:
-        case METATILE_SecretBase_ColorfulFlowers_BaseRight2:
+        case METATILE_SecretBase_PrettyFlowers_Base1:
+        case METATILE_SecretBase_PrettyFlowers_Base2:
+        case METATILE_SecretBase_ColorfulPlant_BaseLeft1:
+        case METATILE_SecretBase_ColorfulPlant_BaseRight1:
+        case METATILE_SecretBase_ColorfulPlant_BaseLeft2:
+        case METATILE_SecretBase_ColorfulPlant_BaseRight2:
         case METATILE_SecretBase_BigPlant_BaseLeft1:
         case METATILE_SecretBase_BigPlant_BaseRight1:
         case METATILE_SecretBase_BigPlant_BaseLeft2:

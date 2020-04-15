@@ -8927,7 +8927,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
         for (i = 0; i < gBattlersCount; i++)
         {
             if (gBattlerByTurnOrder[i] == gBattlerTarget)
-                gActionsByTurnOrder[i] = 11;
+                gActionsByTurnOrder[i] = B_ACTION_TRY_FINISH;
         }
 
         gCurrentMove = MOVE_PURSUIT;
@@ -10007,7 +10007,7 @@ static void Cmd_pursuitrelated(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
         && !(gAbsentBattlerFlags & gBitTable[gActiveBattler])
-        && gChosenActionByBattler[gActiveBattler] == 0
+        && gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
         && gChosenMoveByBattler[gActiveBattler] == MOVE_PURSUIT)
     {
         gActionsByTurnOrder[gActiveBattler] = 11;
@@ -10325,7 +10325,7 @@ static void Cmd_displaydexinfo(void)
         if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
-            gBattleCommunication[TASK_ID] = CreateDexDisplayMonDataTask(SpeciesToNationalPokedexNum(species),
+            gBattleCommunication[TASK_ID] = DisplayCaughtMonDexPage(SpeciesToNationalPokedexNum(species),
                                                                         gBattleMons[gBattlerTarget].otId,
                                                                         gBattleMons[gBattlerTarget].personality);
             gBattleCommunication[0]++;

@@ -86,6 +86,40 @@ $(TILESETGFXDIR)/secondary/pacifidlog/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/sootopolis/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 328
 
+SOOTOPOLISANIMDIR := $(TILESETGFXDIR)/secondary/sootopolis/anim
+
+$(SOOTOPOLISANIMDIR)/stormy_water/0.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/0_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/0_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/1.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/1_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/1_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/2.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/2_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/2_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/3.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/3_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/3_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/4.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/4_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/4_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/5.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/5_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/5_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/6.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/6_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/6_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/7.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/7_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/7_groudon.4bpp 
+	@cat $^ >$@
+
 $(TILESETGFXDIR)/secondary/battle_frontier_outside_west/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 508
 
@@ -357,9 +391,9 @@ $(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
-										  $(UNUSEDGFXDIR)/yellow_frame.bin \
-										  $(UNUSEDGFXDIR)/green_frame.bin \
-										  $(UNUSEDGFXDIR)/blank_frame.bin
+                                          $(UNUSEDGFXDIR)/yellow_frame.bin \
+                                          $(UNUSEDGFXDIR)/green_frame.bin \
+                                          $(UNUSEDGFXDIR)/blank_frame.bin
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
