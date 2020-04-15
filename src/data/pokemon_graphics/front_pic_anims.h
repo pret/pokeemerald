@@ -14016,3 +14016,5 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(LYCANROC_DUSK),
 };
 
+#undef ANIM_CMD
+#undef ANIM_CMD_FULL

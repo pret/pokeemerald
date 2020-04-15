@@ -42,7 +42,7 @@ void TraderSetup(void)
     for (i = 0; i < 4; i++)
     {
         StringCopy(trader->playerNames[i], sDefaultTraderNames[i]);
-        trader->decorIds[i] = sDefaultTraderDecorations[i];
+        trader->decorations[i] = sDefaultTraderDecorations[i];
         trader->language[i] = GAME_LANGUAGE;
     }
 }
@@ -64,10 +64,10 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     for (i = 0; i < 4; i++)
     {
         s32 curWidth;
-        if (trader->decorIds[i] > NUM_DECORATIONS)
+        if (trader->decorations[i] > NUM_DECORATIONS)
             curWidth = fiveMarksWidth;
         else
-            curWidth = GetStringWidth(1, gDecorations[trader->decorIds[i]].name, 0);
+            curWidth = GetStringWidth(1, gDecorations[trader->decorations[i]].name, 0);
         if (curWidth > windowWidth)
             windowWidth = curWidth;
     }
@@ -76,10 +76,10 @@ void CreateAvailableDecorationsMenu(u8 taskId)
     DrawStdFrameWithCustomTileAndPalette(data[3], FALSE, 0x214, 14);
     for (i = 0; i < 4; i++)
     {
-        if (trader->decorIds[i] > NUM_DECORATIONS)
+        if (trader->decorations[i] > NUM_DECORATIONS)
             AddTextPrinterParameterized(data[3], 1, gText_FiveMarks, 8, 16 * i + 1, 255, NULL);
         else
-            AddTextPrinterParameterized(data[3], 1, gDecorations[trader->decorIds[i]].name, 8, 16 * i + 1, 255, NULL);
+            AddTextPrinterParameterized(data[3], 1, gDecorations[trader->decorations[i]].name, 8, 16 * i + 1, 255, NULL);
     }
     AddTextPrinterParameterized(data[3], 1, gText_Exit, 8, 16 * i + 1, 255, NULL);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[3], 5, 0);
@@ -125,7 +125,7 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
             gSpecialVar_0x8005 = input;
             StringCopy(gStringVar1, trader->playerNames[input]);
             ConvertInternationalString(gStringVar1, trader->language[input]);
-            Task_BufferDecorSelectionAndCloseWindow(taskId, trader->decorIds[input]);
+            Task_BufferDecorSelectionAndCloseWindow(taskId, trader->decorations[input]);
             break;
     }
 }
@@ -167,7 +167,7 @@ void ScrSpecial_TraderMenuGiveDecoration(void)
     CreateTask(ShowDecorationCategoriesWindow, 0);
 }
 
-void sub_8133DA0(u8 taskId)
+void DecorationItemsMenuAction_Trade(u8 taskId)
 {
     if (IsSelectedDecorInThePC() == TRUE)
     {
@@ -197,7 +197,7 @@ void ScrSpecial_TraderDoDecorationTrade(void)
     DecorationRemove(gSpecialVar_0x8006);
     DecorationAdd(gSpecialVar_0x8004);
     StringCopy(trader->playerNames[gSpecialVar_0x8005], gSaveBlock2Ptr->playerName);
-    trader->decorIds[gSpecialVar_0x8005] = gSpecialVar_0x8006;
+    trader->decorations[gSpecialVar_0x8005] = gSpecialVar_0x8006;
     trader->language[gSpecialVar_0x8005] = GAME_LANGUAGE;
     trader->alreadyTraded = TRUE;
 }

@@ -586,7 +586,7 @@ u32 sub_81D0A6C(s32 state)
             ShowBg(1);
             ShowBg(2);
             HideBg(3);
-            sub_81C7AC0(1);
+            PokenavFadeScreen(1);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -604,7 +604,7 @@ u32 sub_81D0C54(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        sub_81C7AC0(0);
+        PokenavFadeScreen(0);
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsPaletteFadeActive())
