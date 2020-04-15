@@ -221,9 +221,9 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 static void ItemUseOnFieldCB_Bike(u8 taskId)
 {
     if (!ItemId_GetSecondaryId(gSpecialVar_ItemId))
-        GetOnOffBike(2);
+        GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE);
     else
-        GetOnOffBike(4);
+        GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
     ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
     DestroyTask(taskId);

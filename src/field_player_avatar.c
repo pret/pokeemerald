@@ -59,8 +59,8 @@ static bool8 ForcedMovement_SlideSouth(void);
 static bool8 ForcedMovement_SlideNorth(void);
 static bool8 ForcedMovement_SlideWest(void);
 static bool8 ForcedMovement_SlideEast(void);
-static bool8 ForcedMovement_0xBB(void);
-static bool8 ForcedMovement_0xBC(void);
+static bool8 ForcedMovement_MatJump(void);
+static bool8 ForcedMovement_MatSpin(void);
 static bool8 ForcedMovement_MuddySlope(void);
 
 static void MovePlayerNotOnBike(u8, u16);
@@ -99,10 +99,10 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 a);
 static void sub_808C280(struct ObjectEvent *);
 
 static void StartStrengthAnim(u8, u8);
-static void Task_BumpBoulder(u8 taskId);
-static u8 sub_808C3A4(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
-static u8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
-static u8 sub_808C484(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
+static void Task_PushBoulder(u8 taskId);
+static u8 PushBoulder_Start(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
+static u8 PushBoulder_Move(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
+static u8 PushBoulder_End(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
 
 static void DoPlayerMatJump(void);
 static void DoPlayerAvatarSecretBaseMatJump(u8 taskId);
@@ -182,8 +182,8 @@ static bool8 (*const sForcedMovementFuncs[])(void) =
     ForcedMovement_SlideWest,
     ForcedMovement_SlideEast,
     ForcedMovement_PushedSouthByCurrent,
-    ForcedMovement_0xBB,
-    ForcedMovement_0xBC,
+    ForcedMovement_MatJump,
+    ForcedMovement_MatSpin,
     ForcedMovement_MuddySlope,
 };
 
@@ -211,16 +211,16 @@ static const u8 sAcroBikeTrickCollisionTypes[] = {
     COLLISION_HORIZONTAL_RAIL,
 };
 
-static void (*const gUnknown_084974B8[])(struct ObjectEvent *) =
+static void (*const sPlayerAvatarTransitionFuncs[])(struct ObjectEvent *) =
 {
-    PlayerAvatarTransition_Normal,
-    PlayerAvatarTransition_MachBike,
-    PlayerAvatarTransition_AcroBike,
-    PlayerAvatarTransition_Surfing,
-    PlayerAvatarTransition_Underwater,
-    PlayerAvatarTransition_ReturnToField,
-    PlayerAvatarTransition_Dummy,
-    PlayerAvatarTransition_Dummy,
+    [PLAYER_AVATAR_STATE_NORMAL]     = PlayerAvatarTransition_Normal,
+    [PLAYER_AVATAR_STATE_MACH_BIKE]  = PlayerAvatarTransition_MachBike,
+    [PLAYER_AVATAR_STATE_ACRO_BIKE]  = PlayerAvatarTransition_AcroBike,
+    [PLAYER_AVATAR_STATE_SURFING]    = PlayerAvatarTransition_Surfing,
+    [PLAYER_AVATAR_STATE_UNDERWATER] = PlayerAvatarTransition_Underwater,
+    [PLAYER_AVATAR_STATE_FIELD_MOVE] = PlayerAvatarTransition_ReturnToField,
+    [PLAYER_AVATAR_STATE_FISHING]    = PlayerAvatarTransition_Dummy,
+    [PLAYER_AVATAR_STATE_WATERING]   = PlayerAvatarTransition_Dummy,
 };
 
 static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) =
@@ -259,23 +259,23 @@ static const u8 sFRLGAvatarGfxIds[] = {OBJ_EVENT_GFX_RED, OBJ_EVENT_GFX_LEAF};
 
 static const u8 sRSAvatarGfxIds[] = {OBJ_EVENT_GFX_LINK_RS_BRENDAN, OBJ_EVENT_GFX_LINK_RS_MAY};
 
-static const u8 gUnknown_0849750C[2][5][2] =
+static const u8 sPlayerAvatarGfxToStateFlag[2][5][2] =
 {
-    //male
+    [MALE] =
     {
-        {OBJ_EVENT_GFX_BRENDAN_NORMAL, 1},
-        {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE, 2},
-        {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE, 4},
-        {OBJ_EVENT_GFX_BRENDAN_SURFING, 8},
-        {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, 16},
+        {OBJ_EVENT_GFX_BRENDAN_NORMAL,     PLAYER_AVATAR_FLAG_ON_FOOT},
+        {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,  PLAYER_AVATAR_FLAG_MACH_BIKE},
+        {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE,  PLAYER_AVATAR_FLAG_ACRO_BIKE},
+        {OBJ_EVENT_GFX_BRENDAN_SURFING,    PLAYER_AVATAR_FLAG_SURFING},
+        {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
     },
-    //female
+    [FEMALE] =
     {
-        {OBJ_EVENT_GFX_MAY_NORMAL, 1},
-        {OBJ_EVENT_GFX_MAY_MACH_BIKE, 2},
-        {OBJ_EVENT_GFX_MAY_ACRO_BIKE, 4},
-        {OBJ_EVENT_GFX_MAY_SURFING, 8},
-        {OBJ_EVENT_GFX_MAY_UNDERWATER, 16},
+        {OBJ_EVENT_GFX_MAY_NORMAL,         PLAYER_AVATAR_FLAG_ON_FOOT},
+        {OBJ_EVENT_GFX_MAY_MACH_BIKE,      PLAYER_AVATAR_FLAG_MACH_BIKE},
+        {OBJ_EVENT_GFX_MAY_ACRO_BIKE,      PLAYER_AVATAR_FLAG_ACRO_BIKE},
+        {OBJ_EVENT_GFX_MAY_SURFING,        PLAYER_AVATAR_FLAG_SURFING},
+        {OBJ_EVENT_GFX_MAY_UNDERWATER,     PLAYER_AVATAR_FLAG_UNDERWATER},
     }
 };
 
@@ -287,11 +287,11 @@ static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) =  //Duplicate of 
     MetatileBehavior_IsEastArrowWarp,
 };
 
-static bool8 (*const gUnknown_08497530[])(struct Task *, struct ObjectEvent *, struct ObjectEvent *) =
+static bool8 (*const sPushBoulderFuncs[])(struct Task *, struct ObjectEvent *, struct ObjectEvent *) =
 {
-    sub_808C3A4,
-    do_boulder_dust,
-    sub_808C484,
+    PushBoulder_Start,
+    PushBoulder_Move,
+    PushBoulder_End,
 };
 
 static bool8 (*const sPlayerAvatarSecretBaseMatJump[])(struct Task *, struct ObjectEvent *) =
@@ -547,13 +547,13 @@ static bool8 ForcedMovement_SlideEast(void)
     return ForcedMovement_Slide(DIR_EAST, PlayerGoSpeed2);
 }
 
-static bool8 ForcedMovement_0xBB(void)
+static bool8 ForcedMovement_MatJump(void)
 {
     DoPlayerMatJump();
     return TRUE;
 }
 
-static bool8 ForcedMovement_0xBC(void)
+static bool8 ForcedMovement_MatSpin(void)
 {
     DoPlayerMatSpin();
     return TRUE;
@@ -807,23 +807,23 @@ bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction)
 
 void SetPlayerAvatarTransitionFlags(u16 transitionFlags)
 {
-    gPlayerAvatar.unk1 |= transitionFlags;
+    gPlayerAvatar.transitionFlags |= transitionFlags;
     DoPlayerAvatarTransition();
 }
 
 static void DoPlayerAvatarTransition(void)
 {
     u8 i;
-    u8 flags = gPlayerAvatar.unk1;
+    u8 flags = gPlayerAvatar.transitionFlags;
 
     if (flags != 0)
     {
-        for (i = 0; i < 8; i++, flags >>= 1)
+        for (i = 0; i < ARRAY_COUNT(sPlayerAvatarTransitionFuncs); i++, flags >>= 1)
         {
             if (flags & 1)
-                gUnknown_084974B8[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
+                sPlayerAvatarTransitionFuncs[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
         }
-        gPlayerAvatar.unk1 = 0;
+        gPlayerAvatar.transitionFlags = 0;
     }
 }
 
@@ -1079,23 +1079,23 @@ void PlayerAcroTurnJump(u8 direction)
     PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
 }
 
-void sub_808B980(u8 direction)
+void PlayerWheelieInPlace(u8 direction)
 {
     PlaySE(SE_WALL_HIT);
     PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
 }
 
-void sub_808B9A4(u8 direction)
+void PlayerPopWheelieWhileMoving(u8 direction)
 {
     PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-void sub_808B9BC(u8 direction)
+void PlayerWheelieMove(u8 direction)
 {
     PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-void sub_808B9D4(u8 direction)
+void PlayerEndWheelieWhileMoving(u8 direction)
 {
     PlayerSetAnimId(GetAcroEndWheelieMoveDirectionMovementAction(direction), 2);
 }
@@ -1186,12 +1186,12 @@ void sub_808BC90(s16 x, s16 y)
     MoveObjectEventToMapCoords(&gObjectEvents[gPlayerAvatar.objectEventId], x, y);
 }
 
-u8 TestPlayerAvatarFlags(u8 a)
+u8 TestPlayerAvatarFlags(u8 flag)
 {
-    return gPlayerAvatar.flags & a;
+    return gPlayerAvatar.flags & flag;
 }
 
-u8 sub_808BCD0(void)
+u8 GetPlayerAvatarFlags(void)
 {
     return gPlayerAvatar.flags;
 }
@@ -1335,32 +1335,32 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
 {
     u8 i;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
-        if (gUnknown_0849750C[gender][i][0] == graphicsId)
-            return gUnknown_0849750C[gender][i][1];
+        if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)
+            return sPlayerAvatarGfxToStateFlag[gender][i][1];
     }
-    return 1;
+    return PLAYER_AVATAR_FLAG_ON_FOOT;
 }
 
 u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
 {
     u8 i;
-    u8 r5 = gPlayerAvatar.flags;
+    u8 flags = gPlayerAvatar.flags;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
-        if (gUnknown_0849750C[gPlayerAvatar.gender][i][1] & r5)
-            return gUnknown_0849750C[gPlayerAvatar.gender][i][0];
+        if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & flags)
+            return sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][0];
     }
     return 0;
 }
 
-void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 b)
+void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 transitionFlag)
 {
-    u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
+    u8 stateFlag = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
 
-    gPlayerAvatar.unk1 |= unk | b;
+    gPlayerAvatar.transitionFlags |= stateFlag | transitionFlag;
     DoPlayerAvatarTransition();
 }
 
@@ -1384,7 +1384,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerObjEventTemplate.flagId = 0;
     objectEventId = SpawnSpecialObjectEvent(&playerObjEventTemplate);
     objectEvent = &gObjectEvents[objectEventId];
-    objectEvent->isPlayer = 1;
+    objectEvent->isPlayer = TRUE;
     objectEvent->warpArrowSpriteId = CreateWarpArrowSprite();
     ObjectEventTurn(objectEvent, direction);
     ClearPlayerAvatarInfo();
@@ -1415,7 +1415,7 @@ void sub_808C15C(u8 direction)
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingDirectionAnimNum(direction));
 }
 
-void sub_808C1B4(u8 direction)
+void PlayerUseAcroBikeOnBumpySlope(u8 direction)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetAcroWheelieDirectionAnimNum(direction));
@@ -1453,22 +1453,22 @@ static void sub_808C280(struct ObjectEvent *objectEvent)
 
 static void StartStrengthAnim(u8 a, u8 b)
 {
-    u8 taskId = CreateTask(Task_BumpBoulder, 0xFF);
+    u8 taskId = CreateTask(Task_PushBoulder, 0xFF);
 
     gTasks[taskId].data[1] = a;
     gTasks[taskId].data[2] = b;
-    Task_BumpBoulder(taskId);
+    Task_PushBoulder(taskId);
 }
 
-static void Task_BumpBoulder(u8 taskId)
+static void Task_PushBoulder(u8 taskId)
 {
-    while (gUnknown_08497530[gTasks[taskId].data[0]](&gTasks[taskId],
+    while (sPushBoulderFuncs[gTasks[taskId].data[0]](&gTasks[taskId],
                                                      &gObjectEvents[gPlayerAvatar.objectEventId],
                                                      &gObjectEvents[gTasks[taskId].data[1]]))
         ;
 }
 
-static bool8 sub_808C3A4(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 PushBoulder_Start(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
@@ -1476,7 +1476,7 @@ static bool8 sub_808C3A4(struct Task *task, struct ObjectEvent *playerObject, st
     return FALSE;
 }
 
-static bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 PushBoulder_Move(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     if (ObjectEventIsHeldMovementActive(playerObject))
     {
@@ -1506,7 +1506,7 @@ static bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject
     return FALSE;
 }
 
-static bool8 sub_808C484(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+static bool8 PushBoulder_End(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
 {
     if (ObjectEventCheckHeldMovementStatus(playerObject)
      && ObjectEventCheckHeldMovementStatus(strengthObject))
@@ -1515,7 +1515,7 @@ static bool8 sub_808C484(struct Task *task, struct ObjectEvent *playerObject, st
         ObjectEventClearHeldMovementIfFinished(strengthObject);
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
-        DestroyTask(FindTaskIdByFunc(Task_BumpBoulder));
+        DestroyTask(FindTaskIdByFunc(Task_PushBoulder));
     }
     return FALSE;
 }
@@ -1545,7 +1545,7 @@ static u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEvent
         if (task->data[1] > 1)
         {
             gPlayerAvatar.preventStep = FALSE;
-            gPlayerAvatar.unk1 |= 0x20;
+            gPlayerAvatar.transitionFlags |= PLAYER_AVATAR_FLAG_5;
             DestroyTask(FindTaskIdByFunc(DoPlayerAvatarSecretBaseMatJump));
         }
     }

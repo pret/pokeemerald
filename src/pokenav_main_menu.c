@@ -13,28 +13,6 @@
 #include "menu.h"
 #include "dma3.h"
 
-enum
-{
-    POKENAV_GFX_MAIN_MENU,
-    POKENAV_GFX_CONDITION_MENU,
-    POKENAV_GFX_RIBBONS_MENU,
-    POKENAV_GFX_MATCH_CALL_MENU,
-    // One of these is for the zoomed-in map, and the other is for the
-    // zoomed-out map. Don't know which is which yet.
-    POKENAV_GFX_MAP_MENU_UNK0,
-    POKENAV_GFX_MAP_MENU_UNK1,
-    POKENAV_GFX_PARTY_MENU,
-    POKENAV_GFX_SEARCH_MENU,
-    POKENAV_GFX_COOL_MENU,
-    POKENAV_GFX_BEAUTY_MENU,
-    POKENAV_GFX_CUTE_MENU,
-    POKENAV_GFX_SMART_MENU,
-    POKENAV_GFX_TOUGH_MENU,
-    POKENAV_GFX_MENUS_END,
-};
-
-#define POKENAV_GFX_SUBMENUS_START POKENAV_GFX_PARTY_MENU
-
 struct PokenavMainMenuResources
 {
     void (*unk0)(u32);
@@ -42,7 +20,7 @@ struct PokenavMainMenuResources
     u32 unk8;
     u32 currentTaskId;
     u32 helpBarWindowId;
-    u32 unk14;
+    u32 palettes;
     struct Sprite *spinningPokenav;
     struct Sprite *leftHeaderSprites[2];
     struct Sprite *submenuLeftHeaderSprites[2];
@@ -174,12 +152,12 @@ static const struct CompressedSpriteSheet sPokenavMenuLeftHeaderSpriteSheets[] =
         .size = 0x20,
         .tag = 4
     },
-    [POKENAV_GFX_MAP_MENU_UNK0] = {
+    [POKENAV_GFX_MAP_MENU_ZOOMED_OUT] = {
         .data = gPokenavLeftHeaderHoennMap_Gfx,
         .size = 0x20,
         .tag = 0
     },
-    [POKENAV_GFX_MAP_MENU_UNK1] = {
+    [POKENAV_GFX_MAP_MENU_ZOOMED_IN] = {
         .data = gPokenavLeftHeaderHoennMap_Gfx,
         .size = 0x40,
         .tag = 0
@@ -343,7 +321,7 @@ bool32 WaitForPokenavShutdownFade(void)
 {
     if (!gPaletteFade.active)
     {
-        sub_81C99D4();
+        FreeMenuHandlerSubstruct2();
         CleanupPokenavMainMenuResources();
         FreeAllWindowBuffers();
         return FALSE;
@@ -629,17 +607,17 @@ _081C7AAE:\n\
     .syntax divided");
 }
 
-void sub_81C7AC0(s32 a0)
+void PokenavFadeScreen(s32 fadeType)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    switch (a0)
+    switch (fadeType)
     {
     case 0:
-        BeginNormalPaletteFade(structPtr->unk14, -2, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(structPtr->palettes, -2, 0, 16, RGB_BLACK);
         break;
     case 1:
-        BeginNormalPaletteFade(structPtr->unk14, -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(structPtr->palettes, -2, 16, 0, RGB_BLACK);
         break;
     case 2:
         BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
@@ -708,7 +686,7 @@ static void InitPokenavMainMenuResources(void)
         LoadCompressedSpriteSheet(&gSpinningPokenavSpriteSheet[i]);
 
     Pokenav_AllocAndLoadPalettes(gSpinningNavgearPalettes);
-    structPtr->unk14 = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
+    structPtr->palettes = ~1 & ~(0x10000 << IndexOfSpritePaletteTag(0));
     spriteId = CreateSprite(&sSpinningPokenavSpriteTemplate, 220, 12, 0);
     structPtr->spinningPokenav = &gSprites[spriteId];
 }
@@ -772,61 +750,61 @@ static void InitHoennMapHeaderSprites(void)
     }
 }
 
-void LoadLeftHeaderGfxForIndex(u32 arg0)
+void LoadLeftHeaderGfxForIndex(u32 menuGfxId)
 {
-    if (arg0 < POKENAV_GFX_SUBMENUS_START)
-        LoadLeftHeaderGfxForMenu(arg0);
+    if (menuGfxId < POKENAV_GFX_SUBMENUS_START)
+        LoadLeftHeaderGfxForMenu(menuGfxId);
     else
-        LoadLeftHeaderGfxForSubMenu(arg0 - POKENAV_GFX_SUBMENUS_START);
+        LoadLeftHeaderGfxForSubMenu(menuGfxId - POKENAV_GFX_SUBMENUS_START);
 }
 
-void sub_81C7E14(u32 arg0)
+void sub_81C7E14(u32 menuGfxId)
 {
     struct PokenavMainMenuResources *structPtr = GetSubstructPtr(0);
 
-    if (arg0 == 4)
+    if (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT)
         structPtr->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + 32;
     else
         structPtr->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + 64;
 }
 
-static void LoadLeftHeaderGfxForMenu(u32 index)
+static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
 {
     struct PokenavMainMenuResources *structPtr;
     u32 size, tag;
 
-    if (index >= POKENAV_GFX_SUBMENUS_START)
+    if (menuGfxId >= POKENAV_GFX_SUBMENUS_START)
         return;
 
     structPtr = GetSubstructPtr(0);
-    tag = sPokenavMenuLeftHeaderSpriteSheets[index].tag;
-    size = GetDecompressedDataSize(sPokenavMenuLeftHeaderSpriteSheets[index].data);
+    tag = sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].tag;
+    size = GetDecompressedDataSize(sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].data);
     LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(1) * 16) + 0x100, 0x20);
-    LZ77UnCompWram(sPokenavMenuLeftHeaderSpriteSheets[index].data, gDecompressionBuffer);
+    LZ77UnCompWram(sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].data, gDecompressionBuffer);
     RequestDma3Copy(gDecompressionBuffer, (void *)VRAM + 0x10000 + (GetSpriteTileStartByTag(2) * 32), size, 1);
-    structPtr->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sPokenavMenuLeftHeaderSpriteSheets[index].size;
+    structPtr->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].size;
 
-    if (index == POKENAV_GFX_MAP_MENU_UNK0 || index == POKENAV_GFX_MAP_MENU_UNK1)
+    if (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT || menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_IN)
         structPtr->leftHeaderSprites[1]->pos2.x = 56;
     else
         structPtr->leftHeaderSprites[1]->pos2.x = 64;
 }
 
-static void LoadLeftHeaderGfxForSubMenu(u32 arg0)
+static void LoadLeftHeaderGfxForSubMenu(u32 menuGfxId)
 {
     u32 size, tag;
 
-    if (arg0 >= POKENAV_GFX_MENUS_END - POKENAV_GFX_SUBMENUS_START)
+    if (menuGfxId >= POKENAV_GFX_MENUS_END - POKENAV_GFX_SUBMENUS_START)
         return;
 
-    tag = sPokenavSubMenuLeftHeaderSpriteSheets[arg0].tag;
-    size = GetDecompressedDataSize(sPokenavSubMenuLeftHeaderSpriteSheets[arg0].data);
+    tag = sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].tag;
+    size = GetDecompressedDataSize(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data);
     LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(2) * 16) + 0x100, 0x20);
-    LZ77UnCompWram(sPokenavSubMenuLeftHeaderSpriteSheets[arg0].data, &gDecompressionBuffer[0x1000]);
+    LZ77UnCompWram(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data, &gDecompressionBuffer[0x1000]);
     RequestDma3Copy(&gDecompressionBuffer[0x1000], (void *)VRAM + 0x10800 + (GetSpriteTileStartByTag(2) * 32), size, 1);
 }
 
-void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2)
+void sub_81C7FA0(u32 menuGfxId, bool32 arg1, bool32 arg2)
 {
     u32 var;
 
@@ -835,7 +813,7 @@ void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2)
     else
         var = 0x10;
 
-    if (arg0 < 6)
+    if (menuGfxId < POKENAV_GFX_SUBMENUS_START)
         ShowLeftHeaderSprites(var, arg2);
     else
         ShowLeftHeaderSubmenuSprites(var, arg2);

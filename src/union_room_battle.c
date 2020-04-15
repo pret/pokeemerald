@@ -451,15 +451,15 @@ void sub_801AAD4(void)
 {
     s32 i;
     sub_8014210(10);
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < UNION_ROOM_PARTY_SIZE; i++)
     {
         gEnemyParty[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1];
     }
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         ZeroMonData(&gPlayerParty[i]);
     }
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < UNION_ROOM_PARTY_SIZE; i++)
     {
         gPlayerParty[i] = gEnemyParty[i];
     }
