@@ -7391,3 +7391,6 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(UNOWN_EMARK),
     ANIM_CMD(UNOWN_QMARK),
 };
+
+#undef ANIM_CMD
+#undef ANIM_CMD_FULL
