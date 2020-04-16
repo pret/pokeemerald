@@ -4372,6 +4372,20 @@ Move_PARTING_SHOT:
 	end
 	
 Move_TOPSY_TURVY:
+	loadspritegfx ANIM_TAG_SWEAT_DROP
+	setalpha 12, 8
+	createsprite gSimplePaletteBlendSpriteTemplate ANIM_TARGET, 2, 1, 2, 0, 4, RGB_BLACK
+	waitforvisualfinish
+	createvisualtask AnimTask_RotateVertically, 2, ANIM_TARGET, 768
+	createsprite gSimplePaletteBlendSpriteTemplate ANIM_TARGET, 2, 4, 5, 0, 8, RGB(9, 0, 16)
+	playsewithpan SE_HI_TURUN, SOUND_PAN_TARGET
+	delay 116
+	createsprite gSimplePaletteBlendSpriteTemplate ANIM_TARGET, 2, 4, 5, 8, 0, RGB(9, 0, 16)
+	playsewithpan SE_RU_HYUU, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate ANIM_TARGET, 2, 1, 2, 4, 0, RGB_BLACK
+	waitforvisualfinish
+	blendoff
 	end
 	
 Move_DRAINING_KISS:
