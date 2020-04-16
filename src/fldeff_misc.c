@@ -72,7 +72,7 @@ static const u8 gSpriteImage_858DB78[] = INCBIN_U8("graphics/unknown/858E588/4.4
 
 static const u8 gUnusedEmptySpace_858DBF8[32] = {0};
 
-static const u16 gFieldEffectObjectPalette7[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_07.gbapal");
+static const u16 gFieldEffectObjectPalette7[] = INCBIN_U16("graphics/field_effects/palettes/07.gbapal");
 static const u8 gSpriteImage_858DC38[] = INCBIN_U8("graphics/unknown/858E5D8/0.4bpp");
 static const u8 gSpriteImage_858DCB8[] = INCBIN_U8("graphics/unknown/858E5D8/1.4bpp");
 static const u8 gSpriteImage_858DD38[] = INCBIN_U8("graphics/unknown/858E5D8/2.4bpp");
@@ -84,7 +84,7 @@ static const u8 gSpriteImage_858DFB8[] = INCBIN_U8("graphics/unknown/858E5B0/2.4
 static const u8 gSpriteImage_858E038[] = INCBIN_U8("graphics/unknown/858E5B0/3.4bpp");
 static const u8 gSpriteImage_858E0B8[] = INCBIN_U8("graphics/unknown/858E5B0/4.4bpp");
 static const u8 gSpriteImage_858E138[] = INCBIN_U8("graphics/unknown/858E5B0/5.4bpp");
-static const u16 gFieldEffectObjectPalette8[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_08.gbapal");
+static const u16 gFieldEffectObjectPalette8[] = INCBIN_U16("graphics/field_effects/palettes/08.gbapal");
 static const u8 gSpriteImage_858E1D8[] = INCBIN_U8("graphics/unknown/858E674/0.4bpp");
 static const u8 gSpriteImage_858E2D8[] = INCBIN_U8("graphics/unknown/858E674/1.4bpp");
 static const u8 gSpriteImage_858E3D8[] = INCBIN_U8("graphics/unknown/858E674/2.4bpp");
@@ -285,7 +285,7 @@ static const struct SpriteTemplate gUnknown_0858E68C =
     .callback = SpriteCB_SandPillar_0,
 };
 
-// This uses one of the secret base palettes, so there is no "field_effect_object_palette_09.pal" file.
+// This uses one of the secret base palettes, so there is no "graphics/field_effects/palettes/09.pal" file.
 const struct SpritePalette gFieldEffectObjectPaletteInfo9 = {gTilesetPalettes_SecretBase[5], 0x100E};
 
 static const u8 gSpriteImage_858E6AC[] = INCBIN_U8("graphics/unknown/858E84C/0.4bpp");
@@ -319,7 +319,7 @@ static const struct SpriteTemplate gUnknown_0858E880 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1000,
-    .oam = &gEventObjectBaseOam_32x8,
+    .oam = &gObjectEventBaseOam_32x8,
     .anims = gSpriteAnimTable_858E87C,
     .images = gUnknown_0858E84C,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -948,7 +948,7 @@ static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
     {
         switch (gTasks[taskId].tMetatileID)
         {
-        case METATILE_SecretBase_NoteMat_C:
+        case METATILE_SecretBase_NoteMat_C_Low:
             PlaySE(SE_TOY_C);
             break;
         case METATILE_SecretBase_NoteMat_D:
@@ -969,7 +969,7 @@ static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
         case METATILE_SecretBase_NoteMat_B:
             PlaySE(SE_TOY_B);
             break;
-        case METATILE_SecretBase_NoteMat_C_Sharp:
+        case METATILE_SecretBase_NoteMat_C_High:
             PlaySE(SE_TOY_C1);
             break;
         }
@@ -1004,8 +1004,8 @@ static void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 
 void DoSecretBaseGlitterMatSparkle(void)
 {
-    s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
-    s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
+    s16 x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    s16 y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
     u8 spriteId;
 
     sub_80930E0(&x, &y, 8, 4);
@@ -1231,27 +1231,27 @@ static void Task_WateringBerryTreeAnim_0(u8 taskId)
 
 static void Task_WateringBerryTreeAnim_1(u8 taskId)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (!EventObjectIsMovementOverridden(playerEventObj)
-        || EventObjectClearHeldMovementIfFinished(playerEventObj))
+    if (!ObjectEventIsMovementOverridden(playerObjEvent)
+        || ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
         sub_808C228(GetPlayerFacingDirection());
-        EventObjectSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+        ObjectEventSetHeldMovement(playerObjEvent, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
         gTasks[taskId].func = Task_WateringBerryTreeAnim_2;
     }
 }
 
 static void Task_WateringBerryTreeAnim_2(u8 taskId)
 {
-    struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (EventObjectClearHeldMovementIfFinished(playerEventObj))
+    if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
         s16 value = gTasks[taskId].data[1]++;
 
         if (value < 10)
-            EventObjectSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(playerObjEvent, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
 
         else
             gTasks[taskId].func = Task_WateringBerryTreeAnim_3;
@@ -1260,7 +1260,7 @@ static void Task_WateringBerryTreeAnim_2(u8 taskId)
 
 static void Task_WateringBerryTreeAnim_3(u8 taskId)
 {
-    SetPlayerAvatarTransitionFlags(sub_808BCD0());
+    SetPlayerAvatarTransitionFlags(GetPlayerAvatarFlags());
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }

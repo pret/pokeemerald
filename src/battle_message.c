@@ -579,15 +579,15 @@ static const u8 sText_PsychicTerrainEnds[] = _("The weirdness disappeared\nfrom 
 static const u8 sText_GrassyTerrainEnds[] = _("The grass disappeared\nfrom the battlefield.");
 static const u8 sText_AngryPointActivates[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY} maxed\nits attack!");
 static const u8 sText_PoisonHealHpUp[] = _("The poisoning healed {B_ATK_NAME_WITH_PREFIX}\na little bit!");
-static const u8 sText_BadDreamsDmg[] = _("{B_DEF_NAME_WITH_PREFIX} is tormented\nby {B_DEF_ABILITY}!");
+static const u8 sText_BadDreamsDmg[] = _("{B_DEF_NAME_WITH_PREFIX} is tormented\nby {B_ATK_ABILITY}!");
 static const u8 sText_MoldBreakerEnters[] = _("{B_ATK_NAME_WITH_PREFIX} breaks the mold!");
 static const u8 sText_TeravoltEnters[] = _("{B_ATK_NAME_WITH_PREFIX} is radiating a bursting aura!");
-static const u8 sText_TurboblazeEnters[] = _("{B_ATK_NAME_WITH_PREFIX} is radiating a blazing aura!");
+static const u8 sText_TurboblazeEnters[] = _("{B_ATK_NAME_WITH_PREFIX} is radiating\na blazing aura!");
 static const u8 sText_SlowStartEnters[] = _("{B_ATK_NAME_WITH_PREFIX} can't get it going!");
 static const u8 sText_SlowStartEnd[] = _("{B_ATK_NAME_WITH_PREFIX} finally got its act together!");
 static const u8 sText_SolarPowerHpDrop[] = _("The {B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\ntakes its toll!");
 static const u8 sText_AftermathDmg[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
-static const u8 sText_AnticipationActivates[] = _("The {B_ATK_NAME_WITH_PREFIX} shuddered in {B_ATK_ABILITY}!");
+static const u8 sText_AnticipationActivates[] = _("{B_ATK_NAME_WITH_PREFIX} shuddered\nin anticipation!");
 static const u8 sText_ForewarnActivates[] = _("{B_ATK_ABILITY} alerted the {B_ATK_NAME_WITH_PREFIX} to the\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
 static const u8 sText_IceBodyHpGain[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nhealed it a little bit!");
 static const u8 sText_SnowWarningHail[] = _("It started to hail!");
@@ -617,7 +617,7 @@ static const u8 sText_PkmnBlewAwayStealthRock[] = _("{B_ATK_NAME_WITH_PREFIX} bl
 static const u8 sText_StickyWebUsed[] = _("A sticky web spreads out on the\nground around {B_DEF_TEAM2} team!");
 static const u8 sText_QuashSuccess[] = _("The opposing {B_ATK_NAME_WITH_PREFIX}'s move was postponed!");
 static const u8 sText_IonDelugeOn[] = _("A deluge of ions showers\nthe battlefield!");
-static const u8 sText_TopsyTurvySwitchedStats[] = _("{B_ATK_NAME_WITH_PREFIX}'s stat changes were\nall reversed!");
+static const u8 sText_TopsyTurvySwitchedStats[] = _("{B_DEF_NAME_WITH_PREFIX}'s stat changes were\nall reversed!");
 static const u8 sText_TerrainBecomesMisty[] = _("Mist swirled about\nthe battlefield!");
 static const u8 sText_TerrainBecomesGrassy[] = _("Grass grew to cover\nthe battlefield!");
 static const u8 sText_TerrainBecomesElectric[] = _("An electric current runs across\nthe battlefield!");
@@ -1220,7 +1220,8 @@ const u16 gDmgHazardsStringIds[] =
 
 const u16 gSwitchInAbilityStringIds[] =
 {
-    STRINGID_MOLDBREAKERENTERS, STRINGID_TERAVOLTENTERS, STRINGID_TURBOBLAZEENTERS, STRINGID_SLOWSTARTENTERS, STRINGID_UNNERVEENTERS
+    STRINGID_MOLDBREAKERENTERS, STRINGID_TERAVOLTENTERS, STRINGID_TURBOBLAZEENTERS,
+    STRINGID_SLOWSTARTENTERS, STRINGID_UNNERVEENTERS, STRINGID_ANTICIPATIONACTIVATES
 };
 
 const u16 gMissStringIds[] =

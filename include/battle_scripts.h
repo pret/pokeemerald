@@ -330,5 +330,6 @@ extern const u8 BattleScript_DancerActivates[];
 extern const u8 BattleScript_AftermathDmg[];
 extern const u8 BattleScript_StanceChangeActivates[];
 extern const u8 BattleScript_DisguiseBustedActivates[];
+extern const u8 BattleScript_AnticipationActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

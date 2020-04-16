@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 7,
       "y": 19,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 4,
       "y": 4,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 10,
       "y": 10,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 1,
       "y": 2,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_WOOD_MAIL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_SHADOW_MAIL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 1,
       "y": 20,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 2,
       "y": 21,
       "elevation": 3,

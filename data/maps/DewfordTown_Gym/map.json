@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_BRAWLY",
+      "graphics_id": "OBJ_EVENT_GFX_BRAWLY",
       "x": 4,
       "y": 3,
       "elevation": 0,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 2,
       "y": 18,
       "elevation": 0,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 15,
       "y": 3,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 12,
       "y": 25,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 5,
       "y": 24,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 7,
       "y": 8,
       "elevation": 1,
@@ -93,7 +93,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 16,
       "y": 9,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 14,
       "y": 12,
       "elevation": 1,

@@ -1898,22 +1898,22 @@ static const u8 sDeoxysBaseStats[] =
 const u16 gLinkPlayerFacilityClasses[NUM_MALE_LINK_FACILITY_CLASSES + NUM_FEMALE_LINK_FACILITY_CLASSES] =
 {
     // Male classes
-    FACILITY_CLASS_COOLTRAINER_M, 
-    FACILITY_CLASS_BLACK_BELT, 
+    FACILITY_CLASS_COOLTRAINER_M,
+    FACILITY_CLASS_BLACK_BELT,
     FACILITY_CLASS_CAMPER,
-    FACILITY_CLASS_YOUNGSTER, 
-    FACILITY_CLASS_PSYCHIC_M, 
+    FACILITY_CLASS_YOUNGSTER,
+    FACILITY_CLASS_PSYCHIC_M,
     FACILITY_CLASS_BUG_CATCHER,
-    FACILITY_CLASS_PKMN_BREEDER_M, 
+    FACILITY_CLASS_PKMN_BREEDER_M,
     FACILITY_CLASS_GUITARIST,
     // Female Classes
-    FACILITY_CLASS_COOLTRAINER_F, 
-    FACILITY_CLASS_HEX_MANIAC, 
+    FACILITY_CLASS_COOLTRAINER_F,
+    FACILITY_CLASS_HEX_MANIAC,
     FACILITY_CLASS_PICNICKER,
-    FACILITY_CLASS_LASS, 
-    FACILITY_CLASS_PSYCHIC_F, 
+    FACILITY_CLASS_LASS,
+    FACILITY_CLASS_PSYCHIC_F,
     FACILITY_CLASS_BATTLE_GIRL,
-    FACILITY_CLASS_PKMN_BREEDER_F, 
+    FACILITY_CLASS_PKMN_BREEDER_F,
     FACILITY_CLASS_BEAUTY
 };
 
@@ -4109,7 +4109,7 @@ u8 CalculatePlayerPartyCount(void)
 {
     gPlayerPartyCount = 0;
 
-    while (gPlayerPartyCount < 6
+    while (gPlayerPartyCount < PARTY_SIZE
         && GetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
     {
         gPlayerPartyCount++;
@@ -4122,7 +4122,7 @@ u8 CalculateEnemyPartyCount(void)
 {
     gEnemyPartyCount = 0;
 
-    while (gEnemyPartyCount < 6
+    while (gEnemyPartyCount < PARTY_SIZE
         && GetMonData(&gEnemyParty[gEnemyPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
     {
         gEnemyPartyCount++;
@@ -4209,7 +4209,7 @@ void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)
 
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleResources->secretBase->party.heldItems[i]);
 
-            for (j = 0; j < 6; j++)
+            for (j = 0; j < NUM_STATS; j++)
                 SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gBattleResources->secretBase->party.EVs[i]);
 
             for (j = 0; j < MAX_MON_MOVES; j++)

@@ -39,10 +39,10 @@ CableClub_EventScript_DistributeEonTicket:: @ 8276B23
 	checkitem ITEM_EON_TICKET, 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_AlreadyGotEonTicket
-	goto_if_set FLAG_SYS_HAS_EON_TICKET, CableClub_EventScript_AlreadyGotEonTicket
+	goto_if_set FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, CableClub_EventScript_AlreadyGotEonTicket
 	msgbox Mevent_Text_TheresATicketForYou, MSGBOX_DEFAULT
 	giveitem ITEM_EON_TICKET
-	setflag FLAG_SYS_HAS_EON_TICKET
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	setvar VAR_DISTRIBUTE_EON_TICKET, 0
 	msgbox Mevent_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
 	release
@@ -154,7 +154,7 @@ CableClub_EventScript_CloseLinkAndExitLinkRoom:: @ 8276CB5
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
 	applymovement VAR_0x8007, Movement_AttendantFaceLeft
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerExitLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
 	waitmovement 0
 	applymovement VAR_0x8007, Movement_AttendantFaceDown
 	waitmovement 0
@@ -175,7 +175,7 @@ CableClub_EventScript_PlayerExitTradeCenter:: @ 8276CFF
 	setvar VAR_CABLE_CLUB_STATE, 0
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerFaceAttendantRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerFaceAttendantRight
 	waitmovement 0
 	applymovement VAR_0x8007, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -195,7 +195,7 @@ CableClub_EventScript_ExitRecordCorner:: @ 8276D2C
 CableClub_EventScript_PlayerExitRecordCorner:: @ 8276D44
 	special CloseLink
 	setvar VAR_CABLE_CLUB_STATE, 0
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerExitLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
 	waitmovement 0
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_ExitRecordCornerRet
@@ -218,7 +218,7 @@ CableClub_EventScript_PlayerExitUnionRoom:: @ 8276D84
 	setvar VAR_CABLE_CLUB_STATE, 0
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerFaceAttendantRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerFaceAttendantRight
 	waitmovement 0
 	applymovement VAR_0x8007, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -232,24 +232,24 @@ CableClub_EventScript_TrainerCardDataOverwritten:: @ 8276DAE
 	delay 60
 	message CableClub_Text_HopeToSeeYouAgain
 	waitmessage
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerExitLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
 	waitmovement 0
 	applymovement VAR_0x8007, Movement_AttendantFaceDown
 	waitmovement 0
 	return
 
 CableClub_EventScript_PlayerExitLinkRoom:: @ 8276DD5
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerExitLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
 	waitmovement 0
 	return
 
 CableClub_EventScript_Tutorial:: @ 8276DE0
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox CableClub_Text_FirstTimeRightThisWay, MSGBOX_DEFAULT
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, CableClub_Movement_PlayerApproachCounter
+	applymovement OBJ_EVENT_ID_PLAYER, CableClub_Movement_PlayerApproachCounter
 	waitmovement 0
 	delay 30
 	msgbox CableClub_Text_ExplainWirelessClubFirstTime, MSGBOX_DEFAULT
@@ -377,13 +377,13 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -397,7 +397,7 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 
 @ Unused
 CableClub_EventScript_PlayerApproachLinkRoomRight:: @ 827702B
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerApproachLinkRoomRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomRight
 	waitmovement 0
 	return
 
@@ -482,13 +482,13 @@ CableClub_EventScript_EnterTradeCenter:: @ 827713A
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -557,13 +557,13 @@ CableClub_EventScript_EnterRecordCorner:: @ 827724C
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -959,13 +959,13 @@ CableClub_EventScript_EnterUnionRoom:: @ 827759F
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 5, 1
 	waitdooranim
 	special Script_ResetUnionRoomTrade
@@ -1290,13 +1290,13 @@ CableClub_EventScript_EnterWirelessLinkRoom:: @ 8277B3A
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterLinkRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -1486,9 +1486,9 @@ MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom:: @ 8277E0E
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_PlayerEnterMinigameRoom
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterMinigameRoom
 	waitmovement 0
-	hideobjectat EVENT_OBJ_ID_PLAYER, 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	release
 	waitstate
 	end

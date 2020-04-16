@@ -33,7 +33,7 @@ void UpdateMirageRnd(u16 days)
     s32 rnd = GetMirageRnd();
     while (days)
     {
-        rnd = 1103515245 * rnd + 12345;
+        rnd = ISO_RANDOMIZE2(rnd);
         days--;
     }
     SetMirageRnd(rnd);

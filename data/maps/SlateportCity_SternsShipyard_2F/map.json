@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCIENTIST_1",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 10,
       "y": 7,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCIENTIST_1",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 8,
       "y": 4,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCIENTIST_1",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 0,
       "y": 9,
       "elevation": 3,

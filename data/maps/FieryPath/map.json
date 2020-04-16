@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 8,
       "y": 3,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_ITEM_FIERY_PATH_TM06"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 10,
       "y": 15,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 17,
       "y": 15,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 8,
       "y": 11,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 3,
       "y": 12,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,
       "y": 23,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 5,
       "y": 24,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 7,
       "y": 32,
       "elevation": 3,

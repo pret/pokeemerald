@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_PUSHABLE_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 25,
       "y": 3,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 11,
       "y": 4,
       "elevation": 3,

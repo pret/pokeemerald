@@ -26,7 +26,7 @@ BattleFrontier_BattlePikeRoomWildMons_OnWarp: @ 825E466
 
 BattleFrontier_BattlePikeRoomWildMons_EventScript_TurnPlayerNorth:: @ 825E470
 	setvar VAR_TEMP_4, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeRoomWildMons_OnResume: @ 825E47A

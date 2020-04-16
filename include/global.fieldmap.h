@@ -50,7 +50,7 @@ struct BackupMapLayout
     u16 *map;
 };
 
-struct EventObjectTemplate
+struct ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
@@ -102,11 +102,11 @@ struct BgEvent
 
 struct MapEvents
 {
-    u8 eventObjectCount;
+    u8 objectEventCount;
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
-    struct EventObjectTemplate *eventObjects;
+    struct ObjectEventTemplate *objectEvents;
     struct WarpEvent *warps;
     struct CoordEvent *coordEvents;
     struct BgEvent *bgEvents;
@@ -153,7 +153,7 @@ struct MapHeader
 #define SHOW_MAP_NAME_ENABLED  ((gMapHeader.flags & (MAP_SHOW_MAP_NAME | UNUSED_MAP_FLAGS)) == MAP_SHOW_MAP_NAME)
 
 
-struct EventObject
+struct ObjectEvent
 {
     /*0x00*/ u32 active:1;
              u32 singleMovementActive:1;
@@ -216,7 +216,7 @@ struct EventObject
     /*size = 0x24*/
 };
 
-struct EventObjectGraphicsInfo
+struct ObjectEventGraphicsInfo
 {
     /*0x00*/ u16 tileTag;
     /*0x02*/ u16 paletteTag1;
@@ -273,7 +273,7 @@ enum
     COLLISION_OUTSIDE_RANGE,
     COLLISION_IMPASSABLE,
     COLLISION_ELEVATION_MISMATCH,
-    COLLISION_EVENT_OBJECT,
+    COLLISION_OBJECT_EVENT,
     COLLISION_STOP_SURFING,
     COLLISION_LEDGE_JUMP,
     COLLISION_PUSHED_BOULDER,
@@ -304,11 +304,11 @@ enum
 struct PlayerAvatar
 {
     /*0x00*/ u8 flags;
-    /*0x01*/ u8 unk1; // used to be named bike, but its definitely not that. seems to be some transition flags
+    /*0x01*/ u8 transitionFlags; // used to be named bike, but its definitely not that. seems to be some transition flags
     /*0x02*/ u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
     /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
-    /*0x05*/ u8 eventObjectId;
+    /*0x05*/ u8 objectEventId;
     /*0x06*/ bool8 preventStep;
     /*0x07*/ u8 gender;
     /*0x08*/ u8 acroBikeState; // 00 is normal, 01 is turning, 02 is standing wheelie, 03 is hopping wheelie
@@ -330,8 +330,8 @@ struct Camera
     s32 y;
 };
 
-extern struct EventObject gEventObjects[EVENT_OBJECTS_COUNT];
-extern u8 gSelectedEventObject;
+extern struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
+extern u8 gSelectedObjectEvent;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;

@@ -23,12 +23,12 @@ SouthernIsland_Interior_OnTransition: @ 8242A6E
 	end
 
 SouthernIsland_Interior_EventScript_SetUpLatios:: @ 8242A8A
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LATIOS
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIOS
 	setvar VAR_TEMP_4, SPECIES_LATIOS
 	return
 
 SouthernIsland_Interior_EventScript_SetUpLatias:: @ 8242A95
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LATIAS
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIAS
 	setvar VAR_TEMP_4, SPECIES_LATIAS
 	return
 
@@ -41,11 +41,11 @@ SouthernIsland_Interior_EventScript_SetUpPlayerGfx:: @ 8242AA0
 	end
 
 SouthernIsland_Interior_EventScript_SetBrendanGfx:: @ 8242AB8
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_SetMayGfx:: @ 8242ABE
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_TryLatiEncounter:: @ 8242AC4
@@ -58,11 +58,11 @@ SouthernIsland_Interior_EventScript_Lati:: @ 8242AD0
 	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_Sign
 	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
 	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
-	goto_if_unset FLAG_SYS_HAS_EON_TICKET, SouthernIsland_Interior_EventScript_Sign
+	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, SouthernIsland_Interior_EventScript_Sign
 	setflag FLAG_ENCOUNTERED_LATIAS_OR_LATIOS
 	setflag FLAG_TEMP_2
 	special SpawnCameraObject
-	applymovement EVENT_OBJ_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
+	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
 	waitmovement 0
 	delay 50
 	waitse
@@ -71,7 +71,7 @@ SouthernIsland_Interior_EventScript_Lati:: @ 8242AD0
 	waitmoncry
 	addobject 2
 	delay 30
-	applymovement EVENT_OBJ_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
+	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
 	applymovement 2, SouthernIsland_Interior_Movement_LatiApproach
 	waitmovement 0
 	delay 50

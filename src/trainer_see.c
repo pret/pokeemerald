@@ -15,35 +15,35 @@
 #include "battle_pyramid.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 
 // this file's functions
-static u8 CheckTrainer(u8 eventObjectId);
-static u8 GetTrainerApproachDistance(struct EventObject *trainerObj);
-static u8 CheckPathBetweenTrainerAndPlayer(struct EventObject *trainerObj, u8 approachDistance, u8 direction);
-static void TrainerApproachPlayer(struct EventObject *trainerObj, u8 range);
+static u8 CheckTrainer(u8 objectEventId);
+static u8 GetTrainerApproachDistance(struct ObjectEvent *trainerObj);
+static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 approachDistance, u8 direction);
+static void TrainerApproachPlayer(struct ObjectEvent *trainerObj, u8 range);
 static void Task_RunTrainerSeeFuncList(u8 taskId);
 static void Task_DestroyTrainerApproachTask(u8 taskId);
 static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnimNum);
 
-static u8 GetTrainerApproachDistanceSouth(struct EventObject *trainerObj, s16 range, s16 x, s16 y);
-static u8 GetTrainerApproachDistanceNorth(struct EventObject *trainerObj, s16 range, s16 x, s16 y);
-static u8 GetTrainerApproachDistanceWest(struct EventObject *trainerObj, s16 range, s16 x, s16 y);
-static u8 GetTrainerApproachDistanceEast(struct EventObject *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y);
 
-static bool8 sub_80B4178(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 TrainerExclamationMark(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 WaitTrainerExclamationMark(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 TrainerMoveToPlayer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 PlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 WaitPlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 RevealDisguisedTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 WaitRevealDisguisedTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 RevealHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 PopOutOfAshHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 JumpInPlaceHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
-static bool8 WaitRevealHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj);
+static bool8 sub_80B4178(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 TrainerExclamationMark(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 WaitTrainerExclamationMark(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 TrainerMoveToPlayer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 PlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 WaitPlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 RevealDisguisedTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 WaitRevealDisguisedTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 RevealHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 PopOutOfAshHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 JumpInPlaceHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
+static bool8 WaitRevealHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj);
 
 static void SpriteCB_TrainerIcons(struct Sprite *sprite);
 
@@ -62,7 +62,7 @@ static const u8 sEmotion_ExclamationMarkGfx[] = INCBIN_U8("graphics/misc/emotion
 static const u8 sEmotion_QuestionMarkGfx[] = INCBIN_U8("graphics/misc/emotion_question.4bpp");
 static const u8 sEmotion_HeartGfx[] = INCBIN_U8("graphics/misc/emotion_heart.4bpp");
 
-static u8 (*const sDirectionalApproachDistanceFuncs[])(struct EventObject *trainerObj, s16 range, s16 x, s16 y) =
+static u8 (*const sDirectionalApproachDistanceFuncs[])(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y) =
 {
     GetTrainerApproachDistanceSouth,
     GetTrainerApproachDistanceNorth,
@@ -70,7 +70,7 @@ static u8 (*const sDirectionalApproachDistanceFuncs[])(struct EventObject *train
     GetTrainerApproachDistanceEast,
 };
 
-static bool8 (*const sTrainerSeeFuncList[])(u8 taskId, struct Task *task, struct EventObject *trainerObj) =
+static bool8 (*const sTrainerSeeFuncList[])(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj) =
 {
     sub_80B4178,
     TrainerExclamationMark,
@@ -86,7 +86,7 @@ static bool8 (*const sTrainerSeeFuncList[])(u8 taskId, struct Task *task, struct
     WaitRevealHiddenTrainer,
 };
 
-static bool8 (*const sTrainerSeeFuncList2[])(u8 taskId, struct Task *task, struct EventObject *trainerObj) =
+static bool8 (*const sTrainerSeeFuncList2[])(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj) =
 {
     RevealHiddenTrainer,
     PopOutOfAshHiddenTrainer,
@@ -179,13 +179,13 @@ bool8 CheckForTrainersWantingBattle(void)
     gNoOfApproachingTrainers = 0;
     gApproachingTrainerId = 0;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         u8 retVal;
 
-        if (!gEventObjects[i].active)
+        if (!gObjectEvents[i].active)
             continue;
-        if (gEventObjects[i].trainerType != 1 && gEventObjects[i].trainerType != 3)
+        if (gObjectEvents[i].trainerType != 1 && gObjectEvents[i].trainerType != 3)
             continue;
 
         retVal = CheckTrainer(i);
@@ -204,7 +204,7 @@ bool8 CheckForTrainersWantingBattle(void)
     if (gNoOfApproachingTrainers == 1)
     {
         ResetTrainerOpponentIds();
-        ConfigureAndSetUpOneTrainerBattle(gApproachingTrainers[gNoOfApproachingTrainers - 1].eventObjectId,
+        ConfigureAndSetUpOneTrainerBattle(gApproachingTrainers[gNoOfApproachingTrainers - 1].objectEventId,
                                           gApproachingTrainers[gNoOfApproachingTrainers - 1].trainerScriptPtr);
         gTrainerApproachedPlayer = TRUE;
         return TRUE;
@@ -214,7 +214,7 @@ bool8 CheckForTrainersWantingBattle(void)
         ResetTrainerOpponentIds();
         for (i = 0; i < gNoOfApproachingTrainers; i++, gApproachingTrainerId++)
         {
-            ConfigureTwoTrainersBattle(gApproachingTrainers[i].eventObjectId,
+            ConfigureTwoTrainersBattle(gApproachingTrainers[i].objectEventId,
                                        gApproachingTrainers[i].trainerScriptPtr);
         }
         SetUpTwoTrainersBattle();
@@ -229,7 +229,7 @@ bool8 CheckForTrainersWantingBattle(void)
     }
 }
 
-static u8 CheckTrainer(u8 eventObjectId)
+static u8 CheckTrainer(u8 objectEventId)
 {
     const u8 *scriptPtr;
     u8 ret = 1;
@@ -238,16 +238,16 @@ static u8 CheckTrainer(u8 eventObjectId)
     if (InTrainerHill() == TRUE)
         scriptPtr = GetTrainerHillTrainerScript();
     else
-        scriptPtr = GetEventObjectScriptPointerByEventObjectId(eventObjectId);
+        scriptPtr = GetObjectEventScriptPointerByObjectEventId(objectEventId);
 
     if (InBattlePyramid())
     {
-        if (GetBattlePyramidTrainerFlag(eventObjectId))
+        if (GetBattlePyramidTrainerFlag(objectEventId))
             return 0;
     }
     else if (InTrainerHill() == TRUE)
     {
-        if (GetHillTrainerFlag(eventObjectId))
+        if (GetHillTrainerFlag(objectEventId))
             return 0;
     }
     else
@@ -256,7 +256,7 @@ static u8 CheckTrainer(u8 eventObjectId)
             return 0;
     }
 
-    approachDistance = GetTrainerApproachDistance(&gEventObjects[eventObjectId]);
+    approachDistance = GetTrainerApproachDistance(&gObjectEvents[objectEventId]);
 
     if (approachDistance != 0)
     {
@@ -270,10 +270,10 @@ static u8 CheckTrainer(u8 eventObjectId)
             ret = 2;
         }
 
-        gApproachingTrainers[gNoOfApproachingTrainers].eventObjectId = eventObjectId;
+        gApproachingTrainers[gNoOfApproachingTrainers].objectEventId = objectEventId;
         gApproachingTrainers[gNoOfApproachingTrainers].trainerScriptPtr = scriptPtr;
         gApproachingTrainers[gNoOfApproachingTrainers].radius = approachDistance;
-        TrainerApproachPlayer(&gEventObjects[eventObjectId], approachDistance - 1);
+        TrainerApproachPlayer(&gObjectEvents[objectEventId], approachDistance - 1);
         gNoOfApproachingTrainers++;
 
         return ret;
@@ -282,7 +282,7 @@ static u8 CheckTrainer(u8 eventObjectId)
     return 0;
 }
 
-static u8 GetTrainerApproachDistance(struct EventObject *trainerObj)
+static u8 GetTrainerApproachDistance(struct ObjectEvent *trainerObj)
 {
     s16 x, y;
     u8 i;
@@ -308,7 +308,7 @@ static u8 GetTrainerApproachDistance(struct EventObject *trainerObj)
 }
 
 // Returns how far south the player is from trainer. 0 if out of trainer's sight.
-static u8 GetTrainerApproachDistanceSouth(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.x == x
      && y > trainerObj->currentCoords.y
@@ -319,7 +319,7 @@ static u8 GetTrainerApproachDistanceSouth(struct EventObject *trainerObj, s16 ra
 }
 
 // Returns how far north the player is from trainer. 0 if out of trainer's sight.
-static u8 GetTrainerApproachDistanceNorth(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceNorth(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.x == x
      && y < trainerObj->currentCoords.y
@@ -330,7 +330,7 @@ static u8 GetTrainerApproachDistanceNorth(struct EventObject *trainerObj, s16 ra
 }
 
 // Returns how far west the player is from trainer. 0 if out of trainer's sight.
-static u8 GetTrainerApproachDistanceWest(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceWest(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.y == y
      && x < trainerObj->currentCoords.x
@@ -341,7 +341,7 @@ static u8 GetTrainerApproachDistanceWest(struct EventObject *trainerObj, s16 ran
 }
 
 // Returns how far east the player is from trainer. 0 if out of trainer's sight.
-static u8 GetTrainerApproachDistanceEast(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceEast(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.y == y
      && x > trainerObj->currentCoords.x
@@ -353,7 +353,7 @@ static u8 GetTrainerApproachDistanceEast(struct EventObject *trainerObj, s16 ran
 
 #define COLLISION_MASK (~1)
 
-static u8 CheckPathBetweenTrainerAndPlayer(struct EventObject *trainerObj, u8 approachDistance, u8 direction)
+static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 approachDistance, u8 direction)
 {
     s16 x, y;
     u8 unk19_temp;
@@ -394,16 +394,16 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct EventObject *trainerObj, u8 ap
 #define tFuncId             data[0]
 #define tTrainerRange       data[3]
 #define tOutOfAshSpriteId   data[4]
-#define tTrainerEventObjectId data[7]
+#define tTrainerObjectEventId data[7]
 
-static void TrainerApproachPlayer(struct EventObject *trainerObj, u8 range)
+static void TrainerApproachPlayer(struct ObjectEvent *trainerObj, u8 range)
 {
     struct Task *task;
 
     gApproachingTrainers[gNoOfApproachingTrainers].taskId = CreateTask(Task_RunTrainerSeeFuncList, 0x50);
     task = &gTasks[gApproachingTrainers[gNoOfApproachingTrainers].taskId];
     task->tTrainerRange = range;
-    task->tTrainerEventObjectId = gApproachingTrainers[gNoOfApproachingTrainers].eventObjectId;
+    task->tTrainerObjectEventId = gApproachingTrainers[gNoOfApproachingTrainers].objectEventId;
 }
 
 static void sub_80B40C8(TaskFunc followupFunc)
@@ -425,7 +425,7 @@ static void sub_80B40C8(TaskFunc followupFunc)
 static void Task_RunTrainerSeeFuncList(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    struct EventObject *trainerObj = &gEventObjects[task->tTrainerEventObjectId];
+    struct ObjectEvent *trainerObj = &gObjectEvents[task->tTrainerObjectEventId];
 
     if (!trainerObj->active)
     {
@@ -437,24 +437,24 @@ static void Task_RunTrainerSeeFuncList(u8 taskId)
     }
 }
 
-static bool8 sub_80B4178(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 sub_80B4178(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     return FALSE;
 }
 
-static bool8 TrainerExclamationMark(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 TrainerExclamationMark(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     u8 direction;
 
-    EventObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
+    ObjectEventGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
     direction = GetFaceDirectionMovementAction(trainerObj->facingDirection);
-    EventObjectSetHeldMovement(trainerObj, direction);
+    ObjectEventSetHeldMovement(trainerObj, direction);
     task->tFuncId++;
     return TRUE;
 }
 
-static bool8 WaitTrainerExclamationMark(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 WaitTrainerExclamationMark(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON))
     {
@@ -471,88 +471,88 @@ static bool8 WaitTrainerExclamationMark(u8 taskId, struct Task *task, struct Eve
     }
 }
 
-static bool8 TrainerMoveToPlayer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 TrainerMoveToPlayer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    if (!EventObjectIsMovementOverridden(trainerObj) || EventObjectClearHeldMovementIfFinished(trainerObj))
+    if (!ObjectEventIsMovementOverridden(trainerObj) || ObjectEventClearHeldMovementIfFinished(trainerObj))
     {
         if (task->tTrainerRange)
         {
-            EventObjectSetHeldMovement(trainerObj, GetWalkNormalMovementAction(trainerObj->facingDirection));
+            ObjectEventSetHeldMovement(trainerObj, GetWalkNormalMovementAction(trainerObj->facingDirection));
             task->tTrainerRange--;
         }
         else
         {
-            EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACTION_FACE_PLAYER);
+            ObjectEventSetHeldMovement(trainerObj, MOVEMENT_ACTION_FACE_PLAYER);
             task->tFuncId++;
         }
     }
     return FALSE;
 }
 
-static bool8 PlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 PlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    struct EventObject *playerObj;
+    struct ObjectEvent *playerObj;
 
-    if (EventObjectIsMovementOverridden(trainerObj) && !EventObjectClearHeldMovementIfFinished(trainerObj))
+    if (ObjectEventIsMovementOverridden(trainerObj) && !ObjectEventClearHeldMovementIfFinished(trainerObj))
         return FALSE;
 
     SetTrainerMovementType(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
-    TryOverrideTemplateCoordsForEventObject(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
-    OverrideTemplateCoordsForEventObject(trainerObj);
+    TryOverrideTemplateCoordsForObjectEvent(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
+    OverrideTemplateCoordsForObjectEvent(trainerObj);
 
-    playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectIsMovementOverridden(playerObj) && !EventObjectClearHeldMovementIfFinished(playerObj))
+    playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventIsMovementOverridden(playerObj) && !ObjectEventClearHeldMovementIfFinished(playerObj))
         return FALSE;
 
     sub_808BCE8();
-    EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection)));
+    ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection)));
     task->tFuncId++;
     return FALSE;
 }
 
-static bool8 WaitPlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 WaitPlayerFaceApproachingTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    struct EventObject *playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (!EventObjectIsMovementOverridden(playerObj)
-     || EventObjectClearHeldMovementIfFinished(playerObj))
+    if (!ObjectEventIsMovementOverridden(playerObj)
+     || ObjectEventClearHeldMovementIfFinished(playerObj))
         SwitchTaskToFollowupFunc(taskId);
     return FALSE;
 }
 
-static bool8 RevealDisguisedTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 RevealDisguisedTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    if (!EventObjectIsMovementOverridden(trainerObj)
-     || EventObjectClearHeldMovementIfFinished(trainerObj))
+    if (!ObjectEventIsMovementOverridden(trainerObj)
+     || ObjectEventClearHeldMovementIfFinished(trainerObj))
     {
-        EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACTION_REVEAL_TRAINER);
+        ObjectEventSetHeldMovement(trainerObj, MOVEMENT_ACTION_REVEAL_TRAINER);
         task->tFuncId++;
     }
     return FALSE;
 }
 
-static bool8 WaitRevealDisguisedTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 WaitRevealDisguisedTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    if (EventObjectClearHeldMovementIfFinished(trainerObj))
+    if (ObjectEventClearHeldMovementIfFinished(trainerObj))
         task->tFuncId = 3;
 
     return FALSE;
 }
 
-static bool8 RevealHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 RevealHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    if (!EventObjectIsMovementOverridden(trainerObj)
-     || EventObjectClearHeldMovementIfFinished(trainerObj))
+    if (!ObjectEventIsMovementOverridden(trainerObj)
+     || ObjectEventClearHeldMovementIfFinished(trainerObj))
     {
-        EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACTION_FACE_PLAYER);
+        ObjectEventSetHeldMovement(trainerObj, MOVEMENT_ACTION_FACE_PLAYER);
         task->tFuncId++;
     }
     return FALSE;
 }
 
-static bool8 PopOutOfAshHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 PopOutOfAshHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
-    if (EventObjectCheckHeldMovementStatus(trainerObj))
+    if (ObjectEventCheckHeldMovementStatus(trainerObj))
     {
         gFieldEffectArguments[0] = trainerObj->currentCoords.x;
         gFieldEffectArguments[1] = trainerObj->currentCoords.y;
@@ -564,7 +564,7 @@ static bool8 PopOutOfAshHiddenTrainer(u8 taskId, struct Task *task, struct Event
     return FALSE;
 }
 
-static bool8 JumpInPlaceHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 JumpInPlaceHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     struct Sprite *sprite;
 
@@ -575,15 +575,15 @@ static bool8 JumpInPlaceHiddenTrainer(u8 taskId, struct Task *task, struct Event
 
         sprite = &gSprites[trainerObj->spriteId];
         sprite->oam.priority = 2;
-        EventObjectClearHeldMovementIfFinished(trainerObj);
-        EventObjectSetHeldMovement(trainerObj, GetJumpInPlaceMovementAction(trainerObj->facingDirection));
+        ObjectEventClearHeldMovementIfFinished(trainerObj);
+        ObjectEventSetHeldMovement(trainerObj, GetJumpInPlaceMovementAction(trainerObj->facingDirection));
         task->tFuncId++;
     }
 
     return FALSE;
 }
 
-static bool8 WaitRevealHiddenTrainer(u8 taskId, struct Task *task, struct EventObject *trainerObj)
+static bool8 WaitRevealHiddenTrainer(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
         task->tFuncId = 3;
@@ -594,34 +594,34 @@ static bool8 WaitRevealHiddenTrainer(u8 taskId, struct Task *task, struct EventO
 #undef tFuncId
 #undef tTrainerRange
 #undef tOutOfAshSpriteId
-#undef tTrainerEventObjectId
+#undef tTrainerObjectEventId
 
 static void sub_80B44C8(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    struct EventObject *eventObj;
+    struct ObjectEvent *objEvent;
 
-    // another eventObj loaded into by loadword?
-    LoadWordFromTwoHalfwords(&task->data[1], (u32 *)&eventObj);
+    // another objEvent loaded into by loadword?
+    LoadWordFromTwoHalfwords(&task->data[1], (u32 *)&objEvent);
     if (!task->data[7])
     {
-        EventObjectClearHeldMovement(eventObj);
+        ObjectEventClearHeldMovement(objEvent);
         task->data[7]++;
     }
-    sTrainerSeeFuncList2[task->data[0]](taskId, task, eventObj);
+    sTrainerSeeFuncList2[task->data[0]](taskId, task, objEvent);
     if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
-        SetTrainerMovementType(eventObj, GetTrainerFacingDirectionMovementType(eventObj->facingDirection));
-        TryOverrideTemplateCoordsForEventObject(eventObj, GetTrainerFacingDirectionMovementType(eventObj->facingDirection));
+        SetTrainerMovementType(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));
+        TryOverrideTemplateCoordsForObjectEvent(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));
         DestroyTask(taskId);
     }
     else
     {
-        eventObj->heldMovementFinished = 0;
+        objEvent->heldMovementFinished = 0;
     }
 }
 
-void sub_80B4578(struct EventObject *var)
+void sub_80B4578(struct ObjectEvent *var)
 {
     StoreWordInTwoHalfwords(&gTasks[CreateTask(sub_80B44C8, 0)].data[1], (u32)var);
 }
@@ -645,8 +645,8 @@ void TryPrepareSecondApproachingTrainer(void)
         {
             gApproachingTrainerId++;
             gSpecialVar_Result = TRUE;
-            UnfreezeEventObjects();
-            FreezeEventObjectsExceptOne(gApproachingTrainers[1].eventObjectId);
+            UnfreezeObjectEvents();
+            FreezeObjectEventsExceptOne(gApproachingTrainers[1].objectEventId);
         }
         else
         {
@@ -718,21 +718,21 @@ static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnim
 
 static void SpriteCB_TrainerIcons(struct Sprite *sprite)
 {
-    u8 eventObjId;
+    u8 objEventId;
 
-    if (TryGetEventObjectIdByLocalIdAndMap(sprite->sLocalId, sprite->sMapNum, sprite->sMapGroup, &eventObjId)
+    if (TryGetObjectEventIdByLocalIdAndMap(sprite->sLocalId, sprite->sMapNum, sprite->sMapGroup, &objEventId)
      || sprite->animEnded)
     {
         FieldEffectStop(sprite, sprite->sFldEffId);
     }
     else
     {
-        struct Sprite *eventObjSprite = &gSprites[gEventObjects[eventObjId].spriteId];
+        struct Sprite *objEventSprite = &gSprites[gObjectEvents[objEventId].spriteId];
         sprite->sData4 += sprite->sData3;
-        sprite->pos1.x = eventObjSprite->pos1.x;
-        sprite->pos1.y = eventObjSprite->pos1.y - 16;
-        sprite->pos2.x = eventObjSprite->pos2.x;
-        sprite->pos2.y = eventObjSprite->pos2.y + sprite->sData4;
+        sprite->pos1.x = objEventSprite->pos1.x;
+        sprite->pos1.y = objEventSprite->pos1.y - 16;
+        sprite->pos2.x = objEventSprite->pos2.x;
+        sprite->pos2.y = objEventSprite->pos2.y + sprite->sData4;
         if (sprite->sData4)
             sprite->sData3++;
         else
@@ -747,42 +747,42 @@ static void SpriteCB_TrainerIcons(struct Sprite *sprite)
 #undef sData4
 #undef sFldEffId
 
-u8 GetCurrentApproachingTrainerEventObjectId(void)
+u8 GetCurrentApproachingTrainerObjectEventId(void)
 {
     if (gApproachingTrainerId == 0)
-        return gApproachingTrainers[0].eventObjectId;
+        return gApproachingTrainers[0].objectEventId;
     else
-        return gApproachingTrainers[1].eventObjectId;
+        return gApproachingTrainers[1].objectEventId;
 }
 
-u8 GetChosenApproachingTrainerEventObjectId(u8 arrayId)
+u8 GetChosenApproachingTrainerObjectEventId(u8 arrayId)
 {
     if (arrayId >= ARRAY_COUNT(gApproachingTrainers))
         return 0;
     else if (arrayId == 0)
-        return gApproachingTrainers[0].eventObjectId;
+        return gApproachingTrainers[0].objectEventId;
     else
-        return gApproachingTrainers[1].eventObjectId;
+        return gApproachingTrainers[1].objectEventId;
 }
 
 void PlayerFaceTrainerAfterBattle(void)
 {
-    struct EventObject *eventObj;
+    struct ObjectEvent *objEvent;
 
     if (gTrainerApproachedPlayer == TRUE)
     {
-        eventObj = &gEventObjects[gApproachingTrainers[gWhichTrainerToFaceAfterBattle].eventObjectId];
-        gPostBattleMovementScript[0] = GetFaceDirectionMovementAction(GetOppositeDirection(eventObj->facingDirection));
+        objEvent = &gObjectEvents[gApproachingTrainers[gWhichTrainerToFaceAfterBattle].objectEventId];
+        gPostBattleMovementScript[0] = GetFaceDirectionMovementAction(GetOppositeDirection(objEvent->facingDirection));
         gPostBattleMovementScript[1] = MOVEMENT_ACTION_STEP_END;
-        ScriptMovement_StartObjectMovementScript(EVENT_OBJ_ID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
+        ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
     }
     else
     {
-        eventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
-        gPostBattleMovementScript[0] = GetFaceDirectionMovementAction(eventObj->facingDirection);
+        objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        gPostBattleMovementScript[0] = GetFaceDirectionMovementAction(objEvent->facingDirection);
         gPostBattleMovementScript[1] = MOVEMENT_ACTION_STEP_END;
-        ScriptMovement_StartObjectMovementScript(EVENT_OBJ_ID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
+        ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_PLAYER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gPostBattleMovementScript);
     }
 
-    SetMovingNpcId(EVENT_OBJ_ID_PLAYER);
+    SetMovingNpcId(OBJ_EVENT_ID_PLAYER);
 }

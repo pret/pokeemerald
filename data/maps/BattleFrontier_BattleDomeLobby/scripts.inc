@@ -14,7 +14,7 @@ BattleFrontier_BattleDomeLobby_OnWarp: @ 82497FB
 
 BattleFrontier_BattleDomeLobby_EventScript_TurnPlayerNorth:: @ 8249805
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleDomeLobby_OnFrame: @ 824980F
@@ -241,7 +241,7 @@ BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor:: @ 8249C6E
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantWalkToDoor
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantWalkToDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_OpenSinglesDoor
@@ -252,7 +252,7 @@ BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor:: @ 8249C6E
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantEnterDoor
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_CloseSinglesDoor

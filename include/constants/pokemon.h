@@ -107,6 +107,8 @@
 #define FLAG_POWDER                 0x80000
 #define FLAG_TARGET_ABILITY_IGNORED 0x100000
 #define FLAG_DANCE                  0x200000
+#define FLAG_DMG_IN_AIR             0x400000 // X2 dmg on air, always hits target on air
+#define FLAG_HIT_IN_AIR             0x800000 // dmg is normal, always hits target on air
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0

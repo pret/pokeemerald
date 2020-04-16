@@ -14,8 +14,10 @@ cache:
   apt: true
 install:
   - pushd $HOME
-  - travis_retry wget https://github.com/devkitPro/buildscripts/releases/download/devkitARM_r50/devkitARM_r50-linux.tar.xz
+  - travis_retry wget https://github.com/devkitPro/buildscripts/releases/download/devkitARM_r52/devkitARM_r52-linux.tar.xz
   - tar xJf devkitARM*.tar.xz
+  - travis_retry wget https://github.com/devkitPro/devkitarm-rules/releases/download/v1.0.0/devkitarm-rules-1.0.0.tar.xz
+  - tar xJf devkitarm-rules-*.tar.xz -C $DEVKITARM
   - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
   - popd

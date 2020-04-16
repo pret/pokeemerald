@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_NURSE",
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 2,
       "y": 3,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 10,
       "y": 7,
       "elevation": 3,

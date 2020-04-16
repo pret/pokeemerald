@@ -30,7 +30,7 @@ struct Pokenav3Struct
 };
 
 static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *);
-static u32 sub_81CABFC(struct Pokenav3Struct *);
+static u32 GetExitMatchCallMenuId(struct Pokenav3Struct *);
 static u32 CB2_HandleMatchCallOptionsInput(struct Pokenav3Struct *);
 static u32 CB2_HandleCheckPageInput(struct Pokenav3Struct *);
 static u32 CB2_HandleCallInput(struct Pokenav3Struct *);
@@ -52,7 +52,7 @@ static const u8 sMatchCallOptionsHasCheckPage[] =
     MATCH_CALL_OPTION_CANCEL
 };
 
-bool32 PokenavCallback_Init_11(void)
+bool32 PokenavCallback_Init_MatchCall(void)
 {
     struct Pokenav3Struct *state = AllocSubstruct(5, sizeof(struct Pokenav3Struct));
     if (!state)
@@ -65,13 +65,13 @@ bool32 PokenavCallback_Init_11(void)
     return TRUE;
 }
 
-u32 sub_81CAB24(void)
+u32 GetMatchCallCallback(void)
 {
     struct Pokenav3Struct *state = GetSubstructPtr(5);
     return state->callback(state);
 }
 
-void sub_81CAB38(void)
+void FreeMatchCallSubstruct1(void)
 {
     FreePokenavSubstruct(5);
 }
@@ -113,7 +113,7 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
     {
         if (GetPokenavMode() != POKENAV_MODE_FORCE_CALL_READY)
         {
-            state->callback = sub_81CABFC;
+            state->callback = GetExitMatchCallMenuId;
             return POKENAV_MC_FUNC_EXIT;
         }
         else
@@ -126,9 +126,9 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
     return POKENAV_MC_FUNC_NONE;
 }
 
-static u32 sub_81CABFC(struct Pokenav3Struct *state)
+static u32 GetExitMatchCallMenuId(struct Pokenav3Struct *state)
 {
-    return POKENAV_MENU_4;
+    return POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL;
 }
 
 static u32 CB2_HandleMatchCallOptionsInput(struct Pokenav3Struct *state)

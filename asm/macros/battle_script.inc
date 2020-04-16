@@ -1678,6 +1678,16 @@
 	.byte \val
 	.endm
 	
+	.macro getstatvalue battler:req, statId:req
+	various \battler, VARIOUS_GET_STAT_VALUE
+	.byte \statId
+	.endm
+	
+	.macro jumpiffullhp battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_FULL_HP
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
@@ -1770,6 +1780,10 @@
 	
 	.macro dmgtocurrattackerhp
 	manipulatedamage DMG_CURR_ATTACKER_HP
+	.endm
+	
+	.macro dmg_1_2_attackerhp
+	manipulatedamage DMG_1_2_ATTACKER_HP
 	.endm
 	
 	.macro jumpifflowerveil jumpptr:req

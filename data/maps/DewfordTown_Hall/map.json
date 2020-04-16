@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 4,
       "y": 6,
       "elevation": 0,
@@ -28,7 +28,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 1,
       "y": 5,
       "elevation": 0,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 5,
       "y": 4,
       "elevation": 0,
@@ -54,7 +54,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 9,
       "y": 3,
       "elevation": 0,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 5,
       "y": 2,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 14,
       "y": 7,
       "elevation": 0,
@@ -93,7 +93,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 12,
       "y": 3,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PSYCHIC_M",
+      "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",
       "x": 15,
       "y": 3,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 8,
       "y": 6,
       "elevation": 3,

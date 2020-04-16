@@ -188,7 +188,7 @@ static u32 sub_81CFA88(struct PokenavSub9 *structPtr)
 
 static u32 sub_81CFB08(struct PokenavSub9 *structPtr)
 {
-    return POKENAV_MENU_5;
+    return POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS;
 }
 
 static u32 sub_81CFB10(struct PokenavSub9 *structPtr)
@@ -446,7 +446,7 @@ static u32 sub_81CFEB8(s32 state)
         ShowBg(2);
         HideBg(3);
         PrintHelpBarText(HELPBAR_RIBBONS_MON_LIST);
-        sub_81C7AC0(1);
+        PokenavFadeScreen(1);
         if (!unk->unkC)
         {
             LoadLeftHeaderGfxForIndex(2);
@@ -601,7 +601,7 @@ static u32 sub_81D01DC(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        sub_81C7AC0(0);
+        PokenavFadeScreen(0);
         sub_81C78A0();
         return LT_INC_AND_PAUSE;
     case 1:
@@ -621,7 +621,7 @@ static u32 sub_81D021C(s32 state)
     {
     case 0:
         PlaySE(SE_SELECT);
-        sub_81C7AC0(0);
+        PokenavFadeScreen(0);
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsPaletteFadeActive())

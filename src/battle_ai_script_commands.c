@@ -316,6 +316,7 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
     EFFECT_SUPERPOWER,
     EFFECT_ERUPTION,
     EFFECT_OVERHEAT,
+    EFFECT_MIND_BLOWN,
     0xFFFF
 };
 
@@ -428,7 +429,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
 
 u8 BattleAI_ChooseMoveOrAction(void)
 {
-    u16 savedCurrentMove = gCurrentMove;
+    u32 savedCurrentMove = gCurrentMove;
     u8 ret;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
@@ -469,7 +470,7 @@ static u8 ChooseMoveOrAction_Singles(void)
 {
     u8 currentMoveArray[MAX_MON_MOVES];
     u8 consideredMoveArray[MAX_MON_MOVES];
-    u8 numOfBestMoves;
+    u32 numOfBestMoves;
     s32 i, id;
     u32 flags = AI_THINKING_STRUCT->aiFlags;
 
@@ -486,6 +487,9 @@ static u8 ChooseMoveOrAction_Singles(void)
         AI_THINKING_STRUCT->aiLogicId++;
         AI_THINKING_STRUCT->movesetIndex = 0;
     }
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        gBattleStruct->aiFinalScore[sBattler_AI][gBattlerTarget][i] = AI_THINKING_STRUCT->score[i];
 
     // Check special AI actions.
     if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
@@ -648,6 +652,9 @@ static u8 ChooseMoveOrAction_Doubles(void)
                     mostViableMovesScores[0] = mostViableMovesScores[0]; // Needed to match.
                 }
             }
+
+            for (j = 0; j < MAX_MON_MOVES; j++)
+                gBattleStruct->aiFinalScore[sBattler_AI][gBattlerTarget][j] = AI_THINKING_STRUCT->score[j];
         }
     }
 
@@ -737,7 +744,7 @@ static void RecordLastUsedMoveByTarget(void)
     }
 }
 
-static bool32 IsBattlerAIControlled(u32 battlerId)
+bool32 IsBattlerAIControlled(u32 battlerId)
 {
     switch (GetBattlerPosition(battlerId))
     {
@@ -747,10 +754,7 @@ static bool32 IsBattlerAIControlled(u32 battlerId)
     case B_POSITION_OPPONENT_LEFT:
         return TRUE;
     case B_POSITION_PLAYER_RIGHT:
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-            return FALSE;
-        else
-            return TRUE;
+        return ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) != 0);
     case B_POSITION_OPPONENT_RIGHT:
         return TRUE;
     }

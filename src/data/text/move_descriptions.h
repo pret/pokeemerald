@@ -2533,6 +2533,10 @@ static const u8 sMULTI_ATTACKDescription[] = _(
 	"An attack that changes\n"
 	"with Memories.");
 
+static const u8 sMIND_BLOWNDescription[] = _(
+	"It explodes the user's head\n"
+	"to damage everything around.");
+
 static const u8 sNotDoneYetDescription[] = _(
 	"Not done yet.");
 
@@ -3212,4 +3216,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_ZING_ZAP - 1] = sZING_ZAPDescription,
     [MOVE_NATURES_MADNESS - 1] = sNATURES_MADNESSDescription,
     [MOVE_MULTI_ATTACK - 1] = sMULTI_ATTACKDescription,
+    [MOVE_MIND_BLOWN - 1] = sMIND_BLOWNDescription,
 };

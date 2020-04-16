@@ -157,7 +157,7 @@ SecretBase_EventScript_InitSecretBase:: @ 8275B5B
 	end
 
 SecretBase_EventScript_FirstEntrance:: @ 8275B81
-	applymovement EVENT_OBJ_ID_PLAYER, SecretBase_Movement_275BB4
+	applymovement OBJ_EVENT_ID_PLAYER, SecretBase_Movement_275BB4
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO
@@ -301,7 +301,7 @@ SecretBase_EventScript_PutAwayDecoration:: @ 8275D2E
 	end
 
 SecretBase_EventScript_PutAwayDecorationLoop:: @ 8275D39
-	special sub_8129708
+	special PutAwayDecorationIteration
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_PutAwayDecorationEnd
 	addvar VAR_0x8004, 1

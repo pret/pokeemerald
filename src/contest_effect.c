@@ -59,19 +59,22 @@ static s16 RoundUp(s16);
 
 bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove)
 {
-    u8 nextMoveComboMoves[4];
     u8 lastMoveComboStarterId = gContestMoves[lastMove].comboStarterId;
-    nextMoveComboMoves[0] = gContestMoves[nextMove].comboMoves[0];
-    nextMoveComboMoves[1] = gContestMoves[nextMove].comboMoves[1];
-    nextMoveComboMoves[2] = gContestMoves[nextMove].comboMoves[2];
-    nextMoveComboMoves[3] = gContestMoves[nextMove].comboMoves[3];
 
     if (lastMoveComboStarterId == 0)
+    {
         return FALSE;
-    else if (lastMoveComboStarterId == nextMoveComboMoves[0] || lastMoveComboStarterId == nextMoveComboMoves[1] || lastMoveComboStarterId == nextMoveComboMoves[2] || lastMoveComboStarterId == nextMoveComboMoves[3])
-        return gComboStarterLookupTable[lastMoveComboStarterId];
+    }
     else
+    {
+        int i;
+        for (i = 0; i < MAX_COMBO_MOVES; i++)
+        {
+            if (lastMoveComboStarterId == gContestMoves[nextMove].comboMoves[i])
+                return TRUE;
+        }
         return FALSE;
+    }
 }
 
 // A highly appealing move.
@@ -424,7 +427,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     for (i = 0; i < 4; i++)
     {
         if (eContestantStatus[i].hasJudgesAttention && sub_80DE1E8(i))
-            oddsMod[i] = gComboStarterLookupTable[gContestMoves[eContestantStatus[i].prevMove].comboStarterId] * 10;
+            oddsMod[i] = gContestMoves[eContestantStatus[i].prevMove].comboStarterId == 0 ? 0 : 10;
         else
             oddsMod[i] = 0;
         oddsMod[i] -= (eContestantStatus[i].condition / 10) * 10;

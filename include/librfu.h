@@ -4,10 +4,10 @@
 #include "global.h"
 #include "main.h"
 
-/* TODOs: 
+#define LIBRFU_VERSION 1026
+
+/* TODOs:
  * - documentation
- * - decompile librfu_intr.s once arm support is back again
- (for internal structs not documented in SDK)
  * - check if any field needs to be volatile
  * - check if field names make sense
  */
@@ -70,6 +70,7 @@
 #define ID_CPR_POLL_REQ                             0x0033
 #define ID_CPR_END_REQ                              0x0034
 #define ID_UNK35_REQ                                0x0035    // not defined in SDK header
+#define ID_UNK36_REQ                                0x0036    // not defined in SDK header
 #define ID_RESUME_RETRANSMIT_AND_CHANGE_REQ         0x0037
 #define ID_STOP_MODE_REQ                            0x003d
 #define ID_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA_REQ   0x00ff    // When the AGB is the clock slave, the RFU generates an informational notice, and an automatically started DMA, such as HDMA, is generated at the instant the AGB is being returned as the clock master. This ID is notified by a REQ callback when the exchange of this information (REQ command) fails.
@@ -89,8 +90,13 @@
 
 #define RFU_MBOOT_DOWNLOADER_SERIAL_NO  0x0000             // The game serial number of the multi-boot downloader (programs that boot without a Game Pak)
 
+#if LIBRFU_VERSION >= 1028
 #define RFU_API_BUFF_SIZE_RAM           0x0e8c             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in RAM)
 #define RFU_API_BUFF_SIZE_ROM           0x052c             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in ROM)
+#else
+#define RFU_API_BUFF_SIZE_RAM           0x0e64             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in RAM)
+#define RFU_API_BUFF_SIZE_ROM           0x0504             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in ROM)
+#endif
 
 #define RFU_CHILD_MAX                   4                  // Maximum number of slaves that can be connected to one parent device
 
@@ -303,7 +309,11 @@ struct STWIStatus
     u8 ackActiveCommand;
     u8 timerSelect;
     u8 unk_b;
-    s32 timerState; // this field is u32 in firered
+#if LIBRFU_VERSION >= 1026
+    s32 timerState;
+#else
+    u32 timerState;
+#endif
     vu8 timerActive;
     u8 unk_11;
     vu16 error;
@@ -313,10 +323,10 @@ struct STWIStatus
     u8 unk_17;
     void (*callbackM)();
     void (*callbackS)(u16);
-    void (*unk_20)(void);
+    void (*callbackID)(void);
     union RfuPacket *txPacket;
     union RfuPacket *rxPacket;
-    vu8 unk_2c;
+    vu8 sending;
 };
 
 // This struct is used as u8 array in SDK. 
@@ -451,35 +461,14 @@ struct RfuStatic
     u8 nullFrameCount;
     u8 emberCount;
     u8 SCStartFlag;
-    u8 linkEmergencyFlag[4];
-    u8 lsFixedCount[4];
-    u16 cidBak[4];
-    u16 unk_1a;
+    u8 linkEmergencyFlag[RFU_CHILD_MAX];
+    u8 lsFixedCount[RFU_CHILD_MAX];
+    u16 cidBak[RFU_CHILD_MAX];
+    u16 linkEmergencyLimit;
     u16 reqResult;
     u16 tryPid;
     u16 watchdogTimer;
     u32 totalPacketSize;
-};
-
-struct RfuSIO32Id
-{
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    u16 unk8; // unused
-    u16 unkA;
-};
-
-struct RfuAPIBuffer
-{
-    struct RfuLinkStatus linkStatus;
-    struct RfuStatic static_;
-    struct RfuFixed fixed;
-    struct RfuSlotStatusNI NI[RFU_CHILD_MAX];
-    struct RfuSlotStatusUNI UNI[RFU_CHILD_MAX];
-    struct RfuIntrStruct intr;
 };
 
 extern struct STWIStatus *gSTWIStatus;
@@ -488,17 +477,16 @@ extern struct RfuStatic *gRfuStatic;
 extern struct RfuFixed *gRfuFixed;
 extern struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
-extern struct RfuSIO32Id gRfuSIO32Id;
 
-// librfu_s32id
-s32 AgbRFU_checkID(u8);
+// librfu_sio32id
+s32 AgbRFU_checkID(u8 maxTries);
 
 // Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation. 
 
 // librfu_rfu
 // API Initialization and Initial Settings
     // API Initialization
-u16 rfu_initializeAPI(struct RfuAPIBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam);
+u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam);
     // Set Timer Interrupt
 void rfu_setTimerInterrupt(u8 timerNo, IntrFunc *timerIntrTable_p);
     // Resident Function called from within a V-Blank Interrupt
@@ -599,7 +587,7 @@ u16 rfu_MBOOT_CHILD_inheritanceLinkStatus(void);
 
 // For Debug
     // Obtain address of the SWTI-layer receive buffer
-struct RfuIntrStruct *rfu_getSTWIRecvBuffer(void);
+u8 *rfu_getSTWIRecvBuffer(void);
     // Obtain RFU state
 void rfu_REQ_RFUStatus(void);
 u16 rfu_getRFUStatus(u8 *rfuState);
@@ -625,14 +613,14 @@ void STWI_send_DataRxREQ(void);
 void STWI_send_MS_ChangeREQ(void);
 void STWI_send_StopModeREQ(void);
 void STWI_send_SystemStatusREQ(void);
-void STWI_send_GameConfigREQ(const u8 *unk1, const u8 *data);
+void STWI_send_GameConfigREQ(const u8 *serial_uname, const u8 *gname);
 void STWI_send_ResetREQ(void);
 void STWI_send_LinkStatusREQ(void);
 void STWI_send_VersionStatusREQ(void);
 void STWI_send_SlotStatusREQ(void);
 void STWI_send_ConfigStatusREQ(void);
 void STWI_send_ResumeRetransmitAndChangeREQ(void);
-void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3);
+void STWI_send_SystemConfigREQ(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer);
 void STWI_send_SC_StartREQ(void);
 void STWI_send_SC_PollingREQ(void);
 void STWI_send_SC_EndREQ(void);

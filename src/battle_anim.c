@@ -112,7 +112,7 @@ EWRAM_DATA static u16 sAnimMoveIndex = 0; // Set but unused.
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u8 gUnknown_02038440 = 0;
+EWRAM_DATA u8 gAnimCustomPanning = 0;
 
 const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
 {
@@ -1877,7 +1877,7 @@ void ClearBattleAnimationVars(void)
     sAnimMoveIndex = 0;
     gBattleAnimAttacker = 0;
     gBattleAnimTarget = 0;
-    gUnknown_02038440 = 0;
+    gAnimCustomPanning = 0;
 }
 
 void DoMoveAnim(u16 move)
@@ -2783,7 +2783,8 @@ static void ScriptCmd_goto(void)
     sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
-// Uses of this function that rely on a TRUE return are expecting inBattle to not be ticked as defined in contest behavior. As a result, if misused, this function cannot reliably discern between field and contest status and could result in undefined behavior.
+// Uses of this function that rely on a TRUE return are expecting inBattle to not be ticked as defined in contest behavior.
+// As a result, if misused, this function cannot reliably discern between field and contest status and could result in undefined behavior.
 bool8 IsContest(void)
 {
     if (!gMain.inBattle)

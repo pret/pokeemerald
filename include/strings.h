@@ -2882,6 +2882,21 @@ extern const u8 gText_CrushingResults[];
 extern const u8 gText_BerryCrush2[];
 extern const u8 gText_PressingSpeedRankings[];
 extern const u8 gText_Var1Players[];
+extern const u8 gText_ReadyToBerryCrush[];
+extern const u8 gText_WaitForAllChooseBerry[];
+extern const u8 gText_EndedWithXUnitsPowder[];
+extern const u8 gText_RecordingGameResults[];
+extern const u8 gText_PlayBerryCrushAgain[];
+extern const u8 gText_YouHaveNoBerries[];
+extern const u8 gText_MemberDroppedOut[];
+extern const u8 gText_TimesUpNoGoodPowder[];
+extern const u8 gText_CommunicationStandby2[];
+extern const u8 gText_SpaceTimes2[];
+extern const u8 gText_XDotY[];
+extern const u8 gText_Var1Berry[];
+extern const u8 gText_NeatnessRankings[];
+extern const u8 gText_CoopRankings[];
+extern const u8 gText_PressingPowerRankings[];
 
 // Lilycove Lady
 extern const u8 gText_ContestLady_Handsome[];

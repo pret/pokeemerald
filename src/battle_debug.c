@@ -7,6 +7,7 @@
 #include "menu_helpers.h"
 #include "scanline_effect.h"
 #include "palette.h"
+#include "pokemon_icon.h"
 #include "sprite.h"
 #include "item.h"
 #include "task.h"
@@ -17,7 +18,10 @@
 #include "text_window.h"
 #include "international_string_util.h"
 #include "strings.h"
+#include "battle_ai_script_commands.h"
 #include "list_menu.h"
+#include "decompress.h"
+#include "trainer_pokemon_sprites.h"
 #include "malloc.h"
 #include "string_util.h"
 #include "util.h"
@@ -65,6 +69,12 @@ struct BattleDebugMenu
     struct BattleDebugModifyArrows modifyArrows;
     const struct BitfieldInfo *bitfield;
     bool8 battlerWasChanged[MAX_BATTLERS_COUNT];
+
+    u8 aiBattlerId;
+    u8 aiViewState;
+    u8 aiIconSpriteIds[MAX_BATTLERS_COUNT];
+    u8 aiMonSpriteId;
+    u8 aiMovesWindowId;
 };
 
 struct __attribute__((__packed__)) BitfieldInfo
@@ -521,8 +531,8 @@ static const struct BgTemplate sBgTemplates[] =
    },
    {
        .bg = 1,
-       .charBaseIndex = 2,
-       .mapBaseIndex = 29,
+       .charBaseIndex = 10,
+       .mapBaseIndex = 20,
        .screenSize = 0,
        .paletteMode = 0,
        .priority = 0,
@@ -571,6 +581,7 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data);
 static void UpdateMonData(struct BattleDebugMenu *data);
 static u8 *GetSideStatusValue(struct BattleDebugMenu *data, bool32 changeStatus, bool32 statusTrue);
 static bool32 TryMoveDigit(struct BattleDebugModifyArrows *modArrows, bool32 moveUp);
+static void SwitchToDebugView(u8 taskId);
 
 // code
 static struct BattleDebugMenu *GetStructPtr(u8 taskId)
@@ -673,6 +684,121 @@ void CB2_BattleDebugMenu(void)
     }
 }
 
+static void PutMovesPointsText(struct BattleDebugMenu *data)
+{
+    u32 i, j, count;
+    u8 *text = malloc(0x50);
+
+    FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        text[0] = CHAR_SPACE;
+        StringCopy(text + 1, gMoveNames[gBattleMons[data->aiBattlerId].moves[i]]);
+        AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 0, i * 15, 0, NULL);
+        for (count = 0, j = 0; j < MAX_BATTLERS_COUNT; j++)
+        {
+            if (data->aiIconSpriteIds[j] == 0xFF)
+                continue;
+            ConvertIntToDecimalStringN(text,
+                                       gBattleStruct->aiFinalScore[data->aiBattlerId][gSprites[data->aiIconSpriteIds[j]].data[0]][i],
+                                       STR_CONV_MODE_RIGHT_ALIGN, 3);
+            AddTextPrinterParameterized(data->aiMovesWindowId, 1, text, 83 + count * 54, i * 15, 0, NULL);
+            count++;
+        }
+    }
+
+    CopyWindowToVram(data->aiMovesWindowId, 3);
+    free(text);
+}
+
+static void Task_ShowAiPoints(u8 taskId)
+{
+    u32 i, count;
+    struct WindowTemplate winTemplate;
+    struct BattleDebugMenu *data = GetStructPtr(taskId);
+
+    switch (data->aiViewState)
+    {
+    case 0:
+        HideBg(0);
+        ShowBg(1);
+
+        // Swap battler if it's player mon
+        data->aiBattlerId = data->battlerId;
+        while (!IsBattlerAIControlled(data->aiBattlerId))
+        {
+            if (++data->aiBattlerId >= gBattlersCount)
+                data->aiBattlerId = 0;
+        }
+
+        LoadMonIconPalettes();
+        for (count = 0, i = 0; i < MAX_BATTLERS_COUNT; i++)
+        {
+            if (i != data->aiBattlerId && IsBattlerAlive(i))
+            {
+                data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
+                                                         SpriteCallbackDummy,
+                                                         95 + (count * 60), 17, 0, 0, FALSE);
+                gSprites[data->aiIconSpriteIds[i]].data[0] = i; // battler id
+                count++;
+            }
+            else
+            {
+                data->aiIconSpriteIds[i] = 0xFF;
+            }
+        }
+        data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
+                                                 gBattleMons[data->aiBattlerId].otId,
+                                                 gBattleMons[data->aiBattlerId].personality,
+                                                 TRUE,
+                                                 39, 130, 15, 0xFFFF);
+        data->aiViewState++;
+        break;
+    // Put text
+    case 1:
+        winTemplate = CreateWindowTemplate(1, 0, 4, 27, 14, 15, 0x200);
+        data->aiMovesWindowId = AddWindow(&winTemplate);
+        PutWindowTilemap(data->aiMovesWindowId);
+        PutMovesPointsText(data);
+
+        data->aiViewState++;
+        break;
+    // Input
+    case 2:
+        if (gMain.newKeys & (SELECT_BUTTON | B_BUTTON))
+        {
+            SwitchToDebugView(taskId);
+            HideBg(1);
+            ShowBg(0);
+            return;
+        }
+        break;
+    }
+}
+
+static void SwitchToAiPointsView(u8 taskId)
+{
+    gTasks[taskId].func = Task_ShowAiPoints;
+    GetStructPtr(taskId)->aiViewState = 0;
+}
+
+static void SwitchToDebugView(u8 taskId)
+{
+    u32 i;
+    struct BattleDebugMenu *data = GetStructPtr(taskId);
+
+    FreeMonIconPalettes();
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (data->aiIconSpriteIds[i] != 0xFF)
+            FreeAndDestroyMonIconSprite(&gSprites[data->aiIconSpriteIds[i]]);
+    }
+    FreeAndDestroyMonPicSprite(data->aiMonSpriteId);
+    RemoveWindow(data->aiMovesWindowId);
+
+    gTasks[taskId].func = Task_DebugMenuProcessInput;
+}
+
 static void Task_DebugMenuFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -712,6 +838,11 @@ static void Task_DebugMenuProcessInput(u8 taskId)
         listItemId = ListMenu_ProcessInput(data->mainListTaskId);
         if (listItemId != LIST_CANCEL && listItemId != LIST_NOTHING_CHOSEN && listItemId < LIST_ITEM_COUNT)
         {
+            if (listItemId == LIST_ITEM_AI_MOVES_PTS && gMain.newKeys & A_BUTTON)
+            {
+                SwitchToAiPointsView(taskId);
+                return;
+            }
             data->currentMainListItemId = listItemId;
 
             // Create the secondary menu list.
@@ -906,8 +1037,7 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         itemsCount = ARRAY_COUNT(sSideStatusListItems);
         break;
     case LIST_ITEM_AI_MOVES_PTS:
-        itemsCount = 4;
-        break;
+        return;
     }
 
     data->secondaryListItemCount = itemsCount;
@@ -966,7 +1096,6 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
     {
     case LIST_ITEM_MOVES:
     case LIST_ITEM_PP:
-    case LIST_ITEM_AI_MOVES_PTS:
         for (i = 0; i < 4; i++)
         {
             PadString(gMoveNames[gBattleMons[data->battlerId].moves[i]], text);
@@ -1337,14 +1466,6 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].pp[data->currentSecondaryListItemId];
         data->modifyArrows.typeOfVal = VAL_U8;
         data->modifyArrows.currValue = gBattleMons[data->battlerId].pp[data->currentSecondaryListItemId];
-        break;
-    case LIST_ITEM_AI_MOVES_PTS:
-        data->modifyArrows.minValue = 0;
-        data->modifyArrows.maxValue = 255;
-        data->modifyArrows.maxDigits = 3;
-        data->modifyArrows.modifiedValPtr = gBattleResources->ai->score;
-        data->modifyArrows.typeOfVal = VAL_S8;
-        data->modifyArrows.currValue = gBattleResources->ai->score[data->currentSecondaryListItemId];
         break;
     case LIST_ITEM_HELD_ITEM:
         data->modifyArrows.minValue = 0;

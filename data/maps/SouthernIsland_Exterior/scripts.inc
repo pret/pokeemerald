@@ -31,12 +31,12 @@ SouthernIsland_Exterior_EventScript_AsYouLike:: @ 8242A17
 	end
 
 Ferry_EventScript_DepartIslandSouth:: @ 8242A21
-	applymovement EVENT_OBJ_ID_PLAYER, Ferry_EventScript_DepartIslandBoardSouth
+	applymovement OBJ_EVENT_ID_PLAYER, Ferry_EventScript_DepartIslandBoardSouth
 	waitmovement 0
 	return
 
 Ferry_EventScript_DepartIslandWest:: @ 8242A2C
-	applymovement EVENT_OBJ_ID_PLAYER, Ferry_EventScript_DepartIslandBoardWest
+	applymovement OBJ_EVENT_ID_PLAYER, Ferry_EventScript_DepartIslandBoardWest
 	waitmovement 0
 	return
 

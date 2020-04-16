@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 22,
       "y": 9,
       "elevation": 3,
@@ -39,7 +39,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 0,
       "y": 37,
       "elevation": 3,

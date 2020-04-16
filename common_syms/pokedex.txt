@@ -1,2 +1,2 @@
 gUnusedPokedexU8
-gUnknown_030060B4
+gPokedexVBlankCB

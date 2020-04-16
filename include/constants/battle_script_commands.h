@@ -146,14 +146,18 @@
 #define VARIOUS_TRY_ILLUSION_OFF                83
 #define VARIOUS_SET_SPRITEIGNORE0HP             84
 #define VARIOUS_HANDLE_FORM_CHANGE              85
+#define VARIOUS_GET_STAT_VALUE                  86
+#define VARIOUS_JUMP_IF_FULL_HP                 87
 
-// Cmd_manipulatedmg
+// Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
 #define DMG_RECOIL_FROM_MISS       1
 #define DMG_DOUBLED                2
 #define DMG_1_8_TARGET_HP          3
 #define DMG_FULL_ATTACKER_HP       4
 #define DMG_CURR_ATTACKER_HP       5
+#define DMG_BIG_ROOT               6
+#define DMG_1_2_ATTACKER_HP        7
 
 // Cmd_jumpifcantswitch
 #define SWITCH_IGNORE_ESCAPE_PREVENTION   0x80

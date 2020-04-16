@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 28,
       "y": 16,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 6,
       "y": 6,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 29,
       "y": 12,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_MAX_ELIXIR"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
       "x": 20,
       "y": 18,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 15,
       "y": 9,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 16,
       "y": 9,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 15,
       "y": 10,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_NUGGET"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 16,
       "y": 10,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
       "x": 28,
       "y": 21,
       "elevation": 3,

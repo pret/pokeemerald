@@ -33,10 +33,10 @@
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 
-extern const u16 gEventObjectPalette8[];
-extern const u16 gEventObjectPalette17[];
-extern const u16 gEventObjectPalette33[];
-extern const u16 gEventObjectPalette34[];
+extern const u16 gObjectEventPalette8[];
+extern const u16 gObjectEventPalette17[];
+extern const u16 gObjectEventPalette33[];
+extern const u16 gObjectEventPalette34[];
 
 static const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 
@@ -249,9 +249,9 @@ void SetLinkContestPlayerGfx(void)
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    gContestMons[i].trainerGfxId = EVENT_OBJ_GFX_LINK_RS_BRENDAN;
+                    gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
                 else
-                    gContestMons[i].trainerGfxId = EVENT_OBJ_GFX_LINK_RS_MAY;
+                    gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_LINK_RS_MAY;
             }
         }
 
@@ -265,7 +265,7 @@ void SetLinkContestPlayerGfx(void)
 void LoadLinkContestPlayerPalettes(void)
 {
     int i;
-    u8 eventObjectId;
+    u8 objectEventId;
     int version;
     struct Sprite *sprite;
 
@@ -274,23 +274,23 @@ void LoadLinkContestPlayerPalettes(void)
     {
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
-            eventObjectId = GetEventObjectIdByLocalIdAndMap(gUnknown_0858D8EC[i], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-            sprite = &gSprites[gEventObjects[eventObjectId].spriteId];
+            objectEventId = GetObjectEventIdByLocalIdAndMap(gUnknown_0858D8EC[i], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            sprite = &gSprites[gObjectEvents[objectEventId].spriteId];
             sprite->oam.paletteNum = 6 + i;
             version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gEventObjectPalette33, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPalette33, 0x160 + i * 0x10, 0x20);
                 else
-                    LoadPalette(gEventObjectPalette34, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPalette34, 0x160 + i * 0x10, 0x20);
             }
             else
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gEventObjectPalette8, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPalette8, 0x160 + i * 0x10, 0x20);
                 else
-                    LoadPalette(gEventObjectPalette17, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPalette17, 0x160 + i * 0x10, 0x20);
             }
         }
     }
@@ -434,7 +434,7 @@ void ScriptRandom(void)
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
-        gContestRngValue = 1103515245 * gContestRngValue + 24691;
+        gContestRngValue = ISO_RANDOMIZE1(gContestRngValue);
         random = gContestRngValue >> 16;
         scriptPtr = &gSpecialVar_Result;
     }
@@ -448,7 +448,7 @@ void ScriptRandom(void)
 
 u16 GetContestRand(void)
 {
-    gContestRngValue = 1103515245 * gContestRngValue + 24691;
+    gContestRngValue = ISO_RANDOMIZE1(gContestRngValue);
     return gContestRngValue >> 16;
 }
 

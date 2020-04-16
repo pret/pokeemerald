@@ -385,7 +385,7 @@
 #define B_ANIM_POKEBLOCK_THROW          0x4
 #define B_ANIM_ITEM_KNOCKOFF            0x5
 #define B_ANIM_TURN_TRAP                0x6
-#define B_ANIM_ITEM_EFFECT              0x7
+#define B_ANIM_HELD_ITEM_EFFECT         0x7
 #define B_ANIM_SMOKEBALL_ESCAPE         0x8
 #define B_ANIM_HANGED_ON                0x9
 #define B_ANIM_RAIN_CONTINUES           0xA
@@ -430,8 +430,8 @@
 #define B_ANIM_STATUS_NIGHTMARE         0x8
 #define B_ANIM_STATUS_WRAPPED           0x9 // does not actually exist
 
-// Most tasks return a value to gBattleAnimArgs[7].
-#define ARG_RET_ID 0x7
+// Tasks with return values often assign them to gBattleAnimArgs[7].
+#define ARG_RET_ID 7
 
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0
