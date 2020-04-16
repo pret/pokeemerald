@@ -4397,6 +4397,8 @@ extern const u32 gItemIcon_SteelMemory[];
 extern const u32 gItemIconPalette_SteelMemory[];
 extern const u32 gItemIcon_WaterMemory[];
 extern const u32 gItemIconPalette_WaterMemory[];
+extern const u32 gItemIconPalette_BugTMHM[];
+extern const u32 gItemIconPalette_FairyTMHM[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
