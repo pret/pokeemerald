@@ -292,7 +292,7 @@
 #define EVO_ITEM_FEMALE      0x001B // specified item is used on a female Pokémon
 #define EVO_LEVEL_RAIN       0x001C // Pokémon reaches the specified level while it's raining
 #define EVO_SPECIFIC_MON_IN_PARTY  0x001D // Pokémon levels up with a specified Pokémon in party
-#define EVO_LEVEL_SPECIFIC_MON_TYPE_IN_PARTY  0x001E // Pokémon reaches the specified level with a specified Pokémon in party
+#define EVO_LEVEL_DARK_TYPE_MON_IN_PARTY  0x001E // Pokémon reaches the specified level with a Dark Type Pokémon in party
 
 #define EVOS_PER_MON 8
 
