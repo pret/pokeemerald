@@ -9054,7 +9054,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BURN_UP] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_BURN_UP,
         .power = 130,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -9096,7 +9096,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PURIFY] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_PURIFY,
         .power = 0,
         .type = TYPE_POISON,
         .accuracy = 0,
