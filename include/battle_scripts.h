@@ -334,5 +334,6 @@ extern const u8 BattleScript_DisguiseBustedActivates[];
 extern const u8 BattleScript_AnticipationActivates[];
 extern const u8 BattleScript_SlowStartEnds[];
 extern const u8 BattleScript_HealerActivates[];
+extern const u8 BattleScript_ScriptingAbilityStatRaise[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

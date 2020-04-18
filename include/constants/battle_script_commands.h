@@ -149,6 +149,7 @@
 #define VARIOUS_GET_STAT_VALUE                  86
 #define VARIOUS_JUMP_IF_FULL_HP                 87
 #define VARIOUS_LOSE_TYPE                       88
+#define VARIOUS_TRY_ACTIVATE_SOULHEART          89
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

@@ -4783,6 +4783,7 @@ BattleScript_FaintAttacker::
 	dofaintanimation BS_ATTACKER
 	printstring STRINGID_ATTACKERFAINTED
 	cleareffectsonfaint BS_ATTACKER
+	tryactivatesoulheart
 	trytrainerslidefirstdownmsg BS_ATTACKER
 	return
 
@@ -4793,6 +4794,7 @@ BattleScript_FaintTarget::
 	dofaintanimation BS_TARGET
 	printstring STRINGID_TARGETFAINTED
 	cleareffectsonfaint BS_TARGET
+	tryactivatesoulheart
 	tryactivatemoxie BS_ATTACKER
 	tryactivatefellstinger BS_ATTACKER
 	trytrainerslidefirstdownmsg BS_TARGET
@@ -6798,6 +6800,20 @@ BattleScript_TargetAbilityStatRaise::
 	waitanimation
 	printstring STRINGID_TARGETABILITYSTATRAISE
 	waitmessage 0x40
+	return
+	
+BattleScript_ScriptingAbilityStatRaise::
+	copybyte gBattlerAbility, sBATTLER
+	call BattleScript_AbilityPopUp
+	copybyte sSAVED_DMG, gBattlerAttacker
+	copybyte gBattlerAttacker, sBATTLER
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_ATTACKERABILITYSTATRAISE
+	waitmessage 0x40
+	copybyte gBattlerAttacker, sSAVED_DMG
 	return
 
 BattleScript_WeakArmorActivates::
