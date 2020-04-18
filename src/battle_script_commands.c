@@ -7751,6 +7751,7 @@ static void Cmd_various(void)
         if (gBattlescriptCurrInstr[3] == 0)
         {
             gBattleScripting.savedDmg = gBattlerSpriteIds[gActiveBattler];
+            HideBattlerShadowSprite(gActiveBattler);
         }
         else if (gBattlescriptCurrInstr[3] == 1)
         {
@@ -7762,6 +7763,7 @@ static void Cmd_various(void)
             gBattlerSpriteIds[gActiveBattler] = gBattleScripting.savedDmg;
             if (gBattleMons[gActiveBattler].hp != 0)
             {
+                SetBattlerShadowSpriteCallback(gActiveBattler, gBattleMons[gActiveBattler].species);
                 BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
             }
         }
