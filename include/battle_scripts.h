@@ -331,5 +331,6 @@ extern const u8 BattleScript_AftermathDmg[];
 extern const u8 BattleScript_StanceChangeActivates[];
 extern const u8 BattleScript_DisguiseBustedActivates[];
 extern const u8 BattleScript_AnticipationActivates[];
+extern const u8 BattleScript_SlowStartEnds[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

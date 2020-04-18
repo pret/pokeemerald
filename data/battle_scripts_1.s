@@ -5741,6 +5741,14 @@ BattleScript_ThroatChopEndTurn::
 	printstring STRINGID_THROATCHOPENDS
 	waitmessage 0x40
 	end2
+	
+BattleScript_SlowStartEnds::
+	pause 0x5
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SLOWSTARTEND
+	waitmessage 0x40
+	end2
 
 BattleScript_SelectingNotAllowedMoveGravity::
 	printselectionstring STRINGID_GRAVITYPREVENTSUSAGE

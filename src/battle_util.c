@@ -1392,6 +1392,7 @@ enum
 	ENDTURN_ELECTRIFY,
 	ENDTURN_POWDER,
 	ENDTURN_THROAT_CHOP,
+	ENDTURN_SLOW_START,
 	ENDTURN_BATTLER_COUNT
 };
 
@@ -1852,6 +1853,16 @@ u8 DoBattlerEndTurnEffects(void)
             if (gDisableStructs[gActiveBattler].throatChopTimer && --gDisableStructs[gActiveBattler].throatChopTimer == 0)
             {
                 BattleScriptExecute(BattleScript_ThroatChopEndTurn);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_SLOW_START:
+            if (gDisableStructs[gActiveBattler].slowStartTimer
+                && --gDisableStructs[gActiveBattler].slowStartTimer == 0
+                && ability == ABILITY_SLOW_START)
+            {
+                BattleScriptExecute(BattleScript_SlowStartEnds);
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;
@@ -2854,6 +2865,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITY_SLOW_START:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
+                gDisableStructs[battler].slowStartTimer = 5;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 3;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
