@@ -1066,6 +1066,7 @@ AI_CheckViability:
 	if_effect EFFECT_MORNING_SUN, AI_CV_HealWeather
 	if_effect EFFECT_SYNTHESIS, AI_CV_HealWeather
 	if_effect EFFECT_MOONLIGHT, AI_CV_HealWeather
+	if_effect EFFECT_SHORE_UP, AI_CV_Heal
 	if_effect EFFECT_RAIN_DANCE, AI_CV_RainDance
 	if_effect EFFECT_SUNNY_DAY, AI_CV_SunnyDay
 	if_effect EFFECT_BELLY_DRUM, AI_CV_BellyDrum
@@ -3721,7 +3722,7 @@ AI_HPAware:
 
 AI_HPAware_UserHasHighHP:
 	get_considered_move_effect
-	if_in_bytes AI_HPAware_DiscouragedEffectsWhenHighHP, AI_HPAware_TryToDiscourage
+	if_in_hwords AI_HPAware_DiscouragedEffectsWhenHighHP, AI_HPAware_TryToDiscourage
 	goto AI_HPAware_ConsiderTarget
 
 AI_HPAware_UserHasMediumHP:
@@ -3758,21 +3759,22 @@ AI_HPAware_End:
 	end
 
 AI_HPAware_DiscouragedEffectsWhenHighHP: @ 82DE21F
-    .byte EFFECT_EXPLOSION
-    .byte EFFECT_RESTORE_HP
-    .byte EFFECT_REST
-    .byte EFFECT_DESTINY_BOND
-    .byte EFFECT_FLAIL
-    .byte EFFECT_ENDURE
-    .byte EFFECT_MORNING_SUN
-    .byte EFFECT_SYNTHESIS
-    .byte EFFECT_MOONLIGHT
-    .byte EFFECT_SOFTBOILED
-    .byte EFFECT_ROOST
-    .byte EFFECT_MEMENTO
-    .byte EFFECT_GRUDGE
-    .byte EFFECT_OVERHEAT
-    .byte -1
+    .2byte EFFECT_EXPLOSION
+    .2byte EFFECT_RESTORE_HP
+    .2byte EFFECT_REST
+    .2byte EFFECT_DESTINY_BOND
+    .2byte EFFECT_FLAIL
+    .2byte EFFECT_ENDURE
+    .2byte EFFECT_MORNING_SUN
+    .2byte EFFECT_SYNTHESIS
+    .2byte EFFECT_MOONLIGHT
+    .2byte EFFECT_SHORE_UP
+    .2byte EFFECT_SOFTBOILED
+    .2byte EFFECT_ROOST
+    .2byte EFFECT_MEMENTO
+    .2byte EFFECT_GRUDGE
+    .2byte EFFECT_OVERHEAT
+    .2byte -1
 
 AI_HPAware_DiscouragedEffectsWhenMediumHP: @ 82DE22D
     .byte EFFECT_EXPLOSION

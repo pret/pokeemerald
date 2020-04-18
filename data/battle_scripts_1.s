@@ -359,6 +359,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectMindBlown
 	.4byte BattleScript_EffectPurify
 	.4byte BattleScript_EffectBurnUp
+	.4byte BattleScript_EffectShoreUp
 	
 BattleScript_EffectBurnUp:
 	attackcanceler
@@ -3734,6 +3735,7 @@ BattleScript_EffectSonicboom::
 BattleScript_EffectMorningSun::
 BattleScript_EffectSynthesis::
 BattleScript_EffectMoonlight::
+BattleScript_EffectShoreUp::
 	attackcanceler
 	attackstring
 	ppreduce

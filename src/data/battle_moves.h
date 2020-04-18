@@ -8731,7 +8731,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SHORE_UP] =
     {
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_SHORE_UP,
         .power = 0,
         .type = TYPE_GROUND,
         .accuracy = 0,
