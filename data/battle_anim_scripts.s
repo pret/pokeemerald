@@ -2746,20 +2746,22 @@ Move_PSYCHO_CUT:
 	loadspritegfx ANIM_TAG_PSYCHO_CUT 
 	monbg ANIM_ATK_PARTNER 
 	createsprite gPsychoCutSpiralSpriteTemplate, 2, 4, 0, 0, 0, 0
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, 1, 0, 4, 4, RGB_BLACK
-	createvisualtask AnimTask_BlendBattleAnimPal, 9, 5, 2, 2, 10, 0, RGB(20, 12, 23)  
-	createvisualtask AnimTask_BlendBattleAnimPal, 9, 2, 2, 10, 0, RGB(20, 12, 23)
+	createvisualtask AnimTask_BlendBattleAnimPal, 1, 1, 2, 0,  4, RGB_BLACK
+	createvisualtask AnimTask_BlendBattleAnimPal, 1, 2, 2, 0, 10, RGB(20, 12, 23)  
 	delay 30
 	clearmonbg ANIM_ATK_PARTNER 
-	blendoff 
 	waitforvisualfinish 
 	monbg ANIM_TARGET 
 	monbgprio_28 ANIM_TARGET  
 	setalpha 12, 8 
-	playsewithpan 160, SOUND_PAN_ATTACKER, 
+	playsewithpan SE_W013B, SOUND_PAN_ATTACKER, 
 	createsprite gPsychoCutSpriteTemplate, 130, 5, 20, 0, -8, 0, 20
 	waitforvisualfinish 
-	clearmonbg ANIM_TARGET 
+	createvisualtask AnimTask_BlendBattleAnimPal, 1, 1, 2, 4,  0, RGB_BLACK
+	createvisualtask AnimTask_BlendBattleAnimPal, 1, 2, 2, 10, 0, RGB(20, 12, 23)
+	clearmonbg ANIM_TARGET
+	blendoff
+	waitforvisualfinish
 	end
 	
 Move_ZEN_HEADBUTT:
@@ -4450,14 +4452,14 @@ Move_INFERNO:
 	call SetImpactBackground
 	loopsewithpan SE_W221B, SOUND_PAN_TARGET, 40, 4
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 94, 1
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 1, 0, 9, 31
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 1, 0, 9, RGB_RED
 	call InfernoAnim
 	call InfernoAnim
 	call InfernoAnim
 	call InfernoAnim
 	call InfernoAnim
 	call InfernoAnim
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 1, 9, 0, 31
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 1, 9, 0, RGB_RED
 	restorebg
 	waitbgfadein
 	waitforvisualfinish

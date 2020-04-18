@@ -2811,16 +2811,13 @@ AI_CV_SemiInvulnerable:
 	score -1
 	goto AI_CV_SemiInvulnerable_End
 
-@ BUG: The scripts for checking type-resistance to weather for semi-invulnerable moves are swapped
-@      The result is that the AI is encouraged to stall while taking damage from weather
-@      To fix, swap _CheckSandstormTypes/_CheckIceType in the below script
 AI_CV_SemiInvulnerable2:
 	if_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_SemiInvulnerable_TryEncourage
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_SemiInvulnerable_TryEncourage
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_SemiInvulnerable_TryEncourage
 	get_weather
-	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckSandstormTypes
-	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckIceType
+	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckIceType
+	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckSandstormTypes
 	goto AI_CV_SemiInvulnerable5
 
 AI_CV_SemiInvulnerable_CheckSandstormTypes:
@@ -2828,6 +2825,8 @@ AI_CV_SemiInvulnerable_CheckSandstormTypes:
 	if_in_bytes AI_CV_SandstormResistantTypes, AI_CV_SemiInvulnerable_TryEncourage
 	get_user_type2
 	if_in_bytes AI_CV_SandstormResistantTypes, AI_CV_SemiInvulnerable_TryEncourage
+	get_ability AI_USER
+	if_in_bytes AI_SandstormResistantAbilities, AI_CV_SemiInvulnerable_TryEncourage
 	goto AI_CV_SemiInvulnerable5
 
 AI_CV_SemiInvulnerable_CheckIceType:
@@ -2835,6 +2834,8 @@ AI_CV_SemiInvulnerable_CheckIceType:
 	if_equal TYPE_ICE, AI_CV_SemiInvulnerable_TryEncourage
 	get_user_type2
 	if_equal TYPE_ICE, AI_CV_SemiInvulnerable_TryEncourage
+	get_ability AI_USER
+	if_in_bytes AI_HailResistantAbilities, AI_CV_SemiInvulnerable_TryEncourage
 
 AI_CV_SemiInvulnerable5:
 	if_target_faster AI_CV_SemiInvulnerable_End
@@ -2855,6 +2856,21 @@ AI_CV_SandstormResistantTypes:
     .byte TYPE_ROCK
     .byte TYPE_STEEL
     .byte -1
+	
+AI_SandstormResistantAbilities:
+	.byte ABILITY_SAND_VEIL
+	.byte ABILITY_SAND_FORCE
+	.byte ABILITY_SAND_RUSH
+	.byte ABILITY_OVERCOAT
+	.byte ABILITY_MAGIC_GUARD
+	.byte -1
+	
+AI_HailResistantAbilities:
+	.byte ABILITY_ICE_BODY
+	.byte ABILITY_SNOW_CLOAK
+	.byte ABILITY_OVERCOAT
+	.byte ABILITY_MAGIC_GUARD
+	.byte -1
 
 AI_CV_FakeOut:
 	if_ability AI_TARGET, ABILITY_INNER_FOCUS, AI_CV_FakeOut_End
