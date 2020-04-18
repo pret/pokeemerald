@@ -6428,6 +6428,14 @@ BattleScript_SolarPowerActivates::
 	waitmessage 0x40
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	end3
+	
+BattleScript_HealerActivates::
+	call BattleScript_AbilityPopUp
+	curestatus BS_SCRIPTING
+	updatestatusicon BS_SCRIPTING
+	printstring STRINGID_HEALERCURE
+	waitmessage 0x40
+	end3
 
 BattleScript_SandstreamActivates::
 	pause 0x20
