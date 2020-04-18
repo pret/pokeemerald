@@ -1008,17 +1008,26 @@ Move_U_TURN:
 	playsewithpan SE_W019, SOUND_PAN_ATTACKER
 	createsprite gFlyBallUpSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 13, 336
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_CanBattlerSwitch, 1, ANIM_ATTACKER
+	jumpretfalse UTurnVisible
 	createsprite gFlyBallAttackSpriteTemplate, ANIM_ATTACKER, 2, 20, TRUE
+UTurnContinue:
 	delay 20
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 0
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 8, 1
 	playsewithpan SE_W013, SOUND_PAN_TARGET
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
+	createvisualtask AnimTask_CanBattlerSwitch, 1, ANIM_ATTACKER
+	jumpretfalse UTurnLast
 	invisible ANIM_ATTACKER
+UTurnLast:
 	blendoff
 	waitforvisualfinish
 	end
+UTurnVisible:
+	createsprite gFlyBallAttackSpriteTemplate, ANIM_ATTACKER, 2, 20, FALSE
+	goto UTurnContinue
 
 Move_CLOSE_COMBAT:
 	loadspritegfx ANIM_TAG_IMPACT	
@@ -4518,13 +4527,26 @@ Move_VOLT_SWITCH:
 	delay 4
 	call ElectricityEffect
 	playsewithpan SE_W085B, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_CanBattlerSwitch 1, ANIM_ATTACKER
+	jumpretfalse VoltSwitchContinue
+	createvisualtask AnimTask_IsTargetSameSide 1
+	jumprettrue VoltSwitchAgainstPartner
 	createvisualtask AnimTask_SlideOffScreen, 5, ANIM_ATTACKER, -2
+VoltSwitchContinue:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
+	createvisualtask AnimTask_CanBattlerSwitch 1, ANIM_ATTACKER
+	jumpretfalse VoltSwitchLast
 	invisible ANIM_ATTACKER
+VoltSwitchLast:
 	delay 8
 	end
+@ Attacking the same side requires a change of direction
+@ why would you attack your partner though?!
+VoltSwitchAgainstPartner:
+	createvisualtask AnimTask_SlideOffScreen, 5, ANIM_ATTACKER, +2
+	goto VoltSwitchContinue
 	
 Move_STRUGGLE_BUG:
 	end
