@@ -3134,7 +3134,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             case ABILITY_MOODY:
                 if (gDisableStructs[battler].isFirstTurn != 2)
                 {
-                    u32 validToRaise = 0, validToLower;
+                    u32 validToRaise = 0, validToLower = 0;
                     u32 statsNum = (B_MOODY_ACC_EVASION != GEN_8) ? NUM_BATTLE_STATS : NUM_STATS;
 
                     for (i = STAT_ATK; i < statsNum; i++)
