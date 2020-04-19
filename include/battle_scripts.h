@@ -336,5 +336,8 @@ extern const u8 BattleScript_SlowStartEnds[];
 extern const u8 BattleScript_HealerActivates[];
 extern const u8 BattleScript_ScriptingAbilityStatRaise[];
 extern const u8 BattleScript_ReceiverActivates[];
+extern const u8 BattleScript_FriskActivates[];
+extern const u8 BattleScript_FriskMsg[];
+extern const u8 BattleScript_FriskMsgWithPopup[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

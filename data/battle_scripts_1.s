@@ -6887,6 +6887,18 @@ BattleScript_SwitchInAbilityMsg::
 	printfromtable gSwitchInAbilityStringIds
 	waitmessage 0x40
 	end3
+	
+BattleScript_FriskMsgWithPopup::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+BattleScript_FriskMsg::
+	printstring STRINGID_FRISKACTIVATES
+	waitmessage 0x40
+	return
+	
+BattleScript_FriskActivates::
+	tryfriskmsg BS_ATTACKER
+	end3
 
 BattleScript_ImposterActivates::
 	transformdataexecution
