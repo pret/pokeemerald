@@ -12,16 +12,17 @@
 #define ABILITYEFFECT_ENDTURN                    0x1
 #define ABILITYEFFECT_MOVES_BLOCK                0x2
 #define ABILITYEFFECT_ABSORBING                  0x3
-#define ABILITYEFFECT_MOVE_END                   0x4
-#define ABILITYEFFECT_IMMUNITY                   0x5
-#define ABILITYEFFECT_FORECAST                   0x6
-#define ABILITYEFFECT_SYNCHRONIZE                0x7
-#define ABILITYEFFECT_ATK_SYNCHRONIZE            0x8
-#define ABILITYEFFECT_INTIMIDATE1                0x9
-#define ABILITYEFFECT_INTIMIDATE2                0xA
-#define ABILITYEFFECT_TRACE1                     0xB
-#define ABILITYEFFECT_TRACE2                     0xC
-#define ABILITYEFFECT_MOVE_END_OTHER             0xD
+#define ABILITYEFFECT_MOVE_END_ATTACKER          0x4
+#define ABILITYEFFECT_MOVE_END                   0x5
+#define ABILITYEFFECT_IMMUNITY                   0x6
+#define ABILITYEFFECT_FORECAST                   0x7
+#define ABILITYEFFECT_SYNCHRONIZE                0x8
+#define ABILITYEFFECT_ATK_SYNCHRONIZE            0x9
+#define ABILITYEFFECT_INTIMIDATE1                0xA
+#define ABILITYEFFECT_INTIMIDATE2                0xB
+#define ABILITYEFFECT_TRACE1                     0xC
+#define ABILITYEFFECT_TRACE2                     0xD
+#define ABILITYEFFECT_MOVE_END_OTHER             0xE
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0

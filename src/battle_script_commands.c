@@ -4528,8 +4528,10 @@ static void Cmd_moveend(void)
         case MOVEEND_ABILITIES: // Such as abilities activating on contact(Poison Spore, Rough Skin, etc.).
             if (AbilityBattleEffects(ABILITYEFFECT_MOVE_END, gBattlerTarget, 0, 0, 0))
                 effect = TRUE;
-            // Poison Touch, possibly other in the future
-            else if (AbilityBattleEffects(ABILITYEFFECT_MOVE_END, gBattlerAttacker, 0, 0, 0))
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_ABILITIES_ATTACKER: // Poison Touch, possibly other in the future
+            if (AbilityBattleEffects(ABILITYEFFECT_MOVE_END_ATTACKER, gBattlerAttacker, 0, 0, 0))
                 effect = TRUE;
             gBattleScripting.moveendState++;
             break;
