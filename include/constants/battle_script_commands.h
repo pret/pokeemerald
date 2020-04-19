@@ -153,6 +153,7 @@
 #define VARIOUS_TRY_ACTIVATE_RECEIVER           90
 #define VARIOUS_TRY_ACTIVATE_BEAST_BOOST        91
 #define VARIOUS_TRY_FRISK                       92
+#define VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED  93
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

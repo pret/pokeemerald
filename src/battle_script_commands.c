@@ -1038,7 +1038,7 @@ static bool32 TryAegiFormChange(void)
     }
 
     BattleScriptPushCursor();
-    gBattlescriptCurrInstr = BattleScript_StanceChangeActivates;
+    gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
     return TRUE;
 }
 
@@ -1797,7 +1797,7 @@ static void Cmd_datahpupdate(void)
         {
             gBattleMons[gActiveBattler].species = SPECIES_MIMIKYU_BUSTED;
             BattleScriptPush(gBattlescriptCurrInstr + 2);
-            gBattlescriptCurrInstr = BattleScript_DisguiseBustedActivates;
+            gBattlescriptCurrInstr = BattleScript_TargetFormChange;
         }
         else
         {
@@ -2224,8 +2224,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 || GetBattlerAbility(gEffectBattler) == ABILITY_INSOMNIA
                 || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
                 || IsAbilityOnSide(gEffectBattler, ABILITY_SWEET_VEIL)
-                || IsFlowerVeilProtected(gEffectBattler)
-                || IsLeafGuardProtected(gEffectBattler))
+                || IsAbilityStatusProtected(gEffectBattler))
                 break;
 
             CancelMultiTurnMoves(gEffectBattler);
@@ -2270,8 +2269,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY
                 || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
-                || IsFlowerVeilProtected(gEffectBattler)
-                || IsLeafGuardProtected(gEffectBattler))
+                || IsAbilityStatusProtected(gEffectBattler))
                 break;
 
             statusChanged = TRUE;
@@ -2310,8 +2308,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_WATER_VEIL
                 || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
-                || IsFlowerVeilProtected(gEffectBattler)
-                || IsLeafGuardProtected(gEffectBattler))
+                || IsAbilityStatusProtected(gEffectBattler))
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
@@ -2329,8 +2326,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_MAGMA_ARMOR
                 || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
-                || IsFlowerVeilProtected(gEffectBattler)
-                || IsLeafGuardProtected(gEffectBattler))
+                || IsAbilityStatusProtected(gEffectBattler))
                 break;
 
             CancelMultiTurnMoves(gEffectBattler);
@@ -2375,8 +2371,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             if (GetBattlerAbility(gEffectBattler) == ABILITY_LIMBER
                 || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
-                || IsFlowerVeilProtected(gEffectBattler)
-                || IsLeafGuardProtected(gEffectBattler))
+                || IsAbilityStatusProtected(gEffectBattler))
                 break;
             if (gBattleMons[gEffectBattler].status1)
                 break;
@@ -2419,8 +2414,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             {
                 if (GetBattlerAbility(gEffectBattler) == ABILITY_IMMUNITY
                     || GetBattlerAbility(gEffectBattler) == ABILITY_COMATOSE
-                    || IsFlowerVeilProtected(gEffectBattler)
-                    || IsLeafGuardProtected(gEffectBattler))
+                    || IsAbilityStatusProtected(gEffectBattler))
                     break;
 
                 // It's redundant, because at this point we know the status1 value is 0.
@@ -6748,6 +6742,19 @@ u32 IsLeafGuardProtected(u32 battler)
         return 0;
 }
 
+bool32 IsShieldsDownProtected(u32 battler)
+{
+    return (gBattleMons[battler].ability == ABILITY_SHIELDS_DOWN
+            && gBattleMons[battler].species == SPECIES_MINIOR);
+}
+
+u32 IsAbilityStatusProtected(u32 battler)
+{
+    return IsFlowerVeilProtected(battler)
+        || IsLeafGuardProtected(battler)
+        || IsShieldsDownProtected(battler);
+}
+
 static void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
 {
     CalculateMonStats(mon);
@@ -6805,6 +6812,12 @@ static void Cmd_various(void)
         else if (WILD_DOUBLE_BATTLE
                  && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
                  && GetBattlerSide(gBattlerTarget) == B_SIDE_OPPONENT)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+    case VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED:
+        if (IsShieldsDownProtected(gActiveBattler))
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         else
             gBattlescriptCurrInstr += 7;
