@@ -46,6 +46,7 @@
 #define GEN_5 2
 #define GEN_6 3
 #define GEN_7 4
+#define GEN_8 5
 
 // Calculation settings
 #define B_CRIT_CHANCE               GEN_6 // Chances of a critical hit landing. See atk04_critcalc.
@@ -59,6 +60,7 @@
 #define B_FELL_STINGER_STAT_RAISE   GEN_6 // Gen6 Atk+2, Gen7 Atk+3.
 #define B_SOUND_SUBSTITUTE          GEN_6 // Starting from Gen6 sound moves bypass Substitute.
 #define B_TOXIC_NEVER_MISS          GEN_6 // Starting from Gen6, if Toxic is used by a Poison type, it will never miss.
+#define B_MOODY_ACC_EVASION         GEN_6 // In Gen8, Moody CANNOT raise Accuray and Evasion any more
 
 // Ability settings
 #define B_ABILITY_POP_UP            GEN_6 // Starting from gen5, the pokemon abilities are displayed in a pop-up, when they activate in battle.

@@ -3131,6 +3131,45 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_MOODY:
+                if (gDisableStructs[battler].isFirstTurn != 2)
+                {
+                    u32 validToRaise = 0, validToLower;
+                    u32 statsNum = (B_MOODY_ACC_EVASION != GEN_8) ? NUM_BATTLE_STATS : NUM_STATS;
+
+                    for (i = STAT_ATK; i < statsNum; i++)
+                    {
+                        if (gBattleMons[battler].statStages[i] != 0)
+                            validToLower |= gBitTable[i];
+                        if (gBattleMons[battler].statStages[i] != 12)
+                            validToRaise |= gBitTable[i];
+                    }
+
+                    if (validToLower != 0 || validToRaise != 0) // Can lower one stat, or can raise one stat
+                    {
+                        gBattleScripting.statChanger = gBattleScripting.savedStatChanger = 0; // for raising and lowering stat respectively
+                        if (validToRaise != 0) // Find stat to raise
+                        {
+                            do
+                            {
+                                i = (Random() % statsNum) + STAT_ATK;
+                            } while (!(validToRaise & gBitTable[i]));
+                            SET_STATCHANGER(i, (gBattleMons[battler].statStages[i] < 11) ? 2 : 1, FALSE);
+                            validToLower &= ~(gBitTable[i]); // Can't lower the same stat as raising.
+                        }
+                        if (validToLower != 0) // Find stat to lower
+                        {
+                            do
+                            {
+                                i = (Random() % statsNum) + STAT_ATK;
+                            } while (!(validToLower & gBitTable[i]));
+                            SET_STATCHANGER2(gBattleScripting.savedStatChanger, i, 1, TRUE);
+                        }
+                        BattleScriptPushCursorAndCallback(BattleScript_MoodyActivates);
+                        effect++;
+                    }
+                }
+                break;
             case ABILITY_TRUANT:
                 gDisableStructs[gBattlerAttacker].truantCounter ^= 1;
                 break;

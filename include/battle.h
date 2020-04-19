@@ -578,6 +578,7 @@ struct BattleStruct
 #define SET_STAT_BUFF_VALUE(n)((((n) << 3) & 0xF8))
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
+#define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
 
 struct BattleScripting
 {
@@ -590,7 +591,7 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 moveendState;
-    u8 unused_15;
+    u8 savedStatChanger; // For further use, if attempting to change stat two times(ex. Moody)
     u8 unused_16;
     u8 battler;
     u8 animTurn;

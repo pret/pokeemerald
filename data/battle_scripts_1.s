@@ -6394,6 +6394,31 @@ BattleScript_SpeedBoostActivates::
 	printstring STRINGID_PKMNRAISEDSPEED
 	waitmessage 0x40
 	end3
+	
+@ Can't compare directly to a value, have to compare to value at pointer
+sZero:
+.byte 0
+	
+BattleScript_MoodyActivates::
+	call BattleScript_AbilityPopUp
+	jumpifbyteequal sSTATCHANGER, sZero, BattleScript_MoodyLower
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_MoodyLower
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 0x1, BattleScript_MoodyLower
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_MoodyLower:
+	jumpifbyteequal sSAVED_STAT_CHANGER, sZero, BattleScript_MoodyEnd
+	copybyte sSTATCHANGER, sSAVED_STAT_CHANGER
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_MoodyEnd
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 0x1, BattleScript_MoodyEnd
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+BattleScript_MoodyEnd:
+	end3
 
 BattleScript_TraceActivates::
 	pause 0x20
@@ -6859,9 +6884,9 @@ BattleScript_WeakArmorActivatesEnd:
 	return
 
 BattleScript_AttackerAbilityStatRaise::
-	setgraphicalstatchangevalues
 	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
+	setgraphicalstatchangevalues
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
 	printstring STRINGID_ATTACKERABILITYSTATRAISE
