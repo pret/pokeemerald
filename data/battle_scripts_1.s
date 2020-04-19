@@ -4784,6 +4784,7 @@ BattleScript_FaintAttacker::
 	printstring STRINGID_ATTACKERFAINTED
 	cleareffectsonfaint BS_ATTACKER
 	tryactivatesoulheart
+	tryactivatereceiver BS_ATTACKER
 	trytrainerslidefirstdownmsg BS_ATTACKER
 	return
 
@@ -4794,9 +4795,11 @@ BattleScript_FaintTarget::
 	dofaintanimation BS_TARGET
 	printstring STRINGID_TARGETFAINTED
 	cleareffectsonfaint BS_TARGET
-	tryactivatesoulheart
-	tryactivatemoxie BS_ATTACKER
 	tryactivatefellstinger BS_ATTACKER
+	tryactivatesoulheart
+	tryactivatereceiver BS_TARGET
+	tryactivatemoxie BS_ATTACKER
+	tryactivatebeastboost BS_ATTACKER
 	trytrainerslidefirstdownmsg BS_TARGET
 	return
 
@@ -6404,6 +6407,13 @@ BattleScript_TraceActivates::
 BattleScript_TraceActivatesEnd3::
 	call BattleScript_TraceActivates
 	end3
+
+BattleScript_ReceiverActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_RECEIVERABILITYTAKEOVER
+	waitmessage 0x40
+	settracedability BS_ABILITY_BATTLER
+	return
 
 BattleScript_RainDishActivates::
 	call BattleScript_AbilityPopUp

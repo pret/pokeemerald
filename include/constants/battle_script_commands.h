@@ -150,6 +150,8 @@
 #define VARIOUS_JUMP_IF_FULL_HP                 87
 #define VARIOUS_LOSE_TYPE                       88
 #define VARIOUS_TRY_ACTIVATE_SOULHEART          89
+#define VARIOUS_TRY_ACTIVATE_RECEIVER           90
+#define VARIOUS_TRY_ACTIVATE_BEAST_BOOST        91
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
