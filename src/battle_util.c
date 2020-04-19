@@ -3526,7 +3526,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                  && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
                  && !IsFlowerVeilProtected(gBattlerAttacker)
                  && !IsLeafGuardProtected(gBattlerAttacker)
-                 && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+                 && IsMoveMakingContact(move, gBattlerAttacker)
                  && (Random() % 3) == 0)
                 {
                     gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_SLEEP;
@@ -3550,7 +3550,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
              && !IsFlowerVeilProtected(gBattlerAttacker)
              && !IsLeafGuardProtected(gBattlerAttacker)
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && IsMoveMakingContact(move, gBattlerAttacker)
              && (Random() % 3) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_POISON;
@@ -3572,10 +3572,31 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY)
              && !IsFlowerVeilProtected(gBattlerAttacker)
              && !IsLeafGuardProtected(gBattlerAttacker)
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && IsMoveMakingContact(move, gBattlerAttacker)
              && (Random() % 3) == 0)
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_PARALYSIS;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+                effect++;
+            }
+            break;
+        case ABILITY_POISON_TOUCH:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerTarget].hp != 0
+             && !gProtectStructs[gBattlerTarget].confusionSelfDmg
+             && !IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_POISON)
+             && !IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_STEEL)
+             && GetBattlerAbility(gBattlerTarget) != ABILITY_IMMUNITY
+             && !(gBattleMons[gBattlerTarget].status1 & STATUS1_ANY)
+             && !IsFlowerVeilProtected(gBattlerTarget)
+             && !IsLeafGuardProtected(gBattlerTarget)
+             && IsMoveMakingContact(move, gBattlerAttacker)
+             && (Random() % 3) == 0)
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
