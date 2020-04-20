@@ -3192,7 +3192,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             {
                                 i = (Random() % statsNum) + STAT_ATK;
                             } while (!(validToRaise & gBitTable[i]));
-                            SET_STATCHANGER(i, (gBattleMons[battler].statStages[i] < 11) ? 2 : 1, FALSE);
+                            SET_STATCHANGER(i, 2, FALSE);
                             validToLower &= ~(gBitTable[i]); // Can't lower the same stat as raising.
                         }
                         if (validToLower != 0) // Find stat to lower

@@ -261,6 +261,11 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_TAUNT, AI_CBM_Taunt
 	if_effect EFFECT_HEAL_BELL, AI_CBM_HealBell
 	if_effect EFFECT_FOLLOW_ME, AI_CBM_FollowMe
+	if_effect EFFECT_GEOMANCY, AI_CBM_QuiverDance
+	end
+	
+AI_CBM_Geomancy:
+	call AI_CBM_QuiverDance
 	end
 	
 AI_CBM_FollowMe:
@@ -3452,6 +3457,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:
     .2byte EFFECT_SUNNY_DAY
     .2byte EFFECT_SANDSTORM
     .2byte EFFECT_HAIL
+    .2byte EFFECT_GEOMANCY
     .2byte -1
 
 AI_PreferStrongestMove:

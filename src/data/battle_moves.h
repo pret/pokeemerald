@@ -8436,7 +8436,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GEOMANCY] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_GEOMANCY,
         .power = 0,
         .type = TYPE_FAIRY,
         .accuracy = 0,

@@ -7257,9 +7257,7 @@ static void Cmd_various(void)
             && !NoAliveMonsForEitherParty()
             && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
         {
-            if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] >= 11)
-                SET_STATCHANGER(STAT_ATK, 1, FALSE);
-            else if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] <= 9 && B_FELL_STINGER_STAT_RAISE >= GEN_7)
+            if (B_FELL_STINGER_STAT_RAISE >= GEN_7)
                 SET_STATCHANGER(STAT_ATK, 3, FALSE);
             else
                 SET_STATCHANGER(STAT_ATK, 2, FALSE);
@@ -8592,6 +8590,10 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         else // try to decrease
         {
             statValue = -GET_STAT_BUFF_VALUE(statValue);
+            if (gBattleMons[gActiveBattler].statStages[statId] == 1)
+                statValue = -1;
+            else if (gBattleMons[gActiveBattler].statStages[statId] == 2)
+                statValue = -2;
             gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
             index = 1;
             if (statValue == -2)
@@ -8620,12 +8622,15 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler);
-
         }
     }
     else // stat increase
     {
         statValue = GET_STAT_BUFF_VALUE(statValue);
+        if (gBattleMons[gActiveBattler].statStages[statId] == 11)
+            statValue = 1;
+        else if (gBattleMons[gActiveBattler].statStages[statId] == 10)
+            statValue = 2;
         gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
         index = 1;
         if (statValue == 2)
