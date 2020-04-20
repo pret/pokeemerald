@@ -4760,6 +4760,7 @@ static void Cmd_moveend(void)
             break;
         case MOVEEND_LIFE_ORB:
             if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIFE_ORB
+                && IsBattlerAlive(gBattlerAttacker)
                 && !(GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST)
                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
                 && gSpecialStatuses[gBattlerAttacker].damagedMons)
