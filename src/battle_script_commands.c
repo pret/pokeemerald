@@ -1284,9 +1284,83 @@ static bool32 AccuracyCalcHelper(u16 move)
     return FALSE;
 }
 
+u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
+{
+    u32 calc, moveAcc, atkHoldEffect, atkParam, defHoldEffect, defParam, atkAbility, defAbility;
+    s8 buff, accStage, evasionStage;
+
+    atkAbility = GetBattlerAbility(battlerAtk);
+    defAbility = GetBattlerAbility(battlerDef);
+
+    accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
+    evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
+    if (atkAbility == ABILITY_UNAWARE)
+        evasionStage = 6;
+    if (gBattleMoves[move].flags & FLAG_STAT_STAGES_IGNORED)
+        evasionStage = 6;
+    if (defAbility == ABILITY_UNAWARE)
+        accStage = 6;
+
+    if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT || gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED)
+        buff = accStage;
+    else
+        buff = accStage + 6 - evasionStage;
+
+    if (buff < 0)
+        buff = 0;
+    if (buff > 0xC)
+        buff = 0xC;
+
+    moveAcc = gBattleMoves[move].accuracy;
+    // Check Thunder and Hurricane on sunny weather.
+    if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY
+        && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
+        moveAcc = 50;
+    // Check Wonder Skin.
+    if (defAbility == ABILITY_WONDER_SKIN && gBattleMoves[move].power == 0)
+        moveAcc = 50;
+
+    calc = sAccuracyStageRatios[buff].dividend * moveAcc;
+    calc /= sAccuracyStageRatios[buff].divisor;
+
+    if (atkAbility == ABILITY_COMPOUND_EYES)
+        calc = (calc * 130) / 100; // 1.3 compound eyes boost
+    else if (atkAbility == ABILITY_VICTORY_STAR)
+        calc = (calc * 110) / 100; // 1.1 victory star boost
+    if (IsBattlerAlive(BATTLE_PARTNER(battlerAtk)) && GetBattlerAbility(BATTLE_PARTNER(battlerAtk)) == ABILITY_VICTORY_STAR)
+        calc = (calc * 110) / 100; // 1.1 ally's victory star boost
+
+    if (defAbility == ABILITY_SAND_VEIL && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY)
+        calc = (calc * 80) / 100; // 1.2 sand veil loss
+    else if (defAbility == ABILITY_SNOW_CLOAK && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_HAIL_ANY)
+        calc = (calc * 80) / 100; // 1.2 snow cloak loss
+    else if (defAbility == ABILITY_TANGLED_FEET && gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
+        calc = (calc * 50) / 100; // 1.5 tangled feet loss
+
+    if (atkAbility == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
+        calc = (calc * 80) / 100; // 1.2 hustle loss
+
+    defHoldEffect = GetBattlerHoldEffect(battlerDef, TRUE);
+    defParam = GetBattlerHoldEffectParam(battlerDef);
+    gPotentialItemEffectBattler = battlerDef;
+
+    atkHoldEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
+    atkParam = GetBattlerHoldEffectParam(battlerAtk);
+
+    if (defHoldEffect == HOLD_EFFECT_EVASION_UP)
+        calc = (calc * (100 - defParam)) / 100;
+
+    if (atkHoldEffect == HOLD_EFFECT_WIDE_LENS)
+        calc = (calc * (100 + atkParam)) / 100;
+    else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef));
+        calc = (calc * (100 + atkParam)) / 100;
+
+    return calc;
+}
+
 static void Cmd_accuracycheck(void)
 {
-    u16 move = T2_READ_16(gBattlescriptCurrInstr + 5);
+    u16 type, move = T2_READ_16(gBattlescriptCurrInstr + 5);
 
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
@@ -1302,84 +1376,14 @@ static void Cmd_accuracycheck(void)
     }
     else
     {
-        u8 type, moveAcc, atkHoldEffect, atkParam, defHoldEffect, defParam, atkAbility, defAbility;
-        s8 buff, accStage, evasionStage;
-        u32 calc;
-
         GET_MOVE_TYPE(move, type);
-
         if (JumpIfMoveAffectedByProtect(move))
             return;
         if (AccuracyCalcHelper(move))
             return;
 
-        atkAbility = GetBattlerAbility(gBattlerAttacker);
-        defAbility = GetBattlerAbility(gBattlerTarget);
-
-        accStage = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-        evasionStage = gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
-        if (atkAbility == ABILITY_UNAWARE)
-            evasionStage = 6;
-        if (gBattleMoves[move].flags & FLAG_STAT_STAGES_IGNORED)
-            evasionStage = 6;
-        if (defAbility == ABILITY_UNAWARE)
-            accStage = 6;
-
-        if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT || gStatuses3[gBattlerTarget] & STATUS3_MIRACLE_EYED)
-            buff = accStage;
-        else
-            buff = accStage + 6 - evasionStage;
-
-        if (buff < 0)
-            buff = 0;
-        if (buff > 0xC)
-            buff = 0xC;
-
-        moveAcc = gBattleMoves[move].accuracy;
-        // Check Thunder and Hurricane on sunny weather.
-        if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
-            moveAcc = 50;
-        // Check Wonder Skin.
-        if (defAbility == ABILITY_WONDER_SKIN && gBattleMoves[move].power == 0)
-            moveAcc = 50;
-
-        calc = sAccuracyStageRatios[buff].dividend * moveAcc;
-        calc /= sAccuracyStageRatios[buff].divisor;
-
-        if (atkAbility == ABILITY_COMPOUND_EYES)
-            calc = (calc * 130) / 100; // 1.3 compound eyes boost
-        else if (atkAbility == ABILITY_VICTORY_STAR)
-            calc = (calc * 110) / 100; // 1.1 victory star boost
-        if (IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)) && GetBattlerAbility(BATTLE_PARTNER(gBattlerAttacker)) == ABILITY_VICTORY_STAR)
-            calc = (calc * 110) / 100; // 1.1 ally's victory star boost
-
-        if (defAbility == ABILITY_SAND_VEIL && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY)
-            calc = (calc * 80) / 100; // 1.2 sand veil loss
-        else if (defAbility == ABILITY_SNOW_CLOAK && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_HAIL_ANY)
-            calc = (calc * 80) / 100; // 1.2 snow cloak loss
-        else if (defAbility == ABILITY_TANGLED_FEET && gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION)
-            calc = (calc * 50) / 100; // 1.5 tangled feet loss
-
-        if (atkAbility == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
-            calc = (calc * 80) / 100; // 1.2 hustle loss
-
-        defHoldEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
-        defParam = GetBattlerHoldEffectParam(gBattlerTarget);
-        gPotentialItemEffectBattler = gBattlerTarget;
-
-        atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
-        atkParam = GetBattlerHoldEffectParam(gBattlerAttacker);
-
-        if (defHoldEffect == HOLD_EFFECT_EVASION_UP)
-            calc = (calc * (100 - defParam)) / 100;
-
-        if (atkHoldEffect == HOLD_EFFECT_WIDE_LENS)
-            calc = (calc * (100 + atkParam)) / 100;
-        else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget));
-            calc = (calc * (100 + atkParam)) / 100;
-
         // final calculation
-        if ((Random() % 100 + 1) > calc)
+        if ((Random() % 100 + 1) > GetTotalAccuracy(gBattlerAttacker, gBattlerTarget, move))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&

@@ -47,12 +47,16 @@ gBattleAI_ScriptsTable:: @ 82DBEF8
 
 AI_CheckBadMove:
 	if_target_is_ally AI_Ret
-	if_move MOVE_FISSURE, AI_CBM_CheckIfNegatesType
-	if_move MOVE_HORN_DRILL, AI_CBM_CheckIfNegatesType
-	get_how_powerful_move_is
-	if_equal MOVE_POWER_DISCOURAGED, AI_CheckBadMove_CheckEffect
+@ Check powder moves
+	if_move_flag FLAG_POWDER AI_CBM_PowderMoves
+	goto AI_CBM_CheckIfNegatesType
+AI_CBM_PowderMoves:
+	if_type AI_TARGET, TYPE_GRASS, Score_Minus10
+	if_ability AI_TARGET, ABILITY_OVERCOAT, Score_Minus10
+	get_hold_effect AI_TARGET
+	if_equal HOLD_EFFECT_SAFETY_GOOGLES Score_Minus10
 
-AI_CBM_CheckIfNegatesType: @ 82DBF92
+AI_CBM_CheckIfNegatesType:
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_ability AI_USER
 	if_equal ABILITY_MOLD_BREAKER, AI_CheckBadMove_CheckEffect
