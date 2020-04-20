@@ -2599,14 +2599,6 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     }
                 }
                 break;
-            case MOVE_EFFECT_RECOIL_25: // 25% recoil
-                gBattleMoveDamage = (gHpDealt) / 4;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
-                break;
             case MOVE_EFFECT_ATK_PLUS_1:
             case MOVE_EFFECT_DEF_PLUS_1:
             case MOVE_EFFECT_SPD_PLUS_1:
@@ -2812,7 +2804,15 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_DefSpDefDown;
                 break;
-            case MOVE_EFFECT_RECOIL_33: // Double Edge
+            case MOVE_EFFECT_RECOIL_25: // Take Down, 25% recoil
+                gBattleMoveDamage = (gHpDealt) / 4;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
+                break;
+            case MOVE_EFFECT_RECOIL_33: // Double Edge, 33 % recoil
                 gBattleMoveDamage = gHpDealt / 3;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
@@ -2820,7 +2820,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleScripting.moveEffect];
                 break;
-            case MOVE_EFFECT_RECOIL_50: // Head Smash
+            case MOVE_EFFECT_RECOIL_50: // Head Smash, 50 % recoil
                 gBattleMoveDamage = gHpDealt / 2;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;

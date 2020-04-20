@@ -63,7 +63,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectRecoilIfMiss
 	.4byte BattleScript_EffectMist
 	.4byte BattleScript_EffectFocusEnergy
-	.4byte BattleScript_EffectRecoil
+	.4byte BattleScript_EffectRecoil25
 	.4byte BattleScript_EffectConfuse
 	.4byte BattleScript_EffectAttackUp2
 	.4byte BattleScript_EffectDefenseUp2
@@ -213,7 +213,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSnatch
 	.4byte BattleScript_EffectLowKick
 	.4byte BattleScript_EffectSecretPower
-	.4byte BattleScript_EffectDoubleEdge
+	.4byte BattleScript_EffectRecoil33
 	.4byte BattleScript_EffectTeeterDance
 	.4byte BattleScript_EffectHitEscape
 	.4byte BattleScript_EffectMudSport
@@ -2821,12 +2821,6 @@ BattleScript_EffectFocusEnergy:
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRecoil:
-	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
-	incrementgamestat GAME_STAT_USED_STRUGGLE
-	goto BattleScript_EffectHit
-
 BattleScript_EffectConfuse:
 	attackcanceler
 	attackstring
@@ -4533,7 +4527,13 @@ BattleScript_EffectSecretPower::
 	getsecretpowereffect
 	goto BattleScript_EffectHit
 
-BattleScript_EffectDoubleEdge::
+BattleScript_EffectRecoil25:
+	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
+	incrementgamestat GAME_STAT_USED_STRUGGLE
+	goto BattleScript_EffectHit
+
+BattleScript_EffectRecoil33::
 	setmoveeffect MOVE_EFFECT_RECOIL_33 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
