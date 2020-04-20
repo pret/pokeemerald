@@ -1287,6 +1287,7 @@ AI_CV_MirrorMove2: @ 82DCB58
 AI_CV_MirrorMove_End: @ 82DCB6B
 	end
 
+.align 1
 AI_CV_MirrorMove_EncouragedMovesToMirror: @ 82DCB6C
     .2byte MOVE_SLEEP_POWDER
     .2byte MOVE_LOVELY_KISS
@@ -3473,6 +3474,7 @@ sMovesTable_ProtectMoves:
     .2byte MOVE_DETECT
     .2byte -1
 
+.align 1
 sEffectsStatRaise:
 	.2byte EFFECT_ATTACK_UP
 	.2byte EFFECT_ATTACK_UP_2
@@ -3758,6 +3760,7 @@ AI_HPAware_TargetTryToDiscourage:
 AI_HPAware_End:
 	end
 
+.align 1
 AI_HPAware_DiscouragedEffectsWhenHighHP: @ 82DE21F
     .2byte EFFECT_EXPLOSION
     .2byte EFFECT_RESTORE_HP
