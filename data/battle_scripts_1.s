@@ -362,6 +362,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectShoreUp
 	.4byte BattleScript_EffectGeomancy
 	.4byte BattleScript_EffectFairyLock
+	.4byte BattleScript_EffectAllySwitch
+	
+BattleScript_EffectAllySwitch:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifnoally BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_ALLYSWITCHPOSITION
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectFairyLock:
 	attackcanceler

@@ -263,6 +263,7 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_FOLLOW_ME, AI_CBM_FollowMe
 	if_effect EFFECT_GEOMANCY, AI_CBM_QuiverDance
 	if_effect EFFECT_FAIRY_LOCK, AI_CBM_FairyLock
+	if_effect EFFECT_ALLY_SWITCH, AI_CBM_HelpingHand
 	end
 	
 AI_CBM_FairyLock:
@@ -847,6 +848,7 @@ AI_CBM_WillOWisp: @ 82DC6B4
 
 AI_CBM_HelpingHand: @ 82DC6E3
 	if_not_double_battle Score_Minus10
+	if_battler_absent AI_USER_PARTNER, Score_Minus10
 	end
 
 AI_CBM_TrickAndKnockOff: @ 82DC6EB
