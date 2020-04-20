@@ -8252,7 +8252,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .split = SPLIT_STATUS,
     },
 
-    [MOVE_KING_S_SHIELD] =
+    [MOVE_KINGS_SHIELD] =
     {
         .effect = EFFECT_PROTECT,
         .power = 0,

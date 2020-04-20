@@ -4693,7 +4693,7 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
         .comboMoves = {0}
     },
 
-    [MOVE_KING_S_SHIELD] =
+    [MOVE_KINGS_SHIELD] =
     {
         .effect = CONTEST_EFFECT_AVOID_STARTLE,
         .contestCategory = CONTEST_CATEGORY_TOUGH,

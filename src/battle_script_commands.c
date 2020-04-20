@@ -780,7 +780,7 @@ static const u8 sForbiddenMoves[MOVES_COUNT] =
     [MOVE_HYPERSPACE_HOLE] = FORBIDDEN_METRONOME,
     [MOVE_ICE_BURN] = FORBIDDEN_METRONOME,
     [MOVE_INSTRUCT] = FORBIDDEN_METRONOME,
-    [MOVE_KING_S_SHIELD] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_KINGS_SHIELD] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_LIGHT_OF_RUIN] = FORBIDDEN_METRONOME,
     [MOVE_MAT_BLOCK] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
     [MOVE_ME_FIRST] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK,
@@ -1031,7 +1031,7 @@ static bool32 TryAegiFormChange(void)
         gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_BLADE;
         break;
     case SPECIES_AEGISLASH_BLADE: // Blade -> Shield
-        if (gCurrentMove != MOVE_KING_S_SHIELD)
+        if (gCurrentMove != MOVE_KINGS_SHIELD)
             return FALSE;
         gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH;
         break;
@@ -1467,7 +1467,7 @@ static void Cmd_ppreduce(void)
 }
 
 // The chance is 1/N for each stage.
-#if B_CRIT_CHANCE == GEN_7
+#if B_CRIT_CHANCE >= GEN_7
     static const u8 sCriticalHitChance[] = {24, 8, 2, 1, 1};
 #elif B_CRIT_CHANCE == GEN_6
     static const u8 sCriticalHitChance[] = {16, 8, 2, 1, 1};
@@ -3536,7 +3536,7 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage += gExpShareExp;
                     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && B_TRAINER_EXP_MULTIPLIER != GEN_7)
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && B_TRAINER_EXP_MULTIPLIER <= GEN_7)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
 
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]))
@@ -4471,7 +4471,7 @@ static void Cmd_moveend(void)
                     i = gBattlerAttacker;
                     gBattlerAttacker = gBattlerTarget;
                     gBattlerTarget = i; // gBattlerTarget and gBattlerAttacker are swapped in order to activate Defiant, if applicable
-                    gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_2;
+                    gBattleScripting.moveEffect = (B_KINGS_SHIELD_LOWER_ATK >= GEN_8) ? MOVE_EFFECT_ATK_MINUS_1 : MOVE_EFFECT_ATK_MINUS_2;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_KingsShieldEffect;
                     effect = 1;
@@ -7259,7 +7259,7 @@ static void Cmd_various(void)
         {
             if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] >= 11)
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
-            else if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] <= 9 && B_FELL_STINGER_STAT_RAISE == GEN_7)
+            else if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] <= 9 && B_FELL_STINGER_STAT_RAISE >= GEN_7)
                 SET_STATCHANGER(STAT_ATK, 3, FALSE);
             else
                 SET_STATCHANGER(STAT_ATK, 2, FALSE);
@@ -7639,7 +7639,7 @@ static void Cmd_various(void)
                 break;
         }
         if (gLastMoves[gBattlerTarget] == 0 || gLastMoves[gBattlerTarget] == 0xFFFF || sMoveEffectsForbiddenToInstruct[i] != FORBIDDEN_INSTRUCT_END
-            || gLastMoves[gBattlerTarget] == MOVE_STRUGGLE || gLastMoves[gBattlerTarget] == MOVE_KING_S_SHIELD)
+            || gLastMoves[gBattlerTarget] == MOVE_STRUGGLE || gLastMoves[gBattlerTarget] == MOVE_KINGS_SHIELD)
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         }
@@ -7978,7 +7978,7 @@ static void Cmd_setprotectlike(void)
                 gProtectStructs[gBattlerAttacker].spikyShielded = 1;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             }
-            else if (gCurrentMove == MOVE_KING_S_SHIELD)
+            else if (gCurrentMove == MOVE_KINGS_SHIELD)
             {
                 gProtectStructs[gBattlerAttacker].kingsShielded = 1;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
