@@ -1776,6 +1776,7 @@ Move_ROCK_POLISH:
 	setalpha 12, 8
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 1, 3, 0, 12, RGB_BLACK
 	waitforvisualfinish
+	loopsewithpan SE_W104, SOUND_PAN_ATTACKER, 10, 7
 	createsprite gRockPolishStreakSpriteTemplate, ANIM_ATTACKER, 2, -10, 3
 	delay 1
 	createsprite gRockPolishStreakSpriteTemplate, ANIM_ATTACKER, 2, 24, -19
