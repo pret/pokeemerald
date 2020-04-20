@@ -361,6 +361,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectBurnUp
 	.4byte BattleScript_EffectShoreUp
 	.4byte BattleScript_EffectGeomancy
+	.4byte BattleScript_EffectFairyLock
+	
+BattleScript_EffectFairyLock:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	trysetfairylock BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_NOONEWILLBEABLETORUNAWAY
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectBurnUp:
 	attackcanceler

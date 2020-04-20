@@ -221,6 +221,7 @@ struct FieldTimer
     u8 psychicTerrainTimer;
     u8 echoVoiceCounter;
     u8 gravityTimer;
+    u8 fairyLockTimer;
 };
 
 struct WishFutureKnock
