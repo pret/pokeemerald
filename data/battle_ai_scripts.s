@@ -2214,8 +2214,8 @@ AI_CV_Counter3:
 
 AI_CV_Counter4:
 	get_last_used_bank_move AI_TARGET
-	get_move_type_from_result
-	if_not_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_ScoreDown1
+	get_move_split_from_result
+	if_not_equal SPLIT_PHYSICAL, AI_CV_Counter_ScoreDown1
 	if_random_less_than 100, AI_CV_Counter_End
 	score +1
 	goto AI_CV_Counter_End
@@ -2226,10 +2226,7 @@ AI_CV_Counter5:
 	score +1
 
 AI_CV_Counter6:
-	get_target_type1
-	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
-	get_target_type2
-	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
+	if_has_no_physical_move AI_TARGET, AI_CV_Counter_ScoreDown1
 	if_random_less_than 50, AI_CV_Counter_End
 
 AI_CV_Counter7:
@@ -2244,18 +2241,6 @@ AI_CV_Counter_ScoreDown1:
 
 AI_CV_Counter_End:
 	end
-
-AI_CV_Counter_PhysicalTypeList:
-    .byte TYPE_NORMAL
-    .byte TYPE_FIGHTING
-    .byte TYPE_FLYING
-    .byte TYPE_POISON
-    .byte TYPE_GROUND
-    .byte TYPE_ROCK
-    .byte TYPE_BUG
-    .byte TYPE_GHOST
-    .byte TYPE_STEEL
-    .byte -1
 
 AI_CV_Encore:
 	if_any_move_disabled AI_TARGET, AI_CV_Encore2
@@ -2643,6 +2628,8 @@ AI_CV_Pursuit_End:
 	end
 
 AI_CV_RainDance:
+	get_weather
+	if_equal AI_WEATHER_RAIN, AI_CV_RainDance_End
 	if_user_faster AI_CV_RainDance2
 	get_ability AI_USER
 	if_equal ABILITY_SWIFT_SWIM, AI_CV_RainDance3
@@ -2673,13 +2660,15 @@ AI_CV_RainDance_Rock:
 	score +2
 AI_CV_RainDance_Opponent:
 	if_has_move_with_type AI_TARGET, TYPE_FIRE, AI_CV_RainDance_OpponentPlus
-	if_no_type AI_TARGET, TYPE_FIRE, AI_CV_SunnyDay_End
+	if_no_type AI_TARGET, TYPE_FIRE, AI_CV_RainDance_End
 AI_CV_RainDance_OpponentPlus:
 	score +1
 AI_CV_RainDance_End:
 	end
 
 AI_CV_SunnyDay:
+	get_weather
+	if_equal AI_WEATHER_SUN, AI_CV_SunnyDay_End
 	if_hp_less_than AI_USER, 40, AI_CV_SunnyDay_ScoreDown1
 	get_weather
 	if_equal AI_WEATHER_HAIL, AI_CV_SunnyDay2
@@ -2796,8 +2785,8 @@ AI_CV_MirrorCoat3:
 
 AI_CV_MirrorCoat4:
 	get_last_used_bank_move AI_TARGET
-	get_move_type_from_result
-	if_not_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_ScoreDown1
+	get_move_split_from_result
+	if_not_equal SPLIT_SPECIAL, AI_CV_MirrorCoat_ScoreDown1
 	if_random_less_than 100, AI_CV_MirrorCoat_End
 	score +1
 	goto AI_CV_MirrorCoat_End
@@ -2808,10 +2797,7 @@ AI_CV_MirrorCoat5:
 	score +1
 
 AI_CV_MirrorCoat6:
-	get_target_type1
-	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
-	get_target_type2
-	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
+	if_has_no_special_move AI_TARGET, AI_CV_MirrorCoat_ScoreDown1
 	if_random_less_than 50, AI_CV_MirrorCoat_End
 
 AI_CV_MirrorCoat_ScoreUp4:
@@ -2826,17 +2812,6 @@ AI_CV_MirrorCoat_ScoreDown1:
 
 AI_CV_MirrorCoat_End:
 	end
-
-AI_CV_MirrorCoat_SpecialTypeList:
-    .byte TYPE_FIRE
-    .byte TYPE_WATER
-    .byte TYPE_GRASS
-    .byte TYPE_ELECTRIC
-    .byte TYPE_PSYCHIC
-    .byte TYPE_ICE
-    .byte TYPE_DRAGON
-    .byte TYPE_DARK
-    .byte -1
 
 AI_CV_ChargeUpMove:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_ChargeUpMove_ScoreDown2

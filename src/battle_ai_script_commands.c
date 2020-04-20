@@ -175,6 +175,7 @@ static void Cmd_is_grounded(void);
 static void Cmd_get_best_dmg_hp_percent(void);
 static void Cmd_get_curr_dmg_hp_percent(void);
 static void Cmd_get_move_split_from_result(void);
+static void Cmd_get_considered_move_split(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -302,6 +303,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_get_best_dmg_hp_percent,                    // 0x72
     Cmd_get_curr_dmg_hp_percent,                    // 0x73
     Cmd_get_move_split_from_result,                 // 0x74
+    Cmd_get_considered_move_split,                  // 0x75
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1517,11 +1519,7 @@ static void Cmd_get_how_powerful_move_is(void)
 
 static void Cmd_get_last_used_battler_move(void)
 {
-    if (gAIScriptPtr[1] == AI_USER)
-        AI_THINKING_STRUCT->funcResult = gLastMoves[sBattler_AI];
-    else
-        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerTarget];
-
+    AI_THINKING_STRUCT->funcResult = gLastMoves[BattleAI_GetWantedBattler(gAIScriptPtr[1])];
     gAIScriptPtr += 2;
 }
 
@@ -2799,7 +2797,12 @@ static void Cmd_get_curr_dmg_hp_percent(void)
 
 static void Cmd_get_move_split_from_result(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].type;
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].split;
+    gAIScriptPtr += 1;
+}
 
+static void Cmd_get_considered_move_split(void)
+{
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].split;
     gAIScriptPtr += 1;
 }
