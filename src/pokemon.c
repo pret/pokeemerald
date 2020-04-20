@@ -6220,7 +6220,8 @@ void SetWildMonHeldItem(void)
 
     count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG, 0)
-        && GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES)
+        && (GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES
+            || GetMonAbility(&gPlayerParty[0]) == ABILITY_SUPER_LUCK))
     {
         var1 = 20;
         var2 = 80;
