@@ -2669,8 +2669,13 @@ AI_CV_RainDance_ScoreDown1:
 	score -1
 AI_CV_RainDance_Rock:
 	get_hold_effect AI_USER
-	if_not_equal HOLD_EFFECT_DAMP_ROCK, AI_CV_RainDance_End
+	if_not_equal HOLD_EFFECT_DAMP_ROCK, AI_CV_RainDance_Opponent
 	score +2
+AI_CV_RainDance_Opponent:
+	if_has_move_with_type AI_TARGET, TYPE_FIRE, AI_CV_RainDance_OpponentPlus
+	if_no_type AI_TARGET, TYPE_FIRE, AI_CV_SunnyDay_End
+AI_CV_RainDance_OpponentPlus:
+	score +1
 AI_CV_RainDance_End:
 	end
 
@@ -2680,16 +2685,51 @@ AI_CV_SunnyDay:
 	if_equal AI_WEATHER_HAIL, AI_CV_SunnyDay2
 	if_equal AI_WEATHER_RAIN, AI_CV_SunnyDay2
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SunnyDay2
-	goto AI_CV_SunnyDay_End
+	goto AI_CV_SunnyDay_Rock
 AI_CV_SunnyDay2:
 	score +1
-	goto AI_CV_SunnyDay_End
+	goto AI_CV_SunnyDay_Rock
 AI_CV_SunnyDay_ScoreDown1:
 	score -1
-AI_CV_SunnyDay_End:
+AI_CV_SunnyDay_Rock:
 	get_hold_effect AI_USER
-	if_not_equal HOLD_EFFECT_HEAT_ROCK, AI_Ret
+	if_not_equal HOLD_EFFECT_HEAT_ROCK, AI_CV_SunnyDay_Moves
 	score +2
+AI_CV_SunnyDay_Moves:
+	if_has_move_with_effect AI_USER, EFFECT_SOLARBEAM, AI_CV_SunnyDay_MovesPlus
+	if_has_move_with_effect AI_USER, EFFECT_SYNTHESIS, AI_CV_SunnyDay_MovesPlus
+	if_has_move_with_effect AI_USER_PARTNER, EFFECT_SOLARBEAM, AI_CV_SunnyDay_MovesPlus
+	if_has_move_with_effect AI_USER_PARTNER, EFFECT_SYNTHESIS, AI_CV_SunnyDay_MovesPlus
+	if_has_move_with_type AI_USER, TYPE_FIRE, AI_CV_SunnyDay_MovesPlus
+	goto AI_CV_SunnyDay_Abilities
+AI_CV_SunnyDay_MovesPlus:
+	score +1
+AI_CV_SunnyDay_Abilities:
+	if_user_faster AI_CV_SunnyDay_Abilities2
+	if_ability AI_USER, ABILITY_CHLOROPHYLL, AI_CV_SunnyDay_AbilitiesPlus
+	get_ability AI_USER_PARTNER
+	if_not_equal ABILITY_CHLOROPHYLL, AI_CV_SunnyDay_Abilities2
+AI_CV_SunnyDay_AbilitiesPlus:
+	score +1
+AI_CV_SunnyDay_Abilities2:
+	if_ability AI_USER, ABILITY_LEAF_GUARD, AI_CV_SunnyDay_Abilities2Plus
+	get_ability AI_USER_PARTNER
+	if_not_equal ABILITY_LEAF_GUARD, AI_CV_SunnyDay_Opponent
+AI_CV_SunnyDay_Abilities2Plus:
+	score + 1
+@ If target is fire type, giving him a sunny day boost may not be a good idea
+AI_CV_SunnyDay_Opponent:
+	if_ability AI_USER, ABILITY_FLASH_FIRE, AI_CV_SunnyDay_Opponent2
+	if_has_move_with_type AI_TARGET, TYPE_FIRE, AI_CV_SunnyDay_OpponentMinus
+	if_no_type AI_TARGET, TYPE_FIRE, AI_CV_SunnyDay_Opponent2
+AI_CV_SunnyDay_OpponentMinus:
+	score -1
+AI_CV_SunnyDay_Opponent2:
+	if_has_move_with_type AI_TARGET,  TYPE_WATER, AI_CV_SunnyDay_Opponent2Plus
+	if_no_type AI_TARGET, TYPE_WATER, AI_CV_SunnyDay_End
+AI_CV_SunnyDay_Opponent2Plus:
+	score +1
+AI_CV_SunnyDay_End:
 	end
 
 AI_CV_BellyDrum:
@@ -2911,16 +2951,22 @@ AI_CV_Hail_ScoreDown1:
 	score -1
 AI_CV_Hail_Rock:
 	get_hold_effect AI_USER
-	if_not_equal HOLD_EFFECT_ICY_ROCK, AI_Ret
+	if_not_equal HOLD_EFFECT_ICY_ROCK, AI_CV_Hail_Ability
 	score +2
 AI_CV_Hail_Ability:
 	get_ability AI_USER
 	if_equal ABILITY_ICE_BODY, AI_CV_Hail_AbilityPlus
 	if_equal ABILITY_SNOW_CLOAK, AI_CV_Hail_AbilityPlus
 	if_equal ABILITY_SLUSH_RUSH, AI_CV_Hail_AbilityPlus
-	if_not_equal ABILITY_FORECAST, AI_CV_Hail_End
+	if_not_equal ABILITY_FORECAST, AI_CV_Hail_Move
 AI_CV_Hail_AbilityPlus:
-	score +1,
+	score +1
+AI_CV_Hail_Move:
+	if_has_move AI_USER, MOVE_BLIZZARD, AI_CV_Hail_MovePlus
+	if_has_move AI_USER_PARTNER, MOVE_BLIZZARD, AI_CV_Hail_MovePlus
+	goto AI_CV_Hail_End
+AI_CV_Hail_MovePlus:
+	score +1
 AI_CV_Hail_End:
 	end
 	
@@ -3347,9 +3393,7 @@ AI_SetupFirstTurn:
 	if_not_equal 0, AI_SetupFirstTurn_End
 	get_considered_move_effect
 	if_not_in_hwords AI_SetupFirstTurn_SetupEffectsToEncourage, AI_SetupFirstTurn_End
-	if_random_less_than 80, AI_SetupFirstTurn_End
 	score +2
-
 AI_SetupFirstTurn_End:
 	end
 
@@ -3429,6 +3473,10 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:
     .2byte EFFECT_TAILWIND
     .2byte EFFECT_DRAGON_DANCE
     .2byte EFFECT_STICKY_WEB
+    .2byte EFFECT_RAIN_DANCE
+    .2byte EFFECT_SUNNY_DAY
+    .2byte EFFECT_SANDSTORM
+    .2byte EFFECT_HAIL
     .2byte -1
 
 AI_PreferStrongestMove:

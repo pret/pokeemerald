@@ -1290,7 +1290,13 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
     s8 buff, accStage, evasionStage;
 
     atkAbility = GetBattlerAbility(battlerAtk);
+    atkHoldEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
+    atkParam = GetBattlerHoldEffectParam(battlerAtk);
+
     defAbility = GetBattlerAbility(battlerDef);
+    defHoldEffect = GetBattlerHoldEffect(battlerDef, TRUE);
+    defParam = GetBattlerHoldEffectParam(battlerDef);
+    gPotentialItemEffectBattler = battlerDef;
 
     accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
     evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
@@ -1339,13 +1345,6 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
 
     if (atkAbility == ABILITY_HUSTLE && IS_MOVE_PHYSICAL(move))
         calc = (calc * 80) / 100; // 1.2 hustle loss
-
-    defHoldEffect = GetBattlerHoldEffect(battlerDef, TRUE);
-    defParam = GetBattlerHoldEffectParam(battlerDef);
-    gPotentialItemEffectBattler = battlerDef;
-
-    atkHoldEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
-    atkParam = GetBattlerHoldEffectParam(battlerAtk);
 
     if (defHoldEffect == HOLD_EFFECT_EVASION_UP)
         calc = (calc * (100 - defParam)) / 100;
