@@ -2755,11 +2755,12 @@ static bool32 TryChangeBattleTerrain(u32 battler, u32 statusFlag, u8 *timer)
 
 static bool32 ShouldChangeFormHpBased(u32 battler)
 {
-    // Ability,     form >, form <=
-    static const u16 forms[][3] =
+    // Ability,     form >, form <=, hp divided
+    static const u16 forms[][4] =
     {
-        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN, SPECIES_DARMANITAN_ZEN},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR, SPECIES_MINIOR_CORE},
+        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN, SPECIES_DARMANITAN_ZEN, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR, SPECIES_MINIOR_CORE, 2},
+        {ABILITY_SCHOOLING, SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI, 4},
     };
     u32 i;
 
@@ -2768,13 +2769,13 @@ static bool32 ShouldChangeFormHpBased(u32 battler)
         if (gBattleMons[battler].ability == forms[i][0])
         {
             if (gBattleMons[battler].species == forms[i][2]
-                && gBattleMons[battler].hp > gBattleMons[battler].maxHP / 2)
+                && gBattleMons[battler].hp > gBattleMons[battler].maxHP / forms[i][3])
             {
                 gBattleMons[battler].species = forms[i][1];
                 return TRUE;
             }
             if (gBattleMons[battler].species == forms[i][1]
-                && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2)
+                && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / forms[i][3])
             {
                 gBattleMons[battler].species = forms[i][2];
                 return TRUE;
@@ -3093,6 +3094,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
             }
             break;
+        case ABILITY_SCHOOLING:
+            if (gBattleMons[battler].level < 20)
+                break;
         case ABILITY_SHIELDS_DOWN:
             if (ShouldChangeFormHpBased(battler))
             {
@@ -3249,6 +3253,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect++;
                 }
                 break;
+            case ABILITY_SCHOOLING:
+                if (gBattleMons[battler].level < 20)
+                    break;
             case ABILITY_ZEN_MODE:
             case ABILITY_SHIELDS_DOWN:
                 if ((effect = ShouldChangeFormHpBased(battler)))
@@ -6582,6 +6589,7 @@ void UndoFormChange(u32 monId, u32 side)
         {SPECIES_MIMIKYU_BUSTED, SPECIES_MIMIKYU},
         {SPECIES_DARMANITAN_ZEN, SPECIES_DARMANITAN},
         {SPECIES_MINIOR, SPECIES_MINIOR_CORE},
+        {SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI},
     };
 
     currSpecies = GetMonData(&party[monId], MON_DATA_SPECIES, NULL);
