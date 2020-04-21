@@ -233,14 +233,12 @@
 	.endm
 
 	@ Generic compare macro which attempts to deduce argument types based on their values
-	@ Any values between 0x4000 to 0x4FFF and 0x8000 to 0x8FFF are considered event variable identifiers
-	.macro compare arg1:req, arg2:req
-		.if ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && ((\arg2 >> 12) == 4 || (\arg2 >> 12) == 8)
-			compare_var_to_var \arg1, \arg2
-		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= 0 && \arg2 <= 0xFFFF)
-			compare_var_to_value \arg1, \arg2
+	@ Any values between 0x4000 to 0x40FF and 0x8000 to 0x8015 are considered event variable identifiers
+	.macro compare var:req, arg:req
+		.if ((\arg >= VARS_START && \arg <= VARS_END) || (\arg >= SPECIAL_VARS_START && \arg <= SPECIAL_VARS_END))
+			compare_var_to_var \var, \arg
 		.else
-			.error "Invalid arguments for 'compare'"
+			compare_var_to_value \var, \arg
 		.endif
 	.endm
 
@@ -465,47 +463,47 @@
 	.2byte \Y
 	.endm
 
-	@ Retrieves the number of Pokemon in the player's party, and stores that number in variable 0x800D (LASTRESULT).
+	@ Retrieves the number of Pokemon in the player's party, and stores that number in VAR_RESULT.
 	.macro getpartysize
 	.byte 0x43
 	.endm
 
-	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and variable 0x800D (LASTRESULT) will be set to 0x0001; otherwise, LASTRESULT is set to 0x0000.
-	.macro giveitem index:req, quantity:req
+	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and VAR_RESULT will be set to TRUE; otherwise, VAR_RESULT is set to FALSE.
+	.macro additem index:req, quantity=1
 	.byte 0x44
 	.2byte \index
 	.2byte \quantity
 	.endm
 
 	@ Removes quantity of item index from the player's Bag.
-	.macro takeitem index:req, quantity:req
+	.macro removeitem index:req, quantity=1
 	.byte 0x45
 	.2byte \index
 	.2byte \quantity
 	.endm
 
-	@ Checks if the player has enough space in their Bag to hold quantity more of item index. Sets variable 0x800D (LASTRESULT) to 0x0001 if there is room, or 0x0000 is there is no room.
+	@ Checks if the player has enough space in their Bag to hold quantity more of item index. Sets VAR_RESULT to TRUE if there is room, or FALSE is there is no room.
 	.macro checkitemspace index:req, quantity:req
 	.byte 0x46
 	.2byte \index
 	.2byte \quantity
 	.endm
 
-	@ Checks if the player has quantity or more of item index in their Bag. Sets variable 0x800D (LASTRESULT) to 0x0001 if the player has enough of the item, or 0x0000 if they have fewer than quantity of the item.
+	@ Checks if the player has quantity or more of item index in their Bag. Sets VAR_RESULT to TRUE if the player has enough of the item, or FALSE if they have fewer than quantity of the item.
 	.macro checkitem index:req, quantity:req
 	.byte 0x47
 	.2byte \index
 	.2byte \quantity
 	.endm
 
-	@ Checks which Bag pocket the specified (index) item belongs in, and writes the value to variable 0x800D (LASTRESULT). This script is used to show the name of the proper Bag pocket when the player receives an item via callstd (simplified to giveitem in XSE).
+	@ Checks which Bag pocket the specified item belongs in, and writes the pocket value (POCKET_*) to VAR_RESULT. This script is used to show the name of the proper Bag pocket when the player receives an item via callstd (simplified to giveitem in XSE).
 	.macro checkitemtype index:req
 	.byte 0x48
 	.2byte \index
 	.endm
 
 	@ Adds a quantity amount of item index to the player's PC. Both arguments can be variables.
-	.macro givepcitem index:req, quantity:req
+	.macro addpcitem index:req, quantity:req
 	.byte 0x49
 	.2byte \index
 	.2byte \quantity
@@ -519,13 +517,13 @@
 	.endm
 
 	@ Adds decoration to the player's PC. In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro givedecoration decoration:req
+	.macro adddecoration decoration:req
 	.byte 0x4b
 	.2byte \decoration
 	.endm
 
 	@ Removes a decoration from the player's PC. In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro takedecoration decoration:req
+	.macro removedecoration decoration:req
 	.byte 0x4c
 	.2byte \decoration
 	.endm
@@ -536,7 +534,7 @@
 	.2byte \decoration
 	.endm
 
-	@ Checks if the player has enough space in their PC to hold decoration. Sets variable 0x800D (LASTRESULT) to 0x0001 if there is room, or 0x0000 is there is no room. In FireRed, this command is a nop. (The argument is read, but not used for anything.)
+	@ Checks if the player has enough space in their PC to hold decoration. Sets VAR_RESULT to TRUE if there is room, or FALSE is there is no room. In FireRed, this command is a nop. (The argument is read, but not used for anything.)
 	.macro checkdecorspace decoration:req
 	.byte 0x4e
 	.2byte \decoration
@@ -677,7 +675,7 @@
 	.elseif \type == TRAINER_BATTLE_SET_TRAINER_B
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
-	.elseif \type == TRAINER_BATTLE_12
+	.elseif \type == TRAINER_BATTLE_HILL
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 	.endif
@@ -765,7 +763,8 @@
 	.2byte \y
 	.endm
 
-	.macro moveobjectoffscreen index:req
+	@ Copies a live object event's xy position to its template, so that if the sprite goes off screen, it'll still be there when it comes back on screen.
+	.macro copyobjectxytoperm index:req
 	.byte 0x64
 	.2byte \index
 	.endm
@@ -817,14 +816,14 @@
 	.byte 0x6d
 	.endm
 
-	@ Displays a YES/NO multichoice box at the specified coordinates, and blocks script execution until the user makes a selection. Their selection is stored in variable 0x800D (LASTRESULT); 0x0000 for "NO" or if the user pressed B, and 0x0001 for "YES".
+	@ Displays a YES/NO multichoice box at the specified coordinates, and blocks script execution until the user makes a selection. Their selection is stored in VAR_RESULT as NO (0) or YES (1). Pressing B is equivalent to answering NO
 	.macro yesnobox x:req, y:req
 	.byte 0x6e
 	.byte \x
 	.byte \y
 	.endm
 
-	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined (gMultichoiceLists) and the one to be used is specified with list. If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with list. If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
 	.macro multichoice x:req, y:req, list:req, b:req
 	.byte 0x6f
 	.byte \x
@@ -833,7 +832,7 @@
 	.byte \b
 	.endm
 
-	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined (gMultichoiceLists) and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. If b is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
 	.macro multichoicedefault x:req, y:req, list:req, default:req, b:req
 	.byte 0x70
 	.byte \x
@@ -843,7 +842,7 @@
 	.byte \b
 	.endm
 
-	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined (gMultichoiceLists) and the one to be used is specified with list. The per_row argument determines how many list items will be shown on a single row of the box.
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with list. The per_row argument determines how many list items will be shown on a single row of the box.
 	.macro multichoicegrid x:req, y:req, list:req, per_row:req, B:req
 	.byte 0x71
 	.byte \x
@@ -877,20 +876,20 @@
 	.endm
 
 	@ Displays a box containing the front sprite for the specified (species) Pokemon species.
-	.macro drawmonpic species:req, x:req, y:req
+	.macro showmonpic species:req, x:req, y:req
 	.byte 0x75
 	.2byte \species
 	.byte \x
 	.byte \y
 	.endm
 
-	@ Hides all boxes displayed with drawmonpic.
-	.macro erasemonpic
+	@ Hides all boxes displayed with showmonpic.
+	.macro hidemonpic
 	.byte 0x76
 	.endm
 
 	@ Draws an image of the winner of the contest. In FireRed, this command is a nop. (The argument is discarded.)
-	.macro drawcontestwinner a:req
+	.macro showcontestwinner a:req
 	.byte 0x77
 	.byte \a
 	.endm
@@ -901,15 +900,15 @@
 	.4byte \text
 	.endm
 
-	@ Gives the player one of the specified (species) Pokemon at level level holding item. The unknown arguments should all be zeroes.
-	.macro givemon species:req, level:req, item:req, unknown1:req, unknown2:req, unknown3:req
+	@ Gives the player one of the specified (species) Pokemon at level level holding item. The trailing 0s are unused parameters
+	.macro givemon species:req, level:req, item:req
 	.byte 0x79
 	.2byte \species
 	.byte \level
 	.2byte \item
-	.4byte \unknown1
-	.4byte \unknown2
-	.byte \unknown3
+	.4byte 0x0
+	.4byte 0x0
+	.byte 0
 	.endm
 
 	.macro giveegg species:req
@@ -924,7 +923,7 @@
 	.2byte \move
 	.endm
 
-	@ Checks if at least one Pokemon in the player's party knows the specified (index) attack. If so, variable 0x800D (LASTRESULT) is set to the (zero-indexed) slot number of the first Pokemon that knows the move. If not, LASTRESULT is set to 0x0006. Variable 0x8004 is also set to this Pokemon's species.
+	@ Checks if at least one Pokemon in the player's party knows the specified (index) attack. If so, VAR_RESULT is set to the (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE. VAR_0x8004 is also set to this Pokemon's species.
 	.macro checkpartymove index:req
 	.byte 0x7c
 	.2byte \index
@@ -1044,27 +1043,27 @@
 	.byte 0x8e
 	.endm
 
-	@ Stores a random integer between 0 and limit in variable 0x800D (LASTRESULT).
+	@ Stores a random integer between 0 and limit in VAR_RESULT.
 	.macro random limit:req
 	.byte 0x8f
 	.2byte \limit
 	.endm
 
 	@ If check is 0x00, this command adds value to the player's money.
-	.macro givemoney value:req, check:req
+	.macro addmoney value:req, check:req
 	.byte 0x90
 	.4byte \value
 	.byte \check
 	.endm
 
 	@ If check is 0x00, this command subtracts value from the player's money.
-	.macro takemoney value:req, check:req
+	.macro removemoney value:req, check:req
 	.byte 0x91
 	.4byte \value
 	.byte \check
 	.endm
 
-	@ If check is 0x00, this command will check if the player has value or more money; script variable 0x800D (LASTRESULT) is set to 0x0001 if the player has enough money, or 0x0000 if the do not.
+	@ If check is 0x00, this command will check if the player has money >= value; VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
 	.macro checkmoney value:req, check:req
 	.byte 0x92
 	.4byte \value
@@ -1079,9 +1078,11 @@
 	.byte \check
 	.endm
 
-	@ Hides the secondary box spawned by showmoney.
+	@ Hides the secondary box spawned by showmoney. Consumption of the x and y arguments was dummied out.
 	.macro hidemoneybox
 	.byte 0x94
+	.byte 0  @ \x
+	.byte 0  @ \y
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. Consumes but does not use arguments.
@@ -1089,6 +1090,7 @@
 	.byte 0x95
 	.byte \x
 	.byte \y
+	.byte 0 @ 1 = don't perform this command. Always 0 in vanilla. Why this is a thing is beyond me.
 	.endm
 
 	@ Gets the price reduction for the index given. In FireRed, this command is a nop.
@@ -1097,16 +1099,16 @@
 	.2byte \index
 	.endm
 
-	@ Fades the screen to and from black and white. Mode 0x00 fades from black, mode 0x01 fades out to black, mode 0x2 fades in from white, and mode 0x3 fades out to white.
-	.macro fadescreen effect:req
+	@ Fades the screen to and from black and white. Modes are FADE_(TO/FROM)_(WHITE/BLACK)
+	.macro fadescreen mode:req
 	.byte 0x97
-	.byte \effect
+	.byte \mode
 	.endm
 
-	@ Fades the screen to and from black and white. Mode 0x00 fades from black, mode 0x01 fades out to black, mode 0x2 fades in from white, and mode 0x3 fades out to white. Other modes may exist.
-	.macro fadescreenspeed effect:req, speed:req
+	@ Fades the screen to and from black and white. Modes are FADE_(TO/FROM)_(WHITE/BLACK)
+	.macro fadescreenspeed mode:req, speed:req
 	.byte 0x98
-	.byte \effect
+	.byte \mode
 	.byte \speed
 	.endm
 
@@ -1150,7 +1152,7 @@
 	.2byte \heallocation
 	.endm
 
-	@ Checks the player's gender. If male, then 0x0000 is stored in variable 0x800D (LASTRESULT). If female, then 0x0001 is stored in LASTRESULT.
+	@ Checks the player's gender. If male, then MALE (0) is stored in VAR_RESULT. If female, then FEMALE (1) is stored in VAR_RESULT.
 	.macro checkplayergender
 	.byte 0xa0
 	.endm
@@ -1279,12 +1281,12 @@
 	.2byte \out
 	.endm
 
-	.macro givecoins count:req
+	.macro addcoins count:req
 	.byte 0xb4
 	.2byte \count
 	.endm
 
-	.macro takecoins count:req
+	.macro removecoins count:req
 	.byte 0xb5
 	.2byte \count
 	.endm
@@ -1433,7 +1435,7 @@
 	.2byte \slot
 	.endm
 
-	@ Checks if the Pokemon in the specified slot of the player's party is obedient. If the Pokemon is disobedient, 0x0001 is written to script variable 0x800D (LASTRESULT). If the Pokemon is obedient (or if the specified slot is empty or invalid), 0x0000 is written.
+	@ Checks if the Pokemon in the specified slot of the player's party is obedient. If the Pokemon is disobedient, VAR_RESULT is TRUE. If the Pokemon is obedient (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
 	.macro checkmonobedience slot:req
 	.byte 0xce
 	.2byte \slot
@@ -1466,31 +1468,34 @@
 	.byte \location
 	.endm
 
-	.macro mossdeepgym1 unknown:req
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Moves the objects on the colored puzzle specified by puzzleNumber one rotation
+	.macro moverotatingtileobjects puzzleNumber:req
 	.byte 0xd3
-	.2byte \unknown
+	.2byte \puzzleNumber
 	.endm
 
-	.macro mossdeepgym2
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Updates the facing direction of all objects on the puzzle tiles
+	.macro turnrotatingtileobjects
 	.byte 0xd4
 	.endm
 
-	@ In FireRed, this command is a nop.
-	.macro mossdeepgym3 var:req
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Allocates memory for the puzzle objects. isTrickHouse is needed to determine which of the two maps the puzzle is on, in order to know where in the tileset the puzzle tiles start. In FireRed, this command is a nop.
+	.macro initrotatingtilepuzzle isTrickHouse:req
 	.byte 0xd5
-	.2byte \var
+	.2byte \isTrickHouse
 	.endm
 
-	.macro mossdeepgym4
+	@ For the rotating tile puzzles in Mossdeep Gym/Trick House Room 7. Frees the memory allocated for the puzzle objects.
+	.macro freerotatingtilepuzzle
 	.byte 0xd6
 	.endm
 
-	.macro warp7 map:req, byte:req, word1:req, word2:req
+	.macro warpmossdeepgym map:req, warpId:req, x:req, y:req
 	.byte 0xd7
 	map \map
-	.byte \byte
-	.2byte \word1
-	.2byte \word2
+	.byte \warpId
+	.2byte \x
+	.2byte \y
 	.endm
 
 	.macro cmdD8
@@ -1501,7 +1506,7 @@
 	.byte 0xd9
 	.endm
 
-	.macro hidebox2
+	.macro closebraillemessage
 	.byte 0xda
 	.endm
 
@@ -1510,9 +1515,9 @@
 	.4byte \pointer
 	.endm
 
-	.macro fadescreenswapbuffers byte:req
+	.macro fadescreenswapbuffers mode:req
 	.byte 0xdc
-	.byte \byte
+	.byte \mode
 	.endm
 
 	.macro buffertrainerclassname out:req, class:req
@@ -1532,7 +1537,7 @@
 	.4byte \pointer
 	.endm
 
-	.macro warp8 map:req, byte:req, word1:req, word2:req
+	.macro warpsootopolislegend map:req, byte:req, word1:req, word2:req
 	.byte 0xe0
 	map \map
 	.byte \byte
@@ -1559,12 +1564,12 @@
 
 	.macro goto_if_unset flag:req, dest:req
 	checkflag \flag
-	goto_if 0, \dest
+	goto_if FALSE, \dest
 	.endm
 
 	.macro goto_if_set flag:req, dest:req
 	checkflag \flag
-	goto_if 1, \dest
+	goto_if TRUE, \dest
 	.endm
 
 	.macro goto_if_lt dest:req @ LESS THAN
@@ -1593,12 +1598,12 @@
 
 	.macro call_if_unset flag:req, dest:req
 	checkflag \flag
-	call_if 0, \dest
+	call_if FALSE, \dest
 	.endm
 
 	.macro call_if_set flag:req, dest:req
 	checkflag \flag
-	call_if 1, \dest
+	call_if TRUE, \dest
 	.endm
 
 	.macro call_if_lt dest:req @ LESS THAN
@@ -1625,6 +1630,44 @@
 	call_if 5, \dest
 	.endm
 
+	.macro vgoto_if_eq dest:req
+	vgoto_if TRUE, \dest
+	.endm
+
+	.macro vgoto_if_ne dest:req
+	vgoto_if FALSE, \dest
+	.endm
+
+	.macro vgoto_if_unset flag:req, dest:req
+	checkflag \flag
+	vgoto_if FALSE, \dest
+	.endm
+
+	.macro vgoto_if_set flag:req, dest:req
+	checkflag \flag
+	vgoto_if TRUE, \dest
+	.endm
+
+	.macro goto_if_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	goto_if TRUE, \dest
+	.endm
+
+	.macro goto_if_not_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	goto_if FALSE, \dest
+	.endm
+
+	.macro call_if_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	call_if TRUE, \dest
+	.endm
+
+	.macro call_if_not_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	call_if FALSE, \dest
+	.endm
+
 	.macro switch var:req
 	copyvar VAR_0x8000, \var
 	.endm
@@ -1640,6 +1683,7 @@
 	MSGBOX_DEFAULT = 4
 	MSGBOX_YESNO = 5
 	MSGBOX_AUTOCLOSE = 6
+	MSGBOX_GETPOINTS = 9
 
 	YES = 1
 	NO  = 0
@@ -1649,13 +1693,19 @@
 	callstd \type
 	.endm
 
-	.macro giveitem_std item:req, amount=1, function=0
+	.macro giveitem item:req, amount=1
 	setorcopyvar VAR_0x8000, \item
 	setorcopyvar VAR_0x8001, \amount
-	callstd \function
+	callstd STD_OBTAIN_ITEM
 	.endm
 
-	.macro givedecoration_std decoration:req
+	.macro finditem item:req, amount=1
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
+	callstd STD_FIND_ITEM
+	.endm
+
+	.macro givedecoration decoration:req
 	setorcopyvar VAR_0x8000, \decoration
 	callstd STD_OBTAIN_DECORATION
 	.endm
@@ -1665,4 +1715,11 @@
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, \trainer
 	callstd STD_REGISTER_MATCH_CALL
+	.endm
+
+	.macro dofieldeffectsparkle x:req, y:req, priority:req
+	setfieldeffectargument 0, \x
+	setfieldeffectargument 1, \y
+	setfieldeffectargument 2, \priority
+	dofieldeffect FLDEFF_SPARKLE
 	.endm

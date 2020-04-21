@@ -1,181 +1,163 @@
 BattleFrontier_BattleDomePreBattleRoom_MapScripts:: @ 824B1F9
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B204
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomePreBattleRoom_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomePreBattleRoom_OnWarp
 	.byte 0
 
-BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B204: @ 824B204
-	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E
+BattleFrontier_BattleDomePreBattleRoom_OnWarp: @ 824B204
+	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_TurnPlayerNorth
 	.2byte 0
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E:: @ 824B20E
+BattleFrontier_BattleDomePreBattleRoom_EventScript_TurnPlayerNorth:: @ 824B20E
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
-	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222
+BattleFrontier_BattleDomePreBattleRoom_OnFrame: @ 824B218
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom
 	.2byte 0
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
+BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom:: @ 824B222
 	compare VAR_0x8006, 1
-	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 6
-	setvar VAR_0x8006, 1
-	special CallFrontierUtilFunc
+	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle
+	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	setvar VAR_TEMP_0, 1
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	lockall
-
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F:: @ 824B24F
-	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B4FB
+BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound:: @ 824B24F
+	call BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForNextRoundMessage
 	waitmessage
+	switch VAR_RESULT  @ No case?
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord
+	multichoice 16, 0, MULTI_TOURNEY_WITH_RECORD, 1
 	switch VAR_RESULT
-	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23E8E0
-	compare VAR_RESULT, 1
-	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1
-	multichoice 16, 0, 73, 1
-	switch VAR_RESULT
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5
-	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D
-	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B30D
-	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B349
-	case 5, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo
+	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree
+	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge
+	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRecordBattle
+	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge
+	case 5, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1:: @ 824B2C1
-	multichoice 16, 2, 107, 1
+BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord:: @ 824B2C1
+	multichoice 16, 2, MULTI_TOURNEY_NO_RECORD, 1
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5
-	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D
-	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B349
-	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo
+	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree
+	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge
+	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge
+	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B30D:: @ 824B30D
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24BAF7
+BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRecordBattle:: @ 824B30D
+	message BattleFrontier_BattleDomePreBattleRoom_Text_RecordLastMatch
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B33F
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
+	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_RecordBattle
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B33F:: @ 824B33F
-	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23E8B4
-	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+BattleFrontier_BattleDomePreBattleRoom_EventScript_RecordBattle:: @ 824B33F
+	call BattleFrontier_EventScript_SaveBattle
+	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B349:: @ 824B349
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BA69, MSGBOX_YESNO
+BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge:: @ 824B349
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_SaveAndQuitGame, MSGBOX_YESNO
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case NO, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
+	case YES, BattleFrontier_BattleDomePreBattleRoom_EventScript_PauseChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B377:: @ 824B377
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24BA93
+BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge:: @ 824B377
+	message BattleFrontier_BattleDomePreBattleRoom_Text_RetireYourChallenge
 	waitmessage
-	multichoicedefault 20, 8, 94, 1, 0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, 0
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3A9
-	case 127, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
+	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_RetireChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3A9:: @ 824B3A9
-	setvar VAR_0x8004, 12
-	setvar VAR_0x8005, 9
-	special CallBattleDomeFunction
-	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24BE9A
+BattleFrontier_BattleDomePreBattleRoom_EventScript_RetireChallenge:: @ 824B3A9
+	dome_resolvewinners DOME_PLAYER_RETIRED
+	goto BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobbyLost
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB:: @ 824B3BB
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24BAD3
+BattleFrontier_BattleDomePreBattleRoom_EventScript_PauseChallenge:: @ 824B3BB
+	message BattleFrontier_BattleDomePreBattleRoom_Text_SavingDataPleaseWait
 	waitmessage
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 2
-	special CallBattleDomeFunction
+	dome_save CHALLENGE_STATUS_PAUSED
 	playse SE_SAVE
 	waitse
-	fadescreen 1
-	setvar VAR_0x8004, 4
-	special CallFrontierUtilFunc
+	fadescreen FADE_TO_BLACK
+	frontier_reset
 	end
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD:: @ 824B3DD
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B9B5, MSGBOX_DEFAULT
-	fadescreen 1
-	setvar VAR_0x8004, 6
-	special CallBattleDomeFunction
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo:: @ 824B3DD
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_PlayersNextOpponentIsTrainer, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+	dome_showopponentinfo
 	waitstate
-	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5:: @ 824B3F5
-	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B40A
-	fadescreen 1
-	setvar VAR_0x8004, 7
-	special CallBattleDomeFunction
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree:: @ 824B3F5
+	call BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowRoundMessage
+	fadescreen FADE_TO_BLACK
+	dome_showtourneytree
 	waitstate
-	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B40A:: @ 824B40A
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowRoundMessage:: @ 824B40A
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B449
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B452
-	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B45B
-	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B464
+	case DOME_ROUND1, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound1
+	case DOME_ROUND2, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound2
+	case DOME_SEMIFINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInSemifinals
+	case DOME_FINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInFinals
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B449:: @ 824B449
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B9D9, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound1:: @ 824B449
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound1, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B452:: @ 824B452
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B9FD, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound2:: @ 824B452
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound2, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B45B:: @ 824B45B
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BA21, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInSemifinals:: @ 824B45B
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInSemifinals, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B464:: @ 824B464
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BA46, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInFinals:: @ 824B464
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInFinals, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24B70C
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge:: @ 824B46D
+	message BattleFrontier_BattleDomePreBattleRoom_Text_ChooseTwoMons
 	waitmessage
 	waitbuttonpress
-	fadescreen 1
-	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23F2B7
+	fadescreen FADE_TO_BLACK
+	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, 2
-	special sub_80F9490
+	setvar VAR_0x8005, DOME_BATTLE_PARTY_SIZE  @ 2 of the 3 party mons are selected for battle
+	special ChoosePartyForBattleFrontier
 	waitstate
-	setvar VAR_0x8004, 21
-	special CallFrontierUtilFunc
+	frontier_resetsketch
 	compare VAR_RESULT, 0
-	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 8
-	special CallBattleDomeFunction
-	setvar VAR_0x8004, 18
-	special CallBattleDomeFunction
-	setvar VAR_0x8004, 9
-	special CallBattleDomeFunction
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B748, MSGBOX_DEFAULT
+	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
+	dome_set DOME_DATA_SELECTED_MONS
+	dome_reduceparty
+	dome_setopponent
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, BattleFrontier_BattleDomePreBattleRoom_Movement_24B64F
+	applymovement 1, BattleFrontier_BattleDomePreBattleRoom_Movement_AttendantMoveAside
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B657
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerWalkToDoor
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B659
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 5, 1
 	waitdooranim
@@ -184,232 +166,229 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	waitstate
 	end
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B4FB:: @ 824B4FB
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForNextRoundMessage:: @ 824B4FB
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	switch VAR_RESULT
-	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B53A
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B540
-	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B546
-	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B54C
+	case DOME_ROUND1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound1
+	case DOME_ROUND2, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound2
+	case DOME_SEMIFINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForSemifinals
+	case DOME_FINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForFinals
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B53A:: @ 824B53A
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24B65C
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound1:: @ 824B53A
+	message BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound1
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B540:: @ 824B540
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24B689
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound2:: @ 824B540
+	message BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound2
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B546:: @ 824B546
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24B6B6
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForSemifinals:: @ 824B546
+	message BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForSemifinals
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B54C:: @ 824B54C
-	setvar VAR_0x8004, 9
-	special CallFrontierUtilFunc
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForFinals:: @ 824B54C
+	frontier_getbrainstatus
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B
-	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0
-	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B
-	case 4, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0
-	message BattleFrontier_BattleDomePreBattleRoom_Text_24B6E3
+	case FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver
+	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold
+	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver
+	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold
+	message BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForFinals
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B:: @ 824B58B
-	goto_if_set FLAG_TEMP_1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5B5
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BB2E, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver:: @ 824B58B
+	goto_if_set FLAG_TEMP_1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilverShort
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilver, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0:: @ 824B5A0
-	goto_if_set FLAG_TEMP_1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5BE
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BBAC, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold:: @ 824B5A0
+	goto_if_set FLAG_TEMP_1, BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGoldShort
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGold, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5B5:: @ 824B5B5
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BC2A, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilverShort:: @ 824B5B5
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilverShort, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5BE:: @ 824B5BE
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BC63, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGoldShort:: @ 824B5BE
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGoldShort, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
+BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle:: @ 824B5C7
 	setvar VAR_TEMP_0, 1
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B760, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_RestoreMonsToFullHealth, MSGBOX_DEFAULT
 	special LoadPlayerParty
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 3
-	special CallFrontierUtilFunc
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
-	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600
-	fadescreen 1
-	setvar VAR_0x8004, 11
-	special CallBattleDomeFunction
+	call BattleFrontier_BattleDomePreBattleRoom_EventScript_RoundCompleteMessage
+	fadescreen FADE_TO_BLACK
+	dome_showstatictourneytree
 	waitstate
-	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600:: @ 824B600
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	special CallFrontierUtilFunc
+BattleFrontier_BattleDomePreBattleRoom_EventScript_RoundCompleteMessage:: @ 824B600
+	frontier_get FRONTIER_DATA_BATTLE_NUM
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B634
-	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B63D
-	case 3, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B646
+	case DOME_ROUND2, BattleFrontier_BattleDomePreBattleRoom_EventScript_Round1Complete
+	case DOME_SEMIFINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_Round2Complete
+	case DOME_FINAL, BattleFrontier_BattleDomePreBattleRoom_EventScript_SemifinalsComplete
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B634:: @ 824B634
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B7A3, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_Round1Complete:: @ 824B634
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_Round1Complete, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B63D:: @ 824B63D
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B7F1, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_Round2Complete:: @ 824B63D
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_Round2Complete, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_EventScript_24B646:: @ 824B646
-	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24B83F, MSGBOX_DEFAULT
+BattleFrontier_BattleDomePreBattleRoom_EventScript_SemifinalsComplete:: @ 824B646
+	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_SemifinalsComplete, MSGBOX_DEFAULT
 	return
 
-BattleFrontier_BattleDomePreBattleRoom_Movement_24B64F: @ 824B64F
+BattleFrontier_BattleDomePreBattleRoom_Movement_AttendantMoveAside: @ 824B64F
 	walk_right
 	face_left
 	step_end
 
-BattleFrontier_BattleDomePreBattleRoom_Movement_24B652: @ 824B652
+BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnter: @ 824B652
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-BattleFrontier_BattleDomePreBattleRoom_Movement_24B657: @ 824B657
+BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerWalkToDoor: @ 824B657
 	walk_up
 	step_end
 
-BattleFrontier_BattleDomePreBattleRoom_Movement_24B659: @ 824B659
+BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor: @ 824B659
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B65C: @ 824B65C
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound1: @ 824B65C
 	.string "Your 1st-round match is next.\n"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B689: @ 824B689
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound2: @ 824B689
 	.string "Your 2nd-round match is next.\n"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B6B6: @ 824B6B6
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForSemifinals: @ 824B6B6
 	.string "Your semifinal match is next.\n"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B6E3: @ 824B6E3
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForFinals: @ 824B6E3
 	.string "Your final match is next.\n"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B70C: @ 824B70C
+BattleFrontier_BattleDomePreBattleRoom_Text_ChooseTwoMons: @ 824B70C
 	.string "Please choose the two POKéMON\n"
 	.string "that are to appear in battle.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B748: @ 824B748
+BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay: @ 824B748
 	.string "Right this way, please.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B760: @ 824B760
+BattleFrontier_BattleDomePreBattleRoom_Text_RestoreMonsToFullHealth: @ 824B760
 	.string "Thank you for competing!\p"
 	.string "I'll restore your POKéMON to\n"
 	.string "full health.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B7A3: @ 824B7A3
+BattleFrontier_BattleDomePreBattleRoom_Text_Round1Complete: @ 824B7A3
 	.string "All 1st-round matches have been\n"
 	.string "completed.\p"
 	.string "These are the teams that advanced!$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B7F1: @ 824B7F1
+BattleFrontier_BattleDomePreBattleRoom_Text_Round2Complete: @ 824B7F1
 	.string "All 2nd-round matches have been\n"
 	.string "completed.\p"
 	.string "These are the teams that advanced!$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B83F: @ 824B83F
+BattleFrontier_BattleDomePreBattleRoom_Text_SemifinalsComplete: @ 824B83F
 	.string "All semifinal matches have been\n"
 	.string "completed.\p"
 	.string "These are the teams that advanced!$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B88D: @ 824B88D
+@ Unused
+BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForRound2: @ 824B88D
 	.string "Congratulations for getting through\n"
 	.string "the 1st round.\p"
 	.string "The 2nd round is next.\n"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B8E6: @ 824B8E6
+@ Unused
+BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForSemifinals: @ 824B8E6
 	.string "Congratulations for advancing\n"
 	.string "to the semifinals.\p"
 	.string "The best four teams meet in this round.\n"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B94E: @ 824B94E
+@ Unused
+BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForFinals: @ 824B94E
 	.string "Congratulations for advancing\n"
 	.string "to the final match.\p"
 	.string "You're one win from the championship.\n"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B9B5: @ 824B9B5
+BattleFrontier_BattleDomePreBattleRoom_Text_PlayersNextOpponentIsTrainer: @ 824B9B5
 	.string "{PLAYER}'s next opponent\n"
 	.string "is this TRAINER.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B9D9: @ 824B9D9
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound1: @ 824B9D9
 	.string "The tournament is in the 1st round.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24B9FD: @ 824B9FD
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound2: @ 824B9FD
 	.string "The tournament is in the 2nd round.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BA21: @ 824BA21
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInSemifinals: @ 824BA21
 	.string "The tournament is in the semifinals.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BA46: @ 824BA46
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInFinals: @ 824BA46
 	.string "The tournament is up to the final.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BA69: @ 824BA69
+BattleFrontier_BattleDomePreBattleRoom_Text_SaveAndQuitGame: @ 824BA69
 	.string "Would you like to save and\n"
 	.string "quit the game?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BA93: @ 824BA93
+BattleFrontier_BattleDomePreBattleRoom_Text_RetireYourChallenge: @ 824BA93
 	.string "Would you like to retire from your\n"
 	.string "Battle Tournament challenge?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BAD3: @ 824BAD3
+BattleFrontier_BattleDomePreBattleRoom_Text_SavingDataPleaseWait: @ 824BAD3
 	.string "I am saving your data.\n"
 	.string "Please wait.$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BAF7: @ 824BAF7
+BattleFrontier_BattleDomePreBattleRoom_Text_RecordLastMatch: @ 824BAF7
 	.string "Should I record your last match\n"
 	.string "on your FRONTIER PASS?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BB2E: @ 824BB2E
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilver: @ 824BB2E
 	.string "Congratulations for advancing\n"
 	.string "to the final match.\p"
 	.string "For the final match, you will challenge\n"
 	.string "the DOME ACE TUCKER.\p"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BBAC: @ 824BBAC
+@ Identical to ReadyForTuckerSilver
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGold: @ 824BBAC
 	.string "Congratulations for advancing\n"
 	.string "to the final match.\p"
 	.string "For the final match, you will challenge\n"
 	.string "the DOME ACE TUCKER.\p"
 	.string "Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BC2A: @ 824BC2A
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilverShort: @ 824BC2A
 	.string "Your final battle against TUCKER is\n"
 	.string "next. Are you ready?$"
 
-BattleFrontier_BattleDomePreBattleRoom_Text_24BC63: @ 824BC63
+@ Identical again
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGoldShort: @ 824BC63
 	.string "Your final battle against TUCKER is\n"
 	.string "next. Are you ready?$"
 

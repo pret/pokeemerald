@@ -52,10 +52,10 @@ static const u16 sSaveLocationPokeCenterList[] =
     MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F,
     MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
     MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F,
-    MAP_SINGLE_BATTLE_COLOSSEUM,
+    MAP_BATTLE_COLOSSEUM_2P,
     MAP_TRADE_CENTER,
     MAP_RECORD_CORNER,
-    MAP_DOUBLE_BATTLE_COLOSSEUM,
+    MAP_BATTLE_COLOSSEUM_4P,
     0xFFFF,
 };
 
@@ -118,18 +118,21 @@ void TrySetMapSaveWarpStatus(void)
     sub_81AFD5C();
 }
 
-void sub_81AFDA0(void)
+// In FRLG, only 0x1, 0x10, and 0x20 are set when the pokedex is received
+// 0x2, 0x4, 0x8, and 0x8000 are instead set by SetPostgameFlags
+// These flags are read by Pokemon Colosseum/XD for linking. XD Additionally requires FLAG_SYS_GAME_CLEAR
+void SetUnlockedPokedexFlags(void)
 {
-    gSaveBlock2Ptr->field_A8 |= 0x8000;
-    gSaveBlock2Ptr->field_A8 |= 0x1;
-    gSaveBlock2Ptr->field_A8 |= 0x2;
-    gSaveBlock2Ptr->field_A8 |= 0x4;
-    gSaveBlock2Ptr->field_A8 |= 0x10;
-    gSaveBlock2Ptr->field_A8 |= 0x20;
-    gSaveBlock2Ptr->field_A8 |= 0x8;
+    gSaveBlock2Ptr->gcnLinkFlags |= 0x8000;
+    gSaveBlock2Ptr->gcnLinkFlags |= 0x1;
+    gSaveBlock2Ptr->gcnLinkFlags |= 0x2;
+    gSaveBlock2Ptr->gcnLinkFlags |= 0x4;
+    gSaveBlock2Ptr->gcnLinkFlags |= 0x10;
+    gSaveBlock2Ptr->gcnLinkFlags |= 0x20;
+    gSaveBlock2Ptr->gcnLinkFlags |= 0x8;
 }
 
-void sub_81AFDD0(void)
+void SetChampionSaveWarp(void)
 {
-    gSaveBlock2Ptr->specialSaveWarpFlags |= 0x80;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CHAMPION_SAVEWARP;
 }

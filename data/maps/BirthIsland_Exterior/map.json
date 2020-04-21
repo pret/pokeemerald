@@ -3,7 +3,7 @@
   "name": "BirthIsland_Exterior",
   "layout": "LAYOUT_BIRTH_ISLAND_EXTERIOR",
   "music": "MUS_NONE",
-  "region_map_section": "MAPSEC_BIRTH_ISLAND_2",
+  "region_map_section": "MAPSEC_BIRTH_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_DEOXYS_TRIANGLE",
+      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
       "x": 15,
       "y": 12,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BirthIsland_Exterior_EventScript_267F83",
+      "script": "BirthIsland_Exterior_EventScript_Triangle",
       "flag": "FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_DEOXYS",
+      "graphics_id": "OBJ_EVENT_GFX_DEOXYS",
       "x": 15,
       "y": 3,
       "elevation": 0,

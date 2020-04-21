@@ -6,7 +6,7 @@
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "graphics.h"
 #include "random.h"
 #include "util.h"
@@ -534,7 +534,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);
     else
-        lzPaletteData = GetFrontSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
+        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, 0x20);
@@ -597,7 +597,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);
     else
-        lzPaletteData = GetFrontSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
+        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, 0x20);
@@ -779,7 +779,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *battlerId)
         break;
     case 4:
         InitBattlerHealthboxCoords(*battlerId);
-        if (gBattlerPositions[*battlerId] <= 1)
+        if (gBattlerPositions[*battlerId] <= B_POSITION_OPPONENT_LEFT)
             DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battlerId], FALSE);
         else
             DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battlerId], TRUE);
@@ -811,7 +811,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *battlerId)
         break;
     case 6:
         LoadAndCreateEnemyShadowSprites();
-        sub_81B8C68();
+        BufferBattlePartyCurrentOrder();
         retVal = TRUE;
         break;
     }
@@ -918,7 +918,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
         dst = (void *)(VRAM + 0x10000 + gSprites[gBattlerSpriteIds[battlerAtk]].oam.tileNum * 32);
         DmaCopy32(3, src, dst, 0x800);
         paletteOffset = 0x100 + battlerAtk * 16;
-        lzPaletteData = GetFrontSpritePalFromSpeciesAndPersonality(targetSpecies, otId, personalityValue);
+        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, otId, personalityValue);
         LZDecompressWram(lzPaletteData, gDecompressionBuffer);
         LoadPalette(gDecompressionBuffer, paletteOffset, 32);
 
@@ -945,10 +945,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
 
 void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
 {
-    u8 position;
-    s32 i;
-    u32 var;
-    const void *substitutePal;
+    s32 i, position, palOffset;
 
     if (!loadMonSprite)
     {
@@ -964,19 +961,16 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
         else
             LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[position]);
 
-        i = 1;
-        var = battlerId * 16;
-        substitutePal = gSubstituteDollPal;
-        for (; i < 4; i++)
+        for (i = 1; i < 4; i++)
         {
-            register void *dmaSrc asm("r0") = gMonSpritesGfxPtr->sprites[position];
-            void *dmaDst = (i * 0x800) + dmaSrc;
-            u32 dmaSize = 0x800;
-            DmaCopy32(3, dmaSrc, dmaDst, dmaSize);
-            i++;i--;
+            u8 (*ptr)[4][0x800] = gMonSpritesGfxPtr->sprites[position];
+            ptr++;ptr--; // Needed to match.
+
+            DmaCopy32Defvars(3, (*ptr)[0], (*ptr)[i], 0x800);
         }
 
-        LoadCompressedPalette(substitutePal, 0x100 + var, 32);
+        palOffset = (battlerId * 16) + 0x100;
+        LoadCompressedPalette(gSubstituteDollPal, palOffset, 32);
     }
     else
     {
@@ -1067,8 +1061,8 @@ void HandleBattleLowHpMusicChange(void)
     {
         u8 playerBattler1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
         u8 playerBattler2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-        u8 battler1PartyId = pokemon_order_func(gBattlerPartyIndexes[playerBattler1]);
-        u8 battler2PartyId = pokemon_order_func(gBattlerPartyIndexes[playerBattler2]);
+        u8 battler1PartyId = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[playerBattler1]);
+        u8 battler2PartyId = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[playerBattler2]);
 
         if (GetMonData(&gPlayerParty[battler1PartyId], MON_DATA_HP) != 0)
             HandleLowHpMusicChange(&gPlayerParty[battler1PartyId], playerBattler1);
@@ -1232,8 +1226,8 @@ void FreeMonSpritesGfx(void)
     if (gMonSpritesGfxPtr == NULL)
         return;
 
-    if (gMonSpritesGfxPtr->field_17C != NULL)
-        FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+    if (gMonSpritesGfxPtr->buffer != NULL)
+        FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
     if (gMonSpritesGfxPtr->field_178 != NULL)
         FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_178);
 

@@ -27,7 +27,8 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/field_effects.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_object_movement.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -63,27 +64,27 @@ static void PokeballGlowEffect_7(struct Sprite *);
 static u8 PokecenterHealEffectHelper(s16, s16);
 static void HallOfFameRecordEffectHelper(s16, s16, s16, u8);
 
-static void mapldr_080842E8(void);
+static void FieldCallback_Fly(void);
 static void task00_8084310(u8);
 static void mapldr_08084390(void);
 static void c3_080843F8(u8);
 
-static void sub_80B6B94(u8);
-static bool8 sub_80B6BCC(struct Task *);
-static bool8 sub_80B6C74(struct Task *);
-static bool8 sub_80B6C90(struct Task *);
-static bool8 sub_80B6D04(struct Task *);
-static bool8 sub_80B6DBC(struct Task *);
-static bool8 sub_80B6DD8(struct Task *);
-static bool8 sub_80B6E18(struct Task *);
+static void Task_FallWarpFieldEffect(u8);
+static bool8 FallWarpEffect_1(struct Task *);
+static bool8 FallWarpEffect_2(struct Task *);
+static bool8 FallWarpEffect_3(struct Task *);
+static bool8 FallWarpEffect_4(struct Task *);
+static bool8 FallWarpEffect_5(struct Task *);
+static bool8 FallWarpEffect_6(struct Task *);
+static bool8 FallWarpEffect_7(struct Task *);
 
-static void sub_80B6E88(u8);
-static bool8 sub_80B6EC0(struct Task *);
-static bool8 sub_80B6EE0(struct Task *);
-static bool8 sub_80B6F50(struct Task *);
-static bool8 sub_80B6F74(struct Task *);
-static bool8 sub_80B6F84(struct Task *);
-static bool8 sub_80B6FA8(struct Task *);
+static void Task_EscalatorWarpFieldEffect(u8);
+static bool8 EscalatorWarpEffect_1(struct Task *);
+static bool8 EscalatorWarpEffect_2(struct Task *);
+static bool8 EscalatorWarpEffect_3(struct Task *);
+static bool8 EscalatorWarpEffect_4(struct Task *);
+static bool8 EscalatorWarpEffect_5(struct Task *);
+static bool8 EscalatorWarpEffect_6(struct Task *);
 
 static void sub_80B6FB8(struct Task *);
 static void sub_80B7004(struct Task *);
@@ -101,40 +102,38 @@ static bool8 sub_80B72D0(struct Task *);
 static bool8 sub_80B72F4(struct Task *);
 
 static void sub_80B7384(u8);
-static bool8 sub_80B73D0(struct Task *, struct EventObject *);
-static bool8 waterfall_1_do_anim_probably(struct Task *, struct EventObject *);
-static bool8 waterfall_2_wait_anim_finish_probably(struct Task *, struct EventObject *);
-static bool8 sub_80B7450(struct Task *, struct EventObject *);
-static bool8 sub_80B7478(struct Task *, struct EventObject *);
+static bool8 sub_80B73D0(struct Task *, struct ObjectEvent *);
+static bool8 waterfall_1_do_anim_probably(struct Task *, struct ObjectEvent *);
+static bool8 waterfall_2_wait_anim_finish_probably(struct Task *, struct ObjectEvent *);
+static bool8 sub_80B7450(struct Task *, struct ObjectEvent *);
+static bool8 sub_80B7478(struct Task *, struct ObjectEvent *);
 
 static void Task_Dive(u8);
 static bool8 dive_1_lock(struct Task *);
 static bool8 dive_2_unknown(struct Task *);
 static bool8 dive_3_unknown(struct Task *);
 
-static void sub_80B75F0(u8);
-static bool8 sub_80B764C(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7684(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B76B8(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7704(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B77F8(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7814(struct Task *, struct EventObject *, struct Sprite *);
+static void Task_LavaridgeGymB1FWarp(u8);
+static bool8 LavaridgeGymB1FWarpEffect_1(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpEffect_2(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpEffect_3(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpEffect_4(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpEffect_5(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpEffect_6(struct Task *, struct ObjectEvent *, struct Sprite *);
 
-static void mapldr_080851BC(void);
-static void sub_80B7890(u8);
+static void FieldCB_LavaridgeGymB1FWarpExit(void);
+static void Task_LavaridgeGymB1FWarpExit(u8);
+static bool8 LavaridgeGymB1FWarpExitEffect_1(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpExitEffect_2(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpExitEffect_3(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGymB1FWarpExitEffect_4(struct Task *, struct ObjectEvent *, struct Sprite *);
 
-static bool8 sub_80B78EC(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B791C(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7968(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B79BC(struct Task *, struct EventObject *, struct Sprite *);
-
-static void sub_80B7A8C(u8);
-
-static bool8 sub_80B7AE8(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7B18(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7B94(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7BCC(struct Task *, struct EventObject *, struct Sprite *);
-static bool8 sub_80B7BF4(struct Task *, struct EventObject *, struct Sprite *);
+static void Task_LavaridgeGym1FWarp(u8);
+static bool8 LavaridgeGym1FWarpEffect_1(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGym1FWarpEffect_2(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGym1FWarpEffect_3(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGym1FWarpEffect_4(struct Task *, struct ObjectEvent *, struct Sprite *);
+static bool8 LavaridgeGym1FWarpEffect_5(struct Task *, struct ObjectEvent *, struct Sprite *);
 
 static void DoEscapeRopeFieldEffect(u8);
 static void EscapeRopeFieldEffect_Step0(struct Task *);
@@ -232,7 +231,7 @@ static void Fldeff_MoveDeoxysRock_Step(u8 taskId);
 
 // Static RAM declarations
 
-static IWRAM_DATA u8 sActiveList[32];
+static u8 sActiveList[32];
 
 // External declarations
 extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
@@ -246,12 +245,12 @@ const u32 gNewGameBirchPic[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
 const u32 gUnusedBirchBeauty[] = INCBIN_U32("graphics/unused/intro_birch_beauty.4bpp");
 const u16 gNewGameBirchPalette[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
 const u32 gSpriteImage_855A970[] = INCBIN_U32("graphics/misc/pokeball_glow.4bpp");
-const u16 gFieldEffectObjectPalette4[16] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_04.gbapal");
+const u16 gFieldEffectObjectPalette4[16] = INCBIN_U16("graphics/field_effects/palettes/04.gbapal");
 const u32 gSpriteImage_855A9B0[] = INCBIN_U32("graphics/misc/pokecenter_monitor/0.4bpp");
 const u32 gSpriteImage_855AA70[] = INCBIN_U32("graphics/misc/pokecenter_monitor/1.4bpp");
 const u32 gSpriteImage_855AB30[] = INCBIN_U32("graphics/misc/big_hof_monitor.4bpp");
 const u8 gSpriteImage_855AD30[] = INCBIN_U8("graphics/misc/small_hof_monitor.4bpp");
-const u16 gFieldEffectObjectPalette5[16] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_05.gbapal");
+const u16 gFieldEffectObjectPalette5[16] = INCBIN_U16("graphics/field_effects/palettes/05.gbapal");
 
 // Graphics for the lights streaking past your Pokemon when it uses a field move.
 const u32 gFieldMoveStreaksTiles[] = INCBIN_U32("graphics/misc/field_move_streaks.4bpp");
@@ -406,20 +405,76 @@ const struct SpriteFrameImage gSpriteImageTable_855C294[] =
 
 const struct Subsprite gSubspriteTable_855C29C[] =
 {
-    {.x = -12, .y = -8, .priority = 2, .tileOffset = 0, .shape = 1, .size = 0},
-    {.x =   4, .y = -8, .priority = 2, .tileOffset = 2, .shape = 0, .size = 0},
-    {.x = -12, .y =  0, .priority = 2, .tileOffset = 3, .shape = 1, .size = 0},
-    {.x =   4, .y =  0, .priority = 2, .tileOffset = 5, .shape = 0, .size = 0}
+    {
+        .x = -12, 
+        .y =  -8, 
+        .shape = SPRITE_SHAPE(16x8), 
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 0, 
+        .priority = 2
+    },
+    {
+        .x =  4, 
+        .y = -8,
+        .shape = SPRITE_SHAPE(8x8), 
+        .size = SPRITE_SIZE(8x8), 
+        .tileOffset = 2, 
+        .priority = 2 
+    },
+    {
+        .x = -12, 
+        .y =   0, 
+        .shape = SPRITE_SHAPE(16x8), 
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 3, 
+        .priority = 2
+    },
+    {
+        .x = 4, 
+        .y = 0, 
+        .shape = SPRITE_SHAPE(8x8), 
+        .size = SPRITE_SIZE(8x8), 
+        .tileOffset = 5, 
+        .priority = 2
+    }
 };
 
 const struct SubspriteTable gUnknown_0855C2AC = subsprite_table(gSubspriteTable_855C29C);
 
 const struct Subsprite gSubspriteTable_855C2B4[] =
 {
-    {.x = -32, .y = -8, .priority = 2, .tileOffset =  0, .shape = 1, .size = 1},
-    {.x =   0, .y = -8, .priority = 2, .tileOffset =  4, .shape = 1, .size = 1},
-    {.x = -32, .y =  0, .priority = 2, .tileOffset =  8, .shape = 1, .size = 1},
-    {.x =   0, .y =  0, .priority = 2, .tileOffset = 12, .shape = 1, .size = 1}
+    {
+        .x = -32, 
+        .y = -8, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0, 
+        .priority = 2
+    },
+    {
+        .x =  0, 
+        .y = -8, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 4, 
+        .priority = 2
+    },
+    {
+        .x = -32, 
+        .y =  0, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 8, 
+        .priority = 2
+    },
+    {
+        .x =   0, 
+        .y =  0, 
+        .shape = SPRITE_SHAPE(32x8), 
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12, 
+        .priority = 2
+    }
 };
 
 const struct SubspriteTable gUnknown_0855C2C4 = subsprite_table(gSubspriteTable_855C2B4);
@@ -540,25 +595,25 @@ const u8 gUnknown_0855C3BC[] = {16, 12, 8, 0};
 const u8 gUnknown_0855C3C0[] = {16, 12, 8, 0};
 const u8 gUnknown_0855C3C4[] = { 0,  0, 0, 0};
 
-bool8 (*const gUnknown_0855C3C8[])(struct Task *) =
+bool8 (*const sFallWarpFieldEffectFuncs[])(struct Task *) =
 {
-    sub_80B6BCC,
-    sub_80B6C74,
-    sub_80B6C90,
-    sub_80B6D04,
-    sub_80B6DBC,
-    sub_80B6DD8,
-    sub_80B6E18,
+    FallWarpEffect_1,
+    FallWarpEffect_2,
+    FallWarpEffect_3,
+    FallWarpEffect_4,
+    FallWarpEffect_5,
+    FallWarpEffect_6,
+    FallWarpEffect_7,
 };
 
-bool8 (*const gUnknown_0855C3E4[])(struct Task *) =
+bool8 (*const sEscalatorWarpFieldEffectFuncs[])(struct Task *) =
 {
-    sub_80B6EC0,
-    sub_80B6EE0,
-    sub_80B6F50,
-    sub_80B6F74,
-    sub_80B6F84,
-    sub_80B6FA8,
+    EscalatorWarpEffect_1,
+    EscalatorWarpEffect_2,
+    EscalatorWarpEffect_3,
+    EscalatorWarpEffect_4,
+    EscalatorWarpEffect_5,
+    EscalatorWarpEffect_6,
 };
 
 bool8 (*const gUnknown_0855C3FC[])(struct Task *) =
@@ -572,7 +627,7 @@ bool8 (*const gUnknown_0855C3FC[])(struct Task *) =
     sub_80B72F4,
 };
 
-bool8 (*const gUnknown_0855C418[])(struct Task *, struct EventObject *) =
+bool8 (*const gUnknown_0855C418[])(struct Task *, struct ObjectEvent *) =
 {
     sub_80B73D0,
     waterfall_1_do_anim_probably,
@@ -588,31 +643,31 @@ bool8 (*const gUnknown_0855C42C[])(struct Task *) =
     dive_3_unknown,
 };
 
-bool8 (*const gUnknown_0855C438[])(struct Task *, struct EventObject *, struct Sprite *) =
+bool8 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
-    sub_80B764C,
-    sub_80B7684,
-    sub_80B76B8,
-    sub_80B7704,
-    sub_80B77F8,
-    sub_80B7814,
+    LavaridgeGymB1FWarpEffect_1,
+    LavaridgeGymB1FWarpEffect_2,
+    LavaridgeGymB1FWarpEffect_3,
+    LavaridgeGymB1FWarpEffect_4,
+    LavaridgeGymB1FWarpEffect_5,
+    LavaridgeGymB1FWarpEffect_6,
 };
 
-bool8 (*const gUnknown_0855C450[])(struct Task *, struct EventObject *, struct Sprite *) =
+bool8 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
-    sub_80B78EC,
-    sub_80B791C,
-    sub_80B7968,
-    sub_80B79BC,
+    LavaridgeGymB1FWarpExitEffect_1,
+    LavaridgeGymB1FWarpExitEffect_2,
+    LavaridgeGymB1FWarpExitEffect_3,
+    LavaridgeGymB1FWarpExitEffect_4,
 };
 
-bool8 (*const gUnknown_0855C460[])(struct Task *, struct EventObject *, struct Sprite *) =
+bool8 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
-    sub_80B7AE8,
-    sub_80B7B18,
-    sub_80B7B94,
-    sub_80B7BCC,
-    sub_80B7BF4,
+    LavaridgeGym1FWarpEffect_1,
+    LavaridgeGym1FWarpEffect_2,
+    LavaridgeGym1FWarpEffect_3,
+    LavaridgeGym1FWarpEffect_4,
+    LavaridgeGym1FWarpEffect_5,
 };
 
 void (*const gEscapeRopeFieldEffectFuncs[])(struct Task *) =
@@ -870,184 +925,54 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
 {
     ResetPreservedPalettesInWeather();
-    if (sprite->oam.affineMode != 0)
+    if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
     {
         FreeOamMatrix(sprite->oam.matrixNum);
     }
     FreeAndDestroyMonPicSprite(spriteId);
 }
 
-#ifdef NONMATCHING
+// r, g, b are between 0 and 16
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     int curRed;
     int curGreen;
     int curBlue;
+    u16 outPal;
 
-    curRed = gPlttBufferUnfaded[i] & 0x1f;
-    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
-    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
     curRed += (((0x1f - curRed) * r) >> 4);
     curGreen += (((0x1f - curGreen) * g) >> 4);
     curBlue += (((0x1f - curBlue) * b) >> 4);
-    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
 }
 
+// r, g, b are between 0 and 16
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     int curRed;
     int curGreen;
     int curBlue;
+    u16 outPal;
 
-    curRed = gPlttBufferUnfaded[i] & 0x1f;
-    curGreen = (gPlttBufferUnfaded[i] & (0x1f << 5)) >> 5;
-    curBlue = (gPlttBufferUnfaded[i] & (0x1f << 10)) >> 10;
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
     curRed -= ((curRed * r) >> 4);
     curGreen -= ((curGreen * g) >> 4);
     curBlue -= ((curBlue * b) >> 4);
-    gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
 }
-#else
-NAKED
-void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    asm(".syntax unified\n"
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tlsls r0, 16\n"
-    "\tlsls r1, 24\n"
-    "\tlsrs r1, 24\n"
-    "\tlsls r2, 24\n"
-    "\tlsrs r2, 24\n"
-    "\tlsls r3, 24\n"
-    "\tlsrs r3, 24\n"
-    "\tldr r4, _08085D00 @ =gPlttBufferUnfaded\n"
-    "\tlsrs r0, 15\n"
-    "\tadds r4, r0, r4\n"
-    "\tldrh r4, [r4]\n"
-    "\tmovs r5, 0x1F\n"
-    "\tmov r9, r5\n"
-    "\tmov r8, r4\n"
-    "\tmov r6, r8\n"
-    "\tands r6, r5\n"
-    "\tmov r8, r6\n"
-    "\tmovs r6, 0xF8\n"
-    "\tlsls r6, 2\n"
-    "\tands r6, r4\n"
-    "\tlsrs r6, 5\n"
-    "\tmovs r5, 0xF8\n"
-    "\tlsls r5, 7\n"
-    "\tands r4, r5\n"
-    "\tlsrs r4, 10\n"
-    "\tmov r7, r9\n"
-    "\tmov r5, r8\n"
-    "\tsubs r7, r5\n"
-    "\tmov r12, r7\n"
-    "\tmov r7, r12\n"
-    "\tmuls r7, r1\n"
-    "\tadds r1, r7, 0\n"
-    "\tasrs r1, 4\n"
-    "\tadd r8, r1\n"
-    "\tmov r5, r9\n"
-    "\tsubs r1, r5, r6\n"
-    "\tmuls r1, r2\n"
-    "\tasrs r1, 4\n"
-    "\tadds r6, r1\n"
-    "\tsubs r5, r4\n"
-    "\tmov r9, r5\n"
-    "\tmov r1, r9\n"
-    "\tmuls r1, r3\n"
-    "\tasrs r1, 4\n"
-    "\tadds r4, r1\n"
-    "\tmov r7, r8\n"
-    "\tlsls r7, 16\n"
-    "\tlsls r6, 21\n"
-    "\torrs r6, r7\n"
-    "\tlsls r4, 26\n"
-    "\torrs r4, r6\n"
-    "\tlsrs r4, 16\n"
-    "\tldr r1, _08085D04 @ =gPlttBufferFaded\n"
-    "\tadds r0, r1\n"
-    "\tstrh r4, [r0]\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-    "_08085D00: .4byte gPlttBufferUnfaded\n"
-    "_08085D04: .4byte gPlttBufferFaded\n"
-    ".syntax divided");
-}
-
-NAKED
-void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    asm(".syntax unified\n"
-    "\tpush {r4-r6,lr}\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6}\n"
-    "\tlsls r0, 16\n"
-    "\tlsls r1, 24\n"
-    "\tlsrs r1, 24\n"
-    "\tlsls r2, 24\n"
-    "\tlsrs r2, 24\n"
-    "\tlsls r3, 24\n"
-    "\tlsrs r3, 24\n"
-    "\tldr r4, _08085D78 @ =gPlttBufferUnfaded\n"
-    "\tlsrs r0, 15\n"
-    "\tadds r4, r0, r4\n"
-    "\tldrh r4, [r4]\n"
-    "\tmovs r5, 0x1F\n"
-    "\tmov r8, r5\n"
-    "\tmov r6, r8\n"
-    "\tands r6, r4\n"
-    "\tmov r8, r6\n"
-    "\tmovs r5, 0xF8\n"
-    "\tlsls r5, 2\n"
-    "\tands r5, r4\n"
-    "\tlsrs r5, 5\n"
-    "\tmovs r6, 0xF8\n"
-    "\tlsls r6, 7\n"
-    "\tands r4, r6\n"
-    "\tlsrs r4, 10\n"
-    "\tmov r6, r8\n"
-    "\tmuls r6, r1\n"
-    "\tadds r1, r6, 0\n"
-    "\tasrs r1, 4\n"
-    "\tmov r6, r8\n"
-    "\tsubs r6, r1\n"
-    "\tadds r1, r5, 0\n"
-    "\tmuls r1, r2\n"
-    "\tasrs r1, 4\n"
-    "\tsubs r5, r1\n"
-    "\tadds r1, r4, 0\n"
-    "\tmuls r1, r3\n"
-    "\tasrs r1, 4\n"
-    "\tsubs r4, r1\n"
-    "\tlsls r6, 16\n"
-    "\tlsls r5, 21\n"
-    "\torrs r5, r6\n"
-    "\tlsls r4, 26\n"
-    "\torrs r4, r5\n"
-    "\tlsrs r4, 16\n"
-    "\tldr r1, _08085D7C @ =gPlttBufferFaded\n"
-    "\tadds r0, r1\n"
-    "\tstrh r4, [r0]\n"
-    "\tpop {r3}\n"
-    "\tmov r8, r3\n"
-    "\tpop {r4-r6}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-    "_08085D78: .4byte gPlttBufferUnfaded\n"
-    "_08085D7C: .4byte gPlttBufferFaded\n"
-    ".syntax divided");
-}
-#endif
 
 bool8 FldEff_PokecenterHeal(void)
 {
@@ -1364,18 +1289,18 @@ void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
 }
 
 
-void sub_80B69DC(void)
+void ReturnToFieldFromFlyMapSelect(void)
 {
     SetMainCallback2(CB2_ReturnToField);
-    gFieldCallback = mapldr_080842E8;
+    gFieldCallback = FieldCallback_Fly;
 }
 
-static void mapldr_080842E8(void)
+static void FieldCallback_Fly(void)
 {
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(task00_8084310, 0);
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     gFieldCallback = NULL;
 }
 
@@ -1410,15 +1335,15 @@ static void task00_8084310(u8 taskId)
 static void mapldr_08084390(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_black();
+    FadeInFromBlack();
     CreateTask(c3_080843F8, 0);
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     if (gPlayerAvatar.flags & 0x08)
     {
-        EventObjectTurn(&gEventObjects[gPlayerAvatar.eventObjectId], DIR_WEST);
+        ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_WEST);
     }
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     gFieldCallback = NULL;
 }
 
@@ -1438,47 +1363,47 @@ static void c3_080843F8(u8 taskId)
     if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
     {
         ScriptContext2_Disable();
-        UnfreezeEventObjects();
+        UnfreezeObjectEvents();
         DestroyTask(taskId);
     }
 }
 
-void sub_80B6B68(void)
+void FieldCB_FallWarpExit(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_maplights();
+    WarpFadeInScreen();
     ScriptContext2_Enable();
-    FreezeEventObjects();
-    CreateTask(sub_80B6B94, 0);
+    FreezeObjectEvents();
+    CreateTask(Task_FallWarpFieldEffect, 0);
     gFieldCallback = NULL;
 }
 
-static void sub_80B6B94(u8 taskId)
+static void Task_FallWarpFieldEffect(u8 taskId)
 {
     struct Task *task;
     task = &gTasks[taskId];
-    while (gUnknown_0855C3C8[task->data[0]](task)); // return code signifies whether to continue blocking here
+    while (sFallWarpFieldEffectFuncs[task->data[0]](task)); // return code signifies whether to continue blocking here
 }
 
-static bool8 sub_80B6BCC(struct Task *task) // gUnknown_0855C3C8[0]
+static bool8 FallWarpEffect_1(struct Task *task)
 {
-    struct EventObject *playerObject;
+    struct ObjectEvent *playerObject;
     struct Sprite *playerSprite;
-    playerObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    playerObject = &gObjectEvents[gPlayerAvatar.objectEventId];
     playerSprite = &gSprites[gPlayerAvatar.spriteId];
     CameraObjectReset2();
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     gPlayerAvatar.preventStep = TRUE;
-    EventObjectSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
+    ObjectEventSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
     task->data[4] = playerSprite->subspriteMode;
     playerObject->fixedPriority = 1;
     playerSprite->oam.priority = 1;
-    playerSprite->subspriteMode = 2;
+    playerSprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     task->data[0]++;
     return TRUE;
 }
 
-static bool8 sub_80B6C74(struct Task *task) // gUnknown_0855C3C8[1]
+static bool8 FallWarpEffect_2(struct Task *task)
 {
     if (IsWeatherNotFadingIn())
     {
@@ -1487,7 +1412,7 @@ static bool8 sub_80B6C74(struct Task *task) // gUnknown_0855C3C8[1]
     return FALSE;
 }
 
-static bool8 sub_80B6C90(struct Task *task) // gUnknown_0855C3C8[2]
+static bool8 FallWarpEffect_3(struct Task *task)
 {
     struct Sprite *sprite;
     s16 centerToCornerVecY;
@@ -1496,18 +1421,18 @@ static bool8 sub_80B6C90(struct Task *task) // gUnknown_0855C3C8[2]
     sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
     task->data[1] = 1;
     task->data[2] = 0;
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = FALSE;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
     PlaySE(SE_RU_HYUU);
     task->data[0]++;
     return FALSE;
 }
 
-static bool8 sub_80B6D04(struct Task *task)
+static bool8 FallWarpEffect_4(struct Task *task)
 {
-    struct EventObject *eventObject;
+    struct ObjectEvent *objectEvent;
     struct Sprite *sprite;
 
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.y += task->data[1];
     if (task->data[1] < 8)
@@ -1521,22 +1446,22 @@ static bool8 sub_80B6D04(struct Task *task)
     if (task->data[3] == 0 && sprite->pos2.y >= -16)
     {
         task->data[3]++;
-        eventObject->fixedPriority = 0;
+        objectEvent->fixedPriority = 0;
         sprite->subspriteMode = task->data[4];
-        eventObject->triggerGroundEffectsOnMove = 1;
+        objectEvent->triggerGroundEffectsOnMove = 1;
     }
     if (sprite->pos2.y >= 0)
     {
         PlaySE(SE_W070);
-        eventObject->triggerGroundEffectsOnStop = 1;
-        eventObject->landingJump = 1;
+        objectEvent->triggerGroundEffectsOnStop = 1;
+        objectEvent->landingJump = 1;
         sprite->pos2.y = 0;
         task->data[0]++;
     }
     return FALSE;
 }
 
-static bool8 sub_80B6DBC(struct Task *task)
+static bool8 FallWarpEffect_5(struct Task *task)
 {
     task->data[0]++;
     task->data[1] = 4;
@@ -1545,7 +1470,7 @@ static bool8 sub_80B6DBC(struct Task *task)
     return TRUE;
 }
 
-static bool8 sub_80B6DD8(struct Task *task)
+static bool8 FallWarpEffect_6(struct Task *task)
 {
     SetCameraPanning(0, task->data[1]);
     task->data[1] = -task->data[1];
@@ -1561,51 +1486,51 @@ static bool8 sub_80B6DD8(struct Task *task)
     return FALSE;
 }
 
-static bool8 sub_80B6E18(struct Task *task)
+static bool8 FallWarpEffect_7(struct Task *task)
 {
     gPlayerAvatar.preventStep = FALSE;
     ScriptContext2_Disable();
     CameraObjectReset1();
-    UnfreezeEventObjects();
+    UnfreezeObjectEvents();
     InstallCameraPanAheadCallback();
-    DestroyTask(FindTaskIdByFunc(sub_80B6B94));
+    DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
     return FALSE;
 }
 
-void sub_80B6E4C(u8 a0, u8 priority)
+void StartEscalatorWarp(u8 metatileBehavior, u8 priority)
 {
     u8 taskId;
-    taskId = CreateTask(sub_80B6E88, priority);
+    taskId = CreateTask(Task_EscalatorWarpFieldEffect, priority);
     gTasks[taskId].data[1] = 0;
-    if (a0 == 0x6a)
+    if (metatileBehavior == MB_UP_ESCALATOR)
     {
         gTasks[taskId].data[1] = 1;
     }
 }
 
-static void sub_80B6E88(u8 taskId)
+static void Task_EscalatorWarpFieldEffect(u8 taskId)
 {
     struct Task *task;
     task = &gTasks[taskId];
-    while (gUnknown_0855C3E4[task->data[0]](task));
+    while (sEscalatorWarpFieldEffectFuncs[task->data[0]](task));
 }
 
-static bool8 sub_80B6EC0(struct Task *task)
+static bool8 EscalatorWarpEffect_1(struct Task *task)
 {
-    FreezeEventObjects();
+    FreezeObjectEvents();
     CameraObjectReset2();
     sub_80E1558(task->data[1]);
     task->data[0]++;
     return FALSE;
 }
 
-static bool8 sub_80B6EE0(struct Task *task)
+static bool8 EscalatorWarpEffect_2(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
+        ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
         task->data[0]++;
         task->data[2] = 0;
         task->data[3] = 0;
@@ -1618,7 +1543,7 @@ static bool8 sub_80B6EE0(struct Task *task)
     return FALSE;
 }
 
-static bool8 sub_80B6F50(struct Task *task)
+static bool8 EscalatorWarpEffect_3(struct Task *task)
 {
     sub_80B6FB8(task);
     if (task->data[2] > 3)
@@ -1629,14 +1554,14 @@ static bool8 sub_80B6F50(struct Task *task)
     return FALSE;
 }
 
-static bool8 sub_80B6F74(struct Task *task)
+static bool8 EscalatorWarpEffect_4(struct Task *task)
 {
     sub_80B6FB8(task);
     sub_80B7060();
     return FALSE;
 }
 
-static bool8 sub_80B6F84(struct Task *task)
+static bool8 EscalatorWarpEffect_5(struct Task *task)
 {
     sub_80B7004(task);
     if (task->data[2] > 3)
@@ -1647,7 +1572,7 @@ static bool8 sub_80B6F84(struct Task *task)
     return FALSE;
 }
 
-static bool8 sub_80B6FA8(struct Task *task)
+static bool8 EscalatorWarpEffect_6(struct Task *task)
 {
     sub_80B7004(task);
     sub_80B7060();
@@ -1683,7 +1608,7 @@ static void sub_80B7004(struct Task *task)
 static void sub_80B7050(void)
 {
     TryFadeOutOldMapMusic();
-    WarpFadeScreen();
+    WarpFadeOutScreen();
 }
 
 static void sub_80B7060(void)
@@ -1694,14 +1619,14 @@ static void sub_80B7060(void)
         WarpIntoMap();
         gFieldCallback = sub_80B70B4;
         SetMainCallback2(CB2_LoadMap);
-        DestroyTask(FindTaskIdByFunc(sub_80B6E88));
+        DestroyTask(FindTaskIdByFunc(Task_EscalatorWarpFieldEffect));
     }
 }
 
 static void sub_80B70B4(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_maplights();
+    WarpFadeInScreen();
     ScriptContext2_Enable();
     CreateTask(sub_80B70DC, 0);
     gFieldCallback = NULL;
@@ -1716,13 +1641,13 @@ static void sub_80B70DC(u8 taskId)
 
 static bool8 sub_80B7114(struct Task *task)
 {
-    struct EventObject *eventObject;
+    struct ObjectEvent *objectEvent;
     s16 x;
     s16 y;
     u8 behavior;
     CameraObjectReset2();
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(DIR_EAST));
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(DIR_EAST));
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
     task->data[0]++;
@@ -1812,13 +1737,13 @@ static bool8 sub_80B72D0(struct Task *task)
 
 static bool8 sub_80B72F4(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         CameraObjectReset1();
         ScriptContext2_Disable();
-        EventObjectSetHeldMovement(eventObject, GetWalkNormalMovementAction(DIR_EAST));
+        ObjectEventSetHeldMovement(objectEvent, GetWalkNormalMovementAction(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(sub_80B70DC));
     }
     return FALSE;
@@ -1835,10 +1760,10 @@ bool8 FldEff_UseWaterfall(void)
 
 static void sub_80B7384(u8 taskId)
 {
-    while (gUnknown_0855C418[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId]));
+    while (gUnknown_0855C418[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]));
 }
 
-static bool8 sub_80B73D0(struct Task *task, struct EventObject *eventObject)
+static bool8 sub_80B73D0(struct Task *task, struct ObjectEvent *objectEvent)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
@@ -1846,12 +1771,12 @@ static bool8 sub_80B73D0(struct Task *task, struct EventObject *eventObject)
     return FALSE;
 }
 
-static bool8 waterfall_1_do_anim_probably(struct Task *task, struct EventObject *eventObject)
+static bool8 waterfall_1_do_anim_probably(struct Task *task, struct ObjectEvent *objectEvent)
 {
     ScriptContext2_Enable();
-    if (!EventObjectIsMovementOverridden(eventObject))
+    if (!ObjectEventIsMovementOverridden(objectEvent))
     {
-        EventObjectClearHeldMovementIfFinished(eventObject);
+        ObjectEventClearHeldMovementIfFinished(objectEvent);
         gFieldEffectArguments[0] = task->data[1];
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         task->data[0]++;
@@ -1859,7 +1784,7 @@ static bool8 waterfall_1_do_anim_probably(struct Task *task, struct EventObject 
     return FALSE;
 }
 
-static bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct EventObject *eventObject)
+static bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct ObjectEvent *objectEvent)
 {
     if (FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
@@ -1869,20 +1794,20 @@ static bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct Eve
     return TRUE;
 }
 
-static bool8 sub_80B7450(struct Task *task, struct EventObject *eventObject)
+static bool8 sub_80B7450(struct Task *task, struct ObjectEvent *objectEvent)
 {
-    EventObjectSetHeldMovement(eventObject, GetWalkSlowMovementAction(DIR_NORTH));
+    ObjectEventSetHeldMovement(objectEvent, GetWalkSlowMovementAction(DIR_NORTH));
     task->data[0]++;
     return FALSE;
 }
 
-static bool8 sub_80B7478(struct Task *task, struct EventObject *eventObject)
+static bool8 sub_80B7478(struct Task *task, struct ObjectEvent *objectEvent)
 {
-    if (!EventObjectClearHeldMovementIfFinished(eventObject))
+    if (!ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         return FALSE;
     }
-    if (MetatileBehavior_IsWaterfall(eventObject->currentMetatileBehavior))
+    if (MetatileBehavior_IsWaterfall(objectEvent->currentMetatileBehavior))
     {
         task->data[0] = 3;
         return TRUE;
@@ -1931,36 +1856,36 @@ static bool8 dive_3_unknown(struct Task *task)
     PlayerGetDestCoords(&mapPosition.x, &mapPosition.y);
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
-        dive_warp(&mapPosition, gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior);
+        dive_warp(&mapPosition, gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior);
         DestroyTask(FindTaskIdByFunc(Task_Dive));
         FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
     }
     return FALSE;
 }
 
-void sub_80B75D8(u8 priority)
+void StartLavaridgeGymB1FWarp(u8 priority)
 {
-    CreateTask(sub_80B75F0, priority);
+    CreateTask(Task_LavaridgeGymB1FWarp, priority);
 }
 
-static void sub_80B75F0(u8 taskId)
+static void Task_LavaridgeGymB1FWarp(u8 taskId)
 {
-    while (gUnknown_0855C438[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId], &gSprites[gPlayerAvatar.spriteId]));
+    while (sLavaridgeGymB1FWarpEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-static bool8 sub_80B764C(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpEffect_1(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    FreezeEventObjects();
+    FreezeObjectEvents();
     CameraObjectReset2();
     SetCameraPanningCallback(NULL);
     gPlayerAvatar.preventStep = TRUE;
-    eventObject->fixedPriority = 1;
+    objectEvent->fixedPriority = 1;
     task->data[1] = 1;
     task->data[0]++;
     return TRUE;
 }
 
-static bool8 sub_80B7684(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpEffect_2(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     SetCameraPanning(0, task->data[1]);
     task->data[1] = -task->data[1];
@@ -1973,12 +1898,12 @@ static bool8 sub_80B7684(struct Task *task, struct EventObject *eventObject, str
     return FALSE;
 }
 
-static bool8 sub_80B76B8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpEffect_3(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     sprite->pos2.y = 0;
     task->data[3] = 1;
-    gFieldEffectArguments[0] = eventObject->currentCoords.x;
-    gFieldEffectArguments[1] = eventObject->currentCoords.y;
+    gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objectEvent->currentCoords.y;
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_LAVARIDGE_GYM_WARP);
@@ -1987,7 +1912,7 @@ static bool8 sub_80B76B8(struct Task *task, struct EventObject *eventObject, str
     return TRUE;
 }
 
-static bool8 sub_80B7704(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpEffect_4(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     s16 centerToCornerVecY;
     SetCameraPanning(0, task->data[1]);
@@ -2019,9 +1944,9 @@ static bool8 sub_80B7704(struct Task *task, struct EventObject *eventObject, str
     if (task->data[5] == 0 && sprite->pos2.y < -0x10)
     {
         task->data[5]++;
-        eventObject->fixedPriority = 1;
+        objectEvent->fixedPriority = 1;
         sprite->oam.priority = 1;
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     }
     if (task->data[1] == 0 && task->data[4] != 0)
     {
@@ -2030,56 +1955,56 @@ static bool8 sub_80B7704(struct Task *task, struct EventObject *eventObject, str
     return FALSE;
 }
 
-static bool8 sub_80B77F8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpEffect_5(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     TryFadeOutOldMapMusic();
-    WarpFadeScreen();
+    WarpFadeOutScreen();
     task->data[0]++;
     return FALSE;
 }
 
-static bool8 sub_80B7814(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpEffect_6(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
         WarpIntoMap();
-        gFieldCallback = mapldr_080851BC;
+        gFieldCallback = FieldCB_LavaridgeGymB1FWarpExit;
         SetMainCallback2(CB2_LoadMap);
-        DestroyTask(FindTaskIdByFunc(sub_80B75F0));
+        DestroyTask(FindTaskIdByFunc(Task_LavaridgeGymB1FWarp));
     }
     return FALSE;
 }
 
-static void mapldr_080851BC(void)
+static void FieldCB_LavaridgeGymB1FWarpExit(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_maplights();
+    WarpFadeInScreen();
     ScriptContext2_Enable();
     gFieldCallback = NULL;
-    CreateTask(sub_80B7890, 0);
+    CreateTask(Task_LavaridgeGymB1FWarpExit, 0);
 }
 
-static void sub_80B7890(u8 taskId)
+static void Task_LavaridgeGymB1FWarpExit(u8 taskId)
 {
-    while (gUnknown_0855C450[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId], &gSprites[gPlayerAvatar.spriteId]));
+    while (sLavaridgeGymB1FWarpExitEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-static bool8 sub_80B78EC(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpExitEffect_1(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     CameraObjectReset2();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     gPlayerAvatar.preventStep = TRUE;
-    eventObject->invisible = TRUE;
+    objectEvent->invisible = TRUE;
     task->data[0]++;
     return FALSE;
 }
 
-static bool8 sub_80B791C(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpExitEffect_2(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (IsWeatherNotFadingIn())
     {
-        gFieldEffectArguments[0] = eventObject->currentCoords.x;
-        gFieldEffectArguments[1] = eventObject->currentCoords.y;
+        gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+        gFieldEffectArguments[1] = objectEvent->currentCoords.y;
         gFieldEffectArguments[2] = sprite->subpriority - 1;
         gFieldEffectArguments[3] = sprite->oam.priority;
         task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
@@ -2088,32 +2013,33 @@ static bool8 sub_80B791C(struct Task *task, struct EventObject *eventObject, str
     return FALSE;
 }
 
-static bool8 sub_80B7968(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpExitEffect_3(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     sprite = &gSprites[task->data[1]];
     if (sprite->animCmdIndex > 1)
     {
         task->data[0]++;
-        eventObject->invisible = FALSE;
+        objectEvent->invisible = FALSE;
         CameraObjectReset1();
         PlaySE(SE_W091);
-        EventObjectSetHeldMovement(eventObject, GetJumpMovementAction(DIR_EAST));
+        ObjectEventSetHeldMovement(objectEvent, GetJumpMovementAction(DIR_EAST));
     }
     return FALSE;
 }
 
-static bool8 sub_80B79BC(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGymB1FWarpExitEffect_4(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (EventObjectClearHeldMovementIfFinished(eventObject))
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
-        UnfreezeEventObjects();
-        DestroyTask(FindTaskIdByFunc(sub_80B7890));
+        UnfreezeObjectEvents();
+        DestroyTask(FindTaskIdByFunc(Task_LavaridgeGymB1FWarpExit));
     }
     return FALSE;
 }
 
+// For the ash puff effect when warping off the B1F ash tiles
 u8 FldEff_LavaridgeGymWarp(void)
 {
     u8 spriteId;
@@ -2124,7 +2050,7 @@ u8 FldEff_LavaridgeGymWarp(void)
     return spriteId;
 }
 
-void sub_80B7A58(struct Sprite *sprite)
+void SpriteCB_LavaridgeGymWarp(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -2132,34 +2058,34 @@ void sub_80B7A58(struct Sprite *sprite)
     }
 }
 
-void sub_80B7A74(u8 priority)
+void StartLavaridgeGym1FWarp(u8 priority)
 {
-    CreateTask(sub_80B7A8C, priority);
+    CreateTask(Task_LavaridgeGym1FWarp, priority);
 }
 
-static void sub_80B7A8C(u8 taskId)
+static void Task_LavaridgeGym1FWarp(u8 taskId)
 {
-    while(gUnknown_0855C460[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId], &gSprites[gPlayerAvatar.spriteId]));
+    while(sLavaridgeGym1FWarpEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-static bool8 sub_80B7AE8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGym1FWarpEffect_1(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    FreezeEventObjects();
+    FreezeObjectEvents();
     CameraObjectReset2();
     gPlayerAvatar.preventStep = TRUE;
-    eventObject->fixedPriority = 1;
+    objectEvent->fixedPriority = 1;
     task->data[0]++;
     return FALSE;
 }
 
-static bool8 sub_80B7B18(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGym1FWarpEffect_2(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (EventObjectClearHeldMovementIfFinished(eventObject))
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         if (task->data[1] > 3)
         {
-            gFieldEffectArguments[0] = eventObject->currentCoords.x;
-            gFieldEffectArguments[1] = eventObject->currentCoords.y;
+            gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+            gFieldEffectArguments[1] = objectEvent->currentCoords.y;
             gFieldEffectArguments[2] = sprite->subpriority - 1;
             gFieldEffectArguments[3] = sprite->oam.priority;
             task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
@@ -2167,42 +2093,42 @@ static bool8 sub_80B7B18(struct Task *task, struct EventObject *eventObject, str
         } else
         {
             task->data[1]++;
-            EventObjectSetHeldMovement(eventObject, GetWalkInPlaceFastestMovementAction(eventObject->facingDirection));
+            ObjectEventSetHeldMovement(objectEvent, GetWalkInPlaceFastestMovementAction(objectEvent->facingDirection));
             PlaySE(SE_FU_ZUZUZU);
         }
     }
     return FALSE;
 }
 
-static bool8 sub_80B7B94(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGym1FWarpEffect_3(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (gSprites[task->data[1]].animCmdIndex == 2)
     {
-        eventObject->invisible = TRUE;
+        objectEvent->invisible = TRUE;
         task->data[0]++;
     }
     return FALSE;
 }
 
-static bool8 sub_80B7BCC(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGym1FWarpEffect_4(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
         TryFadeOutOldMapMusic();
-        WarpFadeScreen();
+        WarpFadeOutScreen();
         task->data[0]++;
     }
     return FALSE;
 }
 
-static bool8 sub_80B7BF4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
+static bool8 LavaridgeGym1FWarpEffect_5(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
         WarpIntoMap();
-        gFieldCallback = sub_80B6B68;
+        gFieldCallback = FieldCB_FallWarpExit;
         SetMainCallback2(CB2_LoadMap);
-        DestroyTask(FindTaskIdByFunc(sub_80B7A8C));
+        DestroyTask(FindTaskIdByFunc(Task_LavaridgeGym1FWarp));
     }
     return FALSE;
 }
@@ -2217,7 +2143,7 @@ u8 FldEff_PopOutOfAsh(void)
     return spriteId;
 }
 
-void sub_80B7CAC(struct Sprite *sprite)
+void SpriteCB_PopOutOfAsh(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -2228,7 +2154,7 @@ void sub_80B7CAC(struct Sprite *sprite)
 void StartEscapeRopeFieldEffect(void)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     CreateTask(DoEscapeRopeFieldEffect, 0x50);
 }
 
@@ -2246,19 +2172,19 @@ static void EscapeRopeFieldEffect_Step0(struct Task *task)
 
 static void EscapeRopeFieldEffect_Step1(struct Task *task)
 {
-    struct EventObject *eventObject;
+    struct ObjectEvent *objectEvent;
     u8 spinDirections[5] =  {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     if (task->data[14] != 0 && (--task->data[14]) == 0)
     {
         TryFadeOutOldMapMusic();
-        WarpFadeScreen();
+        WarpFadeOutScreen();
     }
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         if (task->data[14] == 0 && !gPaletteFade.active && BGMusicStopped() == TRUE)
         {
-            SetEventObjectDirection(eventObject, task->data[15]);
+            SetObjectEventDirection(objectEvent, task->data[15]);
             SetWarpDestinationToEscapeWarp();
             WarpIntoMap();
             gFieldCallback = mapldr_080859D4;
@@ -2266,7 +2192,7 @@ static void EscapeRopeFieldEffect_Step1(struct Task *task)
             DestroyTask(FindTaskIdByFunc(DoEscapeRopeFieldEffect));
         } else if (task->data[1] == 0 || (--task->data[1]) == 0)
         {
-            EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(spinDirections[eventObject->facingDirection]));
+            ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(spinDirections[objectEvent->facingDirection]));
             if (task->data[2] < 12)
             {
                 task->data[2]++;
@@ -2284,11 +2210,11 @@ void (*const gUnknown_0855C484[])(struct Task *) = {
 static void mapldr_080859D4(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_maplights();
+    WarpFadeInScreen();
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     gFieldCallback = NULL;
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     CreateTask(sub_80B7E94, 0);
 }
 
@@ -2309,29 +2235,29 @@ static void sub_80B7EC4(struct Task *task)
 static void sub_80B7EE8(struct Task *task)
 {
     u8 spinDirections[5] = {1, 3, 4, 2, 1};
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
-        if (EventObjectIsMovementOverridden(eventObject) && !EventObjectClearHeldMovementIfFinished(eventObject))
+        if (ObjectEventIsMovementOverridden(objectEvent) && !ObjectEventClearHeldMovementIfFinished(objectEvent))
         {
             return;
         }
         if (task->data[2] >= 32 && task->data[15] == GetPlayerFacingDirection())
         {
-            eventObject->invisible = FALSE;
+            objectEvent->invisible = FALSE;
             ScriptContext2_Disable();
-            UnfreezeEventObjects();
+            UnfreezeObjectEvents();
             DestroyTask(FindTaskIdByFunc(sub_80B7E94));
             return;
         }
-        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(spinDirections[eventObject->facingDirection]));
+        ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(spinDirections[objectEvent->facingDirection]));
         if (task->data[2] < 32)
         {
             task->data[2]++;
         }
         task->data[1] = task->data[2] >> 2;
     }
-    eventObject->invisible ^= 1;
+    objectEvent->invisible ^= 1;
 }
 
 void CreateTeleportFieldEffectTask(void)
@@ -2354,7 +2280,7 @@ static void ExecuteTeleportFieldEffectTask(u8 taskId)
 static void TeleportFieldEffectTask1(struct Task *task)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     CameraObjectReset2();
     task->data[15] = GetPlayerFacingDirection();
     task->data[0]++;
@@ -2363,14 +2289,14 @@ static void TeleportFieldEffectTask1(struct Task *task)
 static void TeleportFieldEffectTask2(struct Task *task)
 {
     u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
-        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
+        ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
         task->data[1] = 8;
         task->data[2]++;
     }
-    if (task->data[2] > 7 && task->data[15] == eventObject->facingDirection)
+    if (task->data[2] > 7 && task->data[15] == objectEvent->facingDirection)
     {
         task->data[0]++;
         task->data[1] = 4;
@@ -2383,12 +2309,12 @@ static void TeleportFieldEffectTask2(struct Task *task)
 static void TeleportFieldEffectTask3(struct Task *task)
 {
     u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((--task->data[1]) <= 0)
     {
         task->data[1] = 4;
-        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
+        ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
     }
     sprite->pos1.y -= task->data[3];
     task->data[4] += task->data[3];
@@ -2396,15 +2322,15 @@ static void TeleportFieldEffectTask3(struct Task *task)
     {
         task->data[3] <<= 1;
     }
-    if (task->data[4] > 8 && (sprite->oam.priority = 1, sprite->subspriteMode != 0))
+    if (task->data[4] > 8 && (sprite->oam.priority = 1, sprite->subspriteMode != SUBSPRITES_OFF))
     {
-        sprite->subspriteMode = 2;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     }
     if (task->data[4] >= 0xa8)
     {
         task->data[0]++;
         TryFadeOutOldMapMusic();
-        WarpFadeScreen();
+        WarpFadeOutScreen();
     }
 }
 
@@ -2432,11 +2358,11 @@ static void TeleportFieldEffectTask4(struct Task *task)
 static void mapldr_08085D88(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_maplights();
+    WarpFadeInScreen();
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     gFieldCallback = NULL;
-    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     CameraObjectReset2();
     CreateTask(sub_80B8250, 0);
 }
@@ -2461,7 +2387,7 @@ static void sub_80B8280(struct Task *task)
         sprite = &gSprites[gPlayerAvatar.spriteId];
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
         sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
-        gEventObjects[gPlayerAvatar.eventObjectId].invisible = FALSE;
+        gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
         task->data[0]++;
         task->data[1] = 8;
         task->data[2] = 1;
@@ -2474,22 +2400,22 @@ static void sub_80B8280(struct Task *task)
 static void sub_80B830C(struct Task *task)
 {
     u8 spinDirections[5] = {1, 3, 4, 2, 1};
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((sprite->pos2.y += task->data[1]) >= -8)
     {
         if (task->data[13] == 0)
         {
             task->data[13]++;
-            eventObject->triggerGroundEffectsOnMove = 1;
+            objectEvent->triggerGroundEffectsOnMove = 1;
             sprite->subspriteMode = task->data[14];
         }
     } else
     {
         sprite->oam.priority = 1;
-        if (sprite->subspriteMode != 0)
+        if (sprite->subspriteMode != SUBSPRITES_OFF)
         {
-            sprite->subspriteMode = 2;
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
     }
     if (sprite->pos2.y >= -0x30 && task->data[1] > 1 && !(sprite->pos2.y & 1))
@@ -2499,7 +2425,7 @@ static void sub_80B830C(struct Task *task)
     if ((--task->data[2]) == 0)
     {
         task->data[2] = 4;
-        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
+        ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
     }
     if (sprite->pos2.y >= 0)
     {
@@ -2513,16 +2439,16 @@ static void sub_80B830C(struct Task *task)
 static void sub_80B8410(struct Task *task)
 {
     u8 spinDirections[5] = {1, 3, 4, 2, 1};
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if ((--task->data[1]) == 0)
     {
-        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
+        ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
         task->data[1] = 8;
-        if ((++task->data[2]) > 4 && task->data[14] == eventObject->facingDirection)
+        if ((++task->data[2]) > 4 && task->data[14] == objectEvent->facingDirection)
         {
             ScriptContext2_Disable();
             CameraObjectReset1();
-            UnfreezeEventObjects();
+            UnfreezeObjectEvents();
             DestroyTask(FindTaskIdByFunc(sub_80B8250));
         }
     }
@@ -2952,31 +2878,31 @@ static void sub_80B8D84(u8 taskId)
 static void sub_80B8DB4(struct Task *task)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     gPlayerAvatar.preventStep = TRUE;
     SetPlayerAvatarStateMask(8);
     PlayerGetDestCoords(&task->data[1], &task->data[2]);
-    MoveCoords(gEventObjects[gPlayerAvatar.eventObjectId].movementDirection, &task->data[1], &task->data[2]);
+    MoveCoords(gObjectEvents[gPlayerAvatar.objectEventId].movementDirection, &task->data[1], &task->data[2]);
     task->data[0]++;
 }
 
 static void sub_80B8E14(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         sub_808C114();
-        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
 
 static void sub_80B8E60(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectCheckHeldMovementStatus(eventObject))
+    struct ObjectEvent *objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventCheckHeldMovementStatus(objectEvent))
     {
         gFieldEffectArguments[0] = task->data[15] | 0x80000000;
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -2986,32 +2912,32 @@ static void sub_80B8E60(struct Task *task)
 
 static void sub_80B8EA8(struct Task *task)
 {
-    struct EventObject *eventObject;
+    struct ObjectEvent *objectEvent;
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
-        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(3));
-        EventObjectClearHeldMovementIfFinished(eventObject);
-        EventObjectSetHeldMovement(eventObject, GetJumpSpecialMovementAction(eventObject->movementDirection));
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(3));
+        ObjectEventClearHeldMovementIfFinished(objectEvent);
+        ObjectEventSetHeldMovement(objectEvent, GetJumpSpecialMovementAction(objectEvent->movementDirection));
         gFieldEffectArguments[0] = task->data[1];
         gFieldEffectArguments[1] = task->data[2];
-        gFieldEffectArguments[2] = gPlayerAvatar.eventObjectId;
-        eventObject->fieldEffectSpriteId = FieldEffectStart(FLDEFF_SURF_BLOB);
+        gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
+        objectEvent->fieldEffectSpriteId = FieldEffectStart(FLDEFF_SURF_BLOB);
         task->data[0]++;
     }
 }
 
 static void sub_80B8F24(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= 0xdf;
-        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(eventObject->movementDirection));
-        sub_81555AC(eventObject->fieldEffectSpriteId, 1);
-        UnfreezeEventObjects();
+        ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->movementDirection));
+        sub_81555AC(objectEvent->fieldEffectSpriteId, 1);
+        UnfreezeObjectEvents();
         ScriptContext2_Disable();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
         DestroyTask(FindTaskIdByFunc(sub_80B8D84));
@@ -3116,22 +3042,22 @@ static void sub_80B91D4(u8 taskId)
 
 static void sub_80B9204(struct Task *task)
 {
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->data[15] = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
         sub_808C114();
-        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
 
 static void sub_80B925C(struct Task *task)
 {
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->data[0]++;
         gFieldEffectArguments[0] = task->data[1];
@@ -3143,11 +3069,11 @@ static void sub_80B92A0(struct Task *task)
 {
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
-        struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         if (task->data[15] & 0x08)
         {
-            sub_81555AC(eventObject->fieldEffectSpriteId, 2);
-            sub_81555D8(eventObject->fieldEffectSpriteId, 0);
+            sub_81555AC(objectEvent->fieldEffectSpriteId, 2);
+            sub_81555D8(objectEvent->fieldEffectSpriteId, 0);
         }
         task->data[1] = sub_80B94C4();
         task->data[0]++;
@@ -3161,14 +3087,14 @@ static void sub_80B92F8(struct Task *task)
         task->data[0]++;
         task->data[2] = 16;
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
-        EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], MOVEMENT_ACTION_FACE_LEFT);
+        ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_FACE_LEFT);
     }
 }
 
 static void sub_80B933C(struct Task *task)
 {
-    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if ((task->data[2] == 0 || (--task->data[2]) == 0) && EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if ((task->data[2] == 0 || (--task->data[2]) == 0) && ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->data[0]++;
         PlaySE(SE_W019);
@@ -3180,14 +3106,14 @@ static void sub_80B9390(struct Task *task)
 {
     if ((++task->data[2]) >= 8)
     {
-        struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(0x03));
-        StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
-        eventObject->inanimate = 1;
-        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
+        struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(0x03));
+        StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
+        objectEvent->inanimate = 1;
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
         if (task->data[15] & 0x08)
         {
-            DestroySprite(&gSprites[eventObject->fieldEffectSpriteId]);
+            DestroySprite(&gSprites[objectEvent->fieldEffectSpriteId]);
         }
         task->data[0]++;
         task->data[2] = 0;
@@ -3198,11 +3124,11 @@ static void sub_80B9418(struct Task *task)
 {
     if ((++task->data[2]) >= 10)
     {
-        struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        EventObjectClearHeldMovementIfActive(eventObject);
-        eventObject->inanimate = 0;
-        eventObject->hasShadow = 0;
-        sub_80B9560(task->data[1], eventObject->spriteId);
+        struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        ObjectEventClearHeldMovementIfActive(objectEvent);
+        objectEvent->inanimate = 0;
+        objectEvent->hasShadow = 0;
+        sub_80B9560(task->data[1], objectEvent->spriteId);
         CameraObjectReset2();
         task->data[0]++;
     }
@@ -3212,7 +3138,7 @@ static void sub_80B9474(struct Task *task)
 {
     if (sub_80B9508(task->data[1]))
     {
-        WarpFadeScreen();
+        WarpFadeOutScreen();
         task->data[0]++;
     }
 }
@@ -3284,7 +3210,7 @@ static void sub_80B957C(struct Sprite *sprite)
     {
         if (sprite->data[0] == 0)
         {
-            sprite->oam.affineMode = 3;
+            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             sprite->affineAnims = gSpriteAffineAnimTable_0855C548;
             InitSpriteAffineAnim(sprite);
             StartSpriteAffineAnim(sprite, 0);
@@ -3304,9 +3230,9 @@ static void sub_80B957C(struct Sprite *sprite)
         if (sprite->data[1] > 0x81)
         {
             sprite->data[7]++;
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             FreeOamMatrix(sprite->oam.matrixNum);
-            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, 0);
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
         }
     }
 }
@@ -3337,7 +3263,7 @@ void sub_80B96B0(struct Sprite *sprite)
     {
         if (sprite->data[0] == 0)
         {
-            sprite->oam.affineMode = 3;
+            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             sprite->affineAnims = gSpriteAffineAnimTable_0855C548;
             InitSpriteAffineAnim(sprite);
             StartSpriteAffineAnim(sprite, 1);
@@ -3368,7 +3294,7 @@ void sub_80B96B0(struct Sprite *sprite)
         if (sprite->data[3] >= 60)
         {
             sprite->data[7]++;
-            sprite->oam.affineMode = 0;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
             FreeOamMatrix(sprite->oam.matrixNum);
             sprite->invisible = TRUE;
         }
@@ -3404,9 +3330,9 @@ static void sub_80B97D4(u8 taskId)
 
 static void sub_80B9804(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
+    struct ObjectEvent *objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->data[0]++;
         task->data[2] = 17;
@@ -3415,27 +3341,27 @@ static void sub_80B9804(struct Task *task)
         SetPlayerAvatarStateMask(0x01);
         if (task->data[15] & 0x08)
         {
-            sub_81555AC(eventObject->fieldEffectSpriteId, 0);
+            sub_81555AC(objectEvent->fieldEffectSpriteId, 0);
         }
-        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(0x3));
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(0x3));
         CameraObjectReset2();
-        EventObjectTurn(eventObject, DIR_WEST);
-        StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
-        eventObject->invisible = FALSE;
+        ObjectEventTurn(objectEvent, DIR_WEST);
+        StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
+        objectEvent->invisible = FALSE;
         task->data[1] = sub_80B94C4();
         sub_80B9524(task->data[1]);
-        sub_80B9560(task->data[1], eventObject->spriteId);
+        sub_80B9560(task->data[1], objectEvent->spriteId);
     }
 }
 
 static void sub_80B98B8(struct Task *task)
 {
-    struct EventObject *eventObject;
+    struct ObjectEvent *objectEvent;
     struct Sprite *sprite;
     if (task->data[2] == 0 || (--task->data[2]) == 0)
     {
-        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        sprite = &gSprites[eventObject->spriteId];
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        sprite = &gSprites[objectEvent->spriteId];
         sub_80B9560(task->data[1], 0x40);
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
@@ -3478,26 +3404,26 @@ static void sub_80B9924(struct Task *task)
 
 static void sub_80B9978(struct Task *task)
 {
-    struct EventObject *eventObject;
+    struct ObjectEvent *objectEvent;
     struct Sprite *sprite;
     if (sub_80B9508(task->data[1]))
     {
-        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        sprite = &gSprites[eventObject->spriteId];
-        eventObject->inanimate = 0;
-        MoveEventObjectToMapCoords(eventObject, eventObject->currentCoords.x, eventObject->currentCoords.y);
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        sprite = &gSprites[objectEvent->spriteId];
+        objectEvent->inanimate = 0;
+        MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = 1;
         sub_808C114();
-        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
 
 static void sub_80B99F0(struct Task *task)
 {
-    if (EventObjectClearHeldMovementIfFinished(&gEventObjects[gPlayerAvatar.eventObjectId]))
+    if (ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gPlayerAvatar.objectEventId]))
     {
         task->data[0]++;
         sub_80B9794(task->data[1]);
@@ -3517,18 +3443,18 @@ static void sub_80B9A28(struct Task *task)
 static void sub_80B9A60(struct Task *task)
 {
     u8 state;
-    struct EventObject *eventObject;
+    struct ObjectEvent *objectEvent;
     if ((--task->data[1]) == 0)
     {
-        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         state = 0;
         if (task->data[15] & 0x08)
         {
             state = 3;
-            sub_81555AC(eventObject->fieldEffectSpriteId, 1);
+            sub_81555AC(objectEvent->fieldEffectSpriteId, 1);
         }
-        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(state));
-        EventObjectTurn(eventObject, DIR_SOUTH);
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(state));
+        ObjectEventTurn(objectEvent, DIR_SOUTH);
         gPlayerAvatar.flags = task->data[15];
         gPlayerAvatar.preventStep = FALSE;
         FieldEffectActiveListRemove(FLDEFF_FLY_IN);
@@ -3539,11 +3465,11 @@ static void sub_80B9A60(struct Task *task)
 bool8 sub_80B9ADC(void)
 {
     u8 taskId;
-    u8 eventObjectIdBuffer;
-    if (!TryGetEventObjectIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &eventObjectIdBuffer))
+    u8 objectEventIdBuffer;
+    if (!TryGetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &objectEventIdBuffer))
     {
         taskId = CreateTask(sub_80B9BE8, 0x50);
-        gTasks[taskId].data[2] = eventObjectIdBuffer;
+        gTasks[taskId].data[2] = objectEventIdBuffer;
         gTasks[taskId].data[6] = gFieldEffectArguments[0];
         gTasks[taskId].data[7] = gFieldEffectArguments[1];
         gTasks[taskId].data[8] = gFieldEffectArguments[2];
@@ -3622,8 +3548,8 @@ void sub_80B9C54(s16* data, u8 taskId)
 {
     if (++data[3] > 0x78)
     {
-        struct Sprite *sprite = &gSprites[gEventObjects[data[2]].spriteId];
-        gEventObjects[data[2]].invisible = TRUE;
+        struct Sprite *sprite = &gSprites[gObjectEvents[data[2]].spriteId];
+        gObjectEvents[data[2]].invisible = TRUE;
         BlendPalettes(0x0000FFFF, 0x10, RGB_WHITE);
         BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITE);
         sub_80B9D24(sprite);
@@ -3639,7 +3565,7 @@ void sub_80B9CDC(s16* a0, u8 taskId)
     if (!gPaletteFade.active && !FuncIsActiveTask(sub_80B9B3C))
     {
         InstallCameraPanAheadCallback();
-        RemoveEventObjectByLocalIdAndMap(a0[6], a0[7], a0[8]);
+        RemoveObjectEventByLocalIdAndMap(a0[6], a0[7], a0[8]);
         FieldEffectActiveListRemove(0x41);
         DestroyTask(taskId);
     }
@@ -3734,24 +3660,24 @@ static void sub_80B9DB8(struct Sprite* sprite)
 
 bool8 Fldeff_MoveDeoxysRock(struct Sprite* sprite)
 {
-    u8 eventObjectIdBuffer;
-    if (!TryGetEventObjectIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &eventObjectIdBuffer))
+    u8 objectEventIdBuffer;
+    if (!TryGetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &objectEventIdBuffer))
     {
-        struct EventObject *object;
+        struct ObjectEvent *object;
         int xPos, yPos;
         u8 taskId;
-        object = &gEventObjects[eventObjectIdBuffer];
+        object = &gObjectEvents[objectEventIdBuffer];
         xPos = object->currentCoords.x - 7;
         yPos = object->currentCoords.y - 7;
         xPos = (gFieldEffectArguments[3] - xPos) * 16;
         yPos = (gFieldEffectArguments[4] - yPos) * 16;
-        ShiftEventObjectCoords(object, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
+        ShiftObjectEventCoords(object, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
         taskId = CreateTask(Fldeff_MoveDeoxysRock_Step, 0x50);
         gTasks[taskId].data[1] = object->spriteId;
         gTasks[taskId].data[2] = gSprites[object->spriteId].pos1.x + xPos;
         gTasks[taskId].data[3] = gSprites[object->spriteId].pos1.y + yPos;
         gTasks[taskId].data[8] = gFieldEffectArguments[5];
-        gTasks[taskId].data[9] = eventObjectIdBuffer;
+        gTasks[taskId].data[9] = objectEventIdBuffer;
     }
     return FALSE;
 }
@@ -3780,10 +3706,10 @@ static void Fldeff_MoveDeoxysRock_Step(u8 taskId)
             }
             else
             {
-                struct EventObject *object = &gEventObjects[data[9]];
+                struct ObjectEvent *object = &gObjectEvents[data[9]];
                 sprite->pos1.x = data[2];
                 sprite->pos1.y = data[3];
-                ShiftStillEventObjectCoords(object);
+                ShiftStillObjectEventCoords(object);
                 object->triggerGroundEffectsOnStop = TRUE;
                 FieldEffectActiveListRemove(0x42);
                 DestroyTask(taskId);

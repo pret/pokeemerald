@@ -1,48 +1,48 @@
 Route128_MapScripts:: @ 81F6B38
 	map_script MAP_SCRIPT_ON_TRANSITION, Route128_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route128_MapScript2_1F6B4D
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route128_OnFrame
 	.byte 0
 
 Route128_OnTransition: @ 81F6B43
-	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetWeather15
+	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	end
 
-Route128_MapScript2_1F6B4D: @ 81F6B4D
-	map_script_2 VAR_ROUTE128_STATE, 1, Route128_EventScript_1F6B57
+Route128_OnFrame: @ 81F6B4D
+	map_script_2 VAR_ROUTE128_STATE, 1, Route128_EventScript_KyogreAwakenedScene
 	.2byte 0
 
-Route128_EventScript_1F6B57:: @ 81F6B57
+Route128_EventScript_KyogreAwakenedScene:: @ 81F6B57
 	lockall
 	delay 20
-	applymovement 4, Route128_Movement_1F6C89
+	applymovement 4, Route128_Movement_ArchieLookAround
 	waitmovement 0
-	msgbox Route128_Text_1F6DF5, MSGBOX_DEFAULT
+	msgbox Route128_Text_ArchieWhatHappened, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Route128_Movement_1F6C91
+	applymovement 4, Route128_Movement_ArchieBackUp
 	waitmovement 0
-	msgbox Route128_Text_1F6E48, MSGBOX_DEFAULT
+	msgbox Route128_Text_ArchieIOnlyWanted, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, Route128_Movement_1F6CAD
+	applymovement 5, Route128_Movement_MaxieApproachArchie
 	waitmovement 0
-	applymovement 4, Common_Movement_WalkInPlaceUp
+	applymovement 4, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox Route128_Text_1F6E5A, MSGBOX_DEFAULT
+	msgbox Route128_Text_MaxieDoYouUnderstandNow, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, Route128_Movement_1F6CBB
+	applymovement 5, Route128_Movement_MaxieApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox Route128_Text_1F6F1E, MSGBOX_DEFAULT
+	msgbox Route128_Text_MaxieResposibilityFallsToArchieAndMe, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Route128_Movement_1F6C96
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
-	applymovement 5, Route128_Movement_1F6CA8
+	applymovement 4, Route128_Movement_ArchieRunLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement 5, Route128_Movement_MaxieWalkLeft
 	waitmovement 0
-	msgbox Route128_Text_1F704F, MSGBOX_DEFAULT
+	msgbox Route128_Text_MaxieThisDefiesBelief, MSGBOX_DEFAULT
 	closemessage
 	delay 40
-	applymovement 5, Route128_Movement_1F6CB0
-	applymovement 4, Route128_Movement_1F6C9B
+	applymovement 5, Route128_Movement_MaxieExit
+	applymovement 4, Route128_Movement_ArchieExit
 	waitmovement 0
 	removeobject 5
 	removeobject 4
@@ -51,21 +51,21 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	dofieldeffect FLDEFF_NPCFLY_OUT
 	waitfieldeffect FLDEFF_NPCFLY_OUT
 	addobject 3
-	applymovement 3, Route128_Movement_1F6C87
+	applymovement 3, Route128_Movement_StevenApproachPlayer
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	msgbox Route128_Text_1F70C9, MSGBOX_DEFAULT
+	msgbox Route128_Text_StevenWhatIsHappening, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, Route128_Movement_1F6C85
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	applymovement 3, Route128_Movement_StevenWalkUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox Route128_Text_1F70EA, MSGBOX_DEFAULT
-	applymovement 3, Common_Movement_WalkInPlaceDown
+	msgbox Route128_Text_StevenWholeWorldWillDrown, MSGBOX_DEFAULT
+	applymovement 3, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	msgbox Route128_Text_1F721B, MSGBOX_DEFAULT
+	msgbox Route128_Text_StevenImGoingToSootopolis, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, Common_Movement_WalkInPlaceDown
+	applymovement 3, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
@@ -78,11 +78,11 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	releaseall
 	end
 
-Route128_Movement_1F6C76: @ 81F6C76
+Route128_Movement_Unused1: @ 81F6C76
 	walk_fast_left
 	step_end
 
-Route128_Movement_1F6C78: @ 81F6C78
+Route128_Movement_Unused2: @ 81F6C78
 	walk_left
 	walk_left
 	walk_left
@@ -97,15 +97,15 @@ Route128_Movement_1F6C78: @ 81F6C78
 	walk_up
 	step_end
 
-Route128_Movement_1F6C85: @ 81F6C85
+Route128_Movement_StevenWalkUp: @ 81F6C85
 	walk_up
 	step_end
 
-Route128_Movement_1F6C87: @ 81F6C87
+Route128_Movement_StevenApproachPlayer: @ 81F6C87
 	walk_fast_left
 	step_end
 
-Route128_Movement_1F6C89: @ 81F6C89
+Route128_Movement_ArchieLookAround: @ 81F6C89
 	walk_fast_down
 	walk_in_place_fastest_left
 	delay_16
@@ -115,21 +115,21 @@ Route128_Movement_1F6C89: @ 81F6C89
 	walk_in_place_fastest_down
 	step_end
 
-Route128_Movement_1F6C91: @ 81F6C91
+Route128_Movement_ArchieBackUp: @ 81F6C91
 	lock_facing_direction
 	walk_slow_up
 	delay_16
 	unlock_facing_direction
 	step_end
 
-Route128_Movement_1F6C96: @ 81F6C96
+Route128_Movement_ArchieRunLeft: @ 81F6C96
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
 	walk_in_place_fastest_right
 	step_end
 
-Route128_Movement_1F6C9B: @ 81F6C9B
+Route128_Movement_ArchieExit: @ 81F6C9B
 	delay_16
 	delay_16
 	walk_fast_up
@@ -144,19 +144,19 @@ Route128_Movement_1F6C9B: @ 81F6C9B
 	walk_fast_up
 	step_end
 
-Route128_Movement_1F6CA8: @ 81F6CA8
+Route128_Movement_MaxieWalkLeft: @ 81F6CA8
 	walk_left
 	walk_left
 	delay_8
 	delay_4
 	step_end
 
-Route128_Movement_1F6CAD: @ 81F6CAD
+Route128_Movement_MaxieApproachArchie: @ 81F6CAD
 	walk_left
 	walk_in_place_fastest_down
 	step_end
 
-Route128_Movement_1F6CB0: @ 81F6CB0
+Route128_Movement_MaxieExit: @ 81F6CB0
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
@@ -169,90 +169,90 @@ Route128_Movement_1F6CB0: @ 81F6CB0
 	walk_fast_up
 	step_end
 
-Route128_Movement_1F6CBB: @ 81F6CBB
+Route128_Movement_MaxieApproachPlayer: @ 81F6CBB
 	walk_right
 	walk_in_place_fastest_down
 	step_end
 
-Route128_EventScript_1F6CBE:: @ 81F6CBE
-	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_2A287F, Route128_Text_2A28AB, Route128_EventScript_1F6CEA
+Route128_EventScript_Isaiah:: @ 81F6CBE
+	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_IsaiahIntro, Route128_Text_IsaiahDefeat, Route128_EventScript_RegisterIsaiah
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, 1
-	goto_if_eq Route128_EventScript_1F6D09
-	msgbox Route128_Text_2A28D7, MSGBOX_DEFAULT
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route128_EventScript_RematchIsaiah
+	msgbox Route128_Text_IsaiahPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route128_EventScript_1F6CEA:: @ 81F6CEA
-	special sub_80B4808
+Route128_EventScript_RegisterIsaiah:: @ 81F6CEA
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route128_Text_2A2916, MSGBOX_DEFAULT
+	msgbox Route128_Text_IsaiahRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_ISAIAH_1
 	release
 	end
 
-Route128_EventScript_1F6D09:: @ 81F6D09
-	trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_2A2975, Route128_Text_2A29B8
-	msgbox Route128_Text_2A29DC, MSGBOX_AUTOCLOSE
+Route128_EventScript_RematchIsaiah:: @ 81F6D09
+	trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_IsaiahRematchIntro, Route128_Text_IsaiahRematchDefeat
+	msgbox Route128_Text_IsaiahPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route128_EventScript_1F6D20:: @ 81F6D20
-	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_2A2A1F, Route128_Text_2A2A94, Route128_EventScript_1F6D4C
+Route128_EventScript_Katelyn:: @ 81F6D20
+	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, Route128_EventScript_RegisterKatelyn
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, 1
-	goto_if_eq Route128_EventScript_1F6D6B
-	msgbox Route128_Text_2A2AB7, MSGBOX_DEFAULT
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route128_EventScript_RematchKatelyn
+	msgbox Route128_Text_KatelynPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route128_EventScript_1F6D4C:: @ 81F6D4C
-	special sub_80B4808
+Route128_EventScript_RegisterKatelyn:: @ 81F6D4C
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route128_Text_2A2AF9, MSGBOX_DEFAULT
+	msgbox Route128_Text_KatelynRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_KATELYN_1
 	release
 	end
 
-Route128_EventScript_1F6D6B:: @ 81F6D6B
-	trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_2A2B41, Route128_Text_2A2BAB
-	msgbox Route128_Text_2A2BDD, MSGBOX_AUTOCLOSE
+Route128_EventScript_RematchKatelyn:: @ 81F6D6B
+	trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_KatelynRematchIntro, Route128_Text_KatelynRematchDefeat
+	msgbox Route128_Text_KatelynPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route128_EventScript_1F6D82:: @ 81F6D82
-	trainerbattle_single TRAINER_ALEXA, Route128_Text_2A2C1C, Route128_Text_2A2C79
-	msgbox Route128_Text_2A2C95, MSGBOX_AUTOCLOSE
+Route128_EventScript_Alexa:: @ 81F6D82
+	trainerbattle_single TRAINER_ALEXA, Route128_Text_AlexaIntro, Route128_Text_AlexaDefeat
+	msgbox Route128_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route128_EventScript_1F6D99:: @ 81F6D99
-	trainerbattle_single TRAINER_RUBEN, Route128_Text_2A2CD9, Route128_Text_2A2CFE
-	msgbox Route128_Text_2A2D0D, MSGBOX_AUTOCLOSE
+Route128_EventScript_Ruben:: @ 81F6D99
+	trainerbattle_single TRAINER_RUBEN, Route128_Text_RubenIntro, Route128_Text_RubenDefeat
+	msgbox Route128_Text_RubenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route128_EventScript_1F6DB0:: @ 81F6DB0
-	trainerbattle_single TRAINER_WAYNE, Route128_Text_2A2D3D, Route128_Text_2A2DA9
-	msgbox Route128_Text_2A2DBA, MSGBOX_AUTOCLOSE
+Route128_EventScript_Wayne:: @ 81F6DB0
+	trainerbattle_single TRAINER_WAYNE, Route128_Text_WayneIntro, Route128_Text_WayneDefeat
+	msgbox Route128_Text_WaynePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route128_EventScript_1F6DC7:: @ 81F6DC7
-	trainerbattle_single TRAINER_HARRISON, Route128_Text_2A2E0F, Route128_Text_2A2E44
-	msgbox Route128_Text_2A2E6C, MSGBOX_AUTOCLOSE
+Route128_EventScript_Harrison:: @ 81F6DC7
+	trainerbattle_single TRAINER_HARRISON, Route128_Text_HarrisonIntro, Route128_Text_HarrisonDefeat
+	msgbox Route128_Text_HarrisonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route128_EventScript_1F6DDE:: @ 81F6DDE
-	trainerbattle_single TRAINER_CARLEE, Route128_Text_2A2EC8, Route128_Text_2A2EFA
-	msgbox Route128_Text_2A2F2F, MSGBOX_AUTOCLOSE
+Route128_EventScript_Carlee:: @ 81F6DDE
+	trainerbattle_single TRAINER_CARLEE, Route128_Text_CarleeIntro, Route128_Text_CarleeDefeat
+	msgbox Route128_Text_CarleePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route128_Text_1F6DF5: @ 81F6DF5
+Route128_Text_ArchieWhatHappened: @ 81F6DF5
 	.string "ARCHIE: What happened…\n"
 	.string "What is this wretched scene…\p"
 	.string "Did I…make a horrible mistake?$"
 
-Route128_Text_1F6E48: @ 81F6E48
+Route128_Text_ArchieIOnlyWanted: @ 81F6E48
 	.string "I…\n"
 	.string "I only wanted…$"
 
-Route128_Text_1F6E5A: @ 81F6E5A
+Route128_Text_MaxieDoYouUnderstandNow: @ 81F6E5A
 	.string "MAXIE: Do you understand now,\n"
 	.string "ARCHIE?\p"
 	.string "Do you finally see how disastrous\n"
@@ -261,7 +261,7 @@ Route128_Text_1F6E5A: @ 81F6E5A
 	.string "something before the situation goes\l"
 	.string "completely out of control!$"
 
-Route128_Text_1F6F1E: @ 81F6F1E
+Route128_Text_MaxieResposibilityFallsToArchieAndMe: @ 81F6F1E
 	.string "MAXIE: {PLAYER}, don't say anything.\p"
 	.string "I know that I have no right to be\n"
 	.string "critical of ARCHIE…\p"
@@ -273,17 +273,17 @@ Route128_Text_1F6F1E: @ 81F6F1E
 	.string "The responsibility for putting an end\n"
 	.string "to this falls to ARCHIE and me…$"
 
-Route128_Text_1F704F: @ 81F704F
+Route128_Text_MaxieThisDefiesBelief: @ 81F704F
 	.string "MAXIE: This defies belief…\p"
 	.string "Those super-ancient POKéMON…\p"
 	.string "Their power is unbelievable.\n"
 	.string "They've upset the balance of nature…$"
 
-Route128_Text_1F70C9: @ 81F70C9
+Route128_Text_StevenWhatIsHappening: @ 81F70C9
 	.string "STEVEN: {PLAYER}{KUN}!\n"
 	.string "What is happening?$"
 
-Route128_Text_1F70EA: @ 81F70EA
+Route128_Text_StevenWholeWorldWillDrown: @ 81F70EA
 	.string "This is terrible…\p"
 	.string "After the scorching heat wave ended,\n"
 	.string "this deluge began.\p"
@@ -295,7 +295,7 @@ Route128_Text_1F70EA: @ 81F70EA
 	.string "There's no point arguing here…\n"
 	.string "SOOTOPOLIS might provide answers…$"
 
-Route128_Text_1F721B: @ 81F721B
+Route128_Text_StevenImGoingToSootopolis: @ 81F721B
 	.string "{PLAYER}{KUN}…\n"
 	.string "I don't know what you intend to do,\l"
 	.string "but don't do anything reckless.\p"

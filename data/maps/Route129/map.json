@@ -31,7 +31,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 28,
       "y": 16,
       "elevation": 1,
@@ -40,11 +40,11 @@
       "movement_range_y": 4,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route129_EventScript_1F72EC",
+      "script": "Route129_EventScript_Chase",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 10,
       "y": 14,
       "elevation": 1,
@@ -53,11 +53,11 @@
       "movement_range_y": 2,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route129_EventScript_1F7303",
+      "script": "Route129_EventScript_Allison",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 13,
       "y": 22,
       "elevation": 1,
@@ -66,11 +66,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route129_EventScript_1F7331",
+      "script": "Route129_EventScript_Tisha",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 35,
       "y": 9,
       "elevation": 1,
@@ -79,11 +79,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route129_EventScript_1F731A",
+      "script": "Route129_EventScript_Reed",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 13,
       "y": 27,
       "elevation": 1,
@@ -92,7 +92,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route129_EventScript_1F7348",
+      "script": "Route129_EventScript_Clarence",
       "flag": "0"
     }
   ],

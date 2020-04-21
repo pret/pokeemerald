@@ -237,7 +237,7 @@
 #define ANIM_TAG_SPOTLIGHT                  (ANIM_SPRITES_START + 227)
 #define ANIM_TAG_LETTER_Z                   (ANIM_SPRITES_START + 228)
 #define ANIM_TAG_RAPID_SPIN                 (ANIM_SPRITES_START + 229)
-#define ANIM_TAG_TRI_FORCE_TRIANGLE         (ANIM_SPRITES_START + 230)
+#define ANIM_TAG_TRI_ATTACK_TRIANGLE        (ANIM_SPRITES_START + 230)
 #define ANIM_TAG_WISP_ORB                   (ANIM_SPRITES_START + 231)
 #define ANIM_TAG_WISP_FIRE                  (ANIM_SPRITES_START + 232)
 #define ANIM_TAG_GOLD_STARS                 (ANIM_SPRITES_START + 233)
@@ -354,9 +354,9 @@
 #define B_ANIM_POKEBLOCK_THROW          0x4
 #define B_ANIM_ITEM_KNOCKOFF            0x5
 #define B_ANIM_TURN_TRAP                0x6
-#define B_ANIM_ITEM_EFFECT              0x7
+#define B_ANIM_HELD_ITEM_EFFECT         0x7
 #define B_ANIM_SMOKEBALL_ESCAPE         0x8
-#define B_ANIM_HANGED_ON                0x9
+#define B_ANIM_FOCUS_BAND               0x9
 #define B_ANIM_RAIN_CONTINUES           0xA
 #define B_ANIM_SUN_CONTINUES            0xB
 #define B_ANIM_SANDSTORM_CONTINUES      0xC
@@ -392,8 +392,8 @@
 #define B_ANIM_STATUS_NIGHTMARE         0x8
 #define B_ANIM_STATUS_WRAPPED           0x9 // does not actually exist
 
-// Most tasks return a value to gBattleAnimArgs[7].
-#define ARG_RET_ID 0x7
+// Tasks with return values often assign them to gBattleAnimArgs[7].
+#define ARG_RET_ID 7
 
 // Trapping Wrap-like moves end turn animation.
 #define TRAP_ANIM_BIND 0

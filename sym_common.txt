@@ -1,11 +1,40 @@
 	.space 0x8
 	.include "main.o"
-	.include "bg.o"
-	.include "window.o"
-	.include "text.o"
-	.include "sprite.o"
+	@ ../gflib/bg.o
+	.align 2
+gUnneededFireRedVariable:
+    .space 4
+    @ ../gflib/window.o
+    .align 4
+gTransparentTileNumber:
+    .space 1
+    .align 4
+gUnknown_03002F70:
+    .space 16
+    @ ../gflib/text.o
+    .align 4
+gFonts:
+    .space 4
+    .align 2
+gUnknown_03002F84:
+    .space 1
+    .align 4
+gUnknown_03002F90:
+    .space 132
+    .align 2
+gTextFlags:
+    .space 4
+    @ ../gflib/sprite.o
+    .align 2
+gOamMatrixAllocBitmap:
+    .space 4
+    .align 2
+gReservedSpritePaletteCount:
+    .space 1
+    .align 4
 	.include "link.o"
-	.include "link_rfu.o"
+	.include "AgbRfu_LinkManager.o"
+	.include "link_rfu_2.o"
 	.include "rtc.o"
 	.include "battle_main.o"
 	.include "random.o"
@@ -23,7 +52,7 @@
 	.include "contest.o"
 	.include "tv.o"
 	.include "mauville_old_man.o"
-	.include "contest_painting_effects.o"
+	.include "image_processing_effects.o"
 	
 	.space 0x4
 	
@@ -45,29 +74,9 @@
 	
 	.space 0x44
 
-gUnknown_03006370: @ 3006370
-	.space 0x10
-
+	.include "ereader_screen.o"
 	.include "m4a.o"
 	.include "agb_flash.o"
-
-gRfuState: @ 3007868
-	.space 0x8
-
-gUnknown_03007870: @ 3007870
-	.space 0x10
-
-gUnknown_03007880: @ 3007880
-	.space 0x10
-
-gUnknown_03007890: @ 3007890
-	.space 0x4
-
-gUnknown_03007894: @ 3007894
-	.space 0x4
-
-gUnknown_03007898: @ 3007898
-	.space 0x8
-
-gUnknown_030078A0: @ 30078A0
-	.space 0xC
+	.include "librfu_stwi.o"
+	.include "librfu_rfu.o"
+	.include "librfu_sio32id.o"

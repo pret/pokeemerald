@@ -9,16 +9,16 @@ void GenerateBattlePyramidWildMon(void);
 u8 GetPyramidRunMultiplier(void);
 u8 InBattlePyramid(void);
 bool8 InBattlePyramid_(void);
-void sub_81A9E90(void);
+void PausePyramidChallenge(void);
 void SoftResetInBattlePyramid(void);
 void CopyPyramidTrainerSpeechBefore(u16 trainerId);
 void CopyPyramidTrainerWinSpeech(u16 trainerId);
 void CopyPyramidTrainerLoseSpeech(u16 trainerId);
 u8 GetBattlePyramindTrainerEncounterMusicId(u16 trainerId);
 void GenerateBattlePyramidFloorLayout(u16 *mapArg, bool8 setPlayerPosition);
-void LoadBattlePyramidEventObjectTemplates(void);
-void LoadBattlePyramidFloorEventObjectScripts(void);
-u8 GetNumBattlePyramidEventObjects(void);
+void LoadBattlePyramidObjectEventTemplates(void);
+void LoadBattlePyramidFloorObjectEventScripts(void);
+u8 GetNumBattlePyramidObjectEvents(void);
 u16 GetBattlePyramidPickupItemId(void);
 
 #endif // GUARD_BATTLE_PYRAMID_H

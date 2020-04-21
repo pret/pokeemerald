@@ -743,7 +743,7 @@ AI_CheckViability:
 	if_effect EFFECT_MIRROR_COAT, AI_CV_MirrorCoat
 	if_effect EFFECT_SKULL_BASH, AI_CV_ChargeUpMove
 	if_effect EFFECT_SOLARBEAM, AI_CV_ChargeUpMove
-	if_effect EFFECT_SEMI_INVULNERABLE, AI_CV_Fly
+	if_effect EFFECT_SEMI_INVULNERABLE, AI_CV_SemiInvulnerable
 	if_effect EFFECT_SOFTBOILED, AI_CV_Heal
 	if_effect EFFECT_FAKE_OUT, AI_CV_FakeOut
 	if_effect EFFECT_SPIT_UP, AI_CV_SpitUp
@@ -2317,48 +2317,51 @@ AI_CV_ChargeUpMove_ScoreDown2:
 AI_CV_ChargeUpMove_End:
 	end
 
-AI_CV_Fly:
-	if_doesnt_have_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_Fly2
+AI_CV_SemiInvulnerable:
+	if_doesnt_have_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_SemiInvulnerable2
 	score -1
-	goto AI_CV_Fly_End
+	goto AI_CV_SemiInvulnerable_End
 
-AI_CV_Fly2:
-	if_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_Fly6
-	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Fly6
-	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Fly6
+@ BUG: The scripts for checking type-resistance to weather for semi-invulnerable moves are swapped
+@      The result is that the AI is encouraged to stall while taking damage from weather
+@      To fix, swap _CheckSandstormTypes/_CheckIceType in the below script
+AI_CV_SemiInvulnerable2:
+	if_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_SemiInvulnerable_TryEncourage
+	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_SemiInvulnerable_TryEncourage
+	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_SemiInvulnerable_TryEncourage
 	get_weather
-	if_equal AI_WEATHER_HAIL, AI_CV_Fly3
-	if_equal AI_WEATHER_SANDSTORM, AI_CV_Fly4
-	goto AI_CV_Fly5
+	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckSandstormTypes
+	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckIceType
+	goto AI_CV_SemiInvulnerable5
 
-AI_CV_Fly3:
+AI_CV_SemiInvulnerable_CheckSandstormTypes:
 	get_user_type1
-	if_in_bytes AI_CV_Fly_TypesToEncourage, AI_CV_Fly6
+	if_in_bytes AI_CV_SandstormResistantTypes, AI_CV_SemiInvulnerable_TryEncourage
 	get_user_type2
-	if_in_bytes AI_CV_Fly_TypesToEncourage, AI_CV_Fly6
-	goto AI_CV_Fly5
+	if_in_bytes AI_CV_SandstormResistantTypes, AI_CV_SemiInvulnerable_TryEncourage
+	goto AI_CV_SemiInvulnerable5
 
-AI_CV_Fly4:
+AI_CV_SemiInvulnerable_CheckIceType:
 	get_user_type1
-	if_equal TYPE_ICE, AI_CV_Fly6
+	if_equal TYPE_ICE, AI_CV_SemiInvulnerable_TryEncourage
 	get_user_type2
-	if_equal TYPE_ICE, AI_CV_Fly6
+	if_equal TYPE_ICE, AI_CV_SemiInvulnerable_TryEncourage
 
-AI_CV_Fly5:
-	if_target_faster AI_CV_Fly_End
+AI_CV_SemiInvulnerable5:
+	if_target_faster AI_CV_SemiInvulnerable_End
 	get_last_used_bank_move AI_TARGET
 	get_move_effect_from_result
-	if_not_equal EFFECT_LOCK_ON, AI_CV_Fly6
-	goto AI_CV_Fly_End
+	if_not_equal EFFECT_LOCK_ON, AI_CV_SemiInvulnerable_TryEncourage
+	goto AI_CV_SemiInvulnerable_End
 
-AI_CV_Fly6:
-	if_random_less_than 80, AI_CV_Fly_End
+AI_CV_SemiInvulnerable_TryEncourage:
+	if_random_less_than 80, AI_CV_SemiInvulnerable_End
 	score +1
 
-AI_CV_Fly_End:
+AI_CV_SemiInvulnerable_End:
 	end
 
-AI_CV_Fly_TypesToEncourage:
+AI_CV_SandstormResistantTypes:
     .byte TYPE_GROUND
     .byte TYPE_ROCK
     .byte TYPE_STEEL
@@ -2395,10 +2398,10 @@ AI_CV_Hail_ScoreDown1:
 AI_CV_Hail_End:
 	end
 
+@ BUG: Facade score is increased if the target is statused, but should be if the user is. Replace AI_TARGET with AI_USER
 AI_CV_Facade:
 	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
 	score +1
-
 AI_CV_Facade_End:
 	end
 

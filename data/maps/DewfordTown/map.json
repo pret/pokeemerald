@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 7,
       "y": 12,
       "elevation": 3,
@@ -35,11 +35,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_EventScript_1E95B1",
+      "script": "DewfordTown_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 12,
       "y": 9,
       "elevation": 3,
@@ -48,11 +48,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "DewfordTown_EventScript_1E9511",
+      "script": "DewfordTown_EventScript_Briney",
       "flag": "FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 12,
       "y": 14,
       "elevation": 3,
@@ -61,11 +61,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_EventScript_1E95D5",
+      "script": "DewfordTown_EventScript_OldRodFisherman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MR_BRINEYS_BOAT",
+      "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
       "x": 12,
       "y": 8,
       "elevation": 1,
@@ -78,7 +78,7 @@
       "flag": "FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 1,
       "y": 6,
       "elevation": 3,
@@ -87,7 +87,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "DewfordTown_EventScript_1E9922",
+      "script": "DewfordTown_EventScript_TrendyPhraseBoy",
       "flag": "0"
     }
   ],
@@ -136,7 +136,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "DewfordTown_EventScript_1E95BA"
+      "script": "DewfordTown_EventScript_TownSign"
     },
     {
       "type": "sign",
@@ -144,7 +144,7 @@
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "DewfordTown_EventScript_1E95C3"
+      "script": "DewfordTown_EventScript_GymSign"
     },
     {
       "type": "sign",
@@ -168,7 +168,7 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "DewfordTown_EventScript_1E95CC"
+      "script": "DewfordTown_EventScript_HallSign"
     }
   ]
 }

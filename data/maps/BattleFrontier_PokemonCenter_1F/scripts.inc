@@ -1,43 +1,44 @@
 BattleFrontier_PokemonCenter_1F_MapScripts:: @ 82678F9
-	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_PokemonCenter_1F_MapScript1_267904
-	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-BattleFrontier_PokemonCenter_1F_MapScript1_267904: @ 8267904
+BattleFrontier_PokemonCenter_1F_OnTransition: @ 8267904
 	setrespawn HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST
 	end
 
-BattleFrontier_PokemonCenter_1F_EventScript_267908:: @ 8267908
+@ VAR_0x800B is the Nurse's object event id
+BattleFrontier_PokemonCenter_1F_EventScript_Nurse:: @ 8267908
 	setvar VAR_0x800B, 1
-	call BattleFrontier_PokemonCenter_1F_EventScript_27191E
+	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-BattleFrontier_PokemonCenter_1F_EventScript_267916:: @ 8267916
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267944, MSGBOX_NPC
+BattleFrontier_PokemonCenter_1F_EventScript_SchoolKid:: @ 8267916
+	msgbox BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon, MSGBOX_NPC
 	end
 
-BattleFrontier_PokemonCenter_1F_EventScript_26791F:: @ 826791F
-	msgbox BattleFrontier_PokemonCenter_1F_Text_2679EB, MSGBOX_NPC
+BattleFrontier_PokemonCenter_1F_EventScript_Man:: @ 826791F
+	msgbox BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena, MSGBOX_NPC
 	end
 
-BattleFrontier_PokemonCenter_1F_EventScript_267928:: @ 8267928
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267A4B, MSGBOX_NPC
+BattleFrontier_PokemonCenter_1F_EventScript_Picnicker:: @ 8267928
+	msgbox BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge, MSGBOX_NPC
 	end
 
-BattleFrontier_PokemonCenter_1F_EventScript_267931:: @ 8267931
+BattleFrontier_PokemonCenter_1F_EventScript_Skitty:: @ 8267931
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_SKITTY, 0
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267A90, MSGBOX_DEFAULT
+	msgbox BattleFrontier_PokemonCenter_1F_Text_Skitty, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-BattleFrontier_PokemonCenter_1F_Text_267944: @ 8267944
+BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon: @ 8267944
 	.string "There was someone here using a \n"
 	.string "POKéMON I've never seen before.\p"
 	.string "I never learned about it at\n"
@@ -45,15 +46,15 @@ BattleFrontier_PokemonCenter_1F_Text_267944: @ 8267944
 	.string "I wonder where you can catch POKéMON\n"
 	.string "like that.$"
 
-BattleFrontier_PokemonCenter_1F_Text_2679EB: @ 82679EB
+BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena: @ 82679EB
 	.string "Okay! Next stop, the BATTLE ARENA!\n"
 	.string "I'd better get the right POKéMON from\l"
 	.string "the PC Storage System.$"
 
-BattleFrontier_PokemonCenter_1F_Text_267A4B: @ 8267A4B
+BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge: @ 8267A4B
 	.string "Giggle… I'm going to go through every\n"
 	.string "challenge with just this baby!$"
 
-BattleFrontier_PokemonCenter_1F_Text_267A90: @ 8267A90
+BattleFrontier_PokemonCenter_1F_Text_Skitty: @ 8267A90
 	.string "SKITTY: Mya myaaah!$"
 

@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 4,
       "y": 6,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat1_2F_EventScript_21523D",
+      "script": "RustboroCity_Flat1_2F_EventScript_WaldasMom",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 9,
       "y": 5,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SKITTY_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_SKITTY_DOLL",
       "x": 9,
       "y": 4,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat1_2F_EventScript_215246",
+      "script": "RustboroCity_Flat1_2F_EventScript_PokeDoll",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TREECKO_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_TREECKO_DOLL",
       "x": 10,
       "y": 5,
       "elevation": 3,
@@ -63,11 +63,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat1_2F_EventScript_215246",
+      "script": "RustboroCity_Flat1_2F_EventScript_PokeDoll",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TORCHIC_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_TORCHIC_DOLL",
       "x": 10,
       "y": 6,
       "elevation": 3,
@@ -76,11 +76,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat1_2F_EventScript_215246",
+      "script": "RustboroCity_Flat1_2F_EventScript_PokeDoll",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 8,
       "y": 5,
       "elevation": 3,
@@ -89,11 +89,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat1_2F_EventScript_21513A",
+      "script": "RustboroCity_Flat1_2F_EventScript_WaldasDad",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MUDKIP_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_MUDKIP_DOLL",
       "x": 8,
       "y": 6,
       "elevation": 3,
@@ -102,11 +102,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat1_2F_EventScript_215246",
+      "script": "RustboroCity_Flat1_2F_EventScript_PokeDoll",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_PIKACHU_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_PIKACHU_DOLL",
       "x": 9,
       "y": 7,
       "elevation": 3,
@@ -115,7 +115,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_Flat1_2F_EventScript_215246",
+      "script": "RustboroCity_Flat1_2F_EventScript_PokeDoll",
       "flag": "0"
     }
   ],

@@ -15,7 +15,7 @@
   "connections": [],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 31,
       "y": 18,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E5E8D",
+      "script": "SootopolisCity_EventScript_CaveOfOriginExpert",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 47,
       "y": 33,
       "elevation": 0,
@@ -37,11 +37,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E5FE2",
+      "script": "SootopolisCity_EventScript_Woman2",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 9,
       "y": 43,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E5ED8",
+      "script": "SootopolisCity_EventScript_Kiri",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_NINJA_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 51,
       "y": 14,
       "elevation": 3,
@@ -63,11 +63,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E608E",
+      "script": "SootopolisCity_EventScript_NinjaBoy",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 43,
       "y": 26,
       "elevation": 3,
@@ -76,11 +76,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E60E3",
+      "script": "SootopolisCity_EventScript_Boy1",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 26,
       "y": 4,
       "elevation": 3,
@@ -89,11 +89,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6017",
+      "script": "SootopolisCity_EventScript_Man",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_STEVEN",
+      "graphics_id": "OBJ_EVENT_GFX_STEVEN",
       "x": 20,
       "y": 36,
       "elevation": 3,
@@ -102,11 +102,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6166",
+      "script": "SootopolisCity_EventScript_Steven",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 49,
       "y": 34,
       "elevation": 3,
@@ -115,11 +115,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6038",
+      "script": "SootopolisCity_EventScript_Woman1",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GROUDON_3",
+      "graphics_id": "OBJ_EVENT_GFX_GROUDON_3",
       "x": 28,
       "y": 44,
       "elevation": 0,
@@ -132,7 +132,7 @@
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_KYOGRE_3",
+      "graphics_id": "OBJ_EVENT_GFX_KYOGRE_3",
       "x": 34,
       "y": 44,
       "elevation": 1,
@@ -145,7 +145,7 @@
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_RAYQUAZA_2",
+      "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_2",
       "x": 31,
       "y": 41,
       "elevation": 1,
@@ -158,7 +158,7 @@
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 17,
       "y": 44,
       "elevation": 3,
@@ -167,11 +167,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6411",
+      "script": "SootopolisCity_EventScript_Maniac",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 14,
       "y": 42,
       "elevation": 3,
@@ -180,11 +180,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E63DB",
+      "script": "SootopolisCity_EventScript_Girl",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 17,
       "y": 40,
       "elevation": 3,
@@ -193,11 +193,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6393",
+      "script": "SootopolisCity_EventScript_BlackBelt",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_2",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
       "x": 19,
       "y": 37,
       "elevation": 3,
@@ -206,11 +206,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E635D",
+      "script": "SootopolisCity_EventScript_Boy2",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAXIE",
+      "graphics_id": "OBJ_EVENT_GFX_MAXIE",
       "x": 29,
       "y": 33,
       "elevation": 3,
@@ -219,11 +219,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E64F2",
+      "script": "SootopolisCity_EventScript_Maxie",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ARCHIE",
+      "graphics_id": "OBJ_EVENT_GFX_ARCHIE",
       "x": 31,
       "y": 33,
       "elevation": 3,
@@ -232,11 +232,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E651F",
+      "script": "SootopolisCity_EventScript_Archie",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WALLACE",
+      "graphics_id": "OBJ_EVENT_GFX_WALLACE",
       "x": 31,
       "y": 18,
       "elevation": 3,
@@ -245,7 +245,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_EventScript_1E6446",
+      "script": "SootopolisCity_EventScript_Wallace",
       "flag": "FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE"
     }
   ],
@@ -350,7 +350,7 @@
       "y": 34,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_EventScript_1E614B"
+      "script": "SootopolisCity_EventScript_GymSign"
     },
     {
       "type": "sign",
@@ -390,7 +390,7 @@
       "y": 37,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SootopolisCity_EventScript_1E6154"
+      "script": "SootopolisCity_EventScript_CitySign"
     }
   ]
 }

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "pokeblock.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "palette.h"
@@ -85,6 +85,10 @@ struct UsePokeblockStruct
     /*0x7FD0*/ struct UsePokeblockSubStruct info;
 };
 
+#define TAG_TILE_CONDITION_UP_DOWN    0
+#define TAG_PAL_CONDITION_UP_DOWN     0
+#define TAG_PAL_POKEBLOCK_CONDITION   1
+
 extern void sub_81D21DC(u8);
 
 // this file's functions
@@ -130,26 +134,12 @@ static u8 sub_8168048(void);
 void sub_8168180(struct Sprite *sprite);
 void sub_81681B4(struct Sprite *sprite);
 void sub_8168168(struct Sprite *sprite);
+void sub_8168374(struct Sprite *sprite);
 
-extern const struct BgTemplate gUnknown_085DFCCC[4];
-extern const struct WindowTemplate gUnknown_085DFCDC[];
-extern const struct WindowTemplate sUsePokeblockYesNoWinTemplate[];
-extern const u8* sContestStatNames[];
-extern const u32 gUnknown_085DFCB0[];
-extern const u8 gUnknown_085DFCC4[];
-extern const struct SpriteSheet gSpriteSheet_ConditionUpDown;
-extern const struct SpritePalette gSpritePalette_ConditionUpDown;
-extern const struct SpriteTemplate gSpriteTemplate_085DFD5C;
-extern const s16 gUnknown_085DFD28[][2];
-extern const u32 gUnknown_085DFB60[];
-extern const u32 gUnknown_085DFA80[];
-extern const u32 gUnknown_085DFA60[];
-extern const u32 gUnknown_085DFC0C[];
 extern const u16 gUnknown_086231E8[];
 extern const u16 gUnknown_08623208[];
-extern const u8 gUnknown_085DFCC9[];
-extern const struct SpritePalette gUnknown_085DFDB8;
-extern const struct SpriteTemplate gUnknown_085DFDA0;
+extern const struct SpritePalette gSpritePalette_085DFDB8;
+extern const struct SpriteTemplate gSpriteTemplate_085DFDA0;
 
 // ram variables
 EWRAM_DATA struct UsePokeblockSubStruct *gUnknown_0203BC90 = NULL;
@@ -164,6 +154,245 @@ EWRAM_DATA struct UsePokeblockStruct *gUnknown_0203BCAC = NULL;
 
 // const rom data
 // todo: make it static once the file is decompiled
+
+const u32 gUnknown_085DFA60[] = INCBIN_U32("graphics/interface/85DFA60.bin");
+const u32 gUnknown_085DFA80[] = INCBIN_U32("graphics/interface/85DFA80.4bpp");
+const u32 gUnknown_085DFB60[] = INCBIN_U32("graphics/interface/85DFB60.bin");
+const u32 gUnknown_085DFC0C[] = INCBIN_U32("graphics/interface/85DFC0C.bin");
+
+const u32 gUnknown_085DFCB0[] =
+{
+    MON_DATA_COOL,
+    MON_DATA_TOUGH,
+    MON_DATA_SMART,
+    MON_DATA_CUTE,
+    MON_DATA_BEAUTY
+};
+
+const u8 gUnknown_085DFCC4[] =
+{
+    0, // Spicy/Cool
+    4, // Dry/Beauty
+    3, // Sweet/Cute
+    2, // Bitter/Smart
+    1  // Sour/Tough 
+};
+
+static const u8 sNatureTextColors[] =
+{
+    TEXT_COLOR_TRANSPARENT,
+    TEXT_COLOR_BLUE,
+    TEXT_COLOR_WHITE
+};
+
+const struct BgTemplate gUnknown_085DFCCC[4] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 0x1F,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x1E,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 0x1D,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x100
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 0x17,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    }
+};
+
+const struct WindowTemplate gUnknown_085DFCDC[] = 
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 0xD,
+        .tilemapTop = 1,
+        .width = 0xD,
+        .height = 4,
+        .paletteNum = 0xF,
+        .baseBlock = 1
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0xE,
+        .width = 0xB,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x35
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 0x11,
+        .width = 0x1C,
+        .height = 2,
+        .paletteNum = 0xF,
+        .baseBlock = 0x4B
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+const struct WindowTemplate sUsePokeblockYesNoWinTemplate = 
+{
+    .bg = 0,
+    .tilemapLeft = 0x18,
+    .tilemapTop = 0xB,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 0xF,
+    .baseBlock = 0x83
+};
+
+const u8 *const sContestStatNames[] =
+{
+    gText_Coolness,
+    gText_Toughness,
+    gText_Smartness,
+    gText_Cuteness,
+    gText_Beauty3
+};
+
+const struct SpriteSheet gSpriteSheet_ConditionUpDown = 
+{
+    gUsePokeblockUpDown_Gfx, 0x200, TAG_TILE_CONDITION_UP_DOWN
+};
+
+const struct SpritePalette gSpritePalette_ConditionUpDown =
+{
+    gUsePokeblockUpDown_Pal, TAG_PAL_CONDITION_UP_DOWN
+};
+
+const s16 gUnknown_085DFD28[][2] =
+{
+    {0x9C, 0x24},
+    {0x75, 0x3B},
+    {0x75, 0x76},
+    {0xC5, 0x76},
+    {0xC5, 0x3B}
+};
+
+const struct OamData gOamData_085DFD3C = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
+    .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+};
+
+const union AnimCmd gSpriteAnim_085DFD44[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_085DFD4C[] =
+{
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_085DFD54[] =
+{
+    gSpriteAnim_085DFD44,
+    gSpriteAnim_085DFD4C
+};
+
+const struct SpriteTemplate gSpriteTemplate_085DFD5C =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gOamData_085DFD3C,
+    .anims = gSpriteAnimTable_085DFD54,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct OamData gOamData_085DFD74 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+};
+
+const union AnimCmd gSpriteAnim_085DFD7C[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_085DFD84[] =
+{
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_085DFD8C[] =
+{
+    ANIMCMD_FRAME(64, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_085DFD94[] =
+{
+    gSpriteAnim_085DFD7C,
+    gSpriteAnim_085DFD84,
+    gSpriteAnim_085DFD8C
+};
+
+const struct SpriteTemplate gSpriteTemplate_085DFDA0 =
+{
+    .tileTag = 1,
+    .paletteTag = 1,
+    .oam = &gOamData_085DFD74,
+    .anims = gSpriteAnimTable_085DFD94,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8168374,
+};
+
+const struct SpritePalette gSpritePalette_085DFDB8 =
+{
+    gUsePokeblockCondition_Pal, TAG_PAL_POKEBLOCK_CONDITION
+};
 
 // code
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void))
@@ -618,7 +847,7 @@ void sub_8166D44(void)
     AddTextPrinterParameterized(2, 1, gStringVar4, 0, 1, 0, NULL);
     PutWindowTilemap(2);
     CopyWindowToVram(2, 3);
-    CreateYesNoMenu(sUsePokeblockYesNoWinTemplate, 151, 14, 0);
+    CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
 }
 
 s8 sub_8166DE4(void)
@@ -708,62 +937,24 @@ void Pokeblock_MenuWindowTextPrint(const u8 *message)
     AddTextPrinterParameterized(2, 1, gStringVar4, 0, 1, 0, NULL);
 }
 
-// This function is a joke.
-#ifdef NONMATCHING
 void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
 {
-    if (a2 != 0)
+    switch (a2)
     {
+    case 1 ... 32767:
+        a2 = 0;
+        // fallthrough
+    case -32768 ... -1:
+        if (a2)
+            dest[(u16)a2] += 0; // something you can't imagine
         StringCopy(dest, sContestStatNames[statId]);
         StringAppend(dest, gText_WasEnhanced);
-    }
-    else
-    {
+        break;
+    case 0:
         StringCopy(dest, gText_NothingChanged);
+        break;
     }
 }
-#else
-NAKED
-void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
-{
-    asm(".syntax unified\n\
-push {r4,lr}\n\
-    adds r4, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r3, r1, 24\n\
-    lsls r2, 16\n\
-    lsrs r0, r2, 16\n\
-    asrs r2, 16\n\
-    cmp r2, 0\n\
-    beq _08167010\n\
-    cmp r2, 0\n\
-    ble _08166FEC\n\
-    movs r0, 0\n\
-_08166FEC:\n\
-    lsls r0, 16\n\
-    ldr r1, =sContestStatNames\n\
-    lsls r0, r3, 2\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    adds r0, r4, 0\n\
-    bl StringCopy\n\
-    ldr r1, =gText_WasEnhanced\n\
-    adds r0, r4, 0\n\
-    bl StringAppend\n\
-    b _08167018\n\
-    .pool\n\
-_08167010:\n\
-    ldr r1, =gText_NothingChanged\n\
-    adds r0, r4, 0\n\
-    bl StringCopy\n\
-_08167018:\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void Pokeblock_GetMonContestStats(struct Pokemon *mon, u8 *data)
 {
@@ -1073,8 +1264,8 @@ void sub_8167760(void)
     if (spriteId != MAX_SPRITES)
     {
         gUnknown_0203BCAC->field_7B06[i] = spriteId;
-        gSprites[spriteId].oam.shape = 1;
-        gSprites[spriteId].oam.size = 2;
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
     }
     else
     {
@@ -1169,7 +1360,7 @@ void sub_8167BA0(u16 arg0, u8 copyToVramMode)
         nature = GetNature(&gPlayerParty[partyIndex]);
         str = StringCopy(gUnknown_0203BCAC->info.field_7A, gText_NatureSlash);
         str = StringCopy(str, gNatureNamePointers[nature]);
-        AddTextPrinterParameterized3(1, 1, 2, 1, gUnknown_085DFCC9, 0, gUnknown_0203BCAC->info.field_7A);
+        AddTextPrinterParameterized3(1, 1, 2, 1, sNatureTextColors, 0, gUnknown_0203BCAC->info.field_7A);
     }
 
     if (copyToVramMode)
@@ -1373,7 +1564,7 @@ static void sub_8168248(void)
     struct CompressedSpriteSheet spriteSheet;
     struct SpritePalette spritePalette;
 
-    spritePalette = gUnknown_085DFDB8;
+    spritePalette = gSpritePalette_085DFDB8;
     spriteSheet.data = gUsePokeblockCondition_Gfx;
     spriteSheet.size = 0x800;
     spriteSheet.tag = 1;
@@ -1388,7 +1579,7 @@ static void sub_8168294(void)
     int yStart = 17;
     int var = 8;
     struct Sprite **sprites = gUnknown_0203BCAC->field_7B44;
-    const struct SpriteTemplate *template = &gUnknown_085DFDA0;
+    const struct SpriteTemplate *template = &gSpriteTemplate_085DFDA0;
 
     for (i = 0, xDiff = 64, xStart = -96; i < 2; i++)
     {

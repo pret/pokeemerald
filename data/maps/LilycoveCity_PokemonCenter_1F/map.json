@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_NURSE",
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_PokemonCenter_1F_EventScript_21C5E8",
+      "script": "LilycoveCity_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 10,
       "y": 7,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_PokemonCenter_1F_EventScript_21C5F6",
+      "script": "LilycoveCity_PokemonCenter_1F_EventScript_Boy",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 11,
       "y": 8,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_PokemonCenter_1F_EventScript_21C5FF",
+      "script": "LilycoveCity_PokemonCenter_1F_EventScript_Maniac",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 1,
       "y": 3,
       "elevation": 3,
@@ -63,11 +63,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_PokemonCenter_1F_EventScript_2A836B",
+      "script": "LilycoveCity_PokemonCenter_1F_EventScript_LilycoveLady",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_1",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 2,
       "y": 3,
       "elevation": 3,
@@ -76,8 +76,8 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_PokemonCenter_1F_EventScript_2A89C7",
-      "flag": "FLAG_HIDE_LILYCOVE_POKEMON_CENTER_LADY"
+      "script": "LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon",
+      "flag": "FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON"
     }
   ],
   "warp_events": [

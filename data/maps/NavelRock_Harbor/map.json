@@ -3,7 +3,7 @@
   "name": "NavelRock_Harbor",
   "layout": "LAYOUT_ISLAND_HARBOR",
   "music": "MUS_RG_NANASHIMA",
-  "region_map_section": "MAPSEC_NAVEL_ROCK2",
+  "region_map_section": "MAPSEC_NAVEL_ROCK",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 8,
       "y": 5,
       "elevation": 0,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NavelRock_Harbor_EventScript_2690BD",
+      "script": "NavelRock_Harbor_EventScript_Sailor",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SS_TIDAL",
+      "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
       "x": 8,
       "y": 7,
       "elevation": 1,

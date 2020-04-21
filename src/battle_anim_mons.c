@@ -7,7 +7,7 @@
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
@@ -26,15 +26,15 @@
 
 #define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
 
-extern const struct OamData gUnknown_0852497C;
+extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
 static void sub_80A6FB4(struct Sprite *sprite);
 static void sub_80A7144(struct Sprite *sprite);
-static void sub_80A791C(struct Sprite *sprite);
+static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void sub_80A8DFC(struct Sprite *sprite);
 static void sub_80A8E88(struct Sprite *sprite);
 static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId);
-static void AnimTask_BlendMonInAndOutSetup(struct Task *task);
+static void AnimTask_BlendPalInAndOutSetup(struct Task *task);
 static void sub_80A7AFC(u8 taskId);
 static void sub_80A8CAC(u8 taskId);
 static void AnimTask_BlendMonInAndOutStep(u8 taskId);
@@ -92,7 +92,7 @@ static const struct SpriteTemplate sUnknown_08525F90[] =
     {
         .tileTag = 55125,
         .paletteTag = 55125,
-        .oam = &gUnknown_0852497C,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -101,7 +101,7 @@ static const struct SpriteTemplate sUnknown_08525F90[] =
     {
         .tileTag = 55126,
         .paletteTag = 55126,
-        .oam = &gUnknown_0852497C,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -958,7 +958,7 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const void *src)
     CopyBgTilemapBufferToVram(bgId);
 }
 
-void sub_80A6D60(struct BattleAnimBgData *unk, const void *src, u32 arg2)
+void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *unk, const void *src, u32 arg2)
 {
     InitAnimBgTilemapBuffer(unk->bgId, src);
     if (IsContest() == TRUE)
@@ -966,7 +966,7 @@ void sub_80A6D60(struct BattleAnimBgData *unk, const void *src, u32 arg2)
     CopyBgTilemapBufferToVram(unk->bgId);
 }
 
-u8 sub_80A6D94(void)
+u8 GetBattleBgPaletteNum(void)
 {
     if (IsContest())
         return 1;
@@ -988,7 +988,7 @@ void sub_80A6DAC(bool8 arg0)
     }
 }
 
-void sub_80A6DEC(struct Sprite *sprite)
+void TradeMenuBouncePartySprites(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -1253,7 +1253,7 @@ void ResetSpriteRotScale(u8 spriteId)
 {
     SetSpriteRotScale(spriteId, 0x100, 0x100, 0);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    gSprites[spriteId].oam.objMode = 0;
+    gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
     gSprites[spriteId].affineAnimPaused = FALSE;
     CalcCenterToCornerVec(&gSprites[spriteId], gSprites[spriteId].oam.shape, gSprites[spriteId].oam.size, gSprites[spriteId].oam.affineMode);
 }
@@ -1353,7 +1353,7 @@ u32 sub_80A75AC(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner,
         if (!IsContest())
             selectedPalettes = 0xe;
         else
-            selectedPalettes = 1 << sub_80A6D94();
+            selectedPalettes = 1 << GetBattleBgPaletteNum();
     }
     if (attacker)
     {
@@ -1456,7 +1456,7 @@ static u8 GetBattlerAtPosition_(u8 position)
     return GetBattlerAtPosition(position);
 }
 
-void sub_80A77C8(struct Sprite *sprite)
+void AnimSpriteOnMonPos(struct Sprite *sprite)
 {
     bool8 var;
 
@@ -1513,7 +1513,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_80A78AC(struct Sprite *sprite)
+void AnimThrowProjectile(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -1523,16 +1523,16 @@ void sub_80A78AC(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
-    sprite->callback = sub_80A791C;
+    sprite->callback = AnimThrowProjectile_Step;
 }
 
-static void sub_80A791C(struct Sprite *sprite)
+static void AnimThrowProjectile_Step(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
 }
 
-void sub_80A7938(struct Sprite *sprite)
+void AnimTravelDiagonally(struct Sprite *sprite)
 {
     bool8 r4;
     u8 battlerId, coordType;
@@ -1547,7 +1547,7 @@ void sub_80A7938(struct Sprite *sprite)
         r4 = FALSE;
         coordType = BATTLER_COORD_Y;
     }
-    if (!gBattleAnimArgs[5])
+    if (gBattleAnimArgs[5] == ANIM_ATTACKER)
     {
         InitSpritePosToAnimAttacker(sprite, r4);
         battlerId = gBattleAnimAttacker;
@@ -1594,7 +1594,8 @@ void obj_delete_but_dont_free_vram(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_80A7A74(u8 taskId)
+// Only used to fade Moonlight moon sprite in
+void AnimTask_AlphaFadeIn(u8 taskId)
 {
     s16 v1 = 0;
     s16 v2 = 0;
@@ -1663,10 +1664,10 @@ void AnimTask_BlendMonInAndOut(u8 task)
         return;
     }
     gTasks[task].data[0] = (gSprites[spriteId].oam.paletteNum * 0x10) + 0x101;
-    AnimTask_BlendMonInAndOutSetup(&gTasks[task]);
+    AnimTask_BlendPalInAndOutSetup(&gTasks[task]);
 }
 
-static void AnimTask_BlendMonInAndOutSetup(struct Task *task)
+static void AnimTask_BlendPalInAndOutSetup(struct Task *task)
 {
     task->data[1] = gBattleAnimArgs[1];
     task->data[2] = 0;
@@ -1713,7 +1714,8 @@ static void AnimTask_BlendMonInAndOutStep(u8 taskId)
     }
 }
 
-void sub_80A7CB4(u8 task)
+// See AnimTask_BlendMonInAndOut. Same, but ANIM_TAG_* instead of mon
+void AnimTask_BlendPalInAndOutByTag(u8 task)
 {
     u8 palette = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
 
@@ -1723,7 +1725,7 @@ void sub_80A7CB4(u8 task)
         return;
     }
     gTasks[task].data[0] = (palette * 0x10) + 0x101;
-    AnimTask_BlendMonInAndOutSetup(&gTasks[task]);
+    AnimTask_BlendPalInAndOutSetup(&gTasks[task]);
 }
 
 void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union AffineAnimCmd *affineAnimCmds)
@@ -1944,7 +1946,7 @@ void AnimTask_GetFrustrationPowerLevel(u8 taskId)
         powerLevel = 2;
     else
         powerLevel = 3;
-    gBattleAnimArgs[7] = powerLevel;
+    gBattleAnimArgs[ARG_RET_ID] = powerLevel;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -2033,43 +2035,43 @@ u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority
     u16 sheet = LoadSpriteSheet(&sUnknown_08525FC0[a3]);
     u16 palette = AllocSpritePalette(sUnknown_08525F90[a3].paletteTag);
 
-    if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->field_17C == NULL)
-        gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
+    if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->buffer == NULL)
+        gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
     if (!isBackpic)
     {
-        LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
         if (a10 == 1 || sub_80688F8(5, battlerId) == 1 || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
             LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
-                                                gMonSpritesGfxPtr->field_17C,
+                                                gMonSpritesGfxPtr->buffer,
                                                 species,
                                                 personality,
                                                 TRUE);
         else
             LoadSpecialPokePic_2(&gMonFrontPicTable[species],
-                                 gMonSpritesGfxPtr->field_17C,
+                                 gMonSpritesGfxPtr->buffer,
                                  species,
                                  personality,
                                  TRUE);
     }
     else
     {
-        LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
         if (a10 == 1 || sub_80688F8(5, battlerId) == 1 || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
             LoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],
-                                                gMonSpritesGfxPtr->field_17C,
+                                                gMonSpritesGfxPtr->buffer,
                                                 species,
                                                 personality,
                                                 FALSE);
         else
             LoadSpecialPokePic_2(&gMonBackPicTable[species],
-                                 gMonSpritesGfxPtr->field_17C,
+                                 gMonSpritesGfxPtr->buffer,
                                  species,
                                  personality,
                                  FALSE);
     }
 
-    RequestDma3Copy(gMonSpritesGfxPtr->field_17C, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->field_17C);
+    RequestDma3Copy(gMonSpritesGfxPtr->buffer, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);
+    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
 
     if (!isBackpic)
         spriteId = CreateSprite(&sUnknown_08525F90[a3], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
@@ -2267,7 +2269,7 @@ u8 sub_80A89C8(int battlerId, u8 spriteId, int species)
     gSprites[newSpriteId] = gSprites[spriteId];
     gSprites[newSpriteId].usingSheet = TRUE;
     gSprites[newSpriteId].oam.priority = 0;
-    gSprites[newSpriteId].oam.objMode = 2;
+    gSprites[newSpriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
     gSprites[newSpriteId].oam.tileNum = gSprites[spriteId].oam.tileNum;
     gSprites[newSpriteId].callback = SpriteCallbackDummy;
     return newSpriteId;
@@ -2316,7 +2318,8 @@ void sub_80A8AEC(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
-void sub_80A8B64(struct Sprite *sprite)
+// Used by Detect/Disable
+void AnimSpinningSparkle(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -2328,7 +2331,10 @@ void sub_80A8B64(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-void sub_80A8BC4(u8 taskId)
+// Slides attacker to right and back with a cloned trace of the specified color
+// arg0: Trace palette blend color
+// arg1: Trace palette blend coeff
+void AnimTask_AttackerPunchWithTrace(u8 taskId)
 {
     u16 src;
     u16 dest;
@@ -2412,7 +2418,7 @@ static void sub_80A8DFC(struct Sprite *sprite)
     }
 }
 
-void sub_80A8E30(struct Sprite *sprite)
+void AnimWeatherBallUp(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -2436,7 +2442,7 @@ static void sub_80A8E88(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_80A8EE4(struct Sprite *sprite)
+void AnimWeatherBallDown(struct Sprite *sprite)
 {
     int x;
     sprite->data[0] = gBattleAnimArgs[2];

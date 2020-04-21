@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 41,
       "y": 32,
       "elevation": 1,
@@ -35,11 +35,11 @@
       "movement_range_y": 7,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route131_EventScript_1F7429",
+      "script": "Route131_EventScript_Richard",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 18,
       "y": 19,
       "elevation": 1,
@@ -48,11 +48,11 @@
       "movement_range_y": 7,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route131_EventScript_1F7440",
+      "script": "Route131_EventScript_Herman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 10,
       "y": 22,
       "elevation": 1,
@@ -61,11 +61,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route131_EventScript_1F7457",
+      "script": "Route131_EventScript_Susie",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 31,
       "y": 25,
       "elevation": 1,
@@ -74,11 +74,11 @@
       "movement_range_y": 5,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route131_EventScript_1F746E",
+      "script": "Route131_EventScript_Kara",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 9,
       "y": 16,
       "elevation": 1,
@@ -87,11 +87,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route131_EventScript_1F7485",
+      "script": "Route131_EventScript_Reli",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TUBER_M_SWIMMING",
+      "graphics_id": "OBJ_EVENT_GFX_TUBER_M_SWIMMING",
       "x": 8,
       "y": 16,
       "elevation": 1,
@@ -100,11 +100,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route131_EventScript_1F74A0",
+      "script": "Route131_EventScript_Ian",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 52,
       "y": 20,
       "elevation": 1,
@@ -113,11 +113,11 @@
       "movement_range_y": 3,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route131_EventScript_1F74D2",
+      "script": "Route131_EventScript_Kevin",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 52,
       "y": 27,
       "elevation": 1,
@@ -126,7 +126,7 @@
       "movement_range_y": 3,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Route131_EventScript_1F74BB",
+      "script": "Route131_EventScript_Talia",
       "flag": "0"
     }
   ],

@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 4,
       "y": 4,
       "elevation": 0,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge4_EventScript_26358D",
+      "script": "BattleFrontier_Lounge4_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_COOK",
+      "graphics_id": "OBJ_EVENT_GFX_COOK",
       "x": 6,
       "y": 6,
       "elevation": 0,
@@ -37,11 +37,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge4_EventScript_263596",
+      "script": "BattleFrontier_Lounge4_EventScript_Cook",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 0,
       "y": 5,
       "elevation": 0,
@@ -50,7 +50,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_Lounge4_EventScript_26359F",
+      "script": "BattleFrontier_Lounge4_EventScript_Man",
       "flag": "0"
     }
   ],

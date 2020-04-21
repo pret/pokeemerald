@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 13,
       "y": 10,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BC75",
+      "script": "Route110_TrickHousePuzzle2_EventScript_Ted",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 10,
       "y": 17,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BC8C",
+      "script": "Route110_TrickHousePuzzle2_EventScript_Paul",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 11,
       "y": 9,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BCA3",
+      "script": "Route110_TrickHousePuzzle2_EventScript_Georgia",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 8,
       "y": 17,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_WAVE_MAIL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 13,
       "elevation": 3,
@@ -111,7 +111,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BBDD"
+      "script": "Route110_TrickHousePuzzle2_EventScript_Button1"
     },
     {
       "type": "trigger",
@@ -120,7 +120,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BBF0"
+      "script": "Route110_TrickHousePuzzle2_EventScript_Button2"
     },
     {
       "type": "trigger",
@@ -129,7 +129,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_3",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BC03"
+      "script": "Route110_TrickHousePuzzle2_EventScript_Button3"
     },
     {
       "type": "trigger",
@@ -138,7 +138,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_4",
       "var_value": "0",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BC16"
+      "script": "Route110_TrickHousePuzzle2_EventScript_Button4"
     }
   ],
   "bg_events": [
@@ -148,7 +148,7 @@
       "y": 14,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route110_TrickHousePuzzle2_EventScript_26BBC0"
+      "script": "Route110_TrickHousePuzzle2_EventScript_Scroll"
     }
   ]
 }

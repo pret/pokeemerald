@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bg.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -18,6 +18,7 @@
 #include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/metatile_labels.h"
 
 struct MirageTowerPulseBlend {
     u8 taskId;
@@ -109,24 +110,24 @@ const struct SpriteSheet gMirageTowerCeilingCrumbleSpriteSheets[] =
 
 static const struct MetatileCoords sInvisibleMirageTowerMetatiles[] =
 {
-    {18, 53, 0x251},
-    {19, 53, 0x251},
-    {20, 53, 0x251},
-    {18, 54, 0x251},
-    {19, 54, 0x251},
-    {20, 54, 0x251},
-    {18, 55, 0x251},
-    {19, 55, 0x251},
-    {20, 55, 0x251},
-    {18, 56, 0x251},
-    {19, 56, 0x251},
-    {20, 56, 0x251},
-    {18, 57, 0x259},
-    {19, 57, 0x259},
-    {20, 57, 0x259},
-    {18, 58, 0x121},
-    {19, 58, 0x121},
-    {20, 58, 0x121},
+    {18, 53, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 53, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 53, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 54, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 54, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 54, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 55, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 55, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 55, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 56, METATILE_ID(Mauville, DeepSand_Center)},
+    {19, 56, METATILE_ID(Mauville, DeepSand_Center)},
+    {20, 56, METATILE_ID(Mauville, DeepSand_Center)},
+    {18, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
+    {19, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
+    {20, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
+    {18, 58, METATILE_ID(General, SandPit_Center)},
+    {19, 58, METATILE_ID(General, SandPit_Center)},
+    {20, 58, METATILE_ID(General, SandPit_Center)},
 };
 
 static const union AnimCmd gSpriteAnim_8617DEC[] =
@@ -138,10 +139,10 @@ static const union AnimCmd gSpriteAnim_8617DEC[] =
 static const struct OamData gOamData_8617DF4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
@@ -257,7 +258,7 @@ EWRAM_DATA static struct Struct203CF10 *sUnknown_0203CF10 = NULL;
 EWRAM_DATA static struct BgRegOffsets *sBgShakeOffsets = NULL;
 EWRAM_DATA struct MirageTowerPulseBlend *sMirageTowerPulseBlend = NULL;
 
-IWRAM_DATA static u16 gUnknown_030012A8[8];
+static u16 gUnknown_030012A8[8];
 
 bool8 IsMirageTowerVisible(void)
 {
@@ -317,7 +318,7 @@ void SetMirageTowerVisibility(void)
     u16 rand;
     bool8 visible;
 
-    if (VarGet(VAR_ROUTE_111_STATE))
+    if (VarGet(VAR_MIRAGE_TOWER_STATE))
     {
         FlagClear(FLAG_MIRAGE_TOWER_VISIBLE);
         return;
@@ -345,16 +346,16 @@ void StartPlayerDescendMirageTower(void)
 
 static void PlayerDescendMirageTower(u8 taskId)
 {
-    u8 eventObjectId;
-    struct EventObject *fakePlayerEventObject;
-    struct EventObject *playerEventObject;
+    u8 objectEventId;
+    struct ObjectEvent *fakePlayerObjectEvent;
+    struct ObjectEvent *playerObjectEvent;
 
-    TryGetEventObjectIdByLocalIdAndMap(45, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectId);
-    fakePlayerEventObject = &gEventObjects[eventObjectId];
-    gSprites[fakePlayerEventObject->spriteId].pos2.y += 4;
-    playerEventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if ((gSprites[fakePlayerEventObject->spriteId].pos1.y + gSprites[fakePlayerEventObject->spriteId].pos2.y) >=
-        (gSprites[playerEventObject->spriteId].pos1.y + gSprites[playerEventObject->spriteId].pos2.y))
+    TryGetObjectEventIdByLocalIdAndMap(45, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    fakePlayerObjectEvent = &gObjectEvents[objectEventId];
+    gSprites[fakePlayerObjectEvent->spriteId].pos2.y += 4;
+    playerObjectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if ((gSprites[fakePlayerObjectEvent->spriteId].pos1.y + gSprites[fakePlayerObjectEvent->spriteId].pos2.y) >=
+        (gSprites[playerObjectEvent->spriteId].pos1.y + gSprites[playerObjectEvent->spriteId].pos2.y))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();

@@ -2,7 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "pokemon.h"
 #include "trainer_hill.h"
 #include "party_menu.h"
@@ -92,17 +92,17 @@ void AdjustFriendshipOnBattleFaint(u8 battlerId)
     if (gBattleMons[opposingBattlerId].level > gBattleMons[battlerId].level)
     {
         if (gBattleMons[opposingBattlerId].level - gBattleMons[battlerId].level > 29)
-            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], 8);
+            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], FRIENDSHIP_EVENT_FAINT_LARGE);
         else
-            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], 6);
+            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], FRIENDSHIP_EVENT_FAINT_SMALL);
     }
     else
     {
-        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], 6);
+        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], FRIENDSHIP_EVENT_FAINT_SMALL);
     }
 }
 
-void sub_80571DC(u8 battlerId, u8 arg1)
+void SwitchPartyOrderInGameMulti(u8 battlerId, u8 arg1)
 {
     if (GetBattlerSide(battlerId) != B_SIDE_OPPONENT)
     {
@@ -110,13 +110,13 @@ void sub_80571DC(u8 battlerId, u8 arg1)
 
         // gBattleStruct->field_60[0][i]
 
-        for (i = 0; i < 3; i++)
-            gUnknown_0203CF00[i] = *(0 * 3 + i + (u8*)(gBattleStruct->field_60));
+        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+            gBattlePartyCurrentOrder[i] = *(0 * 3 + i + (u8*)(gBattleStruct->field_60));
 
-        sub_81B8FB0(pokemon_order_func(gBattlerPartyIndexes[battlerId]), pokemon_order_func(arg1));
+        SwitchPartyMonSlots(GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battlerId]), GetPartyIdFromBattlePartyId(arg1));
 
-        for (i = 0; i < 3; i++)
-            *(0 * 3 + i + (u8*)(gBattleStruct->field_60)) = gUnknown_0203CF00[i];
+        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+            *(0 * 3 + i + (u8*)(gBattleStruct->field_60)) = gBattlePartyCurrentOrder[i];
     }
 }
 

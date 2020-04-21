@@ -9,7 +9,7 @@
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
@@ -262,10 +262,10 @@ static bool8 sub_814842C(struct Sprite *sprite);
 static bool8 sub_8148458(struct Sprite *sprite);
 
 // iwram bss vars
-IWRAM_DATA static s16 sUnusedRectangularSpiralVar;
-IWRAM_DATA static u8 sTestingTransitionId;
-IWRAM_DATA static u8 sTestingTransitionState;
-IWRAM_DATA static struct StructRectangularSpiral sRectangularSpiralTransition[4];
+static s16 sUnusedRectangularSpiralVar;
+static u8 sTestingTransitionId;
+static u8 sTestingTransitionState;
+static struct StructRectangularSpiral sRectangularSpiralTransition[4];
 
 // ewram vars
 EWRAM_DATA static struct TransitionData *sTransitionStructPtr = NULL;
@@ -750,7 +750,7 @@ static const struct SpriteTemplate gUnknown_085C8E68 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4105,
-    .oam = &gEventObjectBaseOam_32x32,
+    .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_85C8E3C,
     .images = sSpriteImageTable_85C8E2C,
     .affineAnims = sSpriteAffineAnimTable_85C8E60,
@@ -760,10 +760,10 @@ static const struct SpriteTemplate gUnknown_085C8E68 =
 static const struct OamData gOamData_85C8E80 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -817,7 +817,7 @@ static const struct SpriteTemplate sSpriteTemplate_85C8EBC =
     .callback = sub_8148380
 };
 
-static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_10.gbapal");
+static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/field_effects/palettes/10.gbapal");
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
 {
@@ -1672,7 +1672,7 @@ bool8 FldEff_Pokeball(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&gUnknown_085C8E68, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     gSprites[spriteId].oam.priority = 0;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].data[0] = gFieldEffectArguments[2];
     gSprites[spriteId].data[1] = gFieldEffectArguments[3];
     gSprites[spriteId].data[2] = -1;
@@ -1961,9 +1961,10 @@ static bool8 Phase2_Ripple_Func2(struct Task *task)
 
     for (i = 0; i < 160; i++, r4 += r8)
     {
-        // todo: fix the asm
         s16 var = r4 >> 8;
-        asm("");
+        
+        var++;
+        var--;
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
     }
 
@@ -2393,20 +2394,20 @@ static void Mugshots_CreateOpponentPlayerSprites(struct Task *task)
     opponentSprite->callback = sub_8148380;
     playerSprite->callback = sub_8148380;
 
-    opponentSprite->oam.affineMode = 3;
-    playerSprite->oam.affineMode = 3;
+    opponentSprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+    playerSprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
 
     opponentSprite->oam.matrixNum = AllocOamMatrix();
     playerSprite->oam.matrixNum = AllocOamMatrix();
 
-    opponentSprite->oam.shape = 1;
-    playerSprite->oam.shape = 1;
+    opponentSprite->oam.shape = SPRITE_SHAPE(64x32);
+    playerSprite->oam.shape = SPRITE_SHAPE(64x32);
 
-    opponentSprite->oam.size = 3;
-    playerSprite->oam.size = 3;
+    opponentSprite->oam.size = SPRITE_SIZE(64x32);
+    playerSprite->oam.size = SPRITE_SIZE(64x32);
 
-    CalcCenterToCornerVec(opponentSprite, 1, 3, 3);
-    CalcCenterToCornerVec(playerSprite, 1, 3, 3);
+    CalcCenterToCornerVec(opponentSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
+    CalcCenterToCornerVec(playerSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
 
     SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, sMugshotsOpponentRotationScales[mugshotId][0], sMugshotsOpponentRotationScales[mugshotId][1], 0);
     SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 512, 0);

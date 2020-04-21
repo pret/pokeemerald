@@ -1,68 +1,73 @@
 #include "global.h"
-#include "window.h"
+#include "malloc.h"
+#include "battle.h"
+#include "berry_crush.h"
 #include "bg.h"
-#include "random.h"
-#include "string_util.h"
-#include "task.h"
+#include "cable_club.h"
+#include "data.h"
+#include "decompress.h"
+#include "dodrio_berry_picking.h"
+#include "dynamic_placeholder_text_util.h"
+#include "easy_chat.h"
 #include "event_data.h"
+#include "event_object_lock.h"
+#include "field_control_avatar.h"
+#include "field_player_avatar.h"
+#include "field_screen_effect.h"
+#include "field_weather.h"
+#include "international_string_util.h"
+#include "librfu.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "librfu.h"
-#include "alloc.h"
-#include "menu.h"
 #include "list_menu.h"
+#include "load_save.h"
+#include "menu.h"
 #include "menu_helpers.h"
+#include "mevent.h"
+#include "mystery_gift.h"
+#include "overworld.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "pokemon_jump.h"
+#include "random.h"
+#include "save_location.h"
 #include "script.h"
+#include "script_pokemon_util_80F87D8.h"
 #include "sound.h"
-#include "constants/songs.h"
-#include "constants/game_stat.h"
-#include "constants/maps.h"
-#include "constants/species.h"
-#include "constants/rgb.h"
-#include "constants/battle_frontier.h"
+#include "start_menu.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
 #include "trade.h"
 #include "trainer_card.h"
-#include "overworld.h"
-#include "battle.h"
-#include "load_save.h"
-#include "cable_club.h"
-#include "field_control_avatar.h"
-#include "party_menu.h"
-#include "field_weather.h"
-#include "palette.h"
-#include "decompress.h"
-#include "start_menu.h"
-#include "data.h"
-#include "field_screen_effect.h"
-#include "script_pokemon_util_80F87D8.h"
-#include "international_string_util.h"
-#include "field_player_avatar.h"
-#include "strings.h"
-#include "mevent.h"
-#include "dynamic_placeholder_text_util.h"
 #include "union_room.h"
-#include "easy_chat.h"
-#include "event_obj_lock.h"
 #include "union_room_chat.h"
-#include "berry_crush.h"
-#include "mystery_gift.h"
 #include "union_room_player_avatar.h"
-#include "pokemon_jump.h"
+#include "window.h"
+#include "constants/battle_frontier.h"
+#include "constants/cable_club.h"
+#include "constants/game_stat.h"
+#include "constants/maps.h"
+#include "constants/party_menu.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/union_room.h"
 
-EWRAM_DATA u8 gUnknown_02022C20[12] = {};
+EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
 EWRAM_DATA u8 gUnknown_02022C2C = 0;
 EWRAM_DATA u8 gUnknown_02022C2D = 0;
 EWRAM_DATA union UnkUnion_Main gUnknown_02022C30 = {};
 EWRAM_DATA u32 gFiller_02022C34 = 0;
-EWRAM_DATA struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38 = {};
-EWRAM_DATA u16 gUnknown_02022C3C = 0;
-EWRAM_DATA u8 gUnknown_02022C3E = 0;
-EWRAM_DATA struct TradeUnkStruct gUnknown_02022C40 = {};
+EWRAM_DATA struct GFtgtGnameSub gUnknown_02022C38 = {};
+EWRAM_DATA u16 gUnionRoomOfferedSpecies = 0;
+EWRAM_DATA u8 gUnionRoomRequestedMonType = 0;
+static EWRAM_DATA struct UnionRoomTrade sUnionRoomTrade = {};
 
 // IWRAM vars
-IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
-IWRAM_DATA struct UnkStruct_Group *gUnknown_03000DA4;
-IWRAM_DATA struct UnkStruct_URoom *gUnknown_03000DA8;
+static struct UnkStruct_Leader *gUnknown_03000DA0;
+static struct UnkStruct_Group *gUnknown_03000DA4;
+static struct UnkStruct_URoom *gUnknown_03000DA8;
 
 // this file's functions
 void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5);
@@ -95,18 +100,17 @@ void sub_8013BD8(struct UnkStruct_Group *arg0, s32 id);
 void sub_80173D4(void);
 void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
 bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1);
-u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId);
-void sub_801807C(struct TradeUnkStruct *arg0);
+static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *arg0, u8 multiplayerId);
+static void ResetUnionRoomTrade(struct UnionRoomTrade *arg0);
 void sub_801AC54(void);
-void sub_802493C(u8 monId, MainCallback callback);
 void sub_80149D8(void);
 void MG_DrawTextBorder(u8 windowId);
 s8 mevent_message_print_and_prompt_yes_no(u8 *textState, u8 *arg1, u8 arg2, const u8 *str);
-bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1);
+bool32 sub_8016F1C(struct GFtgtGname *arg0, s16 arg1);
 u8 sub_8016DF0(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 void sub_8019F2C(void);
-bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1);
-void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1);
+static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade);
+static void RegisterTradeMon(u32 monId, struct UnionRoomTrade *arg1);
 void sub_80181CC(void);
 bool32 sub_8017940(void);
 u8 sub_8016B00(void);
@@ -122,7 +126,7 @@ void sub_801818C(bool32 arg0);
 s32 sub_8017178(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate);
 s32 sub_80172A0(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6);
 s32 sub_8017CB0(struct UnkStruct_x20 * arg, s32 arg1);
-bool32 sub_8018024(void);
+bool32 HasAtLeastTwoMonsOfLevel30OrLower(void);
 u32 sub_8017984(s32 arg0);
 void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2);
 void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender);
@@ -140,1071 +144,28 @@ void sub_8013DF4(u8 windowId, s32 itemId, u8 y);
 void sub_8017BE8(u8 windowId, s32 itemId, u8 y);
 void nullsub_14(u8 windowId, s32 itemId, u8 y);
 
-// const rom data
-
-ALIGNED(4) const u8 gText_EmptyString[] = _("");
-ALIGNED(4) const u8 gText_Colon[] = _(":");
-ALIGNED(4) const u8 gText_UnkCtrlCodeF907[] = _("{ID}");
-ALIGNED(4) const u8 gText_PleaseStartOver[] = _("Please start over from the beginning.");
-ALIGNED(4) const u8 gText_WirelessSearchCanceled[] = _("The WIRELESS COMMUNICATION\nSYSTEM search has been canceled.");
-ALIGNED(4) const u8 unref_text_union_room_0[] = _("Awaiting communication\nfrom another player.");
-ALIGNED(4) const u8 gText_AwaitingCommunication[] = _("{STR_VAR_1}! Awaiting\ncommunication from another player.");
-ALIGNED(4) const u8 gText_AwaitingLink[] = _("{STR_VAR_1}! Awaiting link!\nPress START when everyone's ready.");
-ALIGNED(4) const u8 gJPText_SingleBattle[] = _("シングルバトルを かいさいする");
-ALIGNED(4) const u8 gJPText_DoubleBattle[] = _("ダブルバトルを かいさいする");
-ALIGNED(4) const u8 gJPText_MultiBattle[] = _("マルチバトルを かいさいする");
-ALIGNED(4) const u8 gJPText_TradePokemon[] = _("ポケモンこうかんを かいさいする");
-ALIGNED(4) const u8 gJPText_Chat[] = _("チャットを かいさいする");
-ALIGNED(4) const u8 gJPText_DistWonderCard[] = _("ふしぎなカードをくばる");
-ALIGNED(4) const u8 gJPText_DistWonderNews[] = _("ふしぎなニュースをくばる");
-ALIGNED(4) const u8 unref_text_union_room_1[] = _("ふしぎなできごとを かいさいする");
-ALIGNED(4) const u8 gJPText_HoldPokemonJump[] = _("なわとびを かいさいする");
-ALIGNED(4) const u8 gJPText_HoldBerryCrush[] = _("きのみマッシャーを かいさいする");
-ALIGNED(4) const u8 gJPText_HoldBerryPicking[] = _("きのみどりを かいさいする");
-ALIGNED(4) const u8 gJPText_HoldSpinTrade[] = _("ぐるぐるこうかんを かいさいする");
-ALIGNED(4) const u8 gJPText_HoldSpinShop[] = _("ぐるぐるショップを かいさいする");
-
-const u8 *const unref_text_ptrs_union_room_0[] = {
-    gJPText_SingleBattle,
-    gJPText_DoubleBattle,
-    gJPText_MultiBattle,
-    gJPText_TradePokemon,
-    gJPText_Chat,
-    gJPText_DistWonderCard,
-    gJPText_DistWonderNews,
-    gJPText_DistWonderCard,
-    gJPText_HoldPokemonJump,
-    gJPText_HoldBerryCrush,
-    gJPText_HoldBerryPicking,
-    gJPText_HoldBerryPicking,
-    gJPText_HoldSpinTrade,
-    gJPText_HoldSpinShop
-};
-
-const u8 gText_1PlayerNeeded[] = _("1 player\nneeded.");
-const u8 gText_2PlayersNeeded[] = _("2 players\nneeded.");
-const u8 gText_3PlayersNeeded[] = _("3 players\nneeded.");
-const u8 gText_4PlayersNeeded[] = _("4 players\nneeded.");
-const u8 gText_2PlayerMode[] = _("2-PLAYER\nMODE");
-const u8 gText_3PlayerMode[] = _("3-PLAYER\nMODE");
-const u8 gText_4PlayerMode[] = _("4-PLAYER\nMODE");
-const u8 gText_5PlayerMode[] = _("5-PLAYER\nMODE");
-
-const u8 *const gUnknown_082EDB60[][5] = {
-    {
-        gText_1PlayerNeeded,
-        gText_2PlayerMode,
-        NULL,
-        NULL,
-        NULL
-    }, {
-        gText_3PlayersNeeded,
-        gText_2PlayersNeeded,
-        gText_1PlayerNeeded,
-        gText_4PlayerMode,
-        NULL
-    }, {
-        gText_1PlayerNeeded,
-        gText_2PlayerMode,
-        gText_3PlayerMode,
-        gText_4PlayerMode,
-        gText_5PlayerMode
-    }, {
-        gText_2PlayersNeeded,
-        gText_1PlayerNeeded,
-        gText_3PlayerMode,
-        gText_4PlayerMode,
-        gText_5PlayerMode
-    }, {
-        gText_1PlayerNeeded,
-        gText_2PlayerMode,
-        gText_3PlayerMode,
-        gText_4PlayerMode,
-        NULL
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EDBC4[] = _("{B_BUTTON}CANCEL");
-ALIGNED(4) const u8 unref_text_union_room_2[] = _("ため\nさんかしゃ ぼしゅうちゅう です！");
-ALIGNED(4) const u8 gUnknown_082EDBE8[] = _("{STR_VAR_2} contacted you for\n{STR_VAR_1}. Accept?");
-ALIGNED(4) const u8 gUnknown_082EDC0C[] = _("{STR_VAR_2} contacted you.\nWill you share {STR_VAR_1}?");
-ALIGNED(4) const u8 gUnknown_082EDC34[] = _("{STR_VAR_2} contacted you.\nAdd to the members?");
-ALIGNED(4) const u8 gUnknown_082EDC5C[] = _("{STR_VAR_1}!\nAre these members OK?");
-ALIGNED(4) const u8 gUnknown_082EDC78[] = _("Cancel {STR_VAR_1} MODE\nwith these members?");
-ALIGNED(4) const u8 gUnknown_082EDC9C[] = _("An “OK” was sent\nto {STR_VAR_1}.");
-ALIGNED(4) const u8 gUnknown_082EDCB4[] = _("The other TRAINER doesn't appear\nto be available now…\p");
-ALIGNED(4) const u8 gUnknown_082EDCEC[] = _("You can't transmit with a TRAINER\nwho is too far away.\p");
-ALIGNED(4) const u8 gUnknown_082EDD24[] = _("The other TRAINER(S) is/are not\nready yet.\p");
-
-const u8 *const gUnknown_082EDD50[] = {
-    gUnknown_082EDCEC,
-    gUnknown_082EDD24
-};
-
-ALIGNED(4) const u8 gUnknown_082EDD58[] = _("The {STR_VAR_1} MODE with\nthese members will be canceled.{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EDD8C[] = _("There is a member who can no\nlonger remain available.\p");
-
-const u8 *const gUnknown_082EDDC4[] = {
-    gUnknown_082EDCB4,
-    gUnknown_082EDD8C
-};
-
-ALIGNED(4) const u8 gUnknown_082EDDCC[] = _("The other TRAINER appears\nunavailable…\p");
-ALIGNED(4) const u8 gUnknown_082EDDF4[] = _("{STR_VAR_1} sent back an “OK”!");
-ALIGNED(4) const u8 gUnknown_082EDE0C[] = _("{STR_VAR_1} OK'd your registration as\na member.");
-ALIGNED(4) const u8 gUnknown_082EDE34[] = _("{STR_VAR_1} replied, “No…”\p");
-ALIGNED(4) const u8 gUnknown_082EDE48[] = _("{STR_VAR_1}!\nAwaiting other members!");
-ALIGNED(4) const u8 gUnknown_082EDE64[] = _("Quit being a member?");
-ALIGNED(4) const u8 gUnknown_082EDE7C[] = _("You stopped being a member.\p");
-
-const u8 *const gUnknown_082EDE9C[] = {
-    NULL,
-    gUnknown_082EDD8C,
-    gUnknown_082EDDCC,
-    NULL,
-    NULL,
-    NULL,
-    gUnknown_082EDE34,
-    NULL,
-    NULL,
-    gUnknown_082EDE7C
-};
-
-ALIGNED(4) const u8 gUnknown_082EDEC4[] = _("The WIRELESS COMMUNICATION\nSYSTEM link has been established.");
-ALIGNED(4) const u8 gUnknown_082EDF04[] = _("The WIRELESS COMMUNICATION\nSYSTEM link has been dropped…");
-ALIGNED(4) const u8 gUnknown_082EDF40[] = _("The link with your friend has been\ndropped…");
-ALIGNED(4) const u8 gUnknown_082EDF6C[] = _("{STR_VAR_1} replied, “No…”");
-
-const u8 *const gUnknown_082EDF80[] = {
-    NULL,
-    gUnknown_082EDF40,
-    gUnknown_082EDF40,
-    NULL,
-    NULL,
-    NULL,
-    gUnknown_082EDF6C,
-    NULL,
-    NULL,
-    NULL
-};
-
-ALIGNED(4) const u8 gUnknown_082EDFA8[] = _("Do you want the {STR_VAR_2}\nMODE?");
-ALIGNED(4) const u8 gUnknown_082EDFC4[] = _("Do you want the {STR_VAR_2}\nMODE?");
-
-const u8 *const unref_text_ptrs_union_room_1[] = {
-    gUnknown_082EDFA8,
-    gUnknown_082EDFC4
-};
-
-ALIGNED(4) const u8 unref_text_union_room_3[] = _("Communicating…\nPlease wait.");
-ALIGNED(4) const u8 gUnknown_082EE004[] = _("Awaiting {STR_VAR_1}'s response about\nthe trade…");
-ALIGNED(4) const u8 gUnknown_082EE02C[] = _("Communicating{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
-ALIGNED(4) const u8 gUnknown_082EE098[] = _("Communicating with {STR_VAR_1}{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
-ALIGNED(4) const u8 gUnknown_082EE104[] = _("Please wait a while{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
-
-const u8 *const gUnknown_082EE17C[] = {
-    gUnknown_082EE02C,
-    gUnknown_082EE098,
-    gUnknown_082EE104
-};
-
-ALIGNED(4) const u8 gUnknown_082EE188[] = _("Hiya! Is there something that you\nwanted to do?");
-ALIGNED(4) const u8 gUnknown_082EE1B8[] = _("Hello!\nWould you like to do something?");
-ALIGNED(4) const u8 gUnknown_082EE1E0[] = _("{STR_VAR_1}: Hiya, we meet again!\nWhat are you up for this time?");
-ALIGNED(4) const u8 gUnknown_082EE218[] = _("{STR_VAR_1}: Oh! {PLAYER}, hello!\nWould you like to do something?");
-
-const u8 *const gUnknown_082EE24C[][2] = {
-    {
-        gUnknown_082EE188,
-        gUnknown_082EE1B8
-    }, {
-        gUnknown_082EE1E0,
-        gUnknown_082EE218
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EE25C[] = _("Want to do something?");
-ALIGNED(4) const u8 gUnknown_082EE274[] = _("Would you like to do something?");
-ALIGNED(4) const u8 gUnknown_082EE294[] = _("{STR_VAR_1}: What would you like to\ndo now?");
-ALIGNED(4) const u8 unref_text_union_room_4[] = _("{STR_VAR_1}: Want to do anything else?");
-
-const u8 *const unref_text_ptrs_union_room_2[][2] = {
-    {
-        gUnknown_082EE25C,
-        gUnknown_082EE274
-    }, {
-        gUnknown_082EE294,
-        gUnknown_082EE294
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EE2E8[] = _("Somebody has contacted you.{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE308[] = _("{STR_VAR_1} has contacted you.{PAUSE 60}");
-
-const u8 *const gUnknown_082EE324[] = {
-    gUnknown_082EE2E8,
-    gUnknown_082EE308
-};
-
-ALIGNED(4) const u8 gUnknown_082EE32C[] = _("Awaiting a response from\nthe other TRAINER…");
-ALIGNED(4) const u8 gUnknown_082EE358[] = _("Awaiting a response from\n{STR_VAR_1}…");
-
-const u8 *const gUnknown_082EE378[] = {
-    gUnknown_082EE32C,
-    gUnknown_082EE358
-};
-
-ALIGNED(4) const u8 gUnknown_082EE380[] = _("The other TRAINER showed\nyou their TRAINER CARD.\pWould you like to show your\nTRAINER CARD?");
-ALIGNED(4) const u8 gUnknown_082EE3DC[] = _("The other TRAINER challenges you\nto battle.\pWill you accept the battle\nchallenge?");
-ALIGNED(4) const u8 gUnknown_082EE430[] = _("The other TRAINER invites you\nto chat.\pWill you accept the chat\ninvitation?");
-ALIGNED(4) const u8 gUnknown_082EE47C[] = _("There is an offer to trade your\nregistered Lv. {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}\pin exchange for a\nLv. {SPECIAL_F7 0x02} {SPECIAL_F7 0x03}.\pWill you accept this trade\noffer?");
-ALIGNED(4) const u8 gUnknown_082EE4F0[] = _("There is an offer to trade your\nregistered EGG.\lWill you accept this trade offer?");
-ALIGNED(4) const u8 gUnknown_082EE544[] = _("The chat has been dropped.\p");
-ALIGNED(4) const u8 gUnknown_082EE560[] = _("You declined the offer.\p");
-ALIGNED(4) const u8 gUnknown_082EE57C[] = _("You declined the offer.\p");
-ALIGNED(4) const u8 gUnknown_082EE598[] = _("The chat was ended.\p");
-
-const u8 *const unref_text_ptrs_union_room_3[] = {
-    gUnknown_082EE380,
-    gUnknown_082EE3DC,
-    gUnknown_082EE430,
-    gUnknown_082EE47C
-};
-
-ALIGNED(4) const u8 gUnknown_082EE5C0[] = _("Oh, hey! We're in a chat right now.\nWant to join us?");
-ALIGNED(4) const u8 gUnknown_082EE5F8[] = _("{STR_VAR_1}: Hey, {PLAYER}!\nWe're having a chat right now.\lWant to join us?");
-ALIGNED(4) const u8 gUnknown_082EE638[] = _("Oh, hi! We're having a chat now.\nWould you like to join us?");
-ALIGNED(4) const u8 gUnknown_082EE674[] = _("{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe're having a chat now.\lWould you like to join us?");
-
-const u8 *const gUnknown_082EE6B8[][2] = {
-    {
-        gUnknown_082EE5C0,
-        gUnknown_082EE638
-    }, {
-        gUnknown_082EE5F8,
-        gUnknown_082EE674
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EE6C8[] = _("……\nThe TRAINER appears to be busy…\p");
-ALIGNED(4) const u8 gUnknown_082EE6EC[] = _("A battle, huh?\nAll right, just give me some time.");
-ALIGNED(4) const u8 gUnknown_082EE720[] = _("You want to chat, huh?\nSure, just wait a little.");
-ALIGNED(4) const u8 gUnknown_082EE754[] = _("Sure thing! As my “Greetings,”\nhere's my TRAINER CARD.");
-ALIGNED(4) const u8 gUnknown_082EE78C[] = _("A battle? Of course, but I need\ntime to get ready.");
-ALIGNED(4) const u8 gUnknown_082EE7C0[] = _("Did you want to chat?\nOkay, but please wait a moment.");
-ALIGNED(4) const u8 gUnknown_082EE7F8[] = _("As my introduction, I'll show you\nmy TRAINER CARD.");
-
-const u8 *const gUnknown_082EE82C[][4] = {
-    {
-        gUnknown_082EE6EC,
-        gUnknown_082EE720,
-        NULL,
-        gUnknown_082EE754
-    }, {
-        gUnknown_082EE78C,
-        gUnknown_082EE7C0,
-        NULL,
-        gUnknown_082EE7F8
-    }
-};
-
-ALIGNED(4) const u8 unref_text_union_room_5[] = _("You want to chat, huh?\nSure, just wait a little.");
-ALIGNED(4) const u8 gUnknown_082EE880[] = _("Thanks for waiting!\nLet's get our battle started!{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE8B8[] = _("All right!\nLet's chat!{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE8D4[] = _("Sorry I made you wait!\nLet's get started!{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE904[] = _("Sorry I made you wait!\nLet's chat.{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE92C[] = _("The trade will be started.{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE94C[] = _("The battle will be started.{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EE96C[] = _("Entering the chat…{PAUSE 60}");
-
-const u8 *const gUnknown_082EE984[][2][3] = {
-    {
-        {
-            gUnknown_082EE94C,
-            gUnknown_082EE96C,
-            gUnknown_082EE92C
-        }, {
-            gUnknown_082EE94C,
-            gUnknown_082EE96C,
-            gUnknown_082EE92C
-        }
-    }, {
-        {
-            gUnknown_082EE880,
-            gUnknown_082EE8B8,
-            gUnknown_082EE92C
-        }, {
-            gUnknown_082EE8D4,
-            gUnknown_082EE904,
-            gUnknown_082EE92C
-        }
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EE9B4[] = _("Sorry! My POKéMON don't seem to\nbe feeling too well right now.\lLet me battle you another time.\p");
-ALIGNED(4) const u8 gUnknown_082EEA14[] = _("I'm terribly sorry, but my POKéMON\naren't feeling well…\pLet's battle another time.\p");
-
-const u8 *const gUnknown_082EEA68[] = {
-    gUnknown_082EE9B4,
-    gUnknown_082EEA14
-};
-
-ALIGNED(4) const u8 gUnknown_082EEA70[] = _("Huh? My TRAINER CARD…\nWhere'd it go now?\lSorry! I'll show you another time!\p");
-ALIGNED(4) const u8 gUnknown_082EEAC0[] = _("Oh? Now where did I put my\nTRAINER CARD?…\lSorry! I'll show you later!\p");
-
-const u8 *const gUnknown_082EEB08[] = {
-    gUnknown_082EEA70,
-    gUnknown_082EEAC0
-};
-
-ALIGNED(4) const u8 gUnknown_082EEB10[] = _("If you want to do something with\nme, just give me a shout!\p");
-ALIGNED(4) const u8 gUnknown_082EEB4C[] = _("If you want to do something with\nme, don't be shy.\p");
-
-const u8 *const gUnknown_082EEB80[] = {
-    gUnknown_082EEB10,
-    gUnknown_082EEB4C
-};
-
-ALIGNED(4) const u8 gUnknown_082EEB88[] = _("Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p");
-ALIGNED(4) const u8 gUnknown_082EEBD0[] = _("If you want to battle, you need\ntwo POKéMON that are below\lLv. 30.\p");
-ALIGNED(4) const u8 gUnknown_082EEC14[] = _("For a battle, you need two\nPOKéMON that are below Lv. 30.\p");
-ALIGNED(4) const u8 gUnknown_082EEC50[] = _("Oh, all right.\nCome see me anytime, okay?\p");
-ALIGNED(4) const u8 gUnknown_082EEC7C[] = _("Oh…\nPlease come by anytime.\p");
-
-const u8 *const gUnknown_082EEC9C[] = {
-    gUnknown_082EEC50,
-    gUnknown_082EEC7C
-};
-
-ALIGNED(4) const u8 gUnknown_082EECA4[] = _("Oh, sorry!\nI just can't right this instant.\lLet's chat another time.\p");
-ALIGNED(4) const u8 gUnknown_082EECEC[] = _("Oh, I'm sorry.\nI have too much to do right now.\lLet's chat some other time.\p");
-
-const u8 *const gUnknown_082EED3C[] = {
-    gUnknown_082EECA4,
-    gUnknown_082EECEC
-};
-
-ALIGNED(4) const u8 gUnknown_082EED44[] = _("Whoa!\nI can tell you're pretty tough!\p");
-ALIGNED(4) const u8 gUnknown_082EED6C[] = _("You used that move?\nThat's good strategy!\p");
-ALIGNED(4) const u8 gUnknown_082EED98[] = _("Way to go!\nThat was an eye-opener!\p");
-ALIGNED(4) const u8 gUnknown_082EEDBC[] = _("Oh! How could you use that\nPOKéMON in that situation?\p");
-ALIGNED(4) const u8 gUnknown_082EEDF4[] = _("That POKéMON…\nIt's been raised really well!\p");
-ALIGNED(4) const u8 gUnknown_082EEE24[] = _("That's it!\nThis is the right move now!\p");
-ALIGNED(4) const u8 gUnknown_082EEE4C[] = _("That's awesome!\nYou can battle that way?\p");
-ALIGNED(4) const u8 gUnknown_082EEE78[] = _("You have exquisite timing for\nswitching POKéMON!\p");
-
-const u8 *const gUnknown_082EEEAC[][4] = {
-    {
-        gUnknown_082EED44,
-        gUnknown_082EED6C,
-        gUnknown_082EED98,
-        gUnknown_082EEDBC
-    }, {
-        gUnknown_082EEDF4,
-        gUnknown_082EEE24,
-        gUnknown_082EEE4C,
-        gUnknown_082EEE78
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EEECC[] = _("Oh, I see!\nThis is educational!\p");
-ALIGNED(4) const u8 gUnknown_082EEEF0[] = _("Don't say anything funny anymore!\nI'm sore from laughing!\p");
-ALIGNED(4) const u8 gUnknown_082EEF2C[] = _("Oh?\nSomething like that happened.\p");
-ALIGNED(4) const u8 gUnknown_082EEF50[] = _("Hmhm… What?\nSo is this what you're saying?\p");
-ALIGNED(4) const u8 gUnknown_082EEF7C[] = _("Is that right?\nI didn't know that.\p");
-ALIGNED(4) const u8 gUnknown_082EEFA0[] = _("Ahaha!\nWhat is that about?\p");
-ALIGNED(4) const u8 gUnknown_082EEFBC[] = _("Yes, that's exactly it!\nThat's what I meant.\p");
-ALIGNED(4) const u8 gUnknown_082EEFEC[] = _("In other words…\nYes! That's right!\p");
-
-const u8 *const gUnknown_082EF010[][4] = {
-    {
-        gUnknown_082EEECC,
-        gUnknown_082EEEF0,
-        gUnknown_082EEF2C,
-        gUnknown_082EEF50
-    }, {
-        gUnknown_082EEF7C,
-        gUnknown_082EEFA0,
-        gUnknown_082EEFBC,
-        gUnknown_082EEFEC
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EF030[] = _("I'm just showing my TRAINER CARD\nas my way of greeting.\p");
-ALIGNED(4) const u8 gUnknown_082EF06C[] = _("I hope I get to know you better!\p");
-ALIGNED(4) const u8 gUnknown_082EF090[] = _("We're showing each other our\nTRAINER CARDS to get acquainted.\p");
-ALIGNED(4) const u8 gUnknown_082EF0D0[] = _("Glad to meet you.\nPlease don't be a stranger!\p");
-
-const u8 *const gUnknown_082EF100[][2] = {
-    {
-        gUnknown_082EF030,
-        gUnknown_082EF06C
-    }, {
-        gUnknown_082EF090,
-        gUnknown_082EF0D0
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EF110[] = _("Yeahah!\nI really wanted this POKéMON!\p");
-ALIGNED(4) const u8 gUnknown_082EF138[] = _("Finally, a trade got me that\nPOKéMON I'd wanted a long time.\p");
-ALIGNED(4) const u8 gUnknown_082EF178[] = _("I'm trading POKéMON right now.\p");
-ALIGNED(4) const u8 gUnknown_082EF198[] = _("I finally got that POKéMON I\nwanted in a trade!\p");
-
-const u8 *const gUnknown_082EF1CC[][4] = {
-    {
-        gUnknown_082EF110,
-        gUnknown_082EF138,
-        NULL,
-        NULL
-    }, {
-        gUnknown_082EF178,
-        gUnknown_082EF198,
-        NULL,
-        NULL
-    }
-};
-
-ALIGNED(4) const u8 gUnknown_082EF1EC[] = _("{STR_VAR_1} checked the\nTRADING BOARD.\p");
-ALIGNED(4) const u8 gUnknown_082EF20C[] = _("Welcome to the TRADING BOARD.\pYou may register your POKéMON\nand offer it up for a trade.\pWould you like to register one of\nyour POKéMON?");
-ALIGNED(4) const u8 gUnknown_082EF298[] = _("This TRADING BOARD is used for\noffering a POKéMON for a trade.\pAll you need to do is register a\nPOKéMON for a trade.\pAnother TRAINER may offer a party\nPOKéMON in return for the trade.\pWe hope you will register POKéMON\nand trade them with many, many\lother TRAINERS.\pWould you like to register one of\nyour POKéMON?");
-ALIGNED(4) const u8 unref_text_union_room_6[] = _("We have registered your POKéMON for\ntrade on the TRADING BOARD.\pThank you for using this service!\p");
-ALIGNED(4) const u8 unref_text_union_room_7[] = _("Nobody has registered any POKéMON\nfor trade on the TRADING BOARD.\p\n");
-ALIGNED(4) const u8 gUnknown_082EF47C[] = _("Please choose the type of POKéMON\nthat you would like in the trade.\n");
-ALIGNED(4) const u8 gUnknown_082EF4C4[] = _("Which of your party POKéMON will\nyou offer in trade?\p");
-ALIGNED(4) const u8 gUnknown_082EF4FC[] = _("Registration has been canceled.\p");
-ALIGNED(4) const u8 gUnknown_082EF520[] = _("Registration has been completed.\p");
-ALIGNED(4) const u8 gUnknown_082EF544[] = _("The trade has been canceled.\p");
-ALIGNED(4) const u8 gUnknown_082EF564[] = _("Cancel the registration of your\nLv. {STR_VAR_2} {STR_VAR_1}?");
-ALIGNED(4) const u8 gUnknown_082EF590[] = _("Cancel the registration of your\nEGG?");
-ALIGNED(4) const u8 gUnknown_082EF5B8[] = _("The registration has been canceled.\p");
-ALIGNED(4) const u8 unref_text_union_room_8[] = _("TRAINERS wishing to make a trade\nwill be listed.");
-ALIGNED(4) const u8 unref_text_union_room_9[] = _("Please choose the TRAINER with whom\nyou would like to trade POKéMON.");
-ALIGNED(4) const u8 gUnknown_082EF65C[] = _("Would you like to ask {STR_VAR_1} to\nmake a trade?");
-ALIGNED(4) const u8 unref_text_union_room_10[] = _("Awaiting a response from\nthe other TRAINER…");
-ALIGNED(4) const u8 unref_text_union_room_11[] = _("You have not registered a POKéMON\nfor trading.\p");
-ALIGNED(4) const u8 gUnknown_082EF6E4[] = _("You don't have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p");
-ALIGNED(4) const u8 gUnknown_082EF718[] = _("You don't have an EGG that\n{STR_VAR_1} wants.\p");
-ALIGNED(4) const u8 gUnknown_082EF740[] = _("{STR_VAR_1} can't make a trade for\nyour POKéMON right now.\p");
-ALIGNED(4) const u8 gUnknown_082EF774[] = _("You can't make a trade for\n{STR_VAR_1}'s POKéMON right now.\p");
-
-const u8 *const unref_text_ptrs_union_room_4[] = {
-    gUnknown_082EF740,
-    gUnknown_082EF774
-};
-
-ALIGNED(4) const u8 gUnknown_082EF7B0[] = _("Your trade offer was rejected.\p");
-ALIGNED(4) const u8 gUnknown_082EF7D0[] = _("EGG TRADE");
-ALIGNED(4) const u8 gUnknown_082EF7DC[] = _("{DPAD_UPDOWN}CHOOSE  {A_BUTTON}JOIN  {B_BUTTON}CANCEL");
-ALIGNED(4) const u8 gUnknown_082EF7F8[] = _("Please choose a TRAINER.");
-ALIGNED(4) const u8 gUnknown_082EF814[] = _("Please choose a TRAINER for\na SINGLE BATTLE.");
-ALIGNED(4) const u8 gUnknown_082EF844[] = _("Please choose a TRAINER for\na DOUBLE BATTLE.");
-ALIGNED(4) const u8 gUnknown_082EF874[] = _("Please choose the LEADER\nfor a MULTI BATTLE.");
-ALIGNED(4) const u8 gUnknown_082EF8A4[] = _("Please choose the TRAINER to\ntrade with.");
-ALIGNED(4) const u8 gUnknown_082EF8D0[] = _("Please choose the TRAINER who is\nsharing WONDER CARDS.");
-ALIGNED(4) const u8 gUnknown_082EF908[] = _("Please choose the TRAINER who is\nsharing WONDER NEWS.");
-ALIGNED(4) const u8 gUnknown_082EF940[] = _("Jump with mini POKéMON!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EF974[] = _("BERRY CRUSH!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EF99C[] = _("DODRIO BERRY-PICKING!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EF9CC[] = _("BERRY BLENDER!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EF9F8[] = _("RECORD CORNER!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EFA24[] = _("COOLNESS CONTEST!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EFA50[] = _("BEAUTY CONTEST!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EFA7C[] = _("CUTENESS CONTEST!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EFAA8[] = _("SMARTNESS CONTEST!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EFAD8[] = _("TOUGHNESS CONTEST!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EFB08[] = _("BATTLE TOWER LEVEL 50!\nPlease choose the LEADER.");
-ALIGNED(4) const u8 gUnknown_082EFB3C[] = _("BATTLE TOWER OPEN LEVEL!\nPlease choose the LEADER.");
-
-const u8 *const gUnknown_082EFB70[] = {
-    gUnknown_082EF814,
-    gUnknown_082EF844,
-    gUnknown_082EF874,
-    gUnknown_082EF8A4,
-    gUnknown_082EF940,
-    gUnknown_082EF974,
-    gUnknown_082EF99C,
-    gUnknown_082EF8D0,
-    gUnknown_082EF908,
-    NULL,
-    NULL,
-    NULL,
-    gUnknown_082EF9F8,
-    gUnknown_082EF9CC,
-    NULL,
-    gUnknown_082EFA24,
-    gUnknown_082EFA50,
-    gUnknown_082EFA7C,
-    gUnknown_082EFAA8,
-    gUnknown_082EFAD8,
-    gUnknown_082EFB08,
-    gUnknown_082EFB3C
-};
-
-ALIGNED(4) const u8 gUnknown_082EFBC8[] = _("Searching for a WIRELESS\nCOMMUNICATION SYSTEM. Wait...");
-ALIGNED(4) const u8 unref_text_union_room_12[] = _("For a DOUBLE BATTLE, you must have\nat least two POKéMON.\p");
-ALIGNED(4) const u8 gUnknown_082EFC3C[] = _("Awaiting {STR_VAR_1}'s response…");
-ALIGNED(4) const u8 gUnknown_082EFC54[] = _("{STR_VAR_1} has been asked to register\nyou as a member. Please wait.");
-ALIGNED(4) const u8 gUnknown_082EFC90[] = _("Awaiting a response from the\nWIRELESS COMMUNICATION SYSTEM.");
-ALIGNED(4) const u8 unref_text_union_room_13[] = _("Please wait for other TRAINERS to\ngather and get ready.");
-ALIGNED(4) const u8 gUnknown_082EFD04[] = _("No CARDS appear to be shared \nright now.");
-ALIGNED(4) const u8 gUnknown_082EFD30[] = _("No NEWS appears to be shared\nright now.");
-
-const u8 *const gUnknown_082EFD58[] = {
-    gUnknown_082EFD04,
-    gUnknown_082EFD30
-};
-
-ALIGNED(4) const u8 gUnknown_082EFD60[] = _("BATTLE");
-ALIGNED(4) const u8 gUnknown_082EFD68[] = _("CHAT");
-ALIGNED(4) const u8 gUnknown_082EFD70[] = _("GREETINGS");
-ALIGNED(4) const u8 gUnknown_082EFD7C[] = _("EXIT");
-ALIGNED(4) const u8 gUnknown_082EFD84[] = _("EXIT");
-ALIGNED(4) const u8 gUnknown_082EFD8C[] = _("INFO");
-ALIGNED(4) const u8 gUnknown_082EFD94[] = _("NAME{CLEAR_TO 0x3C}WANTED{CLEAR_TO 0x6E}OFFER{CLEAR_TO 0xC6}LV.");
-ALIGNED(4) const u8 gUnknown_082EFDB0[] = _("SINGLE BATTLE");
-ALIGNED(4) const u8 gUnknown_082EFDC0[] = _("DOUBLE BATTLE");
-ALIGNED(4) const u8 gUnknown_082EFDD0[] = _("MULTI BATTLE");
-ALIGNED(4) const u8 gUnknown_082EFDE0[] = _("POKéMON TRADES");
-ALIGNED(4) const u8 gUnknown_082EFDF0[] = _("CHAT");
-ALIGNED(4) const u8 gUnknown_082EFDF8[] = _("CARDS");
-ALIGNED(4) const u8 gUnknown_082EFE00[] = _("WONDER CARDS");
-ALIGNED(4) const u8 gUnknown_082EFE10[] = _("WONDER NEWS");
-ALIGNED(4) const u8 gUnknown_082EFE1C[] = _("POKéMON JUMP");
-ALIGNED(4) const u8 gUnknown_082EFE2C[] = _("BERRY CRUSH");
-ALIGNED(4) const u8 gUnknown_082EFE38[] = _("BERRY-PICKING");
-ALIGNED(4) const u8 gUnknown_082EFE48[] = _("SEARCH");
-ALIGNED(4) const u8 gUnknown_082EFE50[] = _("BERRY BLENDER");
-ALIGNED(4) const u8 gUnknown_082EFE60[] = _("RECORD CORNER");
-ALIGNED(4) const u8 gUnknown_082EFE70[] = _("COOL CONTEST");
-ALIGNED(4) const u8 gUnknown_082EFE80[] = _("BEAUTY CONTEST");
-ALIGNED(4) const u8 gUnknown_082EFE90[] = _("CUTE CONTEST");
-ALIGNED(4) const u8 gUnknown_082EFEA0[] = _("SMART CONTEST");
-ALIGNED(4) const u8 gUnknown_082EFEB0[] = _("TOUGH CONTEST");
-ALIGNED(4) const u8 gUnknown_082EFEC0[] = _("BATTLE TOWER LV. 50");
-ALIGNED(4) const u8 gUnknown_082EFED4[] = _("BATTLE TOWER OPEN LEVEL");
-ALIGNED(4) const u8 gUnknown_082EFEEC[] = _("It's a NORMAL CARD.");
-ALIGNED(4) const u8 gUnknown_082EFF00[] = _("It's a BRONZE CARD!");
-ALIGNED(4) const u8 gUnknown_082EFF14[] = _("It's a COPPER CARD!");
-ALIGNED(4) const u8 gUnknown_082EFF28[] = _("It's a SILVER CARD!");
-ALIGNED(4) const u8 gUnknown_082EFF3C[] = _("It's a GOLD CARD!");
-
-const u8 *const gUnknown_082EFF50[] = {
-    gUnknown_082EFEEC,
-    gUnknown_082EFF00,
-    gUnknown_082EFF14,
-    gUnknown_082EFF28,
-    gUnknown_082EFF3C
-};
-
-ALIGNED(4) const u8 gUnknown_082EFF64[] = _("This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\nTRAINER CARD…\l{SPECIAL_F7 0x02}\pPOKéDEX: {SPECIAL_F7 0x03}\nTIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p");
-ALIGNED(4) const u8 gUnknown_082EFFA4[] = _("BATTLES: WINS: {SPECIAL_F7 0x00}  LOSSES: {SPECIAL_F7 0x02}\nTRADES: {SPECIAL_F7 0x03}\p“{SPECIAL_F7 0x04} {SPECIAL_F7 0x05}\n{SPECIAL_F7 0x06} {SPECIAL_F7 0x07}”\p");
-ALIGNED(4) const u8 gUnknown_082EFFDC[] = _("{SPECIAL_F7 0x01}: Glad to have met you!{PAUSE 60}");
-ALIGNED(4) const u8 gUnknown_082EFFFC[] = _("{SPECIAL_F7 0x01}: Glad to meet you!{PAUSE 60}");
-
-const u8 *const gUnknown_082F0018[] = {
-    gUnknown_082EFFDC,
-    gUnknown_082EFFFC
-};
-
-ALIGNED(4) const u8 gUnknown_082F0020[] = _("Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}");
-
-const u8 *const gUnknown_082F0048[] = {
-    gText_EmptyString,
-    gUnknown_082EFDB0,
-    gUnknown_082EFDC0,
-    gUnknown_082EFDD0,
-    gUnknown_082EFDE0,
-    gUnknown_082EFDF0,
-    gUnknown_082EFE00,
-    gUnknown_082EFE10,
-    gUnknown_082EFDF8,
-    gUnknown_082EFE1C,
-    gUnknown_082EFE2C,
-    gUnknown_082EFE38,
-    gUnknown_082EFE48,
-    gText_EmptyString,
-    gUnknown_082EFED4,
-    gUnknown_082EFE60,
-    gUnknown_082EFE50,
-    gText_EmptyString,
-    gText_EmptyString,
-    gText_EmptyString,
-    gText_EmptyString,
-    gUnknown_082EFE00,
-    gUnknown_082EFE10,
-    gUnknown_082EFE70,
-    gUnknown_082EFE80,
-    gUnknown_082EFE90,
-    gUnknown_082EFEA0,
-    gUnknown_082EFEB0,
-    gUnknown_082EFEC0
-};
-
-const struct WindowTemplate gUnknown_082F00BC = {
-    .bg = 0x00,
-    .tilemapLeft = 0x00,
-    .tilemapTop = 0x00,
-    .width = 0x1E,
-    .height = 0x02,
-    .paletteNum = 0x0F,
-    .baseBlock = 0x0008
-};
-
-const u32 gUnknown_082F00C4[] = {
-    0x0201,
-    0x0202,
-    0x0403,
-    0x0204,
-    0x2509,
-    0x250a,
-    0x350b,
-    0x0000,
-    0x0000,
-    0x0000,
-    0x0000,
-    0x0000,
-    0x240f,
-    0x2410,
-    0x0000,
-    0x2417,
-    0x2418,
-    0x2419,
-    0x241a,
-    0x241b,
-    0x021c,
-    0x020e
-};
-
-const struct WindowTemplate gUnknown_082F011C = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x03,
-    .width = 0x0d,
-    .height = 0x08,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x0044
-};
-
-const struct WindowTemplate gUnknown_082F0124 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x03,
-    .width = 0x0d,
-    .height = 0x0a,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x0044
-};
-
-const struct WindowTemplate gUnknown_082F012C = {
-    .bg = 0x00,
-    .tilemapLeft = 0x10,
-    .tilemapTop = 0x03,
-    .width = 0x07,
-    .height = 0x04,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x00c6
-};
-
-const struct ListMenuItem gUnknown_082F0134[] = {
-    { gText_EmptyString, 0 },
-    { gText_EmptyString, 1 },
-    { gText_EmptyString, 2 },
-    { gText_EmptyString, 3 },
-    { gText_EmptyString, 4 }
-};
-
-const struct ListMenuTemplate gUnknown_082F015C = {
-    .items = gUnknown_082F0134,
-    .moveCursorFunc = NULL,
-    .itemPrintFunc = sub_8013278,
-    .totalItems = 5,
-    .maxShowed = 5,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 0,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
-    .cursorKind = 1
-};
-
-const struct WindowTemplate gUnknown_082F0174 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x03,
-    .width = 0x11,
-    .height = 0x0a,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x0044
-};
-
-const struct WindowTemplate gUnknown_082F017C = {
-    .bg = 0x00,
-    .tilemapLeft = 0x14,
-    .tilemapTop = 0x03,
-    .width = 0x07,
-    .height = 0x04,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x00ee
-};
-
-const struct ListMenuItem gUnknown_082F0184[] = {
-    { gText_EmptyString,  0 },
-    { gText_EmptyString,  1 },
-    { gText_EmptyString,  2 },
-    { gText_EmptyString,  3 },
-    { gText_EmptyString,  4 },
-    { gText_EmptyString,  5 },
-    { gText_EmptyString,  6 },
-    { gText_EmptyString,  7 },
-    { gText_EmptyString,  8 },
-    { gText_EmptyString,  9 },
-    { gText_EmptyString, 10 },
-    { gText_EmptyString, 11 },
-    { gText_EmptyString, 12 },
-    { gText_EmptyString, 13 },
-    { gText_EmptyString, 14 },
-    { gText_EmptyString, 15 }
-};
-
-const struct ListMenuTemplate gUnknown_082F0204 = {
-    .items = gUnknown_082F0184,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = sub_8013DF4,
-    .totalItems = 16,
-    .maxShowed = 5,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = 1,
-    .fontId = 1,
-    .cursorKind = 0
-};
-
-const struct WindowTemplate gUnknown_082F021C = {
-    .bg = 0x00,
-    .tilemapLeft = 0x14,
-    .tilemapTop = 0x05,
-    .width = 0x10,
-    .height = 0x08,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x0001
-};
-
-const struct ListMenuItem gUnknown_082F0224[] = {
-    { gUnknown_082EFD70, 0x208 },
-    { gUnknown_082EFD60, 0x241 },
-    { gUnknown_082EFD68, 0x245 },
-    { gUnknown_082EFD7C, 0x040 }
-};
-
-const struct ListMenuTemplate gUnknown_082F0244 = {
-    .items = gUnknown_082F0224,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = NULL,
-    .totalItems = 4,
-    .maxShowed = 4,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
-    .cursorKind = 0
-};
-
-const struct WindowTemplate gUnknown_082F025C = {
-    .bg = 0x00,
-    .tilemapLeft = 0x12,
-    .tilemapTop = 0x07,
-    .width = 0x10,
-    .height = 0x06,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x0001
-};
-
-const struct ListMenuItem gUnknown_082F0264[] = {
-    { gText_Register, 1 },
-    { gUnknown_082EFD8C, 2 },
-    { gUnknown_082EFD7C, 3 }
-};
-
-const struct ListMenuTemplate gUnknown_082F027C = {
-    .items = gUnknown_082F0264,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = NULL,
-    .totalItems = 3,
-    .maxShowed = 3,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
-    .cursorKind = 0
-};
-
-const struct WindowTemplate gUnknown_082F0294 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x14,
-    .tilemapTop = 0x01,
-    .width = 0x10,
-    .height = 0x0c,
-    .paletteNum = 0x0f,
-    .baseBlock = 0x0001
-};
-
-const struct ListMenuItem gUnknown_082F029C[] = {
-    { gTypeNames[TYPE_NORMAL],   TYPE_NORMAL         },
-    { gTypeNames[TYPE_FIRE],     TYPE_FIRE           },
-    { gTypeNames[TYPE_WATER],    TYPE_WATER          },
-    { gTypeNames[TYPE_ELECTRIC], TYPE_ELECTRIC       },
-    { gTypeNames[TYPE_GRASS],    TYPE_GRASS          },
-    { gTypeNames[TYPE_ICE],      TYPE_ICE            },
-    { gTypeNames[TYPE_GROUND],   TYPE_GROUND         },
-    { gTypeNames[TYPE_ROCK],     TYPE_ROCK           },
-    { gTypeNames[TYPE_FLYING],   TYPE_FLYING         },
-    { gTypeNames[TYPE_PSYCHIC],  TYPE_PSYCHIC        },
-    { gTypeNames[TYPE_FIGHTING], TYPE_FIGHTING       },
-    { gTypeNames[TYPE_POISON],   TYPE_POISON         },
-    { gTypeNames[TYPE_BUG],      TYPE_BUG            },
-    { gTypeNames[TYPE_GHOST],    TYPE_GHOST          },
-    { gTypeNames[TYPE_DRAGON],   TYPE_DRAGON         },
-    { gTypeNames[TYPE_STEEL],    TYPE_STEEL          },
-    { gTypeNames[TYPE_DARK],     TYPE_DARK           },
-    { gUnknown_082EFD7C,         NUMBER_OF_MON_TYPES }
-};
-
-const struct ListMenuTemplate gUnknown_082F032C = {
-    .items = gUnknown_082F029C,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = NULL,
-    .totalItems = NUMBER_OF_MON_TYPES,
-    .maxShowed = 6,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
-    .cursorKind = 0
-};
-
-const struct WindowTemplate gUnknown_082F0344 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x01,
-    .width = 0x1c,
-    .height = 0x02,
-    .paletteNum = 0x0d,
-    .baseBlock = 0x0001
-};
-
-const struct WindowTemplate gUnknown_082F034C = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x05,
-    .width = 0x1c,
-    .height = 0x0c,
-    .paletteNum = 0x0d,
-    .baseBlock = 0x0039
-};
-
-const struct ListMenuItem gUnknown_082F0354[] = {
-    { gText_EmptyString, -3 },
-    { gText_EmptyString,  0 },
-    { gText_EmptyString,  1 },
-    { gText_EmptyString,  2 },
-    { gText_EmptyString,  3 },
-    { gText_EmptyString,  4 },
-    { gText_EmptyString,  5 },
-    { gText_EmptyString,  6 },
-    { gText_EmptyString,  7 },
-    { gUnknown_082EFD84,  8 }
-};
-
-const struct ListMenuTemplate gUnknown_082F03A4 = {
-    .items = gUnknown_082F0354,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = sub_8017BE8,
-    .totalItems = 10,
-    .maxShowed = 6,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 14,
-    .fillValue = 15,
-    .cursorShadowPal = 13,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = 0,
-    .fontId = 1,
-    .cursorKind = 0
-};
-
-const struct WindowTemplate UnrefWindowTemplate_082F03B4 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x05,
-    .width = 0x1c,
-    .height = 0x0c,
-    .paletteNum = 0x0d,
-    .baseBlock = 0x0039
-};
-
-const struct ListMenuItem gUnknown_082F03C4[] = {
-    { gText_EmptyString,  0 },
-    { gText_EmptyString,  1 },
-    { gText_EmptyString,  2 },
-    { gText_EmptyString,  3 },
-    { gText_EmptyString,  4 },
-    { gText_EmptyString,  5 },
-    { gText_EmptyString,  6 },
-    { gText_EmptyString,  7 },
-    { gText_EmptyString,  8 },
-    { gText_EmptyString,  9 },
-    { gText_EmptyString, 10 },
-    { gText_EmptyString, 11 },
-    { gText_EmptyString, 12 },
-    { gText_EmptyString, 13 },
-    { gText_EmptyString, 14 },
-    { gText_EmptyString, 15 }
-};
-
-const struct ListMenuTemplate UnrefListMenuTemplate_082F0444 = {
-    .items = gUnknown_082F03C4,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = nullsub_14,
-    .totalItems = 16,
-    .maxShowed = 4,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = 1,
-    .fontId = 1,
-    .cursorKind = 0
-};
-
-const struct UnkStruct_Shared gUnknown_082F045C = {0};
-
-ALIGNED(4) const u8 gUnknown_082F0474[] = {0x01, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0478[] = {0x02, 0xff};
-ALIGNED(4) const u8 gUnknown_082F047C[] = {0x03, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0480[] = {0x04, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0484[] = {0x09, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0488[] = {0x0a, 0xff};
-ALIGNED(4) const u8 gUnknown_082F048C[] = {0x0b, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0490[] = {0x15, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0494[] = {0x16, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0498[] = {0x40, 0x41, 0x44, 0x45, 0x48, 0x51, 0x52, 0x53, 0x54, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04A4[] = {0x0c, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04A8[] = {0x01, 0x02, 0x03, 0x04, 0x09, 0x0a, 0x0b, 0x15, 0x16, 0x0d, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04B4[] = {0x0f, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04B8[] = {0x10, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04BC[] = {0x17, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04C0[] = {0x18, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04C4[] = {0x19, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04C8[] = {0x1a, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04CC[] = {0x1b, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04D0[] = {0x1c, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04D4[] = {0x0e, 0xff};
-
-const u8 *const gUnknown_082F04D8[] = {
-    gUnknown_082F0474,
-    gUnknown_082F0478,
-    gUnknown_082F047C,
-    gUnknown_082F0480,
-    gUnknown_082F0484,
-    gUnknown_082F0488,
-    gUnknown_082F048C,
-    gUnknown_082F0490,
-    gUnknown_082F0494,
-    gUnknown_082F0498,
-    gUnknown_082F04A4,
-    gUnknown_082F04A8,
-    gUnknown_082F04B4,
-    gUnknown_082F04B8,
-    NULL,
-    gUnknown_082F04BC,
-    gUnknown_082F04C0,
-    gUnknown_082F04C4,
-    gUnknown_082F04C8,
-    gUnknown_082F04CC,
-    gUnknown_082F04D0,
-    gUnknown_082F04D4
-};
-
-const u8 gUnknown_082F0530[] = {
-    0x01, 0x02, 0x03, 0x04, 0x09, 0x0a, 0x0b, 0x15,
-    0x16, 0x00, 0x00, 0x00, 0x0f, 0x10, 0x00, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x0e, 0x00, 0x00
-};
+#include "data/union_room.h"
 
 // code
-void nullsub_89(u8 taskId)
-{
-
-}
-
 void sub_80124EC(u8 windowId, u8 arg1, u8 stringId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     switch (arg1 << 8)
     {
     case 0x200:
-        sub_80173E0(windowId, 1, gUnknown_082EDB60[0][stringId - 1], 0, 1, 0);
+        sub_80173E0(windowId, 1, sPlayersNeededOrModeTexts[0][stringId - 1], 0, 1, 0);
         break;
     case 0x400:
-        sub_80173E0(windowId, 1, gUnknown_082EDB60[1][stringId - 1], 0, 1, 0);
+        sub_80173E0(windowId, 1, sPlayersNeededOrModeTexts[1][stringId - 1], 0, 1, 0);
         break;
     case 0x2500:
-        sub_80173E0(windowId, 1, gUnknown_082EDB60[2][stringId - 1], 0, 1, 0);
+        sub_80173E0(windowId, 1, sPlayersNeededOrModeTexts[2][stringId - 1], 0, 1, 0);
         break;
     case 0x3500:
-        sub_80173E0(windowId, 1, gUnknown_082EDB60[3][stringId - 1], 0, 1, 0);
+        sub_80173E0(windowId, 1, sPlayersNeededOrModeTexts[3][stringId - 1], 0, 1, 0);
         break;
     case 0x2400:
-        sub_80173E0(windowId, 1, gUnknown_082EDB60[4][stringId - 1], 0, 1, 0);
+        sub_80173E0(windowId, 1, sPlayersNeededOrModeTexts[4][stringId - 1], 0, 1, 0);
         break;
     }
 
@@ -1217,7 +178,7 @@ void sub_80125BC(u8 windowId)
     u8 *txtPtr;
 
     sub_80173E0(windowId, 1, gSaveBlock2Ptr->playerName, 0, 1, 0);
-    txtPtr = StringCopy(text, gText_UnkCtrlCodeF907);
+    txtPtr = StringCopy(text, sText_ID);
     ConvertIntToDecimalStringN(txtPtr, ReadAsU16(gSaveBlock2Ptr->playerTrainerId), STR_CONV_MODE_LEADING_ZEROS, 5);
     sub_80173E0(windowId, 1, text, 0, 0x11, 0);
 }
@@ -1231,7 +192,7 @@ void sub_801262C(u8 *dst, u8 caseId)
     case 14 ... 16:
     case 21 ... 28:
         // UB: argument *dst isn't used, instead it always prints to gStringVar4
-        StringExpandPlaceholders(gStringVar4, gText_AwaitingCommunication);
+        StringExpandPlaceholders(gStringVar4, sText_AwaitingCommunication);
         break;
     }
 }
@@ -1249,7 +210,7 @@ bool32 sub_80126CC(u32 caseId)
     }
 }
 
-void BerryBlenderLinkBecomeLeader(void)
+void TryBecomeLinkLeader(void)
 {
     u8 taskId;
     struct UnkStruct_Leader *dataPtr;
@@ -1271,7 +232,7 @@ void sub_8012780(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
+        if (gSpecialVar_0x8004 == LINK_GROUP_BATTLE_TOWER && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F00C4[gSpecialVar_0x8004];
         gUnknown_02022C2D = gUnknown_082F00C4[gSpecialVar_0x8004] >> 8;
@@ -1308,7 +269,7 @@ void sub_8012780(u8 taskId)
         data->field_11 = AddWindow(&gUnknown_082F012C);
 
         FillWindowPixelBuffer(data->field_10, PIXEL_FILL(2));
-        sub_80173E0(data->field_10, 0, gUnknown_082EDBC4, 8, 1, 4);
+        sub_80173E0(data->field_10, 0, sText_BButtonCancel, 8, 1, 4);
         PutWindowTilemap(data->field_10);
         CopyWindowToVram(data->field_10, 2);
 
@@ -1326,13 +287,13 @@ void sub_8012780(u8 taskId)
         data->state = 4;
         break;
     case 4:
-        StringCopy(gStringVar1, gUnknown_082F0048[gUnknown_02022C2C]);
+        StringCopy(gStringVar1, sLinkGroupActivityTexts[gUnknown_02022C2C]);
         if ((gUnknown_02022C2D >> 4) != 0)
         {
             if (data->field_13 > (gUnknown_02022C2D >> 4) - 1 && (gUnknown_02022C2D & 0xF) != 0)
-                StringExpandPlaceholders(gStringVar4, gText_AwaitingLink);
+                StringExpandPlaceholders(gStringVar4, sText_AwaitingLinkPressStart);
             else
-                StringExpandPlaceholders(gStringVar4, gText_AwaitingCommunication);
+                StringExpandPlaceholders(gStringVar4, sText_AwaitingCommunication);
         }
         else
         {
@@ -1380,7 +341,7 @@ void sub_8012780(u8 taskId)
         break;
     case 10:
         id = ((gUnknown_02022C2C & 0xF) == 2) ? 1 : 0;
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDDC4[id]))
+        if (PrintOnTextbox(&data->textState, sPlayerUnavailableTexts[id]))
         {
             data->field_13 = sub_8013398(data->field_0);
             RedrawListMenu(data->listTaskId);
@@ -1389,7 +350,7 @@ void sub_8012780(u8 taskId)
         break;
     case 29:
         id = ((gUnknown_02022C2D & 0xF) == 2) ? 0 : 1;
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDDC4[id]))
+        if (PrintOnTextbox(&data->textState, sPlayerUnavailableTexts[id]))
         {
             data->state = 21;
         }
@@ -1439,7 +400,7 @@ void sub_8012780(u8 taskId)
                     else
                     {
                         sub_8018404(gStringVar1, &data->field_0->arr[data->field_13 - 1]);
-                        StringExpandPlaceholders(gStringVar4, gUnknown_082EDC9C);
+                        StringExpandPlaceholders(gStringVar4, sText_AnOKWasSentToPlayer);
                         data->state = 13;
                     }
 
@@ -1477,7 +438,7 @@ void sub_8012780(u8 taskId)
             data->state = 17;
         break;
     case 15:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDC5C))
+        if (PrintOnTextbox(&data->textState, sText_AreTheseMembersOK))
             data->state = 16;
         break;
     case 16:
@@ -1496,7 +457,7 @@ void sub_8012780(u8 taskId)
         }
         break;
     case 19:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDC78))
+        if (PrintOnTextbox(&data->textState, sText_CancelModeWithTheseMembers))
             data->state = 20;
         break;
     case 20:
@@ -1543,7 +504,7 @@ void sub_8012780(u8 taskId)
         }
         break;
     case 30:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDD58))
+        if (PrintOnTextbox(&data->textState, sText_ModeWithTheseMembersWillBeCanceled))
             data->state = 23;
         break;
     case 21:
@@ -1611,11 +572,11 @@ void sub_8012FC4(u8 *dst, u8 caseId)
     case 4:
     case 14:
     case 28:
-        StringExpandPlaceholders(dst, gUnknown_082EDBE8);
+        StringExpandPlaceholders(dst, sText_PlayerContactedYouForXAccept);
         break;
     case 21:
     case 22:
-        StringExpandPlaceholders(dst, gUnknown_082EDC0C);
+        StringExpandPlaceholders(dst, sText_PlayerContactedYouShareX);
         break;
     case 3:
     case 9:
@@ -1628,7 +589,7 @@ void sub_8012FC4(u8 *dst, u8 caseId)
     case 25:
     case 26:
     case 27:
-        StringExpandPlaceholders(dst, gUnknown_082EDC34);
+        StringExpandPlaceholders(dst, sText_PlayerContactedYouAddToMembers);
         break;
     }
 }
@@ -1639,11 +600,11 @@ void sub_8013078(u8 *dst, u8 caseId)
     {
     case 65:
     case 68:
-        StringExpandPlaceholders(dst, gUnknown_082EE560);
+        StringExpandPlaceholders(dst, sText_OfferDeclined1);
         break;
     case 69:
     case 72:
-        StringExpandPlaceholders(dst, gUnknown_082EE57C);
+        StringExpandPlaceholders(dst, sText_OfferDeclined2);
         break;
     }
 }
@@ -1659,7 +620,7 @@ void sub_80130B4(u8 *dst, u8 caseId)
     case 21:
     case 22:
     case 28:
-        StringExpandPlaceholders(dst, gUnknown_082EFC3C);
+        StringExpandPlaceholders(dst, sText_AwaitingPlayersResponse);
         break;
     case 3:
     case 9:
@@ -1672,7 +633,7 @@ void sub_80130B4(u8 *dst, u8 caseId)
     case 25:
     case 26:
     case 27:
-        StringExpandPlaceholders(dst, gUnknown_082EFC54);
+        StringExpandPlaceholders(dst, sText_PlayerHasBeenAskedToRegisterYouPleaseWait);
         break;
     }
 }
@@ -1688,7 +649,7 @@ void sub_8013160(u8 *dst, u8 caseId)
     case 21:
     case 22:
     case 28:
-        StringExpandPlaceholders(dst, gUnknown_082EDDF4);
+        StringExpandPlaceholders(dst, sText_PlayerSentBackOK);
         break;
     case 3:
     case 9:
@@ -1701,7 +662,7 @@ void sub_8013160(u8 *dst, u8 caseId)
     case 25:
     case 26:
     case 27:
-        StringExpandPlaceholders(dst, gUnknown_082EDE0C);
+        StringExpandPlaceholders(dst, sText_PlayerOKdRegistration);
         break;
     }
 }
@@ -1831,7 +792,7 @@ u8 sub_8013398(struct UnkStruct_Main0 *arg0)
     return ret;
 }
 
-void BerryBlenderLinkJoinGroup(void)
+void TryJoinLinkGroup(void)
 {
     u8 taskId;
     struct UnkStruct_Group *dataPtr;
@@ -1853,7 +814,7 @@ void sub_80134E8(u8 taskId)
     switch (data->state)
     {
     case 0:
-        if (gSpecialVar_0x8004 == 20 && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
+        if (gSpecialVar_0x8004 == LINK_GROUP_BATTLE_TOWER && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F0530[gSpecialVar_0x8004];
         sub_8010F84(gUnknown_02022C2C, 0, 0);
@@ -1865,7 +826,7 @@ void sub_80134E8(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EFB70[gSpecialVar_0x8004]))
+        if (PrintOnTextbox(&data->textState, sChooseTrainerTexts[gSpecialVar_0x8004]))
             data->state = 2;
         break;
     case 2:
@@ -1877,7 +838,7 @@ void sub_80134E8(u8 taskId)
         data->field_D = AddWindow(&gUnknown_082F017C);
 
         FillWindowPixelBuffer(data->field_C, PIXEL_FILL(2));
-        sub_80173E0(data->field_C, 0, gUnknown_082EF7DC, 8, 1, 4);
+        sub_80173E0(data->field_C, 0, sText_ChooseJoinCancel, 8, 1, 4);
         PutWindowTilemap(data->field_C);
         CopyWindowToVram(data->field_C, 2);
 
@@ -1909,9 +870,9 @@ void sub_80134E8(u8 taskId)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
-                unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
+                unusedVar  = data->field_0->arr[id].unk.field_0.activity;
 
-                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.unk_0a_7)
+                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.started)
                 {
                     u32 var = sub_8013B8C(data, id);
                     if (var == 0)
@@ -1922,7 +883,7 @@ void sub_80134E8(u8 taskId)
                     }
                     else
                     {
-                        StringCopy(gStringVar4, gUnknown_082EDD50[var - 1]);
+                        StringCopy(gStringVar4, sCantTransmitToTrainerTexts[var - 1]);
                         data->state = 18;
                         PlaySE(SE_PN_ON);
                     }
@@ -1953,7 +914,7 @@ void sub_80134E8(u8 taskId)
     case 6:
         if (gReceivedRemoteLinkPlayers != 0)
         {
-            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.activity;
             sub_8011A64(0, 0);
             switch (gUnknown_02022C2C)
             {
@@ -1987,8 +948,8 @@ void sub_80134E8(u8 taskId)
                 else
                 {
                     sub_8011A64(7, 0);
-                    StringCopy(gStringVar1, gUnknown_082F0048[gUnknown_02022C2C]);
-                    StringExpandPlaceholders(gStringVar4, gUnknown_082EDE48);
+                    StringCopy(gStringVar1, sLinkGroupActivityTexts[gUnknown_02022C2C]);
+                    StringExpandPlaceholders(gStringVar4, sText_AwaitingOtherMembers);
                 }
             }
             break;
@@ -2023,7 +984,7 @@ void sub_80134E8(u8 taskId)
             data->state = 7;
         break;
     case 7:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDE64))
+        if (PrintOnTextbox(&data->textState, sText_QuitBeingMember))
             data->state = 8;
         break;
     case 8:
@@ -2070,7 +1031,7 @@ void sub_80134E8(u8 taskId)
         break;
     case 13:
         DestroyWirelessStatusIndicatorSprite();
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDE9C[sub_8011A74()]))
+        if (PrintOnTextbox(&data->textState, sPlayerDisconnectedTexts[sub_8011A74()]))
         {
             gSpecialVar_Result = 6;
             data->state = 23;
@@ -2083,7 +1044,7 @@ void sub_80134E8(u8 taskId)
         break;
     case 15:
         DestroyWirelessStatusIndicatorSprite();
-        if (PrintOnTextbox(&data->textState, gUnknown_082EDE9C[sub_8011A74()]))
+        if (PrintOnTextbox(&data->textState, sPlayerDisconnectedTexts[sub_8011A74()]))
         {
             gSpecialVar_Result = 8;
             data->state = 23;
@@ -2112,11 +1073,11 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 {
     struct UnkStruct_x20 *structPtr = &arg0->field_0->arr[id];
 
-    if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.unk_01_2 != 3)
+    if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.version != VERSION_EMERALD)
     {
-        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & 0x80))
+        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & CHAMPION_SAVEWARP))
             return 1;
-        else if (structPtr->unk.field_0.unk_00.unk_00_7)
+        else if (structPtr->unk.field_0.unk_00.isChampion)
             return 0;
     }
     else
@@ -2221,7 +1182,7 @@ u8 sub_8013DBC(struct UnkStruct_Group *data, u32 id)
 {
     if (data->field_0->arr[id].field_1A_0 == 1)
     {
-        if (data->field_0->arr[id].unk.field_0.unk_0a_7)
+        if (data->field_0->arr[id].unk.field_0.started)
             return 3;
         else if (data->field_0->arr[id].field_1A_1 != 0)
             return 1;
@@ -2305,22 +1266,22 @@ u8 sub_8013E44(void)
     return ret;
 }
 
-void sub_8013F60(u8 taskId)
+static void Task_CreateTradeMenu(u8 taskId)
 {
-    sub_80773AC();
+    CB2_StartCreateTradeMenu();
     DestroyTask(taskId);
 }
 
 u8 sub_8013F78(void)
 {
-    u8 taskId = CreateTask(sub_8013F60, 0);
+    u8 taskId = CreateTask(Task_CreateTradeMenu, 0);
 
     return taskId;
 }
 
 void sub_8013F90(u8 taskId)
 {
-    u32 monId = sub_8018120(&gUnknown_02022C40, GetMultiplayerId());
+    u32 monId = GetPartyPositionOfRegisteredMon(&sUnionRoomTrade, GetMultiplayerId());
 
     switch (gTasks[taskId].data[0])
     {
@@ -2345,13 +1306,13 @@ void sub_8013F90(u8 taskId)
     case 3:
         if (GetBlockReceivedStatus() == 3)
         {
-            memcpy(gUnknown_020321C0, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct MailStruct) * PARTY_SIZE);
+            memcpy(gTradeMail, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct MailStruct) * PARTY_SIZE);
             ResetBlockReceivedFlags();
-            gUnknown_02032298[0] = monId;
-            gUnknown_02032298[1] = 6;
+            gSelectedTradeMonPositions[TRADE_PLAYER] = monId;
+            gSelectedTradeMonPositions[TRADE_PARTNER] = PARTY_SIZE;
             gMain.savedCallback = CB2_ReturnToField;
-            SetMainCallback2(sub_807AE50);
-            sub_801807C(&gUnknown_02022C40);
+            SetMainCallback2(CB2_LinkTrade);
+            ResetUnionRoomTrade(&sUnionRoomTrade);
             DestroyTask(taskId);
         }
         break;
@@ -2421,7 +1382,7 @@ void sub_8014210(u16 battleFlags)
     HealPlayerParty();
     SavePlayerParty();
     LoadPlayerBag();
-    gLinkPlayers[0].linkType = 0x2211;
+    gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
     gLinkPlayers[GetMultiplayerId()].id = GetMultiplayerId();
     gLinkPlayers[GetMultiplayerId() ^ 1].id = GetMultiplayerId() ^ 1;
     gMain.savedCallback = sub_80B360C;
@@ -2429,18 +1390,18 @@ void sub_8014210(u16 battleFlags)
     PlayBattleBGM();
 }
 
-void sub_8014290(u16 arg0, u16 x, u16 y)
+static void sub_8014290(u16 linkService, u16 x, u16 y)
 {
-    VarSet(VAR_CABLE_CLUB_STATE, arg0);
+    VarSet(VAR_CABLE_CLUB_STATE, linkService);
     SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     WarpIntoMap();
 }
 
-void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
+void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 linkService)
 {
-    gSpecialVar_0x8004 = arg4;
-    VarSet(VAR_CABLE_CLUB_STATE, arg4);
+    gSpecialVar_0x8004 = linkService;
+    VarSet(VAR_CABLE_CLUB_STATE, linkService);
     gFieldLinkPlayerCount = GetLinkPlayerCount();
     gLocalLinkPlayerId = GetMultiplayerId();
     SetCableClubWarp();
@@ -2458,7 +1419,7 @@ void sub_8014384(void)
         break;
     case 1:
         if (!FuncIsActiveTask(sub_80140E0))
-            SetMainCallback2(sub_8086074);
+            SetMainCallback2(CB2_ReturnToFieldCableClub);
         break;
     }
 
@@ -2506,7 +1467,7 @@ void sub_801440C(u8 taskId)
         HealPlayerParty();
         SavePlayerParty();
         LoadPlayerBag();
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, 1);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_SINGLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 2:
@@ -2515,7 +1476,7 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(SINGLE_BATTLE_COLOSSEUM), MAP_NUM(SINGLE_BATTLE_COLOSSEUM), 6, 8, 2);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_DOUBLE_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 3:
@@ -2524,19 +1485,19 @@ void sub_801440C(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         sub_80143E4(gBlockSendBuffer, TRUE);
-        sub_8014304(MAP_GROUP(DOUBLE_BATTLE_COLOSSEUM), MAP_NUM(DOUBLE_BATTLE_COLOSSEUM), 5, 8, 5);
+        sub_8014304(MAP_GROUP(BATTLE_COLOSSEUM_4P), MAP_NUM(BATTLE_COLOSSEUM_4P), 5, 8, USING_MULTI_BATTLE);
         SetMainCallback2(sub_8014384);
         break;
     case 4:
         sub_80143E4(gBlockSendBuffer, TRUE);
         CleanupOverworldWindowsAndTilemaps();
-        sub_8014304(MAP_GROUP(TRADE_CENTER), MAP_NUM(TRADE_CENTER), 5, 8, 3);
+        sub_8014304(MAP_GROUP(TRADE_CENTER), MAP_NUM(TRADE_CENTER), 5, 8, USING_TRADE_CENTER);
         SetMainCallback2(sub_8014384);
         break;
     case 15:
         sub_80143E4(gBlockSendBuffer, TRUE);
         CleanupOverworldWindowsAndTilemaps();
-        sub_8014304(MAP_GROUP(RECORD_CORNER), MAP_NUM(RECORD_CORNER), 8, 9, 4);
+        sub_8014304(MAP_GROUP(RECORD_CORNER), MAP_NUM(RECORD_CORNER), 8, 9, USING_RECORD_CORNER);
         SetMainCallback2(sub_8014384);
         break;
     case 68:
@@ -2562,15 +1523,15 @@ void sub_801440C(u8 taskId)
         SetMainCallback2(sub_80141A4);
         break;
     case 9:
-        sub_8014290(8, 5, 1);
+        sub_8014290(USING_MINIGAME, 5, 1);
         sub_802A9A8(GetCursorSelectionMonId(), CB2_LoadMap);
         break;
     case 10:
-        sub_8014290(7, 9, 1);
+        sub_8014290(USING_BERRY_CRUSH, 9, 1);
         sub_8020C70(CB2_LoadMap);
         break;
     case 11:
-        sub_8014290(8, 5, 1);
+        sub_8014290(USING_MINIGAME, 5, 1);
         sub_802493C(GetCursorSelectionMonId(), CB2_LoadMap);
         break;
     }
@@ -2594,7 +1555,7 @@ void sub_8014790(u8 taskId)
         {
         case 14:
         case 28:
-            gLinkPlayers[0].linkType = 0x2211;
+            gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
             gLinkPlayers[0].id = 0;
             gLinkPlayers[1].id = 2;
             sendBuff[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
@@ -2617,7 +1578,7 @@ void sub_8014790(u8 taskId)
     case 1:
         if (!ScriptContext1_IsScriptSetUp())
         {
-            FadeScreen(1, 0);
+            FadeScreen(FADE_TO_BLACK, 0);
             data[0] = 2;
         }
         break;
@@ -2627,7 +1588,7 @@ void sub_8014790(u8 taskId)
             if (gUnknown_02022C2C == 29)
             {
                 DestroyTask(taskId);
-                SetMainCallback2(sub_80773AC);
+                SetMainCallback2(CB2_StartCreateTradeMenu);
             }
             else
             {
@@ -2751,7 +1712,7 @@ void sub_8014A40(u8 taskId)
         data->state = 2;
         break;
     case 2:
-        StringCopy(gStringVar1, gUnknown_082F0048[gUnknown_02022C2C]);
+        StringCopy(gStringVar1, sLinkGroupActivityTexts[gUnknown_02022C2C]);
         sub_801262C(gStringVar4, gUnknown_02022C2C);
         data->state = 3;
         break;
@@ -2768,7 +1729,7 @@ void sub_8014A40(u8 taskId)
         }
         break;
     case 6:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EDF40))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_LinkWithFriendDropped))
         {
             data->field_13 = sub_8013398(data->field_0);
             RedrawListMenu(data->listTaskId);
@@ -2808,7 +1769,7 @@ void sub_8014A40(u8 taskId)
                 RedrawListMenu(data->listTaskId);
                 data->field_13++;
                 sub_8018404(gStringVar1, &data->field_0->arr[data->field_13 - 1]);
-                StringExpandPlaceholders(gStringVar4, gUnknown_082EDC9C);
+                StringExpandPlaceholders(gStringVar4, sText_AnOKWasSentToPlayer);
                 data->state = 9;
                 sub_800EF38();
             }
@@ -2865,7 +1826,7 @@ void sub_8014A40(u8 taskId)
         data->state++;
         break;
     case 14:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_PleaseStartOver))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_PleaseStartOver))
         {
             DestroyTask(taskId);
             gSpecialVar_Result = 5;
@@ -2933,7 +1894,7 @@ void sub_8014F48(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        AddTextPrinterToWindow1(gUnknown_082EF7F8);
+        AddTextPrinterToWindow1(sText_ChooseTrainer);
         data->state = 2;
         break;
     case 2:
@@ -2980,9 +1941,9 @@ void sub_8014F48(u8 taskId)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
-                unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
+                unusedVar  = data->field_0->arr[id].unk.field_0.activity;
 
-                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.unk_0a_7)
+                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.started)
                 {
                     data->field_F = id;
                     LoadWirelessStatusIndicatorSpriteGfx();
@@ -3006,14 +1967,14 @@ void sub_8014F48(u8 taskId)
         }
         break;
     case 4:
-        AddTextPrinterToWindow1(gUnknown_082EFC3C);
+        AddTextPrinterToWindow1(sText_AwaitingPlayersResponse);
         sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
         data->state = 5;
         break;
     case 5:
         if (gReceivedRemoteLinkPlayers != 0)
         {
-            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.activity;
             data->state = 10;
         }
 
@@ -3025,7 +1986,7 @@ void sub_8014F48(u8 taskId)
             data->state = 8;
             break;
         case 5:
-            AddTextPrinterToWindow1(gUnknown_082EDDF4);
+            AddTextPrinterToWindow1(sText_PlayerSentBackOK);
             sub_8011A64(0, 0);
             break;
         }
@@ -3043,7 +2004,7 @@ void sub_8014F48(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EDF80[sub_8011A74()]))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sLinkDroppedTexts[sub_8011A74()]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -3053,7 +2014,7 @@ void sub_8014F48(u8 taskId)
         break;
     case 7:
         DestroyWirelessStatusIndicatorSprite();
-        AddTextPrinterToWindow1(gText_PleaseStartOver);
+        AddTextPrinterToWindow1(sText_PleaseStartOver);
         DestroyTask(taskId);
         sub_800EDD4();
         gSpecialVar_Result = 5;
@@ -3102,7 +2063,7 @@ void sub_80152F4(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        AddTextPrinterToWindow1(gUnknown_082EFBC8);
+        AddTextPrinterToWindow1(sText_SearchingForWirelessSystemWait);
         data->state = 2;
         break;
     case 2:
@@ -3142,7 +2103,7 @@ void sub_80152F4(u8 taskId)
                 id = ListMenu_ProcessInput(data->listTaskId);
             if (data->field_14 > 120)
             {
-                if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.unk_0a_7)
+                if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.started)
                 {
                     if (sub_8016F1C(&data->field_0->arr[0].unk.field_0, data->field_12 + 7))
                     {
@@ -3171,14 +2132,14 @@ void sub_80152F4(u8 taskId)
         }
         break;
     case 4:
-        AddTextPrinterToWindow1(gUnknown_082EFC90);
+        AddTextPrinterToWindow1(sText_AwaitingResponseFromWirelessSystem);
         sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
         data->state = 5;
         break;
     case 5:
         if (gReceivedRemoteLinkPlayers != 0)
         {
-            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.activity;
             data->state = 12;
         }
 
@@ -3190,7 +2151,7 @@ void sub_80152F4(u8 taskId)
             data->state = 8;
             break;
         case 5:
-            AddTextPrinterToWindow1(gUnknown_082EDEC4);
+            AddTextPrinterToWindow1(sText_WirelessLinkEstablished);
             sub_8011A64(0, 0);
             break;
         }
@@ -3211,7 +2172,7 @@ void sub_80152F4(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EDF04))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessLinkDropped))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -3220,7 +2181,7 @@ void sub_80152F4(u8 taskId)
         }
         break;
     case 7:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_WirelessSearchCanceled))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessSearchCanceled))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -3229,7 +2190,7 @@ void sub_80152F4(u8 taskId)
         }
         break;
     case 11:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_082EFD58[data->field_12]))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sNoWonderSharedTexts[data->field_12]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -3334,7 +2295,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 2:
         sub_8010F84(0x40, 0, 0);
-        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
+        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         sub_800B488();
         OpenLink();
         sub_8011C84();
@@ -3345,22 +2306,24 @@ void sub_80156E0(u8 taskId)
         data->state = 3;
         break;
     case 3:
-        if ((sub_81B1360() == 8 || sub_81B1360() == 9) && gUnknown_02022C40.field_0 != 0)
+        if ((GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_REGISTER 
+           || GetPartyMenuType() == PARTY_MENU_TYPE_UNION_ROOM_TRADE) 
+           && sUnionRoomTrade.field_0 != 0)
         {
             id = GetCursorSelectionMonId();
-            switch (gUnknown_02022C40.field_0)
+            switch (sUnionRoomTrade.field_0)
             {
             case 1:
                 sub_8011090(0x54, 0, 1);
                 if (id >= PARTY_SIZE)
                 {
-                    sub_801807C(&gUnknown_02022C40);
+                    ResetUnionRoomTrade(&sUnionRoomTrade);
                     sub_8010FCC(0, 0, 0);
-                    sub_801568C(gUnknown_082EF4FC);
+                    sub_801568C(sText_RegistrationCanceled);
                 }
-                else if (!sub_80180A0(GetCursorSelectionMonId(), &gUnknown_02022C40))
+                else if (!RegisterTradeMonAndGetIsEgg(GetCursorSelectionMonId(), &sUnionRoomTrade))
                 {
-                    sub_8015664(0x34, gUnknown_082EF47C);
+                    sub_8015664(0x34, sText_ChooseRequestedMonType);
                 }
                 else
                 {
@@ -3369,21 +2332,21 @@ void sub_80156E0(u8 taskId)
                 break;
             case 2:
                 sub_80156C8(data);
-                taskData[1] = gUnknown_02022C40.field_8;
+                taskData[1] = sUnionRoomTrade.field_8;
                 if (id >= PARTY_SIZE)
                 {
-                    sub_801568C(gUnknown_082EF544);
+                    sub_801568C(sText_TradeCanceled);
                 }
                 else
                 {
                     sub_8011090(0x54, 0, 1);
                     gUnknown_02022C2C = 0x44;
-                    sub_80180E8(GetCursorSelectionMonId(), &gUnknown_02022C40);
+                    RegisterTradeMon(GetCursorSelectionMonId(), &sUnionRoomTrade);
                     data->state = 51;
                 }
                 break;
             }
-            gUnknown_02022C40.field_0 = 0;
+            sUnionRoomTrade.field_0 = 0;
         }
         else
         {
@@ -3455,7 +2418,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 23:
-        if (!FuncIsActiveTask(sub_809FA34))
+        if (!FuncIsActiveTask(Task_ShowStartMenu))
         {
             sub_8011090(0x40, 0, 0);
             data->state = 4;
@@ -3491,9 +2454,9 @@ void sub_80156E0(u8 taskId)
         case 1:
         case 2:
             if (sub_8011B90() == TRUE)
-                sub_801568C(gUnknown_082EE6C8);
+                sub_801568C(sText_TrainerAppearsBusy);
             else
-                sub_8015664(30, gUnknown_082EE6C8);
+                sub_8015664(30, sText_TrainerAppearsBusy);
 
             gUnknown_02022C2C = 0x40;
             break;
@@ -3510,7 +2473,7 @@ void sub_80156E0(u8 taskId)
         if (!FuncIsActiveTask(sub_80140E0))
         {
             if (gUnknown_02022C2C == 0x44)
-                sub_8015664(31, gUnknown_082EE004);
+                sub_8015664(31, sText_AwaitingPlayersResponseAboutTrade);
             else
                 data->state = 5;
         }
@@ -3526,7 +2489,7 @@ void sub_80156E0(u8 taskId)
     case 5:
         id = sub_80179AC(&data->field_0->arr[taskData[1]]);
         playerGender = sub_8017CF8(taskData[1], data->field_0);
-        sub_8015664(6, gUnknown_082EE24C[id][playerGender]);
+        sub_8015664(6, sHiDoSomethingTexts[id][playerGender]);
         break;
     case 6:
         var5 = sub_8017178(&data->textState, &data->field_1B, &data->field_1C, &gUnknown_082F021C, &gUnknown_082F0244);
@@ -3544,16 +2507,16 @@ void sub_80156E0(u8 taskId)
                 {
                     data->field_4C[0] = 0x40;
                     sub_800FE50(data->field_4C);
-                    StringCopy(gStringVar4, gUnknown_082EEB80[gLinkPlayers[0].gender]);
+                    StringCopy(gStringVar4, sIfYouWantToDoSomethingTexts[gLinkPlayers[0].gender]);
                     data->state = 32;
                 }
                 else
                 {
                     gUnknown_02022C2C = var5;
                     gUnknown_02022C2D = (u32)(var5) >> 8;
-                    if (gUnknown_02022C2C == 0x41 && !sub_8018024())
+                    if (gUnknown_02022C2C == 0x41 && !HasAtLeastTwoMonsOfLevel30OrLower())
                     {
-                        sub_8015664(5, gUnknown_082EEBD0);
+                        sub_8015664(5, sText_NeedTwoMonsOfLevel30OrLower1);
                     }
                     else
                     {
@@ -3566,14 +2529,14 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 28:
-        StringCopy(gStringVar4, gUnknown_082EEB88);
+        StringCopy(gStringVar4, sText_TrainerBattleBusy);
         data->state = 36;
         break;
     case 27:
         sub_8017FD8(data);
         playerGender = sub_8017CF8(taskData[1], data->field_0);
         id = sub_8017984(data->field_4C[0] & 0x3F);
-        if (PrintOnTextbox(&data->textState, gUnknown_082EE82C[playerGender][id]))
+        if (PrintOnTextbox(&data->textState, sText_WaitOrShowCardTexts[playerGender][id]))
         {
             taskData[3] = 0;
             data->state = 29;
@@ -3585,15 +2548,15 @@ void sub_80156E0(u8 taskId)
         break;
     case 31:
         data->field_4C[0] = 0x44;
-        data->field_4C[1] = gUnknown_02022C40.species;
-        data->field_4C[2] = gUnknown_02022C40.level;
+        data->field_4C[1] = sUnionRoomTrade.species;
+        data->field_4C[2] = sUnionRoomTrade.level;
         sub_800FE50(data->field_4C);
         data->state = 29;
         break;
     case 29:
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            StringCopy(gStringVar4, gUnknown_082EEB88);
+            StringCopy(gStringVar4, sText_TrainerBattleBusy);
             data->state = 28;
         }
         else
@@ -3623,7 +2586,7 @@ void sub_80156E0(u8 taskId)
     case 7:
         id = sub_80179AC(&data->field_0->arr[taskData[1]]);
         playerGender = sub_8017CF8(taskData[1], data->field_0);
-        sub_8015664(6, gUnknown_082EE24C[id][playerGender]);
+        sub_8015664(6, sHiDoSomethingTexts[id][playerGender]);
         break;
     case 40:
         if (PrintOnTextbox(&data->textState, gStringVar4))
@@ -3641,7 +2604,7 @@ void sub_80156E0(u8 taskId)
             {
                 StringCopy(gStringVar1, gLinkPlayers[GetMultiplayerId() ^ 1].name);
                 id = sub_800E540(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
-                StringExpandPlaceholders(gStringVar4, gUnknown_082EE378[id]);
+                StringExpandPlaceholders(gStringVar4, sAwaitingResponseTexts[id]);
                 data->state = 33;
             }
             else
@@ -3665,7 +2628,7 @@ void sub_80156E0(u8 taskId)
         case 1:
         case -1:
             playerGender = sub_8017CF8(taskData[1], data->field_0);
-            sub_801568C(gUnknown_082EEC9C[playerGender]);
+            sub_801568C(sDeclineBattleTexts[playerGender]);
             break;
         }
         break;
@@ -3688,9 +2651,9 @@ void sub_80156E0(u8 taskId)
             playerGender = sub_8017CF8(taskData[1], data->field_0);
             sub_8011090(0x54, 0, 1);
             if (sub_8011B90() == TRUE)
-                sub_801568C(gUnknown_082EED3C[playerGender]);
+                sub_801568C(sChatDeclinedTexts[playerGender]);
             else
-                sub_8015664(30, gUnknown_082EED3C[playerGender]);
+                sub_8015664(30, sChatDeclinedTexts[playerGender]);
             break;
         case 3:
             data->state = 22;
@@ -3704,9 +2667,9 @@ void sub_80156E0(u8 taskId)
             playerGender = sub_8017CF8(taskData[1], data->field_0);
             sub_8011090(0x54, 0, 1);
             if (sub_8011B90() == TRUE)
-                sub_801568C(gUnknown_082EED3C[playerGender]);
+                sub_801568C(sChatDeclinedTexts[playerGender]);
             else
-                sub_8015664(30, gUnknown_082EED3C[playerGender]);
+                sub_8015664(30, sChatDeclinedTexts[playerGender]);
         }
         if (gReceivedRemoteLinkPlayers != 0)
             data->state = 16;
@@ -3737,7 +2700,7 @@ void sub_80156E0(u8 taskId)
             data->state = 33;
             StringCopy(gStringVar1, gLinkPlayers[1].name);
             id = sub_800E540(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EE324[id]);
+            StringExpandPlaceholders(gStringVar4, sPlayerContactedYouTexts[id]);
         }
         break;
     case 33:
@@ -3750,7 +2713,7 @@ void sub_80156E0(u8 taskId)
         if (sub_80168DC(data) && gMain.newKeys & B_BUTTON)
         {
             sub_8011DE0(1);
-            StringCopy(gStringVar4, gUnknown_082EE598);
+            StringCopy(gStringVar4, sText_ChatEnded);
             data->state = 36;
         }
         break;
@@ -3771,12 +2734,12 @@ void sub_80156E0(u8 taskId)
             taskData[3] = 0;
             if (gUnknown_02022C2C == 0x41)
             {
-                if (!sub_8018024())
+                if (!HasAtLeastTwoMonsOfLevel30OrLower())
                 {
                     data->field_4C[0] = 0x52;
                     sub_800FE50(data->field_4C);
                     data->state = 10;
-                    StringCopy(gStringVar4, gUnknown_082EEC14);
+                    StringCopy(gStringVar4, sText_NeedTwoMonsOfLevel30OrLower2);
                 }
                 else
                 {
@@ -3866,19 +2829,19 @@ void sub_80156E0(u8 taskId)
         {
             if (sub_800F7DC()->species == SPECIES_EGG)
             {
-                StringCopy(gStringVar4, gUnknown_082EF590);
+                StringCopy(gStringVar4, sText_CancelRegistrationOfEgg);
             }
             else
             {
                 StringCopy(gStringVar1, gSpeciesNames[sub_800F7DC()->species]);
-                ConvertIntToDecimalStringN(gStringVar2, sub_800F7DC()->unk_0b_1, STR_CONV_MODE_LEFT_ALIGN, 3);
-                StringExpandPlaceholders(gStringVar4, gUnknown_082EF564);
+                ConvertIntToDecimalStringN(gStringVar2, sub_800F7DC()->level, STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringExpandPlaceholders(gStringVar4, sText_CancelRegistrationOfMon);
             }
             sub_8015664(44, gStringVar4);
         }
         break;
     case 43:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF20C))
+        if (PrintOnTextbox(&data->textState, sText_RegisterMonAtTradingBoard))
             data->state = 47;
         break;
     case 47:
@@ -3894,11 +2857,11 @@ void sub_80156E0(u8 taskId)
             {
                 switch (var5)
                 {
-                case 1:
-                    sub_8015664(53, gUnknown_082EF4C4);
+                case 1: // REGISTER
+                    sub_8015664(53, sText_WhichMonWillYouOffer);
                     break;
-                case 2:
-                    sub_8015664(47, gUnknown_082EF298);
+                case 2: // INFO
+                    sub_8015664(47, sText_TradingBoardInfo);
                     break;
                 }
             }
@@ -3911,33 +2874,33 @@ void sub_80156E0(u8 taskId)
     case 54:
         if (!gPaletteFade.active)
         {
-            gUnknown_02022C40.field_0 = 1;
-            gFieldCallback = sub_80AF128;
-            sub_81B8904(8, CB2_ReturnToField);
+            sUnionRoomTrade.field_0 = 1;
+            gFieldCallback = FieldCB_ContinueScriptUnionRoom;
+            ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_REGISTER, CB2_ReturnToField);
         }
         break;
     case 52:
-        var5 = sub_8017178(&data->textState, &data->field_1D, &data->field_1E, &gUnknown_082F0294, &gUnknown_082F032C);
+        var5 = sub_8017178(&data->textState, &data->field_1D, &data->field_1E, &gUnknown_082F0294, &sMenuTemplate_TradingBoardRequestType);
         if (var5 != -1)
         {
             switch (var5)
             {
             case -2:
             case 18:
-                sub_801807C(&gUnknown_02022C40);
+                ResetUnionRoomTrade(&sUnionRoomTrade);
                 sub_8010FCC(0, 0, 0);
-                sub_801568C(gUnknown_082EF4FC);
+                sub_801568C(sText_RegistrationCanceled);
                 break;
             default:
-                gUnknown_02022C40.type = var5;
+                sUnionRoomTrade.type = var5;
                 data->state = 55;
                 break;
             }
         }
         break;
     case 55:
-        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
-        sub_801568C(gUnknown_082EF520);
+        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        sub_801568C(sText_RegistraionCompleted);
         break;
     case 44:
         switch (sub_80170B8(&data->textState, FALSE))
@@ -3953,16 +2916,16 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 56:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF5B8))
+        if (PrintOnTextbox(&data->textState, sText_RegistrationCanceled2))
         {
             sub_8010FCC(0, 0, 0);
-            sub_801807C(&gUnknown_02022C40);
+            ResetUnionRoomTrade(&sUnionRoomTrade);
             sub_801818C(TRUE);
             data->state = 4;
         }
         break;
     case 45:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF1EC))
+        if (PrintOnTextbox(&data->textState, sText_XCheckedTradingBoard))
             data->state = 46;
         break;
     case 46:
@@ -3986,18 +2949,18 @@ void sub_80156E0(u8 taskId)
                 {
                 case 0:
                     sub_8018404(gStringVar1, &data->field_0->arr[var5]);
-                    sub_8015664(49, gUnknown_082EF65C);
+                    sub_8015664(49, sText_AskTrainerToMakeTrade);
                     taskData[1] = var5;
                     break;
                 case 1:
                     sub_8018404(gStringVar1, &data->field_0->arr[var5]);
                     StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
-                    sub_8015664(46, gUnknown_082EF6E4);
+                    sub_8015664(46, sText_DontHaveTypeTrainerWants);
                     break;
                 case 2:
                     sub_8018404(gStringVar1, &data->field_0->arr[var5]);
                     StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
-                    sub_8015664(46, gUnknown_082EF718);
+                    sub_8015664(46, sText_DontHaveEggTrainerWants);
                     break;
                 }
                 break;
@@ -4018,23 +2981,23 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 50:
-        if (PrintOnTextbox(&data->textState, gUnknown_082EF4C4))
+        if (PrintOnTextbox(&data->textState, sText_WhichMonWillYouOffer))
         {
-            gUnknown_02022C40.field_0 = 2;
+            sUnionRoomTrade.field_0 = 2;
             memcpy(&gUnknown_02022C38, &data->field_0->arr[taskData[1]].unk.field_0.unk_00, sizeof(gUnknown_02022C38));
-            gUnknown_02022C3E = data->field_0->arr[taskData[1]].unk.field_0.type;
-            gUnknown_02022C3C = data->field_0->arr[taskData[1]].unk.field_0.species;
-            gFieldCallback = sub_80AF128;
-            sub_81B8904(9, CB2_ReturnToField);
+            gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].unk.field_0.type;
+            gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].unk.field_0.species;
+            gFieldCallback = FieldCB_ContinueScriptUnionRoom;
+            ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_TRADE, CB2_ReturnToField);
             sub_80156B0(data);
-            gUnknown_02022C40.field_8 = taskData[1];
+            sUnionRoomTrade.field_8 = taskData[1];
         }
         break;
     case 51:
         gUnknown_02022C2C = 0x44;
         sub_8012188(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, 0x44);
         sub_8018404(gStringVar1, &data->field_0->arr[taskData[1]]);
-        sub_8017020(gUnknown_082EE17C[2]);
+        sub_8017020(sCommunicatingWaitTexts[2]);
         data->state = 25;
         break;
     case 26:
@@ -4097,20 +3060,20 @@ bool32 sub_80168DC(struct UnkStruct_URoom *arg0)
     return TRUE;
 }
 
-void sub_8016934(void)
+void InitUnionRoom(void)
 {
     struct UnkStruct_URoom *ptr;
 
-    gUnknown_02022C20[0] = EOS;
+    sUnionRoomPlayerName[0] = EOS;
     CreateTask(sub_801697C, 0);
     gUnknown_02022C30.uRoom = gUnknown_02022C30.uRoom; // Needed to match.
-    gUnknown_02022C30.uRoom = ptr = AllocZeroed(0x26C);
+    gUnknown_02022C30.uRoom = ptr = AllocZeroed(sizeof(struct UnkStruct_URoom));
     gUnknown_03000DA8 = gUnknown_02022C30.uRoom;
     ptr->state = 0;
     ptr->textState = 0;
     ptr->field_10 = 0;
     ptr->field_12 = 0;
-    gUnknown_02022C20[0] = EOS;
+    sUnionRoomPlayerName[0] = EOS;
 }
 
 void sub_801697C(u8 taskId)
@@ -4149,7 +3112,7 @@ void sub_801697C(u8 taskId)
         {
         case 1:
         case 2:
-            if (gUnknown_02022C20[0] == EOS)
+            if (sUnionRoomPlayerName[0] == EOS)
             {
                 for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
                 {
@@ -4158,7 +3121,7 @@ void sub_801697C(u8 taskId)
                         sub_8018404(text, &structPtr->field_0->arr[i]);
                         if (sub_800E540(ReadAsU16(structPtr->field_0->arr[i].unk.field_0.unk_00.playerTrainerId), text))
                         {
-                            StringCopy(gUnknown_02022C20, text);
+                            StringCopy(sUnionRoomPlayerName, text);
                             break;
                         }
                     }
@@ -4182,12 +3145,12 @@ void sub_801697C(u8 taskId)
     }
 }
 
-bool16 sp182_move_string(void)
+bool16 BufferUnionRoomPlayerName(void)
 {
-    if (gUnknown_02022C20[0] != EOS)
+    if (sUnionRoomPlayerName[0] != EOS)
     {
-        StringCopy(gStringVar1, gUnknown_02022C20);
-        gUnknown_02022C20[0] = EOS;
+        StringCopy(gStringVar1, sUnionRoomPlayerName);
+        sUnionRoomPlayerName[0] = EOS;
         return TRUE;
     }
     else
@@ -4282,11 +3245,11 @@ void sub_8016CA0(u8 taskId)
     for (i = 0; i < 4; i++)
     {
         r4 = sub_800DE7C(&sp0.field_0, sp0.playerName, i);
-        if (!sub_8013D88(sp0.field_0.unk_0a_0, gTasks[taskId].data[4]))
+        if (!sub_8013D88(sp0.field_0.activity, gTasks[taskId].data[4]))
         {
             sp0 = gUnknown_082F045C;
         }
-        if (sp0.field_0.unk_00.unk_00_0 == 1)
+        if (sp0.field_0.unk_00.language == 1)
         {
             sp0 = gUnknown_082F045C;
         }
@@ -4328,7 +3291,7 @@ void sub_8016E24(u8 taskId)
     for (i = 0; i < 4; i++)
     {
         sub_800DE7C(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i);
-        if (!sub_8013D88(ptr[0]->arr[i].unk0.field_0.unk_0a_0, gTasks[taskId].data[2]))
+        if (!sub_8013D88(ptr[0]->arr[i].unk0.field_0.activity, gTasks[taskId].data[2]))
         {
             ptr[0]->arr[i].unk0 = gUnknown_082F045C;
         }
@@ -4343,11 +3306,11 @@ void sub_8016E24(u8 taskId)
     }
 }
 
-bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1)
+bool32 sub_8016F1C(struct GFtgtGname *arg0, s16 arg1)
 {
     if (arg1 == 7)
     {
-        if (!arg0->unk_00.unk_00_5)
+        if (!arg0->unk_00.hasCard)
         {
             return FALSE;
         }
@@ -4358,7 +3321,7 @@ bool32 sub_8016F1C(struct UnkLinkRfuStruct_02022B14 *arg0, s16 arg1)
     }
     else if (arg1 == 8)
     {
-        if (!arg0->unk_00.unk_00_4)
+        if (!arg0->unk_00.hasNews)
         {
             return FALSE;
         }
@@ -4408,7 +3371,7 @@ u8 sub_8016FF0(struct UnkStruct_Main4 * a0, u32 a1)
 
 bool32 sub_8017020(const u8 *src)
 {
-    sub_81973A4();
+    LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
     StringExpandPlaceholders(gStringVar4, src);
     AddTextPrinterWithCustomSpeedForMessage(FALSE, 1);
@@ -4432,7 +3395,7 @@ bool8 PrintOnTextbox(u8 *textState, const u8 *str)
     switch (*textState)
     {
     case 0:
-        sub_81973A4();
+        LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 1);
         StringExpandPlaceholders(gStringVar4, str);
         AddTextPrinterForMessage_2(TRUE);
@@ -4486,7 +3449,7 @@ u8 sub_8017118(const struct WindowTemplate * template)
     u8 windowId = AddWindow(template);
     DrawStdWindowFrame(windowId, FALSE);
     FillWindowPixelBuffer(windowId, 0xFF);
-    sub_80173E0(windowId, 1, gUnknown_082EFD94, 8, 1, 6);
+    sub_80173E0(windowId, 1, sText_NameWantedOfferLv, 8, 1, 6);
     CopyWindowToVram(windowId, 2);
     PutWindowTilemap(windowId);
     return windowId;
@@ -4735,19 +3698,19 @@ bool32 sub_8017678(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
 {
     s32 i;
 
-    if (arg0->field_0.unk_0a_0 != arg1->field_0.unk_0a_0)
+    if (arg0->field_0.activity != arg1->field_0.activity)
     {
         return TRUE;
     }
 
-    if (arg0->field_0.unk_0a_7 != arg1->field_0.unk_0a_7)
+    if (arg0->field_0.started != arg1->field_0.started)
     {
         return TRUE;
     }
 
     for (i = 0; i < 4; i++)
     {
-        if (arg0->field_0.unk_04[i] != arg1->field_0.unk_04[i])
+        if (arg0->field_0.child_sprite_gender[i] != arg1->field_0.child_sprite_gender[i])
         {
             return TRUE;
         }
@@ -4812,16 +3775,16 @@ void sub_80177B8(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4,
     u8 sp0[6];
 
     ConvertIntToDecimalStringN(gStringVar4, id + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringAppend(gStringVar4, gText_Colon);
+    StringAppend(gStringVar4, sText_Colon);
     sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, 0);
     arg1 += 18;
-    r2 = arg3->unk.field_0.unk_0a_0;
+    r2 = arg3->unk.field_0.activity;
     if (arg3->field_1A_0 == 1 && !(r2 & 0x40))
     {
         sub_8018404(gStringVar4, arg3);
         sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, arg4);
         ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
-        StringCopy(gStringVar4, gText_UnkCtrlCodeF907);
+        StringCopy(gStringVar4, sText_ID);
         StringAppend(gStringVar4, sp0);
         sub_80173E0(arg0, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x88), arg2, arg4);
     }
@@ -4836,7 +3799,7 @@ void sub_80178A0(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4,
         sub_8018404(gStringVar4, arg3);
         sub_80173E0(arg0, 1, gStringVar4, arg1, arg2, arg4);
         ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
-        StringCopy(gStringVar4, gText_UnkCtrlCodeF907);
+        StringCopy(gStringVar4, sText_ID);
         StringAppend(gStringVar4, sp0);
         sub_80173E0(arg0, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x68), arg2, arg4);
     }
@@ -4891,18 +3854,18 @@ s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
 
     struct UnkStruct_x20 * r5 = &arg0->arr[arg2];
 
-    if (!r5->unk.field_0.unk_0a_7 && arg1 == 0)
+    if (!r5->unk.field_0.started && arg1 == 0)
     {
         sub_8018404(gStringVar1, r5);
         r2 = sub_800E540(ReadAsU16(r5->unk.field_0.unk_00.playerTrainerId), gStringVar1);
-        if (r5->unk.field_0.unk_0a_0 == 0x45)
+        if (r5->unk.field_0.activity == 0x45)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EE6B8[r2][playerGender]);
+            StringExpandPlaceholders(gStringVar4, sJoinChatTexts[r2][playerGender]);
             return 2;
         }
         else
         {
-            sub_8017020(gUnknown_082EE17C[r2]);
+            sub_8017020(sCommunicatingWaitTexts[r2]);
             return 1;
         }
     }
@@ -4913,22 +3876,22 @@ s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
         {
             playerGender = (r5->unk.field_0.unk_00.playerTrainerId[arg1 + 1] >> 3) & 1;
         }
-        switch (r5->unk.field_0.unk_0a_0 & 0x3F)
+        switch (r5->unk.field_0.activity & 0x3F)
         {
         case 1:
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EEEAC[playerGender][Random() % 4]);
+            StringExpandPlaceholders(gStringVar4, sBattleReactionTexts[playerGender][Random() % 4]);
             break;
         case 4:
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EF1CC[playerGender][Random() % 2]);
+            StringExpandPlaceholders(gStringVar4, sTradeReactionTexts[playerGender][Random() % 2]);
             break;
         case 5:
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EF010[playerGender][Random() % 4]);
+            StringExpandPlaceholders(gStringVar4, sChatReactionTexts[playerGender][Random() % 4]);
             break;
         case 8:
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EF100[playerGender][Random() % 2]);
+            StringExpandPlaceholders(gStringVar4, sTrainerCardReactionTexts[playerGender][Random() % 2]);
             break;
         default:
-            StringExpandPlaceholders(gStringVar4, gUnknown_082EE6C8);
+            StringExpandPlaceholders(gStringVar4, sText_TrainerAppearsBusy);
             break;
         }
         return 0;
@@ -4940,17 +3903,17 @@ void nullsub_14(u8 windowId, s32 itemId, u8 y)
 
 }
 
-void sub_8017B3C(u8 arg0, u8 arg1, struct UnkLinkRfuStruct_02022B14 * arg2, const u8 * str, u8 arg4)
+void sub_8017B3C(u8 arg0, u8 arg1, struct GFtgtGname * arg2, const u8 * str, u8 arg4)
 {
     u8 sp8[4];
     u16 r8 = arg2->species;
     u8 r7 = arg2->type;
-    u8 r9 = arg2->unk_0b_1;
+    u8 r9 = arg2->level;
 
     sub_80173E0(arg0, 1, str, 8, arg1, arg4);
     if (r8 == SPECIES_EGG)
     {
-        sub_80173E0(arg0, 1, gUnknown_082EF7D0, 0x44, arg1, arg4);
+        sub_80173E0(arg0, 1, sText_EggTrade, 0x44, arg1, arg4);
     }
     else
     {
@@ -4964,7 +3927,7 @@ void sub_8017B3C(u8 arg0, u8 arg1, struct UnkLinkRfuStruct_02022B14 * arg2, cons
 void sub_8017BE8(u8 windowId, s32 itemId, u8 y)
 {
     struct UnkStruct_Leader *leader = gUnknown_02022C30.leader;
-    struct UnkLinkRfuStruct_02022B14 *rfu;
+    struct GFtgtGname *rfu;
     s32 i, j;
     u8 sp4[11];
 
@@ -5055,16 +4018,16 @@ void sub_8017D9C(u8 *dst, s32 arg1, u32 playerGender)
     switch (arg1)
     {
     case 0x41:
-        StringExpandPlaceholders(dst, gUnknown_082EEA68[playerGender]);
+        StringExpandPlaceholders(dst, sBattleDeclinedTexts[playerGender]);
         break;
     case 0x45:
-        StringExpandPlaceholders(dst, gUnknown_082EED3C[playerGender]);
+        StringExpandPlaceholders(dst, sChatDeclinedTexts[playerGender]);
         break;
     case 0x44:
-        StringExpandPlaceholders(dst, gUnknown_082EF7B0);
+        StringExpandPlaceholders(dst, sText_TradeOfferRejected);
         break;
     case 0x48:
-        StringExpandPlaceholders(dst, gUnknown_082EEB08[playerGender]);
+        StringExpandPlaceholders(dst, sShowTrainerCardDeclinedTexts[playerGender]);
         break;
     }
 }
@@ -5077,13 +4040,13 @@ void sub_8017E00(u8 *dst, u8 arg1)
     switch (arg1)
     {
     case 0x41:
-        StringCopy(dst, gUnknown_082EE984[mpId][gender][0]);
+        StringCopy(dst, sStartActivityTexts[mpId][gender][0]);
         break;
     case 0x44:
-        StringCopy(dst, gUnknown_082EE984[mpId][gender][2]);
+        StringCopy(dst, sStartActivityTexts[mpId][gender][2]);
         break;
     case 0x45:
-        StringCopy(dst, gUnknown_082EE984[mpId][gender][1]);
+        StringCopy(dst, sStartActivityTexts[mpId][gender][1]);
         break;
     }
 }
@@ -5097,19 +4060,19 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
     switch (arg2[0])
     {
     case 0x41:
-        StringExpandPlaceholders(dst, gUnknown_082EE3DC);
+        StringExpandPlaceholders(dst, sText_BattleChallenge);
         result = 1;
         break;
     case 0x45:
-        StringExpandPlaceholders(dst, gUnknown_082EE430);
+        StringExpandPlaceholders(dst, sText_ChatInvitation);
         result = 1;
         break;
     case 0x44:
-        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, gUnknown_02022C40.playerLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[gUnknown_02022C40.playerSpecies]);
+        ConvertIntToDecimalStringN(arg3->field_58 + 0x00, sUnionRoomTrade.playerLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringCopy(arg3->field_58 + 0x10, gSpeciesNames[sUnionRoomTrade.playerSpecies]);
         for (i = 0; i < 4; i++)
         {
-            if (gUnknown_03007890->unk_14[i].unk_04 == 2)
+            if (gRfuLinkStatus->partner[i].serialNo == 2)
             {
                 ConvertIntToDecimalStringN(arg3->field_58 + 0x20, arg2[2], STR_CONV_MODE_LEFT_ALIGN, 3);
                 StringCopy(arg3->field_58 + 0x30, gSpeciesNames[arg2[1]]);
@@ -5119,7 +4082,7 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
         }
         if (species == SPECIES_EGG)
         {
-            StringCopy(dst, gUnknown_082EE4F0);
+            StringCopy(dst, sText_OfferToTradeEgg);
         }
         else
         {
@@ -5127,16 +4090,16 @@ s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
             {
                 DynamicPlaceholderTextUtil_SetPlaceholderPtr(i, arg3->field_58 + 0x10 * i);
             }
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(dst, gUnknown_082EE47C);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dst, sText_OfferToTradeMon);
         }
         result = 1;
         break;
     case 0x48:
-        StringExpandPlaceholders(dst, gUnknown_082EE380);
+        StringExpandPlaceholders(dst, sText_ShowTrainerCard);
         result = 1;
         break;
     case 0x40:
-        StringExpandPlaceholders(dst, gUnknown_082EE544);
+        StringExpandPlaceholders(dst, sText_ChatDropped);
         result = 2;
         break;
     }
@@ -5169,14 +4132,14 @@ bool32 InUnionRoom(void)
            ? TRUE : FALSE;
 }
 
-bool32 sub_8018024(void)
+bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
 {
     s32 i;
     s32 count = 0;
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if (   GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
+        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
         {
             count++;
@@ -5184,16 +4147,12 @@ bool32 sub_8018024(void)
     }
 
     if (count > 1)
-    {
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
-void sub_801807C(struct TradeUnkStruct *arg0)
+static void ResetUnionRoomTrade(struct UnionRoomTrade *arg0)
 {
     arg0->field_0 = 0;
     arg0->type = 0;
@@ -5205,34 +4164,30 @@ void sub_801807C(struct TradeUnkStruct *arg0)
     arg0->personality = 0;
 }
 
-void sub_8018090(void)
+void Script_ResetUnionRoomTrade(void)
 {
-    sub_801807C(&gUnknown_02022C40);
+    ResetUnionRoomTrade(&sUnionRoomTrade);
 }
 
-bool32 sub_80180A0(u32 monId, struct TradeUnkStruct *arg1)
+static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade)
 {
-    arg1->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
-    arg1->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-    arg1->playerPersonality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
-    if (arg1->playerSpecies == SPECIES_EGG)
-    {
+    trade->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    trade->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    trade->playerPersonality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+    if (trade->playerSpecies == SPECIES_EGG)
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
-void sub_80180E8(u32 monId, struct TradeUnkStruct *arg1)
+static void RegisterTradeMon(u32 monId, struct UnionRoomTrade *trade)
 {
-    arg1->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
-    arg1->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-    arg1->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
+    trade->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+    trade->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+    trade->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
 }
 
-u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId)
+static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *trade, u8 multiplayerId)
 {
     u16 response = 0;
     u16 species;
@@ -5241,15 +4196,17 @@ u32 sub_8018120(struct TradeUnkStruct *arg0, u8 multiplayerId)
     u16 cur_species;
     s32 i;
 
+    // player
     if (multiplayerId == 0)
     {
-        species = arg0->playerSpecies;
-        personality = arg0->playerPersonality;
+        species = trade->playerSpecies;
+        personality = trade->playerPersonality;
     }
+    // partner
     else
     {
-        species = arg0->species;
-        personality = arg0->personality;
+        species = trade->species;
+        personality = trade->personality;
     }
 
     for (i = 0; i < gPlayerPartyCount; i++)
@@ -5279,7 +4236,7 @@ void sub_801818C(bool32 arg0)
     gUnknown_02022C2C = 0;
     if (arg0)
     {
-        sub_8010FCC(gUnknown_02022C40.type, gUnknown_02022C40.playerSpecies, gUnknown_02022C40.playerLevel);
+        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         sub_8011090(0x40, 0, 0);
     }
 }
@@ -5287,7 +4244,7 @@ void sub_801818C(bool32 arg0)
 void sub_80181CC(void)
 {
     ScriptContext2_Enable();
-    ScriptFreezeEventObjects();
+    ScriptFreezeObjectEvents();
 }
 
 u8 sub_80181DC(struct UnkStruct_URoom *arg0)
@@ -5321,7 +4278,7 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
 
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->playerName);
 
-    StringCopy(arg1->field_174, gUnknown_082EFF50[trainerCard->stars]);
+    StringCopy(arg1->field_174, sCardColorTexts[trainerCard->stars]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_174);
 
     ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -5332,7 +4289,7 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, arg1->field_C0[3]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, arg1->field_C0[4]);
 
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082EFF64);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, sText_TrainerCardInfoPage1);
     StringCopy(gStringVar4, arg1->field_1A4);
 
     n = trainerCard->linkBattleWins;
@@ -5354,23 +4311,23 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
     ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
     {
-        CopyEasyChatWord(arg1->field_C0[i + 3], trainerCard->var_28[i]);
+        CopyEasyChatWord(arg1->field_C0[i + 3], trainerCard->easyChatProfile[i]);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, arg1->field_C0[i + 3]);
     }
 
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082EFFA4);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, sText_TrainerCardInfoPage2);
     StringAppend(gStringVar4, arg1->field_1A4);
 
     if (arg2 == TRUE)
     {
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082F0020);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, sText_FinishedCheckingPlayersTrainerCard);
         StringAppend(gStringVar4, arg1->field_1A4);
     }
     else if (arg2 == FALSE)
     {
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_082F0018[trainerCard->gender]);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, sGladToMeetYouTexts[trainerCard->gender]);
         StringAppend(gStringVar4, arg1->field_1A4);
     }
 }
@@ -5378,5 +4335,5 @@ void sub_8018220(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
 void sub_8018404(u8 *dest, struct UnkStruct_x20 *arg1)
 {
     StringCopy7(dest, arg1->unk.playerName);
-    ConvertInternationalString(dest, arg1->unk.field_0.unk_00.unk_00_0);
+    ConvertInternationalString(dest, arg1->unk.field_0.unk_00.language);
 }

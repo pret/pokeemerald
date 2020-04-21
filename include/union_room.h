@@ -1,13 +1,13 @@
 #ifndef GUARD_UNION_ROOM_H
 #define GUARD_UNION_ROOM_H
 
-#include "librfu.h"
+#include "link_rfu.h"
 
 // Exported type declarations
 
 struct UnkStruct_Shared
 {
-    struct UnkLinkRfuStruct_02022B14 field_0;
+    struct GFtgtGname field_0;
     u8 ALIGNED(4) playerName[PLAYER_NAME_LENGTH + 1];
 };
 
@@ -135,7 +135,7 @@ union UnkUnion_Main
     struct UnkStruct_URoom *uRoom;
 };
 
-struct TradeUnkStruct
+struct UnionRoomTrade
 {
     u16 field_0;
     u16 type;
@@ -154,10 +154,10 @@ struct TradeUnkStruct
 
 extern u8 gUnknown_02022C2C;
 extern union UnkUnion_Main gUnknown_02022C30;
-extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38;
+extern struct GFtgtGnameSub gUnknown_02022C38;
 
-extern u16 gUnknown_02022C3C;
-extern u8 gUnknown_02022C3E;
+extern u16 gUnionRoomOfferedSpecies;
+extern u8 gUnionRoomRequestedMonType;
 
 // Exported ROM declarations
 

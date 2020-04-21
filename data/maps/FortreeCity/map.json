@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 31,
       "y": 3,
       "elevation": 4,
@@ -35,11 +35,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_1E25B6",
+      "script": "FortreeCity_EventScript_Man",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_1",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 32,
       "y": 16,
       "elevation": 3,
@@ -48,11 +48,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_1E25DE",
+      "script": "FortreeCity_EventScript_Girl",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 32,
       "y": 10,
       "elevation": 3,
@@ -61,11 +61,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_1E25BF",
+      "script": "FortreeCity_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 11,
       "y": 14,
       "elevation": 4,
@@ -74,11 +74,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_1E25F0",
+      "script": "FortreeCity_EventScript_Boy",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_OLD_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
       "x": 8,
       "y": 10,
       "elevation": 3,
@@ -87,11 +87,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_1E25E7",
+      "script": "FortreeCity_EventScript_OldMan",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GAMEBOY_KID",
+      "graphics_id": "OBJ_EVENT_GFX_GAMEBOY_KID",
       "x": 9,
       "y": 16,
       "elevation": 3,
@@ -100,11 +100,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_1E25F9",
+      "script": "FortreeCity_EventScript_GameboyKid",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_KECLEON_1",
+      "graphics_id": "OBJ_EVENT_GFX_KECLEON_1",
       "x": 25,
       "y": 8,
       "elevation": 3,
@@ -113,7 +113,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FortreeCity_EventScript_1E2614",
+      "script": "FortreeCity_EventScript_Kecleon",
       "flag": "FLAG_HIDE_FORTREE_CITY_KECLEON"
     }
   ],
@@ -190,7 +190,7 @@
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FortreeCity_EventScript_1E2602"
+      "script": "FortreeCity_EventScript_CitySign"
     },
     {
       "type": "sign",
@@ -214,7 +214,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "FortreeCity_EventScript_1E260B"
+      "script": "FortreeCity_EventScript_GymSign"
     },
     {
       "type": "sign",

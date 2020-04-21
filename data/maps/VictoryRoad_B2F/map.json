@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 15,
       "y": 6,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_2368D5",
+      "script": "VictoryRoad_B2F_EventScript_Vito",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 43,
       "y": 14,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "VictoryRoad_B2F_EventScript_2368EC",
+      "script": "VictoryRoad_B2F_EventScript_Owen",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 2,
       "y": 17,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_236903",
+      "script": "VictoryRoad_B2F_EventScript_Caroline",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 35,
       "y": 22,
       "elevation": 3,
@@ -63,11 +63,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_23691A",
+      "script": "VictoryRoad_B2F_EventScript_Julie",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 13,
       "y": 8,
       "elevation": 3,
@@ -80,7 +80,7 @@
       "flag": "FLAG_ITEM_VICTORY_ROAD_B2F_FULL_HEAL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 25,
       "y": 18,
       "elevation": 4,
@@ -89,11 +89,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_236948",
+      "script": "VictoryRoad_B2F_EventScript_Dianne",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 25,
       "y": 21,
       "elevation": 4,
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "VictoryRoad_B2F_EventScript_236931",
+      "script": "VictoryRoad_B2F_EventScript_Felix",
       "flag": "0"
     }
   ],

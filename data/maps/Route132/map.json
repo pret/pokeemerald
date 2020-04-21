@@ -26,7 +26,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
       "x": 40,
       "y": 13,
       "elevation": 1,
@@ -35,11 +35,11 @@
       "movement_range_y": 3,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route132_EventScript_1F74EA",
+      "script": "Route132_EventScript_Gilbert",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 10,
       "y": 6,
       "elevation": 1,
@@ -48,11 +48,11 @@
       "movement_range_y": 3,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route132_EventScript_1F7501",
+      "script": "Route132_EventScript_Dana",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 10,
       "y": 11,
       "elevation": 3,
@@ -65,7 +65,7 @@
       "flag": "FLAG_ITEM_ROUTE_132_RARE_CANDY"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 9,
       "y": 15,
       "elevation": 3,
@@ -74,11 +74,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route132_EventScript_1F752F",
+      "script": "Route132_EventScript_Kiyo",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 49,
       "y": 28,
       "elevation": 3,
@@ -87,11 +87,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Route132_EventScript_1F7518",
+      "script": "Route132_EventScript_Ronald",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 33,
       "y": 26,
       "elevation": 3,
@@ -100,11 +100,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route132_EventScript_1F7546",
+      "script": "Route132_EventScript_Paxton",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_5",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 33,
       "y": 31,
       "elevation": 3,
@@ -113,11 +113,11 @@
       "movement_range_y": 4,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route132_EventScript_1F755D",
+      "script": "Route132_EventScript_Darcy",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_F",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 21,
       "y": 30,
       "elevation": 3,
@@ -126,11 +126,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route132_EventScript_1F758B",
+      "script": "Route132_EventScript_Makayla",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 21,
       "y": 25,
       "elevation": 3,
@@ -139,11 +139,11 @@
       "movement_range_y": 4,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route132_EventScript_1F7574",
+      "script": "Route132_EventScript_Jonathan",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 20,
       "y": 27,
       "elevation": 3,

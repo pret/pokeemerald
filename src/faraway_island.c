@@ -12,10 +12,10 @@
 #include "constants/vars.h"
 
 static u8 sub_81D4890(u8);
-static bool8 sub_81D4C14(struct EventObject*, u8);
-static u8 sub_81D4C9C(struct EventObject*, u8);
-static u8 sub_81D4C58(struct EventObject*, u8);
-static u8 sub_81D4CE0(struct EventObject*, u8);
+static bool8 sub_81D4C14(struct ObjectEvent*, u8);
+static u8 sub_81D4C9C(struct ObjectEvent*, u8);
+static u8 sub_81D4C58(struct ObjectEvent*, u8);
+static u8 sub_81D4CE0(struct ObjectEvent*, u8);
 static u8 sub_81D4D24(u8);
 static bool8 CanMewWalkToCoords(s16, s16);
 
@@ -36,26 +36,26 @@ static const s16 sFarawayIslandRockCoords[4][2] =
     {20, 20},
 };
 
-static u8 GetMewEventObjectId(void)
+static u8 GetMewObjectEventId(void)
 {
-    u8 eventObjectId;
-    TryGetEventObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectId);
-    return eventObjectId;
+    u8 objectEventId;
+    TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    return objectEventId;
 }
 
 u32 GetMewMoveDirection(void)
 {
     u8 i;
     int skip;
-    struct EventObject *mew = &gEventObjects[GetMewEventObjectId()];
+    struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
-    sPlayerToMewDeltaX = gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.x - mew->currentCoords.x;
-    sPlayerToMewDeltaY = gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.y - mew->currentCoords.y;
+    sPlayerToMewDeltaX = gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x - mew->currentCoords.x;
+    sPlayerToMewDeltaY = gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y - mew->currentCoords.y;
     for (i = 0; i < ARRAY_COUNT(sMewDirectionCandidates); i++)
         sMewDirectionCandidates[i] = DIR_NONE;
 
-    if (gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.x == gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x
-     && gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.y == gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y)
+    if (gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x == gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x
+     && gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y == gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y)
     {
         return DIR_NONE;
     }
@@ -70,10 +70,10 @@ u32 GetMewMoveDirection(void)
 
     for (i = 0; i < ARRAY_COUNT(sFarawayIslandRockCoords); i++)
     {
-        if (gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.x == sFarawayIslandRockCoords[i][0])
+        if (gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x == sFarawayIslandRockCoords[i][0])
         {
             skip = 0;
-            if (gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.y < sFarawayIslandRockCoords[i][1])
+            if (gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y < sFarawayIslandRockCoords[i][1])
             {
                 if (mew->currentCoords.y <= sFarawayIslandRockCoords[i][1])
                     skip = 1;
@@ -88,7 +88,7 @@ u32 GetMewMoveDirection(void)
             {
                 if (sPlayerToMewDeltaX > 0)
                 {
-                    if (mew->currentCoords.x + 1 == gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.x)
+                    if (mew->currentCoords.x + 1 == gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x)
                     {
                         if (CanMewWalkToCoords(mew->currentCoords.x + 1, mew->currentCoords.y))
                             return DIR_EAST;
@@ -96,14 +96,14 @@ u32 GetMewMoveDirection(void)
                 }
                 else if (sPlayerToMewDeltaX < 0)
                 {
-                    if (mew->currentCoords.x - 1 == gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.x)
+                    if (mew->currentCoords.x - 1 == gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x)
                     {
                         if (CanMewWalkToCoords(mew->currentCoords.x - 1, mew->currentCoords.y))
                             return DIR_WEST;
                     }
                 }
 
-                if (mew->currentCoords.x == gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.x)
+                if (mew->currentCoords.x == gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x)
                 {
                     if (sPlayerToMewDeltaY > 0)
                     {
@@ -119,10 +119,10 @@ u32 GetMewMoveDirection(void)
             }
         }
 
-        if (gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.y == sFarawayIslandRockCoords[i][1])
+        if (gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y == sFarawayIslandRockCoords[i][1])
         {
             skip = 0;
-            if (gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.x < sFarawayIslandRockCoords[i][0])
+            if (gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x < sFarawayIslandRockCoords[i][0])
             {
                 if (mew->currentCoords.x <= sFarawayIslandRockCoords[i][0])
                     skip = 1;
@@ -137,7 +137,7 @@ u32 GetMewMoveDirection(void)
             {
                 if (sPlayerToMewDeltaY > 0)
                 {
-                    if (mew->currentCoords.y + 1 == gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.y)
+                    if (mew->currentCoords.y + 1 == gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y)
                     {
                         if (CanMewWalkToCoords(mew->currentCoords.x, mew->currentCoords.y + 1))
                             return DIR_SOUTH;
@@ -145,14 +145,14 @@ u32 GetMewMoveDirection(void)
                 }
                 else if (sPlayerToMewDeltaY < 0)
                 {
-                    if (mew->currentCoords.y - 1 == gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.y)
+                    if (mew->currentCoords.y - 1 == gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y)
                     {
                         if (CanMewWalkToCoords(mew->currentCoords.x, mew->currentCoords.y - 1))
                             return DIR_NORTH;
                     }
                 }
 
-                if (mew->currentCoords.y == gEventObjects[gPlayerAvatar.eventObjectId].previousCoords.y)
+                if (mew->currentCoords.y == gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y)
                 {
                     if (sPlayerToMewDeltaX > 0)
                     {
@@ -211,13 +211,13 @@ u32 GetMewMoveDirection(void)
 
     if (sPlayerToMewDeltaY == 0)
     {
-        if (gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y > mew->currentCoords.y)
+        if (gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y > mew->currentCoords.y)
         {
             if (CanMewWalkToCoords(mew->currentCoords.x, mew->currentCoords.y - 1))
                 return DIR_NORTH;
         }
 
-        if (gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y < mew->currentCoords.y)
+        if (gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y < mew->currentCoords.y)
         {
             if (CanMewWalkToCoords(mew->currentCoords.x, mew->currentCoords.y + 1))
                 return DIR_SOUTH;
@@ -232,13 +232,13 @@ u32 GetMewMoveDirection(void)
 
     if (sPlayerToMewDeltaX == 0)
     {
-        if (gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x > mew->currentCoords.x)
+        if (gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x > mew->currentCoords.x)
         {
             if (CanMewWalkToCoords(mew->currentCoords.x - 1, mew->currentCoords.y))
                 return DIR_WEST;
         }
 
-        if (gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x < mew->currentCoords.x)
+        if (gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x < mew->currentCoords.x)
         {
             if (CanMewWalkToCoords(mew->currentCoords.x + 1, mew->currentCoords.y))
                 return DIR_EAST;
@@ -256,8 +256,8 @@ u32 GetMewMoveDirection(void)
 
 static bool8 CanMewWalkToCoords(s16 x, s16 y)
 {
-    if (gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x == x
-     && gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y == y)
+    if (gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x == x
+     && gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y == y)
     {
         return FALSE;
     }
@@ -269,7 +269,7 @@ static u8 sub_81D4890(u8 ignoredDir)
 {
     u8 i;
     u8 count = 0;
-    struct EventObject *mew = &gEventObjects[GetMewEventObjectId()];
+    struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
     for (i = 0; i < ARRAY_COUNT(sMewDirectionCandidates); i++)
         sMewDirectionCandidates[i] = DIR_NONE;
@@ -318,12 +318,12 @@ void UpdateFarawayIslandStepCounter(void)
     }
 }
 
-bool8 EventObjectIsFarawayIslandMew(struct EventObject *eventObject)
+bool8 ObjectEventIsFarawayIslandMew(struct ObjectEvent *objectEvent)
 {
     if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(FARAWAY_ISLAND_INTERIOR)
      && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FARAWAY_ISLAND_INTERIOR))
     {
-        if (eventObject->graphicsId == EVENT_OBJ_GFX_MEW)
+        if (objectEvent->graphicsId == OBJ_EVENT_GFX_MEW)
             return TRUE;
     }
 
@@ -342,7 +342,7 @@ bool8 IsMewPlayingHideAndSeek(void)
     return FALSE;
 }
 
-bool8 sub_81D4A58(struct EventObject *eventObject)
+bool8 sub_81D4A58(struct ObjectEvent *objectEvent)
 {
     if (VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER) != 0xFFFF
      && VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER) % 4 == 0)
@@ -356,7 +356,7 @@ void sub_81D4A90(void)
     s16 x;
     s16 y;
     u8 spriteId;
-    struct EventObject *mew = &gEventObjects[GetMewEventObjectId()];
+    struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
     mew->invisible = 0;
     if (gSpecialVar_0x8004 == 1)
@@ -396,7 +396,7 @@ void sub_81D4BEC(void)
         DestroySprite(&gSprites[sUnknown_0203CF50]);
 }
 
-static bool8 sub_81D4C14(struct EventObject *mew, u8 index)
+static bool8 sub_81D4C14(struct ObjectEvent *mew, u8 index)
 {
     if (sPlayerToMewDeltaY > 0 && CanMewWalkToCoords(mew->currentCoords.x, mew->currentCoords.y - 1))
     {
@@ -407,7 +407,7 @@ static bool8 sub_81D4C14(struct EventObject *mew, u8 index)
     return FALSE;
 }
 
-static u8 sub_81D4C58(struct EventObject *mew, u8 index)
+static u8 sub_81D4C58(struct ObjectEvent *mew, u8 index)
 {
     if (sPlayerToMewDeltaX < 0 && CanMewWalkToCoords(mew->currentCoords.x + 1, mew->currentCoords.y))
     {
@@ -418,7 +418,7 @@ static u8 sub_81D4C58(struct EventObject *mew, u8 index)
     return FALSE;
 }
 
-static u8 sub_81D4C9C(struct EventObject *mew, u8 index)
+static u8 sub_81D4C9C(struct ObjectEvent *mew, u8 index)
 {
     if (sPlayerToMewDeltaY < 0 && CanMewWalkToCoords(mew->currentCoords.x, mew->currentCoords.y + 1))
     {
@@ -429,7 +429,7 @@ static u8 sub_81D4C9C(struct EventObject *mew, u8 index)
     return FALSE;
 }
 
-static u8 sub_81D4CE0(struct EventObject *mew, u8 index)
+static u8 sub_81D4CE0(struct ObjectEvent *mew, u8 index)
 {
     if (sPlayerToMewDeltaX > 0 && CanMewWalkToCoords(mew->currentCoords.x - 1, mew->currentCoords.y))
     {

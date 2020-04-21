@@ -13,9 +13,10 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_GYM",
   "connections": null,
+  "shared_scripts_map": "BattlePyramidSquare01",
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 0,
       "y": 6,
       "elevation": 4,
@@ -28,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 4,
       "y": 0,
       "elevation": 4,
@@ -41,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 6,
       "y": 0,
       "elevation": 4,
@@ -54,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_LITTLE_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 4,
       "y": 4,
       "elevation": 4,
@@ -67,7 +68,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 7,
       "y": 4,
       "elevation": 4,
@@ -80,7 +81,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 1,
       "y": 1,
       "elevation": 4,
@@ -93,7 +94,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 7,
       "elevation": 4,

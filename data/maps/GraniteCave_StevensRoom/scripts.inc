@@ -1,63 +1,63 @@
 GraniteCave_StevensRoom_MapScripts:: @ 822DC7A
 	.byte 0
 
-GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
+GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	lock
 	faceplayer
-	msgbox GraniteCave_StevensRoom_Text_22DD5A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 274
-	call GraniteCave_StevensRoom_EventScript_2723E4
+	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
+	setvar VAR_0x8004, ITEM_LETTER
+	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
-	msgbox GraniteCave_StevensRoom_Text_22DDBD, MSGBOX_DEFAULT
-	giveitem_std ITEM_TM47
-	compare VAR_RESULT, 0
-	call_if_eq GraniteCave_StevensRoom_EventScript_22DD3C
-	msgbox GraniteCave_StevensRoom_Text_22DE6B, MSGBOX_DEFAULT
+	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
+	giveitem ITEM_TM47
+	compare VAR_RESULT, FALSE
+	call_if_eq GraniteCave_StevensRoom_EventScript_BagFull
+	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox GraniteCave_StevensRoom_Text_22DF6A, MSGBOX_DEFAULT
+	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
-	msgbox GraniteCave_StevensRoom_Text_22DF8C, MSGBOX_DEFAULT
+	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, 2
-	call_if_eq GraniteCave_StevensRoom_EventScript_22DD0D
-	compare VAR_FACING, 1
-	call_if_eq GraniteCave_StevensRoom_EventScript_22DD2A
-	compare VAR_FACING, 3
-	call_if_eq GraniteCave_StevensRoom_EventScript_22DD18
-	compare VAR_FACING, 4
-	call_if_eq GraniteCave_StevensRoom_EventScript_22DD18
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitNorth
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitSouth
+	compare VAR_FACING, DIR_WEST
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
+	compare VAR_FACING, DIR_EAST
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	playse SE_KAIDAN
 	removeobject 1
 	release
 	end
 
-GraniteCave_StevensRoom_EventScript_22DD0D:: @ 822DD0D
-	applymovement 1, GraniteCave_StevensRoom_Movement_22DD45
+GraniteCave_StevensRoom_EventScript_StevenExitNorth:: @ 822DD0D
+	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_22DD18:: @ 822DD18
-	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_22DD4C
-	applymovement 1, GraniteCave_StevensRoom_Movement_22DD45
+GraniteCave_StevensRoom_EventScript_StevenExitWestEast:: @ 822DD18
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_22DD2A:: @ 822DD2A
-	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_22DD4C
-	applymovement 1, GraniteCave_StevensRoom_Movement_22DD51
+GraniteCave_StevensRoom_EventScript_StevenExitSouth:: @ 822DD2A
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_22DD3C:: @ 822DD3C
-	msgbox GraniteCave_StevensRoom_Text_22DFAA, MSGBOX_DEFAULT
+GraniteCave_StevensRoom_EventScript_BagFull:: @ 822DD3C
+	msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
 	return
 
-GraniteCave_StevensRoom_Movement_22DD45: @ 822DD45
+GraniteCave_StevensRoom_Movement_StevenExit: @ 822DD45
 	walk_up
 	walk_up
 	walk_up
@@ -66,14 +66,14 @@ GraniteCave_StevensRoom_Movement_22DD45: @ 822DD45
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Movement_22DD4C: @ 822DD4C
+GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit: @ 822DD4C
 	delay_16
 	delay_16
 	delay_16
 	walk_in_place_fastest_up
 	step_end
 
-GraniteCave_StevensRoom_Movement_22DD51: @ 822DD51
+GraniteCave_StevensRoom_Movement_StevenExitSouth: @ 822DD51
 	walk_left
 	walk_up
 	walk_up
@@ -84,14 +84,14 @@ GraniteCave_StevensRoom_Movement_22DD51: @ 822DD51
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Text_22DD5A: @ 822DD5A
+GraniteCave_StevensRoom_Text_ImStevenLetterForMe: @ 822DD5A
 	.string "My name is STEVEN.\p"
 	.string "I'm interested in rare stones,\n"
 	.string "so I travel here and there.\p"
 	.string "Oh?\n"
 	.string "A LETTER for me?$"
 
-GraniteCave_StevensRoom_Text_22DDBD: @ 822DDBD
+GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
 	.string "STEVEN: Okay, thank you.\p"
 	.string "You went through all this trouble to\n"
 	.string "deliver that. I need to thank you.\p"
@@ -100,7 +100,7 @@ GraniteCave_StevensRoom_Text_22DDBD: @ 822DDBD
 	.string "It contains my favorite move,\n"
 	.string "STEEL WING.$"
 
-GraniteCave_StevensRoom_Text_22DE6B: @ 822DE6B
+GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
 	.string "STEVEN: Your POKéMON appear quite\n"
 	.string "capable.\p"
 	.string "If you keep training, you could even\n"
@@ -111,14 +111,14 @@ GraniteCave_StevensRoom_Text_22DE6B: @ 822DE6B
 	.string "our POKéNAVS.\p"
 	.string "… … … … … …$"
 
-GraniteCave_StevensRoom_Text_22DF6A: @ 822DF6A
+GraniteCave_StevensRoom_Text_RegisteredSteven: @ 822DF6A
 	.string "Registered STEVEN\n"
 	.string "in the POKéNAV.$"
 
-GraniteCave_StevensRoom_Text_22DF8C: @ 822DF8C
+GraniteCave_StevensRoom_Text_IveGotToHurryAlong: @ 822DF8C
 	.string "Now, I've got to hurry along.$"
 
-GraniteCave_StevensRoom_Text_22DFAA: @ 822DFAA
+GraniteCave_StevensRoom_Text_OhBagIsFull: @ 822DFAA
 	.string "Oh, your BAG is full…\n"
 	.string "That's too bad, then.$"
 

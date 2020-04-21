@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_M",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_SeashoreHouse_EventScript_2693FE",
+      "script": "Route109_SeashoreHouse_EventScript_Owner",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 2,
       "y": 3,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route109_SeashoreHouse_EventScript_2694E2",
+      "script": "Route109_SeashoreHouse_EventScript_Dwayne",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TUBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_TUBER_M",
       "x": 14,
       "y": 9,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route109_SeashoreHouse_EventScript_269518",
+      "script": "Route109_SeashoreHouse_EventScript_Simon",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 10,
       "y": 5,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route109_SeashoreHouse_EventScript_2694FD",
+      "script": "Route109_SeashoreHouse_EventScript_Johanna",
       "flag": "0"
     }
   ],

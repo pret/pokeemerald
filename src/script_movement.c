@@ -3,229 +3,231 @@
 #include "event_object_movement.h"
 #include "task.h"
 #include "util.h"
+#include "constants/event_objects.h"
+#include "constants/event_object_movement.h"
 
 // static functions
-static void sub_80D33AC(u8);
-static u8 sub_80D33F4(void);
-static bool8 sub_80D3408(u8, u8, const u8 *);
-static u8 sub_80D3474(u8, u8);
-static bool8 sub_80D3584(u8, u8);
-static void sub_80D35DC(u8, u8, u8, const u8 *);
-static void UnfreezeObjects(u8);
-static void sub_80D3660(u8);
-static void sub_80A2490(u8, u8, u8, const u8 *);
+static void ScriptMovement_StartMoveObjects(u8 priority);
+static u8 GetMoveObjectsTaskId(void);
+static bool8 ScriptMovement_TryAddNewMovement(u8 taskId, u8 objEventId, const u8 *movementScript);
+static u8 GetMovementScriptIdFromObjectEventId(u8 taskId, u8 objEventId);
+static bool8 IsMovementScriptFinished(u8 taskId, u8 moveScrId);
+static void ScriptMovement_AddNewMovement(u8 taskId, u8 moveScrId, u8 objEventId, const u8 *movementScript);
+static void ScriptMovement_UnfreezeActiveObjects(u8 taskId);
+static void ScriptMovement_MoveObjects(u8 taskId);
+static void ScriptMovement_TakeStep(u8 taskId, u8 moveScrId, u8 objEventId, const u8 *movementScript);
 
 // EWRAM_DATA
-static EWRAM_DATA const u8 *gUnknown_02039D90[16] = {0};
+static EWRAM_DATA const u8 *gMovementScripts[OBJECT_EVENTS_COUNT] = {0};
 
 // text
 bool8 ScriptMovement_StartObjectMovementScript(u8 localId, u8 mapNum, u8 mapGroup, const u8 *movementScript)
 {
-    u8 eventObjId;
+    u8 objEventId;
 
-    if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjId))
+    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objEventId))
         return TRUE;
-    if (!FuncIsActiveTask(sub_80D3660))
-        sub_80D33AC(50);
-    return sub_80D3408(sub_80D33F4(), eventObjId, movementScript);
+    if (!FuncIsActiveTask(ScriptMovement_MoveObjects))
+        ScriptMovement_StartMoveObjects(50);
+    return ScriptMovement_TryAddNewMovement(GetMoveObjectsTaskId(), objEventId, movementScript);
 }
 
-bool8 ScriptMovement_IsObjectMovementFinished(u8 localId, u8 mapNum, u8 mapBank)
+bool8 ScriptMovement_IsObjectMovementFinished(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    u8 eventObjId;
-    u8 r4;
-    u8 r1;
+    u8 objEventId;
+    u8 taskId;
+    u8 moveScrId;
 
-    if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapBank, &eventObjId))
+    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objEventId))
         return TRUE;
-    r4 = sub_80D33F4();
-    r1 = sub_80D3474(r4, eventObjId);
-    if (r1 == 16)
+    taskId = GetMoveObjectsTaskId();
+    moveScrId = GetMovementScriptIdFromObjectEventId(taskId, objEventId);
+    if (moveScrId == OBJECT_EVENTS_COUNT)
         return TRUE;
-    return sub_80D3584(r4, r1);
+    return IsMovementScriptFinished(taskId, moveScrId);
 }
 
-void sub_80D338C(void)
+void ScriptMovement_UnfreezeObjectEvents(void)
 {
     u8 taskId;
 
-    taskId = sub_80D33F4();
+    taskId = GetMoveObjectsTaskId();
     if (taskId != 0xFF)
     {
-        UnfreezeObjects(taskId);
+        ScriptMovement_UnfreezeActiveObjects(taskId);
         DestroyTask(taskId);
     }
 }
 
-
-static void sub_80D33AC(u8 priority)
+static void ScriptMovement_StartMoveObjects(u8 priority)
 {
     u8 taskId;
     u8 i;
 
-    taskId = CreateTask(sub_80D3660, priority);
-    for (i = 1; i < 16; i++)
+    taskId = CreateTask(ScriptMovement_MoveObjects, priority);
+
+    for (i = 1; i < NUM_TASK_DATA; i++) 
         gTasks[taskId].data[i] = 0xFFFF;
 }
 
-static u8 sub_80D33F4(void)
+static u8 GetMoveObjectsTaskId(void)
 {
-    return FindTaskIdByFunc(sub_80D3660);
+    return FindTaskIdByFunc(ScriptMovement_MoveObjects);
 }
 
-static bool8 sub_80D3408(u8 taskId, u8 eventObjId, const u8 *movementScript)
+static bool8 ScriptMovement_TryAddNewMovement(u8 taskId, u8 objEventId, const u8 *movementScript)
 {
-    u8 r4;
+    u8 moveScrId;
 
-    r4 = sub_80D3474(taskId, eventObjId);
-    if (r4 != 16)
+    moveScrId = GetMovementScriptIdFromObjectEventId(taskId, objEventId);
+    if (moveScrId != OBJECT_EVENTS_COUNT)
     {
-        if (sub_80D3584(taskId, r4) == 0)
+        if (IsMovementScriptFinished(taskId, moveScrId) == 0)
         {
             return TRUE;
         }
         else
         {
-            sub_80D35DC(taskId, r4, eventObjId, movementScript);
+            ScriptMovement_AddNewMovement(taskId, moveScrId, objEventId, movementScript);
             return FALSE;
         }
     }
-    r4 = sub_80D3474(taskId, 0xFF);
-    if (r4 == 16)
+    moveScrId = GetMovementScriptIdFromObjectEventId(taskId, OBJ_EVENT_ID_PLAYER);
+    if (moveScrId == OBJECT_EVENTS_COUNT)
     {
         return TRUE;
     }
     else
     {
-        sub_80D35DC(taskId, r4, eventObjId, movementScript);
+        ScriptMovement_AddNewMovement(taskId, moveScrId, objEventId, movementScript);
         return FALSE;
     }
 }
 
-static u8 sub_80D3474(u8 taskId, u8 b)
+static u8 GetMovementScriptIdFromObjectEventId(u8 taskId, u8 objEventId)
 {
-    u8 *ptr;
+    u8 *moveScriptId;
     u8 i;
 
-    ptr = (u8 *)&gTasks[taskId].data[1];
-    for (i = 0; i < 16; i++, ptr++)
+    moveScriptId = (u8 *)&gTasks[taskId].data[1];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++, moveScriptId++)
     {
-        if (*ptr == b)
+        if (*moveScriptId == objEventId)
             return i;
     }
-    return 16;
+    return OBJECT_EVENTS_COUNT;
 }
 
-static void sub_80D34B0(u8 taskId, u8 b, u8 **c)
+static void LoadObjectEventIdPtrFromMovementScript(u8 taskId, u8 moveScrId, u8 **pObjEventId)
 {
     u8 i;
 
-    *c = (u8 *)&gTasks[taskId].data[1];
-    for (i = 0; i < b; i++, (*c)++)
+    *pObjEventId = (u8 *)&gTasks[taskId].data[1];
+    for (i = 0; i < moveScrId; i++, (*pObjEventId)++)
         ;
 }
 
-static void sub_80D34E4(u8 taskId, u8 b, u8 c)
+static void SetObjectEventIdAtMovementScript(u8 taskId, u8 moveScrId, u8 objEventId)
 {
     u8 *ptr;
 
-    sub_80D34B0(taskId, b, &ptr);
-    *ptr = c;  //what is this supposed to do?
+    LoadObjectEventIdPtrFromMovementScript(taskId, moveScrId, &ptr);
+    *ptr = objEventId;
 }
 
-static void sub_80D3508(u8 taskId, u8 b, u8 *c)
+static void LoadObjectEventIdFromMovementScript(u8 taskId, u8 moveScrId, u8 *objEventId)
 {
     u8 *ptr;
 
-    sub_80D34B0(taskId, b, &ptr);
-    *c = *ptr;
+    LoadObjectEventIdPtrFromMovementScript(taskId, moveScrId, &ptr);
+    *objEventId = *ptr;
 }
 
-static void sub_80D352C(u8 a, u8 b)
+static void ClearMovementScriptFinished(u8 taskId, u8 moveScrId)
 {
-    u16 var = ~gBitTable[b];
+    u16 mask = ~gBitTable[moveScrId];
 
-    gTasks[a].data[0] &= var;
+    gTasks[taskId].data[0] &= mask;
 }
 
-static void sub_80D355C(u8 taskId, u8 b)
+static void SetMovementScriptFinished(u8 taskId, u8 moveScrId)
 {
-    gTasks[taskId].data[0] |= gBitTable[b];
+    gTasks[taskId].data[0] |= gBitTable[moveScrId];
 }
 
-static bool8 sub_80D3584(u8 taskId, u8 b)
+static bool8 IsMovementScriptFinished(u8 taskId, u8 moveScrId)
 {
-    u16 var = (u16)gTasks[taskId].data[0] & gBitTable[b];
+    u16 moveScriptFinished = (u16)gTasks[taskId].data[0] & gBitTable[moveScrId];
 
-    if (var != 0)
+    if (moveScriptFinished != 0)
         return TRUE;
     else
         return FALSE;
 }
 
-static void npc_obj_offscreen_culling_and_flag_update(u8 a, const u8 *movementScript)
+static void SetMovementScript(u8 moveScrId, const u8 *movementScript)
 {
-    gUnknown_02039D90[a] = movementScript;
+    gMovementScripts[moveScrId] = movementScript;
 }
 
-static const u8 *sub_80D35CC(u8 a)
+static const u8 *GetMovementScript(u8 moveScrId)
 {
-    return gUnknown_02039D90[a];
+    return gMovementScripts[moveScrId];
 }
 
-static void sub_80D35DC(u8 taskId, u8 b, u8 eventObjId, const u8 *movementScript)
+static void ScriptMovement_AddNewMovement(u8 taskId, u8 moveScrId, u8 objEventId, const u8 *movementScript)
 {
-    sub_80D352C(taskId, b);
-    npc_obj_offscreen_culling_and_flag_update(b, movementScript);
-    sub_80D34E4(taskId, b, eventObjId);
+    ClearMovementScriptFinished(taskId, moveScrId);
+    SetMovementScript(moveScrId, movementScript);
+    SetObjectEventIdAtMovementScript(taskId, moveScrId, objEventId);
 }
 
-static void UnfreezeObjects(u8 taskId)
+static void ScriptMovement_UnfreezeActiveObjects(u8 taskId)
 {
-    u8 *pEventObjId;
+    u8 *pObjEventId;
     u8 i;
 
-    pEventObjId = (u8 *)&gTasks[taskId].data[1];
-    for (i = 0; i < 16; i++, pEventObjId++)
+    pObjEventId = (u8 *)&gTasks[taskId].data[1];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++, pObjEventId++)
     {
-        if (*pEventObjId != 0xFF)
-            UnfreezeEventObject(&gEventObjects[*pEventObjId]);
+        if (*pObjEventId != 0xFF)
+            UnfreezeObjectEvent(&gObjectEvents[*pObjEventId]);
     }
 }
 
-static void sub_80D3660(u8 taskId)
+static void ScriptMovement_MoveObjects(u8 taskId)
 {
     u8 i;
-    u8 var;
+    u8 objEventId;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        sub_80D3508(taskId, i, &var);
-        if (var != 0xFF)
-            sub_80A2490(taskId, i, var, sub_80D35CC(i));
+        LoadObjectEventIdFromMovementScript(taskId, i, &objEventId);
+        if (objEventId != 0xFF)
+            ScriptMovement_TakeStep(taskId, i, objEventId, GetMovementScript(i));
     }
 }
 
-static void sub_80A2490(u8 taskId, u8 b, u8 eventObjId, const u8 *d)
+static void ScriptMovement_TakeStep(u8 taskId, u8 moveScrId, u8 objEventId, const u8 *movementScript)
 {
-    u8 var;
+    u8 nextMoveActionId;
 
-    if (EventObjectIsHeldMovementActive(&gEventObjects[eventObjId])
-     && !EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
+    if (ObjectEventIsHeldMovementActive(&gObjectEvents[objEventId])
+     && !ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]))
         return;
 
-    var = *d;
-    if (var == 0xFE)
+    nextMoveActionId = *movementScript;
+    if (nextMoveActionId == MOVEMENT_ACTION_STEP_END)
     {
-        sub_80D355C(taskId, b);
-        FreezeEventObject(&gEventObjects[eventObjId]);
+        SetMovementScriptFinished(taskId, moveScrId);
+        FreezeObjectEvent(&gObjectEvents[objEventId]);
     }
     else
     {
-        if (!EventObjectSetHeldMovement(&gEventObjects[eventObjId], var))
+        if (!ObjectEventSetHeldMovement(&gObjectEvents[objEventId], nextMoveActionId))
         {
-            d++;
-            npc_obj_offscreen_culling_and_flag_update(b, d);
+            movementScript++;
+            SetMovementScript(moveScrId, movementScript);
         }
     }
 }

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "bard_music.h"
 #include "bg.h"
 #include "data.h"
@@ -30,6 +30,8 @@
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
+#include "constants/lilycove_lady.h"
+#include "constants/mauville_old_man.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/rgb.h"
@@ -120,8 +122,8 @@ static void sub_811B768(void);
 static u8 sub_811B960(u8);
 static void sub_811B9A0(void);
 static u8 sub_811BA1C(void);
-static int sub_811BF20(void);
-static u16 sub_811BF40(void);
+static int DidPlayerInputMysteryGiftPhrase(void);
+static u16 DidPlayerInputABerryMasterWifePhrase(void);
 static bool8 sub_811CE94(void);
 static void sub_811CF64(void);
 static void sub_811CF04(void);
@@ -208,7 +210,7 @@ static void sub_811D830(void);
 static void sub_811D058(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
 static void sub_811DD84(void);
 static void sub_811D6F4(void);
-static void sub_811D758(void);
+static void PrintEasyChatKeyboardText(void);
 static void sub_811D794(void);
 static const u8 *GetEasyChatWordGroupName(u8);
 static void sub_811D864(u8, u8);
@@ -219,8 +221,8 @@ static void sub_811E0EC(s8, s8);
 static void sub_811E1A4(s8, s8);
 static void sub_811E2DC(struct Sprite *);
 static void sub_811E34C(u8, u8);
-static bool8 sub_811F0F8(void);
-static u16 sub_811F108(void);
+static bool8 EasyChatIsNationalPokedexEnabled(void);
+static u16 GetRandomUnlockedEasyChatPokemon(void);
 static void sub_811F2D4(void);
 static void sub_811F46C(void);
 static u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
@@ -240,6 +242,7 @@ struct Unk8597530
     MainCallback callback;
 };
 
+// Lilycove Quiz Lady
 static const struct Unk8597530 sUnknown_08597530[] = {
     {
         .word = 26,
@@ -529,11 +532,11 @@ static const u16 sMysteryGiftPhrase[] = {
 };
 
 static const u16 sBerryMasterWifePhrases[][2] = {
-    {EC_WORD_GREAT, EC_WORD_BATTLE},
-    {EC_WORD_CHALLENGE, EC_WORD_CONTEST},
-    {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
-    {EC_WORD_COOL, EC_POKEMON(LATIOS)},
-    {EC_WORD_SUPER, EC_WORD_HUSTLE},
+    [PHRASE_GREAT_BATTLE - 1]        = {EC_WORD_GREAT, EC_WORD_BATTLE},
+    [PHRASE_CHALLENGE_CONTEST - 1]   = {EC_WORD_CHALLENGE, EC_WORD_CONTEST},
+    [PHRASE_OVERWHELMING_LATIAS - 1] = {EC_WORD_OVERWHELMING, EC_POKEMON(LATIAS)},
+    [PHRASE_COOL_LATIOS - 1]         = {EC_WORD_COOL, EC_POKEMON(LATIOS)},
+    [PHRASE_SUPER_HUSTLE - 1]        = {EC_WORD_SUPER, EC_WORD_HUSTLE},
 };
 
 static const u16 sEasyChatTriangleCursorPalette[] = INCBIN_U16("graphics/easy_chat/triangle_cursor.gbapal");
@@ -696,11 +699,12 @@ static  const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
 
 static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
-static const u8 *const sUnknown_08597C90[] = {
-    gUnknown_862B810,
-    gUnknown_862B832,
-    gUnknown_862B84B,
-    gUnknown_862B86C,
+static const u8 *const sEasyChatKeyboardText[] = 
+{
+    gText_EasyChatKeyboard_ABCDEFothers,
+    gText_EasyChatKeyboard_GHIJKL,
+    gText_EasyChatKeyboard_MNOPQRS,
+    gText_EasyChatKeyboard_TUVWXYZ,
 };
 
 static const struct SpriteSheet sEasyChatSpriteSheets[] = {
@@ -1260,7 +1264,7 @@ void ShowEasyChatScreen(void)
         break;
     case EASY_CHAT_TYPE_BARD_SONG:
         bard = &gSaveBlock1Ptr->oldMan.bard;
-        for (i = 0; i < 6; i ++)
+        for (i = 0; i < BARD_SONG_LENGTH; i ++)
             bard->temporaryLyrics[i] = bard->songLyrics[i];
 
         words = bard->temporaryLyrics;
@@ -1305,18 +1309,18 @@ void ShowEasyChatScreen(void)
         displayedPersonType = EASY_CHAT_PERSON_BOY;
         break;
     case EASY_CHAT_TYPE_QUIZ_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.unk_016;
+        words = &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer;
         break;
     case EASY_CHAT_TYPE_QUIZ_QUESTION:
         return;
     case EASY_CHAT_TYPE_QUIZ_SET_QUESTION:
-        words = gSaveBlock1Ptr->lilycoveLady.quiz.unk_002;
+        words = gSaveBlock1Ptr->lilycoveLady.quiz.question;
         break;
     case EASY_CHAT_TYPE_QUIZ_SET_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.unk_014;
+        words = &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer;
         break;
     case EASY_CHAT_TYPE_APPRENTICE:
-        words = gSaveBlock2Ptr->apprentices[0].easyChatWords;
+        words = gSaveBlock2Ptr->apprentices[0].speechWon;
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
         words = sub_801B058();
@@ -1329,7 +1333,7 @@ void ShowEasyChatScreen(void)
     DoEasyChatScreen(gSpecialVar_0x8004, words, CB2_ReturnToFieldContinueScript, displayedPersonType);
 }
 
-static void sub_811A7E4(void)
+static void CB2_QuizLadyQuestion(void)
 {
     LilycoveLady *lilycoveLady;
 
@@ -1337,13 +1341,13 @@ static void sub_811A7E4(void)
     switch (gMain.state)
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         break;
     case 1:
         if (!gPaletteFade.active)
         {
             lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-            lilycoveLady->quiz.unk_016 = -1;
+            lilycoveLady->quiz.playerAnswer = -1;
             CleanupOverworldWindowsAndTilemaps();
             DoQuizQuestionEasyChatScreen();
         }
@@ -1352,9 +1356,9 @@ static void sub_811A7E4(void)
     gMain.state ++;
 }
 
-void sub_811A858(void)
+void QuizLadyShowQuizQuestion(void)
 {
-    SetMainCallback2(sub_811A7E4);
+    SetMainCallback2(CB2_QuizLadyQuestion);
 }
 
 static int sub_811A868(u16 word)
@@ -1387,7 +1391,7 @@ static void DoQuizAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(
         EASY_CHAT_TYPE_QUIZ_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.unk_016,
+        &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1395,7 +1399,7 @@ static void DoQuizAnswerEasyChatScreen(void)
 static void DoQuizQuestionEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.unk_002,
+        gSaveBlock1Ptr->lilycoveLady.quiz.question,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1403,7 +1407,7 @@ static void DoQuizQuestionEasyChatScreen(void)
 static void DoQuizSetAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.unk_014,
+        &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1411,7 +1415,7 @@ static void DoQuizSetAnswerEasyChatScreen(void)
 static void DoQuizSetQuestionEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.unk_002,
+        gSaveBlock1Ptr->lilycoveLady.quiz.question,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -2594,17 +2598,17 @@ static int FooterHasFourOptions_(void)
     return FooterHasFourOptions();
 }
 
-u8 sub_811BC7C(const u16 *arg0, u8 arg1)
+static bool8 IsPhraseDifferentThanPlayerInput(const u16 *phrase, u8 phraseLength)
 {
     u8 i;
 
-    for (i = 0; i < arg1; i++)
+    for (i = 0; i < phraseLength; i++)
     {
-        if (arg0[i] != sEasyChatScreen->ecWordBuffer[i])
-            return 1;
+        if (phrase[i] != sEasyChatScreen->ecWordBuffer[i])
+            return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 static u8 GetDisplayedPersonType(void)
@@ -2660,9 +2664,9 @@ static int sub_811BD64(void)
         return sub_811BCF4();
 
     saveBlock1 = gSaveBlock1Ptr;
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < QUIZ_QUESTION_LEN; i++)
     {
-        if (saveBlock1->lilycoveLady.quiz.unk_002[i] != 0xFFFF)
+        if (saveBlock1->lilycoveLady.quiz.question[i] != 0xFFFF)
             return 0;
     }
 
@@ -2676,7 +2680,7 @@ static int sub_811BDB0(void)
         return sub_811BCF4();
 
     quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    return quiz->unk_014 == 0xFFFF ? 1 : 0;
+    return quiz->correctAnswer == 0xFFFF ? 1 : 0;
 }
 
 static void sub_811BDF0(u8 *arg0)
@@ -2727,7 +2731,7 @@ static void sub_811BE9C(void)
         FlagSet(FLAG_SYS_CHAT_USED);
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
-        if (sub_811BF20())
+        if (DidPlayerInputMysteryGiftPhrase())
             gSpecialVar_0x8004 = 2;
         else
             gSpecialVar_0x8004 = 0;
@@ -2737,22 +2741,22 @@ static void sub_811BE9C(void)
         gSpecialVar_0x8004 = sub_81226D8(sEasyChatScreen->ecWordBuffer);
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
-        gSpecialVar_0x8004 = sub_811BF40();
+        gSpecialVar_0x8004 = DidPlayerInputABerryMasterWifePhrase();
         break;
     }
 }
 
-static int sub_811BF20(void)
+static int DidPlayerInputMysteryGiftPhrase(void)
 {
-    return sub_811BC7C(sMysteryGiftPhrase, ARRAY_COUNT(sMysteryGiftPhrase)) == 0;
+    return !IsPhraseDifferentThanPlayerInput(sMysteryGiftPhrase, ARRAY_COUNT(sMysteryGiftPhrase));
 }
 
-static u16 sub_811BF40(void)
+static u16 DidPlayerInputABerryMasterWifePhrase(void)
 {
     int i;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sBerryMasterWifePhrases); i++)
     {
-        if (!sub_811BC7C(sBerryMasterWifePhrases[i], ARRAY_COUNT(*sBerryMasterWifePhrases)))
+        if (!IsPhraseDifferentThanPlayerInput(sBerryMasterWifePhrases[i], ARRAY_COUNT(*sBerryMasterWifePhrases)))
             return i + 1;
     }
 
@@ -3699,7 +3703,7 @@ static void sub_811CFCC(void)
 
     xOffset = GetStringCenterAlignXOffset(1, titleText, 144);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    sub_811D058(0, 1, titleText, xOffset, 1, 0xFF, 0, 2, 3);
+    sub_811D058(0, 1, titleText, xOffset, 1, 0xFF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
@@ -3709,12 +3713,12 @@ void sub_811D028(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, vo
     AddTextPrinterParameterized(windowId, fontId, str, x, y, speed, callback);
 }
 
-static void sub_811D058(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 red, u8 green, u8 blue)
+static void sub_811D058(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 bg, u8 fg, u8 shadow)
 {
     u8 color[3];
-    color[0] = red;
-    color[1] = green;
-    color[2] = blue;
+    color[0] = bg;
+    color[1] = fg;
+    color[2] = shadow;
     AddTextPrinterParameterized3(windowId, fontId, left, top, color, speed, str);
 }
 
@@ -3965,7 +3969,7 @@ static void sub_811D698(u32 arg0)
         sub_811D6F4();
         break;
     case 1:
-        sub_811D758();
+        PrintEasyChatKeyboardText();
         break;
     case 2:
         sub_811D794();
@@ -4008,12 +4012,12 @@ static void sub_811D6F4(void)
     }
 }
 
-static void sub_811D758(void)
+static void PrintEasyChatKeyboardText(void)
 {
     u32 i;
 
-    for (i = 0; i < ARRAY_COUNT(sUnknown_08597C90); i++)
-        sub_811D028(2, 1, sUnknown_08597C90[i], 10, 97 + i * 16, 0xFF, NULL);
+    for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardText); i++)
+        sub_811D028(2, 1, sEasyChatKeyboardText[i], 10, 97 + i * 16, 0xFF, NULL);
 }
 
 static void sub_811D794(void)
@@ -4085,7 +4089,7 @@ static void sub_811D864(u8 arg0, u8 arg1)
                 if (!sub_811BF88(easyChatWord))
                     sub_811D028(2, 1, sUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, NULL);
                 else
-                    sub_811D058(2, 1, sUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, 1, 5, 3);
+                    sub_811D058(2, 1, sUnknown_0203A11C->unkCC, (j * 13 + 3) * 8, y, 0xFF, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GREY);
             }
         }
 
@@ -4714,13 +4718,13 @@ static void sub_811E828(void)
     switch (GetDisplayedPersonType())
     {
     case EASY_CHAT_PERSON_REPORTER_MALE:
-        graphicsId = EVENT_OBJ_GFX_REPORTER_M;
+        graphicsId = OBJ_EVENT_GFX_REPORTER_M;
         break;
     case EASY_CHAT_PERSON_REPORTER_FEMALE:
-        graphicsId = EVENT_OBJ_GFX_REPORTER_F;
+        graphicsId = OBJ_EVENT_GFX_REPORTER_F;
         break;
     case EASY_CHAT_PERSON_BOY:
-        graphicsId = EVENT_OBJ_GFX_BOY_1;
+        graphicsId = OBJ_EVENT_GFX_BOY_1;
         break;
     default:
         return;
@@ -4729,15 +4733,15 @@ static void sub_811E828(void)
     if (GetEasyChatScreenFrameId() != 4)
         return;
 
-    spriteId = AddPseudoEventObject(graphicsId, SpriteCallbackDummy, 76, 40, 0);
+    spriteId = AddPseudoObjectEvent(graphicsId, SpriteCallbackDummy, 76, 40, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].oam.priority = 0;
         StartSpriteAnim(&gSprites[spriteId], 2);
     }
 
-    spriteId = AddPseudoEventObject(
-        gSaveBlock2Ptr->playerGender == MALE ? EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL : EVENT_OBJ_GFX_RIVAL_MAY_NORMAL,
+    spriteId = AddPseudoObjectEvent(
+        gSaveBlock2Ptr->playerGender == MALE ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
         SpriteCallbackDummy,
         52,
         40,
@@ -4806,7 +4810,7 @@ static void sub_811E948(void)
     PutWindowTilemap(windowId);
 }
 
-static bool8 sub_811EA28(u8 groupId)
+static bool8 IsEasyChatGroupUnlocked(u8 groupId)
 {
     switch (groupId)
     {
@@ -4817,7 +4821,7 @@ static bool8 sub_811EA28(u8 groupId)
     case EC_GROUP_MOVE_2:
         return FlagGet(FLAG_SYS_GAME_CLEAR);
     case EC_GROUP_POKEMON_2:
-        return sub_811F0F8();
+        return EasyChatIsNationalPokedexEnabled();
     default:
         return TRUE;
     }
@@ -4828,7 +4832,7 @@ u16 EasyChat_GetNumWordsInGroup(u8 groupId)
     if (groupId == EC_GROUP_POKEMON)
         return GetNationalPokedexCount(FLAG_GET_SEEN);
 
-    if (sub_811EA28(groupId))
+    if (IsEasyChatGroupUnlocked(groupId))
         return gEasyChatGroups[groupId].numEnabledWords;
 
     return 0;
@@ -5035,24 +5039,24 @@ static u16 GetEasyChatWordStringLength(u16 easyChatWord)
     }
 }
 
-bool8 sub_811EDC4(const u16 *easyChatWords, u8 arg1, u8 arg2, u16 arg3)
+static bool8 CanPhraseFitInXRowsYCols(const u16 *easyChatWords, u8 numRows, u8 numColumns, u16 maxLength)
 {
     u8 i, j;
 
-    for (i = 0; i < arg2; i++)
+    for (i = 0; i < numColumns; i++)
     {
-        u16 totalLength = arg1 - 1;
-        for (j = 0; j < arg1; j++)
+        u16 totalLength = numRows - 1;
+        for (j = 0; j < numRows; j++)
             totalLength += GetEasyChatWordStringLength(*(easyChatWords++));
 
-        if (totalLength > arg3)
+        if (totalLength > maxLength)
             return TRUE;
     }
 
     return FALSE;
 }
 
-u16 sub_811EE38(u16 groupId)
+u16 GetRandomEasyChatWordFromGroup(u16 groupId)
 {
     u16 index = Random() % gEasyChatGroups[groupId].numWords;
     if (groupId == EC_GROUP_POKEMON
@@ -5066,18 +5070,18 @@ u16 sub_811EE38(u16 groupId)
     return EC_WORD(groupId, index);
 }
 
-u16 sub_811EE90(u16 groupId)
+u16 GetRandomEasyChatWordFromUnlockedGroup(u16 groupId)
 {
-    if (!sub_811EA28(groupId))
+    if (!IsEasyChatGroupUnlocked(groupId))
         return 0xFFFF;
 
     if (groupId == EC_GROUP_POKEMON)
-        return sub_811F108();
+        return GetRandomUnlockedEasyChatPokemon();
 
-    return sub_811EE38(groupId);
+    return GetRandomEasyChatWordFromGroup(groupId);
 }
 
-void sub_811EECC(void)
+void ShowEasyChatProfile(void)
 {
     u16 *easyChatWords;
     int columns, rows;
@@ -5090,7 +5094,7 @@ void sub_811EECC(void)
         break;
     case 1:
         easyChatWords = gSaveBlock1Ptr->easyChatBattleStart;
-        if (sub_811EDC4(gSaveBlock1Ptr->easyChatBattleStart, 3, 2, 18))
+        if (CanPhraseFitInXRowsYCols(gSaveBlock1Ptr->easyChatBattleStart, 3, 2, 18))
         {
             columns = 2;
             rows = 3;
@@ -5119,23 +5123,24 @@ void sub_811EECC(void)
     ShowFieldAutoScrollMessage(gStringVar4);
 }
 
-void sub_811EF6C(void)
+// The phrase that a man in Dewford Hall suggests has a "deep link" to the current trendy phrase
+void BufferDeepLinkPhrase(void)
 {
     int groupId = Random() & 1 ? EC_GROUP_HOBBIES : EC_GROUP_LIFESTYLE;
-    u16 easyChatWord = sub_811EE90(groupId);
+    u16 easyChatWord = GetRandomEasyChatWordFromUnlockedGroup(groupId);
     CopyEasyChatWord(gStringVar2, easyChatWord);
 }
 
-static bool8 sub_811EF98(u8 additionalPhraseId)
+static bool8 IsAdditionalPhraseUnlocked(u8 additionalPhraseId)
 {
     int byteOffset = additionalPhraseId / 8;
     int shift = additionalPhraseId % 8;
     return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
 }
 
-void sub_811EFC0(u8 additionalPhraseId)
+void UnlockAdditionalPhrase(u8 additionalPhraseId)
 {
-    if (additionalPhraseId < 33)
+    if (additionalPhraseId < NUM_ADDITIONAL_PHRASES)
     {
         int byteOffset = additionalPhraseId / 8;
         int shift = additionalPhraseId % 8;
@@ -5143,32 +5148,32 @@ void sub_811EFC0(u8 additionalPhraseId)
     }
 }
 
-u8 sub_811EFF0(void)
+static u8 GetNumAdditionalPhrasesUnlocked(void)
 {
     u8 i;
     u8 numAdditionalPhrasesUnlocked;
 
-    for (i = 0, numAdditionalPhrasesUnlocked = 0; i < 33; i++)
+    for (i = 0, numAdditionalPhrasesUnlocked = 0; i < NUM_ADDITIONAL_PHRASES; i++)
     {
-        if (sub_811EF98(i))
+        if (IsAdditionalPhraseUnlocked(i))
             numAdditionalPhrasesUnlocked++;
     }
 
     return numAdditionalPhrasesUnlocked;
 }
 
-u16 sub_811F01C(void)
+u16 GetNewHipsterPhraseToTeach(void)
 {
     u16 i;
     u16 additionalPhraseId;
-    u8 numAdditionalPhrasesUnlocked = sub_811EFF0();
-    if (numAdditionalPhrasesUnlocked == 33)
+    u8 numAdditionalPhrasesUnlocked = GetNumAdditionalPhrasesUnlocked();
+    if (numAdditionalPhrasesUnlocked == NUM_ADDITIONAL_PHRASES)
         return 0xFFFF;
 
-    additionalPhraseId = Random() % (33 - numAdditionalPhrasesUnlocked);
-    for (i = 0; i < 33; i++)
+    additionalPhraseId = Random() % (NUM_ADDITIONAL_PHRASES - numAdditionalPhrasesUnlocked);
+    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
     {
-        if (!sub_811EF98(i))
+        if (!IsAdditionalPhraseUnlocked(i))
         {
             if (additionalPhraseId)
             {
@@ -5176,7 +5181,7 @@ u16 sub_811F01C(void)
             }
             else
             {
-                sub_811EFC0(i);
+                UnlockAdditionalPhrase(i);
                 return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
             }
         }
@@ -5185,17 +5190,18 @@ u16 sub_811F01C(void)
     return 0xFFFF;
 }
 
-u16 sub_811F090(void)
+// Unused
+u16 GetRandomTaughtHipsterPhrase(void)
 {
     u16 i;
-    u16 additionalPhraseId = sub_811EFF0();
+    u16 additionalPhraseId = GetNumAdditionalPhrasesUnlocked();
     if (additionalPhraseId == 0)
         return 0xFFFF;
 
     additionalPhraseId = Random() % additionalPhraseId;
-    for (i = 0; i < 33; i++)
+    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
     {
-        if (sub_811EF98(i))
+        if (IsAdditionalPhraseUnlocked(i))
         {
             if (additionalPhraseId)
                 additionalPhraseId--;
@@ -5207,12 +5213,12 @@ u16 sub_811F090(void)
     return 0xFFFF;
 }
 
-static bool8 sub_811F0F8(void)
+static bool8 EasyChatIsNationalPokedexEnabled(void)
 {
     return IsNationalPokedexEnabled();
 }
 
-static u16 sub_811F108(void)
+static u16 GetRandomUnlockedEasyChatPokemon(void)
 {
     u16 i;
     u16 numWords;
@@ -5494,7 +5500,7 @@ static bool8 sub_811F764(u16 wordIndex, u8 groupId)
     case EC_GROUP_MOVE_2:
         return TRUE;
     case EC_GROUP_TRENDY_SAYING:
-        return sub_811EF98(wordIndex);
+        return IsAdditionalPhraseUnlocked(wordIndex);
     default:
         return gEasyChatGroups[groupId].wordData.words[wordIndex].enabled;
     }
@@ -5542,7 +5548,7 @@ bool32 sub_811F8D8(int easyChatWord)
     int groupId = EC_GROUP(easyChatWord);
     int mask = 0x7F;
     int index = EC_INDEX(easyChatWord);
-    if (!sub_811EA28(groupId & mask))
+    if (!IsEasyChatGroupUnlocked(groupId & mask))
         return FALSE;
     else
         return sub_811F764(index, groupId & mask);

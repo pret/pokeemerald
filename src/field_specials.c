@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "cable_club.h"
@@ -35,6 +35,7 @@
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
+#include "slot_machine.h"
 #include "sound.h"
 #include "starter_choose.h"
 #include "string_util.h"
@@ -44,87 +45,97 @@
 #include "tv.h"
 #include "wallclock.h"
 #include "window.h"
+#include "constants/battle_frontier.h"
+#include "constants/battle_tower.h"
+#include "constants/decorations.h"
 #include "constants/event_objects.h"
+#include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
+#include "constants/field_specials.h"
 #include "constants/items.h"
+#include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/mevent.h"
+#include "constants/tv.h"
+#include "constants/script_menu.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
+#include "constants/metatile_labels.h"
 #include "palette.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
-static EWRAM_DATA u32 gBikeCyclingTimer = 0;
-static EWRAM_DATA u8 gUnknown_0203AB5C = 0;
-static EWRAM_DATA u8 gUnknown_0203AB5D = 0;
-static EWRAM_DATA u8 gUnknown_0203AB5E = 0;
-static EWRAM_DATA u16 gUnknown_0203AB60 = 0;
-static EWRAM_DATA u16 gUnknown_0203AB62 = 0;
-static EWRAM_DATA struct ListMenuItem *gUnknown_0203AB64 = NULL;
-static EWRAM_DATA u16 gUnknown_0203AB68 = 0;
-static EWRAM_DATA u16 gUnknown_0203AB6A = 0;
-static EWRAM_DATA u8 gUnknown_0203AB6C = 0;
-static EWRAM_DATA u8 gUnknown_0203AB6D = 0;
-static EWRAM_DATA u8 gUnknown_0203AB6E = 0;
-static EWRAM_DATA u8 gUnknown_0203AB6F = 0;
-static EWRAM_DATA u32 gUnknown_0203AB70 = 0;
+static EWRAM_DATA u32 sBikeCyclingTimer = 0;
+static EWRAM_DATA u8 sSlidingDoorNextFrameCounter = 0;
+static EWRAM_DATA u8 sSlidingDoorFrame = 0;
+static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
+static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
+static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
+static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
+static EWRAM_DATA u16 sScrollableMultichoice_ScrollOffset = 0;
+static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
+static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
+static EWRAM_DATA u8 sBattlePointsWindowId = 0;
+static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
+static EWRAM_DATA u8 sPCBoxToSendMon = 0;
+static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
 
-struct ListMenuTemplate gUnknown_030061D0;
+struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
 
-extern const u16 gEventObjectPalette8[];
-extern const u16 gEventObjectPalette17[];
-extern const u16 gEventObjectPalette33[];
-extern const u16 gEventObjectPalette34[];
+extern const u16 gObjectEventPalette8[];
+extern const u16 gObjectEventPalette17[];
+extern const u16 gObjectEventPalette33[];
+extern const u16 gObjectEventPalette34[];
 
-
-void UpdateMovedLilycoveFanClubMembers(void);
-void sub_813BF60(void);
-u16 GetNumMovedLilycoveFanClubMembers(void);
+void TryLoseFansFromPlayTime(void);
+void SetPlayerGotFirstFans(void);
+u16 GetNumFansOfPlayerInTrainerFanClub(void);
 
 static void RecordCyclingRoadResults(u32, u8);
-static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum);
-static void Task_PetalburgGym(u8);
-static void PetalburgGymFunc(u8, u16);
+static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum);
+static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId);
+static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId);
 static void Task_PCTurnOnEffect(u8);
 static void PCTurnOnEffect_0(struct Task *);
 static void PCTurnOnEffect_1(s16, s8, s8);
 static void PCTurnOffEffect(void);
 static void Task_LotteryCornerComputerEffect(u8);
 static void LotteryCornerComputerEffect(struct Task *);
-static void sub_81395BC(u8 taskId);
-static void sub_8139620(u8 taskId);
-static void sub_8139AF4(u8 taskId);
-static void sub_8139C2C(u16 a1, u8 a2);
-static void sub_8139C80(u8 taskId);
-static void sub_813A2DC(u8 taskId);
-static void sub_813AA60(u16 a0, u16 a1);
-static void sub_813ACE8(u8 a0, u16 a1);
-static void sub_813A42C(void);
-static void sub_813A4EC(u8 taskId);
-static void sub_813A694(u8 taskId);
-static void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void sub_813AC44(u16 a0, u16 a1);
-static void sub_813AD34(u8 a0, u16 a1);
-static void sub_813A570(u8 taskId);
-static void sub_813A738(u8 taskId);
+static void Task_ShakeCamera(u8 taskId);
+static void StopCameraShake(u8 taskId);
+static void Task_MoveElevator(u8 taskId);
+static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending);
+static void Task_MoveElevatorWindowLights(u8 taskId);
+static void Task_ShowScrollableMultichoice(u8 taskId);
+static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection);
+static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection);
+static void InitScrollableMultichoice(void);
+static void ScrollableMultichoice_ProcessInput(u8 taskId);
+static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId);
+static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused);
+static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection);
+static void CloseScrollableMultichoice(u8 taskId);
+static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId);
 static void sub_813A600(u8 taskId);
 static void sub_813A664(u8 taskId);
-static void sub_813ABD4(u16 a0);
+static void ShowFrontierExchangeCornerItemIcon(u16 item);
 static void Task_DeoxysRockInteraction(u8 taskId);
 static void ChangeDeoxysRockLevel(u8 a0);
 static void WaitForDeoxysRockMovement(u8 taskId);
-static void sub_813B57C(u8 taskId);
-static void sub_813B824(u8 taskId);
-static void _fwalk(u8 taskId);
-static u8 sub_813BF44(void);
-static void sub_813BD84(void);
-static u16 sub_813BB74(void);
-static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
+static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId);
+static void Task_LoopWingFlapSE(u8 taskId);
+static void Task_CloseBattlePikeCurtain(u8 taskId);
+static u8 DidPlayerGetFirstFans(void);
+static void SetInitialFansOfPlayer(void);
+static u16 PlayerGainRandomTrainerFan(void);
+static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
 
 void Special_ShowDiploma(void)
 {
@@ -143,14 +154,14 @@ void ResetCyclingRoadChallengeData(void)
 {
     gBikeCyclingChallenge = FALSE;
     gBikeCollisions = 0;
-    gBikeCyclingTimer = 0;
+    sBikeCyclingTimer = 0;
 }
 
 void Special_BeginCyclingRoadChallenge(void)
 {
     gBikeCyclingChallenge = TRUE;
     gBikeCollisions = 0;
-    gBikeCyclingTimer = gMain.vblankCounter1;
+    sBikeCyclingTimer = gMain.vblankCounter1;
 }
 
 u16 GetPlayerAvatarBike(void)
@@ -236,7 +247,7 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
 }
 
 void FinishCyclingRoadChallenge(void) {
-    const u32 numFrames = gMain.vblankCounter1 - gBikeCyclingTimer;
+    const u32 numFrames = gMain.vblankCounter1 - sBikeCyclingTimer;
 
     DetermineCyclingRoadResults(numFrames, gBikeCollisions);
     RecordCyclingRoadResults(numFrames, gBikeCollisions);
@@ -293,9 +304,10 @@ void ResetSSTidalFlag(void)
     FlagClear(FLAG_SYS_CRUISE_MODE);
 }
 
+// Returns TRUE if the Cruise is over
 bool32 CountSSTidalStep(u16 delta)
 {
-    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
+    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) < SS_TIDAL_MAX_STEPS)
     {
         return FALSE;
     }
@@ -305,21 +317,21 @@ bool32 CountSSTidalStep(u16 delta)
 u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 {
     u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
-    switch (*GetVarPointer(VAR_PORTHOLE_STATE))
+    switch (*GetVarPointer(VAR_SS_TIDAL_STATE))
     {
-        case 1:
-        case 8:
-            return 1;
-        case 3:
-        case 9:
-            return 4;
-        case 4:
-        case 5:
-            return 2;
-        case 6:
-        case 10:
-            return 3;
-        case 2:
+        case SS_TIDAL_BOARD_SLATEPORT:
+        case SS_TIDAL_LAND_SLATEPORT:
+            return SS_TIDAL_LOCATION_SLATEPORT;
+        case SS_TIDAL_HALFWAY_LILYCOVE:
+        case SS_TIDAL_EXIT_CURRENTS_RIGHT:
+            return SS_TIDAL_LOCATION_ROUTE131;
+        case SS_TIDAL_LAND_LILYCOVE:
+        case SS_TIDAL_BOARD_LILYCOVE:
+            return SS_TIDAL_LOCATION_LILYCOVE;
+        case SS_TIDAL_DEPART_LILYCOVE:
+        case SS_TIDAL_EXIT_CURRENTS_LEFT:
+            return SS_TIDAL_LOCATION_ROUTE124;
+        case SS_TIDAL_DEPART_SLATEPORT:
             if (*varCruiseStepCount < 60)
             {
                 *mapNum = MAP_NUM(ROUTE134);
@@ -336,7 +348,7 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
                 *x = *varCruiseStepCount - 140;
             }
             break;
-        case 7:
+        case SS_TIDAL_HALFWAY_SLATEPORT:
             if (*varCruiseStepCount < 66)
             {
                 *mapNum = MAP_NUM(ROUTE132);
@@ -355,7 +367,7 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
     }
     *mapGroup = MAP_GROUP(ROUTE132);
     *y = 20;
-    return 0;
+    return SS_TIDAL_LOCATION_CURRENTS;
 }
 
 bool32 ShouldDoWallyCall(void)
@@ -385,9 +397,9 @@ bool32 ShouldDoWallyCall(void)
     return TRUE;
 }
 
-bool32 ShouldDoWinonaCall(void)
+bool32 ShouldDoScottFortreeCall(void)
 {
-    if (FlagGet(FLAG_REGISTER_WINONA_POKENAV))
+    if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
     {
         switch (gMapHeader.mapType)
         {
@@ -395,7 +407,7 @@ bool32 ShouldDoWinonaCall(void)
             case MAP_TYPE_CITY:
             case MAP_TYPE_ROUTE:
             case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_WINONA_CALL_STEP_COUNTER)) < 10)
+                if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -412,17 +424,17 @@ bool32 ShouldDoWinonaCall(void)
     return TRUE;
 }
 
-bool32 ShouldDoScottCall(void)
+bool32 ShouldDoScottBattleFrontierCall(void)
 {
-    if (FlagGet(FLAG_SCOTT_CALL_NATIONAL_DEX))
+    if (FlagGet(FLAG_SCOTT_CALL_BATTLE_FRONTIER))
     {
         switch (gMapHeader.mapType)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 6:
-                if (++(*GetVarPointer(VAR_SCOTT_CALL_STEP_COUNTER)) < 10)
+            case MAP_TYPE_TOWN:
+            case MAP_TYPE_CITY:
+            case MAP_TYPE_ROUTE:
+            case MAP_TYPE_OCEAN_ROUTE:
+                if (++(*GetVarPointer(VAR_SCOTT_BF_CALL_STEP_COUNTER)) < 10)
                 {
                     return FALSE;
                 }
@@ -445,10 +457,10 @@ bool32 ShouldDoRoxanneCall(void)
     {
         switch (gMapHeader.mapType)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 6:
+            case MAP_TYPE_TOWN:
+            case MAP_TYPE_CITY:
+            case MAP_TYPE_ROUTE:
+            case MAP_TYPE_OCEAN_ROUTE:
                 if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
@@ -472,10 +484,10 @@ bool32 ShouldDoRivalRayquazaCall(void)
     {
         switch (gMapHeader.mapType)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 6:
+            case MAP_TYPE_TOWN:
+            case MAP_TYPE_CITY:
+            case MAP_TYPE_ROUTE:
+            case MAP_TYPE_OCEAN_ROUTE:
                 if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 250)
                 {
                     return FALSE;
@@ -510,13 +522,18 @@ u8 GetLinkPartnerNames(void)
     return nLinkPlayers;
 }
 
-void SpawnLinkPartnerEventObject(void)
+void SpawnLinkPartnerObjectEvent(void)
 {
     u8 j = 0;
     s16 x = 0;
     s16 y = 0;
-    u8 gUnknown_085B2B5C[] = {7, 9, 8, 10};
-    s8 gUnknown_085B2B60[][2] = {
+    u8 movementTypes[] = {
+        MOVEMENT_TYPE_FACE_UP, 
+        MOVEMENT_TYPE_FACE_LEFT, 
+        MOVEMENT_TYPE_FACE_DOWN, 
+        MOVEMENT_TYPE_FACE_RIGHT
+    };
+    s8 coordOffsets[][2] = {
         { 0,  1},
         { 1,  0},
         { 0, -1},
@@ -559,27 +576,27 @@ void SpawnLinkPartnerEventObject(void)
                 case VERSION_RUBY:
                 case VERSION_SAPPHIRE:
                     if (gLinkPlayers[i].gender == 0)
-                        linkSpriteId = EVENT_OBJ_GFX_LINK_RS_BRENDAN;
+                        linkSpriteId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
                     else
-                        linkSpriteId = EVENT_OBJ_GFX_LINK_RS_MAY;
+                        linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
                     break;
                 case VERSION_EMERALD:
                     if (gLinkPlayers[i].gender == 0)
-                        linkSpriteId = EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL;
+                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
                     else
-                        linkSpriteId = EVENT_OBJ_GFX_RIVAL_MAY_NORMAL;
+                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
                     break;
                 default:
                     if (gLinkPlayers[i].gender == 0)
-                        linkSpriteId = EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL;
+                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
                     else
-                        linkSpriteId = EVENT_OBJ_GFX_RIVAL_MAY_NORMAL;
+                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
                     break;
             }
-            SpawnSpecialEventObjectParameterized(linkSpriteId, gUnknown_085B2B5C[j], 0xf0 - i, gUnknown_085B2B60[j][0] + x + 7, gUnknown_085B2B60[j][1] + y + 7, 0);
-            LoadLinkPartnerEventObjectSpritePalette(linkSpriteId, 0xf0 - i, i);
+            SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + 7, coordOffsets[j][1] + y + 7, 0);
+            LoadLinkPartnerObjectEventSpritePalette(linkSpriteId, 240 - i, i);
             j++;
-            if (j == 4)
+            if (j == MAX_LINK_PLAYERS)
             {
                 j = 0;
             }
@@ -587,168 +604,166 @@ void SpawnLinkPartnerEventObject(void)
     }
 }
 
-static void LoadLinkPartnerEventObjectSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum)
+static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum)
 {
     u8 adjustedPaletteNum;
     // Note: This temp var is necessary; paletteNum += 6 doesn't match.
     adjustedPaletteNum = paletteNum + 6;
-    if (graphicsId == EVENT_OBJ_GFX_LINK_RS_BRENDAN ||
-        graphicsId == EVENT_OBJ_GFX_LINK_RS_MAY ||
-        graphicsId == EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL ||
-        graphicsId == EVENT_OBJ_GFX_RIVAL_MAY_NORMAL)
+    if (graphicsId == OBJ_EVENT_GFX_LINK_RS_BRENDAN ||
+        graphicsId == OBJ_EVENT_GFX_LINK_RS_MAY ||
+        graphicsId == OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL ||
+        graphicsId == OBJ_EVENT_GFX_RIVAL_MAY_NORMAL)
     {
-        u8 obj = GetEventObjectIdByLocalIdAndMap(localEventId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-        if (obj != EVENT_OBJECTS_COUNT)
+        u8 obj = GetObjectEventIdByLocalIdAndMap(localEventId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        if (obj != OBJECT_EVENTS_COUNT)
         {
-            u8 spriteId = gEventObjects[obj].spriteId;
+            u8 spriteId = gObjectEvents[obj].spriteId;
             struct Sprite *sprite = &gSprites[spriteId];
             sprite->oam.paletteNum = adjustedPaletteNum;
 
             switch (graphicsId)
             {
-                case EVENT_OBJ_GFX_LINK_RS_BRENDAN:
-                    LoadPalette(gEventObjectPalette33, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                case OBJ_EVENT_GFX_LINK_RS_BRENDAN:
+                    LoadPalette(gObjectEventPalette33, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
-                case EVENT_OBJ_GFX_LINK_RS_MAY:
-                    LoadPalette(gEventObjectPalette34, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                case OBJ_EVENT_GFX_LINK_RS_MAY:
+                    LoadPalette(gObjectEventPalette34, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
-                case EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL:
-                    LoadPalette(gEventObjectPalette8, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                case OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL:
+                    LoadPalette(gObjectEventPalette8, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
-                case EVENT_OBJ_GFX_RIVAL_MAY_NORMAL:
-                    LoadPalette(gEventObjectPalette17, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                case OBJ_EVENT_GFX_RIVAL_MAY_NORMAL:
+                    LoadPalette(gObjectEventPalette17, 0x100 + (adjustedPaletteNum << 4), 0x20);
                     break;
             }
         }
     }
 }
 
-static const struct UCoords8 gUnknown_085B2B68[] = {
+// NOTE: Coordinates are +7, +7 from actual in-map coordinates
+static const struct UCoords8 sMauvilleGymSwitchCoords[] =
+{
     { 7, 22},
     {11, 19},
     {10, 16},
     {15, 16}
 };
 
-void MauvilleGymSpecial1(void)
+// Presses the stepped-on switch and raises the rest
+void MauvilleGymPressSwitch(void)
 {
     u8 i;
-    for (i = 0; i < ARRAY_COUNT(gUnknown_085B2B68); i++)
+    for (i = 0; i < ARRAY_COUNT(sMauvilleGymSwitchCoords); i++)
     {
         if (i == gSpecialVar_0x8004)
-        {
-            MapGridSetMetatileIdAt(gUnknown_085B2B68[i].x, gUnknown_085B2B68[i].y, 0x206);
-        }
+            MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_ID(MauvilleGym, PressedSwitch));
         else
-        {
-            MapGridSetMetatileIdAt(gUnknown_085B2B68[i].x, gUnknown_085B2B68[i].y, 0x205);
-        }
+            MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_ID(MauvilleGym, RaisedSwitch));
     }
 }
 
-void MauvilleGymSpecial2(void)
+// Sets the gym barriers back to the default state; their alt state is handled by MauvilleCity_Gym_EventScript_SetAltBarriers
+void MauvilleGymSetDefaultBarriers(void)
 {
     int x, y;
+    // All switches/barriers are within these coord ranges -7
     for (y = 12; y < 24; y++)
     {
         for (x = 7; x < 16; x++)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
-                case 0x220:
-                    MapGridSetMetatileIdAt(x, y, 0x230);
+                case METATILE_ID(MauvilleGym, GreenBeamH1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH1_Off));
                     break;
-                case 0x221:
-                    MapGridSetMetatileIdAt(x, y, 0x231);
+                case METATILE_ID(MauvilleGym, GreenBeamH2_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH2_Off));
                     break;
-                case 0x228:
-                    MapGridSetMetatileIdAt(x, y, 0x238);
+                case METATILE_ID(MauvilleGym, GreenBeamH3_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH3_Off));
                     break;
-                case 0x229:
-                    MapGridSetMetatileIdAt(x, y, 0x239);
+                case METATILE_ID(MauvilleGym, GreenBeamH4_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH4_Off));
                     break;
-                case 0x230:
-                    MapGridSetMetatileIdAt(x, y, 0x220);
+                case METATILE_ID(MauvilleGym, GreenBeamH1_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH1_On));
                     break;
-                case 0x231:
-                    MapGridSetMetatileIdAt(x, y, 0x221);
+                case METATILE_ID(MauvilleGym, GreenBeamH2_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH2_On));
                     break;
-                case 0x238:
-                    MapGridSetMetatileIdAt(x, y, 0xe28);
+                case METATILE_ID(MauvilleGym, GreenBeamH3_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH3_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x239:
-                    MapGridSetMetatileIdAt(x, y, 0xe29);
+                case METATILE_ID(MauvilleGym, GreenBeamH4_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH4_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x222:
-                    MapGridSetMetatileIdAt(x, y, 0x232);
+                case METATILE_ID(MauvilleGym, RedBeamH1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH1_Off));
                     break;
-                case 0x223:
-                    MapGridSetMetatileIdAt(x, y, 0x233);
+                case METATILE_ID(MauvilleGym, RedBeamH2_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH2_Off));
                     break;
-                case 0x22a:
-                    MapGridSetMetatileIdAt(x, y, 0x23a);
+                case METATILE_ID(MauvilleGym, RedBeamH3_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH3_Off));
                     break;
-                case 0x22b:
-                    MapGridSetMetatileIdAt(x, y, 0x23b);
+                case METATILE_ID(MauvilleGym, RedBeamH4_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH4_Off));
                     break;
-                case 0x232:
-                    MapGridSetMetatileIdAt(x, y, 0x222);
+                case METATILE_ID(MauvilleGym, RedBeamH1_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH1_On));
                     break;
-                case 0x233:
-                    MapGridSetMetatileIdAt(x, y, 0x223);
+                case METATILE_ID(MauvilleGym, RedBeamH2_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH2_On));
                     break;
-                case 0x23a:
-                    MapGridSetMetatileIdAt(x, y, 0xe2a);
+                case METATILE_ID(MauvilleGym, RedBeamH3_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH3_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x23b:
-                    MapGridSetMetatileIdAt(x, y, 0xe2b);
+                case METATILE_ID(MauvilleGym, RedBeamH4_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH4_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x240:
-                    MapGridSetMetatileIdAt(x, y, 0xe42);
+                case METATILE_ID(MauvilleGym, GreenBeamV1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x248:
-                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                case METATILE_ID(MauvilleGym, GreenBeamV2_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, FloorTile));
                     break;
-                case 0x241:
-                    MapGridSetMetatileIdAt(x, y, 0xe43);
+                case METATILE_ID(MauvilleGym, RedBeamV1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_Off) | METATILE_COLLISION_MASK);
                     break;
-                case 0x249:
-                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                case METATILE_ID(MauvilleGym, RedBeamV2_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, FloorTile));
                     break;
-                case 0x242:
-                    MapGridSetMetatileIdAt(x, y, 0xe40);
+                case METATILE_ID(MauvilleGym, PoleBottom_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV1_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x21a:
-                    if (MapGridGetMetatileIdAt(x, y - 1) == 0x240)
-                    {
-                        MapGridSetMetatileIdAt(x, y, 0xe48);
-                    }
+                case METATILE_ID(MauvilleGym, FloorTile):
+                    if (MapGridGetMetatileIdAt(x, y - 1) == METATILE_ID(MauvilleGym, GreenBeamV1_On))
+                        MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamV2_On) | METATILE_COLLISION_MASK);
                     else
-                    {
-                        MapGridSetMetatileIdAt(x, y, 0xe49);
-                    }
+                        MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV2_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x243:
-                    MapGridSetMetatileIdAt(x, y, 0xe41);
+                case METATILE_ID(MauvilleGym, PoleBottom_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamV1_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x251:
-                    MapGridSetMetatileIdAt(x, y, 0xe50);
+                case METATILE_ID(MauvilleGym, PoleTop_Off):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleTop_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x250:
-                    MapGridSetMetatileIdAt(x, y, 0x251);
+                case METATILE_ID(MauvilleGym, PoleTop_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleTop_Off));
                     break;
             }
         }
     }
 }
 
-void MauvilleGymSpecial3(void)
+// Presses all switches and deactivates all beams.
+void MauvilleGymDeactivatePuzzle(void)
 {
     int i, x, y;
-    const struct UCoords8 *switchCoords = gUnknown_085B2B68;
-    for (i = ARRAY_COUNT(gUnknown_085B2B68) - 1; i >= 0; i--)
+    const struct UCoords8 *switchCoords = sMauvilleGymSwitchCoords;
+    for (i = ARRAY_COUNT(sMauvilleGymSwitchCoords) - 1; i >= 0; i--)
     {
-        MapGridSetMetatileIdAt(switchCoords->x, switchCoords->y, 0x206);
+        MapGridSetMetatileIdAt(switchCoords->x, switchCoords->y, METATILE_ID(MauvilleGym, PressedSwitch));
         switchCoords++;
     }
     for (y = 12; y < 24; y++)
@@ -757,66 +772,73 @@ void MauvilleGymSpecial3(void)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
-                case 0x220:
-                    MapGridSetMetatileIdAt(x, y, 0x230);
+                case METATILE_ID(MauvilleGym, GreenBeamH1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH1_Off));
                     break;
-                case 0x221:
-                    MapGridSetMetatileIdAt(x, y, 0x231);
+                case METATILE_ID(MauvilleGym, GreenBeamH2_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH2_Off));
                     break;
-                case 0x228:
-                    MapGridSetMetatileIdAt(x, y, 0x238);
+                case METATILE_ID(MauvilleGym, GreenBeamH3_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH3_Off));
                     break;
-                case 0x229:
-                    MapGridSetMetatileIdAt(x, y, 0x239);
+                case METATILE_ID(MauvilleGym, GreenBeamH4_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, GreenBeamH4_Off));
                     break;
-                case 0x222:
-                    MapGridSetMetatileIdAt(x, y, 0x232);
+                case METATILE_ID(MauvilleGym, RedBeamH1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH1_Off));
                     break;
-                case 0x223:
-                    MapGridSetMetatileIdAt(x, y, 0x233);
+                case METATILE_ID(MauvilleGym, RedBeamH2_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH2_Off));
                     break;
-                case 0x22a:
-                    MapGridSetMetatileIdAt(x, y, 0x23a);
+                case METATILE_ID(MauvilleGym, RedBeamH3_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH3_Off));
                     break;
-                case 0x22b:
-                    MapGridSetMetatileIdAt(x, y, 0x23b);
+                case METATILE_ID(MauvilleGym, RedBeamH4_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, RedBeamH4_Off));
                     break;
-                case 0x240:
-                    MapGridSetMetatileIdAt(x, y, 0xe42);
+                case METATILE_ID(MauvilleGym, GreenBeamV1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_On) | METATILE_COLLISION_MASK);
                     break;
-                case 0x241:
-                    MapGridSetMetatileIdAt(x, y, 0xe43);
+                case METATILE_ID(MauvilleGym, RedBeamV1_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleBottom_Off) | METATILE_COLLISION_MASK);
                     break;
-                case 0x248:
-                case 0x249:
-                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                case METATILE_ID(MauvilleGym, GreenBeamV2_On):
+                case METATILE_ID(MauvilleGym, RedBeamV2_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, FloorTile));
                     break;
-                case 0x250:
-                    MapGridSetMetatileIdAt(x, y, 0x251);
+                case METATILE_ID(MauvilleGym, PoleTop_On):
+                    MapGridSetMetatileIdAt(x, y, METATILE_ID(MauvilleGym, PoleTop_Off));
                     break;
             }
         }
     }
 }
 
-static const u8 gUnknown_085B2B78[] = {0, 1, 1, 1, 1};
-static const u16 gUnknown_085B2B7E[] = {0x218, 0x219, 0x21a, 0x21b, 0x21c};
+static const bool8 sSlidingDoorNextFrameDelay[] = {0, 1, 1, 1, 1};
 
-void PetalburgGymSpecial1(void)
+static const u16 sPetalburgGymSlidingDoorMetatiles[] = {
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame0),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame1),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame2),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame3),
+    METATILE_ID(PetalburgGym, SlidingDoor_Frame4),
+};
+
+void PetalburgGymSlideOpenRoomDoors(void)
 {
-    gUnknown_0203AB5C = 0;
-    gUnknown_0203AB5D = 0;
+    sSlidingDoorNextFrameCounter = 0;
+    sSlidingDoorFrame = 0;
     PlaySE(SE_KI_GASYAN);
-    CreateTask(Task_PetalburgGym, 8);
+    CreateTask(Task_PetalburgGymSlideOpenRoomDoors, 8);
 }
 
-static void Task_PetalburgGym(u8 taskId)
+static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId)
 {
-    if (gUnknown_085B2B78[gUnknown_0203AB5D] == gUnknown_0203AB5C)
+    if (sSlidingDoorNextFrameDelay[sSlidingDoorFrame] == sSlidingDoorNextFrameCounter)
     {
-        PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_085B2B7E[gUnknown_0203AB5D]);
-        gUnknown_0203AB5C = 0;
-        if ((++gUnknown_0203AB5D) == 5)
+        PetalburgGymSetDoorMetatiles(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[sSlidingDoorFrame]);
+        sSlidingDoorNextFrameCounter = 0;
+        if ((++sSlidingDoorFrame) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
         {
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -824,78 +846,78 @@ static void Task_PetalburgGym(u8 taskId)
     }
     else
     {
-        gUnknown_0203AB5C++;
+        sSlidingDoorNextFrameCounter++;
     }
 }
 
-static void PetalburgGymFunc(u8 a0, u16 a1)
+static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId)
 {
-    u16 x[4];
-    u16 y[4];
+    u16 doorCoordsX[4];
+    u16 doorCoordsY[4];
     u8 i;
     u8 nDoors = 0;
-    switch (a0)
+    switch (roomNumber)
     {
         case 1:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x68;
-            y[1] = 0x68;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 104;
+            doorCoordsY[1] = 104;
             break;
         case 2:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x4e;
-            y[1] = 0x4e;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 78;
+            doorCoordsY[1] = 78;
             break;
         case 3:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x5b;
-            y[1] = 0x5b;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 91;
+            doorCoordsY[1] = 91;
             break;
         case 4:
             nDoors = 1;
-            x[0] = 7;
-            y[0] = 0x27;
+            doorCoordsX[0] = 7;
+            doorCoordsY[0] = 39;
             break;
         case 5:
             nDoors = 2;
-            x[0] = 1;
-            x[1] = 7;
-            y[0] = 0x34;
-            y[1] = 0x34;
+            doorCoordsX[0] = 1;
+            doorCoordsX[1] = 7;
+            doorCoordsY[0] = 52;
+            doorCoordsY[1] = 52;
             break;
         case 6:
             nDoors = 1;
-            x[0] = 1;
-            y[0] = 0x41;
+            doorCoordsX[0] = 1;
+            doorCoordsY[0] = 65;
             break;
         case 7:
             nDoors = 1;
-            x[0] = 7;
-            y[0] = 0xd;
+            doorCoordsX[0] = 7;
+            doorCoordsY[0] = 13;
             break;
         case 8:
             nDoors = 1;
-            x[0] = 1;
-            y[0] = 0x1a;
+            doorCoordsX[0] = 1;
+            doorCoordsY[0] = 26;
             break;
     }
     for (i = 0; i < nDoors; i++)
     {
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 7, a1 | METATILE_COLLISION_MASK);
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 8, (a1 + 8) | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 7, metatileId | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 8, (metatileId + 8) | METATILE_COLLISION_MASK);
     }
     DrawWholeMapView();
 }
 
-void PetalburgGymSpecial2(void)
+void PetalburgGymUnlockRoomDoors(void)
 {
-    PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_085B2B7E[4]);
+    PetalburgGymSetDoorMetatiles(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[4]);
 }
 
 void ShowFieldMessageStringVar4(void)
@@ -955,7 +977,7 @@ void CableCarWarp(void)
     }
 }
 
-void SetFlagInVar(void)
+void SetHiddenItemFlag(void)
 {
     FlagSet(gSpecialVar_0x8004);
 }
@@ -973,7 +995,7 @@ u16 GetWeekCount(void)
 u8 GetLeadMonFriendshipScore(void)
 {
     struct Pokemon *pokemon = &gPlayerParty[GetLeadMonIndex()];
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
     {
         return 6;
     }
@@ -1067,37 +1089,37 @@ static void PCTurnOnEffect_0(struct Task *task)
     task->data[3]++;
 }
 
-static void PCTurnOnEffect_1(s16 flag, s8 dx, s8 dy)
+static void PCTurnOnEffect_1(s16 isPcTurnedOn, s8 dx, s8 dy)
 {
     u16 tileId = 0;
-    if (flag != 0)
+    if (isPcTurnedOn)
     {
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
         {
-            tileId = 0x4;
+            tileId = METATILE_ID(Building, PC_Off);
         }
-        else if (gSpecialVar_0x8004 == 1)
+        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
         {
-            tileId = 0x25a;
+            tileId = METATILE_ID(BrendansMaysHouse, BrendanPC_Off);
         }
-        else if (gSpecialVar_0x8004 == 2)
+        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
         {
-            tileId = 0x259;
+            tileId = METATILE_ID(BrendansMaysHouse, MayPC_Off);
         }
     }
     else
     {
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
         {
-            tileId = 0x5;
+            tileId = METATILE_ID(Building, PC_On);
         }
-        else if (gSpecialVar_0x8004 == 1)
+        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
         {
-            tileId = 0x27f;
+            tileId = METATILE_ID(BrendansMaysHouse, BrendanPC_On);
         }
-        else if (gSpecialVar_0x8004 == 2)
+        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
         {
-            tileId = 0x27e;
+            tileId = METATILE_ID(BrendansMaysHouse, MayPC_On);
         }
     }
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
@@ -1131,15 +1153,15 @@ static void PCTurnOffEffect(void)
     }
     if (gSpecialVar_0x8004 == 0)
     {
-        tileId = 0x4;
+        tileId = METATILE_ID(Building, PC_Off);
     }
     else if (gSpecialVar_0x8004 == 1)
     {
-        tileId = 0x25a;
+        tileId = METATILE_ID(BrendansMaysHouse, BrendanPC_Off);
     }
     else if (gSpecialVar_0x8004 == 2)
     {
-        tileId = 0x259;
+        tileId = METATILE_ID(BrendansMaysHouse, MayPC_Off);
     }
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
     DrawWholeMapView();
@@ -1174,13 +1196,13 @@ static void LotteryCornerComputerEffect(struct Task *task)
         task->data[3] = 0;
         if (task->data[4] != 0)
         {
-            MapGridSetMetatileIdAt(18, 8, 0xe9d);
-            MapGridSetMetatileIdAt(18, 9, 0xea5);
+            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | METATILE_COLLISION_MASK);
         }
         else
         {
-            MapGridSetMetatileIdAt(18, 8, 0xe58);
-            MapGridSetMetatileIdAt(18, 9, 0xe60);
+            MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Flash) | METATILE_COLLISION_MASK);
+            MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Flash) | METATILE_COLLISION_MASK);
         }
         DrawWholeMapView();
         task->data[4] ^= 1;
@@ -1194,23 +1216,23 @@ static void LotteryCornerComputerEffect(struct Task *task)
 
 void EndLotteryCornerComputerEffect(void)
 {
-    MapGridSetMetatileIdAt(18, 8, 0xe9d);
-    MapGridSetMetatileIdAt(18, 9, 0xea5);
+    MapGridSetMetatileIdAt(18, 8, METATILE_ID(Shop, Laptop1_Normal) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Shop, Laptop2_Normal) | METATILE_COLLISION_MASK);
     DrawWholeMapView();
 }
 
-void SetTrickHouseEndRoomFlag(void)
+void SetTrickHouseNuggetFlag(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_TRICK_HOUSE_END_ROOM;
+    u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET;
     *specVar = flag;
     FlagSet(flag);
 }
 
-void ResetTrickHouseEndRoomFlag(void)
+void ResetTrickHouseNuggetFlag(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_TRICK_HOUSE_END_ROOM;
+    u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET;
     *specVar = flag;
     FlagClear(flag);
 }
@@ -1283,15 +1305,15 @@ void IsGrassTypeInParty(void)
 
 void SpawnCameraObject(void)
 {
-    u8 obj = SpawnSpecialEventObjectParameterized(EVENT_OBJ_GFX_BOY_1, 8, EVENT_OBJ_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
-    gEventObjects[obj].invisible = TRUE;
-    CameraObjectSetFollowedObjectId(gEventObjects[obj].spriteId);
+    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1, MOVEMENT_TYPE_FACE_DOWN, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    gObjectEvents[obj].invisible = TRUE;
+    CameraObjectSetFollowedObjectId(gObjectEvents[obj].spriteId);
 }
 
 void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveEventObjectByLocalIdAndMap(EVENT_OBJ_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 u8 GetPokeblockNameByMonNature(void)
@@ -1316,16 +1338,16 @@ void BufferEReaderTrainerName(void)
 
 u16 GetSlotMachineId(void)
 {
-    static const u8 gUnknown_085B2B88[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
-    static const u8 gUnknown_085B2B94[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
-    static const u8 gUnknown_085B2BA0[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
+    static const u8 sSlotMachineRandomSeeds[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
+    static const u8 sSlotMachineIds[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
+    static const u8 sSlotMachineServiceDayIds[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
 
-    u32 v0 = gSaveBlock1Ptr->easyChatPairs[0].unk0_0 + gSaveBlock1Ptr->easyChatPairs[0].unk2 + gUnknown_085B2B88[gSpecialVar_0x8004];
-    if (GetPriceReduction(2))
+    u32 rnd = gSaveBlock1Ptr->easyChatPairs[0].unk0_0 + gSaveBlock1Ptr->easyChatPairs[0].unk2 + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
+    if (GetPriceReduction(POKENEWS_GAME_CORNER))
     {
-        return gUnknown_085B2BA0[v0 % 12];
+        return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
     }
-    return gUnknown_085B2B94[v0 % 12];
+    return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
 
 bool8 FoundAbandonedShipRoom1Key(void)
@@ -1390,9 +1412,9 @@ void GiveLeadMonEffortRibbon(void)
     ribbonSet = TRUE;
     leadMon = &gPlayerParty[GetLeadMonIndex()];
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > 4)
+    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
     {
-        sub_80EE4DC(leadMon, 0x47);
+        TryPutSpotTheCutiesOnAir(leadMon, 0x47);
     }
 }
 
@@ -1407,7 +1429,9 @@ bool8 Special_AreLeadMonEVsMaxedOut(void)
 
 u8 TryUpdateRusturfTunnelState(void)
 {
-    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
+    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) 
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) 
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
@@ -1423,7 +1447,7 @@ u8 TryUpdateRusturfTunnelState(void)
     return FALSE;
 }
 
-void SetShoalItemFlag(u16 v0)
+void SetShoalItemFlag(u16 unused)
 {
     FlagSet(FLAG_SYS_SHOAL_ITEM);
 }
@@ -1431,7 +1455,7 @@ void SetShoalItemFlag(u16 v0)
 void PutZigzagoonInPlayerParty(void)
 {
     u16 monData;
-    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 0x20, FALSE, 0, FALSE, 0);
+    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 32, FALSE, 0, OT_ID_PLAYER_ID, 0);
     monData = TRUE;
     SetMonData(&gPlayerParty[0], MON_DATA_ABILITY_NUM, &monData);
     monData = MOVE_TACKLE;
@@ -1471,43 +1495,55 @@ bool8 IsPokerusInParty(void)
     return TRUE;
 }
 
-void sub_8139560(void)
+#define horizontalPan  data[0]
+#define delayCounter   data[1]
+#define numShakes      data[2]
+#define delay          data[3]
+#define verticalPan    data[4]
+
+void ShakeCamera(void)
 {
-    u8 taskId = CreateTask(sub_81395BC, 9);
-    gTasks[taskId].data[0] = gSpecialVar_0x8005;
-    gTasks[taskId].data[1] = 0;
-    gTasks[taskId].data[2] = gSpecialVar_0x8006;
-    gTasks[taskId].data[3] = gSpecialVar_0x8007;
-    gTasks[taskId].data[4] = gSpecialVar_0x8004;
+    u8 taskId = CreateTask(Task_ShakeCamera, 9);
+    gTasks[taskId].horizontalPan = gSpecialVar_0x8005;
+    gTasks[taskId].delayCounter = 0;
+    gTasks[taskId].numShakes = gSpecialVar_0x8006;
+    gTasks[taskId].delay = gSpecialVar_0x8007;
+    gTasks[taskId].verticalPan = gSpecialVar_0x8004;
     SetCameraPanningCallback(NULL);
     PlaySE(SE_W070);
 }
 
-static void sub_81395BC(u8 taskId)
+static void Task_ShakeCamera(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    data[1]++;
-    if (data[1] % data[3] == 0)
+    delayCounter++;
+    if (delayCounter % delay == 0)
     {
-        data[1] = 0;
-        data[2]--;
-        data[0] = -data[0];
-        data[4] = -data[4];
-        SetCameraPanning(data[0], data[4]);
-        if (data[2] == 0)
+        delayCounter = 0;
+        numShakes--;
+        horizontalPan = -horizontalPan;
+        verticalPan = -verticalPan;
+        SetCameraPanning(horizontalPan, verticalPan);
+        if (numShakes == 0)
         {
-            sub_8139620(taskId);
+            StopCameraShake(taskId);
             InstallCameraPanAheadCallback();
         }
     }
 }
 
-static void sub_8139620(u8 taskId)
+static void StopCameraShake(u8 taskId)
 {
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
+
+#undef horizontalPan
+#undef delayCounter
+#undef numShakes
+#undef delay
+#undef verticalPan
 
 bool8 FoundBlackGlasses(void)
 {
@@ -1518,7 +1554,7 @@ void SetRoute119Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
     {
-        SetSav1Weather(20);
+        SetSav1Weather(WEATHER_ROUTE119_CYCLE);
     }
 }
 
@@ -1526,7 +1562,7 @@ void SetRoute123Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
     {
-        SetSav1Weather(21);
+        SetSav1Weather(WEATHER_ROUTE123_CYCLE);
     }
 }
 
@@ -1549,9 +1585,10 @@ u16 ScriptGetPartyMonSpecies(void)
     return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
 }
 
-void nullsub_54(void)
+// Removed for Emerald
+void TryInitBattleTowerAwardManObjectEvent(void)
 {
-
+    //TryInitLocalObjectEvent(6);
 }
 
 u16 GetDaysUntilPacifidlogTMAvailable(void)
@@ -1574,18 +1611,16 @@ u16 SetPacifidlogTMReceivedDay(void)
     return gLocalTime.days;
 }
 
-bool8 MonOTNameMatchesPlayer(void)
+bool8 MonOTNameNotPlayer(void)
 {
     if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
-    {
-        return TRUE;    // huh?
-    }
+        return TRUE;
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
+
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -1598,20 +1633,20 @@ void BufferLottoTicketNumber(void)
     else if (gSpecialVar_Result >= 1000)
     {
         gStringVar1[0] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else if (gSpecialVar_Result >= 100)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else if (gSpecialVar_Result >= 10)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else
     {
@@ -1619,30 +1654,30 @@ void BufferLottoTicketNumber(void)
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
         gStringVar1[3] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, 0, CountDigits(gSpecialVar_Result));
+        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
 }
 
-u16 sub_813986C(void)
+u16 GetMysteryEventCardVal(void)
 {
     switch (gSpecialVar_Result)
     {
-        case 0:
-            return mevent_081445C0(3);
-        case 1:
-            return mevent_081445C0(4);
-        case 2:
-            return mevent_081445C0(0);
-        case 3:
+        case GET_NUM_STAMPS:
+            return mevent_081445C0(GET_NUM_STAMPS_INTERNAL);
+        case GET_MAX_STAMPS:
+            return mevent_081445C0(GET_MAX_STAMPS_INTERNAL);
+        case GET_CARD_BATTLES_WON:
+            return mevent_081445C0(GET_CARD_BATTLES_WON_INTERNAL);
+        case 3: // Never occurs
             return mevent_081445C0(1);
-        case 4:
+        case 4: // Never occurs
             return mevent_081445C0(2);
         default:
             return 0;
     }
 }
 
-bool8 sub_81398C0(void)
+bool8 BufferTMHMMoveName(void)
 {
     if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
     {
@@ -1653,36 +1688,37 @@ bool8 sub_81398C0(void)
     return FALSE;
 }
 
-bool8 sub_813990C(void)
+bool8 IsBadEggInParty(void)
 {
     u8 partyCount = CalculatePlayerPartyCount();
     u8 i;
 
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == 1)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == TRUE)
             return TRUE;
     }
 
     return FALSE;
 }
 
-bool8 InMultiBattleRoom(void)
+bool8 InMultiPartnerRoom(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM)
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM) &&
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) &&
         VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS)
         return TRUE;
     return FALSE;
 }
 
-void sub_8139980(void)
+void OffsetCameraForBattle(void)
 {
     SetCameraPanningCallback(NULL);
     SetCameraPanning(8, 0);
 }
 
-const struct WindowTemplate gUnknown_085B2BAC = {
+const struct WindowTemplate gElevatorFloor_WindowTemplate = 
+{
     .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 1,
@@ -1692,136 +1728,163 @@ const struct WindowTemplate gUnknown_085B2BAC = {
     .baseBlock = 8,
 };
 
-const u8 *const gElevatorFloorsTable[] = {
-    gText_B4F,
-    gText_B3F,
-    gText_B2F,
-    gText_B1F,
-    gText_1F,
-    gText_2F,
-    gText_3F,
-    gText_4F,
-    gText_5F,
-    gText_6F,
-    gText_7F,
-    gText_8F,
-    gText_9F,
-    gText_10F,
-    gText_11F,
-    gText_Rooftop
+const u8 *const gDeptStoreFloorNames[] =
+{
+    [DEPT_STORE_FLOORNUM_B4F] = gText_B4F,
+    [DEPT_STORE_FLOORNUM_B3F] = gText_B3F,
+    [DEPT_STORE_FLOORNUM_B2F] = gText_B2F,
+    [DEPT_STORE_FLOORNUM_B1F] = gText_B1F,
+    [DEPT_STORE_FLOORNUM_1F] = gText_1F,
+    [DEPT_STORE_FLOORNUM_2F] = gText_2F,
+    [DEPT_STORE_FLOORNUM_3F] = gText_3F,
+    [DEPT_STORE_FLOORNUM_4F] = gText_4F,
+    [DEPT_STORE_FLOORNUM_5F] = gText_5F,
+    [DEPT_STORE_FLOORNUM_6F] = gText_6F,
+    [DEPT_STORE_FLOORNUM_7F] = gText_7F,
+    [DEPT_STORE_FLOORNUM_8F] = gText_8F,
+    [DEPT_STORE_FLOORNUM_9F] = gText_9F,
+    [DEPT_STORE_FLOORNUM_10F] = gText_10F,
+    [DEPT_STORE_FLOORNUM_11F] = gText_11F,
+    [DEPT_STORE_FLOORNUM_ROOFTOP] = gText_Rooftop
 };
 
-const u16 gUnknown_085B2BF4[][3] =
+static const u16 sElevatorWindowTiles_Ascending[][3] =
 {
-    {0x0329, 0x032a, 0x032b},
-    {0x0331, 0x0332, 0x0333},
-    {0x0339, 0x033a, 0x033b},
-};
-const u16 gUnknown_085B2C06[][3] =
-{
-    {0x0329, 0x032b, 0x032a},
-    {0x0331, 0x0333, 0x0332},
-    {0x0339, 0x033b, 0x033a},
+    {
+        METATILE_ID(BattleFrontier, Elevator_Top0),
+        METATILE_ID(BattleFrontier, Elevator_Top1),
+        METATILE_ID(BattleFrontier, Elevator_Top2)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Mid0),
+        METATILE_ID(BattleFrontier, Elevator_Mid1),
+        METATILE_ID(BattleFrontier, Elevator_Mid2)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Bottom0),
+        METATILE_ID(BattleFrontier, Elevator_Bottom1),
+        METATILE_ID(BattleFrontier, Elevator_Bottom2)
+    },
 };
 
-void SetDepartmentStoreFloorVar(void)
+static const u16 sElevatorWindowTiles_Descending[][3] =
+{
+    {
+        METATILE_ID(BattleFrontier, Elevator_Top0),
+        METATILE_ID(BattleFrontier, Elevator_Top2),
+        METATILE_ID(BattleFrontier, Elevator_Top1)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Mid0),
+        METATILE_ID(BattleFrontier, Elevator_Mid2),
+        METATILE_ID(BattleFrontier, Elevator_Mid1)
+    },
+    {
+        METATILE_ID(BattleFrontier, Elevator_Bottom0),
+        METATILE_ID(BattleFrontier, Elevator_Bottom2),
+        METATILE_ID(BattleFrontier, Elevator_Bottom1)
+    },
+};
+
+void SetDeptStoreFloor(void)
 {
     u8 deptStoreFloor;
     switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
     {
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
-            deptStoreFloor = 4;
+            deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
             break;
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
-            deptStoreFloor = 5;
+            deptStoreFloor = DEPT_STORE_FLOORNUM_2F;
             break;
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
-            deptStoreFloor = 6;
+            deptStoreFloor = DEPT_STORE_FLOORNUM_3F;
             break;
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
-            deptStoreFloor = 7;
+            deptStoreFloor = DEPT_STORE_FLOORNUM_4F;
             break;
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
-            deptStoreFloor = 8;
+            deptStoreFloor = DEPT_STORE_FLOORNUM_5F;
             break;
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP):
-            deptStoreFloor = 15;
+            deptStoreFloor = DEPT_STORE_FLOORNUM_ROOFTOP;
             break;
         default:
-            deptStoreFloor = 4;
+            deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
             break;
     }
     VarSet(VAR_DEPT_STORE_FLOOR, deptStoreFloor);
 }
 
-u16 sub_81399F4(void)
+u16 GetDeptStoreDefaultFloorChoice(void)
 {
-    gUnknown_0203AB60 = 0;
-    gUnknown_0203AB62 = 0;
+    sLilycoveDeptStore_NeverRead = 0;
+    sLilycoveDeptStore_DefaultFloorChoice = 0;
 
     if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_1F))
     {
         switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
-                gUnknown_0203AB60 = 0;
-                gUnknown_0203AB62 = 0;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 0;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
-                gUnknown_0203AB60 = 0;
-                gUnknown_0203AB62 = 1;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 1;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
-                gUnknown_0203AB60 = 0;
-                gUnknown_0203AB62 = 2;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 2;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
-                gUnknown_0203AB60 = 0;
-                gUnknown_0203AB62 = 3;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 3;
                 break;
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
-                gUnknown_0203AB60 = 0;
-                gUnknown_0203AB62 = 4;
+                sLilycoveDeptStore_NeverRead = 0;
+                sLilycoveDeptStore_DefaultFloorChoice = 4;
                 break;
         }
     }
 
-    return gUnknown_0203AB62;
+    return sLilycoveDeptStore_DefaultFloorChoice;
 }
 
-void ShakeScreenInElevator(void)
+void MoveElevator(void)
 {
-    static const u8 gUnknown_085B2C18[] = { 0x08, 0x10, 0x18, 0x20, 0x26, 0x2e, 0x34, 0x38, 0x39 };
+    static const u8 sElevatorTripLength[] = { 8, 16, 24, 32, 38, 46, 52, 56, 57 };
 
-    s16 *data = gTasks[CreateTask(sub_8139AF4, 9)].data;
+    s16 *data = gTasks[CreateTask(Task_MoveElevator, 9)].data;
     u16 floorDelta;
 
     data[1] = 0;
     data[2] = 0;
     data[4] = 1;
 
+    // descending
     if (gSpecialVar_0x8005 > gSpecialVar_0x8006)
     {
         floorDelta = gSpecialVar_0x8005 - gSpecialVar_0x8006;
-        data[6] = 1;
+        data[6] = TRUE;
     }
     else
     {
         floorDelta = gSpecialVar_0x8006 - gSpecialVar_0x8005;
-        data[6] = 0;
+        data[6] = FALSE;
     }
 
     if (floorDelta > 8)
         floorDelta = 8;
 
-    data[5] = gUnknown_085B2C18[floorDelta];
+    data[5] = sElevatorTripLength[floorDelta];
 
     SetCameraPanningCallback(NULL);
-    sub_8139C2C(floorDelta, data[6]);
+    MoveElevatorWindowLights(floorDelta, data[6]);
     PlaySE(SE_ELEBETA);
 }
 
-static void sub_8139AF4(u8 taskId)
+static void Task_MoveElevator(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     data[1]++;
@@ -1831,6 +1894,8 @@ static void sub_8139AF4(u8 taskId)
         data[2]++;
         data[4] = -data[4];
         SetCameraPanning(0, data[4]);
+
+        // arrived at floor
         if (data[2] == data[5])
         {
             PlaySE(SE_PINPON);
@@ -1841,44 +1906,44 @@ static void sub_8139AF4(u8 taskId)
     }
 }
 
-void sub_8139B60(void)
+void ShowDeptStoreElevatorFloorSelect(void)
 {
     int xPos;
 
-    gUnknown_0203AB5E = AddWindow(&gUnknown_085B2BAC);
-    SetStandardWindowBorderStyle(gUnknown_0203AB5E, 0);
+    sTutorMoveAndElevatorWindowId = AddWindow(&gElevatorFloor_WindowTemplate);
+    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
 
     xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
 
-    xPos = GetStringCenterAlignXOffset(1, gElevatorFloorsTable[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gElevatorFloorsTable[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
+    xPos = GetStringCenterAlignXOffset(1, gDeptStoreFloorNames[gSpecialVar_0x8005], 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
 
-    PutWindowTilemap(gUnknown_0203AB5E);
-    CopyWindowToVram(gUnknown_0203AB5E, 3);
+    PutWindowTilemap(sTutorMoveAndElevatorWindowId);
+    CopyWindowToVram(sTutorMoveAndElevatorWindowId, 3);
 }
 
-void sub_8139C10(void)
+void CloseDeptStoreElevatorWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB5E, TRUE);
-    RemoveWindow(gUnknown_0203AB5E);
+    ClearStdWindowAndFrameToTransparent(sTutorMoveAndElevatorWindowId, TRUE);
+    RemoveWindow(sTutorMoveAndElevatorWindowId);
 }
 
-static void sub_8139C2C(u16 a1, u8 a2)
+static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending)
 {
-    static const u8 gUnknown_085B2C21[] = { 0x03, 0x06, 0x09, 0x0c, 0x0f, 0x12, 0x15, 0x18, 0x1b };
+    static const u8 sElevatorLightCycles[] = { 3, 6, 9, 12, 15, 18, 21, 24, 27 };
 
-    if (FuncIsActiveTask(sub_8139C80) != TRUE)
+    if (FuncIsActiveTask(Task_MoveElevatorWindowLights) != TRUE)
     {
-        u8 taskId = CreateTask(sub_8139C80, 8);
+        u8 taskId = CreateTask(Task_MoveElevatorWindowLights, 8);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = 0;
-        gTasks[taskId].data[2] = a2;
-        gTasks[taskId].data[3] = gUnknown_085B2C21[a1];
+        gTasks[taskId].data[2] = descending;
+        gTasks[taskId].data[3] = sElevatorLightCycles[floorDelta];
     }
 }
 
-static void sub_8139C80(u8 taskId)
+static void Task_MoveElevatorWindowLights(u8 taskId)
 {
     u8 x, y;
     s16 *data = gTasks[taskId].data;
@@ -1886,23 +1951,26 @@ static void sub_8139C80(u8 taskId)
     if (data[1] == 6)
     {
         data[0]++;
-        if (data[2] == 0)
+
+        // ascending
+        if (data[2] == FALSE)
         {
             for (y = 0; y < 3; y++)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2BF4[y][data[0] % 3] | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Ascending[y][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
+        // descending
         else
         {
             for (y = 0; y < 3; y++)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2C06[y][data[0] % 3] | METATILE_COLLISION_MASK);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Descending[y][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
@@ -1916,7 +1984,7 @@ static void sub_8139C80(u8 taskId)
     data[1]++;
 }
 
-void sub_8139D98(void)
+void BufferVarsForIVRater(void)
 {
     u8 i;
     u32 ivStorage[NUM_STATS];
@@ -1957,23 +2025,44 @@ void sub_8139D98(void)
     }
 }
 
-bool8 warp0_in_pokecenter(void)
+bool8 UsedPokemonCenterWarp(void)
 {
-    static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xFFFF };
+    static const u16 sPokemonCenters[] = 
+    { 
+        MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 
+        MAP_DEWFORD_TOWN_POKEMON_CENTER_1F, 
+        MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F, 
+        MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F, 
+        MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F, 
+        MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F, 
+        MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 
+        MAP_SLATEPORT_CITY_POKEMON_CENTER_1F, 
+        MAP_MAUVILLE_CITY_POKEMON_CENTER_1F, 
+        MAP_RUSTBORO_CITY_POKEMON_CENTER_1F, 
+        MAP_FORTREE_CITY_POKEMON_CENTER_1F, 
+        MAP_LILYCOVE_CITY_POKEMON_CENTER_1F, 
+        MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F, 
+        MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F, 
+        MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F, 
+        MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F, 
+        MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F, 
+        MAP_UNION_ROOM, 
+        0xFFFF 
+    };
 
     int i;
     u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
 
-    for (i = 0; gUnknown_085B2C2A[i] != 0xFFFF; i++)
+    for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)
     {
-        if (gUnknown_085B2C2A[i] == map)
+        if (sPokemonCenters[i] == map)
             return TRUE;
     }
 
     return FALSE;
 }
 
-bool32 sub_8139ED0(void)
+bool32 PlayerNotAtTrainerHillEntrance(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
     {
@@ -1982,130 +2071,191 @@ bool32 sub_8139ED0(void)
     return TRUE;
 }
 
-void UpdateFrontierManiac(u16 a0)
+void UpdateFrontierManiac(u16 daysSince)
 {
     u16 *var = GetVarPointer(VAR_FRONTIER_MANIAC_FACILITY);
-    *var += a0;
-    *var %= 10;
+    *var += daysSince;
+    *var %= FRONTIER_MANIAC_FACILITY_COUNT;
 }
 
-void sub_8139F20(void)
+void ShowFrontierManiacMessage(void)
 {
-    static const u8 *const gUnknown_085B2C50[][3] = {
-        { BattleFrontier_Lounge2_Text_260971, BattleFrontier_Lounge2_Text_260A1E, BattleFrontier_Lounge2_Text_260AE7 },
-        { BattleFrontier_Lounge2_Text_2619AC, BattleFrontier_Lounge2_Text_261A91, BattleFrontier_Lounge2_Text_261B0C },
-        { BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95, BattleFrontier_Lounge2_Text_261B95 },
-        { BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A, BattleFrontier_Lounge2_Text_261C1A },
-        { BattleFrontier_Lounge2_Text_260BC4, BattleFrontier_Lounge2_Text_260C6D, BattleFrontier_Lounge2_Text_260D3A },
-        { BattleFrontier_Lounge2_Text_260E1E, BattleFrontier_Lounge2_Text_260EC7, BattleFrontier_Lounge2_Text_260F74 },
-        { BattleFrontier_Lounge2_Text_2614E6, BattleFrontier_Lounge2_Text_261591, BattleFrontier_Lounge2_Text_26166F },
-        { BattleFrontier_Lounge2_Text_261282, BattleFrontier_Lounge2_Text_261329, BattleFrontier_Lounge2_Text_261403 },
-        { BattleFrontier_Lounge2_Text_261026, BattleFrontier_Lounge2_Text_2610CC, BattleFrontier_Lounge2_Text_261194 },
-        { BattleFrontier_Lounge2_Text_26174D, BattleFrontier_Lounge2_Text_2617F9, BattleFrontier_Lounge2_Text_2618C4 },
+    static const u8 *const sFrontierManiacMessages[][FRONTIER_MANIAC_MESSAGE_COUNT] = 
+    {
+        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] =
+        { 
+            BattleFrontier_Lounge2_Text_SalonMaidenIsThere, 
+            BattleFrontier_Lounge2_Text_SalonMaidenSilverMons, 
+            BattleFrontier_Lounge2_Text_SalonMaidenGoldMons 
+        },
+        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] =
+        { 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice1, 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice2, 
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice3 
+        },
+        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS] = 
+        { 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice 
+        },
+        [FRONTIER_MANIAC_BATTLE_TOWER_LINK] =
+        { 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice 
+        },
+        [FRONTIER_MANIAC_BATTLE_DOME] =
+        { 
+            BattleFrontier_Lounge2_Text_DomeAceIsThere, 
+            BattleFrontier_Lounge2_Text_DomeAceSilverMons, 
+            BattleFrontier_Lounge2_Text_DomeAceGoldMons 
+        },
+        [FRONTIER_MANIAC_BATTLE_FACTORY] =
+        { 
+            BattleFrontier_Lounge2_Text_FactoryHeadIsThere, 
+            BattleFrontier_Lounge2_Text_FactoryHeadSilverMons, 
+            BattleFrontier_Lounge2_Text_FactoryHeadGoldMons 
+        },
+        [FRONTIER_MANIAC_BATTLE_PALACE] =
+        { 
+            BattleFrontier_Lounge2_Text_PalaceMavenIsThere, 
+            BattleFrontier_Lounge2_Text_PalaceMavenSilverMons, 
+            BattleFrontier_Lounge2_Text_PalaceMavenGoldMons 
+        },
+        [FRONTIER_MANIAC_BATTLE_ARENA] =
+        { 
+            BattleFrontier_Lounge2_Text_ArenaTycoonIsThere, 
+            BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons, 
+            BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons 
+        },
+        [FRONTIER_MANIAC_BATTLE_PIKE] = 
+        { 
+            BattleFrontier_Lounge2_Text_PikeQueenIsThere, 
+            BattleFrontier_Lounge2_Text_PikeQueenSilverMons, 
+            BattleFrontier_Lounge2_Text_PikeQueenGoldMons 
+        },
+        [FRONTIER_MANIAC_BATTLE_PYRAMID] =
+        { 
+            BattleFrontier_Lounge2_Text_PyramidKingIsThere, 
+            BattleFrontier_Lounge2_Text_PyramidKingSilverMons, 
+            BattleFrontier_Lounge2_Text_PyramidKingGoldMons 
+        },
     };
 
-    static const u8 gUnknown_085B2CC8[][2] = {
-        { 0x15, 0x38 },
-        { 0x15, 0x23 },
-        { 0xff, 0xff },
-        { 0xff, 0xff },
-        { 0x02, 0x04 },
-        { 0x07, 0x15 },
-        { 0x07, 0x15 },
-        { 0x0e, 0x1c },
-        { 0x0d, 0x70 },
-        { 0x07, 0x38 }
+    static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] = 
+    {
+        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] = { 21, 56 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] = { 21, 35 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS]  = { 255, 255 },
+        [FRONTIER_MANIAC_BATTLE_TOWER_LINK]    = { 255, 255 },
+        [FRONTIER_MANIAC_BATTLE_DOME]          = { 2, 4 },
+        [FRONTIER_MANIAC_BATTLE_FACTORY]       = { 7, 21 },
+        [FRONTIER_MANIAC_BATTLE_PALACE]        = { 7, 21 },
+        [FRONTIER_MANIAC_BATTLE_ARENA]         = { 14, 28 },
+        [FRONTIER_MANIAC_BATTLE_PIKE]          = { 13, 112 }, //BUG: 112 (0x70) is probably a mistake; the Pike Queen is battled twice well before that
+        [FRONTIER_MANIAC_BATTLE_PYRAMID]       = { 7, 56 }
     };
 
     u8 i;
-    u16 unk = 0;
-    u16 var = VarGet(VAR_FRONTIER_MANIAC_FACILITY);
-    switch (var)
+    u16 winStreak = 0;
+    u16 facility = VarGet(VAR_FRONTIER_MANIAC_FACILITY);
+
+    switch (facility)
     {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-            if (gSaveBlock2Ptr->frontier.towerWinStreaks[var][0] >= gSaveBlock2Ptr->frontier.towerWinStreaks[var][1])
+        case FRONTIER_MANIAC_BATTLE_TOWER_SINGLES:
+        case FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES:
+        case FRONTIER_MANIAC_BATTLE_TOWER_MULTIS:
+        case FRONTIER_MANIAC_BATTLE_TOWER_LINK:
+            if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50] 
+                >= gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
             {
-                unk = gSaveBlock2Ptr->frontier.towerWinStreaks[var][0];
+                winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.towerWinStreaks[var][1];
+                winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN];
             }
             break;
-        case 4:
-            if (gSaveBlock2Ptr->frontier.domeWinStreaks[0][0] >= gSaveBlock2Ptr->frontier.domeWinStreaks[0][1])
+        case FRONTIER_MANIAC_BATTLE_DOME:
+            if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
+                >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
             {
-                unk = gSaveBlock2Ptr->frontier.domeWinStreaks[0][0];
+                winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.domeWinStreaks[0][1];
+                winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
             }
             break;
-        case 5:
-            if (gSaveBlock2Ptr->frontier.factoryWinStreaks[0][0] >= gSaveBlock2Ptr->frontier.factoryWinStreaks[0][1])
+        case FRONTIER_MANIAC_BATTLE_FACTORY:
+            if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
+                >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
             {
-                unk = gSaveBlock2Ptr->frontier.factoryWinStreaks[0][0];
+                winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.factoryWinStreaks[0][1];
+                winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
             }
             break;
-        case 6:
-            if (gSaveBlock2Ptr->frontier.palaceWinStreaks[0][0] >= gSaveBlock2Ptr->frontier.palaceWinStreaks[0][1])
+        case FRONTIER_MANIAC_BATTLE_PALACE:
+            if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
+                >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
             {
-                unk = gSaveBlock2Ptr->frontier.palaceWinStreaks[0][0];
+                winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.palaceWinStreaks[0][1];
+                winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
             }
             break;
-        case 7:
-            if (gSaveBlock2Ptr->frontier.arenaWinStreaks[0] >= gSaveBlock2Ptr->frontier.arenaWinStreaks[1])
+        case FRONTIER_MANIAC_BATTLE_ARENA:
+            if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50] 
+                >= gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN])
             {
-                unk = gSaveBlock2Ptr->frontier.arenaWinStreaks[0];
+                winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.arenaWinStreaks[1];
+                winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN];
             }
             break;
-        case 8:
-            if (gSaveBlock2Ptr->frontier.pikeWinStreaks[0] >= gSaveBlock2Ptr->frontier.pikeWinStreaks[1])
+        case FRONTIER_MANIAC_BATTLE_PIKE:
+            if (gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50] 
+                >= gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN])
             {
-                unk = gSaveBlock2Ptr->frontier.pikeWinStreaks[0];
+                winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.pikeWinStreaks[1];
+                winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN];
             }
             break;
-        case 9:
-            if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[0] >= gSaveBlock2Ptr->frontier.pyramidWinStreaks[1])
+        case FRONTIER_MANIAC_BATTLE_PYRAMID:
+            if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50] 
+                >= gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN])
             {
-                unk = gSaveBlock2Ptr->frontier.pyramidWinStreaks[0];
+                winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.pyramidWinStreaks[1];
+                winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN];
             }
             break;
     }
 
-    for (i = 0; i < 2 && gUnknown_085B2CC8[var][i] < unk; i++);
+    for (i = 0; i < FRONTIER_MANIAC_MESSAGE_COUNT - 1 && sFrontierManiacStreakThresholds[facility][i] < winStreak; i++);
 
-    ShowFieldMessage(gUnknown_085B2C50[var][i]);
+    ShowFieldMessage(sFrontierManiacMessages[facility][i]);
 }
 
-void sub_813A080(void)
+// gSpecialVar_0x8005 and 0x8006 here are used by MoveElevator
+void BufferBattleTowerElevatorFloors(void)
 {
-    static const u16 gUnknown_085B2CDC[] = {
-        0x0007, 0x000e, 0x0015, 0x001c, 0x0023, 0x0031, 0x003f, 0x004d, 0x005b, 0x0000
+    static const u16 sBattleTowerStreakThresholds[] = {
+        7, 14, 21, 28, 35, 49, 63, 77, 91, 0
     };
 
     u8 i;
@@ -2119,9 +2269,9 @@ void sub_813A080(void)
         return;
     }
 
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < ARRAY_COUNT(sBattleTowerStreakThresholds) - 1; i++)
     {
-        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode])
+        if (sBattleTowerStreakThresholds[i] > gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode])
         {
             gSpecialVar_0x8005 = 4;
             gSpecialVar_0x8006 = i + 5;
@@ -2133,161 +2283,166 @@ void sub_813A080(void)
     gSpecialVar_0x8006 = 12;
 }
 
-void sub_813A128(void)
+// Scrollable Multichoice task data defines
+#define tMaxItemsOnScreen    data[0]
+#define tNumItems            data[1]
+#define tLeft                data[2]
+#define tTop                 data[3]
+#define tWidth               data[4]
+#define tHeight              data[5]
+#define tKeepOpenAfterSelect data[6]
+#define tScrollOffset        data[7]
+#define tSelectedRow         data[8]
+#define tScrollMultiId       data[11]
+#define tScrollArrowId       data[12]
+#define tWindowId            data[13]
+#define tListTaskId          data[14]
+#define tTaskId              data[15]
+// data[9] and [10] unused
+
+void ShowScrollableMultichoice(void)
 {
-    u8 taskId = CreateTask(sub_813A2DC, 8);
+    u8 taskId = CreateTask(Task_ShowScrollableMultichoice, 8);
     struct Task *task = &gTasks[taskId];
-    task->data[11] = gSpecialVar_0x8004;
+    task->tScrollMultiId = gSpecialVar_0x8004;
 
     switch (gSpecialVar_0x8004)
     {
-        case 0:
-            task->data[0] = 1;
-            task->data[1] = 1;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 1;
-            task->data[5] = 1;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_NONE:
+            task->tMaxItemsOnScreen = 1;
+            task->tNumItems = 1;
+            task->tLeft = 1;
+            task->tTop = 1;
+            task->tWidth = 1;
+            task->tHeight = 1;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 1:
-            task->data[0] = 5;
-            task->data[1] = 8;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 9;
-            task->data[5] = 10;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
+            task->tNumItems = 8;
+            task->tLeft = 1;
+            task->tTop = 1;
+            task->tWidth = 9;
+            task->tHeight = 10;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 2:
-            task->data[0] = 6;
-            task->data[1] = 12;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 7;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_POKEMON_FAN_CLUB_RATER:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 12;
+            task->tLeft = 1;
+            task->tTop = 1;
+            task->tWidth = 7;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 3:
-            task->data[0] = 6;
-            task->data[1] = 11;
-            task->data[2] = 14;
-            task->data[3] = 1;
-            task->data[4] = 15;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 11;
+            task->tLeft = 14;
+            task->tTop = 1;
+            task->tWidth = 15;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 4:
-            task->data[0] = 6;
-            task->data[1] = 6;
-            task->data[2] = 14;
-            task->data[3] = 1;
-            task->data[4] = 15;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 6;
+            task->tLeft = 14;
+            task->tTop = 1;
+            task->tWidth = 15;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 5:
-            task->data[0] = 6;
-            task->data[1] = 7;
-            task->data[2] = 14;
-            task->data[3] = 1;
-            task->data[4] = 15;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 7;
+            task->tLeft = 14;
+            task->tTop = 1;
+            task->tWidth = 15;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 6:
-            task->data[0] = 6;
-            task->data[1] = 10;
-            task->data[2] = 14;
-            task->data[3] = 1;
-            task->data[4] = 15;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 10;
+            task->tLeft = 14;
+            task->tTop = 1;
+            task->tWidth = 15;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 7:
-            task->data[0] = 6;
-            task->data[1] = 12;
-            task->data[2] = 15;
-            task->data[3] = 1;
-            task->data[4] = 14;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BERRY_POWDER_VENDOR:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 12;
+            task->tLeft = 15;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 8:
-            task->data[0] = 6;
-            task->data[1] = 10;
-            task->data[2] = 17;
-            task->data[3] = 1;
-            task->data[4] = 11;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BF_RECEPTIONIST:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 10;
+            task->tLeft = 17;
+            task->tTop = 1;
+            task->tWidth = 11;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 9:
-        case 10:
-            task->data[0] = 6;
-            task->data[1] = 11;
-            task->data[2] = 15;
-            task->data[3] = 1;
-            task->data[4] = 14;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BF_MOVE_TUTOR_1:
+        case SCROLL_MULTI_BF_MOVE_TUTOR_2:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 11;
+            task->tLeft = 15;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 11:
-            task->data[0] = 6;
-            task->data[1] = 7;
-            task->data[2] = 19;
-            task->data[3] = 1;
-            task->data[4] = 10;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_SS_TIDAL_DESTINATION:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 7;
+            task->tLeft = 19;
+            task->tTop = 1;
+            task->tWidth = 10;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
-        case 12:
-            task->data[0] = 6;
-            task->data[1] = 7;
-            task->data[2] = 17;
-            task->data[3] = 1;
-            task->data[4] = 12;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
+        case SCROLL_MULTI_BATTLE_TENT_RULES:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 7;
+            task->tLeft = 17;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
             break;
         default:
-            gSpecialVar_Result = 0x7F;
+            gSpecialVar_Result = MULTI_B_PRESSED;
             DestroyTask(taskId);
             break;
     }
 }
 
-static const u8 *const gUnknown_085B2CF0[][16] = {
+static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] = 
+{
+    [SCROLL_MULTI_NONE] = 
     {
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] = 
     {
         gText_BlueFlute,
         gText_YellowFlute,
@@ -2296,16 +2451,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_BlackFlute,
         gText_PrettyChair,
         gText_PrettyDesk,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] = 
     {
         gText_0Pts,
         gText_10Pts,
@@ -2318,12 +2466,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_80Pts,
         gText_90Pts,
         gText_100Pts,
-        gText_QuestionMark,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_QuestionMark
     },
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1] = 
     {
         gText_KissPoster16BP,
         gText_KissCushion32BP,
@@ -2335,31 +2480,18 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_CyndaquilDoll80BP,
         gText_ChikoritaDoll80BP,
         gText_TotodileDoll80BP,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2] =
     {
         gText_LaprasDoll128BP,
         gText_SnorlaxDoll128BP,
         gText_VenusaurDoll256BP,
         gText_CharizardDoll256BP,
         gText_BlastoiseDoll256BP,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
     {
         gText_Protein1BP,
         gText_Calcium1BP,
@@ -2367,17 +2499,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_Zinc1BP,
         gText_Carbos1BP,
         gText_HpUp1BP,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
     {
         gText_Leftovers48BP,
         gText_WhiteHerb48BP,
@@ -2388,14 +2512,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_KingsRock64BP,
         gText_FocusBand64BP,
         gText_ScopeLens64BP,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BERRY_POWDER_VENDOR] =
     {
         gText_EnergyPowder50,
         gText_EnergyRoot80,
@@ -2408,12 +2527,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_Zinc1000,
         gText_HPUp1000,
         gText_PPUp3000,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BF_RECEPTIONIST] =
     {
         gText_BattleTower2,
         gText_BattleDome,
@@ -2424,14 +2540,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_BattlePyramid,
         gText_RankingHall,
         gText_ExchangeService,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BF_MOVE_TUTOR_1] = 
     {
         gText_Softboiled16BP,
         gText_SeismicToss24BP,
@@ -2443,13 +2554,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_Counter48BP,
         gText_ThunderWave48BP,
         gText_SwordsDance48BP,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BF_MOVE_TUTOR_2] = 
     {
         gText_DefenseCurl16BP,
         gText_Snore24BP,
@@ -2461,13 +2568,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_IcePunch48BP,
         gText_ThunderPunch48BP,
         gText_FirePunch48BP,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_SS_TIDAL_DESTINATION] =
     {
         gText_SlateportCity,
         gText_BattleFrontier,
@@ -2475,17 +2578,9 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_NavelRock,
         gText_BirthIsland,
         gText_FarawayIsland,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     },
+    [SCROLL_MULTI_BATTLE_TENT_RULES] =
     {
         gText_BattleTrainers,
         gText_BattleBasics,
@@ -2493,142 +2588,134 @@ static const u8 *const gUnknown_085B2CF0[][16] = {
         gText_PokemonMoves,
         gText_Underpowered,
         gText_WhenInDanger,
-        gText_Exit,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+        gText_Exit
     }
 };
 
-static void sub_813A2DC(u8 taskId)
+static void Task_ShowScrollableMultichoice(u8 taskId)
 {
-    u32 unk1;
+    u32 width;
     u8 i, windowId;
     struct WindowTemplate template;
     struct Task *task = &gTasks[taskId];
 
     ScriptContext2_Enable();
-    gUnknown_0203AB68 = 0;
-    gUnknown_0203AB6C = 0x40;
-    sub_813AA60(task->data[11], 0);
-    sub_813ACE8(task->data[11], 0);
-    gUnknown_0203AB64 = AllocZeroed(task->data[1] * 8);
-    gUnknown_0203AB6A = 0;
-    sub_813A42C();
+    sScrollableMultichoice_ScrollOffset = 0;
+    sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
+    FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, 0);
+    ShowBattleFrontierTutorWindow(task->tScrollMultiId, 0);
+    sScrollableMultichoice_ListMenuItem = AllocZeroed(task->tNumItems * 8);
+    sFrontierExchangeCorner_NeverRead = 0;
+    InitScrollableMultichoice();
 
-    for (unk1 = 0, i = 0; i < task->data[1]; i++)
+    for (width = 0, i = 0; i < task->tNumItems; i++)
     {
-        const u8 *text = gUnknown_085B2CF0[gSpecialVar_0x8004][i];
-        gUnknown_0203AB64[i].name = text;
-        gUnknown_0203AB64[i].id = i;
-        unk1 = display_text_and_get_width(text, unk1);
+        const u8 *text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
+        sScrollableMultichoice_ListMenuItem[i].name = text;
+        sScrollableMultichoice_ListMenuItem[i].id = i;
+        width = DisplayTextAndGetWidth(text, width);
     }
 
-    task->data[4] = convert_pixel_width_to_tile_width(unk1);
+    task->tWidth = ConvertPixelWidthToTileWidth(width);
 
-    if (task->data[2] + task->data[4] > 0x1D)
+    if (task->tLeft + task->tWidth > MAX_MULTICHOICE_WIDTH + 1)
     {
-        int unk2 = 0x1D - task->data[4];
-        if (unk2 < 0)
+        int adjustedLeft = MAX_MULTICHOICE_WIDTH + 1 - task->tWidth;
+        if (adjustedLeft < 0)
         {
-            task->data[2] = 0;
+            task->tLeft = 0;
         }
         else
         {
-            task->data[2] = unk2;
+            task->tLeft = adjustedLeft;
         }
     }
 
-    template = CreateWindowTemplate(0, task->data[2], task->data[3], task->data[4], task->data[5], 0xF, 0x64);
+    template = CreateWindowTemplate(0, task->tLeft, task->tTop, task->tWidth, task->tHeight, 0xF, 0x64);
     windowId = AddWindow(&template);
-    task->data[13] = windowId;
+    task->tWindowId = windowId;
     SetStandardWindowBorderStyle(windowId, 0);
 
-    gUnknown_030061D0.totalItems = task->data[1];
-    gUnknown_030061D0.maxShowed = task->data[0];
-    gUnknown_030061D0.windowId = task->data[13];
+    gScrollableMultichoice_ListMenuTemplate.totalItems = task->tNumItems;
+    gScrollableMultichoice_ListMenuTemplate.maxShowed = task->tMaxItemsOnScreen;
+    gScrollableMultichoice_ListMenuTemplate.windowId = task->tWindowId;
 
-    sub_813A694(taskId);
-    task->data[14] = ListMenuInit(&gUnknown_030061D0, task->data[7], task->data[8]);
+    ScrollableMultichoice_UpdateScrollArrows(taskId);
+    task->tListTaskId = ListMenuInit(&gScrollableMultichoice_ListMenuTemplate, task->tScrollOffset, task->tSelectedRow);
     schedule_bg_copy_tilemap_to_vram(0);
-    gTasks[taskId].func = sub_813A4EC;
+    gTasks[taskId].func = ScrollableMultichoice_ProcessInput;
 }
 
-static void sub_813A42C(void)
+static void InitScrollableMultichoice(void)
 {
-    gUnknown_030061D0.items = gUnknown_0203AB64;
-    gUnknown_030061D0.moveCursorFunc = sub_813A46C;
-    gUnknown_030061D0.itemPrintFunc = NULL;
-    gUnknown_030061D0.totalItems = 1;
-    gUnknown_030061D0.maxShowed = 1;
-    gUnknown_030061D0.windowId = 0;
-    gUnknown_030061D0.header_X = 0;
-    gUnknown_030061D0.item_X = 8;
-    gUnknown_030061D0.cursor_X = 0;
-    gUnknown_030061D0.upText_Y = 1;
-    gUnknown_030061D0.cursorPal = 2;
-    gUnknown_030061D0.fillValue = 1;
-    gUnknown_030061D0.cursorShadowPal = 3;
-    gUnknown_030061D0.lettersSpacing = 0;
-    gUnknown_030061D0.itemVerticalPadding = 0;
-    gUnknown_030061D0.scrollMultiple = 0;
-    gUnknown_030061D0.fontId = 1;
-    gUnknown_030061D0.cursorKind = 0;
+    gScrollableMultichoice_ListMenuTemplate.items = sScrollableMultichoice_ListMenuItem;
+    gScrollableMultichoice_ListMenuTemplate.moveCursorFunc = ScrollableMultichoice_MoveCursor;
+    gScrollableMultichoice_ListMenuTemplate.itemPrintFunc = NULL;
+    gScrollableMultichoice_ListMenuTemplate.totalItems = 1;
+    gScrollableMultichoice_ListMenuTemplate.maxShowed = 1;
+    gScrollableMultichoice_ListMenuTemplate.windowId = 0;
+    gScrollableMultichoice_ListMenuTemplate.header_X = 0;
+    gScrollableMultichoice_ListMenuTemplate.item_X = 8;
+    gScrollableMultichoice_ListMenuTemplate.cursor_X = 0;
+    gScrollableMultichoice_ListMenuTemplate.upText_Y = 1;
+    gScrollableMultichoice_ListMenuTemplate.cursorPal = 2;
+    gScrollableMultichoice_ListMenuTemplate.fillValue = 1;
+    gScrollableMultichoice_ListMenuTemplate.cursorShadowPal = 3;
+    gScrollableMultichoice_ListMenuTemplate.lettersSpacing = 0;
+    gScrollableMultichoice_ListMenuTemplate.itemVerticalPadding = 0;
+    gScrollableMultichoice_ListMenuTemplate.scrollMultiple = 0;
+    gScrollableMultichoice_ListMenuTemplate.fontId = 1;
+    gScrollableMultichoice_ListMenuTemplate.cursorKind = 0;
 }
 
-static void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     u8 taskId;
     PlaySE(SE_SELECT);
-    taskId = FindTaskIdByFunc(sub_813A4EC);
+    taskId = FindTaskIdByFunc(ScrollableMultichoice_ProcessInput);
     if (taskId != 0xFF)
     {
-        u16 misc;
+        u16 selection;
         struct Task *task = &gTasks[taskId];
-        ListMenuGetScrollAndRow(task->data[14], &misc, NULL);
-        gUnknown_0203AB68 = misc;
-        ListMenuGetCurrentItemArrayId(task->data[14], &misc);
-        sub_813AC44(task->data[11], gUnknown_0203AB6A);
-        sub_813AA60(task->data[11], misc);
-        sub_813AD34(task->data[11], misc);
-        gUnknown_0203AB6A = misc;
+        ListMenuGetScrollAndRow(task->tListTaskId, &selection, NULL);
+        sScrollableMultichoice_ScrollOffset = selection;
+        ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
+        HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sFrontierExchangeCorner_NeverRead);
+        FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, selection);
+        ShowBattleFrontierTutorMoveDescription(task->tScrollMultiId, selection);
+        sFrontierExchangeCorner_NeverRead = selection;
     }
 }
 
-static void sub_813A4EC(u8 taskId)
+static void ScrollableMultichoice_ProcessInput(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    s32 input = ListMenu_ProcessInput(task->data[14]);
+    s32 input = ListMenu_ProcessInput(task->tListTaskId);
 
     switch (input)
     {
     case LIST_NOTHING_CHOSEN:
         break;
     case LIST_CANCEL:
-        gSpecialVar_Result = 0x7F;
+        gSpecialVar_Result = MULTI_B_PRESSED;
         PlaySE(SE_SELECT);
-        sub_813A570(taskId);
+        CloseScrollableMultichoice(taskId);
         break;
     default:
         gSpecialVar_Result = input;
         PlaySE(SE_SELECT);
-        if (!task->data[6])
+        if (!task->tKeepOpenAfterSelect)
         {
-            sub_813A570(taskId);
+            CloseScrollableMultichoice(taskId);
         }
-        else if (input == task->data[1] - 1)
+        // if selected option was the last one (Exit)
+        else if (input == task->tNumItems - 1)
         {
-            sub_813A570(taskId);
+            CloseScrollableMultichoice(taskId);
         }
         else
         {
-            sub_813A738(taskId);
+            ScrollableMultichoice_RemoveScrollArrows(taskId);
             task->func = sub_813A600;
             EnableBothScriptContexts();
         }
@@ -2636,37 +2723,39 @@ static void sub_813A4EC(u8 taskId)
     }
 }
 
-static void sub_813A570(u8 taskId)
+static void CloseScrollableMultichoice(u8 taskId)
 {
-    u16 array;
+    u16 selection;
     struct Task *task = &gTasks[taskId];
-    ListMenuGetCurrentItemArrayId(task->data[14], &array);
-    sub_813AC44(task->data[11], array);
-    sub_813A738(taskId);
-    DestroyListMenuTask(task->data[14], NULL, NULL);
-    Free(gUnknown_0203AB64);
-    ClearStdWindowAndFrameToTransparent(task->data[13], 1);
-    FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
-    CopyWindowToVram(task->data[13], 2);
-    RemoveWindow(task->data[13]);
+    ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
+    HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, selection);
+    ScrollableMultichoice_RemoveScrollArrows(taskId);
+    DestroyListMenuTask(task->tListTaskId, NULL, NULL);
+    Free(sScrollableMultichoice_ListMenuItem);
+    ClearStdWindowAndFrameToTransparent(task->tWindowId, 1);
+    FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
+    CopyWindowToVram(task->tWindowId, 2);
+    RemoveWindow(task->tWindowId);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
 
+// Functionally unused; tKeepOpenAfterSelect is only != 0 in unused functions
 static void sub_813A600(u8 taskId)
 {
-    switch (gTasks[taskId].data[6])
+    switch (gTasks[taskId].tKeepOpenAfterSelect)
     {
         case 1:
         default:
             break;
         case 2:
-            gTasks[taskId].data[6] = 1;
+            gTasks[taskId].tKeepOpenAfterSelect = 1;
             gTasks[taskId].func = sub_813A664;
             break;
     }
 }
 
+// Never called
 void sub_813A630(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_813A600);
@@ -2676,20 +2765,20 @@ void sub_813A630(void)
     }
     else
     {
-        gTasks[taskId].data[6]++;
+        gTasks[taskId].tKeepOpenAfterSelect++;
     }
 }
 
 static void sub_813A664(u8 taskId)
 {
     ScriptContext2_Enable();
-    sub_813A694(taskId);
-    gTasks[taskId].func = sub_813A4EC;
+    ScrollableMultichoice_UpdateScrollArrows(taskId);
+    gTasks[taskId].func = ScrollableMultichoice_ProcessInput;
 }
 
-static void sub_813A694(u8 taskId)
+static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
 {
-    static const struct ScrollArrowsTemplate gUnknown_085B3030 = {
+    static const struct ScrollArrowsTemplate sScrollableMultichoice_ScrollArrowsTemplate = {
         .firstArrowType = SCROLL_ARROW_UP,
         .firstX = 0,
         .firstY = 0,
@@ -2704,77 +2793,94 @@ static void sub_813A694(u8 taskId)
     };
 
     struct Task *task = &gTasks[taskId];
-    struct ScrollArrowsTemplate template = gUnknown_085B3030;
-    if (task->data[0] != task->data[1])
+    struct ScrollArrowsTemplate template = sScrollableMultichoice_ScrollArrowsTemplate;
+    if (task->tMaxItemsOnScreen != task->data[1])
     {
-        template.firstX = (task->data[4] / 2) * 8 + 12 + (task->data[2] - 1) * 8;
+        template.firstX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
         template.firstY = 8;
-        template.secondX = (task->data[4] / 2) * 8 + 12 + (task->data[2] - 1) * 8;
-        template.secondY = task->data[5] * 8 + 10;
+        template.secondX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
+        template.secondY = task->tHeight * 8 + 10;
         template.fullyUpThreshold = 0;
-        template.fullyDownThreshold = task->data[1] - task->data[0];
-        task->data[12] = AddScrollIndicatorArrowPair(&template, &gUnknown_0203AB68);
+        template.fullyDownThreshold = task->data[1] - task->tMaxItemsOnScreen;
+        task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &sScrollableMultichoice_ScrollOffset);
     }
 }
 
-static void sub_813A738(u8 taskId)
+static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (task->data[0] != task->data[1])
+    if (task->tMaxItemsOnScreen != task->data[1])
     {
-        RemoveScrollIndicatorArrowPair(task->data[12]);
+        RemoveScrollIndicatorArrowPair(task->tScrollArrowId);
     }
 }
 
-void nullsub_55(void)
+// Removed for Emerald (replaced by ShowScrollableMultichoice)
+void ShowGlassWorkshopMenu(void)
 {
-
+    /*
+    u8 i;
+    ScriptContext2_Enable();
+    Menu_DrawStdWindowFrame(0, 0, 10, 11);
+    InitMenu(0, 1, 1, 5, 0, 9);
+    gUnknown_0203925C = 0;
+    ClearVerticalScrollIndicatorPalettes();
+    LoadScrollIndicatorPalette();
+    sub_810F2B4();
+    for (i = 0; i < 5; i++)
+    {
+        Menu_PrintText(gUnknown_083F83C0[i], 1, 2 * i + 1);
+    }
+    gUnknown_0203925B = 0;
+    gUnknown_0203925A = ARRAY_COUNT(gUnknown_083F83C0);
+    CreateTask(sub_810F118, 8);
+    */
 }
 
-void sub_813A76C(void)
+void SetBattleTowerLinkPlayerGfx(void)
 {
     u8 i;
     for (i = 0; i < 2; i++)
     {
         if (gLinkPlayers[i].gender == MALE)
         {
-            VarSet(VAR_OBJ_GFX_ID_F - i, EVENT_OBJ_GFX_BRENDAN_NORMAL);
+            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_BRENDAN_NORMAL);
         }
         else
         {
-            VarSet(VAR_OBJ_GFX_ID_F - i, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL);
+            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL);
         }
     }
 }
 
-void sub_813A7B8(void)
+void ShowNatureGirlMessage(void)
 {
-    static const u8 *const gUnknown_085B3040[] = {
-        BattleFrontier_Lounge5_Text_26468D,
-        BattleFrontier_Lounge5_Text_2646E5,
-        BattleFrontier_Lounge5_Text_264741,
-        BattleFrontier_Lounge5_Text_2647A4,
-        BattleFrontier_Lounge5_Text_2647FC,
-        BattleFrontier_Lounge5_Text_264858,
-        BattleFrontier_Lounge5_Text_2648BE,
-        BattleFrontier_Lounge5_Text_264916,
-        BattleFrontier_Lounge5_Text_264972,
-        BattleFrontier_Lounge5_Text_2649D5,
-        BattleFrontier_Lounge5_Text_264A3F,
-        BattleFrontier_Lounge5_Text_264A9B,
-        BattleFrontier_Lounge5_Text_264AF3,
-        BattleFrontier_Lounge5_Text_264B5D,
-        BattleFrontier_Lounge5_Text_2648BE,
-        BattleFrontier_Lounge5_Text_264BC3,
-        BattleFrontier_Lounge5_Text_264C36,
-        BattleFrontier_Lounge5_Text_2648BE,
-        BattleFrontier_Lounge5_Text_264C95,
-        BattleFrontier_Lounge5_Text_264D01,
-        BattleFrontier_Lounge5_Text_264D6B,
-        BattleFrontier_Lounge5_Text_264DD7,
-        BattleFrontier_Lounge5_Text_264E33,
-        BattleFrontier_Lounge5_Text_264E8F,
-        BattleFrontier_Lounge5_Text_2648BE,
+    static const u8 *const sNatureGirlMessages[] = {
+        [NATURE_HARDY]   = BattleFrontier_Lounge5_Text_NatureGirlHardy,
+        [NATURE_LONELY]  = BattleFrontier_Lounge5_Text_NatureGirlLonely,
+        [NATURE_BRAVE]   = BattleFrontier_Lounge5_Text_NatureGirlBrave,
+        [NATURE_ADAMANT] = BattleFrontier_Lounge5_Text_NatureGirlAdamant,
+        [NATURE_NAUGHTY] = BattleFrontier_Lounge5_Text_NatureGirlNaughty,
+        [NATURE_BOLD]    = BattleFrontier_Lounge5_Text_NatureGirlBold,
+        [NATURE_DOCILE]  = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
+        [NATURE_RELAXED] = BattleFrontier_Lounge5_Text_NatureGirlRelaxed,
+        [NATURE_IMPISH]  = BattleFrontier_Lounge5_Text_NatureGirlImpish,
+        [NATURE_LAX]     = BattleFrontier_Lounge5_Text_NatureGirlLax,
+        [NATURE_TIMID]   = BattleFrontier_Lounge5_Text_NatureGirlTimid,
+        [NATURE_HASTY]   = BattleFrontier_Lounge5_Text_NatureGirlHasty,
+        [NATURE_SERIOUS] = BattleFrontier_Lounge5_Text_NatureGirlSerious,
+        [NATURE_JOLLY]   = BattleFrontier_Lounge5_Text_NatureGirlJolly,
+        [NATURE_NAIVE]   = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
+        [NATURE_MODEST]  = BattleFrontier_Lounge5_Text_NatureGirlModest,
+        [NATURE_MILD]    = BattleFrontier_Lounge5_Text_NatureGirlMild,
+        [NATURE_QUIET]   = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
+        [NATURE_BASHFUL] = BattleFrontier_Lounge5_Text_NatureGirlBashful,
+        [NATURE_RASH]    = BattleFrontier_Lounge5_Text_NatureGirlRash,
+        [NATURE_CALM]    = BattleFrontier_Lounge5_Text_NatureGirlCalm,
+        [NATURE_GENTLE]  = BattleFrontier_Lounge5_Text_NatureGirlGentle,
+        [NATURE_SASSY]   = BattleFrontier_Lounge5_Text_NatureGirlSassy,
+        [NATURE_CAREFUL] = BattleFrontier_Lounge5_Text_NatureGirlCareful,
+        [NATURE_QUIRKY]  = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
     };
 
     u8 nature;
@@ -2785,94 +2891,110 @@ void sub_813A7B8(void)
     }
 
     nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
-    ShowFieldMessage(gUnknown_085B3040[nature]);
+    ShowFieldMessage(sNatureGirlMessages[nature]);
 }
 
-void UpdateFrontierGambler(u16 a0)
+void UpdateFrontierGambler(u16 daysSince)
 {
-    u16 *var = GetVarPointer(VAR_FRONTIER_GAMBLER_FACILITY);
-    *var += a0;
-    *var %= 12;
+    u16 *var = GetVarPointer(VAR_FRONTIER_GAMBLER_CHALLENGE);
+    *var += daysSince;
+    *var %= FRONTIER_GAMBLER_CHALLENGE_COUNT;
 }
 
-void sub_813A820(void)
+void ShowFrontierGamblerLookingMessage(void)
 {
-    static const u8 *const gUnknown_085B30A4[] = {
-        BattleFrontier_Lounge3_Text_262261,
-        BattleFrontier_Lounge3_Text_26230D,
-        BattleFrontier_Lounge3_Text_2623B9,
-        BattleFrontier_Lounge3_Text_262464,
-        BattleFrontier_Lounge3_Text_26250E,
-        BattleFrontier_Lounge3_Text_2625B8,
-        BattleFrontier_Lounge3_Text_26266A,
-        BattleFrontier_Lounge3_Text_26271C,
-        BattleFrontier_Lounge3_Text_2627C9,
-        BattleFrontier_Lounge3_Text_262876,
-        BattleFrontier_Lounge3_Text_26291A,
-        BattleFrontier_Lounge3_Text_2629BC,
+    static const u8 *const sFrontierGamblerLookingMessages[] = 
+    {
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleTowerMulti,
+        BattleFrontier_Lounge3_Text_ChallengeBattleDomeSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleDomeDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleFactorySingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattleFactoryDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePalaceSingle,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePalaceDouble,
+        BattleFrontier_Lounge3_Text_ChallengeBattleArena,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePike,
+        BattleFrontier_Lounge3_Text_ChallengeBattlePyramid,
     };
 
-    u16 var = VarGet(VAR_FRONTIER_GAMBLER_FACILITY);
-    ShowFieldMessage(gUnknown_085B30A4[var]);
-    VarSet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F, var);
+    u16 challenge = VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE);
+    ShowFieldMessage(sFrontierGamblerLookingMessages[challenge]);
+    VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, challenge);
 }
 
-void sub_813A854(void)
+void ShowFrontierGamblerGoMessage(void)
 {
-    static const u8 *const gUnknown_085B30D4[] = {
-        BattleFrontier_Lounge3_Text_262C04,
-        BattleFrontier_Lounge3_Text_262C90,
-        BattleFrontier_Lounge3_Text_262D1C,
-        BattleFrontier_Lounge3_Text_262DA7,
-        BattleFrontier_Lounge3_Text_262E34,
-        BattleFrontier_Lounge3_Text_262EC1,
-        BattleFrontier_Lounge3_Text_262F56,
-        BattleFrontier_Lounge3_Text_262FEB,
-        BattleFrontier_Lounge3_Text_263078,
-        BattleFrontier_Lounge3_Text_263105,
-        BattleFrontier_Lounge3_Text_26318C,
-        BattleFrontier_Lounge3_Text_263211,
+    static const u8 *const sFrontierGamblerGoMessages[] = 
+    {
+        BattleFrontier_Lounge3_Text_GetToBattleTowerSingle,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleTowerMulti,
+        BattleFrontier_Lounge3_Text_GetToBattleDomeSingle,
+        BattleFrontier_Lounge3_Text_GetToBattleDomeDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleFactorySingle,
+        BattleFrontier_Lounge3_Text_GetToBattleFactoryDouble,
+        BattleFrontier_Lounge3_Text_GetToBattlePalaceSingle,
+        BattleFrontier_Lounge3_Text_GetToBattlePalaceDouble,
+        BattleFrontier_Lounge3_Text_GetToBattleArena,
+        BattleFrontier_Lounge3_Text_GetToBattlePike,
+        BattleFrontier_Lounge3_Text_GetToBattlePyramid,
     };
 
-    ShowFieldMessage(gUnknown_085B30D4[VarGet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F)]);
+    ShowFieldMessage(sFrontierGamblerGoMessages[VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE)]);
 }
 
-void sub_813A878(u8 a0)
+void FrontierGamblerSetWonOrLost(bool8 won)
 {
-    static const u16 gUnknown_085B3104[] = {0x0000, 0x0001, 0x0002, 0x0100, 0x0101, 0x0400, 0x0401, 0x0200, 0x0201, 0x0300, 0x0500, 0x0600};
+    static const u16 sFrontierChallenges[] = 
+    {
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_DOUBLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_MULTIS),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_DOME,    FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_DOME,    FRONTIER_MODE_DOUBLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PYRAMID, FRONTIER_MODE_SINGLES)
+    };
 
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u16 var2 = VarGet(VAR_FRONTIER_GAMBLER_SET_FACILITY_F);
+    u16 challenge = VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE);
     u16 frontierFacilityId = VarGet(VAR_FRONTIER_FACILITY);
 
-    if (VarGet(VAR_FRONTIER_GAMBLER_PLACED_BET_F) == 1)
+    if (VarGet(VAR_FRONTIER_GAMBLER_STATE) == FRONTIER_GAMBLER_PLACED_BET)
     {
-        if (gUnknown_085B3104[var2] == (frontierFacilityId << 8) + battleMode)
+        if (sFrontierChallenges[challenge] ==  FRONTIER_CHALLENGE(frontierFacilityId, battleMode))
         {
-            if (a0 != 0)
+            if (won)
             {
-                VarSet(VAR_FRONTIER_GAMBLER_PLACED_BET_F, 2);
+                VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON);
             }
             else
             {
-                VarSet(VAR_FRONTIER_GAMBLER_PLACED_BET_F, 3);
+                VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_LOST);
             }
         }
     }
 }
 
-void sub_813A8FC(void)
+void UpdateBattlePointsWindow(void)
 {
     u8 string[32];
     u32 x;
     StringCopy(ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
     x = GetStringRightAlignXOffset(1, string, 48);
-    AddTextPrinterParameterized(gUnknown_0203AB6D, 1, string, x, 1, 0, NULL);
+    AddTextPrinterParameterized(sBattlePointsWindowId, 1, string, x, 1, 0, NULL);
 }
 
-void sub_813A958(void)
+void ShowBattlePointsWindow(void)
 {
-    static const struct WindowTemplate gUnknown_085B311C = {
+    static const struct WindowTemplate sBattlePoints_WindowTemplate = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -2882,19 +3004,19 @@ void sub_813A958(void)
         .baseBlock = 8,
     };
 
-    gUnknown_0203AB6D = AddWindow(&gUnknown_085B311C);
-    SetStandardWindowBorderStyle(gUnknown_0203AB6D, 0);
-    sub_813A8FC();
-    CopyWindowToVram(gUnknown_0203AB6D, 2);
+    sBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
+    SetStandardWindowBorderStyle(sBattlePointsWindowId, 0);
+    UpdateBattlePointsWindow();
+    CopyWindowToVram(sBattlePointsWindowId, 2);
 }
 
-void sub_813A988(void)
+void CloseBattlePointsWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB6D, TRUE);
-    RemoveWindow(gUnknown_0203AB6D);
+    ClearStdWindowAndFrameToTransparent(sBattlePointsWindowId, TRUE);
+    RemoveWindow(sBattlePointsWindowId);
 }
 
-void sub_813A9A4(void)
+void TakeFrontierBattlePoints(void)
 {
     if (gSaveBlock2Ptr->frontier.battlePoints < gSpecialVar_0x8004)
     {
@@ -2906,11 +3028,11 @@ void sub_813A9A4(void)
     }
 }
 
-void sub_813A9D0(void)
+void GiveFrontierBattlePoints(void)
 {
-    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > 9999)
+    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
     {
-        gSaveBlock2Ptr->frontier.battlePoints = 9999;
+        gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
     }
     else
     {
@@ -2918,14 +3040,14 @@ void sub_813A9D0(void)
     }
 }
 
-u16 sub_813AA04(void)
+u16 GetFrontierBattlePoints(void)
 {
     return gSaveBlock2Ptr->frontier.battlePoints;
 }
 
-void sub_813AA18(void)
+void ShowFrontierExchangeCornerItemIconWindow(void)
 {
-    static const struct WindowTemplate gUnknown_085B3124 = {
+    static const struct WindowTemplate sFrontierExchangeCorner_ItemIconWindowTemplate = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 9,
@@ -2935,159 +3057,139 @@ void sub_813AA18(void)
         .baseBlock = 20,
     };
 
-    gUnknown_0203AB6E = AddWindow(&gUnknown_085B3124);
-    SetStandardWindowBorderStyle(gUnknown_0203AB6E, 0);
-    CopyWindowToVram(gUnknown_0203AB6E, 2);
+    sFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
+    SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, 0);
+    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, 2);
 }
 
-void sub_813AA44(void)
+void CloseFrontierExchangeCornerItemIconWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB6E, TRUE);
-    RemoveWindow(gUnknown_0203AB6E);
+    ClearStdWindowAndFrameToTransparent(sFrontierExchangeCorner_ItemIconWindowId, TRUE);
+    RemoveWindow(sFrontierExchangeCorner_ItemIconWindowId);
 }
 
-static void sub_813AA60(u16 a0, u16 a1)
+static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
 {
-    static const u16 gUnknown_085B312C[] = { 0x004b, 0x0067, 0x0057, 0x004f, 0x0054, 0x0055, 0x0056, 0x0050, 0x0051, 0x0052, 0xFFFF };
-    static const u16 gUnknown_085B3142[] = { 0x0071, 0x006f, 0x0072, 0x0073, 0x0074, 0xFFFF };
-    static const u16 gUnknown_085B314E[] = { 0x0040, 0x0043, 0x0041, 0x0046, 0x0042, 0x003f, 0xFFFF };
-    static const u16 gUnknown_085B315C[] = { 0x00c8, 0x00b4, 0x00b7, 0x00b9, 0x00b3, 0x00ba, 0x00bb, 0x00c4, 0x00c6, 0xFFFF };
+    #include "data/battle_frontier/battle_frontier_exchange_corner.h"
 
-    static const u8 *const gUnknown_085B3170[] = {
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_260201,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26022F,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26025B,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_260287,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2602B5,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2602E0,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26030F,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26033E,
-        gText_Exit,
-    };
-
-    static const u8 *const gUnknown_085B319C[] = {
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C,
-        gText_Exit
-    };
-
-    static const u8 *const gUnknown_085B31B4[] = {
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_260397,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2603E6,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26040E,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_260436,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26045C,
-        gText_Exit
-    };
-
-    static const u8 *const gUnknown_085B31D0[] = {
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2604D8,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_26050F,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_260542,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_260575,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_2605E2,
-        BattleFrontier_BattlePointExchangeServiceCorner_Text_260613,
-        gText_Exit
-    };
-
-    if (a0 > 2 && a0 < 7)
+    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR)
     {
         FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
-        switch (a0)
+        switch (menu)
         {
-            case 3:
-                AddTextPrinterParameterized2(0, 1, gUnknown_085B3170[a1], 0, NULL, 2, 1, 3);
-                if (gUnknown_085B312C[a1] == 0xFFFF)
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
+                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, 2, 1, 3);
+                if (sFrontierExchangeCorner_Decor1[selection] == 0xFFFF)
                 {
-                    sub_813ABD4(gUnknown_085B312C[a1]);
+                    ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection]);
                 }
                 else
                 {
                     FreeSpriteTilesByTag(5500);
                     FreeSpritePaletteByTag(5500);
-                    gUnknown_0203AB6C = AddDecorationIconObject(gUnknown_085B312C[a1], 33, 88, 0, 5500, 5500);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, 5500, 5500);
                 }
                 break;
-            case 4:
-                AddTextPrinterParameterized2(0, 1, gUnknown_085B319C[a1], 0, NULL, 2, 1, 3);
-                if (gUnknown_085B3142[a1] == 0xFFFF)
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
+                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, 2, 1, 3);
+                if (sFrontierExchangeCorner_Decor2[selection] == 0xFFFF)
                 {
-                    sub_813ABD4(gUnknown_085B3142[a1]);
+                    ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection]);
                 }
                 else
                 {
                     FreeSpriteTilesByTag(5500);
                     FreeSpritePaletteByTag(5500);
-                    gUnknown_0203AB6C = AddDecorationIconObject(gUnknown_085B3142[a1], 33, 88, 0, 5500, 5500);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, 5500, 5500);
                 }
                 break;
-            case 5:
-                AddTextPrinterParameterized2(0, 1, gUnknown_085B31B4[a1], 0, NULL, 2, 1, 3);
-                sub_813ABD4(gUnknown_085B314E[a1]);
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, 2, 1, 3);
+                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
                 break;
-            case 6:
-                AddTextPrinterParameterized2(0, 1, gUnknown_085B31D0[a1], 0, NULL, 2, 1, 3);
-                sub_813ABD4(gUnknown_085B315C[a1]);
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, 2, 1, 3);
+                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
                 break;
         }
     }
 }
 
-static void sub_813ABD4(u16 a0)
+static void ShowFrontierExchangeCornerItemIcon(u16 item)
 {
     FreeSpriteTilesByTag(5500);
     FreeSpritePaletteByTag(5500);
-    gUnknown_0203AB6C = AddItemIconSprite(5500, 5500, a0);
+    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(5500, 5500, item);
 
-    if (gUnknown_0203AB6C != MAX_SPRITES)
+    if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
-        gSprites[gUnknown_0203AB6C].oam.priority = 0;
-        gSprites[gUnknown_0203AB6C].pos1.x = 36;
-        gSprites[gUnknown_0203AB6C].pos1.y = 92;
+        gSprites[sScrollableMultichoice_ItemSpriteId].oam.priority = 0;
+        gSprites[sScrollableMultichoice_ItemSpriteId].pos1.x = 36;
+        gSprites[sScrollableMultichoice_ItemSpriteId].pos1.y = 92;
     }
 }
 
-static void sub_813AC44(u16 a0, u16 unused)
+static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
 {
-    if (gUnknown_0203AB6C != MAX_SPRITES)
+    if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
-        switch (a0)
+        switch (menu)
         {
-            case 3 ... 6:
-                DestroySpriteAndFreeResources(&gSprites[gUnknown_0203AB6C]);
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+                DestroySpriteAndFreeResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
                 break;
         }
-        gUnknown_0203AB6C = MAX_SPRITES;
+        sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     }
 }
 
-static const u16 gUnknown_085B31F8[] = { 0x0087, 0x0045, 0x008a, 0x0005, 0x0019, 0x0022, 0x009d, 0x0044, 0x0056, 0x000e };
-static const u16 gUnknown_085B320C[] = { 0x006f, 0x00ad, 0x00bd, 0x0081, 0x00c4, 0x00cb, 0x00f4, 0x0008, 0x0009, 0x0007 };
+static const u16 sBattleFrontier_TutorMoves1[] =
+{ 
+    MOVE_SOFT_BOILED, 
+    MOVE_SEISMIC_TOSS, 
+    MOVE_DREAM_EATER, 
+    MOVE_MEGA_PUNCH, 
+    MOVE_MEGA_KICK, 
+    MOVE_BODY_SLAM, 
+    MOVE_ROCK_SLIDE, 
+    MOVE_COUNTER, 
+    MOVE_THUNDER_WAVE, 
+    MOVE_SWORDS_DANCE 
+};
 
-void sub_813AC7C(void)
+static const u16 sBattleFrontier_TutorMoves2[] =
+{ 
+    MOVE_DEFENSE_CURL, 
+    MOVE_SNORE, 
+    MOVE_MUD_SLAP, 
+    MOVE_SWIFT, 
+    MOVE_ICY_WIND, 
+    MOVE_ENDURE, 
+    MOVE_PSYCH_UP, 
+    MOVE_ICE_PUNCH, 
+    MOVE_THUNDER_PUNCH, 
+    MOVE_FIRE_PUNCH 
+};
+
+void BufferBattleFrontierTutorMoveName(void)
 {
     if (gSpecialVar_0x8005 != 0)
     {
-        StringCopy(gStringVar1, gMoveNames[gUnknown_085B320C[gSpecialVar_0x8004]]);
+        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves2[gSpecialVar_0x8004]]);
     }
     else
     {
-        StringCopy(gStringVar1, gMoveNames[gUnknown_085B31F8[gSpecialVar_0x8004]]);
+        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
     }
 }
 
-static void sub_813ACE8(u8 a0, u16 a1)
+static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 {
-    static const struct WindowTemplate gUnknown_085B3220 = {
+    static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate = 
+    {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 7,
@@ -3097,67 +3199,70 @@ static void sub_813ACE8(u8 a0, u16 a1)
         .baseBlock = 28,
     };
 
-    if (a0 == 9 || a0 == 10)
+    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
         if (gSpecialVar_0x8006 == 0)
         {
-            gUnknown_0203AB5E = AddWindow(&gUnknown_085B3220);
-            SetStandardWindowBorderStyle(gUnknown_0203AB5E, 0);
+            sTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierTutor_WindowTemplate);
+            SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
         }
-        sub_813AD34(a0, a1);
+        ShowBattleFrontierTutorMoveDescription(menu, selection);
     }
 }
 
-static void sub_813AD34(u8 a0, u16 a1)
+static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 {
-    static const u8 *const gUnknown_085B3228[] = {
-        BattleFrontier_Lounge7_Text_265E30,
-        BattleFrontier_Lounge7_Text_265E5B,
-        BattleFrontier_Lounge7_Text_265E8A,
-        BattleFrontier_Lounge7_Text_265EC0,
-        BattleFrontier_Lounge7_Text_265EED,
-        BattleFrontier_Lounge7_Text_265F1C,
-        BattleFrontier_Lounge7_Text_265F47,
-        BattleFrontier_Lounge7_Text_265F77,
-        BattleFrontier_Lounge7_Text_265FAA,
-        BattleFrontier_Lounge7_Text_265FDD,
-        gText_Exit,
-    };
-
-    static const u8 *const gUnknown_085B3254[] = {
-        BattleFrontier_Lounge7_Text_26600A,
-        BattleFrontier_Lounge7_Text_26603E,
-        BattleFrontier_Lounge7_Text_266070,
-        BattleFrontier_Lounge7_Text_2660A6,
-        BattleFrontier_Lounge7_Text_2660D0,
-        BattleFrontier_Lounge7_Text_2660FF,
-        BattleFrontier_Lounge7_Text_26612D,
-        BattleFrontier_Lounge7_Text_26615F,
-        BattleFrontier_Lounge7_Text_266185,
-        BattleFrontier_Lounge7_Text_2661B5,
-        gText_Exit,
-    };
-
-    if (a0 == 9 || a0 == 10)
+    static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] = 
     {
-        FillWindowPixelRect(gUnknown_0203AB5E, PIXEL_FILL(1), 0, 0, 96, 48);
-        if (a0 == 10)
+        BattleFrontier_Lounge7_Text_SoftboiledDesc,
+        BattleFrontier_Lounge7_Text_SeismicTossDesc,
+        BattleFrontier_Lounge7_Text_DreamEaterDesc,
+        BattleFrontier_Lounge7_Text_MegaPunchDesc,
+        BattleFrontier_Lounge7_Text_MegaKickDesc,
+        BattleFrontier_Lounge7_Text_BodySlamDesc,
+        BattleFrontier_Lounge7_Text_RockSlideDesc,
+        BattleFrontier_Lounge7_Text_CounterDesc,
+        BattleFrontier_Lounge7_Text_ThunderWaveDesc,
+        BattleFrontier_Lounge7_Text_SwordsDanceDesc,
+        gText_Exit,
+    };
+
+    static const u8 *const sBattleFrontier_TutorMoveDescriptions2[] = 
+    {
+        BattleFrontier_Lounge7_Text_DefenseCurlDesc,
+        BattleFrontier_Lounge7_Text_SnoreDesc,
+        BattleFrontier_Lounge7_Text_MudSlapDesc,
+        BattleFrontier_Lounge7_Text_SwiftDesc,
+        BattleFrontier_Lounge7_Text_IcyWindDesc,
+        BattleFrontier_Lounge7_Text_EndureDesc,
+        BattleFrontier_Lounge7_Text_PsychUpDesc,
+        BattleFrontier_Lounge7_Text_IcePunchDesc,
+        BattleFrontier_Lounge7_Text_ThunderPunchDesc,
+        BattleFrontier_Lounge7_Text_FirePunchDesc,
+        gText_Exit,
+    };
+
+    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
+    {
+        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
+        if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
         {
-            AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gUnknown_085B3254[a1], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
         }
         else
         {
-            AddTextPrinterParameterized(gUnknown_0203AB5E, 1, gUnknown_085B3228[a1], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
         }
     }
 }
 
-void sub_813ADB8(void)
+void CloseBattleFrontierTutorWindow(void)
 {
-    ClearStdWindowAndFrameToTransparent(gUnknown_0203AB5E, TRUE);
-    RemoveWindow(gUnknown_0203AB5E);
+    ClearStdWindowAndFrameToTransparent(sTutorMoveAndElevatorWindowId, TRUE);
+    RemoveWindow(sTutorMoveAndElevatorWindowId);
 }
 
+// Never called
 void sub_813ADD4(void)
 {
     u16 scrollOffset, selectedRow;
@@ -3166,74 +3271,91 @@ void sub_813ADD4(void)
     if (taskId != 0xFF)
     {
         struct Task *task = &gTasks[taskId];
-        ListMenuGetScrollAndRow(task->data[14], &scrollOffset, &selectedRow);
-        SetStandardWindowBorderStyle(task->data[13], 0);
+        ListMenuGetScrollAndRow(task->tListTaskId, &scrollOffset, &selectedRow);
+        SetStandardWindowBorderStyle(task->tWindowId, 0);
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
         {
-            AddTextPrinterParameterized5(task->data[13], 1, gUnknown_085B2CF0[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
+            AddTextPrinterParameterized5(task->tWindowId, 1, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
         }
 
-        AddTextPrinterParameterized(task->data[13], 1, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
-        PutWindowTilemap(task->data[13]);
-        CopyWindowToVram(task->data[13], 3);
+        AddTextPrinterParameterized(task->tWindowId, 1, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
+        PutWindowTilemap(task->tWindowId);
+        CopyWindowToVram(task->tWindowId, 3);
     }
 }
 
-void sub_813AEB4(void)
+void GetBattleFrontierTutorMoveIndex(void)
 {
     u8 i;
-    u16 temp1 = 0;
-    u16 temp2 = 0;
+    u16 moveTutor = 0;
+    u16 moveIndex = 0;
     gSpecialVar_0x8005 = 0;
 
-    temp1 = VarGet(VAR_TEMP_E);
-    temp2 = VarGet(VAR_TEMP_D);
+    moveTutor = VarGet(VAR_TEMP_E);
+    moveIndex = VarGet(VAR_TEMP_D);
 
-    if (temp1 != 0)
+    if (moveTutor != 0)
     {
         i = 0;
         do
         {
-            if (gTutorMoves[i] == gUnknown_085B320C[temp2])
+            if (gTutorMoves[i] == sBattleFrontier_TutorMoves2[moveIndex])
             {
                 gSpecialVar_0x8005 = i;
                 break;
             }
             i++;
-        } while (i < 30);
+        } while (i < TUTOR_MOVE_COUNT);
     }
     else
     {
         i = 0;
         do
         {
-            if (gTutorMoves[i] == gUnknown_085B31F8[temp2])
+            if (gTutorMoves[i] == sBattleFrontier_TutorMoves1[moveIndex])
             {
                 gSpecialVar_0x8005 = i;
                 break;
             }
             i++;
-        } while (i < 30);
+        } while (i < TUTOR_MOVE_COUNT);
     }
 }
 
+// Never called
 void sub_813AF48(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_813A600);
     if (taskId != 0xFF)
     {
         struct Task *task = &gTasks[taskId];
-        DestroyListMenuTask(task->data[14], NULL, NULL);
-        Free(gUnknown_0203AB64);
-        ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
-        FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
-        ClearWindowTilemap(task->data[13]);
-        CopyWindowToVram(task->data[13], 2);
-        RemoveWindow(task->data[13]);
+        DestroyListMenuTask(task->tListTaskId, NULL, NULL);
+        Free(sScrollableMultichoice_ListMenuItem);
+        ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
+        FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
+        ClearWindowTilemap(task->tWindowId);
+        CopyWindowToVram(task->tWindowId, 2);
+        RemoveWindow(task->tWindowId);
         DestroyTask(taskId);
     }
 }
+
+// Undefine Scrollable Multichoice task data macros
+#undef tMaxItemsOnScreen  
+#undef tNumItems           
+#undef tLeft               
+#undef tTop                 
+#undef tWidth              
+#undef tHeight             
+#undef tKeepOpenAfterSelect 
+#undef tScrollOffset      
+#undef tSelectedRow        
+#undef tScrollMultiId       
+#undef tScrollArrowId       
+#undef tWindowId            
+#undef tListTaskId         
+#undef tTaskId              
 
 void DoDeoxysRockInteraction(void)
 {
@@ -3312,9 +3434,9 @@ static void Task_DeoxysRockInteraction(u8 taskId)
 
 static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
-    u8 eventObjectId;
+    u8 objectEventId;
     LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
-    TryGetEventObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectId);
+    TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
         PlaySE(SE_W109);
@@ -3334,7 +3456,7 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
         gFieldEffectArguments[5] = 5;
 
     FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
-    Overworld_SetEventObjTemplateCoords(1, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
+    Overworld_SetObjEventTemplateCoords(1, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
 }
 
 static void WaitForDeoxysRockMovement(u8 taskId)
@@ -3363,53 +3485,53 @@ void IncrementBirthIslandRockStepCount(void)
     }
 }
 
-void sub_813B1D0(void)
+void SetDeoxysRockPalette(void)
 {
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
     BlendPalettes(0x04000000, 16, 0);
 }
 
-void set_unknown_box_id(u8 id)
+void SetPCBoxToSendMon(u8 boxId)
 {
-    gUnknown_0203AB6F = id;
+    sPCBoxToSendMon = boxId;
 }
 
-u16 get_unknown_box_id(void)
+u16 GetPCBoxToSendMon(void)
 {
-    return gUnknown_0203AB6F;
+    return sPCBoxToSendMon;
 }
 
-bool8 sub_813B21C(void)
+bool8 ShouldShowBoxWasFullMessage(void)
 {
-    if (FlagGet(FLAG_SYS_STORAGE_UNKNOWN_FLAG) == FALSE)
+    if (!FlagGet(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE))
     {
-        if (StorageGetCurrentBox() != VarGet(VAR_STORAGE_UNKNOWN))
+        if (StorageGetCurrentBox() != VarGet(VAR_PC_BOX_TO_SEND_MON))
         {
-            FlagSet(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
+            FlagSet(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
             return TRUE;
         }
     }
     return FALSE;
 }
 
-bool8 sub_813B260(void)
+bool8 IsDestinationBoxFull(void)
 {
     int box;
     int i;
-    set_unknown_box_id(VarGet(VAR_STORAGE_UNKNOWN));
+    SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
     box = StorageGetCurrentBox();
     do
     {
         for (i = 0; i < IN_BOX_COUNT; i++)
         {
-            if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == 0)
+            if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == SPECIES_NONE)
             {
-                if (get_unknown_box_id() != box)
+                if (GetPCBoxToSendMon() != box)
                 {
-                    FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
+                    FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
                 }
-                VarSet(VAR_STORAGE_UNKNOWN, box);
-                return sub_813B21C();
+                VarSet(VAR_PC_BOX_TO_SEND_MON, box);
+                return ShouldShowBoxWasFullMessage();
             }
         }
 
@@ -3421,36 +3543,36 @@ bool8 sub_813B260(void)
     return FALSE;
 }
 
-void CreateUnusualWeatherEvent(void)
+void CreateAbnormalWeatherEvent(void)
 {
     u16 randomValue = Random();
-    VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
+    VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 0);
 
     if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % TERRA_CAVE_LOCATIONS) + TERRA_CAVE_LOCATIONS_START);
     }
     else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % MARINE_CAVE_LOCATIONS) + MARINE_CAVE_LOCATIONS_START);
     }
     else if ((randomValue & 1) == 0)
     {
         randomValue = Random();
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % TERRA_CAVE_LOCATIONS) + TERRA_CAVE_LOCATIONS_START);
     }
     else
     {
         randomValue = Random();
-        VarSet(VAR_UNUSUAL_WEATHER_LOCATION, (randomValue % UNUSUAL_WEATHER_COUNT_PER_LEGENDARY) + UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % MARINE_CAVE_LOCATIONS) + MARINE_CAVE_LOCATIONS_START);
     }
 }
 
-// Saves the map name for the current unusual weather location in gStringVar1, then
+// Saves the map name for the current abnormal weather location in gStringVar1, then
 // returns TRUE if the weather is for Kyogre, and FALSE if it's for Groudon.
-bool32 GetUnusualWeatherMapNameAndType(void)
+bool32 GetAbnormalWeatherMapNameAndType(void)
 {
-    static const u8 sUnusualWeatherMapNumbers[] = {
+    static const u8 sAbnormalWeatherMapNumbers[] = {
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE115),
@@ -3469,24 +3591,20 @@ bool32 GetUnusualWeatherMapNameAndType(void)
         MAP_NUM(ROUTE129)
     };
 
-    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
+    u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
-    GetMapName(gStringVar1, sUnusualWeatherMapNumbers[unusualWeather - 1], 0);
+    GetMapName(gStringVar1, sAbnormalWeatherMapNumbers[abnormalWeather - 1], 0);
 
-    if (unusualWeather < UNUSUAL_WEATHER_KYOGRE_LOCATIONS_START)
-    {
+    if (abnormalWeather < MARINE_CAVE_LOCATIONS_START)
         return FALSE;
-    }
     else
-    {
         return TRUE;
-    }
 }
 
-bool8 UnusualWeatherHasExpired(void)
+bool8 AbnormalWeatherHasExpired(void)
 {
     // Duplicate array.
-    static const u8 sUnusualWeatherMapNumbers_2[] = {
+    static const u8 sAbnormalWeatherMapNumbers[] = {
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE114),
         MAP_NUM(ROUTE115),
@@ -3505,17 +3623,17 @@ bool8 UnusualWeatherHasExpired(void)
         MAP_NUM(ROUTE129)
     };
 
-    u16 steps = VarGet(VAR_UNUSUAL_WEATHER_STEP_COUNTER);
-    u16 unusualWeather = VarGet(VAR_UNUSUAL_WEATHER_LOCATION);
+    u16 steps = VarGet(VAR_ABNORMAL_WEATHER_STEP_COUNTER);
+    u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
-    if (unusualWeather == UNUSUAL_WEATHER_NONE)
+    if (abnormalWeather == ABNORMAL_WEATHER_NONE)
     {
         return FALSE;
     }
 
     if (++steps > 999)
     {
-        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, 0);
+        VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 0);
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
@@ -3525,7 +3643,7 @@ bool8 UnusualWeatherHasExpired(void)
                 case MAP_NUM(MARINE_CAVE_END):
                 case MAP_NUM(TERRA_CAVE_ENTRANCE):
                 case MAP_NUM(TERRA_CAVE_END):
-                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
+                    VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
@@ -3540,27 +3658,27 @@ bool8 UnusualWeatherHasExpired(void)
                 case MAP_NUM(UNDERWATER5):
                 case MAP_NUM(UNDERWATER6):
                 case MAP_NUM(UNDERWATER7):
-                    VarSet(VAR_SHOULD_END_UNUSUAL_WEATHER, 1);
+                    VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
                     return FALSE;
                 default:
                     break;
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapNum == sUnusualWeatherMapNumbers_2[unusualWeather - 1] &&
+        if (gSaveBlock1Ptr->location.mapNum == sAbnormalWeatherMapNumbers[abnormalWeather - 1] &&
             gSaveBlock1Ptr->location.mapGroup == 0)
         {
             return TRUE;
         }
         else
         {
-            VarSet(VAR_UNUSUAL_WEATHER_LOCATION, UNUSUAL_WEATHER_NONE);
+            VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
             return FALSE;
         }
     }
     else
     {
-        VarSet(VAR_UNUSUAL_WEATHER_STEP_COUNTER, steps);
+        VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, steps);
         return FALSE;
     }
 }
@@ -3570,38 +3688,40 @@ void Unused_SetWeatherSunny(void)
     SetCurrentAndNextWeather(WEATHER_SUNNY);
 }
 
-bool32 sub_813B490(void)
+// Always returns 1
+u32 GetMartEmployeeObjectEventId(void)
 {
-    static const u8 gUnknown_085B3420[][3] = {
-        { 0x02, 0x04, 0x01 },
-        { 0x04, 0x04, 0x01 },
-        { 0x05, 0x00, 0x01 },
-        { 0x06, 0x03, 0x01 },
-        { 0x08, 0x06, 0x01 },
-        { 0x09, 0x0d, 0x01 },
-        { 0x0a, 0x07, 0x01 },
-        { 0x0b, 0x07, 0x01 },
-        { 0x0c, 0x04, 0x01 },
-        { 0x0e, 0x05, 0x01 },
-        { 0x0f, 0x04, 0x01 },
-        { 0x1a, 0x37, 0x01 }
+    static const u8 sPokeMarts[][3] =
+    {
+        { MAP_GROUP(OLDALE_TOWN_MART),     MAP_NUM(OLDALE_TOWN_MART),     1 },
+        { MAP_GROUP(LAVARIDGE_TOWN_MART),  MAP_NUM(LAVARIDGE_TOWN_MART),  1 }, 
+        { MAP_GROUP(FALLARBOR_TOWN_MART),  MAP_NUM(FALLARBOR_TOWN_MART),  1 },
+        { MAP_GROUP(VERDANTURF_TOWN_MART), MAP_NUM(VERDANTURF_TOWN_MART), 1 },
+        { MAP_GROUP(PETALBURG_CITY_MART),  MAP_NUM(PETALBURG_CITY_MART),  1 },
+        { MAP_GROUP(SLATEPORT_CITY_MART),  MAP_NUM(SLATEPORT_CITY_MART),  1 },
+        { MAP_GROUP(MAUVILLE_CITY_MART),   MAP_NUM(MAUVILLE_CITY_MART),   1 },
+        { MAP_GROUP(RUSTBORO_CITY_MART),   MAP_NUM(RUSTBORO_CITY_MART),   1 },
+        { MAP_GROUP(FORTREE_CITY_MART),    MAP_NUM(FORTREE_CITY_MART),    1 },
+        { MAP_GROUP(MOSSDEEP_CITY_MART),   MAP_NUM(MOSSDEEP_CITY_MART),   1 },
+        { MAP_GROUP(SOOTOPOLIS_CITY_MART), MAP_NUM(SOOTOPOLIS_CITY_MART), 1 },
+        { MAP_GROUP(BATTLE_FRONTIER_MART), MAP_NUM(BATTLE_FRONTIER_MART), 1 }
     };
 
     u8 i;
-    for (i = 0; i < 12; i++)
+    for (i = 0; i < ARRAY_COUNT(sPokeMarts); i++)
     {
-        if (gSaveBlock1Ptr->location.mapGroup == gUnknown_085B3420[i][0])
+        if (gSaveBlock1Ptr->location.mapGroup == sPokeMarts[i][0])
         {
-            if (gSaveBlock1Ptr->location.mapNum == gUnknown_085B3420[i][1])
+            if (gSaveBlock1Ptr->location.mapNum == sPokeMarts[i][1])
             {
-                return gUnknown_085B3420[i][2];
+                return sPokeMarts[i][2];
             }
         }
     }
-    return TRUE;
+    return 1;
 }
 
-bool32 sub_813B4E0(void)
+bool32 IsTrainerRegistered(void)
 {
     int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (index >= 0)
@@ -3612,18 +3732,18 @@ bool32 sub_813B4E0(void)
     return FALSE;
 }
 
-bool32 sub_813B514(void)
+// Always returns FALSE
+bool32 ShouldDistributeEonTicket(void)
 {
-    if (!VarGet(VAR_ALWAYS_ZERO_0x403F))
-    {
+    if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
         return FALSE;
-    }
+    
     return TRUE;
 }
 
 void sub_813B534(void)
 {
-    gUnknown_0203AB70 = gBattleTypeFlags;
+    sBattleTowerMultiBattleTypeFlags = gBattleTypeFlags;
     gBattleTypeFlags = 0;
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -3631,12 +3751,12 @@ void sub_813B534(void)
     }
 }
 
-void sub_813B568(void)
+void LinkRetireStatusWithBattleTowerPartner(void)
 {
-    CreateTask(sub_813B57C, 5);
+    CreateTask(Task_LinkRetireStatusWithBattleTowerPartner, 5);
 }
 
-static void sub_813B57C(u8 taskId)
+static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -3667,21 +3787,24 @@ static void sub_813B57C(u8 taskId)
                 {
                     gSpecialVar_0x8005 = gBlockRecvBuffer[1][0];
                     ResetBlockReceivedFlag(1);
-                    if (gSpecialVar_0x8004 == 1 && gSpecialVar_0x8005 == 1)
+                    if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                     && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
                     {
-                        gSpecialVar_Result = 1;
+                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_BOTH_RETIRE;
                     }
-                    else if (gSpecialVar_0x8004 == 0 && gSpecialVar_0x8005 == 1)
+                    else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE 
+                          && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
                     {
-                        gSpecialVar_Result = 2;
+                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_PARTNER_RETIRE;
                     }
-                    else if (gSpecialVar_0x8004 == 1 && gSpecialVar_0x8005 == 0)
+                    else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                          && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_CONTINUE)
                     {
-                        gSpecialVar_Result = 3;
+                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_PLAYER_RETIRE;
                     }
                     else
                     {
-                        gSpecialVar_Result = 0;
+                        gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_CONTINUE;
                     }
                 }
                 gTasks[taskId].data[0]++;
@@ -3719,14 +3842,14 @@ static void sub_813B57C(u8 taskId)
         case 5:
             if (GetMultiplayerId() == 0)
             {
-                if (gSpecialVar_Result == 2)
+                if (gSpecialVar_Result == BATTLE_TOWER_LINKSTAT_PARTNER_RETIRE)
                 {
                     ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
                 }
             }
             else
             {
-                if (gSpecialVar_Result == 3)
+                if (gSpecialVar_Result == BATTLE_TOWER_LINKSTAT_PLAYER_RETIRE)
                 {
                     ShowFieldAutoScrollMessage(gText_YourPartnerHasRetired);
                 }
@@ -3757,14 +3880,14 @@ static void sub_813B57C(u8 taskId)
             {
                 sub_800AC34();
             }
-            gBattleTypeFlags = gUnknown_0203AB70;
+            gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
             EnableBothScriptContexts();
             DestroyTask(taskId);
             break;
     }
 }
 
-void sub_813B7D8(void)
+void Script_DoRayquazaScene(void)
 {
     if (gSpecialVar_0x8004 == 0)
     {
@@ -3776,40 +3899,46 @@ void sub_813B7D8(void)
     }
 }
 
-void sub_813B80C(void)
+#define playCount data[0]
+#define delay     data[1]
+
+void LoopWingFlapSE(void)
 {
-    CreateTask(sub_813B824, 8);
+    CreateTask(Task_LoopWingFlapSE, 8);
     PlaySE(SE_W017);
 }
 
-static void sub_813B824(u8 taskId)
+static void Task_LoopWingFlapSE(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    data[1]++;
-    if (data[1] == gSpecialVar_0x8005)
+    delay++;
+    if (delay == gSpecialVar_0x8005)
     {
-        data[0]++;
-        data[1] = 0;
+        playCount++;
+        delay = 0;
         PlaySE(SE_W017);
     }
 
-    if (data[0] == gSpecialVar_0x8004 - 1)
+    if (playCount == gSpecialVar_0x8004 - 1)
     {
         DestroyTask(taskId);
     }
 }
 
-void sub_813B880(void)
+#undef playCount
+#undef delay
+
+void CloseBattlePikeCurtain(void)
 {
-    u8 taskId = CreateTask(_fwalk, 8);
+    u8 taskId = CreateTask(Task_CloseBattlePikeCurtain, 8);
     gTasks[taskId].data[0] = 4;
     gTasks[taskId].data[1] = 4;
     gTasks[taskId].data[2] = 4;
     gTasks[taskId].data[3] = 0;
 }
 
-static void _fwalk(u8 taskId)
+static void Task_CloseBattlePikeCurtain(u8 taskId)
 {
     u8 x, y;
     s16 *data = gTasks[taskId].data;
@@ -3821,7 +3950,7 @@ static void _fwalk(u8 taskId)
         {
             for (x = 0; x < 3; x++)
             {
-                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + 6, gSaveBlock1Ptr->pos.y + y + 4, x + 0x201 + y * 8 + data[3] * 32);
+                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + 6, gSaveBlock1Ptr->pos.y + y + 4, x + 513 + y * 8 + data[3] * 32);
             }
         }
         DrawWholeMapView();
@@ -3834,23 +3963,25 @@ static void _fwalk(u8 taskId)
     }
 }
 
-void sub_813B968(void)
+void GetBattlePyramidHint(void)
 {
     gSpecialVar_Result = gSpecialVar_0x8004 / 7;
     gSpecialVar_Result -= (gSpecialVar_Result / 20) * 20;
 }
 
-void sub_813B9A0(void)
+// Used to avoid a potential softlock if the player respawns on Dewford with no way off
+void ResetHealLocationFromDewford(void)
 {
     if (gSaveBlock1Ptr->lastHealLocation.mapGroup == MAP_GROUP(DEWFORD_TOWN) && gSaveBlock1Ptr->lastHealLocation.mapNum == MAP_NUM(DEWFORD_TOWN))
     {
-        SetLastHealLocationWarp(3);
+        SetLastHealLocationWarp(HEAL_LOCATION_PETALBURG_CITY);
     }
 }
 
-bool8 sub_813B9C0(void)
+bool8 InPokemonCenter(void)
 {
-    static const u16 gUnknown_085B3444[] = {
+    static const u16 sPokemonCenters[] =
+    {
         MAP_OLDALE_TOWN_POKEMON_CENTER_1F,
         MAP_DEWFORD_TOWN_POKEMON_CENTER_1F,
         MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F,
@@ -3868,19 +3999,19 @@ bool8 sub_813B9C0(void)
         MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,
         MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
         MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
-        MAP_SINGLE_BATTLE_COLOSSEUM,
+        MAP_BATTLE_COLOSSEUM_2P,
         MAP_TRADE_CENTER,
         MAP_RECORD_CORNER,
-        MAP_DOUBLE_BATTLE_COLOSSEUM,
+        MAP_BATTLE_COLOSSEUM_4P,
         0xFFFF
     };
 
     int i;
     u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
 
-    for (i = 0; gUnknown_085B3444[i] != 0xFFFF; i++)
+    for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)
     {
-        if (gUnknown_085B3444[i] == map)
+        if (sPokemonCenters[i] == map)
         {
             return TRUE;
         }
@@ -3888,28 +4019,72 @@ bool8 sub_813B9C0(void)
     return FALSE;
 }
 
+/*  Summary of the Lilycove Trainer Fan Club, because it's a little messy
+    
+    ## The Fan Club room itself
+    There are initially 4 members of the Fan Club (+ an interviewer), none of whom are fans of the player
+    After becoming the champion there will be 8 members of the Fan Club, 3 of whom are automatically fans of the player
+    After this point, if a club member is a fan of the player they will sit at the front table and comment on the player
+    If they are not fans of the player, they will sit at the far table and can make comments about a different trainer (see BufferFanClubTrainerName)
+    
+    ## Gaining/losing fans
+    After every link battle the player will gain a fan if they won, or lose a fan if they lost
+    If the player has at least 3 fans, this is the only way to gain fans
+    If the player has fewer than 3 fans, they may also gain fans by completing certain tasks enough times (see TryGainNewFanFromCounter)
+    If the player has at least 5 fans, they can lose a fan every 12 real-time hours, or more often if the timer variable is reset (see TryLoseFansFromPlayTime)
+    If the player has only 1 fan left it cannot be lost
+
+    ## Variables
+    VAR_FANCLUB_FAN_COUNTER, a bitfield for tracking the fans
+      Bits  1-7: Counter for when to add new fans
+      Bit     8: Flag set after receiving the initial 3 fans
+      Bits 9-16: Flags for each of the 8 club members, set to 1 when theyre a fan of the player and 0 when theyre not
+
+    VAR_FANCLUB_LOSE_FAN_TIMER, a timer for when to lose fans
+      Compared against playTimeHours. When theyre equal, a fan is ready to be lost
+      For every fan thats lost this way 12 hours are added to the timer
+
+    VAR_LILYCOVE_FAN_CLUB_STATE
+      0: Player is not the champion yet
+      1: Player is the champion, ready to meet their initial fans
+      2: Player has met their initial fans
+*/
+
+#define FANCLUB_BITFIELD (gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
+#define FANCLUB_COUNTER    0x007F
+#define FANCLUB_FAN_FLAGS  0xFF80
+
+#define GET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD >> (flag) & 1)
+#define SET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD |= 1 << (flag))
+#define FLIP_TRAINER_FAN_CLUB_FLAG(flag)(FANCLUB_BITFIELD ^= 1 << (flag))
+
+#define GET_TRAINER_FAN_CLUB_COUNTER        (FANCLUB_BITFIELD & FANCLUB_COUNTER)
+#define SET_TRAINER_FAN_CLUB_COUNTER(count) (FANCLUB_BITFIELD = (FANCLUB_BITFIELD & FANCLUB_FAN_FLAGS) | (count))
+#define INCR_TRAINER_FAN_CLUB_COUNTER(count)(FANCLUB_BITFIELD += (count))
+#define CLEAR_TRAINER_FAN_CLUB_COUNTER      (FANCLUB_BITFIELD &= ~(FANCLUB_COUNTER))
+
 void ResetFanClub(void)
 {
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = 0;
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = 0;
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START] = 0;
+    gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = 0;
 }
 
-void sub_813BA30(void)
+void TryLoseFansFromPlayTimeAfterLinkBattle(void)
 {
-    if (sub_813BF44() != 0)
+    if (DidPlayerGetFirstFans())
     {
-        UpdateMovedLilycoveFanClubMembers();
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+        TryLoseFansFromPlayTime();
+        gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
     }
 }
 
-void sub_813BA60(void)
+void UpdateTrainerFanClubGameClear(void)
 {
-    if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
+    if (!GET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS))
     {
-        sub_813BF60();
-        sub_813BD84();
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+        SetPlayerGotFirstFans();
+        SetInitialFansOfPlayer();
+        gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
         FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
         FlagClear(FLAG_HIDE_FANCLUB_BOY);
         FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
@@ -3919,186 +4094,216 @@ void sub_813BA60(void)
     }
 }
 
-u8 sub_813BADC(u8 a0)
+// If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
+// Defeating Drake or participating in a Link Contest increments the counter by 2
+// Participating at Battle Tower or in a Secret Base battle increments the counter by 1
+u8 TryGainNewFanFromCounter(u8 incrementId)
 {
-    static const u8 gUnknown_085B3470[] = { 0x02, 0x01, 0x02, 0x01 };
+    static const u8 sCounterIncrements[] = { 2, 1, 2, 1 };
 
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
-        if ((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7F) + gUnknown_085B3470[a0] > 19)
+        if (GET_TRAINER_FAN_CLUB_COUNTER + sCounterIncrements[incrementId] > 19)
         {
-            if (GetNumMovedLilycoveFanClubMembers() < 3)
+            if (GetNumFansOfPlayerInTrainerFanClub() < 3)
             {
-                sub_813BB74();
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] &= 0xFF80;
+                PlayerGainRandomTrainerFan();
+                CLEAR_TRAINER_FAN_CLUB_COUNTER;
             }
             else
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0xFF80) | 0x14;
+                SET_TRAINER_FAN_CLUB_COUNTER(20);
             }
         }
         else
         {
-            gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] += gUnknown_085B3470[a0];
+            INCR_TRAINER_FAN_CLUB_COUNTER(sCounterIncrements[incrementId]);
         }
     }
 
-    return gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7F;
+    return GET_TRAINER_FAN_CLUB_COUNTER;
 }
 
-static u16 sub_813BB74(void)
+
+// Loop through the fan club members, and if theyre not a fan of the player there is a 50% chance for them to become a fan
+// Stops when a fan is gained
+// If no new fan was gained while looping, the last non-fan in the list becomes a fan
+// If all the members are already fans of the player then this redundantly sets the first fan in the list to be a fan
+static u16 PlayerGainRandomTrainerFan(void)
 {
-    static const u8 gUnknown_085B3474[] = { 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
+    { 
+        FANCLUB_MEMBER1, 
+        FANCLUB_MEMBER2, 
+        FANCLUB_MEMBER3, 
+        FANCLUB_MEMBER4, 
+        FANCLUB_MEMBER5, 
+        FANCLUB_MEMBER6,
+        FANCLUB_MEMBER7, 
+        FANCLUB_MEMBER8 
+    };
 
     u8 i;
-    u8 retVal = 0;
+    u8 idx = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
     {
-        if (!((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B3474[i]) & 1))
+        if (!GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]))
         {
-            retVal = i;
-            if ((Random() & 1) != 0)
+            idx = i;
+            if (Random() & 1)
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 1 << gUnknown_085B3474[retVal];
-                return retVal;
+                SET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+                return idx;
             }
         }
     }
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 1 << gUnknown_085B3474[retVal];
-    return retVal;
+    SET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+    return idx;
 }
 
-static u16 sub_813BC00(void)
+// Loops through the fan club members, and if theyre a fan of the player there is a 50% chance for them to stop being a fan
+// Stops if a fan is removed, or if the player has only one fan left
+// If no fan was lost while looping, the last current fan in the list will stop being a fan
+static u16 PlayerLoseRandomTrainerFan(void)
 {
-    static const u8 gUnknown_085B347C[] = { 0x08, 0x0d, 0x0e, 0x0b, 0x0a, 0x0c, 0x0f, 0x09 };
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
+    { 
+        FANCLUB_MEMBER1, 
+        FANCLUB_MEMBER6, 
+        FANCLUB_MEMBER7, 
+        FANCLUB_MEMBER4, 
+        FANCLUB_MEMBER3, 
+        FANCLUB_MEMBER5, 
+        FANCLUB_MEMBER8, 
+        FANCLUB_MEMBER2 
+    };
 
     u8 i;
-    u8 retVal = 0;
+    u8 idx = 0;
 
-    if (GetNumMovedLilycoveFanClubMembers() == 1)
+    if (GetNumFansOfPlayerInTrainerFanClub() == 1)
     {
         return 0;
     }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
     {
-        if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[i]) & 1) != 0)
+        if (GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]))
         {
-            retVal = i;
-            if ((Random() & 1) != 0)
+            idx = i;
+            if (Random() & 1)
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= 1 << gUnknown_085B347C[retVal];
-                return retVal;
+                FLIP_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+                return idx;
             }
         }
     }
 
-    if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_085B347C[retVal]) & 1))
+    if (GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]))
     {
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= 1 << gUnknown_085B347C[retVal];
+        FLIP_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
     }
 
-    return retVal;
+    return idx;
 }
 
-u16 GetNumMovedLilycoveFanClubMembers(void)
+u16 GetNumFansOfPlayerInTrainerFanClub(void)
 {
     u8 i;
-    u8 retVal = 0;
+    u8 numFans = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < NUM_TRAINER_FAN_CLUB_MEMBERS; i++)
     {
-        if (((gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> (i + 8)) & 1) != 0)
-        {
-            retVal++;
-        }
+        if (GET_TRAINER_FAN_CLUB_FLAG(i + FANCLUB_MEMBER1))
+            numFans++;
     }
 
-    return retVal;
+    return numFans;
 }
 
-void UpdateMovedLilycoveFanClubMembers(void)
+// If the player has > 5 fans in the Trainer Fan Club, then lose 1 fan for every 12 hours since the last fan loss / timer reset
+void TryLoseFansFromPlayTime(void)
 {
     u8 i = 0;
     if (gSaveBlock2Ptr->playTimeHours < 999)
     {
         while (TRUE)
         {
-            if (GetNumMovedLilycoveFanClubMembers() < 5)
+            if (GetNumFansOfPlayerInTrainerFanClub() < 5)
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+                gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
                 break;
             }
-            else if (i == 8)
+            else if (i == NUM_TRAINER_FAN_CLUB_MEMBERS)
             {
                 break;
             }
-            else if (gSaveBlock2Ptr->playTimeHours - gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] < 12)
+            else if (gSaveBlock2Ptr->playTimeHours - gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] < 12)
             {
                 return;
             }
-            sub_813BC00();
-            gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] += 12;
+            PlayerLoseRandomTrainerFan();
+            gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] += 12;
             i++;
         }
     }
 }
 
-bool8 ShouldMoveLilycoveFanClubMember(void)
+bool8 IsFanClubMemberFanOfPlayer(void)
 {
-    return (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gSpecialVar_0x8004) & 1;
+    return GET_TRAINER_FAN_CLUB_FLAG(gSpecialVar_0x8004);
 }
 
-static void sub_813BD84(void)
+static void SetInitialFansOfPlayer(void)
 {
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x2000;
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x100;
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x400;
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER6);
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER1);
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER3);
 }
 
-void BufferStreakTrainerText(void)
+void BufferFanClubTrainerName(void)
 {
-    u8 a = 0;
-    u8 b = 0;
+    u8 whichLinkTrainer = 0;
+    u8 whichNPCTrainer = 0;
     switch (gSpecialVar_0x8004)
     {
-        case 8:
+        case FANCLUB_MEMBER1:
             break;
-        case 9:
+        case FANCLUB_MEMBER2:
             break;
-        case 10:
-            a = 0;
-            b = 3;
+        case FANCLUB_MEMBER3:
+            whichLinkTrainer = 0;
+            whichNPCTrainer = 3;
             break;
-        case 11:
-            a = 0;
-            b = 1;
+        case FANCLUB_MEMBER4:
+            whichLinkTrainer = 0;
+            whichNPCTrainer = 1;
             break;
-        case 12:
-            a = 1;
-            b = 0;
+        case FANCLUB_MEMBER5:
+            whichLinkTrainer = 1;
+            whichNPCTrainer = 0;
             break;
-        case 13:
-            a = 0;
-            b = 4;
+        case FANCLUB_MEMBER6:
+            whichLinkTrainer = 0;
+            whichNPCTrainer = 4;
             break;
-        case 14:
-            a = 1;
-            b = 5;
+        case FANCLUB_MEMBER7:
+            whichLinkTrainer = 1;
+            whichNPCTrainer = 5;
             break;
-        case 15:
+        case FANCLUB_MEMBER8:
             break;
     }
-    sub_813BE30(&gSaveBlock1Ptr->linkBattleRecords, a, b);
+    BufferFanClubTrainerName_(&gSaveBlock1Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
 }
 
-static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b)
+static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
-    struct LinkBattleRecord *record = &linkRecords->entries[a];
+    struct LinkBattleRecord *record = &linkRecords->entries[whichLinkTrainer];
     if (record->name[0] == EOS)
     {
-        switch (b)
+        switch (whichNPCTrainer)
         {
             case 0:
                 StringCopy(gStringVar1, gText_Wallace);
@@ -4125,39 +4330,36 @@ static void sub_813BE30(struct LinkBattleRecords *linkRecords, u8 a, u8 b)
     }
     else
     {
-        StringCopyN(gStringVar1, record->name, 7);
-        gStringVar1[7] = EOS;
-        ConvertInternationalString(gStringVar1, linkRecords->languages[a]);
+        StringCopyN(gStringVar1, record->name, PLAYER_NAME_LENGTH);
+        gStringVar1[PLAYER_NAME_LENGTH] = EOS;
+        ConvertInternationalString(gStringVar1, linkRecords->languages[whichLinkTrainer]);
     }
 }
 
-void sub_813BF10(void)
+void UpdateTrainerFansAfterLinkBattle(void)
 {
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
-        sub_813BA30();
-        if (gBattleOutcome == 1)
-        {
-            sub_813BB74();
-        }
+        TryLoseFansFromPlayTimeAfterLinkBattle();
+        if (gBattleOutcome == B_OUTCOME_WON)
+            PlayerGainRandomTrainerFan();
         else
-        {
-            sub_813BC00();
-        }
+            PlayerLoseRandomTrainerFan();
     }
 }
 
-static bool8 sub_813BF44(void)
+static bool8 DidPlayerGetFirstFans(void)
 {
-    return (gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1;
+    return GET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS);
 }
 
-void sub_813BF60(void)
+void SetPlayerGotFirstFans(void)
 {
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x80;
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS);
 }
 
-u8 sub_813BF7C(void)
+// return value is always ignored
+u8 Script_TryGainNewFanFromCounter(void)
 {
-    return sub_813BADC(gSpecialVar_0x8004);
+    return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }

@@ -3,7 +3,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "link.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "random.h"
 #include "text.h"
 #include "tv.h"
@@ -25,12 +25,12 @@ void InitDewfordTrend(void)
 
     for (i = 0; i < 5; i++)
     {
-        gSaveBlock1Ptr->easyChatPairs[i].words[0] = sub_811EE38(EC_GROUP_CONDITIONS);
+        gSaveBlock1Ptr->easyChatPairs[i].words[0] = GetRandomEasyChatWordFromGroup(EC_GROUP_CONDITIONS);
 
         if (Random() & 1)
-            gSaveBlock1Ptr->easyChatPairs[i].words[1] = sub_811EE38(EC_GROUP_LIFESTYLE);
+            gSaveBlock1Ptr->easyChatPairs[i].words[1] = GetRandomEasyChatWordFromGroup(EC_GROUP_LIFESTYLE);
         else
-            gSaveBlock1Ptr->easyChatPairs[i].words[1] = sub_811EE38(EC_GROUP_HOBBIES);
+            gSaveBlock1Ptr->easyChatPairs[i].words[1] = GetRandomEasyChatWordFromGroup(EC_GROUP_HOBBIES);
 
         gSaveBlock1Ptr->easyChatPairs[i].unk1_6 = Random() & 1;
         sub_8122B28(&(gSaveBlock1Ptr->easyChatPairs[i]));

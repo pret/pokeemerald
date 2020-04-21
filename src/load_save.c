@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "berry_powder.h"
 #include "item.h"
 #include "load_save.h"
@@ -42,10 +42,10 @@ EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = 0;
 
 // IWRAM common
-IWRAM_DATA bool32 gFlashMemoryPresent;
-IWRAM_DATA struct SaveBlock1 *gSaveBlock1Ptr;
-IWRAM_DATA struct SaveBlock2 *gSaveBlock2Ptr;
-IWRAM_DATA struct PokemonStorage *gPokemonStoragePtr;
+bool32 gFlashMemoryPresent;
+struct SaveBlock1 *gSaveBlock1Ptr;
+struct SaveBlock2 *gSaveBlock2Ptr;
+struct PokemonStorage *gPokemonStoragePtr;
 
 // code
 void CheckForFlashMemory(void)
@@ -181,32 +181,32 @@ void LoadPlayerParty(void)
         gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
 }
 
-void SaveEventObjects(void)
+void SaveObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
-        gSaveBlock1Ptr->eventObjects[i] = gEventObjects[i];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        gSaveBlock1Ptr->objectEvents[i] = gObjectEvents[i];
 }
 
-void LoadEventObjects(void)
+void LoadObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
-        gEventObjects[i] = gSaveBlock1Ptr->eventObjects[i];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        gObjectEvents[i] = gSaveBlock1Ptr->objectEvents[i];
 }
 
 void SaveSerializedGame(void)
 {
     SavePlayerParty();
-    SaveEventObjects();
+    SaveObjectEvents();
 }
 
 void LoadSerializedGame(void)
 {
     LoadPlayerParty();
-    LoadEventObjects();
+    LoadObjectEvents();
 }
 
 void LoadPlayerBag(void)

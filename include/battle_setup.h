@@ -4,7 +4,6 @@
 #include "gym_leader_rematch.h"
 
 #define REMATCHES_COUNT 5
-#define REMATCH_ELITE_FOUR_ENTRIES REMATCH_SIDNEY
 
 struct RematchTrainer
 {
@@ -34,8 +33,8 @@ void ChooseStarter(void);
 void ResetTrainerOpponentIds(void);
 void SetMapVarsToTrainer(void);
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
-void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerScript);
-void ConfigureTwoTrainersBattle(u8 trainerEventObjId, const u8 *trainerScript);
+void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerScript);
+void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript);
 void SetUpTwoTrainersBattle(void);
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 void SetUpTrainerMovement(void);

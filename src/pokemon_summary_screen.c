@@ -20,7 +20,7 @@
 #include "item.h"
 #include "link.h"
 #include "m4a.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "mon_markings.h"
@@ -42,6 +42,7 @@
 #include "window.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -121,8 +122,8 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 metGame; // 0xB
         u32 pid; // 0xC
         u32 exp; // 0x10
-        u16 moves[4]; // 0x14
-        u8 pp[4]; // 0x1C
+        u16 moves[MAX_MON_MOVES]; // 0x14
+        u8 pp[MAX_MON_MOVES]; // 0x1C
         u16 currentHP; // 0x20
         u16 maxHP; // 0x22
         u16 atk; // 0x24
@@ -162,7 +163,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     u8 unk_filler4[6];
 } *sMonSummaryScreen = NULL;
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
-static EWRAM_DATA u8 sUnknown_0203CF21 = 0;
+static EWRAM_DATA u8 sMoveSlotToReplace = 0;
 ALIGNED(4) static EWRAM_DATA u8 sUnknownTaskId = 0;
 
 struct UnkStruct_61CC04
@@ -224,10 +225,10 @@ static void DrawExperienceProgressBar(struct Pokemon* mon);
 static void DrawContestMoveHearts(u16 move);
 static void LimitEggSummaryPageDisplay(void);
 static void ResetWindows(void);
-static void sub_81C25E8(void);
-static void sub_81C2628(void);
-static void sub_81C2794(void);
-static void sub_81C27DC(struct Pokemon *mon, u16 a);
+static void PrintMonInfo(void);
+static void PrintNotEggInfo(void);
+static void PrintEggInfo(void);
+static void PrintGenderSymbol(struct Pokemon *mon, u16 a);
 static void PrintPageNamesAndStatsPageToWindows(void);
 static void CreatePageWindowTilemaps(u8 a);
 static void ClearPageWindowTilemaps(u8 a);
@@ -705,10 +706,10 @@ static const u8 sMovesPPLayout[] = _("{PP}{SPECIAL_F7 0x00}/{SPECIAL_F7 0x01}");
 static const struct OamData sOamData_MoveTypes =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
     .matrixNum = 0,
@@ -881,10 +882,10 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIE
 static const struct OamData gOamData_861CFF4 =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
@@ -970,10 +971,10 @@ static const struct SpriteTemplate gUnknown_0861D084 =
 static const struct OamData sOamData_StatusCondition =
 {
     .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
     .matrixNum = 0,
@@ -1173,7 +1174,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
             gMain.state++;
         break;
     case 11:
-        sub_81C25E8();
+        PrintMonInfo();
         gMain.state++;
         break;
     case 12:
@@ -1449,7 +1450,7 @@ static void sub_81C0348(void)
     DrawPokerusCuredSymbol(&sMonSummaryScreen->currentMon);
 }
 
-static void sub_81C0434(void)
+static void FreeSummaryScreen(void)
 {
     FreeAllWindowBuffers();
     Free(sMonSummaryScreen);
@@ -1474,7 +1475,7 @@ static void CloseSummaryScreen(u8 taskId)
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         if (gMonSpritesGfxPtr == 0)
             sub_806F47C(0);
-        sub_81C0434();
+        FreeSummaryScreen();
         DestroyTask(taskId);
     }
 }
@@ -1491,11 +1492,11 @@ static void HandleInput(u8 taskId)
         {
             ChangeSummaryPokemon(taskId, 1);
         }
-        else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysState() == 1)
+        else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             ChangePage(taskId, -1);
         }
-        else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysState() == 2)
+        else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             ChangePage(taskId, 1);
         }
@@ -1625,7 +1626,7 @@ static void sub_81C0704(u8 taskId)
         SetTypeIcons();
         break;
     case 10:
-        sub_81C25E8();
+        PrintMonInfo();
         break;
     case 11:
         PrintPageSpecificText(sMonSummaryScreen->currPageIndex);
@@ -2159,11 +2160,11 @@ static void HandleReplaceMoveInput(u8 taskId)
                 data[0] = 4;
                 sub_81C1070(data, 1, &sMonSummaryScreen->firstMoveIndex);
             }
-            else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+            else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
             {
                 ChangePage(taskId, -1);
             }
-            else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+            else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
             {
                 ChangePage(taskId, 1);
             }
@@ -2173,8 +2174,8 @@ static void HandleReplaceMoveInput(u8 taskId)
                 {
                     StopPokemonAnimations();
                     PlaySE(SE_SELECT);
-                    sUnknown_0203CF21 = sMonSummaryScreen->firstMoveIndex;
-                    gSpecialVar_0x8005 = sUnknown_0203CF21;
+                    sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
+                    gSpecialVar_0x8005 = sMoveSlotToReplace;
                     BeginCloseSummaryScreen(taskId);
                 }
                 else
@@ -2188,8 +2189,8 @@ static void HandleReplaceMoveInput(u8 taskId)
                 u32 var1;
                 StopPokemonAnimations();
                 PlaySE(SE_SELECT);
-                sUnknown_0203CF21 = 4;
-                gSpecialVar_0x8005 = 4;
+                sMoveSlotToReplace = MAX_MON_MOVES;
+                gSpecialVar_0x8005 = MAX_MON_MOVES;
                 BeginCloseSummaryScreen(taskId);
             }
         }
@@ -2238,7 +2239,7 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
             data[1] = 0;
             gTasks[taskId].func = HandleReplaceMoveInput;
         }
-        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             if (sMonSummaryScreen->currPageIndex != 2)
             {
@@ -2252,7 +2253,7 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
                 sub_81C1EFC(9, -2, move);
             }
         }
-        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             if (sMonSummaryScreen->currPageIndex != 3)
             {
@@ -2281,9 +2282,9 @@ static void HandleHMMovesCantBeForgottenInput(u8 taskId)
     }
 }
 
-u8 sub_81C1B94(void)
+u8 GetMoveSlotToReplace(void)
 {
-    return sUnknown_0203CF21;
+    return sMoveSlotToReplace;
 }
 
 static void DrawPagination(void) // Updates the pagination dots at the top of the summary screen
@@ -2571,12 +2572,12 @@ static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mo
     schedule_bg_copy_tilemap_to_vram(3);
 }
 
-static void sub_81C228C(bool8 isMonShiny)
+static void SetDexNumberColor(bool8 isMonShiny)
 {
     if (!isMonShiny)
-        sub_8199C30(3, 1, 4, 8, 8, 0);
+        SetBgTilemapPalette(3, 1, 4, 8, 8, 0);
     else
-        sub_8199C30(3, 1, 4, 8, 8, 5);
+        SetBgTilemapPalette(3, 1, 4, 8, 8, 5);
     schedule_bg_copy_tilemap_to_vram(3);
 }
 
@@ -2695,19 +2696,19 @@ static void SummaryScreen_PrintTextOnWindow(u8 windowId, const u8 *string, u8 x,
     AddTextPrinterParameterized4(windowId, 1, x, y, 0, lineSpacing, sTextColors_861CD2C[colorId], 0, string);
 }
 
-static void sub_81C25E8(void)
+static void PrintMonInfo(void)
 {
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER, PIXEL_FILL(0));
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, PIXEL_FILL(0));
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, PIXEL_FILL(0));
     if (!sMonSummaryScreen->summary.isEgg)
-        sub_81C2628();
+        PrintNotEggInfo();
     else
-        sub_81C2794();
+        PrintEggInfo();
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
-static void sub_81C2628(void)
+static void PrintNotEggInfo(void)
 {
     u8 strArray[16];
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
@@ -2715,18 +2716,18 @@ static void sub_81C2628(void)
     u16 dexNum = SpeciesToPokedexNum(summary->species);
     if (dexNum != 0xFFFF)
     {
-        StringCopy(gStringVar1, &gText_UnkCtrlF908Clear01[0]);
-        ConvertIntToDecimalStringN(gStringVar2, dexNum, 2, 3);
+        StringCopy(gStringVar1, &gText_NumberClear01[0]);
+        ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
         StringAppend(gStringVar1, gStringVar2);
         if (!IsMonShiny(mon))
         {
             SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER, gStringVar1, 0, 1, 0, 1);
-            sub_81C228C(FALSE);
+            SetDexNumberColor(FALSE);
         }
         else
         {
             SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER, gStringVar1, 0, 1, 0, 7);
-            sub_81C228C(TRUE);
+            SetDexNumberColor(TRUE);
         }
         PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER);
     }
@@ -2734,12 +2735,12 @@ static void sub_81C2628(void)
     {
         ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER);
         if (!IsMonShiny(mon))
-            sub_81C228C(FALSE);
+            SetDexNumberColor(FALSE);
         else
-            sub_81C228C(TRUE);
+            SetDexNumberColor(TRUE);
     }
     StringCopy(gStringVar1, &gText_LevelSymbol[0]);
-    ConvertIntToDecimalStringN(gStringVar2, summary->level, 0, 3);
+    ConvertIntToDecimalStringN(gStringVar2, summary->level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(gStringVar1, gStringVar2);
     SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gStringVar1, 0x18, 17, 0, 1);
     GetMonNickname(mon, gStringVar1);
@@ -2747,12 +2748,12 @@ static void sub_81C2628(void)
     strArray[0] = CHAR_SLASH;
     StringCopy(&strArray[1], &gSpeciesNames[summary->species2][0]);
     SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, &strArray[0], 0, 1, 0, 1);
-    sub_81C27DC(mon, summary->species2);
+    PrintGenderSymbol(mon, summary->species2);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
 }
 
-static void sub_81C2794(void)
+static void PrintEggInfo(void)
 {
     GetMonNickname(&sMonSummaryScreen->currentMon, gStringVar1);
     SummaryScreen_PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, gStringVar1, 0, 1, 0, 1);
@@ -2761,7 +2762,7 @@ static void sub_81C2794(void)
     ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
 }
 
-static void sub_81C27DC(struct Pokemon *mon, u16 species)
+static void PrintGenderSymbol(struct Pokemon *mon, u16 species)
 {
     if (species != SPECIES_NIDORAN_M && species != SPECIES_NIDORAN_F)
     {
@@ -3054,7 +3055,7 @@ static void PrintMonOTID(void)
     int xPos;
     if (InBattleFactory() != TRUE && InSlateportBattleTent() != TRUE)
     {
-        ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_UnkCtrlF907F908), (u16)sMonSummaryScreen->summary.OTID, 2, 5);
+        ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_IDNumber2), (u16)sMonSummaryScreen->summary.OTID, STR_CONV_MODE_LEADING_ZEROS, 5);
         xPos = GetStringRightAlignXOffset(1, gStringVar1, 56);
         SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ID), gStringVar1, xPos, 1, 0, 1);
     }
@@ -3094,7 +3095,7 @@ static void BufferMonTrainerMemo(void)
 
         if (sum->metLocation < MAPSEC_NONE)
         {
-            sub_8124610(metLocationString, sum->metLocation);
+            GetMapNameHandleAquaHideout(metLocationString, sum->metLocation);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
         }
 
@@ -3141,7 +3142,7 @@ static void GetMetLevelString(u8 *output)
     u8 level = sMonSummaryScreen->summary.metLevel;
     if (level == 0)
         level = EGG_HATCH_LEVEL;
-    ConvertIntToDecimalStringN(output, level, 0, 3);
+    ConvertIntToDecimalStringN(output, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, output);
 }
 
@@ -3208,7 +3209,7 @@ static void PrintEggOTName(void)
 static void PrintEggOTID(void)
 {
     int x;
-    StringCopy(gStringVar1, gText_UnkCtrlF907F908);
+    StringCopy(gStringVar1, gText_IDNumber2);
     StringAppend(gStringVar1, gText_FiveMarks);
     x = GetStringRightAlignXOffset(1, gStringVar1, 56);
     SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ID), gStringVar1, x, 1, 0, 1);
@@ -3336,7 +3337,7 @@ static void PrintRibbonCount(void)
     }
     else
     {
-        ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.ribbonCount, 1, 2);
+        ConvertIntToDecimalStringN(gStringVar1, sMonSummaryScreen->summary.ribbonCount, STR_CONV_MODE_RIGHT_ALIGN, 2);
         StringExpandPlaceholders(gStringVar4, gText_RibbonsVar1);
         text = gStringVar4;
     }
@@ -3412,7 +3413,7 @@ static void PrintExpPointsNextLevel(void)
     int offset;
     u32 expToNextLevel;
 
-    ConvertIntToDecimalStringN(gStringVar1, sum->exp, 1, 7);
+    ConvertIntToDecimalStringN(gStringVar1, sum->exp, STR_CONV_MODE_RIGHT_ALIGN, 7);
     offset = GetStringRightAlignXOffset(1, gStringVar1, 42) + 2;
     SummaryScreen_PrintTextOnWindow(windowId, gStringVar1, offset, 1, 0, 0);
 
@@ -3421,7 +3422,7 @@ static void PrintExpPointsNextLevel(void)
     else
         expToNextLevel = 0;
 
-    ConvertIntToDecimalStringN(gStringVar1, expToNextLevel, 1, 6);
+    ConvertIntToDecimalStringN(gStringVar1, expToNextLevel, STR_CONV_MODE_RIGHT_ALIGN, 6);
     offset = GetStringRightAlignXOffset(1, gStringVar1, 42) + 2;
     SummaryScreen_PrintTextOnWindow(windowId, gStringVar1, offset, 17, 0, 0);
 }
@@ -3508,8 +3509,8 @@ static void PrintMoveNameAndPP(u8 moveIndex)
     {
         pp = CalculatePPWithBonus(move, summaryStruct->summary.ppBonuses, moveIndex);
         SummaryScreen_PrintTextOnWindow(moveNameWindowId, gMoveNames[move], 0, moveIndex * 16 + 1, 0, 1);
-        ConvertIntToDecimalStringN(gStringVar1, summaryStruct->summary.pp[moveIndex], 1, 2);
-        ConvertIntToDecimalStringN(gStringVar2, pp, 1, 2);
+        ConvertIntToDecimalStringN(gStringVar1, summaryStruct->summary.pp[moveIndex], STR_CONV_MODE_RIGHT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar2);
@@ -3542,7 +3543,7 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
         }
         else
         {
-            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveIndex].power, 1, 3);
+            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveIndex].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
 
@@ -3554,7 +3555,7 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
         }
         else
         {
-            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveIndex].accuracy, 1, 3);
+            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[moveIndex].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             text = gStringVar1;
         }
 
@@ -3672,7 +3673,7 @@ static void PrintNewMoveDetailsOrCancelText(void)
         else
             SummaryScreen_PrintTextOnWindow(windowId1, gMoveNames[move], 0, 65, 0, 5);
 
-        ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, 1, 2);
+        ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1);

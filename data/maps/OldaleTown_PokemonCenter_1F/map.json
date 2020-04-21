@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_NURSE",
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_PokemonCenter_1F_EventScript_1FC01A",
+      "script": "OldaleTown_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 4,
       "y": 4,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_PokemonCenter_1F_EventScript_1FC028",
+      "script": "OldaleTown_PokemonCenter_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BOY_1",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 10,
       "y": 6,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_PokemonCenter_1F_EventScript_1FC031",
+      "script": "OldaleTown_PokemonCenter_1F_EventScript_Boy",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_GIRL_3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 3,
       "y": 7,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_PokemonCenter_1F_EventScript_1FC03A",
+      "script": "OldaleTown_PokemonCenter_1F_EventScript_Girl",
       "flag": "0"
     }
   ],

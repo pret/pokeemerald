@@ -17,7 +17,7 @@
 #include "list_menu.h"
 #include "mail.h"
 #include "main.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
@@ -39,7 +39,7 @@ EWRAM_DATA struct PyramidBagCursorData gPyramidBagCursorData = {0};
 
 // This file's functions.
 static void Task_HandlePyramidBagInput(u8 taskId);
-static void sub_81C4F44(u8 taskId);
+static void Task_ChooseItemsToTossFromPyramidBag(u8 taskId);
 static void sub_81C5B4C(u8 taskId);
 static void Task_BeginItemSwap(u8 taskId);
 static void sub_81C5D20(u8 taskId);
@@ -67,7 +67,7 @@ static void sub_81C700C(void);
 static void sub_81C6E98(void);
 static void sub_81C6F20(void);
 static void sub_81C6404(void);
-static void sub_81C6E1C(void);
+static void CloseBattlePyramidBagTextWindow(void);
 static bool8 sub_81C5238(void);
 static bool8 sub_81C5078(void);
 static void ShowItemImage(u16 itemId, u8 itemSpriteArrayId);
@@ -278,10 +278,10 @@ static const struct WindowTemplate gUnknown_0861F350[] =
 static const struct OamData gOamData_861F378 =
 {
     .y = 0,
-    .affineMode = 1,
-    .objMode = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = 0,
-    .bpp = 0,
+    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
     .matrixNum = 0,
@@ -346,38 +346,38 @@ void InitBattlePyramidBagCursorPosition(void)
 
 void CB2_PyramidBagMenuFromStartMenu(void)
 {
-    sub_81C4F98(0, CB2_ReturnToFieldWithOpenMenu);
+    GoToBattlePyramidBagMenu(0, CB2_ReturnToFieldWithOpenMenu);
 }
 
 static void sub_81C4F10(void)
 {
-    sub_81C4F98(1, SetCB2ToReshowScreenAfterMenu2);
+    GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
-void sub_81C4F24(void)
+void ChooseItemsToTossFromPyramidBag(void)
 {
     ScriptContext2_Enable();
-    FadeScreen(1, 0);
-    CreateTask(sub_81C4F44, 10);
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(Task_ChooseItemsToTossFromPyramidBag, 10);
 }
 
-static void sub_81C4F44(u8 taskId)
+static void Task_ChooseItemsToTossFromPyramidBag(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        gFieldCallback2 = hm_add_c3_without_phase_2;
-        sub_81C4F98(3, CB2_ReturnToField);
+        gFieldCallback2 = CB2_FadeFromPartyMenu;
+        GoToBattlePyramidBagMenu(3, CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }
 
-void sub_81C4F84(void)
+void CB2_ReturnToPyramidBagMenu(void)
 {
-    sub_81C4F98(4, gPyramidBagCursorData.callback);
+    GoToBattlePyramidBagMenu(4, gPyramidBagCursorData.callback);
 }
 
-void sub_81C4F98(u8 a0, void (*callback)(void))
+void GoToBattlePyramidBagMenu(u8 a0, void (*callback)(void))
 {
     gPyramidBagResources = AllocZeroed(sizeof(*gPyramidBagResources));
 
@@ -589,7 +589,7 @@ static void PyramidBag_CopyItemName(u8 *dst, u16 itemId)
     {
         ConvertIntToDecimalStringN(gStringVar1, ITEM_TO_BERRY(itemId), STR_CONV_MODE_LEADING_ZEROS, 2);
         CopyItemName(itemId, gStringVar2);
-        StringExpandPlaceholders(dst, gText_UnkF908Var1Clear7Var2);
+        StringExpandPlaceholders(dst, gText_NumberVar1Clear7Var2);
     }
     else
     {
@@ -809,7 +809,7 @@ static void sub_81C5AB8(u8 y, u8 arg1)
         PrintOnWindow_Font1(0, gText_SelectorArrow2, 0, y, 0, 0, 0, arg1);
 }
 
-void sub_81C5B14(u8 taskId)
+void CloseBattlePyramidBagAndSetCallback(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = sub_81C5B4C;
@@ -862,7 +862,7 @@ static void Task_HandlePyramidBagInput(u8 taskId)
             case LIST_CANCEL:
                 PlaySE(SE_SELECT);
                 gSpecialVar_ItemId = 0;
-                sub_81C5B14(taskId);
+                CloseBattlePyramidBagAndSetCallback(taskId);
                 break;
             default:
                 PlaySE(SE_SELECT);
@@ -981,7 +981,7 @@ static void HandleMenuActionInput(u8 taskId)
                 sub_8199134(0, 1);
             }
         }
-        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
         {
             if (id & 1 && IsValidMenuAction(id - 1))
             {
@@ -989,7 +989,7 @@ static void HandleMenuActionInput(u8 taskId)
                 sub_8199134(-1, 0);
             }
         }
-        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
         {
             if (!(id & 1) && IsValidMenuAction(id + 1))
             {
@@ -1043,7 +1043,7 @@ static void BagAction_UseOnField(u8 taskId)
         || ItemIsMail(gSpecialVar_ItemId) == TRUE)
     {
         sub_81C61A8();
-        DisplayItemMessageInBattlePyramid(taskId, gText_DadsAdvice, sub_81C6714);
+        DisplayItemMessageInBattlePyramid(taskId, gText_DadsAdvice, Task_CloseBattlePyramidBagMessage);
     }
     else if (ItemId_GetFieldFunc(gSpecialVar_ItemId) != NULL)
     {
@@ -1202,8 +1202,8 @@ static void BagAction_Give(u8 taskId)
     }
     else if (!ItemId_GetImportance(gSpecialVar_ItemId))
     {
-        gPyramidBagResources->callback2 = sub_81B7F60;
-        sub_81C5B14(taskId);
+        gPyramidBagResources->callback2 = CB2_ChooseMonToGiveItem;
+        CloseBattlePyramidBagAndSetCallback(taskId);
     }
     else
     {
@@ -1223,15 +1223,15 @@ static void sub_81C66EC(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        sub_81C6714(taskId);
+        Task_CloseBattlePyramidBagMessage(taskId);
     }
 }
 
-void sub_81C6714(u8 taskId)
+void Task_CloseBattlePyramidBagMessage(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    sub_81C6E1C();
+    CloseBattlePyramidBagTextWindow();
     PrintItemDescription(data[1]);
     sub_81C5A98(data[0], 0);
     SetTaskToMainPyramidBagInputHandler(taskId);
@@ -1242,7 +1242,7 @@ static void sub_81C674C(u8 taskId)
     if (!itemid_80BF6D8_mail_related(gSpecialVar_ItemId))
         DisplayItemMessageInBattlePyramid(taskId, gText_CantWriteMail, sub_81C66EC);
     else if (!ItemId_GetImportance(gSpecialVar_ItemId))
-        sub_81C5B14(taskId);
+        CloseBattlePyramidBagAndSetCallback(taskId);
     else
         sub_81C66AC(taskId);
 }
@@ -1350,7 +1350,7 @@ static void sub_81C6A14(u8 taskId)
     SetTaskToMainPyramidBagInputHandler(taskId);
 }
 
-void sub_81C6A94(void)
+void TryStoreHeldItemsInPyramidBag(void)
 {
     u8 i;
     struct Pokemon *party = gPlayerParty;
@@ -1363,8 +1363,9 @@ void sub_81C6A94(void)
     for (i = 0; i < 3; i++)
     {
         heldItem = GetMonData(&party[i], MON_DATA_HELD_ITEM);
-        if (heldItem != 0 && !AddBagItem(heldItem, 1))
+        if (heldItem != ITEM_NONE && !AddBagItem(heldItem, 1))
         {
+            // Cant store party held items in pyramid bag because bag is full
             memcpy(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
             memcpy(gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
             Free(newItems);
@@ -1374,7 +1375,7 @@ void sub_81C6A94(void)
         }
     }
 
-    heldItem = 0;
+    heldItem = ITEM_NONE;
     for (i = 0; i < 3; i++)
     {
         SetMonData(&party[i], MON_DATA_HELD_ITEM, &heldItem);
@@ -1461,7 +1462,7 @@ void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, void (*callback
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
-static void sub_81C6E1C(void)
+static void CloseBattlePyramidBagTextWindow(void)
 {
     ClearDialogWindowAndFrameToTransparent(2, FALSE);
     // This ClearWindowTilemap call is redundant, since ClearDialogWindowAndFrameToTransparent already calls it.

@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 17,
       "y": 11,
       "elevation": 6,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "BattleFrontier_BattlePyramidTop_EventScript_2551D0",
+      "script": "BattleFrontier_BattlePyramidTop_EventScript_Attendant",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BRANDON",
+      "graphics_id": "OBJ_EVENT_GFX_BRANDON",
       "x": 17,
       "y": 7,
       "elevation": 0,
@@ -50,7 +50,7 @@
       "elevation": 4,
       "var": "VAR_TEMP_2",
       "var_value": "0",
-      "script": "BattleFrontier_BattlePyramidTop_EventScript_255256"
+      "script": "BattleFrontier_BattlePyramidTop_EventScript_BattleBrandon"
     }
   ],
   "bg_events": []

@@ -1,4 +1,3 @@
-
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
@@ -8,6 +7,15 @@
 
 #define MENU_NOTHING_CHOSEN -2
 #define MENU_B_PRESSED -1
+
+enum
+{
+    SAVE_MENU_NAME,
+    SAVE_MENU_CAUGHT,
+    SAVE_MENU_PLAY_TIME,
+    SAVE_MENU_LOCATION,
+    SAVE_MENU_BADGES,
+};
 
 struct MenuAction
 {
@@ -24,12 +32,11 @@ void FreeAllOverworldWindowBuffers(void);
 void InitStandardTextBoxWindows(void);
 void sub_8197200(void);
 u16 RunTextPrintersAndIsPrinter0Active(void);
-void sub_81973A4(void);
-void DrawDialogueFrame(u8, u8);
+void LoadMessageBoxAndBorderGfx(void);
+void DrawDialogueFrame(u8 windowId, bool8 copyToVram);
 void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram);
 u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor);
 void PrintPlayerNameOnWindow(u8, const u8*, u16, u16);
-void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void DisplayYesNoMenuDefaultYes(void);
@@ -82,12 +89,12 @@ void sub_819786C(u8 windowId, bool8 copyToVram);
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress);
 void RemoveStartMenuWindow(void);
 void DisplayYesNoMenuWithDefault(u8 initialCursorPos);
-void sub_819A344(u8 a0, u8 *dest, u8 color);
+void BufferSaveMenuText(u8 textId, u8 *dest, u8 color);
 void RemoveMapNamePopUpWindow(void);
 u8 GetMapNamePopUpWindowId(void);
 u8 AddMapNamePopUpWindow(void);
 void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing);
-void sub_8199C30(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
+void SetBgTilemapPalette(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
 void sub_8199D3C(void *ptr, int delta, int width, int height, bool32 is8BPP);
 void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyToVram);
 void sub_8197AE8(bool8 copyToVram);
@@ -95,7 +102,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
 s8 Menu_ProcessInputGridLayout(void);
 u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted);
 s8 Menu_ProcessInputNoWrapAround_other(void);
-void sub_8199CBC(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height);
+void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height);
 u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile);
 void sub_8198314(void);
 void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram);

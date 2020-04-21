@@ -2,9 +2,11 @@
 #define GUARD_TRAINERS_H
 
 #include "constants/opponents.h"
+#include "constants/battle_frontier_trainers.h"
 
 // Special Trainer Ids.
-#define TRAINER_RECORD_MIXING_FRIEND        300
+//      0-299 are frontier trainers
+#define TRAINER_RECORD_MIXING_FRIEND        FRONTIER_TRAINERS_COUNT
 #define TRAINER_RECORD_MIXING_APPRENTICE    400
 #define TRAINER_EREADER                     500
 #define TRAINER_FRONTIER_BRAIN              1022
@@ -119,7 +121,7 @@
 
 #define FACILITY_CLASS_HIKER                 0x0
 #define FACILITY_CLASS_AQUA_GRUNT_M          0x1
-#define FACILITY_CLASS_POKEMON_BREEDER_F     0x2
+#define FACILITY_CLASS_PKMN_BREEDER_F        0x2
 #define FACILITY_CLASS_COOLTRAINER_M         0x3
 #define FACILITY_CLASS_BIRD_KEEPER           0x4
 #define FACILITY_CLASS_COLLECTOR             0x5
@@ -201,6 +203,86 @@
 #define FACILITY_CLASS_RS_MAY                0x51
 
 #define FACILITY_CLASSES_COUNT               0x52
+
+#define RS_FACILITY_CLASS_AQUA_LEADER_ARCHIE    0x0
+#define RS_FACILITY_CLASS_AQUA_GRUNT_M          0x1
+#define RS_FACILITY_CLASS_AQUA_GRUNT_F          0x2
+#define RS_FACILITY_CLASS_AROMA_LADY            0x3
+#define RS_FACILITY_CLASS_RUIN_MANIAC           0x4
+#define RS_FACILITY_CLASS_INTERVIEWER           0x5
+#define RS_FACILITY_CLASS_TUBER_F               0x6
+#define RS_FACILITY_CLASS_TUBER_M               0x7
+#define RS_FACILITY_CLASS_COOLTRAINER_M         0x8
+#define RS_FACILITY_CLASS_COOLTRAINER_F         0x9
+#define RS_FACILITY_CLASS_HEX_MANIAC            0xA
+#define RS_FACILITY_CLASS_LADY                  0xB
+#define RS_FACILITY_CLASS_BEAUTY                0xC
+#define RS_FACILITY_CLASS_RICH_BOY              0xD
+#define RS_FACILITY_CLASS_POKEMANIAC            0xE
+#define RS_FACILITY_CLASS_SWIMMER_M             0xF
+#define RS_FACILITY_CLASS_BLACK_BELT            0x10
+#define RS_FACILITY_CLASS_GUITARIST             0x11
+#define RS_FACILITY_CLASS_KINDLER               0x12
+#define RS_FACILITY_CLASS_CAMPER                0x13
+#define RS_FACILITY_CLASS_BUG_MANIAC            0x14
+#define RS_FACILITY_CLASS_PSYCHIC_M             0x15
+#define RS_FACILITY_CLASS_PSYCHIC_F             0x16
+#define RS_FACILITY_CLASS_GENTLEMAN             0x17
+#define RS_FACILITY_CLASS_ELITE_FOUR_M          0x18
+#define RS_FACILITY_CLASS_ELITE_FOUR_F          0x19
+#define RS_FACILITY_CLASS_LEADER_F              0x1A
+#define RS_FACILITY_CLASS_LEADER_M              0x1B
+#define RS_FACILITY_CLASS_LEADER_MF             0x1C
+#define RS_FACILITY_CLASS_SCHOOL_KID_M          0x1D
+#define RS_FACILITY_CLASS_SCHOOL_KID_F          0x1E
+#define RS_FACILITY_CLASS_SR_AND_JR             0x1F
+#define RS_FACILITY_CLASS_POKEFAN_M             0x20
+#define RS_FACILITY_CLASS_POKEFAN_F             0x21
+#define RS_FACILITY_CLASS_EXPERT_M              0x22
+#define RS_FACILITY_CLASS_EXPERT_F              0x23
+#define RS_FACILITY_CLASS_YOUNGSTER             0x24
+#define RS_FACILITY_CLASS_CHAMPION              0x25
+#define RS_FACILITY_CLASS_FISHERMAN             0x26
+#define RS_FACILITY_CLASS_CYCLING_TRIATHLETE_M  0x27
+#define RS_FACILITY_CLASS_CYCLING_TRIATHLETE_F  0x28
+#define RS_FACILITY_CLASS_RUNNING_TRIATHLETE_M  0x29
+#define RS_FACILITY_CLASS_RUNNING_TRIATHLETE_F  0x2A
+#define RS_FACILITY_CLASS_SWIMMING_TRIATHLETE_M 0x2B
+#define RS_FACILITY_CLASS_SWIMMING_TRIATHLETE_F 0x2C
+#define RS_FACILITY_CLASS_DRAGON_TAMER          0x2D
+#define RS_FACILITY_CLASS_BIRD_KEEPER           0x2E
+#define RS_FACILITY_CLASS_NINJA_BOY             0x2F
+#define RS_FACILITY_CLASS_BATTLE_GIRL           0x30
+#define RS_FACILITY_CLASS_PARASOL_LADY          0x31
+#define RS_FACILITY_CLASS_SWIMMER_F             0x32
+#define RS_FACILITY_CLASS_PICNICKER             0x33
+#define RS_FACILITY_CLASS_TWINS                 0x34
+#define RS_FACILITY_CLASS_SAILOR                0x35
+#define RS_FACILITY_CLASS_BOARDER_1             0x36
+#define RS_FACILITY_CLASS_BOARDER_2             0x37
+#define RS_FACILITY_CLASS_COLLECTOR             0x38
+#define RS_FACILITY_CLASS_WALLY                 0x39
+#define RS_FACILITY_CLASS_BRENDAN_1             0x3A
+#define RS_FACILITY_CLASS_BRENDAN_2             0x3B
+#define RS_FACILITY_CLASS_BRENDAN_3             0x3C
+#define RS_FACILITY_CLASS_MAY_1                 0x3D
+#define RS_FACILITY_CLASS_MAY_2                 0x3E
+#define RS_FACILITY_CLASS_MAY_3                 0x3F
+#define RS_FACILITY_CLASS_PKMN_BREEDER_M        0x40
+#define RS_FACILITY_CLASS_PKMN_BREEDER_F        0x41
+#define RS_FACILITY_CLASS_PKMN_RANGER_M         0x42
+#define RS_FACILITY_CLASS_PKMN_RANGER_F         0x43
+#define RS_FACILITY_CLASS_MAGMA_LEADER          0x44
+#define RS_FACILITY_CLASS_MAGMA_GRUNT_M         0x45
+#define RS_FACILITY_CLASS_MAGMA_GRUNT_F         0x46
+#define RS_FACILITY_CLASS_LASS                  0x47
+#define RS_FACILITY_CLASS_BUG_CATCHER           0x48
+#define RS_FACILITY_CLASS_HIKER                 0x49
+#define RS_FACILITY_CLASS_YOUNG_COUPLE          0x4A
+#define RS_FACILITY_CLASS_OLD_COUPLE            0x4B
+#define RS_FACILITY_CLASS_SIS_AND_BRO           0x4C
+
+#define RS_FACILITY_CLASSES_COUNT               0x4D
 
 #define TRAINER_CLASS_PKMN_TRAINER_1 0x0  // Unused
 #define TRAINER_CLASS_PKMN_TRAINER_2 0x1  // Unused

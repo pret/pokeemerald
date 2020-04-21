@@ -1,7 +1,10 @@
-CC = gcc
-.PHONY: clean
+CC ?= gcc
+.PHONY: all clean
 
 SRCS = gbafix.c
+
+all: gbafix
+	@:
 
 gbafix: $(SRCS)
 	$(CC) $(SRCS) -o $@ $(LDFLAGS)

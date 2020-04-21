@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_POKEFAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 2,
       "y": 5,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_House2_EventScript_2078F3",
+      "script": "PetalburgCity_House2_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_SCHOOL_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 7,
       "y": 5,
       "elevation": 3,
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_House2_EventScript_2078FC",
+      "script": "PetalburgCity_House2_EventScript_SchoolKid",
       "flag": "0"
     }
   ],

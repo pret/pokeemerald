@@ -1,5 +1,5 @@
 *.pal text eol=crlf
-
+*.sh text eol=lf
 *.s text eol=lf
 *.txt text eol=lf
 Makefile text eol=lf

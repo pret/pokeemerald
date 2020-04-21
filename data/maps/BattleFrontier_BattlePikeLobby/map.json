@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_LINK_RECEPTIONIST",
+      "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
       "x": 5,
       "y": 5,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25B868",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Attendant",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 10,
       "y": 9,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BAAB",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Hiker",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 0,
       "y": 5,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BAB4",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Twin",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BABD",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Beauty",
       "flag": "0"
     }
   ],
@@ -98,7 +98,7 @@
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BA80"
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_ShowResults"
     },
     {
       "type": "sign",
@@ -106,7 +106,7 @@
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "BattleFrontier_BattlePikeLobby_EventScript_25BAC6"
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_RulesBoard"
     }
   ]
 }

@@ -154,7 +154,7 @@
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_MOVE;                                   \
-    textVar[2] = move;                                          \
+    textVar[2] = (move & 0xFF);                                 \
     textVar[3] = (move & 0xFF00) >> 8;                          \
     textVar[4] = B_BUFF_EOS;                                    \
 }
@@ -213,7 +213,7 @@ struct BattleMsgData
 void BufferStringBattle(u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
 u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
-void BattlePutTextOnWindow(const u8* text, u8 arg1);
+void BattlePutTextOnWindow(const u8* text, u8 windowId);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 
@@ -259,7 +259,7 @@ extern const u8 gText_Love[];
 extern const u8 gText_SpaceAndSpace[];
 extern const u8 gText_CommaSpace[];
 extern const u8 gText_Space2[];
-extern const u8 gText_ScrollTextUp[];
+extern const u8 gText_LineBreak[];
 extern const u8 gText_NewLine[];
 extern const u8 gText_Are[];
 extern const u8 gText_Are2[];

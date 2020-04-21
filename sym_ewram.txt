@@ -1,11 +1,13 @@
 	.include "src/decompress.o"
 	.include "src/main.o"
-	.include "src/window.o"
-	.include "src/text.o"
-	.include "src/sprite.o"
-	.include "src/string_util.o"
+	.include "gflib/window.o"
+	.include "gflib/text.o"
+	.include "gflib/sprite.o"
+	.include "gflib/string_util.o"
 	.include "src/link.o"
-	.include "src/link_rfu.o"
+	.include "src/AgbRfu_LinkManager.o"
+	.include "src/link_rfu_3.o"
+	.include "src/link_rfu_2.o"
 	.include "src/union_room.o"
 	.include "src/mystery_gift.o"
 	.include "src/union_room_player_avatar.o"
@@ -18,17 +20,10 @@
 	.include "src/berry_crush.o"
 	.include "src/berry_powder.o"
 	.include "src/dodrio_berry_picking.o"
-
-    @ pokemon_jump
-gUnknown_02022CFC: @ 2022CFC
-	.space 0x4
-
-gUnknown_02022D00: @ 2022D00
-	.space 0x4
-
+	.include "src/pokemon_jump.o"
 	.include "src/main_menu.o"
 	.include "src/battle_controllers.o"
-	.include "src/rom_8034C54.o"
+	.include "src/digit_obj_util.o"
 	.include "src/battle_main.o"
 	.include "src/pokemon.o"
 	.include "src/random.o"
@@ -84,7 +79,7 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/safari_zone.o"
 	.include "src/item_use.o"
 	.include "src/battle_anim_effects_1.o"
-	.include "src/dragon.o"
+	.include "src/battle_anim_dragon.o"
 	.include "src/battle_anim_utility_funcs.o"
 	.include "src/battle_intro.o"
 	.include "src/easy_chat.o"
@@ -136,7 +131,7 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/match_call.o"
 	.include "src/menu.o"
 	.include "src/battle_factory_screen.o"
-	.include "src/mossdeep_gym.o"
+	.include "src/rotating_tile_puzzle.o"
 	.include "src/item_menu.o"
 	.include "src/list_menu.o"
 	.include "src/dynamic_placeholder_text_util.o"
@@ -144,7 +139,7 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/party_menu.o"
 	.include "src/mirage_tower.o"
 	.include "src/pokemon_summary_screen.o"
-	.include "src/unk_pokedex_area_screen_helper.o"
+	.include "src/pokedex_area_region_map.o"
 	.include "src/battle_pyramid_bag.o"
 	.include "src/pokenav.o"
 	.include "src/pokenav_match_call_ui.o"

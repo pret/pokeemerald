@@ -36,11 +36,11 @@ static void DrawMetatile(s32 a, u16 *b, u16 c);
 static void CameraPanningCB_PanAhead(void);
 
 // IWRAM bss vars
-static IWRAM_DATA struct FieldCameraOffset sFieldCameraOffset;
-static IWRAM_DATA s16 sHorizontalCameraPan;
-static IWRAM_DATA s16 sVerticalCameraPan;
-static IWRAM_DATA u8 gUnknown_03000E2C;
-static IWRAM_DATA void (*sFieldCameraPanningCallback)(void);
+static struct FieldCameraOffset sFieldCameraOffset;
+static s16 sHorizontalCameraPan;
+static s16 sVerticalCameraPan;
+static u8 gUnknown_03000E2C;
+static void (*sFieldCameraPanningCallback)(void);
 
 struct CameraObject gFieldCamera;
 u16 gTotalCameraPixelOffsetY;
@@ -299,7 +299,7 @@ static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
         gBGTilemapBuffers1[offset + 0x20] = metatiles[2];
         gBGTilemapBuffers1[offset + 0x21] = metatiles[3];
 
-        // Draw metatile's top layer to the top background layer, which covers event object sprites.
+        // Draw metatile's top layer to the top background layer, which covers object event sprites.
         gBGTilemapBuffers2[offset] = metatiles[4];
         gBGTilemapBuffers2[offset + 1] = metatiles[5];
         gBGTilemapBuffers2[offset + 0x20] = metatiles[6];
@@ -415,7 +415,7 @@ void CameraUpdate(void)
     if (deltaX != 0 || deltaY != 0)
     {
         CameraMove(deltaX, deltaY);
-        UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
+        UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
         ResetBerryTreeSparkleFlags();
         tilemap_move_something(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
@@ -430,7 +430,7 @@ void CameraUpdate(void)
 void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
 {
     CameraMove(deltaX, deltaY);
-    UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
+    UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
     DrawWholeMapView();
     gTotalCameraPixelOffsetX -= deltaX * 16;
     gTotalCameraPixelOffsetY -= deltaY * 16;

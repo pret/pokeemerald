@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "decompress.h"
 #include "overworld.h"
 #include "script.h"
@@ -216,7 +216,7 @@ static u32 mainseq_4(struct mevent_client * svr)
         sub_801B508(svr->recvBuffer);
         break;
     case 17:
-        InitRamScript_NoEventObject(svr->recvBuffer, 1000);
+        InitRamScript_NoObjectEvent(svr->recvBuffer, 1000);
         break;
     case 18:
         memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, svr->recvBuffer, 0xbc);

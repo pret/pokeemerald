@@ -2,9 +2,15 @@
 #include "event_data.h"
 #include "pokedex.h"
 
-#define TEMP_FLAGS_SIZE 0x4
-#define DAILY_FLAGS_SIZE 0x8
-#define TEMP_VARS_SIZE 0x20
+#define NUM_SPECIAL_FLAGS (SPECIAL_FLAGS_END - SPECIAL_FLAGS_START + 1)
+#define NUM_TEMP_FLAGS    (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
+#define NUM_DAILY_FLAGS   (DAILY_FLAGS_END - DAILY_FLAGS_START + 1)
+#define NUM_TEMP_VARS     (TEMP_VARS_END - TEMP_VARS_START + 1)
+
+#define SPECIAL_FLAGS_SIZE  (NUM_SPECIAL_FLAGS / 8)  // 8 flags per byte
+#define TEMP_FLAGS_SIZE     (NUM_TEMP_FLAGS / 8)
+#define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
+#define TEMP_VARS_SIZE      (NUM_TEMP_VARS * 2)      // 1/2 var per byte
 
 EWRAM_DATA u16 gSpecialVar_0x8000 = 0;
 EWRAM_DATA u16 gSpecialVar_0x8001 = 0;
@@ -24,7 +30,7 @@ EWRAM_DATA u16 gSpecialVar_Facing = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_Unused_0x8014 = 0;
-EWRAM_DATA static u8 gSpecialFlags[16] = {0};
+EWRAM_DATA static u8 gSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
 
 extern u16 *const gSpecialVars[];
 
@@ -37,8 +43,8 @@ void InitEventData(void)
 
 void ClearTempFieldEventData(void)
 {
-    memset(gSaveBlock1Ptr->flags, 0, TEMP_FLAGS_SIZE);
-    memset(gSaveBlock1Ptr->vars, 0, TEMP_VARS_SIZE);
+    memset(gSaveBlock1Ptr->flags + (TEMP_FLAGS_START / 8), 0, TEMP_FLAGS_SIZE);
+    memset(gSaveBlock1Ptr->vars + ((TEMP_VARS_START - VARS_START) * 2), 0, TEMP_VARS_SIZE);
     FlagClear(FLAG_SYS_ENC_UP_ITEM);
     FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
     FlagClear(FLAG_SYS_USE_STRENGTH);
@@ -48,7 +54,7 @@ void ClearTempFieldEventData(void)
 
 void ClearDailyFlags(void)
 {
-    memset(gSaveBlock1Ptr->flags + 0x124, 0, DAILY_FLAGS_SIZE);
+    memset(gSaveBlock1Ptr->flags + (DAILY_FLAGS_START / 8), 0, DAILY_FLAGS_SIZE);
 }
 
 void DisableNationalPokedex(void)
@@ -108,7 +114,7 @@ bool32 IsMysteryGiftEnabled(void)
     return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
 }
 
-void sub_809D4D8(void)
+void ClearMysteryEventFlags(void)
 {
     FlagClear(FLAG_MYSTERY_EVENT_DONE);
     FlagClear(FLAG_MYSTERY_EVENT_1);
@@ -128,7 +134,7 @@ void sub_809D4D8(void)
     FlagClear(FLAG_MYSTERY_EVENT_15);
 }
 
-void sub_809D570(void)
+void ClearMysteryEventVars(void)
 {
     VarSet(VAR_EVENT_PICHU_SLOT, 0);
     VarSet(VAR_NEVER_READ_0x40DE, 0);
@@ -187,7 +193,7 @@ bool8 VarSet(u16 id, u16 value)
     return TRUE;
 }
 
-u8 VarGetEventObjectGraphicsId(u8 id)
+u8 VarGetObjectEventGraphicsId(u8 id)
 {
     return VarGet(VAR_OBJ_GFX_ID_0 + id);
 }

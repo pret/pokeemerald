@@ -6,7 +6,7 @@
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "main.h"
 #include "menu.h"
 #include "overworld.h"
@@ -245,7 +245,7 @@ static void CableCarMainCallback_Setup(void)
 {
     u16 imebak;
     u8 i = 0;
-    int sizeOut = 0;
+    u32 sizeOut = 0;
 
     switch (gMain.state)
     {
@@ -307,7 +307,7 @@ static void CableCarMainCallback_Setup(void)
         gMain.state++;
         break;
     case 5:
-        if (sCableCar->weather == WEATHER_ASH)
+        if (sCableCar->weather == WEATHER_VOLCANIC_ASH)
         {
             gMain.state++;
         }
@@ -425,7 +425,7 @@ static void sub_81503E4(u8 taskId)
     case 1:
         switch (sCableCar->weather)
         {
-        case WEATHER_ASH:
+        case WEATHER_VOLCANIC_ASH:
             if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL && gWeatherPtr->sprites.s2.ashSprites[0]->oam.priority != 0)
             {
                 for (; i < NUM_ASH_SPRITES; i++)
@@ -768,15 +768,15 @@ static void LoadCableCarSprites(void)
     u8 i;
 
     u8 playerGraphicsIds[2] = {
-        EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
-        EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+        OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
+        OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
     };
     u16 rval = Random();
     u8 hikerGraphicsIds[4] = {
-        EVENT_OBJ_GFX_HIKER,
-        EVENT_OBJ_GFX_CAMPER,
-        EVENT_OBJ_GFX_PICNICKER,
-        EVENT_OBJ_GFX_ZIGZAGOON_1
+        OBJ_EVENT_GFX_HIKER,
+        OBJ_EVENT_GFX_CAMPER,
+        OBJ_EVENT_GFX_PICNICKER,
+        OBJ_EVENT_GFX_ZIGZAGOON_1
     };
     s16 hikerCoords[2][2] = {
         {   0,  80 },
@@ -797,7 +797,7 @@ static void LoadCableCarSprites(void)
     {
         case 0:
         default:
-            spriteId = AddPseudoEventObject(playerGraphicsIds[gSaveBlock2Ptr->playerGender], sub_8150948, 200, 73, 102);
+            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], sub_8150948, 200, 73, 102);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -815,13 +815,13 @@ static void LoadCableCarSprites(void)
             gSprites[spriteId].pos2.y = 4;
             gSprites[spriteId].data[0] = 200;
             gSprites[spriteId].data[1] = 99;
-            sCableCar->weather = WEATHER_ASH;
+            sCableCar->weather = WEATHER_VOLCANIC_ASH;
             sCableCar->unk4 = 0x15e;
             SetCurrentAndNextWeatherNoDelay(WEATHER_SUNNY);
             break;
         case 1:
             CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap + 0x24, 24, 26, 12, 3, 17);
-            spriteId = AddPseudoEventObject(playerGraphicsIds[gSaveBlock2Ptr->playerGender], sub_8150948, 128, 39, 102);
+            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], sub_8150948, 128, 39, 102);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -841,7 +841,7 @@ static void LoadCableCarSprites(void)
             gSprites[spriteId].data[1] = 0x41;
             sCableCar->weather = WEATHER_SUNNY;
             sCableCar->unk4 = 0x109;
-            SetCurrentAndNextWeatherNoDelay(WEATHER_ASH);
+            SetCurrentAndNextWeatherNoDelay(WEATHER_VOLCANIC_ASH);
             break;
     }
     for (i = 0; i < 9; i++)
@@ -852,7 +852,7 @@ static void LoadCableCarSprites(void)
     }
     if ((rval % 64) == 0)
     {
-        spriteId = AddPseudoEventObject(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
+        spriteId = AddPseudoObjectEvent(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].oam.priority = 2;

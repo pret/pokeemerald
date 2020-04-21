@@ -1,5 +1,5 @@
-#include "constants/bg_event_constants.h"
-#include "constants/event_object_movement_constants.h"
+#include "constants/event_bg.h"
+#include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/items.h"

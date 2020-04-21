@@ -5,7 +5,7 @@
   "music": "MUS_DAN01",
   "region_map_section": "MAPSEC_RUSTURF_TUNNEL",
   "requires_flash": false,
-  "weather": "WEATHER_FOG_1",
+  "weather": "WEATHER_FOG_HORIZONTAL",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_bike": true,
   "allow_escape_rope": true,
@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_BLACK_BELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 23,
       "y": 5,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_22CE76",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN"
+      "script": "RusturfTunnel_EventScript_WandasBoyfriend",
+      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_WANDAS_BOYFRIEND"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 24,
       "y": 5,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 1,
       "elevation": 3,
@@ -54,7 +54,7 @@
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_POKE_BALL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 30,
       "y": 2,
       "elevation": 3,
@@ -67,7 +67,7 @@
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -77,10 +77,10 @@
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_OLD_MAN"
+      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_BRINEY"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 14,
       "y": 5,
       "elevation": 3,
@@ -89,11 +89,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_22D0C2",
+      "script": "RusturfTunnel_EventScript_Grunt",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 14,
       "y": 4,
       "elevation": 3,
@@ -102,11 +102,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_22D0AF",
+      "script": "RusturfTunnel_EventScript_Peeko",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_PEEKO"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 24,
       "y": 4,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 32,
       "y": 13,
       "elevation": 3,
@@ -128,11 +128,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "RusturfTunnel_EventScript_22D1B1",
+      "script": "RusturfTunnel_EventScript_Mike",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 25,
       "y": 4,
       "elevation": 3,
@@ -141,8 +141,8 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_22CE5F",
-      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN"
+      "script": "RusturfTunnel_EventScript_Wanda",
+      "flag": "FLAG_HIDE_RUSTURF_TUNNEL_WANDA"
     }
   ],
   "warp_events": [
@@ -176,7 +176,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "RusturfTunnel_EventScript_22D071"
+      "script": "RusturfTunnel_EventScript_TunnelBlockagePos1"
     },
     {
       "type": "trigger",
@@ -185,7 +185,7 @@
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
       "var_value": "2",
-      "script": "RusturfTunnel_EventScript_22D083"
+      "script": "RusturfTunnel_EventScript_AquaGruntBackUp"
     },
     {
       "type": "trigger",
@@ -194,7 +194,7 @@
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
       "var_value": "2",
-      "script": "RusturfTunnel_EventScript_22D083"
+      "script": "RusturfTunnel_EventScript_AquaGruntBackUp"
     },
     {
       "type": "trigger",
@@ -203,7 +203,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "RusturfTunnel_EventScript_22D077"
+      "script": "RusturfTunnel_EventScript_TunnelBlockagePos2"
     },
     {
       "type": "trigger",
@@ -212,7 +212,7 @@
       "elevation": 3,
       "var": "0",
       "var_value": "0",
-      "script": "RusturfTunnel_EventScript_22D07D"
+      "script": "RusturfTunnel_EventScript_TunnelBlockagePos3"
     }
   ],
   "bg_events": []

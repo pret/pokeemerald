@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_0",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 13,
       "y": 12,
       "elevation": 3,
@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_VAR_1",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 13,
       "y": 2,
       "elevation": 0,
@@ -65,7 +65,7 @@
       "y": 11,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SouthernIsland_Interior_EventScript_242AC4"
+      "script": "SouthernIsland_Interior_EventScript_TryLatiEncounter"
     }
   ]
 }

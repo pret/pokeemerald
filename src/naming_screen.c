@@ -1,6 +1,6 @@
 #include "global.h"
 #include "naming_screen.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "palette.h"
 #include "task.h"
 #include "sprite.h"
@@ -33,28 +33,11 @@ EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
 
 // extern text
-extern const u8 gExpandedPlaceholder_Empty[];
-extern const u8 gText_PkmnTransferredSomeonesPC[];
-extern const u8 gText_PkmnTransferredLanettesPC[];
-extern const u8 gText_PkmnBoxSomeonesPCFull[];
-extern const u8 gText_PkmnBoxLanettesPCFull[];
 extern const u8 gText_MoveOkBack[];
 extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
-extern const u8 gUnknown_0862B88D[];
-extern const u8 gUnknown_0862B8AE[];
-extern const u8 gUnknown_0862B8CF[];
-extern const u8 gUnknown_0862B8F0[];
-extern const u8 gUnknown_0862B911[];
-extern const u8 gUnknown_0862B932[];
-extern const u8 gUnknown_0862B953[];
-extern const u8 gUnknown_0862B974[];
-extern const u8 gUnknown_0862B995[];
-extern const u8 gUnknown_0862B9AE[];
-extern const u8 gUnknown_0862B9C7[];
-extern const u8 gUnknown_0862B9E0[];
 
 
 // start of .rodata
@@ -63,15 +46,15 @@ static const u8 gSpriteImage_858BCB8[] = INCBIN_U8("graphics/naming_screen/pc_ic
 static const u16 gUnknown_0858BD78[] = INCBIN_U16("graphics/naming_screen/0.gbapal");
 static const u16 gUnknown_0858BD98[] = INCBIN_U16("graphics/naming_screen/1.gbapal");
 
-static const u8 *const gUnknown_0858BDB8[] =
+static const u8 *const sTransferredToPCMessages[] =
 {
     gText_PkmnTransferredSomeonesPC,
     gText_PkmnTransferredLanettesPC,
-    gText_PkmnBoxSomeonesPCFull,
-    gText_PkmnBoxLanettesPCFull
+    gText_PkmnTransferredSomeonesPCBoxFull,
+    gText_PkmnTransferredLanettesPCBoxFull
 };
 
-static const u8 gUnknown_0858BDC8[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
+static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
 
 static const struct BgTemplate gUnknown_0858BE00[] =
 {
@@ -171,7 +154,7 @@ static const struct SpriteTemplate gUnknown_0858C138;
 static const struct SpriteTemplate sSpriteTemplate_InputArrow;
 static const struct SpriteTemplate sSpriteTemplate_Underscore;
 static const struct SpriteTemplate gUnknown_0858C180;
-static const u8* const gUnknown_0858C198[][4];
+static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
 static const struct SpriteSheet gUnknown_0858C1C8[];
 static const struct SpritePalette gUnknown_0858C230[];
 
@@ -238,7 +221,7 @@ static void NamingScreen_TurnOffScreen(void);
 static void NamingScreen_InitDisplayMode(void);
 static void VBlankCB_NamingScreen(void);
 static void sub_80E501C(void);
-static bool8 sub_80E503C(u8);
+static bool8 IsLetter(u8);
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
@@ -428,35 +411,52 @@ static void sub_80E31B0(u8 taskId)
     }
 }
 
-static const u8 gUnknown_0858BEBB[] = { 0, 2, 1 };
-static const u8 gUnknown_0858BEBE[] = { 1, 0, 2 };
-static const u8 gUnknown_0858BEC1[] = { 2, 1, 0 };
+static const u8 sPageOrderLowerFirst[] = 
+{ 
+    KBPAGE_LETTERS_LOWER, 
+    KBPAGE_SYMBOLS, 
+    KBPAGE_LETTERS_UPPER 
+};
+
+static const u8 sPageOrderUpperFirst[] = 
+{ 
+    KBPAGE_LETTERS_UPPER, 
+    KBPAGE_LETTERS_LOWER, 
+    KBPAGE_SYMBOLS 
+};
+
+static const u8 sPageOrderSymbolsFirst[] = 
+{ 
+    KBPAGE_SYMBOLS, 
+    KBPAGE_LETTERS_UPPER, 
+    KBPAGE_LETTERS_LOWER 
+};
 
 static u8 sub_80E3244(u8 a1)
 {
-    return gUnknown_0858BEBB[a1];
+    return sPageOrderLowerFirst[a1];
 }
 
 static u8 sub_80E3254(void)
 {
-    return gUnknown_0858BEBE[gNamingScreenData->currentPage];
+    return sPageOrderUpperFirst[gNamingScreenData->currentPage];
 }
 
 static u8 sub_80E3274(void)
 {
-    return gUnknown_0858BEC1[gNamingScreenData->currentPage];
+    return sPageOrderSymbolsFirst[gNamingScreenData->currentPage];
 }
 
 static bool8 MainState_BeginFadeIn(void)
 {
     sub_80E4CF8(3, gUnknown_08DD4544);
-    gNamingScreenData->currentPage = PAGE_UPPER;
+    gNamingScreenData->currentPage = KBPAGE_LETTERS_UPPER;
     sub_80E4CF8(2, gUnknown_08DD46E0);
     sub_80E4CF8(1, gUnknown_08DD4620);
-    sub_80E4DE4(gNamingScreenData->windows[1], 0);
-    sub_80E4DE4(gNamingScreenData->windows[0], 1);
-    nullsub_10(2, 0);
-    nullsub_10(1, 1);
+    sub_80E4DE4(gNamingScreenData->windows[1], KBPAGE_LETTERS_LOWER);
+    sub_80E4DE4(gNamingScreenData->windows[0], KBPAGE_LETTERS_UPPER);
+    nullsub_10(2, KBPAGE_LETTERS_LOWER);
+    nullsub_10(1, KBPAGE_LETTERS_UPPER);
     sub_80E4D10();
     sub_80E4964();
     sub_80E4EF0();
@@ -541,23 +541,23 @@ static void DisplaySentToPCMessage(void)
 {
     u8 stringToDisplay = 0;
 
-    if (!sub_813B260())
+    if (!IsDestinationBoxFull())
     {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
         StringCopy(gStringVar2, gNamingScreenData->destBuffer);
     }
     else
     {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_STORAGE_UNKNOWN)));
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
         StringCopy(gStringVar2, gNamingScreenData->destBuffer);
-        StringCopy(gStringVar3, GetBoxNamePtr(get_unknown_box_id()));
+        StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon()));
         stringToDisplay = 2;
     }
 
     if (FlagGet(FLAG_SYS_PC_LANETTE))
         stringToDisplay++;
 
-    StringExpandPlaceholders(gStringVar4, gUnknown_0858BDB8[stringToDisplay]);
+    StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, 0);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
@@ -913,7 +913,7 @@ static void CursorInit(void)
     gNamingScreenData->cursorSpriteId = CreateSprite(&gUnknown_0858C138, 38, 88, 1);
     sub_80E3E3C(1);
     gSprites[gNamingScreenData->cursorSpriteId].oam.priority = 1;
-    gSprites[gNamingScreenData->cursorSpriteId].oam.objMode = 1;
+    gSprites[gNamingScreenData->cursorSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
     gSprites[gNamingScreenData->cursorSpriteId].data[6] = 1;
     gSprites[gNamingScreenData->cursorSpriteId].data[6] = 2;
     SetCursorPos(0, 0);
@@ -1171,7 +1171,7 @@ static void NamingScreen_CreatePlayerIcon(void)
     u8 spriteId;
 
     rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gNamingScreenData->monSpecies);
-    spriteId = AddPseudoEventObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
+    spriteId = AddPseudoObjectEvent(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }
@@ -1198,7 +1198,7 @@ static void NamingScreen_CreateWandaDadIcon(void)
 {
     u8 spriteId;
 
-    spriteId = AddPseudoEventObject(EVENT_OBJ_GFX_MAN_1, SpriteCallbackDummy, 0x38, 0x25, 0);
+    spriteId = AddPseudoObjectEvent(OBJ_EVENT_GFX_MAN_1, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }
@@ -1526,8 +1526,8 @@ static void TaskDummy3(void)
 
 static const u8 sGenderColors[2][3] =
 {
-    {0, 9, 8},
-    {0, 5, 4}
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_BLUE},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED}
 };
 
 static void sub_80E49BC(void)
@@ -1660,7 +1660,7 @@ static void sub_80E4CF8(u8 bg, const void *src)
     CopyToBgTilemapBuffer(bg, src, 0, 0);
 }
 
-static void nullsub_10(u8 a1, u8 a2)
+static void nullsub_10(u8 a1, u8 page)
 {
 
 }
@@ -1678,8 +1678,8 @@ static void sub_80E4D10(void)
     for (i = 0; i < maxChars; i++)
     {
         temp[0] = gNamingScreenData->textBuffer[i];
-        temp[1] = gExpandedPlaceholder_Empty[0];
-        unk2 = (sub_80E503C(temp[0]) == 1) ? 2 : 0;
+        temp[1] = gText_ExpandedPlaceholder_Empty[0];
+        unk2 = (IsLetter(temp[0]) == TRUE) ? 2 : 0;
 
         AddTextPrinterParameterized(gNamingScreenData->windows[2], 1, temp, i * 8 + unk + unk2, 1, 0xFF, NULL);
     }
@@ -1689,43 +1689,43 @@ static void sub_80E4D10(void)
     PutWindowTilemap(gNamingScreenData->windows[2]);
 }
 
-struct TextColorThing   // needed because of alignment... it's so stupid
+struct TextColor   // Needed because of alignment
 {
     u8 colors[3][4];
 };
 
-static const struct TextColorThing sUnkColorStruct =
+static const struct TextColor sTextColorStruct =
 {
     {
-        {13, 1, 2},
-        {14, 1, 2},
-        {15, 1, 2}
+        {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY},
+        {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY},
+        {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY}
     }
 };
 
-static const u8 sFillValues[3] =
+static const u8 sFillValues[KBPAGE_COUNT] =
 {
-    PIXEL_FILL(0xE),
-    PIXEL_FILL(0xD),
-    PIXEL_FILL(0xF)
+    [KBPAGE_LETTERS_LOWER] = PIXEL_FILL(0xE),
+    [KBPAGE_LETTERS_UPPER] = PIXEL_FILL(0xD),
+    [KBPAGE_SYMBOLS] = PIXEL_FILL(0xF)
 };
 
-static const u8 *const sUnkColors[3] =
+static const u8 *const sKeyboardTextColors[KBPAGE_COUNT] =
 {
-    sUnkColorStruct.colors[1],
-    sUnkColorStruct.colors[0],
-    sUnkColorStruct.colors[2]
+    [KBPAGE_LETTERS_LOWER] = sTextColorStruct.colors[1],
+    [KBPAGE_LETTERS_UPPER] = sTextColorStruct.colors[0],
+    [KBPAGE_SYMBOLS] = sTextColorStruct.colors[2]
 };
 
-static void sub_80E4DE4(u8 window, u8 a1)
+static void sub_80E4DE4(u8 window, u8 page)
 {
     u8 i;
 
-    FillWindowPixelBuffer(window, sFillValues[a1]);
+    FillWindowPixelBuffer(window, sFillValues[page]);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < KBROW_COUNT; i++)
     {
-        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sUnkColors[a1], 0, gUnknown_0858C198[a1][i]);
+        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
     }
 
     PutWindowTilemap(window);
@@ -1767,7 +1767,7 @@ static void sub_80E4E5C(void)
 
 static void sub_80E4EF0(void)
 {
-    const u8 color[3] = { 15, 1, 2 };
+    const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
 
     FillWindowPixelBuffer(gNamingScreenData->windows[4], PIXEL_FILL(15));
     AddTextPrinterParameterized3(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
@@ -1815,13 +1815,13 @@ static void sub_80E501C(void)
     ShowBg(3);
 }
 
-static bool8 sub_80E503C(u8 character)
+static bool8 IsLetter(u8 character)
 {
     u8 i;
 
-    for (i = 0; gUnknown_0858BDC8[i] != EOS; i++)
+    for (i = 0; sText_AlphabetUpperLower[i] != EOS; i++)
     {
-        if (character == gUnknown_0858BDC8[i])
+        if (character == sText_AlphabetUpperLower[i])
             return FALSE;
     }
     return FALSE;
@@ -1857,7 +1857,7 @@ static const struct NamingScreenTemplate playerNamingScreenTemplate =
     .maxChars = 7,
     .iconFunction = 1,
     .addGenderIcon = 0,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
     .title = gText_YourName,
 };
@@ -1868,7 +1868,7 @@ static const struct NamingScreenTemplate pcBoxNamingTemplate =
     .maxChars = 8,
     .iconFunction = 2,
     .addGenderIcon = 0,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 19,
     .title = gText_BoxName,
 };
@@ -1879,7 +1879,7 @@ static const struct NamingScreenTemplate monNamingScreenTemplate =
     .maxChars = 10,
     .iconFunction = 3,
     .addGenderIcon = 1,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
     .title = gText_PkmnsNickname,
 };
@@ -1890,7 +1890,7 @@ static const struct NamingScreenTemplate wandaWordsScreenTemplate =
     .maxChars = 15,
     .iconFunction = 4,
     .addGenderIcon = 0,
-    .initialPage = PAGE_UPPER,
+    .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 11,
     .title = gText_TellHimTheWords,
 };
@@ -1948,37 +1948,170 @@ const struct OamData gOamData_858BFFC =
 
 static const struct Subsprite gUnknown_0858C004[] =
 {
-    {-20,  -16, 1,  1,   0,     1},
-    { 12,  -16, 0,  0,   4,     1},
-    {-20,  -8,  1,  1,   5,     1},
-    { 12,  -8,  0,  0,   9,     1},
-    {-20,   0,  1,  1,  10,     1},
-    { 12,   0,  0,  0,  14,     1},
-    {-20,   8,  1,  1,  15,     1},
-    { 12,   8,  0,  0,  19,     1}
+    {
+        .x = -20,  
+        .y = -16, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),  
+        .tileOffset = 0,     
+        .priority = 1
+    },
+    {
+        .x =  12,  
+        .y = -16, 
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8),  
+        .tileOffset = 4,     
+        .priority = 1
+    },
+    {
+        .x = -20,  
+        .y = -8,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8), 
+        .tileOffset = 5,     
+        .priority = 1
+    },
+    {
+        .x =  12,  
+        .y = -8,  
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 9,     
+        .priority = 1
+    },
+    {
+        .x = -20,  
+        .y =  0,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8), 
+        .tileOffset = 10,    
+        .priority = 1
+    },
+    {
+        .x =  12,  
+        .y =  0,  
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8), 
+        .tileOffset = 14,    
+        .priority = 1
+    },
+    {
+        .x = -20,  
+        .y =  8,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 15,    
+        .priority = 1
+    },
+    {
+        .x =  12,  
+        .y =  8,  
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 19,    
+        .priority = 1
+    }
 };
 
 static const struct Subsprite gUnknown_0858C024[] =
 {
-    {-12,  -4,  1,  0,   0,     1},
-    {  4,  -4,  0,  0,   2,     1}
+    {
+        .x = -12,  
+        .y = -4,  
+        .shape = SPRITE_SHAPE(16x8),  
+        .size = SPRITE_SIZE(16x8),  
+        .tileOffset = 0,     
+        .priority = 1
+    },
+    {
+        .x =   4,  
+        .y = -4,  
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8), 
+        .tileOffset = 2,     
+        .priority = 1
+    }
 };
 
 static const struct Subsprite gUnknown_0858C02C[] =
 {
-    {-20,  -12, 1,  1,   0,     1},
-    { 12,  -12, 0,  0,   4,     1},
-    {-20,  -4,  1,  1,   5,     1},
-    { 12,  -4,  0,  0,   9,     1},
-    {-20,   4,  1,  1,  10,     1},
-    { 12,   4,  0,  0,  14,     1}
+    {
+        .x = -20,  
+        .y = -12, 
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 0,     
+        .priority = 1
+    },
+    {
+        .x =  12,  
+        .y = -12, 
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 4,     
+        .priority = 1
+    },
+    {
+        .x = -20,  
+        .y = -4,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 5,     
+        .priority = 1
+    },
+    {
+        .x =  12,  
+        .y = -4,  
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 9,     
+        .priority = 1
+    },
+    {
+        .x = -20,  
+        .y =  4,  
+        .shape = SPRITE_SHAPE(32x8),  
+        .size = SPRITE_SIZE(32x8), 
+        .tileOffset = 10,    
+        .priority = 1
+    },
+    {
+        .x =  12,  
+        .y =  4,  
+        .shape = SPRITE_SHAPE(8x8),  
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 14,    
+        .priority = 1
+    }
 };
 
 static const struct Subsprite gUnknown_0858C044[] =
 {
-    {-8,   -12, 1,  0,   0,     3},
-    {-8,   -4,  1,  0,   2,     3},
-    {-8,    4,  1,  0,   4,     3}
+    {
+        .x = -8,   
+        .y = -12, 
+        .shape = SPRITE_SHAPE(16x8),  
+        .size = SPRITE_SIZE(16x8), 
+        .tileOffset = 0,     
+        .priority = 3
+    },
+    {
+        .x = -8,   
+        .y = -4,  
+        .shape = SPRITE_SHAPE(16x8),  
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 2,     
+        .priority = 3
+    },
+    {
+        .x = -8,   
+        .y =  4,  
+        .shape = SPRITE_SHAPE(16x8),  
+        .size = SPRITE_SIZE(16x8), 
+        .tileOffset = 4,     
+        .priority = 3
+    }
 };
 
 static const struct SubspriteTable gUnknown_0858C050[] =
@@ -2144,25 +2277,28 @@ static const struct SpriteTemplate gUnknown_0858C180 =
     .callback = SpriteCallbackDummy
 };
 
-static const u8* const gUnknown_0858C198[][4] =
+static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 {
+    [KBPAGE_LETTERS_LOWER] = 
     {
-        gUnknown_0862B88D,
-        gUnknown_0862B8AE,
-        gUnknown_0862B8CF,
-        gUnknown_0862B8F0
+        gText_NamingScreenKeyboard_abcdef,
+        gText_NamingScreenKeyboard_ghijkl,
+        gText_NamingScreenKeyboard_mnopqrs,
+        gText_NamingScreenKeyboard_tuvwxyz
     },
+    [KBPAGE_LETTERS_UPPER] = 
     {
-        gUnknown_0862B911,
-        gUnknown_0862B932,
-        gUnknown_0862B953,
-        gUnknown_0862B974
+        gText_NamingScreenKeyboard_ABCDEF,
+        gText_NamingScreenKeyboard_GHIJKL,
+        gText_NamingScreenKeyboard_MNOPQRS,
+        gText_NamingScreenKeyboard_TUVWXYZ
     },
+    [KBPAGE_SYMBOLS] = 
     {
-        gUnknown_0862B995,
-        gUnknown_0862B9AE,
-        gUnknown_0862B9C7,
-        gUnknown_0862B9E0
+        gText_NamingScreenKeyboard_01234,
+        gText_NamingScreenKeyboard_56789,
+        gText_NamingScreenKeyboard_Symbols1,
+        gText_NamingScreenKeyboard_Symbols2
     },
 };
 

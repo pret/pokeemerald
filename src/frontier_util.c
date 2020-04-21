@@ -24,11 +24,12 @@
 #include "data.h"
 #include "record_mixing.h"
 #include "strings.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "save.h"
 #include "load_save.h"
 #include "battle_dome.h"
 #include "constants/battle_frontier.h"
+#include "constants/frontier_util.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
 #include "constants/game_stat.h"
@@ -44,33 +45,33 @@ struct FrontierBrainMon
     u8 fixedIV;
     u8 nature;
     u8 evs[NUM_STATS];
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
 };
 
 // This file's functions.
-static void sub_81A17A0(void);
-static void sub_81A1830(void);
-static void sub_81A1968(void);
-static void sub_81A1AD4(void);
+static void GetChallengeStatus(void);
+static void GetFrontierData(void);
+static void SetFrontierData(void);
+static void SetSelectedPartyOrder(void);
 static void DoSoftReset_(void);
-static void sub_81A1B28(void);
-static void sub_81A1B38(void);
+static void SetFrontierTrainers(void);
+static void SaveSelectedParty(void);
 static void ShowFacilityResultsWindow(void);
-static void sub_81A31FC(void);
-static void sub_81A35EC(void);
-static void sub_81A3B00(void);
-static void sub_81A3B64(void);
-static void sub_81A3D30(void);
-static void sub_81A3D58(void);
-static void sub_81A3DA0(void);
-static void sub_81A3FD4(void);
-static void sub_81A4224(void);
-static void sub_81A4230(void);
-static void sub_81A43A8(void);
-static void sub_81A4410(void);
-static void sub_81A443C(void);
-static void sub_81A447C(void);
-static void sub_81A457C(void);
+static void CheckPutFrontierTVShowOnAir(void);
+static void Script_GetFrontierBrainStatus(void);
+static void IsTrainerFrontierBrain(void);
+static void GiveBattlePoints(void);
+static void GetFacilitySymbolCount(void);
+static void GiveFacilitySymbol(void);
+static void CheckBattleTypeFlag(void);
+static void CheckPartyIneligibility(void);
+static void ValidateVisitingTrainer(void);
+static void IncrementWinStreak(void);
+static void RestoreHeldItems(void);
+static void SaveRecordBattle(void);
+static void BufferFrontierTrainerName(void);
+static void ResetSketchedMoves(void);
+static void SetFacilityBrainObjectEvent(void);
 static void ShowTowerResultsWindow(u8);
 static void ShowDomeResultsWindow(u8);
 static void ShowPalaceResultsWindow(u8);
@@ -82,18 +83,18 @@ static void ShowLinkContestResultsWindow(void);
 static void CopyFrontierBrainText(bool8 playerWonText);
 
 // const rom data
-static const u8 gUnknown_08611550[][4] =
+static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
 {
-    [FRONTIER_FACILITY_TOWER]   = {0x23, 0x46, 0x23, 0x01},
-    [FRONTIER_FACILITY_DOME]    = {0x04, 0x09, 0x05, 0x00},
-    [FRONTIER_FACILITY_PALACE]  = {0x15, 0x2a, 0x15, 0x01},
-    [FRONTIER_FACILITY_ARENA]   = {0x1c, 0x38, 0x1c, 0x01},
-    [FRONTIER_FACILITY_FACTORY] = {0x15, 0x2a, 0x15, 0x01},
-    [FRONTIER_FACILITY_PIKE]    = {0x1c, 0x8c, 0x38, 0x01},
-    [FRONTIER_FACILITY_PYRAMID] = {0x15, 0x46, 0x23, 0x00},
+    [FRONTIER_FACILITY_TOWER]   = {35,  70, 35, 1},
+    [FRONTIER_FACILITY_DOME]    = { 4,   9,  5, 0},
+    [FRONTIER_FACILITY_PALACE]  = {21,  42, 21, 1},
+    [FRONTIER_FACILITY_ARENA]   = {28,  56, 28, 1},
+    [FRONTIER_FACILITY_FACTORY] = {21,  42, 21, 1},
+    [FRONTIER_FACILITY_PIKE]    = {28, 140, 56, 1},
+    [FRONTIER_FACILITY_PYRAMID] = {21,  70, 35, 0},
 };
 
-static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
+static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZE] =
 {
     [FRONTIER_FACILITY_TOWER] =
     {
@@ -103,7 +104,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ALAKAZAM,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 24,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {106, 0, 152, 152, 100, 0},
                 .moves = {MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH, MOVE_DISABLE},
             },
@@ -111,7 +112,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ENTEI,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 24,
-                .nature = 1,
+                .nature = NATURE_LONELY,
                 .evs = {100, 152, 152, 0, 100, 6},
                 .moves = {MOVE_FIRE_BLAST, MOVE_CALM_MIND, MOVE_RETURN, MOVE_ROAR},
             },
@@ -119,7 +120,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SNORLAX,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 24,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 0, 0, 106, 100},
                 .moves = {MOVE_BODY_SLAM, MOVE_BELLY_DRUM, MOVE_YAWN, MOVE_SHADOW_BALL},
             },
@@ -130,7 +131,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_RAIKOU,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {158, 0, 252, 100, 0, 0},
                 .moves = {MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_REFLECT, MOVE_REST},
             },
@@ -138,7 +139,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_LATIOS,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_DRAGON_CLAW},
             },
@@ -146,7 +147,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SNORLAX,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {252, 252, 0, 0, 6, 0},
                 .moves = {MOVE_CURSE, MOVE_RETURN, MOVE_REST, MOVE_SHADOW_BALL},
             },
@@ -160,7 +161,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SWAMPERT,
                 .heldItem = ITEM_FOCUS_BAND,
                 .fixedIV = 20,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {152, 152, 106, 0, 100, 0},
                 .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_COUNTER},
             },
@@ -168,7 +169,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SALAMENCE,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 20,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 106, 100, 0, 0},
                 .moves = {MOVE_EARTHQUAKE, MOVE_BRICK_BREAK, MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE},
             },
@@ -176,7 +177,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_CHARIZARD,
                 .heldItem = ITEM_WHITE_HERB,
                 .fixedIV = 20,
-                .nature = 17,
+                .nature = NATURE_QUIET,
                 .evs = {100, 152, 106, 152, 0, 0},
                 .moves = {MOVE_OVERHEAT, MOVE_ROCK_SLIDE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE},
             },
@@ -187,7 +188,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SWAMPERT,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 252, 6, 0, 0, 0},
                 .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_MIRROR_COAT},
             },
@@ -195,7 +196,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_METAGROSS,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 252, 6, 0, 0, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PROTECT},
             },
@@ -203,7 +204,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_LATIAS,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_REST},
             },
@@ -217,7 +218,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_CROBAT,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 16,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 0, 0, 152, 100, 106},
                 .moves = {MOVE_CONFUSE_RAY, MOVE_DOUBLE_TEAM, MOVE_TOXIC, MOVE_FLY},
             },
@@ -225,7 +226,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SLAKING,
                 .heldItem = ITEM_SCOPE_LENS,
                 .fixedIV = 16,
-                .nature = 0,
+                .nature = NATURE_HARDY,
                 .evs = {152, 152, 0, 106, 100, 0},
                 .moves = {MOVE_EARTHQUAKE, MOVE_SWAGGER, MOVE_SHADOW_BALL, MOVE_BRICK_BREAK},
             },
@@ -233,7 +234,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_LAPRAS,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 16,
-                .nature = 17,
+                .nature = NATURE_QUIET,
                 .evs = {0, 0, 252, 0, 106, 152},
                 .moves = {MOVE_ICE_BEAM, MOVE_HORN_DRILL, MOVE_CONFUSE_RAY, MOVE_PROTECT},
             },
@@ -244,7 +245,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ARCANINE,
                 .heldItem = ITEM_WHITE_HERB,
                 .fixedIV = 31,
-                .nature = 11,
+                .nature = NATURE_HASTY,
                 .evs = {6, 252, 252, 0, 0, 0},
                 .moves = {MOVE_OVERHEAT, MOVE_EXTREME_SPEED, MOVE_ROAR, MOVE_PROTECT},
             },
@@ -252,7 +253,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SLAKING,
                 .heldItem = ITEM_SCOPE_LENS,
                 .fixedIV = 31,
-                .nature = 0,
+                .nature = NATURE_HARDY,
                 .evs = {6, 252, 0, 252, 0, 0},
                 .moves = {MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_YAWN},
             },
@@ -260,7 +261,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SUICUNE,
                 .heldItem = ITEM_KINGS_ROCK,
                 .fixedIV = 31,
-                .nature = 11,
+                .nature = NATURE_HASTY,
                 .evs = {252, 0, 252, 6, 0, 0},
                 .moves = {MOVE_BLIZZARD, MOVE_SURF, MOVE_BITE, MOVE_CALM_MIND},
             },
@@ -274,7 +275,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_HERACROSS,
                 .heldItem = ITEM_SALAC_BERRY,
                 .fixedIV = 20,
-                .nature = 13,
+                .nature = NATURE_JOLLY,
                 .evs = {106, 152, 0, 152, 0, 100},
                 .moves = {MOVE_MEGAHORN, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL},
             },
@@ -282,7 +283,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_UMBREON,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 20,
-                .nature = 20,
+                .nature = NATURE_CALM,
                 .evs = {152, 0, 100, 0, 152, 106},
                 .moves = {MOVE_BODY_SLAM, MOVE_CONFUSE_RAY, MOVE_PSYCHIC, MOVE_FAINT_ATTACK},
             },
@@ -290,7 +291,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SHEDINJA,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 20,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 6, 252, 0, 0},
                 .moves = {MOVE_SHADOW_BALL, MOVE_RETURN, MOVE_CONFUSE_RAY, MOVE_AERIAL_ACE},
             },
@@ -301,7 +302,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_UMBREON,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 20,
+                .nature = NATURE_CALM,
                 .evs = {252, 0, 0, 0, 252, 6},
                 .moves = {MOVE_DOUBLE_EDGE, MOVE_CONFUSE_RAY, MOVE_REST, MOVE_PSYCHIC},
             },
@@ -309,7 +310,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_GENGAR,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 31,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {252, 0, 252, 0, 6, 0},
                 .moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_DESTINY_BOND},
             },
@@ -317,7 +318,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_BRELOOM,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 31,
-                .nature = 13,
+                .nature = NATURE_JOLLY,
                 .evs = {6, 252, 0, 252, 0, 0},
                 .moves = {MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_GIGA_DRAIN, MOVE_HEADBUTT},
             },
@@ -332,7 +333,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_METANG,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {0, 252, 252, 0, 6, 0},
                 .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
             },
@@ -340,7 +341,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SKARMORY,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 8,
+                .nature = NATURE_IMPISH,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
             },
@@ -348,7 +349,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_AGGRON,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 0, 0, 252, 6},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
             },
@@ -358,7 +359,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_METANG,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {0, 252, 252, 0, 6, 0},
                 .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
             },
@@ -366,7 +367,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SKARMORY,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 8,
+                .nature = NATURE_IMPISH,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
             },
@@ -374,7 +375,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_AGGRON,
                 .heldItem = ITEM_SITRUS_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {0, 252, 0, 0, 252, 6},
                 .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
             },
@@ -388,7 +389,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SEVIPER,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 16,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 0, 252, 0, 6, 0},
                 .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_POISON_FANG, MOVE_GIGA_DRAIN},
             },
@@ -396,7 +397,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SHUCKLE,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 16,
-                .nature = 5,
+                .nature = NATURE_BOLD,
                 .evs = {252, 0, 0, 0, 106, 252},
                 .moves = {MOVE_TOXIC, MOVE_SANDSTORM, MOVE_PROTECT, MOVE_REST},
             },
@@ -404,7 +405,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_MILOTIC,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 16,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {152, 0, 100, 0, 152, 106},
                 .moves = {MOVE_ICE_BEAM, MOVE_MIRROR_COAT, MOVE_SURF, MOVE_RECOVER},
             },
@@ -415,7 +416,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_SEVIPER,
                 .heldItem = ITEM_FOCUS_BAND,
                 .fixedIV = 31,
-                .nature = 5,
+                .nature = NATURE_BOLD,
                 .evs = {252, 0, 0, 0, 252, 6},
                 .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
             },
@@ -423,7 +424,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_STEELIX,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 31,
-                .nature = 2,
+                .nature = NATURE_BRAVE,
                 .evs = {252, 0, 0, 0, 6, 252},
                 .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_EXPLOSION, MOVE_SCREECH},
             },
@@ -431,7 +432,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_GYARADOS,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 31,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {252, 6, 0, 0, 0, 252},
                 .moves = {MOVE_DRAGON_DANCE, MOVE_RETURN, MOVE_ROAR, MOVE_REST},
             },
@@ -445,7 +446,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_REGIROCK,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 16,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 0, 0, 106, 100},
                 .moves = {MOVE_EXPLOSION, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER},
             },
@@ -453,7 +454,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_REGISTEEL,
                 .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = 16,
-                .nature = 3,
+                .nature = NATURE_ADAMANT,
                 .evs = {152, 152, 0, 0, 6, 200},
                 .moves = {MOVE_EARTHQUAKE, MOVE_METAL_CLAW, MOVE_TOXIC, MOVE_IRON_DEFENSE},
             },
@@ -461,7 +462,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_REGICE,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 16,
-                .nature = 15,
+                .nature = NATURE_MODEST,
                 .evs = {106, 0, 152, 0, 100, 152},
                 .moves = {MOVE_ICE_BEAM, MOVE_AMNESIA, MOVE_THUNDER, MOVE_REST},
             },
@@ -472,7 +473,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ARTICUNO,
                 .heldItem = ITEM_SCOPE_LENS,
                 .fixedIV = 31,
-                .nature = 16,
+                .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_BLIZZARD, MOVE_WATER_PULSE, MOVE_AERIAL_ACE, MOVE_REFLECT},
             },
@@ -480,7 +481,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_ZAPDOS,
                 .heldItem = ITEM_LUM_BERRY,
                 .fixedIV = 31,
-                .nature = 16,
+                .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_THUNDER, MOVE_DETECT, MOVE_DRILL_PECK, MOVE_LIGHT_SCREEN},
             },
@@ -488,7 +489,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
                 .species = SPECIES_MOLTRES,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .fixedIV = 31,
-                .nature = 16,
+                .nature = NATURE_MILD,
                 .evs = {6, 0, 252, 252, 0, 0},
                 .moves = {MOVE_FIRE_BLAST, MOVE_HYPER_BEAM, MOVE_AERIAL_ACE, MOVE_SAFEGUARD},
             },
@@ -496,7 +497,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
     },
 };
 
-static const u8 gUnknown_086118B4[][7][4] =
+static const u8 sBattlePointAwards[][NUM_FRONTIER_FACILITIES][FRONTIER_MODE_COUNT] =
 {
     {
         {1, 2, 3, 3}, {1, 1, 0, 0}, {4, 5, 0, 0}, {1, 0, 0, 0}, {3, 4, 0, 0}, {1, 0, 0, 0}, {5, 0, 0, 0}
@@ -590,7 +591,9 @@ static const u8 gUnknown_086118B4[][7][4] =
     },
 };
 
-static const u16 gUnknown_08611BFC[][2] =
+// Flags to change the conversation when the Frontier Brain is encountered for a battle
+// First bit is has battled them before and not won yet, second bit is has battled them and won (obtained a Symbol)
+static const u16 sBattledBrainBitFlags[NUM_FRONTIER_FACILITIES][2] =
 {
     [FRONTIER_FACILITY_TOWER]   = {0x0001, 0x0002},
     [FRONTIER_FACILITY_DOME]    = {0x0004, 0x0008},
@@ -603,32 +606,32 @@ static const u16 gUnknown_08611BFC[][2] =
 
 static void (* const sFrontierUtilFuncs[])(void) =
 {
-    sub_81A17A0,
-    sub_81A1830,
-    sub_81A1968,
-    sub_81A1AD4,
-    DoSoftReset_,
-    sub_81A1B28,
-    sub_81A1B38,
-    ShowFacilityResultsWindow,
-    sub_81A31FC,
-    sub_81A35EC,
-    sub_81A3B00,
-    sub_81A3B64,
-    sub_81A3D30,
-    sub_81A3D58,
-    sub_81A3DA0,
-    sub_81A3FD4,
-    sub_81A4224,
-    sub_81A4230,
-    sub_81A43A8,
-    sub_81A4410,
-    sub_81A443C,
-    sub_81A447C,
-    sub_81A457C,
+    [FRONTIER_UTIL_FUNC_GET_STATUS]            = GetChallengeStatus,
+    [FRONTIER_UTIL_FUNC_GET_DATA]              = GetFrontierData,
+    [FRONTIER_UTIL_FUNC_SET_DATA]              = SetFrontierData,
+    [FRONTIER_UTIL_FUNC_SET_PARTY_ORDER]       = SetSelectedPartyOrder,
+    [FRONTIER_UTIL_FUNC_SOFT_RESET]            = DoSoftReset_,
+    [FRONTIER_UTIL_FUNC_SET_TRAINERS]          = SetFrontierTrainers,
+    [FRONTIER_UTIL_FUNC_SAVE_PARTY]            = SaveSelectedParty,
+    [FRONTIER_UTIL_FUNC_RESULTS_WINDOW]        = ShowFacilityResultsWindow,
+    [FRONTIER_UTIL_FUNC_CHECK_AIR_TV_SHOW]     = CheckPutFrontierTVShowOnAir,
+    [FRONTIER_UTIL_FUNC_GET_BRAIN_STATUS]      = Script_GetFrontierBrainStatus,
+    [FRONTIER_UTIL_FUNC_IS_BRAIN]              = IsTrainerFrontierBrain,
+    [FRONTIER_UTIL_FUNC_GIVE_BATTLE_POINTS]    = GiveBattlePoints,
+    [FRONTIER_UTIL_FUNC_GET_FACILITY_SYMBOLS]  = GetFacilitySymbolCount,
+    [FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL]  = GiveFacilitySymbol,
+    [FRONTIER_UTIL_FUNC_CHECK_BATTLE_TYPE]     = CheckBattleTypeFlag,
+    [FRONTIER_UTIL_FUNC_CHECK_INELIGIBLE]      = CheckPartyIneligibility,
+    [FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER]   = ValidateVisitingTrainer,
+    [FRONTIER_UTIL_FUNC_INCREMENT_STREAK]      = IncrementWinStreak,
+    [FRONTIER_UTIL_FUNC_RESTORE_HELD_ITEMS]    = RestoreHeldItems,
+    [FRONTIER_UTIL_FUNC_SAVE_BATTLE]           = SaveRecordBattle,
+    [FRONTIER_UTIL_FUNC_BUFFER_TRAINER_NAME]   = BufferFrontierTrainerName,
+    [FRONTIER_UTIL_FUNC_RESET_SKETCH_MOVES]    = ResetSketchedMoves,
+    [FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT]      = SetFacilityBrainObjectEvent,
 };
 
-static const struct WindowTemplate gUnknown_08611C74 =
+static const struct WindowTemplate sFrontierResultsWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 1,
@@ -639,7 +642,7 @@ static const struct WindowTemplate gUnknown_08611C74 =
     .baseBlock = 1
 };
 
-static const struct WindowTemplate gUnknown_08611C7C =
+static const struct WindowTemplate sLinkContestResultsWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 2,
@@ -650,7 +653,7 @@ static const struct WindowTemplate gUnknown_08611C7C =
     .baseBlock = 1
 };
 
-static const struct WindowTemplate gUnknown_08611C84 =
+static const struct WindowTemplate sRankingHallRecordsWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 2,
@@ -662,15 +665,15 @@ static const struct WindowTemplate gUnknown_08611C84 =
 };
 
 // Second field - whether the character is female.
-static const u8 sFacilityToBrainEventObjGfx[][2] =
+static const u8 sFrontierBrainObjEventGfx[NUM_FRONTIER_FACILITIES][2] =
 {
-    [FRONTIER_FACILITY_TOWER]   = {EVENT_OBJ_GFX_ANABEL,  TRUE},
-    [FRONTIER_FACILITY_DOME]    = {EVENT_OBJ_GFX_TUCKER,  FALSE},
-    [FRONTIER_FACILITY_PALACE]  = {EVENT_OBJ_GFX_SPENSER, FALSE},
-    [FRONTIER_FACILITY_ARENA]   = {EVENT_OBJ_GFX_GRETA,   TRUE},
-    [FRONTIER_FACILITY_FACTORY] = {EVENT_OBJ_GFX_NOLAND,  FALSE},
-    [FRONTIER_FACILITY_PIKE]    = {EVENT_OBJ_GFX_LUCY,    TRUE},
-    [FRONTIER_FACILITY_PYRAMID] = {EVENT_OBJ_GFX_BRANDON, FALSE},
+    [FRONTIER_FACILITY_TOWER]   = {OBJ_EVENT_GFX_ANABEL,  TRUE},
+    [FRONTIER_FACILITY_DOME]    = {OBJ_EVENT_GFX_TUCKER,  FALSE},
+    [FRONTIER_FACILITY_PALACE]  = {OBJ_EVENT_GFX_SPENSER, FALSE},
+    [FRONTIER_FACILITY_ARENA]   = {OBJ_EVENT_GFX_GRETA,   TRUE},
+    [FRONTIER_FACILITY_FACTORY] = {OBJ_EVENT_GFX_NOLAND,  FALSE},
+    [FRONTIER_FACILITY_PIKE]    = {OBJ_EVENT_GFX_LUCY,    TRUE},
+    [FRONTIER_FACILITY_PYRAMID] = {OBJ_EVENT_GFX_BRANDON, FALSE},
 };
 
 const u16 gFrontierBannedSpecies[] =
@@ -679,41 +682,41 @@ const u16 gFrontierBannedSpecies[] =
     SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
 };
 
-static const u8 *const gUnknown_08611CB0[][2] =
+static const u8 *const sRecordsWindowChallengeTexts[][2] =
 {
-    {gText_BattleTower2,  gUnknown_085ED164},
-    {gText_BattleTower2,  gUnknown_085ED170},
-    {gText_BattleTower2,  gUnknown_085ED17C},
-    {gText_BattleDome,    gUnknown_085ED164},
-    {gText_BattlePalace,  gUnknown_085ED164},
-    {gText_BattleArena,   gUnknown_085ED190},
-    {gText_BattleFactory, gUnknown_085ED164},
-    {gText_BattlePike,    gUnknown_085ED190},
-    {gText_BattlePyramid, gUnknown_085ED190},
-    {gText_BattleTower2,  gUnknown_085ED188},
+    [RANKING_HALL_BATTLE_TOWER_SINGLES] = {gText_BattleTower2,  gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_TOWER_DOUBLES] = {gText_BattleTower2,  gText_FacilityDouble},
+    [RANKING_HALL_BATTLE_TOWER_MULTIS]  = {gText_BattleTower2,  gText_FacilityMulti},
+    [RANKING_HALL_BATTLE_DOME]          = {gText_BattleDome,    gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_PALACE]        = {gText_BattlePalace,  gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_ARENA]         = {gText_BattleArena,   gText_Facility},
+    [RANKING_HALL_BATTLE_FACTORY]       = {gText_BattleFactory, gText_FacilitySingle},
+    [RANKING_HALL_BATTLE_PIKE]          = {gText_BattlePike,    gText_Facility},
+    [RANKING_HALL_BATTLE_PYRAMID]       = {gText_BattlePyramid, gText_Facility},
+    [RANKING_HALL_BATTLE_TOWER_LINK]    = {gText_BattleTower2,  gText_FacilityLink},
 };
 
-static const u8 *const gLevelModeText[] =
+static const u8 *const sLevelModeText[] =
 {
     gText_RecordsLv50,
     gText_RecordsOpenLevel,
 };
 
-static const u8 *const gHallFacilityToRecordsText[] =
+static const u8 *const sHallFacilityToRecordsText[] =
 {
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityClearStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityKOsStreak,
-    gText_FrontierFacilityWinStreak,
-    gText_FrontierFacilityRoomsCleared,
-    gText_FrontierFacilityFloorsCleared,
-    gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_SINGLES] = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_DOUBLES] = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_TOWER_MULTIS]  = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_DOME]          = gText_FrontierFacilityClearStreak,
+    [RANKING_HALL_BATTLE_PALACE]        = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_ARENA]         = gText_FrontierFacilityKOsStreak,
+    [RANKING_HALL_BATTLE_FACTORY]       = gText_FrontierFacilityWinStreak,
+    [RANKING_HALL_BATTLE_PIKE]          = gText_FrontierFacilityRoomsCleared,
+    [RANKING_HALL_BATTLE_PYRAMID]       = gText_FrontierFacilityFloorsCleared,
+    [RANKING_HALL_BATTLE_TOWER_LINK]    = gText_FrontierFacilityWinStreak,
 };
 
-static const u16 gFacilityToBrainTrainerId[] =
+static const u16 sFrontierBrainTrainerIds[NUM_FRONTIER_FACILITIES] =
 {
     [FRONTIER_FACILITY_TOWER]   = TRAINER_ANABEL,
     [FRONTIER_FACILITY_DOME]    = TRAINER_TUCKER,
@@ -724,60 +727,60 @@ static const u16 gFacilityToBrainTrainerId[] =
     [FRONTIER_FACILITY_PYRAMID] = TRAINER_BRANDON,
 };
 
-static const u8 *const gUnknown_08611D40[] =
+static const u8 *const sFrontierBrainPlayerLostSilverTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C843F,
-    gText_082C848B,
-    gText_082C8628,
-    gText_082C85B4,
-    gText_082C8512,
-    gText_082C859D,
-    gText_082C86C3,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelWonSilver,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerWonSilver,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserWonSilver,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaWonSilver,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandWonSilver,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyWonSilver,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonWonSilver,
 };
 
-static const u8 *const gUnknown_08611D5C[] =
+static const u8 *const sFrontierBrainPlayerWonSilverTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C8458,
-    gText_082C84C1,
-    gText_082C8662,
-    gText_082C85E3,
-    gText_082C853B,
-    gText_082C85A4,
-    gText_082C86FE,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelDefeatSilver,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerDefeatSilver,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserDefeatSilver,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaDefeatSilver,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandDefeatSilver,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyDefeatSilver,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonDefeatSilver,
 };
 
-static const u8 *const gUnknown_08611D78[] =
+static const u8 *const sFrontierBrainPlayerLostGoldTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C846C,
-    gText_082C84D0,
-    gText_082C8682,
-    gText_082C85F5,
-    gText_082C8561,
-    gText_082C85A9,
-    gText_082C8739,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelWonGold,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerWonGold,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserWonGold,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaWonGold,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandWonGold,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyWonGold,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonWonGold,
 };
 
-static const u8 *const gUnknown_08611D94[] =
+static const u8 *const sFrontierBrainPlayerWonGoldTexts[NUM_FRONTIER_FACILITIES] =
 {
-    gText_082C8480,
-    gText_082C84F7,
-    gText_082C86B3,
-    gText_082C8611,
-    gText_082C8589,
-    gText_082C85AE,
-    gText_082C877B,
+    [FRONTIER_FACILITY_TOWER]   = gText_AnabelDefeatGold,
+    [FRONTIER_FACILITY_DOME]    = gText_TuckerDefeatGold,
+    [FRONTIER_FACILITY_PALACE]  = gText_SpenserDefeatGold,
+    [FRONTIER_FACILITY_ARENA]   = gText_GretaDefeatGold,
+    [FRONTIER_FACILITY_FACTORY] = gText_NolandDefeatGold,
+    [FRONTIER_FACILITY_PIKE]    = gText_LucyDefeatGold,
+    [FRONTIER_FACILITY_PYRAMID] = gText_BrandonDefeatGold,
 };
 
-static const u8 *const *const gUnknown_08611DB0[] =
+static const u8 *const *const sFrontierBrainPlayerLostTexts[] =
 {
-    gUnknown_08611D40,
-    gUnknown_08611D78,
+    sFrontierBrainPlayerLostSilverTexts,
+    sFrontierBrainPlayerLostGoldTexts,
 };
 
-static const u8 *const *const gUnknown_08611DB8[] =
+static const u8 *const *const sFrontierBrainPlayerWonTexts[] =
 {
-    gUnknown_08611D5C,
-    gUnknown_08611D94,
+    sFrontierBrainPlayerWonSilverTexts,
+    sFrontierBrainPlayerWonGoldTexts,
 };
 
 // code
@@ -786,105 +789,106 @@ void CallFrontierUtilFunc(void)
     sFrontierUtilFuncs[gSpecialVar_0x8004]();
 }
 
-static void sub_81A17A0(void)
+// Buffers into VAR_TEMP_0 specifically because this is used to react to the status in OnFrame map scripts
+static void GetChallengeStatus(void)
 {
     VarSet(VAR_TEMP_0, 0xFF);
-    switch (gSaveBlock2Ptr->frontier.field_CA8)
+    switch (gSaveBlock2Ptr->frontier.challengeStatus)
     {
     case 0:
         break;
-    case 1:
-        sub_813A878(0);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+    case CHALLENGE_STATUS_SAVING:
+        FrontierGamblerSetWonOrLost(FALSE);
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
-    case 4:
-        sub_813A878(0);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+    case CHALLENGE_STATUS_LOST:
+        FrontierGamblerSetWonOrLost(FALSE);
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
-    case 3:
-        sub_813A878(1);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+    case CHALLENGE_STATUS_WON:
+        FrontierGamblerSetWonOrLost(TRUE);
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
-    case 2:
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.field_CA8);
+    case CHALLENGE_STATUS_PAUSED:
+        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
     }
 }
 
-static void sub_81A1830(void)
+static void GetFrontierData(void)
 {
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
-    u8 currSymbol = GetPlayerSymbolCountForFacility(facility);
-    if (currSymbol == 2)
-        currSymbol = 1;
+    u8 hasSymbol = GetPlayerSymbolCountForFacility(facility);
+    if (hasSymbol == 2)
+        hasSymbol = 1;
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CA8;
+    case FRONTIER_DATA_CHALLENGE_STATUS:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.challengeStatus;
         break;
-    case 1:
+    case FRONTIER_DATA_LVL_MODE:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.lvlMode;
         break;
-    case 2:
+    case FRONTIER_DATA_BATTLE_NUM:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
         break;
-    case 3:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CA9_a;
+    case FRONTIER_DATA_PAUSED:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.challengePaused;
         break;
-    case 5:
+    case FRONTIER_DATA_BATTLE_OUTCOME:
         gSpecialVar_Result = gBattleOutcome;
         gBattleOutcome = 0;
         break;
-    case 6:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_CA9_b;
+    case FRONTIER_DATA_RECORD_DISABLED:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.disableRecordBattle;
         break;
-    case 7:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_D00 & gUnknown_08611BFC[facility][currSymbol];
+    case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
+        gSpecialVar_Result = gSaveBlock2Ptr->frontier.battledBrainFlags & sBattledBrainBitFlags[facility][hasSymbol];
         break;
     }
 }
 
-static void sub_81A1968(void)
+static void SetFrontierData(void)
 {
     s32 i;
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
-    u8 currSymbol = GetPlayerSymbolCountForFacility(facility);
-    if (currSymbol == 2)
-        currSymbol = 1;
+    u8 hasSymbol = GetPlayerSymbolCountForFacility(facility);
+    if (hasSymbol == 2)
+        hasSymbol = 1;
 
     switch (gSpecialVar_0x8005)
     {
-    case 0:
-        gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8006;
+    case FRONTIER_DATA_CHALLENGE_STATUS:
+        gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8006;
         break;
-    case 1:
+    case FRONTIER_DATA_LVL_MODE:
         gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_0x8006;
         break;
-    case 2:
+    case FRONTIER_DATA_BATTLE_NUM:
         gSaveBlock2Ptr->frontier.curChallengeBattleNum = gSpecialVar_0x8006;
         break;
-    case 3:
-        gSaveBlock2Ptr->frontier.field_CA9_a = gSpecialVar_0x8006;
+    case FRONTIER_DATA_PAUSED:
+        gSaveBlock2Ptr->frontier.challengePaused = gSpecialVar_0x8006;
         break;
-    case 4:
-        for (i = 0; i < 4; i++)
+    case FRONTIER_DATA_SELECTED_MON_ORDER:
+        for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
             gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
         break;
-    case 6:
-        gSaveBlock2Ptr->frontier.field_CA9_b = gSpecialVar_0x8006;
+    case FRONTIER_DATA_RECORD_DISABLED:
+        gSaveBlock2Ptr->frontier.disableRecordBattle = gSpecialVar_0x8006;
         break;
-    case 7:
-        gSaveBlock2Ptr->frontier.field_D00 |= gUnknown_08611BFC[facility][currSymbol];
+    case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
+        gSaveBlock2Ptr->frontier.battledBrainFlags |= sBattledBrainBitFlags[facility][hasSymbol];
         break;
     }
 }
 
-static void sub_81A1AD4(void)
+static void SetSelectedPartyOrder(void)
 {
     s32 i;
 
-    sub_81B8558();
+    ClearSelectedPartyOrder();
     for (i = 0; i < gSpecialVar_0x8005; i++)
         gSelectedOrderFromParty[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
     ReducePlayerPartyToSelectedMons();
@@ -895,16 +899,16 @@ static void DoSoftReset_(void)
     DoSoftReset();
 }
 
-static void sub_81A1B28(void)
+static void SetFrontierTrainers(void)
 {
     gFacilityTrainers = gBattleFrontierTrainers;
 }
 
-static void sub_81A1B38(void)
+static void SaveSelectedParty(void)
 {
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
     {
         u16 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
         if (monId < PARTY_SIZE)
@@ -914,7 +918,7 @@ static void sub_81A1B38(void)
 
 static void ShowFacilityResultsWindow(void)
 {
-    if (gSpecialVar_0x8006 > 3)
+    if (gSpecialVar_0x8006 >= FRONTIER_MODE_COUNT)
         gSpecialVar_0x8006 = 0;
     switch (gSpecialVar_0x8005)
     {
@@ -939,15 +943,15 @@ static void ShowFacilityResultsWindow(void)
     case FRONTIER_FACILITY_PYRAMID:
         ShowPyramidResultsWindow();
         break;
-    case RESULTS_LINK_CONTEST:
+    case FACILITY_LINK_CONTEST:
         ShowLinkContestResultsWindow();
         break;
     }
 }
 
-static bool8 sub_81A1C24(u32 flags)
+static bool8 IsWinStreakActive(u32 challenge)
 {
-    if (gSaveBlock2Ptr->frontier.field_CDC & flags)
+    if (gSaveBlock2Ptr->frontier.winStreakActiveFlags & challenge)
         return TRUE;
     else
         return FALSE;
@@ -977,8 +981,8 @@ static void PrintHyphens(s32 y)
 static void TowerPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
-    if (num > 9999)
-        num = 9999;
+    if (num > MAX_STREAK)
+        num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_WinStreak);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
@@ -993,8 +997,8 @@ static void TowerPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y
 static u16 TowerGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
@@ -1008,27 +1012,27 @@ static void TowerPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x
     default:
     case FRONTIER_MODE_SINGLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(2);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_SINGLES_OPEN);
         else
-            isCurrent = sub_81A1C24(1);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_SINGLES_50);
         break;
     case FRONTIER_MODE_DOUBLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x8000);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_DOUBLES_OPEN);
         else
-            isCurrent = sub_81A1C24(0x4000);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_DOUBLES_50);
         break;
     case FRONTIER_MODE_MULTIS:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x20000);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_MULTIS_OPEN);
         else
-            isCurrent = sub_81A1C24(0x10000);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_MULTIS_50);
         break;
     case FRONTIER_MODE_LINK_MULTIS:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x80000);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_LINK_MULTIS_OPEN);
         else
-            isCurrent = sub_81A1C24(0x40000);
+            isCurrent = IsWinStreakActive(STREAK_TOWER_LINK_MULTIS_50);
         break;
     }
 
@@ -1040,7 +1044,7 @@ static void TowerPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x
 
 static void ShowTowerResultsWindow(u8 battleMode)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C74);
+    gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
@@ -1068,8 +1072,8 @@ static void ShowTowerResultsWindow(u8 battleMode)
 static u16 DomeGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
@@ -1091,15 +1095,15 @@ static void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2
     default:
     case FRONTIER_MODE_SINGLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(8);
+            isCurrent = IsWinStreakActive(STREAK_DOME_SINGLES_OPEN);
         else
-            isCurrent = sub_81A1C24(4);
+            isCurrent = IsWinStreakActive(STREAK_DOME_SINGLES_50);
         break;
     case FRONTIER_MODE_DOUBLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x200000);
+            isCurrent = IsWinStreakActive(STREAK_DOME_DOUBLES_OPEN);
         else
-            isCurrent = sub_81A1C24(0x100000);
+            isCurrent = IsWinStreakActive(STREAK_DOME_DOUBLES_50);
         break;
     }
 
@@ -1111,7 +1115,7 @@ static void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2
 
 static void ShowDomeResultsWindow(u8 battleMode)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C74);
+    gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
@@ -1137,8 +1141,8 @@ static void ShowDomeResultsWindow(u8 battleMode)
 static void PalacePrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
-    if (num > 9999)
-        num = 9999;
+    if (num > MAX_STREAK)
+        num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_WinStreak);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
@@ -1153,8 +1157,8 @@ static void PalacePrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 
 static u16 PalaceGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
@@ -1168,15 +1172,15 @@ static void PalacePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 
     default:
     case FRONTIER_MODE_SINGLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x20);
+            isCurrent = IsWinStreakActive(STREAK_PALACE_SINGLES_OPEN);
         else
-            isCurrent = sub_81A1C24(0x10);
+            isCurrent = IsWinStreakActive(STREAK_PALACE_SINGLES_50);
         break;
     case FRONTIER_MODE_DOUBLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x800000);
+            isCurrent = IsWinStreakActive(STREAK_PALACE_DOUBLES_OPEN);
         else
-            isCurrent = sub_81A1C24(0x400000);
+            isCurrent = IsWinStreakActive(STREAK_PALACE_DOUBLES_50);
     }
 
     if (isCurrent == TRUE)
@@ -1187,7 +1191,7 @@ static void PalacePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 
 
 static void ShowPalaceResultsWindow(u8 battleMode)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C74);
+    gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
@@ -1211,8 +1215,8 @@ static void ShowPalaceResultsWindow(u8 battleMode)
 static u16 PikeGetWinStreak(u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
@@ -1231,9 +1235,9 @@ static void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
     u16 winStreak = PikeGetWinStreak(lvlMode);
 
     if (lvlMode != FRONTIER_LVL_50)
-        isCurrent = sub_81A1C24(0x800);
+        isCurrent = IsWinStreakActive(STREAK_PIKE_OPEN);
     else
-        isCurrent = sub_81A1C24(0x400);
+        isCurrent = IsWinStreakActive(STREAK_PIKE_50);
 
     if (isCurrent == TRUE)
         PrintTwoStrings(gText_Current, gText_RoomsCleared, winStreak, x1, x2, y);
@@ -1243,7 +1247,7 @@ static void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 
 static void ShowPikeResultsWindow(void)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C74);
+    gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleChoiceResults);
@@ -1265,8 +1269,8 @@ static void ShowPikeResultsWindow(void)
 static void ArenaPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
-    if (num > 9999)
-        num = 9999;
+    if (num > MAX_STREAK)
+        num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_KOsInARow);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
@@ -1281,8 +1285,8 @@ static void ArenaPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static u16 ArenaGetWinStreak(u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode];
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
@@ -1293,9 +1297,9 @@ static void ArenaPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
     u16 winStreak = ArenaGetWinStreak(lvlMode);
 
     if (lvlMode != FRONTIER_LVL_50)
-        isCurrent = sub_81A1C24(0x80);
+        isCurrent = IsWinStreakActive(STREAK_ARENA_OPEN);
     else
-        isCurrent = sub_81A1C24(0x40);
+        isCurrent = IsWinStreakActive(STREAK_ARENA_50);
 
     if (isCurrent == TRUE)
         ArenaPrintStreak(gText_Current, winStreak, x1, x2, y);
@@ -1305,7 +1309,7 @@ static void ArenaPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 
 static void ShowArenaResultsWindow(void)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C74);
+    gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     PrintHyphens(10);
@@ -1325,8 +1329,8 @@ static void ShowArenaResultsWindow(void)
 static void FactoryPrintStreak(const u8 *str, u16 num1, u16 num2, u8 x1, u8 x2, u8 x3, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
-    if (num1 > 9999)
-        num1 = 9999;
+    if (num1 > MAX_STREAK)
+        num1 = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num1, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_WinStreak);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
@@ -1346,8 +1350,8 @@ static void FactoryPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8
 static u16 FactoryGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
@@ -1355,8 +1359,8 @@ static u16 FactoryGetWinStreak(u8 battleMode, u8 lvlMode)
 static u16 FactoryGetRentsCount(u8 battleMode, u8 lvlMode)
 {
     u16 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
-    if (rents > 9999)
-        return 9999;
+    if (rents > MAX_STREAK)
+        return MAX_STREAK;
     else
         return rents;
 }
@@ -1371,15 +1375,15 @@ static void FactoryPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8
     default:
     case FRONTIER_MODE_SINGLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x200);
+            isCurrent = IsWinStreakActive(STREAK_FACTORY_SINGLES_OPEN);
         else
-            isCurrent = sub_81A1C24(0x100);
+            isCurrent = IsWinStreakActive(STREAK_FACTORY_SINGLES_50);
         break;
     case FRONTIER_MODE_DOUBLES:
         if (lvlMode != FRONTIER_LVL_50)
-            isCurrent = sub_81A1C24(0x2000000);
+            isCurrent = IsWinStreakActive(STREAK_FACTORY_DOUBLES_OPEN);
         else
-            isCurrent = sub_81A1C24(0x1000000);
+            isCurrent = IsWinStreakActive(STREAK_FACTORY_DOUBLES_50);
         break;
     }
 
@@ -1391,7 +1395,7 @@ static void FactoryPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8
 
 static void ShowFactoryResultsWindow(u8 battleMode)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C74);
+    gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
@@ -1416,8 +1420,8 @@ static void ShowFactoryResultsWindow(u8 battleMode)
 static void PyramidPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
-    if (num > 9999)
-        num = 9999;
+    if (num > MAX_STREAK)
+        num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_FloorsCleared);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
@@ -1432,8 +1436,8 @@ static void PyramidPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static u16 PyramidGetWinStreak(u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
-    if (winStreak > 9999)
-        return 9999;
+    if (winStreak > MAX_STREAK)
+        return MAX_STREAK;
     else
         return winStreak;
 }
@@ -1444,9 +1448,9 @@ static void PyramidPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
     u16 winStreak = PyramidGetWinStreak(lvlMode);
 
     if (lvlMode != FRONTIER_LVL_50)
-        isCurrent = sub_81A1C24(0x2000);
+        isCurrent = IsWinStreakActive(STREAK_PYRAMID_OPEN);
     else
-        isCurrent = sub_81A1C24(0x1000);
+        isCurrent = IsWinStreakActive(STREAK_PYRAMID_50);
 
     if (isCurrent == TRUE)
         PyramidPrintStreak(gText_Current, winStreak, x1, x2, y);
@@ -1456,7 +1460,7 @@ static void PyramidPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 
 static void ShowPyramidResultsWindow(void)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C74);
+    gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleQuestResults);
@@ -1479,7 +1483,7 @@ static void ShowLinkContestResultsWindow(void)
     s32 i, j;
     s32 x;
 
-    gRecordsWindowId = AddWindow(&gUnknown_08611C7C);
+    gRecordsWindowId = AddWindow(&sLinkContestResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
@@ -1523,7 +1527,7 @@ static void ShowLinkContestResultsWindow(void)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-static void sub_81A31FC(void)
+static void CheckPutFrontierTVShowOnAir(void)
 {
     u8 name[32];
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1540,25 +1544,25 @@ static void sub_81A31FC(void)
             {
                 StringCopy(name, gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name);
                 StripExtCtrlCodes(name);
-                StringCopy(gSaveBlock2Ptr->frontier.opponentName[lvlMode], name);
-                SetTrainerId(gLinkPlayers[gBattleScripting.multiplayerId ^ 1].trainerId, gSaveBlock2Ptr->frontier.field_EF1[lvlMode]);
+                StringCopy(gSaveBlock2Ptr->frontier.opponentNames[lvlMode], name);
+                SetTrainerId(gLinkPlayers[gBattleScripting.multiplayerId ^ 1].trainerId, gSaveBlock2Ptr->frontier.opponentTrainerIds[lvlMode]);
             }
             if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] > 1
-                && sub_80EE818())
+                && ShouldAirFrontierTVShow())
             {
                 switch (battleMode)
                 {
                 case FRONTIER_MODE_SINGLES:
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 1);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 1);
                     break;
                 case FRONTIER_MODE_DOUBLES:
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 2);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 2);
                     break;
                 case FRONTIER_MODE_MULTIS:
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 3);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 3);
                     break;
                 case FRONTIER_MODE_LINK_MULTIS:
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 4);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode], 4);
                     break;
                 }
             }
@@ -1569,12 +1573,12 @@ static void sub_81A31FC(void)
         {
             gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
             if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] > 1
-                && sub_80EE818())
+                && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 5);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 5);
                 else
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 6);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode], 6);
             }
         }
         break;
@@ -1583,12 +1587,12 @@ static void sub_81A31FC(void)
         {
             gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
             if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] > 1
-                && sub_80EE818())
+                && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 11);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 11);
                 else
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 12);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode], 12);
             }
         }
         break;
@@ -1597,9 +1601,9 @@ static void sub_81A31FC(void)
         {
             gSaveBlock2Ptr->frontier.arenaRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode];
             if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] > 1
-                && sub_80EE818())
+                && ShouldAirFrontierTVShow())
             {
-                sub_80EE8C8(gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode], 10);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode], 10);
             }
         }
         break;
@@ -1609,12 +1613,12 @@ static void sub_81A31FC(void)
             gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
             gSaveBlock2Ptr->frontier.factoryRecordRentsCount[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
             if (gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] > 1
-                && sub_80EE818())
+                && ShouldAirFrontierTVShow())
             {
                 if (battleMode == FRONTIER_MODE_SINGLES)
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 7);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 7);
                 else
-                    sub_80EE8C8(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 8);
+                    TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode], 8);
             }
         }
         break;
@@ -1623,9 +1627,9 @@ static void sub_81A31FC(void)
         {
             gSaveBlock2Ptr->frontier.pikeRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
             if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] > 1
-                && sub_80EE818())
+                && ShouldAirFrontierTVShow())
             {
-                sub_80EE8C8(gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode], 9);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode], 9);
             }
         }
         break;
@@ -1634,53 +1638,58 @@ static void sub_81A31FC(void)
         {
             gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
             if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > 1
-                && sub_80EE818())
+                && ShouldAirFrontierTVShow())
             {
-                sub_80EE8C8(gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode], 13);
+                TryPutFrontierTVShowOnAir(gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode], 13);
             }
         }
         break;
     }
 }
 
-static void sub_81A35EC(void)
+static void Script_GetFrontierBrainStatus(void)
 {
     VarGet(VAR_FRONTIER_FACILITY); // Unused return value.
-    gSpecialVar_Result = sub_81A3610();
+    gSpecialVar_Result = GetFrontierBrainStatus();
 }
 
-u8 sub_81A3610(void)
+u8 GetFrontierBrainStatus(void)
 {
-    s32 ret = 0;
+    s32 status = FRONTIER_BRAIN_NOT_READY;
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u16 val = GetCurrentFacilityWinStreak();
-    s32 r5 = val + gUnknown_08611550[facility][3];
+    u16 winStreakNoModifier = GetCurrentFacilityWinStreak();
+    s32 winStreak = winStreakNoModifier + sFrontierBrainStreakAppearances[facility][3];
     s32 symbolsCount;
 
     if (battleMode != FRONTIER_MODE_SINGLES)
-        return 0;
+        return FRONTIER_BRAIN_NOT_READY;
 
     symbolsCount = GetPlayerSymbolCountForFacility(facility);
     switch (symbolsCount)
     {
+    // Missing a symbol
     case 0:
     case 1:
-        if (r5 == gUnknown_08611550[facility][symbolsCount])
-            ret = symbolsCount + 1;
+        if (winStreak == sFrontierBrainStreakAppearances[facility][symbolsCount])
+            status = symbolsCount + 1; // FRONTIER_BRAIN_SILVER and FRONTIER_BRAIN_GOLD
         break;
+    // Already received both symbols
     case 2:
     default:
-        if (r5 == gUnknown_08611550[facility][0])
-            ret = 3;
-        else if (r5 == gUnknown_08611550[facility][1])
-            ret = 4;
-        else if (r5 > gUnknown_08611550[facility][1] && (r5 - gUnknown_08611550[facility][1]) % gUnknown_08611550[facility][2] == 0)
-            ret = 4;
+        // Silver streak is reached
+        if (winStreak == sFrontierBrainStreakAppearances[facility][0])
+            status = FRONTIER_BRAIN_STREAK;
+        // Gold streak is reached
+        else if (winStreak == sFrontierBrainStreakAppearances[facility][1])
+            status = FRONTIER_BRAIN_STREAK_LONG;
+        // Some increment of the gold streak is reached
+        else if (winStreak > sFrontierBrainStreakAppearances[facility][1] && (winStreak - sFrontierBrainStreakAppearances[facility][1]) % sFrontierBrainStreakAppearances[facility][2] == 0)
+            status = FRONTIER_BRAIN_STREAK_LONG;
         break;
     }
 
-    return ret;
+    return status;
 }
 
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
@@ -1692,12 +1701,12 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
             CopyFrontierBrainText(FALSE);
-        else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        else if (trainerId < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
         else
-            CopyFriendsApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
+            BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
         break;
     case FRONTIER_PLAYER_LOST_TEXT:
         if (trainerId == TRAINER_EREADER)
@@ -1708,7 +1717,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         {
             CopyFrontierBrainText(FALSE);
         }
-        else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        else if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechWin);
         }
@@ -1724,7 +1733,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
             if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
                 FrontierSpeechToString(GetRecordedBattleEasyChatSpeech());
             else
-                FrontierSpeechToString(gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].easyChatWords);
+                FrontierSpeechToString(gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].speechWon);
         }
         break;
     case FRONTIER_PLAYER_WON_TEXT:
@@ -1736,7 +1745,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         {
             CopyFrontierBrainText(TRUE);
         }
-        else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
+        else if (trainerId < FRONTIER_TRAINERS_COUNT)
         {
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
         }
@@ -1752,26 +1761,26 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
             if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             {
                 trainerId = GetRecordedBattleApprenticeId();
-                FrontierSpeechToString(gApprentices[trainerId].easyChatWords);
+                FrontierSpeechToString(gApprentices[trainerId].speechLost);
             }
             else
             {
                 trainerId = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id;
-                FrontierSpeechToString(gApprentices[trainerId].easyChatWords);
+                FrontierSpeechToString(gApprentices[trainerId].speechLost);
             }
         }
         break;
     }
 }
 
-void sub_81A3908(void)
+void ResetWinStreaks(void)
 {
     s32 battleMode, lvlMode;
 
-    gSaveBlock2Ptr->frontier.field_CDC = 0;
-    for (battleMode = 0; battleMode < 4; battleMode++)
+    gSaveBlock2Ptr->frontier.winStreakActiveFlags = 0;
+    for (battleMode = 0; battleMode < FRONTIER_MODE_COUNT; battleMode++)
     {
-        for (lvlMode = 0; lvlMode < 2; lvlMode++)
+        for (lvlMode = 0; lvlMode < FRONTIER_LVL_TENT; lvlMode++)
         {
             gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
             if (battleMode < FRONTIER_MODE_MULTIS)
@@ -1788,8 +1797,8 @@ void sub_81A3908(void)
             }
         }
     }
-    if (gSaveBlock2Ptr->frontier.field_CA8 != 0)
-        gSaveBlock2Ptr->frontier.field_CA8 = 1;
+    if (gSaveBlock2Ptr->frontier.challengeStatus != 0)
+        gSaveBlock2Ptr->frontier.challengeStatus = CHALLENGE_STATUS_SAVING;
 }
 
 u32 GetCurrentFacilityWinStreak(void)
@@ -1819,15 +1828,15 @@ u32 GetCurrentFacilityWinStreak(void)
     }
 }
 
-void sub_81A3ACC(void)
+void ResetFrontierTrainerIds(void)
 {
     s32 i;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.trainerIds); i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 
-static void sub_81A3B00(void)
+static void IsTrainerFrontierBrain(void)
 {
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
         gSpecialVar_Result = TRUE;
@@ -1841,7 +1850,7 @@ u8 GetPlayerSymbolCountForFacility(u8 facility)
          + FlagGet(FLAG_SYS_TOWER_GOLD + facility * 2);
 }
 
-static void sub_81A3B64(void)
+static void GiveBattlePoints(void)
 {
     s32 challengeNum = 0;
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1876,37 +1885,37 @@ static void sub_81A3B64(void)
 
     if (challengeNum != 0)
         challengeNum--;
-    if (challengeNum >= ARRAY_COUNT(gUnknown_086118B4))
-        challengeNum = ARRAY_COUNT(gUnknown_086118B4) - 1;
+    if (challengeNum >= ARRAY_COUNT(sBattlePointAwards))
+        challengeNum = ARRAY_COUNT(sBattlePointAwards) - 1;
 
-    points = gUnknown_086118B4[challengeNum][facility][battleMode];
+    points = sBattlePointAwards[challengeNum][facility][battleMode];
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
         points += 10;
     gSaveBlock2Ptr->frontier.battlePoints += points;
     ConvertIntToDecimalStringN(gStringVar1, points, STR_CONV_MODE_LEFT_ALIGN, 2);
-    if (gSaveBlock2Ptr->frontier.battlePoints > 9999)
-        gSaveBlock2Ptr->frontier.battlePoints = 9999;
+    if (gSaveBlock2Ptr->frontier.battlePoints > MAX_BATTLE_FRONTIER_POINTS)
+        gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
 
-    points = gSaveBlock2Ptr->frontier.field_EBA;
-    points += gUnknown_086118B4[challengeNum][facility][battleMode];
-    sub_80EED60(gUnknown_086118B4[challengeNum][facility][battleMode]);
+    points = gSaveBlock2Ptr->frontier.cardBattlePoints;
+    points += sBattlePointAwards[challengeNum][facility][battleMode];
+    IncrementDailyBattlePoints(sBattlePointAwards[challengeNum][facility][battleMode]);
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
         points += 10;
-        sub_80EED60(10);
+        IncrementDailyBattlePoints(10);
     }
     if (points > 0xFFFF)
         points = 0xFFFF;
-    gSaveBlock2Ptr->frontier.field_EBA = points;
+    gSaveBlock2Ptr->frontier.cardBattlePoints = points;
 }
 
-static void sub_81A3D30(void)
+static void GetFacilitySymbolCount(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     gSpecialVar_Result = GetPlayerSymbolCountForFacility(facility);
 }
 
-static void sub_81A3D58(void)
+static void GiveFacilitySymbol(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     if (GetPlayerSymbolCountForFacility(facility) == 0)
@@ -1915,7 +1924,7 @@ static void sub_81A3D58(void)
         FlagSet(FLAG_SYS_TOWER_GOLD + facility * 2);
 }
 
-static void sub_81A3DA0(void)
+static void CheckBattleTypeFlag(void)
 {
     if (gBattleTypeFlags & gSpecialVar_0x8005)
         gSpecialVar_Result = TRUE;
@@ -1923,12 +1932,12 @@ static void sub_81A3DA0(void)
         gSpecialVar_Result = FALSE;
 }
 
-static u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
+static u8 AppendCaughtBannedMonSpeciesName(u16 species, u8 count, s32 numBannedMonsCaught)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
-        arg1++;
-        switch (arg1)
+        count++;
+        switch (count)
         {
         case 1:
         case 3:
@@ -1936,30 +1945,30 @@ static u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
         case 7:
         case 9:
         case 11:
-            if (arg2 == arg1)
+            if (numBannedMonsCaught == count)
                 StringAppend(gStringVar1, gText_SpaceAndSpace);
-            else if (arg2 > arg1)
+            else if (numBannedMonsCaught > count)
                 StringAppend(gStringVar1, gText_CommaSpace);
             break;
         case 2:
-            if (arg1 == arg2)
+            if (count == numBannedMonsCaught)
                 StringAppend(gStringVar1, gText_SpaceAndSpace);
             else
                 StringAppend(gStringVar1, gText_CommaSpace);
             StringAppend(gStringVar1, gText_NewLine);
             break;
         default:
-            if (arg1 == arg2)
+            if (count == numBannedMonsCaught)
                 StringAppend(gStringVar1, gText_SpaceAndSpace);
             else
                 StringAppend(gStringVar1, gText_CommaSpace);
-            StringAppend(gStringVar1, gText_ScrollTextUp);
+            StringAppend(gStringVar1, gText_LineBreak);
             break;
         }
         StringAppend(gStringVar1, gSpeciesNames[species]);
     }
 
-    return arg1;
+    return count;
 }
 
 static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count)
@@ -1995,30 +2004,36 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     (*count)++;
 }
 
-static void sub_81A3FD4(void)
+// gSpecialVar_Result is the level mode before and after calls to this function
+// gSpecialVar_0x8004 is used to store the return value instead (TRUE if there are insufficient eligible mons)
+// The names of ineligible pokemon that have been caught are also buffered to print
+static void CheckPartyIneligibility(void)
 {
-    u16 speciesArray[6];
-    u16 itemArray[6];
+    u16 speciesArray[PARTY_SIZE];
+    u16 itemArray[PARTY_SIZE];
     s32 monId = 0;
     s32 toChoose = 0;
     u8 count = 0;
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     s32 monIdLooper;
 
+    // count is re-used, define for clarity
+    #define numEligibleMons count
+
     switch (battleMode)
     {
     case FRONTIER_MODE_SINGLES:
-        toChoose = 3;
+        toChoose = FRONTIER_PARTY_SIZE;
         break;
     case FRONTIER_MODE_MULTIS:
     case FRONTIER_MODE_LINK_MULTIS:
-        toChoose = 2;
+        toChoose = FRONTIER_MULTI_PARTY_SIZE;
         break;
     case FRONTIER_MODE_DOUBLES:
         if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_TOWER)
-            toChoose = 4;
+            toChoose = FRONTIER_DOUBLES_PARTY_SIZE;
         else
-            toChoose = 3;
+            toChoose = FRONTIER_PARTY_SIZE;
         break;
     }
 
@@ -2026,7 +2041,7 @@ static void sub_81A3FD4(void)
     do
     {
         monId = monIdLooper;
-        count = 0;
+        numEligibleMons = 0;
         do
         {
             u16 species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
@@ -2035,12 +2050,12 @@ static void sub_81A3FD4(void)
             u16 hp = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
             if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_PYRAMID)
             {
-                if (heldItem == 0)
-                    AppendIfValid(species, heldItem, hp, gSpecialVar_Result, level, speciesArray, itemArray, &count);
+                if (heldItem == ITEM_NONE)
+                    AppendIfValid(species, heldItem, hp, gSpecialVar_Result, level, speciesArray, itemArray, &numEligibleMons);
             }
             else
             {
-                AppendIfValid(species, heldItem, hp, gSpecialVar_Result, level, speciesArray, itemArray, &count);
+                AppendIfValid(species, heldItem, hp, gSpecialVar_Result, level, speciesArray, itemArray, &numEligibleMons);
             }
             monId++;
             if (monId >= PARTY_SIZE)
@@ -2048,9 +2063,9 @@ static void sub_81A3FD4(void)
         } while (monId != monIdLooper);
 
         monIdLooper++;
-    } while (monIdLooper < PARTY_SIZE && count < toChoose);
+    } while (monIdLooper < PARTY_SIZE && numEligibleMons < toChoose);
 
-    if (count < toChoose)
+    if (numEligibleMons < toChoose)
     {
         s32 i;
         s32 caughtBannedMons = 0;
@@ -2061,10 +2076,10 @@ static void sub_81A3FD4(void)
                 caughtBannedMons++;
         }
         gStringVar1[0] = EOS;
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_0x8004 = TRUE;
         count = 0;
         for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-            count = sub_81A3DD0(gFrontierBannedSpecies[i], count, caughtBannedMons);
+            count = AppendCaughtBannedMonSpeciesName(gFrontierBannedSpecies[i], count, caughtBannedMons);
 
         if (count == 0)
         {
@@ -2074,7 +2089,7 @@ static void sub_81A3FD4(void)
         else
         {
             if (count & 1)
-                StringAppend(gStringVar1, gText_ScrollTextUp);
+                StringAppend(gStringVar1, gText_LineBreak);
             else
                 StringAppend(gStringVar1, gText_Space2);
             StringAppend(gStringVar1, gText_Are2);
@@ -2082,17 +2097,18 @@ static void sub_81A3FD4(void)
     }
     else
     {
-        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8004 = FALSE;
         gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_Result;
     }
+    #undef numEligibleMons
 }
 
-static void sub_81A4224(void)
+static void ValidateVisitingTrainer(void)
 {
     ValidateEReaderTrainer();
 }
 
-static void sub_81A4230(void)
+static void IncrementWinStreak(void)
 {
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2101,50 +2117,50 @@ static void sub_81A4230(void)
     switch (facility)
     {
     case FRONTIER_FACILITY_TOWER:
-        if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] < MAX_STREAK)
         {
             gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode]++;
             if (battleMode == FRONTIER_MODE_SINGLES)
             {
                 SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode]);
-                gSaveBlock2Ptr->frontier.field_D02 = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
+                gSaveBlock2Ptr->frontier.towerSinglesStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
             }
         }
         break;
     case FRONTIER_FACILITY_DOME:
-        if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] < MAX_STREAK)
             gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode]++;
-        if (gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][lvlMode] < MAX_STREAK)
             gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][lvlMode]++;
         break;
     case FRONTIER_FACILITY_PALACE:
-        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] < MAX_STREAK)
             gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode]++;
         break;
     case FRONTIER_FACILITY_ARENA:
-        if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] < MAX_STREAK)
             gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode]++;
         break;
     case FRONTIER_FACILITY_FACTORY:
-        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] < MAX_STREAK)
             gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode]++;
         break;
     case FRONTIER_FACILITY_PIKE:
-        if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] < MAX_STREAK)
             gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode]++;
         break;
     case FRONTIER_FACILITY_PYRAMID:
-        if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] < 9999)
+        if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] < MAX_STREAK)
             gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode]++;
         break;
     }
 }
 
-static void sub_81A43A8(void)
+static void RestoreHeldItems(void)
 {
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
     {
         if (gSaveBlock2Ptr->frontier.selectedPartyMons[i] != 0)
         {
@@ -2154,13 +2170,13 @@ static void sub_81A43A8(void)
     }
 }
 
-static void sub_81A4410(void)
+static void SaveRecordBattle(void)
 {
     gSpecialVar_Result = MoveRecordedBattleToSaveData();
-    gSaveBlock2Ptr->frontier.field_CA9_b = 1;
+    gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
 }
 
-static void sub_81A443C(void)
+static void BufferFrontierTrainerName(void)
 {
     switch (gSpecialVar_0x8005)
     {
@@ -2173,11 +2189,11 @@ static void sub_81A443C(void)
     }
 }
 
-static void sub_81A447C(void)
+static void ResetSketchedMoves(void)
 {
     u8 i, j, k;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
     {
         u16 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
         if (monId < PARTY_SIZE)
@@ -2198,9 +2214,9 @@ static void sub_81A447C(void)
     }
 }
 
-static void sub_81A457C(void)
+static void SetFacilityBrainObjectEvent(void)
 {
-    SetFrontierBrainEventObjGfx(VarGet(VAR_FRONTIER_FACILITY));
+    SetFrontierBrainObjEventGfx(VarGet(VAR_FRONTIER_FACILITY));
 }
 
 // Battle Frontier Ranking Hall records.
@@ -2216,11 +2232,11 @@ static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hall
         TVShowConvertInternationalString(text, hallRecord->name, hallRecord->language);
         AddTextPrinterParameterized(gRecordsWindowId, 1, text, (x + 2) * 8, (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
         winStreak = hallRecord->winStreak;
-        if (winStreak > 9999)
-            winStreak = 9999;
+        if (winStreak > MAX_STREAK)
+            winStreak = MAX_STREAK;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[hallFacilityId]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[hallFacilityId]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, sHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2243,11 +2259,11 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
         AddTextPrinterParameterized(gRecordsWindowId, 1, text, (x + 4) * 8, (8 * (y + 5 * position + 1)) + 1, TEXT_SPEED_FF, NULL);
 
         winStreak = hallRecord->winStreak;
-        if (winStreak > 9999)
-            winStreak = 9999;
+        if (winStreak > MAX_STREAK)
+            winStreak = MAX_STREAK;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[9]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[RANKING_HALL_BATTLE_TOWER_LINK]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, sHallFacilityToRecordsText[RANKING_HALL_BATTLE_TOWER_LINK], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2326,15 +2342,15 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
     struct RankingHall1P records1P[3];
     struct RankingHall2P records2P[3];
 
-    StringCopy(gStringVar1, gUnknown_08611CB0[hallFacilityId][0]);
-    StringExpandPlaceholders(gStringVar4, gUnknown_08611CB0[hallFacilityId][1]);
+    StringCopy(gStringVar1, sRecordsWindowChallengeTexts[hallFacilityId][0]);
+    StringExpandPlaceholders(gStringVar4, sRecordsWindowChallengeTexts[hallFacilityId][1]);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-    x = GetStringRightAlignXOffset(1, gLevelModeText[lvlMode], 0xD0);
-    AddTextPrinterParameterized(gRecordsWindowId, 1, gLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
-    if (hallFacilityId == HALL_FACILITIES_COUNT)
+    x = GetStringRightAlignXOffset(1, sLevelModeText[lvlMode], 0xD0);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, sLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
+    if (hallFacilityId == RANKING_HALL_BATTLE_TOWER_LINK)
     {
-        gSaveBlock2Ptr->frontier.opponentName[0][PLAYER_NAME_LENGTH] = EOS;
-        gSaveBlock2Ptr->frontier.opponentName[1][PLAYER_NAME_LENGTH] = EOS;
+        gSaveBlock2Ptr->frontier.opponentNames[0][PLAYER_NAME_LENGTH] = EOS;
+        gSaveBlock2Ptr->frontier.opponentNames[1][PLAYER_NAME_LENGTH] = EOS;
         Fill2PRecords(records2P, lvlMode);
         for (i = 0; i < 3; i++)
             Print2PRecord(i, 1, 4, &records2P[i]);
@@ -2349,7 +2365,7 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
 
 void ShowRankingHallRecordsWindow(void)
 {
-    gRecordsWindowId = AddWindow(&gUnknown_08611C84);
+    gRecordsWindowId = AddWindow(&sRankingHallRecordsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_50);
@@ -2394,7 +2410,7 @@ void ClearRankingHallRecords(void)
     }
 }
 
-void sub_81A4C30(void)
+void SaveGameFrontier(void)
 {
     s32 i;
     struct Pokemon *monsParty = calloc(PARTY_SIZE, sizeof(struct Pokemon));
@@ -2425,7 +2441,7 @@ u8 GetFrontierBrainTrainerPicIndex(void)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    return gTrainers[gFacilityToBrainTrainerId[facility]].trainerPic;
+    return gTrainers[sFrontierBrainTrainerIds[facility]].trainerPic;
 }
 
 u8 GetFrontierBrainTrainerClass(void)
@@ -2437,7 +2453,7 @@ u8 GetFrontierBrainTrainerClass(void)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    return gTrainers[gFacilityToBrainTrainerId[facility]].trainerClass;
+    return gTrainers[sFrontierBrainTrainerIds[facility]].trainerClass;
 }
 
 void CopyFrontierBrainTrainerName(u8 *dst)
@@ -2451,7 +2467,7 @@ void CopyFrontierBrainTrainerName(u8 *dst)
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        dst[i] = gTrainers[gFacilityToBrainTrainerId[facility]].trainerName[i];
+        dst[i] = gTrainers[sFrontierBrainTrainerIds[facility]].trainerName[i];
 
     dst[i] = EOS;
 }
@@ -2459,13 +2475,13 @@ void CopyFrontierBrainTrainerName(u8 *dst)
 bool8 IsFrontierBrainFemale(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    return sFacilityToBrainEventObjGfx[facility][1];
+    return sFrontierBrainObjEventGfx[facility][1];
 }
 
-void SetFrontierBrainEventObjGfx_2(void)
+void SetFrontierBrainObjEventGfx_2(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFrontierBrainObjEventGfx[facility][0]);
 }
 
 #define FRONTIER_BRAIN_OTID 61226
@@ -2474,7 +2490,7 @@ void SetFrontierBrainEventObjGfx_2(void)
 void CreateFrontierBrainPokemon(void)
 {
     s32 i, j;
-    s32 monCountInBits;
+    s32 selectedMonBits;
     s32 monPartyId;
     s32 monLevel = 0;
     u8 friendship;
@@ -2482,16 +2498,16 @@ void CreateFrontierBrainPokemon(void)
     s32 symbol = GetFronterBrainSymbol();
 
     if (facility == FRONTIER_FACILITY_DOME)
-        monCountInBits = GetDomeTrainerMonCountInBits(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
+        selectedMonBits = GetDomeTrainerSelectedMons(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
     else
-        monCountInBits = 7;
+        selectedMonBits = (1 << FRONTIER_PARTY_SIZE) - 1; // all 3 mons selected
 
     ZeroEnemyPartyMons();
     monPartyId = 0;
     monLevel = SetFacilityPtrsGetLevel();
-    for (i = 0; i < 3; monCountInBits >>= 1, i++)
+    for (i = 0; i < FRONTIER_PARTY_SIZE; selectedMonBits >>= 1, i++)
     {
-        if (!(monCountInBits & 1))
+        if (!(selectedMonBits & 1))
             continue;
 
         do
@@ -2503,11 +2519,11 @@ void CreateFrontierBrainPokemon(void)
                   monLevel,
                   sFrontierBrainsMons[facility][symbol][i].fixedIV,
                   TRUE, j,
-                  TRUE, FRONTIER_BRAIN_OTID);
+                  OT_ID_PRESET, FRONTIER_BRAIN_OTID);
         SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM, &sFrontierBrainsMons[facility][symbol][i].heldItem);
         for (j = 0; j < NUM_STATS; j++)
             SetMonData(&gEnemyParty[monPartyId], MON_DATA_HP_EV + j, &sFrontierBrainsMons[facility][symbol][i].evs[j]);
-        friendship = 0xFF;
+        friendship = MAX_FRIENDSHIP;
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[monPartyId], sFrontierBrainsMons[facility][symbol][i].moves[j], j);
@@ -2544,7 +2560,7 @@ void CreateFrontierBrainPokemon(void)
     bl TrainerIdToDomeTournamentId\n\
     lsls r0, 16\n\
     lsrs r0, 16\n\
-    bl GetDomeTrainerMonCountInBits\n\
+    bl GetDomeTrainerSelectedMons\n\
     adds r4, r0, 0\n\
     b _081A4E46\n\
     .pool\n\
@@ -2765,10 +2781,10 @@ u16 GetFrontierBrainMonSpecies(u8 monId)
     return sFrontierBrainsMons[facility][symbol][monId].species;
 }
 
-void SetFrontierBrainEventObjGfx(u8 facility)
+void SetFrontierBrainObjEventGfx(u8 facility)
 {
     gTrainerBattleOpponent_A = TRAINER_FRONTIER_BRAIN;
-    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFrontierBrainObjEventGfx[facility][0]);
 }
 
 u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId)
@@ -2803,17 +2819,18 @@ s32 GetFronterBrainSymbol(void)
     if (symbol == 2)
     {
         u16 winStreak = GetCurrentFacilityWinStreak();
-        if (winStreak + gUnknown_08611550[facility][3] == gUnknown_08611550[facility][0])
+        if (winStreak + sFrontierBrainStreakAppearances[facility][3] == sFrontierBrainStreakAppearances[facility][0])
             symbol = 0;
-        else if (winStreak + gUnknown_08611550[facility][3] == gUnknown_08611550[facility][1])
+        else if (winStreak + sFrontierBrainStreakAppearances[facility][3] == sFrontierBrainStreakAppearances[facility][1])
             symbol = 1;
-        else if (winStreak + gUnknown_08611550[facility][3] > gUnknown_08611550[facility][1]
-                 && (winStreak + gUnknown_08611550[facility][3] - gUnknown_08611550[facility][1]) % gUnknown_08611550[facility][2] == 0)
+        else if (winStreak + sFrontierBrainStreakAppearances[facility][3] > sFrontierBrainStreakAppearances[facility][1]
+                 && (winStreak + sFrontierBrainStreakAppearances[facility][3] - sFrontierBrainStreakAppearances[facility][1]) % sFrontierBrainStreakAppearances[facility][2] == 0)
             symbol = 1;
     }
     return symbol;
 }
 
+// Called for intro speech as well despite the fact that its handled in the map scripts files instead
 static void CopyFrontierBrainText(bool8 playerWonText)
 {
     s32 facility;
@@ -2833,10 +2850,10 @@ static void CopyFrontierBrainText(bool8 playerWonText)
     switch (playerWonText)
     {
     case FALSE:
-        StringCopy(gStringVar4, gUnknown_08611DB0[symbol][facility]);
+        StringCopy(gStringVar4, sFrontierBrainPlayerLostTexts[symbol][facility]);
         break;
     case TRUE:
-        StringCopy(gStringVar4, gUnknown_08611DB8[symbol][facility]);
+        StringCopy(gStringVar4, sFrontierBrainPlayerWonTexts[symbol][facility]);
         break;
     }
 }

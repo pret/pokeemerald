@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 12,
       "y": 5,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Rooms_1F_EventScript_237A93",
+      "script": "AbandonedShip_Rooms_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 4,
       "y": 5,
       "elevation": 3,
@@ -41,7 +41,7 @@
       "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_HARBOR_MAIL"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 10,
       "y": 11,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AbandonedShip_Rooms_1F_EventScript_237AB3",
+      "script": "AbandonedShip_Rooms_1F_EventScript_Thalia",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 10,
       "y": 16,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "AbandonedShip_Rooms_1F_EventScript_237A9C",
+      "script": "AbandonedShip_Rooms_1F_EventScript_Demetrius",
       "flag": "0"
     }
   ],

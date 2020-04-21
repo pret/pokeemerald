@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_WOMAN_4",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_House_EventScript_270966",
+      "script": "Route119_House_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 1,
       "y": 6,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_House_EventScript_27096F",
+      "script": "Route119_House_EventScript_Wingull",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 0,
       "y": 4,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_House_EventScript_27096F",
+      "script": "Route119_House_EventScript_Wingull",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 2,
       "y": 2,
       "elevation": 3,
@@ -63,11 +63,11 @@
       "movement_range_y": 1,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_House_EventScript_27096F",
+      "script": "Route119_House_EventScript_Wingull",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 8,
       "y": 5,
       "elevation": 3,
@@ -76,11 +76,11 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_House_EventScript_27096F",
+      "script": "Route119_House_EventScript_Wingull",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 6,
       "y": 6,
       "elevation": 3,
@@ -89,11 +89,11 @@
       "movement_range_y": 2,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_House_EventScript_27096F",
+      "script": "Route119_House_EventScript_Wingull",
       "flag": "0"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_WINGULL",
+      "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 5,
       "y": 3,
       "elevation": 3,
@@ -102,7 +102,7 @@
       "movement_range_y": 3,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_House_EventScript_27096F",
+      "script": "Route119_House_EventScript_Wingull",
       "flag": "0"
     }
   ],

@@ -2,7 +2,7 @@
 #include "main.h"
 #include "text.h"
 #include "task.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "scanline_effect.h"
 #include "text_window.h"
@@ -921,7 +921,7 @@ static bool32 mevent_save_game(u8 * state)
         (*state)++;
         break;
     case 1:
-        TrySavingData(0);
+        TrySavingData(SAVE_NORMAL);
         (*state)++;
         break;
     case 2:

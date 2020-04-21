@@ -1,170 +1,170 @@
 Route113_MapScripts:: @ 81F2153
-	map_script MAP_SCRIPT_ON_RESUME, Route113_MapScript1_1F215E
+	map_script MAP_SCRIPT_ON_RESUME, Route113_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route113_OnTransition
 	.byte 0
 
-Route113_MapScript1_1F215E: @ 81F215E
-	setstepcallback 1
+Route113_OnResume: @ 81F215E
+	setstepcallback STEP_CB_ASH
 	end
 
 Route113_OnTransition: @ 81F2161
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
-	call Route113_EventScript_1F216A
+	call Route113_EventScript_CheckSetAshWeather
 	end
 
-Route113_EventScript_1F216A:: @ 81F216A
+Route113_EventScript_CheckSetAshWeather:: @ 81F216A
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_0, 19
-	goto_if_lt Route113_EventScript_1F2189
+	goto_if_lt Route113_EventScript_DontSetAshWeather
 	compare VAR_TEMP_0, 84
-	goto_if_gt Route113_EventScript_1F2189
-	setweather WEATHER_ASH
+	goto_if_gt Route113_EventScript_DontSetAshWeather
+	setweather WEATHER_VOLCANIC_ASH
 	return
 
-Route113_EventScript_1F2189:: @ 81F2189
+Route113_EventScript_DontSetAshWeather:: @ 81F2189
 	return
 
-Route113_EventScript_1F218A:: @ 81F218A
-	msgbox Route113_Text_1F235B, MSGBOX_NPC
+Route113_EventScript_Gentleman:: @ 81F218A
+	msgbox Route113_Text_AshCanBeFashionedIntoGlass, MSGBOX_NPC
 	end
 
-Route113_EventScript_1F2193:: @ 81F2193
-	msgbox Route113_Text_1F23CA, MSGBOX_NPC
+Route113_EventScript_NinjaBoy:: @ 81F2193
+	msgbox Route113_Text_FunWalkingThroughAsh, MSGBOX_NPC
 	end
 
-Route113_EventScript_1F219C:: @ 81F219C
-	msgbox Route113_Text_1F2440, MSGBOX_SIGN
+Route113_EventScript_RouteSign111:: @ 81F219C
+	msgbox Route113_Text_RouteSign111, MSGBOX_SIGN
 	end
 
-Route113_EventScript_1F21A5:: @ 81F21A5
-	msgbox Route113_Text_1F2456, MSGBOX_SIGN
+Route113_EventScript_RouteSignFallarbor:: @ 81F21A5
+	msgbox Route113_Text_RouteSignFallarbor, MSGBOX_SIGN
 	end
 
-Route113_EventScript_1F21AE:: @ 81F21AE
-	msgbox Route113_Text_1F24F8, MSGBOX_SIGN
+Route113_EventScript_GlassWorkshopSign:: @ 81F21AE
+	msgbox Route113_Text_GlassWorkshopSign, MSGBOX_SIGN
 	end
 
-Route113_EventScript_1F21B7:: @ 81F21B7
-	msgbox Route113_Text_1F2471, MSGBOX_SIGN
+Route113_EventScript_TrainerTipsRegisterKeyItems:: @ 81F21B7
+	msgbox Route113_Text_TrainerTipsRegisterKeyItems, MSGBOX_SIGN
 	end
 
-Route113_EventScript_1F21C0:: @ 81F21C0
-	trainerbattle_single TRAINER_JAYLEN, Route113_Text_299D3C, Route113_Text_299D68
-	msgbox Route113_Text_299D7D, MSGBOX_AUTOCLOSE
+Route113_EventScript_Jaylen:: @ 81F21C0
+	trainerbattle_single TRAINER_JAYLEN, Route113_Text_JaylenIntro, Route113_Text_JaylenDefeat
+	msgbox Route113_Text_JaylenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F21D7:: @ 81F21D7
-	trainerbattle_single TRAINER_DILLON, Route113_Text_299DE3, Route113_Text_299E1C
-	msgbox Route113_Text_299E38, MSGBOX_AUTOCLOSE
+Route113_EventScript_Dillon:: @ 81F21D7
+	trainerbattle_single TRAINER_DILLON, Route113_Text_DillonIntro, Route113_Text_DillonDefeat
+	msgbox Route113_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F21EE:: @ 81F21EE
-	trainerbattle_single TRAINER_MADELINE_1, Route113_Text_299EA6, Route113_Text_299EF9, Route113_EventScript_1F221A
+Route113_EventScript_Madeline:: @ 81F21EE
+	trainerbattle_single TRAINER_MADELINE_1, Route113_Text_MadelineIntro, Route113_Text_MadelineDefeat, Route113_EventScript_RegisterMadeline
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, 1
-	goto_if_eq Route113_EventScript_1F2239
-	msgbox Route113_Text_299F15, MSGBOX_DEFAULT
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route113_EventScript_RematchMadeline
+	msgbox Route113_Text_MadelinePostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route113_EventScript_1F221A:: @ 81F221A
-	special sub_80B4808
+Route113_EventScript_RegisterMadeline:: @ 81F221A
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route113_Text_299F49, MSGBOX_DEFAULT
+	msgbox Route113_Text_MadelineRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_MADELINE_1
 	release
 	end
 
-Route113_EventScript_1F2239:: @ 81F2239
-	trainerbattle_rematch TRAINER_MADELINE_1, Route113_Text_299F8A, Route113_Text_299FC9
-	msgbox Route113_Text_299FD8, MSGBOX_AUTOCLOSE
+Route113_EventScript_RematchMadeline:: @ 81F2239
+	trainerbattle_rematch TRAINER_MADELINE_1, Route113_Text_MadelineRematchIntro, Route113_Text_MadelineRematchDefeat
+	msgbox Route113_Text_MadelinePostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F2250:: @ 81F2250
-	trainerbattle_single TRAINER_LAO_1, Route113_Text_29A015, Route113_Text_29A04C, Route113_EventScript_1F227C
+Route113_EventScript_Lao:: @ 81F2250
+	trainerbattle_single TRAINER_LAO_1, Route113_Text_LaoIntro, Route113_Text_LaoDefeat, Route113_EventScript_RegisterLao
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, 1
-	goto_if_eq Route113_EventScript_1F229B
-	msgbox Route113_Text_29A067, MSGBOX_DEFAULT
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route113_EventScript_RematchLao
+	msgbox Route113_Text_LaoPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route113_EventScript_1F227C:: @ 81F227C
-	special sub_80B4808
+Route113_EventScript_RegisterLao:: @ 81F227C
+	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route113_Text_29A0A2, MSGBOX_DEFAULT
+	msgbox Route113_Text_LaoRegister, MSGBOX_DEFAULT
 	register_matchcall TRAINER_LAO_1
 	release
 	end
 
-Route113_EventScript_1F229B:: @ 81F229B
-	trainerbattle_rematch TRAINER_LAO_1, Route113_Text_29A0E8, Route113_Text_29A11F
-	msgbox Route113_Text_29A13A, MSGBOX_AUTOCLOSE
+Route113_EventScript_RematchLao:: @ 81F229B
+	trainerbattle_rematch TRAINER_LAO_1, Route113_Text_LaoRematchIntro, Route113_Text_LaoRematchDefeat
+	msgbox Route113_Text_LaoPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F22B2:: @ 81F22B2
-	trainerbattle_single TRAINER_LUNG, Route113_Text_29A192, Route113_Text_29A1C6
-	msgbox Route113_Text_29A219, MSGBOX_AUTOCLOSE
+Route113_EventScript_Lung:: @ 81F22B2
+	trainerbattle_single TRAINER_LUNG, Route113_Text_LungIntro, Route113_Text_LungDefeat
+	msgbox Route113_Text_LungPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F22C9:: @ 81F22C9
-	trainerbattle_double TRAINER_TORI_AND_TIA, Route113_Text_29A261, Route113_Text_29A29D, Route113_Text_29A31F
-	msgbox Route113_Text_29A2DE, MSGBOX_AUTOCLOSE
+Route113_EventScript_Tori:: @ 81F22C9
+	trainerbattle_double TRAINER_TORI_AND_TIA, Route113_Text_ToriIntro, Route113_Text_ToriDefeat, Route113_Text_ToriNotEnoughMons
+	msgbox Route113_Text_ToriPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F22E4:: @ 81F22E4
-	trainerbattle_double TRAINER_TORI_AND_TIA, Route113_Text_29A35C, Route113_Text_29A397, Route113_Text_29A419
-	msgbox Route113_Text_29A3DA, MSGBOX_AUTOCLOSE
+Route113_EventScript_Tia:: @ 81F22E4
+	trainerbattle_double TRAINER_TORI_AND_TIA, Route113_Text_TiaIntro, Route113_Text_TiaDefeat, Route113_Text_TiaNotEnoughMons
+	msgbox Route113_Text_TiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F22FF:: @ 81F22FF
-	trainerbattle_single TRAINER_SOPHIE, Route113_Text_29A4BF, Route113_Text_29A508
-	msgbox Route113_Text_29A529, MSGBOX_AUTOCLOSE
+Route113_EventScript_Sophie:: @ 81F22FF
+	trainerbattle_single TRAINER_SOPHIE, Route113_Text_SophieIntro, Route113_Text_SophieDefeat
+	msgbox Route113_Text_SophiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F2316:: @ 81F2316
-	trainerbattle_single TRAINER_COBY, Route113_Text_29A453, Route113_Text_29A480
-	msgbox Route113_Text_29A489, MSGBOX_AUTOCLOSE
+Route113_EventScript_Coby:: @ 81F2316
+	trainerbattle_single TRAINER_COBY, Route113_Text_CobyIntro, Route113_Text_CobyDefeat
+	msgbox Route113_Text_CobyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F232D:: @ 81F232D
-	trainerbattle_single TRAINER_LAWRENCE, Route113_Text_29A566, Route113_Text_29A5A0
-	msgbox Route113_Text_29A5BE, MSGBOX_AUTOCLOSE
+Route113_EventScript_Lawrence:: @ 81F232D
+	trainerbattle_single TRAINER_LAWRENCE, Route113_Text_LawrenceIntro, Route113_Text_LawrenceDefeat
+	msgbox Route113_Text_LawrencePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_1F2344:: @ 81F2344
-	trainerbattle_single TRAINER_WYATT, Route113_Text_29A5E4, Route113_Text_29A628
-	msgbox Route113_Text_29A65D, MSGBOX_AUTOCLOSE
+Route113_EventScript_Wyatt:: @ 81F2344
+	trainerbattle_single TRAINER_WYATT, Route113_Text_WyattIntro, Route113_Text_WyattDefeat
+	msgbox Route113_Text_WyattPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_Text_1F235B: @ 81F235B
+Route113_Text_AshCanBeFashionedIntoGlass: @ 81F235B
 	.string "Wahahaha! Today's technology is a\n"
 	.string "wondrous thing!\p"
 	.string "Take this volcanic ash here.\n"
 	.string "It can be fashioned into glass.$"
 
-Route113_Text_1F23CA: @ 81F23CA
+Route113_Text_FunWalkingThroughAsh: @ 81F23CA
 	.string "It's fun walking through the volcano's\n"
 	.string "ashes on the ground and grass.\p"
 	.string "You can see where you walked--it's\n"
 	.string "really neat!$"
 
-Route113_Text_1F2440: @ 81F2440
+Route113_Text_RouteSign111: @ 81F2440
 	.string "ROUTE 113\n"
 	.string "{RIGHT_ARROW} ROUTE 111$"
 
-Route113_Text_1F2456: @ 81F2456
+Route113_Text_RouteSignFallarbor: @ 81F2456
 	.string "ROUTE 113\n"
 	.string "{LEFT_ARROW} FALLARBOR TOWN$"
 
-Route113_Text_1F2471: @ 81F2471
+Route113_Text_TrainerTipsRegisterKeyItems: @ 81F2471
 	.string "TRAINER TIPS\p"
 	.string "You may register one of the KEY ITEMS\n"
 	.string "in your BAG as SELECT.\p"
 	.string "Simply press SELECT to use\n"
 	.string "the registered item conveniently.$"
 
-Route113_Text_1F24F8: @ 81F24F8
+Route113_Text_GlassWorkshopSign: @ 81F24F8
 	.string "GLASS WORKSHOP\n"
 	.string "“Turning Volcanic Ash into Glass Items”$"
 

@@ -1,6 +1,6 @@
 CASTFORMGFXDIR := graphics/pokemon/castform
 TILESETGFXDIR := data/tilesets
-FONTGFXDIR := data/graphics/fonts
+FONTGFXDIR := graphics/fonts
 INTERFACEGFXDIR := graphics/interface
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
@@ -15,7 +15,7 @@ SLOTMACHINEGFXDIR := graphics/slot_machine
 PKNAVGFXDIR := graphics/pokenav
 PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 PSSGFXDIR := graphics/pokemon_storage
-EVENTOBJGFXDIR := graphics/event_objects
+OBJEVENTGFXDIR := graphics/object_events
 MISCGFXDIR := graphics/misc
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
@@ -85,6 +85,40 @@ $(TILESETGFXDIR)/secondary/pacifidlog/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/sootopolis/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 328
+
+SOOTOPOLISANIMDIR := $(TILESETGFXDIR)/secondary/sootopolis/anim
+
+$(SOOTOPOLISANIMDIR)/stormy_water/0.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/0_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/0_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/1.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/1_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/1_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/2.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/2_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/2_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/3.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/3_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/3_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/4.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/4_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/4_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/5.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/5_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/5_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/6.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/6_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/6_groudon.4bpp 
+	@cat $^ >$@
+
+$(SOOTOPOLISANIMDIR)/stormy_water/7.4bpp: $(SOOTOPOLISANIMDIR)/stormy_water/7_kyogre.4bpp \
+                                          $(SOOTOPOLISANIMDIR)/stormy_water/7_groudon.4bpp 
+	@cat $^ >$@
 
 $(TILESETGFXDIR)/secondary/battle_frontier_outside_west/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 508
@@ -357,9 +391,9 @@ $(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
-										  $(UNUSEDGFXDIR)/yellow_frame.bin \
-										  $(UNUSEDGFXDIR)/green_frame.bin \
-										  $(UNUSEDGFXDIR)/blank_frame.bin
+                                          $(UNUSEDGFXDIR)/yellow_frame.bin \
+                                          $(UNUSEDGFXDIR)/green_frame.bin \
+                                          $(UNUSEDGFXDIR)/blank_frame.bin
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/color_frames.4bpp: %.4bpp: %.png
@@ -409,7 +443,7 @@ $(MASKSGFXDIR)/unknown_C2EA50.4bpp: %.4bpp: %.png
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 16
 
-$(INTERFACEGFXDIR)/party_menu_misc.4bpp: %.4bpp: %.png
+$(INTERFACEGFXDIR)/party_menu_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62
 
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
@@ -644,7 +678,7 @@ $(PSSGFXDIR)/ludicolo.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/ludico
 $(PSSGFXDIR)/whiscash.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/whiscash_bg.4bpp
 	@cat $^ >$@
 
-$(EVENTOBJGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 11
 
 $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png

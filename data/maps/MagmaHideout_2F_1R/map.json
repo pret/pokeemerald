@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
       "x": 18,
       "y": 19,
       "elevation": 3,
@@ -24,11 +24,11 @@
       "movement_range_y": 4,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "MagmaHideout_2F_1R_EventScript_239B7F",
+      "script": "MagmaHideout_2F_1R_EventScript_Grunt4",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
       "x": 12,
       "y": 14,
       "elevation": 3,
@@ -37,11 +37,11 @@
       "movement_range_y": 6,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MagmaHideout_2F_1R_EventScript_239B96",
+      "script": "MagmaHideout_2F_1R_EventScript_Grunt5",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_F",
       "x": 8,
       "y": 8,
       "elevation": 3,
@@ -50,11 +50,11 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "7",
-      "script": "MagmaHideout_2F_1R_EventScript_239B51",
+      "script": "MagmaHideout_2F_1R_EventScript_Grunt14",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
       "x": 21,
       "y": 11,
       "elevation": 3,
@@ -63,7 +63,7 @@
       "movement_range_y": 1,
       "trainer_type": "1",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "MagmaHideout_2F_1R_EventScript_239B68",
+      "script": "MagmaHideout_2F_1R_EventScript_Grunt3",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     }
   ],

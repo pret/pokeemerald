@@ -10,10 +10,10 @@
 // this file's functions
 static void sub_8158B98(u8 taskId);
 static void sub_8158C04(u8 taskId);
-static void sub_8158D08(u8 taskId);
-static void sub_8158FF4(u8 taskId);
-static void sub_815913C(u8 taskId);
-static void sub_8159308(u8 taskId);
+static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId);
+static void SoundTask_PlayDoubleCry_Step(u8 taskId);
+static void SoundTask_PlayCryWithEcho_Step(u8 taskId);
+static void SoundTask_AdjustPanningVar_Step(u8 taskId);
 
 // task start
 void sub_8158B30(u8 taskId)
@@ -73,7 +73,7 @@ static void sub_8158C04(u8 taskId)
 // task end
 
 // task start
-void sub_8158C58(u8 taskId)
+void SoundTask_LoopSEAdjustPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 targetPan = gBattleAnimArgs[2];
@@ -97,11 +97,11 @@ void sub_8158C58(u8 taskId)
     gTasks[taskId].data[11] = sourcePan;
     gTasks[taskId].data[12] = r9;
 
-    gTasks[taskId].func = sub_8158D08;
-    sub_8158D08(taskId);
+    gTasks[taskId].func = SoundTask_LoopSEAdjustPanning_Step;
+    SoundTask_LoopSEAdjustPanning_Step(taskId);
 }
 
-static void sub_8158D08(u8 taskId)
+static void SoundTask_LoopSEAdjustPanning_Step(u8 taskId)
 {
     if (gTasks[taskId].data[12]++ == gTasks[taskId].data[6])
     {
@@ -119,7 +119,7 @@ static void sub_8158D08(u8 taskId)
         u16 dPan, oldPan;
         gTasks[taskId].data[10] = 0;
         dPan = gTasks[taskId].data[3];
-        oldPan = gTasks[taskId].data[11] ;
+        oldPan = gTasks[taskId].data[11];
         gTasks[taskId].data[11] = dPan + oldPan;
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
@@ -127,7 +127,7 @@ static void sub_8158D08(u8 taskId)
 // task end
 
 // task start
-void sub_8158D8C(u8 taskId)
+void SoundTask_PlayCryHighPitch(u8 taskId)
 {
     u16 species = 0;
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
@@ -173,7 +173,7 @@ void sub_8158D8C(u8 taskId)
 // task end
 
 // task start
-void sub_8158E9C(u8 taskId)
+void SoundTask_PlayDoubleCry(u8 taskId)
 {
     u16 species = 0;
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
@@ -222,7 +222,7 @@ void sub_8158E9C(u8 taskId)
         else
             PlayCry3(species, pan, 7);
 
-        gTasks[taskId].func = sub_8158FF4;
+        gTasks[taskId].func = SoundTask_PlayDoubleCry_Step;
     }
     else
     {
@@ -230,7 +230,7 @@ void sub_8158E9C(u8 taskId)
     }
 }
 
-static void sub_8158FF4(u8 taskId)
+static void SoundTask_PlayDoubleCry_Step(u8 taskId)
 {
     u16 species = gTasks[taskId].data[1];
     s8 pan = gTasks[taskId].data[2];
@@ -261,7 +261,7 @@ static void sub_8158FF4(u8 taskId)
 }
 // task end
 
-void sub_8159078(u8 taskId)
+void SoundTask_WaitForCry(u8 taskId)
 {
     if (gTasks[taskId].data[9] < 2)
     {
@@ -275,7 +275,7 @@ void sub_8159078(u8 taskId)
 }
 
 // task start
-void sub_81590B8(u8 taskId)
+void SoundTask_PlayCryWithEcho(u8 taskId)
 {
     u16 species;
     s8 pan;
@@ -292,12 +292,12 @@ void sub_81590B8(u8 taskId)
     gTasks[taskId].data[2] = pan;
 
     if (species != SPECIES_NONE)
-        gTasks[taskId].func = sub_815913C;
+        gTasks[taskId].func = SoundTask_PlayCryWithEcho_Step;
     else
         DestroyAnimVisualTask(taskId);
 }
 
-static void sub_815913C(u8 taskId)
+static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 {
     u16 species = gTasks[taskId].data[1];
     s8 pan = gTasks[taskId].data[2];
@@ -332,7 +332,7 @@ static void sub_815913C(u8 taskId)
 }
 // task end
 
-void sub_8159210(u8 taskId)
+void SoundTask_PlaySE1WithPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
@@ -341,7 +341,7 @@ void sub_8159210(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8159244(u8 taskId)
+void SoundTask_PlaySE2WithPanning(u8 taskId)
 {
     u16 songId = gBattleAnimArgs[0];
     s8 pan = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
@@ -350,7 +350,9 @@ void sub_8159244(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8159278(u8 taskId)
+// Adjusts panning and assigns it to gAnimCustomPanning. Doesnt play sound. 
+// Used by Confuse Ray and Will-O-Wisp (see uses of gAnimCustomPanning)
+void SoundTask_AdjustPanningVar(u8 taskId)
 {
     s8 targetPan = gBattleAnimArgs[1];
     s8 panIncrement = gBattleAnimArgs[2];
@@ -367,11 +369,11 @@ void sub_8159278(u8 taskId)
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].data[11] = sourcePan;
 
-    gTasks[taskId].func = sub_8159308;
-    sub_8159308(taskId);
+    gTasks[taskId].func = SoundTask_AdjustPanningVar_Step;
+    SoundTask_AdjustPanningVar_Step(taskId);
 }
 
-void sub_8159308(u8 taskId)
+static void SoundTask_AdjustPanningVar_Step(u8 taskId)
 {
     u16 panIncrement = gTasks[taskId].data[3];
 
@@ -384,7 +386,7 @@ void sub_8159308(u8 taskId)
         gTasks[taskId].data[11] = KeepPanInRange(gTasks[taskId].data[11], oldPan);
     }
 
-    gUnknown_02038440 = gTasks[taskId].data[11];
+    gAnimCustomPanning = gTasks[taskId].data[11];
     if (gTasks[taskId].data[11] == gTasks[taskId].data[2])
         DestroyAnimVisualTask(taskId);
 }

@@ -31,6 +31,7 @@
 #include "constants/battle_anim.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/party_menu.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
@@ -664,7 +665,7 @@ u32 sub_8057FBC(void) // unused
 
 static void HandleMoveSwitching(void)
 {
-    u8 perMovePPBonuses[4];
+    u8 perMovePPBonuses[MAX_MON_MOVES];
     struct ChooseMoveStruct moveStruct;
     u8 totalPPBonuses;
 
@@ -1341,10 +1342,10 @@ static void WaitForMonSelection(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        if (gUnknown_0203CEE8 == 1)
-            BtlController_EmitChosenMonReturnValue(1, gUnknown_0203CEE9, gUnknown_0203CF00);
+        if (gPartyMenuUseExitCallback == TRUE)
+            BtlController_EmitChosenMonReturnValue(1, gSelectedMonPartyId, gBattlePartyCurrentOrder);
         else
-            BtlController_EmitChosenMonReturnValue(1, 6, NULL);
+            BtlController_EmitChosenMonReturnValue(1, PARTY_SIZE, NULL);
 
         if ((gBattleBufferA[gActiveBattler][1] & 0xF) == 1)
             PrintLinkStandbyMsg();
@@ -1531,12 +1532,12 @@ void ActionSelectionDestroyCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
-void SetCB2ToReshowScreenAfterMenu(void)
+void CB2_SetUpReshowBattleScreenAfterMenu(void)
 {
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
 
-void SetCB2ToReshowScreenAfterMenu2(void)
+void CB2_SetUpReshowBattleScreenAfterMenu2(void)
 {
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
@@ -2312,7 +2313,7 @@ static void PlayerHandleDrawTrainerPic(void)
         gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.y = 48;
         gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -2;
         gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_805D7AC;
-        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineMode = 0;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.affineMode = ST_OAM_AFFINE_OFF;
         gSprites[gBattlerSpriteIds[gActiveBattler]].hFlip = 1;
     }
     // Use the back pic in any other scenario.
@@ -2484,7 +2485,7 @@ static void PlayerDoMoveAnimation(void)
     case 1:
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
         {
-            sub_805EB9C(0);
+            sub_805EB9C(ST_OAM_AFFINE_OFF);
             DoMoveAnim(move);
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 2;
         }
@@ -2493,7 +2494,7 @@ static void PlayerDoMoveAnimation(void)
         gAnimScriptCallback();
         if (!gAnimScriptActive)
         {
-            sub_805EB9C(1);
+            sub_805EB9C(ST_OAM_AFFINE_NORMAL);
             if (gBattleSpritesDataPtr->battlerData[gActiveBattler].behindSubstitute && multihit < 2)
             {
                 InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_MON_TO_SUBSTITUTE);
@@ -2632,20 +2633,20 @@ static void PlayerHandleChooseItem(void)
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
     gBattlerInMenuId = gActiveBattler;
 
-    for (i = 0; i < 3; i++)
-        gUnknown_0203CF00[i] = gBattleBufferA[gActiveBattler][1 + i];
+    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
 }
 
 static void PlayerHandleChoosePokemon(void)
 {
     s32 i;
 
-    for (i = 0; i < 3; i++)
-        gUnknown_0203CF00[i] = gBattleBufferA[gActiveBattler][4 + i];
+    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][4 + i];
 
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleBufferA[gActiveBattler][1] & 0xF) != PARTY_CANT_SWITCH)
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleBufferA[gActiveBattler][1] & 0xF) != PARTY_ACTION_CANT_SWITCH)
     {
-        BtlController_EmitChosenMonReturnValue(1, gBattlerPartyIndexes[gActiveBattler] + 1, gUnknown_0203CF00);
+        BtlController_EmitChosenMonReturnValue(1, gBattlerPartyIndexes[gActiveBattler] + 1, gBattlePartyCurrentOrder);
         PlayerBufferExecCompleted();
     }
     else
@@ -2675,8 +2676,9 @@ static void PlayerHandleHealthBarUpdate(void)
     LoadBattleBarGfx(0);
     hpVal = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
+    // gPlayerPartyLostHP used by Battle Dome, but never read
     if (hpVal > 0)
-        gUnknown_0203CD70 += hpVal;
+        gPlayerPartyLostHP += hpVal;
 
     if (hpVal != INSTANT_HP_BAR_DROP)
     {
@@ -3092,7 +3094,7 @@ static void PlayerHandleCmd55(void)
 {
     sub_81851A8(&gBattleBufferA[gActiveBattler][4]);
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
-    gSaveBlock2Ptr->frontier.field_CA9_b = gBattleBufferA[gActiveBattler][2];
+    gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleBufferA[gActiveBattler][2];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     PlayerBufferExecCompleted();
