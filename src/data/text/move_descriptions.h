@@ -2613,6 +2613,18 @@ static const u8 sMIND_BLOWNDescription[] = _(
 	"It explodes the user's head\n"
 	"to damage everything around.");
 
+static const u8 sPLASMA_FISTSDescription[] = _(
+	"Hits with electrical fists.\n"
+	"Normal moves become Electric.");
+
+static const u8 sPHOTON_GEYSERDescription[] = _(
+	"The foe's highest offensive\n"
+	"determines its category.");
+
+static const u8 sDOUBLE_IRON_BASHDescription[] = _(
+    "The user spins and hits with\n"
+    "its arms. May cause flinch.");
+
 static const u8 sNotDoneYetDescription[] = _(
 	"Not done yet.");
 
@@ -3293,4 +3305,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_NATURES_MADNESS - 1] = sNATURES_MADNESSDescription,
     [MOVE_MULTI_ATTACK - 1] = sMULTI_ATTACKDescription,
     [MOVE_MIND_BLOWN - 1] = sMIND_BLOWNDescription,
+    [MOVE_PLASMA_FISTS - 1] = sPLASMA_FISTSDescription,
+    [MOVE_PHOTON_GEYSER - 1] = sPHOTON_GEYSERDescription,
+    [MOVE_DOUBLE_IRON_BASH - 1] = sDOUBLE_IRON_BASHDescription,
 };

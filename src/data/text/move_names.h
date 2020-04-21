@@ -674,4 +674,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_NATURES_MADNESS] = _("Nature's Mad"),
     [MOVE_MULTI_ATTACK] = _("Multi-Attack"),
     [MOVE_MIND_BLOWN] = _("Mind Blown"),
+    [MOVE_PLASMA_FISTS] = _("Plasma Fists"),
+    [MOVE_PHOTON_GEYSER] = _("PhotonGeyser"),
+    [MOVE_DOUBLE_IRON_BASH] = _("D. Iron Bash"),
 };
