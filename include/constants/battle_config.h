@@ -17,8 +17,8 @@
 #define SPECIES_DARMANITAN_ZEN 10002
 #define SPECIES_MINIOR_CORE 0
 #define SPECIES_MINIOR 10003
-#define SPECIES_WISHIWASHI SPECIES_SKARMORY
-#define SPECIES_WISHIWASHI_SCHOOL SPECIES_HO_OH
+#define SPECIES_WISHIWASHI 0
+#define SPECIES_WISHIWASHI_SCHOOL 10004
 
 // Items with peculiar battle effects. Remove them if they're properly placed in constant/items.h
 #define ITEM_GRISEOUS_ORB 0
