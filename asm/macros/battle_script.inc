@@ -1713,6 +1713,12 @@
 	various \battler, VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED
 	.4byte \ptr
 	.endm
+
+	.macro trypoisontype attacker:req, target:req, ptr:req
+	various \attacker, VARIOUS_HANDLE_TYPE_IMMUNITY
+	.byte \target
+	.4byte \ptr
+	.endm
 	
 	.macro trysetfairylock ptr:req
 	various BS_ATTACKER, VARIOUS_TRY_FAIRY_LOCK

@@ -156,6 +156,7 @@
 #define VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED  93
 #define VARIOUS_TRY_FAIRY_LOCK                  94
 #define VARIOUS_JUMP_IF_NO_ALLY                 95
+#define VARIOUS_HANDLE_TYPE_IMMUNITY            96
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
