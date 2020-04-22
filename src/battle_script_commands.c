@@ -6851,6 +6851,11 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    case VARIOUS_INFATUATE_WITH_BATTLER:
+        gBattleScripting.battler = gActiveBattler;
+        gBattleMons[gActiveBattler].status2 |= STATUS2_INFATUATED_WITH(GetBattlerForBattleScript(gBattlescriptCurrInstr[3]));
+        gBattlescriptCurrInstr += 4;
+        return;
     case VARIOUS_TRY_FAIRY_LOCK:
         if (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
         {
