@@ -1439,6 +1439,18 @@
 	various \battler, VARIOUS_TRY_ACTIVATE_MOXIE
 	.endm
 	
+	.macro tryactivatebeastboost battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_BEAST_BOOST
+	.endm
+	
+	.macro tryactivatereceiver battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_RECEIVER
+	.endm
+	
+	.macro tryactivatesoulheart
+	various BS_ATTACKER, VARIOUS_TRY_ACTIVATE_SOULHEART
+	.endm
+	
 	.macro tryactivatefellstinger battler:req
 	various \battler, VARIOUS_TRY_ACTIVATE_FELL_STINGER
 	.endm
@@ -1686,6 +1698,51 @@
 	.macro jumpiffullhp battler:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_FULL_HP
 	.4byte \ptr
+	.endm
+	
+	.macro losetype battler:req, type:req
+	various \battler, VARIOUS_LOSE_TYPE
+	.byte \type
+	.endm
+	
+	.macro tryfriskmsg battler:req
+	various \battler, VARIOUS_TRY_FRISK
+	.endm
+	
+	.macro jumpifshieldsdown battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED
+	.4byte \ptr
+	.endm
+
+	.macro trypoisontype attacker:req, target:req, ptr:req
+	various \attacker, VARIOUS_HANDLE_TYPE_IMMUNITY
+	.byte \target
+	.4byte \ptr
+	.endm
+	
+	.macro trysetfairylock ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_FAIRY_LOCK
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifnoally battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NO_ALLY
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifnoholdeffect battler:req, holdEffet:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NO_HOLD_EFFECT
+	.byte \holdEffet
+	.4byte \ptr
+	.endm
+	
+	.macro infatuatewithbattler battler1:req, battler2:req
+	various \battler1, VARIOUS_INFATUATE_WITH_BATTLER
+	.byte \battler2
+	.endm
+	
+	.macro setlastuseditem battler:req
+	various \battler, VARIOUS_SET_LAST_USED_ITEM
 	.endm
 	
 @ helpful macros

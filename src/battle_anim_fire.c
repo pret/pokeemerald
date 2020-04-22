@@ -548,9 +548,9 @@ static void AnimFireSpread(struct Sprite *sprite)
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
 
     sprite->pos1.y += gBattleAnimArgs[1];
-    sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = gBattleAnimArgs[2];
-    sprite->data[2] = gBattleAnimArgs[3];
+    sprite->data[0] = gBattleAnimArgs[4]; // duration
+    sprite->data[1] = gBattleAnimArgs[2]; // x
+    sprite->data[2] = gBattleAnimArgs[3]; // y
 
     sprite->callback = TranslateSpriteLinearFixedPoint;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);

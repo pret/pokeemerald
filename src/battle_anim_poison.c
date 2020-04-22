@@ -480,7 +480,8 @@ static void AnimSludgeBombHitParticle_Step(struct Sprite *sprite)
 
 static void AnimAcidPoisonDroplet(struct Sprite *sprite)
 {
-    SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
+    if (gBattleAnimArgs[5])
+        SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];

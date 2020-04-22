@@ -175,6 +175,7 @@ static void Cmd_is_grounded(void);
 static void Cmd_get_best_dmg_hp_percent(void);
 static void Cmd_get_curr_dmg_hp_percent(void);
 static void Cmd_get_move_split_from_result(void);
+static void Cmd_get_considered_move_split(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -302,6 +303,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_get_best_dmg_hp_percent,                    // 0x72
     Cmd_get_curr_dmg_hp_percent,                    // 0x73
     Cmd_get_move_split_from_result,                 // 0x74
+    Cmd_get_considered_move_split,                  // 0x75
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1378,8 +1380,8 @@ static void Cmd_get_considered_move_power(void)
     gAIScriptPtr += 1;
 }
 
-// Checks if the move dealing less damage does not have worse effects.
-static bool32 CompareTwoMoves(u32 bestMove, u32 goodMove)
+// Checks if one of the moves has side effects or perks
+static u32 WhichMoveBetter(u32 move1, u32 move2)
 {
     s32 defAbility = AI_GetAbility(gBattlerTarget, FALSE);
 
@@ -1388,31 +1390,52 @@ static bool32 CompareTwoMoves(u32 bestMove, u32 goodMove)
         && (BATTLE_HISTORY->itemEffects[gBattlerTarget] == HOLD_EFFECT_ROCKY_HELMET
         || defAbility == ABILITY_IRON_BARBS || defAbility == ABILITY_ROUGH_SKIN))
     {
-        if (IS_MOVE_PHYSICAL(goodMove) && !IS_MOVE_PHYSICAL(bestMove))
-            return FALSE;
+        if (IS_MOVE_PHYSICAL(move1) && !IS_MOVE_PHYSICAL(move2))
+            return 1;
+        if (IS_MOVE_PHYSICAL(move2) && !IS_MOVE_PHYSICAL(move1))
+            return 0;
     }
     // Check recoil
     if (GetBattlerAbility(sBattler_AI) != ABILITY_ROCK_HEAD)
     {
-        if (((gBattleMoves[goodMove].effect == EFFECT_RECOIL
-                || gBattleMoves[goodMove].effect == EFFECT_RECOIL_IF_MISS
-                || gBattleMoves[goodMove].effect == EFFECT_RECOIL_50
-                || gBattleMoves[goodMove].effect == EFFECT_RECOIL_33_STATUS)
-            && (gBattleMoves[bestMove].effect != EFFECT_RECOIL
-                 && gBattleMoves[bestMove].effect != EFFECT_RECOIL_IF_MISS
-                 && gBattleMoves[bestMove].effect != EFFECT_RECOIL_50
-                 && gBattleMoves[bestMove].effect != EFFECT_RECOIL_33_STATUS
-                 && gBattleMoves[bestMove].effect != EFFECT_RECHARGE)))
-            return FALSE;
+        if (((gBattleMoves[move1].effect == EFFECT_RECOIL_25
+                || gBattleMoves[move1].effect == EFFECT_RECOIL_IF_MISS
+                || gBattleMoves[move1].effect == EFFECT_RECOIL_50
+                || gBattleMoves[move1].effect == EFFECT_RECOIL_33
+                || gBattleMoves[move1].effect == EFFECT_RECOIL_33_STATUS)
+            && (gBattleMoves[move2].effect != EFFECT_RECOIL_25
+                 && gBattleMoves[move2].effect != EFFECT_RECOIL_IF_MISS
+                 && gBattleMoves[move2].effect != EFFECT_RECOIL_50
+                 && gBattleMoves[move2].effect != EFFECT_RECOIL_33
+                 && gBattleMoves[move2].effect != EFFECT_RECOIL_33_STATUS
+                 && gBattleMoves[move2].effect != EFFECT_RECHARGE)))
+            return 1;
+
+        if (((gBattleMoves[move2].effect == EFFECT_RECOIL_25
+                || gBattleMoves[move2].effect == EFFECT_RECOIL_IF_MISS
+                || gBattleMoves[move2].effect == EFFECT_RECOIL_50
+                || gBattleMoves[move2].effect == EFFECT_RECOIL_33
+                || gBattleMoves[move2].effect == EFFECT_RECOIL_33_STATUS)
+            && (gBattleMoves[move1].effect != EFFECT_RECOIL_25
+                 && gBattleMoves[move1].effect != EFFECT_RECOIL_IF_MISS
+                 && gBattleMoves[move1].effect != EFFECT_RECOIL_50
+                 && gBattleMoves[move1].effect != EFFECT_RECOIL_33
+                 && gBattleMoves[move1].effect != EFFECT_RECOIL_33_STATUS
+                 && gBattleMoves[move1].effect != EFFECT_RECHARGE)))
+            return 0;
     }
     // Check recharge
-    if (gBattleMoves[goodMove].effect == EFFECT_RECHARGE && gBattleMoves[bestMove].effect != EFFECT_RECHARGE)
-        return FALSE;
+    if (gBattleMoves[move1].effect == EFFECT_RECHARGE && gBattleMoves[move2].effect != EFFECT_RECHARGE)
+        return 1;
+    if (gBattleMoves[move2].effect == EFFECT_RECHARGE && gBattleMoves[move1].effect != EFFECT_RECHARGE)
+        return 0;
     // Check additional effect.
-    if (gBattleMoves[bestMove].effect != 0 && gBattleMoves[goodMove].effect == 0)
-        return FALSE;
+    if (gBattleMoves[move1].effect == 0 && gBattleMoves[move2].effect != 0)
+        return 1;
+    if (gBattleMoves[move2].effect == 0 && gBattleMoves[move1].effect != 0)
+        return 0;
 
-    return TRUE;
+    return 2;
 }
 
 static void Cmd_get_how_powerful_move_is(void)
@@ -1449,19 +1472,39 @@ static void Cmd_get_how_powerful_move_is(void)
             }
         }
 
-        for (bestId = 0, i = 0; i < MAX_MON_MOVES; i++)
+        hp = gBattleMons[gBattlerTarget].hp + (20 * gBattleMons[gBattlerTarget].hp / 100); // 20 % add to make sure the battler is always fainted
+        // If a move can faint battler, it doesn't matter how much damage it does
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (moveDmgs[i] > hp)
+                moveDmgs[i] = hp;
+        }
+
+        for (bestId = 0, i = 1; i < MAX_MON_MOVES; i++)
         {
             if (moveDmgs[i] > moveDmgs[bestId])
                 bestId = i;
+            if (moveDmgs[i] == moveDmgs[bestId])
+            {
+                switch (WhichMoveBetter(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[i]))
+                {
+                case 2:
+                    if (Random() & 1)
+                        break;
+                case 1:
+                    bestId = i;
+                    break;
+                }
+            }
         }
 
         currId = AI_THINKING_STRUCT->movesetIndex;
-        hp = gBattleMons[gBattlerTarget].hp;
         if (currId == bestId)
             AI_THINKING_STRUCT->funcResult = MOVE_POWER_BEST;
         // Compare percentage difference.
-        else if ((moveDmgs[bestId] * 100 / hp) - (moveDmgs[currId] * 100 / hp) <= 10
-                 && CompareTwoMoves(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[currId]))
+        else if ((moveDmgs[currId] >= hp || moveDmgs[bestId] < hp) // If current move can faint as well, or if neither can
+                 && (moveDmgs[bestId] * 100 / hp) - (moveDmgs[currId] * 100 / hp) <= 30
+                 && WhichMoveBetter(gBattleMons[sBattler_AI].moves[bestId], gBattleMons[sBattler_AI].moves[currId]) != 0)
             AI_THINKING_STRUCT->funcResult = MOVE_POWER_GOOD;
         else
             AI_THINKING_STRUCT->funcResult = MOVE_POWER_WEAK;
@@ -1476,11 +1519,7 @@ static void Cmd_get_how_powerful_move_is(void)
 
 static void Cmd_get_last_used_battler_move(void)
 {
-    if (gAIScriptPtr[1] == AI_USER)
-        AI_THINKING_STRUCT->funcResult = gLastMoves[sBattler_AI];
-    else
-        AI_THINKING_STRUCT->funcResult = gLastMoves[gBattlerTarget];
-
+    AI_THINKING_STRUCT->funcResult = gLastMoves[BattleAI_GetWantedBattler(gAIScriptPtr[1])];
     gAIScriptPtr += 2;
 }
 
@@ -2758,7 +2797,12 @@ static void Cmd_get_curr_dmg_hp_percent(void)
 
 static void Cmd_get_move_split_from_result(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].type;
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].split;
+    gAIScriptPtr += 1;
+}
 
+static void Cmd_get_considered_move_split(void)
+{
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].split;
     gAIScriptPtr += 1;
 }

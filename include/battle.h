@@ -221,6 +221,7 @@ struct FieldTimer
     u8 psychicTerrainTimer;
     u8 echoVoiceCounter;
     u8 gravityTimer;
+    u8 fairyLockTimer;
 };
 
 struct WishFutureKnock
@@ -543,6 +544,10 @@ struct BattleStruct
     bool8 spriteIgnore0Hp;
     struct Illusion illusion[MAX_BATTLERS_COUNT];
     s8 aiFinalScore[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // AI, target, moves to make debugging easier
+    u8 soulheartBattlerId;
+    u8 friskedBattler; // Frisk needs to identify 2 battlers in double battles.
+    bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
+    u8 sameMoveTurns[MAX_BATTLERS_COUNT]; // For Metronome, number of times the same moves has been SUCCESFULLY used.
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -575,6 +580,7 @@ struct BattleStruct
 #define SET_STAT_BUFF_VALUE(n)((((n) << 3) & 0xF8))
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
+#define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
 
 struct BattleScripting
 {
@@ -587,7 +593,7 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 moveendState;
-    u8 unused_15;
+    u8 savedStatChanger; // For further use, if attempting to change stat two times(ex. Moody)
     u8 unused_16;
     u8 battler;
     u8 animTurn;
