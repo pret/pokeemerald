@@ -552,7 +552,10 @@ int main(int argc, char **argv)
             FATAL_ERROR("Output file \"%s\" has no extension.\n", outputPath);
 
         size_t newOutputPathSize = strlen(inputPath) - strlen(inputFileExtension) + strlen(outputFileExtension);
-        outputPath = (char *)malloc(newOutputPathSize);
+        outputPath = malloc(newOutputPathSize);
+
+        if (outputPath == NULL)
+            FATAL_ERROR("Failed to allocate memory for new output path.\n");
 
         for (int i = 0; i < newOutputPathSize; i++)
         {
