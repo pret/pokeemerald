@@ -1447,6 +1447,13 @@ static void Cmd_ppreduce(void)
     if (!(gHitMarker & (HITMARKER_NO_PPDEDUCT | HITMARKER_NO_ATTACKSTRING)) && gBattleMons[gBattlerAttacker].pp[gCurrMovePos])
     {
         gProtectStructs[gBattlerAttacker].notFirstStrike = 1;
+        // For item Metronome
+        if (gCurrentMove == gLastResultingMoves[gBattlerAttacker]
+            && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+            && !WasUnableToUseMove(gBattlerAttacker))
+                gBattleStruct->sameMoveTurns[gBattlerAttacker]++;
+        else
+            gBattleStruct->sameMoveTurns[gBattlerAttacker] = 0;
 
         if (gBattleMons[gBattlerAttacker].pp[gCurrMovePos] > ppToDeduct)
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] -= ppToDeduct;
@@ -4806,7 +4813,7 @@ static void Cmd_moveend(void)
             }
             gBattleScripting.moveendState++;
             break;
-        case MOVEEND_CLEAR_BITS: // Clear bits active while using a move for all targets and all hits.
+        case MOVEEND_CLEAR_BITS: // Clear/Set bits for things like using a move for all targets and all hits.
             if (gSpecialStatuses[gBattlerAttacker].instructedChosenTarget)
                 *(gBattleStruct->moveTarget + gBattlerAttacker) = gSpecialStatuses[gBattlerAttacker].instructedChosenTarget & 0x3;
             if (gSpecialStatuses[gBattlerAttacker].dancerOriginalTarget)

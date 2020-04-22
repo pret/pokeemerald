@@ -3045,6 +3045,7 @@ void SwitchInClearSetData(void)
     gLastHitBy[gActiveBattler] = 0xFF;
 
     gBattleStruct->lastTakenMove[gActiveBattler] = 0;
+    gBattleStruct->sameMoveTurns[gActiveBattler] = 0;
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][0] = 0;
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][1] = 0;
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][2] = 0;
@@ -3130,6 +3131,7 @@ void FaintClearSetData(void)
     gLastHitBy[gActiveBattler] = 0xFF;
 
     gBattleStruct->choicedMove[gActiveBattler] = 0;
+    gBattleStruct->sameMoveTurns[gActiveBattler] = 0;
     gBattleStruct->lastTakenMove[gActiveBattler] = 0;
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][0] = 0;
     gBattleStruct->lastTakenMoveFrom[gActiveBattler][1] = 0;
