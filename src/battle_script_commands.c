@@ -6856,6 +6856,9 @@ static void Cmd_various(void)
         gBattleMons[gActiveBattler].status2 |= STATUS2_INFATUATED_WITH(GetBattlerForBattleScript(gBattlescriptCurrInstr[3]));
         gBattlescriptCurrInstr += 4;
         return;
+    case VARIOUS_SET_LAST_USED_ITEM:
+        gLastUsedItem = gBattleMons[gActiveBattler].item;
+        break;
     case VARIOUS_TRY_FAIRY_LOCK:
         if (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
         {

@@ -6626,6 +6626,22 @@ BattleScript_82DB4AF::
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage 0x40
 	return
+	
+BattleScript_TryAdrenalineOrb:
+	jumpifnoholdeffect BS_TARGET, HOLD_EFFECT_ADRENALINE_ORB, BattleScript_TryAdrenalineOrbRet
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPEED, 12, BattleScript_TryAdrenalineOrbRet
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN | STAT_BUFF_ALLOW_PTR, BattleScript_TryAdrenalineOrbRet
+	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	copybyte sBATTLER, gBattlerTarget
+	setlastuseditem BS_TARGET
+	printstring STRINGID_USINGXTHEYOFZN
+	waitmessage 0x40
+	removeitem BS_TARGET
+BattleScript_TryAdrenalineOrbRet:
+	return
 
 BattleScript_IntimidateActivatesEnd3::
 	call BattleScript_PauseIntimidateActivates
@@ -6635,9 +6651,9 @@ BattleScript_PauseIntimidateActivates:
 	pause 0x20
 BattleScript_IntimidateActivates::
 	setbyte gBattlerTarget, 0x0
-	setstatchanger STAT_ATK, 1, TRUE
 	call BattleScript_AbilityPopUp
 BattleScript_IntimidateActivatesLoop:
+	setstatchanger STAT_ATK, 1, TRUE
 	trygetintimidatetarget BattleScript_IntimidateActivatesReturn
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateActivatesLoopIncrement
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
@@ -6649,6 +6665,7 @@ BattleScript_IntimidateActivatesLoop:
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage 0x40
+	call BattleScript_TryAdrenalineOrb
 BattleScript_IntimidateActivatesLoopIncrement:
 	addbyte gBattlerTarget, 0x1
 	goto BattleScript_IntimidateActivatesLoop
@@ -6658,6 +6675,7 @@ BattleScript_IntimidatePrevented:
 	pause 0x20
 	printstring STRINGID_PREVENTEDFROMWORKING
 	waitmessage 0x40
+	call BattleScript_TryAdrenalineOrb
 	goto BattleScript_IntimidateActivatesLoopIncrement
 
 BattleScript_DroughtActivates::
