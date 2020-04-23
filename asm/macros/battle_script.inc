@@ -1863,4 +1863,10 @@
 	jumpifability BS_TARGET, ABILITY_LEAF_GUARD, \jumpptr
 	1:
 	.endm
+	
+	.macro jumpifsafeguard jumpptr:req
+	jumpifability BS_ATTACKER, ABILITY_INFILTRATOR, 1f
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, \jumpptr
+	1:
+	.endm
 
