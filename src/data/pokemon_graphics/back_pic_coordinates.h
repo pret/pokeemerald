@@ -4195,7 +4195,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_MEGA_DIANCIE] =
     {
         .size = 0,
-        .y_offset = 0,
+        .y_offset = 0x06,
     },
     [SPECIES_MEGA_AUDINO] =
     {
@@ -4524,6 +4524,16 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 0x8,
     },
     // Forms
+    [SPECIES_PRIMAL_KYOGRE] =
+    {
+        .size = 0x84,
+        .y_offset = 0x12
+    },
+    [SPECIES_PRIMAL_GROUDON] =
+    {
+        .size = 0x86,
+        .y_offset = 0x8
+    },
     [SPECIES_SHAYMIN_SKY] =
     {
         .size = 0x65,

@@ -4524,6 +4524,16 @@ const struct MonCoords gMonFrontPicCoords[] =
         .y_offset = 0x8,
     },
     // Forms
+    [SPECIES_PRIMAL_KYOGRE] =
+    {
+        .size = 0x87,
+        .y_offset = 0x0,
+    },
+    [SPECIES_PRIMAL_GROUDON] =
+    {
+        .size = 0x88,
+        .y_offset = 0x0,
+    },
     [SPECIES_SHAYMIN_SKY] =
     {
         .size = 0x87,
