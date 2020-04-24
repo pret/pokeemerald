@@ -45,6 +45,20 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
         image.hasPalette = false;
     }
 
+    if (options->tilemapFilePath != NULL)
+    {
+        int fileSize;
+        image.tilemap.data.affine = ReadWholeFile(options->tilemapFilePath, &fileSize);
+        if (options->isAffineMap && options->bitDepth != 8)
+            FATAL_ERROR("affine maps are necessarily 8bpp\n");
+        image.isAffine = options->isAffineMap;
+        image.tilemap.size = fileSize;
+    }
+    else
+    {
+        image.tilemap.data.affine = NULL;
+    }
+
     ReadImage(inputPath, options->width, options->bitDepth, options->metatileWidth, options->metatileHeight, &image, !image.hasPalette);
 
     image.hasTransparency = options->hasTransparency;
@@ -59,6 +73,7 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
     struct Image image;
 
     image.bitDepth = options->bitDepth;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadPng(inputPath, &image);
 
@@ -77,6 +92,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
     options.width = 1;
     options.metatileWidth = 1;
     options.metatileHeight = 1;
+    options.isAffineMap = false;
 
     for (int i = 3; i < argc; i++)
     {
@@ -134,6 +150,17 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
             if (options.metatileHeight < 1)
                 FATAL_ERROR("metatile height must be positive.\n");
         }
+        else if (strcmp(option, "-tilemap") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No tilemap value following \"-tilemap\".\n");
+            i++;
+            options.tilemapFilePath = argv[i];
+        }
+        else if (strcmp(option, "-affine") == 0)
+        {
+            options.isAffineMap = true;
+        }
         else
         {
             FATAL_ERROR("Unrecognized option \"%s\".\n", option);
@@ -155,6 +182,8 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     options.bitDepth = bitDepth;
     options.metatileWidth = 1;
     options.metatileHeight = 1;
+    options.tilemapFilePath = NULL;
+    options.isAffineMap = false;
 
     for (int i = 3; i < argc; i++)
     {
