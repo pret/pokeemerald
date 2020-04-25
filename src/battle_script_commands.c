@@ -7006,11 +7006,7 @@ static void Cmd_various(void)
                 statId = (Random() % NUM_BATTLE_STATS) + 1;
             } while (!(bits & gBitTable[statId]));
 
-            if (gBattleMons[gActiveBattler].statStages[statId] >= 11)
-                SET_STATCHANGER(statId, 1, FALSE);
-            else
-                SET_STATCHANGER(statId, 2, FALSE);
-
+            SET_STATCHANGER(statId, 2, FALSE);
             gBattlescriptCurrInstr += 7;
         }
         else
