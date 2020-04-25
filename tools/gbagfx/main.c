@@ -301,6 +301,7 @@ void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, 
 void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadLatinFont(inputPath, &image);
     WritePng(outputPath, &image);
@@ -311,6 +312,7 @@ void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNU
 void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     image.bitDepth = 2;
 
@@ -323,6 +325,7 @@ void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNU
 void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadHalfwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
@@ -333,6 +336,7 @@ void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     image.bitDepth = 2;
 
@@ -345,6 +349,7 @@ void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, 
 void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     ReadFullwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
@@ -355,6 +360,7 @@ void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+    image.tilemap.data.affine = NULL; // initialize to NULL to avoid issues in FreeImage
 
     image.bitDepth = 2;
 
