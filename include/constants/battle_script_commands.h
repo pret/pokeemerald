@@ -12,7 +12,7 @@
 #define sTRIPLE_KICK_POWER gBattleScripting + 0x12
 #define sMOVEEND_STATE gBattleScripting + 0x14
 #define sSAVED_STAT_CHANGER gBattleScripting + 0x15
-#define sUNUSED_16 gBattleScripting + 0x16
+#define sSHIFT_SWITCHED gBattleScripting + 0x16
 #define sBATTLER gBattleScripting + 0x17
 #define sB_ANIM_TURN gBattleScripting + 0x18
 #define sB_ANIM_TARGETS_HIT gBattleScripting + 0x19

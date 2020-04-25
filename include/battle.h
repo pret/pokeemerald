@@ -594,7 +594,7 @@ struct BattleScripting
     u16 tripleKickPower;
     u8 moveendState;
     u8 savedStatChanger; // For further use, if attempting to change stat two times(ex. Moody)
-    u8 unused_16;
+    u8 shiftSwitched; // When the game tells you the next enemy's pokemon and you switch. Option for noobs but oh well.
     u8 battler;
     u8 animTurn;
     u8 animTargetsHit;

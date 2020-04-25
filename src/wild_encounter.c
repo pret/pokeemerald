@@ -18,6 +18,7 @@
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "constants/abilities.h"
+#include "constants/battle_config.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
@@ -336,7 +337,7 @@ static u8 PickWildMonNature(void)
     // check synchronize for a pokemon with the same ability
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE
-        && Random() % 2 == 0)
+        && ((B_SYNCHRONIZE_NATURE >= GEN_8) || Random() % 2 == 0))
     {
         return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % 25;
     }

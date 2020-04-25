@@ -1612,9 +1612,9 @@ u8 DoBattlerEndTurnEffects(void)
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[gActiveBattler]);
                     gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                     if (GetBattlerHoldEffect(gBattleStruct->wrappedBy[gActiveBattler], TRUE) == HOLD_EFFECT_BINDING_BAND)
-                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (B_BINDING_DAMAGE >= GEN_6) ? 6 : 8;
                     else
-                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (B_BINDING_DAMAGE >= GEN_6) ? 8 : 16;
 
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
@@ -2310,7 +2310,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleMons[gBattlerAttacker].status2--;
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION)
                 {
-                    if (Random() & 1)
+                    if (Random() % ((B_CONFUSION_SELF_DMG_CHANCE >= GEN_7) ? 3 : 2 == 0))
                     {
                         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                         BattleScriptPushCursor();
@@ -3319,7 +3319,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     effect = 2, statId = STAT_ATK;
                 break;
             case ABILITY_FLASH_FIRE:
-                if (moveType == TYPE_FIRE && !(gBattleMons[battler].status1 & STATUS1_FREEZE))
+                if (moveType == TYPE_FIRE && !((gBattleMons[battler].status1 & STATUS1_FREEZE) && B_FLASH_FIRE_FROZEN <= GEN_4))
                 {
                     if (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_FLASH_FIRE))
                     {

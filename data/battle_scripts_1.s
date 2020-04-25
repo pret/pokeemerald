@@ -907,7 +907,7 @@ BattleScript_EffectPsychoShift:
 	goto BattleScript_ButItFailed
 BattleScript_EffectPsychoShiftCanWork:
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	trypsychoshift BattleScript_MoveEnd
 	attackanimation
 	waitanimation
@@ -2132,7 +2132,7 @@ BattleScript_EffectSleep::
 	jumpifshieldsdown BS_TARGET, BattleScript_LeafGuardProtects
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_SLEEP
@@ -2653,7 +2653,7 @@ BattleScript_EffectToxic::
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	trypoisontype BS_ATTACKER, BS_TARGET, BattleScript_NotAffected
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_TOXIC
@@ -2856,7 +2856,7 @@ BattleScript_EffectConfuse:
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_AlreadyConfused
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_CONFUSION
@@ -2974,7 +2974,7 @@ BattleScript_EffectPoison::
 	trypoisontype BS_ATTACKER, BS_TARGET, BattleScript_NotAffected
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_POISON
@@ -2999,7 +2999,7 @@ BattleScript_EffectParalyze:
 	jumpiftype BS_TARGET, TYPE_ELECTRIC, BattleScript_NotAffected
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	attackanimation
 	waitanimation
@@ -3707,7 +3707,7 @@ BattleScript_EffectSwagger::
 	waitmessage 0x40
 BattleScript_SwaggerTryConfuse:
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	seteffectprimary
 	goto BattleScript_MoveEnd
@@ -4244,7 +4244,7 @@ BattleScript_EffectFlatter::
 	waitmessage 0x40
 BattleScript_FlatterTryConfuse::
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	seteffectprimary
 	goto BattleScript_MoveEnd
@@ -4263,7 +4263,7 @@ BattleScript_EffectWillOWisp::
 	jumpifshieldsdown BS_TARGET, BattleScript_LeafGuardProtects
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
 	setmoveeffect MOVE_EFFECT_BURN
@@ -4536,7 +4536,7 @@ BattleScript_EffectYawn::
 	jumpifleafguard BattleScript_LeafGuardProtects
 	jumpifshieldsdown BS_TARGET, BattleScript_LeafGuardProtects
 	jumpifsubstituteblocks BattleScript_ButItFailed
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	jumpifcantmakeasleep BattleScript_ButItFailed
 	setyawn BattleScript_ButItFailed
@@ -4665,7 +4665,7 @@ BattleScript_TeeterDanceLoop::
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_TeeterDanceAlreadyConfused
 	jumpifhasnohp BS_TARGET, BattleScript_TeeterDanceLoopIncrement
 	accuracycheck BattleScript_TeeterDanceMissed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_TeeterDanceSafeguardProtected
+	jumpifsafeguard BattleScript_TeeterDanceSafeguardProtected
 	attackanimation
 	waitanimation
 	seteffectprimary
@@ -4921,6 +4921,7 @@ BattleScript_GiveExp::
 	end2
 
 BattleScript_HandleFaintedMon::
+	setbyte sSHIFT_SWITCHED, 0x0
 	atk24 BattleScript_82DA8F6
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
 	jumpifbattletype BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonTryChooseAnother
@@ -4931,7 +4932,7 @@ BattleScript_HandleFaintedMon::
 	jumpifbyte CMP_EQUAL, gBattleCommunication + 1, 0x0, BattleScript_FaintedMonTryChooseAnother
 	jumpifplayerran BattleScript_FaintedMonEnd
 	printstring STRINGID_CANTESCAPE2
-BattleScript_FaintedMonTryChooseAnother::
+BattleScript_FaintedMonTryChooseAnother:
 	openpartyscreen 0x3, BattleScript_FaintedMonEnd
 	switchhandleorder BS_FAINTED, 0x2
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonChooseAnother
@@ -4966,9 +4967,8 @@ BattleScript_FaintedMonTryChooseAnother::
 	hidepartystatussummary BS_ATTACKER
 	switchinanim BS_ATTACKER, 0x0
 	waitstate
-	switchineffects BS_ATTACKER
-	resetsentmonsvalue
-BattleScript_FaintedMonChooseAnother::
+	setbyte sSHIFT_SWITCHED, 0x1
+BattleScript_FaintedMonChooseAnother:
 	drawpartystatussummary BS_FAINTED
 	getswitchedmondata BS_FAINTED
 	switchindataupdate BS_FAINTED
@@ -4979,11 +4979,19 @@ BattleScript_FaintedMonChooseAnother::
 	waitstate
 	various7 BS_ATTACKER
 	trytrainerslidelastonmsg BS_FAINTED
+	jumpifbytenotequal sSHIFT_SWITCHED, sZero, BattleScript_FaintedMonShiftSwitched
+BattleScript_FaintedMonChooseAnotherEnd:
 	switchineffects BS_FAINTED
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonEnd
 	cancelallactions
 BattleScript_FaintedMonEnd::
 	end2
+BattleScript_FaintedMonShiftSwitched:
+	copybyte sSAVED_BATTLER, gBattlerTarget
+	switchineffects BS_ATTACKER
+	resetsentmonsvalue
+	copybyte gBattlerTarget, sSAVED_BATTLER
+	goto BattleScript_FaintedMonChooseAnotherEnd
 
 BattleScript_82DA8F6::
 	openpartyscreen 0x5, BattleScript_82DA8FC
