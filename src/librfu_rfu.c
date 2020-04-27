@@ -110,7 +110,7 @@ static const struct LLSFStruct llsf_struct[2] = {
 
 #define xstr(s) str(s)
 #define str(s) #s
-const char version_string[] = "RFU_V" xstr(LIBRFU_VERSION);
+static const char version_string[] = "RFU_V" xstr(LIBRFU_VERSION);
 
 static const char str_checkMbootLL[] = "RFU-MBOOT";
 
@@ -154,16 +154,13 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
     gRfuStatic = (void *)APIBuffer + 0xb4; // + sizeof(*gRfuLinkStatus)
     gRfuFixed = (void *)APIBuffer + 0xdc; // + sizeof(*gRfuStatic)
     gRfuSlotStatusNI[0] = (void *)APIBuffer + 0x1bc; // + sizeof(*gRfuFixed)
-    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c; // + sizeof(*gRfuSlotStatusNI[0])
+    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c; // + sizeof(*gRfuSlotStatusNI[0]) * RFU_CHILD_MAX
     for (i = 1; i < RFU_CHILD_MAX; ++i)
     {
         gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
         gRfuSlotStatusUNI[i] = &gRfuSlotStatusUNI[i - 1][1];
     }
-    // TODO: Is it possible to fix the following 2 statements?
-    // It's equivalent to:
-    // gRfuFixed->STWIBuffer = &APIBuffer->intr;
-    // STWI_init_all(&APIBuffer->intr, sioIntrTable_p, copyInterruptToRam);
+    // remaining space in API buffer is used for `struct RfuIntrStruct`. 
     gRfuFixed->STWIBuffer = (struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1];
     STWI_init_all((struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1], sioIntrTable_p, copyInterruptToRam);
     rfu_STC_clearAPIVariables();
