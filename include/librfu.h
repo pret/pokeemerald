@@ -371,8 +371,7 @@ struct NIComm
     u16 state;                     // Communication state of slot
     u16 failCounter;               // Count of failed transmissions/receptions (Count is increased when transmission/reception of data does not succeed within 1PF=16.7 ms)
     const u8 *now_p[WINDOW_COUNT]; // Address of current send/receive (The data is divided into WINDOW_COUNT blocks and sent in payloadSize units.)
-    // remainSize is u32 in SDK. This is a hack to match ASM
-    s32 remainSize;                // Size of remaining communication data
+    u32 remainSize;                // Size of remaining communication data
     u16 errorCode;                 // Error code
     u8 bmSlot;                     // Expresses the current communication slot in bits
                                    //   (When sending from the Master, because multiple slaves can be specified with bmSlot, communications are terminated based on the failCounter for each child device)
