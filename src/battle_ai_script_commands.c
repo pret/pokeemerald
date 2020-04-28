@@ -731,19 +731,7 @@ static void BattleAI_DoAIProcessing(void)
 
 static void RecordLastUsedMoveByTarget(void)
 {
-    s32 i;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
-            break;
-        if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] != gLastMoves[gBattlerTarget]  // HACK: This redundant condition is a hack to make the asm match.
-         && BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == MOVE_NONE)
-        {
-            BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] = gLastMoves[gBattlerTarget];
-            break;
-        }
-    }
+    RecordMoveBattle(gBattlerTarget, gLastMoves[gBattlerTarget]);
 }
 
 bool32 IsBattlerAIControlled(u32 battlerId)
@@ -768,6 +756,22 @@ void ClearBattlerMoveHistory(u8 battlerId)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         BATTLE_HISTORY->usedMoves[battlerId].moves[i] = MOVE_NONE;
+}
+
+void RecordMoveBattle(u8 battlerId, u32 move)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (BATTLE_HISTORY->usedMoves[battlerId].moves[i] == move)
+            break;
+        if (BATTLE_HISTORY->usedMoves[battlerId].moves[i] == MOVE_NONE)
+        {
+            BATTLE_HISTORY->usedMoves[battlerId].moves[i] = move;
+            break;
+        }
+    }
 }
 
 void RecordAbilityBattle(u8 battlerId, u8 abilityId)

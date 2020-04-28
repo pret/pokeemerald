@@ -16,6 +16,7 @@
 #include "battle_ai_script_commands.h"
 #include "event_data.h"
 #include "link.h"
+#include "malloc.h"
 #include "berry.h"
 #include "pokedex.h"
 #include "mail.h"
@@ -2786,6 +2787,64 @@ static bool32 ShouldChangeFormHpBased(u32 battler)
     return FALSE;
 }
 
+static u8 ForewarnChooseMove(u32 battler)
+{
+    struct Forewarn {
+        u8 battlerId;
+        u8 power;
+        u16 moveId;
+    };
+    u32 i, j, bestId, count;
+    struct Forewarn *data = malloc(sizeof(struct Forewarn) * MAX_BATTLERS_COUNT * MAX_MON_MOVES);
+
+    // Put all moves
+    for (count = 0, i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (IsBattlerAlive(i) && GetBattlerSide(i) != GetBattlerSide(battler))
+        {
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (gBattleMons[i].moves[j] == MOVE_NONE)
+                    continue;
+                data[count].moveId = gBattleMons[i].moves[j];
+                data[count].battlerId = i;
+                switch (gBattleMoves[data[count].moveId].effect)
+                {
+                case EFFECT_OHKO:
+                    data[count].power = 150;
+                    break;
+                case EFFECT_COUNTER:
+                case EFFECT_MIRROR_COAT:
+                case EFFECT_METAL_BURST:
+                    data[count].power = 120;
+                    break;
+                default:
+                    if (gBattleMoves[data[count].moveId].power == 1)
+                        data[count].power = 80;
+                    else
+                        data[count].power = gBattleMoves[data[count].moveId].power;
+                    break;
+                }
+                count++;
+            }
+        }
+    }
+
+    for (bestId = 0, i = 1; i < count; i++)
+    {
+        if (data[i].power > data[bestId].power)
+            bestId = i;
+        else if (data[i].power == data[bestId].power && Random() & 1)
+            bestId = i;
+    }
+
+    gBattlerTarget = data[bestId].battlerId;
+    PREPARE_MOVE_BUFFER(gBattleTextBuff1, data[bestId].moveId)
+    RecordMoveBattle(gBattlerTarget, data[bestId].moveId);
+
+    free(data);
+}
+
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
@@ -2960,6 +3019,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 effect++;
             }
             return effect; // Note: It returns effect as to not record the ability if Frisk does not activate.
+        case ABILITY_FOREWARN:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                ForewarnChooseMove(battler);
+                gBattleCommunication[MULTISTRING_CHOOSER] = 6;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
         case ABILITY_DOWNLOAD:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
