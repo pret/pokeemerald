@@ -3690,9 +3690,7 @@ u8 IsRunningFromBattleImpossible(void)
         return 2;
     }
 
-    if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
-        || (gStatuses3[gActiveBattler] & STATUS3_ROOTED)
-        || gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
+    if (!CanBattlerEscape(gActiveBattler))
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         return 1;
@@ -3868,10 +3866,8 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_SWITCH:
                     *(gBattleStruct->field_58 + gActiveBattler) = gBattlerPartyIndexes[gActiveBattler];
-                    if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
-                        || gBattleTypeFlags & BATTLE_TYPE_ARENA
-                        || gFieldStatuses & STATUS_FIELD_FAIRY_LOCK
-                        || gStatuses3[gActiveBattler] & STATUS3_ROOTED)
+                    if (gBattleTypeFlags & BATTLE_TYPE_ARENA
+                        || !CanBattlerEscape(gActiveBattler))
                     {
                         BtlController_EmitChoosePokemon(0, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, gBattleStruct->field_60[gActiveBattler]);
                     }
@@ -5553,8 +5549,7 @@ static void HandleAction_Run(void)
         }
         else
         {
-            if (gBattleMons[gBattlerAttacker].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION)
-                || gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
+            if (!CanBattlerEscape(gBattlerAttacker))
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = 4;
                 gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;

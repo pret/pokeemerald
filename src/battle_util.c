@@ -4077,6 +4077,14 @@ u32 IsAbilityPreventingEscape(u32 battlerId)
     return 0;
 }
 
+bool32 CanBattlerEscape(u32 battlerId) // no ability check
+{
+    return (GetBattlerHoldEffect(battlerId, TRUE) == HOLD_EFFECT_SHED_SHELL
+            || !((gBattleMons[battlerId].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
+                || (gStatuses3[battlerId] & STATUS3_ROOTED)
+                || gFieldStatuses & STATUS_FIELD_FAIRY_LOCK));
+}
+
 void BattleScriptExecute(const u8 *BS_ptr)
 {
     gBattlescriptCurrInstr = BS_ptr;
