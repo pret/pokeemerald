@@ -4619,7 +4619,11 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     gCurrentActionFuncId = gActionsByTurnOrder[0];
     gBattleStruct->dynamicMoveType = 0;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
         gBattleStruct->ateBoost[i] = FALSE;
+        gSpecialStatuses[i].gemBoost = FALSE;
+    }
+
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
@@ -4968,20 +4972,24 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     if (move == MOVE_STRUGGLE)
         return;
 
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->ateBoost[battlerAtk] = 0;
+    gSpecialStatuses[battlerAtk].gemBoost = 0;
+
     if (gBattleMoves[move].effect == EFFECT_WEATHER_BALL)
     {
         if (WEATHER_HAS_EFFECT)
         {
             if (gBattleWeather & WEATHER_RAIN_ANY)
-                *(&gBattleStruct->dynamicMoveType) = TYPE_WATER | 0x80;
+                gBattleStruct->dynamicMoveType = TYPE_WATER | 0x80;
             else if (gBattleWeather & WEATHER_SANDSTORM_ANY)
-                *(&gBattleStruct->dynamicMoveType) = TYPE_ROCK | 0x80;
+                gBattleStruct->dynamicMoveType = TYPE_ROCK | 0x80;
             else if (gBattleWeather & WEATHER_SUN_ANY)
-                *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | 0x80;
+                gBattleStruct->dynamicMoveType = TYPE_FIRE | 0x80;
             else if (gBattleWeather & WEATHER_HAIL_ANY)
-                *(&gBattleStruct->dynamicMoveType) = TYPE_ICE | 0x80;
+                gBattleStruct->dynamicMoveType = TYPE_ICE | 0x80;
             else
-                *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | 0x80;
+                gBattleStruct->dynamicMoveType = TYPE_NORMAL | 0x80;
         }
     }
     else if (gBattleMoves[move].effect == EFFECT_HIDDEN_POWER)
