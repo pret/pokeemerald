@@ -27,7 +27,17 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
 
     if (options->paletteFilePath != NULL)
     {
-        ReadGbaPalette(options->paletteFilePath, &image.palette);
+        char *paletteFileExtension = GetFileExtensionAfterDot(options->paletteFilePath);
+
+        if (strcmp(paletteFileExtension, "gbapal") == 0)
+        {
+            ReadGbaPalette(options->paletteFilePath, &image.palette);
+        }
+        else
+        {
+            ReadJascPalette(options->paletteFilePath, &image.palette);
+        }
+
         image.hasPalette = true;
     }
     else
@@ -59,7 +69,7 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
 
 void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **argv)
 {
-    char *inputFileExtension = GetFileExtension(inputPath);
+    char *inputFileExtension = GetFileExtensionAfterDot(inputPath);
     struct GbaToPngOptions options;
     options.paletteFilePath = NULL;
     options.bitDepth = inputFileExtension[0] - '0';
@@ -138,7 +148,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
 
 void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **argv)
 {
-    char *outputFileExtension = GetFileExtension(outputPath);
+    char *outputFileExtension = GetFileExtensionAfterDot(outputPath);
     int bitDepth = outputFileExtension[0] - '0';
     struct PngToGbaOptions options;
     options.numTiles = 0;
@@ -198,9 +208,17 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     ConvertPngToGba(inputPath, outputPath, &options);
 }
 
+void HandlePngToJascPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+{
+    struct Palette palette = {0};
+
+    ReadPngPalette(inputPath, &palette);
+    WriteJascPalette(outputPath, &palette);
+}
+
 void HandlePngToGbaPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
-    struct Palette palette;
+    struct Palette palette = {0};
 
     ReadPngPalette(inputPath, &palette);
     WriteGbaPalette(outputPath, &palette);
@@ -208,7 +226,7 @@ void HandlePngToGbaPaletteCommand(char *inputPath, char *outputPath, int argc UN
 
 void HandleGbaToJascPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
-    struct Palette palette;
+    struct Palette palette = {0};
 
     ReadGbaPalette(inputPath, &palette);
     WriteJascPalette(outputPath, &palette);
@@ -241,7 +259,7 @@ void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, 
         }
     }
 
-    struct Palette palette;
+    struct Palette palette = {0};
 
     ReadJascPalette(inputPath, &palette);
 
@@ -483,6 +501,8 @@ void HandleHuffDecompressCommand(char *inputPath, char *outputPath, int argc UNU
 
 int main(int argc, char **argv)
 {
+    char converted = 0;
+
     if (argc < 3)
         FATAL_ERROR("Usage: gbagfx INPUT_PATH OUTPUT_PATH [options...]\n");
 
@@ -495,6 +515,7 @@ int main(int argc, char **argv)
         { "png", "4bpp", HandlePngToGbaCommand },
         { "png", "8bpp", HandlePngToGbaCommand },
         { "png", "gbapal", HandlePngToGbaPaletteCommand },
+        { "png", "pal", HandlePngToJascPaletteCommand },
         { "gbapal", "pal", HandleGbaToJascPaletteCommand },
         { "pal", "gbapal", HandleJascToGbaPaletteCommand },
         { "latfont", "png", HandleLatinFontToPngCommand },
@@ -514,14 +535,39 @@ int main(int argc, char **argv)
 
     char *inputPath = argv[1];
     char *outputPath = argv[2];
-    char *inputFileExtension = GetFileExtension(inputPath);
-    char *outputFileExtension = GetFileExtension(outputPath);
+    char *inputFileExtension = GetFileExtensionAfterDot(inputPath);
+    char *outputFileExtension = GetFileExtensionAfterDot(outputPath);
 
     if (inputFileExtension == NULL)
         FATAL_ERROR("Input file \"%s\" has no extension.\n", inputPath);
 
     if (outputFileExtension == NULL)
-        FATAL_ERROR("Output file \"%s\" has no extension.\n", outputPath);
+    {
+        outputFileExtension = GetFileExtension(outputPath);
+
+        if (*outputFileExtension == '.')
+            outputFileExtension++;
+
+        if (*outputFileExtension == 0)
+            FATAL_ERROR("Output file \"%s\" has no extension.\n", outputPath);
+
+        size_t newOutputPathSize = strlen(inputPath) - strlen(inputFileExtension) + strlen(outputFileExtension);
+        outputPath = malloc(newOutputPathSize);
+
+        if (outputPath == NULL)
+            FATAL_ERROR("Failed to allocate memory for new output path.\n");
+
+        for (int i = 0; i < newOutputPathSize; i++)
+        {
+            outputPath[i] = inputPath[i];
+
+            if (outputPath[i] == '.')
+            {
+                strcpy(&outputPath[i + 1], outputFileExtension);
+                break;
+            }
+        }
+    }
 
     for (int i = 0; handlers[i].function != NULL; i++)
     {
@@ -529,9 +575,16 @@ int main(int argc, char **argv)
             && (handlers[i].outputFileExtension == NULL || strcmp(handlers[i].outputFileExtension, outputFileExtension) == 0))
         {
             handlers[i].function(inputPath, outputPath, argc, argv);
-            return 0;
+            converted = 1;
+            break;
         }
     }
 
-    FATAL_ERROR("Don't know how to convert \"%s\" to \"%s\".\n", inputPath, outputPath);
+    if (outputPath != argv[2])
+        free(outputPath);
+
+    if (!converted)
+        FATAL_ERROR("Don't know how to convert \"%s\" to \"%s\".\n", argv[1], argv[2]);
+
+    return 0;
 }

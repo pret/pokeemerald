@@ -16,7 +16,7 @@ static void sub_8135780(void);
 // text
 bool8 SetUpFieldMove_Dig(void)
 {
-    if (CanUseEscapeRopeOnCurrMap() == TRUE)
+    if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = hm2_dig;

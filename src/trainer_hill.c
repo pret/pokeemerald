@@ -33,6 +33,7 @@
 #include "constants/trainers.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
+#include "constants/trainer_types.h"
 
 #define HILL_TAG_NORMAL 0
 #define HILL_TAG_VARIETY 1
@@ -258,7 +259,7 @@ static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
     .movementType = MOVEMENT_TYPE_LOOK_AROUND,
     .movementRangeX = 1,
     .movementRangeY = 1,
-    .trainerType = 1,
+    .trainerType = TRAINER_TYPE_NORMAL,
 };
 
 static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] = 
