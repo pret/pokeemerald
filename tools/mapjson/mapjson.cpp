@@ -108,9 +108,9 @@ string generate_map_header_text(Json map_data, Json layouts_data, string version
         text << "\t.byte " << map_data["show_map_name"].bool_value() << "\n";
     else if (version == "emerald")
         text << "\tmap_header_flags "
-             << "allow_bike=" << map_data["allow_bike"].bool_value() << ", "
-             << "allow_escape_rope=" << map_data["allow_escape_rope"].bool_value() << ", "
-             << "allow_run=" << map_data["allow_running"].bool_value() << ", "
+             << "allow_cycling=" << map_data["allow_cycling"].bool_value() << ", "
+             << "allow_escaping=" << map_data["allow_escaping"].bool_value() << ", "
+             << "allow_running=" << map_data["allow_running"].bool_value() << ", "
              << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
 
      text << "\t.byte " << map_data["battle_scene"].string_value() << "\n\n";

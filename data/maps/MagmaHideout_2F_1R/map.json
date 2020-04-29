@@ -7,8 +7,8 @@
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
-  "allow_bike": true,
-  "allow_escape_rope": true,
+  "allow_cycling": true,
+  "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
@@ -22,7 +22,7 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN",
       "movement_range_x": 5,
       "movement_range_y": 4,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "MagmaHideout_2F_1R_EventScript_Grunt4",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
@@ -35,7 +35,7 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT",
       "movement_range_x": 7,
       "movement_range_y": 6,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "MagmaHideout_2F_1R_EventScript_Grunt5",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
@@ -48,7 +48,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "7",
       "script": "MagmaHideout_2F_1R_EventScript_Grunt14",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
@@ -61,7 +61,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "MagmaHideout_2F_1R_EventScript_Grunt3",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"

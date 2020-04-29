@@ -917,9 +917,9 @@ static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
     DisplayItemMessageOnField(taskId, gStringVar4, Task_UseDigEscapeRopeOnField);
 }
 
-bool8 CanUseEscapeRopeOnCurrMap(void)
+bool8 CanUseDigOrEscapeRopeOnCurMap(void)
 {
-    if (gMapHeader.flags & MAP_ALLOW_ESCAPE_ROPE)
+    if (gMapHeader.flags & MAP_ALLOW_ESCAPING)
         return TRUE;
     else
         return FALSE;
@@ -927,7 +927,7 @@ bool8 CanUseEscapeRopeOnCurrMap(void)
 
 void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 {
-    if (CanUseEscapeRopeOnCurrMap() == TRUE)
+    if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_EscapeRope;
         SetUpItemUseOnFieldCallback(taskId);

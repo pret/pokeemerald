@@ -27,6 +27,7 @@
 #include "constants/field_effects.h"
 #include "constants/items.h"
 #include "constants/mauville_old_man.h"
+#include "constants/trainer_types.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 
@@ -1454,7 +1455,7 @@ u8 SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 l
     objectEventTemplate.movementType = movementBehavior;
     objectEventTemplate.movementRangeX = 0;
     objectEventTemplate.movementRangeY = 0;
-    objectEventTemplate.trainerType = 0;
+    objectEventTemplate.trainerType = TRAINER_TYPE_NONE;
     objectEventTemplate.trainerRange_berryTreeId = 0;
     return SpawnSpecialObjectEvent(&objectEventTemplate);
 }
@@ -2344,7 +2345,8 @@ static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
     return GetObjectEventFlagIdByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
 }
 
-u8 sub_808F080(u8 localId, u8 mapNum, u8 mapGroup)
+// Unused
+static u8 GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
 
@@ -2355,7 +2357,8 @@ u8 sub_808F080(u8 localId, u8 mapNum, u8 mapGroup)
     return gObjectEvents[objectEventId].trainerType;
 }
 
-u8 sub_808F0BC(u8 objectEventId)
+// Unused
+static u8 GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
 {
     return gObjectEvents[objectEventId].trainerType;
 }
@@ -2604,7 +2607,7 @@ bool8 ObjectEventIsTrainerAndCloseToPlayer(struct ObjectEvent *objectEvent)
     {
         return FALSE;
     }
-    if (objectEvent->trainerType != 1 && objectEvent->trainerType != 3)
+    if (objectEvent->trainerType != TRAINER_TYPE_NORMAL && objectEvent->trainerType != TRAINER_TYPE_BURIED)
     {
         return FALSE;
     }
