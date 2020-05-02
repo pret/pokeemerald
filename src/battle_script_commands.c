@@ -2442,7 +2442,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
             BattleScriptPush(gBattlescriptCurrInstr + 1);
 
             if (sStatusFlagsForMoveEffects[gBattleScripting.moveEffect] == STATUS1_SLEEP)
-                gBattleMons[gEffectBattler].status1 |= (B_SLEEP_TURNS >= GEN_5) ? ((Random() & 2) + 1) : ((Random() & 3) + 2);
+                gBattleMons[gEffectBattler].status1 |= (B_SLEEP_TURNS >= GEN_5) ? ((Random() % 3) + 2) : ((Random() % 4) + 3);
             else
                 gBattleMons[gEffectBattler].status1 |= sStatusFlagsForMoveEffects[gBattleScripting.moveEffect];
 
