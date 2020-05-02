@@ -1225,10 +1225,10 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
         rand = randMin + Random() % (randMax - randMin + 1);
 
         // Round upwards
-        if ((rand % NUM_BERRY_STAGES) >= NUM_BERRY_STAGES / 2)
-            extraYield = rand / NUM_BERRY_STAGES + 1;
+        if ((rand % NUM_WATER_STAGES) >= NUM_WATER_STAGES / 2)
+            extraYield = rand / NUM_WATER_STAGES + 1;
         else
-            extraYield = rand / NUM_BERRY_STAGES;
+            extraYield = rand / NUM_WATER_STAGES;
         return extraYield + min;
     }
 }
