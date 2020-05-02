@@ -1207,8 +1207,8 @@ static u8 GetNumStagesWateredByBerryTreeId(u8 id)
 // However, this function actually skews towards higher berry yields, because
 // it rounds `extraYield` to the nearest whole number.
 //
-// See resulting yields: https://pastebin.com/RLGnP9Ng, and 
-// bug fix: https://pastebin.com/cDjnUWL0.
+// See resulting yields: https://gist.github.com/hondew/2a099dbe54aa91414decdbfaa524327d,
+// and bug fix: https://gist.github.com/hondew/0f0164e5b9dadfd72d24f30f2c049a0b.
 static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
 {
     u32 randMin;
