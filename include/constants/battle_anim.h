@@ -321,6 +321,10 @@
 #define ANIM_TAG_STEALTH_ROCK               (ANIM_SPRITES_START + 311)
 #define ANIM_TAG_POISON_JAB                 (ANIM_SPRITES_START + 312)
 #define ANIM_TAG_GREEN_POISON_BUBBLE        (ANIM_SPRITES_START + 313)
+#define ANIM_TAG_FLASH_CANNON_BALL          (ANIM_SPRITES_START + 314)
+#define ANIM_TAG_WATER_GUN                  (ANIM_SPRITES_START + 315)
+#define ANIM_TAG_PUNISHMENT_BLADES          (ANIM_SPRITES_START + 316)
+#define ANIM_TAG_QUICK_GUARD_HAND           (ANIM_SPRITES_START + 317)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -376,6 +380,9 @@
 #define BG_GIGA_IMPACT_CONTEST 30
 #define BG_TRICK_ROOM 31
 #define BG_ROCK_WRECKER 32
+#define BG_SPACIAL_REND_ON_OPPONENT 33
+#define BG_SPACIAL_REND_ON_PLAYER 34
+#define BG_DARK_VOID 35
 
 // table ids for general animations
 #define B_ANIM_CASTFORM_CHANGE          0x0

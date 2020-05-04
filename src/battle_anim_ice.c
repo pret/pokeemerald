@@ -561,6 +561,17 @@ const struct SpriteTemplate gAvalancheSpriteTemplate =
     .callback = AvalancheAnim_Step,
 };
 
+const struct SpriteTemplate gChatterSingNotesTemplate =
+{
+    .tileTag = ANIM_TAG_MUSIC_NOTES,
+    .paletteTag = ANIM_TAG_MUSIC_NOTES,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = gMusicNotesAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_IceCrystalHit,
+    .callback = AnimIceEffectParticle
+};
+
 static void AvalancheAnim_Step(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)

@@ -456,6 +456,54 @@ const struct SpriteTemplate gShockWaveProgressingBoltSpriteTemplate =
     .callback = AnimShockWaveProgressingBolt,
 };
 
+const struct SpriteTemplate gFlashCannonGrayChargeTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_GrowingElectricOrb,
+    .callback = AnimGrowingChargeOrb
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_JudgmentBall[] =
+{
+	AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+	AFFINEANIMCMD_FRAME(8, 8, 0, 15), //Half size
+	AFFINEANIMCMD_FRAME(0, 0, 0, 120), //Delay
+	AFFINEANIMCMD_FRAME(24, 24, 0, 5), //Normal size
+	AFFINEANIMCMD_FRAME(0, 0, 0, 10), //Delay
+	AFFINEANIMCMD_FRAME(-16, -16, 0, 15), //Revert to 1 px
+	AFFINEANIMCMD_END,
+};
+static const union AffineAnimCmd* const sSpriteAffineAnimTable_JudgmentBall[] =
+{
+	sSpriteAffineAnim_JudgmentBall,
+};
+const struct SpriteTemplate gJudgmentBlackChargeTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sSpriteAffineAnimTable_JudgmentBall,
+    .callback = AnimGrowingChargeOrb
+};
+
+const struct SpriteTemplate gSeedFlareGreenChargeTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_GrowingElectricOrb,
+    .callback = AnimGrowingChargeOrb
+};
+
+// functions
 static void AnimLightning(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)

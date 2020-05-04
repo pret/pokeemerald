@@ -1439,6 +1439,10 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_StealthRock, 0x0080, ANIM_TAG_STEALTH_ROCK},
     {gBattleAnimSpriteGfx_PoisonJab, 0x0080, ANIM_TAG_POISON_JAB},
     {gBattleAnimSpriteGfx_PoisonBubble, 0x0180, ANIM_TAG_GREEN_POISON_BUBBLE},
+    {gBattleAnimSpriteGfx_FlashCannonBall, 0x200, ANIM_TAG_FLASH_CANNON_BALL},
+    {gBattleAnimSpriteGfx_WaterGun, 0x180, ANIM_TAG_WATER_GUN},
+    {gBattleAnimSpriteGfx_Punishment, 0xa00, ANIM_TAG_PUNISHMENT_BLADES},
+    {gBattleAnimSpriteGfx_QuickGuard, 0x200, ANIM_TAG_QUICK_GUARD_HAND},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1757,6 +1761,10 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_StealthRock, ANIM_TAG_STEALTH_ROCK},
     {gBattleAnimSpritePal_PoisonJab, ANIM_TAG_POISON_JAB},
     {gBattleAnimSpritePal_Vine, ANIM_TAG_GREEN_POISON_BUBBLE},
+    {gBattleAnimSpritePal_FlashCannonBall,	ANIM_TAG_FLASH_CANNON_BALL},
+    {gBattleAnimSpritePal_WaterGun,	ANIM_TAG_WATER_GUN},
+    {gBattleAnimSpritePal_Punishment,	ANIM_TAG_PUNISHMENT_BLADES},
+    {gBattleAnimSpritePal_QuickGuard,	ANIM_TAG_QUICK_GUARD_HAND},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
@@ -1794,6 +1802,9 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_GIGA_IMPACT_CONTEST] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_ImpactContests},
     [BG_TRICK_ROOM] = {gBattleAnimBgImage_TrickRoom, gBattleAnimBgPalette_TrickRoom, gBattleAnimBgTilemap_TrickRoom},
     [BG_ROCK_WRECKER] = {gBattleAnimBgImage_RockWrecker, gBattleAnimBgPalette_RockWrecker, gBattleAnimBgTilemap_RockWrecker},
+    [BG_SPACIAL_REND_ON_OPPONENT] = {gBattleAnimBgImage_SpacialRendOpponent, gBattleAnimBgPalette_SpacialRendOpponent, gBattleAnimBgTilemap_SpacialRendOpponent},
+    [BG_SPACIAL_REND_ON_PLAYER] = {gBattleAnimBgImage_SpacialRendPlayer, gBattleAnimBgPalette_SpacialRendPlayer, gBattleAnimBgTilemap_SpacialRendPlayer},
+    [BG_DARK_VOID] = {gBattleAnimBgImage_DarkVoid, gBattleAnimBgPalette_DarkVoid, gBattleAnimBgTilemap_DarkVoid},
 };
 
 static void (* const sScriptCmdTable[])(void) =
