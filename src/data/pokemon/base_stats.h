@@ -7,9 +7,9 @@
         .baseHP = 50,                       \
         .baseAttack = 150,                  \
         .baseDefense = 50,                  \
+        .baseSpeed = 150,                   \
         .baseSpAttack = 150,                \
         .baseSpDefense = 50,                \
-        .baseSpeed = 150,                   \
         .type1 = TYPE_NORMAL,               \
         .type2 = TYPE_NORMAL,               \
         .catchRate = 3,                     \

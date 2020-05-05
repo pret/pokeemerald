@@ -7,8 +7,8 @@
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
-  "allow_bike": false,
-  "allow_escape_rope": false,
+  "allow_cycling": false,
+  "allow_escaping": false,
   "allow_running": false,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_AQUA",
@@ -22,7 +22,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "AquaHideout_B1F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
@@ -35,7 +35,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
       "script": "AquaHideout_B1F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
@@ -48,7 +48,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_ItemMaxElixir",
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_MAX_ELIXIR"
@@ -61,7 +61,7 @@
       "movement_type": "MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE",
       "movement_range_x": 4,
       "movement_range_y": 0,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "AquaHideout_B1F_EventScript_Grunt5",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
@@ -74,7 +74,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_ItemMasterBall",
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL"
@@ -87,7 +87,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_Electrode1",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1"
@@ -100,7 +100,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_ItemNugget",
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_NUGGET"
@@ -113,7 +113,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_Electrode2",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2"
@@ -126,7 +126,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "AquaHideout_B1F_EventScript_Grunt7",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"

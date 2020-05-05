@@ -1,3 +1,4 @@
+#include <limits.h>
 #include "global.h"
 #include "bg.h"
 #include "dma3.h"
@@ -1178,20 +1179,19 @@ void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s
 {
     u16 var;
 
-    if (palette1 == 16)
-        goto CASE_16;
     switch (palette1)
     {
-    case 0 ... 16:
+    case 0 ... 15:
         var = ((*src + tileOffset) & 0xFFF) + ((palette1 + palette2) << 12);
         break;
-    CASE_16:
+    case 16:
         var = *dest;
         var &= 0xFC00;
         var += palette2 << 12;
         var |= (*src + tileOffset) & 0x3FF;
         break;
     default:
+    case 17 ... INT_MAX:
         var = *src + tileOffset + (palette2 << 12);
         break;
     }
