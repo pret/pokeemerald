@@ -26,4 +26,12 @@
 #define UNITS_METRIC
 #endif
 
+// Fix bugs which may or may not be related to modern gcc versions.
+// There is no reason for keeping bugs other than matching, so
+// always fix bugs when the build isn't supposed to match with
+// a newer compiler.
+#if MODERN
+#define BUGFIX
+#endif
+
 #endif // GUARD_CONFIG_H
