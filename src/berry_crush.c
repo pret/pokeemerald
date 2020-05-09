@@ -3209,6 +3209,11 @@ static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attr
     return 0;
 }
 
+#if MODERN
+// TODO remove this as soon as the code below is understood
+// add a UBFIX if required (code buggy?)
+__attribute__((optimize("no-aggressive-loop-optimizations")))
+#endif
 void sub_8024578(struct BerryCrushGame *r4)
 {
     u8 r5 = 0;

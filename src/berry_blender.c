@@ -2202,6 +2202,11 @@ static s16 sub_8081BD4(void)
     return sUnknown_03000E06;
 }
 
+#if MODERN
+// TODO remove this as soon as the code below is understood
+// add a UBFIX if required (code buggy?)
+__attribute__((optimize("no-aggressive-loop-optimizations")))
+#endif
 static void Blender_CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *pokeblock, u8 playersNo, u8 *flavors, u16 maxRPM)
 {
     s32 i, j;
