@@ -14,6 +14,7 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 ## Contents
 
 - [RNG does not get seeded](#rng-does-not-get-seeded)
+- [Scrolling through items in the bag causes the image to flicker](#scrolling-through-items-in-the-bag-causes-the-image-to-flicker)
 
 
 ## RNG does not get seeded
@@ -38,5 +39,39 @@ And edit `AgbMain`:
 	InitMapMusic();
 +	SeedRngWithRtc();
 	ClearDma3Requests();
+	...
+```
+
+## Scrolling through items in the bag causes the image to flicker
+
+**Fix:** Add the following function to [src/item_menu_icons.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu_icons.c):
+```diff
++void HideBagItemIconSprite(u8 id)
++{
++	u8 *spriteId = &gBagMenu->spriteId[10];
++	if (spriteId[id] != 0xFF)
++	{
++		gSprites[spriteId[id]].invisible = TRUE;
++	}
++}
+
+```
+
+and its corresponding declaration in [include/item_menu_icons.h](https://github.com/pret/pokeemerald/blob/master/include/item_menu_icons.h):
+
+```diff
++void HideBagItemIconSprite(u8 id);
+
+```
+
+Then edit `BagMenu_MoveCursorCallback` in [src/item_menu.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu.c):
+
+```diff
+	...
+{
+-	RemoveBagItemIconSprite(1 ^ gBagMenu->unk81B_1);
++	HideBagItemIconSprite(gBagMenu->unk81B_1 ^ 1);
++	RemoveBagItemIconSprite(gBagMenu->unk81B_1);
+	if (a != -2)
 	...
 ```
