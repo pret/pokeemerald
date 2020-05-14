@@ -14,7 +14,7 @@
 	.include "src/dodrio_berry_picking.o"
 	.include "src/rtc.o"
 	.include "src/main_menu.o"
-	.include "src/rom_8034C54.o"
+	.include "src/digit_obj_util.o"
 	.include "src/egg_hatch.o"
 	.include "src/berry_blender.o"
 	.include "src/play_time.o"

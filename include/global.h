@@ -465,7 +465,7 @@ struct SaveBlock2
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xA8*/ u32 field_A8; // Written to, but never read.
+    /*0xA8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
     /*0xAC*/ u32 encryptionKey;
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
@@ -637,7 +637,7 @@ struct MauvilleManHipster
 struct MauvilleOldManTrader
 {
     u8 id;
-    u8 decorIds[NUM_TRADER_ITEMS];
+    u8 decorations[NUM_TRADER_ITEMS];
     u8 playerNames[NUM_TRADER_ITEMS][11];
     u8 alreadyTraded;
     u8 language[NUM_TRADER_ITEMS];
@@ -928,16 +928,16 @@ struct SaveBlock1
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
     /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
     /*0x1A9C*/ struct SecretBase secretBases[SECRET_BASES_COUNT];
-    /*0x271C*/ u8 playerRoomDecor[DECOR_MAX_PLAYERS_HOUSE];
-    /*0x2728*/ u8 playerRoomDecorPos[DECOR_MAX_PLAYERS_HOUSE];
-    /*0x2734*/ u8 decorDesk[10];
-    /*0x273E*/ u8 decorChair[10];
-    /*0x2748*/ u8 decorPlant[10];
-    /*0x2752*/ u8 decorOrnament[30];
-    /*0x2770*/ u8 decorMat[30];
-    /*0x278E*/ u8 decorPoster[10];
-    /*0x2798*/ u8 decorDoll[40];
-    /*0x27C0*/ u8 decorCushion[10];
+    /*0x271C*/ u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE];
+    /*0x2728*/ u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE];
+    /*0x2734*/ u8 decorationDesks[10];
+    /*0x273E*/ u8 decorationChairs[10];
+    /*0x2748*/ u8 decorationPlants[10];
+    /*0x2752*/ u8 decorationOrnaments[30];
+    /*0x2770*/ u8 decorationMats[30];
+    /*0x278E*/ u8 decorationPosters[10];
+    /*0x2798*/ u8 decorationDolls[40];
+    /*0x27C0*/ u8 decorationCushions[10];
     /*0x27CA*/ u8 padding_27CA[2];
     /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
     /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];

@@ -696,11 +696,11 @@ static void AcroBikeTransition_WheelieMoving(u8 direction)
             if (MetatileBehavior_IsBumpySlope(playerObjEvent->currentMetatileBehavior))
                 PlayerIdleWheelie(direction);
             else
-                sub_808B980(direction);  //hit wall?
+                PlayerWheelieInPlace(direction);  //hit wall?
         }
         return;
     }
-    sub_808B9BC(direction);
+    PlayerWheelieMove(direction);
     gPlayerAvatar.runningState = MOVING;
 }
 
@@ -730,11 +730,11 @@ static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
             if (MetatileBehavior_IsBumpySlope(playerObjEvent->currentMetatileBehavior))
                 PlayerIdleWheelie(direction);
             else
-                sub_808B980(direction);  //hit wall?
+                PlayerWheelieInPlace(direction);  //hit wall?
         }
         return;
     }
-    sub_808B9A4(direction);
+    PlayerPopWheelieWhileMoving(direction);
     gPlayerAvatar.runningState = MOVING;
 }
 
@@ -757,7 +757,7 @@ static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
             PlayerEndWheelie(direction);
         return;
     }
-    sub_808B9D4(direction);
+    PlayerEndWheelieWhileMoving(direction);
 }
 
 void Bike_TryAcroBikeHistoryUpdate(u16 newKeys, u16 heldKeys)
@@ -1049,14 +1049,14 @@ void Bike_HandleBumpySlopeJump(void)
         if (MetatileBehavior_IsBumpySlope(tileBehavior))
         {
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
-            sub_808C1B4(GetPlayerMovementDirection());
+            PlayerUseAcroBikeOnBumpySlope(GetPlayerMovementDirection());
         }
     }
 }
 
 bool32 IsRunningDisallowed(u8 metatile)
 {
-    if (!(gMapHeader.flags & MAP_ALLOW_RUN) || IsRunningDisallowedByMetatile(metatile) == TRUE)
+    if (!(gMapHeader.flags & MAP_ALLOW_RUNNING) || IsRunningDisallowedByMetatile(metatile) == TRUE)
         return TRUE;
     else
         return FALSE;

@@ -94,7 +94,7 @@ static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
     [FRONTIER_FACILITY_PYRAMID] = {21,  70, 35, 0},
 };
 
-static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
+static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZE] =
 {
     [FRONTIER_FACILITY_TOWER] =
     {
@@ -1778,9 +1778,9 @@ void ResetWinStreaks(void)
     s32 battleMode, lvlMode;
 
     gSaveBlock2Ptr->frontier.winStreakActiveFlags = 0;
-    for (battleMode = 0; battleMode < 4; battleMode++)
+    for (battleMode = 0; battleMode < FRONTIER_MODE_COUNT; battleMode++)
     {
-        for (lvlMode = 0; lvlMode < 2; lvlMode++)
+        for (lvlMode = 0; lvlMode < FRONTIER_LVL_TENT; lvlMode++)
         {
             gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
             if (battleMode < FRONTIER_MODE_MULTIS)

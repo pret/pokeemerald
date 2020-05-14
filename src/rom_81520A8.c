@@ -2,7 +2,7 @@
 #include "rom_81520A8.h"
 #include "malloc.h"
 #include "main.h"
-#include "rom_8034C54.h"
+#include "digit_obj_util.h"
 
 static EWRAM_DATA struct
 {
@@ -138,7 +138,7 @@ static bool32 sub_81523F4(struct UnkStruct_81520A8 *structPtr, u8 arg1)
         return FALSE;
 
     structPtr->unk18 = arg1;
-    structPtr->tileNum = (sub_80355F8(structPtr->oam.shape, structPtr->oam.size) * arg1) + tileStart;
+    structPtr->tileNum = (GetTilesPerImage(structPtr->oam.shape, structPtr->oam.size) * arg1) + tileStart;
     return TRUE;
 }
 

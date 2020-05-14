@@ -484,9 +484,13 @@ static void sub_801B7D8(u32 command)
         }
 
         if (dest == NULL)
+        {
             AGB_ASSERT(0);
+        }
         else if (++(*dest) > 999)
+        {
             *dest = 999;
+        }
     }
 }
 

@@ -2578,7 +2578,7 @@ static void CreateDomeOpponentMons(u16 tournamentTrainerId)
         // Create mon if it was selected, starting from back
         for (i = FRONTIER_PARTY_SIZE - 1; i >= 0; i--)
         {
-            if (selectedMonBits & 4)
+            if (selectedMonBits & (1 << (FRONTIER_PARTY_SIZE - 1)))
             {
                 CreateDomeOpponentMon(monsCount, tournamentTrainerId, i, otId);
                 monsCount++;

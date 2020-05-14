@@ -221,9 +221,9 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 static void ItemUseOnFieldCB_Bike(u8 taskId)
 {
     if (!ItemId_GetSecondaryId(gSpecialVar_ItemId))
-        GetOnOffBike(2);
+        GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE);
     else
-        GetOnOffBike(4);
+        GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
     ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -911,9 +911,9 @@ static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
     DisplayItemMessageOnField(taskId, gStringVar4, Task_UseDigEscapeRopeOnField);
 }
 
-bool8 CanUseEscapeRopeOnCurrMap(void)
+bool8 CanUseDigOrEscapeRopeOnCurMap(void)
 {
-    if (gMapHeader.flags & MAP_ALLOW_ESCAPE_ROPE)
+    if (gMapHeader.flags & MAP_ALLOW_ESCAPING)
         return TRUE;
     else
         return FALSE;
@@ -921,7 +921,7 @@ bool8 CanUseEscapeRopeOnCurrMap(void)
 
 void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 {
-    if (CanUseEscapeRopeOnCurrMap() == TRUE)
+    if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_EscapeRope;
         SetUpItemUseOnFieldCallback(taskId);

@@ -4,7 +4,7 @@ EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 8229A34
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_OnTransition: @ 8229A3F
-	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_1
+	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY
 	call_if_unset FLAG_MET_SCOTT_IN_EVERGRANDE, EverGrandeCity_PokemonCenter_1F_EventScript_TryShowScott
 	end
 

@@ -90,13 +90,8 @@
 
 #define RFU_MBOOT_DOWNLOADER_SERIAL_NO  0x0000             // The game serial number of the multi-boot downloader (programs that boot without a Game Pak)
 
-#if LIBRFU_VERSION >= 1028
-#define RFU_API_BUFF_SIZE_RAM           0x0e8c             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in RAM)
-#define RFU_API_BUFF_SIZE_ROM           0x052c             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in ROM)
-#else
 #define RFU_API_BUFF_SIZE_RAM           0x0e64             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in RAM)
 #define RFU_API_BUFF_SIZE_ROM           0x0504             // Necessary size for buffer specified by rfu_initializeAPI (fast communication version that operates the library SIO interrupt routines in ROM)
-#endif
 
 #define RFU_CHILD_MAX                   4                  // Maximum number of slaves that can be connected to one parent device
 
@@ -376,8 +371,7 @@ struct NIComm
     u16 state;                     // Communication state of slot
     u16 failCounter;               // Count of failed transmissions/receptions (Count is increased when transmission/reception of data does not succeed within 1PF=16.7 ms)
     const u8 *now_p[WINDOW_COUNT]; // Address of current send/receive (The data is divided into WINDOW_COUNT blocks and sent in payloadSize units.)
-    // remainSize is u32 in SDK. This is a hack to match ASM
-    s32 remainSize;                // Size of remaining communication data
+    u32 remainSize;                // Size of remaining communication data
     u16 errorCode;                 // Error code
     u8 bmSlot;                     // Expresses the current communication slot in bits
                                    //   (When sending from the Master, because multiple slaves can be specified with bmSlot, communications are terminated based on the failCounter for each child device)
