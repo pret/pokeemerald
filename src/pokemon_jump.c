@@ -2966,18 +2966,18 @@ static void sub_802D150(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_082FE164, ARRAY_COUNT(gUnknown_082FE164));
         InitWindows(gUnknown_082FE174);
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         sub_802C974(gUnknown_02022D00);
         sub_802DD08();
         LoadPalette(gPkmnJumpBgPal, 0, 0x20);
-        decompress_and_copy_tile_data_to_vram(3, gPkmnJumpBgGfx, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(3, gPkmnJumpBgTilemap, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(3, gPkmnJumpBgGfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, gPkmnJumpBgTilemap, 0, 0, 1);
         LoadPalette(gPkmnJumpVenusaurPal, 0x30, 0x20);
-        decompress_and_copy_tile_data_to_vram(2, gPkmnJumpVenusaurGfx, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(2, gPkmnJumpVenusaurTilemap, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(2, gPkmnJumpVenusaurGfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, gPkmnJumpVenusaurTilemap, 0, 0, 1);
         LoadPalette(gPkmnJumpResultsPal, 0x10, 0x20);
-        decompress_and_copy_tile_data_to_vram(1, gPkmnJumpResultsGfx, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(1, gPkmnJumpResultsTilemap, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(1, gPkmnJumpResultsGfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gPkmnJumpResultsTilemap, 0, 0, 1);
         LoadPalette(gPkmnJumpPal3, 0x20, 0x20);
         SetBgTilemapBuffer(0, gUnknown_02022D00->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
@@ -2991,7 +2991,7 @@ static void sub_802D150(void)
         gUnknown_02022D00->unk4++;
         break;
     case 1:
-        if (!free_temp_tile_data_buffers_if_possible())
+        if (!FreeTempTileDataBuffersIfPossible())
         {
             sub_802DBF8();
             sub_802CE9C(gUnknown_02022D00);

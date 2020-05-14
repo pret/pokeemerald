@@ -1255,7 +1255,7 @@ static void sub_8174F70(void)
     ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
-    reset_temp_tile_data_buffers();
+    ResetTempTileDataBuffers();
     ResetAllPicSprites();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
@@ -1282,10 +1282,10 @@ static bool8 sub_8175024(void)
     switch (sHofGfxPtr->state)
     {
     case 0:
-        decompress_and_copy_tile_data_to_vram(1, sHallOfFame_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sHallOfFame_Gfx, 0, 0, 0);
         break;
     case 1:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return TRUE;
         break;
     case 2:
