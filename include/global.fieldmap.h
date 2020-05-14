@@ -54,7 +54,7 @@ struct ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
-    /*0x02*/ u8 unk2;
+    /*0x02*/ u8 inConnection; // Leftover from FRLG
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
