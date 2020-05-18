@@ -138,7 +138,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
 static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 battlerIn1, battlerIn2;
-    u8 absorbingTypeAbility;
+    u16 absorbingTypeAbility;
     s32 firstId;
     s32 lastId; // + 1
     struct Pokemon *party;
@@ -189,7 +189,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     for (i = firstId; i < lastId; i++)
     {
         u16 species;
-        u8 monAbility;
+        u16 monAbility;
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
@@ -370,7 +370,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
     for (i = firstId; i < lastId; i++)
     {
         u16 species;
-        u8 monAbility;
+        u16 monAbility;
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
