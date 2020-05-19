@@ -24,7 +24,7 @@ void PlayTimeCounter_Start(void)
 {
     sPlayTimeCounterState = RUNNING;
 
-    if (gSaveBlock2Ptr->playTimeHours > 999)
+    if (gSaveBlock2Ptr->playTimeHours >= 1000)
         PlayTimeCounter_SetToMax();
 }
 
