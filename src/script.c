@@ -255,7 +255,7 @@ u8 *MapHeaderGetScriptTable(u8 tag)
         if (*mapScripts == tag)
         {
             mapScripts++;
-            return (u8 *)(mapScripts[0] + (mapScripts[1] << 8) + (mapScripts[2] << 16) + (mapScripts[3] << 24));
+            return (u8 *)(*mapScripts + (*(mapScripts + 1) << 8) + (*(mapScripts + 2) << 16) + (*(mapScripts + 3) << 24));
         }
         mapScripts += 5;
     }
