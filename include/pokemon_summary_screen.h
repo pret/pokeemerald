@@ -20,7 +20,7 @@ void SummaryScreen_DestroyUnknownTask(void);
 enum PokemonSummaryScreenMode
 {
     PSS_MODE_NORMAL,
-    PSS_MODE_UNK1,
+    PSS_MODE_LOCK_MOVES,
     PSS_MODE_BOX,
     PSS_MODE_SELECT_MOVE,
 };
@@ -31,6 +31,7 @@ enum PokemonSummaryScreenPage
     PSS_PAGE_SKILLS,
     PSS_PAGE_BATTLE_MOVES,
     PSS_PAGE_CONTEST_MOVES,
+    PSS_PAGE_COUNT,
 };
 
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H
