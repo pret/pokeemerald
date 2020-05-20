@@ -1038,15 +1038,15 @@ static void Task_DoFadeEffect(u8 taskId)
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITE);
         }
         sPassGfx->setAffine = TRUE;
-        sPassGfx->unk2E = sub_8151624(data[1]);
-        sPassGfx->unk30 = sub_8151624(data[2]);
+        sPassGfx->unk2E = MathUtil_Inv16(data[1]);
+        sPassGfx->unk30 = MathUtil_Inv16(data[2]);
         break;
     case 1:
         UpdatePaletteFade();
         data[1] += data[3];
         data[2] += data[4];
-        sPassGfx->unk2E = sub_8151624(data[1]);
-        sPassGfx->unk30 = sub_8151624(data[2]);
+        sPassGfx->unk2E = MathUtil_Inv16(data[1]);
+        sPassGfx->unk30 = MathUtil_Inv16(data[2]);
         if (!data[0])
         {
             if (data[1] <= 0x1FC)
@@ -1154,8 +1154,8 @@ static void sub_80C5F58(bool8 arg0, bool8 arg1)
                     gUnknown_085713E0[sPassData->unkE - 1][1] << 8,
                     gUnknown_085713E0[sPassData->unkE - 1][0],
                     gUnknown_085713E0[sPassData->unkE - 1][1],
-                    sub_8151624(0x1FC),
-                    sub_8151624(0x1FC),
+                    MathUtil_Inv16(0x1FC),
+                    MathUtil_Inv16(0x1FC),
                     0);
     }
     else
@@ -1165,8 +1165,8 @@ static void sub_80C5F58(bool8 arg0, bool8 arg1)
                     gUnknown_085713E0[sPassData->unkE - 1][1] << 8,
                     gUnknown_085713E0[sPassData->unkE - 1][0],
                     gUnknown_085713E0[sPassData->unkE - 1][1],
-                    sub_8151624(0x100),
-                    sub_8151624(0x100),
+                    MathUtil_Inv16(0x100),
+                    MathUtil_Inv16(0x100),
                     0);
     }
 }
