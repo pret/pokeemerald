@@ -1727,14 +1727,18 @@ static bool8 AwardPayoutAction_FreeTask(struct Task *task)
     return FALSE;
 }
 
-// Get the tag at position `offset` below the top of the reel window
+// Get the tag at position `offset` below the top of the reel's tape. Note that
+// if `offset` is negative, it wraps around to the bottom of the tape.
 //           .-----------------.
-//           | 7RD | 7RD | 7RD | <- offset = 0
+//           | [ ] | [ ] | [ ] | <- offset = 0
 //           /-----|-----|-----\
-// screen -> | CHY | CHY | POW | <- offset = 1
-//           | AZU | REP | 7BL | <- offset = 2
-//           | REP | LOT | REP | <- offset = 3
+// screen -> | [ ] | [ ] | [ ] | <- offset = 1
+//           | [ ] | [ ] | [ ] | <- offset = 2
+//           | [ ] | [ ] | [ ] | <- offset = 3
 //           \-----|-----|-----/
+//           | ... | ... | ... |
+//           | [ ] | [ ] | [ ] | <- offset = 20
+//           .-----------------.
 static u8 GetTagAtRest(u8 reel, s16 offset)
 {
     s16 pos = (sSlotMachine->reelPositions[reel] + offset) % REEL_NUM_TAGS;
