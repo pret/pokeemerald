@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_SLOT_MACHINE_H
 #define GUARD_CONSTANTS_SLOT_MACHINE_H
 
-#define NUM_REELS          3
+#define NUM_REELS           3
 #define REEL_NUM_TAGS      21
 #define REEL_TAG_HEIGHT    24
 #define SLOT_MACHINE_COUNT 12
