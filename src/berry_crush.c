@@ -918,10 +918,10 @@ void sub_8020E58(void)
     u32 var0, var1;
 
     var0 = gUnknown_02022C90->unk68.as_four_players.unk00.unk04;
-    var0 <<= 8;
-    var0 = MathUtil_Div32(var0, 60 << 8);
+    var0 = Q_24_8(var0);
+    var0 = MathUtil_Div32(var0, Q_24_8(60));
     var1 = gUnknown_02022C90->unk68.as_four_players.unk00.unk0A;
-    var1 <<= 8;
+    var1 = Q_24_8(var1);
     var1 = MathUtil_Div32(var1, var0) & 0xFFFF;
     gUnknown_02022C90->unk16 = var1;
     switch (gUnknown_02022C90->unk9)
@@ -1232,12 +1232,12 @@ void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
         var0 *= 128;
         var6 = var5 + 32;
         var6 = var6 / 2;
-        var1 = MathUtil_Div16Shift(7, 0x3F80, var6);
+        var1 = MathUtil_Div16Shift(7, Q_8_8(63.5), var6);
         data[0] = (u16)arg1->unk38[i]->pos1.x * 128;
         data[3] = MathUtil_Div16Shift(7, var0, var1);
         var1 = MathUtil_Mul16Shift(7, var1, 85);
         data[4] = 0;
-        data[5] = MathUtil_Div16Shift(7, 0x3F80, var1);
+        data[5] = MathUtil_Div16Shift(7, Q_8_8(63.5), var1);
         data[7] |= 0x8000;
         if (arg1->unkC[i]->unk8 < 0)
             StartSpriteAffineAnim(arg1->unk38[i], 1);
@@ -1383,7 +1383,7 @@ void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
 
     arg0->unk4 = arg1 / 3600;
     arg0->unk6 = (arg1 % 3600) / 60;
-    r3 = MathUtil_Mul16((arg1 % 60) << 8, 4);
+    r3 = MathUtil_Mul16(Q_8_8(arg1 % 60), 4);
 
     for (i = 0; i < 8; i++)
     {
@@ -1944,7 +1944,7 @@ void sub_8022B28(struct Sprite *sprite)
     r7[3] = MathUtil_Div16Shift(7, r4, r5);
     r2 = MathUtil_Mul16Shift(7, r5, 85);
     r7[4] = r8;
-    r7[5] = MathUtil_Div16Shift(7, 0x3F80, r2);
+    r7[5] = MathUtil_Div16Shift(7, Q_8_8(63.5), r2);
     r7[6] = sprite->pos2.x / 4;
     r7[7] |= 0x8000;
     sprite->pos2.y = r8;
@@ -2194,7 +2194,7 @@ static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
         }
         r5->unk10 = 0;
         ResetBlockReceivedFlags();
-        r5->unk20 = MathUtil_Div32(r5->unk18 << 8, 0x2000);
+        r5->unk20 = MathUtil_Div32(Q_24_8(r5->unk18), Q_24_8(32));
         break;
     case 5:
         ClearDialogWindowAndFrame(0, 1);
@@ -2411,9 +2411,9 @@ void sub_802339C(struct BerryCrushGame *r4)
         r2_ = r4->unk1A;
         if (r0 - r2_ > 0)
         {
-            r2_ <<= 8;
+            r2_ = Q_24_8(r2_);
             r2_ = MathUtil_Div32(r2_, r4->unk20);
-            r2_ >>= 8;
+            r2_ = Q_24_8_TO_INT(r2_);
             r4->unk24 = r2_;
         }
         else
@@ -2800,13 +2800,13 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
         );
         r7->unk68.as_four_players.unk00.unk04 = r7->unk28;
         r7->unk68.as_four_players.unk00.unk06 = r7->unk18 / (r7->unk28 / 60);
-        r2 = MathUtil_Mul32(r7->unk30 << 8, 0x3200);
-        r2 = MathUtil_Div32(r2, r7->unk32 << 8) + 0x3200;
-        r2 >>= 8;
+        r2 = MathUtil_Mul32(Q_24_8(r7->unk30), Q_24_8(50));
+        r2 = MathUtil_Div32(r2, Q_24_8(r7->unk32)) + Q_24_8(50);
+        r2 = Q_24_8_TO_INT(r2);
         r7->unk68.as_four_players.unk00.unk08 = r2 & 0x7F;
-        r2 <<= 8;
-        r2 = MathUtil_Div32(r2, 0x6400);
-        r4 = (r7->unk1C * r7->unk9) << 8;
+        r2 = Q_24_8(r2);
+        r2 = MathUtil_Div32(r2, Q_24_8(100));
+        r4 = Q_24_8(r7->unk1C * r7->unk9);
         r4 = MathUtil_Mul32(r4, r2);
         r7->unk68.as_four_players.unk00.unk00 = r4 >> 8;
         r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[0][7] = Random() % 3;
@@ -2822,10 +2822,10 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[3] != 0)
                 {
                     r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[2];
-                    r2 <<= 8;
-                    r2 = MathUtil_Mul32(r2, 0x6400);
+                    r2 = Q_24_8(r2);
+                    r2 = MathUtil_Mul32(r2, Q_24_8(100));
                     r4 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[3];
-                    r4 <<= 8;
+                    r4 = Q_24_8(r4);
                     r4 = MathUtil_Div32(r2, r4);
                 }
                 else
@@ -2837,10 +2837,10 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[3] != 0)
                 {
                     r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[4];
-                    r2 <<= 8;
-                    r2 = MathUtil_Mul32(r2, 0x6400);
+                    r2 = Q_24_8(r2);
+                    r2 = MathUtil_Mul32(r2, Q_24_8(100));
                     r4 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[3];
-                    r4 <<= 8;
+                    r4 = Q_24_8(r4);
                     r4 = MathUtil_Div32(r2, r4);
                 }
                 else
@@ -2860,10 +2860,10 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 else
                 {
                     r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[5];
-                    r2 <<= 8;
-                    r2 = MathUtil_Mul32(r2, 0x6400);
+                    r2 = Q_24_8(r2);
+                    r2 = MathUtil_Mul32(r2, Q_24_8(100));
                     r4 = r7->unk28;
-                    r4 <<= 8;
+                    r4 = Q_24_8(r4);
                     r4 = MathUtil_Div32(r2, r4);
                 }
                 break;
