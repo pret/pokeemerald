@@ -322,7 +322,7 @@ static const u8 sBerryCrushTextColorTable[][3] =
 };
 
 
-static const struct WindowTemplate gUnknown_082F32EC =
+static const struct WindowTemplate sWindowTemplate_BerryCrushRankings =
 {
     .bg = 0, 
     .tilemapLeft = 3, 
@@ -421,7 +421,7 @@ static const u8 gUnknown_082F3344[][4] =
     {12, 14, 15, 16},
 };
 
-static const u32 gUnknown_082F334C[] = 
+static const u32 sPressingSpeedConversionTable[] = 
 {
     50000000 / (1 << 0), 
     50000000 / (1 << 1), 
@@ -1388,7 +1388,7 @@ void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
     for (i = 0; i < 8; i++)
     {
         if ((r3 >> (7 - i)) & 1)
-            r7 += gUnknown_082F334C[i];
+            r7 += sPressingSpeedConversionTable[i];
     }
 
     arg0->unk8 = r7 / 1000000;
@@ -1442,7 +1442,7 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
             r7 = sp24->as_four_players.unk00.unk0C[sp10][r8] & 15;
             for (r2 = 0; r2 < 4; ++r2)
                 if ((r7 >> (3 - r2)) & 1)
-                    r3 += gUnknown_082F334C[r2];
+                    r3 += sPressingSpeedConversionTable[r2];
             r7 = r3 / 1000000u;
             ConvertIntToDecimalStringN(gStringVar2, r7, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gUnknown_082F43B4[sp10]);
@@ -1499,7 +1499,7 @@ void sub_8021D34(struct BerryCrushGame *r8)
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimesPerSec);
     for (; r10 < 8; ++r10)
         if (((u8)r8->unk16 >> (7 - r10)) & 1)
-            sp0C += *(r10 + gUnknown_082F334C); // It's accessed in a different way here for unknown reason
+            sp0C += *(r10 + sPressingSpeedConversionTable); // It's accessed in a different way here for unknown reason
     ConvertIntToDecimalStringN(gStringVar1, r8->unk16 >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY3);
@@ -1580,93 +1580,89 @@ void sub_802222C(struct BerryCrushGame *r4)
     sub_8022600(r4);
 }
 
-void sub_8022250(u8 r4)
+static void Task_ShowBerryCrushRankings(u8 taskId)
 {
-    u8 r9 = 0, r2, r7, r10;
-    u32 sp0C = 0;
-    s16 *r6 = gTasks[r4].data;
-    const u8 *r10_; // turn r5/sl register swap into r8/sl
+    u8 i = 0, j, xPos, yPos;
+    u32 score = 0;
+    s16 *data = gTasks[taskId].data;
+    u8 *str;
     
-    switch (r6[0])
+    switch (data[0])
     {
     case 0:
-        r6[1] = AddWindow(&gUnknown_082F32EC);
-        PutWindowTilemap((u8)r6[1]);
-        FillWindowPixelBuffer((u8)r6[1], PIXEL_FILL(0));
-        LoadUserWindowBorderGfx_((u8)r6[1], 541, 208);
-        DrawStdFrameWithCustomTileAndPalette((u8)r6[1], 0, 541, 13);
+        data[1] = AddWindow(&sWindowTemplate_BerryCrushRankings);
+        PutWindowTilemap(data[1]);
+        FillWindowPixelBuffer(data[1], PIXEL_FILL(0));
+        LoadUserWindowBorderGfx_(data[1], 541, 208);
+        DrawStdFrameWithCustomTileAndPalette(data[1], 0, 541, 13);
         break;
     case 1:
-        r10_ = gText_BerryCrush2;
-        ++r10_; --r10_; // swap sb/sl
-    #ifndef NONMATCHING
-        asm("":::"r8"); // turn r8/sl register swap into sb/sl
-    #endif
-        r7 = 96 - GetStringWidth(1, r10_, -1) / 2u;
+        xPos = 96 - GetStringWidth(1, gText_BerryCrush2, -1) / 2u;
         AddTextPrinterParameterized3(
-            (u8)r6[1],
+            data[1],
             1,
-            r7,
+            xPos,
             1,
             sBerryCrushTextColorTable[3],
             0,
-            r10_
+            gText_BerryCrush2
         );
-        r10_ = gText_PressingSpeedRankings;
-        r7 = 96 - GetStringWidth(1, r10_, -1) / 2u;
+        xPos = 96 - GetStringWidth(1, gText_PressingSpeedRankings, -1) / 2u;
         AddTextPrinterParameterized3(
-            (u8)r6[1],
+            data[1],
             1,
-            r7,
+            xPos,
             17,
             sBerryCrushTextColorTable[3],
             0,
-            r10_
+            gText_PressingSpeedRankings
         );
-        r10 = 41;
-        for (; r9 < 4; ++r9)
+        yPos = 41;
+        for (i = 0; i < 4; ++i)
         {
-            ConvertIntToDecimalStringN(gStringVar1, r9 + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
+            ConvertIntToDecimalStringN(gStringVar1, i + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
             StringExpandPlaceholders(gStringVar4, gText_Var1Players);
             AddTextPrinterParameterized3(
-                (u8)r6[1],
+                data[1],
                 1,
                 0,
-                r10,
+                yPos,
                 sBerryCrushTextColorTable[0],
                 0,
                 gStringVar4
             );
-            r7 = 192 - (u8)GetStringWidth(1, gText_TimesPerSec, -1);
+            xPos = 192 - (u8)GetStringWidth(1, gText_TimesPerSec, -1);
             AddTextPrinterParameterized3(
-                (u8)r6[1],
+                data[1],
                 1,
-                r7,
-                r10,
+                xPos,
+                yPos,
                 sBerryCrushTextColorTable[0],
                 0,
                 gText_TimesPerSec
             );
-            for (r2 = 0; r2 < 8; ++r2)
-                if (((u8)r6[r9 + 2] >> (7 - r2)) & 1)
-                    sp0C += gUnknown_082F334C[r2];
-            ConvertIntToDecimalStringN(gStringVar1, (u16)r6[r9 + 2] >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
+            for (j = 0; j < 8; ++j)
+            {
+                if (((data[i + 2] & 0xFF) >> (7 - j)) & 1)
+                    score += sPressingSpeedConversionTable[j];
+            }
+            ConvertIntToDecimalStringN(gStringVar1, (u16)data[i + 2] >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar2, score / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gText_XDotY3);
-            r7 -= GetStringWidth(1, gStringVar4, -1);
+            xPos -= GetStringWidth(1, gStringVar4, -1);
             AddTextPrinterParameterized3(
-                (u8)r6[1],
+                data[1],
                 1,
-                r7,
-                r10,
+                xPos,
+                yPos,
                 sBerryCrushTextColorTable[0],
                 0,
                 gStringVar4
             );
-            r10 += 16;
-            sp0C = 0;
+            yPos += 16;
+            score = 0;
         }
-        CopyWindowToVram((u8)r6[1], 3);
+        CopyWindowToVram(data[1], 3);
         break;
     case 2:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
@@ -1674,16 +1670,16 @@ void sub_8022250(u8 r4)
         else
             return;
     case 3:
-        ClearStdWindowAndFrameToTransparent((u8)r6[1], 1);
-        ClearWindowTilemap((u8)r6[1]);
-        RemoveWindow((u8)r6[1]);
-        DestroyTask(r4);
+        ClearStdWindowAndFrameToTransparent(data[1], 1);
+        ClearWindowTilemap(data[1]);
+        RemoveWindow(data[1]);
+        DestroyTask(taskId);
         EnableBothScriptContexts();
         ScriptContext2_Disable();
-        r6[0] = 0;
+        data[0] = 0;
         return;
     }
-    ++r6[0];
+    ++data[0];
 }
 
 void ShowBerryCrushRankings(void)
@@ -1691,7 +1687,7 @@ void ShowBerryCrushRankings(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask(sub_8022250, 0);
+    taskId = CreateTask(Task_ShowBerryCrushRankings, 0);
     gTasks[taskId].data[2] = gSaveBlock2Ptr->berryCrush.berryCrushResults[0];
     gTasks[taskId].data[3] = gSaveBlock2Ptr->berryCrush.berryCrushResults[1];
     gTasks[taskId].data[4] = gSaveBlock2Ptr->berryCrush.berryCrushResults[2];
