@@ -206,7 +206,7 @@ void sub_8022554(struct BerryCrushGame_138 *r0);
 void sub_8024578(struct BerryCrushGame *);
 void sub_8024644(u8 *, u32, u32, u32, u32);
 static void sub_8022A20(struct Sprite *sprite);
-static u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1);
+static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *r6, u8 *r1);
 static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5);
 static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5);
 static u32 sub_8022E1C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
@@ -767,7 +767,7 @@ static const u8 *const gUnknown_082F43B4[] =
 static u32 (*const gUnknown_082F43CC[])(struct BerryCrushGame *, u8 *) =
 {
     NULL,
-    sub_8022C58,
+    BerryCrushCommand_BeginNormalPaletteFade,
     sub_8022CB0,
     sub_8022D14,
     sub_8022E1C,
@@ -1975,39 +1975,42 @@ void sub_8022BEC(u16 r5, u8 r4, u8 *r7)
     }
 }
 
-static u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1)
+static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *game, u8 *params)
 {
-    u16 r4;
-    u32 r0;
-#ifndef NONMATCHING // fake match, nobody can write such code
-    register u32 r2 asm("r2");
-    register u32 r3 asm("r3");
+    // params points to packed values:
+    // bytes 0-3: selectedPals (bitfield)
+    // byte 4: delay
+    // byte 5: startY
+    // byte 6: stopY
+    // bytes 7-8: fade color
+    // byte 9: if TRUE, communicate on fade complete
 
-    r2 = r1[0];
-    r3 = r1[1];
-    r3 <<= 8;
-    r2 |= r3;
-    r3 = r1[2];
-    r3 <<= 16;
-    r2 |= r3;
-    r3 = r1[3];
-    r3 <<= 24;
-    r0 = r2;
-    r0 |= r3;
+    u16 color;
+    u32 selectedPals;
+    selectedPals = ({
+#ifndef NONMATCHING
+        register u32 value asm("r2");
+        register u32 b asm("r3");
 #else
-    u32 r2;
+        u32 value;
+        u32 b;
+#endif //NONMATCHING
+        value  =      params[0] << 0;
+        value |= (b = params[1] << 8);
+        value |= (b = params[2] << 16);
+        value |= (b = params[3] << 24);
+        value;
+    });
 
-    r0 = T1_READ_32(r1);
-#endif
-    r2 = r1[9];
-    r1[0] = r2;
-    r4 = r1[8] << 8;
-    r2 = r1[7];
-    r4 |= r2;
+    params[0] = params[9];
+
+    color  = params[8] << 8;
+    color |= params[7] << 0;
+
     gPaletteFade.bufferTransferDisabled = FALSE;
-    BeginNormalPaletteFade(r0, r1[4], r1[5], r1[6], r4);
+    BeginNormalPaletteFade(selectedPals, params[4], params[5], params[6], color);
     UpdatePaletteFade();
-    r6->unkE = 2;
+    game->unkE = 2;
     return 0;
 }
 
