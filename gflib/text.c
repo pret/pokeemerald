@@ -202,7 +202,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
         }
 
         if (speed != TEXT_SPEED_FF)
-          CopyWindowToVram(gTempTextPrinter.printerTemplate.windowId, 2);
+            CopyWindowToVram(gTempTextPrinter.printerTemplate.windowId, 2);
         gTextPrinters[printerTemplate->windowId].active = 0;
     }
     gUnknown_03002F84 = 0;
@@ -215,7 +215,7 @@ void RunTextPrinters(void)
 
     if (gUnknown_03002F84 == 0)
     {
-        for (i = 0; i < 0x20; ++i)
+        for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
         {
             if (gTextPrinters[i].active)
             {
