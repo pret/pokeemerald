@@ -193,7 +193,7 @@ static void sub_8020F88(void);
 static void sub_8020FA0(u8);
 void sub_8020FC4(struct BerryCrushGame *);
 void sub_8022BEC(u16, u8, u8 *);
-void sub_8024604(u8 *, u32, s32, u32, u32, u32, u32);
+static void BerryCrush_SetPaletteFadeParams(u8 *, bool8, u32, s8, u8, u8, u16);
 static int sub_8021450(struct BerryCrushGame *);
 void sub_8022588(struct BerryCrushGame *);
 void sub_8022600(struct BerryCrushGame *);
@@ -874,7 +874,7 @@ void sub_8020C70(MainCallback callback)
     gUnknown_02022C90->unk12 = 1;
     gUnknown_02022C90->unkE = 1;
     gUnknown_02022C90->unkF = 6;
-    sub_8024604(gUnknown_02022C90->unk36, 1, -1, 0, 16, 0, 0);
+    BerryCrush_SetPaletteFadeParams(gUnknown_02022C90->unk36, 1, -1, 0, 16, 0, 0);
     sub_8022BEC(4, 1, gUnknown_02022C90->unk36);
     SetMainCallback2(sub_8020F88);
     gUnknown_02022C90->unkA = CreateTask(sub_8020FA0, 8);
@@ -891,7 +891,7 @@ static void sub_8020D8C(void)
     gUnknown_02022C90->unk68.as_four_players.others[gUnknown_02022C90->unk8].unk0 = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
     gUnknown_02022C90->unkE = 1;
     gUnknown_02022C90->unkF = 9;
-    sub_8024604(gUnknown_02022C90->unk36, 0, -1, 0, 16, 0, 0);
+    BerryCrush_SetPaletteFadeParams(gUnknown_02022C90->unk36, 0, -1, 0, 16, 0, 0);
     sub_8022BEC(4, 1, gUnknown_02022C90->unk36);
     gUnknown_02022C90->unkA = CreateTask(sub_8020FA0, 8);
     SetMainCallback2(sub_8020F88);
@@ -3250,64 +3250,19 @@ void sub_8024578(struct BerryCrushGame *r4)
     }
 }
 
-#ifdef NONMATCHING
-void sub_8024604(u8 *r0, u32 r1, s32 r2, u32 r3, u32 r5, u32 r6, u32 r4)
+static void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, u32 selectedPals, s8 delay, u8 startY, u8 targetY, u16 palette)
 {
-    u8 sp[8];
-    u8 *p;
-
-    1[(u32 *)sp] = r2;
-    0[(u16 *)sp] = r4;
-    p = &sp[4];
-    r0[0] = p[0];
-    r0[1] = p[1];
-    r0[2] = p[2];
-    r0[3] = p[3];
-    r0[4] = r3;
-    r0[5] = r5;
-    r0[6] = r6;
-    r0[7] = sp[0];
-    r0[8] = sp[1];
-    r0[9] = r1;
+    params[0] = ((u8 *)&selectedPals)[0];
+    params[1] = ((u8 *)&selectedPals)[1];
+    params[2] = ((u8 *)&selectedPals)[2];
+    params[3] = ((u8 *)&selectedPals)[3];
+    params[4] = delay;
+    params[5] = startY;
+    params[6] = targetY;
+    params[7] = ((u8 *)&palette)[0];
+    params[8] = ((u8 *)&palette)[1];
+    params[9] = communicateAfter;
 }
-#else
-NAKED
-void sub_8024604(u8 *r0, u32 r1, s32 r2, u32 r3, u32 r5, u32 r6, u32 r4)
-{
-    asm_unified("\n\
-        push {r4-r6,lr}\n\
-        sub sp, 0x8\n\
-        str r2, [sp, 0x4]\n\
-        ldr r5, [sp, 0x18]\n\
-        ldr r6, [sp, 0x1C]\n\
-        ldr r4, [sp, 0x20]\n\
-        mov r2, sp\n\
-        strh r4, [r2]\n\
-        add r4, sp, 0x4\n\
-        ldrb r2, [r4]\n\
-        strb r2, [r0]\n\
-        ldrb r2, [r4, 0x1]\n\
-        strb r2, [r0, 0x1]\n\
-        ldrb r2, [r4, 0x2]\n\
-        strb r2, [r0, 0x2]\n\
-        ldrb r2, [r4, 0x3]\n\
-        strb r2, [r0, 0x3]\n\
-        strb r3, [r0, 0x4]\n\
-        strb r5, [r0, 0x5]\n\
-        strb r6, [r0, 0x6]\n\
-        mov r2, sp\n\
-        ldrb r2, [r2]\n\
-        strb r2, [r0, 0x7]\n\
-        mov r2, sp\n\
-        ldrb r2, [r2, 0x1]\n\
-        strb r2, [r0, 0x8]\n\
-        strb r1, [r0, 0x9]\n\
-        add sp, 0x8\n\
-        pop {r4-r6}\n\
-        pop {r0}\n\
-        bx r0");
-}
-#endif
 
 void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
 {
