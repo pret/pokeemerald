@@ -88,4 +88,21 @@
 #define B_FAST_INTRO                TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
 #define B_SLEEP_TURNS               GEN_6 // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
 
+// Animation Settings
+#define NEW_SWORD_PARTICLE          // update swords dance particle
+#define NEW_LEECH_SEED_PARTICLE     //update leech seed's animation particle
+#define NEW_HORN_ATTACK_PARTICLE    //update horn attack's horn
+#define NEW_LEAF_PARTICLE           // update leaf particle
+#define NEW_EMBER_PARTICLES         //updates ember fire particle
+#define NEW_MEAN_LOOK_PARTICLE      //update mean look eye
+#define NEW_TEETH_PARTICLE          //update bite/crunch teeth particle
+#define NEW_HANDS_FEET_PARTICLE     //update chop/kick/punch particles
+#define NEW_SPIKES_PARTICLE         //update spikes particle
+#define NEW_FLY_BUBBLE_PARTICLE     //update fly 'bubble' particle
+#define NEW_CURSE_NAIL_PARTICLE     //updates curse nail
+#define NEW_BATON_PASS_BALL_PARTICLE    //update baton pass pokeball sprite
+#define NEW_MORNING_SUN_STAR_PARTICLE   //updates morning sun star particles
+#define NEW_IMPACT_PALETTE          //updates the basic 'hit' particle
+#define NEW_SURF_PARTICLE_PALETTE   //updates the surf wave palette
+
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
