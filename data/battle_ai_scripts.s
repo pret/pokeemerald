@@ -67,6 +67,7 @@ AI_CBM_CheckIfNegatesType:
 	if_equal ABILITY_LIGHTNING_ROD, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_MOTOR_DRIVE, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
+	if_equal ABILITY_STORM_DRAIN, CheckIfWaterAbsorbCancelsWater
 	if_equal ABILITY_DRY_SKIN, CheckIfWaterAbsorbCancelsWater
 	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
@@ -264,6 +265,21 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_GEOMANCY, AI_CBM_QuiverDance
 	if_effect EFFECT_FAIRY_LOCK, AI_CBM_FairyLock
 	if_effect EFFECT_ALLY_SWITCH, AI_CBM_HelpingHand
+	if_effect EFFECT_TRICK_ROOM, AI_CBM_TrickRoom
+	if_effect EFFECT_WONDER_ROOM, AI_CBM_WonderRoom
+	if_effect EFFECT_MAGIC_ROOM, AI_CBM_MagicRoom
+	end
+	
+AI_CBM_TrickRoom:
+	if_field_status STATUS_FIELD_TRICK_ROOM, Score_Minus10
+	end
+	
+AI_CBM_WonderRoom:
+	if_field_status STATUS_FIELD_WONDER_ROOM, Score_Minus10
+	end
+	
+AI_CBM_MagicRoom:
+	if_field_status STATUS_FIELD_MAGIC_ROOM, Score_Minus10
 	end
 	
 AI_CBM_FairyLock:

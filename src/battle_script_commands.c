@@ -1678,7 +1678,11 @@ static void Cmd_attackanimation(void)
     if (gBattleControllerExecFlags)
         return;
 
-    if ((gHitMarker & HITMARKER_NO_ANIMATIONS) && (gCurrentMove != MOVE_TRANSFORM && gCurrentMove != MOVE_SUBSTITUTE))
+    if ((gHitMarker & HITMARKER_NO_ANIMATIONS)
+        && gCurrentMove != MOVE_TRANSFORM
+        && gCurrentMove != MOVE_SUBSTITUTE
+        // In a wild double battle gotta use the teleport animation if two wild pokemon are alive.
+        && !(gCurrentMove == MOVE_TELEPORT && WILD_DOUBLE_BATTLE && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT && IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker))))
     {
         BattleScriptPush(gBattlescriptCurrInstr + 1);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
@@ -7001,7 +7005,7 @@ static void Cmd_various(void)
             u32 statId;
             do
             {
-                statId = (Random() % NUM_BATTLE_STATS) + 1;
+                statId = (Random() % (NUM_BATTLE_STATS - 1)) + 1;
             } while (!(bits & gBitTable[statId]));
 
             SET_STATCHANGER(statId, 2, FALSE);

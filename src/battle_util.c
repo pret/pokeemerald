@@ -2311,7 +2311,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleMons[gBattlerAttacker].status2--;
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION)
                 {
-                    if (Random() % ((B_CONFUSION_SELF_DMG_CHANCE >= GEN_7) ? 3 : 2 == 0)) // confusion dmg
+                    if (Random() % ((B_CONFUSION_SELF_DMG_CHANCE >= GEN_7) ? 3 : 2) == 0) // confusion dmg
                     {
                         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                         gBattlerTarget = gBattlerAttacker;
@@ -5882,7 +5882,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_BRINE:
-        if (gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 2))
+        if (gBattleMons[battlerDef].hp <= (gBattleMons[battlerDef].maxHP / 2))
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case EFFECT_VENOSHOCK:

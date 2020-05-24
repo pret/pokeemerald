@@ -21,6 +21,8 @@ static void AnimWaterBubbleProjectile_Step2(struct Sprite *);
 static void AnimWaterBubbleProjectile_Step3(struct Sprite *);
 static void AnimAuroraBeamRings(struct Sprite *);
 static void AnimAuroraBeamRings_Step(struct Sprite *);
+void AnimFlyUpTarget(struct Sprite *);
+static void AnimFlyUpTarget_Step(struct Sprite *);
 static void AnimToTargetInSinWave(struct Sprite *);
 static void AnimToTargetInSinWave_Step(struct Sprite *);
 static void AnimHydroCannonCharge(struct Sprite *);
@@ -191,6 +193,17 @@ const struct SpriteTemplate gHydroPumpOrbSpriteTemplate =
     .callback = AnimToTargetInSinWave,
 };
 
+const struct SpriteTemplate gWaterPledgeOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WATER_ORB,
+    .paletteTag = ANIM_TAG_WATER_ORB,
+    .oam = &gOamData_AffineOff_ObjBlend_16x16,
+    .anims = gAnims_WaterMudOrb,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFlyUpTarget,
+};
+
 const struct SpriteTemplate gMudShotOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BROWN_ORB,
@@ -246,6 +259,17 @@ const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimToTargetInSinWave,
+};
+
+const struct SpriteTemplate gFirePledgeSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_FlamethrowerFlame,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFlyUpTarget,
 };
 
 const struct SpriteTemplate gPsywaveRingSpriteTemplate =
@@ -853,6 +877,27 @@ _081075DE:\n\
 	.pool\n");
 }
 #endif
+
+void AnimFlyUpTarget(struct Sprite *sprite)
+{
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    sprite->pos2.y += GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) / 2;
+    sprite->pos2.y += gBattleAnimArgs[1];
+    sprite->data[0] = gBattleAnimArgs[2]; //max y offset
+    sprite->data[1] = gBattleAnimArgs[3]; //speed
+    sprite->callback = AnimFlyUpTarget_Step;
+    sprite->callback(sprite);
+}
+
+static void AnimFlyUpTarget_Step(struct Sprite *sprite)
+{
+    if(sprite->pos2.y <= sprite->data[0])
+    {
+        DestroyAnimSprite(sprite);
+        return;
+    }
+    sprite->pos2.y -= sprite->data[1];
+}
 
 // For animating undulating beam attacks (e.g. Flamethrower, Hydro Pump, Signal Beam)
 static void AnimToTargetInSinWave(struct Sprite *sprite)
