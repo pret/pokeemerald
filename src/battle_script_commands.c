@@ -7001,7 +7001,7 @@ static void Cmd_various(void)
             u32 statId;
             do
             {
-                statId = (Random() % NUM_BATTLE_STATS) + 1;
+                statId = (Random() % (NUM_BATTLE_STATS - 1)) + 1;
             } while (!(bits & gBitTable[statId]));
 
             SET_STATCHANGER(statId, 2, FALSE);
