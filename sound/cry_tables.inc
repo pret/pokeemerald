@@ -873,24 +873,24 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Kyurem_White
 	cry_not Cry_Meowstic_F
 	@ Alolan Forms
-	cry_not Cry_Alolan_Rattata
-	cry_not Cry_Alolan_Raticate
-	cry_not Cry_Alolan_Raichu
-	cry_not Cry_Alolan_Sandshrew
-	cry_not Cry_Alolan_Sandslash
-	cry_not Cry_Alolan_Vulpix
-	cry_not Cry_Alolan_Ninetales
-	cry_not Cry_Alolan_Diglett
-	cry_not Cry_Alolan_Dugtrio
-	cry_not Cry_Alolan_Meowth
-	cry_not Cry_Alolan_Persian
-	cry_not Cry_Alolan_Geodude
-	cry_not Cry_Alolan_Graveler
-	cry_not Cry_Alolan_Golem
-	cry_not Cry_Alolan_Grimer
-	cry_not Cry_Alolan_Muk
-	cry_not Cry_Alolan_Exeggutor
-	cry_not Cry_Alolan_Marowak
+	cry Cry_Alolan_Rattata
+	cry Cry_Alolan_Raticate
+	cry Cry_Alolan_Raichu
+	cry Cry_Alolan_Sandshrew
+	cry Cry_Alolan_Sandslash
+	cry Cry_Alolan_Vulpix
+	cry Cry_Alolan_Ninetales
+	cry Cry_Alolan_Diglett
+	cry Cry_Alolan_Dugtrio
+	cry Cry_Alolan_Meowth
+	cry Cry_Alolan_Persian
+	cry Cry_Alolan_Geodude
+	cry Cry_Alolan_Graveler
+	cry Cry_Alolan_Golem
+	cry Cry_Alolan_Grimer
+	cry Cry_Alolan_Muk
+	cry Cry_Alolan_Exeggutor
+	cry Cry_Alolan_Marowak
 	@ Form Changes
 	cry_not Cry_Primal_Kyogre
 	cry_not Cry_Primal_Groudon
@@ -1783,24 +1783,24 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Kyurem_White
 	cry2_not Cry_Meowstic_F
 	@ Alolan Forms
-	cry2_not Cry_Alolan_Rattata
-	cry2_not Cry_Alolan_Raticate
-	cry2_not Cry_Alolan_Raichu
-	cry2_not Cry_Alolan_Sandshrew
-	cry2_not Cry_Alolan_Sandslash
-	cry2_not Cry_Alolan_Vulpix
-	cry2_not Cry_Alolan_Ninetales
-	cry2_not Cry_Alolan_Diglett
-	cry2_not Cry_Alolan_Dugtrio
-	cry2_not Cry_Alolan_Meowth
-	cry2_not Cry_Alolan_Persian
-	cry2_not Cry_Alolan_Geodude
-	cry2_not Cry_Alolan_Graveler
-	cry2_not Cry_Alolan_Golem
-	cry2_not Cry_Alolan_Grimer
-	cry2_not Cry_Alolan_Muk
-	cry2_not Cry_Alolan_Exeggutor
-	cry2_not Cry_Alolan_Marowak
+	cry2 Cry_Alolan_Rattata
+	cry2 Cry_Alolan_Raticate
+	cry2 Cry_Alolan_Raichu
+	cry2 Cry_Alolan_Sandshrew
+	cry2 Cry_Alolan_Sandslash
+	cry2 Cry_Alolan_Vulpix
+	cry2 Cry_Alolan_Ninetales
+	cry2 Cry_Alolan_Diglett
+	cry2 Cry_Alolan_Dugtrio
+	cry2 Cry_Alolan_Meowth
+	cry2 Cry_Alolan_Persian
+	cry2 Cry_Alolan_Geodude
+	cry2 Cry_Alolan_Graveler
+	cry2 Cry_Alolan_Golem
+	cry2 Cry_Alolan_Grimer
+	cry2 Cry_Alolan_Muk
+	cry2 Cry_Alolan_Exeggutor
+	cry2 Cry_Alolan_Marowak
 	@ Form Changes
 	cry2_not Cry_Primal_Kyogre
 	cry2_not Cry_Primal_Groudon
