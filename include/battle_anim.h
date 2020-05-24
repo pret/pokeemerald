@@ -224,9 +224,11 @@ void AnimMoveTwisterParticle(struct Sprite* sprite);
 void AnimParticleBurst(struct Sprite *);
 void AnimPowerAbsorptionOrb(struct Sprite* sprite);
 void AnimNeedleArmSpike(struct Sprite *);
+void AnimTask_CompressTargetHorizontally(u8 taskId);
 extern const union AnimCmd *const gRazorLeafParticleAnimTable[];
 extern const union AnimCmd *const gPowerAbsorptionOrbAnimTable[];
 extern const union AffineAnimCmd *const gPowerAbsorptionOrbAffineAnimTable[];
+extern const union AnimCmd *const gMusicNotesAnimTable[];
 
 // battle_anim_water.c
 void AnimWaterPulseRing(struct Sprite *sprite);

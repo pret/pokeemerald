@@ -510,6 +510,28 @@ const struct SpriteTemplate gLavaPlumeSpriteTemplate =
     .callback = AnimLavaPlumeOrbitScatter,
 };
 
+const struct SpriteTemplate gSpacialRendBladesTemplate =
+{
+    .tileTag = ANIM_TAG_PUNISHMENT_BLADES,
+    .paletteTag = ANIM_TAG_PINK_HEART_2, //ANIM_TAG_BERRY_EATEN,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_BasicFire,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireSpiralOutward
+};
+
+const struct SpriteTemplate gSpacialRendBladesTemplate2 =
+{
+    .tileTag = ANIM_TAG_PUNISHMENT_BLADES,
+    .paletteTag = ANIM_TAG_PINK_HEART_2,    //ANIM_TAG_BERRY_EATEN,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_FireSpiralSpread,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireSpread
+};
+
 static void AnimLavaPlumeOrbitScatter(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);

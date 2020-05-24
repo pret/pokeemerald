@@ -296,6 +296,7 @@
 #define ANIM_TAG_SLASH_2                    (ANIM_SPRITES_START + 286)
 #define ANIM_TAG_WHIP_HIT                   (ANIM_SPRITES_START + 287)
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
+//new particles
 #define ANIM_TAG_WHITE_STREAK               (ANIM_SPRITES_START + 289)
 #define ANIM_TAG_PURPLE_JAB                 (ANIM_SPRITES_START + 290)
 #define ANIM_TAG_TOXIC_SPIKES               (ANIM_SPRITES_START + 291)
@@ -321,6 +322,75 @@
 #define ANIM_TAG_STEALTH_ROCK               (ANIM_SPRITES_START + 311)
 #define ANIM_TAG_POISON_JAB                 (ANIM_SPRITES_START + 312)
 #define ANIM_TAG_GREEN_POISON_BUBBLE        (ANIM_SPRITES_START + 313)
+#define ANIM_TAG_FLASH_CANNON_BALL          (ANIM_SPRITES_START + 314)
+#define ANIM_TAG_WATER_GUN                  (ANIM_SPRITES_START + 315)
+#define ANIM_TAG_PUNISHMENT_BLADES          (ANIM_SPRITES_START + 316)
+#define ANIM_TAG_QUICK_GUARD_HAND           (ANIM_SPRITES_START + 317)
+
+#define ANIM_TAG_SHELL_RIGHT                (ANIM_SPRITES_START + 318)
+#define ANIM_TAG_SHELL_LEFT                 (ANIM_SPRITES_START + 319)
+#define ANIM_TAG_RAZOR_SHELL                (ANIM_SPRITES_START + 320)
+#define ANIM_TAG_HYDRO_PUMP                 (ANIM_SPRITES_START + 321)
+#define ANIM_TAG_BRINE                      (ANIM_SPRITES_START + 322)
+#define ANIM_TAG_GEAR                       (ANIM_SPRITES_START + 323)
+#define ANIM_TAG_ASSURANCE_HAND             (ANIM_SPRITES_START + 324)
+#define ANIM_TAG_ACUPRESSURE_FINGER         (ANIM_SPRITES_START + 325)
+#define ANIM_TAG_WISHIWASHI_FISH            (ANIM_SPRITES_START + 326)
+#define ANIM_TAG_ZYGARDE_HEXES              (ANIM_SPRITES_START + 327)
+#define ANIM_TAG_AURA_SPHERE                (ANIM_SPRITES_START + 328)
+#define ANIM_TAG_OMEGA_STONE                (ANIM_SPRITES_START + 329)
+#define ANIM_TAG_ALPHA_STONE                (ANIM_SPRITES_START + 330)
+#define ANIM_TAG_BERRY_NORMAL               (ANIM_SPRITES_START + 331)
+#define ANIM_TAG_BERRY_EATEN                (ANIM_SPRITES_START + 332)
+#define ANIM_TAG_DRAGON_ASCENT              (ANIM_SPRITES_START + 333)
+#define ANIM_TAG_PINK_DIAMOND               (ANIM_SPRITES_START + 334)
+#define ANIM_TAG_STEAM_ERUPTION             (ANIM_SPRITES_START + 335)
+#define ANIM_TAG_CONFIDE                    (ANIM_SPRITES_START + 336)
+#define ANIM_TAG_VERTICAL_HEX               (ANIM_SPRITES_START + 337)
+#define ANIM_TAG_UNAVAILABLE_1              (ANIM_SPRITES_START + 338)  //0x2862.. supposedly used elsewhere?    
+#define ANIM_TAG_UNAVAILABLE_2              (ANIM_SPRITES_START + 339)
+#define ANIM_TAG_POWER_TRICK                (ANIM_SPRITES_START + 340)
+#define ANIM_TAG_CHAIN_LINK                 (ANIM_SPRITES_START + 341)
+#define ANIM_TAG_ANCHOR                     (ANIM_SPRITES_START + 342)
+#define ANIM_TAG_HORSESHOE_SIDE_FIST        (ANIM_SPRITES_START + 343)
+#define ANIM_TAG_DRAGON_ASCENT_FOE          (ANIM_SPRITES_START + 344)
+#define ANIM_TAG_CRAFTY_SHIELD              (ANIM_SPRITES_START + 345)
+#define ANIM_TAG_BLACEPHALON_HEAD           (ANIM_SPRITES_START + 346)
+#define ANIM_TAG_FAIRY_LOCK_CHAINS          (ANIM_SPRITES_START + 347)
+#define ANIM_TAG_IONS                       (ANIM_SPRITES_START + 348)
+#define ANIM_TAG_CHOP                       (ANIM_SPRITES_START + 349)
+#define ANIM_TAG_HEART_STAMP                (ANIM_SPRITES_START + 350)
+#define ANIM_TAG_HORN_LEECH                 (ANIM_SPRITES_START + 351)
+#define ANIM_TAG_STEAMROLLER                (ANIM_SPRITES_START + 352)
+#define ANIM_TAG_HOOPA_HAND                 (ANIM_SPRITES_START + 353)
+#define ANIM_TAG_HOOPA_RING                 (ANIM_SPRITES_START + 354)
+#define ANIM_TAG_METAL_BITS                 (ANIM_SPRITES_START + 355)
+#define ANIM_TAG_SMALL_ROCK                 (ANIM_SPRITES_START + 356)
+#define ANIM_TAG_SPIRIT_ARROW               (ANIM_SPRITES_START + 357)
+#define ANIM_TAG_ULTRA_BURST_SYMBOL         (ANIM_SPRITES_START + 358)
+#define ANIM_TAG_Z_MOVE_SYMBOL              (ANIM_SPRITES_START + 359)
+#define ANIM_TAG_REALLY_BIG_ROCK            (ANIM_SPRITES_START + 360)
+#define ANIM_TAG_COCOON                     (ANIM_SPRITES_START + 361)
+#define ANIM_TAG_CORKSCREW                  (ANIM_SPRITES_START + 362)
+#define ANIM_TAG_HAVOC_SPEAR                (ANIM_SPRITES_START + 363)
+#define ANIM_TAG_PURPLE_DRAKE               (ANIM_SPRITES_START + 364)
+#define ANIM_TAG_MUD_BOMB                   (ANIM_SPRITES_START + 365)
+#define ANIM_TAG_BRANCH                     (ANIM_SPRITES_START + 366)
+#define ANIM_TAG_APPLE                      (ANIM_SPRITES_START + 367)
+#define ANIM_TAG_OBSTRUCT_CROSS             (ANIM_SPRITES_START + 368)
+#define ANIM_TAG_POISON_COLUMN              (ANIM_SPRITES_START + 369)
+#define ANIM_TAG_GARBAGE_COLUMN             (ANIM_SPRITES_START + 370)
+#define ANIM_TAG_LARGE_SPIKE                (ANIM_SPRITES_START + 371)
+#define ANIM_TAG_DRAGON_PULSE_RING          (ANIM_SPRITES_START + 372)
+#define ANIM_TAG_STONE_PILLAR               (ANIM_SPRITES_START + 373)
+#define ANIM_TAG_MUSHROOM                   (ANIM_SPRITES_START + 374)
+#define ANIM_TAG_GOLDEN_APPLE               (ANIM_SPRITES_START + 375)
+#define ANIM_TAG_ICE_ROCK                   (ANIM_SPRITES_START + 376)
+#define ANIM_TAG_TORNADO                    (ANIM_SPRITES_START + 377)
+#define ANIM_TAG_STRAIGHT_BEAM              (ANIM_SPRITES_START + 378)
+#define ANIM_TAG_DREEPY                     (ANIM_SPRITES_START + 379)
+#define ANIM_TAG_ICE_ROCK_SINGLE            (ANIM_SPRITES_START + 380)
+#define ANIM_TAG_STONE_PILLAR_MULTI         (ANIM_SPRITES_START + 381)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -376,6 +446,52 @@
 #define BG_GIGA_IMPACT_CONTEST 30
 #define BG_TRICK_ROOM 31
 #define BG_ROCK_WRECKER 32
+#define BG_SPACIAL_REND_ON_OPPONENT 33
+#define BG_SPACIAL_REND_ON_PLAYER 34
+#define BG_DARK_VOID 35
+
+#define BG_WATER                                36
+#define BG_NIGHTMARE                            37
+#define BG_LEAF_STORM                           38
+#define BG_FIRE                                 39
+#define BG_FIRE_2                               40
+#define BG_WATER_2                              41
+#define BG_POISON                               42
+#define BG_AEROBLAST                            43
+#define BG_HIGH_SPEED                           44  //hurricane, close combat
+#define BG_ELECTRIC_TERRAIN                     45
+#define BG_GRASSY_TERRAIN                       46
+#define BG_MISTY_TERRAIN                        47
+#define BG_PSYCHIC_TERRAIN                      48
+#define BG_FOCUS_BLAST                          49
+#define BG_GUNK_SHOT                            50
+#define BG_HYDRO_CANNON                         51
+#define BG_WONDER_ROOM                          52
+#define BG_MAGIC_ROOM                           53
+#define BG_HYPERSPACE_FURY                      54
+#define BG_BOLT_STRIKE                          55
+#define BG_ZMOVE_ACTIVATE                       56
+#define BG_TECTONIC_RAGE                        57
+#define BG_BLUE_SKY_DAY                         58
+#define BG_BLUE_SKY_AFTERNOON                   59
+#define BG_BLUE_SKY_NIGHT                       60
+#define BG_ZMOVE_MOUNTAIN                       61
+#define BG_NEVERENDING_NIGHTMARE                62
+#define BG_WATER_PULSE                          63
+#define BG_INFERNO_OVERDRIVE                    64
+#define BG_BLOOM_DOOM                           65
+#define BG_SHATTERED_PSYCHE                     66
+#define BG_TWINKLE_TACKLE                       67
+#define BG_BLACKHOLE_ECLIPSE                    68
+#define BG_SOULSTEALING_7STAR_STRIKE            69
+#define BG_MALICIOUS_MOONSAULT                  70
+#define BG_CLANGOROUS_SOULBLAZE                 71
+#define BG_SNUGGLE_FOREVER                      72
+#define BG_MAX_LIGHTNING                        73
+#define BG_GARBAGE_FALLS                        74
+#define BG_HYPER_BEAM                           75
+#define BG_DYNAMAX_CANNON                       76
+#define BG_AURA_SPHERE                          77
 
 // table ids for general animations
 #define B_ANIM_CASTFORM_CHANGE          0x0

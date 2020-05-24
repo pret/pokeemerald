@@ -327,6 +327,43 @@ const struct SpriteTemplate gStealthRockSpriteTemplate =
     .callback = AnimStealthRock,
 };
 
+static const union AffineAnimCmd sSpriteAffineAnim_CrushGripHandEnemyAttack[] =
+{
+	AFFINEANIMCMD_FRAME(0, 0, 96, 1), //180 degree turn
+	AFFINEANIMCMD_END
+};
+static const union AffineAnimCmd sSpriteAffineAnim_DoNothing[] =
+{
+	AFFINEANIMCMD_FRAME(0, 0, 0, 1), //Do nothing
+	AFFINEANIMCMD_END
+};
+static const union AffineAnimCmd* const sSpriteAffineAnimTable_CrushGripHand[] =
+{
+	sSpriteAffineAnim_DoNothing,
+	sSpriteAffineAnim_CrushGripHandEnemyAttack,
+};
+const struct SpriteTemplate gCrushGripHandTemplate =
+{
+    .tileTag = ANIM_TAG_PURPLE_HAND_OUTLINE,
+    .paletteTag = ANIM_TAG_ACCUPRESSURE,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = sAnims_BasicRock,
+    .images = NULL,
+    .affineAnims = sSpriteAffineAnimTable_CrushGripHand,
+    .callback = AnimRockBlastRock
+};
+
+const struct SpriteTemplate gSeedFlareGreenWavesTemplate =
+{
+    .tileTag = ANIM_TAG_FLYING_DIRT,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFlyingSandCrescent
+};
+
 static void AnimStealthRock(struct Sprite *sprite)
 {
     u16 x;
