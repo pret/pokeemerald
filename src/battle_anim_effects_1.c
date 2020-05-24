@@ -776,6 +776,8 @@ const union AnimCmd *const gRazorLeafParticleAnimTable[] =
     gRazorLeafParticleAnimCmds2,
 };
 
+void AnimFlyUpTarget(struct Sprite *sprite);
+
 const struct SpriteTemplate gRazorLeafParticleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_LEAF,
@@ -785,6 +787,17 @@ const struct SpriteTemplate gRazorLeafParticleSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimRazorLeafParticle,
+};
+
+const struct SpriteTemplate gGrassPledgeSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFlyUpTarget,
 };
 
 const struct SpriteTemplate gTwisterLeafSpriteTemplate =
