@@ -2311,7 +2311,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleMons[gBattlerAttacker].status2--;
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_CONFUSION)
                 {
-                    if (Random() % ((B_CONFUSION_SELF_DMG_CHANCE >= GEN_7) ? 3 : 2 == 0)) // confusion dmg
+                    if (Random() % ((B_CONFUSION_SELF_DMG_CHANCE >= GEN_7) ? 3 : 2) == 0) // confusion dmg
                     {
                         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                         gBattlerTarget = gBattlerAttacker;
