@@ -2794,7 +2794,7 @@ static bool8 sub_811BFA4(void)
         DeactivateAllTextPrinters();
         sub_811CF64();
         sub_811CF04();
-        CpuFastFill(0, (void *)VRAM + 0x1000000, 0x400);
+        CpuFastFill(0, (void *)OAM, OAM_SIZE);
         break;
     case 1:
         DecompressAndLoadBgGfxUsingHeap(3, gEasyChatWindow_Gfx, 0, 0, 0);
