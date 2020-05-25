@@ -296,7 +296,7 @@ static void CreateMoveSelectorSprites(u8 idArrayStart);
 static void SpriteCb_MoveSelector(struct Sprite *sprite);
 static void DestroyMoveSelectorSprites(u8 firstArrayId);
 static void SetMainMoveSelectorColor(u8 whichColor);
-static void MakeMoveSelectorVisible(u8 a);
+static void KeepMoveSelectorVisible(u8 firstSpriteId);
 
 // const rom data
 #include "data/text/move_descriptions.h"
@@ -1095,7 +1095,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     }
 
     sMonSummaryScreen->currPageIndex = sMonSummaryScreen->minPageIndex;
-    SummaryScreen_SetUnknownTaskId(-1);
+    SummaryScreen_SetUnknownTaskId(0xFF);
 
     if (gMonSpritesGfxPtr == NULL)
         sub_806F2AC(0, 0);
@@ -1975,16 +1975,16 @@ static void ChangeSelectedMove(s16 *taskData, s8 direction, u8 *moveIndexPtr)
     }
 
     *moveIndexPtr = newMoveIndex;
-    // Not sure what the purpose of this function is, seems to have no effect whatsoever.
+    // Get rid of the 'flicker' effect(while idle) when scrolling.
     if (moveIndexPtr == &sMonSummaryScreen->firstMoveIndex)
-        MakeMoveSelectorVisible(SPRITE_ARR_ID_MOVE_SELECTOR1);
+        KeepMoveSelectorVisible(SPRITE_ARR_ID_MOVE_SELECTOR1);
     else
-        MakeMoveSelectorVisible(SPRITE_ARR_ID_MOVE_SELECTOR2);
+        KeepMoveSelectorVisible(SPRITE_ARR_ID_MOVE_SELECTOR2);
 }
 
 static void CloseMoveSelectMode(u8 taskId)
 {
-    DestroyMoveSelectorSprites(8);
+    DestroyMoveSelectorSprites(SPRITE_ARR_ID_MOVE_SELECTOR1);
     ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_SWITCH);
     PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_INFO);
     PrintMoveDetails(0);
@@ -2678,14 +2678,10 @@ static void ResetWindows(void)
 
     InitWindows(sSummaryTemplate);
     DeactivateAllTextPrinters();
-    for (i = 0; i < 20; i++)
-    {
+    for (i = 0; i < PSS_LABEL_WINDOW_END; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    }
     for (i = 0; i < ARRAY_COUNT(sMonSummaryScreen->windowIds); i++)
-    {
         sMonSummaryScreen->windowIds[i] = 0xFF;
-    }
 }
 
 static void PrintTextOnWindow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId)
@@ -3299,7 +3295,7 @@ static void Task_PrintSkillsPage(u8 taskId)
 static void PrintHeldItemName(void)
 {
     const u8 *text;
-    int offset;
+    int x;
 
     if (sMonSummaryScreen->summary.item == ITEM_ENIGMA_BERRY
         && IsMultiBattle() == TRUE
@@ -3317,14 +3313,14 @@ static void PrintHeldItemName(void)
         text = gStringVar1;
     }
 
-    offset = GetStringCenterAlignXOffset(1, text, 72) + 6;
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_HELD_ITEM), text, offset, 1, 0, 0);
+    x = GetStringCenterAlignXOffset(1, text, 72) + 6;
+    PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_HELD_ITEM), text, x, 1, 0, 0);
 }
 
 static void PrintRibbonCount(void)
 {
     const u8 *text;
-    int offset;
+    int x;
 
     if (sMonSummaryScreen->summary.ribbonCount == 0)
     {
@@ -3337,8 +3333,8 @@ static void PrintRibbonCount(void)
         text = gStringVar4;
     }
 
-    offset = GetStringCenterAlignXOffset(1, text, 70) + 6;
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT), text, offset, 1, 0, 0);
+    x = GetStringCenterAlignXOffset(1, text, 70) + 6;
+    PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT), text, x, 1, 0, 0);
 }
 
 static void BufferLeftColumnStats(void)
@@ -3799,7 +3795,7 @@ static void SetMoveTypeIcons(void)
         if (summary->moves[i] != MOVE_NONE)
             SetTypeSpritePosAndPal(gBattleMoves[summary->moves[i]].type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
         else
-            SetSpriteInvisibility(i + 3, TRUE);
+            SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
     }
 }
 
@@ -3812,7 +3808,7 @@ static void SetContestMoveTypeIcons(void)
         if (summary->moves[i] != MOVE_NONE)
             SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gContestMoves[summary->moves[i]].contestCategory, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
         else
-            SetSpriteInvisibility(i + 3, TRUE);
+            SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
     }
 }
 
@@ -3938,9 +3934,9 @@ static void SpriteCB_Pokemon(struct Sprite *sprite)
     }
 }
 
-void SummaryScreen_SetUnknownTaskId(u8 a0)
+void SummaryScreen_SetUnknownTaskId(u8 taskId)
 {
-    sUnknownTaskId = a0;
+    sUnknownTaskId = taskId;
 }
 
 void SummaryScreen_DestroyUnknownTask(void)
@@ -4041,7 +4037,7 @@ static void CreateMoveSelectorSprites(u8 idArrayStart)
         if (idArrayStart == SPRITE_ARR_ID_MOVE_SELECTOR1)
             subpriority = 1;
 
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < MOVE_SELECTOR_SPRITES_COUNT; i++)
         {
             spriteIds[i] = CreateSprite(&sMoveSelectorSpriteTemplate, i * 16 + 89, 40, subpriority);
             if (i == 0)
@@ -4104,7 +4100,7 @@ static void SetMainMoveSelectorColor(u8 which)
     }
 }
 
-static void MakeMoveSelectorVisible(u8 firstSpriteId)
+static void KeepMoveSelectorVisible(u8 firstSpriteId)
 {
     u8 i;
     u8 *spriteIds = &sMonSummaryScreen->spriteIds[firstSpriteId];
