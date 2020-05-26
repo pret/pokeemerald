@@ -2395,7 +2395,6 @@ Move_NASTY_PLOT:
 	waitbgfadeout 
 	createvisualtask AnimTask_FadeScreenToWhite, 5
 	waitbgfadein 
-	return
 	delay 8
 	createsprite gQuestionMarkSpriteTemplate, 20, 0
 	playsewithpan SE_W118, SOUND_PAN_ATTACKER, 
