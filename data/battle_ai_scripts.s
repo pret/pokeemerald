@@ -497,19 +497,25 @@ AI_CBM_Gravity:
 	if_field_status STATUS_FIELD_GRAVITY, Score_Minus10
 	end
 	
+@ Don't use hazards if target side has no mons to switch
+AI_CBM_Hazards:
+	count_usable_party_mons AI_TARGET
+	if_equal 0, Score_Minus10
+	end
+	
 AI_CBM_ToxicSpikes:
 	if_not_side_affecting AI_TARGET, SIDE_STATUS_TOXIC_SPIKES, AI_Ret
 	get_hazards_count AI_TARGET, EFFECT_TOXIC_SPIKES
 	if_equal 2, Score_Minus10
-	end
+	goto AI_CBM_Hazards
 	
 AI_CBM_StealthRock:
 	if_side_affecting AI_TARGET, SIDE_STATUS_STEALTH_ROCK, Score_Minus10
-	end
+	goto AI_CBM_Hazards
 
 AI_CBM_StickyWeb:
 	if_side_affecting AI_TARGET, SIDE_STATUS_STICKY_WEB, Score_Minus10
-	end
+	goto AI_CBM_Hazards
 	
 AI_CBM_Sleep: @ 82DC2D4
 	get_ability AI_TARGET
@@ -749,6 +755,7 @@ AI_CBM_Curse: @ 82DC5BB
 	end
 
 AI_CBM_Spikes: @ 82DC5CC
+	call AI_CBM_Hazards
 	if_not_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, AI_Ret
 	get_hazards_count AI_TARGET, EFFECT_SPIKES
 	if_equal 3, Score_Minus10
@@ -1175,15 +1182,15 @@ AI_CV_PerishSong_ShadowTag:
 	goto AI_CV_PerishSongCheckTrap
 	
 AI_CV_Hazards:
-	if_ability AI_TARGET, ABILITY_MAGIC_BOUNCE, AI_CV_StealthRockEnd
+	if_ability AI_TARGET, ABILITY_MAGIC_BOUNCE, AI_CV_HzardsEnd
 	is_first_turn_for AI_USER
-	if_equal 0, AI_CV_StealthRockEnd
+	if_equal 0, AI_CV_HzardsEnd
 	score +2
-AI_CV_StealthRockEnd:
+AI_CV_HzardsEnd:
 	end
 AI_CV_StealthRock2:
 	score -2
-	goto AI_CV_StealthRockEnd
+	goto AI_CV_HzardsEnd
 	
 AI_CV_MistyTerrain:
 	call AI_CV_TerrainExpander
