@@ -4,6 +4,7 @@
 #include "trig.h"
 #include "constants/songs.h"
 #include "sound.h"
+#include "constants/moves.h"
 
 static void AnimLightning(struct Sprite *);
 static void AnimLightning_Step(struct Sprite *);
@@ -843,7 +844,7 @@ void AnimThunderWave(struct Sprite *sprite)
 
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
-    if (IsMoveAnimAnchorShot())
+    if (gAnimMoveIndex == MOVE_ANCHOR_SHOT)
         spriteId = CreateSprite(&gAnchorShotChainTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
     else
         spriteId = CreateSprite(&gThunderWaveSpriteTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
@@ -903,7 +904,7 @@ static void AnimTask_ElectricChargingParticles_Step(u8 taskId)
         {
             u8 spriteId;
             task->data[12] = 0;
-            if (IsMoveAnimFlashCannonOrSteelBeam())
+            if (gAnimMoveIndex == MOVE_FLASH_CANNON || gAnimMoveIndex == MOVE_STEEL_BEAM)
                 spriteId = CreateSprite(&gLightOfRuinGrayChargeTemplate, task->data[14], task->data[15], 2);
             else
                 spriteId = CreateSprite(&gElectricChargingParticlesSpriteTemplate, task->data[14], task->data[15], 2);

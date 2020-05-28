@@ -488,10 +488,6 @@ void AnimDragonDanceOrb(struct Sprite *sprite);
 void AnimOverheatFlame(struct Sprite *sprite);
 
 // battle_anim_new.c
-bool8 IsMoveAnimDarkVoid(void);
-bool8 IsMoveAnimFlashCannonOrSteelBeam(void);
-bool8 IsMoveAnimCoreEnforcer(void);
-bool8 IsMoveAnimAnchorShot(void);
 void CoreEnforcerLoadBeamTarget(struct Sprite* sprite);
 
 #endif // GUARD_BATTLE_ANIM_H

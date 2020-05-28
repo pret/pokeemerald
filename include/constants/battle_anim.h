@@ -398,10 +398,6 @@
 #define ANIM_ATK_PARTNER 2
 #define ANIM_DEF_PARTNER 3
 
-//sides
-#define SIDE_ATTACKER   2
-#define SIDE_TARGET     3
-
 // stereo panning constants [0-255]
 //
 //          0
@@ -597,28 +593,28 @@
 #define BACK_ANIM_FADE_BLUE_WITH_SHAKE         0x19
 
 // mon pal blend
-#define PAL_BG 0x1
-#define PAL_ATK 0x2
-#define PAL_DEF 0x4
-#define PAL_ATK_PARTNER 0x8
-#define PAL_DEF_PARTNER 0x10
-#define PAL_ALL 0x1f
-#define PAL_BG_4 0x20
-#define PAL_BG_5 0x40
-#define PAL_ALL_BANKS 0x780
-#define PAL_PLAYER1 0x80
-#define PAL_PLAYER2 0x100
-#define PAL_OPPONENT1 0x200
-#define PAL_OPPONENT2 0x400
+#define ANIM_PAL_BG             0x1
+#define ANIM_PAL_ATK            0x2
+#define ANIM_PAL_DEF            0x4
+#define ANIM_PAL_ATK_PARTNER    0x8
+#define ANIM_PAL_DEF_PARTNER    0x10
+#define ANIM_PAL_ALL            0x1f
+#define ANIM_PAL_BG_4           0x20
+#define ANIM_PAL_BG_5           0x40
+#define ANIM_PAL_ALL_BATTLERS   0x780
+#define ANIM_PAL_PLAYER1        0x80
+#define ANIM_PAL_PLAYER2        0x100
+#define ANIM_PAL_OPPONENT1      0x200
+#define ANIM_PAL_OPPONENT2      0x400
 
 // horseshoe/fist frames
-#define RIGHT_FIST 0
-#define LEFT_FIST  2
+#define ANIM_RIGHT_FIST  0
+#define ANIM_LEFT_FIST   2
 
 // surf wave palettes
-#define SURF_PALETTE_SURF           0
-#define SURF_PALETTE_MUDDY_WATER    1
-#define SURF_PALETTE_SLUDGE_WAVE    2
+#define ANIM_SURF_PAL_SURF           0
+#define ANIM_SURF_PAL_MUDDY_WATER    1
+#define ANIM_SURF_PAL_SLUDGE_WAVE    2
 
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

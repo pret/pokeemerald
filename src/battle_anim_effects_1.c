@@ -15,6 +15,7 @@
 #include "util.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/moves.h"
 
 EWRAM_DATA s16 gUnknown_0203A0F8[4] = {0};
 
@@ -3034,7 +3035,7 @@ static void AnimSolarbeamSmallOrb(struct Sprite* sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
     
-    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsMoveAnimCoreEnforcer())
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gAnimMoveIndex == MOVE_CORE_ENFORCER)
     {
         CoreEnforcerLoadBeamTarget(sprite);
     }

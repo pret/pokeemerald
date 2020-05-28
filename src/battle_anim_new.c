@@ -15,9 +15,6 @@
 #include "battle_controllers.h"
 #include "constants/moves.h"
 
-// defines
-#define PARTNER(battler) (battler ^ BIT_FLANK)
-
 //// function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite* sprite);
 static void SpriteCB_SpriteOnMonForDuration(struct Sprite *sprite);
@@ -4055,10 +4052,10 @@ static u8 LoadBattleAnimTarget(u8 arg)
             battler = gBattleAnimTarget;
             break;
         case 2:
-            battler = PARTNER(gBattleAnimAttacker);
+            battler = BATTLE_PARTNER(gBattleAnimAttacker);
             break;
         case 3:
-            battler = PARTNER(gBattleAnimTarget);
+            battler = BATTLE_PARTNER(gBattleAnimTarget);
             break;
         }
     }
@@ -4073,12 +4070,12 @@ static u8 LoadBattleAnimTarget(u8 arg)
     return battler;
 }
 
-static u8 GetProperCentredCoord(u8 bank, u8 coordType)
+static u8 GetProperCentredCoord(u8 battler, u8 coordType)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-        return (GetBattlerSpriteCoord2(bank, coordType) + GetBattlerSpriteCoord2(PARTNER(bank), coordType)) / 2;
+        return (GetBattlerSpriteCoord2(battler, coordType) + GetBattlerSpriteCoord2(BATTLE_PARTNER(battler), coordType)) / 2;
 
-    return GetBattlerSpriteCoord(bank, coordType);
+    return GetBattlerSpriteCoord(battler, coordType);
 }
 
 static void InitSpritePosToGivenTarget(struct Sprite* sprite, u8 target)
@@ -4095,9 +4092,9 @@ static void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool8 respec
     if (!respectMonPicOffsets)
     {
         sprite->pos1.x = (GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_X)
-                       +  GetBattlerSpriteCoord2(PARTNER(gBattleAnimTarget), BATTLER_COORD_X)) / 2;
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_X)) / 2;
         sprite->pos1.y = (GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_Y)
-                       +  GetBattlerSpriteCoord2(PARTNER(gBattleAnimTarget), BATTLER_COORD_Y)) / 2;
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_Y)) / 2;
     }
 
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
@@ -4109,16 +4106,16 @@ static void InitSpritePosToAnimAttackersCentre(struct Sprite *sprite, bool8 resp
     if (!respectMonPicOffsets)
     {
         sprite->pos1.x = (GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_X)
-                       +  GetBattlerSpriteCoord2(PARTNER(gBattleAnimAttacker), BATTLER_COORD_X)) / 2;
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X)) / 2;
         sprite->pos1.y = (GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_Y)
-                       +  GetBattlerSpriteCoord2(PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y)) / 2;
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y)) / 2;
     }
     else
     {
         sprite->pos1.x = (GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_X_2)
-                       +  GetBattlerSpriteCoord2(PARTNER(gBattleAnimAttacker), BATTLER_COORD_X_2)) / 2;
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X_2)) / 2;
         sprite->pos1.y = (GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET)
-                       +  GetBattlerSpriteCoord2(PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y_PIC_OFFSET)) / 2;
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y_PIC_OFFSET)) / 2;
     }
 
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
@@ -4275,11 +4272,11 @@ static void SpriteCB_CoreEnforcerBeam(struct Sprite* sprite)
         sprite->data[0] = gBattleAnimArgs[2];
 
         sprite->data[2] = (GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2)
-                        +  GetBattlerSpriteCoord(PARTNER(gBattleAnimTarget), BATTLER_COORD_X_2)) / 2;
+                        +  GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_X_2)) / 2;
 
 
         sprite->data[4] = (GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET)
-                        +  GetBattlerSpriteCoord(PARTNER(gBattleAnimTarget), BATTLER_COORD_Y_PIC_OFFSET)) / 2;
+                        +  GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_Y_PIC_OFFSET)) / 2;
 
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
@@ -4324,7 +4321,7 @@ static void SpriteCB_TranslateAnimSpriteToTargetMonLocationDoubles(struct Sprite
 //arg 0: initial x pixel offset
 //arg 1: initial y pixel offset
 //arg 2: speed
-//arg 3: anim bank
+//arg 3: anim battler
 static void SpriteCB_FallingObject(struct Sprite *sprite)
 {
     u8 target = LoadBattleAnimTarget(3);
@@ -4740,7 +4737,7 @@ static void SpriteCB_AcidDripSingleTarget(struct Sprite *sprite)
 //Causes an object to fall from the sky.
 //arg 0: initial x pixel offset
 //arg 1: initial y pixel offset
-//arg 2: anim bank
+//arg 2: anim battler
 static void SpriteCB_WaterDroplet(struct Sprite *sprite)
 {
     u8 target = LoadBattleAnimTarget(2);
@@ -4816,7 +4813,7 @@ static void SpriteCB_SurroundingRing(struct Sprite *sprite)
 //Imitates launching a beam of light towards the sky
 //arg 0: initial x pixel offset
 //arg 1: initial y pixel offset
-//arg 2: bank
+//arg 2: battler
 //arg 3: duration
 //arg 4: Anim num
 //arg 5: affine anim start delay
@@ -4942,55 +4939,15 @@ void AnimTask_SquishTarget(u8 taskId)
     task->func = AnimTask_WaitAffineAnim;
 }
 
-void AnimTask_IsTargetPartner(u8 taskId)
-{
-    if (gBattleAnimTarget == PARTNER(gBattleAnimAttacker))
-        gBattleAnimArgs[0] = 1;
-    else
-        gBattleAnimArgs[0] = 0;
-
-    DestroyAnimVisualTask(taskId);
-}
-
-void AnimTask_AllBanksInvisible(u8 taskId)
-{
-    int i;
-    u8 spriteId;
-    
-    for (i = 0; i < gBattlersCount; ++i)
-    {
-        spriteId = gBattlerSpriteIds[i];
-        if (spriteId != 0xFF)
-            gSprites[spriteId].invisible = TRUE;
-    }
-
-    DestroyAnimVisualTask(taskId);
-}
-
-void AnimTask_AllBanksVisible(u8 taskId)
-{
-    int i;
-    u8 spriteId;
-    
-    for (i = 0; i < gBattlersCount; ++i)
-    {
-        spriteId = gBattlerSpriteIds[i];
-        if (spriteId != 0xFF)
-            gSprites[spriteId].invisible = FALSE;
-    }
-
-    DestroyAnimVisualTask(taskId);
-}
-
 void CoreEnforcerLoadBeamTarget(struct Sprite* sprite)
 {
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = (GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2)
-                    +  GetBattlerSpriteCoord(PARTNER(gBattleAnimTarget), BATTLER_COORD_X_2)) / 2;
+                    +  GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_X_2)) / 2;
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = (GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET)
-                    +  GetBattlerSpriteCoord(PARTNER(gBattleAnimTarget), BATTLER_COORD_Y_PIC_OFFSET)) / 2;
+                    +  GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_Y_PIC_OFFSET)) / 2;
 }
 
 void AnimTask_CreateBestowItem(u8 taskId)
@@ -5033,26 +4990,5 @@ void AnimTask_TechnoBlast(u8 taskId)
     //gBattleAnimArgs[0] = gItems[GetBattlerPartyData(gBattleAnimAttacker).item].holdEffectParam;
     gBattleAnimArgs[0] = ItemId_GetHoldEffectParam(gBattleMons[gBattleAnimAttacker].item);
     DestroyAnimVisualTask(taskId);
-}
-
-// move checks
-bool8 IsMoveAnimDarkVoid(void)
-{
-    return gAnimMoveIndex == MOVE_DARK_VOID;
-}
-
-bool8 IsMoveAnimFlashCannonOrSteelBeam(void)
-{
-    return gAnimMoveIndex == MOVE_FLASH_CANNON || gAnimMoveIndex == MOVE_STEEL_BEAM;
-}
-
-bool8 IsMoveAnimCoreEnforcer(void)
-{
-    return gAnimMoveIndex == MOVE_CORE_ENFORCER;
-}
-
-bool8 IsMoveAnimAnchorShot(void)
-{
-    return gAnimMoveIndex == MOVE_ANCHOR_SHOT;
 }
 

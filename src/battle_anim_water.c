@@ -1077,14 +1077,16 @@ void AnimTask_CreateSurfWave(u8 taskId)
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     switch (gBattleAnimArgs[0])
     {
-    case SURF_PALETTE_SURF:
+    case ANIM_SURF_PAL_SURF:
     default:
         LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
         break;
-    case SURF_PALETTE_MUDDY_WATER:
+    case ANIM_SURF_PAL_MUDDY_WATER:
         LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
-    case SURF_PALETTE_SLUDGE_WAVE:
+        break;
+    case ANIM_SURF_PAL_SLUDGE_WAVE:
         LoadCompressedPalette(gBattleAnimBgPalette_SludgeWave, animBg.paletteId * 16, 32);
+        break;
     }
     
     taskId2 = CreateTask(AnimTask_SurfWaveScanlineEffect, gTasks[taskId].priority + 1);

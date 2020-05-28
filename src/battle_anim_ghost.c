@@ -9,6 +9,7 @@
 #include "sound.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/moves.h"
 
 static void AnimConfuseRayBallBounce(struct Sprite *);
 static void AnimConfuseRayBallBounce_Step1(struct Sprite *);
@@ -874,7 +875,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
              && battler != (gBattleAnimAttacker ^ 2)
              && IsBattlerSpriteVisible(battler))
             {
-                if (IsMoveAnimDarkVoid())
+                if (gAnimMoveIndex == MOVE_DARK_VOID)
                     spriteId = CreateSprite(&gDarkVoidBlackHoleTemplate, baseX, baseY, 55);   //dark void
                 else
                     spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);   //destiny bond
@@ -900,7 +901,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
     }
     else
     {
-        if (IsMoveAnimDarkVoid())
+        if (gAnimMoveIndex == MOVE_DARK_VOID)
             spriteId = CreateSprite(&gDarkVoidBlackHoleTemplate, baseX, baseY, 55);   //dark void
         else
             spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);   //destiny bond
