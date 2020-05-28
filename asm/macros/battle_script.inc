@@ -1715,7 +1715,13 @@
 	.endm
 
 	.macro trypoisontype attacker:req, target:req, ptr:req
-	various \attacker, VARIOUS_HANDLE_TYPE_IMMUNITY
+	various \attacker, VARIOUS_POISON_TYPE_IMMUNITY
+	.byte \target
+	.4byte \ptr
+	.endm
+
+	.macro tryparalyzetype attacker:req, target:req, ptr:req
+	various \attacker, VARIOUS_PARALYZE_TYPE_IMMUNITY
 	.byte \target
 	.4byte \ptr
 	.endm
