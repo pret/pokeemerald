@@ -17,6 +17,21 @@ struct Palette {
 	int numColors;
 };
 
+struct NonAffineTile {
+    unsigned short index:10;
+    unsigned short hflip:1;
+    unsigned short vflip:1;
+    unsigned short palno:4;
+} __attribute__((packed));
+
+struct Tilemap {
+    union {
+        struct NonAffineTile *non_affine;
+        unsigned char *affine;
+    } data;
+    int size;
+};
+
 struct Image {
 	int width;
 	int height;
@@ -25,6 +40,8 @@ struct Image {
 	bool hasPalette;
 	struct Palette palette;
 	bool hasTransparency;
+	struct Tilemap tilemap;
+	bool isAffine;
 };
 
 void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
