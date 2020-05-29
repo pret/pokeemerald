@@ -25,4 +25,11 @@
 #define BERRY_STAGE_BERRIES     5
 #define BERRY_STAGE_SPARKLING   255
 
+// Berries can be watered in the following stages:
+// - BERRY_STAGE_PLANTED
+// - BERRY_STAGE_SPROUTED
+// - BERRY_STAGE_TALLER
+// - BERRY_STAGE_FLOWERING
+#define NUM_WATER_STAGES 4
+
 #endif // GUARD_CONSTANTS_BERRY_H

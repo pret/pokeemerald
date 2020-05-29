@@ -666,10 +666,12 @@ static const union AnimCmd *const sSpriteAnimTable_DexListStartMenuCursor[] =
     sSpriteAnim_DexListStartMenuCursor
 };
 
+#define TAG_DEX_INTERFACE 4096 // Tile and pal tag used for all interface sprites.
+
 static const struct SpriteTemplate sScrollBarSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_ScrollBar,
     .anims = sSpriteAnimTable_ScrollBar,
     .images = NULL,
@@ -679,8 +681,8 @@ static const struct SpriteTemplate sScrollBarSpriteTemplate =
 
 static const struct SpriteTemplate sScrollArrowSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_ScrollArrow,
     .anims = sSpriteAnimTable_ScrollArrow,
     .images = NULL,
@@ -690,8 +692,8 @@ static const struct SpriteTemplate sScrollArrowSpriteTemplate =
 
 static const struct SpriteTemplate sInterfaceTextSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_InterfaceText,
     .anims = sSpriteAnimTable_InterfaceText,
     .images = NULL,
@@ -701,8 +703,8 @@ static const struct SpriteTemplate sInterfaceTextSpriteTemplate =
 
 static const struct SpriteTemplate sRotatingPokeBallSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_RotatingPokeBall,
     .anims = sSpriteAnimTable_RotatingPokeBall,
     .images = NULL,
@@ -712,8 +714,8 @@ static const struct SpriteTemplate sRotatingPokeBallSpriteTemplate =
 
 static const struct SpriteTemplate sSeenOwnTextSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_SeenOwnText,
     .anims = sSpriteAnimTable_SeenOwnText,
     .images = NULL,
@@ -723,8 +725,8 @@ static const struct SpriteTemplate sSeenOwnTextSpriteTemplate =
 
 static const struct SpriteTemplate sHoennNationalTextSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_InterfaceText,
     .anims = sSpriteAnimTable_HoennNationalText,
     .images = NULL,
@@ -734,8 +736,8 @@ static const struct SpriteTemplate sHoennNationalTextSpriteTemplate =
 
 static const struct SpriteTemplate sHoennDexSeenOwnNumberSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_Dex8x16,
     .anims = sSpriteAnimTable_HoennSeenOwnNumber,
     .images = NULL,
@@ -745,8 +747,8 @@ static const struct SpriteTemplate sHoennDexSeenOwnNumberSpriteTemplate =
 
 static const struct SpriteTemplate sNationalDexSeenOwnNumberSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_Dex8x16,
     .anims = sSpriteAnimTable_NationalSeenOwnNumber,
     .images = NULL,
@@ -756,8 +758,8 @@ static const struct SpriteTemplate sNationalDexSeenOwnNumberSpriteTemplate =
 
 static const struct SpriteTemplate sDexListStartMenuCursorSpriteTemplate =
 {
-    .tileTag = 4096,
-    .paletteTag = 4096,
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
     .oam = &sOamData_Dex8x16,
     .anims = sSpriteAnimTable_DexListStartMenuCursor,
     .images = NULL,
@@ -767,13 +769,13 @@ static const struct SpriteTemplate sDexListStartMenuCursorSpriteTemplate =
 
 static const struct CompressedSpriteSheet sInterfaceSpriteSheet[] =
 {
-    {gPokedexInterface_Gfx, 0x2000, 4096},
+    {gPokedexInterface_Gfx, 0x2000, TAG_DEX_INTERFACE},
     {0}
 };
 
 static const struct SpritePalette sInterfaceSpritePalette[] =
 {
-    {gPokedexBgHoenn_Pal, 4096},
+    {gPokedexBgHoenn_Pal, TAG_DEX_INTERFACE},
     {0}
 };
 

@@ -25,6 +25,7 @@
 #include "bg.h"
 #include "window.h"
 #include "constants/coins.h"
+#include "constants/slot_machine.h"
 
 // Text
 extern const u8 gText_YouDontHaveThreeCoins[];
@@ -32,31 +33,6 @@ extern const u8 gText_QuitTheGame[];
 extern const u8 gText_YouveGot9999Coins[];
 extern const u8 gText_YouveRunOutOfCoins[];
 extern const u8 gText_ReelTimeHelp[];
-
-enum
-{
-    SLOT_MACHINE_TAG_7_RED,
-    SLOT_MACHINE_TAG_7_BLUE,
-    SLOT_MACHINE_TAG_AZURILL,
-    SLOT_MACHINE_TAG_LOTAD,
-    SLOT_MACHINE_TAG_CHERRY,
-    SLOT_MACHINE_TAG_POWER,
-    SLOT_MACHINE_TAG_REPLAY
-};
-
-enum
-{
-    SLOT_MACHINE_MATCHED_1CHERRY,
-    SLOT_MACHINE_MATCHED_2CHERRY,
-    SLOT_MACHINE_MATCHED_REPLAY,
-    SLOT_MACHINE_MATCHED_LOTAD,
-    SLOT_MACHINE_MATCHED_AZURILL,
-    SLOT_MACHINE_MATCHED_POWER,
-    SLOT_MACHINE_MATCHED_777_MIXED,
-    SLOT_MACHINE_MATCHED_777_RED,
-    SLOT_MACHINE_MATCHED_777_BLUE,
-    SLOT_MACHINE_MATCHED_NONE
-};
 
 struct SlotMachineEwramStruct
 {
@@ -81,7 +57,7 @@ struct SlotMachineEwramStruct
     /*0x1A*/ s16 reelIncrement; // speed of reel
     /*0x1C*/ s16 reelPixelOffsets[3];
     /*0x22*/ u16 reelPixelOffsetsWhileStopping[3];
-    /*0x28*/ s16 reelTagOffsets[3];
+    /*0x28*/ s16 reelPositions[3];
     /*0x2E*/ s16 reelExtraTurns[3];
     /*0x34*/ s16 winnerRows[3];
     /*0x3A*/ u8 slotReelTasks[3];
@@ -184,7 +160,7 @@ static bool8 IsFinalTask_RunAwardPayoutActions(void);
 static bool8 AwardPayoutAction0(struct Task *task);
 static bool8 AwardPayoutAction_GivePayoutToPlayer(struct Task *task);
 static bool8 AwardPayoutAction_FreeTask(struct Task *task);
-static u8 GetNearbyTag_Quantized(u8 x, s16 y);
+static u8 GetTagAtRest(u8 x, s16 y);
 static void GameplayTask_StopSlotReel(void);
 static void ReelTasks_SetUnkTaskData(u8 a0);
 static void sub_8102E1C(u8 a0);
@@ -890,8 +866,8 @@ static void SlotMachineSetup_0_1(void)
     for (i = 0; i < NUM_REELS; i++)
     {
         sSlotMachine->reelPixelOffsetsWhileStopping[i] = 0;
-        sSlotMachine->reelTagOffsets[i] = gInitialReelPositions[i][sSlotMachine->luckyGame] % REEL_NUM_TAGS;
-        sSlotMachine->reelPixelOffsets[i] = REEL_NUM_TAGS * REEL_TAG_HEIGHT - sSlotMachine->reelTagOffsets[i] * REEL_TAG_HEIGHT;
+        sSlotMachine->reelPositions[i] = gInitialReelPositions[i][sSlotMachine->luckyGame] % REEL_NUM_TAGS;
+        sSlotMachine->reelPixelOffsets[i] = REEL_NUM_TAGS * REEL_TAG_HEIGHT - sSlotMachine->reelPositions[i] * REEL_TAG_HEIGHT;
         sSlotMachine->reelPixelOffsets[i] %= REEL_NUM_TAGS * REEL_TAG_HEIGHT;
     }
     AlertTVThatPlayerPlayedSlotMachine(GetCoins());
@@ -1598,9 +1574,9 @@ static void CheckMatch_CenterRow(void)
 {
     u8 c1, c2, c3, match;
 
-    c1 = GetNearbyTag_Quantized(0, 2);
-    c2 = GetNearbyTag_Quantized(1, 2);
-    c3 = GetNearbyTag_Quantized(2, 2);
+    c1 = GetTagAtRest(LEFT_REEL, 2);
+    c2 = GetTagAtRest(MIDDLE_REEL, 2);
+    c3 = GetTagAtRest(RIGHT_REEL, 2);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1614,9 +1590,9 @@ static void CheckMatch_TopAndBottom(void)
 {
     u8 c1, c2, c3, match;
 
-    c1 = GetNearbyTag_Quantized(0, 1);
-    c2 = GetNearbyTag_Quantized(1, 1);
-    c3 = GetNearbyTag_Quantized(2, 1);
+    c1 = GetTagAtRest(LEFT_REEL, 1);
+    c2 = GetTagAtRest(MIDDLE_REEL, 1);
+    c3 = GetTagAtRest(RIGHT_REEL, 1);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1626,9 +1602,9 @@ static void CheckMatch_TopAndBottom(void)
         sSlotMachine->matchedSymbols |= gSlotMatchFlags[match];
         sub_8103E04(1);
     }
-    c1 = GetNearbyTag_Quantized(0, 3);
-    c2 = GetNearbyTag_Quantized(1, 3);
-    c3 = GetNearbyTag_Quantized(2, 3);
+    c1 = GetTagAtRest(LEFT_REEL, 3);
+    c2 = GetTagAtRest(MIDDLE_REEL, 3);
+    c3 = GetTagAtRest(RIGHT_REEL, 3);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1644,9 +1620,9 @@ static void CheckMatch_Diagonals(void)
 {
     u8 c1, c2, c3, match;
 
-    c1 = GetNearbyTag_Quantized(0, 1);
-    c2 = GetNearbyTag_Quantized(1, 2);
-    c3 = GetNearbyTag_Quantized(2, 3);
+    c1 = GetTagAtRest(LEFT_REEL, 1);
+    c2 = GetTagAtRest(MIDDLE_REEL, 2);
+    c3 = GetTagAtRest(RIGHT_REEL, 3);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1657,9 +1633,9 @@ static void CheckMatch_Diagonals(void)
         }
         sub_8103E04(3);
     }
-    c1 = GetNearbyTag_Quantized(0, 3);
-    c2 = GetNearbyTag_Quantized(1, 2);
-    c3 = GetNearbyTag_Quantized(2, 1);
+    c1 = GetTagAtRest(LEFT_REEL, 3);
+    c2 = GetTagAtRest(MIDDLE_REEL, 2);
+    c3 = GetTagAtRest(RIGHT_REEL, 1);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1751,25 +1727,34 @@ static bool8 AwardPayoutAction_FreeTask(struct Task *task)
     return FALSE;
 }
 
-
-// Returns the tag that is posOffset below the tag at the top of reelIndex's tape
-static u8 GetNearbyTag_Quantized(u8 reelIndex, s16 posOffset)
+// Get the tag at position `offset` below the top of the reel's tape. Note that
+// if `offset` is negative, it wraps around to the bottom of the tape.
+//           .-----------------.
+//           | [ ] | [ ] | [ ] | <- offset = 0
+//           /-----|-----|-----\
+// screen -> | [ ] | [ ] | [ ] | <- offset = 1
+//           | [ ] | [ ] | [ ] | <- offset = 2
+//           | [ ] | [ ] | [ ] | <- offset = 3
+//           \-----|-----|-----/
+//           | ... | ... | ... |
+//           | [ ] | [ ] | [ ] | <- offset = 20
+//           .-----------------.
+static u8 GetTagAtRest(u8 reel, s16 offset)
 {
-    s16 tagIndex = (sSlotMachine->reelTagOffsets[reelIndex] + posOffset) % REEL_NUM_TAGS;
-    if (tagIndex < 0)
-        tagIndex += REEL_NUM_TAGS;
-    return gReelSymbols[reelIndex][tagIndex];
+    s16 pos = (sSlotMachine->reelPositions[reel] + offset) % REEL_NUM_TAGS;
+    if (pos < 0)
+        pos += REEL_NUM_TAGS;
+    return gReelSymbols[reel][pos];
 }
 
-
-// Calculates GetNearbyTag_Quantized as if the reel was snapped downwards into place
-static u8 GetNearbyTag(u8 reelIndex, s16 posOffset)
+// Calculates GetTagAtRest as if the reel were snapped downwards into place.
+static u8 GetTag(u8 reel, s16 offset)
 {
-    s16 tagOffset = 0;
-    s16 result = sSlotMachine->reelPixelOffsets[reelIndex] % 24;
-    if (result != 0)
-        tagOffset = -1;
-    return GetNearbyTag_Quantized(reelIndex, posOffset + tagOffset);
+    s16 inc = 0;
+    s16 pixelOffset = sSlotMachine->reelPixelOffsets[reel] % REEL_TAG_HEIGHT;
+    if (pixelOffset != 0)
+        inc = -1;
+    return GetTagAtRest(reel, offset + inc);
 }
 
 static u8 GetNearbyReelTimeTag(s16 n)
@@ -1784,7 +1769,7 @@ static void AdvanceSlotReel(u8 reelIndex, s16 value)
 {
     sSlotMachine->reelPixelOffsets[reelIndex] += value;
     sSlotMachine->reelPixelOffsets[reelIndex] %= 504;
-    sSlotMachine->reelTagOffsets[reelIndex] = REEL_NUM_TAGS - sSlotMachine->reelPixelOffsets[reelIndex] / 24;
+    sSlotMachine->reelPositions[reelIndex] = REEL_NUM_TAGS - sSlotMachine->reelPixelOffsets[reelIndex] / 24;
 }
 
 s16 AdvanceSlotReelToNextTag(u8 reelIndex, s16 value)
@@ -1940,7 +1925,7 @@ static bool8 DecideReelTurns_BiasTag_Reel1(void)
 
 static bool8 AreTagsAtPosition_Reel1(s16 pos, u8 tag1, u8 tag2)
 {
-    u8 tag = GetNearbyTag(0, pos);
+    u8 tag = GetTag(LEFT_REEL, pos);
     if (tag == tag1 || tag == tag2)
     {
         sSlotMachine->biasTag = tag;
@@ -1951,7 +1936,7 @@ static bool8 AreTagsAtPosition_Reel1(s16 pos, u8 tag1, u8 tag2)
 
 static bool8 AreCherriesOnScreen_Reel1(s16 offsetFromCenter)
 {
-    if (GetNearbyTag(0, 1 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetNearbyTag(0, 2 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetNearbyTag(0, 3 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY)
+    if (GetTag(LEFT_REEL, 1 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetTag(LEFT_REEL, 2 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetTag(LEFT_REEL, 3 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY)
         return TRUE;
     else
         return FALSE;
@@ -2046,7 +2031,7 @@ static bool8 DecideReelTurns_BiasTag_Reel2_Bet1or2(void)
     for (i = 0; i < 5; i++)
     {
         // if biasTag appears in the same row within 4 turns
-        if (GetNearbyTag(1, biasTagLocation_Reel1 - i) == sSlotMachine->biasTag)
+        if (GetTag(MIDDLE_REEL, biasTagLocation_Reel1 - i) == sSlotMachine->biasTag)
         {
             sSlotMachine->winnerRows[1] = biasTagLocation_Reel1;
             sSlotMachine->reelExtraTurns[1] = i;
@@ -2068,7 +2053,7 @@ static bool8 DecideReelTurns_BiasTag_Reel2_Bet3(void)
             for (i = 0; i < 5; i++)
             {
                 //...and if the bias tag will appear in the middle row within 4 turns
-                if (GetNearbyTag(1, 2 - i) == sSlotMachine->biasTag)
+                if (GetTag(MIDDLE_REEL, 2 - i) == sSlotMachine->biasTag)
                 {
                     sSlotMachine->winnerRows[1] = 2;
                     sSlotMachine->reelExtraTurns[1] = i;
@@ -2084,7 +2069,7 @@ static bool8 DecideReelTurns_BiasTag_Reel2_Bet3(void)
         for (i = 0; i < 5; i++)
         {
             //...and if the biasTag will appear in the center row of reel 2 within 4 turns
-            if (GetNearbyTag(1, 2 - i) == sSlotMachine->biasTag)
+            if (GetTag(MIDDLE_REEL, 2 - i) == sSlotMachine->biasTag)
             {
                 sSlotMachine->winnerRows[1] = 2;
                 sSlotMachine->reelExtraTurns[1] = i;
@@ -2117,7 +2102,7 @@ static bool8 DecideReelTurns_BiasTag_Reel3_Bet1or2(u8 biasTag)
     for (i = 0; i < 5; i++)
     {
         // if the biasTag appears in the same row as in reel 2 within 4 turns
-        if (GetNearbyTag(2, biasTagLocation_Reel2 - i) == biasTag)
+        if (GetTag(RIGHT_REEL, biasTagLocation_Reel2 - i) == biasTag)
         {
             sSlotMachine->winnerRows[2] = biasTagLocation_Reel2;
             sSlotMachine->reelExtraTurns[2] = i;
@@ -2143,7 +2128,7 @@ static bool8 DecideReelTurns_BiasTag_Reel3_Bet3(u8 biasTag)
     for (i = 0; i < 5; i++)
     {
         // if the biasTag lands in that position within 4 turns
-        if (GetNearbyTag(2, biasTagFinalPos - i) == biasTag)
+        if (GetTag(RIGHT_REEL, biasTagFinalPos - i) == biasTag)
         {
             sSlotMachine->reelExtraTurns[2] = i;
             sSlotMachine->winnerRows[2] = biasTagFinalPos;
@@ -2189,7 +2174,7 @@ static void DecideReelTurns_NoBiasTag_Reel2_Bet1(void)
 {
     if (sSlotMachine->winnerRows[0] != 0 && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
-        u8 biasTag = GetNearbyTag(0, 2 - sSlotMachine->reelExtraTurns[0]);
+        u8 biasTag = GetTag(LEFT_REEL, 2 - sSlotMachine->reelExtraTurns[0]);
         //...and if biasTag is one of the 7's...
         if (IsBiasTag777_SwitchColor(&biasTag))
         //...swap color of biasTag...
@@ -2198,7 +2183,7 @@ static void DecideReelTurns_NoBiasTag_Reel2_Bet1(void)
             for (i = 0; i < 5; i++)
             {
                 //...and if the biasTag appears within 4 turns
-                if (biasTag == GetNearbyTag(1, 2 - i))
+                if (biasTag == GetTag(MIDDLE_REEL, 2 - i))
                 {
                     sSlotMachine->winnerRows[1] = 2;
                     sSlotMachine->reelExtraTurns[1] = i;
@@ -2213,7 +2198,7 @@ static void DecideReelTurns_NoBiasTag_Reel2_Bet2(void)
 {
     if (sSlotMachine->winnerRows[0] != 0 && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
-        u8 biasTag = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
+        u8 biasTag = GetTag(LEFT_REEL, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
         //...and if biasTag is one of the 7's...
         if (IsBiasTag777_SwitchColor(&biasTag))
         //...swap color of biasTag...
@@ -2222,7 +2207,7 @@ static void DecideReelTurns_NoBiasTag_Reel2_Bet2(void)
             for (i = 0; i < 5; i++)
             {
                 //...and if the biasTag appears in same row in reel 2 within 4 turns
-                if (biasTag == GetNearbyTag(1, sSlotMachine->winnerRows[0] - i))
+                if (biasTag == GetTag(MIDDLE_REEL, sSlotMachine->winnerRows[0] - i))
                 {
                     sSlotMachine->winnerRows[1] = sSlotMachine->winnerRows[0];
                     sSlotMachine->reelExtraTurns[1] = i;
@@ -2247,7 +2232,7 @@ static void DecideReelTurns_NoBiasTag_Reel2_Bet3(void)
         }
         else
         {
-            u8 biasTag = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
+            u8 biasTag = GetTag(LEFT_REEL, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
             //...and if biasTag is one of the 7's...
             if (IsBiasTag777_SwitchColor(&biasTag))
             //...swap the color of the 7...
@@ -2257,7 +2242,7 @@ static void DecideReelTurns_NoBiasTag_Reel2_Bet3(void)
                     j = 3;
                 for (i = 0; i < 2; i++, j--)
                 {
-                    if (biasTag == GetNearbyTag(1, j))
+                    if (biasTag == GetTag(MIDDLE_REEL, j))
                     {
                         sSlotMachine->winnerRows[1] = j;
                         sSlotMachine->reelExtraTurns[1] = 0;
@@ -2266,7 +2251,7 @@ static void DecideReelTurns_NoBiasTag_Reel2_Bet3(void)
                 }
                 for (j = 1; j < 5; j++)
                 {
-                    if (biasTag == GetNearbyTag(1, sSlotMachine->winnerRows[0] - j))
+                    if (biasTag == GetTag(MIDDLE_REEL, sSlotMachine->winnerRows[0] - j))
                     {
                         if (sSlotMachine->winnerRows[0] == 1)
                         {
@@ -2340,8 +2325,8 @@ static void DecideReelTurns_NoBiasTag_Reel3(void)
 static void DecideReelTurns_NoBiasTag_Reel3_Bet1(void)
 {
     s16 i = 0;
-    u8 tag1 = GetNearbyTag(0, 2 - sSlotMachine->reelExtraTurns[0]);
-    u8 tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
+    u8 tag1 = GetTag(LEFT_REEL, 2 - sSlotMachine->reelExtraTurns[0]);
+    u8 tag2 = GetTag(MIDDLE_REEL, 2 - sSlotMachine->reelExtraTurns[1]);
     // if tags match in first 2 reels...
     if (tag1 == tag2)
     {
@@ -2349,7 +2334,7 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet1(void)
         while (1)
         {
             u8 tag3;
-            if (!(tag1 == (tag3 = GetNearbyTag(2, 2 - i)) || (tag1 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE) || (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED)))
+            if (!(tag1 == (tag3 = GetTag(RIGHT_REEL, 2 - i)) || (tag1 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE) || (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED)))
                 break;
             i++;
         }
@@ -2361,7 +2346,7 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet1(void)
             //...see if you can match with reel 1 within 4 turns
             for (i = 0; i < 5; i++)
             {
-                if (tag1 == GetNearbyTag(2, 2 - i))
+                if (tag1 == GetTag(RIGHT_REEL, 2 - i))
                 {
                     sSlotMachine->reelExtraTurns[2] = i;
                     return;
@@ -2372,7 +2357,7 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet1(void)
         i = 0;
         while (1)
         {
-            if (tag1 != GetNearbyTag(2, 2 - i))
+            if (tag1 != GetTag(RIGHT_REEL, 2 - i))
                 break;
             i++;
         }
@@ -2389,15 +2374,15 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet2(void)
     u8 tag3;
     if (sSlotMachine->winnerRows[1] != 0 && sSlotMachine->winnerRows[0] == sSlotMachine->winnerRows[1] && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
-        tag1 = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
-        tag2 = GetNearbyTag(1, sSlotMachine->winnerRows[1] - sSlotMachine->reelExtraTurns[1]);
+        tag1 = GetTag(LEFT_REEL, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetTag(MIDDLE_REEL, sSlotMachine->winnerRows[1] - sSlotMachine->reelExtraTurns[1]);
         //...and if tags are mixed 7s...
         if (AreTagsMixed77(tag1, tag2))
         {
             //...try to match with reel 1 within 4 turns
             for (i = 0; i < 5; i++)
             {
-                tag3 = GetNearbyTag(2, sSlotMachine->winnerRows[1] - i);
+                tag3 = GetTag(RIGHT_REEL, sSlotMachine->winnerRows[1] - i);
                 if (tag1 == tag3)
                 {
                     extraTurns = i;
@@ -2412,9 +2397,9 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet2(void)
         s16 loopExit;
         for (i = 1, loopExit = 0; i < 4; i++)
         {
-            tag1 = GetNearbyTag(0, i - sSlotMachine->reelExtraTurns[0]);  // why does this update with i
-            tag2 = GetNearbyTag(1, i - sSlotMachine->reelExtraTurns[1]);
-            tag3 = GetNearbyTag(2, i - extraTurns);
+            tag1 = GetTag(LEFT_REEL, i - sSlotMachine->reelExtraTurns[0]);  // why does this update with i
+            tag2 = GetTag(MIDDLE_REEL, i - sSlotMachine->reelExtraTurns[1]);
+            tag3 = GetTag(RIGHT_REEL, i - extraTurns);
             // if bit 7 of luckyFlags is unset...
             //...and if all 3 tags match and they're not mixed 7s
             if (!TagsDontMatchOrHaveAny7s(tag1, tag2, tag3) && (!AreTagsMixed777(tag1, tag2, tag3) || !(sSlotMachine->luckyFlags & LUCKY_BIAS_777)))
@@ -2441,8 +2426,8 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet3(void)
     DecideReelTurns_NoBiasTag_Reel3_Bet2();
     if (sSlotMachine->winnerRows[1] != 0 && sSlotMachine->winnerRows[0] != sSlotMachine->winnerRows[1] && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
-        tag1 = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
-        tag2 = GetNearbyTag(1, sSlotMachine->winnerRows[1] - sSlotMachine->reelExtraTurns[1]);
+        tag1 = GetTag(LEFT_REEL, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetTag(MIDDLE_REEL, sSlotMachine->winnerRows[1] - sSlotMachine->reelExtraTurns[1]);
         //..and if tags are mixed 7s...
         if (AreTagsMixed77(tag1, tag2))
         {
@@ -2451,7 +2436,7 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet3(void)
                 j = 3;
             for (i = 0; i < 5; i++)
             {
-                tag3 = GetNearbyTag(2, j - (sSlotMachine->reelExtraTurns[2] + i));
+                tag3 = GetTag(RIGHT_REEL, j - (sSlotMachine->reelExtraTurns[2] + i));
                 if (tag1 == tag3)
                 {
                     sSlotMachine->reelExtraTurns[2] += i;
@@ -2462,18 +2447,18 @@ static void DecideReelTurns_NoBiasTag_Reel3_Bet3(void)
     }
     while (1)
     {
-        tag1 = GetNearbyTag(0, 1 - sSlotMachine->reelExtraTurns[0]);
-        tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
-        tag3 = GetNearbyTag(2, 3 - sSlotMachine->reelExtraTurns[2]);
+        tag1 = GetTag(LEFT_REEL, 1 - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetTag(MIDDLE_REEL, 2 - sSlotMachine->reelExtraTurns[1]);
+        tag3 = GetTag(RIGHT_REEL, 3 - sSlotMachine->reelExtraTurns[2]);
         if (TagsDontMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed777(tag1, tag2, tag3) && sSlotMachine->luckyFlags & LUCKY_BIAS_777))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
     while (1)
     {
-        tag1 = GetNearbyTag(0, 3 - sSlotMachine->reelExtraTurns[0]);
-        tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
-        tag3 = GetNearbyTag(2, 1 - sSlotMachine->reelExtraTurns[2]);
+        tag1 = GetTag(LEFT_REEL, 3 - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetTag(MIDDLE_REEL, 2 - sSlotMachine->reelExtraTurns[1]);
+        tag3 = GetTag(RIGHT_REEL, 1 - sSlotMachine->reelExtraTurns[2]);
         if (TagsDontMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed777(tag1, tag2, tag3) && sSlotMachine->luckyFlags & LUCKY_BIAS_777))
             break;
         sSlotMachine->reelExtraTurns[2]++;
@@ -3314,7 +3299,7 @@ static void sub_8104F18(struct Sprite *sprite)
     sprite->data[2] = sSlotMachine->reelPixelOffsets[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
     sprite->pos1.y = sSlotMachine->reelPixelOffsetsWhileStopping[sprite->data[0]] + 28 + sprite->data[2];
-    sprite->sheetTileStart = GetSpriteTileStartByTag(GetNearbyTag_Quantized(sprite->data[0], sprite->data[2] / 24));
+    sprite->sheetTileStart = GetSpriteTileStartByTag(GetTagAtRest(sprite->data[0], sprite->data[2] / 24));
     SetSpriteSheetFrameTileNum(sprite);
 }
 

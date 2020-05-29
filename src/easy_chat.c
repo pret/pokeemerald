@@ -2794,7 +2794,7 @@ static bool8 sub_811BFA4(void)
         DeactivateAllTextPrinters();
         sub_811CF64();
         sub_811CF04();
-        CpuFastFill(0, (void *)VRAM + 0x1000000, 0x400);
+        CpuFastFill(0, (void *)OAM, OAM_SIZE);
         break;
     case 1:
         DecompressAndLoadBgGfxUsingHeap(3, gEasyChatWindow_Gfx, 0, 0, 0);
@@ -2828,8 +2828,12 @@ static bool8 sub_811BFA4(void)
         else
         {
             sub_811DE5C(0, 0, 0, 0);
-            SetGpuReg(REG_OFFSET_WININ, WIN_RANGE(0, 63));
-            SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0, 59));
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+            SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0
+                                       | WINOUT_WIN01_BG1
+                                       | WINOUT_WIN01_BG3
+                                       | WINOUT_WIN01_OBJ
+                                       | WINOUT_WIN01_CLR);
             ShowBg(3);
             ShowBg(1);
             ShowBg(2);
