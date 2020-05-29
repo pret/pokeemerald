@@ -97,20 +97,20 @@
 #define B_POWDER_GRASS              GEN_6 // In Gen6+, Grass type Pokémon are immune to powder and spore moves.
 
 // Animation Settings
-#define NEW_SWORD_PARTICLE          // update swords dance particle
-#define NEW_LEECH_SEED_PARTICLE     //update leech seed's animation particle
-#define NEW_HORN_ATTACK_PARTICLE    //update horn attack's horn
-#define NEW_LEAF_PARTICLE           // update leaf particle
-#define NEW_EMBER_PARTICLES         //updates ember fire particle
-#define NEW_MEAN_LOOK_PARTICLE      //update mean look eye
-#define NEW_TEETH_PARTICLE          //update bite/crunch teeth particle
-#define NEW_HANDS_FEET_PARTICLE     //update chop/kick/punch particles
-#define NEW_SPIKES_PARTICLE         //update spikes particle
-#define NEW_FLY_BUBBLE_PARTICLE     //update fly 'bubble' particle
-#define NEW_CURSE_NAIL_PARTICLE     //updates curse nail
-#define NEW_BATON_PASS_BALL_PARTICLE    //update baton pass pokeball sprite
-#define NEW_MORNING_SUN_STAR_PARTICLE   //updates morning sun star particles
-#define NEW_IMPACT_PALETTE          //updates the basic 'hit' particle
-#define NEW_SURF_PARTICLE_PALETTE   //updates the surf wave palette
+#define NEW_SWORD_PARTICLE              TRUE    // update swords dance particle
+#define NEW_LEECH_SEED_PARTICLE         TRUE    //update leech seed's animation particle
+#define NEW_HORN_ATTACK_PARTICLE        TRUE    //update horn attack's horn
+#define NEW_LEAF_PARTICLE               TRUE    // update leaf particle
+#define NEW_EMBER_PARTICLES             TRUE    //updates ember fire particle
+#define NEW_MEAN_LOOK_PARTICLE          TRUE    //update mean look eye
+#define NEW_TEETH_PARTICLE              TRUE    //update bite/crunch teeth particle
+#define NEW_HANDS_FEET_PARTICLE         TRUE    //update chop/kick/punch particles
+#define NEW_SPIKES_PARTICLE             TRUE    //update spikes particle
+#define NEW_FLY_BUBBLE_PARTICLE         TRUE    //update fly 'bubble' particle
+#define NEW_CURSE_NAIL_PARTICLE         TRUE    //updates curse nail
+#define NEW_BATON_PASS_BALL_PARTICLE    TRUE    //update baton pass pokeball sprite
+#define NEW_MORNING_SUN_STAR_PARTICLE   TRUE    //updates morning sun star particles
+#define NEW_IMPACT_PALETTE              TRUE    //updates the basic 'hit' particle
+#define NEW_SURF_PARTICLE_PALETTE       TRUE    //updates the surf wave palette
 
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H

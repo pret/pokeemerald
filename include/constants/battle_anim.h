@@ -592,5 +592,29 @@
 #define BACK_ANIM_FADE_GREEN_WITH_SHAKE        0x18
 #define BACK_ANIM_FADE_BLUE_WITH_SHAKE         0x19
 
+// mon pal blend
+#define ANIM_PAL_BG             0x1
+#define ANIM_PAL_ATK            0x2
+#define ANIM_PAL_DEF            0x4
+#define ANIM_PAL_ATK_PARTNER    0x8
+#define ANIM_PAL_DEF_PARTNER    0x10
+#define ANIM_PAL_ALL            0x1f
+#define ANIM_PAL_BG_4           0x20
+#define ANIM_PAL_BG_5           0x40
+#define ANIM_PAL_ALL_BATTLERS   0x780
+#define ANIM_PAL_PLAYER1        0x80
+#define ANIM_PAL_PLAYER2        0x100
+#define ANIM_PAL_OPPONENT1      0x200
+#define ANIM_PAL_OPPONENT2      0x400
+
+// horseshoe/fist frames
+#define ANIM_RIGHT_FIST  0
+#define ANIM_LEFT_FIST   2
+
+// surf wave palettes
+#define ANIM_SURF_PAL_SURF           0
+#define ANIM_SURF_PAL_MUDDY_WATER    1
+#define ANIM_SURF_PAL_SLUDGE_WAVE    2
+
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H
