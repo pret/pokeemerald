@@ -1016,16 +1016,16 @@ static void Task_DoFadeEffect(u8 taskId)
         if (!data[0])
         {
             sub_80C5F58(TRUE, FALSE);
-            data[1] = 0x100;
-            data[2] = 0x100;
+            data[1] = Q_8_8(1);
+            data[2] = Q_8_8(1);
             data[3] = 0x15;
             data[4] = 0x15;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_WHITE);
         }
         else
         {
-            data[1] = 0x1FC;
-            data[2] = 0x1FC;
+            data[1] = Q_8_8(1.984375); // 1 and 63/64
+            data[2] = Q_8_8(1.984375);
             data[3] = -0x15;
             data[4] = -0x15;
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
@@ -1038,23 +1038,23 @@ static void Task_DoFadeEffect(u8 taskId)
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITE);
         }
         sPassGfx->setAffine = TRUE;
-        sPassGfx->unk2E = sub_8151624(data[1]);
-        sPassGfx->unk30 = sub_8151624(data[2]);
+        sPassGfx->unk2E = MathUtil_Inv16(data[1]);
+        sPassGfx->unk30 = MathUtil_Inv16(data[2]);
         break;
     case 1:
         UpdatePaletteFade();
         data[1] += data[3];
         data[2] += data[4];
-        sPassGfx->unk2E = sub_8151624(data[1]);
-        sPassGfx->unk30 = sub_8151624(data[2]);
+        sPassGfx->unk2E = MathUtil_Inv16(data[1]);
+        sPassGfx->unk30 = MathUtil_Inv16(data[2]);
         if (!data[0])
         {
-            if (data[1] <= 0x1FC)
+            if (data[1] <= Q_8_8(1.984375))
                 return;
         }
         else
         {
-            if (data[1] != 0x100)
+            if (data[1] != Q_8_8(1))
                 return;
         }
         break;
@@ -1154,8 +1154,8 @@ static void sub_80C5F58(bool8 arg0, bool8 arg1)
                     gUnknown_085713E0[sPassData->unkE - 1][1] << 8,
                     gUnknown_085713E0[sPassData->unkE - 1][0],
                     gUnknown_085713E0[sPassData->unkE - 1][1],
-                    sub_8151624(0x1FC),
-                    sub_8151624(0x1FC),
+                    MathUtil_Inv16(Q_8_8(1.984375)), // 1 and 63/64
+                    MathUtil_Inv16(Q_8_8(1.984375)),
                     0);
     }
     else
@@ -1165,8 +1165,8 @@ static void sub_80C5F58(bool8 arg0, bool8 arg1)
                     gUnknown_085713E0[sPassData->unkE - 1][1] << 8,
                     gUnknown_085713E0[sPassData->unkE - 1][0],
                     gUnknown_085713E0[sPassData->unkE - 1][1],
-                    sub_8151624(0x100),
-                    sub_8151624(0x100),
+                    MathUtil_Inv16(Q_8_8(1)),
+                    MathUtil_Inv16(Q_8_8(1)),
                     0);
     }
 }
