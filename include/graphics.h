@@ -4048,11 +4048,11 @@ extern const u32 gMoveTypes_Pal[];
 extern const u32 gStatusScreenBitmap[];
 
 extern const u16 gSummaryScreenPowAcc_Tilemap[];
-extern const u16 gUnknown_08DC3C34[];
+extern const u16 gSummaryScreenAppealJam_Tilemap[];
 
 extern const u32 gMoveTypes_Gfx[];
-extern const u32 gMoveSelectorBitmap[];
-extern const u32 gUnknown_08D97CF4[];
+extern const u32 gSummaryMoveSelect_Gfx[];
+extern const u32 gSummaryMoveSelect_Pal[];
 extern const u32 gStatusGfx_Icons[];
 extern const u32 gStatusPal_Icons[];
 

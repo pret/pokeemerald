@@ -13,13 +13,13 @@ static void DecompressGlyphFont6(u16);
 u16 Font6Func(struct TextPrinter *textPrinter)
 {
     u16 char_;
-    struct TextPrinterSubStruct *sub;
+    struct TextPrinterSubStruct *subStruct;
+    subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    sub = &textPrinter->subUnion.sub;
     switch (textPrinter->state)
     {
         case 0:
-            if (gMain.heldKeys & (A_BUTTON | B_BUTTON) && sub->hasPrintBeenSpedUp)
+            if (gMain.heldKeys & (A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp)
             {
                 textPrinter->delayCounter = 0;
             }
@@ -28,7 +28,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                 textPrinter->delayCounter --;
                 if (gTextFlags.canABSpeedUpPrint && gMain.newKeys & (A_BUTTON | B_BUTTON))
                 {
-                    sub->hasPrintBeenSpedUp = TRUE;
+                    subStruct->hasPrintBeenSpedUp = TRUE;
                     textPrinter->delayCounter = 0;
                 }
                 return 3;
@@ -81,7 +81,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                             textPrinter->printerTemplate.currentChar++;
                             return 2;
                         case 6:
-                            sub->glyphId = *textPrinter->printerTemplate.currentChar;
+                            subStruct->glyphId = *textPrinter->printerTemplate.currentChar;
                             textPrinter->printerTemplate.currentChar++;
                             return 2;
                         case 7:
@@ -94,7 +94,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                             textPrinter->state = 1;
                             if (gTextFlags.autoScroll)
                             {
-                                sub->autoScrollDelay = 0;
+                                subStruct->autoScrollDelay = 0;
                             }
                             return 3;
                         case 10:
