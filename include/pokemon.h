@@ -205,6 +205,10 @@ struct BaseStats
             u8 noFlip : 1;
 };
 
+#define MOVE_PHYSICALITY_PHYSICAL	0
+#define MOVE_PHYSICALITY_SPECIAL	1
+#define MOVE_PHYSICALITY_OTHER		2
+
 struct BattleMove
 {
     u8 effect;
@@ -216,6 +220,7 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
+    u8 physicality;
 };
 
 struct SpindaSpot
