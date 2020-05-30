@@ -849,7 +849,7 @@ static void sub_80B32B4(u8 taskId)
         CleanupOverworldWindowsAndTilemaps();
         gTrainerBattleOpponent_A = 0x800;
         SetMainCallback2(CB2_InitBattle);
-        gMain.savedCallback = sub_80B360C;
+        gMain.savedCallback = CB2_ReturnFromCableClubBattle;
         DestroyTask(taskId);
         break;
     }
@@ -915,7 +915,7 @@ static void sub_80B33BC(u8 taskId)
         CleanupOverworldWindowsAndTilemaps();
         gTrainerBattleOpponent_A = 0x800;
         SetMainCallback2(CB2_InitBattle);
-        gMain.savedCallback = sub_80B360C;
+        gMain.savedCallback = CB2_ReturnFromCableClubBattle;
         DestroyTask(taskId);
         break;
     }
@@ -965,7 +965,7 @@ static void sub_80B3554(void)
     RunTasks();
 }
 
-void sub_80B360C(void)
+void CB2_ReturnFromCableClubBattle(void)
 {
     gBattleTypeFlags &= ~BATTLE_TYPE_20;
     Overworld_ResetMapMusic();
@@ -1129,7 +1129,7 @@ static void sub_80B3894(u8 taskId)
     case 3:
         if (IsLinkTaskFinished())
         {
-            sub_8013F78();
+            CreateTask_ReturnFromLinkTrade();
             DestroyTask(taskId);
         }
         break;

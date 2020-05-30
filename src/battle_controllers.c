@@ -33,7 +33,7 @@ void HandleLinkBattleSetup(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         if (gWirelessCommType)
-            sub_800B488();
+            SetWirelessCommType1();
         if (!gReceivedRemoteLinkPlayers)
             OpenLink();
         CreateTask(task00_08081A90, 0);

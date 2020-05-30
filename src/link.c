@@ -221,7 +221,7 @@ static const u8 sUnused_082ED224[] = {0x00, 0xff, 0xfe, 0xff, 0x00};
 
 bool8 IsWirelessAdapterConnected(void)
 {
-    sub_800B488();
+    SetWirelessCommType1();
     sub_800E700();
     if (rfu_LMAN_REQBN_softReset_and_checkID() == 0x8001)
     {
@@ -389,7 +389,7 @@ void CloseLink(void)
     gReceivedRemoteLinkPlayers = FALSE;
     if (gWirelessCommType)
     {
-        sub_800EDD4();
+        LinkRfu_Shutdown();
     }
     gLinkOpen = FALSE;
     DisableSerial();
@@ -1860,7 +1860,7 @@ bool8 HandleLinkConnection(void)
     return FALSE;
 }
 
-void sub_800B488(void)
+void SetWirelessCommType1(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {

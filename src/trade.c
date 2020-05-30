@@ -52,6 +52,7 @@
 #include "constants/rgb.h"
 #include "constants/species.h"
 #include "constants/songs.h"
+#include "constants/union_room.h"
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
@@ -234,7 +235,7 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 static bool8 SendLinkData(const void *linkData, u32 size)
 {
-    if (gUnknown_02022C2C == 29)
+    if (gPlayerCurrActivity == ACTIVITY_29)
     {
         rfu_NI_setSendData(lman.acceptSlot_flag, 84, linkData, size);
         return TRUE;
@@ -252,7 +253,7 @@ static void sub_80771AC(u8 a0)
 
 static bool32 sub_80771BC(void)
 {
-    if (gUnknown_02022C2C == 29)
+    if (gPlayerCurrActivity == ACTIVITY_29)
     {
         if (gRfuSlotStatusNI[sub_800E87C(lman.acceptSlot_flag)]->send.state == 0)
             return TRUE;
@@ -288,7 +289,7 @@ static void TradeResetReceivedFlag(u32 who)
 
 static bool32 IsWirelessTrade(void)
 {
-    if (gWirelessCommType && gUnknown_02022C2C == 29)
+    if (gWirelessCommType && gPlayerCurrActivity == ACTIVITY_29)
         return TRUE;
     else
         return FALSE;
@@ -393,7 +394,7 @@ static void CB2_CreateTradeMenu(void)
 
             if (gWirelessCommType)
             {
-                sub_800B488();
+                SetWirelessCommType1();
                 OpenLink();
                 sub_8011BA4();
             }

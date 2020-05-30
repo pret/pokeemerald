@@ -12,7 +12,7 @@ enum
 #define UNION_ROOM_KB_ROW_COUNT 10
 
 
-void sub_801DD98(void);
+void EnterUnionRoomChat(void);
 void copy_strings_to_sav1(void);
 
 #endif // GUARD_UNION_ROOM_CHAT_H

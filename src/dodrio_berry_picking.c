@@ -450,7 +450,7 @@ static void (*const gUnknown_082F7AF4[])(void) =
 };
 
 // code
-void sub_802493C(u16 a0, void (*callback)(void))
+void StartDodrioBerryPicking(u16 a0, void (*callback)(void))
 {
     gUnknown_03000DB0 = FALSE;
 

@@ -17,28 +17,46 @@ static u8 sub_8019DF4(void);
 static u32 sub_8019F8C(u32 playerIdx, u32 arg1);
 static void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2);
 
-ALIGNED(4) const u8 gUnknown_082F072C[][10] = {
-    {0x21, 0x2c, 0x1f, 0x23, 0x25, 0x24, 0x41, 0x42},
-    {0x22, 0x28, 0x20, 0x2f, 0x2f, 0x0e, 0x14, 0x2d}
+static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][10] = {
+    [MALE] = {
+        OBJ_EVENT_GFX_MAN_3, 
+        OBJ_EVENT_GFX_BLACK_BELT, 
+        OBJ_EVENT_GFX_CAMPER, 
+        OBJ_EVENT_GFX_YOUNGSTER, 
+        OBJ_EVENT_GFX_PSYCHIC_M, 
+        OBJ_EVENT_GFX_BUG_CATCHER, 
+        OBJ_EVENT_GFX_MAN_4, 
+        OBJ_EVENT_GFX_MAN_5
+    },
+    [FEMALE] = {
+        OBJ_EVENT_GFX_WOMAN_5, 
+        OBJ_EVENT_GFX_HEX_MANIAC, 
+        OBJ_EVENT_GFX_PICNICKER, 
+        OBJ_EVENT_GFX_LASS, 
+        OBJ_EVENT_GFX_LASS, 
+        OBJ_EVENT_GFX_GIRL_3, 
+        OBJ_EVENT_GFX_WOMAN_2, 
+        OBJ_EVENT_GFX_BEAUTY
+    }
 };
 
-static const s16 gUnknown_082F0740[][2] = {
-    {0x4, 0x6},
-    {0xd, 0x8},
-    {0xa, 0x6},
-    {0x1, 0x8},
-    {0xd, 0x4},
-    {0x7, 0x4},
-    {0x1, 0x4},
-    {0x7, 0x8}
+static const s16 sUnionPartnerCoords[][2] = {
+    { 4,  6},
+    {13,  8},
+    {10,  6},
+    { 1,  8},
+    {13,  4},
+    { 7,  4},
+    { 1,  4},
+    { 7,  8}
 };
 
-static const s8 gUnknown_082F0760[][2] = {
-    { 0,  0},
-    { 1,  0},
-    { 0, -1},
-    {-1,  0},
-    { 0,  1}
+static const s8 sFacingDirectionOffsets[][2] = {
+    [DIR_NONE]  = { 0,  0},
+    [DIR_SOUTH] = { 1,  0},
+    [DIR_NORTH] = { 0, -1},
+    [DIR_WEST]  = {-1,  0},
+    [DIR_EAST]  = { 0,  1}
 };
 
 static const u8 gUnknown_082F076A[] = {
@@ -79,22 +97,22 @@ static bool32 is_walking_or_running(void)
 
 static u8 sub_8019978(u32 a0, u32 a1)
 {
-    return gUnknown_082F072C[a0][a1 % 8];
+    return sUnionRoomObjGfxIds[a0][a1 % 8];
 }
 
 static void sub_8019990(u32 a0, u32 a1, s32 * a2, s32 * a3)
 {
-    *a2 = gUnknown_082F0740[a0][0] + gUnknown_082F0760[a1][0] + 7;
-    *a3 = gUnknown_082F0740[a0][1] + gUnknown_082F0760[a1][1] + 7;
+    *a2 = sUnionPartnerCoords[a0][0] + sFacingDirectionOffsets[a1][0] + 7;
+    *a3 = sUnionPartnerCoords[a0][1] + sFacingDirectionOffsets[a1][1] + 7;
 }
 
 static bool32 sub_80199E0(u32 a0, u32 a1, s32 a2, s32 a3)
 {
-    if (gUnknown_082F0740[a0][0] + gUnknown_082F0760[a1][0] + 7 != a2)
+    if (sUnionPartnerCoords[a0][0] + sFacingDirectionOffsets[a1][0] + 7 != a2)
     {
         return FALSE;
     }
-    else if (gUnknown_082F0740[a0][1] + gUnknown_082F0760[a1][1] + 7 != a3)
+    else if (sUnionPartnerCoords[a0][1] + sFacingDirectionOffsets[a1][1] + 7 != a3)
     {
         return FALSE;
     }
@@ -384,19 +402,19 @@ void sub_8019E3C(void)
     sub_8019E20();
 }
 
-void sub_8019E70(u8 * sp8, s32 r9)
+void CreateGroupMemberObjectsInvisible(u8 * sp8, s32 r9)
 {
     s32 r7;
 
     for (r7 = 0; r7 < 5; r7++)
     {
         s32 r5 = 5 * r9 + r7;
-        sp8[r5] = sprite_new(OBJ_EVENT_GFX_MAN_4, r5 - 0x38, gUnknown_082F0740[r9][0] + gUnknown_082F0760[r7][0], gUnknown_082F0740[r9][1] + gUnknown_082F0760[r7][1], 3, 1);
+        sp8[r5] = sprite_new(OBJ_EVENT_GFX_MAN_4, r5 - 0x38, sUnionPartnerCoords[r9][0] + sFacingDirectionOffsets[r7][0], sUnionPartnerCoords[r9][1] + sFacingDirectionOffsets[r7][1], 3, 1);
         sub_8097C44(r5 - 0x38, TRUE);
     }
 }
 
-void sub_8019F04(u8 * r5)
+void DestroyGroupMemberObjects(u8 * r5)
 {
     s32 i;
     for (i = 0; i < 40; i++)
@@ -526,30 +544,30 @@ static void sub_801A214(u32 r5, struct GFtgtGname * unused)
     }
 }
 
-static void sub_801A234(struct UnkStruct_URoom *r0)
+static void sub_801A234(struct WirelessLink_URoom *r0)
 {
     s32 i;
     struct UnkStruct_x20 * r4;
     gUnknown_02022C68 = 0;
     for (i = 0, r4 = r0->field_0->arr; i < 8; i++)
     {
-        if (r4[i].field_1A_0 == 1)
+        if (r4[i].groupScheduledAnim == 1)
         {
-            sub_801A16C(i, &r4[i].unk.field_0);
+            sub_801A16C(i, &r4[i].gname_uname.gname);
         }
-        else if (r4[i].field_1A_0 == 2)
+        else if (r4[i].groupScheduledAnim == 2)
         {
-            sub_801A214(i, &r4[i].unk.field_0);
+            sub_801A214(i, &r4[i].gname_uname.gname);
         }
     }
 }
 
-void sub_801A274(struct UnkStruct_URoom *unused)
+void ScheduleUnionRoomPlayerRefresh(struct WirelessLink_URoom *unused)
 {
     gUnknown_02022C68 = 300;
 }
 
-void sub_801A284(struct UnkStruct_URoom *r2)
+void HandleUnionRoomPlayerRefresh(struct WirelessLink_URoom *r2)
 {
     if (++gUnknown_02022C68 > 300)
     {
@@ -557,7 +575,7 @@ void sub_801A284(struct UnkStruct_URoom *r2)
     }
 }
 
-bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
+bool32 RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
 {
     s16 x, y;
     s32 i, j;
@@ -572,11 +590,11 @@ bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
         for (j = 0; j < 5; j++)
         {
             s32 r3 = 5 * i + j;
-            if (x != gUnknown_082F0740[i][0] + gUnknown_082F0760[j][0] + 7)
+            if (x != sUnionPartnerCoords[i][0] + sFacingDirectionOffsets[j][0] + 7)
             {
                 continue;
             }
-            if (y != gUnknown_082F0740[i][1] + gUnknown_082F0760[j][1] + 7)
+            if (y != sUnionPartnerCoords[i][1] + sFacingDirectionOffsets[j][1] + 7)
             {
                 continue;
             }
@@ -588,7 +606,7 @@ bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
             {
                 continue;
             }
-            if (r4[i].field_1A_0 != 1)
+            if (r4[i].groupScheduledAnim != 1)
             {
                 continue;
             }
@@ -606,7 +624,7 @@ static void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2)
     sub_8097B78(5 * arg1 - 0x38 + arg0, arg2);
 }
 
-void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)
+void UpdateUnionGroupMemberFacing(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)
 {
-    return sub_801A3B0(arg0, arg1, sub_8019F64(arg0, arg1, &arg2->arr[arg1].unk.field_0));
+    return sub_801A3B0(arg0, arg1, sub_8019F64(arg0, arg1, &arg2->arr[arg1].gname_uname.gname));
 }

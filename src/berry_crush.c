@@ -832,7 +832,7 @@ u32 sub_8020C0C(MainCallback callback)
     return 0;
 }
 
-void sub_8020C70(MainCallback callback)
+void StartBerryCrush(MainCallback callback)
 {
     u8 playerCount = 0;
     u8 multiplayerId;

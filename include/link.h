@@ -274,7 +274,7 @@ void LoadWirelessStatusIndicatorSpriteGfx(void);
 bool8 IsLinkTaskFinished(void);
 void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_800ADF8(void);
-void sub_800B488(void);
+void SetWirelessCommType1(void);
 void CheckShouldAdvanceLinkState(void);
 void sub_8011BD0(void);
 u8 IsLinkMaster(void);

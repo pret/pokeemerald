@@ -400,7 +400,7 @@ static const struct PokemonJumpMons gPkmnJumpSpecies[] =
     { .species = SPECIES_BAGON,      .unk2 = 1, },
 };
 
-void sub_802A9A8(u16 partyIndex, MainCallback callback)
+void StartPokemonJump(u16 partyIndex, MainCallback callback)
 {
     u8 taskId;
 

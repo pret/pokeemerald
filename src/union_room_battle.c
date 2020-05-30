@@ -35,14 +35,14 @@ struct UnkStruct_3000DAC
     /*0x62*/ u8 filler_62[10];
 };
 
-struct UnkStruct_2022C6C
+struct UnionRoomBattleWork
 {
-    s16 a0;
+    s16 textState;
 };
 
 static struct UnkStruct_3000DAC * gUnknown_03000DAC;
 
-EWRAM_DATA struct UnkStruct_2022C6C * gUnknown_02022C6C = NULL;
+EWRAM_DATA struct UnionRoomBattleWork * sWork = NULL;
 
 void sub_801A43C(void);
 void sub_801A6C0(u8 taskId);
@@ -53,7 +53,7 @@ const u16 gWirelessInfoScreenPal[] = INCBIN_U16("graphics/interface/wireless_inf
 const u32 gWirelessInfoScreenGfx[] = INCBIN_U32("graphics/interface/wireless_info_screen.4bpp.lz");
 const u32 gWirelessInfoScreenTilemap[] = INCBIN_U32("graphics/interface/wireless_info_screen.bin.lz");
 
-const struct BgTemplate gUnknown_082F0D34[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -67,7 +67,7 @@ const struct BgTemplate gUnknown_082F0D34[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_082F0D3C[] = {
+const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0x00,
         .tilemapLeft = 0x03,
@@ -191,12 +191,12 @@ void sub_801A43C(void)
     gUnknown_03000DAC = AllocZeroed(sizeof(struct UnkStruct_3000DAC));
     SetVBlankCallback(NULL);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_082F0D34, ARRAY_COUNT(gUnknown_082F0D34));
+    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     SetBgTilemapBuffer(1, Alloc(0x800));
     SetBgTilemapBuffer(0, Alloc(0x800));
     DecompressAndLoadBgGfxUsingHeap(1, gWirelessInfoScreenGfx, 0, 0, 0);
     CopyToBgTilemapBuffer(1, gWirelessInfoScreenTilemap, 0, 0);
-    InitWindows(gUnknown_082F0D3C);
+    InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     ResetPaletteFade();
     ResetSpriteData();
@@ -205,7 +205,7 @@ void sub_801A43C(void)
     m4aSoundVSyncOn();
     SetVBlankCallback(sub_801A418);
     gUnknown_03000DAC->taskId = CreateTask(sub_801A6C0, 0);
-    gUnknown_03000DAC->unk61 = sub_8013C40();
+    gUnknown_03000DAC->unk61 = CreateTask_ListenToWireless();
     gUnknown_03000DAC->unk10[3] = 1;
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -369,7 +369,7 @@ static void sub_801A8B0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 m
 u32 sub_801A960(struct UnkStruct_x20 * a0, u32 * a1)
 {
     s32 i, j, r2;
-    u32 result = a0->unk.field_0.activity;
+    u32 result = a0->gname_uname.gname.activity;
 
     for (i = 0; i < (unsigned)ARRAY_COUNT(gUnknown_082F0D70); i++)
     {
@@ -377,7 +377,7 @@ u32 sub_801A960(struct UnkStruct_x20 * a0, u32 * a1)
         {
             continue;
         }
-        if (a0->field_1A_0 != 1)
+        if (a0->groupScheduledAnim != 1)
         {
             continue;
         }
@@ -386,7 +386,7 @@ u32 sub_801A960(struct UnkStruct_x20 * a0, u32 * a1)
             r2 = 0;
             for (j = 0; j < 4; j++)
             {
-                if (a0->unk.field_0.child_sprite_gender[j] != 0)
+                if (a0->gname_uname.gname.child_sprite_gender[j] != 0)
                 {
                     r2++;
                 }
@@ -450,7 +450,7 @@ bool32 sub_801AA30(u32 * a0, u32 * a1, u32 * a2, u8 taskId)
 void sub_801AAD4(void)
 {
     s32 i;
-    sub_8014210(10);
+    StartUnionRoomBattle(10);
     for (i = 0; i < UNION_ROOM_PARTY_SIZE; i++)
     {
         gEnemyParty[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1];
@@ -506,13 +506,13 @@ void sub_801AC40(void)
     TransferPlttBuffer();
 }
 
-void sub_801AC54(void)
+void CB2_UnionRoomBattle(void)
 {
     switch (gMain.state)
     {
     case 0:
         SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
-        gUnknown_02022C6C = AllocZeroed(4);
+        sWork = AllocZeroed(4);
         ResetSpriteData();
         FreeAllSpritePalettes();
         ResetTasks();
@@ -535,7 +535,7 @@ void sub_801AC54(void)
         gMain.state++;
         break;
     case 1:
-        if (sub_801ABDC(&gUnknown_02022C6C->a0, gText_CommStandbyAwaitingOtherPlayer, 0))
+        if (sub_801ABDC(&sWork->textState, gText_CommStandbyAwaitingOtherPlayer, 0))
         {
             gMain.state++;
         }
@@ -604,7 +604,7 @@ void sub_801AC54(void)
         }
         break;
     case 7:
-        if (sub_801ABDC(&gUnknown_02022C6C->a0, gText_RefusedBattle, 1))
+        if (sub_801ABDC(&sWork->textState, gText_RefusedBattle, 1))
         {
             SetMainCallback2(CB2_ReturnToField);
         }
@@ -616,7 +616,7 @@ void sub_801AC54(void)
         }
         break;
     case 9:
-        if (sub_801ABDC(&gUnknown_02022C6C->a0, gText_BattleWasRefused, 1))
+        if (sub_801ABDC(&sWork->textState, gText_BattleWasRefused, 1))
         {
             SetMainCallback2(CB2_ReturnToField);
         }

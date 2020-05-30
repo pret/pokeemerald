@@ -548,12 +548,12 @@ u16 mevent_081445C0(u32 command)
     return 0;
 }
 
-void sub_801B940(void)
+void ResetReceivedWonderCardFlag(void)
 {
     gUnknown_02022C70 = FALSE;
 }
 
-bool32 sub_801B94C(u16 a0)
+bool32 MEventHandleReceivedWonderCard(u16 a0)
 {
     gUnknown_02022C70 = FALSE;
     if (a0 == 0)

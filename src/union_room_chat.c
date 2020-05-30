@@ -588,7 +588,7 @@ const struct SpriteTemplate gUnknown_082F3244 = {
     .callback = SpriteCallbackDummy
 };
 
-void sub_801DD98(void)
+void EnterUnionRoomChat(void)
 {
     gUnknown_02022C84 = Alloc(sizeof(*gUnknown_02022C84));
     sub_801DDD0(gUnknown_02022C84);

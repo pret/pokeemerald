@@ -50,27 +50,36 @@ const u8 sText_4PlayerMode[] = _("4-PLAYER\nMODE");
 const u8 sText_5PlayerMode[] = _("5-PLAYER\nMODE");
 
 static const u8 *const sPlayersNeededOrModeTexts[][5] = {
+    // 2 players required
     {
         sText_1PlayerNeeded,
         sText_2PlayerMode
-    }, {
+    }, 
+    // 4 players required
+    {
         sText_3PlayersNeeded,
         sText_2PlayersNeeded,
         sText_1PlayerNeeded,
         sText_4PlayerMode
-    }, {
+    }, 
+    // 2-5 players required
+    {
         sText_1PlayerNeeded,
         sText_2PlayerMode,
         sText_3PlayerMode,
         sText_4PlayerMode,
         sText_5PlayerMode
-    }, {
+    }, 
+    // 3-5 players required
+    {
         sText_2PlayersNeeded,
         sText_1PlayerNeeded,
         sText_3PlayerMode,
         sText_4PlayerMode,
         sText_5PlayerMode
-    }, {
+    }, 
+    // 2-4 players required
+    {
         sText_1PlayerNeeded,
         sText_2PlayerMode,
         sText_3PlayerMode,
@@ -484,8 +493,8 @@ static const u8 *const sChooseTrainerTexts[NUM_LINK_GROUP_TYPES] =
     [LINK_GROUP_BERRY_PICKING]     = sText_ChooseLeaderBerryPicking,
     [LINK_GROUP_WONDER_CARD]       = sText_ChooseTrainerToShareWonderCards,
     [LINK_GROUP_WONDER_NEWS]       = sText_ChooseTrainerToShareWonderNews,
-    [LINK_GROUP_UNK_9]             = NULL,
-    [LINK_GROUP_UNK_10]            = NULL,
+    [LINK_GROUP_UNION_ROOM_RESUME] = NULL,
+    [LINK_GROUP_UNION_ROOM_INIT]   = NULL,
     [LINK_GROUP_UNK_11]            = NULL,
     [LINK_GROUP_RECORD_CORNER]     = sText_ChooseLeaderRecordCorner,
     [LINK_GROUP_BERRY_BLENDER]     = sText_ChooseLeaderBerryBlender,
@@ -599,7 +608,7 @@ const u8 *const sLinkGroupActivityTexts[] = {
     sText_BattleTowerLv50
 };
 
-const struct WindowTemplate gUnknown_082F00BC = {
+static const struct WindowTemplate sWindowTemplate_BButtonCancel = {
     .bg = 0x00,
     .tilemapLeft = 0x00,
     .tilemapTop = 0x00,
@@ -609,29 +618,33 @@ const struct WindowTemplate gUnknown_082F00BC = {
     .baseBlock = 0x0008
 };
 
-const u32 gUnknown_082F00C4[NUM_LINK_GROUP_TYPES] = {
-    0x0201,
-    0x0202,
-    0x0403,
-    0x0204,
-    0x2509,
-    0x250a,
-    0x350b,
-    0x0000,
-    0x0000,
-    0x0000,
-    0x0000,
-    0x0000,
-    0x240f,
-    0x2410,
-    0x0000,
-    0x2417,
-    0x2418,
-    0x2419,
-    0x241a,
-    0x241b,
-    0x021c,
-    0x020e
+// Minimum and maximum number of players for a link group
+// A minimum of 0 means the min and max are equal
+#define LINK_GROUP_CAPACITY(min, max)(((min) << 12) | ((max) << 8))
+
+static const u32 sLinkGroupToActivityAndCapacity[NUM_LINK_GROUP_TYPES] = {
+    [LINK_GROUP_SINGLE_BATTLE]     = ACTIVITY_BATTLE_SINGLE     | LINK_GROUP_CAPACITY(0, 2),
+    [LINK_GROUP_DOUBLE_BATTLE]     = ACTIVITY_BATTLE_DOUBLE     | LINK_GROUP_CAPACITY(0, 2),
+    [LINK_GROUP_MULTI_BATTLE]      = ACTIVITY_BATTLE_MULTI      | LINK_GROUP_CAPACITY(0, 4),
+    [LINK_GROUP_TRADE]             = ACTIVITY_TRADE             | LINK_GROUP_CAPACITY(0, 2),
+    [LINK_GROUP_POKEMON_JUMP]      = ACTIVITY_POKEMON_JUMP      | LINK_GROUP_CAPACITY(2, 5),
+    [LINK_GROUP_BERRY_CRUSH]       = ACTIVITY_BERRY_CRUSH       | LINK_GROUP_CAPACITY(2, 5),
+    [LINK_GROUP_BERRY_PICKING]     = ACTIVITY_BERRY_PICK        | LINK_GROUP_CAPACITY(3, 5),
+    [LINK_GROUP_WONDER_CARD]       = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
+    [LINK_GROUP_WONDER_NEWS]       = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
+    [LINK_GROUP_UNION_ROOM_RESUME] = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
+    [LINK_GROUP_UNION_ROOM_INIT]   = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
+    [LINK_GROUP_UNK_11]            = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
+    [LINK_GROUP_RECORD_CORNER]     = ACTIVITY_RECORD_CORNER     | LINK_GROUP_CAPACITY(2, 4),
+    [LINK_GROUP_BERRY_BLENDER]     = ACTIVITY_BERRY_BLENDER     | LINK_GROUP_CAPACITY(2, 4),
+    [LINK_GROUP_UNK_14]            = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
+    [LINK_GROUP_COOL_CONTEST]      = ACTIVITY_CONTEST_COOL      | LINK_GROUP_CAPACITY(2, 4),
+    [LINK_GROUP_BEAUTY_CONTEST]    = ACTIVITY_CONTEST_BEAUTY    | LINK_GROUP_CAPACITY(2, 4),
+    [LINK_GROUP_CUTE_CONTEST]      = ACTIVITY_CONTEST_CUTE      | LINK_GROUP_CAPACITY(2, 4),
+    [LINK_GROUP_SMART_CONTEST]     = ACTIVITY_CONTEST_SMART     | LINK_GROUP_CAPACITY(2, 4),
+    [LINK_GROUP_TOUGH_CONTEST]     = ACTIVITY_CONTEST_TOUGH     | LINK_GROUP_CAPACITY(2, 4),
+    [LINK_GROUP_BATTLE_TOWER]      = ACTIVITY_BATTLE_TOWER      | LINK_GROUP_CAPACITY(0, 2),
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = ACTIVITY_BATTLE_TOWER_OPEN | LINK_GROUP_CAPACITY(0, 2)
 };
 
 const struct WindowTemplate gUnknown_082F011C = {
@@ -654,7 +667,7 @@ const struct WindowTemplate gUnknown_082F0124 = {
     .baseBlock = 0x0044
 };
 
-const struct WindowTemplate gUnknown_082F012C = {
+static const struct WindowTemplate sWindowTemplate_NumPlayerMode = {
     .bg = 0x00,
     .tilemapLeft = 0x10,
     .tilemapTop = 0x03,
@@ -672,11 +685,11 @@ const struct ListMenuItem gUnknown_082F0134[] = {
     { sText_EmptyString, 4 }
 };
 
-const struct ListMenuTemplate gUnknown_082F015C = {
+static const struct ListMenuTemplate sListMenuTemplate_PossibleGroupMembers = {
     .items = gUnknown_082F0134,
     .moveCursorFunc = NULL,
-    .itemPrintFunc = sub_8013278,
-    .totalItems = 5,
+    .itemPrintFunc = ItemPrintFunc_PossibleGroupMembers,
+    .totalItems = ARRAY_COUNT(gUnknown_082F0134),
     .maxShowed = 5,
     .windowId = 0,
     .header_X = 0,
@@ -732,11 +745,11 @@ const struct ListMenuItem gUnknown_082F0184[] = {
     { sText_EmptyString, 15 }
 };
 
-const struct ListMenuTemplate gUnknown_082F0204 = {
+static const struct ListMenuTemplate sListMenuTemplate_UnionRoomGroups = {
     .items = gUnknown_082F0184,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = sub_8013DF4,
-    .totalItems = 16,
+    .itemPrintFunc = ListMenuItemPrintFunc_UnionRoomGroups,
+    .totalItems = ARRAY_COUNT(gUnknown_082F0184),
     .maxShowed = 5,
     .windowId = 0,
     .header_X = 0,
@@ -753,7 +766,7 @@ const struct ListMenuTemplate gUnknown_082F0204 = {
     .cursorKind = 0
 };
 
-const struct WindowTemplate gUnknown_082F021C = {
+static const struct WindowTemplate sWindowTemplate_InviteToActivity = {
     .bg = 0x00,
     .tilemapLeft = 0x14,
     .tilemapTop = 0x05,
@@ -770,11 +783,11 @@ const struct ListMenuItem gUnknown_082F0224[] = {
     { sText_Exit, 0x040 }
 };
 
-const struct ListMenuTemplate gUnknown_082F0244 = {
+static const struct ListMenuTemplate sListMenuTemplate_InviteToActivity = {
     .items = gUnknown_082F0224,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .itemPrintFunc = NULL,
-    .totalItems = 4,
+    .totalItems = ARRAY_COUNT(gUnknown_082F0224),
     .maxShowed = 4,
     .windowId = 0,
     .header_X = 0,
@@ -811,7 +824,7 @@ const struct ListMenuTemplate gUnknown_082F027C = {
     .items = gUnknown_082F0264,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .itemPrintFunc = NULL,
-    .totalItems = 3,
+    .totalItems = ARRAY_COUNT(gUnknown_082F0264),
     .maxShowed = 3,
     .windowId = 0,
     .header_X = 0,
@@ -838,7 +851,7 @@ const struct WindowTemplate gUnknown_082F0294 = {
     .baseBlock = 0x0001
 };
 
-static const struct ListMenuItem sTradingBoardTypes[] = {
+static const struct ListMenuItem sTradingBoardTypes[NUMBER_OF_MON_TYPES] = {
     { gTypeNames[TYPE_NORMAL],   TYPE_NORMAL         },
     { gTypeNames[TYPE_FIRE],     TYPE_FIRE           },
     { gTypeNames[TYPE_WATER],    TYPE_WATER          },
@@ -856,14 +869,14 @@ static const struct ListMenuItem sTradingBoardTypes[] = {
     { gTypeNames[TYPE_DRAGON],   TYPE_DRAGON         },
     { gTypeNames[TYPE_STEEL],    TYPE_STEEL          },
     { gTypeNames[TYPE_DARK],     TYPE_DARK           },
-    { sText_Exit,         NUMBER_OF_MON_TYPES }
+    { sText_Exit,                NUMBER_OF_MON_TYPES }
 };
 
 const struct ListMenuTemplate sMenuTemplate_TradingBoardRequestType = {
     .items = sTradingBoardTypes,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .itemPrintFunc = NULL,
-    .totalItems = NUMBER_OF_MON_TYPES,
+    .totalItems = ARRAY_COUNT(sTradingBoardTypes),
     .maxShowed = 6,
     .windowId = 0,
     .header_X = 0,
@@ -900,7 +913,7 @@ const struct WindowTemplate gUnknown_082F034C = {
     .baseBlock = 0x0039
 };
 
-const struct ListMenuItem gUnknown_082F0354[] = {
+static const struct ListMenuItem sTradeBoardListMenuItems[] = {
     { sText_EmptyString, -3 },
     { sText_EmptyString,  0 },
     { sText_EmptyString,  1 },
@@ -913,11 +926,11 @@ const struct ListMenuItem gUnknown_082F0354[] = {
     { sText_Exit2,  8 }
 };
 
-const struct ListMenuTemplate gUnknown_082F03A4 = {
-    .items = gUnknown_082F0354,
+static const struct ListMenuTemplate sTradeBoardListMenuTemplate = {
+    .items = sTradeBoardListMenuItems,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .itemPrintFunc = sub_8017BE8,
-    .totalItems = 10,
+    .itemPrintFunc = TradeBoardListMenuItemPrintFunc,
+    .totalItems = ARRAY_COUNT(sTradeBoardListMenuItems),
     .maxShowed = 6,
     .windowId = 0,
     .header_X = 0,
@@ -944,7 +957,7 @@ const struct WindowTemplate UnrefWindowTemplate_082F03B4 = {
     .baseBlock = 0x0039
 };
 
-const struct ListMenuItem gUnknown_082F03C4[] = {
+static const struct ListMenuItem sEmptyListMenuItems[] = {
     { sText_EmptyString,  0 },
     { sText_EmptyString,  1 },
     { sText_EmptyString,  2 },
@@ -963,11 +976,12 @@ const struct ListMenuItem gUnknown_082F03C4[] = {
     { sText_EmptyString, 15 }
 };
 
-const struct ListMenuTemplate UnrefListMenuTemplate_082F0444 = {
-    .items = gUnknown_082F03C4,
+// Unused
+static const struct ListMenuTemplate sUnknownListMenuTemplate = {
+    .items = sEmptyListMenuItems,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .itemPrintFunc = nullsub_14,
-    .totalItems = 16,
+    .totalItems = ARRAY_COUNT(sEmptyListMenuItems),
     .maxShowed = 4,
     .windowId = 0,
     .header_X = 0,
@@ -984,78 +998,100 @@ const struct ListMenuTemplate UnrefListMenuTemplate_082F0444 = {
     .cursorKind = 0
 };
 
-const struct UnkStruct_Shared gUnknown_082F045C = {0};
+const struct WirelessGnameUnamePair sWirelessGnameUnamePair_Dummy = {0};
 
-ALIGNED(4) const u8 gUnknown_082F0474[] = {0x01, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0478[] = {0x02, 0xff};
-ALIGNED(4) const u8 gUnknown_082F047C[] = {0x03, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0480[] = {0x04, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0484[] = {0x09, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0488[] = {0x0a, 0xff};
-ALIGNED(4) const u8 gUnknown_082F048C[] = {0x0b, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0490[] = {0x15, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0494[] = {0x16, 0xff};
-ALIGNED(4) const u8 gUnknown_082F0498[] = {0x40, 0x41, 0x44, 0x45, 0x48, 0x51, 0x52, 0x53, 0x54, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04A4[] = {0x0c, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04A8[] = {0x01, 0x02, 0x03, 0x04, 0x09, 0x0a, 0x0b, 0x15, 0x16, 0x0d, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04B4[] = {0x0f, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04B8[] = {0x10, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04BC[] = {0x17, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04C0[] = {0x18, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04C4[] = {0x19, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04C8[] = {0x1a, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04CC[] = {0x1b, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04D0[] = {0x1c, 0xff};
-ALIGNED(4) const u8 gUnknown_082F04D4[] = {0x0e, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_SingleBattle[]    = {ACTIVITY_BATTLE_SINGLE, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_DoubleBattle[]    = {ACTIVITY_BATTLE_DOUBLE, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_MultiBattle[]     = {ACTIVITY_BATTLE_MULTI, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_Trade[]           = {ACTIVITY_TRADE, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_PokemonJump[]     = {ACTIVITY_POKEMON_JUMP, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_BerryCrush[]      = {ACTIVITY_BERRY_CRUSH, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_BerryPicking[]    = {ACTIVITY_BERRY_PICK, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_WonderCard[]      = {ACTIVITY_WONDER_CARD2, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_WonderNews[]      = {ACTIVITY_WONDER_NEWS2, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_Resume[]          = {
+    IN_UNION_ROOM | ACTIVITY_NONE, 
+    IN_UNION_ROOM | ACTIVITY_BATTLE_SINGLE, 
+    IN_UNION_ROOM | ACTIVITY_TRADE, 
+    IN_UNION_ROOM | ACTIVITY_CHAT, 
+    IN_UNION_ROOM | ACTIVITY_CARD, 
+    IN_UNION_ROOM | ACTIVITY_ACCEPT, 
+    IN_UNION_ROOM | ACTIVITY_DECLINE, 
+    IN_UNION_ROOM | ACTIVITY_NPCTALK, 
+    IN_UNION_ROOM | ACTIVITY_PLYRTALK, 
+    0xff
+};
+ALIGNED(4) const u8 sAcceptedActivityIds_Init[]            = {ACTIVITY_SEARCH, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_Unk11[]           = {
+    ACTIVITY_BATTLE_SINGLE, 
+    ACTIVITY_BATTLE_DOUBLE, 
+    ACTIVITY_BATTLE_MULTI, 
+    ACTIVITY_TRADE, 
+    ACTIVITY_POKEMON_JUMP, 
+    ACTIVITY_BERRY_CRUSH, 
+    ACTIVITY_BERRY_PICK, 
+    ACTIVITY_WONDER_CARD2, 
+    ACTIVITY_WONDER_NEWS2, 
+    ACTIVITY_SPIN_TRADE, 
+    0xff
+};
+ALIGNED(4) const u8 sAcceptedActivityIds_RecordCorner[]    = {ACTIVITY_RECORD_CORNER, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_BerryBlender[]    = {ACTIVITY_BERRY_BLENDER, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_CoolContest[]     = {ACTIVITY_CONTEST_COOL, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_BeautyContest[]   = {ACTIVITY_CONTEST_BEAUTY, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_CuteContest[]     = {ACTIVITY_CONTEST_CUTE, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_SmartContest[]    = {ACTIVITY_CONTEST_SMART, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_ToughContest[]    = {ACTIVITY_CONTEST_TOUGH, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_BattleTower[]     = {ACTIVITY_BATTLE_TOWER, 0xff};
+ALIGNED(4) const u8 sAcceptedActivityIds_BattleTowerOpen[] = {ACTIVITY_BATTLE_TOWER_OPEN, 0xff};
 
-const u8 *const gUnknown_082F04D8[NUM_LINK_GROUP_TYPES] = {
-    gUnknown_082F0474,
-    gUnknown_082F0478,
-    gUnknown_082F047C,
-    gUnknown_082F0480,
-    gUnknown_082F0484,
-    gUnknown_082F0488,
-    gUnknown_082F048C,
-    gUnknown_082F0490,
-    gUnknown_082F0494,
-    gUnknown_082F0498,
-    gUnknown_082F04A4,
-    gUnknown_082F04A8,
-    gUnknown_082F04B4,
-    gUnknown_082F04B8,
-    NULL,
-    gUnknown_082F04BC,
-    gUnknown_082F04C0,
-    gUnknown_082F04C4,
-    gUnknown_082F04C8,
-    gUnknown_082F04CC,
-    gUnknown_082F04D0,
-    gUnknown_082F04D4
+const u8 *const sAcceptedActivityIds[NUM_LINK_GROUP_TYPES] = {
+    [LINK_GROUP_SINGLE_BATTLE]     = sAcceptedActivityIds_SingleBattle,
+    [LINK_GROUP_DOUBLE_BATTLE]     = sAcceptedActivityIds_DoubleBattle,
+    [LINK_GROUP_MULTI_BATTLE]      = sAcceptedActivityIds_MultiBattle,
+    [LINK_GROUP_TRADE]             = sAcceptedActivityIds_Trade,
+    [LINK_GROUP_POKEMON_JUMP]      = sAcceptedActivityIds_PokemonJump,
+    [LINK_GROUP_BERRY_CRUSH]       = sAcceptedActivityIds_BerryCrush,
+    [LINK_GROUP_BERRY_PICKING]     = sAcceptedActivityIds_BerryPicking,
+    [LINK_GROUP_WONDER_CARD]       = sAcceptedActivityIds_WonderCard,
+    [LINK_GROUP_WONDER_NEWS]       = sAcceptedActivityIds_WonderNews,
+    [LINK_GROUP_UNION_ROOM_RESUME] = sAcceptedActivityIds_Resume,
+    [LINK_GROUP_UNION_ROOM_INIT]   = sAcceptedActivityIds_Init,
+    [LINK_GROUP_UNK_11]            = sAcceptedActivityIds_Unk11,
+    [LINK_GROUP_RECORD_CORNER]     = sAcceptedActivityIds_RecordCorner,
+    [LINK_GROUP_BERRY_BLENDER]     = sAcceptedActivityIds_BerryBlender,
+    [LINK_GROUP_UNK_14]            = NULL,
+    [LINK_GROUP_COOL_CONTEST]      = sAcceptedActivityIds_CoolContest,
+    [LINK_GROUP_BEAUTY_CONTEST]    = sAcceptedActivityIds_BeautyContest,
+    [LINK_GROUP_CUTE_CONTEST]      = sAcceptedActivityIds_CuteContest,
+    [LINK_GROUP_SMART_CONTEST]     = sAcceptedActivityIds_SmartContest,
+    [LINK_GROUP_TOUGH_CONTEST]     = sAcceptedActivityIds_ToughContest,
+    [LINK_GROUP_BATTLE_TOWER]      = sAcceptedActivityIds_BattleTower,
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = sAcceptedActivityIds_BattleTowerOpen
 };
 
-// Link group type to ID for gUnknown_02022C2C
-const u8 gUnknown_082F0530[NUM_LINK_GROUP_TYPES + 2] = 
+static const u8 sLinkGroupToURoomActivity[NUM_LINK_GROUP_TYPES + 2] = 
 {
-    0x01, 
-    0x02, 
-    0x03, 
-    0x04, 
-    0x09, 
-    0x0a, 
-    0x0b, 
-    0x15,
-    0x16, 
-    0x00, 
-    0x00, 
-    0x00, 
-    0x0f, 
-    0x10, 
-    0x00, 
-    0x17,
-    0x18, 
-    0x19, 
-    0x1a, 
-    0x1b, 
-    0x1c, 
-    0x0e
+    [LINK_GROUP_SINGLE_BATTLE]     = ACTIVITY_BATTLE_SINGLE, 
+    [LINK_GROUP_DOUBLE_BATTLE]     = ACTIVITY_BATTLE_DOUBLE, 
+    [LINK_GROUP_MULTI_BATTLE]      = ACTIVITY_BATTLE_MULTI, 
+    [LINK_GROUP_TRADE]             = ACTIVITY_TRADE, 
+    [LINK_GROUP_POKEMON_JUMP]      = ACTIVITY_POKEMON_JUMP, 
+    [LINK_GROUP_BERRY_CRUSH]       = ACTIVITY_BERRY_CRUSH, 
+    [LINK_GROUP_BERRY_PICKING]     = ACTIVITY_BERRY_PICK, 
+    [LINK_GROUP_WONDER_CARD]       = ACTIVITY_WONDER_CARD2,
+    [LINK_GROUP_WONDER_NEWS]       = ACTIVITY_WONDER_NEWS2, 
+    [LINK_GROUP_UNION_ROOM_RESUME] = ACTIVITY_NONE, 
+    [LINK_GROUP_UNION_ROOM_INIT]   = ACTIVITY_NONE, 
+    [LINK_GROUP_UNK_11]            = ACTIVITY_NONE, 
+    [LINK_GROUP_RECORD_CORNER]     = ACTIVITY_RECORD_CORNER, 
+    [LINK_GROUP_BERRY_BLENDER]     = ACTIVITY_BERRY_BLENDER, 
+    [LINK_GROUP_UNK_14]            = ACTIVITY_NONE, 
+    [LINK_GROUP_COOL_CONTEST]      = ACTIVITY_CONTEST_COOL,
+    [LINK_GROUP_BEAUTY_CONTEST]    = ACTIVITY_CONTEST_BEAUTY, 
+    [LINK_GROUP_CUTE_CONTEST]      = ACTIVITY_CONTEST_CUTE, 
+    [LINK_GROUP_SMART_CONTEST]     = ACTIVITY_CONTEST_SMART, 
+    [LINK_GROUP_TOUGH_CONTEST]     = ACTIVITY_CONTEST_TOUGH, 
+    [LINK_GROUP_BATTLE_TOWER]      = ACTIVITY_BATTLE_TOWER, 
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = ACTIVITY_BATTLE_TOWER_OPEN
 };

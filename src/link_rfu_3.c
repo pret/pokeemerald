@@ -625,7 +625,7 @@ void sub_800DD94(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
     data->unk_00.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
-bool8 sub_800DE7C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal;
 
@@ -660,7 +660,7 @@ bool8 sub_800DE7C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
     return retVal;
 }
 
-bool8 sub_800DF34(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == 0x7F7D)
@@ -677,7 +677,7 @@ bool8 sub_800DF34(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
     return retVal;
 }
 
-void sub_800DF90(struct GFtgtGname *buff1, u8 *buff2)
+void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2)
 {
     memcpy(buff1, &gUnknown_02022B14, 0xD);
     memcpy(buff2, gUnknown_02022B22, 8);
@@ -820,7 +820,7 @@ void sub_800E174(void)
         gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
         gMain.oamBuffer[125].tileNum = sprite->data[6] + sprite->anims[sprite->data[2]][sprite->data[4]].frame.imageValue;
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
-        if (sub_8011A74() == 1)
+        if (RfuGetErrorStatus() == 1)
         {
             DestroyWirelessStatusIndicatorSprite();
         }
@@ -908,7 +908,7 @@ void RecordMixTrainerNames(void)
     }
 }
 
-bool32 sub_800E540(u16 id, u8 *name)
+bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
     s32 i;
 
