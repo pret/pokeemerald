@@ -697,6 +697,45 @@
 
 #define MOVES_COUNT_GEN7 677
 
-#define MOVES_COUNT MOVES_COUNT_GEN7
+// Gen 8 moves.
+#define MOVE_DYNAMAX_CANNON           (MOVES_COUNT_GEN7 + 0)
+#define MOVE_SNIPE_SHOT               (MOVES_COUNT_GEN7 + 1)
+#define MOVE_JAW_LOCK                 (MOVES_COUNT_GEN7 + 2)
+#define MOVE_STUFF_CHEEKS             (MOVES_COUNT_GEN7 + 3)
+#define MOVE_NO_RETREAT               (MOVES_COUNT_GEN7 + 4)
+#define MOVE_TAR_SHOT                 (MOVES_COUNT_GEN7 + 5)
+#define MOVE_MAGIC_POWDER             (MOVES_COUNT_GEN7 + 6)
+#define MOVE_DRAGON_DARTS             (MOVES_COUNT_GEN7 + 7)
+#define MOVE_TEA_TIME                 (MOVES_COUNT_GEN7 + 8)
+#define MOVE_OCTOLOCK                 (MOVES_COUNT_GEN7 + 9)
+#define MOVE_BOLT_BEAK                (MOVES_COUNT_GEN7 + 10)
+#define MOVE_FISHIOUS_REND            (MOVES_COUNT_GEN7 + 11)
+#define MOVE_COURT_CHANGE             (MOVES_COUNT_GEN7 + 12)
+#define MOVE_CLANGOROUS_SOUL          (MOVES_COUNT_GEN7 + 13)
+#define MOVE_BODY_PRESS               (MOVES_COUNT_GEN7 + 14)
+#define MOVE_DECORATE                 (MOVES_COUNT_GEN7 + 15)
+#define MOVE_DRUM_BEATING             (MOVES_COUNT_GEN7 + 16)
+#define MOVE_SNAP_TRAP                (MOVES_COUNT_GEN7 + 17)
+#define MOVE_PYRO_BALL                (MOVES_COUNT_GEN7 + 18)
+#define MOVE_BEHEMOTH_BLADE           (MOVES_COUNT_GEN7 + 19)
+#define MOVE_BEHEMOTH_BASH            (MOVES_COUNT_GEN7 + 20)
+#define MOVE_AURA_WHEEL               (MOVES_COUNT_GEN7 + 21)
+#define MOVE_BREAKING_SWIPE           (MOVES_COUNT_GEN7 + 22)
+#define MOVE_BRANCH_POKE              (MOVES_COUNT_GEN7 + 23)
+#define MOVE_OVERDRIVE                (MOVES_COUNT_GEN7 + 24)
+#define MOVE_APPLE_ACID               (MOVES_COUNT_GEN7 + 25)
+#define MOVE_GRAV_APPLE               (MOVES_COUNT_GEN7 + 26)
+#define MOVE_SPIRIT_BREAK             (MOVES_COUNT_GEN7 + 27)
+#define MOVE_STRANGE_STEAM            (MOVES_COUNT_GEN7 + 28)
+#define MOVE_LIFE_DEW                 (MOVES_COUNT_GEN7 + 29)
+#define MOVE_OBSTRUCT                 (MOVES_COUNT_GEN7 + 30)
+#define MOVE_FALSE_SURRENDER          (MOVES_COUNT_GEN7 + 31)
+#define MOVE_METEOR_ASSAULT           (MOVES_COUNT_GEN7 + 32)
+#define MOVE_ETERNA_BEAM              (MOVES_COUNT_GEN7 + 33)
+#define MOVE_STEEL_BEAM               (MOVES_COUNT_GEN7 + 34)
+
+#define MOVES_COUNT_GEN8              (MOVES_COUNT_GEN7 + 35)
+
+#define MOVES_COUNT                 MOVES_COUNT_GEN8
 
 #endif  // GUARD_CONSTANTS_MOVES_H
