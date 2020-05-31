@@ -1578,7 +1578,7 @@ static void AnimAirWaveProjectile(struct Sprite *sprite)
     {
         sprite->data[0] = 8;
         task->data[5] = 4;
-        a = sub_8151624(0x1000);
+        a = MathUtil_Inv16(Q_8_8(16));
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
         sprite->pos2.y = 0;
@@ -1597,8 +1597,8 @@ static void AnimAirWaveProjectile(struct Sprite *sprite)
         sprite->data[1] = 0;
         sprite->data[6] = 0;
         sprite->data[5] = 0;
-        sprite->data[3] = sub_8151534(sub_8151534(b, a), sub_8151624(0x1C0));
-        sprite->data[4] = sub_8151534(sub_8151534(c, a), sub_8151624(0x1C0));
+        sprite->data[3] = MathUtil_Mul16(MathUtil_Mul16(b, a), MathUtil_Inv16(Q_8_8(1.75)));
+        sprite->data[4] = MathUtil_Mul16(MathUtil_Mul16(c, a), MathUtil_Inv16(Q_8_8(1.75)));
         sprite->callback = AnimAirWaveProjectile_Step1;
     }
 }
@@ -1689,18 +1689,18 @@ void AnimTask_AirCutterProjectile(u8 taskId)
     else
         xDiff = attackerX - targetX;
 
-    gTasks[taskId].data[5] = sub_8151534(xDiff, sub_8151624(gBattleAnimArgs[2] & ~1));
-    gTasks[taskId].data[6] = sub_8151534(gTasks[taskId].data[5], 0x80);
+    gTasks[taskId].data[5] = MathUtil_Mul16(xDiff, MathUtil_Inv16(gBattleAnimArgs[2] & ~1));
+    gTasks[taskId].data[6] = MathUtil_Mul16(gTasks[taskId].data[5], Q_8_8(0.5));
     gTasks[taskId].data[7] = gBattleAnimArgs[2];
     if (targetY >= attackerY)
     {
         yDiff = targetY - attackerY;
-        gTasks[taskId].data[8] = sub_8151534(yDiff, sub_8151624(gTasks[taskId].data[5])) & ~1;
+        gTasks[taskId].data[8] = MathUtil_Mul16(yDiff, MathUtil_Inv16(gTasks[taskId].data[5])) & ~1;
     }
     else
     {
         yDiff = attackerY - targetY;
-        gTasks[taskId].data[8] = sub_8151534(yDiff, sub_8151624(gTasks[taskId].data[5])) | 1;
+        gTasks[taskId].data[8] = MathUtil_Mul16(yDiff, MathUtil_Inv16(gTasks[taskId].data[5])) | 1;
     }
 
     gTasks[taskId].data[3] = gBattleAnimArgs[3];

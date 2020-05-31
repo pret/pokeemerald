@@ -1,3 +1,4 @@
+#include <limits.h>
 #include "librfu.h"
 
 struct LLSFStruct
@@ -110,7 +111,7 @@ static const struct LLSFStruct llsf_struct[2] = {
 
 #define xstr(s) str(s)
 #define str(s) #s
-const char version_string[] = "RFU_V" xstr(LIBRFU_VERSION);
+static const char version_string[] = "RFU_V" xstr(LIBRFU_VERSION);
 
 static const char str_checkMbootLL[] = "RFU-MBOOT";
 
@@ -154,16 +155,13 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
     gRfuStatic = (void *)APIBuffer + 0xb4; // + sizeof(*gRfuLinkStatus)
     gRfuFixed = (void *)APIBuffer + 0xdc; // + sizeof(*gRfuStatic)
     gRfuSlotStatusNI[0] = (void *)APIBuffer + 0x1bc; // + sizeof(*gRfuFixed)
-    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c; // + sizeof(*gRfuSlotStatusNI[0])
+    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c; // + sizeof(*gRfuSlotStatusNI[0]) * RFU_CHILD_MAX
     for (i = 1; i < RFU_CHILD_MAX; ++i)
     {
         gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
         gRfuSlotStatusUNI[i] = &gRfuSlotStatusUNI[i - 1][1];
     }
-    // TODO: Is it possible to fix the following 2 statements?
-    // It's equivalent to:
-    // gRfuFixed->STWIBuffer = &APIBuffer->intr;
-    // STWI_init_all(&APIBuffer->intr, sioIntrTable_p, copyInterruptToRam);
+    // remaining space in API buffer is used for `struct RfuIntrStruct`. 
     gRfuFixed->STWIBuffer = (struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1];
     STWI_init_all((struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1], sioIntrTable_p, copyInterruptToRam);
     rfu_STC_clearAPIVariables();
@@ -1800,7 +1798,7 @@ static u16 rfu_STC_NI_constructLLSF(u8 bm_slot_id, u8 **dest_pp, struct NIComm *
     }
     else
     {
-        if ((u32)NI_comm->remainSize >= NI_comm->payloadSize)
+        if (NI_comm->remainSize >= NI_comm->payloadSize)
             size = NI_comm->payloadSize;
         else
             size = NI_comm->remainSize;
@@ -2095,34 +2093,31 @@ static void rfu_STC_NI_receive_Sender(u8 NI_slot, u8 bm_flag, const struct RfuLo
             else
                 NI_comm->now_p[llsf_NI->phase] += NI_comm->payloadSize << 2;
             NI_comm->remainSize -= NI_comm->payloadSize;
-            if (NI_comm->remainSize != 0)
-                if (NI_comm->remainSize >= 0)
-                    goto _081E30AE;
-            // Above is a hack to avoid optimization over comparison.
-            // rfu_STC_NI_constructLLSF uses this field as u32.
-            // It's equivalent to the following condition:
-            // if (NI_comm->remainSize == 0 || NI_comm->remainSize < 0)
+            switch (NI_comm->remainSize)
+            {
+            default:
+            case 0:
+                NI_comm->phase = 0;
+                if (NI_comm->state == SLOT_STATE_SEND_START)
                 {
-                    NI_comm->phase = 0;
-                    if (NI_comm->state == SLOT_STATE_SEND_START)
+                    for (i = 0; i < WINDOW_COUNT; ++i)
                     {
-                        for (i = 0; i < WINDOW_COUNT; ++i)
-                        {
-                            NI_comm->n[i] = 1;
-                            NI_comm->now_p[i] = NI_comm->src + NI_comm->payloadSize * i;
-                        }
-                        NI_comm->remainSize = NI_comm->dataSize;
-                        NI_comm->state = SLOT_STATE_SENDING;
+                        NI_comm->n[i] = 1;
+                        NI_comm->now_p[i] = NI_comm->src + NI_comm->payloadSize * i;
                     }
-                    else
-                    {
-                        NI_comm->n[0] = 0;
-                        NI_comm->remainSize = 0;
-                        NI_comm->state = SLOT_STATE_SEND_LAST;
-                    }
+                    NI_comm->remainSize = NI_comm->dataSize;
+                    NI_comm->state = SLOT_STATE_SENDING;
                 }
-        _081E30AE:
-            ;
+                else
+                {
+                    NI_comm->n[0] = 0;
+                    NI_comm->remainSize = 0;
+                    NI_comm->state = SLOT_STATE_SEND_LAST;
+                }
+                break;
+            case 1 ... INT_MAX:
+                break;
+            }
         }
         else if (NI_comm->state == SLOT_STATE_SEND_LAST)
         {

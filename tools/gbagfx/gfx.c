@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include "global.h"
 #include "gfx.h"
 #include "util.h"
@@ -203,6 +204,147 @@ static void ConvertToTiles8Bpp(unsigned char *src, unsigned char *dest, int numT
 	}
 }
 
+static void DecodeAffineTilemap(unsigned char *input, unsigned char *output, unsigned char *tilemap, int tileSize, int numTiles)
+{
+    for (int i = 0; i < numTiles; i++)
+    {
+        memcpy(&output[i * tileSize], &input[tilemap[i] * tileSize], tileSize);
+    }
+}
+
+#define REVERSE_BIT_ORDER(x) ({ \
+      ((((x) >> 7) & 1) << 0)   \
+    | ((((x) >> 6) & 1) << 1)   \
+    | ((((x) >> 5) & 1) << 2)   \
+    | ((((x) >> 4) & 1) << 3)   \
+    | ((((x) >> 3) & 1) << 4)   \
+    | ((((x) >> 2) & 1) << 5)   \
+    | ((((x) >> 1) & 1) << 6)   \
+    | ((((x) >> 0) & 1) << 7);  \
+})
+
+#define SWAP_BYTES(a, b) ({   \
+    unsigned char tmp = *(a); \
+    *(a) = *(b);              \
+    *(b) = tmp;               \
+})
+
+#define NSWAP(x) ({ (((x) >> 4) & 0xF) | (((x) << 4) & 0xF0); })
+
+#define SWAP_NYBBLES(a, b) ({        \
+    unsigned char tmp = NSWAP(*(a)); \
+    *(a) = NSWAP(*(b));              \
+    *(b) = tmp;                      \
+})
+
+static void VflipTile(unsigned char * tile, int bitDepth)
+{
+    int i;
+    switch (bitDepth)
+    {
+    case 1:
+        SWAP_BYTES(&tile[0], &tile[7]);
+        SWAP_BYTES(&tile[1], &tile[6]);
+        SWAP_BYTES(&tile[2], &tile[5]);
+        SWAP_BYTES(&tile[3], &tile[4]);
+        break;
+    case 4:
+        for (i = 0; i < 4; i++)
+        {
+            SWAP_BYTES(&tile[i + 0], &tile[i + 28]);
+            SWAP_BYTES(&tile[i + 4], &tile[i + 24]);
+            SWAP_BYTES(&tile[i + 8], &tile[i + 20]);
+            SWAP_BYTES(&tile[i + 12], &tile[i + 16]);
+        }
+        break;
+    case 8:
+        for (i = 0; i < 8; i++)
+        {
+            SWAP_BYTES(&tile[i + 0], &tile[i + 56]);
+            SWAP_BYTES(&tile[i + 8], &tile[i + 48]);
+            SWAP_BYTES(&tile[i + 16], &tile[i + 40]);
+            SWAP_BYTES(&tile[i + 24], &tile[i + 32]);
+        }
+        break;
+    }
+}
+
+static void HflipTile(unsigned char * tile, int bitDepth)
+{
+    int i;
+    switch (bitDepth)
+    {
+    case 1:
+        for (i = 0; i < 8; i++)
+            tile[i] = REVERSE_BIT_ORDER(tile[i]);
+        break;
+    case 4:
+        for (i = 0; i < 8; i++)
+        {
+            SWAP_NYBBLES(&tile[4 * i + 0], &tile[4 * i + 3]);
+            SWAP_NYBBLES(&tile[4 * i + 1], &tile[4 * i + 2]);;
+        }
+        break;
+    case 8:
+        for (i = 0; i < 8; i++)
+        {
+            SWAP_BYTES(&tile[8 * i + 0], &tile[8 * i + 7]);
+            SWAP_BYTES(&tile[8 * i + 1], &tile[8 * i + 6]);
+            SWAP_BYTES(&tile[8 * i + 2], &tile[8 * i + 5]);
+            SWAP_BYTES(&tile[8 * i + 3], &tile[8 * i + 4]);
+        }
+        break;
+    }
+}
+
+static void DecodeNonAffineTilemap(unsigned char *input, unsigned char *output, struct NonAffineTile *tilemap, int tileSize, int outTileSize, int bitDepth, int numTiles)
+{
+    unsigned char * in_tile;
+    unsigned char * out_tile = output;
+    int effectiveBitDepth = tileSize == outTileSize ? bitDepth : 8;
+    for (int i = 0; i < numTiles; i++)
+    {
+        in_tile = &input[tilemap[i].index * tileSize];
+        if (tileSize == outTileSize)
+            memcpy(out_tile, in_tile, tileSize);
+        else
+        {
+            for (int j = 0; j < 64; j++)
+            {
+                int shift = (j & 1) * 4;
+                out_tile[j] = (in_tile[j / 2] & (0xF << shift)) >> shift;
+            }
+        }
+        if (tilemap[i].hflip)
+            HflipTile(out_tile, effectiveBitDepth);
+        if (tilemap[i].vflip)
+            VflipTile(out_tile, effectiveBitDepth);
+        if (bitDepth == 4 && effectiveBitDepth == 8)
+        {
+            for (int j = 0; j < 64; j++)
+            {
+                out_tile[j] &= 0xF;
+                out_tile[j] |= (15 - tilemap[i].palno) << 4;
+            }
+        }
+        out_tile += outTileSize;
+    }
+}
+
+static unsigned char *DecodeTilemap(unsigned char *tiles, struct Tilemap *tilemap, int *numTiles_p, bool isAffine, int tileSize, int outTileSize, int bitDepth)
+{
+    int mapTileSize = isAffine ? 1 : 2;
+    int numTiles = tilemap->size / mapTileSize;
+    unsigned char *decoded = calloc(numTiles, outTileSize);
+    if (isAffine)
+        DecodeAffineTilemap(tiles, decoded, tilemap->data.affine, tileSize, numTiles);
+    else
+        DecodeNonAffineTilemap(tiles, decoded, tilemap->data.non_affine, tileSize, outTileSize, bitDepth, numTiles);
+    free(tiles);
+    *numTiles_p = numTiles;
+    return decoded;
+}
+
 void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
 {
 	int tileSize = bitDepth * 8;
@@ -211,6 +353,16 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
 
 	int numTiles = fileSize / tileSize;
+	if (image->tilemap.data.affine != NULL)
+    {
+	    int outTileSize = (bitDepth == 4 && image->palette.numColors > 16) ? 64 : tileSize;
+        buffer = DecodeTilemap(buffer, &image->tilemap, &numTiles, image->isAffine, tileSize, outTileSize, bitDepth);
+        if (outTileSize == 64)
+        {
+            tileSize = 64;
+            image->bitDepth = bitDepth = 8;
+        }
+    }
 
 	int tilesHeight = (numTiles + tilesWidth - 1) / tilesWidth;
 
@@ -298,6 +450,11 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 
 void FreeImage(struct Image *image)
 {
+    if (image->tilemap.data.affine != NULL)
+    {
+        free(image->tilemap.data.affine);
+        image->tilemap.data.affine = NULL;
+    }
 	free(image->pixels);
 	image->pixels = NULL;
 }
@@ -318,6 +475,12 @@ void ReadGbaPalette(char *path, struct Palette *palette)
 		palette->colors[i].green = UPCONVERT_BIT_DEPTH(GET_GBA_PAL_GREEN(paletteEntry));
 		palette->colors[i].blue = UPCONVERT_BIT_DEPTH(GET_GBA_PAL_BLUE(paletteEntry));
 	}
+	// png can only accept 16 or 256 colors, so fill the remainder with black
+	if (palette->numColors > 16)
+    {
+	    memset(&palette->colors[palette->numColors], 0, (256 - palette->numColors) * sizeof(struct Color));
+	    palette->numColors = 256;
+    }
 
 	free(data);
 }
