@@ -319,48 +319,48 @@ static const TaskFunc sPhase1_Tasks[B_TRANSITION_COUNT] =
 
 static const TaskFunc sPhase2_Tasks[B_TRANSITION_COUNT] =
 {
-    Phase2Task_Blur,                        // 0
-    Phase2Task_Swirl,                       // 1
-    Phase2Task_Shuffle,                     // 2
-    Phase2Task_BigPokeball,                 // 3
-    Phase2Task_PokeballsTrail,              // 4
-    Phase2Task_Clockwise_BlackFade,         // 5
-    Phase2Task_Ripple,                      // 6
-    Phase2Task_Wave,                        // 7
-    Phase2Task_Slice,                       // 8
-    Phase2Task_WhiteFade,                   // 9
-    Phase2Task_GridSquares,                 // 10
-    Phase2Task_Shards,                      // 11
-    Phase2Task_Sidney,                      // 12
-    Phase2Task_Phoebe,                      // 13
-    Phase2Task_Glacia,                      // 14
-    Phase2Task_Drake,                       // 15
-    Phase2Task_Champion,                    // 16
-    Phase2Task_Aqua,                        // 17
-    Phase2Task_Magma,                       // 18
-    Phase2Task_Regice,                      // 19
-    Phase2Task_Registeel,                   // 20
-    Phase2Task_Regirock,                    // 21
-    Phase2Task_Kyogre,                      // 22
-    Phase2Task_Groudon,                     // 23
-    Phase2Task_Rayquaza,                    // 24
-    Phase2Task_ShredSplit,                  // 25
-    Phase2Task_Blackhole1,                  // 26
-    Phase2Task_Blackhole2,                  // 27
-    Phase2Task_RectangularSpiral,           // 28
-    Phase2Task_29,                          // 29
-    Phase2Task_30,                          // 30
-    Phase2Task_31,                          // 31
-    Phase2Task_32,                          // 32
-    Phase2Task_33,                          // 33
-    Phase2Task_34,                          // 34
-    Phase2Task_35,                          // 35
-    Phase2Task_36,                          // 36
-    Phase2Task_37,                          // 37
-    Phase2Task_38,                          // 38
-    Phase2Task_39,                          // 39
-    Phase2Task_40,                          // 40
-    Phase2Task_41,                          // 41
+    [B_TRANSITION_BLUR] = Phase2Task_Blur,
+    [B_TRANSITION_SWIRL] = Phase2Task_Swirl,
+    [B_TRANSITION_SHUFFLE] = Phase2Task_Shuffle,
+    [B_TRANSITION_BIG_POKEBALL] = Phase2Task_BigPokeball,
+    [B_TRANSITION_POKEBALLS_TRAIL] = Phase2Task_PokeballsTrail,
+    [B_TRANSITION_CLOCKWISE_BLACKFADE] = Phase2Task_Clockwise_BlackFade,
+    [B_TRANSITION_RIPPLE] = Phase2Task_Ripple,
+    [B_TRANSITION_WAVE] = Phase2Task_Wave,
+    [B_TRANSITION_SLICE] = Phase2Task_Slice,
+    [B_TRANSITION_WHITEFADE] = Phase2Task_WhiteFade,
+    [B_TRANSITION_GRID_SQUARES] = Phase2Task_GridSquares,
+    [B_TRANSITION_SHARDS] = Phase2Task_Shards,
+    [B_TRANSITION_SIDNEY] = Phase2Task_Sidney,
+    [B_TRANSITION_PHOEBE] = Phase2Task_Phoebe,
+    [B_TRANSITION_GLACIA] = Phase2Task_Glacia,
+    [B_TRANSITION_DRAKE] = Phase2Task_Drake,
+    [B_TRANSITION_CHAMPION] = Phase2Task_Champion,
+    [B_TRANSITION_AQUA] = Phase2Task_Aqua,
+    [B_TRANSITION_MAGMA] = Phase2Task_Magma,
+    [B_TRANSITION_REGICE] = Phase2Task_Regice,
+    [B_TRANSITION_REGISTEEL] = Phase2Task_Registeel,
+    [B_TRANSITION_REGIROCK] = Phase2Task_Regirock,
+    [B_TRANSITION_KYOGRE] = Phase2Task_Kyogre,
+    [B_TRANSITION_GROUDON] = Phase2Task_Groudon,
+    [B_TRANSITION_RAYQUAZA] = Phase2Task_Rayquaza,
+    [B_TRANSITION_SHRED_SPLIT] = Phase2Task_ShredSplit,
+    [B_TRANSITION_BLACKHOLE1] = Phase2Task_Blackhole1,
+    [B_TRANSITION_BLACKHOLE2] = Phase2Task_Blackhole2,
+    [B_TRANSITION_RECTANGULAR_SPIRAL] = Phase2Task_RectangularSpiral,
+    [B_TRANSITION_29] = Phase2Task_29,
+    [B_TRANSITION_30] = Phase2Task_30,
+    [B_TRANSITION_31] = Phase2Task_31,
+    [B_TRANSITION_32] = Phase2Task_32,
+    [B_TRANSITION_33] = Phase2Task_33,
+    [B_TRANSITION_34] = Phase2Task_34,
+    [B_TRANSITION_35] = Phase2Task_35,
+    [B_TRANSITION_36] = Phase2Task_36,
+    [B_TRANSITION_37] = Phase2Task_37,
+    [B_TRANSITION_38] = Phase2Task_38,
+    [B_TRANSITION_39] = Phase2Task_39,
+    [B_TRANSITION_40] = Phase2Task_40,
+    [B_TRANSITION_41] = Phase2Task_41,
 };
 
 static const TransitionStateFunc sMainTransitionPhases[] =
@@ -515,27 +515,27 @@ static const TransitionStateFunc sPhase2_Mugshot_Funcs[] =
 
 static const u8 sMugshotsTrainerPicIDsTable[MUGSHOTS_COUNT] =
 {
-    TRAINER_PIC_ELITE_FOUR_SIDNEY,
-    TRAINER_PIC_ELITE_FOUR_PHOEBE,
-    TRAINER_PIC_ELITE_FOUR_GLACIA,
-    TRAINER_PIC_ELITE_FOUR_DRAKE,
-    TRAINER_PIC_CHAMPION_WALLACE
+    [MUGSHOT_SIDNEY] = TRAINER_PIC_ELITE_FOUR_SIDNEY,
+    [MUGSHOT_PHOEBE] = TRAINER_PIC_ELITE_FOUR_PHOEBE,
+    [MUGSHOT_GLACIA] = TRAINER_PIC_ELITE_FOUR_GLACIA,
+    [MUGSHOT_DRAKE] = TRAINER_PIC_ELITE_FOUR_DRAKE,
+    [MUGSHOT_CHAMPION] = TRAINER_PIC_CHAMPION_WALLACE,
 };
 static const s16 sMugshotsOpponentRotationScales[MUGSHOTS_COUNT][2] =
 {
-    {0x200, 0x200},
-    {0x200, 0x200},
-    {0x1B0, 0x1B0},
-    {0x1A0, 0x1A0},
-    {0x188, 0x188},
+    [MUGSHOT_SIDNEY] =   {0x200, 0x200},
+    [MUGSHOT_PHOEBE] =   {0x200, 0x200},
+    [MUGSHOT_GLACIA] =   {0x1B0, 0x1B0},
+    [MUGSHOT_DRAKE] =    {0x1A0, 0x1A0},
+    [MUGSHOT_CHAMPION] = {0x188, 0x188},
 };
 static const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT][2] =
 {
-    {0,     0},
-    {0,     0},
-    {-4,    4},
-    {0,     5},
-    {-8,    7},
+    [MUGSHOT_SIDNEY] =   {0,     0},
+    [MUGSHOT_PHOEBE] =   {0,     0},
+    [MUGSHOT_GLACIA] =   {-4,    4},
+    [MUGSHOT_DRAKE] =    {0,     5},
+    [MUGSHOT_CHAMPION] = {-8,    7},
 };
 
 static const TransitionSpriteCallback sUnknown_085C8C24[] =
@@ -834,17 +834,17 @@ static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may
 
 static const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
 {
-    sMugshotPal_Sidney,
-    sMugshotPal_Phoebe,
-    sMugshotPal_Glacia,
-    sMugshotPal_Drake,
-    sMugshotPal_Champion
+    [MUGSHOT_SIDNEY] = sMugshotPal_Sidney,
+    [MUGSHOT_PHOEBE] = sMugshotPal_Phoebe,
+    [MUGSHOT_GLACIA] = sMugshotPal_Glacia,
+    [MUGSHOT_DRAKE] = sMugshotPal_Drake,
+    [MUGSHOT_CHAMPION] = sMugshotPal_Champion
 };
 
-static const u16 *const sPlayerMugshotsPals[2] =
+static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
 {
-    sMugshotPal_Brendan,
-    sMugshotPal_May
+    [MALE] = sMugshotPal_Brendan,
+    [FEMALE] = sMugshotPal_May
 };
 
 static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
