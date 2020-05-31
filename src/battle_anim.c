@@ -1500,7 +1500,6 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_WaterGun, 0x180, ANIM_TAG_WATER_GUN},
     {gBattleAnimSpriteGfx_Punishment, 0xa00, ANIM_TAG_PUNISHMENT_BLADES},
     {gBattleAnimSpriteGfx_QuickGuard, 0x200, ANIM_TAG_QUICK_GUARD_HAND},
-
     {gBattleAnimSpriteGfx_ShellRight, 0x800, ANIM_TAG_SHELL_RIGHT},
     {gBattleAnimSpriteGfx_ShellLeft, 0x800, ANIM_TAG_SHELL_LEFT},
     {gBattleAnimSpriteGfx_RazorShell, 0x200, ANIM_TAG_RAZOR_SHELL},
@@ -1920,6 +1919,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_BlueRing2, ANIM_TAG_BLUE_RING_2},
     {gBattleAnimSpritePal_WhiteStreak, ANIM_TAG_WHITE_STREAK},
     {gBattleAnimSpritePal_PurpleJab, ANIM_TAG_PURPLE_JAB},
+    //new particles
     {gBattleAnimSpritePal_ToxicSpikes, ANIM_TAG_TOXIC_SPIKES},
     {gBattleAnimSpritePal_EnergyBall, ANIM_TAG_ENERGY_BALL},
     {gBattleAnimSpritePal_SeedBrown, ANIM_TAG_SEED_BROWN},
@@ -1947,7 +1947,6 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_WaterGun,	ANIM_TAG_WATER_GUN},
     {gBattleAnimSpritePal_Punishment,	ANIM_TAG_PUNISHMENT_BLADES},
     {gBattleAnimSpritePal_QuickGuard,	ANIM_TAG_QUICK_GUARD_HAND},
-    
     {gBattleAnimSpritePal_ShellLeft,	ANIM_TAG_SHELL_RIGHT},
     {gBattleAnimSpritePal_ShellLeft,	ANIM_TAG_SHELL_LEFT},
     {gBattleAnimSpritePal_RazorShell,	ANIM_TAG_RAZOR_SHELL},
@@ -1976,12 +1975,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_HorseshoeFist,	ANIM_TAG_HORSESHOE_SIDE_FIST},
     {gBattleAnimSpritePal_AvalancheRocks,	ANIM_TAG_DRAGON_ASCENT_FOE},
     {gBattleAnimSpritePal_CraftyShield,	ANIM_TAG_CRAFTY_SHIELD},
-    {gBattleAnimSpritePal_QuickGuard,	ANIM_TAG_QUICK_GUARD_HAND},
     {gBattleAnimSpritePal_BlacephalonHead,	ANIM_TAG_BLACEPHALON_HEAD},
     {gBattleAnimSpritePal_DracoMeteor,	ANIM_TAG_FAIRY_LOCK_CHAINS},
     {gBattleAnimSpritePal_LightningRain, ANIM_TAG_IONS},
     {gBattleAnimSpritePal_Chop, ANIM_TAG_CHOP},
-    {gBattleAnimSpritePal_HeartStamp, ANIM_TAG_HEART_STAMP},
+    [ANIM_TAG_HEART_STAMP - ANIM_SPRITES_START] = {gBattleAnimSpritePal_HeartStamp, ANIM_TAG_HEART_STAMP},
     {gBattleAnimSpritePal_HornLeech,	ANIM_TAG_HORN_LEECH},
     {gBattleAnimSpritePal_Steamroller, ANIM_TAG_STEAMROLLER},
     {gBattleAnimSpritePal_HoopaHand,	ANIM_TAG_HOOPA_HAND},

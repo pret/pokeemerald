@@ -844,10 +844,11 @@ void AnimThunderWave(struct Sprite *sprite)
 
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
-    if (gAnimMoveIndex == MOVE_ANCHOR_SHOT)
-        spriteId = CreateSprite(&gAnchorShotChainTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
-    else
+    if (gAnimMoveIndex == MOVE_THUNDER_WAVE)
         spriteId = CreateSprite(&gThunderWaveSpriteTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
+    else
+        spriteId = CreateSprite(&gAnchorShotChainTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
+        
     
     gSprites[spriteId].oam.tileNum += 8;
     gAnimVisualTaskCount++;
