@@ -706,7 +706,7 @@
 #define MOVE_TAR_SHOT                 (MOVES_COUNT_GEN7 + 5)
 #define MOVE_MAGIC_POWDER             (MOVES_COUNT_GEN7 + 6)
 #define MOVE_DRAGON_DARTS             (MOVES_COUNT_GEN7 + 7)
-#define MOVE_TEA_TIME                 (MOVES_COUNT_GEN7 + 8)
+#define MOVE_TEATIME                  (MOVES_COUNT_GEN7 + 8)
 #define MOVE_OCTOLOCK                 (MOVES_COUNT_GEN7 + 9)
 #define MOVE_BOLT_BEAK                (MOVES_COUNT_GEN7 + 10)
 #define MOVE_FISHIOUS_REND            (MOVES_COUNT_GEN7 + 11)
@@ -731,7 +731,7 @@
 #define MOVE_OBSTRUCT                 (MOVES_COUNT_GEN7 + 30)
 #define MOVE_FALSE_SURRENDER          (MOVES_COUNT_GEN7 + 31)
 #define MOVE_METEOR_ASSAULT           (MOVES_COUNT_GEN7 + 32)
-#define MOVE_ETERNA_BEAM              (MOVES_COUNT_GEN7 + 33)
+#define MOVE_ETERNABEAM               (MOVES_COUNT_GEN7 + 33)
 #define MOVE_STEEL_BEAM               (MOVES_COUNT_GEN7 + 34)
 
 #define MOVES_COUNT_GEN8              (MOVES_COUNT_GEN7 + 35)
