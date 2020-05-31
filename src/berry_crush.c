@@ -193,7 +193,7 @@ static void sub_8020F88(void);
 static void sub_8020FA0(u8);
 void sub_8020FC4(struct BerryCrushGame *);
 void sub_8022BEC(u16, u8, u8 *);
-void sub_8024604(u8 *, u32, s32, u32, u32, u32, u32);
+static void BerryCrush_SetPaletteFadeParams(u8 *, bool8, u32, s8, u8, u8, u16);
 static int sub_8021450(struct BerryCrushGame *);
 void sub_8022588(struct BerryCrushGame *);
 void sub_8022600(struct BerryCrushGame *);
@@ -206,7 +206,7 @@ void sub_8022554(struct BerryCrushGame_138 *r0);
 void sub_8024578(struct BerryCrushGame *);
 void sub_8024644(u8 *, u32, u32, u32, u32);
 static void sub_8022A20(struct Sprite *sprite);
-static u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1);
+static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *r6, u8 *r1);
 static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5);
 static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5);
 static u32 sub_8022E1C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
@@ -322,7 +322,7 @@ static const u8 sBerryCrushTextColorTable[][3] =
 };
 
 
-static const struct WindowTemplate gUnknown_082F32EC =
+static const struct WindowTemplate sWindowTemplate_BerryCrushRankings =
 {
     .bg = 0, 
     .tilemapLeft = 3, 
@@ -421,7 +421,7 @@ static const u8 gUnknown_082F3344[][4] =
     {12, 14, 15, 16},
 };
 
-static const u32 gUnknown_082F334C[] = 
+static const u32 sPressingSpeedConversionTable[] = 
 {
     50000000 / (1 << 0), 
     50000000 / (1 << 1), 
@@ -767,7 +767,7 @@ static const u8 *const gUnknown_082F43B4[] =
 static u32 (*const gUnknown_082F43CC[])(struct BerryCrushGame *, u8 *) =
 {
     NULL,
-    sub_8022C58,
+    BerryCrushCommand_BeginNormalPaletteFade,
     sub_8022CB0,
     sub_8022D14,
     sub_8022E1C,
@@ -874,7 +874,7 @@ void sub_8020C70(MainCallback callback)
     gUnknown_02022C90->unk12 = 1;
     gUnknown_02022C90->unkE = 1;
     gUnknown_02022C90->unkF = 6;
-    sub_8024604(gUnknown_02022C90->unk36, 1, -1, 0, 16, 0, 0);
+    BerryCrush_SetPaletteFadeParams(gUnknown_02022C90->unk36, 1, -1, 0, 16, 0, 0);
     sub_8022BEC(4, 1, gUnknown_02022C90->unk36);
     SetMainCallback2(sub_8020F88);
     gUnknown_02022C90->unkA = CreateTask(sub_8020FA0, 8);
@@ -891,7 +891,7 @@ static void sub_8020D8C(void)
     gUnknown_02022C90->unk68.as_four_players.others[gUnknown_02022C90->unk8].unk0 = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
     gUnknown_02022C90->unkE = 1;
     gUnknown_02022C90->unkF = 9;
-    sub_8024604(gUnknown_02022C90->unk36, 0, -1, 0, 16, 0, 0);
+    BerryCrush_SetPaletteFadeParams(gUnknown_02022C90->unk36, 0, -1, 0, 16, 0, 0);
     sub_8022BEC(4, 1, gUnknown_02022C90->unk36);
     gUnknown_02022C90->unkA = CreateTask(sub_8020FA0, 8);
     SetMainCallback2(sub_8020F88);
@@ -918,11 +918,11 @@ void sub_8020E58(void)
     u32 var0, var1;
 
     var0 = gUnknown_02022C90->unk68.as_four_players.unk00.unk04;
-    var0 <<= 8;
-    var0 = sub_81515FC(var0, 60 << 8);
+    var0 = Q_24_8(var0);
+    var0 = MathUtil_Div32(var0, Q_24_8(60));
     var1 = gUnknown_02022C90->unk68.as_four_players.unk00.unk0A;
-    var1 <<= 8;
-    var1 = sub_81515FC(var1, var0) & 0xFFFF;
+    var1 = Q_24_8(var1);
+    var1 = MathUtil_Div32(var1, var0) & 0xFFFF;
     gUnknown_02022C90->unk16 = var1;
     switch (gUnknown_02022C90->unk9)
     {
@@ -1232,12 +1232,12 @@ void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
         var0 *= 128;
         var6 = var5 + 32;
         var6 = var6 / 2;
-        var1 = sub_81515D4(7, 0x3F80, var6);
+        var1 = MathUtil_Div16Shift(7, Q_8_8(63.5), var6);
         data[0] = (u16)arg1->unk38[i]->pos1.x * 128;
-        data[3] = sub_81515D4(7, var0, var1);
-        var1 = sub_8151550(7, var1, 85);
+        data[3] = MathUtil_Div16Shift(7, var0, var1);
+        var1 = MathUtil_Mul16Shift(7, var1, 85);
         data[4] = 0;
-        data[5] = sub_81515D4(7, 0x3F80, var1);
+        data[5] = MathUtil_Div16Shift(7, Q_8_8(63.5), var1);
         data[7] |= 0x8000;
         if (arg1->unkC[i]->unk8 < 0)
             StartSpriteAffineAnim(arg1->unk38[i], 1);
@@ -1383,12 +1383,12 @@ void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
 
     arg0->unk4 = arg1 / 3600;
     arg0->unk6 = (arg1 % 3600) / 60;
-    r3 = sub_8151534((arg1 % 60) << 8, 4);
+    r3 = MathUtil_Mul16(Q_8_8(arg1 % 60), 4);
 
     for (i = 0; i < 8; i++)
     {
         if ((r3 >> (7 - i)) & 1)
-            r7 += gUnknown_082F334C[i];
+            r7 += sPressingSpeedConversionTable[i];
     }
 
     arg0->unk8 = r7 / 1000000;
@@ -1442,7 +1442,7 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
             r7 = sp24->as_four_players.unk00.unk0C[sp10][r8] & 15;
             for (r2 = 0; r2 < 4; ++r2)
                 if ((r7 >> (3 - r2)) & 1)
-                    r3 += gUnknown_082F334C[r2];
+                    r3 += sPressingSpeedConversionTable[r2];
             r7 = r3 / 1000000u;
             ConvertIntToDecimalStringN(gStringVar2, r7, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gUnknown_082F43B4[sp10]);
@@ -1499,7 +1499,7 @@ void sub_8021D34(struct BerryCrushGame *r8)
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimesPerSec);
     for (; r10 < 8; ++r10)
         if (((u8)r8->unk16 >> (7 - r10)) & 1)
-            sp0C += *(r10 + gUnknown_082F334C); // It's accessed in a different way here for unknown reason
+            sp0C += *(r10 + sPressingSpeedConversionTable); // It's accessed in a different way here for unknown reason
     ConvertIntToDecimalStringN(gStringVar1, r8->unk16 >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY3);
@@ -1580,93 +1580,89 @@ void sub_802222C(struct BerryCrushGame *r4)
     sub_8022600(r4);
 }
 
-void sub_8022250(u8 r4)
+static void Task_ShowBerryCrushRankings(u8 taskId)
 {
-    u8 r9 = 0, r2, r7, r10;
-    u32 sp0C = 0;
-    s16 *r6 = gTasks[r4].data;
-    const u8 *r10_; // turn r5/sl register swap into r8/sl
+    u8 i = 0, j, xPos, yPos;
+    u32 score = 0;
+    s16 *data = gTasks[taskId].data;
+    u8 *str;
     
-    switch (r6[0])
+    switch (data[0])
     {
     case 0:
-        r6[1] = AddWindow(&gUnknown_082F32EC);
-        PutWindowTilemap((u8)r6[1]);
-        FillWindowPixelBuffer((u8)r6[1], PIXEL_FILL(0));
-        LoadUserWindowBorderGfx_((u8)r6[1], 541, 208);
-        DrawStdFrameWithCustomTileAndPalette((u8)r6[1], 0, 541, 13);
+        data[1] = AddWindow(&sWindowTemplate_BerryCrushRankings);
+        PutWindowTilemap(data[1]);
+        FillWindowPixelBuffer(data[1], PIXEL_FILL(0));
+        LoadUserWindowBorderGfx_(data[1], 541, 208);
+        DrawStdFrameWithCustomTileAndPalette(data[1], 0, 541, 13);
         break;
     case 1:
-        r10_ = gText_BerryCrush2;
-        ++r10_; --r10_; // swap sb/sl
-    #ifndef NONMATCHING
-        asm("":::"r8"); // turn r8/sl register swap into sb/sl
-    #endif
-        r7 = 96 - GetStringWidth(1, r10_, -1) / 2u;
+        xPos = 96 - GetStringWidth(1, gText_BerryCrush2, -1) / 2u;
         AddTextPrinterParameterized3(
-            (u8)r6[1],
+            data[1],
             1,
-            r7,
+            xPos,
             1,
             sBerryCrushTextColorTable[3],
             0,
-            r10_
+            gText_BerryCrush2
         );
-        r10_ = gText_PressingSpeedRankings;
-        r7 = 96 - GetStringWidth(1, r10_, -1) / 2u;
+        xPos = 96 - GetStringWidth(1, gText_PressingSpeedRankings, -1) / 2u;
         AddTextPrinterParameterized3(
-            (u8)r6[1],
+            data[1],
             1,
-            r7,
+            xPos,
             17,
             sBerryCrushTextColorTable[3],
             0,
-            r10_
+            gText_PressingSpeedRankings
         );
-        r10 = 41;
-        for (; r9 < 4; ++r9)
+        yPos = 41;
+        for (i = 0; i < 4; ++i)
         {
-            ConvertIntToDecimalStringN(gStringVar1, r9 + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
+            ConvertIntToDecimalStringN(gStringVar1, i + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
             StringExpandPlaceholders(gStringVar4, gText_Var1Players);
             AddTextPrinterParameterized3(
-                (u8)r6[1],
+                data[1],
                 1,
                 0,
-                r10,
+                yPos,
                 sBerryCrushTextColorTable[0],
                 0,
                 gStringVar4
             );
-            r7 = 192 - (u8)GetStringWidth(1, gText_TimesPerSec, -1);
+            xPos = 192 - (u8)GetStringWidth(1, gText_TimesPerSec, -1);
             AddTextPrinterParameterized3(
-                (u8)r6[1],
+                data[1],
                 1,
-                r7,
-                r10,
+                xPos,
+                yPos,
                 sBerryCrushTextColorTable[0],
                 0,
                 gText_TimesPerSec
             );
-            for (r2 = 0; r2 < 8; ++r2)
-                if (((u8)r6[r9 + 2] >> (7 - r2)) & 1)
-                    sp0C += gUnknown_082F334C[r2];
-            ConvertIntToDecimalStringN(gStringVar1, (u16)r6[r9 + 2] >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            ConvertIntToDecimalStringN(gStringVar2, sp0C / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
+            for (j = 0; j < 8; ++j)
+            {
+                if (((data[i + 2] & 0xFF) >> (7 - j)) & 1)
+                    score += sPressingSpeedConversionTable[j];
+            }
+            ConvertIntToDecimalStringN(gStringVar1, (u16)data[i + 2] >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar2, score / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gText_XDotY3);
-            r7 -= GetStringWidth(1, gStringVar4, -1);
+            xPos -= GetStringWidth(1, gStringVar4, -1);
             AddTextPrinterParameterized3(
-                (u8)r6[1],
+                data[1],
                 1,
-                r7,
-                r10,
+                xPos,
+                yPos,
                 sBerryCrushTextColorTable[0],
                 0,
                 gStringVar4
             );
-            r10 += 16;
-            sp0C = 0;
+            yPos += 16;
+            score = 0;
         }
-        CopyWindowToVram((u8)r6[1], 3);
+        CopyWindowToVram(data[1], 3);
         break;
     case 2:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
@@ -1674,16 +1670,16 @@ void sub_8022250(u8 r4)
         else
             return;
     case 3:
-        ClearStdWindowAndFrameToTransparent((u8)r6[1], 1);
-        ClearWindowTilemap((u8)r6[1]);
-        RemoveWindow((u8)r6[1]);
-        DestroyTask(r4);
+        ClearStdWindowAndFrameToTransparent(data[1], 1);
+        ClearWindowTilemap(data[1]);
+        RemoveWindow(data[1]);
+        DestroyTask(taskId);
         EnableBothScriptContexts();
         ScriptContext2_Disable();
-        r6[0] = 0;
+        data[0] = 0;
         return;
     }
-    ++r6[0];
+    ++data[0];
 }
 
 void ShowBerryCrushRankings(void)
@@ -1691,7 +1687,7 @@ void ShowBerryCrushRankings(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask(sub_8022250, 0);
+    taskId = CreateTask(Task_ShowBerryCrushRankings, 0);
     gTasks[taskId].data[2] = gSaveBlock2Ptr->berryCrush.berryCrushResults[0];
     gTasks[taskId].data[3] = gSaveBlock2Ptr->berryCrush.berryCrushResults[1];
     gTasks[taskId].data[4] = gSaveBlock2Ptr->berryCrush.berryCrushResults[2];
@@ -1943,12 +1939,12 @@ void sub_8022B28(struct Sprite *sprite)
     r7[2] = 32;
     r7[7] = 168;
     r4 = sprite->pos2.x * 128;
-    r5 = sub_81515D4(7, (168 - sprite->pos1.y) << 7, (r2 + 32) >> 1);
+    r5 = MathUtil_Div16Shift(7, (168 - sprite->pos1.y) << 7, (r2 + 32) >> 1);
     sprite->data[0] = sprite->pos1.x << 7;
-    r7[3] = sub_81515D4(7, r4, r5);
-    r2 = sub_8151550(7, r5, 85);
+    r7[3] = MathUtil_Div16Shift(7, r4, r5);
+    r2 = MathUtil_Mul16Shift(7, r5, 85);
     r7[4] = r8;
-    r7[5] = sub_81515D4(7, 0x3F80, r2);
+    r7[5] = MathUtil_Div16Shift(7, Q_8_8(63.5), r2);
     r7[6] = sprite->pos2.x / 4;
     r7[7] |= 0x8000;
     sprite->pos2.y = r8;
@@ -1979,39 +1975,42 @@ void sub_8022BEC(u16 r5, u8 r4, u8 *r7)
     }
 }
 
-static u32 sub_8022C58(struct BerryCrushGame *r6, u8 *r1)
+static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *game, u8 *params)
 {
-    u16 r4;
-    u32 r0;
-#ifndef NONMATCHING // fake match, nobody can write such code
-    register u32 r2 asm("r2");
-    register u32 r3 asm("r3");
+    // params points to packed values:
+    // bytes 0-3: selectedPals (bitfield)
+    // byte 4: delay
+    // byte 5: startY
+    // byte 6: stopY
+    // bytes 7-8: fade color
+    // byte 9: if TRUE, communicate on fade complete
 
-    r2 = r1[0];
-    r3 = r1[1];
-    r3 <<= 8;
-    r2 |= r3;
-    r3 = r1[2];
-    r3 <<= 16;
-    r2 |= r3;
-    r3 = r1[3];
-    r3 <<= 24;
-    r0 = r2;
-    r0 |= r3;
+    u16 color;
+    u32 selectedPals;
+    selectedPals = ({
+#ifndef NONMATCHING
+        register u32 value asm("r2");
+        register u32 b asm("r3");
 #else
-    u32 r2;
+        u32 value;
+        u32 b;
+#endif //NONMATCHING
+        value  =      params[0] << 0;
+        value |= (b = params[1] << 8);
+        value |= (b = params[2] << 16);
+        value |= (b = params[3] << 24);
+        value;
+    });
 
-    r0 = T1_READ_32(r1);
-#endif
-    r2 = r1[9];
-    r1[0] = r2;
-    r4 = r1[8] << 8;
-    r2 = r1[7];
-    r4 |= r2;
+    params[0] = params[9];
+
+    color  = params[8] << 8;
+    color |= params[7] << 0;
+
     gPaletteFade.bufferTransferDisabled = FALSE;
-    BeginNormalPaletteFade(r0, r1[4], r1[5], r1[6], r4);
+    BeginNormalPaletteFade(selectedPals, params[4], params[5], params[6], color);
     UpdatePaletteFade();
-    r6->unkE = 2;
+    game->unkE = 2;
     return 0;
 }
 
@@ -2195,7 +2194,7 @@ static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
         }
         r5->unk10 = 0;
         ResetBlockReceivedFlags();
-        r5->unk20 = sub_81515FC(r5->unk18 << 8, 0x2000);
+        r5->unk20 = MathUtil_Div32(Q_24_8(r5->unk18), Q_24_8(32));
         break;
     case 5:
         ClearDialogWindowAndFrame(0, 1);
@@ -2412,9 +2411,9 @@ void sub_802339C(struct BerryCrushGame *r4)
         r2_ = r4->unk1A;
         if (r0 - r2_ > 0)
         {
-            r2_ <<= 8;
-            r2_ = sub_81515FC(r2_, r4->unk20);
-            r2_ >>= 8;
+            r2_ = Q_24_8(r2_);
+            r2_ = MathUtil_Div32(r2_, r4->unk20);
+            r2_ = Q_24_8_TO_INT(r2_);
             r4->unk24 = r2_;
         }
         else
@@ -2801,14 +2800,14 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
         );
         r7->unk68.as_four_players.unk00.unk04 = r7->unk28;
         r7->unk68.as_four_players.unk00.unk06 = r7->unk18 / (r7->unk28 / 60);
-        r2 = sub_8151574(r7->unk30 << 8, 0x3200);
-        r2 = sub_81515FC(r2, r7->unk32 << 8) + 0x3200;
-        r2 >>= 8;
+        r2 = MathUtil_Mul32(Q_24_8(r7->unk30), Q_24_8(50));
+        r2 = MathUtil_Div32(r2, Q_24_8(r7->unk32)) + Q_24_8(50);
+        r2 = Q_24_8_TO_INT(r2);
         r7->unk68.as_four_players.unk00.unk08 = r2 & 0x7F;
-        r2 <<= 8;
-        r2 = sub_81515FC(r2, 0x6400);
-        r4 = (r7->unk1C * r7->unk9) << 8;
-        r4 = sub_8151574(r4, r2);
+        r2 = Q_24_8(r2);
+        r2 = MathUtil_Div32(r2, Q_24_8(100));
+        r4 = Q_24_8(r7->unk1C * r7->unk9);
+        r4 = MathUtil_Mul32(r4, r2);
         r7->unk68.as_four_players.unk00.unk00 = r4 >> 8;
         r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[0][7] = Random() % 3;
         for (r6 = 0, r8 = 0; r8 < r7->unk9; ++r8)
@@ -2823,11 +2822,11 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[3] != 0)
                 {
                     r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[2];
-                    r2 <<= 8;
-                    r2 = sub_8151574(r2, 0x6400);
+                    r2 = Q_24_8(r2);
+                    r2 = MathUtil_Mul32(r2, Q_24_8(100));
                     r4 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[3];
-                    r4 <<= 8;
-                    r4 = sub_81515FC(r2, r4);
+                    r4 = Q_24_8(r4);
+                    r4 = MathUtil_Div32(r2, r4);
                 }
                 else
                 {
@@ -2838,11 +2837,11 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[3] != 0)
                 {
                     r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[4];
-                    r2 <<= 8;
-                    r2 = sub_8151574(r2, 0x6400);
+                    r2 = Q_24_8(r2);
+                    r2 = MathUtil_Mul32(r2, Q_24_8(100));
                     r4 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[3];
-                    r4 <<= 8;
-                    r4 = sub_81515FC(r2, r4);
+                    r4 = Q_24_8(r4);
+                    r4 = MathUtil_Div32(r2, r4);
                 }
                 else
                 {
@@ -2861,11 +2860,11 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 else
                 {
                     r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[5];
-                    r2 <<= 8;
-                    r2 = sub_8151574(r2, 0x6400);
+                    r2 = Q_24_8(r2);
+                    r2 = MathUtil_Mul32(r2, Q_24_8(100));
                     r4 = r7->unk28;
-                    r4 <<= 8;
-                    r4 = sub_81515FC(r2, r4);
+                    r4 = Q_24_8(r4);
+                    r4 = MathUtil_Div32(r2, r4);
                 }
                 break;
             }
@@ -3251,64 +3250,19 @@ void sub_8024578(struct BerryCrushGame *r4)
     }
 }
 
-#ifdef NONMATCHING
-void sub_8024604(u8 *r0, u32 r1, s32 r2, u32 r3, u32 r5, u32 r6, u32 r4)
+static void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, u32 selectedPals, s8 delay, u8 startY, u8 targetY, u16 palette)
 {
-    u8 sp[8];
-    u8 *p;
-
-    1[(u32 *)sp] = r2;
-    0[(u16 *)sp] = r4;
-    p = &sp[4];
-    r0[0] = p[0];
-    r0[1] = p[1];
-    r0[2] = p[2];
-    r0[3] = p[3];
-    r0[4] = r3;
-    r0[5] = r5;
-    r0[6] = r6;
-    r0[7] = sp[0];
-    r0[8] = sp[1];
-    r0[9] = r1;
+    params[0] = ((u8 *)&selectedPals)[0];
+    params[1] = ((u8 *)&selectedPals)[1];
+    params[2] = ((u8 *)&selectedPals)[2];
+    params[3] = ((u8 *)&selectedPals)[3];
+    params[4] = delay;
+    params[5] = startY;
+    params[6] = targetY;
+    params[7] = ((u8 *)&palette)[0];
+    params[8] = ((u8 *)&palette)[1];
+    params[9] = communicateAfter;
 }
-#else
-NAKED
-void sub_8024604(u8 *r0, u32 r1, s32 r2, u32 r3, u32 r5, u32 r6, u32 r4)
-{
-    asm_unified("\n\
-        push {r4-r6,lr}\n\
-        sub sp, 0x8\n\
-        str r2, [sp, 0x4]\n\
-        ldr r5, [sp, 0x18]\n\
-        ldr r6, [sp, 0x1C]\n\
-        ldr r4, [sp, 0x20]\n\
-        mov r2, sp\n\
-        strh r4, [r2]\n\
-        add r4, sp, 0x4\n\
-        ldrb r2, [r4]\n\
-        strb r2, [r0]\n\
-        ldrb r2, [r4, 0x1]\n\
-        strb r2, [r0, 0x1]\n\
-        ldrb r2, [r4, 0x2]\n\
-        strb r2, [r0, 0x2]\n\
-        ldrb r2, [r4, 0x3]\n\
-        strb r2, [r0, 0x3]\n\
-        strb r3, [r0, 0x4]\n\
-        strb r5, [r0, 0x5]\n\
-        strb r6, [r0, 0x6]\n\
-        mov r2, sp\n\
-        ldrb r2, [r2]\n\
-        strb r2, [r0, 0x7]\n\
-        mov r2, sp\n\
-        ldrb r2, [r2, 0x1]\n\
-        strb r2, [r0, 0x8]\n\
-        strb r1, [r0, 0x9]\n\
-        add sp, 0x8\n\
-        pop {r4-r6}\n\
-        pop {r0}\n\
-        bx r0");
-}
-#endif
 
 void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
 {
