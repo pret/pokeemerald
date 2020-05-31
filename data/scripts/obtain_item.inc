@@ -59,7 +59,7 @@ EventScript_ObtainedItem:: @ 8271B95
     delay 10
     showitemdesc
 	waitfanfare
-    msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+    msgbox gText_PutItemInPocket, MSGBOX_SIGN
     hideitemdesc
 	setvar VAR_RESULT, 1
 	return
