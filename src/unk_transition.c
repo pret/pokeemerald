@@ -185,11 +185,11 @@ static const TransitionStateFunc sPhase2_41_Funcs[] =
 // code
 static void sub_81DA700(void)
 {
-    u16 *tilemap, *tileset;
+    u16 *dst1, *dst2;
 
-    GetBg0TilesDst(&tilemap, &tileset);
-    LZ77UnCompVram(gUnknown_0862AD54, tileset);
-    LZ77UnCompVram(gUnknown_0862AF30, tilemap);
+    sub_8149F58(&dst1, &dst2);
+    LZ77UnCompVram(gUnknown_0862AD54, dst2);
+    LZ77UnCompVram(gUnknown_0862AF30, dst1);
     LoadPalette(gUnknown_0862B53C, 0xF0, 0x20);
     LoadCompressedSpriteSheet(&sUnknown_0862B724);
     LoadSpritePalette(&sUnknown_0862B72C);
