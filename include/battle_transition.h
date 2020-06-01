@@ -7,7 +7,7 @@ void BattleTransition_Start(u8 transitionId);
 bool8 IsBattleTransitionDone(void);
 bool8 FldEff_Pokeball(void);
 void TransitionPhase1_Task_RunFuncs(u8 taskId);
-void GetBg0TilesDst(u16 **tilemap, u16 **tileset);
+void sub_8149F58(u16 **a0, u16 **a1);
 
 extern const struct SpritePalette gFieldEffectObjectPaletteInfo10;
 
