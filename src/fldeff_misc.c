@@ -1008,7 +1008,7 @@ void DoSecretBaseGlitterMatSparkle(void)
     s16 y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
     u8 spriteId;
 
-    sub_80930E0(&x, &y, 8, 4);
+    SetSpritePosToOffsetMapCoords(&x, &y, 8, 4);
 
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[22], x, y, 0);
     if (spriteId != MAX_SPRITES)

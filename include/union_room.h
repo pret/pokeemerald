@@ -2,6 +2,7 @@
 #define GUARD_UNION_ROOM_H
 
 #include "link_rfu.h"
+#include "constants/union_room.h"
 
 // Exported type declarations
 
@@ -31,7 +32,7 @@ struct UnkStruct_x20 // WirelessLink_Member?
 
 struct UnkStruct_Main0
 {
-    struct UnkStruct_x20 arr[8];
+    struct UnkStruct_x20 arr[MAX_UNION_ROOM_PLAYERS];
 };
 
 struct UnkStruct_Main4
@@ -85,12 +86,12 @@ struct WirelessLink_Group
     u8 delayBeforePrint;
 };
 
-struct UnkStruct_8019BA8
+struct UnionRoomObject
 {
-    u8 field_0;
-    u8 field_1;
-    s8 field_2;
-    u8 field_3;
+    u8 state;
+    u8 gfxId;
+    s8 animState;
+    u8 schedAnim;
 };
 
 struct WirelessLink_URoom
@@ -121,7 +122,7 @@ struct WirelessLink_URoom
     u8 activityRequestStrbufs[4][16];
     u16 partnerYesNoResponse;
     u16 recvActivityRequest[3];
-    struct UnkStruct_8019BA8 field_A0[8];
+    struct UnionRoomObject objects[MAX_UNION_ROOM_PLAYERS];
     u8 field_C0[12][15];
     u8 field_174[48];
     u8 field_1A4[200];

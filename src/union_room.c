@@ -53,7 +53,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "constants/union_room.h"
 
 static EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
 EWRAM_DATA u8 gPlayerCurrActivity = 0;
@@ -104,7 +103,7 @@ static bool32 AreUnionRoomPlayerGnamesDifferent(struct WirelessGnameUnamePair *a
 static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *arg0, u8 multiplayerId);
 static void ResetUnionRoomTrade(struct UnionRoomTrade *arg0);
 static void CreateTask_StartActivity(void);
-static bool32 GetGnameWonderFlagByLinkGroup(struct GFtgtGname *arg0, s16 arg1);
+static bool32 HasWonderCardOrNewsByLinkGroup(struct GFtgtGname *arg0, s16 arg1);
 static u8 CreateTask_SearchForChildOrParent(struct UnkStruct_Main4 *arg0, struct UnkStruct_Main4 *arg1, u32 arg2);
 static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade);
 static void RegisterTradeMon(u32 monId, struct UnionRoomTrade *arg1);
@@ -1191,14 +1190,14 @@ static void Task_ListenToWireless(u8 taskId)
     }
 }
 
-static bool32 IsPartnerActivityAcceptable(u32 activity, u32 group)
+static bool32 IsPartnerActivityAcceptable(u32 activity, u32 linkGroup)
 {
-    if (group == 0xFF)
+    if (linkGroup == 0xFF)
         return TRUE;
 
-    if (group <= ARRAY_COUNT(sAcceptedActivityIds)) // UB: <= may access data outside the array
+    if (linkGroup <= ARRAY_COUNT(sAcceptedActivityIds)) // UB: <= may access data outside the array
     {
-        const u8 *bytes = sAcceptedActivityIds[group];
+        const u8 *bytes = sAcceptedActivityIds[linkGroup];
 
         while ((*(bytes) != 0xFF))
         {
@@ -2149,7 +2148,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
             {
                 if (data->field_0->arr[0].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->field_0->arr[0].gname_uname.gname.started)
                 {
-                    if (GetGnameWonderFlagByLinkGroup(&data->field_0->arr[0].gname_uname.gname, data->isWonderNews + LINK_GROUP_WONDER_CARD))
+                    if (HasWonderCardOrNewsByLinkGroup(&data->field_0->arr[0].gname_uname.gname, data->isWonderNews + LINK_GROUP_WONDER_CARD))
                     {
                         data->leaderId = 0;
                         data->refreshTimer = 0;
@@ -2325,15 +2324,15 @@ static void Task_RunUnionRoom(u8 taskId)
         data->field_C = AllocZeroed(RFU_CHILD_MAX * sizeof(struct UnkStruct_x1C));
         data->field_0 = AllocZeroed(8 * sizeof(struct UnkStruct_x20));
         data->field_8 = AllocZeroed(sizeof(struct UnkStruct_x20));
-        ClearUnkStruct_x20Array(data->field_0->arr, 8);
+        ClearUnkStruct_x20Array(data->field_0->arr, ARRAY_COUNT(data->field_0->arr));
         gPlayerCurrActivity = IN_UNION_ROOM;
         data->field_20 = CreateTask_SearchForChildOrParent(data->field_C, data->field_4, LINK_GROUP_UNION_ROOM_RESUME);
-        sub_8019BA8(data->field_A0);
-        sub_8019F2C();
+        InitUnionRoomPlayerObjects(data->objects);
+        SetTilesAroundUnionRoomPlayersPassable();
         data->state = 1;
         break;
     case 1:
-        CreateGroupMemberObjectsInvisible(data->spriteIds, taskData[0]);
+        CreateGroupMemberSpritesInvisible(data->spriteIds, taskData[0]);
         if (++taskData[0] == 8)
             data->state = 2;
         break;
@@ -2426,7 +2425,7 @@ static void Task_RunUnionRoom(u8 taskId)
         {
             if (gMain.newKeys & A_BUTTON)
             {
-                if (RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(data->field_0, &taskData[0], &taskData[1], data->spriteIds))
+                if (TrySetUnionRoomMemberFacePlayer(data->field_0, &taskData[0], &taskData[1], data->spriteIds))
                 {
                     PlaySE(SE_SELECT);
                     UR_EnableScriptContext2AndFreezeObjectEvents();
@@ -2526,7 +2525,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (!gReceivedRemoteLinkPlayers)
         {
             HandleCancelTrade(FALSE);
-            UpdateUnionGroupMemberFacing(taskData[0], taskData[1], data->field_0);
+            UpdateUnionRoomMemberFacing(taskData[0], taskData[1], data->field_0);
             data->state = 2;
         }
         break;
@@ -2848,7 +2847,7 @@ static void Task_RunUnionRoom(u8 taskId)
         Free(data->field_C);
         Free(data->field_4);
         DestroyTask(data->field_20);
-        DestroyGroupMemberObjects(data->spriteIds);
+        DestroyGroupMemberSprites(data->spriteIds);
         data->state = 17;
         break;
     case 17:
@@ -2858,7 +2857,7 @@ static void Task_RunUnionRoom(u8 taskId)
     case 18:
         if (!UpdatePaletteFade())
         {
-            sub_8019E3C();
+            DestroyUnionRoomPlayerObjects();
             DestroyTask(taskId);
             Free(sWirelessLinkMain.uRoom);
             CreateTask_StartActivity();
@@ -3048,7 +3047,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (PrintOnTextbox(&data->textState, gStringVar4))
         {
             HandleCancelTrade(TRUE);
-            UpdateUnionGroupMemberFacing(taskData[0], taskData[1], data->field_0);
+            UpdateUnionRoomMemberFacing(taskData[0], taskData[1], data->field_0);
             data->state = 4;
         }
         break;
@@ -3221,7 +3220,7 @@ static u8 HandlePlayerListUpdate(void)
             return 4;
         }
     }
-    for (j = 0; j < 8; j++)
+    for (j = 0; j < ARRAY_COUNT(data->field_0->arr); j++)
     {
         if (data->field_0->arr[j].groupScheduledAnim != UNION_ROOM_SPAWN_NONE)
         {
@@ -3350,29 +3349,21 @@ static void Task_ListenForPartnersWithCompatibleSerialNos(u8 taskId)
     }
 }
 
-static bool32 GetGnameWonderFlagByLinkGroup(struct GFtgtGname *gname, s16 linkGroup)
+static bool32 HasWonderCardOrNewsByLinkGroup(struct GFtgtGname *gname, s16 linkGroup)
 {
     if (linkGroup == LINK_GROUP_WONDER_CARD)
     {
         if (!gname->unk_00.hasCard)
-        {
             return FALSE;
-        }
         else
-        {
             return TRUE;
-        }
     }
     else if (linkGroup == LINK_GROUP_WONDER_NEWS)
     {
         if (!gname->unk_00.hasNews)
-        {
             return FALSE;
-        }
         else
-        {
             return TRUE;
-        }
     }
     else
     {
@@ -3389,7 +3380,7 @@ static void Task_ListenForPartnersWithSerial7F7D(u8 taskId)
     {
         if (LinkRfu_GetNameIfSerial7F7D(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.playerName, i))
         {
-            GetGnameWonderFlagByLinkGroup(&ptr[0]->arr[i].gname_uname.gname, gTasks[taskId].data[2]);
+            HasWonderCardOrNewsByLinkGroup(&ptr[0]->arr[i].gname_uname.gname, gTasks[taskId].data[2]);
         }
         ptr[0]->arr[i].active = AreGnameUnameDifferent(&ptr[0]->arr[i].gname_uname, &sWirelessGnameUnamePair_Dummy);
     }
@@ -3980,7 +3971,7 @@ static void TradeBoardListMenuItemPrintFunc(u8 windowId, s32 itemId, u8 y)
     else
     {
         j = 0;
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < (int)ARRAY_COUNT(data->field_0->arr); i++)
         {
             if (data->field_0->arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN && data->field_0->arr[i].gname_uname.gname.species != SPECIES_NONE)
             {

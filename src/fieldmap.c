@@ -917,11 +917,11 @@ void GetCameraCoords(u16 *x, u16 *y)
     *y = gSaveBlock1Ptr->pos.y;
 }
 
-void sub_8088B94(int x, int y, int a2)
+void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable)
 {
     if (x >= 0 && x < gBackupMapLayout.width && y >= 0 && y < gBackupMapLayout.height)
     {
-        if (a2 != 0)
+        if (impassable)
             gBackupMapLayout.map[x + gBackupMapLayout.width * y] |= METATILE_COLLISION_MASK;
         else
             gBackupMapLayout.map[x + gBackupMapLayout.width * y] &= ~METATILE_COLLISION_MASK;
