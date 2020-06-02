@@ -4481,17 +4481,17 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_ALOLAN_MEOWTH] =
     {
         .size = 0x65,
-        .y_offset = 0x6,
+        .y_offset = 0x7,
     },
     [SPECIES_ALOLAN_PERSIAN] =
     {
         .size = 0x87,
-        .y_offset = 0x7,
+        .y_offset = 0x8,
     },
     [SPECIES_ALOLAN_GEODUDE] =
     {
         .size = 0x66,
-        .y_offset = 0xb,
+        .y_offset = 0xd,
     },
     [SPECIES_ALOLAN_GRAVELER] =
     {
@@ -4501,12 +4501,12 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_ALOLAN_GOLEM] =
     {
         .size = 0x84,
-        .y_offset = 0xb,
+        .y_offset = 0xd,
     },
     [SPECIES_ALOLAN_GRIMER] =
     {
         .size = 0x75,
-        .y_offset = 0xd,
+        .y_offset = 0xe,
     },
     [SPECIES_ALOLAN_MUK] =
     {
