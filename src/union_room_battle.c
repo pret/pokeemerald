@@ -1,5 +1,4 @@
 #include "global.h"
-#include "defines.h"
 #include "battle.h"
 #include "task.h"
 #include "text.h"
@@ -19,6 +18,7 @@
 #include "link.h"
 #include "union_room.h"
 #include "union_room_battle.h"
+#include "constants/rgb.h"
 #include "constants/trainers.h"
 
 struct UnionRoomBattle
@@ -69,7 +69,7 @@ static void CB2_SetUpPartiesAndStartBattle(void)
     }
     IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
     CalculatePlayerPartyCount();
-    gTrainerBattleOpponent_A = TRAINER_OPPONENT_C00;
+    gTrainerBattleOpponent_A = TRAINER_UNION_ROOM;
     SetMainCallback2(CB2_InitBattle);
 }
 
@@ -150,7 +150,7 @@ void CB2_UnionRoomBattle(void)
     case 3:
         if (!UpdatePaletteFade())
         {
-            memset(gBlockSendBuffer, 0, sizeof(gBlockSendBuffer));
+            memset(gBlockSendBuffer, 0, 0x20);
             if (gSelectedOrderFromParty[0] == -gSelectedOrderFromParty[1])
             {
                 gBlockSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
@@ -159,7 +159,7 @@ void CB2_UnionRoomBattle(void)
             {
                 gBlockSendBuffer[0] = ACTIVITY_ACCEPT | IN_UNION_ROOM;
             }
-            SendBlock(0, gBlockSendBuffer, sizeof(gBlockSendBuffer));
+            SendBlock(0, gBlockSendBuffer, 0x20);
             gMain.state++;
         }
         break;
@@ -175,7 +175,7 @@ void CB2_UnionRoomBattle(void)
             else
             {
                 sub_800AC34();
-                if (gBlockRecvBuffer[GetMultiplayerId()][0] == (ACTIVITY_DECLINE | IN_UNION_ROOM)))
+                if (gBlockRecvBuffer[GetMultiplayerId()][0] == (ACTIVITY_DECLINE | IN_UNION_ROOM))
                 {
                     gMain.state = 6;
                 }
