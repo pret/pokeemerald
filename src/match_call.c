@@ -1098,7 +1098,7 @@ bool32 TryStartMatchCall(void)
     return FALSE;
 }
 
-void StartMatchCallFromScript(u8 *message)
+void StartMatchCallFromScript(const u8 *message)
 {
     gMatchCallState.triggeredFromScript = 1;
     StartMatchCall();
