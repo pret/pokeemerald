@@ -19,113 +19,131 @@
 #include "constants/songs.h"
 #include "constants/union_room.h"
 
-struct UnkStruct_3000DAC
-{
-    /*0x00*/ u32 unk00[4];
-    /*0x10*/ u32 unk10[4];
-    /*0x20*/ u32 unk20[16];
-    /*0x60*/ u8 taskId;
-    /*0x61*/ u8 unk61;
-    /*0x62*/ u8 filler_62[10];
+enum {
+    COLORMODE_NORMAL,
+    COLORMODE_WHITE_LGRAY,
+    COLORMODE_RED,
+    COLORMODE_GREEN,
+    COLORMODE_WHITE_DGRAY,
 };
 
-static struct UnkStruct_3000DAC * gUnknown_03000DAC;
+#define GROUPTYPE_TRADE   0
+#define GROUPTYPE_BATTLE  1
+#define GROUPTYPE_UNION   2
+#define GROUPTYPE_TOTAL   3
+#define GROUPTYPE_NONE   -1
+#define NUM_GROUPTYPES    4
 
-void sub_801A43C(void);
-void sub_801A6C0(u8 taskId);
-static void sub_801A8B0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 mode);
-bool32 sub_801AA30(u32 * a0, u32 * a1, u32 * a2, u8 taskId);
+struct WirelessCommunicationStatusScreen
+{
+    u32 groupCounts[NUM_GROUPTYPES];
+    u32 prevGroupCounts[NUM_GROUPTYPES];
+    u32 activities[NUM_TASK_DATA];
+    u8 taskId;
+    u8 rfuTaskId;
+    u8 filler[10];
+};
 
-const u16 gWirelessInfoScreenPal[] = INCBIN_U16("graphics/interface/wireless_info_screen.gbapal");
-const u32 gWirelessInfoScreenGfx[] = INCBIN_U32("graphics/interface/wireless_info_screen.4bpp.lz");
-const u32 gWirelessInfoScreenTilemap[] = INCBIN_U32("graphics/interface/wireless_info_screen.bin.lz");
+static struct WirelessCommunicationStatusScreen * sStatusScreen;
+
+static void CB2_InitWirelessCommunicationScreen(void);
+static void Task_WirelessCommunicationScreen(u8);
+static void WCSS_AddTextPrinterParameterized(u8, u8, const u8 *, u8, u8, u8);
+static bool32 UpdateCommunicationCounts(u32 *, u32 *, u32 *, u8);
+
+static const u16 sBgTiles_Pal[] = INCBIN_U16("graphics/interface/wireless_info_screen.gbapal");
+static const u32 sBgTiles_Gfx[] = INCBIN_U32("graphics/interface/wireless_info_screen.4bpp.lz");
+static const u32 sBgTiles_Tilemap[] = INCBIN_U32("graphics/interface/wireless_info_screen.bin.lz");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
-        .mapBaseIndex = 0x1F,
+        .mapBaseIndex = 31,
         .priority = 0
     }, {
         .bg = 1,
         .charBaseIndex = 0,
-        .mapBaseIndex = 0x08,
+        .mapBaseIndex = 8,
         .priority = 1
     }
 };
 
-const struct WindowTemplate sWindowTemplates[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
-        .bg = 0x00,
-        .tilemapLeft = 0x03,
-        .tilemapTop = 0x00,
-        .width = 0x18,
-        .height = 0x03,
-        .paletteNum = 0x0f,
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 0,
+        .width = 24,
+        .height = 3,
+        .paletteNum = 15,
         .baseBlock = 0x0001
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x03,
-        .tilemapTop = 0x04,
-        .width = 0x15,
-        .height = 0x0f,
-        .paletteNum = 0x0f,
+        .bg = 0,
+        .tilemapLeft = 3,
+        .tilemapTop = 4,
+        .width = 21,
+        .height = 15,
+        .paletteNum = 15,
         .baseBlock = 0x0049
     }, {
-        .bg = 0x00,
-        .tilemapLeft = 0x18,
-        .tilemapTop = 0x04,
-        .width = 0x03,
-        .height = 0x0f,
-        .paletteNum = 0x0f,
+        .bg = 0,
+        .tilemapLeft = 24,
+        .tilemapTop = 4,
+        .width = 3,
+        .height = 15,
+        .paletteNum = 15,
         .baseBlock = 0x0184
-    },
-    { 0xFF }
+    }, DUMMY_WIN_TEMPLATE
 };
 
-const u8 *const gUnknown_082F0D5C[] = {
-    gText_WirelessCommStatus,
-    gText_PeopleTrading,
-    gText_PeopleBattling,
-    gText_PeopleInUnionRoom,
-    gText_PeopleCommunicating
+static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
+    [0]                    = gText_WirelessCommStatus,
+    [GROUPTYPE_TRADE + 1]  = gText_PeopleTrading,
+    [GROUPTYPE_BATTLE + 1] = gText_PeopleBattling,
+    [GROUPTYPE_UNION + 1]  = gText_PeopleInUnionRoom,
+    [GROUPTYPE_TOTAL + 1]  = gText_PeopleCommunicating
 };
 
-const u8 gUnknown_082F0D70[][3] = {
-    {0x01, 0x01, 0x02},
-    {0x02, 0x01, 0x02},
-    {0x03, 0x01, 0x04},
-    {0x04, 0x00, 0x02},
-    {0x06, 0x03, 0x02},
-    {0x07, 0x03, 0x02},
-    {0x09, 0x03, 0x00},
-    {0x0a, 0x03, 0x00},
-    {0x0b, 0x03, 0x00},
-    {0x0c, 0xff, 0x00},
-    {0x0d, 0x00, 0x00},
-    {0x10, 0x03, 0x00},
-    {0x0f, 0x03, 0x00},
-    {0x40, 0x02, 0x01},
-    {0x41, 0x02, 0x02},
-    {0x44, 0x02, 0x02},
-    {0x45, 0x02, 0x00},
-    {0x48, 0x02, 0x02},
-    {0x54, 0x02, 0x01},
-    {0x53, 0x02, 0x02},
-    {0x51, 0x02, 0x01},
-    {0x52, 0x02, 0x01},
-    {0x15, 0x03, 0x02},
-    {0x16, 0x03, 0x02},
-    {0x17, 0x03, 0x00},
-    {0x18, 0x03, 0x00},
-    {0x19, 0x03, 0x00},
-    {0x1a, 0x03, 0x00},
-    {0x1b, 0x03, 0x00},
-    {0x1c, 0x01, 0x02},
-    {0x0e, 0x01, 0x02}
+// Activity, group type, number of players
+// 0 players means the number of players can change and should be counted dynamically
+// GROUPTYPE_TOTAL have no unique group and are simply counted in the total of "people communicating"
+// UB: GROUPTYPE_NONE (-1) can potentially be used as an index into a u8[4] in CountPlayersInGroupAndGetActivity
+static const u8 sActivityGroupInfo[][3] = {
+    {ACTIVITY_BATTLE_SINGLE,                 GROUPTYPE_BATTLE, 2},
+    {ACTIVITY_BATTLE_DOUBLE,                 GROUPTYPE_BATTLE, 2},
+    {ACTIVITY_BATTLE_MULTI,                  GROUPTYPE_BATTLE, 4},
+    {ACTIVITY_TRADE,                         GROUPTYPE_TRADE,  2},
+    {ACTIVITY_WONDER_CARD,                   GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_WONDER_NEWS,                   GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_POKEMON_JUMP,                  GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_BERRY_CRUSH,                   GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_BERRY_PICK,                    GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_SEARCH,                        GROUPTYPE_NONE,   0},
+    {ACTIVITY_SPIN_TRADE,                    GROUPTYPE_TRADE,  0},
+    {ACTIVITY_BERRY_BLENDER,                 GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_RECORD_CORNER,                 GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_NONE | IN_UNION_ROOM,          GROUPTYPE_UNION,  1},
+    {ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM, GROUPTYPE_UNION,  2},
+    {ACTIVITY_TRADE | IN_UNION_ROOM,         GROUPTYPE_UNION,  2},
+    {ACTIVITY_CHAT | IN_UNION_ROOM,          GROUPTYPE_UNION,  0},
+    {ACTIVITY_CARD | IN_UNION_ROOM,          GROUPTYPE_UNION,  2},
+    {ACTIVITY_PLYRTALK | IN_UNION_ROOM,      GROUPTYPE_UNION,  1},
+    {ACTIVITY_NPCTALK | IN_UNION_ROOM,       GROUPTYPE_UNION,  2},
+    {ACTIVITY_ACCEPT | IN_UNION_ROOM,        GROUPTYPE_UNION,  1},
+    {ACTIVITY_DECLINE | IN_UNION_ROOM,       GROUPTYPE_UNION,  1},
+    {ACTIVITY_WONDER_CARD2,                  GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_WONDER_NEWS2,                  GROUPTYPE_TOTAL,  2},
+    {ACTIVITY_CONTEST_COOL,                  GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_CONTEST_BEAUTY,                GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_CONTEST_CUTE,                  GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_CONTEST_SMART,                 GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_CONTEST_TOUGH,                 GROUPTYPE_TOTAL,  0},
+    {ACTIVITY_BATTLE_TOWER,                  GROUPTYPE_BATTLE, 2},
+    {ACTIVITY_BATTLE_TOWER_OPEN,             GROUPTYPE_BATTLE, 2}
 };
 
-void sub_801A3F4(void)
+static void CB2_RunWirelessCommunicationScreen(void)
 {
     if (!IsDma3ManagerBusyWithBgCopy())
     {
@@ -137,29 +155,29 @@ void sub_801A3F4(void)
     }
 }
 
-void sub_801A418(void)
+static void VBlankCB_WirelessCommunicationScreen(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_801A42C(void)
+void ShowWirelessCommunicationScreen(void)
 {
-    SetMainCallback2(sub_801A43C);
+    SetMainCallback2(CB2_InitWirelessCommunicationScreen);
 }
 
-void sub_801A43C(void)
+static void CB2_InitWirelessCommunicationScreen(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
-    gUnknown_03000DAC = AllocZeroed(sizeof(struct UnkStruct_3000DAC));
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    sStatusScreen = AllocZeroed(sizeof(struct WirelessCommunicationStatusScreen));
     SetVBlankCallback(NULL);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     SetBgTilemapBuffer(1, Alloc(0x800));
     SetBgTilemapBuffer(0, Alloc(0x800));
-    DecompressAndLoadBgGfxUsingHeap(1, gWirelessInfoScreenGfx, 0, 0, 0);
-    CopyToBgTilemapBuffer(1, gWirelessInfoScreenTilemap, 0, 0);
+    DecompressAndLoadBgGfxUsingHeap(1, sBgTiles_Gfx, 0, 0, 0);
+    CopyToBgTilemapBuffer(1, sBgTiles_Tilemap, 0, 0);
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     ResetPaletteFade();
@@ -167,20 +185,20 @@ void sub_801A43C(void)
     ResetTasks();
     ScanlineEffect_Stop();
     m4aSoundVSyncOn();
-    SetVBlankCallback(sub_801A418);
-    gUnknown_03000DAC->taskId = CreateTask(sub_801A6C0, 0);
-    gUnknown_03000DAC->unk61 = CreateTask_ListenToWireless();
-    gUnknown_03000DAC->unk10[3] = 1;
+    SetVBlankCallback(VBlankCB_WirelessCommunicationScreen);
+    sStatusScreen->taskId = CreateTask(Task_WirelessCommunicationScreen, 0);
+    sStatusScreen->rfuTaskId = CreateTask_ListenToWireless();
+    sStatusScreen->prevGroupCounts[GROUPTYPE_TOTAL] = 1;
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
     ChangeBgY(1, 0, 0);
-    LoadPalette(gWirelessInfoScreenPal, 0x00, 0x20);
+    LoadPalette(sBgTiles_Pal, 0x00, 0x20);
     Menu_LoadStdPalAt(0xF0);
     DynamicPlaceholderTextUtil_Reset();
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0x0F);
     CopyBgTilemapBufferToVram(1);
-    SetMainCallback2(sub_801A3F4);
+    SetMainCallback2(CB2_RunWirelessCommunicationScreen);
     RunTasks();
     RunTextPrinters();
     AnimateSprites();
@@ -188,225 +206,227 @@ void sub_801A43C(void)
     UpdatePaletteFade();
 }
 
-void sub_801A584(void)
+static void CB2_ExitWirelessCommunicationStatusScreen(void)
 {
     s32 i;
     FreeAllWindowBuffers();
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sBgTemplates); i++)
     {
         Free(GetBgTilemapBuffer(i));
     }
-    Free(gUnknown_03000DAC);
+    Free(sStatusScreen);
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void sub_801A5BC(s16 * a0, s16 * a1)
+static void WCSS_CyclePalette(s16 * counter, s16 * palIdx)
 {
-    if (++(*a0) > 5)
+    if (++(*counter) > 5)
     {
-        if (++(*a1) == 14)
-        {
-            *a1 = 0;
-        }
-        *a0 = 0;
+        if (++(*palIdx) == 14)
+            *palIdx = 0;
+
+        *counter = 0;
     }
-    LoadPalette(gWirelessInfoScreenPal + 16 * (*a1 + 2), 0, 0x10);
+    LoadPalette(sBgTiles_Pal + 16 * (*palIdx + 2), 0, 0x10);
 }
 
-void sub_801A600(void)
+static void PrintHeaderTexts(void)
 {
     s32 i;
-    FillWindowPixelBuffer(0, 0);
-    FillWindowPixelBuffer(1, 0);
-    FillWindowPixelBuffer(2, 0);
-    sub_801A8B0(0, 1, gUnknown_082F0D5C[0], GetStringCenterAlignXOffset(1, gUnknown_082F0D5C[0], 0xC0), 6, 3);
-    for (i = 0; i < 3; i++)
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    WCSS_AddTextPrinterParameterized(0, 1, sHeaderTexts[0], GetStringCenterAlignXOffset(1, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
+    for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
     {
-        sub_801A8B0(1, 1, gUnknown_082F0D5C[i + 1], 0, 30 * i + 8, 1);
+        WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
     }
-    sub_801A8B0(1, 1, gUnknown_082F0D5C[i + 1], 0, 30 * i + 8, 2);
+    WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_RED);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 2);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
 }
 
-void sub_801A6C0(u8 taskId)
+#define tState data[0]
+
+static void Task_WirelessCommunicationScreen(u8 taskId)
 {
     s32 i;
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
-        sub_801A600();
-        gTasks[taskId].data[0]++;
+        PrintHeaderTexts();
+        gTasks[taskId].tState++;
         break;
     case 1:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
         ShowBg(1);
         CopyBgTilemapBufferToVram(0);
         ShowBg(0);
-        gTasks[taskId].data[0]++;
+        gTasks[taskId].tState++;
         break;
     case 2:
         if (!gPaletteFade.active)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
         }
         break;
     case 3:
-        if (sub_801AA30(gUnknown_03000DAC->unk00, gUnknown_03000DAC->unk10, gUnknown_03000DAC->unk20, gUnknown_03000DAC->unk61))
+        if (UpdateCommunicationCounts(sStatusScreen->groupCounts, sStatusScreen->prevGroupCounts, sStatusScreen->activities, sStatusScreen->rfuTaskId))
         {
-            FillWindowPixelBuffer(2, 0);
-            for (i = 0; i < 4; i++)
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            for (i = 0; i < NUM_GROUPTYPES; i++)
             {
-                ConvertIntToDecimalStringN(gStringVar4, gUnknown_03000DAC->unk00[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
-                if (i != 3)
-                {
-                    sub_801A8B0(2, 1, gStringVar4, 12, 30 * i + 8, 1);
-                }
+                ConvertIntToDecimalStringN(gStringVar4, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+                if (i != GROUPTYPE_TOTAL)
+                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
                 else
-                {
-                    sub_801A8B0(2, 1, gStringVar4, 12, 98, 2);
-                }
+                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 98, COLORMODE_RED);
             }
             PutWindowTilemap(2);
             CopyWindowToVram(2, 3);
         }
-        if (({gMain.newKeys & A_BUTTON;}) || ({gMain.newKeys & B_BUTTON;}))
+        if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            gTasks[gUnknown_03000DAC->unk61].data[15] = 0xFF;
-            gTasks[taskId].data[0]++;
+            gTasks[sStatusScreen->rfuTaskId].data[15] = 0xFF;
+            gTasks[taskId].tState++;
         }
-        sub_801A5BC(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
+        WCSS_CyclePalette(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
         break;
     case 4:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        gTasks[taskId].data[0]++;
+        gTasks[taskId].tState++;
         break;
     case 5:
         if (!gPaletteFade.active)
         {
-            SetMainCallback2(sub_801A584);
+            SetMainCallback2(CB2_ExitWirelessCommunicationStatusScreen);
             DestroyTask(taskId);
         }
         break;
     }
 }
 
-static void sub_801A8B0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 mode)
+#undef tState
+
+static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 mode)
 {
     u8 color[3];
 
     switch (mode)
     {
-    case 0:
-        color[0] = 0;
-        color[1] = 2;
-        color[2] = 3;
+    case COLORMODE_NORMAL:
+        color[0] = TEXT_COLOR_TRANSPARENT;
+        color[1] = TEXT_COLOR_DARK_GREY;
+        color[2] = TEXT_COLOR_LIGHT_GREY;
         break;
-    case 1:
-        color[0] = 0;
-        color[1] = 1;
-        color[2] = 3;
+    case COLORMODE_WHITE_LGRAY:
+        color[0] = TEXT_COLOR_TRANSPARENT;
+        color[1] = TEXT_COLOR_WHITE;
+        color[2] = TEXT_COLOR_LIGHT_GREY;
         break;
-    case 2:
-        color[0] = 0;
-        color[1] = 4;
-        color[2] = 5;
+    case COLORMODE_RED:
+        color[0] = TEXT_COLOR_TRANSPARENT;
+        color[1] = TEXT_COLOR_RED;
+        color[2] = TEXT_COLOR_LIGHT_RED;
         break;
-    case 3:
-        color[0] = 0;
-        color[1] = 7;
-        color[2] = 6;
+    case COLORMODE_GREEN:
+        color[0] = TEXT_COLOR_TRANSPARENT;
+        color[1] = TEXT_COLOR_LIGHT_GREEN;
+        color[2] = TEXT_COLOR_GREEN;
         break;
-    case 4:
-        color[0] = 0;
-        color[1] = 1;
-        color[2] = 2;
+    case COLORMODE_WHITE_DGRAY:
+        color[0] = TEXT_COLOR_TRANSPARENT;
+        color[1] = TEXT_COLOR_WHITE;
+        color[2] = TEXT_COLOR_DARK_GREY;
         break;
     }
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, color, -1, str);
 }
 
-u32 sub_801A960(struct UnkStruct_x20 * a0, u32 * a1)
+static u32 CountPlayersInGroupAndGetActivity(struct UnkStruct_x20 * unk20, u32 * groupCounts)
 {
-    s32 i, j, r2;
-    u32 result = a0->gname_uname.gname.activity;
+    int i, j, k;
+    u32 activity = unk20->gname_uname.gname.activity;
 
-    for (i = 0; i < (unsigned)ARRAY_COUNT(gUnknown_082F0D70); i++)
+    #define group_activity(i) (sActivityGroupInfo[(i)][0])
+    #define group_type(i)     (sActivityGroupInfo[(i)][1])
+    #define group_players(i)  (sActivityGroupInfo[(i)][2])
+
+    for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
-        if (result != gUnknown_082F0D70[i][0])
+        if (activity == group_activity(i) && unk20->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
-            continue;
-        }
-        if (a0->groupScheduledAnim != 1)
-        {
-            continue;
-        }
-        if (gUnknown_082F0D70[i][2] == 0)
-        {
-            r2 = 0;
-            for (j = 0; j < 4; j++)
+            if (group_players(i) == 0)
             {
-                if (a0->gname_uname.gname.child_sprite_gender[j] != 0)
+                k = 0;
+                for (j = 0; j < RFU_CHILD_MAX; j++)
                 {
-                    r2++;
+                    if (unk20->gname_uname.gname.child_sprite_gender[j] != 0) k++;
                 }
+                k++;
+                groupCounts[group_type(i)] += k;
             }
-            r2++;
-            a1[gUnknown_082F0D70[i][1]] += r2;
-        }
-        else
-        {
-            a1[gUnknown_082F0D70[i][1]] += gUnknown_082F0D70[i][2];
+            else
+            {
+                groupCounts[group_type(i)] += group_players(i);
+            }
         }
     }
-    return result;
+    return activity;
+
+    #undef group_activity
+    #undef group_type
+    #undef group_players
 }
 
-bool32 sub_801AA08(u32 * a0, u32 * a1)
+static bool32 HaveCountsChanged(u32 * currCounts, u32 * prevCounts)
 {
     s32 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_GROUPTYPES; i++)
     {
-        if (a0[i] != a1[i])
-        {
+        if (currCounts[i] != prevCounts[i])
             return TRUE;
-        }
     }
     return FALSE;
 }
 
-bool32 sub_801AA30(u32 * a0, u32 * a1, u32 * a2, u8 taskId)
+static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts, u32 * activities, u8 taskId)
 {
-    bool32 r8 = FALSE;
-    u32 sp0[4] = {0, 0, 0, 0};
+    bool32 activitiesChanged = FALSE;
+    u32 groupCountBuffer[NUM_GROUPTYPES] = {0, 0, 0, 0};
     struct UnkStruct_x20 ** data = (void *)gTasks[taskId].data;
     s32 i;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < NUM_TASK_DATA; i++)
     {
-        u32 r1 = sub_801A960(&(*data)[i], sp0);
-        if (r1 != a2[i])
+        u32 activity = CountPlayersInGroupAndGetActivity(&(*data)[i], groupCountBuffer);
+        if (activity != activities[i])
         {
-            a2[i] = r1;
-            r8 = TRUE;
+            activities[i] = activity;
+            activitiesChanged = TRUE;
         }
     }
-    if (sub_801AA08(sp0, a1) == 0)
+
+    if (!HaveCountsChanged(groupCountBuffer, prevGroupCounts))
     {
-        if (r8 != TRUE)
-        {
+        if (activitiesChanged == TRUE)
+            return TRUE;
+        else
             return FALSE;
-        }
     }
     else
     {
-        memcpy(a0, sp0, sizeof(sp0));
-        memcpy(a1, sp0, sizeof(sp0));
-        a0[3] = a0[0] + a0[1] + a0[2] + a0[3];
+        memcpy(groupCounts,     groupCountBuffer, sizeof(groupCountBuffer));
+        memcpy(prevGroupCounts, groupCountBuffer, sizeof(groupCountBuffer));
+
+        groupCounts[GROUPTYPE_TOTAL] = groupCounts[GROUPTYPE_TRADE] 
+                                     + groupCounts[GROUPTYPE_BATTLE] 
+                                     + groupCounts[GROUPTYPE_UNION] 
+                                     + groupCounts[GROUPTYPE_TOTAL];
+        return TRUE;
     }
-    return TRUE;
 }

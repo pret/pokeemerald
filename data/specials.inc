@@ -427,7 +427,7 @@ gSpecials:: @ 81DBA64
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
-	def_special sub_801A42C
+	def_special ShowWirelessCommunicationScreen
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
 	def_special sub_801DC20
