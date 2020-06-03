@@ -16,7 +16,7 @@ bool8 ShowFieldAutoScrollMessage(const u8 *message);
 void HideFieldMessageBox(void);
 bool8 IsFieldMessageBoxHidden(void);
 u8 GetFieldMessageBoxMode(void);
-void sub_8098374(void);
+void StopFieldMessage(void);
 void InitFieldMessageBox(void);
 
 #endif // GUARD_FIELD_MESSAGE_BOX_H

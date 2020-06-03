@@ -569,7 +569,7 @@ bool32 MEventHandleReceivedWonderCard(u16 a0)
     return TRUE;
 }
 
-void sub_801B990(u32 a0, u32 a1)
+void RecordIdOfWonderCardSenderByEventType(u32 a0, u32 a1)
 {
     if (gUnknown_02022C70)
     {

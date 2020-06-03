@@ -1298,15 +1298,15 @@ static u8 GetNewLeaderCandidate(void)
     return ret;
 }
 
-static void Task_ReturnFromLinkTrade(u8 taskId)
+static void Task_CreateTradeMenu(u8 taskId)
 {
     CB2_StartCreateTradeMenu();
     DestroyTask(taskId);
 }
 
-u8 CreateTask_ReturnFromLinkTrade(void)
+u8 CreateTask_CreateTradeMenu(void)
 {
-    u8 taskId = CreateTask(Task_ReturnFromLinkTrade, 0);
+    u8 taskId = CreateTask(Task_CreateTradeMenu, 0);
 
     return taskId;
 }
@@ -1589,7 +1589,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
     switch (data[0])
     {
     case 0:
-        gSpecialVar_Result = 1;
+        gSpecialVar_Result = LINKUP_SUCCESS;
         switch (gPlayerCurrActivity)
         {
         case ACTIVITY_BATTLE_TOWER:
@@ -1655,9 +1655,9 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
         if (GetBlockReceivedStatus() == 3)
         {
             ResetBlockReceivedFlags();
-            if (sub_80B2AF4(gBlockRecvBuffer[0], gBlockRecvBuffer[1]))
+            if (AreBattleTowerLinkSpeciesSame(gBlockRecvBuffer[0], gBlockRecvBuffer[1]))
             {
-                gSpecialVar_Result = 11;
+                gSpecialVar_Result = LINKUP_FAILED_BATTLE_TOWER;
                 data[0] = 7;
             }
             else

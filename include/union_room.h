@@ -161,7 +161,7 @@ extern u8 gUnionRoomRequestedMonType;
 
 // Exported ROM declarations
 
-u8 CreateTask_ReturnFromLinkTrade(void);
+u8 CreateTask_CreateTradeMenu(void);
 void nullsub_89(u8 taskId);
 void var_800D_set_xB(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);

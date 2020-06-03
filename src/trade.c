@@ -389,7 +389,7 @@ static void CB2_CreateTradeMenu(void)
 
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = LINKTYPE_0x1122;
+            gLinkType = LINKTYPE_TRADE_CONNECTING;
             sTradeMenuData->timer = 0;
 
             if (gWirelessCommType)
@@ -402,7 +402,7 @@ static void CB2_CreateTradeMenu(void)
             {
                 OpenLink();
                 gMain.state++;
-                CreateTask(task00_08081A90, 1);
+                CreateTask(Task_WaitForLinkPlayerConnection, 1);
             }
         }
         else
@@ -2750,7 +2750,7 @@ void CB2_LinkTrade(void)
     case 0:
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = LINKTYPE_0x1144;
+            gLinkType = LINKTYPE_TRADE_DISCONNECTED;
             CloseLink();
         }
         sTradeData = AllocZeroed(sizeof(*sTradeData));
@@ -4597,7 +4597,7 @@ static void CB2_SaveAndEndTrade(void)
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
         if (gWirelessCommType)
         {
-            sub_801B990(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+            RecordIdOfWonderCardSenderByEventType(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
         }
         SetContinueGameWarpStatusToDynamicWarp();
         sub_8153380();

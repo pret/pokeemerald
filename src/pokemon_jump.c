@@ -1148,12 +1148,12 @@ static bool32 sub_802B720(void)
     case 2:
         if (sub_802C70C())
         {
-            CreateTask(sub_8153688, 6);
+            CreateTask(Task_LinkSave, 6);
             gUnknown_02022CFC->unk8++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(sub_8153688))
+        if (!FuncIsActiveTask(Task_LinkSave))
         {
             sub_802DA14();
             gUnknown_02022CFC->unk8++;

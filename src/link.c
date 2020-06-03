@@ -282,7 +282,7 @@ void LinkTestScreen(void)
     ResetTasks();
     SetVBlankCallback(sub_80096BC);
     ResetBlockSend();
-    gLinkType = LINKTYPE_0x1111;
+    gLinkType = LINKTYPE_TRADE;
     OpenLink();
     SeedRng(gMain.vblankCounter2);
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -826,23 +826,23 @@ void OpenLinkTimed(void)
     OpenLink();
 }
 
-u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
+u8 GetLinkPlayerDataExchangeStatusTimed(int minPlayers, int maxPlayers)
 {
     int i;
     int count;
     u32 index;
-    u8 cmpVal;
+    u8 numPlayers;
     u32 linkType1;
     u32 linkType2;
 
     count = 0;
     if (gReceivedRemoteLinkPlayers == TRUE)
     {
-        cmpVal = GetLinkPlayerCount_2();
-        if (lower > cmpVal || cmpVal > upper)
+        numPlayers = GetLinkPlayerCount_2();
+        if (minPlayers > numPlayers || numPlayers > maxPlayers)
         {
-            sPlayerDataExchangeStatus = EXCHANGE_STAT_6;
-            return 6;
+            sPlayerDataExchangeStatus = EXCHANGE_WRONG_NUM_PLAYERS;
+            return sPlayerDataExchangeStatus;
         }
         else
         {
@@ -860,19 +860,19 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             }
             if (count == GetLinkPlayerCount())
             {
-                if (gLinkPlayers[0].linkType == 0x1133)
+                if (gLinkPlayers[0].linkType == LINKTYPE_TRADE_SETUP)
                 {
                     switch (GetGameProgressForLinkTrade())
                     {
-                        case TRADE_PLAYER_NOT_READY:
-                            sPlayerDataExchangeStatus = EXCHANGE_PLAYER_NOT_READY;
-                            break;
-                        case TRADE_PARTNER_NOT_READY:
-                            sPlayerDataExchangeStatus = EXCHANGE_PARTNER_NOT_READY;
-                            break;
-                        case TRADE_BOTH_PLAYERS_READY:
-                            sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
-                            break;
+                    case TRADE_PLAYER_NOT_READY:
+                        sPlayerDataExchangeStatus = EXCHANGE_PLAYER_NOT_READY;
+                        break;
+                    case TRADE_PARTNER_NOT_READY:
+                        sPlayerDataExchangeStatus = EXCHANGE_PARTNER_NOT_READY;
+                        break;
+                    case TRADE_BOTH_PLAYERS_READY:
+                        sPlayerDataExchangeStatus = EXCHANGE_COMPLETE;
+                        break;
                     }
                 }
                 else
@@ -882,11 +882,14 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             }
             else
             {
-                sPlayerDataExchangeStatus = EXCHANGE_IN_PROGRESS;
+                sPlayerDataExchangeStatus = EXCHANGE_DIFF_SELECTIONS;
                 linkType1 = gLinkPlayers[GetMultiplayerId()].linkType;
                 linkType2 = gLinkPlayers[GetMultiplayerId() ^ 1].linkType;
-                if ((linkType1 == 0x2266 && linkType2 == 0x2277) || (linkType1 == 0x2277 && linkType2 == 0x2266))
+                if ((linkType1 == LINKTYPE_BATTLE_TOWER_50 && linkType2 == LINKTYPE_BATTLE_TOWER_OPEN) 
+                 || (linkType1 == LINKTYPE_BATTLE_TOWER_OPEN && linkType2 == LINKTYPE_BATTLE_TOWER_50))
                 {
+                    // 3 below indicates partner made different level mode selection
+                    // See BattleFrontier_BattleTowerLobby_EventScript_AbortLinkDifferentSelections
                     gSpecialVar_0x8005 = 3;
                 }
             }
@@ -921,7 +924,7 @@ bool8 IsLinkPlayerDataExchangeComplete(void)
     else
     {
         retval = FALSE;
-        sPlayerDataExchangeStatus = EXCHANGE_IN_PROGRESS;
+        sPlayerDataExchangeStatus = EXCHANGE_DIFF_SELECTIONS;
     }
     return retval;
 }

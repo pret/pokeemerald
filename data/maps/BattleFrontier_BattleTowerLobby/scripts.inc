@@ -786,19 +786,19 @@ BattleFrontier_BattleTowerLobby_EventScript_TryCableLink:: @ 823F2C5
 	setvar VAR_0x8005, 0
 	special TryBattleLinkup
 	waitstate
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
 	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AbortLinkDifferentSelections
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AbortLinkIncorrectNumberOfPlayers
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
-	compare VAR_RESULT, 11
+	compare VAR_RESULT, LINKUP_FAILED_BATTLE_TOWER
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AbortLink
 	end
 
@@ -853,7 +853,7 @@ BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful:: @ 823F3AF
 	message BattleFrontier_BattleTowerLobby_Text_SaveGameBeforeShowingIn
 	waitmessage
 	tower_save CHALLENGE_STATUS_SAVING
-	special sub_80A08CC
+	special SaveForBattleTowerLink
 	waitstate
 	playse SE_SAVE
 	waitse
@@ -914,7 +914,7 @@ BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful:: @ 823F496
 	message BattleFrontier_BattleTowerLobby_Text_SaveGameBeforeShowingIn
 	waitmessage
 	tower_save CHALLENGE_STATUS_SAVING
-	special sub_80A08CC
+	special SaveForBattleTowerLink
 	waitstate
 	playse SE_SAVE
 	waitse

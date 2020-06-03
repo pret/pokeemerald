@@ -767,15 +767,15 @@ LilycoveCity_ContestLobby_EventScript_TrySetUpLinkContest:: @ 821AA15
 	call_if_eq LilycoveCity_ContestLobby_EventScript_TryLinkGMode
 	compare VAR_TEMP_C, 2
 	goto_if_ge LilycoveCity_ContestLobby_EventScript_CancelLinkContest
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkContest
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkError
-	compare VAR_RESULT, 10
+	compare VAR_RESULT, LINKUP_FAILED_CONTEST_GMODE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkModeDifference
 	message3 LilycoveCity_ContestLobby_Text_Transmitting
 	contestlinktransfer

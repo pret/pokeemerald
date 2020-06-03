@@ -4483,12 +4483,12 @@ static void sub_802A380(void)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateTask(sub_8153688, 0);
+            CreateTask(Task_LinkSave, 0);
             gUnknown_02022CF8->state++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(sub_8153688))
+        if (!FuncIsActiveTask(Task_LinkSave))
             gUnknown_02022CF8->state++;
         break;
     default:

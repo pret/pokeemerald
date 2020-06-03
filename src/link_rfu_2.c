@@ -2408,7 +2408,7 @@ void sub_8011AFC(void)
     SetVBlankCallback(sub_8011AE8);
     if (IsWirelessAdapterConnected())
     {
-        gLinkType = LINKTYPE_0x1111;
+        gLinkType = LINKTYPE_TRADE;
         SetWirelessCommType1();
         OpenLink();
         SeedRng(gMain.vblankCounter2);

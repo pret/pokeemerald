@@ -148,7 +148,7 @@ void sub_8098358(void)
     sFieldMessageBoxMode = 0;
 }
 
-void sub_8098374(void)
+void StopFieldMessage(void)
 {
     task_del_textbox();
     sFieldMessageBoxMode = 0;

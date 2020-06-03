@@ -73,10 +73,10 @@
 #define LINKCMD_CANCEL_TRADE          0xEEBB
 #define LINKCMD_0xEECC                0xEECC
 
-#define LINKTYPE_0x1111              0x1111  // trade
-#define LINKTYPE_0x1122              0x1122  // trade
-#define LINKTYPE_0x1133              0x1133  // trade
-#define LINKTYPE_0x1144              0x1144  // trade
+#define LINKTYPE_TRADE               0x1111
+#define LINKTYPE_TRADE_CONNECTING    0x1122
+#define LINKTYPE_TRADE_SETUP         0x1133
+#define LINKTYPE_TRADE_DISCONNECTED  0x1144
 #define LINKTYPE_BATTLE              0x2211
 #define LINKTYPE_0x2222              0x2222  // unused battle?
 #define LINKTYPE_SINGLE_BATTLE       0x2233
@@ -85,13 +85,13 @@
 #define LINKTYPE_BATTLE_TOWER_50     0x2266
 #define LINKTYPE_BATTLE_TOWER_OPEN   0x2277 
 #define LINKTYPE_BATTLE_TOWER        0x2288
-#define LINKTYPE_0x3311              0x3311
-#define LINKTYPE_0x3322              0x3322
+#define LINKTYPE_RECORD_MIX_BEFORE   0x3311
+#define LINKTYPE_RECORD_MIX_AFTER    0x3322
 #define LINKTYPE_BERRY_BLENDER_SETUP 0x4411
 #define LINKTYPE_BERRY_BLENDER       0x4422
-#define LINKTYPE_0x5501              0x5501  // mystery event
+#define LINKTYPE_MYSTERY_EVENT       0x5501
 #define LINKTYPE_0x5502              0x5502  // unused?
-#define LINKTYPE_0x5503              0x5503  // eReader
+#define LINKTYPE_EREADER             0x5503
 #define LINKTYPE_CONTEST_GMODE       0x6601
 #define LINKTYPE_CONTEST_EMODE       0x6602
 
@@ -126,10 +126,10 @@ enum
     EXCHANGE_NOT_STARTED,
     EXCHANGE_COMPLETE,
     EXCHANGE_TIMED_OUT,
-    EXCHANGE_IN_PROGRESS,
+    EXCHANGE_DIFF_SELECTIONS,
     EXCHANGE_PLAYER_NOT_READY,
     EXCHANGE_PARTNER_NOT_READY,
-    EXCHANGE_STAT_6,
+    EXCHANGE_WRONG_NUM_PLAYERS,
     EXCHANGE_STAT_7
 };
 

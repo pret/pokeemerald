@@ -3013,10 +3013,10 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
         DrawDialogueFrame(0, 0);
         AddTextPrinterParameterized2(0, 1, gText_SavingDontTurnOffPower, 0, 0, 2, 1, 3);
         CopyWindowToVram(0, 3);
-        CreateTask(sub_8153688, 0);
+        CreateTask(Task_LinkSave, 0);
         break;
     case 3:
-        if (FuncIsActiveTask(sub_8153688))
+        if (FuncIsActiveTask(Task_LinkSave))
             return 0;
         break;
     case 4:

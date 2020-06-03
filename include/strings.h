@@ -962,7 +962,7 @@ extern const u8 gText_TwoDashes[];
 
 extern const u8 *const gReturnToXStringsTable2[];
 
-extern const u8 gText_XPLink[];
+extern const u8 gText_NumPlayerLink[];
 extern const u8 gText_ConfirmLinkWhenPlayersReady[];
 extern const u8 gText_ConfirmStartLinkWithXPlayers[];
 extern const u8 gText_AwaitingLinkup[];
