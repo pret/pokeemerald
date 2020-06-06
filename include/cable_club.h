@@ -3,12 +3,6 @@
 
 #include "task.h"
 
-// Exported type declarations
-
-// Exported RAM declarations
-
-// Exported ROM declarations
-
 void CreateTask_EnterCableClubSeat(TaskFunc taskFunc);
 u8 CreateTask_ReestablishCableClubLink(void);
 void CB2_ReturnFromCableClubBattle(void);

@@ -2338,7 +2338,7 @@ static void Task_RunUnionRoom(u8 taskId)
         break;
     case 2:
         SetHostRFUtgtGname(IN_UNION_ROOM, 0, 0);
-        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        SetTradeBoardRegisteredMonInfo(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         SetWirelessCommType1();
         OpenLink();
         InitializeRfuLinkManager_EnterUnionRoom();
@@ -2361,7 +2361,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 if (id >= PARTY_SIZE)
                 {
                     ResetUnionRoomTrade(&sUnionRoomTrade);
-                    sub_8010FCC(0, 0, 0);
+                    SetTradeBoardRegisteredMonInfo(TYPE_NORMAL, SPECIES_NONE, 0);
                     ScheduleFieldMessageAndExit(sText_RegistrationCanceled);
                 }
                 else if (!RegisterTradeMonAndGetIsEgg(GetCursorSelectionMonId(), &sUnionRoomTrade))
@@ -2453,7 +2453,7 @@ static void Task_RunUnionRoom(u8 taskId)
             case 4:
                 data->state = 11;
                 UR_EnableScriptContext2AndFreezeObjectEvents();
-                sub_8010FCC(0, 0, 0);
+                SetTradeBoardRegisteredMonInfo(TYPE_NORMAL, SPECIES_NONE, 0);
                 UpdateGameDataWithActivitySpriteGendersFlag(ACTIVITY_NPCTALK | IN_UNION_ROOM, GetActivePartnerSpriteGenderParam(data), 0);
                 break;
             }
@@ -2931,7 +2931,7 @@ static void Task_RunUnionRoom(u8 taskId)
             case -2:
             case 18:
                 ResetUnionRoomTrade(&sUnionRoomTrade);
-                sub_8010FCC(0, 0, 0);
+                SetTradeBoardRegisteredMonInfo(TYPE_NORMAL, SPECIES_NONE, 0);
                 ScheduleFieldMessageAndExit(sText_RegistrationCanceled);
                 break;
             default:
@@ -2942,7 +2942,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case 55:
-        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        SetTradeBoardRegisteredMonInfo(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         ScheduleFieldMessageAndExit(sText_RegistraionCompleted);
         break;
     case 44:
@@ -2961,7 +2961,7 @@ static void Task_RunUnionRoom(u8 taskId)
     case 56:
         if (PrintOnTextbox(&data->textState, sText_RegistrationCanceled2))
         {
-            sub_8010FCC(0, 0, 0);
+            SetTradeBoardRegisteredMonInfo(TYPE_NORMAL, SPECIES_NONE, 0);
             ResetUnionRoomTrade(&sUnionRoomTrade);
             HandleCancelTrade(TRUE);
             data->state = 4;
@@ -4265,7 +4265,7 @@ static void HandleCancelTrade(bool32 unlockObjs)
     gPlayerCurrActivity = 0;
     if (unlockObjs)
     {
-        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        SetTradeBoardRegisteredMonInfo(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         UpdateGameDataWithActivitySpriteGendersFlag(IN_UNION_ROOM, 0, 0);
     }
 }

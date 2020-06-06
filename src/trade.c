@@ -396,7 +396,7 @@ static void CB2_CreateTradeMenu(void)
             {
                 SetWirelessCommType1();
                 OpenLink();
-                sub_8011BA4();
+                CreateTask_RfuIdle();
             }
             else
             {
@@ -438,7 +438,7 @@ static void CB2_CreateTradeMenu(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            sub_8011BD0();
+            DestroyTask_RfuIdle();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuData->timer = 0;

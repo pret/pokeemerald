@@ -842,7 +842,7 @@ void StartBerryCrush(MainCallback callback)
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
         Rfu.unk_12 = 0;
-        Rfu.unk_ee = 1;
+        Rfu.errorState = 1;
         return;
     }
 
@@ -853,7 +853,7 @@ void StartBerryCrush(MainCallback callback)
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
         Rfu.unk_12 = 0;
-        Rfu.unk_ee = 1;
+        Rfu.errorState = 1;
         return;
     }
 
@@ -863,7 +863,7 @@ void StartBerryCrush(MainCallback callback)
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
         Rfu.unk_12 = 0;
-        Rfu.unk_ee = 1;
+        Rfu.errorState = 1;
         return;
     }
 

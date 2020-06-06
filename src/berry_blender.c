@@ -1500,7 +1500,7 @@ static void sub_80808D4(void)
     switch (sBerryBlenderData->mainState)
     {
     case 0:
-        sub_800B4C0();
+        SetWirelessCommType0();
         sub_8080588();
         Blender_SetParticipantBerryData(0, gSpecialVar_ItemId);
         Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[0], gSpecialVar_ItemId);

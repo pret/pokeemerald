@@ -5,7 +5,18 @@
 #include "link.h"
 #include "AgbRfu_LinkManager.h"
 
-// Exported type declarations
+#define RFU_COMMAND_0x4400 0x4400
+#define RFU_COMMAND_0x8800 0x8800
+#define RFU_COMMAND_0x8900 0x8900
+#define RFU_COMMAND_0xA100 0xA100
+#define RFU_COMMAND_0x7700 0x7700
+#define RFU_COMMAND_0x7800 0x7800
+#define RFU_COMMAND_0x6600 0x6600
+#define RFU_COMMAND_0x5F00 0x5F00
+#define RFU_COMMAND_0x2F00 0x2F00
+#define RFU_COMMAND_0xBE00 0xBE00
+#define RFU_COMMAND_0xEE00 0xEE00
+#define RFU_COMMAND_0xED00 0xED00
 
 // RfuTgtData.gname is read as these structs.
 struct GFtgtGnameSub
@@ -67,34 +78,34 @@ struct UnkLinkRfuStruct_02022B44
     u8 fill_84[0x58];
 };
 
-struct UnkRfuStruct_2_Sub_6c
+struct RfuBlockSend
 {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u16 unk_02;
-    /* 0x04 */ const u8 *unk_04;
-    /* 0x08 */ u32 unk_08;
-    /* 0x0c */ u32 unk_0c;
-    /* 0x10 */ u8 unk_10;
-    /* 0x11 */ u8 unk_11;
-    /* 0x12 */ u8 unk_12;
+    /* 0x00 */ u16 next;
+    /* 0x02 */ u16 count;
+    /* 0x04 */ const u8 *payload;
+    /* 0x08 */ u32 receivedFlags;
+    /* 0x0c */ u32 failedFlags;
+    /* 0x10 */ bool8 sending;
+    /* 0x11 */ u8 owner;
+    /* 0x12 */ u8 receiving;
 };
 
-struct UnkRfuStruct_2_Sub_124
+struct RfuRecvQueue
 {
     /* 0x000 */ u8 unk_00[32][70];
     /* 0x8c0 */ vu8 unk_8c0;
     /* 0x8c1 */ vu8 unk_8c1;
-    /* 0x8c2 */ vu8 unk_8c2;
-    /* 0x8c3 */ vu8 unk_8c3;
+    /* 0x8c2 */ vu8 count;
+    /* 0x8c3 */ vu8 full;
 };
 
-struct UnkRfuStruct_2_Sub_9e8
+struct RfuSendQueue
 {
     /* 0x000 */ u8 unk_00[40][14];
     /* 0x230 */ vu8 unk_230;
     /* 0x231 */ vu8 unk_231;
-    /* 0x232 */ vu8 unk_232;
-    /* 0x233 */ vu8 unk_233;
+    /* 0x232 */ vu8 count;
+    /* 0x233 */ vu8 full;
 };
 
 struct UnkRfuStruct_2_Sub_c1c
@@ -102,7 +113,7 @@ struct UnkRfuStruct_2_Sub_c1c
     /* 0x00 */ u8 unk_00[2][14];
     /* 0x1c */ vu8 unk_1c;
     /* 0x1d */ vu8 unk_1d;
-    /* 0x1e */ vu8 unk_1e;
+    /* 0x1e */ vu8 count;
 };
 
 struct UnkRfuStruct_Sub_Unused
@@ -114,13 +125,13 @@ struct UnkRfuStruct_Sub_Unused
     /* 0x203 */ vu8 unk_203;
 };
 
-struct UnkRfuStruct_2
+struct GFRfuManager
 {
-    /* 0x000 */ void (*linkRfuCallback)(void);
-    /* 0x004 */ u16 unk_04;
+    /* 0x000 */ void (*callback)(void);
+    /* 0x004 */ u16 state;
     /* 0x006 */ u8 filler_06[4];
-    /* 0x00a */ u16 unk_0a;
-    /* 0x00c */ u8 unk_0c;
+    /* 0x00a */ u16 linkmanMsg;
+    /* 0x00c */ u8 parentChild;
     /* 0x00d */ u8 playerCount;
     /* 0x00e */ u8 unk_0e;
     /* 0x00f */ u8 unk_0f;
@@ -130,19 +141,19 @@ struct UnkRfuStruct_2
     /* 0x04c */ u8 unk_4c[14];
     /* 0x05a */ u8 unk_5a;
     /* 0x05b */ u8 unk_5b;
-    /* 0x05c */ u8 unk_5c[5];
-    /* 0x061 */ u8 unk_61[5];
-    /* 0x066 */ u8 unk_66;
-    /* 0x067 */ u8 unk_67;
+    /* 0x05c */ bool8 unk_5c[MAX_RFU_PLAYERS];
+    /* 0x061 */ bool8 unk_61[MAX_RFU_PLAYERS];
+    /* 0x066 */ u8 idleTaskId;
+    /* 0x067 */ u8 searchTaskId;
     /* 0x068 */ u8 filler_68[4];
-    /* 0x06c */ struct UnkRfuStruct_2_Sub_6c unk_6c;
-    /* 0x080 */ struct UnkRfuStruct_2_Sub_6c unk_80[5];
+    /* 0x06c */ struct RfuBlockSend unk_6c;
+    /* 0x080 */ struct RfuBlockSend unk_80[MAX_RFU_PLAYERS];
     /* 0x0e4 */ u8 unk_e4[5];
     /* 0x0e9 */ u8 unk_e9[5];
-    /* 0x0ee */ vu8 unk_ee;
-    /* 0x0ef */ u8 unk_ef;
-    /* 0x0f0 */ u8 unk_f0;
-    /* 0x0f1 */ u8 unk_f1;
+    /* 0x0ee */ vu8 errorState;
+    /* 0x0ef */ bool8 isShuttingDown;
+    /* 0x0f0 */ u8 linkLossRecoveryState;
+    /* 0x0f1 */ u8 errorStatus;
     /* 0x0f2 */ u16 unk_f2[6];
     /* 0x0fe */ u16 unk_fe;
     /* 0x100 */ u16 unk_100;
@@ -151,18 +162,18 @@ struct UnkRfuStruct_2
     /* 0x10A */ struct GFtgtGname unk_10A;
     u8 filler_;
     u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
-    /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
+    /* 0x124 */ struct RfuRecvQueue recvQueue;
+    /* 0x9e8 */ struct RfuSendQueue sendQueue;
     /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
     /* 0xc3c */ vu8 unk_c3c;
     /* 0xc3d */ u8 unk_c3d;
-    /* 0xc3e */ vu8 unk_c3e;
+    /* 0xc3e */ vu8 childSlot;
     /* 0xc3f */ u8 unk_c3f[70];
     /* 0xc85 */ u8 unk_c85;
     /* 0xc86 */ u8 unk_c86;
-    /* 0xc87 */ u8 unk_c87[5][7][2];
-    /* 0xccd */ u8 unk_ccd;
-    /* 0xcce */ u8 unk_cce;
+    /* 0xc87 */ u8 recvCmds[5][7][2];
+    /* 0xccd */ u8 parentId;
+    /* 0xcce */ u8 multiplayerId;
     /* 0xccf */ u8 unk_ccf;
     /* 0xcd0 */ vu8 unk_cd0;
     /* 0xcd1 */ u8 unk_cd1[4];
@@ -172,57 +183,48 @@ struct UnkRfuStruct_2
     /* 0xcdb */ vu8 unk_cdb;
     /* 0xcdc */ vu8 unk_cdc;
     /* 0xcdd */ u8 unk_cdd;
-    /* 0xcde */ u8 unk_cde[4];
+    /* 0xcde */ u8 linkPlayerIdx[RFU_CHILD_MAX];
     /* 0xce2 */ u8 unk_ce2;
     /* 0xce2 */ u8 unk_ce3;
     /* 0xce4 */ u8 unk_ce4;
     /* 0xce5 */ u8 unk_ce5;
     /* 0xce5 */ u8 unk_ce6;
-    /* 0xce7 */ u8 unk_ce7;
+    /* 0xce7 */ u8 acceptSlot_flag;
     /* 0xce8 */ u8 unk_ce8;
     /* 0xce9 */ u8 unk_ce9;
     /* 0xcea */ u8 unk_cea[4];
     /* 0xcee */ u8 unk_cee[4];
 }; // size = 0xcf4
 
-struct UnkRfuStruct_8010A14
-{
-    char unk_00[15];
-    u8 unk_0f;
-    u8 unk_10[4];
-    struct LinkPlayer unk_14[5];
-    u8 fill_a0[0x5c];
-};
-
 // Exported RAM declarations
 
-extern struct GFtgtGname gUnknown_02022B14;
-extern u8 gUnknown_02022B22[];
-extern struct UnkRfuStruct_2 Rfu;
+extern struct GFtgtGname gHostRFUtgtGnameBuffer;
+extern u8 gHostRFUtgtUnameBuffer[];
+extern struct GFRfuManager Rfu;
 extern u8 gWirelessStatusIndicatorSpriteId;
 
 // Exported ROM declarations
 void WipeTrainerNameRecords(void);
 void sub_800E700(void);
 void LinkRfu_Shutdown(void);
-void sub_800F6FC(u8 who);
-void sub_800F728(u8 who);
+void Rfu_SetBlockReceivedFlag(u8 who);
+void Rfu_ResetBlockReceivedFlag(u8 who);
 bool32 IsSendingKeysToRfu(void);
-void sub_800F804(void);
+void StartSendingKeysToRfu(void);
 void sub_800F850(void);
-u8 sub_800FCD8(void);
-bool32 sub_800FE84(const u8 *src, size_t size);
+u8 Rfu_GetBlockReceivedStatus(void);
+bool32 Rfu_InitBlockSend(const u8 *src, size_t size);
 void ClearLinkRfuCallback(void);
-u8 sub_80104F4(void);
-u8 rfu_get_multiplayer_id(void);
+u8 Rfu_GetLinkPlayerCount(void);
+u8 Rfu_GetMultiplayerId(void);
 bool8 sub_8010100(u8 a0);
 bool8 IsLinkRfuTaskFinished(void);
 bool8 Rfu_IsMaster(void);
 void task_add_05_task_del_08FA224_when_no_RfuFunc(void);
 void sub_8010434(void);
-void sub_800E604(void);
+void ResetLinkRfuGFLayer(void);
 void sub_800E174(void);
-void sub_800E6D0(void);
+void InitRFU(void);
 bool32 sub_8010EC0(void);
 bool32 sub_8010F1C(void);
 bool32 RfuIsErrorStatus1or2(void);
@@ -233,7 +235,7 @@ void sub_80111B0(bool32 a0);
 u8 RfuGetErrorStatus(void);
 struct GFtgtGname *GetHostRFUtgtGname(void);
 void UpdateGameData_GroupLockedIn(u8 a0);
-void sub_8011170(u32 a0);
+void GetLinkmanErrorParams(u32 a0);
 void RfuSetErrorStatus(u8 a0, u16 a1);
 u8 sub_801048C(bool32 a0);
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2);
@@ -259,7 +261,7 @@ void UpdateGameDataWithActivitySpriteGendersFlag(u8 a0, u32 a1, u32 a2);
 void CreateTask_RfuReconnectWithParent(const u8 *src, u16 trainerId);
 void SetGnameBufferWonderFlags(bool32 a0, bool32 a1);
 void ClearAndInitHostRFUtgtGname(void);
-void sub_8010FCC(u32 a0, u32 a1, u32 a2);
+void SetTradeBoardRegisteredMonInfo(u32 type, u32 species, u32 level);
 void InitializeRfuLinkManager_EnterUnionRoom(void);
 void sub_8012188(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
 bool32 IsUnionRoomListenTaskActive(void);
@@ -271,7 +273,8 @@ void sub_800EF7C(void);
 bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
 bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
 s32 sub_800E87C(u8 idx);
-void sub_8011BA4(void);
+void CreateTask_RfuIdle(void);
+void DestroyTask_RfuIdle(void);
 void sub_8010198(void);
 void sub_8011AC8(void);
 void LinkRfu_FatalError(void);
@@ -280,42 +283,17 @@ void sub_80104B0(void);
 void sub_8011A50(void);
 void sub_80110B8(u32 a0);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
-void sub_800EAB4(void);
-void sub_800EAFC(void);
 void sub_800ED34(u16 unused);
-void sub_800EDBC(u16 unused);
-void sub_800F048(void);
-void sub_800F86C(u8 unused);
-void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
-void sub_800FD14(u16 command);
-void rfufunc_80F9F44(void);
-void sub_800FFB0(void);
-void rfufunc_80FA020(void);
-bool32 sub_8010454(u32 a0);
-void sub_8010528(void);
-void sub_8010750(void);
-s32 sub_80107A0(void);
-void sub_801084C(u8 taskId);
-void sub_80109E8(u16 a0);
-void sub_8010A70(void *a0);
-void sub_8010AAC(u8 taskId);
-void sub_8010D0C(u8 taskId);
-void sub_80115EC(s32 a0);
-u8 sub_8011CE4(const u8 *a0, u16 a1);
-void sub_8011D6C(u32 a0);
-void sub_8011E94(u32 a0, u32 a1);
+bool32 RfuSerialNumberIsValid(u32 serialNo);
 bool8 sub_8012224(void);
-void sub_801227C(void);
-void sub_801209C(u8 taskId);
-void sub_8011BF8(void);
 void sub_8011BA4(void);
-void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr);
-void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr);
+void sub_800D6C8(struct RfuRecvQueue *ptr);
+void sub_800D724(struct RfuSendQueue *ptr);
 void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr);
-void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
-void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
-bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
-bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
+void sub_800D7D8(struct RfuRecvQueue *q1, u8 *q2);
+void sub_800D888(struct RfuSendQueue *q1, u8 *q2);
+bool8 sub_800D934(struct RfuRecvQueue *q1, u8 *q2);
+bool8 sub_800D9DC(struct RfuSendQueue *q1, u8 *q2);
 void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2);

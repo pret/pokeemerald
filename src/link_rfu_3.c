@@ -165,7 +165,7 @@ const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     SpriteCallbackDummy
 };
 
-void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr)
+void sub_800D6C8(struct RfuRecvQueue *ptr)
 {
     s32 i;
     s32 j;
@@ -179,11 +179,11 @@ void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr)
     }
     ptr->unk_8c1 = 0;
     ptr->unk_8c0 = 0;
-    ptr->unk_8c2 = 0;
-    ptr->unk_8c3 = 0;
+    ptr->count = 0;
+    ptr->full = FALSE;
 }
 
-void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr)
+void sub_800D724(struct RfuSendQueue *ptr)
 {
     s32 i;
     s32 j;
@@ -197,8 +197,8 @@ void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr)
     }
     ptr->unk_231 = 0;
     ptr->unk_230 = 0;
-    ptr->unk_232 = 0;
-    ptr->unk_233 = 0;
+    ptr->count = 0;
+    ptr->full = FALSE;
 }
 
 void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
@@ -219,13 +219,13 @@ void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
     ptr->unk_203 = 0;
 }
 
-void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
+void sub_800D7D8(struct RfuRecvQueue *q1, u8 *q2)
 {
     s32 i;
     u16 imeBak;
     u8 count;
 
-    if (q1->unk_8c2 < 32)
+    if (q1->count < 32)
     {
         imeBak = REG_IME;
         REG_IME = 0;
@@ -245,7 +245,7 @@ void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
             }
             q1->unk_8c0++;
             q1->unk_8c0 %= 32;
-            q1->unk_8c2++;
+            q1->count++;
             for (i = 0; i < 70; i++)
             {
                 q2[i] = 0;
@@ -255,16 +255,16 @@ void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
     }
     else
     {
-        q1->unk_8c3 = 1;
+        q1->full = TRUE;
     }
 }
 
-void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
+void sub_800D888(struct RfuSendQueue *q1, u8 *q2)
 {
     s32 i;
     u16 imeBak;
 
-    if (q1->unk_232 < 40)
+    if (q1->count < 40)
     {
         imeBak = REG_IME;
         REG_IME = 0;
@@ -283,7 +283,7 @@ void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
             }
             q1->unk_230++;
             q1->unk_230 %= 40;
-            q1->unk_232++;
+            q1->count++;
             for (i = 0; i < 14; i++)
             {
                 q2[i] = 0;
@@ -293,18 +293,18 @@ void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
     }
     else
     {
-        q1->unk_233 = 1;
+        q1->full = TRUE;
     }
 }
 
-bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
+bool8 sub_800D934(struct RfuRecvQueue *q1, u8 *q2)
 {
     u16 imeBak;
     s32 i;
 
     imeBak = REG_IME;
     REG_IME = 0;
-    if (q1->unk_8c0 == q1->unk_8c1 || q1->unk_8c3 != 0)
+    if (q1->unk_8c0 == q1->unk_8c1 || q1->full)
     {
         for (i = 0; i < 70; i++)
         {
@@ -319,17 +319,17 @@ bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
     }
     q1->unk_8c1++;
     q1->unk_8c1 %= 32;
-    q1->unk_8c2--;
+    q1->count--;
     REG_IME = imeBak;
     return TRUE;
 }
 
-bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
+bool8 sub_800D9DC(struct RfuSendQueue *q1, u8 *q2)
 {
     s32 i;
     u16 imeBak;
 
-    if (q1->unk_230 == q1->unk_231 || q1->unk_233 != 0)
+    if (q1->unk_230 == q1->unk_231 || q1->full)
     {
         return FALSE;
     }
@@ -341,7 +341,7 @@ bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
     }
     q1->unk_231++;
     q1->unk_231 %= 40;
-    q1->unk_232--;
+    q1->count--;
     REG_IME = imeBak;
     return TRUE;
 }
@@ -362,9 +362,9 @@ void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2)
         }
         q1->unk_1c++;
         q1->unk_1c %= 2;
-        if (q1->unk_1e < 2)
+        if (q1->count < 2)
         {
-            q1->unk_1e++;
+            q1->count++;
         }
         else
         {
@@ -377,7 +377,7 @@ bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
 {
     s32 i;
 
-    if (q1->unk_1e == 0)
+    if (q1->count == 0)
     {
         return FALSE;
     }
@@ -390,7 +390,7 @@ bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
     }
     q1->unk_1d++;
     q1->unk_1d %= 2;
-    q1->unk_1e--;
+    q1->count--;
     return TRUE;
 }
 
@@ -632,7 +632,7 @@ bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
     if (lman.parent_child == 1)
     {
         retVal = TRUE;
-        if (sub_8010454(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
+        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
         {
             memcpy(buff1, gRfuLinkStatus->partner[idx].gname, 0xD);
             memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
@@ -646,7 +646,7 @@ bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
     else
     {
         retVal = FALSE;
-        if (sub_8010454(gRfuLinkStatus->partner[idx].serialNo))
+        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo))
         {
             memcpy(buff1, gRfuLinkStatus->partner[idx].gname, 0xD);
             memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
@@ -679,8 +679,8 @@ bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2)
 {
-    memcpy(buff1, &gUnknown_02022B14, 0xD);
-    memcpy(buff2, gUnknown_02022B22, 8);
+    memcpy(buff1, &gHostRFUtgtGnameBuffer, 0xD);
+    memcpy(buff2, gHostRFUtgtUnameBuffer, 8);
 }
 
 void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
