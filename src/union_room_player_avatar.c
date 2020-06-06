@@ -418,13 +418,13 @@ void sub_8019F2C(void)
     }
 }
 
-static u8 sub_8019F64(u32 r1, u32 unused, struct UnkLinkRfuStruct_02022B14 * r2)
+static u8 sub_8019F64(u32 r1, u32 unused, struct GFtgtGname * r2)
 {
     if (r1 != 0)
     {
         return gUnknown_082F076F[r1];
     }
-    else if (r2->unk_0a_0 == 0x45)
+    else if (r2->activity == 0x45)
     {
         return 1;
     }
@@ -439,7 +439,7 @@ static u32 sub_8019F8C(u32 a0, u32 a1)
     return sub_8097C8C(5 * a0 + a1 - 0x38);
 }
 
-static void sub_8019FA4(u32 r5, u32 r6, u8 r8, struct UnkLinkRfuStruct_02022B14 * r9)
+static void sub_8019FA4(u32 r5, u32 r6, u8 r8, struct GFtgtGname * r9)
 {
     s32 x, y;
     s32 r7 = 5 * r5 + r6;
@@ -462,7 +462,7 @@ static void sub_801A02C(u32 a0, u32 a1)
     sub_8088B94(x, y, 0);
 }
 
-static void sub_801A064(u32 r7, struct UnkLinkRfuStruct_02022B14 * r8)
+static void sub_801A064(u32 r7, struct GFtgtGname * r8)
 {
     s16 x, y, x2, y2;
     s32 i;
@@ -479,21 +479,21 @@ static void sub_801A064(u32 r7, struct UnkLinkRfuStruct_02022B14 * r8)
     }
     for (i = 1; i < 5; i++)
     {
-        if (r8->unk_04[i - 1] == 0)
+        if (r8->child_sprite_gender[i - 1] == 0)
         {
             sub_801A02C(r7, i);
         }
         else if (sub_80199E0(r7, i, x, y) == 0 && sub_80199E0(r7, i, x2, y2) == 0)
         {
-            sub_8019FA4(r7, i, sub_8019978((r8->unk_04[i - 1] >> 3) & 1, r8->unk_04[i - 1] & 7), r8);
+            sub_8019FA4(r7, i, sub_8019978((r8->child_sprite_gender[i - 1] >> 3) & 1, r8->child_sprite_gender[i - 1] & 7), r8);
         }
     }
 }
 
-static void sub_801A16C(u32 r5, struct UnkLinkRfuStruct_02022B14 * r4)
+static void sub_801A16C(u32 r5, struct GFtgtGname * r4)
 {
     u32 i;
-    switch (r4->unk_0a_0)
+    switch (r4->activity)
     {
     case 0x40:
     case 0x54:
@@ -516,7 +516,7 @@ static void sub_801A16C(u32 r5, struct UnkLinkRfuStruct_02022B14 * r4)
     }
 }
 
-static void sub_801A214(u32 r5, struct UnkLinkRfuStruct_02022B14 * unused)
+static void sub_801A214(u32 r5, struct GFtgtGname * unused)
 {
     s32 i;
     sub_8019D20(r5);

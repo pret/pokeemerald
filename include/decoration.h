@@ -52,14 +52,6 @@ struct Decoration
     const u16 *tiles;
 };
 
-struct DecorationPCContext
-{
-    u8 *items;
-    u8 *pos;
-    u8 size;
-    u8 isPlayerRoom;
-};
-
 extern const struct Decoration gDecorations[];
 extern EWRAM_DATA u8 *gCurDecorationItems;
 extern EWRAM_DATA u8 gCurDecorationIndex;

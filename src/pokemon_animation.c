@@ -1138,11 +1138,9 @@ static void pokemonanimfunc_04(struct Sprite *sprite)
     sprite->callback = sub_817F978;
 }
 
-#ifdef NONMATCHING
 static void sub_817F9F4(struct Sprite *sprite)
 {
     s32 counter = sprite->data[2];
-
     if (counter > 384)
     {
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
@@ -1151,8 +1149,7 @@ static void sub_817F9F4(struct Sprite *sprite)
     }
     else
     {
-        s32 divCounter = counter / 128;
-
+        s16 divCounter = counter / 128;
         switch (divCounter)
         {
         case 0:
@@ -1161,84 +1158,14 @@ static void sub_817F9F4(struct Sprite *sprite)
             break;
         case 2:
         case 3:
-            sprite->pos2.y = -(Sin(counter - 256, sprite->data[0] * 3));
+            counter -= 256;
+            sprite->pos2.y = -(Sin(counter, sprite->data[0] * 3));
             break;
         }
     }
 
     sprite->data[2] += 12;
 }
-
-#else
-NAKED
-static void sub_817F9F4(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-            push {r4,lr}\n\
-    adds r4, r0, 0\n\
-    movs r0, 0x32\n\
-    ldrsh r1, [r4, r0]\n\
-    movs r0, 0xC0\n\
-    lsls r0, 1\n\
-    cmp r1, r0\n\
-    ble _0817FA14\n\
-    ldr r0, =SpriteCB_SetDummyOnAnimEnd\n\
-    str r0, [r4, 0x1C]\n\
-    movs r0, 0\n\
-    strh r0, [r4, 0x24]\n\
-    b _0817FA5E\n\
-    .pool\n\
-_0817FA14:\n\
-    adds r0, r1, 0\n\
-    cmp r1, 0\n\
-    bge _0817FA1C\n\
-    adds r0, 0x7F\n\
-_0817FA1C:\n\
-    asrs r2, r0, 7\n\
-    lsls r0, r2, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0\n\
-    blt _0817FA60\n\
-    cmp r0, 0x1\n\
-    ble _0817FA48\n\
-    cmp r0, 0x3\n\
-    bgt _0817FA60\n\
-    ldr r2, =0xffffff00\n\
-    adds r1, r2\n\
-    lsls r0, r1, 16\n\
-    asrs r0, 16\n\
-    movs r1, 0x2E\n\
-    ldrsh r2, [r4, r1]\n\
-    lsls r1, r2, 1\n\
-    adds r1, r2\n\
-    lsls r1, 16\n\
-    b _0817FA56\n\
-    .pool\n\
-_0817FA48:\n\
-    lsls r0, r2, 7\n\
-    subs r0, r1, r0\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    movs r2, 0x2E\n\
-    ldrsh r1, [r4, r2]\n\
-    lsls r1, 17\n\
-_0817FA56:\n\
-    asrs r1, 16\n\
-    bl Sin\n\
-    negs r0, r0\n\
-_0817FA5E:\n\
-    strh r0, [r4, 0x26]\n\
-_0817FA60:\n\
-    ldrh r0, [r4, 0x32]\n\
-    adds r0, 0xC\n\
-    strh r0, [r4, 0x32]\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 static void pokemonanimfunc_1E(struct Sprite *sprite)
 {

@@ -1282,7 +1282,7 @@ bool8 ScrCmd_pokenavcall(struct ScriptContext *ctx)
 
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
-    sub_8098238(msg);
+    ShowPokenavFieldMessage(msg);
     return FALSE;
 }
 

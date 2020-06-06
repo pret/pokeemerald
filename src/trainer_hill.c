@@ -33,6 +33,7 @@
 #include "constants/trainers.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
+#include "constants/trainer_types.h"
 
 #define HILL_TAG_NORMAL 0
 #define HILL_TAG_VARIETY 1
@@ -164,7 +165,7 @@ static const u16 sPrizeListElixir2[]     = {ITEM_ELIXIR,           ITEM_ETHER, I
 static const u16 sPrizeListBrickBreak[]  = {ITEM_TM31_BRICK_BREAK, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
 static const u16 sPrizeListTorment[]     = {ITEM_TM41_TORMENT,     ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
 static const u16 sPrizeListSkillSwap[]   = {ITEM_TM48_SKILL_SWAP,  ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const u16 sPrizeListGigaSwap[]    = {ITEM_TM19_GIGA_DRAIN,  ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 sPrizeListGigaDrain[]   = {ITEM_TM19_GIGA_DRAIN,  ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
 static const u16 sPrizeListAttract[]     = {ITEM_TM45_ATTRACT,     ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
 
 static const u16 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
@@ -191,7 +192,7 @@ static const u16 *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
 	sPrizeListBrickBreak,
 	sPrizeListTorment,
 	sPrizeListSkillSwap,
-	sPrizeListGigaSwap,
+	sPrizeListGigaDrain,
 	sPrizeListAttract
 };
 
@@ -258,7 +259,7 @@ static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
     .movementType = MOVEMENT_TYPE_LOOK_AROUND,
     .movementRangeX = 1,
     .movementRangeY = 1,
-    .trainerType = 1,
+    .trainerType = TRAINER_TYPE_NORMAL,
 };
 
 static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] = 
@@ -903,7 +904,7 @@ const u8 *GetTrainerHillTrainerScript(void)
 static void ShowTrainerHillPostBattleText(void)
 {
     CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_AFTER, gSpecialVar_LastTalked);
-    sub_80982B8();
+    ShowFieldMessageFromBuffer();
 }
 
 static void CreateNPCTrainerHillParty(u16 trainerId, u8 firstMonId)

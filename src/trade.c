@@ -236,7 +236,7 @@ static bool8 SendLinkData(const void *linkData, u32 size)
 {
     if (gUnknown_02022C2C == 29)
     {
-        rfu_NI_setSendData(gUnknown_03004140.unk_00, 84, linkData, size);
+        rfu_NI_setSendData(lman.acceptSlot_flag, 84, linkData, size);
         return TRUE;
     }
     else
@@ -254,7 +254,7 @@ static bool32 sub_80771BC(void)
 {
     if (gUnknown_02022C2C == 29)
     {
-        if (gRfuSlotStatusNI[sub_800E87C(gUnknown_03004140.unk_00)]->send.state == 0)
+        if (gRfuSlotStatusNI[sub_800E87C(lman.acceptSlot_flag)]->send.state == 0)
             return TRUE;
         else
             return FALSE;
@@ -273,7 +273,7 @@ static u32 _GetBlockReceivedStatus(void)
 static void TradeResetReceivedFlags(void)
 {
     if (IsWirelessTrade())
-        rfu_clearSlot(12, gUnknown_03004140.unk_00);
+        rfu_clearSlot(12, lman.acceptSlot_flag);
     else
         ResetBlockReceivedFlags();
 }
@@ -281,7 +281,7 @@ static void TradeResetReceivedFlags(void)
 static void TradeResetReceivedFlag(u32 who)
 {
     if (IsWirelessTrade())
-        rfu_clearSlot(12, gUnknown_03004140.unk_00);
+        rfu_clearSlot(12, lman.acceptSlot_flag);
     else
         ResetBlockReceivedFlag(who);
 }
@@ -1199,7 +1199,7 @@ static void QueueLinkTradeData(void)
 {
     if (sTradeMenuData->playerLinkFlagChoseAction && sTradeMenuData->partnerLinkFlagChoseAction)
     {
-        if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE 
+        if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE
             && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_TRADE)
         {
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_BOTH_MONS_SELECTED;
@@ -1208,7 +1208,7 @@ static void QueueLinkTradeData(void)
             QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
             sTradeMenuData->playerLinkFlagChoseAction = sTradeMenuData->partnerLinkFlagChoseAction = 0;
         }
-        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE 
+        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_CANCEL)
         {
             PrintTradeMessage(TRADE_MSG_CANCELED);
@@ -1219,7 +1219,7 @@ static void QueueLinkTradeData(void)
             sTradeMenuData->playerLinkFlagChoseAction = sTradeMenuData->partnerLinkFlagChoseAction = 0;
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
         }
-        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL 
+        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_TRADE)
         {
             PrintTradeMessage(TRADE_MSG_FRIEND_WANTS_TO_TRADE);
@@ -1230,7 +1230,7 @@ static void QueueLinkTradeData(void)
             sTradeMenuData->playerLinkFlagChoseAction = sTradeMenuData->partnerLinkFlagChoseAction = 0;
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
         }
-        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL 
+        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_CANCEL)
         {
             sTradeMenuData->linkData[0] = LINKCMD_CANCEL_TRADE;
@@ -1244,7 +1244,7 @@ static void QueueLinkTradeData(void)
 
     if (sTradeMenuData->playerLinkFlagStatus && sTradeMenuData->partnerLinkFlagStatus)
     {
-        if (sTradeMenuData->playerLinkFlagStatus == INITIATE_TRADE 
+        if (sTradeMenuData->playerLinkFlagStatus == INITIATE_TRADE
          && sTradeMenuData->partnerLinkFlagStatus == INITIATE_TRADE)
         {
             sTradeMenuData->linkData[0] = LINKCMD_START_TRADE;
@@ -1255,7 +1255,7 @@ static void QueueLinkTradeData(void)
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_LINK_TRADE_FADE_OUT;
         }
 
-        if (sTradeMenuData->playerLinkFlagStatus == CANCEL_TRADE 
+        if (sTradeMenuData->playerLinkFlagStatus == CANCEL_TRADE
          || sTradeMenuData->partnerLinkFlagStatus == CANCEL_TRADE)
         {
             PrintTradeMessage(TRADE_MSG_CANCELED);
@@ -1464,10 +1464,10 @@ static void TradeMenuShowMonSummaryScreen(void)
     {
         // Player's party
         if (sTradeMenuData->cursorPosition < PARTY_SIZE)
-            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gPlayerParty, sTradeMenuData->cursorPosition, sTradeMenuData->partyCounts[TRADE_PLAYER] - 1, CB2_ReturnToTradeMenu);
+            ShowPokemonSummaryScreen(PSS_MODE_LOCK_MOVES, gPlayerParty, sTradeMenuData->cursorPosition, sTradeMenuData->partyCounts[TRADE_PLAYER] - 1, CB2_ReturnToTradeMenu);
         // Partner's party
         else
-            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gEnemyParty, sTradeMenuData->cursorPosition - PARTY_SIZE, sTradeMenuData->partyCounts[TRADE_PARTNER] - 1, CB2_ReturnToTradeMenu);
+            ShowPokemonSummaryScreen(PSS_MODE_LOCK_MOVES, gEnemyParty, sTradeMenuData->cursorPosition - PARTY_SIZE, sTradeMenuData->partyCounts[TRADE_PARTNER] - 1, CB2_ReturnToTradeMenu);
         FreeAllWindowBuffers();
     }
 }
@@ -1504,7 +1504,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     if (hasLiveMon)
         hasLiveMon = BOTH_MONS_VALID;
 
-    return hasLiveMon; //PLAYER_MON_INVALID or BOTH_MONS_VALID 
+    return hasLiveMon; //PLAYER_MON_INVALID or BOTH_MONS_VALID
 }
 
 // Returns TRUE if the partner's selected mon is invalid, FALSE otherwise
@@ -1841,10 +1841,10 @@ static void DrawTradeMenuParty(u8 whichParty)
         sTradeMenuData->drawPartyState[whichParty]++;
         break;
     case 4:
-        DrawTradeMenuPartyMonInfo(whichParty, partyIdx, 
-            sTradeMenuPartyMonBoxDimensions[whichParty][0] + 4, 
-            sTradeMenuPartyMonBoxDimensions[whichParty][1] + 1, 
-            sTradeMenuPartyMonBoxDimensions[whichParty][0], 
+        DrawTradeMenuPartyMonInfo(whichParty, partyIdx,
+            sTradeMenuPartyMonBoxDimensions[whichParty][0] + 4,
+            sTradeMenuPartyMonBoxDimensions[whichParty][1] + 1,
+            sTradeMenuPartyMonBoxDimensions[whichParty][0],
             sTradeMenuPartyMonBoxDimensions[whichParty][1]);
         sTradeMenuData->drawPartyState[whichParty]++;
         break;
@@ -2028,7 +2028,7 @@ static void ResetTradeMenuPartyPositions(u8 whichParty)
 static void PrintNicknamesForTradeMenu(void)
 {
     rbox_fill_rectangle(1);
-  //PrintPartyNicknamesForTradeMenu(TRADE_PLAYER); ?  
+  //PrintPartyNicknamesForTradeMenu(TRADE_PLAYER); ?
     PrintPartyNicknamesForTradeMenu(TRADE_PARTNER);
 }
 
@@ -2405,15 +2405,15 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct rfuPlayer, struct UnkLinkRfuStruct_02022B14Substruct rfuPartner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, u8 isObedientBitSet)
+int GetUnionRoomTradeMessageId(struct GFtgtGnameSub rfuPlayer, struct GFtgtGnameSub rfuPartner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, u8 isObedientBitSet)
 {
     bool8 playerHasNationalDex = rfuPlayer.hasNationalDex;
     bool8 playerIsChampion = rfuPlayer.isChampion;
     bool8 partnerHasNationalDex = rfuPartner.hasNationalDex;
     bool8 partnerIsChampion = rfuPartner.isChampion;
-    u8 r1 = rfuPartner.unk_01_2;
+    u8 r1 = rfuPartner.version;
 
-    if (r1 != 3)
+    if (r1 != VERSION_EMERALD)
     {
         if (!playerIsChampion)
         {
@@ -2476,7 +2476,7 @@ int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct rfuPlay
     return UR_TRADE_MSG_NONE;
 }
 
-int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct rfuPlayer, u16 species2, u16 species, u8 isObedientBitSet)
+int CanRegisterMonForTradingBoard(struct GFtgtGnameSub rfuPlayer, u16 species2, u16 species, u8 isObedientBitSet)
 {
     bool8 hasNationalDex = rfuPlayer.hasNationalDex;
 
@@ -4539,8 +4539,8 @@ static void CB2_TryFinishTrade(void)
     else
     {
         UpdateTradeFinishFlags();
-        if (mpId == 0 
-            && sTradeData->playerLinkFlagFinishTrade == READY_FINISH_TRADE 
+        if (mpId == 0
+            && sTradeData->playerLinkFlagFinishTrade == READY_FINISH_TRADE
             && sTradeData->partnerLinkFlagFinishTrade == READY_FINISH_TRADE)
         {
             sTradeData->linkData[0] = LINKCMD_CONFIRM_FINISH_TRADE;

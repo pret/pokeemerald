@@ -35,7 +35,6 @@
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
-#include "slot_machine.h"
 #include "sound.h"
 #include "starter_choose.h"
 #include "string_util.h"
@@ -59,6 +58,7 @@
 #include "constants/mevent.h"
 #include "constants/tv.h"
 #include "constants/script_menu.h"
+#include "constants/slot_machine.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/moves.h"
@@ -3550,21 +3550,21 @@ void CreateAbnormalWeatherEvent(void)
 
     if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
-        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % TERRA_CAVE_LOCATIONS) + TERRA_CAVE_LOCATIONS_START);
     }
     else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
     {
-        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % MARINE_CAVE_LOCATIONS) + MARINE_CAVE_LOCATIONS_START);
     }
     else if ((randomValue & 1) == 0)
     {
         randomValue = Random();
-        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_GROUDON_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % TERRA_CAVE_LOCATIONS) + TERRA_CAVE_LOCATIONS_START);
     }
     else
     {
         randomValue = Random();
-        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % ABNORMAL_WEATHER_COUNT_PER_LEGENDARY) + ABNORMAL_WEATHER_KYOGRE_LOCATIONS_START);
+        VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % MARINE_CAVE_LOCATIONS) + MARINE_CAVE_LOCATIONS_START);
     }
 }
 
@@ -3595,14 +3595,10 @@ bool32 GetAbnormalWeatherMapNameAndType(void)
 
     GetMapName(gStringVar1, sAbnormalWeatherMapNumbers[abnormalWeather - 1], 0);
 
-    if (abnormalWeather < ABNORMAL_WEATHER_KYOGRE_LOCATIONS_START)
-    {
+    if (abnormalWeather < MARINE_CAVE_LOCATIONS_START)
         return FALSE;
-    }
     else
-    {
         return TRUE;
-    }
 }
 
 bool8 AbnormalWeatherHasExpired(void)

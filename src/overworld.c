@@ -978,7 +978,7 @@ static u16 GetCenterScreenMetatileBehavior(void)
 
 bool32 Overworld_IsBikingAllowed(void)
 {
-    if (!(gMapHeader.flags & MAP_ALLOW_BIKE))
+    if (!(gMapHeader.flags & MAP_ALLOW_CYCLING))
         return FALSE;
     else
         return TRUE;
@@ -2913,7 +2913,7 @@ bool32 sub_808766C(void)
 static u32 GetLinkSendQueueLength(void)
 {
     if (gWirelessCommType != 0)
-        return gUnknown_03005000.unk_9e8.unk_232;
+        return Rfu.unk_9e8.unk_232;
     else
         return gLink.sendQueue.count;
 }

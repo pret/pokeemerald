@@ -172,7 +172,7 @@ AbnormalWeather_StartGroudonWeather:: @ 8273D1B
 
 AbnormalWeather_EventScript_EndEventAndCleanup_1:: @ 8273D1F
 	lockall
-	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_KYOGRE_LOCATIONS_START
+	compare VAR_ABNORMAL_WEATHER_LOCATION, MARINE_CAVE_LOCATIONS_START
 	goto_if_ge AbnormalWeather_EventScript_ShowRainEndedMessage
 	goto AbnormalWeather_EventScript_ShowSunEndedMessage
 	end

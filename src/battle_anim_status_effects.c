@@ -19,10 +19,10 @@ extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 
 // This file's functions.
 static void sub_80A9DB4(u8 taskId);
-static void sub_80A9FD0(u8 taskId);
-static void sub_80AA020(u8 taskId);
-static void sub_80AA0D0(u8 taskId);
-static void sub_80AA124(u8 taskId);
+static void AnimTask_FrozenIceCube_Step1(u8 taskId);
+static void AnimTask_FrozenIceCube_Step2(u8 taskId);
+static void AnimTask_FrozenIceCube_Step3(u8 taskId);
+static void AnimTask_FrozenIceCube_Step4(u8 taskId);
 static void Task_DoStatusAnimation(u8 taskId);
 static void sub_80A9E44(struct Sprite *sprite);
 static void sub_80A9E78(struct Sprite *sprite);
@@ -42,6 +42,7 @@ static const union AnimCmd *const sSpriteAnimTable_853EDF8[] =
     sSpriteAnim_853EDE4
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_0853EDFC =
 {
     .tileTag = ANIM_TAG_ORB,
@@ -53,6 +54,7 @@ const struct SpriteTemplate gUnknown_0853EDFC =
     .callback = sub_80A8AEC,
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_0853EE14 =
 {
     .tileTag = ANIM_TAG_ORB,
@@ -64,37 +66,37 @@ const struct SpriteTemplate gUnknown_0853EE14 =
     .callback = sub_80A8A6C,
 };
 
-static const union AnimCmd sSpriteAnim_853EE2C[] =
+static const union AnimCmd sAnim_WeatherBallNormal[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sSpriteAnimTable_853EE34[] =
+static const union AnimCmd *const sAnims_WeatherBallNormal[] =
 {
-    sSpriteAnim_853EE2C
+    sAnim_WeatherBallNormal
 };
 
-const struct SpriteTemplate gUnknown_0853EE38 =
+const struct SpriteTemplate gWeatherBallUpSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sSpriteAnimTable_853EE34,
+    .anims = sAnims_WeatherBallNormal,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8E30,
+    .callback = AnimWeatherBallUp,
 };
 
-const struct SpriteTemplate gUnknown_0853EE50 =
+const struct SpriteTemplate gWeatherBallNormalDownSpriteTemplate =
 {
     .tileTag = ANIM_TAG_WEATHER_BALL,
     .paletteTag = ANIM_TAG_WEATHER_BALL,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sSpriteAnimTable_853EE34,
+    .anims = sAnims_WeatherBallNormal,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8EE4,
+    .callback = AnimWeatherBallDown,
 };
 
 static const union AnimCmd sSpriteAnim_853EE68[] =
@@ -112,7 +114,7 @@ static const union AnimCmd *const sSpriteAnimTable_853EE80[] =
     sSpriteAnim_853EE68
 };
 
-const struct SpriteTemplate gUnknown_0853EE84 =
+const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
@@ -120,9 +122,10 @@ const struct SpriteTemplate gUnknown_0853EE84 =
     .anims = sSpriteAnimTable_853EE80,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8B64,
+    .callback = AnimSpinningSparkle,
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_0853EE9C =
 {
     .tileTag = ANIM_TAG_MONSTER_FOOT,
@@ -159,6 +162,7 @@ static const union AnimCmd *const sSpriteAnimTable_853EECC[] =
     sSpriteAnim_853EEC4
 };
 
+// Unused
 const struct SpriteTemplate gUnknown_0853EED8 =
 {
     .tileTag = ANIM_TAG_IMPACT,
@@ -204,7 +208,7 @@ const struct SpriteTemplate gUnknown_0853EF18 =
     .callback = sub_80A8A6C,
 };
 
-static const struct Subsprite gUnknown_0853EF30[] =
+static const struct Subsprite sFrozenIceCubeSubsprites[] =
 {
     {
         .x = -16, 
@@ -240,12 +244,12 @@ static const struct Subsprite gUnknown_0853EF30[] =
     },
 };
 
-static const struct SubspriteTable gUnknown_0853EF40[] =
+static const struct SubspriteTable sFrozenIceCubeSubspriteTable[] =
 {
-    {ARRAY_COUNT(gUnknown_0853EF30), gUnknown_0853EF30},
+    {ARRAY_COUNT(sFrozenIceCubeSubsprites), sFrozenIceCubeSubsprites},
 };
 
-static const struct SpriteTemplate gUnknown_0853EF48 =
+static const struct SpriteTemplate gFrozenIceCubeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ICE_CUBE,
     .paletteTag = ANIM_TAG_ICE_CUBE,
@@ -267,7 +271,7 @@ static const struct SpriteTemplate gUnknown_0853EF60 =
     .callback = sub_80A9E44,
 };
 
-// code
+// Unused
 u8 sub_80A9C70(u8 battlerId, bool8 b)
 {
     u8 battlerSpriteId = gBattlerSpriteIds[battlerId];
@@ -376,7 +380,7 @@ static void sub_80A9E78(struct Sprite *sprite)
     }
 }
 
-void sub_80A9EF4(u8 taskId)
+void AnimTask_FrozenIceCube(u8 taskId)
 {
     s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 32;
     s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;
@@ -386,20 +390,20 @@ void sub_80A9EF4(u8 taskId)
         x -= 6;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-    spriteId = CreateSprite(&gUnknown_0853EF48, x, y, 4);
+    spriteId = CreateSprite(&gFrozenIceCubeSpriteTemplate, x, y, 4);
     if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
         gSprites[spriteId].invisible = TRUE;
-    SetSubspriteTables(&gSprites[spriteId], gUnknown_0853EF40);
+    SetSubspriteTables(&gSprites[spriteId], sFrozenIceCubeSubspriteTable);
     gTasks[taskId].data[15] = spriteId;
-    gTasks[taskId].func = sub_80A9FD0;
+    gTasks[taskId].func = AnimTask_FrozenIceCube_Step1;
 }
 
-static void sub_80A9FD0(u8 taskId)
+static void AnimTask_FrozenIceCube_Step1(u8 taskId)
 {
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] == 10)
     {
-        gTasks[taskId].func = sub_80AA020;
+        gTasks[taskId].func = AnimTask_FrozenIceCube_Step2;
         gTasks[taskId].data[1] = 0;
     }
     else
@@ -410,7 +414,7 @@ static void sub_80A9FD0(u8 taskId)
     }
 }
 
-static void sub_80AA020(u8 taskId)
+static void AnimTask_FrozenIceCube_Step2(u8 taskId)
 {
     u8 palIndex = IndexOfSpritePaletteTag(ANIM_TAG_ICE_CUBE);
 
@@ -436,19 +440,19 @@ static void sub_80AA020(u8 taskId)
                 if (gTasks[taskId].data[4] == 2)
                 {
                     gTasks[taskId].data[1] = 9;
-                    gTasks[taskId].func = sub_80AA0D0;
+                    gTasks[taskId].func = AnimTask_FrozenIceCube_Step3;
                 }
             }
         }
     }
 }
 
-static void sub_80AA0D0(u8 taskId)
+static void AnimTask_FrozenIceCube_Step3(u8 taskId)
 {
     gTasks[taskId].data[1]--;
     if (gTasks[taskId].data[1] == -1)
     {
-        gTasks[taskId].func = sub_80AA124;
+        gTasks[taskId].func = AnimTask_FrozenIceCube_Step4;
         gTasks[taskId].data[1] = 0;
     }
     else
@@ -459,7 +463,7 @@ static void sub_80AA0D0(u8 taskId)
     }
 }
 
-static void sub_80AA124(u8 taskId)
+static void AnimTask_FrozenIceCube_Step4(u8 taskId)
 {
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] == 37)

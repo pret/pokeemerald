@@ -31,7 +31,7 @@ gSpecials:: @ 81DBA64
 	def_special GetObjectEventLocalIdByFlag
 	def_special GetSecretBaseTypeInFrontOfPlayer
 	def_special SetSecretBaseOwnerGfxId
-	def_special sub_8129708
+	def_special PutAwayDecorationIteration
 	def_special EnterNewlyCreatedSecretBase
 	def_special SetBattledOwnerFromResult
 	def_special DoSecretBasePCTurnOffEffect
@@ -504,7 +504,7 @@ gSpecials:: @ 81DBA64
 	def_special GetMartEmployeeObjectEventId
 	def_special sub_80A08CC
 	def_special Unused_SetWeatherSunny
-	def_special sub_81AFDA0
+	def_special SetUnlockedPokedexFlags
 	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex

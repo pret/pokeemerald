@@ -200,15 +200,7 @@ struct TextPrinter
 
     void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
 
-    union
-#if !MODERN
-    __attribute__((packed))
-#endif
-    {
-        struct TextPrinterSubStruct sub;
-        u8 fields[7];
-    } subUnion;
-
+    u8 subStructFields[7]; // always cast to struct TextPrinterSubStruct... so why bother
     u8 active;
     u8 state;       // 0x1C
     u8 textSpeed;
