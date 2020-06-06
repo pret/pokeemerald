@@ -106,6 +106,7 @@ Std_FindItem:: @ 8271BFD
 	lock
 	faceplayer
 	waitse
+    copyvar VAR_0x8006, VAR_0x8000
 	copyvar VAR_0x8004, VAR_0x8000
 	copyvar VAR_0x8005, VAR_0x8001
 	checkitemspace VAR_0x8000, VAR_0x8001
@@ -164,6 +165,7 @@ EventScript_NoRoomToPickUpItem:: @ 8271CA1
 EventScript_HiddenItemScript:: @ 8271CB7
 	lockall
 	waitse
+    copyvar VAR_0x8006, VAR_0x8005
 	additem VAR_0x8005
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural 1, VAR_0x8005, 1
