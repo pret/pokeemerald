@@ -28,12 +28,13 @@ extern u16 gUnknown_0203CF30[];
 #endif
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
-void ShowItemIconSprite(u16 item);
-void DestroyItemIconSprite(void);
+static void ShowItemIconSprite(u16 item, bool8 firstTime);
+static void DestroyItemIconSprite(void);
 
 // EWRAM variables
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 EWRAM_DATA static u8 sHeaderBoxWindowId = 0;
+EWRAM_DATA u8 sItemIconSpriteId = 0;
 
 // rodata
 #include "data/text/item_descriptions.h"
@@ -1191,7 +1192,7 @@ void DrawHeaderBox(void)
     
     if (GetSetItemObtained(item, FLAG_GET_OBTAINED))
     {
-        ShowItemIconSprite(item);
+        ShowItemIconSprite(item, FALSE);
         return; //no box if item obtained previously
     }
     
@@ -1207,22 +1208,26 @@ void DrawHeaderBox(void)
     else
         textY = 0;
     
-    ShowItemIconSprite(item);
+    ShowItemIconSprite(item, TRUE);
     AddTextPrinterParameterized(sHeaderBoxWindowId, 0, gStringVar1, ITEM_ICON_X + 2, textY, 0, NULL);
-    GetSetItemObtained(item, FLAG_SET_OBTAINED);
-    return;
 }
 
 void HideHeaderBox(void)
 {
     DestroyItemIconSprite();
-    ClearStdWindowAndFrameToTransparent(sHeaderBoxWindowId, FALSE);
-    CopyWindowToVram(sHeaderBoxWindowId, 2);
-    RemoveWindow(sHeaderBoxWindowId);
+    
+    if (!GetSetItemObtained(gSpecialVar_0x8006, FLAG_GET_OBTAINED))
+    {
+        //header box only exists if haven't seen item before
+        GetSetItemObtained(gSpecialVar_0x8006, FLAG_SET_OBTAINED);
+        ClearStdWindowAndFrameToTransparent(sHeaderBoxWindowId, FALSE);
+        CopyWindowToVram(sHeaderBoxWindowId, 3);
+        RemoveWindow(sHeaderBoxWindowId);
+    }
 }
 
 #define ITEM_TAG 0x2722 //same as money label
-void ShowItemIconSprite(u16 item)
+static void ShowItemIconSprite(u16 item, bool8 firstTime)
 {
 	s16 x, y;
 	u8 iconSpriteId;
@@ -1230,7 +1235,7 @@ void ShowItemIconSprite(u16 item)
     iconSpriteId = AddItemIconSprite(ITEM_TAG, ITEM_TAG, item);
 	if (iconSpriteId != MAX_SPRITES)
 	{        
-        if (GetSetItemObtained(item, FLAG_GET_OBTAINED))
+        if (!firstTime)
         {
             //show in message box
 			x = 213;
@@ -1248,13 +1253,16 @@ void ShowItemIconSprite(u16 item)
 		gSprites[iconSpriteId].oam.priority = 0;
 	}
 
-	gSpecialVar_0x8009 = iconSpriteId;
+	sItemIconSpriteId = iconSpriteId;
 }
 
-void DestroyItemIconSprite(void)
-{
+static void DestroyItemIconSprite(void)
+{    
+    //DestroySpriteAndFreeResources(&gSprites[sItemIconSpriteId]);
+    ///*
 	FreeSpriteTilesByTag(ITEM_TAG);
 	FreeSpritePaletteByTag(ITEM_TAG);
-	FreeSpriteOamMatrix(&gSprites[gSpecialVar_0x8009]);
-	DestroySprite(&gSprites[gSpecialVar_0x8009]);
+	FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId]);
+	DestroySprite(&gSprites[sItemIconSpriteId]);
+    //*/
 }
