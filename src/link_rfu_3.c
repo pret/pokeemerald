@@ -7,30 +7,101 @@
 #include "text.h"
 #include "event_data.h"
 
+struct RfuUnusedQueue
+{
+    u8 slots[2][256];
+    vu8 recvSlot;
+    vu8 sendSlot;
+    vu8 count;
+    vu8 full;
+};
+
 EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 
-static u8 gUnknown_03000D74;
+static u8 sUnknown_03000D74;
 
-const u16 gWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
-const u32 gWirelessLinkIconPic[] = INCBIN_U32("graphics/interface/wireless_link_icon.4bpp.lz");
+static const u16 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
+static const u32 sWirelessLinkIconPic[] = INCBIN_U32("graphics/interface/wireless_link_icon.4bpp.lz");
 
-const u8 sWireless_ASCIItoRSETable[] = {
-    0xff, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x37,
+// Most of the below two tables won't make sense with ASCII encoding.
+static const u8 sWireless_ASCIItoRSETable[256] = {
+    EOS, 
+    0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x37,
     0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
     0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47,
     0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f,
-    0x00, 0xab, 0xb5, 0xb6, 0xb1, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0xb2, 0xf1, 0x00, 0xae, 0xad, 0xba,
-    0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8,
-    0xa9, 0xaa, 0x00, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f,
-    0x00, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf, 0xc0, 0xc1,
-    0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9,
-    0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1,
-    0xd2, 0xd3, 0xd4, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6,
-    0x00, 0xd5, 0xd6, 0xd7, 0xd8, 0xd9, 0xda, 0xdb,
-    0xdc, 0xdd, 0xde, 0xdf, 0xe0, 0xe1, 0xe2, 0xe3,
-    0xe4, 0xe5, 0xe6, 0xe7, 0xe8, 0xe9, 0xea, 0xeb,
-    0xec, 0xed, 0xee, 0x2d, 0x2f, 0x30, 0x31, 0x32,
+    [' '] = CHAR_SPACE, 
+    ['!'] = CHAR_EXCL_MARK, 
+    0xb5, 0xb6, 0xb1, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0xb2, 0xf1, 0x00,
+    ['-'] = CHAR_HYPHEN, 
+    ['.'] = CHAR_PERIOD, 
+    ['/'] = CHAR_SLASH,
+    ['0'] = CHAR_0,
+    ['1'] = CHAR_1, 
+    ['2'] = CHAR_2, 
+    ['3'] = CHAR_3, 
+    ['4'] = CHAR_4, 
+    ['5'] = CHAR_5, 
+    ['6'] = CHAR_6, 
+    ['7'] = CHAR_7,
+    ['8'] = CHAR_8, 
+    ['9'] = CHAR_9,  
+    0x00, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f, 0x00, 
+    ['A'] = CHAR_A, 
+    ['B'] = CHAR_B, 
+    ['C'] = CHAR_C, 
+    ['D'] = CHAR_D, 
+    ['E'] = CHAR_E, 
+    ['F'] = CHAR_F, 
+    ['G'] = CHAR_G,
+    ['H'] = CHAR_H, 
+    ['I'] = CHAR_I, 
+    ['J'] = CHAR_J, 
+    ['K'] = CHAR_K, 
+    ['L'] = CHAR_L, 
+    ['M'] = CHAR_M, 
+    ['N'] = CHAR_N, 
+    ['O'] = CHAR_O,
+    ['P'] = CHAR_P, 
+    ['Q'] = CHAR_Q, 
+    ['R'] = CHAR_R, 
+    ['S'] = CHAR_S, 
+    ['T'] = CHAR_T, 
+    ['U'] = CHAR_U, 
+    ['V'] = CHAR_V,
+    ['W'] = CHAR_W,
+    ['X'] = CHAR_X, 
+    ['Y'] = CHAR_Y, 
+    ['Z'] = CHAR_Z, 
+    0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0x00, 
+    ['a'] = CHAR_a, 
+    ['b'] = CHAR_b, 
+    ['c'] = CHAR_c, 
+    ['d'] = CHAR_d, 
+    ['e'] = CHAR_e, 
+    ['f'] = CHAR_f, 
+    ['g'] = CHAR_g,
+    ['h'] = CHAR_h, 
+    ['i'] = CHAR_i, 
+    ['j'] = CHAR_j, 
+    ['k'] = CHAR_k, 
+    ['l'] = CHAR_l, 
+    ['m'] = CHAR_m, 
+    ['n'] = CHAR_n, 
+    ['o'] = CHAR_o,
+    ['p'] = CHAR_p, 
+    ['q'] = CHAR_q, 
+    ['r'] = CHAR_r, 
+    ['s'] = CHAR_s, 
+    ['t'] = CHAR_t, 
+    ['u'] = CHAR_u, 
+    ['v'] = CHAR_v, 
+    ['w'] = CHAR_w,
+    ['x'] = CHAR_x, 
+    ['y'] = CHAR_y, 
+    ['z'] = CHAR_z, 
+    0x2d, 0x2f, 0x30, 0x31, 0x32,
     0x33, 0x34, 0x35, 0x36, 0x50, 0x00, 0x01, 0x02,
     0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
     0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12,
@@ -49,42 +120,107 @@ const u8 sWireless_ASCIItoRSETable[] = {
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94
 };
 
-const u8 sWireless_RSEtoASCIITable[] = {
-    0x20, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c,
-    0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
-    0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x9b, 0x9c,
-    0x9d, 0x9e, 0x9f, 0xa0, 0xe0, 0xe1, 0xe2, 0xe3,
-    0xe4, 0xe5, 0xe6, 0xe7, 0xe8, 0xe9, 0xea, 0xeb,
-    0xec, 0xed, 0xee, 0xef, 0xf0, 0x7b, 0xf1, 0x7c,
-    0x7d, 0x7e, 0x7f, 0x80, 0x81, 0x82, 0x83, 0x07,
-    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
-    0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
-    0x84, 0xb1, 0xb2, 0xb3, 0xb4, 0xb5, 0xb6, 0xb7,
-    0xb8, 0xb9, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf,
-    0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7,
-    0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf,
-    0xd0, 0xd1, 0xd2, 0xd3, 0xd4, 0xd5, 0xd6, 0xd7,
-    0xd8, 0xd9, 0xda, 0xdb, 0xdc, 0xa6, 0xdd, 0xa7,
-    0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xf2,
-    0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa,
-    0xfb, 0xfc, 0xfd, 0xfe, 0xff, 0x01, 0x02, 0x03,
-    0x04, 0x05, 0x06, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
-    0xaf, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,
-    0x37, 0x38, 0x39, 0x21, 0xdf, 0xa1, 0xb0, 0xa5,
-    0xde, 0x24, 0x2a, 0xa2, 0xa3, 0x22, 0x23, 0x20,
-    0xa4, 0x20, 0x2f, 0x41, 0x42, 0x43, 0x44, 0x45,
-    0x46, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d,
-    0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55,
-    0x56, 0x57, 0x58, 0x59, 0x5a, 0x61, 0x62, 0x63,
-    0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6a, 0x6b,
-    0x6c, 0x6d, 0x6e, 0x6f, 0x70, 0x71, 0x72, 0x73,
-    0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x20,
-    0x20, 0x2b, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x20,
-    0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
+static const u8 sWireless_RSEtoASCIITable[256] = {
+    [CHAR_SPACE] = ' ', 
+    0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 
+    0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95, 
+    0x96, 0x97, 0x98, 0x99, 0x9a, 0x9b, 0x9c, 0x9d, 
+    0x9e, 0x9f, 0xa0, 0xe0, 0xe1, 0xe2, 0xe3, 0xe4, 
+    0xe5, 0xe6, 0xe7, 0xe8, 0xe9, 0xea, 0xeb, 0xec, 
+    0xed, 0xee, 0xef, 0xf0, 0x7b, 0xf1, 0x7c, 0x7d, 
+    0x7e, 0x7f, 0x80, 0x81, 0x82, 0x83, 0x07, 0x08, 
+    0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 
+    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 
+    0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x84, 
+    0xb1, 0xb2, 0xb3, 0xb4, 0xb5, 0xb6, 0xb7, 0xb8, 
+    0xb9, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf, 0xc0, 
+    0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 
+    0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 
+    0xd1, 0xd2, 0xd3, 0xd4, 0xd5, 0xd6, 0xd7, 0xd8, 
+    0xd9, 0xda, 0xdb, 0xdc, 0xa6, 0xdd, 0xa7, 0xa8, 
+    0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xf2, 0xf3, 
+    0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xfb, 
+    0xfc, 0xfd, 0xfe, 0xff, 0x01, 0x02, 0x03, 0x04, 
+    0x05, 0x06, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f, 0xaf, 
+    [CHAR_0] = '0', 
+    [CHAR_1] = '1', 
+    [CHAR_2] = '2', 
+    [CHAR_3] = '3', 
+    [CHAR_4] = '4', 
+    [CHAR_5] = '5', 
+    [CHAR_6] = '6',
+    [CHAR_7] = '7', 
+    [CHAR_8] = '8', 
+    [CHAR_9] = '9', 
+    [CHAR_EXCL_MARK] = '!', 
+    0xdf, 0xa1, 0xb0, 0xa5, 0xde, 0x24, 0x2a, 
+    0xa2, 0xa3, 0x22, 0x23, 0x20, 0xa4, 0x20, 
+    [CHAR_SLASH] = '/', 
+    [CHAR_A] = 'A', 
+    [CHAR_B] = 'B', 
+    [CHAR_C] = 'C', 
+    [CHAR_D] = 'D', 
+    [CHAR_E] = 'E',
+    [CHAR_F] = 'F', 
+    [CHAR_G] = 'G', 
+    [CHAR_H] = 'H', 
+    [CHAR_I] = 'I', 
+    [CHAR_J] = 'J', 
+    [CHAR_K] = 'K', 
+    [CHAR_L] = 'L', 
+    [CHAR_M] = 'M',
+    [CHAR_N] = 'N', 
+    [CHAR_O] = 'O', 
+    [CHAR_P] = 'P', 
+    [CHAR_Q] = 'Q', 
+    [CHAR_R] = 'R', 
+    [CHAR_S] = 'S', 
+    [CHAR_T] = 'T', 
+    [CHAR_U] = 'U',
+    [CHAR_V] = 'V', 
+    [CHAR_W] = 'W', 
+    [CHAR_X] = 'X', 
+    [CHAR_Y] = 'Y', 
+    [CHAR_Z] = 'Z', 
+    [CHAR_a] = 'a', 
+    [CHAR_b] = 'b', 
+    [CHAR_c] = 'c',
+    [CHAR_d] = 'd', 
+    [CHAR_e] = 'e', 
+    [CHAR_f] = 'f', 
+    [CHAR_g] = 'g', 
+    [CHAR_h] = 'h', 
+    [CHAR_i] = 'i', 
+    [CHAR_j] = 'j', 
+    [CHAR_k] = 'k',
+    [CHAR_l] = 'l', 
+    [CHAR_m] = 'm', 
+    [CHAR_n] = 'n', 
+    [CHAR_o] = 'o', 
+    [CHAR_p] = 'p', 
+    [CHAR_q] = 'q', 
+    [CHAR_r] = 'r', 
+    [CHAR_s] = 's',
+    [CHAR_t] = 't', 
+    [CHAR_u] = 'u', 
+    [CHAR_v] = 'v', 
+    [CHAR_w] = 'w', 
+    [CHAR_x] = 'x', 
+    [CHAR_y] = 'y', 
+    [CHAR_z] = 'z', 
+    0x20, 0x20, 0x2b, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 
+    [CHAR_SPECIAL_F7] = ' ',
+    [CHAR_SPECIAL_F8] = ' ', 
+    [CHAR_SPECIAL_F9] = ' ', 
+    [CHAR_PROMPT_SCROLL] = ' ', 
+    [CHAR_PROMPT_CLEAR] = ' ', 
+    [EXT_CTRL_CODE_BEGIN] = ' ', 
+    [PLACEHOLDER_BEGIN] = ' ', 
+    [CHAR_NEWLINE] = ' ', 
+    [EOS] = 0
 };
 
-const struct OamData sWirelessStatusIndicatorOamData =
+static const struct OamData sWirelessStatusIndicatorOamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -98,7 +234,7 @@ const struct OamData sWirelessStatusIndicatorOamData =
     .paletteNum = 0,
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     // 3 bars
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
@@ -109,7 +245,7 @@ const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
     // 2 bars
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
@@ -118,28 +254,28 @@ const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim2[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim2[] = {
     // 1 bar
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim3[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim3[] = {
     // searching
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_FRAME(20, 10),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim4[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim4[] = {
     // error
     ANIMCMD_FRAME(24, 10),
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
+static const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
     sWirelessStatusIndicatorAnim0,
     sWirelessStatusIndicatorAnim1,
     sWirelessStatusIndicatorAnim2,
@@ -147,15 +283,15 @@ const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
     sWirelessStatusIndicatorAnim4
 };
 
-const struct CompressedSpriteSheet sWirelessStatusIndicatorSpriteSheet = {
-    gWirelessLinkIconPic, 0x0380, 0xD431
+static const struct CompressedSpriteSheet sWirelessStatusIndicatorSpriteSheet = {
+    sWirelessLinkIconPic, 0x0380, 0xD431
 };
 
-const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
-    gWirelessLinkIconPalette, 0xD432
+static const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
+    sWirelessLinkIconPalette, 0xD432
 };
 
-const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
+static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     0xD431,
     0xD432,
     &sWirelessStatusIndicatorOamData,
@@ -165,7 +301,7 @@ const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     SpriteCallbackDummy
 };
 
-void sub_800D6C8(struct RfuRecvQueue *ptr)
+void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 {
     s32 i;
     s32 j;
@@ -174,16 +310,16 @@ void sub_800D6C8(struct RfuRecvQueue *ptr)
     {
         for (j = 0; j < 70; j++)
         {
-            ptr->unk_00[i][j] = 0;
+            queue->slots[i][j] = 0;
         }
     }
-    ptr->unk_8c1 = 0;
-    ptr->unk_8c0 = 0;
-    ptr->count = 0;
-    ptr->full = FALSE;
+    queue->sendSlot = 0;
+    queue->recvSlot = 0;
+    queue->count = 0;
+    queue->full = FALSE;
 }
 
-void sub_800D724(struct RfuSendQueue *ptr)
+void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 {
     s32 i;
     s32 j;
@@ -192,16 +328,16 @@ void sub_800D724(struct RfuSendQueue *ptr)
     {
         for (j = 0; j < 14; j++)
         {
-            ptr->unk_00[i][j] = 0;
+            queue->slots[i][j] = 0;
         }
     }
-    ptr->unk_231 = 0;
-    ptr->unk_230 = 0;
-    ptr->count = 0;
-    ptr->full = FALSE;
+    queue->sendSlot = 0;
+    queue->recvSlot = 0;
+    queue->count = 0;
+    queue->full = FALSE;
 }
 
-void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
+static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
 {
     s32 i;
     s32 j;
@@ -210,29 +346,29 @@ void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
     {
         for (j = 0; j < 256; j++)
         {
-            ptr->unk_00[i][j] = 0;
+            queue->slots[i][j] = 0;
         }
     }
-    ptr->unk_201 = 0;
-    ptr->unk_200 = 0;
-    ptr->unk_202 = 0;
-    ptr->unk_203 = 0;
+    queue->sendSlot = 0;
+    queue->recvSlot = 0;
+    queue->count = 0;
+    queue->full = FALSE;
 }
 
-void sub_800D7D8(struct RfuRecvQueue *q1, u8 *q2)
+void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data)
 {
     s32 i;
     u16 imeBak;
     u8 count;
 
-    if (q1->count < 32)
+    if (queue->count < 32)
     {
         imeBak = REG_IME;
         REG_IME = 0;
         count = 0;
         for (i = 0; i < 70; i += 14)
         {
-            if (q2[i] == 0 && q2[i + 1] == 0)
+            if (data[i] == 0 && data[i + 1] == 0)
             {
                 count++;
             }
@@ -241,36 +377,36 @@ void sub_800D7D8(struct RfuRecvQueue *q1, u8 *q2)
         {
             for (i = 0; i < 70; i++)
             {
-                q1->unk_00[q1->unk_8c0][i] = q2[i];
+                queue->slots[queue->recvSlot][i] = data[i];
             }
-            q1->unk_8c0++;
-            q1->unk_8c0 %= 32;
-            q1->count++;
+            queue->recvSlot++;
+            queue->recvSlot %= 32;
+            queue->count++;
             for (i = 0; i < 70; i++)
             {
-                q2[i] = 0;
+                data[i] = 0;
             }
         }
         REG_IME = imeBak;
     }
     else
     {
-        q1->full = TRUE;
+        queue->full = TRUE;
     }
 }
 
-void sub_800D888(struct RfuSendQueue *q1, u8 *q2)
+void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *data)
 {
     s32 i;
     u16 imeBak;
 
-    if (q1->count < 40)
+    if (queue->count < 40)
     {
         imeBak = REG_IME;
         REG_IME = 0;
         for (i = 0; i < 14; i++)
         {
-            if (q2[i] != 0)
+            if (data[i] != 0)
             {
                 break;
             }
@@ -279,156 +415,153 @@ void sub_800D888(struct RfuSendQueue *q1, u8 *q2)
         {
             for (i = 0; i < 14; i++)
             {
-                q1->unk_00[q1->unk_230][i] = q2[i];
+                queue->slots[queue->recvSlot][i] = data[i];
             }
-            q1->unk_230++;
-            q1->unk_230 %= 40;
-            q1->count++;
+            queue->recvSlot++;
+            queue->recvSlot %= 40;
+            queue->count++;
             for (i = 0; i < 14; i++)
             {
-                q2[i] = 0;
+                data[i] = 0;
             }
         }
         REG_IME = imeBak;
     }
     else
     {
-        q1->full = TRUE;
+        queue->full = TRUE;
     }
 }
 
-bool8 sub_800D934(struct RfuRecvQueue *q1, u8 *q2)
+bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *src)
 {
     u16 imeBak;
     s32 i;
 
     imeBak = REG_IME;
     REG_IME = 0;
-    if (q1->unk_8c0 == q1->unk_8c1 || q1->full)
+    if (queue->recvSlot == queue->sendSlot || queue->full)
     {
         for (i = 0; i < 70; i++)
         {
-            q2[i] = 0;
+            src[i] = 0;
         }
         REG_IME = imeBak;
         return FALSE;
     }
     for (i = 0; i < 70; i++)
     {
-        q2[i] = q1->unk_00[q1->unk_8c1][i];
+        src[i] = queue->slots[queue->sendSlot][i];
     }
-    q1->unk_8c1++;
-    q1->unk_8c1 %= 32;
-    q1->count--;
+    queue->sendSlot++;
+    queue->sendSlot %= 32;
+    queue->count--;
     REG_IME = imeBak;
     return TRUE;
 }
 
-bool8 sub_800D9DC(struct RfuSendQueue *q1, u8 *q2)
+bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *src)
 {
     s32 i;
     u16 imeBak;
 
-    if (q1->unk_230 == q1->unk_231 || q1->full)
-    {
+    if (queue->recvSlot == queue->sendSlot || queue->full)
         return FALSE;
-    }
+
     imeBak = REG_IME;
     REG_IME = 0;
     for (i = 0; i < 14; i++)
     {
-        q2[i] = q1->unk_00[q1->unk_231][i];
+        src[i] = queue->slots[queue->sendSlot][i];
     }
-    q1->unk_231++;
-    q1->unk_231 %= 40;
-    q1->count--;
+    queue->sendSlot++;
+    queue->sendSlot %= 40;
+    queue->count--;
     REG_IME = imeBak;
     return TRUE;
 }
 
-void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2)
+void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *data)
 {
     s32 i;
 
-    if (q2[1] == 0)
+    if (data[1] == 0)
     {
-        sub_800DAC8(q1, NULL);
+        RfuBackupQueue_Dequeue(queue, NULL);
     }
     else
     {
         for (i = 0; i < 14; i++)
         {
-            q1->unk_00[q1->unk_1c][i] = q2[i];
+            queue->slots[queue->recvSlot][i] = data[i];
         }
-        q1->unk_1c++;
-        q1->unk_1c %= 2;
-        if (q1->count < 2)
+        queue->recvSlot++;
+        queue->recvSlot %= 2;
+        if (queue->count < 2)
         {
-            q1->count++;
+            queue->count++;
         }
         else
         {
-            q1->unk_1d = q1->unk_1c;
+            queue->sendSlot = queue->recvSlot;
         }
     }
 }
 
-bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
+bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *src)
 {
     s32 i;
 
-    if (q1->count == 0)
-    {
+    if (queue->count == 0)
         return FALSE;
-    }
-    if (q2 != NULL)
+
+    if (src != NULL)
     {
         for (i = 0; i < 14; i++)
         {
-            q2[i] = q1->unk_00[q1->unk_1d][i];
+            src[i] = queue->slots[queue->sendSlot][i];
         }
     }
-    q1->unk_1d++;
-    q1->unk_1d %= 2;
-    q1->count--;
+    queue->sendSlot++;
+    queue->sendSlot %= 2;
+    queue->count--;
     return TRUE;
 }
 
-void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+static void RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *data)
 {
     s32 i;
 
-    if (q1->unk_202 < 2)
+    if (queue->count < 2)
     {
         for (i = 0; i < 256; i++)
         {
-            q1->unk_00[q1->unk_200][i] = q2[i];
+            queue->slots[queue->recvSlot][i] = data[i];
         }
-        q1->unk_200++;
-        q1->unk_200 %= 2;
-        q1->unk_202++;
+        queue->recvSlot++;
+        queue->recvSlot %= 2;
+        queue->count++;
     }
     else
     {
-        q1->unk_203 = 1;
+        queue->full = TRUE;
     }
 }
 
-bool8 sub_800DB84(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+static bool8 RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u8 *dest)
 {
     s32 i;
 
-    if (q1->unk_200 == q1->unk_201 || q1->unk_203)
-    {
+    if (queue->recvSlot == queue->sendSlot || queue->full)
         return FALSE;
-    }
+
     for (i = 0; i < 256; i++)
     {
-        q2[i] = q1->unk_00[q1->unk_201][i];
+        dest[i] = queue->slots[queue->sendSlot][i];
     }
-    q1->unk_201++;
-    q1->unk_201 %= 2;
-    q1->unk_202--;
+    queue->sendSlot++;
+    queue->sendSlot %= 2;
+    queue->count--;
     return TRUE;
 }
 
@@ -467,47 +600,47 @@ void sub_800DBF8(u8 *q1, u8 mode)
     case 3:
         for (i = 0; i < 200; i++)
         {
-            q1[i] = i + 1 + gUnknown_03000D74;
-            r5 += (i + 1 + gUnknown_03000D74) & 0xFF;
+            q1[i] = i + 1 + sUnknown_03000D74;
+            r5 += (i + 1 + sUnknown_03000D74) & 0xFF;
         }
         *((u16 *)(q1 + i)) = r5;
-        gUnknown_03000D74++;
+        sUnknown_03000D74++;
         break;
     }
 }
 
 // File boundary here maybe?
 
-void PkmnStrToASCII(u8 *q1, const u8 *q2)
+static void PkmnStrToASCII(u8 *asciiStr, const u8 *pkmnStr)
 {
     s32 i;
 
-    for (i = 0; q2[i] != EOS; i++)
+    for (i = 0; pkmnStr[i] != EOS; i++)
     {
-        q1[i] = sWireless_RSEtoASCIITable[q2[i]];
+        asciiStr[i] = sWireless_RSEtoASCIITable[pkmnStr[i]];
     }
-    q1[i] = 0;
+    asciiStr[i] = 0;
 }
 
-void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
+static void ASCIIToPkmnStr(u8 *pkmnStr, const u8 *asciiStr)
 {
     s32 i;
 
-    for (i = 0; q2[i] != 0; i++)
+    for (i = 0; asciiStr[i] != 0; i++)
     {
-        q1[i] = sWireless_ASCIItoRSETable[q2[i]];
+        pkmnStr[i] = sWireless_ASCIItoRSETable[asciiStr[i]];
     }
-    q1[i] = EOS;
+    pkmnStr[i] = EOS;
 }
 
 #ifdef NONMATCHING
-u8 sub_800DD1C(u8 maxFlags)
+static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     u8 flagCount = 0;
     u32 flags = gRfuLinkStatus->connSlotFlag;
     u8 i;
 
-    if (gRfuLinkStatus->parentChild == 1)
+    if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
         for (i = 0; i < 4; flags >>= 1, i++)
         {
@@ -530,7 +663,8 @@ u8 sub_800DD1C(u8 maxFlags)
     return 0;
 }
 #else
-NAKED u8 sub_800DD1C(u8 maxFlags)
+NAKED 
+static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tlsls r0, 24\n"
@@ -599,7 +733,7 @@ NAKED u8 sub_800DD1C(u8 maxFlags)
 }
 #endif
 
-void sub_800DD94(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders)
 {
     s32 i;
 
@@ -607,19 +741,19 @@ void sub_800DD94(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
     {
         data->unk_00.playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        data->child_sprite_gender[i] = r3;
-        r3 >>= 8;
+        data->child_sprite_gender[i] = child_sprite_genders;
+        child_sprite_genders >>= 8;
     }
     data->playerGender = gSaveBlock2Ptr->playerGender;
-    data->activity = r9;
-    data->started = r2;
+    data->activity = activity;
+    data->started = started;
     data->unk_00.language = GAME_LANGUAGE;
     data->unk_00.version = GAME_VERSION;
-    data->unk_00.hasNews = 0;
-    data->unk_00.hasCard = 0;
-    data->unk_00.unk_00_6 = 0;
+    data->unk_00.hasNews = FALSE;
+    data->unk_00.hasCard = FALSE;
+    data->unk_00.unknown = FALSE;
     data->unk_00.isChampion = FlagGet(FLAG_IS_CHAMPION);
     data->unk_00.hasNationalDex = IsNationalPokedexEnabled();
     data->unk_00.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
@@ -629,31 +763,31 @@ bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal;
 
-    if (lman.parent_child == 1)
+    if (lman.parent_child == MODE_PARENT)
     {
         retVal = TRUE;
-        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
+        if (IsRfuSerialNumberValid(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
         {
-            memcpy(buff1, gRfuLinkStatus->partner[idx].gname, 0xD);
+            memcpy(buff1, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
             memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
         }
         else
         {
-            memset(buff1, 0, 0xD);
+            memset(buff1, 0, RFU_GAME_NAME_LENGTH);
             memset(buff2, 0, PLAYER_NAME_LENGTH + 1);
         }
     }
     else
     {
         retVal = FALSE;
-        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo))
+        if (IsRfuSerialNumberValid(gRfuLinkStatus->partner[idx].serialNo))
         {
-            memcpy(buff1, gRfuLinkStatus->partner[idx].gname, 0xD);
+            memcpy(buff1, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
             memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
         }
         else
         {
-            memset(buff1, 0, 0xD);
+            memset(buff1, 0, RFU_GAME_NAME_LENGTH);
             memset(buff2, 0, PLAYER_NAME_LENGTH + 1);
         }
     }
@@ -665,22 +799,22 @@ bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == 0x7F7D)
     {
-        memcpy(buff1, gRfuLinkStatus->partner[idx].gname, 0xD);
-        memcpy(buff2, gRfuLinkStatus->partner[idx].uname, 8);
+        memcpy(buff1, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+        memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
         retVal = TRUE;
     }
     else
     {
-        memset(buff1, 0, 0xD);
-        memset(buff2, 0, 8);
+        memset(buff1, 0, RFU_GAME_NAME_LENGTH);
+        memset(buff2, 0, PLAYER_NAME_LENGTH + 1);
     }
     return retVal;
 }
 
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2)
 {
-    memcpy(buff1, &gHostRFUtgtGnameBuffer, 0xD);
-    memcpy(buff2, gHostRFUtgtUnameBuffer, 8);
+    memcpy(buff1, &gHostRFUtgtGnameBuffer, RFU_GAME_NAME_LENGTH);
+    memcpy(buff2, gHostRFUtgtUnameBuffer, PLAYER_NAME_LENGTH + 1);
 }
 
 void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
@@ -692,7 +826,7 @@ void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
         x = 0xE7;
         y = 0x08;
     }
-    if (gRfuLinkStatus->parentChild == 1)
+    if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
         sprId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
         gSprites[sprId].data[7] = 0x1234;
@@ -730,11 +864,11 @@ void LoadWirelessStatusIndicatorSpriteGfx(void)
     gWirelessStatusIndicatorSpriteId = 0xFF;
 }
 
-u8 sub_800E124(void)
+static u8 GetParentSignalStrength(void)
 {
     u8 i;
     u8 flags = gRfuLinkStatus->connSlotFlag;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (flags & 1)
         {
@@ -745,7 +879,7 @@ u8 sub_800E124(void)
     return 0;
 }
 
-void sub_800E15C(struct Sprite *sprite, s32 signalStrengthAnimNum)
+static void SetWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 signalStrengthAnimNum)
 {
     if (sprite->data[2] != signalStrengthAnimNum)
     {
@@ -755,50 +889,50 @@ void sub_800E15C(struct Sprite *sprite, s32 signalStrengthAnimNum)
     }
 }
 
-void sub_800E174(void)
+void UpdateWirelessStatusIndicatorSprite(void)
 {
     if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
-        u8 signalStrength = 255;
+        u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
         u8 i = 0;
-        if (gRfuLinkStatus->parentChild == 1)
+        if (gRfuLinkStatus->parentChild == MODE_PARENT)
         {
             for (i = 0; i < GetLinkPlayerCount() - 1; i++)
             {
-                if (signalStrength >= sub_800DD1C(i + 1))
+                if (signalStrength >= GetConnectedChildStrength(i + 1))
                 {
-                    signalStrength = sub_800DD1C(i + 1);
+                    signalStrength = GetConnectedChildStrength(i + 1);
                 }
             }
         }
         else
         {
-            signalStrength = sub_800E124();
+            signalStrength = GetParentSignalStrength();
         }
-        if (sub_8012224() == TRUE)
+        if (IsRfuRecoveringFromLinkLoss() == TRUE)
         {
             sprite->data[0] = 4;
         }
-        else if (signalStrength < 25)
+        else if (signalStrength <= RFU_LINK_ICON_LEVEL1_MAX)
         {
             sprite->data[0] = 3;
         }
-        else if (signalStrength >= 25 && signalStrength < 127)
+        else if (signalStrength >= RFU_LINK_ICON_LEVEL2_MIN && signalStrength <= RFU_LINK_ICON_LEVEL2_MAX)
         {
             sprite->data[0] = 2;
         }
-        else if (signalStrength >= 127 && signalStrength < 229)
+        else if (signalStrength >= RFU_LINK_ICON_LEVEL3_MIN && signalStrength <= RFU_LINK_ICON_LEVEL3_MAX)
         {
             sprite->data[0] = 1;
         }
-        else if (signalStrength >= 229)
+        else if (signalStrength >= RFU_LINK_ICON_LEVEL4_MIN)
         {
             sprite->data[0] = 0;
         }
         if (sprite->data[0] != sprite->data[1])
         {
-            sub_800E15C(sprite, sprite->data[0]);
+            SetWirelessStatusIndicatorAnim(sprite, sprite->data[0]);
             sprite->data[1] = sprite->data[0];
         }
         if (sprite->anims[sprite->data[2]][sprite->data[4]].frame.duration < sprite->data[3])
@@ -827,22 +961,20 @@ void sub_800E174(void)
     }
 }
 
-void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
+static void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
 {
     dest->trainerId = trainerId;
     StringCopy(dest->trainerName, name);
 }
 
-bool32 NameIsNotEmpty(const u8 *name)
+static bool32 NameIsNotEmpty(const u8 *name)
 {
     s32 i;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
     {
         if (name[i] != 0)
-        {
             return TRUE;
-        }
     }
     return FALSE;
 }
@@ -862,7 +994,7 @@ void RecordMixTrainerNames(void)
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             connectedTrainerRecordIndices[i] = -1;
-            for (j = 0; j < 20; j++)
+            for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); j++)
             {
                 if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->trainerNameRecords[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->trainerNameRecords[j].trainerName) == 0)
                 {
@@ -890,12 +1022,12 @@ void RecordMixTrainerNames(void)
 
         // Copy all non-empty records to the new list, in the order they appear on the old list. If the list is full,
         // the last (oldest) records will be dropped.
-        for (i = 0; i < 20; i++)
+        for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
         {
             if (NameIsNotEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
             {
                 CopyTrainerRecord(&newRecords[nextSpace], gSaveBlock1Ptr->trainerNameRecords[i].trainerId, gSaveBlock1Ptr->trainerNameRecords[i].trainerName);
-                if (++nextSpace >= 20)
+                if (++nextSpace >= (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords))
                 {
                     break;
                 }
@@ -903,7 +1035,7 @@ void RecordMixTrainerNames(void)
         }
 
         // Finalize the new list, and clean up.
-        memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, 20 * sizeof(struct TrainerNameRecord));
+        memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, sizeof(gSaveBlock1Ptr->trainerNameRecords));
         free(newRecords);
     }
 }
@@ -912,16 +1044,13 @@ bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
     s32 i;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
         if (StringCompare(gSaveBlock1Ptr->trainerNameRecords[i].trainerName, name) == 0 && gSaveBlock1Ptr->trainerNameRecords[i].trainerId == id)
-        {
             return TRUE;
-        }
+
         if (!NameIsNotEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
-        {
             return FALSE;
-        }
     }
     return FALSE;
 }
@@ -930,7 +1059,7 @@ void WipeTrainerNameRecords(void)
 {
     s32 i;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
         gSaveBlock1Ptr->trainerNameRecords[i].trainerId = 0;
         CpuFill16(0, gSaveBlock1Ptr->trainerNameRecords[i].trainerName, 8);
