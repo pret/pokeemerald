@@ -426,7 +426,7 @@ gSpecials:: @ 81DBA64
 	def_special IsWirelessAdapterConnected
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
-	def_special UnionRoomSpecial
+	def_special RunUnionRoom
 	def_special ShowWirelessCommunicationScreen
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName

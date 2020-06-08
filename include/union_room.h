@@ -2,6 +2,7 @@
 #define GUARD_UNION_ROOM_H
 
 #include "link_rfu.h"
+#include "link.h"
 #include "constants/union_room.h"
 
 // Exported type declarations
@@ -12,22 +13,20 @@ struct WirelessGnameUnamePair
     u8 ALIGNED(4) playerName[PLAYER_NAME_LENGTH + 1];
 };
 
-struct UnkStruct_x1C // WirelessLink_Member?
+struct UnkStruct_x1C
 {
     struct WirelessGnameUnamePair gname_uname;
     u8 active:1;
 };
 
-struct UnkStruct_x20 // WirelessLink_Member?
+struct UnkStruct_x20
 {
     struct WirelessGnameUnamePair gname_uname;
-    u16 field_18;
+    u16 timeoutCounter;
     u8 groupScheduledAnim:2;
-    u8 field_1A_1:1;
+    bool8 useRedText:1; // Never set
     u8 field_1B;
-    u8 field_1D;
-    u8 field_1E;
-    u8 field_1F;
+    u8 filler[3];
 };
 
 struct UnkStruct_Main0
@@ -37,12 +36,12 @@ struct UnkStruct_Main0
 
 struct UnkStruct_Main4
 {
-    struct UnkStruct_x1C arr[5];
+    struct UnkStruct_x1C arr[MAX_RFU_PLAYERS];
 };
 
 struct UnkStruct_Main8
 {
-    struct UnkStruct_x20 arr[5];
+    struct UnkStruct_x20 arr[MAX_RFU_PLAYERS];
 };
 
 struct WirelessLink_Leader
@@ -62,8 +61,8 @@ struct WirelessLink_Leader
     u8 field_16;
     u8 listenTaskId;
     u8 activity;
-    u8 field_19;
-    u16 field_1A;
+    u8 joinRequestAnswer;
+    u16 memberConfirmTimeout;
 };
 
 struct WirelessLink_Group
@@ -100,32 +99,29 @@ struct WirelessLink_URoom
     struct UnkStruct_Main4 *field_4;
     struct UnkStruct_Main0 *field_8;
     struct UnkStruct_Main4 *field_C;
-    u16 field_10;
+    u16 unknown; // Never read
     u16 field_12;
     u8 state;
     u8 stateAfterPrint;
     u8 textState;
-    u8 field_17;
-    u8 field_18;
-    u8 field_19;
-    u8 field_1A;
+    u8 filler[4];
     u8 topListMenuWindowId;
     u8 topListMenuId;
     u8 tradeBoardSelectWindowId;
     u8 tradeBoardDetailsWindowId;
-    u8 field_1F;
-    u8 field_20;
+    u8 unused1;
+    u8 searchTaskId;
     u8 spriteIds[40];
-    u8 field_49;
-    u8 field_4A;
+    u8 unused2;
+    u8 tradeBoardListMenuId;
     u16 playerSendBuffer[6];
     u8 activityRequestStrbufs[4][16];
     u16 partnerYesNoResponse;
     u16 recvActivityRequest[3];
     struct UnionRoomObject objects[MAX_UNION_ROOM_PLAYERS];
-    u8 field_C0[12][15];
-    u8 field_174[48];
-    u8 field_1A4[200];
+    u8 trainerCardStrBuffer[12][15];
+    u8 trainerCardColorStrBuffer[48];
+    u8 trainerCardMsgStrBuffer[200];
 };
 
 union WirelessLink_Main
@@ -137,16 +133,16 @@ union WirelessLink_Main
 
 struct UnionRoomTrade
 {
-    u16 field_0;
+    u16 state;
     u16 type;
     u32 playerPersonality;
-    u8 field_8;
-    u8 field_9;
+    u8 offerPlayerId;
+    u8 filler1;
     u16 playerSpecies;
     u16 playerLevel;
     u16 species;
     u16 level;
-    u16 field_12;
+    u16 filler2;
     u32 personality;
 };
 
@@ -162,7 +158,7 @@ extern u8 gUnionRoomRequestedMonType;
 // Exported ROM declarations
 
 u8 CreateTask_CreateTradeMenu(void);
-void var_800D_set_xB(void);
+void SetUsingUnionRoomStartMenu(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
 void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
 void MEvent_CreateTask_Leader(u32 arg0);

@@ -78,7 +78,7 @@ static const u8 sNextFacingDirection[] = {
     [DIR_EAST]  = DIR_NORTH
 };
 
-// Local id 1 is the Nurse/Aide
+// Local id 1 is the Nurse/Attendant, 2-9 are link players
 static const u8 sUnionRoomLocalIds[] = { 9, 8, 7, 2, 6, 5, 4, 3 };
 
 static const u16 sUnknown[] = {
@@ -102,9 +102,9 @@ static const u8 sMovement_UnionPlayerEnter[2] = {
     MOVEMENT_ACTION_STEP_END
 };
 
-static bool32 is_walking_or_running(void)
+static bool32 IsPlayerStandingStill(void)
 {
-    if (gPlayerAvatar.tileTransitionState == 2 || gPlayerAvatar.tileTransitionState == 0)
+    if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
         return TRUE;
     else
         return FALSE;
@@ -251,7 +251,7 @@ static bool32 AnimateUnionRoomPlayerSpawn(s8 * state, u32 playerIdx, struct Unio
     switch (*state)
     {
     case 0:
-        if (!is_walking_or_running())
+        if (!IsPlayerStandingStill())
         {
             break;
         }
@@ -567,12 +567,12 @@ void HandleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom)
     }
 }
 
-bool32 TrySetUnionRoomMemberFacePlayer(struct UnkStruct_Main0 *main0, s16 *directionPtr, s16 *playerIdxPtr, u8 *spriteIds)
+bool32 TryInteractWithUnionRoomMember(struct UnkStruct_Main0 *main0, s16 *directionPtr, s16 *playerIdxPtr, u8 *spriteIds)
 {
     s16 x, y;
     s32 i, direction;
     struct UnkStruct_x20 * r4;
-    if (!is_walking_or_running())
+    if (!IsPlayerStandingStill())
     {
         return FALSE;
     }
@@ -602,6 +602,7 @@ bool32 TrySetUnionRoomMemberFacePlayer(struct UnkStruct_Main0 *main0, s16 *direc
             {
                 continue;
             }
+            // Face player
             SetUnionRoomObjectFacingDirection(direction, i, sOppositeFacingDirection[GetPlayerFacingDirection()]);
             *directionPtr = direction;
             *playerIdxPtr = i;

@@ -29,6 +29,20 @@
 #define BACKUP_QUEUE_NUM_SLOTS 2
 #define BACKUP_QUEUE_SLOT_LENGTH 14
 
+#define RFU_STATUS_OK                   0
+#define RFU_STATUS_FATAL_ERROR          1
+#define RFU_STATUS_CONNECTION_ERROR     2
+#define RFU_STATUS_CHILD_SEND_COMPLETE  3
+#define RFU_STATUS_NEW_CHILD_DETECTED   4
+#define RFU_STATUS_JOIN_GROUP_OK        5
+#define RFU_STATUS_JOIN_GROUP_NO        6
+#define RFU_STATUS_WAIT_ACK_JOIN_GROUP  7
+#define RFU_STATUS_LEAVE_GROUP_NOTICE   8
+#define RFU_STATUS_LEAVE_GROUP          9
+#define RFU_STATUS_10                   10
+#define RFU_STATUS_11                   11
+#define RFU_STATUS_ACK_JOIN_GROUP       12
+
 // RfuTgtData.gname is read as these structs.
 struct GFtgtGnameSub
 {
@@ -125,7 +139,7 @@ struct GFRfuManager
     /* 0x0ee */ vu8 errorState;
     /* 0x0ef */ bool8 isShuttingDown;
     /* 0x0f0 */ u8 linkLossRecoveryState;
-    /* 0x0f1 */ u8 errorStatus;
+    /* 0x0f1 */ u8 status;
     /* 0x0f2 */ u16 unk_f2[6];
     /* 0x0fe */ u16 unk_fe;
     /* 0x100 */ u16 unk_100;
@@ -142,14 +156,14 @@ struct GFRfuManager
     /* 0xc3e */ vu8 childSlot;
     /* 0xc3f */ u8 unk_c3f[70];
     /* 0xc85 */ u8 unk_c85;
-    /* 0xc86 */ u8 unk_c86;
+    /* 0xc86 */ u8 recvStatus;
     /* 0xc87 */ u8 recvCmds[5][7][2];
     /* 0xccd */ u8 parentId;
     /* 0xcce */ u8 multiplayerId;
     /* 0xccf */ u8 unk_ccf;
     /* 0xcd0 */ vu8 unk_cd0;
-    /* 0xcd1 */ u8 unk_cd1[4];
-    /* 0xcd5 */ u8 unk_cd5[4];
+    /* 0xcd1 */ u8 partnerSendStatuses[RFU_CHILD_MAX];
+    /* 0xcd5 */ u8 partnerRecvStatuses[RFU_CHILD_MAX];
     /* 0xcd9 */ u8 unk_cd9;
     /* 0xcda */ u8 unk_cda;
     /* 0xcdb */ vbool8 unk_cdb;
@@ -199,36 +213,36 @@ void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
 bool32 sub_8010EC0(void);
 bool32 sub_8010F1C(void);
-bool32 RfuIsErrorStatus1or2(void);
+bool32 RfuHasErrored(void);
 bool32 IsRfuRecvQueueEmpty(void);
 u32 GetRfuRecvQueueLength(void);
 void RfuVSync(void);
 void sub_80111B0(bool32 a0);
-u8 RfuGetErrorStatus(void);
+u8 RfuGetStatus(void);
 struct GFtgtGname *GetHostRFUtgtGname(void);
 void UpdateGameData_GroupLockedIn(u8 a0);
 void GetLinkmanErrorParams(u32 a0);
-void RfuSetErrorStatus(u8 a0, u16 a1);
+void RfuSetStatus(u8 a0, u16 a1);
 u8 sub_801048C(bool32 a0);
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2);
-void SetHostRFUtgtGname(u8 a0, u32 a1, u32 a2);
+void SetHostRFUtgtGname(u8 activity, u32 child_sprite_genders, bool32 started);
 void InitializeRfuLinkManager_LinkLeader(u32 a0);
 bool32 sub_8012240(void);
 void LinkRfu_StopManagerAndFinalizeSlots(void);
 bool32 sub_80105EC(void);
-bool32 TrainerIdAndNameStillInPartnersList(u16 a0, const u8 *a1);
-void SendByteToPartnerByIdAndName(u8 a0, u16 a1, const u8 *a2);
-u32 WaitSendByteToPartnerByIdAndName(u16 a0, const u8 *a1);
+bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *name);
+void SendRfuStatusToPartner(u8 status, u16 trainerId, const u8 *name);
+u32 WaitSendRfuStatusToPartner(u16 trainerId, const u8 *name);
 void RequestDisconnectSlotByTrainerNameAndId(const u8 *a0, u16 a1);
 bool8 LmanAcceptSlotFlagIsNotZero(void);
 bool32 WaitRfuState(bool32 a0);
 void sub_801103C(void);
 void InitializeRfuLinkManager_JoinGroup(void);
-void LinkRfuNIsend8(void);
+void SendLeaveGroupNotice(void);
 void RecordMixTrainerNames(void);
 void LinkRfu_CreateConnectionAsParent(void);
 void LinkRfu_StopManagerBeforeEnteringChat(void);
-void UpdateGameDataWithActivitySpriteGendersFlag(u8 a0, u32 a1, u32 a2);
+void UpdateGameData_SetActivity(u8 activity, u32 flags, bool32 started);
 void CreateTask_RfuReconnectWithParent(const u8 *src, u16 trainerId);
 void SetGnameBufferWonderFlags(bool32 a0, bool32 a1);
 void ClearAndInitHostRFUtgtGname(void);

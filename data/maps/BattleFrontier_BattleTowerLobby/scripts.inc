@@ -884,26 +884,26 @@ BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader:: @ 823F3F3
 
 BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader:: @ 823F430
 	call CableClub_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader
-	compare VAR_RESULT, 11
+	compare VAR_RESULT, LINKUP_FAILED_BATTLE_TOWER
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AbortLink
 	release
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup:: @ 823F463
 	call CableClub_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup
-	compare VAR_RESULT, 11
+	compare VAR_RESULT, LINKUP_FAILED_BATTLE_TOWER
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AbortLink
 	release
 	return

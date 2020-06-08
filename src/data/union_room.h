@@ -99,15 +99,15 @@ ALIGNED(4) const u8 sText_OtherTrainerUnavailableNow[] = _("The other TRAINER do
 ALIGNED(4) const u8 sText_CantTransmitTrainerTooFar[] = _("You can't transmit with a TRAINER\nwho is too far away.\p");
 ALIGNED(4) const u8 sText_TrainersNotReadyYet[] = _("The other TRAINER(S) is/are not\nready yet.\p");
 
-const u8 *const sCantTransmitToTrainerTexts[] = {
-    sText_CantTransmitTrainerTooFar,
-    sText_TrainersNotReadyYet
+static const u8 *const sCantTransmitToTrainerTexts[] = {
+    [UR_TRADE_PLAYER_NOT_READY - 1]  = sText_CantTransmitTrainerTooFar,
+    [UR_TRADE_PARTNER_NOT_READY - 1] = sText_TrainersNotReadyYet
 };
 
 ALIGNED(4) const u8 sText_ModeWithTheseMembersWillBeCanceled[] = _("The {STR_VAR_1} MODE with\nthese members will be canceled.{PAUSE 60}");
 ALIGNED(4) const u8 sText_MemberNoLongerAvailable[] = _("There is a member who can no\nlonger remain available.\p");
 
-const u8 *const sPlayerUnavailableTexts[] = {
+static const u8 *const sPlayerUnavailableTexts[] = {
     sText_OtherTrainerUnavailableNow,
     sText_MemberNoLongerAvailable
 };
@@ -120,17 +120,17 @@ ALIGNED(4) const u8 sText_AwaitingOtherMembers[] = _("{STR_VAR_1}!\nAwaiting oth
 ALIGNED(4) const u8 sText_QuitBeingMember[] = _("Quit being a member?");
 ALIGNED(4) const u8 sText_StoppedBeingMember[] = _("You stopped being a member.\p");
 
-const u8 *const sPlayerDisconnectedTexts[] = {
-    NULL,
-    sText_MemberNoLongerAvailable,
-    sText_TrainerAppearsUnavailable,
-    NULL,
-    NULL,
-    NULL,
-    sText_PlayerRepliedNo,
-    NULL,
-    NULL,
-    sText_StoppedBeingMember
+static const u8 *const sPlayerDisconnectedTexts[] = {
+    [RFU_STATUS_OK]                  = NULL,
+    [RFU_STATUS_FATAL_ERROR]         = sText_MemberNoLongerAvailable,
+    [RFU_STATUS_CONNECTION_ERROR]    = sText_TrainerAppearsUnavailable,
+    [RFU_STATUS_CHILD_SEND_COMPLETE] = NULL,
+    [RFU_STATUS_NEW_CHILD_DETECTED]  = NULL,
+    [RFU_STATUS_JOIN_GROUP_OK]       = NULL,
+    [RFU_STATUS_JOIN_GROUP_NO]       = sText_PlayerRepliedNo,
+    [RFU_STATUS_WAIT_ACK_JOIN_GROUP] = NULL,
+    [RFU_STATUS_LEAVE_GROUP_NOTICE]  = NULL,
+    [RFU_STATUS_LEAVE_GROUP]         = sText_StoppedBeingMember
 };
 
 ALIGNED(4) const u8 sText_WirelessLinkEstablished[] = _("The WIRELESS COMMUNICATION\nSYSTEM link has been established.");
@@ -139,16 +139,16 @@ ALIGNED(4) const u8 sText_LinkWithFriendDropped[] = _("The link with your friend
 ALIGNED(4) const u8 sText_PlayerRepliedNo2[] = _("{STR_VAR_1} replied, “No…”");
 
 const u8 *const sLinkDroppedTexts[] = {
-    NULL,
-    sText_LinkWithFriendDropped,
-    sText_LinkWithFriendDropped,
-    NULL,
-    NULL,
-    NULL,
-    sText_PlayerRepliedNo2,
-    NULL,
-    NULL,
-    NULL
+    [RFU_STATUS_OK]                  = NULL,
+    [RFU_STATUS_FATAL_ERROR]         = sText_LinkWithFriendDropped,
+    [RFU_STATUS_CONNECTION_ERROR]    = sText_LinkWithFriendDropped,
+    [RFU_STATUS_CHILD_SEND_COMPLETE] = NULL,
+    [RFU_STATUS_NEW_CHILD_DETECTED]  = NULL,
+    [RFU_STATUS_JOIN_GROUP_OK]       = NULL,
+    [RFU_STATUS_JOIN_GROUP_NO]       = sText_PlayerRepliedNo2,
+    [RFU_STATUS_WAIT_ACK_JOIN_GROUP] = NULL,
+    [RFU_STATUS_LEAVE_GROUP_NOTICE]  = NULL,
+    [RFU_STATUS_LEAVE_GROUP]         = NULL
 };
 
 ALIGNED(4) const u8 sText_DoYouWantXMode[] = _("Do you want the {STR_VAR_2}\nMODE?");
@@ -260,7 +260,7 @@ ALIGNED(4) const u8 sText_WaitForBattleFemale[] = _("A battle? Of course, but I 
 ALIGNED(4) const u8 sText_WaitForChatFemale[] = _("Did you want to chat?\nOkay, but please wait a moment.");
 ALIGNED(4) const u8 sText_ShowTrainerCardFemale[] = _("As my introduction, I'll show you\nmy TRAINER CARD.");
 
-const u8 *const sText_WaitOrShowCardTexts[GENDER_COUNT][4] = {
+static const u8 *const sText_WaitOrShowCardTexts[GENDER_COUNT][4] = {
     {
         sText_WaitForBattleMale,
         sText_WaitForChatMale,
@@ -283,7 +283,7 @@ ALIGNED(4) const u8 sText_TradeWillBeStarted[] = _("The trade will be started.{P
 ALIGNED(4) const u8 sText_BattleWillBeStarted[] = _("The battle will be started.{PAUSE 60}");
 ALIGNED(4) const u8 sText_EnteringChat[] = _("Entering the chat…{PAUSE 60}");
 
-const u8 *const sStartActivityTexts[][GENDER_COUNT][3] = {
+static const u8 *const sStartActivityTexts[][GENDER_COUNT][3] = {
     {
         {
             sText_BattleWillBeStarted,
@@ -334,18 +334,21 @@ const u8 *const sIfYouWantToDoSomethingTexts[GENDER_COUNT] = {
 ALIGNED(4) const u8 sText_TrainerBattleBusy[] = _("Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p");
 ALIGNED(4) const u8 sText_NeedTwoMonsOfLevel30OrLower1[] = _("If you want to battle, you need\ntwo POKéMON that are below\lLv. 30.\p");
 ALIGNED(4) const u8 sText_NeedTwoMonsOfLevel30OrLower2[] = _("For a battle, you need two\nPOKéMON that are below Lv. 30.\p");
-ALIGNED(4) const u8 sText_DeclineBattleMale[] = _("Oh, all right.\nCome see me anytime, okay?\p");
-ALIGNED(4) const u8 stext_DeclineBattleFemale[] = _("Oh…\nPlease come by anytime.\p");
 
-static const u8 *const sDeclineBattleTexts[GENDER_COUNT] = {
-    sText_DeclineBattleMale,
-    stext_DeclineBattleFemale
+ALIGNED(4) const u8 sText_DeclineChatMale[] = _("Oh, all right.\nCome see me anytime, okay?\p");
+ALIGNED(4) const u8 stext_DeclineChatFemale[] = _("Oh…\nPlease come by anytime.\p");
+
+// Response from partner when player declines chat
+static const u8 *const sDeclineChatTexts[GENDER_COUNT] = {
+    sText_DeclineChatMale,
+    stext_DeclineChatFemale
 };
 
 ALIGNED(4) const u8 sText_ChatDeclinedMale[] = _("Oh, sorry!\nI just can't right this instant.\lLet's chat another time.\p");
 ALIGNED(4) const u8 sText_ChatDeclinedFemale[] = _("Oh, I'm sorry.\nI have too much to do right now.\lLet's chat some other time.\p");
 
-const u8 *const sChatDeclinedTexts[GENDER_COUNT] = {
+// Response from partner when they decline chat
+static const u8 *const sChatDeclinedTexts[GENDER_COUNT] = {
     sText_ChatDeclinedMale,
     sText_ChatDeclinedFemale
 };
@@ -576,36 +579,36 @@ const u8 *const sGladToMeetYouTexts[GENDER_COUNT] = {
 
 ALIGNED(4) const u8 sText_FinishedCheckingPlayersTrainerCard[] = _("Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}");
 
-const u8 *const sLinkGroupActivityTexts[] = {
-    sText_EmptyString,
-    sText_SingleBattle,
-    sText_DoubleBattle,
-    sText_MultiBattle,
-    sText_PokemonTrades,
-    sText_Chat,
-    sText_WonderCards,
-    sText_WonderNews,
-    sText_Cards,
-    sText_PokemonJump,
-    sText_BerryCrush,
-    sText_BerryPicking,
-    sText_Search,
-    sText_EmptyString,
-    sText_BattleTowerOpenLv,
-    sText_RecordCorner,
-    sText_BerryBlender,
-    sText_EmptyString,
-    sText_EmptyString,
-    sText_EmptyString,
-    sText_EmptyString,
-    sText_WonderCards,
-    sText_WonderNews,
-    sText_CoolContest,
-    sText_BeautyContest,
-    sText_CuteContest,
-    sText_SmartContest,
-    sText_ToughContest,
-    sText_BattleTowerLv50
+static const u8 *const sLinkGroupActivityNameTexts[] = {
+    [ACTIVITY_NONE]              = sText_EmptyString,
+    [ACTIVITY_BATTLE_SINGLE]     = sText_SingleBattle,
+    [ACTIVITY_BATTLE_DOUBLE]     = sText_DoubleBattle,
+    [ACTIVITY_BATTLE_MULTI]      = sText_MultiBattle,
+    [ACTIVITY_TRADE]             = sText_PokemonTrades,
+    [ACTIVITY_CHAT]              = sText_Chat,
+    [ACTIVITY_WONDER_CARD]       = sText_WonderCards,
+    [ACTIVITY_WONDER_NEWS]       = sText_WonderNews,
+    [ACTIVITY_CARD]              = sText_Cards,
+    [ACTIVITY_POKEMON_JUMP]      = sText_PokemonJump,
+    [ACTIVITY_BERRY_CRUSH]       = sText_BerryCrush,
+    [ACTIVITY_BERRY_PICK]        = sText_BerryPicking,
+    [ACTIVITY_SEARCH]            = sText_Search,
+    [ACTIVITY_SPIN_TRADE]        = sText_EmptyString,
+    [ACTIVITY_BATTLE_TOWER_OPEN] = sText_BattleTowerOpenLv,
+    [ACTIVITY_RECORD_CORNER]     = sText_RecordCorner,
+    [ACTIVITY_BERRY_BLENDER]     = sText_BerryBlender,
+    [ACTIVITY_ACCEPT]            = sText_EmptyString,
+    [ACTIVITY_DECLINE]           = sText_EmptyString,
+    [ACTIVITY_NPCTALK]           = sText_EmptyString,
+    [ACTIVITY_PLYRTALK]          = sText_EmptyString,
+    [ACTIVITY_WONDER_CARD2]      = sText_WonderCards,
+    [ACTIVITY_WONDER_NEWS2]      = sText_WonderNews,
+    [ACTIVITY_CONTEST_COOL]      = sText_CoolContest,
+    [ACTIVITY_CONTEST_BEAUTY]    = sText_BeautyContest,
+    [ACTIVITY_CONTEST_CUTE]      = sText_CuteContest,
+    [ACTIVITY_CONTEST_SMART]     = sText_SmartContest,
+    [ACTIVITY_CONTEST_TOUGH]     = sText_ToughContest,
+    [ACTIVITY_BATTLE_TOWER]      = sText_BattleTowerLv50
 };
 
 static const struct WindowTemplate sWindowTemplate_BButtonCancel = {
@@ -621,6 +624,9 @@ static const struct WindowTemplate sWindowTemplate_BButtonCancel = {
 // Minimum and maximum number of players for a link group
 // A minimum of 0 means the min and max are equal
 #define LINK_GROUP_CAPACITY(min, max)(((min) << 12) | ((max) << 8))
+#define GROUP_MAX(capacity)(capacity & 0x0F)
+#define GROUP_MIN(capacity)(capacity >> 4)
+#define GROUP_MIN2(capacity)(capacity & 0xF0) // Unnecessary to have both, but needed to match
 
 static const u32 sLinkGroupToActivityAndCapacity[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_SINGLE_BATTLE]     = ACTIVITY_BATTLE_SINGLE     | LINK_GROUP_CAPACITY(0, 2),
@@ -647,37 +653,37 @@ static const u32 sLinkGroupToActivityAndCapacity[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_BATTLE_TOWER_OPEN] = ACTIVITY_BATTLE_TOWER_OPEN | LINK_GROUP_CAPACITY(0, 2)
 };
 
-const struct WindowTemplate gUnknown_082F011C = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x03,
-    .width = 0x0d,
-    .height = 0x08,
-    .paletteNum = 0x0f,
+static const struct WindowTemplate sWindowTemplate_PlayerList = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 3,
+    .width = 13,
+    .height = 8,
+    .paletteNum = 15,
     .baseBlock = 0x0044
 };
 
-const struct WindowTemplate gUnknown_082F0124 = {
-    .bg = 0x00,
-    .tilemapLeft = 0x01,
-    .tilemapTop = 0x03,
-    .width = 0x0d,
-    .height = 0x0a,
-    .paletteNum = 0x0f,
+static const struct WindowTemplate sWindowTemplate_5PlayerList = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 3,
+    .width = 13,
+    .height = 10,
+    .paletteNum = 15,
     .baseBlock = 0x0044
 };
 
 static const struct WindowTemplate sWindowTemplate_NumPlayerMode = {
-    .bg = 0x00,
-    .tilemapLeft = 0x10,
-    .tilemapTop = 0x03,
-    .width = 0x07,
-    .height = 0x04,
-    .paletteNum = 0x0f,
+    .bg = 0,
+    .tilemapLeft = 16,
+    .tilemapTop = 3,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 15,
     .baseBlock = 0x00c6
 };
 
-const struct ListMenuItem gUnknown_082F0134[] = {
+static const struct ListMenuItem sPossibleGroupMembersListMenuItems[] = {
     { sText_EmptyString, 0 },
     { sText_EmptyString, 1 },
     { sText_EmptyString, 2 },
@@ -686,10 +692,10 @@ const struct ListMenuItem gUnknown_082F0134[] = {
 };
 
 static const struct ListMenuTemplate sListMenuTemplate_PossibleGroupMembers = {
-    .items = gUnknown_082F0134,
+    .items = sPossibleGroupMembersListMenuItems,
     .moveCursorFunc = NULL,
     .itemPrintFunc = ItemPrintFunc_PossibleGroupMembers,
-    .totalItems = ARRAY_COUNT(gUnknown_082F0134),
+    .totalItems = ARRAY_COUNT(sPossibleGroupMembersListMenuItems),
     .maxShowed = 5,
     .windowId = 0,
     .header_X = 0,
@@ -804,7 +810,7 @@ static const struct ListMenuTemplate sListMenuTemplate_InviteToActivity = {
     .cursorKind = 0
 };
 
-const struct WindowTemplate gUnknown_082F025C = {
+static const struct WindowTemplate sWindowTemplate_RegisterForTrade = {
     .bg = 0x00,
     .tilemapLeft = 0x12,
     .tilemapTop = 0x07,
@@ -814,17 +820,17 @@ const struct WindowTemplate gUnknown_082F025C = {
     .baseBlock = 0x0001
 };
 
-const struct ListMenuItem gUnknown_082F0264[] = {
+static const struct ListMenuItem sRegisterForTradeListMenuItems[] = {
     { gText_Register, 1 },
     { sText_Info, 2 },
     { sText_Exit, 3 }
 };
 
-const struct ListMenuTemplate gUnknown_082F027C = {
-    .items = gUnknown_082F0264,
+static const struct ListMenuTemplate sListMenuTemplate_RegisterForTrade = {
+    .items = sRegisterForTradeListMenuItems,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .itemPrintFunc = NULL,
-    .totalItems = ARRAY_COUNT(gUnknown_082F0264),
+    .totalItems = ARRAY_COUNT(sRegisterForTradeListMenuItems),
     .maxShowed = 3,
     .windowId = 0,
     .header_X = 0,
@@ -872,7 +878,7 @@ static const struct ListMenuItem sTradingBoardTypes[NUMBER_OF_MON_TYPES] = {
     { sText_Exit,                NUMBER_OF_MON_TYPES }
 };
 
-const struct ListMenuTemplate sMenuTemplate_TradingBoardRequestType = {
+static const struct ListMenuTemplate sMenuTemplate_TradingBoardRequestType = {
     .items = sTradingBoardTypes,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .itemPrintFunc = NULL,
@@ -893,7 +899,7 @@ const struct ListMenuTemplate sMenuTemplate_TradingBoardRequestType = {
     .cursorKind = 0
 };
 
-const struct WindowTemplate gUnknown_082F0344 = {
+static const struct WindowTemplate sWindowTemplate_TradingBoard = {
     .bg = 0x00,
     .tilemapLeft = 0x01,
     .tilemapTop = 0x01,

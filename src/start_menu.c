@@ -525,7 +525,7 @@ void Task_ShowStartMenu(u8 taskId)
     {
     case 0:
         if (InUnionRoom() == TRUE)
-            var_800D_set_xB();
+            SetUsingUnionRoomStartMenu();
 
         gMenuCallback = HandleStartMenuInput;
         task->data[0]++;

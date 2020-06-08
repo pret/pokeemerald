@@ -953,7 +953,7 @@ void UpdateWirelessStatusIndicatorSprite(void)
         gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
         gMain.oamBuffer[125].tileNum = sprite->sTileStart + sprite->anims[sprite->sCurrAnimNum][sprite->sFrameIdx].frame.imageValue;
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
-        if (RfuGetErrorStatus() == 1)
+        if (RfuGetStatus() == RFU_STATUS_FATAL_ERROR)
         {
             DestroyWirelessStatusIndicatorSprite();
         }

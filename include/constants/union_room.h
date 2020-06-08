@@ -44,7 +44,7 @@
 #define ACTIVITY_BATTLE_TOWER       28
 #define ACTIVITY_29                 29
 
-#define IN_UNION_ROOM   0x40
+#define IN_UNION_ROOM               (1 << 6)
 
 // Used in UR_AddTextPrinterParameterized
 #define UR_COLOR_DKE_WHT_LTE 0
@@ -82,5 +82,21 @@
 #define UR_TRADE_MATCH  0
 #define UR_TRADE_NOTYPE 1
 #define UR_TRADE_NOEGG  2
+
+#define UR_TRADE_READY             0
+#define UR_TRADE_PLAYER_NOT_READY  1
+#define UR_TRADE_PARTNER_NOT_READY 2
+
+#define UR_INTERACT_PLAYER_1   1
+#define UR_INTERACT_PLAYER_2   2
+#define UR_INTERACT_PLAYER_3   3
+#define UR_INTERACT_PLAYER_4   4
+#define UR_INTERACT_PLAYER_5   5
+#define UR_INTERACT_PLAYER_6   6
+#define UR_INTERACT_PLAYER_7   7
+#define UR_INTERACT_PLAYER_8   8
+#define UR_INTERACT_ATTENDANT  9
+#define UR_INTERACT_UNUSED     10
+#define UR_INTERACT_START_MENU 11
 
 #endif //GUARD_CONSTANTS_UNION_ROOM_H
