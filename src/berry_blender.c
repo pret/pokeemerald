@@ -1246,7 +1246,7 @@ static void sub_8080018(void)
         if (++sBerryBlenderData->framesToWait > 20)
         {
             ClearDialogWindowAndFrameToTransparent(4, TRUE);
-            if (GetBlockReceivedStatus() == sub_800A9D8())
+            if (GetBlockReceivedStatus() == GetLinkPlayerCountAsBitFlags())
             {
                 for (i = 0; i < GetLinkPlayerCount(); i++)
                 {
@@ -1664,7 +1664,7 @@ static void sub_80808D4(void)
 static void sub_8080DF8(void)
 {
     s32 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CMD_LENGTH / 2; i++)
     {
         gSendCmd[0] = 0;
         gSendCmd[2] = 0;

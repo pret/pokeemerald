@@ -215,7 +215,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
     case 2:
         if (WaitForWeatherFadeIn() == TRUE)
         {
-            sub_8009F18();
+            StartSendingKeysToLink();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -240,7 +240,7 @@ void Task_ReturnToFieldRecordMixing(u8 taskId)
         }
         break;
     case 2:
-        sub_8009F18();
+        StartSendingKeysToLink();
         ResetAllMultiplayerState();
         ScriptContext2_Disable();
         DestroyTask(taskId);

@@ -283,7 +283,7 @@ static void Task_LinkupAwaitConfirmation(u8 taskId)
     if (linkPlayerCount < tMinPlayers)
         return;
 
-    sub_800AA04(linkPlayerCount);
+    SaveLinkPlayers(linkPlayerCount);
     ClearLinkPlayerCountWindow(tWindowId);
     ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
     ShowFieldAutoScrollMessage(gText_ConfirmStartLinkWithXPlayers);
@@ -372,7 +372,7 @@ static void Task_LinkupExchangeDataWithLeader(u8 taskId)
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gLocalLinkPlayerId = GetMultiplayerId();
-        sub_800AA04(gFieldLinkPlayerCount);
+        SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
@@ -420,7 +420,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gLocalLinkPlayerId = GetMultiplayerId();
-        sub_800AA04(gFieldLinkPlayerCount);
+        SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
@@ -516,7 +516,7 @@ static void Task_LinkupAwaitTrainerCardData(u8 taskId)
     if (CheckLinkErrored(taskId) == TRUE)
         return;
 
-    if (GetBlockReceivedStatus() != sub_800A9A8())
+    if (GetBlockReceivedStatus() != GetSavedLinkPlayerCountAsBitFlags())
         return;
 
     for (index = 0; index < GetLinkPlayerCount(); index++)
@@ -800,8 +800,8 @@ static void Task_ReestablishLinkAwaitConfirmation(u8 taskId)
     if (gReceivedRemoteLinkPlayers == TRUE
      && IsLinkPlayerDataExchangeComplete() == TRUE)
     {
-        sub_800AB18();
-        sub_8009F18();
+        CheckLinkPlayersMatchSaved();
+        StartSendingKeysToLink();
         DestroyTask(taskId);
     }
 }
@@ -901,7 +901,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
         tState = 3;
         break;
     case 3:
-        if (GetBlockReceivedStatus() == sub_800A9D8())
+        if (GetBlockReceivedStatus() == GetLinkPlayerCountAsBitFlags())
         {
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
@@ -1236,7 +1236,7 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
         // Players connected, destroy task
         if (gWirelessCommType == 0)
         {
-            if (!sub_800AA60())
+            if (!DoesLinkPlayerCountMatchSaved())
             {
                 CloseLink();
                 SetMainCallback2(CB2_LinkError);

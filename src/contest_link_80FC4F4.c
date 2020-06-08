@@ -36,7 +36,7 @@ bool8 sub_80FC530(u8 arg0)
 
 bool8 sub_80FC55C(void)
 {
-    if (GetBlockReceivedStatus() == sub_800A9D8())
+    if (GetBlockReceivedStatus() == GetLinkPlayerCountAsBitFlags())
     {
         ResetBlockReceivedFlags();
         return TRUE;

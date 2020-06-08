@@ -7,9 +7,20 @@
 #include "text.h"
 #include "event_data.h"
 
+enum {
+    WIRELESS_STATUS_ANIM_3_BARS,
+    WIRELESS_STATUS_ANIM_2_BARS,
+    WIRELESS_STATUS_ANIM_1_BAR,
+    WIRELESS_STATUS_ANIM_SEARCHING,
+    WIRELESS_STATUS_ANIM_ERROR,
+};
+
+#define UNUSED_QUEUE_NUM_SLOTS 2
+#define UNUSED_QUEUE_SLOT_LENGTH 256
+
 struct RfuUnusedQueue
 {
-    u8 slots[2][256];
+    u8 slots[UNUSED_QUEUE_NUM_SLOTS][UNUSED_QUEUE_SLOT_LENGTH];
     vu8 recvSlot;
     vu8 sendSlot;
     vu8 count;
@@ -234,8 +245,7 @@ static const struct OamData sWirelessStatusIndicatorOamData =
     .paletteNum = 0,
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
-    // 3 bars
+static const union AnimCmd sWirelessStatusIndicator_3Bars[] = {
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
     ANIMCMD_FRAME(12,  5),
@@ -245,8 +255,7 @@ static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
-    // 2 bars
+static const union AnimCmd sWirelessStatusIndicator_2Bars[] = {
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
     ANIMCMD_FRAME(12, 10),
@@ -254,33 +263,30 @@ static const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim2[] = {
-    // 1 bar
+static const union AnimCmd sWirelessStatusIndicator_1Bar[] = {
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim3[] = {
-    // searching
+static const union AnimCmd sWirelessStatusIndicator_Searching[] = {
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_FRAME(20, 10),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd sWirelessStatusIndicatorAnim4[] = {
-    // error
+static const union AnimCmd sWirelessStatusIndicator_Error[] = {
     ANIMCMD_FRAME(24, 10),
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_JUMP(0)
 };
 
 static const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
-    sWirelessStatusIndicatorAnim0,
-    sWirelessStatusIndicatorAnim1,
-    sWirelessStatusIndicatorAnim2,
-    sWirelessStatusIndicatorAnim3,
-    sWirelessStatusIndicatorAnim4
+    [WIRELESS_STATUS_ANIM_3_BARS]    = sWirelessStatusIndicator_3Bars,
+    [WIRELESS_STATUS_ANIM_2_BARS]    = sWirelessStatusIndicator_2Bars,
+    [WIRELESS_STATUS_ANIM_1_BAR]     = sWirelessStatusIndicator_1Bar,
+    [WIRELESS_STATUS_ANIM_SEARCHING] = sWirelessStatusIndicator_Searching,
+    [WIRELESS_STATUS_ANIM_ERROR]     = sWirelessStatusIndicator_Error
 };
 
 static const struct CompressedSpriteSheet sWirelessStatusIndicatorSpriteSheet = {
@@ -292,13 +298,13 @@ static const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
 };
 
 static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
-    0xD431,
-    0xD432,
-    &sWirelessStatusIndicatorOamData,
-    sWirelessStatusIndicatorAnims,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
+    .tileTag = 0xD431,
+    .paletteTag = 0xD432,
+    .oam = &sWirelessStatusIndicatorOamData,
+    .anims = sWirelessStatusIndicatorAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
@@ -306,9 +312,9 @@ void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
     s32 i;
     s32 j;
 
-    for (i = 0; i < 32; i++)
+    for (i = 0; i < RECV_QUEUE_NUM_SLOTS; i++)
     {
-        for (j = 0; j < 70; j++)
+        for (j = 0; j < RECV_QUEUE_SLOT_LENGTH; j++)
         {
             queue->slots[i][j] = 0;
         }
@@ -324,9 +330,9 @@ void RfuSendQueue_Reset(struct RfuSendQueue *queue)
     s32 i;
     s32 j;
 
-    for (i = 0; i < 40; i++)
+    for (i = 0; i < SEND_QUEUE_NUM_SLOTS; i++)
     {
-        for (j = 0; j < 14; j++)
+        for (j = 0; j < SEND_QUEUE_SLOT_LENGTH; j++)
         {
             queue->slots[i][j] = 0;
         }
@@ -342,9 +348,9 @@ static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
     s32 i;
     s32 j;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < UNUSED_QUEUE_NUM_SLOTS; i++)
     {
-        for (j = 0; j < 256; j++)
+        for (j = 0; j < UNUSED_QUEUE_SLOT_LENGTH; j++)
         {
             queue->slots[i][j] = 0;
         }
@@ -361,31 +367,27 @@ void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data)
     u16 imeBak;
     u8 count;
 
-    if (queue->count < 32)
+    if (queue->count < RECV_QUEUE_NUM_SLOTS)
     {
         imeBak = REG_IME;
         REG_IME = 0;
         count = 0;
-        for (i = 0; i < 70; i += 14)
+        for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i += RECV_QUEUE_SLOT_LENGTH / MAX_RFU_PLAYERS)
         {
             if (data[i] == 0 && data[i + 1] == 0)
-            {
                 count++;
-            }
         }
-        if (count != 5)
+        if (count != MAX_RFU_PLAYERS)
         {
-            for (i = 0; i < 70; i++)
-            {
+            for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
                 queue->slots[queue->recvSlot][i] = data[i];
-            }
+
             queue->recvSlot++;
-            queue->recvSlot %= 32;
+            queue->recvSlot %= RECV_QUEUE_NUM_SLOTS;
             queue->count++;
-            for (i = 0; i < 70; i++)
-            {
+
+            for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
                 data[i] = 0;
-            }
         }
         REG_IME = imeBak;
     }
@@ -400,30 +402,27 @@ void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *data)
     s32 i;
     u16 imeBak;
 
-    if (queue->count < 40)
+    if (queue->count < SEND_QUEUE_NUM_SLOTS)
     {
         imeBak = REG_IME;
         REG_IME = 0;
-        for (i = 0; i < 14; i++)
+        for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
         {
             if (data[i] != 0)
-            {
                 break;
-            }
         }
-        if (i != 14)
+        if (i != SEND_QUEUE_SLOT_LENGTH)
         {
-            for (i = 0; i < 14; i++)
+            for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
             {
                 queue->slots[queue->recvSlot][i] = data[i];
             }
             queue->recvSlot++;
-            queue->recvSlot %= 40;
+            queue->recvSlot %= SEND_QUEUE_NUM_SLOTS;
             queue->count++;
-            for (i = 0; i < 14; i++)
-            {
+
+            for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
                 data[i] = 0;
-            }
         }
         REG_IME = imeBak;
     }
@@ -442,19 +441,18 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *src)
     REG_IME = 0;
     if (queue->recvSlot == queue->sendSlot || queue->full)
     {
-        for (i = 0; i < 70; i++)
-        {
+        for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
             src[i] = 0;
-        }
+
         REG_IME = imeBak;
         return FALSE;
     }
-    for (i = 0; i < 70; i++)
+    for (i = 0; i < RECV_QUEUE_SLOT_LENGTH; i++)
     {
         src[i] = queue->slots[queue->sendSlot][i];
     }
     queue->sendSlot++;
-    queue->sendSlot %= 32;
+    queue->sendSlot %= RECV_QUEUE_NUM_SLOTS;
     queue->count--;
     REG_IME = imeBak;
     return TRUE;
@@ -470,12 +468,11 @@ bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *src)
 
     imeBak = REG_IME;
     REG_IME = 0;
-    for (i = 0; i < 14; i++)
-    {
+    for (i = 0; i < SEND_QUEUE_SLOT_LENGTH; i++)
         src[i] = queue->slots[queue->sendSlot][i];
-    }
+
     queue->sendSlot++;
-    queue->sendSlot %= 40;
+    queue->sendSlot %= SEND_QUEUE_NUM_SLOTS;
     queue->count--;
     REG_IME = imeBak;
     return TRUE;
@@ -491,20 +488,16 @@ void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *data)
     }
     else
     {
-        for (i = 0; i < 14; i++)
-        {
+        for (i = 0; i < BACKUP_QUEUE_SLOT_LENGTH; i++)
             queue->slots[queue->recvSlot][i] = data[i];
-        }
+
         queue->recvSlot++;
-        queue->recvSlot %= 2;
-        if (queue->count < 2)
-        {
+        queue->recvSlot %= BACKUP_QUEUE_NUM_SLOTS;
+
+        if (queue->count < BACKUP_QUEUE_NUM_SLOTS)
             queue->count++;
-        }
         else
-        {
             queue->sendSlot = queue->recvSlot;
-        }
     }
 }
 
@@ -517,13 +510,11 @@ bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *src)
 
     if (src != NULL)
     {
-        for (i = 0; i < 14; i++)
-        {
+        for (i = 0; i < BACKUP_QUEUE_SLOT_LENGTH; i++)
             src[i] = queue->slots[queue->sendSlot][i];
-        }
     }
     queue->sendSlot++;
-    queue->sendSlot %= 2;
+    queue->sendSlot %= BACKUP_QUEUE_NUM_SLOTS;
     queue->count--;
     return TRUE;
 }
@@ -532,14 +523,13 @@ static void RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *data)
 {
     s32 i;
 
-    if (queue->count < 2)
+    if (queue->count < UNUSED_QUEUE_NUM_SLOTS)
     {
-        for (i = 0; i < 256; i++)
-        {
+        for (i = 0; i < UNUSED_QUEUE_SLOT_LENGTH; i++)
             queue->slots[queue->recvSlot][i] = data[i];
-        }
+
         queue->recvSlot++;
-        queue->recvSlot %= 2;
+        queue->recvSlot %= UNUSED_QUEUE_NUM_SLOTS;
         queue->count++;
     }
     else
@@ -555,17 +545,17 @@ static bool8 RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u8 *dest)
     if (queue->recvSlot == queue->sendSlot || queue->full)
         return FALSE;
 
-    for (i = 0; i < 256; i++)
-    {
+    for (i = 0; i < UNUSED_QUEUE_SLOT_LENGTH; i++)
         dest[i] = queue->slots[queue->sendSlot][i];
-    }
+
     queue->sendSlot++;
-    queue->sendSlot %= 2;
+    queue->sendSlot %= UNUSED_QUEUE_NUM_SLOTS;
     queue->count--;
     return TRUE;
 }
 
-void sub_800DBF8(u8 *q1, u8 mode)
+// Unused
+static void sub_800DBF8(u8 *q1, u8 mode)
 {
     s32 i;
     u8 rval;
@@ -797,7 +787,7 @@ bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal = FALSE;
-    if (gRfuLinkStatus->partner[idx].serialNo == 0x7F7D)
+    if (gRfuLinkStatus->partner[idx].serialNo == RFU_SERIAL_7F7D)
     {
         memcpy(buff1, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
         memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
@@ -817,6 +807,15 @@ void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2
     memcpy(buff2, gHostRFUtgtUnameBuffer, PLAYER_NAME_LENGTH + 1);
 }
 
+#define sNextAnimNum  data[0]
+#define sSavedAnimNum data[1]
+#define sCurrAnimNum  data[2]
+#define sFrameDelay   data[3]
+#define sFrameIdx     data[4]
+#define sTileStart    data[6]
+#define sValidator    data[7]
+#define STATUS_INDICATOR_ACTIVE 0x1234 // Used to validate active indicator
+
 void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
 {
     u8 sprId;
@@ -829,25 +828,25 @@ void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
         sprId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
-        gSprites[sprId].data[7] = 0x1234;
-        gSprites[sprId].data[6] = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[sprId].sValidator = STATUS_INDICATOR_ACTIVE;
+        gSprites[sprId].sTileStart = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
         gSprites[sprId].invisible = TRUE;
         gWirelessStatusIndicatorSpriteId = sprId;
     }
     else
     {
         gWirelessStatusIndicatorSpriteId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
-        gSprites[gWirelessStatusIndicatorSpriteId].data[7] = 0x1234;
-        gSprites[gWirelessStatusIndicatorSpriteId].data[6] = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[gWirelessStatusIndicatorSpriteId].sValidator = STATUS_INDICATOR_ACTIVE;
+        gSprites[gWirelessStatusIndicatorSpriteId].sTileStart = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
         gSprites[gWirelessStatusIndicatorSpriteId].invisible = TRUE;
     }
 }
 
 void DestroyWirelessStatusIndicatorSprite(void)
 {
-    if (gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
+    if (gSprites[gWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
     {
-        gSprites[gWirelessStatusIndicatorSpriteId].data[7] = 0;
+        gSprites[gWirelessStatusIndicatorSpriteId].sValidator = 0;
         DestroySprite(&gSprites[gWirelessStatusIndicatorSpriteId]);
         gMain.oamBuffer[125] = gDummyOamData;
         CpuCopy16(&gDummyOamData, (struct OamData *)OAM + 125, sizeof(struct OamData));
@@ -879,19 +878,19 @@ static u8 GetParentSignalStrength(void)
     return 0;
 }
 
-static void SetWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 signalStrengthAnimNum)
+static void SetWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 animNum)
 {
-    if (sprite->data[2] != signalStrengthAnimNum)
+    if (sprite->sCurrAnimNum != animNum)
     {
-        sprite->data[2] = signalStrengthAnimNum;
-        sprite->data[3] = 0;
-        sprite->data[4] = 0;
+        sprite->sCurrAnimNum = animNum;
+        sprite->sFrameDelay = 0;
+        sprite->sFrameIdx = 0;
     }
 }
 
 void UpdateWirelessStatusIndicatorSprite(void)
 {
-    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
+    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].sValidator == STATUS_INDICATOR_ACTIVE)
     {
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
         u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
@@ -912,47 +911,47 @@ void UpdateWirelessStatusIndicatorSprite(void)
         }
         if (IsRfuRecoveringFromLinkLoss() == TRUE)
         {
-            sprite->data[0] = 4;
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_ERROR;
         }
         else if (signalStrength <= RFU_LINK_ICON_LEVEL1_MAX)
         {
-            sprite->data[0] = 3;
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_SEARCHING;
         }
         else if (signalStrength >= RFU_LINK_ICON_LEVEL2_MIN && signalStrength <= RFU_LINK_ICON_LEVEL2_MAX)
         {
-            sprite->data[0] = 2;
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_1_BAR;
         }
         else if (signalStrength >= RFU_LINK_ICON_LEVEL3_MIN && signalStrength <= RFU_LINK_ICON_LEVEL3_MAX)
         {
-            sprite->data[0] = 1;
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_2_BARS;
         }
         else if (signalStrength >= RFU_LINK_ICON_LEVEL4_MIN)
         {
-            sprite->data[0] = 0;
+            sprite->sNextAnimNum = WIRELESS_STATUS_ANIM_3_BARS;
         }
-        if (sprite->data[0] != sprite->data[1])
+        if (sprite->sNextAnimNum != sprite->sSavedAnimNum)
         {
-            SetWirelessStatusIndicatorAnim(sprite, sprite->data[0]);
-            sprite->data[1] = sprite->data[0];
+            SetWirelessStatusIndicatorAnim(sprite, sprite->sNextAnimNum);
+            sprite->sSavedAnimNum = sprite->sNextAnimNum;
         }
-        if (sprite->anims[sprite->data[2]][sprite->data[4]].frame.duration < sprite->data[3])
+        if (sprite->anims[sprite->sCurrAnimNum][sprite->sFrameIdx].frame.duration < sprite->sFrameDelay)
         {
-            sprite->data[4]++;
-            sprite->data[3] = 0;
-            if (sprite->anims[sprite->data[2]][sprite->data[4]].type == -2)
+            sprite->sFrameIdx++;
+            sprite->sFrameDelay = 0;
+            if (sprite->anims[sprite->sCurrAnimNum][sprite->sFrameIdx].type == -2)
             {
-                sprite->data[4] = 0;
+                sprite->sFrameIdx = 0;
             }
         }
         else
         {
-            sprite->data[3]++;
+            sprite->sFrameDelay++;
         }
         gMain.oamBuffer[125] = sWirelessStatusIndicatorOamData;
         gMain.oamBuffer[125].x = sprite->pos1.x + sprite->centerToCornerVecX;
         gMain.oamBuffer[125].y = sprite->pos1.y + sprite->centerToCornerVecY;
         gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
-        gMain.oamBuffer[125].tileNum = sprite->data[6] + sprite->anims[sprite->data[2]][sprite->data[4]].frame.imageValue;
+        gMain.oamBuffer[125].tileNum = sprite->sTileStart + sprite->anims[sprite->sCurrAnimNum][sprite->sFrameIdx].frame.imageValue;
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
         if (RfuGetErrorStatus() == 1)
         {
@@ -960,6 +959,14 @@ void UpdateWirelessStatusIndicatorSprite(void)
         }
     }
 }
+
+#undef sNextAnimNum
+#undef sSavedAnimNum
+#undef sCurrAnimNum
+#undef sFrameDelay
+#undef sFrameIdx
+#undef sTileStart
+#undef sValidator
 
 static void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
 {
@@ -988,7 +995,7 @@ void RecordMixTrainerNames(void)
         s32 j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[5];
-        struct TrainerNameRecord *newRecords = calloc(20, sizeof(struct TrainerNameRecord));
+        struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));
 
         // Check if we already have a record saved for connected trainers.
         for (i = 0; i < GetLinkPlayerCount(); i++)

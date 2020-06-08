@@ -1361,7 +1361,7 @@ static void Task_ExchangeCards(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        if (GetBlockReceivedStatus() == sub_800A9D8())
+        if (GetBlockReceivedStatus() == GetLinkPlayerCountAsBitFlags())
         {
             s32 i;
             u16 *recvBuff;

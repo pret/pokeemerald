@@ -231,7 +231,7 @@ static void PrepareExchangePacket(void)
 
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
-        if (sub_800A03C() == 0)
+        if (LinkDummy_Return2() == 0)
             PrepareUnknownExchangePacket(&sSentRecord->ruby);
         else
             PrepareExchangePacketForRubySapphire(&sSentRecord->ruby);
@@ -526,7 +526,7 @@ static void Task_CopyReceiveBuffer(u8 taskId)
     u8 status = GetBlockReceivedStatus();
     u8 handledPlayers = 0;
 
-    if (status == sub_800A9D8())
+    if (status == GetLinkPlayerCountAsBitFlags())
     {
         u8 i;
 

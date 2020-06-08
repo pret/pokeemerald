@@ -18,6 +18,17 @@
 #define RFU_COMMAND_0xEE00 0xEE00
 #define RFU_COMMAND_0xED00 0xED00
 
+#define RFU_SERIAL_7F7D 0x7F7D
+
+#define RECV_QUEUE_NUM_SLOTS 32
+#define RECV_QUEUE_SLOT_LENGTH (14 * MAX_RFU_PLAYERS)
+
+#define SEND_QUEUE_NUM_SLOTS 40
+#define SEND_QUEUE_SLOT_LENGTH 14
+
+#define BACKUP_QUEUE_NUM_SLOTS 2
+#define BACKUP_QUEUE_SLOT_LENGTH 14
+
 // RfuTgtData.gname is read as these structs.
 struct GFtgtGnameSub
 {
@@ -48,35 +59,6 @@ struct __attribute__((packed, aligned(2))) GFtgtGname
     u8 padding;
 }; // size: RFU_GNAME_SIZE
 
-struct UnkLinkRfuStruct_02022B2C
-{
-    u8 unk_00;
-    u8 unk_01;
-    u16 unk_02;
-    u8 unk_04;
-    u16 unk_06;
-    struct GFtgtGname *unk_08;
-    u8 *unk_0c;
-    u8 unk_10;
-    u8 unk_11;
-    u16 unk_12;
-    u16 unk_14;
-};
-
-struct UnkLinkRfuStruct_02022B44
-{
-    u8 fill_00[6];
-    u16 unk_06;
-    u8 fill_08[6];
-    vu8 unk_0e;
-    u8 unk_0f;
-    u8 fill_10[0x54];
-    u16 unk_64;
-    u8 fill_66[0x1d];
-    u8 unk_83;
-    u8 fill_84[0x58];
-};
-
 struct RfuBlockSend
 {
     /* 0x00 */ u16 next;
@@ -91,7 +73,7 @@ struct RfuBlockSend
 
 struct RfuRecvQueue
 {
-    /* 0x000 */ u8 slots[32][70];
+    /* 0x000 */ u8 slots[RECV_QUEUE_NUM_SLOTS][RECV_QUEUE_SLOT_LENGTH];
     /* 0x8c0 */ vu8 recvSlot;
     /* 0x8c1 */ vu8 sendSlot;
     /* 0x8c2 */ vu8 count;
@@ -100,7 +82,7 @@ struct RfuRecvQueue
 
 struct RfuSendQueue
 {
-    /* 0x000 */ u8 slots[40][14];
+    /* 0x000 */ u8 slots[SEND_QUEUE_NUM_SLOTS][SEND_QUEUE_SLOT_LENGTH];
     /* 0x230 */ vu8 recvSlot;
     /* 0x231 */ vu8 sendSlot;
     /* 0x232 */ vu8 count;
@@ -109,7 +91,7 @@ struct RfuSendQueue
 
 struct RfuBackupQueue
 {
-    /* 0x00 */ u8 slots[2][14];
+    /* 0x00 */ u8 slots[BACKUP_QUEUE_NUM_SLOTS][BACKUP_QUEUE_SLOT_LENGTH];
     /* 0x1c */ vu8 recvSlot;
     /* 0x1d */ vu8 sendSlot;
     /* 0x1e */ vu8 count;
@@ -123,11 +105,11 @@ struct GFRfuManager
     /* 0x00a */ u16 linkmanMsg;
     /* 0x00c */ u8 parentChild;
     /* 0x00d */ u8 playerCount;
-    /* 0x00e */ u8 unk_0e;
+    /* 0x00e */ bool8 unk_0e;
     /* 0x00f */ u8 unk_0f;
     /* 0x010 */ u16 unk_10;
     /* 0x012 */ u16 unk_12;
-    /* 0x014 */ u8 unk_14[4][14];
+    /* 0x014 */ u8 unk_14[RFU_CHILD_MAX][14];
     /* 0x04c */ u8 unk_4c[14];
     /* 0x05a */ u8 unk_5a;
     /* 0x05b */ u8 unk_5b;
@@ -136,8 +118,8 @@ struct GFRfuManager
     /* 0x066 */ u8 idleTaskId;
     /* 0x067 */ u8 searchTaskId;
     /* 0x068 */ u8 filler_68[4];
-    /* 0x06c */ struct RfuBlockSend unk_6c;
-    /* 0x080 */ struct RfuBlockSend unk_80[MAX_RFU_PLAYERS];
+    /* 0x06c */ struct RfuBlockSend sendBlock;
+    /* 0x080 */ struct RfuBlockSend recvBlock[MAX_RFU_PLAYERS];
     /* 0x0e4 */ u8 unk_e4[5];
     /* 0x0e9 */ u8 unk_e9[5];
     /* 0x0ee */ vu8 errorState;
@@ -170,8 +152,8 @@ struct GFRfuManager
     /* 0xcd5 */ u8 unk_cd5[4];
     /* 0xcd9 */ u8 unk_cd9;
     /* 0xcda */ u8 unk_cda;
-    /* 0xcdb */ vu8 unk_cdb;
-    /* 0xcdc */ vu8 unk_cdc;
+    /* 0xcdb */ vbool8 unk_cdb;
+    /* 0xcdc */ vbool8 unk_cdc;
     /* 0xcdd */ u8 unk_cdd;
     /* 0xcde */ u8 linkPlayerIdx[RFU_CHILD_MAX];
     /* 0xce2 */ u8 unk_ce2;
@@ -195,7 +177,7 @@ extern u8 gWirelessStatusIndicatorSpriteId;
 
 // Exported ROM declarations
 void WipeTrainerNameRecords(void);
-void sub_800E700(void);
+void InitRFUAPI(void);
 void LinkRfu_Shutdown(void);
 void Rfu_SetBlockReceivedFlag(u8 who);
 void Rfu_ResetBlockReceivedFlag(u8 who);
@@ -264,7 +246,6 @@ bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *buff1, u8 *buff2, u8 idx);
 s32 sub_800E87C(u8 idx);
 void CreateTask_RfuIdle(void);
 void DestroyTask_RfuIdle(void);
-void sub_8010198(void);
 void sub_8011AC8(void);
 void LinkRfu_FatalError(void);
 bool32 sub_8011A9C(void);
@@ -273,7 +254,6 @@ void sub_8011A50(void);
 void sub_80110B8(u32 a0);
 bool32 IsRfuSerialNumberValid(u32 serialNo);
 bool8 IsRfuRecoveringFromLinkLoss(void);
-void sub_8011BA4(void);
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue);
 void RfuSendQueue_Reset(struct RfuSendQueue *queue);
 void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data);
@@ -282,13 +262,9 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *dest);
 bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *dest);
 void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *q2);
 bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *q2);
-void sub_800DBF8(u8 *q1, u8 mode);
-u8 sub_800DD1C(u8 maxFlags);
-void InitHostRFUtgtGname(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3);
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders);
 void CreateWirelessStatusIndicatorSprite(u8 x, u8 y);
 void DestroyWirelessStatusIndicatorSprite(void);
 void LoadWirelessStatusIndicatorSpriteGfx(void);
-u8 sub_800E124(void);
-void sub_800E15C(struct Sprite *sprite, s32 signalStrengthAnimNum);
 
 #endif //GUARD_LINK_RFU_H

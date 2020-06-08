@@ -1237,7 +1237,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 
             if (gWirelessCommType != 0 && InUnionRoom())
             {
-                if (sub_800A07C())
+                if (Link_AnyPartnersPlayingFRLG_JP())
                 {
                     *state = 1;
                 }
