@@ -1453,7 +1453,9 @@ static void Task_SpinPokenavIcon(u8 taskId)
 
 static bool32 TrainerIsEligibleForRematch(int matchCallId)
 {
+    #ifndef FREE_MATCH_CALL
     return gSaveBlock1Ptr->trainerRematches[matchCallId] > 0;
+    #endif
 }
 
 static u16 GetRematchTrainerLocation(int matchCallId)

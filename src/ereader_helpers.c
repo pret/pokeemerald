@@ -392,7 +392,9 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
 
 static u8 sub_81D38D4(void)
 {
+    #ifndef FREE_TRAINER_HILL
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
+    #endif
 }
 
 static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(struct EReaderTrainerHillTrainer *arg0)

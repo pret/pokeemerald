@@ -835,7 +835,11 @@ static bool8 ShouldUseItem(void)
             continue;
 
         if (item == ITEM_ENIGMA_BERRY)
+            #ifndef FREE_ENIGMA_BERRY
             itemEffects = gSaveBlock1Ptr->enigmaBerry.itemEffect;
+            #else
+            itemEffects = 0;
+            #endif
         else
             itemEffects = gItemEffectTable[item - ITEM_POTION];
 

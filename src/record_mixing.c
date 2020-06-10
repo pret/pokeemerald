@@ -1167,6 +1167,7 @@ static void ReceiveApprenticeData(struct Apprentice *mixApprentice, size_t recor
 
 static void sub_80E8578(struct RecordMixingHallRecords *dst, void *hallRecords, size_t recordSize, u32 arg3, s32 linkPlayerCount)
 {
+    #ifndef FREE_RECORD_MIXING_HALL_RECORDS
     s32 i, j, k, l;
     s32 var_68;
 
@@ -1232,6 +1233,7 @@ static void sub_80E8578(struct RecordMixingHallRecords *dst, void *hallRecords, 
                 dst->hallRecords2P[j][k + 3] = gUnknown_03001168[k]->twoPlayers[j];
         }
     }
+    #endif
 }
 
 static void sub_80E8880(struct RankingHall1P *arg0, struct RankingHall1P *arg1)
@@ -1286,6 +1288,7 @@ static void sub_80E88CC(struct RankingHall2P *arg0, struct RankingHall2P *arg1)
 
 static void sub_80E8924(struct RecordMixingHallRecords *arg0)
 {
+    #ifndef FREE_RECORD_MIXING_HALL_RECORDS
     s32 i, j;
 
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
@@ -1295,10 +1298,12 @@ static void sub_80E8924(struct RecordMixingHallRecords *arg0)
     }
     for (j = 0; j < 2; j++)
         sub_80E88CC(gSaveBlock2Ptr->hallRecords2P[j], arg0->hallRecords2P[j]);
+    #endif
 }
 
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t recordSize, u32 arg2)
 {
+    #ifndef FREE_RECORD_MIXING_HALL_RECORDS
     u8 linkPlayerCount = GetLinkPlayerCount();
     struct RecordMixingHallRecords *largeStructPtr = AllocZeroed(sizeof(struct RecordMixingHallRecords));
 
@@ -1306,6 +1311,7 @@ static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, siz
     sub_80E8924(largeStructPtr);
 
     Free(largeStructPtr);
+    #endif
 }
 
 static void sub_80E89F8(struct RecordMixingDayCareMail *dst)

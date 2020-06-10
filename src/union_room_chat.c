@@ -904,8 +904,10 @@ static void InitUnionRoomChat(struct UnionRoomChat *chat)
     chat->exitType = 0;
     chat->changedRegisteredTexts = FALSE;
     PrepareSendBuffer_Null(chat->sendMessageBuffer);
+    #ifndef FREE_UNION_ROOM_CHAT
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
-        StringCopy(chat->registeredTexts[i], gSaveBlock1Ptr->registeredTexts[i]);
+        StringCopy(unionRoomChat->registeredTexts[i], gSaveBlock1Ptr->registeredTexts[i]);
+    #endif
 }
 
 static void FreeUnionRoomChat(void)
@@ -1737,9 +1739,11 @@ static void ResetMessageEntryBuffer(void)
 
 static void SaveRegisteredTexts(void)
 {
+    #ifndef FREE_UNION_ROOM_CHAT
     int i;
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
         StringCopy(gSaveBlock1Ptr->registeredTexts[i], sChat->registeredTexts[i]);
+    #endif
 }
 
 static u8 *GetRegisteredTextByRow(int row)
@@ -1983,6 +1987,7 @@ static u8 *GetChatHostName(void)
 
 void InitUnionRoomChatRegisteredTexts(void)
 {
+    #ifndef FREE_UNION_ROOM_CHAT
     StringCopy(gSaveBlock1Ptr->registeredTexts[0], gText_Hello);
     StringCopy(gSaveBlock1Ptr->registeredTexts[1], gText_Pokemon2);
     StringCopy(gSaveBlock1Ptr->registeredTexts[2], gText_Trade);
@@ -1993,6 +1998,7 @@ void InitUnionRoomChatRegisteredTexts(void)
     StringCopy(gSaveBlock1Ptr->registeredTexts[7], gText_YaySmileEmoji);
     StringCopy(gSaveBlock1Ptr->registeredTexts[8], gText_ThankYou);
     StringCopy(gSaveBlock1Ptr->registeredTexts[9], gText_ByeBye);
+    #endif
 }
 
 #define tState               data[0]

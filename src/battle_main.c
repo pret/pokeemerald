@@ -746,6 +746,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
     if (IsEnigmaBerryValid() == TRUE)
     {
+        #ifndef FREE_ENIGMA_BERRY
         for (i = 0; i < BERRY_NAME_LENGTH; i++)
             battleBerry->name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
         battleBerry->name[i] = EOS;
@@ -755,6 +756,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
         battleBerry->holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
         battleBerry->holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
+        #endif
     }
     else
     {
@@ -781,6 +783,7 @@ static void SetAllPlayersBerryData(void)
     {
         if (IsEnigmaBerryValid() == TRUE)
         {
+            #ifndef FREE_ENIGMA_BERRY
             for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
                 gEnigmaBerries[0].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
@@ -799,6 +802,7 @@ static void SetAllPlayersBerryData(void)
             gEnigmaBerries[2].holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
             gEnigmaBerries[0].holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
             gEnigmaBerries[2].holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
+            #endif
         }
         else
         {
