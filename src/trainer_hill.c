@@ -904,7 +904,7 @@ const u8 *GetTrainerHillTrainerScript(void)
 static void ShowTrainerHillPostBattleText(void)
 {
     CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_AFTER, gSpecialVar_LastTalked);
-    sub_80982B8();
+    ShowFieldMessageFromBuffer();
 }
 
 static void CreateNPCTrainerHillParty(u16 trainerId, u8 firstMonId)
