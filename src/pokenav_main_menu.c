@@ -342,18 +342,18 @@ static u32 LoopedTask_InitPokenavMenu(s32 a0)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gPokenavMainMenuBgTemplates, ARRAY_COUNT(gPokenavMainMenuBgTemplates));
         ResetBgPositions();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         return LT_INC_AND_CONTINUE;
     case 1:
         structPtr = GetSubstructPtr(0);
-        decompress_and_copy_tile_data_to_vram(0, &gPokenavHeader_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(0, &gPokenavHeader_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(0, structPtr->tilemapBuffer);
         CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
         CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, 0, 0x20);
         CopyBgTilemapBufferToVram(0);
         return LT_INC_AND_PAUSE;
     case 2:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
         InitHelpBar();

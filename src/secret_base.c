@@ -947,7 +947,7 @@ static void FinalizeRegistryMenu(u8 taskId)
     SetStandardWindowBorderStyle(data[6], 0);
     data[5] = ListMenuInit(&gMultiuseListMenuTemplate, data[2], data[1]);
     AddRegistryMenuScrollArrows(taskId);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void AddRegistryMenuScrollArrows(u8 taskId)
@@ -975,7 +975,7 @@ static void HandleRegistryMenuInput(u8 taskId)
         ClearStdWindowAndFrame(data[6], 0);
         ClearWindowTilemap(data[6]);
         RemoveWindow(data[6]);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         free(sRegistryMenu);
         GoToSecretBasePCRegisterMenu(taskId);
         break;
@@ -998,7 +998,7 @@ static void ShowRegistryMenuActions(u8 taskId)
     SetStandardWindowBorderStyle(data[7], 0);
     PrintMenuTable(data[7], 2, sRegistryMenuActions);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[7], 2, 0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = HandleRegistryMenuActionsInput;
 }
 
@@ -1028,7 +1028,7 @@ static void ShowRegistryMenuDeleteConfirmation(u8 taskId)
     ClearWindowTilemap(data[6]);
     ClearWindowTilemap(data[7]);
     RemoveWindow(data[7]);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     GetSecretBaseName(gStringVar1, data[4]);
     StringExpandPlaceholders(gStringVar4, gText_OkayToDeleteFromRegistry);
     DisplayItemMessageOnField(taskId, gStringVar4, ShowRegistryMenuDeleteYesNo);
@@ -1073,7 +1073,7 @@ static void ReturnToMainRegistryMenu(u8 taskId)
     ClearStdWindowAndFrame(data[7], 0);
     ClearWindowTilemap(data[7]);
     RemoveWindow(data[7]);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = HandleRegistryMenuInput;
 }
 

@@ -1828,7 +1828,7 @@ static bool8 sub_801F4D0(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_082F2C60, ARRAY_COUNT(gUnknown_082F2C60));
         InitWindows(gUnknown_082F2C70);
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         sub_8020770();
         sub_801F574(gUnknown_02022C88);
         sub_801F580();
@@ -1916,7 +1916,7 @@ static bool8 sub_801F644(u8 arg0)
 
 bool32 sub_801F658(u8 *state)
 {
-    if (free_temp_tile_data_buffers_if_possible() == TRUE)
+    if (FreeTempTileDataBuffersIfPossible() == TRUE)
         return TRUE;
 
     switch (*state)
@@ -2739,7 +2739,7 @@ static void sub_80205B4(void)
 {
     LoadPalette(gUnknown_08DD4BD0, 0x70, 0x20);
     LoadPalette(gUnknown_08DD4BB0, 0xC0, 0x20);
-    decompress_and_copy_tile_data_to_vram(1, gUnknown_08DD4BF0, 0, 0, 0);
+    DecompressAndCopyTileDataToVram(1, gUnknown_08DD4BF0, 0, 0, 0);
     CopyToBgTilemapBuffer(1, gUnknown_08DD4C4C, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
@@ -2749,7 +2749,7 @@ static void sub_8020604(void)
     u8 *ptr;
 
     LoadPalette(gLinkMiscMenu_Pal, 0, 0x20);
-    ptr = decompress_and_copy_tile_data_to_vram(2, gLinkMiscMenu_Gfx, 0, 0, 0);
+    ptr = DecompressAndCopyTileDataToVram(2, gLinkMiscMenu_Gfx, 0, 0, 0);
     if (ptr)
     {
         CpuFastCopy(&ptr[0x220], gUnknown_02022C88->unk2128, 0x20);

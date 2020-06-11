@@ -299,7 +299,7 @@ bool8 itemid_80BF6D8_mail_related(u16 itemId)
         return FALSE;
 }
 
-bool8 sub_81221AC(void)
+bool8 MenuHelpers_LinkSomething(void)
 {
     if (IsUpdateLinkStateCBActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
         return TRUE;
@@ -309,13 +309,13 @@ bool8 sub_81221AC(void)
 
 static bool8 sub_81221D0(void)
 {
-    if (!sub_81221AC())
+    if (!MenuHelpers_LinkSomething())
         return FALSE;
     else
         return sub_8087598();
 }
 
-bool8 sub_81221EC(void)
+bool8 MenuHelpers_CallLinkSomething(void)
 {
     if (sub_81221D0() == TRUE)
         return TRUE;
