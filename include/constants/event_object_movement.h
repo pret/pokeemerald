@@ -242,6 +242,8 @@
 #define MOVEMENT_ACTION_FIGURE_8                        0x9B
 #define MOVEMENT_ACTION_FLY_UP                          0x9C
 #define MOVEMENT_ACTION_FLY_DOWN                        0x9D
+#define MOVEMENT_ACTION_EXIT_POKEBALL                   0x9E
+#define MOVEMENT_ACTION_ENTER_POKEBALL                  0x9F
 
 #define MOVEMENT_ACTION_STEP_END 0xFE
 

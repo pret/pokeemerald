@@ -181,9 +181,16 @@ const union AnimCmd gObjectEventImageAnim_FaceSouth[] =
     ANIMCMD_JUMP(0),
 };
 
+
 const union AnimCmd gObjectEventImageAnim_FaceNorth[] =
 {
     ANIMCMD_FRAME(1, 16),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceNorth2F[] =
+{
+    ANIMCMD_FRAME(2, 16),
     ANIMCMD_JUMP(0),
 };
 
@@ -193,9 +200,21 @@ const union AnimCmd gObjectEventImageAnim_FaceWest[] =
     ANIMCMD_JUMP(0),
 };
 
+const union AnimCmd gObjectEventImageAnim_FaceWest2F[] =
+{
+    ANIMCMD_FRAME(4, 16),
+    ANIMCMD_JUMP(0),
+};
+
 const union AnimCmd gObjectEventImageAnim_FaceEast[] =
 {
     ANIMCMD_FRAME(2, 16, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_FaceEast2F[] =
+{
+    ANIMCMD_FRAME(4, 16, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -210,9 +229,9 @@ const union AnimCmd gObjectEventImageAnim_GoSouth[] =
 
 const union AnimCmd gObjectEventImageAnim_GoSouth2F[] =
 {
-    ANIMCMD_FRAME(3, 6),
-    ANIMCMD_FRAME(4, 6),
-    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(1, 6),
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_JUMP(0),
 };
@@ -228,11 +247,11 @@ const union AnimCmd gObjectEventImageAnim_GoNorth[] =
 
 const union AnimCmd gObjectEventImageAnim_GoNorth2F[] =
 {
-  ANIMCMD_FRAME(5, 6),
-  ANIMCMD_FRAME(6, 6),
-  ANIMCMD_FRAME(6, 6),
-  ANIMCMD_FRAME(1, 6),
-    ANIMCMD_JUMP(0),
+  ANIMCMD_FRAME(2, 6),
+  ANIMCMD_FRAME(3, 6),
+  ANIMCMD_FRAME(3, 6),
+  ANIMCMD_FRAME(2, 6),
+  ANIMCMD_JUMP(0),
 };
 
 const union AnimCmd gObjectEventImageAnim_GoWest[] =
@@ -246,10 +265,10 @@ const union AnimCmd gObjectEventImageAnim_GoWest[] =
 
 const union AnimCmd gObjectEventImageAnim_GoWest2F[] =
 {
-    ANIMCMD_FRAME(7, 6),
-    ANIMCMD_FRAME(8, 6),
-    ANIMCMD_FRAME(8, 6),
-    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_FRAME(4, 6),
     ANIMCMD_JUMP(0),
 };
 
@@ -264,10 +283,10 @@ const union AnimCmd gObjectEventImageAnim_GoEast[] =
 
 const union AnimCmd gObjectEventImageAnim_GoEast2F[] =
 {
-    ANIMCMD_FRAME(7, 6, .hFlip = TRUE),
-    ANIMCMD_FRAME(8, 6, .hFlip = TRUE),
-    ANIMCMD_FRAME(8, 6, .hFlip = TRUE),
-    ANIMCMD_FRAME(2, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 6, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -276,6 +295,15 @@ const union AnimCmd gObjectEventImageAnim_GoFastSouth[] =
     ANIMCMD_FRAME(3, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_GoFastSouth2F[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(1, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_JUMP(0),
 };
@@ -289,12 +317,30 @@ const union AnimCmd gObjectEventImageAnim_GoFastNorth[] =
     ANIMCMD_JUMP(0),
 };
 
+const union AnimCmd gObjectEventImageAnim_GoFastNorth2F[] =
+{
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_JUMP(0),
+};
+
 const union AnimCmd gObjectEventImageAnim_GoFastWest[] =
 {
     ANIMCMD_FRAME(7, 4),
     ANIMCMD_FRAME(2, 4),
     ANIMCMD_FRAME(8, 4),
     ANIMCMD_FRAME(2, 4),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_GoFastWest2F[] =
+{
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(4, 4),
     ANIMCMD_JUMP(0),
 };
 
@@ -307,12 +353,46 @@ const union AnimCmd gObjectEventImageAnim_GoFastEast[] =
     ANIMCMD_JUMP(0),
 };
 
+const union AnimCmd gObjectEventImageAnim_GoFastEast2F[] =
+{
+    ANIMCMD_FRAME(4, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 4, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 4, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
 const union AnimCmd gObjectEventImageAnim_GoFasterSouth[] =
 {
     ANIMCMD_FRAME(3, 2),
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(4, 2),
     ANIMCMD_FRAME(0, 2),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_ExitPokeball[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_EnterSouth[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 3),
     ANIMCMD_JUMP(0),
 };
 
@@ -325,12 +405,36 @@ const union AnimCmd gObjectEventImageAnim_GoFasterNorth[] =
     ANIMCMD_JUMP(0),
 };
 
+const union AnimCmd gObjectEventImageAnim_EnterNorth[] =
+{
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_JUMP(0),
+};
+
 const union AnimCmd gObjectEventImageAnim_GoFasterWest[] =
 {
     ANIMCMD_FRAME(7, 2),
     ANIMCMD_FRAME(2, 2),
     ANIMCMD_FRAME(8, 2),
     ANIMCMD_FRAME(2, 2),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_EnterWest[] =
+{
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 3),
     ANIMCMD_JUMP(0),
 };
 
@@ -343,11 +447,35 @@ const union AnimCmd gObjectEventImageAnim_GoFasterEast[] =
     ANIMCMD_JUMP(0),
 };
 
+const union AnimCmd gObjectEventImageAnim_EnterEast[] =
+{
+    ANIMCMD_FRAME(4, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_JUMP(0),
+};
+
 const union AnimCmd gObjectEventImageAnim_GoFastestSouth[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_ExitPokeballFast[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0),
 };
@@ -883,25 +1011,25 @@ const union AnimCmd *const gObjectEventImageAnimTable_Standard[] = {
 
 const union AnimCmd *const gObjectEventImageAnimTable_Following[] = {
     gObjectEventImageAnim_FaceSouth,
-    gObjectEventImageAnim_FaceNorth,
-    gObjectEventImageAnim_FaceWest,
-    gObjectEventImageAnim_FaceEast,
+    gObjectEventImageAnim_FaceNorth2F,
+    gObjectEventImageAnim_FaceWest2F,
+    gObjectEventImageAnim_FaceEast2F,
     gObjectEventImageAnim_GoSouth2F,
     gObjectEventImageAnim_GoNorth2F,
     gObjectEventImageAnim_GoWest2F,
     gObjectEventImageAnim_GoEast2F,
-    gObjectEventImageAnim_GoFastSouth,
-    gObjectEventImageAnim_GoFastNorth,
-    gObjectEventImageAnim_GoFastWest,
-    gObjectEventImageAnim_GoFastEast,
-    gObjectEventImageAnim_GoFasterSouth,
-    gObjectEventImageAnim_GoFasterNorth,
-    gObjectEventImageAnim_GoFasterWest,
-    gObjectEventImageAnim_GoFasterEast,
-    gObjectEventImageAnim_GoFastestSouth,
-    gObjectEventImageAnim_GoFastestNorth,
-    gObjectEventImageAnim_GoFastestWest,
-    gObjectEventImageAnim_GoFastestEast,
+    gObjectEventImageAnim_GoFastSouth2F,
+    gObjectEventImageAnim_GoFastNorth2F,
+    gObjectEventImageAnim_GoFastWest2F,
+    gObjectEventImageAnim_GoFastEast2F,
+    gObjectEventImageAnim_EnterSouth,
+    gObjectEventImageAnim_EnterNorth,
+    gObjectEventImageAnim_EnterWest,
+    gObjectEventImageAnim_EnterEast,
+    gObjectEventImageAnim_ExitPokeball,
+    gObjectEventImageAnim_ExitPokeballFast,
+    gObjectEventImageAnim_ExitPokeball,
+    gObjectEventImageAnim_ExitPokeball,
 };
 
 const union AnimCmd *const gObjectEventImageAnimTable_HoOh[] = {
@@ -1201,6 +1329,10 @@ const struct UnkStruct_085094AC gUnknown_085094AC[] = {
     },
     {
         .anims = gObjectEventImageAnimTable_Standard,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = gObjectEventImageAnimTable_Following,
         .animPos = {1, 3, 0, 2},
     },
     {

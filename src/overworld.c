@@ -1604,6 +1604,11 @@ static void CB2_LoadMapOnReturnToFieldCableClub(void)
 
 void CB2_ReturnToField(void)
 {
+    if (gFieldCallback == FieldCallback_Fly) {
+      RemoveFollowingPokemon();
+    } else {
+      UpdateFollowingPokemon();
+    }
     if (IsUpdateLinkStateCBActive() == TRUE)
     {
         SetMainCallback2(CB2_ReturnToFieldLink);

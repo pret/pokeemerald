@@ -240,10 +240,12 @@
 #define OBJ_EVENT_GFX_LINK_RS_MAY                236
 #define OBJ_EVENT_GFX_LUGIA                      237
 #define OBJ_EVENT_GFX_HOOH                       238
-#define OBJ_EVENT_GFX_MARSHTOMP                  239
-#define OBJ_EVENT_GFX_ALTARIA                    240
+#define OBJ_EVENT_GFX_ANIMATED_BALL              239
+#define OBJ_EVENT_GFX_MARSHTOMP                  240
+#define OBJ_EVENT_GFX_ALTARIA                    241
+#define OBJ_EVENT_GFX_TOGETIC                    242
 
-#define NUM_OBJ_EVENT_GFX                        241
+#define NUM_OBJ_EVENT_GFX                        243
 
 
 // These are dynamic object gfx ids.
@@ -283,5 +285,6 @@
 
 #define OBJ_EVENT_ID_PLAYER 0xFF
 #define OBJ_EVENT_ID_CAMERA 0x7F
+#define OBJ_EVENT_ID_FOLLOWER 0xFE
 
 #endif  // GUARD_CONSTANTS_EVENT_OBJECTS_H

@@ -410,7 +410,7 @@ u8 (*const gMovementTypeFuncs_FollowPlayer[])(struct ObjectEvent *, struct Sprit
 bool8 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {
     FollowablePlayerMovement_Idle,
     FollowablePlayerMovement_Idle,
-    FollowablePlayerMovement_GoSpeed0,
+    FollowablePlayerMovement_Step,
     FollowablePlayerMovement_GoSpeed1,
     FollowablePlayerMovement_GoSpeed2,
     FollowablePlayerMovement_Slide,

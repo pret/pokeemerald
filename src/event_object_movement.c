@@ -16,6 +16,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
+#include "pokemon.h"
 #include "random.h"
 #include "sprite.h"
 #include "task.h"
@@ -27,6 +28,7 @@
 #include "constants/field_effects.h"
 #include "constants/items.h"
 #include "constants/mauville_old_man.h"
+#include "constants/species.h"
 #include "constants/trainer_types.h"
 #include "constants/union_room.h"
 
@@ -440,6 +442,8 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_MARSHTOMP 0x1124
+#define OBJ_EVENT_PAL_TAG_ALTARIA 0x1125
+#define OBJ_EVENT_PAL_TAG_TOGETIC 0x1126
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -487,6 +491,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
     {gObjectEventPaletteMarshtomp, OBJ_EVENT_PAL_TAG_MARSHTOMP},
+    {gObjectEventPaletteAltaria, OBJ_EVENT_PAL_TAG_ALTARIA},
+    {gObjectEventPaletteTogetic, OBJ_EVENT_PAL_TAG_TOGETIC},
     {NULL,                  0x0000},
 };
 
@@ -1368,24 +1374,8 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
 
     objectEvent = &gObjectEvents[objectEventId];
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-<<<<<<< HEAD
-    paletteSlot = graphicsInfo->paletteSlot;
-    if (paletteSlot == 0)
-    {
-        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, 0);
-    }
-    else if (paletteSlot == 10)
-    {
-        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, 10);
-    }
-    else if (paletteSlot >= 16)
-    {
-        paletteSlot -= 16;
-        sub_808EAB0(graphicsInfo->paletteTag, paletteSlot);
-=======
     if (spriteTemplate->paletteTag != 0xffff) {
         LoadObjectEventPalette(spriteTemplate->paletteTag);
->>>>>>> ecbde8db7 (Added dynamic overworld palettes (github.com/pret/pokeemerald/wiki/Dynamic-overworld-palette-system))
     }
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
@@ -1585,22 +1575,105 @@ u8 CreateObjectSprite(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
     return spriteId;
 }
 
-u8 SpawnFollowingPokemon(void) {
+u8 SpeciesToGraphicsId(u16 species) { // TODO: Eventually graphicsIds will have to be u16's
+  switch (species) {
+    case SPECIES_MARSHTOMP:
+      return OBJ_EVENT_GFX_MARSHTOMP;
+      break;
+    case SPECIES_ALTARIA:
+      return OBJ_EVENT_GFX_ALTARIA;
+      break;
+    case SPECIES_TOGETIC:
+      return OBJ_EVENT_GFX_TOGETIC;
+      break;
+    default:
+      return OBJ_EVENT_GFX_DUSCLOPS; // TODO: Change this
+  }
+}
+
+struct Pokemon * GetFirstLiveMon(void) { // Return address of first conscious party mon or NULL
+  struct Pokemon *mon;
+  u8 i;
+  for (i=0; i<PARTY_SIZE;i++) {
+    if (gPlayerParty[i].hp > 0 && !(gPlayerParty[i].box.isEgg || gPlayerParty[i].box.isBadEgg)) {
+      return &gPlayerParty[i];
+    }
+  }
+  return NULL;
+}
+
+u8 SpawnFollowingPokemon(void) { // Spawn a following pokemon TODO: Avoid this on certain maps
+  struct Pokemon *mon;
+  u8 graphicsId;
   u8 objectEventId;
   struct ObjectEventTemplate template = {0};
 
-  template.localId = 0xFE;
-  template.graphicsId = OBJ_EVENT_GFX_MARSHTOMP;
+  template.localId = OBJ_EVENT_ID_FOLLOWER;
+  mon = GetFirstLiveMon();
+  if (mon == NULL) { // fainted party, don't spawn an object TODO
+    return 0;
+  }
+  template.graphicsId = SpeciesToGraphicsId(GetMonData(mon, MON_DATA_SPECIES));
   template.x = gSaveBlock1Ptr->pos.x;
   template.y = gSaveBlock1Ptr->pos.y;
   template.elevation = 5;
   template.movementType = MOVEMENT_TYPE_FOLLOW_PLAYER;
-  template.trainerType = 0xFE;
-  template.script = NULL;
+  // template.script = EventScript_Follower; // This does nothing because scripts are templated
   objectEventId = SpawnSpecialObjectEvent(&template);
   gObjectEvents[objectEventId].invisible = TRUE;
   gObjectEvents[objectEventId].hasShadow = TRUE;
   return objectEventId;
+}
+
+void UpdateFollowingPokemon(void) {
+  u8 i;
+  u8 graphicsId;
+  struct ObjectEvent *objectEvent = NULL;
+  struct Pokemon *mon;
+
+  // TODO: Improve finding player following pokemon
+  for (i=0; i < OBJECT_EVENTS_COUNT; i++) {
+    if (gObjectEvents[i].localId == 0xFE) {
+      objectEvent = &gObjectEvents[i];
+      break;
+    }
+  }
+  if (objectEvent == NULL) {
+    return;
+  }
+  mon = GetFirstLiveMon();
+  if (mon == NULL) { // TODO: Fainted party
+    return;
+  }
+  graphicsId = SpeciesToGraphicsId(GetMonData(mon, MON_DATA_SPECIES));
+  if (graphicsId != objectEvent->graphicsId) { // Mark as invisible
+    MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+    objectEvent->invisible = TRUE;
+    gSprites[objectEvent->spriteId].data[1] = 0; // set state
+    gSprites[objectEvent->spriteId].data[6] = 0; // set graphicsId
+    gSprites[objectEvent->spriteId].data[7] = 0; // set animation data
+  }
+  objectEvent->graphicsId = graphicsId;
+  return;
+}
+
+void RemoveFollowingPokemon(void) {
+  struct ObjectEvent *objectEvent = NULL;
+  u8 i;
+  for (i=0; i < OBJECT_EVENTS_COUNT; i++) {
+    if (gObjectEvents[i].localId == 0xFE) {
+      objectEvent = &gObjectEvents[i];
+      break;
+    }
+  }
+  if (objectEvent == NULL) {
+    return;
+  }
+  RemoveObjectEvent(objectEvent);
+}
+
+static bool8 IsFollowerVisible(void) { // Determine whether follower should be visible
+  return !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE);
 }
 
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
@@ -1720,28 +1793,9 @@ static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex(objectEvent->graphicsId, objectEvent->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
-<<<<<<< HEAD
-    *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
-    paletteSlot = graphicsInfo->paletteSlot;
-    if (paletteSlot == 0)
-    {
-        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
-    }
-    else if (paletteSlot == 10)
-    {
-        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
-    }
-    else if (paletteSlot >= 16)
-    {
-        paletteSlot -= 16;
-        sub_808EAB0(graphicsInfo->paletteTag, paletteSlot);
-    }
-    *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
-=======
     if (spriteTemplate.paletteTag != 0xffff) {
       LoadObjectEventPalette(spriteTemplate.paletteTag);
     }
->>>>>>> ecbde8db7 (Added dynamic overworld palettes (github.com/pret/pokeemerald/wiki/Dynamic-overworld-palette-system))
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -1798,30 +1852,40 @@ void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     struct Sprite *sprite;
-    u8 paletteSlot;
+    u16 i;
+    u8 paletteNum;
+    u16 *debugPtr = (u16*) 0x0203d008;
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     sprite = &gSprites[objectEvent->spriteId];
-    paletteSlot = graphicsInfo->paletteSlot;
-    if (paletteSlot == 0)
-    {
-        PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
+    *debugPtr = graphicsId;
+    *(debugPtr + 1) = graphicsInfo->paletteSlot;
+    if (graphicsInfo->paletteSlot == 0) { // Hack until I can fix this
+      PatchObjectPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+      paletteNum = 0;
+    } else {
+      paletteNum = sprite->oam.paletteNum;
+      // Free old palette if otherwise unused
+      sprite->inUse = FALSE;
+      FieldEffectFreePaletteIfUnused(paletteNum);
+      sprite->inUse = TRUE;
+
+      i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1);
+      *(debugPtr + 2) = i;
+      paletteNum = IndexOfSpritePaletteTag(sObjectEventSpritePalettes[i].tag);
+      *(debugPtr + 3) = paletteNum;
+      if (paletteNum == 0xFF) { // Load palette
+        paletteNum = LoadSpritePalette(&sObjectEventSpritePalettes[i]);
+      }
     }
-    else if (paletteSlot == 10)
-    {
-        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
-    }
-    else if (paletteSlot >= 16)
-    {
-        paletteSlot -= 16;
-        sub_808EAB0(graphicsInfo->paletteTag, paletteSlot);
-    }
+    *(debugPtr + 4) = paletteNum;
+    sprite->oam.paletteNum = paletteNum;
+    *((u32*) (debugPtr + 6)) = (u32) &sprite->oam;
     sprite->oam.shape = graphicsInfo->oam->shape;
     sprite->oam.size = graphicsInfo->oam->size;
     sprite->images = graphicsInfo->images;
     sprite->anims = graphicsInfo->anims;
     sprite->subspriteTables = graphicsInfo->subspriteTables;
-    sprite->oam.paletteNum = paletteSlot;
     objectEvent->inanimate = graphicsInfo->inanimate;
     objectEvent->graphicsId = graphicsId;
     SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
@@ -2374,6 +2438,9 @@ void SetObjectEventDirection(struct ObjectEvent *objectEvent, u8 direction)
 
 static const u8 *GetObjectEventScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
+    if (localId == OBJ_EVENT_ID_FOLLOWER) {
+      return EventScript_Follower;
+    }
     return GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->script;
 }
 
@@ -4461,7 +4528,11 @@ movement_type_def(MovementType_FollowPlayer, gMovementTypeFuncs_FollowPlayer)
 bool8 MovementType_FollowPlayer_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE)) {
+    if (sprite->data[6]) { // Restore graphicsId TODO: Change this hack
+      ObjectEventSetGraphicsId(objectEvent, sprite->data[6]);
+      sprite->data[6] = 0;
+    }
+    if (!IsFollowerVisible()) { // Shadow player's position
       objectEvent->invisible = TRUE;
       MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
       return FALSE;
@@ -4472,10 +4543,10 @@ bool8 MovementType_FollowPlayer_Step0(struct ObjectEvent *objectEvent, struct Sp
 
 bool8 MovementType_FollowPlayer_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (gObjectEvents[gPlayerAvatar.objectEventId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
-    {
+    if (gObjectEvents[gPlayerAvatar.objectEventId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER) { // do nothing if player is stationary
         return FALSE;
     }
+    // TODO: Remove dependence on PlayerGetCopyableMovement
     return gFollowPlayerMovementFuncs[PlayerGetCopyableMovement()](objectEvent, sprite, GetPlayerMovementDirection(), NULL);
 }
 
@@ -4486,55 +4557,67 @@ bool8 MovementType_FollowPlayer_Step2(struct ObjectEvent *objectEvent, struct Sp
         objectEvent->singleMovementActive = 0;
         sprite->data[1] = 1;
     }
+    objectEvent->invisible = FALSE;
     return FALSE;
 }
 
 bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    if (!objectEvent->singleMovementActive) {
+    u8 direction;
+    if (!IsFollowerVisible()) { // Animate entering pokeball
+      if (objectEvent->invisible) {
+        return FALSE;
+      }
+      ClearObjectEventMovement(objectEvent, sprite);
+      ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_ENTER_POKEBALL);
+      objectEvent->singleMovementActive = 1;
+      sprite->animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
+      sprite->data[1] = 2; // movement action sets state to 0 later
+      return TRUE;
+    } else if (!objectEvent->singleMovementActive) { // walk in place
       ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceNormalMovementAction(objectEvent->facingDirection));
       objectEvent->singleMovementActive = 1;
       return TRUE;
-    }
-    if (ObjectEventExecSingleMovementAction(objectEvent, sprite)) {
+    } else if (ObjectEventExecSingleMovementAction(objectEvent, sprite)) { // finish movement action
         objectEvent->singleMovementActive = 0;
     }
     return FALSE;
 }
 
-bool8 FollowablePlayerMovement_GoSpeed0(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
+bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
     s16 x;
     s16 y;
     s16 targetX;
     s16 targetY;
-    u32 *debugPtr;
-    debugPtr = (u32*) 0x0203d000;
+    u32 *debugPtr = (u32*) 0x0203d000;
+    *(debugPtr) = (u32) &sprite->data[0];
+
     targetX = gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x;
     targetY = gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y;
     x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
     y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
-    *debugPtr = (u32) x + (y << 16);
-    *(debugPtr + 1) = (u32) targetX + (targetY << 16);
-    if (x == targetX && y == targetY) { // don't move if the player collided
+
+    if ((x == targetX && y == targetY) || !IsFollowerVisible()) { // don't move on player collision or if not visible
       return FALSE;
     }
     x = objectEvent->currentCoords.x;
     y = objectEvent->currentCoords.y;
-    *(debugPtr + 2) = (u32) x + (y << 16);
-    if (x == targetX && y == targetY) { // don't move if already in the player's last position
+    ClearObjectEventMovement(objectEvent, sprite);
+
+    if (objectEvent->invisible) { // Animate exiting pokeball
+      MoveObjectEventToMapCoords(objectEvent, targetX, targetY);
+      ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
+      objectEvent->singleMovementActive = 1;
+      sprite->animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
+      sprite->data[1] = 2;
+      return TRUE;
+    } else if (x == targetX && y == targetY) { // don't move if already in the player's last position
       return FALSE;
     }
 
-    ClearObjectEventMovement(objectEvent, sprite);
-    // Change state to invisible
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE)) {
-      objectEvent->invisible = TRUE;
-      sprite->data[1] = 0;
-      return FALSE;
-    }
-    objectEvent->invisible = FALSE;
+    // Follow player
     direction = GetDirectionToFace(x, y, targetX, targetY);
     ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) { // Set follow speed accordingly
@@ -5059,7 +5142,7 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         curObject = &gObjectEvents[i];
-        if (curObject->active && (curObject->trainerType != 0xFE || objectEvent != &gObjectEvents[gPlayerAvatar.objectEventId]) && curObject != objectEvent)
+        if (curObject->active && (curObject->movementType != MOVEMENT_TYPE_FOLLOW_PLAYER || objectEvent != &gObjectEvents[gPlayerAvatar.objectEventId]) && curObject != objectEvent)
         {
             if ((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
             {
@@ -6064,6 +6147,87 @@ bool8 MovementAction_WalkInPlaceSlowDown_Step0(struct ObjectEvent *objectEvent, 
 {
     sub_8094554(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionAnimNum(DIR_SOUTH), 32);
     return MovementAction_WalkInPlaceSlow_Step1(objectEvent, sprite);
+}
+
+// Copy and load objectEvent's palette, but set all opaque colors to white
+static u8 LoadWhiteFlashPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
+  struct SpritePalette dynamicPalette;
+  u16 paletteData[16];
+  u16 i = GetObjectEventGraphicsInfo(objectEvent->graphicsId)->paletteTag1;
+  u8 j;
+  i = FindObjectEventPaletteIndexByTag(i);
+  dynamicPalette.tag = OBJ_EVENT_PAL_TAG_NONE-1; // TODO: Use a proper palette tag here
+  dynamicPalette.data = paletteData;
+  paletteData[0] = sObjectEventSpritePalettes[i].data[0];
+  for (j=1; j<16; j++) {
+    paletteData[j] = 0xFFFF;
+  }
+  sprite->oam.paletteNum = LoadSpritePalette(&dynamicPalette);
+  return sprite->oam.paletteNum;
+}
+
+bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
+
+
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) {
+      sub_8094554(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_NORTH), 8);
+      sprite->data[7] = 0; // fast speed
+    } else {
+      sub_8094554(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_SOUTH), 16);
+      sprite->data[7] = 1; // slow speed
+    }
+    sprite->data[6] = objectEvent->graphicsId;
+    ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
+    return MovementAction_ExitPokeball_Step1(objectEvent, sprite);
+}
+
+bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u8 duration = sprite->data[7] & 0xF;
+    sprite->data[3]--;
+    if (sprite->data[3] == 0)
+    {
+        sprite->data[2] = 2;
+        sprite->animPaused = TRUE;
+        return TRUE;
+    // Restore graphicsId and set palette to white
+    } else if ((duration == 0 && sprite->data[3] == 3) || (duration == 1 && sprite->data[3] == 7)) {
+      ObjectEventSetGraphicsId(objectEvent, sprite->data[6]);
+      sprite->data[7] = (sprite->oam.paletteNum << 4) | (sprite->data[7] & 0xFF0F); // Save old paletteNum
+      LoadWhiteFlashPalette(objectEvent, sprite);
+    // Restore original palette
+    } else if ((duration == 0 && sprite->data[3] == 1) || (duration == 1 && sprite->data[3] == 3)) {
+      FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_NONE-1);
+      sprite->oam.paletteNum = (sprite->data[7] >> 4) & 0xF;
+    }
+    return FALSE;
+}
+
+bool8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
+    u8 direction = objectEvent->facingDirection;
+    sub_8094554(objectEvent, sprite, direction, GetMoveDirectionFasterAnimNum(direction), 16);
+    sprite->data[7] = 1; // slow speed
+    sprite->data[6] = objectEvent->graphicsId;
+    return MovementAction_EnterPokeball_Step1(objectEvent, sprite);
+}
+
+bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    sprite->data[3]--;
+    if (sprite->data[3] == 0)
+    {
+        sprite->data[2] = 2;
+        sprite->animPaused = TRUE;
+        return TRUE;
+    } else if (sprite->data[3] == 1) { // Change state
+      sprite->data[1] = 0;
+    } else if (sprite->data[3] == 11) { // Set palette to white
+      LoadWhiteFlashPalette(objectEvent, sprite);
+    } else if (sprite->data[3] == 7) { // Free white palette and change to pokeball
+      FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_NONE-1);
+      ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
+    }
+    return FALSE;
 }
 
 bool8 MovementAction_WalkInPlaceSlowUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -7849,7 +8013,8 @@ static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent *objEven
         || (MetatileBehavior_IsPacifidlogLog(objEvent->currentMetatileBehavior)
             && MetatileBehavior_IsPacifidlogLog(objEvent->previousMetatileBehavior)))
     {
-        if (!objEvent->inShallowFlowingWater)
+        // Only set flags if objEvent leaves tracks
+        if (!objEvent->inShallowFlowingWater && GetObjectEventGraphicsInfo(objEvent->graphicsId)->tracks)
         {
             objEvent->inShallowFlowingWater = 0;
             objEvent->inShallowFlowingWater = 1;
