@@ -33,7 +33,7 @@ void HandleLinkBattleSetup(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         if (gWirelessCommType)
-            sub_800B488();
+            SetWirelessCommType1();
         if (!gReceivedRemoteLinkPlayers)
             OpenLink();
         CreateTask(task00_08081A90, 0);
@@ -827,7 +827,7 @@ void sub_8033648(void)
 
     if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & BATTLE_TYPE_20))
     {
-        sub_8011BD0();
+        LinkRfu_DestroyIdleTask();
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             if (GetBlockReceivedStatus() & gBitTable[i])

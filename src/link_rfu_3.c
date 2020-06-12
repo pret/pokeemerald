@@ -165,7 +165,7 @@ const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     SpriteCallbackDummy
 };
 
-void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr)
+void RFU_queue_32_70_reset(struct UnkRfuStruct_2_Sub_124 *queue)
 {
     s32 i;
     s32 j;
@@ -174,16 +174,16 @@ void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr)
     {
         for (j = 0; j < 70; j++)
         {
-            ptr->unk_00[i][j] = 0;
+            queue->slots[i][j] = 0;
         }
     }
-    ptr->unk_8c1 = 0;
-    ptr->unk_8c0 = 0;
-    ptr->unk_8c2 = 0;
-    ptr->unk_8c3 = 0;
+    queue->send_slot = 0;
+    queue->recv_slot = 0;
+    queue->count = 0;
+    queue->full = 0;
 }
 
-void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr)
+void RFU_queue_40_14_reset(struct RfuSendQueue *queue)
 {
     s32 i;
     s32 j;
@@ -192,16 +192,16 @@ void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr)
     {
         for (j = 0; j < 14; j++)
         {
-            ptr->unk_00[i][j] = 0;
+            queue->slots[i][j] = 0;
         }
     }
-    ptr->unk_231 = 0;
-    ptr->unk_230 = 0;
-    ptr->unk_232 = 0;
-    ptr->unk_233 = 0;
+    queue->send_slot = 0;
+    queue->recv_slot = 0;
+    queue->count = 0;
+    queue->full = 0;
 }
 
-void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
+void RFU_queue_2_256_reset(struct UnkRfuStruct_Sub_Unused *queue)
 {
     s32 i;
     s32 j;
@@ -210,29 +210,29 @@ void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
     {
         for (j = 0; j < 256; j++)
         {
-            ptr->unk_00[i][j] = 0;
+            queue->slots[i][j] = 0;
         }
     }
-    ptr->unk_201 = 0;
-    ptr->unk_200 = 0;
-    ptr->unk_202 = 0;
-    ptr->unk_203 = 0;
+    queue->send_slot = 0;
+    queue->recv_slot = 0;
+    queue->count = 0;
+    queue->full = 0;
 }
 
-void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
+void RFU_queue_32_70_recv(struct UnkRfuStruct_2_Sub_124 *queue, u8 *data)
 {
     s32 i;
     u16 imeBak;
     u8 count;
 
-    if (q1->unk_8c2 < 32)
+    if (queue->count < 32)
     {
         imeBak = REG_IME;
         REG_IME = 0;
         count = 0;
         for (i = 0; i < 70; i += 14)
         {
-            if (q2[i] == 0 && q2[i + 1] == 0)
+            if (data[i] == 0 && data[i + 1] == 0)
             {
                 count++;
             }
@@ -241,36 +241,36 @@ void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
         {
             for (i = 0; i < 70; i++)
             {
-                q1->unk_00[q1->unk_8c0][i] = q2[i];
+                queue->slots[queue->recv_slot][i] = data[i];
             }
-            q1->unk_8c0++;
-            q1->unk_8c0 %= 32;
-            q1->unk_8c2++;
+            queue->recv_slot++;
+            queue->recv_slot %= 32;
+            queue->count++;
             for (i = 0; i < 70; i++)
             {
-                q2[i] = 0;
+                data[i] = 0;
             }
         }
         REG_IME = imeBak;
     }
     else
     {
-        q1->unk_8c3 = 1;
+        queue->full = 1;
     }
 }
 
-void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
+void RFU_queue_40_14_recv(struct RfuSendQueue *queue, u8 *data)
 {
     s32 i;
     u16 imeBak;
 
-    if (q1->unk_232 < 40)
+    if (queue->count < 40)
     {
         imeBak = REG_IME;
         REG_IME = 0;
         for (i = 0; i < 14; i++)
         {
-            if (q2[i] != 0)
+            if (data[i] != 0)
             {
                 break;
             }
@@ -279,57 +279,57 @@ void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
         {
             for (i = 0; i < 14; i++)
             {
-                q1->unk_00[q1->unk_230][i] = q2[i];
+                queue->slots[queue->recv_slot][i] = data[i];
             }
-            q1->unk_230++;
-            q1->unk_230 %= 40;
-            q1->unk_232++;
+            queue->recv_slot++;
+            queue->recv_slot %= 40;
+            queue->count++;
             for (i = 0; i < 14; i++)
             {
-                q2[i] = 0;
+                data[i] = 0;
             }
         }
         REG_IME = imeBak;
     }
     else
     {
-        q1->unk_233 = 1;
+        queue->full = 1;
     }
 }
 
-bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
+bool8 RFU_queue_32_70_send(struct UnkRfuStruct_2_Sub_124 *queue, u8 *data)
 {
     u16 imeBak;
     s32 i;
 
     imeBak = REG_IME;
     REG_IME = 0;
-    if (q1->unk_8c0 == q1->unk_8c1 || q1->unk_8c3 != 0)
+    if (queue->recv_slot == queue->send_slot || queue->full != 0)
     {
         for (i = 0; i < 70; i++)
         {
-            q2[i] = 0;
+            data[i] = 0;
         }
         REG_IME = imeBak;
         return FALSE;
     }
     for (i = 0; i < 70; i++)
     {
-        q2[i] = q1->unk_00[q1->unk_8c1][i];
+        data[i] = queue->slots[queue->send_slot][i];
     }
-    q1->unk_8c1++;
-    q1->unk_8c1 %= 32;
-    q1->unk_8c2--;
+    queue->send_slot++;
+    queue->send_slot %= 32;
+    queue->count--;
     REG_IME = imeBak;
     return TRUE;
 }
 
-bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
+bool8 RFU_queue_40_14_send(struct RfuSendQueue *queue, u8 *dest)
 {
     s32 i;
     u16 imeBak;
 
-    if (q1->unk_230 == q1->unk_231 || q1->unk_233 != 0)
+    if (queue->recv_slot == queue->send_slot || queue->full != 0)
     {
         return FALSE;
     }
@@ -337,98 +337,98 @@ bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
     REG_IME = 0;
     for (i = 0; i < 14; i++)
     {
-        q2[i] = q1->unk_00[q1->unk_231][i];
+        dest[i] = queue->slots[queue->send_slot][i];
     }
-    q1->unk_231++;
-    q1->unk_231 %= 40;
-    q1->unk_232--;
+    queue->send_slot++;
+    queue->send_slot %= 40;
+    queue->count--;
     REG_IME = imeBak;
     return TRUE;
 }
 
-void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2)
+void RFU_queue_2_14_recv(struct UnkRfuStruct_2_Sub_c1c *queue, const u8 *data)
 {
     s32 i;
 
-    if (q2[1] == 0)
+    if (data[1] == 0)
     {
-        sub_800DAC8(q1, NULL);
+        RFU_queue_2_14_send(queue, NULL);
     }
     else
     {
         for (i = 0; i < 14; i++)
         {
-            q1->unk_00[q1->unk_1c][i] = q2[i];
+            queue->slots[queue->recv_slot][i] = data[i];
         }
-        q1->unk_1c++;
-        q1->unk_1c %= 2;
-        if (q1->unk_1e < 2)
+        queue->recv_slot++;
+        queue->recv_slot %= 2;
+        if (queue->count < 2)
         {
-            q1->unk_1e++;
+            queue->count++;
         }
         else
         {
-            q1->unk_1d = q1->unk_1c;
+            queue->send_slot = queue->recv_slot;
         }
     }
 }
 
-bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
+bool8 RFU_queue_2_14_send(struct UnkRfuStruct_2_Sub_c1c *queue, u8 *dest)
 {
     s32 i;
 
-    if (q1->unk_1e == 0)
+    if (queue->count == 0)
     {
         return FALSE;
     }
-    if (q2 != NULL)
+    if (dest != NULL)
     {
         for (i = 0; i < 14; i++)
         {
-            q2[i] = q1->unk_00[q1->unk_1d][i];
+            dest[i] = queue->slots[queue->send_slot][i];
         }
     }
-    q1->unk_1d++;
-    q1->unk_1d %= 2;
-    q1->unk_1e--;
+    queue->send_slot++;
+    queue->send_slot %= 2;
+    queue->count--;
     return TRUE;
 }
 
-void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+void RFU_queue_2_256_recv(struct UnkRfuStruct_Sub_Unused *queue, u8 *data)
 {
     s32 i;
 
-    if (q1->unk_202 < 2)
+    if (queue->count < 2)
     {
         for (i = 0; i < 256; i++)
         {
-            q1->unk_00[q1->unk_200][i] = q2[i];
+            queue->slots[queue->recv_slot][i] = data[i];
         }
-        q1->unk_200++;
-        q1->unk_200 %= 2;
-        q1->unk_202++;
+        queue->recv_slot++;
+        queue->recv_slot %= 2;
+        queue->count++;
     }
     else
     {
-        q1->unk_203 = 1;
+        queue->full = 1;
     }
 }
 
-bool8 sub_800DB84(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+bool8 RFU_queue_2_256_send(struct UnkRfuStruct_Sub_Unused *queue, u8 *send)
 {
     s32 i;
 
-    if (q1->unk_200 == q1->unk_201 || q1->unk_203)
+    if (queue->recv_slot == queue->send_slot || queue->full)
     {
         return FALSE;
     }
     for (i = 0; i < 256; i++)
     {
-        q2[i] = q1->unk_00[q1->unk_201][i];
+        send[i] = queue->slots[queue->send_slot][i];
     }
-    q1->unk_201++;
-    q1->unk_201 %= 2;
-    q1->unk_202--;
+    queue->send_slot++;
+    queue->send_slot %= 2;
+    queue->count--;
     return TRUE;
 }
 
@@ -501,7 +501,7 @@ void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
 }
 
 #ifdef NONMATCHING
-u8 sub_800DD1C(u8 maxFlags)
+u8 GetConnectedChildStrength(u8 maxFlags)
 {
     u8 flagCount = 0;
     u32 flags = gRfuLinkStatus->connSlotFlag;
@@ -530,7 +530,7 @@ u8 sub_800DD1C(u8 maxFlags)
     return 0;
 }
 #else
-NAKED u8 sub_800DD1C(u8 maxFlags)
+NAKED u8 GetConnectedChildStrength(u8 maxFlags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tlsls r0, 24\n"
@@ -599,7 +599,7 @@ NAKED u8 sub_800DD1C(u8 maxFlags)
 }
 #endif
 
-void sub_800DD94(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
 {
     s32 i;
 
@@ -625,14 +625,14 @@ void sub_800DD94(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
     data->unk_00.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
-bool8 sub_800DE7C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal;
 
     if (lman.parent_child == 1)
     {
         retVal = TRUE;
-        if (sub_8010454(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
+        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
         {
             memcpy(buff1, gRfuLinkStatus->partner[idx].gname, 0xD);
             memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
@@ -646,7 +646,7 @@ bool8 sub_800DE7C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
     else
     {
         retVal = FALSE;
-        if (sub_8010454(gRfuLinkStatus->partner[idx].serialNo))
+        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo))
         {
             memcpy(buff1, gRfuLinkStatus->partner[idx].gname, 0xD);
             memcpy(buff2, gRfuLinkStatus->partner[idx].uname, PLAYER_NAME_LENGTH + 1);
@@ -660,7 +660,7 @@ bool8 sub_800DE7C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
     return retVal;
 }
 
-bool8 sub_800DF34(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+bool8 LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == 0x7F7D)
@@ -679,8 +679,8 @@ bool8 sub_800DF34(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
 
 void sub_800DF90(struct GFtgtGname *buff1, u8 *buff2)
 {
-    memcpy(buff1, &gUnknown_02022B14, 0xD);
-    memcpy(buff2, gUnknown_02022B22, 8);
+    memcpy(buff1, &gHostRFUtgtGnameBuffer, 0xD);
+    memcpy(buff2, gHostRFUtgtUnameBuffer, 8);
 }
 
 void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
@@ -730,7 +730,7 @@ void LoadWirelessStatusIndicatorSpriteGfx(void)
     gWirelessStatusIndicatorSpriteId = 0xFF;
 }
 
-u8 sub_800E124(void)
+u8 GetParentSignalStrength(void)
 {
     u8 i;
     u8 flags = gRfuLinkStatus->connSlotFlag;
@@ -745,7 +745,7 @@ u8 sub_800E124(void)
     return 0;
 }
 
-void sub_800E15C(struct Sprite *sprite, s32 signalStrengthAnimNum)
+void SetAndRestartWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 signalStrengthAnimNum)
 {
     if (sprite->data[2] != signalStrengthAnimNum)
     {
@@ -755,7 +755,7 @@ void sub_800E15C(struct Sprite *sprite, s32 signalStrengthAnimNum)
     }
 }
 
-void sub_800E174(void)
+void UpdateWirelessStatusIndicatorSprite(void)
 {
     if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
@@ -766,15 +766,15 @@ void sub_800E174(void)
         {
             for (i = 0; i < GetLinkPlayerCount() - 1; i++)
             {
-                if (signalStrength >= sub_800DD1C(i + 1))
+                if (signalStrength >= GetConnectedChildStrength(i + 1))
                 {
-                    signalStrength = sub_800DD1C(i + 1);
+                    signalStrength = GetConnectedChildStrength(i + 1);
                 }
             }
         }
         else
         {
-            signalStrength = sub_800E124();
+            signalStrength = GetParentSignalStrength();
         }
         if (sub_8012224() == TRUE)
         {
@@ -798,7 +798,7 @@ void sub_800E174(void)
         }
         if (sprite->data[0] != sprite->data[1])
         {
-            sub_800E15C(sprite, sprite->data[0]);
+            SetAndRestartWirelessStatusIndicatorAnim(sprite, sprite->data[0]);
             sprite->data[1] = sprite->data[0];
         }
         if (sprite->anims[sprite->data[2]][sprite->data[4]].frame.duration < sprite->data[3])
@@ -820,7 +820,7 @@ void sub_800E174(void)
         gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
         gMain.oamBuffer[125].tileNum = sprite->data[6] + sprite->anims[sprite->data[2]][sprite->data[4]].frame.imageValue;
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
-        if (sub_8011A74() == 1)
+        if (RfuGetErrorStatus() == 1)
         {
             DestroyWirelessStatusIndicatorSprite();
         }
@@ -908,7 +908,7 @@ void RecordMixTrainerNames(void)
     }
 }
 
-bool32 sub_800E540(u16 id, u8 *name)
+bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
     s32 i;
 

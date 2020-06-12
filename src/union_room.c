@@ -236,10 +236,10 @@ void sub_8012780(u8 taskId)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F00C4[gSpecialVar_0x8004];
         gUnknown_02022C2D = gUnknown_082F00C4[gSpecialVar_0x8004] >> 8;
-        sub_8010F84(gUnknown_02022C2C, 0, 0);
-        sub_800B488();
+        SetHostRFUtgtGname(gUnknown_02022C2C, 0, 0);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C10(gUnknown_02022C2D & 0xF);
+        InitializeRfuLinkManager_LinkLeader(gUnknown_02022C2D & 0xF);
         data->state = 3;
         break;
     case 3:
@@ -325,7 +325,7 @@ void sub_8012780(u8 taskId)
             && gMain.newKeys & START_BUTTON)
         {
             data->state = 15;
-            sub_800EF38();
+            LinkRfu_StopManagerAndFinalizeSlots();
         }
         if (data->state == 6 && sub_80105EC())
         {
@@ -362,19 +362,19 @@ void sub_8012780(u8 taskId)
         }
         break;
     case 11:
-        switch (sub_80170B8(&data->textState, sub_801064C(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
+        switch (sub_80170B8(&data->textState, TrainerIdAndNameStillInPartnersList(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
             data->field_19 = 5;
-            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            SendByteToPartnerByIdAndName(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 12;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            SendByteToPartnerByIdAndName(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 12;
             break;
         case -3:
@@ -383,7 +383,7 @@ void sub_8012780(u8 taskId)
         }
         break;
     case 12:
-        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        val = WaitSendByteToPartnerByIdAndName(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -404,7 +404,7 @@ void sub_8012780(u8 taskId)
                         data->state = 13;
                     }
 
-                    sub_800EF38();
+                    LinkRfu_StopManagerAndFinalizeSlots();
                     sub_80124EC(data->field_11, gUnknown_02022C2D, data->field_13);
                 }
                 else
@@ -414,7 +414,7 @@ void sub_8012780(u8 taskId)
             }
             else
             {
-                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
+                RequestDisconnectSlotByTrainerNameAndId(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_8013398(data->field_0);
                 RedrawListMenu(data->listTaskId);
@@ -425,7 +425,7 @@ void sub_8012780(u8 taskId)
         }
         else if (val == 2)
         {
-            sub_8011A64(0, 0);
+            RfuSetErrorStatus(0, 0);
             data->state = 4;
         }
         break;
@@ -482,9 +482,9 @@ void sub_8012780(u8 taskId)
             data->state = 18;
         break;
     case 18:
-        if (sub_800EF1C())
+        if (LmanAcceptSlotFlagIsNotZero())
         {
-            if (sub_800EF58(FALSE))
+            if (WaitRfuState(FALSE))
             {
                 data->state = 26;
             }
@@ -510,7 +510,7 @@ void sub_8012780(u8 taskId)
     case 21:
     case 23:
         DestroyWirelessStatusIndicatorSprite();
-        sub_800EDD4();
+        LinkRfu_Shutdown();
         sub_8012F64(data);
         data->state++;
         break;
@@ -525,7 +525,7 @@ void sub_8012780(u8 taskId)
         gSpecialVar_Result = 8;
         break;
     case 26:
-        if (sub_8011A80())
+        if (RfuIsErrorStatus1or2())
         {
             data->state = 29;
         }
@@ -535,7 +535,7 @@ void sub_8012780(u8 taskId)
             {
                 if (sub_80126CC(gUnknown_02022C2C))
                     sub_801103C();
-                sub_8011068(1);
+                UpdateGameData_GroupLockedIn(1);
                 sub_80149C4();
                 sub_8012F64(data);
                 DestroyTask(taskId);
@@ -679,7 +679,7 @@ bool8 sub_801320C(struct UnkStruct_Leader *data, u32 arg1, u32 arg2)
         data->state = arg1;
         break;
     case 2:
-        sub_8011A64(0, 0);
+        RfuSetErrorStatus(0, 0);
         RedrawListMenu(data->listTaskId);
         data->state = arg2;
         return TRUE;
@@ -817,10 +817,10 @@ void sub_80134E8(u8 taskId)
         if (gSpecialVar_0x8004 == LINK_GROUP_BATTLE_TOWER && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
             gSpecialVar_0x8004++;
         gUnknown_02022C2C = gUnknown_082F0530[gSpecialVar_0x8004];
-        sub_8010F84(gUnknown_02022C2C, 0, 0);
-        sub_800B488();
+        SetHostRFUtgtGname(gUnknown_02022C2C, 0, 0);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C5C();
+        InitializeRfuLinkManager_JoinGroup();
         data->field_4 = AllocZeroed(0x70);
         data->field_0 = AllocZeroed(0x200);
         data->state = 1;
@@ -915,7 +915,7 @@ void sub_80134E8(u8 taskId)
         if (gReceivedRemoteLinkPlayers != 0)
         {
             gUnknown_02022C2C = data->field_0->arr[data->field_F].unk.field_0.activity;
-            sub_8011A64(0, 0);
+            RfuSetErrorStatus(0, 0);
             switch (gUnknown_02022C2C)
             {
             case 1 ... 5:
@@ -927,7 +927,7 @@ void sub_80134E8(u8 taskId)
             }
         }
 
-        switch (sub_8011A74())
+        switch (RfuGetErrorStatus())
         {
         case 1:
             data->state = 12;
@@ -943,11 +943,11 @@ void sub_80134E8(u8 taskId)
             {
                 if (gUnknown_02022C2C == 28 || gUnknown_02022C2C == 14)
                 {
-                    sub_8011A64(12, 0);
+                    RfuSetErrorStatus(12, 0);
                 }
                 else
                 {
-                    sub_8011A64(7, 0);
+                    RfuSetErrorStatus(7, 0);
                     StringCopy(gStringVar1, sLinkGroupActivityTexts[gUnknown_02022C2C]);
                     StringExpandPlaceholders(gStringVar4, sText_AwaitingOtherMembers);
                 }
@@ -958,7 +958,7 @@ void sub_80134E8(u8 taskId)
             {
                 if (PrintOnTextbox(&data->textState, gStringVar4))
                 {
-                    sub_8011A64(12, 0);
+                    RfuSetErrorStatus(12, 0);
                     data->field_15 = 0;
                 }
             }
@@ -980,7 +980,7 @@ void sub_80134E8(u8 taskId)
             break;
         }
 
-        if (!sub_8011A74() && gMain.newKeys & B_BUTTON)
+        if (!RfuGetErrorStatus() && gMain.newKeys & B_BUTTON)
             data->state = 7;
         break;
     case 7:
@@ -988,10 +988,10 @@ void sub_80134E8(u8 taskId)
             data->state = 8;
         break;
     case 8:
-        switch (sub_80170B8(&data->textState, sub_8011A74()))
+        switch (sub_80170B8(&data->textState, RfuGetErrorStatus()))
         {
         case 0:
-            sub_80106D4();
+            LinkRfuNIsend8();
             data->state = 9;
             RedrawListMenu(data->listTaskId);
             break;
@@ -1007,7 +1007,7 @@ void sub_80134E8(u8 taskId)
         }
         break;
     case 9:
-        if (sub_8011A74())
+        if (RfuGetErrorStatus())
             data->state = 6;
         break;
     case 10:
@@ -1031,7 +1031,7 @@ void sub_80134E8(u8 taskId)
         break;
     case 13:
         DestroyWirelessStatusIndicatorSprite();
-        if (PrintOnTextbox(&data->textState, sPlayerDisconnectedTexts[sub_8011A74()]))
+        if (PrintOnTextbox(&data->textState, sPlayerDisconnectedTexts[RfuGetErrorStatus()]))
         {
             gSpecialVar_Result = 6;
             data->state = 23;
@@ -1044,7 +1044,7 @@ void sub_80134E8(u8 taskId)
         break;
     case 15:
         DestroyWirelessStatusIndicatorSprite();
-        if (PrintOnTextbox(&data->textState, sPlayerDisconnectedTexts[sub_8011A74()]))
+        if (PrintOnTextbox(&data->textState, sPlayerDisconnectedTexts[RfuGetErrorStatus()]))
         {
             gSpecialVar_Result = 8;
             data->state = 23;
@@ -1060,7 +1060,7 @@ void sub_80134E8(u8 taskId)
     case 23:
         DestroyTask(taskId);
         sub_80173D4();
-        sub_800EDD4();
+        LinkRfu_Shutdown();
         break;
     case 21:
         sub_80149C4();
@@ -1095,8 +1095,8 @@ void sub_8013BD8(struct UnkStruct_Group *data, s32 id)
     CreateWirelessStatusIndicatorSprite(0, 0);
     RedrawListMenu(data->listTaskId);
     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
-    sub_8011090(gUnknown_082F0530[gSpecialVar_0x8004], 0, 1);
-    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
+    UpdateGameDataWithActivitySpriteGendersFlag(gUnknown_082F0530[gSpecialVar_0x8004], 0, 1);
+    CreateTask_RfuReconnectWithParent(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
 }
 
 u8 sub_8013C40(void)
@@ -1122,10 +1122,10 @@ void sub_8013C7C(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sub_8010F84(0, 0, 0);
-        sub_800B488();
+        SetHostRFUtgtGname(0, 0, 0);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C5C();
+        InitializeRfuLinkManager_JoinGroup();
         sub_80111B0(TRUE);
         data->field_4 = AllocZeroed(0x70);
         data->field_0 = AllocZeroed(0x200);
@@ -1148,11 +1148,11 @@ void sub_8013C7C(u8 taskId)
         DestroyTask(data->field_11);
         Free(data->field_0);
         Free(data->field_4);
-        sub_800EDD4();
+        LinkRfu_Shutdown();
         data->state++;
         break;
     case 11:
-        sub_800EDD4();
+        LinkRfu_Shutdown();
         DestroyTask(taskId);
         break;
     }
@@ -1508,12 +1508,12 @@ void sub_801440C(u8 taskId)
     case 69:
         if (GetMultiplayerId() == 0)
         {
-            sub_800ED10();
+            LinkRfu_CreateConnectionAsParent();
         }
         else
         {
-            sub_800ED28();
-            sub_8010F84(69, 0, 1);
+            LinkRfu_StopManagerBeforeEnteringChat();
+            SetHostRFUtgtGname(69, 0, 1);
         }
         sub_801DD98();
         break;
@@ -1678,11 +1678,11 @@ void sub_8014A40(u8 taskId)
     case 0:
         gUnknown_02022C2C = data->field_18;
         gUnknown_02022C2D = 2;
-        sub_8010F84(data->field_18, 0, 0);
-        sub_8010FA0(FALSE, FALSE);
-        sub_800B488();
+        SetHostRFUtgtGname(data->field_18, 0, 0);
+        SetGnameBufferWonderFlags(FALSE, FALSE);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C10(2);
+        InitializeRfuLinkManager_LinkLeader(2);
         data->state = 1;
         break;
     case 1:
@@ -1748,19 +1748,19 @@ void sub_8014A40(u8 taskId)
             data->field_0->arr[data->field_13].field_1B = 0;
             RedrawListMenu(data->listTaskId);
             data->field_19 = 5;
-            sub_8010688(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            SendByteToPartnerByIdAndName(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 8;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_8010688(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            SendByteToPartnerByIdAndName(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 8;
             break;
         }
         break;
     case 8:
-        val = sub_8010714(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        val = WaitSendByteToPartnerByIdAndName(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -1771,11 +1771,11 @@ void sub_8014A40(u8 taskId)
                 sub_8018404(gStringVar1, &data->field_0->arr[data->field_13 - 1]);
                 StringExpandPlaceholders(gStringVar4, sText_AnOKWasSentToPlayer);
                 data->state = 9;
-                sub_800EF38();
+                LinkRfu_StopManagerAndFinalizeSlots();
             }
             else
             {
-                sub_8011DC0(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
+                RequestDisconnectSlotByTrainerNameAndId(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_8013398(data->field_0);
                 RedrawListMenu(data->listTaskId);
@@ -1786,7 +1786,7 @@ void sub_8014A40(u8 taskId)
         }
         else if (val == 2)
         {
-            sub_8011A64(0, 0);
+            RfuSetErrorStatus(0, 0);
             data->state = 2;
         }
         break;
@@ -1803,9 +1803,9 @@ void sub_8014A40(u8 taskId)
             data->state = 12;
         break;
     case 12:
-        if (sub_800EF1C())
+        if (LmanAcceptSlotFlagIsNotZero())
         {
-            sub_800EF58(FALSE);
+            WaitRfuState(FALSE);
             data->state = 15;
         }
         else
@@ -1815,7 +1815,7 @@ void sub_8014A40(u8 taskId)
         break;
     case 13:
         DestroyWirelessStatusIndicatorSprite();
-        sub_800EDD4();
+        LinkRfu_Shutdown();
         DestroyListMenuTask(data->listTaskId, 0, 0);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->listWindowId);
@@ -1833,13 +1833,13 @@ void sub_8014A40(u8 taskId)
         }
         break;
     case 15:
-        if (sub_8011A74() == 1 || sub_8011A74() == 2)
+        if (RfuGetErrorStatus() == 1 || RfuGetErrorStatus() == 2)
         {
             data->state = 13;
         }
         else if (gReceivedRemoteLinkPlayers != 0)
         {
-            sub_8011068(1);
+            UpdateGameData_GroupLockedIn(1);
             data->state++;
         }
         break;
@@ -1885,10 +1885,10 @@ void sub_8014F48(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sub_8010F84(data->field_12 + 21, 0, 0);
-        sub_800B488();
+        SetHostRFUtgtGname(data->field_12 + 21, 0, 0);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C5C();
+        InitializeRfuLinkManager_JoinGroup();
         data->field_4 = AllocZeroed(0x70);
         data->field_0 = AllocZeroed(0x200);
         data->state = 1;
@@ -1950,7 +1950,7 @@ void sub_8014F48(u8 taskId)
                     CreateWirelessStatusIndicatorSprite(0, 0);
                     RedrawListMenu(data->listTaskId);
                     sub_8018404(gStringVar1, &data->field_0->arr[data->field_F]);
-                    sub_8011FC8(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
+                    CreateTask_RfuReconnectWithParent(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
                     PlaySE(SE_PN_ON);
                     data->state = 4;
                 }
@@ -1978,7 +1978,7 @@ void sub_8014F48(u8 taskId)
             data->state = 10;
         }
 
-        switch (sub_8011A74())
+        switch (RfuGetErrorStatus())
         {
         case 1:
         case 2:
@@ -1987,7 +1987,7 @@ void sub_8014F48(u8 taskId)
             break;
         case 5:
             AddTextPrinterToWindow1(sText_PlayerSentBackOK);
-            sub_8011A64(0, 0);
+            RfuSetErrorStatus(0, 0);
             break;
         }
         break;
@@ -2004,11 +2004,11 @@ void sub_8014F48(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sLinkDroppedTexts[sub_8011A74()]))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sLinkDroppedTexts[RfuGetErrorStatus()]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_800EDD4();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
@@ -2016,7 +2016,7 @@ void sub_8014F48(u8 taskId)
         DestroyWirelessStatusIndicatorSprite();
         AddTextPrinterToWindow1(sText_PleaseStartOver);
         DestroyTask(taskId);
-        sub_800EDD4();
+        LinkRfu_Shutdown();
         gSpecialVar_Result = 5;
         break;
     case 11:
@@ -2054,10 +2054,10 @@ void sub_80152F4(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sub_8010F84(0, 0, 0);
-        sub_800B488();
+        SetHostRFUtgtGname(0, 0, 0);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C5C();
+        InitializeRfuLinkManager_JoinGroup();
         data->field_4 = AllocZeroed(0x70);
         data->field_0 = AllocZeroed(0x200);
         data->state = 1;
@@ -2111,7 +2111,7 @@ void sub_80152F4(u8 taskId)
                         data->field_14 = 0;
                         LoadWirelessStatusIndicatorSpriteGfx();
                         CreateWirelessStatusIndicatorSprite(0, 0);
-                        sub_8011FC8(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.field_0.unk_00.playerTrainerId));
+                        CreateTask_RfuReconnectWithParent(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.field_0.unk_00.playerTrainerId));
                         PlaySE(SE_PN_ON);
                         data->state = 4;
                     }
@@ -2143,7 +2143,7 @@ void sub_80152F4(u8 taskId)
             data->state = 12;
         }
 
-        switch (sub_8011A74())
+        switch (RfuGetErrorStatus())
         {
         case 1:
         case 2:
@@ -2152,7 +2152,7 @@ void sub_80152F4(u8 taskId)
             break;
         case 5:
             AddTextPrinterToWindow1(sText_WirelessLinkEstablished);
-            sub_8011A64(0, 0);
+            RfuSetErrorStatus(0, 0);
             break;
         }
         break;
@@ -2176,7 +2176,7 @@ void sub_80152F4(u8 taskId)
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_800EDD4();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
@@ -2185,7 +2185,7 @@ void sub_80152F4(u8 taskId)
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_800EDD4();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
@@ -2194,7 +2194,7 @@ void sub_80152F4(u8 taskId)
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_800EDD4();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
@@ -2213,7 +2213,7 @@ void UnionRoomSpecial(void)
 {
     struct UnkStruct_URoom *dataPtr;
 
-    sub_8010F60();
+    ClearAndInitHostRFUtgtGname();
     CreateTask(sub_80156E0, 10);
 
     // dumb line needed to match
@@ -2294,11 +2294,11 @@ void sub_80156E0(u8 taskId)
             data->state = 2;
         break;
     case 2:
-        sub_8010F84(0x40, 0, 0);
-        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
-        sub_800B488();
+        SetHostRFUtgtGname(0x40, 0, 0);
+        RfuUpdatePlayerGnameStateAndSend(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C84();
+        InitializeRfuLinkManager_EnterUnionRoom();
         sub_8017580(&data->field_8->arr[0], 1);
         sub_80175EC(data->field_4, 4);
         sub_80175EC(data->field_C, 4);
@@ -2314,11 +2314,11 @@ void sub_80156E0(u8 taskId)
             switch (sUnionRoomTrade.field_0)
             {
             case 1:
-                sub_8011090(0x54, 0, 1);
+                UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
                 if (id >= PARTY_SIZE)
                 {
                     ResetUnionRoomTrade(&sUnionRoomTrade);
-                    sub_8010FCC(0, 0, 0);
+                    RfuUpdatePlayerGnameStateAndSend(0, 0, 0);
                     sub_801568C(sText_RegistrationCanceled);
                 }
                 else if (!RegisterTradeMonAndGetIsEgg(GetCursorSelectionMonId(), &sUnionRoomTrade))
@@ -2339,7 +2339,7 @@ void sub_80156E0(u8 taskId)
                 }
                 else
                 {
-                    sub_8011090(0x54, 0, 1);
+                    UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
                     gUnknown_02022C2C = 0x44;
                     RegisterTradeMon(GetCursorSelectionMonId(), &sUnionRoomTrade);
                     data->state = 51;
@@ -2358,7 +2358,7 @@ void sub_80156E0(u8 taskId)
         {
             if (gSpecialVar_Result == 9)
             {
-                sub_8011090(0x54, 0, 1);
+                UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
                 PlaySE(SE_PC_LOGIN);
                 StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
                 data->state = 42;
@@ -2366,7 +2366,7 @@ void sub_80156E0(u8 taskId)
             }
             else if (gSpecialVar_Result == 11)
             {
-                sub_8011090(0x54, 0, 1);
+                UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
                 data->state = 23;
                 gSpecialVar_Result = 0;
             }
@@ -2391,7 +2391,7 @@ void sub_80156E0(u8 taskId)
                 }
                 else if (sub_8017940())
                 {
-                    sub_8011090(0x54, 0, 1);
+                    UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
                     PlaySE(SE_PC_LOGIN);
                     sub_80181CC();
                     StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
@@ -2410,8 +2410,8 @@ void sub_80156E0(u8 taskId)
             case 4:
                 data->state = 11;
                 sub_80181CC();
-                sub_8010FCC(0, 0, 0);
-                sub_8011090(0x53, sub_80181DC(data), 0);
+                RfuUpdatePlayerGnameStateAndSend(0, 0, 0);
+                UpdateGameDataWithActivitySpriteGendersFlag(0x53, sub_80181DC(data), 0);
                 break;
             }
             sub_801A284(data);
@@ -2420,14 +2420,14 @@ void sub_80156E0(u8 taskId)
     case 23:
         if (!FuncIsActiveTask(Task_ShowStartMenu))
         {
-            sub_8011090(0x40, 0, 0);
+            UpdateGameDataWithActivitySpriteGendersFlag(0x40, 0, 0);
             data->state = 4;
         }
         break;
     case 24:
         sub_801704C();
         playerGender = sub_8017CF8(taskData[1], data->field_0);
-        sub_8011090(0x54, 0, 1);
+        UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
         switch (sub_80179D4(data->field_0, taskData[0], taskData[1], playerGender))
         {
         case 0:
@@ -2445,7 +2445,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 25:
         sub_801704C();
-        switch (sub_8011A74())
+        switch (RfuGetErrorStatus())
         {
         case 4:
             sub_801818C(TRUE);
@@ -2453,7 +2453,7 @@ void sub_80156E0(u8 taskId)
             break;
         case 1:
         case 2:
-            if (sub_8011B90() == TRUE)
+            if (IsUnionRoomListenTaskActive() == TRUE)
                 sub_801568C(sText_TrainerAppearsBusy);
             else
                 sub_8015664(30, sText_TrainerAppearsBusy);
@@ -2506,7 +2506,7 @@ void sub_80156E0(u8 taskId)
                 if (var5 == -2 || var5 == 0x40)
                 {
                     data->field_4C[0] = 0x40;
-                    sub_800FE50(data->field_4C);
+                    RfuPrepareSend0x2f00(data->field_4C);
                     StringCopy(gStringVar4, sIfYouWantToDoSomethingTexts[gLinkPlayers[0].gender]);
                     data->state = 32;
                 }
@@ -2521,7 +2521,7 @@ void sub_80156E0(u8 taskId)
                     else
                     {
                         data->field_4C[0] = gUnknown_02022C2C | 0x40;
-                        sub_800FE50(data->field_4C);
+                        RfuPrepareSend0x2f00(data->field_4C);
                         data->state = 27;
                     }
                 }
@@ -2550,7 +2550,7 @@ void sub_80156E0(u8 taskId)
         data->field_4C[0] = 0x44;
         data->field_4C[1] = sUnionRoomTrade.species;
         data->field_4C[2] = sUnionRoomTrade.level;
-        sub_800FE50(data->field_4C);
+        RfuPrepareSend0x2f00(data->field_4C);
         data->state = 29;
         break;
     case 29:
@@ -2603,7 +2603,7 @@ void sub_80156E0(u8 taskId)
             if (GetMultiplayerId() == 0)
             {
                 StringCopy(gStringVar1, gLinkPlayers[GetMultiplayerId() ^ 1].name);
-                id = sub_800E540(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
+                id = PlayerHasMetTrainerBefore(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
                 StringExpandPlaceholders(gStringVar4, sAwaitingResponseTexts[id]);
                 data->state = 33;
             }
@@ -2619,7 +2619,7 @@ void sub_80156E0(u8 taskId)
         case 0:
             CopyBgTilemapBufferToVram(0);
             gUnknown_02022C2C = 0x45;
-            sub_8011090(0x45, 0, 1);
+            UpdateGameDataWithActivitySpriteGendersFlag(0x45, 0, 1);
             sub_8012188(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, gUnknown_02022C2C);
             data->field_12 = taskData[1];
             data->state = 20;
@@ -2640,7 +2640,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 21:
-        switch (sub_8011A74())
+        switch (RfuGetErrorStatus())
         {
         case 4:
             sub_801818C(TRUE);
@@ -2649,8 +2649,8 @@ void sub_80156E0(u8 taskId)
         case 1:
         case 2:
             playerGender = sub_8017CF8(taskData[1], data->field_0);
-            sub_8011090(0x54, 0, 1);
-            if (sub_8011B90() == TRUE)
+            UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
+            if (IsUnionRoomListenTaskActive() == TRUE)
                 sub_801568C(sChatDeclinedTexts[playerGender]);
             else
                 sub_8015664(30, sChatDeclinedTexts[playerGender]);
@@ -2662,11 +2662,11 @@ void sub_80156E0(u8 taskId)
         taskData[3]++;
         break;
     case 22:
-        if (sub_8011A80())
+        if (RfuIsErrorStatus1or2())
         {
             playerGender = sub_8017CF8(taskData[1], data->field_0);
-            sub_8011090(0x54, 0, 1);
-            if (sub_8011B90() == TRUE)
+            UpdateGameDataWithActivitySpriteGendersFlag(0x54, 0, 1);
+            if (IsUnionRoomListenTaskActive() == TRUE)
                 sub_801568C(sChatDeclinedTexts[playerGender]);
             else
                 sub_8015664(30, sChatDeclinedTexts[playerGender]);
@@ -2681,7 +2681,7 @@ void sub_80156E0(u8 taskId)
         data->field_9A[0] = 0;
         break;
     case 12:
-        if (sub_8011A80())
+        if (RfuIsErrorStatus1or2())
         {
             sub_801818C(FALSE);
             data->state = 2;
@@ -2699,7 +2699,7 @@ void sub_80156E0(u8 taskId)
         {
             data->state = 33;
             StringCopy(gStringVar1, gLinkPlayers[1].name);
-            id = sub_800E540(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
+            id = PlayerHasMetTrainerBefore(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
             StringExpandPlaceholders(gStringVar4, sPlayerContactedYouTexts[id]);
         }
         break;
@@ -2726,9 +2726,9 @@ void sub_80156E0(u8 taskId)
         case 0:
             data->field_4C[0] = 0x51;
             if (gUnknown_02022C2C == 0x45)
-                sub_8011090(gUnknown_02022C2C | 0x40, sub_801100C(1), 0);
+                UpdateGameDataWithActivitySpriteGendersFlag(gUnknown_02022C2C | 0x40, sub_801100C(1), 0);
             else
-                sub_8011090(gUnknown_02022C2C | 0x40, sub_801100C(1), 1);
+                UpdateGameDataWithActivitySpriteGendersFlag(gUnknown_02022C2C | 0x40, sub_801100C(1), 1);
 
             data->field_8->arr[0].field_1B = 0;
             taskData[3] = 0;
@@ -2737,32 +2737,32 @@ void sub_80156E0(u8 taskId)
                 if (!HasAtLeastTwoMonsOfLevel30OrLower())
                 {
                     data->field_4C[0] = 0x52;
-                    sub_800FE50(data->field_4C);
+                    RfuPrepareSend0x2f00(data->field_4C);
                     data->state = 10;
                     StringCopy(gStringVar4, sText_NeedTwoMonsOfLevel30OrLower2);
                 }
                 else
                 {
-                    sub_800FE50(data->field_4C);
+                    RfuPrepareSend0x2f00(data->field_4C);
                     data->state = 13;
                 }
             }
             else if (gUnknown_02022C2C == 0x48)
             {
-                sub_800FE50(data->field_4C);
+                RfuPrepareSend0x2f00(data->field_4C);
                 sub_8018220(gStringVar4, data, 1);
                 data->state = 40;
             }
             else
             {
-                sub_800FE50(data->field_4C);
+                RfuPrepareSend0x2f00(data->field_4C);
                 data->state = 13;
             }
             break;
         case 1:
         case -1:
             data->field_4C[0] = 0x52;
-            sub_800FE50(data->field_4C);
+            RfuPrepareSend0x2f00(data->field_4C);
             data->state = 10;
             sub_8013078(gStringVar4, gUnknown_02022C2C);
             break;
@@ -2821,20 +2821,20 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 42:
-        if (sub_800F7DC()->species == SPECIES_NONE)
+        if (GetHostRFUtgtGname()->species == SPECIES_NONE)
         {
             data->state = 43;
         }
         else
         {
-            if (sub_800F7DC()->species == SPECIES_EGG)
+            if (GetHostRFUtgtGname()->species == SPECIES_EGG)
             {
                 StringCopy(gStringVar4, sText_CancelRegistrationOfEgg);
             }
             else
             {
-                StringCopy(gStringVar1, gSpeciesNames[sub_800F7DC()->species]);
-                ConvertIntToDecimalStringN(gStringVar2, sub_800F7DC()->level, STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringCopy(gStringVar1, gSpeciesNames[GetHostRFUtgtGname()->species]);
+                ConvertIntToDecimalStringN(gStringVar2, GetHostRFUtgtGname()->level, STR_CONV_MODE_LEFT_ALIGN, 3);
                 StringExpandPlaceholders(gStringVar4, sText_CancelRegistrationOfMon);
             }
             sub_8015664(44, gStringVar4);
@@ -2888,7 +2888,7 @@ void sub_80156E0(u8 taskId)
             case -2:
             case 18:
                 ResetUnionRoomTrade(&sUnionRoomTrade);
-                sub_8010FCC(0, 0, 0);
+                RfuUpdatePlayerGnameStateAndSend(0, 0, 0);
                 sub_801568C(sText_RegistrationCanceled);
                 break;
             default:
@@ -2899,7 +2899,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 55:
-        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        RfuUpdatePlayerGnameStateAndSend(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         sub_801568C(sText_RegistraionCompleted);
         break;
     case 44:
@@ -2918,7 +2918,7 @@ void sub_80156E0(u8 taskId)
     case 56:
         if (PrintOnTextbox(&data->textState, sText_RegistrationCanceled2))
         {
-            sub_8010FCC(0, 0, 0);
+            RfuUpdatePlayerGnameStateAndSend(0, 0, 0);
             ResetUnionRoomTrade(&sUnionRoomTrade);
             sub_801818C(TRUE);
             data->state = 4;
@@ -3088,10 +3088,10 @@ void sub_801697C(u8 taskId)
         structPtr->state = 1;
         break;
     case 1:
-        sub_8010F84(0xC, 0, 0);
-        sub_800B488();
+        SetHostRFUtgtGname(0xC, 0, 0);
+        SetWirelessCommType1();
         OpenLink();
-        sub_8011C84();
+        InitializeRfuLinkManager_EnterUnionRoom();
         sub_80111B0(1);
         structPtr->state = 2;
         break;
@@ -3119,7 +3119,7 @@ void sub_801697C(u8 taskId)
                     if (structPtr->field_0->arr[i].field_1A_0 == 1)
                     {
                         sub_8018404(text, &structPtr->field_0->arr[i]);
-                        if (sub_800E540(ReadAsU16(structPtr->field_0->arr[i].unk.field_0.unk_00.playerTrainerId), text))
+                        if (PlayerHasMetTrainerBefore(ReadAsU16(structPtr->field_0->arr[i].unk.field_0.unk_00.playerTrainerId), text))
                         {
                             StringCopy(sUnionRoomPlayerName, text);
                             break;
@@ -3139,7 +3139,7 @@ void sub_801697C(u8 taskId)
         free(structPtr->field_4);
         DestroyTask(structPtr->field_20);
         free(gUnknown_02022C30.uRoom);
-        sub_800EDD4();
+        LinkRfu_Shutdown();
         DestroyTask(taskId);
         break;
     }
@@ -3244,7 +3244,7 @@ void sub_8016CA0(u8 taskId)
 
     for (i = 0; i < 4; i++)
     {
-        r4 = sub_800DE7C(&sp0.field_0, sp0.playerName, i);
+        r4 = LinkRfu_GetNameIfCompatible(&sp0.field_0, sp0.playerName, i);
         if (!sub_8013D88(sp0.field_0.activity, gTasks[taskId].data[4]))
         {
             sp0 = gUnknown_082F045C;
@@ -3290,7 +3290,7 @@ void sub_8016E24(u8 taskId)
 
     for (i = 0; i < 4; i++)
     {
-        sub_800DE7C(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i);
+        LinkRfu_GetNameIfCompatible(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i);
         if (!sub_8013D88(ptr[0]->arr[i].unk0.field_0.activity, gTasks[taskId].data[2]))
         {
             ptr[0]->arr[i].unk0 = gUnknown_082F045C;
@@ -3343,7 +3343,7 @@ void sub_8016F44(u8 taskId)
 
     for (i = 0; i < 4; i++)
     {
-        if (sub_800DF34(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i))
+        if (LinkRfu3_SetGnameUnameFromStaticBuffers(&ptr[0]->arr[i].unk0.field_0, ptr[0]->arr[i].unk0.playerName, i))
         {
             sub_8016F1C(&ptr[0]->arr[i].unk0.field_0, gTasks[taskId].data[2]);
         }
@@ -3845,7 +3845,7 @@ u32 sub_80179AC(struct UnkStruct_x20 *arg0)
 {
     u8 sp0[30];
     sub_8018404(sp0, arg0);
-    return sub_800E540(ReadAsU16(arg0->unk.field_0.unk_00.playerTrainerId), sp0);
+    return PlayerHasMetTrainerBefore(ReadAsU16(arg0->unk.field_0.unk_00.playerTrainerId), sp0);
 }
 
 s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender)
@@ -3857,7 +3857,7 @@ s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
     if (!r5->unk.field_0.started && arg1 == 0)
     {
         sub_8018404(gStringVar1, r5);
-        r2 = sub_800E540(ReadAsU16(r5->unk.field_0.unk_00.playerTrainerId), gStringVar1);
+        r2 = PlayerHasMetTrainerBefore(ReadAsU16(r5->unk.field_0.unk_00.playerTrainerId), gStringVar1);
         if (r5->unk.field_0.activity == 0x45)
         {
             StringExpandPlaceholders(gStringVar4, sJoinChatTexts[r2][playerGender]);
@@ -3933,7 +3933,7 @@ void sub_8017BE8(u8 windowId, s32 itemId, u8 y)
 
     if (itemId == -3 && y == gUnknown_082F03A4.upText_Y)
     {
-        rfu = sub_800F7DC();
+        rfu = GetHostRFUtgtGname();
         if (rfu->species != SPECIES_NONE)
         {
             sub_8017B3C(windowId, y, rfu, gSaveBlock2Ptr->playerName, 5);
@@ -4236,8 +4236,8 @@ void sub_801818C(bool32 arg0)
     gUnknown_02022C2C = 0;
     if (arg0)
     {
-        sub_8010FCC(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
-        sub_8011090(0x40, 0, 0);
+        RfuUpdatePlayerGnameStateAndSend(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
+        UpdateGameDataWithActivitySpriteGendersFlag(0x40, 0, 0);
     }
 }
 

@@ -393,9 +393,9 @@ static void CB2_CreateTradeMenu(void)
 
             if (gWirelessCommType)
             {
-                sub_800B488();
+                SetWirelessCommType1();
                 OpenLink();
-                sub_8011BA4();
+                LinkRfu_CreateIdleTask();
             }
             else
             {
@@ -437,13 +437,13 @@ static void CB2_CreateTradeMenu(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            sub_8011BD0();
+            LinkRfu_DestroyIdleTask();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuData->timer = 0;
             if (gWirelessCommType)
             {
-                sub_801048C(TRUE);
+				ToggleLMANlinkRecovery(TRUE);
                 sub_800ADF8();
             }
         }
@@ -1689,7 +1689,7 @@ static void CancelTrade_2(void)
 
 static void LinkTradeWaitForQueue(void)
 {
-    if (!sub_801048C(FALSE) && GetNumQueuedActions() == 0)
+    if (!ToggleLMANlinkRecovery(FALSE) && GetNumQueuedActions() == 0)
     {
         sub_800ADF8();
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_START_LINK_TRADE;

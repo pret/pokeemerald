@@ -573,7 +573,7 @@ static void IsTrainerHillChallengeActive(void)
         gSpecialVar_Result = TRUE;
 }
 
-void nullsub_129(void)
+void rfu_dbg_print_num9(void)
 {
 
 }

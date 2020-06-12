@@ -708,7 +708,7 @@ static void sub_801DFAC(void)
         gUnknown_02022C84->unk6++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
             if (SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
                 gUnknown_02022C84->unk6++;
@@ -917,7 +917,7 @@ static void sub_801E240(void)
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
         {
             if (!gUnknown_02022C84->unk13)
                 gUnknown_02022C84->unk6 = 6;
@@ -968,15 +968,15 @@ static void sub_801E460(void)
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
             gUnknown_02022C84->unk6++;
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 1) && !sub_8011A9C())
+        if ((GetBlockReceivedStatus() & 1) && !GetRfuUnkCE8())
             gUnknown_02022C84->unk6++;
         break;
     case 5:
-        if (IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
             sub_800AC34();
             gUnknown_02022C84->unkA = 0;
@@ -1011,7 +1011,7 @@ static void sub_801E5C4(void)
         }
         break;
     case 1:
-        if (!sub_801F644(0) && IsLinkTaskFinished() && !sub_8011A9C())
+        if (!sub_801F644(0) && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
             sub_800AC34();
             gUnknown_02022C84->unkA = 0;
@@ -1057,7 +1057,7 @@ static void sub_801E668(void)
         }
         break;
     case 2:
-        if (sub_801F644(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
+        if (sub_801F644(0) != TRUE && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
             sub_800AC34();
             gUnknown_02022C84->unkA = 0;
@@ -1095,7 +1095,7 @@ static void sub_801E764(void)
         gUnknown_02022C84->unk6++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !sub_8011A9C() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
+        if (IsLinkTaskFinished() == TRUE && !GetRfuUnkCE8() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
             gUnknown_02022C84->unk6++;
         break;
     case 2:
@@ -1736,7 +1736,7 @@ static void sub_801F2B4(u8 taskId)
         }
 
         data[3] = GetBlockReceivedStatus();
-        if (!data[3] && sub_8011A9C())
+        if (!data[3] && GetRfuUnkCE8())
             return;
 
         data[1] = 0;
@@ -1809,7 +1809,7 @@ static void sub_801F2B4(u8 taskId)
         DestroyTask(taskId);
         break;
     case 2:
-        if (!sub_8011A9C())
+        if (!GetRfuUnkCE8())
         {
             if (!gUnknown_02022C84->unk13)
                 sub_80110B8(gUnknown_02022C84->unkD);

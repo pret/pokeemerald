@@ -270,7 +270,7 @@ static void sub_802EAB0(u8 taskId)
             memset(packet, 0, sizeof(packet));
             packet[0] = 0x7FFF;
             packet[1] = data[12];
-            sub_800FE50(packet);
+            RfuPrepareSend0x2f00(packet);
         }
     }
     else

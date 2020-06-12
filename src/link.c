@@ -221,7 +221,7 @@ static const u8 sUnused_082ED224[] = {0x00, 0xff, 0xfe, 0xff, 0x00};
 
 bool8 IsWirelessAdapterConnected(void)
 {
-    sub_800B488();
+    SetWirelessCommType1();
     sub_800E700();
     if (rfu_LMAN_REQBN_softReset_and_checkID() == 0x8001)
     {
@@ -389,7 +389,7 @@ void CloseLink(void)
     gReceivedRemoteLinkPlayers = FALSE;
     if (gWirelessCommType)
     {
-        sub_800EDD4();
+        LinkRfu_Shutdown();
     }
     gLinkOpen = FALSE;
     DisableSerial();
@@ -601,7 +601,7 @@ static void ProcessRecvCmds(u8 unused)
                             linkPlayer->neverRead = 0;
                             linkPlayer->progressFlags = 0;
                         }
-                        sub_800B524(linkPlayer);
+                        IntlConvertLinkPlayerName(linkPlayer);
                         if (strcmp(block->magic1, gASCIIGameFreakInc) != 0
                             || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
                         {
@@ -709,7 +709,7 @@ void sub_8009F18(void)
 {
     if (gWirelessCommType)
     {
-        sub_800F804();
+        StartSendingKeysToRfu();
     }
     gLinkCallback = sub_8009F70;
 }
@@ -763,7 +763,7 @@ u8 GetLinkPlayerCount(void)
 {
     if (gWirelessCommType)
     {
-        return sub_80104F4();
+        return GetRfuPlayerCount();
     }
     return EXTRACT_PLAYER_COUNT(gLinkStatus);
 }
@@ -1043,7 +1043,7 @@ u8 GetMultiplayerId(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        return rfu_get_multiplayer_id();
+        return LinkRfu_GetMultiplayerId();
     }
     return SIO_MULTI_CNT->id;
 }
@@ -1060,7 +1060,7 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
 {
     if (gWirelessCommType == TRUE)
     {
-        return sub_800FE84(src, size);
+        return Rfu_InitBlockSend(src, size);
     }
     return InitBlockSend(src, size);
 }
@@ -1069,7 +1069,7 @@ bool8 sub_800A4D8(u8 a0)
 {
     if (gWirelessCommType == TRUE)
     {
-        return sub_8010100(a0);
+        return LinkRfu_PrepareCmd0xA100(a0);
     }
     if (gLinkCallback == NULL)
     {
@@ -1093,7 +1093,7 @@ u8 GetBlockReceivedStatus(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        return sub_800FCD8();
+        return Rfu_GetBlockReceivedStatus();
     }
     return (gBlockReceivedStatus[3] << 3) | (gBlockReceivedStatus[2] << 2) | (gBlockReceivedStatus[1] << 1) | (gBlockReceivedStatus[0] << 0);
 }
@@ -1102,7 +1102,7 @@ static void SetBlockReceivedFlag(u8 who)
 {
     if (gWirelessCommType == TRUE)
     {
-        sub_800F6FC(who);
+        Rfu_SetBlockReceivedFlag(who);
     }
     else
     {
@@ -1118,7 +1118,7 @@ void ResetBlockReceivedFlags(void)
     {
         for (i = 0; i < MAX_RFU_PLAYERS; i++)
         {
-            sub_800F728(i);
+            Rfu_ResetBlockReceivedFlag(i);
         }
     }
     else
@@ -1134,7 +1134,7 @@ void ResetBlockReceivedFlag(u8 who)
 {
     if (gWirelessCommType == TRUE)
     {
-        sub_800F728(who);
+        Rfu_ResetBlockReceivedFlag(who);
     }
     else if (gBlockReceivedStatus[who])
     {
@@ -1427,7 +1427,7 @@ void sub_800ABF4(u16 a0)
 {
     if (gWirelessCommType == TRUE)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_BeginBuildAndSendCommand5F();
     }
     else
     {
@@ -1444,7 +1444,7 @@ void sub_800AC34(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_BeginBuildAndSendCommand5F();
     }
     else
     {
@@ -1499,7 +1499,7 @@ void sub_800AD10(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_BeginBuildAndSendCommand5F();
     }
     else
     {
@@ -1558,7 +1558,7 @@ void sub_800ADF8(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        sub_8010434();
+        LinkRfu_SetRfuFuncToSend6600();
     }
     else
     {
@@ -1618,7 +1618,7 @@ static void CheckErrorStatus(void)
     }
 }
 
-void sub_800AF18(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
 {
     sLinkErrorBuffer.status = status;
     sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
@@ -1647,7 +1647,7 @@ void CB2_LinkError(void)
         {
             gWirelessCommType = 3;
         }
-        sub_800E604();
+        ResetLinkRfuGFLayer();
     }
     SetVBlankCallback(sub_80096BC);
     ResetBgsAndClearDma3BusyFlags(0);
@@ -1803,7 +1803,7 @@ bool8 HasLinkErrorOccurred(void)
     return gLinkErrorOccurred;
 }
 
-void sub_800B348(void)
+void PrepareLocalLinkPlayerBlock(void)
 {
     struct LinkPlayerBlock *block;
 
@@ -1815,7 +1815,7 @@ void sub_800B348(void)
     memcpy(gBlockSendBuffer, block, sizeof(*block));
 }
 
-void sub_800B3A4(u32 who)
+void LinkPlayerFromBlock(u32 who)
 {
     u8 who_ = who;
     struct LinkPlayerBlock *block;
@@ -1824,7 +1824,7 @@ void sub_800B3A4(u32 who)
     block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
     player = &gLinkPlayers[who_];
     *player = block->linkPlayer;
-    sub_800B524(player);
+    IntlConvertLinkPlayerName(player);
     if (strcmp(block->magic1, gASCIIGameFreakInc) != 0 || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
     {
         SetMainCallback2(CB2_LinkError);
@@ -1847,8 +1847,8 @@ bool8 HandleLinkConnection(void)
     }
     else
     {
-        r4 = sub_8010EC0();
-        r5 = sub_8010F1C();
+        r4 = LinkRfuMain1();
+        r5 = LinkRfuMain2();
         if (sub_808766C() == TRUE)
         {
             if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
@@ -1860,7 +1860,7 @@ bool8 HandleLinkConnection(void)
     return FALSE;
 }
 
-void sub_800B488(void)
+void SetWirelessCommType1(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
@@ -1908,7 +1908,7 @@ u8 GetWirelessCommType(void)
     return gWirelessCommType;
 }
 
-void sub_800B524(struct LinkPlayer *player)
+void IntlConvertLinkPlayerName(struct LinkPlayer *player)
 {
     player->progressFlagsCopy = player->progressFlags;
     ConvertInternationalString(player->name, player->language);

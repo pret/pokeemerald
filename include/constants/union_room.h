@@ -1,6 +1,35 @@
 #ifndef GUARD_CONSTANTS_UNION_ROOM_H
 #define GUARD_CONSTANTS_UNION_ROOM_H
 
+#define ACTIVITY_NONE       0
+#define ACTIVITY_BATTLE     1
+#define ACTIVITY_DBLBATTLE  2
+#define ACTIVITY_MLTBATTLE  3
+#define ACTIVITY_TRADE      4
+#define ACTIVITY_CHAT       5
+#define ACTIVITY_WCARD      6
+#define ACTIVITY_WNEWS      7
+#define ACTIVITY_CARD       8
+#define ACTIVITY_PJUMP      9
+#define ACTIVITY_BCRUSH    10
+#define ACTIVITY_BPICK     11
+#define ACTIVITY_SEARCH    12
+#define ACTIVITY_SPINTRADE 13
+#define ACTIVITY_ITEMTRADE 14
+
+// Player response
+#define ACTIVITY_ACCEPT    17
+#define ACTIVITY_DECLINE   18
+
+#define ACTIVITY_NPCTALK   19
+#define ACTIVITY_PLYRTALK  20
+
+// Duplicate IDs?
+#define ACTIVITY_WCARD2    21
+#define ACTIVITY_WNEWS2    22
+
+#define IN_UNION_ROOM   0x40
+
 #define LINK_GROUP_SINGLE_BATTLE        0
 #define LINK_GROUP_DOUBLE_BATTLE        1
 #define LINK_GROUP_MULTI_BATTLE         2

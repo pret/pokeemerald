@@ -985,7 +985,7 @@ static void Task_DoRecordMixing(u8 taskId)
 
     // Mixing Emerald records.
     case 6:
-        if (!sub_801048C(FALSE))
+        if (!ToggleLMANlinkRecovery(FALSE))
         {
             CreateTask(sub_8153688, 5);
             task->data[0] ++;
@@ -996,7 +996,7 @@ static void Task_DoRecordMixing(u8 taskId)
         {
             if (gWirelessCommType)
             {
-                sub_801048C(TRUE);
+                ToggleLMANlinkRecovery(TRUE);
                 task->data[0] = 8;
             }
             else

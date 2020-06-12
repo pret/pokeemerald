@@ -558,7 +558,7 @@ static void sub_8024BC8(u8 taskId)
     case 2:
         if (!sub_802A770())
         {
-            sub_8010434();
+            LinkRfu_SetRfuFuncToSend6600();
             gUnknown_02022C98->unk0C++;
         }
         break;
@@ -671,7 +671,7 @@ static void sub_8024E38(void)
         gUnknown_02022C98->unk10++;
         break;
     case 1:
-        sub_8010434();
+        LinkRfu_SetRfuFuncToSend6600();
         gUnknown_02022C98->unk10++;
         break;
     case 2:
@@ -690,7 +690,7 @@ static void sub_8024E38(void)
     case 4:
         if (++gUnknown_02022C98->unk30 > 5)
         {
-            sub_8010434();
+            LinkRfu_SetRfuFuncToSend6600();
             gUnknown_02022C98->unk10++;
         }
         break;
@@ -2748,7 +2748,7 @@ static void sub_8027DD0(u32 arg0)
     struct UnkPacket1 packet;
     packet.id = 1;
     packet.unk4 = arg0;
-    sub_800FE50(&packet);
+    RfuPrepareSend0x2f00(&packet);
 }
 
 static u32 sub_8027DFC(u32 arg0)
@@ -2857,7 +2857,7 @@ static void sub_8027E30(struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruc
     packet.unkA_3 = arg6;
     packet.unkB_1 = arg7;
     packet.unkB_0 = arg8;
-    sub_800FE50(&packet);
+    RfuPrepareSend0x2f00(&packet);
 }
 
 static u32 sub_8028164(u32 unused, struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruct_31A0_2C *arg1, struct DodrioSubstruct_31A0_2C *arg2, struct DodrioSubstruct_31A0_2C *arg3, struct DodrioSubstruct_31A0_2C *arg4, struct DodrioSubstruct_31A0_2C *arg5, u8 *arg6, u32 *arg7, u32 *arg8)
@@ -2935,7 +2935,7 @@ static void sub_80282EC(u8 arg0)
     struct UnkPacket3 packet;
     packet.id = 3;
     packet.unk4 = arg0;
-    sub_800FE50(&packet);
+    RfuPrepareSend0x2f00(&packet);
 }
 
 static u32 sub_8028318(u32 arg0, u8 *arg1)
@@ -2966,7 +2966,7 @@ static void sub_8028350(u32 arg0)
     struct UnkPacket4 packet;
     packet.id = 4;
     packet.unk4 = arg0;
-    sub_800FE50(&packet);
+    RfuPrepareSend0x2f00(&packet);
 }
 
 static u32 sub_8028374(u32 arg0)
