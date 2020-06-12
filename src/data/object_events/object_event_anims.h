@@ -208,12 +208,30 @@ const union AnimCmd gObjectEventImageAnim_GoSouth[] =
     ANIMCMD_JUMP(0),
 };
 
+const union AnimCmd gObjectEventImageAnim_GoSouth2F[] =
+{
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_JUMP(0),
+};
+
 const union AnimCmd gObjectEventImageAnim_GoNorth[] =
 {
     ANIMCMD_FRAME(5, 8),
     ANIMCMD_FRAME(1, 8),
     ANIMCMD_FRAME(6, 8),
     ANIMCMD_FRAME(1, 8),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_GoNorth2F[] =
+{
+  ANIMCMD_FRAME(5, 6),
+  ANIMCMD_FRAME(6, 6),
+  ANIMCMD_FRAME(6, 6),
+  ANIMCMD_FRAME(1, 6),
     ANIMCMD_JUMP(0),
 };
 
@@ -226,12 +244,30 @@ const union AnimCmd gObjectEventImageAnim_GoWest[] =
     ANIMCMD_JUMP(0),
 };
 
+const union AnimCmd gObjectEventImageAnim_GoWest2F[] =
+{
+    ANIMCMD_FRAME(7, 6),
+    ANIMCMD_FRAME(8, 6),
+    ANIMCMD_FRAME(8, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_JUMP(0),
+};
+
 const union AnimCmd gObjectEventImageAnim_GoEast[] =
 {
     ANIMCMD_FRAME(7, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(8, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gObjectEventImageAnim_GoEast2F[] =
+{
+    ANIMCMD_FRAME(7, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 6, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 6, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -831,6 +867,29 @@ const union AnimCmd *const gObjectEventImageAnimTable_Standard[] = {
     gObjectEventImageAnim_GoNorth,
     gObjectEventImageAnim_GoWest,
     gObjectEventImageAnim_GoEast,
+    gObjectEventImageAnim_GoFastSouth,
+    gObjectEventImageAnim_GoFastNorth,
+    gObjectEventImageAnim_GoFastWest,
+    gObjectEventImageAnim_GoFastEast,
+    gObjectEventImageAnim_GoFasterSouth,
+    gObjectEventImageAnim_GoFasterNorth,
+    gObjectEventImageAnim_GoFasterWest,
+    gObjectEventImageAnim_GoFasterEast,
+    gObjectEventImageAnim_GoFastestSouth,
+    gObjectEventImageAnim_GoFastestNorth,
+    gObjectEventImageAnim_GoFastestWest,
+    gObjectEventImageAnim_GoFastestEast,
+};
+
+const union AnimCmd *const gObjectEventImageAnimTable_Following[] = {
+    gObjectEventImageAnim_FaceSouth,
+    gObjectEventImageAnim_FaceNorth,
+    gObjectEventImageAnim_FaceWest,
+    gObjectEventImageAnim_FaceEast,
+    gObjectEventImageAnim_GoSouth2F,
+    gObjectEventImageAnim_GoNorth2F,
+    gObjectEventImageAnim_GoWest2F,
+    gObjectEventImageAnim_GoEast2F,
     gObjectEventImageAnim_GoFastSouth,
     gObjectEventImageAnim_GoFastNorth,
     gObjectEventImageAnim_GoFastWest,

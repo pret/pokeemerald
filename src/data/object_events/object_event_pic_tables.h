@@ -2149,6 +2149,30 @@ const struct SpriteFrameImage gObjectEventPicTable_HoOh[] = {
     overworld_frame(gObjectEventPic_HoOh, 4, 4, 1),
 };
 
+const struct SpriteFrameImage gObjectEventPicTable_Marshtomp[] = {
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 0),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 1),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 2),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 3),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 4),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 5),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 6),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 7),
+    overworld_frame(gObjectEventPic_Marshtomp, 2, 4, 8),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Altaria[] = {
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 5),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 6),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 7),
+    overworld_frame(gObjectEventPic_Altaria, 4, 4, 8),
+};
+
 const struct SpriteFrameImage gObjectEventPicTable_RubySapphireBrendan[] = {
     overworld_frame(gObjectEventPic_RubySapphireBrendanNormal, 2, 4, 0),
     overworld_frame(gObjectEventPic_RubySapphireBrendanNormal, 2, 4, 1),

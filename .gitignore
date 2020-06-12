@@ -33,4 +33,5 @@ porymap.project.cfg
 .vscode/
 *.a
 .fuse_hidden*
+.ccls-cache/*
 *.sna

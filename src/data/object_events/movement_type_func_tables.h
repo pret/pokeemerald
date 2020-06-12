@@ -401,6 +401,26 @@ bool8 (*const gCopyPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *,
     CopyablePlayerMovement_None,
 };
 
+u8 (*const gMovementTypeFuncs_FollowPlayer[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_FollowPlayer_Step0,
+    MovementType_FollowPlayer_Step1,
+    MovementType_FollowPlayer_Step2,
+};
+
+bool8 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {
+    FollowablePlayerMovement_Idle,
+    FollowablePlayerMovement_Idle,
+    FollowablePlayerMovement_GoSpeed0,
+    FollowablePlayerMovement_GoSpeed1,
+    FollowablePlayerMovement_GoSpeed2,
+    FollowablePlayerMovement_Slide,
+    fph_IM_DIFFERENT,
+    FollowablePlayerMovement_GoSpeed4,
+    FollowablePlayerMovement_Jump,
+    FollowablePlayerMovement_Idle,
+    FollowablePlayerMovement_Idle,
+};
+
 u8 (*const gMovementTypeFuncs_CopyPlayerInGrass[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_CopyPlayer_Step0,
     MovementType_CopyPlayerInGrass_Step1,
