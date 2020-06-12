@@ -450,7 +450,6 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #include "data/object_events/object_event_subsprites.h"
 #include "data/object_events/object_event_graphics_info.h"
 
-<<<<<<< HEAD
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Npc1,                  OBJ_EVENT_PAL_TAG_NPC_1},
     {gObjectEventPal_Npc2,                  OBJ_EVENT_PAL_TAG_NPC_2},
@@ -487,47 +486,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-    {NULL,                                  0x0000},
-=======
-const struct SpritePalette sObjectEventSpritePalettes[] = {
-    {gObjectEventPalette0,  OBJ_EVENT_PAL_TAG_0},
-    {gObjectEventPalette1,  OBJ_EVENT_PAL_TAG_1},
-    {gObjectEventPalette2,  OBJ_EVENT_PAL_TAG_2},
-    {gObjectEventPalette3,  OBJ_EVENT_PAL_TAG_3},
-    {gObjectEventPalette4,  OBJ_EVENT_PAL_TAG_4},
-    {gObjectEventPalette5,  OBJ_EVENT_PAL_TAG_5},
-    {gObjectEventPalette6,  OBJ_EVENT_PAL_TAG_6},
-    {gObjectEventPalette7,  OBJ_EVENT_PAL_TAG_7},
-    {gObjectEventPalette8,  OBJ_EVENT_PAL_TAG_8},
-    {gObjectEventPalette9,  OBJ_EVENT_PAL_TAG_9},
-    {gObjectEventPalette10, OBJ_EVENT_PAL_TAG_10},
-    {gObjectEventPalette11, OBJ_EVENT_PAL_TAG_11},
-    {gObjectEventPalette12, OBJ_EVENT_PAL_TAG_12},
-    {gObjectEventPalette13, OBJ_EVENT_PAL_TAG_13},
-    {gObjectEventPalette14, OBJ_EVENT_PAL_TAG_14},
-    {gObjectEventPalette15, OBJ_EVENT_PAL_TAG_15},
-    {gObjectEventPalette16, OBJ_EVENT_PAL_TAG_16},
-    {gObjectEventPalette17, OBJ_EVENT_PAL_TAG_17},
-    {gObjectEventPalette18, OBJ_EVENT_PAL_TAG_18},
-    {gObjectEventPalette19, OBJ_EVENT_PAL_TAG_19},
-    {gObjectEventPalette20, OBJ_EVENT_PAL_TAG_20},
-    {gObjectEventPalette21, OBJ_EVENT_PAL_TAG_21},
-    {gObjectEventPalette22, OBJ_EVENT_PAL_TAG_22},
-    {gObjectEventPalette23, OBJ_EVENT_PAL_TAG_23},
-    {gObjectEventPalette24, OBJ_EVENT_PAL_TAG_24},
-    {gObjectEventPalette25, OBJ_EVENT_PAL_TAG_25},
-    {gObjectEventPalette26, OBJ_EVENT_PAL_TAG_26},
-    {gObjectEventPalette27, OBJ_EVENT_PAL_TAG_27},
-    {gObjectEventPalette28, OBJ_EVENT_PAL_TAG_28},
-    {gObjectEventPalette29, OBJ_EVENT_PAL_TAG_29},
-    {gObjectEventPalette30, OBJ_EVENT_PAL_TAG_30},
-    {gObjectEventPalette31, OBJ_EVENT_PAL_TAG_31},
-    {gObjectEventPalette32, OBJ_EVENT_PAL_TAG_32},
-    {gObjectEventPalette33, OBJ_EVENT_PAL_TAG_33},
-    {gObjectEventPalette34, OBJ_EVENT_PAL_TAG_34},
     {gObjectEventPaletteMarshtomp, OBJ_EVENT_PAL_TAG_MARSHTOMP},
     {NULL,                  0x0000},
->>>>>>> 43d2595b3 (Testing follower pokemon.)
 };
 
 static const u16 sReflectionPaletteTags_Brendan[] = {
@@ -1374,10 +1334,13 @@ void RemoveObjectEventByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 
 static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
 {
+    u8 paletteNum;
     struct SpriteFrameImage image;
     image.size = GetObjectEventGraphicsInfo(objectEvent->graphicsId)->size;
     gSprites[objectEvent->spriteId].images = &image;
+    paletteNum = gSprites[objectEvent->spriteId].oam.paletteNum;
     DestroySprite(&gSprites[objectEvent->spriteId]);
+    FieldEffectFreePaletteIfUnused(paletteNum);
 }
 
 void RemoveAllObjectEventsExceptPlayer(void)
@@ -1394,7 +1357,6 @@ void RemoveAllObjectEventsExceptPlayer(void)
 static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 spriteId;
-    u8 paletteSlot;
     u8 objectEventId;
     struct Sprite *sprite;
     struct ObjectEvent *objectEvent;
@@ -1406,6 +1368,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
 
     objectEvent = &gObjectEvents[objectEventId];
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+<<<<<<< HEAD
     paletteSlot = graphicsInfo->paletteSlot;
     if (paletteSlot == 0)
     {
@@ -1419,12 +1382,15 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     {
         paletteSlot -= 16;
         sub_808EAB0(graphicsInfo->paletteTag, paletteSlot);
+=======
+    if (spriteTemplate->paletteTag != 0xffff) {
+        LoadObjectEventPalette(spriteTemplate->paletteTag);
+>>>>>>> ecbde8db7 (Added dynamic overworld palettes (github.com/pret/pokeemerald/wiki/Dynamic-overworld-palette-system))
     }
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
         objectEvent->invisible = TRUE;
 
-    *(u16 *)&spriteTemplate->paletteTag = 0xFFFF;
     spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
     if (spriteId == MAX_SPRITES)
     {
@@ -1438,7 +1404,6 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->pos1.x += 8;
     sprite->pos1.y += 16 + sprite->centerToCornerVecY;
-    sprite->oam.paletteNum = paletteSlot;
     sprite->coordOffsetEnabled = TRUE;
     sprite->data[0] = objectEventId;
     objectEvent->spriteId = spriteId;
@@ -1732,7 +1697,6 @@ void sub_808E16C(s16 x, s16 y)
 static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
 {
     u8 spriteId;
-    u8 paletteSlot;
     struct Sprite *sprite;
     struct ObjectEvent *objectEvent;
     struct SpriteTemplate spriteTemplate;
@@ -1756,6 +1720,7 @@ static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex(objectEvent->graphicsId, objectEvent->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
+<<<<<<< HEAD
     *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
     paletteSlot = graphicsInfo->paletteSlot;
     if (paletteSlot == 0)
@@ -1772,6 +1737,11 @@ static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
         sub_808EAB0(graphicsInfo->paletteTag, paletteSlot);
     }
     *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
+=======
+    if (spriteTemplate.paletteTag != 0xffff) {
+      LoadObjectEventPalette(spriteTemplate.paletteTag);
+    }
+>>>>>>> ecbde8db7 (Added dynamic overworld palettes (github.com/pret/pokeemerald/wiki/Dynamic-overworld-palette-system))
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -1791,7 +1761,6 @@ static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
         {
             SetSubspriteTables(sprite, subspriteTables);
         }
-        sprite->oam.paletteNum = paletteSlot;
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = objectEventId;
         objectEvent->spriteId = spriteId;
