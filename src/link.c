@@ -1659,7 +1659,7 @@ void CB2_LinkError(void)
     if (InitWindows(sLinkErrorWindowTemplates))
     {
         DeactivateAllTextPrinters();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);

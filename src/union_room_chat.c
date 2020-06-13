@@ -2127,7 +2127,7 @@ static bool8 TryAllocDisplay(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         InitWindows(sWinTemplates);
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         InitScanlineEffect();
         InitDisplay(sDisplay);
         ResetDisplaySubtasks();
@@ -2215,7 +2215,7 @@ static bool8 IsDisplaySubtaskActive(u8 id)
 
 static bool32 Display_LoadGfx(u8 *state)
 {
-    if (free_temp_tile_data_buffers_if_possible() == TRUE)
+    if (FreeTempTileDataBuffersIfPossible() == TRUE)
         return TRUE;
 
     switch (*state)
@@ -3037,7 +3037,7 @@ static void LoadChatWindowBorderGfx(void)
 {
     LoadPalette(gUnionRoomChat_Window_Pal2, 0x70, 0x20);
     LoadPalette(gUnionRoomChat_Window_Pal1, 0xC0, 0x20);
-    decompress_and_copy_tile_data_to_vram(1, gUnionRoomChat_Border_Gfx, 0, 0, 0);
+    DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Border_Gfx, 0, 0, 0);
     CopyToBgTilemapBuffer(1, gUnionRoomChat_Border_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
@@ -3047,7 +3047,7 @@ static void LoadChatWindowGfx(void)
     u8 *ptr;
 
     LoadPalette(gUnionRoomChat_Background_Pal, 0, 0x20);
-    ptr = decompress_and_copy_tile_data_to_vram(2, gUnionRoomChat_Background_Gfx, 0, 0, 0);
+    ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Background_Gfx, 0, 0, 0);
     if (ptr)
     {
         CpuFastCopy(&ptr[0x220], sDisplay->unk2128, 0x20);

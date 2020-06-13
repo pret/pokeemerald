@@ -76,9 +76,9 @@ void CB2_ShowDiploma(void)
     sDiplomaTilemapPtr = malloc(0x1000);
     InitDiplomaBg();
     InitDiplomaWindow();
-    reset_temp_tile_data_buffers();
-    decompress_and_copy_tile_data_to_vram(1, &sDiplomaTiles, 0, 0, 0);
-    while (free_temp_tile_data_buffers_if_possible())
+    ResetTempTileDataBuffers();
+    DecompressAndCopyTileDataToVram(1, &sDiplomaTiles, 0, 0, 0);
+    while (FreeTempTileDataBuffersIfPossible())
         ;
     LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);

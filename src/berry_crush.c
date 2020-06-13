@@ -1031,7 +1031,7 @@ int sub_802104C(void)
         SetHBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ScanlineEffect_Stop();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         break;
     case 1:
         CpuFill16(0, (void *)OAM, OAM_SIZE);
@@ -1069,10 +1069,10 @@ int sub_802104C(void)
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_08DE34B8, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_08DE34B8, 0, 0, 0);
         break;
     case 6:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return 0;
 
         InitStandardTextBoxWindows();

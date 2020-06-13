@@ -410,7 +410,7 @@ static u32 LoopedTask_OpenMenu(s32 state)
     {
     case 0:
         InitBgTemplates(gUnknown_08620194, ARRAY_COUNT(gUnknown_08620194));
-        decompress_and_copy_tile_data_to_vram(1, gPokenavMessageBox_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gPokenavMessageBox_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(1, unk->bg1TilemapBuffer);
         CopyToBgTilemapBuffer(1, gPokenavMessageBox_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
@@ -423,23 +423,23 @@ static u32 LoopedTask_OpenMenu(s32 state)
         ChangeBgY(3, 0, 0);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        decompress_and_copy_tile_data_to_vram(2, gUnknown_0861FD6C, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(2, gUnknown_0861FFF4, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(2, gUnknown_0861FD6C, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, gUnknown_0861FFF4, 0, 0, 1);
         CopyPaletteIntoBufferUnfaded(gUnknown_0861FD4C, 0x20, 0x20);
         return LT_INC_AND_PAUSE;
     case 2:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        decompress_and_copy_tile_data_to_vram(3, gUnknown_0861FC98, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(3, gUnknown_0861FCAC, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(3, gUnknown_0861FC98, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, gUnknown_0861FCAC, 0, 0, 1);
         CopyPaletteIntoBufferUnfaded(gUnknown_0861FC78, 0x30, 0x20);
         if (GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION || GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION_SEARCH)
             sub_81CA850();
         return LT_INC_AND_PAUSE;
     case 3:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         AddOptionDescriptionWindow();
         sub_81CA7D4();

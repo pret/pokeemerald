@@ -122,7 +122,7 @@ void CB2_UnionRoomBattle(void)
         ResetTasks();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         if (!InitWindows(sWindowTemplates))
             return;
         DeactivateAllTextPrinters();
