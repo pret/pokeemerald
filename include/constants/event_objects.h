@@ -244,8 +244,9 @@
 #define OBJ_EVENT_GFX_MARSHTOMP                  240
 #define OBJ_EVENT_GFX_ALTARIA                    241
 #define OBJ_EVENT_GFX_TOGETIC                    242
+#define OBJ_EVENT_GFX_CHARIZARD                  243
 
-#define NUM_OBJ_EVENT_GFX                        243
+#define NUM_OBJ_EVENT_GFX                        244
 
 
 // These are dynamic object gfx ids.

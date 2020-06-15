@@ -68,6 +68,7 @@ u8 MovementAction_WalkInPlaceNormalDown_Step0(struct ObjectEvent *, struct Sprit
 u8 MovementAction_WalkInPlace_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_EnterPokeball_Step2(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceNormalUp_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceNormalLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceNormalRight_Step0(struct ObjectEvent *, struct Sprite *);
@@ -76,8 +77,8 @@ u8 MovementAction_WalkInPlaceFastUp_Step0(struct ObjectEvent *, struct Sprite *)
 u8 MovementAction_WalkInPlaceFastLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceFastRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceFastestDown_Step0(struct ObjectEvent *, struct Sprite *);
-u8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-u8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *, struct Sprite *);
+u8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceFastestUp_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceFastestLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_WalkInPlaceFastestRight_Step0(struct ObjectEvent *, struct Sprite *);
@@ -882,7 +883,7 @@ u8 (*const gMovementActionFuncs_ExitPokeball[])(struct ObjectEvent *, struct Spr
 u8 (*const gMovementActionFuncs_EnterPokeball[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_EnterPokeball_Step0,
     MovementAction_EnterPokeball_Step1,
-    MovementAction_PauseSpriteAnim,
+    MovementAction_EnterPokeball_Step2,
 };
 
 u8 (*const gMovementActionFuncs_WalkInPlaceFastestUp[])(struct ObjectEvent *, struct Sprite *) = {

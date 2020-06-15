@@ -402,9 +402,9 @@ bool8 (*const gCopyPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *,
 };
 
 u8 (*const gMovementTypeFuncs_FollowPlayer[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_FollowPlayer_Step0,
-    MovementType_FollowPlayer_Step1,
-    MovementType_FollowPlayer_Step2,
+    MovementType_FollowPlayer_Shadow,
+    MovementType_FollowPlayer_Active,
+    MovementType_FollowPlayer_Moving,
 };
 
 bool8 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {

@@ -99,6 +99,7 @@ struct Pokemon * GetFirstLiveMon(void);
 u8 SpawnFollowingPokemon(void);
 void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);
+struct ObjectEvent * GetFollowerObject(void);
 void TrySpawnObjectEvents(s16, s16);
 u8 CreateObjectSprite(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction);
 u8 AddPseudoObjectEvent(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
@@ -419,9 +420,9 @@ bool8 cph_IM_DIFFERENT(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 CopyablePlayerMovement_GoSpeed4(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 CopyablePlayerMovement_Jump(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 
-u8 MovementType_FollowPlayer_Step0(struct ObjectEvent *, struct Sprite *);
-u8 MovementType_FollowPlayer_Step1(struct ObjectEvent *, struct Sprite *);
-u8 MovementType_FollowPlayer_Step2(struct ObjectEvent *, struct Sprite *);
+u8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *, struct Sprite *);
+u8 MovementType_FollowPlayer_Active(struct ObjectEvent *, struct Sprite *);
+u8 MovementType_FollowPlayer_Moving(struct ObjectEvent *, struct Sprite *);
 
 bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 FollowablePlayerMovement_FaceDirection(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));

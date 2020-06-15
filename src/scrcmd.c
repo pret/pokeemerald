@@ -15,6 +15,7 @@
 #include "field_effect.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -1003,9 +1004,27 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     const void *movementScript = (const void *)ScriptReadWord(ctx);
+    struct ObjectEvent *objEvent;
+
 
     ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
     sMovingNpcId = localId;
+    if (localId != OBJ_EVENT_ID_FOLLOWER) { // Force follower into pokeball
+      objEvent = GetFollowerObject();
+      // return early if no follower or in shadowing state
+      if (objEvent == NULL || gSprites[objEvent->spriteId].data[1] == 0) {
+        return FALSE;
+      }
+      // ClearEventObjectMovement(
+      objEvent->singleMovementActive = 0;
+      objEvent->heldMovementActive = FALSE;
+      objEvent->heldMovementFinished = FALSE;
+      objEvent->movementActionId = 0xFF;
+      gSprites[objEvent->spriteId].data[1] = 0;
+      // )
+      gSprites[objEvent->spriteId].animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
+      ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_FOLLOWER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, EnterPokeballMovement);
+    }
     return FALSE;
 }
 
