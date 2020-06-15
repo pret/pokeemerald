@@ -33,5 +33,3 @@ gLastSendQueueCount
 gLink
 gLastRecvQueueCount
 gLinkSavedIme
-gLinkFiller6
-gLinkFiller7
