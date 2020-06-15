@@ -1876,14 +1876,12 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
 
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
 {
-    const struct ObjectEventGraphicsInfo *graphicsInfo;
-    struct Sprite *sprite;
+    const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
+    struct Sprite *sprite = &gSprites[objectEvent->spriteId];
     u16 i;
     u8 paletteNum;
     u16 *debugPtr = (u16*) 0x0203d008;
 
-    graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
-    sprite = &gSprites[objectEvent->spriteId];
     *debugPtr = graphicsId;
     *(debugPtr + 1) = graphicsInfo->paletteSlot;
     if (graphicsInfo->paletteSlot == 0) { // Hack until I can fix this
@@ -1960,7 +1958,42 @@ void PlayerObjectTurn(struct PlayerAvatar *playerAvatar, u8 direction)
     ObjectEventTurn(&gObjectEvents[playerAvatar->objectEventId], direction);
 }
 
-static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, u8 berryId, u8 berryStage) {
+  const u8 graphicsId = gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage];
+  const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
+  struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+  u8 paletteNum = sprite->oam.paletteNum;
+  u16 paletteTag = sObjectEventSpritePalettes[gBerryTreePaletteSlotTablePointers[berryId][berryStage]-2].tag;
+  u16 i;
+  // Free old palette if otherwise unused
+  sprite->inUse = FALSE;
+  FieldEffectFreePaletteIfUnused(paletteNum);
+  sprite->inUse = TRUE;
+  i = FindObjectEventPaletteIndexByTag(paletteTag);
+  paletteNum = IndexOfSpritePaletteTag(sObjectEventSpritePalettes[i].tag);
+  if (paletteNum == 0xFF) { // Load palette
+    paletteNum = LoadSpritePalette(&sObjectEventSpritePalettes[i]);
+  }
+  sprite->oam.paletteNum = paletteNum;
+  sprite->oam.shape = graphicsInfo->oam->shape;
+  sprite->oam.size = graphicsInfo->oam->size;
+  sprite->images = gBerryTreePicTablePointers[berryId];
+  sprite->anims = graphicsInfo->anims;
+  sprite->subspriteTables = graphicsInfo->subspriteTables;
+  objectEvent->inanimate = graphicsInfo->inanimate;
+  objectEvent->graphicsId = graphicsId;
+  SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
+  sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+  sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+  sprite->pos1.x += 8;
+  sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+  if (objectEvent->trackedByCamera)
+  {
+      CameraObjectReset1();
+  }
+}
+
+static void get_berry_tree_graphics(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     u8 berryStage;
     u8 berryId;
@@ -1977,9 +2010,10 @@ static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, struct Sprite 
         if (berryId > ITEM_TO_BERRY(LAST_BERRY_INDEX))
             berryId = 0;
 
-        ObjectEventSetGraphicsId(objectEvent, gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage]);
-        sprite->images = gBerryTreePicTablePointers[berryId];
-        sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[berryId][berryStage];
+        // ObjectEventSetGraphicsId(objectEvent, gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage]);
+        // sprite->images = gBerryTreePicTablePointers[berryId];
+        // sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[berryId][berryStage];
+        SetBerryTreeGraphics(objectEvent, berryId, berryStage);
         StartSpriteAnim(sprite, berryStage);
     }
 }
