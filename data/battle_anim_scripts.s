@@ -11732,21 +11732,21 @@ Move_DRAGON_HAMMER::
 	launchtask AnimTask_SquishTarget 0x2 0x0
 	delay 0x5
 	playsewithpan SE_W025B, SOUND_PAN_TARGET
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x84 0x8 0x8 0x1 0x0
-	delay 0x2
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x80 4 0xfff8 0xfff8 0x1 0x0
-	delay 0x2
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x80 4 0x8 0xfff8 0x1 0x0
-	delay 0x2
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x80 4 0xfff8 0x8 0x1 0x0
-	delay 0x2
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x80 4 0x8 0x8 0x1 0x0
-	delay 0x2
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x80 4 0xfff8 0xfff8 0x1 0x0
-	delay 0x2
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x80 4 0x8 0xfff8 0x1 0x0
-	delay 0x2
-	launchtemplate gOctazookaSmokeSpriteTemplate 0x80 4 0xfff8 0x8 0x1 0x0
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, 8, 8, 1, 0
+	delay 2
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, -8, -8, 1, 0
+	delay 2
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, 8, -8, 1, 0
+	delay 2
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, -8, 8, 1, 0
+	delay 2
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, 8, 8, 1, 0
+	delay 2
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, -8, -8, 1, 0
+	delay 2
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, 8, -8, 1, 0
+	delay 2
+	createsprite gOctazookaSmokeSpriteTemplate, ANIM_TARGET, 2, -8, 8, 1, 0
 	delay 51
 	launchtemplate gSlideMonToOriginalPosSpriteTemplate 0x2 0x3 ANIM_ATTACKER 0x0 0x5
 	waitforvisualfinish
