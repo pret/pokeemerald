@@ -7671,7 +7671,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RELIC_SONG] =
     {
-        .effect = EFFECT_SLEEP,
+        .effect = EFFECT_SLEEP_HIT,
         .power = 75,
         .type = TYPE_NORMAL,
         .accuracy = 100,
