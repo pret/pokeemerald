@@ -11611,13 +11611,13 @@ Move_TROP_KICK::
 	playsewithpan SE_W233B, SOUND_PAN_TARGET
 	delay 0xA
 	playsewithpan SE_W234, SOUND_PAN_ATTACKER
-	launchtemplate gTropKickLeavesTemplate 0x81 0x5 0x0 0xa SOUND_PAN_ATTACKER 0xb0 0x28
-	launchtemplate gTropKickLeavesTemplate 0x81 0x5 0x0 0xa 0xff40 0xf0 0x28
-	launchtemplate gTropKickFlowerTemplate 0x81 0x5 0x0 0xa SOUND_PAN_ATTACKER 0xff60 0x28
-	launchtemplate gTropKickFlowerTemplate 0x81 0x5 0x0 0xa 0xff40 0xff90 0x28
-	launchtemplate gTropKickFlowerTemplate 0x81 0x5 0x0 0xa 0xa0 0x30 0x28
-	launchtemplate gTropKickLeavesTemplate 0x81 0x5 0x0 0xa 0xff20 0xffe0 0x28
-	launchtemplate gTropKickLeavesTemplate 0x81 0x5 0x0 0xa 0x70 0xff80 0x28
+	launchtemplate gTropKickLeavesTemplate, ANIM_TARGET, 5, 0, 10, 192, 176, 40
+	launchtemplate gTropKickLeavesTemplate, ANIM_TARGET, 5, 0, 10, -192, 240, 40
+	launchtemplate gTropKickFlowerTemplate, ANIM_TARGET, 5, 0, 10, 192, -160, 40
+	launchtemplate gTropKickFlowerTemplate, ANIM_TARGET, 5, 0, 10, -192, -112, 40
+	launchtemplate gTropKickFlowerTemplate, ANIM_TARGET, 5, 0, 10, 160, 48, 40
+	launchtemplate gTropKickLeavesTemplate, ANIM_TARGET, 5, 0, 10, -224, -32, 40
+	launchtemplate gTropKickLeavesTemplate, ANIM_TARGET, 5, 0, 10, 112, -128, 40
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
