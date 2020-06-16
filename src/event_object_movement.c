@@ -1874,37 +1874,36 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
     SetPlayerAvatarExtraStateTransition(gObjectEvents[objectEventId].graphicsId, PLAYER_AVATAR_FLAG_5);
 }
 
+// Update sprite's palette, freeing old palette if necessary
+u8 UpdateSpritePalette(struct SpritePalette * spritePalette, struct Sprite * sprite) {
+  u8 paletteNum = sprite->oam.paletteNum;
+  // Free palette if otherwise unused
+  sprite->inUse = FALSE;
+  FieldEffectFreePaletteIfUnused(paletteNum);
+  sprite->inUse = TRUE;
+  paletteNum = IndexOfSpritePaletteTag(spritePalette->tag);
+  if (paletteNum == 0xFF) {
+    paletteNum = LoadSpritePalette(spritePalette);
+  }
+  sprite->oam.paletteNum = paletteNum;
+  return paletteNum;
+}
+
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
     u16 i;
     u8 paletteNum;
-    u16 *debugPtr = (u16*) 0x0203d008;
 
-    *debugPtr = graphicsId;
-    *(debugPtr + 1) = graphicsInfo->paletteSlot;
-    if (graphicsInfo->paletteSlot == 0) { // Hack until I can fix this
+    if (graphicsInfo->paletteSlot == 0 && FALSE) { // Hack until I can fix this
       PatchObjectPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
       paletteNum = 0;
     } else {
-      paletteNum = sprite->oam.paletteNum;
-      // Free old palette if otherwise unused
-      sprite->inUse = FALSE;
-      FieldEffectFreePaletteIfUnused(paletteNum);
-      sprite->inUse = TRUE;
-
       i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1);
-      *(debugPtr + 2) = i;
-      paletteNum = IndexOfSpritePaletteTag(sObjectEventSpritePalettes[i].tag);
-      *(debugPtr + 3) = paletteNum;
-      if (paletteNum == 0xFF) { // Load palette
-        paletteNum = LoadSpritePalette(&sObjectEventSpritePalettes[i]);
-      }
+      paletteNum = UpdateSpritePalette((struct SpritePalette *)&sObjectEventSpritePalettes[i], sprite);
     }
-    *(debugPtr + 4) = paletteNum;
     sprite->oam.paletteNum = paletteNum;
-    *((u32*) (debugPtr + 6)) = (u32) &sprite->oam;
     sprite->oam.shape = graphicsInfo->oam->shape;
     sprite->oam.size = graphicsInfo->oam->size;
     sprite->images = graphicsInfo->images;
@@ -2010,9 +2009,6 @@ static void get_berry_tree_graphics(struct ObjectEvent *objectEvent, struct Spri
         if (berryId > ITEM_TO_BERRY(LAST_BERRY_INDEX))
             berryId = 0;
 
-        // ObjectEventSetGraphicsId(objectEvent, gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage]);
-        // sprite->images = gBerryTreePicTablePointers[berryId];
-        // sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[berryId][berryStage];
         SetBerryTreeGraphics(objectEvent, berryId, berryStage);
         StartSpriteAnim(sprite, berryStage);
     }
@@ -4592,7 +4588,6 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
       MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
       return FALSE;
     }
-    // __asm__(".2byte 0xBE00");
     sprite->data[1] = 1; // Enter idle state
     return TRUE;
 }
