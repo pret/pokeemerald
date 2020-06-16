@@ -8204,33 +8204,37 @@ Move_PETAL_BLIZZARD::
 
 Move_FREEZE_DRY::
 	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0x0 0x7 0x0
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_DEF 0x2 0x0 0x9 0x7f4c
-	delay 0x14
+	loadspritegfx ANIM_TAG_IMPACT
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 7, RGB_BLACK
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 2, 0, 9, RGB(12, 26, 31)
+	delay 20
 	playsewithpan SE_W081, SOUND_PAN_TARGET
-	launchtemplate gIceCrystalSpiralInwardSmall 0x2 0x1 0x0
-	launchtemplate gIceCrystalSpiralInwardSmall 0x2 0x1 0x40
-	launchtemplate gIceCrystalSpiralInwardSmall 0x2 0x1 0x80
-	launchtemplate gIceCrystalSpiralInwardSmall 0x2 0x1 SOUND_PAN_ATTACKER
-	delay 0x5
-	launchtemplate gIceCrystalSpiralInwardLarge 0x2 0x1 0x20
-	launchtemplate gIceCrystalSpiralInwardLarge 0x2 0x1 0x60
-	launchtemplate gIceCrystalSpiralInwardLarge 0x2 0x1 0xa0
-	launchtemplate gIceCrystalSpiralInwardLarge 0x2 0x1 0xe0
+	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 0
+	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 64
+	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 128
+	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 192
+	delay 5
+	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 32
+	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 96
+	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 160
+	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 224
+	delay 17
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 5, 3, 1
 	waitforvisualfinish
+	delay 15
 	call IceCrystalEffectShort
-	delay 0x5
-	playsewithpan SE_W172, 0x0
+	delay 5
 	loadspritegfx ANIM_TAG_ICE_CUBE
-	monbgprio_28 ANIM_TARGET
-	launchtask AnimTask_FrozenIceCube 0x2 0x0
-	waitplaysewithpan SE_RG_CARD1 SOUND_PAN_TARGET 0x11
+	createvisualtask AnimTask_FrozenIceCube, 2
+	waitplaysewithpan SE_W258, SOUND_PAN_TARGET, 17
 	waitforvisualfinish
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_DEF 0x2 0x9 0x0 0x7f4c
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, 4, 2, 9, 0, RGB(12, 26, 31)
+	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 7, 0, RGB_BLACK
+	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x0 0x7 0x0 0x0
-	waitforvisualfinish
 	blendoff
 	end
 
