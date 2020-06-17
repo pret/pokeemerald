@@ -1604,9 +1604,6 @@ static void CB2_LoadMapOnReturnToFieldCableClub(void)
 
 void CB2_ReturnToField(void)
 {
-    if (gFieldCallback == FieldCallback_Fly) { // Destroy follower if flying away
-      RemoveFollowingPokemon();
-    }
     if (IsUpdateLinkStateCBActive() == TRUE)
     {
         SetMainCallback2(CB2_ReturnToFieldLink);
@@ -1950,7 +1947,11 @@ static bool32 ReturnToFieldLocal(u8 *state)
         sub_80867D8();
         ResumeMap(FALSE);
         sub_8086A68();
-        UpdateFollowingPokemon(); // TODO: Update all dynamic graphicsIds
+        if (gFieldCallback == FieldCallback_Fly) {
+          RemoveFollowingPokemon();
+        } else {
+          UpdateFollowingPokemon(); // TODO: Update all dynamic graphicsIds
+        }
         SetCameraToTrackPlayer();
         (*state)++;
         break;
