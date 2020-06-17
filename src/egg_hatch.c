@@ -490,7 +490,7 @@ static void CB2_EggHatch_0(void)
         SetVBlankCallback(VBlankCB_EggHatch);
         gSpecialVar_0x8005 = GetCurrentMapMusic();
 
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
 

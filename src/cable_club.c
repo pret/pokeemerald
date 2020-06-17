@@ -524,7 +524,7 @@ static void sub_80B2CEC(u8 taskId)
 {
     gSpecialVar_Result = 5;
     sub_80B241C(gTasks[taskId].data[5]);
-    sub_8098374();
+    StopFieldMessage();
     RemoveWindow(gTasks[taskId].data[5]);
     EnableBothScriptContexts();
     DestroyTask(taskId);

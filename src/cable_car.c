@@ -265,7 +265,7 @@ static void CableCarMainCallback_Setup(void)
         ResetTasks();
         FreeAllSpritePalettes();
         ResetPaletteFade();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         StartWeather();
         for (i = 0; i < 20; i++)
             gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
@@ -291,11 +291,11 @@ static void CableCarMainCallback_Setup(void)
         sCableCar->mountainTilemap = malloc_and_decompress(gCableCarMountainTilemap, &sizeOut);
         sCableCar->pylonStemTilemap = malloc_and_decompress(gCableCarPylonStemTilemap, &sizeOut);
         sCableCar->pylonHookTilemapEntries = gCableCarPylonHookTilemapEntries;
-        decompress_and_copy_tile_data_to_vram(0, gUnknown_08DBA5B8, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(0, gUnknown_08DBA5B8, 0, 0, 0);
         gMain.state++;
         break;
     case 3:
-        if (!free_temp_tile_data_buffers_if_possible())
+        if (!FreeTempTileDataBuffersIfPossible())
         {
             LoadPalette(gUnknown_08DBA518, 0, 0x80);
             gMain.state++;

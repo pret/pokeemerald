@@ -201,11 +201,11 @@ static void CB2_InitBerryTagScreen(void)
 {
     while (1)
     {
-        if (sub_81221EC() == TRUE)
+        if (MenuHelpers_CallLinkSomething() == TRUE)
             break;
         if (InitBerryTagScreen() == TRUE)
             break;
-        if (sub_81221AC() == TRUE)
+        if (MenuHelpers_LinkSomething() == TRUE)
             break;
     }
 }
@@ -238,7 +238,7 @@ static bool8 InitBerryTagScreen(void)
         gMain.state++;
         break;
     case 5:
-        if (!sub_81221AC())
+        if (!MenuHelpers_LinkSomething())
             ResetTasks();
         gMain.state++;
         break;
@@ -301,8 +301,8 @@ static void HandleInitBackgrounds(void)
     SetBgTilemapBuffer(2, sBerryTag->tilemapBuffers[0]);
     SetBgTilemapBuffer(3, sBerryTag->tilemapBuffers[1]);
     ResetAllBgsCoordinates();
-    schedule_bg_copy_tilemap_to_vram(2);
-    schedule_bg_copy_tilemap_to_vram(3);
+    ScheduleBgCopyTilemapToVram(2);
+    ScheduleBgCopyTilemapToVram(3);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ShowBg(0);
@@ -318,12 +318,12 @@ static bool8 LoadBerryTagGfx(void)
     switch (sBerryTag->gfxState)
     {
     case 0:
-        reset_temp_tile_data_buffers();
-        decompress_and_copy_tile_data_to_vram(2, gBerryCheck_Gfx, 0, 0, 0);
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(2, gBerryCheck_Gfx, 0, 0, 0);
         sBerryTag->gfxState++;
         break;
     case 1:
-        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             LZDecompressWram(gBerryTag_Gfx, sBerryTag->tilemapBuffers[0]);
             sBerryTag->gfxState++;
@@ -371,8 +371,8 @@ static void HandleInitWindows(void)
     LoadPalette(sFontPalette, 0xF0, 0x20);
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         PutWindowTilemap(i);
-    schedule_bg_copy_tilemap_to_vram(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(0);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void PrintTextInBerryTagScreen(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed, u8 colorStructId)
@@ -386,7 +386,7 @@ static void AddBerryTagTextToBg0(void)
     FillWindowPixelBuffer(WIN_BERRY_TAG, PIXEL_FILL(15));
     PrintTextInBerryTagScreen(WIN_BERRY_TAG, gText_BerryTag, GetStringCenterAlignXOffset(1, gText_BerryTag, 0x40), 1, 0, 1);
     PutWindowTilemap(WIN_BERRY_TAG);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void PrintAllBerryData(void)

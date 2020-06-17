@@ -724,7 +724,7 @@ void CB2_StartWallClock(void)
 
     AddTextPrinterParameterized(1, 1, gText_Confirm3, 0, 1, 0, NULL);
     PutWindowTilemap(1);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
 }
 
 void CB2_ViewWallClock(void)
@@ -772,7 +772,7 @@ void CB2_ViewWallClock(void)
 
     AddTextPrinterParameterized(1, 1, gText_Cancel4, 0, 1, 0, NULL);
     PutWindowTilemap(1);
-    schedule_bg_copy_tilemap_to_vram(2);
+    ScheduleBgCopyTilemapToVram(2);
 }
 
 static void WallClockMainCallback(void)
@@ -839,7 +839,7 @@ static void Task_SetClock3(u8 taskId)
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x250, 0x0d);
     AddTextPrinterParameterized(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
     PutWindowTilemap(0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     CreateYesNoMenu(&gUnknown_085B21F4, 0x250, 0x0d, 1);
     gTasks[taskId].func = Task_SetClock4;
 }
