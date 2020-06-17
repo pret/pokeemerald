@@ -1469,7 +1469,9 @@ bool8 ScrCmd_hidemonpic(struct ScriptContext *ctx)
 bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
 {
     u8 contestWinnerId = ScriptReadByte(ctx);
-    if (contestWinnerId)
+
+    // Don't save artist's painting yet
+    if (contestWinnerId != CONTEST_WINNER_ARTIST)
         SetContestWinnerForPainting(contestWinnerId);
 
     ShowContestWinner();
@@ -1953,14 +1955,14 @@ bool8 ScrCmd_startcontest(struct ScriptContext *ctx)
 
 bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 {
-    sub_80F8484();
+    ShowContestResults();
     ScriptContext1_Stop();
     return TRUE;
 }
 
 bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 {
-    sub_80F84C4(gSpecialVar_ContestCategory);
+    ContestLinkTransfer(gSpecialVar_ContestCategory);
     ScriptContext1_Stop();
     return TRUE;
 }

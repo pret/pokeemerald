@@ -471,13 +471,11 @@ const u8 gTiles_8C19450[] = INCBIN_U8("graphics/contest/heart.4bpp");
 const u32 gUnknownGfx_C19470[] = INCBIN_U32("graphics/unknown/unknown_C19470.4bpp.lz");
 const u32 gUnknownPal_C19470[] = INCBIN_U32("graphics/unknown/unknown_C19470.gbapal.lz");
 
-const u32 gUnknown_08C19588[] = INCBIN_U32("graphics/contest/misc_2.4bpp.lz");
-
+const u32 gContestResults_Gfx[] = INCBIN_U32("graphics/contest/results_screen.4bpp.lz");
 const u32 gUnknown_08C19EEC[] = INCBIN_U32("graphics/contest/misc_2_tilemap_1.bin.lz");
 const u32 gUnknown_08C1A000[] = INCBIN_U32("graphics/contest/misc_2_tilemap_2.bin.lz");
 const u32 gUnknown_08C1A12C[] = INCBIN_U32("graphics/contest/misc_2_tilemap_3.bin.lz");
-
-const u32 gUnknown_08C1A2B4[] = INCBIN_U32("graphics/contest/misc_2.gbapal.lz");
+const u32 gContestResults_Pal[] = INCBIN_U32("graphics/contest/results_screen.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_Impact[] = INCBIN_U32("graphics/battle_anims/sprites/impact.4bpp.lz");
 const u32 gBattleAnimSpritePal_Impact[] = INCBIN_U32("graphics/battle_anims/sprites/impact.gbapal.lz");
@@ -1298,19 +1296,19 @@ const u8 gFireRedMenuElements_Gfx[] = INCBIN_U8("graphics/interface_fr/menu.4bpp
 
 const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/interface/hm.4bpp");
 
-// contest link stuff, appears to be a set of tilemaps
+// contest results screen
 
-const u16 gUnknown_08DC63F8[] = INCBIN_U16("graphics/contest/clink_tilemap1.bin");
-const u16 gUnknown_08DC6420[] = INCBIN_U16("graphics/contest/clink_tilemap2.bin");
-const u16 gUnknown_08DC6448[] = INCBIN_U16("graphics/contest/clink_tilemap3.bin");
-const u16 gUnknown_08DC6470[] = INCBIN_U16("graphics/contest/clink_tilemap4.bin");
-const u16 gUnknown_08DC6498[] = INCBIN_U16("graphics/contest/clink_tilemap5.bin");
-const u16 gUnknown_08DC64AC[] = INCBIN_U16("graphics/contest/clink_tilemap6.bin");
-const u16 gUnknown_08DC64C0[] = INCBIN_U16("graphics/contest/clink_tilemap7.bin");
-const u16 gUnknown_08DC64D4[] = INCBIN_U16("graphics/contest/clink_tilemap8.bin");
-const u16 gUnknown_08DC64E8[] = INCBIN_U16("graphics/contest/clink_tilemap9.bin");
-const u16 gUnknown_08DC64FC[] = INCBIN_U16("graphics/contest/clink_tilemap10.bin");
-const u16 gUnknown_08DC6510[] = INCBIN_U16("graphics/contest/clink_tilemap11.bin");
+const u16 gNormalContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_normal.bin");
+const u16 gSuperContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_super.bin");
+const u16 gHyperContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_hyper.bin");
+const u16 gMasterContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_master.bin");
+const u16 gLinkContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_link.bin");
+const u16 gCoolContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_cool.bin");
+const u16 gBeautyContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_beauty.bin");
+const u16 gCuteContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_cute.bin");
+const u16 gSmartContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_smart.bin");
+const u16 gToughContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen_tough.bin");
+const u16 gContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_screen.bin");
 
 // pokenav
 

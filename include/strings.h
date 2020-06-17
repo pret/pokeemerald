@@ -2494,7 +2494,7 @@ extern const u8 gText_CommunicationStandby[];
 extern const u8 gText_AnnouncingResults[];
 extern const u8 gText_PreliminaryResults[];
 extern const u8 gText_Round2Results[];
-extern const u8 gText_Var1sVar2Won[];
+extern const u8 gText_ContestantsMonWon[];
 
 // Trainer Card
 extern const u8 gText_LinkCableBattles[];

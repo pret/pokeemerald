@@ -296,14 +296,14 @@ void sub_80FCACC(u8 taskId)
     case 0:
         if (IsLinkTaskFinished())
         {
-            if (sub_80FC4F4(gUnknown_02039F08, sizeof(gUnknown_02039F08)) == 1)
+            if (sub_80FC4F4(gContestMonTotalPoints, sizeof(gContestMonTotalPoints)) == 1)
                 gTasks[taskId].data[0]++;
         }
         break;
     case 1:
         if (sub_80FC55C())
         {
-            memcpy(gUnknown_02039F08, gBlockRecvBuffer[gUnknown_02039F2B], sizeof(gUnknown_02039F08));
+            memcpy(gContestMonTotalPoints, gBlockRecvBuffer[gUnknown_02039F2B], sizeof(gContestMonTotalPoints));
             gTasks[taskId].data[0]++;
         }
         break;
@@ -334,14 +334,14 @@ void sub_80FCACC(u8 taskId)
     case 6:
         if (IsLinkTaskFinished())
         {
-            if (sub_80FC4F4(gUnknown_02039F18, sizeof(gUnknown_02039F18)) == 1)
+            if (sub_80FC4F4(gContestMonRound2Points, sizeof(gContestMonRound2Points)) == 1)
                 gTasks[taskId].data[0]++;
         }
         break;
     case 7:
         if (sub_80FC55C())
         {
-            memcpy(gUnknown_02039F18, gBlockRecvBuffer[gUnknown_02039F2B], sizeof(gUnknown_02039F18));
+            memcpy(gContestMonRound2Points, gBlockRecvBuffer[gUnknown_02039F2B], sizeof(gContestMonRound2Points));
             gTasks[taskId].data[0]++;
         }
         break;

@@ -122,7 +122,7 @@ void ShouldReadyContestArtist(void)
 {
     if (gContestFinalStandings[gContestPlayerMonIndex] == 0
      && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
-     && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
+     && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = TRUE;
     }
@@ -304,7 +304,7 @@ u8 GiveMonArtistRibbon(void)
     if (!hasArtistRibbon 
         && gContestFinalStandings[gContestPlayerMonIndex] == 0 
         && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
-        && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
+        && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
         hasArtistRibbon = 1;
         SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);
