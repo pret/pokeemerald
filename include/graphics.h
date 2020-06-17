@@ -4082,8 +4082,8 @@ extern const u8 gNamingScreenUnderscoreTiles[];
 
 extern const u32 gUnknown_08D9BA44[];
 
-extern const u32 gContestConfetti_Gfx[];
-extern const u32 gContestConfetti_Pal[];
+extern const u32 gConfetti_Gfx[];
+extern const u32 gConfetti_Pal[];
 
 extern const u32 gUnknown_08C093F0[];
 extern const u32 gSubstituteDollTilemap[];

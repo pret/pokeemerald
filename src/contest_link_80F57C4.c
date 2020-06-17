@@ -43,6 +43,8 @@
 #include "constants/vars.h"
 #include "contest.h"
 
+#define TAG_CONFETTI 3017
+
 struct ContestLinkUnk0
 {
     u8 unk0;
@@ -139,7 +141,7 @@ static void sub_80F85BC(u8);
 static void sub_80F86B8(u8);
 static void sub_80F878C(u8);
 static void sub_80F87B4(u8);
-static void sub_80F7768(struct Sprite *sprite);
+static void SpriteCB_Confetti(struct Sprite *sprite);
 
 static const u16 sUnknown_0858D6B0[] = INCBIN_U16("graphics/unknown/unknown_58D6B0.gbapal");
 static const u8 sUnknown_0858D6D0[] = INCBIN_U8("graphics/unknown/unknown_58D6D0.4bpp");
@@ -191,7 +193,7 @@ static const struct SpritePalette sUnknown_0858D850 =
      .tag = 3009,
 };
 
-static const struct OamData sOamData_858D858 =
+static const struct OamData sOamData_Confetti =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -208,29 +210,29 @@ static const struct OamData sOamData_858D858 =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_858D860 =
+static const struct SpriteTemplate sSpriteTemplate_Confetti =
 {
-    .tileTag = 3017, 
-    .paletteTag = 3017, 
-    .oam = &sOamData_858D858, 
+    .tileTag = TAG_CONFETTI, 
+    .paletteTag = TAG_CONFETTI, 
+    .oam = &sOamData_Confetti, 
     .anims = gDummySpriteAnimTable, 
     .images = NULL, 
     .affineAnims = gDummySpriteAffineAnimTable, 
-    .callback = sub_80F7768
+    .callback = SpriteCB_Confetti
 };
 
-static const struct CompressedSpriteSheet sUnknown_0858D878 =
+static const struct CompressedSpriteSheet sSpriteSheet_Confetti =
 {
-    .data = gContestConfetti_Gfx, 
+    .data = gConfetti_Gfx, 
     .size = 0x220, 
-    .tag = 3017
+    .tag = TAG_CONFETTI
 };
 
 
-static const struct CompressedSpritePalette sUnknown_0858D880 =
+static const struct CompressedSpritePalette sSpritePalette_Confetti =
 {
-    .data = gContestConfetti_Pal, 
-    .tag = 3017
+    .data = gConfetti_Pal, 
+    .tag = TAG_CONFETTI
 };
 
 static const struct BgTemplate sUnknown_0858D888[] =
@@ -869,8 +871,8 @@ static void sub_80F6404(u8 taskId)
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].callback = sub_80F75A8;
         gUnknown_0203A034->unk0->spriteId = spriteId;
-        LoadCompressedSpriteSheet(&sUnknown_0858D878);
-        LoadCompressedSpritePalette(&sUnknown_0858D880);
+        LoadCompressedSpriteSheet(&sSpriteSheet_Confetti);
+        LoadCompressedSpritePalette(&sSpritePalette_Confetti);
         CreateTask(sub_80F7670, 10);
         gTasks[taskId].data[0]++;
         break;
@@ -1829,7 +1831,7 @@ static void sub_80F7670(u8 taskId)
         gTasks[taskId].data[0] = 0;
         if (gUnknown_0203A034->unk0->unk7 < 40)
         {
-            u8 spriteId = CreateSprite(&sSpriteTemplate_858D860, (Random() % 240) - 20, 44, 5);
+            u8 spriteId = CreateSprite(&sSpriteTemplate_Confetti, (Random() % 240) - 20, 44, 5);
             gSprites[spriteId].data[0] = Random() % 512;
             gSprites[spriteId].data[1] = (Random() % 24) + 16;
             gSprites[spriteId].data[2] = (Random() % 256) + 48;
@@ -1842,7 +1844,7 @@ static void sub_80F7670(u8 taskId)
         DestroyTask(taskId);
 }
 
-static void sub_80F7768(struct Sprite *sprite)
+static void SpriteCB_Confetti(struct Sprite *sprite)
 {
     s16 delta;
 

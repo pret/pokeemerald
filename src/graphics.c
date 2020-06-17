@@ -875,8 +875,8 @@ const u32 gSubstituteDollTilemap[] = INCBIN_U32("graphics/battle_anims/sprites/s
 const u32 gBattleAnimSpriteGfx_GreenStar[] = INCBIN_U32("graphics/battle_anims/sprites/green_star.4bpp.lz");
 const u32 gBattleAnimSpritePal_GreenStar[] = INCBIN_U32("graphics/battle_anims/sprites/green_star.gbapal.lz");
 
-const u32 gContestConfetti_Gfx[] = INCBIN_U32("graphics/misc/confetti.4bpp.lz");
-const u32 gContestConfetti_Pal[] = INCBIN_U32("graphics/misc/confetti.gbapal.lz");
+const u32 gConfetti_Gfx[] = INCBIN_U32("graphics/misc/confetti.4bpp.lz");
+const u32 gConfetti_Pal[] = INCBIN_U32("graphics/misc/confetti.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_PinkCloud[] = INCBIN_U32("graphics/battle_anims/sprites/pink_cloud.4bpp.lz");
 const u32 gBattleAnimSpritePal_PinkCloud[] = INCBIN_U32("graphics/battle_anims/sprites/pink_cloud.gbapal.lz");
