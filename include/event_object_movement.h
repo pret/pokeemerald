@@ -93,7 +93,6 @@ u8 GetFaceDirectionAnimNum(u8);
 void SetSpritePosToOffsetMapCoords(s16 *, s16 *, s16, s16);
 void ObjectEventClearHeldMovement(struct ObjectEvent *);
 void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *);
-u8 SpeciesToGraphicsId(u16 species);
 struct Pokemon * GetFirstLiveMon(void);
 u8 SpawnFollowingPokemon(void);
 void UpdateFollowingPokemon(void);

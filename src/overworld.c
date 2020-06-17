@@ -813,7 +813,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
 
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER 
+    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER
      || gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
 }
@@ -1604,10 +1604,8 @@ static void CB2_LoadMapOnReturnToFieldCableClub(void)
 
 void CB2_ReturnToField(void)
 {
-    if (gFieldCallback == FieldCallback_Fly) {
+    if (gFieldCallback == FieldCallback_Fly) { // Destroy follower if flying away
       RemoveFollowingPokemon();
-    } else {
-      UpdateFollowingPokemon();
     }
     if (IsUpdateLinkStateCBActive() == TRUE)
     {
@@ -1952,6 +1950,7 @@ static bool32 ReturnToFieldLocal(u8 *state)
         sub_80867D8();
         ResumeMap(FALSE);
         sub_8086A68();
+        UpdateFollowingPokemon(); // TODO: Update all dynamic graphicsIds
         SetCameraToTrackPlayer();
         (*state)++;
         break;

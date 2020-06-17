@@ -208,6 +208,7 @@ struct ObjectEvent
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ u8 playerCopyableMovement;
+             u8 unused;
     /*size = 0x24*/
 };
 

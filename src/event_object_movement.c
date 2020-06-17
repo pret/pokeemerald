@@ -1580,22 +1580,6 @@ u8 CreateObjectSprite(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
     return spriteId;
 }
 
-u8 SpeciesToGraphicsId(u16 species) { // TODO: Eventually graphicsIds will have to be u16's
-  switch (species) {
-    case SPECIES_MARSHTOMP:
-      return OBJ_EVENT_GFX_MARSHTOMP;
-      break;
-    case SPECIES_ALTARIA:
-      return OBJ_EVENT_GFX_ALTARIA;
-      break;
-    case SPECIES_TOGETIC:
-      return OBJ_EVENT_GFX_TOGETIC;
-      break;
-    default:
-      return OBJ_EVENT_GFX_DUSCLOPS; // TODO: Change this
-  }
-}
-
 struct Pokemon * GetFirstLiveMon(void) { // Return address of first conscious party mon or NULL
   struct Pokemon *mon;
   u8 i;
@@ -1608,24 +1592,21 @@ struct Pokemon * GetFirstLiveMon(void) { // Return address of first conscious pa
 }
 
 u8 SpawnFollowingPokemon(void) { // Spawn a following pokemon TODO: Avoid this on certain maps
-  struct Pokemon *mon;
-  u8 graphicsId;
   u8 objectEventId;
   struct ObjectEventTemplate template = {0};
 
   template.localId = OBJ_EVENT_ID_FOLLOWER;
-  mon = GetFirstLiveMon();
-  if (mon == NULL) { // fainted party, don't spawn a follower
+  if (GetFirstLiveMon() == NULL) // fainted party, don't spawn a follower
     return 0xFF;
-  }
-  template.graphicsId = SpeciesToGraphicsId(GetMonData(mon, MON_DATA_SPECIES));
+  template.graphicsId = OBJ_EVENT_GFX_FOLLOWER;
   template.x = gSaveBlock1Ptr->pos.x;
   template.y = gSaveBlock1Ptr->pos.y;
-  template.elevation = 5;
+  template.elevation = 3;
   template.movementType = MOVEMENT_TYPE_FOLLOW_PLAYER;
   // template.script = EventScript_Follower; // This does nothing because scripts are templated
   objectEventId = SpawnSpecialObjectEvent(&template);
   gObjectEvents[objectEventId].invisible = TRUE;
+  UpdateFollowingPokemon();
   return objectEventId;
 }
 
@@ -1639,38 +1620,82 @@ struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or
   return NULL;
 }
 
-void UpdateFollowingPokemon(void) {
-  u8 i;
-  u8 graphicsId;
+// Return graphicsInfo for a pokemon species TODO: Make this into a table lookup
+static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species) {
+  switch (species) {
+    case SPECIES_MARSHTOMP :
+      return &gObjectEventGraphicsInfo_Marshtomp;
+      break;
+    case SPECIES_TOGETIC :
+      return &gObjectEventGraphicsInfo_Togetic;
+      break;
+    case SPECIES_ALTARIA :
+      return &gObjectEventGraphicsInfo_Altaria;
+      break;
+    case SPECIES_CHARIZARD :
+      return &gObjectEventGraphicsInfo_Charizard;
+      break;
+    default:
+      return &gObjectEventGraphicsInfo_Dusclops;
+  }
+}
+
+// Set graphics & sprite for a follower object event by species TODO: Refactoring
+static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
+  const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species);
+  struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+  u16 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1);
+  u8 paletteNum = UpdateSpritePalette((struct SpritePalette *)&sObjectEventSpritePalettes[i], sprite);
+  sprite->oam.paletteNum = paletteNum;
+  sprite->oam.shape = graphicsInfo->oam->shape;
+  sprite->oam.size = graphicsInfo->oam->size;
+  sprite->images = graphicsInfo->images;
+  sprite->anims = graphicsInfo->anims;
+  sprite->subspriteTables = graphicsInfo->subspriteTables;
+  objectEvent->inanimate = graphicsInfo->inanimate;
+  objectEvent->graphicsId = OBJ_EVENT_GFX_FOLLOWER;
+  SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
+  sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+  sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+  sprite->pos1.x += 8;
+  sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+  if (objectEvent->trackedByCamera)
+  {
+      CameraObjectReset1();
+  }
+}
+
+void UpdateFollowingPokemon(void) { // Update following pokemon if any
   struct ObjectEvent *objectEvent = GetFollowerObject();
+  struct Sprite *sprite;
   struct Pokemon *mon = GetFirstLiveMon();
-  if (objectEvent == NULL) {
+  u16 species;
+  u16 *oldSpecies;
+  if (objectEvent == NULL || mon == NULL) {
     return;
   }
-  if (mon == NULL) { // TODO: Fainted party
-    return;
-  }
-  graphicsId = SpeciesToGraphicsId(GetMonData(mon, MON_DATA_SPECIES));
-  if (graphicsId != objectEvent->graphicsId) { // Mark as invisible
+  sprite = &gSprites[objectEvent->spriteId];
+  species = GetMonData(mon, MON_DATA_SPECIES);
+  oldSpecies = (u16*) &objectEvent->playerCopyableMovement;
+  if (species != *oldSpecies) { // Move to player and set invisible
     MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
-    objectEvent->graphicsId = graphicsId;
     objectEvent->invisible = TRUE;
-    gSprites[objectEvent->spriteId].data[1] = 0; // set state
-    gSprites[objectEvent->spriteId].data[6] = 0; // set graphicsId
-    gSprites[objectEvent->spriteId].data[7] = 0; // set animation data
   }
+  FollowerSetGraphics(objectEvent, species); // TODO: This should be done to all pokemon graphics
+  *oldSpecies = species; // set species
+  sprite->data[6] = 0; // set animation data
+  sprite->data[7] = species; // set species
   return;
 }
 
-void RemoveFollowingPokemon(void) {
+void RemoveFollowingPokemon(void) { // Remove follower object. Idempotent.
   struct ObjectEvent *objectEvent = GetFollowerObject();
-  if (objectEvent == NULL) {
+  if (objectEvent == NULL)
     return;
-  }
   RemoveObjectEvent(objectEvent);
 }
 
-static bool8 IsFollowerVisible(void) { // Determine whether follower should be visible
+static bool8 IsFollowerVisible(void) { // Determine whether follower *should* be visible
   return !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE);
 }
 
@@ -6226,19 +6251,18 @@ bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct 
     objectEvent->invisible = FALSE;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) {
       sub_8094554(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_NORTH), 8);
-      sprite->data[7] = 0; // fast speed
+      sprite->data[6] = 0; // fast speed
     } else {
       sub_8094554(objectEvent, sprite, DIR_SOUTH, GetMoveDirectionFastestAnimNum(DIR_SOUTH), 16);
-      sprite->data[7] = 1; // slow speed
+      sprite->data[6] = 1; // slow speed
     }
-    sprite->data[6] = objectEvent->graphicsId;
     ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
     return MovementAction_ExitPokeball_Step1(objectEvent, sprite);
 }
 
 bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    u8 duration = sprite->data[7] & 0xF;
+    u8 duration = sprite->data[6] & 0xF;
     sprite->data[3]--;
     if (sprite->data[3] == 0)
     {
@@ -6247,13 +6271,13 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
         return TRUE;
     // Restore graphicsId and set palette to white
     } else if ((duration == 0 && sprite->data[3] == 3) || (duration == 1 && sprite->data[3] == 7)) {
-      ObjectEventSetGraphicsId(objectEvent, sprite->data[6]);
-      sprite->data[7] = (sprite->oam.paletteNum << 4) | (sprite->data[7] & 0xFF0F); // Save old paletteNum
+      FollowerSetGraphics(objectEvent, sprite->data[7]);
+      sprite->data[6] = (sprite->oam.paletteNum << 4) | (sprite->data[6] & 0xFF0F); // Save old paletteNum
       LoadWhiteFlashPalette(objectEvent, sprite);
     // Restore original palette
     } else if ((duration == 0 && sprite->data[3] == 1) || (duration == 1 && sprite->data[3] == 3)) {
       FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_NONE-1);
-      sprite->oam.paletteNum = (sprite->data[7] >> 4) & 0xF;
+      sprite->oam.paletteNum = (sprite->data[6] >> 4) & 0xF;
     }
     return FALSE;
 }
@@ -6261,8 +6285,7 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
 bool8 MovementAction_EnterPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
     u8 direction = objectEvent->facingDirection;
     sub_8094554(objectEvent, sprite, direction, GetMoveDirectionFasterAnimNum(direction), 16);
-    sprite->data[7] = 1; // slow speed
-    sprite->data[6] = objectEvent->graphicsId;
+    sprite->data[6] = 1; // slow speed
     return MovementAction_EnterPokeball_Step1(objectEvent, sprite);
 }
 
@@ -6283,7 +6306,7 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
 
 bool8 MovementAction_EnterPokeball_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    ObjectEventSetGraphicsId(objectEvent, sprite->data[6]);
+    FollowerSetGraphics(objectEvent, sprite->data[7]);
     objectEvent->invisible = TRUE;
     sprite->data[1] = 0;
     sprite->data[6] = 0;
