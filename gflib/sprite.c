@@ -1603,7 +1603,7 @@ void FreeAllSpritePalettes(void)
     gReservedSpritePaletteCount = 0;
     for (i = 0; i < 16; i++)
         sSpritePaletteTags[i] = 0xFFFF;
-        LoadPalette(emptyPalette, i * 16 + 0x100, 32); // TODO: For debugging only
+        LoadPalette(emptyPalette, i * 16 + 0x100, 32); // TODO: DEBUG: Remove this or battle palettes break
 }
 
 u8 LoadSpritePalette(const struct SpritePalette *palette)

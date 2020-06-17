@@ -1267,6 +1267,15 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
 bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 {
     u8 playerObjectId;
+    struct ObjectEvent *followerObject = GetFollowerObject();
+    if (followerObject) { // Release follower from movement
+      // ObjectEventClearHeldMovement( TODO: Change the way data[1] determines state
+      followerObject->movementActionId = 0xFF;
+      followerObject->heldMovementActive = FALSE;
+      followerObject->heldMovementFinished = FALSE;
+      gSprites[followerObject->spriteId].data[2] = 0;
+      // )
+    }
 
     HideFieldMessageBox();
     playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
@@ -1279,6 +1288,15 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 bool8 ScrCmd_release(struct ScriptContext *ctx)
 {
     u8 playerObjectId;
+    struct ObjectEvent *followerObject = GetFollowerObject();
+    if (followerObject) { // Release follower from movement
+      // ObjectEventClearHeldMovement(
+      followerObject->movementActionId = 0xFF;
+      followerObject->heldMovementActive = FALSE;
+      followerObject->heldMovementFinished = FALSE;
+      gSprites[followerObject->spriteId].data[2] = 0;
+      // )
+    }
 
     HideFieldMessageBox();
     if (gObjectEvents[gSelectedObjectEvent].active)
