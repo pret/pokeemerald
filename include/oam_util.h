@@ -1,5 +1,5 @@
-#ifndef GUARD_ROM_81520A8_H
-#define GUARD_ROM_81520A8_H
+#ifndef GUARD_OAM_UTIL_H
+#define GUARD_OAM_UTIL_H
 
 struct OamUtil
 {
@@ -30,4 +30,4 @@ u8 OamUtil_SetData(u8 id, u8 dataArrayId, s16 dataValue);
 u8 OamUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x, s16 y, u8 animNum, u8 priority);
 u8 OamUtil_Remove(u8 id);
 
-#endif // GUARD_ROM_81520A8_H
+#endif // GUARD_OAM_UTIL_H

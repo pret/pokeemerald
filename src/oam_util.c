@@ -1,5 +1,5 @@
 #include "global.h"
-#include "rom_81520A8.h"
+#include "oam_util.h"
 #include "malloc.h"
 #include "main.h"
 #include "digit_obj_util.h"

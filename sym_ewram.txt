@@ -103,7 +103,7 @@
 	.include "src/battle_transition.o"
 	.include "src/battle_message.o"
 	.include "src/cable_car.o"
-	.include "src/rom_81520A8.o"
+	.include "src/oam_util.o"
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"
 	.include "src/move_relearner.o"
