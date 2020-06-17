@@ -994,7 +994,6 @@ u32 FldEff_SurfBlob(void)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
-        sprite->oam.paletteNum = 0;
         sprite->data[2] = gFieldEffectArguments[2];
         sprite->data[3] = -1;
         sprite->data[6] = -1;
@@ -1262,7 +1261,7 @@ u32 FldEff_BerryTreeGrowthSparkle(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->oam.paletteNum = 5;
+        sprite->oam.paletteNum = 5; // TODO: What paletteTag does this use?
         sprite->data[0] = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
     }
     return 0;
@@ -1298,7 +1297,7 @@ static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 fldEffObj, u8 paletteNum)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled ++;
-        sprite->oam.paletteNum = paletteNum;
+        sprite->oam.paletteNum = paletteNum; // TODO: Fix paletteNum
         sprite->data[1] = fldEff;
         sprite->data[2] = gFieldEffectArguments[0];
         sprite->data[3] = gFieldEffectArguments[1];

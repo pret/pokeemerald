@@ -140,6 +140,7 @@ static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
 static void UpdateObjectEventSprite(struct Sprite *);
 static void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *);
 u8 GetDirectionToFace(s16 x1, s16 y1, s16 x2, s16 y2);
+static void ObjectEventSetGraphics(struct ObjectEvent *, const struct ObjectEventGraphicsInfo *);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
@@ -1642,27 +1643,9 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species)
 
 // Set graphics & sprite for a follower object event by species TODO: Refactoring
 static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
-  const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species);
-  struct Sprite *sprite = &gSprites[objectEvent->spriteId];
-  u16 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1);
-  u8 paletteNum = UpdateSpritePalette((struct SpritePalette *)&sObjectEventSpritePalettes[i], sprite);
-  sprite->oam.paletteNum = paletteNum;
-  sprite->oam.shape = graphicsInfo->oam->shape;
-  sprite->oam.size = graphicsInfo->oam->size;
-  sprite->images = graphicsInfo->images;
-  sprite->anims = graphicsInfo->anims;
-  sprite->subspriteTables = graphicsInfo->subspriteTables;
-  objectEvent->inanimate = graphicsInfo->inanimate;
   objectEvent->graphicsId = OBJ_EVENT_GFX_FOLLOWER;
-  SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
-  sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
-  sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
-  sprite->pos1.x += 8;
-  sprite->pos1.y += 16 + sprite->centerToCornerVecY;
-  if (objectEvent->trackedByCamera)
-  {
-      CameraObjectReset1();
-  }
+  ObjectEventSetGraphics(objectEvent, SpeciesToGraphicsInfo(species));
+  objectEvent->graphicsId = OBJ_EVENT_GFX_FOLLOWER;
 }
 
 void UpdateFollowingPokemon(void) { // Update following pokemon if any
@@ -1699,7 +1682,7 @@ static bool8 IsFollowerVisible(void) { // Determine whether follower *should* be
   return !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE);
 }
 
-bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx)
+bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
   u16 value;
   u16 species;
@@ -1900,7 +1883,8 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
 }
 
 // Update sprite's palette, freeing old palette if necessary
-u8 UpdateSpritePalette(struct SpritePalette * spritePalette, struct Sprite * sprite) {
+// TODO: Should this be in sprite.c?
+u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct Sprite * sprite) {
   u8 paletteNum = sprite->oam.paletteNum;
   // Free palette if otherwise unused
   sprite->inUse = FALSE;
@@ -1914,37 +1898,33 @@ u8 UpdateSpritePalette(struct SpritePalette * spritePalette, struct Sprite * spr
   return paletteNum;
 }
 
+// Set graphics *by info*
+static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct ObjectEventGraphicsInfo *graphicsInfo) {
+  struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+  u16 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1); // TODO: What if this fails?
+  UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
+  sprite->oam.shape = graphicsInfo->oam->shape;
+  sprite->oam.size = graphicsInfo->oam->size;
+  sprite->images = graphicsInfo->images;
+  sprite->anims = graphicsInfo->anims;
+  sprite->subspriteTables = graphicsInfo->subspriteTables;
+  objectEvent->inanimate = graphicsInfo->inanimate;
+  SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
+  sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+  sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+  sprite->pos1.x += 8;
+  sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+  if (objectEvent->trackedByCamera)
+  {
+      CameraObjectReset1();
+  }
+}
+
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
 {
-    const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
-    struct Sprite *sprite = &gSprites[objectEvent->spriteId];
-    u16 i;
-    u8 paletteNum;
-
-    if (graphicsInfo->paletteSlot == 0 && FALSE) { // Hack until I can fix this
-      PatchObjectPalette(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
-      paletteNum = 0;
-    } else {
-      i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1);
-      paletteNum = UpdateSpritePalette((struct SpritePalette *)&sObjectEventSpritePalettes[i], sprite);
-    }
-    sprite->oam.paletteNum = paletteNum;
-    sprite->oam.shape = graphicsInfo->oam->shape;
-    sprite->oam.size = graphicsInfo->oam->size;
-    sprite->images = graphicsInfo->images;
-    sprite->anims = graphicsInfo->anims;
-    sprite->subspriteTables = graphicsInfo->subspriteTables;
-    objectEvent->inanimate = graphicsInfo->inanimate;
     objectEvent->graphicsId = graphicsId;
-    SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
-    sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
-    sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
-    sprite->pos1.x += 8;
-    sprite->pos1.y += 16 + sprite->centerToCornerVecY;
-    if (objectEvent->trackedByCamera)
-    {
-        CameraObjectReset1();
-    }
+    ObjectEventSetGraphics(objectEvent, GetObjectEventGraphicsInfo(graphicsId));
+    objectEvent->graphicsId = graphicsId;
 }
 
 void ObjectEventSetGraphicsIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
@@ -1986,19 +1966,7 @@ static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, u8 berryId, u8
   const u8 graphicsId = gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage];
   const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
   struct Sprite *sprite = &gSprites[objectEvent->spriteId];
-  u8 paletteNum = sprite->oam.paletteNum;
-  u16 paletteTag = sObjectEventSpritePalettes[gBerryTreePaletteSlotTablePointers[berryId][berryStage]-2].tag;
-  u16 i;
-  // Free old palette if otherwise unused
-  sprite->inUse = FALSE;
-  FieldEffectFreePaletteIfUnused(paletteNum);
-  sprite->inUse = TRUE;
-  i = FindObjectEventPaletteIndexByTag(paletteTag);
-  paletteNum = IndexOfSpritePaletteTag(sObjectEventSpritePalettes[i].tag);
-  if (paletteNum == 0xFF) { // Load palette
-    paletteNum = LoadSpritePalette(&sObjectEventSpritePalettes[i]);
-  }
-  sprite->oam.paletteNum = paletteNum;
+  UpdateSpritePalette(&sObjectEventSpritePalettes[gBerryTreePaletteSlotTablePointers[berryId][berryStage]-2], sprite);
   sprite->oam.shape = graphicsInfo->oam->shape;
   sprite->oam.size = graphicsInfo->oam->size;
   sprite->images = gBerryTreePicTablePointers[berryId];

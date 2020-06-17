@@ -28,45 +28,13 @@ static const struct SpriteFrameImage sPicTable_ShadowExtraLarge[] = {
     obj_frame_tiles(gFieldEffectObjectPic_ShadowExtraLarge),
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_8x8,
-    .anims = sAnimTable_Shadow,
-    .images = sPicTable_ShadowSmall,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = UpdateShadowFieldEffect,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_8x8, gFieldEffectObjectImageAnimTable_Shadow, gFieldEffectObjectPicTable_ShadowSmall, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_16x8,
-    .anims = sAnimTable_Shadow,
-    .images = sPicTable_ShadowMedium,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = UpdateShadowFieldEffect,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_16x8, gFieldEffectObjectImageAnimTable_Shadow, gFieldEffectObjectPicTable_ShadowMedium, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_32x8,
-    .anims = sAnimTable_Shadow,
-    .images = sPicTable_ShadowLarge,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = UpdateShadowFieldEffect,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_32x8, gFieldEffectObjectImageAnimTable_Shadow, gFieldEffectObjectPicTable_ShadowLarge, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_64x32,
-    .anims = sAnimTable_Shadow,
-    .images = sPicTable_ShadowExtraLarge,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = UpdateShadowFieldEffect,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_64x32, gFieldEffectObjectImageAnimTable_Shadow, gFieldEffectObjectPicTable_ShadowExtraLarge, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect};
 
 static const struct SpriteFrameImage sPicTable_TallGrass[] = {
     overworld_frame(gFieldEffectObjectPic_TallGrass, 2, 2, 0),
@@ -208,15 +176,7 @@ static const union AnimCmd *const sAnimTable_SurfBlob[] =
     sSurfBlobAnim_FaceEast,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_32x32,
-    .anims = sAnimTable_SurfBlob,
-    .images = sPicTable_SurfBlob,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = UpdateSurfBlobFieldEffect,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_32x32, gFieldEffectObjectImageAnimTable_SurfBlob, gFieldEffectObjectPicTable_SurfBlob, gDummySpriteAffineAnimTable, UpdateSurfBlobFieldEffect};
 
 static const struct SpriteFrameImage sPicTable_Arrow[] = {
     overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 0),
@@ -265,15 +225,7 @@ static const union AnimCmd *const sAnimTable_Arrow[] =
     sArrowAnim_East,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_Arrow = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_16x16,
-    .anims = sAnimTable_Arrow,
-    .images = sPicTable_Arrow,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_Arrow = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_16x16, gFieldEffectObjectImageAnimTable_Arrow, gFieldEffectObjectPicTable_Arrow, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
 static const struct SpriteFrameImage sPicTable_GroundImpactDust[] = {
     overworld_frame(gFieldEffectObjectPic_GroundImpactDust, 2, 1, 0),
@@ -1062,15 +1014,7 @@ static const union AnimCmd *const sAnimTable_Bird[] =
     sAnim_Bird,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_Bird = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_32x32,
-    .anims = sAnimTable_Bird,
-    .images = sPicTable_Bird,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_Bird = {0xFFFF, OBJ_EVENT_PAL_TAG_MAY, &gObjectEventBaseOam_32x32, gFieldEffectObjectImageAnimTable_Bird, gFieldEffectObjectPicTable_Bird, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
 static const struct SpriteFrameImage sPicTable_ShortGrass[] = {
     overworld_frame(gFieldEffectObjectPic_ShortGrass, 2, 2, 0),
@@ -1147,14 +1091,14 @@ static const union AnimCmd *const sAnimTable_AshPuff[] =
     sAnim_AshPuff,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff = 
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff =
 {
-    .tileTag = 0xFFFF, 
-    .paletteTag = FLDEFF_PAL_TAG_ASH, 
-    .oam = &gObjectEventBaseOam_16x16, 
-    .anims = sAnimTable_AshPuff, 
-    .images = sPicTable_AshPuff, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = 0xFFFF,
+    .paletteTag = FLDEFF_PAL_TAG_ASH,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_AshPuff,
+    .images = sPicTable_AshPuff,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_AshPuff
 };
 
@@ -1183,14 +1127,14 @@ static const union AnimCmd *const sAnimTable_AshLaunch[] =
     sAnim_AshLaunch,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch = 
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch =
 {
-    .tileTag = 0xFFFF, 
-    .paletteTag = FLDEFF_PAL_TAG_ASH, 
-    .oam = &gObjectEventBaseOam_16x16, 
-    .anims = sAnimTable_AshLaunch, 
-    .images = sPicTable_AshLaunch, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = 0xFFFF,
+    .paletteTag = FLDEFF_PAL_TAG_ASH,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_AshLaunch,
+    .images = sPicTable_AshLaunch,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_AshLaunch
 };
 

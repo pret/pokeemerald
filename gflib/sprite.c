@@ -607,7 +607,7 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
     if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
         InitSpriteAffineAnim(sprite);
 
-    if (template->paletteTag != 0xFFFF)
+    if (template->paletteTag != 0xFFFF) // TODO: Load sprite palette if tag not present
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(template->paletteTag);
 
     return index;
