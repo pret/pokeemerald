@@ -1883,8 +1883,7 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
 }
 
 // Update sprite's palette, freeing old palette if necessary
-// TODO: Should this be in sprite.c?
-u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct Sprite * sprite) {
+static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct Sprite * sprite) {
   u8 paletteNum = sprite->oam.paletteNum;
   // Free palette if otherwise unused
   sprite->inUse = FALSE;
@@ -1898,11 +1897,21 @@ u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct Sprite
   return paletteNum;
 }
 
+// Find and update based on template's paletteTag
+// TODO: Should this logic happen in CreateSpriteAt?
+u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate * template, struct Sprite * sprite) {
+  u8 i = FindObjectEventPaletteIndexByTag(template->paletteTag);
+  if (i == 0xFF)
+    return i;
+  return UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
+}
+
 // Set graphics *by info*
 static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct ObjectEventGraphicsInfo *graphicsInfo) {
   struct Sprite *sprite = &gSprites[objectEvent->spriteId];
-  u16 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1); // TODO: What if this fails?
-  UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
+  u8 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1);
+  if (i != 0xFF)
+    UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
   sprite->oam.shape = graphicsInfo->oam->shape;
   sprite->oam.size = graphicsInfo->oam->size;
   sprite->images = graphicsInfo->images;
@@ -4578,6 +4587,7 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
 {
     ClearObjectEventMovement(objectEvent, sprite);
     if (!IsFollowerVisible()) { // Shadow player's position
+      objectEvent->invisible = TRUE;
       MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
       return FALSE;
     }

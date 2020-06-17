@@ -925,15 +925,7 @@ static const union AnimCmd *const sAnimTable_TreeDisguise[] =
     sAnim_TreeDisguiseReveal,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_TreeDisguise = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_16x32,
-    .anims = sAnimTable_TreeDisguise,
-    .images = sPicTable_TreeDisguise,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = UpdateDisguiseFieldEffect,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_TreeDisguise = {0xFFFF, OBJ_EVENT_PAL_TAG_NPC_3, &gObjectEventBaseOam_16x32, gFieldEffectObjectImageAnimTable_TreeDisguise, gFieldEffectObjectPicTable_TreeDisguise, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect};
 
 static const struct SpriteFrameImage sPicTable_MountainDisguise[] = {
     overworld_frame(gFieldEffectObjectPic_MountainDisguise, 2, 4, 0),
@@ -969,15 +961,7 @@ static const union AnimCmd *const sAnimTable_MountainDisguise[] =
     sAnim_MountainDisguiseReveal,
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_MountainDisguise = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
-    .oam = &gObjectEventBaseOam_16x32,
-    .anims = sAnimTable_MountainDisguise,
-    .images = sPicTable_MountainDisguise,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = UpdateDisguiseFieldEffect,
-};
+const struct SpriteTemplate gFieldEffectObjectTemplate_MountainDisguise = {0xFFFF, OBJ_EVENT_PAL_TAG_NPC_2, &gObjectEventBaseOam_16x32, gFieldEffectObjectImageAnimTable_MountainDisguise, gFieldEffectObjectPicTable_MountainDisguise, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect};
 
 static const struct SpriteFrameImage sPicTable_SandDisguisePlaceholder[] = {
     overworld_frame(gFieldEffectObjectPic_SandDisguisePlaceholder, 2, 4, 0),
