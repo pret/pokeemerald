@@ -1270,6 +1270,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     struct ObjectEvent *followerObject = GetFollowerObject();
     if (followerObject) { // Release follower from movement
       // ObjectEventClearHeldMovement( TODO: Change the way data[1] determines state
+      followerObject->singleMovementActive = FALSE;
       followerObject->movementActionId = 0xFF;
       followerObject->heldMovementActive = FALSE;
       followerObject->heldMovementFinished = FALSE;
@@ -1291,6 +1292,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     struct ObjectEvent *followerObject = GetFollowerObject();
     if (followerObject) { // Release follower from movement
       // ObjectEventClearHeldMovement(
+      followerObject->singleMovementActive = FALSE;
       followerObject->movementActionId = 0xFF;
       followerObject->heldMovementActive = FALSE;
       followerObject->heldMovementFinished = FALSE;
