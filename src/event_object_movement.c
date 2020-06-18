@@ -4591,6 +4591,7 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
     if (!IsFollowerVisible()) { // Shadow player's position
       objectEvent->invisible = TRUE;
       MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+      objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
       return FALSE;
     }
     sprite->data[1] = 1; // Enter idle state
@@ -4610,7 +4611,7 @@ bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct S
       ClearObjectEventMovement(objectEvent, sprite);
       ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_ENTER_POKEBALL);
       objectEvent->singleMovementActive = 1;
-      sprite->animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
+      sprite->animCmdIndex = 0; // Needed for animCmdIndex weirdness
       sprite->data[1] = 2; // movement action sets state to 0
       return TRUE;
     }
@@ -6211,19 +6212,14 @@ bool8 MovementAction_WalkInPlaceSlowDown_Step0(struct ObjectEvent *objectEvent, 
 
 // Copy and load objectEvent's palette, but set all opaque colors to white
 static u8 LoadWhiteFlashPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
-  struct SpritePalette dynamicPalette;
+
+  u8 i;
   u16 paletteData[16];
-  u16 i = GetObjectEventGraphicsInfo(objectEvent->graphicsId)->paletteTag1;
-  u8 j;
-  i = FindObjectEventPaletteIndexByTag(i);
-  dynamicPalette.tag = OBJ_EVENT_PAL_TAG_NONE-1; // TODO: Use a proper palette tag here
-  dynamicPalette.data = paletteData;
-  paletteData[0] = sObjectEventSpritePalettes[i].data[0];
-  for (j=1; j<16; j++) {
-    paletteData[j] = 0xFFFF;
+  struct SpritePalette dynamicPalette = {.tag = OBJ_EVENT_PAL_TAG_NONE-1, .data = paletteData};  // TODO: Use a proper palette tag here
+  for (i=1; i<16; i++) {
+    paletteData[i] = 0xFFFF;
   }
-  sprite->oam.paletteNum = LoadSpritePalette(&dynamicPalette);
-  return sprite->oam.paletteNum;
+  return UpdateSpritePalette(&dynamicPalette, sprite);
 }
 
 bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
@@ -6256,8 +6252,9 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
       LoadWhiteFlashPalette(objectEvent, sprite);
     // Restore original palette
     } else if ((duration == 0 && sprite->data[3] == 1) || (duration == 1 && sprite->data[3] == 3)) {
-      FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_NONE-1);
-      sprite->oam.paletteNum = (sprite->data[6] >> 4) & 0xF;
+      FollowerSetGraphics(objectEvent, sprite->data[7]);
+      // FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_NONE-1);
+      // sprite->oam.paletteNum = (sprite->data[6] >> 4) & 0xF;
     }
     return FALSE;
 }
@@ -6278,7 +6275,6 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
     } else if (sprite->data[3] == 11) { // Set palette to white
       LoadWhiteFlashPalette(objectEvent, sprite);
     } else if (sprite->data[3] == 7) { // Free white palette and change to pokeball
-      FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_NONE-1);
       ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
     }
     return FALSE;
