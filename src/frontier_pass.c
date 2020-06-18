@@ -698,7 +698,7 @@ static bool32 InitFrontierPass(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         ResetPaletteFade();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         break;
     case 3:
         AllocateFrontierPassGfx();
@@ -719,11 +719,11 @@ static bool32 InitFrontierPass(void)
         sPassGfx->unk20 = malloc_and_decompress(gUnknown_085712F8, &sizeOut);
         sPassGfx->unk24 = malloc_and_decompress(gUnknown_08571060, &sizeOut);
         sPassGfx->unk28 = malloc_and_decompress(gUnknown_085712C0, &sizeOut);
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_08DE08C8, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(2, gUnknown_08DE2084, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_08DE08C8, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, gUnknown_08DE2084, 0, 0, 0);
         break;
     case 7:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
         FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
@@ -1353,7 +1353,7 @@ static bool32 InitFrontierMap(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         ResetPaletteFade();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         break;
     case 3:
         ResetBgsAndClearDma3BusyFlags(0);
@@ -1372,10 +1372,10 @@ static bool32 InitFrontierMap(void)
         InitWindows(sMapWindowTemplates);
         DeactivateAllTextPrinters();
         PrintOnFrontierMap();
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_0856FBBC, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_0856FBBC, 0, 0, 0);
         break;
     case 5:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
         LoadPalette(gUnknown_08DE07C8[0], 0, 0x1A0);
         LoadPalette(stdpal_get(0), 0xF0, 0x20);

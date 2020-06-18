@@ -200,13 +200,13 @@ s32 FadeToWonderCardMenu(void)
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
-            decompress_and_copy_tile_data_to_vram(2, sWonderCardData->unk_0170->tiles, 0, 0x008, 0);
+            DecompressAndCopyTileDataToVram(2, sWonderCardData->unk_0170->tiles, 0, 0x008, 0);
             sWonderCardData->unk_0176[0] = AddWindow(&gUnknown_082F0E1C[0]);
             sWonderCardData->unk_0176[1] = AddWindow(&gUnknown_082F0E1C[1]);
             sWonderCardData->unk_0176[2] = AddWindow(&gUnknown_082F0E1C[2]);
             break;
         case 3:
-            if (free_temp_tile_data_buffers_if_possible())
+            if (FreeTempTileDataBuffersIfPossible())
                 return 0;
             LoadPalette(stdpal_get(1), 0x20, 0x20);
             gPaletteFade.bufferTransferDisabled = TRUE;
@@ -600,12 +600,12 @@ s32 FadeToWonderNewsMenu(void)
             CopyBgTilemapBufferToVram(1);
             CopyBgTilemapBufferToVram(2);
             CopyBgTilemapBufferToVram(3);
-            decompress_and_copy_tile_data_to_vram(3, sWonderNewsData->unk_01BC->tiles, 0, 8, 0);
+            DecompressAndCopyTileDataToVram(3, sWonderNewsData->unk_01BC->tiles, 0, 8, 0);
             sWonderNewsData->unk_01C8[0] = AddWindow(&gUnknown_082F1DE8[0]);
             sWonderNewsData->unk_01C8[1] = AddWindow(&gUnknown_082F1DE8[1]);
             break;
         case 3:
-            if (free_temp_tile_data_buffers_if_possible())
+            if (FreeTempTileDataBuffersIfPossible())
                 return 0;
             LoadPalette(stdpal_get(1), 0x20, 0x20);
             gPaletteFade.bufferTransferDisabled = TRUE;

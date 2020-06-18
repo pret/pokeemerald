@@ -518,7 +518,7 @@ void sub_801AC54(void)
         ResetTasks();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_082F0DD0, 1);
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         if (!InitWindows(gUnknown_082F0DD4))
         {
             return;

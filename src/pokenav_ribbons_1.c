@@ -414,14 +414,14 @@ static u32 sub_81CFEB8(s32 state)
     {
     case 0:
         InitBgTemplates(gUnknown_086237B0, NELEMS(gUnknown_086237B0));
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_08623604, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_08623604, 0, 0, 0);
         SetBgTilemapBuffer(1, unk->buff);
         CopyToBgTilemapBuffer(1, gUnknown_086236CC, 0, 0);
         CopyPaletteIntoBufferUnfaded(gUnknown_086235E4, 0x10, 0x20);
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         if (!sub_81CFB18())
             return LT_PAUSE;
@@ -430,7 +430,7 @@ static u32 sub_81CFEB8(s32 state)
         ShowBg(1);
         return LT_INC_AND_PAUSE;
     case 2:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         CopyPaletteIntoBufferUnfaded(gUnknown_08623790, 0x20, 0x20);
         sub_81D0304();
@@ -441,7 +441,7 @@ static u32 sub_81CFEB8(s32 state)
         sub_81D024C(unk);
         return LT_INC_AND_PAUSE;
     case 4:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         ShowBg(2);
         HideBg(3);

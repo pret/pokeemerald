@@ -408,7 +408,7 @@ static u32 sub_81CF418(s32 state)
     {
     case 0:
         InitBgTemplates(gUnknown_08623590, NELEMS(gUnknown_08623590));
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_086233E4, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gUnknown_086233E4, 0, 0, 0);
         SetBgTilemapBuffer(1, unk->buff);
         CopyToBgTilemapBuffer(1, gUnknown_086234AC, 0, 0);
         CopyBgTilemapBufferToVram(1);
@@ -416,13 +416,13 @@ static u32 sub_81CF418(s32 state)
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         if (!sub_81CF0C0())
             return LT_PAUSE;
         return LT_INC_AND_PAUSE;
     case 2:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         CopyPaletteIntoBufferUnfaded(gUnknown_08623570, 0x20, 0x20);
         sub_81CF88C();
@@ -434,7 +434,7 @@ static u32 sub_81CF418(s32 state)
         PrintHelpBarText(HELPBAR_CONDITION_MON_LIST);
         return LT_INC_AND_PAUSE;
     case 4:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
         ChangeBgX(1, 0, 0);
         ChangeBgY(1, 0, 0);
