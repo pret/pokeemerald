@@ -1665,7 +1665,10 @@ void RemoveFollowingPokemon(void) { // Remove follower object. Idempotent.
 }
 
 static bool8 IsFollowerVisible(void) { // Determine whether follower *should* be visible
-  return !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE);
+  return
+  !(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE)
+  || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior)
+  || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior));
 }
 
 bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
@@ -4600,7 +4603,8 @@ bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct S
 
 bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
+    // TODO: This check for 0xFF fixes a crash on Route 111, why?
+    if (objectEvent->movementActionId == 0xFF || ObjectEventExecSingleMovementAction(objectEvent, sprite))
     {
         objectEvent->singleMovementActive = 0;
         if (sprite->data[1]) { // restore nonzero state
