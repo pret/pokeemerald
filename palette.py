@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Extract a GBA-compatible palette from a PNG. """
 import sys
 import os.path
 import png

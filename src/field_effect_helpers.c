@@ -84,11 +84,9 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
 
 // Apply a blue tint effect to a palette
 static void ApplyReflectionFilter(u8 paletteNum, u16 *dest) {
-  u32 *debugPtr = (u32*) 0x0203d600;
   u8 i, val, r, g, b;
   // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
   u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
-  *(debugPtr + 2) = (u32) (gPlttBufferUnfaded + 0x100 + paletteNum * 16);
   for (i = 0; i < 16; i++) {
     r = src[i] & 0x1F;
     g = (src[i] >> 5) & 0x1F;

@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle_pyramid.h"
 #include "berry.h"
+#include "data.h"
 #include "decoration.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -18,7 +19,6 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
-#include "data.h"
 #include "pokemon.h"
 #include "random.h"
 #include "script.h"
@@ -447,12 +447,8 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_LUGIA                   0x1121
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
-#define OBJ_EVENT_PAL_TAG_MARSHTOMP 0x1124
-#define OBJ_EVENT_PAL_TAG_ALTARIA 0x1125
-#define OBJ_EVENT_PAL_TAG_TOGETIC 0x1126
-#define OBJ_EVENT_PAL_TAG_CHARIZARD 0x1127
-#define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 #define OBJ_EVENT_PAL_TAG_DYNAMIC 0x1124
+#define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
 #include "data/field_effects/field_effect_object_template_pointers.h"
@@ -498,10 +494,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-    {gObjectEventPaletteMarshtomp, OBJ_EVENT_PAL_TAG_MARSHTOMP},
-    {gObjectEventPaletteAltaria, OBJ_EVENT_PAL_TAG_ALTARIA},
-    {gObjectEventPaletteTogetic, OBJ_EVENT_PAL_TAG_TOGETIC},
-    {gObjectEventPaletteCharizard, OBJ_EVENT_PAL_TAG_CHARIZARD},
+    {gObjectEventPalette0, OBJ_EVENT_PAL_TAG_DYNAMIC},
     {NULL,                  0x0000},
 };
 
@@ -4608,6 +4601,18 @@ bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct S
 {
     if (gObjectEvents[gPlayerAvatar.objectEventId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER) { // do nothing if player is stationary
         return FALSE;
+    } else if (!IsFollowerVisible()) {
+      if (objectEvent->invisible) { // Return to shadowing state
+        sprite->data[1] = 0;
+        return FALSE;
+      }
+      // Animate entering pokeball
+      ClearObjectEventMovement(objectEvent, sprite);
+      ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_ENTER_POKEBALL);
+      objectEvent->singleMovementActive = 1;
+      sprite->animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
+      sprite->data[1] = 2; // movement action sets state to 0
+      return TRUE;
     }
     // TODO: Remove dependence on PlayerGetCopyableMovement
     return gFollowPlayerMovementFuncs[PlayerGetCopyableMovement()](objectEvent, sprite, GetPlayerMovementDirection(), NULL);
@@ -4628,19 +4633,7 @@ bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct S
 bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u8 direction;
-    if (!IsFollowerVisible()) {
-      if (objectEvent->invisible) { // Return to shadowing state
-        sprite->data[1] = 0;
-        return FALSE;
-      }
-      // Animate entering pokeball
-      ClearObjectEventMovement(objectEvent, sprite);
-      ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_ENTER_POKEBALL);
-      objectEvent->singleMovementActive = 1;
-      sprite->animCmdIndex = 0; // Needed because of weird animCmdIndex stuff
-      sprite->data[1] = 2; // movement action sets state to 0
-      return TRUE;
-    } else if (!objectEvent->singleMovementActive) { // walk in place
+    if (!objectEvent->singleMovementActive) { // walk in place
       ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceNormalMovementAction(objectEvent->facingDirection));
       sprite->data[1] = 1;
       objectEvent->singleMovementActive = 1;
