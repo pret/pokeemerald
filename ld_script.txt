@@ -237,7 +237,7 @@ SECTIONS {
         src/cable_car.o(.text);
         src/math_util.o(.text);
         src/roulette_util.o(.text);
-        src/oam_util.o(.text);
+        src/confetti_util.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         src/field_effect_helpers.o(.text);

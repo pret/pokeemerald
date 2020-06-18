@@ -1,5 +1,5 @@
 #include "global.h"
-#include "oam_util.h"
+#include "confetti_util.h"
 #include "malloc.h"
 #include "main.h"
 #include "digit_obj_util.h"
@@ -7,7 +7,7 @@
 static EWRAM_DATA struct
 {
     u8 count;
-    struct OamUtil *array;
+    struct ConfettiUtil *array;
 } *sWork = NULL;
 
 static void sub_81520A8(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height) // Unused.
@@ -47,7 +47,7 @@ static void sub_8152134(void *dest, const u16 *src, u8 left, u8 top, u8 width, u
     }
 }
 
-bool32 OamUtil_Init(u8 count)
+bool32 ConfettiUtil_Init(u8 count)
 {
     u8 i = 0;
 
@@ -59,7 +59,7 @@ bool32 OamUtil_Init(u8 count)
     sWork = AllocZeroed(sizeof(*sWork));
     if (sWork == NULL)
         return FALSE;
-    sWork->array = AllocZeroed(count * sizeof(struct OamUtil));
+    sWork->array = AllocZeroed(count * sizeof(struct ConfettiUtil));
     if (sWork->array == NULL)
     {
         FREE_AND_SET_NULL(sWork);
@@ -76,7 +76,7 @@ bool32 OamUtil_Init(u8 count)
     return TRUE;
 }
 
-bool32 OamUtil_Free(void)
+bool32 ConfettiUtil_Free(void)
 {
     u8 i = 0;
 
@@ -86,7 +86,7 @@ bool32 OamUtil_Free(void)
     for (i = 0; i < sWork->count; i++)
         memcpy(&gMain.oamBuffer[i + 64], &gDummyOamData, sizeof(struct OamData));
 
-    memset(sWork->array, 0, sWork->count * sizeof(struct OamUtil));
+    memset(sWork->array, 0, sWork->count * sizeof(struct ConfettiUtil));
     FREE_AND_SET_NULL(sWork->array);
     memset(sWork, 0, sizeof(*sWork));
     FREE_AND_SET_NULL(sWork);
@@ -94,7 +94,7 @@ bool32 OamUtil_Free(void)
     return TRUE;
 }
 
-bool32 OamUtil_Update(void)
+bool32 ConfettiUtil_Update(void)
 {
     u8 i = 0;
 
@@ -126,7 +126,7 @@ bool32 OamUtil_Update(void)
     return TRUE;
 }
 
-static bool32 SetAnimAndTileNum(struct OamUtil *structPtr, u8 animNum)
+static bool32 SetAnimAndTileNum(struct ConfettiUtil *structPtr, u8 animNum)
 {
     u16 tileStart;
 
@@ -142,7 +142,7 @@ static bool32 SetAnimAndTileNum(struct OamUtil *structPtr, u8 animNum)
     return TRUE;
 }
 
-u8 OamUtil_SetCallback(u8 id, void (*func)(struct OamUtil *))
+u8 ConfettiUtil_SetCallback(u8 id, void (*func)(struct ConfettiUtil *))
 {
     if (sWork == NULL || id >= sWork->count)
         return 0xFF;
@@ -153,7 +153,7 @@ u8 OamUtil_SetCallback(u8 id, void (*func)(struct OamUtil *))
     return id;
 }
 
-u8 OamUtil_SetData(u8 id, u8 dataArrayId, s16 dataValue)
+u8 ConfettiUtil_SetData(u8 id, u8 dataArrayId, s16 dataValue)
 {
     if (sWork == NULL || id >= sWork->count)
         return 0xFF;
@@ -164,9 +164,9 @@ u8 OamUtil_SetData(u8 id, u8 dataArrayId, s16 dataValue)
     return id;
 }
 
-u8 OamUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x, s16 y, u8 animNum, u8 priority)
+u8 ConfettiUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x, s16 y, u8 animNum, u8 priority)
 {
-    struct OamUtil *structPtr = NULL;
+    struct ConfettiUtil *structPtr = NULL;
     u8 i;
 
     if (sWork == NULL || oam == NULL)
@@ -204,12 +204,12 @@ u8 OamUtil_AddNew(const struct OamData *oam, u16 tileTag, u16 palTag, s16 x, s16
     return structPtr->id;
 }
 
-u8 OamUtil_Remove(u8 id)
+u8 ConfettiUtil_Remove(u8 id)
 {
     if (sWork == NULL || !sWork->array[id].active)
         return 0xFF;
 
-    memset(&sWork->array[id], 0, sizeof(struct OamUtil));
+    memset(&sWork->array[id], 0, sizeof(struct ConfettiUtil));
     sWork->array[id].oam.y = 160;
     sWork->array[id].oam.x = 240;
     sWork->array[id].dummied = TRUE;

@@ -33,7 +33,7 @@
 #include "fldeff_misc.h"
 #include "trainer_pokemon_sprites.h"
 #include "data.h"
-#include "oam_util.h"
+#include "confetti_util.h"
 #include "constants/rgb.h"
 
 #define HALL_OF_FAME_MAX_TEAMS 50
@@ -1423,7 +1423,7 @@ static bool8 CreateHofConfettiSprite(void)
 #define tTimer         data[1]
 #define tConfettiCount data[15]
 
-// Indexes into the data array of the struct OamUtil tracking confetti
+// Indexes into the data array of the struct ConfettiUtil
 #define CONFETTI_SINE_IDX 0
 #define CONFETTI_EXTRA_Y  1
 #define CONFETTI_TASK_ID  7
@@ -1448,18 +1448,18 @@ static void StopDomeConfetti(void)
     if ((taskId = FindTaskIdByFunc(Task_DoDomeConfetti)) != 0xFF)
         DestroyTask(taskId);
 
-    OamUtil_Free();
+    ConfettiUtil_Free();
     FreeSpriteTilesByTag(TAG_CONFETTI);
     FreeSpritePaletteByTag(TAG_CONFETTI);
 }
 
-static void UpdateDomeConfetti(struct OamUtil *oamUtil)
+static void UpdateDomeConfetti(struct ConfettiUtil *util)
 {
-    if (oamUtil->yDelta > 110)
+    if (util->yDelta > 110)
     {
         // Destroy confetti after it falls far enough
-        gTasks[oamUtil->data[CONFETTI_TASK_ID]].tConfettiCount--;
-        OamUtil_Remove(oamUtil->id);
+        gTasks[util->data[CONFETTI_TASK_ID]].tConfettiCount--;
+        ConfettiUtil_Remove(util->id);
     }
     else
     {
@@ -1467,16 +1467,16 @@ static void UpdateDomeConfetti(struct OamUtil *oamUtil)
         u8 sineIdx;
         s32 rand;
 
-        oamUtil->yDelta++;
-        oamUtil->yDelta += oamUtil->data[CONFETTI_EXTRA_Y];
+        util->yDelta++;
+        util->yDelta += util->data[CONFETTI_EXTRA_Y];
 
-        sineIdx = oamUtil->data[CONFETTI_SINE_IDX];
+        sineIdx = util->data[CONFETTI_SINE_IDX];
         rand = Random();
         rand &= 3;
         rand += 8;
-        oamUtil->xDelta = (rand) * ((gSineTable[sineIdx])) / 256;
+        util->xDelta = (rand) * ((gSineTable[sineIdx])) / 256;
 
-        oamUtil->data[CONFETTI_SINE_IDX] += 4;
+        util->data[CONFETTI_SINE_IDX] += 4;
     }
 }
 
@@ -1488,7 +1488,7 @@ static void Task_DoDomeConfetti(u8 taskId)
     switch (tState)
     {
     case 0:
-        if (!OamUtil_Init(64))
+        if (!ConfettiUtil_Init(64))
         {
             // Init failed
             DestroyTask(taskId);
@@ -1503,7 +1503,7 @@ static void Task_DoDomeConfetti(u8 taskId)
         if (tTimer != 0 && tTimer % 3 == 0)
         {
             // Create new confetti every 3 frames
-            id = OamUtil_AddNew(&sOamData_Confetti, 
+            id = ConfettiUtil_AddNew(&sOamData_Confetti, 
                               TAG_CONFETTI, 
                               TAG_CONFETTI, 
                               Random() % 240, 
@@ -1512,18 +1512,18 @@ static void Task_DoDomeConfetti(u8 taskId)
                               id);
             if (id != 0xFF)
             {
-                OamUtil_SetCallback(id, UpdateDomeConfetti);
+                ConfettiUtil_SetCallback(id, UpdateDomeConfetti);
 
                 // 1/4 of the confetti move an extra y coord every frame
                 if ((Random() % 4) == 0)
-                    OamUtil_SetData(id, CONFETTI_EXTRA_Y, 1);
+                    ConfettiUtil_SetData(id, CONFETTI_EXTRA_Y, 1);
 
-                OamUtil_SetData(id, CONFETTI_TASK_ID, taskId);
+                ConfettiUtil_SetData(id, CONFETTI_TASK_ID, taskId);
                 tConfettiCount++;
             }
         }
 
-        OamUtil_Update();
+        ConfettiUtil_Update();
         if (tTimer != 0)
             tTimer--;
         else if (tConfettiCount == 0)
