@@ -1588,25 +1588,6 @@ struct Pokemon * GetFirstLiveMon(void) { // Return address of first conscious pa
   return NULL;
 }
 
-u8 SpawnFollowingPokemon(void) { // Spawn a following pokemon TODO: Avoid this on certain maps
-  u8 objectEventId;
-  struct ObjectEventTemplate template = {0};
-
-  template.localId = OBJ_EVENT_ID_FOLLOWER;
-  if (GetFirstLiveMon() == NULL) // fainted party, don't spawn a follower
-    return 0xFF;
-  template.graphicsId = OBJ_EVENT_GFX_OW_MON;
-  template.x = gSaveBlock1Ptr->pos.x;
-  template.y = gSaveBlock1Ptr->pos.y;
-  template.elevation = 3;
-  template.movementType = MOVEMENT_TYPE_FOLLOW_PLAYER;
-  // template.script = EventScript_Follower; // This does nothing because scripts are templated
-  objectEventId = SpawnSpecialObjectEvent(&template);
-  gObjectEvents[objectEventId].invisible = TRUE;
-  UpdateFollowingPokemon();
-  return objectEventId;
-}
-
 struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or NULL
   u8 i;
   for (i=0; i < OBJECT_EVENTS_COUNT; i++) {
@@ -1643,25 +1624,37 @@ static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
 
 void UpdateFollowingPokemon(void) { // Update following pokemon if any
   struct ObjectEvent *objectEvent = GetFollowerObject();
-  struct Sprite *sprite;
   struct Pokemon *mon = GetFirstLiveMon();
+  struct Sprite *sprite;
   u16 species;
   u16 *oldSpecies;
-  if (objectEvent == NULL || mon == NULL) {
-    return;
+  if (mon) {
+    if (objectEvent == NULL) { // Spawn follower
+      struct ObjectEventTemplate template = {
+        .localId = OBJ_EVENT_ID_FOLLOWER,
+        .graphicsId = OBJ_EVENT_GFX_OW_MON,
+        .x = gSaveBlock1Ptr->pos.x,
+        .y = gSaveBlock1Ptr->pos.y,
+        .elevation = 3,
+        .movementType = MOVEMENT_TYPE_FOLLOW_PLAYER
+      };
+      objectEvent = &gObjectEvents[SpawnSpecialObjectEvent(&template)];
+      objectEvent->invisible = TRUE;
+    }
+    sprite = &gSprites[objectEvent->spriteId];
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    oldSpecies = (u16*) &objectEvent->playerCopyableMovement;
+    if (species != *oldSpecies) { // Move to player and set invisible
+      MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+      objectEvent->invisible = TRUE;
+    }
+    FollowerSetGraphics(objectEvent, species); // TODO: This should be done to all pokemon graphics
+    *oldSpecies = species; // set species
+    sprite->data[6] = 0; // set animation data
+    sprite->data[7] = species; // set species
+  } else {
+    RemoveFollowingPokemon();
   }
-  sprite = &gSprites[objectEvent->spriteId];
-  species = GetMonData(mon, MON_DATA_SPECIES);
-  oldSpecies = (u16*) &objectEvent->playerCopyableMovement;
-  if (species != *oldSpecies) { // Move to player and set invisible
-    MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
-    objectEvent->invisible = TRUE;
-  }
-  FollowerSetGraphics(objectEvent, species); // TODO: This should be done to all pokemon graphics
-  *oldSpecies = species; // set species
-  sprite->data[6] = 0; // set animation data
-  sprite->data[7] = species; // set species
-  return;
 }
 
 void RemoveFollowingPokemon(void) { // Remove follower object. Idempotent.

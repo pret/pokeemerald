@@ -94,7 +94,6 @@ void SetSpritePosToOffsetMapCoords(s16 *, s16 *, s16, s16);
 void ObjectEventClearHeldMovement(struct ObjectEvent *);
 void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *);
 struct Pokemon * GetFirstLiveMon(void);
-u8 SpawnFollowingPokemon(void);
 void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);
 struct ObjectEvent * GetFollowerObject(void);
