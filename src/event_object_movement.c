@@ -3,6 +3,7 @@
 #include "battle_pyramid.h"
 #include "berry.h"
 #include "decoration.h"
+#include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -17,6 +18,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
+#include "data.h"
 #include "pokemon.h"
 #include "random.h"
 #include "script.h"
@@ -450,6 +452,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_TOGETIC 0x1126
 #define OBJ_EVENT_PAL_TAG_CHARIZARD 0x1127
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
+#define OBJ_EVENT_PAL_TAG_DYNAMIC 0x1124
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
 #include "data/field_effects/field_effect_object_template_pointers.h"
@@ -1599,7 +1602,7 @@ u8 SpawnFollowingPokemon(void) { // Spawn a following pokemon TODO: Avoid this o
   template.localId = OBJ_EVENT_ID_FOLLOWER;
   if (GetFirstLiveMon() == NULL) // fainted party, don't spawn a follower
     return 0xFF;
-  template.graphicsId = OBJ_EVENT_GFX_FOLLOWER;
+  template.graphicsId = OBJ_EVENT_GFX_OW_MON;
   template.x = gSaveBlock1Ptr->pos.x;
   template.y = gSaveBlock1Ptr->pos.y;
   template.elevation = 3;
@@ -1641,11 +1644,22 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species)
   }
 }
 
-// Set graphics & sprite for a follower object event by species TODO: Refactoring
+// Set graphics & sprite for a follower object event by species
 static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
-  objectEvent->graphicsId = OBJ_EVENT_GFX_FOLLOWER;
+  const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species);
+  objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
   ObjectEventSetGraphics(objectEvent, SpeciesToGraphicsInfo(species));
-  objectEvent->graphicsId = OBJ_EVENT_GFX_FOLLOWER;
+  objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
+  if (graphicsInfo->paletteTag1 == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
+    struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+    const struct CompressedSpritePalette *spritePalette = &gMonPaletteTable[species];
+    // Free palette if otherwise unused
+    sprite->inUse = FALSE;
+    FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
+    sprite->inUse = TRUE;
+    LoadCompressedSpritePalette(spritePalette);
+    sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
+  }
 }
 
 void UpdateFollowingPokemon(void) { // Update following pokemon if any
