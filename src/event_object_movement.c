@@ -1884,17 +1884,12 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
 
 // Update sprite's palette, freeing old palette if necessary
 static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct Sprite * sprite) {
-  u8 paletteNum = sprite->oam.paletteNum;
   // Free palette if otherwise unused
   sprite->inUse = FALSE;
-  FieldEffectFreePaletteIfUnused(paletteNum);
+  FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
   sprite->inUse = TRUE;
-  paletteNum = IndexOfSpritePaletteTag(spritePalette->tag);
-  if (paletteNum == 0xFF) {
-    paletteNum = LoadSpritePalette(spritePalette);
-  }
-  sprite->oam.paletteNum = paletteNum;
-  return paletteNum;
+  sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+  return sprite->oam.paletteNum;
 }
 
 // Find and update based on template's paletteTag

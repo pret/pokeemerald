@@ -19,7 +19,7 @@
 
 static void UpdateObjectReflectionSprite(struct Sprite *);
 static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *, u8);
+static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *, struct Sprite *sprite);
 static void LoadObjectRegularReflectionPalette(struct ObjectEvent *, struct Sprite *);
 static void sub_81561FC(struct Sprite *, u8, u8);
 static void FadeFootprintsTireTracks_Step0(struct Sprite *);
@@ -73,12 +73,12 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
     reflectionSprite->sReflectionVerticalOffset = 0;
     if (!GetObjectEventGraphicsInfo(objectEvent->graphicsId)->disableReflectionPaletteLoad && ((bridgeType = MetatileBehavior_GetBridgeType(objectEvent->previousMetatileBehavior)) || (bridgeType = MetatileBehavior_GetBridgeType(objectEvent->currentMetatileBehavior))))
     {
-        reflectionSprite->sReflectionVerticalOffset = bridgeReflectionVerticalOffsets[bridgeType - 1];
-        LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite->oam.paletteNum);
+        reflectionSprite->data[2] = bridgeReflectionVerticalOffsets[bridgeType - 1];
+        LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite);
     }
     else
     {
-        LoadObjectRegularReflectionPalette(objectEvent, sprite);
+        LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite);
     }
 }
 
@@ -103,98 +103,95 @@ static void ApplyReflectionFilter(u8 paletteNum, u16 *dest) {
 static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    u16 baseTag = gSprites[objectEvent->spriteId].oam.paletteNum;
-    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_NONE + 0x1000;
-    struct SpritePalette filteredPalette;
-    u16 filteredData[16] = {0};
-    u8 paletteIndex = IndexOfSpritePaletteTag(paletteTag);
-    u32 *debugPtr = (u32*) 0x0203d600;
-    if (paletteIndex == 0xFF) { // Build filtered palette
-      *(debugPtr) = baseTag;
-      *(debugPtr + 1) = (u32) filteredData;
-      __asm__(".2byte 0xBE00");
+    const struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
+    u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
+    u16 paletteTag = baseTag == 0xFFFF ? mainSprite->oam.paletteNum + 0x2000 : baseTag + 0x2000;
+    u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
+    if (paletteNum == 0xFF) { // Load filtered palette
+      u16 filteredData[16] = {0};
+      struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
       ApplyReflectionFilter(baseTag, filteredData);
-      *(debugPtr + 1) = (u32) filteredData;
-      __asm__(".2byte 0xBE00");
-      filteredPalette.tag = paletteTag;
-      filteredPalette.data = filteredData;
-      paletteIndex = LoadSpritePalette(&filteredPalette);
-      // UpdateSpritePaletteWithWeather(paletteIndex);
+      paletteNum = LoadSpritePalette(&filteredPalette);
+      UpdateSpritePaletteWithWeather(paletteNum);
     }
-    sprite->oam.paletteNum = paletteIndex;
+    sprite->oam.paletteNum = paletteNum;
 }
+
+#define HIGH_BRIDGE_PAL_TAG 0x4000
 
 // When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
 // This is so the sprite blends in with the dark water metatile underneath the bridge.
-static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEvent, u8 paletteNum)
+static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    const struct ObjectEventGraphicsInfo *graphicsInfo;
-
-    graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    if (graphicsInfo->reflectionPaletteTag != OBJ_EVENT_PAL_TAG_NONE)
-    {
-        PatchObjectPalette(graphicsInfo->reflectionPaletteTag, paletteNum);
-        UpdateSpritePaletteWithWeather(paletteNum);
+    u16 blueData[16] = {0};
+    struct SpritePalette bluePalette = {.tag = HIGH_BRIDGE_PAL_TAG, .data = blueData};
+    u8 i;
+    for (i = 1; i < 16; i++) {
+      blueData[i] = 0x55c9;
     }
+    sprite->oam.paletteNum = LoadSpritePalette(&bluePalette);
+    UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
 }
 
 static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[reflectionSprite->data[0]];
     struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
-    u16 baseTag = mainSprite->oam.paletteNum;
-    u16 paletteTag = baseTag + OBJ_EVENT_PAL_TAG_NONE + 0x1000;
-    struct SpritePalette filteredPalette;
-    u16 filteredData[16] = {0};
-    u8 paletteNum;
 
     if (!objectEvent->active || !objectEvent->hasReflection || objectEvent->localId != reflectionSprite->data[1])
     {
         reflectionSprite->inUse = FALSE;
         FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
+        return;
     }
-    else
+
+    // Only filter palette if not using the high bridge blue palette
+    if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum) {
+      u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
+      u16 paletteTag = baseTag == 0xFFFF ? mainSprite->oam.paletteNum + 0x2000 : baseTag + 0x2000;
+      u8 paletteNum;
+      // Free palette if unused
+      reflectionSprite->inUse = FALSE;
+      FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
+      reflectionSprite->inUse = TRUE;
+      paletteNum = IndexOfSpritePaletteTag(paletteTag);
+      if (paletteNum == 0xFF) { // Build filtered palette
+        u16 filteredData[16] = {0};
+        struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
+        ApplyReflectionFilter(mainSprite->oam.paletteNum, filteredData);
+        paletteNum = LoadSpritePalette(&filteredPalette);
+        UpdateSpritePaletteWithWeather(paletteNum);
+      }
+      reflectionSprite->oam.paletteNum = paletteNum;
+    }
+    reflectionSprite->oam.shape = mainSprite->oam.shape;
+    reflectionSprite->oam.size = mainSprite->oam.size;
+    reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;
+    reflectionSprite->oam.tileNum = mainSprite->oam.tileNum;
+    reflectionSprite->subspriteTables = mainSprite->subspriteTables;
+    reflectionSprite->subspriteTableNum = mainSprite->subspriteTableNum;
+    reflectionSprite->invisible = mainSprite->invisible;
+    reflectionSprite->pos1.x = mainSprite->pos1.x;
+    // reflectionSprite->data[2] holds an additional vertical offset, used by the high bridges on Route 120
+    reflectionSprite->pos1.y = mainSprite->pos1.y + GetReflectionVerticalOffset(objectEvent) + reflectionSprite->data[2];
+    reflectionSprite->centerToCornerVecX = mainSprite->centerToCornerVecX;
+    reflectionSprite->centerToCornerVecY = mainSprite->centerToCornerVecY;
+    reflectionSprite->pos2.x = mainSprite->pos2.x;
+    reflectionSprite->pos2.y = -mainSprite->pos2.y;
+    reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
+
+    if (objectEvent->hideReflection == TRUE)
+        reflectionSprite->invisible = TRUE;
+
+    // Check if the reflection is not still.
+    if (reflectionSprite->data[7] == FALSE)
     {
-        // Free palette if unused
-        reflectionSprite->inUse = FALSE;
-        FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
-        reflectionSprite->inUse = TRUE;
-        paletteNum = IndexOfSpritePaletteTag(paletteTag);
-        if (paletteNum == 0xFF) { // Build filtered palette
-          ApplyReflectionFilter(baseTag, filteredData);
-          filteredPalette.tag = paletteTag;
-          filteredPalette.data = filteredData;
-          paletteNum = LoadSpritePalette(&filteredPalette);
-        }
-        reflectionSprite->oam.paletteNum = paletteNum;
-
-        reflectionSprite->oam.shape = mainSprite->oam.shape;
-        reflectionSprite->oam.size = mainSprite->oam.size;
-        reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;
-        reflectionSprite->oam.tileNum = mainSprite->oam.tileNum;
-        reflectionSprite->subspriteTables = mainSprite->subspriteTables;
-        reflectionSprite->subspriteTableNum = mainSprite->subspriteTableNum;
-        reflectionSprite->invisible = mainSprite->invisible;
-        reflectionSprite->pos1.x = mainSprite->pos1.x;
-        reflectionSprite->pos1.y = mainSprite->pos1.y + GetReflectionVerticalOffset(objectEvent) + reflectionSprite->sReflectionVerticalOffset;
-        reflectionSprite->centerToCornerVecX = mainSprite->centerToCornerVecX;
-        reflectionSprite->centerToCornerVecY = mainSprite->centerToCornerVecY;
-        reflectionSprite->pos2.x = mainSprite->pos2.x;
-        reflectionSprite->pos2.y = -mainSprite->pos2.y;
-        reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
-
-        if (objectEvent->hideReflection == TRUE)
-            reflectionSprite->invisible = TRUE;
-
-        if (reflectionSprite->sIsStillReflection == FALSE)
-        {
-            // Sets the reflection sprite's rot/scale matrix to the appropriate
-            // matrix based on whether or not the main sprite is horizontally flipped.
-            // If the sprite is facing to the east, then it is flipped, and its matrixNum is 8.
-            reflectionSprite->oam.matrixNum = 0;
-            if (mainSprite->oam.matrixNum & ST_OAM_HFLIP)
-                reflectionSprite->oam.matrixNum = 1;
-        }
+        // Sets the reflection sprite's rot/scale matrix to the appropriate
+        // matrix based on whether or not the main sprite is horizontally flipped.
+        // If the sprite is facing to the east, then it is flipped, and its matrixNum is 8.
+        reflectionSprite->oam.matrixNum = 0;
+        if (mainSprite->oam.matrixNum & ST_OAM_HFLIP)
+            reflectionSprite->oam.matrixNum = 1;
     }
 }
 
