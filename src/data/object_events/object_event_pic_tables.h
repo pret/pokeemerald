@@ -2197,6 +2197,15 @@ const struct SpriteFrameImage gObjectEventPicTable_Charizard[] = {
     overworld_frame(gObjectEventPic_Charizard, 4, 4, 5),
 };
 
+const struct SpriteFrameImage gObjectEventPicTable_Banette[] = {
+    overworld_frame(gObjectEventPic_Banette, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Banette, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Banette, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Banette, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Banette, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Banette, 4, 4, 5),
+};
+
 const struct SpriteFrameImage gObjectEventPicTable_RubySapphireBrendan[] = {
     overworld_frame(gObjectEventPic_RubySapphireBrendanNormal, 2, 4, 0),
     overworld_frame(gObjectEventPic_RubySapphireBrendanNormal, 2, 4, 1),

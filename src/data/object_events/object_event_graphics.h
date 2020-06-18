@@ -365,4 +365,5 @@ const u32 gObjectEventPic_Marshtomp[] = INCBIN_U32("graphics/object_events/pics/
 const u32 gObjectEventPic_Altaria[] = INCBIN_U32("graphics/object_events/pics/pokemon/altaria.4bpp");
 const u32 gObjectEventPic_Togetic[] = INCBIN_U32("graphics/object_events/pics/pokemon/togetic.4bpp");
 const u32 gObjectEventPic_Charizard[] = INCBIN_U32("graphics/object_events/pics/pokemon/charizard.4bpp");
+const u32 gObjectEventPic_Banette[] = INCBIN_U32("graphics/object_events/pics/pokemon/banette.4bpp");
 const u16 gObjectEventPalette31[] = INCBIN_U16("graphics/object_events/palettes/31.gbapal");

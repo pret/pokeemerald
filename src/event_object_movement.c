@@ -1632,6 +1632,9 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species)
     case SPECIES_CHARIZARD :
       return &gObjectEventGraphicsInfo_Charizard;
       break;
+    case SPECIES_BANETTE :
+      return &gObjectEventGraphicsInfo_Banette;
+      break;
     default:
       return &gObjectEventGraphicsInfo_Dusclops;
   }
