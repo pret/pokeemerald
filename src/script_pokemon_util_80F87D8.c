@@ -3,7 +3,7 @@
 #include "battle_gfx_sfx_util.h"
 #include "berry.h"
 #include "contest.h"
-#include "contest_link_80F57C4.h"
+#include "contest_util.h"
 #include "contest_painting.h"
 #include "data.h"
 #include "daycare.h"

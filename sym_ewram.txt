@@ -74,7 +74,7 @@
 	.include "src/record_mixing.o"
 	.include "src/secret_base.o"
 	.include "src/tv.o"
-	.include "src/contest_link_80F57C4.o"
+	.include "src/contest_util.o"
 	.include "src/rotating_gate.o"
 	.include "src/safari_zone.o"
 	.include "src/item_use.o"
