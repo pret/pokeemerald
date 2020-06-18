@@ -1617,27 +1617,10 @@ struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or
   return NULL;
 }
 
-// Return graphicsInfo for a pokemon species TODO: Make this into a table lookup
+// Return graphicsInfo for a pokemon species
 static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species) {
-  switch (species) {
-    case SPECIES_MARSHTOMP :
-      return &gObjectEventGraphicsInfo_Marshtomp;
-      break;
-    case SPECIES_TOGETIC :
-      return &gObjectEventGraphicsInfo_Togetic;
-      break;
-    case SPECIES_ALTARIA :
-      return &gObjectEventGraphicsInfo_Altaria;
-      break;
-    case SPECIES_CHARIZARD :
-      return &gObjectEventGraphicsInfo_Charizard;
-      break;
-    case SPECIES_BANETTE :
-      return &gObjectEventGraphicsInfo_Banette;
-      break;
-    default:
-      return &gObjectEventGraphicsInfo_Dusclops;
-  }
+  const struct ObjectEventGraphicsInfo *graphicsInfo = &gPokemonObjectGraphics[species];
+  return graphicsInfo->tileTag != 0xFFFF ? &gObjectEventGraphicsInfo_Dusclops : graphicsInfo;
 }
 
 // Set graphics & sprite for a follower object event by species

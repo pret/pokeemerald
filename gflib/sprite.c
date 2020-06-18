@@ -1599,11 +1599,9 @@ void AllocSpriteTileRange(u16 tag, u16 start, u16 count)
 void FreeAllSpritePalettes(void)
 {
     u8 i;
-    u16 emptyPalette[16] = {0};
     gReservedSpritePaletteCount = 0;
     for (i = 0; i < 16; i++)
         sSpritePaletteTags[i] = 0xFFFF;
-        LoadPalette(emptyPalette, i * 16 + 0x100, 32); // TODO: DEBUG: Remove this or battle palettes break
 }
 
 u8 LoadSpritePalette(const struct SpritePalette *palette)

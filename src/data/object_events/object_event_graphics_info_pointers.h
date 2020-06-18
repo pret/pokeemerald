@@ -239,10 +239,6 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh;
 // Begin pokemon event objects
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AnimatedBall;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Marshtomp;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Altaria;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Togetic;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Charizard;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower;
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bard;
