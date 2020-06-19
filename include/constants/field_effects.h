@@ -21,7 +21,7 @@
 #define FLDEFF_LONG_GRASS                17
 #define FLDEFF_JUMP_LONG_GRASS           18
 #define FLDEFF_UNKNOWN_19                19
-#define FLDEFF_UNKNOWN_20                20
+#define FLDEFF_UNUSED_GRASS              20
 #define FLDEFF_UNKNOWN_21                21
 #define FLDEFF_UNKNOWN_22                22
 #define FLDEFF_BERRY_TREE_GROWTH_SPARKLE 23
@@ -66,7 +66,45 @@
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
 #define FLDEFF_RAYQUAZA                  64
-#define FLDEFF_65                        65
+#define FLDEFF_DESTROY_DEOXYS_ROCK       65
 #define FLDEFF_MOVE_DEOXYS_ROCK          66
 
-#endif
+#define FLDEFFOBJ_SHADOW_S              0
+#define FLDEFFOBJ_SHADOW_M              1
+#define FLDEFFOBJ_SHADOW_L              2
+#define FLDEFFOBJ_SHADOW_XL             3
+#define FLDEFFOBJ_TALL_GRASS            4
+#define FLDEFFOBJ_RIPPLE                5
+#define FLDEFFOBJ_ASH                   6
+#define FLDEFFOBJ_SURF_BLOB             7
+#define FLDEFFOBJ_ARROW                 8
+#define FLDEFFOBJ_GROUND_IMPACT_DUST    9
+#define FLDEFFOBJ_JUMP_TALL_GRASS       10
+#define FLDEFFOBJ_SAND_FOOTPRINTS       11
+#define FLDEFFOBJ_JUMP_BIG_SPLASH       12
+#define FLDEFFOBJ_SPLASH                13
+#define FLDEFFOBJ_JUMP_SMALL_SPLASH     14
+#define FLDEFFOBJ_LONG_GRASS            15
+#define FLDEFFOBJ_JUMP_LONG_GRASS       16
+#define FLDEFFOBJ_17                    17
+#define FLDEFFOBJ_UNUSED_GRASS          18
+#define FLDEFFOBJ_19                    19
+#define FLDEFFOBJ_20                    20
+#define FLDEFFOBJ_REFLECTION_DISTORTION 21
+#define FLDEFFOBJ_SPARKLE               22
+#define FLDEFFOBJ_DEEP_SAND_FOOTPRINTS  23
+#define FLDEFFOBJ_TREE_DISGUISE         24
+#define FLDEFFOBJ_MOUNTAIN_DISGUISE     25
+#define FLDEFFOBJ_BIRD                  26
+#define FLDEFFOBJ_BIKE_TIRE_TRACKS      27
+#define FLDEFFOBJ_SAND_DISGUISE         28
+#define FLDEFFOBJ_SAND_PILE             29
+#define FLDEFFOBJ_SHORT_GRASS           30
+#define FLDEFFOBJ_HOT_SPRINGS_WATER     31
+#define FLDEFFOBJ_JUMP_OUT_OF_ASH       32
+#define FLDEFFOBJ_LAVARIDGE_GYM_WARP    33
+#define FLDEFFOBJ_BUBBLES               34
+#define FLDEFFOBJ_SMALL_SPARKLE         35
+#define FLDEFFOBJ_RAYQUAZA              36
+
+#endif // GUARD_FIELD_EFFECT_CONSTANTS_H

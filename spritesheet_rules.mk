@@ -582,7 +582,7 @@ $(FLDEFFGFXDIR)/arrow.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/ash.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/berry_tree_growth_sparkle.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/sparkle.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
 $(FLDEFFGFXDIR)/bike_hop_big_splash.4bpp: %.4bpp: %.png
@@ -642,7 +642,7 @@ $(FLDEFFGFXDIR)/unknown_16.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/unknown_17.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_18.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unused_grass.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
 $(FLDEFFGFXDIR)/unknown_19.4bpp: %.4bpp: %.png
@@ -651,14 +651,14 @@ $(FLDEFFGFXDIR)/unknown_19.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/unknown_20.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_29.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/sand_pile.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 1
 
 $(FLDEFFGFXDIR)/lavaridge_gym_warp.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unknown_35.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/small_sparkle.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
-$(FLDEFFGFXDIR)/unused_grass.4bpp: %.4bpp: %.png
+$(FLDEFFGFXDIR)/unused_grass_2.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2

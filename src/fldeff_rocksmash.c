@@ -20,11 +20,12 @@
 #include "constants/songs.h"
 
 // static functions
-static void task08_080C9820(u8 taskId);
-static void sub_8135578(u8 taskId);
-static void sub_813552C(u8 taskId);
-static void sub_813561C(u8 taskId);
-static void sub_81356C4(void);
+static void Task_DoFieldMove_0(u8 taskId);
+static void Task_DoFieldMove_1(u8 taskId);
+static void Task_DoFieldMove_2(u8 taskId);
+static void Task_DoFieldMove_3(u8 taskId);
+
+static void FieldCallback_RockSmash(void);
 static void sub_8135714(void);
 
 // text
@@ -46,13 +47,13 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
     }
 }
 
-u8 oei_task_add(void)
+u8 CreateFieldMoveTask(void)
 {
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-    return CreateTask(task08_080C9820, 8);
+    return CreateTask(Task_DoFieldMove_0, 8);
 }
 
-static void task08_080C9820(u8 taskId)
+static void Task_DoFieldMove_0(u8 taskId)
 {
     u8 objEventId;
 
@@ -65,47 +66,47 @@ static void task08_080C9820(u8 taskId)
         if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
             FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
-            gTasks[taskId].func = sub_8135578;
+            gTasks[taskId].func = Task_DoFieldMove_2;
         }
         else
         {
-            sub_808C114();
+            SetPlayerAvatarFieldMove();
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
-            gTasks[taskId].func = sub_813552C;
+            gTasks[taskId].func = Task_DoFieldMove_1;
         }
     }
 }
 
-static void sub_813552C(u8 taskId)
+static void Task_DoFieldMove_1(u8 taskId)
 {
     if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]) == TRUE)
     {
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
-        gTasks[taskId].func = sub_8135578;
+        gTasks[taskId].func = Task_DoFieldMove_2;
     }
 }
 
-static void sub_8135578(u8 taskId)
+static void Task_DoFieldMove_2(u8 taskId)
 {
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
         gFieldEffectArguments[1] = GetPlayerFacingDirection();
-        if (gFieldEffectArguments[1] == 1)
+        if (gFieldEffectArguments[1] == DIR_SOUTH)
             gFieldEffectArguments[2] = 0;
-        if (gFieldEffectArguments[1] == 2)
+        if (gFieldEffectArguments[1] == DIR_NORTH)
             gFieldEffectArguments[2] = 1;
-        if (gFieldEffectArguments[1] == 3)
+        if (gFieldEffectArguments[1] == DIR_WEST)
             gFieldEffectArguments[2] = 2;
-        if (gFieldEffectArguments[1] == 4)
+        if (gFieldEffectArguments[1] == DIR_EAST)
             gFieldEffectArguments[2] = 3;
         ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByCurrentState());
         StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
-        FieldEffectActiveListRemove(6);
-        gTasks[taskId].func = sub_813561C;
+        FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
+        gTasks[taskId].func = Task_DoFieldMove_3;
     }
 }
 
-static void sub_813561C(u8 taskId)
+static void Task_DoFieldMove_3(u8 taskId)
 {
     void (*func)(void) = (void (*)(void))(((u16)gTasks[taskId].data[8] << 16) | (u16)gTasks[taskId].data[9]);
 
@@ -128,7 +129,7 @@ bool8 SetUpFieldMove_RockSmash(void)
     else if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = sub_81356C4;
+        gPostMenuFieldCallback = FieldCallback_RockSmash;
         return TRUE;
     }
     else
@@ -137,7 +138,7 @@ bool8 SetUpFieldMove_RockSmash(void)
     }
 }
 
-static void sub_81356C4(void)
+static void FieldCallback_RockSmash(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext1_SetupScript(EventScript_FldEffRockSmash);
@@ -145,7 +146,7 @@ static void sub_81356C4(void)
 
 bool8 FldEff_UseRockSmash(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldMoveTask();
 
     gTasks[taskId].data[8] = (u32)sub_8135714 >> 16;
     gTasks[taskId].data[9] = (u32)sub_8135714;

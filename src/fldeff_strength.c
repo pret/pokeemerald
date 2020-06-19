@@ -35,7 +35,7 @@ static void FldEff_UseStrength(void)
 
 bool8 sub_8145E2C(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldMoveTask();
     gTasks[taskId].data[8] = (u32)sub_8145E74 >> 16;
     gTasks[taskId].data[9] = (u32)sub_8145E74;
     GetMonNickname(&gPlayerParty[gFieldEffectArguments[0]], gStringVar1);

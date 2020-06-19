@@ -859,7 +859,7 @@ static void sub_8140388(void)
     SetBgTilemapBuffer(1, gUnknown_0203AB88->tilemapBuffers[2]);
     SetBgTilemapBuffer(2, gUnknown_0203AB88->tilemapBuffers[6]);
     InitWindows(gUnknown_085B614C);
-    sub_8197200();
+    InitTextBoxGfxAndPrinters();
     gUnknown_0203AB8C = 0;
     gUnknown_0203AB88->unk_397C = malloc_and_decompress(gUnknown_085B5DFC, &size);
 }

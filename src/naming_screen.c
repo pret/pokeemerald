@@ -347,7 +347,7 @@ static void NamingScreen_InitBGs(void)
     ChangeBgY(3, 0, 0);
 
     InitStandardTextBoxWindows();
-    sub_8197200();
+    InitTextBoxGfxAndPrinters();
 
     for (i = 0; i < 5; i++)
         gNamingScreenData->windows[i] = AddWindow(&gUnknown_0858BE10[i]);

@@ -35,12 +35,12 @@ void InitMap(void);
 void InitMapFromSavedGame(void);
 void InitTrainerHillMap(void);
 void InitBattlePyramidMap(bool8 setPlayerPosition);
-void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout);
-void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout);
-void apply_map_tileset2_palette(struct MapLayout const *mapLayout);
-void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout);
-void copy_map_tileset1_to_vram(const struct MapLayout *);
-void copy_map_tileset2_to_vram(const struct MapLayout *);
+void CopyMapTilesetsToVram(struct MapLayout const *mapLayout);
+void LoadMapTilesetPalettes(struct MapLayout const *mapLayout);
+void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout);
+void CopySecondaryTilesetToVramUsingHeap(struct MapLayout const *mapLayout);
+void CopyPrimaryTilesetToVram(const struct MapLayout *);
+void CopySecondaryTilesetToVram(const struct MapLayout *);
 struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *connection);
 struct MapConnection *GetConnectionAtCoords(s16 x, s16 y);
 

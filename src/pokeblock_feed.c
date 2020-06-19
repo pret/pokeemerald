@@ -518,7 +518,7 @@ static void CB2_PokeblockFeed(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -536,7 +536,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
     case 0:
         sPokeblockFeed = AllocZeroed(sizeof(*sPokeblockFeed));
         SetVBlankHBlankCallbacksToNull();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:

@@ -30,7 +30,7 @@ extern const u16 gUnknown_0860F074[];
 
 void FreeAllOverworldWindowBuffers(void);
 void InitStandardTextBoxWindows(void);
-void sub_8197200(void);
+void InitTextBoxGfxAndPrinters(void);
 u16 RunTextPrintersAndIsPrinter0Active(void);
 void LoadMessageBoxAndBorderGfx(void);
 void DrawDialogueFrame(u8 windowId, bool8 copyToVram);
@@ -64,8 +64,8 @@ void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirs
 void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 s8 Menu_ProcessInputNoWrapClearOnChoose(void);
 s8 ProcessMenuInput_other(void);
-void do_scheduled_bg_tilemap_copies_to_vram(void);
-void clear_scheduled_bg_copies_to_vram(void);
+void DoScheduledBgTilemapCopiesToVram(void);
+void ClearScheduledBgCopiesToVram(void);
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str);
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 a2, u8 a3);
 void sub_81995E4(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);

@@ -943,7 +943,7 @@ static bool8 SkipCopyingMetatileFromSavedMap(u16* mapMetatilePtr, u16 mapWidth, 
     return FALSE;
 }
 
-void copy_tileset_patterns_to_vram(struct Tileset const *tileset, u16 numTiles, u16 offset)
+static void CopyTilesetToVram(struct Tileset const *tileset, u16 numTiles, u16 offset)
 {
     if (tileset)
     {
@@ -954,7 +954,7 @@ void copy_tileset_patterns_to_vram(struct Tileset const *tileset, u16 numTiles, 
     }
 }
 
-void copy_tileset_patterns_to_vram2(struct Tileset const *tileset, u16 numTiles, u16 offset)
+static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTiles, u16 offset)
 {
     if (tileset)
     {
@@ -975,7 +975,7 @@ void nullsub_90(void)
 
 }
 
-void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u16 size)
+void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size)
 {
     u16 black = RGB_BLACK;
 
@@ -1000,45 +1000,45 @@ void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u1
     }
 }
 
-void copy_map_tileset1_to_vram(struct MapLayout const *mapLayout)
+void CopyPrimaryTilesetToVram(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+    CopyTilesetToVram(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
 }
 
-void copy_map_tileset2_to_vram(struct MapLayout const *mapLayout)
+void CopySecondaryTilesetToVram(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
-void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout)
+void CopySecondaryTilesetToVramUsingHeap(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
-void apply_map_tileset1_palette(struct MapLayout const *mapLayout)
+static void LoadPrimaryTilesetPalette(struct MapLayout const *mapLayout)
 {
-    apply_map_tileset_palette(mapLayout->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
+    LoadTilesetPalette(mapLayout->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
 }
 
-void apply_map_tileset2_palette(struct MapLayout const *mapLayout)
+void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout)
 {
-    apply_map_tileset_palette(mapLayout->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
+    LoadTilesetPalette(mapLayout->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
 }
 
-void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout)
+void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)
 {
     if (mapLayout)
     {
-        copy_tileset_patterns_to_vram2(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
-        copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+        CopyTilesetToVramUsingHeap(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+        CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
     }
 }
 
-void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout)
+void LoadMapTilesetPalettes(struct MapLayout const *mapLayout)
 {
     if (mapLayout)
     {
-        apply_map_tileset1_palette(mapLayout);
-        apply_map_tileset2_palette(mapLayout);
+        LoadPrimaryTilesetPalette(mapLayout);
+        LoadSecondaryTilesetPalette(mapLayout);
     }
 }

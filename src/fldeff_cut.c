@@ -281,7 +281,7 @@ static void FieldCallback_CutGrass(void)
 
 bool8 FldEff_UseCutOnGrass(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldMoveTask();
 
     gTasks[taskId].data[8] = (u32)StartCutGrassFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartCutGrassFieldEffect;
@@ -297,7 +297,7 @@ static void FieldCallback_CutTree(void)
 
 bool8 FldEff_UseCutOnTree(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldMoveTask();
 
     gTasks[taskId].data[8] = (u32)StartCutTreeFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartCutTreeFieldEffect;

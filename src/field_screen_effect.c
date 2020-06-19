@@ -12,6 +12,7 @@
 #include "field_special_scene.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
+#include "io_reg.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -34,13 +35,11 @@
 #include "trainer_hill.h"
 #include "fldeff.h"
 
-extern const u16 gOrbEffectBackgroundLayerFlags[];
-
 // This file's functions.
 static void sub_8080B9C(u8);
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
-static void task0A_fade_n_map_maybe(u8);
+static void Task_DoContestHallWarp(u8);
 static void sub_808115C(u8);
 static void FillPalBufferWhite(void);
 static void Task_ExitDoor(u8);
@@ -314,7 +313,7 @@ static void FieldCB_MossdeepGymWarpExit(void)
     PlaySE(SE_TK_WARPOUT);
     CreateTask(Task_ExitNonDoor, 10);
     ScriptContext2_Enable();
-    sub_8085540(0xE);
+    SetObjectEventLoadFlag((~SKIP_OBJECT_EVENT_LOAD) & 0xF);
 }
 
 static void Task_ExitDoor(u8 taskId)
@@ -558,7 +557,7 @@ void DoTeleportWarp(void)
 
 void DoMossdeepGymWarp(void)
 {
-    sub_8085540(1);
+    SetObjectEventLoadFlag(SKIP_OBJECT_EVENT_LOAD);
     ScriptContext2_Enable();
     SaveObjectEvents();
     TryFadeOutOldMapMusic();
@@ -576,19 +575,21 @@ void DoPortholeWarp(void)
     gFieldCallback = FieldCB_ShowPortholeView;
 }
 
-static void sub_80AF8E0(u8 taskId)
+#define tState data[0]
+
+static void Task_DoCableClubWarp(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch (task->data[0])
+    switch (task->tState)
     {
     case 0:
         ScriptContext2_Enable();
-        task->data[0]++;
+        task->tState++;
         break;
     case 1:
         if (!PaletteFadeActive() && BGMusicStopped())
-            task->data[0]++;
+            task->tState++;
         break;
     case 2:
         WarpIntoMap();
@@ -598,13 +599,15 @@ static void sub_80AF8E0(u8 taskId)
     }
 }
 
+#undef tState
+
 void DoCableClubWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlaySE(SE_KAIDAN);
-    CreateTask(sub_80AF8E0, 10);
+    CreateTask(Task_DoCableClubWarp, 10);
 }
 
 static void Task_ReturnToWorldFromLinkRoom(u8 taskId)
@@ -727,7 +730,7 @@ static void Task_DoDoorWarp(u8 taskId)
     }
 }
 
-static void task0A_fade_n_map_maybe(u8 taskId)
+static void Task_DoContestHallWarp(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -746,7 +749,7 @@ static void task0A_fade_n_map_maybe(u8 taskId)
         break;
     case 2:
         WarpIntoMap();
-        SetMainCallback2(sub_8086024);
+        SetMainCallback2(CB2_ReturnToFieldContestHall);
         DestroyTask(taskId);
         break;
     }
@@ -760,7 +763,7 @@ void DoContestHallWarp(void)
     PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
-    CreateTask(task0A_fade_n_map_maybe, 10);
+    CreateTask(Task_DoContestHallWarp, 10);
 }
 
 static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)

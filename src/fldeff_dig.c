@@ -37,7 +37,7 @@ static void hm2_dig(void)
 
 bool8 FldEff_UseDig(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldMoveTask();
 
     gTasks[taskId].data[8] = (u32)sub_8135780 >> 16;
     gTasks[taskId].data[9] = (u32)sub_8135780;

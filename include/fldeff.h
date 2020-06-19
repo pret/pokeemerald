@@ -22,9 +22,9 @@ void sub_81BE7F4(void);
 void sub_81BE994(void);
 
 // escalator
-void sub_80E1558(u8 var);
-void sub_80E1570(void);
-bool8 sub_80E1584(void);
+void StartEscalator(bool8 var);
+void StopEscalator(void);
+bool8 IsEscalatorMoving(void);
 
 // soft-boiled
 bool8 SetUpFieldMove_SoftBoiled(void);
@@ -55,7 +55,7 @@ bool8 FldEff_UseDig(void);
 
 // rock smash
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);
-u8 oei_task_add(void);
+u8 CreateFieldMoveTask(void);
 bool8 SetUpFieldMove_RockSmash(void);
 bool8 FldEff_UseRockSmash(void);
 

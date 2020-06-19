@@ -379,9 +379,9 @@ static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEve
 
 static void npc_clear_strange_bits(struct ObjectEvent *objEvent)
 {
-    objEvent->inanimate = 0;
-    objEvent->disableAnim = 0;
-    objEvent->facingDirectionLocked = 0;
+    objEvent->inanimate = FALSE;
+    objEvent->disableAnim = FALSE;
+    objEvent->facingDirectionLocked = FALSE;
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
 }
 
@@ -424,14 +424,14 @@ static u8 GetForcedMovementByMetatileBehavior(void)
 
 static bool8 ForcedMovement_None(void)
 {
-    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_6)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE)
     {
         struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-        playerObjEvent->facingDirectionLocked = 0;
-        playerObjEvent->enableAnim = 1;
+        playerObjEvent->facingDirectionLocked = FALSE;
+        playerObjEvent->enableAnim = TRUE;
         SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
-        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_6;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FORCED_MOVE;
     }
     return FALSE;
 }
@@ -441,7 +441,7 @@ static u8 DoForcedMovement(u8 direction, void (*b)(u8))
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
     u8 collision = CheckForPlayerAvatarCollision(direction);
 
-    playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
+    playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED_MOVE;
     if (collision)
     {
         ForcedMovement_None();
@@ -453,7 +453,7 @@ static u8 DoForcedMovement(u8 direction, void (*b)(u8))
         {
             if (collision == COLLISION_LEDGE_JUMP)
                 PlayerJumpLedge(direction);
-            playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
+            playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED_MOVE;
             playerAvatar->runningState = MOVING;
             return 1;
         }
@@ -470,7 +470,7 @@ static u8 DoForcedMovementInCurrentDirection(void (*a)(u8))
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    playerObjEvent->disableAnim = 1;
+    playerObjEvent->disableAnim = TRUE;
     return DoForcedMovement(playerObjEvent->movementDirection, a);
 }
 
@@ -519,12 +519,12 @@ static bool8 ForcedMovement_PushedEastByCurrent(void)
     return DoForcedMovement(DIR_EAST, PlayerRideWaterCurrent);
 }
 
-u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
+static u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    playerObjEvent->disableAnim = 1;
-    playerObjEvent->facingDirectionLocked = 1;
+    playerObjEvent->disableAnim = TRUE;
+    playerObjEvent->facingDirectionLocked = TRUE;
     return DoForcedMovement(direction, b);
 }
 
@@ -567,8 +567,8 @@ static bool8 ForcedMovement_MuddySlope(void)
     if (playerObjEvent->movementDirection != DIR_NORTH || GetPlayerSpeed() <= 3)
     {
         Bike_UpdateBikeCounterSpeed(0);
-        playerObjEvent->facingDirectionLocked = 1;
-        return DoForcedMovement(1, PlayerGoSpeed2);
+        playerObjEvent->facingDirectionLocked = TRUE;
+        return DoForcedMovement(DIR_SOUTH, PlayerGoSpeed2);
     }
     else
     {
@@ -1328,7 +1328,7 @@ void ClearPlayerAvatarInfo(void)
 
 void SetPlayerAvatarStateMask(u8 flags)
 {
-    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_6 | PLAYER_AVATAR_FLAG_5);
+    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_FORCED_MOVE | PLAYER_AVATAR_FLAG_5);
     gPlayerAvatar.flags |= flags;
 }
 
@@ -1404,13 +1404,13 @@ void SetPlayerInvisibility(bool8 invisible)
         gSprites[gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId].invisible = invisible;
 }
 
-void sub_808C114(void)
+void SetPlayerAvatarFieldMove(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
-void sub_808C15C(u8 direction)
+static void SetPlayerAvatarFishing(u8 direction)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FISHING));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingDirectionAnimNum(direction));
@@ -1423,7 +1423,7 @@ void PlayerUseAcroBikeOnBumpySlope(u8 direction)
     SeekSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 1);
 }
 
-void sub_808C228(u8 direction)
+void SetPlayerAvatarWatering(u8 direction)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_WATERING));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFaceDirectionAnimNum(direction));
@@ -1739,8 +1739,8 @@ static bool8 Fishing2(struct Task *task)
     task->tPlayerGfxId = gObjectEvents[gPlayerAvatar.objectEventId].graphicsId;
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     ObjectEventClearHeldMovementIfActive(playerObjEvent);
-    playerObjEvent->enableAnim = 1;
-    sub_808C15C(playerObjEvent->facingDirection);
+    playerObjEvent->enableAnim = TRUE;
+    SetPlayerAvatarFishing(playerObjEvent->facingDirection);
     task->tStep++;
     return FALSE;
 }

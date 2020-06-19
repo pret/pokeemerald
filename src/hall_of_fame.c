@@ -1299,7 +1299,7 @@ static bool8 sub_8175024(void)
         break;
     case 3:
         InitStandardTextBoxWindows();
-        sub_8197200();
+        InitTextBoxGfxAndPrinters();
         break;
     case 4:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);

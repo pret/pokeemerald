@@ -439,7 +439,7 @@ SECTIONS {
         gflib/window.o(.rodata);
         gflib/text.o(.rodata);
         gflib/sprite.o(.rodata);
-        data/io_reg.o(.rodata);
+        gflib/io_reg.o(.rodata);
         gflib/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);

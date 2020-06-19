@@ -417,7 +417,7 @@ void CB2_ChooseStarter(void)
 
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 0x2A8, 0xD0);
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
@@ -477,7 +477,7 @@ static void MainCallback2_StarterChoose(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 

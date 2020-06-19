@@ -2146,7 +2146,7 @@ static void VblankCb_PSS(void)
 static void Cb2_PSS(void)
 {
     RunTasks();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     ScrollBackground();
     sub_80CAA14();
     AnimateSprites();
@@ -2214,7 +2214,7 @@ static void sub_80C7E98(void)
     gReservedSpriteTileCount = 0x280;
     sub_80D2A90(&sPSSData->unk_0020, sPSSData->unk_0028, 8);
     gKeyRepeatStartDelay = 20;
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     sub_80D259C(3);
     sub_80D2644(0, 1, gUnknown_0857239C, 8, 4);
     sub_80D2770(0, 1, 0);
