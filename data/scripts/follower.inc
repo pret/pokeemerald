@@ -13,6 +13,9 @@ gText_FollowerHasWetFeet::
 gText_FollowerSplashesAround::
   .string "{STR_VAR_1} splashes around happily!$"
 
+gText_WantsToFly::
+  .string "{STR_VAR_1} looks adventurous.\nWould you like to use FLY?$"
+
 .macro playfirstmoncry
 callfunc ScrFunc_playfirstmoncry
 .endm
@@ -27,7 +30,18 @@ EventScript_Follower::
   lock
   faceplayer
   callfunc ScrFunc_getfolloweraction
-  msgbox gText_FollowerDefault, MSGBOX_DEFAULT
+  checkpartymove MOVE_FLY
+  compare VAR_RESULT 6
+  goto_if_eq EventScript_FollowerEnd
+  bufferlivemonspeciesname 0
+  msgbox gText_WantsToFly, MSGBOX_YESNO
+  switch VAR_RESULT
+  case NO, EventScript_FollowerEnd
+  case YES, EventScript_FollowerFly
+  case MULTI_B_PRESSED, EventScript_FollowerEnd
+EventScript_FollowerFly::
+  callfunc ScrFunc_followerfly
+EventScript_FollowerEnd::
   release
   end
 
@@ -36,8 +50,7 @@ EventScript_FollowerHasWetFeet::
   playfirstmoncry
   msgbox gText_FollowerHasWetFeet, MSGBOX_DEFAULT
   waitmoncry
-  release
-  end
+  return
 
 EventScript_FollowerSplashesAbout::
   bufferlivemonspeciesname 0
@@ -45,8 +58,7 @@ EventScript_FollowerSplashesAbout::
   applymovement 0xFE FollowerSplashMovement
   waitmovement 0xFE
   msgbox gText_FollowerSplashesAround, MSGBOX_DEFAULT
-  release
-  end
+  return
 
 EnterPokeballMovement::
   .byte 0x9F @ EnterPokeball
@@ -65,5 +77,4 @@ EventScript_FollowerLovesYou::
   waitmoncry
   bufferlivemonspeciesname 0
   msgbox gText_FollowerLovesYou, MSGBOX_DEFAULT
-  release
-  end
+  return

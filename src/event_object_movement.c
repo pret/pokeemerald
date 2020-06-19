@@ -21,6 +21,7 @@
 #include "palette.h"
 #include "pokemon.h"
 #include "random.h"
+#include "region_map.h"
 #include "script.h"
 #include "sprite.h"
 #include "task.h"
@@ -1679,23 +1680,30 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   struct ObjectEvent *objEvent = &gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_FOLLOWER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup)];
   struct Pokemon *follower = GetFirstLiveMon();
   if (follower == NULL) {
+    ScriptCall(ctx, EventScript_FollowerLovesYou);
     return FALSE;
   }
   behavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
   species = GetMonData(follower, MON_DATA_SPECIES);
   if (MetatileBehavior_IsPuddle(behavior) || MetatileBehavior_IsShallowFlowingWater(behavior)) {
     if (gBaseStats[species].type1 == TYPE_FIRE || gBaseStats[species].type2 == TYPE_FIRE) {
-      ScriptJump(ctx, EventScript_FollowerHasWetFeet);
+      ScriptCall(ctx, EventScript_FollowerHasWetFeet);
       return FALSE;
     } else if (GetObjectEventGraphicsInfo(objEvent->graphicsId)->tracks) { // if follower leaves tracks
-      ScriptJump(ctx, EventScript_FollowerSplashesAbout);
+      ScriptCall(ctx, EventScript_FollowerSplashesAbout);
       return FALSE;
     }
   }
   if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
-    ScriptJump(ctx, EventScript_FollowerLovesYou);
+    ScriptCall(ctx, EventScript_FollowerLovesYou);
   }
-  ScriptJump(ctx, EventScript_FollowerLovesYou);
+  // SetMainCallback2(CB2_OpenFlyMap);
+  ScriptCall(ctx, EventScript_FollowerLovesYou);
+  return FALSE;
+}
+
+bool8 ScrFunc_followerfly(struct ScriptContext *ctx) {
+  SetMainCallback2(CB2_OpenFlyMap);
   return FALSE;
 }
 
