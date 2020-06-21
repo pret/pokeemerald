@@ -1,3 +1,8 @@
+.set LOCALID_PLAYER, 1
+.set LOCALID_ATTENDANT_1, 2
+.set LOCALID_ATTENDANT_2, 3
+.set LOCALID_PARTNER, 4
+
 BattleFrontier_BattleTowerMultiCorridor_MapScripts:: @ 8248D4A
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiCorridor_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnWarp
@@ -5,8 +10,8 @@ BattleFrontier_BattleTowerMultiCorridor_MapScripts:: @ 8248D4A
 	.byte 0
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by object event 1, which has the gfx id VAR_OBJ_GFX_ID_F
-	@ The multi partner is represented by object event 4, which has the gfx id VAR_OBJ_GFX_ID_E
+	@ The player is represented instead by LOCALID_PLAYER, and has the gfx id VAR_OBJ_GFX_ID_F
+	@ The multi partner is represented by LOCALID_PARTNER, and has the gfx id VAR_OBJ_GFX_ID_E
 
 BattleFrontier_BattleTowerMultiCorridor_OnTransition: @ 8248D5A
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
@@ -37,8 +42,8 @@ BattleFrontier_BattleTowerMultiCorridor_OnWarp: @ 8248D95
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects:: @ 8248D9F
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
-	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
-	hideobjectat 4, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+	hideobjectat LOCALID_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
 	special OffsetCameraForBattle
 	end
 
@@ -54,10 +59,10 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor:: @ 8248DBC
 	opendoor 1, 1
 	waitdooranim
 	clearflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
-	showobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
-	showobjectat 4, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
-	applymovement 1, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator
-	applymovement 4, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator
+	showobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+	showobjectat LOCALID_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator
+	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator
 	waitmovement 0
 	setflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
 	setvar VAR_0x8004, 14  @ x coord of far door, used by DrawDoor
@@ -65,21 +70,21 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor:: @ 8248DBC
 	closedoor 1, 1
 	waitdooranim
 	clearflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
-	applymovement 1, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor
-	applymovement 4, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor
-	applymovement 3, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor
-	applymovement 2, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor
+	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor
+	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor
+	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor
 	waitmovement 0
 	delay 40
-	applymovement 3, Common_Movement_WalkInPlaceFastestUp
-	applymovement 2, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT_2, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT_1, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	opendoor 7, 1
 	waitdooranim
-	applymovement 3, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor
-	applymovement 2, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor
-	applymovement 1, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor
-	applymovement 4, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor
+	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor
+	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor
+	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor
 	waitmovement 0
 	closedoor 7, 1
 	waitdooranim

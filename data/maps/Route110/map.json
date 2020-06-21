@@ -392,7 +392,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_ROUTE_110_RIVAL_1"
+      "flag": "FLAG_HIDE_ROUTE_110_RIVAL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_VAR_3",
@@ -405,7 +405,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_ROUTE_110_RIVAL_2"
+      "flag": "FLAG_HIDE_ROUTE_110_RIVAL_ON_BIKE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
