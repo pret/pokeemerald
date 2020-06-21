@@ -2297,7 +2297,7 @@ static const u8 sIronPlateDesc[] = _(
 static const u8 sEvioliteDesc[] = _(
     "Raises the Def and\n"
     "Sp. Def of Pokémon\n"
-    "that can still evolve.");
+    "that can evolve.");
 
 static const u8 sFloatStoneDesc[] = _(
     "A light stone that\n"
