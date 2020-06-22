@@ -9012,7 +9012,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LUNGE] =
     {
-        .effect = EFFECT_ATTACK_DOWN,
+        .effect = EFFECT_ATTACK_DOWN_HIT,
         .power = 80,
         .type = TYPE_BUG,
         .accuracy = 100,
