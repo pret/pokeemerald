@@ -364,6 +364,11 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectGeomancy
 	.4byte BattleScript_EffectFairyLock
 	.4byte BattleScript_EffectAllySwitch
+	.4byte BattleScript_EffectSleepHit
+
+BattleScript_EffectSleepHit:
+	setmoveeffect MOVE_EFFECT_SLEEP
+	goto BattleScript_EffectHit
 	
 BattleScript_EffectAllySwitch:
 	attackcanceler
