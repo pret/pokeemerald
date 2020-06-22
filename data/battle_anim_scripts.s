@@ -6477,7 +6477,7 @@ Move_NIGHT_DAZE:
 	launchtemplate gNightDazeVioletCirclesTemplate 0x82 0x1 0x60
 	launchtemplate gNightDazeVioletCirclesTemplate 0x82 0x1 0x80
 	launchtemplate gNightDazeVioletCirclesTemplate 0x82 0x1 0xa0
-	launchtemplate gNightDazeVioletCirclesTemplate 0x82 0x1 SOUND_PAN_ATTACKER
+	launchtemplate gNightDazeVioletCirclesTemplate 0x82 0x1 0x0
 	launchtemplate gNightDazeVioletCirclesTemplate 0x82 0x1 0xe0
 	delay 0x1
 	launchtemplate gNightDazeVioletRingsTemplate 0x3 0x6 0x0 0x0 0x0 0x0 0x1F 0x8
