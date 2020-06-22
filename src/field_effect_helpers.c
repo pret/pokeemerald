@@ -146,11 +146,10 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
       }
       paletteNum = LoadSpritePalette(&filteredPalette);
       UpdateSpritePaletteWithWeather(paletteNum);
+      UpdateSpritePaletteWithTime(paletteNum);
     }
     sprite->oam.paletteNum = paletteNum;
-    // Apply alpha blending
-    // SetGpuReg(REG_OFFSET_BLDALPHA, sprite->data[7] == FALSE ? BLDALPHA_BLEND(8, 12) : BLDALPHA_BLEND(8, 8));
-    sprite->oam.objMode = 1; // BLEND
+    sprite->oam.objMode = 1; // Alpha blending
 }
 
 #define HIGH_BRIDGE_PAL_TAG 0x4010
@@ -200,6 +199,7 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         }
         paletteNum = LoadSpritePalette(&filteredPalette);
         UpdateSpritePaletteWithWeather(paletteNum);
+        UpdateSpritePaletteWithTime(paletteNum);
       }
       reflectionSprite->oam.paletteNum = paletteNum;
     }

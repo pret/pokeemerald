@@ -478,7 +478,7 @@ void Rain_InitVars(void)
     gWeatherPtr->rainSpriteVisibleDelay = 8;
     gWeatherPtr->isDownpour = FALSE;
     gWeatherPtr->targetRainSpriteCount = 10;
-    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaTargetIndex = gTimeOfDay == TIME_OF_DAY_DAY ? 3 : 0;
     gWeatherPtr->gammaStepDelay = 20;
     SetRainStrengthFromSoundEffect(SE_RAIN);
 }
@@ -1020,7 +1020,7 @@ void Thunderstorm_InitVars(void)
     gWeatherPtr->rainSpriteVisibleDelay = 4;
     gWeatherPtr->isDownpour = FALSE;
     gWeatherPtr->targetRainSpriteCount = 16;
-    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaTargetIndex = gTimeOfDay == TIME_OF_DAY_DAY ? 3 : 0;
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     gWeatherPtr->thunderTriggered = 0;
@@ -1116,6 +1116,8 @@ void Thunderstorm_Main(void)
         if (--gWeatherPtr->unknown_6E6 == 0)
         {
             sub_80ABC48(3);
+            if (gTimeOfDay != TIME_OF_DAY_DAY)
+              BlendPalettesWithTime(0xFFFFFFFF);
             gWeatherPtr->unknown_6EA = 1;
             if (--gWeatherPtr->unknown_6EC != 0)
             {
@@ -1152,7 +1154,7 @@ void Thunderstorm_Main(void)
     case 13:
         if (--gWeatherPtr->unknown_6E6 == 0)
         {
-            sub_80ABC7C(19, 3, 5);
+            gTimeOfDay == TIME_OF_DAY_DAY ? sub_80ABC7C(19, 3, 5) : BlendPalettesWithTime(0xFFFFFFFF);
             gWeatherPtr->initStep++;
         }
         break;

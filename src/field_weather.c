@@ -254,6 +254,7 @@ static void Task_WeatherMain(u8 taskId)
 
 static void None_Init(void)
 {
+    Weather_SetBlendCoeffs(8, 12); // Indoor shadows
     gWeatherPtr->gammaTargetIndex = 0;
     gWeatherPtr->gammaStepDelay = 0;
 }
@@ -860,6 +861,7 @@ void LoadCustomWeatherSpritePalette(const u16 *palette)
 {
     LoadPalette(palette, 0x100 + gWeatherPtr->weatherPicSpritePalIndex * 16, 32);
     UpdateSpritePaletteWithWeather(gWeatherPtr->weatherPicSpritePalIndex);
+    UpdateSpritePaletteWithTime(gWeatherPtr->weatherPicSpritePalIndex);
 }
 
 static void LoadDroughtWeatherPalette(u8 *gammaIndexPtr, u8 *a1)

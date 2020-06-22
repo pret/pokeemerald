@@ -6,3 +6,4 @@ gFieldCallback
 gFieldCallback2
 gLocalLinkPlayerId
 gFieldLinkPlayerCount
+gTimeOfDay

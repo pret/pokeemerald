@@ -11,6 +11,7 @@ enum
     NORMAL_FADE,
     FAST_FADE,
     HARDWARE_FADE,
+    TIME_OF_DAY_FADE,
 };
 
 // These are structs for some unused palette system.
@@ -50,6 +51,7 @@ static u8 UpdateNormalPaletteFade(void);
 static void BeginFastPaletteFadeInternal(u8);
 static u8 UpdateFastPaletteFade(void);
 static u8 UpdateHardwarePaletteFade(void);
+static u8 UpdateTimeOfDayPaletteFade(void);
 static void UpdateBlendRegisters(void);
 static bool8 IsSoftwarePaletteFadeFinishing(void);
 static void Task_BlendPalettesGradually(u8 taskId);
@@ -123,6 +125,8 @@ u8 UpdatePaletteFade(void)
         result = UpdateNormalPaletteFade();
     else if (gPaletteFade.mode == FAST_FADE)
         result = UpdateFastPaletteFade();
+    else if (gPaletteFade.mode == TIME_OF_DAY_FADE)
+        result = UpdateTimeOfDayPaletteFade();
     else
         result = UpdateHardwarePaletteFade();
 
@@ -180,6 +184,53 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
         gPaletteFade.blendColor = color;
         gPaletteFade.active = 1;
         gPaletteFade.mode = NORMAL_FADE;
+
+        if (startY < targetY)
+            gPaletteFade.yDec = 0;
+        else
+            gPaletteFade.yDec = 1;
+
+        UpdatePaletteFade();
+
+        temp = gPaletteFade.bufferTransferDisabled;
+        gPaletteFade.bufferTransferDisabled = 0;
+        CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
+        sPlttBufferTransferPending = 0;
+        if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
+            UpdateBlendRegisters();
+        gPaletteFade.bufferTransferDisabled = temp;
+        return TRUE;
+    }
+}
+
+// Like normal palette fade but respects sprite/tile palettes immune to time of day fading
+bool8 BeginTimeOfDayPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u16 blendColor)
+{
+    u8 temp;
+    u16 color = blendColor;
+
+    if (gPaletteFade.active)
+    {
+        return FALSE;
+    }
+    else
+    {
+        gPaletteFade.deltaY = 2;
+
+        if (delay < 0)
+        {
+            gPaletteFade.deltaY += (delay * -1);
+            delay = 0;
+        }
+
+        gPaletteFade_selectedPalettes = selectedPalettes;
+        gPaletteFade.delayCounter = delay;
+        gPaletteFade_delay = delay;
+        gPaletteFade.y = startY;
+        gPaletteFade.targetY = targetY;
+        gPaletteFade.blendColor = color;
+        gPaletteFade.active = 1;
+        gPaletteFade.mode = TIME_OF_DAY_FADE;
 
         if (startY < targetY)
             gPaletteFade.yDec = 0;
@@ -405,6 +456,94 @@ static u8 GetPaletteNumByUid(u16 uid)
     return 16;
 }
 
+// Like normal palette fade, but respects sprite/tile palettes immune to time of day fading
+static u8 UpdateTimeOfDayPaletteFade(void) // Like normal, but respects sprite palettes immune to fading
+{
+    u8 paletteNum;
+    u16 paletteOffset;
+    u16 selectedPalettes;
+
+    if (!gPaletteFade.active)
+        return PALETTE_FADE_STATUS_DONE;
+
+    if (IsSoftwarePaletteFadeFinishing())
+      return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+
+    if (!gPaletteFade.objPaletteToggle)
+    {
+        if (gPaletteFade.delayCounter < gPaletteFade_delay)
+        {
+            gPaletteFade.delayCounter++;
+            return 2;
+        }
+        gPaletteFade.delayCounter = 0;
+    }
+
+    paletteOffset = 0;
+
+    if (!gPaletteFade.objPaletteToggle)
+    {
+        selectedPalettes = gPaletteFade_selectedPalettes;
+    }
+    else
+    {
+        selectedPalettes = gPaletteFade_selectedPalettes >> 16;
+        paletteOffset = 256;
+    }
+
+    for (paletteNum = 0; paletteNum < 16; paletteNum++, selectedPalettes >>= 1, paletteOffset += 16) {
+      if (selectedPalettes & 1) {
+        if (gPaletteFade.yDec) {
+          if (gPaletteFade.objPaletteToggle) { // sprite palettes
+            if (gPaletteFade.y >= gPaletteFade.targetY || GetSpritePaletteTagByPaletteNum(paletteNum) & 0x8000)
+              BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+          // tile palettes
+          } else if (gPaletteFade.y >= gPaletteFade.targetY || (paletteNum >= 13 && paletteNum <= 15)) {
+              BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+          }
+        } else {
+          BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+        }
+      }
+    }
+
+    gPaletteFade.objPaletteToggle ^= 1;
+
+    if (!gPaletteFade.objPaletteToggle)
+    {
+        if ((gPaletteFade.yDec && gPaletteFade.y == 0) || (!gPaletteFade.yDec && gPaletteFade.y == gPaletteFade.targetY))
+        {
+            gPaletteFade_selectedPalettes = 0;
+            gPaletteFade.softwareFadeFinishing = 1;
+        }
+        else
+        {
+            s8 val;
+
+            if (!gPaletteFade.yDec)
+            {
+                val = gPaletteFade.y;
+                val += gPaletteFade.deltaY;
+                if (val > gPaletteFade.targetY)
+                    val = gPaletteFade.targetY;
+                gPaletteFade.y = val;
+            }
+            else
+            {
+                val = gPaletteFade.y;
+                val -= gPaletteFade.deltaY;
+                if (val < 0)
+                    val = 0;
+                gPaletteFade.y = val;
+            }
+        }
+    }
+
+    // gPaletteFade.active cannot change since the last time it was checked. So this
+    // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
+    return PALETTE_FADE_STATUS_ACTIVE;
+}
+
 static u8 UpdateNormalPaletteFade(void)
 {
     u16 paletteOffset;
@@ -586,7 +725,6 @@ static u8 UpdateFastPaletteFade(void)
 
     if (IsSoftwarePaletteFadeFinishing())
         return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
-        
 
     if (gPaletteFade.objPaletteToggle)
     {
@@ -721,7 +859,6 @@ static u8 UpdateFastPaletteFade(void)
         gPaletteFade.mode = NORMAL_FADE;
         gPaletteFade.softwareFadeFinishing = 1;
     }
-    
     // gPaletteFade.active cannot change since the last time it was checked. So this
     // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
     return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;

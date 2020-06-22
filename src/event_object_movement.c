@@ -451,6 +451,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_DYNAMIC 0x1124
+#define OBJ_EVENT_PAL_TAG_LIGHT 0x8001
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -498,6 +499,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
     {gObjectEventPalette0, OBJ_EVENT_PAL_TAG_DYNAMIC},
+    {gObjectEventPaletteLight, OBJ_EVENT_PAL_TAG_LIGHT},
     {NULL,                  0x0000},
 };
 
@@ -1753,6 +1755,87 @@ bool8 ScrFunc_followerfly(struct ScriptContext *ctx) {
   return FALSE;
 }
 
+// Callback for light sprites
+void UpdateLightSprite(struct Sprite *sprite) {
+  s16 left =   gSaveBlock1Ptr->pos.x - 2;
+  s16 right =  gSaveBlock1Ptr->pos.x + 17;
+  s16 top =    gSaveBlock1Ptr->pos.y;
+  s16 bottom = gSaveBlock1Ptr->pos.y + 15;
+  s16 x = sprite->data[6];
+  s16 y = sprite->data[7];
+  u16 sheetTileStart;
+  u32 paletteNum;
+  bool8 finished = TRUE;
+  // Ripped from RemoveObjectEventIfOutsideView
+  if (x >= left && x <= right
+   && y >= top && y <= bottom)
+      finished = FALSE;
+  if (x >= left && x <= right
+   && y >= top && y <= bottom)
+      finished = FALSE;
+  finished = finished ? finished : gTimeOfDay != TIME_OF_DAY_NIGHT;
+  if (finished) {
+    sheetTileStart = sprite->sheetTileStart;
+    paletteNum = sprite->oam.paletteNum;
+    DestroySprite(sprite);
+    FieldEffectFreeTilesIfUnused(sheetTileStart);
+    FieldEffectFreePaletteIfUnused(paletteNum);
+    return;
+  }
+
+  if (gPlayerAvatar.tileTransitionState) {
+    Weather_SetBlendCoeffs(7, 12);
+    sprite->invisible = FALSE;
+  } else {
+    Weather_SetBlendCoeffs(12, 12);
+    sprite->invisible = gSaveBlock2Ptr->playTimeVBlanks & 1;
+  }
+}
+
+// Spawn a light at a map coordinate based on metatile behavior
+static void SpawnLightSprite(s16 x, s16 y, s16 camX, s16 camY, u32 behavior) {
+  struct Sprite *sprite;
+  u8 i;
+  for (i = 0; i < MAX_SPRITES; i++) {
+    sprite = &gSprites[i];
+    if (sprite->inUse && sprite->callback == UpdateLightSprite && sprite->data[6] == x && sprite->data[7] == y)
+      return;
+  }
+  sprite = &gSprites[CreateSprite(&gFieldEffectObjectTemplate_BallLight, 0, 0, 0)];
+  UpdateSpritePaletteByTemplate(&gFieldEffectObjectTemplate_BallLight, sprite);
+  sub_8092FF0(x + camX, y + camY, &sprite->pos1.x, &sprite->pos1.y);
+  sprite->data[6] = x;
+  sprite->data[7] = y;
+  sprite->affineAnims = gDummySpriteAffineAnimTable;
+  sprite->affineAnimBeginning = TRUE;
+  sprite->centerToCornerVecX = -(32 >> 1);
+  sprite->centerToCornerVecY = -(32 >> 1);
+  sprite->oam.priority = 1;
+  sprite->oam.objMode = 1; // BLEND
+  sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+  sprite->coordOffsetEnabled = TRUE;
+  sprite->pos1.x += 8;
+  sprite->pos1.y += 22 + sprite->centerToCornerVecY;
+}
+
+void TrySpawnLightSprites(s16 camX, s16 camY) {
+  s16 left = gSaveBlock1Ptr->pos.x - 2;
+  s16 right = gSaveBlock1Ptr->pos.x + 17;
+  s16 top = gSaveBlock1Ptr->pos.y;
+  s16 bottom = gSaveBlock1Ptr->pos.y + 16;
+  s16 x, y;
+  u32 behavior;
+  if (gTimeOfDay != TIME_OF_DAY_NIGHT)
+    return;
+  for (x = left; x <= right; x++) {
+    for (y = top; y <= bottom; y++) {
+      behavior = MapGridGetMetatileBehaviorAt(x, y);
+      if (behavior == 0x04) // TODO: Use an actual constant
+        SpawnLightSprite(x, y, camX, camY, behavior);
+    }
+  }
+}
+
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
 {
     u8 i;
@@ -1789,6 +1872,7 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
                 TrySpawnObjectEventTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
         }
     }
+    TrySpawnLightSprites(cameraX, cameraY);
 }
 
 void RemoveObjectEventsOutsideView(void)
@@ -1829,7 +1913,7 @@ static void RemoveObjectEventIfOutsideView(struct ObjectEvent *objectEvent)
     RemoveObjectEvent(objectEvent);
 }
 
-void sub_808E16C(s16 x, s16 y)
+void sub_808E16C(s16 x, s16 y) // Called when returning to field
 {
     u8 i;
 
@@ -1842,6 +1926,7 @@ void sub_808E16C(s16 x, s16 y)
         }
     }
     CreateReflectionEffectSprites();
+    TrySpawnLightSprites(x, y);
 }
 
 static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
@@ -1934,7 +2019,13 @@ static u8 UpdateSpritePalette(const struct SpritePalette * spritePalette, struct
   sprite->inUse = FALSE;
   FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
   sprite->inUse = TRUE;
-  sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+  if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF) {
+    sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+    UpdateSpritePaletteWithTime(sprite->oam.paletteNum);
+  } else {
+    sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+  }
+
   return sprite->oam.paletteNum;
 }
 
@@ -2186,11 +2277,14 @@ void Unused_LoadObjectEventPaletteSet(u16 *paletteTags)
 
 static u8 sub_808E8F4(const struct SpritePalette *spritePalette)
 {
+    u8 paletteNum;
     if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xFF)
     {
         return 0xFF;
     }
-    return LoadSpritePalette(spritePalette);
+    paletteNum = LoadSpritePalette(spritePalette);
+    UpdateSpritePaletteWithTime(paletteNum);
+    return paletteNum;
 }
 
 void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)

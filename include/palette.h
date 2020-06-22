@@ -60,6 +60,7 @@ u8 UpdatePaletteFade(void);
 void ResetPaletteFade(void);
 void ReadPlttIntoBuffers(void);
 bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
+bool8 BeginTimeOfDayPaletteFade(u32, s8, u8, u8, u16);
 bool8 unref_sub_8073D3C(u32, u8, u8, u8, u16);
 void unref_sub_8073D84(u8, u32 *);
 void ResetPaletteStructByUid(u16);

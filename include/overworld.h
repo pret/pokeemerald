@@ -15,7 +15,7 @@
 
 // These two are a hack to stop user input until link stuff can be
 // resolved.
-#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B 
+#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B
 #define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
 #define LINK_KEY_CODE_UNK_7 0x1D
 #define LINK_KEY_CODE_UNK_8 0x1E
@@ -25,6 +25,10 @@
 #define MOVEMENT_MODE_SCRIPTED 2
 
 #define SKIP_OBJECT_EVENT_LOAD  1
+#define TIME_OF_DAY_NIGHT 0
+#define TIME_OF_DAY_TWILIGHT 1
+#define TIME_OF_DAY_DAY 2
+#define TIME_OF_DAY_MAX TIME_OF_DAY_DAY
 
 struct InitialPlayerAvatarState
 {
@@ -52,6 +56,7 @@ extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
+extern u8 gTimeOfDay;
 
 // Exported ROM declarations
 extern const struct UCoords32 gDirectionToVectors[];
@@ -130,6 +135,7 @@ void CleanupOverworldWindowsAndTilemaps(void);
 bool32 IsUpdateLinkStateCBActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
+void BlendPalettesWithTime(u32);
 void CB2_Overworld(void);
 void SetMainCallback1(void (*cb)(void));
 void SetUnusedCallback(void *a0);

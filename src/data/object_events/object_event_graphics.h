@@ -283,6 +283,7 @@ const u32 gFieldEffectObjectPic_ShadowSmall[] = INCBIN_U32("graphics/field_effec
 const u32 gFieldEffectObjectPic_ShadowMedium[] = INCBIN_U32("graphics/field_effects/pics/shadow_medium.4bpp");
 const u32 gFieldEffectObjectPic_ShadowLarge[] = INCBIN_U32("graphics/field_effects/pics/shadow_large.4bpp");
 const u32 gFieldEffectObjectPic_ShadowExtraLarge[] = INCBIN_U32("graphics/field_effects/pics/shadow_extra_large.4bpp");
+const u32 gFieldEffectObjectPic_BallLight[] = INCBIN_U32("graphics/object_events/pics/misc/light.4bpp");
 static const u32 sFiller[0x48] = {};
 const u8 gFieldEffectPic_CutGrass[] = INCBIN_U8("graphics/field_effects/pics/cut_grass.4bpp");
 const u32 gFieldEffectPic_CutGrass_Copy[] = INCBIN_U32("graphics/field_effects/pics/cut_grass.4bpp");
@@ -344,14 +345,7 @@ const u32 gObjectEventPic_Greta[] = INCBIN_U32("graphics/object_events/pics/peop
 const u32 gObjectEventPic_Noland[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/noland.4bpp");
 const u32 gObjectEventPic_Lucy[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/lucy.4bpp");
 const u32 gObjectEventPic_Brandon[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/brandon.4bpp");
-<<<<<<< HEAD
-const u32 gObjectEventPic_Lugia[] = INCBIN_U32("graphics/object_events/pics/pokemon/lugia.4bpp");
-const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
-const u32 gObjectEventPic_HoOh[] = INCBIN_U32("graphics/object_events/pics/pokemon/ho_oh.4bpp");
-const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/ho_oh.gbapal");
-=======
 const u16 gObjectEventPalette32[] = INCBIN_U16("graphics/object_events/palettes/32.gbapal");
->>>>>>> e8c5f3ad6 (Added all 386 follower sprites.)
 const u32 gObjectEventPic_AnimatedBall[] = INCBIN_U32("graphics/object_events/pics/misc/animated_ball.4bpp");
 const u16 gObjectEventPalette31[] = INCBIN_U16("graphics/object_events/palettes/31.gbapal");
 const u32 gObjectEventPic_Bulbasaur[] = INCBIN_U32("graphics/object_events/pics/pokemon/bulbasaur.4bpp");
@@ -784,3 +778,4 @@ const u32 gObjectEventPic_LugiaOld[] = INCBIN_U32("graphics/object_events/pics/p
 const u32 gObjectEventPic_HoOhOld[] = INCBIN_U32("graphics/object_events/pics/pokemon/ho_oh_old.4bpp");
 const u32 gObjectEventPic_GroudonOld[] = INCBIN_U32("graphics/object_events/pics/pokemon/groudon_old.4bpp");
 const u32 gObjectEventPic_KyogreOld[] = INCBIN_U32("graphics/object_events/pics/pokemon/kyogre_old.4bpp");
+const u16 gObjectEventPaletteLight[] = INCBIN_U16("graphics/object_events/palettes/light.gbapal");
