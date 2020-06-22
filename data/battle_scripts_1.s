@@ -7400,6 +7400,9 @@ BattleScript_HangedOnMsg::
 	playanimation BS_TARGET, B_ANIM_HANGED_ON, NULL
 	printstring STRINGID_PKMNHUNGONWITHX
 	waitmessage 0x40
+	jumpifnoholdeffect BS_TARGET, HOLD_EFFECT_FOCUS_SASH, BattleScript_HangedOnMsgRet
+	removeitem BS_TARGET
+BattleScript_HangedOnMsgRet:
 	return
 
 BattleScript_BerryConfuseHealEnd2::
