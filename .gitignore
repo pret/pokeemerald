@@ -34,4 +34,5 @@ porymap.project.cfg
 *.a
 .fuse_hidden*
 .ccls-cache/*
+overworld/
 *.sna

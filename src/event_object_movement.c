@@ -32,6 +32,7 @@
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
+#include "constants/map_types.h"
 #include "constants/mauville_old_man.h"
 #include "constants/species.h"
 #include "constants/trainer_types.h"
@@ -143,6 +144,7 @@ static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
 static void UpdateObjectEventSprite(struct Sprite *);
 static void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *);
 u8 GetDirectionToFace(s16 x1, s16 y1, s16 x2, s16 y2);
+static void FollowerSetGraphics(struct ObjectEvent *, u16);
 static void ObjectEventSetGraphics(struct ObjectEvent *, const struct ObjectEventGraphicsInfo *);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
@@ -1433,6 +1435,13 @@ TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTemplate,
     SetSubspriteTables(&gSprites[gObjectEvents[objectEventId].spriteId],
                        subspriteTables);
 
+  // Set species based on script header
+  if (objectEventTemplate->graphicsId == OBJ_EVENT_GFX_OW_MON && objectEventTemplate->script) {
+    const u8 *script = objectEventTemplate->script;
+    if (script[0] == 0x7d) // bufferspeciesname
+      FollowerSetGraphics(&gObjectEvents[objectEventId], script[2] | script[3] << 8);
+  }
+
   return objectEventId;
 }
 
@@ -1608,9 +1617,11 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species)
 // Set graphics & sprite for a follower object event by species
 static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
   const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species);
+  u16 *oldSpecies = (u16*) &objectEvent->playerCopyableMovement;
   objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
   ObjectEventSetGraphics(objectEvent, SpeciesToGraphicsInfo(species));
   objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
+  *oldSpecies = species;
   if (graphicsInfo->paletteTag1 == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
     const struct CompressedSpritePalette *spritePalette = &gMonPaletteTable[species];
@@ -1629,7 +1640,8 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
   struct Sprite *sprite;
   u16 species;
   u16 *oldSpecies;
-  if (mon) {
+  // Avoid spawning large (64x64) follower pokemon inside buildings
+  if (mon && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(GetMonData(mon, MON_DATA_SPECIES))->width == 64)) {
     if (objectEvent == NULL) { // Spawn follower
       struct ObjectEventTemplate template = {
         .localId = OBJ_EVENT_ID_FOLLOWER,
@@ -1637,7 +1649,7 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
         .x = gSaveBlock1Ptr->pos.x,
         .y = gSaveBlock1Ptr->pos.y,
         .elevation = 3,
-        .movementType = MOVEMENT_TYPE_FOLLOW_PLAYER
+        .movementType = MOVEMENT_TYPE_FOLLOW_PLAYER,
       };
       objectEvent = &gObjectEvents[SpawnSpecialObjectEvent(&template)];
       objectEvent->invisible = TRUE;
@@ -1649,10 +1661,9 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
       MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
       objectEvent->invisible = TRUE;
     }
-    FollowerSetGraphics(objectEvent, species); // TODO: This should be done to all pokemon graphics
-    *oldSpecies = species; // set species
+    FollowerSetGraphics(objectEvent, species);
     sprite->data[6] = 0; // set animation data
-    sprite->data[7] = species; // set species
+    *oldSpecies = sprite->data[7] = species; // set species
   } else {
     RemoveFollowingPokemon();
   }
@@ -1689,7 +1700,7 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     if (gBaseStats[species].type1 == TYPE_FIRE || gBaseStats[species].type2 == TYPE_FIRE) {
       ScriptCall(ctx, EventScript_FollowerHasWetFeet);
       return FALSE;
-    } else if (GetObjectEventGraphicsInfo(objEvent->graphicsId)->tracks) { // if follower leaves tracks
+    } else if (SpeciesToGraphicsInfo(species)->tracks) { // if follower leaves tracks
       ScriptCall(ctx, EventScript_FollowerSplashesAbout);
       return FALSE;
     }
@@ -1697,7 +1708,6 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
     ScriptCall(ctx, EventScript_FollowerLovesYou);
   }
-  // SetMainCallback2(CB2_OpenFlyMap);
   ScriptCall(ctx, EventScript_FollowerLovesYou);
   return FALSE;
 }
@@ -1849,6 +1859,10 @@ static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = objectEventId;
         objectEvent->spriteId = spriteId;
+        if (objectEvent->graphicsId == OBJ_EVENT_GFX_OW_MON) { // Set pokemon graphics
+          u16 *species = (u16*) &objectEvent->playerCopyableMovement;
+          FollowerSetGraphics(objectEvent, *species);
+        }
         if (!objectEvent->inanimate && objectEvent->movementType != MOVEMENT_TYPE_PLAYER)
         {
             StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objectEvent->facingDirection));
@@ -8064,8 +8078,7 @@ static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent *objEven
         || (MetatileBehavior_IsPacifidlogLog(objEvent->currentMetatileBehavior)
             && MetatileBehavior_IsPacifidlogLog(objEvent->previousMetatileBehavior)))
     {
-        // Only set flags if objEvent leaves tracks
-        if (!objEvent->inShallowFlowingWater && GetObjectEventGraphicsInfo(objEvent->graphicsId)->tracks)
+        if (!objEvent->inShallowFlowingWater)
         {
             objEvent->inShallowFlowingWater = 0;
             objEvent->inShallowFlowingWater = 1;

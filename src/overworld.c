@@ -1947,11 +1947,10 @@ static bool32 ReturnToFieldLocal(u8 *state)
         sub_80867D8();
         ResumeMap(FALSE);
         sub_8086A68();
-        if (gFieldCallback == FieldCallback_Fly) {
+        if (gFieldCallback == FieldCallback_Fly)
           RemoveFollowingPokemon();
-        } else {
-          UpdateFollowingPokemon(); // TODO: Update all dynamic graphicsIds
-        }
+        else
+          UpdateFollowingPokemon();
         SetCameraToTrackPlayer();
         (*state)++;
         break;
