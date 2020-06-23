@@ -1,3 +1,4 @@
+.set LOCALID_DEOXYS_ROCK, 1
 .set LOCALID_DEOXYS, 2
 
 BirthIsland_Exterior_MapScripts:: @ 8267F15
@@ -67,7 +68,7 @@ BirthIsland_Exterior_EventScript_NotSolved3:: @ 8267FBF
 
 BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	waitse
-	setfieldeffectargument 0, 1
+	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
 	setfieldeffectargument 1, 58
 	setfieldeffectargument 2, 26
 	dofieldeffect FLDEFF_65
