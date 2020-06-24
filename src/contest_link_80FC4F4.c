@@ -6,7 +6,6 @@
 #include "pokemon.h"
 #include "random.h"
 #include "task.h"
-#include "constants/flags.h"
 
 static void sub_80FC5C0(u8);
 static void sub_80FC5DC(u8);

@@ -8,7 +8,6 @@
 #include "script_pokemon_util_80F87D8.h"
 #include "tv.h"
 #include "constants/heal_locations.h"
-#include "constants/flags.h"
 #include "constants/tv.h"
 
 int GameClear(void)

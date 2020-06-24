@@ -23,7 +23,6 @@
 #include "constants/metatile_labels.h"
 #include "constants/songs.h"
 #include "constants/tv.h"
-#include "constants/vars.h"
 
 
 EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
