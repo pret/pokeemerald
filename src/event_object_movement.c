@@ -8453,13 +8453,13 @@ static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, st
 
 void GroundEffect_SandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
+    const struct ObjectEventGraphicsInfo *info = objEvent->graphicsId == OBJ_EVENT_GFX_OW_MON ? SpeciesToGraphicsInfo(objEvent->extra.mon.species, 0) : GetObjectEventGraphicsInfo(objEvent->graphicsId);
     sGroundEffectTracksFuncs[objEvent->invisible ? TRACKS_NONE : info->tracks](objEvent, sprite, 0);
 }
 
 void GroundEffect_DeepSandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
+    const struct ObjectEventGraphicsInfo *info = objEvent->graphicsId == OBJ_EVENT_GFX_OW_MON ? SpeciesToGraphicsInfo(objEvent->extra.mon.species, 0) : GetObjectEventGraphicsInfo(objEvent->graphicsId);
     sGroundEffectTracksFuncs[objEvent->invisible ? TRACKS_NONE : info->tracks](objEvent, sprite, 1);
 }
 

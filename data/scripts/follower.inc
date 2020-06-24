@@ -8,13 +8,13 @@ gText_FollowerDefault::
   .string "ERROR 404: Script not found.$"
 
 gText_FollowerHasWetFeet::
-  .string "{STR_VAR_1} seems unhappy about getting\nits feet wet.$"
+  .string "{STR_VAR_1} frowns at you. It shuffles\nits wet feet.$"
 
 gText_FollowerSplashesAround::
   .string "{STR_VAR_1} splashes around happily!$"
 
 gText_WantsToFly::
-  .string "{STR_VAR_1} looks adventurous.\nWould you like to use FLY?$"
+  .string "{STR_VAR_1} looks up at the\nsky restlessly.\pWould you like to use FLY?$"
 
 .macro playfirstmoncry
 callfunc ScrFunc_playfirstmoncry
