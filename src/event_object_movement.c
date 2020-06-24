@@ -1617,11 +1617,10 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species)
 // Set graphics & sprite for a follower object event by species
 static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
   const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species);
-  u16 *oldSpecies = (u16*) &objectEvent->playerCopyableMovement;
   objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
   ObjectEventSetGraphics(objectEvent, SpeciesToGraphicsInfo(species));
   objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
-  *oldSpecies = species;
+  objectEvent->extra.species = species;
   if (graphicsInfo->paletteTag1 == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
     const struct CompressedSpritePalette *spritePalette = &gMonPaletteTable[species];
@@ -1639,7 +1638,6 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
   struct Pokemon *mon = GetFirstLiveMon();
   struct Sprite *sprite;
   u16 species;
-  u16 *oldSpecies;
   // Avoid spawning large (64x64) follower pokemon inside buildings
   if (mon && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(GetMonData(mon, MON_DATA_SPECIES))->width == 64)) {
     if (objectEvent == NULL) { // Spawn follower
@@ -1656,14 +1654,13 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
     }
     sprite = &gSprites[objectEvent->spriteId];
     species = GetMonData(mon, MON_DATA_SPECIES);
-    oldSpecies = (u16*) &objectEvent->playerCopyableMovement;
-    if (species != *oldSpecies) { // Move to player and set invisible
+    if (species != objectEvent->extra.species) { // Move to player and set invisible
       MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
       objectEvent->invisible = TRUE;
     }
     FollowerSetGraphics(objectEvent, species);
     sprite->data[6] = 0; // set animation data
-    *oldSpecies = sprite->data[7] = species; // set species
+    objectEvent->extra.species = sprite->data[7] = species; // set species
   } else {
     RemoveFollowingPokemon();
   }
@@ -1860,8 +1857,7 @@ static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
         sprite->data[0] = objectEventId;
         objectEvent->spriteId = spriteId;
         if (objectEvent->graphicsId == OBJ_EVENT_GFX_OW_MON) { // Set pokemon graphics
-          u16 *species = (u16*) &objectEvent->playerCopyableMovement;
-          FollowerSetGraphics(objectEvent, *species);
+          FollowerSetGraphics(objectEvent, objectEvent->extra.species);
         }
         if (!objectEvent->inanimate && objectEvent->movementType != MOVEMENT_TYPE_PLAYER)
         {
@@ -5111,7 +5107,7 @@ void SetTrainerMovementType(struct ObjectEvent *objectEvent, u8 movementType)
 {
     objectEvent->movementType = movementType;
     objectEvent->directionSequenceIndex = 0;
-    objectEvent->playerCopyableMovement = 0;
+    objectEvent->extra.playerCopyableMovement = 0;
     gSprites[objectEvent->spriteId].callback = sMovementTypeCallbacks[movementType];
     gSprites[objectEvent->spriteId].data[1] = 0;
 }

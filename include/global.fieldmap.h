@@ -207,8 +207,10 @@ struct ObjectEvent
     /*0x1F*/ u8 previousMetatileBehavior;
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
-    /*0x22*/ u8 playerCopyableMovement;
-             u8 unused;
+    /*0x22*/ union __attribute__((packed)) {
+        u8 playerCopyableMovement;
+        u16 species;
+    } extra;
     /*size = 0x24*/
 };
 

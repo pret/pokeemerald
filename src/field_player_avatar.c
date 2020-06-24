@@ -931,12 +931,12 @@ static bool8 PlayerCheckIfAnimFinishedOrInactive(void)
 
 static void PlayerSetCopyableMovement(u8 a)
 {
-    gObjectEvents[gPlayerAvatar.objectEventId].playerCopyableMovement = a;
+    gObjectEvents[gPlayerAvatar.objectEventId].extra.playerCopyableMovement = a;
 }
 
 u8 PlayerGetCopyableMovement(void)
 {
-    return gObjectEvents[gPlayerAvatar.objectEventId].playerCopyableMovement;
+    return gObjectEvents[gPlayerAvatar.objectEventId].extra.playerCopyableMovement;
 }
 
 static void PlayerForceSetHeldMovement(u8 movementActionId)
