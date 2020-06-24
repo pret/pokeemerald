@@ -2214,6 +2214,14 @@ const struct SpriteFrameImage gObjectEventPicTable_Sandslash[] = {
     overworld_frame(gObjectEventPic_Sandslash, 4, 4, 4),
     overworld_frame(gObjectEventPic_Sandslash, 4, 4, 5),
 };
+const struct SpriteFrameImage gObjectEventPicTable_Nidoran_f[] = {
+    overworld_frame(gObjectEventPic_Nidoran_f, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Nidoran_f, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Nidoran_f, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Nidoran_f, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Nidoran_f, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Nidoran_f, 4, 4, 5),
+};
 const struct SpriteFrameImage gObjectEventPicTable_Nidorina[] = {
     overworld_frame(gObjectEventPic_Nidorina, 4, 4, 0),
     overworld_frame(gObjectEventPic_Nidorina, 4, 4, 1),
@@ -2229,6 +2237,14 @@ const struct SpriteFrameImage gObjectEventPicTable_Nidoqueen[] = {
     overworld_frame(gObjectEventPic_Nidoqueen, 4, 4, 3),
     overworld_frame(gObjectEventPic_Nidoqueen, 4, 4, 4),
     overworld_frame(gObjectEventPic_Nidoqueen, 4, 4, 5),
+};
+const struct SpriteFrameImage gObjectEventPicTable_Nidoran_m[] = {
+    overworld_frame(gObjectEventPic_Nidoran_m, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Nidoran_m, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Nidoran_m, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Nidoran_m, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Nidoran_m, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Nidoran_m, 4, 4, 5),
 };
 const struct SpriteFrameImage gObjectEventPicTable_Nidorino[] = {
     overworld_frame(gObjectEventPic_Nidorino, 4, 4, 0),
