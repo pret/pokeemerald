@@ -18,8 +18,8 @@ TrainerHill_Entrance_OnWarp: @ 82680CF
 TrainerHill_Entrance_OnResume: @ 82680D0
 	trainerhill_resumetimer
 	setvar VAR_TEMP_0, 0
-	trainerhill_clearresult
-	compare VAR_RESULT, 0  @ VAR_RESULT always 0 here
+	trainerhill_getusingereader
+	compare VAR_RESULT, FALSE  @ VAR_RESULT always FALSE here
 	goto_if_eq TrainerHill_Entrance_EventScript_TryFaceAttendant
 	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 6
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant

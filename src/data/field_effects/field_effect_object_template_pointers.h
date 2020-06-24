@@ -16,9 +16,9 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_JumpSmallSplash;
 const struct SpriteTemplate gFieldEffectObjectTemplate_LongGrass;
 const struct SpriteTemplate gFieldEffectObjectTemplate_JumpLongGrass;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Unknown17;
-const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass;
+const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass2;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Unknown19;
-const struct SpriteTemplate gFieldEffectObjectTemplate_Unknown20;
+const struct SpriteTemplate gFieldEffectObjectTemplate_WaterSurfacing;
 const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Sparkle;
 const struct SpriteTemplate gFieldEffectObjectTemplate_DeepSandFootprints;
@@ -30,8 +30,8 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SandDisguisePlaceholder;
 const struct SpriteTemplate gFieldEffectObjectTemplate_SandPile;
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShortGrass;
 const struct SpriteTemplate gFieldEffectObjectTemplate_HotSpringsWater;
-const struct SpriteTemplate gFieldEffectObjectTemplate_JumpOutOfAsh;
-const struct SpriteTemplate gFieldEffectObjectTemplate_LavaridgeGymWarp;
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshPuff;
+const struct SpriteTemplate gFieldEffectObjectTemplate_AshLaunch;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles;
 const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle;
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza;
@@ -55,9 +55,9 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_LONG_GRASS]            = &gFieldEffectObjectTemplate_LongGrass,
     [FLDEFFOBJ_JUMP_LONG_GRASS]       = &gFieldEffectObjectTemplate_JumpLongGrass,
     [FLDEFFOBJ_17]                    = &gFieldEffectObjectTemplate_Unknown17,
-    [FLDEFFOBJ_UNUSED_GRASS]          = &gFieldEffectObjectTemplate_UnusedGrass,
+    [FLDEFFOBJ_UNUSED_GRASS_2]        = &gFieldEffectObjectTemplate_UnusedGrass2,
     [FLDEFFOBJ_19]                    = &gFieldEffectObjectTemplate_Unknown19,
-    [FLDEFFOBJ_20]                    = &gFieldEffectObjectTemplate_Unknown20,
+    [FLDEFFOBJ_WATER_SURFACING]       = &gFieldEffectObjectTemplate_WaterSurfacing,
     [FLDEFFOBJ_REFLECTION_DISTORTION] = &gFieldEffectObjectTemplate_ReflectionDistortion,
     [FLDEFFOBJ_SPARKLE]               = &gFieldEffectObjectTemplate_Sparkle,
     [FLDEFFOBJ_DEEP_SAND_FOOTPRINTS]  = &gFieldEffectObjectTemplate_DeepSandFootprints,
@@ -69,8 +69,8 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     [FLDEFFOBJ_SAND_PILE]             = &gFieldEffectObjectTemplate_SandPile,
     [FLDEFFOBJ_SHORT_GRASS]           = &gFieldEffectObjectTemplate_ShortGrass,
     [FLDEFFOBJ_HOT_SPRINGS_WATER]     = &gFieldEffectObjectTemplate_HotSpringsWater,
-    [FLDEFFOBJ_JUMP_OUT_OF_ASH]       = &gFieldEffectObjectTemplate_JumpOutOfAsh,
-    [FLDEFFOBJ_LAVARIDGE_GYM_WARP]    = &gFieldEffectObjectTemplate_LavaridgeGymWarp,
+    [FLDEFFOBJ_ASH_PUFF]              = &gFieldEffectObjectTemplate_AshPuff,
+    [FLDEFFOBJ_ASH_LAUNCH]            = &gFieldEffectObjectTemplate_AshLaunch,
     [FLDEFFOBJ_BUBBLES]               = &gFieldEffectObjectTemplate_Bubbles,
     [FLDEFFOBJ_SMALL_SPARKLE]         = &gFieldEffectObjectTemplate_SmallSparkle,
     [FLDEFFOBJ_RAYQUAZA]              = &gFieldEffectObjectTemplate_Rayquaza,

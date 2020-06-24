@@ -122,12 +122,12 @@ static const struct SpriteFrameImage sSpriteImageTable_CutGrass[] =
     {gFieldEffectPic_CutGrass, 0x20},
 };
 
-const struct SpritePalette gFieldEffectObjectPaletteInfo6 = {gFieldEffectObjectPalette6, 0x1000};
+const struct SpritePalette gFieldEffectObjectPaletteInfo6 = {gFieldEffectObjectPalette6, FLDEFF_PAL_TAG_0};
 
 static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 0x1000,
+    .paletteTag = FLDEFF_PAL_TAG_0,
     .oam = &sOamData_CutGrass,
     .anims = sSpriteAnimTable_CutGrass,
     .images = sSpriteImageTable_CutGrass,

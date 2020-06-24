@@ -290,7 +290,7 @@ void FieldCB_WarpExitFadeFromWhite(void)
 
 void FieldCB_WarpExitFadeFromBlack(void)
 {
-    if (!sub_81D6534()) // sub_81D6534 always returns false
+    if (!OnTrainerHillEReaderChallengeFloor()) // always false
         Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
     SetUpWarpExitTask();

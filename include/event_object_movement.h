@@ -16,11 +16,7 @@ enum SpinnerRunnerFollowPatterns
     RUNFOLLOW_SOUTH_EAST_WEST
 };
 
-struct UnkStruct_085094AC
-{
-    const union AnimCmd *const *anims;
-    u8 animPos[4];
-};
+#define FIGURE_8_LENGTH 72
 
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE    (1 << 1)
@@ -42,6 +38,12 @@ struct UnkStruct_085094AC
 #define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
+
+struct UnkStruct_085094AC
+{
+    const union AnimCmd *const *anims;
+    u8 animPos[4];
+};
 
 struct PairedPalettes
 {
@@ -174,8 +176,6 @@ u8 sub_809785C(struct Sprite *);
 u8 sub_80978E4(struct Sprite *);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
-void sub_8097750(struct Sprite *);
-bool8 sub_8097758(struct Sprite *);
 void CreateLevitateMovementTask(struct ObjectEvent *);
 void DestroyExtraMovementTask(u8);
 void UnfreezeObjectEvents(void);
@@ -191,8 +191,8 @@ u8 GetLedgeJumpDirection(s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 u16 GetObjectPaletteTag(u8 palSlot);
 void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible);
-s16 sub_809773C(s16 a1);
-s16 sub_8097728(s16 a1);
+s16 GetFigure8XOffset(s16 idx);
+s16 GetFigure8YOffset(s16 idx);
 void CameraObjectReset2(void);
 u8 ObjectEventGetBerryTreeId(u8 objectEventId);
 void sub_8092EF0(u8 mapId, u8 mapNumber, u8 mapGroup);

@@ -1930,7 +1930,7 @@ void sub_80EDA80(void)
     }
 }
 
-void sub_80EDB44(void)
+void TryPutTodaysRivalTrainerOnAir(void)
 {
     TVShow *show;
     u32 i;

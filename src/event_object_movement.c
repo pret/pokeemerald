@@ -130,6 +130,8 @@ static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
 static void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
 static void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *);
+static void InitSpriteForFigure8Anim(struct Sprite *sprite);
+static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
@@ -6864,15 +6866,15 @@ bool8 MovementAction_UnusedAcroActionRight_Step0(struct ObjectEvent *objectEvent
     return FALSE;
 }
 
-void sub_8095AF0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+void InitFigure8Anim(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8097750(sprite);
+    InitSpriteForFigure8Anim(sprite);
     sprite->animPaused = FALSE;
 }
 
-bool8 sub_8095B0C(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 DoFigure8Anim(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8097758(sprite))
+    if (AnimateSpriteInFigure8(sprite))
     {
         ShiftStillObjectEventCoords(objectEvent);
         objectEvent->triggerGroundEffectsOnStop = TRUE;
@@ -6884,14 +6886,14 @@ bool8 sub_8095B0C(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 
 bool8 MovementAction_Figure8_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_8095AF0(objectEvent, sprite);
+    InitFigure8Anim(objectEvent, sprite);
     sprite->data[2] = 1;
     return MovementAction_Figure8_Step1(objectEvent, sprite);
 }
 
 bool8 MovementAction_Figure8_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (sub_8095B0C(objectEvent, sprite))
+    if (DoFigure8Anim(objectEvent, sprite))
     {
         sprite->data[2] = 2;
         return TRUE;
@@ -8094,26 +8096,26 @@ void GroundEffect_Seaweed(struct ObjectEvent *objEvent, struct Sprite *sprite)
 }
 
 static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite) = {
-    GroundEffect_SpawnOnTallGrass,
-    GroundEffect_StepOnTallGrass,
-    GroundEffect_SpawnOnLongGrass,
-    GroundEffect_StepOnLongGrass,
-    GroundEffect_WaterReflection,
-    GroundEffect_IceReflection,
-    GroundEffect_FlowingWater,
-    GroundEffect_SandTracks,
-    GroundEffect_DeepSandTracks,
-    GroundEffect_Ripple,
-    GroundEffect_StepOnPuddle,
-    GroundEffect_SandHeap,
-    GroundEffect_JumpOnTallGrass,
-    GroundEffect_JumpOnLongGrass,
-    GroundEffect_JumpOnShallowWater,
-    GroundEffect_JumpOnWater,
-    GroundEffect_JumpLandingDust,
-    GroundEffect_ShortGrass,
-    GroundEffect_HotSprings,
-    GroundEffect_Seaweed
+    GroundEffect_SpawnOnTallGrass,      // GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN
+    GroundEffect_StepOnTallGrass,       // GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE
+    GroundEffect_SpawnOnLongGrass,      // GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN
+    GroundEffect_StepOnLongGrass,       // GROUND_EFFECT_FLAG_LONG_GRASS_ON_MOVE
+    GroundEffect_WaterReflection,       // GROUND_EFFECT_FLAG_ICE_REFLECTION
+    GroundEffect_IceReflection,         // GROUND_EFFECT_FLAG_REFLECTION
+    GroundEffect_FlowingWater,          // GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER
+    GroundEffect_SandTracks,            // GROUND_EFFECT_FLAG_SAND
+    GroundEffect_DeepSandTracks,        // GROUND_EFFECT_FLAG_DEEP_SAND
+    GroundEffect_Ripple,                // GROUND_EFFECT_FLAG_RIPPLES
+    GroundEffect_StepOnPuddle,          // GROUND_EFFECT_FLAG_PUDDLE
+    GroundEffect_SandHeap,              // GROUND_EFFECT_FLAG_SAND_PILE
+    GroundEffect_JumpOnTallGrass,       // GROUND_EFFECT_FLAG_LAND_IN_TALL_GRASS
+    GroundEffect_JumpOnLongGrass,       // GROUND_EFFECT_FLAG_LAND_IN_LONG_GRASS
+    GroundEffect_JumpOnShallowWater,    // GROUND_EFFECT_FLAG_LAND_IN_SHALLOW_WATER
+    GroundEffect_JumpOnWater,           // GROUND_EFFECT_FLAG_LAND_IN_DEEP_WATER
+    GroundEffect_JumpLandingDust,       // GROUND_EFFECT_FLAG_LAND_ON_NORMAL_GROUND
+    GroundEffect_ShortGrass,            // GROUND_EFFECT_FLAG_SHORT_GRASS
+    GroundEffect_HotSprings,            // GROUND_EFFECT_FLAG_HOT_SPRINGS
+    GroundEffect_Seaweed                // GROUND_EFFECT_FLAG_SEAWEED
 };
 
 static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *sprite, u32 flags)
@@ -8391,7 +8393,7 @@ bool8 sub_80976EC(struct Sprite *sprite)
         return FALSE;
 }
 
-static const s8 gUnknown_0850E772[] = {
+static const s8 sFigure8XOffsets[FIGURE_8_LENGTH] = {
     1, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 1, 2, 2, 1, 2,
     2, 1, 2, 2, 1, 2, 1, 1,
@@ -8403,7 +8405,7 @@ static const s8 gUnknown_0850E772[] = {
     0, 1, 0, 0, 0, 0, 0, 0,
 };
 
-static const s8 gUnknown_0850E7BA[] = {
+static const s8 sFigure8YOffsets[FIGURE_8_LENGTH] = {
      0,  0,  1,  0,  0,  1,  0,  0,
      1,  0,  1,  1,  0,  1,  1,  0,
      1,  1,  0,  1,  1,  0,  1,  1,
@@ -8415,57 +8417,57 @@ static const s8 gUnknown_0850E7BA[] = {
     -1, -1, -1, -1, -1, -1, -1, -2,
 };
 
-s16 sub_8097728(s16 a1)
+s16 GetFigure8YOffset(s16 idx)
 {
-    return gUnknown_0850E7BA[a1];
+    return sFigure8YOffsets[idx];
 }
 
-s16 sub_809773C(s16 a1)
+s16 GetFigure8XOffset(s16 idx)
 {
-    return gUnknown_0850E772[a1];
+    return sFigure8XOffsets[idx];
 }
 
-void sub_8097750(struct Sprite *sprite)
+static void InitSpriteForFigure8Anim(struct Sprite *sprite)
 {
     sprite->data[6] = 0;
     sprite->data[7] = 0;
 }
 
-bool8 sub_8097758(struct Sprite *sprite)
+static bool8 AnimateSpriteInFigure8(struct Sprite *sprite)
 {
-    bool8 result = FALSE;
+    bool8 finished = FALSE;
 
     switch(sprite->data[7])
     {
-        case 0:
-            sprite->pos2.x += sub_809773C(sprite->data[6]);
-            sprite->pos2.y += sub_8097728(sprite->data[6]);
-            break;
-        case 1:
-            sprite->pos2.x -= sub_809773C(0x47 - sprite->data[6]);
-            sprite->pos2.y += sub_8097728(0x47 - sprite->data[6]);
-            break;
-        case 2:
-            sprite->pos2.x -= sub_809773C(sprite->data[6]);
-            sprite->pos2.y += sub_8097728(sprite->data[6]);
-            break;
-        case 3:
-            sprite->pos2.x += sub_809773C(0x47 - sprite->data[6]);
-            sprite->pos2.y += sub_8097728(0x47 - sprite->data[6]);
-            break;
+    case 0:
+        sprite->pos2.x += GetFigure8XOffset(sprite->data[6]);
+        sprite->pos2.y += GetFigure8YOffset(sprite->data[6]);
+        break;
+    case 1:
+        sprite->pos2.x -= GetFigure8XOffset((FIGURE_8_LENGTH - 1) - sprite->data[6]);
+        sprite->pos2.y += GetFigure8YOffset((FIGURE_8_LENGTH - 1) - sprite->data[6]);
+        break;
+    case 2:
+        sprite->pos2.x -= GetFigure8XOffset(sprite->data[6]);
+        sprite->pos2.y += GetFigure8YOffset(sprite->data[6]);
+        break;
+    case 3:
+        sprite->pos2.x += GetFigure8XOffset((FIGURE_8_LENGTH - 1) - sprite->data[6]);
+        sprite->pos2.y += GetFigure8YOffset((FIGURE_8_LENGTH - 1) - sprite->data[6]);
+        break;
     }
-    if(++sprite->data[6] == 0x48)
+    if (++sprite->data[6] == FIGURE_8_LENGTH)
     {
         sprite->data[6] = 0;
         sprite->data[7]++;
     }
-    if(sprite->data[7] == 0x4)
+    if (sprite->data[7] == 4)
     {
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
-        result = TRUE;
+        finished = TRUE;
     }
-    return result;
+    return finished;
 }
 
 static const s8 gUnknown_0850E802[] = {

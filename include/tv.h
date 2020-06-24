@@ -30,7 +30,7 @@ void AlertTVThatPlayerPlayedSlotMachine(u16 nCoinsSpent);
 void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent);
 void AlertTVOfNewCoinTotal(u16 nCoinsPaidOut);
 void TryPutSecretBaseSecretsOnAir(void);
-void sub_80EDB44(void);
+void TryPutTodaysRivalTrainerOnAir(void);
 void sub_80EDC60(const u16 *words);
 void sub_80EDA80(void);
 void ReceivePokeNewsData(void *src, u32 size, u8 masterIdx);

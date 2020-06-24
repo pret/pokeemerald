@@ -749,7 +749,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_Pokeball[] =
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 4105,
+    .paletteTag = FLDEFF_PAL_TAG_9,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_Pokeball,
     .images = sSpriteImage_Pokeball,
@@ -798,7 +798,7 @@ static const union AnimCmd *const sSpriteAnimTable_UnusedBrendanLass[] =
 static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 4106,
+    .paletteTag = FLDEFF_PAL_TAG_10,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,
     .images = sImageTable_UnusedBrendan,
@@ -809,7 +809,7 @@ static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 4106,
+    .paletteTag = FLDEFF_PAL_TAG_10,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,
     .images = sImageTable_UnusedLass,
@@ -821,7 +821,7 @@ static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/field_effe
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
 {
-    gFieldEffectObjectPalette10, 0x1009
+    gFieldEffectObjectPalette10, FLDEFF_PAL_TAG_9
 };
 
 static const u16 sMugshotPal_Sidney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
@@ -850,7 +850,7 @@ static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
 static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
 static const struct SpritePalette sSpritePalette_UnusedTrainer =
 {
-    sUnusedTrainerPalette, 0x100A
+    sUnusedTrainerPalette, FLDEFF_PAL_TAG_10
 };
 
 static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");

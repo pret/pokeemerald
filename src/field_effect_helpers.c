@@ -817,19 +817,19 @@ u32 FldEff_Unknown19(void)
     return 0;
 }
 
-u32 FldEff_UnusedGrass(void)
+u32 FldEff_UnusedGrass2(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
 
     sub_80930E0((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_UNUSED_GRASS], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_UNUSED_GRASS_2], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->data[0] = FLDEFF_UNUSED_GRASS;
+        sprite->data[0] = FLDEFF_UNUSED_GRASS_2;
     }
     return 0;
 }
@@ -851,19 +851,19 @@ u32 FldEff_Unknown21(void)
     return 0;
 }
 
-u32 FldEff_Unknown22(void)
+u32 FldEff_WaterSurfacing(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
 
     sub_80930E0((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_20], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_WATER_SURFACING], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->data[0] = FLDEFF_UNKNOWN_22;
+        sprite->data[0] = FLDEFF_WATER_SURFACING;
     }
     return 0;
 }
@@ -960,33 +960,34 @@ u32 FldEff_SurfBlob(void)
     return spriteId;
 }
 
-void sub_81555AC(u8 spriteId, u8 value)
+// States for bobbing up and down while surfing
+void SetSurfBobState(u8 spriteId, u8 value)
 {
     gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF) | (value & 0xF);
 }
 
-void sub_81555D8(u8 spriteId, u8 value)
+void SetSurfBobWhileFlyingOutState(u8 spriteId, u8 value)
 {
     gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF0) | ((value & 0xF) << 4);
 }
 
-void sub_8155604(u8 spriteId, u8 value, s16 data1)
+void SetSurfBobWhileFishingState(u8 spriteId, u8 value, s16 data1)
 {
     gSprites[spriteId].data[0] = (gSprites[spriteId].data[0] & ~0xF00) | ((value & 0xF) << 8);
     gSprites[spriteId].data[1] = data1;
 }
 
-static u8 sub_8155638(struct Sprite *sprite)
+static u8 GetSurfBobState(struct Sprite *sprite)
 {
     return sprite->data[0] & 0xF;
 }
 
-static u8 sub_8155640(struct Sprite *sprite)
+static u8 GetSurfBobWhileFlyingOutState(struct Sprite *sprite)
 {
     return (sprite->data[0] & 0xF0) >> 4;
 }
 
-static u8 sub_815564C(struct Sprite *sprite)
+static u8 GetSurfBobWhileFishingState(struct Sprite *sprite)
 {
     return (sprite->data[0] & 0xF00) >> 8;
 }
@@ -1018,7 +1019,7 @@ static void SynchroniseSurfAnim(struct ObjectEvent *objectEvent, struct Sprite *
         [DIR_NORTHEAST] = 1,
     };
 
-    if (sub_8155640(sprite) == 0)
+    if (GetSurfBobWhileFlyingOutState(sprite) == 0)
         StartSpriteAnimIfDifferent(sprite, surfBlobDirectionAnims[objectEvent->movementDirection]);
 }
 
@@ -1049,8 +1050,8 @@ void sub_81556E8(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 static void CreateBobbingEffect(struct ObjectEvent *objectEvent, struct Sprite *linkedSprite, struct Sprite *sprite)
 {
     u16 unk_085CDC6A[] = {3, 7};
-    u8 v0 = sub_8155638(sprite);
-    if (v0 != 0)
+    u8 bobState = GetSurfBobState(sprite);
+    if (bobState != 0)
     {
         if (((u16)(++ sprite->data[4]) & unk_085CDC6A[sprite->data[5]]) == 0)
         {
@@ -1060,9 +1061,9 @@ static void CreateBobbingEffect(struct ObjectEvent *objectEvent, struct Sprite *
         {
             sprite->data[3] = -sprite->data[3];
         }
-        if (v0 != 2)
+        if (bobState != 2)
         {
-            if (sub_815564C(sprite) == 0)
+            if (GetSurfBobWhileFishingState(sprite) == 0)
                 linkedSprite->pos2.y = sprite->pos2.y;
             else
                 linkedSprite->pos2.y = sprite->data[1] + sprite->pos2.y;
@@ -1358,61 +1359,72 @@ void UpdateSparkleFieldEffect(struct Sprite *sprite)
         FieldEffectStop(sprite, FLDEFF_SPARKLE);
 }
 
-void sub_8155EA0(struct Sprite *sprite)
+#define sTimer       data[0]
+#define sState       data[2]
+#define sStartY      data[4]
+#define sCounter     data[5]
+#define sAnimCounter data[6]
+#define sAnimState   data[7]
+
+// Same as InitSpriteForFigure8Anim
+static void InitRayquazaForFigure8Anim(struct Sprite *sprite)
 {
-    sprite->data[6] = 0;
-    sprite->data[7] = 0;
+    sprite->sAnimCounter = 0;
+    sprite->sAnimState = 0;
 }
 
-bool8 sub_8155EA8(struct Sprite *sprite)
+// Only different from AnimateSpriteInFigure8 by the addition of SetGpuReg to move the spotlight
+static bool8 AnimateRayquazaInFigure8(struct Sprite *sprite)
 {
-    bool8 returnBool = FALSE;
+    bool8 finished = FALSE;
 
-    switch (sprite->data[7])
+    switch (sprite->sAnimState)
     {
-        case 0:
-            sprite->pos2.x += sub_809773C(sprite->data[6]);
-            sprite->pos2.y += sub_8097728(sprite->data[6]);
-            break;
-        case 1:
-            sprite->pos2.x -= sub_809773C(0x47 - sprite->data[6]);
-            sprite->pos2.y += sub_8097728(0x47 - sprite->data[6]);
-            break;
-        case 2:
-            sprite->pos2.x -= sub_809773C(sprite->data[6]);
-            sprite->pos2.y += sub_8097728(sprite->data[6]);
-            break;
-        case 3:
-            sprite->pos2.x += sub_809773C(0x47 - sprite->data[6]);
-            sprite->pos2.y += sub_8097728(0x47 - sprite->data[6]);
-            break;
+    case 0:
+        sprite->pos2.x += GetFigure8XOffset(sprite->sAnimCounter);
+        sprite->pos2.y += GetFigure8YOffset(sprite->sAnimCounter);
+        break;
+    case 1:
+        sprite->pos2.x -= GetFigure8XOffset((FIGURE_8_LENGTH - 1) - sprite->sAnimCounter);
+        sprite->pos2.y += GetFigure8YOffset((FIGURE_8_LENGTH - 1) - sprite->sAnimCounter);
+        break;
+    case 2:
+        sprite->pos2.x -= GetFigure8XOffset(sprite->sAnimCounter);
+        sprite->pos2.y += GetFigure8YOffset(sprite->sAnimCounter);
+        break;
+    case 3:
+        sprite->pos2.x += GetFigure8XOffset((FIGURE_8_LENGTH - 1) - sprite->sAnimCounter);
+        sprite->pos2.y += GetFigure8YOffset((FIGURE_8_LENGTH - 1) - sprite->sAnimCounter);
+        break;
     }
 
+    // Update spotlight to sweep left and right with Rayquaza
     SetGpuReg(REG_OFFSET_BG0HOFS, -sprite->pos2.x);
-    if (++sprite->data[6] == 72)
+
+    if (++sprite->sAnimCounter == FIGURE_8_LENGTH)
     {
-        sprite->data[6] = 0;
-        sprite->data[7]++;
+        sprite->sAnimCounter = 0;
+        sprite->sAnimState++;
     }
-    if (sprite->data[7] == 4)
+    if (sprite->sAnimState == 4)
     {
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
-        returnBool = TRUE;
+        finished = TRUE;
     }
 
-    return returnBool;
+    return finished;
 }
 
-void sub_8155F80(struct Sprite *sprite)
+void UpdateRayquazaSpotlightEffect(struct Sprite *sprite)
 {
     u8 i, j;
 
-    switch (sprite->data[2])
+    switch (sprite->sState)
     {
         case 0:
-            SetGpuReg(REG_OFFSET_BG0VOFS, 0x78 - (sprite->data[0] / 3));
-            if (sprite->data[0] == 0x60)
+            SetGpuReg(REG_OFFSET_BG0VOFS, 120 - (sprite->sTimer / 3));
+            if (sprite->sTimer == 96)
             {
                 for (i = 0; i < 3; i++)
                 {
@@ -1422,42 +1434,42 @@ void sub_8155F80(struct Sprite *sprite)
                     }
                 }
             }
-            if (sprite->data[0] > 0x137)
+            if (sprite->sTimer > 311)
             {
-                sprite->data[2] = 1;
-                sprite->data[0] = 0;
+                sprite->sState = 1;
+                sprite->sTimer = 0;
             }
             break;
         case 1:
-            sprite->pos1.y = (gSineTable[sprite->data[0] / 3] >> 2) + sprite->data[4];
-            if (sprite->data[0] == 0xBD)
+            sprite->pos1.y = (gSineTable[sprite->sTimer / 3] >> 2) + sprite->sStartY;
+            if (sprite->sTimer == 189)
             {
-                sprite->data[2] = 2;
-                sprite->data[5] = 0;
-                sprite->data[0] = 0;
+                sprite->sState = 2;
+                sprite->sCounter = 0;
+                sprite->sTimer = 0;
             }
             break;
         case 2:
-            if (sprite->data[0] == 0x3C)
+            if (sprite->sTimer == 60)
             {
-                sprite->data[5]++;
-                sprite->data[0] = 0;
+                sprite->sCounter++;
+                sprite->sTimer = 0;
             }
-            if (sprite->data[5] == 7)
+            if (sprite->sCounter == 7)
             {
-                sprite->data[5] = 0;
-                sprite->data[2] = 3;
+                sprite->sCounter = 0;
+                sprite->sState = 3;
             }
             break;
         case 3:
             if (sprite->pos2.y == 0)
             {
-                sprite->data[0] = 0;
-                sprite->data[2]++;
+                sprite->sTimer = 0;
+                sprite->sState++;
             }
-            if (sprite->data[0] == 5)
+            if (sprite->sTimer == 5)
             {
-                sprite->data[0] = 0;
+                sprite->sTimer = 0;
                 if (sprite->pos2.y > 0)
                     sprite->pos2.y--;
                 else
@@ -1465,38 +1477,38 @@ void sub_8155F80(struct Sprite *sprite)
             }
             break;
         case 4:
-            if (sprite->data[0] == 0x3C)
+            if (sprite->sTimer == 60)
             {
-                sprite->data[2] = 5;
-                sprite->data[0] = 0;
-                sprite->data[5] = 0;
+                sprite->sState = 5;
+                sprite->sTimer = 0;
+                sprite->sCounter = 0;
             }
             break;
         case 5:
-            sub_8155EA0(sprite);
-            sprite->data[2] = 6;
-            sprite->data[0] = 0;
+            InitRayquazaForFigure8Anim(sprite);
+            sprite->sState = 6;
+            sprite->sTimer = 0;
             break;
         case 6:
-            if (sub_8155EA8(sprite))
+            if (AnimateRayquazaInFigure8(sprite))
             {
-                sprite->data[0] = 0;
-                if (++sprite->data[5] <= 2)
+                sprite->sTimer = 0;
+                if (++sprite->sCounter <= 2)
                 {
-                    sub_8155EA0(sprite);
+                    InitRayquazaForFigure8Anim(sprite);
                 }
                 else
                 {
-                    sprite->data[5] = 0;
-                    sprite->data[2] = 7;
+                    sprite->sCounter = 0;
+                    sprite->sState = 7;
                 }
             }
             break;
         case 7:
-            if (sprite->data[0] == 0x1E)
+            if (sprite->sTimer == 30)
             {
-                sprite->data[2] = 8;
-                sprite->data[0] = 0;
+                sprite->sState = 8;
+                sprite->sTimer = 0;
             }
             break;
         case 8:
@@ -1508,11 +1520,11 @@ void sub_8155F80(struct Sprite *sprite)
                 }
             }
             SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-            FieldEffectStop(sprite, FLDEFF_RAYQUAZA);
+            FieldEffectStop(sprite, FLDEFF_RAYQUAZA_SPOTLIGHT);
             break;
     }
 
-    if (sprite->data[2] == 1)
+    if (sprite->sState == 1)
     {
         if ((sprite->data[1] & 7) == 0)
             sprite->pos2.y += sprite->data[3];
@@ -1521,10 +1533,17 @@ void sub_8155F80(struct Sprite *sprite)
         sprite->data[1]++;
     }
 
-    sprite->data[0]++;
+    sprite->sTimer++;
 }
 
-void sub_8156194(struct Sprite *sprite)
+#undef sTimer
+#undef sState
+#undef sStartY
+#undef sCounter
+#undef sAnimCounter
+#undef sAnimState
+
+void UpdateJumpImpactEffect(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {

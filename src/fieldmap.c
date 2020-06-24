@@ -44,7 +44,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader);
 static void LoadSavedMapView(void);
 static bool8 SkipCopyingMetatileFromSavedMap(u16* mapMetatilePtr, u16 mapWidth, u8 yMode);
 
-struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *connection)
+struct MapHeader const *const GetMapHeaderFromConnection(struct MapConnection *connection)
 {
     return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
@@ -124,7 +124,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
         gMapConnectionFlags = sDummyConnectionFlags;
         for (i = 0; i < count; i++, connection++)
         {
-            struct MapHeader const *cMap = mapconnection_get_mapheader(connection);
+            struct MapHeader const *cMap = GetMapHeaderFromConnection(connection);
             u32 offset = connection->offset;
             switch (connection->direction)
             {
@@ -734,7 +734,7 @@ int CanCameraMoveInDirection(int direction)
 void sub_80887F8(struct MapConnection *connection, int direction, int x, int y)
 {
     struct MapHeader const *mapHeader;
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
     switch (direction)
     {
     case CONNECTION_EAST:
@@ -805,7 +805,7 @@ struct MapConnection *sub_8088950(u8 direction, int x, int y)
 bool8 sub_80889A8(u8 direction, int x, int y, struct MapConnection *connection)
 {
     struct MapHeader const *mapHeader;
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
     switch (direction)
     {
     case CONNECTION_SOUTH:
@@ -846,7 +846,7 @@ int sub_8088A38(int x, int width)
 int sub_8088A4C(struct MapConnection *connection, int x, int y)
 {
     struct MapHeader const *mapHeader;
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
     switch (connection->direction)
     {
     case CONNECTION_SOUTH:
@@ -893,7 +893,7 @@ struct MapConnection *GetConnectionAtCoords(s16 x, s16 y)
     return NULL;
 }
 
-void sub_8088B3C(u16 x, u16 y)
+void SetCameraFocusCoords(u16 x, u16 y)
 {
     gSaveBlock1Ptr->pos.x = x - 7;
     gSaveBlock1Ptr->pos.y = y - 7;
@@ -905,7 +905,8 @@ void GetCameraFocusCoords(u16 *x, u16 *y)
     *y = gSaveBlock1Ptr->pos.y + 7;
 }
 
-void SetPlayerCoords(u16 x, u16 y)
+// Unused
+static void SetCameraCoords(u16 x, u16 y)
 {
     gSaveBlock1Ptr->pos.x = x;
     gSaveBlock1Ptr->pos.y = y;

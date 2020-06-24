@@ -17,17 +17,17 @@ gFieldEffectScriptPointers:: @ 82DB9D4
     .4byte gFieldEffectScript_UseSurf                   @ FLDEFF_USE_SURF
     .4byte gFieldEffectScript_GroundImpactDust          @ FLDEFF_DUST
     .4byte gFieldEffectScript_UseSecretPowerCave        @ FLDEFF_USE_SECRET_POWER_CAVE
-    .4byte gFieldEffectScript_BikeHopTallGrass          @ FLDEFF_JUMP_TALL_GRASS
+    .4byte gFieldEffectScript_JumpTallGrass             @ FLDEFF_JUMP_TALL_GRASS
     .4byte gFieldEffectScript_SandFootprints            @ FLDEFF_SAND_FOOTPRINTS
-    .4byte gFieldEffectScript_BikeHopBigSplash          @ FLDEFF_JUMP_BIG_SPLASH
+    .4byte gFieldEffectScript_JumpBigSplash             @ FLDEFF_JUMP_BIG_SPLASH
     .4byte gFieldEffectScript_Splash                    @ FLDEFF_SPLASH
-    .4byte gFieldEffectScript_BikeHopSmallSplash        @ FLDEFF_JUMP_SMALL_SPLASH
+    .4byte gFieldEffectScript_JumpSmallSplash           @ FLDEFF_JUMP_SMALL_SPLASH
     .4byte gFieldEffectScript_LongGrass                 @ FLDEFF_LONG_GRASS
     .4byte gFieldEffectScript_JumpLongGrass             @ FLDEFF_JUMP_LONG_GRASS
     .4byte gFieldEffectScript_Unknown19                 @ FLDEFF_UNKNOWN_19
-    .4byte gFieldEffectScript_UnusedGrass               @ FLDEFF_UNUSED_GRASS
+    .4byte gFieldEffectScript_UnusedGrass2              @ FLDEFF_UNUSED_GRASS_2
     .4byte gFieldEffectScript_Unknown21                 @ FLDEFF_UNKNOWN_21
-    .4byte gFieldEffectScript_Unknown22                 @ FLDEFF_UNKNOWN_22
+    .4byte gFieldEffectScript_WaterSurfacing            @ FLDEFF_WATER_SURFACING
     .4byte gFieldEffectScript_BerryTreeGrowthSparkle    @ FLDEFF_BERRY_TREE_GROWTH_SPARKLE
     .4byte gFieldEffectScript_DeepSandFootprints        @ FLDEFF_DEEP_SAND_FOOTPRINTS
     .4byte gFieldEffectScript_PokeCenterHeal            @ FLDEFF_POKECENTER_HEAL
@@ -54,8 +54,8 @@ gFieldEffectScriptPointers:: @ 82DB9D4
     .4byte gFieldEffectScript_HeartIcon                 @ FLDEFF_HEART_ICON
     .4byte gFieldEffectScript_Unknown47                 @ FLDEFF_NOP_47
     .4byte gFieldEffectScript_Unknown48                 @ FLDEFF_NOP_48
-    .4byte gFieldEffectScript_JumpOutOfAsh              @ FLDEFF_POP_OUT_OF_ASH
-    .4byte gFieldEffectScript_LavaridgeGymWarp          @ FLDEFF_LAVARIDGE_GYM_WARP
+    .4byte gFieldEffectScript_AshPuff                   @ FLDEFF_ASH_PUFF
+    .4byte gFieldEffectScript_AshLaunch                 @ FLDEFF_ASH_LAUNCH
     .4byte gFieldEffectScript_SweetScent                @ FLDEFF_SWEET_SCENT
     .4byte gFieldEffectScript_SandPillar                @ FLDEFF_SAND_PILLAR
     .4byte gFieldEffectScript_Bubbles                   @ FLDEFF_BUBBLES
@@ -69,7 +69,7 @@ gFieldEffectScriptPointers:: @ 82DB9D4
     .4byte gFieldEffectScript_SecretBaseBootPC          @ FLDEFF_PCTURN_ON
     .4byte gFieldEffectScript_HallOfFameRecord          @ FLDEFF_HALL_OF_FAME_RECORD
     .4byte gFieldEffectScript_UseTeleport               @ FLDEFF_USE_TELEPORT
-    .4byte gFieldEffectScript_Rayquaza                  @ FLDEFF_RAYQUAZA
+    .4byte gFieldEffectScript_RayquazaSpotlight         @ FLDEFF_RAYQUAZA_SPOTLIGHT
     .4byte gFieldEffectScript_DestroyDeoxysRock         @ FLDEFF_DESTROY_DEOXYS_ROCK
     .4byte gFieldEffectScript_MoveDeoxysRock            @ FLDEFF_MOVE_DEOXYS_ROCK
 
@@ -121,7 +121,7 @@ gFieldEffectScript_UseSecretPowerCave:: @ 82DBB32
     field_eff_callnative FldEff_UseSecretPowerCave
     field_eff_end
 
-gFieldEffectScript_BikeHopTallGrass:: @ 82DBB38
+gFieldEffectScript_JumpTallGrass:: @ 82DBB38
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo1, FldEff_JumpTallGrass
     field_eff_end
 
@@ -129,7 +129,7 @@ gFieldEffectScript_SandFootprints:: @ 82DBB42
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_SandFootprints
     field_eff_end
 
-gFieldEffectScript_BikeHopBigSplash:: @ 82DBB4C
+gFieldEffectScript_JumpBigSplash:: @ 82DBB4C
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_JumpBigSplash
     field_eff_end
 
@@ -137,7 +137,7 @@ gFieldEffectScript_Splash:: @ 82DBB56
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_Splash
     field_eff_end
 
-gFieldEffectScript_BikeHopSmallSplash:: @ 82DBB60
+gFieldEffectScript_JumpSmallSplash:: @ 82DBB60
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_JumpSmallSplash
     field_eff_end
 
@@ -153,16 +153,16 @@ gFieldEffectScript_Unknown19:: @ 82DBB7E
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo1, FldEff_Unknown19
     field_eff_end
 
-gFieldEffectScript_UnusedGrass:: @ 82DBB88
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo1, FldEff_UnusedGrass
+gFieldEffectScript_UnusedGrass2:: @ 82DBB88
+    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo1, FldEff_UnusedGrass2
     field_eff_end
 
 gFieldEffectScript_Unknown21:: @ 82DBB92
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_Unknown21
     field_eff_end
 
-gFieldEffectScript_Unknown22:: @ 82DBB9C
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_Unknown22
+gFieldEffectScript_WaterSurfacing:: @ 82DBB9C
+    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_WaterSurfacing
     field_eff_end
 
 gFieldEffectScript_BerryTreeGrowthSparkle:: @ 82DBBA6
@@ -271,12 +271,12 @@ gFieldEffectScript_Unknown48:: @ 82DBC66
     field_eff_callnative FldEff_NopA700
     field_eff_end
 
-gFieldEffectScript_JumpOutOfAsh:: @ 82DBC6C
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_PopOutOfAsh
+gFieldEffectScript_AshPuff:: @ 82DBC6C
+    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_AshPuff
     field_eff_end
 
-gFieldEffectScript_LavaridgeGymWarp:: @ 82DBC76
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_LavaridgeGymWarp
+gFieldEffectScript_AshLaunch:: @ 82DBC76
+    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, FldEff_AshLaunch
     field_eff_end
 
 gFieldEffectScript_SweetScent:: @ 82DBC80
@@ -332,8 +332,8 @@ gFieldEffectScript_UseTeleport:: @ 82DBCED
     field_eff_callnative FldEff_UseTeleport
     field_eff_end
 
-gFieldEffectScript_Rayquaza:: @ 82DBCF3
-    field_eff_callnative sub_80B8F98
+gFieldEffectScript_RayquazaSpotlight:: @ 82DBCF3
+    field_eff_callnative FldEff_RayquazaSpotlight
     field_eff_end
 
 gFieldEffectScript_DestroyDeoxysRock:: @ 82DBCF9

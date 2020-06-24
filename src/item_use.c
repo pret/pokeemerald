@@ -399,7 +399,7 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     u32 localOffset;
     s32 localLength;
 
-    struct MapHeader const *const mapHeader = mapconnection_get_mapheader(connection);
+    struct MapHeader const *const mapHeader = GetMapHeaderFromConnection(connection);
 
     switch (connection->direction)
     {

@@ -21,9 +21,9 @@
 #define FLDEFF_LONG_GRASS                17
 #define FLDEFF_JUMP_LONG_GRASS           18
 #define FLDEFF_UNKNOWN_19                19
-#define FLDEFF_UNUSED_GRASS              20
+#define FLDEFF_UNUSED_GRASS_2            20
 #define FLDEFF_UNKNOWN_21                21
-#define FLDEFF_UNKNOWN_22                22
+#define FLDEFF_WATER_SURFACING           22
 #define FLDEFF_BERRY_TREE_GROWTH_SPARKLE 23
 #define FLDEFF_DEEP_SAND_FOOTPRINTS      24
 #define FLDEFF_POKECENTER_HEAL           25
@@ -50,8 +50,8 @@
 #define FLDEFF_HEART_ICON                46
 #define FLDEFF_NOP_47                    47
 #define FLDEFF_NOP_48                    48
-#define FLDEFF_POP_OUT_OF_ASH            49
-#define FLDEFF_LAVARIDGE_GYM_WARP        50
+#define FLDEFF_ASH_PUFF                  49
+#define FLDEFF_ASH_LAUNCH                50
 #define FLDEFF_SWEET_SCENT               51
 #define FLDEFF_SAND_PILLAR               52
 #define FLDEFF_BUBBLES                   53
@@ -65,7 +65,7 @@
 #define FLDEFF_PCTURN_ON                 61
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
-#define FLDEFF_RAYQUAZA                  64
+#define FLDEFF_RAYQUAZA_SPOTLIGHT        64
 #define FLDEFF_DESTROY_DEOXYS_ROCK       65
 #define FLDEFF_MOVE_DEOXYS_ROCK          66
 
@@ -87,9 +87,9 @@
 #define FLDEFFOBJ_LONG_GRASS            15
 #define FLDEFFOBJ_JUMP_LONG_GRASS       16
 #define FLDEFFOBJ_17                    17
-#define FLDEFFOBJ_UNUSED_GRASS          18
+#define FLDEFFOBJ_UNUSED_GRASS_2        18
 #define FLDEFFOBJ_19                    19
-#define FLDEFFOBJ_20                    20
+#define FLDEFFOBJ_WATER_SURFACING       20
 #define FLDEFFOBJ_REFLECTION_DISTORTION 21
 #define FLDEFFOBJ_SPARKLE               22
 #define FLDEFFOBJ_DEEP_SAND_FOOTPRINTS  23
@@ -101,10 +101,25 @@
 #define FLDEFFOBJ_SAND_PILE             29
 #define FLDEFFOBJ_SHORT_GRASS           30
 #define FLDEFFOBJ_HOT_SPRINGS_WATER     31
-#define FLDEFFOBJ_JUMP_OUT_OF_ASH       32
-#define FLDEFFOBJ_LAVARIDGE_GYM_WARP    33
+#define FLDEFFOBJ_ASH_PUFF              32
+#define FLDEFFOBJ_ASH_LAUNCH            33
 #define FLDEFFOBJ_BUBBLES               34
 #define FLDEFFOBJ_SMALL_SPARKLE         35
 #define FLDEFFOBJ_RAYQUAZA              36
+
+#define FLDEFF_PAL_TAG_0 0x1000
+#define FLDEFF_PAL_TAG_3 0x1003
+#define FLDEFF_PAL_TAG_4 0x1004
+#define FLDEFF_PAL_TAG_5 0x1005
+#define FLDEFF_PAL_TAG_6 0x1006
+#define FLDEFF_PAL_TAG_7 0x1007
+#define FLDEFF_PAL_TAG_8 0x1008
+#define FLDEFF_PAL_TAG_9 0x1009
+#define FLDEFF_PAL_TAG_10 0x100A
+#define FLDEFF_PAL_TAG_13 0x100D
+#define FLDEFF_PAL_TAG_14 0x100E
+#define FLDEFF_PAL_TAG_15 0x100F
+#define FLDEFF_PAL_TAG_16 0x1010
+#define FLDEFF_PAL_TAG_17 0x1011
 
 #endif // GUARD_FIELD_EFFECT_CONSTANTS_H

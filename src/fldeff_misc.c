@@ -209,7 +209,7 @@ static const struct SpriteFrameImage gUnknown_858E5D8[] =
 static const struct SpriteTemplate gUnknown_0858E600 =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 0x1003,
+    .paletteTag = FLDEFF_PAL_TAG_3,
     .oam = &gOamData_858E4D8,
     .anims = gSpriteAnimTable_858E570,
     .images = gUnknown_858E588,
@@ -220,7 +220,7 @@ static const struct SpriteTemplate gUnknown_0858E600 =
 static const struct SpriteTemplate gUnknown_0858E618 =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 0x1008,
+    .paletteTag = FLDEFF_PAL_TAG_8,
     .oam = &gOamData_858E4D8,
     .anims = gSpriteAnimTable_858E574,
     .images = gUnknown_858E5B0,
@@ -231,7 +231,7 @@ static const struct SpriteTemplate gUnknown_0858E618 =
 static const struct SpriteTemplate gUnknown_0858E630 =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 0x1008,
+    .paletteTag = FLDEFF_PAL_TAG_8,
     .oam = &gOamData_858E4D8,
     .anims = gSpriteAnimTable_858E584,
     .images = gUnknown_858E5D8,
@@ -239,8 +239,8 @@ static const struct SpriteTemplate gUnknown_0858E630 =
     .callback = ShrubEntranceSpriteCallback1,
 };
 
-const struct SpritePalette gFieldEffectObjectPaletteInfo7 = {gFieldEffectObjectPalette7, 0x1003};
-const struct SpritePalette gFieldEffectObjectPaletteInfo8 = {gFieldEffectObjectPalette8, 0x1008};
+const struct SpritePalette gFieldEffectObjectPaletteInfo7 = {gFieldEffectObjectPalette7, FLDEFF_PAL_TAG_3};
+const struct SpritePalette gFieldEffectObjectPaletteInfo8 = {gFieldEffectObjectPalette8, FLDEFF_PAL_TAG_8};
 
 static const struct OamData gOamData_858E658 =
 {
@@ -277,7 +277,7 @@ static const struct SpriteFrameImage gUnknown_0858E674[] =
 static const struct SpriteTemplate gUnknown_0858E68C =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 0x100E,
+    .paletteTag = FLDEFF_PAL_TAG_14,
     .oam = &gOamData_858E658,
     .anims = gSpriteAnimTable_858E670,
     .images = gUnknown_0858E674,
@@ -286,7 +286,7 @@ static const struct SpriteTemplate gUnknown_0858E68C =
 };
 
 // This uses one of the secret base palettes, so there is no "graphics/field_effects/palettes/09.pal" file.
-const struct SpritePalette gFieldEffectObjectPaletteInfo9 = {gTilesetPalettes_SecretBase[5], 0x100E};
+const struct SpritePalette gFieldEffectObjectPaletteInfo9 = {gTilesetPalettes_SecretBase[5], FLDEFF_PAL_TAG_14};
 
 static const u8 gSpriteImage_858E6AC[] = INCBIN_U8("graphics/unknown/858E84C/0.4bpp");
 static const u8 gSpriteImage_858E72C[] = INCBIN_U8("graphics/unknown/858E84C/1.4bpp");
@@ -300,7 +300,7 @@ static const struct SpriteFrameImage gUnknown_0858E84C[] =
     {gSpriteImage_858E7AC, sizeof(gSpriteImage_858E7AC)},
 };
 
-static const struct SpritePalette gUnknown_0858E864 = {gUnknown_0858E82C, 0x1000};
+static const struct SpritePalette gUnknown_0858E864 = {gUnknown_0858E82C, FLDEFF_PAL_TAG_0};
 
 static const union AnimCmd gSpriteAnim_858E86C[] =
 {
@@ -318,7 +318,7 @@ static const union AnimCmd *const gSpriteAnimTable_858E87C[] =
 static const struct SpriteTemplate gUnknown_0858E880 =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 0x1000,
+    .paletteTag = FLDEFF_PAL_TAG_0,
     .oam = &gObjectEventBaseOam_32x8,
     .anims = gSpriteAnimTable_858E87C,
     .images = gUnknown_0858E84C,

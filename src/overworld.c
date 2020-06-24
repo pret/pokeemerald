@@ -96,24 +96,24 @@ static void VBlankCB_Field(void);
 static void SpriteCB_LinkPlayer(struct Sprite *sprite);
 static void ChooseAmbientCrySpecies(void);
 static void DoMapLoadLoop(u8 *state);
+static bool32 LoadMapInStepsLocal(u8 *state, bool32);
 static bool32 LoadMapInStepsLink(u8 *state);
 static bool32 ReturnToFieldLocal(u8 *state);
-static bool32 LoadMapInStepsLocal(u8 *state, bool32);
 static bool32 ReturnToFieldLink(u8 *state);
-static void mli4_mapscripts_and_other(void);
+static void InitObjectEventsLink(void);
+static void InitObjectEventsLocal(void);
 static void InitOverworldGraphicsRegisters(void);
 static u8 GetSpriteForLinkedPlayer(u8);
 static u16 KeyInterCB_SendNothing(u32 a1);
-static void sub_80867C8(void);
+static void ResetMirageTowerAndSaveBlockPtrs(void);
 static void sub_80867D8(void);
-static void sub_8086AE4(void);
-static void sub_80869DC(void);
-static void sub_8086B14(void);
+static void OffsetCameraFocusByLinkPlayerId(void);
+static void SpawnLinkPlayers(void);
 static void SetCameraToTrackGuestPlayer(void);
-static void sub_8086988(bool32 arg0);
+static void ResumeMap(bool32 arg0);
 static void SetCameraToTrackPlayer(void);
 static void sub_8086A68(void);
-static void sub_8086860(void);
+static void InitViewGraphics(void);
 static void SetCameraToTrackGuestPlayer_2(void);
 static void CreateLinkPlayerSprites(void);
 static void ClearAllPlayerKeys(void);
@@ -520,7 +520,7 @@ void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType)
     }
 }
 
-static void mapdata_load_assets_to_gpu_and_full_redraw(void)
+static void InitMapView(void)
 {
     ResetFieldCamera();
     CopyMapTilesetsToVram(gMapHeader.mapLayout);
@@ -939,7 +939,7 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
     else if (MetatileBehavior_IsEastArrowWarp(metatileBehavior) == TRUE)
         return DIR_WEST;
     else if ((playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER  && transitionFlags == PLAYER_AVATAR_FLAG_SURFING)
-     || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER ))
+          || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER))
         return playerStruct->direction;
     else if (MetatileBehavior_IsLadder(metatileBehavior) == TRUE)
         return playerStruct->direction;
@@ -1421,7 +1421,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 {
     struct FieldInput inputStruct;
 
-    sub_808B578();
+    UpdatePlayerAvatarTransitionState();
     FieldClearPlayerInput(&inputStruct);
     FieldGetPlayerInput(&inputStruct, newKeys, heldKeys);
     if (!ScriptContext2_IsEnabled())
@@ -1433,7 +1433,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
         }
         else
         {
-            player_step(inputStruct.dpadDirection, newKeys, heldKeys);
+            PlayerStep(inputStruct.dpadDirection, newKeys, heldKeys);
         }
     }
 }
@@ -1723,12 +1723,12 @@ void CB2_ContinueSavedGame(void)
         ClearContinueGameWarpStatus();
         SetWarpDestinationToContinueGameWarp();
         WarpIntoMap();
-        sub_80EDB44();
+        TryPutTodaysRivalTrainerOnAir();
         SetMainCallback2(CB2_LoadMap);
     }
     else
     {
-        sub_80EDB44();
+        TryPutTodaysRivalTrainerOnAir();
         gFieldCallback = sub_8086204;
         SetMainCallback1(CB1_Overworld);
         CB2_ReturnToField();
@@ -1797,7 +1797,7 @@ static bool32 LoadMapInStepsLink(u8 *state)
         InitOverworldBgs();
         ScriptContext1_Init();
         ScriptContext2_Disable();
-        sub_80867C8();
+        ResetMirageTowerAndSaveBlockPtrs();
         sub_80867D8();
         (*state)++;
         break;
@@ -1806,13 +1806,13 @@ static bool32 LoadMapInStepsLink(u8 *state)
         (*state)++;
         break;
     case 2:
-        sub_8086988(TRUE);
+        ResumeMap(TRUE);
         (*state)++;
         break;
     case 3:
-        sub_8086AE4();
-        sub_80869DC();
-        sub_8086B14();
+        OffsetCameraFocusByLinkPlayerId();
+        InitObjectEventsLink();
+        SpawnLinkPlayers();
         SetCameraToTrackGuestPlayer();
         (*state)++;
         break;
@@ -1878,16 +1878,16 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 a2)
         (*state)++;
         break;
     case 1:
-        sub_80867C8();
+        ResetMirageTowerAndSaveBlockPtrs();
         sub_80867D8();
         (*state)++;
         break;
     case 2:
-        sub_8086988(a2);
+        ResumeMap(a2);
         (*state)++;
         break;
     case 3:
-        mli4_mapscripts_and_other();
+        InitObjectEventsLocal();
         SetCameraToTrackPlayer();
         (*state)++;
         break;
@@ -1945,16 +1945,16 @@ static bool32 ReturnToFieldLocal(u8 *state)
     switch (*state)
     {
     case 0:
-        sub_80867C8();
+        ResetMirageTowerAndSaveBlockPtrs();
         sub_80867D8();
-        sub_8086988(FALSE);
+        ResumeMap(FALSE);
         sub_8086A68();
         SetCameraToTrackPlayer();
         (*state)++;
         break;
     case 1:
-        sub_8086860();
-        sub_81D64C0();
+        InitViewGraphics();
+        TryLoadTrainerHillEReaderPalette();
         (*state)++;
         break;
     case 2:
@@ -1974,12 +1974,12 @@ static bool32 ReturnToFieldLink(u8 *state)
     {
     case 0:
         FieldClearVBlankHBlankCallbacks();
-        sub_80867C8();
+        ResetMirageTowerAndSaveBlockPtrs();
         sub_80867D8();
         (*state)++;
         break;
     case 1:
-        sub_8086988(TRUE);
+        ResumeMap(TRUE);
         (*state)++;
         break;
     case 2:
@@ -2050,7 +2050,7 @@ static void DoMapLoadLoop(u8 *state)
     while (!LoadMapInStepsLocal(state, FALSE));
 }
 
-static void sub_80867C8(void)
+static void ResetMirageTowerAndSaveBlockPtrs(void)
 {
     ClearMirageTowerPulseBlend();
     MoveSaveBlocks_ResetHeap();
@@ -2067,12 +2067,12 @@ static void sub_80867D8(void)
     LoadOam();
 }
 
-static void sub_8086860(void)
+static void InitViewGraphics(void)
 {
     InitCurrentFlashLevelScanlineEffect();
     InitOverworldGraphicsRegisters();
     InitTextBoxGfxAndPrinters();
-    mapdata_load_assets_to_gpu_and_full_redraw();
+    InitMapView();
 }
 
 static void InitOverworldGraphicsRegisters(void)
@@ -2110,7 +2110,7 @@ static void InitOverworldGraphicsRegisters(void)
     InitFieldMessageBox();
 }
 
-static void sub_8086988(bool32 a1)
+static void ResumeMap(bool32 a1)
 {
     ResetTasks();
     ResetSpriteData();
@@ -2133,7 +2133,7 @@ static void sub_8086988(bool32 a1)
     TryStartMirageTowerPulseBlendEffect();
 }
 
-static void sub_80869DC(void)
+static void InitObjectEventsLink(void)
 {
     gTotalCameraPixelOffsetX = 0;
     gTotalCameraPixelOffsetY = 0;
@@ -2142,7 +2142,7 @@ static void sub_80869DC(void)
     TryRunOnWarpIntoMapScript();
 }
 
-static void mli4_mapscripts_and_other(void)
+static void InitObjectEventsLocal(void)
 {
     s16 x, y;
     struct InitialPlayerAvatarState *player;
@@ -2183,17 +2183,17 @@ static void SetCameraToTrackGuestPlayer_2(void)
     InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
 }
 
-static void sub_8086AE4(void)
+static void OffsetCameraFocusByLinkPlayerId(void)
 {
     u16 x, y;
     GetCameraFocusCoords(&x, &y);
 
-    // This is a hack of some kind; it's undone in sub_8086B14, which is called
+    // This is a hack of some kind; it's undone in SpawnLinkPlayers, which is called
     // soon after this function.
-    sub_8088B3C(x + gLocalLinkPlayerId, y);
+    SetCameraFocusCoords(x + gLocalLinkPlayerId, y);
 }
 
-static void sub_8086B14(void)
+static void SpawnLinkPlayers(void)
 {
     u16 i;
     u16 x, y;
