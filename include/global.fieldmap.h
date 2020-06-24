@@ -209,7 +209,12 @@ struct ObjectEvent
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ union __attribute__((packed)) {
         u8 playerCopyableMovement;
-        u16 species;
+        struct __attribute__((packed)) {
+            u16 species:11; // 11 bits for 2048 species
+            u16 form:4;
+            u16 shiny:1;
+        } mon;
+        u16 asU16;
     } extra;
     /*size = 0x24*/
 };

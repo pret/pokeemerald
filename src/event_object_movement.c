@@ -144,7 +144,7 @@ static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
 static void UpdateObjectEventSprite(struct Sprite *);
 static void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *);
 u8 GetDirectionToFace(s16 x1, s16 y1, s16 x2, s16 y2);
-static void FollowerSetGraphics(struct ObjectEvent *, u16);
+static void FollowerSetGraphics(struct ObjectEvent *, u16, u8, bool8);
 static void ObjectEventSetGraphics(struct ObjectEvent *, const struct ObjectEventGraphicsInfo *);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
@@ -1438,8 +1438,17 @@ TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTemplate,
   // Set species based on script header
   if (objectEventTemplate->graphicsId == OBJ_EVENT_GFX_OW_MON && objectEventTemplate->script) {
     const u8 *script = objectEventTemplate->script;
-    if (script[0] == 0x7d) // bufferspeciesname
-      FollowerSetGraphics(&gObjectEvents[objectEventId], script[2] | script[3] << 8);
+    if (script[0] == 0x7d) { // bufferspeciesname
+      u16 species;
+      u8 form;
+      bool8 shiny;
+      gObjectEvents[objectEventId].extra.asU16 = script[2] | script[3] << 8;
+      species = gObjectEvents[objectEventId].extra.mon.species;
+      form = gObjectEvents[objectEventId].extra.mon.form;
+      shiny = gObjectEvents[objectEventId].extra.mon.shiny;
+      FollowerSetGraphics(&gObjectEvents[objectEventId], species, form, shiny);
+    }
+
   }
 
   return objectEventId;
@@ -1588,12 +1597,10 @@ u8 CreateObjectSprite(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
 }
 
 struct Pokemon * GetFirstLiveMon(void) { // Return address of first conscious party mon or NULL
-  struct Pokemon *mon;
   u8 i;
   for (i=0; i<PARTY_SIZE;i++) {
-    if (gPlayerParty[i].hp > 0 && !(gPlayerParty[i].box.isEgg || gPlayerParty[i].box.isBadEgg)) {
+    if (gPlayerParty[i].hp > 0 && !(gPlayerParty[i].box.isEgg || gPlayerParty[i].box.isBadEgg))
       return &gPlayerParty[i];
-    }
   }
   return NULL;
 }
@@ -1601,29 +1608,30 @@ struct Pokemon * GetFirstLiveMon(void) { // Return address of first conscious pa
 struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or NULL
   u8 i;
   for (i=0; i < OBJECT_EVENTS_COUNT; i++) {
-    if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER) {
+    if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER)
       return &gObjectEvents[i];
-    }
   }
   return NULL;
 }
 
 // Return graphicsInfo for a pokemon species
-static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species) {
+static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species, u8 form) {
   const struct ObjectEventGraphicsInfo *graphicsInfo = &gPokemonObjectGraphics[species];
   return graphicsInfo->tileTag != 0xFFFF ? &gObjectEventGraphicsInfo_Dusclops : graphicsInfo;
 }
 
 // Set graphics & sprite for a follower object event by species
-static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
-  const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species);
+static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species, u8 form, bool8 shiny) {
+  const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, form);
   objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
-  ObjectEventSetGraphics(objectEvent, SpeciesToGraphicsInfo(species));
+  ObjectEventSetGraphics(objectEvent, graphicsInfo);
   objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
-  objectEvent->extra.species = species;
+  objectEvent->extra.mon.species = species;
+  objectEvent->extra.mon.form = form;
+  objectEvent->extra.mon.shiny = shiny;
   if (graphicsInfo->paletteTag1 == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
-    const struct CompressedSpritePalette *spritePalette = &gMonPaletteTable[species];
+    const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
     // Free palette if otherwise unused
     sprite->inUse = FALSE;
     FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
@@ -1634,13 +1642,14 @@ static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species) {
 }
 
 void UpdateFollowingPokemon(void) { // Update following pokemon if any
-  struct ObjectEvent *objectEvent = GetFollowerObject();
+  struct ObjectEvent *objEvent = GetFollowerObject();
   struct Pokemon *mon = GetFirstLiveMon();
   struct Sprite *sprite;
   u16 species;
+  bool8 shiny;
   // Avoid spawning large (64x64) follower pokemon inside buildings
-  if (mon && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(GetMonData(mon, MON_DATA_SPECIES))->width == 64)) {
-    if (objectEvent == NULL) { // Spawn follower
+  if (mon && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(GetMonData(mon, MON_DATA_SPECIES), 0)->width == 64)) {
+    if (objEvent == NULL) { // Spawn follower
       struct ObjectEventTemplate template = {
         .localId = OBJ_EVENT_ID_FOLLOWER,
         .graphicsId = OBJ_EVENT_GFX_OW_MON,
@@ -1649,18 +1658,20 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
         .elevation = 3,
         .movementType = MOVEMENT_TYPE_FOLLOW_PLAYER,
       };
-      objectEvent = &gObjectEvents[SpawnSpecialObjectEvent(&template)];
-      objectEvent->invisible = TRUE;
+      objEvent = &gObjectEvents[SpawnSpecialObjectEvent(&template)];
+      objEvent->invisible = TRUE;
     }
-    sprite = &gSprites[objectEvent->spriteId];
+    sprite = &gSprites[objEvent->spriteId];
     species = GetMonData(mon, MON_DATA_SPECIES);
-    if (species != objectEvent->extra.species) { // Move to player and set invisible
-      MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
-      objectEvent->invisible = TRUE;
+    shiny = IsMonShiny(mon);
+    if (species != objEvent->extra.mon.species || shiny != objEvent->extra.mon.shiny) { // Move to player and set invisible
+      MoveObjectEventToMapCoords(objEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+      objEvent->invisible = TRUE;
     }
-    FollowerSetGraphics(objectEvent, species);
+    FollowerSetGraphics(objEvent, species, 0, shiny);
     sprite->data[6] = 0; // set animation data
-    objectEvent->extra.species = sprite->data[7] = species; // set species
+    objEvent->extra.mon.species = species;
+    objEvent->extra.mon.shiny = shiny;
   } else {
     RemoveFollowingPokemon();
   }
@@ -1685,19 +1696,19 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   u16 value;
   u16 species;
   u32 behavior;
-  struct ObjectEvent *objEvent = &gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_FOLLOWER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup)];
-  struct Pokemon *follower = GetFirstLiveMon();
-  if (follower == NULL) {
+  struct ObjectEvent *objEvent = GetFollowerObject();
+  struct Pokemon *mon = GetFirstLiveMon();
+  if (mon == NULL) {
     ScriptCall(ctx, EventScript_FollowerLovesYou);
     return FALSE;
   }
   behavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
-  species = GetMonData(follower, MON_DATA_SPECIES);
+  species = GetMonData(mon, MON_DATA_SPECIES);
   if (MetatileBehavior_IsPuddle(behavior) || MetatileBehavior_IsShallowFlowingWater(behavior)) {
     if (gBaseStats[species].type1 == TYPE_FIRE || gBaseStats[species].type2 == TYPE_FIRE) {
       ScriptCall(ctx, EventScript_FollowerHasWetFeet);
       return FALSE;
-    } else if (SpeciesToGraphicsInfo(species)->tracks) { // if follower leaves tracks
+    } else if (SpeciesToGraphicsInfo(species, 0)->tracks) { // if follower is grounded
       ScriptCall(ctx, EventScript_FollowerSplashesAbout);
       return FALSE;
     }
@@ -1857,7 +1868,7 @@ static void sub_808E1B8(u8 objectEventId, s16 x, s16 y)
         sprite->data[0] = objectEventId;
         objectEvent->spriteId = spriteId;
         if (objectEvent->graphicsId == OBJ_EVENT_GFX_OW_MON) { // Set pokemon graphics
-          FollowerSetGraphics(objectEvent, objectEvent->extra.species);
+          FollowerSetGraphics(objectEvent, objectEvent->extra.mon.species, objectEvent->extra.mon.form, objectEvent->extra.mon.shiny);
         }
         if (!objectEvent->inanimate && objectEvent->movementType != MOVEMENT_TYPE_PLAYER)
         {
@@ -6248,14 +6259,11 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
         return TRUE;
     // Restore graphicsId and set palette to white
     } else if ((duration == 0 && sprite->data[3] == 3) || (duration == 1 && sprite->data[3] == 7)) {
-      FollowerSetGraphics(objectEvent, sprite->data[7]);
-      sprite->data[6] = (sprite->oam.paletteNum << 4) | (sprite->data[6] & 0xFF0F); // Save old paletteNum
+      FollowerSetGraphics(objectEvent, objectEvent->extra.mon.species, objectEvent->extra.mon.form, objectEvent->extra.mon.shiny);
       LoadWhiteFlashPalette(objectEvent, sprite);
     // Restore original palette
     } else if ((duration == 0 && sprite->data[3] == 1) || (duration == 1 && sprite->data[3] == 3)) {
-      FollowerSetGraphics(objectEvent, sprite->data[7]);
-      // FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_NONE-1);
-      // sprite->oam.paletteNum = (sprite->data[6] >> 4) & 0xF;
+      FollowerSetGraphics(objectEvent, objectEvent->extra.mon.species, objectEvent->extra.mon.form, objectEvent->extra.mon.shiny);
     }
     return FALSE;
 }
@@ -6283,7 +6291,7 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
 
 bool8 MovementAction_EnterPokeball_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    FollowerSetGraphics(objectEvent, sprite->data[7]);
+    FollowerSetGraphics(objectEvent, objectEvent->extra.mon.species, objectEvent->extra.mon.form, objectEvent->extra.mon.shiny);
     objectEvent->invisible = TRUE;
     sprite->data[1] = 0;
     sprite->data[6] = 0;
