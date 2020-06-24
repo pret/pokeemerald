@@ -425,7 +425,6 @@ struct MegaEvolutionData
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;
-    u8 indicatorSpriteIds[MAX_BATTLERS_COUNT];
 };
 
 struct Illusion

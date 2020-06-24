@@ -2811,7 +2811,7 @@ static void SpriteCB_BounceEffect(struct Sprite *sprite)
     gSprites[bouncerSpriteId].pos2.y = y;
     sprite->sSinIndex = (sprite->sSinIndex + sprite->sDelta) & 0xFF;
 
-    bouncerSpriteId = gBattleStruct->mega.indicatorSpriteIds[sprite->sBattler];
+    bouncerSpriteId = GetMegaIndicatorSpriteId(sprite->sBouncerSpriteId);
     if (sprite->sWhich == BOUNCE_HEALTHBOX && bouncerSpriteId != 0xFF)
         gSprites[bouncerSpriteId].pos2.y = y;
 }
@@ -2964,8 +2964,6 @@ static void BattleStartClearSetData(void)
     gBattleStruct->arenaLostOpponentMons = 0;
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        gBattleStruct->mega.indicatorSpriteIds[i] = 0xFF;
 }
 
 void SwitchInClearSetData(void)
