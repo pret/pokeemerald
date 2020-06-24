@@ -729,6 +729,7 @@ const u32 gObjectEventPic_Anorith[] = INCBIN_U32("graphics/object_events/pics/po
 const u32 gObjectEventPic_Armaldo[] = INCBIN_U32("graphics/object_events/pics/pokemon/armaldo.4bpp");
 const u32 gObjectEventPic_Feebas[] = INCBIN_U32("graphics/object_events/pics/pokemon/feebas.4bpp");
 const u32 gObjectEventPic_Milotic[] = INCBIN_U32("graphics/object_events/pics/pokemon/milotic.4bpp");
+const u32 gObjectEventPic_Castform[] = INCBIN_U32("graphics/object_events/pics/pokemon/castform.4bpp");
 const u32 gObjectEventPic_Kecleon[] = INCBIN_U32("graphics/object_events/pics/pokemon/kecleon.4bpp");
 const u32 gObjectEventPic_Shuppet[] = INCBIN_U32("graphics/object_events/pics/pokemon/shuppet.4bpp");
 const u32 gObjectEventPic_Banette[] = INCBIN_U32("graphics/object_events/pics/pokemon/banette.4bpp");

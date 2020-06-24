@@ -4990,6 +4990,14 @@ const struct SpriteFrameImage gObjectEventPicTable_Milotic[] = {
     overworld_frame(gObjectEventPic_Milotic, 4, 4, 4),
     overworld_frame(gObjectEventPic_Milotic, 4, 4, 5),
 };
+const struct SpriteFrameImage gObjectEventPicTable_Castform[] = {
+    overworld_frame(gObjectEventPic_Castform, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Castform, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Castform, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Castform, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Castform, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Castform, 4, 4, 5),
+};
 const struct SpriteFrameImage gObjectEventPicTable_Kecleon[] = {
     overworld_frame(gObjectEventPic_Kecleon, 4, 4, 0),
     overworld_frame(gObjectEventPic_Kecleon, 4, 4, 1),

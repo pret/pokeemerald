@@ -1800,6 +1800,9 @@ $(OBJEVENTGFXDIR)/pokemon/feebas.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/milotic.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(OBJEVENTGFXDIR)/pokemon/castform.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(OBJEVENTGFXDIR)/pokemon/kecleon.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
