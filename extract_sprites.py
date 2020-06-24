@@ -31,13 +31,12 @@ def extract_sprites(spritesheet):
             offset += 1
 
 
-def stack_sprite(index, path):
+def stack_sprite(name, path):
     joinp = os.path.join
-    name = f'{index:03d}.png'
     frames = [joinp(path, 'down', name), joinp(path, 'down', 'frame2', name),
               joinp(path, 'up', name), joinp(path, 'up', 'frame2', name),
               joinp(path, 'left', name), joinp(path, 'left', 'frame2', name)]
-    output = joinp(path, f'{index_to_name[index]}.png')
+    output = joinp(path, name)
     subprocess.run(['convert'] + frames + ['+append', output], check=True)
     print(f'Stacked {output}')
 
@@ -85,14 +84,14 @@ def paletteify(path, output_path=None):
     joinp = os.path.join
     _, tail = os.path.split(path)
     species, _ = os.path.splitext(tail)
-    front = png.Reader(joinp(PKMN_GRAPHICS, species, 'anim_front.png'))
+    front = png.Reader(joinp(PKMN_GRAPHICS, species.split('_')[0], species.split('_')[1], 'anim_front.png'))
     front.read()
     target_palette = tuple(c[:3] for c in front.palette())
     r, g, b = target_palette[0]
     color = f'rgb({r},{g},{b})'
     # Strip alpha color
     subprocess.run(['convert', path, '-background', color, '-alpha', 'remove', output_path], check=True)
-    apply_palette(joinp(PKMN_GRAPHICS, species, 'anim_front.png'), output_path, output_path)
+    apply_palette(joinp(PKMN_GRAPHICS, species.split('_')[0], species.split('_')[1], 'anim_front.png'), output_path, output_path)
 
 # Sprites from https://veekun.com/dex/downloads
 
@@ -101,33 +100,4 @@ if __name__ == '__main__':
     if args:
         paletteify(args[0])
     else:
-        f0 = open('graphics_info.h', 'w', buffering=1)
-        f1 = open('pic_tables.h', 'w', buffering=1)
-        f2 = open('event_graphics.h', 'w', buffering=1)
-        f3 = open('spritesheet_extra.mk', 'w', buffering=1)
-        for index in range(1, 386+1):
-            stack_sprite(index, 'overworld')
-            try:
-                species = index_to_name[index]
-                path = os.path.join('overworld', f'{species}.png')
-                output_path = os.path.join('graphics', 'object_events', 'pics', 'pokemon', f'{species}.png')
-                paletteify(path, output_path)
-            except Exception as e:
-                print(e.__class__.__name__, e, file=sys.stderr)
-                continue
-            d = 32 if species not in {'steelix', 'wailord', 'kyogre', 'groudon', 'rayquaza', 'lugia', 'ho_oh'} else 64
-            line = f'[SPECIES_{species.upper()}] = {{0xFFFF, OBJ_EVENT_PAL_TAG_DYNAMIC, OBJ_EVENT_PAL_TAG_NONE, {d*16}, {d}, {d}, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_FOOT, &gObjectEventBaseOam_{d}x{d}, gObjectEventSpriteOamTables_{d}x{d}, gObjectEventImageAnimTable_Following, gObjectEventPicTable_{species.capitalize()}, gDummySpriteAffineAnimTable}},'
-            f0.write(line + '\n')
-            lines = [f'const struct SpriteFrameImage gObjectEventPicTable_{species.capitalize()}[] = {{']
-            lines += [f'    overworld_frame(gObjectEventPic_{species.capitalize()}, 4, 4, {frame}),' for frame in range(6)]
-            lines.append('};')
-            f1.write('\n'.join(lines) + '\n')
-            line = f'const u32 gObjectEventPic_{species.capitalize()}[] = INCBIN_U32("graphics/object_events/pics/pokemon/{species}.4bpp");'
-            f2.write(line + '\n')
-            lines = [f'$(OBJEVENTGFXDIR)/pokemon/{species}.4bpp: %.4bpp: %.png\n',
-                     f'\t$(GFX) $< $@ -mwidth {int(d/8)} -mheight {int(d/8)}\n\n']
-            f3.write(''.join(lines))
-        f0.close()
-        f1.close()
-        f2.close()
-        f3.close()
+        stack_sprite('201-question.png', 'overworld')
