@@ -8412,59 +8412,75 @@ Move_GRASSY_TERRAIN::
 	loadspritegfx ANIM_TAG_ORBS @Recover Ball
 	loadspritegfx ANIM_TAG_GREEN_SPARKLE @Green Star
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
-	launchtemplate gGrassyTerrainOrbsTemplate 0x2 0x2 0x1a 0x0
-	launchtemplate gGrassyTerrainOrbsTemplate 0x2 0x2 0x1a 0x2a
-	launchtemplate gGrassyTerrainOrbsTemplate 0x2 0x2 0x1a 0x54
-	launchtemplate gGrassyTerrainOrbsTemplate 0x2 0x2 0x1a 0x7e
-	launchtemplate gGrassyTerrainOrbsTemplate 0x2 0x2 0x1a 0xa8
-	launchtemplate gGrassyTerrainOrbsTemplate 0x2 0x2 0x1a 0xd2
-	delay 0x34
-	setarg 0x7 0xffff
-	playsewithpan SE_W215, SOUND_PAN_ATTACKER
-	launchtask AnimTask_ScaleMonAndRestore 0x5 0x5 0xfff9 0xfff9 0xb 0x0 0x0
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 0x0
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 0x20
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 0x40
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 0x60
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 0x80
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 0xa0
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 SOUND_PAN_ATTACKER
-	launchtemplate gGrassyTerrainStarTemplate 0x82 0x1 0xe0
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
-	panse_26 SE_W080, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 0x1, 0x0
-	waitsound
+	delay 30
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(11, 26, 11), 12, 5, 1
+	delay 4
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	playsewithpan SE_W179, SOUND_PAN_ATTACKER
+	createsprite gGrassyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 0
+	createsprite gGrassyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 42
+	createsprite gGrassyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 84
+	createsprite gGrassyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 126
+	createsprite gGrassyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 168
+	createsprite gGrassyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 210
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 0, 4, RGB(11, 26, 11)
+	delay 52
+	setarg 7, 0xFFFF
+	playsewithpan SE_W215, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 0
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 32
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 64
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 96
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 128
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 160
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 192
+	createsprite gGrassyTerrainStarTemplate, ANIM_TARGET, 2, 224
+	panse_26 SE_W080, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +1, 0x0
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(31, 24, 31)
+	waitforvisualfinish
 	end
 	
 Move_MISTY_TERRAIN::
 	loadspritegfx ANIM_TAG_ORBS @Recover Ball
-	loadspritegfx ANIM_TAG_GREEN_SPARKLE @Green Star
 	loadspritegfx ANIM_TAG_WATER_GUN @Light Blue Colour
+	loadspritegfx ANIM_TAG_GREEN_SPARKLE
 	playsewithpan SE_W215, SOUND_PAN_ATTACKER
-	launchtemplate gMistyTerrainOrbsTemplate 0x2 0x2 0x1a 0x0
-	launchtemplate gMistyTerrainOrbsTemplate 0x2 0x2 0x1a 0x2a
-	launchtemplate gMistyTerrainOrbsTemplate 0x2 0x2 0x1a 0x54
-	launchtemplate gMistyTerrainOrbsTemplate 0x2 0x2 0x1a 0x7e
-	launchtemplate gMistyTerrainOrbsTemplate 0x2 0x2 0x1a 0xa8
-	launchtemplate gMistyTerrainOrbsTemplate 0x2 0x2 0x1a 0xd2
-	delay 0x34
-	setarg 0x7 0xffff
-	playsewithpan SE_W213, SOUND_PAN_ATTACKER
-	launchtask AnimTask_ScaleMonAndRestore 0x5 0x5 0xfff9 0xfff9 0xb 0x0 0x0
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 0x0
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 0x20
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 0x40
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 0x60
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 0x80
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 0xa0
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 SOUND_PAN_ATTACKER
-	launchtemplate gMistyTerrainStarTemplate 0x82 0x1 0xe0
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
-	playsewithpan SE_W322, SOUND_PAN_ATTACKER
-	delay 0x40
+	delay 30
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(31, 24, 31), 12, 5, 1
+	delay 4
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	playsewithpan SE_W179, SOUND_PAN_ATTACKER
+	createsprite gMistyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 0
+	createsprite gMistyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 42
+	createsprite gMistyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 84
+	createsprite gMistyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 126
+	createsprite gMistyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 168
+	createsprite gMistyTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 210
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 0, 7, RGB(31, 24, 31)
+	delay 52
+	setarg 7, 0xFFFF
+	playsewithpan SE_W213, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 0
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 32
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 64
+	playse SE_W322
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 96
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 128
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 160
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 192
+	createsprite gMistyTerrainStarTemplate, ANIM_TARGET, 2, 224
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 7, 0, RGB(31, 24, 31)
+	waitforvisualfinish
 	end
 
 
@@ -9315,31 +9331,37 @@ CoinShower:
 Move_ELECTRIC_TERRAIN::
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS
 	playsewithpan SE_W268, SOUND_PAN_ATTACKER
-	launchtemplate gElectricTerrainOrbsTemplate 0x2 0x2 0x1a 0x0
-	launchtemplate gElectricTerrainOrbsTemplate 0x2 0x2 0x1a 0x2a
-	launchtemplate gElectricTerrainOrbsTemplate 0x2 0x2 0x1a 0x54
-	launchtemplate gElectricTerrainOrbsTemplate 0x2 0x2 0x1a 0x7e
-	launchtemplate gElectricTerrainOrbsTemplate 0x2 0x2 0x1a 0xa8
-	launchtemplate gElectricTerrainOrbsTemplate 0x2 0x2 0x1a 0xd2
-	delay 0x34
-	setarg 0x7 0xffff
-	playsewithpan SE_W213, SOUND_PAN_ATTACKER
-	launchtask AnimTask_ScaleMonAndRestore 0x5 0x5 0xfff9 0xfff9 0xb 0x0 0x0
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 0x0
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 0x20
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 0x40
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 0x60
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 0x80
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 0xa0
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 SOUND_PAN_ATTACKER
-	launchtemplate gElectricTerrainFlyingBallTemplate 0x82 0x1 0xe0
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
-	playsewithpan SE_W085B, SOUND_PAN_TARGET
-	delay 0x40
-	playsewithpan SE_W085B, SOUND_PAN_TARGET
-	delay 0x40
+	delay 30
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 27, 0), 12, 5, 1
+	delay 4
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	playsewithpan SE_W179, SOUND_PAN_ATTACKER
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 0
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 42
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 84
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 126
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 168
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 210
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 0, 4, RGB(28, 28, 0)
+	delay 52
+	setarg 7, 0xFFFF
+	playsewithpan SE_W115, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 0
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 32
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 64
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 96
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 128
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 160
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 192
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 224
+	loopsewithpan SE_W085B, SOUND_PAN_TARGET, 0x16, 0x3
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(28, 28, 0)
+	waitforvisualfinish
 	end
 
 
@@ -10998,31 +11020,38 @@ Move_PSYCHIC_TERRAIN::
 	loadspritegfx ANIM_TAG_GREEN_SPARKLE @Green Star
 	loadspritegfx ANIM_TAG_POISON_BUBBLE @Purple Colour
 	playsewithpan SE_W215, SOUND_PAN_ATTACKER
-	launchtemplate gPsychicTerrainOrbsTemplate 0x2 0x2 0x1a 0x0
-	launchtemplate gPsychicTerrainOrbsTemplate 0x2 0x2 0x1a 0x2a
-	launchtemplate gPsychicTerrainOrbsTemplate 0x2 0x2 0x1a 0x54
-	launchtemplate gPsychicTerrainOrbsTemplate 0x2 0x2 0x1a 0x7e
-	launchtemplate gPsychicTerrainOrbsTemplate 0x2 0x2 0x1a 0xa8
-	launchtemplate gPsychicTerrainOrbsTemplate 0x2 0x2 0x1a 0xd2
-	delay 0x34
-	setarg 0x7 0xffff
-	playsewithpan SE_W213, SOUND_PAN_ATTACKER
-	launchtask AnimTask_ScaleMonAndRestore 0x5 0x5 0xfff9 0xfff9 0xb 0x0 0x0
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 0x0
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 0x20
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 0x40
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 0x60
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 0x80
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 0xa0
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 SOUND_PAN_ATTACKER
-	launchtemplate gPsychicTerrainStarTemplate 0x82 0x1 0xe0
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
+	delay 30
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 0, 13), 12, 5, 1
+	delay 4
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	playsewithpan SE_W179, SOUND_PAN_ATTACKER
+	createsprite gPsychicTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 0
+	createsprite gPsychicTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 42
+	createsprite gPsychicTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 84
+	createsprite gPsychicTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 126
+	createsprite gPsychicTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 168
+	createsprite gPsychicTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 210
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 0, 4, RGB(27, 0, 13)
+	delay 52
+	setarg 7, 0xFFFF
+	playsewithpan SE_W213, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 0
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 32
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 64
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 96
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 128
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 160
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 192
+	createsprite gPsychicTerrainStarTemplate, ANIM_TARGET, 2, 224
 	loopsewithpan SE_W048, SOUND_PAN_TARGET, 0xa, 0x3
-	waitsound
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(27, 0, 13)
+	waitforvisualfinish
 	end
-    
 
 Move_LUNGE::
 	loadspritegfx ANIM_TAG_IMPACT @hit
