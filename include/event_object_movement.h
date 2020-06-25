@@ -97,6 +97,7 @@ struct Pokemon * GetFirstLiveMon(void);
 void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);
 struct ObjectEvent * GetFollowerObject(void);
+u8 GetDirectionToFace(s16, s16, s16, s16);
 void TrySpawnObjectEvents(s16, s16);
 u8 CreateObjectSprite(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction);
 u8 AddPseudoObjectEvent(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
