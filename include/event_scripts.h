@@ -5,6 +5,11 @@ extern const u8 EventScript_Follower[];
 extern const u8 EventScript_FollowerHasWetFeet[];
 extern const u8 EventScript_FollowerSplashesAbout[];
 extern const u8 EventScript_FollowerLovesYou[];
+extern const u8 EventScript_FollowerUnhappyFace[];
+extern const u8 EventScript_FollowerHappyRain[];
+extern const u8 EventScript_FollowerMetLocation[];
+extern const u8 EventScript_FollowerEnd[];
+extern const u8 EventScript_FollowerSkeptical[];
 extern const u8 EnterPokeballMovement[];
 
 extern const u8 EventScript_TestSignpostMsg[];

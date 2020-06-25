@@ -1691,21 +1691,29 @@ static bool8 IsFollowerVisible(void) { // Determine whether follower *should* be
   || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior));
 }
 
+static bool8 SpeciesHasType(u16 species, u8 type) {
+  return gBaseStats[species].type1 == type || gBaseStats[species].type2 == type;
+}
+
 bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
   u16 value;
   u16 species;
   u32 behavior;
+  u8 friendship;
   struct ObjectEvent *objEvent = GetFollowerObject();
   struct Pokemon *mon = GetFirstLiveMon();
   if (mon == NULL) {
     ScriptCall(ctx, EventScript_FollowerLovesYou);
     return FALSE;
   }
+  if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)) // only return to flying if map type is relevant
+    ScriptJump(ctx, EventScript_FollowerEnd);
   behavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
   species = GetMonData(mon, MON_DATA_SPECIES);
+  // Puddle splash or wet feet
   if (MetatileBehavior_IsPuddle(behavior) || MetatileBehavior_IsShallowFlowingWater(behavior)) {
-    if (gBaseStats[species].type1 == TYPE_FIRE || gBaseStats[species].type2 == TYPE_FIRE) {
+    if (SpeciesHasType(species, TYPE_FIRE)) {
       ScriptCall(ctx, EventScript_FollowerHasWetFeet);
       return FALSE;
     } else if (SpeciesToGraphicsInfo(species, 0)->tracks) { // if follower is grounded
@@ -1713,10 +1721,26 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
       return FALSE;
     }
   }
+  // Weather-based messages
   if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
-    ScriptCall(ctx, EventScript_FollowerLovesYou);
+    if (SpeciesHasType(species, TYPE_FIRE)) {
+      ScriptCall(ctx, EventScript_FollowerUnhappyFace);
+      return FALSE;
+    } else if (SpeciesHasType(species, TYPE_WATER) || SpeciesHasType(species, TYPE_GRASS)) {
+      ScriptCall(ctx, EventScript_FollowerHappyRain);
+      return FALSE;
+    }
   }
-  ScriptCall(ctx, EventScript_FollowerLovesYou);
+  // Location-based messages
+  if (GetMonData(mon, MON_DATA_MET_LOCATION) == GetCurrentRegionMapSectionId()) {
+    ScriptCall(ctx, EventScript_FollowerMetLocation);
+    return FALSE;
+  }
+  friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+  if (friendship < 25)
+    ScriptCall(ctx, EventScript_FollowerSkeptical);
+  else if (friendship == 255)
+    ScriptCall(ctx, EventScript_FollowerLovesYou);
   return FALSE;
 }
 
