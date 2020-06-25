@@ -57,7 +57,7 @@ def closest_color(c, palette):
     min_d = float('inf')
     best = 0
     r1, g1, b1 = c
-    for i, (r2, g2, b2) in enumerate(palette):
+    for i, (r2, g2, b2) in enumerate(palette[1:], 1):
         # Color diff from https://stackoverflow.com/questions/1847092/given-an-rgb-value-what-would-be-the-best-way-to-find-the-closest-match-in-the-d
         d = ((r2-r1)*0.30)**2 + ((g2-g1)*0.59)**2 + ((b2-b1)*0.11)**2
         if d < min_d:
@@ -75,7 +75,7 @@ def apply_palette(palette_file, input_file, output_file):  # Apply one file's pa
     with open(output_file, 'wb') as f:
         new_rows = []
         for row in rows:
-            new_rows.append([closest_color(src_palette[c], target_palette) for c in row])
+            new_rows.append([closest_color(src_palette[c], target_palette) if c else 0 for c in row])
         w = png.Writer(width=w, height=h, bitdepth=4, palette=target_palette)
         w.write(f, new_rows)
 
@@ -84,14 +84,14 @@ def paletteify(path, output_path=None):
     joinp = os.path.join
     _, tail = os.path.split(path)
     species, _ = os.path.splitext(tail)
-    front = png.Reader(joinp(PKMN_GRAPHICS, species.split('_')[0], species.split('_')[1], 'anim_front.png'))
+    front = png.Reader(joinp(PKMN_GRAPHICS, species, 'anim_front.png'))
     front.read()
     target_palette = tuple(c[:3] for c in front.palette())
     r, g, b = target_palette[0]
     color = f'rgb({r},{g},{b})'
     # Strip alpha color
     subprocess.run(['convert', path, '-background', color, '-alpha', 'remove', output_path], check=True)
-    apply_palette(joinp(PKMN_GRAPHICS, species.split('_')[0], species.split('_')[1], 'anim_front.png'), output_path, output_path)
+    apply_palette(joinp(PKMN_GRAPHICS, species, 'anim_front.png'), output_path, output_path)
 
 # Sprites from https://veekun.com/dex/downloads
 
@@ -100,4 +100,11 @@ if __name__ == '__main__':
     if args:
         paletteify(args[0])
     else:
-        stack_sprite('201-question.png', 'overworld')
+        for path in sorted(glob('overworld/*.png')):
+            _, tail = os.path.split(path)
+            name, _ = os.path.splitext(tail)
+            output_path = os.path.join('graphics/object_events/pics/pokemon', f'{name}.png')
+            try:
+                paletteify(path, output_path)
+            except Exception as e:
+                print(name, e.__class__.__name__, e, file=sys.stderr)

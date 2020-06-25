@@ -2646,6 +2646,14 @@ const struct SpriteFrameImage gObjectEventPicTable_Magneton[] = {
     overworld_frame(gObjectEventPic_Magneton, 4, 4, 4),
     overworld_frame(gObjectEventPic_Magneton, 4, 4, 5),
 };
+const struct SpriteFrameImage gObjectEventPicTable_Farfetchd[] = {
+    overworld_frame(gObjectEventPic_Farfetchd, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Farfetchd, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Farfetchd, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Farfetchd, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Farfetchd, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Farfetchd, 4, 4, 5),
+};
 const struct SpriteFrameImage gObjectEventPicTable_Doduo[] = {
     overworld_frame(gObjectEventPic_Doduo, 4, 4, 0),
     overworld_frame(gObjectEventPic_Doduo, 4, 4, 1),
@@ -2949,6 +2957,14 @@ const struct SpriteFrameImage gObjectEventPicTable_Starmie[] = {
     overworld_frame(gObjectEventPic_Starmie, 4, 4, 3),
     overworld_frame(gObjectEventPic_Starmie, 4, 4, 4),
     overworld_frame(gObjectEventPic_Starmie, 4, 4, 5),
+};
+const struct SpriteFrameImage gObjectEventPicTable_Mr_Mime[] = {
+    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 5),
 };
 const struct SpriteFrameImage gObjectEventPicTable_Scyther[] = {
     overworld_frame(gObjectEventPic_Scyther, 4, 4, 0),
