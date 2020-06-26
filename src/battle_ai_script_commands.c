@@ -1654,7 +1654,7 @@ static void Cmd_get_considered_move_effect(void)
 static s32 AI_GetAbility(u32 battlerId, bool32 guess)
 {
     // The AI knows its own ability.
-    if (IsBattlerAIControlled)
+    if (IsBattlerAIControlled(battlerId))
         return gBattleMons[battlerId].ability;
 
     if (BATTLE_HISTORY->abilities[battlerId] != 0)

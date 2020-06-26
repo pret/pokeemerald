@@ -6754,6 +6754,7 @@ BattleScript_BadDreamsLoop:
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	printstring STRINGID_BADDREAMSDMG
 	waitmessage 0x40
+	jumpifability BS_TARGET, ABILITY_MAGIC_GUARD, BattleScript_BadDreamsIncrement
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
 	tryfaintmon BS_TARGET, FALSE, NULL

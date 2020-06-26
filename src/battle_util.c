@@ -1417,9 +1417,18 @@ s32 GetDrainedBigRootHp(u32 battler, s32 hp)
     return hp * -1;
 }
 
+#define MAGIC_GAURD_CHECK \
+if (ability == ABILITY_MAGIC_GUARD) \
+{\
+    RecordAbilityBattle(gActiveBattler, ability);\
+    gBattleStruct->turnEffectsTracker++;\
+            break;\
+}
+
+
 u8 DoBattlerEndTurnEffects(void)
 {
-    u32 ability, effect = 0;
+    u32 ability, i, effect = 0;
 
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
     while (gBattleStruct->turnEffectsBattlerId < gBattlersCount && gBattleStruct->turnEffectsTracker <= ENDTURN_BATTLER_COUNT)
@@ -1483,6 +1492,8 @@ u8 DoBattlerEndTurnEffects(void)
              && gBattleMons[gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BATTLER].hp != 0
              && gBattleMons[gActiveBattler].hp != 0)
             {
+                MAGIC_GAURD_CHECK;
+
                 gBattlerTarget = gStatuses3[gActiveBattler] & STATUS3_LEECHSEED_BATTLER; // Notice gBattlerTarget is actually the HP receiver.
                 gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
                 if (gBattleMoveDamage == 0)
@@ -1496,9 +1507,10 @@ u8 DoBattlerEndTurnEffects(void)
             break;
         case ENDTURN_POISON:  // poison
             if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON)
-                && gBattleMons[gActiveBattler].hp != 0
-                && ability != ABILITY_MAGIC_GUARD)
+                && gBattleMons[gActiveBattler].hp != 0)
             {
+                MAGIC_GAURD_CHECK;
+
                 if (ability == ABILITY_POISON_HEAL)
                 {
                     if (!BATTLER_MAX_HP(gActiveBattler) && !(gStatuses3[gActiveBattler] & STATUS3_HEAL_BLOCK))
@@ -1524,9 +1536,10 @@ u8 DoBattlerEndTurnEffects(void)
             break;
         case ENDTURN_BAD_POISON:  // toxic poison
             if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON)
-                && gBattleMons[gActiveBattler].hp != 0
-                && ability != ABILITY_MAGIC_GUARD)
+                && gBattleMons[gActiveBattler].hp != 0)
             {
+                MAGIC_GAURD_CHECK;
+
                 if (ability == ABILITY_POISON_HEAL)
                 {
                     if (!BATTLER_MAX_HP(gActiveBattler) && !(gStatuses3[gActiveBattler] & STATUS3_HEAL_BLOCK))
@@ -1555,9 +1568,10 @@ u8 DoBattlerEndTurnEffects(void)
             break;
         case ENDTURN_BURN:  // burn
             if ((gBattleMons[gActiveBattler].status1 & STATUS1_BURN)
-                && gBattleMons[gActiveBattler].hp != 0
-                && ability != ABILITY_MAGIC_GUARD)
+                && gBattleMons[gActiveBattler].hp != 0)
             {
+                MAGIC_GAURD_CHECK;
+
                 gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
                 if (ability == ABILITY_HEATPROOF)
                     gBattleMoveDamage /= 2;
@@ -1570,9 +1584,9 @@ u8 DoBattlerEndTurnEffects(void)
             break;
         case ENDTURN_NIGHTMARES:  // spooky nightmares
             if ((gBattleMons[gActiveBattler].status2 & STATUS2_NIGHTMARE)
-                && gBattleMons[gActiveBattler].hp != 0
-                && ability != ABILITY_MAGIC_GUARD)
+                && gBattleMons[gActiveBattler].hp != 0)
             {
+                MAGIC_GAURD_CHECK;
                 // R/S does not perform this sleep check, which causes the nightmare effect to
                 // persist even after the affected Pokemon has been awakened by Shed Skin.
                 if (gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
@@ -1592,9 +1606,9 @@ u8 DoBattlerEndTurnEffects(void)
             break;
         case ENDTURN_CURSE:  // curse
             if ((gBattleMons[gActiveBattler].status2 & STATUS2_CURSED)
-                && gBattleMons[gActiveBattler].hp != 0
-                && ability != ABILITY_MAGIC_GUARD)
+                && gBattleMons[gActiveBattler].hp != 0)
             {
+                MAGIC_GAURD_CHECK;
                 gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 4;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
@@ -1608,6 +1622,8 @@ u8 DoBattlerEndTurnEffects(void)
             {
                 if (--gDisableStructs[gActiveBattler].wrapTurns != 0)  // damaged by wrap
                 {
+                    MAGIC_GAURD_CHECK;
+
                     gBattleScripting.animArg1 = gBattleStruct->wrappedMove[gActiveBattler];
                     gBattleScripting.animArg2 = gBattleStruct->wrappedMove[gActiveBattler] >> 8;
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[gActiveBattler]);
@@ -1708,7 +1724,6 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_DISABLE:  // disable
             if (gDisableStructs[gActiveBattler].disableTimer != 0)
             {
-                s32 i;
                 for (i = 0; i < MAX_MON_MOVES; i++)
                 {
                     if (gDisableStructs[gActiveBattler].disabledMove == gBattleMons[gActiveBattler].moves[i])
@@ -4006,7 +4021,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_IntimidateActivates;
                 }
-                gBattlerAbility = gBattleStruct->intimidateBattler = i;
+                battler = gBattlerAbility = gBattleStruct->intimidateBattler = i;
                 effect++;
                 break;
             }
@@ -4051,7 +4066,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     gBattleResources->flags->flags[i] &= ~(RESOURCE_FLAG_TRACED);
                     gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
-                    gBattlerAbility = gBattleScripting.battler = i;
+                    battler = gBattlerAbility = gBattleScripting.battler = i;
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)

@@ -1014,6 +1014,17 @@ AI_WeakDmg:
 	if_equal MOVE_POWER_BEST, Score_Minus2
 	score -3
 	end
+	
+AI_DiscourageMagicGuard:
+	if_no_ability AI_TARGET, ABILITY_MAGIC_GUARD, AI_DiscourageMagicGuardEnd
+	if_effect EFFECT_POISON, Score_Minus5
+	if_effect EFFECT_WILL_O_WISP, Score_Minus5
+	if_effect EFFECT_TOXIC, Score_Minus5
+	if_effect EFFECT_LEECH_SEED, Score_Minus5
+	if_no_type AI_TARGET, TYPE_GHOST, AI_DiscourageMagicGuardEnd
+	if_effect EFFECT_CURSE, Score_Minus5
+AI_DiscourageMagicGuardEnd:
+	end
 
 AI_CheckViability:
 	if_target_is_ally AI_Ret
@@ -1022,6 +1033,7 @@ AI_CheckViability:
 	call AI_CheckIfAlreadyDead
 	call AI_CV_DmgMove
 	call AI_WeakDmg
+	call AI_DiscourageMagicGuard
 	if_effect EFFECT_HIT, AI_CV_Hit
 	if_effect EFFECT_SLEEP, AI_CV_Sleep
 	if_effect EFFECT_ABSORB, AI_CV_Absorb
