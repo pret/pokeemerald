@@ -342,11 +342,29 @@ static const union AffineAnimCmd sAffineAnim_GrowingElectricOrb_2[] =
     AFFINEANIMCMD_END,
 };
 
+static const union AffineAnimCmd sAffineAnim_GrowingElectricOrb_4[] =
+{
+    AFFINEANIMCMD_FRAME(5, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0x2, 0x2, 0, 20),
+    AFFINEANIMCMD_FRAME(0x3, 0x3, 0, 15),
+    AFFINEANIMCMD_FRAME(0x1, 0x1, 0, 25),
+    AFFINEANIMCMD_FRAME(0xFFFC, 0xFFFC, 0, 5),
+    AFFINEANIMCMD_FRAME(0x3, 0x3, 0, 5),
+    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 5),
+    AFFINEANIMCMD_FRAME(0x4, 0x4, 0, 5),
+    AFFINEANIMCMD_END
+};
+
 const union AffineAnimCmd *const gAffineAnims_GrowingElectricOrb[] =
 {
     sAffineAnim_GrowingElectricOrb_0,
     sAffineAnim_GrowingElectricOrb_1,
     sAffineAnim_GrowingElectricOrb_2,
+};
+
+const union AffineAnimCmd *const gAffineAnims_GrowingElectricOrb2[] =
+{
+    sAffineAnim_GrowingElectricOrb_4,
 };
 
 const struct SpriteTemplate gGrowingChargeOrbSpriteTemplate =
@@ -357,6 +375,18 @@ const struct SpriteTemplate gGrowingChargeOrbSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gAffineAnims_GrowingElectricOrb,
+    .callback = AnimGrowingChargeOrb,
+};
+
+// For Electro Ball - smaller orb.
+const struct SpriteTemplate gGrowingChargeOrb2SpriteTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_GrowingElectricOrb2,
     .callback = AnimGrowingChargeOrb,
 };
 
@@ -848,8 +878,8 @@ void AnimThunderWave(struct Sprite *sprite)
         spriteId = CreateSprite(&gThunderWaveSpriteTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
     else
         spriteId = CreateSprite(&gAnchorShotChainTemplate, sprite->pos1.x + 32, sprite->pos1.y, sprite->subpriority);
-        
-    
+
+
     gSprites[spriteId].oam.tileNum += 8;
     gAnimVisualTaskCount++;
     gSprites[spriteId].callback = AnimThunderWave_Step;
@@ -909,7 +939,7 @@ static void AnimTask_ElectricChargingParticles_Step(u8 taskId)
                 spriteId = CreateSprite(&gLightOfRuinGrayChargeTemplate, task->data[14], task->data[15], 2);
             else
                 spriteId = CreateSprite(&gElectricChargingParticlesSpriteTemplate, task->data[14], task->data[15], 2);
-            
+
             if (spriteId != MAX_SPRITES)
             {
                 struct Sprite *sprite = &gSprites[spriteId];

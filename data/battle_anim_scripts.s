@@ -4834,31 +4834,29 @@ Move_SYCHRONOISE:
 Move_ELECTRO_BALL:
 	loadspritegfx ANIM_TAG_SPARK_2	@yelow
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @charge
-	monbg 0x0
+	loadspritegfx ANIM_TAG_FLASH_CANNON_BALL	@ball
+	monbg ANIM_TARGET
 	setalpha 12, 8
 	playsewithpan SE_W268, SOUND_PAN_ATTACKER
-	launchtemplate gGrowingChargeOrbSpriteTemplate 0x2 0x1 0x0
+	createsprite gGrowingChargeOrb2SpriteTemplate, ANIM_ATTACKER, 2, 0
 	delay 0x19
 	playsewithpan SE_W268, SOUND_PAN_ATTACKER
 	delay 0x14
 	playsewithpan SE_W268, SOUND_PAN_ATTACKER
 	delay 0xF
 	playsewithpan SE_W268, SOUND_PAN_ATTACKER
-	delay 0xA
 	delay 0x6
 	loopsewithpan SE_W268, 0xC, 0x6, 0x5
 	waitforvisualfinish
-	loadspritegfx ANIM_TAG_FLASH_CANNON_BALL	@ball
-	launchtemplate gElectroBallCannonBallTemplate, ANIM_TARGET, 2, 0x10, 0x10, 0x8
+	createsprite gElectroBallCannonBallTemplate, ANIM_TARGET, 2, 16, 16, 8
 	waitforvisualfinish
 	playsewithpan SE_W028, SOUND_PAN_TARGET
-	createvisualtask AnimTask_ShakeMon2, 0x2, 0x1, 0x4, 0x0, 0x8, 0x1
+	createvisualtask AnimTask_ShakeMon2, 0x2, ANIM_TARGET, 0x4, 0x0, 0x8, 0x1
 	call ElectricityEffect
 	waitforvisualfinish
-	clearmonbg 0x0
+	clearmonbg ANIM_TARGET
 	blendoff
 	end
-    
 	
 Move_SOAK:
 	loadspritegfx ANIM_TAG_SMALL_BUBBLES
