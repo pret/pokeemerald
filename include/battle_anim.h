@@ -87,6 +87,7 @@ void DestroySpriteAndMatrix(struct Sprite *sprite);
 void TranslateSpriteLinearFixedPoint(struct Sprite *sprite);
 void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffsets);
 void InitSpritePosToAnimTarget(struct Sprite *sprite, bool8 respectMonPicOffsets);
+bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool8 respectMonPicOffsets);
 void StartAnimLinearTranslation(struct Sprite *sprite);
 void InitAnimArcTranslation(struct Sprite *sprite);
 bool8 AnimTranslateLinear(struct Sprite *sprite);

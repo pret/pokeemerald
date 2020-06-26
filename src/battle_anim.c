@@ -1404,7 +1404,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_NewPokeball, 0x0080, ANIM_TAG_POKEBALL},
     #else
     {gBattleAnimSpriteGfx_Pokeball, 0x0080, ANIM_TAG_POKEBALL},
-    #endif 
+    #endif
     {gBattleAnimSpriteGfx_Spotlight, 0x0800, ANIM_TAG_SPOTLIGHT},
     {gBattleAnimSpriteGfx_LetterZ, 0x0200, ANIM_TAG_LETTER_Z},
     {gBattleAnimSpriteGfx_RapidSpin, 0x0300, ANIM_TAG_RAPID_SPIN},
@@ -1422,7 +1422,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     #if NEW_MORNING_SUN_STAR_PARTICLE
     {gBattleAnimSpriteGfx_NewGreenStar, 0x0200, ANIM_TAG_GREEN_STAR},
     #else
-    {gBattleAnimSpriteGfx_GreenStar, 0x0200, ANIM_TAG_GREEN_STAR},    
+    {gBattleAnimSpriteGfx_GreenStar, 0x0200, ANIM_TAG_GREEN_STAR},
     #endif
     {gBattleAnimSpriteGfx_PinkCloud, 0x0200, ANIM_TAG_PINK_CLOUD},
     {gBattleAnimSpriteGfx_SweatDrop, 0x0020, ANIM_TAG_SWEAT_DROP},
@@ -2184,6 +2184,15 @@ void DoMoveAnim(u16 move)
 {
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gBattlerTarget;
+    // Make sure the anim target of moves hitting everyone is at the opposite side.
+    if (gBattleMoves[move].target & MOVE_TARGET_FOES_AND_ALLY && IsDoubleBattle())
+    {
+        while (GET_BATTLER_SIDE(gBattleAnimAttacker) == GET_BATTLER_SIDE(gBattleAnimTarget))
+        {
+            if (++gBattleAnimTarget >= MAX_BATTLERS_COUNT)
+                gBattleAnimTarget = 0;
+        }
+    }
     LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
 }
 

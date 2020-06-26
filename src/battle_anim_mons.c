@@ -793,6 +793,46 @@ void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffse
     sprite->pos1.y += gBattleAnimArgs[1];
 }
 
+void InitSpritePosToAnimAttackerPartner(struct Sprite *sprite, bool8 respectMonPicOffsets)
+{
+    if (!respectMonPicOffsets)
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X);
+        sprite->pos1.y = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y);
+    }
+    else
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X_2);
+        sprite->pos1.y = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->pos1.y += gBattleAnimArgs[1];
+}
+
+bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool8 respectMonPicOffsets)
+{
+    u32 battlerId = GetAnimBattlerId(animBattlerId);
+    if (GetAnimBattlerSpriteId(animBattlerId) == 0xFF || !IsBattlerSpriteVisible(battlerId))
+    {
+        DestroyAnimSprite(sprite);
+        return FALSE;
+    }
+
+    if (!respectMonPicOffsets)
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_X);
+        sprite->pos1.y = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_Y);
+    }
+    else if (animBattlerId != ANIM_TARGET)
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_X_2);
+        sprite->pos1.y = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->pos1.y += gBattleAnimArgs[1];
+    return TRUE;
+}
+
 u8 GetBattlerSide(u8 battlerId)
 {
     return GET_BATTLER_SIDE2(battlerId);
@@ -1466,10 +1506,14 @@ void AnimSpriteOnMonPos(struct Sprite *sprite)
             var = TRUE;
         else
             var = FALSE;
-        if (!gBattleAnimArgs[2])
+
+        if (gBattleAnimArgs[2] == 0)
             InitSpritePosToAnimAttacker(sprite, var);
-        else
+        else if (gBattleAnimArgs[2] == 1)
             InitSpritePosToAnimTarget(sprite, var);
+        else if (gBattleAnimArgs[2] == 2)
+            InitSpritePosToAnimAttackerPartner(sprite, var);
+
         sprite->data[0]++;
 
     }

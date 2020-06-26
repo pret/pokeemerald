@@ -813,6 +813,8 @@ void AnimTask_InvertScreenColor(u8 taskId)
         selectedPalettes |= (0x10000 << gBattleAnimTarget);
     if (gBattleAnimArgs[0] & 0x8 && IsBattlerAlive(BATTLE_PARTNER(gBattleAnimTarget)))
         selectedPalettes |= (0x10000 << BATTLE_PARTNER(gBattleAnimTarget));
+	if (gBattleAnimArgs[0] & 0x10 && IsBattlerAlive(BATTLE_PARTNER(gBattleAnimAttacker)))
+        selectedPalettes |= (0x10000 << BATTLE_PARTNER(gBattleAnimAttacker));
 
     InvertPlttBuffer(selectedPalettes);
     DestroyAnimVisualTask(taskId);
@@ -1050,11 +1052,9 @@ void AnimHitSplatRandom(struct Sprite *sprite)
     if (gBattleAnimArgs[1] == -1)
         gBattleAnimArgs[1] = Random2() & 3;
 
+    if (!InitSpritePosToAnimBattler(gBattleAnimArgs[0], sprite, FALSE))
+        return;
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[1]);
-    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 0);
-    else
-        InitSpritePosToAnimTarget(sprite, FALSE);
 
     sprite->pos2.x += (Random2() % 48) - 24;
     sprite->pos2.y += (Random2() % 24) - 12;

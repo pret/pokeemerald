@@ -3085,32 +3085,80 @@ Move_DISCHARGE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT, 0, 12, 12, RGB(0, 0, 23)
 	waitforvisualfinish
-	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, 1, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, 215, SOUND_PAN_TARGET
 	delay 3
-	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, 1, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_DEF_PARTNER, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_ATK_PARTNER, 2
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, 215, SOUND_PAN_TARGET
 	delay 3
-	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, 1, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_DEF_PARTNER, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_ATK_PARTNER, 2
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, 215, SOUND_PAN_TARGET
 	delay 3
-	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, 1, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_DEF_PARTNER, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_ATK_PARTNER, 2
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, 215, SOUND_PAN_TARGET
 	delay 3
-	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, 1, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_DEF_PARTNER, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_ATK_PARTNER, 2
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, 215, SOUND_PAN_TARGET
 	delay 3
-	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, 1, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_DEF_PARTNER, 2
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_ATK_PARTNER, 2
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, 215, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 16, 0, RGB_WHITEALPHA
-	createvisualtask AnimTask_HorizontalShake, 5, 1, 5, 14
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 5, 14
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_DEF_PARTNER, 5, 14
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_ATK_PARTNER, 5, 14
 	waitforvisualfinish  
 	clearmonbg ANIM_ATTACKER 
 	blendoff 
-	call ElectricityEffect 
+	call DischargeElectrify 
 	waitforvisualfinish 
 	end
+DischargeElectrify:
+	playsewithpan SE_W085B, SOUND_PAN_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 5, 0, 5, 0, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 5, 0, 5, 0, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 5, 0, 5, 0, ANIM_ATK_PARTNER
+	delay 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -5, 10, 5, 1, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -5, 10, 5, 1, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -5, 10, 5, 1, ANIM_ATK_PARTNER
+	delay 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 15, 20, 5, 2, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 15, 20, 5, 2, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 15, 20, 5, 2, ANIM_ATK_PARTNER
+	delay 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -15, -10, 5, 0, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -15, -10, 5, 0, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -15, -10, 5, 0, ANIM_ATK_PARTNER
+	delay 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 25, 0, 5, 1, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 25, 0, 5, 1, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 25, 0, 5, 1, ANIM_ATK_PARTNER
+	delay 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -8, 8, 5, 2, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -8, 8, 5, 2, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -8, 8, 5, 2, ANIM_ATK_PARTNER
+	delay 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 2, -8, 5, 0, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 2, -8, 5, 0, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 2, -8, 5, 0, ANIM_ATK_PARTNER
+	delay 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -20, 15, 5, 1, ANIM_TARGET
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -20, 15, 5, 1, ANIM_DEF_PARTNER
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -20, 15, 5, 1, ANIM_ATK_PARTNER
+	return
 	
 Move_LAVA_PLUME:
 	loadspritegfx ANIM_TAG_FIRE_PLUME 
@@ -6854,20 +6902,20 @@ TechnoBlastElectric:
 	playsewithpan SE_W052, SOUND_PAN_ATTACKER
 	launchtask AnimTask_ShakeMon2 0x2 0x5 0x1 0x4 0x0 0x5 0x1
 	launchtemplate gTechnoBlastYellowSmokeTemplate 0x82, 0x4, 0x8 0x8 0x1 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x5 0x0 0x5 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfffb 0xa 0x5 0x1
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x5 0x0 0x5 0x0, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfffb 0xa 0x5 0x1, ANIM_TARGET
 	delay 0x2
 	launchtemplate gTechnoBlastYellowSmokeTemplate 0x82, 0x4, 0xfff8 0xfff8 0x1 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xf 0x14 0x5 0x2
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff1 0xfff6 0x5 0x0
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xf 0x14 0x5 0x2, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff1 0xfff6 0x5 0x0, ANIM_TARGET
 	delay 0x2
 	launchtemplate gTechnoBlastYellowSmokeTemplate 0x82, 0x4, 0x8 0xfff8 0x1 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x19 0x0 0x5 0x1
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff8 0x8 0x5 0x2
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x19 0x0 0x5 0x1, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff8 0x8 0x5 0x2, ANIM_TARGET
 	delay 0x2
 	launchtemplate gTechnoBlastYellowSmokeTemplate 0x82, 0x4, 0xfff8 0x8 0x1 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x2 0xfff8 0x5 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xffec 0xf 0x5 0x1
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x2 0xfff8 0x5 0x0, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xffec 0xf 0x5 0x1, ANIM_TARGET
 	waitforvisualfinish
 	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0xC 0x0 0x0
 	waitforvisualfinish
@@ -8520,23 +8568,23 @@ Move_ELECTRIFY::
 	playsewithpan SE_W085B, SOUND_PAN_TARGET
 	launchtemplate gElectrifyYellowRingTemplate 0x3 0x6 0x0 0x0 0x1 0x0 0x1f 0x8
 	launchtask AnimTask_ShakeMon 0x5 0x5 ANIM_TARGET 0x4 0x0 0x6 0x1
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x5 0x0 0x5 0x0
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x5 0x0 0x5 0x0, ANIM_TARGET
 	delay 0x1
 	launchtemplate gElectrifyYellowRingTemplate 0x3 0x6 0x0 0x0 0x1 0x0 0x1f 0x8
 	delay 0x1
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfffb 0xa 0x5 0x1
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfffb 0xa 0x5 0x1, ANIM_TARGET
 	launchtemplate gElectrifyYellowRingTemplate 0x3 0x6 0x0 0x0 0x1 0x0 0x1f 0x8
 	delay 0x1
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xf 0x14 0x5 0x2
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff1 0xfff6 0x5 0x0
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xf 0x14 0x5 0x2, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff1 0xfff6 0x5 0x0, ANIM_TARGET
 	delay 0x2
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x19 0x0 0x5 0x1
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x19 0x0 0x5 0x1, ANIM_TARGET
 	delay 0x2
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff8 0x8 0x5 0x2
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff8 0x8 0x5 0x2, ANIM_TARGET
 	delay 0x2
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x2 0xfff8 0x5 0x0
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x2 0xfff8 0x5 0x0, ANIM_TARGET
 	delay 0x2
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xffec 0xf 0x5 0x1
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xffec 0xf 0x5 0x1, ANIM_TARGET
 	waitforvisualfinish
 	launchtask AnimTask_BlendBattleAnimPal 0xA 0x5 ANIM_PAL_DEF 0x2 0xB 0x0 0x039B
 	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0x3 0x0 0x039B
@@ -8656,14 +8704,16 @@ Move_MOONBLAST:
 Move_BOOMBURST:
 	loadspritegfx ANIM_TAG_EXPLOSION
 	loadspritegfx ANIM_TAG_THIN_RING
-	createvisualtask AnimTask_InvertScreenColor, 2, 0x1 | 0x2 | 0x4 | 0x8
+	createvisualtask AnimTask_InvertScreenColor, 2, 0x1 | 0x4 | 0x8 | 0x10
 	createvisualtask SoundTask_PlayCryWithEcho, 5
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 5, ANIM_ATTACKER, 0
 	createsprite gHyperVoiceRingSpriteTemplate, ANIM_ATTACKER, 0, 45, 0, 0, 0, 0, 0, 1
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 6, 1
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 6, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 1, 0, 6, 1
 	createvisualtask SoundTask_WaitForCry, 2, 1, 0, 6, 1
 	delay 20
+	jumpifdoublebattle Boomburst_Doubles
 	playsewithpan SE_W153, SOUND_PAN_ATTACKER
 	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
 	delay 4
@@ -8678,10 +8728,29 @@ Move_BOOMBURST:
 	delay 4
 	playsewithpan SE_W153, SOUND_PAN_ATTACKER
 	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
+Boomburst_Last:
 	delay 4
-	createvisualtask AnimTask_InvertScreenColor, 2, 0x1 | 0x2 | 0x4 | 0x8
+	createvisualtask AnimTask_InvertScreenColor, 2, 0x1 | 0x4 | 0x8 | 0x10
 	waitforvisualfinish
 	end
+Boomburst_Doubles:
+	playsewithpan SE_W153, SOUND_PAN_ATTACKER
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 2, 1
+	delay 4
+	playsewithpan SE_W153, SOUND_PAN_ATTACKER
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 24, -24, 1, 1
+	delay 4
+	playsewithpan SE_W153, SOUND_PAN_ATTACKER
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -16, 16, 1, 1
+	delay 4
+	playsewithpan SE_W153, SOUND_PAN_ATTACKER
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -12, 1, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -12, 2, 1
+	delay 4
+	playsewithpan SE_W153, SOUND_PAN_ATTACKER
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
+	goto Boomburst_Last
 	
 Move_FAIRY_LOCK::
 	loadspritegfx ANIM_TAG_CHAIN_LINK @Chain Colour
@@ -9033,20 +9102,20 @@ Move_EERIE_IMPULSE::
 	waitforvisualfinish
 	playsewithpan SE_W085B, SOUND_PAN_ATTACKER
 	launchtemplate gEerieImpulseImpactTemplate 0x2 0x6 0x0 0xfffb 0x1 0x0 0x20 0x10
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x5 0x0 0x5 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfffb 0xa 0x5 0x1
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x5 0x0 0x5 0x0, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfffb 0xa 0x5 0x1, ANIM_TARGET
 	delay 0x7
 	launchtemplate gEerieImpulseImpactTemplate 0x2 0x6 0xfff1 0xa 0x1 0x0 0x20 0x10
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xf 0x14 0x5 0x2
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff1 0xfff6 0x5 0x0
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xf 0x14 0x5 0x2, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff1 0xfff6 0x5 0x0, ANIM_TARGET
 	delay 0x7
 	launchtemplate gEerieImpulseImpactTemplate 0x2 0x6 0xfff1 0xfff1 0x1 0x0 0x20 0x10
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x19 0x0 0x5 0x1
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff8 0x8 0x5 0x2
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x19 0x0 0x5 0x1, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xfff8 0x8 0x5 0x2, ANIM_TARGET
 	delay 0x7
 	launchtemplate gEerieImpulseImpactTemplate 0x2 0x6 0xa 0xfffb 0x1 0x0 0x20 0x10
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x2 0xfff8 0x5 0x0
-	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xffec 0xf 0x5 0x1
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0x2 0xfff8 0x5 0x0, ANIM_TARGET
+	launchtemplate gElectricitySpriteTemplate 0x82, 0x4, 0xffec 0xf 0x5 0x1, ANIM_TARGET
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -23682,21 +23751,21 @@ WaterBubblesEffectLong:
 ElectricityEffect:
 	playsewithpan SE_W085B, SOUND_PAN_TARGET
 ElectricityEffectNoSound:
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 5, 0, 5, 0
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 5, 0, 5, 0, ANIM_TARGET
 	delay 2
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -5, 10, 5, 1
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -5, 10, 5, 1, ANIM_TARGET
 	delay 2
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 15, 20, 5, 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 15, 20, 5, 2, ANIM_TARGET
 	delay 2
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -15, -10, 5, 0
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -15, -10, 5, 0, ANIM_TARGET
 	delay 2
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 25, 0, 5, 1
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 25, 0, 5, 1, ANIM_TARGET
 	delay 2
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -8, 8, 5, 2
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -8, 8, 5, 2, ANIM_TARGET
 	delay 2
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 2, -8, 5, 0
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, 2, -8, 5, 0, ANIM_TARGET
 	delay 2
-	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -20, 15, 5, 1
+	createsprite gElectricitySpriteTemplate, ANIM_TARGET, 2, -20, 15, 5, 1, ANIM_TARGET
 	return
 
 ConfusionEffect:
