@@ -1737,9 +1737,13 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     return FALSE;
   }
   friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-  if (friendship < 25)
+  if (friendship <= 80)
     ScriptCall(ctx, EventScript_FollowerSkeptical);
-  else if (friendship == 255)
+  else if (friendship <= 170)
+    ScriptCall(ctx, EventScript_FollowerAppraising);
+  else if (friendship < 255)
+    ScriptCall(ctx, EventScript_FollowerHappyWalk);
+  else // Max friendship
     ScriptCall(ctx, EventScript_FollowerLovesYou);
   return FALSE;
 }

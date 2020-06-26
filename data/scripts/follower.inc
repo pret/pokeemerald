@@ -1,5 +1,5 @@
 gText_FollowerLovesYou::
-  .string "{STR_VAR_1} loves you!$"
+  .string "{STR_VAR_1} jumps and grins at you.\pIts expression is welling up with love!$"
 
 gText_FollowerLostInThought::
   .string "{STR_VAR_1} seems lost in thought.$"
@@ -28,6 +28,12 @@ gText_FollowerMetLocation::
 gText_FollowerSkeptical::
   .string "{STR_VAR_1} gives you a skeptical look...\pWhat could it mean?$"
 
+gText_FollowerAppraising::
+  .string "{STR_VAR_1} looks you up and down...\pIt carefully follows\nbehind you.$"
+
+gText_FollowerHappyWalk::
+  .string "{STR_VAR_1} skips happily behind you!$"
+
 .macro playfirstmoncry
 callfunc ScrFunc_playfirstmoncry
 .endm
@@ -55,6 +61,20 @@ EventScript_FollowerFly::
 EventScript_FollowerEnd::
   release
   end
+
+EventScript_FollowerHappyWalk::
+  bufferlivemonspeciesname 0
+  playfirstmoncry
+  msgbox gText_FollowerHappyWalk, MSGBOX_DEFAULT
+  waitmoncry
+  return
+
+EventScript_FollowerAppraising::
+  bufferlivemonspeciesname 0
+  playfirstmoncry
+  msgbox gText_FollowerAppraising, MSGBOX_DEFAULT
+  waitmoncry
+  return
 
 EventScript_FollowerSkeptical::
   bufferlivemonspeciesname 0
