@@ -317,7 +317,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectFinalGambit
 	.4byte BattleScript_EffectTechnoBlast
 	.4byte BattleScript_EffectJudgment
-	.4byte BattleScript_EffectAutonomize
+	.4byte BattleScript_EffectAutotomize
 	.4byte BattleScript_EffectCopycat
 	.4byte BattleScript_EffectDefog
 	.4byte BattleScript_EffectHitEnemyHealAlly
@@ -1039,27 +1039,27 @@ BattleScript_EffectInstruct:
 	setbyte sB_ANIM_TARGETS_HIT, 0x0
 	jumptocalledmove TRUE
 
-BattleScript_EffectAutonomize:
+BattleScript_EffectAutotomize:
 	setstatchanger STAT_SPEED, 2, FALSE
 	attackcanceler
 	attackstring
 	ppreduce
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_AutonomizeWeightLoss
-	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AutonomizeAttackAnim
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_AutotomizeWeightLoss
+	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AutotomizeAttackAnim
 	pause 0x20
-	goto BattleScript_AutonomizePrintString
-BattleScript_AutonomizeAttackAnim::
+	goto BattleScript_AutotomizePrintString
+BattleScript_AutotomizeAttackAnim::
 	attackanimation
 	waitanimation
-BattleScript_AutonomizeDoAnim::
+BattleScript_AutotomizeDoAnim::
 	setgraphicalstatchangevalues
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-BattleScript_AutonomizePrintString::
+BattleScript_AutotomizePrintString::
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
-BattleScript_AutonomizeWeightLoss::
+BattleScript_AutotomizeWeightLoss::
 	jumpifmovehadnoeffect BattleScript_MoveEnd
-	tryautonomize BS_ATTACKER, BattleScript_MoveEnd
+	tryautotomize BS_ATTACKER, BattleScript_MoveEnd
 	printstring STRINGID_BECAMENIMBLE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd

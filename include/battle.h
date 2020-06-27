@@ -107,7 +107,7 @@ struct DisableStruct
     u8 truantSwitchInHack:1;
     u8 mimickedMoves:4;
     u8 rechargeTimer;
-    u8 autonomizeCount;
+    u8 autotomizeCount;
     u8 slowStartTimer;
     u8 embargoTimer;
     u8 magnetRiseTimer;

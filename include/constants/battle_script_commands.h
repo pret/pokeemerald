@@ -115,7 +115,7 @@
 #define VARIOUS_TRY_LAST_RESORT                 52
 #define VARIOUS_ARGUMENT_STATUS_EFFECT          53
 #define VARIOUS_TRY_HIT_SWITCH_TARGET           54
-#define VARIOUS_TRY_AUTONOMIZE                  55
+#define VARIOUS_TRY_AUTOTOMIZE                  55
 #define VARIOUS_TRY_COPYCAT                     56
 #define VARIOUS_ABILITY_POPUP                   57
 #define VARIOUS_DEFOG                           58

@@ -1562,8 +1562,8 @@
 	.4byte \ptr
 	.endm
 	
-	.macro tryautonomize battler:req, ptr:req
-	various \battler, VARIOUS_TRY_AUTONOMIZE
+	.macro tryautotomize battler:req, ptr:req
+	various \battler, VARIOUS_TRY_AUTOTOMIZE
 	.4byte \ptr
 	.endm
 	

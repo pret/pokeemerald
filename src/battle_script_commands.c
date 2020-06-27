@@ -7684,10 +7684,10 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         }
         return;
-    case VARIOUS_TRY_AUTONOMIZE:
+    case VARIOUS_TRY_AUTOTOMIZE:
         if (GetBattlerWeight(gActiveBattler) > 1)
         {
-            gDisableStructs[gActiveBattler].autonomizeCount++;
+            gDisableStructs[gActiveBattler].autotomizeCount++;
             gBattlescriptCurrInstr += 7;
         }
         else

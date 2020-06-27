@@ -247,7 +247,7 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_PSYCHO_SHIFT, AI_CBM_PsychicShift
 	if_effect EFFECT_DEFOG, AI_CBM_Defog
 	if_effect EFFECT_SYNCHRONOISE, AI_CBM_Synchronoise
-	if_effect EFFECT_AUTONOMIZE, AI_CBM_SpeedUp
+	if_effect EFFECT_AUTOTOMIZE, AI_CBM_SpeedUp
 	if_effect EFFECT_TOXIC_THREAD, AI_CBM_ToxicThread
 	if_effect EFFECT_VENOM_DRENCH, AI_CBM_VenomDrench
 	if_effect EFFECT_DEFENSE_UP_3, AI_CBM_DefenseUp
@@ -3477,7 +3477,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage:
     .2byte EFFECT_BULK_UP
     .2byte EFFECT_CALM_MIND
     .2byte EFFECT_ACUPRESSURE
-    .2byte EFFECT_AUTONOMIZE
+    .2byte EFFECT_AUTOTOMIZE
     .2byte EFFECT_SHIFT_GEAR
     .2byte EFFECT_SHELL_SMASH
     .2byte EFFECT_GROWTH
