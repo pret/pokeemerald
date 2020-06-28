@@ -3802,7 +3802,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             break;
         case ABILITY_ILLUSION:
-            if (gBattleStruct->illusion[battler].on && !gBattleStruct->illusion[battler].broken && IsBattlerAlive(battler) && TARGET_TURN_DAMAGED)
+            if (gBattleStruct->illusion[gBattlerTarget].on && !gBattleStruct->illusion[gBattlerTarget].broken && TARGET_TURN_DAMAGED)
             {
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_IllusionOff;
@@ -6750,7 +6750,16 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
 
 struct Pokemon *GetIllusionMonPtr(u32 battlerId)
 {
-    if (!gBattleStruct->illusion[battlerId].on || gBattleStruct->illusion[battlerId].broken)
+    if (gBattleStruct->illusion[battlerId].broken)
+        return NULL;
+    if (!gBattleStruct->illusion[battlerId].set)
+    {
+        if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+            SetIllusionMon(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
+        else
+            SetIllusionMon(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
+    }
+    if (!gBattleStruct->illusion[battlerId].on)
         return NULL;
 
     return gBattleStruct->illusion[battlerId].mon;
@@ -6758,9 +6767,7 @@ struct Pokemon *GetIllusionMonPtr(u32 battlerId)
 
 void ClearIllusionMon(u32 battlerId)
 {
-    gBattleStruct->illusion[battlerId].on = 0;
-    gBattleStruct->illusion[battlerId].mon = NULL;
-    gBattleStruct->illusion[battlerId].broken = 1;
+    memset(&gBattleStruct->illusion[battlerId], 0, sizeof(gBattleStruct->illusion[battlerId]));
 }
 
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
@@ -6768,6 +6775,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
     struct Pokemon *party, *partnerMon;
     s32 i, id;
 
+    gBattleStruct->illusion[battlerId].set = 1;
     if (GetMonAbility(mon) != ABILITY_ILLUSION)
         return FALSE;
 
@@ -6784,7 +6792,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
     // Find last alive non-egg pokemon.
     for (i = PARTY_SIZE - 1; i >= 0; i--)
     {
-        id = GetPartyIdFromBattlePartyId(i);
+        id = i;
         if (GetMonData(&party[id], MON_DATA_SANITY_HAS_SPECIES)
             && GetMonData(&party[id], MON_DATA_HP)
             && &party[id] != mon

@@ -4946,6 +4946,7 @@ BattleScript_FaintedMonTryChooseAnother:
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonChooseAnother
 	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, 0x1, BattleScript_FaintedMonChooseAnother
 	jumpifcantswitch BS_PLAYER1, BattleScript_FaintedMonChooseAnother
+	setbyte sILLUSION_NICK_HACK, 1
 	printstring STRINGID_ENEMYABOUTTOSWITCHPKMN
 	setbyte gBattleCommunication, 0x0
 	yesnobox

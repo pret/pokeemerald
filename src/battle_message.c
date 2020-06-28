@@ -19,6 +19,7 @@
 #include "text.h"
 #include "trainer_hill.h"
 #include "window.h"
+#include "constants/abilities.h"
 #include "constants/battle_string_ids.h"
 #include "constants/frontier_util.h"
 #include "constants/items.h"
@@ -1529,7 +1530,7 @@ const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");
 const u8 gText_CongratsPkmnEvolved[] = _("Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{WAIT_SE}\p");
 const u8 gText_PkmnStoppedEvolving[] = _("Huh? {STR_VAR_1}\nstopped evolving!\p");
 const u8 gText_EllipsisQuestionMark[] = _("……?\p");
-const u8 gText_WhatWillPkmnDo[] = _("What will\n{B_ACTIVE_NAME_WITH_PREFIX} do?");
+const u8 gText_WhatWillPkmnDo[] = _("What will\n{B_ACTIVE_NAME2} do?");
 const u8 gText_WhatWillPkmnDo2[] = _("What will\n{B_PLAYER_NAME} do?");
 const u8 gText_WhatWillWallyDo[] = _("What will\nWALLY do?");
 const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
@@ -2919,6 +2920,18 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 GetBattlerNick(gBattlerTarget, text);
                 toCpy = text;
                 break;
+            case B_TXT_ACTIVE_NAME: // active name
+                GetBattlerNick(gActiveBattler, text);
+                toCpy = text;
+                break;
+            case B_TXT_ACTIVE_NAME2: // active battlerId name with prefix, no illusion
+                if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, text);
+                else
+                    GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_NICKNAME, text);
+                StringGetEnd10(text);
+                toCpy = text;
+                break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect battlerId name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gEffectBattler)
                 break;
@@ -3234,6 +3247,37 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     return dstID;
 }
 
+static void IllusionNickHack(u32 battlerId, u32 partyId, u8 *dst)
+{
+    s32 id, i;
+    // we know it's gEnemyParty
+    struct Pokemon *mon = &gEnemyParty[partyId], *partnerMon;
+
+    if (GetMonAbility(mon) == ABILITY_ILLUSION)
+    {
+        if (IsBattlerAlive(BATTLE_PARTNER(battlerId)))
+            partnerMon = &gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]];
+        else
+            partnerMon = mon;
+
+        // Find last alive non-egg pokemon.
+        for (i = PARTY_SIZE - 1; i >= 0; i--)
+        {
+            id = i;
+            if (GetMonData(&gEnemyParty[id], MON_DATA_SANITY_HAS_SPECIES)
+                && GetMonData(&gEnemyParty[id], MON_DATA_HP)
+                && &gEnemyParty[id] != mon
+                && &gEnemyParty[id] != partnerMon)
+            {
+                GetMonData(&gEnemyParty[id], MON_DATA_NICKNAME, dst);
+                return;
+            }
+        }
+    }
+
+    GetMonData(mon, MON_DATA_NICKNAME, dst);
+}
+
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 {
     u32 srcID = 1;
@@ -3305,6 +3349,12 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             if (src[srcID + 2] == gBattlerPartyIndexes[src[srcID + 1]])
             {
                 GetBattlerNick(src[srcID + 1], dst);
+            }
+            else if (gBattleScripting.illusionNickHack) // for STRINGID_ENEMYABOUTTOSWITCHPKMN
+            {
+                gBattleScripting.illusionNickHack = 0;
+                IllusionNickHack(src[srcID + 1], src[srcID + 2], dst);
+                StringGetEnd10(dst);
             }
             else
             {

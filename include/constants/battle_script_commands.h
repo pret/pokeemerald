@@ -34,6 +34,7 @@
 #define sSAVED_MOVE_EFFECT gBattleScripting + 0x2C
 #define sMOVE_EFFECT gBattleScripting + 0x2E
 #define sMULTIHIT_EFFECT gBattleScripting + 0x30
+#define sILLUSION_NICK_HACK gBattleScripting + 0x32
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 

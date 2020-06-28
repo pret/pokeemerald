@@ -429,9 +429,10 @@ struct MegaEvolutionData
 
 struct Illusion
 {
-    u8 on:1;
-    u8 broken:1;
-    u8 partyId:3;
+    u8 on;
+    u8 set;
+    u8 broken;
+    u8 partyId;
     struct Pokemon *mon;
 };
 
@@ -616,6 +617,7 @@ struct BattleScripting
     u16 savedMoveEffect; // For moves hitting multiple targets.
     u16 moveEffect;
     u16 multihitMoveEffect;
+    u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
 };
 
 // rom_80A5C6C

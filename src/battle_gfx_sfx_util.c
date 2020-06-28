@@ -411,7 +411,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
     }
 
     if (tableId == B_ANIM_ILLUSION_OFF)
-        ClearIllusionMon(activeBattler);
+        gBattleStruct->illusion[activeBattler].broken = 1;
 
     gBattleAnimAttacker = atkBattler;
     gBattleAnimTarget = defBattler;
@@ -1158,11 +1158,6 @@ void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute)
     gBattleMonForms[battlerId] = 0;
     if (!dontClearSubstitute)
         ClearBehindSubstituteBit(battlerId);
-
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        SetIllusionMon(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
-    else
-        SetIllusionMon(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
 }
 
 void AllocateMonSpritesGfx(void)

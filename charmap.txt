@@ -407,6 +407,8 @@ B_ATK_TEAM2 = FD 38
 B_DEF_NAME = FD 39
 B_DEF_TEAM1 = FD 3A
 B_DEF_TEAM2 = FD 3B
+B_ACTIVE_NAME = FD 3C
+B_ACTIVE_NAME2 = FD 3D @ no Illusion check
 
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00
