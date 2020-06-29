@@ -4197,22 +4197,94 @@ enum
 };
 
 // second argument is 1/X of current hp compared to max hp
-static bool32 HasEnoughHpToEatBerry(u8 battlerId, u32 hpFraction)
+static bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
 {
     if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / hpFraction)
     {
         return TRUE;
     }
-    else if (hpFraction <= 4 && GetBattlerAbility(battlerId) == ABILITY_GLUTTONY
+    else if (hpFraction <= 4 && GetBattlerAbility(battlerId) == ABILITY_GLUTTONY && ItemId_GetPocket(itemId) == POCKET_BERRIES
              && gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2)
     {
         RecordAbilityBattle(battlerId, ABILITY_GLUTTONY);
         return TRUE;
     }
-    else
+
+    return FALSE;
+}
+
+static u8 HealConfuseBerry(u32 battlerId, u32 itemId, u8 flavorId)
+{
+    if (HasEnoughHpToEatBerry(battlerId, 2, itemId))
     {
-        return FALSE;
+        PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, flavorId);
+
+        gBattleMoveDamage = gBattleMons[battlerId].maxHP / GetBattlerHoldEffectParam(battlerId);
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        gBattleMoveDamage *= -1;
+        if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, flavorId) < 0)
+            BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
+        else
+            BattleScriptExecute(BattleScript_ItemHealHP_RemoveItemEnd2);
+
+        return ITEM_HP_CHANGE;
     }
+    return 0;
+}
+
+static u8 StatRaiseBerry(u32 battlerId, u32 itemId, u32 statId)
+{
+    if (gBattleMons[battlerId].statStages[statId] < 0xC && HasEnoughHpToEatBerry(battlerId, GetBattlerHoldEffectParam(battlerId), itemId))
+    {
+        PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+        PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
+
+        gEffectBattler = battlerId;
+        SET_STATCHANGER(statId, 1, FALSE);
+        gBattleScripting.animArg1 = 0xE + statId;
+        gBattleScripting.animArg2 = 0;
+        BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
+        return ITEM_STATS_CHANGE;
+    }
+    return 0;
+}
+
+static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId)
+{
+    s32 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (gBattleMons[battlerId].statStages[STAT_ATK + i] < 0xC)
+            break;
+    }
+    if (i != 5 && HasEnoughHpToEatBerry(battlerId, GetBattlerHoldEffectParam(battlerId), itemId))
+    {
+        do
+        {
+            i = Random() % 5;
+        } while (gBattleMons[battlerId].statStages[STAT_ATK + i] == 0xC);
+
+        PREPARE_STAT_BUFFER(gBattleTextBuff1, i + 1);
+
+        gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
+        gBattleTextBuff2[1] = B_BUFF_STRING;
+        gBattleTextBuff2[2] = STRINGID_STATSHARPLY;
+        gBattleTextBuff2[3] = STRINGID_STATSHARPLY >> 8;
+        gBattleTextBuff2[4] = B_BUFF_STRING;
+        gBattleTextBuff2[5] = STRINGID_STATROSE;
+        gBattleTextBuff2[6] = STRINGID_STATROSE >> 8;
+        gBattleTextBuff2[7] = EOS;
+
+        gEffectBattler = battlerId;
+        SET_STATCHANGER(i + 1, 2, FALSE);
+        gBattleScripting.animArg1 = 0x21 + i + 6;
+        gBattleScripting.animArg2 = 0;
+        BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
+        return ITEM_STATS_CHANGE;
+    }
+    return 0;
 }
 
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
@@ -4221,12 +4293,11 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
     u8 effect = ITEM_NO_EFFECT;
     u8 changedPP = 0;
     u8 battlerHoldEffect, atkHoldEffect;
-    u8 battlerHoldEffectParam, atkHoldEffectParam;
+    u8 atkHoldEffectParam;
     u16 atkItem;
 
     gLastUsedItem = gBattleMons[battlerId].item;
     battlerHoldEffect = GetBattlerHoldEffect(battlerId, TRUE);
-    battlerHoldEffectParam = GetBattlerHoldEffectParam(battlerId);
 
     atkItem = gBattleMons[gBattlerAttacker].item;
     atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
@@ -4260,6 +4331,152 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     BattleScriptExecute(BattleScript_WhiteHerbEnd2);
                 }
                 break;
+            case HOLD_EFFECT_CONFUSE_SPICY:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_SPICY);
+                break;
+            case HOLD_EFFECT_CONFUSE_DRY:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_DRY);
+                break;
+            case HOLD_EFFECT_CONFUSE_SWEET:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_SWEET);
+                break;
+            case HOLD_EFFECT_CONFUSE_BITTER:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_BITTER);
+                break;
+            case HOLD_EFFECT_CONFUSE_SOUR:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_SOUR);
+                break;
+            case HOLD_EFFECT_ATTACK_UP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_ATK);
+                break;
+            case HOLD_EFFECT_DEFENSE_UP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_DEF);
+                break;
+            case HOLD_EFFECT_SPEED_UP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_SPEED);
+                break;
+            case HOLD_EFFECT_SP_ATTACK_UP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_SPATK);
+                break;
+            case HOLD_EFFECT_SP_DEFENSE_UP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_SPDEF);
+                break;
+            case HOLD_EFFECT_CRITICAL_UP:
+                if (B_BERRIES_INSTANT >= GEN_4 && !(gBattleMons[battlerId].status2 & STATUS2_FOCUS_ENERGY) && HasEnoughHpToEatBerry(battlerId, GetBattlerHoldEffectParam(battlerId), gLastUsedItem))
+                {
+                    gBattleMons[battlerId].status2 |= STATUS2_FOCUS_ENERGY;
+                    BattleScriptExecute(BattleScript_BerryFocusEnergyEnd2);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_RANDOM_STAT_UP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = RandomStatRaiseBerry(battlerId, gLastUsedItem);
+                break;
+            case HOLD_EFFECT_CURE_PAR:
+                if (B_BERRIES_INSTANT >= GEN_4 && gBattleMons[battlerId].status1 & STATUS1_PARALYSIS)
+                {
+                    gBattleMons[battlerId].status1 &= ~(STATUS1_PARALYSIS);
+                    BattleScriptExecute(BattleScript_BerryCurePrlzEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
+                break;
+            case HOLD_EFFECT_CURE_PSN:
+                if (B_BERRIES_INSTANT >= GEN_4 && gBattleMons[battlerId].status1 & STATUS1_PSN_ANY)
+                {
+                    gBattleMons[battlerId].status1 &= ~(STATUS1_PSN_ANY | STATUS1_TOXIC_COUNTER);
+                    BattleScriptExecute(BattleScript_BerryCurePsnEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
+                break;
+            case HOLD_EFFECT_CURE_BRN:
+                if (B_BERRIES_INSTANT >= GEN_4 && gBattleMons[battlerId].status1 & STATUS1_BURN)
+                {
+                    gBattleMons[battlerId].status1 &= ~(STATUS1_BURN);
+                    BattleScriptExecute(BattleScript_BerryCureBrnEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
+                break;
+            case HOLD_EFFECT_CURE_FRZ:
+                if (B_BERRIES_INSTANT >= GEN_4 && gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+                {
+                    gBattleMons[battlerId].status1 &= ~(STATUS1_FREEZE);
+                    BattleScriptExecute(BattleScript_BerryCureFrzEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
+                break;
+            case HOLD_EFFECT_CURE_SLP:
+                if (B_BERRIES_INSTANT >= GEN_4 && gBattleMons[battlerId].status1 & STATUS1_SLEEP)
+                {
+                    gBattleMons[battlerId].status1 &= ~(STATUS1_SLEEP);
+                    gBattleMons[battlerId].status2 &= ~(STATUS2_NIGHTMARE);
+                    BattleScriptExecute(BattleScript_BerryCureSlpEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
+                break;
+            case HOLD_EFFECT_CURE_STATUS:
+                if (B_BERRIES_INSTANT >= GEN_4 && gBattleMons[battlerId].status1 & STATUS1_ANY || gBattleMons[battlerId].status2 & STATUS2_CONFUSION)
+                {
+                    i = 0;
+                    if (gBattleMons[battlerId].status1 & STATUS1_PSN_ANY)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_PoisonJpn);
+                        i++;
+                    }
+                    if (gBattleMons[battlerId].status1 & STATUS1_SLEEP)
+                    {
+                        gBattleMons[battlerId].status2 &= ~(STATUS2_NIGHTMARE);
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_SleepJpn);
+                        i++;
+                    }
+                    if (gBattleMons[battlerId].status1 & STATUS1_PARALYSIS)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_ParalysisJpn);
+                        i++;
+                    }
+                    if (gBattleMons[battlerId].status1 & STATUS1_BURN)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
+                        i++;
+                    }
+                    if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
+                        i++;
+                    }
+                    if (gBattleMons[battlerId].status2 & STATUS2_CONFUSION)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
+                        i++;
+                    }
+                    if (!(i > 1))
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                    else
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    gBattleMons[battlerId].status1 = 0;
+                    gBattleMons[battlerId].status2 &= ~(STATUS2_CONFUSION);
+                    BattleScriptExecute(BattleScript_BerryCureChosenStatusEnd2);
+                    effect = ITEM_STATUS_CHANGE;
+                }
+                break;
+            case HOLD_EFFECT_RESTORE_HP:
+                if (B_BERRIES_INSTANT >= GEN_4 && HasEnoughHpToEatBerry(battlerId, 2, gLastUsedItem))
+                {
+                    gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) * -1;
+                    BattleScriptExecute(BattleScript_ItemHealHP_RemoveItemEnd2);
+                    effect = ITEM_HP_CHANGE;
+                }
+                break;
             case HOLD_EFFECT_AIR_BALLOON:
                 effect = ITEM_EFFECT_OTHER;
                 gBattleScripting.battler = battlerId;
@@ -4267,8 +4484,23 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 RecordItemEffectBattle(battlerId, HOLD_EFFECT_AIR_BALLOON);
                 break;
             }
+
             if (effect)
+            {
                 gSpecialStatuses[battlerId].switchInItemDone = 1;
+                gActiveBattler = gBattlerAttacker = gPotentialItemEffectBattler = gBattleScripting.battler = battlerId;
+                switch (effect)
+                {
+                case ITEM_STATUS_CHANGE:
+                    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battlerId].status1);
+                    MarkBattlerForControllerExec(gActiveBattler);
+                    break;
+                case ITEM_PP_CHANGE:
+                    if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED) && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[i]))
+                        gBattleMons[battlerId].pp[i] = changedPP;
+                    break;
+                }
+            }
         }
         break;
     case 1:
@@ -4277,14 +4509,11 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_RESTORE_HP:
-                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
+                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2, gLastUsedItem))
                 {
-                    gBattleMoveDamage = battlerHoldEffectParam;
-                    if (gBattleMons[battlerId].hp + battlerHoldEffectParam > gBattleMons[battlerId].maxHP)
-                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
-                    gBattleMoveDamage *= -1;
-                    BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
-                    effect = 4;
+                    gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) *-1;
+                    BattleScriptExecute(BattleScript_ItemHealHP_RemoveItemEnd2);
+                    effect = ITEM_HP_CHANGE;
                 }
                 break;
             case HOLD_EFFECT_RESTORE_PP:
@@ -4309,10 +4538,10 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     if (i != MAX_MON_MOVES)
                     {
                         u8 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
-                        if (changedPP + battlerHoldEffectParam > maxPP)
+                        if (changedPP + GetBattlerHoldEffectParam(battlerId) > maxPP)
                             changedPP = maxPP;
                         else
-                            changedPP = changedPP + battlerHoldEffectParam;
+                            changedPP = changedPP + GetBattlerHoldEffectParam(battlerId);
 
                         PREPARE_MOVE_BUFFER(gBattleTextBuff1, move);
 
@@ -4368,166 +4597,48 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     RecordItemEffectBattle(battlerId, battlerHoldEffect);
                 }
                 break;
-            // nice copy/paste there gamefreak, making a function for confuse berries was too much eh?
             case HOLD_EFFECT_CONFUSE_SPICY:
-                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
-                {
-                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SPICY);
-
-                    gBattleMoveDamage = gBattleMons[battlerId].maxHP / battlerHoldEffectParam;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
-                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
-                    gBattleMoveDamage *= -1;
-                    if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, FLAVOR_SPICY) < 0)
-                        BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
-                    else
-                        BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_SPICY);
                 break;
             case HOLD_EFFECT_CONFUSE_DRY:
-                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
-                {
-                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_DRY);
-
-                    gBattleMoveDamage = gBattleMons[battlerId].maxHP / battlerHoldEffectParam;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
-                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
-                    gBattleMoveDamage *= -1;
-                    if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, FLAVOR_DRY) < 0)
-                        BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
-                    else
-                        BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_DRY);
                 break;
             case HOLD_EFFECT_CONFUSE_SWEET:
-                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
-                {
-                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SWEET);
-
-                    gBattleMoveDamage = gBattleMons[battlerId].maxHP / battlerHoldEffectParam;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
-                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
-                    gBattleMoveDamage *= -1;
-                    if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, FLAVOR_SWEET) < 0)
-                        BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
-                    else
-                        BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_SWEET);
                 break;
             case HOLD_EFFECT_CONFUSE_BITTER:
-                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
-                {
-                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_BITTER);
-
-                    gBattleMoveDamage = gBattleMons[battlerId].maxHP / battlerHoldEffectParam;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
-                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
-                    gBattleMoveDamage *= -1;
-                    if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, FLAVOR_BITTER) < 0)
-                        BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
-                    else
-                        BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_BITTER);
                 break;
             case HOLD_EFFECT_CONFUSE_SOUR:
-                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2))
-                {
-                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SOUR);
-
-                    gBattleMoveDamage = gBattleMons[battlerId].maxHP / battlerHoldEffectParam;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)
-                        gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;
-                    gBattleMoveDamage *= -1;
-                    if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, FLAVOR_SOUR) < 0)
-                        BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
-                    else
-                        BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = HealConfuseBerry(battlerId, gLastUsedItem, FLAVOR_SOUR);
                 break;
-            // copy/paste again, smh
             case HOLD_EFFECT_ATTACK_UP:
-                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_ATK] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
-                {
-                    PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
-                    PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
-
-                    gEffectBattler = battlerId;
-                    SET_STATCHANGER(STAT_ATK, 1, FALSE);
-                    gBattleScripting.animArg1 = 0xE + STAT_ATK;
-                    gBattleScripting.animArg2 = 0;
-                    BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
-                    effect = ITEM_STATS_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_ATK);
                 break;
             case HOLD_EFFECT_DEFENSE_UP:
-                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_DEF] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
-                {
-                    PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_DEF);
-
-                    gEffectBattler = battlerId;
-                    SET_STATCHANGER(STAT_DEF, 1, FALSE);
-                    gBattleScripting.animArg1 = 0xE + STAT_DEF;
-                    gBattleScripting.animArg2 = 0;
-                    BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
-                    effect = ITEM_STATS_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_DEF);
                 break;
             case HOLD_EFFECT_SPEED_UP:
-                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_SPEED] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
-                {
-                    PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPEED);
-
-                    gEffectBattler = battlerId;
-                    SET_STATCHANGER(STAT_SPEED, 1, FALSE);
-                    gBattleScripting.animArg1 = 0xE + STAT_SPEED;
-                    gBattleScripting.animArg2 = 0;
-                    BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
-                    effect = ITEM_STATS_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_SPEED);
                 break;
             case HOLD_EFFECT_SP_ATTACK_UP:
-                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_SPATK] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
-                {
-                    PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPATK);
-
-                    gEffectBattler = battlerId;
-                    SET_STATCHANGER(STAT_SPATK, 1, FALSE);
-                    gBattleScripting.animArg1 = 0xE + STAT_SPATK;
-                    gBattleScripting.animArg2 = 0;
-                    BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
-                    effect = ITEM_STATS_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_SPATK);
                 break;
             case HOLD_EFFECT_SP_DEFENSE_UP:
-                if (!moveTurn && gBattleMons[battlerId].statStages[STAT_SPDEF] < 0xC && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
-                {
-                    PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPDEF);
-
-                    gEffectBattler = battlerId;
-                    SET_STATCHANGER(STAT_SPDEF, 1, FALSE);
-                    gBattleScripting.animArg1 = 0xE + STAT_SPDEF;
-                    gBattleScripting.animArg2 = 0;
-                    BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
-                    effect = ITEM_STATS_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = StatRaiseBerry(battlerId, gLastUsedItem, STAT_SPDEF);
                 break;
             case HOLD_EFFECT_CRITICAL_UP:
-                if (!moveTurn && !(gBattleMons[battlerId].status2 & STATUS2_FOCUS_ENERGY) && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
+                if (!moveTurn && !(gBattleMons[battlerId].status2 & STATUS2_FOCUS_ENERGY) && HasEnoughHpToEatBerry(battlerId, GetBattlerHoldEffectParam(battlerId), gLastUsedItem))
                 {
                     gBattleMons[battlerId].status2 |= STATUS2_FOCUS_ENERGY;
                     BattleScriptExecute(BattleScript_BerryFocusEnergyEnd2);
@@ -4536,38 +4647,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 break;
             case HOLD_EFFECT_RANDOM_STAT_UP:
                 if (!moveTurn)
-                {
-                    for (i = 0; i < 5; i++)
-                    {
-                        if (gBattleMons[battlerId].statStages[STAT_ATK + i] < 0xC)
-                            break;
-                    }
-                    if (i != 5 && HasEnoughHpToEatBerry(battlerId, battlerHoldEffectParam))
-                    {
-                        do
-                        {
-                            i = Random() % 5;
-                        } while (gBattleMons[battlerId].statStages[STAT_ATK + i] == 0xC);
-
-                        PREPARE_STAT_BUFFER(gBattleTextBuff1, i + 1);
-
-                        gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
-                        gBattleTextBuff2[1] = B_BUFF_STRING;
-                        gBattleTextBuff2[2] = STRINGID_STATSHARPLY;
-                        gBattleTextBuff2[3] = STRINGID_STATSHARPLY >> 8;
-                        gBattleTextBuff2[4] = B_BUFF_STRING;
-                        gBattleTextBuff2[5] = STRINGID_STATROSE;
-                        gBattleTextBuff2[6] = STRINGID_STATROSE >> 8;
-                        gBattleTextBuff2[7] = EOS;
-
-                        gEffectBattler = battlerId;
-                        SET_STATCHANGER(i + 1, 2, FALSE);
-                        gBattleScripting.animArg1 = 0x21 + i + 6;
-                        gBattleScripting.animArg2 = 0;
-                        BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
-                        effect = ITEM_STATS_CHANGE;
-                    }
-                }
+                    effect = RandomStatRaiseBerry(battlerId, gLastUsedItem);
                 break;
             case HOLD_EFFECT_CURE_PAR:
                 if (gBattleMons[battlerId].status1 & STATUS1_PARALYSIS)
@@ -4677,9 +4757,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 
             if (effect)
             {
-                gBattleScripting.battler = battlerId;
-                gPotentialItemEffectBattler = battlerId;
-                gActiveBattler = gBattlerAttacker = battlerId;
+                gActiveBattler = gBattlerAttacker = gPotentialItemEffectBattler = gBattleScripting.battler = battlerId;
                 switch (effect)
                 {
                 case ITEM_STATUS_CHANGE:
@@ -4699,9 +4777,17 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         {
             gLastUsedItem = gBattleMons[battlerId].item;
             battlerHoldEffect = GetBattlerHoldEffect(battlerId, TRUE);
-            battlerHoldEffectParam = GetBattlerHoldEffectParam(battlerId);
             switch (battlerHoldEffect)
             {
+            case HOLD_EFFECT_RESTORE_HP:
+                if (B_HP_BERRIES >= GEN_4 && HasEnoughHpToEatBerry(battlerId, 2, gLastUsedItem))
+                {
+                    gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) *-1;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
+                    effect = ITEM_HP_CHANGE;
+                }
+                break;
             case HOLD_EFFECT_CURE_PAR:
                 if (gBattleMons[battlerId].status1 & STATUS1_PARALYSIS)
                 {
@@ -4826,10 +4912,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 
             if (effect)
             {
-                gPotentialItemEffectBattler = gBattleScripting.battler = battlerId;
-                gActiveBattler = battlerId;
-                BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
-                MarkBattlerForControllerExec(gActiveBattler);
+                gActiveBattler = gPotentialItemEffectBattler = gBattleScripting.battler = battlerId;
+                if (effect == ITEM_STATUS_CHANGE)
+                {
+                    BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                    MarkBattlerForControllerExec(gActiveBattler);
+                }
                 break;
             }
         }

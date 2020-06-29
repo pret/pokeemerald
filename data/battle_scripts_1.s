@@ -7334,8 +7334,17 @@ BattleScript_WhiteHerbRet::
 	waitmessage 0x40
 	removeitem BS_SCRIPTING
 	return
-
-BattleScript_ItemHealHP_RemoveItem::
+	
+BattleScript_ItemHealHP_RemoveItemRet::
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
+	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
+	waitmessage 0x40
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
+	removeitem BS_SCRIPTING
+	return
+BattleScript_ItemHealHP_RemoveItemEnd2::
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage 0x40
