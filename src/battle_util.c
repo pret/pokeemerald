@@ -4287,6 +4287,29 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId)
     return 0;
 }
 
+static u8 ItemHealHp(u32 battlerId, u32 itemId, bool32 end2, bool32 percentHeal)
+{
+    if (HasEnoughHpToEatBerry(battlerId, 2, gLastUsedItem))
+    {
+        if (percentHeal)
+            gBattleMoveDamage = (gBattleMons[battlerId].maxHP * GetBattlerHoldEffectParam(battlerId) / 100) * -1;
+        else
+            gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) * -1;
+
+        if (end2)
+        {
+            BattleScriptExecute(BattleScript_ItemHealHP_RemoveItemEnd2);
+        }
+        else
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
+        }
+        return ITEM_HP_CHANGE;
+    }
+    return 0;
+}
+
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 {
     int i = 0, moveType;
@@ -4470,12 +4493,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RESTORE_HP:
-                if (B_BERRIES_INSTANT >= GEN_4 && HasEnoughHpToEatBerry(battlerId, 2, gLastUsedItem))
-                {
-                    gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) * -1;
-                    BattleScriptExecute(BattleScript_ItemHealHP_RemoveItemEnd2);
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = ItemHealHp(battlerId, gLastUsedItem, TRUE, FALSE);
+                break;
+            case HOLD_EFFECT_RESTORE_PCT_HP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = ItemHealHp(battlerId, gLastUsedItem, TRUE, TRUE);
                 break;
             case HOLD_EFFECT_AIR_BALLOON:
                 effect = ITEM_EFFECT_OTHER;
@@ -4509,12 +4532,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_RESTORE_HP:
-                if (!moveTurn && HasEnoughHpToEatBerry(battlerId, 2, gLastUsedItem))
-                {
-                    gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) *-1;
-                    BattleScriptExecute(BattleScript_ItemHealHP_RemoveItemEnd2);
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (!moveTurn)
+                    effect = ItemHealHp(battlerId, gLastUsedItem, TRUE, FALSE);
+                break;
+            case HOLD_EFFECT_RESTORE_PCT_HP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = ItemHealHp(battlerId, gLastUsedItem, TRUE, TRUE);
                 break;
             case HOLD_EFFECT_RESTORE_PP:
                 if (!moveTurn)
@@ -4780,13 +4803,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             switch (battlerHoldEffect)
             {
             case HOLD_EFFECT_RESTORE_HP:
-                if (B_HP_BERRIES >= GEN_4 && HasEnoughHpToEatBerry(battlerId, 2, gLastUsedItem))
-                {
-                    gBattleMoveDamage = GetBattlerHoldEffectParam(battlerId) *-1;
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
-                    effect = ITEM_HP_CHANGE;
-                }
+                if (B_HP_BERRIES >= GEN_4)
+                    effect = ItemHealHp(battlerId, gLastUsedItem, FALSE, FALSE);
+                break;
+            case HOLD_EFFECT_RESTORE_PCT_HP:
+                if (B_BERRIES_INSTANT >= GEN_4)
+                    effect = ItemHealHp(battlerId, gLastUsedItem, FALSE, TRUE);
                 break;
             case HOLD_EFFECT_CURE_PAR:
                 if (gBattleMons[battlerId].status1 & STATUS1_PARALYSIS)
