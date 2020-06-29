@@ -52,8 +52,8 @@ gFieldEffectScriptPointers:: @ 82DB9D4
     .4byte gFieldEffectScript_UseDive                   @ FLDEFF_USE_DIVE
     .4byte gFieldEffectScript_Pokeball                  @ FLDEFF_POKEBALL
     .4byte gFieldEffectScript_HeartIcon                 @ FLDEFF_HEART_ICON
-    .4byte gFieldEffectScript_Unknown47                 @ FLDEFF_NOP_47
-    .4byte gFieldEffectScript_Unknown48                 @ FLDEFF_NOP_48
+    .4byte gFieldEffectScript_Nop47                     @ FLDEFF_NOP_47
+    .4byte gFieldEffectScript_Nop48                     @ FLDEFF_NOP_48
     .4byte gFieldEffectScript_AshPuff                   @ FLDEFF_ASH_PUFF
     .4byte gFieldEffectScript_AshLaunch                 @ FLDEFF_ASH_LAUNCH
     .4byte gFieldEffectScript_SweetScent                @ FLDEFF_SWEET_SCENT
@@ -263,12 +263,12 @@ gFieldEffectScript_HeartIcon:: @ 82DBC56
     field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_HeartIcon
     field_eff_end
 
-gFieldEffectScript_Unknown47:: @ 82DBC60
-    field_eff_callnative FldEff_NopA6FC
+gFieldEffectScript_Nop47:: @ 82DBC60
+    field_eff_callnative FldEff_Nop47
     field_eff_end
 
-gFieldEffectScript_Unknown48:: @ 82DBC66
-    field_eff_callnative FldEff_NopA700
+gFieldEffectScript_Nop48:: @ 82DBC66
+    field_eff_callnative FldEff_Nop48
     field_eff_end
 
 gFieldEffectScript_AshPuff:: @ 82DBC6C
@@ -284,7 +284,7 @@ gFieldEffectScript_SweetScent:: @ 82DBC80
     field_eff_end
 
 gFieldEffectScript_SandPillar:: @ 82DBC86
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo9, FldEff_SandPillar
+    field_eff_loadfadedpal_callnative gSpritePalette_SandPillar, FldEff_SandPillar
     field_eff_end
 
 gFieldEffectScript_Bubbles:: @ 82DBC90
@@ -296,15 +296,15 @@ gFieldEffectScript_Sparkle:: @ 82DBC9A
     field_eff_end
 
 gFieldEffectScript_ShowSecretPowerCave:: @ 82DBCA4
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo7, FldEff_SecretPowerCave
+    field_eff_loadfadedpal_callnative gSpritePalette_SecretPower_Cave, FldEff_SecretPowerCave
     field_eff_end
 
 gFieldEffectScript_ShowSecretPowerTree:: @ 82DBCAE
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo8, FldEff_SecretPowerTree
+    field_eff_loadfadedpal_callnative gSpritePalette_SecretPower_Plant, FldEff_SecretPowerTree
     field_eff_end
 
 gFieldEffectScript_ShowSecretPowerShrub:: @ 82DBCB8
-    field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo8, FldEff_SecretPowerShrub
+    field_eff_loadfadedpal_callnative gSpritePalette_SecretPower_Plant, FldEff_SecretPowerShrub
     field_eff_end
 
 gFieldEffectScript_ShowCutGrass:: @ 82DBCC2

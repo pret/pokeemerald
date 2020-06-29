@@ -2360,11 +2360,11 @@ static void Cb_ShowPSS(u8 taskId)
     {
     case 0:
         PlaySE(SE_PC_LOGIN);
-        sub_80F9BCC(0x14, 0, 1);
+        ComputerScreenOpenEffect(20, 0, 1);
         sPSSData->state++;
         break;
     case 1:
-        if (!sub_80F9C1C())
+        if (!IsComputerScreenOpenEffectActive())
             SetPSSCallback(Cb_MainPSS);
         break;
     }
@@ -3781,11 +3781,11 @@ static void Cb_OnCloseBoxPressed(u8 taskId)
         }
         break;
     case 3:
-        sub_80F9BF4(0x14, 0, 1);
+        ComputerScreenCloseEffect(20, 0, 1);
         sPSSData->state++;
         break;
     case 4:
-        if (!sub_80F9C30())
+        if (!IsComputerScreenCloseEffectActive())
         {
             sub_80CABE0();
             gPlayerPartyCount = CalculatePlayerPartyCount();
@@ -3842,11 +3842,11 @@ static void Cb_OnBPressed(u8 taskId)
         }
         break;
     case 3:
-        sub_80F9BF4(0x14, 0, 0);
+        ComputerScreenCloseEffect(20, 0, 0);
         sPSSData->state++;
         break;
     case 4:
-        if (!sub_80F9C30())
+        if (!IsComputerScreenCloseEffectActive())
         {
             sub_80CABE0();
             gPlayerPartyCount = CalculatePlayerPartyCount();

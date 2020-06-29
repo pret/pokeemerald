@@ -799,7 +799,7 @@ void CB2_DoHallOfFamePC(void)
         {
             struct HallofFameTeam *fameTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
             fameTeam->mon[0] = sDummyFameMon;
-            sub_80F9BCC(0, 0, 0);
+            ComputerScreenOpenEffect(0, 0, 0);
             SetVBlankCallback(VBlankCB_HallOfFame);
             gMain.state++;
         }
@@ -809,7 +809,7 @@ void CB2_DoHallOfFamePC(void)
         AnimateSprites();
         BuildOamBuffer();
         UpdatePaletteFade();
-        if (!sub_80F9C1C())
+        if (!IsComputerScreenOpenEffectActive())
             gMain.state++;
         break;
     case 5:
@@ -1023,13 +1023,13 @@ static void Task_HofPC_HandlePaletteOnExit(u8 taskId)
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
     fameTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
     fameTeam->mon[0] = sDummyFameMon;
-    sub_80F9BF4(0, 0, 0);
+    ComputerScreenCloseEffect(0, 0, 0);
     gTasks[taskId].func = Task_HofPC_HandleExit;
 }
 
 static void Task_HofPC_HandleExit(u8 taskId)
 {
-    if (!sub_80F9C30())
+    if (!IsComputerScreenCloseEffectActive())
     {
         u8 i;
 

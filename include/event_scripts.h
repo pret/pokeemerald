@@ -375,7 +375,7 @@ extern const u8 SecretBase_Text_Trainer9Defeated[];
 extern const u8 EventScript_FldEffStrength[];
 extern const u8 EventScript_FailSweetScent[];
 extern const u8 EventScript_FldEffFlash[];
-extern const u8 EventScript_FldEffRockSmash[];
+extern const u8 EventScript_RockSmashFromPartyMenu[];
 
 //player pc
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];

@@ -939,7 +939,7 @@ static bool8 SkipCopyingMetatileFromSavedMap(u16* mapMetatilePtr, u16 mapWidth, 
     else
         mapMetatilePtr += mapWidth;
 
-    if (sub_80FADE4(*mapMetatilePtr & METATILE_ID_MASK, yMode) == 1)
+    if (IsLargeBreakableDecoration(*mapMetatilePtr & METATILE_ID_MASK, yMode) == TRUE)
         return TRUE;
     return FALSE;
 }

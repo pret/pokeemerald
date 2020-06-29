@@ -2229,7 +2229,7 @@ void StartEscapeRopeFieldEffect(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
-    CreateTask(Task_EscapeRopeWarpOut, 0x50);
+    CreateTask(Task_EscapeRopeWarpOut, 80);
 }
 
 static void Task_EscapeRopeWarpOut(u8 taskId)
@@ -2598,8 +2598,8 @@ static void FieldMoveShowMonOutdoorsEffect_Init(struct Task *task)
     task->data[11] = REG_WININ;
     task->data[12] = REG_WINOUT;
     StoreWordInTwoHalfwords(&task->data[13], (u32)gMain.vblankCallback);
-    task->tWinHoriz = WIN_RANGE(240, 241);
-    task->tWinVert = WIN_RANGE(80, 81);
+    task->tWinHoriz = WIN_RANGE(DISPLAY_WIDTH, DISPLAY_WIDTH + 1);
+    task->tWinVert = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
     task->tWinIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
     task->tWinOut = WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR;
     SetGpuReg(REG_OFFSET_WIN0H, task->tWinHoriz);
@@ -2637,15 +2637,15 @@ static void FieldMoveShowMonOutdoorsEffect_CreateBanner(struct Task *task)
     if (horiz < 0)
         horiz = 0;
 
-    if (vertHi < 40)
-        vertHi = 40;
+    if (vertHi < DISPLAY_HEIGHT / 4)
+        vertHi = DISPLAY_HEIGHT / 4;
 
-    if (vertLo > 120)
-        vertLo = 120;
+    if (vertLo > DISPLAY_WIDTH / 2)
+        vertLo = DISPLAY_WIDTH / 2;
 
     task->tWinHoriz = (horiz << 8) | (task->tWinHoriz & 0xff);
     task->tWinVert = (vertHi << 8) | vertLo;
-    if (horiz == 0 && vertHi == 40 && vertLo == 120)
+    if (horiz == 0 && vertHi == DISPLAY_HEIGHT / 4 && vertLo == DISPLAY_WIDTH / 2)
     {
         gSprites[task->tMonSpriteId].callback = SpriteCB_FieldMoveMonSlideOnscreen;
         task->tState++;
@@ -2670,15 +2670,15 @@ static void FieldMoveShowMonOutdoorsEffect_ShrinkBanner(struct Task *task)
     vertHi += 6;
     vertLo -= 6;
 
-    if (vertHi > 80)
-        vertHi = 80;
+    if (vertHi > DISPLAY_HEIGHT / 2)
+        vertHi = DISPLAY_HEIGHT / 2;
 
-    if (vertLo < 81)
-        vertLo = 81;
+    if (vertLo < DISPLAY_HEIGHT / 2 + 1)
+        vertLo = DISPLAY_HEIGHT / 2 + 1;
 
     task->tWinVert = (vertHi << 8) | vertLo;
 
-    if (vertHi == 80 && vertLo == 81)
+    if (vertHi == DISPLAY_HEIGHT / 2 && vertLo == DISPLAY_HEIGHT / 2 + 1)
         task->tState++;
 }
 
@@ -2686,8 +2686,8 @@ static void FieldMoveShowMonOutdoorsEffect_RestoreBg(struct Task *task)
 {
     u16 bg0cnt = (REG_BG0CNT >> 8) << 11;
     CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
-    task->tWinHoriz = 241;
-    task->tWinVert = 161;
+    task->tWinHoriz = DISPLAY_WIDTH + 1;
+    task->tWinVert = DISPLAY_HEIGHT + 1;
     task->tWinIn = task->data[11];
     task->tWinOut = task->data[12];
     task->tState++;
@@ -2787,8 +2787,8 @@ static void FieldMoveShowMonIndoorsEffect_SlideBannerOn(struct Task *task)
 {
     if (SlideIndoorBannerOnscreen(task))
     {
-        SetGpuReg(REG_OFFSET_WIN1H, 0x00f0);
-        SetGpuReg(REG_OFFSET_WIN1V, 0x2878);
+        SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0, DISPLAY_WIDTH));
+        SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(DISPLAY_HEIGHT / 4, DISPLAY_HEIGHT - DISPLAY_HEIGHT / 4));
         gSprites[task->tMonSpriteId].callback = SpriteCB_FieldMoveMonSlideOnscreen;
         task->tState++;
     }
@@ -2807,8 +2807,8 @@ static void FieldMoveShowMonIndoorsEffect_RestoreBg(struct Task *task)
     AnimateIndoorShowMonBg(task);
     task->tBgOffsetIdx = task->tBgHoriz & 7;
     task->tBgOffset = 0;
-    SetGpuReg(REG_OFFSET_WIN1H, 0xffff);
-    SetGpuReg(REG_OFFSET_WIN1V, 0xffff);
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0xFF, 0xFF));
+    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(0xFF, 0xFF));
     task->tState++;
 }
 
@@ -2917,7 +2917,7 @@ static u8 InitFieldMoveMonSprite(u32 species, u32 otId, u32 personality)
     struct Sprite *sprite;
     v0 = (species & 0x80000000) >> 16;
     species &= 0x7fffffff;
-    monSprite = CreateMonSprite_FieldMove(species, otId, personality, 0x140, 0x50, 0);
+    monSprite = CreateMonSprite_FieldMove(species, otId, personality, 320, 80, 0);
     sprite = &gSprites[monSprite];
     sprite->callback = SpriteCallbackDummy;
     sprite->oam.priority = 0;
@@ -2928,9 +2928,9 @@ static u8 InitFieldMoveMonSprite(u32 species, u32 otId, u32 personality)
 
 static void SpriteCB_FieldMoveMonSlideOnscreen(struct Sprite *sprite)
 {
-    if ((sprite->pos1.x -= 20) <= 120)
+    if ((sprite->pos1.x -= 20) <= DISPLAY_WIDTH / 2)
     {
-        sprite->pos1.x = 120;
+        sprite->pos1.x = DISPLAY_WIDTH / 2;
         sprite->sOnscreenTimer = 30;
         sprite->callback = SpriteCB_FieldMoveMonWaitAfterCry;
         if (sprite->data[6])
@@ -2947,21 +2947,15 @@ static void SpriteCB_FieldMoveMonSlideOnscreen(struct Sprite *sprite)
 static void SpriteCB_FieldMoveMonWaitAfterCry(struct Sprite *sprite)
 {
     if ((--sprite->sOnscreenTimer) == 0)
-    {
         sprite->callback = SpriteCB_FieldMoveMonSlideOffscreen;
-    }
 }
 
 static void SpriteCB_FieldMoveMonSlideOffscreen(struct Sprite *sprite)
 {
     if (sprite->pos1.x < -64)
-    {
         sprite->sSlidOffscreen = TRUE;
-    }
     else
-    {
         sprite->pos1.x -= 20;
-    }
 }
 
 #undef tState
@@ -3311,7 +3305,7 @@ static void StartFlyBirdSwoopDown(u8 spriteId)
     struct Sprite *sprite;
     sprite = &gSprites[spriteId];
     sprite->callback = SpriteCB_FlyBirdSwoopDown;
-    sprite->pos1.x = 120;
+    sprite->pos1.x = DISPLAY_WIDTH / 2;
     sprite->pos1.y = 0;
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;

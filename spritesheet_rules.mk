@@ -662,3 +662,18 @@ $(FLDEFFGFXDIR)/small_sparkle.4bpp: %.4bpp: %.png
 
 $(FLDEFFGFXDIR)/unused_grass_3.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/secret_power_cave.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/secret_power_shrub.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/secret_power_tree.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FLDEFFGFXDIR)/sand_pillar.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(FLDEFFGFXDIR)/record_mix_lights.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 1

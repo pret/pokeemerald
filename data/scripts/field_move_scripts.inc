@@ -77,7 +77,7 @@ EventScript_RockSmash:: @ 82907A6
 	goto EventScript_SmashRock
 	end
 
-EventScript_FldEffRockSmash:: @ 82907F0
+EventScript_RockSmashFromPartyMenu:: @ 82907F0
 	lockall
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
@@ -89,10 +89,10 @@ EventScript_SmashRock:: @ 82907FB
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_EndSmash
 	special RockSmashWildEncounter
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_EndSmash
 	waitstate
 	releaseall
