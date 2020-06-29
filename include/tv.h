@@ -35,7 +35,7 @@ void sub_80EDC60(const u16 *words);
 void sub_80EDA80(void);
 void ReceivePokeNewsData(void *src, u32 size, u8 masterIdx);
 void sub_80F0BB8(void);
-void sub_80ED950(bool8 flag);
+void RecordFishingAttemptForTV(bool8 caughtFish);
 void IncrementDailySlotsUses(void);
 void IncrementDailyRouletteUses(void);
 void IncrementDailyWildBattles(void);
