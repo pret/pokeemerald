@@ -44,7 +44,7 @@ static void sub_808115C(u8);
 static void FillPalBufferWhite(void);
 static void Task_ExitDoor(u8);
 static bool32 WaitForWeatherFadeIn(void);
-static void task0A_mpl_807E31C(u8 taskId);
+static void Task_TeleportTileWarpExit(u8 taskId);
 static void Task_WarpAndLoadMap(u8 taskId);
 static void Task_DoDoorWarp(u8 taskId);
 static void Task_EnableScriptAfterMusicFade(u8 taskId);
@@ -297,12 +297,12 @@ void FieldCB_WarpExitFadeFromBlack(void)
     ScriptContext2_Enable();
 }
 
-static void FieldCB_TeleportWarpExit(void)
+static void FieldCB_TeleportTileWarpExit(void)
 {
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
     PlaySE(SE_TK_WARPOUT);
-    CreateTask(task0A_mpl_807E31C, 10);
+    CreateTask(Task_TeleportTileWarpExit, 10);
     ScriptContext2_Enable();
 }
 
@@ -545,14 +545,15 @@ void DoLavaridgeGym1FWarp(void)
     StartLavaridgeGym1FWarp(10);
 }
 
-void DoTeleportWarp(void)
+// Warp from a teleporting tile, e.g. in Aqua Hideout (For the move Teleport see FldEff_TeleportWarpOut)
+void DoTeleportTileWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlaySE(SE_TK_WARPIN);
     CreateTask(Task_WarpAndLoadMap, 10);
-    gFieldCallback = FieldCB_TeleportWarpExit;
+    gFieldCallback = FieldCB_TeleportTileWarpExit;
 }
 
 void DoMossdeepGymWarp(void)
@@ -999,7 +1000,7 @@ void WriteBattlePyramidViewScanlineEffectBuffer(void)
     CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
 }
 
-static void task0A_mpl_807E31C(u8 taskId)
+static void Task_TeleportTileWarpExit(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -1056,7 +1057,7 @@ void sub_80B0244(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_WarpAndLoadMap, 10);
-    gFieldCallback = FieldCB_TeleportWarpExit;
+    gFieldCallback = FieldCB_TeleportTileWarpExit;
 }
 
 void sub_80B0268(void)

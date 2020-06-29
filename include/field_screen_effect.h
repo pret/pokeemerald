@@ -28,7 +28,7 @@ void DoFallWarp(void);
 void DoEscalatorWarp(u8 metatileBehavior);
 void DoLavaridgeGymB1FWarp(void);
 void DoLavaridgeGym1FWarp(void);
-void DoTeleportWarp(void);
+void DoTeleportTileWarp(void);
 void DoMossdeepGymWarp(void);
 void DoPortholeWarp(void);
 void DoCableClubWarp(void);

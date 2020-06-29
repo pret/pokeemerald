@@ -725,7 +725,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
         }
         if (MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) == TRUE)
         {
-            DoTeleportWarp();
+            DoTeleportTileWarp();
             return TRUE;
         }
         if (MetatileBehavior_IsWarpOrBridge(metatileBehavior) == TRUE)
