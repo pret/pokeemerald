@@ -3816,7 +3816,7 @@ static void SpriteCB_DeoxysRockFragment(struct Sprite* sprite)
         sprite->pos1.y += 12;
         break;
     }
-    if ((u16)(sprite->pos1.x + 4) > 248 || sprite->pos1.y < -4 || sprite->pos1.y > 164)
+    if ((u16)(sprite->pos1.x + 4) > DISPLAY_WIDTH + 8 || sprite->pos1.y < -4 || sprite->pos1.y > DISPLAY_HEIGHT + 4)
         DestroySprite(sprite);
 }
 
@@ -3834,7 +3834,7 @@ bool8 FldEff_MoveDeoxysRock(struct Sprite* sprite)
         xPos = (gFieldEffectArguments[3] - xPos) * 16;
         yPos = (gFieldEffectArguments[4] - yPos) * 16;
         ShiftObjectEventCoords(object, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
-        taskId = CreateTask(Task_MoveDeoxysRock, 0x50);
+        taskId = CreateTask(Task_MoveDeoxysRock, 80);
         gTasks[taskId].data[1] = object->spriteId;
         gTasks[taskId].data[2] = gSprites[object->spriteId].pos1.x + xPos;
         gTasks[taskId].data[3] = gSprites[object->spriteId].pos1.y + yPos;

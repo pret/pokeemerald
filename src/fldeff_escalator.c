@@ -17,45 +17,45 @@ static void Task_DrawTeleporterCable(u8 taskId);
 #define LAST_ESCALATOR_STAGE (ESCALATOR_STAGES - 1)
 
 static const u16 sElevatorMetatiles_1F_0[ESCALATOR_STAGES] = {
-    METATILE_ID(PokemonCenter, Elevator1F_Tile0_Frame2),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile0_Frame1),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile0_Frame0)
+    METATILE_PokemonCenter_Elevator1F_Tile0_Frame2,
+    METATILE_PokemonCenter_Elevator1F_Tile0_Frame1,
+    METATILE_PokemonCenter_Elevator1F_Tile0_Frame0
 };
 
 static const u16 sElevatorMetatiles_1F_1[ESCALATOR_STAGES] = {
-    METATILE_ID(PokemonCenter, Elevator1F_Tile1_Frame2),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile1_Frame1),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile1_Frame0)
+    METATILE_PokemonCenter_Elevator1F_Tile1_Frame2,
+    METATILE_PokemonCenter_Elevator1F_Tile1_Frame1,
+    METATILE_PokemonCenter_Elevator1F_Tile1_Frame0
 };
 
 static const u16 sElevatorMetatiles_1F_2[ESCALATOR_STAGES] = {
-    METATILE_ID(PokemonCenter, Elevator1F_Tile2_Frame2),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile2_Frame1),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile2_Frame0)
+    METATILE_PokemonCenter_Elevator1F_Tile2_Frame2,
+    METATILE_PokemonCenter_Elevator1F_Tile2_Frame1,
+    METATILE_PokemonCenter_Elevator1F_Tile2_Frame0
 };
 
 static const u16 sElevatorMetatiles_1F_3[ESCALATOR_STAGES] = {
-    METATILE_ID(PokemonCenter, Elevator1F_Tile3_Frame2),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile3_Frame1),
-    METATILE_ID(PokemonCenter, Elevator1F_Tile3_Frame0)
+    METATILE_PokemonCenter_Elevator1F_Tile3_Frame2,
+    METATILE_PokemonCenter_Elevator1F_Tile3_Frame1,
+    METATILE_PokemonCenter_Elevator1F_Tile3_Frame0
 };
 
 static const u16 sElevatorMetatiles_2F_0[ESCALATOR_STAGES] = {
-    METATILE_ID(PokemonCenter, Elevator2F_Tile0_Frame0),
-    METATILE_ID(PokemonCenter, Elevator2F_Tile0_Frame1),
-    METATILE_ID(PokemonCenter, Elevator2F_Tile0_Frame2)
+    METATILE_PokemonCenter_Elevator2F_Tile0_Frame0,
+    METATILE_PokemonCenter_Elevator2F_Tile0_Frame1,
+    METATILE_PokemonCenter_Elevator2F_Tile0_Frame2
 };
 
 static const u16 sElevatorMetatiles_2F_1[ESCALATOR_STAGES] = {
-    METATILE_ID(PokemonCenter, Elevator2F_Tile1_Frame0),
-    METATILE_ID(PokemonCenter, Elevator2F_Tile1_Frame1),
-    METATILE_ID(PokemonCenter, Elevator2F_Tile1_Frame2)
+    METATILE_PokemonCenter_Elevator2F_Tile1_Frame0,
+    METATILE_PokemonCenter_Elevator2F_Tile1_Frame1,
+    METATILE_PokemonCenter_Elevator2F_Tile1_Frame2
 };
 
 static const u16 sElevatorMetatiles_2F_2[ESCALATOR_STAGES] = {
-    METATILE_ID(PokemonCenter, Elevator2F_Tile2_Frame0),
-    METATILE_ID(PokemonCenter, Elevator2F_Tile2_Frame1),
-    METATILE_ID(PokemonCenter, Elevator2F_Tile2_Frame2)
+    METATILE_PokemonCenter_Elevator2F_Tile2_Frame0,
+    METATILE_PokemonCenter_Elevator2F_Tile2_Frame1,
+    METATILE_PokemonCenter_Elevator2F_Tile2_Frame2
 };
 
 #define tState            data[0]

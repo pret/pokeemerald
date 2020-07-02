@@ -87,12 +87,12 @@ bool8 ShouldDoBrailleDigEffect(void)
 
 void DoBrailleDigEffect(void)
 {
-    MapGridSetMetatileIdAt(16, 8, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
-    MapGridSetMetatileIdAt(17, 8, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
-    MapGridSetMetatileIdAt(18, 8, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
-    MapGridSetMetatileIdAt(16, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(17, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
-    MapGridSetMetatileIdAt(18, 9, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(16, 8, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(17, 8, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(18, 8, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt(16, 9, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(17, 9, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(18, 9, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
@@ -280,12 +280,12 @@ void UseRegirockHm_Callback(void)
 
 void DoBrailleRegirockEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
-    MapGridSetMetatileIdAt(15, 26, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
-    MapGridSetMetatileIdAt(16, 26, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
-    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
-    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(14, 26, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(15, 26, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(16, 26, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt(14, 27, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
@@ -319,12 +319,12 @@ void UseRegisteelHm_Callback(void)
 
 void DoBrailleRegisteelEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, METATILE_ID(Cave, SealedChamberEntrance_TopLeft));
-    MapGridSetMetatileIdAt(15, 26, METATILE_ID(Cave, SealedChamberEntrance_TopMid));
-    MapGridSetMetatileIdAt(16, 26, METATILE_ID(Cave, SealedChamberEntrance_TopRight));
-    MapGridSetMetatileIdAt(14, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomLeft) | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(15, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomMid));
-    MapGridSetMetatileIdAt(16, 27, METATILE_ID(Cave, SealedChamberEntrance_BottomRight) | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(14, 26, METATILE_Cave_SealedChamberEntrance_TopLeft);
+    MapGridSetMetatileIdAt(15, 26, METATILE_Cave_SealedChamberEntrance_TopMid);
+    MapGridSetMetatileIdAt(16, 26, METATILE_Cave_SealedChamberEntrance_TopRight);
+    MapGridSetMetatileIdAt(14, 27, METATILE_Cave_SealedChamberEntrance_BottomLeft | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
+    MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
