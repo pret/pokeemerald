@@ -26,7 +26,7 @@ static s16 sPlayerToMewDeltaX;
 static s16 sPlayerToMewDeltaY;
 static u8 sMewDirectionCandidates[4];
 
-extern const struct SpritePalette gFieldEffectObjectPaletteInfo1;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
 static const s16 sFarawayIslandRockCoords[4][2] =
@@ -374,8 +374,8 @@ void sub_81D4A90(void)
         if (gSpecialVar_Facing != DIR_NORTH)
             gSprites[mew->spriteId].subpriority = 1;
 
-        LoadSpritePalette(&gFieldEffectObjectPaletteInfo1);
-        UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(gFieldEffectObjectPaletteInfo1.tag));
+        LoadSpritePalette(&gSpritePalette_GeneralFieldEffect1);
+        UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(gSpritePalette_GeneralFieldEffect1.tag));
 
         x = mew->currentCoords.x;
         y = mew->currentCoords.y;

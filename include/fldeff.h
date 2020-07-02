@@ -9,17 +9,8 @@ bool8 FldEff_CutGrass(void);
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y);
 void FixLongGrassMetatilesWindowBottom(s16 x, s16 y);
 
-extern const struct SpritePalette gFieldEffectObjectPaletteInfo6;
+extern const struct SpritePalette gSpritePalette_CutGrass;
 extern struct MapPosition gPlayerFacingPosition;
-
-// groundshake
-bool8 sub_81BE66C(void);
-void sub_81BE6AC(void);
-void sub_81BE6B8(void);
-void sub_81BE72C(void);
-void sub_81BE79C(void);
-void sub_81BE7F4(void);
-void sub_81BE994(void);
 
 // escalator
 void StartEscalator(bool8 var);
@@ -39,7 +30,7 @@ bool8 GetMapPairFadeFromType(u8 a1, u8 a2);
 
 // strength
 bool8 SetUpFieldMove_Strength(void);
-bool8 sub_8145E2C(void);
+bool8 FldEff_UseStrength(void);
 
 // sweet scent
 bool8 SetUpFieldMove_SweetScent(void);

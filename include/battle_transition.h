@@ -9,7 +9,7 @@ bool8 FldEff_Pokeball(void);
 void TransitionPhase1_Task_RunFuncs(u8 taskId);
 void GetBg0TilesDst(u16 **tilemap, u16 **tileset);
 
-extern const struct SpritePalette gFieldEffectObjectPaletteInfo10;
+extern const struct SpritePalette gSpritePalette_Pokeball;
 
 enum // TRANSITION_MUGSHOT
 {

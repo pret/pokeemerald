@@ -1948,7 +1948,7 @@ void sub_808E7E4(u8 localId, u8 mapNum, u8 mapGroup)
     }
 }
 
-void sub_808E82C(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
+void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 {
     u8 objectEventId;
     struct Sprite *sprite;

@@ -65,12 +65,12 @@ static void SpriteCB_SandPillar_End(struct Sprite *);
 
 static const u8 sSecretPowerCave_Gfx[] = INCBIN_U8("graphics/field_effects/pics/secret_power_cave.4bpp");
 static const u8 sFiller[32] = {0};
-static const u16 sSecretPowerCave_Pal[] = INCBIN_U16("graphics/field_effects/palettes/07.gbapal");
+static const u16 sSecretPowerCave_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_cave.gbapal");
 static const u8 sSecretPowerShrub_Gfx[] = INCBIN_U8("graphics/field_effects/pics/secret_power_shrub.4bpp");
 static const u8 sSecretPowerTree_Gfx[] = INCBIN_U8("graphics/field_effects/pics/secret_power_tree.4bpp");
-static const u16 sSecretPowerPlant_Pal[] = INCBIN_U16("graphics/field_effects/palettes/08.gbapal");
+static const u16 sSecretPowerPlant_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_plant.gbapal");
 
-// TODO: These should also be combined into a single image
+// TODO: These should also be combined into a single image, not matching for some reason
 static const u8 sSandPillar0_Gfx[] = INCBIN_U8("graphics/field_effects/pics/sand_pillar/0.4bpp");
 static const u8 sSandPillar1_Gfx[] = INCBIN_U8("graphics/field_effects/pics/sand_pillar/1.4bpp");
 static const u8 sSandPillar2_Gfx[] = INCBIN_U8("graphics/field_effects/pics/sand_pillar/2.4bpp");
@@ -196,7 +196,7 @@ static const struct SpriteFrameImage sPicTable_SecretPowerShrub[] =
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_3,
+    .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_TREE,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerCave,
     .images = sPicTable_SecretPowerCave,
@@ -207,7 +207,7 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerCave =
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_8,
+    .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerTree,
     .images = sPicTable_SecretPowerTree,
@@ -218,7 +218,7 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerTree =
 static const struct SpriteTemplate sSpriteTemplate_SecretPowerShrub =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_8,
+    .paletteTag = FLDEFF_PAL_TAG_SECRET_POWER_PLANT,
     .oam = &sOam_SecretPower,
     .anims = sAnimTable_SecretPowerShrub,
     .images = sPicTable_SecretPowerShrub,
@@ -226,8 +226,8 @@ static const struct SpriteTemplate sSpriteTemplate_SecretPowerShrub =
     .callback = SpriteCB_ShrubEntranceInit,
 };
 
-const struct SpritePalette gSpritePalette_SecretPower_Cave = {sSecretPowerCave_Pal, FLDEFF_PAL_TAG_3};
-const struct SpritePalette gSpritePalette_SecretPower_Plant = {sSecretPowerPlant_Pal, FLDEFF_PAL_TAG_8};
+const struct SpritePalette gSpritePalette_SecretPower_Cave = {sSecretPowerCave_Pal, FLDEFF_PAL_TAG_SECRET_POWER_TREE};
+const struct SpritePalette gSpritePalette_SecretPower_Plant = {sSecretPowerPlant_Pal, FLDEFF_PAL_TAG_SECRET_POWER_PLANT};
 
 static const struct OamData sOam_SandPillar =
 {
@@ -256,15 +256,15 @@ static const union AnimCmd *const sAnimTable_SandPillar[] =
 
 static const struct SpriteFrameImage sPicTable_SandPillar[] =
 {
-    {sSandPillar0_Gfx, 0x100},
-    {sSandPillar1_Gfx, 0x100},
-    {sSandPillar2_Gfx, 0x100},
+    {sSandPillar0_Gfx, sizeof(sSandPillar0_Gfx)},
+    {sSandPillar1_Gfx, sizeof(sSandPillar1_Gfx)},
+    {sSandPillar2_Gfx, sizeof(sSandPillar2_Gfx)},
 };
 
 static const struct SpriteTemplate sSpriteTemplate_SandPillar =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_14,
+    .paletteTag = FLDEFF_PAL_TAG_SAND_PILLAR,
     .oam = &sOam_SandPillar,
     .anims = sAnimTable_SandPillar,
     .images = sPicTable_SandPillar,
@@ -272,8 +272,7 @@ static const struct SpriteTemplate sSpriteTemplate_SandPillar =
     .callback = SpriteCB_SandPillar_BreakTop,
 };
 
-// This uses one of the secret base palettes, so there is no "graphics/field_effects/palettes/09.pal" file.
-const struct SpritePalette gSpritePalette_SandPillar = {gTilesetPalettes_SecretBase[5], FLDEFF_PAL_TAG_14};
+const struct SpritePalette gSpritePalette_SandPillar = {gTilesetPalettes_SecretBase[5], FLDEFF_PAL_TAG_SAND_PILLAR};
 
 static const u8 sRecordMixLights_Gfx[] = INCBIN_U8("graphics/field_effects/pics/record_mix_lights.4bpp");
 static const u16 sRecordMixLights_Pal[] = INCBIN_U16("graphics/field_effects/palettes/record_mix_lights.gbapal");
@@ -285,7 +284,7 @@ static const struct SpriteFrameImage sPicTable_RecordMixLights[] =
     overworld_frame(sRecordMixLights_Gfx, 4, 1, 2),
 };
 
-static const struct SpritePalette sSpritePalette_RecordMixLights = {sRecordMixLights_Pal, FLDEFF_PAL_TAG_0};
+static const struct SpritePalette sSpritePalette_RecordMixLights = {sRecordMixLights_Pal, 0x1000};
 
 static const union AnimCmd sAnim_RecordMixLights[] =
 {
@@ -303,7 +302,7 @@ static const union AnimCmd *const sAnimTable_RecordMixLights[] =
 static const struct SpriteTemplate sSpriteTemplate_RecordMixLights =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = FLDEFF_PAL_TAG_0,
+    .paletteTag = 0x1000,
     .oam = &gObjectEventBaseOam_32x8,
     .anims = sAnimTable_RecordMixLights,
     .images = sPicTable_RecordMixLights,

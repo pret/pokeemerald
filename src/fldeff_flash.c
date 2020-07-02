@@ -106,7 +106,7 @@ static void FldEff_UseFlash(void)
 {
     PlaySE(SE_W115);
     FlagSet(FLAG_SYS_USE_FLASH);
-    ScriptContext1_SetupScript(EventScript_FldEffFlash);
+    ScriptContext1_SetupScript(EventScript_UseFlash);
 }
 
 static void CB2_ChangeMapMain(void)

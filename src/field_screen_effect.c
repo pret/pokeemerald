@@ -36,11 +36,9 @@
 #include "fldeff.h"
 
 // This file's functions.
-static void sub_8080B9C(u8);
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
 static void Task_DoContestHallWarp(u8);
-static void sub_808115C(u8);
 static void FillPalBufferWhite(void);
 static void Task_ExitDoor(u8);
 static bool32 WaitForWeatherFadeIn(void);
