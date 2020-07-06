@@ -24,6 +24,7 @@
 #include "pokedex.h"
 #include "util.h"
 #include "trainer_pokemon_sprites.h"
+#include "starter_choose.h"
 #include "constants/battle_frontier.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
@@ -131,8 +132,6 @@ struct FactorySwapMonsStruct
     struct UnkFactoryStruct unk2C;
     bool8 unk30;
 };
-
-extern const u32 gUnknown_085B18AC[];
 
 // This file's functions.
 static void sub_819A44C(struct Sprite *sprite);
@@ -263,7 +262,7 @@ static const struct SpriteSheet gUnknown_086103BC[] =
 
 static const struct CompressedSpriteSheet gUnknown_086103E4[] =
 {
-    {gUnknown_085B18AC, 0x800, TAG_TILE_64},
+    {gPokeballSelection_Gfx, 0x800, TAG_TILE_64},
     {},
 };
 
@@ -616,7 +615,7 @@ static const struct SpriteSheet gUnknown_08610650[] =
 
 static const struct CompressedSpriteSheet gUnknown_086106A0[] =
 {
-    {gUnknown_085B18AC, 0x800, TAG_TILE_64},
+    {gPokeballSelection_Gfx, 0x800, TAG_TILE_64},
     {},
 };
 
