@@ -16,46 +16,46 @@ static void Task_DrawTeleporterCable(u8 taskId);
 #define ESCALATOR_STAGES     3
 #define LAST_ESCALATOR_STAGE (ESCALATOR_STAGES - 1)
 
-static const u16 sElevatorMetatiles_1F_0[ESCALATOR_STAGES] = {
-    METATILE_PokemonCenter_Elevator1F_Tile0_Frame2,
-    METATILE_PokemonCenter_Elevator1F_Tile0_Frame1,
-    METATILE_PokemonCenter_Elevator1F_Tile0_Frame0
+static const u16 sEscalatorMetatiles_1F_0[ESCALATOR_STAGES] = {
+    METATILE_PokemonCenter_Escalator1F_Tile0_Frame2,
+    METATILE_PokemonCenter_Escalator1F_Tile0_Frame1,
+    METATILE_PokemonCenter_Escalator1F_Tile0_Frame0
 };
 
-static const u16 sElevatorMetatiles_1F_1[ESCALATOR_STAGES] = {
-    METATILE_PokemonCenter_Elevator1F_Tile1_Frame2,
-    METATILE_PokemonCenter_Elevator1F_Tile1_Frame1,
-    METATILE_PokemonCenter_Elevator1F_Tile1_Frame0
+static const u16 sEscalatorMetatiles_1F_1[ESCALATOR_STAGES] = {
+    METATILE_PokemonCenter_Escalator1F_Tile1_Frame2,
+    METATILE_PokemonCenter_Escalator1F_Tile1_Frame1,
+    METATILE_PokemonCenter_Escalator1F_Tile1_Frame0
 };
 
-static const u16 sElevatorMetatiles_1F_2[ESCALATOR_STAGES] = {
-    METATILE_PokemonCenter_Elevator1F_Tile2_Frame2,
-    METATILE_PokemonCenter_Elevator1F_Tile2_Frame1,
-    METATILE_PokemonCenter_Elevator1F_Tile2_Frame0
+static const u16 sEscalatorMetatiles_1F_2[ESCALATOR_STAGES] = {
+    METATILE_PokemonCenter_Escalator1F_Tile2_Frame2,
+    METATILE_PokemonCenter_Escalator1F_Tile2_Frame1,
+    METATILE_PokemonCenter_Escalator1F_Tile2_Frame0
 };
 
-static const u16 sElevatorMetatiles_1F_3[ESCALATOR_STAGES] = {
-    METATILE_PokemonCenter_Elevator1F_Tile3_Frame2,
-    METATILE_PokemonCenter_Elevator1F_Tile3_Frame1,
-    METATILE_PokemonCenter_Elevator1F_Tile3_Frame0
+static const u16 sEscalatorMetatiles_1F_3[ESCALATOR_STAGES] = {
+    METATILE_PokemonCenter_Escalator1F_Tile3_Frame2,
+    METATILE_PokemonCenter_Escalator1F_Tile3_Frame1,
+    METATILE_PokemonCenter_Escalator1F_Tile3_Frame0
 };
 
-static const u16 sElevatorMetatiles_2F_0[ESCALATOR_STAGES] = {
-    METATILE_PokemonCenter_Elevator2F_Tile0_Frame0,
-    METATILE_PokemonCenter_Elevator2F_Tile0_Frame1,
-    METATILE_PokemonCenter_Elevator2F_Tile0_Frame2
+static const u16 sEscalatorMetatiles_2F_0[ESCALATOR_STAGES] = {
+    METATILE_PokemonCenter_Escalator2F_Tile0_Frame0,
+    METATILE_PokemonCenter_Escalator2F_Tile0_Frame1,
+    METATILE_PokemonCenter_Escalator2F_Tile0_Frame2
 };
 
-static const u16 sElevatorMetatiles_2F_1[ESCALATOR_STAGES] = {
-    METATILE_PokemonCenter_Elevator2F_Tile1_Frame0,
-    METATILE_PokemonCenter_Elevator2F_Tile1_Frame1,
-    METATILE_PokemonCenter_Elevator2F_Tile1_Frame2
+static const u16 sEscalatorMetatiles_2F_1[ESCALATOR_STAGES] = {
+    METATILE_PokemonCenter_Escalator2F_Tile1_Frame0,
+    METATILE_PokemonCenter_Escalator2F_Tile1_Frame1,
+    METATILE_PokemonCenter_Escalator2F_Tile1_Frame2
 };
 
-static const u16 sElevatorMetatiles_2F_2[ESCALATOR_STAGES] = {
-    METATILE_PokemonCenter_Elevator2F_Tile2_Frame0,
-    METATILE_PokemonCenter_Elevator2F_Tile2_Frame1,
-    METATILE_PokemonCenter_Elevator2F_Tile2_Frame2
+static const u16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
+    METATILE_PokemonCenter_Escalator2F_Tile2_Frame0,
+    METATILE_PokemonCenter_Escalator2F_Tile2_Frame1,
+    METATILE_PokemonCenter_Escalator2F_Tile2_Frame2
 };
 
 #define tState            data[0]
@@ -122,25 +122,25 @@ static void Task_DrawEscalator(u8 taskId)
     switch (tState)
     {
         case 0:
-            SetEscalatorMetatile(taskId, sElevatorMetatiles_1F_0, 0);
+            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_0, 0);
             break;
         case 1:
-            SetEscalatorMetatile(taskId, sElevatorMetatiles_1F_1, 0);
+            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_1, 0);
             break;
         case 2:
-            SetEscalatorMetatile(taskId, sElevatorMetatiles_1F_2, METATILE_COLLISION_MASK);
+            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_2, METATILE_COLLISION_MASK);
             break;
         case 3:
-            SetEscalatorMetatile(taskId, sElevatorMetatiles_1F_3, 0);
+            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_3, 0);
             break;
         case 4:
-            SetEscalatorMetatile(taskId, sElevatorMetatiles_2F_0, METATILE_COLLISION_MASK);
+            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_0, METATILE_COLLISION_MASK);
             break;
         case 5:
-            SetEscalatorMetatile(taskId, sElevatorMetatiles_2F_1, 0);
+            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_1, 0);
             break;
         case 6:
-            SetEscalatorMetatile(taskId, sElevatorMetatiles_2F_2, 0);
+            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_2, 0);
             break;
     }
 
