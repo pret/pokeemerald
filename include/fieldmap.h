@@ -43,6 +43,7 @@ void copy_map_tileset1_to_vram(const struct MapLayout *);
 void copy_map_tileset2_to_vram(const struct MapLayout *);
 struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *connection);
 struct MapConnection *GetConnectionAtCoords(s16 x, s16 y);
+void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);
@@ -50,6 +51,5 @@ void SpriteCB_HallOfFameMonitor(struct Sprite *);
 
 // field_region_map.c
 void FieldInitRegionMap(MainCallback callback);
-void sub_8088B94(int x, int y, int a2);
 
 #endif //GUARD_FIELDMAP_H

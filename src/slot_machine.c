@@ -384,7 +384,7 @@ static const u16 gSlotPayouts[];
 static const u8 *const gUnknown_083EDCE4;
 static const u8 *const gUnknown_083EDCDC;
 static const u32 gReelTimeGfx[];
-static const struct SpriteSheet gSlotMachineSpriteSheets[];
+static const struct SpriteSheet gSlotMachineSpriteSheets[22];
 static const struct SpritePalette gSlotMachineSpritePalettes[];
 static const u16 *const gUnknown_083EDE20;
 static const s16 gInitialReelPositions[][2];
@@ -4171,8 +4171,8 @@ static void sub_81063C0(void)
     LZDecompressWram(gSlotMachineReelTime_Gfx, sUnknown_0203AAD4);
     sUnknown_0203AAD8 = Alloc(0x3600);
     LZDecompressWram(gReelTimeGfx, sUnknown_0203AAD8);
-    sUnknown_0203AB30 = AllocZeroed(sizeof(struct SpriteSheet) * 22);
-    for (i = 0; i < 22; i++)
+    sUnknown_0203AB30 = AllocZeroed(sizeof(struct SpriteSheet) * ARRAY_COUNT(gSlotMachineSpriteSheets));
+    for (i = 0; i < ARRAY_COUNT(gSlotMachineSpriteSheets); i++)
     {
         sUnknown_0203AB30[i].data = gSlotMachineSpriteSheets[i].data;
         sUnknown_0203AB30[i].size = gSlotMachineSpriteSheets[i].size;
@@ -6708,7 +6708,7 @@ static const struct SubspriteTable *const gUnknown_083EDBC4[] =
     NULL
 };
 
-static const struct SpriteSheet gSlotMachineSpriteSheets[] =
+static const struct SpriteSheet gSlotMachineSpriteSheets[22] =
 {
     { .data = gSlotMachineReelSymbol1Tiles, .size = 0x200, .tag = 0 },
     { .data = gSlotMachineReelSymbol2Tiles, .size = 0x200, .tag = 1 },
@@ -6727,15 +6727,12 @@ static const struct SpriteSheet gSlotMachineSpriteSheets[] =
     { .data = gSlotMachineNumber7Tiles, .size = 0x40, .tag = 14 },
     { .data = gSlotMachineNumber8Tiles, .size = 0x40, .tag = 15 },
     { .data = gSlotMachineNumber9Tiles, .size = 0x40, .tag = 16 },
-};
-
-static const u8 sUnused1[][8] = 
-{
-    {0, 0, 0, 0, 0, 2, 18},
-    {0, 0, 0, 0, 0, 2, 19}, 
-    {0, 0, 0, 0, 0, 3, 20}, 
-    {0, 0, 0, 0, 0, 3, 21}, 
-    {0, 0, 0, 0, 0, 0,  0}
+    // the data for these sheets is determined at runtime
+    { .data = NULL, .size = 0x200, .tag = 18 },
+    { .data = NULL, .size = 0x200, .tag = 19 },
+    { .data = NULL, .size = 0x300, .tag = 20 },
+    { .data = NULL, .size = 0x300, .tag = 21 },
+    {},
 };
 
 static const u8 *const gUnknown_083EDCDC = gUnknown_08DD19F8;

@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-void sub_802A9A8(u16 monId, MainCallback callback);
+void StartPokemonJump(u16 monId, MainCallback callback);
 bool32 IsSpeciesAllowedInPokemonJump(u16 species);
 void IsPokemonJumpSpeciesInParty(void);
 void ResetPokeJumpResults(void);

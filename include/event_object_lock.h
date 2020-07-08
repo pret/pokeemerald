@@ -8,6 +8,6 @@ void LockSelectedObjectEvent(void);
 void sub_8098630(void);
 bool8 sub_8098734(void);
 void ScriptUnfreezeObjectEvents(void);
-void sub_8098524(void);
+void UnionRoom_UnlockPlayerAndChatPartner(void);
 
 #endif // GUARD_EVENT_OBJECT_LOCK_H

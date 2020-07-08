@@ -764,11 +764,11 @@ void ClearTVShowData(void)
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows); i ++)
     {
-        gSaveBlock1Ptr->tvShows[i].common.kind = 0;
-        gSaveBlock1Ptr->tvShows[i].common.active = 0;
-        for (j = 0; j < sizeof(TVShow) - 2; j ++)
+        gSaveBlock1Ptr->tvShows[i].commonInit.kind = 0;
+        gSaveBlock1Ptr->tvShows[i].commonInit.active = 0;
+        for (j = 0; j < ARRAY_COUNT(gSaveBlock1Ptr->tvShows[i].commonInit.pad02); j ++)
         {
-            gSaveBlock1Ptr->tvShows[i].common.pad02[j] = 0;
+            gSaveBlock1Ptr->tvShows[i].commonInit.pad02[j] = 0;
         }
     }
     ClearPokemonNews();
@@ -3167,11 +3167,11 @@ void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)
 {
     u8 i;
 
-    shows[idx].common.kind = TVSHOW_OFF_AIR;
-    shows[idx].common.active = FALSE;
-    for (i = 0; i < 34; i ++)
+    shows[idx].commonInit.kind = TVSHOW_OFF_AIR;
+    shows[idx].commonInit.active = FALSE;
+    for (i = 0; i < ARRAY_COUNT(shows[idx].commonInit.pad02); i++)
     {
-        shows[idx].common.pad02[i] = 0;
+        shows[idx].commonInit.pad02[i] = 0;
     }
 }
 
