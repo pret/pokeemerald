@@ -2114,7 +2114,7 @@ static bool8 LavaridgeGymB1FWarpExitEffect_End(struct Task *task, struct ObjectE
 u8 FldEff_AshLaunch(void)
 {
     u8 spriteId;
-    sub_80930E0((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_LAUNCH], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -2206,7 +2206,7 @@ static bool8 LavaridgeGym1FWarpEffect_Warp(struct Task *task, struct ObjectEvent
 u8 FldEff_AshPuff(void)
 {
     u8 spriteId;
-    sub_80930E0((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_PUFF], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;

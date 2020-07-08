@@ -1981,7 +1981,7 @@ void BufferStringBattle(u16 stringID)
                 }
                 else
                 {
-                    if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                    if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                         stringPtr = sText_Trainer1WantsToBattle;
                     else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
                         stringPtr = sText_LinkTrainerWantsToBattlePause;
@@ -2049,7 +2049,7 @@ void BufferStringBattle(u16 stringID)
             {
                 if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
                     stringPtr = sText_Trainer1SentOutPkmn;
-                else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                     stringPtr = sText_Trainer1SentOutPkmn;
                 else
                     stringPtr = sText_LinkTrainerSentOutPkmn;
@@ -2110,7 +2110,7 @@ void BufferStringBattle(u16 stringID)
                 {
                     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                         stringPtr = sText_LinkTrainerMultiSentOutPkmn;
-                    else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                    else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                         stringPtr = sText_Trainer1SentOutPkmn2;
                     else
                         stringPtr = sText_LinkTrainerSentOutPkmn2;
@@ -2180,7 +2180,7 @@ void BufferStringBattle(u16 stringID)
                     break;
                 }
             }
-            else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+            else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
             {
                 switch (gBattleTextBuff1[0])
                 {
@@ -2495,8 +2495,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_CLASS: // trainer class name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
                     toCpy = gTrainerClassNames[GetSecretBaseTrainerClass()];
-                else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
-                    toCpy = gTrainerClassNames[sub_8068BB0()];
+                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+                    toCpy = gTrainerClassNames[GetUnionRoomTrainerClass()];
                 else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
                     toCpy = gTrainerClassNames[GetFrontierBrainTrainerClass()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -2517,7 +2517,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     ConvertInternationalString(text, gBattleResources->secretBase->language);
                     toCpy = text;
                 }
-                else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                 {
                     toCpy = gLinkPlayers[multiplayerId ^ BIT_SIDE].name;
                 }

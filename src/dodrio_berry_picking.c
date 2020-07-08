@@ -450,7 +450,7 @@ static void (*const gUnknown_082F7AF4[])(void) =
 };
 
 // code
-void sub_802493C(u16 a0, void (*callback)(void))
+void StartDodrioBerryPicking(u16 a0, void (*callback)(void))
 {
     gUnknown_03000DB0 = FALSE;
 
@@ -832,9 +832,9 @@ static void sub_8025158(void)
 
 static bool32 sub_8025170(void)
 {
-    u8 r4 = GetBlockReceivedStatus();
-    u8 r0 = sub_800A9D8();
-    if (r4 == r0)
+    u8 recvStatus = GetBlockReceivedStatus();
+    u8 playerFlags = GetLinkPlayerCountAsBitFlags();
+    if (recvStatus == playerFlags)
     {
         ResetBlockReceivedFlags();
         return TRUE;
@@ -4483,12 +4483,12 @@ static void sub_802A380(void)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            CreateTask(sub_8153688, 0);
+            CreateTask(Task_LinkSave, 0);
             gUnknown_02022CF8->state++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(sub_8153688))
+        if (!FuncIsActiveTask(Task_LinkSave))
             gUnknown_02022CF8->state++;
         break;
     default:

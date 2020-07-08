@@ -2359,7 +2359,7 @@ void SetupBagMenu_Textboxes(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 1, 0xE0);
     LoadMessageBoxGfx(0, 10, 0xD0);
-    sub_819A2BC(0xC0, 1);
+    ListMenuLoadStdPalAt(0xC0, 1);
     LoadPalette(&gUnknown_0860F074, 0xF0, 0x20);
     for (i = 0; i < 3; i++)
     {
