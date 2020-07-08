@@ -11,6 +11,7 @@
 	.include "src/union_room.o"
 	.include "src/mystery_gift.o"
 	.include "src/union_room_player_avatar.o"
+	.include "src/wireless_communication_status_screen.o"
 	.include "src/union_room_battle.o"
 	.include "src/mevent2.o"
 	.include "src/mevent_801BAAC.o"

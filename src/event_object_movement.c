@@ -28,6 +28,7 @@
 #include "constants/items.h"
 #include "constants/mauville_old_man.h"
 #include "constants/trainer_types.h"
+#include "constants/union_room.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 
@@ -97,7 +98,7 @@ static void DoRippleFieldEffect(struct ObjectEvent*, struct Sprite*);
 static void DoGroundEffects_OnSpawn(struct ObjectEvent*, struct Sprite*);
 static void DoGroundEffects_OnBeginStep(struct ObjectEvent*, struct Sprite*);
 static void DoGroundEffects_OnFinishStep(struct ObjectEvent*, struct Sprite*);
-static void sub_8097D68(struct Sprite*);
+static void UpdateObjectEventSpritePosition(struct Sprite*);
 static void ApplyLevitateMovement(u8);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Hidden_Callback(struct ObjectEvent *, struct Sprite *);
@@ -129,7 +130,7 @@ static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, 
 static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
 static void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
-static void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *);
+static void UpdateObjectEventSprite(struct Sprite *);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
@@ -1522,7 +1523,9 @@ u8 AddPseudoObjectEvent(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
     return spriteId;
 }
 
-u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
+// Used to create sprite object events instead of a full object event
+// Used when resources are limiting, e.g. for the audience in contests or group members in Union Room
+u8 CreateObjectSprite(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1531,11 +1534,11 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
-    MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, UpdateObjectEventSpriteSubpriorityAndVisibility, &spriteTemplate, &subspriteTables);
+    MakeObjectTemplateFromObjectEventGraphicsInfo(graphicsId, UpdateObjectEventSprite, &spriteTemplate, &subspriteTables);
     *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
     x += 7;
     y += 7;
-    sub_80930E0(&x, &y, 8, 16);
+    SetSpritePosToOffsetMapCoords(&x, &y, 8, 16);
     spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -2363,7 +2366,8 @@ static u8 GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
     return gObjectEvents[objectEventId].trainerType;
 }
 
-u8 sub_808F0D4(u8 localId, u8 mapNum, u8 mapGroup)
+// Unused
+u8 GetObjectEventBerryTreeIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
 
@@ -2374,7 +2378,7 @@ u8 sub_808F0D4(u8 localId, u8 mapNum, u8 mapGroup)
     return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
 
-u8 ObjectEventGetBerryTreeId(u8 objectEventId)
+u8 GetObjectEventBerryTreeId(u8 objectEventId)
 {
     return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
@@ -4864,22 +4868,22 @@ void SetSpritePosToMapCoords(s16 mapX, s16 mapY, s16 *destX, s16 *destY)
     s16 dx = -gTotalCameraPixelOffsetX - gFieldCamera.x;
     s16 dy = -gTotalCameraPixelOffsetY - gFieldCamera.y;
     if (gFieldCamera.x > 0)
-        dx += 1 << 4;
+        dx += 16;
 
     if (gFieldCamera.x < 0)
-        dx -= 1 << 4;
+        dx -= 16;
 
     if (gFieldCamera.y > 0)
-        dy += 1 << 4;
+        dy += 16;
 
     if (gFieldCamera.y < 0)
-        dy -= 1 << 4;
+        dy -= 16;
 
     *destX = ((mapX - gSaveBlock1Ptr->pos.x) << 4) + dx;
     *destY = ((mapY - gSaveBlock1Ptr->pos.y) << 4) + dy;
 }
 
-void sub_80930E0(s16 *x, s16 *y, s16 dx, s16 dy)
+void SetSpritePosToOffsetMapCoords(s16 *x, s16 *y, s16 dx, s16 dy)
 {
     SetSpritePosToMapCoords(*x, *y, x, y);
     *x += dx;
@@ -8630,51 +8634,56 @@ void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible)
         sprite->invisible = TRUE;
 }
 
-static void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *sprite)
+#define tInvisible     data[2]
+#define tAnimNum       data[3]
+#define tAnimState     data[4]
+
+static void UpdateObjectEventSprite(struct Sprite *sprite)
 {
-    sub_8097D68(sprite);
+    UpdateObjectEventSpritePosition(sprite);
     SetObjectSubpriorityByZCoord(sprite->data[1], sprite, 1);
-    UpdateObjectEventSpriteVisibility(sprite, sprite->data[2]);
+    UpdateObjectEventSpriteVisibility(sprite, sprite->tInvisible);
 }
 
-void sub_8097AF0(void)
+// Unused
+static void DestroyObjectEventSprites(void)
 {
     int i;
 
-    for(i = 0; i < MAX_SPRITES; i++)
+    for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        if(sprite->inUse && sprite->callback == UpdateObjectEventSpriteSubpriorityAndVisibility)
+        if(sprite->inUse && sprite->callback == UpdateObjectEventSprite)
             DestroySprite(sprite);
     }
 }
 
-int sub_8097B2C(u8 var) // this should return a u8, because all that call this shifts to u8, but it wont match because it doesnt shift u8 at the end.
+static int GetObjectEventSpriteId(u8 var) // this should return a u8, because all that call this shifts to u8, but it wont match because it doesnt shift u8 at the end.
 {
     int i;
 
-    for(i = 0; i < MAX_SPRITES; i++)
+    for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        if(sprite->inUse && sprite->callback == UpdateObjectEventSpriteSubpriorityAndVisibility && (u8)sprite->data[0] == var)
+        if(sprite->inUse && sprite->callback == UpdateObjectEventSprite && (u8)sprite->data[0] == var)
             return i;
     }
     return MAX_SPRITES;
 }
 
-void sub_8097B78(u8 var1, u8 var2)
+void TurnObjectEventSprite(u8 objectEventId, u8 direction)
 {
-    u8 spriteId = sub_8097B2C(var1);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
 
-    if(spriteId != MAX_SPRITES)
-        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(var2));
+    if (spriteId != MAX_SPRITES)
+        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(direction));
 }
 
-void sub_8097BB4(u8 var1, u8 graphicsId)
+void SetObjectEventSpriteGraphics(u8 objectEventId, u8 graphicsId)
 {
-    int spriteId = sub_8097B2C(var1);
+    int spriteId = GetObjectEventSpriteId(objectEventId);
 
-    if(spriteId != MAX_SPRITES)
+    if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
         const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
@@ -8685,7 +8694,7 @@ void sub_8097BB4(u8 var1, u8 graphicsId)
         sprite->oam.paletteNum = graphicsInfo->paletteSlot;
         sprite->images = graphicsInfo->images;
 
-        if(graphicsInfo->subspriteTables == NULL)
+        if (graphicsInfo->subspriteTables == NULL)
         {
             sprite->subspriteTables = NULL;
             sprite->subspriteTableNum = 0;
@@ -8700,102 +8709,102 @@ void sub_8097BB4(u8 var1, u8 graphicsId)
     }
 }
 
-void sub_8097C44(u8 var, bool32 var2)
+void SetObjectEventSpriteInvisibility(u8 objectEventId, bool32 invisible)
 {
-    u8 spriteId = sub_8097B2C(var);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
 
-    if(spriteId == MAX_SPRITES)
+    if (spriteId == MAX_SPRITES)
         return;
 
-    if(var2)
-        gSprites[spriteId].data[2] = 1;
+    if (invisible)
+        gSprites[spriteId].tInvisible = TRUE;
     else
-        gSprites[spriteId].data[2] = 0;
+        gSprites[spriteId].tInvisible = FALSE;
 }
 
-bool32 sub_8097C8C(u8 var)
+bool32 IsObjectEventSpriteInvisible(u8 objectEventId)
 {
-    u8 spriteId = sub_8097B2C(var);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
 
-    if(spriteId == MAX_SPRITES)
+    if (spriteId == MAX_SPRITES)
         return FALSE;
 
-    return (gSprites[spriteId].data[2] == TRUE);
+    return (gSprites[spriteId].tInvisible == TRUE);
 }
 
-void sub_8097CC4(u8 var1, u8 var2)
+void SetObjectEventSpriteAnim(u8 objectEventId, u8 animNum)
 {
-    u8 spriteId = sub_8097B2C(var1);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
 
-    if(spriteId != MAX_SPRITES)
+    if (spriteId != MAX_SPRITES)
     {
-        gSprites[spriteId].data[3] = var2;
-        gSprites[spriteId].data[4] = 0;
+        gSprites[spriteId].tAnimNum = animNum;
+        gSprites[spriteId].tAnimState = 0;
     }
 }
 
-void sub_8097CF4(struct Sprite *sprite)
+static void MoveUnionRoomObjectUp(struct Sprite *sprite)
 {
-    switch(sprite->data[4])
+    switch(sprite->tAnimState)
     {
         case 0:
             sprite->pos2.y = 0;
-            sprite->data[4]++;
+            sprite->tAnimState++;
         case 1:
             sprite->pos2.y -= 8;
-            if(sprite->pos2.y == -160)
+            if (sprite->pos2.y == -160)
             {
                 sprite->pos2.y = 0;
-                sprite->data[2] = 1;
-                sprite->data[3] = 0;
-                sprite->data[4] = 0;
+                sprite->tInvisible = TRUE;
+                sprite->tAnimNum = 0;
+                sprite->tAnimState = 0;
             }
     }
 }
 
-void sub_8097D30(struct Sprite *sprite)
+static void MoveUnionRoomObjectDown(struct Sprite *sprite)
 {
-    switch(sprite->data[4])
+    switch(sprite->tAnimState)
     {
         case 0:
             sprite->pos2.y = -160;
-            sprite->data[4]++;
+            sprite->tAnimState++;
         case 1:
             sprite->pos2.y += 8;
             if(sprite->pos2.y == 0)
             {
-                sprite->data[3] = 0;
-                sprite->data[4] = 0;
+                sprite->tAnimNum = 0;
+                sprite->tAnimState = 0;
             }
     }
 }
 
-static void sub_8097D68(struct Sprite *sprite)
+static void UpdateObjectEventSpritePosition(struct Sprite *sprite)
 {
-    switch(sprite->data[3])
+    switch(sprite->tAnimNum)
     {
-        case 1:
-            sub_8097D30(sprite);
+        case UNION_ROOM_SPAWN_IN:
+            MoveUnionRoomObjectDown(sprite);
             break;
-        case 2:
-            sub_8097CF4(sprite);
+        case UNION_ROOM_SPAWN_OUT:
+            MoveUnionRoomObjectUp(sprite);
             break;
         case 0:
             break;
         default:
-            sprite->data[3] = 0;
+            sprite->tAnimNum = 0;
             break;
     }
 }
 
-bool32 sub_8097D9C(u8 var)
+bool32 IsObjectEventSpriteAnimating(u8 var)
 {
-    u8 spriteId = sub_8097B2C(var);
+    u8 spriteId = GetObjectEventSpriteId(var);
 
-    if(spriteId == MAX_SPRITES)
+    if (spriteId == MAX_SPRITES)
         return FALSE;
 
-    if(gSprites[spriteId].data[3] != FALSE)
+    if (gSprites[spriteId].tAnimNum != 0)
         return TRUE;
 
     return FALSE;

@@ -4986,14 +4986,14 @@ extern const u16 gEasyChatRightWindow_Pal[];
 extern const u32 gUsePokeblockCondition_Gfx[];
 
 // Union Room Chat
-extern const u16 gUnknown_08DD4BB0[];
-extern const u16 gUnknown_08DD4BD0[];
-extern const u32 gUnknown_08DD4BF0[];
-extern const u32 gUnknown_08DD4C4C[];
-extern const u32 gUnknown_08DD4CF8[];
-extern const u16 gLinkMiscMenu_Pal[];
-extern const u32 gLinkMiscMenu_Gfx[];
-extern const u32 gLinkMiscMenu_Tilemap[];
+extern const u16 gUnionRoomChat_Background_Pal[];
+extern const u32 gUnionRoomChat_Background_Gfx[];
+extern const u32 gUnionRoomChat_Background_Tilemap[];
+extern const u16 gUnionRoomChat_Window_Pal1[];
+extern const u16 gUnionRoomChat_Window_Pal2[];
+extern const u32 gUnionRoomChat_Border_Gfx[];
+extern const u32 gUnionRoomChat_Border_Tilemap[];
+extern const u32 gUnionRoomChat_RButtonLabels[];
 
 // Use Pokeblock
 extern const u8 gPokenavConditionCancel_Gfx[];

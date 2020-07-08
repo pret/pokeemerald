@@ -2725,7 +2725,7 @@ void SetDeoxysStats(void)
     }
 }
 
-u16 sub_8068B48(void)
+u16 GetUnionRoomTrainerPic(void)
 {
     u8 linkId;
     u32 arrId;
@@ -2740,7 +2740,7 @@ u16 sub_8068B48(void)
     return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
 }
 
-u16 sub_8068BB0(void)
+u16 GetUnionRoomTrainerClass(void)
 {
     u8 linkId;
     u32 arrId;
