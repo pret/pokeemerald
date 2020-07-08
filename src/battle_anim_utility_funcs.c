@@ -1073,6 +1073,9 @@ void AnimTask_IsDoubleBattle(u8 taskId)
 
 void AnimTask_CanBattlerSwitch(u8 taskId)
 {
-    gBattleAnimArgs[ARG_RET_ID] = CanBattlerSwitch(GetAnimBattlerId(gBattleAnimArgs[0]));
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        gBattleAnimArgs[ARG_RET_ID] = TRUE;
+    else
+        gBattleAnimArgs[ARG_RET_ID] = CanBattlerSwitch(GetAnimBattlerId(gBattleAnimArgs[0]));
     DestroyAnimVisualTask(taskId);
 }
