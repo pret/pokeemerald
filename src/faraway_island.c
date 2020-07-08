@@ -378,7 +378,7 @@ void sub_81D4A90(void)
 
         x = mew->currentCoords.x;
         y = mew->currentCoords.y;
-        sub_80930E0(&x, &y, 8, 8);
+        SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
         sUnknown_0203CF50 = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[15], x, y, gSprites[mew->spriteId].subpriority - 1);
         if (sUnknown_0203CF50 != MAX_SPRITES)
         {

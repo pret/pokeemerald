@@ -162,7 +162,7 @@ static void Task_ReturnToFieldCableLink(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[1] = sub_80B3050();
+        task->data[1] = CreateTask_ReestablishCableClubLink();
         task->data[0]++;
         break;
     case 1:
@@ -204,7 +204,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
         if (!IsLinkTaskFinished())
         {
             if (++task->data[1] > 1800)
-                sub_8011170(0x6000);
+                GetLinkmanErrorParams(0x6000);
         }
         else
         {
@@ -215,7 +215,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
     case 2:
         if (WaitForWeatherFadeIn() == TRUE)
         {
-            sub_8009F18();
+            StartSendingKeysToLink();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -240,7 +240,7 @@ void Task_ReturnToFieldRecordMixing(u8 taskId)
         }
         break;
     case 2:
-        sub_8009F18();
+        StartSendingKeysToLink();
         ResetAllMultiplayerState();
         ScriptContext2_Disable();
         DestroyTask(taskId);

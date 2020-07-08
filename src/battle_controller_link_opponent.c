@@ -1267,9 +1267,9 @@ static void LinkOpponentHandleDrawTrainerPic(void)
     else
     {
         xPos = 176;
-        if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+        if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
         {
-            trainerPicId = sub_8068B48();
+            trainerPicId = GetUnionRoomTrainerPic();
         }
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_FIRE_RED
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
