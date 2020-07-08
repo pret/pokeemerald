@@ -170,7 +170,7 @@ void SetContestWinnerForPainting(int contestWinnerId)
     u8 *ptr2 = &gUnknown_02039F5C;
 	gCurContestWinner = gSaveBlock1Ptr->contestWinners[contestWinnerId - 1];
 	*ptr1 = contestWinnerId - 1;
-	*ptr2 = 0;
+	*ptr2 = FALSE;
 }
 
 void CB2_ContestPainting(void)
@@ -281,7 +281,7 @@ static void InitContestPaintingWindow(void)
     ShowBg(1);
 }
 
-static void PrintContestPaintingCaption(u8 contestType, u8 arg1)
+static void PrintContestPaintingCaption(u8 contestType, bool8 arg1)
 {
     int x;
     u8 category;
@@ -519,12 +519,14 @@ _081303F8:\n\
 }
 #endif
 
-static void LoadContestPaintingFrame(u8 contestWinnerId, u8 arg1)
+#define VRAM_PICTURE_DATA(x, y) (((u16 *)(BG_SCREEN_ADDR(12)))[(y) * 32 + (x)])
+
+static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 arg1)
 {
     u8 x, y;
 
     LoadPalette(gPictureFramePalettes, 0, 0x100);
-    if (arg1 == 1)
+    if (arg1 == TRUE)
     {
         switch (gContestPaintingWinner->contestCategory / 3)
         {
@@ -550,8 +552,6 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, u8 arg1)
             break;
         }
 
-#define VRAM_PICTURE_DATA(x, y) (((u16 *)(BG_SCREEN_ADDR(12)))[(y) * 32 + (x)])
-
         // Set the background
         for (y = 0; y < 20; y++)
         {
@@ -569,8 +569,6 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, u8 arg1)
         // Re-set the entire top row to the first top frame part
         for (x = 0; x < 16; x++)
             VRAM_PICTURE_DATA(x + 7, 2) = (*gContestMonPixels)[2][7];
-
-#undef VRAM_PICTURE_DATA
     }
     else if (contestWinnerId < 8)
     {
@@ -604,6 +602,8 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, u8 arg1)
         }
     }
 }
+
+#undef VRAM_PICTURE_DATA
 
 static void InitPaintingMonOamData(u8 contestWinnerId)
 {
@@ -692,7 +692,7 @@ static void DoContestPaintingImageProcessing(u8 imageEffect)
     LoadPalette(gContestPaintingMonPalette, 0x100, 0x200);
 }
 
-static void CreateContestPaintingPicture(u8 contestWinnerId, u8 arg1)
+static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 arg1)
 {
     AllocPaintingResources();
     InitContestMonPixels(gContestPaintingWinner->species, 0);

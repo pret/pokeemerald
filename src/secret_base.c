@@ -37,6 +37,7 @@
 #include "constants/event_bg.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
+#include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/map_types.h"
@@ -1120,7 +1121,7 @@ const u8 *GetSecretBaseTrainerLoseText(void)
 
 void PrepSecretBaseBattleFlags(void)
 {
-    TryGainNewFanFromCounter(1);
+    TryGainNewFanFromCounter(FANCOUNTER_BATTLED_AT_BASE);
     gTrainerBattleOpponent_A = TRAINER_SECRET_BASE;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_SECRET_BASE;
 }
