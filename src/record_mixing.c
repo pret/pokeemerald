@@ -169,10 +169,9 @@ static const u8 gUnknown_0858CFBE[3][4] =
 
 #define BUFFER_CHUNK_SIZE 200
 
-// Note: VAR_0x8005 contains the spotId.
 void RecordMixingPlayerSpotTriggered(void)
 {
-    sub_80B37D4(Task_RecordMixing_Main);
+    CreateTask_EnterCableClubSeat(Task_RecordMixing_Main);
 }
 
 // these variables were const in R/S, but had to become changeable because of saveblocks changing RAM position
@@ -232,7 +231,7 @@ static void PrepareExchangePacket(void)
 
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
-        if (sub_800A03C() == 0)
+        if (LinkDummy_Return2() == 0)
             PrepareUnknownExchangePacket(&sSentRecord->ruby);
         else
             PrepareExchangePacketForRubySapphire(&sSentRecord->ruby);
@@ -351,7 +350,7 @@ static void Task_RecordMixing_Main(u8 taskId)
         {
             tState = 4;
             if (gWirelessCommType == 0)
-                data[10] = sub_80B3050();
+                data[10] = CreateTask_ReestablishCableClubLink();
 
             PrintTextOnRecordMixing(gText_RecordMixingComplete);
             data[8] = 0;
@@ -527,7 +526,7 @@ static void Task_CopyReceiveBuffer(u8 taskId)
     u8 status = GetBlockReceivedStatus();
     u8 handledPlayers = 0;
 
-    if (status == sub_800A9D8())
+    if (status == GetLinkPlayerCountAsBitFlags())
     {
         u8 i;
 
@@ -987,12 +986,12 @@ static void Task_DoRecordMixing(u8 taskId)
     case 6:
         if (!sub_801048C(FALSE))
         {
-            CreateTask(sub_8153688, 5);
+            CreateTask(Task_LinkSave, 5);
             task->data[0] ++;
         }
         break;
-    case 7: // wait for sub_8153688 to finish.
-        if (!FuncIsActiveTask(sub_8153688))
+    case 7: // wait for Task_LinkSave to finish.
+        if (!FuncIsActiveTask(Task_LinkSave))
         {
             if (gWirelessCommType)
             {

@@ -3,7 +3,7 @@
 #include "battle_gfx_sfx_util.h"
 #include "berry.h"
 #include "contest.h"
-#include "contest_link_80F57C4.h"
+#include "contest_util.h"
 #include "contest_painting.h"
 #include "data.h"
 #include "daycare.h"
@@ -121,7 +121,7 @@ void ShouldReadyContestArtist(void)
 {
     if (gContestFinalStandings[gContestPlayerMonIndex] == 0
      && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
-     && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
+     && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = TRUE;
     }
@@ -303,7 +303,7 @@ u8 GiveMonArtistRibbon(void)
     if (!hasArtistRibbon 
         && gContestFinalStandings[gContestPlayerMonIndex] == 0 
         && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
-        && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
+        && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
         hasArtistRibbon = 1;
         SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);
