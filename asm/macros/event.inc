@@ -318,7 +318,7 @@
 	.endm
 
 	@ Sets the values of variables 0x8000, 0x8001, and 0x8002 to the current hour, minute, and second. In FRLG, 
-        @ this command sets those variables to zero.
+	@ this command sets those variables to zero.
 	.macro gettime
 	.byte 0x2e
 	.endm
@@ -382,7 +382,7 @@
 	.endm
 
 	@ Sends the player to Warp warp on Map bank.map. If the specified warp is 0xFF, 
-        @ then the player will instead be sent to (X, Y) on the map.
+	@ then the player will instead be sent to (X, Y) on the map.
 	.macro warp map:req, warp:req, X:req, Y:req
 	.byte 0x39
 	map \map
@@ -434,7 +434,7 @@
 	.endm
 
 	@ Sets the warp destination that a warp to Warp 127 on Map 127.127 will connect to. 
-        @ Useful when a map has warps that need to go to script-controlled locations (i.e. elevators).
+	@ Useful when a map has warps that need to go to script-controlled locations (i.e. elevators).
 	.macro setdynamicwarp map:req, warp:req, X:req, Y:req
 	.byte 0x3f
 	map \map
@@ -474,7 +474,7 @@
 	.endm
 
 	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and 
-        @ VAR_RESULT will be set to TRUE; otherwise, VAR_RESULT is set to FALSE.
+	@ VAR_RESULT will be set to TRUE; otherwise, VAR_RESULT is set to FALSE.
 	.macro additem index:req, quantity=1
 	.byte 0x44
 	.2byte \index
