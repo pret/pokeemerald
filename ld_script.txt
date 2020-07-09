@@ -65,6 +65,7 @@ SECTIONS {
         src/union_room.o(.text);
         src/mystery_gift.o(.text);
         src/union_room_player_avatar.o(.text);
+        src/wireless_communication_status_screen.o(.text);
         src/union_room_battle.o(.text);
         src/mevent2.o(.text);
         src/mevent_801BAAC.o(.text);
@@ -168,7 +169,7 @@ SECTIONS {
         src/record_mixing.o(.text);
         src/secret_base.o(.text);
         src/tv.o(.text);
-        src/contest_link_80F57C4.o(.text);
+        src/contest_util.o(.text);
         src/script_pokemon_util_80F87D8.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
@@ -176,7 +177,7 @@ SECTIONS {
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
-        src/contest_link_80FC4F4.o(.text);
+        src/contest_link.o(.text);
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
         src/battle_anim_effects_2.o(.text);
@@ -237,7 +238,7 @@ SECTIONS {
         src/cable_car.o(.text);
         src/math_util.o(.text);
         src/roulette_util.o(.text);
-        src/rom_81520A8.o(.text);
+        src/confetti_util.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         src/field_effect_helpers.o(.text);
@@ -328,7 +329,7 @@ SECTIONS {
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
-        src/contest_link_81D9DE4.o(.text);
+        src/contest_link_util.o(.text);
         src/gym_leader_rematch.o(.text);
         src/unk_transition.o(.text);
         src/international_string_util.o(.text);
@@ -450,6 +451,7 @@ SECTIONS {
         src/union_room.o(.rodata);
         src/mystery_gift.o(.rodata);
         src/union_room_player_avatar.o(.rodata);
+        src/wireless_communication_status_screen.o(.rodata);
         src/union_room_battle.o(.rodata);
         src/mevent2.o(.rodata);
         src/mevent_801BAAC.o(.rodata);
@@ -542,13 +544,13 @@ SECTIONS {
         src/record_mixing.o(.rodata);
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
-        src/contest_link_80F57C4.o(.rodata);
+        src/contest_util.o(.rodata);
         src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         src/fldeff_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
-        src/contest_link_80FC4F4.o(.rodata);
+        src/contest_link.o(.rodata);
         src/item_use.o(.rodata);
         src/battle_anim_effects_1.o(.rodata);
         src/battle_anim_effects_2.o(.rodata);

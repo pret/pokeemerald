@@ -600,15 +600,15 @@ BerryBlender_EventScript_TryDoLinkBlender: @ 82940BB
 	waitmessage
 	special TryBerryBlenderLinkup
 	waitstate
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BerryBlender_EventScript_SpawnLinkPartners
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
 	goto_if_eq BerryBlender_EventScript_CloseLinkNotReady
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq BerryBlender_EventScript_CloseLinkDifferentSelections
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BerryBlender_EventScript_CloseLink
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq BerryBlender_EventScript_LinkError
 	end
 
@@ -712,22 +712,22 @@ BerryBlender_EventScript_DecideLinkLeader: @ 82941F8
 
 BerryBlender_EventScript_TryLeadGroup: @ 8294235
 	call BerryBlender_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BerryBlender_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BerryBlender_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq BerryBlender_EventScript_TryLeadGroup
 	release
 	end
 
 BerryBlender_EventScript_TryJoinGroup: @ 829425D
 	call BerryBlender_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BerryBlender_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BerryBlender_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq BerryBlender_EventScript_TryJoinGroup
 	release
 	end

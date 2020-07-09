@@ -85,10 +85,10 @@ static u8 sub_81D4DE8(struct Unk03006370 *arg0)
     return var0;
 }
 
-static void sub_81D4E30(void)
+static void OpenEReaderLink(void)
 {
     memset(gDecompressionBuffer, 0, 0x2000);
-    gLinkType = LINKTYPE_0x5503;
+    gLinkType = LINKTYPE_EREADER;
     OpenLink();
     SetSuppressLinkErrorMessage(TRUE);
 }
@@ -255,7 +255,7 @@ static void sub_81D5084(u8 taskId)
             data->unk8 = 1;
         break;
     case 1:
-        sub_81D4E30();
+        OpenEReaderLink();
         sub_81D505C(&data->unk0);
         data->unk8 = 2;
         break;
@@ -285,7 +285,7 @@ static void sub_81D5084(u8 taskId)
     case 5:
         if (sub_81D5064(&data->unk0, 90))
         {
-            sub_81D4E30();
+            OpenEReaderLink();
             data->unk8 = 6;
         }
         else if (gMain.newKeys & B_BUTTON)
@@ -319,7 +319,7 @@ static void sub_81D5084(u8 taskId)
         else if (sub_81D5064(&data->unk0, 10))
         {
             CloseLink();
-            sub_81D4E30();
+            OpenEReaderLink();
             sub_81D505C(&data->unk0);
         }
         break;
@@ -360,7 +360,7 @@ static void sub_81D5084(u8 taskId)
             data->unk8 = 12;
         break;
     case 12:
-        sub_81D4E30();
+        OpenEReaderLink();
         AddTextPrinterToWindow1(gJPText_AllowEReaderToLoadCard);
         data->unk8 = 13;
         break;

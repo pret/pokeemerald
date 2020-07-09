@@ -832,7 +832,7 @@ u32 sub_8020C0C(MainCallback callback)
     return 0;
 }
 
-void sub_8020C70(MainCallback callback)
+void StartBerryCrush(MainCallback callback)
 {
     u8 playerCount = 0;
     u8 multiplayerId;
@@ -842,7 +842,7 @@ void sub_8020C70(MainCallback callback)
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
         Rfu.unk_12 = 0;
-        Rfu.unk_ee = 1;
+        Rfu.errorState = 1;
         return;
     }
 
@@ -853,7 +853,7 @@ void sub_8020C70(MainCallback callback)
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
         Rfu.unk_12 = 0;
-        Rfu.unk_ee = 1;
+        Rfu.errorState = 1;
         return;
     }
 
@@ -863,7 +863,7 @@ void sub_8020C70(MainCallback callback)
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
         Rfu.unk_12 = 0;
-        Rfu.unk_ee = 1;
+        Rfu.errorState = 1;
         return;
     }
 
@@ -3013,10 +3013,10 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
         DrawDialogueFrame(0, 0);
         AddTextPrinterParameterized2(0, 1, gText_SavingDontTurnOffPower, 0, 0, 2, 1, 3);
         CopyWindowToVram(0, 3);
-        CreateTask(sub_8153688, 0);
+        CreateTask(Task_LinkSave, 0);
         break;
     case 3:
-        if (FuncIsActiveTask(sub_8153688))
+        if (FuncIsActiveTask(Task_LinkSave))
             return 0;
         break;
     case 4:
@@ -3209,6 +3209,11 @@ static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attr
     return 0;
 }
 
+#if MODERN
+// TODO remove this as soon as the code below is understood
+// add a UBFIX if required (code buggy?)
+__attribute__((optimize("no-aggressive-loop-optimizations")))
+#endif
 void sub_8024578(struct BerryCrushGame *r4)
 {
     u8 r5 = 0;

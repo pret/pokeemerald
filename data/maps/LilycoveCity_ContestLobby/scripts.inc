@@ -43,7 +43,7 @@ LilycoveCity_ContestLobby_EventScript_ContestArtist:: @ 821A264
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 0
+	showcontestwinner CONTEST_WINNER_ARTIST
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -217,7 +217,7 @@ LilycoveCity_ContestLobby_EventScript_LinkContestArtist:: @ 821A436
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 0
+	showcontestwinner CONTEST_WINNER_ARTIST
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink
@@ -505,42 +505,42 @@ LilycoveCity_ContestLobby_EventScript_NinjaBoy:: @ 821A735
 LilycoveCity_ContestLobby_EventScript_ContestWinner1:: @ 821A73E
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 1
+	showcontestwinner CONTEST_WINNER_HALL_1
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner2:: @ 821A745
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 2
+	showcontestwinner CONTEST_WINNER_HALL_2
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner3:: @ 821A74C
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 3
+	showcontestwinner CONTEST_WINNER_HALL_3
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner4:: @ 821A753
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 4
+	showcontestwinner CONTEST_WINNER_HALL_4
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner5:: @ 821A75A
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 5
+	showcontestwinner CONTEST_WINNER_HALL_5
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner6:: @ 821A761
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 6
+	showcontestwinner CONTEST_WINNER_HALL_6
 	releaseall
 	end
 
@@ -767,15 +767,15 @@ LilycoveCity_ContestLobby_EventScript_TrySetUpLinkContest:: @ 821AA15
 	call_if_eq LilycoveCity_ContestLobby_EventScript_TryLinkGMode
 	compare VAR_TEMP_C, 2
 	goto_if_ge LilycoveCity_ContestLobby_EventScript_CancelLinkContest
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkContest
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkError
-	compare VAR_RESULT, 10
+	compare VAR_RESULT, LINKUP_FAILED_CONTEST_GMODE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkModeDifference
 	message3 LilycoveCity_ContestLobby_Text_Transmitting
 	contestlinktransfer
@@ -889,22 +889,22 @@ LilycoveCity_ContestLobby_EventScript_DecideLinkLeader:: @ 821ABA6
 
 LilycoveCity_ContestLobby_EventScript_TryLeadGroup:: @ 821ABE3
 	call LilycoveCity_ContestLobby_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TryLeadGroup
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_TryJoinGroup:: @ 821AC0B
 	call LilycoveCity_ContestLobby_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TryJoinGroup
 	release
 	end

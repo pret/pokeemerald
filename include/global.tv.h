@@ -18,6 +18,13 @@ typedef union // size = 0x24
         /*0x23*/ u8 trainerIdHi;
     } common;
 
+    // Common init (used for initialization loop)
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 pad02[34];
+    } commonInit;
+
     // Local shows
     // TVSHOW_FAN_CLUB_LETTER
     struct {

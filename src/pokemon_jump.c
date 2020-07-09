@@ -216,7 +216,7 @@ static bool32 sub_802C618(void);
 static bool32 sub_802C650(void);
 static void sub_802C688(int);
 static int sub_802C6B0(void);
-static bool32 sub_802C70C(void);
+static bool32 AreLinkQueuesEmpty(void);
 static int sub_802C73C(u8 *);
 static void sub_802C780(void);
 static int sub_802C790(int);
@@ -400,7 +400,7 @@ static const struct PokemonJumpMons gPkmnJumpSpecies[] =
     { .species = SPECIES_BAGON,      .unk2 = 1, },
 };
 
-void sub_802A9A8(u16 partyIndex, MainCallback callback)
+void StartPokemonJump(u16 partyIndex, MainCallback callback)
 {
     u8 taskId;
 
@@ -876,7 +876,7 @@ static bool32 sub_802B31C(void)
         gUnknown_02022CFC->unk8++;
         // fall through
     case 1:
-        if (sub_802C70C())
+        if (AreLinkQueuesEmpty())
             return FALSE;
         break;
     }
@@ -1146,14 +1146,14 @@ static bool32 sub_802B720(void)
         }
         break;
     case 2:
-        if (sub_802C70C())
+        if (AreLinkQueuesEmpty())
         {
-            CreateTask(sub_8153688, 6);
+            CreateTask(Task_LinkSave, 6);
             gUnknown_02022CFC->unk8++;
         }
         break;
     case 3:
-        if (!FuncIsActiveTask(sub_8153688))
+        if (!FuncIsActiveTask(Task_LinkSave))
         {
             sub_802DA14();
             gUnknown_02022CFC->unk8++;
@@ -2025,9 +2025,9 @@ static int sub_802C6B0(void)
     return count;
 }
 
-static bool32 sub_802C70C(void)
+static bool32 AreLinkQueuesEmpty(void)
 {
-    return !Rfu.unk_124.unk_8c2 && !Rfu.unk_9e8.unk_232;
+    return !Rfu.recvQueue.count && !Rfu.sendQueue.count;
 }
 
 static int sub_802C73C(u8 *arg0)
