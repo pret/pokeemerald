@@ -172,7 +172,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney:: @ 824BF62
 BattleFrontier_BattleDomeBattleRoom_EventScript_WonLvOpenTourney:: @ 824BF96
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp, MSGBOX_DEFAULT
 BattleFrontier_BattleDomeBattleRoom_EventScript_CelebrateWin:: @ 824BF9E
-	special DoConfettiEffect
+	special DoDomeConfetti
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60

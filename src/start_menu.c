@@ -133,8 +133,8 @@ static u8 BattlePyramidRetireInputCallback(void);
 // Task callbacks
 static void StartMenuTask(u8 taskId);
 static void SaveGameTask(u8 taskId);
-static void sub_80A0550(u8 taskId);
-static void sub_80A08A4(u8 taskId);
+static void Task_SaveAfterLinkBattle(u8 taskId);
+static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
 static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
@@ -219,8 +219,8 @@ static bool8 SaveSuccesTimer(void);
 static bool8 SaveErrorTimer(void);
 static void InitBattlePyramidRetire(void);
 static void sub_80A03D8(void);
-static bool32 sub_80A03E4(u8 *par1);
-static void sub_80A0540(void);
+static bool32 InitSaveWindowAfterLinkBattle(u8 *par1);
+static void CB2_SaveAfterLinkBattle(void);
 static void ShowSaveInfoWindow(void);
 static void RemoveSaveInfoWindow(void);
 static void HideStartMenuWindow(void);
@@ -525,7 +525,7 @@ void Task_ShowStartMenu(u8 taskId)
     {
     case 0:
         if (InUnionRoom() == TRUE)
-            var_800D_set_xB();
+            SetUsingUnionRoomStartMenu();
 
         gMenuCallback = HandleStartMenuInput;
         task->data[0]++;
@@ -1159,9 +1159,9 @@ static void sub_80A03D8(void)
     TransferPlttBuffer();
 }
 
-static bool32 sub_80A03E4(u8 *par1)
+static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
 {
-    switch (*par1)
+    switch (*state)
     {
     case 0:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
@@ -1193,43 +1193,43 @@ static bool32 sub_80A03E4(u8 *par1)
         return TRUE;
     }
 
-    (*par1)++;
+    (*state)++;
     return FALSE;
 }
 
-void sub_80A0514(void)
+void CB2_SetUpSaveAfterLinkBattle(void)
 {
-    if (sub_80A03E4(&gMain.state))
+    if (InitSaveWindowAfterLinkBattle(&gMain.state))
     {
-        CreateTask(sub_80A0550, 0x50);
-        SetMainCallback2(sub_80A0540);
+        CreateTask(Task_SaveAfterLinkBattle, 0x50);
+        SetMainCallback2(CB2_SaveAfterLinkBattle);
     }
 }
 
-static void sub_80A0540(void)
+static void CB2_SaveAfterLinkBattle(void)
 {
     RunTasks();
     UpdatePaletteFade();
 }
 
-static void sub_80A0550(u8 taskId)
+static void Task_SaveAfterLinkBattle(u8 taskId)
 {
-    s16 *step = gTasks[taskId].data;
+    s16 *state = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
-        switch (*step)
+        switch (*state)
         {
         case 0:
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0,
                                         1,
                                         gText_SavingDontTurnOffPower,
-                                        255,
+                                        TEXT_SPEED_FF,
                                         NULL,
-                                        2,
-                                        1,
-                                        3);
+                                        TEXT_COLOR_DARK_GREY,
+                                        TEXT_COLOR_WHITE,
+                                        TEXT_COLOR_LIGHT_GREY);
             DrawTextBorderOuter(0, 8, 14);
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);
@@ -1237,37 +1237,37 @@ static void sub_80A0550(u8 taskId)
 
             if (gWirelessCommType != 0 && InUnionRoom())
             {
-                if (sub_800A07C())
+                if (Link_AnyPartnersPlayingFRLG_JP())
                 {
-                    *step = 1;
+                    *state = 1;
                 }
                 else
                 {
-                    *step = 5;
+                    *state = 5;
                 }
             }
             else
             {
                 gSoftResetDisabled = 1;
-                *step = 1;
+                *state = 1;
             }
             break;
         case 1:
             SetContinueGameWarpStatusToDynamicWarp();
             FullSaveGame();
-            *step = 2;
+            *state = 2;
             break;
         case 2:
             if (CheckSaveFile())
             {
                 ClearContinueGameWarpStatus2();
-                *step = 3;
+                *state = 3;
                 gSoftResetDisabled = 0;
             }
             break;
         case 3:
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-            *step = 4;
+            *state = 4;
             break;
         case 4:
             FreeAllWindowBuffers();
@@ -1275,13 +1275,13 @@ static void sub_80A0550(u8 taskId)
             DestroyTask(taskId);
             break;
         case 5:
-            CreateTask(sub_8153688, 0x5);
-            *step = 6;
+            CreateTask(Task_LinkSave, 5);
+            *state = 6;
             break;
         case 6:
-            if (!FuncIsActiveTask(sub_8153688))
+            if (!FuncIsActiveTask(Task_LinkSave))
             {
-                *step = 3;
+                *state = 3;
             }
             break;
         }
@@ -1357,21 +1357,25 @@ static void RemoveSaveInfoWindow(void)
     RemoveWindow(sSaveInfoWindowId);
 }
 
-static void sub_80A08A4(u8 taskId)
+static void Task_WaitForBattleTowerLinkSave(u8 taskId)
 {
-    if (!FuncIsActiveTask(sub_8153688))
+    if (!FuncIsActiveTask(Task_LinkSave))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();
     }
 }
 
-void sub_80A08CC(void)
+#define tPartialSave data[2]
+
+void SaveForBattleTowerLink(void)
 {
-    u8 taskId = CreateTask(sub_8153688, 0x5);
-    gTasks[taskId].data[2] = 1;
-    gTasks[CreateTask(sub_80A08A4, 0x6)].data[1] = taskId;
+    u8 taskId = CreateTask(Task_LinkSave, 5);
+    gTasks[taskId].tPartialSave = TRUE;
+    gTasks[CreateTask(Task_WaitForBattleTowerLinkSave, 6)].data[1] = taskId;
 }
+
+#undef tPartialSave
 
 static void HideStartMenuWindow(void)
 {
