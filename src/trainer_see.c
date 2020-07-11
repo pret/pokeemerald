@@ -462,22 +462,11 @@ static bool8 TrainerSeeIdle(u8 taskId, struct Task *task, struct ObjectEvent *tr
 static bool8 TrainerExclamationMark(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     u8 direction;
-    struct ObjectEvent *followerObj = GetFollowerObject();
 
     ObjectEventGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
     direction = GetFaceDirectionMovementAction(trainerObj->facingDirection);
     ObjectEventSetHeldMovement(trainerObj, direction);
-    if (followerObj) {
-      struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
-      s16 x = playerObj->currentCoords.x;
-      s16 y = playerObj->currentCoords.y;
-      // Move back player's location by facing direction
-      MoveCoords(GetOppositeDirection(playerObj->facingDirection), &x, &y);
-      direction = GetDirectionToFace(followerObj->previousCoords.x, followerObj->previousCoords.y, x, y);
-      followerObj->singleMovementActive = FALSE;
-      ObjectEventSetHeldMovement(followerObj, GetWalkNormalMovementAction(direction));
-    }
     task->tFuncId++;
     return TRUE;
 }
