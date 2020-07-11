@@ -187,7 +187,7 @@ static void sub_81DA700(void)
 {
     u16 *dst1, *dst2;
 
-    sub_8149F58(&dst1, &dst2);
+    GetBg0TilesDst(&dst1, &dst2);
     LZ77UnCompVram(gUnknown_0862AD54, dst2);
     LZ77UnCompVram(gUnknown_0862AF30, dst1);
     LoadPalette(gUnknown_0862B53C, 0xF0, 0x20);

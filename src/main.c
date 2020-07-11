@@ -75,7 +75,7 @@ static EWRAM_DATA u16 gTrainerId = 0;
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
 static void CallCallbacks(void);
-static void SeedRngWithRtc(void);
+//static void SeedRngWithRtc(void);
 static void ReadKeys(void);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
@@ -113,11 +113,12 @@ void AgbMain()
     InitIntrHandlers();
     m4aSoundInit();
     EnableVCountIntrAtLine150();
-    sub_800E6D0();
+    InitRFU();
     RtcInit();
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
+    //SeedRngWithRtc(); see comment at SeedRngWithRtc declaration below
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
@@ -227,6 +228,14 @@ void EnableVCountIntrAtLine150(void)
     SetGpuReg(REG_OFFSET_DISPSTAT, gpuReg | DISPSTAT_VCOUNT_INTR);
     EnableInterrupts(INTR_FLAG_VCOUNT);
 }
+
+// oops! FRLG commented this out to remove RTC, however Emerald didnt undo this!
+//static void SeedRngWithRtc(void)
+//{
+//    u32 seed = RtcGetMinuteCount();
+//    seed = (seed >> 16) ^ (seed & 0xFFFF);
+//    SeedRng(seed);
+//}
 
 void InitKeys(void)
 {
@@ -358,7 +367,7 @@ static void VBlankIntr(void)
     if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
         Random();
 
-    sub_800E174();
+    UpdateWirelessStatusIndicatorSprite();
 
     INTR_CHECK |= INTR_FLAG_VBLANK;
     gMain.intrCheck |= INTR_FLAG_VBLANK;

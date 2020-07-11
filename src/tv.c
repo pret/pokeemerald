@@ -764,11 +764,11 @@ void ClearTVShowData(void)
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows); i ++)
     {
-        gSaveBlock1Ptr->tvShows[i].common.kind = 0;
-        gSaveBlock1Ptr->tvShows[i].common.active = 0;
-        for (j = 0; j < sizeof(TVShow) - 2; j ++)
+        gSaveBlock1Ptr->tvShows[i].commonInit.kind = 0;
+        gSaveBlock1Ptr->tvShows[i].commonInit.active = 0;
+        for (j = 0; j < ARRAY_COUNT(gSaveBlock1Ptr->tvShows[i].commonInit.pad02); j ++)
         {
-            gSaveBlock1Ptr->tvShows[i].common.pad02[j] = 0;
+            gSaveBlock1Ptr->tvShows[i].commonInit.pad02[j] = 0;
         }
     }
     ClearPokemonNews();
@@ -3167,11 +3167,11 @@ void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)
 {
     u8 i;
 
-    shows[idx].common.kind = TVSHOW_OFF_AIR;
-    shows[idx].common.active = FALSE;
-    for (i = 0; i < 34; i ++)
+    shows[idx].commonInit.kind = TVSHOW_OFF_AIR;
+    shows[idx].commonInit.active = FALSE;
+    for (i = 0; i < ARRAY_COUNT(shows[idx].commonInit.pad02); i++)
     {
-        shows[idx].common.pad02[i] = 0;
+        shows[idx].commonInit.pad02[i] = 0;
     }
 }
 
@@ -3800,25 +3800,28 @@ static s8 sub_80F06D0(TVShow *tvShows)
     return -1;
 }
 
-#ifdef NONMATCHING
 static void sub_80F0708(void) // FIXME: register allocation shenanigans
 {
     u16 i;
-    TVShow *show;
+    u16 j;
 
     for (i = 0; i < LAST_TVSHOW_IDX; i ++)
     {
         switch (gSaveBlock1Ptr->tvShows[i].common.kind)
         {
             case TVSHOW_CONTEST_LIVE_UPDATES:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->contestLiveUpdates.species, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->contestLiveUpdates.winningSpecies, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->contestLiveUpdates.species;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->contestLiveUpdates.winningSpecies;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
                 break;
             case TVSHOW_BATTLE_UPDATE:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleUpdate.speciesPlayer, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleUpdate.speciesOpponent, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->battleUpdate.speciesPlayer;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->battleUpdate.speciesOpponent;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_FAN_CLUB_SPECIAL:
                 break;
@@ -3828,43 +3831,57 @@ static void sub_80F0708(void) // FIXME: register allocation shenanigans
             case TVSHOW_OFF_AIR:
                 break;
             case TVSHOW_FAN_CLUB_LETTER:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->fanclubLetter.species, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->fanclubLetter.species;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_RECENT_HAPPENINGS:
                 break;
             case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->fanclubOpinions.species, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->fanclubOpinions.species;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_UNKN_SHOWTYPE_04:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->unkShow04.var06, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->unkShow04.var06;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_NAME_RATER_SHOW:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->nameRaterShow.species, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->nameRaterShow.randomSpecies, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->nameRaterShow.species;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->nameRaterShow.randomSpecies;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->bravoTrainer.species, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->bravoTrainer.species;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->bravoTrainerTower.species, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->bravoTrainerTower.defeatedSpecies, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->bravoTrainerTower.species;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->bravoTrainerTower.defeatedSpecies;
+                sub_80F0B24(j, i);
                 break;
 
             case TVSHOW_POKEMON_TODAY_CAUGHT:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->pokemonToday.species, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->pokemonToday.species;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_SMART_SHOPPER:
                 break;
             case TVSHOW_POKEMON_TODAY_FAILED:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->pokemonTodayFailed.species, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->pokemonTodayFailed.species2, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->pokemonTodayFailed.species;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->pokemonTodayFailed.species2;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_FISHING_ADVICE:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->pokemonAngler.species, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->pokemonAngler.species;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_WORLD_OF_MASTERS:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->worldOfMasters.species, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->worldOfMasters.caughtPoke, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->worldOfMasters.species;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->worldOfMasters.caughtPoke;
+                sub_80F0B24(j, i);
                 break;
 
             case TVSHOW_TODAYS_RIVAL_TRAINER:
@@ -3876,37 +3893,48 @@ static void sub_80F0708(void) // FIXME: register allocation shenanigans
             case TVSHOW_FIND_THAT_GAMER:
                 break;
             case TVSHOW_BREAKING_NEWS:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->breakingNews.lastOpponentSpecies, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->breakingNews.poke1Species, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->breakingNews.lastOpponentSpecies;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->breakingNews.poke1Species;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_SECRET_BASE_VISIT:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->secretBaseVisit.species, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->secretBaseVisit.species;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_LOTTO_WINNER:
                 break;
             case TVSHOW_BATTLE_SEMINAR:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleSeminar.species, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleSeminar.foeSpecies, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->battleSeminar.species;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->battleSeminar.foeSpecies;
+                sub_80F0B24(j, i);
                 break;
             case TVSHOW_TRAINER_FAN_CLUB:
                 break;
             case TVSHOW_CUTIES:
                 break;
             case TVSHOW_FRONTIER:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->frontier.species1, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->frontier.species2, i);
-                switch ((&gSaveBlock1Ptr->tvShows[i])->frontier.facility)
+                j = (&gSaveBlock1Ptr->tvShows[i])->frontier.species1;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->frontier.species2;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->frontier.facility;
+                switch (j)
                 {
                     case  3:
                     case  4:
                         break;
                     case  1:
                     case  5 ... 13:
-                        sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->frontier.species3, i);
+                        j = (&gSaveBlock1Ptr->tvShows[i])->frontier.species3;
+                        sub_80F0B24(j, i);
                         break;
                     case 2:
-                        sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->frontier.species3, i);
-                        sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->frontier.species4, i);
+                        j = (&gSaveBlock1Ptr->tvShows[i])->frontier.species3;
+                        sub_80F0B24(j, i);
+                        j = (&gSaveBlock1Ptr->tvShows[i])->frontier.species4;
+                        sub_80F0B24(j, i);
                         break;
                 }
                 break;
@@ -3926,444 +3954,6 @@ static void sub_80F0708(void) // FIXME: register allocation shenanigans
         }
     }
 }
-#else
-NAKED static void sub_80F0708(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r9\n"
-                    "\tmov r6, r8\n"
-                    "\tpush {r6,r7}\n"
-                    "\tsub sp, 0x8\n"
-                    "\tmovs r0, 0\n"
-                    "\tmov r9, r0\n"
-                    "_080F0716:\n"
-                    "\tldr r3, =gSaveBlock1Ptr\n"
-                    "\tldr r1, [r3]\n"
-                    "\tmov r4, r9\n"
-                    "\tlsls r2, r4, 3\n"
-                    "\tadds r0, r2, r4\n"
-                    "\tlsls r0, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r0, =0x000027cc\n"
-                    "\tadds r1, r0\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tadds r7, r2, 0\n"
-                    "\tcmp r0, 0x29\n"
-                    "\tbls _080F0732\n"
-                    "\tb _080F0AD8\n"
-                    "_080F0732:\n"
-                    "\tlsls r0, 2\n"
-                    "\tldr r1, =_080F0748\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r0, [r0]\n"
-                    "\tmov pc, r0\n"
-                    "\t.pool\n"
-                    "\t.align 2, 0\n"
-                    "_080F0748:\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_OFF_AIR\n"
-                    "\t.4byte _080F0848  @ TVSHOW_FAN_CLUB_LETTER\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_RECENT_HAPPENINGS\n"
-                    "\t.4byte _080F0860  @ TVSHOW_PKMN_FAN_CLUB_OPINIONS\n"
-                    "\t.4byte _080F0878  @ TVSHOW_UNKN_SHOWTYPE_04\n"
-                    "\t.4byte _080F0890  @ TVSHOW_NAME_RATER_SHOW\n"
-                    "\t.4byte _080F08BC  @ TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE\n"
-                    "\t.4byte _080F08D4  @ TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE\n"
-                    "\t.4byte _080F07F0  @ TVSHOW_CONTEST_LIVE_UPDATES\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_3_CHEERS_FOR_POKEBLOCKS\n"
-                    "\t.4byte _080F081C  @ TVSHOW_BATTLE_UPDATE\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_FAN_CLUB_SPECIAL\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_CONTEST_LIVE_UPDATES_2\n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0900  @ TVSHOW_POKEMON_TODAY_CAUGHT\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_SMART_SHOPPER\n"
-                    "\t.4byte _080F0918  @ TVSHOW_POKEMON_TODAY_FAILED\n"
-                    "\t.4byte _080F0944  @ TVSHOW_FISHING_ADVICE\n"
-                    "\t.4byte _080F095C  @ TVSHOW_WORLD_OF_MASTERS\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_TODAYS_RIVAL_TRAINER\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_TREND_WATCHER\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_TREASURE_INVESTIGATORS\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_FIND_THAT_GAMER\n"
-                    "\t.4byte _080F0974  @ TVSHOW_BREAKING_NEWS\n"
-                    "\t.4byte _080F09A0  @ TVSHOW_SECRET_BASE_VISIT\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_LOTTO_WINNER\n"
-                    "\t.4byte _080F09C0  @ TVSHOW_BATTLE_SEMINAR\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_TRAINER_FAN_CLUB\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_CUTIES\n"
-                    "\t.4byte _080F09F4  @ TVSHOW_FRONTIER\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_NUMBER_ONE\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_SECRET_BASE_SECRETS\n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_SAFARI_FAN_CLUB\n"
-                    "\t.4byte _080F0AD8  @ \n"
-                    "\t.4byte _080F0AE2_break  @ TVSHOW_MASS_OUTBREAK\n"
-                    "_080F07F0:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r7, r1\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0x12]\n"
-                    "\tlsls r5, r1, 24\n"
-                    "\tlsrs r5, 24\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r6\n"
-                    "\tldrh r0, [r4, 0x2]\n"
-                    "\tb _080F09E6\n"
-                    "\t.pool\n"
-                    "_080F081C:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r4, r7, r2\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0x16]\n"
-                    "\tlsls r5, r2, 24\n"
-                    "\tlsrs r5, 24\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r6\n"
-                    "\tldrh r0, [r4, 0x2]\n"
-                    "\tb _080F09E6\n"
-                    "\t.pool\n"
-                    "_080F0848:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r4, r9\n"
-                    "\tadds r1, r7, r4\n"
-                    "\tlsls r1, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r0, =0x000027cc\n"
-                    "\tadds r1, r0\n"
-                    "\tldrh r0, [r1, 0x2]\n"
-                    "\tb _080F09B0\n"
-                    "\t.pool\n"
-                    "_080F0860:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r1, r7, r2\n"
-                    "\tlsls r1, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r4, =0x000027cc\n"
-                    "\tadds r1, r4\n"
-                    "\tldrh r0, [r1, 0x2]\n"
-                    "\tlsls r1, r2, 24\n"
-                    "\tb _080F09B2\n"
-                    "\t.pool\n"
-                    "_080F0878:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r1, r7, r2\n"
-                    "\tlsls r1, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r4, =0x000027cc\n"
-                    "\tadds r1, r4\n"
-                    "\tldrh r0, [r1, 0x6]\n"
-                    "\tlsls r1, r2, 24\n"
-                    "\tb _080F09B2\n"
-                    "\t.pool\n"
-                    "_080F0890:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r7, r1\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0x2]\n"
-                    "\tlsls r5, r1, 24\n"
-                    "\tlsrs r5, 24\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r6\n"
-                    "\tldrh r0, [r4, 0x1C]\n"
-                    "\tb _080F09E6\n"
-                    "\t.pool\n"
-                    "_080F08BC:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r1, r7, r2\n"
-                    "\tlsls r1, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r4, =0x000027cc\n"
-                    "\tadds r1, r4\n"
-                    "\tldrh r0, [r1, 0x2]\n"
-                    "\tlsls r1, r2, 24\n"
-                    "\tb _080F09B2\n"
-                    "\t.pool\n"
-                    "_080F08D4:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r7, r1\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0xA]\n"
-                    "\tlsls r5, r1, 24\n"
-                    "\tlsrs r5, 24\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r6\n"
-                    "\tldrh r0, [r4, 0x14]\n"
-                    "\tb _080F09E6\n"
-                    "\t.pool\n"
-                    "_080F0900:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r1, r7, r2\n"
-                    "\tlsls r1, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r4, =0x000027cc\n"
-                    "\tadds r1, r4\n"
-                    "\tldrh r0, [r1, 0x10]\n"
-                    "\tlsls r1, r2, 24\n"
-                    "\tb _080F09B2\n"
-                    "\t.pool\n"
-                    "_080F0918:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r7, r1\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0xC]\n"
-                    "\tlsls r5, r1, 24\n"
-                    "\tlsrs r5, 24\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r6\n"
-                    "\tldrh r0, [r4, 0xE]\n"
-                    "\tb _080F09E6\n"
-                    "\t.pool\n"
-                    "_080F0944:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r1, r7, r2\n"
-                    "\tlsls r1, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r4, =0x000027cc\n"
-                    "\tadds r1, r4\n"
-                    "\tldrh r0, [r1, 0x4]\n"
-                    "\tlsls r1, r2, 24\n"
-                    "\tb _080F09B2\n"
-                    "\t.pool\n"
-                    "_080F095C:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r7, r1\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0x8]\n"
-                    "\tb _080F09D0\n"
-                    "\t.pool\n"
-                    "_080F0974:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r4, r7, r2\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0x2]\n"
-                    "\tlsls r5, r2, 24\n"
-                    "\tlsrs r5, 24\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r6\n"
-                    "\tldrh r0, [r4, 0xA]\n"
-                    "\tb _080F09E6\n"
-                    "\t.pool\n"
-                    "_080F09A0:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r4, r9\n"
-                    "\tadds r1, r7, r4\n"
-                    "\tlsls r1, 2\n"
-                    "\tadds r1, r0\n"
-                    "\tldr r0, =0x000027cc\n"
-                    "\tadds r1, r0\n"
-                    "\tldrh r0, [r1, 0x8]\n"
-                    "_080F09B0:\n"
-                    "\tlsls r1, r4, 24\n"
-                    "_080F09B2:\n"
-                    "\tlsrs r1, 24\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tb _080F0AE2_break\n"
-                    "\t.pool\n"
-                    "_080F09C0:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r7, r1\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r6, =0x000027cc\n"
-                    "\tadds r0, r6\n"
-                    "\tldrh r0, [r0, 0x6]\n"
-                    "_080F09D0:\n"
-                    "\tlsls r5, r1, 24\n"
-                    "\tlsrs r5, 24\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r6\n"
-                    "\tldrh r0, [r4, 0x4]\n"
-                    "_080F09E6:\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tb _080F0AE2_break\n"
-                    "\t.pool\n"
-                    "_080F09F4:\n"
-                    "\tldr r0, [r3]\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r4, r7, r2\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r5, =0x000027cc\n"
-                    "\tadds r0, r5\n"
-                    "\tldrh r0, [r0, 0x4]\n"
-                    "\tlsls r2, 24\n"
-                    "\tmov r8, r2\n"
-                    "\tlsrs r6, r2, 24\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tstr r3, [sp, 0x4]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tadds r0, r5\n"
-                    "\tldrh r0, [r0, 0x6]\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r3, [sp, 0x4]\n"
-                    "\tldr r0, [r3]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r5\n"
-                    "\tldrb r0, [r4, 0xD]\n"
-                    "\tsubs r0, 0x1\n"
-                    "\tmov r6, r8\n"
-                    "\tcmp r0, 0xC\n"
-                    "\tbhi _080F0AE2_break\n"
-                    "\tlsls r0, 2\n"
-                    "\tldr r1, =_080F0A48\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r0, [r0]\n"
-                    "\tmov pc, r0\n"
-                    "\t.pool\n"
-                    "\t.align 2, 0\n"
-                    "_080F0A48:\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0AA0\n"
-                    "\t.4byte _080F0AE2_break\n"
-                    "\t.4byte _080F0AE2_break\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "\t.4byte _080F0A7C\n"
-                    "_080F0A7C:\n"
-                    "\tldr r0, =gSaveBlock1Ptr\n"
-                    "\tldr r1, [r0]\n"
-                    "\tmov r4, r9\n"
-                    "\tadds r0, r7, r4\n"
-                    "\tlsls r0, 2\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r1, =0x000027cc\n"
-                    "\tadds r0, r1\n"
-                    "\tldrh r0, [r0, 0x8]\n"
-                    "\tlsrs r1, r6, 24\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tb _080F0AE2_break\n"
-                    "\t.pool\n"
-                    "_080F0AA0:\n"
-                    "\tldr r2, =gSaveBlock1Ptr\n"
-                    "\tldr r0, [r2]\n"
-                    "\tmov r1, r9\n"
-                    "\tadds r4, r7, r1\n"
-                    "\tlsls r4, 2\n"
-                    "\tadds r0, r4, r0\n"
-                    "\tldr r5, =0x000027cc\n"
-                    "\tadds r0, r5\n"
-                    "\tldrh r0, [r0, 0x8]\n"
-                    "\tlsrs r6, 24\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tstr r2, [sp]\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tldr r2, [sp]\n"
-                    "\tldr r0, [r2]\n"
-                    "\tadds r4, r0\n"
-                    "\tadds r4, r5\n"
-                    "\tldrh r0, [r4, 0xA]\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tbl sub_80F0B24\n"
-                    "\tb _080F0AE2_break\n"
-                    "\t.pool\n"
-                    "_080F0AD8:\n"
-                    "\tmov r2, r9\n"
-                    "\tlsls r0, r2, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tbl SetTvShowInactive\n"
-                    "_080F0AE2_break:\n"
-                    "\tmov r0, r9\n"
-                    "\tadds r0, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tmov r9, r0\n"
-                    "\tcmp r0, 0x17\n"
-                    "\tbhi _080F0AF2\n"
-                    "\tb _080F0716\n"
-                    "_080F0AF2:\n"
-                    "\tadd sp, 0x8\n"
-                    "\tpop {r3,r4}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0");
-}
-#endif
 
 void SetTvShowInactive(u8 showIdx)
 {

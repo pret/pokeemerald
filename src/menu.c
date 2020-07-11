@@ -1742,7 +1742,7 @@ void clear_scheduled_bg_copies_to_vram(void)
     memset(gUnknown_0203CDA4, 0, sizeof(gUnknown_0203CDA4));
 }
 
-void schedule_bg_copy_tilemap_to_vram(u8 bgId)
+void ScheduleBgCopyTilemapToVram(u8 bgId)
 {
     gUnknown_0203CDA4[bgId] = TRUE;
 }
@@ -1771,7 +1771,7 @@ void do_scheduled_bg_tilemap_copies_to_vram(void)
     }
 }
 
-void reset_temp_tile_data_buffers(void)
+void ResetTempTileDataBuffers(void)
 {
     int i;
     for (i = 0; i < (s32)ARRAY_COUNT(gUnknown_0203CDAC); i++)
@@ -1781,7 +1781,7 @@ void reset_temp_tile_data_buffers(void)
     gUnknown_0203CDA8 = 0;
 }
 
-bool8 free_temp_tile_data_buffers_if_possible(void)
+bool8 FreeTempTileDataBuffersIfPossible(void)
 {
     int i;
 
@@ -1803,7 +1803,7 @@ bool8 free_temp_tile_data_buffers_if_possible(void)
     }
 }
 
-void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
+void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
     if (gUnknown_0203CDA8 < ARRAY_COUNT(gUnknown_0203CDAC))
@@ -2107,7 +2107,7 @@ void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
     BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality, 1), x, y, 32, 32);
 }
 
-void sub_819A2BC(u8 palOffset, u8 palId)
+void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
 {
     const u16 *palette;
 

@@ -2,36 +2,36 @@
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
 #define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
 
-#define OLD_UNOWN_BASE_STATS                \
-    {                                       \
-        .baseHP = 50,                       \
-        .baseAttack = 150,                  \
-        .baseDefense = 50,                  \
-        .baseSpAttack = 150,                \
-        .baseSpDefense = 50,                \
-        .baseSpeed = 150,                   \
-        .type1 = TYPE_NORMAL,               \
-        .type2 = TYPE_NORMAL,               \
-        .catchRate = 3,                     \
-        .expYield = 1,                      \
-        .evYield_HP = 2,                    \
-        .evYield_Attack = 2,                \
-        .evYield_Defense = 2,               \
-        .evYield_Speed = 2,                 \
-        .evYield_SpAttack = 2,              \
-        .evYield_SpDefense = 2,             \
-        .item1 = ITEM_NONE,                 \
-        .item2 = ITEM_NONE,                 \
-        .genderRatio = MON_GENDERLESS,      \
-        .eggCycles = 120,                   \
-        .friendship = 0,                    \
-        .growthRate = GROWTH_MEDIUM_FAST,   \
-        .eggGroup1 = EGG_GROUP_UNDISCOVERED,\
-        .eggGroup2 = EGG_GROUP_UNDISCOVERED,\
-        .abilities = {0, 0},                \
-        .safariZoneFleeRate = 0,            \
-        .bodyColor = BODY_COLOR_BLACK,      \
-        .noFlip = FALSE,                    \
+#define OLD_UNOWN_BASE_STATS                        \
+    {                                               \
+        .baseHP = 50,                               \
+        .baseAttack = 150,                          \
+        .baseDefense = 50,                          \
+        .baseSpeed = 150,                           \
+        .baseSpAttack = 150,                        \
+        .baseSpDefense = 50,                        \
+        .type1 = TYPE_NORMAL,                       \
+        .type2 = TYPE_NORMAL,                       \
+        .catchRate = 3,                             \
+        .expYield = 1,                              \
+        .evYield_HP = 2,                            \
+        .evYield_Attack = 2,                        \
+        .evYield_Defense = 2,                       \
+        .evYield_Speed = 2,                         \
+        .evYield_SpAttack = 2,                      \
+        .evYield_SpDefense = 2,                     \
+        .item1 = ITEM_NONE,                         \
+        .item2 = ITEM_NONE,                         \
+        .genderRatio = MON_GENDERLESS,              \
+        .eggCycles = 120,                           \
+        .friendship = 0,                            \
+        .growthRate = GROWTH_MEDIUM_FAST,           \
+        .eggGroup1 = EGG_GROUP_UNDISCOVERED,        \
+        .eggGroup2 = EGG_GROUP_UNDISCOVERED,        \
+        .abilities = {ABILITY_NONE, ABILITY_NONE},  \
+        .safariZoneFleeRate = 0,                    \
+        .bodyColor = BODY_COLOR_BLACK,              \
+        .noFlip = FALSE,                            \
     }
 
 const struct BaseStats gBaseStats[] =

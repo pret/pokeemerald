@@ -30,6 +30,7 @@
 #include "link_rfu.h"
 #include "mevent_news.h"
 #include "mevent_server.h"
+#include "constants/cable_club.h"
 
 void bgid_upload_textbox_1(u8 bgId);
 void task_add_00_mystery_gift(void);
@@ -1135,9 +1136,9 @@ void task_add_00_mystery_gift(void)
 
 void task00_mystery_gift(u8 taskId)
 {
-    struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
-    u32 sp0;
-    const u8 * r1;
+    struct MysteryGiftTaskData *data = (void *)gTasks[taskId].data;
+    u32 sp0, flag;
+    const u8 *r1;
 
     switch (data->state)
     {
@@ -1233,32 +1234,30 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case  5:
-    {
-        register u8 eos asm("r1");
-        gStringVar1[0] = (eos = EOS);
-        gStringVar2[0] = eos;
-        gStringVar3[0] = eos;
-    }
+        *gStringVar1 = EOS;
+        *gStringVar2 = EOS;
+        *gStringVar3 = EOS;
+
         switch (data->IsCardOrNews)
         {
         case 0:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(0x15);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_CARD2);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(0x15);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_CARD2);
             }
             break;
         case 1:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(0x16);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_NEWS2);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(0x16);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_NEWS2);
             }
             break;
         }
@@ -1271,7 +1270,7 @@ void task00_mystery_gift(u8 taskId)
             data->state = 7;
             mevent_client_do_init(data->IsCardOrNews);
         }
-        else if (gSpecialVar_Result == 5)
+        else if (gSpecialVar_Result == LINKUP_FAILED)
         {
             ClearScreenInBg0(TRUE);
             data->state = 3;
@@ -1306,7 +1305,8 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case  9:
-        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, mevent_client_get_buffer()))
+        flag = mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, mevent_client_get_buffer());
+        switch (flag)
         {
         case 0:
             mevent_client_set_param(0);
@@ -1333,7 +1333,8 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 11:
-        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_ThrowAwayWonderCard))
+        flag = mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_ThrowAwayWonderCard);
+        switch (flag)
         {
         case 0:
             if (CheckReceivedGiftFromWonderCard() == TRUE)
@@ -1360,7 +1361,8 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 12:
-        switch ((u32)mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_HaventReceivedCardsGift))
+        flag = mevent_message_print_and_prompt_yes_no(&data->textState, &data->curPromptWindowId, FALSE, gText_HaventReceivedCardsGift);
+        switch (flag)
         {
         case 0:
             mevent_client_set_param(0);
@@ -1397,8 +1399,6 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 15:
-    {
-        register bool32 flag asm("r1");
         r1 = mevent_message(&sp0, data->IsCardOrNews, data->source, data->prevPromptWindowId);
         if (r1 == NULL)
         {
@@ -1425,7 +1425,7 @@ void task00_mystery_gift(u8 taskId)
                     GenerateRandomNews(2);
                 }
             }
-            if (sp0 == 0)
+            if (!sp0)
             {
                 data->state = 0;
                 PrintMysteryGiftOrEReaderTopMenu(0, 0);
@@ -1436,7 +1436,6 @@ void task00_mystery_gift(u8 taskId)
             }
         }
         break;
-    }
     case 16:
         if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gText_CommunicationError))
         {
@@ -1601,10 +1600,10 @@ void task00_mystery_gift(u8 taskId)
             switch (data->IsCardOrNews)
             {
             case 0:
-                MEvent_CreateTask_Leader(21);
+                MEvent_CreateTask_Leader(ACTIVITY_WONDER_CARD2);
                 break;
             case 1:
-                MEvent_CreateTask_Leader(22);
+                MEvent_CreateTask_Leader(ACTIVITY_WONDER_NEWS2);
                 break;
             }
             data->source = 1;
@@ -1617,19 +1616,17 @@ void task00_mystery_gift(u8 taskId)
             ClearScreenInBg0(1);
             data->state = 31;
         }
-        else if (gSpecialVar_Result == 5)
+        else if (gSpecialVar_Result == LINKUP_FAILED)
         {
             ClearScreenInBg0(1);
             data->state = 18;
         }
         break;
     case 31:
-    {
-        register u8 eos asm("r1");
-        gStringVar1[0] = (eos = EOS);
-        gStringVar2[0] = eos;
-        gStringVar3[0] = eos;
-    }
+        *gStringVar1 = EOS;
+        *gStringVar2 = EOS;
+        *gStringVar3 = EOS;
+
         if (data->IsCardOrNews == 0)
         {
             AddTextPrinterToWindow1(gText_SendingWonderCard);

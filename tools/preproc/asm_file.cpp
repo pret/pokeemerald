@@ -20,6 +20,7 @@
 
 #include <cstdio>
 #include <cstdarg>
+#include <stdexcept>
 #include "preproc.h"
 #include "asm_file.h"
 #include "char_util.h"

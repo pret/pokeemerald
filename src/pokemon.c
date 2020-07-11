@@ -2736,7 +2736,7 @@ void SetDeoxysStats(void)
     }
 }
 
-u16 sub_8068B48(void)
+u16 GetUnionRoomTrainerPic(void)
 {
     u8 linkId;
     u32 arrId;
@@ -2751,7 +2751,7 @@ u16 sub_8068B48(void)
     return FacilityClassToPicIndex(gLinkPlayerFacilityClasses[arrId]);
 }
 
-u16 sub_8068BB0(void)
+u16 GetUnionRoomTrainerClass(void)
 {
     u8 linkId;
     u32 arrId;
@@ -3245,7 +3245,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
         // moves always do at least 1 damage.
@@ -3292,7 +3292,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
         // are effects of weather negated with cloud nine or air lock

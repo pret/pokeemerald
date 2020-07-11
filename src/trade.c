@@ -52,6 +52,7 @@
 #include "constants/rgb.h"
 #include "constants/species.h"
 #include "constants/songs.h"
+#include "constants/union_room.h"
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
@@ -234,7 +235,7 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 static bool8 SendLinkData(const void *linkData, u32 size)
 {
-    if (gUnknown_02022C2C == 29)
+    if (gPlayerCurrActivity == ACTIVITY_29)
     {
         rfu_NI_setSendData(lman.acceptSlot_flag, 84, linkData, size);
         return TRUE;
@@ -252,7 +253,7 @@ static void sub_80771AC(u8 a0)
 
 static bool32 sub_80771BC(void)
 {
-    if (gUnknown_02022C2C == 29)
+    if (gPlayerCurrActivity == ACTIVITY_29)
     {
         if (gRfuSlotStatusNI[sub_800E87C(lman.acceptSlot_flag)]->send.state == 0)
             return TRUE;
@@ -288,7 +289,7 @@ static void TradeResetReceivedFlag(u32 who)
 
 static bool32 IsWirelessTrade(void)
 {
-    if (gWirelessCommType && gUnknown_02022C2C == 29)
+    if (gWirelessCommType && gPlayerCurrActivity == ACTIVITY_29)
         return TRUE;
     else
         return FALSE;
@@ -388,20 +389,20 @@ static void CB2_CreateTradeMenu(void)
 
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = LINKTYPE_0x1122;
+            gLinkType = LINKTYPE_TRADE_CONNECTING;
             sTradeMenuData->timer = 0;
 
             if (gWirelessCommType)
             {
-                sub_800B488();
+                SetWirelessCommType1();
                 OpenLink();
-                sub_8011BA4();
+                CreateTask_RfuIdle();
             }
             else
             {
                 OpenLink();
                 gMain.state++;
-                CreateTask(task00_08081A90, 1);
+                CreateTask(Task_WaitForLinkPlayerConnection, 1);
             }
         }
         else
@@ -437,7 +438,7 @@ static void CB2_CreateTradeMenu(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            sub_8011BD0();
+            DestroyTask_RfuIdle();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuData->timer = 0;
@@ -1199,7 +1200,7 @@ static void QueueLinkTradeData(void)
 {
     if (sTradeMenuData->playerLinkFlagChoseAction && sTradeMenuData->partnerLinkFlagChoseAction)
     {
-        if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE 
+        if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE
             && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_TRADE)
         {
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_BOTH_MONS_SELECTED;
@@ -1208,7 +1209,7 @@ static void QueueLinkTradeData(void)
             QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
             sTradeMenuData->playerLinkFlagChoseAction = sTradeMenuData->partnerLinkFlagChoseAction = 0;
         }
-        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE 
+        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_TRADE
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_CANCEL)
         {
             PrintTradeMessage(TRADE_MSG_CANCELED);
@@ -1219,7 +1220,7 @@ static void QueueLinkTradeData(void)
             sTradeMenuData->playerLinkFlagChoseAction = sTradeMenuData->partnerLinkFlagChoseAction = 0;
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
         }
-        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL 
+        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_TRADE)
         {
             PrintTradeMessage(TRADE_MSG_FRIEND_WANTS_TO_TRADE);
@@ -1230,7 +1231,7 @@ static void QueueLinkTradeData(void)
             sTradeMenuData->playerLinkFlagChoseAction = sTradeMenuData->partnerLinkFlagChoseAction = 0;
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
         }
-        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL 
+        else if (sTradeMenuData->playerLinkFlagChoseAction == WANTS_TO_CANCEL
               && sTradeMenuData->partnerLinkFlagChoseAction == WANTS_TO_CANCEL)
         {
             sTradeMenuData->linkData[0] = LINKCMD_CANCEL_TRADE;
@@ -1244,7 +1245,7 @@ static void QueueLinkTradeData(void)
 
     if (sTradeMenuData->playerLinkFlagStatus && sTradeMenuData->partnerLinkFlagStatus)
     {
-        if (sTradeMenuData->playerLinkFlagStatus == INITIATE_TRADE 
+        if (sTradeMenuData->playerLinkFlagStatus == INITIATE_TRADE
          && sTradeMenuData->partnerLinkFlagStatus == INITIATE_TRADE)
         {
             sTradeMenuData->linkData[0] = LINKCMD_START_TRADE;
@@ -1255,7 +1256,7 @@ static void QueueLinkTradeData(void)
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_LINK_TRADE_FADE_OUT;
         }
 
-        if (sTradeMenuData->playerLinkFlagStatus == CANCEL_TRADE 
+        if (sTradeMenuData->playerLinkFlagStatus == CANCEL_TRADE
          || sTradeMenuData->partnerLinkFlagStatus == CANCEL_TRADE)
         {
             PrintTradeMessage(TRADE_MSG_CANCELED);
@@ -1464,10 +1465,10 @@ static void TradeMenuShowMonSummaryScreen(void)
     {
         // Player's party
         if (sTradeMenuData->cursorPosition < PARTY_SIZE)
-            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gPlayerParty, sTradeMenuData->cursorPosition, sTradeMenuData->partyCounts[TRADE_PLAYER] - 1, CB2_ReturnToTradeMenu);
+            ShowPokemonSummaryScreen(PSS_MODE_LOCK_MOVES, gPlayerParty, sTradeMenuData->cursorPosition, sTradeMenuData->partyCounts[TRADE_PLAYER] - 1, CB2_ReturnToTradeMenu);
         // Partner's party
         else
-            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gEnemyParty, sTradeMenuData->cursorPosition - PARTY_SIZE, sTradeMenuData->partyCounts[TRADE_PARTNER] - 1, CB2_ReturnToTradeMenu);
+            ShowPokemonSummaryScreen(PSS_MODE_LOCK_MOVES, gEnemyParty, sTradeMenuData->cursorPosition - PARTY_SIZE, sTradeMenuData->partyCounts[TRADE_PARTNER] - 1, CB2_ReturnToTradeMenu);
         FreeAllWindowBuffers();
     }
 }
@@ -1504,7 +1505,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     if (hasLiveMon)
         hasLiveMon = BOTH_MONS_VALID;
 
-    return hasLiveMon; //PLAYER_MON_INVALID or BOTH_MONS_VALID 
+    return hasLiveMon; //PLAYER_MON_INVALID or BOTH_MONS_VALID
 }
 
 // Returns TRUE if the partner's selected mon is invalid, FALSE otherwise
@@ -1841,10 +1842,10 @@ static void DrawTradeMenuParty(u8 whichParty)
         sTradeMenuData->drawPartyState[whichParty]++;
         break;
     case 4:
-        DrawTradeMenuPartyMonInfo(whichParty, partyIdx, 
-            sTradeMenuPartyMonBoxDimensions[whichParty][0] + 4, 
-            sTradeMenuPartyMonBoxDimensions[whichParty][1] + 1, 
-            sTradeMenuPartyMonBoxDimensions[whichParty][0], 
+        DrawTradeMenuPartyMonInfo(whichParty, partyIdx,
+            sTradeMenuPartyMonBoxDimensions[whichParty][0] + 4,
+            sTradeMenuPartyMonBoxDimensions[whichParty][1] + 1,
+            sTradeMenuPartyMonBoxDimensions[whichParty][0],
             sTradeMenuPartyMonBoxDimensions[whichParty][1]);
         sTradeMenuData->drawPartyState[whichParty]++;
         break;
@@ -2028,7 +2029,7 @@ static void ResetTradeMenuPartyPositions(u8 whichParty)
 static void PrintNicknamesForTradeMenu(void)
 {
     rbox_fill_rectangle(1);
-  //PrintPartyNicknamesForTradeMenu(TRADE_PLAYER); ?  
+  //PrintPartyNicknamesForTradeMenu(TRADE_PLAYER); ?
     PrintPartyNicknamesForTradeMenu(TRADE_PARTNER);
 }
 
@@ -2749,7 +2750,7 @@ void CB2_LinkTrade(void)
     case 0:
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = LINKTYPE_0x1144;
+            gLinkType = LINKTYPE_TRADE_DISCONNECTED;
             CloseLink();
         }
         sTradeData = AllocZeroed(sizeof(*sTradeData));
@@ -4539,8 +4540,8 @@ static void CB2_TryFinishTrade(void)
     else
     {
         UpdateTradeFinishFlags();
-        if (mpId == 0 
-            && sTradeData->playerLinkFlagFinishTrade == READY_FINISH_TRADE 
+        if (mpId == 0
+            && sTradeData->playerLinkFlagFinishTrade == READY_FINISH_TRADE
             && sTradeData->partnerLinkFlagFinishTrade == READY_FINISH_TRADE)
         {
             sTradeData->linkData[0] = LINKCMD_CONFIRM_FINISH_TRADE;
@@ -4596,7 +4597,7 @@ static void CB2_SaveAndEndTrade(void)
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
         if (gWirelessCommType)
         {
-            sub_801B990(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+            RecordIdOfWonderCardSenderByEventType(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
         }
         SetContinueGameWarpStatusToDynamicWarp();
         sub_8153380();

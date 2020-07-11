@@ -182,10 +182,6 @@ static const union AnimCmd *const sAnims_BasicRock[] =
 {
     sAnim_BasicRock_0,
     sAnim_BasicRock_1,
-};
-
-static const union AnimCmd *const sAnims_WeatherBallRockDown[] =
-{
     sAnim_WeatherBallRockDown_0,
     sAnim_WeatherBallRockDown_1,
 };
@@ -296,7 +292,7 @@ const struct SpriteTemplate gWeatherBallRockDownSpriteTemplate =
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = sAnims_WeatherBallRockDown,
+    .anims = &sAnims_BasicRock[2],
     .images = NULL,
     .affineAnims = sAffineAnims_BasicRock,
     .callback = AnimWeatherBallDown,

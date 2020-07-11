@@ -293,7 +293,7 @@ static const s16 sEggShardVelocities[][2] =
 
 // code
 
-static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
+static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 {
     u16 species;
     u32 personality, pokerus;
@@ -357,7 +357,7 @@ static void AddHatchedMonToParty(u8 id)
     u8 mapNameID;
     struct Pokemon* mon = &gPlayerParty[id];
 
-    CreatedHatchedMon(mon, &gEnemyParty[0]);
+    CreateHatchedMon(mon, &gEnemyParty[0]);
     SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
 
     pokeNum = GetMonData(mon, MON_DATA_SPECIES);
@@ -490,7 +490,7 @@ static void CB2_EggHatch_0(void)
         SetVBlankCallback(VBlankCB_EggHatch);
         gSpecialVar_0x8005 = GetCurrentMapMusic();
 
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
 
@@ -865,7 +865,7 @@ static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
     AddTextPrinterParameterized4(windowId, 1, x, y, 0, 0, sEggHatchData->textColor, speed, string);
 }
 
-u8 GetEggStepsToSubtract(void)
+u8 GetEggCyclesToSubtract(void)
 {
     u8 count, i;
     for (count = CalculatePlayerPartyCount(), i = 0; i < count; i++)

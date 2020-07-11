@@ -533,9 +533,16 @@ static bool32 SavedMapViewIsEmpty(void)
     u16 i;
     u32 marker = 0;
 
+#ifndef UBFIX
     // BUG: This loop extends past the bounds of the mapView array. Its size is only 0x100.
     for (i = 0; i < 0x200; i++)
         marker |= gSaveBlock1Ptr->mapView[i];
+#else
+    // UBFIX: Only iterate over 0x100
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->mapView); i++)
+        marker |= gSaveBlock1Ptr->mapView[i];
+#endif
+
 
     if (marker == 0)
         return TRUE;
@@ -917,11 +924,11 @@ void GetCameraCoords(u16 *x, u16 *y)
     *y = gSaveBlock1Ptr->pos.y;
 }
 
-void sub_8088B94(int x, int y, int a2)
+void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable)
 {
     if (x >= 0 && x < gBackupMapLayout.width && y >= 0 && y < gBackupMapLayout.height)
     {
-        if (a2 != 0)
+        if (impassable)
             gBackupMapLayout.map[x + gBackupMapLayout.width * y] |= METATILE_COLLISION_MASK;
         else
             gBackupMapLayout.map[x + gBackupMapLayout.width * y] &= ~METATILE_COLLISION_MASK;
@@ -950,7 +957,7 @@ void copy_tileset_patterns_to_vram(struct Tileset const *tileset, u16 numTiles, 
         if (!tileset->isCompressed)
             LoadBgTiles(2, tileset->tiles, numTiles * 32, offset);
         else
-            decompress_and_copy_tile_data_to_vram(2, tileset->tiles, numTiles * 32, offset, 0);
+            DecompressAndCopyTileDataToVram(2, tileset->tiles, numTiles * 32, offset, 0);
     }
 }
 

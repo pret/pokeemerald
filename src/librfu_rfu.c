@@ -488,7 +488,7 @@ static void rfu_CB_configGameData(u8 reqCommand, u16 reqResult)
         for (i = 0; i < RFU_GAME_NAME_LENGTH; ++i)
             gRfuLinkStatus->my.gname[i] = *gname_uname_p++;
         ++gname_uname_p;
-        for (i = 0; i < RFU_USER_NAME_LENGTH; ++i)
+        for (i = 0; i < PLAYER_NAME_LENGTH + 1; ++i)
             gRfuLinkStatus->my.uname[i] = *gname_uname_p++;
     }
     rfu_STC_REQ_callback(reqCommand, reqResult);
@@ -718,7 +718,7 @@ static void rfu_STC_readParentCandidateList(void)
             for (j = 0; j < RFU_GAME_NAME_LENGTH; ++j)
                 target->gname[j] = *packet_p++;
             ++packet_p;
-            for (j = 0; j < RFU_USER_NAME_LENGTH; ++j)
+            for (j = 0; j < PLAYER_NAME_LENGTH + 1; ++j)
                 target->uname[j] = *packet_p++;
             ++gRfuLinkStatus->findParentCount;
         }
