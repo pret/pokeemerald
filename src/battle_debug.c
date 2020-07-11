@@ -124,6 +124,7 @@ enum
     VAR_U16_4_ENTRIES,
     VAL_S8,
     VAL_ITEM,
+    VAL_ALL_STAT_STAGES,
 };
 
 enum
@@ -988,6 +989,8 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
     switch (data->currentMainListItemId)
     {
     case LIST_ITEM_ABILITY:
+        itemsCount = 1;
+        break;
     case LIST_ITEM_HELD_ITEM:
         itemsCount = 2;
         break;
@@ -1005,7 +1008,7 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         itemsCount = ARRAY_COUNT(sStatsListItems);
         break;
     case LIST_ITEM_STAT_STAGES:
-        itemsCount = 7;
+        itemsCount = 8;
         break;
     case LIST_ITEM_STATUS1:
         listTemplate.items = sStatus1ListItems;
@@ -1067,6 +1070,8 @@ static void PadString(const u8 *src, u8 *dst)
     dst[i] = EOS;
 }
 
+static const u8 sTextAll[] = _("All");
+
 static void PrintSecondaryEntries(struct BattleDebugMenu *data)
 {
     u8 text[20];
@@ -1105,9 +1110,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         // Allow changing all moves at once. Useful for testing in wild doubles.
         if (data->currentMainListItemId == LIST_ITEM_MOVES)
         {
-            u8 textAll[] = _("All");
-
-            PadString(textAll, text);
+            PadString(sTextAll, text);
             printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
             AddTextPrinter(&printer, 0, NULL);
         }
@@ -1138,7 +1141,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         }
         break;
     case LIST_ITEM_STAT_STAGES:
-        for (i = 0; i < 7; i++)
+        for (i = 0; i < NUM_BATTLE_STATS - 1; i++)
         {
             u8 *txtPtr = StringCopy(text, gStatNamesTable[STAT_ATK + i]);
             txtPtr[0] = CHAR_SPACE;
@@ -1158,6 +1161,10 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
             printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
             AddTextPrinter(&printer, 0, NULL);
         }
+        // Allow changing all stat stages at once.
+        PadString(sTextAll, text);
+        printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
+        AddTextPrinter(&printer, 0, NULL);
         break;
     }
 }
@@ -1202,6 +1209,7 @@ static const u32 GetBitfieldValue(u32 value, u32 currBit, u32 bitsCount)
 
 static void UpdateBattlerValue(struct BattleDebugMenu *data)
 {
+    u32 i;
     switch (data->modifyArrows.typeOfVal)
     {
     case VAL_U8:
@@ -1218,6 +1226,10 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
         ((u16*)(data->modifyArrows.modifiedValPtr))[1] = data->modifyArrows.currValue;
         ((u16*)(data->modifyArrows.modifiedValPtr))[2] = data->modifyArrows.currValue;
         ((u16*)(data->modifyArrows.modifiedValPtr))[3] = data->modifyArrows.currValue;
+        break;
+    case VAL_ALL_STAT_STAGES:
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
+            gBattleMons[data->battlerId].statStages[i] = data->modifyArrows.currValue;
         break;
     case VAL_U32:
         *(u32*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
@@ -1514,9 +1526,18 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.minValue = 0;
         data->modifyArrows.maxValue = 12;
         data->modifyArrows.maxDigits = 2;
-        data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
-        data->modifyArrows.typeOfVal = VAL_U8;
-        data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
+        if (data->currentSecondaryListItemId == NUM_BATTLE_STATS - 1) // Change all stats
+        {
+            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[STAT_ATK];
+            data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[STAT_ATK];
+            data->modifyArrows.typeOfVal = VAL_ALL_STAT_STAGES;
+        }
+        else
+        {
+            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
+            data->modifyArrows.typeOfVal = VAL_U8;
+            data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
+        }
         break;
     case LIST_ITEM_VARIOUS:
         if (data->currentSecondaryListItemId == VARIOUS_SHOW_HP)
