@@ -12,6 +12,8 @@ struct GbaToPngOptions {
     int width;
     int metatileWidth;
     int metatileHeight;
+    char *tilemapFilePath;
+    bool isAffineMap;
 };
 
 struct PngToGbaOptions {
@@ -19,6 +21,8 @@ struct PngToGbaOptions {
     int bitDepth;
     int metatileWidth;
     int metatileHeight;
+    char *tilemapFilePath;
+    bool isAffineMap;
 };
 
 #endif // OPTIONS_H

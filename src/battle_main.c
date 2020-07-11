@@ -995,7 +995,7 @@ static void CB2_HandleStartBattle(void)
                     sub_8036A5C();
                     SetPlayerBerryDataInBattleStruct();
 
-                    if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                    if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                     {
                         gLinkPlayers[0].id = 0;
                         gLinkPlayers[1].id = 1;

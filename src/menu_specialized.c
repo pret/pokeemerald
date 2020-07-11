@@ -704,7 +704,7 @@ void InitMoveRelearnerWindows(bool8 useContextWindow)
     DrawStdFrameWithCustomTileAndPalette(2, 0, 1, 0xE);
     DrawStdFrameWithCustomTileAndPalette(3, 0, 1, 0xE);
     nullsub_79();
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void nullsub_79(void)

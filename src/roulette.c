@@ -943,15 +943,15 @@ static void sub_81405CC(void)
         ResetPaletteFade();
         ResetSpriteData();
         ResetTasks();
-        reset_temp_tile_data_buffers();
+        ResetTempTileDataBuffers();
         break;
     case 3:
         LoadPalette(&gUnknown_085B5BFC, 0, 0x1C0);
-        decompress_and_copy_tile_data_to_vram(1, gRouletteMenuTiles, 0, 0, 0);
-        decompress_and_copy_tile_data_to_vram(2, gRouletteWheelTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gRouletteMenuTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, gRouletteWheelTiles, 0, 0, 0);
         break;
     case 4:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return;
 
         sub_8140470();

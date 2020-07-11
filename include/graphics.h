@@ -6255,8 +6255,8 @@ extern const u8 gNamingScreenUnderscoreTiles[];
 
 extern const u32 gUnknown_08D9BA44[];
 
-extern const u32 gContestConfetti_Gfx[];
-extern const u32 gContestConfetti_Pal[];
+extern const u32 gConfetti_Gfx[];
+extern const u32 gConfetti_Pal[];
 
 extern const u32 gUnknown_08C093F0[];
 extern const u32 gSubstituteDollTilemap[];
@@ -7100,23 +7100,23 @@ extern const u32 gRouletteCreditTiles[];
 extern const u32 gRouletteNumbersTiles[];
 extern const u32 gRouletteMultiplierTiles[];
 
-// Contest Link
-extern const u32 gUnknown_08C19588[];
+// Contest util
+extern const u32 gContestResults_Gfx[];
 extern const u32 gUnknown_08C19EEC[];
 extern const u32 gUnknown_08C1A000[];
 extern const u32 gUnknown_08C1A12C[];
-extern const u32 gUnknown_08C1A2B4[];
-extern const u16 gUnknown_08DC6498[];
-extern const u16 gUnknown_08DC63F8[];
-extern const u16 gUnknown_08DC6420[];
-extern const u16 gUnknown_08DC6448[];
-extern const u16 gUnknown_08DC6470[];
-extern const u16 gUnknown_08DC64AC[];
-extern const u16 gUnknown_08DC64C0[];
-extern const u16 gUnknown_08DC64D4[];
-extern const u16 gUnknown_08DC64E8[];
-extern const u16 gUnknown_08DC64FC[];
-extern const u16 gUnknown_08DC6510[];
+extern const u32 gContestResults_Pal[];
+extern const u16 gLinkContestResults_Tilemap[];
+extern const u16 gNormalContestResults_Tilemap[];
+extern const u16 gSuperContestResults_Tilemap[];
+extern const u16 gHyperContestResults_Tilemap[];
+extern const u16 gMasterContestResults_Tilemap[];
+extern const u16 gCoolContestResults_Tilemap[];
+extern const u16 gBeautyContestResults_Tilemap[];
+extern const u16 gCuteContestResults_Tilemap[];
+extern const u16 gSmartContestResults_Tilemap[];
+extern const u16 gToughContestResults_Tilemap[];
+extern const u16 gContestResults_Tilemap[];
 
 // Trainer Card.
 extern const u16 gHoennTrainerCard0Star_Pal[];
@@ -7159,14 +7159,14 @@ extern const u16 gEasyChatRightWindow_Pal[];
 extern const u32 gUsePokeblockCondition_Gfx[];
 
 // Union Room Chat
-extern const u16 gUnknown_08DD4BB0[];
-extern const u16 gUnknown_08DD4BD0[];
-extern const u32 gUnknown_08DD4BF0[];
-extern const u32 gUnknown_08DD4C4C[];
-extern const u32 gUnknown_08DD4CF8[];
-extern const u16 gLinkMiscMenu_Pal[];
-extern const u32 gLinkMiscMenu_Gfx[];
-extern const u32 gLinkMiscMenu_Tilemap[];
+extern const u16 gUnionRoomChat_Background_Pal[];
+extern const u32 gUnionRoomChat_Background_Gfx[];
+extern const u32 gUnionRoomChat_Background_Tilemap[];
+extern const u16 gUnionRoomChat_Window_Pal1[];
+extern const u16 gUnionRoomChat_Window_Pal2[];
+extern const u32 gUnionRoomChat_Border_Gfx[];
+extern const u32 gUnionRoomChat_Border_Tilemap[];
+extern const u32 gUnionRoomChat_RButtonLabels[];
 
 // Use Pokeblock
 extern const u8 gPokenavConditionCancel_Gfx[];

@@ -487,7 +487,7 @@ static void Task_StarterChoose1(u8 taskId)
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x2A8, 0xD);
     AddTextPrinterParameterized(0, 1, gText_BirchInTrouble, 0, 1, 0, NULL);
     PutWindowTilemap(0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_StarterChoose2;
 }
 
@@ -540,7 +540,7 @@ static void Task_StarterChoose4(u8 taskId)
     PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     CreateYesNoMenu(&gUnknown_085B1DDC, 0x2A8, 0xD, 0);
     gTasks[taskId].func = Task_StarterChoose5;
 }
@@ -603,7 +603,7 @@ static void CreateStarterPokemonLabel(u8 selection)
     AddTextPrinterParameterized3(sStarterChooseWindowId, 1, width, 0x11, sTextColors, 0, speciesName);
 
     PutWindowTilemap(sStarterChooseWindowId);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 
     labelLeft = sStarterLabelCoords[selection][0] * 8 - 4;
     labelRight = (sStarterLabelCoords[selection][0] + 13) * 8 + 4;
@@ -621,7 +621,7 @@ static void sub_8134604(void)
     sStarterChooseWindowId = 0xFF;
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void Task_MoveStarterChooseCursor(u8 taskId)

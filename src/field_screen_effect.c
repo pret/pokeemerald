@@ -162,7 +162,7 @@ static void Task_ReturnToFieldCableLink(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[1] = sub_80B3050();
+        task->data[1] = CreateTask_ReestablishCableClubLink();
         task->data[0]++;
         break;
     case 1:
@@ -204,7 +204,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
         if (!IsLinkTaskFinished())
         {
             if (++task->data[1] > 1800)
-                sub_8011170(0x6000);
+                GetLinkmanErrorParams(0x6000);
         }
         else
         {
@@ -215,7 +215,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
     case 2:
         if (WaitForWeatherFadeIn() == TRUE)
         {
-            sub_8009F18();
+            StartSendingKeysToLink();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -240,7 +240,7 @@ void Task_ReturnToFieldRecordMixing(u8 taskId)
         }
         break;
     case 2:
-        sub_8009F18();
+        StartSendingKeysToLink();
         ResetAllMultiplayerState();
         ScriptContext2_Disable();
         DestroyTask(taskId);
@@ -1137,7 +1137,7 @@ static void Task_OrbEffect(u8 taskId)
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
         SetBgTilemapPalette(0, 0, 0, 0x1E, 0x14, 0xF);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         SetOrbFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], tCenterX, tCenterY, 1);
         CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
         ScanlineEffect_SetParams(sFlashEffectParams);
