@@ -1633,13 +1633,19 @@ static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species, u8
   objectEvent->extra.mon.shiny = shiny;
   if (graphicsInfo->paletteTag1 == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+    // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
+    // so that palette tags do not overlap
     const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
     // Free palette if otherwise unused
     sprite->inUse = FALSE;
     FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
     sprite->inUse = TRUE;
-    LoadCompressedSpritePalette(spritePalette);
-    sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
+    if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF) { // Load compressed palette
+      LoadCompressedSpritePalette(spritePalette);
+      sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
+      UpdateSpritePaletteWithTime(sprite->oam.paletteNum);
+    } else
+      sprite->oam.paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
   }
 }
 
