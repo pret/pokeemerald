@@ -52,10 +52,7 @@ struct BagMenuStruct
     void (*exitCallback)(void);
     u8 tilemapBuffer[0x800];
     u8 spriteId[12];
-    u8 windowPointers[7];
-    u8 unk817;
-    u8 unk818;
-    u8 unk819;
+    u8 windowPointers[10];
     u8 itemOriginalLocation;
     u8 pocketSwitchDisabled:4;
     u8 itemIconSlot:2;
