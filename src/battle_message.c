@@ -2357,7 +2357,7 @@ void BufferStringBattle(u16 stringID)
                 }
                 else
                 {
-                    if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                    if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                         stringPtr = sText_Trainer1WantsToBattle;
                     else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
                         stringPtr = sText_LinkTrainerWantsToBattlePause;
@@ -2429,7 +2429,7 @@ void BufferStringBattle(u16 stringID)
             {
                 if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
                     stringPtr = sText_Trainer1SentOutPkmn;
-                else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                     stringPtr = sText_Trainer1SentOutPkmn;
                 else
                     stringPtr = sText_LinkTrainerSentOutPkmn;
@@ -2490,7 +2490,7 @@ void BufferStringBattle(u16 stringID)
                 {
                     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                         stringPtr = sText_LinkTrainerMultiSentOutPkmn;
-                    else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+                    else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                         stringPtr = sText_Trainer1SentOutPkmn2;
                     else
                         stringPtr = sText_LinkTrainerSentOutPkmn2;
@@ -2557,7 +2557,7 @@ void BufferStringBattle(u16 stringID)
                     break;
                 }
             }
-            else if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_C00)
+            else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
             {
                 switch (gBattleTextBuff1[0])
                 {
@@ -2690,7 +2690,7 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
         ConvertInternationalString(text, gBattleResources->secretBase->language);
         toCpy = text;
     }
-    else if (trainerId == TRAINER_OPPONENT_C00)
+    else if (trainerId == TRAINER_UNION_ROOM)
     {
         toCpy = gLinkPlayers[multiplayerId ^ BIT_SIDE].name;
     }
@@ -2795,8 +2795,8 @@ static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
 
     if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
         toCpy = gTrainerClassNames[GetSecretBaseTrainerClass()];
-    else if (trainerId == TRAINER_OPPONENT_C00)
-        toCpy = gTrainerClassNames[sub_8068BB0()];
+    else if (trainerId == TRAINER_UNION_ROOM)
+        toCpy = gTrainerClassNames[GetUnionRoomTrainerClass()];
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
         toCpy = gTrainerClassNames[GetFrontierBrainTrainerClass()];
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)

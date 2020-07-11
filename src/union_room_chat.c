@@ -27,256 +27,446 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+enum
+{
+    UNION_ROOM_KB_PAGE_UPPER,
+    UNION_ROOM_KB_PAGE_LOWER,
+    UNION_ROOM_KB_PAGE_EMOJI,
+    UNION_ROOM_KB_PAGE_REGISTER,
+    UNION_ROOM_KB_PAGE_COUNT,
+};
+
+#define MAX_MESSAGE_LENGTH 15
+
+enum {
+    CHAT_MESSAGE_NONE,
+    CHAT_MESSAGE_CHAT,
+    CHAT_MESSAGE_JOIN,
+    CHAT_MESSAGE_LEAVE,
+    CHAT_MESSAGE_DROP,
+    CHAT_MESSAGE_DISBAND,
+};
+
+enum {
+    STDMESSAGE_QUIT_CHATTING,
+    STDMESSAGE_REGISTER_WHERE,
+    STDMESSAGE_REGISTER_HERE,
+    STDMESSAGE_INPUT_TEXT,
+    STDMESSAGE_EXITING_CHAT,
+    STDMESSAGE_LEADER_LEFT,
+    STDMESSAGE_ASK_SAVE,
+    STDMESSAGE_ASK_OVERWRITE,
+    STDMESSAGE_SAVING_NO_OFF,
+    STDMESSAGE_SAVED_THE_GAME,
+    STDMESSAGE_WARN_LEADER_LEAVE,
+};
+
+enum {
+    CHAT_FUNC_JOIN,
+    CHAT_FUNC_HANDLE_INPUT,
+    CHAT_FUNC_SWITCH,
+    CHAT_FUNC_ASK_QUIT,
+    CHAT_FUNC_SEND,
+    CHAT_FUNC_REGISTER,
+    CHAT_FUNC_EXIT,
+    CHAT_FUNC_DROP,
+    CHAT_FUNC_DISBANDED,
+    CHAT_FUNC_SAVE_AND_EXIT,
+};
+
+enum {
+    CHATDISPLAY_FUNC_LOAD_GFX,
+    CHATDISPLAY_FUNC_MOVE_KB_CURSOR,
+    CHATDISPLAY_FUNC_CURSOR_BLINK,
+    CHATDISPLAY_FUNC_SHOW_KB_SWAP_MENU,
+    CHATDISPLAY_FUNC_HIDE_KB_SWAP_MENU,
+    CHATDISPLAY_FUNC_SWITCH_PAGES,
+    CHATDISPLAY_FUNC_ASK_QUIT_CHATTING,
+    CHATDISPLAY_FUNC_DESTROY_YESNO,
+    CHATDISPLAY_FUNC_UPDATE_MSG,
+    CHATDISPLAY_FUNC_ASK_REGISTER_TEXT,
+    CHATDISPLAY_FUNC_CANCEL_REGISTER,
+    CHATDISPLAY_FUNC_RETURN_TO_KB,
+    CHATDISPLAY_FUNC_SCROLL_CHAT,
+    CHATDISPLAY_FUNC_PRINT_INPUT_TEXT,
+    CHATDISPLAY_FUNC_ASK_SAVE,
+    CHATDISPLAY_FUNC_ASK_OVERWRITE_SAVE,
+    CHATDISPLAY_FUNC_PRINT_SAVING,
+    CHATDISPLAY_FUNC_PRINT_SAVED_GAME,
+    CHATDISPLAY_FUNC_PRINT_EXITING_CHAT,
+    CHATDISPLAY_FUNC_PRINT_LEADER_LEFT,
+    CHATDISPLAY_FUNC_ASK_CONFIRM_LEADER_LEAVE,
+};
+
+enum {
+    CHAT_EXIT_NONE,
+    CHAT_EXIT_ONLY_LEADER,
+    CHAT_EXIT_DROPPED,
+    CHAT_EXIT_DISBANDED,
+};
+
 struct UnionRoomChat
 {
-    u8 filler0[0x4];
-    u16 unk4;
-    u16 unk6;
-    u8 filler8[0x2];
-    u16 unkA;
-    u8 fillerC[0x1];
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
+    u32 filler1;
+    u16 funcId;
+    u16 funcState;
+    u16 filler2;
+    u16 exitDelayTimer;
+    u8 filler3;
+    u8 linkPlayerCount;
+    u8 handleInputTask;
+    u8 receiveMessagesTask;
     u8 currentPage;
-    u8 unk11;
+    u8 currentCol;
     u8 currentRow;
-    u8 unk13;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;
-    u8 unk1A[0x1F];
-    u8 unk39[0x40];
-    u8 unk79[0x40];
-    u8 unkB9[UNION_ROOM_KB_ROW_COUNT][21];
-    u8 filler18B[0x5];
-    u8 unk190[0x28];
-    u16 unk1B8;
+    u8 multiplayerId;
+    u8 lastBufferCursorPos;
+    u8 bufferCursorPos;
+    u8 receivedPlayerIndex;
+    u8 exitType;
+    bool8 changedRegisteredTexts;
+    u8 afterSaveTimer;
+    u8 messageEntryBuffer[2 * MAX_MESSAGE_LENGTH + 1];
+    u8 receivedMessage[64];
+    u8 hostName[64];
+    u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
+    u8 filler4[5];
+    u8 sendMessageBuffer[40];
+    u16 tryQuitAgainTimer;
 };
 
-struct UnionRoomChat2_Unk0
+struct UnionRoomChatDisplay_Subtask
 {
-    bool32 (* unk0)(u8 *);
-    u8 unk4;
-    u8 unk5;
+    bool32 (* callback)(u8 *);
+    bool8 active;
+    u8 state;
 };
 
-struct UnionRoomChat2
+struct UnionRoomChatDisplay
 {
-    struct UnionRoomChat2_Unk0 unk0[3];
-    u16 unk18;
-    u16 unk1A;
-    u16 unk1C;
-    u16 unk1E;
-    s16 unk20;
-    u8 unk22[0x106];
-    u8 unk128[BG_SCREEN_SIZE];
-    u8 unk928[BG_SCREEN_SIZE];
-    u8 unk1128[BG_SCREEN_SIZE];
-    u8 unk1928[BG_SCREEN_SIZE];
+    struct UnionRoomChatDisplay_Subtask subtasks[3];
+    u16 yesNoMenuWindowId;
+    u16 currLine;
+    u16 scrollCount;
+    u16 messageWindowId;
+    s16 bg1hofs;
+    u8 expandedPlaceholdersBuffer[0x106];
+    u8 bg0Buffer[BG_SCREEN_SIZE];
+    u8 bg1Buffer[BG_SCREEN_SIZE];
+    u8 bg3Buffer[BG_SCREEN_SIZE];
+    u8 bg2Buffer[BG_SCREEN_SIZE];
     u8 unk2128[0x20];
     u8 unk2148[0x20];
 };
 
-struct UnionRoomChat3
+struct UnionRoomChatSprites
 {
-    struct Sprite *unk0;
-    struct Sprite *unk4;
-    struct Sprite *unk8;
-    struct Sprite *unkC;
-    struct Sprite *unk10;
-    u16 unk14;
+    struct Sprite *keyboardCursor;
+    struct Sprite *textEntryArrow;
+    struct Sprite *textEntryCursor;
+    struct Sprite *rButtonIcon;
+    struct Sprite *rButtonLabel;
+    u16 cursorBlinkTimer;
 };
 
-struct Unk82F2C98
+struct SubtaskInfo
 {
-    u16 unk0;
-    bool32 (* unk4)(u8 *);
+    u16 idx;
+    bool32 (* callback)(u8 *);
 };
 
-struct Unk82F2D40
+struct MessageWindowInfo
 {
-    const u8 *unk0;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
+    const u8 *text;
+    u8 boxType;
+    u8 x;
+    u8 y;
+    u8 letterSpacing;
+    u8 lineSpacing;
+    bool8 hasPlaceholders;
+    bool8 useWiderBox;
 };
 
-static void sub_801DDD0(struct UnionRoomChat *);
-static void c2_081284E0(void);
-static void sub_801DF20(void);
-static void sub_801DF38(void);
-static void sub_801DF54(u8 taskId);
-static void sub_801DFAC(void);
-static void sub_801E030(void);
-static void sub_801E120(void);
-static void sub_801E240(void);
-static void sub_801E460(void);
-static void sub_801E5C4(void);
-static void sub_801E668(void);
-static void sub_801E764(void);
-static void sub_801E838(void);
-static void sub_801E978(void);
-static void sub_801EBD4(u16);
-static bool32 sub_801EBE4(void);
-static void sub_801EC94(void);
-static void sub_801ED68(void);
-static void sub_801ED94(void);
-static bool32 sub_801EDC4(void);
-static void sub_801EDE0(void);
-static void sub_801EE10(void);
-static void sub_801EE2C(void);
-static u8 *sub_801EE84(void);
-static u8 *sub_801EEA8(void);
-static void sub_801EF1C(u8 *);
-static void sub_801EF24(u8 *);
-static void sub_801EF4C(u8 *);
-static void sub_801EF7C(u8 *);
-static void sub_801EFA8(u8 *);
-static void sub_801EFD0(u8 *);
-static u8 *sub_801F114(void);
-static void sub_801F2B4(u8 taskId);
-static bool8 sub_801F4D0(void);
-static bool32 sub_801F534(void);
-static void sub_801F544(void);
-static void sub_801F5B8(void);
-static void sub_801F5EC(u16, u8);
-static bool8 sub_801F644(u8);
-static s8 sub_801FF08(void);
-static bool32 sub_8020890(void);
-static void sub_8020770(void);
-static void sub_801F574(struct UnionRoomChat2 *);
-static void sub_801F580(void);
-static void sub_80208D0(void);
-static bool32 sub_801FDD8(u8 *);
-static void sub_8020480(void);
-static void sub_8020538(void);
-static void sub_8020584(void);
-static void sub_80205B4(void);
-static void sub_8020604(void);
+static void InitUnionRoomChat(struct UnionRoomChat *);
+static void CB2_LoadInterface(void);
+static void VBlankCB_UnionRoomChatMain(void);
+static void CB2_UnionRoomChatMain(void);
+static void Task_HandlePlayerInput(u8 taskId);
+static void Chat_Join(void);
+static void Chat_HandleInput(void);
+static void Chat_Switch(void);
+static void Chat_AskQuitChatting(void);
+static void Chat_Exit(void);
+static void Chat_Drop(void);
+static void Chat_Disbanded(void);
+static void Chat_SendMessage(void);
+static void Chat_Register(void);
+static void Chat_SaveAndExit(void);
+static void SetChatFunction(u16);
+static bool32 HandleDPadInput(void);
+static void AppendTextToMessage(void);
+static void DeleteLastMessageCharacter(void);
+static void SwitchCaseOfLastMessageCharacter(void);
+static bool32 ChatMessageIsNotEmpty(void);
+static void RegisterTextAtRow(void);
+static void ResetMessageEntryBuffer(void);
+static void SaveRegisteredTexts(void);
+static u8 *GetEndOfMessagePtr(void);
+static u8 *GetLastCharOfMessagePtr(void);
+static void PrepareSendBuffer_Null(u8 *);
+static void PrepareSendBuffer_Join(u8 *);
+static void PrepareSendBuffer_Chat(u8 *);
+static void PrepareSendBuffer_Leave(u8 *);
+static void PrepareSendBuffer_Drop(u8 *);
+static void PrepareSendBuffer_Disband(u8 *);
+static u8 *GetLimitedMessageStartPtr(void);
+static void Task_ReceiveChatMessage(u8 taskId);
+static bool8 TryAllocDisplay(void);
+static bool32 IsDisplaySubtask0Active(void);
+static void FreeDisplay(void);
+static void RunDisplaySubtasks(void);
+static void StartDisplaySubtask(u16, u8);
+static bool8 IsDisplaySubtaskActive(u8);
+static s8 ProcessMenuInput(void);
+static bool32 TryAllocSprites(void);
+static void InitScanlineEffect(void);
+static void InitDisplay(struct UnionRoomChatDisplay *);
+static void ResetDisplaySubtasks(void);
+static void FreeSprites(void);
+static void ResetGpuBgState(void);
+static void SetBgTilemapBuffers(void);
+static void ClearBg0(void);
+static void LoadChatWindowBorderGfx(void);
+static void LoadChatWindowGfx(void);
 static void sub_8020680(void);
-static void sub_80206A4(void);
-static void sub_80206D0(void);
-static void sub_8020740(void);
-static void sub_80206E8(void);
-static void sub_80208E8(void);
-static void sub_8020A68(void);
-static void sub_8020B20(void);
-static void sub_80203B0(void);
-static void sub_802040C(void);
-static void sub_802091C(bool32);
+static void LoadChatMessagesWindow(void);
+static void LoadKeyboardWindow(void);
+static void LoadKeyboardSwapWindow(void);
+static void LoadTextEntryWindow(void);
+static void CreateKeyboardCursorSprite(void);
+static void CreateTextEntrySprites(void);
+static void CreateRButtonSprites(void);
+static void ShowKeyboardSwapMenu(void);
+static void HideKeyboardSwapMenu(void);
+static void SetKeyboardCursorInvisibility(bool32);
 static bool32 sub_8020320(void);
-static void sub_80201A4(void);
+static void PrintCurrentKeyboardPage(void);
 static bool32 sub_8020368(void);
-static void sub_802093C(void);
-static void sub_8020B80(void);
-static void sub_801FF18(int, u16);
-static void sub_801FDDC(u8, u8, u8);
-static void sub_8020094(void);
-static void sub_801FEBC(void);
-static void sub_80200C8(void);
-static void sub_801FEE4(void);
-static void sub_80200EC(u16, u16, u8);
-static void sub_8020118(u16, u8 *, u8, u8, u8);
-static void sub_80209AC(int);
-static void sub_8020420(u16, u8 *, u8);
-static void sub_80209E0(void);
-static bool32 sub_8020A1C(void);
+static void MoveKeyboardCursor(void);
+static void UpdateRButtonLabel(void);
+static void AddStdMessageWindow(int, u16);
+static void AddYesNoMenuAt(u8, u8, u8);
+static void HideStdMessageWindow(void);
+static void HideYesNoMenuWindow(void);
+static void DestroyStdMessageWindow(void);
+static void DestroyYesNoMenuWindow(void);
+static void FillTextEntryWindow(u16, u16, u8);
+static void DrawTextEntryMessage(u16, u8 *, u8, u8, u8);
+static void SetRegisteredTextPalette(bool32);
+static void PrintChatMessage(u16, u8 *, u8);
+static void StartKeyboardCursorAnim(void);
+static bool32 TryKeyboardCursorReopen(void);
 static void sub_80207C0(s16);
 static void sub_8020818(s16);
-static bool32 sub_801F658(u8 *state);
-static bool32 sub_801F6F8(u8 *state);
-static bool32 sub_801F730(u8 *state);
-static bool32 sub_801F768(u8 *state);
-static bool32 sub_801F7D4(u8 *state);
-static bool32 sub_801F7E0(u8 *state);
-static bool32 sub_801F82C(u8 *state);
-static bool32 sub_801F870(u8 *state);
-static bool32 sub_801F8DC(u8 *state);
-static bool32 sub_801F984(u8 *state);
-static bool32 sub_801FA2C(u8 *state);
-static bool32 sub_801FA68(u8 *state);
-static bool32 sub_801FB44(u8 *state);
-static bool32 sub_801FB70(u8 *state);
-static bool32 sub_801FBB4(u8 *state);
-static bool32 sub_801FBF8(u8 *state);
-static bool32 sub_801FC4C(u8 *state);
-static bool32 sub_801FC9C(u8 *state);
-static bool32 sub_801FCEC(u8 *state);
-static bool32 sub_801FD30(u8 *state);
-static bool32 sub_801FD88(u8 *state);
-static void sub_8020ABC(struct Sprite *sprite);
-static void sub_8020AF4(struct Sprite *sprite);
+static bool32 Display_Dummy(u8 *);
+static bool32 Display_LoadGfx(u8 *state);
+static bool32 Display_ShowKeyboardSwapMenu(u8 *state);
+static bool32 Display_HideKeyboardSwapMenu(u8 *state);
+static bool32 Display_SwitchPages(u8 *state);
+static bool32 Display_MoveKeyboardCursor(u8 *state);
+static bool32 Display_AskQuitChatting(u8 *state);
+static bool32 Display_DestroyYesNoDialog(u8 *state);
+static bool32 Display_UpdateMessageBuffer(u8 *state);
+static bool32 Display_AskRegisterText(u8 *state);
+static bool32 Display_CancelRegister(u8 *state);
+static bool32 Display_ReturnToKeyboard(u8 *state);
+static bool32 Display_ScrollChat(u8 *state);
+static bool32 Display_AnimateKeyboardCursor(u8 *state);
+static bool32 Display_PrintInputText(u8 *state);
+static bool32 Display_PrintExitingChat(u8 *state);
+static bool32 Display_PrintLeaderLeft(u8 *state);
+static bool32 Display_AskSave(u8 *state);
+static bool32 Display_AskOverwriteSave(u8 *state);
+static bool32 Display_PrintSavingDontTurnOff(u8 *state);
+static bool32 Display_PrintSavedTheGame(u8 *state);
+static bool32 Display_AskConfirmLeaderLeave(u8 *state);
+static void SpriteCB_TextEntryCursor(struct Sprite *sprite);
+static void SpriteCB_TextEntryArrow(struct Sprite *sprite);
 
-EWRAM_DATA struct UnionRoomChat *gUnknown_02022C84 = NULL;
-EWRAM_DATA struct UnionRoomChat2 *gUnknown_02022C88 = NULL;
-EWRAM_DATA struct UnionRoomChat3 *gUnknown_02022C8C = NULL;
+static EWRAM_DATA struct UnionRoomChat *sChat = NULL;
+static EWRAM_DATA struct UnionRoomChatDisplay *sDisplay = NULL;
+static EWRAM_DATA struct UnionRoomChatSprites *sSprites = NULL;
 
-void (*const gUnknown_082F2A7C[])(void) =
-    {
-        sub_801DFAC,
-        sub_801E030,
-        sub_801E120,
-        sub_801E240,
-        sub_801E764,
-        sub_801E838,
-        sub_801E460,
-        sub_801E5C4,
-        sub_801E668,
-        sub_801E978,
-    };
+static void (*const sChatMainFunctions[])(void) = {
+    [CHAT_FUNC_JOIN]          = Chat_Join,
+    [CHAT_FUNC_HANDLE_INPUT]  = Chat_HandleInput,
+    [CHAT_FUNC_SWITCH]        = Chat_Switch,
+    [CHAT_FUNC_ASK_QUIT]      = Chat_AskQuitChatting,
+    [CHAT_FUNC_SEND]          = Chat_SendMessage,
+    [CHAT_FUNC_REGISTER]      = Chat_Register,
+    [CHAT_FUNC_EXIT]          = Chat_Exit,
+    [CHAT_FUNC_DROP]          = Chat_Drop,
+    [CHAT_FUNC_DISBANDED]     = Chat_Disbanded,
+    [CHAT_FUNC_SAVE_AND_EXIT] = Chat_SaveAndExit
+};
 
-static const u8 sKeyboardPageMaxRow[] = 
+static const u8 sKeyboardPageMaxRow[UNION_ROOM_KB_PAGE_COUNT] = 
 {
-    [UNION_ROOM_KB_PAGE_UPPER] = 9, 
-    [UNION_ROOM_KB_PAGE_LOWER] = 9, 
-    [UNION_ROOM_KB_PAGE_EMOJI] = 9, 
-    9
+    [UNION_ROOM_KB_PAGE_UPPER]    = 9, 
+    [UNION_ROOM_KB_PAGE_LOWER]    = 9, 
+    [UNION_ROOM_KB_PAGE_EMOJI]    = 9, 
+    [UNION_ROOM_KB_PAGE_REGISTER] = 9
 };
 
-static const u8 gUnknown_082F2AA8[] = {
-    CHAR_SPACE, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
-    0x1D, 0x1E, CHAR_SPACE, 0x20, 0x21, 0x22, 0x23, 0x24,
-    0x25, 0x26, 0x27, 0x28, 0x29, 0x15, 0x01, 0x02,
-    CHAR_SPACE, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, CHAR_SPACE,
-    0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
-    0x13, 0x14, 0x2A, 0x2B, 0x2C, 0x2D, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x35, 0x36, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x53, 0x54, 0x55, 0x56, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, 0x6F, 0x5B, 0x5C, 0x5D, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    0x03, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x5A,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x84, 0x85, 0x86, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    0xA0, CHAR_0, CHAR_1, CHAR_2, CHAR_3, CHAR_4, CHAR_5, CHAR_6,
-    CHAR_7, CHAR_8, CHAR_9, CHAR_EXCL_MARK, CHAR_QUESTION_MARK, CHAR_PERIOD, CHAR_HYPHEN, 0xAF,
-    CHAR_ELLIPSIS, CHAR_DBL_QUOT_LEFT, CHAR_DBL_QUOT_RIGHT, CHAR_SGL_QUOT_LEFT, CHAR_SGL_QUOT_RIGHT, CHAR_MALE, CHAR_FEMALE, CHAR_CURRENCY,
-    CHAR_COMMA, CHAR_MULT_SIGN, CHAR_SLASH, CHAR_a, CHAR_b, CHAR_c, CHAR_d, CHAR_e,
-    CHAR_f, CHAR_g, CHAR_h, CHAR_i, CHAR_j, CHAR_k, CHAR_l, CHAR_m,
-    CHAR_n, CHAR_o, CHAR_p, CHAR_q, CHAR_r, CHAR_s, CHAR_t, CHAR_u,
-    CHAR_v, CHAR_w, CHAR_x, CHAR_y, CHAR_z, CHAR_A, CHAR_B, CHAR_C,
-    CHAR_D, CHAR_E, CHAR_F, CHAR_G, CHAR_H, CHAR_I, CHAR_J, CHAR_K,
-    CHAR_L, CHAR_M, CHAR_N, CHAR_O, CHAR_P, CHAR_Q, CHAR_R, CHAR_S,
-    CHAR_T, CHAR_U, CHAR_V, CHAR_W, CHAR_X, CHAR_Y, CHAR_Z, 0xEF,
-    CHAR_COLON, 0xF4, 0xF5, 0xF6, 0xF1, 0xF2, 0xF3, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE
+static const u8 sCaseToggleTable[256] = {
+    [CHAR_A] = CHAR_a,
+    [CHAR_B] = CHAR_b,
+    [CHAR_C] = CHAR_c,
+    [CHAR_D] = CHAR_d,
+    [CHAR_E] = CHAR_e,
+    [CHAR_F] = CHAR_f,
+    [CHAR_G] = CHAR_g,
+    [CHAR_H] = CHAR_h,
+    [CHAR_I] = CHAR_i,
+    [CHAR_J] = CHAR_j,
+    [CHAR_K] = CHAR_k,
+    [CHAR_L] = CHAR_l,
+    [CHAR_M] = CHAR_m,
+    [CHAR_N] = CHAR_n,
+    [CHAR_O] = CHAR_o,
+    [CHAR_P] = CHAR_p,
+    [CHAR_Q] = CHAR_q,
+    [CHAR_R] = CHAR_r,
+    [CHAR_S] = CHAR_s,
+    [CHAR_T] = CHAR_t,
+    [CHAR_U] = CHAR_u,
+    [CHAR_V] = CHAR_v,
+    [CHAR_W] = CHAR_w,
+    [CHAR_X] = CHAR_x,
+    [CHAR_Y] = CHAR_y,
+    [CHAR_Z] = CHAR_z,
+    [CHAR_a] = CHAR_A,
+    [CHAR_b] = CHAR_B,
+    [CHAR_c] = CHAR_C,
+    [CHAR_d] = CHAR_D,
+    [CHAR_e] = CHAR_E,
+    [CHAR_f] = CHAR_F,
+    [CHAR_g] = CHAR_G,
+    [CHAR_h] = CHAR_H,
+    [CHAR_i] = CHAR_I,
+    [CHAR_j] = CHAR_J,
+    [CHAR_k] = CHAR_K,
+    [CHAR_l] = CHAR_L,
+    [CHAR_m] = CHAR_M,
+    [CHAR_n] = CHAR_N,
+    [CHAR_o] = CHAR_O,
+    [CHAR_p] = CHAR_P,
+    [CHAR_q] = CHAR_Q,
+    [CHAR_r] = CHAR_R,
+    [CHAR_s] = CHAR_S,
+    [CHAR_t] = CHAR_T,
+    [CHAR_u] = CHAR_U,
+    [CHAR_v] = CHAR_V,
+    [CHAR_w] = CHAR_W,
+    [CHAR_x] = CHAR_X,
+    [CHAR_y] = CHAR_Y,
+    [CHAR_z] = CHAR_Z,
+    [CHAR_A_GRAVE] = CHAR_a_GRAVE,
+    [CHAR_A_ACUTE] = CHAR_a_ACUTE,
+    [CHAR_A_CIRCUMFLEX] = CHAR_a_CIRCUMFLEX,
+    [CHAR_A_DIAERESIS] = CHAR_a_DIAERESIS,
+    [CHAR_C_CEDILLA] = CHAR_c_CEDILLA,
+    [CHAR_E_GRAVE] = CHAR_e_GRAVE,
+    [CHAR_E_ACUTE] = CHAR_e_ACUTE,
+    [CHAR_E_CIRCUMFLEX] = CHAR_e_CIRCUMFLEX,
+    [CHAR_E_DIAERESIS] = CHAR_e_DIAERESIS,
+    [CHAR_I_GRAVE] = CHAR_i_GRAVE,
+    [CHAR_I_ACUTE] = CHAR_i_ACUTE,
+    [CHAR_I_CIRCUMFLEX] = CHAR_i_CIRCUMFLEX,
+    [CHAR_I_DIAERESIS] = CHAR_i_DIAERESIS,
+    [CHAR_O_GRAVE] = CHAR_o_GRAVE,
+    [CHAR_O_ACUTE] = CHAR_o_ACUTE,
+    [CHAR_O_CIRCUMFLEX] = CHAR_o_CIRCUMFLEX,
+    [CHAR_O_DIAERESIS] = CHAR_o_DIAERESIS,
+    [CHAR_OE] = CHAR_oe,
+    [CHAR_U_GRAVE] = CHAR_u_GRAVE,
+    [CHAR_U_ACUTE] = CHAR_u_ACUTE,
+    [CHAR_U_CIRCUMFLEX] = CHAR_u_CIRCUMFLEX,
+    [CHAR_U_DIAERESIS] = CHAR_u_DIAERESIS,
+    [CHAR_N_TILDE] = CHAR_n_TILDE,
+    [CHAR_ESZETT] = CHAR_ESZETT,
+    [CHAR_a_GRAVE] = CHAR_A_GRAVE,
+    [CHAR_a_ACUTE] = CHAR_A_ACUTE,
+    [CHAR_a_CIRCUMFLEX] = CHAR_A_CIRCUMFLEX,
+    [CHAR_a_DIAERESIS] = CHAR_A_DIAERESIS,
+    [CHAR_c_CEDILLA] = CHAR_C_CEDILLA,
+    [CHAR_e_GRAVE] = CHAR_E_GRAVE,
+    [CHAR_e_ACUTE] = CHAR_E_ACUTE,
+    [CHAR_e_CIRCUMFLEX] = CHAR_E_CIRCUMFLEX,
+    [CHAR_e_DIAERESIS] = CHAR_E_DIAERESIS,
+    [CHAR_i_GRAVE] = CHAR_I_GRAVE,
+    [CHAR_i_ACUTE] = CHAR_I_ACUTE,
+    [CHAR_i_CIRCUMFLEX] = CHAR_I_CIRCUMFLEX,
+    [CHAR_i_DIAERESIS] = CHAR_I_DIAERESIS,
+    [CHAR_o_GRAVE] = CHAR_O_GRAVE,
+    [CHAR_o_ACUTE] = CHAR_O_ACUTE,
+    [CHAR_o_CIRCUMFLEX] = CHAR_O_CIRCUMFLEX,
+    [CHAR_o_DIAERESIS] = CHAR_O_DIAERESIS,
+    [CHAR_oe] = CHAR_OE,
+    [CHAR_u_GRAVE] = CHAR_U_GRAVE,
+    [CHAR_u_ACUTE] = CHAR_U_ACUTE,
+    [CHAR_u_CIRCUMFLEX] = CHAR_U_CIRCUMFLEX,
+    [CHAR_u_DIAERESIS] = CHAR_U_DIAERESIS,
+    [CHAR_n_TILDE] = CHAR_N_TILDE,
+    [CHAR_0] = CHAR_0,
+    [CHAR_1] = CHAR_1,
+    [CHAR_2] = CHAR_2,
+    [CHAR_3] = CHAR_3,
+    [CHAR_4] = CHAR_4,
+    [CHAR_5] = CHAR_5,
+    [CHAR_6] = CHAR_6,
+    [CHAR_7] = CHAR_7,
+    [CHAR_8] = CHAR_8,
+    [CHAR_9] = CHAR_9,
+    [CHAR_PK] = CHAR_PK,
+    [CHAR_MN] = CHAR_MN,
+    [CHAR_PO] = CHAR_PO,
+    [CHAR_KE] = CHAR_KE,
+    [CHAR_SUPER_E]  = CHAR_SUPER_E,
+    [CHAR_SUPER_ER] = CHAR_SUPER_ER,
+    [CHAR_SUPER_RE] = CHAR_SUPER_RE,
+    [CHAR_PERIOD] = CHAR_PERIOD,
+    [CHAR_COMMA] = CHAR_COMMA,
+    [CHAR_COLON] = CHAR_COLON,
+    [CHAR_SEMICOLON] = CHAR_SEMICOLON,
+    [CHAR_EXCL_MARK] = CHAR_EXCL_MARK,
+    [CHAR_QUESTION_MARK] = CHAR_QUESTION_MARK,
+    [CHAR_HYPHEN] = CHAR_HYPHEN,
+    [CHAR_SLASH] = CHAR_SLASH,
+    [CHAR_ELLIPSIS] = CHAR_ELLIPSIS,
+    [CHAR_LEFT_PAREN] = CHAR_LEFT_PAREN,
+    [CHAR_RIGHT_PAREN] = CHAR_RIGHT_PAREN,
+    [CHAR_AMPERSAND] = CHAR_AMPERSAND,
+    [CHAR_DBL_QUOT_LEFT] = CHAR_DBL_QUOT_LEFT,
+    [CHAR_DBL_QUOT_RIGHT] = CHAR_DBL_QUOT_RIGHT,
+    [CHAR_SGL_QUOT_LEFT] = CHAR_SGL_QUOT_LEFT,
+    [CHAR_SGL_QUOT_RIGHT] = CHAR_SGL_QUOT_RIGHT,
+    [CHAR_MASCULINE_ORDINAL] = CHAR_MASCULINE_ORDINAL,
+    [CHAR_FEMININE_ORDINAL] = CHAR_FEMININE_ORDINAL,
+    [CHAR_BULLET] = CHAR_BULLET,
+    [CHAR_EQUALS] = CHAR_EQUALS,
+    [CHAR_MULT_SIGN] = CHAR_MULT_SIGN,
+    [CHAR_PERCENT] = CHAR_PERCENT,
+    [CHAR_LESS_THAN] = CHAR_LESS_THAN,
+    [CHAR_GREATER_THAN] = CHAR_GREATER_THAN,
+    [CHAR_MALE] = CHAR_MALE,
+    [CHAR_FEMALE] = CHAR_FEMALE,
+    [CHAR_CURRENCY] = CHAR_CURRENCY,
+    [CHAR_BLACK_TRIANGLE] = CHAR_BLACK_TRIANGLE,
 };
 
-static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT] = 
+// Excludes UNION_ROOM_KB_PAGE_REGISTER, the text for which is chosen by the player
+static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNION_ROOM_KB_ROW_COUNT] = 
 {
     [UNION_ROOM_KB_PAGE_UPPER] = 
     {
@@ -319,10 +509,10 @@ static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_RO
     }
 };
 
-const u16 gUnknown_082F2C20[] = INCBIN_U16("graphics/interface/unk_palette1.gbapal");
-const u16 gUnknown_082F2C40[] = INCBIN_U16("graphics/interface/unk_palette2.gbapal");
+static const u16 sUnk_Palette1[] = INCBIN_U16("graphics/union_room_chat/unk_palette1.gbapal");
+static const u16 sUnk_Palette2[] = INCBIN_U16("graphics/union_room_chat/unk_palette2.gbapal");
 
-const struct BgTemplate gUnknown_082F2C60[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -358,7 +548,7 @@ const struct BgTemplate gUnknown_082F2C60[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_082F2C70[] = {
+static const struct WindowTemplate sWinTemplates[] = {
     {
         .bg = 0x03,
         .tilemapLeft = 0x08,
@@ -391,242 +581,341 @@ const struct WindowTemplate gUnknown_082F2C70[] = {
         .height = 0x09,
         .paletteNum = 0x0e,
         .baseBlock = 0x0013,
-    }, { 0xFF }
+    }, DUMMY_WIN_TEMPLATE
 };
 
-const struct Unk82F2C98 gUnknown_082F2C98[] = {
-    {0x00000000, sub_801F658},
-    {0x00000003, sub_801F6F8},
-    {0x00000004, sub_801F730},
-    {0x00000005, sub_801F768},
-    {0x00000001, sub_801F7D4},
-    {0x00000006, sub_801F7E0},
-    {0x00000007, sub_801F82C},
-    {0x00000008, sub_801F870},
-    {0x00000009, sub_801F8DC},
-    {0x0000000a, sub_801F984},
-    {0x0000000b, sub_801FA2C},
-    {0x0000000c, sub_801FA68},
-    {0x00000002, sub_801FB44},
-    {0x0000000d, sub_801FB70},
-    {0x00000012, sub_801FBB4},
-    {0x00000013, sub_801FBF8},
-    {0x0000000e, sub_801FC4C},
-    {0x0000000f, sub_801FC9C},
-    {0x00000010, sub_801FCEC},
-    {0x00000011, sub_801FD30},
-    {0x00000014, sub_801FD88}
+static const struct SubtaskInfo sDisplaySubtasks[] = {
+    {CHATDISPLAY_FUNC_LOAD_GFX,                 Display_LoadGfx},
+    {CHATDISPLAY_FUNC_SHOW_KB_SWAP_MENU,        Display_ShowKeyboardSwapMenu},
+    {CHATDISPLAY_FUNC_HIDE_KB_SWAP_MENU,        Display_HideKeyboardSwapMenu},
+    {CHATDISPLAY_FUNC_SWITCH_PAGES,             Display_SwitchPages},
+    {CHATDISPLAY_FUNC_MOVE_KB_CURSOR,           Display_MoveKeyboardCursor},
+    {CHATDISPLAY_FUNC_ASK_QUIT_CHATTING,        Display_AskQuitChatting},
+    {CHATDISPLAY_FUNC_DESTROY_YESNO,            Display_DestroyYesNoDialog},
+    {CHATDISPLAY_FUNC_UPDATE_MSG,               Display_UpdateMessageBuffer},
+    {CHATDISPLAY_FUNC_ASK_REGISTER_TEXT,        Display_AskRegisterText},
+    {CHATDISPLAY_FUNC_CANCEL_REGISTER,          Display_CancelRegister},
+    {CHATDISPLAY_FUNC_RETURN_TO_KB,             Display_ReturnToKeyboard},
+    {CHATDISPLAY_FUNC_SCROLL_CHAT,              Display_ScrollChat},
+    {CHATDISPLAY_FUNC_CURSOR_BLINK,             Display_AnimateKeyboardCursor},
+    {CHATDISPLAY_FUNC_PRINT_INPUT_TEXT,         Display_PrintInputText},
+    {CHATDISPLAY_FUNC_PRINT_EXITING_CHAT,       Display_PrintExitingChat},
+    {CHATDISPLAY_FUNC_PRINT_LEADER_LEFT,        Display_PrintLeaderLeft},
+    {CHATDISPLAY_FUNC_ASK_SAVE,                 Display_AskSave},
+    {CHATDISPLAY_FUNC_ASK_OVERWRITE_SAVE,       Display_AskOverwriteSave},
+    {CHATDISPLAY_FUNC_PRINT_SAVING,             Display_PrintSavingDontTurnOff},
+    {CHATDISPLAY_FUNC_PRINT_SAVED_GAME,         Display_PrintSavedTheGame},
+    {CHATDISPLAY_FUNC_ASK_CONFIRM_LEADER_LEAVE, Display_AskConfirmLeaderLeave}
 };
 
-const struct Unk82F2D40 gUnknown_082F2D40[] = {
-    {gText_QuitChatting, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
-    {gText_RegisterTextWhere, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
-    {gText_RegisterTextHere, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
-    {gText_InputText, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
-    {gText_ExitingChat, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00},
-    {gText_LeaderLeftEndingChat, 0x02, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00},
-    {gText_RegisteredTextChanged, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01},
-    {gText_AlreadySavedFile_Unused, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01},
-    {gText_SavingDontTurnOff_Unused, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01},
-    {gText_PlayerSavedGame_Unused, 0x02, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01},
-    {gText_IfLeaderLeavesChatEnds, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01}
+static const struct MessageWindowInfo sDisplayStdMessages[] = {
+    [STDMESSAGE_QUIT_CHATTING] = {
+        .text = gText_QuitChatting, 
+        .boxType = 1, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = FALSE
+    },
+    [STDMESSAGE_REGISTER_WHERE] = {
+        .text = gText_RegisterTextWhere, 
+        .boxType = 1, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = FALSE
+    },
+    [STDMESSAGE_REGISTER_HERE] = {
+        .text = gText_RegisterTextHere, 
+        .boxType = 1, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = FALSE
+    },
+    [STDMESSAGE_INPUT_TEXT] = {
+        .text = gText_InputText, 
+        .boxType = 1, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = FALSE
+    },
+    [STDMESSAGE_EXITING_CHAT] = {
+        .text = gText_ExitingChat, 
+        .boxType = 2, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = FALSE
+    },
+    [STDMESSAGE_LEADER_LEFT] = {
+        .text = gText_LeaderLeftEndingChat, 
+        .boxType = 2, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = TRUE, 
+        .useWiderBox = FALSE
+    },
+    [STDMESSAGE_ASK_SAVE] = {
+        .text = gText_RegisteredTextChangedOKToSave, 
+        .boxType = 2, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = TRUE
+    },
+    [STDMESSAGE_ASK_OVERWRITE] = {
+        .text = gText_AlreadySavedFile_Chat, 
+        .boxType = 2, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = TRUE
+    },
+    [STDMESSAGE_SAVING_NO_OFF] = {
+        .text = gText_SavingDontTurnOff_Chat, 
+        .boxType = 2, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = TRUE
+    },
+    [STDMESSAGE_SAVED_THE_GAME] = {
+        .text = gText_PlayerSavedGame_Chat, 
+        .boxType = 2, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = TRUE, 
+        .useWiderBox = TRUE
+    },
+    [STDMESSAGE_WARN_LEADER_LEAVE] = {
+        .text = gText_IfLeaderLeavesChatEnds, 
+        .boxType = 2, 
+        .x = 0, 
+        .y = 1, 
+        .letterSpacing = 0, 
+        .lineSpacing = 0, 
+        .hasPlaceholders = FALSE, 
+        .useWiderBox = TRUE
+    }
 };
 
-const u8 gText_Ellipsis[] = _("…");
+static const u8 sText_Ellipsis[] = _("…");
 
-const struct MenuAction gUnknown_082F2DC8[] = {
-    {gText_Upper, NULL},
-    {gText_Lower, NULL},
-    {gText_Symbols, NULL},
-    {gText_Register2, NULL},
-    {gText_Exit2, NULL},
+static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT + 1] = {
+    [UNION_ROOM_KB_PAGE_UPPER]    = {gText_Upper, NULL},
+    [UNION_ROOM_KB_PAGE_LOWER]    = {gText_Lower, NULL},
+    [UNION_ROOM_KB_PAGE_EMOJI]    = {gText_Symbols, NULL},
+    [UNION_ROOM_KB_PAGE_REGISTER] = {gText_Register2, NULL},
+    [UNION_ROOM_KB_PAGE_COUNT]    = {gText_Exit2, NULL},
 };
 
-const u16 gUnknown_082F2DF0[] = INCBIN_U16("graphics/interface/unk_palette3.gbapal");
-const u32 gUnknown_082F2E10[] = INCBIN_U32("graphics/interface/unk_cursor.4bpp.lz");
-const u32 gUnknown_082F3094[] = INCBIN_U32("graphics/interface/unk_dash.4bpp.lz");
-const u32 gUnknown_082F30B4[] = INCBIN_U32("graphics/interface/unk_cursor_arrow.4bpp.lz");
-const u32 gUnknown_082F30E0[] = INCBIN_U32("graphics/interface/unk_rbutton.4bpp.lz");
+static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");
+static const u32 sKeyboardCursorTiles[] = INCBIN_U32("graphics/union_room_chat/keyboard_cursor.4bpp.lz");
+static const u32 sTextEntryCursorTiles[] = INCBIN_U32("graphics/union_room_chat/text_entry_cursor.4bpp.lz");
+static const u32 sTextEntryArrowTiles[] = INCBIN_U32("graphics/union_room_chat/text_entry_arrow.4bpp.lz");
+static const u32 sRButtonGfxTiles[] = INCBIN_U32("graphics/union_room_chat/r_button.4bpp.lz");
 
-const struct CompressedSpriteSheet gUnknown_082F3134[] = {
-    {gUnknown_082F2E10, 0x1000, 0x0000},
-    {gUnknown_082F30B4, 0x0040, 0x0001},
-    {gUnknown_082F3094, 0x0040, 0x0002},
-    {gUnknown_082F30E0, 0x0080, 0x0003},
-    {gUnknown_08DD4CF8, 0x0400, 0x0004}
+static const struct CompressedSpriteSheet sSpriteSheets[] = {
+    {sKeyboardCursorTiles,         0x1000, 0},
+    {sTextEntryArrowTiles,         0x0040, 1},
+    {sTextEntryCursorTiles,        0x0040, 2},
+    {sRButtonGfxTiles,             0x0080, 3},
+    {gUnionRoomChat_RButtonLabels, 0x0400, 4}
 };
 
-const struct SpritePalette gUnknown_082F315C = {
-    gUnknown_082F2DF0, 0x0000
+static const struct SpritePalette sSpritePalette = {
+    sUnionRoomChatInterfacePal, 0
 };
 
-const struct OamData gUnknown_082F3164 = {
+static const struct OamData sOam_KeyboardCursor = {
     .shape = SPRITE_SHAPE(64x32),
     .size = SPRITE_SIZE(64x32),
     .priority = 1
 };
 
-const union AnimCmd gUnknown_082F316C[] = {
+static const union AnimCmd sAnim_KeyboardCursor_Open[] = {
     ANIMCMD_FRAME(0x00, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_082F3174[] = {
+static const union AnimCmd sAnim_KeyboardCursor_Closed[] = {
     ANIMCMD_FRAME(0x20, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_082F317C[] = {
+static const union AnimCmd sAnim_KeyboardCursorWide_Open[] = {
     ANIMCMD_FRAME(0x40, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_082F3184[] = {
+static const union AnimCmd sAnim_KeyboardCursorWide_Closed[] = {
     ANIMCMD_FRAME(0x60, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_082F318C[] = {
-    gUnknown_082F316C,
-    gUnknown_082F3174,
-    gUnknown_082F317C,
-    gUnknown_082F3184
+static const union AnimCmd *const sAnims_KeyboardCursor[] = {
+    sAnim_KeyboardCursor_Open,
+    sAnim_KeyboardCursor_Closed,
+    sAnim_KeyboardCursorWide_Open,
+    sAnim_KeyboardCursorWide_Closed
 };
 
-const struct SpriteTemplate gUnknown_082F319C = {
+static const struct SpriteTemplate sSpriteTemplate_KeyboardCursor = {
     .tileTag = 0x0000,
     .paletteTag = 0x0000,
-    .oam = &gUnknown_082F3164,
-    .anims = gUnknown_082F318C,
+    .oam = &sOam_KeyboardCursor,
+    .anims = sAnims_KeyboardCursor,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gUnknown_082F31B4 = {
+static const struct OamData sOam_TextEntrySprite = {
     .shape = SPRITE_SHAPE(8x16),
     .size = SPRITE_SIZE(8x16),
     .priority = 2
 };
 
-const struct SpriteTemplate gUnknown_082F31BC = {
+static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor = {
     .tileTag = 0x0002,
     .paletteTag = 0x0000,
-    .oam = &gUnknown_082F31B4,
+    .oam = &sOam_TextEntrySprite,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8020ABC
+    .callback = SpriteCB_TextEntryCursor
 };
 
-const struct SpriteTemplate gUnknown_082F31D4 = {
+static const struct SpriteTemplate sSpriteTemplate_TextEntryArrow = {
     .tileTag = 0x0001,
     .paletteTag = 0x0000,
-    .oam = &gUnknown_082F31B4,
+    .oam = &sOam_TextEntrySprite,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8020AF4
+    .callback = SpriteCB_TextEntryArrow
 };
 
-const struct OamData gUnknown_082F31EC = {
+static const struct OamData sOam_RButtonIcon = {
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
-const struct OamData gUnknown_082F31F4 = {
+static const struct OamData sOam_RButtonLabel = {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
     .priority = 2
 };
 
-const union AnimCmd gUnknown_082F31FC[] = {
+static const union AnimCmd sAnim_ToggleCaseIcon[] = {
     ANIMCMD_FRAME(0x00, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_082F3204[] = {
+static const union AnimCmd sAnim_ToggleCaseIcon_Duplicate1[] = {
     ANIMCMD_FRAME(0x08, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_082F320C[] = {
+static const union AnimCmd sAnim_ToggleCaseIcon_Duplicate2[] = {
     ANIMCMD_FRAME(0x10, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_082F3214[] = {
+static const union AnimCmd sAnim_RegisterIcon[] = {
     ANIMCMD_FRAME(0x18, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_082F321C[] = {
-    gUnknown_082F31FC,
-    gUnknown_082F3204,
-    gUnknown_082F320C,
-    gUnknown_082F3214
+static const union AnimCmd *const sAnims_RButtonLabels[] = {
+    sAnim_ToggleCaseIcon,
+    sAnim_ToggleCaseIcon_Duplicate1,
+    sAnim_ToggleCaseIcon_Duplicate2,
+    sAnim_RegisterIcon
 };
 
-const struct SpriteTemplate gUnknown_082F322C = {
+static const struct SpriteTemplate sSpriteTemplate_RButtonIcon = {
     .tileTag = 0x0003,
     .paletteTag = 0x0000,
-    .oam = &gUnknown_082F31EC,
+    .oam = &sOam_RButtonIcon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gUnknown_082F3244 = {
+static const struct SpriteTemplate sSpriteTemplate_RButtonLabels = {
     .tileTag = 0x0004,
     .paletteTag = 0x0000,
-    .oam = &gUnknown_082F31F4,
-    .anims = gUnknown_082F321C,
+    .oam = &sOam_RButtonLabel,
+    .anims = sAnims_RButtonLabels,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-void sub_801DD98(void)
+void EnterUnionRoomChat(void)
 {
-    gUnknown_02022C84 = Alloc(sizeof(*gUnknown_02022C84));
-    sub_801DDD0(gUnknown_02022C84);
+    sChat = Alloc(sizeof(struct UnionRoomChat));
+    InitUnionRoomChat(sChat);
     gKeyRepeatStartDelay = 20;
     SetVBlankCallback(NULL);
-    SetMainCallback2(c2_081284E0);
+    SetMainCallback2(CB2_LoadInterface);
 }
 
-static void sub_801DDD0(struct UnionRoomChat *unionRoomChat)
+static void InitUnionRoomChat(struct UnionRoomChat *chat)
 {
     int i;
 
-    unionRoomChat->unk4 = 0;
-    unionRoomChat->unk6 = 0;
-    unionRoomChat->currentPage = 0;
-    unionRoomChat->unk11 = 0;
-    unionRoomChat->currentRow = 0;
-    unionRoomChat->unk14 = 0;
-    unionRoomChat->unk15 = 0;
-    unionRoomChat->unk16 = 0;
-    unionRoomChat->unk1A[0] = EOS;
-    unionRoomChat->unkD = GetLinkPlayerCount();
-    unionRoomChat->unk13 = GetMultiplayerId();
-    unionRoomChat->unk17 = 0;
-    unionRoomChat->unk18 = 0;
-    sub_801EF1C(unionRoomChat->unk190);
+    chat->funcId = 0;
+    chat->funcState = 0;
+    chat->currentPage = 0;
+    chat->currentCol = 0;
+    chat->currentRow = 0;
+    chat->lastBufferCursorPos = 0;
+    chat->bufferCursorPos = 0;
+    chat->receivedPlayerIndex = 0;
+    chat->messageEntryBuffer[0] = EOS;
+    chat->linkPlayerCount = GetLinkPlayerCount();
+    chat->multiplayerId = GetMultiplayerId();
+    chat->exitType = 0;
+    chat->changedRegisteredTexts = FALSE;
+    PrepareSendBuffer_Null(chat->sendMessageBuffer);
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
-        StringCopy(unionRoomChat->unkB9[i], gSaveBlock1Ptr->unk3C88[i]);
+        StringCopy(chat->registeredTexts[i], gSaveBlock1Ptr->registeredTexts[i]);
 }
 
-void sub_801DE30(void)
+static void FreeUnionRoomChat(void)
 {
-    DestroyTask(gUnknown_02022C84->unkE);
-    DestroyTask(gUnknown_02022C84->unkF);
-    Free(gUnknown_02022C84);
+    DestroyTask(sChat->handleInputTask);
+    DestroyTask(sChat->receiveMessagesTask);
+    Free(sChat);
 }
 
-static void c2_081284E0(void)
+static void CB2_LoadInterface(void)
 {
     switch (gMain.state)
     {
@@ -634,16 +923,16 @@ static void c2_081284E0(void)
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        sub_801F4D0();
+        TryAllocDisplay();
         gMain.state++;
         break;
     case 1:
-        sub_801F5B8();
-        if (!sub_801F534())
+        RunDisplaySubtasks();
+        if (!IsDisplaySubtask0Active())
         {
             BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
-            SetVBlankCallback(sub_801DF20);
+            SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;
         }
         break;
@@ -651,9 +940,9 @@ static void c2_081284E0(void)
         UpdatePaletteFade();
         if (!gPaletteFade.active)
         {
-            SetMainCallback2(sub_801DF38);
-            gUnknown_02022C84->unkE = CreateTask(sub_801DF54, 8);
-            gUnknown_02022C84->unkF = CreateTask(sub_801F2B4, 7);
+            SetMainCallback2(CB2_UnionRoomChatMain);
+            sChat->handleInputTask = CreateTask(Task_HandlePlayerInput, 8);
+            sChat->receiveMessagesTask = CreateTask(Task_ReceiveChatMessage, 7);
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(232, 150);
         }
@@ -661,7 +950,7 @@ static void c2_081284E0(void)
     }
 }
 
-static void sub_801DF20(void)
+static void VBlankCB_UnionRoomChatMain(void)
 {
     TransferPlttBuffer();
     LoadOam();
@@ -669,146 +958,146 @@ static void sub_801DF20(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void sub_801DF38(void)
+static void CB2_UnionRoomChatMain(void)
 {
     RunTasks();
-    sub_801F5B8();
+    RunDisplaySubtasks();
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
 }
 
-static void sub_801DF54(u8 taskId)
+static void Task_HandlePlayerInput(u8 taskId)
 {
-    switch (gUnknown_02022C84->unk17)
+    switch (sChat->exitType)
     {
-    case 1:
-        sub_801EBD4(6);
-        gUnknown_02022C84->unk17 = 0;
+    case CHAT_EXIT_ONLY_LEADER:
+        SetChatFunction(CHAT_FUNC_EXIT);
+        sChat->exitType = CHAT_EXIT_NONE;
         break;
-    case 2:
-        sub_801EBD4(7);
-        gUnknown_02022C84->unk17 = 0;
+    case CHAT_EXIT_DROPPED:
+        SetChatFunction(CHAT_FUNC_DROP);
+        sChat->exitType = CHAT_EXIT_NONE;
         break;
-    case 3:
-        sub_801EBD4(8);
-        gUnknown_02022C84->unk17 = 0;
+    case CHAT_EXIT_DISBANDED:
+        SetChatFunction(CHAT_FUNC_DISBANDED);
+        sChat->exitType = CHAT_EXIT_NONE;
         break;
     }
 
-    gUnknown_082F2A7C[gUnknown_02022C84->unk4]();
+    sChatMainFunctions[sChat->funcId]();
 }
 
-static void sub_801DFAC(void)
+static void Chat_Join(void)
 {
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        sub_801EF24(gUnknown_02022C84->unk190);
-        gUnknown_02022C84->unk6++;
+        PrepareSendBuffer_Join(sChat->sendMessageBuffer);
+        sChat->funcState++;
         // fall through
     case 1:
         if (IsLinkTaskFinished() && !sub_8011A9C())
         {
-            if (SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
-                gUnknown_02022C84->unk6++;
+            if (SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+                sChat->funcState++;
         }
         break;
     case 2:
         if (IsLinkTaskFinished())
-            sub_801EBD4(1);
+            SetChatFunction(CHAT_FUNC_HANDLE_INPUT);
         break;
     }
 }
 
-static void sub_801E030(void)
+static void Chat_HandleInput(void)
 {
-    bool8 var0, var1;
+    bool8 updateMsgActive, cursorBlinkActive;
 
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
         if (gMain.newKeys & START_BUTTON)
         {
-            if (gUnknown_02022C84->unk15)
-                sub_801EBD4(4);
+            if (sChat->bufferCursorPos)
+                SetChatFunction(CHAT_FUNC_SEND);
         }
         else if (gMain.newKeys & SELECT_BUTTON)
         {
-            sub_801EBD4(2);
+            SetChatFunction(CHAT_FUNC_SWITCH);
         }
         else if (gMain.newAndRepeatedKeys & B_BUTTON)
         {
-            if (gUnknown_02022C84->unk15)
+            if (sChat->bufferCursorPos)
             {
-                sub_801ED68();
-                sub_801F5EC(8, 0);
-                gUnknown_02022C84->unk6 = 1;
+                DeleteLastMessageCharacter();
+                StartDisplaySubtask(CHATDISPLAY_FUNC_UPDATE_MSG, 0);
+                sChat->funcState = 1;
             }
             else
             {
-                sub_801EBD4(3);
+                SetChatFunction(CHAT_FUNC_ASK_QUIT);
             }
         }
         else if (gMain.newKeys & A_BUTTON)
         {
-            sub_801EC94();
-            sub_801F5EC(8, 0);
-            sub_801F5EC(2, 1);
-            gUnknown_02022C84->unk6 = 1;
+            AppendTextToMessage();
+            StartDisplaySubtask(CHATDISPLAY_FUNC_UPDATE_MSG, 0);
+            StartDisplaySubtask(CHATDISPLAY_FUNC_CURSOR_BLINK, 1);
+            sChat->funcState = 1;
         }
         else if (gMain.newKeys & R_BUTTON)
         {
-            if (gUnknown_02022C84->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+            if (sChat->currentPage != UNION_ROOM_KB_PAGE_REGISTER)
             {
-                sub_801ED94();
-                sub_801F5EC(8, 0);
-                gUnknown_02022C84->unk6 = 1;
+                SwitchCaseOfLastMessageCharacter();
+                StartDisplaySubtask(CHATDISPLAY_FUNC_UPDATE_MSG, 0);
+                sChat->funcState = 1;
             }
             else
             {
-                sub_801EBD4(5);
+                SetChatFunction(5);
             }
         }
-        else if (sub_801EBE4())
+        else if (HandleDPadInput())
         {
-            sub_801F5EC(1, 0);
-            gUnknown_02022C84->unk6 = 1;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_MOVE_KB_CURSOR, 0);
+            sChat->funcState = 1;
         }
         break;
     case 1:
-        var0 = sub_801F644(0);
-        var1 = sub_801F644(1);
-        if (!var0 && !var1)
-            gUnknown_02022C84->unk6 = 0;
+        updateMsgActive = IsDisplaySubtaskActive(0);
+        cursorBlinkActive = IsDisplaySubtaskActive(1);
+        if (!updateMsgActive && !cursorBlinkActive)
+            sChat->funcState = 0;
         break;
     }
 }
 
-static void sub_801E120(void)
+static void Chat_Switch(void)
 {
     s16 input;
-    int var0;
+    bool32 shouldSwitchPages;
 
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        sub_801F5EC(3, 0);
-        gUnknown_02022C84->unk6++;
+        StartDisplaySubtask(CHATDISPLAY_FUNC_SHOW_KB_SWAP_MENU, 0);
+        sChat->funcState++;
         break;
     case 1:
-        if (!sub_801F644(0))
-            gUnknown_02022C84->unk6++;
+        if (!IsDisplaySubtaskActive(0))
+            sChat->funcState++;
         break;
     case 2:
         input = Menu_ProcessInput();
         switch (input)
         {
         default:
-            sub_801F5EC(4, 0);
-            var0 = 1;
-            if (gUnknown_02022C84->currentPage == input || input > UNION_ROOM_KB_PAGE_COUNT)
-                var0 = 0;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_HIDE_KB_SWAP_MENU, 0);
+            shouldSwitchPages = TRUE;
+            if (sChat->currentPage == input || input > UNION_ROOM_KB_PAGE_REGISTER)
+                shouldSwitchPages = FALSE;
             break;
         case MENU_NOTHING_CHOSEN:
             if (gMain.newKeys & SELECT_BUTTON)
@@ -818,538 +1107,532 @@ static void sub_801E120(void)
             }
             return;
         case MENU_B_PRESSED:
-            sub_801F5EC(4, 0);
-            gUnknown_02022C84->unk6 = 3;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_HIDE_KB_SWAP_MENU, 0);
+            sChat->funcState = 3;
             return;
         }
 
-        if (!var0)
+        if (!shouldSwitchPages)
         {
-            gUnknown_02022C84->unk6 = 3;
+            sChat->funcState = 3;
             return;
         }
 
-        gUnknown_02022C84->unk11 = 0;
-        gUnknown_02022C84->currentRow = 0;
-        sub_801F5EC(5, 1);
-        gUnknown_02022C84->currentPage = input;
-        gUnknown_02022C84->unk6 = 4;
+        sChat->currentCol = 0;
+        sChat->currentRow = 0;
+        StartDisplaySubtask(CHATDISPLAY_FUNC_SWITCH_PAGES, 1);
+        sChat->currentPage = input;
+        sChat->funcState = 4;
         break;
     case 3:
-        if (!sub_801F644(0))
-            sub_801EBD4(1);
+        if (!IsDisplaySubtaskActive(0))
+            SetChatFunction(CHAT_FUNC_HANDLE_INPUT);
         break;
     case 4:
-        if (!sub_801F644(0) && !sub_801F644(1))
-            sub_801EBD4(1);
+        if (!IsDisplaySubtaskActive(0) && !IsDisplaySubtaskActive(1))
+            SetChatFunction(CHAT_FUNC_HANDLE_INPUT);
         break;
     }
 }
 
-static void sub_801E240(void)
+static void Chat_AskQuitChatting(void)
 {
     s8 input;
 
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        sub_801F5EC(6, 0);
-        gUnknown_02022C84->unk6 = 1;
+        StartDisplaySubtask(CHATDISPLAY_FUNC_ASK_QUIT_CHATTING, 0);
+        sChat->funcState = 1;
         break;
     case 1:
-        if (!sub_801F644(0))
-            gUnknown_02022C84->unk6 = 2;
+        if (!IsDisplaySubtaskActive(0))
+            sChat->funcState = 2;
         break;
     case 2:
-        input = sub_801FF08();
+        input = ProcessMenuInput();
         switch (input)
         {
         case -1:
         case 1:
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6 = 3;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState = 3;
             break;
         case 0:
-            if (gUnknown_02022C84->unk13 == 0)
+            if (sChat->multiplayerId == 0)
             {
-                sub_801EFD0(gUnknown_02022C84->unk190);
-                sub_801F5EC(7, 0);
-                gUnknown_02022C84->unk6 = 9;
+                PrepareSendBuffer_Disband(sChat->sendMessageBuffer);
+                StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+                sChat->funcState = 9;
             }
             else
             {
-                sub_801EF7C(gUnknown_02022C84->unk190);
-                gUnknown_02022C84->unk6 = 4;
+                PrepareSendBuffer_Leave(sChat->sendMessageBuffer);
+                sChat->funcState = 4;
             }
             break;
         }
         break;
     case 3:
-        if (!sub_801F644(0))
-            sub_801EBD4(1);
+        if (!IsDisplaySubtaskActive(0))
+            SetChatFunction(CHAT_FUNC_HANDLE_INPUT);
         break;
     case 9:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            sub_801F5EC(20, 0);
-            gUnknown_02022C84->unk6 = 10;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_ASK_CONFIRM_LEADER_LEAVE, 0);
+            sChat->funcState = 10;
         }
         break;
     case 10:
-        if (!sub_801F644(0))
-            gUnknown_02022C84->unk6 = 8;
+        if (!IsDisplaySubtaskActive(0))
+            sChat->funcState = 8;
         break;
     case 8:
-        input = sub_801FF08();
+        input = ProcessMenuInput();
         switch (input)
         {
         case -1:
         case 1:
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6 = 3;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState = 3;
             break;
         case 0:
             sub_80104B0();
-            sub_801EFD0(gUnknown_02022C84->unk190);
-            gUnknown_02022C84->unk6 = 4;
-            gUnknown_02022C84->unk1B8 = 0;
+            PrepareSendBuffer_Disband(sChat->sendMessageBuffer);
+            sChat->funcState = 4;
+            sChat->tryQuitAgainTimer = 0;
             break;
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
+        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
         {
-            if (!gUnknown_02022C84->unk13)
-                gUnknown_02022C84->unk6 = 6;
+            if (!sChat->multiplayerId)
+                sChat->funcState = 6;
             else
-                gUnknown_02022C84->unk6 = 5;
+                sChat->funcState = 5;
         }
 
         if (!gReceivedRemoteLinkPlayers)
-            sub_801EBD4(9);
+            SetChatFunction(CHAT_FUNC_SAVE_AND_EXIT);
         break;
     case 5:
         if (!gReceivedRemoteLinkPlayers)
         {
-            sub_801EBD4(9);
+            SetChatFunction(CHAT_FUNC_SAVE_AND_EXIT);
         }
-        else if (++gUnknown_02022C84->unk1B8 > 300)
+        else if (++sChat->tryQuitAgainTimer > 300)
         {
-            gUnknown_02022C84->unk1B8 = 0;
-            gUnknown_02022C84->unk6 = 4;
+            sChat->tryQuitAgainTimer = 0;
+            sChat->funcState = 4;
         }
         break;
     }
 }
 
-static void sub_801E460(void)
+static void Chat_Exit(void)
 {
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        if (!FuncIsActiveTask(sub_801F2B4))
+        if (!FuncIsActiveTask(Task_ReceiveChatMessage))
         {
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6++;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState++;
         }
         break;
     case 1:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            sub_801F5EC(18, 0);
-            gUnknown_02022C84->unk6++;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_PRINT_EXITING_CHAT, 0);
+            sChat->funcState++;
         }
         break;
     case 2:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            sub_801EFA8(gUnknown_02022C84->unk190);
-            gUnknown_02022C84->unk6++;
+            PrepareSendBuffer_Drop(sChat->sendMessageBuffer);
+            sChat->funcState++;
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
-            gUnknown_02022C84->unk6++;
+        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+            sChat->funcState++;
         break;
     case 4:
         if ((GetBlockReceivedStatus() & 1) && !sub_8011A9C())
-            gUnknown_02022C84->unk6++;
+            sChat->funcState++;
         break;
     case 5:
         if (IsLinkTaskFinished() && !sub_8011A9C())
         {
             sub_800AC34();
-            gUnknown_02022C84->unkA = 0;
-            gUnknown_02022C84->unk6++;
+            sChat->exitDelayTimer = 0;
+            sChat->funcState++;
         }
         break;
     case 6:
-        if (gUnknown_02022C84->unkA < 150)
-            gUnknown_02022C84->unkA++;
+        if (sChat->exitDelayTimer < 150)
+            sChat->exitDelayTimer++;
 
         if (!gReceivedRemoteLinkPlayers)
-            gUnknown_02022C84->unk6++;
+            sChat->funcState++;
         break;
     case 7:
-        if (gUnknown_02022C84->unkA >= 150)
-            sub_801EBD4(9);
+        if (sChat->exitDelayTimer >= 150)
+            SetChatFunction(CHAT_FUNC_SAVE_AND_EXIT);
         else
-            gUnknown_02022C84->unkA++;
+            sChat->exitDelayTimer++;
         break;
     }
 }
 
-static void sub_801E5C4(void)
+static void Chat_Drop(void)
 {
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        if (!FuncIsActiveTask(sub_801F2B4))
+        if (!FuncIsActiveTask(Task_ReceiveChatMessage))
         {
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6++;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState++;
         }
         break;
     case 1:
-        if (!sub_801F644(0) && IsLinkTaskFinished() && !sub_8011A9C())
+        if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !sub_8011A9C())
         {
             sub_800AC34();
-            gUnknown_02022C84->unkA = 0;
-            gUnknown_02022C84->unk6++;
+            sChat->exitDelayTimer = 0;
+            sChat->funcState++;
         }
         break;
     case 2:
-        if (gUnknown_02022C84->unkA < 150)
-            gUnknown_02022C84->unkA++;
+        if (sChat->exitDelayTimer < 150)
+            sChat->exitDelayTimer++;
 
         if (!gReceivedRemoteLinkPlayers)
-            gUnknown_02022C84->unk6++;
+            sChat->funcState++;
         break;
     case 3:
-        if (gUnknown_02022C84->unkA >= 150)
-            sub_801EBD4(9);
+        if (sChat->exitDelayTimer >= 150)
+            SetChatFunction(CHAT_FUNC_SAVE_AND_EXIT);
         else
-            gUnknown_02022C84->unkA++;
+            sChat->exitDelayTimer++;
         break;
     }
 }
 
-static void sub_801E668(void)
+static void Chat_Disbanded(void)
 {
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        if (!FuncIsActiveTask(sub_801F2B4))
+        if (!FuncIsActiveTask(Task_ReceiveChatMessage))
         {
-            if (gUnknown_02022C84->unk13)
-                sub_801F5EC(7, 0);
+            if (sChat->multiplayerId)
+                StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
 
-            gUnknown_02022C84->unk6++;
+            sChat->funcState++;
         }
         break;
     case 1:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            if (gUnknown_02022C84->unk13)
-                sub_801F5EC(19, 0);
+            if (sChat->multiplayerId)
+                StartDisplaySubtask(CHATDISPLAY_FUNC_PRINT_LEADER_LEFT, 0);
 
-            gUnknown_02022C84->unk6++;
+            sChat->funcState++;
         }
         break;
     case 2:
-        if (sub_801F644(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
         {
             sub_800AC34();
-            gUnknown_02022C84->unkA = 0;
-            gUnknown_02022C84->unk6++;
+            sChat->exitDelayTimer = 0;
+            sChat->funcState++;
         }
         break;
     case 3:
-        if (gUnknown_02022C84->unkA < 150)
-            gUnknown_02022C84->unkA++;
+        if (sChat->exitDelayTimer < 150)
+            sChat->exitDelayTimer++;
 
         if (!gReceivedRemoteLinkPlayers)
-            gUnknown_02022C84->unk6++;
+            sChat->funcState++;
         break;
     case 4:
-        if (gUnknown_02022C84->unkA >= 150)
-            sub_801EBD4(9);
+        if (sChat->exitDelayTimer >= 150)
+            SetChatFunction(CHAT_FUNC_SAVE_AND_EXIT);
         else
-            gUnknown_02022C84->unkA++;
+            sChat->exitDelayTimer++;
         break;
     }
 }
 
-static void sub_801E764(void)
+static void Chat_SendMessage(void)
 {
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
         if (!gReceivedRemoteLinkPlayers)
         {
-            sub_801EBD4(1);
+            SetChatFunction(CHAT_FUNC_HANDLE_INPUT);
             break;
         }
 
-        sub_801EF4C(gUnknown_02022C84->unk190);
-        gUnknown_02022C84->unk6++;
+        PrepareSendBuffer_Chat(sChat->sendMessageBuffer);
+        sChat->funcState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !sub_8011A9C() && SendBlock(0, gUnknown_02022C84->unk190, sizeof(gUnknown_02022C84->unk190)))
-            gUnknown_02022C84->unk6++;
+        if (IsLinkTaskFinished() == TRUE && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+            sChat->funcState++;
         break;
     case 2:
-        sub_801EE10();
-        sub_801F5EC(8, 0);
-        gUnknown_02022C84->unk6++;
+        ResetMessageEntryBuffer();
+        StartDisplaySubtask(CHATDISPLAY_FUNC_UPDATE_MSG, 0);
+        sChat->funcState++;
         break;
     case 3:
-        if (!sub_801F644(0))
-            gUnknown_02022C84->unk6++;
+        if (!IsDisplaySubtaskActive(0))
+            sChat->funcState++;
         break;
     case 4:
         if (IsLinkTaskFinished())
-            sub_801EBD4(1);
+            SetChatFunction(CHAT_FUNC_HANDLE_INPUT);
         break;
     }
 }
 
-static void sub_801E838(void)
+static void Chat_Register(void)
 {
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        if (sub_801EDC4())
+        if (ChatMessageIsNotEmpty())
         {
-            sub_801F5EC(9, 0);
-            gUnknown_02022C84->unk6 = 2;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_ASK_REGISTER_TEXT, 0);
+            sChat->funcState = 2;
         }
         else
         {
-            sub_801F5EC(13, 0);
-            gUnknown_02022C84->unk6 = 5;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_PRINT_INPUT_TEXT, 0);
+            sChat->funcState = 5;
         }
         break;
     case 1:
         if (gMain.newKeys & A_BUTTON)
         {
-            sub_801EDE0();
-            sub_801F5EC(11, 0);
-            gUnknown_02022C84->unk6 = 3;
+            RegisterTextAtRow();
+            StartDisplaySubtask(CHATDISPLAY_FUNC_RETURN_TO_KB, 0);
+            sChat->funcState = 3;
         }
         else if (gMain.newKeys & B_BUTTON)
         {
-            sub_801F5EC(10, 0);
-            gUnknown_02022C84->unk6 = 4;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_CANCEL_REGISTER, 0);
+            sChat->funcState = 4;
         }
-        else if (sub_801EBE4())
+        else if (HandleDPadInput())
         {
-            sub_801F5EC(1, 0);
-            gUnknown_02022C84->unk6 = 2;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_MOVE_KB_CURSOR, 0);
+            sChat->funcState = 2;
         }
         break;
     case 2:
-        if (!sub_801F644(0))
-            gUnknown_02022C84->unk6 = 1;
+        if (!IsDisplaySubtaskActive(0))
+            sChat->funcState = 1;
         break;
     case 3:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            sub_801F5EC(10, 0);
-            gUnknown_02022C84->unk6 = 4;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_CANCEL_REGISTER, 0);
+            sChat->funcState = 4;
         }
         break;
     case 4:
-        if (!sub_801F644(0))
-            sub_801EBD4(1);
+        if (!IsDisplaySubtaskActive(0))
+            SetChatFunction(CHAT_FUNC_HANDLE_INPUT);
         break;
     case 5:
-        if (!sub_801F644(0))
-            gUnknown_02022C84->unk6 = 6;
+        if (!IsDisplaySubtaskActive(0))
+            sChat->funcState = 6;
         break;
     case 6:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6 = 4;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState = 4;
         }
         break;
     }
 }
 
-static void sub_801E978(void)
+static void Chat_SaveAndExit(void)
 {
     s8 input;
 
-    switch (gUnknown_02022C84->unk6)
+    switch (sChat->funcState)
     {
     case 0:
-        if (!gUnknown_02022C84->unk18)
+        if (!sChat->changedRegisteredTexts)
         {
-            gUnknown_02022C84->unk6 = 12;
+            sChat->funcState = 12;
         }
         else
         {
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6 = 1;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState = 1;
         }
         break;
     case 1:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            sub_801F5EC(14, 0);
-            gUnknown_02022C84->unk6 = 2;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_ASK_SAVE, 0);
+            sChat->funcState = 2;
         }
         break;
     case 2:
-        input = sub_801FF08();
+        input = ProcessMenuInput();
         switch (input)
         {
         case -1:
         case 1:
-            gUnknown_02022C84->unk6 = 12;
+            sChat->funcState = 12;
             break;
         case 0:
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6 = 3;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState = 3;
             break;
         }
         break;
     case 3:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            sub_801F5EC(15, 0);
-            gUnknown_02022C84->unk6 = 4;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_ASK_OVERWRITE_SAVE, 0);
+            sChat->funcState = 4;
         }
         break;
     case 4:
-        if (!sub_801F644(0))
-            gUnknown_02022C84->unk6 = 5;
+        if (!IsDisplaySubtaskActive(0))
+            sChat->funcState = 5;
         break;
     case 5:
-        input = sub_801FF08();
+        input = ProcessMenuInput();
         switch (input)
         {
         case -1:
         case 1:
-            gUnknown_02022C84->unk6 = 12;
+            sChat->funcState = 12;
             break;
         case 0:
-            sub_801F5EC(7, 0);
-            gUnknown_02022C84->unk6 = 6;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
+            sChat->funcState = 6;
             break;
         }
         break;
     case 6:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
-            sub_801F5EC(16, 0);
-            sub_801EE2C();
-            gUnknown_02022C84->unk6 = 7;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_PRINT_SAVING, 0);
+            SaveRegisteredTexts();
+            sChat->funcState = 7;
         }
         break;
     case 7:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
             SetContinueGameWarpStatusToDynamicWarp();
             TrySavingData(SAVE_NORMAL);
-            gUnknown_02022C84->unk6 = 8;
+            sChat->funcState = 8;
         }
         break;
     case 8:
-        sub_801F5EC(17, 0);
-        gUnknown_02022C84->unk6 = 9;
+        StartDisplaySubtask(CHATDISPLAY_FUNC_PRINT_SAVED_GAME, 0);
+        sChat->funcState = 9;
         break;
     case 9:
-        if (!sub_801F644(0))
+        if (!IsDisplaySubtaskActive(0))
         {
             PlaySE(SE_SAVE);
             ClearContinueGameWarpStatus2();
-            gUnknown_02022C84->unk6 = 10;
+            sChat->funcState = 10;
         }
         break;
     case 10:
-        gUnknown_02022C84->unk19 = 0;
-        gUnknown_02022C84->unk6 = 11;
+        sChat->afterSaveTimer = 0;
+        sChat->funcState = 11;
         break;
     case 11:
-        gUnknown_02022C84->unk19++;
-        if (gUnknown_02022C84->unk19 > 120)
-            gUnknown_02022C84->unk6 = 12;
+        sChat->afterSaveTimer++;
+        if (sChat->afterSaveTimer > 120)
+            sChat->funcState = 12;
         break;
     case 12:
         BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
-        gUnknown_02022C84->unk6 = 13;
+        sChat->funcState = 13;
         break;
     case 13:
         if (!gPaletteFade.active)
         {
-            sub_801F544();
-            sub_801DE30();
+            FreeDisplay();
+            FreeUnionRoomChat();
             SetMainCallback2(CB2_ReturnToField);
         }
         break;
     }
 }
 
-static void sub_801EBD4(u16 arg0)
+static void SetChatFunction(u16 funcId)
 {
-    gUnknown_02022C84->unk4 = arg0;
-    gUnknown_02022C84->unk6 = 0;
+    sChat->funcId = funcId;
+    sChat->funcState = 0;
 }
 
-static bool32 sub_801EBE4(void)
+static bool32 HandleDPadInput(void)
 {
-    if (!(gMain.newAndRepeatedKeys & DPAD_UP))
+    do
     {
+        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        {
+            if (sChat->currentRow > 0)
+                sChat->currentRow--;
+            else
+                sChat->currentRow = sKeyboardPageMaxRow[sChat->currentPage];
+            break;
+        }
         if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            if (gUnknown_02022C84->currentRow < sKeyboardPageMaxRow[gUnknown_02022C84->currentPage])
-                gUnknown_02022C84->currentRow++;
+            if (sChat->currentRow < sKeyboardPageMaxRow[sChat->currentPage])
+                sChat->currentRow++;
             else
-                gUnknown_02022C84->currentRow = 0;
-
-            return TRUE;
+                sChat->currentRow = 0;
+            break;
         }
-
-        if (gUnknown_02022C84->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+        if (sChat->currentPage != UNION_ROOM_KB_PAGE_REGISTER)
         {
             if (gMain.newAndRepeatedKeys & DPAD_LEFT)
             {
-                if (gUnknown_02022C84->unk11)
-                    gUnknown_02022C84->unk11--;
+                if (sChat->currentCol > 0)
+                    sChat->currentCol--;
                 else
-                    gUnknown_02022C84->unk11 = 4;
+                    sChat->currentCol = 4;
+                break;
             }
             else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
             {
-                if (gUnknown_02022C84->unk11 > 3)
-                    gUnknown_02022C84->unk11 = 0;
+                if (sChat->currentCol < 4)
+                    sChat->currentCol++;
                 else
-                    gUnknown_02022C84->unk11++;
+                    sChat->currentCol = 0;
+                break;
             }
-            else
-            {
-                return FALSE;
-            }
-
-            return TRUE;
         }
-
         return FALSE;
-    }
-    else
-    {
-        if (gUnknown_02022C84->currentRow)
-            gUnknown_02022C84->currentRow--;
-        else
-            gUnknown_02022C84->currentRow = sKeyboardPageMaxRow[gUnknown_02022C84->currentPage];
+    } while (0);
 
-        return TRUE;
-    }
+    return TRUE;  
 }
 
-static void sub_801EC94(void)
+static void AppendTextToMessage(void)
 {
     int i;
     const u8 *charsStr;
@@ -1357,10 +1640,11 @@ static void sub_801EC94(void)
     u8 *str;
     u8 buffer[21];
 
-    if (gUnknown_02022C84->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+    if (sChat->currentPage != UNION_ROOM_KB_PAGE_REGISTER)
     {
-        charsStr = sUnionRoomKeyboardText[gUnknown_02022C84->currentPage][gUnknown_02022C84->currentRow];
-        for (i = 0; i < gUnknown_02022C84->unk11; i++)
+        // Going to append a single character        
+        charsStr = sUnionRoomKeyboardText[sChat->currentPage][sChat->currentRow];
+        for (i = 0; i < sChat->currentCol; i++)
         {
             if (*charsStr == CHAR_SPECIAL_F9)
                 charsStr++;
@@ -1371,19 +1655,20 @@ static void sub_801EC94(void)
     }
     else
     {
-        u8 *tempStr = StringCopy(buffer, gUnknown_02022C84->unkB9[gUnknown_02022C84->currentRow]);
+        // Going to append registered text string
+        u8 *tempStr = StringCopy(buffer, sChat->registeredTexts[sChat->currentRow]);
         tempStr[0] = CHAR_SPACE;
         tempStr[1] = EOS;
         charsStr = buffer;
         strLength = StringLength_Multibyte(buffer);
     }
 
-    gUnknown_02022C84->unk14 = gUnknown_02022C84->unk15;
+    sChat->lastBufferCursorPos = sChat->bufferCursorPos;
     if (!charsStr)
         return;
 
-    str = sub_801EE84();
-    while (--strLength != -1 && gUnknown_02022C84->unk15 < 15)
+    str = GetEndOfMessagePtr();
+    while (--strLength != -1 && sChat->bufferCursorPos < MAX_MESSAGE_LENGTH)
     {
         if (*charsStr == CHAR_SPECIAL_F9)
         {
@@ -1396,103 +1681,103 @@ static void sub_801EC94(void)
         charsStr++;
         str++;
 
-        gUnknown_02022C84->unk15++;
+        sChat->bufferCursorPos++;
     }
 
     *str = EOS;
 }
 
-static void sub_801ED68(void)
+static void DeleteLastMessageCharacter(void)
 {
-    gUnknown_02022C84->unk14 = gUnknown_02022C84->unk15;
-    if (gUnknown_02022C84->unk15)
+    sChat->lastBufferCursorPos = sChat->bufferCursorPos;
+    if (sChat->bufferCursorPos)
     {
-        u8 *str = sub_801EEA8();
+        u8 *str = GetLastCharOfMessagePtr();
         *str = EOS;
-        gUnknown_02022C84->unk15--;
+        sChat->bufferCursorPos--;
     }
 }
 
-static void sub_801ED94(void)
+static void SwitchCaseOfLastMessageCharacter(void)
 {
     u8 *str;
     u8 character;
 
-    gUnknown_02022C84->unk14 = gUnknown_02022C84->unk15 - 1;
-    str = sub_801EEA8();
+    sChat->lastBufferCursorPos = sChat->bufferCursorPos - 1;
+    str = GetLastCharOfMessagePtr();
     if (*str != CHAR_SPECIAL_F9)
     {
-        character = gUnknown_082F2AA8[*str];
+        character = sCaseToggleTable[*str];
         if (character)
             *str = character;
     }
 }
 
-static bool32 sub_801EDC4(void)
+static bool32 ChatMessageIsNotEmpty(void)
 {
-    if (gUnknown_02022C84->unk15)
+    if (sChat->bufferCursorPos)
         return TRUE;
     else
         return FALSE;
 }
 
-static void sub_801EDE0(void)
+static void RegisterTextAtRow(void)
 {
-    u8 *src = sub_801F114();
-    StringCopy(gUnknown_02022C84->unkB9[gUnknown_02022C84->currentRow], src);
-    gUnknown_02022C84->unk18 = 1;
+    u8 *src = GetLimitedMessageStartPtr();
+    StringCopy(sChat->registeredTexts[sChat->currentRow], src);
+    sChat->changedRegisteredTexts = TRUE;
 }
 
-static void sub_801EE10(void)
+static void ResetMessageEntryBuffer(void)
 {
-    gUnknown_02022C84->unk1A[0] = EOS;
-    gUnknown_02022C84->unk14 = 15;
-    gUnknown_02022C84->unk15 = 0;
+    sChat->messageEntryBuffer[0] = EOS;
+    sChat->lastBufferCursorPos = 15;
+    sChat->bufferCursorPos = 0;
 }
 
-static void sub_801EE2C(void)
+static void SaveRegisteredTexts(void)
 {
     int i;
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
-        StringCopy(gSaveBlock1Ptr->unk3C88[i], gUnknown_02022C84->unkB9[i]);
+        StringCopy(gSaveBlock1Ptr->registeredTexts[i], sChat->registeredTexts[i]);
 }
 
-static u8 *sub_801EE6C(int arg0)
+static u8 *GetRegisteredTextByRow(int row)
 {
-    return gUnknown_02022C84->unkB9[arg0];
+    return sChat->registeredTexts[row];
 }
 
-static u8 *sub_801EE84(void)
+static u8 *GetEndOfMessagePtr(void)
 {
-    u8 *str = gUnknown_02022C84->unk1A;
+    u8 *str = sChat->messageEntryBuffer;
     while (*str != EOS)
         str++;
 
     return str;
 }
 
-static u8 *sub_801EEA8(void)
+static u8 *GetLastCharOfMessagePtr(void)
 {
-    u8 *str = gUnknown_02022C84->unk1A;
-    u8 *str2 = str;
-    while (*str != EOS)
+    u8 *currChar = sChat->messageEntryBuffer;
+    u8 *lastChar = currChar;
+    while (*currChar != EOS)
     {
-        str2 = str;
-        if (*str == CHAR_SPECIAL_F9)
-            str++;
-        str++;
+        lastChar = currChar;
+        if (*currChar == CHAR_SPECIAL_F9)
+            currChar++;
+        currChar++;
     }
 
-    return str2;
+    return lastChar;
 }
 
-static u16 sub_801EED8(void)
+static u16 GetNumOverflowCharsInMessage(void)
 {
     u8 *str;
     u32 i, numChars, strLength;
 
-    strLength = StringLength_Multibyte(gUnknown_02022C84->unk1A);
-    str = gUnknown_02022C84->unk1A;
+    strLength = StringLength_Multibyte(sChat->messageEntryBuffer);
+    str = sChat->messageEntryBuffer;
     numChars = 0;
     if (strLength > 10)
     {
@@ -1510,83 +1795,83 @@ static u16 sub_801EED8(void)
     return numChars;
 }
 
-static void sub_801EF1C(u8 *arg0)
+static void PrepareSendBuffer_Null(u8 *buffer)
 {
-    arg0[0] = CHAR_SPACE;
+    buffer[0] = CHAT_MESSAGE_NONE;
 }
 
-static void sub_801EF24(u8 *arg0)
+static void PrepareSendBuffer_Join(u8 *buffer)
 {
-    arg0[0] = 2;
-    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_02022C84->unk13;
+    buffer[0] = CHAT_MESSAGE_JOIN;
+    StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
+    buffer[1 + (PLAYER_NAME_LENGTH + 1)] = sChat->multiplayerId;
 }
 
-static void sub_801EF4C(u8 *arg0)
+static void PrepareSendBuffer_Chat(u8 *buffer)
 {
-    arg0[0] = 1;
-    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    StringCopy(&arg0[1 + (PLAYER_NAME_LENGTH + 1)], gUnknown_02022C84->unk1A);
+    buffer[0] = CHAT_MESSAGE_CHAT;
+    StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
+    StringCopy(&buffer[1 + (PLAYER_NAME_LENGTH + 1)], sChat->messageEntryBuffer);
 }
 
-static void sub_801EF7C(u8 *arg0)
+static void PrepareSendBuffer_Leave(u8 *buffer)
 {
-    arg0[0] = 3;
-    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_02022C84->unk13;
+    buffer[0] = CHAT_MESSAGE_LEAVE;
+    StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
+    buffer[1 + (PLAYER_NAME_LENGTH + 1)] = sChat->multiplayerId;
     sub_8011A50();
 }
 
-static void sub_801EFA8(u8 *arg0)
+static void PrepareSendBuffer_Drop(u8 *buffer)
 {
-    arg0[0] = 4;
-    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_02022C84->unk13;
+    buffer[0] = CHAT_MESSAGE_DROP;
+    StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
+    buffer[1 + (PLAYER_NAME_LENGTH + 1)] = sChat->multiplayerId;
 }
 
-static void sub_801EFD0(u8 *arg0)
+static void PrepareSendBuffer_Disband(u8 *buffer)
 {
-    arg0[0] = 5;
-    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_02022C84->unk13;
+    buffer[0] = CHAT_MESSAGE_DISBAND;
+    StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
+    buffer[1 + (PLAYER_NAME_LENGTH + 1)] = sChat->multiplayerId;
 }
 
-static bool32 sub_801EFF8(u8 *arg0, u8 *arg1)
+static bool32 ProcessReceivedChatMessage(u8 *dest, u8 *recvMessage)
 {
     u8 *tempStr;
-    u8 var0 = *arg1;
-    u8 *str = arg1 + 1;
-    arg1 = str;
-    arg1 += 8;
+    u8 cmd = *recvMessage;
+    u8 *name = recvMessage + 1;
+    recvMessage = name;
+    recvMessage += PLAYER_NAME_LENGTH + 1;
 
-    switch (var0)
+    switch (cmd)
     {
-    case 2:
-        if (gUnknown_02022C84->unk13 != str[8])
+    case CHAT_MESSAGE_JOIN:
+        if (sChat->multiplayerId != name[PLAYER_NAME_LENGTH + 1])
         {
             DynamicPlaceholderTextUtil_Reset();
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700JoinedChat);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, name);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dest, gText_F700JoinedChat);
             return TRUE;
         }
         break;
-    case 1:
-        tempStr = StringCopy(arg0, str);
+    case CHAT_MESSAGE_CHAT:
+        tempStr = StringCopy(dest, name);
         *(tempStr++) = EXT_CTRL_CODE_BEGIN;
         *(tempStr++) = EXT_CTRL_CODE_CLEAR_TO;
         *(tempStr++) = 42;
         *(tempStr++) = CHAR_COLON;
-        StringCopy(tempStr, arg1);
+        StringCopy(tempStr, recvMessage);
         return TRUE;
-    case 5:
-        StringCopy(gUnknown_02022C84->unk79, str);
+    case CHAT_MESSAGE_DISBAND:
+        StringCopy(sChat->hostName, name);
         // fall through
-    case 3:
-        if (gUnknown_02022C84->unk13 != *arg1)
+    case CHAT_MESSAGE_LEAVE:
+        if (sChat->multiplayerId != *recvMessage)
         {
             DynamicPlaceholderTextUtil_Reset();
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700LeftChat);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, name);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dest, gText_F700LeftChat);
             return TRUE;
         }
         break;
@@ -1597,47 +1882,47 @@ static bool32 sub_801EFF8(u8 *arg0, u8 *arg1)
 
 static u8 GetCurrentKeyboardPage(void)
 {
-    return gUnknown_02022C84->currentPage;
+    return sChat->currentPage;
 }
 
-static void sub_801F0BC(u8 *arg0, u8 *arg1)
+static void GetCurrentKeyboardColAndRow(u8 *col, u8 *row)
 {
-    *arg0 = gUnknown_02022C84->unk11;
-    *arg1 = gUnknown_02022C84->currentRow;
+    *col = sChat->currentCol;
+    *row = sChat->currentRow;
 }
 
-static u8 *sub_801F0D0(void)
+static u8 *GetMessageEntryBuffer(void)
 {
-    return gUnknown_02022C84->unk1A;
+    return sChat->messageEntryBuffer;
 }
 
-static int sub_801F0DC(void)
+static int GetLengthOfMessageEntry(void)
 {
-    u8 *str = sub_801F0D0();
+    u8 *str = GetMessageEntryBuffer();
     return StringLength_Multibyte(str);
 }
 
-static void sub_801F0EC(u32 *arg0, u32 *arg1)
+static void GetBufferSelectionRegion(u32 *x, u32 *width)
 {
-    int diff = gUnknown_02022C84->unk15 - gUnknown_02022C84->unk14;
+    int diff = sChat->bufferCursorPos - sChat->lastBufferCursorPos;
     if (diff < 0)
     {
         diff *= -1;
-        *arg0 = gUnknown_02022C84->unk15;
+        *x = sChat->bufferCursorPos;
     }
     else
     {
-        *arg0 = gUnknown_02022C84->unk14;
+        *x = sChat->lastBufferCursorPos;
     }
 
-    *arg1 = diff;
+    *width = diff;
 }
 
-static u8 *sub_801F114(void)
+static u8 *GetLimitedMessageStartPtr(void)
 {
     int i;
-    u16 numChars = sub_801EED8();
-    u8 *str = gUnknown_02022C84->unk1A;
+    u16 numChars = GetNumOverflowCharsInMessage();
+    u8 *str = sChat->messageEntryBuffer;
     for (i = 0; i < numChars; i++)
     {
         if (*str == CHAR_SPECIAL_F9)
@@ -1649,12 +1934,12 @@ static u8 *sub_801F114(void)
     return str;
 }
 
-static u16 sub_801F144(void)
+static u16 GetLimitedMessageStartPos(void)
 {
     u16 count;
     u32 i;
-    u16 numChars = sub_801EED8();
-    u8 *str = gUnknown_02022C84->unk1A;
+    u16 numChars = GetNumOverflowCharsInMessage();
+    u8 *str = sChat->messageEntryBuffer;
     for (count = 0, i = 0; i < numChars; count++, i++)
     {
         if (*str == CHAR_SPECIAL_F9)
@@ -1666,56 +1951,63 @@ static u16 sub_801F144(void)
     return count;
 }
 
-static u8 *sub_801F180(void)
+static u8 *GetLastReceivedMessage(void)
 {
-    return gUnknown_02022C84->unk39;
+    return sChat->receivedMessage;
 }
 
-static u8 sub_801F18C(void)
+static u8 GetReceivedPlayerIndex(void)
 {
-    return gUnknown_02022C84->unk16;
+    return sChat->receivedPlayerIndex;
 }
 
-static int sub_801F198(void)
+static int GetTextEntryCursorPosition(void)
 {
-    return gUnknown_02022C84->unk15;
+    return sChat->bufferCursorPos;
 }
 
-static int sub_801F1A4(void)
+static int GetShouldShowCaseToggleIcon(void)
 {
-    u8 *str = sub_801EEA8();
+    u8 *str = GetLastCharOfMessagePtr();
     u32 character = *str;
-    if (character > 0xFF || gUnknown_082F2AA8[character] == character || gUnknown_082F2AA8[character] == 0)
+    if (character > 0xFF || sCaseToggleTable[character] == character || sCaseToggleTable[character] == 0)
         return 3;
     else
         return 0;
 }
 
-static u8 *sub_801F1D0(void)
+static u8 *GetChatHostName(void)
 {
-    return gUnknown_02022C84->unk79;
+    return sChat->hostName;
 }
 
-void copy_strings_to_sav1(void)
+void InitUnionRoomChatRegisteredTexts(void)
 {
-    StringCopy(gSaveBlock1Ptr->unk3C88[0], gText_Hello);
-    StringCopy(gSaveBlock1Ptr->unk3C88[1], gText_Pokemon2);
-    StringCopy(gSaveBlock1Ptr->unk3C88[2], gText_Trade);
-    StringCopy(gSaveBlock1Ptr->unk3C88[3], gText_Battle);
-    StringCopy(gSaveBlock1Ptr->unk3C88[4], gText_Lets);
-    StringCopy(gSaveBlock1Ptr->unk3C88[5], gText_Ok);
-    StringCopy(gSaveBlock1Ptr->unk3C88[6], gText_Sorry);
-    StringCopy(gSaveBlock1Ptr->unk3C88[7], gText_YaySmileEmoji);
-    StringCopy(gSaveBlock1Ptr->unk3C88[8], gText_ThankYou);
-    StringCopy(gSaveBlock1Ptr->unk3C88[9], gText_ByeBye);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[0], gText_Hello);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[1], gText_Pokemon2);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[2], gText_Trade);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[3], gText_Battle);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[4], gText_Lets);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[5], gText_Ok);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[6], gText_Sorry);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[7], gText_YaySmileEmoji);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[8], gText_ThankYou);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[9], gText_ByeBye);
 }
 
-static void sub_801F2B4(u8 taskId)
+#define tState               data[0]
+#define tI                   data[1]
+#define tCurrLinkPlayer      data[2]
+#define tBlockReceivedStatus data[3]
+#define tLinkPlayerCount     data[4]
+#define tNextState           data[5]
+
+static void Task_ReceiveChatMessage(u8 taskId)
 {
     u8 *buffer;
     s16 *data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
         if (!gReceivedRemoteLinkPlayers)
@@ -1724,115 +2016,122 @@ static void sub_801F2B4(u8 taskId)
             return;
         }
 
-        data[0] = 1;
+        tState = 1;
         // fall through
     case 1:
-        data[4] = GetLinkPlayerCount();
-        if (gUnknown_02022C84->unkD != data[4])
+        tLinkPlayerCount = GetLinkPlayerCount();
+        if (sChat->linkPlayerCount != tLinkPlayerCount)
         {
-            data[0] = 2;
-            gUnknown_02022C84->unkD = data[4];
+            tState = 2;
+            sChat->linkPlayerCount = tLinkPlayerCount;
             return;
         }
 
-        data[3] = GetBlockReceivedStatus();
-        if (!data[3] && sub_8011A9C())
+        tBlockReceivedStatus = GetBlockReceivedStatus();
+        if (!tBlockReceivedStatus && sub_8011A9C())
             return;
 
-        data[1] = 0;
-        data[0] = 3;
+        tI = 0;
+        tState = 3;
         // fall through
     case 3:
-        for (; data[1] < 5 && ((data[3] >> data[1]) & 1) == 0; data[1]++)
+        for (; tI < 5 && ((tBlockReceivedStatus >> tI) & 1) == 0; tI++)
             ;
 
-        if (data[1] == 5)
+        if (tI == 5)
         {
-            data[0] = 1;
+            tState = 1;
             return;
         }
 
-        data[2] = data[1];
-        ResetBlockReceivedFlag(data[2]);
-        buffer = (u8 *)gBlockRecvBuffer[data[1]];
+        tCurrLinkPlayer = tI;
+        ResetBlockReceivedFlag(tCurrLinkPlayer);
+        buffer = (u8 *)gBlockRecvBuffer[tI];
         switch (buffer[0])
         {
             default:
-            case 1: data[5] = 3; break;
-            case 2: data[5] = 3; break;
-            case 3: data[5] = 4; break;
-            case 4: data[5] = 5; break;
-            case 5: data[5] = 6; break;
+            case CHAT_MESSAGE_CHAT:     tNextState = 3; break;
+            case CHAT_MESSAGE_JOIN:    tNextState = 3; break;
+            case CHAT_MESSAGE_LEAVE:   tNextState = 4; break;
+            case CHAT_MESSAGE_DROP:    tNextState = 5; break;
+            case CHAT_MESSAGE_DISBAND: tNextState = 6; break;
         }
 
-        if (sub_801EFF8(gUnknown_02022C84->unk39, (u8 *)gBlockRecvBuffer[data[1]]))
+        if (ProcessReceivedChatMessage(sChat->receivedMessage, (u8 *)gBlockRecvBuffer[tI]))
         {
-            gUnknown_02022C84->unk16 = data[1];
-            sub_801F5EC(12, 2);
-            data[0] = 7;
+            sChat->receivedPlayerIndex = tI;
+            StartDisplaySubtask(CHATDISPLAY_FUNC_SCROLL_CHAT, 2);
+            tState = 7;
         }
         else
         {
-            data[0] = data[5];
+            tState = tNextState;
         }
 
-        data[1]++;
+        tI++;
         break;
     case 7:
-        if (!sub_801F644(2))
-            data[0] = data[5];
+        if (!IsDisplaySubtaskActive(2))
+            tState = tNextState;
         break;
     case 4:
-        if (!gUnknown_02022C84->unk13 && data[2])
+        if (!sChat->multiplayerId && tCurrLinkPlayer)
         {
             if (GetLinkPlayerCount() == 2)
             {
                 sub_80104B0();
-                gUnknown_02022C84->unk17 = 1;
+                sChat->exitType = 1;
                 DestroyTask(taskId);
                 return;
             }
 
-            sub_8011DE0(data[2]);
+            sub_8011DE0(tCurrLinkPlayer);
         }
 
-        data[0] = 3;
+        tState = 3;
         break;
     case 5:
-        if (gUnknown_02022C84->unk13)
-            gUnknown_02022C84->unk17 = 2;
+        if (sChat->multiplayerId)
+            sChat->exitType = 2;
 
         DestroyTask(taskId);
         break;
     case 6:
-        gUnknown_02022C84->unk17 = 3;
+        sChat->exitType = 3;
         DestroyTask(taskId);
         break;
     case 2:
         if (!sub_8011A9C())
         {
-            if (!gUnknown_02022C84->unk13)
-                sub_80110B8(gUnknown_02022C84->unkD);
+            if (!sChat->multiplayerId)
+                sub_80110B8(sChat->linkPlayerCount);
 
-            data[0] = 1;
+            tState = 1;
         }
         break;
     }
 }
 
-static bool8 sub_801F4D0(void)
+#undef tNextState
+#undef tLinkPlayerCount
+#undef tBlockReceivedStatus
+#undef tCurrLinkPlayer
+#undef tI
+#undef tState
+
+static bool8 TryAllocDisplay(void)
 {
-    gUnknown_02022C88 = Alloc(sizeof(*gUnknown_02022C88));
-    if (gUnknown_02022C88 && sub_8020890())
+    sDisplay = Alloc(sizeof(*sDisplay));
+    if (sDisplay && TryAllocSprites())
     {
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_082F2C60, ARRAY_COUNT(gUnknown_082F2C60));
-        InitWindows(gUnknown_082F2C70);
-        reset_temp_tile_data_buffers();
-        sub_8020770();
-        sub_801F574(gUnknown_02022C88);
-        sub_801F580();
-        sub_801F5EC(0, 0);
+        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+        InitWindows(sWinTemplates);
+        ResetTempTileDataBuffers();
+        InitScanlineEffect();
+        InitDisplay(sDisplay);
+        ResetDisplaySubtasks();
+        StartDisplaySubtask(CHATDISPLAY_FUNC_LOAD_GFX, 0);
         return TRUE;
     }
     else
@@ -1841,114 +2140,114 @@ static bool8 sub_801F4D0(void)
     }
 }
 
-static bool32 sub_801F534(void)
+static bool32 IsDisplaySubtask0Active(void)
 {
-    return sub_801F644(0);
+    return IsDisplaySubtaskActive(0);
 }
 
-static void sub_801F544(void)
+static void FreeDisplay(void)
 {
-    sub_80208D0();
-    if (gUnknown_02022C88)
-        FREE_AND_SET_NULL(gUnknown_02022C88);
+    FreeSprites();
+    if (sDisplay)
+        FREE_AND_SET_NULL(sDisplay);
 
     FreeAllWindowBuffers();
     gScanlineEffect.state = 3;
 }
 
-static void sub_801F574(struct UnionRoomChat2 *arg0)
+static void InitDisplay(struct UnionRoomChatDisplay *display)
 {
-    arg0->unk18 = 0xFF;
-    arg0->unk1E = 0xFF;
-    arg0->unk1A = 0;
+    display->yesNoMenuWindowId = 0xFF;
+    display->messageWindowId = 0xFF;
+    display->currLine = 0;
 }
 
-static void sub_801F580(void)
-{
-    int i;
-
-    if (!gUnknown_02022C88)
-        return;
-
-    for (i = 0; i < 3; i++)
-    {
-        gUnknown_02022C88->unk0[i].unk0 = sub_801FDD8;
-        gUnknown_02022C88->unk0[i].unk4 = 0;
-        gUnknown_02022C88->unk0[i].unk5 = 0;
-    }
-}
-
-static void sub_801F5B8(void)
+static void ResetDisplaySubtasks(void)
 {
     int i;
 
-    if (!gUnknown_02022C88)
+    if (!sDisplay)
         return;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sDisplay->subtasks); i++)
     {
-        gUnknown_02022C88->unk0[i].unk4 =
-            gUnknown_02022C88->unk0[i].unk0(&gUnknown_02022C88->unk0[i].unk5);
+        sDisplay->subtasks[i].callback = Display_Dummy;
+        sDisplay->subtasks[i].active = FALSE;
+        sDisplay->subtasks[i].state = 0;
     }
 }
 
-static void sub_801F5EC(u16 arg0, u8 arg1)
+static void RunDisplaySubtasks(void)
+{
+    int i;
+
+    if (!sDisplay)
+        return;
+
+    for (i = 0; i < (int)ARRAY_COUNT(sDisplay->subtasks); i++)
+    {
+        sDisplay->subtasks[i].active =
+            sDisplay->subtasks[i].callback(&sDisplay->subtasks[i].state);
+    }
+}
+
+static void StartDisplaySubtask(u16 subtaskId, u8 assignId)
 {
     u32 i;
 
-    gUnknown_02022C88->unk0[arg1].unk0 = sub_801FDD8;
-    for (i = 0; i < 21; i++)
+    sDisplay->subtasks[assignId].callback = Display_Dummy;
+    for (i = 0; i < ARRAY_COUNT(sDisplaySubtasks); i++)
     {
-        if (gUnknown_082F2C98[i].unk0 == arg0)
+        if (sDisplaySubtasks[i].idx == subtaskId)
         {
-            gUnknown_02022C88->unk0[arg1].unk0 = gUnknown_082F2C98[i].unk4;
-            gUnknown_02022C88->unk0[arg1].unk4 = 1;
-            gUnknown_02022C88->unk0[arg1].unk5 = 0;
+            sDisplay->subtasks[assignId].callback = sDisplaySubtasks[i].callback;
+            sDisplay->subtasks[assignId].active = TRUE;
+            sDisplay->subtasks[assignId].state = 0;
             break;
         }
     }
 }
 
-static bool8 sub_801F644(u8 arg0)
+static bool8 IsDisplaySubtaskActive(u8 id)
 {
-    return gUnknown_02022C88->unk0[arg0].unk4;
+    return sDisplay->subtasks[id].active;
 }
 
-bool32 sub_801F658(u8 *state)
+static bool32 Display_LoadGfx(u8 *state)
 {
-    if (free_temp_tile_data_buffers_if_possible() == TRUE)
+    if (FreeTempTileDataBuffersIfPossible() == TRUE)
         return TRUE;
 
     switch (*state)
     {
     case 0:
-        sub_8020480();
-        sub_8020538();
+        ResetGpuBgState();
+        SetBgTilemapBuffers();
         break;
     case 1:
-        sub_8020584();
+        ClearBg0();
         break;
     case 2:
-        sub_80205B4();
+        LoadChatWindowBorderGfx();
         break;
     case 3:
-        sub_8020604();
+        LoadChatWindowGfx();
         break;
     case 4:
         sub_8020680();
         break;
     case 5:
-        sub_80206A4();
-        sub_80206D0();
-        sub_8020740();
-        sub_80206E8();
+        LoadChatMessagesWindow();
+        LoadKeyboardWindow();
+        LoadKeyboardSwapWindow();
+        LoadTextEntryWindow();
         break;
     case 6:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_80208E8();
-            sub_8020A68();
-            sub_8020B20();
+            CreateKeyboardCursorSprite();
+            CreateTextEntrySprites();
+            CreateRButtonSprites();
         }
         break;
     default:
@@ -1959,12 +2258,12 @@ bool32 sub_801F658(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F6F8(u8 *state)
+static bool32 Display_ShowKeyboardSwapMenu(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_80203B0();
+        ShowKeyboardSwapMenu();
         CopyWindowToVram(3, 3);
         break;
     case 1:
@@ -1975,12 +2274,12 @@ bool32 sub_801F6F8(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F730(u8 *state)
+static bool32 Display_HideKeyboardSwapMenu(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_802040C();
+        HideKeyboardSwapMenu();
         CopyWindowToVram(3, 3);
         break;
     case 1:
@@ -1991,16 +2290,16 @@ bool32 sub_801F730(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F768(u8 *state)
+static bool32 Display_SwitchPages(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_802091C(TRUE);
+        SetKeyboardCursorInvisibility(TRUE);
         if (sub_8020320())
             return TRUE;
 
-        sub_80201A4();
+        PrintCurrentKeyboardPage();
         CopyWindowToVram(2, 2);
         break;
     case 1:
@@ -2011,9 +2310,9 @@ bool32 sub_801F768(u8 *state)
         if (sub_8020368())
             return TRUE;
 
-        sub_802093C();
-        sub_802091C(FALSE);
-        sub_8020B80();
+        MoveKeyboardCursor();
+        SetKeyboardCursorInvisibility(FALSE);
+        UpdateRButtonLabel();
         return FALSE;
     }
 
@@ -2021,20 +2320,20 @@ bool32 sub_801F768(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F7D4(u8 *state)
+static bool32 Display_MoveKeyboardCursor(u8 *state)
 {
-    sub_802093C();
+    MoveKeyboardCursor();
     return FALSE;
 }
 
-bool32 sub_801F7E0(u8 *state)
+static bool32 Display_AskQuitChatting(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_801FF18(0, 0);
-        sub_801FDDC(23, 11, 1);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_QUIT_CHATTING, 0);
+        AddYesNoMenuAt(23, 11, 1);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -2044,21 +2343,21 @@ bool32 sub_801F7E0(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F82C(u8 *state)
+static bool32 Display_DestroyYesNoDialog(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_8020094();
-        sub_801FEBC();
+        HideStdMessageWindow();
+        HideYesNoMenuWindow();
         CopyBgTilemapBufferToVram(0);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
             return TRUE;
 
-        sub_80200C8();
-        sub_801FEE4();
+        DestroyStdMessageWindow();
+        DestroyYesNoMenuWindow();
         return FALSE;
     }
 
@@ -2066,24 +2365,24 @@ bool32 sub_801F82C(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F870(u8 *state)
+static bool32 Display_UpdateMessageBuffer(u8 *state)
 {
-    u32 var0, var1;
+    u32 x, width;
     u8 *str;
 
     switch (*state)
     {
     case 0:
-        sub_801F0EC(&var0, &var1);
-        sub_80200EC(var0, var1, 0);
-        str = sub_801F0D0();
-        sub_8020118(0, str, 3, 1, 2);
+        GetBufferSelectionRegion(&x, &width);
+        FillTextEntryWindow(x, width, 0);
+        str = GetMessageEntryBuffer();
+        DrawTextEntryMessage(0, str, 3, 1, 2);
         CopyWindowToVram(1, 2);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8020B80();
+            UpdateRButtonLabel();
             return FALSE;
         }
         return TRUE;
@@ -2093,27 +2392,27 @@ bool32 sub_801F870(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F8DC(u8 *state)
+static bool32 Display_AskRegisterText(u8 *state)
 {
-    u16 var0;
+    u16 x;
     u8 *str;
     u16 length;
 
     switch (*state)
     {
     case 0:
-        var0 = sub_801F144();
-        str = sub_801F114();
+        x = GetLimitedMessageStartPos();
+        str = GetLimitedMessageStartPtr();
         length = StringLength_Multibyte(str);
-        sub_80200EC(var0, length, PIXEL_FILL(6));
-        sub_8020118(var0, str, 0, 4, 5);
+        FillTextEntryWindow(x, length, PIXEL_FILL(6));
+        DrawTextEntryMessage(x, str, 0, 4, 5);
         CopyWindowToVram(1, 2);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_801FF18(1, 16);
-            CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+            AddStdMessageWindow(STDMESSAGE_REGISTER_WHERE, 16);
+            CopyWindowToVram(sDisplay->messageWindowId, 3);
         }
         else
         {
@@ -2122,7 +2421,7 @@ bool32 sub_801F8DC(u8 *state)
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
-            sub_80209AC(1);
+            SetRegisteredTextPalette(TRUE);
         else
             return TRUE;
         break;
@@ -2134,27 +2433,27 @@ bool32 sub_801F8DC(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801F984(u8 *state)
+static bool32 Display_CancelRegister(u8 *state)
 {
-    u16 var0;
+    u16 x;
     u8 *str;
     u16 length;
 
     switch (*state)
     {
     case 0:
-        var0 = sub_801F144();
-        str = sub_801F114();
+        x = GetLimitedMessageStartPos();
+        str = GetLimitedMessageStartPtr();
         length = StringLength_Multibyte(str);
-        sub_80200EC(var0, length, PIXEL_FILL(0));
-        sub_8020118(var0, str, 3, 1, 2);
+        FillTextEntryWindow(x, length, PIXEL_FILL(0));
+        DrawTextEntryMessage(x, str, 3, 1, 2);
         CopyWindowToVram(1, 2);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8020094();
-            CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+            HideStdMessageWindow();
+            CopyWindowToVram(sDisplay->messageWindowId, 3);
         }
         else
         {
@@ -2164,8 +2463,8 @@ bool32 sub_801F984(u8 *state)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_80209AC(0);
-            sub_80200C8();
+            SetRegisteredTextPalette(FALSE);
+            DestroyStdMessageWindow();
         }
         else
         {
@@ -2180,12 +2479,12 @@ bool32 sub_801F984(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FA2C(u8 *state)
+static bool32 Display_ReturnToKeyboard(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_80201A4();
+        PrintCurrentKeyboardPage();
         CopyWindowToVram(2, 2);
         (*state)++;
         break;
@@ -2199,48 +2498,48 @@ bool32 sub_801FA2C(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FA68(u8 *state)
+static bool32 Display_ScrollChat(u8 *state)
 {
-    u16 var0;
+    u16 row;
     u8 *str;
-    u8 var1;
+    u8 colorIdx;
 
     switch (*state)
     {
     case 0:
-        var0 = gUnknown_02022C88->unk1A;
-        str = sub_801F180();
-        var1 = sub_801F18C();
-        sub_8020420(var0, str, var1);
+        row = sDisplay->currLine;
+        str = GetLastReceivedMessage();
+        colorIdx = GetReceivedPlayerIndex();
+        PrintChatMessage(row, str, colorIdx);
         CopyWindowToVram(0, 2);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
             return TRUE;
 
-        if (gUnknown_02022C88->unk1A < 9)
+        if (sDisplay->currLine < 9)
         {
-            gUnknown_02022C88->unk1A++;
+            sDisplay->currLine++;
             *state = 4;
             return FALSE;
         }
         else
         {
-            gUnknown_02022C88->unk1C = 0;
+            sDisplay->scrollCount = 0;
             (*state)++;
         }
         // fall through
     case 2:
         ScrollWindow(0, 0, 5, PIXEL_FILL(1));
         CopyWindowToVram(0, 2);
-        gUnknown_02022C88->unk1C++;
+        sDisplay->scrollCount++;
         (*state)++;
         // fall through
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
             return TRUE;
 
-        if (gUnknown_02022C88->unk1C < 3)
+        if (sDisplay->scrollCount < 3)
         {
             (*state)--;
             return TRUE;
@@ -2256,44 +2555,28 @@ bool32 sub_801FA68(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FB44(u8 *state)
+static bool32 Display_AnimateKeyboardCursor(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_80209E0();
+        StartKeyboardCursorAnim();
         (*state)++;
         break;
     case 1:
-        return sub_8020A1C();
+        return TryKeyboardCursorReopen();
     }
 
     return TRUE;
 }
 
-bool32 sub_801FB70(u8 *state)
+static bool32 Display_PrintInputText(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_801FF18(3, 16);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
-        (*state)++;
-        break;
-    case 1:
-        return IsDma3ManagerBusyWithBgCopy();
-    }
-
-    return TRUE;
-}
-
-bool32 sub_801FBB4(u8 *state)
-{
-    switch (*state)
-    {
-    case 0:
-        sub_801FF18(4, 0);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_INPUT_TEXT, 16);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -2303,7 +2586,23 @@ bool32 sub_801FBB4(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FBF8(u8 *state)
+static bool32 Display_PrintExitingChat(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        AddStdMessageWindow(STDMESSAGE_EXITING_CHAT, 0);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool32 Display_PrintLeaderLeft(u8 *state)
 {
     u8 *str;
 
@@ -2311,10 +2610,10 @@ bool32 sub_801FBF8(u8 *state)
     {
     case 0:
         DynamicPlaceholderTextUtil_Reset();
-        str = sub_801F1D0();
+        str = GetChatHostName();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
-        sub_801FF18(5, 0);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_LEADER_LEFT, 0);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -2324,14 +2623,14 @@ bool32 sub_801FBF8(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FC4C(u8 *state)
+static bool32 Display_AskSave(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_801FF18(6, 0);
-        sub_801FDDC(23, 10, 1);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_ASK_SAVE, 0);
+        AddYesNoMenuAt(23, 10, 1);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -2341,14 +2640,14 @@ bool32 sub_801FC4C(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FC9C(u8 *state)
+static bool32 Display_AskOverwriteSave(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_801FF18(7, 0);
-        sub_801FDDC(23, 10, 1);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_ASK_OVERWRITE, 0);
+        AddYesNoMenuAt(23, 10, 1);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -2358,13 +2657,13 @@ bool32 sub_801FC9C(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FCEC(u8 *state)
+static bool32 Display_PrintSavingDontTurnOff(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_801FF18(8, 0);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_SAVING_NO_OFF, 0);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -2374,15 +2673,15 @@ bool32 sub_801FCEC(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FD30(u8 *state)
+static bool32 Display_PrintSavedTheGame(u8 *state)
 {
     switch (*state)
     {
     case 0:
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
-        sub_801FF18(9, 0);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_SAVED_THE_GAME, 0);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -2392,14 +2691,14 @@ bool32 sub_801FD30(u8 *state)
     return TRUE;
 }
 
-bool32 sub_801FD88(u8 *state)
+static bool32 Display_AskConfirmLeaderLeave(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_801FF18(10, 0);
-        sub_801FDDC(23, 10, 1);
-        CopyWindowToVram(gUnknown_02022C88->unk1E, 3);
+        AddStdMessageWindow(STDMESSAGE_WARN_LEADER_LEAVE, 0);
+        AddYesNoMenuAt(23, 10, 1);
+        CopyWindowToVram(sDisplay->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -2409,12 +2708,12 @@ bool32 sub_801FD88(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_801FDD8(u8 *arg0)
+static bool32 Display_Dummy(u8 *state)
 {
     return FALSE;
 }
 
-static void sub_801FDDC(u8 left, u8 top, u8 initialCursorPos)
+static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
 {
     struct WindowTemplate template;
     template.bg = 0;
@@ -2424,42 +2723,42 @@ static void sub_801FDDC(u8 left, u8 top, u8 initialCursorPos)
     template.height = 4;
     template.paletteNum = 14;
     template.baseBlock = 0x52;
-    gUnknown_02022C88->unk18 = AddWindow(&template);
-    if (gUnknown_02022C88->unk18 != 0xFF)
+    sDisplay->yesNoMenuWindowId = AddWindow(&template);
+    if (sDisplay->yesNoMenuWindowId != 0xFF)
     {
-        FillWindowPixelBuffer(gUnknown_02022C88->unk18, PIXEL_FILL(1));
-        PutWindowTilemap(gUnknown_02022C88->unk18);
-        AddTextPrinterParameterized(gUnknown_02022C88->unk18, 1, gText_Yes, 8, 1, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(gUnknown_02022C88->unk18, 1, gText_No, 8, 17, TEXT_SPEED_FF, NULL);
-        DrawTextBorderOuter(gUnknown_02022C88->unk18, 1, 13);
-        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_02022C88->unk18, 2, initialCursorPos);
+        FillWindowPixelBuffer(sDisplay->yesNoMenuWindowId, PIXEL_FILL(1));
+        PutWindowTilemap(sDisplay->yesNoMenuWindowId);
+        AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, 1, gText_Yes, 8, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sDisplay->yesNoMenuWindowId, 1, gText_No, 8, 17, TEXT_SPEED_FF, NULL);
+        DrawTextBorderOuter(sDisplay->yesNoMenuWindowId, 1, 13);
+        InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sDisplay->yesNoMenuWindowId, 2, initialCursorPos);
     }
 }
 
-static void sub_801FEBC(void)
+static void HideYesNoMenuWindow(void)
 {
-    if (gUnknown_02022C88->unk18 != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(gUnknown_02022C88->unk18, FALSE);
-        ClearWindowTilemap(gUnknown_02022C88->unk18);
+        ClearStdWindowAndFrameToTransparent(sDisplay->yesNoMenuWindowId, FALSE);
+        ClearWindowTilemap(sDisplay->yesNoMenuWindowId);
     }
 }
 
-static void sub_801FEE4(void)
+static void DestroyYesNoMenuWindow(void)
 {
-    if (gUnknown_02022C88->unk18 != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != 0xFF)
     {
-        RemoveWindow(gUnknown_02022C88->unk18);
-        gUnknown_02022C88->unk18 = 0xFF;
+        RemoveWindow(sDisplay->yesNoMenuWindowId);
+        sDisplay->yesNoMenuWindowId = 0xFF;
     }
 }
 
-static s8 sub_801FF08(void)
+static s8 ProcessMenuInput(void)
 {
     return Menu_ProcessInput();
 }
 
-static void sub_801FF18(int arg0, u16 arg1)
+static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 {
     const u8 *str;
     int windowId;
@@ -2471,43 +2770,43 @@ static void sub_801FF18(int arg0, u16 arg1)
     template.height = 4;
     template.paletteNum = 14;
     template.baseBlock = 0x6A;
-    if (gUnknown_082F2D40[arg0].unkA)
+    if (sDisplayStdMessages[msgId].useWiderBox)
     {
         template.tilemapLeft -= 7;
         template.width += 7;
     }
 
-    gUnknown_02022C88->unk1E = AddWindow(&template);
-    windowId = gUnknown_02022C88->unk1E;
-    if (gUnknown_02022C88->unk1E == 0xFF)
+    sDisplay->messageWindowId = AddWindow(&template);
+    windowId = sDisplay->messageWindowId;
+    if (sDisplay->messageWindowId == 0xFF)
         return;
 
-    if (gUnknown_082F2D40[arg0].unk9)
+    if (sDisplayStdMessages[msgId].hasPlaceholders)
     {
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_02022C88->unk22, gUnknown_082F2D40[arg0].unk0);
-        str = gUnknown_02022C88->unk22;
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(sDisplay->expandedPlaceholdersBuffer, sDisplayStdMessages[msgId].text);
+        str = sDisplay->expandedPlaceholdersBuffer;
     }
     else
     {
-        str = gUnknown_082F2D40[arg0].unk0;
+        str = sDisplayStdMessages[msgId].text;
     }
 
-    ChangeBgY(0, arg1 * 256, 0);
+    ChangeBgY(0, bg0vofs * 256, 0);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
-    if (gUnknown_082F2D40[arg0].unk4 == 1)
+    if (sDisplayStdMessages[msgId].boxType == 1)
     {
         DrawTextBorderInner(windowId, 0xA, 2);
         AddTextPrinterParameterized5(
             windowId,
             1,
             str,
-            gUnknown_082F2D40[arg0].unk5 + 8,
-            gUnknown_082F2D40[arg0].unk6 + 8,
+            sDisplayStdMessages[msgId].x + 8,
+            sDisplayStdMessages[msgId].y + 8,
             TEXT_SPEED_FF,
             NULL,
-            gUnknown_082F2D40[arg0].unk7,
-            gUnknown_082F2D40[arg0].unk8);
+            sDisplayStdMessages[msgId].letterSpacing,
+            sDisplayStdMessages[msgId].lineSpacing);
     }
     else
     {
@@ -2516,105 +2815,103 @@ static void sub_801FF18(int arg0, u16 arg1)
             windowId,
             1,
             str,
-            gUnknown_082F2D40[arg0].unk5,
-            gUnknown_082F2D40[arg0].unk6,
+            sDisplayStdMessages[msgId].x,
+            sDisplayStdMessages[msgId].y,
             TEXT_SPEED_FF,
             NULL,
-            gUnknown_082F2D40[arg0].unk7,
-            gUnknown_082F2D40[arg0].unk8);
+            sDisplayStdMessages[msgId].letterSpacing,
+            sDisplayStdMessages[msgId].lineSpacing);
     }
 
-    gUnknown_02022C88->unk1E = windowId;
+    sDisplay->messageWindowId = windowId;
 }
 
-static void sub_8020094(void)
+static void HideStdMessageWindow(void)
 {
-    if (gUnknown_02022C88->unk1E != 0xFF)
+    if (sDisplay->messageWindowId != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(gUnknown_02022C88->unk1E, FALSE);
-        ClearWindowTilemap(gUnknown_02022C88->unk1E);
+        ClearStdWindowAndFrameToTransparent(sDisplay->messageWindowId, FALSE);
+        ClearWindowTilemap(sDisplay->messageWindowId);
     }
 
     ChangeBgY(0, 0, 0);
 }
 
-static void sub_80200C8(void)
+static void DestroyStdMessageWindow(void)
 {
-    if (gUnknown_02022C88->unk1E != 0xFF)
+    if (sDisplay->messageWindowId != 0xFF)
     {
-        RemoveWindow(gUnknown_02022C88->unk1E);
-        gUnknown_02022C88->unk1E = 0xFF;
+        RemoveWindow(sDisplay->messageWindowId);
+        sDisplay->messageWindowId = 0xFF;
     }
 }
 
-static void sub_80200EC(u16 x, u16 width, u8 fillValue)
+static void FillTextEntryWindow(u16 x, u16 width, u8 fillValue)
 {
     FillWindowPixelRect(1, fillValue, x * 8, 1, width * 8, 14);
 }
 
-static void sub_8020118(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
+static void DrawTextEntryMessage(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shadowColor)
 {
-    u8 *str2;
-    u8 sp[38];
-    if (fillValue)
-        sub_80200EC(x, sub_801F198() - x, fillValue);
+    u8 color[3];
+    u8 strBuffer[35];
+    if (bgColor != TEXT_COLOR_TRANSPARENT)
+        FillTextEntryWindow(x, GetTextEntryCursorPosition() - x, bgColor);
 
-    sp[0] = fillValue;
-    sp[1] = arg3;
-    sp[2] = arg4;
-    str2 = &sp[4];
-    str2[0] = EXT_CTRL_CODE_BEGIN;
-    str2[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
-    str2[2] = 8;
-    StringCopy(&str2[3], str);
-    AddTextPrinterParameterized3(1, 2, x * 8, 1, sp, TEXT_SPEED_FF, str2);
+    color[0] = bgColor;
+    color[1] = fgColor;
+    color[2] = shadowColor;
+    strBuffer[0] = EXT_CTRL_CODE_BEGIN;
+    strBuffer[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+    strBuffer[2] = 8;
+    StringCopy(&strBuffer[3], str);
+    AddTextPrinterParameterized3(1, 2, x * 8, 1, color, TEXT_SPEED_FF, strBuffer);
 }
 
-static void sub_80201A4(void)
+static void PrintCurrentKeyboardPage(void)
 {
     u8 page;
     int i;
-    int var1;
     u16 left;
     u16 top;
-    u8 sp[52];
-    u8 *str;
+    u8 color[3];
+    u8 str[45];
     u8 *str2;
 
     FillWindowPixelBuffer(2, PIXEL_FILL(15));
     page = GetCurrentKeyboardPage();
-    sp[0] = TEXT_COLOR_TRANSPARENT;
-    sp[1] = TEXT_DYNAMIC_COLOR_5;
-    sp[2] = TEXT_DYNAMIC_COLOR_4;
-    if (page != UNION_ROOM_KB_PAGE_COUNT)
+    color[0] = TEXT_COLOR_TRANSPARENT;
+    color[1] = TEXT_DYNAMIC_COLOR_5;
+    color[2] = TEXT_DYNAMIC_COLOR_4;
+    if (page != UNION_ROOM_KB_PAGE_REGISTER)
     {
-        str = &sp[4];
         str[0] = EXT_CTRL_CODE_BEGIN;
         str[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
-        var1 = 8;
-        str[2] = var1;
-        left = var1;
+        str[2] = 8;
+
         if (page == UNION_ROOM_KB_PAGE_EMOJI)
             left = 6;
+        else
+            left = 8;
 
         for (i = 0, top = 0; i < UNION_ROOM_KB_ROW_COUNT; i++, top += 12)
         {
             if (!sUnionRoomKeyboardText[page][i])
                 return;
 
-            StringCopy(&sp[7], sUnionRoomKeyboardText[page][i]);
-            AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, &sp[4]);
+            StringCopy(&str[3], sUnionRoomKeyboardText[page][i]);
+            AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
         }
     }
     else
     {
         left = 4;
-        for (i = 0, top = 0; i < 10; i++, top += 12)
+        for (i = 0, top = 0; i < UNION_ROOM_KB_ROW_COUNT; i++, top += 12)
         {
-            str2 = sub_801EE6C(i);
+            str2 = GetRegisteredTextByRow(i);
             if (GetStringWidth(0, str2, 0) <= 40)
             {
-                AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, str2);
+                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str2);
             }
             else
             {
@@ -2622,11 +2919,11 @@ static void sub_80201A4(void)
                 do
                 {
                     length--;
-                    StringCopyN_Multibyte(&sp[4], str2, length);
-                } while (GetStringWidth(0, &sp[4], 0) > 35);
+                    StringCopyN_Multibyte(str, str2, length);
+                } while (GetStringWidth(0, str, 0) > 35);
 
-                AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, &sp[4]);
-                AddTextPrinterParameterized3(2, 0, left + 35, top, sp, TEXT_SPEED_FF, gText_Ellipsis);
+                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
+                AddTextPrinterParameterized3(2, 0, left + 35, top, color, TEXT_SPEED_FF, sText_Ellipsis);
             }
         }
     }
@@ -2634,68 +2931,69 @@ static void sub_80201A4(void)
 
 static bool32 sub_8020320(void)
 {
-    if (gUnknown_02022C88->unk20 < 56)
+    if (sDisplay->bg1hofs < 56)
     {
-        gUnknown_02022C88->unk20 += 12;
-        if (gUnknown_02022C88->unk20 >= 56)
-            gUnknown_02022C88->unk20 = 56;
+        sDisplay->bg1hofs += 12;
+        if (sDisplay->bg1hofs >= 56)
+            sDisplay->bg1hofs = 56;
 
-        if (gUnknown_02022C88->unk20 < 56)
+        if (sDisplay->bg1hofs < 56)
         {
-            sub_80207C0(gUnknown_02022C88->unk20);
+            sub_80207C0(sDisplay->bg1hofs);
             return TRUE;
         }
     }
 
-    sub_8020818(gUnknown_02022C88->unk20);
+    sub_8020818(sDisplay->bg1hofs);
     return FALSE;
 }
 
 static bool32 sub_8020368(void)
 {
-    if (gUnknown_02022C88->unk20 > 0)
+    if (sDisplay->bg1hofs > 0)
     {
-        gUnknown_02022C88->unk20 -= 12;
-        if (gUnknown_02022C88->unk20 <= 0)
-            gUnknown_02022C88->unk20 = 0;
+        sDisplay->bg1hofs -= 12;
+        if (sDisplay->bg1hofs <= 0)
+            sDisplay->bg1hofs = 0;
 
-        if (gUnknown_02022C88->unk20 > 0)
+        if (sDisplay->bg1hofs > 0)
         {
-            sub_80207C0(gUnknown_02022C88->unk20);
+            sub_80207C0(sDisplay->bg1hofs);
             return TRUE;
         }
     }
 
-    sub_8020818(gUnknown_02022C88->unk20);
+    sub_8020818(sDisplay->bg1hofs);
     return FALSE;
 }
 
-static void sub_80203B0(void)
+static void ShowKeyboardSwapMenu(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
-    PrintTextArray(3, 2, 8, 1, 14, 5, gUnknown_082F2DC8);
+    PrintTextArray(3, 2, 8, 1, 14, 5, sKeyboardPageTitleTexts);
     sub_81983AC(3, 2, 0, 1, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }
 
-static void sub_802040C(void)
+static void HideKeyboardSwapMenu(void)
 {
     ClearStdWindowAndFrameToTransparent(3, FALSE);
     ClearWindowTilemap(3);
 }
 
-static void sub_8020420(u16 row, u8 *str, u8 arg2)
+static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
 {
+    // colorIdx: 0 = grey, 1 = red, 2 = green, 3 = blue
     u8 color[3];
     color[0] = TEXT_COLOR_WHITE;
-    color[1] = arg2 * 2 + 2;
-    color[2] = arg2 * 2 + 3;
+    color[1] = colorIdx * 2 + 2;
+    color[2] = colorIdx * 2 + 3;
     FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);
     AddTextPrinterParameterized3(0, 2, 0, row * 15 + 1, color, TEXT_SPEED_FF, str);
 }
 
-static void sub_8020480(void)
+static void ResetGpuBgState(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -2720,83 +3018,83 @@ static void sub_8020480(void)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
 }
 
-static void sub_8020538(void)
+static void SetBgTilemapBuffers(void)
 {
-    SetBgTilemapBuffer(0, gUnknown_02022C88->unk128);
-    SetBgTilemapBuffer(1, gUnknown_02022C88->unk928);
-    SetBgTilemapBuffer(3, gUnknown_02022C88->unk1128);
-    SetBgTilemapBuffer(2, gUnknown_02022C88->unk1928);
+    SetBgTilemapBuffer(0, sDisplay->bg0Buffer);
+    SetBgTilemapBuffer(1, sDisplay->bg1Buffer);
+    SetBgTilemapBuffer(3, sDisplay->bg3Buffer);
+    SetBgTilemapBuffer(2, sDisplay->bg2Buffer);
 }
 
-static void sub_8020584(void)
+static void ClearBg0(void)
 {
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, 1);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
 }
 
-static void sub_80205B4(void)
+static void LoadChatWindowBorderGfx(void)
 {
-    LoadPalette(gUnknown_08DD4BD0, 0x70, 0x20);
-    LoadPalette(gUnknown_08DD4BB0, 0xC0, 0x20);
-    decompress_and_copy_tile_data_to_vram(1, gUnknown_08DD4BF0, 0, 0, 0);
-    CopyToBgTilemapBuffer(1, gUnknown_08DD4C4C, 0, 0);
+    LoadPalette(gUnionRoomChat_Window_Pal2, 0x70, 0x20);
+    LoadPalette(gUnionRoomChat_Window_Pal1, 0xC0, 0x20);
+    DecompressAndCopyTileDataToVram(1, gUnionRoomChat_Border_Gfx, 0, 0, 0);
+    CopyToBgTilemapBuffer(1, gUnionRoomChat_Border_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 
-static void sub_8020604(void)
+static void LoadChatWindowGfx(void)
 {
     u8 *ptr;
 
-    LoadPalette(gLinkMiscMenu_Pal, 0, 0x20);
-    ptr = decompress_and_copy_tile_data_to_vram(2, gLinkMiscMenu_Gfx, 0, 0, 0);
+    LoadPalette(gUnionRoomChat_Background_Pal, 0, 0x20);
+    ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Background_Gfx, 0, 0, 0);
     if (ptr)
     {
-        CpuFastCopy(&ptr[0x220], gUnknown_02022C88->unk2128, 0x20);
-        CpuFastCopy(&ptr[0x420], gUnknown_02022C88->unk2148, 0x20);
+        CpuFastCopy(&ptr[0x220], sDisplay->unk2128, 0x20);
+        CpuFastCopy(&ptr[0x420], sDisplay->unk2148, 0x20);
     }
 
-    CopyToBgTilemapBuffer(2, gLinkMiscMenu_Tilemap, 0, 0);
+    CopyToBgTilemapBuffer(2, gUnionRoomChat_Background_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(2);
 }
 
 static void sub_8020680(void)
 {
-    LoadPalette(gUnknown_082F2C20, 0x80, 0x20);
+    LoadPalette(sUnk_Palette1, 0x80, 0x20);
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
 }
 
-static void sub_80206A4(void)
+static void LoadChatMessagesWindow(void)
 {
-    LoadPalette(gUnknown_082F2C40, 0xF0, 0x20);
+    LoadPalette(sUnk_Palette2, 0xF0, 0x20);
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     CopyWindowToVram(0, 3);
 }
 
-static void sub_80206D0(void)
+static void LoadKeyboardWindow(void)
 {
     PutWindowTilemap(2);
-    sub_80201A4();
+    PrintCurrentKeyboardPage();
     CopyWindowToVram(2, 3);
 }
 
-static void sub_80206E8(void)
+static void LoadTextEntryWindow(void)
 {
     int i;
-    u8 var0[2];
-    var0[0] = 0;
-    var0[1] = 0xFF;
+    u8 unused[2];
+    unused[0] = 0;
+    unused[1] = 0xFF;
 
-    for (i = 0; i < 15; i++)
-        BlitBitmapToWindow(1, gUnknown_02022C88->unk2128, i * 8, 0, 8, 16);
+    for (i = 0; i < MAX_MESSAGE_LENGTH; i++)
+        BlitBitmapToWindow(1, sDisplay->unk2128, i * 8, 0, 8, 16);
 
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     PutWindowTilemap(1);
     CopyWindowToVram(1, 3);
 }
 
-static void sub_8020740(void)
+static void LoadKeyboardSwapWindow(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     LoadUserWindowBorderGfx(3, 1, 0xD0);
@@ -2804,110 +3102,110 @@ static void sub_8020740(void)
     LoadPalette(gUnknown_0860F074, 0xE0,  0x20);
 }
 
-static void sub_8020770(void)
+static void InitScanlineEffect(void)
 {
     struct ScanlineEffectParams params;
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
     params.dmaDest = &REG_BG1HOFS;
     params.initState = 1;
     params.unused9 = 0;
-    gUnknown_02022C88->unk20 = 0;
+    sDisplay->bg1hofs = 0;
     CpuFastFill(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
     ScanlineEffect_SetParams(params);
 }
 
-static void sub_80207C0(s16 arg0)
+static void sub_80207C0(s16 bg1hofs)
 {
-    CpuFill16(arg0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], 0x120);
-    CpuFill16(0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer] + 0x90, 0x20);
+    CpuFill16(bg1hofs, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], 0x120);
+    CpuFill16(0,       gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer] + 0x90, 0x20);
 }
 
-static void sub_8020818(s16 arg0)
+static void sub_8020818(s16 bg1hofs)
 {
-    CpuFill16(arg0, gScanlineEffectRegBuffers[0],         0x120);
-    CpuFill16(0,    gScanlineEffectRegBuffers[0] +  0x90, 0x20);
-    CpuFill16(arg0, gScanlineEffectRegBuffers[0] + 0x3C0, 0x120);
-    CpuFill16(0,    gScanlineEffectRegBuffers[0] + 0x450, 0x20);
+    CpuFill16(bg1hofs, gScanlineEffectRegBuffers[0],         0x120);
+    CpuFill16(0,       gScanlineEffectRegBuffers[0] +  0x90, 0x20);
+    CpuFill16(bg1hofs, gScanlineEffectRegBuffers[0] + 0x3C0, 0x120);
+    CpuFill16(0,       gScanlineEffectRegBuffers[0] + 0x450, 0x20);
 }
 
-static bool32 sub_8020890(void)
+static bool32 TryAllocSprites(void)
 {
     u32 i;
-    for (i = 0; i < 5; i++)
-        LoadCompressedSpriteSheet(&gUnknown_082F3134[i]);
+    for (i = 0; i < ARRAY_COUNT(sSpriteSheets); i++)
+        LoadCompressedSpriteSheet(&sSpriteSheets[i]);
 
-    LoadSpritePalette(&gUnknown_082F315C);
-    gUnknown_02022C8C = Alloc(0x18);
-    if (!gUnknown_02022C8C)
+    LoadSpritePalette(&sSpritePalette);
+    sSprites = Alloc(sizeof(struct UnionRoomChatSprites));
+    if (!sSprites)
         return FALSE;
 
     return TRUE;
 }
 
-static void sub_80208D0(void)
+static void FreeSprites(void)
 {
-    if (gUnknown_02022C8C)
-        Free(gUnknown_02022C8C);
+    if (sSprites)
+        Free(sSprites);
 }
 
-static void sub_80208E8(void)
+static void CreateKeyboardCursorSprite(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_082F319C, 10, 24, 0);
-    gUnknown_02022C8C->unk0 = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(&sSpriteTemplate_KeyboardCursor, 10, 24, 0);
+    sSprites->keyboardCursor = &gSprites[spriteId];
 }
 
-static void sub_802091C(bool32 invisible)
+static void SetKeyboardCursorInvisibility(bool32 invisible)
 {
-    gUnknown_02022C8C->unk0->invisible = invisible;
+    sSprites->keyboardCursor->invisible = invisible;
 }
 
-static void sub_802093C(void)
+static void MoveKeyboardCursor(void)
 {
     u8 x, y;
     u8 page = GetCurrentKeyboardPage();
-    sub_801F0BC(&x, &y);
-    if (page != UNION_ROOM_KB_PAGE_COUNT)
+    GetCurrentKeyboardColAndRow(&x, &y);
+    if (page != UNION_ROOM_KB_PAGE_REGISTER)
     {
-        StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
-        gUnknown_02022C8C->unk0->pos1.x = x * 8 + 10;
-        gUnknown_02022C8C->unk0->pos1.y = y * 12 + 24;
+        StartSpriteAnim(sSprites->keyboardCursor, 0);
+        sSprites->keyboardCursor->pos1.x = x * 8 + 10;
+        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
     }
     else
     {
-        StartSpriteAnim(gUnknown_02022C8C->unk0, 2);
-        gUnknown_02022C8C->unk0->pos1.x = 24;
-        gUnknown_02022C8C->unk0->pos1.y = y * 12 + 24;
+        StartSpriteAnim(sSprites->keyboardCursor, 2);
+        sSprites->keyboardCursor->pos1.x = 24;
+        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
     }
 }
 
-static void sub_80209AC(int arg0)
+static void SetRegisteredTextPalette(bool32 registering)
 {
-    const u16 *palette = &gUnknown_082F2DF0[arg0 * 2 + 1];
+    const u16 *palette = &sUnionRoomChatInterfacePal[registering * 2 + 1];
     u8 index = IndexOfSpritePaletteTag(0);
     LoadPalette(palette, index * 16 + 0x101, 4);
 }
 
-static void sub_80209E0(void)
+static void StartKeyboardCursorAnim(void)
 {
-    if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
-        StartSpriteAnim(gUnknown_02022C8C->unk0, 1);
+    if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_REGISTER)
+        StartSpriteAnim(sSprites->keyboardCursor, 1);
     else
-        StartSpriteAnim(gUnknown_02022C8C->unk0, 3);
+        StartSpriteAnim(sSprites->keyboardCursor, 3);
 
-    gUnknown_02022C8C->unk14 = 0;
+    sSprites->cursorBlinkTimer = 0;
 }
 
-static bool32 sub_8020A1C(void)
+static bool32 TryKeyboardCursorReopen(void)
 {
-    if (gUnknown_02022C8C->unk14 > 3)
+    if (sSprites->cursorBlinkTimer > 3)
         return FALSE;
 
-    if (++gUnknown_02022C8C->unk14 > 3)
+    if (++sSprites->cursorBlinkTimer > 3)
     {
-        if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
-            StartSpriteAnim(gUnknown_02022C8C->unk0, 0);
+        if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_REGISTER)
+            StartSpriteAnim(sSprites->keyboardCursor, 0);
         else
-            StartSpriteAnim(gUnknown_02022C8C->unk0, 2);
+            StartSpriteAnim(sSprites->keyboardCursor, 2);
 
         return FALSE;
     }
@@ -2915,29 +3213,29 @@ static bool32 sub_8020A1C(void)
     return TRUE;
 }
 
-static void sub_8020A68(void)
+static void CreateTextEntrySprites(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_082F31BC, 76, 152, 2);
-    gUnknown_02022C8C->unk8 = &gSprites[spriteId];
-    spriteId = CreateSprite(&gUnknown_082F31D4, 64, 152, 1);
-    gUnknown_02022C8C->unk4 = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(&sSpriteTemplate_TextEntryCursor, 76, 152, 2);
+    sSprites->textEntryCursor = &gSprites[spriteId];
+    spriteId = CreateSprite(&sSpriteTemplate_TextEntryArrow, 64, 152, 1);
+    sSprites->textEntryArrow = &gSprites[spriteId];
 }
 
-static void sub_8020ABC(struct Sprite *sprite)
+static void SpriteCB_TextEntryCursor(struct Sprite *sprite)
 {
-    int var0 = sub_801F198();
-    if (var0 == 15)
+    int pos = GetTextEntryCursorPosition();
+    if (pos == MAX_MESSAGE_LENGTH)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
     }
     else
     {
-        sprite->invisible = 0;
-        sprite->pos1.x = var0 * 8 + 76;
+        sprite->invisible = FALSE;
+        sprite->pos1.x = pos * 8 + 76;
     }
 }
 
-static void sub_8020AF4(struct Sprite *sprite)
+static void SpriteCB_TextEntryArrow(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 4)
     {
@@ -2947,40 +3245,42 @@ static void sub_8020AF4(struct Sprite *sprite)
     }
 }
 
-static void sub_8020B20(void)
+static void CreateRButtonSprites(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_082F322C, 8, 152, 3);
-    gUnknown_02022C8C->unkC = &gSprites[spriteId];
-    spriteId = CreateSprite(&gUnknown_082F3244, 32, 152, 4);
-    gUnknown_02022C8C->unk10 = &gSprites[spriteId];
-    gUnknown_02022C8C->unk10->invisible = 1;
+    u8 spriteId = CreateSprite(&sSpriteTemplate_RButtonIcon, 8, 152, 3);
+    sSprites->rButtonIcon = &gSprites[spriteId];
+    spriteId = CreateSprite(&sSpriteTemplate_RButtonLabels, 32, 152, 4);
+    sSprites->rButtonLabel = &gSprites[spriteId];
+    sSprites->rButtonLabel->invisible = TRUE;
 }
 
-static void sub_8020B80(void)
+static void UpdateRButtonLabel(void)
 {
-    if (GetCurrentKeyboardPage() == UNION_ROOM_KB_PAGE_COUNT)
+    if (GetCurrentKeyboardPage() == UNION_ROOM_KB_PAGE_REGISTER)
     {
-        if (sub_801F0DC() != 0)
+        if (GetLengthOfMessageEntry() != 0)
         {
-            gUnknown_02022C8C->unk10->invisible = 0;
-            StartSpriteAnim(gUnknown_02022C8C->unk10, 3);
+            // REGISTER
+            sSprites->rButtonLabel->invisible = FALSE;
+            StartSpriteAnim(sSprites->rButtonLabel, 3);
         }
         else
         {
-            gUnknown_02022C8C->unk10->invisible = 1;
+            sSprites->rButtonLabel->invisible = TRUE;
         }
     }
     else
     {
-        int anim = sub_801F1A4();
+        int anim = GetShouldShowCaseToggleIcon();
         if (anim == 3)
         {
-            gUnknown_02022C8C->unk10->invisible = 1;
+            sSprites->rButtonLabel->invisible = TRUE;
         }
         else
         {
-            gUnknown_02022C8C->unk10->invisible = 0;
-            StartSpriteAnim(gUnknown_02022C8C->unk10, anim);
+            // A <--> a (toggle case)
+            sSprites->rButtonLabel->invisible = FALSE;
+            StartSpriteAnim(sSprites->rButtonLabel, anim);
         }
     }
 

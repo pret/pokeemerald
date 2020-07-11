@@ -31,14 +31,14 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "util.h"
-#include "contest_link_80F57C4.h"
+#include "contest_util.h"
 #include "dma3.h"
 #include "battle_message.h"
 #include "event_scripts.h"
 #include "event_data.h"
 #include "strings.h"
 #include "contest_effect.h"
-#include "contest_link_80FC4F4.h"
+#include "contest_link.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
 #include "data.h"
@@ -155,7 +155,7 @@ static void Contest_StartTextPrinter(const u8 *, u32);
 static void ContestBG_FillBoxWithIncrementingTile(u8, u16, u8, u8, u8, u8, u8, s16);
 static bool32 Contest_RunTextPrinters(void);
 static void Contest_SetBgCopyFlags(u32 flagIndex);
-static void sub_80DBD18(void);
+static void CalculateFinalScores(void);
 static void sub_80DD080(u8);
 static void sub_80DE9DC(u8);
 static void sub_80DCBE8(u8, u8);
@@ -184,7 +184,7 @@ static void sub_80DC3AC(void);
 static bool8 sub_80DC3C4(void);
 static void ContestBG_FillBoxWithTile(u8, u16, u8, u8, u8, u8, u8);
 static void Contest_PrintTextToBg0WindowStd(u32, const u8 *);
-static s16 sub_80DBD34(u8);
+static s16 GetContestantRound2Points(u8);
 static void DetermineFinalStandings(void);
 static bool8 sub_80DBF30(s32, s32, struct UnknownContestStruct6 *);
 static void sub_80DC0F4(u8);
@@ -221,9 +221,9 @@ static void SwapMoveDescAndContestTilemaps(void);
 // EWRAM vars.
 EWRAM_DATA struct ContestPokemon gContestMons[CONTESTANT_COUNT] = {0};
 EWRAM_DATA s16 gContestMonConditions[CONTESTANT_COUNT] = {0};
-EWRAM_DATA s16 gUnknown_02039F08[CONTESTANT_COUNT] = {0};
+EWRAM_DATA s16 gContestMonTotalPoints[CONTESTANT_COUNT] = {0};
 EWRAM_DATA s16 gUnknown_02039F10[CONTESTANT_COUNT] = {0};
-EWRAM_DATA s16 gUnknown_02039F18[CONTESTANT_COUNT] = {0};
+EWRAM_DATA s16 gContestMonRound2Points[CONTESTANT_COUNT] = {0};
 EWRAM_DATA u8 gContestFinalStandings[CONTESTANT_COUNT] = {0};
 EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
@@ -239,7 +239,7 @@ EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
 EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
-EWRAM_DATA u8 gUnknown_02039F5C = 0;
+EWRAM_DATA bool8 gUnknown_02039F5C = 0;
 EWRAM_DATA u8 gUnknown_02039F5D = 0;
 
 // IWRAM common vars.
@@ -2490,7 +2490,7 @@ static void sub_80DA5E8(u8 taskId)
     gBattle_BG2_Y = 0;
     for (i = 0; i < CONTESTANT_COUNT; i++)
         gUnknown_02039F10[i] = eContestantStatus[i].pointTotal;
-    sub_80DBD18();
+    CalculateFinalScores();
     ContestClearGeneralTextWindow();
     if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         BravoTrainerPokemonProfile_BeforeInterview1(eContestantStatus[gContestPlayerMonIndex].prevMove);
@@ -3367,22 +3367,22 @@ bool8 Contest_IsMonsTurnDisabled(u8 a)
         return FALSE;
 }
 
-static void sub_80DBCE0(u8 contestant)
+static void CalculateTotalPointsForContestant(u8 contestant)
 {
-    gUnknown_02039F18[contestant] = sub_80DBD34(contestant);
-    gUnknown_02039F08[contestant] = gContestMonConditions[contestant] + gUnknown_02039F18[contestant];
+    gContestMonRound2Points[contestant] = GetContestantRound2Points(contestant);
+    gContestMonTotalPoints[contestant] = gContestMonConditions[contestant] + gContestMonRound2Points[contestant];
 }
 
-static void sub_80DBD18(void)
+static void CalculateFinalScores(void)
 {
     s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        sub_80DBCE0(i);
+        CalculateTotalPointsForContestant(i);
     DetermineFinalStandings();
 }
 
-static s16 sub_80DBD34(u8 contestant)
+static s16 GetContestantRound2Points(u8 contestant)
 {
     return gUnknown_02039F10[contestant] * 2;
 }
@@ -3411,7 +3411,7 @@ static void DetermineFinalStandings(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        sp8[i].unk0 = gUnknown_02039F08[i];
+        sp8[i].unk0 = gContestMonTotalPoints[i];
         sp8[i].unk4 = gContestMonConditions[i];
         sp8[i].unk8 = randomOrdering[i];
         sp8[i].unkC = i;
@@ -5313,22 +5313,22 @@ bool8 sub_80DEDA8(u8 rank)
     }
     if (rank != 0xFE)
     {
-        u8 r4 = sub_80DEFA8(rank, 1);
+        u8 id = sub_80DEFA8(rank, 1);
 
-        gSaveBlock1Ptr->contestWinners[r4].personality = gContestMons[i].personality;
-        gSaveBlock1Ptr->contestWinners[r4].species = gContestMons[i].species;
-        gSaveBlock1Ptr->contestWinners[r4].trainerId = gContestMons[i].otId;
-        StringCopy(gSaveBlock1Ptr->contestWinners[r4].monName, gContestMons[i].nickname);
-        StringCopy(gSaveBlock1Ptr->contestWinners[r4].trainerName, gContestMons[i].trainerName);
+        gSaveBlock1Ptr->contestWinners[id].personality = gContestMons[i].personality;
+        gSaveBlock1Ptr->contestWinners[id].species = gContestMons[i].species;
+        gSaveBlock1Ptr->contestWinners[id].trainerId = gContestMons[i].otId;
+        StringCopy(gSaveBlock1Ptr->contestWinners[id].monName, gContestMons[i].nickname);
+        StringCopy(gSaveBlock1Ptr->contestWinners[id].trainerName, gContestMons[i].trainerName);
         if(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-            gSaveBlock1Ptr->contestWinners[r4].contestRank = CONTEST_RANK_LINK;
+            gSaveBlock1Ptr->contestWinners[id].contestRank = CONTEST_RANK_LINK;
         else
-            gSaveBlock1Ptr->contestWinners[r4].contestRank = gSpecialVar_ContestRank;
+            gSaveBlock1Ptr->contestWinners[id].contestRank = gSpecialVar_ContestRank;
 
         if (rank != 0xFF)
-            gSaveBlock1Ptr->contestWinners[r4].contestCategory = gSpecialVar_ContestCategory;
+            gSaveBlock1Ptr->contestWinners[id].contestCategory = gSpecialVar_ContestCategory;
         else
-            gSaveBlock1Ptr->contestWinners[r4].contestCategory = r7;
+            gSaveBlock1Ptr->contestWinners[id].contestCategory = r7;
     }
     else
     {
@@ -5354,24 +5354,24 @@ u8 sub_80DEFA8(u8 rank, u8 b)
     case CONTEST_RANK_MASTER:
         if (b != 0)
         {
-            for (i = 5; i >= 1; i--)
+            for (i = NUM_CONTEST_HALL_WINNERS - 1; i >= 1; i--)
                 memcpy(&gSaveBlock1Ptr->contestWinners[i], &gSaveBlock1Ptr->contestWinners[i - 1], sizeof(struct ContestWinner));
         }
         return 0;
-    default: // CONTEST_RANK_LINK
+    default:
         switch (gSpecialVar_ContestCategory)
         {
         case CONTEST_CATEGORY_COOL:
-            return 8;
+            return CONTEST_WINNER_MUSEUM_COOL - 1;
         case CONTEST_CATEGORY_BEAUTY:
-            return 9;
+            return CONTEST_WINNER_MUSEUM_BEAUTY - 1;
         case CONTEST_CATEGORY_CUTE:
-            return 10;
+            return CONTEST_WINNER_MUSEUM_CUTE - 1;
         case CONTEST_CATEGORY_SMART:
-            return 11;
+            return CONTEST_WINNER_MUSEUM_SMART - 1;
         case CONTEST_CATEGORY_TOUGH:
         default:
-            return 12;
+            return CONTEST_WINNER_MUSEUM_TOUGH - 1;
         }
     }
 }
@@ -5471,7 +5471,7 @@ static void sub_80DF250(void)
     gContestResources->field_1c[r1].unkD |= 1;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (i != var_38 && gUnknown_02039F08[var_38] - gUnknown_02039F08[i] <= 50)
+        if (i != var_38 && gContestMonTotalPoints[var_38] - gContestMonTotalPoints[i] <= 50)
             gContestResources->field_1c[i].unkD |= 4;
 
         if (!gContestResources->field_1c[i].unkE_2)
@@ -5491,7 +5491,7 @@ static void sub_80DF250(void)
         {
             if (gContestMonConditions[i] > gContestMonConditions[j])
                 r12 = TRUE;
-            if (gUnknown_02039F18[i] > gUnknown_02039F18[j])
+            if (gContestMonRound2Points[i] > gContestMonRound2Points[j])
                 r8 = TRUE;
         }
         if (!r12 && !r8)
@@ -5582,7 +5582,7 @@ static void sub_80DF4F8(void)
     {
         if (gContestMonConditions[r7] < gContestMonConditions[i])
             r9++;
-        if (gUnknown_02039F18[r7] < gUnknown_02039F18[i])
+        if (gContestMonRound2Points[r7] < gContestMonRound2Points[i])
             r10++;
     }
 

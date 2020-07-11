@@ -541,7 +541,7 @@ static u8 AddDecorationWindow(u8 windowIndex)
     }
 
     DrawStdFrameWithCustomTileAndPalette(*windowId, FALSE, 0x214, 14);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     return *windowId;
 }
 
@@ -550,7 +550,7 @@ static void RemoveDecorationWindow(u8 windowIndex)
     ClearStdWindowAndFrameToTransparent(sDecorMenuWindowIds[windowIndex], FALSE);
     ClearWindowTilemap(sDecorMenuWindowIds[windowIndex]);
     RemoveWindow(sDecorMenuWindowIds[windowIndex]);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void AddDecorationActionsWindow(void)
@@ -729,7 +729,7 @@ static void PrintDecorationCategoryMenuItems(u8 taskId)
     }
 
     AddTextPrinterParameterized(windowId, 1, gTasks[taskId].tDecorationMenuCommand == DECOR_MENU_TRADE ? gText_Exit : gText_Cancel, 8, i * 16 + 1, 0, NULL);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void PrintDecorationCategoryMenuItem(u8 winid, u8 category, u8 x, u8 y, bool8 disabled, u8 speed)

@@ -293,7 +293,7 @@ static void HideChooseTimeWindow(u8 windowId)
 {
     ClearStdWindowAndFrameToTransparent(windowId, FALSE);
     RemoveWindow(windowId);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u8 seconds)
@@ -323,7 +323,7 @@ static void ShowChooseTimeWindow(u8 windowId, u16 days, u8 hours, u8 minutes, u8
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 0xE);
     PrintTime(windowId, 0, 1, days, hours, minutes, seconds);
     AddTextPrinterParameterized(windowId, 1, gText_Confirm2, 126, 1, 0, NULL);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u16 keys)
@@ -470,7 +470,7 @@ static void sub_809F048(void)
     clear_scheduled_bg_copies_to_vram();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);
     InitWindows(sUnknown_08510408);
@@ -498,7 +498,7 @@ static void ShowMessage(const u8 *str)
 {
     DrawDialogFrameWithCustomTileAndPalette(1, FALSE, 0x200, 0xF);
     AddTextPrinterParameterized(1, 1, str, 0, 1, 0, NULL);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void Task_ShowResetRtcPrompt(u8 taskId)
@@ -529,7 +529,7 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
             gSaveBlock2Ptr->lastBerryTreeUpdate.seconds);
         ShowMessage(gText_ResetRTCConfirmCancel);
         CopyWindowToVram(0, 2);
-        schedule_bg_copy_tilemap_to_vram(0);
+        ScheduleBgCopyTilemapToVram(0);
         data[0]++;
     case 1:
         if (gMain.newKeys & B_BUTTON)

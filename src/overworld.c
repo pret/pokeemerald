@@ -1858,7 +1858,7 @@ static bool32 map_loading_iteration_3(u8 *state)
         (*state)++;
         break;
     case 8:
-        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
             (*state)++;
@@ -1933,7 +1933,7 @@ static bool32 load_map_stuff(u8 *state, u32 a2)
         (*state)++;
         break;
     case 8:
-        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
             (*state)++;
@@ -2030,7 +2030,7 @@ static bool32 map_loading_iteration_2_link(u8 *state)
         (*state)++;
         break;
     case 7:
-        if (free_temp_tile_data_buffers_if_possible() != TRUE)
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
             (*state)++;
@@ -2101,7 +2101,7 @@ static void sub_8086860(void)
 static void InitOverworldGraphicsRegisters(void)
 {
     clear_scheduled_bg_copies_to_vram();
-    reset_temp_tile_data_buffers();
+    ResetTempTileDataBuffers();
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WINOBJ_BG0);
@@ -2113,9 +2113,9 @@ static void InitOverworldGraphicsRegisters(void)
                                | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(13, 7));
     InitOverworldBgs();
-    schedule_bg_copy_tilemap_to_vram(1);
-    schedule_bg_copy_tilemap_to_vram(2);
-    schedule_bg_copy_tilemap_to_vram(3);
+    ScheduleBgCopyTilemapToVram(1);
+    ScheduleBgCopyTilemapToVram(2);
+    ScheduleBgCopyTilemapToVram(3);
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -2913,7 +2913,7 @@ bool32 sub_808766C(void)
 static u32 GetLinkSendQueueLength(void)
 {
     if (gWirelessCommType != 0)
-        return Rfu.unk_9e8.unk_232;
+        return Rfu.sendQueue.count;
     else
         return gLink.sendQueue.count;
 }

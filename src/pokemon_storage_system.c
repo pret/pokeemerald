@@ -3892,7 +3892,7 @@ static void Cb_ChangeScreen(u8 taskId)
         break;
     case SCREEN_CHANGE_ITEM_FROM_BAG:
         FreePSSData();
-        GoToBagMenu(11, 0, Cb2_ReturnToPSS);
+        GoToBagMenu(ITEMMENULOCATION_PCBOX, 0, Cb2_ReturnToPSS);
         break;
     }
 
@@ -3944,7 +3944,7 @@ static void LoadPSSMenuGfx(void)
     LZ77UnCompWram(gUnknown_085722A0, sPSSData->field_5AC4);
     SetBgTilemapBuffer(1, sPSSData->field_5AC4);
     ShowBg(1);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static bool8 InitPSSWindows(void)
@@ -4010,7 +4010,7 @@ static void RefreshCursorMonData(void)
     LoadCursorMonGfx(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality);
     PrintCursorMonInfo();
     sub_80CA65C();
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void BoxSetMosaic(void)
@@ -4154,7 +4154,7 @@ static void sub_80CA65C(void)
     }
 
     sub_80D2918(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void sub_80CA704(void)
@@ -4181,7 +4181,7 @@ static void sub_80CA704(void)
         sub_80D2918(2);
     }
 
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
     sPSSData->unk_02C7 = 0;
 }
 
@@ -4202,7 +4202,7 @@ static bool8 ShowPartyMenu(void)
     sPSSData->field_2C2++;
     sub_80D27F4(1, 3, 1);
     sub_80D2918(1);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
     sub_80CBAF0(8);
     if (++sPSSData->field_2C5 == 20)
     {
@@ -4236,7 +4236,7 @@ static bool8 HidePartyMenu(void)
         sub_80CBAF0(-8);
         if (++sPSSData->field_2C5 != 20)
         {
-            schedule_bg_copy_tilemap_to_vram(1);
+            ScheduleBgCopyTilemapToVram(1);
             return TRUE;
         }
         else
@@ -4246,7 +4246,7 @@ static bool8 HidePartyMenu(void)
             CompactPartySlots();
             sub_80D27AC(2, 0, 0, 9, 2);
             sub_80D2918(2);
-            schedule_bg_copy_tilemap_to_vram(1);
+            ScheduleBgCopyTilemapToVram(1);
             return FALSE;
         }
     }
@@ -4262,7 +4262,7 @@ static void sub_80CA984(bool8 arg0)
         sub_80D27AC(2, 0, 2, 9, 2);
 
     sub_80D2918(2);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void sub_80CA9C0(void)
@@ -4331,7 +4331,7 @@ static void sub_80CAB20(void)
     sub_80CAA74();
     sub_80D27AC(1, 0, 0, 12, 22);
     sub_80D2918(1);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void SetUpDoShowPartyMenu(void)
@@ -4422,7 +4422,7 @@ static void PrintStorageActionText(u8 id)
     DrawTextBorderOuter(1, 2, 14);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void ShowYesNoWindow(s8 cursorPos)
@@ -4434,7 +4434,7 @@ static void ShowYesNoWindow(s8 cursorPos)
 static void ClearBottomWindow(void)
 {
     ClearStdWindowAndFrameToTransparent(1, FALSE);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void AddWallpaperSetsMenu(void)
@@ -7904,7 +7904,7 @@ static void AddMenu(void)
     DrawStdFrameWithCustomTileAndPalette(sPSSData->field_CB0, FALSE, 11, 14);
     PrintMenuTable(sPSSData->field_CB0, sPSSData->menuItemsCount, (void*)sPSSData->menuItems);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sPSSData->field_CB0, sPSSData->menuItemsCount, 0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     sPSSData->field_CAE = 0;
 }
 
@@ -9127,7 +9127,7 @@ static bool8 sub_80D18E4(void)
         sub_80D19B4(var);
 
     FillBgTilemapBufferRect(0, 0, var + 1, 12, 1, 9, 0x11);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     return TRUE;
 }
 
@@ -9141,7 +9141,7 @@ static void sub_80D19B4(u32 arg0)
     FillBgTilemapBufferRect(0, 0x13B, arg0, 0xD, 1, 7, 0xFu);
     FillBgTilemapBufferRect(0, 0x13C, arg0, 0xC, 1, 1, 0xFu);
     FillBgTilemapBufferRect(0, 0x13D, arg0, 0x14, 1, 1, 0xFu);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void sub_80D1A48(struct Sprite *sprite)

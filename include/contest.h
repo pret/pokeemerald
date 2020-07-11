@@ -452,9 +452,9 @@ struct ContestResources
 
 extern struct ContestPokemon gContestMons[CONTESTANT_COUNT];
 extern s16 gContestMonConditions[CONTESTANT_COUNT];
-extern s16 gUnknown_02039F08[CONTESTANT_COUNT];
+extern s16 gContestMonTotalPoints[CONTESTANT_COUNT];
 extern s16 gUnknown_02039F10[CONTESTANT_COUNT];
-extern s16 gUnknown_02039F18[CONTESTANT_COUNT];
+extern s16 gContestMonRound2Points[CONTESTANT_COUNT];
 extern u8 gContestFinalStandings[CONTESTANT_COUNT];
 extern u8 gContestMonPartyIndex;
 extern u8 gContestPlayerMonIndex;
@@ -470,7 +470,6 @@ extern u8 sContestBgCopyFlags;
 extern struct ContestWinner gCurContestWinner;
 extern u8 gUnknown_02039F5C;
 extern u8 gUnknown_02039F5D;
-
 extern u32 gContestRngValue;
 
 // contest.c
