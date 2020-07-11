@@ -4410,7 +4410,7 @@ void Task_AbilityCapsule(u8 taskId)
             gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
             DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            schedule_bg_copy_tilemap_to_vram(2);
+            ScheduleBgCopyTilemapToVram(2);
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
             return;
         }
@@ -4420,7 +4420,7 @@ void Task_AbilityCapsule(u8 taskId)
         StringExpandPlaceholders(gStringVar4, askText);
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gStringVar4, 1);
-        schedule_bg_copy_tilemap_to_vram(2);
+        ScheduleBgCopyTilemapToVram(2);
         tState++;
         break;
     case 1:
@@ -4440,7 +4440,7 @@ void Task_AbilityCapsule(u8 taskId)
         case MENU_B_PRESSED:
             gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
-            schedule_bg_copy_tilemap_to_vram(2);
+            ScheduleBgCopyTilemapToVram(2);
             // Don't exit party selections screen, return to choosing a mon.
             ClearStdWindowAndFrameToTransparent(6, 0);
             ClearWindowTilemap(6);
@@ -4453,7 +4453,7 @@ void Task_AbilityCapsule(u8 taskId)
         PlaySE(SE_KAIFUKU);
         StringExpandPlaceholders(gStringVar4, doneText);
         DisplayPartyMenuMessage(gStringVar4, 1);
-        schedule_bg_copy_tilemap_to_vram(2);
+        ScheduleBgCopyTilemapToVram(2);
         tState++;
         break;
     case 4:
