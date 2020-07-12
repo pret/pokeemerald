@@ -653,7 +653,7 @@ static void Task_WaitForLinkPartnersBeforeResults(u8 taskId)
 
 static void sub_80F5F14(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FC998, sub_80F5F30);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonIdxs, sub_80F5F30);
 }
 
 static void sub_80F5F30(u8 taskId)
@@ -2405,25 +2405,25 @@ void GetContestPlayerId(void)
     gSpecialVar_0x8004 = gContestPlayerMonIndex;
 }
 
-void ContestLinkTransfer(u8 taskId)
+void ContestLinkTransfer(u8 category)
 {
     u8 newTaskId;
     ScriptContext2_Enable();
     newTaskId = CreateTask(sub_80FC580, 0);
     SetTaskFuncWithFollowupFunc(newTaskId, sub_80FC580, sub_80F8508);
-    gTasks[newTaskId].data[9] = taskId;
+    gTasks[newTaskId].data[9] = category;
 }
 
 static void sub_80F8508(u8 taskId)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
     {
-        sub_80DA8C8(gContestMonPartyIndex);
+        CreateContestMonFromParty(gContestMonPartyIndex);
         SetTaskFuncWithFollowupFunc(taskId, sub_80FC6BC, sub_80F8568);
     }
     else
     {
-        sub_80DA8C8(gContestMonPartyIndex);
+        CreateContestMonFromParty(gContestMonPartyIndex);
         gTasks[taskId].func = sub_81D9DE4;
     }
 }

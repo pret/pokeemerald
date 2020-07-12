@@ -226,7 +226,9 @@ struct ContestPokemon
     /*0x29*/ u8 smart; // smart
     /*0x2A*/ u8 tough; // tough
     /*0x2B*/ u8 sheen; // sheen
-    /*0x2C*/ u8 unk2C[12];
+    u8 highestRank;
+    bool8 gameCleared;
+    /*0x2C*/ u8 unk2C[10];
     /*0x38*/ u32 personality;  // personality
     /*0x3C*/ u32 otId;  // otId
 };
@@ -252,85 +254,85 @@ struct ContestStruct_field_18
 
 struct Contest
 {
-    /*0x0*/ u8 playerMoveChoice;
-    /*0x1*/ u8 turnNumber;
-    /*0x2*/ u8 unused2[CONTESTANT_COUNT];
-    /*0x6*/ u16 unk1920A_0:1;  // Task active flags?
-    u16 unk1920A_1:1;
-    u16 unk1920A_2:1;
-    u16 unk1920A_3:1;
-    u16 unk1920A_4:1;
-    u16 isShowingApplauseMeter:1;
-    u16 applauseMeterIsMoving:1;
-    u16 unk1920A_7:1;
-    /*0x7*/ u16 unk1920B_0:1;
-    u16 unk1920B_1:1;
-    u16 unk1920B_2:1;
-    /*0x8*/ u8 mainTaskId;
-    /*0x9*/ u8 unk1920D[4];
-    /*0xD*/ u8 unk19211;
-    /*0xE*/ u8 unk19212;
-    /*0xF*/ u8 filler19213;
-    /*0x10*/ u8 unk19214;
-    /*0x11*/ u8 unk19215;
-    /*0x12*/ u8 unk19216;    // sprite ID
-    /*0x13*/ s8 applauseLevel;
-    /*0x19218*/ u8 prevTurnOrder[CONTESTANT_COUNT];
-    /*0x1921C*/ u32 unk1921C;   // saved RNG value?
+    u8 playerMoveChoice;
+    u8 turnNumber;
+    u8 unused2[CONTESTANT_COUNT];
+    bool16 unk1920A_0:1;  // Task active flags?
+    bool16 unk1920A_1:1;
+    bool16 unk1920A_2:1;
+    bool16 unk1920A_3:1;
+    bool16 unk1920A_4:1;
+    bool16 isShowingApplauseMeter:1;
+    bool16 applauseMeterIsMoving:1;
+    bool16 unk1920A_7:1;
+    bool16 unk1920B_0:1;
+    bool16 sliderHeartsAnimating:1; // When the slider heart is appearing/disappearing
+    bool16 unk1920B_2:1;
+    u8 mainTaskId;
+    u8 unk1920D[4];
+    u8 unk19211;
+    u8 unk19212;
+    u8 filler19213;
+    u8 unk19214;
+    u8 unk19215;
+    u8 unk19216;    // sprite ID
+    s8 applauseLevel;
+    u8 prevTurnOrder[CONTESTANT_COUNT];
+    u32 unk1921C;   // saved RNG value?
     u16 moveHistory[CONTEST_TURN_COUNT][CONTESTANT_COUNT];
     u8 excitementHistory[CONTEST_TURN_COUNT][CONTESTANT_COUNT];
     u8 applauseMeterSpriteId;
-    /*0x1925D*/ u8 contestSetupState;
-    /*0x1925E*/ u8 unk1925E;
+    u8 contestSetupState;
+    u8 unk1925E;
 };
 
 struct ContestantStatus
 {
-    /*0x00*/ s16 appeal1;  // move appeal?
-    /*0x02*/ s16 appeal2;  // final appeal after end of turn, maybe?
-    /*0x04*/ s16 pointTotal;
-    /*0x06*/ u16 currMove;
-    /*0x08*/ u16 prevMove;
-    /*0x0A*/ u8 moveCategory;
-    /*0x0B*/ u8 ranking:2;
+    s16 appeal1;  // move appeal?
+    s16 appeal2;  // final appeal after end of turn, maybe?
+    s16 pointTotal;
+    u16 currMove;
+    u16 prevMove;
+    u8 moveCategory;
+    u8 ranking:2;
     u8 unkB_2:2;
     u8 moveRepeatCount:3;
-    u8 noMoreTurns:1;  // used a one-time move?
-    /*0x0C*/ u8 nervous:1;
+    bool8 noMoreTurns:1;  // used a one-time move?
+    bool8 nervous:1;
     u8 numTurnsSkipped:2;
-    /*0x0D*/ s8 condition;
-    /*0x0E*/ u8 jam;
-    /*0x0F*/ u8 jamReduction;
+    s8 condition;
+    u8 jam;
+    u8 jamReduction;
 
     // Flags set by move effect
-    /*0x10*/ u8 resistant:1;
-    u8 immune:1;
-    u8 moreEasilyStartled:1;
-    u8 usedRepeatableMove:1;
+    bool8 resistant:1;
+    bool8 immune:1;
+    bool8 moreEasilyStartled:1;
+    bool8 usedRepeatableMove:1;
     u8 conditionMod:2; // 1: just raised condition; 2: appeal greatly improved by condition
     u8 turnOrderMod:2; // 1: defined; 2: random
-    /*0x11*/ u8 turnOrderModAction:2; // 1: made first; 2: made last; 3: made random
-    u8 turnSkipped:1;
-    u8 exploded:1;
-    u8 overrideCategoryExcitementMod:1;
-    u8 appealTripleCondition:1;
+    u8 turnOrderModAction:2; // 1: made first; 2: made last; 3: made random
+    bool8 turnSkipped:1;
+    bool8 exploded:1;
+    bool8 overrideCategoryExcitementMod:1;
+    bool8 appealTripleCondition:1;
 
-    /*0x12*/ u8 jamSafetyCount;
-    /*0x13*/ u8 effectStringId;   // status action?
-    /*0x14*/ u8 effectStringId2;
-    /*0x15*/ u8 disappointedRepeat:1;
-    u8 unk15_1:1;
-    u8 unk15_2:1;
-    u8 unk15_3:1;
-    u8 hasJudgesAttention:1;
-    u8 judgesAttentionWasRemoved:1;
-    u8 unk15_6:1;
-    /*0x16*/ u8 unk16;
-    /*0x17*/ u8 unk17;
-    /*0x18*/ u8 unk18;
-    /*0x19*/ u8 nextTurnOrder;  // turn position
-    /*0x1A*/ u8 attentionLevel;  // How much the Pokemon "stood out"
-    /*0x1B*/ u8 unk1B;
+    u8 jamSafetyCount;
+    u8 effectStringId;   // status action?
+    u8 effectStringId2;
+    bool8 repeatedMove:1;
+    bool8 unused:1;
+    bool8 repeatedPrevMove:1; // never read
+    bool8 unk15_3:1;
+    bool8 hasJudgesAttention:1;
+    bool8 judgesAttentionWasRemoved:1;
+    bool8 unk15_6:1;
+    u8 unk16;
+    u8 unk17;
+    u8 unk18;
+    u8 nextTurnOrder;  // turn position
+    u8 attentionLevel;  // How much the Pokemon "stood out"
+    u8 unk1B;
 };
 
 struct UnknownContestStruct7
@@ -348,9 +350,9 @@ struct ContestAIInfo
     /*0x00*/ u8 aiState;
     /*0x02*/ u16 nextMove;
     /*0x04*/ u8 nextMoveIndex;
-    /*0x05*/ u8 unk5[4];
+    /*0x05*/ u8 moveScores[MAX_MON_MOVES];
     /*0x09*/ u8 aiAction;
-    /*0x0A*/ u8 fillerA[0x6]; // TODO: don't know what's here
+    /*0x0A*/ u8 filler[6];
     /*0x10*/ u8 currentAICheck;
     /*0x14*/ u32 aiChecks;
     /*0x18*/ s16 scriptResult;
@@ -370,9 +372,9 @@ struct UnknownContestStruct5
 
 struct UnknownContestStruct4
 {
-    u8 unk0;  // sprite ID
-    u8 unk1;  // sprite ID
-    u8 unk2_0:1;
+    u8 sliderHeartSpriteId;
+    u8 nextTurnSpriteId;
+    u8 sliderUpdating:1;
     u8 unk2_1:1;
     u8 unk2_2:1;
 };
@@ -454,7 +456,7 @@ extern u32 gContestRngValue;
 void ResetLinkContestBoolean(void);
 void LoadContestBgAfterMoveAnim(void);
 void CB2_StartContest(void);
-void sub_80DA8C8(u8 partyIndex);
+void CreateContestMonFromParty(u8 partyIndex);
 void sub_80DAB8C(u8 contestType, u8 rank);
 void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);
 u8 GetContestEntryEligibility(struct Pokemon *pkmn);
@@ -474,18 +476,6 @@ void ResetContestLinkResults(void);
 bool8 sub_80DEDA8(u8 a);
 u8 sub_80DEFA8(u8 a, u8 b);
 void ClearContestWinnerPicsInContestHall(void);
-void sub_80DFA08(struct ContestPokemon *mon, s32 language);
-
-// contest link
-void sub_81D9DE4(u8 taskId);
-void sub_80FCF40(u8);
-void sub_80FCFD0(u8);
-void sub_80F8714(u8);
-bool32 sub_80FC670(s16 *);
-bool32 sub_80FC4F4(void *, u16);
-bool8 sub_80FC55C(void);
-bool8 sub_80FC530(u8);
-u8 sub_80F86E0(u8 *);
-void sub_80FC9F8(u8 taskId);
+void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language);
 
 #endif //GUARD_CONTEST_H

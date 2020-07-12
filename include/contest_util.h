@@ -7,6 +7,5 @@ void StartContest(void);
 void BufferContestantMonSpecies(void);
 void ShowContestResults(void);
 void ContestLinkTransfer(u8);
-void sub_80FC998(u8 taskId);
 
 #endif // GUARD_CONTEST_UTIL_H

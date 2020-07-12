@@ -97,7 +97,7 @@ static void ContestEffect_GreatAppealButNoMoreMoves(void)
 static void ContestEffect_RepetitionNotBoring(void)
 {
     eContestantStatus[eContestResources8.contestant].usedRepeatableMove = TRUE;
-    eContestantStatus[eContestResources8.contestant].disappointedRepeat = FALSE;
+    eContestantStatus[eContestResources8.contestant].repeatedMove = FALSE;
     eContestantStatus[eContestResources8.contestant].moveRepeatCount = 0;
 }
 
@@ -138,7 +138,7 @@ static void ContestEffect_StartleFrontMon(void)
     if (eContestResources8.turnOrder[a] != 0) {
         int i;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestResources8.turnOrder[a] - 1 == eContestResources8.turnOrder[i])
                 break;
@@ -156,15 +156,15 @@ static void ContestEffect_StartleFrontMon(void)
 static void ContestEffect_StartlePrevMons(void)
 {
     u8 idx = 0;
-    u8 a = eContestResources8.contestant;
+    u8 contestant = eContestResources8.contestant;
 
-    if (eContestResources8.turnOrder[a] != 0)
+    if (eContestResources8.turnOrder[contestant] != 0)
     {
         int i, j;
 
-        for (i = 0, j = 0; i < 4; i++)
+        for (i = 0, j = 0; i < CONTESTANT_COUNT; i++)
         {
-            if (eContestResources8.turnOrder[a] > eContestResources8.turnOrder[i])
+            if (eContestResources8.turnOrder[contestant] > eContestResources8.turnOrder[i])
                 eContestResources8.jamQueue[j++] = i;
         }
 
@@ -390,11 +390,11 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     u8 contestantIds[5];
     int i;
     int numAfter;
-    s16 oddsMod[4];
-    s16 odds[4];
+    s16 oddsMod[CONTESTANT_COUNT];
+    s16 odds[CONTESTANT_COUNT];
 
     memset(contestantIds, 0xFF, ARRAY_COUNT(contestantIds));
-    for (i = 0, numAfter = 0; i < 4; i++)
+    for (i = 0, numAfter = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestResources8.turnOrder[eContestResources8.contestant] < eContestResources8.turnOrder[i] &&
             !eContestantStatus[i].nervous && !Contest_IsMonsTurnDisabled(i))
@@ -418,10 +418,10 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     }
     else
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
             odds[i] = 0;
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestantStatus[i].hasJudgesAttention && sub_80DE1E8(i))
             oddsMod[i] = gComboStarterLookupTable[gContestMoves[eContestantStatus[i].prevMove].comboStarterId] * 10;
@@ -471,7 +471,7 @@ static void ContestEffect_WorsenConditionOfPrevMons(void)
     u8 numHit = 0;
     int i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestResources8.turnOrder[eContestResources8.contestant] > eContestResources8.turnOrder[i] &&
             eContestantStatus[i].condition > 0 &&
@@ -495,7 +495,7 @@ static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
     u8 numHit = 0;
     int i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestResources8.turnOrder[eContestResources8.contestant] > eContestResources8.turnOrder[i])
         {
@@ -542,7 +542,7 @@ static void ContestEffect_AppealAsGoodAsPrevOnes(void)
     int i;
     int appealSum;
 
-    for (i = 0, appealSum = 0; i < 4; i++)
+    for (i = 0, appealSum = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestResources8.turnOrder[eContestResources8.contestant] > eContestResources8.turnOrder[i])
             appealSum += eContestantStatus[i].appeal2;
@@ -570,7 +570,7 @@ static void ContestEffect_AppealAsGoodAsPrevOne(void)
     if (eContestResources8.turnOrder[eContestResources8.contestant] != 0)
     {
         int i;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestResources8.turnOrder[eContestResources8.contestant] - 1 == eContestResources8.turnOrder[i])
                 appeal = eContestantStatus[i].appeal2;
@@ -647,7 +647,7 @@ static void ContestEffect_BetterIfSameType(void)
 
     while (1)
     {
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             if (eContestResources8.turnOrder[j] == i)
                 break;
@@ -679,7 +679,7 @@ static void ContestEffect_BetterIfDiffType(void)
         u16 move = eContestantStatus[eContestResources8.contestant].currMove;
         int i;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestResources8.turnOrder[eContestResources8.contestant] - 1 == eContestResources8.turnOrder[i] &&
                 gContestMoves[move].contestCategory != gContestMoves[eContestantStatus[i].currMove].contestCategory)
@@ -699,7 +699,7 @@ static void ContestEffect_AffectedByPrevAppeal(void)
     {
         int i;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestResources8.turnOrder[eContestResources8.contestant] - 1 == eContestResources8.turnOrder[i])
             {
@@ -748,18 +748,18 @@ static void ContestEffect_NextAppealEarlier(void)
 {
     s8 i;
     s8 j;
-    u8 turnOrder[4];
+    u8 turnOrder[CONTESTANT_COUNT];
 
     if (eContest.turnNumber != 4)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
 
         turnOrder[eContestResources8.contestant] = 0xFF;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < CONTESTANT_COUNT; j++)
             {
                 if (j != eContestResources8.contestant &&
                     i == turnOrder[j] &&
@@ -769,14 +769,14 @@ static void ContestEffect_NextAppealEarlier(void)
                     break;
                 }
             }
-            if (j == 4)
+            if (j == CONTESTANT_COUNT)
                 break;
         }
 
         turnOrder[eContestResources8.contestant] = 0;
         eContestantStatus[eContestResources8.contestant].turnOrderMod = 1;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             eContestantStatus[i].nextTurnOrder = turnOrder[i];
         }
@@ -790,18 +790,18 @@ static void ContestEffect_NextAppealLater(void)
 {
     s8 i;
     s8 j;
-    u8 turnOrder[4];
+    u8 turnOrder[CONTESTANT_COUNT];
 
     if (eContest.turnNumber != 4)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
 
         turnOrder[eContestResources8.contestant] = 0xFF;
 
-        for (i = 3; i > -1; i--)
+        for (i = CONTESTANT_COUNT - 1; i > -1; i--)
         {
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < CONTESTANT_COUNT; j++)
             {
                 if (j != eContestResources8.contestant &&
                     i == turnOrder[j] &&
@@ -811,14 +811,14 @@ static void ContestEffect_NextAppealLater(void)
                     break;
                 }
             }
-            if (j == 4)
+            if (j == CONTESTANT_COUNT)
                 break;
         }
 
-        turnOrder[eContestResources8.contestant] = 3;
+        turnOrder[eContestResources8.contestant] = CONTESTANT_COUNT - 1;
         eContestantStatus[eContestResources8.contestant].turnOrderMod = 1;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             eContestantStatus[i].nextTurnOrder = turnOrder[i];
         }
@@ -838,22 +838,22 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
 {
     s8 i;
     s8 j;
-    u8 turnOrder[4];
-    u8 unselectedContestants[4];
+    u8 turnOrder[CONTESTANT_COUNT];
+    u8 unselectedContestants[CONTESTANT_COUNT];
 
     if (eContest.turnNumber != 4)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
             unselectedContestants[i] = i;
         }
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
-            u8 rval = Random() % (4 - i);
+            u8 rval = Random() % (CONTESTANT_COUNT - i);
 
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < CONTESTANT_COUNT; j++)
             {
                 if (unselectedContestants[j] != 0xFF)
                 {
@@ -869,7 +869,7 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
             }
         }
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             eContestantStatus[i].nextTurnOrder = turnOrder[i];
             eContestantStatus[i].turnOrderMod = 2;
@@ -894,7 +894,7 @@ static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
     int i;
     u8 numJammed = 0;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestResources8.turnOrder[eContestResources8.contestant] > eContestResources8.turnOrder[i])
         {
@@ -965,7 +965,7 @@ static void JamByMoveCategory(u8 category)
     int i;
     int numJammed = 0;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestResources8.turnOrder[eContestResources8.contestant] > eContestResources8.turnOrder[i])
         {
@@ -1010,7 +1010,7 @@ static bool8 CanUnnerveContestant(u8 i)
 
 static bool8 WasAtLeastOneOpponentJammed(void)
 {
-    s16 jamBuffer[4] = {0};
+    s16 jamBuffer[CONTESTANT_COUNT] = {0};
     int i;
 
     for (i = 0; eContestResources8.jamQueue[i] != 0xFF; i++)
@@ -1044,7 +1044,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
         }
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (jamBuffer[i] != 0)
             return TRUE;

@@ -48,7 +48,7 @@ gContestAIChecks:: @ 82DE350
 
 @ Unreferenced AI routine to encourage moves that improve condition on the first
 @ turn. Additionally, it checks the appeal order of the user and the effect
-@ type, but the code is buggy and doesn't affect the score.
+@ type, but the code is buggy and doesnt affect the score.
 	if_turn_not_eq 0, ContestUnreferenced_80
 	if_effect_not_eq CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS, ContestUnreferenced_80
 	score +10
@@ -63,7 +63,7 @@ ContestUnreferenced_0D:
 ContestUnreferenced_end:
 	end
 
-@ Unreferenced AI routine that doesn't make much sense.
+@ Unreferenced AI routine that doesnt make much sense.
 	if_turn_eq 0, ContestUnreferenced_0F_1
 	if_turn_eq 1, ContestUnreferenced_0F_2
 	if_turn_eq 2, ContestUnreferenced_0F_3
@@ -122,25 +122,26 @@ ContestUnreferenced_score2:
 	end
 
 AI_CheckBoring:
-	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_end_081DC27F
-	if_move_used_count_eq 1, AI_score1_081DC27F
-	if_move_used_count_eq 2, AI_score2_081DC27F
-	if_move_used_count_eq 3, AI_score3_081DC27F
-	if_move_used_count_eq 4, AI_score4_081DC27F
+	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_CheckBoring_NotBoring
+	if_move_used_count_eq 1, AI_CheckBoring_FirstRepeat
+	if_move_used_count_eq 2, AI_CheckBoring_SecondRepeat
+	if_move_used_count_eq 3, AI_CheckBoring_ThirdRepeat
+	if_move_used_count_eq 4, AI_CheckBoring_FourthRepeat
+	@ No repeats
 	end
-AI_score1_081DC27F:
+AI_CheckBoring_FirstRepeat:
 	score -5
 	end
-AI_score2_081DC27F:
+AI_CheckBoring_SecondRepeat:
 	score -15
 	end
-AI_score3_081DC27F:
+AI_CheckBoring_ThirdRepeat:
 	score -20
 	end
-AI_score4_081DC27F:
+AI_CheckBoring_FourthRepeat:
 	score -25
 	end
-AI_end_081DC27F:
+AI_CheckBoring_NotBoring:
 	end
 
 AI_CheckExcitement:
