@@ -8674,7 +8674,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             statValue = -GET_STAT_BUFF_VALUE(statValue);
             if (gBattleMons[gActiveBattler].statStages[statId] == 1)
                 statValue = -1;
-            else if (gBattleMons[gActiveBattler].statStages[statId] == 2)
+            else if (gBattleMons[gActiveBattler].statStages[statId] == 2 && statValue < -2)
                 statValue = -2;
             gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
             index = 1;
@@ -8711,7 +8711,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         statValue = GET_STAT_BUFF_VALUE(statValue);
         if (gBattleMons[gActiveBattler].statStages[statId] == 11)
             statValue = 1;
-        else if (gBattleMons[gActiveBattler].statStages[statId] == 10)
+        else if (gBattleMons[gActiveBattler].statStages[statId] == 10 && statValue > 2)
             statValue = 2;
         gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
         index = 1;
