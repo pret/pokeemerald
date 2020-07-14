@@ -2292,7 +2292,7 @@ void AnimTask_GetBattlersFromArg(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-bool8 IsCriticalCapture(void)
+bool32 IsCriticalCapture(void)
 {
     return gBattleSpritesDataPtr->animationData->isCriticalCapture;
 }
