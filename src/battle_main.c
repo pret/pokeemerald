@@ -5547,7 +5547,7 @@ static void HandleAction_UseItem(void)
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
 
-    if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball
+    if (gLastUsedItem <= LAST_BALL) // is ball
     {
         gBattlescriptCurrInstr = gBattlescriptsForBallThrow[gLastUsedItem];
     }
