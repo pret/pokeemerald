@@ -41,7 +41,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/tv.h"
-#include "constants/vars.h"
 #include "contest.h"
 
 enum {
