@@ -77,6 +77,7 @@ static void RepeatBallOpenParticleAnimation(u8);
 static void TimerBallOpenParticleAnimation(u8);
 static void PremierBallOpenParticleAnimation(u8);
 static void sub_817330C(struct Sprite *);
+static void CB_CriticalCaptureThrownBallMovement(struct Sprite *sprite);
 
 struct BallCaptureSuccessStarData
 {
@@ -923,7 +924,10 @@ static void sub_817138C(struct Sprite *sprite)
         angle = 0;
         sprite->pos1.y += Cos(angle, 40);
         sprite->pos2.y = -Cos(angle, sprite->data[4]);
-        sprite->callback = sub_81713D0;
+        if (IsCriticalCapture())
+            sprite->callback = CB_CriticalCaptureThrownBallMovement;
+        else
+            sprite->callback = sub_81713D0;
     }
 }
 
@@ -1116,22 +1120,38 @@ static void sub_8171520(struct Sprite *sprite)
     case 5:
         sprite->data[3] += 0x100;
         state = sprite->data[3] >> 8;
-        if (state == gBattleSpritesDataPtr->animationData->ballThrowCaseId)
+        if (IsCriticalCapture())
         {
-            sprite->affineAnimPaused = 1;
-            sprite->callback = sub_81717B4;
-        }
-        else
-        {
-            if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_3_SHAKES_SUCCESS && state == 3)
+            if (gBattleSpritesDataPtr->animationData->criticalCaptureSuccess)
             {
                 sprite->callback = sub_81717D8;
                 sprite->affineAnimPaused = 1;
             }
             else
             {
-                sprite->data[3]++;
                 sprite->affineAnimPaused = 1;
+                sprite->callback = sub_81717B4;
+            }
+        }
+        else
+        {
+            if (state == gBattleSpritesDataPtr->animationData->ballThrowCaseId)
+            {
+                sprite->affineAnimPaused = 1;
+                sprite->callback = sub_81717B4;
+            }
+            else
+            {
+                if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_3_SHAKES_SUCCESS && state == 3)
+                {
+                    sprite->callback = sub_81717D8;
+                    sprite->affineAnimPaused = 1;
+                }
+                else
+                {
+                    sprite->data[3]++;
+                    sprite->affineAnimPaused = 1;
+                }
             }
         }
         break;
@@ -2271,3 +2291,53 @@ void AnimTask_GetBattlersFromArg(u8 taskId)
     gBattleAnimTarget = gBattleSpritesDataPtr->animationData->animArg >> 8;
     DestroyAnimVisualTask(taskId);
 }
+
+bool8 IsCriticalCapture(void)
+{
+    return gBattleSpritesDataPtr->animationData->isCriticalCapture;
+}
+
+static void CB_CriticalCaptureThrownBallMovement(struct Sprite *sprite)
+{
+    bool8 lastBounce = FALSE;
+    u8 maxBounces = 6;
+    int bounceCount = sprite->data[3] >> 8;
+
+    if (bounceCount == 0)
+        PlaySE(SE_BOWA);
+
+    switch (sprite->data[3] & 0xFF)
+    {
+    case 0:
+        if (bounceCount < 3)
+            sprite->pos2.x++;
+
+        if (++sprite->data[5] >= 3)
+            sprite->data[3] += 257;
+
+        break;
+    case 1:
+        if (bounceCount < 3 || sprite->pos2.x != 0)
+            sprite->pos2.x--;
+
+        if (--sprite->data[5] <= 0)
+        {
+            sprite->data[5] = 0;
+            sprite->data[3] &= -0x100;
+        }
+
+        if (bounceCount >= maxBounces)
+            lastBounce = TRUE;
+
+        break;
+    }
+
+    if (lastBounce)
+    {
+        sprite->data[3] = 0;
+        sprite->data[4] = 40;   //starting max height
+        sprite->data[5] = 0;
+        sprite->callback = sub_81713D0;
+    }
+}
+
