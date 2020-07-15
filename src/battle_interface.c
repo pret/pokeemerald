@@ -938,10 +938,52 @@ void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerO
 
 }
 
+static void SetHealthboxVisibility(u8 priority)
+{
+    u32 i;
+    
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        switch (gSprites[i].template->tileTag)
+        {
+        case TAG_HEALTHBOX_PLAYER1_TILE:
+        case TAG_HEALTHBOX_PLAYER2_TILE:
+        case TAG_HEALTHBOX_OPPONENT1_TILE:
+        case TAG_HEALTHBOX_OPPONENT2_TILE:
+        case TAG_HEALTHBAR_PLAYER1_TILE:
+        case TAG_HEALTHBAR_OPPONENT1_TILE:
+        case TAG_HEALTHBAR_PLAYER2_TILE:
+        case TAG_HEALTHBAR_OPPONENT2_TILE:
+            switch (priority)
+            {
+            case 0:
+                if (!gSprites[i].invisible)
+                {
+                    gSprites[i].data[7] = TRUE;
+                    gSprites[i].invisible = TRUE;
+                }
+                else
+                {
+                    gSprites[i].data[7] = FALSE;
+                }
+                break;
+            default:
+                if (gSprites[i].data[7])
+                {
+                    gSprites[i].invisible = FALSE;
+                    gSprites[i].data[7] = FALSE;
+                }
+                break;
+            }
+        }
+    }
+}
+
 void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
     s32 i;
-
+    bool8 hide;
+    
     for (i = 0; i < gBattlersCount; i++)
     {
         u8 healthboxLeftSpriteId = gHealthboxSpriteIds[i];
@@ -955,6 +997,50 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
         if (indicatorSpriteId != 0xFF)
             gSprites[indicatorSpriteId].oam.priority = priority;
     }
+    
+    #if HIDE_HEALTHBOXES_DURING_ANIMS
+        hide = TRUE;
+    #else
+        return;
+    #endif
+    
+    switch (gBattleResources->bufferA[gBattleAnimAttacker][0])
+    {
+    case CONTROLLER_MOVEANIMATION:
+    {
+        if (gBattleResources->bufferA[gBattleAnimAttacker][1] == MOVE_TRANSFORM)
+            return;
+
+        break;
+    }
+    case CONTROLLER_BALLTHROWANIM:
+        return; //throwing ball does not hide hp boxes
+    case CONTROLLER_BATTLEANIMATION:
+        //check special anims that hide health boxes
+        switch (gBattleResources->bufferA[gBattleAnimAttacker][1])
+        {
+        case B_ANIM_TURN_TRAP:
+        case B_ANIM_LEECH_SEED_DRAIN:
+        case B_ANIM_MON_HIT:
+        case B_ANIM_SNATCH_MOVE:
+        case B_ANIM_FUTURE_SIGHT_HIT:
+        case B_ANIM_DOOM_DESIRE_HIT:
+        case B_ANIM_WISH_HEAL:
+        //new
+        case B_ANIM_MEGA_EVOLUTION:
+        case B_ANIM_TERRAIN_MISTY:
+        case B_ANIM_TERRAIN_GRASSY:
+        case B_ANIM_TERRAIN_ELECTRIC:
+        case B_ANIM_TERRAIN_PSYCHIC:
+            hide = TRUE;
+            break;
+        }
+    default:
+        return;
+    }
+    
+    if (hide)
+        SetHealthboxVisibility(priority);
 }
 
 void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y)

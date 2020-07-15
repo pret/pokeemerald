@@ -118,4 +118,6 @@
 #define NEW_IMPACT_PALETTE              TRUE    //updates the basic 'hit' particle
 #define NEW_SURF_PARTICLE_PALETTE       TRUE    //updates the surf wave palette
 
+#define HIDE_HEALTHBOXES_DURING_ANIMS   TRUE    //if TRUE, hides healthboxes during move animations
+
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
