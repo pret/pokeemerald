@@ -18,7 +18,6 @@
 #include "task.h"
 #include "text_window.h"
 #include "window.h"
-#include "constants/flags.h"
 #include "constants/songs.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15

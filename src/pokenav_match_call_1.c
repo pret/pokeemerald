@@ -12,7 +12,6 @@
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
-#include "constants/flags.h"
 #include "constants/songs.h"
 
 struct Pokenav3Struct

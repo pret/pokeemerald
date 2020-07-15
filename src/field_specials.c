@@ -63,7 +63,6 @@
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
-#include "constants/vars.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
@@ -4095,11 +4094,17 @@ void UpdateTrainerFanClubGameClear(void)
 }
 
 // If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
-// Defeating Drake or participating in a Link Contest increments the counter by 2
+// Defeating Drake or participating in a Contest increments the counter by 2 
 // Participating at Battle Tower or in a Secret Base battle increments the counter by 1
 u8 TryGainNewFanFromCounter(u8 incrementId)
 {
-    static const u8 sCounterIncrements[] = { 2, 1, 2, 1 };
+    static const u8 sCounterIncrements[] = 
+    { 
+        [FANCOUNTER_DEFEATED_DRAKE]    = 2, 
+        [FANCOUNTER_BATTLED_AT_BASE]   = 1, 
+        [FANCOUNTER_FINISHED_CONTEST]  = 2, 
+        [FANCOUNTER_USED_BATTLE_TOWER] = 1 
+    };
 
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {

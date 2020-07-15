@@ -7,7 +7,6 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "sound.h"
-#include "constants/flags.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
 

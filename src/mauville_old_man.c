@@ -3,7 +3,6 @@
 #include "constants/songs.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
-#include "constants/vars.h"
 #include "mauville_old_man.h"
 #include "event_data.h"
 #include "string_util.h"

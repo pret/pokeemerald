@@ -17,6 +17,8 @@
 #define ITEM_LUXURY_BALL 11
 #define ITEM_PREMIER_BALL 12
 
+#define LAST_BALL ITEM_PREMIER_BALL
+
 // Pokemon Items
 #define ITEM_POTION 13
 #define ITEM_ANTIDOTE 14

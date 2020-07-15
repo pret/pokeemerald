@@ -17,7 +17,6 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_specials.h"
 #include "constants/songs.h"
-#include "constants/vars.h"
 #include "constants/metatile_labels.h"
 
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
