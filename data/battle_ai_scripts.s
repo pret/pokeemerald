@@ -725,10 +725,7 @@ AI_CBM_Substitute: @ 82DC568
 
 AI_CBM_LeechSeed: @ 82DC57A
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, Score_Minus10
-	get_target_type1
-	if_equal TYPE_GRASS, Score_Minus10
-	get_target_type2
-	if_equal TYPE_GRASS, Score_Minus10
+	if_type AI_TARGET, TYPE_GRASS, Score_Minus10
 	end
 
 AI_CBM_Disable: @ 82DC595
@@ -862,10 +859,9 @@ AI_CBM_WillOWisp: @ 82DC6B4
 	get_ability AI_TARGET
 	if_equal ABILITY_WATER_VEIL, Score_Minus10
 	if_equal ABILITY_FLARE_BOOST, Score_Minus10
+	if_equal ABILITY_FLASH_FIRE, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus10
+	if_type AI_TARGET, TYPE_FIRE, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
@@ -3717,16 +3713,26 @@ AI_TryOnAlly:
 	if_equal MOVE_POWER_DISCOURAGED, AI_TryStatusMoveOnAlly
 	get_curr_move_type
 	if_equal TYPE_FIRE, AI_TryFireMoveOnAlly
-
+	if_effect EFFECT_ALWAYS_CRIT, AI_TryCritAngerPointAlly
 AI_DiscourageOnAlly:
 	goto Score_Minus30
 
 AI_TryFireMoveOnAlly:
 	if_ability AI_USER_PARTNER, ABILITY_FLASH_FIRE, AI_TryFireMoveOnAlly_FlashFire
 	goto AI_DiscourageOnAlly
-
 AI_TryFireMoveOnAlly_FlashFire:
 	if_flash_fired AI_USER_PARTNER, AI_DiscourageOnAlly
+	goto Score_Plus3
+	
+AI_TryCritAngerPointAlly:
+	get_ability AI_USER_PARTNER
+	if_not_equal ABILITY_ANGER_POINT, AI_DiscourageOnAlly
+	if_stat_level_more_than AI_USER_PARTNER, STAT_ATK, 8, AI_DiscourageOnAlly
+	if_status2 AI_USER_PARTNER, STATUS2_SUBSTITUTE, AI_DiscourageOnAlly
+	if_has_no_move_with_split AI_USER_PARTNER, SPLIT_PHYSICAL, AI_DiscourageOnAlly
+	get_curr_dmg_hp_percent
+	if_more_than 34,AI_DiscourageOnAlly
+	if_hp_less_than AI_USER_PARTNER, 60, AI_DiscourageOnAlly
 	goto Score_Plus3
 
 AI_TryStatusMoveOnAlly:
