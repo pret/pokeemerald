@@ -27,7 +27,6 @@
 #include "trainer_pokemon_sprites.h"
 #include "script_pokemon_util_80F87D8.h"
 #include "constants/songs.h"
-#include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
