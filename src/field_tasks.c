@@ -19,7 +19,6 @@
 #include "constants/field_tasks.h"
 #include "constants/items.h"
 #include "constants/songs.h"
-#include "constants/vars.h"
 #include "constants/metatile_labels.h"
 
 struct PacifidlogMetatileOffsets

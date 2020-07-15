@@ -25,7 +25,6 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
-#include "constants/flags.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"

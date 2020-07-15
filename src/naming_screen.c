@@ -13,7 +13,6 @@
 #include "field_player_avatar.h"
 #include "event_object_movement.h"
 #include "event_data.h"
-#include "constants/vars.h"
 #include "constants/songs.h"
 #include "pokemon_storage_system.h"
 #include "graphics.h"
