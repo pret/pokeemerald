@@ -51,16 +51,6 @@
 #define MSG_DISPLAY             0x7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
 
-#define MOVE_TARGET_SELECTED            0x0
-#define MOVE_TARGET_DEPENDS             0x1
-#define MOVE_TARGET_USER_OR_SELECTED    0x2
-#define MOVE_TARGET_RANDOM              0x4
-#define MOVE_TARGET_BOTH                0x8
-#define MOVE_TARGET_USER                0x10
-#define MOVE_TARGET_FOES_AND_ALLY       0x20
-#define MOVE_TARGET_OPPONENTS_FIELD     0x40
-#define MOVE_TARGET_ALLY                0x80
-
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
 struct ResourceFlags
@@ -68,11 +58,12 @@ struct ResourceFlags
     u32 flags[4];
 };
 
-#define RESOURCE_FLAG_FLASH_FIRE    0x1
-#define RESOURCE_FLAG_ROOST         0x2
-#define RESOURCE_FLAG_UNBURDEN      0x4
-#define RESOURCE_FLAG_INTIMIDATED   0x8
-#define RESOURCE_FLAG_TRACED        0x10
+#define RESOURCE_FLAG_FLASH_FIRE     0x1
+#define RESOURCE_FLAG_ROOST          0x2
+#define RESOURCE_FLAG_UNBURDEN       0x4
+#define RESOURCE_FLAG_INTIMIDATED    0x8
+#define RESOURCE_FLAG_TRACED         0x10
+#define RESOURCE_FLAG_EMERGENCY_EXIT 0x20
 
 struct DisableStruct
 {

@@ -3610,9 +3610,38 @@ AI_ConsiderAllyChosenMove:
 	if_equal 0, AI_ConsiderAllyChosenMoveRet
 	get_move_effect_from_result
 	if_equal EFFECT_HELPING_HAND, AI_PartnerChoseHelpingHand	
-	if_equal EFFECT_PERISH_SONG, AI_PartnerChosePerishSong	
+	if_equal EFFECT_PERISH_SONG, AI_PartnerChosePerishSong
+	if_equal EFFECT_ALWAYS_CRIT, AI_PartnerChoseAlwaysCrit
 AI_ConsiderAllyChosenMoveRet:
 	end
+	
+@ Ally decided to use Frost Breath on us. we must have Anger Point as our ability
+AI_PartnerChoseAlwaysCrit:
+	if_no_ability AI_USER, ABILITY_ANGER_POINT, AI_PartnerChoseAlwaysCritEnd
+	@frost breath user should be faster
+	compare_speeds AI_USER, AI_USER_PARTNER
+	if_not_equal 1, AI_PartnerChoseAlwaysCritEnd
+	get_considered_move_effect
+	if_in_hwords sEffectsAtkRaise, Score_Minus3
+	@encourage moves hitting multiple opponents
+	get_considered_move_power
+	if_equal 0, AI_PartnerChoseAlwaysCritEnd
+	get_considered_move_target
+	if_equal MOVE_TARGET_BOTH, Score_Plus3
+	if_equal MOVE_TARGET_FOES_AND_ALLY, Score_Plus3
+AI_PartnerChoseAlwaysCritEnd:
+	end
+	
+.align 1
+sEffectsAtkRaise:
+    .2byte EFFECT_ATTACK_ACCURACY_UP
+    .2byte EFFECT_ATTACK_UP
+    .2byte EFFECT_ATTACK_UP_2
+    .2byte EFFECT_DRAGON_DANCE
+    .2byte EFFECT_COIL
+    .2byte EFFECT_BELLY_DRUM
+    .2byte EFFECT_BULK_UP
+    .2byte -1
 	
 AI_PartnerChoseHelpingHand:
 	@ Do not use a status move if you know your move's power will be boosted

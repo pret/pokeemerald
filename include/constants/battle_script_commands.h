@@ -211,8 +211,9 @@
 #define MOVEEND_NEXT_TARGET 20
 #define MOVEEND_LIFE_ORB 21
 #define MOVEEND_DANCER 22
-#define MOVEEND_CLEAR_BITS 23
-#define MOVEEND_COUNT 24
+#define MOVEEND_EMERGENCY_EXIT 23
+#define MOVEEND_CLEAR_BITS 24
+#define MOVEEND_COUNT 25
 
 // stat flags for Cmd_playstatchangeanimation
 #define BIT_HP                      0x1

@@ -347,7 +347,7 @@
 #define ANIM_TAG_STEAM_ERUPTION             (ANIM_SPRITES_START + 335)
 #define ANIM_TAG_CONFIDE                    (ANIM_SPRITES_START + 336)
 #define ANIM_TAG_VERTICAL_HEX               (ANIM_SPRITES_START + 337)
-#define ANIM_TAG_UNAVAILABLE_1              (ANIM_SPRITES_START + 338)  //0x2862.. supposedly used elsewhere?    
+#define ANIM_TAG_UNAVAILABLE_1              (ANIM_SPRITES_START + 338)  //0x2862.. supposedly used elsewhere?
 #define ANIM_TAG_UNAVAILABLE_2              (ANIM_SPRITES_START + 339)
 #define ANIM_TAG_POWER_TRICK                (ANIM_SPRITES_START + 340)
 #define ANIM_TAG_CHAIN_LINK                 (ANIM_SPRITES_START + 341)
@@ -524,6 +524,7 @@
 #define B_ANIM_TERRAIN_PSYCHIC          0x1B
 #define B_ANIM_ILLUSION_OFF             0x1C
 #define B_ANIM_FORM_CHANGE              0x1D
+#define B_ANIM_SLIDE_OFFSCREEN          0x1E // for Emergency Exit
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0
