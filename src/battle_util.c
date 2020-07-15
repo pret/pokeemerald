@@ -2860,7 +2860,7 @@ static u8 ForewarnChooseMove(u32 battler)
 
     gBattlerTarget = data[bestId].battlerId;
     PREPARE_MOVE_BUFFER(gBattleTextBuff1, data[bestId].moveId)
-    RecordMoveBattle(gBattlerTarget, data[bestId].moveId);
+    RecordKnownMove(gBattlerTarget, data[bestId].moveId);
 
     free(data);
 }

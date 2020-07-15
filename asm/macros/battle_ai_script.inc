@@ -678,6 +678,11 @@
 	.byte \battler2
 	.endm
 	
+	.macro is_wakeup_turn battler:req
+	.byte 0x78
+	.byte \battler
+	.endm
+	
 @ useful script macros
 	.macro if_has_physical_move battler:req, ptr:req
 	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr

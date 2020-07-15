@@ -1096,9 +1096,9 @@ AI_CheckViability:
 	if_effect EFFECT_COUNTER, AI_CV_Counter
 	if_effect EFFECT_ENCORE, AI_CV_Encore
 	if_effect EFFECT_PAIN_SPLIT, AI_CV_PainSplit
-	if_effect EFFECT_SNORE, AI_CV_Snore
 	if_effect EFFECT_LOCK_ON, AI_CV_LockOn
 	if_effect EFFECT_SLEEP_TALK, AI_CV_SleepTalk
+	if_effect EFFECT_SNORE, AI_CV_SleepTalk
 	if_effect EFFECT_DESTINY_BOND, AI_CV_DestinyBond
 	if_effect EFFECT_FLAIL, AI_CV_Flail
 	if_effect EFFECT_HEAL_BELL, AI_CV_HealBell
@@ -2387,10 +2387,6 @@ AI_CV_PainSplit_ScoreDown1:
 AI_CV_PainSplit_End:
 	end
 
-AI_CV_Snore:
-	score +2
-	end
-
 AI_CV_LockOn:
 	if_random_less_than 128, AI_CV_LockOn_End
 	score +2
@@ -2399,6 +2395,8 @@ AI_CV_LockOn_End:
 	end
 
 AI_CV_SleepTalk:
+	is_wakeup_turn AI_USER
+	if_equal 1, Score_Minus5
 	if_status AI_USER, STATUS1_SLEEP, Score_Plus10
 	score -5
 	end

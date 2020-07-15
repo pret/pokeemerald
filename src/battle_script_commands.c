@@ -4781,6 +4781,7 @@ static void Cmd_moveend(void)
                     gHitMarker &= ~(HITMARKER_NO_PPDEDUCT);
                 }
             }
+            RecordLastUsedMoveBy(gBattlerAttacker, gCurrentMove);
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_LIFE_ORB:
