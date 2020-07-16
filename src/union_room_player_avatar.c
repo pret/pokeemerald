@@ -8,7 +8,6 @@
 #include "union_room.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
-#include "constants/flags.h"
 
 #define UR_SPRITE_START_ID (MAX_SPRITES - MAX_UNION_ROOM_PLAYERS)
 #define UR_PLAYER_SPRITE_ID(playerIdx, facingDir)(5 * playerIdx + facingDir)

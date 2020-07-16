@@ -6,10 +6,8 @@
 #include "metatile_behavior.h"
 #include "sprite.h"
 #include "constants/event_objects.h"
-#include "constants/flags.h"
 #include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
-#include "constants/vars.h"
 
 static u8 sub_81D4890(u8);
 static bool8 sub_81D4C14(struct ObjectEvent*, u8);
