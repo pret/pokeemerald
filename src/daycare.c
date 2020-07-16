@@ -1304,12 +1304,12 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
     {
         switch (score)
         {
-            case 20:
-                return 40;
-            case 50:
-                return 80;
-            case 70:
-                return 88;
+        case 20:
+            return 40;
+        case 50:
+            return 80;
+        case 70:
+            return 88;
         }
     }
     
