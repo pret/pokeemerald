@@ -170,7 +170,7 @@ BerryBlender_Text_LookGoodAtBlendingJoinUs: @ 8293842
 
 BerryBlender_Text_MakeDeliciousPokeblocks: @ 829388F
 	.string "I'm going to make delicious {POKEBLOCK}S\n"
-	.string "and make my POKéMON cuter.$"
+	.string "and make my Pokémon cuter.$"
 
 BerryBlender_Text_SaveGameBeforeBerryBlenderLink: @ 82938CD
 	.string "{POKEBLOCK}S will be made with your friends \n"
