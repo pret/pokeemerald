@@ -19,6 +19,9 @@
 #define SPECIES_MINIOR 10003
 #define SPECIES_WISHIWASHI 0
 #define SPECIES_WISHIWASHI_SCHOOL 10004
+#define SPECIES_ZYGARDE 0 // 50%
+#define SPECIES_ZYGARDE_10 10005 // 10 %
+#define SPECIES_ZYGARDE_COMPLETE 10006 // 100 %
 
 // Items with peculiar battle effects. Remove them if they're properly placed in constant/items.h
 #define ITEM_GRISEOUS_ORB 0

@@ -3357,6 +3357,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 if ((effect = ShouldChangeFormHpBased(battler)))
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
                 break;
+            case ABILITY_POWER_CONSTRUCT:
+                if ((gBattleMons[battler].species == SPECIES_ZYGARDE || gBattleMons[battler].species == SPECIES_ZYGARDE_10)
+                    && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2)
+                {
+                    gBattleStruct->changedSpecies[gBattlerPartyIndexes[battler]] = gBattleMons[battler].species;
+                    gBattleMons[battler].species = SPECIES_ZYGARDE_COMPLETE;
+                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
+                    effect++;
+                }
+                break;
             }
         }
         break;
@@ -6849,6 +6859,13 @@ void UndoMegaEvolution(u32 monId)
     {
         gBattleStruct->mega.evolvedPartyIds[B_SIDE_PLAYER] &= ~(gBitTable[monId]);
         SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->mega.playerEvolvedSpecies);
+        CalculateMonStats(&gPlayerParty[monId]);
+    }
+    // While not exactly a mega evolution, Zygarde follows the same rules.
+    else if (GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL) == SPECIES_ZYGARDE_COMPLETE)
+    {
+        SetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[monId]);
+        gBattleStruct->changedSpecies[monId] = 0;
         CalculateMonStats(&gPlayerParty[monId]);
     }
 }
