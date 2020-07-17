@@ -3112,7 +3112,7 @@ static void BattleStartClearSetData(void)
     }
 
     gBattleStruct->givenExpMons = 0;
-    gBattleStruct->field_92 = 0;
+    gBattleStruct->palaceFlags = 0;
 
     gRandomTurnNumber = Random();
 
@@ -3159,7 +3159,7 @@ void SwitchInClearSetData(void)
              && (gDisableStructs[i].battlerWithSureHit == gActiveBattler))
             {
                 gStatuses3[i] &= ~(STATUS3_ALWAYS_HITS);
-                gStatuses3[i] |= 0x10;
+                gStatuses3[i] |= STATUS3_ALWAYS_HITS_TURN(2);
             }
         }
     }
@@ -3214,7 +3214,7 @@ void SwitchInClearSetData(void)
     *(3 * 2 + gActiveBattler * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0) = 0;
     *(3 * 2 + gActiveBattler * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) = 0;
 
-    gBattleStruct->field_92 &= ~(gBitTable[gActiveBattler]);
+    gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3309,7 +3309,7 @@ void FaintClearSetData(void)
     *(3 * 2 + gActiveBattler * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0) = 0;
     *(3 * 2 + gActiveBattler * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) = 0;
 
-    gBattleStruct->field_92 &= ~(gBitTable[gActiveBattler]);
+    gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -4052,7 +4052,7 @@ void BattleTurnPassed(void)
     gRandomTurnNumber = Random();
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-        BattleScriptExecute(BattleScript_82DB881);
+        BattleScriptExecute(BattleScript_PalacePrintFlavorText);
     else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->arenaTurnCounter == 0)
         BattleScriptExecute(BattleScript_ArenaTurnBeginning);
 }
