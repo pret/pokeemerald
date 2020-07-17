@@ -24,20 +24,21 @@
 #include "contest.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/battle_palace.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-extern const u8 gUnknown_0831C604[];
+extern const u8 gBattlePalaceNatureToMoveTarget[];
 extern const u8 * const gBattleAnims_General[];
 extern const u8 * const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 
 // this file's functions
-static u8 sub_805D4A8(u16 move);
-static u16 BattlePalaceGetTargetRetValue(void);
+static u8 GetBattlePalaceMoveGroup(u16 move);
+static u16 GetBattlePalaceTarget(void);
 static void sub_805D7EC(struct Sprite *sprite);
 static bool8 ShouldAnimBeDoneRegardlessOfSubsitute(u8 animId);
 static void Task_ClearBitWhenBattleTableAnimDone(u8 taskId);
@@ -108,6 +109,7 @@ void FreeBattleSpritesData(void)
     FREE_AND_SET_NULL(gBattleSpritesDataPtr);
 }
 
+// Pokemon chooses move to use in Battle Palace rather than player
 u16 ChooseMoveAndTargetInBattlePalace(void)
 {
     s32 i, var1, var2;
@@ -116,60 +118,88 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
     s32 percent = Random() % 100;
 
-    i = (gBattleStruct->field_92 & gBitTable[gActiveBattler]) ? 2 : 0;
-    var2 = i;
-    var1 = i + 2;
+    // Heavy variable re-use here makes this hard to read without defines
+    // Possibly just optimization? might still match with additional vars
+    #define maxGroupNum var1
+    #define minGroupNum var2
+    #define selectedGroup percent
+    #define selectedMoves var2
+    #define moveTarget var1
+    #define validMoveFlags var1
+    #define numValidMoveGroups var2
+    #define validMoveGroup var2
 
-    for (; i < var1; i++)
+    // If battler is < 50% HP and not asleep, use second set of move group likelihoods
+    // otherwise use first set
+    i = (gBattleStruct->palaceFlags & gBitTable[gActiveBattler]) ? 2 : 0;
+    minGroupNum = i;
+
+    maxGroupNum = i + 2; // + 2 because there are two percentages per set of likelihoods
+
+    // Each nature has a different percent chance to select a move from one of 3 move groups
+    // If percent is less than 1st check, use move from "Attack" group
+    // If percent is less than 2nd check, use move from "Defense" group
+    // Otherwise use move from "Support" group 
+    for (; i < maxGroupNum; i++)
     {
-        if (gUnknown_0831C494[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)][i] > percent)
+        if (gBattlePalaceNatureToMoveGroupLikelihood[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)][i] > percent)
             break;
     }
+    selectedGroup = i - minGroupNum;
+    if (i == maxGroupNum)
+        selectedGroup = PALACE_MOVE_GROUP_SUPPORT;
 
-    percent = i - var2;
-    if (i == var1)
-        percent = 2;
-
-    for (var2 = 0, i = 0; i < MAX_MON_MOVES; i++)
+    // Flag moves that match selected group, to be passed to AI
+    for (selectedMoves = 0, i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moveInfo->moves[i] == MOVE_NONE)
             break;
-        if (percent == sub_805D4A8(moveInfo->moves[i]) && moveInfo->currentPp[i] != 0)
-            var2 |= gBitTable[i];
+        if (selectedGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]) && moveInfo->currentPp[i] != 0)
+            selectedMoves |= gBitTable[i];
     }
 
-    if (var2 != 0)
+    // Pass selected moves to AI, pick one
+    if (selectedMoves != 0)
     {
-        gBattleStruct->field_92 &= 0xF;
-        gBattleStruct->field_92 |= (var2 << 4);
-        BattleAI_SetupAIData(var2);
+        gBattleStruct->palaceFlags &= 0xF;
+        gBattleStruct->palaceFlags |= (selectedMoves << 4);
+        BattleAI_SetupAIData(selectedMoves);
         chosenMoveId = BattleAI_ChooseMoveOrAction();
     }
 
+    // If no moves matched the selected group, pick a new move from groups the pokemon has
+    // In this case the AI is not checked again, so the choice may be worse
+    // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
     if (chosenMoveId == -1)
     {
         if (unusableMovesBits != 0xF)
         {
-            var1 = 0, var2 = 0;
+            validMoveFlags = 0, numValidMoveGroups = 0;
 
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (sub_805D4A8(moveInfo->moves[i]) == 0 && !(gBitTable[i] & unusableMovesBits))
-                    var1 += 0x1;
-                if (sub_805D4A8(moveInfo->moves[i]) == 1 && !(gBitTable[i] & unusableMovesBits))
-                    var1 += 0x10;
-                if (sub_805D4A8(moveInfo->moves[i]) == 2 && !(gBitTable[i] & unusableMovesBits))
-                    var1 += 0x100;
+                // validMoveFlags is used here as a bitfield for which moves can be used for each move group type
+                // first 4 bits are for attack (1 for each move), then 4 bits for defense, and 4 for support
+                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_ATTACK && !(gBitTable[i] & unusableMovesBits))
+                    validMoveFlags += (1 << 0);
+                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_DEFENSE && !(gBitTable[i] & unusableMovesBits))
+                    validMoveFlags += (1 << 4);
+                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_SUPPORT && !(gBitTable[i] & unusableMovesBits))
+                    validMoveFlags += (1 << 8);
             }
 
-            if ((var1 & 0xF) > 1)
-                var2++;
-            if ((var1 & 0xF0) > 0x1F)
-                var2++;
-            if ((var1 & 0xF0) > 0x1FF)
-                var2++;
+            // Count the move groups the pokemon has
+            if ((validMoveFlags & 0xF) > 1)
+                numValidMoveGroups++;
+            if ((validMoveFlags & 0xF0) > 0x1F)
+                numValidMoveGroups++;
+            if ((validMoveFlags & 0xF0) > 0x1FF)
+                numValidMoveGroups++;
 
-            if (var2 > 1 || var2 == 0)
+            
+            // If more than 1 possible move group, or no possible move groups
+            // then choose move randomly
+            if (numValidMoveGroups > 1 || numValidMoveGroups == 0)
             {
                 do
                 {
@@ -178,32 +208,35 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
                         chosenMoveId = i;
                 } while (chosenMoveId == -1);
             }
+            // Otherwise randomly choose move of only available move group
             else
             {
-                if ((var1 & 0xF) > 1)
-                    var2 = 0;
-                if ((var1 & 0xF0) > 0x1F)
-                    var2 = 1;
-                if ((var1 & 0xF0) > 0x1FF)
-                    var2 = 2;
+                if ((validMoveFlags & 0xF) > 1)
+                    validMoveGroup = PALACE_MOVE_GROUP_ATTACK;
+                if ((validMoveFlags & 0xF0) > 0x1F)
+                    validMoveGroup = PALACE_MOVE_GROUP_DEFENSE;
+                if ((validMoveFlags & 0xF0) > 0x1FF)
+                    validMoveGroup = PALACE_MOVE_GROUP_SUPPORT;
 
                 do
                 {
                     i = Random() % MAX_MON_MOVES;
-                    if (!(gBitTable[i] & unusableMovesBits) && var2 == sub_805D4A8(moveInfo->moves[i]))
+                    if (!(gBitTable[i] & unusableMovesBits) && validMoveGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]))
                         chosenMoveId = i;
                 } while (chosenMoveId == -1);
             }
 
+            // If a move was selected (and in this case was not from the Nature-chosen group)
+            // then there's a 50% chance it won't be used anyway
             if (Random() % 100 > 49)
             {
-                gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
+                gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
                 return 0;
             }
         }
         else
         {
-            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
             return 0;
         }
     }
@@ -211,26 +244,35 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     if (moveInfo->moves[chosenMoveId] == MOVE_CURSE)
     {
         if (moveInfo->monType1 != TYPE_GHOST && moveInfo->monType2 != TYPE_GHOST)
-            var1 = MOVE_TARGET_USER;
+            moveTarget = MOVE_TARGET_USER;
         else
-            var1 = MOVE_TARGET_SELECTED;
+            moveTarget = MOVE_TARGET_SELECTED;
     }
     else
     {
-        var1 = gBattleMoves[moveInfo->moves[chosenMoveId]].target;
+        moveTarget = gBattleMoves[moveInfo->moves[chosenMoveId]].target;
     }
 
-    if (var1 & MOVE_TARGET_USER)
+    if (moveTarget & MOVE_TARGET_USER)
         chosenMoveId |= (gActiveBattler << 8);
-    else if (var1 == MOVE_TARGET_SELECTED)
-        chosenMoveId |= (BattlePalaceGetTargetRetValue());
+    else if (moveTarget == MOVE_TARGET_SELECTED)
+        chosenMoveId |= GetBattlePalaceTarget();
     else
         chosenMoveId |= (GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) & BIT_SIDE) ^ BIT_SIDE) << 8);
 
     return chosenMoveId;
 }
 
-static u8 sub_805D4A8(u16 move)
+#undef maxGroupNum
+#undef minGroupNum
+#undef selectedGroup
+#undef selectedMoves
+#undef moveTarget
+#undef validMoveFlags
+#undef numValidMoveGroups
+#undef validMoveGroup
+
+static u8 GetBattlePalaceMoveGroup(u16 move)
 {
     switch (gBattleMoves[move].target)
     {
@@ -240,21 +282,21 @@ static u8 sub_805D4A8(u16 move)
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
         if (gBattleMoves[move].power == 0)
-            return 2;
+            return PALACE_MOVE_GROUP_SUPPORT;
         else
-            return 0;
+            return PALACE_MOVE_GROUP_ATTACK;
         break;
     case MOVE_TARGET_DEPENDS:
     case MOVE_TARGET_OPPONENTS_FIELD:
-        return 2;
+        return PALACE_MOVE_GROUP_SUPPORT;
     case MOVE_TARGET_USER:
-        return 1;
+        return PALACE_MOVE_GROUP_DEFENSE;
     default:
-        return 0;
+        return PALACE_MOVE_GROUP_ATTACK;
     }
 }
 
-static u16 BattlePalaceGetTargetRetValue(void)
+static u16 GetBattlePalaceTarget(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
@@ -274,19 +316,19 @@ static u16 BattlePalaceGetTargetRetValue(void)
         if (gBattleMons[opposing1].hp == gBattleMons[opposing2].hp)
             return (((gActiveBattler & BIT_SIDE) ^ BIT_SIDE) + (Random() & 2)) << 8;
 
-        switch (gUnknown_0831C604[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)])
+        switch (gBattlePalaceNatureToMoveTarget[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)])
         {
-        case 0:
+        case PALACE_TARGET_STRONGER:
             if (gBattleMons[opposing1].hp > gBattleMons[opposing2].hp)
                 return opposing1 << 8;
             else
                 return opposing2 << 8;
-        case 1:
+        case PALACE_TARGET_WEAKER:
             if (gBattleMons[opposing1].hp < gBattleMons[opposing2].hp)
                 return opposing1 << 8;
             else
                 return opposing2 << 8;
-        case 2:
+        case PALACE_TARGET_RANDOM:
             return (((gActiveBattler & BIT_SIDE) ^ BIT_SIDE) + (Random() & 2)) << 8;
         }
     }
