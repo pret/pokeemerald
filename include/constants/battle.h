@@ -90,7 +90,7 @@
 #define B_OUTCOME_NO_SAFARI_BALLS      8
 #define B_OUTCOME_FORFEITED            9
 #define B_OUTCOME_MON_TELEPORTED       10
-#define B_OUTCOME_LINK_BATTLE_RAN      128
+#define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
 
 // Non-volatile status conditions
 // These persist remain outside of battle and after switching out
@@ -287,8 +287,8 @@
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
 #define NUM_MOVE_EFFECTS                60
 
-#define MOVE_EFFECT_AFFECTS_USER        64
-#define MOVE_EFFECT_CERTAIN             128
+#define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
+#define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
 
 // Battle terrain defines for gBattleTerrain.
 #define BATTLE_TERRAIN_GRASS        0
