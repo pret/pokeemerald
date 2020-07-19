@@ -8124,7 +8124,7 @@ static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *
 {
     u8 i;
 
-    if (ObjectEventIsFarawayIslandMew(objEvent) == TRUE && !sub_81D4A58(objEvent))
+    if (ObjectEventIsFarawayIslandMew(objEvent) == TRUE && !ShouldMewShakeGrass(objEvent))
         return;
 
     for (i = 0; i < ARRAY_COUNT(sGroundEffectFuncs); i++, flags >>= 1)
