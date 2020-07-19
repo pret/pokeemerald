@@ -128,7 +128,7 @@ struct PokemonStorageSystemData
     u16 field_B0[528 / 2];
     u16 field_2C0;
     u16 field_2C2;
-    u8 field_2C4;
+    u8 field_2C4; // Unused
     u8 field_2C5;
     u8 showPartyMenuState;
     u8 unk_02C7;
@@ -136,21 +136,21 @@ struct PokemonStorageSystemData
     bool8 unk_02C9;
     s16 newCurrBoxId;
     u16 bg2_X;
-    s16 field_2CE;
+    s16 wallpaperScrollSpeed;
     u16 field_2D0;
     u8 field_2D2;
-    u8 field_2D3;
-    u8 field_2D4;
-    u16 field_2D6;
-    s16 field_2D8;
-    u16 field_2DA;
-    u16 field_2DC;
-    u16 field_2DE;
-    u16 field_2E0;
+    u8 field_2D3; // Written to, but never read.
+    u8 field_2D4; // Written to, but never read.
+    u16 field_2D6; // Written to, but never read.
+    s16 field_2D8; // Written to, but never read.
+    u16 field_2DA; // Written to, but never read.
+    u16 field_2DC; // Written to, but never read.
+    u16 field_2DE; // Written to, but never read.
+    u16 field_2E0; // Written to, but never read.
     u8 filler[22];
     u8 field_2F8[1024];
     u8 field_6F8;
-    u8 field_6F9;
+    u8 field_6F9; // Written to, but never read.
     u8 field_6FA;
     s8 field_6FB;
     u16 field_6FC[16];
@@ -160,14 +160,14 @@ struct PokemonStorageSystemData
     struct Sprite *field_728[2];
     struct Sprite *field_730[2];
     u32 field_738;
-    u8 field_73C[80];
-    u16 field_78C;
+    u8 field_73C[80]; // Unused
+    u16 field_78C; // Written to, but never read.
     s16 wallpaperSetId;
     s16 wallpaperId;
     u16 field_792[360];
     u8 wallpaperChangeState;
     u8 field_A63;
-    u8 field_A64;
+    u8 boxScrollDestination;
     s8 field_A65;
     u8 *wallpaperTiles;
     struct Sprite *movingMonSprite;
@@ -189,12 +189,12 @@ struct PokemonStorageSystemData
     u8 field_C68;
     s8 field_C69;
     u8 field_C6A;
-    u8 field_C6B;
+    u8 field_C6B; // Written to, but never read.
     struct WindowTemplate menuWindow;
     struct StorageMenu menuItems[7];
     u8 menuItemsCount;
     u8 menuWidth;
-    u8 field_CAE;
+    u8 field_CAE; // Written to, but never read.
     u16 field_CB0;
     struct Sprite *field_CB4;
     struct Sprite *field_CB8;
@@ -247,7 +247,7 @@ struct PokemonStorageSystemData
     u16 field_2176[8];
     u8 field_2186;
     u8 field_2187;
-    u8 field_2188;
+    u8 pokemonSummaryScreenMode;
     union
     {
         struct Pokemon *mon;
@@ -262,13 +262,13 @@ struct PokemonStorageSystemData
     struct UnkStorageStruct field_2204[3];
     u16 movingItem;
     u16 field_2236;
-    u8 field_2238;
+    u8 field_2238; // Unused
     u16 field_223A;
     u16 *field_223C;
     struct Sprite *cursorMonSprite;
     u16 field_2244[0x40];
     u8 field_22C4[0x800];
-    u8 field_2AC4[0x1800];
+    u8 field_2AC4[0x1800]; // Unused
     u8 field_42C4[0x800];
     u8 field_4AC4[0x1000];
     u8 field_5AC4[0x800];
@@ -658,7 +658,7 @@ static void SetBoxSpeciesAndPersonalities(u8 boxId);
 static void sub_80CB9D0(struct Sprite *sprite, u16 partyId);
 static void sub_80CC370(u8 taskId);
 static void sub_80CCB50(u8 boxId);
-static s8 sub_80CC644(u8 boxId);
+static s8 DetermineBoxScrollDirection(u8 boxId);
 static void sub_80CCA3C(const void *tilemap, s8 direction, u8 arg2);
 static s16 sub_80CD00C(const u8 *string);
 static bool8 MonPlaceChange_Shift(void);
@@ -3879,7 +3879,7 @@ static void Cb_ChangeScreen(u8 taskId)
         boxMons = sPSSData->field_218C.box;
         monIndex = sPSSData->field_2187;
         maxMonIndex = sPSSData->field_2186;
-        mode = sPSSData->field_2188;
+        mode = sPSSData->pokemonSummaryScreenMode;
         FreePSSData();
         if (mode == PSS_MODE_NORMAL && boxMons == &gUnknown_02039D14.box)
             ShowPokemonSummaryScreenSet40EF(mode, boxMons, monIndex, maxMonIndex, Cb2_ReturnToPSS);
@@ -5276,9 +5276,9 @@ static void sub_80CC370(u8 taskId)
 
 static void SetUpScrollToBox(u8 boxId)
 {
-    s8 direction = sub_80CC644(boxId);
+    s8 direction = DetermineBoxScrollDirection(boxId);
 
-    sPSSData->field_2CE = (direction > 0) ? 6 : -6;
+    sPSSData->wallpaperScrollSpeed = (direction > 0) ? 6 : -6;
     sPSSData->field_2D3 = (direction > 0) ? 1 : 2;
     sPSSData->field_2D0 = 32;
     sPSSData->field_2D4 = boxId;
@@ -5288,7 +5288,7 @@ static void SetUpScrollToBox(u8 boxId)
     sPSSData->field_2DC = (direction <= 0) ? 5 : 0;
     sPSSData->field_2DE = 0;
     sPSSData->field_2E0 = 2;
-    sPSSData->field_A64 = boxId;
+    sPSSData->boxScrollDestination = boxId;
     sPSSData->field_A65 = direction;
     sPSSData->field_A63 = 0;
 }
@@ -5300,21 +5300,21 @@ static bool8 ScrollToBox(void)
     switch (sPSSData->field_A63)
     {
     case 0:
-        LoadWallpaperGfx(sPSSData->field_A64, sPSSData->field_A65);
+        LoadWallpaperGfx(sPSSData->boxScrollDestination, sPSSData->field_A65);
         sPSSData->field_A63++;
     case 1:
         if (!WaitForWallpaperGfxLoad())
             return TRUE;
 
-        sub_80CB4CC(sPSSData->field_A64, sPSSData->field_A65);
-        sub_80CCCFC(sPSSData->field_A64, sPSSData->field_A65);
+        sub_80CB4CC(sPSSData->boxScrollDestination, sPSSData->field_A65);
+        sub_80CCCFC(sPSSData->boxScrollDestination, sPSSData->field_A65);
         sub_80CD0B8(sPSSData->field_A65);
         break;
     case 2:
         var = sub_80CB584();
         if (sPSSData->field_2D0 != 0)
         {
-            sPSSData->bg2_X += sPSSData->field_2CE;
+            sPSSData->bg2_X += sPSSData->wallpaperScrollSpeed;
             if (--sPSSData->field_2D0 != 0)
                 return TRUE;
             sub_80CCEE0();
@@ -5327,7 +5327,7 @@ static bool8 ScrollToBox(void)
     return TRUE;
 }
 
-static s8 sub_80CC644(u8 boxId)
+static s8 DetermineBoxScrollDirection(u8 boxId)
 {
     u8 i;
     u8 currentBox = StorageGetCurrentBox();
@@ -5735,7 +5735,7 @@ static void sub_80CD210(struct Sprite *sprite)
         sprite->data[0] = 3;
         break;
     case 3:
-        sprite->pos1.x -= sPSSData->field_2CE;
+        sprite->pos1.x -= sPSSData->wallpaperScrollSpeed;
         if (sprite->pos1.x < 73 || sprite->pos1.x > 247)
             sprite->invisible = TRUE;
         if (--sprite->data[1] == 0)
@@ -5746,7 +5746,7 @@ static void sub_80CD210(struct Sprite *sprite)
         }
         break;
     case 4:
-        sprite->pos1.x -= sPSSData->field_2CE;
+        sprite->pos1.x -= sPSSData->wallpaperScrollSpeed;
         break;
     }
 }
@@ -6632,21 +6632,21 @@ static void sub_80CE7E8(void)
         sPSSData->field_218C.mon = &gUnknown_02039D14;
         sPSSData->field_2187 = 0;
         sPSSData->field_2186 = 0;
-        sPSSData->field_2188 = 0;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_NORMAL;
     }
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
     {
         sPSSData->field_218C.mon = gPlayerParty;
         sPSSData->field_2187 = sBoxCursorPosition;
         sPSSData->field_2186 = CountPartyMons() - 1;
-        sPSSData->field_2188 = 0;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_NORMAL;
     }
     else
     {
         sPSSData->field_218C.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
         sPSSData->field_2187 = sBoxCursorPosition;
         sPSSData->field_2186 = IN_BOX_COUNT - 1;
-        sPSSData->field_2188 = 2;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_BOX;
     }
 }
 
