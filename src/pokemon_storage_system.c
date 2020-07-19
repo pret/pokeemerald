@@ -167,7 +167,7 @@ struct PokemonStorageSystemData
     u16 field_792[360];
     u8 wallpaperChangeState;
     u8 field_A63;
-    u8 BoxScrollDestination;
+    u8 boxScrollDestination;
     s8 field_A65;
     u8 *wallpaperTiles;
     struct Sprite *movingMonSprite;
@@ -5288,7 +5288,7 @@ static void SetUpScrollToBox(u8 boxId)
     sPSSData->field_2DC = (direction <= 0) ? 5 : 0;
     sPSSData->field_2DE = 0;
     sPSSData->field_2E0 = 2;
-    sPSSData->BoxScrollDestination = boxId;
+    sPSSData->boxScrollDestination = boxId;
     sPSSData->field_A65 = direction;
     sPSSData->field_A63 = 0;
 }
@@ -5300,14 +5300,14 @@ static bool8 ScrollToBox(void)
     switch (sPSSData->field_A63)
     {
     case 0:
-        LoadWallpaperGfx(sPSSData->BoxScrollDestination, sPSSData->field_A65);
+        LoadWallpaperGfx(sPSSData->boxScrollDestination, sPSSData->field_A65);
         sPSSData->field_A63++;
     case 1:
         if (!WaitForWallpaperGfxLoad())
             return TRUE;
 
-        sub_80CB4CC(sPSSData->BoxScrollDestination, sPSSData->field_A65);
-        sub_80CCCFC(sPSSData->BoxScrollDestination, sPSSData->field_A65);
+        sub_80CB4CC(sPSSData->boxScrollDestination, sPSSData->field_A65);
+        sub_80CCCFC(sPSSData->boxScrollDestination, sPSSData->field_A65);
         sub_80CD0B8(sPSSData->field_A65);
         break;
     case 2:
