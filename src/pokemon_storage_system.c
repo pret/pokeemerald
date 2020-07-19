@@ -136,7 +136,7 @@ struct PokemonStorageSystemData
     bool8 unk_02C9;
     s16 newCurrBoxId;
     u16 bg2_X;
-    s16 WallpaperScrollSpeed;
+    s16 wallpaperScrollSpeed;
     u16 field_2D0;
     u8 field_2D2;
     u8 field_2D3; // Written to, but never read.
@@ -247,7 +247,7 @@ struct PokemonStorageSystemData
     u16 field_2176[8];
     u8 field_2186;
     u8 field_2187;
-    u8 PokemonSummaryScreenMode;
+    u8 pokemonSummaryScreenMode;
     union
     {
         struct Pokemon *mon;
@@ -3879,7 +3879,7 @@ static void Cb_ChangeScreen(u8 taskId)
         boxMons = sPSSData->field_218C.box;
         monIndex = sPSSData->field_2187;
         maxMonIndex = sPSSData->field_2186;
-        mode = sPSSData->PokemonSummaryScreenMode;
+        mode = sPSSData->pokemonSummaryScreenMode;
         FreePSSData();
         if (mode == PSS_MODE_NORMAL && boxMons == &gUnknown_02039D14.box)
             ShowPokemonSummaryScreenSet40EF(mode, boxMons, monIndex, maxMonIndex, Cb2_ReturnToPSS);
@@ -5278,7 +5278,7 @@ static void SetUpScrollToBox(u8 boxId)
 {
     s8 direction = DetermineBoxScrollDirection(boxId);
 
-    sPSSData->WallpaperScrollSpeed = (direction > 0) ? 6 : -6;
+    sPSSData->wallpaperScrollSpeed = (direction > 0) ? 6 : -6;
     sPSSData->field_2D3 = (direction > 0) ? 1 : 2;
     sPSSData->field_2D0 = 32;
     sPSSData->field_2D4 = boxId;
@@ -5314,7 +5314,7 @@ static bool8 ScrollToBox(void)
         var = sub_80CB584();
         if (sPSSData->field_2D0 != 0)
         {
-            sPSSData->bg2_X += sPSSData->WallpaperScrollSpeed;
+            sPSSData->bg2_X += sPSSData->wallpaperScrollSpeed;
             if (--sPSSData->field_2D0 != 0)
                 return TRUE;
             sub_80CCEE0();
@@ -5735,7 +5735,7 @@ static void sub_80CD210(struct Sprite *sprite)
         sprite->data[0] = 3;
         break;
     case 3:
-        sprite->pos1.x -= sPSSData->WallpaperScrollSpeed;
+        sprite->pos1.x -= sPSSData->wallpaperScrollSpeed;
         if (sprite->pos1.x < 73 || sprite->pos1.x > 247)
             sprite->invisible = TRUE;
         if (--sprite->data[1] == 0)
@@ -5746,7 +5746,7 @@ static void sub_80CD210(struct Sprite *sprite)
         }
         break;
     case 4:
-        sprite->pos1.x -= sPSSData->WallpaperScrollSpeed;
+        sprite->pos1.x -= sPSSData->wallpaperScrollSpeed;
         break;
     }
 }
@@ -6632,21 +6632,21 @@ static void sub_80CE7E8(void)
         sPSSData->field_218C.mon = &gUnknown_02039D14;
         sPSSData->field_2187 = 0;
         sPSSData->field_2186 = 0;
-        sPSSData->PokemonSummaryScreenMode = PSS_MODE_NORMAL;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_NORMAL;
     }
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
     {
         sPSSData->field_218C.mon = gPlayerParty;
         sPSSData->field_2187 = sBoxCursorPosition;
         sPSSData->field_2186 = CountPartyMons() - 1;
-        sPSSData->PokemonSummaryScreenMode = PSS_MODE_NORMAL;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_NORMAL;
     }
     else
     {
         sPSSData->field_218C.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
         sPSSData->field_2187 = sBoxCursorPosition;
         sPSSData->field_2186 = IN_BOX_COUNT - 1;
-        sPSSData->PokemonSummaryScreenMode = PSS_MODE_BOX;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_BOX;
     }
 }
 
