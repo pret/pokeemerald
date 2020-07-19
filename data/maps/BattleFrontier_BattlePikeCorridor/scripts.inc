@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattlePikeCorridor_MapScripts:: @ 825C771
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeCorridor_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeCorridor_OnWarp
@@ -13,7 +15,7 @@ BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor:: @ 825C786
 	pike_cleartrainerids
 	pike_nohealing TRUE
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor
-	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor
 	waitmovement 0
 	lockall
 	msgbox BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun, MSGBOX_DEFAULT

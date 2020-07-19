@@ -84,7 +84,7 @@ EWRAM_DATA static struct PokeblockFeedStruct *sPokeblockFeed = NULL;
 EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
 
 // const rom data
-static const u8 sNatureToMonPokeblockAnim[][2] =
+static const u8 sNatureToMonPokeblockAnim[NUM_NATURES][2] =
 {
     [NATURE_HARDY] = {  0, 0 },
     [NATURE_LONELY] = {  3, 0 },

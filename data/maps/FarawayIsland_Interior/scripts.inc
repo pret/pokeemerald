@@ -1,3 +1,5 @@
+.set LOCALID_MEW, 1
+
 FarawayIsland_Interior_MapScripts:: @ 8267CFA
 	map_script MAP_SCRIPT_ON_RESUME, FarawayIsland_Interior_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Interior_OnTransition
@@ -56,13 +58,13 @@ FarawayIsland_Interior_OnFrame: @ 8267D98
 FarawayIsland_Interior_EventScript_FindMew:: @ 8267DA2
 	lockall
 	playse SE_PIN
-	applymovement 1, Common_Movement_ExclamationMark
+	applymovement LOCALID_MEW, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Common_Movement_Delay48
+	applymovement LOCALID_MEW, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 1, FarawayIsland_Interior_Movement_MewMoveAndHide
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewMoveAndHide
 	waitmovement 0
-	copyobjectxytoperm 1
+	copyobjectxytoperm LOCALID_MEW
 	setvar VAR_TEMP_1, 1
 	releaseall
 	end
@@ -118,7 +120,7 @@ FarawayIsland_Interior_Movement_MewHideLeft: @ 8267DEB
 FarawayIsland_Interior_EventScript_Mew:: @ 8267DF2
 	lock
 	faceplayer
-	applymovement 1, FarawayIsland_Interior_Movement_MewAppear
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewAppear
 	waitmovement 0
 	setvar VAR_0x8004, 0
 	special sub_81D4A90
@@ -169,22 +171,22 @@ FarawayIsland_Interior_EventScript_PlayerOrMewRan:: @ 8267EA4
 	end
 
 FarawayIsland_Interior_EventScript_MewHideDown:: @ 8267EAF
-	applymovement 1, FarawayIsland_Interior_Movement_MewHideDown
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideDown
 	waitmovement 0
 	return
 
 FarawayIsland_Interior_EventScript_MewHideUp:: @ 8267EBA
-	applymovement 1, FarawayIsland_Interior_Movement_MewHideUp
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideUp
 	waitmovement 0
 	return
 
 FarawayIsland_Interior_EventScript_MewHideRight:: @ 8267EC5
-	applymovement 1, FarawayIsland_Interior_Movement_MewHideRight
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideRight
 	waitmovement 0
 	return
 
 FarawayIsland_Interior_EventScript_MewHideLeft:: @ 8267ED0
-	applymovement 1, FarawayIsland_Interior_Movement_MewHideLeft
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideLeft
 	waitmovement 0
 	return
 
@@ -192,7 +194,7 @@ FarawayIsland_Interior_EventScript_HideMewWhenGrassCut:: @ 8267EDB
 	lockall
 	fadescreenswapbuffers FADE_TO_BLACK
 	setflag FLAG_HIDE_MEW
-	removeobject 1
+	removeobject LOCALID_MEW
 	fadescreenswapbuffers FADE_FROM_BLACK
 	msgbox FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded, MSGBOX_DEFAULT
 	closemessage

@@ -1,3 +1,5 @@
+.set LOCALID_NURSE, 1
+
 BattleFrontier_PokemonCenter_1F_MapScripts:: @ 82678F9
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -7,9 +9,8 @@ BattleFrontier_PokemonCenter_1F_OnTransition: @ 8267904
 	setrespawn HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST
 	end
 
-@ VAR_0x800B is the Nurse's object event id
 BattleFrontier_PokemonCenter_1F_EventScript_Nurse:: @ 8267908
-	setvar VAR_0x800B, 1
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

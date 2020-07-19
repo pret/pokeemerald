@@ -205,7 +205,7 @@ extern const u8 BattleScript_BerryStatRaiseEnd2[];
 extern const u8 BattleScript_BerryFocusEnergyEnd2[];
 extern const u8 BattleScript_ActionSelectionItemsCantBeUsed[];
 extern const u8 BattleScript_ArenaTurnBeginning[];
-extern const u8 BattleScript_82DB881[];
+extern const u8 BattleScript_PalacePrintFlavorText[];
 extern const u8 BattleScript_ArenaDoJudgment[];
 extern const u8 BattleScript_82DAA0B[];
 extern const u8 BattleScript_AskIfWantsToForfeitMatch[];
