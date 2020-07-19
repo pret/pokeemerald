@@ -2501,7 +2501,7 @@ static void sub_80B8584(struct Task *task)
 {
     task->data[11] = REG_WININ;
     task->data[12] = REG_WINOUT;
-    StoreWordInTwoHalfwords(&task->data[13], (u32)gMain.vblankCallback);
+    StoreWordInTwoHalfwords((u16 *)&task->data[13], (u32)gMain.vblankCallback);
     task->data[1] = 0xf0f1;
     task->data[2] = 0x5051;
     task->data[3] = 0x3f;

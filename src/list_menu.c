@@ -1257,17 +1257,17 @@ void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, st
     s32 i, j, id = 0;
 
     subsprites[id] = sSubsprite_RedOutline1;
-    subsprites[id].x = 136;
-    subsprites[id].y = 136;
+    subsprites[id].x = -120;
+    subsprites[id].y = -120;
     id++;
 
     subsprites[id] = sSubsprite_RedOutline2;
     subsprites[id].x = rowWidth + 128;
-    subsprites[id].y = 136;
+    subsprites[id].y = -120;
     id++;
 
     subsprites[id] = sSubsprite_RedOutline7;
-    subsprites[id].x = 136;
+    subsprites[id].x = -120;
     subsprites[id].y = rowHeight + 128;
     id++;
 
@@ -1297,7 +1297,7 @@ void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, st
         for (j = 8; j < rowHeight - 8; j += 8)
         {
             subsprites[id] = sSubsprite_RedOutline4;
-            subsprites[id].x = 136;
+            subsprites[id].x = -120;
             subsprites[id].y = j - 120;
             id++;
 
