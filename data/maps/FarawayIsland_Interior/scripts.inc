@@ -8,24 +8,24 @@ FarawayIsland_Interior_MapScripts:: @ 8267CFA
 	.byte 0
 
 FarawayIsland_Interior_OnReturnToField: @ 8267D0F
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, FarawayIsland_Interior_EventScript_267D19
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, FarawayIsland_Interior_EventScript_TrySetMewAboveGrass
 	end
 
-FarawayIsland_Interior_EventScript_267D19:: @ 8267D19
+FarawayIsland_Interior_EventScript_TrySetMewAboveGrass:: @ 8267D19
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
+	goto_if_eq FarawayIsland_Interior_EventScript_SetMewAboveGrass
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
+	goto_if_eq FarawayIsland_Interior_EventScript_SetMewAboveGrass
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
+	goto_if_eq FarawayIsland_Interior_EventScript_SetMewAboveGrass
 	compare VAR_RESULT, B_OUTCOME_MON_TELEPORTED
-	goto_if_eq FarawayIsland_Interior_EventScript_267D4B
+	goto_if_eq FarawayIsland_Interior_EventScript_SetMewAboveGrass
 	return
 
-FarawayIsland_Interior_EventScript_267D4B:: @ 8267D4B
+FarawayIsland_Interior_EventScript_SetMewAboveGrass:: @ 8267D4B
 	setvar VAR_0x8004, 1
-	special sub_81D4A90
+	special SetMewAboveGrass
 	return
 
 FarawayIsland_Interior_OnResume: @ 8267D54
@@ -81,7 +81,7 @@ FarawayIsland_Interior_Movement_MewAppear: @ 8267DD4
 	set_visible
 	step_end
 
-FarawayIsland_Interior_Movement_MewHideDown: @ 8267DD6
+FarawayIsland_Interior_Movement_MewFloatUpNorth: @ 8267DD6
 	lock_facing_direction
 	walk_fast_up
 	walk_fast_up
@@ -90,7 +90,7 @@ FarawayIsland_Interior_Movement_MewHideDown: @ 8267DD6
 	walk_in_place_down
 	step_end
 
-FarawayIsland_Interior_Movement_MewHideUp: @ 8267DDD
+FarawayIsland_Interior_Movement_MewFloatUpSouth: @ 8267DDD
 	lock_facing_direction
 	walk_fast_up
 	walk_fast_up
@@ -99,7 +99,7 @@ FarawayIsland_Interior_Movement_MewHideUp: @ 8267DDD
 	walk_in_place_up
 	step_end
 
-FarawayIsland_Interior_Movement_MewHideRight: @ 8267DE4
+FarawayIsland_Interior_Movement_MewFloatUpWest: @ 8267DE4
 	lock_facing_direction
 	walk_fast_up
 	walk_fast_up
@@ -108,7 +108,7 @@ FarawayIsland_Interior_Movement_MewHideRight: @ 8267DE4
 	walk_in_place_right
 	step_end
 
-FarawayIsland_Interior_Movement_MewHideLeft: @ 8267DEB
+FarawayIsland_Interior_Movement_MewFloatUpEast: @ 8267DEB
 	lock_facing_direction
 	walk_fast_up
 	walk_fast_up
@@ -123,19 +123,19 @@ FarawayIsland_Interior_EventScript_Mew:: @ 8267DF2
 	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewAppear
 	waitmovement 0
 	setvar VAR_0x8004, 0
-	special sub_81D4A90
+	special SetMewAboveGrass
 	message FarawayIsland_Interior_Text_Mew
 	waitse
 	playmoncry SPECIES_MEW, 2
 	compare VAR_FACING, DIR_NORTH
-	call_if_eq FarawayIsland_Interior_EventScript_MewHideDown
+	call_if_eq FarawayIsland_Interior_EventScript_FoundMewNorth
 	compare VAR_FACING, DIR_SOUTH
-	call_if_eq FarawayIsland_Interior_EventScript_MewHideUp
+	call_if_eq FarawayIsland_Interior_EventScript_FoundMewSouth
 	compare VAR_FACING, DIR_WEST
-	call_if_eq FarawayIsland_Interior_EventScript_MewHideRight
+	call_if_eq FarawayIsland_Interior_EventScript_FoundMewWest
 	compare VAR_FACING, DIR_EAST
-	call_if_eq FarawayIsland_Interior_EventScript_MewHideLeft
-	special sub_81D4BEC
+	call_if_eq FarawayIsland_Interior_EventScript_FoundMewEast
+	special DestroyMewEmergingGrassSprite
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_MEW
@@ -170,23 +170,23 @@ FarawayIsland_Interior_EventScript_PlayerOrMewRan:: @ 8267EA4
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-FarawayIsland_Interior_EventScript_MewHideDown:: @ 8267EAF
-	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideDown
+FarawayIsland_Interior_EventScript_FoundMewNorth:: @ 8267EAF
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewFloatUpNorth
 	waitmovement 0
 	return
 
-FarawayIsland_Interior_EventScript_MewHideUp:: @ 8267EBA
-	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideUp
+FarawayIsland_Interior_EventScript_FoundMewSouth:: @ 8267EBA
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewFloatUpSouth
 	waitmovement 0
 	return
 
-FarawayIsland_Interior_EventScript_MewHideRight:: @ 8267EC5
-	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideRight
+FarawayIsland_Interior_EventScript_FoundMewWest:: @ 8267EC5
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewFloatUpWest
 	waitmovement 0
 	return
 
-FarawayIsland_Interior_EventScript_MewHideLeft:: @ 8267ED0
-	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewHideLeft
+FarawayIsland_Interior_EventScript_FoundMewEast:: @ 8267ED0
+	applymovement LOCALID_MEW, FarawayIsland_Interior_Movement_MewFloatUpEast
 	waitmovement 0
 	return
 
