@@ -6,39 +6,40 @@
 #include "sprite.h"
 #include "util.h"
 #include "constants/pokemon.h"
+#include "constants/battle_palace.h"
 
 static void SmokescreenImpact_Callback(struct Sprite *);
 static void SpriteCB_DestroySprite(struct Sprite *sprite);
 
 // The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
 
-const u8 gUnknown_0831C604[] = 
+const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] = 
 {
-    [NATURE_HARDY]   = 0, 
-    [NATURE_LONELY]  = 0, 
-    [NATURE_BRAVE]   = 1, 
-    [NATURE_ADAMANT] = 0, 
-    [NATURE_NAUGHTY] = 1, 
-    [NATURE_BOLD]    = 1, 
-    [NATURE_DOCILE]  = 2, 
-    [NATURE_RELAXED] = 0,
-    [NATURE_IMPISH]  = 0, 
-    [NATURE_LAX]     = 0, 
-    [NATURE_TIMID]   = 1, 
-    [NATURE_HASTY]   = 1, 
-    [NATURE_SERIOUS] = 1, 
-    [NATURE_JOLLY]   = 0, 
-    [NATURE_NAIVE]   = 2, 
-    [NATURE_MODEST]  = 1,
-    [NATURE_MILD]    = 0, 
-    [NATURE_QUIET]   = 1, 
-    [NATURE_BASHFUL] = 1, 
-    [NATURE_RASH]    = 0, 
-    [NATURE_CALM]    = 0, 
-    [NATURE_GENTLE]  = 0, 
-    [NATURE_SASSY]   = 1, 
-    [NATURE_CAREFUL] = 1,
-    [NATURE_QUIRKY]  = 0, 
+    [NATURE_HARDY]   = PALACE_TARGET_STRONGER,
+    [NATURE_LONELY]  = PALACE_TARGET_STRONGER,
+    [NATURE_BRAVE]   = PALACE_TARGET_WEAKER,
+    [NATURE_ADAMANT] = PALACE_TARGET_STRONGER,
+    [NATURE_NAUGHTY] = PALACE_TARGET_WEAKER,
+    [NATURE_BOLD]    = PALACE_TARGET_WEAKER,
+    [NATURE_DOCILE]  = PALACE_TARGET_RANDOM, 
+    [NATURE_RELAXED] = PALACE_TARGET_STRONGER,
+    [NATURE_IMPISH]  = PALACE_TARGET_STRONGER,
+    [NATURE_LAX]     = PALACE_TARGET_STRONGER,
+    [NATURE_TIMID]   = PALACE_TARGET_WEAKER,
+    [NATURE_HASTY]   = PALACE_TARGET_WEAKER,
+    [NATURE_SERIOUS] = PALACE_TARGET_WEAKER,
+    [NATURE_JOLLY]   = PALACE_TARGET_STRONGER,
+    [NATURE_NAIVE]   = PALACE_TARGET_RANDOM, 
+    [NATURE_MODEST]  = PALACE_TARGET_WEAKER,
+    [NATURE_MILD]    = PALACE_TARGET_STRONGER,
+    [NATURE_QUIET]   = PALACE_TARGET_WEAKER,
+    [NATURE_BASHFUL] = PALACE_TARGET_WEAKER,
+    [NATURE_RASH]    = PALACE_TARGET_STRONGER,
+    [NATURE_CALM]    = PALACE_TARGET_STRONGER,
+    [NATURE_GENTLE]  = PALACE_TARGET_STRONGER,
+    [NATURE_SASSY]   = PALACE_TARGET_WEAKER,
+    [NATURE_CAREFUL] = PALACE_TARGET_WEAKER,
+    [NATURE_QUIRKY]  = PALACE_TARGET_STRONGER,
 };
 
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =

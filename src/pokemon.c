@@ -1349,7 +1349,7 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
 
 #include "data/pokemon/item_effects.h"
 
-const s8 gNatureStatTable[][NUM_EV_STATS] =
+const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 {
     // Atk Def Spd Sp.Atk Sp.Def
     {    0,  0,  0,     0,     0}, // Hardy
@@ -5372,12 +5372,12 @@ u8 *UseStatIncreaseItem(u16 itemId)
 
 u8 GetNature(struct Pokemon *mon)
 {
-    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % 25;
+    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NUM_NATURES;
 }
 
 u8 GetNatureFromPersonality(u32 personality)
 {
-    return personality % 25;
+    return personality % NUM_NATURES;
 }
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
@@ -5747,7 +5747,7 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 {
     // Dont modify HP, Accuracy, or Evasion by nature
-    if (statIndex <= STAT_HP || statIndex > NUM_EV_STATS)
+    if (statIndex <= STAT_HP || statIndex > NUM_NATURE_STATS)
     {
         // Should just be "return n", but it wouldn't match without this.
         u16 retVal = n;
@@ -6404,13 +6404,13 @@ bool8 IsMonSpriteNotFlipped(u16 species)
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
     u8 nature = GetNature(mon);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
+    return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 {
     u8 nature = GetNatureFromPersonality(personality);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
+    return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
 bool8 IsTradedMon(struct Pokemon *mon)
