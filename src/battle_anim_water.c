@@ -643,7 +643,6 @@ static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
         DestroyAnimVisualTask(taskId);
 }
 
-
 // For animating undulating beam attacks (e.g. Flamethrower, Hydro Pump, Signal Beam)
 static void AnimToTargetInSinWave(struct Sprite *sprite)
 {
