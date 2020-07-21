@@ -303,7 +303,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_POLIWAG] =
     {
         .size = 0x74,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_POLIWHIRL] =
     {
@@ -408,7 +408,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_MAGNEMITE] =
     {
         .size = 0x43,
-        .y_offset = 0x15,
+        .y_offset = 21,
     },
     [SPECIES_MAGNETON] =
     {
@@ -503,7 +503,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_VOLTORB] =
     {
         .size = 0x44,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_ELECTRODE] =
     {
@@ -663,7 +663,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_DITTO] =
     {
         .size = 0x54,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_EEVEE] =
     {
@@ -703,7 +703,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_KABUTO] =
     {
         .size = 0x54,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_KABUTOPS] =
     {
@@ -838,7 +838,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_SPINARAK] =
     {
         .size = 0x54,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_ARIADOS] =
     {
@@ -1033,7 +1033,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_DUNSPARCE] =
     {
         .size = 0x74,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_GLIGAR] =
     {
@@ -1458,7 +1458,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_SILCOON] =
     {
         .size = 0x75,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_BEAUTIFLY] =
     {
@@ -1548,7 +1548,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_WINGULL] =
     {
         .size = 0x84,
-        .y_offset = 0x18,
+        .y_offset = 24,
     },
     [SPECIES_PELIPPER] =
     {
@@ -1628,7 +1628,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_LUVDISC] =
     {
         .size = 0x46,
-        .y_offset = 0x18,
+        .y_offset = 24,
     },
     [SPECIES_CORPHISH] =
     {
@@ -1793,7 +1793,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_SWABLU] =
     {
         .size = 0x76,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_ALTARIA] =
     {
@@ -1928,7 +1928,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_CASTFORM] =
     {
         .size = 0x34,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_VOLBEAT] =
     {
@@ -2083,12 +2083,12 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_UNOWN_E] =
     {
         .size = 0x44,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_UNOWN_F] =
     {
         .size = 0x44,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_UNOWN_G] =
     {
@@ -2108,22 +2108,22 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_UNOWN_J] =
     {
         .size = 0x34,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_UNOWN_K] =
     {
         .size = 0x44,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_UNOWN_L] =
     {
         .size = 0x34,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_UNOWN_M] =
     {
         .size = 0x44,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_UNOWN_N] =
     {
@@ -2138,17 +2138,17 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_UNOWN_P] =
     {
         .size = 0x34,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_UNOWN_Q] =
     {
         .size = 0x43,
-        .y_offset = 0x15,
+        .y_offset = 21,
     },
     [SPECIES_UNOWN_R] =
     {
         .size = 0x34,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_UNOWN_S] =
     {
@@ -2173,17 +2173,17 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_UNOWN_W] =
     {
         .size = 0x44,
-        .y_offset = 0x13,
+        .y_offset = 19,
     },
     [SPECIES_UNOWN_X] =
     {
         .size = 0x33,
-        .y_offset = 0x15,
+        .y_offset = 21,
     },
     [SPECIES_UNOWN_Y] =
     {
         .size = 0x34,
-        .y_offset = 0x11,
+        .y_offset = 17,
     },
     [SPECIES_UNOWN_Z] =
     {
