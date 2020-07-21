@@ -13,28 +13,28 @@
 
 	.align 2
 gBattlescriptsForBallThrow:: @ 82DBD08
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_SafariBallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
-	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow        @ ITEM_NONE
+	.4byte BattleScript_BallThrow        @ ITEM_MASTER_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_ULTRA_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_GREAT_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_POKE_BALL
+	.4byte BattleScript_SafariBallThrow  @ ITEM_SAFARI_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_NET_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_DIVE_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_NEST_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_REPEAT_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_TIMER_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_LUXURY_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_PREMIER_BALL
 
 	.align 2
 gBattlescriptsForUsingItem:: @ 82DBD3C
 	.4byte BattleScript_PlayerUsesItem
-	.4byte BattleScript_OpponentUsesHealItem
-	.4byte BattleScript_OpponentUsesHealItem
-	.4byte BattleScript_OpponentUsesStatusCureItem
-	.4byte BattleScript_OpponentUsesXItem
-	.4byte BattleScript_OpponentUsesGuardSpecs
+	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_FULL_RESTORE
+	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_HEAL_HP
+	.4byte BattleScript_OpponentUsesStatusCureItem  @ AI_ITEM_CURE_CONDITION
+	.4byte BattleScript_OpponentUsesXItem           @ AI_ITEM_X_STAT
+	.4byte BattleScript_OpponentUsesGuardSpecs      @ AI_ITEM_GUARD_SPECS
 
 	.align 2
 gBattlescriptsForRunningByItem:: @ 82DBD54

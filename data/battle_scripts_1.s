@@ -798,7 +798,7 @@ BattleScript_KOFail::
 BattleScript_EffectRazorWind::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, 0x0
+	setbyte sTWOTURN_STRINGID, 0
 	call BattleScriptFirstChargingTurn
 	goto BattleScript_MoveEnd
 
@@ -1084,7 +1084,7 @@ BattleScript_EffectAccuracyDownHit::
 BattleScript_EffectSkyAttack::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, 0x3
+	setbyte sTWOTURN_STRINGID, 3
 	call BattleScriptFirstChargingTurn
 	goto BattleScript_MoveEnd
 
@@ -1831,7 +1831,7 @@ BattleScript_EffectMirrorCoat::
 BattleScript_EffectSkullBash::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, 0x2
+	setbyte sTWOTURN_STRINGID, 2
 	call BattleScriptFirstChargingTurn
 	setstatchanger STAT_DEF, 1, FALSE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_SkullBashEnd
@@ -1927,7 +1927,7 @@ BattleScript_EffectSolarbeam::
 BattleScript_SolarbeamDecideTurn::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, 0x1
+	setbyte sTWOTURN_STRINGID, 1
 	call BattleScriptFirstChargingTurn
 	goto BattleScript_MoveEnd
 BattleScript_SolarbeamOnFirstTurn::
@@ -1996,19 +1996,19 @@ BattleScript_EffectSemiInvulnerable::
 	jumpifmove MOVE_FLY, BattleScript_FirstTurnFly
 	jumpifmove MOVE_DIVE, BattleScript_FirstTurnDive
 	jumpifmove MOVE_BOUNCE, BattleScript_FirstTurnBounce
-	setbyte sTWOTURN_STRINGID, 0x5
+	setbyte sTWOTURN_STRINGID, 5
 	goto BattleScript_FirstTurnSemiInvulnerable
 
 BattleScript_FirstTurnBounce::
-	setbyte sTWOTURN_STRINGID, 0x7
+	setbyte sTWOTURN_STRINGID, 7
 	goto BattleScript_FirstTurnSemiInvulnerable
 
 BattleScript_FirstTurnDive::
-	setbyte sTWOTURN_STRINGID, 0x6
+	setbyte sTWOTURN_STRINGID, 6
 	goto BattleScript_FirstTurnSemiInvulnerable
 
 BattleScript_FirstTurnFly::
-	setbyte sTWOTURN_STRINGID, 0x4
+	setbyte sTWOTURN_STRINGID, 4
 BattleScript_FirstTurnSemiInvulnerable::
 	call BattleScriptFirstChargingTurn
 	setsemiinvulnerablebit
@@ -3252,7 +3252,7 @@ BattleScript_SunlightFaded::
 	end2
 
 BattleScript_OverworldWeatherStarts::
-	printfromtable gWeatherContinuesStringIds
+	printfromtable gWeatherStartsStringIds
 	waitmessage 0x40
 	playanimation2 BS_ATTACKER, sB_ANIM_ARG1, NULL
 	end3
