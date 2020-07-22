@@ -930,6 +930,8 @@ const u8 *const gMonIconTable[] =
     [SPECIES_MIMIKYU_BUSTED] = gMonIcon_MimikyuBusted,
     [SPECIES_LYCANROC_MIDNIGHT] = gMonIcon_LycanrocMidnight,
     [SPECIES_LYCANROC_DUSK] = gMonIcon_LycanrocDusk,
+    [SPECIES_ZYGARDE_10] = gMonIcon_Zygarde10,
+    [SPECIES_ZYGARDE_COMPLETE] = gMonIcon_ZygardeComplete,
     [SPECIES_UNOWN_A] = gMonIcon_UnownA,
     [SPECIES_UNOWN_B] = gMonIcon_UnownB,
     [SPECIES_UNOWN_C] = gMonIcon_UnownC,
@@ -1866,6 +1868,8 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_MIMIKYU_BUSTED] = 1,
     [SPECIES_LYCANROC_MIDNIGHT] = 0,
     [SPECIES_LYCANROC_DUSK] = 0,
+    [SPECIES_ZYGARDE_10] = 1,
+    [SPECIES_ZYGARDE_COMPLETE] = 1,
     [SPECIES_UNOWN_A ... SPECIES_UNOWN_QMARK] = 0,
     [SPECIES_EGG] = 1,
 };

@@ -4614,4 +4614,14 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = 0x45,
         .y_offset = 0x00,
     },
+    [SPECIES_ZYGARDE_10] =
+    {
+        .size = 0x45,
+        .y_offset = 0x00,
+    },
+    [SPECIES_ZYGARDE_COMPLETE] =
+    {
+        .size = 0x55,
+        .y_offset = 0x0,
+    },
 };

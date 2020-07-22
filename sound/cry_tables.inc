@@ -908,6 +908,8 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Mimikyu_Busted
 	cry_not Cry_Lycanroc_Midnight
 	cry_not Cry_Lycanroc_Dusk
+	cry_not Cry_Zygarde_10
+	cry_not Cry_Zygarde_Complete
 
 	.align 2
 gCryTable2:: @ 869EF24
@@ -1818,3 +1820,5 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Mimikyu_Busted
 	cry2_not Cry_Lycanroc_Midnight
 	cry2_not Cry_Lycanroc_Dusk
+	cry2_not Cry_Zygarde_10
+	cry2_not Cry_Zygarde_Complete

@@ -906,4 +906,6 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_MIMIKYU_BUSTED] = _("Mimikyu"),
     [SPECIES_LYCANROC_MIDNIGHT] = _("Lycanroc"),
     [SPECIES_LYCANROC_DUSK] = _("Lycanroc"),
+    [SPECIES_ZYGARDE_10] = _("Zygarde"),
+    [SPECIES_ZYGARDE_COMPLETE] = _("Zygarde"),
 };

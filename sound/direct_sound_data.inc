@@ -4007,6 +4007,14 @@ Cry_Lycanroc_Dusk::
 	.incbin "sound/direct_sound_samples/cries/cry_not_lycanroc_dusk.bin"
 
 	.align 2
+Cry_Zygarde_10::
+	.incbin "sound/direct_sound_samples/cries/cry_not_zygarde_10.bin"
+
+	.align 2
+Cry_Zygarde_Complete::
+	.incbin "sound/direct_sound_samples/cries/cry_not_zygarde_complete.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 
