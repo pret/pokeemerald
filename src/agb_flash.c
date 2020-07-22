@@ -165,7 +165,7 @@ void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
         i--;
     }
 
-    readFlash_Core = (void (*)(vu8 *, u8 *, u32))((s32)readFlash_Core_Buffer + 1);
+    readFlash_Core = (void (*)(vu8 *, u8 *, u32))((uintptr_t)readFlash_Core_Buffer + 1);
 
     src = FLASH_BASE + (sectorNum << gFlash->sector.shift) + offset;
 
@@ -213,7 +213,7 @@ u32 VerifyFlashSector(u16 sectorNum, u8 *src)
         i--;
     }
 
-    verifyFlashSector_Core = (u32 (*)(u8 *, u8 *, u32))((s32)verifyFlashSector_Core_Buffer + 1);
+    verifyFlashSector_Core = (u32 (*)(u8 *, u8 *, u32))((uintptr_t)verifyFlashSector_Core_Buffer + 1);
 
     tgt = FLASH_BASE + (sectorNum << gFlash->sector.shift);
     size = gFlash->sector.size;
