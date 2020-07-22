@@ -41,7 +41,7 @@ u16 ReadFlashId(void)
     u8 (*readFlash1)(u8 *);
 
     SetReadFlash1(readFlash1Buffer);
-    readFlash1 = (u8 (*)(u8 *))((s32)readFlash1Buffer + 1);
+    readFlash1 = (u8 (*)(u8 *))(intptr_t)readFlash1Buffer + 1);
 
     // Enter ID mode.
     FLASH_WRITE(0x5555, 0xAA);
