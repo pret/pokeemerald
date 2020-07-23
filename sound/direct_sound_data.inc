@@ -4015,15 +4015,15 @@ Cry_Zygarde_Complete::
 	.incbin "sound/direct_sound_samples/cries/cry_not_zygarde_complete.bin"
 
 	.align 2
-Deoxys_Attack::
+Cry_Deoxys_Attack::
 	.incbin "sound/direct_sound_samples/cries/cry_deoxys.bin"
 
 	.align 2
-Deoxys_Defense::
+Cry_Deoxys_Defense::
 	.incbin "sound/direct_sound_samples/cries/cry_deoxys.bin"
 
 	.align 2
-Deoxys_Speed::
+Cry_Deoxys_Speed::
 	.incbin "sound/direct_sound_samples/cries/cry_deoxys.bin"
 
 	.align 2
