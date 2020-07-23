@@ -909,4 +909,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_LYCANROC_DUSK] = sLycanrocDuskLevelUpLearnset,
     [SPECIES_ZYGARDE_10] = sZygardeLevelUpLearnset,
     [SPECIES_ZYGARDE_COMPLETE] = sZygardeLevelUpLearnset,
+    [SPECIES_DEOXYS_ATTACK] = sDeoxysAttackLevelUpLearnset,
+    [SPECIES_DEOXYS_DEFENSE] = sDeoxysDefenseLevelUpLearnset,
+    [SPECIES_DEOXYS_SPEED] = sDeoxysSpeedLevelUpLearnset,
 };
