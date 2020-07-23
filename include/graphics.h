@@ -3725,6 +3725,18 @@ extern const u32 gMonFrontPic_ZygardeComplete[];
 extern const u32 gMonBackPic_ZygardeComplete[];
 extern const u32 gMonPalette_ZygardeComplete[];
 extern const u32 gMonShinyPalette_ZygardeComplete[];
+extern const u32 gMonFrontPic_DeoxysAttack[];
+extern const u32 gMonBackPic_DeoxysAttack[];
+extern const u32 gMonPalette_DeoxysAttack[];
+extern const u32 gMonShinyPalette_DeoxysAttack[];
+extern const u32 gMonFrontPic_DeoxysDefense[];
+extern const u32 gMonBackPic_DeoxysDefense[];
+extern const u32 gMonPalette_DeoxysDefense[];
+extern const u32 gMonShinyPalette_DeoxysDefense[];
+extern const u32 gMonFrontPic_DeoxysSpeed[];
+extern const u32 gMonBackPic_DeoxysSpeed[];
+extern const u32 gMonPalette_DeoxysSpeed[];
+extern const u32 gMonShinyPalette_DeoxysSpeed[];
 
 extern const u8 gMonIcon_QuestionMark[];
 extern const u8 gMonIcon_Bulbasaur[];
@@ -4662,6 +4674,9 @@ extern const u8 gMonIcon_LycanrocMidnight[];
 extern const u8 gMonIcon_LycanrocDusk[];
 extern const u8 gMonIcon_Zygarde10[];
 extern const u8 gMonIcon_ZygardeComplete[];
+extern const u8 gMonIcon_DeoxysAttack[];
+extern const u8 gMonIcon_DeoxysDefense[];
+extern const u8 gMonIcon_DeoxysSpeed[];
 
 extern const u8 gMonFootprint_QuestionMark[];
 extern const u8 gMonFootprint_Bulbasaur[];
