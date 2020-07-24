@@ -1718,7 +1718,7 @@ static void LoadContestResultsTilemaps(void)
 // Represented on results board as stars
 static u8 GetNumPreliminaryPoints(u8 monIndex, bool8 capPoints)
 {
-    u32 condition = gContestMonConditions[monIndex] << 16;
+    u32 condition = gContestMonRound1Points[monIndex] << 16;
     u32 numStars = condition / 0x3F;
 
     if (numStars & 0xFFFF)
@@ -1966,7 +1966,7 @@ static void CalculateContestantsResultData(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        relativePoints = (gContestMonConditions[i] * 1000) / abs(highestPoints);
+        relativePoints = (gContestMonRound1Points[i] * 1000) / abs(highestPoints);
         if (relativePoints % 10 > 4)
             relativePoints += 10;
         (*sContestResults->monResults)[i].relativePreliminaryPoints = relativePoints / 10;
@@ -2206,7 +2206,7 @@ void TryEnterContestMon(void)
     // Nonzero eligibility can still be non-eligibile, if mon is fainted or egg
     if (eligibility)
     {
-        sub_80DAB8C(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
+        SetContestants(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
         sub_80DB09C(gSpecialVar_ContestCategory);
     }
 
@@ -2324,7 +2324,7 @@ void GetContestMonConditionRanking(void)
 
     for (i = 0, rank = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (gContestMonConditions[gSpecialVar_0x8006] < gContestMonConditions[i])
+        if (gContestMonRound1Points[gSpecialVar_0x8006] < gContestMonRound1Points[i])
             rank++;
     }
 
@@ -2333,7 +2333,7 @@ void GetContestMonConditionRanking(void)
 
 void GetContestMonCondition(void)
 {
-    gSpecialVar_0x8004 = gContestMonConditions[gSpecialVar_0x8006];
+    gSpecialVar_0x8004 = gContestMonRound1Points[gSpecialVar_0x8006];
 }
 
 void GetContestWinnerId(void)
@@ -2472,13 +2472,13 @@ static void sub_80F85BC(u8 taskId)
 
     gUnknown_02039F2B = sub_80F86E0(sp4);
     sub_80DB09C(gSpecialVar_ContestCategory);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FCF40, sub_80F86B8);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, sub_80F86B8);
 }
 
 static void sub_80F86B8(u8 taskId)
 {
     SortContestants(FALSE);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FCFD0, sub_80F8714);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateTurnOrder, sub_80F8714);
 }
 
 u8 sub_80F86E0(u8 *arg0)

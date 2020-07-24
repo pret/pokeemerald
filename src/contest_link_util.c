@@ -70,29 +70,30 @@ static void sub_81D9F68(u8 taskId)
     u8 i;
     u8 rank;
     int gameCleared;
-    u8 data1[4];
-    u8 data2[4];
+    u8 contestCategories[CONTESTANT_COUNT];
+    u8 data2[CONTESTANT_COUNT];
 
-    memset(data1, 0, sizeof(data1));
+    memset(contestCategories, 0, sizeof(contestCategories));
     memset(data2, 0, sizeof(data2));
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
-        data1[i] = gTasks[taskId].data[i + 1];
+        contestCategories[i] = gTasks[taskId].data[i + 1];
     
+    // Ensure all players are doing the same category
     i = 0;
     if (i < gNumLinkContestPlayers)
     {
         while (++i < gNumLinkContestPlayers)
         {
-            if (data1[0] != data1[i])
+            if (contestCategories[0] != contestCategories[i])
                 break;
         }
     }
 
     if (i == gNumLinkContestPlayers)
-        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8004 = FALSE;
     else
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_0x8004 = TRUE;
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
         data2[i] = gTasks[taskId].data[i + 5];
@@ -119,7 +120,7 @@ static void sub_81D9F68(u8 taskId)
             }
         }
 
-        sub_80DACBC(data1[0], rank, gameCleared);
+        SetLinkAIContestants(contestCategories[0], rank, gameCleared);
     }
 
     gUnknown_02039F2B = sub_80F86E0(data2);
@@ -132,13 +133,13 @@ static void sub_81D9F68(u8 taskId)
 static void sub_81DA10C(u8 taskId)
 {
     sub_80DB09C(gSpecialVar_ContestCategory);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FCF40, sub_81DA138);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, sub_81DA138);
 }
 
 static void sub_81DA138(u8 taskId)
 {
     SortContestants(FALSE);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FCFD0, sub_80F8714);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateTurnOrder, sub_80F8714);
 }
 
 static void sub_81DA160(u8 taskId)

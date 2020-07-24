@@ -10,11 +10,11 @@ extern const u8 *gAIScriptPtr;
 extern const u8 *gContestAIChecks[];
 
 static void ContestAICmd_score(void);
-static void ContestAICmd_get_turn(void);
-static void ContestAICmd_if_turn_less_than(void);
-static void ContestAICmd_if_turn_more_than(void);
-static void ContestAICmd_if_turn_eq(void);
-static void ContestAICmd_if_turn_not_eq(void);
+static void ContestAICmd_get_appeal_num(void);
+static void ContestAICmd_if_appeal_num_less_than(void);
+static void ContestAICmd_if_appeal_num_more_than(void);
+static void ContestAICmd_if_appeal_num_eq(void);
+static void ContestAICmd_if_appeal_num_not_eq(void);
 static void ContestAICmd_get_excitement(void);
 static void ContestAICmd_if_excitement_less_than(void);
 static void ContestAICmd_if_excitement_more_than(void);
@@ -151,11 +151,11 @@ typedef void (* ContestAICmdFunc)(void);
 static const ContestAICmdFunc sContestAICmdTable[] =
 {
     ContestAICmd_score,                             // 0x00
-    ContestAICmd_get_turn,                          // 0x01
-    ContestAICmd_if_turn_less_than,                 // 0x02
-    ContestAICmd_if_turn_more_than,                 // 0x03
-    ContestAICmd_if_turn_eq,                        // 0x04
-    ContestAICmd_if_turn_not_eq,                    // 0x05
+    ContestAICmd_get_appeal_num,                    // 0x01
+    ContestAICmd_if_appeal_num_less_than,           // 0x02
+    ContestAICmd_if_appeal_num_more_than,           // 0x03
+    ContestAICmd_if_appeal_num_eq,                  // 0x04
+    ContestAICmd_if_appeal_num_not_eq,              // 0x05
     ContestAICmd_get_excitement,                    // 0x06
     ContestAICmd_if_excitement_less_than,           // 0x07
     ContestAICmd_if_excitement_more_than,           // 0x08
@@ -324,7 +324,7 @@ u8 ContestAI_GetActionToUse(void)
     {
         // Randomly choose a move index. If it's the move
         // with the highest (or tied highest) score, return
-        u8 moveIdx = Random() & (MAX_MON_MOVES - 1); // % 4 doesn't match
+        u8 moveIdx = Random() & (MAX_MON_MOVES - 1); // % MAX_MON_MOVES doesn't match
         u8 score = eContestAI.moveScores[moveIdx];
         int i;
         for (i = 0; i < MAX_MON_MOVES; i++)
@@ -404,15 +404,15 @@ static void ContestAICmd_score(void)
     gAIScriptPtr += 2;
 }
 
-static void ContestAICmd_get_turn(void)
+static void ContestAICmd_get_appeal_num(void)
 {
-    eContestAI.scriptResult = eContest.turnNumber;
+    eContestAI.scriptResult = eContest.appealNumber;
     gAIScriptPtr += 1;
 }
 
-static void ContestAICmd_if_turn_less_than(void)
+static void ContestAICmd_if_appeal_num_less_than(void)
 {
-    ContestAICmd_get_turn();
+    ContestAICmd_get_appeal_num();
 
     if (eContestAI.scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -420,9 +420,9 @@ static void ContestAICmd_if_turn_less_than(void)
         gAIScriptPtr += 5;
 }
 
-static void ContestAICmd_if_turn_more_than(void)
+static void ContestAICmd_if_appeal_num_more_than(void)
 {
-    ContestAICmd_get_turn();
+    ContestAICmd_get_appeal_num();
 
     if (eContestAI.scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -430,9 +430,9 @@ static void ContestAICmd_if_turn_more_than(void)
         gAIScriptPtr += 5;
 }
 
-static void ContestAICmd_if_turn_eq(void)
+static void ContestAICmd_if_appeal_num_eq(void)
 {
-    ContestAICmd_get_turn();
+    ContestAICmd_get_appeal_num();
 
     if (eContestAI.scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -440,9 +440,9 @@ static void ContestAICmd_if_turn_eq(void)
         gAIScriptPtr += 5;
 }
 
-static void ContestAICmd_if_turn_not_eq(void)
+static void ContestAICmd_if_appeal_num_not_eq(void)
 {
-    ContestAICmd_get_turn();
+    ContestAICmd_get_appeal_num();
 
     if (eContestAI.scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -636,7 +636,7 @@ static void ContestAICmd_unk_19(void)
 
 static void ContestAICmd_unk_1A(void)
 {
-    eContestAI.scriptResult = gContestMonConditions[eContestAI.contestantId];
+    eContestAI.scriptResult = gContestMonRound1Points[eContestAI.contestantId];
     gAIScriptPtr += 1;
 }
 
@@ -1357,7 +1357,7 @@ static void ContestAICmd_unk_5E(void)
 {
     u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
-    eContestAI.scriptResult = gContestMonConditions[contestant] - gContestMonConditions[eContestAI.contestantId];
+    eContestAI.scriptResult = gContestMonRound1Points[contestant] - gContestMonRound1Points[eContestAI.contestantId];
     gAIScriptPtr += 2;
 }
 

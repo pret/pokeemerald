@@ -158,7 +158,7 @@ void sub_80F8970(void)
     u8 r7;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        conditions[i] = gContestMonConditions[i];
+        conditions[i] = gContestMonRound1Points[i];
 
     for (i = 0; i < CONTESTANT_COUNT - 1; i++)
     {
@@ -195,7 +195,7 @@ void sub_80F8970(void)
     var2 = r8;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (condition == gContestMonConditions[i])
+        if (condition == gContestMonRound1Points[i])
         {
             if (var2 == 1)
                 break;

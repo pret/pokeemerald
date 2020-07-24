@@ -750,7 +750,7 @@ static void ContestEffect_NextAppealEarlier(void)
     s8 j;
     u8 turnOrder[CONTESTANT_COUNT];
 
-    if (eContest.turnNumber != 4)
+    if (eContest.appealNumber != CONTEST_LAST_APPEAL)
     {
         for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
@@ -792,7 +792,7 @@ static void ContestEffect_NextAppealLater(void)
     s8 j;
     u8 turnOrder[CONTESTANT_COUNT];
 
-    if (eContest.turnNumber != 4)
+    if (eContest.appealNumber != CONTEST_LAST_APPEAL)
     {
         for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
@@ -841,7 +841,7 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
     u8 turnOrder[CONTESTANT_COUNT];
     u8 unselectedContestants[CONTESTANT_COUNT];
 
-    if (eContest.turnNumber != 4)
+    if (eContest.appealNumber != CONTEST_LAST_APPEAL)
     {
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
