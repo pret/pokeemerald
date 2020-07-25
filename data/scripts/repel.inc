@@ -3,4 +3,4 @@ EventScript_RepelWoreOff:: @ 82A4B2A
 	end
 
 Text_RepelWoreOff: @ 82A4B33
-	.string "REPEL's effect wore off…$"
+	.string "Repel's effect wore off…$"
