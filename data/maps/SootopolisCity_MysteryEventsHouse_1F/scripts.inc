@@ -1,3 +1,5 @@
+.set LOCALID_OLD_MAN, 1
+
 SootopolisCity_MysteryEventsHouse_1F_MapScripts:: @ 8227953
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_1F_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_1F_OnFrame
@@ -13,14 +15,14 @@ SootopolisCity_MysteryEventsHouse_1F_OnTransition: @ 822795E
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout:: @ 822797D
 	setvar VAR_TEMP_1, 1
-	setobjectxyperm 1, 3, 2
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_OLD_MAN, 3, 2
+	setobjectmovementtype LOCALID_OLD_MAN, MOVEMENT_TYPE_FACE_DOWN
 	setmaplayoutindex LAYOUT_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F_STAIRS_UNBLOCKED
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_MoveOldManToDoor:: @ 8227991
-	setobjectxyperm 1, 2, 2
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_OLD_MAN, 2, 2
+	setobjectmovementtype LOCALID_OLD_MAN, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_OnFrame: @ 822799D
@@ -33,9 +35,9 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle:: @ 82279
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerExitStairs
 	waitmovement 0
-	applymovement 1, SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer
+	applymovement LOCALID_OLD_MAN, SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer
 	waitmovement 0
-	copyobjectxytoperm 1
+	copyobjectxytoperm LOCALID_OLD_MAN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	compare VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1

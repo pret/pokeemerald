@@ -116,7 +116,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 
 MauvilleCity_Gym_EventScript_GiveShockWave2:: @ 820DF8D
 	giveitem ITEM_TM34
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
@@ -125,7 +125,7 @@ MauvilleCity_Gym_EventScript_GiveShockWave2:: @ 820DF8D
 
 MauvilleCity_Gym_EventScript_GiveShockWave:: @ 820DFB1
 	giveitem ITEM_TM34
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34

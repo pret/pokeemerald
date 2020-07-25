@@ -1,3 +1,8 @@
+.set LOCALID_ATTENDANT, 1
+.set LOCALID_NURSE, 2
+.set LOCALID_GIRL, 4
+.set LOCALID_MAN, 5
+
 TrainerHill_Entrance_MapScripts:: @ 82680AC
 	map_script MAP_SCRIPT_ON_RESUME, TrainerHill_Entrance_OnResume
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, TrainerHill_Entrance_OnReturn
@@ -36,10 +41,10 @@ TrainerHill_Entrance_EventScript_PlayerDontFaceAttendant:: @ 826811A
 	end
 
 TrainerHill_Entrance_OnReturn: @ 826811B
-	addobject 2
-	addobject 1
-	addobject 5
-	addobject 4
+	addobject LOCALID_NURSE
+	addobject LOCALID_ATTENDANT
+	addobject LOCALID_MAN
+	addobject LOCALID_GIRL
 	end
 
 TrainerHill_Entrance_OnLoad: @ 8268128
@@ -99,7 +104,7 @@ TrainerHill_Entrance_EventScript_EndExitChallenge:: @ 82681EE
 	end
 
 TrainerHill_Entrance_EventScript_Nurse:: @ 82681EF
-	setvar VAR_0x800B, 2
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

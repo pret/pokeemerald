@@ -1,3 +1,8 @@
+@ Local IDs are the same for both players houses
+.set LOCALID_MOM, 1
+.set LOCALID_DAD, 5
+.set LOCALID_MOM_2F, 14
+
 PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet:: @ 82926FE
 	setvar VAR_LITTLEROOT_INTRO_STATE, 5
 	return
@@ -74,7 +79,7 @@ PlayersHouse_2F_EventScript_WallClock:: @ 8292799
 	end
 
 PlayersHouse_2F_EventScript_MomComesUpstairsMale:: @ 82927DF
-	setvar VAR_0x8008, 14
+	setvar VAR_0x8008, LOCALID_MOM_2F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersMale
 	waitmovement 0
@@ -87,7 +92,7 @@ PlayersHouse_2F_EventScript_MomComesUpstairsMale:: @ 82927DF
 	return
 
 PlayersHouse_2F_EventScript_MomComesUpstairsFemale:: @ 829280F
-	setvar VAR_0x8008, 14
+	setvar VAR_0x8008, LOCALID_MOM_2F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersFemale
 	waitmovement 0
@@ -514,14 +519,14 @@ PlayersHouse_1F_EventScript_AirLatiBroadcast:: @ 8292C72
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale:: @ 8292C76
 	setvar VAR_0x8008, MALE
-	setvar VAR_0x8009, 5  @ Dad object event ID
-	setvar VAR_0x800A, 1  @ Mom object event ID
+	setvar VAR_0x8009, LOCALID_DAD
+	setvar VAR_0x800A, LOCALID_MOM
 	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale:: @ 8292C86
 	setvar VAR_0x8008, FEMALE
-	setvar VAR_0x8009, 5  @ Dad object event ID
-	setvar VAR_0x800A, 1  @ Mom object event ID
+	setvar VAR_0x8009, LOCALID_DAD
+	setvar VAR_0x800A, LOCALID_MOM
 	return
 
 PlayersHouse_1F_EventScript_DadApproachPlayerMale:: @ 8292C96

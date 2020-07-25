@@ -58,7 +58,7 @@ PacifidlogTown_House2_EventScript_PutInEffort:: @ 8203845
 PacifidlogTown_House2_EventScript_GiveFrustration:: @ 820384F
 	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM21
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special SetPacifidlogTMReceivedDay

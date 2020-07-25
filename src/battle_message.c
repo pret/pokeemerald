@@ -1267,10 +1267,12 @@ static const u8 sText_PkmnGettingIntoPosition[] = _("{B_SCR_ACTIVE_NAME_WITH_PRE
 static const u8 sText_PkmnBeganGrowlingDeeply[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} began growling deeply!");
 static const u8 sText_PkmnEagerForMore[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is eager for more!");
 
-const u16 gStringIds_85CCF0A[] =
+const u16 gBattlePalaceFlavorTextTable[] =
 {
-    STRINGID_GLINTAPPEARSINEYE, STRINGID_PKMNGETTINGINTOPOSITION,
-    STRINGID_PKMNBEGANGROWLINGDEEPLY, STRINGID_PKMNEAGERFORMORE
+    STRINGID_GLINTAPPEARSINEYE, 
+    STRINGID_PKMNGETTINGINTOPOSITION,
+    STRINGID_PKMNBEGANGROWLINGDEEPLY, 
+    STRINGID_PKMNEAGERFORMORE
 };
 
 static const u8 sText_RefIfNothingIsDecided[] = _("Referee: If nothing is decided in\n3 turns, we will go to judging!");

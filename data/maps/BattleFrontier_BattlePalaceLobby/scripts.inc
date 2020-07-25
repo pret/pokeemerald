@@ -1,3 +1,6 @@
+.set LOCALID_ATTENDANT_SINGLES, 1
+.set LOCALID_ATTENDANT_DOUBLES, 6
+
 BattleFrontier_BattlePalaceLobby_MapScripts:: @ 824D77E
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePalaceLobby_OnWarp
@@ -269,11 +272,11 @@ BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor:: @ 824DBBC
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant:: @ 824DC23
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant:: @ 824DC29
-	setvar VAR_LAST_TALKED, 6
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor:: @ 824DC2F

@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 VerdanturfTown_BattleTentLobby_MapScripts:: @ 82016D0
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentLobby_OnWarp
@@ -195,12 +197,12 @@ VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge:: @ 8201A3F
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor:: @ 8201A41
-	applymovement 1, VerdanturfTown_BattleTentLobby_Movement_WalkToDoor
+	applymovement LOCALID_ATTENDANT, VerdanturfTown_BattleTentLobby_Movement_WalkToDoor
 	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_WalkToDoor
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
-	applymovement 1, VerdanturfTown_BattleTentLobby_Movement_AttendantEnterDoor
+	applymovement LOCALID_ATTENDANT, VerdanturfTown_BattleTentLobby_Movement_AttendantEnterDoor
 	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 6, 1

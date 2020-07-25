@@ -1,3 +1,7 @@
+.set LOCALID_INVISIBLE_BRIDGE_KECLEON, 30
+.set LOCALID_STEVEN, 31
+.set LOCALID_VISIBLE_BRIDGE_KECLEON, 36
+
 Route120_MapScripts:: @ 81F53EC
 	map_script MAP_SCRIPT_ON_RESUME, Route120_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route120_OnTransition
@@ -27,8 +31,8 @@ Route120_EventScript_RemoveBridgeKecleon:: @ 81F5449
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject 30 @ Invisible Bridge Kecleon
-	removeobject 36 @ Visible Bridge Kecleon
+	removeobject LOCALID_INVISIBLE_BRIDGE_KECLEON
+	removeobject LOCALID_VISIBLE_BRIDGE_KECLEON
 	return
 
 Route120_EventScript_RemoveKecleon:: @ 81F5460
@@ -57,7 +61,7 @@ Route120_EventScript_SetBridgeClearMetatiles:: @ 81F54A3
 	return
 
 Route120_EventScript_SetBridgeKecleonMovement:: @ 81F54C8
-	setobjectmovementtype 36, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype LOCALID_VISIBLE_BRIDGE_KECLEON, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 Route120_OnTransition: @ 81F54CD
@@ -146,7 +150,7 @@ Route120_EventScript_GiveIapapaBerry:: @ 81F55F6
 
 Route120_EventScript_GiveBerry:: @ 81F5601
 	giveitem VAR_0x8004
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_120_RECEIVED_BERRY
 	msgbox Route120_Text_BerryIsRareRaiseItWithCare, MSGBOX_DEFAULT
@@ -196,14 +200,14 @@ Route120_EventScript_StevenBattleKecleon:: @ 81F568B
 	call_if_eq Route120_EventScript_PlayerApproachKecleonNorth
 	compare VAR_FACING, DIR_WEST
 	call_if_eq Route120_EventScript_PlayerApproachKecleonWest
-	applymovement 31, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 20
 	msgbox Route120_Text_StevenUsedDevonScope, MSGBOX_DEFAULT
 	closemessage
-	applymovement 30, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_INVISIBLE_BRIDGE_KECLEON, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement 30, Movement_KecleonAppears
+	applymovement LOCALID_INVISIBLE_BRIDGE_KECLEON, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2
@@ -226,14 +230,14 @@ Route120_EventScript_StevenBattleKecleon:: @ 81F568B
 
 Route120_EventScript_RemoveBridgeKecleonPostBattle:: @ 81F571C
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject 30 @ Invisible Bridge Kecleon
-	removeobject 36 @ Visible Bridge Kecleon
+	removeobject LOCALID_INVISIBLE_BRIDGE_KECLEON
+	removeobject LOCALID_VISIBLE_BRIDGE_KECLEON
 	fadescreenswapbuffers FADE_FROM_BLACK
 	goto Route120_EventScript_StevenGiveDeconScope
 	end
 
 Route120_EventScript_StevenGiveDeconScope:: @ 81F572C
-	applymovement 31, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
@@ -241,13 +245,13 @@ Route120_EventScript_StevenGiveDeconScope:: @ 81F572C
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
 	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
-	removeobject 31
+	removeobject LOCALID_STEVEN
 	waitfieldeffect FLDEFF_NPCFLY_OUT
 	setmetatile 13, 15, METATILE_Fortree_WoodBridge1_Top, 0
 	setmetatile 12, 16, METATILE_Fortree_WoodBridge1_Bottom, 0

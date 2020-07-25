@@ -1,3 +1,5 @@
+.set LOCALID_NURSE, 1
+
 MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8210E5B
 	map_script MAP_SCRIPT_ON_TRANSITION, MauvilleCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -13,9 +15,8 @@ MauvilleCity_PokemonCenter_1F_EventScript_SetMauvilleOldManGfx:: @ 8210E74
 	special ScrSpecial_SetMauvilleOldManObjEventGfx
 	end
 
-@ VAR_0x800B is the Nurse's object event id
 MauvilleCity_PokemonCenter_1F_EventScript_Nurse:: @ 8210E78
-	setvar VAR_0x800B, 1
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

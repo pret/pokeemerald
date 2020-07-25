@@ -121,7 +121,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 
 SootopolisCity_Gym_1F_EventScript_GiveWaterPulse:: @ 8224FD4
 	giveitem ITEM_TM03
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03
@@ -129,7 +129,7 @@ SootopolisCity_Gym_1F_EventScript_GiveWaterPulse:: @ 8224FD4
 
 SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2:: @ 8224FF7
 	giveitem ITEM_TM03
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03

@@ -1,3 +1,5 @@
+.set LOCALID_NURSE, 1
+
 PetalburgCity_PokemonCenter_1F_MapScripts:: @ 82079E8
 	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -8,9 +10,8 @@ PetalburgCity_PokemonCenter_1F_OnTransition: @ 82079F3
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-@ VAR_0x800B is the Nurse's object event id
 PetalburgCity_PokemonCenter_1F_EventScript_Nurse:: @ 82079FC
-	setvar VAR_0x800B, 1
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -30,7 +31,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_Woman:: @ 8207A1C
 	faceplayer
 	msgbox PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, IsStarterInParty
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo
 	release
 	end

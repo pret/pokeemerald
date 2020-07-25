@@ -1,3 +1,5 @@
+.set LOCALID_NURSE, 1
+
 LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 81FFAFA
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -8,9 +10,8 @@ LavaridgeTown_PokemonCenter_1F_OnTransition: @ 81FFB05
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-@ VAR_0x800B is the Nurse's object event id
 LavaridgeTown_PokemonCenter_1F_EventScript_Nurse:: @ 81FFB0E
-	setvar VAR_0x800B, 1
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

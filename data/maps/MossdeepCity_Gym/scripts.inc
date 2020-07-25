@@ -92,7 +92,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated:: @ 82208D1
 
 MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
 	giveitem ITEM_TM04
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
@@ -101,7 +101,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
 
 MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
 	giveitem ITEM_TM04
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04

@@ -1,3 +1,5 @@
+.set LOCALID_WALLYS_UNCLE, 1
+
 PetalburgCity_WallysHouse_MapScripts:: @ 8204229
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_WallysHouse_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_WallysHouse_OnWarp
@@ -9,7 +11,7 @@ PetalburgCity_WallysHouse_OnWarp: @ 8204234
 
 PetalburgCity_WallysHouse_EventScript_PlayerUncleFaceEachOther:: @ 820423E
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
-	turnobject 1, DIR_WEST
+	turnobject LOCALID_WALLYS_UNCLE, DIR_WEST
 	end
 
 PetalburgCity_WallysHouse_OnFrame: @ 8204247

@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattlePalaceCorridor_MapScripts:: @ 824F4A3
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceCorridor_OnFrame
 	.byte 0
@@ -8,7 +10,7 @@ BattleFrontier_BattlePalaceCorridor_OnFrame: @ 824F4A9
 
 BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor:: @ 824F4B3
 	delay 16
-	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_EnterCorridor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_EnterCorridor
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_EnterCorridor
 	waitmovement 0
 	lockall
@@ -27,12 +29,12 @@ BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor:: @ 824F4B3
 	frontier_get FRONTIER_DATA_LVL_MODE
 	compare VAR_RESULT, FRONTIER_LVL_OPEN
 	goto_if_eq BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom
-	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkTo50BattleRoom
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkTo50BattleRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkTo50BattleRoom
 	waitmovement 0
 	opendoor 6, 3
 	waitdooranim
-	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerEnterBattleRoom
 	waitmovement 0
 	closedoor 6, 3
@@ -40,12 +42,12 @@ BattleFrontier_BattlePalaceCorridor_EventScript_WalkThroughCorridor:: @ 824F4B3
 	goto BattleFrontier_BattlePalaceCorridor_EventScript_WarpToBattleRoom
 
 BattleFrontier_BattlePalaceCorridor_EventScript_WalkToOpenBattleRoom:: @ 824F553
-	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkToOpenBattleRoom
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantWalkToOpenBattleRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerWalkToOpenBattleRoom
 	waitmovement 0
 	opendoor 10, 3
 	waitdooranim
-	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_PlayerEnterBattleRoom
 	waitmovement 0
 	closedoor 10, 3

@@ -1,3 +1,5 @@
+.set LOCALID_SCOTT, 1
+
 BattleFrontier_ScottsHouse_MapScripts:: @ 82636A7
 	.byte 0
 
@@ -161,7 +163,7 @@ BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier:: @ 8263943
 	compare VAR_FACING, DIR_WEST
 	call_if_eq BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest
 	msgbox BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal, MSGBOX_DEFAULT
-	applymovement 1, Common_Movement_FacePlayer
+	applymovement LOCALID_SCOTT, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing, MSGBOX_DEFAULT
 	compare VAR_SCOTT_STATE, 13
@@ -207,22 +209,22 @@ BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints:: @ 82639F8
 	end
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth:: @ 8263A13
-	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth:: @ 8263A1E
-	applymovement 1, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast:: @ 8263A29
-	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest:: @ 8263A34
-	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
