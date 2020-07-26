@@ -683,6 +683,13 @@
 	.byte \battler
 	.endm
 	
+	.macro if_has_move_with_accuracy_lt battler:req, value:req, ptr:req
+	.byte 0x79
+	.byte \battler
+	.byte \value
+	.4byte \ptr
+	.endm
+	
 @ useful script macros
 	.macro if_has_physical_move battler:req, ptr:req
 	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr

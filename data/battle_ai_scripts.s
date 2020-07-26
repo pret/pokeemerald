@@ -268,6 +268,18 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_TRICK_ROOM, AI_CBM_TrickRoom
 	if_effect EFFECT_WONDER_ROOM, AI_CBM_WonderRoom
 	if_effect EFFECT_MAGIC_ROOM, AI_CBM_MagicRoom
+	if_effect EFFECT_SOAK, AI_CBM_Soak
+	if_effect EFFECT_LOCK_ON, AI_CBM_LockOn
+	end
+	
+AI_CBM_LockOn:
+	if_status3 AI_TARGET, STATUS3_ALWAYS_HITS, Score_Minus10
+	if_ability AI_TARGET, ABILITY_NO_GUARD, Score_Minus10
+	if_ability AI_USER, ABILITY_NO_GUARD, Score_Minus10
+	end
+	
+AI_CBM_Soak:
+	if_type AI_TARGET, TYPE_WATER, Score_Minus10
 	end
 	
 AI_CBM_TrickRoom:
@@ -1122,6 +1134,7 @@ AI_CheckViability:
 	if_effect EFFECT_MIRROR_COAT, AI_CV_MirrorCoat
 	if_effect EFFECT_SKULL_BASH, AI_CV_ChargeUpMove
 	if_effect EFFECT_SOLARBEAM, AI_CV_ChargeUpMove
+	if_effect EFFECT_GEOMANCY, AI_CV_Geomancy
 	if_effect EFFECT_SEMI_INVULNERABLE, AI_CV_SemiInvulnerable
 	if_effect EFFECT_SOFTBOILED, AI_CV_Heal
 	if_effect EFFECT_FAKE_OUT, AI_CV_FakeOut
@@ -1970,6 +1983,7 @@ AI_CV_Rest_End:
 	end
 
 AI_CV_OneHitKO:
+	if_status3 AI_TARGET, STATUS3_ALWAYS_HITS, Score_Plus5
 	end
 
 AI_CV_SuperFang:
@@ -2034,6 +2048,9 @@ AI_CV_FocusEnergy2:
 	goto AI_CV_FocusEnergy3
 
 AI_CV_Swagger:
+	if_doesnt_have_move_with_effect AI_USER, EFFECT_FOUL_PLAY, AI_CV_Swagger2
+	score +1
+AI_CV_Swagger2:
 	if_has_move AI_USER, MOVE_PSYCH_UP, AI_CV_SwaggerHasPsychUp
 
 AI_CV_Flatter:
@@ -2386,10 +2403,32 @@ AI_CV_PainSplit_ScoreDown1:
 
 AI_CV_PainSplit_End:
 	end
+	
+AI_EncourageIfHasOHKO:
+	if_level_cond 1, AI_EncourageIfHasOHKORet
+	if_has_move_with_effect AI_USER, EFFECT_OHKO, Score_Plus3
+AI_EncourageIfHasOHKORet:
+	end
+	
+AI_EncourageIfHasLowAccuracyMove:
+	if_ability AI_USER, ABILITY_COMPOUND_EYES, AI_EncourageIfHasVeryLowAccuracyMove
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_WIDE_LENS, AI_EncourageIfHasVeryLowAccuracyMove
+	if_equal HOLD_EFFECT_ZOOM_LENS, AI_EncourageIfHasVeryLowAccuracyMove
+	if_has_move_with_accuracy_lt AI_USER, 86, Score_Plus3
+	if_has_move_with_accuracy_lt AI_USER, 91, Score_Plus1
+	goto Score_Minus1
+AI_EncourageIfHasVeryLowAccuracyMove:
+	if_has_move_with_accuracy_lt AI_USER, 81, Score_Plus3
+	if_has_move_with_accuracy_lt AI_USER, 86, Score_Plus1
+	goto Score_Minus1
 
 AI_CV_LockOn:
+	call AI_EncourageIfHasOHKO
+	call AI_EncourageIfHasLowAccuracyMove
+AI_CV_LockOn2:
 	if_random_less_than 128, AI_CV_LockOn_End
-	score +2
+	score +1
 
 AI_CV_LockOn_End:
 	end
@@ -2854,8 +2893,15 @@ AI_CV_MirrorCoat_ScoreDown1:
 
 AI_CV_MirrorCoat_End:
 	end
+	
+AI_CV_Geomancy:
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_POWER_HERB, AI_CV_ChargeUpMove_ScoreUp2
+	end
 
 AI_CV_ChargeUpMove:
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_POWER_HERB, AI_CV_ChargeUpMove_ScoreUp2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_ChargeUpMove_ScoreDown2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_ChargeUpMove_ScoreDown2
 	if_has_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_ChargeUpMove_ScoreDown2
@@ -2868,8 +2914,13 @@ AI_CV_ChargeUpMove_ScoreDown2:
 
 AI_CV_ChargeUpMove_End:
 	end
+AI_CV_ChargeUpMove_ScoreUp2:
+	score +2
+	goto AI_CV_ChargeUpMove_End
 
 AI_CV_SemiInvulnerable:
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_POWER_HERB, AI_CV_ChargeUpMove_ScoreUp2
 	if_doesnt_have_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_SemiInvulnerable2
 	score -1
 	goto AI_CV_SemiInvulnerable_End
