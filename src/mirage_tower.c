@@ -690,7 +690,7 @@ static void DoFossilFallAndSink(u8 taskId)
         if (gSprites[sUnknown_0203CF0C->spriteId].callback != SpriteCallbackDummy)
             return;
         DestroySprite(&gSprites[sUnknown_0203CF0C->spriteId]);
-        FREE_AND_SET_NULL(sUnknown_0203CF0C->unkC);;
+        FREE_AND_SET_NULL(sUnknown_0203CF0C->unkC);
         FREE_AND_SET_NULL(sUnknown_0203CF0C->frameImage);
         FREE_AND_SET_NULL(sUnknown_0203CF0C->frameImageTiles);
         FREE_AND_SET_NULL(sUnknown_0203CF0C);
