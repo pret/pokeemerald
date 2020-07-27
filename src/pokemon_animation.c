@@ -783,7 +783,7 @@ static const u8 sBackAnimationIds[] =
     0x94, 0x95, 0x96, // 0x19
 };
 
-static const u8 sBackAnimNatureModTable[] =
+static const u8 sBackAnimNatureModTable[NUM_NATURES] =
 {
     [NATURE_HARDY] = 0x00,
     [NATURE_LONELY] = 0x02,

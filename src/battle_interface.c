@@ -2797,8 +2797,8 @@ static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTi
 {
     u32 windowId, i;
     u8 *windowTileData;
-    u8 text1[MAX_CHARS_PRINTED + 1];
-    u8 text2[MAX_CHARS_PRINTED + 1];
+    u8 text1[MAX_CHARS_PRINTED + 2];
+    u8 text2[MAX_CHARS_PRINTED + 2];
 
     for (i = 0; i < MAX_CHARS_PRINTED + 1; i++)
     {

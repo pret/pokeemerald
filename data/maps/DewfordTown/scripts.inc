@@ -1,3 +1,15 @@
+@ Sailing to and from Dewford uses local IDs from different maps
+@ e.g. Route 104's sail to Dewford script references local IDs from Dewford's map
+@ All of these local IDs are labeled here
+.equ LOCALID_BRINEY_DEWFORD, 2
+.equ LOCALID_BOAT_DEWFORD, 4
+
+.equ LOCALID_BOAT_R109, 1 
+.equ LOCALID_BRINEY_R109, 2
+
+.equ LOCALID_BOAT_R104, 7
+.equ LOCALID_BRINEY_R104, 8
+
 DewfordTown_MapScripts:: @ 81E9507
 	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
 	.byte 0
@@ -116,16 +128,16 @@ DewfordTown_EventScript_FishingNotSoGood:: @ 81E9656
 
 DewfordTown_EventScript_SailToPetalburg:: @ 81E9660
 	call EventScript_BackupMrBrineyLocation
-	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority LOCALID_BRINEY_DEWFORD, MAP_DEWFORD_TOWN, 0
 	setobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN, 0
-	applymovement 2, DewfordTown_Movement_BrineyBoardBoat
+	applymovement LOCALID_BRINEY_DEWFORD, DewfordTown_Movement_BrineyBoardBoat
 	waitmovement 0
-	removeobject 2
+	removeobject LOCALID_BRINEY_DEWFORD
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_PlayerBoardBoat
 	waitmovement 0
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
 	call Common_EventScript_PlayBrineysBoatMusic
-	applymovement 4, DewfordTown_Movement_SailToPetalburg
+	applymovement LOCALID_BOAT_DEWFORD, DewfordTown_Movement_SailToPetalburg
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_SailToPetalburg
 	waitmovement 0
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE104
@@ -137,7 +149,7 @@ DewfordTown_EventScript_SailToPetalburg:: @ 81E9660
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	hideobjectat 4, MAP_DEWFORD_TOWN
+	hideobjectat LOCALID_BOAT_DEWFORD, MAP_DEWFORD_TOWN
 	setvar VAR_BOARD_BRINEY_BOAT_STATE, 2
 	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
@@ -148,39 +160,39 @@ DewfordTown_EventScript_SailToPetalburg:: @ 81E9660
 
 DewfordTown_EventScript_SailToSlateport:: @ 81E96E7
 	call EventScript_BackupMrBrineyLocation
-	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority LOCALID_BRINEY_DEWFORD, MAP_DEWFORD_TOWN, 0
 	setobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN, 1
-	applymovement 2, DewfordTown_Movement_BrineyBoardBoat
+	applymovement LOCALID_BRINEY_DEWFORD, DewfordTown_Movement_BrineyBoardBoat
 	waitmovement 0
-	removeobject 2
+	removeobject LOCALID_BRINEY_DEWFORD
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_PlayerBoardBoat
 	waitmovement 0
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
 	call Common_EventScript_PlayBrineysBoatMusic
-	applymovement 4, DewfordTown_Movement_SailToSlateport
+	applymovement LOCALID_BOAT_DEWFORD, DewfordTown_Movement_SailToSlateport
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_SailToSlateport
 	waitmovement 0
 	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_ROUTE109
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_ExitBoatSlateport
 	waitmovement 0
-	setobjectxyperm 2, 21, 26
-	addobject 2
-	setobjectpriority 2, MAP_ROUTE109, 0
-	applymovement 2, DewfordTown_Movement_BrineyExitBoat
+	setobjectxyperm LOCALID_BRINEY_R109, 21, 26
+	addobject LOCALID_BRINEY_R109
+	setobjectpriority LOCALID_BRINEY_R109, MAP_ROUTE109, 0
+	applymovement LOCALID_BRINEY_R109, DewfordTown_Movement_BrineyExitBoat
 	waitmovement 0
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY
-	addobject 1
+	addobject LOCALID_BOAT_R109
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	hideobjectat 4, MAP_DEWFORD_TOWN
+	hideobjectat LOCALID_BOAT_DEWFORD, MAP_DEWFORD_TOWN
 	call_if_unset FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_LandedSlateportDeliverGoods
 	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_LandedSlateport
 	closemessage
 	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
-	resetobjectpriority 2, MAP_ROUTE109
-	copyobjectxytoperm 2
+	resetobjectpriority LOCALID_BRINEY_R109, MAP_ROUTE109
+	copyobjectxytoperm LOCALID_BRINEY_R109
 	release
 	end
 

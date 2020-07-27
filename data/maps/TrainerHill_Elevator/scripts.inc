@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 TrainerHill_Elevator_MapScripts:: @ 826934F
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TrainerHill_Elevator_OnFrame
 	.byte 0
@@ -20,14 +22,14 @@ TrainerHill_Elevator_EventScript_ExitToRoof:: @ 8269360
 TrainerHill_Elevator_EventScript_EnterElevator:: @ 8269375
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Elevator_Movement_PlayerApproachAttendant
 	waitmovement 0
-	applymovement 1, TrainerHill_Elevator_Movement_AttendantFacePlayer
+	applymovement LOCALID_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFacePlayer
 	waitmovement 0
 	lockall
 	msgbox TrainerHill_Elevator_Text_ReturnToReception, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq TrainerHill_Elevator_EventScript_ExitToRoof
 	releaseall
-	applymovement 1, TrainerHill_Elevator_Movement_AttendantFaceDown
+	applymovement LOCALID_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFaceDown
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Elevator_Movement_PlayerMoveToCenterOfElevator
 	waitmovement 0

@@ -518,7 +518,7 @@ BattleScript_EffectLaserFocus:
 	attackcanceler
 	attackstring
 	ppreduce
-	setuserstatus3 STATUS3_LASER_FOCUS BattleScript_ButItFailed
+	setuserstatus3 STATUS3_LASER_FOCUS, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_LASERFOCUS
@@ -1835,7 +1835,7 @@ BattleScript_EffectMagnetRise:
 	attackcanceler
 	attackstring
 	ppreduce
-	setuserstatus3 STATUS3_MAGNET_RISE BattleScript_ButItFailed
+	setuserstatus3 STATUS3_MAGNET_RISE, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNLEVITATEDONELECTROMAGNETISM
@@ -1859,7 +1859,7 @@ BattleScript_EffectAquaRing:
 	attackcanceler
 	attackstring
 	ppreduce
-	setuserstatus3 STATUS3_AQUA_RING BattleScript_ButItFailed
+	setuserstatus3 STATUS3_AQUA_RING, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNSURROUNDEDWITHVEILOFWATER
@@ -4461,7 +4461,7 @@ BattleScript_EffectIngrain:
 	attackcanceler
 	attackstring
 	ppreduce
-	setuserstatus3 STATUS3_ROOTED BattleScript_ButItFailed
+	setuserstatus3 STATUS3_ROOTED, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNPLANTEDROOTS
@@ -4615,7 +4615,7 @@ BattleScript_EffectGrudge:
 	attackcanceler
 	attackstring
 	ppreduce
-	setuserstatus3 STATUS3_GRUDGE BattleScript_ButItFailed
+	setuserstatus3 STATUS3_GRUDGE, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNWANTSGRUDGE
@@ -5242,7 +5242,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, FALSE, NULL
 	moveendfromto MOVEEND_ABILITIES, MOVEEND_CHOICE_MOVE
-	various4 BS_TARGET
+	getbattlerfainted BS_TARGET
 	jumpifbyte CMP_EQUAL, gBattleCommunication, 0x0, BattleScript_PursuitDmgOnSwitchOutRet
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_TARGET
@@ -7503,18 +7503,18 @@ BattleScript_FlushMessageBox::
 	printstring STRINGID_EMPTYSTRING3
 	return
 
-BattleScript_82DB881::
-	setbyte gBattleCommunication + 1, 0x0
-BattleScript_82DB887::
-	various8 BS_ATTACKER
-	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x1, BattleScript_82DB89D
-	printfromtable gStringIds_85CCF0A
+BattleScript_PalacePrintFlavorText::
+	setbyte gBattleCommunication + 1, 0
+BattleScript_PalaceTryBattlerFlavorText::
+	palaceflavortext BS_ATTACKER @ BS_ATTACKER here overwritten by gBattleCommunication + 1
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, TRUE, BattleScript_PalaceEndFlavorText
+	printfromtable gBattlePalaceFlavorTextTable
 	waitmessage 0x40
-BattleScript_82DB89D::
-	addbyte gBattleCommunication + 1, 0x1
-	jumpifbytenotequal gBattleCommunication + 1, gBattlersCount, BattleScript_82DB887
-	setbyte gBattleCommunication, 0x0
-	setbyte gBattleCommunication + 1, 0x0
+BattleScript_PalaceEndFlavorText::
+	addbyte gBattleCommunication + 1, 1
+	jumpifbytenotequal gBattleCommunication + 1, gBattlersCount, BattleScript_PalaceTryBattlerFlavorText
+	setbyte gBattleCommunication, 0
+	setbyte gBattleCommunication + 1, 0
 	end2
 
 BattleScript_ArenaTurnBeginning::

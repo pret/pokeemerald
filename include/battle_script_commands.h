@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_SCRIPT_COMMANDS_H
 #define GUARD_BATTLE_SCRIPT_COMMANDS_H
 
+#include "constants/pokemon.h"
+
 #define WINDOW_CLEAR            0x1
 #define WINDOW_x80              0x80
 
@@ -26,6 +28,6 @@ bool32 IsShieldsDownProtected(u32 battler);
 u32 IsAbilityStatusProtected(u32 battler);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
-extern const u8 gUnknown_0831C494[][4];
+extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];
 
 #endif // GUARD_BATTLE_SCRIPT_COMMANDS_H

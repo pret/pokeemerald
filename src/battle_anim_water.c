@@ -783,98 +783,24 @@ void AnimTask_RotateAuroraRingColors(u8 taskId)
     gTasks[taskId].func = AnimTask_RotateAuroraRingColors_Step;
 }
 
-#ifdef NONMATCHING
 static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 {
     int i;
     u16 palIndex;
-    u16 *palPtr1;
-    u16 *palPtr2;
-    u16 rgbBuffer;
 
     if (++gTasks[taskId].data[10] == 3)
     {
+        u16 tempPlt;
         gTasks[taskId].data[10] = 0;
         palIndex = gTasks[taskId].data[2] + 1;
-        palPtr1 = &gPlttBufferFaded[palIndex];
-        rgbBuffer = *palPtr1;
-        palPtr2 = &palPtr1[1];
-        for (i = 0; i < 7; i++)
-            palPtr1[i] = palPtr2[i];
-        gPlttBufferFaded[palIndex + 7] = rgbBuffer;
+        tempPlt = gPlttBufferFaded[palIndex];
+        for (i = 1; i < 8; i++)
+            gPlttBufferFaded[palIndex + i - 1] = gPlttBufferFaded[palIndex + i];
+        gPlttBufferFaded[palIndex + 7] = tempPlt;
     }
     if (++gTasks[taskId].data[11] == gTasks[taskId].data[0])
         DestroyAnimVisualTask(taskId);
 }
-#else
-NAKED
-static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	ldr r1, =gTasks\n\
-	lsls r0, r4, 2\n\
-	adds r0, r4\n\
-	lsls r0, 3\n\
-	adds r2, r0, r1\n\
-	ldrh r0, [r2, 0x1C]\n\
-	adds r0, 0x1\n\
-	strh r0, [r2, 0x1C]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	mov r12, r1\n\
-	cmp r0, 0x3\n\
-	bne _081075BE\n\
-	movs r0, 0\n\
-	strh r0, [r2, 0x1C]\n\
-	ldrh r0, [r2, 0xC]\n\
-	adds r0, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	ldr r1, =gPlttBufferFaded\n\
-	lsls r0, r5, 1\n\
-	adds r0, r1\n\
-	ldrh r6, [r0]\n\
-	adds r7, r1, 0\n\
-	adds r3, r0, 0x2\n\
-	movs r1, 0x6\n\
-	adds r2, r0, 0\n\
-_081075A8:\n\
-	ldrh r0, [r3]\n\
-	strh r0, [r2]\n\
-	adds r3, 0x2\n\
-	adds r2, 0x2\n\
-	subs r1, 0x1\n\
-	cmp r1, 0\n\
-	bge _081075A8\n\
-	adds r0, r5, 0x7\n\
-	lsls r0, 1\n\
-	adds r0, r7\n\
-	strh r6, [r0]\n\
-_081075BE:\n\
-	lsls r0, r4, 2\n\
-	adds r0, r4\n\
-	lsls r0, 3\n\
-	add r0, r12\n\
-	ldrh r1, [r0, 0x1E]\n\
-	adds r1, 0x1\n\
-	strh r1, [r0, 0x1E]\n\
-	lsls r1, 16\n\
-	asrs r1, 16\n\
-	movs r2, 0x8\n\
-	ldrsh r0, [r0, r2]\n\
-	cmp r1, r0\n\
-	bne _081075DE\n\
-	adds r0, r4, 0\n\
-	bl DestroyAnimVisualTask\n\
-_081075DE:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n");
-}
-#endif
 
 void AnimFlyUpTarget(struct Sprite *sprite)
 {
@@ -1002,6 +928,7 @@ static void AnimHydroCannonBeam(struct Sprite *sprite)
         if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_LEFT)
             gBattleAnimArgs[0] *= -1;
     }
+
     if ((gBattleAnimArgs[5] & 0xFF00) == 0)
         animType = TRUE;
     else

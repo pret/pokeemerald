@@ -1,3 +1,8 @@
+.set LOCALID_ATTENDANT, 1
+.set LOCALID_SS_TIDAL, 2
+.set LOCALID_FERRY_SAILOR, 4
+.set LOCALID_BRINEY, 5
+
 LilycoveCity_Harbor_MapScripts:: @ 821E000
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_Harbor_OnTransition
 	.byte 0
@@ -110,7 +115,7 @@ LilycoveCity_Harbor_EventScript_GetEonTicketState:: @ 821E194
 	setvar VAR_TEMP_E, 0
 	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, Common_EventScript_NopReturn
 	checkitem ITEM_EON_TICKET, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 1
 	goto_if_set FLAG_SHOWN_EON_TICKET, Common_EventScript_NopReturn
@@ -121,7 +126,7 @@ LilycoveCity_Harbor_EventScript_GetAuroraTicketState:: @ 821E1C6
 	setvar VAR_TEMP_D, 0
 	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, Common_EventScript_NopReturn
 	checkitem ITEM_AURORA_TICKET, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_D, 1
 	goto_if_set FLAG_SHOWN_AURORA_TICKET, Common_EventScript_NopReturn
@@ -132,7 +137,7 @@ LilycoveCity_Harbor_EventScript_GetOldSeaMapState:: @ 821E1F8
 	setvar VAR_TEMP_C, 0
 	goto_if_unset FLAG_ENABLE_SHIP_FARAWAY_ISLAND, Common_EventScript_NopReturn
 	checkitem ITEM_OLD_SEA_MAP, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 1
 	goto_if_set FLAG_SHOWN_OLD_SEA_MAP, Common_EventScript_NopReturn
@@ -143,7 +148,7 @@ LilycoveCity_Harbor_EventScript_GetMysticTicketState:: @ 821E22A
 	setvar VAR_TEMP_9, 0
 	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, Common_EventScript_NopReturn
 	checkitem ITEM_MYSTIC_TICKET, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 1
 	goto_if_set FLAG_SHOWN_MYSTIC_TICKET, Common_EventScript_NopReturn
@@ -247,18 +252,18 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime:: @ 821E350
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor
 	msgbox EventTicket_Text_OldSeaMapTooFar, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 4, Common_Movement_ExclamationMark
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, Common_Movement_Delay48
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayEast
-	addobject 5
+	addobject LOCALID_BRINEY
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth
 	compare VAR_FACING, DIR_EAST
@@ -274,7 +279,7 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime:: @ 821E350
 	call_if_eq LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorNorth
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, LOCALID_SS_TIDAL
 	call Common_EventScript_FerryDepart
 	warp MAP_FARAWAY_ISLAND_ENTRANCE, 255, 13, 38
 	waitstate
@@ -329,14 +334,14 @@ LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime:: @ 821E44D
 LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect:: @ 821E4B6
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
-	removeobject 4
+	removeobject LOCALID_FERRY_SAILOR
 	delay 30
-	applymovement 1, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	showobjectat 1, MAP_LILYCOVE_CITY_HARBOR
+	showobjectat LOCALID_ATTENDANT, MAP_LILYCOVE_CITY_HARBOR
 	delay 30
 	msgbox LilycoveCity_Harbor_Text_SailAnotherTime, MSGBOX_DEFAULT
 	release
@@ -348,24 +353,24 @@ LilycoveCity_Harbor_EventScript_GetEventTicketSailor:: @ 821E4EE
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	delay 60
-	addobject 4
+	addobject LOCALID_FERRY_SAILOR
 	delay 30
-	applymovement 4, Common_Movement_FacePlayer
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_FacePlayer
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BoardFerryWithSailor:: @ 821E514
-	applymovement 4, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 30
-	removeobject 4
+	removeobject LOCALID_FERRY_SAILOR
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryNorth
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
 	hideobjectat OBJ_EVENT_ID_PLAYER, 0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, LOCALID_SS_TIDAL
 	call Common_EventScript_FerryDepart
 	return
 
@@ -429,7 +434,7 @@ LilycoveCity_Harbor_EventScript_BoardFerry:: @ 821E5CC
 	call_if_eq LilycoveCity_Harbor_EventScript_PlayerBoardFerryEast
 	delay 30
 	hideobjectat OBJ_EVENT_ID_PLAYER, 0
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, LOCALID_SS_TIDAL
 	call Common_EventScript_FerryDepart
 	return
 
@@ -475,12 +480,12 @@ LilycoveCity_Harbor_EventScript_SailorFerryAvailable:: @ 821E64C
 	end
 
 LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth:: @ 821E656
-	applymovement 4, LilycoveCity_Harbor_Movement_SailorOutOfWayNorth
+	applymovement LOCALID_FERRY_SAILOR, LilycoveCity_Harbor_Movement_SailorOutOfWayNorth
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayEast:: @ 821E661
-	applymovement 4, LilycoveCity_Harbor_Movement_SailorOutOfWayEast
+	applymovement LOCALID_FERRY_SAILOR, LilycoveCity_Harbor_Movement_SailorOutOfWayEast
 	waitmovement 0
 	return
 
@@ -498,36 +503,36 @@ LilycoveCity_Harbor_Movement_SailorOutOfWayEast: @ 821E671
 	step_end
 
 LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth:: @ 821E675
-	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFaceSailorEast:: @ 821E680
-	applymovement 5, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFacePlayerNorth:: @ 821E68B
-	applymovement 5, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast:: @ 821E696
-	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_BRINEY, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorNorth:: @ 821E6A1
-	applymovement 5, LilycoveCity_Harbor_Movement_BrineyBoardFerry
+	applymovement LOCALID_BRINEY, LilycoveCity_Harbor_Movement_BrineyBoardFerry
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardWithBrineyNorth
-	applymovement 4, LilycoveCity_Harbor_Movement_SailorBoardWithBrineyNorth
+	applymovement LOCALID_FERRY_SAILOR, LilycoveCity_Harbor_Movement_SailorBoardWithBrineyNorth
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast:: @ 821E6BA
-	applymovement 5, LilycoveCity_Harbor_Movement_BrineyBoardFerry
+	applymovement LOCALID_BRINEY, LilycoveCity_Harbor_Movement_BrineyBoardFerry
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_Harbor_Movement_PlayerBoardWithBrineyEast
-	applymovement 4, LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast
+	applymovement LOCALID_FERRY_SAILOR, LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast
 	waitmovement 0
 	return
 
