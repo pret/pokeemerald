@@ -205,7 +205,7 @@ u32 VerifyFlashSector(u16 sectorNum, u8 *src)
     funcSrc = (u16 *)((uintptr_t)funcSrc ^ 1);
     funcDest = verifyFlashSector_Core_Buffer;
 
-    i = (u16)(((uintptr_t)VerifyFlashSector - (uintptr_t)VerifyFlashSector_Core) >> 1);
+    i = ((uintptr_t)VerifyFlashSector - (uintptr_t)VerifyFlashSector_Core) >> 1;
 
     while (i != 0)
     {
