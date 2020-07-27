@@ -1,3 +1,11 @@
+.set LOCALID_GROUDON, 1
+.set LOCALID_GRUNT_1, 2
+.set LOCALID_GRUNT_2, 3
+.set LOCALID_GRUNT_3, 4
+.set LOCALID_TABITHA, 5
+.set LOCALID_MAXIE, 6
+.set LOCALID_GROUDON_SLEEPING, 7
+
 MagmaHideout_4F_MapScripts:: @ 823A55F
 	.byte 0
 
@@ -18,11 +26,11 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 150
-	removeobject 7  @ sleeping Groudon
-	addobject 1     @ awakened Groudon
+	removeobject LOCALID_GROUDON_SLEEPING
+	addobject LOCALID_GROUDON
 	waitstate
 	delay 60
-	applymovement 1, MagmaHideout_4F_Movement_GroudonApproach
+	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonApproach
 	waitmovement 0
 	special FadeOutOrbEffect
 	waitstate
@@ -32,9 +40,9 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement 1, MagmaHideout_4F_Movement_GroudonExit
+	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonExit
 	waitmovement 0
-	removeobject 1
+	removeobject LOCALID_GROUDON
 	delay 4
 	setvar VAR_0x8004, 2  @ vertical pan
 	setvar VAR_0x8005, 2  @ horizontal pan
@@ -43,14 +51,14 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	special ShakeCamera
 	waitstate
 	delay 30
-	applymovement 6, MagmaHideout_4F_Movement_MaxieLookAround
+	applymovement LOCALID_MAXIE, MagmaHideout_4F_Movement_MaxieLookAround
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_MaxieGroudonWhatsWrong, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 30
-	applymovement 6, Common_Movement_FacePlayer
+	applymovement LOCALID_MAXIE, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_MaxieOhItWasYou, MSGBOX_DEFAULT
 	closemessage
@@ -63,11 +71,11 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
 	setvar VAR_SLATEPORT_HARBOR_STATE, 1
 	fadescreen FADE_TO_BLACK
-	removeobject 6
-	removeobject 2
-	removeobject 3
-	removeobject 4
-	removeobject 5
+	removeobject LOCALID_MAXIE
+	removeobject LOCALID_GRUNT_1
+	removeobject LOCALID_GRUNT_2
+	removeobject LOCALID_GRUNT_3
+	removeobject LOCALID_TABITHA
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	fadescreen FADE_FROM_BLACK
 	releaseall

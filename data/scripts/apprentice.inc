@@ -1,3 +1,5 @@
+.set LOCALID_APPRENTICE, 6
+
 BattleFrontier_BattleTowerLobby_EventScript_Apprentice:: @ 82B688D
 	lock
 	faceplayer
@@ -225,7 +227,7 @@ Apprentice_EventScript_LeaveNorth: @ 82B6E54
 	apprentice_shouldleave
 	compare VAR_0x8004, FALSE  @ Always TRUE here
 	goto_if_eq Apprentice_EventScript_DontMove
-	applymovement 6, Apprentice_Movement_LeaveNorth
+	applymovement LOCALID_APPRENTICE, Apprentice_Movement_LeaveNorth
 	waitmovement 0
 	end
 
@@ -233,7 +235,7 @@ Apprentice_EventScript_Leave: @ 82B6E72
 	apprentice_shouldleave
 	compare VAR_0x8004, FALSE  @ Always TRUE here
 	goto_if_eq Apprentice_EventScript_DontMove
-	applymovement 6, Apprentice_Movement_Leave
+	applymovement LOCALID_APPRENTICE, Apprentice_Movement_Leave
 	waitmovement 0
 	end
 

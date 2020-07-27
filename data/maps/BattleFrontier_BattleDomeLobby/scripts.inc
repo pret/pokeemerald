@@ -1,3 +1,6 @@
+.set LOCALID_ATTENDANT_SINGLES, 1
+.set LOCALID_ATTENDANT_DOUBLES, 6
+
 BattleFrontier_BattleDomeLobby_MapScripts:: @ 82497E2
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleDomeLobby_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomeLobby_OnFrame
@@ -262,19 +265,19 @@ BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor:: @ 8249C6E
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantWalkToDoor:: @ 8249CDD
-	applymovement 1, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
+	applymovement LOCALID_ATTENDANT_SINGLES, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantWalkToDoor:: @ 8249CE5
-	applymovement 6, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
+	applymovement LOCALID_ATTENDANT_DOUBLES, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantEnterDoor:: @ 8249CED
-	applymovement 1, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
+	applymovement LOCALID_ATTENDANT_SINGLES, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantEnterDoor:: @ 8249CF5
-	applymovement 6, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
+	applymovement LOCALID_ATTENDANT_DOUBLES, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles:: @ 8249CFD
