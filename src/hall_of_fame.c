@@ -612,7 +612,7 @@ static void Task_Hof_PrintMonInfoAfterAnimating(u8 taskId)
 
 static void Task_Hof_TryDisplayAnotherMon(u8 taskId)
 {
-    u16 currPokeID = (u16)gTasks[taskId].tDisplayedMonId;
+    u16 currPokeID = gTasks[taskId].tDisplayedMonId;
     struct HallofFameMon* currMon = &sHofMonPtr->mon[currPokeID];
 
     if (gTasks[taskId].tFrameCount != 0)
@@ -1483,7 +1483,7 @@ static void UpdateDomeConfetti(struct ConfettiUtil *util)
 static void Task_DoDomeConfetti(u8 taskId)
 {
     u32 id = 0;
-    u16 *data = (u16 *)gTasks[taskId].data;
+    u16 *data = gTasks[taskId].data;
 
     switch (tState)
     {
