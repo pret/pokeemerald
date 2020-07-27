@@ -964,7 +964,7 @@ static void HandleRegistryMenuInput(u8 taskId)
 
     data = gTasks[taskId].data;
     input = ListMenu_ProcessInput(data[5]);
-    ListMenuGetScrollAndRow((u8)data[5], (u16 *)&data[2], (u16 *)&data[1]);
+    ListMenuGetScrollAndRow(data[5], (u16 *)&data[2], (u16 *)&data[1]);
     switch (input)
     {
     case LIST_NOTHING_CHOSEN:
