@@ -2900,28 +2900,28 @@ Move_MIRROR_SHOT:
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_IMPACT 
 	loadspritegfx ANIM_TAG_WHITE_CIRCLE_OF_LIGHT 
-	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 5, 2, 0, 10, -1  
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 0, 10, RGB_WHITEALPHA 
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT, 0, 12, 12, RGB(21, 21, 21)
 	waitforvisualfinish 
 	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, 2, 215, 63  
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_W233B, SOUND_PAN_TARGET
 	delay 3
 	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, 2, 215, 63  
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_W233B, SOUND_PAN_TARGET
 	delay 3
 	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, 2, 215, 63  
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_W233B, SOUND_PAN_TARGET
 	delay 3 
 	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, 2, 215, 63  
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_W233B, SOUND_PAN_TARGET
 	delay 3 
 	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, 2, 215, 63  
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_W233B, SOUND_PAN_TARGET
 	delay 3 
 	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2  
-	createvisualtask SoundTask_PlaySE1WithPanning, 5, 2, 215, 63  
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_W233B, SOUND_PAN_TARGET
 	waitforvisualfinish
-	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 16, 0, RGB_WHITEALPHA
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 10, 0, RGB_WHITEALPHA
 	createvisualtask AnimTask_HorizontalShake, 5, 1, 5, 14 
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER 
