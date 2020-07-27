@@ -63,7 +63,6 @@
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
-#include "constants/vars.h"
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
@@ -2855,7 +2854,7 @@ void SetBattleTowerLinkPlayerGfx(void)
 
 void ShowNatureGirlMessage(void)
 {
-    static const u8 *const sNatureGirlMessages[] = {
+    static const u8 *const sNatureGirlMessages[NUM_NATURES] = {
         [NATURE_HARDY]   = BattleFrontier_Lounge5_Text_NatureGirlHardy,
         [NATURE_LONELY]  = BattleFrontier_Lounge5_Text_NatureGirlLonely,
         [NATURE_BRAVE]   = BattleFrontier_Lounge5_Text_NatureGirlBrave,
@@ -3688,7 +3687,7 @@ void Unused_SetWeatherSunny(void)
     SetCurrentAndNextWeather(WEATHER_SUNNY);
 }
 
-// Always returns 1
+// All mart employees have a local id of 1, so function always returns 1
 u32 GetMartEmployeeObjectEventId(void)
 {
     static const u8 sPokeMarts[][3] =

@@ -22,11 +22,11 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer:: @ 8227
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
 	waitstate
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, B_OUTCOME_DREW
 	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, B_OUTCOME_WON
 	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, B_OUTCOME_LOST
 	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost
 	closemessage
 	special HealPlayerParty

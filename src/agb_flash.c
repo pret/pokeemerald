@@ -127,7 +127,8 @@ void SetReadFlash1(u16 *dest)
     }
 }
 
-void ReadFlash_Core(u8 *src, u8 *dest, u32 size)
+// Using volatile here to make sure the flash memory will ONLY be read as bytes, to prevent any compiler optimizations.
+void ReadFlash_Core(vu8 *src, u8 *dest, u32 size)
 {
     while (size-- != 0)
     {
@@ -142,7 +143,7 @@ void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
     u16 readFlash_Core_Buffer[0x40];
     u16 *funcSrc;
     u16 *funcDest;
-    void (*readFlash_Core)(u8 *, u8 *, u32);
+    void (*readFlash_Core)(vu8 *, u8 *, u32);
 
     REG_WAITCNT = (REG_WAITCNT & ~WAITCNT_SRAM_MASK) | WAITCNT_SRAM_8;
 
@@ -164,7 +165,7 @@ void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
         i--;
     }
 
-    readFlash_Core = (void (*)(u8 *, u8 *, u32))((s32)readFlash_Core_Buffer + 1);
+    readFlash_Core = (void (*)(vu8 *, u8 *, u32))((s32)readFlash_Core_Buffer + 1);
 
     src = FLASH_BASE + (sectorNum << gFlash->sector.shift) + offset;
 

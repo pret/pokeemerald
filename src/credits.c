@@ -21,7 +21,6 @@
 #include "trig.h"
 #include "graphics.h"
 #include "pokedex.h"
-#include "constants/vars.h"
 #include "event_data.h"
 #include "random.h"
 #include "constants/species.h"
