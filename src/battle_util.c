@@ -2924,6 +2924,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     switch (caseID)
     {
     case ABILITYEFFECT_ON_SWITCHIN: // 0
+        gBattleScripting.battler = battler;
         switch (gLastUsedAbility)
         {
         case ABILITYEFFECT_SWITCH_IN_WEATHER:
@@ -2938,7 +2939,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     {
                         gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
                         gBattleScripting.animArg1 = B_ANIM_RAIN_CONTINUES;
-                        gBattleScripting.battler = battler;
                         effect++;
                     }
                     break;
@@ -2947,7 +2947,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     {
                         gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
                         gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
-                        gBattleScripting.battler = battler;
                         effect++;
                     }
                     break;
@@ -2956,7 +2955,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     {
                         gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
                         gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
-                        gBattleScripting.battler = battler;
                         effect++;
                     }
                     break;
@@ -3115,7 +3113,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (TryChangeBattleWeather(battler, ENUM_WEATHER_RAIN, TRUE))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
-                gBattleScripting.battler = battler;
                 effect++;
             }
             break;
@@ -3123,7 +3120,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (TryChangeBattleWeather(battler, ENUM_WEATHER_SANDSTORM, TRUE))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_SandstreamActivates);
-                gBattleScripting.battler = battler;
                 effect++;
             }
             break;
@@ -3131,7 +3127,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (TryChangeBattleWeather(battler, ENUM_WEATHER_SUN, TRUE))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
-                gBattleScripting.battler = battler;
                 effect++;
             }
             break;
@@ -3139,7 +3134,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (TryChangeBattleWeather(battler, ENUM_WEATHER_HAIL, TRUE))
             {
                 BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivates);
-                gBattleScripting.battler = battler;
                 effect++;
             }
             break;
@@ -3184,7 +3178,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (effect != 0)
             {
                 BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                gBattleScripting.battler = battler;
                 *(&gBattleStruct->formToChangeInto) = effect - 1;
             }
             break;
