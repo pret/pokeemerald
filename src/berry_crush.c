@@ -1076,7 +1076,7 @@ int sub_802104C(void)
             return 0;
 
         InitStandardTextBoxWindows();
-        sub_8197200();
+        InitTextBoxGfxAndPrinters();
         sub_8022588(var0);
         sub_8022600(var0);
         gPaletteFade.bufferTransferDisabled = TRUE;

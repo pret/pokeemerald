@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_SCREEN_EFFECT_H
 #define GUARD_FIELD_SCREEN_EFFECT_H
 
+extern const s32 gMaxFlashLevel;
+
 void WarpFadeInScreen(void);
 void WarpFadeOutScreen(void);
 void FadeInFromBlack(void);
@@ -26,7 +28,7 @@ void DoFallWarp(void);
 void DoEscalatorWarp(u8 metatileBehavior);
 void DoLavaridgeGymB1FWarp(void);
 void DoLavaridgeGym1FWarp(void);
-void DoTeleportWarp(void);
+void DoTeleportTileWarp(void);
 void DoMossdeepGymWarp(void);
 void DoPortholeWarp(void);
 void DoCableClubWarp(void);

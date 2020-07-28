@@ -64,7 +64,7 @@ static void TrainerHillSetPlayerLost(void);
 static void TrainerHillGetChallengeStatus(void);
 static void BufferChallengeTime(void);
 static void GetAllFloorsUsed(void);
-static void ClearVarResult(void);
+static void GetInEReaderMode(void);
 static void IsTrainerHillChallengeActive(void);
 static void ShowTrainerHillPostBattleText(void);
 static void SetAllTrainerFlags(void);
@@ -202,7 +202,7 @@ static const u16 *const *const sPrizeListSets[] =
     sPrizeLists2
 };
 
-static const u16 sUnknown_0862A5D4[] = INCBIN_U16("graphics/pokenav/862A5D4.gbapal");
+static const u16 sEReader_Pal[] = INCBIN_U16("graphics/misc/trainer_hill_ereader.gbapal");
 static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
 static const struct TrHillTag *const sDataPerTag[] =
@@ -233,7 +233,7 @@ static void (* const sHillFunctions[])(void) =
     [TRAINER_HILL_FUNC_GET_CHALLENGE_STATUS]  = TrainerHillGetChallengeStatus,
     [TRAINER_HILL_FUNC_GET_CHALLENGE_TIME]    = BufferChallengeTime,
     [TRAINER_HILL_FUNC_GET_ALL_FLOORS_USED]   = GetAllFloorsUsed,
-    [TRAINER_HILL_FUNC_CLEAR_RESULT]          = ClearVarResult,
+    [TRAINER_HILL_FUNC_GET_IN_EREADER_MODE]   = GetInEReaderMode,
     [TRAINER_HILL_FUNC_IN_CHALLENGE]          = IsTrainerHillChallengeActive,
     [TRAINER_HILL_FUNC_POST_BATTLE_TEXT]      = ShowTrainerHillPostBattleText,
     [TRAINER_HILL_FUNC_SET_ALL_TRAINER_FLAGS] = SetAllTrainerFlags,
@@ -546,10 +546,11 @@ static void GetAllFloorsUsed(void)
 }
 
 // May have been dummied. Every time this is called a conditional for var result occurs afterwards
-static void ClearVarResult(void)
+// Relation to E-Reader is an assumption, most dummied Trainer Hill code seems to be JP E-Reader mode related
+static void GetInEReaderMode(void)
 {
     SetUpDataStruct();
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
     FreeDataStruct();
 }
 
@@ -997,11 +998,11 @@ static void SetAllTrainerFlags(void)
     gSaveBlock2Ptr->frontier.trainerFlags = 0xFF;
 }
 
-// Palette never loaded, sub_81D6534 always FALSE
-void sub_81D64C0(void)
+// Palette never loaded, OnTrainerHillEReaderChallengeFloor always FALSE
+void TryLoadTrainerHillEReaderPalette(void)
 {
-    if (sub_81D6534() == TRUE)
-        LoadPalette(sUnknown_0862A5D4, 0x70, 0x20);
+    if (OnTrainerHillEReaderChallengeFloor() == TRUE)
+        LoadPalette(sEReader_Pal, 0x70, 0x20);
 }
 
 static void GetGameSaved(void)
@@ -1020,13 +1021,13 @@ static void ClearGameSaved(void)
 }
 
 // Always FALSE
-bool32 sub_81D6534(void)
+bool32 OnTrainerHillEReaderChallengeFloor(void)
 {
     if (!InTrainerHillChallenge() || GetCurrentTrainerHillMapId() == TRAINER_HILL_ENTRANCE)
         return FALSE;
 
-    ClearVarResult();
-    if (gSpecialVar_Result == 0)
+    GetInEReaderMode();
+    if (gSpecialVar_Result == FALSE)
         return FALSE;
     else
         return TRUE;

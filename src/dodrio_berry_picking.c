@@ -4629,7 +4629,7 @@ static void sub_802A7A8(void)
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
     InitStandardTextBoxWindows();
-    sub_8197200();
+    InitTextBoxGfxAndPrinters();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetBgTilemapBuffer(3, gUnknown_02022CF8->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, gUnknown_02022CF8->tilemapBuffers[1]);

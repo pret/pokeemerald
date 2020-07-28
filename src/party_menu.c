@@ -462,7 +462,7 @@ static void CB2_UpdatePartyMenu(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -489,7 +489,7 @@ static bool8 ShowPartyMenu(void)
     case 0:
         SetVBlankHBlankCallbacksToNull();
         ResetVramOamAndBgCntRegs();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:

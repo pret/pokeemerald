@@ -1836,31 +1836,25 @@ static void TryEndMassOutbreak(u16 days)
         gSaveBlock1Ptr->outbreakDaysLeft -= days;
 }
 
-void sub_80ED950(bool8 flag)
+void RecordFishingAttemptForTV(bool8 caughtFish)
 {
-    if (flag)
+    if (caughtFish)
     {
         if (sPokemonAnglerAttemptCounters >> 8 > 4)
-        {
             PutFishingAdviceShowOnTheAir();
-        }
+
         sPokemonAnglerAttemptCounters &= 0xFF;
         if (sPokemonAnglerAttemptCounters != 0xFF)
-        {
             sPokemonAnglerAttemptCounters += 0x01;
-        }
     }
     else
     {
         if ((u8)sPokemonAnglerAttemptCounters > 4)
-        {
             PutFishingAdviceShowOnTheAir();
-        }
+
         sPokemonAnglerAttemptCounters &= 0xFF00;
         if (sPokemonAnglerAttemptCounters >> 8 != 0xFF)
-        {
             sPokemonAnglerAttemptCounters += 0x0100;
-        }
     }
 }
 
@@ -1930,7 +1924,7 @@ void sub_80EDA80(void)
     }
 }
 
-void sub_80EDB44(void)
+void TryPutTodaysRivalTrainerOnAir(void)
 {
     TVShow *show;
     u32 i;

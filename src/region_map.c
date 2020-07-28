@@ -1683,7 +1683,7 @@ void CB2_OpenFlyMap(void)
         break;
     case 3:
         LoadUserWindowBorderGfx(0, 0x65, 0xd0);
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 4:
@@ -1746,7 +1746,7 @@ static void CB2_FlyMap(void)
     sFlyMap->callback();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
 }
 
 static void SetFlyMapCallback(void callback(void))
