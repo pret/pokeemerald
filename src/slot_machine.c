@@ -775,7 +775,7 @@ static void PlaySlotMachine_Internal(u8 slotMachineIndex, MainCallback cb)
 {
     struct Task *task = &gTasks[CreateTask(SlotMachineDummyTask, 0xFF)];
     task->data[0] = slotMachineIndex;
-    StoreWordInTwoHalfwords(task->data + 1, (intptr_t)cb);
+    StoreWordInTwoHalfwords((u16 *)(task->data + 1), (intptr_t)cb);
 }
 
 
