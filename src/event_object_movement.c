@@ -1205,8 +1205,7 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
 {
     struct ObjectEvent *objectEvent;
     u8 objectEventId;
-    s16 x;
-    s16 y;
+    s16 x, y;
 
     if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId))
         return OBJECT_EVENTS_COUNT;
@@ -1220,7 +1219,6 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->movementType = template->movementType;
     objectEvent->localId = template->localId;
     objectEvent->mapNum = mapNum;
-    objectEvent++; objectEvent--;
     objectEvent->mapGroup = mapGroup;
     objectEvent->initialCoords.x = x;
     objectEvent->initialCoords.y = y;
@@ -1237,9 +1235,6 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
     SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
     SetObjectEventDynamicGraphicsId(objectEvent);
-#ifndef NONMATCHING
-    asm("":::"r5", "r6");
-#endif
     if (gRangedMovementTypes[objectEvent->movementType])
     {
         if (objectEvent->range.as_nybbles.x == 0)
