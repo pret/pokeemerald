@@ -4628,7 +4628,7 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
         gBattleMons[battlerId].statStages[i] = 6;
 
     gBattleMons[battlerId].status2 = 0;
-    sub_803FA70(battlerId);
+    UpdateSentPokesToOpponentValue(battlerId);
     ClearTemporarySpeciesSpriteData(battlerId, FALSE);
 }
 

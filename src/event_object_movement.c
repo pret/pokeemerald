@@ -1223,7 +1223,6 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->movementType = template->movementType;
     objectEvent->localId = template->localId;
     objectEvent->mapNum = mapNum;
-    objectEvent++; objectEvent--;
     objectEvent->mapGroup = mapGroup;
     objectEvent->initialCoords.x = x;
     objectEvent->initialCoords.y = y;
@@ -1236,13 +1235,11 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->range.as_nybbles.x = template->movementRangeX;
     objectEvent->range.as_nybbles.y = template->movementRangeY;
     objectEvent->trainerType = template->trainerType;
+    objectEvent->mapNum = mapNum; //redundant, but needed to match
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
     SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
     SetObjectEventDynamicGraphicsId(objectEvent);
-#ifndef NONMATCHING
-    asm("":::"r5", "r6");
-#endif
     if (gRangedMovementTypes[objectEvent->movementType])
     {
         if (objectEvent->range.as_nybbles.x == 0)
@@ -8953,7 +8950,7 @@ void CreateLevitateMovementTask(struct ObjectEvent *objectEvent)
     u8 taskId = CreateTask(ApplyLevitateMovement, 0xFF);
     struct Task *task = &gTasks[taskId];
 
-    StoreWordInTwoHalfwords(&task->data[0], (u32)objectEvent);
+    StoreWordInTwoHalfwords((u16 *)&task->data[0], (u32)objectEvent);
     objectEvent->warpArrowSpriteId = taskId;
     task->data[3] = 0xFFFF;
 }
@@ -8964,7 +8961,7 @@ static void ApplyLevitateMovement(u8 taskId)
     struct Sprite *sprite;
     struct Task *task = &gTasks[taskId];
 
-    LoadWordFromTwoHalfwords(&task->data[0], (u32 *)&objectEvent); // load the map object pointer.
+    LoadWordFromTwoHalfwords((u16 *)&task->data[0], (u32 *)&objectEvent); // load the map object pointer.
     sprite = &gSprites[objectEvent->spriteId];
 
     if(!(task->data[2] & 0x3))
@@ -8981,7 +8978,7 @@ void DestroyExtraMovementTask(u8 taskId)
     struct ObjectEvent *objectEvent;
     struct Task *task = &gTasks[taskId];
 
-    LoadWordFromTwoHalfwords(&task->data[0], (u32 *)&objectEvent); // unused objectEvent
+    LoadWordFromTwoHalfwords((u16 *)&task->data[0], (u32 *)&objectEvent); // unused objectEvent
     DestroyTask(taskId);
 }
 

@@ -633,7 +633,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -643,7 +643,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -653,7 +653,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -663,7 +663,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -673,7 +673,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -683,7 +683,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -693,7 +693,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -703,7 +703,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -713,7 +713,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -723,7 +723,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -733,7 +733,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -743,7 +743,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 1,
         .var06 = 0xFF,
         .var07_0 = 8,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -753,7 +753,7 @@ static const struct UnkStruct1 gUnknown_085B6388[] =
         .var05 = 10,
         .var06 = 0xFF,
         .var07_0 = 14,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
 };
@@ -767,7 +767,7 @@ static const struct UnkStruct1 gUnknown_085B63F0[] =
         .var05 = 30,
         .var06 = 0xFF,
         .var07_0 = 14,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -777,7 +777,7 @@ static const struct UnkStruct1 gUnknown_085B63F0[] =
         .var05 = 30,
         .var06 = 0xFF,
         .var07_0 = 14,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     },
     {
@@ -787,7 +787,7 @@ static const struct UnkStruct1 gUnknown_085B63F0[] =
         .var05 = 30,
         .var06 = 0xFF,
         .var07_0 = 14,
-        .var07_5 = 2,
+        .var07_5 = -2,
         .var07_7 = 0
     }
 };

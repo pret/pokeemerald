@@ -1862,7 +1862,7 @@ u8 GetMonAilment(struct Pokemon *mon)
 
 static void SetPartyMonsAllowedInMinigame(void)
 {
-    u16 *ptr;
+    s16 *ptr;
 
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MINIGAME)
     {
@@ -4951,9 +4951,9 @@ static void Task_DisplayLevelUpStatsPg2(u8 taskId)
 
 static void DisplayLevelUpStatsPg1(u8 taskId)
 {
-    s16 *arrayPtr = sPartyMenuInternal->data;
+    u16 *arrayPtr = (u16*)sPartyMenuInternal->data;
 
-    arrayPtr[12] = CreateLevelUpStatsWindow();
+    arrayPtr[12] = (u16)CreateLevelUpStatsWindow();
     DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     CopyWindowToVram(arrayPtr[12], 2);
     ScheduleBgCopyTilemapToVram(2);
@@ -4961,7 +4961,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
 
 static void DisplayLevelUpStatsPg2(u8 taskId)
 {
-    s16 *arrayPtr = sPartyMenuInternal->data;
+    u16 *arrayPtr = (u16 *)sPartyMenuInternal->data;
 
     DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     CopyWindowToVram(arrayPtr[12], 2);
