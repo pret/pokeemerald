@@ -429,7 +429,7 @@ void UpdatePulseBlend(struct PulseBlend *pulseBlend)
     }
 }
 
-void sub_8152008(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
+void ClearGridSelectionRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
 {
     u16 *_dest;
     u8 i;
@@ -446,7 +446,7 @@ void sub_8152008(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
     }
 }
 
-void sub_8152058(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
+void SetGridSelectionRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
 {
     u16 *_dest;
     u16 *_src = src;
