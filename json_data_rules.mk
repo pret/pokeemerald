@@ -19,6 +19,7 @@ PKMN_GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon_graphics
 
 SPECIES_TEMPLATES := include/constants/species.h 	\
 	$(TEXT_SUBDIR)/species_names.h 					\
+	$(PKMN_SUBDIR)/pokedex_entries.h				\
 	$(PKMN_SUBDIR)/pokedex_text.h					\
 	$(PKMN_SUBDIR)/level_up_learnset_pointers.h 	\
 	$(PKMN_SUBDIR)/tmhm_learnsets.h 				\
@@ -26,12 +27,19 @@ SPECIES_TEMPLATES := include/constants/species.h 	\
 	$(PKMN_SUBDIR)/egg_moves.h						\
 	$(PKMN_SUBDIR)/base_stats.h						\
 	$(PKMN_SUBDIR)/evolution.h						\
+	$(PKMN_GRAPHICS_SUBDIR)/front_pic_anims.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_coordinates.h	\
+	$(PKMN_GRAPHICS_SUBDIR)/front_pic_table.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/back_pic_coordinates.h	\
+	$(PKMN_GRAPHICS_SUBDIR)/back_pic_table.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/footprint_table.h		\
+	$(PKMN_GRAPHICS_SUBDIR)/palette_table.h			\
+	$(PKMN_GRAPHICS_SUBDIR)/shiny_palette_table.h	\
+	$(PKMN_GRAPHICS_SUBDIR)/still_front_pic_table.h	\
 	$(PKMN_GRAPHICS_SUBDIR)/icon.h					\
 	$(PKMN_GRAPHICS_SUBDIR)/jump.h					\
-	$(PKMN_GRAPHICS_SUBDIR)/animation.h
+	$(PKMN_GRAPHICS_SUBDIR)/animation.h				\
+	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h
 
 SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, $(SPECIES_TEMPLATES))
 

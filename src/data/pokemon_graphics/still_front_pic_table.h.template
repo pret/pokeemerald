@@ -1,0 +1,13 @@
+{{ doNotModifyHeader }}
+
+
+const struct CompressedSpriteSheet gMonStillFrontPicTable[] =
+{
+## for specimen in species
+## if existsIn(specimen.graphics, "still")
+    SPECIES_SPRITE({{upper(specimen.name)}}, gMonStillFrontPicTable_{{specimen.graphics.still}}),
+## else
+    SPECIES_SPRITE({{upper(specimen.name)}}, gMonStillFrontPicTable_{{specimen.name}}),
+## endif
+## endfor
+};

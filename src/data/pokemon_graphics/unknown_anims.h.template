@@ -1,0 +1,69 @@
+{{ doNotModifyHeader }}
+
+
+## for specimen in species
+## if existsIn(specimen.graphics, "animation")
+## if existsIn(specimen.graphics.animation, "unknown")
+## if existsIn(specimen.graphics.animation.unknown, "frames")
+## for frameset in specimen.graphics.animation.unknown.frames
+static const union AnimCmd sUnknownAnim_{{upper(specimen.name)}}_{{loop.index1}}[] =
+{
+## for frame in frameset
+    ANIMCMD_FRAME({% for value in frame %}{% if loop.is_last %}{{value}}{% else %}{{value}}, {% endif %}{% endfor %}),
+## endfor
+    ANIMCMD_END,
+};
+
+## endfor
+## endif
+## endif
+## endif
+## endfor
+
+## for specimen in species
+## if not existsIn(specimen.graphics, "animation")
+static const union AnimCmd *const sUnknownAnims_{{upper(specimen.name)}}[] = {sAnim_GeneralFrame0};
+## else if not existsIn(specimen.graphics.animation, "unknown")
+static const union AnimCmd *const sUnknownAnims_{{upper(specimen.name)}}[] = {sAnim_GeneralFrame0};
+## endif
+## endfor
+
+## for specimen in species
+## if existsIn(specimen.graphics, "animation")
+## if existsIn(specimen.graphics.animation, "unknown")
+
+static const union AnimCmd *const sUnknownAnims_{{upper(specimen.name)}}[] =
+{
+    sAnim_GeneralFrame0,
+## for frameset in specimen.graphics.animation.unknown
+    sUnknownAnim_{{upper(specimen.name)}}_{{loop.index1}},
+## endfor
+};
+## endif
+## endif
+## endfor
+
+#define ANIM_CMD(name)             [SPECIES_##name] = sUnknownAnims_##name
+#define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
+
+static const union AnimCmd *const *const sUnknownAnimsTable[] =
+{
+## for specimen in species
+## if existsIn(specimen.graphics, "animation")
+## if existsIn(specimen.graphics.animation, "unknown")
+## if existsIn(specimen.graphics.animation.unknown, "source")
+    ANIM_CMD_FULL({{upper(specimen.name)}}, sAnims_{{upper(specimen.graphics.animation.unknown.source)}}),
+## else
+    ANIM_CMD({{upper(specimen.name)}}),
+## endif
+## else
+    ANIM_CMD({{upper(specimen.name)}}),
+## endif
+## else
+    ANIM_CMD({{upper(specimen.name)}}),
+## endif
+## endfor
+};
+
+#undef ANIM_CMD_FULL
+#undef ANIM_CMD

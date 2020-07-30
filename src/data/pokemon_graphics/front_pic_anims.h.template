@@ -1,0 +1,48 @@
+{{ doNotModifyHeader }}
+
+
+## for specimen in species
+## if existsIn(specimen.graphics.front_pic.animation, "frames")
+## for frameset in specimen.graphics.front_pic.animation.frames
+static const union AnimCmd sAnim_{{upper(specimen.name)}}_{{loop.index}}[] =
+{
+## for frame in frameset
+    ANIMCMD_FRAME({% for value in frame %}{% if loop.is_last %}{{value}}{% else %}{{value}}, {% endif %}{% endfor %}),
+## endfor
+    ANIMCMD_END,
+};
+## endfor
+
+## endif
+## endfor
+
+## for specimen in species
+## if existsIn(specimen.graphics.front_pic.animation, "frames")
+static const union AnimCmd *const sAnims_{{upper(specimen.name)}}[] =
+{
+    sAnimGeneralFrame0,
+## for frameset in specimen.graphics.front_pic.animation.frames
+    sAnim_{{upper(specimen.name)}}_{{loop.index}},
+## endfor
+};
+
+## endif
+## endfor
+
+
+#define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
+#define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
+
+const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
+{
+## for specimen in species
+## if existsIn(specimen.graphics.front_pic.animation, "frames")
+    ANIM_CMD({{upper(specimen.name)}}),
+## else
+    ANIM_CMD_FULL({{upper(specimen.name)}}, sAnims_{{upper(specimen.graphics.front_pic.animation.source)}}),
+## endif
+## endfor
+};
+
+#undef ANIM_CMD_FULL
+#undef ANIM_CMD

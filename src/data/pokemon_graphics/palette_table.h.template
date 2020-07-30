@@ -1,0 +1,13 @@
+{{ doNotModifyHeader }}
+
+
+const struct CompressedSpriteSheet gMonPaletteTable[] =
+{
+## for specimen in species
+## if existsIn(specimen.graphics, "palette")
+    SPECIES_PAL({{upper(specimen.name)}}, gMonPaletteTable_{{specimen.graphics.palette}}),
+## else
+    SPECIES_PAL({{upper(specimen.name)}}, gMonPaletteTable_{{specimen.name}}),
+## endif
+## endfor
+};

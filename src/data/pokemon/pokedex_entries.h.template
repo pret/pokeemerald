@@ -1,0 +1,22 @@
+{{ doNotModifyHeader }}
+
+
+const struct PokedexEntry gPokedexEntries[] =
+{
+## for specimen in species
+## if existsIn(specimen, "pokedex")
+    [NATIONAL_DEX_{{upper(specimen.name)}}] =
+    {
+        .categoryName = _({{upper(specimen.pokedex.category)}}),
+        .height = {{specimen.pokedex.height}},
+        .weight = {{specimen.pokedex.weight}},
+        .description = g{{specimen.name}}PokedexText,
+        .pokemonScale = {{specimen.pokedex.scale}},
+        .pokemonOffset = {{specimen.pokedex.offset}},
+        .trainerScale = {{specimen.pokedex.trainer_scale}},
+        .trainerOffset = {{specimen.pokedex.trainer_offset}},
+    },
+
+## endif
+## endfor
+};

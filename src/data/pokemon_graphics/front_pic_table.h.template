@@ -1,0 +1,13 @@
+{{ doNotModifyHeader }}
+
+
+const struct CompressedSpriteSheet gMonFrontPicTable[] =
+{
+## for specimen in species
+## if existsIn(specimen.graphics.front_pic, "data")
+    SPECIES_SPRITE({{upper(specimen.name)}}, gMonFrontPic_{{specimen.graphics.front_pic.data}}),
+## else
+    SPECIES_SPRITE({{upper(specimen.name)}}, gMonFrontPic_{{specimen.name}}),
+## endif
+## endfor
+};
