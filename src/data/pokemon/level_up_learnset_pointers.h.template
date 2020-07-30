@@ -1,0 +1,9 @@
+{{ doNotModifyHeader }}
+
+
+const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
+{
+## for specimen in species
+	[SPECIES_{{upper(specimen.name)}}] = s{{specimen.name}}LevelUpLearnset,
+## endfor
+};

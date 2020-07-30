@@ -1,0 +1,16 @@
+{{ doNotModifyHeader }}
+
+
+const u8 *const gMonIconTable[] =
+{
+## for specimen in species
+	[SPECIES_{{upper(specimen.name)}}] = gMonIcon_{{specimen.name}},
+## endfor
+};
+
+const u8 *const gMonIconPaletteIndices[] =
+{
+## for specimen in species
+	[SPECIES_{{upper(specimen.name)}}] = {{specimen.graphics.icon.palette}},
+## endfor
+};

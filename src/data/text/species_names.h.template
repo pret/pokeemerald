@@ -1,0 +1,8 @@
+{{ doNotModifyHeader }}
+
+const struct u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] =
+{
+## for specimen in species
+    [SPECIES_{{ upper(specimen.name) }}] = _("{{ specimen.name }}"),
+## endfor
+};

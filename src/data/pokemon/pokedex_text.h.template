@@ -1,0 +1,13 @@
+const u8 gDummyPokedexText[] = _(
+        "This is a newly discovered POKéMON.\n"
+        "It is currently under investigation.\n"
+        "No detailed information is available\n"
+        "at this time.");
+
+
+## for specimen in species
+## if existsIn(specimen.pokedex, "entry")
+const u8 g{{specimen.name}}PokedexText[] = _("{{specimen.pokedex.entry}}");
+
+## endif
+## endfor

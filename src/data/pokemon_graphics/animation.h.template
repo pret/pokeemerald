@@ -1,0 +1,27 @@
+{{ doNotModifyHeader }}
+
+
+static const u8 sSpeciesToBackAnimSet[] =
+{
+## for specimen in species
+	[SPECIES_{{upper(specimen.name)}}] = BACK_ANIM_{{upper(specimen.graphics.back_pic.animation)}},
+## endfor
+};
+
+static const u8 sMonFrontAnimIdsTable[] =
+{
+## for specimen in species
+## if specimen.name != "NONE"
+    [SPECIES_{{upper(specimen.name)}}] = specimen.graphics.front_pic.animation_id,
+## endif
+## endfor
+};
+
+static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
+{
+## for specimen in species
+## if existsIn(specimen.graphics.front_pic, "animation_delay")
+    [SPECIES_{{upper(specimen.name)}}] = specimen.graphics.front_pic.animation_delay,
+## endif
+## endfor
+};

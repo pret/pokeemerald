@@ -1,0 +1,33 @@
+#ifndef GUARD_CONSTANTS_SPECIES_H
+#define GUARD_CONSTANTS_SPECIES_H
+
+
+// Game data index defines
+
+## for specimen in species
+#define SPECIES_{{upper(specimen.name)}} {{specimen.pokedex.internal}}
+## endfor
+
+#define NUM_SPECIES SPECIES_EGG
+
+
+// National Dex index defines
+
+## for specimen in species
+#define NATIONAL_DEX_{{upper(specimen.name)}} {{specimen.pokedex.national}}
+## endfor
+
+#define KANTO_DEX_COUNT NATIONAL_DEX_MEW
+#define JOHTO_DEX_COUNT NATIONAL_DEX_CELEBI
+#define NATIONAL_DEX_COUNT NATIONAL_DEX_DEOXYS
+
+
+// Hoenn Dex index defines
+## for specimen in species
+#define HOENN_DEX_{{upper(specimen.name)}} {{specimen.pokedex.hoenn}}
+## endfor
+
+#define HOENN_DEX_COUNT HOENN_DEX_DEOXYS
+
+
+#endif // GUARD_CONSTANTS_SPECIES_H

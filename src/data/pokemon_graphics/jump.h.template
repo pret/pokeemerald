@@ -1,0 +1,11 @@
+{{ doNotModifyHeader }}
+
+
+static const struct PokemonJumpMons gPkmnJumpSpecies[] =
+{
+## for specimen in species
+## if existsIn(specimen.graphics, "jump")
+    { .species = SPECIES_{{upper(specimen.name)}}, .unk2 = {{specimen.graphics.jump}} },
+## endif
+## endfor
+};

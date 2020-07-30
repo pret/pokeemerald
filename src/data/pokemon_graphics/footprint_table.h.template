@@ -1,0 +1,9 @@
+{{ doNotModifyHeader }}
+
+
+const u8 *const gMonFootprintTable[] =
+{
+## for specimen in species
+	[SPECIES_{{upper(specimen.name)}}] = gMonFootprint_{{specimen.name}},
+## endfor
+};

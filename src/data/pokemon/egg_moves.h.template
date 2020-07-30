@@ -1,0 +1,25 @@
+{{ doNotModifyHeader }}
+
+
+#define EGG_MOVES_SPECIES_OFFSET 20000
+#define EGG_MOVES_TERMINATOR 0xFFFF
+#define egg_moves(species, moves...) (SPECIES_##species + EGG_MOVES_SPECIES_OFFSET), moves
+
+
+const u16 gEggMoves[] =
+{
+## for specimen in species
+## if existsIn(specimen.learnsets, "egg")
+    egg_moves({{upper(specimen.name)}},
+## for move in specimen.learnsets.egg
+## if loop.is_last
+              MOVE_{{upper(move)}}),
+
+## else
+              MOVE_{{upper(move)}},
+## endif
+## endfor
+## endif
+## endfor
+    EGG_MOVES_TERMINATOR
+};

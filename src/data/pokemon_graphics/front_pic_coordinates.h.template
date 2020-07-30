@@ -1,0 +1,12 @@
+{{ doNotModifyHeader }}
+
+const struct MonCoords gMonFrontPicCoords[] =
+{
+## for specimen in species
+    [SPECIES_{{ upper(specimen.name) }}] =
+    {
+        .size = {{ specimen.graphics.front_pic.size }},
+        .y_offset = {{ specimen.graphics.front_pic.y_offset }}
+    },
+## endfor
+};
