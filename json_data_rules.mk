@@ -11,7 +11,7 @@ $(C_BUILDDIR)/wild_encounter.o: c_dep += $(DATA_SRC_SUBDIR)/wild_encounters.h
 
 
 
-SPECIES_JSON := $(DATA_SRC_SUBDIR)/pokemon_species.json
+SPECIES_JSON := $(DATA_ASM_SUBDIR)/pokemon_species.json
 
 GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/graphics
 TEXT_SUBDIR := $(DATA_SRC_SUBDIR)/text
