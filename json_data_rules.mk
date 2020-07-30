@@ -12,16 +12,22 @@ $(C_BUILDDIR)/wild_encounter.o: c_dep += $(DATA_SRC_SUBDIR)/wild_encounters.h
 
 
 SPECIES_JSON := $(DATA_SRC_SUBDIR)/pokemon_species.json
+
+GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/graphics
 TEXT_SUBDIR := $(DATA_SRC_SUBDIR)/text
 PKMN_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon
 PKMN_GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon_graphics
 
 
 SPECIES_TEMPLATES := include/constants/species.h 	\
+	include/graphics_pokemon.h						\
+	$(GRAPHICS_SUBDIR)/pokemon.h					\
+	$(GRAPHICS_SUBDIR)/anim_mon_front_pics.h		\
 	$(TEXT_SUBDIR)/species_names.h 					\
 	$(PKMN_SUBDIR)/pokedex_entries.h				\
 	$(PKMN_SUBDIR)/pokedex_text.h					\
 	$(PKMN_SUBDIR)/level_up_learnset_pointers.h 	\
+	$(PKMN_SUBDIR)/level_up_learnsets.h				\
 	$(PKMN_SUBDIR)/tmhm_learnsets.h 				\
 	$(PKMN_SUBDIR)/tutor_learnsets.h 				\
 	$(PKMN_SUBDIR)/egg_moves.h						\

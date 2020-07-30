@@ -1,0 +1,11 @@
+{{ doNotModifyHeader }}
+
+## for specimen in species
+
+const u32 gMonStillFrontPic_{{specimen.name}}[] = INCBIN_U32("graphics/pokemon/{{lower(specimen.name)}}/front.4bpp.lz");
+const u32 gMonPalette_{{specimen.name}}[]       = INCBIN_U32("graphics/pokemon/{{lower(specimen.name)}}/normal.gbapal.lz");
+const u32 gMonBackPic_{{specimen.name}}[]       = INCBIN_U32("graphics/pokemon/{{lower(specimen.name)}}/back.4bpp.lz");
+const u32 gMonShinyPalette_{{specimen.name}}[]  = INCBIN_U32("graphics/pokemon/{{lower(specimen.name)}}/shiny.gbapal.lz");
+const u8 gMonIcon_{{specimen.name}}[]           = INCBIN_U8("graphics/pokemon/{{lower(specimen.name)}}/icon.4bpp");
+const u8 gMonFootprint_{{specimen.name}}[]      = INCBIN_U8("graphics/pokemon/{{lower(specimen.name)}}/footprint.1bpp");
+## endfor

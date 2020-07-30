@@ -39,19 +39,19 @@
                 "egg_group" : [ "monster", "grass" ]
             },
 			"learnsets" : {
-				"levelup" : [
-					{ "1" : "tackle" },
-					{ "4" : "growl" },
-					{ "7" : "leech_seed" },
-					{ "10" : "vine_whip" },
-					{ "15" : "poison_powder" },
-					{ "15" : "sleep_powder" },
-					{ "20" : "razor_leaf" },
-					{ "25" : "sweet_scent" },
-					{ "32" : "growth" },
-					{ "39" : "synthesis" },
-					{ "46" : "solar_beam" }
-				],
+				"levelup" : {
+					"1" : "tackle",
+					"4" : "growl",
+					"7" : "leech_seed",
+					"10" : "vine_whip",
+					"15" : "poison_powder",
+					"15" : "sleep_powder",
+					"20" : "razor_leaf",
+					"25" : "sweet_scent",
+					"32" : "growth",
+					"39" : "synthesis",
+					"46" : "solar_beam"
+                },
 				"tmhm" : [
                     "toxic",
                     "bullet_seed",
@@ -166,9 +166,19 @@
                 "egg_group" : [ "monster", "grass" ]
             },
 			"learnsets" : {
-				"learnset" : [
-
-				],
+				"levelup" : {
+					"1" : "tackle",
+					"4" : "growl",
+					"7" : "leech_seed",
+					"10" : "vine_whip",
+					"15" : "poison_powder",
+					"15" : "sleep_powder",
+					"22" : "razor_leaf",
+					"29" : "sweet_scent",
+					"38" : "growth",
+					"47" : "synthesis",
+					"56" : "solar_beam"
+                },
 				"tmhm" : [
                     "toxic",
                     "bullet_seed",

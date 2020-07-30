@@ -1,0 +1,15 @@
+{{ doNotModifyHeader }}
+
+
+#define LEVEL_UP_MOVE(lvl, move) ((lvl << 9) | move)
+
+## for specimen in species
+
+static const u16 s{{specimen.name}}LevelUpLearnset[] =
+{
+## for level, move in specimen.learnsets.levelup
+    LEVEL_UP_MOVE({{level}}, MOVE_{{upper(move)}}),
+## endfor
+    LEVEL_UP_END
+};
+## endfor

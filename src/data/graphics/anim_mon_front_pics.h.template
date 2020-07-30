@@ -1,0 +1,6 @@
+{{ doNotModifyHeader }}
+
+
+## for specimen in species
+const u32 gMonFrontPic_{{specimen.name}} = INCBIN_U32("graphics/pokemon/{{lower(specimen.name)}}/anim_front.4bpp.lz");
+## endfor

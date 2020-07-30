@@ -1,0 +1,11 @@
+{{ doNotModifyHeader }}
+
+
+## for specimen in species
+extern const u32 gMonStillFrontPic_{{specimen.name}}[];
+extern const u32 gMonPalette_{{specimen.name}}[];
+extern const u32 gMonBackPic_{{specimen.name}}[];
+extern const u32 gMonShinyPalette_{{specimen.name}}[];
+extern const u8 gMonIcon_{{specimen.name}}[];
+extern const u8 gMonFootprint_{{specimen.name}}[];
+## endfor
