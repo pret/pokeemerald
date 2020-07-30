@@ -1930,6 +1930,7 @@ static void AnimWaterPulseRing_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
     sprite->data[0]++;
 }
+
 static void CreateWaterPulseRingBubbles(struct Sprite *sprite, s32 xDiff, s32 yDiff)
 {
     s16 combinedX, combinedY;
