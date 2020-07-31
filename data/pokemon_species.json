@@ -1,13 +1,13 @@
 {
     "species": [
         {
-            "name" : "NONE",
+            "name" : "None",
             "learnsets" : {
                 "tutor" : []
             }
         },
         {
-            "name": "BULBASAUR",
+            "name": "Bulbasaur",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -143,7 +143,7 @@
             ]
         },
         {
-            "name": "IVYSAUR",
+            "name" : "Ivysaur",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -276,7 +276,7 @@
             ]
         },
         {
-            "name": "VENUSAUR",
+            "name" : "Venusaur",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -409,7 +409,7 @@
             }
         },
         {
-            "name": "CHARMANDER",
+            "name" : "Charmander",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -553,7 +553,7 @@
             ]
         },
         {
-            "name": "CHARMELEON",
+            "name" : "Charmeleon",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -691,7 +691,7 @@
             ]
         },
         {
-            "name": "CHARIZARD",
+            "name" : "Charizard",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -834,7 +834,7 @@
             }
         },
         {
-            "name": "SQUIRTLE",
+            "name" : "Squirtle",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -980,7 +980,7 @@
             ]
         },
         {
-            "name": "WARTORTLE",
+            "name" : "Wartortle",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -1123,7 +1123,7 @@
             ]
         },
         {
-            "name": "BLASTOISE",
+            "name" : "Blastoise",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -1265,7 +1265,7 @@
             }
         },
         {
-            "name": "CATERPIE",
+            "name" : "Caterpie",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -1329,7 +1329,7 @@
             ]
         },
         {
-            "name": "METAPOD",
+            "name" : "Metapod",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -1393,7 +1393,7 @@
             ]
         },
         {
-            "name": "BUTTERFREE",
+            "name" : "Butterfree",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -1516,7 +1516,7 @@
             }
         },
         {
-            "name": "WEEDLE",
+            "name" : "Weedle",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -1581,7 +1581,7 @@
             ]
         },
         {
-            "name": "KAKUNA",
+            "name" : "Kakuna",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -1646,7 +1646,7 @@
             ]
         },
         {
-            "name": "BEEDRILL",
+            "name" : "Beedrill",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -1762,7 +1762,7 @@
             }
         },
         {
-            "name": "PIDGEY",
+            "name" : "Pidgey",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -1882,7 +1882,7 @@
             ]
         },
         {
-            "name": "PIDGEOTTO",
+            "name" : "Pidgeotto",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -2001,7 +2001,7 @@
             ]
         },
         {
-            "name": "PIDGEOT",
+            "name" : "Pidgeot",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -2118,7 +2118,7 @@
             }
         },
         {
-            "name": "RATTATA",
+            "name" : "Rattata",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -2251,7 +2251,7 @@
             ]
         },
         {
-            "name": "RATICATE",
+            "name" : "Raticate",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -2374,7 +2374,7 @@
             }
         },
         {
-            "name": "SPEAROW",
+            "name" : "Spearow",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -2496,7 +2496,7 @@
             ]
         },
         {
-            "name": "FEAROW",
+            "name" : "Fearow",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -2610,7 +2610,7 @@
             }
         },
         {
-            "name": "EKANS",
+            "name" : "Ekans",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -2742,7 +2742,7 @@
             ]
         },
         {
-            "name": "ARBOK",
+            "name" : "Arbok",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -2868,7 +2868,7 @@
             }
         },
         {
-            "name": "PIKACHU",
+            "name" : "Pikachu",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -3007,7 +3007,7 @@
             ]
         },
         {
-            "name": "RAICHU",
+            "name" : "Raichu",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -3120,7 +3120,7 @@
             }
         },
         {
-            "name": "SANDSHREW",
+            "name" : "Sandshrew",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -3261,7 +3261,7 @@
             ]
         },
         {
-            "name": "SANDSLASH",
+            "name" : "Sandslash",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -3393,7 +3393,7 @@
             }
         },
         {
-            "name": "NIDORAN_F",
+            "name" : "Nidoran_f",
             "learnsets": {
                 "levelup": [
                     {
@@ -3530,7 +3530,7 @@
             ]
         },
         {
-            "name": "NIDORINA",
+            "name" : "Nidorina",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -3657,7 +3657,7 @@
             ]
         },
         {
-            "name": "NIDOQUEEN",
+            "name" : "Nidoqueen",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -3787,7 +3787,7 @@
             }
         },
         {
-            "name": "NIDORAN_M",
+            "name" : "Nidoran_m",
             "learnsets": {
                 "levelup": [
                     {
@@ -3923,7 +3923,7 @@
             ]
         },
         {
-            "name": "NIDORINO",
+            "name" : "Nidorino",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -4050,7 +4050,7 @@
             ]
         },
         {
-            "name": "NIDOKING",
+            "name" : "Nidoking",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -4180,7 +4180,7 @@
             }
         },
         {
-            "name": "CLEFAIRY",
+            "name" : "Clefairy",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -4340,7 +4340,7 @@
             ]
         },
         {
-            "name": "CLEFABLE",
+            "name" : "Clefable",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -4468,7 +4468,7 @@
             }
         },
         {
-            "name": "VULPIX",
+            "name" : "Vulpix",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -4601,7 +4601,7 @@
             ]
         },
         {
-            "name": "NINETALES",
+            "name" : "Ninetales",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -4702,7 +4702,7 @@
             }
         },
         {
-            "name": "JIGGLYPUFF",
+            "name" : "Jigglypuff",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -4849,7 +4849,7 @@
             ]
         },
         {
-            "name": "WIGGLYTUFF",
+            "name" : "Wigglytuff",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -4970,7 +4970,7 @@
             }
         },
         {
-            "name": "ZUBAT",
+            "name" : "Zubat",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5098,7 +5098,7 @@
             ]
         },
         {
-            "name": "GOLBAT",
+            "name" : "Golbat",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5228,7 +5228,7 @@
             ]
         },
         {
-            "name": "ODDISH",
+            "name" : "Oddish",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5347,7 +5347,7 @@
             ]
         },
         {
-            "name": "GLOOM",
+            "name" : "Gloom",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5468,7 +5468,7 @@
             ]
         },
         {
-            "name": "VILEPLUME",
+            "name" : "Vileplume",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5565,7 +5565,7 @@
             }
         },
         {
-            "name": "PARAS",
+            "name" : "Paras",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5699,7 +5699,7 @@
             ]
         },
         {
-            "name": "PARASECT",
+            "name" : "Parasect",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5825,7 +5825,7 @@
             }
         },
         {
-            "name": "VENONAT",
+            "name" : "Venonat",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -5951,7 +5951,7 @@
             ]
         },
         {
-            "name": "VENOMOTH",
+            "name" : "Venomoth",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -6077,7 +6077,7 @@
             }
         },
         {
-            "name": "DIGLETT",
+            "name" : "Diglett",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -6203,7 +6203,7 @@
             ]
         },
         {
-            "name": "DUGTRIO",
+            "name" : "Dugtrio",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -6324,7 +6324,7 @@
             }
         },
         {
-            "name": "MEOWTH",
+            "name" : "Meowth",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -6459,7 +6459,7 @@
             ]
         },
         {
-            "name": "PERSIAN",
+            "name" : "Persian",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -6585,7 +6585,7 @@
             }
         },
         {
-            "name": "PSYDUCK",
+            "name" : "Psyduck",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -6730,7 +6730,7 @@
             ]
         },
         {
-            "name": "GOLDUCK",
+            "name" : "Golduck",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -6867,7 +6867,7 @@
             }
         },
         {
-            "name": "MANKEY",
+            "name" : "Mankey",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -7016,7 +7016,7 @@
             ]
         },
         {
-            "name": "PRIMEAPE",
+            "name" : "Primeape",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -7159,7 +7159,7 @@
             }
         },
         {
-            "name": "GROWLITHE",
+            "name" : "Growlithe",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -7292,7 +7292,7 @@
             ]
         },
         {
-            "name": "ARCANINE",
+            "name" : "Arcanine",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -7396,7 +7396,7 @@
             }
         },
         {
-            "name": "POLIWAG",
+            "name" : "Poliwag",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -7524,7 +7524,7 @@
             ]
         },
         {
-            "name": "POLIWHIRL",
+            "name" : "Poliwhirl",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -7668,7 +7668,7 @@
             ]
         },
         {
-            "name": "POLIWRATH",
+            "name" : "Poliwrath",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -7795,7 +7795,7 @@
             }
         },
         {
-            "name": "ABRA",
+            "name" : "Abra",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -7917,7 +7917,7 @@
             ]
         },
         {
-            "name": "KADABRA",
+            "name" : "Kadabra",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -8064,7 +8064,7 @@
             ]
         },
         {
-            "name": "ALAKAZAM",
+            "name" : "Alakazam",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -8206,7 +8206,7 @@
             }
         },
         {
-            "name": "MACHOP",
+            "name" : "Machop",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -8353,7 +8353,7 @@
             ]
         },
         {
-            "name": "MACHOKE",
+            "name" : "Machoke",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -8494,7 +8494,7 @@
             ]
         },
         {
-            "name": "MACHAMP",
+            "name" : "Machamp",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -8630,7 +8630,7 @@
             }
         },
         {
-            "name": "BELLSPROUT",
+            "name" : "Bellsprout",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -8756,7 +8756,7 @@
             ]
         },
         {
-            "name": "WEEPINBELL",
+            "name" : "Weepinbell",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -8879,7 +8879,7 @@
             ]
         },
         {
-            "name": "VICTREEBEL",
+            "name" : "Victreebel",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -8974,7 +8974,7 @@
             }
         },
         {
-            "name": "TENTACOOL",
+            "name" : "Tentacool",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -9102,7 +9102,7 @@
             ]
         },
         {
-            "name": "TENTACRUEL",
+            "name" : "Tentacruel",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -9223,7 +9223,7 @@
             }
         },
         {
-            "name": "GEODUDE",
+            "name" : "Geodude",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -9368,7 +9368,7 @@
             ]
         },
         {
-            "name": "GRAVELER",
+            "name" : "Graveler",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -9513,7 +9513,7 @@
             ]
         },
         {
-            "name": "GOLEM",
+            "name" : "Golem",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -9656,7 +9656,7 @@
             }
         },
         {
-            "name": "PONYTA",
+            "name" : "Ponyta",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -9781,7 +9781,7 @@
             ]
         },
         {
-            "name": "RAPIDASH",
+            "name" : "Rapidash",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -9905,7 +9905,7 @@
             }
         },
         {
-            "name": "SLOWPOKE",
+            "name" : "Slowpoke",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -10058,7 +10058,7 @@
             ]
         },
         {
-            "name": "SLOWBRO",
+            "name" : "Slowbro",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -10209,7 +10209,7 @@
             }
         },
         {
-            "name": "MAGNEMITE",
+            "name" : "Magnemite",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -10333,7 +10333,7 @@
             ]
         },
         {
-            "name": "MAGNETON",
+            "name" : "Magneton",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -10458,7 +10458,7 @@
             }
         },
         {
-            "name": "FARFETCHD",
+            "name" : "Farfetchd",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -10587,7 +10587,7 @@
             }
         },
         {
-            "name": "DODUO",
+            "name" : "Doduo",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -10713,7 +10713,7 @@
             ]
         },
         {
-            "name": "DODRIO",
+            "name" : "Dodrio",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -10834,7 +10834,7 @@
             }
         },
         {
-            "name": "SEEL",
+            "name" : "Seel",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -10958,7 +10958,7 @@
             ]
         },
         {
-            "name": "DEWGONG",
+            "name" : "Dewgong",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -11080,7 +11080,7 @@
             }
         },
         {
-            "name": "GRIMER",
+            "name" : "Grimer",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -11220,7 +11220,7 @@
             ]
         },
         {
-            "name": "MUK",
+            "name" : "Muk",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -11354,7 +11354,7 @@
             }
         },
         {
-            "name": "SHELLDER",
+            "name" : "Shellder",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -11476,7 +11476,7 @@
             ]
         },
         {
-            "name": "CLOYSTER",
+            "name" : "Cloyster",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -11581,7 +11581,7 @@
             }
         },
         {
-            "name": "GASTLY",
+            "name" : "Gastly",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -11709,7 +11709,7 @@
             ]
         },
         {
-            "name": "HAUNTER",
+            "name" : "Haunter",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -11834,7 +11834,7 @@
             ]
         },
         {
-            "name": "GENGAR",
+            "name" : "Gengar",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -11970,7 +11970,7 @@
             }
         },
         {
-            "name": "ONIX",
+            "name" : "Onix",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -12105,7 +12105,7 @@
             ]
         },
         {
-            "name": "DROWZEE",
+            "name" : "Drowzee",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -12249,7 +12249,7 @@
             ]
         },
         {
-            "name": "HYPNO",
+            "name" : "Hypno",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -12386,7 +12386,7 @@
             }
         },
         {
-            "name": "KRABBY",
+            "name" : "Krabby",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -12518,7 +12518,7 @@
             ]
         },
         {
-            "name": "KINGLER",
+            "name" : "Kingler",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -12645,7 +12645,7 @@
             }
         },
         {
-            "name": "VOLTORB",
+            "name" : "Voltorb",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -12767,7 +12767,7 @@
             ]
         },
         {
-            "name": "ELECTRODE",
+            "name" : "Electrode",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -12890,7 +12890,7 @@
             }
         },
         {
-            "name": "EXEGGCUTE",
+            "name" : "Exeggcute",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -13023,7 +13023,7 @@
             ]
         },
         {
-            "name": "EXEGGUTOR",
+            "name" : "Exeggutor",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -13127,7 +13127,7 @@
             }
         },
         {
-            "name": "CUBONE",
+            "name" : "Cubone",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -13281,7 +13281,7 @@
             ]
         },
         {
-            "name": "MAROWAK",
+            "name" : "Marowak",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -13430,7 +13430,7 @@
             }
         },
         {
-            "name": "HITMONLEE",
+            "name" : "Hitmonlee",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -13560,7 +13560,7 @@
             }
         },
         {
-            "name": "HITMONCHAN",
+            "name" : "Hitmonchan",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -13690,7 +13690,7 @@
             }
         },
         {
-            "name": "LICKITUNG",
+            "name" : "Lickitung",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -13844,7 +13844,7 @@
             }
         },
         {
-            "name": "KOFFING",
+            "name" : "Koffing",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -13976,7 +13976,7 @@
             ]
         },
         {
-            "name": "WEEZING",
+            "name" : "Weezing",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -14101,7 +14101,7 @@
             }
         },
         {
-            "name": "RHYHORN",
+            "name" : "Rhyhorn",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -14247,7 +14247,7 @@
             ]
         },
         {
-            "name": "RHYDON",
+            "name" : "Rhydon",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -14394,7 +14394,7 @@
             }
         },
         {
-            "name": "CHANSEY",
+            "name" : "Chansey",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -14562,7 +14562,7 @@
             ]
         },
         {
-            "name": "TANGELA",
+            "name" : "Tangela",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -14691,7 +14691,7 @@
             }
         },
         {
-            "name": "KANGASKHAN",
+            "name" : "Kangaskhan",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -14843,7 +14843,7 @@
             }
         },
         {
-            "name": "HORSEA",
+            "name" : "Horsea",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -14967,7 +14967,7 @@
             ]
         },
         {
-            "name": "SEADRA",
+            "name" : "Seadra",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -15093,7 +15093,7 @@
             ]
         },
         {
-            "name": "GOLDEEN",
+            "name" : "Goldeen",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -15219,7 +15219,7 @@
             ]
         },
         {
-            "name": "SEAKING",
+            "name" : "Seaking",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -15336,7 +15336,7 @@
             }
         },
         {
-            "name": "STARYU",
+            "name" : "Staryu",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -15469,7 +15469,7 @@
             ]
         },
         {
-            "name": "STARMIE",
+            "name" : "Starmie",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -15579,7 +15579,7 @@
             }
         },
         {
-            "name": "MR_MIME",
+            "name" : "Mr_mime",
             "learnsets": {
                 "levelup": [
                     {
@@ -15740,7 +15740,7 @@
             }
         },
         {
-            "name": "SCYTHER",
+            "name" : "Scyther",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -15873,7 +15873,7 @@
             ]
         },
         {
-            "name": "JYNX",
+            "name" : "Jynx",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -16017,7 +16017,7 @@
             }
         },
         {
-            "name": "ELECTABUZZ",
+            "name" : "Electabuzz",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -16144,7 +16144,7 @@
             }
         },
         {
-            "name": "MAGMAR",
+            "name" : "Magmar",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -16274,7 +16274,7 @@
             }
         },
         {
-            "name": "PINSIR",
+            "name" : "Pinsir",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -16400,7 +16400,7 @@
             }
         },
         {
-            "name": "TAUROS",
+            "name" : "Tauros",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -16520,7 +16520,7 @@
             }
         },
         {
-            "name": "MAGIKARP",
+            "name" : "Magikarp",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -16589,7 +16589,7 @@
             ]
         },
         {
-            "name": "GYARADOS",
+            "name" : "Gyarados",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -16712,7 +16712,7 @@
             }
         },
         {
-            "name": "LAPRAS",
+            "name" : "Lapras",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -16853,7 +16853,7 @@
             }
         },
         {
-            "name": "DITTO",
+            "name" : "Ditto",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -16911,7 +16911,7 @@
             }
         },
         {
-            "name": "EEVEE",
+            "name" : "Eevee",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -17047,7 +17047,7 @@
             ]
         },
         {
-            "name": "VAPOREON",
+            "name" : "Vaporeon",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -17169,7 +17169,7 @@
             }
         },
         {
-            "name": "JOLTEON",
+            "name" : "Jolteon",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -17288,7 +17288,7 @@
             }
         },
         {
-            "name": "FLAREON",
+            "name" : "Flareon",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -17405,7 +17405,7 @@
             }
         },
         {
-            "name": "PORYGON",
+            "name" : "Porygon",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -17534,7 +17534,7 @@
             ]
         },
         {
-            "name": "OMANYTE",
+            "name" : "Omanyte",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -17669,7 +17669,7 @@
             ]
         },
         {
-            "name": "OMASTAR",
+            "name" : "Omastar",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -17797,7 +17797,7 @@
             }
         },
         {
-            "name": "KABUTO",
+            "name" : "Kabuto",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -17934,7 +17934,7 @@
             ]
         },
         {
-            "name": "KABUTOPS",
+            "name" : "Kabutops",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -18070,7 +18070,7 @@
             }
         },
         {
-            "name": "AERODACTYL",
+            "name" : "Aerodactyl",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -18196,7 +18196,7 @@
             }
         },
         {
-            "name": "SNORLAX",
+            "name" : "Snorlax",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -18355,7 +18355,7 @@
             }
         },
         {
-            "name": "ARTICUNO",
+            "name" : "Articuno",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -18469,7 +18469,7 @@
             }
         },
         {
-            "name": "ZAPDOS",
+            "name" : "Zapdos",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -18583,7 +18583,7 @@
             }
         },
         {
-            "name": "MOLTRES",
+            "name" : "Moltres",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -18695,7 +18695,7 @@
             }
         },
         {
-            "name": "DRATINI",
+            "name" : "Dratini",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -18834,7 +18834,7 @@
             ]
         },
         {
-            "name": "DRAGONAIR",
+            "name" : "Dragonair",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -18971,7 +18971,7 @@
             ]
         },
         {
-            "name": "DRAGONITE",
+            "name" : "Dragonite",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -19126,7 +19126,7 @@
             }
         },
         {
-            "name": "MEWTWO",
+            "name" : "Mewtwo",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -19278,7 +19278,7 @@
             }
         },
         {
-            "name": "MEW",
+            "name" : "Mew",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -19440,7 +19440,7 @@
             }
         },
         {
-            "name": "CHIKORITA",
+            "name" : "Chikorita",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -19572,7 +19572,7 @@
             ]
         },
         {
-            "name": "BAYLEEF",
+            "name" : "Bayleef",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -19704,7 +19704,7 @@
             ]
         },
         {
-            "name": "MEGANIUM",
+            "name" : "Meganium",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -19832,7 +19832,7 @@
             }
         },
         {
-            "name": "CYNDAQUIL",
+            "name" : "Cyndaquil",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -19955,7 +19955,7 @@
             ]
         },
         {
-            "name": "QUILAVA",
+            "name" : "Quilava",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -20078,7 +20078,7 @@
             ]
         },
         {
-            "name": "TYPHLOSION",
+            "name" : "Typhlosion",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -20207,7 +20207,7 @@
             }
         },
         {
-            "name": "TOTODILE",
+            "name" : "Totodile",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -20347,7 +20347,7 @@
             ]
         },
         {
-            "name": "CROCONAW",
+            "name" : "Croconaw",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -20488,7 +20488,7 @@
             ]
         },
         {
-            "name": "FERALIGATR",
+            "name" : "Feraligatr",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -20626,7 +20626,7 @@
             }
         },
         {
-            "name": "SENTRET",
+            "name" : "Sentret",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -20770,7 +20770,7 @@
             ]
         },
         {
-            "name": "FURRET",
+            "name" : "Furret",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -20909,7 +20909,7 @@
             }
         },
         {
-            "name": "HOOTHOOT",
+            "name" : "Hoothoot",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -21037,7 +21037,7 @@
             ]
         },
         {
-            "name": "NOCTOWL",
+            "name" : "Noctowl",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -21157,7 +21157,7 @@
             }
         },
         {
-            "name": "LEDYBA",
+            "name" : "Ledyba",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -21290,7 +21290,7 @@
             ]
         },
         {
-            "name": "LEDIAN",
+            "name" : "Ledian",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -21416,7 +21416,7 @@
             }
         },
         {
-            "name": "SPINARAK",
+            "name" : "Spinarak",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -21542,7 +21542,7 @@
             ]
         },
         {
-            "name": "ARIADOS",
+            "name" : "Ariados",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -21661,7 +21661,7 @@
             }
         },
         {
-            "name": "CROBAT",
+            "name" : "Crobat",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -21786,7 +21786,7 @@
             }
         },
         {
-            "name": "CHINCHOU",
+            "name" : "Chinchou",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -21916,7 +21916,7 @@
             ]
         },
         {
-            "name": "LANTURN",
+            "name" : "Lanturn",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -22039,7 +22039,7 @@
             }
         },
         {
-            "name": "PICHU",
+            "name" : "Pichu",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -22160,7 +22160,7 @@
             ]
         },
         {
-            "name": "CLEFFA",
+            "name" : "Cleffa",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -22294,7 +22294,7 @@
             ]
         },
         {
-            "name": "IGGLYBUFF",
+            "name" : "Igglybuff",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -22422,7 +22422,7 @@
             ]
         },
         {
-            "name": "TOGEPI",
+            "name" : "Togepi",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -22567,7 +22567,7 @@
             ]
         },
         {
-            "name": "TOGETIC",
+            "name" : "Togetic",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -22705,7 +22705,7 @@
             }
         },
         {
-            "name": "NATU",
+            "name" : "Natu",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -22837,7 +22837,7 @@
             ]
         },
         {
-            "name": "XATU",
+            "name" : "Xatu",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -22956,7 +22956,7 @@
             }
         },
         {
-            "name": "MAREEP",
+            "name" : "Mareep",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -23075,7 +23075,7 @@
             ]
         },
         {
-            "name": "FLAAFFY",
+            "name" : "Flaaffy",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -23199,7 +23199,7 @@
             ]
         },
         {
-            "name": "AMPHAROS",
+            "name" : "Ampharos",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -23324,7 +23324,7 @@
             }
         },
         {
-            "name": "BELLOSSOM",
+            "name" : "Bellossom",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -23423,7 +23423,7 @@
             }
         },
         {
-            "name": "MARILL",
+            "name" : "Marill",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -23564,7 +23564,7 @@
             ]
         },
         {
-            "name": "AZUMARILL",
+            "name" : "Azumarill",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -23699,7 +23699,7 @@
             }
         },
         {
-            "name": "SUDOWOODO",
+            "name" : "Sudowoodo",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -23829,7 +23829,7 @@
             }
         },
         {
-            "name": "POLITOED",
+            "name" : "Politoed",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -23952,7 +23952,7 @@
             }
         },
         {
-            "name": "HOPPIP",
+            "name" : "Hoppip",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -24078,7 +24078,7 @@
             ]
         },
         {
-            "name": "SKIPLOOM",
+            "name" : "Skiploom",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -24204,7 +24204,7 @@
             ]
         },
         {
-            "name": "JUMPLUFF",
+            "name" : "Jumpluff",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -24325,7 +24325,7 @@
             }
         },
         {
-            "name": "AIPOM",
+            "name" : "Aipom",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -24472,7 +24472,7 @@
             }
         },
         {
-            "name": "SUNKERN",
+            "name" : "Sunkern",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -24591,7 +24591,7 @@
             ]
         },
         {
-            "name": "SUNFLORA",
+            "name" : "Sunflora",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -24700,7 +24700,7 @@
             }
         },
         {
-            "name": "YANMA",
+            "name" : "Yanma",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -24821,7 +24821,7 @@
             }
         },
         {
-            "name": "WOOPER",
+            "name" : "Wooper",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -24962,7 +24962,7 @@
             ]
         },
         {
-            "name": "QUAGSIRE",
+            "name" : "Quagsire",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -25096,7 +25096,7 @@
             }
         },
         {
-            "name": "ESPEON",
+            "name" : "Espeon",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -25218,7 +25218,7 @@
             }
         },
         {
-            "name": "UMBREON",
+            "name" : "Umbreon",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -25339,7 +25339,7 @@
             }
         },
         {
-            "name": "MURKROW",
+            "name" : "Murkrow",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -25462,7 +25462,7 @@
             }
         },
         {
-            "name": "SLOWKING",
+            "name" : "Slowking",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -25607,7 +25607,7 @@
             }
         },
         {
-            "name": "MISDREAVUS",
+            "name" : "Misdreavus",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -25738,7 +25738,7 @@
             }
         },
         {
-            "name": "UNOWN",
+            "name" : "Unown",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -25793,7 +25793,7 @@
             }
         },
         {
-            "name": "WOBBUFFET",
+            "name" : "Wobbuffet",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -25858,7 +25858,7 @@
             }
         },
         {
-            "name": "GIRAFARIG",
+            "name" : "Girafarig",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -25998,7 +25998,7 @@
             }
         },
         {
-            "name": "PINECO",
+            "name" : "Pineco",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -26126,7 +26126,7 @@
             ]
         },
         {
-            "name": "FORRETRESS",
+            "name" : "Forretress",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -26245,7 +26245,7 @@
             }
         },
         {
-            "name": "DUNSPARCE",
+            "name" : "Dunsparce",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -26382,7 +26382,7 @@
             }
         },
         {
-            "name": "GLIGAR",
+            "name" : "Gligar",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -26506,7 +26506,7 @@
             }
         },
         {
-            "name": "STEELIX",
+            "name" : "Steelix",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -26635,7 +26635,7 @@
             }
         },
         {
-            "name": "SNUBBULL",
+            "name" : "Snubbull",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -26790,7 +26790,7 @@
             ]
         },
         {
-            "name": "GRANBULL",
+            "name" : "Granbull",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -26933,7 +26933,7 @@
             }
         },
         {
-            "name": "QWILFISH",
+            "name" : "Qwilfish",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -27057,7 +27057,7 @@
             }
         },
         {
-            "name": "SCIZOR",
+            "name" : "Scizor",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -27176,7 +27176,7 @@
             }
         },
         {
-            "name": "SHUCKLE",
+            "name" : "Shuckle",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -27291,7 +27291,7 @@
             }
         },
         {
-            "name": "HERACROSS",
+            "name" : "Heracross",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -27420,7 +27420,7 @@
             }
         },
         {
-            "name": "SNEASEL",
+            "name" : "Sneasel",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -27575,7 +27575,7 @@
             }
         },
         {
-            "name": "TEDDIURSA",
+            "name" : "Teddiursa",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -27726,7 +27726,7 @@
             ]
         },
         {
-            "name": "URSARING",
+            "name" : "Ursaring",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -27864,7 +27864,7 @@
             }
         },
         {
-            "name": "SLUGMA",
+            "name" : "Slugma",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -27985,7 +27985,7 @@
             ]
         },
         {
-            "name": "MAGCARGO",
+            "name" : "Magcargo",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -28108,7 +28108,7 @@
             }
         },
         {
-            "name": "SWINUB",
+            "name" : "Swinub",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -28238,7 +28238,7 @@
             ]
         },
         {
-            "name": "PILOSWINE",
+            "name" : "Piloswine",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -28363,7 +28363,7 @@
             }
         },
         {
-            "name": "CORSOLA",
+            "name" : "Corsola",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -28506,7 +28506,7 @@
             }
         },
         {
-            "name": "REMORAID",
+            "name" : "Remoraid",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -28634,7 +28634,7 @@
             ]
         },
         {
-            "name": "OCTILLERY",
+            "name" : "Octillery",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -28754,7 +28754,7 @@
             }
         },
         {
-            "name": "DELIBIRD",
+            "name" : "Delibird",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -28856,7 +28856,7 @@
             }
         },
         {
-            "name": "MANTINE",
+            "name" : "Mantine",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -28978,7 +28978,7 @@
             }
         },
         {
-            "name": "SKARMORY",
+            "name" : "Skarmory",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -29103,7 +29103,7 @@
             }
         },
         {
-            "name": "HOUNDOUR",
+            "name" : "Houndour",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -29241,7 +29241,7 @@
             ]
         },
         {
-            "name": "HOUNDOOM",
+            "name" : "Houndoom",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -29368,7 +29368,7 @@
             }
         },
         {
-            "name": "KINGDRA",
+            "name" : "Kingdra",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -29491,7 +29491,7 @@
             }
         },
         {
-            "name": "PHANPY",
+            "name" : "Phanpy",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -29617,7 +29617,7 @@
             ]
         },
         {
-            "name": "DONPHAN",
+            "name" : "Donphan",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -29731,7 +29731,7 @@
             }
         },
         {
-            "name": "PORYGON2",
+            "name" : "Porygon2",
             "learnsets": {
                 "levelup": [
                     {
@@ -29855,7 +29855,7 @@
             }
         },
         {
-            "name": "STANTLER",
+            "name" : "Stantler",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -29984,7 +29984,7 @@
             }
         },
         {
-            "name": "SMEARGLE",
+            "name" : "Smeargle",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -30066,7 +30066,7 @@
             }
         },
         {
-            "name": "TYROGUE",
+            "name" : "Tyrogue",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -30176,7 +30176,7 @@
             ]
         },
         {
-            "name": "HITMONTOP",
+            "name" : "Hitmontop",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -30297,7 +30297,7 @@
             }
         },
         {
-            "name": "SMOOCHUM",
+            "name" : "Smoochum",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -30443,7 +30443,7 @@
             ]
         },
         {
-            "name": "ELEKID",
+            "name" : "Elekid",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -30579,7 +30579,7 @@
             ]
         },
         {
-            "name": "MAGBY",
+            "name" : "Magby",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -30712,7 +30712,7 @@
             ]
         },
         {
-            "name": "MILTANK",
+            "name" : "Miltank",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -30860,7 +30860,7 @@
             }
         },
         {
-            "name": "BLISSEY",
+            "name" : "Blissey",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -31014,7 +31014,7 @@
             }
         },
         {
-            "name": "RAIKOU",
+            "name" : "Raikou",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -31135,7 +31135,7 @@
             }
         },
         {
-            "name": "ENTEI",
+            "name" : "Entei",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -31255,7 +31255,7 @@
             }
         },
         {
-            "name": "SUICUNE",
+            "name" : "Suicune",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -31378,7 +31378,7 @@
             }
         },
         {
-            "name": "LARVITAR",
+            "name" : "Larvitar",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -31508,7 +31508,7 @@
             ]
         },
         {
-            "name": "PUPITAR",
+            "name" : "Pupitar",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -31635,7 +31635,7 @@
             ]
         },
         {
-            "name": "TYRANITAR",
+            "name" : "Tyranitar",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -31781,7 +31781,7 @@
             }
         },
         {
-            "name": "LUGIA",
+            "name" : "Lugia",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -31918,7 +31918,7 @@
             }
         },
         {
-            "name": "HO_OH",
+            "name" : "Ho_oh",
             "learnsets": {
                 "levelup": [
                     {
@@ -32052,7 +32052,7 @@
             }
         },
         {
-            "name": "CELEBI",
+            "name" : "Celebi",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -32177,7 +32177,7 @@
             }
         },
         {
-            "name": "TREECKO",
+            "name" : "Treecko",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -32322,7 +32322,7 @@
             ]
         },
         {
-            "name": "GROVYLE",
+            "name" : "Grovyle",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -32468,7 +32468,7 @@
             ]
         },
         {
-            "name": "SCEPTILE",
+            "name" : "Sceptile",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -32612,7 +32612,7 @@
             }
         },
         {
-            "name": "TORCHIC",
+            "name" : "Torchic",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -32749,7 +32749,7 @@
             ]
         },
         {
-            "name": "COMBUSKEN",
+            "name" : "Combusken",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -32896,7 +32896,7 @@
             ]
         },
         {
-            "name": "BLAZIKEN",
+            "name" : "Blaziken",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -33045,7 +33045,7 @@
             }
         },
         {
-            "name": "MUDKIP",
+            "name" : "Mudkip",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -33185,7 +33185,7 @@
             ]
         },
         {
-            "name": "MARSHTOMP",
+            "name" : "Marshtomp",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -33335,7 +33335,7 @@
             ]
         },
         {
-            "name": "SWAMPERT",
+            "name" : "Swampert",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -33483,7 +33483,7 @@
             }
         },
         {
-            "name": "POOCHYENA",
+            "name" : "Poochyena",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -33621,7 +33621,7 @@
             ]
         },
         {
-            "name": "MIGHTYENA",
+            "name" : "Mightyena",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -33757,7 +33757,7 @@
             }
         },
         {
-            "name": "ZIGZAGOON",
+            "name" : "Zigzagoon",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -33903,7 +33903,7 @@
             ]
         },
         {
-            "name": "LINOONE",
+            "name" : "Linoone",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -34045,7 +34045,7 @@
             }
         },
         {
-            "name": "WURMPLE",
+            "name" : "Wurmple",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -34116,7 +34116,7 @@
             ]
         },
         {
-            "name": "SILCOON",
+            "name" : "Silcoon",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -34180,7 +34180,7 @@
             ]
         },
         {
-            "name": "BEAUTIFLY",
+            "name" : "Beautifly",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -34296,7 +34296,7 @@
             }
         },
         {
-            "name": "CASCOON",
+            "name" : "Cascoon",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -34360,7 +34360,7 @@
             ]
         },
         {
-            "name": "DUSTOX",
+            "name" : "Dustox",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -34477,7 +34477,7 @@
             }
         },
         {
-            "name": "LOTAD",
+            "name" : "Lotad",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -34601,7 +34601,7 @@
             ]
         },
         {
-            "name": "LOMBRE",
+            "name" : "Lombre",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -34736,7 +34736,7 @@
             ]
         },
         {
-            "name": "LUDICOLO",
+            "name" : "Ludicolo",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -34854,7 +34854,7 @@
             }
         },
         {
-            "name": "SEEDOT",
+            "name" : "Seedot",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -34975,7 +34975,7 @@
             ]
         },
         {
-            "name": "NUZLEAF",
+            "name" : "Nuzleaf",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35110,7 +35110,7 @@
             ]
         },
         {
-            "name": "SHIFTRY",
+            "name" : "Shiftry",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35222,7 +35222,7 @@
             }
         },
         {
-            "name": "NINCADA",
+            "name" : "Nincada",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35350,7 +35350,7 @@
             ]
         },
         {
-            "name": "NINJASK",
+            "name" : "Ninjask",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35482,7 +35482,7 @@
             }
         },
         {
-            "name": "SHEDINJA",
+            "name" : "Shedinja",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35597,7 +35597,7 @@
             }
         },
         {
-            "name": "TAILLOW",
+            "name" : "Taillow",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35719,7 +35719,7 @@
             ]
         },
         {
-            "name": "SWELLOW",
+            "name" : "Swellow",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35834,7 +35834,7 @@
             }
         },
         {
-            "name": "SHROOMISH",
+            "name" : "Shroomish",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -35959,7 +35959,7 @@
             ]
         },
         {
-            "name": "BRELOOM",
+            "name" : "Breloom",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -36100,7 +36100,7 @@
             }
         },
         {
-            "name": "SPINDA",
+            "name" : "Spinda",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -36257,7 +36257,7 @@
             }
         },
         {
-            "name": "WINGULL",
+            "name" : "Wingull",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -36380,7 +36380,7 @@
             ]
         },
         {
-            "name": "PELIPPER",
+            "name" : "Pelipper",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -36507,7 +36507,7 @@
             }
         },
         {
-            "name": "SURSKIT",
+            "name" : "Surskit",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -36630,7 +36630,7 @@
             ]
         },
         {
-            "name": "MASQUERAIN",
+            "name" : "Masquerain",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -36758,7 +36758,7 @@
             }
         },
         {
-            "name": "WAILMER",
+            "name" : "Wailmer",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -36900,7 +36900,7 @@
             ]
         },
         {
-            "name": "WAILORD",
+            "name" : "Wailord",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -37036,7 +37036,7 @@
             }
         },
         {
-            "name": "SKITTY",
+            "name" : "Skitty",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -37187,7 +37187,7 @@
             ]
         },
         {
-            "name": "DELCATTY",
+            "name" : "Delcatty",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -37302,7 +37302,7 @@
             }
         },
         {
-            "name": "KECLEON",
+            "name" : "Kecleon",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -37464,7 +37464,7 @@
             }
         },
         {
-            "name": "BALTOY",
+            "name" : "Baltoy",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -37593,7 +37593,7 @@
             ]
         },
         {
-            "name": "CLAYDOL",
+            "name" : "Claydol",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -37731,7 +37731,7 @@
             }
         },
         {
-            "name": "NOSEPASS",
+            "name" : "Nosepass",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -37861,7 +37861,7 @@
             }
         },
         {
-            "name": "TORKOAL",
+            "name" : "Torkoal",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -37986,7 +37986,7 @@
             }
         },
         {
-            "name": "SABLEYE",
+            "name" : "Sableye",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -38136,7 +38136,7 @@
             }
         },
         {
-            "name": "BARBOACH",
+            "name" : "Barboach",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -38265,7 +38265,7 @@
             ]
         },
         {
-            "name": "WHISCASH",
+            "name" : "Whiscash",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -38396,7 +38396,7 @@
             }
         },
         {
-            "name": "LUVDISC",
+            "name" : "Luvdisc",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -38515,7 +38515,7 @@
             }
         },
         {
-            "name": "CORPHISH",
+            "name" : "Corphish",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -38655,7 +38655,7 @@
             ]
         },
         {
-            "name": "CRAWDAUNT",
+            "name" : "Crawdaunt",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -38796,7 +38796,7 @@
             }
         },
         {
-            "name": "FEEBAS",
+            "name" : "Feebas",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -38901,7 +38901,7 @@
             ]
         },
         {
-            "name": "MILOTIC",
+            "name" : "Milotic",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -39022,7 +39022,7 @@
             }
         },
         {
-            "name": "CARVANHA",
+            "name" : "Carvanha",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -39150,7 +39150,7 @@
             ]
         },
         {
-            "name": "SHARPEDO",
+            "name" : "Sharpedo",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -39285,7 +39285,7 @@
             }
         },
         {
-            "name": "TRAPINCH",
+            "name" : "Trapinch",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -39408,7 +39408,7 @@
             ]
         },
         {
-            "name": "VIBRAVA",
+            "name" : "Vibrava",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -39540,7 +39540,7 @@
             ]
         },
         {
-            "name": "FLYGON",
+            "name" : "Flygon",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -39672,7 +39672,7 @@
             }
         },
         {
-            "name": "MAKUHITA",
+            "name" : "Makuhita",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -39822,7 +39822,7 @@
             ]
         },
         {
-            "name": "HARIYAMA",
+            "name" : "Hariyama",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -39966,7 +39966,7 @@
             }
         },
         {
-            "name": "ELECTRIKE",
+            "name" : "Electrike",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -40097,7 +40097,7 @@
             ]
         },
         {
-            "name": "MANECTRIC",
+            "name" : "Manectric",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -40225,7 +40225,7 @@
             }
         },
         {
-            "name": "NUMEL",
+            "name" : "Numel",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -40359,7 +40359,7 @@
             ]
         },
         {
-            "name": "CAMERUPT",
+            "name" : "Camerupt",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -40492,7 +40492,7 @@
             }
         },
         {
-            "name": "SPHEAL",
+            "name" : "Spheal",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -40636,7 +40636,7 @@
             ]
         },
         {
-            "name": "SEALEO",
+            "name" : "Sealeo",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -40774,7 +40774,7 @@
             ]
         },
         {
-            "name": "WALREIN",
+            "name" : "Walrein",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -40907,7 +40907,7 @@
             }
         },
         {
-            "name": "CACNEA",
+            "name" : "Cacnea",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -41051,7 +41051,7 @@
             ]
         },
         {
-            "name": "CACTURNE",
+            "name" : "Cacturne",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -41193,7 +41193,7 @@
             }
         },
         {
-            "name": "SNORUNT",
+            "name" : "Snorunt",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -41319,7 +41319,7 @@
             ]
         },
         {
-            "name": "GLALIE",
+            "name" : "Glalie",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -41454,7 +41454,7 @@
             }
         },
         {
-            "name": "LUNATONE",
+            "name" : "Lunatone",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -41580,7 +41580,7 @@
             }
         },
         {
-            "name": "SOLROCK",
+            "name" : "Solrock",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -41709,7 +41709,7 @@
             }
         },
         {
-            "name": "AZURILL",
+            "name" : "Azurill",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -41826,7 +41826,7 @@
             ]
         },
         {
-            "name": "SPOINK",
+            "name" : "Spoink",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -41963,7 +41963,7 @@
             ]
         },
         {
-            "name": "GRUMPIG",
+            "name" : "Grumpig",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -42108,7 +42108,7 @@
             }
         },
         {
-            "name": "PLUSLE",
+            "name" : "Plusle",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -42236,7 +42236,7 @@
             }
         },
         {
-            "name": "MINUN",
+            "name" : "Minun",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -42364,7 +42364,7 @@
             }
         },
         {
-            "name": "MAWILE",
+            "name" : "Mawile",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -42511,7 +42511,7 @@
             }
         },
         {
-            "name": "MEDITITE",
+            "name" : "Meditite",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -42659,7 +42659,7 @@
             ]
         },
         {
-            "name": "MEDICHAM",
+            "name" : "Medicham",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -42812,7 +42812,7 @@
             }
         },
         {
-            "name": "SWABLU",
+            "name" : "Swablu",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -42944,7 +42944,7 @@
             ]
         },
         {
-            "name": "ALTARIA",
+            "name" : "Altaria",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -43084,7 +43084,7 @@
             }
         },
         {
-            "name": "WYNAUT",
+            "name" : "Wynaut",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -43163,7 +43163,7 @@
             ]
         },
         {
-            "name": "DUSKULL",
+            "name" : "Duskull",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -43302,7 +43302,7 @@
             ]
         },
         {
-            "name": "DUSCLOPS",
+            "name" : "Dusclops",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -43453,7 +43453,7 @@
             }
         },
         {
-            "name": "ROSELIA",
+            "name" : "Roselia",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -43598,7 +43598,7 @@
             }
         },
         {
-            "name": "SLAKOTH",
+            "name" : "Slakoth",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -43743,7 +43743,7 @@
             ]
         },
         {
-            "name": "VIGOROTH",
+            "name" : "Vigoroth",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -43891,7 +43891,7 @@
             ]
         },
         {
-            "name": "SLAKING",
+            "name" : "Slaking",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -44034,7 +44034,7 @@
             }
         },
         {
-            "name": "GULPIN",
+            "name" : "Gulpin",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -44178,7 +44178,7 @@
             ]
         },
         {
-            "name": "SWALOT",
+            "name" : "Swalot",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -44323,7 +44323,7 @@
             }
         },
         {
-            "name": "TROPIUS",
+            "name" : "Tropius",
             "learnsets": {
                 "tmhm": [
                     "ROAR",
@@ -44455,7 +44455,7 @@
             }
         },
         {
-            "name": "WHISMUR",
+            "name" : "Whismur",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -44601,7 +44601,7 @@
             ]
         },
         {
-            "name": "LOUDRED",
+            "name" : "Loudred",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -44757,7 +44757,7 @@
             ]
         },
         {
-            "name": "EXPLOUD",
+            "name" : "Exploud",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -44911,7 +44911,7 @@
             }
         },
         {
-            "name": "CLAMPERL",
+            "name" : "Clamperl",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -45025,7 +45025,7 @@
             ]
         },
         {
-            "name": "HUNTAIL",
+            "name" : "Huntail",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -45136,7 +45136,7 @@
             }
         },
         {
-            "name": "GOREBYSS",
+            "name" : "Gorebyss",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -45247,7 +45247,7 @@
             }
         },
         {
-            "name": "ABSOL",
+            "name" : "Absol",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -45398,7 +45398,7 @@
             }
         },
         {
-            "name": "SHUPPET",
+            "name" : "Shuppet",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -45534,7 +45534,7 @@
             ]
         },
         {
-            "name": "BANETTE",
+            "name" : "Banette",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -45669,7 +45669,7 @@
             }
         },
         {
-            "name": "SEVIPER",
+            "name" : "Seviper",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -45798,7 +45798,7 @@
             }
         },
         {
-            "name": "ZANGOOSE",
+            "name" : "Zangoose",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -45954,7 +45954,7 @@
             }
         },
         {
-            "name": "RELICANTH",
+            "name" : "Relicanth",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -46093,7 +46093,7 @@
             }
         },
         {
-            "name": "ARON",
+            "name" : "Aron",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -46237,7 +46237,7 @@
             ]
         },
         {
-            "name": "LAIRON",
+            "name" : "Lairon",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -46384,7 +46384,7 @@
             ]
         },
         {
-            "name": "AGGRON",
+            "name" : "Aggron",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -46548,7 +46548,7 @@
             }
         },
         {
-            "name": "CASTFORM",
+            "name" : "Castform",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -46673,7 +46673,7 @@
             }
         },
         {
-            "name": "VOLBEAT",
+            "name" : "Volbeat",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -46809,7 +46809,7 @@
             }
         },
         {
-            "name": "ILLUMISE",
+            "name" : "Illumise",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -46944,7 +46944,7 @@
             }
         },
         {
-            "name": "LILEEP",
+            "name" : "Lileep",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -47068,7 +47068,7 @@
             ]
         },
         {
-            "name": "CRADILY",
+            "name" : "Cradily",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -47194,7 +47194,7 @@
             }
         },
         {
-            "name": "ANORITH",
+            "name" : "Anorith",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -47322,7 +47322,7 @@
             ]
         },
         {
-            "name": "ARMALDO",
+            "name" : "Armaldo",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -47452,7 +47452,7 @@
             }
         },
         {
-            "name": "RALTS",
+            "name" : "Ralts",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -47593,7 +47593,7 @@
             ]
         },
         {
-            "name": "KIRLIA",
+            "name" : "Kirlia",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -47736,7 +47736,7 @@
             ]
         },
         {
-            "name": "GARDEVOIR",
+            "name" : "Gardevoir",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -47874,7 +47874,7 @@
             }
         },
         {
-            "name": "BAGON",
+            "name" : "Bagon",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -48010,7 +48010,7 @@
             ]
         },
         {
-            "name": "SHELGON",
+            "name" : "Shelgon",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -48153,7 +48153,7 @@
             ]
         },
         {
-            "name": "SALAMENCE",
+            "name" : "Salamence",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -48300,7 +48300,7 @@
             }
         },
         {
-            "name": "BELDUM",
+            "name" : "Beldum",
             "learnsets": {
                 "tmhm": [],
                 "levelup": [
@@ -48365,7 +48365,7 @@
             ]
         },
         {
-            "name": "METANG",
+            "name" : "Metang",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -48505,7 +48505,7 @@
             ]
         },
         {
-            "name": "METAGROSS",
+            "name" : "Metagross",
             "learnsets": {
                 "tmhm": [
                     "TOXIC",
@@ -48648,7 +48648,7 @@
             }
         },
         {
-            "name": "REGIROCK",
+            "name" : "Regirock",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -48774,7 +48774,7 @@
             }
         },
         {
-            "name": "REGICE",
+            "name" : "Regice",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -48900,7 +48900,7 @@
             }
         },
         {
-            "name": "REGISTEEL",
+            "name" : "Registeel",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -49030,7 +49030,7 @@
             }
         },
         {
-            "name": "KYOGRE",
+            "name" : "Kyogre",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -49160,7 +49160,7 @@
             }
         },
         {
-            "name": "GROUDON",
+            "name" : "Groudon",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -49302,7 +49302,7 @@
             }
         },
         {
-            "name": "RAYQUAZA",
+            "name" : "Rayquaza",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -49441,7 +49441,7 @@
             }
         },
         {
-            "name": "LATIAS",
+            "name" : "Latias",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -49581,7 +49581,7 @@
             }
         },
         {
-            "name": "LATIOS",
+            "name" : "Latios",
             "learnsets": {
                 "tmhm": [
                     "DRAGON_CLAW",
@@ -49721,7 +49721,7 @@
             }
         },
         {
-            "name": "JIRACHI",
+            "name" : "Jirachi",
             "learnsets": {
                 "tmhm": [
                     "WATER_PULSE",
@@ -49860,7 +49860,7 @@
             }
         },
         {
-            "name": "DEOXYS",
+            "name" : "Deoxys",
             "learnsets": {
                 "tmhm": [
                     "FOCUS_PUNCH",
@@ -50013,7 +50013,7 @@
             }
         },
         {
-            "name": "CHIMECHO",
+            "name" : "Chimecho",
             "learnsets": {
                 "tmhm": [
                     "CALM_MIND",
@@ -50146,14 +50146,14 @@
             }
         },
         {
-            "name": "EGG",
+            "name" : "Egg",
             "pokedex": {
                 "internal": 23,
                 "national": 23
             }
         },
         {
-            "name": "OLD_UNOWN_B",
+            "name" : "Old_unown_b",
             "pokedex": {
                 "hoenn": 387,
                 "internal": 252,
@@ -50161,7 +50161,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_C",
+            "name" : "Old_unown_c",
             "pokedex": {
                 "hoenn": 388,
                 "internal": 253,
@@ -50169,7 +50169,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_D",
+            "name" : "Old_unown_d",
             "pokedex": {
                 "hoenn": 389,
                 "internal": 254,
@@ -50177,7 +50177,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_E",
+            "name" : "Old_unown_e",
             "pokedex": {
                 "hoenn": 390,
                 "internal": 255,
@@ -50185,7 +50185,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_F",
+            "name" : "Old_unown_f",
             "pokedex": {
                 "hoenn": 391,
                 "internal": 256,
@@ -50193,7 +50193,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_G",
+            "name" : "Old_unown_g",
             "pokedex": {
                 "hoenn": 392,
                 "internal": 257,
@@ -50201,7 +50201,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_H",
+            "name" : "Old_unown_h",
             "pokedex": {
                 "hoenn": 393,
                 "internal": 258,
@@ -50209,7 +50209,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_I",
+            "name" : "Old_unown_i",
             "pokedex": {
                 "hoenn": 394,
                 "internal": 259,
@@ -50217,7 +50217,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_J",
+            "name" : "Old_unown_j",
             "pokedex": {
                 "hoenn": 395,
                 "internal": 260,
@@ -50225,7 +50225,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_K",
+            "name" : "Old_unown_k",
             "pokedex": {
                 "hoenn": 396,
                 "internal": 261,
@@ -50233,7 +50233,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_L",
+            "name" : "Old_unown_l",
             "pokedex": {
                 "hoenn": 397,
                 "internal": 262,
@@ -50241,7 +50241,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_M",
+            "name" : "Old_unown_m",
             "pokedex": {
                 "hoenn": 398,
                 "internal": 263,
@@ -50249,7 +50249,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_N",
+            "name" : "Old_unown_n",
             "pokedex": {
                 "hoenn": 399,
                 "internal": 264,
@@ -50257,7 +50257,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_O",
+            "name" : "Old_unown_o",
             "pokedex": {
                 "hoenn": 400,
                 "internal": 265,
@@ -50265,7 +50265,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_P",
+            "name" : "Old_unown_p",
             "pokedex": {
                 "hoenn": 401,
                 "internal": 266,
@@ -50273,7 +50273,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_Q",
+            "name" : "Old_unown_q",
             "pokedex": {
                 "hoenn": 402,
                 "internal": 267,
@@ -50281,7 +50281,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_R",
+            "name" : "Old_unown_r",
             "pokedex": {
                 "hoenn": 403,
                 "internal": 268,
@@ -50289,7 +50289,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_S",
+            "name" : "Old_unown_s",
             "pokedex": {
                 "hoenn": 404,
                 "internal": 269,
@@ -50297,7 +50297,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_T",
+            "name" : "Old_unown_t",
             "pokedex": {
                 "hoenn": 405,
                 "internal": 270,
@@ -50305,7 +50305,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_U",
+            "name" : "Old_unown_u",
             "pokedex": {
                 "hoenn": 406,
                 "internal": 271,
@@ -50313,7 +50313,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_V",
+            "name" : "Old_unown_v",
             "pokedex": {
                 "hoenn": 407,
                 "internal": 272,
@@ -50321,7 +50321,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_W",
+            "name" : "Old_unown_w",
             "pokedex": {
                 "hoenn": 408,
                 "internal": 273,
@@ -50329,7 +50329,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_X",
+            "name" : "Old_unown_x",
             "pokedex": {
                 "hoenn": 409,
                 "internal": 274,
@@ -50337,7 +50337,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_Y",
+            "name" : "Old_unown_y",
             "pokedex": {
                 "hoenn": 410,
                 "internal": 275,
@@ -50345,7 +50345,7 @@
             }
         },
         {
-            "name": "OLD_UNOWN_Z",
+            "name" : "Old_unown_z",
             "pokedex": {
                 "hoenn": 411,
                 "internal": 276,
@@ -50353,14 +50353,14 @@
             }
         },
         {
-            "name": "UNOWN_B",
+            "name" : "Unown_b",
             "pokedex": {
                 "internal": 414,
                 "national": 201
             }
         },
         {
-            "name": "UNOWN_P",
+            "name" : "Unown_p",
             "pokedex": {
                 "internal": 439,
                 "national": 217
