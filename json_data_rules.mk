@@ -19,7 +19,7 @@ PKMN_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon
 PKMN_GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon_graphics
 
 
-SPECIES_TEMPLATES := include/constants/species.h 	\
+SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
 	include/graphics_pokemon.h						\
 	$(GRAPHICS_SUBDIR)/pokemon.h					\
 	$(GRAPHICS_SUBDIR)/anim_mon_front_pics.h		\
@@ -45,9 +45,9 @@ SPECIES_TEMPLATES := include/constants/species.h 	\
 	$(PKMN_GRAPHICS_SUBDIR)/icon.h					\
 	$(PKMN_GRAPHICS_SUBDIR)/jump.h					\
 	$(PKMN_GRAPHICS_SUBDIR)/animation.h				\
-	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h
+	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h)
 
-SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, $(SPECIES_TEMPLATES))
+SPECIES_TEMPLATES := $(PKMN_SUBDIR)/egg_moves.h
 
 AUTO_GEN_TARGETS += $(SPECIES_TEMPLATES_TEST)
 
@@ -55,4 +55,12 @@ AUTO_GEN_TARGETS += $(SPECIES_TEMPLATES_TEST)
 $(SPECIES_TEMPLATES_TEST): %.h.tmp.h: $(SPECIES_JSON) %.h.template
 	$(JSONPROC) $^ $@
 
-species_templates: $(SPECIES_TEMPLATES_TEST)
+$(SPECIES_TEMPLATES): %.h: $(SPECIES_JSON) %.h.template
+	$(JSONPROC) $^ $@
+
+species_templates_test: $(SPECIES_TEMPLATES_TEST)
+
+species_templates: $(SPECIES_TEMPLATES)
+
+
+$(C_BUILDDIR)/daycare.o: c_dep += $(PKMN_SUBDIR)/egg_moves.h

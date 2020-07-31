@@ -9,6 +9,7 @@
 const u16 gEggMoves[] =
 {
 ## for specimen in species
+## if existsIn(specimen, "learnsets")
 ## if existsIn(specimen.learnsets, "egg")
     egg_moves({{upper(specimen.name)}},
 ## for move in specimen.learnsets.egg
@@ -19,6 +20,7 @@ const u16 gEggMoves[] =
               MOVE_{{upper(move)}},
 ## endif
 ## endfor
+## endif
 ## endif
 ## endfor
     EGG_MOVES_TERMINATOR
