@@ -831,6 +831,8 @@ u8 CreateSafariPlayerHealthboxSprites(void)
     gSprites[healthboxLeftSpriteId].oam.affineParam = healthboxRightSpriteId;
     gSprites[healthboxRightSpriteId].hOther_HealthBoxSpriteId = healthboxLeftSpriteId;
 
+    gSprites[healthboxRightSpriteId].hOther_IndicatorSpriteId = 0xFF;
+
     gSprites[healthboxRightSpriteId].callback = SpriteCB_HealthBoxOther;
 
     return healthboxLeftSpriteId;
