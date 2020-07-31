@@ -40,11 +40,29 @@ const u16 gTutorMoves[TUTOR_MOVE_COUNT] =
 static const u32 sTutorLearnsets[] =
 {
 ## for specimen in species
-	[SPECIES_{{upper(specimen.name)}}] = (0
+## if existsIn(specimen, "learnsets")
+## if existsIn(specimen.learnsets, "tutor")
+## if length(specimen.learnsets.tutor) > 0
 ## for move in specimen.learnsets.tutor
+## if loop.is_first and loop.is_last
+	[SPECIES_{{upper(specimen.name)}}] = (TUTOR(MOVE_{{upper(move)}})),
+## else if loop.is_first
+	[SPECIES_{{upper(specimen.name)}}] = (TUTOR(MOVE_{{upper(move)}})
+## else if loop.is_last
+		| TUTOR(MOVE_{{upper(move)}})),
+## else
 		| TUTOR(MOVE_{{upper(move)}})
+## endif
 ## endfor
-	),
+
+## else
+    [SPECIES_{{upper(specimen.name)}}] = (0),
+
+## endif
+## else
+    [SPECIES_{{upper(specimen.name)}}] = (0),
+
+## endif
+## endif
 ## endfor
 };
-

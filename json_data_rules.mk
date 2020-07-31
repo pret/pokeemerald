@@ -47,7 +47,8 @@ SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
 	$(PKMN_GRAPHICS_SUBDIR)/animation.h				\
 	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h)
 
-SPECIES_TEMPLATES := $(PKMN_SUBDIR)/egg_moves.h
+SPECIES_TEMPLATES := $(PKMN_SUBDIR)/egg_moves.h		\
+	$(PKMN_SUBDIR)/tutor_learnsets.h
 
 AUTO_GEN_TARGETS += $(SPECIES_TEMPLATES_TEST)
 
@@ -64,3 +65,4 @@ species_templates: $(SPECIES_TEMPLATES)
 
 
 $(C_BUILDDIR)/daycare.o: c_dep += $(PKMN_SUBDIR)/egg_moves.h
+$(C_BUILDDIR)/party_menu.o: c_dep += $(PKMN_SUBDIR)/tutor_learnsets.h
