@@ -4,6 +4,10 @@
 #include "roulette_util.h"
 #include "util.h"
 
+// "Roulette Util" is perhaps more accurately a general flashing util
+// e.g. it handles fading the palettes for the color selections on the Roulette wheel
+// but it also handles the "pulse blend" effect of Mirage Tower
+
 void sub_8151678(struct UnkStruct0 *r0)
 {
     r0->var00 = 0;
@@ -429,7 +433,8 @@ void UpdatePulseBlend(struct PulseBlend *pulseBlend)
     }
 }
 
-void ClearGridSelectionRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
+// Below used for the Roulette grid
+void ClearTilemapRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
 {
     u16 *_dest;
     u8 i;
@@ -446,7 +451,7 @@ void ClearGridSelectionRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 he
     }
 }
 
-void SetGridSelectionRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
+void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
 {
     u16 *_dest;
     u16 *_src = src;
