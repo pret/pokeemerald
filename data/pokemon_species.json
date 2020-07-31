@@ -38,21 +38,15 @@
                 "egg_cycles" : 20,
                 "egg_group" : [ "monster", "grass" ]
             },
-			"learnsets" : {
-				"levelup" : {
-					"1" : "tackle",
-					"4" : "growl",
-					"7" : "leech_seed",
-					"10" : "vine_whip",
-					"15" : "poison_powder",
-					"15" : "sleep_powder",
-					"20" : "razor_leaf",
-					"25" : "sweet_scent",
-					"32" : "growth",
-					"39" : "synthesis",
-					"46" : "solar_beam"
-                },
-				"tmhm" : [
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "tackle" },
+                    { "4" : "growl" },
+                    { "7" : "leech_seed" },
+                    { "10" : "vine_whip" },
+                    { "15" : "poison_powder" }
+                ],
+                "tmhm" : [
                     "toxic",
                     "bullet_seed",
                     "hidden_power",
@@ -72,21 +66,21 @@
                     "strength",
                     "flash",
                     "rock_smash"
-				],
-				"tutor" : [
-					"swords_dance",
-					"body_slam",
-					"double_edge",
-					"mimic",
-					"substitute",
-					"snore",
-					"endure",
-					"mud_slap",
-					"swapper",
-					"sleep_talk",
-					"defence_curl",
-					"fury_cutter"
-				],
+                ],
+                "tutor" : [
+                    "swords_dance",
+                    "body_slam",
+                    "double_edge",
+                    "mimic",
+                    "substitute",
+                    "snore",
+                    "endure",
+                    "mud_slap",
+                    "swapper",
+                    "sleep_talk",
+                    "defence_curl",
+                    "fury_cutter"
+                ],
                 "egg" : [
                     "light_screen",
                     "skull_bash",
@@ -97,7 +91,7 @@
                     "grass_whistle",
                     "curse"
                 ]
-			},
+            },
             "evolution" : [{
                 "level" : 16,
                 "target" : "IVYSAUR"
@@ -165,21 +159,15 @@
                 "egg_cycles" : 20,
                 "egg_group" : [ "monster", "grass" ]
             },
-			"learnsets" : {
-				"levelup" : {
-					"1" : "tackle",
-					"4" : "growl",
-					"7" : "leech_seed",
-					"10" : "vine_whip",
-					"15" : "poison_powder",
-					"15" : "sleep_powder",
-					"22" : "razor_leaf",
-					"29" : "sweet_scent",
-					"38" : "growth",
-					"47" : "synthesis",
-					"56" : "solar_beam"
-                },
-				"tmhm" : [
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "tackle" },
+                    { "4" : "growl" },
+                    { "38" : "growth" },
+                    { "47" : "synthesis" },
+                    { "56" : "solar_beam" }
+                ],
+                "tmhm" : [
                     "toxic",
                     "bullet_seed",
                     "hidden_power",
@@ -200,8 +188,8 @@
                     "flash",
                     "rock_smash"
                 ],
-				"tutor" : []
-			},
+                "tutor" : []
+            },
             "evolution" : [{
                 "level" : 32,
                 "target" : "VENUSAUR"

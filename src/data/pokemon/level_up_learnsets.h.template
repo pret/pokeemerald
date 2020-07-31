@@ -7,8 +7,10 @@
 
 static const u16 s{{specimen.name}}LevelUpLearnset[] =
 {
-## for level, move in specimen.learnsets.levelup
+## for level_move in specimen.learnsets.levelup
+## for level, move in level_move
     LEVEL_UP_MOVE({{level}}, MOVE_{{upper(move)}}),
+## endfor
 ## endfor
     LEVEL_UP_END
 };
