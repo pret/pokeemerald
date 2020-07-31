@@ -48,6 +48,8 @@ SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
 	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h)
 
 SPECIES_TEMPLATES := $(PKMN_SUBDIR)/egg_moves.h		\
+	$(PKMN_SUBDIR)/level_up_learnsets.h				\
+	$(PKMN_SUBDIR)/level_up_learnset_pointers.h		\
 	$(PKMN_SUBDIR)/tutor_learnsets.h
 
 AUTO_GEN_TARGETS += $(SPECIES_TEMPLATES_TEST)
@@ -64,5 +66,6 @@ species_templates_test: $(SPECIES_TEMPLATES_TEST)
 species_templates: $(SPECIES_TEMPLATES)
 
 
-$(C_BUILDDIR)/daycare.o: c_dep += $(PKMN_SUBDIR)/egg_moves.h
+$(C_BUILDDIR)/daycare.o: 	c_dep += $(PKMN_SUBDIR)/egg_moves.h
 $(C_BUILDDIR)/party_menu.o: c_dep += $(PKMN_SUBDIR)/tutor_learnsets.h
+$(C_BUILDDIR)/pokemon.o: 	c_dep += $(PKMN_SUBDIR)/level_up_learnsets.h

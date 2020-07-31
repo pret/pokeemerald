@@ -1,2 +1,4 @@
 egg_moves.h
+level_up_learnsets.h
+level_up_learnset_pointers.h
 tutor_learnsets.h

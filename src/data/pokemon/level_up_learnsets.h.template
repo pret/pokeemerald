@@ -4,9 +4,11 @@
 #define LEVEL_UP_MOVE(lvl, move) ((lvl << 9) | move)
 
 ## for specimen in species
+## if existsIn(specimen, "learnsets")
+## if existsIn(specimen.learnsets, "levelup")
+## if isArray(specimen.learnsets.levelup)
 
-static const u16 s{{specimen.name}}LevelUpLearnset[] =
-{
+static const u16 s{{specimen.name}}LevelUpLearnset[] = {
 ## for level_move in specimen.learnsets.levelup
 ## for level, move in level_move
     LEVEL_UP_MOVE({{level}}, MOVE_{{upper(move)}}),
@@ -14,4 +16,7 @@ static const u16 s{{specimen.name}}LevelUpLearnset[] =
 ## endfor
     LEVEL_UP_END
 };
+## endif
+## endif
+## endif
 ## endfor

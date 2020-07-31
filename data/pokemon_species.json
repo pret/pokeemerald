@@ -3,7 +3,8 @@
         {
             "name" : "None",
             "learnsets" : {
-                "tutor" : []
+                "tutor" : [],
+                "levelup" : "Bulbasaur"
             }
         },
         {
@@ -32177,6 +32178,331 @@
             }
         },
         {
+            "name" : "Old_unown_B",
+            "pokedex": {
+                "hoenn": 387,
+                "internal": 252,
+                "national": 387
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_C",
+            "pokedex": {
+                "hoenn": 388,
+                "internal": 253,
+                "national": 388
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_D",
+            "pokedex": {
+                "hoenn": 389,
+                "internal": 254,
+                "national": 389
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_E",
+            "pokedex": {
+                "hoenn": 390,
+                "internal": 255,
+                "national": 390
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_F",
+            "pokedex": {
+                "hoenn": 391,
+                "internal": 256,
+                "national": 391
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_G",
+            "pokedex": {
+                "hoenn": 392,
+                "internal": 257,
+                "national": 392
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_H",
+            "pokedex": {
+                "hoenn": 393,
+                "internal": 258,
+                "national": 393
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_I",
+            "pokedex": {
+                "hoenn": 394,
+                "internal": 259,
+                "national": 394
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_J",
+            "pokedex": {
+                "hoenn": 395,
+                "internal": 260,
+                "national": 395
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_K",
+            "pokedex": {
+                "hoenn": 396,
+                "internal": 261,
+                "national": 396
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_L",
+            "pokedex": {
+                "hoenn": 397,
+                "internal": 262,
+                "national": 397
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_M",
+            "pokedex": {
+                "hoenn": 398,
+                "internal": 263,
+                "national": 398
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_N",
+            "pokedex": {
+                "hoenn": 399,
+                "internal": 264,
+                "national": 399
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_O",
+            "pokedex": {
+                "hoenn": 400,
+                "internal": 265,
+                "national": 400
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_P",
+            "pokedex": {
+                "hoenn": 401,
+                "internal": 266,
+                "national": 401
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_Q",
+            "pokedex": {
+                "hoenn": 402,
+                "internal": 267,
+                "national": 402
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_R",
+            "pokedex": {
+                "hoenn": 403,
+                "internal": 268,
+                "national": 403
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_S",
+            "pokedex": {
+                "hoenn": 404,
+                "internal": 269,
+                "national": 404
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_T",
+            "pokedex": {
+                "hoenn": 405,
+                "internal": 270,
+                "national": 405
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_U",
+            "pokedex": {
+                "hoenn": 406,
+                "internal": 271,
+                "national": 406
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_V",
+            "pokedex": {
+                "hoenn": 407,
+                "internal": 272,
+                "national": 407
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_W",
+            "pokedex": {
+                "hoenn": 408,
+                "internal": 273,
+                "national": 408
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_X",
+            "pokedex": {
+                "hoenn": 409,
+                "internal": 274,
+                "national": 409
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_Y",
+            "pokedex": {
+                "hoenn": 410,
+                "internal": 275,
+                "national": 410
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
+            "name" : "Old_unown_Z",
+            "pokedex": {
+                "hoenn": 411,
+                "internal": 276,
+                "national": 411
+            },
+            "learnsets" : {
+                "levelup" : [
+                    { "1" : "TACKLE" }
+                ]
+            }
+        },
+        {
             "name" : "Treecko",
             "learnsets": {
                 "tmhm": [
@@ -50150,206 +50476,6 @@
             "pokedex": {
                 "internal": 23,
                 "national": 23
-            }
-        },
-        {
-            "name" : "Old_unown_b",
-            "pokedex": {
-                "hoenn": 387,
-                "internal": 252,
-                "national": 387
-            }
-        },
-        {
-            "name" : "Old_unown_c",
-            "pokedex": {
-                "hoenn": 388,
-                "internal": 253,
-                "national": 388
-            }
-        },
-        {
-            "name" : "Old_unown_d",
-            "pokedex": {
-                "hoenn": 389,
-                "internal": 254,
-                "national": 389
-            }
-        },
-        {
-            "name" : "Old_unown_e",
-            "pokedex": {
-                "hoenn": 390,
-                "internal": 255,
-                "national": 390
-            }
-        },
-        {
-            "name" : "Old_unown_f",
-            "pokedex": {
-                "hoenn": 391,
-                "internal": 256,
-                "national": 391
-            }
-        },
-        {
-            "name" : "Old_unown_g",
-            "pokedex": {
-                "hoenn": 392,
-                "internal": 257,
-                "national": 392
-            }
-        },
-        {
-            "name" : "Old_unown_h",
-            "pokedex": {
-                "hoenn": 393,
-                "internal": 258,
-                "national": 393
-            }
-        },
-        {
-            "name" : "Old_unown_i",
-            "pokedex": {
-                "hoenn": 394,
-                "internal": 259,
-                "national": 394
-            }
-        },
-        {
-            "name" : "Old_unown_j",
-            "pokedex": {
-                "hoenn": 395,
-                "internal": 260,
-                "national": 395
-            }
-        },
-        {
-            "name" : "Old_unown_k",
-            "pokedex": {
-                "hoenn": 396,
-                "internal": 261,
-                "national": 396
-            }
-        },
-        {
-            "name" : "Old_unown_l",
-            "pokedex": {
-                "hoenn": 397,
-                "internal": 262,
-                "national": 397
-            }
-        },
-        {
-            "name" : "Old_unown_m",
-            "pokedex": {
-                "hoenn": 398,
-                "internal": 263,
-                "national": 398
-            }
-        },
-        {
-            "name" : "Old_unown_n",
-            "pokedex": {
-                "hoenn": 399,
-                "internal": 264,
-                "national": 399
-            }
-        },
-        {
-            "name" : "Old_unown_o",
-            "pokedex": {
-                "hoenn": 400,
-                "internal": 265,
-                "national": 400
-            }
-        },
-        {
-            "name" : "Old_unown_p",
-            "pokedex": {
-                "hoenn": 401,
-                "internal": 266,
-                "national": 401
-            }
-        },
-        {
-            "name" : "Old_unown_q",
-            "pokedex": {
-                "hoenn": 402,
-                "internal": 267,
-                "national": 402
-            }
-        },
-        {
-            "name" : "Old_unown_r",
-            "pokedex": {
-                "hoenn": 403,
-                "internal": 268,
-                "national": 403
-            }
-        },
-        {
-            "name" : "Old_unown_s",
-            "pokedex": {
-                "hoenn": 404,
-                "internal": 269,
-                "national": 404
-            }
-        },
-        {
-            "name" : "Old_unown_t",
-            "pokedex": {
-                "hoenn": 405,
-                "internal": 270,
-                "national": 405
-            }
-        },
-        {
-            "name" : "Old_unown_u",
-            "pokedex": {
-                "hoenn": 406,
-                "internal": 271,
-                "national": 406
-            }
-        },
-        {
-            "name" : "Old_unown_v",
-            "pokedex": {
-                "hoenn": 407,
-                "internal": 272,
-                "national": 407
-            }
-        },
-        {
-            "name" : "Old_unown_w",
-            "pokedex": {
-                "hoenn": 408,
-                "internal": 273,
-                "national": 408
-            }
-        },
-        {
-            "name" : "Old_unown_x",
-            "pokedex": {
-                "hoenn": 409,
-                "internal": 274,
-                "national": 409
-            }
-        },
-        {
-            "name" : "Old_unown_y",
-            "pokedex": {
-                "hoenn": 410,
-                "internal": 275,
-                "national": 410
-            }
-        },
-        {
-            "name" : "Old_unown_z",
-            "pokedex": {
-                "hoenn": 411,
-                "internal": 276,
-                "national": 411
             }
         },
         {
