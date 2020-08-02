@@ -1,6 +1,14 @@
 CXX ?= g++
 
-CXXFLAGS := -Wall -std=c++11 -O2
+CXX_DEBUG_FLAGS := -g -O0
+CXX_NDEBUG_FLAGS := -O2
+
+ifeq "x$(DEBUG)" "x"
+CXXFLAGS := -Wall -std=c++11 $(CXX_NDEBUG_FLAGS)
+else
+CXXFLAGS := -Wall -std=c++11 $(CXX_DEBUG_FLAGS)
+endif
+
 
 INCLUDES := -I .
 
