@@ -7318,7 +7318,7 @@
             ],
             "body_color": "BLUE",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "TADPOLE",
@@ -7335,7 +7335,10 @@
                     "level": 25,
                     "target": "POLIWHIRL"
                 }
-            ]
+            ],
+            "graphics" : {
+                "flip" : false
+            }
         },
         {
             "name" : "Poliwhirl",
@@ -7455,7 +7458,7 @@
             ],
             "body_color": "BLUE",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "TADPOLE",
@@ -7476,7 +7479,10 @@
                     "trade_item": "KINGS_ROCK",
                     "target": "POLITOED"
                 }
-            ]
+            ],
+            "graphics" : {
+                "flip" : false
+            }
         },
         {
             "name" : "Poliwrath",
@@ -7589,7 +7595,7 @@
             ],
             "body_color": "BLUE",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "TADPOLE",
@@ -7600,6 +7606,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "Its highly developed muscles never grow\\nfatigued, however much it exercises.\\nThis POK\u00e9MON can swim back and forth\\nacross the Pacific Ocean without effort." },                "number" : { "hoenn": 249, "internal": 62, "national": 62 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -12328,7 +12337,7 @@
             ],
             "body_color": "RED",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "PINCER",
@@ -12339,6 +12348,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "It waves its huge, oversized claw in the\\nair to communicate with others.\\nBut since the claw is so heavy, this\\nPOK\u00e9MON quickly tires." },                "number" : { "hoenn": 269, "internal": 99, "national": 99 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -15749,7 +15761,7 @@
             ],
             "body_color": "YELLOW",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "ELECTRIC",
@@ -15760,6 +15772,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "When a storm approaches, it competes with\\nothers to scale heights that are likely to\\nbe stricken by lightning. Some towns use\\nELECTABUZZ in place of lightning rods." },                "number" : { "hoenn": 283, "internal": 125, "national": 125 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -19985,7 +20000,7 @@
             ],
             "body_color": "BLUE",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "BIG JAW",
@@ -20002,7 +20017,10 @@
                     "level": 30,
                     "target": "FERALIGATR"
                 }
-            ]
+            ],
+            "graphics" : {
+                "flip" : false
+            }
         },
         {
             "name" : "Feraligatr",
@@ -21874,7 +21892,7 @@
             ],
             "body_color": "PINK",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "BALLOON",
@@ -21891,7 +21909,10 @@
                     "friendship": true,
                     "target": "JIGGLYPUFF"
                 }
-            ]
+            ],
+            "graphics" : {
+                "flip" : false
+            }
         },
         {
             "name" : "Togepi",
@@ -23374,7 +23395,7 @@
             ],
             "body_color": "GREEN",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "FROG",
@@ -23385,6 +23406,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "The curled hair on its head proves its\\nstatus as a king. It is said that the\\nlonger and curlier the hair, the more\\nrespect it earns from its peers." },                "number" : { "hoenn": 331, "internal": 186, "national": 186 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -25173,7 +25197,7 @@
             ],
             "body_color": "BLACK",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "SYMBOL",
@@ -25190,6 +25214,9 @@
                     "internal": 201,
                     "national": 201
                 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -26919,7 +26946,7 @@
             ],
             "body_color": "BLACK",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "SHARP CLAW",
@@ -26930,6 +26957,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "A SNEASEL scales trees by punching its\\nhooked claws into the bark. It seeks out\\nunguarded nests and steals eggs for food\\nwhile the parents are away." },                "number" : { "hoenn": 357, "internal": 215, "national": 215 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -27061,7 +27091,7 @@
             ],
             "body_color": "BROWN",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "LITTLE BEAR",
@@ -27078,7 +27108,10 @@
                     "level": 30,
                     "target": "URSARING"
                 }
-            ]
+            ],
+            "graphics" : {
+                "flip" : false
+            }
         },
         {
             "name" : "Ursaring",
@@ -29854,7 +29887,7 @@
             ],
             "body_color": "YELLOW",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "ELECTRIC",
@@ -29871,7 +29904,10 @@
                     "level": 30,
                     "target": "ELECTABUZZ"
                 }
-            ]
+            ],
+            "graphics" : {
+                "flip" : false
+            }
         },
         {
             "name" : "Magby",
@@ -31444,7 +31480,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_C",
@@ -31455,7 +31519,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_D",
@@ -31466,7 +31558,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_E",
@@ -31477,7 +31597,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_F",
@@ -31488,7 +31636,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_G",
@@ -31499,7 +31675,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_H",
@@ -31510,7 +31714,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_I",
@@ -31521,7 +31753,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_J",
@@ -31532,7 +31792,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_K",
@@ -31543,7 +31831,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_L",
@@ -31554,7 +31870,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_M",
@@ -31565,7 +31909,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_N",
@@ -31576,7 +31948,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_O",
@@ -31587,7 +31987,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_P",
@@ -31598,7 +32026,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_Q",
@@ -31609,7 +32065,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_R",
@@ -31620,7 +32104,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_S",
@@ -31631,7 +32143,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_T",
@@ -31642,7 +32182,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_U",
@@ -31653,7 +32221,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_V",
@@ -31664,7 +32260,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_W",
@@ -31675,7 +32299,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_X",
@@ -31686,7 +32338,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_Y",
@@ -31697,7 +32377,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Old_unown_Z",
@@ -31708,7 +32416,35 @@
                 "levelup" : [
                     { "1" : "TACKLE" }
                 ]
-            }
+            },
+            "base_stats": {
+                "hp": 50,
+                "attack": 150,
+                "defense": 50,
+                "speed": 150,
+                "special_attack": 150,
+                "special_defense": 50
+            },
+            "type": [ "NORMAL" ],
+            "catch_rate": 3,
+            "experience_yield": 1,
+            "ev_yield": {
+                "hp": 2,
+                "attack": 2,
+                "defense": 2,
+                "speed": 2,
+                "special_attack": 2,
+                "special_defense": 2
+            },
+            "item": [],
+            "base_friendship": 0,
+            "growth_rate": "MEDIUM_FAST",
+            "breeding": {
+                "egg_cycles": 120,
+                "egg_group": [ "UNDISCOVERED" ]
+            },
+            "abilities": [],
+            "body_color": "BLACK"
         },
         {
             "name" : "Treecko",
@@ -35681,7 +36417,7 @@
             ],
             "body_color": "BROWN",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "SPOT PANDA",
@@ -35692,6 +36428,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "It is distinguished by a pattern of\\nspots that is always different. Its\\nunsteady, tottering walk has the\\neffect of fouling its foe's aim." },                "number" : { "hoenn": 114, "internal": 308, "national": 327 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -42857,7 +43596,7 @@
             ],
             "body_color": "GREEN",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "THORN",
@@ -42868,6 +43607,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "A ROSELIA that drinks nutritionally rich\\nspringwater blooms with lovely flowers.\\nThe fragrance of its flowers has the\\neffect of making its foes careless." },                "number" : { "hoenn": 94, "internal": 363, "national": 315 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -44618,7 +45360,7 @@
             ],
             "body_color": "WHITE",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "DISASTER",
@@ -44629,6 +45371,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "It sharply senses even subtle changes in\\nthe sky and the land to predict natural\\ndisasters. It is a long-lived POK\u00e9MON that\\nhas a life-span of 100 years." },                "number" : { "hoenn": 152, "internal": 376, "national": 359 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -45009,7 +45754,7 @@
             ],
             "body_color": "BLACK",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "FANG SNAKE",
@@ -45020,6 +45765,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "SEVIPER and ZANGOOSE are eternal rivals.\\nIt counters a ZANGOOSE's dazzling agility\\nwith its swordlike tail, which also oozes\\na horrible poison." },                "number" : { "hoenn": 124, "internal": 379, "national": 336 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -45162,7 +45910,7 @@
             ],
             "body_color": "WHITE",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "CAT FERRET",
@@ -45173,6 +45921,9 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "When it battles, it stands on its hind legs\\nand attacks with its sharply clawed\\nforelegs. Its fur bristles if it encounters\\nany SEVIPER." },                "number" : { "hoenn": 123, "internal": 380, "national": 335 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -46236,10 +46987,10 @@
             },
             "item": [],
             "pct_female": 12.5,
+            "base_friendship": 70,
+            "growth_rate": "ERRATIC",
             "breeding": {
                 "egg_cycles": 30,
-                "base_friendship": 70,
-                "growth_rate": "ERRATIC",
                 "egg_group": [
                     "WATER_3"
                 ]
@@ -49131,7 +49882,7 @@
             ],
             "body_color": "RED",
             "graphics": {
-                "flip": true
+                "flip": false
             },
             "pokedex": { "entry": {
                 "category": "DNA",
@@ -49142,6 +49893,9 @@
                 "trainer_scale": 290,
                 "trainer_offset": 2,
                 "text": "A POK\u00e9MON that mutated from an\\nextraterrestrial virus exposed to a laser\\nbeam. Its body is configured for superior\\nagility and speed." },                "number" : { "hoenn": 202, "internal": 410, "national": 386 }
+            },
+            "graphics" : {
+                "flip" : false
             }
         },
         {
@@ -49272,32 +50026,6 @@
                 "trainer_scale": 256,
                 "trainer_offset": 0,
                 "text": "They fly about very actively when the hot\\nseason arrives. They communicate among\\nthemselves using seven different and\\ndistinguishing cries." },                "number" : { "hoenn": 151, "internal": 411, "national": 358 }
-            }
-        },
-        {
-            "name" : "Egg",
-            "pokedex": {
-                "number" : {
-                    "internal": 412
-                }
-            }
-        },
-        {
-            "name" : "Unown_b",
-            "pokedex": {
-                "number" : {
-                    "internal": 414,
-                    "national": 201
-                }
-            }
-        },
-        {
-            "name" : "Unown_p",
-            "pokedex": {
-                "number" : {
-                    "internal": 439,
-                    "national": 217
-                }
             }
         }
     ]
