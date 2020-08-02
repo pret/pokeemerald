@@ -1,28 +1,6 @@
 {
     "species": [
         {
-            "name" : "None",
-            "learnsets" : {
-                "tutor" : [],
-                "levelup" : "Bulbasaur"
-            },
-            "pokedex" : {
-                "number" : {
-                    "internal" : 0
-                },
-                "entry": {
-                    "category": "UNKNOWN",
-                    "height": 0,
-                    "weight": 0,
-                    "scale": 256,
-                    "offset": 0,
-                    "trainer_scale": 256,
-                    "trainer_offset": 0,
-                    "text": "This is a newly discovered POKéMON.\\nIt is currently under investigation.\\nNo detailed information is available\\nat this time."
-                }
-            }
-        },
-        {
             "name": "Bulbasaur",
             "learnsets": {
                 "tmhm": [

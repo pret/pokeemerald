@@ -3,6 +3,7 @@
 
 const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 {
+    [SPECIES_NONE] = sBulbasaurLevelUpLearnset,
 ## for specimen in species
 ## if existsIn(specimen, "learnsets")
 ## if existsIn(specimen.learnsets, "levelup")

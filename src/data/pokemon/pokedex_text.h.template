@@ -1,5 +1,8 @@
 {{ doNotModifyHeader }}
 
+
+const u8 gDummyPokedexText[] = _(
+        "This is a newly discovered POKéMON.\nIt is currently under investigation.\nNo detailed information is available\nat this time.");
 ## for specimen in sort(species, "pokedex/number/national")
 ## if existsIn(specimen.pokedex, "entry")
 

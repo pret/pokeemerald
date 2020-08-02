@@ -3,8 +3,20 @@
 
 const struct PokedexEntry gPokedexEntries[] =
 {
+    [NATIONAL_DEX_NONE] =
+    {
+        .categoryName = _("UNKNOWN"),
+        .height = 0,
+        .weight = 0,
+        .description = gDummyPokedexText,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0
+    },
 ## for specimen in sort(species, "pokedex/number/national")
 ## if existsIn(specimen.pokedex, "entry")
+
     [NATIONAL_DEX_{{upper(specimen.name)}}] =
     {
         .categoryName = _("{{upper(specimen.pokedex.entry.category)}}"),
@@ -16,7 +28,6 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = {{specimen.pokedex.entry.trainer_scale}},
         .trainerOffset = {{specimen.pokedex.entry.trainer_offset}},
     },
-
 ## endif
 ## endfor
 };
