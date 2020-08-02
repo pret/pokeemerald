@@ -5,7 +5,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 {
 ## for specimen in species
 ## if existsIn(specimen, "evolution")
-	[SPECIES_{{upper(specimen.name)}}] = {
+    [SPECIES_{{upper(specimen.name)}}] = {
 ## for evolution in specimen.evolution
 ## if existsIn(evolution, "level")
         { EVO_LEVEL, {{evolution.level}}, SPECIES_{{upper(evolution.target)}} },
@@ -36,10 +36,10 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 ## else if existsIn(evolution, "emerge")
         { EVO_LEVEL_NINJASK, {{evolution.emerge}}, SPECIES_{{upper(evolution.target)}} },
 ## else if existsIn(evolution, "shed")
-        { EVO_LEVEL_SHEDINJA, {{evolution.emerge}}, SPECIES_{{upper(evolution.target)}} },
+        { EVO_LEVEL_SHEDINJA, {{evolution.shed}}, SPECIES_{{upper(evolution.target)}} },
 ## endif
 ## endfor
-## endif
     },
+## endif
 ## endfor
 };

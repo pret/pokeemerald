@@ -24,10 +24,7 @@ SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
 	$(GRAPHICS_SUBDIR)/pokemon.h					\
 	$(GRAPHICS_SUBDIR)/anim_mon_front_pics.h		\
 	$(TEXT_SUBDIR)/species_names.h 					\
-	$(PKMN_SUBDIR)/pokedex_entries.h				\
-	$(PKMN_SUBDIR)/pokedex_text.h					\
 	$(PKMN_SUBDIR)/tmhm_learnsets.h 				\
-	$(PKMN_SUBDIR)/evolution.h						\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_anims.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_coordinates.h	\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_table.h		\
@@ -45,6 +42,7 @@ SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
 SPECIES_TEMPLATES :=								\
 	$(PKMN_SUBDIR)/base_stats.h						\
 	$(PKMN_SUBDIR)/egg_moves.h						\
+    $(PKMN_SUBDIR)/evolution.h                      \
 	$(PKMN_SUBDIR)/pokedex_entries.h				\
 	$(PKMN_SUBDIR)/pokedex_text.h					\
 	$(PKMN_SUBDIR)/level_up_learnsets.h				\
@@ -67,5 +65,6 @@ species_templates: $(SPECIES_TEMPLATES)
 
 $(C_BUILDDIR)/daycare.o: 	c_dep += $(PKMN_SUBDIR)/egg_moves.h
 $(C_BUILDDIR)/party_menu.o: c_dep += $(PKMN_SUBDIR)/tutor_learnsets.h
-$(C_BUILDDIR)/pokemon.o: 	c_dep += $(PKMN_SUBDIR)/level_up_learnsets.h $(PKMN_SUBDIR)/level_up_learnset_pointers.h
+$(C_BUILDDIR)/pokemon.o: 	c_dep += $(PKMN_SUBDIR)/evolution.h $(PKMN_SUBDIR)/level_up_learnsets.h $(PKMN_SUBDIR)/level_up_learnset_pointers.h
 $(C_BUILDDIR)/pokedex.o:	c_dep += $(PKMN_SUBDIR)/pokedex_entries.h $(PKMN_SUBDIR)/pokedex_text.h
+$(C_BUILDDIR)/evolution_scene.o: c_dep += $(PKMN_SUBDIR)/evolution.h

@@ -1,5 +1,6 @@
 base_stats.h
 egg_moves.h
+evolution.h
 pokedex_entries.h
 pokedex_text.h
 level_up_learnsets.h
