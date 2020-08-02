@@ -23,7 +23,6 @@ SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
 	include/graphics_pokemon.h						\
 	$(GRAPHICS_SUBDIR)/pokemon.h					\
 	$(GRAPHICS_SUBDIR)/anim_mon_front_pics.h		\
-	$(TEXT_SUBDIR)/species_names.h 					\
 	$(PKMN_SUBDIR)/tmhm_learnsets.h 				\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_anims.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_coordinates.h	\
@@ -47,7 +46,8 @@ SPECIES_TEMPLATES :=								\
 	$(PKMN_SUBDIR)/pokedex_text.h					\
 	$(PKMN_SUBDIR)/level_up_learnsets.h				\
 	$(PKMN_SUBDIR)/level_up_learnset_pointers.h		\
-	$(PKMN_SUBDIR)/tutor_learnsets.h
+	$(PKMN_SUBDIR)/tutor_learnsets.h                \
+	$(TEXT_SUBDIR)/species_names.h
 
 AUTO_GEN_TARGETS += $(SPECIES_TEMPLATES_TEST)
 

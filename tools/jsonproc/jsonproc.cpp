@@ -122,6 +122,7 @@ int main(int argc, char *argv[])
         string name = args.at(0)->get<string>();
         name = replace(name, ". ", "_");
         name = replace(name, "-", "_");
+        name = replace(name, "'", "");
         name = replace(name, "♀", "_F");
         name = replace(name, "♂", "_M");
         return name;
