@@ -8,7 +8,7 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 ## if existsIn(specimen, "learnsets")
 ## if existsIn(specimen.learnsets, "levelup")
 ## if isArray(specimen.learnsets.levelup)
-    [SPECIES_{{upper(cvar(specimen.name))}}] = s{{cvar(specimen.name)}}LevelUpLearnset,
+    [SPECIES_{{cvar(specimen.name)}}] = s{{cvar(specimen.name)}}LevelUpLearnset,
 ## else
     [SPECIES_{{upper(cvar(specimen.name))}}] = s{{specimen.learnsets.levelup}}LevelUpLearnset,
 ## endif

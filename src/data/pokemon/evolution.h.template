@@ -5,38 +5,38 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 {
 ## for specimen in species
 ## if existsIn(specimen, "evolution")
-    [SPECIES_{{upper(cvar(specimen.name))}}] = {
+    [SPECIES_{{cvar(specimen.name)}}] = {
 ## for evolution in specimen.evolution
 ## if existsIn(evolution, "level")
-        { EVO_LEVEL, {{evolution.level}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL, {{evolution.level}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "item")
-        { EVO_ITEM, ITEM_{{upper(evolution.item)}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_ITEM, ITEM_{{upper(evolution.item)}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "friendship")
-        { EVO_FRIENDSHIP, 0, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_FRIENDSHIP, 0, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "friendship_day")
-        { EVO_FRIENDSHIP_DAY, 0, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_FRIENDSHIP_DAY, 0, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "friendship_night")
-        { EVO_FRIENDSHIP_NIGHT, 0, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_FRIENDSHIP_NIGHT, 0, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "trade")
-        { EVO_TRADE, 0, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_TRADE, 0, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "trade_item")
-        { EVO_TRADE_ITEM, ITEM_{{upper(evolution.trade_item)}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_TRADE_ITEM, ITEM_{{upper(evolution.trade_item)}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "beauty")
-        { EVO_BEAUTY, {{evolution.beauty}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_BEAUTY, {{evolution.beauty}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "atk_lt_def")
-        { EVO_LEVEL_ATK_LT_DEF, {{evolution.atk_lt_def}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL_ATK_LT_DEF, {{evolution.atk_lt_def}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "atk_eq_def")
-        { EVO_LEVEL_ATK_EQ_DEF, {{evolution.atk_eq_def}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL_ATK_EQ_DEF, {{evolution.atk_eq_def}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "atk_gt_def")
-        { EVO_LEVEL_ATK_GT_DEF, {{evolution.atk_gt_def}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL_ATK_GT_DEF, {{evolution.atk_gt_def}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "personality_lesslikely")
-        { EVO_LEVEL_SILCOON, {{evolution.personality_lesslikely}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL_SILCOON, {{evolution.personality_lesslikely}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "personality_morelikely")
-        { EVO_LEVEL_CASCOON, {{evolution.personality_morelikely}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL_CASCOON, {{evolution.personality_morelikely}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "emerge")
-        { EVO_LEVEL_NINJASK, {{evolution.emerge}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL_NINJASK, {{evolution.emerge}}, SPECIES_{{cvar(evolution.target)}} },
 ## else if existsIn(evolution, "shed")
-        { EVO_LEVEL_SHEDINJA, {{evolution.shed}}, SPECIES_{{upper(cvar(evolution.target))}} },
+        { EVO_LEVEL_SHEDINJA, {{evolution.shed}}, SPECIES_{{cvar(evolution.target)}} },
 ## endif
 ## endfor
     },

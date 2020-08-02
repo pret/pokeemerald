@@ -11,7 +11,7 @@ const u16 gEggMoves[] =
 ## for specimen in species
 ## if existsIn(specimen, "learnsets")
 ## if existsIn(specimen.learnsets, "egg")
-    egg_moves({{upper(cvar(specimen.name))}},
+    egg_moves({{cvar(specimen.name)}},
 ## for move in specimen.learnsets.egg
 ## if loop.is_last
               MOVE_{{upper(move)}}),

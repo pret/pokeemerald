@@ -10,7 +10,7 @@
 const u32 gTMHMLearnsets[][2] =
 {
 ## for specimen in species
-	[SPECIES_{{upper(specimen.name)}}] = TMHM_LEARNSET(0
+	[SPECIES_{{cvar(specimen.name)}}] = TMHM_LEARNSET(0
 ## for tmhm in specimen.learnsets.tmhm
 		| TMHM(TMHM_{{upper(tmhm)}})
 ## endfor
