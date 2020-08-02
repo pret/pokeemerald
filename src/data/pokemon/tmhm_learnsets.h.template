@@ -9,11 +9,17 @@
 // each bit corresponding to a .
 const u32 gTMHMLearnsets[][2] =
 {
+    [SPECIES_NONE]        = TMHM_LEARNSET(0),
 ## for specimen in species
+
+## if existsIn(specimen.learnsets, "tmhm")
 	[SPECIES_{{cvar(specimen.name)}}] = TMHM_LEARNSET(0
 ## for tmhm in specimen.learnsets.tmhm
 		| TMHM(TMHM_{{upper(tmhm)}})
 ## endfor
 	),
+## else
+    [SPECIES_{{cvar(specimen.name)}}] = TMHM_LEARNSET(0),
+## endif
 ## endfor
 };

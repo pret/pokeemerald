@@ -5,4 +5,5 @@ pokedex_entries.h
 pokedex_text.h
 level_up_learnsets.h
 level_up_learnset_pointers.h
+tmhm_learnsets.h
 tutor_learnsets.h
