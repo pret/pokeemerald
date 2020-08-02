@@ -8,7 +8,7 @@
 ## if existsIn(specimen.learnsets, "levelup")
 ## if isArray(specimen.learnsets.levelup)
 
-static const u16 s{{specimen.name}}LevelUpLearnset[] = {
+static const u16 s{{cvar(specimen.name)}}LevelUpLearnset[] = {
 ## for level_move in specimen.learnsets.levelup
 ## for level, move in level_move
     LEVEL_UP_MOVE({{level}}, MOVE_{{upper(move)}}),

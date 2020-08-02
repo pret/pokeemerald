@@ -3,6 +3,7 @@
 #include "jsonproc.h"
 
 #include <map>
+#include <regex>
 #include <string>
 #include <vector>
 
@@ -29,6 +30,12 @@ static vector<string> split(const string &value, const char separator)
 
     return splits;
 }
+
+static string replace(const string &valuearg, const string &substr, const string &newsubstr)
+{
+    return std::regex_replace(valuearg, std::regex(substr), newsubstr);
+}
+
 
 void set_custom_var(string key, string value)
 {
@@ -106,6 +113,18 @@ int main(int argc, char *argv[])
             return rawValue;
 
         return rawValue.substr(0, i);
+    });
+
+    /**
+     * Convert a name to a C-compliant variable name
+     */
+    env.add_callback("cvar", 1, [](Arguments &args) {
+        string name = args.at(0)->get<string>();
+        name = replace(name, ". ", "_");
+        name = replace(name, "-", "_");
+        name = replace(name, "♀", "_F");
+        name = replace(name, "♂", "_M");
+        return name;
     });
 
     /**

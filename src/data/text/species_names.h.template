@@ -1,8 +1,14 @@
 {{ doNotModifyHeader }}
 
-const struct u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] =
+
+const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] =
 {
+    [SPECIES_NONE] = _("??????????"),
 ## for specimen in species
-    [SPECIES_{{ upper(specimen.name) }}] = _("{{ specimen.name }}"),
+## if existsIn(specimen, "display_name")
+    [SPECIES_{{upper(cvar(specimen.name))}}] = _("{{specimen.display_name}}"),
+## else
+    [SPECIES_{{upper(cvar(specimen.name))}}] = _("{{specimen.name}}"),
+## endif
 ## endfor
 };

@@ -3,14 +3,14 @@
 
 const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 {
-    [SPECIES_NONE] = sBulbasaurLevelUpLearnset,
+    [SPECIES_NONE] = sBULBASAURLevelUpLearnset,
 ## for specimen in species
 ## if existsIn(specimen, "learnsets")
 ## if existsIn(specimen.learnsets, "levelup")
 ## if isArray(specimen.learnsets.levelup)
-    [SPECIES_{{upper(specimen.name)}}] = s{{specimen.name}}LevelUpLearnset,
+    [SPECIES_{{upper(cvar(specimen.name))}}] = s{{cvar(specimen.name)}}LevelUpLearnset,
 ## else
-    [SPECIES_{{upper(specimen.name)}}] = s{{specimen.learnsets.levelup}}LevelUpLearnset,
+    [SPECIES_{{upper(cvar(specimen.name))}}] = s{{specimen.learnsets.levelup}}LevelUpLearnset,
 ## endif
 ## endif
 ## endif

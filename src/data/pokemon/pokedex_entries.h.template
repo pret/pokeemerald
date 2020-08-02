@@ -17,12 +17,12 @@ const struct PokedexEntry gPokedexEntries[] =
 ## for specimen in sort(species, "pokedex/number/national")
 ## if existsIn(specimen.pokedex, "entry")
 
-    [NATIONAL_DEX_{{upper(specimen.name)}}] =
+    [NATIONAL_DEX_{{upper(cvar(specimen.name))}}] =
     {
         .categoryName = _("{{upper(specimen.pokedex.entry.category)}}"),
         .height = {{specimen.pokedex.entry.height}},
         .weight = {{specimen.pokedex.entry.weight}},
-        .description = g{{specimen.name}}PokedexText,
+        .description = g{{cvar(specimen.name)}}PokedexText,
         .pokemonScale = {{specimen.pokedex.entry.scale}},
         .pokemonOffset = {{specimen.pokedex.entry.offset}},
         .trainerScale = {{specimen.pokedex.entry.trainer_scale}},

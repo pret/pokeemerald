@@ -11,7 +11,7 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_NONE] = {0},
 ## for specimen in species
 
-    [SPECIES_{{upper(specimen.name)}}] =
+    [SPECIES_{{upper(cvar(specimen.name))}}] =
     {
         .baseHP        = {{specimen.base_stats.hp}},
         .baseAttack    = {{specimen.base_stats.attack}},
