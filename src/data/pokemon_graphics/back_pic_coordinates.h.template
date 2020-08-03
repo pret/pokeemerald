@@ -23,7 +23,7 @@ const struct MonCoords gMonBackPicCoords[] =
     },
 
 ## for form in unown_forms
-    [SPECIES_{{cvar(form.name)}}] =
+    [SPECIES_UNOWN_{{form.letter}}] =
     {
         .size = {{form.graphics.back_pic.size}},
         .y_offset = {{form.graphics.back_pic.y_offset}},

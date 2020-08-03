@@ -67346,7 +67346,7 @@
     ],
     "unown_forms": [
         {
-            "name": "UNOWN_B",
+            "letter": "B",
             "graphics": {
                 "back_pic": {
                     "size": "0x56",
@@ -67373,7 +67373,7 @@
             }
         },
         {
-            "name": "UNOWN_C",
+            "letter": "C",
             "graphics": {
                 "back_pic": {
                     "size": "0x67",
@@ -67400,7 +67400,7 @@
             }
         },
         {
-            "name": "UNOWN_D",
+            "letter": "D",
             "graphics": {
                 "back_pic": {
                     "size": "0x56",
@@ -67427,7 +67427,7 @@
             }
         },
         {
-            "name": "UNOWN_E",
+            "letter": "E",
             "graphics": {
                 "back_pic": {
                     "size": "0x56",
@@ -67454,7 +67454,7 @@
             }
         },
         {
-            "name": "UNOWN_F",
+            "letter": "F",
             "graphics": {
                 "back_pic": {
                     "size": "0x66",
@@ -67481,7 +67481,7 @@
             }
         },
         {
-            "name": "UNOWN_G",
+            "letter": "G",
             "graphics": {
                 "back_pic": {
                     "size": "0x57",
@@ -67508,7 +67508,7 @@
             }
         },
         {
-            "name": "UNOWN_H",
+            "letter": "H",
             "graphics": {
                 "back_pic": {
                     "size": "0x66",
@@ -67535,7 +67535,7 @@
             }
         },
         {
-            "name": "UNOWN_I",
+            "letter": "I",
             "graphics": {
                 "back_pic": {
                     "size": "0x37",
@@ -67562,7 +67562,7 @@
             }
         },
         {
-            "name": "UNOWN_J",
+            "letter": "J",
             "graphics": {
                 "back_pic": {
                     "size": "0x46",
@@ -67589,7 +67589,7 @@
             }
         },
         {
-            "name": "UNOWN_K",
+            "letter": "K",
             "graphics": {
                 "back_pic": {
                     "size": "0x57",
@@ -67616,7 +67616,7 @@
             }
         },
         {
-            "name": "UNOWN_L",
+            "letter": "L",
             "graphics": {
                 "back_pic": {
                     "size": "0x46",
@@ -67643,7 +67643,7 @@
             }
         },
         {
-            "name": "UNOWN_M",
+            "letter": "M",
             "graphics": {
                 "back_pic": {
                     "size": "0x65",
@@ -67670,7 +67670,7 @@
             }
         },
         {
-            "name": "UNOWN_N",
+            "letter": "N",
             "graphics": {
                 "back_pic": {
                     "size": "0x65",
@@ -67697,7 +67697,7 @@
             }
         },
         {
-            "name": "UNOWN_O",
+            "letter": "O",
             "graphics": {
                 "back_pic": {
                     "size": "0x66",
@@ -67724,7 +67724,7 @@
             }
         },
         {
-            "name": "UNOWN_P",
+            "letter": "P",
             "graphics": {
                 "back_pic": {
                     "size": "0x46",
@@ -67751,7 +67751,7 @@
             }
         },
         {
-            "name": "UNOWN_Q",
+            "letter": "Q",
             "graphics": {
                 "back_pic": {
                     "size": "0x55",
@@ -67778,7 +67778,7 @@
             }
         },
         {
-            "name": "UNOWN_R",
+            "letter": "R",
             "graphics": {
                 "back_pic": {
                     "size": "0x45",
@@ -67805,7 +67805,7 @@
             }
         },
         {
-            "name": "UNOWN_S",
+            "letter": "S",
             "graphics": {
                 "back_pic": {
                     "size": "0x57",
@@ -67832,7 +67832,7 @@
             }
         },
         {
-            "name": "UNOWN_T",
+            "letter": "T",
             "graphics": {
                 "back_pic": {
                     "size": "0x45",
@@ -67859,7 +67859,7 @@
             }
         },
         {
-            "name": "UNOWN_U",
+            "letter": "U",
             "graphics": {
                 "back_pic": {
                     "size": "0x65",
@@ -67886,7 +67886,7 @@
             }
         },
         {
-            "name": "UNOWN_V",
+            "letter": "V",
             "graphics": {
                 "back_pic": {
                     "size": "0x56",
@@ -67913,7 +67913,7 @@
             }
         },
         {
-            "name": "UNOWN_W",
+            "letter": "W",
             "graphics": {
                 "back_pic": {
                     "size": "0x55",
@@ -67940,7 +67940,7 @@
             }
         },
         {
-            "name": "UNOWN_X",
+            "letter": "X",
             "graphics": {
                 "back_pic": {
                     "size": "0x55",
@@ -67967,7 +67967,7 @@
             }
         },
         {
-            "name": "UNOWN_Y",
+            "letter": "Y",
             "graphics": {
                 "back_pic": {
                     "size": "0x46",
@@ -67994,7 +67994,7 @@
             }
         },
         {
-            "name": "UNOWN_Z",
+            "letter": "Z",
             "graphics": {
                 "back_pic": {
                     "size": "0x46",
@@ -68021,7 +68021,7 @@
             }
         },
         {
-            "name": "UNOWN_EMARK",
+            "letter": "EMARK",
             "graphics": {
                 "back_pic": {
                     "size": "0x37",
@@ -68048,7 +68048,7 @@
             }
         },
         {
-            "name": "UNOWN_QMARK",
+            "letter": "QMARK",
             "graphics": {
                 "back_pic": {
                     "size": "0x47",
