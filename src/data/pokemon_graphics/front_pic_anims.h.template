@@ -1,10 +1,18 @@
 {{ doNotModifyHeader }}
 
 
+static const union AnimCmd sAnim_NONE_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 ## for specimen in species
 ## if existsIn(specimen.graphics.front_pic.animation, "frames")
 ## for frameset in specimen.graphics.front_pic.animation.frames
-static const union AnimCmd sAnim_{{upper(specimen.name)}}_{{loop.index}}[] =
+static const union AnimCmd sAnim_{{cvar(specimen.name)}}_{{loop.index1}}[] =
 {
 ## for frame in frameset
     ANIMCMD_FRAME({% for value in frame %}{% if loop.is_last %}{{value}}{% else %}{{value}}, {% endif %}{% endfor %}),
@@ -15,18 +23,62 @@ static const union AnimCmd sAnim_{{upper(specimen.name)}}_{{loop.index}}[] =
 
 ## endif
 ## endfor
+static const union AnimCmd sAnim_EGG_1[] =
+{
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_END,
+};
 
+## for form in unown_forms
+## for frameset in form.graphics.front_pic.animation.frames
+static const union AnimCmd sAnim_{{cvar(form.name)}}_{{loop.index1}}[] =
+{
+## for frame in frameset
+    ANIMCMD_FRAME({% for value in frame %}{% if loop.is_last %}{{value}}{% else %}{{value}}, {% endif %}{% endfor %}),
+## endfor
+    ANIMCMD_END,
+};
+## endfor
+
+## endfor
+
+
+static const union AnimCmd *const sAnims_NONE[] ={
+    sAnim_GeneralFrame0,
+    sAnim_NONE_1,
+};
 ## for specimen in species
 ## if existsIn(specimen.graphics.front_pic.animation, "frames")
-static const union AnimCmd *const sAnims_{{upper(specimen.name)}}[] =
-{
-    sAnimGeneralFrame0,
+static const union AnimCmd *const sAnims_{{cvar(specimen.name)}}[] ={
+## if not existsIn(specimen.graphics.front_pic.animation, "general")
+    sAnim_GeneralFrame0,
+## else if specimen.graphics.front_pic.animation.general
+    sAnim_GeneralFrame0,
+## endif
 ## for frameset in specimen.graphics.front_pic.animation.frames
-    sAnim_{{upper(specimen.name)}}_{{loop.index}},
+    sAnim_{{cvar(specimen.name)}}_{{loop.index1}},
 ## endfor
 };
 
 ## endif
+## endfor
+static const union AnimCmd *const sAnims_EGG[] ={
+    sAnim_GeneralFrame0,
+    sAnim_EGG_1,
+};
+
+## for form in unown_forms
+static const union AnimCmd *const sAnims_{{cvar(form.name)}}[] ={
+## for frameset in form.graphics.front_pic.animation.frames
+    sAnim_GeneralFrame0,
+    sAnim_{{cvar(form.name)}}_{{loop.index1}},
+## endfor
+
+};
+
 ## endfor
 
 
@@ -35,12 +87,17 @@ static const union AnimCmd *const sAnims_{{upper(specimen.name)}}[] =
 
 const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 {
+    ANIM_CMD(NONE),
 ## for specimen in species
-## if existsIn(specimen.graphics.front_pic.animation, "frames")
-    ANIM_CMD({{upper(specimen.name)}}),
+## if existsIn(specimen.graphics.front_pic.animation, "source")
+    ANIM_CMD_FULL({{cvar(specimen.name)}}, sAnims_{{cvar(specimen.graphics.front_pic.animation.source)}}),
 ## else
-    ANIM_CMD_FULL({{upper(specimen.name)}}, sAnims_{{upper(specimen.graphics.front_pic.animation.source)}}),
+    ANIM_CMD({{cvar(specimen.name)}}),
 ## endif
+## endfor
+    ANIM_CMD(EGG),
+## for form in unown_forms
+    ANIM_CMD({{cvar(form.name)}}),
 ## endfor
 };
 
