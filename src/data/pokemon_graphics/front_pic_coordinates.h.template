@@ -2,11 +2,30 @@
 
 const struct MonCoords gMonFrontPicCoords[] =
 {
-## for specimen in species
-    [SPECIES_{{ upper(specimen.name) }}] =
+    [SPECIES_NONE] =
     {
-        .size = {{ specimen.graphics.front_pic.size }},
-        .y_offset = {{ specimen.graphics.front_pic.y_offset }}
+        .size = 0x88,
+        .y_offset = 0,
+    },
+## for specimen in species
+    [SPECIES_{{cvar(specimen.name)}}] =
+    {
+        .size = {{specimen.graphics.front_pic.size}},
+        .y_offset = {{specimen.graphics.front_pic.y_offset}},
+    },
+## endfor
+
+    [SPECIES_EGG] =
+    {
+        .size = 0x33,
+        .y_offset = 20,
+    },
+
+## for form in unown_forms
+    [SPECIES_{{cvar(form.name)}}] =
+    {
+        .size = {{form.graphics.front_pic.size}},
+        .y_offset = {{form.graphics.front_pic.y_offset}},
     },
 ## endfor
 };

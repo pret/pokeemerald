@@ -1,12 +1,32 @@
 {{ doNotModifyHeader }}
 
+
 const struct MonCoords gMonBackPicCoords[] =
 {
-## for specimen in species
-    [SPECIES_{{ upper(specimen.name) }}] =
+    [SPECIES_NONE] =
     {
-        .size = {{ specimen.graphics.back_pic.size }},
-        .y_offset = {{ specimen.graphics.back_pic.y_offset }}
+        .size = 0x88,
+        .y_offset = 0,
+    },
+## for specimen in species
+    [SPECIES_{{cvar(specimen.name)}}] =
+    {
+        .size = {{specimen.graphics.back_pic.size}},
+        .y_offset = {{specimen.graphics.back_pic.y_offset}},
+    },
+## endfor
+
+    [SPECIES_EGG] =
+    {
+        .size = 0x36,
+        .y_offset = 10,
+    },
+
+## for form in unown_forms
+    [SPECIES_{{cvar(form.name)}}] =
+    {
+        .size = {{form.graphics.back_pic.size}},
+        .y_offset = {{form.graphics.back_pic.y_offset}},
     },
 ## endfor
 };
