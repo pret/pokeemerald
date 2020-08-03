@@ -17,7 +17,7 @@ void sub_8151678(struct UnkStruct0 *r0)
 
 u8 sub_815168C(struct UnkStruct0 *r0, u8 r1, const struct UnkStruct1 *r2)
 {
-    if (!(r1 < 16) || (r0->var04[r1].var00_7))
+    if (!(r1 < 16) || (r0->var04[r1].active))
         return 0xFF;
 
     r0->var04[r1].var04.var00 = r2->var00;
@@ -29,7 +29,7 @@ u8 sub_815168C(struct UnkStruct0 *r0, u8 r1, const struct UnkStruct1 *r2)
     r0->var04[r1].var04.var07_5 = r2->var07_5;
     r0->var04[r1].var04.var07_7 = r2->var07_7;
     r0->var04[r1].var00_0 = 0;
-    r0->var04[r1].var00_7 = 1;
+    r0->var04[r1].active = TRUE;
     r0->var04[r1].var02 = 0;
     r0->var04[r1].var01 = 0;
     if (r0->var04[r1].var04.var07_7 < 0)
@@ -44,7 +44,7 @@ u8 sub_8151710(struct UnkStruct0 *r0, u8 r1)
 {
     if (r1 >= 16)
         return 0xFF;
-    if (!r0->var04[r1].var00_7)
+    if (!r0->var04[r1].active)
         return 0xFF;
 
     memset(&r0->var04[r1], 0, sizeof(r0->var04[r1]));
@@ -154,16 +154,16 @@ void task_tutorial_controls_fadein(struct UnkStruct0 *r0)
     }
 }
 
-void sub_8151A48(struct UnkStruct0 *r0, u16 r1)
+void sub_8151A48(struct UnkStruct0 *r0, u16 flags)
 {
     u8 i = 0;
 
     r0->var00++;
     for (i = 0; i < 16; i++)
     {
-        if ((r1 >> i) & 1)
+        if ((flags >> i) & 1)
         {
-            if (r0->var04[i].var00_7)
+            if (r0->var04[i].active)
             {
                 r0->var02 |= 1 << i;
                 r0->var04[i].var00_0 = 1;
@@ -172,7 +172,7 @@ void sub_8151A48(struct UnkStruct0 *r0, u16 r1)
     }
 }
 
-void sub_8151A9C(struct UnkStruct0 *r0, u16 r1)
+void sub_8151A9C(struct UnkStruct0 *r0, u16 flags)
 {
     u8 i;
 
@@ -180,9 +180,9 @@ void sub_8151A9C(struct UnkStruct0 *r0, u16 r1)
     {
         if ((r0->var02 >> i) & 1)
         {
-            if (r0->var04[i].var00_7)
+            if (r0->var04[i].active)
             {
-                if ((r1 >> i) & 1)
+                if ((flags >> i) & 1)
                 {
                     u32 offset = r0->var04[i].var04.var02;
                     u16 *faded = &gPlttBufferFaded[offset];
@@ -199,14 +199,14 @@ void sub_8151A9C(struct UnkStruct0 *r0, u16 r1)
             }
         }
     }
-    if (r1 == 0xFFFF)
+    if (flags == 0xFFFF)
     {
         r0->var00 = 0;
         r0->var02 = 0;
     }
     else
     {
-        r0->var02 = r0->var02 & ~r1;
+        r0->var02 = r0->var02 & ~flags;
     }
 }
 
