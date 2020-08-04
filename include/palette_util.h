@@ -1,5 +1,5 @@
-#ifndef GUARD_ROULETTE_UTIL_H
-#define GUARD_ROULETTE_UTIL_H
+#ifndef GUARD_PALETTE_UTIL_H
+#define GUARD_PALETTE_UTIL_H
 
 struct PulseBlendSettings
 {
@@ -80,4 +80,4 @@ u8 RouletteFlash_Add(struct RouletteFlashUtil *r0, u8 r1, const struct RouletteF
 void RouletteFlash_Stop(struct RouletteFlashUtil *r0, u16 r1);
 void RouletteFlash_Enable(struct RouletteFlashUtil *r0, u16 r1);
 
-#endif // GUARD_ROULETTE_UTIL_H
+#endif // GUARD_PALETTE_UTIL_H
