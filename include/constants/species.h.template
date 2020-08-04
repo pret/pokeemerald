@@ -4,8 +4,14 @@
 
 // Game data index defines
 
+#define SPECIES_NONE 0
 ## for specimen in species
-#define SPECIES_{{upper(specimen.name)}} {{specimen.pokedex.internal}}
+#define SPECIES_{{cvar(specimen.name)}} {{specimen.pokedex.number.internal}}
+## endfor
+#define SPECIES_EGG {{subtract(length(species), -1)}}
+
+## for form in unown_forms
+#define SPECIES_UNOWN_{{form.letter}} {{subtract(length(species), subtract(-1, loop.index1))}}
 ## endfor
 
 #define NUM_SPECIES SPECIES_EGG
@@ -13,8 +19,9 @@
 
 // National Dex index defines
 
-## for specimen in species
-#define NATIONAL_DEX_{{upper(specimen.name)}} {{specimen.pokedex.national}}
+#define NATIONAL_DEX_NONE 0
+## for specimen in sort(species, "pokedex/number/national")
+#define NATIONAL_DEX_{{cvar(specimen.name)}} {{specimen.pokedex.number.national}}
 ## endfor
 
 #define KANTO_DEX_COUNT NATIONAL_DEX_MEW
@@ -23,8 +30,9 @@
 
 
 // Hoenn Dex index defines
-## for specimen in species
-#define HOENN_DEX_{{upper(specimen.name)}} {{specimen.pokedex.hoenn}}
+#define HOENN_DEX_NONE 0
+## for specimen in sort(species, "pokedex/number/hoenn")
+#define HOENN_DEX_{{cvar(specimen.name)}} {{specimen.pokedex.number.hoenn}}
 ## endfor
 
 #define HOENN_DEX_COUNT HOENN_DEX_DEOXYS

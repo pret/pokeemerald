@@ -19,7 +19,7 @@ PKMN_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon
 PKMN_GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon_graphics
 
 
-SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
+SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h,		\
 	include/graphics_pokemon.h						\
 	$(GRAPHICS_SUBDIR)/pokemon.h					\
 	$(GRAPHICS_SUBDIR)/anim_mon_front_pics.h		\
@@ -35,6 +35,7 @@ SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h, include/constants/species.h 	\
 	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h)
 
 SPECIES_TEMPLATES :=								\
+	include/constants/species.h						\
 	$(PKMN_SUBDIR)/base_stats.h						\
 	$(PKMN_SUBDIR)/egg_moves.h						\
     $(PKMN_SUBDIR)/evolution.h                      \
