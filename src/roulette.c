@@ -100,6 +100,26 @@
 #define F_PURPLE_SKITTY   (1 << SQU_PURPLE_SKITTY)
 #define F_PURPLE_MAKUHITA (1 << SQU_PURPLE_MAKUHITA)
 
+// Flags for flashing selections on the roulette wheel
+#define F_FLASH_COLOR_O_WYNAUT   (1 << 0)
+#define F_FLASH_COLOR_G_AZURILL  (1 << 1)
+#define F_FLASH_COLOR_P_SKITTY   (1 << 2)
+#define F_FLASH_COLOR_O_MAKUHITA (1 << 3)
+#define F_FLASH_COLOR_G_WYNAUT   (1 << 4)
+#define F_FLASH_COLOR_P_AZURILL  (1 << 5)
+#define F_FLASH_COLOR_O_SKITTY   (1 << 6)
+#define F_FLASH_COLOR_G_MAKUHITA (1 << 7)
+#define F_FLASH_COLOR_P_WYNAUT   (1 << 8)
+#define F_FLASH_COLOR_O_AZURILL  (1 << 9)
+#define F_FLASH_COLOR_G_SKITTY   (1 << 10)
+#define F_FLASH_COLOR_P_MAKUHITA (1 << 11)
+#define F_FLASH_OUTER_EDGES      (1 << 12) // when the player wins
+#define FLASH_ICON               (NUM_ROULETTE_SLOTS + 1)
+#define FLASH_ICON_2             (FLASH_ICON + 1)
+#define FLASH_ICON_3             (FLASH_ICON + 2)
+#define F_FLASH_ICON             (1 << FLASH_ICON)
+#define F_FLASH_COLUMN           (1 << FLASH_ICON | 1 << FLASH_ICON_2 | 1 << FLASH_ICON_3)
+
 #define MAX_MULTIPLIER 12
 
 #define PALTAG_SHADOW 1
@@ -271,7 +291,7 @@ struct GridSelection
     u8 tilemapOffset;
     u32 flag;
     u32 inSelectionFlags;
-    u16 var10;
+    u16 flashFlags;
 };
 
 struct RouletteSlot
@@ -336,7 +356,7 @@ static EWRAM_DATA struct Roulette
     TaskFunc nextTask;
     u8 filler_2[4];
     TaskFunc prevTask;
-    struct UnkStruct0 flashUtil;
+    struct RouletteFlashUtil flashUtil;
     u16 tilemapBuffers[7][0x400];
     u16 *gridTilemap;
 } *sRoulette = NULL;
@@ -461,7 +481,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 0,
         .flag = 0,
         .inSelectionFlags = 0,
-        .var10 = 0x0,
+        .flashFlags = 0,
     },
     [COL_WYNAUT] = {
         .spriteIdOffset = 12,
@@ -474,7 +494,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 0,
         .flag = F_WYNAUT_COL,
         .inSelectionFlags = F_WYNAUT_COL | F_ORANGE_WYNAUT | F_GREEN_WYNAUT | F_PURPLE_WYNAUT,
-        .var10 = 0xE000,
+        .flashFlags = F_FLASH_COLUMN,
     },
     [COL_AZURILL] = {
         .spriteIdOffset = 13,
@@ -487,7 +507,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 0,
         .flag = F_AZURILL_COL,
         .inSelectionFlags = F_AZURILL_COL | F_ORANGE_AZURILL | F_GREEN_AZURILL | F_PURPLE_AZURILL,
-        .var10 = 0xE000,
+        .flashFlags = F_FLASH_COLUMN,
     },
     [COL_SKITTY] = {
         .spriteIdOffset = 14,
@@ -500,7 +520,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 0,
         .flag = F_SKITTY_COL,
         .inSelectionFlags = F_SKITTY_COL | F_ORANGE_SKITTY | F_GREEN_SKITTY | F_PURPLE_SKITTY,
-        .var10 = 0xE000,
+        .flashFlags = F_FLASH_COLUMN,
     },
     [COL_MAKUHITA] = {
         .spriteIdOffset = 15,
@@ -513,7 +533,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 0,
         .flag = F_MAKUHITA_COL,
         .inSelectionFlags = F_MAKUHITA_COL | F_ORANGE_MAKUHITA | F_GREEN_MAKUHITA | F_PURPLE_MAKUHITA,
-        .var10 = 0xE000,
+        .flashFlags = F_FLASH_COLUMN,
     },
     [ROW_ORANGE] = {
         .spriteIdOffset = 16,
@@ -526,7 +546,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 12,
         .flag = F_ORANGE_ROW,
         .inSelectionFlags = F_ORANGE_ROW | F_ORANGE_WYNAUT | F_ORANGE_AZURILL | F_ORANGE_SKITTY | F_ORANGE_MAKUHITA,
-        .var10 = 0x249,
+        .flashFlags = F_FLASH_COLOR_O_WYNAUT | F_FLASH_COLOR_O_AZURILL | F_FLASH_COLOR_O_SKITTY | F_FLASH_COLOR_O_MAKUHITA,
     },
     [SQU_ORANGE_WYNAUT] = {
         .spriteIdOffset = 0,
@@ -539,7 +559,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 3,
         .flag = F_ORANGE_WYNAUT,
         .inSelectionFlags = F_ORANGE_WYNAUT,
-        .var10 = 0x2001,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_O_WYNAUT,
     },
     [SQU_ORANGE_AZURILL] = {
         .spriteIdOffset = 9,
@@ -552,7 +572,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 3,
         .flag = F_ORANGE_AZURILL,
         .inSelectionFlags = F_ORANGE_AZURILL,
-        .var10 = 0x2200,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_O_AZURILL,
     },
     [SQU_ORANGE_SKITTY] = {
         .spriteIdOffset = 6,
@@ -565,7 +585,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 3,
         .flag = F_ORANGE_SKITTY,
         .inSelectionFlags = F_ORANGE_SKITTY,
-        .var10 = 0x2040,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_O_SKITTY,
     },
     [SQU_ORANGE_MAKUHITA] = {
         .spriteIdOffset = 3,
@@ -578,7 +598,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 3,
         .flag = F_ORANGE_MAKUHITA,
         .inSelectionFlags = F_ORANGE_MAKUHITA,
-        .var10 = 0x2008,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_O_MAKUHITA,
     },
     [ROW_GREEN] = {
         .spriteIdOffset = 17,
@@ -591,7 +611,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 15,
         .flag = F_GREEN_ROW,
         .inSelectionFlags = F_GREEN_ROW | F_GREEN_WYNAUT | F_GREEN_AZURILL | F_GREEN_SKITTY | F_GREEN_MAKUHITA,
-        .var10 = 0x492,
+        .flashFlags = F_FLASH_COLOR_G_WYNAUT | F_FLASH_COLOR_G_AZURILL | F_FLASH_COLOR_G_SKITTY | F_FLASH_COLOR_G_MAKUHITA,
     },
     [SQU_GREEN_WYNAUT] = {
         .spriteIdOffset = 4,
@@ -604,7 +624,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 6,
         .flag = F_GREEN_WYNAUT,
         .inSelectionFlags = F_GREEN_WYNAUT,
-        .var10 = 0x2010,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_G_WYNAUT,
     },
     [SQU_GREEN_AZURILL] = {
         .spriteIdOffset = 1,
@@ -617,7 +637,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 6,
         .flag = F_GREEN_AZURILL,
         .inSelectionFlags = F_GREEN_AZURILL,
-        .var10 = 0x2002,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_G_AZURILL,
     },
     [SQU_GREEN_SKITTY] = {
         .spriteIdOffset = 10,
@@ -630,7 +650,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 6,
         .flag = F_GREEN_SKITTY,
         .inSelectionFlags = F_GREEN_SKITTY,
-        .var10 = 0x2400,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_G_SKITTY,
     },
     [SQU_GREEN_MAKUHITA] = {
         .spriteIdOffset = 7,
@@ -643,7 +663,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 6,
         .flag = F_GREEN_MAKUHITA,
         .inSelectionFlags = F_GREEN_MAKUHITA,
-        .var10 = 0x2080,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_G_MAKUHITA,
     },
     [ROW_PURPLE] = {
         .spriteIdOffset = 18,
@@ -656,7 +676,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 18,
         .flag = F_PURPLE_ROW,
         .inSelectionFlags = F_PURPLE_ROW | F_PURPLE_WYNAUT | F_PURPLE_AZURILL | F_PURPLE_SKITTY | F_PURPLE_MAKUHITA,
-        .var10 = 0x924,
+        .flashFlags = F_FLASH_COLOR_P_WYNAUT | F_FLASH_COLOR_P_AZURILL | F_FLASH_COLOR_P_SKITTY | F_FLASH_COLOR_P_MAKUHITA,
     },
     [SQU_PURPLE_WYNAUT] = {
         .spriteIdOffset = 8,
@@ -669,7 +689,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 9,
         .flag = F_PURPLE_WYNAUT,
         .inSelectionFlags = F_PURPLE_WYNAUT,
-        .var10 = 0x2100,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_P_WYNAUT,
     },
     [SQU_PURPLE_AZURILL] = {
         .spriteIdOffset = 5,
@@ -682,7 +702,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 9,
         .flag = F_PURPLE_AZURILL,
         .inSelectionFlags = F_PURPLE_AZURILL,
-        .var10 = 0x2020,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_P_AZURILL,
     },
     [SQU_PURPLE_SKITTY] = {
         .spriteIdOffset = 2,
@@ -695,7 +715,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 9,
         .flag = F_PURPLE_SKITTY,
         .inSelectionFlags = F_PURPLE_SKITTY,
-        .var10 = 0x2004,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_P_SKITTY,
     },
     [SQU_PURPLE_MAKUHITA] = {
         .spriteIdOffset = 11,
@@ -708,7 +728,7 @@ static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
         .tilemapOffset = 9,
         .flag = F_PURPLE_MAKUHITA,
         .inSelectionFlags = F_PURPLE_MAKUHITA,
-        .var10 = 0x2800,
+        .flashFlags = F_FLASH_ICON | F_FLASH_COLOR_P_MAKUHITA,
     },
 };
 
@@ -835,171 +855,174 @@ static const struct RouletteTable sRouletteTables[] =
     }
 };
 
-static const struct UnkStruct1 gUnknown_085B6388[NUM_ROULETTE_SLOTS + 1] =
+// Data to flash the color indicator for each slot on the roulette wheel
+static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS + 1] =
 {
-    {
-        .var00 = 0x8000,
-        .var02 = 0x0005,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_O_WYNAUT
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x5,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x000A,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_G_AZURILL
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0xA,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x0015,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_P_SKITTY
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x15,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x0055,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_O_MAKUHITA
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x55,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x005A,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_G_WYNAUT
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x5A,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x0065,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_P_AZURILL
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x65,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x0075,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_O_SKITTY
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x75,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x007A,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_G_MAKUHITA
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x7A,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x0085,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_P_WYNAUT
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x85,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x0095,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_O_AZURILL
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x95,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x009A,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_G_SKITTY
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0x9A,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x8000,
-        .var02 = 0x00A5,
-        .var04 = 1,
-        .var05 = 1,
-        .var06 = 0xFF,
-        .var07_0 = 8,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_COLOR_P_MAKUHITA
+        .color = FLASHUTIL_USE_EXISTING_COLOR,
+        .paletteOffset = 0xA5,
+        .numColors = 1,
+        .delay = 1,
+        .unk6 = -1,
+        .numFadeCycles = 8,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x77D6,
-        .var02 = 0x0028,
-        .var04 = 2,
-        .var05 = 10,
-        .var06 = 0xFF,
-        .var07_0 = 14,
-        .var07_5 = -2,
-        .var07_7 = 0
+    { // F_FLASH_OUTER_EDGES
+        .color = RGB(22, 30, 29),
+        .paletteOffset = 0x28,
+        .numColors = 2,
+        .delay = 10,
+        .unk6 = -1,
+        .numFadeCycles = 14,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
 };
 
-static const struct UnkStruct1 gUnknown_085B63F0[NUM_BOARD_COLORS] =
+// Data to flash any pokemon icon (F_FLASH_ICON) on the roulette wheel. One entry for each color row
+// Each poke icon flashes with the tint of the row color it belongs to, so the pokemon itself is irrelevant
+static const struct RouletteFlashSettings sFlashData_PokeIcons[NUM_BOARD_COLORS] =
 {
-    {
-        .var00 = 0x53FF,
-        .var02 = 0x0101,
-        .var04 = 5,
-        .var05 = 30,
-        .var06 = 0xFF,
-        .var07_0 = 14,
-        .var07_5 = -2,
-        .var07_7 = 0
+    [GET_ROW_IDX(ROW_ORANGE)] = {
+        .color = RGB(31, 31, 20),
+        .paletteOffset = 0x101,
+        .numColors = 5,
+        .delay = 30,
+        .unk6 = -1,
+        .numFadeCycles = 14,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x7FFB,
-        .var02 = 0x0106,
-        .var04 = 5,
-        .var05 = 30,
-        .var06 = 0xFF,
-        .var07_0 = 14,
-        .var07_5 = -2,
-        .var07_7 = 0
+    [GET_ROW_IDX(ROW_GREEN)] = {
+        .color = RGB(27, 31, 31),
+        .paletteOffset = 0x106,
+        .numColors = 5,
+        .delay = 30,
+        .unk6 = -1,
+        .numFadeCycles = 14,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     },
-    {
-        .var00 = 0x7F7F,
-        .var02 = 0x010B,
-        .var04 = 5,
-        .var05 = 30,
-        .var06 = 0xFF,
-        .var07_0 = 14,
-        .var07_5 = -2,
-        .var07_7 = 0
+    [GET_ROW_IDX(ROW_PURPLE)] = {
+        .color = RGB(31, 27, 31),
+        .paletteOffset = 0x10B,
+        .numColors = 5,
+        .delay = 30,
+        .unk6 = -1,
+        .numFadeCycles = 14,
+        .unk7_5 = -2,
+        .colorDeltaDir = 0,
     }
 };
 
@@ -1020,8 +1043,8 @@ static void CB2_Roulette(void)
 	RunTasks();
 	AnimateSprites();
 	BuildOamBuffer();
-	if (sRoulette->flashUtil.var00)
-	   task_tutorial_controls_fadein(&sRoulette->flashUtil);
+	if (sRoulette->flashUtil.enabled)
+	   RouletteFlash_Run(&sRoulette->flashUtil);
 }
 
 static void VBlankCB_Roulette(void)
@@ -1110,12 +1133,13 @@ static void InitRouletteTableData(void)
     else
         gPlttBufferUnfaded[0] = gPlttBufferUnfaded[0x51] = gPlttBufferFaded[0] = gPlttBufferFaded[0x51] = bgColors[1];
 
-    sub_8151678(&sRoulette->flashUtil);
+    RouletteFlash_Reset(&sRoulette->flashUtil);
 
     // Init flash util for flashing the selected colors on the wheel
+    // + 1 for the additional entry to flash the outer edges on a win
     for (i = 0; i < NUM_ROULETTE_SLOTS + 1; i++)
     {
-        sub_815168C(&sRoulette->flashUtil, i, &gUnknown_085B6388[i]);
+        RouletteFlash_Add(&sRoulette->flashUtil, i, &sFlashData_Colors[i]);
     }
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1421,8 +1445,8 @@ static void ProcessBetGridInput(u8 taskId)
         UpdateGridSelection(taskId);
         gTasks[taskId].data[1] = 0;
         PlaySE(SE_SELECT);
-        sub_8151A9C(&sRoulette->flashUtil, 0xFFFF); // Reset previous flashing wheel color selection
-        sRoulette->flashUtil.var04[13].active = sRoulette->flashUtil.var04[14].active = sRoulette->flashUtil.var04[15].active = FALSE; // Same as above, but for icon
+        RouletteFlash_Stop(&sRoulette->flashUtil, 0xFFFF);
+        sRoulette->flashUtil.palettes[FLASH_ICON].available = sRoulette->flashUtil.palettes[FLASH_ICON_2].available = sRoulette->flashUtil.palettes[FLASH_ICON_3].available = FALSE;
         FlashSelectionOnWheel(gTasks[taskId].tSelectionId);
         
         // Switch all the poke (column) headers to gray outlines
@@ -1680,7 +1704,7 @@ static void Task_RecordBallHit(u8 taskId)
                 bool8 won = IsHitInBetSelection(RecordHit(taskId, sRoulette->hitSlot), sRoulette->betSelection[sRoulette->curBallNum]);
                 gTasks[taskId].tWonBet = won;
                 if (won == TRUE)
-                    sub_8151A48(&sRoulette->flashUtil, 0x1000); // Flash outer edges of wheel
+                    RouletteFlash_Enable(&sRoulette->flashUtil, F_FLASH_OUTER_EDGES);
             }
             if (gTasks[taskId].data[1] <= 60)
             {
@@ -1853,8 +1877,8 @@ static void Task_PrintPayout(u8 taskId)
 
 static void Task_EndTurn(u8 taskId)
 {
-    sub_8151A9C(&sRoulette->flashUtil, 0xFFFF);
-    sRoulette->flashUtil.var04[13].active = sRoulette->flashUtil.var04[14].active = sRoulette->flashUtil.var04[15].active = FALSE;
+    RouletteFlash_Stop(&sRoulette->flashUtil, 0xFFFF);
+    sRoulette->flashUtil.palettes[FLASH_ICON].available = sRoulette->flashUtil.palettes[FLASH_ICON_2].available = sRoulette->flashUtil.palettes[FLASH_ICON_3].available = FALSE;
     gSprites[sRoulette->spriteIds[SPR_WHEEL_ICONS + sGridSelections[gTasks[taskId].tWinningSquare].spriteIdOffset]].invisible = TRUE;
     gTasks[taskId].func = Task_TryPrintEndTurnMsg;
 }
@@ -1937,8 +1961,8 @@ static void Task_ClearBoard(u8 taskId)
 
 static void ExitRoulette(u8 taskId)
 {
-    sub_8151A9C(&sRoulette->flashUtil, 0xFFFF);
-    sub_8151678(&sRoulette->flashUtil);
+    RouletteFlash_Stop(&sRoulette->flashUtil, 0xFFFF);
+    RouletteFlash_Reset(&sRoulette->flashUtil);
     SetCoins(gTasks[taskId].tCoins);
     if (GetCoins() < sRoulette->minBet)
         gSpecialVar_0x8004 = TRUE;
@@ -2108,9 +2132,9 @@ static bool8 IsHitInBetSelection(u8 gridSquare, u8 betSelection)
 
 static void FlashSelectionOnWheel(u8 selectionId)
 {
-    u16 var0 = 0;
+    u16 flashFlags = 0;
     u8 numSelected;
-    u16 var3;
+    u16 palOffset;
     u8 i;
 
     switch (selectionId)
@@ -2122,47 +2146,46 @@ static void FlashSelectionOnWheel(u8 selectionId)
         for (i = (selectionId + 1); i < (selectionId + 5); i++)
         {
             if (!(sRoulette->hitFlags & sGridSelections[i].flag))
-                var0 |= sGridSelections[i].var10;
+                flashFlags |= sGridSelections[i].flashFlags;
         }
-        sub_8151A48(&sRoulette->flashUtil, var0 &= 0xDFFF);
+        RouletteFlash_Enable(&sRoulette->flashUtil, flashFlags &= ~(F_FLASH_ICON));
         break;
     default:
     {
         // Selection is either a column or individual square
-        struct UnkStruct1 var1[NUM_BOARD_COLORS];
-        memcpy(var1, gUnknown_085B63F0, sizeof(var1));
+        struct RouletteFlashSettings iconFlash[NUM_BOARD_COLORS];
+        memcpy(iconFlash, sFlashData_PokeIcons, sizeof(iconFlash));
 
         if (selectionId >= COL_WYNAUT && selectionId <= COL_MAKUHITA)
             numSelected = NUM_BOARD_COLORS; // Selection is full column
         else
             numSelected = 1;
 
-        var3 = GET_ROW_IDX(selectionId);
+        palOffset = GET_ROW_IDX(selectionId);
         switch (GET_COL(selectionId))
         {
-        // The specific color of the poke it references doesn't matter, because the icons themelves all share a palette
+        // The specific color of the poke it references doesn't matter, because the icons of a poke share a palette
         // So it just uses the first sprite ID of each
         case COL_WYNAUT:
-            var3 = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_WYNAUT]].oam.paletteNum * 16;
+            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_WYNAUT]].oam.paletteNum * 16;
             break;
         case COL_AZURILL:
-            var3 = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_GREEN_AZURILL]].oam.paletteNum * 16;
+            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_GREEN_AZURILL]].oam.paletteNum * 16;
             break;
         case COL_SKITTY:
-            var3 = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_PURPLE_SKITTY]].oam.paletteNum * 16;
+            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_PURPLE_SKITTY]].oam.paletteNum * 16;
             break;
         case COL_MAKUHITA:
-            var3 = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_MAKUHITA]].oam.paletteNum * 16;
+            palOffset = gSprites[sRoulette->spriteIds[SPR_WHEEL_ICON_ORANGE_MAKUHITA]].oam.paletteNum * 16;
             break;
         }
         if (numSelected == 1)
         {
-            // Selection is individual square
+            // Selection is individual square, add entry in flash util for its icon
             if (!(sRoulette->hitFlags & sGridSelections[selectionId].flag))
             {
-                // Set poke icon of selected square to flash
-                var1[GET_ROW_IDX(selectionId)].var02 += var3;
-                sub_815168C(&sRoulette->flashUtil, 13, &var1[GET_ROW_IDX(selectionId)]);
+                iconFlash[GET_ROW_IDX(selectionId)].paletteOffset += palOffset;
+                RouletteFlash_Add(&sRoulette->flashUtil, NUM_ROULETTE_SLOTS + 1, &iconFlash[GET_ROW_IDX(selectionId)]);
             }
             else
             {
@@ -2172,25 +2195,26 @@ static void FlashSelectionOnWheel(u8 selectionId)
         }
         else
         {
-            // Selection is full column
+            // Selection is full column, add entry in flash util for each unhit space's icon
+            // If there is only 1 unhit space, also add its flags so its color will flash as well
             for (i = 0; i < NUM_BOARD_COLORS; i++)
             {
-                u8 var4 = i * 5 + selectionId + 5;
-                if (!(sRoulette->hitFlags & sGridSelections[var4].flag))
+                u8 columnSlotId = i * 5 + selectionId + 5;
+                if (!(sRoulette->hitFlags & sGridSelections[columnSlotId].flag))
                 {
-                    // Set poke icons of selected squares to flash
-                    var1[GET_ROW_IDX(var4)].var02 += var3;
-                    sub_815168C(&sRoulette->flashUtil, i + 13, &var1[GET_ROW_IDX(var4)]);
+                    iconFlash[GET_ROW_IDX(columnSlotId)].paletteOffset += palOffset;
+                    RouletteFlash_Add(&sRoulette->flashUtil, i + NUM_ROULETTE_SLOTS + 1, &iconFlash[GET_ROW_IDX(columnSlotId)]);
                     if (numSelected == 3)
-                        var0 = sGridSelections[var4].var10;
+                        flashFlags = sGridSelections[columnSlotId].flashFlags;
                     numSelected--;
                 }
             }
+            // If there was more than 1 space in the column, reset flags; only icons will flash
             if (numSelected != 2)
-                var0 = 0;
+                flashFlags = 0;
         }
         // Do flash
-        sub_8151A48(&sRoulette->flashUtil, var0 |= sGridSelections[selectionId].var10);
+        RouletteFlash_Enable(&sRoulette->flashUtil, flashFlags |= sGridSelections[selectionId].flashFlags);
         break;
     }
     }
