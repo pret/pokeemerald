@@ -1105,6 +1105,8 @@ static void Cmd_attackcanceler(void)
     if (NoTargetPresent(gCurrentMove))
     {
         gBattlescriptCurrInstr = BattleScript_ButItFailedAtkStringPpReduce;
+        if (!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
+            CancelMultiTurnMoves(gBattlerAttacker);
         return;
     }
 
