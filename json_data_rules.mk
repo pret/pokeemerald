@@ -19,11 +19,6 @@ PKMN_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon
 PKMN_GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon_graphics
 
 
-SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h,		\
-	include/graphics_pokemon.h						\
-	$(PKMN_GRAPHICS_SUBDIR)/animation.h				\
-	)
-
 SPECIES_HEADERS :=									\
 	include/constants/species.h						\
 	include/graphics_pokemon.h						\
@@ -38,9 +33,11 @@ SPECIES_HEADERS :=									\
 	$(PKMN_SUBDIR)/level_up_learnset_pointers.h		\
 	$(PKMN_SUBDIR)/tutor_learnsets.h                \
 	$(PKMN_SUBDIR)/tmhm_learnsets.h 				\
+	$(PKMN_GRAPHICS_SUBDIR)/back_animation.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/back_pic_coordinates.h	\
 	$(PKMN_GRAPHICS_SUBDIR)/back_pic_table.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/footprint_table.h		\
+	$(PKMN_GRAPHICS_SUBDIR)/front_animation.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_anims.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_coordinates.h	\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_table.h		\
@@ -56,14 +53,9 @@ SPECIES_SRCS :=										\
 AUTO_GEN_HEADERS += $(SPECIES_HEADERS)
 AUTO_GEN_SRCS    += $(SPECIES_SRCS)
 
-$(SPECIES_TEMPLATES_TEST): %.h.tmp.h: $(SPECIES_JSON) %.h.template
-	$(JSONPROC) $^ $@
-
 $(SPECIES_HEADERS): %.h: $(SPECIES_JSON) %.h.template
 	$(JSONPROC) $^ $@
 $(SPECIES_SRCS): %.c: $(SPECIES_JSON) %.c.template
 	$(JSONPROC) $^ $@
-
-species_templates_test: $(SPECIES_TEMPLATES_TEST)
 
 species_templates: $(SPECIES_HEADERS) $(SPECIES_SRCS)
