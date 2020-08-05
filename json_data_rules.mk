@@ -32,7 +32,7 @@ SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h,		\
 	$(PKMN_GRAPHICS_SUBDIR)/icon.h					\
 	$(PKMN_GRAPHICS_SUBDIR)/jump.h					\
 	$(PKMN_GRAPHICS_SUBDIR)/animation.h				\
-	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h)
+	)
 
 SPECIES_TEMPLATES :=								\
 	include/constants/species.h						\
@@ -48,6 +48,7 @@ SPECIES_TEMPLATES :=								\
 	$(PKMN_GRAPHICS_SUBDIR)/back_pic_coordinates.h	\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_anims.h		\
 	$(PKMN_GRAPHICS_SUBDIR)/front_pic_coordinates.h	\
+	$(PKMN_GRAPHICS_SUBDIR)/unknown_anims.h			\
 	$(TEXT_SUBDIR)/species_names.h
 
 AUTO_GEN_TARGETS += $(SPECIES_TEMPLATES_TEST)

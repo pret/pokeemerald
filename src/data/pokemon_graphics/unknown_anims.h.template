@@ -1,66 +1,77 @@
 {{ doNotModifyHeader }}
 
+## for specimen in having(species, "graphics/unknown/animation")
+## if loop.is_last
+static const union AnimCmd sUnknownAnim_Unused1[] =
+{
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
+};
 
-## for specimen in species
-## if existsIn(specimen.graphics, "animation")
-## if existsIn(specimen.graphics.animation, "unknown")
-## if existsIn(specimen.graphics.animation.unknown, "frames")
-## for frameset in specimen.graphics.animation.unknown.frames
-static const union AnimCmd sUnknownAnim_{{upper(specimen.name)}}_{{loop.index1}}[] =
+static const union AnimCmd sUnknownAnim_Unused2[] =
+{
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
+};
+## endif
+## for frameset in specimen.graphics.unknown.animation
+
+static const union AnimCmd sUnknownAnim_{{cvar(specimen.name)}}_{{loop.index1}}[] =
 {
 ## for frame in frameset
     ANIMCMD_FRAME({% for value in frame %}{% if loop.is_last %}{{value}}{% else %}{{value}}, {% endif %}{% endfor %}),
 ## endfor
     ANIMCMD_END,
 };
-
 ## endfor
-## endif
-## endif
-## endif
 ## endfor
 
+
+static const union AnimCmd *const sUnknownAnims_NONE[] = {sAnim_GeneralFrame0};
 ## for specimen in species
-## if not existsIn(specimen.graphics, "animation")
-static const union AnimCmd *const sUnknownAnims_{{upper(specimen.name)}}[] = {sAnim_GeneralFrame0};
-## else if not existsIn(specimen.graphics.animation, "unknown")
-static const union AnimCmd *const sUnknownAnims_{{upper(specimen.name)}}[] = {sAnim_GeneralFrame0};
-## endif
-## endfor
-
-## for specimen in species
-## if existsIn(specimen.graphics, "animation")
-## if existsIn(specimen.graphics.animation, "unknown")
-
-static const union AnimCmd *const sUnknownAnims_{{upper(specimen.name)}}[] =
+## if specimen.name >= "OLD_UNOWN_C" and specimen.name <= "OLD_UNOWN_Z"
+## else if not existsIn(specimen.graphics, "unknown")
+static const union AnimCmd *const sUnknownAnims_{{cvar(specimen.name)}}[] = {sAnim_GeneralFrame0};
+## else if not existsIn(specimen.graphics.unknown, "animation")
+static const union AnimCmd *const sUnknownAnims_{{cvar(specimen.name)}}[] = {sAnim_GeneralFrame0};
+## else
+static const union AnimCmd *const sUnknownAnims_{{cvar(specimen.name)}}[] =
 {
     sAnim_GeneralFrame0,
-## for frameset in specimen.graphics.animation.unknown
-    sUnknownAnim_{{upper(specimen.name)}}_{{loop.index1}},
+## for frameset in specimen.graphics.unknown.animation
+    sUnknownAnim_{{cvar(specimen.name)}}_{{loop.index1}},
 ## endfor
 };
-## endif
+
 ## endif
 ## endfor
+static const union AnimCmd *const sUnknownAnims_EGG[] = {sAnim_GeneralFrame0};
+## for form in unown_forms
+## if not loop.is_first
+static const union AnimCmd *const sUnknownAnims_UNOWN_{{form.letter}}[] = {sAnim_GeneralFrame0};
+## endif
+## endfor
+
 
 #define ANIM_CMD(name)             [SPECIES_##name] = sUnknownAnims_##name
 #define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
 
 static const union AnimCmd *const *const sUnknownAnimsTable[] =
 {
+    ANIM_CMD(NONE),
 ## for specimen in species
-## if existsIn(specimen.graphics, "animation")
-## if existsIn(specimen.graphics.animation, "unknown")
-## if existsIn(specimen.graphics.animation.unknown, "source")
-    ANIM_CMD_FULL({{upper(specimen.name)}}, sAnims_{{upper(specimen.graphics.animation.unknown.source)}}),
+## if specimen.name >= "OLD_UNOWN_C" and specimen.name <= "OLD_UNOWN_Z"
+    ANIM_CMD_FULL({{cvar(specimen.name)}}, sUnknownAnims_OLD_UNOWN_B),
 ## else
-    ANIM_CMD({{upper(specimen.name)}}),
+    ANIM_CMD({{cvar(specimen.name)}}),
 ## endif
+## endfor
+    ANIM_CMD(EGG),
+## for form in unown_forms
+## if loop.is_first
+    ANIM_CMD_FULL(UNOWN_{{form.letter}}, sUnknownAnims_EGG),
 ## else
-    ANIM_CMD({{upper(specimen.name)}}),
-## endif
-## else
-    ANIM_CMD({{upper(specimen.name)}}),
+    ANIM_CMD(UNOWN_{{form.letter}}),
 ## endif
 ## endfor
 };
