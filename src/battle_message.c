@@ -438,14 +438,14 @@ static const u8 sText_Evasiveness[] = _("evasiveness");
 
 const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
 {
-    [STAT_HP]      = sText_HP2, 
-    [STAT_ATK]     = sText_Attack2, 
+    [STAT_HP]      = sText_HP2,
+    [STAT_ATK]     = sText_Attack2,
     [STAT_DEF]     = sText_Defense2,
-    [STAT_SPEED]   = sText_Speed, 
-    [STAT_SPATK]   = sText_SpAtk2, 
+    [STAT_SPEED]   = sText_Speed,
+    [STAT_SPATK]   = sText_SpAtk2,
     [STAT_SPDEF]   = sText_SpDef2,
-    [STAT_ACC]     = sText_Accuracy, 
-    [STAT_EVASION] = sText_Evasiveness
+    [STAT_ACC]     = sText_Accuracy,
+    [STAT_EVASION] = sText_Evasiveness,
 };
 
 static const u8 sText_PokeblockWasTooSpicy[] = _("was too spicy!");
@@ -456,9 +456,9 @@ static const u8 sText_PokeblockWasTooSour[] = _("was too sour!");
 
 const u8 * const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
 {
-    [FLAVOR_SPICY]  = sText_PokeblockWasTooSpicy, 
+    [FLAVOR_SPICY]  = sText_PokeblockWasTooSpicy,
     [FLAVOR_DRY]    = sText_PokeblockWasTooDry,
-    [FLAVOR_SWEET]  = sText_PokeblockWasTooSweet, 
+    [FLAVOR_SWEET]  = sText_PokeblockWasTooSweet,
     [FLAVOR_BITTER] = sText_PokeblockWasTooBitter,
     [FLAVOR_SOUR]   = sText_PokeblockWasTooSour
 };
