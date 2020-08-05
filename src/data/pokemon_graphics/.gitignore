@@ -1,9 +1,12 @@
+back_animation.h
 back_pic_coordinates.h
 back_pic_table.h
 footprint_table.h
+front_animation.h
 front_pic_anims.h
 front_pic_coordinates.h
 front_pic_table.h
+icon.h
 palette_table.h
 shiny_palette_table.h
 still_front_pic_table.h
