@@ -71895,7 +71895,7 @@
             }
         },
         {
-            "letter": "EXCLAMATION_MARK",
+            "letter": "EMARK",
             "graphics": {
                 "back_pic": {
                     "size": "0x37",
@@ -71926,7 +71926,7 @@
             }
         },
         {
-            "letter": "QUESTION_MARK",
+            "letter": "QMARK",
             "graphics": {
                 "back_pic": {
                     "size": "0x47",
