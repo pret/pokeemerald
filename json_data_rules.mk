@@ -21,7 +21,6 @@ PKMN_GRAPHICS_SUBDIR := $(DATA_SRC_SUBDIR)/pokemon_graphics
 
 SPECIES_TEMPLATES_TEST := $(addsuffix .tmp.h,		\
 	include/graphics_pokemon.h						\
-	$(PKMN_GRAPHICS_SUBDIR)/jump.h					\
 	$(PKMN_GRAPHICS_SUBDIR)/animation.h				\
 	)
 
@@ -34,6 +33,7 @@ SPECIES_HEADERS :=									\
     $(PKMN_SUBDIR)/evolution.h                      \
 	$(PKMN_SUBDIR)/pokedex_entries.h				\
 	$(PKMN_SUBDIR)/pokedex_text.h					\
+	$(PKMN_SUBDIR)/pokemon_jump_table.h				\
 	$(PKMN_SUBDIR)/level_up_learnsets.h				\
 	$(PKMN_SUBDIR)/level_up_learnset_pointers.h		\
 	$(PKMN_SUBDIR)/tutor_learnsets.h                \

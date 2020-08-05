@@ -167,7 +167,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "IVYSAUR",
@@ -676,7 +677,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 1
         },
         {
             "name": "CHARMELEON",
@@ -1198,7 +1200,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "WARTORTLE",
@@ -1674,7 +1677,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "METAPOD",
@@ -1767,7 +1771,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "BUTTERFREE",
@@ -2078,7 +2083,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "KAKUNA",
@@ -2208,7 +2214,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 1
         },
         {
             "name": "BEEDRILL",
@@ -3041,7 +3048,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 1
         },
         {
             "name": "RATICATE",
@@ -3233,7 +3241,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "SPEAROW",
@@ -4142,7 +4151,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "RAICHU",
@@ -4514,7 +4524,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "SANDSLASH",
@@ -4899,7 +4910,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "NIDORINA",
@@ -5383,7 +5395,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "NIDORINO",
@@ -5903,7 +5916,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "CLEFABLE",
@@ -6268,7 +6282,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "NINETALES",
@@ -6634,7 +6649,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 2
         },
         {
             "name": "WIGGLYTUFF",
@@ -7412,7 +7428,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "GLOOM",
@@ -7927,7 +7944,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 1
         },
         {
             "name": "PARASECT",
@@ -9026,7 +9044,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 0
         },
         {
             "name": "PERSIAN",
@@ -9385,7 +9404,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "GOLDUCK",
@@ -9775,7 +9795,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "PRIMEAPE",
@@ -10141,7 +10162,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 1
         },
         {
             "name": "ARCANINE",
@@ -10449,7 +10471,8 @@
                     "level": 25,
                     "target": "POLIWHIRL"
                 }
-            ]
+            ],
+            "jump": 2
         },
         {
             "name": "POLIWHIRL",
@@ -12018,7 +12041,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "WEEPINBELL",
@@ -15662,7 +15686,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 1
         },
         {
             "name": "CLOYSTER",
@@ -17070,7 +17095,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 1
         },
         {
             "name": "KINGLER",
@@ -17771,7 +17797,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 2
         },
         {
             "name": "EXEGGUTOR",
@@ -18103,7 +18130,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 0
         },
         {
             "name": "MAROWAK",
@@ -23051,7 +23079,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 2
         },
         {
             "name": "EEVEE",
@@ -23216,7 +23245,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "VAPOREON",
@@ -24015,7 +24045,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 1
         },
         {
             "name": "OMASTAR",
@@ -24370,7 +24401,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 1
         },
         {
             "name": "KABUTOPS",
@@ -26542,7 +26574,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "BAYLEEF",
@@ -27020,7 +27053,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "QUILAVA",
@@ -27515,7 +27549,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "CROCONAW",
@@ -29154,7 +29189,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "ARIADOS",
@@ -30076,7 +30112,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "CLEFFA",
@@ -30247,7 +30284,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "IGGLYBUFF",
@@ -30432,7 +30470,8 @@
                     "friendship": true,
                     "target": "JIGGLYPUFF"
                 }
-            ]
+            ],
+            "jump": 2
         },
         {
             "name": "TOGEPI",
@@ -30610,7 +30649,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 2
         },
         {
             "name": "TOGETIC",
@@ -31322,7 +31362,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "FLAAFFY",
@@ -31789,7 +31830,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "MARILL",
@@ -31971,7 +32013,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 2
         },
         {
             "name": "AZUMARILL",
@@ -33331,7 +33374,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "SUNFLORA",
@@ -33878,7 +33922,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 2
         },
         {
             "name": "QUAGSIRE",
@@ -35471,7 +35516,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 2
         },
         {
             "name": "FORRETRESS",
@@ -36313,7 +36359,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "GRANBULL",
@@ -36954,7 +37001,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "HERACROSS",
@@ -37502,7 +37550,8 @@
                     "level": 30,
                     "target": "URSARING"
                 }
-            ]
+            ],
+            "jump": 0
         },
         {
             "name": "URSARING",
@@ -37852,7 +37901,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 2
         },
         {
             "name": "MAGCARGO",
@@ -38201,7 +38251,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "PILOSWINE",
@@ -39544,7 +39595,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 1
         },
         {
             "name": "HOUNDOOM",
@@ -40075,7 +40127,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "DONPHAN",
@@ -40421,7 +40474,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "STANTLER",
@@ -40837,7 +40891,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 1
         },
         {
             "name": "HITMONTOP",
@@ -41214,7 +41269,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "ELEKID",
@@ -41381,7 +41437,8 @@
                     "level": 30,
                     "target": "ELECTABUZZ"
                 }
-            ]
+            ],
+            "jump": 1
         },
         {
             "name": "MAGBY",
@@ -41563,7 +41620,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "MILTANK",
@@ -42549,7 +42607,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "PUPITAR",
@@ -45183,7 +45242,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "GROVYLE",
@@ -45733,7 +45793,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 2
         },
         {
             "name": "COMBUSKEN",
@@ -46370,7 +46431,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "MARSHTOMP",
@@ -46643,7 +46705,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "SWAMPERT",
@@ -47043,7 +47106,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "MIGHTYENA",
@@ -47427,7 +47491,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "LINOONE",
@@ -47620,7 +47685,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "WURMPLE",
@@ -47740,7 +47806,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "SILCOON",
@@ -47859,7 +47926,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "BEAUTIFLY",
@@ -48182,7 +48250,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "DUSTOX",
@@ -48560,7 +48629,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "LOMBRE",
@@ -49117,7 +49187,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "NUZLEAF",
@@ -49649,7 +49720,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 1
         },
         {
             "name": "NINJASK",
@@ -50579,7 +50651,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "BRELOOM",
@@ -51498,7 +51571,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "MASQUERAIN",
@@ -52384,7 +52458,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "DELCATTY",
@@ -53763,7 +53838,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "SABLEYE",
@@ -53970,7 +54046,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "BARBOACH",
@@ -55862,7 +55939,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "VIBRAVA",
@@ -56841,7 +56919,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "MANECTRIC",
@@ -57211,7 +57290,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "CAMERUPT",
@@ -58238,7 +58318,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 2
         },
         {
             "name": "CACTURNE",
@@ -58588,7 +58669,8 @@
                     }
                 },
                 "icon_palette": 2
-            }
+            },
+            "jump": 0
         },
         {
             "name": "GLALIE",
@@ -59430,7 +59512,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "SPOINK",
@@ -59648,7 +59731,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "GRUMPIG",
@@ -60023,7 +60107,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "MINUN",
@@ -60202,7 +60287,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "MAWILE",
@@ -60408,7 +60494,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "MEDITITE",
@@ -60599,7 +60686,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "MEDICHAM",
@@ -61421,7 +61509,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "DUSKULL",
@@ -62002,7 +62091,8 @@
                     "internal": 363,
                     "national": 315
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "SLAKOTH",
@@ -62806,7 +62896,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 2
         },
         {
             "name": "SWALOT",
@@ -63388,7 +63479,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 0
         },
         {
             "name": "LOUDRED",
@@ -63937,7 +64029,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "HUNTAIL",
@@ -65592,7 +65685,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "LAIRON",
@@ -66390,7 +66484,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "ILLUMISE",
@@ -66576,7 +66671,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 0
         },
         {
             "name": "LILEEP",
@@ -67093,7 +67189,8 @@
                     }
                 },
                 "icon_palette": 0
-            }
+            },
+            "jump": 1
         },
         {
             "name": "ARMALDO",
@@ -67438,7 +67535,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 0
         },
         {
             "name": "KIRLIA",
@@ -67614,7 +67712,8 @@
                     }
                 },
                 "icon_palette": 1
-            }
+            },
+            "jump": 0
         },
         {
             "name": "GARDEVOIR",
@@ -68018,7 +68117,8 @@
                         ]
                     ]
                 }
-            }
+            },
+            "jump": 1
         },
         {
             "name": "SHELGON",
