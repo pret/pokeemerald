@@ -3,11 +3,16 @@
 
 const struct CompressedSpriteSheet gMonStillFrontPicTable[] =
 {
+    SPECIES_SPRITE(NONE, gMonStillFrontPic_CircledQuestionMark),
 ## for specimen in species
-## if existsIn(specimen.graphics, "still")
-    SPECIES_SPRITE({{upper(specimen.name)}}, gMonStillFrontPicTable_{{specimen.graphics.still}}),
+## if specimen.name >= "OLD_UNOWN_B" and specimen.name <= "OLD_UNOWN_Z"
+    SPECIES_SPRITE({{cvar(specimen.name)}}, gMonStillFrontPic_DoubleQuestionMark),
 ## else
-    SPECIES_SPRITE({{upper(specimen.name)}}, gMonStillFrontPicTable_{{specimen.name}}),
+    SPECIES_SPRITE({{cvar(specimen.name)}}, gMonStillFrontPic_{{cvar(specimen.name)}}),
 ## endif
+## endfor
+    SPECIES_SPRITE(EGG, gMonStillFrontPic_Egg),
+## for form in unown_forms
+    SPECIES_SPRITE(UNOWN_{{form.letter}}, gMonStillFrontPic_UNOWN_{{form.letter}}),
 ## endfor
 };

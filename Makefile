@@ -150,7 +150,8 @@ OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
 
-AUTO_GEN_TARGETS :=
+AUTO_GEN_HEADERS :=
+AUTO_GEN_SRCS    :=
 
 $(shell mkdir -p $(SUBDIRS))
 
@@ -182,7 +183,7 @@ mostlyclean: tidy
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
-	rm -f $(AUTO_GEN_TARGETS)
+	rm -f $(AUTO_GEN_HEADERS) $(AUTO_GEN_SRCS)
 	@$(MAKE) clean -C berry_fix
 	@$(MAKE) clean -C libagbsyscall
 
@@ -239,7 +240,7 @@ $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtu
 endif
 
 ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: c_dep := $(AUTO_GEN_TARGETS)
+$(C_BUILDDIR)/%.o: c_dep := $(AUTO_GEN_HEADERS)
 else
 $(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
 endif
@@ -267,7 +268,7 @@ $(GFLIB_BUILDDIR)/%.o : $(GFLIB_SUBDIR)/%.c $$(c_dep)
 	$(AS) $(ASFLAGS) -o $@ $(GFLIB_BUILDDIR)/$*.s
 
 ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: c_asm_dep :=
+$(C_BUILDDIR)/%.o: c_asm_dep := $(AUTO_GEN_HEADERS)
 else
 $(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
 endif
@@ -276,7 +277,7 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
 	$(AS) $(ASFLAGS) -o $@ $<
 
 ifeq ($(NODEP),1)
-$(ASM_BUILDDIR)/%.o: asm_dep :=
+$(ASM_BUILDDIR)/%.o: asm_dep := $(AUTO_GEN_HEADERS)
 else
 $(ASM_BUILDDIR)/%.o: asm_dep = $(shell $(SCANINC) -I "" $(ASM_SUBDIR)/$*.s)
 endif
@@ -285,7 +286,7 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
 	$(AS) $(ASFLAGS) -o $@ $<
 
 ifeq ($(NODEP),1)
-$(DATA_ASM_BUILDDIR)/%.o: data_dep :=
+$(DATA_ASM_BUILDDIR)/%.o: data_dep := $(AUTO_GEN_HEADERS)
 else
 $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I include -I "" $(DATA_ASM_SUBDIR)/$*.s)
 endif
@@ -316,7 +317,7 @@ endif
 $(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(LD_SCRIPT_DEPS)
 	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT) > ld_script.ld
 
-$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) berry_fix libagbsyscall
+$(ELF): $(AUTO_GEN_SRCS) $(OBJ_DIR)/ld_script.ld $(OBJS) berry_fix libagbsyscall
 	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 

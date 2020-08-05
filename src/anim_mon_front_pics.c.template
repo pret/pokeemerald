@@ -1,0 +1,25 @@
+{{ doNotModifyHeader }}
+
+
+#include "global.h"
+
+const u32 gMonFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/anim_front.4bpp.lz");
+
+## for specimen in species
+## if specimen.name == "UNOWN"
+const u32 gMonFrontPic_UNOWN[] = INCBIN_U32("graphics/pokemon/unown/a/anim_front.4bpp.lz");
+## else if specimen.name == "OLD_UNOWN_B"
+
+const u32 gMonFrontPic_DoubleQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/double/anim_front.4bpp.lz");
+
+## else if specimen.name >= "OLD_UNOWN_B" and specimen.name <= "OLD_UNOWN_Z"
+## else
+const u32 gMonFrontPic_{{cvar(specimen.name)}}[] = INCBIN_U32("graphics/pokemon/{{lower(cvar(specimen.name))}}/anim_front.4bpp.lz");
+## endif
+## endfor
+
+const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/anim_front.4bpp.lz");
+
+## for form in unown_forms
+const u32 gMonFrontPic_UNOWN_{{form.letter}}[] = INCBIN_U32("graphics/pokemon/unown/{{lower(form.letter)}}/anim_front.4bpp.lz");
+## endfor

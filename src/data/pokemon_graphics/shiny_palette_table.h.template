@@ -1,13 +1,18 @@
 {{ doNotModifyHeader }}
 
 
-const struct CompressedSpriteSheet gMonShinyPaletteTable[] =
+const struct CompressedSpritePalette gMonShinyPaletteTable[] =
 {
+    SPECIES_SHINY_PAL(NONE, gMonShinyPalette_CircledQuestionMark),
 ## for specimen in species
-## if existsIn(specimen.graphics, "shiny_palette")
-    SPECIES_SHINY_PAL({{upper(specimen.name)}}, gMonShinyPaletteTable_{{specimen.graphics.shiny_palette}}),
+## if specimen.name >= "OLD_UNOWN_B" and specimen.name <= "OLD_UNOWN_Z"
+    SPECIES_SHINY_PAL({{cvar(specimen.name)}}, gMonShinyPalette_DoubleQuestionMark),
 ## else
-    SPECIES_SHINY_PAL({{upper(specimen.name)}}, gMonShinyPaletteTable_{{specimen.name}}),
+    SPECIES_SHINY_PAL({{cvar(specimen.name)}}, gMonShinyPalette_{{cvar(specimen.name)}}),
 ## endif
+## endfor
+    SPECIES_SHINY_PAL(EGG, gMonPalette_Egg),
+## for form in unown_forms
+    SPECIES_SHINY_PAL(UNOWN_{{form.letter}}, gMonShinyPalette_UNOWN),
 ## endfor
 };

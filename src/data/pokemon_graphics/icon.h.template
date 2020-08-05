@@ -3,14 +3,28 @@
 
 const u8 *const gMonIconTable[] =
 {
+    [SPECIES_NONE] = gMonIcon_BULBASAUR,
 ## for specimen in species
-	[SPECIES_{{upper(specimen.name)}}] = gMonIcon_{{specimen.name}},
+## if specimen.name >= "OLD_UNOWN_B" and specimen.name <= "OLD_UNOWN_Z"
+    [SPECIES_{{cvar(specimen.name)}}] = gMonIcon_QuestionMark,
+## else
+	[SPECIES_{{cvar(specimen.name)}}] = gMonIcon_{{cvar(specimen.name)}},
+## endif
+## endfor
+    [SPECIES_EGG] = gMonIcon_Egg,
+## for form in unown_forms
+    [SPECIES_UNOWN_{{form.letter}}] = gMonIcon_UNOWN_{{form.letter}},
 ## endfor
 };
 
-const u8 *const gMonIconPaletteIndices[] =
+const u8 gMonIconPaletteIndices[] =
 {
+    [SPECIES_NONE] = 0,
 ## for specimen in species
-	[SPECIES_{{upper(specimen.name)}}] = {{specimen.graphics.icon.palette}},
+	[SPECIES_{{cvar(specimen.name)}}] = {{specimen.graphics.icon_palette}},
+## endfor
+    [SPECIES_EGG] = 1,
+## for form in unown_forms
+    [SPECIES_UNOWN_{{form.letter}}] = 0,
 ## endfor
 };

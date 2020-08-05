@@ -2,10 +2,25 @@
 
 
 ## for specimen in species
-extern const u32 gMonStillFrontPic_{{specimen.name}}[];
-extern const u32 gMonPalette_{{specimen.name}}[];
-extern const u32 gMonBackPic_{{specimen.name}}[];
-extern const u32 gMonShinyPalette_{{specimen.name}}[];
-extern const u8 gMonIcon_{{specimen.name}}[];
-extern const u8 gMonFootprint_{{specimen.name}}[];
+## if specimen.name >= "OLD_UNOWN_B" and specimen.name <= "OLD_UNOWN_Z"
+## else
+extern const u32 gMonFrontPic_{{cvar(specimen.name)}}[];
+extern const u32 gMonPalette_{{cvar(specimen.name)}}[];
+extern const u32 gMonBackPic_{{cvar(specimen.name)}}[];
+extern const u32 gMonShinyPalette_{{cvar(specimen.name)}}[];
+extern const u32 gMonStillFrontPic_{{cvar(specimen.name)}}[];
+extern const u8 gMonIcon_{{cvar(specimen.name)}}[];
+extern const u8 gMonFootprint_{{cvar(specimen.name)}}[];
+## endif
+## endfor
+extern const u32 gMonPic_Egg[];
+extern const u32 gMonPalette_Egg[];
+extern const u32 gMonFrontPic_Egg[];
+extern const u32 gMonStillFrontPic_Egg[];
+extern const u8 gMonIcon_Egg[];
+## for form in unown_forms
+extern const u32 gMonFrontPic_UNOWN_{{form.letter}}[];
+extern const u32 gMonBackPic_UNOWN_{{form.letter}}[];
+extern const u32 gMonStillFrontPic_UNOWN_{{form.letter}}[];
+extern const u8 gMonIcon_UNOWN_{{form.letter}}[];
 ## endfor
