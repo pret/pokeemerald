@@ -159,6 +159,35 @@ int main(int argc, char *argv[])
         return jarray;
     });
 
+    /**
+     * Filter an array for only elements possessing the given key
+     */
+    env.add_callback("having", 2, [](Arguments &args) {
+        const json *jsrc = args.at(0);
+
+        const vector<string> delims = split(args[1]->get<string>(), '/');
+
+        json passing = json::array();
+
+        for (auto arrayelt = jsrc->begin(); arrayelt != jsrc->end(); ++arrayelt) {
+            const json *jobj = &*arrayelt;
+            bool ok = true;
+            for (const auto &delim : delims) {
+                auto maybe = jobj->find(delim);
+                if (maybe == jobj->end()) {
+                    ok = false;
+                    break;
+                }
+                jobj = &*maybe;
+            }
+            if (ok) {
+                passing.push_back(json(*arrayelt));
+            }
+        }
+
+        return passing;
+    });
+
     // single argument is a json object
     env.add_callback("isEmpty", 1, [](Arguments& args) {
         return args.at(0)->empty();
