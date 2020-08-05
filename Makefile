@@ -239,7 +239,7 @@ $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtu
 endif
 
 ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: c_dep :=
+$(C_BUILDDIR)/%.o: c_dep := $(AUTO_GEN_TARGETS)
 else
 $(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include -I gflib $(C_SUBDIR)/$*.c)
 endif

@@ -62,11 +62,3 @@ $(SPECIES_TEMPLATES): %.h: $(SPECIES_JSON) %.h.template
 species_templates_test: $(SPECIES_TEMPLATES_TEST)
 
 species_templates: $(SPECIES_TEMPLATES)
-
-
-$(C_BUILDDIR)/daycare.o: 	c_dep += $(PKMN_SUBDIR)/egg_moves.h
-$(C_BUILDDIR)/party_menu.o: c_dep += $(PKMN_SUBDIR)/tutor_learnsets.h
-$(C_BUILDDIR)/pokemon.o: 	c_dep += $(PKMN_SUBDIR)/evolution.h $(PKMN_SUBDIR)/level_up_learnsets.h $(PKMN_SUBDIR)/level_up_learnset_pointers.h $(PKMN_SUBDIR)/tmhm_learnsets.h
-$(C_BUILDDIR)/pokedex.o:	c_dep += $(PKMN_SUBDIR)/pokedex_entries.h $(PKMN_SUBDIR)/pokedex_text.h
-$(C_BUILDDIR)/evolution_scene.o: c_dep += $(PKMN_SUBDIR)/evolution.h
-$(C_BUILDDIR)/data.o:       c_dep += $(PKMN_GRAPHICS_SUBDIR)/back_pic_coordinates.h $(PKMN_GRAPHICS_SUBDIR)/front_pic_anims.h $(PKMN_GRAPHICS_SUBDIR)/front_pic_coordinates.h
