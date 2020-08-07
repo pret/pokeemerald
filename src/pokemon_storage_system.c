@@ -8097,7 +8097,7 @@ static bool8 sub_80D0344(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             sub_80CFE84();
-            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
             ShowBg(0);
             return FALSE;
         }
@@ -8203,7 +8203,7 @@ static bool8 sub_80D04C8(void)
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
             sub_80CFE84();
             ShowBg(0);
             return FALSE;

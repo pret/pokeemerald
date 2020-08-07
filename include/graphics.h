@@ -4074,11 +4074,11 @@ extern const u8 gUnknown_08DD4620[];
 extern const u8 gUnknown_08DD46E0[];
 extern const u8 gUnknown_08DD47A0[];
 extern const u8 gNamingScreenRWindow_Gfx[];
-extern const u8 gNamingScreenKeyboardButton_Gfx[];
+extern const u8 gNamingScreenPageButton_Gfx[];
 extern const u8 gNamingScreenROptions_Gfx[];
 extern const u8 gNamingScreenCursor_Gfx[];
-extern const u8 gNamingScreenRightPointingTriangleTiles[];
-extern const u8 gNamingScreenUnderscoreTiles[];
+extern const u8 gNamingScreenInputArrow_Gfx[];
+extern const u8 gNamingScreenUnderscore_Gfx[];
 
 extern const u32 gUnknown_08D9BA44[];
 

@@ -1435,10 +1435,9 @@ const u32 gNamingScreenMenu_Gfx[] = INCBIN_U32("graphics/naming_screen/menu.4bpp
 const u8 gNamingScreenRWindow_Gfx[] = INCBIN_U8("graphics/naming_screen/rwindow.4bpp");
 const u8 gNamingScreenROptions_Gfx[] = INCBIN_U8("graphics/naming_screen/roptions.4bpp");
 const u8 gNamingScreenCursor_Gfx[] = INCBIN_U8("graphics/naming_screen/cursor.4bpp");
-const u8 gNamingScreenKeyboardButton_Gfx[] = INCBIN_U8("graphics/naming_screen/keyboard_button.4bpp");
-
-const u8 gNamingScreenRightPointingTriangleTiles[] = INCBIN_U8("graphics/naming_screen/right_pointing_triangle.4bpp");
-const u8 gNamingScreenUnderscoreTiles[] = INCBIN_U8("graphics/naming_screen/underscore.4bpp");
+const u8 gNamingScreenPageButton_Gfx[] = INCBIN_U8("graphics/naming_screen/page_button.4bpp");
+const u8 gNamingScreenInputArrow_Gfx[] = INCBIN_U8("graphics/naming_screen/right_pointing_triangle.4bpp");
+const u8 gNamingScreenUnderscore_Gfx[] = INCBIN_U8("graphics/naming_screen/underscore.4bpp");
 
 const u32 gUnknown_08DD4544[] = INCBIN_U32("graphics/unknown/unknown_DD4544.bin.lz");
 const u32 gUnknown_08DD4620[] = INCBIN_U32("graphics/unknown/unknown_DD4620.bin.lz");
