@@ -4069,10 +4069,10 @@ extern const u8 gHealthboxElementsGfxTable[][32];
 
 extern const u16 gNamingScreenMenu_Pal[];
 extern const u32 gNamingScreenMenu_Gfx[];
-extern const u32 gUnknown_08DD4544[];
-extern const u8 gUnknown_08DD4620[];
-extern const u8 gUnknown_08DD46E0[];
-extern const u8 gUnknown_08DD47A0[];
+extern const u32 gNamingScreenBackground_Tilemap[];
+extern const u8 gNamingScreenKeyboardUpper_Tilemap[];
+extern const u8 gNamingScreenKeyboardLower_Tilemap[];
+extern const u8 gNamingScreenKeyboardSymbols_Tilemap[];
 extern const u8 gNamingScreenRWindow_Gfx[];
 extern const u8 gNamingScreenPageButton_Gfx[];
 extern const u8 gNamingScreenROptions_Gfx[];
