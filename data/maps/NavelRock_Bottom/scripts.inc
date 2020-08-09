@@ -1,3 +1,5 @@
+.set LOCALID_LUGIA, 1
+
 NavelRock_Bottom_MapScripts:: @ 8269255
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Bottom_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Bottom_OnResume
@@ -25,7 +27,7 @@ NavelRock_Bottom_EventScript_TryRemoveLugia:: @ 826928E
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject 1
+	removeobject LOCALID_LUGIA
 	return
 
 NavelRock_Bottom_EventScript_Lugia:: @ 82692A2

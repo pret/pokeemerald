@@ -28,12 +28,12 @@ LavaridgeTown_HerbShop_EventScript_ExpertM:: @ 81FE4FC
 LavaridgeTown_HerbShop_EventScript_OldMan:: @ 81FE505
 	lock
 	faceplayer
-	goto_if_set FLFLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_ExplainCharcoal
+	goto_if_set FLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_ExplainCharcoal
 	msgbox LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine, MSGBOX_DEFAULT
 	giveitem ITEM_CHARCOAL
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLFLAG_RECEIVED_CHARCOAL
+	setflag FLAG_RECEIVED_CHARCOAL
 	release
 	end
 

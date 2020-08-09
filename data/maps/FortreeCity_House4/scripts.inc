@@ -1,3 +1,5 @@
+.set LOCALID_WINGULL, 3
+
 FortreeCity_House4_MapScripts:: @ 8217C80
 	.byte 0
 
@@ -14,9 +16,9 @@ FortreeCity_House4_EventScript_Boy:: @ 8217C8A
 	closemessage
 	setflag FLAG_WINGULL_SENT_ON_ERRAND
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
-	applymovement 3, FortreeCity_House4_Movement_WingullExit
+	applymovement LOCALID_WINGULL, FortreeCity_House4_Movement_WingullExit
 	waitmovement 0
-	removeobject 3
+	removeobject LOCALID_WINGULL
 	releaseall
 	end
 

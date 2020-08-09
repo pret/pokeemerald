@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattlePikeRoomFinal_MapScripts:: @ 825E392
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeRoomFinal_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRoomFinal_OnWarp
@@ -9,7 +11,7 @@ BattleFrontier_BattlePikeRoomFinal_OnFrame: @ 825E39D
 
 BattleFrontier_BattlePikeRoomFinal_EventScript_EnterRoom:: @ 825E3A7
 	delay 16
-	applymovement 1, BattleFrontier_BattlePikeRoomFinal_Movement_AttendantApproachPlayer
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePikeRoomFinal_Movement_AttendantApproachPlayer
 	waitmovement 0
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	lockall
