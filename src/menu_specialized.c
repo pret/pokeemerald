@@ -27,6 +27,8 @@
 #include "constants/species.h"
 #include "gba/io_reg.h"
 
+#define TAG_CONDITION_SPARKLE 104
+
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
@@ -38,7 +40,7 @@ static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void nullsub_79(void);
 static void sub_81D3408(struct Sprite *sprite);
-static void sub_81D3564(struct Sprite *sprite);
+static void SpriteCB_ConditionSparkle(struct Sprite *sprite);
 static void sub_81D35E8(struct Sprite *sprite);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
@@ -1096,10 +1098,10 @@ bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
     return ((var1 != 0) || (var2 != 0));
 }
 
-static const u32 gUnknown_08625560[] = INCBIN_U32("graphics/pokenav/pokeball.4bpp");
-static const u32 gUnknown_08625660[] = INCBIN_U32("graphics/pokenav/pokeball_placeholder.4bpp");
-static const u16 gUnknown_08625680[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
-static const u32 gUnknown_086256A0[] = INCBIN_U32("graphics/pokenav/sparkle.4bpp");
+static const u32 sConditionPokeball_Gfx[] = INCBIN_U32("graphics/pokenav/condition/pokeball.4bpp");
+static const u32 sConditionPokeballPlaceholder_Gfx[] = INCBIN_U32("graphics/pokenav/condition/pokeball_placeholder.4bpp");
+static const u16 sConditionSparkle_Gfx[] = INCBIN_U16("graphics/pokenav/condition/sparkle.gbapal");
+static const u32 sConditionSparkle_Pal[] = INCBIN_U32("graphics/pokenav/condition/sparkle.4bpp");
 
 static const struct OamData sOamData_8625A20 =
 {
@@ -1175,14 +1177,14 @@ void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, str
     *pal = dataPal;
 }
 
-void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
+void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
 {
     u8 i;
 
     struct SpriteSheet dataSheets[] =
     {
-        {gUnknown_08625560, 0x100, 101},
-        {gUnknown_08625660, 0x20, 103},
+        {sConditionPokeball_Gfx, 0x100, 101},
+        {sConditionPokeballPlaceholder_Gfx, 0x20, 103},
         {gPokenavConditionCancel_Gfx, 0x100, 102},
         {},
     };
@@ -1214,10 +1216,10 @@ void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, s
         *(pals++) = dataPals[i];
 }
 
-void sub_81D32B0(struct SpriteSheet *sheet, struct SpritePalette *pal)
+void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {gUnknown_086256A0, 0x380, 104};
-    struct SpritePalette dataPal = {gUnknown_08625680, 104};
+    struct SpriteSheet dataSheet = {sConditionSparkle_Pal, 0x380, TAG_CONDITION_SPARKLE};
+    struct SpritePalette dataPal = {sConditionSparkle_Gfx, TAG_CONDITION_SPARKLE};
 
     *sheet = dataSheet;
     *pal = dataPal;
@@ -1241,7 +1243,7 @@ static void sub_81D32F4(struct Sprite *sprite)
     }
 }
 
-static const struct OamData sOamData_8625AD0 =
+static const struct OamData sOam_ConditionSparkle =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1253,7 +1255,7 @@ static const struct OamData sOamData_8625AD0 =
     .priority = 0,
 };
 
-static const union AnimCmd sSpriteAnim_8625AD8[] =
+static const union AnimCmd sAnim_ConditionSparkle[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 5),
@@ -1265,38 +1267,38 @@ static const union AnimCmd sSpriteAnim_8625AD8[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_8625AF8[] =
+static const union AnimCmd *const sAnims_ConditionSparkle[] =
 {
-    sSpriteAnim_8625AD8,
-    sSpriteAnim_8625AD8 + 2,
+    sAnim_ConditionSparkle,
+    sAnim_ConditionSparkle + 2,
 };
 
 // unused
 static const union AnimCmd *const sSpriteAnimTable_8625B00[] =
 {
-    sSpriteAnim_8625AD8 + 4,
-    sSpriteAnim_8625AD8 + 6,
+    sAnim_ConditionSparkle + 4,
+    sAnim_ConditionSparkle + 6,
 };
 
 // unused
 static const union AnimCmd *const sSpriteAnimTable_8625B08[] =
 {
-    sSpriteAnim_8625AD8 + 8,
-    sSpriteAnim_8625AD8 + 10,
+    sAnim_ConditionSparkle + 8,
+    sAnim_ConditionSparkle + 10,
 };
 
 // unused
 static const union AnimCmd *const *const sUnknown_08625B10 = sSpriteAnimTable_8625B08;
 
-const struct SpriteTemplate gUnknown_08625B14 =
+static const struct SpriteTemplate sSpriteTemplate_ConditionSparkle =
 {
-    .tileTag = 104,
-    .paletteTag = 104,
-    .oam = &sOamData_8625AD0,
-    .anims = sSpriteAnimTable_8625AF8,
+    .tileTag = TAG_CONDITION_SPARKLE,
+    .paletteTag = TAG_CONDITION_SPARKLE,
+    .oam = &sOam_ConditionSparkle,
+    .anims = sAnims_ConditionSparkle,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81D3564,
+    .callback = SpriteCB_ConditionSparkle,
 };
 
 static const s16 gUnknown_08625B2C[][2] =
@@ -1313,7 +1315,7 @@ static const s16 gUnknown_08625B2C[][2] =
     {-20, -28},
 };
 
-void sub_81D3314(struct Sprite *sprite)
+static void sub_81D3314(struct Sprite *sprite)
 {
     struct Sprite *sprite2 = &gSprites[sprite->data[4]];
 
@@ -1329,7 +1331,7 @@ void sub_81D3314(struct Sprite *sprite)
     }
 }
 
-void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
+static void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
 {
     u16 i;
 
@@ -1343,7 +1345,7 @@ void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
             sprites[i]->data[3] = i;
             if (arg1 == 0 || arg0 != 9)
             {
-                sprites[i]->callback = sub_81D3564;
+                sprites[i]->callback = SpriteCB_ConditionSparkle;
             }
             else
             {
@@ -1364,12 +1366,12 @@ static void sub_81D3408(struct Sprite *sprite)
     for (i = 0; i < sprite->data[2] + 1; i++)
     {
         gSprites[id].data[1] = (gSprites[id].data[0] * 16) + 1;
-        gSprites[id].callback = sub_81D3564;
+        gSprites[id].callback = SpriteCB_ConditionSparkle;
         id = gSprites[id].data[5];
     }
 }
 
-void sub_81D3464(struct Sprite **sprites)
+void ResetConditionSparkleSprites(struct Sprite **sprites)
 {
     u8 i;
 
@@ -1377,14 +1379,14 @@ void sub_81D3464(struct Sprite **sprites)
         sprites[i] = NULL;
 }
 
-void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2)
+void CreateConditionSparkleSprites(struct Sprite **sprites, u8 arg1, u8 _count)
 {
     u16 i, spriteId, firstSpriteId = 0;
-    u8 count = arg2;
+    u8 count = _count;
 
     for (i = 0; i < count + 1; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08625B14, 0, 0, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_ConditionSparkle, 0, 0, 0);
         if (spriteId != MAX_SPRITES)
         {
             sprites[i] = &gSprites[spriteId];
@@ -1405,7 +1407,7 @@ void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2)
     sub_81D338C(count, 1, sprites);
 }
 
-void sub_81D3520(struct Sprite **sprites)
+void DestroyConditionSparkleSprites(struct Sprite **sprites)
 {
     u16 i;
 
@@ -1423,14 +1425,14 @@ void sub_81D3520(struct Sprite **sprites)
     }
 }
 
-void sub_81D354C(struct Sprite **sprites)
+void FreeConditionSparkles(struct Sprite **sprites)
 {
-    sub_81D3520(sprites);
-    FreeSpriteTilesByTag(104);
-    FreeSpritePaletteByTag(104);
+    DestroyConditionSparkleSprites(sprites);
+    FreeSpriteTilesByTag(TAG_CONDITION_SPARKLE);
+    FreeSpritePaletteByTag(TAG_CONDITION_SPARKLE);
 }
 
-static void sub_81D3564(struct Sprite *sprite)
+static void SpriteCB_ConditionSparkle(struct Sprite *sprite)
 {
     if (sprite->data[1] != 0)
     {

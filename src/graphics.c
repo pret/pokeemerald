@@ -1313,7 +1313,6 @@ const u16 gContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_scree
 // pokenav
 
 const u16 gPokenavCondition_Pal[] = INCBIN_U16("graphics/pokenav/condition.gbapal");
-
 const u32 gPokenavCondition_Gfx[] = INCBIN_U32("graphics/pokenav/condition.4bpp.lz");
 const u32 gPokenavCondition_Tilemap[] = INCBIN_U32("graphics/pokenav/condition.bin.lz");
 

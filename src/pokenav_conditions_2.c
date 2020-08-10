@@ -24,7 +24,7 @@ u32 sub_81CE700(s32);
 
 BSS_DATA u8 gUnknown_030012BC;
 
-const u16 gUnknown_086231E8[] = INCBIN_U16("graphics/pokenav/86231E8.gbapal");
+const u16 gConditionGraphData_Pal[] = INCBIN_U16("graphics/pokenav/condition/graph_data.gbapal");
 const u16 gUnknown_08623208[] = INCBIN_U16("graphics/pokenav/8623208.gbapal");
 const u32 gUnknown_08623228[] = INCBIN_U32("graphics/pokenav/8623228.4bpp.lz");
 const u32 gUnknown_0862323C[] = INCBIN_U32("graphics/pokenav/862323C.bin.lz");
@@ -236,7 +236,7 @@ u32 sub_81CDE94(s32 state)
         LZ77UnCompVram(gUnknown_0862323C, structPtr->tilemapBuffers[2]);
         SetBgTilemapBuffer(2, structPtr->tilemapBuffers[2]);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(gUnknown_086231E8, 0x30, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, 0x30, 0x20);
         sub_81D21DC(2);
         return LT_INC_AND_PAUSE;
     case 5:
@@ -325,9 +325,9 @@ u32 sub_81CDE94(s32 state)
     case 20:
         if (!sub_81D3178(sub_81CDC70(), &structPtr->unk1814))
         {
-            sub_81D3464(structPtr->unk28e0);
+            ResetConditionSparkleSprites(structPtr->unk28e0);
             if (sub_81CDD5C() == TRUE || sub_81CDC60() != sub_81CDC50())
-                sub_81D3480(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
+                CreateConditionSparkleSprites(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
 
             return LT_FINISH;
         }
@@ -345,7 +345,7 @@ u32 sub_81CE2D0(s32 state)
     {
     case 0:
         sub_81CEEC8();
-        sub_81D3520(structPtr->unk28e0);
+        DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 1:
         if (sub_81D31A4(sub_81CDC70(), &structPtr->unk1814))
@@ -360,7 +360,7 @@ u32 sub_81CE2D0(s32 state)
     case 3:
         if (IsPaletteFadeActive() || MainMenuLoopedTaskIsBusy())
             return 2;
-        sub_81D354C(structPtr->unk28e0);
+        FreeConditionSparkles(structPtr->unk28e0);
         HideBg(1);
         HideBg(2);
         HideBg(3);
@@ -385,7 +385,7 @@ u32 sub_81CE37C(s32 state)
         return 1;
     case 2:
         sub_81CD548(2);
-        sub_81D3520(structPtr->unk28e0);
+        DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 3:
         sub_81D2074(unkPtr);
@@ -414,11 +414,11 @@ u32 sub_81CE37C(s32 state)
         unkPtr = sub_81CDC70();
         if (!sub_81D3178(unkPtr, &structPtr->unk1814))
         {
-            sub_81D3464(structPtr->unk28e0);
+            ResetConditionSparkleSprites(structPtr->unk28e0);
             if (sub_81CDD5C() != TRUE && sub_81CDC60() == sub_81CDC50())
                 return 1;
 
-            sub_81D3480(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
+            CreateConditionSparkleSprites(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
             return 1;
         }
         return 2;
@@ -461,8 +461,8 @@ u32 sub_81CE4D8(s32 state)
     case 8:
         if (!sub_81D3178(sub_81CDC70(), &structPtr->unk1814))
         {
-            sub_81D3464(structPtr->unk28e0);
-            sub_81D3480(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
+            ResetConditionSparkleSprites(structPtr->unk28e0);
+            CreateConditionSparkleSprites(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
             return 1;
         }
         return 2;
@@ -485,7 +485,7 @@ u32 sub_81CE5E4(s32 state)
         return 1;
     case 2:
         sub_81CD548(2);
-        sub_81D3520(structPtr->unk28e0);
+        DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 3:
         if (!sub_81D31A4(sub_81CDC70(), &structPtr->unk1814))
@@ -663,7 +663,7 @@ void sub_81CE9E4(void)
     u16 i, spriteId;
     struct Pokenav7Struct *structPtr = GetSubstructPtr(0xC);
 
-    sub_81D321C(sprSheets, &sprTemplate, sprPals);
+    LoadConditionSelectionIcons(sprSheets, &sprTemplate, sprPals);
     if (sub_81CDD5C() == TRUE)
     {
         structPtr->monMarks.baseTileTag = 0x6A;
@@ -728,7 +728,7 @@ void sub_81CE9E4(void)
         }
     }
 
-    sub_81D32B0(&sprSheet, &sprPals[0]);
+    LoadConditionSparkle(&sprSheet, &sprPals[0]);
     LoadSpriteSheet(&sprSheet);
     sprPals[1].data = NULL;
     Pokenav_AllocAndLoadPalettes(sprPals);

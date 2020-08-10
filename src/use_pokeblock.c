@@ -24,54 +24,73 @@
 #include "pokemon_summary_screen.h"
 #include "item_menu.h"
 
-struct UsePokeblockSubStruct
+/*
+    This file handles the pokeblock screen where the player
+    chooses which pokemon to give a pokeblock to. The subsequent
+    scene of feeding the pokeblock to the pokemon is handled by
+    pokeblock_feed.c, and the rest of the pokeblock menu (and 
+    other pokeblock-related functions) are in pokeblock.c
+*/
+
+enum {
+    WIN_NAME,
+    WIN_NATURE,
+    WIN_TEXT,
+    WIN_COUNT
+};
+
+struct UsePokeblockSession
 {
-    /*0x00*/ void (*field_0)(void);
-    /*0x04*/ void (*callback)(void);
+    /*0x00*/ void (*callback)(void);
+    /*0x04*/ void (*exitCallback)(void);
     /*0x08*/ struct Pokeblock *pokeblock;
     /*0x0C*/ struct Pokemon *mon;
     /*0x10*/ u8 stringBuffer[0x40];
-    /*0x50*/ u8 field_50;
-    /*0x51*/ u8 field_51;
+    /*0x50*/ u8 mainState;
+    /*0x51*/ u8 field_51; // unused
     /*0x52*/ u8 field_52;
     /*0x53*/ u8 field_53;
-    /*0x54*/ u8 field_54;
-    /*0x55*/ u8 field_55;
+    /*0x54*/ u8 numEnhancements;
+    /*0x55*/ u8 field_55; // unused
     /*0x56*/ u8 field_56;
-    /*0x57*/ u8 field_57[5];
-    /*0x5C*/ u8 field_5c[5];
-    /*0x61*/ u8 field_61[5];
-    /*0x66*/ s16 field_66[5];
-    /*0x70*/ u8 field_70;
-    /*0x71*/ u8 field_71;
-    /*0x74*/ u8 (*unk74)(void);
-    /*0x78*/ u8 unk78;
-    /*0x79*/ u8 filler79[0x1];
-    /*0x7A*/ u8 field_7A[0x22];
+    /*0x57*/ u8 field_57[FLAVOR_COUNT];
+    /*0x5C*/ u8 field_5c[FLAVOR_COUNT];
+    /*0x61*/ u8 field_61[FLAVOR_COUNT];
+    /*0x66*/ s16 field_66[FLAVOR_COUNT];
+    /*0x70*/ u8 field_70; // mon id + 1
+    /*0x71*/ u8 field_71; // mon id 
+    /*0x74*/ u8 (*unk74)(void); // selection handler
+    /*0x78*/ u8 helperState;
+    /*0x79*/ u8 filler79[1]; // unused
+    /*0x7A*/ u8 field_7A[0x22]; // nature text buffer
 };
 
-struct Unk7FB8
+// This struct is identical to PokenavMonList, the struct used for managing lists of pokemon in the pokenav
+// Given that this screen is essentially duplicated in the poknav, this struct was probably the same one with
+// a more general name/purpose
+// TODO: Once the pokenav conditions screens are documented, resolve the above
+struct UsePokeblockMenuPokemon
 {
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
+    u8 boxId; // Because this screen is never used for the PC this is always set to TOTAL_BOXES_COUNT to refer to party
+    u8 monId;
+    u16 data; // never read
 };
 
-struct UsePokeblockStruct
+struct UsePokeblockMenu
 {
-    /*0x0000*/ u8 filler0[4];
-    /*0x0000*/ u16 field_4[6][0x40];
-    /*0x0304*/ u8 field_304[3][0x2000];
-    /*0x6304*/ u8 filler_6304[0x1000];
+    /*0x0000*/ u8 filler0[4]; // unused
+    /*0x0000*/ u16 field_4[6][0x40]; // pal buffer
+    /*0x0304*/ u8 field_304[3][0x2000]; // sheet buffer
+    /*0x6304*/ u8 filler_6304[0x1000]; // unused?
     /*0x7304*/ u8 tilemapBuffer[BG_SCREEN_SIZE + 2];
-    /*0x7B06*/ u8 field_7B06[7];
-    /*0x7B0E*/ s16 field_7B0E;
-    /*0x7B10*/ u8 field_7B10;
-    /*0x7B12*/ u16 field_7B12;
-    /*0x7B12*/ u16 field_7B14;
+    /*0x7B06*/ u8 field_7B06[7]; // sprite ids
+    /*0x7B0E*/ s16 field_7B0E; // x pos?
+    /*0x7B10*/ u8 field_7B10; // sprite id?
+    /*0x7B12*/ u16 field_7B12; // pal
+    /*0x7B12*/ u16 field_7B14; // sheet
     /*0x7B12*/ u8 *field_7B18;
-    /*0x7B1C*/ struct Sprite *field_7B1C[10];
-    /*0x7B44*/ struct Sprite *field_7B44[2];
+    /*0x7B1C*/ struct Sprite *sparkles[10];
+    /*0x7B44*/ struct Sprite *condition[2];
     /*0x7B4C*/ u8 field_7B4C;
     /*0x7B4D*/ u8 field_7B4D[3][24];
     /*0x7B95*/ u8 field_7B95[3][64];
@@ -81,86 +100,78 @@ struct UsePokeblockStruct
     /*0x7FB4*/ s8 field_7FB4;
     /*0x7FB5*/ s8 field_7FB5;
     /*0x7FB6*/ s8 field_7FB6;
-    /*0x7FB8*/ struct Unk7FB8 field_7FB8[6];
-    /*0x7FD0*/ struct UsePokeblockSubStruct info;
+    /*0x7FB8*/ struct UsePokeblockMenuPokemon party[PARTY_SIZE];
+    /*0x7FD0*/ struct UsePokeblockSession info;
 };
 
-#define TAG_TILE_CONDITION_UP_DOWN    0
-#define TAG_PAL_CONDITION_UP_DOWN     0
-#define TAG_PAL_POKEBLOCK_CONDITION   1
+#define TAG_UP_DOWN     0
+#define TAG_CONDITION   1
 
-extern void sub_81D21DC(u8);
-
-// this file's functions
-void sub_816636C(void (*func)(void));
-void sub_8166380(void);
-void sub_816631C(void);
-void sub_81662C0(void);
-void sub_8166564(void);
-void sub_8166304(void);
-void sub_81668F8(void);
-void sub_8167420(void);
-void sub_8167760(void);
-u8 sub_81672E4(u8 arg0);
+static void SetUsePokeblockCallback(void (*func)(void));
+static void LoadUsePokeblockMenu(void);
+static void sub_816631C(void);
+static void sub_81662C0(void);
+static void ShowUsePokeblockMenu(void);
+static void sub_8166304(void);
+static void sub_81668F8(void);
+static void sub_8167420(void);
+static void sub_8167760(void);
+static u8 GetNumNonEggPartyMons(u8);
 static bool8 sub_8168328(void);
-bool8 sub_8167930(void);
-void sub_8167608(u8 arg0);
-void sub_8167BA0(u16 arg0, u8 copyToVramMode);
-void sub_8166634(void);
+static bool8 LoadUsePokeblockGfx(void);
+static void sub_8167608(u8);
+static void UpdateMonInfoText(u16, bool8);
+static void UsePokeblockMenu(void);
 static void sub_8167CA0(bool8);
-void sub_8166BEC(void);
-void sub_8166D44(void);
-s8 sub_8166DE4(void);
-bool8 IsSheenMaxed(void);
-void sub_8166F50(void);
-void sub_816681C(void);
-void sub_8166F94(void);
-u8 sub_81672A4(u8 a0);
-void sub_8166A34(void);
-void sub_8167104(void);
-void sub_8167338(void);
-void sub_81681F4(u8);
-void sub_8166E24(void);
-bool8 sub_8166EDC(void);
-void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2);
-void Pokeblock_MenuWindowTextPrint(const u8 *message);
-void sub_8167184(struct Pokeblock *, struct Pokemon *);
-void sub_81673DC(struct Sprite *sprite);
-void sub_81674BC(void);
-void sub_816753C(s16, u8);
+static void CloseUsePokeblockMenu(void);
+static void AskUsePokeblock(void);
+static s8 HandleAskUsePokeblockInput(void);
+static bool8 IsSheenMaxed(void);
+static void PrintWontEatAnymore(void);
+static void FeedPokeblockToMon(void);
+static void EraseMenuWindow(void);
+static u8 sub_81672A4(u8);
+static void sub_8166A34(void);
+static void sub_8167104(void);
+static void sub_8167338(void);
+static void sub_81681F4(u8);
+static void sub_8166E24(void);
+static bool8 sub_8166EDC(void);
+static void BufferEnhancedStatText(u8 *, u8, s16);
+static void PrintMenuWindowText(const u8 *);
+static void sub_8167184(struct Pokeblock *, struct Pokemon *);
+static void sub_81673DC(struct Sprite *);
+static void sub_81674BC(void);
+static void sub_816753C(s16, u8);
 static u8 sub_8167EA4(void);
 static u8 sub_8167FA4(void);
 static u8 sub_8168048(void);
-void sub_8168180(struct Sprite *sprite);
-void sub_81681B4(struct Sprite *sprite);
-void sub_8168168(struct Sprite *sprite);
-void sub_8168374(struct Sprite *sprite);
+static void sub_8168180(struct Sprite *);
+static void sub_81681B4(struct Sprite *);
+static void sub_8168168(struct Sprite *);
+static void sub_8168374(struct Sprite *);
 
-extern const u16 gUnknown_086231E8[];
+extern const u16 gConditionGraphData_Pal[];
 extern const u16 gUnknown_08623208[];
-extern const struct SpritePalette gSpritePalette_085DFDB8;
-extern const struct SpriteTemplate gSpriteTemplate_085DFDA0;
 
-// ram variables
-EWRAM_DATA struct UsePokeblockSubStruct *gUnknown_0203BC90 = NULL;
-EWRAM_DATA void (*gUnknown_0203BC94)(void) = NULL;
-EWRAM_DATA struct Pokeblock *gUnknown_0203BC98 = NULL;
+// The below 3 are saved for returning to the screen after feeding a pokeblock to a mon
+// so that the rest of the data can be freed
+static EWRAM_DATA struct UsePokeblockSession *sInfo = NULL;
+static EWRAM_DATA void (*sExitCallback)(void) = NULL;
+static EWRAM_DATA struct Pokeblock *sPokeblock = NULL;
 EWRAM_DATA u8 gPokeblockMonId = 0;
 EWRAM_DATA s16 gPokeblockGain = 0;
-EWRAM_DATA u8 *gUnknown_0203BCA0 = NULL;
-EWRAM_DATA u8 *gUnknown_0203BCA4 = NULL;
-EWRAM_DATA u8 *gUnknown_0203BCA8 = NULL;
-EWRAM_DATA struct UsePokeblockStruct *gUnknown_0203BCAC = NULL;
+static EWRAM_DATA u8 *sGraph_Tilemap = NULL;
+static EWRAM_DATA u8 *sGraph_Gfx = NULL;
+static EWRAM_DATA u8 *sMonFrame_TilemapPtr = NULL;
+static EWRAM_DATA struct UsePokeblockMenu *sMenu = NULL;
 
-// const rom data
-// todo: make it static once the file is decompiled
+static const u32 sMonFrame_Pal[] = INCBIN_U32("graphics/pokeblock/use_screen/mon_frame_pal.bin"); // TODO: convert to .pal
+static const u32 sMonFrame_Gfx[] = INCBIN_U32("graphics/pokeblock/use_screen/mon_frame.4bpp");
+static const u32 sMonFrame_Tilemap[] = INCBIN_U32("graphics/pokeblock/use_screen/mon_frame.bin");
+static const u32 sGraphData_Tilemap[] = INCBIN_U32("graphics/pokeblock/use_screen/graph_data.bin");
 
-const u32 gUnknown_085DFA60[] = INCBIN_U32("graphics/interface/85DFA60.bin");
-const u32 gUnknown_085DFA80[] = INCBIN_U32("graphics/interface/85DFA80.4bpp");
-const u32 gUnknown_085DFB60[] = INCBIN_U32("graphics/interface/85DFB60.bin");
-const u32 gUnknown_085DFC0C[] = INCBIN_U32("graphics/interface/85DFC0C.bin");
-
-const u32 gUnknown_085DFCB0[] =
+static const u32 gUnknown_085DFCB0[] =
 {
     MON_DATA_COOL,
     MON_DATA_TOUGH,
@@ -169,13 +180,13 @@ const u32 gUnknown_085DFCB0[] =
     MON_DATA_BEAUTY
 };
 
-const u8 gUnknown_085DFCC4[] =
+static const u8 sFlavors[FLAVOR_COUNT] =
 {
-    0, // Spicy/Cool
-    4, // Dry/Beauty
-    3, // Sweet/Cute
-    2, // Bitter/Smart
-    1  // Sour/Tough 
+    FLAVOR_SPICY,
+    FLAVOR_SOUR,
+    FLAVOR_BITTER,
+    FLAVOR_SWEET,
+    FLAVOR_DRY
 };
 
 static const u8 sNatureTextColors[] =
@@ -185,7 +196,7 @@ static const u8 sNatureTextColors[] =
     TEXT_COLOR_WHITE
 };
 
-const struct BgTemplate gUnknown_085DFCCC[4] =
+static const struct BgTemplate sBgTemplates[4] =
 {
     {
         .bg = 0,
@@ -225,50 +236,50 @@ const struct BgTemplate gUnknown_085DFCCC[4] =
     }
 };
 
-const struct WindowTemplate gUnknown_085DFCDC[] = 
+static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] = 
 {
-    {
+    [WIN_NAME] = {
         .bg = 0,
-        .tilemapLeft = 0xD,
+        .tilemapLeft = 13,
         .tilemapTop = 1,
-        .width = 0xD,
+        .width = 13,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1
     },
-    {
+    [WIN_NATURE] = {
         .bg = 0,
         .tilemapLeft = 0,
-        .tilemapTop = 0xE,
-        .width = 0xB,
+        .tilemapTop = 14,
+        .width = 11,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x35
     },
-    {
+    [WIN_TEXT] = {
         .bg = 0,
         .tilemapLeft = 1,
-        .tilemapTop = 0x11,
-        .width = 0x1C,
+        .tilemapTop = 17,
+        .width = 28,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x4B
     },
     DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate sUsePokeblockYesNoWinTemplate = 
+static const struct WindowTemplate sUsePokeblockYesNoWinTemplate = 
 {
     .bg = 0,
-    .tilemapLeft = 0x18,
-    .tilemapTop = 0xB,
+    .tilemapLeft = 24,
+    .tilemapTop = 11,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x83
 };
 
-const u8 *const sContestStatNames[] =
+static const u8 *const sContestStatNames[] =
 {
     gText_Coolness,
     gText_Toughness,
@@ -277,17 +288,17 @@ const u8 *const sContestStatNames[] =
     gText_Beauty3
 };
 
-const struct SpriteSheet gSpriteSheet_ConditionUpDown = 
+static const struct SpriteSheet sSpriteSheet_UpDown = 
 {
-    gUsePokeblockUpDown_Gfx, 0x200, TAG_TILE_CONDITION_UP_DOWN
+    gUsePokeblockUpDown_Gfx, 0x200, TAG_UP_DOWN
 };
 
-const struct SpritePalette gSpritePalette_ConditionUpDown =
+static const struct SpritePalette sSpritePalette_UpDown =
 {
-    gUsePokeblockUpDown_Pal, TAG_PAL_CONDITION_UP_DOWN
+    gUsePokeblockUpDown_Pal, TAG_UP_DOWN
 };
 
-const s16 gUnknown_085DFD28[][2] =
+static const s16 gUnknown_085DFD28[][2] =
 {
     {0x9C, 0x24},
     {0x75, 0x3B},
@@ -296,7 +307,7 @@ const s16 gUnknown_085DFD28[][2] =
     {0xC5, 0x3B}
 };
 
-const struct OamData gOamData_085DFD3C = 
+static const struct OamData sOam_UpDown = 
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -310,36 +321,36 @@ const struct OamData gOamData_085DFD3C =
     .paletteNum = 0,
 };
 
-const union AnimCmd gSpriteAnim_085DFD44[] =
+static const union AnimCmd sAnim_Up[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_085DFD4C[] =
+static const union AnimCmd sAnim_Down[] =
 {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_085DFD54[] =
+static const union AnimCmd *const sAnims_UpDown[] =
 {
-    gSpriteAnim_085DFD44,
-    gSpriteAnim_085DFD4C
+    sAnim_Up,
+    sAnim_Down
 };
 
-const struct SpriteTemplate gSpriteTemplate_085DFD5C =
+static const struct SpriteTemplate sSpriteTemplate_UpDown =
 {
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gOamData_085DFD3C,
-    .anims = gSpriteAnimTable_085DFD54,
+    .tileTag = TAG_UP_DOWN,
+    .paletteTag = TAG_UP_DOWN,
+    .oam = &sOam_UpDown,
+    .anims = sAnims_UpDown,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-const struct OamData gOamData_085DFD74 = 
+static const struct OamData sOam_Condition = 
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -353,84 +364,85 @@ const struct OamData gOamData_085DFD74 =
     .paletteNum = 0,
 };
 
-const union AnimCmd gSpriteAnim_085DFD7C[] =
+static const union AnimCmd gSpriteAnim_085DFD7C[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_085DFD84[] =
+static const union AnimCmd gSpriteAnim_085DFD84[] =
 {
     ANIMCMD_FRAME(32, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_085DFD8C[] =
+static const union AnimCmd gSpriteAnim_085DFD8C[] =
 {
     ANIMCMD_FRAME(64, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_085DFD94[] =
+static const union AnimCmd *const sAnims_Condition[] =
 {
     gSpriteAnim_085DFD7C,
     gSpriteAnim_085DFD84,
     gSpriteAnim_085DFD8C
 };
 
-const struct SpriteTemplate gSpriteTemplate_085DFDA0 =
+static const struct SpriteTemplate sSpriteTemplate_Condition =
 {
-    .tileTag = 1,
-    .paletteTag = 1,
-    .oam = &gOamData_085DFD74,
-    .anims = gSpriteAnimTable_085DFD94,
+    .tileTag = TAG_CONDITION,
+    .paletteTag = TAG_CONDITION,
+    .oam = &sOam_Condition,
+    .anims = sAnims_Condition,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_8168374,
 };
 
-const struct SpritePalette gSpritePalette_085DFDB8 =
+static const struct SpritePalette sSpritePalette_Condition =
 {
-    gUsePokeblockCondition_Pal, TAG_PAL_POKEBLOCK_CONDITION
+    gUsePokeblockCondition_Pal, TAG_CONDITION
 };
 
-// code
+// When first opening the selection screen
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void))
 {
-    gUnknown_0203BCAC = AllocZeroed(sizeof(*gUnknown_0203BCAC));
-    gUnknown_0203BC90 = &gUnknown_0203BCAC->info;
-    gUnknown_0203BC90->pokeblock = pokeblock;
-    gUnknown_0203BC90->callback = callback;
-    sub_816636C(sub_8166380);
+    sMenu = AllocZeroed(sizeof(*sMenu));
+    sInfo = &sMenu->info;
+    sInfo->pokeblock = pokeblock;
+    sInfo->exitCallback = callback;
+    SetUsePokeblockCallback(LoadUsePokeblockMenu);
     SetMainCallback2(sub_816631C);
 }
 
-void CB2_ReturnAndChooseMonToGivePokeblock(void)
+// When returning to the selection screen after feeding a pokeblock to a mon
+static void CB2_ReturnAndChooseMonToGivePokeblock(void)
 {
-    gUnknown_0203BCAC = AllocZeroed(sizeof(*gUnknown_0203BCAC));
-    gUnknown_0203BC90 = &gUnknown_0203BCAC->info;
-    gUnknown_0203BC90->pokeblock = gUnknown_0203BC98;
-    gUnknown_0203BC90->callback = gUnknown_0203BC94;
-    gPokeblockMonId = sub_81672E4(gPokeblockMonId);
-    gUnknown_0203BC90->field_56 = gPokeblockMonId < 4 ? 0 : 1;
-    sub_816636C(sub_8166380);
+    sMenu = AllocZeroed(sizeof(*sMenu));
+    sInfo = &sMenu->info;
+    sInfo->pokeblock = sPokeblock;
+    sInfo->exitCallback = sExitCallback;
+    gPokeblockMonId = GetNumNonEggPartyMons(gPokeblockMonId);
+    sInfo->field_56 = gPokeblockMonId < 4 ? 0 : 1;
+    SetUsePokeblockCallback(LoadUsePokeblockMenu);
     SetMainCallback2(sub_81662C0);
 }
 
-void sub_81662C0(void)
+static void sub_81662C0(void)
 {
-    gUnknown_0203BC90->field_0();
+    sInfo->callback();
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    if (gUnknown_0203BC90->field_0 == sub_8166564)
+    if (sInfo->callback == ShowUsePokeblockMenu)
     {
-        gUnknown_0203BC90->field_50 = 0;
+        sInfo->mainState = 0;
         SetMainCallback2(sub_8166304);
     }
 }
 
-void sub_8166304(void)
+static void sub_8166304(void)
 {
     sub_81668F8();
     AnimateSprites();
@@ -438,242 +450,255 @@ void sub_8166304(void)
     UpdatePaletteFade();
 }
 
-void sub_816631C(void)
+static void sub_816631C(void)
 {
-    gUnknown_0203BC90->field_0();
+    sInfo->callback();
     AnimateSprites();
     BuildOamBuffer();
     RunTextPrinters();
     UpdatePaletteFade();
 }
 
-void sub_8166340(void)
+static void VBlankCB_UsePokeblock(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_81D2108(&gUnknown_0203BCAC->field_7C58);
+    sub_81D2108(&sMenu->field_7C58);
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void sub_816636C(void (*func)(void))
+static void SetUsePokeblockCallback(void (*func)(void))
 {
-    gUnknown_0203BC90->field_0 = func;
-    gUnknown_0203BC90->field_50 = 0;
+    sInfo->callback = func;
+    sInfo->mainState = 0;
 }
 
-void sub_8166380(void)
+static void LoadUsePokeblockMenu(void)
 {
-    switch (gUnknown_0203BC90->field_50)
+    switch (sInfo->mainState)
     {
     case 0:
-        gUnknown_0203BCAC->field_7B10 = 0xFF;
-        sub_81D1ED4(&gUnknown_0203BCAC->field_7C58);
-        gUnknown_0203BC90->field_50++;
+        sMenu->field_7B10 = 0xFF;
+        sub_81D1ED4(&sMenu->field_7C58);
+        sInfo->mainState++;
         break;
     case 1:
         ResetSpriteData();
         FreeAllSpritePalettes();
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 2:
         SetVBlankCallback(NULL);
         CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 3:
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_085DFCCC, ARRAY_COUNT(gUnknown_085DFCCC));
-        InitWindows(gUnknown_085DFCDC);
+        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+        InitWindows(sWindowTemplates);
         DeactivateAllTextPrinters();
         LoadUserWindowBorderGfx(0, 0x97, 0xE0);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 4:
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 5:
         if (!sub_8168328())
-            gUnknown_0203BC90->field_50++;
+            sInfo->mainState++;
         break;
     case 6:
         gKeyRepeatStartDelay = 20;
         sub_8167420();
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 7:
-        if (!sub_8167930())
-            gUnknown_0203BC90->field_50++;
+        if (!LoadUsePokeblockGfx())
+            sInfo->mainState++;
         break;
     case 8:
         sub_8167608(0);
         sub_8167760();
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 9:
-        if (!sub_81D312C(&gUnknown_0203BCAC->field_7B0E))
-            gUnknown_0203BC90->field_50++;
+        if (!sub_81D312C(&sMenu->field_7B0E))
+            sInfo->mainState++;
         break;
     case 10:
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 11:
-        sub_81D2754(gUnknown_0203BCAC->field_7C58.unk0[0], gUnknown_0203BCAC->field_7C58.unk14[0]);
-        sub_81D20AC(&gUnknown_0203BCAC->field_7C58);
-        gUnknown_0203BC90->field_50++;
+        sub_81D2754(sMenu->field_7C58.unk0[0], sMenu->field_7C58.unk14[0]);
+        sub_81D20AC(&sMenu->field_7C58);
+        sInfo->mainState++;
         break;
     case 12:
-        if (!sub_81D20BC(&gUnknown_0203BCAC->field_7C58))
+        if (!sub_81D20BC(&sMenu->field_7C58))
         {
-            sub_81D1F84(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[0], gUnknown_0203BCAC->field_7C58.unk14[0]);
-            gUnknown_0203BC90->field_50++;
+            sub_81D1F84(&sMenu->field_7C58, sMenu->field_7C58.unk14[0], sMenu->field_7C58.unk14[0]);
+            sInfo->mainState++;
         }
         break;
     case 13:
-        sub_81D2230(&gUnknown_0203BCAC->field_7C58);
-        gUnknown_0203BC90->field_50++;
+        sub_81D2230(&sMenu->field_7C58);
+        sInfo->mainState++;
         break;
     case 14:
-        PutWindowTilemap(0);
-        PutWindowTilemap(1);
-        sub_8167BA0(0, 1);
-        gUnknown_0203BC90->field_50++;
+        PutWindowTilemap(WIN_NAME);
+        PutWindowTilemap(WIN_NATURE);
+        UpdateMonInfoText(0, TRUE);
+        sInfo->mainState++;
         break;
     case 15:
-        sub_816636C(sub_8166564);
+        SetUsePokeblockCallback(ShowUsePokeblockMenu);
         break;
     }
 }
 
-void sub_8166564(void)
+static void ShowUsePokeblockMenu(void)
 {
-    switch (gUnknown_0203BC90->field_50)
+    switch (sInfo->mainState)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-        SetVBlankCallback(sub_8166340);
+        SetVBlankCallback(VBlankCB_UsePokeblock);
         ShowBg(0);
         ShowBg(1);
         ShowBg(3);
         ShowBg(2);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 1:
         if (!gPaletteFade.active)
         {
-            sub_81D3464(gUnknown_0203BCAC->field_7B1C);
-            if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+            ResetConditionSparkleSprites(sMenu->sparkles);
+            if (sMenu->info.field_71 != sMenu->info.field_70 - 1)
             {
-                u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
-                sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
+                u8 var0 = sMenu->unk7FB0[sMenu->field_7FB3];
+                CreateConditionSparkleSprites(sMenu->sparkles, sMenu->field_7B10, var0);
             }
 
-            sub_816636C(sub_8166634);
+            SetUsePokeblockCallback(UsePokeblockMenu);
         }
         break;
     }
 }
 
-void sub_8166634(void)
+enum {
+    STATE_HANDLE_INPUT,
+    STATE_UPDATE_SELECTION,
+    STATE_2, // unused state
+    STATE_CLOSE,
+    STATE_4, // unused state
+    STATE_CONFIRM_SELECTION,
+    STATE_HANDLE_CONFIRMATION,
+    STATE_WAIT_MSG,
+};
+
+static void UsePokeblockMenu(void)
 {
     u8 var;
 
-    switch (gUnknown_0203BC90->field_50)
+    switch (sInfo->mainState)
     {
-    case 0:
-        if (gMain.heldKeys & DPAD_UP)
+    case STATE_HANDLE_INPUT:
+        if (JOY_HELD(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             sub_8167CA0(TRUE);
-            sub_81D3520(gUnknown_0203BCAC->field_7B1C);
-            gUnknown_0203BC90->field_50 = 1;
+            DestroyConditionSparkleSprites(sMenu->sparkles);
+            sInfo->mainState = STATE_UPDATE_SELECTION;
         }
-        else if (gMain.heldKeys & DPAD_DOWN)
+        else if (JOY_HELD(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             sub_8167CA0(FALSE);
-            sub_81D3520(gUnknown_0203BCAC->field_7B1C);
-            gUnknown_0203BC90->field_50 = 1;
+            DestroyConditionSparkleSprites(sMenu->sparkles);
+            sInfo->mainState = STATE_UPDATE_SELECTION;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            gUnknown_0203BC90->field_50 = 3;
+            sInfo->mainState = STATE_CLOSE;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            if (gUnknown_0203BCAC->info.field_71 == gUnknown_0203BCAC->info.field_70 - 1)
-                gUnknown_0203BC90->field_50 = 3;
+
+            // If last item, selected Cancel. Otherwise selected mon
+            if (sMenu->info.field_71 == sMenu->info.field_70 - 1)
+                sInfo->mainState = STATE_CLOSE;
             else
-                gUnknown_0203BC90->field_50 = 5;
+                sInfo->mainState = STATE_CONFIRM_SELECTION;
         }
         break;
-    case 1:
-        var = gUnknown_0203BCAC->info.unk74();
+    case STATE_UPDATE_SELECTION:
+        var = sMenu->info.unk74();
         if (!var)
-            gUnknown_0203BC90->field_50 = var;
+            sInfo->mainState = STATE_HANDLE_INPUT;
         break;
-    case 2:
+    case STATE_2:
         break;
-    case 3:
-        sub_816636C(sub_8166BEC);
+    case STATE_CLOSE:
+        SetUsePokeblockCallback(CloseUsePokeblockMenu);
         break;
-    case 4:
+    case STATE_4:
         break;
-    case 5:
-        sub_8166D44();
-        gUnknown_0203BC90->field_50++;
+    case STATE_CONFIRM_SELECTION:
+        AskUsePokeblock();
+        sInfo->mainState++;
         break;
-    case 6:
-        switch (sub_8166DE4())
+    case STATE_HANDLE_CONFIRMATION:
+        switch (HandleAskUsePokeblockInput())
         {
-        case 1:
-        case -1:
-            gUnknown_0203BC90->field_50 = 0;
+        case 1: // NO
+        case MENU_B_PRESSED:
+            sInfo->mainState = STATE_HANDLE_INPUT;
             break;
-        case 0:
+        case 0: // YES
             if (IsSheenMaxed())
             {
-                sub_8166F50();
-                gUnknown_0203BC90->field_50 = 7;
+                PrintWontEatAnymore();
+                sInfo->mainState = STATE_WAIT_MSG;
             }
             else
             {
-                sub_816636C(sub_816681C);
+                SetUsePokeblockCallback(FeedPokeblockToMon);
             }
             break;
         }
         break;
-    case 7:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    case STATE_WAIT_MSG:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
-            sub_8166F94();
-            gUnknown_0203BC90->field_50 = 0;
+            EraseMenuWindow();
+            sInfo->mainState = STATE_HANDLE_INPUT;
         }
         break;
     }
 }
 
-void sub_816681C(void)
+static void FeedPokeblockToMon(void)
 {
-    switch (gUnknown_0203BC90->field_50)
+    switch (sInfo->mainState)
     {
     case 0:
-        gPokeblockMonId = sub_81672A4(gUnknown_0203BCAC->info.field_71);
-        gUnknown_0203BC94 = gUnknown_0203BC90->callback;
-        gUnknown_0203BC98 = gUnknown_0203BC90->pokeblock;
+        gPokeblockMonId = sub_81672A4(sMenu->info.field_71);
+        sExitCallback = sInfo->exitCallback;
+        sPokeblock = sInfo->pokeblock;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 1:
         if (!gPaletteFade.active)
         {
             SetVBlankCallback(NULL);
-            FREE_AND_SET_NULL(gUnknown_0203BCA0);
-            FREE_AND_SET_NULL(gUnknown_0203BCA4);
-            FREE_AND_SET_NULL(gUnknown_0203BCA8);
-            FREE_AND_SET_NULL(gUnknown_0203BCAC);
+            FREE_AND_SET_NULL(sGraph_Tilemap);
+            FREE_AND_SET_NULL(sGraph_Gfx);
+            FREE_AND_SET_NULL(sMonFrame_TilemapPtr);
+            FREE_AND_SET_NULL(sMenu);
             FreeAllWindowBuffers();
             gMain.savedCallback = CB2_ReturnAndChooseMonToGivePokeblock;
             CB2_PreparePokeblockFeedScene();
@@ -682,184 +707,184 @@ void sub_816681C(void)
     }
 }
 
-void sub_81668F8(void)
+static void sub_81668F8(void)
 {
     u16 var;
 
-    switch (gUnknown_0203BC90->field_50)
+    switch (sInfo->mainState)
     {
     case 0:
-        if (gUnknown_0203BCAC->info.field_71 != gPokeblockMonId)
+        if (sMenu->info.field_71 != gPokeblockMonId)
         {
-            sub_8167CA0(gUnknown_0203BC90->field_56);
-            gUnknown_0203BC90->field_50++;
+            sub_8167CA0(sInfo->field_56);
+            sInfo->mainState++;
         }
         else
         {
-            gUnknown_0203BC90->field_50 = 3;
+            sInfo->mainState = 3;
         }
         break;
     case 1:
-        var = gUnknown_0203BCAC->info.unk74();
+        var = sMenu->info.unk74();
         if (!var)
-            gUnknown_0203BC90->field_50 = var;
+            sInfo->mainState = var;
         break;
     case 2:
         break;
     case 3:
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 4:
         ShowBg(0);
         ShowBg(1);
         ShowBg(3);
         ShowBg(2);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 5:
-        SetVBlankCallback(sub_8166340);
+        SetVBlankCallback(VBlankCB_UsePokeblock);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 6:
         if (!gPaletteFade.active)
         {
-            sub_81D3464(gUnknown_0203BCAC->field_7B1C);
-            sub_816636C(sub_8166A34);
+            ResetConditionSparkleSprites(sMenu->sparkles);
+            SetUsePokeblockCallback(sub_8166A34);
             SetMainCallback2(sub_816631C);
         }
         break;
     }
 }
 
-void sub_8166A34(void)
+static void sub_8166A34(void)
 {
     u8 var;
 
-    switch (gUnknown_0203BC90->field_50)
+    switch (sInfo->mainState)
     {
     case 0:
-        gUnknown_0203BC90->mon = gPlayerParty;
-        gUnknown_0203BC90->mon += gUnknown_0203BCAC->field_7FB8[gUnknown_0203BCAC->info.field_71].unk1;
-        sub_81D3520(gUnknown_0203BCAC->field_7B1C);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mon = gPlayerParty;
+        sInfo->mon += sMenu->party[sMenu->info.field_71].monId;
+        DestroyConditionSparkleSprites(sMenu->sparkles);
+        sInfo->mainState++;
         break;
     case 1:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
-            gUnknown_0203BC90->field_50++;
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+            sInfo->mainState++;
         break;
     case 2:
         sub_8167104();
-        sub_81D2754(gUnknown_0203BC90->field_5c, gUnknown_0203BCAC->field_7C58.unk14[3]);
-        sub_81D1F84(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->field_7C58.unk14[gUnknown_0203BCAC->field_7FB3], gUnknown_0203BCAC->field_7C58.unk14[3]);
+        sub_81D2754(sInfo->field_5c, sMenu->field_7C58.unk14[3]);
+        sub_81D1F84(&sMenu->field_7C58, sMenu->field_7C58.unk14[sMenu->field_7FB3], sMenu->field_7C58.unk14[3]);
         sub_8167338();
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 3:
-        var = sub_81D2074(&gUnknown_0203BCAC->field_7C58);
+        var = sub_81D2074(&sMenu->field_7C58);
         if (!var)
         {
-            sub_81681F4(sub_81672A4(gUnknown_0203BCAC->info.field_71));
-            if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+            sub_81681F4(sub_81672A4(sMenu->info.field_71));
+            if (sMenu->info.field_71 != sMenu->info.field_70 - 1)
             {
-                u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
-                sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
+                u8 var0 = sMenu->unk7FB0[sMenu->field_7FB3];
+                CreateConditionSparkleSprites(sMenu->sparkles, sMenu->field_7B10, var0);
             }
 
-            gUnknown_0203BC90->field_52 = 0;
-            gUnknown_0203BC90->field_50++;
+            sInfo->field_52 = 0;
+            sInfo->mainState++;
         }
         break;
     case 4:
-        if (++gUnknown_0203BC90->field_52 > 16)
+        if (++sInfo->field_52 > 16)
         {
             sub_8166E24();
-            gUnknown_0203BC90->field_50++;
+            sInfo->mainState++;
         }
         break;
     case 5:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON) && !sub_8166EDC())
+        if (JOY_NEW(A_BUTTON | B_BUTTON) && !sub_8166EDC())
         {
             TryClearPokeblock((u8)gSpecialVar_ItemId);
-            sub_816636C(sub_8166BEC);
+            SetUsePokeblockCallback(CloseUsePokeblockMenu);
         }
         break;
     }
 }
 
-void sub_8166BEC(void)
+static void CloseUsePokeblockMenu(void)
 {
     u8 i, var;
 
-    switch (gUnknown_0203BC90->field_50)
+    switch (sInfo->mainState)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 1:
         if (!gPaletteFade.active)
-            gUnknown_0203BC90->field_50 = 2;
+            sInfo->mainState = 2;
         break;
     case 2:
         gScanlineEffect.state = 3;
         ScanlineEffect_InitHBlankDmaTransfer();
-        gUnknown_0203BC90->field_50++;
+        sInfo->mainState++;
         break;
     case 3:
-        SetMainCallback2(gUnknown_0203BC90->callback);
-        sub_81D354C(gUnknown_0203BCAC->field_7B1C);
-        for (i = 0; i < 7; i++)
-            DestroySprite(&gSprites[gUnknown_0203BCAC->field_7B06[i]]);
+        SetMainCallback2(sInfo->exitCallback);
+        FreeConditionSparkles(sMenu->sparkles);
+        for (i = 0; i < ARRAY_COUNT(sMenu->field_7B06); i++)
+            DestroySprite(&gSprites[sMenu->field_7B06[i]]);
 
-        FreeSpriteTilesByTag(0);
-        FreeSpriteTilesByTag(1);
-        FreeSpritePaletteByTag(0);
-        FreeSpritePaletteByTag(1);
+        FreeSpriteTilesByTag(TAG_UP_DOWN);
+        FreeSpriteTilesByTag(TAG_CONDITION);
+        FreeSpritePaletteByTag(TAG_UP_DOWN);
+        FreeSpritePaletteByTag(TAG_CONDITION);
 
-        for (i = 0; i < 2; i++)
-            DestroySprite(gUnknown_0203BCAC->field_7B44[i]);
+        for (i = 0; i < ARRAY_COUNT(sMenu->condition); i++)
+            DestroySprite(sMenu->condition[i]);
 
-        if (gUnknown_0203BCAC->field_7B10 != 0xFF)
-            DestroySprite(&gSprites[gUnknown_0203BCAC->field_7B10]);
+        if (sMenu->field_7B10 != 0xFF)
+            DestroySprite(&gSprites[sMenu->field_7B10]);
 
         SetVBlankCallback(NULL);
-        FREE_AND_SET_NULL(gUnknown_0203BCA0);
-        FREE_AND_SET_NULL(gUnknown_0203BCA4);
-        FREE_AND_SET_NULL(gUnknown_0203BCA8);
-        FREE_AND_SET_NULL(gUnknown_0203BCAC);
+        FREE_AND_SET_NULL(sGraph_Tilemap);
+        FREE_AND_SET_NULL(sGraph_Gfx);
+        FREE_AND_SET_NULL(sMonFrame_TilemapPtr);
+        FREE_AND_SET_NULL(sMenu);
         FreeAllWindowBuffers();
         break;
     }
 }
 
-void sub_8166D44(void)
+static void AskUsePokeblock(void)
 {
     u8 stringBuffer[0x40];
 
-    GetMonData(&gPlayerParty[sub_81672A4(gUnknown_0203BCAC->info.field_71)], MON_DATA_NICKNAME, stringBuffer);
+    GetMonData(&gPlayerParty[sub_81672A4(sMenu->info.field_71)], MON_DATA_NICKNAME, stringBuffer);
     StringGetEnd10(stringBuffer);
     StringAppend(stringBuffer, gText_GetsAPokeBlockQuestion);
     StringCopy(gStringVar4, stringBuffer);
-    FillWindowPixelBuffer(2, 17);
-    DrawTextBorderOuter(2, 151, 14);
-    AddTextPrinterParameterized(2, 1, gStringVar4, 0, 1, 0, NULL);
-    PutWindowTilemap(2);
-    CopyWindowToVram(2, 3);
+    FillWindowPixelBuffer(WIN_TEXT, 17);
+    DrawTextBorderOuter(WIN_TEXT, 151, 14);
+    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
+    PutWindowTilemap(WIN_TEXT);
+    CopyWindowToVram(WIN_TEXT, 3);
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
 }
 
-s8 sub_8166DE4(void)
+static s8 HandleAskUsePokeblockInput(void)
 {
     s8 menuItem = Menu_ProcessInputNoWrapClearOnChoose();
 
     switch (menuItem)
     {
-    case 0:
+    case 0: // YES
         break;
     case MENU_B_PRESSED:
-    case 1:
+    case 1: // NO
         PlaySE(SE_SELECT);
         rbox_fill_rectangle(2);
         ClearWindowTilemap(2);
@@ -869,84 +894,84 @@ s8 sub_8166DE4(void)
     return menuItem;
 }
 
-void sub_8166E24(void)
+static void sub_8166E24(void)
 {
-    DrawTextBorderOuter(2, 151, 14);
-    FillWindowPixelBuffer(2, 17);
+    DrawTextBorderOuter(WIN_TEXT, 151, 14);
+    FillWindowPixelBuffer(WIN_TEXT, 17);
 
-    for (gUnknown_0203BC90->field_53 = 0; gUnknown_0203BC90->field_53 < 5; gUnknown_0203BC90->field_53++)
+    for (sInfo->field_53 = 0; sInfo->field_53 < FLAVOR_COUNT; sInfo->field_53++)
     {
-        if (gUnknown_0203BC90->field_61[gUnknown_0203BC90->field_53] != 0)
+        if (sInfo->field_61[sInfo->field_53] != 0)
             break;
     }
 
-    if (gUnknown_0203BC90->field_53 < 5)
-        Pokeblock_BufferEnhancedStatText(gStringVar4, gUnknown_0203BC90->field_53, gUnknown_0203BC90->field_61[gUnknown_0203BC90->field_53]);
+    if (sInfo->field_53 < FLAVOR_COUNT)
+        BufferEnhancedStatText(gStringVar4, sInfo->field_53, sInfo->field_61[sInfo->field_53]);
     else
-        Pokeblock_BufferEnhancedStatText(gStringVar4, gUnknown_0203BC90->field_53, 0);
+        BufferEnhancedStatText(gStringVar4, sInfo->field_53, 0);
 
-    Pokeblock_MenuWindowTextPrint(gStringVar4);
-    PutWindowTilemap(2);
-    CopyWindowToVram(2, 3);
+    PrintMenuWindowText(gStringVar4);
+    PutWindowTilemap(WIN_TEXT);
+    CopyWindowToVram(WIN_TEXT, 3);
 }
 
-bool8 sub_8166EDC(void)
+static bool8 sub_8166EDC(void)
 {
-    FillWindowPixelBuffer(2, 17);
+    FillWindowPixelBuffer(WIN_TEXT, 17);
 
     while (1)
     {
-        gUnknown_0203BC90->field_53++;
-        if (gUnknown_0203BC90->field_53 < 5)
+        sInfo->field_53++;
+        if (sInfo->field_53 < FLAVOR_COUNT)
         {
-            if (gUnknown_0203BC90->field_61[gUnknown_0203BC90->field_53] != 0)
+            if (sInfo->field_61[sInfo->field_53] != 0)
                 break;
         }
         else
         {
-            gUnknown_0203BC90->field_53 = 5;
+            sInfo->field_53 = FLAVOR_COUNT;
             return FALSE;
         }
     }
 
-    Pokeblock_BufferEnhancedStatText(gStringVar4, gUnknown_0203BC90->field_53, gUnknown_0203BC90->field_61[gUnknown_0203BC90->field_53]);
-    Pokeblock_MenuWindowTextPrint(gStringVar4);
-    CopyWindowToVram(2, 2);
+    BufferEnhancedStatText(gStringVar4, sInfo->field_53, sInfo->field_61[sInfo->field_53]);
+    PrintMenuWindowText(gStringVar4);
+    CopyWindowToVram(WIN_TEXT, 2);
 
     return TRUE;
 }
 
-void sub_8166F50(void)
+static void PrintWontEatAnymore(void)
 {
-    FillWindowPixelBuffer(2, 17);
-    DrawTextBorderOuter(2, 151, 14);
-    AddTextPrinterParameterized(2, 1, gText_WontEatAnymore, 0, 1, 0, NULL);
-    PutWindowTilemap(2);
-    CopyWindowToVram(2, 3);
+    FillWindowPixelBuffer(WIN_TEXT, 17);
+    DrawTextBorderOuter(WIN_TEXT, 151, 14);
+    AddTextPrinterParameterized(WIN_TEXT, 1, gText_WontEatAnymore, 0, 1, 0, NULL);
+    PutWindowTilemap(WIN_TEXT);
+    CopyWindowToVram(WIN_TEXT, 3);
 }
 
-void sub_8166F94(void)
+static void EraseMenuWindow(void)
 {
-    rbox_fill_rectangle(2);
-    ClearWindowTilemap(2);
-    CopyWindowToVram(2, 3);
+    rbox_fill_rectangle(WIN_TEXT);
+    ClearWindowTilemap(WIN_TEXT);
+    CopyWindowToVram(WIN_TEXT, 3);
 }
 
-void Pokeblock_MenuWindowTextPrint(const u8 *message)
+static void PrintMenuWindowText(const u8 *message)
 {
-    AddTextPrinterParameterized(2, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
 }
 
-void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
+static void BufferEnhancedStatText(u8 *dest, u8 statId, s16 enhancement)
 {
-    switch (a2)
+    switch (enhancement)
     {
-    case 1 ... 32767:
-        a2 = 0;
+    case 1 ... 32767: // if > 0
+        enhancement = 0;
         // fallthrough
-    case -32768 ... -1:
-        if (a2)
-            dest[(u16)a2] += 0; // something you can't imagine
+    case -32768 ... -1: // if < 0
+        if (enhancement)
+            dest[(u16)enhancement] += 0; // something you can't imagine
         StringCopy(dest, sContestStatNames[statId]);
         StringAppend(dest, gText_WasEnhanced);
         break;
@@ -956,7 +981,7 @@ void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statId, s16 a2)
     }
 }
 
-void Pokeblock_GetMonContestStats(struct Pokemon *mon, u8 *data)
+static void GetMonConditions(struct Pokemon *mon, u8 *data)
 {
     u16 i;
 
@@ -964,7 +989,7 @@ void Pokeblock_GetMonContestStats(struct Pokemon *mon, u8 *data)
         data[i] = GetMonData(mon, gUnknown_085DFCB0[i]);
 }
 
-void sub_8167054(struct Pokeblock *pokeblock, struct Pokemon *mon)
+static void sub_8167054(struct Pokeblock *pokeblock, struct Pokemon *mon)
 {
     u16 i;
     s16 cstat;
@@ -973,10 +998,10 @@ void sub_8167054(struct Pokeblock *pokeblock, struct Pokemon *mon)
     if (GetMonData(mon, MON_DATA_SHEEN) != 255)
     {
         sub_8167184(pokeblock, mon);
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < FLAVOR_COUNT; i++)
         {
             data = GetMonData(mon, gUnknown_085DFCB0[i]);
-            cstat = data +  gUnknown_0203BC90->field_66[i];
+            cstat = data +  sInfo->field_66[i];
             if (cstat < 0)
                 cstat = 0;
             if (cstat > 255)
@@ -994,28 +1019,28 @@ void sub_8167054(struct Pokeblock *pokeblock, struct Pokemon *mon)
     }
 }
 
-void sub_8167104(void)
+static void sub_8167104(void)
 {
     u16 i;
     struct Pokemon *mon = gPlayerParty;
-    mon += gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->info.field_71 * 4 + 9];
+    mon += sMenu->unk7FB0[sMenu->info.field_71 * 4 + 9];
 
-    Pokeblock_GetMonContestStats(mon, gUnknown_0203BC90->field_57);
-    sub_8167054(gUnknown_0203BC90->pokeblock, mon);
-    Pokeblock_GetMonContestStats(mon, gUnknown_0203BC90->field_5c);
-    for (i = 0; i < 5; i++)
-        gUnknown_0203BC90->field_61[i] = gUnknown_0203BC90->field_5c[i] - gUnknown_0203BC90->field_57[i];
+    GetMonConditions(mon, sInfo->field_57);
+    sub_8167054(sInfo->pokeblock, mon);
+    GetMonConditions(mon, sInfo->field_5c);
+    for (i = 0; i < FLAVOR_COUNT; i++)
+        sInfo->field_61[i] = sInfo->field_5c[i] - sInfo->field_57[i];
 }
 
-void sub_8167184(struct Pokeblock *pokeblock, struct Pokemon *mon)
+static void sub_8167184(struct Pokeblock *pokeblock, struct Pokemon *mon)
 {
     s8 i, direction, taste;
 
-    gUnknown_0203BC90->field_66[0] = pokeblock->spicy;
-    gUnknown_0203BC90->field_66[1] = pokeblock->sour;
-    gUnknown_0203BC90->field_66[2] = pokeblock->bitter;
-    gUnknown_0203BC90->field_66[3] = pokeblock->sweet;
-    gUnknown_0203BC90->field_66[4] = pokeblock->dry;
+    sInfo->field_66[0] = pokeblock->spicy;
+    sInfo->field_66[1] = pokeblock->sour;
+    sInfo->field_66[2] = pokeblock->bitter;
+    sInfo->field_66[3] = pokeblock->sweet;
+    sInfo->field_66[4] = pokeblock->dry;
 
     if (gPokeblockGain > 0)
         direction = 1;
@@ -1024,24 +1049,24 @@ void sub_8167184(struct Pokeblock *pokeblock, struct Pokemon *mon)
     else
         return;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < FLAVOR_COUNT; i++)
     {
-        s16 amount = gUnknown_0203BC90->field_66[i];
+        s16 amount = sInfo->field_66[i];
         s8 boost = amount / 10;
 
         if (amount % 10 >= 5) // round to the nearest
             boost++;
 
-        taste = GetMonFlavorRelation(mon, gUnknown_085DFCC4[i]);
+        taste = GetMonFlavorRelation(mon, sFlavors[i]);
         if (taste == direction)
-            gUnknown_0203BC90->field_66[i] += boost * taste;
+            sInfo->field_66[i] += boost * taste;
     }
 }
 
-bool8 IsSheenMaxed(void)
+static bool8 IsSheenMaxed(void)
 {
-    if (GetBoxOrPartyMonData(gUnknown_0203BCAC->field_7FB8[gUnknown_0203BCAC->info.field_71].unk0,
-                             gUnknown_0203BCAC->field_7FB8[gUnknown_0203BCAC->info.field_71].unk1,
+    if (GetBoxOrPartyMonData(sMenu->party[sMenu->info.field_71].boxId,
+                             sMenu->party[sMenu->info.field_71].monId,
                              MON_DATA_SHEEN,
                              NULL) == 255)
         return TRUE;
@@ -1049,7 +1074,7 @@ bool8 IsSheenMaxed(void)
         return FALSE;
 }
 
-u8 sub_81672A4(u8 a0)
+static u8 sub_81672A4(u8 a0)
 {
     u8 i;
 
@@ -1066,7 +1091,8 @@ u8 sub_81672A4(u8 a0)
     return 0;
 }
 
-u8 sub_81672E4(u8 partyCount)
+// TODO: Update
+static u8 GetNumNonEggPartyMons(u8 partyCount)
 {
     u8 i, numEggs;
 
@@ -1079,36 +1105,37 @@ u8 sub_81672E4(u8 partyCount)
     return partyCount - numEggs;
 }
 
-u8 sub_8167324(u8 a0)
+// Unused
+static u8 sub_8167324(u8 a0)
 {
     return sub_81672A4(a0);
 }
 
-void sub_8167338(void)
+static void sub_8167338(void)
 {
     u16 i, spriteId;
 
-    LoadSpriteSheet(&gSpriteSheet_ConditionUpDown);
-    LoadSpritePalette(&gSpritePalette_ConditionUpDown);
-    gUnknown_0203BC90->field_54 = 0;
+    LoadSpriteSheet(&sSpriteSheet_UpDown);
+    LoadSpritePalette(&sSpritePalette_UpDown);
+    sInfo->numEnhancements = 0;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < FLAVOR_COUNT; i++)
     {
-        if (gUnknown_0203BC90->field_61[i] != 0)
+        if (sInfo->field_61[i] != 0)
         {
-            spriteId = CreateSprite(&gSpriteTemplate_085DFD5C, gUnknown_085DFD28[i][0], gUnknown_085DFD28[i][1], 0);
+            spriteId = CreateSprite(&sSpriteTemplate_UpDown, gUnknown_085DFD28[i][0], gUnknown_085DFD28[i][1], 0);
             if (spriteId != MAX_SPRITES)
             {
-                if (gUnknown_0203BC90->field_61[i] != 0)
+                if (sInfo->field_61[i] != 0)
                     gSprites[spriteId].callback = sub_81673DC;
 
-                gUnknown_0203BC90->field_54++;
+                sInfo->numEnhancements++;
             }
         }
     }
 }
 
-void sub_81673DC(struct Sprite *sprite)
+static void sub_81673DC(struct Sprite *sprite)
 {
     if (sprite->data[0] < 6)
         sprite->pos2.y -= 2;
@@ -1118,11 +1145,11 @@ void sub_81673DC(struct Sprite *sprite)
     if (++sprite->data[0] > 60)
     {
         DestroySprite(sprite);
-        gUnknown_0203BC90->field_54--;
+        sInfo->numEnhancements--;
     }
 }
 
-void sub_8167420(void)
+static void sub_8167420(void)
 {
     u16 i;
     u16 numMons;
@@ -1131,91 +1158,91 @@ void sub_8167420(void)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            gUnknown_0203BCAC->field_7FB8[numMons].unk0 = 14;
-            gUnknown_0203BCAC->field_7FB8[numMons].unk1 = i;
-            gUnknown_0203BCAC->field_7FB8[numMons].unk2 = 0;
+            sMenu->party[numMons].boxId = TOTAL_BOXES_COUNT;
+            sMenu->party[numMons].monId = i;
+            sMenu->party[numMons].data = 0;
             numMons++;
         }
     }
 
-    gUnknown_0203BCAC->info.field_71 = 0;
-    gUnknown_0203BCAC->info.field_70 = numMons + 1;
+    sMenu->info.field_71 = 0;
+    sMenu->info.field_70 = numMons + 1;
     sub_81674BC();
 }
 
-void sub_81674BC(void)
+static void sub_81674BC(void)
 {
     s16 var, var2;
 
-    sub_816753C(gUnknown_0203BCAC->info.field_71, 0);
-    gUnknown_0203BCAC->field_7FB3 = 0;
-    gUnknown_0203BCAC->field_7FB4 = 1;
-    gUnknown_0203BCAC->field_7FB5 = 2;
+    sub_816753C(sMenu->info.field_71, 0);
+    sMenu->field_7FB3 = 0;
+    sMenu->field_7FB4 = 1;
+    sMenu->field_7FB5 = 2;
 
-    var = gUnknown_0203BCAC->info.field_71 + 1;
-    if (var >= gUnknown_0203BCAC->info.field_70)
+    var = sMenu->info.field_71 + 1;
+    if (var >= sMenu->info.field_70)
         var = 0;
 
-    var2 = gUnknown_0203BCAC->info.field_71 - 1;
+    var2 = sMenu->info.field_71 - 1;
     if (var2 < 0)
-        var2 = gUnknown_0203BCAC->info.field_70 - 1;
+        var2 = sMenu->info.field_70 - 1;
 
     sub_816753C(var, 1);
     sub_816753C(var2, 2);
 }
 
-void sub_816753C(s16 id1, u8 id2)
+static void sub_816753C(s16 id1, u8 id2)
 {
-    u8 boxId = gUnknown_0203BCAC->field_7FB8[id1].unk0;
-    u8 monId = gUnknown_0203BCAC->field_7FB8[id1].unk1;
-    u8 r6 = gUnknown_0203BCAC->info.field_70;
+    u8 boxId = sMenu->party[id1].boxId;
+    u8 monId = sMenu->party[id1].monId;
+    u8 r6 = sMenu->info.field_70;
     bool8 r8 = FALSE;
 
-    sub_81D2ED4(gUnknown_0203BCAC->field_7B4D[id2], gUnknown_0203BCAC->field_7B95[id2], boxId, monId, id1, r6, r8);
-    sub_81D2F78(&gUnknown_0203BCAC->field_7C58, gUnknown_0203BCAC->unk7FB0, boxId, monId, id1, id2, r6, r8);
-    sub_81D3094(gUnknown_0203BCAC->field_304[id2], gUnknown_0203BCAC->field_4[id2], boxId, monId, id1, r6, r8);
+    sub_81D2ED4(sMenu->field_7B4D[id2], sMenu->field_7B95[id2], boxId, monId, id1, r6, r8);
+    sub_81D2F78(&sMenu->field_7C58, sMenu->unk7FB0, boxId, monId, id1, id2, r6, r8);
+    sub_81D3094(sMenu->field_304[id2], sMenu->field_4[id2], boxId, monId, id1, r6, r8);
 }
 
-void sub_8167608(u8 arg0)
+static void sub_8167608(u8 arg0)
 {
     u8 spriteId;
     struct SpriteTemplate spriteTemplate;
     struct SpriteSheet spriteSheet;
     struct SpritePalette spritePal;
 
-    if (gUnknown_0203BCAC->field_7B10 == 0xFF)
+    if (sMenu->field_7B10 == 0xFF)
     {
         sub_81D31D0(&spriteSheet, &spriteTemplate, &spritePal);
-        spriteSheet.data = gUnknown_0203BCAC->field_304[arg0];
-        spritePal.data = gUnknown_0203BCAC->field_4[arg0];
-        gUnknown_0203BCAC->field_7B12 = LoadSpritePalette(&spritePal);
-        gUnknown_0203BCAC->field_7B14 = LoadSpriteSheet(&spriteSheet);
+        spriteSheet.data = sMenu->field_304[arg0];
+        spritePal.data = sMenu->field_4[arg0];
+        sMenu->field_7B12 = LoadSpritePalette(&spritePal);
+        sMenu->field_7B14 = LoadSpriteSheet(&spriteSheet);
         spriteId = CreateSprite(&spriteTemplate, 38, 104, 0);
-        gUnknown_0203BCAC->field_7B10 = spriteId;
+        sMenu->field_7B10 = spriteId;
         if (spriteId == MAX_SPRITES)
         {
             FreeSpriteTilesByTag(100);
             FreeSpritePaletteByTag(100);
-            gUnknown_0203BCAC->field_7B10 = 0xFF;
+            sMenu->field_7B10 = 0xFF;
         }
         else
         {
-            gUnknown_0203BCAC->field_7B10 = spriteId;
-            gSprites[gUnknown_0203BCAC->field_7B10].callback = sub_8168168;
-            gSprites[gUnknown_0203BCAC->field_7B10].pos2.y -= 34;
-            gUnknown_0203BCAC->field_7B18 = (void*)(OBJ_VRAM0 + (gUnknown_0203BCAC->field_7B14 * 32));
-            gUnknown_0203BCAC->field_7B12 = (gUnknown_0203BCAC->field_7B12 * 16) + 0x100;
+            sMenu->field_7B10 = spriteId;
+            gSprites[sMenu->field_7B10].callback = sub_8168168;
+            gSprites[sMenu->field_7B10].pos2.y -= 34;
+            sMenu->field_7B18 = (void*)(OBJ_VRAM0 + (sMenu->field_7B14 * 32));
+            sMenu->field_7B12 = (sMenu->field_7B12 * 16) + 0x100;
         }
     }
     else
     {
-        do {} while(0); // Surprised to see something like this? It's a very neat trick for generating the same assembly. It has no practical purpose, feel free to remove it.
-        DmaCopy16Defvars(3, gUnknown_0203BCAC->field_304[arg0], gUnknown_0203BCAC->field_7B18, 0x800);
-        LoadPalette(gUnknown_0203BCAC->field_4[arg0], gUnknown_0203BCAC->field_7B12, 32);
+        do {} while(0); // Only needed to match, feel free to remove.
+        DmaCopy16Defvars(3, sMenu->field_304[arg0], sMenu->field_7B18, 0x800);
+        LoadPalette(sMenu->field_4[arg0], sMenu->field_7B12, 32);
     }
 }
 
-void sub_8167760(void)
+static void sub_8167760(void)
 {
     u16 i, spriteId;
     struct SpriteSheet spriteSheets[4];
@@ -1224,22 +1251,22 @@ void sub_8167760(void)
     struct SpriteSheet spriteSheet2;
     struct SpritePalette spritePal2;
 
-    sub_81D321C(spriteSheets, &spriteTemplate, spritePals);
+    LoadConditionSelectionIcons(spriteSheets, &spriteTemplate, spritePals);
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePals);
 
-    for (i = 0; i < gUnknown_0203BCAC->info.field_70 - 1; i++)
+    for (i = 0; i < sMenu->info.field_70 - 1; i++)
     {
         spriteId = CreateSprite(&spriteTemplate, 226, (i * 20) + 8, 0);
         if (spriteId != MAX_SPRITES)
         {
-            gUnknown_0203BCAC->field_7B06[i] = spriteId;
+            sMenu->field_7B06[i] = spriteId;
             gSprites[spriteId].data[0] = i;
             gSprites[spriteId].callback = sub_8168180;
         }
         else
         {
-            gUnknown_0203BCAC->field_7B06[i] = -1;
+            sMenu->field_7B06[i] = -1;
         }
     }
 
@@ -1249,12 +1276,12 @@ void sub_8167760(void)
         spriteId = CreateSprite(&spriteTemplate, 230, (i * 20) + 8, 0);
         if (spriteId != MAX_SPRITES)
         {
-            gUnknown_0203BCAC->field_7B06[i] = spriteId;
+            sMenu->field_7B06[i] = spriteId;
             gSprites[spriteId].oam.size = 0;
         }
         else
         {
-            gUnknown_0203BCAC->field_7B06[i] = -1;
+            sMenu->field_7B06[i] = -1;
         }
     }
 
@@ -1263,23 +1290,23 @@ void sub_8167760(void)
     spriteId = CreateSprite(&spriteTemplate, 222, (i * 20) + 8, 0);
     if (spriteId != MAX_SPRITES)
     {
-        gUnknown_0203BCAC->field_7B06[i] = spriteId;
+        sMenu->field_7B06[i] = spriteId;
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
         gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
     }
     else
     {
-        gUnknown_0203BCAC->field_7B06[i] = -1;
+        sMenu->field_7B06[i] = -1;
     }
 
-    sub_81D32B0(&spriteSheet2, &spritePal2);
+    LoadConditionSparkle(&spriteSheet2, &spritePal2);
     LoadSpriteSheet(&spriteSheet2);
     LoadSpritePalette(&spritePal2);
 }
 
-bool8 sub_8167930(void)
+static bool8 LoadUsePokeblockGfx(void)
 {
-    switch (gUnknown_0203BCAC->info.unk78)
+    switch (sMenu->info.helperState)
     {
     case 0:
         ChangeBgX(0, 0, 0);
@@ -1290,88 +1317,88 @@ bool8 sub_8167930(void)
         ChangeBgY(2, 0, 0);
         ChangeBgX(3, 0, 0);
         ChangeBgY(3, 136 << 6, 0);
-        SetGpuReg(REG_OFFSET_DISPCNT, 28736);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2|BLDCNT_EFFECT_BLEND|BLDCNT_TGT2_BG1);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
         break;
     case 1:
-        gUnknown_0203BCA4 = Alloc(6656);
-        gUnknown_0203BCA0 = Alloc(1280);
-        gUnknown_0203BCA8 = Alloc(1280);
+        sGraph_Gfx = Alloc(6656);
+        sGraph_Tilemap = Alloc(1280);
+        sMonFrame_TilemapPtr = Alloc(1280);
         break;
     case 2:
-        LZ77UnCompVram(gUnknown_085DFB60, gUnknown_0203BCA8);
+        LZ77UnCompVram(sMonFrame_Tilemap, sMonFrame_TilemapPtr);
         break;
     case 3:
-        LoadBgTiles(3, gUnknown_085DFA80, 224, 0);
+        LoadBgTiles(3, sMonFrame_Gfx, 224, 0);
         break;
     case 4:
-         LoadBgTilemap(3, gUnknown_0203BCA8, 1280, 0);
+         LoadBgTilemap(3, sMonFrame_TilemapPtr, 1280, 0);
         break;
     case 5:
-        LoadPalette(gUnknown_085DFA60, 208, 32);
-        gUnknown_0203BCAC->field_7B0E = 0xFFB0;
+        LoadPalette(sMonFrame_Pal, 208, 32);
+        sMenu->field_7B0E = -80;
         break;
     case 6:
-        LZ77UnCompVram(gUsePokeblockGraph_Gfx, gUnknown_0203BCA4);
+        LZ77UnCompVram(gUsePokeblockGraph_Gfx, sGraph_Gfx);
         break;
     case 7:
-        LZ77UnCompVram(gUsePokeblockGraph_Tilemap, gUnknown_0203BCA0);
+        LZ77UnCompVram(gUsePokeblockGraph_Tilemap, sGraph_Tilemap);
         LoadPalette(gUsePokeblockGraph_Pal, 32, 32);
         break;
     case 8:
-        LoadBgTiles(1, gUnknown_0203BCA4, 6656, 160 << 2);
+        LoadBgTiles(1, sGraph_Gfx, 6656, 160 << 2);
         break;
     case 9:
-        SetBgTilemapBuffer(1, gUnknown_0203BCA0);
+        SetBgTilemapBuffer(1, sGraph_Tilemap);
         CopyToBgTilemapBufferRect(1, gUsePokeblockNatureWin_Pal, 0, 13, 12, 4);
         CopyBgTilemapBufferToVram(1);
         break;
     case 10:
-        LZ77UnCompVram(gUnknown_085DFC0C, gUnknown_0203BCAC->tilemapBuffer);
+        LZ77UnCompVram(sGraphData_Tilemap, sMenu->tilemapBuffer);
         break;
     case 11:
-        LoadBgTilemap(2, gUnknown_0203BCAC->tilemapBuffer, 1280, 0);
-        LoadPalette(gUnknown_086231E8, 48, 32);
+        LoadBgTilemap(2, sMenu->tilemapBuffer, 1280, 0);
+        LoadPalette(gConditionGraphData_Pal, 48, 32);
         LoadPalette(gUnknown_08623208, 240, 32);
         sub_81D21DC(2);
         break;
     default:
-        gUnknown_0203BCAC->info.unk78 = 0;
+        sMenu->info.helperState = 0;
         return FALSE;
     }
 
-    gUnknown_0203BCAC->info.unk78++;
+    sMenu->info.helperState++;
     return TRUE;
 }
 
-void sub_8167BA0(u16 arg0, u8 copyToVramMode)
+static void UpdateMonInfoText(u16 arg0, bool8 firstPrint)
 {
     u8 partyIndex;
     u8 nature;
     u8 *str;
 
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+    FillWindowPixelBuffer(WIN_NAME, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_NATURE, PIXEL_FILL(0));
+    if (sMenu->info.field_71 != sMenu->info.field_70 - 1)
     {
-        AddTextPrinterParameterized(0, 1, gUnknown_0203BCAC->field_7B95[arg0], 0, 1, 0, NULL);
-        partyIndex = sub_81672A4(gUnknown_0203BCAC->info.field_71);
+        AddTextPrinterParameterized(WIN_NAME, 1, sMenu->field_7B95[arg0], 0, 1, 0, NULL);
+        partyIndex = sub_81672A4(sMenu->info.field_71);
         nature = GetNature(&gPlayerParty[partyIndex]);
-        str = StringCopy(gUnknown_0203BCAC->info.field_7A, gText_NatureSlash);
+        str = StringCopy(sMenu->info.field_7A, gText_NatureSlash);
         str = StringCopy(str, gNatureNamePointers[nature]);
-        AddTextPrinterParameterized3(1, 1, 2, 1, sNatureTextColors, 0, gUnknown_0203BCAC->info.field_7A);
+        AddTextPrinterParameterized3(WIN_NATURE, 1, 2, 1, sNatureTextColors, 0, sMenu->info.field_7A);
     }
 
-    if (copyToVramMode)
+    if (firstPrint)
     {
-        CopyWindowToVram(0, 3);
-        CopyWindowToVram(1, 3);
+        CopyWindowToVram(WIN_NAME, 3);
+        CopyWindowToVram(WIN_NATURE, 3);
     }
     else
     {
-        CopyWindowToVram(0, 2);
-        CopyWindowToVram(1, 2);
+        CopyWindowToVram(WIN_NAME, 2);
+        CopyWindowToVram(WIN_NATURE, 2);
     }
 }
 
@@ -1381,86 +1408,86 @@ static void sub_8167CA0(bool8 arg0)
     bool32 r8, r4;
 
     if (arg0)
-        var0 = gUnknown_0203BCAC->field_7FB5;
+        var0 = sMenu->field_7FB5;
     else
-        var0 = gUnknown_0203BCAC->field_7FB4;
+        var0 = sMenu->field_7FB4;
 
     sub_81D1F84(
-        &gUnknown_0203BCAC->field_7C58,
-        gUnknown_0203BCAC->field_7C58.unk14[gUnknown_0203BCAC->field_7FB3],
-        gUnknown_0203BCAC->field_7C58.unk14[var0]);
+        &sMenu->field_7C58,
+        sMenu->field_7C58.unk14[sMenu->field_7FB3],
+        sMenu->field_7C58.unk14[var0]);
 
-    r8 = (gUnknown_0203BCAC->info.field_71 ^ (gUnknown_0203BCAC->info.field_70 - 1)) ? 1 : 0;
+    r8 = (sMenu->info.field_71 ^ (sMenu->info.field_70 - 1)) ? 1 : 0;
     if (arg0)
     {
-        gUnknown_0203BCAC->field_7FB5 = gUnknown_0203BCAC->field_7FB4;
-        gUnknown_0203BCAC->field_7FB4 = gUnknown_0203BCAC->field_7FB3;
-        gUnknown_0203BCAC->field_7FB3 = var0;
-        gUnknown_0203BCAC->field_7FB6 = gUnknown_0203BCAC->field_7FB5;
+        sMenu->field_7FB5 = sMenu->field_7FB4;
+        sMenu->field_7FB4 = sMenu->field_7FB3;
+        sMenu->field_7FB3 = var0;
+        sMenu->field_7FB6 = sMenu->field_7FB5;
 
-        gUnknown_0203BCAC->info.field_71 = (gUnknown_0203BCAC->info.field_71 == 0)
-            ? gUnknown_0203BCAC->info.field_70 - 1
-            : gUnknown_0203BCAC->info.field_71 - 1;
+        sMenu->info.field_71 = (sMenu->info.field_71 == 0)
+            ? sMenu->info.field_70 - 1
+            : sMenu->info.field_71 - 1;
 
-        gUnknown_0203BCAC->field_7B4C = (gUnknown_0203BCAC->info.field_71 == 0)
-            ? gUnknown_0203BCAC->info.field_70 - 1
-            : gUnknown_0203BCAC->info.field_71 - 1;
+        sMenu->field_7B4C = (sMenu->info.field_71 == 0)
+            ? sMenu->info.field_70 - 1
+            : sMenu->info.field_71 - 1;
     }
     else
     {
-        gUnknown_0203BCAC->field_7FB4 = gUnknown_0203BCAC->field_7FB5;
-        gUnknown_0203BCAC->field_7FB5 = gUnknown_0203BCAC->field_7FB3;
-        gUnknown_0203BCAC->field_7FB3 = var0;
-        gUnknown_0203BCAC->field_7FB6 = gUnknown_0203BCAC->field_7FB4;
+        sMenu->field_7FB4 = sMenu->field_7FB5;
+        sMenu->field_7FB5 = sMenu->field_7FB3;
+        sMenu->field_7FB3 = var0;
+        sMenu->field_7FB6 = sMenu->field_7FB4;
 
-        gUnknown_0203BCAC->info.field_71 = (gUnknown_0203BCAC->info.field_71 < gUnknown_0203BCAC->info.field_70 - 1)
-            ? gUnknown_0203BCAC->info.field_71 + 1
+        sMenu->info.field_71 = (sMenu->info.field_71 < sMenu->info.field_70 - 1)
+            ? sMenu->info.field_71 + 1
             : 0;
 
-        gUnknown_0203BCAC->field_7B4C = (gUnknown_0203BCAC->info.field_71 < gUnknown_0203BCAC->info.field_70 - 1)
-            ? gUnknown_0203BCAC->info.field_71 + 1
+        sMenu->field_7B4C = (sMenu->info.field_71 < sMenu->info.field_70 - 1)
+            ? sMenu->info.field_71 + 1
             : 0;
     }
 
-    r4 = (gUnknown_0203BCAC->info.field_71 ^ (gUnknown_0203BCAC->info.field_70 - 1)) ? 1 : 0;
-    sub_81D3520(gUnknown_0203BCAC->field_7B1C);
+    r4 = (sMenu->info.field_71 ^ (sMenu->info.field_70 - 1)) ? 1 : 0;
+    DestroyConditionSparkleSprites(sMenu->sparkles);
 
     if (!r8)
-        gUnknown_0203BCAC->info.unk74 = sub_8167EA4;
+        sMenu->info.unk74 = sub_8167EA4;
     else if (!r4)
-        gUnknown_0203BCAC->info.unk74 = sub_8167FA4;
+        sMenu->info.unk74 = sub_8167FA4;
     else
-        gUnknown_0203BCAC->info.unk74 = sub_8168048;
+        sMenu->info.unk74 = sub_8168048;
 }
 
 static u8 sub_8167EA4(void)
 {
-    switch (gUnknown_0203BCAC->info.unk78)
+    switch (sMenu->info.helperState)
     {
     case 0:
-        sub_8167608(gUnknown_0203BCAC->field_7FB3);
-        gUnknown_0203BCAC->info.unk78++;
+        sub_8167608(sMenu->field_7FB3);
+        sMenu->info.helperState++;
         break;
     case 1:
-        sub_8167BA0(gUnknown_0203BCAC->field_7FB3, 0);
-        gUnknown_0203BCAC->info.unk78++;
+        UpdateMonInfoText(sMenu->field_7FB3, FALSE);
+        sMenu->info.helperState++;
         break;
     case 2:
-        if (!sub_81D3178(&gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7B0E))
+        if (!sub_81D3178(&sMenu->field_7C58, &sMenu->field_7B0E))
         {
-            sub_816753C(gUnknown_0203BCAC->field_7B4C, gUnknown_0203BCAC->field_7FB6);
-            gUnknown_0203BCAC->info.unk78++;
+            sub_816753C(sMenu->field_7B4C, sMenu->field_7FB6);
+            sMenu->info.helperState++;
         }
         break;
     case 3:
-        sub_81D3464(gUnknown_0203BCAC->field_7B1C);
-        if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+        ResetConditionSparkleSprites(sMenu->sparkles);
+        if (sMenu->info.field_71 != sMenu->info.field_70 - 1)
         {
-            u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
-            sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
+            u8 var0 = sMenu->unk7FB0[sMenu->field_7FB3];
+            CreateConditionSparkleSprites(sMenu->sparkles, sMenu->field_7B10, var0);
         }
 
-        gUnknown_0203BCAC->info.unk78 = 0;
+        sMenu->info.helperState = 0;
         return FALSE;
     }
 
@@ -1469,22 +1496,22 @@ static u8 sub_8167EA4(void)
 
 static u8 sub_8167FA4(void)
 {
-    switch (gUnknown_0203BCAC->info.unk78)
+    switch (sMenu->info.helperState)
     {
     case 0:
-        if (!sub_81D31A4(&gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7B0E))
-            gUnknown_0203BCAC->info.unk78++;
+        if (!sub_81D31A4(&sMenu->field_7C58, &sMenu->field_7B0E))
+            sMenu->info.helperState++;
         break;
     case 1:
-        sub_8167BA0(gUnknown_0203BCAC->field_7FB3, 0);
-        gUnknown_0203BCAC->info.unk78++;
+        UpdateMonInfoText(sMenu->field_7FB3, FALSE);
+        sMenu->info.helperState++;
         break;
     case 2:
-        sub_816753C(gUnknown_0203BCAC->field_7B4C, gUnknown_0203BCAC->field_7FB6);
-        gUnknown_0203BCAC->info.unk78++;
+        sub_816753C(sMenu->field_7B4C, sMenu->field_7FB6);
+        sMenu->info.helperState++;
         break;
     case 3:
-        gUnknown_0203BCAC->info.unk78 = 0;
+        sMenu->info.helperState = 0;
         return FALSE;
     }
 
@@ -1493,68 +1520,68 @@ static u8 sub_8167FA4(void)
 
 static u8 sub_8168048(void)
 {
-    switch (gUnknown_0203BCAC->info.unk78)
+    switch (sMenu->info.helperState)
     {
     case 0:
-        sub_81D2074(&gUnknown_0203BCAC->field_7C58);
-        if (!sub_81D3150(&gUnknown_0203BCAC->field_7B0E))
+        sub_81D2074(&sMenu->field_7C58);
+        if (!sub_81D3150(&sMenu->field_7B0E))
         {
-            sub_8167608(gUnknown_0203BCAC->field_7FB3);
-            gUnknown_0203BCAC->info.unk78++;
+            sub_8167608(sMenu->field_7FB3);
+            sMenu->info.helperState++;
         }
         break;
     case 1:
-        sub_8167BA0(gUnknown_0203BCAC->field_7FB3, 0);
-        gUnknown_0203BCAC->info.unk78++;
+        UpdateMonInfoText(sMenu->field_7FB3, FALSE);
+        sMenu->info.helperState++;
         break;
     case 2:
-        if (!sub_81D3178(&gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7B0E))
+        if (!sub_81D3178(&sMenu->field_7C58, &sMenu->field_7B0E))
         {
-            sub_816753C(gUnknown_0203BCAC->field_7B4C, gUnknown_0203BCAC->field_7FB6);
-            gUnknown_0203BCAC->info.unk78++;
+            sub_816753C(sMenu->field_7B4C, sMenu->field_7FB6);
+            sMenu->info.helperState++;
         }
         break;
     case 3:
-        sub_81D3464(gUnknown_0203BCAC->field_7B1C);
-        if (gUnknown_0203BCAC->info.field_71 != gUnknown_0203BCAC->info.field_70 - 1)
+        ResetConditionSparkleSprites(sMenu->sparkles);
+        if (sMenu->info.field_71 != sMenu->info.field_70 - 1)
         {
-            u8 var0 = gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3];
-            sub_81D3480(gUnknown_0203BCAC->field_7B1C, gUnknown_0203BCAC->field_7B10, var0);
+            u8 var0 = sMenu->unk7FB0[sMenu->field_7FB3];
+            CreateConditionSparkleSprites(sMenu->sparkles, sMenu->field_7B10, var0);
         }
 
-        gUnknown_0203BCAC->info.unk78 = 0;
+        sMenu->info.helperState = 0;
         return FALSE;
     }
 
     return TRUE;
 }
 
-void sub_8168168(struct Sprite *sprite)
+static void sub_8168168(struct Sprite *sprite)
 {
-    sprite->pos1.x = gUnknown_0203BCAC->field_7B0E + 38;
+    sprite->pos1.x = sMenu->field_7B0E + 38;
 }
 
-void sub_8168180(struct Sprite *sprite)
+static void sub_8168180(struct Sprite *sprite)
 {
-    if (sprite->data[0] == gUnknown_0203BCAC->info.field_71)
+    if (sprite->data[0] == sMenu->info.field_71)
         StartSpriteAnim(sprite, 0);
     else
         StartSpriteAnim(sprite, 1);
 }
 
-void sub_81681B4(struct Sprite *sprite)
+static void sub_81681B4(struct Sprite *sprite)
 {
-    if (gUnknown_0203BCAC->info.field_71 == gUnknown_0203BCAC->info.field_70 - 1)
+    if (sMenu->info.field_71 == sMenu->info.field_70 - 1)
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(101);
     else
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(102);
 }
 
-void sub_81681F4(u8 monIndex)
+static void sub_81681F4(u8 monIndex)
 {
     u8 sheen = GetMonData(&gPlayerParty[monIndex], MON_DATA_SHEEN);
 
-    gUnknown_0203BCAC->unk7FB0[gUnknown_0203BCAC->field_7FB3] = (sheen != 255)
+    sMenu->unk7FB0[sMenu->field_7FB3] = (sheen != 255)
         ? sheen / 29
         : 9;
 }
@@ -1564,10 +1591,10 @@ static void sub_8168248(void)
     struct CompressedSpriteSheet spriteSheet;
     struct SpritePalette spritePalette;
 
-    spritePalette = gSpritePalette_085DFDB8;
+    spritePalette = sSpritePalette_Condition;
     spriteSheet.data = gUsePokeblockCondition_Gfx;
     spriteSheet.size = 0x800;
-    spriteSheet.tag = 1;
+    spriteSheet.tag = TAG_CONDITION;
     LoadCompressedSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
 }
@@ -1578,8 +1605,8 @@ static void sub_8168294(void)
     s16 xDiff, xStart;
     int yStart = 17;
     int var = 8;
-    struct Sprite **sprites = gUnknown_0203BCAC->field_7B44;
-    const struct SpriteTemplate *template = &gSpriteTemplate_085DFDA0;
+    struct Sprite **sprites = sMenu->condition;
+    const struct SpriteTemplate *template = &sSpriteTemplate_Condition;
 
     for (i = 0, xDiff = 64, xStart = -96; i < 2; i++)
     {
@@ -1597,22 +1624,22 @@ static void sub_8168294(void)
 
 static bool8 sub_8168328(void)
 {
-    switch (gUnknown_0203BCAC->info.unk78)
+    switch (sMenu->info.helperState)
     {
     case 0:
         sub_8168248();
-        gUnknown_0203BCAC->info.unk78++;
+        sMenu->info.helperState++;
         return TRUE;
     case 1:
         sub_8168294();
-        gUnknown_0203BCAC->info.unk78 = 0;
+        sMenu->info.helperState = 0;
         return FALSE;
     }
 
     return FALSE;
 }
 
-void sub_8168374(struct Sprite *sprite)
+static void sub_8168374(struct Sprite *sprite)
 {
     s16 prevX = sprite->pos1.x;
 
