@@ -1515,7 +1515,7 @@ static void Task_HandleBetGridInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        if ((sRoulette->hitFlags & sGridSelections[gTasks[taskId].tSelectionId].flag))
+        if (sRoulette->hitFlags & sGridSelections[gTasks[taskId].tSelectionId].flag)
         {
             // Ball has already landed on this space
             PlaySE(SE_BOO);
