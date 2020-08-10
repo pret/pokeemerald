@@ -25,7 +25,7 @@ u32 sub_81CE700(s32);
 BSS_DATA u8 gUnknown_030012BC;
 
 const u16 gConditionGraphData_Pal[] = INCBIN_U16("graphics/pokenav/condition/graph_data.gbapal");
-const u16 gUnknown_08623208[] = INCBIN_U16("graphics/pokenav/8623208.gbapal");
+const u16 gConditionText_Pal[] = INCBIN_U16("graphics/pokenav/condition/text.gbapal");
 const u32 gUnknown_08623228[] = INCBIN_U32("graphics/pokenav/8623228.4bpp.lz");
 const u32 gUnknown_0862323C[] = INCBIN_U32("graphics/pokenav/862323C.bin.lz");
 const u16 gUnknown_08623338[] = INCBIN_U16("graphics/pokenav/8623338.gbapal");
@@ -134,7 +134,7 @@ struct Pokenav7Struct
     u8 unk1823;
     struct PokemonMarkMenu monMarks;
     struct Sprite *unk28dc;
-    struct Sprite *unk28e0[10];
+    struct Sprite *unk28e0[MAX_CONDITION_SPARKLES];
     u8 unk2908;
     u8 filler2[0x38ac - 0x2909];
 };
@@ -226,7 +226,7 @@ u32 sub_81CDE94(s32 state)
 
         CopyBgTilemapBufferToVram(3);
         CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, 0x10, 0x20);
-        CopyPaletteIntoBufferUnfaded(gUnknown_08623208, 0xF0, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionText_Pal, 0xF0, 0x20);
         structPtr->unk1814 = -80;
         return LT_INC_AND_PAUSE;
     case 4:
@@ -804,7 +804,7 @@ void sub_81CED30(u8 var)
 
     if (structPtr->unk1816 == 0xFF)
     {
-        sub_81D31D0(&sprSheet, &sprTemplate, &sprPal);
+        LoadConditionMonPicTemplate(&sprSheet, &sprTemplate, &sprPal);
         sprSheet.data = sub_81CDCB4(var);
         sprPal.data = sub_81CDCD4(var);
         structPtr->unk1818 = LoadSpritePalette(&sprPal);

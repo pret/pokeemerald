@@ -191,18 +191,30 @@
 #define CHAR_NO            0x08
 #define CHAR_UNDERSCORE    0x09
 
-#define EXT_CTRL_CODE_COLOR     0x1
-#define EXT_CTRL_CODE_HIGHLIGHT 0x2
-#define EXT_CTRL_CODE_SHADOW    0x3
-//
-#define EXT_CTRL_CODE_UNKNOWN_7 0x7
-//
-#define EXT_CTRL_CODE_CLEAR     0x11
-//
-#define EXT_CTRL_CODE_CLEAR_TO  0x13
-#define EXT_CTRL_CODE_MIN_LETTER_SPACING 0x14
-#define EXT_CTRL_CODE_JPN       0x15
-#define EXT_CTRL_CODE_ENG       0x16
+#define EXT_CTRL_CODE_COLOR                  0x1
+#define EXT_CTRL_CODE_HIGHLIGHT              0x2
+#define EXT_CTRL_CODE_SHADOW                 0x3
+#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 0x4
+#define EXT_CTRL_CODE_PALETTE                0x5
+#define EXT_CTRL_CODE_SIZE                   0x6
+#define EXT_CTRL_CODE_UNKNOWN_7              0x7
+#define EXT_CTRL_CODE_PAUSE                  0x8
+#define EXT_CTRL_CODE_PAUSE_UNTIL_PRESS      0x9
+#define EXT_CTRL_CODE_WAIT_SE                0xA
+#define EXT_CTRL_CODE_PLAY_BGM               0xB
+#define EXT_CTRL_CODE_ESCAPE                 0xC
+#define EXT_CTRL_CODE_SHIFT_TEXT             0xD
+#define EXT_CTRL_CODE_UNKNOWN_E              0xE
+#define EXT_CTRL_CODE_UNKNOWN_F              0xF
+#define EXT_CTRL_CODE_PLAY_SE                0x10
+#define EXT_CTRL_CODE_CLEAR                  0x11
+#define EXT_CTRL_CODE_SKIP                   0x12
+#define EXT_CTRL_CODE_CLEAR_TO               0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING     0x14
+#define EXT_CTRL_CODE_JPN                    0x15
+#define EXT_CTRL_CODE_ENG                    0x16
+#define EXT_CTRL_CODE_PAUSE_MUSIC            0x17
+#define EXT_CTRL_CODE_RESUME_MUSIC           0x18
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1

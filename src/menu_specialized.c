@@ -23,11 +23,10 @@
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
+#include "constants/berry.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "gba/io_reg.h"
-
-#define TAG_CONDITION_SPARKLE 104
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
@@ -879,17 +878,18 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
     return ret;
 }
 
-static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
+// Gets the name/gender/level string for the condition menu
+static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
 {
     u16 species, level, gender;
     struct BoxPokemon *boxMon;
     u8 *str;
 
     *(dst++) = EXT_CTRL_CODE_BEGIN;
-    *(dst++) = 4;
-    *(dst++) = 8;
-    *(dst++) = 0;
-    *(dst++) = 9;
+    *(dst++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *(dst++) = TEXT_COLOR_BLUE;
+    *(dst++) = TEXT_COLOR_TRANSPARENT;
+    *(dst++) = TEXT_COLOR_LIGHT_BLUE;
     if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
     {
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
@@ -922,8 +922,8 @@ static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
             ;
 
         *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = 0x12;
-        *(str++) = 0x3C;
+        *(str++) = EXT_CTRL_CODE_SKIP;
+        *(str++) = 60;
 
         switch (gender)
         {
@@ -933,28 +933,28 @@ static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
         case MON_MALE:
             *(str++) = EXT_CTRL_CODE_BEGIN;
             *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = 4;
+            *(str++) = TEXT_COLOR_RED;
             *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = 3;
-            *(str++) = 5;
+            *(str++) = EXT_CTRL_CODE_SHADOW;
+            *(str++) = TEXT_COLOR_LIGHT_RED;
             *(str++) = CHAR_MALE;
             break;
         case MON_FEMALE:
             *(str++) = EXT_CTRL_CODE_BEGIN;
             *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = 6;
+            *(str++) = TEXT_COLOR_GREEN;
             *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = 3;
-            *(str++) = 7;
+            *(str++) = EXT_CTRL_CODE_SHADOW;
+            *(str++) = TEXT_COLOR_LIGHT_GREEN;
             *(str++) = CHAR_FEMALE;
             break;
         }
 
         *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = 4;
-        *(str++) = 8;
-        *(str++) = 0;
-        *(str++) = 9;
+        *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *(str++) = TEXT_COLOR_BLUE;
+        *(str++) = TEXT_COLOR_TRANSPARENT;
+        *(str++) = TEXT_COLOR_LIGHT_BLUE;
         *(str++) = CHAR_SLASH;
         *(str++) = CHAR_SPECIAL_F9;
         *(str++) = CHAR_LV_2;
@@ -966,7 +966,8 @@ static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
     }
 }
 
-static u8 *sub_81D2E7C(u8 *dst, const u8 *src, s16 n)
+// Buffers the string in src to dest up to n chars. If src is less than n chars, fill with spaces
+static u8 *BufferConditionMenuSpacedStringN(u8 *dst, const u8 *src, s16 n)
 {
     while (*src != EOS)
     {
@@ -980,50 +981,53 @@ static u8 *sub_81D2E7C(u8 *dst, const u8 *src, s16 n)
     return dst;
 }
 
-void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
-    if (!arg7)
-        arg6--;
+    // In this and the below 2 functions, numMons can be passed as the number of menu selections (which includes Cancel)
+    // To indicate that the Cancel needs to be subtracted they pass an additional bool
+    // Unclear why they didn't just subtract 1 when it gets passed instead
+    if (!excludesCancel)
+        numMons--;
 
-    if (arg5 != arg6)
+    if (partyId != numMons)
     {
-        sub_81D2CD0(nameDst, boxId, monId);
-        dst[0] = EXT_CTRL_CODE_BEGIN;
-        dst[1] = 4;
-        dst[2] = 8;
-        dst[3] = 0;
-        dst[4] = 9;
+        GetConditionMenuMonString(nameDst, boxId, monId);
+        locationDst[0] = EXT_CTRL_CODE_BEGIN;
+        locationDst[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        locationDst[2] = TEXT_COLOR_BLUE;
+        locationDst[3] = TEXT_COLOR_TRANSPARENT;
+        locationDst[4] = TEXT_COLOR_LIGHT_BLUE;
         if (boxId == TOTAL_BOXES_COUNT) // Party mon.
         {
-            sub_81D2E7C(dst + 5, gText_InParty, 8);
+            BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, 8);
         }
         else
         {
             boxId++;boxId--; // Again...Someone fix this maybe?
-            sub_81D2E7C(dst + 5, GetBoxNamePtr(boxId), 8);
+            BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(boxId), 8);
         }
     }
     else
     {
-        for (i = 0; i < 12; i++)
+        for (i = 0; i < POKEMON_NAME_LENGTH + 2; i++)
             nameDst[i] = CHAR_SPACE;
         nameDst[i] = EOS;
         for (i = 0; i < 8; i++)
-            dst[i] = CHAR_SPACE;
-        dst[i] = EOS;
+            locationDst[i] = CHAR_SPACE;
+        locationDst[i] = EOS;
     }
 }
 
-void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8)
+void GetConditionMenuMonConditions(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
-    if (!arg8)
-        arg7--;
+    if (!excludesCancel)
+        numMons--;
 
-    if (arg5 != arg7)
+    if (partyId != numMons)
     {
         arg0->unk0[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
         arg0->unk0[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
@@ -1039,7 +1043,7 @@ void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 m
     }
     else
     {
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < FLAVOR_COUNT; i++)
         {
             arg0->unk0[id][i] = 0;
             arg0->unk14[id][i].unk0 = 155;
@@ -1048,12 +1052,12 @@ void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 m
     }
 }
 
-void sub_81D3094(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
 {
-    if (!arg7)
-        arg6--;
+    if (!excludesCancel)
+        numMons--;
 
-    if (arg5 != arg6)
+    if (partyId != numMons)
     {
         u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
         u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
@@ -1155,14 +1159,15 @@ static const union AnimCmd *const sSpriteAnimTable_8625A40[] =
     sSpriteAnim_8625A38
 };
 
-void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
+// Just loads the generic data, up to the caller to load the actual sheet/pal for the specific mon
+void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {NULL, 0x800, 100};
+    struct SpriteSheet dataSheet = {NULL, 0x800, TAG_SPMENU_CONDITION_MON};
 
     struct SpriteTemplate dataTemplate =
     {
-        .tileTag = 100,
-        .paletteTag = 100,
+        .tileTag = TAG_SPMENU_CONDITION_MON,
+        .paletteTag = TAG_SPMENU_CONDITION_MON,
         .oam = &sOamData_8625A20,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -1170,7 +1175,7 @@ void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, str
         .callback = SpriteCallbackDummy,
     };
 
-    struct SpritePalette dataPal = {NULL, 100};
+    struct SpritePalette dataPal = {NULL, TAG_SPMENU_CONDITION_MON};
 
     *sheet = dataSheet;
     *template = dataTemplate;
@@ -1183,23 +1188,23 @@ void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTempla
 
     struct SpriteSheet dataSheets[] =
     {
-        {sConditionPokeball_Gfx, 0x100, 101},
-        {sConditionPokeballPlaceholder_Gfx, 0x20, 103},
-        {gPokenavConditionCancel_Gfx, 0x100, 102},
+        {sConditionPokeball_Gfx, 0x100, TAG_SPMENU_CONDITION_BALL},
+        {sConditionPokeballPlaceholder_Gfx, 0x20, TAG_SPMENU_CONDITION_BALL_PLACEHOLDER},
+        {gPokenavConditionCancel_Gfx, 0x100, TAG_SPMENU_CONDITION_CANCEL},
         {},
     };
 
     struct SpritePalette dataPals[] =
     {
-        {gPokenavConditionCancel_Pal, 101},
-        {gPokenavConditionCancel_Pal + 16, 102},
+        {gPokenavConditionCancel_Pal, TAG_SPMENU_CONDITION_BALL},
+        {gPokenavConditionCancel_Pal + 16, TAG_SPMENU_CONDITION_CANCEL},
         {},
     };
 
     struct SpriteTemplate dataTemplate =
     {
-        .tileTag = 101,
-        .paletteTag = 101,
+        .tileTag = TAG_SPMENU_CONDITION_BALL,
+        .paletteTag = TAG_SPMENU_CONDITION_BALL,
         .oam = &sOamData_8625A28,
         .anims = sSpriteAnimTable_8625A40,
         .images = NULL,
@@ -1218,8 +1223,8 @@ void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTempla
 
 void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {sConditionSparkle_Pal, 0x380, TAG_CONDITION_SPARKLE};
-    struct SpritePalette dataPal = {sConditionSparkle_Gfx, TAG_CONDITION_SPARKLE};
+    struct SpriteSheet dataSheet = {sConditionSparkle_Pal, 0x380, TAG_SPMENU_CONDITION_SPARKLE};
+    struct SpritePalette dataPal = {sConditionSparkle_Gfx, TAG_SPMENU_CONDITION_SPARKLE};
 
     *sheet = dataSheet;
     *pal = dataPal;
@@ -1292,8 +1297,8 @@ static const union AnimCmd *const *const sUnknown_08625B10 = sSpriteAnimTable_86
 
 static const struct SpriteTemplate sSpriteTemplate_ConditionSparkle =
 {
-    .tileTag = TAG_CONDITION_SPARKLE,
-    .paletteTag = TAG_CONDITION_SPARKLE,
+    .tileTag = TAG_SPMENU_CONDITION_SPARKLE,
+    .paletteTag = TAG_SPMENU_CONDITION_SPARKLE,
     .oam = &sOam_ConditionSparkle,
     .anims = sAnims_ConditionSparkle,
     .images = NULL,
@@ -1335,7 +1340,7 @@ static void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
 {
     u16 i;
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
     {
         if (sprites[i] != NULL)
         {
@@ -1375,11 +1380,11 @@ void ResetConditionSparkleSprites(struct Sprite **sprites)
 {
     u8 i;
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
         sprites[i] = NULL;
 }
 
-void CreateConditionSparkleSprites(struct Sprite **sprites, u8 arg1, u8 _count)
+void CreateConditionSparkleSprites(struct Sprite **sprites, u8 monSpriteId, u8 _count)
 {
     u16 i, spriteId, firstSpriteId = 0;
     u8 count = _count;
@@ -1391,7 +1396,7 @@ void CreateConditionSparkleSprites(struct Sprite **sprites, u8 arg1, u8 _count)
         {
             sprites[i] = &gSprites[spriteId];
             sprites[i]->invisible = TRUE;
-            sprites[i]->data[4] = arg1;
+            sprites[i]->data[4] = monSpriteId;
             if (i != 0)
                 sprites[i - 1]->data[5] = spriteId;
             else
@@ -1411,7 +1416,7 @@ void DestroyConditionSparkleSprites(struct Sprite **sprites)
 {
     u16 i;
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
     {
         if (sprites[i] != NULL)
         {
@@ -1428,8 +1433,8 @@ void DestroyConditionSparkleSprites(struct Sprite **sprites)
 void FreeConditionSparkles(struct Sprite **sprites)
 {
     DestroyConditionSparkleSprites(sprites);
-    FreeSpriteTilesByTag(TAG_CONDITION_SPARKLE);
-    FreeSpritePaletteByTag(TAG_CONDITION_SPARKLE);
+    FreeSpriteTilesByTag(TAG_SPMENU_CONDITION_SPARKLE);
+    FreeSpritePaletteByTag(TAG_SPMENU_CONDITION_SPARKLE);
 }
 
 static void SpriteCB_ConditionSparkle(struct Sprite *sprite)

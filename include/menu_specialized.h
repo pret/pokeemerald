@@ -6,6 +6,14 @@
 #include "list_menu.h"
 #include "pokemon.h"
 
+#define TAG_SPMENU_CONDITION_MON  100
+#define TAG_SPMENU_CONDITION_BALL 101
+#define TAG_SPMENU_CONDITION_CANCEL 102
+#define TAG_SPMENU_CONDITION_BALL_PLACEHOLDER 103
+#define TAG_SPMENU_CONDITION_SPARKLE 104
+
+#define MAX_CONDITION_SPARKLES 10
+
 struct UnknownSubStruct_81D1ED4
 {
     u16 unk0;
@@ -47,18 +55,18 @@ void MoveRelearnerCreateYesNoMenu(void);
 u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
 void InitMoveRelearnerWindows(bool8 useContextWindow);
 s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst);
-void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7);
-void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8);
-void sub_81D3094(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7);
+void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel);
+void GetConditionMenuMonConditions(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel);
+void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel);
 bool8 sub_81D312C(s16 *var);
 bool8 sub_81D3150(s16 *var);
 bool8 sub_81D3178(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1);
 bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1);
-void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
+void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
 void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals);
 void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal);
 void ResetConditionSparkleSprites(struct Sprite **sprites);
-void CreateConditionSparkleSprites(struct Sprite **sprites, u8 arg1, u8 arg2);
+void CreateConditionSparkleSprites(struct Sprite **sprites, u8 monSpriteId, u8 count);
 void DestroyConditionSparkleSprites(struct Sprite **sprites);
 void FreeConditionSparkles(struct Sprite **sprites);
 void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
