@@ -3135,7 +3135,7 @@ void SwitchInClearSetData(void)
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
         for (i = 0; i < NUM_BATTLE_STATS; i++)
-            gBattleMons[gActiveBattler].statStages[i] = 6;
+            gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
         for (i = 0; i < gBattlersCount; i++)
         {
             if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].battlerPreventingEscape == gActiveBattler)
@@ -3244,7 +3244,7 @@ void FaintClearSetData(void)
     u8 *ptr;
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
-        gBattleMons[gActiveBattler].statStages[i] = 6;
+        gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
 
     gBattleMons[gActiveBattler].status2 = 0;
     gStatuses3[gActiveBattler] = 0;
@@ -3398,7 +3398,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(gActiveBattler)];
             *hpOnSwitchout = gBattleMons[gActiveBattler].hp;
             for (i = 0; i < NUM_BATTLE_STATS; i++)
-                gBattleMons[gActiveBattler].statStages[i] = 6;
+                gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
             gBattleMons[gActiveBattler].status2 = 0;
         }
 
