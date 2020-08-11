@@ -2756,7 +2756,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             {
                 dst[dstID] = EXT_CTRL_CODE_BEGIN;
                 dstID++;
-                dst[dstID] = 9;
+                dst[dstID] = EXT_CTRL_CODE_PAUSE_UNTIL_PRESS;
                 dstID++;
             }
         }

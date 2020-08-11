@@ -67,19 +67,19 @@ const struct GlyphWidthFunc gGlyphWidthFuncs[] =
 
 const struct KeypadIcon gKeypadIcons[] =
 {
-    {  0x0,  0x8, 0xC },
-    {  0x1,  0x8, 0xC },
-    {  0x2, 0x10, 0xC },
-    {  0x4, 0x10, 0xC },
-    {  0x6, 0x18, 0xC },
-    {  0x9, 0x18, 0xC },
-    {  0xC,  0x8, 0xC },
-    {  0xD,  0x8, 0xC },
-    {  0xE,  0x8, 0xC },
-    {  0xF,  0x8, 0xC },
-    { 0x20,  0x8, 0xC },
-    { 0x21,  0x8, 0xC },
-    { 0x22,  0x8, 0xC }
+    [CHAR_A_BUTTON]       = {  0x0,  0x8, 0xC },
+    [CHAR_B_BUTTON]       = {  0x1,  0x8, 0xC },
+    [CHAR_L_BUTTON]       = {  0x2, 0x10, 0xC },
+    [CHAR_R_BUTTON]       = {  0x4, 0x10, 0xC },
+    [CHAR_START_BUTTON]   = {  0x6, 0x18, 0xC },
+    [CHAR_SELECT_BUTTON]  = {  0x9, 0x18, 0xC },
+    [CHAR_DPAD_UP]        = {  0xC,  0x8, 0xC },
+    [CHAR_DPAD_DOWN]      = {  0xD,  0x8, 0xC },
+    [CHAR_DPAD_LEFT]      = {  0xE,  0x8, 0xC },
+    [CHAR_DPAD_RIGHT]     = {  0xF,  0x8, 0xC },
+    [CHAR_DPAD_UPDOWN]    = { 0x20,  0x8, 0xC },
+    [CHAR_DPAD_LEFTRIGHT] = { 0x21,  0x8, 0xC },
+    [CHAR_DPAD_NONE]      = { 0x22,  0x8, 0xC }
 };
 
 const u8 gKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
@@ -1609,22 +1609,22 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->printerTemplate.currentChar++;
             switch (currChar)
             {
-            case 1:
+            case EXT_CTRL_CODE_COLOR:
                 textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 2:
+            case EXT_CTRL_CODE_HIGHLIGHT:
                 textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 3:
+            case EXT_CTRL_CODE_SHADOW:
                 textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 4:
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                 textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
@@ -1633,63 +1633,63 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 5:
+            case EXT_CTRL_CODE_PALETTE:
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 6:
+            case EXT_CTRL_CODE_SIZE:
                 subStruct->glyphId = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case EXT_CTRL_CODE_UNKNOWN_7:
+            case EXT_CTRL_CODE_RESET_SIZE:
                 return 2;
-            case 8:
+            case EXT_CTRL_CODE_PAUSE:
                 textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 textPrinter->state = 6;
                 return 2;
-            case 9:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
                 textPrinter->state = 1;
                 if (gTextFlags.autoScroll)
                     subStruct->autoScrollDelay = 0;
                 return 3;
-            case 10:
+            case EXT_CTRL_CODE_WAIT_SE:
                 textPrinter->state = 5;
                 return 3;
-            case 11:
+            case EXT_CTRL_CODE_PLAY_BGM:
                 currChar = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 currChar |= *textPrinter->printerTemplate.currentChar << 8;
                 textPrinter->printerTemplate.currentChar++;
                 PlayBGM(currChar);
                 return 2;
-            case 12:
+            case EXT_CTRL_CODE_ESCAPE:
                 currChar = *textPrinter->printerTemplate.currentChar | 0x100;
                 textPrinter->printerTemplate.currentChar++;
                 break;
-            case 16:
+            case EXT_CTRL_CODE_PLAY_SE:
                 currChar = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 currChar |= (*textPrinter->printerTemplate.currentChar << 8);
                 textPrinter->printerTemplate.currentChar++;
                 PlaySE(currChar);
                 return 2;
-            case 13:
+            case EXT_CTRL_CODE_SHIFT_TEXT:
                 textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x + *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 14:
+            case EXT_CTRL_CODE_SHIFT_DOWN:
                 textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y + *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 15:
+            case EXT_CTRL_CODE_FILL_WINDOW:
                 FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
                 return 2;
-            case 23:
+            case EXT_CTRL_CODE_PAUSE_MUSIC:
                 m4aMPlayStop(&gMPlayInfo_BGM);
                 return 2;
-            case 24:
+            case EXT_CTRL_CODE_RESUME_MUSIC:
                 m4aMPlayContinue(&gMPlayInfo_BGM);
                 return 2;
             case EXT_CTRL_CODE_CLEAR:
@@ -1702,7 +1702,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                     return 0;
                 }
                 return 2;
-            case 18:
+            case EXT_CTRL_CODE_SKIP:
                 textPrinter->printerTemplate.currentX = *textPrinter->printerTemplate.currentChar + textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
@@ -1739,11 +1739,11 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->state = 3;
             TextPrinterInitDownArrowCounters(textPrinter);
             return 3;
-        case CHAR_SPECIAL_F9:
+        case CHAR_EXTRA_SYMBOL:
             currChar = *textPrinter->printerTemplate.currentChar | 0x100;
             textPrinter->printerTemplate.currentChar++;
             break;
-        case CHAR_SPECIAL_F8:
+        case CHAR_KEYPAD_ICON:
             currChar = *textPrinter->printerTemplate.currentChar++;
             gUnknown_03002F90.unk80 = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
             textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing;
@@ -1891,45 +1891,45 @@ u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
             temp2 = strLocal[strPos++];
             switch (temp2)
             {
-            case 0x4:
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                 ++strPos;
-            case 0xB:
-            case 0x10:
+            case EXT_CTRL_CODE_PLAY_BGM:
+            case EXT_CTRL_CODE_PLAY_SE:
                 ++strPos;
-            case 0x1:
-            case 0x2:
-            case 0x3:
-            case 0x5:
-            case 0x6:
-            case 0x8:
-            case 0xC:
-            case 0xD:
-            case 0xE:
-            case 0x11:
-            case 0x12:
-            case 0x13:
-            case 0x14:
+            case EXT_CTRL_CODE_COLOR:
+            case EXT_CTRL_CODE_HIGHLIGHT:
+            case EXT_CTRL_CODE_SHADOW:
+            case EXT_CTRL_CODE_PALETTE:
+            case EXT_CTRL_CODE_SIZE:
+            case EXT_CTRL_CODE_PAUSE:
+            case EXT_CTRL_CODE_ESCAPE:
+            case EXT_CTRL_CODE_SHIFT_TEXT:
+            case EXT_CTRL_CODE_SHIFT_DOWN:
+            case EXT_CTRL_CODE_CLEAR:
+            case EXT_CTRL_CODE_SKIP:
+            case EXT_CTRL_CODE_CLEAR_TO:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 ++strPos;
                 break;
-            case EXT_CTRL_CODE_UNKNOWN_7:
-            case 0x9:
-            case 0xA:
-            case 0xF:
+            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
             case EXT_CTRL_CODE_ENG:
             default:
                 break;
             }
             break;
-        case CHAR_SPECIAL_F7:
+        case CHAR_DYNAMIC:
         case PLACEHOLDER_BEGIN:
             ++strPos;
             break;
         case CHAR_PROMPT_SCROLL:
         case CHAR_PROMPT_CLEAR:
             break;
-        case CHAR_SPECIAL_F8:
-        case CHAR_SPECIAL_F9:
+        case CHAR_KEYPAD_ICON:
+        case CHAR_EXTRA_SYMBOL:
             ++strPos;
         default:
             ++width;
@@ -1999,19 +1999,19 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case PLACEHOLDER_BEGIN:
             switch (*++str)
             {
-                case 0x2:
+                case PLACEHOLDER_ID_STRING_VAR_1:
                     bufferPointer = gStringVar1;
                     break;
-                case 0x3:
+                case PLACEHOLDER_ID_STRING_VAR_2:
                     bufferPointer = gStringVar2;
                     break;
-                case 0x4:
+                case PLACEHOLDER_ID_STRING_VAR_3:
                     bufferPointer = gStringVar3;
                     break;
                 default:
                     return 0;
             }
-        case CHAR_SPECIAL_F7:
+        case CHAR_DYNAMIC:
             if (bufferPointer == NULL)
                 bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
             while (*bufferPointer != EOS)
@@ -2035,40 +2035,40 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case EXT_CTRL_CODE_BEGIN:
             switch (*++str)
             {
-            case 0x4:
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                 ++str;
-            case 0xB:
-            case 0x10:
+            case EXT_CTRL_CODE_PLAY_BGM:
+            case EXT_CTRL_CODE_PLAY_SE:
                 ++str;
-            case 0x1:
-            case 0x2:
-            case 0x3:
-            case 0x5:
-            case 0x8:
-            case 0xC:
-            case 0xD:
-            case 0xE:
+            case EXT_CTRL_CODE_COLOR:
+            case EXT_CTRL_CODE_HIGHLIGHT:
+            case EXT_CTRL_CODE_SHADOW:
+            case EXT_CTRL_CODE_PALETTE:
+            case EXT_CTRL_CODE_PAUSE:
+            case EXT_CTRL_CODE_ESCAPE:
+            case EXT_CTRL_CODE_SHIFT_TEXT:
+            case EXT_CTRL_CODE_SHIFT_DOWN:
                 ++str;
                 break;
-            case 0x6:
+            case EXT_CTRL_CODE_SIZE:
                 func = GetFontWidthFunc(*++str);
                 if (func == NULL)
                     return 0;
                 if (letterSpacing == -1)
                     localLetterSpacing = GetFontAttribute(*str, FONTATTR_LETTER_SPACING);
                 break;
-            case 0x11:
+            case EXT_CTRL_CODE_CLEAR:
                 glyphWidth = *++str;
                 lineWidth += glyphWidth;
                 break;
-            case 0x12:
+            case EXT_CTRL_CODE_SKIP:
                 lineWidth = *++str;
                 break;
-            case 0x13:
+            case EXT_CTRL_CODE_CLEAR_TO:
                 if (*++str > lineWidth)
                     lineWidth = *str;
                 break;
-            case 0x14:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 minGlyphWidth = *++str;
                 break;
             case EXT_CTRL_CODE_JPN:
@@ -2077,17 +2077,17 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_ENG:
                 isJapanese = 0;
                 break;
-            case EXT_CTRL_CODE_UNKNOWN_7:
-            case 0x9:
-            case 0xA:
-            case 0xF:
+            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
             default:
                 break;
             }
             break;
-        case CHAR_SPECIAL_F8:
-        case CHAR_SPECIAL_F9:
-            if (*str == CHAR_SPECIAL_F9)
+        case CHAR_KEYPAD_ICON:
+        case CHAR_EXTRA_SYMBOL:
+            if (*str == CHAR_EXTRA_SYMBOL)
                 glyphWidth = func(*++str | 0x100, isJapanese);
             else
                 glyphWidth = GetKeypadIconWidth(*++str);
@@ -2146,11 +2146,11 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
 
     SaveTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
 
-    fgColor = 1;
-    bgColor = 0;
-    shadowColor = 3;
+    fgColor = TEXT_COLOR_WHITE;
+    bgColor = TEXT_COLOR_TRANSPARENT;
+    shadowColor = TEXT_COLOR_LIGHT_GREY;
 
-    GenerateFontHalfRowLookupTable(1, 0, 3);
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GREY);
     strLocal = str;
     strPos = 0;
 
@@ -2163,54 +2163,54 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
             temp2 = strLocal[strPos++];
             switch (temp2)
             {
-            case 0x4:
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                 fgColor = strLocal[strPos++];
                 bgColor = strLocal[strPos++];
                 shadowColor = strLocal[strPos++];
                 GenerateFontHalfRowLookupTable(fgColor, bgColor, shadowColor);
                 continue;
-            case 0x1:
+            case EXT_CTRL_CODE_COLOR:
                 fgColor = strLocal[strPos++];
                 GenerateFontHalfRowLookupTable(fgColor, bgColor, shadowColor);
                 continue;
-            case 0x2:
+            case EXT_CTRL_CODE_HIGHLIGHT:
                 bgColor = strLocal[strPos++];
                 GenerateFontHalfRowLookupTable(fgColor, bgColor, shadowColor);
                 continue;
-            case 0x3:
+            case EXT_CTRL_CODE_SHADOW:
                 shadowColor = strLocal[strPos++];
                 GenerateFontHalfRowLookupTable(fgColor, bgColor, shadowColor);
                 continue;
-            case 0x6:
+            case EXT_CTRL_CODE_SIZE:
                 fontId = strLocal[strPos++];
                 break;
-            case 0xB:
-            case 0x10:
+            case EXT_CTRL_CODE_PLAY_BGM:
+            case EXT_CTRL_CODE_PLAY_SE:
                 ++strPos;
-            case 0x5:
-            case 0x8:
-            case 0xC:
-            case 0xD:
-            case 0xE:
-            case 0x11:
-            case 0x12:
-            case 0x13:
-            case 0x14:
+            case EXT_CTRL_CODE_PALETTE:
+            case EXT_CTRL_CODE_PAUSE:
+            case EXT_CTRL_CODE_ESCAPE:
+            case EXT_CTRL_CODE_SHIFT_TEXT:
+            case EXT_CTRL_CODE_SHIFT_DOWN:
+            case EXT_CTRL_CODE_CLEAR:
+            case EXT_CTRL_CODE_SKIP:
+            case EXT_CTRL_CODE_CLEAR_TO:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
                 ++strPos;
                 break;
-            case EXT_CTRL_CODE_UNKNOWN_7:
-            case 0x9:
-            case 0xA:
-            case 0xF:
+            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
             case EXT_CTRL_CODE_ENG:
             default:
                 continue;
             }
             break;
-        case CHAR_SPECIAL_F7:
-        case CHAR_SPECIAL_F8:
-        case CHAR_SPECIAL_F9:
+        case CHAR_DYNAMIC:
+        case CHAR_KEYPAD_ICON:
+        case CHAR_EXTRA_SYMBOL:
         case PLACEHOLDER_BEGIN:
             ++strPos;
             break;

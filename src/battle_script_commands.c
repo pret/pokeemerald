@@ -6340,15 +6340,13 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     AddTextPrinter(&printerTemplate, 0xFF, NULL);
 
     txtPtr = gStringVar4;
-    gStringVar4[0] = CHAR_SPECIAL_F9;
-    txtPtr++;
-    txtPtr[0] = CHAR_LV_2;
-    txtPtr++;
+    *(txtPtr)++ = CHAR_EXTRA_SYMBOL;
+    *(txtPtr)++ = CHAR_LV_2;
 
     var = (u32)(txtPtr);
     txtPtr = ConvertIntToDecimalStringN(txtPtr, monLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     var = (u32)(txtPtr) - var;
-    txtPtr = StringFill(txtPtr, 0x77, 4 - var);
+    txtPtr = StringFill(txtPtr, CHAR_UNK_SPACER, 4 - var);
 
     if (monGender != MON_GENDERLESS)
     {

@@ -884,10 +884,10 @@ static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
     u8 *str;
 
     *(dst++) = EXT_CTRL_CODE_BEGIN;
-    *(dst++) = 4;
-    *(dst++) = 8;
-    *(dst++) = 0;
-    *(dst++) = 9;
+    *(dst++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *(dst++) = TEXT_COLOR_BLUE;
+    *(dst++) = TEXT_COLOR_TRANSPARENT;
+    *(dst++) = TEXT_COLOR_LIGHT_BLUE;
     if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
     {
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
@@ -920,8 +920,8 @@ static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
             ;
 
         *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = 0x12;
-        *(str++) = 0x3C;
+        *(str++) = EXT_CTRL_CODE_SKIP;
+        *(str++) = 60;
 
         switch (gender)
         {
@@ -931,30 +931,30 @@ static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
         case MON_MALE:
             *(str++) = EXT_CTRL_CODE_BEGIN;
             *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = 4;
+            *(str++) = TEXT_COLOR_RED;
             *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = 3;
-            *(str++) = 5;
+            *(str++) = EXT_CTRL_CODE_SHADOW;
+            *(str++) = TEXT_COLOR_LIGHT_RED;
             *(str++) = CHAR_MALE;
             break;
         case MON_FEMALE:
             *(str++) = EXT_CTRL_CODE_BEGIN;
             *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = 6;
+            *(str++) = TEXT_COLOR_GREEN;
             *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = 3;
-            *(str++) = 7;
+            *(str++) = EXT_CTRL_CODE_SHADOW;
+            *(str++) = TEXT_COLOR_LIGHT_GREEN;
             *(str++) = CHAR_FEMALE;
             break;
         }
 
         *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = 4;
-        *(str++) = 8;
-        *(str++) = 0;
-        *(str++) = 9;
+        *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *(str++) = TEXT_COLOR_BLUE;
+        *(str++) = TEXT_COLOR_TRANSPARENT;
+        *(str++) = TEXT_COLOR_LIGHT_BLUE;
         *(str++) = CHAR_SLASH;
-        *(str++) = CHAR_SPECIAL_F9;
+        *(str++) = CHAR_EXTRA_SYMBOL;
         *(str++) = CHAR_LV_2;
         str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
         *(str++) = CHAR_SPACE;
@@ -989,10 +989,10 @@ void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6,
     {
         sub_81D2CD0(nameDst, boxId, monId);
         dst[0] = EXT_CTRL_CODE_BEGIN;
-        dst[1] = 4;
-        dst[2] = 8;
-        dst[3] = 0;
-        dst[4] = 9;
+        dst[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        dst[2] = TEXT_COLOR_BLUE;
+        dst[3] = TEXT_COLOR_TRANSPARENT;
+        dst[4] = TEXT_COLOR_LIGHT_BLUE;
         if (boxId == TOTAL_BOXES_COUNT) // Party mon.
         {
             sub_81D2E7C(dst + 5, gText_InParty, 8);
