@@ -25,7 +25,7 @@ struct PokenavSub11
     u8 fill2[0x6320 - 0x6308];
     u8 unk6320[3][24];
     u8 unk6368[3][64];
-    struct UnknownStruct_81D1ED4 unk6428;
+    struct ConditionGraph unk6428;
     u8 unk6780[3];
     u8 unk6783[3];
     s8 unk6786;
@@ -546,7 +546,7 @@ u16 sub_81CDC60(void)
     return unkPtr->unk2;
 }
 
-struct UnknownStruct_81D1ED4 *sub_81CDC70(void)
+struct ConditionGraph *sub_81CDC70(void)
 {
     struct PokenavSub11 *structPtr = GetSubstructPtr(11);
     return &structPtr->unk6428;

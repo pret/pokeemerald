@@ -323,7 +323,7 @@ u32 sub_81CDE94(s32 state)
         sub_81CEE74(TRUE);
         return LT_INC_AND_PAUSE;
     case 20:
-        if (!sub_81D3178(sub_81CDC70(), &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOn(sub_81CDC70(), &structPtr->unk1814))
         {
             ResetConditionSparkleSprites(structPtr->unk28e0);
             if (sub_81CDD5C() == TRUE || sub_81CDC60() != sub_81CDC50())
@@ -348,7 +348,7 @@ u32 sub_81CE2D0(s32 state)
         DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 1:
-        if (sub_81D31A4(sub_81CDC70(), &structPtr->unk1814))
+        if (TryUpdateConditionMonTransitionOff(sub_81CDC70(), &structPtr->unk1814))
             return 2;
         sub_81CEE74(FALSE);
         return 1;
@@ -373,7 +373,7 @@ u32 sub_81CE2D0(s32 state)
 u32 sub_81CE37C(s32 state)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(0xC);
-    struct UnknownStruct_81D1ED4 *unkPtr = sub_81CDC70();
+    struct ConditionGraph *unkPtr = sub_81CDC70();
 
     switch (state)
     {
@@ -388,10 +388,10 @@ u32 sub_81CE37C(s32 state)
         DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 3:
-        sub_81D2074(unkPtr);
+        TransitionConditionGraph(unkPtr);
         return 1;
     case 4:
-        if (!sub_81D3150(&structPtr->unk1814))
+        if (!MoveConditionMonOffscreen(&structPtr->unk1814))
         {
             sub_81CED30(sub_81CDC84());
             return 1;
@@ -412,7 +412,7 @@ u32 sub_81CE37C(s32 state)
         return 2;
     case 9:
         unkPtr = sub_81CDC70();
-        if (!sub_81D3178(unkPtr, &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOn(unkPtr, &structPtr->unk1814))
         {
             ResetConditionSparkleSprites(structPtr->unk28e0);
             if (sub_81CDD5C() != TRUE && sub_81CDC60() == sub_81CDC50())
@@ -459,7 +459,7 @@ u32 sub_81CE4D8(s32 state)
             return 1;
         return 2;
     case 8:
-        if (!sub_81D3178(sub_81CDC70(), &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOn(sub_81CDC70(), &structPtr->unk1814))
         {
             ResetConditionSparkleSprites(structPtr->unk28e0);
             CreateConditionSparkleSprites(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
@@ -488,7 +488,7 @@ u32 sub_81CE5E4(s32 state)
         DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 3:
-        if (!sub_81D31A4(sub_81CDC70(), &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOff(sub_81CDC70(), &structPtr->unk1814))
             return 1;
         return 2;
     case 4:
@@ -834,7 +834,7 @@ void sub_81CED30(u8 var)
 
 void sub_81CEE44(void)
 {
-    struct UnknownStruct_81D1ED4 *unk = sub_81CDC70();
+    struct ConditionGraph *unk = sub_81CDC70();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -857,17 +857,17 @@ void sub_81CEE74(bool8 showBg)
 
 void sub_81CEE90(void)
 {
-    struct UnknownStruct_81D1ED4 *unk = sub_81CDC70();
+    struct ConditionGraph *unk = sub_81CDC70();
     u8 id = sub_81CDC84();
 
     gUnknown_030012BC = id;
     sub_81D1F84(unk, unk->unk14[3], unk->unk14[id]);
-    sub_81D2074(unk);
+    TransitionConditionGraph(unk);
 }
 
 void sub_81CEEC8(void)
 {
-    struct UnknownStruct_81D1ED4 *unk = sub_81CDC70();
+    struct ConditionGraph *unk = sub_81CDC70();
 
     if (sub_81CDD5C() || sub_81CDC60() != sub_81CDC50() - 1)
         sub_81D1F84(unk, unk->unk14[sub_81CDC84()], unk->unk14[3]);
