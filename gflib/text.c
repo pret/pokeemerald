@@ -475,7 +475,7 @@ u8 GetLastTextColor(u8 colorType)
                                                                                                                     \
     for (; i < toY; i++)                                                                                            \
     {                                                                                                               \
-        asm("":::"sl");                                                                                             \                                                                                                          
+        asm("":::"sl");                                                                                             \
         r5 = *(ptr++);                                                                                              \
         for (j = fromX; j < toX; j++)                                                                               \
         {                                                                                                           \
