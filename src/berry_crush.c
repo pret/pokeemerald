@@ -3271,7 +3271,7 @@ static void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, 
 
 void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
 {
-    u8 sp[4];
+    u8 sp[2];
 
     0[(u16 *)sp] = r3;
     r0[0] = r1;
