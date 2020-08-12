@@ -6869,36 +6869,36 @@ static void SetCursorMonData(void *pokemon, u8 mode)
 
         txtPtr = sPSSData->cursorMonGenderLvlText;
         *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
-        *(txtPtr)++ = 4;
+        *(txtPtr)++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         switch (gender)
         {
         case MON_MALE:
-            *(txtPtr)++ = 4;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 5;
+            *(txtPtr)++ = TEXT_COLOR_RED;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
             *(txtPtr)++ = CHAR_MALE;
             break;
         case MON_FEMALE:
-            *(txtPtr)++ = 6;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 7;
+            *(txtPtr)++ = TEXT_COLOR_GREEN;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;
             *(txtPtr)++ = CHAR_FEMALE;
             break;
         default:
-            *(txtPtr)++ = 2;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 3;
-            *(txtPtr)++ = 0x77;
+            *(txtPtr)++ = TEXT_COLOR_DARK_GREY;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREY;
+            *(txtPtr)++ = CHAR_UNK_SPACER;
             break;
         }
 
         *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
-        *(txtPtr++) = 4;
-        *(txtPtr++) = 2;
-        *(txtPtr++) = 1;
-        *(txtPtr++) = 3;
-        *(txtPtr++) = 0;
-        *(txtPtr++) = CHAR_SPECIAL_F9;
+        *(txtPtr++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *(txtPtr++) = TEXT_COLOR_DARK_GREY;
+        *(txtPtr++) = TEXT_COLOR_WHITE;
+        *(txtPtr++) = TEXT_COLOR_LIGHT_GREY;
+        *(txtPtr++) = CHAR_SPACE;
+        *(txtPtr++) = CHAR_EXTRA_SYMBOL;
         *(txtPtr++) = CHAR_LV_2;
 
         txtPtr = ConvertIntToDecimalStringN(txtPtr, sPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
