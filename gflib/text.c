@@ -21,7 +21,7 @@ static u16 gLastTextFgColor;
 static u16 gLastTextShadowColor;
 
 const struct FontInfo *gFonts;
-u8 gUnknown_03002F84;
+bool8 gUnknown_03002F84;
 struct Struct_03002F90 gUnknown_03002F90;
 TextFlags gTextFlags;
 
@@ -205,7 +205,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
             CopyWindowToVram(gTempTextPrinter.printerTemplate.windowId, 2);
         gTextPrinters[printerTemplate->windowId].active = 0;
     }
-    gUnknown_03002F84 = 0;
+    gUnknown_03002F84 = FALSE;
     return TRUE;
 }
 
@@ -213,7 +213,7 @@ void RunTextPrinters(void)
 {
     int i;
 
-    if (gUnknown_03002F84 == 0)
+    if (!gUnknown_03002F84)
     {
         for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
         {
@@ -1299,7 +1299,7 @@ u16 Font0Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 0;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1311,7 +1311,7 @@ u16 Font1Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 1;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1323,7 +1323,7 @@ u16 Font2Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 2;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1335,7 +1335,7 @@ u16 Font3Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 3;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1347,7 +1347,7 @@ u16 Font4Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 4;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1359,7 +1359,7 @@ u16 Font5Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 5;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1371,7 +1371,7 @@ u16 Font7Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 7;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1383,7 +1383,7 @@ u16 Font8Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    if (!subStruct->hasGlyphIdBeenSet)
     {
         subStruct->glyphId = 8;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1395,7 +1395,7 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (gTextFlags.autoScroll == 1)
+    if (gTextFlags.autoScroll == TRUE)
     {
         subStruct->autoScrollDelay = 0;
     }
@@ -1411,7 +1411,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
     const u8 *arrowTiles;
 
-    if (gTextFlags.autoScroll == 0)
+    if (!gTextFlags.autoScroll)
     {
         if (subStruct->downArrowDelay != 0)
         {
@@ -1487,7 +1487,7 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
     bool8 result = FALSE;
-    if (gTextFlags.autoScroll != 0)
+    if (gTextFlags.autoScroll)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
@@ -1506,17 +1506,14 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
     bool16 result = FALSE;
-    if (gTextFlags.autoScroll != 0)
+    if (gTextFlags.autoScroll)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
-    else
+    else if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
-        {
-            result = TRUE;
-            PlaySE(SE_SELECT);
-        }
+        result = TRUE;
+        PlaySE(SE_SELECT);
     }
     return result;
 }
@@ -1532,7 +1529,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
     else
     {
         FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 0x8, 0x10);
-        if (drawArrow == 0)
+        if (!drawArrow)
         {
             switch (gTextFlags.useAlternateDownArrow)
             {
@@ -1724,10 +1721,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
             case EXT_CTRL_CODE_JPN:
-                textPrinter->japanese = 1;
+                textPrinter->japanese = TRUE;
                 return 2;
             case EXT_CTRL_CODE_ENG:
-                textPrinter->japanese = 0;
+                textPrinter->japanese = FALSE;
                 return 2;
             }
             break;
@@ -1788,13 +1785,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentX += width;
             }
         }
+        else if (textPrinter->japanese)
+            textPrinter->printerTemplate.currentX += (gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing);
         else
-        {
-            if (textPrinter->japanese)
-                textPrinter->printerTemplate.currentX += (gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing);
-            else
-                textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
-        }
+            textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
         return 0;
     case 1:
         if (TextPrinterWait(textPrinter))
