@@ -322,7 +322,7 @@ struct TextPrinter
     u8 delayCounter;
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
-    u8 japanese;
+    bool8 japanese;
 };
 
 struct FontInfo
@@ -372,7 +372,7 @@ struct Struct_03002F90
 
 extern TextFlags gTextFlags;
 
-extern u8 gUnknown_03002F84;
+extern bool8 gUnknown_03002F84;
 extern struct Struct_03002F90 gUnknown_03002F90;
 
 void SetFontsPointer(const struct FontInfo *fonts);
