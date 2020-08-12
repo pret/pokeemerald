@@ -836,7 +836,7 @@ void sub_81D0FF0(struct PokenavSub14 *structPtr)
 
     txtPtr = StringCopy(gStringVar1, genderTxt);
     *(txtPtr++) = CHAR_SLASH;
-    *(txtPtr++) = CHAR_SPECIAL_F9;
+    *(txtPtr++) = CHAR_EXTRA_SYMBOL;
     *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized(windowId, 1, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);

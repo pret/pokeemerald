@@ -8,7 +8,7 @@
 #include "gpu_regs.h"
 #include "menu.h"
 #include "random.h"
-#include "roulette_util.h"
+#include "palette_util.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"

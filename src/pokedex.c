@@ -4145,7 +4145,7 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     inches = (inches - (feet * 120)) / 10;
 
     buffer[i++] = EXT_CTRL_CODE_BEGIN;
-    buffer[i++] = 0x13;
+    buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
     if (feet / 10 == 0)
     {
         buffer[i++] = 18;

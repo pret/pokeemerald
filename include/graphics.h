@@ -4918,13 +4918,13 @@ extern const u32 gPartyMenuPokeball_Pal[];
 extern const u32 gStatusPal_Icons[];
 
 // Roulette
-extern const u32 gRouletteMenuTiles[];
-extern const u32 gRouletteWheelTiles[];
+extern const u32 gRouletteMenu_Gfx[];
+extern const u32 gRouletteWheel_Gfx[];
 extern const u32 gRouletteCenter_Gfx[];
-extern const u32 gRouletteHeadersTiles[];
-extern const u32 gRouletteCreditTiles[];
-extern const u32 gRouletteNumbersTiles[];
-extern const u32 gRouletteMultiplierTiles[];
+extern const u32 gRouletteHeaders_Gfx[];
+extern const u32 gRouletteCredit_Gfx[];
+extern const u32 gRouletteNumbers_Gfx[];
+extern const u32 gRouletteMultiplier_Gfx[];
 
 // Contest util
 extern const u32 gContestResults_Gfx[];
