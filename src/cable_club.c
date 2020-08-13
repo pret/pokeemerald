@@ -20,7 +20,7 @@
 #include "union_room.h"
 #include "mevent2.h"
 #include "script.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "string_util.h"

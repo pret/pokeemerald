@@ -526,7 +526,7 @@ ContestHall_EventScript_AudienceHeartEmotes:: @ 827A34F
 
 ContestHall_EventScript_DisplayHearts:: @ 827A3E5
 	setvar VAR_RESULT, 8
-	special ScriptRandom
+	special GenerateContestRand
 	compare VAR_RESULT, 0
 	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember1
 	compare VAR_RESULT, 1

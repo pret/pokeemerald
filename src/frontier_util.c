@@ -7,7 +7,7 @@
 #include "battle_tower.h"
 #include "field_specials.h"
 #include "battle.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "main.h"
 #include "window.h"
 #include "menu.h"

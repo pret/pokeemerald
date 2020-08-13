@@ -38,7 +38,7 @@
 #include "script.h"
 #include "script_menu.h"
 #include "script_movement.h"
-#include "script_pokemon_80F8.h"
+#include "script_pokemon_util.h"
 #include "shop.h"
 #include "slot_machine.h"
 #include "sound.h"
@@ -1474,7 +1474,7 @@ bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
     if (contestWinnerId != CONTEST_WINNER_ARTIST)
         SetContestWinnerForPainting(contestWinnerId);
 
-    ShowContestWinner();
+    ShowContestWinnerPainting();
     ScriptContext1_Stop();
     return TRUE;
 }

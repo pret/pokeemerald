@@ -25,7 +25,7 @@
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "contest_util.h"
 #include "constants/songs.h"
 #include "constants/flags.h"
 #include "constants/game_stat.h"

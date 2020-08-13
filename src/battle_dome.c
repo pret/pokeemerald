@@ -29,7 +29,7 @@
 #include "international_string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "graphics.h"
 #include "constants/battle_dome.h"
 #include "constants/frontier_util.h"

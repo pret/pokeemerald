@@ -40,7 +40,6 @@
 #include "strings.h"
 #include "contest_effect.h"
 #include "contest_link.h"
-#include "script_pokemon_util_80F87D8.h"
 #include "international_string_util.h"
 #include "data.h"
 #include "constants/rgb.h"
