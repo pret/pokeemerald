@@ -423,7 +423,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     }
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (eContestantStatus[i].hasJudgesAttention && sub_80DE1E8(i))
+        if (eContestantStatus[i].hasJudgesAttention && IsContestantAllowedToCombo(i))
             oddsMod[i] = gComboStarterLookupTable[gContestMoves[eContestantStatus[i].prevMove].comboStarterId] * 10;
         else
             oddsMod[i] = 0;

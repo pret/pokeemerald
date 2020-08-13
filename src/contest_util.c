@@ -122,8 +122,8 @@ static void CB2_ShowContestResults(void);
 static void VBlankCB_ShowContestResults(void);
 static void Task_SlideContestResultsBg(u8);
 static void Task_WaitForLinkPartnersBeforeResults(u8);
-static void sub_80F5F14(u8);
-static void sub_80F5F30(u8);
+static void Task_CommunicateMonIdxsForResults(u8);
+static void Task_WaitForLinkPartnerMonIdxs(u8);
 static void Task_AnnouncePreliminaryResults(u8);
 static void Task_FlashStarsAndHearts(u8);
 static void Task_ShowPreliminaryResults(u8);
@@ -657,17 +657,17 @@ static void Task_WaitForLinkPartnersBeforeResults(u8 taskId)
 {
     if (gReceivedRemoteLinkPlayers)
     {
-        CreateTask(sub_80F5F14, 0);
+        CreateTask(Task_CommunicateMonIdxsForResults, 0);
         gTasks[taskId].func = TaskDummy;
     }
 }
 
-static void sub_80F5F14(u8 taskId)
+static void Task_CommunicateMonIdxsForResults(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonIdxs, sub_80F5F30);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonIdxs, Task_WaitForLinkPartnerMonIdxs);
 }
 
-static void sub_80F5F30(u8 taskId)
+static void Task_WaitForLinkPartnerMonIdxs(u8 taskId)
 {
     if (IsLinkTaskFinished())
     {

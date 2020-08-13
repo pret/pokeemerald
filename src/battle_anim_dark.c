@@ -849,7 +849,7 @@ void AnimTask_MetallicShine(u8 taskId)
 
     if (IsContest())
     {
-        species = gContestResources->field_18->species;
+        species = gContestResources->moveAnim->species;
     }
     else
     {

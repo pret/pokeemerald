@@ -1200,7 +1200,7 @@ static void ContestAICmd_get_used_combo_starter(void)
     u16 result = FALSE;
     u8 contestant = GetContestantIdByTurn(gAIScriptPtr[1]);
 
-    if (sub_80DE1E8(contestant))
+    if (IsContestantAllowedToCombo(contestant))
         result = gContestMoves[eContestantStatus[contestant].prevMove].comboStarterId ? TRUE : FALSE;
 
     eContestAI.scriptResult = result;

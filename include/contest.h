@@ -123,15 +123,15 @@ struct Shared1A004
     u8 savedJunk[0x800];
 };
 
-struct ContestStruct_field_18
+struct ContestMoveAnimData
 {
     u16 species;
-    u16 unk2;
-    u8 unk4_0:1;
-    u8 unk5;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
+    u16 targetSpecies;
+    bool8 hasTargetAnim:1;
+    u8 contestant;
+    u32 personality;
+    u32 otId;
+    u32 targetPersonality;
 };
 
 struct Contest
@@ -143,29 +143,29 @@ struct Contest
     bool16 unk1920A_1:1;
     bool16 unk1920A_2:1;
     bool16 unk1920A_3:1;
-    bool16 unk1920A_4:1;
+    bool16 waitForJudgeSpeechBubble:1;
     bool16 isShowingApplauseMeter:1;
     bool16 applauseMeterIsMoving:1;
-    bool16 unk1920A_7:1;
-    bool16 unk1920B_0:1;
+    bool16 animatingAudience:1;
+    bool16 waitForAudienceBlend:1;
     bool16 sliderHeartsAnimating:1; // When the slider heart is appearing/disappearing
-    bool16 unk1920B_2:1;
+    bool16 waitForLink:1;
     u8 mainTaskId;
     u8 unk1920D[4];
-    u8 unk19211;
+    u8 judgeAttentionTaskId;
     u8 unk19212;
     u8 filler19213;
     u8 turnNumber;
     u8 currentContestant;
-    u8 unk19216;    // sprite ID
+    u8 judgeSpeechBubbleSpriteId;
     s8 applauseLevel;
     u8 prevTurnOrder[CONTESTANT_COUNT];
-    u32 unk1921C;   // saved RNG value?
+    u32 unusedRng;
     u16 moveHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
     u8 excitementHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
     u8 applauseMeterSpriteId;
     u8 contestSetupState;
-    u8 unk1925E;
+    u8 moveAnimTurnCount;
 };
 
 struct ContestantStatus
@@ -177,7 +177,7 @@ struct ContestantStatus
     u16 prevMove;
     u8 moveCategory;
     u8 ranking:2;
-    u8 unkB_2:2;
+    u8 unused1:2;
     u8 moveRepeatCount:3;
     bool8 noMoreTurns:1;  // used a one-time move?
     bool8 nervous:1;
@@ -203,18 +203,18 @@ struct ContestantStatus
     u8 effectStringId;   // status action?
     u8 effectStringId2;
     bool8 repeatedMove:1;
-    bool8 unused:1;
+    bool8 unused2:1;
     bool8 repeatedPrevMove:1; // never read
     bool8 unk15_3:1;
     bool8 hasJudgesAttention:1;
     bool8 judgesAttentionWasRemoved:1;
-    bool8 unk15_6:1;
-    u8 unk16;
+    bool8 usedComboMove:1;
+    bool8 completedCombo;
     u8 unk17;
     u8 unk18;
     u8 nextTurnOrder;  // turn position
     u8 attentionLevel;  // How much the Pokemon "stood out"
-    u8 unk1B;
+    u8 contestantAnimTarget;
 };
 
 struct UnknownContestStruct7
@@ -246,7 +246,7 @@ struct ContestAIInfo
 
 struct UnknownContestStruct5
 {
-    s8 bits_0;  // current move excitement?
+    s8 moveExcitement;
     u8 excitementFrozen:1;
     u8 excitementFreezer:3;
     s8 unk2;
@@ -256,17 +256,17 @@ struct UnknownContestStruct4
 {
     u8 sliderHeartSpriteId;
     u8 nextTurnSpriteId;
-    u8 sliderUpdating:1;
-    u8 unk2_1:1;
-    u8 unk2_2:1;
+    bool8 sliderUpdating:1;
+    bool8 boxBlinking:1;
+    bool8 updatingAppealHearts:1;
 };
 
-struct UnknownContestStruct6
+struct ContestFinalStandings
 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
+    s32 totalPoints;
+    s32 round1Points;
+    s32 random;
+    s32 contestant;
 };
 
 struct ContestResourcesField1C
@@ -292,12 +292,12 @@ struct ContestResources
     struct ContestAIInfo *aiData;
     struct UnknownContestStruct5 *field_10;
     struct UnknownContestStruct4 *field_14;
-    struct ContestStruct_field_18 *field_18;
+    struct ContestMoveAnimData *moveAnim;
     struct ContestResourcesField1C * field_1c;
     struct ContestResourcesField20 * field_20;
     u8 * contestBgTilemaps[CONTESTANT_COUNT];
-    void * field_34;
-    void * field_38;
+    void * boxBlinkTiles1;
+    void * boxBlinkTiles2;
     void * field_3c;
 };
 
@@ -307,8 +307,8 @@ struct ContestResources
 #define eContestAI (*gContestResources->aiData)
 #define eContestResources10 (*gContestResources->field_10)
 #define eContestResources14 (*gContestResources->field_14)
-#define eUnzippedContestAudienceGfx (gHeap + 0x18000)
-#define eUnknownHeap19000 (gHeap + 0x19000)
+#define eUnzippedContestAudience_Gfx (gHeap + 0x18000)
+#define eContestAudienceFrame2_Gfx (gHeap + 0x19000)
 #define eContestDebugMode (gHeap[0x1a000])
 #define eUnknownHeap1A004 (*(struct Shared1A004 *)(gHeap + 0x1a004))
 
@@ -352,7 +352,7 @@ void SetContestantEffectStringID2(u8 a, u8 b);
 void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
 s8 Contest_GetMoveExcitement(u16 move);
-bool8 sub_80DE1E8(u8 a);
+bool8 IsContestantAllowedToCombo(u8 contestant);
 void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void ResetContestLinkResults(void);
 bool8 sub_80DEDA8(u8 a);
