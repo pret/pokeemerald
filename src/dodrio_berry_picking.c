@@ -558,7 +558,7 @@ static void sub_8024BC8(u8 taskId)
     case 2:
         if (!sub_802A770())
         {
-            sub_8010434();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_02022C98->unk0C++;
         }
         break;
@@ -671,7 +671,7 @@ static void sub_8024E38(void)
         gUnknown_02022C98->unk10++;
         break;
     case 1:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         gUnknown_02022C98->unk10++;
         break;
     case 2:
@@ -690,7 +690,7 @@ static void sub_8024E38(void)
     case 4:
         if (++gUnknown_02022C98->unk30 > 5)
         {
-            sub_8010434();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_02022C98->unk10++;
         }
         break;
@@ -1081,7 +1081,7 @@ static void sub_8025644(void)
     switch (gUnknown_02022C98->unk10)
     {
     case 0:
-        sub_800AC34();
+        SetCloseLinkCallback();
         sub_80292E0(7);
         gUnknown_02022C98->unk10++;
         break;

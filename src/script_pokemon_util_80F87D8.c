@@ -472,7 +472,7 @@ static void Task_LinkContestWaitForConnection(u8 taskId)
     case 0:
         if (IsLinkTaskFinished())
         {
-            sub_800ADF8();
+            SetLinkStandbyCallback();
             gTasks[taskId].data[0]++;
         }
         break;

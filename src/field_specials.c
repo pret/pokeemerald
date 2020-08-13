@@ -3865,7 +3865,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
         case 7:
             if (IsLinkTaskFinished() == 1)
             {
-                sub_800ADF8();
+                SetLinkStandbyCallback();
                 gTasks[taskId].data[0]++;
             }
             break;
@@ -3878,7 +3878,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
         case 9:
             if (gWirelessCommType == 0)
             {
-                sub_800AC34();
+                SetCloseLinkCallback();
             }
             gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
             EnableBothScriptContexts();

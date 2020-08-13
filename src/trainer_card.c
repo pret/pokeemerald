@@ -498,7 +498,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         break;
     case STATE_WAIT_LINK_PARTNER:
-        sub_800AC34();
+        SetCloseLinkCallback();
         DrawDialogueFrame(0, 1);
         AddTextPrinterParameterized(0, 1, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
         CopyWindowToVram(0, 3);

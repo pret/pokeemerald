@@ -151,14 +151,14 @@ static void Task_CreateConfetti(u8);
 static void SpriteCB_TextBoxSlideIn(struct Sprite *);
 static void SpriteCB_TextBoxSlideOut(struct Sprite *);
 static void SpriteCB_EndTextBoxSlideIn(struct Sprite *);
-static void sub_80F8508(u8);
-static void sub_80F8568(u8);
-static void sub_80F8584(u8);
-static void sub_80F85A0(u8);
-static void sub_80F85BC(u8);
-static void sub_80F86B8(u8);
-static void sub_80F878C(u8);
-static void sub_80F87B4(u8);
+static void Task_StartCommunication(u8);
+static void Task_StartCommunicateRngRS(u8);
+static void Task_StartCommunicateLeaderIdsRS(u8);
+static void Task_StartCommunicateCategoryRS(u8);
+static void Task_LinkContest_SetUpContestRS(u8);
+static void Task_LinkContest_CalculateTurnOrderRS(u8);
+static void Task_LinkContest_Disconnect(u8);
+static void Task_LinkContest_WaitDisconnect(u8);
 static void SpriteCB_Confetti(struct Sprite *sprite);
 
 static const u16 sUnknown_0858D6B0[] = INCBIN_U16("graphics/unknown/unknown_58D6B0.gbapal");
@@ -602,7 +602,7 @@ static void Task_ShowContestResults(u8 taskId)
         case 2:
             if (IsLinkTaskFinished())
             {
-                sub_800ADF8();
+                SetLinkStandbyCallback();
                 gTasks[taskId].tState++;
             }
             return;
@@ -975,7 +975,7 @@ static void Task_TryDisconnectLinkPartners(u8 taskId)
         if (!gTasks[taskId].data[10])
         {
             ShowLinkResultsTextBox(gText_CommunicationStandby);
-            sub_800AC34();
+            SetCloseLinkCallback();
             gTasks[taskId].func = Task_WaitForLinkPartnersDisconnect;
         }
     }
@@ -2207,7 +2207,7 @@ void TryEnterContestMon(void)
     if (eligibility)
     {
         SetContestants(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
-        sub_80DB09C(gSpecialVar_ContestCategory);
+        CalculateRound1Points(gSpecialVar_ContestCategory);
     }
 
     gSpecialVar_Result = eligibility;
@@ -2409,103 +2409,102 @@ void ContestLinkTransfer(u8 category)
 {
     u8 newTaskId;
     ScriptContext2_Enable();
-    newTaskId = CreateTask(sub_80FC580, 0);
-    SetTaskFuncWithFollowupFunc(newTaskId, sub_80FC580, sub_80F8508);
+    newTaskId = CreateTask(Task_LinkContest_Init, 0);
+    SetTaskFuncWithFollowupFunc(newTaskId, Task_LinkContest_Init, Task_StartCommunication);
     gTasks[newTaskId].data[9] = category;
 }
 
-static void sub_80F8508(u8 taskId)
+static void Task_StartCommunication(u8 taskId)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
     {
         CreateContestMonFromParty(gContestMonPartyIndex);
-        SetTaskFuncWithFollowupFunc(taskId, sub_80FC6BC, sub_80F8568);
+        SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonsRS, Task_StartCommunicateRngRS);
     }
     else
     {
         CreateContestMonFromParty(gContestMonPartyIndex);
-        gTasks[taskId].func = sub_81D9DE4;
+        gTasks[taskId].func = Task_LinkContest_StartCommunicationEm;
     }
 }
 
-static void sub_80F8568(u8 taskId)
+static void Task_StartCommunicateRngRS(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FC804, sub_80F8584);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRngRS, Task_StartCommunicateLeaderIdsRS);
 }
 
-static void sub_80F8584(u8 taskId)
+static void Task_StartCommunicateLeaderIdsRS(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FCE48, sub_80F85A0);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateLeaderIdsRS, Task_StartCommunicateCategoryRS);
 }
 
-static void sub_80F85A0(u8 taskId)
+static void Task_StartCommunicateCategoryRS(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FC894, sub_80F85BC);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateCategoryRS, Task_LinkContest_SetUpContestRS);
 }
 
-static void sub_80F85BC(u8 taskId)
+static void Task_LinkContest_SetUpContestRS(u8 taskId)
 {
     u8 i;
-    u8 sp0[4];
-    u8 sp4[4];
+    u8 categories[CONTESTANT_COUNT];
+    u8 leaderIds[CONTESTANT_COUNT];
 
-    memset(sp0, 0, sizeof(sp0));
-    memset(sp4, 0, sizeof(sp4));
+    memset(categories, 0, sizeof(categories));
+    memset(leaderIds, 0, sizeof(leaderIds));
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
-        sp0[i] = gTasks[taskId].data[i + 1];
+        categories[i] = gTasks[taskId].data[i + 1];
 
-    for (i = 0; i < gNumLinkContestPlayers;)
-    {
-        i++;
-        if (i >= gNumLinkContestPlayers || sp0[0] != sp0[i])
-            break;
-    }
+    // Ensure all players are doing the same category
+    for (i = 0; i < gNumLinkContestPlayers && categories[0] == categories[i]; i++)
+        ;
 
     if (i == gNumLinkContestPlayers)
-        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8004 = FALSE; // Category choices the same
     else
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_0x8004 = TRUE; // Category choices differ
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
-        sp4[i] = gTasks[taskId].data[i + 5];
+        leaderIds[i] = gTasks[taskId].data[i + 5];
 
-    gUnknown_02039F2B = sub_80F86E0(sp4);
-    sub_80DB09C(gSpecialVar_ContestCategory);
-    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, sub_80F86B8);
+    gContestLinkLeaderIndex = LinkContest_GetLeaderIndex(leaderIds);
+    CalculateRound1Points(gSpecialVar_ContestCategory);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, Task_LinkContest_CalculateTurnOrderRS);
 }
 
-static void sub_80F86B8(u8 taskId)
+static void Task_LinkContest_CalculateTurnOrderRS(u8 taskId)
 {
     SortContestants(FALSE);
-    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateTurnOrder, sub_80F8714);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateTurnOrder, Task_LinkContest_FinalizeConnection);
 }
 
-u8 sub_80F86E0(u8 *arg0)
+u8 LinkContest_GetLeaderIndex(u8 *ids)
 {
     int i;
-    u8 result = 0;
+    u8 leaderIdx = 0;
 
     for (i = 1; i < gNumLinkContestPlayers; i++)
     {
-        if (arg0[result] < arg0[i])
-            result = i;
+        if (ids[leaderIdx] < ids[i])
+            leaderIdx = i;
     }
 
-    return result;
+    return leaderIdx;
 }
 
-void sub_80F8714(u8 taskId)
+void Task_LinkContest_FinalizeConnection(u8 taskId)
 {
     int i;
 
-    if (gSpecialVar_0x8004 == 1)
+    if (gSpecialVar_0x8004 == TRUE)
     {
+        // Link partner data doesn't agree, disconnect
         if (IsLinkTaskFinished())
-            gTasks[taskId].func = sub_80F878C;
+            gTasks[taskId].func = Task_LinkContest_Disconnect;
     }
     else
     {
+        // Succesfully connected
         for (i = 0; i < CONTESTANT_COUNT; i++)
             StringGetEnd10(gContestMons[i].nickname);
 
@@ -2516,13 +2515,13 @@ void sub_80F8714(u8 taskId)
     }
 }
 
-static void sub_80F878C(u8 taskId)
+static void Task_LinkContest_Disconnect(u8 taskId)
 {
-    sub_800AC34();
-    gTasks[taskId].func = sub_80F87B4;
+    SetCloseLinkCallback();
+    gTasks[taskId].func = Task_LinkContest_WaitDisconnect;
 }
 
-static void sub_80F87B4(u8 taskId)
+static void Task_LinkContest_WaitDisconnect(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {

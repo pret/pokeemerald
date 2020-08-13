@@ -69,7 +69,7 @@ static void Task_EndCommunicateMoveSelections(u8 taskId);
 static void Task_HideMoveSelectScreen(u8 taskId);
 static void Task_HideApplauseMeterForAppealStart(u8 taskId);
 static void Task_WaitHideApplauseMeterForAppealStart(u8 taskId);
-static void sub_80D8A88(u8 taskId);
+static void Task_AppealSetup(u8 taskId);
 static void Task_DoAppeals(u8 taskId);
 static void sub_80DA110(u8);
 static void sub_80DA134(struct Sprite *);
@@ -94,7 +94,7 @@ static void Task_CommunicateFinalStandings(u8);
 static void Task_EndCommunicateFinalStandings(u8);
 static void Task_ContestReturnToField(u8);
 static void FieldCB_ContestReturnToField(void);
-static bool8 sub_80DA8A4(void);
+static bool8 IsPlayerLinkLeader(void);
 static void PrintContestantTrainerName(u8);
 static void PrintContestantTrainerNameWithColor(u8 a0, u8 a1);
 static void PrintContestantMonName(u8);
@@ -250,7 +250,7 @@ EWRAM_DATA u8 gContestantTurnOrder[CONTESTANT_COUNT] = {0};
 EWRAM_DATA u8 gLinkContestFlags = 0;
 // Bit 0: Is a link contest
 // Bit 1: Link contest uses wireless adapter
-EWRAM_DATA u8 gUnknown_02039F2B = 0;
+EWRAM_DATA u8 gContestLinkLeaderIndex = 0;
 EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 EWRAM_DATA u8 gNumLinkContestPlayers = 0;
@@ -1118,7 +1118,7 @@ static void Task_TryStartLinkContest(u8 taskId)
             case 1:
                 if (IsLinkTaskFinished())
                 {
-                    sub_800ADF8();
+                    SetLinkStandbyCallback();
                     gTasks[taskId].data[0]++;
                 }
                 return;
@@ -1566,16 +1566,16 @@ static void Task_HideApplauseMeterForAppealStart(u8 taskId)
 static void Task_WaitHideApplauseMeterForAppealStart(u8 taskId)
 {
     if (!eContest.applauseMeterIsMoving && !eContest.sliderHeartsAnimating)
-        gTasks[taskId].func = sub_80D8A88;
+        gTasks[taskId].func = Task_AppealSetup;
 }
 
-static void sub_80D8A88(u8 taskId)
+static void Task_AppealSetup(u8 taskId)
 {
     if (++gTasks[taskId].data[0] > 19)
     {
         eContest.turnNumber = 0;
         eContest.unk1921C = gRngValue;
-        if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && sub_80DA8A4())
+        if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && IsPlayerLinkLeader())
         {
             s32 i;
 
@@ -1611,7 +1611,7 @@ static void Task_DoAppeals(u8 taskId)
             u8 taskId2;
 
             eContest.unk1920B_2 = 1;
-            if (sub_80DA8A4())
+            if (IsPlayerLinkLeader())
                 sub_80DD080(eContest.currentContestant);
             taskId2 = CreateTask(sub_80FCC88, 0);
             SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, sub_80DA110);
@@ -2339,7 +2339,7 @@ static void sub_80DA198(u8 taskId)
             u8 taskId2;
 
             eContest.unk1920B_2 = 1;
-            if (sub_80DA8A4())
+            if (IsPlayerLinkLeader())
             {
                 RankContestants();
                 SetAttentionLevels();
@@ -2619,9 +2619,9 @@ static void TryPutPlayerLast(void)
         gContestPlayerMonIndex = CONTESTANT_COUNT - 1;
 }
 
-static bool8 sub_80DA8A4(void)
+static bool8 IsPlayerLinkLeader(void)
 {
-    if (gContestPlayerMonIndex == gUnknown_02039F2B)
+    if (gContestPlayerMonIndex == gContestLinkLeaderIndex)
         return TRUE;
     return FALSE;
 }
@@ -2902,7 +2902,7 @@ static void PrintContestantMonNameWithColor(u8 contestant, u8 color)
     Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, 7);
 }
 
-static u16 sub_80DAFE0(u8 who, u8 contestCategory)
+static u16 CalculateContestantRound1Points(u8 who, u8 contestCategory)
 {
     u8 statMain;
     u8 statSub1;
@@ -2940,12 +2940,12 @@ static u16 sub_80DAFE0(u8 who, u8 contestCategory)
     return statMain + (statSub1 + statSub2 + gContestMons[who].sheen) / 2;
 }
 
-void sub_80DB09C(u8 contestCategory)
+void CalculateRound1Points(u8 contestCategory)
 {
     s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        gContestMonRound1Points[i] = sub_80DAFE0(i, contestCategory);
+        gContestMonRound1Points[i] = CalculateContestantRound1Points(i, contestCategory);
 }
 
 static u8 sub_80DB0C4(void)
@@ -4252,13 +4252,12 @@ static void sub_80DD080(u8 contestant)
     u16 move;
     u8 effect;
     u8 rnd;
-    bool8 r8;
+    bool8 canUseTurn;
     s32 i;
 
     eContestantStatus[contestant].appeal2 = 0;
     eContestantStatus[contestant].appeal1 = 0;
-    r8 = ContestantCanUseTurn(contestant);
-    if (!r8)
+    if (!ContestantCanUseTurn(contestant))
         return;
 
     move = eContestantStatus[contestant].currMove;
@@ -4974,7 +4973,7 @@ static void sub_80DE4A8(u8 taskId)
             u8 taskId2;
 
             eContest.unk1920B_2 = 1;
-            if (sub_80DA8A4())
+            if (IsPlayerLinkLeader())
                 sub_80DBAA0();
             taskId2 = CreateTask(sub_80FCC88, 0);
             SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, sub_80DA110);

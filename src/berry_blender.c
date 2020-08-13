@@ -1230,7 +1230,7 @@ static void sub_8080018(void)
         sBerryBlenderData->field_114 = 0;
         Blender_CopyBerryData(&sBerryBlenderData->blendedBerries[0], gSpecialVar_ItemId);
         memcpy(gBlockSendBuffer, &sBerryBlenderData->blendedBerries[0], sizeof(struct BlenderBerry));
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         sBerryBlenderData->framesToWait = 0;
         break;
     case 9:
@@ -1238,7 +1238,7 @@ static void sub_8080018(void)
         {
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() == 0)
-                sub_800A4D8(4);
+                SendBlockRequest(4);
             sBerryBlenderData->mainState++;
         }
         break;
@@ -1332,7 +1332,7 @@ static void sub_8080018(void)
         sBerryBlenderData->mainState++;
         break;
     case 19:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         sBerryBlenderData->mainState++;
         break;
     case 20:
@@ -2587,7 +2587,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
     switch (sBerryBlenderData->field_1A0)
     {
     case 0:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         sBerryBlenderData->field_1A0 = 1;
         sBerryBlenderData->framesToWait = 0;
         break;
@@ -2606,7 +2606,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
     case 3:
         if (++sBerryBlenderData->framesToWait == 10)
         {
-            sub_800ADF8();
+            SetLinkStandbyCallback();
             sBerryBlenderData->field_1A0++;
         }
         break;
@@ -2682,7 +2682,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         break;
     case 5:
         Blender_PrintText(&sBerryBlenderData->textState, gText_SavingDontTurnOff2, 0);
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         sBerryBlenderData->gameEndState++;
         break;
     case 6:
@@ -2702,7 +2702,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         break;
     case 8:
         sBerryBlenderData->gameEndState++;
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         break;
     case 9:
         if (IsLinkTaskFinished())
@@ -2732,7 +2732,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
     case 11:
         if (++sBerryBlenderData->framesToWait > 30)
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sBerryBlenderData->gameEndState++;
         }
         break;
