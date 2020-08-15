@@ -451,11 +451,11 @@ u8 GetLastTextColor(u8 colorType)
 {
     switch (colorType)
     {
-    case 0:
+    case COLOR_FOREGROUND:
         return gLastTextFgColor;
-    case 2:
+    case COLOR_BACKGROUND:
         return gLastTextBgColor;
-    case 1:
+    case COLOR_SHADOW:
         return gLastTextShadowColor;
     default:
         return 0;
@@ -482,8 +482,8 @@ u8 GetLastTextColor(u8 colorType)
             const u32 toOrr = r5 & 0xF;                                                                             \
             if (toOrr)                                                                                              \
             {                                                                                                       \
-                dst = windowTiles + ((j >> 3) * 32) + ((j & 7) >> 1) + ((i >> 3) * widthOffset) + ((i & 7) * 4);    \
-                bits = ((j & 1) << 2);                                                                              \
+                dst = windowTiles + ((j / 8) * 32) + ((j & 7) >> 1) + ((i / 8) * widthOffset) + ((i & 7) * 4);    \
+                bits = ((j & 1) * 4);                                                                              \
                 *dst = (toOrr << bits) | ((0xF0 >> bits) & *dst);                                                   \
             }                                                                                                       \
             r5 >>= 4;                                                                                               \
