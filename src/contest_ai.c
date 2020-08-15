@@ -384,7 +384,7 @@ static u8 GetContestantIdByTurn(u8 turn)
     int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        if (eContestResources8.turnOrder[i] == turn)
+        if (eContestAppealResults.turnOrder[i] == turn)
             break;
 
     return i;
@@ -498,7 +498,7 @@ static void ContestAICmd_if_excitement_not_eq(void)
 
 static void ContestAICmd_get_user_order(void)
 {
-    eContestAI.scriptResult = eContestResources8.turnOrder[eContestAI.contestantId];
+    eContestAI.scriptResult = eContestAppealResults.turnOrder[eContestAI.contestantId];
     gAIScriptPtr += 1;
 }
 

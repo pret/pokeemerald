@@ -9,9 +9,9 @@ enum
     CONTEST_DEBUG_MODE_OFF,
     // Prints the totalPoints value for each contestant.
     CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL,
-    // Prints the ContestResourcesField1C::unk_C value as a bitstring for each contestant.
+    // Prints the ContestTV::unk_C value as a bitstring for each contestant.
     CONTEST_DEBUG_MODE_PRINT_UNK_C,
-    // Prints the ContestResourcesField1C::unk_D value as a bitstring for each contestant.
+    // Prints the ContestTV::unk_D value as a bitstring for each contestant.
     CONTEST_DEBUG_MODE_PRINT_UNK_D
 };
 
@@ -90,29 +90,29 @@ enum {
 
 struct ContestPokemon
 {
-    /*0x00*/ u16 species;
-    /*0x02*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x0D*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
-    /*0x15*/ u8 trainerGfxId;
-    /*0x18*/ u32 aiChecks;
-    /*0x1C*/ u8 whichRank:2; // 0x1 0x2
-    u8 aiPool_Cool:1; // 0x4
-    u8 aiPool_Beauty:1; // 0x8
-    u8 aiPool_Cute:1; // 0x10
-    u8 aiPool_Smart:1; // 0x20
-    u8 aiPool_Tough:1; // 0x40
-    /*0x1E*/ u16 moves[MAX_MON_MOVES]; // moves
-    /*0x26*/ u8 cool; // cool
-    /*0x27*/ u8 beauty; // beauty
-    /*0x28*/ u8 cute; // cute
-    /*0x29*/ u8 smart; // smart
-    /*0x2A*/ u8 tough; // tough
-    /*0x2B*/ u8 sheen; // sheen
+    u16 species;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 trainerName[PLAYER_NAME_LENGTH + 1];
+    u8 trainerGfxId;
+    u32 aiChecks;
+    u8 whichRank:2;
+    u8 aiPool_Cool:1;
+    u8 aiPool_Beauty:1;
+    u8 aiPool_Cute:1;
+    u8 aiPool_Smart:1;
+    u8 aiPool_Tough:1;
+    u16 moves[MAX_MON_MOVES];
+    u8 cool;
+    u8 beauty;
+    u8 cute;
+    u8 smart;
+    u8 tough;
+    u8 sheen;
     u8 highestRank;
     bool8 gameCleared;
-    /*0x2C*/ u8 unk2C[10];
-    /*0x38*/ u32 personality;  // personality
-    /*0x3C*/ u32 otId;  // otId
+    u8 unk2C[10];
+    u32 personality;
+    u32 otId;
 };
 
 struct Shared1A004
@@ -210,14 +210,14 @@ struct ContestantStatus
     bool8 judgesAttentionWasRemoved:1;
     bool8 usedComboMove:1;
     bool8 completedCombo;
-    u8 unk17;
+    u8 comboAppealBonus;
     u8 unk18;
     u8 nextTurnOrder;  // turn position
     u8 attentionLevel;  // How much the Pokemon "stood out"
     u8 contestantAnimTarget;
 };
 
-struct UnknownContestStruct7
+struct ContestAppealMoveResults
 {
     u8 turnOrder[CONTESTANT_COUNT];
     s16 jam;
@@ -244,15 +244,15 @@ struct ContestAIInfo
     /*0x41*/ u8 contestantId;
 };
 
-struct UnknownContestStruct5
+struct ContestExcitement
 {
     s8 moveExcitement;
-    u8 excitementFrozen:1;
-    u8 excitementFreezer:3;
-    s8 unk2;
+    u8 frozen:1;
+    u8 freezer:3;
+    s8 excitementAppealBonus;
 };
 
-struct UnknownContestStruct4
+struct ContestGraphicsState
 {
     u8 sliderHeartSpriteId;
     u8 nextTurnSpriteId;
@@ -269,7 +269,7 @@ struct ContestFinalStandings
     s32 contestant;
 };
 
-struct ContestResourcesField1C
+struct ContestTV
 {
     u16 unk0[5];
     s16 unkA;
@@ -279,22 +279,22 @@ struct ContestResourcesField1C
     u8 unkE_2:1;
 };
 
-struct ContestResourcesField20
+struct ContestUnused
 {
-    u8 filler_00[0x0C];
+    u8 filler[12];
 };
 
 struct ContestResources
 {
     struct Contest *contest;
     struct ContestantStatus *status;
-    struct UnknownContestStruct7 *field_8;
+    struct ContestAppealMoveResults *appealResults;
     struct ContestAIInfo *aiData;
-    struct UnknownContestStruct5 *field_10;
-    struct UnknownContestStruct4 *field_14;
+    struct ContestExcitement *excitement;
+    struct ContestGraphicsState *gfxState;
     struct ContestMoveAnimData *moveAnim;
-    struct ContestResourcesField1C * field_1c;
-    struct ContestResourcesField20 * field_20;
+    struct ContestTV *tv;
+    struct ContestUnused * unused;
     u8 * contestBgTilemaps[CONTESTANT_COUNT];
     void * boxBlinkTiles1;
     void * boxBlinkTiles2;
@@ -303,10 +303,10 @@ struct ContestResources
 
 #define eContest (*gContestResources->contest)
 #define eContestantStatus (gContestResources->status)
-#define eContestResources8 (*gContestResources->field_8)
+#define eContestAppealResults (*gContestResources->appealResults)
 #define eContestAI (*gContestResources->aiData)
-#define eContestResources10 (*gContestResources->field_10)
-#define eContestResources14 (*gContestResources->field_14)
+#define eContestExcitement (*gContestResources->excitement)
+#define eContestGfxState (gContestResources->gfxState)
 #define eUnzippedContestAudience_Gfx (gHeap + 0x18000)
 #define eContestAudienceFrame2_Gfx (gHeap + 0x19000)
 #define eContestDebugMode (gHeap[0x1a000])

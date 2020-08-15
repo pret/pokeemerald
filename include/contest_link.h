@@ -1,7 +1,7 @@
 #ifndef GUARD_CONTEST_LINK_H
 #define GUARD_CONTEST_LINK_H
 
-void sub_80FCC88(u8);
+void Task_LinkContest_CommunicateAppealsState(u8);
 void Task_LinkContest_CommunicateFinalStandings(u8);
 void Task_LinkContest_Init(u8);
 void Task_LinkContest_CommunicateMonsRS(u8);

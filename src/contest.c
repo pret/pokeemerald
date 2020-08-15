@@ -1027,10 +1027,10 @@ static void InitContestResources(void)
         eContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
         eContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
     }
-    eContestResources8 = (struct UnknownContestStruct7){};
+    eContestAppealResults = (struct ContestAppealMoveResults){};
     eContestAI = (struct ContestAIInfo){};
-    *gContestResources->field_10 = (struct UnknownContestStruct5){};
-    memset(gContestResources->field_14, 0, CONTESTANT_COUNT * sizeof(struct UnknownContestStruct4));
+    *gContestResources->excitement = (struct ContestExcitement){};
+    memset(eContestGfxState, 0, CONTESTANT_COUNT * sizeof(struct ContestGraphicsState));
     
     if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         SortContestants(FALSE);
@@ -1043,7 +1043,7 @@ static void InitContestResources(void)
     // Calling this here while all the nextTurnOrder values are 0xFF will actually
     // just reverse the turn order.
     ApplyNextTurnOrder();
-    memset(gContestResources->field_1c, 0, sizeof(*gContestResources->field_1c) * CONTESTANT_COUNT);
+    memset(gContestResources->tv, 0, sizeof(*gContestResources->tv) * CONTESTANT_COUNT);
 }
 
 static void AllocContestResources(void)
@@ -1051,13 +1051,13 @@ static void AllocContestResources(void)
     gContestResources = AllocZeroed(sizeof(struct ContestResources));
     gContestResources->contest = AllocZeroed(sizeof(struct Contest));
     gContestResources->status = AllocZeroed(sizeof(struct ContestantStatus) * CONTESTANT_COUNT);
-    gContestResources->field_8 = AllocZeroed(sizeof(struct UnknownContestStruct7));
+    gContestResources->appealResults = AllocZeroed(sizeof(struct ContestAppealMoveResults));
     gContestResources->aiData = AllocZeroed(sizeof(struct ContestAIInfo));
-    gContestResources->field_10 = AllocZeroed(sizeof(struct UnknownContestStruct5) * CONTESTANT_COUNT);
-    gContestResources->field_14 = AllocZeroed(sizeof(struct UnknownContestStruct4) * CONTESTANT_COUNT);
+    gContestResources->excitement = AllocZeroed(sizeof(struct ContestExcitement) * CONTESTANT_COUNT);
+    gContestResources->gfxState = AllocZeroed(sizeof(struct ContestGraphicsState) * CONTESTANT_COUNT);
     gContestResources->moveAnim = AllocZeroed(sizeof(struct ContestMoveAnimData));
-    gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C) * CONTESTANT_COUNT);
-    gContestResources->field_20 = AllocZeroed(sizeof(struct ContestResourcesField20));
+    gContestResources->tv = AllocZeroed(sizeof(struct ContestTV) * CONTESTANT_COUNT);
+    gContestResources->unused = AllocZeroed(sizeof(struct ContestUnused));
     gContestResources->contestBgTilemaps[0] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[1] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[2] = AllocZeroed(0x1000);
@@ -1073,13 +1073,13 @@ static void FreeContestResources(void)
 {
     FREE_AND_SET_NULL(gContestResources->contest);
     FREE_AND_SET_NULL(gContestResources->status);
-    FREE_AND_SET_NULL(gContestResources->field_8);
+    FREE_AND_SET_NULL(gContestResources->appealResults);
     FREE_AND_SET_NULL(gContestResources->aiData);
-    FREE_AND_SET_NULL(gContestResources->field_10);
-    FREE_AND_SET_NULL(gContestResources->field_14);
+    FREE_AND_SET_NULL(gContestResources->excitement);
+    FREE_AND_SET_NULL(gContestResources->gfxState);
     FREE_AND_SET_NULL(gContestResources->moveAnim);
-    FREE_AND_SET_NULL(gContestResources->field_1c);
-    FREE_AND_SET_NULL(gContestResources->field_20);
+    FREE_AND_SET_NULL(gContestResources->tv);
+    FREE_AND_SET_NULL(gContestResources->unused);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[0]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[1]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[2]);
@@ -1724,7 +1724,7 @@ static void Task_DoAppeals(u8 taskId)
     {
     case APPEALSTATE_START_TURN:
         ContestDebugDoPrint();
-        for (i = 0; eContest.turnNumber != gContestResources->field_8->turnOrder[i]; i++)
+        for (i = 0; eContest.turnNumber != eContestAppealResults.turnOrder[i]; i++)
             ;
         eContest.currentContestant = i;
         contestant = eContest.currentContestant;
@@ -1735,8 +1735,8 @@ static void Task_DoAppeals(u8 taskId)
             eContest.waitForLink = TRUE;
             if (IsPlayerLinkLeader())
                 CalculateAppealMoveImpact(eContest.currentContestant);
-            taskId2 = CreateTask(sub_80FCC88, 0);
-            SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, Task_EndWaitForLink);
+            taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
+            SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
             ContestPrintLinkStandby();
             gTasks[taskId].tState = APPEALSTATE_1;
         }
@@ -1787,7 +1787,7 @@ static void Task_DoAppeals(u8 taskId)
         if (gSprites[spriteId].callback == SpriteCallbackDummy)
         {
             // Once mon has slid in, also wait for box to finish blinking
-            if (!gContestResources->field_14[contestant].boxBlinking)
+            if (!eContestGfxState[contestant].boxBlinking)
                 gTasks[taskId].tState = APPEALSTATE_PRINT_USED_MOVE_MSG;
         }
         return;
@@ -1923,7 +1923,7 @@ static void Task_DoAppeals(u8 taskId)
         gTasks[taskId].tState = APPEALSTATE_WAIT_MOVE_USERS_HEARTS;
         return;
     case APPEALSTATE_WAIT_MOVE_USERS_HEARTS:
-        if (!gContestResources->field_14[eContest.currentContestant].updatingAppealHearts)
+        if (!eContestGfxState[eContest.currentContestant].updatingAppealHearts)
             gTasks[taskId].tState = APPEALSTATE_TRY_JUDGE_STAR;
         return;
     case APPEALSTATE_TRY_JUDGE_STAR:
@@ -2016,7 +2016,7 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_WAIT_OPPONENT_HEARTS:
         for (i = 0; gTasks[taskId].data[1] != gContestantTurnOrder[i]; i++)
             ;
-        if (!gContestResources->field_14[i].updatingAppealHearts)
+        if (!eContestGfxState[i].updatingAppealHearts)
             gTasks[taskId].tState = APPEALSTATE_UPDATE_OPPONENT_STARS;
         return;
     case APPEALSTATE_UPDATE_OPPONENT_STARS:
@@ -2132,16 +2132,16 @@ static void Task_DoAppeals(u8 taskId)
                 {
                     UpdateAppealHearts(
                         eContestantStatus[contestant].appeal2,
-                        eContestantStatus[contestant].unk17,
+                        eContestantStatus[contestant].comboAppealBonus,
                         contestant);
-                    eContestantStatus[contestant].appeal2 += eContestantStatus[contestant].unk17;
+                    eContestantStatus[contestant].appeal2 += eContestantStatus[contestant].comboAppealBonus;
                 }
                 gTasks[taskId].tState = APPEALSTATE_WAIT_HEARTS_FROM_COMBO;
             }
         }
         return;
     case APPEALSTATE_WAIT_HEARTS_FROM_COMBO:
-        if (!gContestResources->field_14[contestant].updatingAppealHearts)
+        if (!eContestGfxState[contestant].updatingAppealHearts)
         {
             gTasks[taskId].tCounter = 0;
             gTasks[taskId].tState = APPEALSTATE_CHECK_REPEATED_MOVE;
@@ -2177,7 +2177,7 @@ static void Task_DoAppeals(u8 taskId)
         return;
     case APPEALSTATE_WAIT_HEARTS_FROM_REPEAT:
         ContestDebugDoPrint();
-        if (!gContestResources->field_14[contestant].updatingAppealHearts)
+        if (!eContestGfxState[contestant].updatingAppealHearts)
         {
             gTasks[taskId].tCounter = 0;
             ContestClearGeneralTextWindow();
@@ -2185,13 +2185,13 @@ static void Task_DoAppeals(u8 taskId)
         }
         return;
     case APPEALSTATE_UPDATE_CROWD:
-        if (gContestResources->field_10->excitementFrozen && contestant != gContestResources->field_10->excitementFreezer)
+        if (eContestExcitement.frozen && contestant != eContestExcitement.freezer)
         {
             gTasks[taskId].tState = APPEALSTATE_PRINT_CROWD_WATCHES_MSG;
         }
         else
         {
-            r3 = gContestResources->field_10->moveExcitement; // Can't get this to use local variable. Should be "moveExcitement"
+            r3 = eContestExcitement.moveExcitement; // Can't get this to use local variable. Should be "moveExcitement"
             if (eContestantStatus[contestant].overrideCategoryExcitementMod)
             {
                 r3 = 1;
@@ -2293,14 +2293,14 @@ static void Task_DoAppeals(u8 taskId)
                 if (gTasks[taskId].data[11]++ > 29)
                 {
                     gTasks[taskId].data[11] = 0;
-                    UpdateAppealHearts(eContestantStatus[contestant].appeal2, gContestResources->field_10->unk2, contestant);
-                    eContestantStatus[contestant].appeal2 += gContestResources->field_10->unk2;
+                    UpdateAppealHearts(eContestantStatus[contestant].appeal2, eContestExcitement.excitementAppealBonus, contestant);
+                    eContestantStatus[contestant].appeal2 += eContestExcitement.excitementAppealBonus;
                     gTasks[taskId].tCounter++;
                 }
             }
             break;
         case 3:
-            if (!gContestResources->field_14[contestant].updatingAppealHearts)
+            if (!eContestGfxState[contestant].updatingAppealHearts)
             {
                 if (!eContest.animatingAudience)
                 {
@@ -2320,7 +2320,7 @@ static void Task_DoAppeals(u8 taskId)
         }
         return;
     case APPEALSTATE_WAIT_EXCITEMENT_HEARTS:
-        if (!gContestResources->field_14[contestant].updatingAppealHearts)
+        if (!eContestGfxState[contestant].updatingAppealHearts)
         {
             ContestClearGeneralTextWindow();
             gTasks[taskId].tState = APPEALSTATE_SLIDE_APPLAUSE_OUT;
@@ -2328,7 +2328,7 @@ static void Task_DoAppeals(u8 taskId)
         return;
     case APPEALSTATE_PRINT_CROWD_WATCHES_MSG:
         ContestClearGeneralTextWindow();
-        StringCopy(gStringVar3, gContestMons[gContestResources->field_10->excitementFreezer].nickname);
+        StringCopy(gStringVar3, gContestMons[eContestExcitement.freezer].nickname);
         StringCopy(gStringVar1, gContestMons[contestant].nickname);
         StringCopy(gStringVar2, gMoveNames[eContestantStatus[contestant].currMove]);
         StringExpandPlaceholders(gStringVar4, gText_CrowdContinuesToWatchMon);
@@ -2479,8 +2479,8 @@ static void Task_FinishRoundOfAppeals(u8 taskId)
                 RankContestants();
                 SetAttentionLevels();
             }
-            taskId2 = CreateTask(sub_80FCC88, 0);
-            SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, Task_EndWaitForLink);
+            taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
+            SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
             ContestPrintLinkStandby();
             gTasks[taskId].data[0] = 1;
         }
@@ -3526,7 +3526,7 @@ static void ResetContestantStatuses(void)
         eContest.excitementHistory[eContest.appealNumber][i] = Contest_GetMoveExcitement(eContestantStatus[i].currMove);
         eContestantStatus[i].currMove = MOVE_NONE;
     }
-    eContestResources10.excitementFrozen = 0;
+    eContestExcitement.frozen = FALSE;
 }
 
 bool8 Contest_IsMonsTurnDisabled(u8 contestant)
@@ -3702,16 +3702,16 @@ static s8 GetNumHeartsFromAppealPoints(s16 appeal)
 #define tContestant  data[3]
 #define tDelayTimer  data[10]
 
-static u8 UpdateAppealHearts(s16 startAppeal, s16 endAppeal, u8 contestant)
+static u8 UpdateAppealHearts(s16 startAppeal, s16 appealDelta, u8 contestant)
 {
     u8 taskId;
     s8 startHearts;
     s8 heartsDelta;
 
-    gContestResources->field_14[contestant].updatingAppealHearts = TRUE;
+    eContestGfxState[contestant].updatingAppealHearts = TRUE;
     taskId = CreateTask(Task_UpdateAppealHearts, 20);
     startHearts = GetNumHeartsFromAppealPoints(startAppeal);
-    heartsDelta = GetNumHeartsFromAppealPoints(startAppeal + endAppeal) - startHearts;
+    heartsDelta = GetNumHeartsFromAppealPoints(startAppeal + appealDelta) - startHearts;
     GetAppealHeartTileOffset(contestant);  // unused return value
     gTasks[taskId].tNumHearts = abs(startHearts);
     gTasks[taskId].tHeartsDelta = heartsDelta;
@@ -3741,7 +3741,7 @@ static void Task_UpdateAppealHearts(u8 taskId)
         {
             // No more hearts to add/remove, end
             DestroyTask(taskId);
-            gContestResources->field_14[contestant].updatingAppealHearts = FALSE;
+            eContestGfxState[contestant].updatingAppealHearts = FALSE;
             return;
         }
         else if (startHearts == 0)
@@ -3834,7 +3834,7 @@ static void CreateSliderHeartSprites(void)
     {
         u8 y = sSliderHeartYPositions[gContestantTurnOrder[i]];
 
-        gContestResources->field_14[i].sliderHeartSpriteId = CreateSprite(&sSpriteTemplate_SliderHeart, 180, y, 1);
+        eContestGfxState[i].sliderHeartSpriteId = CreateSprite(&sSpriteTemplate_SliderHeart, 180, y, 1);
     }
 }
 
@@ -3847,8 +3847,8 @@ static void UpdateHeartSlider(u8 contestant)
     u8 spriteId;
     s16 slideTarget;
 
-    gContestResources->field_14[contestant].sliderUpdating = TRUE;
-    spriteId = gContestResources->field_14[contestant].sliderHeartSpriteId;
+    eContestGfxState[contestant].sliderUpdating = TRUE;
+    spriteId = eContestGfxState[contestant].sliderHeartSpriteId;
     slideTarget = eContestantStatus[contestant].pointTotal / 10 * 2;
     if (slideTarget > 56)
         slideTarget = 56;
@@ -3878,7 +3878,7 @@ static bool8 SlidersDoneUpdating(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (gContestResources->field_14[i].sliderUpdating)
+        if (eContestGfxState[i].sliderUpdating)
             break;
     }
     if (i == CONTESTANT_COUNT)
@@ -3891,7 +3891,7 @@ static void SpriteCB_UpdateHeartSlider(struct Sprite *sprite)
 {
     if (sprite->pos2.x == sprite->sTargetX)
     {
-        gContestResources->field_14[sprite->sContestant].sliderUpdating = FALSE;
+        eContestGfxState[sprite->sContestant].sliderUpdating = FALSE;
         sprite->callback = SpriteCallbackDummy;
     }
     else
@@ -3910,7 +3910,7 @@ static void UpdateSliderHeartSpriteYPositions(void)
     s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        gSprites[gContestResources->field_14[i].sliderHeartSpriteId].pos1.y = sSliderHeartYPositions[gContestantTurnOrder[i]];
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.y = sSliderHeartYPositions[gContestantTurnOrder[i]];
 }
 
 // Used to hide (or subsequently reshow) the bottom two slider hearts that get hidden by text windows by moving them offscreen
@@ -3924,9 +3924,9 @@ static void SetBottomSliderHeartsInvisibility(bool8 invisible)
         if (gContestantTurnOrder[i] > 1)
         {
             if (!invisible)
-                gSprites[gContestResources->field_14[i].sliderHeartSpriteId].pos1.x = 180;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 180;
             else
-                gSprites[gContestResources->field_14[i].sliderHeartSpriteId].pos1.x = 256;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 256;
         }
     }
 }
@@ -3939,12 +3939,12 @@ static void CreateNextTurnSprites(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         LoadCompressedSpriteSheet(&sSpriteSheet_NextTurn[i]);
-        gContestResources->field_14[i].nextTurnSpriteId = CreateSprite(&sSpriteTemplates_NextTurn[i],
+        eContestGfxState[i].nextTurnSpriteId = CreateSprite(&sSpriteTemplates_NextTurn[i],
                                                            204,
                                                            sNextTurnSpriteYPositions[gContestantTurnOrder[i]],
                                                            0);
-        SetSubspriteTables(&gSprites[gContestResources->field_14[i].nextTurnSpriteId], sSubspriteTable_NextTurn);
-        gSprites[gContestResources->field_14[i].nextTurnSpriteId].invisible = TRUE;
+        SetSubspriteTables(&gSprites[eContestGfxState[i].nextTurnSpriteId], sSubspriteTable_NextTurn);
+        gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = TRUE;
     }
 }
 
@@ -4174,7 +4174,7 @@ static void BlinkContestantBox(u8 spriteId, bool8 b)
     u8 spriteId2;
 
     SetBlendForContestantBoxBlink();
-    gContestResources->field_14[gSprites[spriteId].data[1]].boxBlinking = TRUE;
+    eContestGfxState[gSprites[spriteId].data[1]].boxBlinking = TRUE;
     spriteId2 = gSprites[spriteId].data[0];
     StartSpriteAffineAnim(&gSprites[spriteId], 1);
     StartSpriteAffineAnim(&gSprites[spriteId2], 1);
@@ -4203,7 +4203,7 @@ static void SpriteCB_BlinkContestantBox(struct Sprite *sprite)
 
 static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
 {
-    gContestResources->field_14[sprite->data[1]].boxBlinking = FALSE;
+    eContestGfxState[sprite->data[1]].boxBlinking = FALSE;
     DestroyContestantBoxBlinkSprites(sprite->data[0]);
     ResetBlendForContestantBoxBlink();
 }
@@ -4435,14 +4435,14 @@ static void CalculateAppealMoveImpact(u8 contestant)
     }
     eContestantStatus[contestant].appeal1 = gContestEffects[effect].appeal;
     eContestantStatus[contestant].appeal2 = eContestantStatus[contestant].appeal1;
-    eContestResources8.jam = gContestEffects[effect].jam;
-    eContestResources8.jam2 = eContestResources8.jam;
+    eContestAppealResults.jam = gContestEffects[effect].jam;
+    eContestAppealResults.jam2 = eContestAppealResults.jam;
 
-    eContestResources8.contestant = contestant;
+    eContestAppealResults.contestant = contestant;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         eContestantStatus[i].jam = 0;
-        eContestResources8.unnervedPokes[i] = 0;
+        eContestAppealResults.unnervedPokes[i] = 0;
     }
 
     if (eContestantStatus[contestant].hasJudgesAttention
@@ -4469,7 +4469,7 @@ static void CalculateAppealMoveImpact(u8 contestant)
             eContestantStatus[contestant].completedCombo = completedCombo;
             eContestantStatus[contestant].usedComboMove = TRUE;
             eContestantStatus[contestant].hasJudgesAttention = FALSE;
-            eContestantStatus[contestant].unk17 = eContestantStatus[contestant].appeal1 * eContestantStatus[contestant].completedCombo;
+            eContestantStatus[contestant].comboAppealBonus = eContestantStatus[contestant].appeal1 * eContestantStatus[contestant].completedCombo;
             eContestantStatus[contestant].unk15_3 = TRUE;
         }
         else
@@ -4494,20 +4494,20 @@ static void CalculateAppealMoveImpact(u8 contestant)
         eContestantStatus[contestant].appeal2 = 0;
         eContestantStatus[contestant].appeal1 = 0;
     }
-    eContestResources10.moveExcitement = Contest_GetMoveExcitement(eContestantStatus[contestant].currMove);
+    eContestExcitement.moveExcitement = Contest_GetMoveExcitement(eContestantStatus[contestant].currMove);
     if (eContestantStatus[contestant].overrideCategoryExcitementMod)
-        eContestResources10.moveExcitement = 1;
+        eContestExcitement.moveExcitement = 1;
 
-    if (eContestResources10.moveExcitement > 0)
+    if (eContestExcitement.moveExcitement > 0)
     {
-        if (eContest.applauseLevel + eContestResources10.moveExcitement > 4)
-            eContestResources10.unk2 = 60;
+        if (eContest.applauseLevel + eContestExcitement.moveExcitement > 4)
+            eContestExcitement.excitementAppealBonus = 60;
         else
-            eContestResources10.unk2 = 10;
+            eContestExcitement.excitementAppealBonus = 10;
     }
     else
     {
-        eContestResources10.unk2 = 0;
+        eContestExcitement.excitementAppealBonus = 0;
     }
 
     // Transform and Role Play require a visible target mon
@@ -4554,13 +4554,13 @@ static void PrintAppealMoveResultText(u8 contestant, u8 stringId)
 {
     StringCopy(gStringVar1, gContestMons[contestant].nickname);
     StringCopy(gStringVar2, gMoveNames[eContestantStatus[contestant].currMove]);
-    if      (gContestMoves[eContestantStatus[eContestResources8.contestant].currMove].contestCategory == CONTEST_CATEGORY_COOL)
+    if      (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_COOL)
         StringCopy(gStringVar3, gText_Contest_Shyness);
-    else if (gContestMoves[eContestantStatus[eContestResources8.contestant].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
+    else if (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
         StringCopy(gStringVar3, gText_Contest_Anxiety);
-    else if (gContestMoves[eContestantStatus[eContestResources8.contestant].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
+    else if (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
         StringCopy(gStringVar3, gText_Contest_Laziness);
-    else if (gContestMoves[eContestantStatus[eContestResources8.contestant].currMove].contestCategory == CONTEST_CATEGORY_SMART)
+    else if (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_SMART)
         StringCopy(gStringVar3, gText_Contest_Hesitancy);
     else
         StringCopy(gStringVar3, gText_Contest_Fear);
@@ -4646,7 +4646,7 @@ static void ApplyNextTurnOrder(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContestResources8.turnOrder[i] = newTurnOrder[i];
+        eContestAppealResults.turnOrder[i] = newTurnOrder[i];
         eContestantStatus[i].nextTurnOrder = 0xFF;
         eContestantStatus[i].turnOrderMod = 0;
         gContestantTurnOrder[i] = newTurnOrder[i];
@@ -5005,13 +5005,13 @@ static void ShowHideNextTurnGfx(bool8 show)
     {
         if (eContestantStatus[i].turnOrderMod != 0 && show)
         {
-            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(VRAM + 0x10000 + (gSprites[gContestResources->field_14[i].nextTurnSpriteId].oam.tileNum + 6) * 32), 32);
-            gSprites[gContestResources->field_14[i].nextTurnSpriteId].pos1.y = sNextTurnSpriteYPositions[gContestantTurnOrder[i]];
-            gSprites[gContestResources->field_14[i].nextTurnSpriteId].invisible = FALSE;
+            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(VRAM + 0x10000 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 6) * 32), 32);
+            gSprites[eContestGfxState[i].nextTurnSpriteId].pos1.y = sNextTurnSpriteYPositions[gContestantTurnOrder[i]];
+            gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = FALSE;
         }
         else
         {
-            gSprites[gContestResources->field_14[i].nextTurnSpriteId].invisible = TRUE;
+            gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = TRUE;
         }
     }
 }
@@ -5029,7 +5029,7 @@ static void DrawUnnervedSymbols(void)
     s32 i = 0;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (eContestResources8.unnervedPokes[i] != 0 && !Contest_IsMonsTurnDisabled(i))
+        if (eContestAppealResults.unnervedPokes[i] != 0 && !Contest_IsMonsTurnDisabled(i))
         {
             u32 contestantOffset = gContestantTurnOrder[i] * 5 + 2;
             u16 symbolOffset = GetStatusSymbolTileOffset(STAT_SYMBOL_SWIRL);
@@ -5083,8 +5083,8 @@ static void SetBgForCurtainDrop(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        gSprites[gContestResources->field_14[i].sliderHeartSpriteId].oam.priority = 1;
-        gSprites[gContestResources->field_14[i].nextTurnSpriteId].oam.priority = 1;
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.priority = 1;
+        gSprites[eContestGfxState[i].nextTurnSpriteId].oam.priority = 1;
     }
 }
 
@@ -5109,8 +5109,8 @@ static void UpdateContestantBoxOrder(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        gSprites[gContestResources->field_14[i].sliderHeartSpriteId].oam.priority = 0;
-        gSprites[gContestResources->field_14[i].nextTurnSpriteId].oam.priority = 0;
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.priority = 0;
+        gSprites[eContestGfxState[i].nextTurnSpriteId].oam.priority = 0;
     }
 }
 
@@ -5160,8 +5160,8 @@ static void Task_ResetForNextRound(u8 taskId)
             eContest.waitForLink = TRUE;
             if (IsPlayerLinkLeader())
                 ResetContestantStatuses();
-            taskId2 = CreateTask(sub_80FCC88, 0);
-            SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, Task_EndWaitForLink);
+            taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
+            SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
             ContestPrintLinkStandby();
             gTasks[taskId].data[0] = 2;
         }
@@ -5244,13 +5244,13 @@ static void AnimateSliderHearts(u8 animId)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        gSprites[gContestResources->field_14[i].sliderHeartSpriteId].oam.matrixNum = AllocOamMatrix();
-        gSprites[gContestResources->field_14[i].sliderHeartSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        StartSpriteAffineAnim(&gSprites[gContestResources->field_14[i].sliderHeartSpriteId], animId);
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.matrixNum = AllocOamMatrix();
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+        StartSpriteAffineAnim(&gSprites[eContestGfxState[i].sliderHeartSpriteId], animId);
         if (animId == SLIDER_HEART_ANIM_APPEAR)
         {
-            AnimateSprite(&gSprites[gContestResources->field_14[i].sliderHeartSpriteId]);
-            gSprites[gContestResources->field_14[i].sliderHeartSpriteId].invisible = FALSE;
+            AnimateSprite(&gSprites[eContestGfxState[i].sliderHeartSpriteId]);
+            gSprites[eContestGfxState[i].sliderHeartSpriteId].invisible = FALSE;
         }
     }
     taskId = CreateTask(Task_WaitForSliderHeartAnim, 5);
@@ -5262,15 +5262,15 @@ static void Task_WaitForSliderHeartAnim(u8 taskId)
 {
     s32 i;
 
-    if (gSprites[gContestResources->field_14[0].sliderHeartSpriteId].affineAnimEnded)
+    if (gSprites[eContestGfxState[0].sliderHeartSpriteId].affineAnimEnded)
     {
         if ((u8)gTasks[taskId].tAnimId == SLIDER_HEART_ANIM_DISAPPEAR)
         {
             for (i = 0; i < CONTESTANT_COUNT; i++)
-                gSprites[gContestResources->field_14[i].sliderHeartSpriteId].invisible = TRUE;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].invisible = TRUE;
         }
         for (i = 0; i < CONTESTANT_COUNT; i++)
-            FreeSpriteOamMatrix(&gSprites[gContestResources->field_14[i].sliderHeartSpriteId]);
+            FreeSpriteOamMatrix(&gSprites[eContestGfxState[i].sliderHeartSpriteId]);
         eContest.sliderHeartsAnimating = FALSE;
         DestroyTask(taskId);
     }
@@ -5615,59 +5615,59 @@ static void sub_80DF080(u8 contestant)
 {
     s32 i;
 
-    if (!gContestResources->field_10->excitementFrozen
-        && gContestResources->field_10->moveExcitement > 0
+    if (!eContestExcitement.frozen
+        && eContestExcitement.moveExcitement > 0
         && !eContestantStatus[contestant].repeatedMove)
     {
-        gContestResources->field_1c[contestant].unkC |= 1;
-        gContestResources->field_1c[contestant].unkE_2 = 1;
+        gContestResources->tv[contestant].unkC |= 1;
+        gContestResources->tv[contestant].unkE_2 = 1;
     }
 
     if (eContestantStatus[contestant].nervous)
-        gContestResources->field_1c[contestant].unkC |= 2;
+        gContestResources->tv[contestant].unkC |= 2;
 
-    if (!gContestResources->field_10->excitementFrozen
-        && gContestResources->field_10->moveExcitement != 0
-        && gContestResources->field_10->unk2 == 60)
+    if (!eContestExcitement.frozen
+        && eContestExcitement.moveExcitement != 0
+        && eContestExcitement.excitementAppealBonus == 60)
     {
-        gContestResources->field_1c[contestant].unkC |= 4;
+        gContestResources->tv[contestant].unkC |= 4;
     }
 
     if (eContestantStatus[contestant].usedComboMove
         && eContestantStatus[contestant].completedCombo)
     {
-        gContestResources->field_1c[contestant].unkC |= 8;
+        gContestResources->tv[contestant].unkC |= 8;
     }
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (i != contestant && eContestantStatus[i].jam != 0)
         {
-            gContestResources->field_1c[contestant].unkC |= 0x10;
-            gContestResources->field_1c[i].unkC |= 0x40;
+            gContestResources->tv[contestant].unkC |= 0x10;
+            gContestResources->tv[i].unkC |= 0x40;
         }
     }
 
     if (eContestantStatus[contestant].numTurnsSkipped != 0
         || eContestantStatus[contestant].noMoreTurns)
     {
-        gContestResources->field_1c[contestant].unkC |= 0x20;
+        gContestResources->tv[contestant].unkC |= 0x20;
     }
     else if (!eContestantStatus[contestant].nervous)
     {
-        gContestResources->field_1c[contestant].unkC |= 0x80;
-        gContestResources->field_1c[contestant].unkE_1 = 1;
-        gContestResources->field_1c[contestant].unk0[eContest.appealNumber] = eContestantStatus[contestant].currMove;
+        gContestResources->tv[contestant].unkC |= 0x80;
+        gContestResources->tv[contestant].unkE_1 = 1;
+        gContestResources->tv[contestant].unk0[eContest.appealNumber] = eContestantStatus[contestant].currMove;
     }
 
     if (eContestantStatus[contestant].repeatedMove)
-        gContestResources->field_1c[contestant].unkD |= 2;
+        gContestResources->tv[contestant].unkD |= 2;
 
     if (eContest.applauseLevel == 4
-        && !gContestResources->field_10->excitementFrozen
-        && gContestResources->field_10->moveExcitement < 0)
+        && !eContestExcitement.frozen
+        && eContestExcitement.moveExcitement < 0)
     {
-        gContestResources->field_1c[contestant].unkD |= 0x20;
+        gContestResources->tv[contestant].unkD |= 0x20;
     }
 }
 
@@ -5694,14 +5694,14 @@ static void sub_80DF250(void)
             r1 = i;
     }
 
-    gContestResources->field_1c[r1].unkD |= 1;
+    gContestResources->tv[r1].unkD |= 1;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (i != var_38 && gContestMonTotalPoints[var_38] - gContestMonTotalPoints[i] <= 50)
-            gContestResources->field_1c[i].unkD |= 4;
+            gContestResources->tv[i].unkD |= 4;
 
-        if (!gContestResources->field_1c[i].unkE_2)
-            gContestResources->field_1c[i].unkD |= 8;
+        if (!gContestResources->tv[i].unkE_2)
+            gContestResources->tv[i].unkD |= 8;
 
         for (j = 0; j < CONTESTANT_COUNT; j++)
         {
@@ -5709,7 +5709,7 @@ static void sub_80DF250(void)
                 break;
         }
         if (j == 4 && gContestFinalStandings[i] != 0)
-            gContestResources->field_1c[i].unkD |= 0x10;
+            gContestResources->tv[i].unkD |= 0x10;
 
         r12 = FALSE;
         r8 = FALSE;
@@ -5721,10 +5721,10 @@ static void sub_80DF250(void)
                 r8 = TRUE;
         }
         if (!r12 && !r8)
-            gContestResources->field_1c[i].unkD |= 0x40;
+            gContestResources->tv[i].unkD |= 0x40;
 
-        if (!gContestResources->field_1c[i].unkE_1)
-            gContestResources->field_1c[i].unkD |= 0x80;
+        if (!gContestResources->tv[i].unkE_1)
+            gContestResources->tv[i].unkD |= 0x80;
     }
 
     for (i = 0; i < 5; i++)
@@ -5737,15 +5737,15 @@ static void sub_80DF250(void)
 
     for (i = 0; i < 5; i++)
     {
-        if (gContestResources->field_1c[var_38].unk0[i] != 0)
+        if (gContestResources->tv[var_38].unk0[i] != 0)
         {
             for (j = 0; j < 5; j++)
             {
-                if (gContestResources->field_1c[var_38].unk0[i] != sp0[j])
+                if (gContestResources->tv[var_38].unk0[i] != sp0[j])
                 {
                     if (sp0[j] == 0)
                     {
-                        sp0[j] = gContestResources->field_1c[var_38].unk0[i];
+                        sp0[j] = gContestResources->tv[var_38].unk0[i];
                         spC[j]++;
                     }
                 }
@@ -5775,7 +5775,7 @@ static void sub_80DF250(void)
         }
     }
 
-    gContestResources->field_1c[var_38].unkA = sp14[Random() % count];
+    gContestResources->tv[var_38].unkA = sp14[Random() % count];
 }
 
 static void sub_80DF4F8(void)
@@ -5812,7 +5812,7 @@ static void sub_80DF4F8(void)
             r10++;
     }
 
-    bits = gContestResources->field_1c[r7].unkC;
+    bits = gContestResources->tv[r7].unkC;
     count = 0;
     for (i = 0; i < 8; bits >>= 1, i++)
     {
@@ -5821,7 +5821,7 @@ static void sub_80DF4F8(void)
     }
 
     r5 = Random() % count;
-    bits = gContestResources->field_1c[r7].unkC;
+    bits = gContestResources->tv[r7].unkC;
     count = 0;
     r2 = 0;
     for (i = 0; i < 8; bits >>= 1, r2++, i++)
@@ -5837,13 +5837,13 @@ static void sub_80DF4F8(void)
     if (r7 == 0)
     {
         sp0[0] = 1;
-        r4 = gContestResources->field_1c[1].unkD;
+        r4 = gContestResources->tv[1].unkD;
         i = 2;
     }
     else
     {
         sp0[0] = 0;
-        r4 = gContestResources->field_1c[0].unkD;
+        r4 = gContestResources->tv[0].unkD;
         i = 1;
     }
 
@@ -5852,13 +5852,13 @@ static void sub_80DF4F8(void)
     {
         if (i != r7)
         {
-            if (r4 < gContestResources->field_1c[i].unkD)
+            if (r4 < gContestResources->tv[i].unkD)
             {
                 sp0[0] = i;
-                r4 = gContestResources->field_1c[i].unkD;
+                r4 = gContestResources->tv[i].unkD;
                 r5 = 1;
             }
-            else if (r4 == gContestResources->field_1c[i].unkD)
+            else if (r4 == gContestResources->tv[i].unkD)
             {
                 sp0[r5] = i;
                 r5++;
@@ -5870,7 +5870,7 @@ static void sub_80DF4F8(void)
     r2 = 0x80;
     for (i = 0; i < 8; r2 >>= 1, i++)
     {
-        r4 = gContestResources->field_1c[r6].unkD & r2;
+        r4 = gContestResources->tv[r6].unkD & r2;
         if (r4)
             break;
     }
@@ -5878,7 +5878,7 @@ static void sub_80DF4F8(void)
     ContestLiveUpdates_BeforeInterview_1(r9);
     ContestLiveUpdates_BeforeInterview_2(r10);
     ContestLiveUpdates_BeforeInterview_3(var);
-    ContestLiveUpdates_BeforeInterview_4(gContestResources->field_1c[r7].unkA);
+    ContestLiveUpdates_BeforeInterview_4(gContestResources->tv[r7].unkA);
     ContestLiveUpdates_BeforeInterview_5(r4, r6);
 }
 
@@ -5932,7 +5932,7 @@ static void ContestDebugPrintBitStrings(void)
         {
             txtPtr = StringCopy(text1, gText_CDot);
             Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, 7);
-            bits = gContestResources->field_1c[i].unkC;
+            bits = gContestResources->tv[i].unkC;
             for (j = 7; j > -1; j--) // Weird loop.
             {
                 txtPtr = ConvertIntToDecimalStringN(txtPtr, bits & 1, STR_CONV_MODE_LEFT_ALIGN, 1);
@@ -5952,7 +5952,7 @@ static void ContestDebugPrintBitStrings(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             StringCopy(text1, gText_BDot);
-            bits = gContestResources->field_1c[i].unkD;
+            bits = gContestResources->tv[i].unkD;
             txtPtr = &text1[2];
             for (j = 7; j > -1; j--) // Weird loop.
             {
