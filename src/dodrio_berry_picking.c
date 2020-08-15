@@ -4657,7 +4657,7 @@ static bool32 sub_802A8E8(void)
             return FALSE;
         break;
     case 5:
-        LoadPalette(stdpal_get(3), 0xD0, 0x20);
+        LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
         break;
     default:
         gUnknown_02022CF8->unk3018 = 0;
