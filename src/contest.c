@@ -79,7 +79,7 @@ static void Task_ReadyUpdateHeartSliders(u8);
 static void Task_UpdateHeartSliders(u8);
 static void Task_WaitForHeartSliders(u8);
 static void sub_80DA348(u8);
-static void sub_80DA38C(u8);
+static void Task_WaitPrintRoundResult(u8);
 static void Task_PrintRoundResultText(u8);
 static void Task_ReUpdateHeartSliders(u8);
 static void Task_WaitForHeartSlidersAgain(u8);
@@ -265,6 +265,70 @@ enum {
     SLIDER_HEART_ANIM_NORMAL,
     SLIDER_HEART_ANIM_DISAPPEAR,
     SLIDER_HEART_ANIM_APPEAR,
+};
+
+// States for Task_DoAppeals
+enum {
+    APPEALSTATE_START_TURN,
+    APPEALSTATE_WAIT_LINK,
+    APPEALSTATE_CHECK_SKIP_TURN,
+    APPEALSTATE_SLIDE_MON_IN,
+    APPEALSTATE_WAIT_SLIDE_MON,
+    APPEALSTATE_PRINT_USED_MOVE_MSG,
+    APPEALSTATE_WAIT_USED_MOVE_MSG,
+    APPEALSTATE_MOVE_ANIM,
+    APPEALSTATE_WAIT_MOVE_ANIM,
+    APPEALSTATE_MOVE_ANIM_MULTITURN,
+    APPEALSTATE_SLIDE_MON_OUT,
+    APPEALSTATE_FREE_MON_SPRITE,
+    APPEALSTATE_UPDATE_MOVE_USERS_HEARTS,
+    APPEALSTATE_WAIT_MOVE_USERS_HEARTS,
+    APPEALSTATE_PRINT_COMBO_MSG,
+    APPEALSTATE_TRY_UPDATE_HEARTS_FROM_COMBO,
+    APPEALSTATE_WAIT_HEARTS_FROM_COMBO,
+    APPEALSTATE_CHECK_REPEATED_MOVE,
+    APPEALSTATE_WAIT_HEARTS_FROM_REPEAT,
+    APPEALSTATE_UPDATE_HEARTS_FROM_REPEAT,
+    APPEALSTATE_START_TURN_END_DELAY,
+    APPEALSTATE_TURN_END_DELAY,
+    APPEALSTATE_START_NEXT_TURN,
+    APPEALSTATE_TRY_PRINT_MOVE_RESULT,
+    APPEALSTATE_WAIT_MOVE_RESULT_MSG,
+    APPEALSTATE_UPDATE_OPPONENTS,
+    APPEALSTATE_UPDATE_OPPONENT,
+    APPEALSTATE_WAIT_OPPONENT_RESPONSE_MSG,
+    APPEALSTATE_UPDATE_OPPONENT_HEARTS,
+    APPEALSTATE_WAIT_OPPONENT_HEARTS,
+    APPEALSTATE_UPDATE_OPPONENT_STATUS,
+    APPEALSTATE_PRINT_SKIP_TURN_MSG,
+    APPEALSTATE_WAIT_SKIP_TURN_MSG,
+    APPEALSTATE_PRINT_TOO_NERVOUS_MSG,
+    APPEALSTATE_WAIT_TOO_NERVOUS_MSG,
+    APPEALSTATE_TRY_JUDGE_STAR,
+    APPEALSTATE_WAIT_JUDGE_STAR,
+    APPEALSTATE_UPDATE_MOVE_USERS_STARS,
+    APPEALSTATE_WAIT_MOVE_USERS_STARS,
+    APPEALSTATE_UPDATE_OPPONENT_STARS,
+    APPEALSTATE_WAIT_OPPONENT_STARS,
+    APPEALSTATE_UPDATE_CROWD,
+    APPEALSTATE_42, // Unused state
+    APPEALSTATE_WAIT_EXCITEMENT_HEARTS,
+    APPEALSTATE_44, // Unused state
+    APPEALSTATE_WAIT_JUDGE_COMBO,
+    APPEALSTATE_WAIT_JUDGE_REPEATED_MOVE,
+    APPEALSTATE_TRY_SHOW_NEXT_TURN_GFX,
+    APPEALSTATE_CHECK_TURN_ORDER_MOD,
+    APPEALSTATE_WAIT_JUDGE_TURN_ORDER,
+    APPEALSTATE_UPDATE_MOVE_USERS_STATUS,
+    APPEALSTATE_TRY_PRINT_SKIP_NEXT_TURN_MSG,
+    APPEALSTATE_WAIT_SKIP_NEXT_TURN_MSG,
+    APPEALSTATE_DO_CROWD_UNEXCITED,
+    APPEALSTATE_DO_CROWD_EXCITED,
+    APPEALSTATE_SLIDE_APPLAUSE_OUT,
+    APPEALSTATE_WAIT_SLIDE_APPLAUSE,
+    APPEALSTATE_PRINT_CROWD_WATCHES_MSG,
+    APPEALSTATE_PRINT_MON_MOVE_IGNORED_MSG,
+    APPEALSTATE_WAIT_MON_MOVE_IGNORED_MSG,
 };
 
 // EWRAM vars.
@@ -1023,7 +1087,7 @@ static void InitContestResources(void)
     eContest = (struct Contest){};
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContest.unused2[i] = 0xFF;
+        eContest.unk[i] = 0xFF;
     }
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -1163,7 +1227,7 @@ static void Task_StartContestWaitFade(u8 taskId)
     }
 }
 
-// If this is a link contest try to start communication
+// If this is a link contest try to start appeals communication
 // Otherwise skip ahead
 static void Task_TryStartLinkContest(u8 taskId)
 {
@@ -1634,69 +1698,6 @@ static void Task_WaitHideApplauseMeterForAppealStart(u8 taskId)
         gTasks[taskId].func = Task_AppealSetup;
 }
 
-enum {
-    APPEALSTATE_START_TURN,
-    APPEALSTATE_1,
-    APPEALSTATE_2,
-    APPEALSTATE_SLIDE_MON_IN,
-    APPEALSTATE_WAIT_SLIDE_MON,
-    APPEALSTATE_PRINT_USED_MOVE_MSG,
-    APPEALSTATE_WAIT_USED_MOVE_MSG,
-    APPEALSTATE_MOVE_ANIM,
-    APPEALSTATE_WAIT_MOVE_ANIM,
-    APPEALSTATE_MOVE_ANIM_MULTITURN,
-    APPEALSTATE_SLIDE_MON_OUT,
-    APPEALSTATE_FREE_MON_SPRITE,
-    APPEALSTATE_UPDATE_MOVE_USERS_HEARTS,
-    APPEALSTATE_WAIT_MOVE_USERS_HEARTS,
-    APPEALSTATE_PRINT_COMBO_MSG,
-    APPEALSTATE_TRY_UPDATE_HEARTS_FROM_COMBO,
-    APPEALSTATE_WAIT_HEARTS_FROM_COMBO,
-    APPEALSTATE_CHECK_REPEATED_MOVE,
-    APPEALSTATE_WAIT_HEARTS_FROM_REPEAT,
-    APPEALSTATE_UPDATE_HEARTS_FROM_REPEAT,
-    APPEALSTATE_START_TURN_END_DELAY,
-    APPEALSTATE_TURN_END_DELAY,
-    APPEALSTATE_START_NEXT_TURN,
-    APPEALSTATE_TRY_PRINT_MOVE_RESULT,
-    APPEALSTATE_WAIT_MOVE_RESULT_MSG,
-    APPEALSTATE_UPDATE_OPPONENTS,
-    APPEALSTATE_UPDATE_OPPONENT,
-    APPEALSTATE_WAIT_OPPONENT_RESPONSE_MSG,
-    APPEALSTATE_UPDATE_OPPONENT_HEARTS,
-    APPEALSTATE_WAIT_OPPONENT_HEARTS,
-    APPEALSTATE_UPDATE_OPPONENT_STATUS,
-    APPEALSTATE_PRINT_SKIP_TURN_MSG,
-    APPEALSTATE_WAIT_SKIP_TURN_MSG,
-    APPEALSTATE_PRINT_TOO_NERVOUS_MSG,
-    APPEALSTATE_WAIT_TOO_NERVOUS_MSG,
-    APPEALSTATE_TRY_JUDGE_STAR,
-    APPEALSTATE_WAIT_JUDGE_STAR,
-    APPEALSTATE_UPDATE_MOVE_USERS_STARS,
-    APPEALSTATE_WAIT_MOVE_USERS_STARS,
-    APPEALSTATE_UPDATE_OPPONENT_STARS,
-    APPEALSTATE_WAIT_OPPONENT_STARS,
-    APPEALSTATE_UPDATE_CROWD,
-    APPEALSTATE_42, // Unused state
-    APPEALSTATE_WAIT_EXCITEMENT_HEARTS,
-    APPEALSTATE_44, // Unused state
-    APPEALSTATE_WAIT_JUDGE_COMBO,
-    APPEALSTATE_WAIT_JUDGE_REPEATED_MOVE,
-    APPEALSTATE_TRY_SHOW_NEXT_TURN_GFX,
-    APPEALSTATE_CHECK_TURN_ORDER_MOD,
-    APPEALSTATE_WAIT_JUDGE_TURN_ORDER,
-    APPEALSTATE_UPDATE_MOVE_USERS_STATUS,
-    APPEALSTATE_TRY_PRINT_SKIP_NEXT_TURN_MSG,
-    APPEALSTATE_WAIT_SKIP_NEXT_TURN_MSG,
-    APPEALSTATE_DO_CROWD_UNEXCITED,
-    APPEALSTATE_DO_CROWD_EXCITED,
-    APPEALSTATE_SLIDE_APPLAUSE_OUT,
-    APPEALSTATE_WAIT_SLIDE_APPLAUSE,
-    APPEALSTATE_PRINT_CROWD_WATCHES_MSG,
-    APPEALSTATE_PRINT_MON_MOVE_IGNORED_MSG,
-    APPEALSTATE_WAIT_MON_MOVE_IGNORED_MSG,
-};
-
 #define tState data[0]
 #define tMonSpriteId data[2]
 #define tCounter data[10]
@@ -1746,19 +1747,19 @@ static void Task_DoAppeals(u8 taskId)
             taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
             SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
             ContestPrintLinkStandby();
-            gTasks[taskId].tState = APPEALSTATE_1;
+            gTasks[taskId].tState = APPEALSTATE_WAIT_LINK;
         }
         else
         {
             CalculateAppealMoveImpact(eContest.currentContestant);
-            gTasks[taskId].tState = APPEALSTATE_2;
+            gTasks[taskId].tState = APPEALSTATE_CHECK_SKIP_TURN;
         }
         return;
-    case APPEALSTATE_1:
+    case APPEALSTATE_WAIT_LINK:
         if (!eContest.waitForLink)
-            gTasks[taskId].tState = APPEALSTATE_2;
+            gTasks[taskId].tState = APPEALSTATE_CHECK_SKIP_TURN;
         return;
-    case APPEALSTATE_2:
+    case APPEALSTATE_CHECK_SKIP_TURN:
         SetContestLiveUpdateFlags(contestant);
         ContestDebugPrintBitStrings();
         if (eContestantStatus[contestant].numTurnsSkipped != 0
@@ -1927,7 +1928,7 @@ static void Task_DoAppeals(u8 taskId)
         gTasks[taskId].tState = APPEALSTATE_UPDATE_MOVE_USERS_HEARTS;
         return;
     case APPEALSTATE_UPDATE_MOVE_USERS_HEARTS:
-        UpdateAppealHearts(0, eContestantStatus[contestant].appeal2, contestant);
+        UpdateAppealHearts(0, eContestantStatus[contestant].appeal, contestant);
         gTasks[taskId].tState = APPEALSTATE_WAIT_MOVE_USERS_HEARTS;
         return;
     case APPEALSTATE_WAIT_MOVE_USERS_HEARTS:
@@ -2018,7 +2019,7 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_UPDATE_OPPONENT_HEARTS:
         for (i = 0; gTasks[taskId].data[1] != gContestantTurnOrder[i]; i++)
             ;
-        UpdateAppealHearts(eContestantStatus[i].appeal2 + eContestantStatus[i].jam, -eContestantStatus[i].jam, i);
+        UpdateAppealHearts(eContestantStatus[i].appeal + eContestantStatus[i].jam, -eContestantStatus[i].jam, i);
         gTasks[taskId].tState = APPEALSTATE_WAIT_OPPONENT_HEARTS;
         return;
     case APPEALSTATE_WAIT_OPPONENT_HEARTS:
@@ -2139,10 +2140,10 @@ static void Task_DoAppeals(u8 taskId)
                 if (!eContestantStatus[contestant].hasJudgesAttention)
                 {
                     UpdateAppealHearts(
-                        eContestantStatus[contestant].appeal2,
+                        eContestantStatus[contestant].appeal,
                         eContestantStatus[contestant].comboAppealBonus,
                         contestant);
-                    eContestantStatus[contestant].appeal2 += eContestantStatus[contestant].comboAppealBonus;
+                    eContestantStatus[contestant].appeal += eContestantStatus[contestant].comboAppealBonus;
                 }
                 gTasks[taskId].tState = APPEALSTATE_WAIT_HEARTS_FROM_COMBO;
             }
@@ -2178,8 +2179,8 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_UPDATE_HEARTS_FROM_REPEAT:
         if (!Contest_RunTextPrinters())
         {
-            UpdateAppealHearts(eContestantStatus[contestant].appeal2, -eContestantStatus[contestant].repeatJam, contestant);
-            eContestantStatus[contestant].appeal2 -= eContestantStatus[contestant].repeatJam;
+            UpdateAppealHearts(eContestantStatus[contestant].appeal, -eContestantStatus[contestant].repeatJam, contestant);
+            eContestantStatus[contestant].appeal -= eContestantStatus[contestant].repeatJam;
             gTasks[taskId].tState = APPEALSTATE_WAIT_HEARTS_FROM_REPEAT;
         }
         return;
@@ -2301,8 +2302,8 @@ static void Task_DoAppeals(u8 taskId)
                 if (gTasks[taskId].data[11]++ > 29)
                 {
                     gTasks[taskId].data[11] = 0;
-                    UpdateAppealHearts(eContestantStatus[contestant].appeal2, eContestExcitement.excitementAppealBonus, contestant);
-                    eContestantStatus[contestant].appeal2 += eContestExcitement.excitementAppealBonus;
+                    UpdateAppealHearts(eContestantStatus[contestant].appeal, eContestExcitement.excitementAppealBonus, contestant);
+                    eContestantStatus[contestant].appeal += eContestExcitement.excitementAppealBonus;
                     gTasks[taskId].tCounter++;
                 }
             }
@@ -2560,10 +2561,10 @@ static void sub_80DA348(u8 taskId)
     DmaCopy32Defvars(3, eUnknownHeap1A004.unk18204, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 2;
-    gTasks[taskId].func = sub_80DA38C;
+    gTasks[taskId].func = Task_WaitPrintRoundResult;
 }
 
-static void sub_80DA38C(u8 taskId)
+static void Task_WaitPrintRoundResult(u8 taskId)
 {
     if (++gTasks[taskId].data[0] > 2)
     {
@@ -3416,7 +3417,7 @@ static void RankContestants(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContestantStatus[i].pointTotal += eContestantStatus[i].appeal2;
+        eContestantStatus[i].pointTotal += eContestantStatus[i].appeal;
         arr[i] = eContestantStatus[i].pointTotal;
     }
 
@@ -3467,13 +3468,13 @@ static void SetAttentionLevels(void)
 
         if (eContestantStatus[i].currMove == MOVE_NONE)
             attentionLevel = 5;
-        else if (eContestantStatus[i].appeal2 <= 0)
+        else if (eContestantStatus[i].appeal <= 0)
             attentionLevel = 0;
-        else if (eContestantStatus[i].appeal2 < 30)
+        else if (eContestantStatus[i].appeal < 30)
             attentionLevel = 1;
-        else if (eContestantStatus[i].appeal2 < 60)
+        else if (eContestantStatus[i].appeal < 60)
             attentionLevel = 2;
-        else if (eContestantStatus[i].appeal2 < 80)
+        else if (eContestantStatus[i].appeal < 80)
             attentionLevel = 3;
         else
             attentionLevel = 4;
@@ -3496,8 +3497,8 @@ static void ResetContestantStatuses(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContestantStatus[i].appeal2 = 0;
-        eContestantStatus[i].appeal1 = 0;
+        eContestantStatus[i].appeal = 0;
+        eContestantStatus[i].baseAppeal = 0;
         eContestantStatus[i].jamSafetyCount = 0;
         if (eContestantStatus[i].numTurnsSkipped > 0)
             eContestantStatus[i].numTurnsSkipped--;
@@ -4278,9 +4279,9 @@ static void ContestDebugDoPrint(void)
         }
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
-            value = eContestantStatus[i].appeal2;
+            value = eContestantStatus[i].appeal;
             txtPtr = text;
-            if (eContestantStatus[i].appeal2 < 0)
+            if (eContestantStatus[i].appeal < 0)
             {
                 value *= -1;
                 txtPtr = StringCopy(txtPtr, gText_OneDash);
@@ -4428,8 +4429,8 @@ static void CalculateAppealMoveImpact(u8 contestant)
     bool8 canUseTurn;
     s32 i;
 
-    eContestantStatus[contestant].appeal2 = 0;
-    eContestantStatus[contestant].appeal1 = 0;
+    eContestantStatus[contestant].appeal = 0;
+    eContestantStatus[contestant].baseAppeal = 0;
     if (!ContestantCanUseTurn(contestant))
         return;
 
@@ -4446,8 +4447,8 @@ static void CalculateAppealMoveImpact(u8 contestant)
     {
         eContestantStatus[contestant].moveRepeatCount = 0;
     }
-    eContestantStatus[contestant].appeal1 = gContestEffects[effect].appeal;
-    eContestantStatus[contestant].appeal2 = eContestantStatus[contestant].appeal1;
+    eContestantStatus[contestant].baseAppeal = gContestEffects[effect].appeal;
+    eContestantStatus[contestant].appeal = eContestantStatus[contestant].baseAppeal;
     eContestAppealResults.jam = gContestEffects[effect].jam;
     eContestAppealResults.jam2 = eContestAppealResults.jam;
 
@@ -4465,11 +4466,11 @@ static void CalculateAppealMoveImpact(u8 contestant)
     gContestEffectFuncs[effect]();
 
     if (eContestantStatus[contestant].conditionMod == 1)
-        eContestantStatus[contestant].appeal2 += eContestantStatus[contestant].condition - 10;
+        eContestantStatus[contestant].appeal += eContestantStatus[contestant].condition - 10;
     else if (eContestantStatus[contestant].appealTripleCondition)
-        eContestantStatus[contestant].appeal2 += eContestantStatus[contestant].condition * 3;
+        eContestantStatus[contestant].appeal += eContestantStatus[contestant].condition * 3;
     else
-        eContestantStatus[contestant].appeal2 += eContestantStatus[contestant].condition;
+        eContestantStatus[contestant].appeal += eContestantStatus[contestant].condition;
 
     eContestantStatus[contestant].completedCombo = FALSE;
     eContestantStatus[contestant].usedComboMove = FALSE;
@@ -4482,7 +4483,7 @@ static void CalculateAppealMoveImpact(u8 contestant)
             eContestantStatus[contestant].completedCombo = completedCombo;
             eContestantStatus[contestant].usedComboMove = TRUE;
             eContestantStatus[contestant].hasJudgesAttention = FALSE;
-            eContestantStatus[contestant].comboAppealBonus = eContestantStatus[contestant].appeal1 * eContestantStatus[contestant].completedCombo;
+            eContestantStatus[contestant].comboAppealBonus = eContestantStatus[contestant].baseAppeal * eContestantStatus[contestant].completedCombo;
             eContestantStatus[contestant].unk15_3 = TRUE;
         }
         else
@@ -4504,8 +4505,8 @@ static void CalculateAppealMoveImpact(u8 contestant)
     if (eContestantStatus[contestant].nervous)
     {
         eContestantStatus[contestant].hasJudgesAttention = FALSE;
-        eContestantStatus[contestant].appeal2 = 0;
-        eContestantStatus[contestant].appeal1 = 0;
+        eContestantStatus[contestant].appeal = 0;
+        eContestantStatus[contestant].baseAppeal = 0;
     }
     eContestExcitement.moveExcitement = Contest_GetMoveExcitement(eContestantStatus[contestant].currMove);
     if (eContestantStatus[contestant].overrideCategoryExcitementMod)

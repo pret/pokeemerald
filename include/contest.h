@@ -127,11 +127,11 @@ struct Contest
 {
     u8 playerMoveChoice;
     u8 appealNumber;
-    u8 unused2[CONTESTANT_COUNT];
-    bool16 unk1920A_0:1;  // Task active flags?
-    bool16 unk1920A_1:1;
-    bool16 unk1920A_2:1;
-    bool16 unk1920A_3:1;
+    u8 unk[CONTESTANT_COUNT]; // never read
+    bool16 unused1:1;
+    bool16 unused2:1;
+    bool16 unused3:1;
+    bool16 unused4:1;
     bool16 waitForJudgeSpeechBubble:1;
     bool16 isShowingApplauseMeter:1;
     bool16 applauseMeterIsMoving:1;
@@ -140,10 +140,10 @@ struct Contest
     bool16 sliderHeartsAnimating:1; // When the slider heart is appearing/disappearing
     bool16 waitForLink:1;
     u8 mainTaskId;
-    u8 unk1920D[4];
+    u8 filler1[4];
     u8 judgeAttentionTaskId;
     u8 blendTaskId;
-    u8 filler19213;
+    u8 filler2;
     u8 turnNumber;
     u8 currentContestant;
     u8 judgeSpeechBubbleSpriteId;
@@ -159,8 +159,8 @@ struct Contest
 
 struct ContestantStatus
 {
-    s16 appeal1;  // move appeal?
-    s16 appeal2;  // final appeal after end of turn, maybe?
+    s16 baseAppeal;
+    s16 appeal;
     s16 pointTotal;
     u16 currMove;
     u16 prevMove;
@@ -264,8 +264,8 @@ struct ContestTV
     s16 move;
     u8 winnerFlags;
     u8 loserFlags;
-    u8 madeAppeal:1;
-    u8 madeExcitingAppeal:1;
+    bool8 madeAppeal:1;
+    bool8 madeExcitingAppeal:1;
 };
 
 struct ContestUnused

@@ -6,8 +6,6 @@
 
 	.section script_data, "aw", %progbits
 
-@ TODO
-
 	enum_start
 	enum MON_1
 	enum MON_2
@@ -52,7 +50,7 @@ gContestAIChecks:: @ 82DE350
 
 @ Unreferenced AI routine to encourage moves that improve condition on the first
 @ appeal. Additionally, it checks the turn order of the user and the effect
-@ type, but the code is buggy and doesnt affect the score.
+@ type, but the code is buggy and doesn't affect the score.
 	if_appeal_num_not_eq 0, ContestUnreferenced_80
 	if_effect_not_eq CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS, ContestUnreferenced_80
 	score +10
@@ -67,7 +65,7 @@ ContestUnreferenced_0D:
 ContestUnreferenced_end:
 	end
 
-@ Unreferenced AI routine that doesnt make much sense.
+@ Unreferenced AI routine that doesn't make much sense.
 	if_appeal_num_eq 0, ContestUnreferenced_0F_1
 	if_appeal_num_eq 1, ContestUnreferenced_0F_2
 	if_appeal_num_eq 2, ContestUnreferenced_0F_3

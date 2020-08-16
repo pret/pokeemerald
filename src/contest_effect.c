@@ -520,7 +520,7 @@ static void ContestEffect_BetterIfFirst(void)
     if (gContestantTurnOrder[eContestAppealResults.contestant] == 0)
     {
         u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
-        eContestantStatus[eContestAppealResults.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
+        eContestantStatus[eContestAppealResults.contestant].appeal += 2 * gContestEffects[gContestMoves[move].effect].appeal;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_HUSTLE_STANDOUT);
     }
 }
@@ -531,7 +531,7 @@ static void ContestEffect_BetterIfLast(void)
     if (gContestantTurnOrder[eContestAppealResults.contestant] == 3)
     {
         u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
-        eContestantStatus[eContestAppealResults.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
+        eContestantStatus[eContestAppealResults.contestant].appeal += 2 * gContestEffects[gContestMoves[move].effect].appeal;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_WORK_HARD_UNNOTICED);
     }
 }
@@ -545,7 +545,7 @@ static void ContestEffect_AppealAsGoodAsPrevOnes(void)
     for (i = 0, appealSum = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] > eContestAppealResults.turnOrder[i])
-            appealSum += eContestantStatus[i].appeal2;
+            appealSum += eContestantStatus[i].appeal;
     }
     if (appealSum < 0)
         appealSum = 0;
@@ -556,10 +556,10 @@ static void ContestEffect_AppealAsGoodAsPrevOnes(void)
     }
     else
     {
-        eContestantStatus[eContestAppealResults.contestant].appeal2 += appealSum / 2;
+        eContestantStatus[eContestAppealResults.contestant].appeal += appealSum / 2;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_WORK_BEFORE);
     }
-    eContestantStatus[eContestAppealResults.contestant].appeal2 = RoundTowardsZero(eContestantStatus[eContestAppealResults.contestant].appeal2);
+    eContestantStatus[eContestAppealResults.contestant].appeal = RoundTowardsZero(eContestantStatus[eContestAppealResults.contestant].appeal);
 }
 
 // Makes the appeal as good as the one before it.
@@ -573,7 +573,7 @@ static void ContestEffect_AppealAsGoodAsPrevOne(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] - 1 == eContestAppealResults.turnOrder[i])
-                appeal = eContestantStatus[i].appeal2;
+                appeal = eContestantStatus[i].appeal;
         }
     }
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] == 0 || appeal <= 0)
@@ -582,7 +582,7 @@ static void ContestEffect_AppealAsGoodAsPrevOne(void)
     }
     else
     {
-        eContestantStatus[eContestAppealResults.contestant].appeal2 += appeal;
+        eContestantStatus[eContestAppealResults.contestant].appeal += appeal;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_WORK_PRECEDING);
     }
 }
@@ -592,9 +592,9 @@ static void ContestEffect_BetterWhenLater(void)
 {
     u8 whichTurn = eContestAppealResults.turnOrder[eContestAppealResults.contestant];
     if (whichTurn == 0)
-        eContestantStatus[eContestAppealResults.contestant].appeal2 = 10;
+        eContestantStatus[eContestAppealResults.contestant].appeal = 10;
     else
-        eContestantStatus[eContestAppealResults.contestant].appeal2 = 20 * whichTurn;
+        eContestantStatus[eContestAppealResults.contestant].appeal = 20 * whichTurn;
     if (whichTurn == 0)
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_APPEAL_NOT_SHOWN_WELL);
     else if (whichTurn == 1)
@@ -633,7 +633,7 @@ static void ContestEffect_QualityDependsOnTiming(void)
         appeal = 80;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_APPEAL_EXCELLENTLY2);
     }
-    eContestantStatus[eContestAppealResults.contestant].appeal2 = appeal;
+    eContestantStatus[eContestAppealResults.contestant].appeal = appeal;
 }
 
 static void ContestEffect_BetterIfSameType(void)
@@ -666,7 +666,7 @@ static void ContestEffect_BetterIfSameType(void)
     move = eContestantStatus[eContestAppealResults.contestant].currMove;
     if (gContestMoves[move].contestCategory == gContestMoves[eContestantStatus[j].currMove].contestCategory)
     {
-        eContestantStatus[eContestAppealResults.contestant].appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
+        eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[gContestMoves[move].effect].appeal * 2;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_SAME_TYPE_GOOD);
     }
 }
@@ -684,7 +684,7 @@ static void ContestEffect_BetterIfDiffType(void)
             if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] - 1 == eContestAppealResults.turnOrder[i] &&
                 gContestMoves[move].contestCategory != gContestMoves[eContestantStatus[i].currMove].contestCategory)
             {
-                eContestantStatus[eContestAppealResults.contestant].appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
+                eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[gContestMoves[move].effect].appeal * 2;
                 SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_DIFF_TYPE_GOOD);
                 break;
             }
@@ -703,14 +703,14 @@ static void ContestEffect_AffectedByPrevAppeal(void)
         {
             if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] - 1 == eContestAppealResults.turnOrder[i])
             {
-                if (eContestantStatus[eContestAppealResults.contestant].appeal2 > eContestantStatus[i].appeal2)
+                if (eContestantStatus[eContestAppealResults.contestant].appeal > eContestantStatus[i].appeal)
                 {
-                    eContestantStatus[eContestAppealResults.contestant].appeal2 *= 2;
+                    eContestantStatus[eContestAppealResults.contestant].appeal *= 2;
                     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_STOOD_OUT_AS_MUCH);
                 }
-                else if (eContestantStatus[eContestAppealResults.contestant].appeal2 < eContestantStatus[i].appeal2)
+                else if (eContestantStatus[eContestAppealResults.contestant].appeal < eContestantStatus[i].appeal)
                 {
-                    eContestantStatus[eContestAppealResults.contestant].appeal2 = 0;
+                    eContestantStatus[eContestAppealResults.contestant].appeal = 0;
                     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_NOT_AS_WELL);
                 }
             }
@@ -898,9 +898,9 @@ static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
     {
         if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] > eContestAppealResults.turnOrder[i])
         {
-            if (eContestantStatus[i].appeal2 > 0)
+            if (eContestantStatus[i].appeal > 0)
             {
-                eContestAppealResults.jam = eContestantStatus[i].appeal2 / 2;
+                eContestAppealResults.jam = eContestantStatus[i].appeal / 2;
                 eContestAppealResults.jam = RoundUp(eContestAppealResults.jam);
             }
             else
@@ -946,7 +946,7 @@ static void ContestEffect_BetterWhenAudienceExcited(void)
         appeal = 60;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_APPEAL_EXCELLENTLY2);
     }
-    eContestantStatus[eContestAppealResults.contestant].appeal2 = appeal;
+    eContestantStatus[eContestAppealResults.contestant].appeal = appeal;
 }
 
 // Temporarily stops the crowd from growing excited.
@@ -1054,7 +1054,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
 
 static void JamContestant(u8 i, u8 jam)
 {
-    eContestantStatus[i].appeal2 -= jam;
+    eContestantStatus[i].appeal -= jam;
     eContestantStatus[i].jam += jam;
 }
 
