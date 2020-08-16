@@ -702,7 +702,7 @@ static void Task_Hof_DisplayPlayer(u8 taskId)
     gTasks[taskId].tPlayerSpriteID = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId_Debug(gSaveBlock2Ptr->playerGender, TRUE), 1, 120, 72, 6, 0xFFFF);
     AddWindow(&sHof_WindowTemplate);
     LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
-    LoadPalette(stdpal_get(1), 0xE0, 0x20);
+    LoadPalette(GetTextWindowPalette(1), 0xE0, 0x20);
     gTasks[taskId].tFrameCount = 120;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;
 }
@@ -824,7 +824,7 @@ void CB2_DoHallOfFamePC(void)
         {
             struct HallofFameTeam *fameTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
             fameTeam->mon[0] = sDummyFameMon;
-            sub_80F9BCC(0, 0, 0);
+            ComputerScreenOpenEffect(0, 0, 0);
             SetVBlankCallback(VBlankCB_HallOfFame);
             gMain.state++;
         }
@@ -834,7 +834,7 @@ void CB2_DoHallOfFamePC(void)
         AnimateSprites();
         BuildOamBuffer();
         UpdatePaletteFade();
-        if (!sub_80F9C1C())
+        if (!IsComputerScreenOpenEffectActive())
             gMain.state++;
         break;
     case 5:
@@ -1048,13 +1048,13 @@ static void Task_HofPC_HandlePaletteOnExit(u8 taskId)
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
     fameTeam = (struct HallofFameTeam*)(gDecompressionBuffer);
     fameTeam->mon[0] = sDummyFameMon;
-    sub_80F9BF4(0, 0, 0);
+    ComputerScreenCloseEffect(0, 0, 0);
     gTasks[taskId].func = Task_HofPC_HandleExit;
 }
 
 static void Task_HofPC_HandleExit(u8 taskId)
 {
-    if (!sub_80F9C30())
+    if (!IsComputerScreenCloseEffectActive())
     {
         u8 i;
 
@@ -1324,7 +1324,7 @@ static bool8 sub_8175024(void)
         break;
     case 3:
         InitStandardTextBoxWindows();
-        sub_8197200();
+        InitTextBoxGfxAndPrinters();
         break;
     case 4:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);

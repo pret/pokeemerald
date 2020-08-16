@@ -84,7 +84,7 @@ EWRAM_DATA static struct PokeblockFeedStruct *sPokeblockFeed = NULL;
 EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
 
 // const rom data
-static const u8 sNatureToMonPokeblockAnim[][2] =
+static const u8 sNatureToMonPokeblockAnim[NUM_NATURES][2] =
 {
     [NATURE_HARDY] = {  0, 0 },
     [NATURE_LONELY] = {  3, 0 },
@@ -518,7 +518,7 @@ static void CB2_PokeblockFeed(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -536,7 +536,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
     case 0:
         sPokeblockFeed = AllocZeroed(sizeof(*sPokeblockFeed));
         SetVBlankHBlankCallbacksToNull();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:

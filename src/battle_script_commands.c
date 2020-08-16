@@ -606,111 +606,66 @@ static const struct StatFractions sAccuracyStageRatios[] =
 // The chance is 1/N for each stage.
 static const u16 sCriticalHitChance[] = {16, 8, 4, 3, 2};
 
-static const u32 sStatusFlagsForMoveEffects[] =
+static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
 {
-    0x00000000,
-    STATUS1_SLEEP,
-    STATUS1_POISON,
-    STATUS1_BURN,
-    STATUS1_FREEZE,
-    STATUS1_PARALYSIS,
-    STATUS1_TOXIC_POISON,
-    STATUS2_CONFUSION,
-    STATUS2_FLINCHED,
-    0x00000000,
-    STATUS2_UPROAR,
-    0x00000000,
-    STATUS2_MULTIPLETURNS,
-    STATUS2_WRAPPED,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    STATUS2_RECHARGE,
-    0x00000000,
-    0x00000000,
-    STATUS2_ESCAPE_PREVENTION,
-    STATUS2_NIGHTMARE,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    STATUS2_LOCK_CONFUSE,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000
+    [MOVE_EFFECT_SLEEP]          = STATUS1_SLEEP,
+    [MOVE_EFFECT_POISON]         = STATUS1_POISON,
+    [MOVE_EFFECT_BURN]           = STATUS1_BURN,
+    [MOVE_EFFECT_FREEZE]         = STATUS1_FREEZE,
+    [MOVE_EFFECT_PARALYSIS]      = STATUS1_PARALYSIS,
+    [MOVE_EFFECT_TOXIC]          = STATUS1_TOXIC_POISON,
+    [MOVE_EFFECT_CONFUSION]      = STATUS2_CONFUSION,
+    [MOVE_EFFECT_FLINCH]         = STATUS2_FLINCHED,
+    [MOVE_EFFECT_UPROAR]         = STATUS2_UPROAR,
+    [MOVE_EFFECT_CHARGING]       = STATUS2_MULTIPLETURNS,
+    [MOVE_EFFECT_WRAP]           = STATUS2_WRAPPED,
+    [MOVE_EFFECT_RECHARGE]       = STATUS2_RECHARGE,
+    [MOVE_EFFECT_PREVENT_ESCAPE] = STATUS2_ESCAPE_PREVENTION,
+    [MOVE_EFFECT_NIGHTMARE]      = STATUS2_NIGHTMARE,
+    [MOVE_EFFECT_THRASH]         = STATUS2_LOCK_CONFUSE,
 };
 
 static const u8* const sMoveEffectBS_Ptrs[] =
 {
-    [0] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SLEEP] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_POISON] = BattleScript_MoveEffectPoison,
-    [MOVE_EFFECT_BURN] = BattleScript_MoveEffectBurn,
-    [MOVE_EFFECT_FREEZE] = BattleScript_MoveEffectFreeze,
-    [MOVE_EFFECT_PARALYSIS] = BattleScript_MoveEffectParalysis,
-    [MOVE_EFFECT_TOXIC] = BattleScript_MoveEffectToxic,
-    [MOVE_EFFECT_CONFUSION] = BattleScript_MoveEffectConfusion,
-    [MOVE_EFFECT_FLINCH] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_TRI_ATTACK] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_UPROAR] = BattleScript_MoveEffectUproar,
-    [MOVE_EFFECT_PAYDAY] = BattleScript_MoveEffectPayDay,
-    [MOVE_EFFECT_CHARGING] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_WRAP] = BattleScript_MoveEffectWrap,
-    [MOVE_EFFECT_RECOIL_25] = BattleScript_MoveEffectRecoil,
-    [MOVE_EFFECT_ATK_PLUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_DEF_PLUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SPD_PLUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_ATK_PLUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_DEF_PLUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ACC_PLUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_EVS_PLUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ATK_MINUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_DEF_MINUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SPD_MINUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_ATK_MINUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_DEF_MINUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ACC_MINUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_EVS_MINUS_1] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RECHARGE] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RAGE] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_STEAL_ITEM] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_PREVENT_ESCAPE] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_NIGHTMARE] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ALL_STATS_UP] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RAPIDSPIN] = BattleScript_MoveEffectSleep,
+    [0]                            = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SLEEP]            = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_POISON]           = BattleScript_MoveEffectPoison,
+    [MOVE_EFFECT_BURN]             = BattleScript_MoveEffectBurn,
+    [MOVE_EFFECT_FREEZE]           = BattleScript_MoveEffectFreeze,
+    [MOVE_EFFECT_PARALYSIS]        = BattleScript_MoveEffectParalysis,
+    [MOVE_EFFECT_TOXIC]            = BattleScript_MoveEffectToxic,
+    [MOVE_EFFECT_CONFUSION]        = BattleScript_MoveEffectConfusion,
+    [MOVE_EFFECT_FLINCH]           = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_TRI_ATTACK]       = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_UPROAR]           = BattleScript_MoveEffectUproar,
+    [MOVE_EFFECT_PAYDAY]           = BattleScript_MoveEffectPayDay,
+    [MOVE_EFFECT_CHARGING]         = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_WRAP]             = BattleScript_MoveEffectWrap,
+    [MOVE_EFFECT_RECOIL_25]        = BattleScript_MoveEffectRecoil,
+    [MOVE_EFFECT_ATK_PLUS_1]       = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_DEF_PLUS_1]       = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SPD_PLUS_1]       = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_ATK_PLUS_1]    = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_DEF_PLUS_1]    = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ACC_PLUS_1]       = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_EVS_PLUS_1]       = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ATK_MINUS_1]      = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_DEF_MINUS_1]      = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SPD_MINUS_1]      = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_ATK_MINUS_1]   = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_DEF_MINUS_1]   = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ACC_MINUS_1]      = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_EVS_MINUS_1]      = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RECHARGE]         = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RAGE]             = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_STEAL_ITEM]       = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_PREVENT_ESCAPE]   = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_NIGHTMARE]        = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ALL_STATS_UP]     = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RAPIDSPIN]        = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_REMOVE_PARALYSIS] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ATK_DEF_DOWN] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RECOIL_33] = BattleScript_MoveEffectRecoil,
+    [MOVE_EFFECT_ATK_DEF_DOWN]     = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RECOIL_33]        = BattleScript_MoveEffectRecoil,
 };
 
 static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
@@ -797,16 +752,16 @@ static const u8 sFlailHpScaleToPowerTable[] =
 
 static const u16 sNaturePowerMoves[] =
 {
-    MOVE_STUN_SPORE,
-    MOVE_RAZOR_LEAF,
-    MOVE_EARTHQUAKE,
-    MOVE_HYDRO_PUMP,
-    MOVE_SURF,
-    MOVE_BUBBLE_BEAM,
-    MOVE_ROCK_SLIDE,
-    MOVE_SHADOW_BALL,
-    MOVE_SWIFT,
-    MOVE_SWIFT
+    [BATTLE_TERRAIN_GRASS]      = MOVE_STUN_SPORE,
+    [BATTLE_TERRAIN_LONG_GRASS] = MOVE_RAZOR_LEAF,
+    [BATTLE_TERRAIN_SAND]       = MOVE_EARTHQUAKE,
+    [BATTLE_TERRAIN_UNDERWATER] = MOVE_HYDRO_PUMP,
+    [BATTLE_TERRAIN_WATER]      = MOVE_SURF,
+    [BATTLE_TERRAIN_POND]       = MOVE_BUBBLE_BEAM,
+    [BATTLE_TERRAIN_MOUNTAIN]   = MOVE_ROCK_SLIDE,
+    [BATTLE_TERRAIN_CAVE]       = MOVE_SHADOW_BALL,
+    [BATTLE_TERRAIN_BUILDING]   = MOVE_SWIFT,
+    [BATTLE_TERRAIN_PLAIN]      = MOVE_SWIFT
 };
 
 // format: min. weight (hectograms), base power
@@ -864,58 +819,92 @@ static const u8 sPickupProbabilities[] =
 
 static const u8 sTerrainToType[] =
 {
-    TYPE_GRASS, // tall grass
-    TYPE_GRASS, // long grass
-    TYPE_GROUND, // sand
-    TYPE_WATER, // underwater
-    TYPE_WATER, // water
-    TYPE_WATER, // pond water
-    TYPE_ROCK, // rock
-    TYPE_ROCK, // cave
-    TYPE_NORMAL, // building
-    TYPE_NORMAL, // plain
+    [BATTLE_TERRAIN_GRASS]      = TYPE_GRASS,
+    [BATTLE_TERRAIN_LONG_GRASS] = TYPE_GRASS,
+    [BATTLE_TERRAIN_SAND]       = TYPE_GROUND,
+    [BATTLE_TERRAIN_UNDERWATER] = TYPE_WATER,
+    [BATTLE_TERRAIN_WATER]      = TYPE_WATER,
+    [BATTLE_TERRAIN_POND]       = TYPE_WATER,
+    [BATTLE_TERRAIN_MOUNTAIN]   = TYPE_ROCK,
+    [BATTLE_TERRAIN_CAVE]       = TYPE_ROCK,
+    [BATTLE_TERRAIN_BUILDING]   = TYPE_NORMAL,
+    [BATTLE_TERRAIN_PLAIN]      = TYPE_NORMAL,
 };
 
+// - ITEM_ULTRA_BALL skips Master Ball and ITEM_NONE
 static const u8 sBallCatchBonuses[] =
 {
-    20, 15, 10, 15 // Ultra, Great, Poke, Safari
+    [ITEM_ULTRA_BALL - ITEM_ULTRA_BALL]  = 20, 
+    [ITEM_GREAT_BALL - ITEM_ULTRA_BALL]  = 15, 
+    [ITEM_POKE_BALL - ITEM_ULTRA_BALL]   = 10, 
+    [ITEM_SAFARI_BALL - ITEM_ULTRA_BALL] = 15
 };
 
-const ALIGNED(4) u8 gUnknown_0831C494[][4] =
+// In Battle Palace, moves are chosen based on the pokemons nature rather than by the player
+// Moves are grouped into "Attack", "Defense", or "Support" (see PALACE_MOVE_GROUP_*)
+// Each nature has a certain percent chance of selecting a move from a particular group
+// and a separate percent chance for each group when below 50% HP
+// The table below doesn't list percentages for Support because you can subtract the other two
+// Support percentages are listed in comments off to the side instead
+#define PALACE_STYLE(atk, def, atkLow, defLow) {atk, atk + def, atkLow, atkLow + defLow}
+
+const ALIGNED(4) u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4] =
 {
-    {0x3d, 0x44, 0x3d, 0x44},
-    {0x14, 0x2d, 0x54, 0x5c},
-    {0x46, 0x55, 0x20, 0x5c},
-    {0x26, 0x45, 0x46, 0x55},
-    {0x14, 0x5a, 0x46, 0x5c},
-    {0x1e, 0x32, 0x20, 0x5a},
-    {0x38, 0x4e, 0x38, 0x4e},
-    {0x19, 0x28, 0x4b, 0x5a},
-    {0x45, 0x4b, 0x1c, 0x53},
-    {0x23, 0x2d, 0x1d, 0x23},
-    {0x3e, 0x48, 0x1e, 0x32},
-    {0x3a, 0x5f, 0x58, 0x5e},
-    {0x22, 0x2d, 0x1d, 0x28},
-    {0x23, 0x28, 0x23, 0x5f},
-    {0x38, 0x4e, 0x38, 0x4e},
-    {0x23, 0x50, 0x22, 0x5e},
-    {0x2c, 0x5e, 0x22, 0x28},
-    {0x38, 0x4e, 0x38, 0x4e},
-    {0x1e, 0x58, 0x1e, 0x58},
-    {0x1e, 0x2b, 0x1b, 0x21},
-    {0x28, 0x5a, 0x19, 0x57},
-    {0x12, 0x58, 0x5a, 0x5f},
-    {0x58, 0x5e, 0x16, 0x2a},
-    {0x2a, 0x5c, 0x2a, 0x2f},
-    {0x38, 0x4e, 0x38, 0x4e}
+    [NATURE_HARDY]   = PALACE_STYLE(61,  7, 61,  7), // 32% support >= 50% HP, 32% support < 50% HP
+    [NATURE_LONELY]  = PALACE_STYLE(20, 25, 84,  8), // 55%,  8%
+    [NATURE_BRAVE]   = PALACE_STYLE(70, 15, 32, 60), // 15%,  8%
+    [NATURE_ADAMANT] = PALACE_STYLE(38, 31, 70, 15), // 31%, 15%
+    [NATURE_NAUGHTY] = PALACE_STYLE(20, 70, 70, 22), // 10%,  8%
+    [NATURE_BOLD]    = PALACE_STYLE(30, 20, 32, 58), // 50%, 10%
+    [NATURE_DOCILE]  = PALACE_STYLE(56, 22, 56, 22), // 22%, 22%
+    [NATURE_RELAXED] = PALACE_STYLE(25, 15, 75, 15), // 60%, 10%
+    [NATURE_IMPISH]  = PALACE_STYLE(69,  6, 28, 55), // 25%, 17%
+    [NATURE_LAX]     = PALACE_STYLE(35, 10, 29,  6), // 55%, 65%
+    [NATURE_TIMID]   = PALACE_STYLE(62, 10, 30, 20), // 28%, 50%
+    [NATURE_HASTY]   = PALACE_STYLE(58, 37, 88,  6), //  5%,  6%
+    [NATURE_SERIOUS] = PALACE_STYLE(34, 11, 29, 11), // 55%, 60%
+    [NATURE_JOLLY]   = PALACE_STYLE(35,  5, 35, 60), // 60%,  5%
+    [NATURE_NAIVE]   = PALACE_STYLE(56, 22, 56, 22), // 22%, 22%
+    [NATURE_MODEST]  = PALACE_STYLE(35, 45, 34, 60), // 20%,  6%
+    [NATURE_MILD]    = PALACE_STYLE(44, 50, 34,  6), //  6%, 60%
+    [NATURE_QUIET]   = PALACE_STYLE(56, 22, 56, 22), // 22%, 22%
+    [NATURE_BASHFUL] = PALACE_STYLE(30, 58, 30, 58), // 12%, 12%
+    [NATURE_RASH]    = PALACE_STYLE(30, 13, 27,  6), // 57%, 67%
+    [NATURE_CALM]    = PALACE_STYLE(40, 50, 25, 62), // 10%, 13%
+    [NATURE_GENTLE]  = PALACE_STYLE(18, 70, 90,  5), // 12%,  5%
+    [NATURE_SASSY]   = PALACE_STYLE(88,  6, 22, 20), //  6%, 58%
+    [NATURE_CAREFUL] = PALACE_STYLE(42, 50, 42,  5), //  8%, 53%
+    [NATURE_QUIRKY]  = PALACE_STYLE(56, 22, 56, 22)  // 22%, 22%
 };
 
-static const u8 sUnknown_0831C4F8[] =
+// Indices into gBattlePalaceFlavorTextTable
+static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
 {
-    0x03, 0x00, 0x01, 0x00, 0x00, 0x01, 0x03, 0x00,
-    0x01, 0x02, 0x02, 0x00, 0x03, 0x01, 0x03, 0x01,
-    0x02, 0x03, 0x03, 0x02, 0x01, 0x00, 0x02, 0x02,
-    0x03, 0x00, 0x00, 0x00
+    [NATURE_HARDY]   = 3,
+    [NATURE_LONELY]  = 0,
+    [NATURE_BRAVE]   = 1,
+    [NATURE_ADAMANT] = 0,
+    [NATURE_NAUGHTY] = 0,
+    [NATURE_BOLD]    = 1,
+    [NATURE_DOCILE]  = 3,
+    [NATURE_RELAXED] = 0,
+    [NATURE_IMPISH]  = 1,
+    [NATURE_LAX]     = 2,
+    [NATURE_TIMID]   = 2,
+    [NATURE_HASTY]   = 0,
+    [NATURE_SERIOUS] = 3,
+    [NATURE_JOLLY]   = 1,
+    [NATURE_NAIVE]   = 3,
+    [NATURE_MODEST]  = 1,
+    [NATURE_MILD]    = 2,
+    [NATURE_QUIET]   = 3,
+    [NATURE_BASHFUL] = 3,
+    [NATURE_RASH]    = 2,
+    [NATURE_CALM]    = 1,
+    [NATURE_GENTLE]  = 0,
+    [NATURE_SASSY]   = 2,
+    [NATURE_CAREFUL] = 2,
+    [NATURE_QUIRKY]  = 3,
 };
 
 static void Cmd_attackcanceler(void)
@@ -1139,13 +1128,13 @@ static void Cmd_accuracycheck(void)
         else
         {
             u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-            buff = acc + 6 - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
+            buff = acc + DEFAULT_STAT_STAGE - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
         }
 
-        if (buff < 0)
-            buff = 0;
-        if (buff > 0xC)
-            buff = 0xC;
+        if (buff < MIN_STAT_STAGE)
+            buff = MIN_STAT_STAGE;
+        if (buff > MAX_STAT_STAGE)
+            buff = MAX_STAT_STAGE;
 
         moveAcc = gBattleMoves[move].accuracy;
         // check Thunder on sunny weather
@@ -2245,7 +2234,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
     if (gBattleMons[gEffectBattler].status2 & STATUS2_SUBSTITUTE && affectsUser != MOVE_EFFECT_AFFECTS_USER)
         INCREMENT_RESET_RETURN
 
-    if (gBattleCommunication[MOVE_EFFECT_BYTE] <= 6) // status change
+    if (gBattleCommunication[MOVE_EFFECT_BYTE] <= PRIMARY_STATUS_MOVE_EFFECT)
     {
         switch (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]])
         {
@@ -2453,7 +2442,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             BattleScriptPush(gBattlescriptCurrInstr + 1);
 
             if (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]] == STATUS1_SLEEP)
-                gBattleMons[gEffectBattler].status1 |= ((Random() & 3) + 2);
+                gBattleMons[gEffectBattler].status1 |= STATUS1_SLEEP_TURN((Random() & 3) + 2); // 2-5 turns
             else
                 gBattleMons[gEffectBattler].status1 |= sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
 
@@ -2513,7 +2502,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else
                 {
-                    gBattleMons[gEffectBattler].status2 |= (((Random()) % 0x4)) + 2;
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2); // 2-5 turns
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
@@ -2546,7 +2535,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
 
                     gBattleMons[gEffectBattler].status2 |= STATUS2_MULTIPLETURNS;
                     gLockedMoves[gEffectBattler] = gCurrentMove;
-                    gBattleMons[gEffectBattler].status2 |= ((Random() & 3) + 2) << 4;
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_UPROAR_TURN((Random() & 3) + 2); // 2-5 turns
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
@@ -2591,7 +2580,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else
                 {
-                    gBattleMons[gEffectBattler].status2 |= ((Random() & 3) + 3) << 0xD;
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED_TURN((Random() & 3) + 3); // 3-6 turns
 
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 0) = gCurrentMove;
                     *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 1) = gCurrentMove >> 8;
@@ -2834,7 +2823,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 {
                     gBattleMons[gEffectBattler].status2 |= STATUS2_MULTIPLETURNS;
                     gLockedMoves[gEffectBattler] = gCurrentMove;
-                    gBattleMons[gEffectBattler].status2 |= (((Random() & 1) + 2) << 0xA);
+                    gBattleMons[gEffectBattler].status2 |= STATUS2_LOCK_CONFUSE_TURN((Random() & 1) + 2); // thrash for 2-3 turns
                 }
                 break;
             case MOVE_EFFECT_KNOCK_OFF:
@@ -2929,7 +2918,7 @@ static void Cmd_clearstatusfromeffect(void)
 {
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
-    if (gBattleCommunication[MOVE_EFFECT_BYTE] <= MOVE_EFFECT_TOXIC)
+    if (gBattleCommunication[MOVE_EFFECT_BYTE] <= PRIMARY_STATUS_MOVE_EFFECT)
         gBattleMons[gActiveBattler].status1 &= (~sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]]);
     else
         gBattleMons[gActiveBattler].status2 &= (~sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]]);
@@ -3482,7 +3471,7 @@ static void Cmd_getexp(void)
         else
         {
             gBattleStruct->expGetterMonId++;
-            if (gBattleStruct->expGetterMonId <= 5)
+            if (gBattleStruct->expGetterMonId < PARTY_SIZE)
                 gBattleScripting.getexpState = 2; // loop again
             else
                 gBattleScripting.getexpState = 6; // we're done
@@ -3511,7 +3500,7 @@ static void Cmd_unknown_24(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < MULTI_PARTY_SIZE; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
@@ -3552,13 +3541,13 @@ static void Cmd_unknown_24(void)
         // Impossible to decompile loops.
         for (foundPlayer = 0, i = 0; i < gBattlersCount; i += 2)
         {
-            if (HITMARKER_UNK(i) & gHitMarker && !gSpecialStatuses[i].flag40)
+            if (HITMARKER_FAINTED2(i) & gHitMarker && !gSpecialStatuses[i].flag40)
                 foundPlayer++;
         }
 
         for (foundOpponent = 0, i = 1; i < gBattlersCount; i += 2)
         {
-            if (HITMARKER_UNK(i) & gHitMarker && !gSpecialStatuses[i].flag40)
+            if (HITMARKER_FAINTED2(i) & gHitMarker && !gSpecialStatuses[i].flag40)
                 foundOpponent++;
         }
 
@@ -4396,7 +4385,7 @@ static void Cmd_playstatchangeanimation(void)
             {
                 if (gBattlescriptCurrInstr[3] & STAT_CHANGE_CANT_PREVENT)
                 {
-                    if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
+                    if (gBattleMons[gActiveBattler].statStages[currStat] > MIN_STAT_STAGE)
                     {
                         statAnimId = startingStatAnimId + currStat;
                         changeableStatsCount++;
@@ -4408,7 +4397,7 @@ static void Cmd_playstatchangeanimation(void)
                         && !(gBattleMons[gActiveBattler].ability == ABILITY_KEEN_EYE && currStat == STAT_ACC)
                         && !(gBattleMons[gActiveBattler].ability == ABILITY_HYPER_CUTTER && currStat == STAT_ATK))
                 {
-                    if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
+                    if (gBattleMons[gActiveBattler].statStages[currStat] > MIN_STAT_STAGE)
                     {
                         statAnimId = startingStatAnimId + currStat;
                         changeableStatsCount++;
@@ -4436,7 +4425,7 @@ static void Cmd_playstatchangeanimation(void)
 
         while (statsToCheck != 0)
         {
-            if (statsToCheck & 1 && gBattleMons[gActiveBattler].statStages[currStat] < 0xC)
+            if (statsToCheck & 1 && gBattleMons[gActiveBattler].statStages[currStat] < MAX_STAT_STAGE)
             {
                 statAnimId = startingStatAnimId + currStat;
                 changeableStatsCount++;
@@ -4506,7 +4495,7 @@ static void Cmd_moveend(void)
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && TARGET_TURN_DAMAGED
-                && gBattleMoves[gCurrentMove].power && gBattleMons[gBattlerTarget].statStages[STAT_ATK] <= 0xB)
+                && gBattleMoves[gCurrentMove].power && gBattleMons[gBattlerTarget].statStages[STAT_ATK] < MAX_STAT_STAGE)
             {
                 gBattleMons[gBattlerTarget].statStages[STAT_ATK]++;
                 BattleScriptPushCursor();
@@ -4914,10 +4903,12 @@ static void Cmd_switchindataupdate(void)
 
     SwitchInClearSetData();
 
-    if (gBattleTypeFlags & BATTLE_TYPE_PALACE && gBattleMons[gActiveBattler].maxHP / 2 >= gBattleMons[gActiveBattler].hp
-        && gBattleMons[gActiveBattler].hp != 0 && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
+    if (gBattleTypeFlags & BATTLE_TYPE_PALACE 
+        && gBattleMons[gActiveBattler].maxHP / 2 >= gBattleMons[gActiveBattler].hp
+        && gBattleMons[gActiveBattler].hp != 0 
+        && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
     {
-        gBattleStruct->field_92 |= gBitTable[gActiveBattler];
+        gBattleStruct->palaceFlags |= gBitTable[gActiveBattler];
     }
 
     gBattleScripting.battler = gActiveBattler;
@@ -5101,7 +5092,7 @@ static void Cmd_jumpifcantswitch(void)
                 break;
         }
 
-        if (i == 6)
+        if (i == PARTY_SIZE)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
@@ -5480,7 +5471,7 @@ static void Cmd_switchineffects(void)
     s32 i;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    sub_803FA70(gActiveBattler);
+    UpdateSentPokesToOpponentValue(gActiveBattler);
 
     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
     gSpecialStatuses[gActiveBattler].flag40 = 0;
@@ -6349,15 +6340,13 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     AddTextPrinter(&printerTemplate, 0xFF, NULL);
 
     txtPtr = gStringVar4;
-    gStringVar4[0] = CHAR_SPECIAL_F9;
-    txtPtr++;
-    txtPtr[0] = CHAR_LV_2;
-    txtPtr++;
+    *(txtPtr)++ = CHAR_EXTRA_SYMBOL;
+    *(txtPtr)++ = CHAR_LV_2;
 
     var = (u32)(txtPtr);
     txtPtr = ConvertIntToDecimalStringN(txtPtr, monLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     var = (u32)(txtPtr) - var;
-    txtPtr = StringFill(txtPtr, 0x77, 4 - var);
+    txtPtr = StringFill(txtPtr, CHAR_UNK_SPACER, 4 - var);
 
     if (monGender != MON_GENDERLESS)
     {
@@ -6588,11 +6577,11 @@ static void Cmd_various(void)
     case VARIOUS_GET_MOVE_TARGET:
         gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
         break;
-    case 4:
+    case VARIOUS_GET_BATTLER_FAINTED:
         if (gHitMarker & HITMARKER_FAINTED(gActiveBattler))
-            gBattleCommunication[0] = 1;
+            gBattleCommunication[0] = TRUE;
         else
-            gBattleCommunication[0] = 0;
+            gBattleCommunication[0] = FALSE;
         break;
     case VARIOUS_RESET_INTIMIDATE_TRACE_BITS:
         gSpecialStatuses[gActiveBattler].intimidatedMon = 0;
@@ -6628,17 +6617,19 @@ static void Cmd_various(void)
             gHitMarker &= ~(HITMARKER_x400000);
         }
         break;
-    case 8:
-        gBattleCommunication[0] = 0;
+    case VARIOUS_PALACE_FLAVOR_TEXT:
+        // Try and print end-of-turn Battle Palace flavor text (e.g. "A glint appears in mon's eyes")
+        gBattleCommunication[0] = FALSE; // whether or not msg should be printed
         gBattleScripting.battler = gActiveBattler = gBattleCommunication[1];
-        if (!(gBattleStruct->field_92 & gBitTable[gActiveBattler])
+
+        if (!(gBattleStruct->palaceFlags & gBitTable[gActiveBattler])
             && gBattleMons[gActiveBattler].maxHP / 2 >= gBattleMons[gActiveBattler].hp
             && gBattleMons[gActiveBattler].hp != 0
             && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP))
         {
-            gBattleStruct->field_92 |= gBitTable[gActiveBattler];
-            gBattleCommunication[0] = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = sUnknown_0831C4F8[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)];
+            gBattleStruct->palaceFlags |= gBitTable[gActiveBattler];
+            gBattleCommunication[0] = TRUE;
+            gBattleCommunication[MULTISTRING_CHOOSER] = sBattlePalaceNatureToFlavorTextId[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)];
         }
         break;
     case VARIOUS_ARENA_JUDGMENT_WINDOW:
@@ -7295,7 +7286,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             index++;
             gBattleTextBuff2[index] = B_BUFF_EOS;
 
-            if (gBattleMons[gActiveBattler].statStages[statId] == 0)
+            if (gBattleMons[gActiveBattler].statStages[statId] == MIN_STAT_STAGE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler);
@@ -7322,17 +7313,17 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
         index++;
         gBattleTextBuff2[index] = B_BUFF_EOS;
 
-        if (gBattleMons[gActiveBattler].statStages[statId] == 0xC)
+        if (gBattleMons[gActiveBattler].statStages[statId] == MAX_STAT_STAGE)
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         else
             gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler);
     }
 
     gBattleMons[gActiveBattler].statStages[statId] += statValue;
-    if (gBattleMons[gActiveBattler].statStages[statId] < 0)
-        gBattleMons[gActiveBattler].statStages[statId] = 0;
-    if (gBattleMons[gActiveBattler].statStages[statId] > 0xC)
-        gBattleMons[gActiveBattler].statStages[statId] = 0xC;
+    if (gBattleMons[gActiveBattler].statStages[statId] < MIN_STAT_STAGE)
+        gBattleMons[gActiveBattler].statStages[statId] = MIN_STAT_STAGE;
+    if (gBattleMons[gActiveBattler].statStages[statId] > MAX_STAT_STAGE)
+        gBattleMons[gActiveBattler].statStages[statId] = MAX_STAT_STAGE;
 
     if (gBattleCommunication[MULTISTRING_CHOOSER] == 2 && flags & STAT_BUFF_ALLOW_PTR)
         gMoveResultFlags |= MOVE_RESULT_MISSED;
@@ -7357,7 +7348,7 @@ static void Cmd_normalisebuffs(void) // haze
     for (i = 0; i < gBattlersCount; i++)
     {
         for (j = 0; j < NUM_BATTLE_STATS; j++)
-            gBattleMons[i].statStages[j] = 6;
+            gBattleMons[i].statStages[j] = DEFAULT_STAT_STAGE;
     }
 
     gBattlescriptCurrInstr++;
@@ -7368,7 +7359,7 @@ static void Cmd_setbide(void)
     gBattleMons[gBattlerAttacker].status2 |= STATUS2_MULTIPLETURNS;
     gLockedMoves[gBattlerAttacker] = gCurrentMove;
     gTakenDmg[gBattlerAttacker] = 0;
-    gBattleMons[gBattlerAttacker].status2 |= (STATUS2_BIDE - 0x100); // 2 turns
+    gBattleMons[gBattlerAttacker].status2 |= STATUS2_BIDE_TURN(2);
 
     gBattlescriptCurrInstr++;
 }
@@ -8326,7 +8317,7 @@ static void Cmd_settypetorandomresistance(void) // conversion 2
 static void Cmd_setalwayshitflag(void)
 {
     gStatuses3[gBattlerTarget] &= ~(STATUS3_ALWAYS_HITS);
-    gStatuses3[gBattlerTarget] |= 0x10;
+    gStatuses3[gBattlerTarget] |= STATUS3_ALWAYS_HITS_TURN(2);
     gDisableStructs[gBattlerTarget].battlerWithSureHit = gBattlerAttacker;
     gBattlescriptCurrInstr++;
 }
@@ -8757,7 +8748,7 @@ static void Cmd_rolloutdamagecalculation(void)
 static void Cmd_jumpifconfusedandstatmaxed(void)
 {
     if (gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION
-        && gBattleMons[gBattlerTarget].statStages[gBattlescriptCurrInstr[1]] == 0xC)
+        && gBattleMons[gBattlerTarget].statStages[gBattlescriptCurrInstr[1]] == MAX_STAT_STAGE)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
     else
         gBattlescriptCurrInstr += 6;
@@ -8964,10 +8955,10 @@ static void Cmd_maxattackhalvehp(void) // belly drum
     if (!(gBattleMons[gBattlerAttacker].maxHP / 2))
         halfHp = 1;
 
-    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < 12
+    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE
         && gBattleMons[gBattlerAttacker].hp > halfHp)
     {
-        gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = 12;
+        gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = MAX_STAT_STAGE;
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
@@ -9145,7 +9136,7 @@ static void Cmd_trydobeatup(void)
     else
     {
         u8 beforeLoop = gBattleCommunication[0];
-        for (;gBattleCommunication[0] < 6; gBattleCommunication[0]++)
+        for (;gBattleCommunication[0] < PARTY_SIZE; gBattleCommunication[0]++)
         {
             if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP)
                 && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
@@ -9153,7 +9144,7 @@ static void Cmd_trydobeatup(void)
                 && !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
                     break;
         }
-        if (gBattleCommunication[0] < 6)
+        if (gBattleCommunication[0] < PARTY_SIZE)
         {
             PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattleCommunication[0])
 
@@ -9241,8 +9232,8 @@ static void Cmd_sethail(void)
 
 static void Cmd_jumpifattackandspecialattackcannotfall(void) // memento
 {
-    if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] == 0
-        && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == 0
+    if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] == MIN_STAT_STAGE
+        && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == MIN_STAT_STAGE
         && gBattleCommunication[6] != 1)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
@@ -9520,7 +9511,7 @@ static void Cmd_setyawn(void)
     }
     else
     {
-        gStatuses3[gBattlerTarget] |= 0x1000;
+        gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
         gBattlescriptCurrInstr += 5;
     }
 }
@@ -9654,7 +9645,7 @@ static void Cmd_assistattackselect(void)
     else
         party = gPlayerParty;
 
-    for (monId = 0; monId < 6; monId++)
+    for (monId = 0; monId < PARTY_SIZE; monId++)
     {
         if (monId == gBattlerPartyIndexes[gBattlerAttacker])
             continue;
@@ -9865,7 +9856,7 @@ static void Cmd_pickup(void)
                 if (lvlDivBy10 > 9)
                     lvlDivBy10 = 9;
 
-                for (j = 0; j < 9; j++)
+                for (j = 0; j < (int)ARRAY_COUNT(sPickupProbabilities); j++)
                 {
                     if (sPickupProbabilities[j] > rand)
                     {
@@ -10134,7 +10125,7 @@ static void Cmd_handleballthrow(void)
             }
         }
         else
-            ballMultiplier = sBallCatchBonuses[gLastUsedItem - 2];
+            ballMultiplier = sBallCatchBonuses[gLastUsedItem - ITEM_ULTRA_BALL];
 
         odds = (catchRate * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
@@ -10436,7 +10427,7 @@ static void Cmd_trygivecaughtmonnick(void)
         }
         break;
     case 4:
-        if (CalculatePlayerPartyCount() == 6)
+        if (CalculatePlayerPartyCount() == PARTY_SIZE)
             gBattlescriptCurrInstr += 5;
         else
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);

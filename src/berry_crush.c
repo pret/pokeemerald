@@ -1076,7 +1076,7 @@ int sub_802104C(void)
             return 0;
 
         InitStandardTextBoxWindows();
-        sub_8197200();
+        InitTextBoxGfxAndPrinters();
         sub_8022588(var0);
         sub_8022600(var0);
         gPaletteFade.bufferTransferDisabled = TRUE;
@@ -3271,7 +3271,7 @@ static void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, 
 
 void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
 {
-    u8 sp[4];
+    u8 sp[2];
 
     0[(u16 *)sp] = r3;
     r0[0] = r1;

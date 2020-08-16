@@ -326,7 +326,7 @@ static void Task_RecordMixing_Main(u8 taskId)
         VarSet(VAR_TEMP_0, 1);
         gUnknown_03001130 = FALSE;
         PrepareExchangePacket();
-        CreateRecordMixingSprite();
+        CreateRecordMixingLights();
         tState = 1;
         data[10] = CreateTask(Task_MixingRecordsRecv, 80);
         tSndEffTaskId = CreateTask(Task_RecordMixing_SoundEffect, 81);
@@ -336,7 +336,7 @@ static void Task_RecordMixing_Main(u8 taskId)
         {
             tState = 2;
             FlagSet(FLAG_SYS_MIX_RECORD);
-            DestroyRecordMixingSprite();
+            DestroyRecordMixingLights();
             DestroyTask(tSndEffTaskId);
         }
         break;

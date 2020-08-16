@@ -9,10 +9,10 @@
 	.align 2, 0
 	.global Init
 Init:
-	mov r0, PSR_IRQ_MODE
+	mov r0, #PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
-	mov r0, PSR_SYS_MODE
+	mov r0, #PSR_SYS_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_sys
 	ldr r1, =INTR_VECTOR
@@ -34,8 +34,8 @@ sp_irq: .word IWRAM_END - 0x60
 	.align 2, 0
 	.global IntrMain
 IntrMain: @ 0x2010048
-	mov ip, REG_BASE
-	add r3, ip, OFFSET_REG_IE
+	mov ip, #REG_BASE
+	add r3, ip, #OFFSET_REG_IE
 	ldr r2, [r3]
 	and r1, r2, r2, lsr #16
 	mov r2, #0

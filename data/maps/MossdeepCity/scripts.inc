@@ -1,3 +1,10 @@
+.set LOCALID_GRUNT_1, 10
+.set LOCALID_GRUNT_2, 11
+.set LOCALID_GRUNT_3, 12
+.set LOCALID_GRUNT_4, 13
+.set LOCALID_MAXIE, 14
+.set LOCALID_SCOTT, 16
+
 MossdeepCity_MapScripts:: @ 81E4A96
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_OnTransition
 	.byte 0
@@ -75,24 +82,24 @@ MossdeepCity_EventScript_VisitedMossdeep:: @ 81E4B38
 
 MossdeepCity_EventScript_TeamMagmaEnterSpaceCenter:: @ 81E4B41
 	lockall
-	applymovement 14, MossdeepCity_Movement_MaxieGestureToSpaceCenter
+	applymovement LOCALID_MAXIE, MossdeepCity_Movement_MaxieGestureToSpaceCenter
 	waitmovement 0
-	applymovement 10, MossdeepCity_Movement_GruntFaceSpaceCenter
-	applymovement 11, MossdeepCity_Movement_GruntFaceSpaceCenter
-	applymovement 12, MossdeepCity_Movement_GruntFaceSpaceCenter
-	applymovement 13, MossdeepCity_Movement_GruntFaceSpaceCenter
+	applymovement LOCALID_GRUNT_1, MossdeepCity_Movement_GruntFaceSpaceCenter
+	applymovement LOCALID_GRUNT_2, MossdeepCity_Movement_GruntFaceSpaceCenter
+	applymovement LOCALID_GRUNT_3, MossdeepCity_Movement_GruntFaceSpaceCenter
+	applymovement LOCALID_GRUNT_4, MossdeepCity_Movement_GruntFaceSpaceCenter
 	waitmovement 0
-	applymovement 14, MossdeepCity_Movement_MaxieEnterSpaceCenter
-	applymovement 10, MossdeepCity_Movement_Grunt1EnterSpaceCenter
-	applymovement 11, MossdeepCity_Movement_Grunt2EnterSpaceCenter
-	applymovement 12, MossdeepCity_Movement_Grunt3EnterSpaceCenter
-	applymovement 13, MossdeepCity_Movement_Grunt4EnterSpaceCenter
+	applymovement LOCALID_MAXIE, MossdeepCity_Movement_MaxieEnterSpaceCenter
+	applymovement LOCALID_GRUNT_1, MossdeepCity_Movement_Grunt1EnterSpaceCenter
+	applymovement LOCALID_GRUNT_2, MossdeepCity_Movement_Grunt2EnterSpaceCenter
+	applymovement LOCALID_GRUNT_3, MossdeepCity_Movement_Grunt3EnterSpaceCenter
+	applymovement LOCALID_GRUNT_4, MossdeepCity_Movement_Grunt4EnterSpaceCenter
 	waitmovement 0
-	removeobject 14
-	removeobject 10
-	removeobject 11
-	removeobject 12
-	removeobject 13
+	removeobject LOCALID_MAXIE
+	removeobject LOCALID_GRUNT_1
+	removeobject LOCALID_GRUNT_2
+	removeobject LOCALID_GRUNT_3
+	removeobject LOCALID_GRUNT_4
 	delay 30
 	setvar VAR_MOSSDEEP_CITY_STATE, 2
 	setflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
@@ -260,19 +267,19 @@ MossdeepCity_EventScript_Scott:: @ 81E4C85
 	compare VAR_FACING, DIR_EAST
 	call_if_eq MossdeepCity_EventScript_ScottExitEast
 	addvar VAR_SCOTT_STATE, 1
-	removeobject 16
+	removeobject LOCALID_SCOTT
 	release
 	end
 
 MossdeepCity_EventScript_ScottExitNorth:: @ 81E4CB0
 	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
-	applymovement 16, MossdeepCity_Movement_ScottExitNorth
+	applymovement LOCALID_SCOTT, MossdeepCity_Movement_ScottExitNorth
 	waitmovement 0
 	return
 
 MossdeepCity_EventScript_ScottExitEast:: @ 81E4CC2
 	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
-	applymovement 16, MossdeepCity_Movement_ScottExitEast
+	applymovement LOCALID_SCOTT, MossdeepCity_Movement_ScottExitEast
 	waitmovement 0
 	return
 

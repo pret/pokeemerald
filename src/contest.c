@@ -38,7 +38,6 @@
 #include "data.h"
 #include "contest_ai.h"
 #include "constants/event_objects.h"
-#include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"

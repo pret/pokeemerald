@@ -390,7 +390,7 @@ struct BattleStruct
     u8 expGetterBattlerId;
     u8 unused_5;
     u8 field_91; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
-    u8 field_92; // battle palace related
+    u8 palaceFlags; // First 4 bits are "is < 50% HP and not asleep" for each battler, last 4 bits are selected moves to pass to AI
     u8 field_93; // related to choosing pokemon?
     u8 wallyBattleState;
     u8 wallyMovesState;

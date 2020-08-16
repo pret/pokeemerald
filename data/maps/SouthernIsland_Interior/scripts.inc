@@ -1,3 +1,5 @@
+.set LOCALID_LATI, 2
+
 SouthernIsland_Interior_MapScripts:: @ 8242A45
 	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_OnTransition
@@ -11,7 +13,7 @@ SouthernIsland_Interior_EventScript_TryRemoveLati:: @ 8242A5A
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject 2
+	removeobject LOCALID_LATI
 	return
 
 SouthernIsland_Interior_OnTransition: @ 8242A6E
@@ -69,14 +71,14 @@ SouthernIsland_Interior_EventScript_Lati:: @ 8242AD0
 	playmoncry VAR_TEMP_4, 0
 	delay 30
 	waitmoncry
-	addobject 2
+	addobject LOCALID_LATI
 	delay 30
 	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
-	applymovement 2, SouthernIsland_Interior_Movement_LatiApproach
+	applymovement LOCALID_LATI, SouthernIsland_Interior_Movement_LatiApproach
 	waitmovement 0
 	delay 50
 	special RemoveCameraObject
-	setvar VAR_LAST_TALKED, 2
+	setvar VAR_LAST_TALKED, LOCALID_LATI
 	compare VAR_ROAMER_POKEMON, 0
 	call_if_eq SouthernIsland_Interior_EventScript_SetLatiosBattleVars
 	compare VAR_ROAMER_POKEMON, 0

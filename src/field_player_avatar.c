@@ -25,7 +25,7 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
-#include "constants/flags.h"
+#include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -101,9 +101,9 @@ static void sub_808C280(struct ObjectEvent *);
 
 static void StartStrengthAnim(u8, u8);
 static void Task_PushBoulder(u8 taskId);
-static u8 PushBoulder_Start(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
-static u8 PushBoulder_Move(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
-static u8 PushBoulder_End(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
+static bool8 PushBoulder_Start(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
+static bool8 PushBoulder_Move(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
+static bool8 PushBoulder_End(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject);
 
 static void DoPlayerMatJump(void);
 static void DoPlayerAvatarSecretBaseMatJump(u8 taskId);
@@ -121,22 +121,22 @@ static void Task_StopSurfingInit(u8 taskId);
 static void Task_WaitStopSurfing(u8 taskId);
 
 static void Task_Fishing(u8 taskId);
-static u8 Fishing1(struct Task *task);
-static u8 Fishing2(struct Task *task);
-static u8 Fishing3(struct Task *task);
-static u8 Fishing4(struct Task *task);
-static u8 Fishing5(struct Task *task);
-static u8 Fishing6(struct Task *task);
-static u8 Fishing7(struct Task *task);
-static u8 Fishing8(struct Task *task);
-static u8 Fishing9(struct Task *task);
-static u8 Fishing10(struct Task *task);
-static u8 Fishing11(struct Task *task);
-static u8 Fishing12(struct Task *task);
-static u8 Fishing13(struct Task *task);
-static u8 Fishing14(struct Task *task);
-static u8 Fishing15(struct Task *task);
-static u8 Fishing16(struct Task *task);
+static u8 Fishing_Init(struct Task *task);
+static u8 Fishing_GetRodOut(struct Task *task);
+static u8 Fishing_WaitBeforeDots(struct Task *task);
+static u8 Fishing_InitDots(struct Task *task);
+static u8 Fishing_ShowDots(struct Task *task);
+static u8 Fishing_CheckForBite(struct Task *task);
+static u8 Fishing_GotBite(struct Task *task);
+static u8 Fishing_WaitForA(struct Task *task);
+static u8 Fishing_CheckMoreDots(struct Task *task);
+static u8 Fishing_MonOnHook(struct Task *task);
+static u8 Fishing_StartEncounter(struct Task *task);
+static u8 Fishing_NotEvenNibble(struct Task *task);
+static u8 Fishing_GotAway(struct Task *task);
+static u8 Fishing_NoMon(struct Task *task);
+static u8 Fishing_PutRodAway(struct Task *task);
+static u8 Fishing_EndNoMon(struct Task *task);
 static void AlignFishingAnimationFrames(void);
 
 static u8 sub_808D38C(struct ObjectEvent *object, s16 *a1);
@@ -320,7 +320,7 @@ static u8 ObjectEventCB2_NoMovement2(void)
     return 0;
 }
 
-void player_step(u8 direction, u16 newKeys, u16 heldKeys)
+void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -379,9 +379,9 @@ static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEve
 
 static void npc_clear_strange_bits(struct ObjectEvent *objEvent)
 {
-    objEvent->inanimate = 0;
-    objEvent->disableAnim = 0;
-    objEvent->facingDirectionLocked = 0;
+    objEvent->inanimate = FALSE;
+    objEvent->disableAnim = FALSE;
+    objEvent->facingDirectionLocked = FALSE;
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
 }
 
@@ -424,14 +424,14 @@ static u8 GetForcedMovementByMetatileBehavior(void)
 
 static bool8 ForcedMovement_None(void)
 {
-    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_6)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE)
     {
         struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-        playerObjEvent->facingDirectionLocked = 0;
-        playerObjEvent->enableAnim = 1;
+        playerObjEvent->facingDirectionLocked = FALSE;
+        playerObjEvent->enableAnim = TRUE;
         SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
-        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_6;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FORCED_MOVE;
     }
     return FALSE;
 }
@@ -441,7 +441,7 @@ static u8 DoForcedMovement(u8 direction, void (*b)(u8))
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
     u8 collision = CheckForPlayerAvatarCollision(direction);
 
-    playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
+    playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED_MOVE;
     if (collision)
     {
         ForcedMovement_None();
@@ -453,7 +453,7 @@ static u8 DoForcedMovement(u8 direction, void (*b)(u8))
         {
             if (collision == COLLISION_LEDGE_JUMP)
                 PlayerJumpLedge(direction);
-            playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
+            playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED_MOVE;
             playerAvatar->runningState = MOVING;
             return 1;
         }
@@ -470,7 +470,7 @@ static u8 DoForcedMovementInCurrentDirection(void (*a)(u8))
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    playerObjEvent->disableAnim = 1;
+    playerObjEvent->disableAnim = TRUE;
     return DoForcedMovement(playerObjEvent->movementDirection, a);
 }
 
@@ -519,12 +519,12 @@ static bool8 ForcedMovement_PushedEastByCurrent(void)
     return DoForcedMovement(DIR_EAST, PlayerRideWaterCurrent);
 }
 
-u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
+static u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    playerObjEvent->disableAnim = 1;
-    playerObjEvent->facingDirectionLocked = 1;
+    playerObjEvent->disableAnim = TRUE;
+    playerObjEvent->facingDirectionLocked = TRUE;
     return DoForcedMovement(direction, b);
 }
 
@@ -567,8 +567,8 @@ static bool8 ForcedMovement_MuddySlope(void)
     if (playerObjEvent->movementDirection != DIR_NORTH || GetPlayerSpeed() <= 3)
     {
         Bike_UpdateBikeCounterSpeed(0);
-        playerObjEvent->facingDirectionLocked = 1;
-        return DoForcedMovement(1, PlayerGoSpeed2);
+        playerObjEvent->facingDirectionLocked = TRUE;
+        return DoForcedMovement(DIR_SOUTH, PlayerGoSpeed2);
     }
     else
     {
@@ -869,7 +869,7 @@ static void PlayerAvatarTransition_Surfing(struct ObjectEvent *objEvent)
     gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
     spriteId = FieldEffectStart(FLDEFF_SURF_BLOB);
     objEvent->fieldEffectSpriteId = spriteId;
-    sub_81555AC(spriteId, 1);
+    SetSurfBobState(spriteId, 1);
 }
 
 static void PlayerAvatarTransition_Underwater(struct ObjectEvent *objEvent)
@@ -885,7 +885,7 @@ static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent *objEvent)
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_5;
 }
 
-void sub_808B578(void)
+void UpdatePlayerAvatarTransitionState(void)
 {
     gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
     if (PlayerIsAnimActive())
@@ -1328,7 +1328,7 @@ void ClearPlayerAvatarInfo(void)
 
 void SetPlayerAvatarStateMask(u8 flags)
 {
-    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_6 | PLAYER_AVATAR_FLAG_5);
+    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_FORCED_MOVE | PLAYER_AVATAR_FLAG_5);
     gPlayerAvatar.flags |= flags;
 }
 
@@ -1404,13 +1404,13 @@ void SetPlayerInvisibility(bool8 invisible)
         gSprites[gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId].invisible = invisible;
 }
 
-void sub_808C114(void)
+void SetPlayerAvatarFieldMove(void)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
-void sub_808C15C(u8 direction)
+static void SetPlayerAvatarFishing(u8 direction)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FISHING));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingDirectionAnimNum(direction));
@@ -1423,7 +1423,7 @@ void PlayerUseAcroBikeOnBumpySlope(u8 direction)
     SeekSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 1);
 }
 
-void sub_808C228(u8 direction)
+void SetPlayerAvatarWatering(u8 direction)
 {
     ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_WATERING));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFaceDirectionAnimNum(direction));
@@ -1650,7 +1650,7 @@ static void Task_StopSurfingInit(u8 taskId)
         if (!ObjectEventClearHeldMovementIfFinished(playerObjEvent))
             return;
     }
-    sub_81555AC(playerObjEvent->fieldEffectSpriteId, 2);
+    SetSurfBobState(playerObjEvent->fieldEffectSpriteId, 2);
     ObjectEventSetHeldMovement(playerObjEvent, GetJumpSpecialMovementAction((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = Task_WaitStopSurfing;
 }
@@ -1670,26 +1670,6 @@ static void Task_WaitStopSurfing(u8 taskId)
     }
 }
 
-static bool8 (*const sFishingStateFuncs[])(struct Task *) =
-{
-    Fishing1,
-    Fishing2,
-    Fishing3,
-    Fishing4,
-    Fishing5,
-    Fishing6,
-    Fishing7,
-    Fishing8,
-    Fishing9,
-    Fishing10,
-    Fishing11,
-    Fishing12,
-    Fishing13,
-    Fishing14,
-    Fishing15,
-    Fishing16,
-};
-
 #define tStep              data[0]
 #define tFrameCounter      data[1]
 #define tNumDots           data[2]
@@ -1699,12 +1679,33 @@ static bool8 (*const sFishingStateFuncs[])(struct Task *) =
 #define tPlayerGfxId       data[14]
 #define tFishingRod        data[15]
 
+// Some states are jumped to directly, labeled below
 #define FISHING_START_ROUND 3
 #define FISHING_GOT_BITE 6
 #define FISHING_ON_HOOK 9
 #define FISHING_NO_BITE 11
 #define FISHING_GOT_AWAY 12
 #define FISHING_SHOW_RESULT 13
+
+static bool8 (*const sFishingStateFuncs[])(struct Task *) =
+{
+    Fishing_Init,
+    Fishing_GetRodOut,
+    Fishing_WaitBeforeDots, 
+    Fishing_InitDots,       // FISHING_START_ROUND
+    Fishing_ShowDots,
+    Fishing_CheckForBite,
+    Fishing_GotBite,        // FISHING_GOT_BITE
+    Fishing_WaitForA,
+    Fishing_CheckMoreDots,
+    Fishing_MonOnHook,      // FISHING_ON_HOOK
+    Fishing_StartEncounter,
+    Fishing_NotEvenNibble,  // FISHING_NO_BITE
+    Fishing_GotAway,        // FISHING_GOT_AWAY
+    Fishing_NoMon,          // FISHING_SHOW_RESULT
+    Fishing_PutRodAway,
+    Fishing_EndNoMon,
+};
 
 void StartFishing(u8 rod)
 {
@@ -1720,7 +1721,7 @@ static void Task_Fishing(u8 taskId)
         ;
 }
 
-static bool8 Fishing1(struct Task *task)
+static bool8 Fishing_Init(struct Task *task)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
@@ -1728,24 +1729,32 @@ static bool8 Fishing1(struct Task *task)
     return FALSE;
 }
 
-static bool8 Fishing2(struct Task *task)
+static bool8 Fishing_GetRodOut(struct Task *task)
 {
     struct ObjectEvent *playerObjEvent;
-    const s16 arr1[] = {1, 1, 1};
-    const s16 arr2[] = {1, 3, 6};
+    const s16 minRounds1[] = {
+        [OLD_ROD]   = 1, 
+        [GOOD_ROD]  = 1, 
+        [SUPER_ROD] = 1
+    };
+    const s16 minRounds2[] = {
+        [OLD_ROD]   = 1, 
+        [GOOD_ROD]  = 3, 
+        [SUPER_ROD] = 6
+    };
 
     task->tRoundsPlayed = 0;
-    task->tMinRoundsRequired = arr1[task->tFishingRod] + (Random() % arr2[task->tFishingRod]);
+    task->tMinRoundsRequired = minRounds1[task->tFishingRod] + (Random() % minRounds2[task->tFishingRod]);
     task->tPlayerGfxId = gObjectEvents[gPlayerAvatar.objectEventId].graphicsId;
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     ObjectEventClearHeldMovementIfActive(playerObjEvent);
-    playerObjEvent->enableAnim = 1;
-    sub_808C15C(playerObjEvent->facingDirection);
+    playerObjEvent->enableAnim = TRUE;
+    SetPlayerAvatarFishing(playerObjEvent->facingDirection);
     task->tStep++;
     return FALSE;
 }
 
-static bool8 Fishing3(struct Task *task)
+static bool8 Fishing_WaitBeforeDots(struct Task *task)
 {
     AlignFishingAnimationFrames();
 
@@ -1756,7 +1765,7 @@ static bool8 Fishing3(struct Task *task)
     return FALSE;
 }
 
-static bool8 Fishing4(struct Task *task)
+static bool8 Fishing_InitDots(struct Task *task)
 {
     u32 randVal;
 
@@ -1774,8 +1783,7 @@ static bool8 Fishing4(struct Task *task)
     return TRUE;
 }
 
-// Play a round of the dot game
-static bool8 Fishing5(struct Task *task)
+static bool8 Fishing_ShowDots(struct Task *task)
 {
     const u8 dot[] = _("·");
 
@@ -1810,8 +1818,7 @@ static bool8 Fishing5(struct Task *task)
     }
 }
 
-// Determine if fish bites
-static bool8 Fishing6(struct Task *task)
+static bool8 Fishing_CheckForBite(struct Task *task)
 {
     bool8 bite;
 
@@ -1831,34 +1838,25 @@ static bool8 Fishing6(struct Task *task)
             if (ability == ABILITY_SUCTION_CUPS || ability  == ABILITY_STICKY_HOLD)
             {
                 if (Random() % 100 > 14)
-                {
                     bite = TRUE;
-                }
             }
         }
 
         if (!bite)
         {
             if (Random() & 1)
-            {
                 task->tStep = FISHING_NO_BITE;
-            }
             else
-            {
                 bite = TRUE;
-            }
         }
 
         if (bite == TRUE)
-        {
             StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingBiteDirectionAnimNum(GetPlayerFacingDirection()));
-        }
     }
     return TRUE;
 }
 
-// Oh! A Bite!
-static bool8 Fishing7(struct Task *task)
+static bool8 Fishing_GotBite(struct Task *task)
 {
     AlignFishingAnimationFrames();
     AddTextPrinterParameterized(0, 1, gText_OhABite, 0, 17, 0, NULL);
@@ -1868,9 +1866,13 @@ static bool8 Fishing7(struct Task *task)
 }
 
 // We have a bite. Now, wait for the player to press A, or the timer to expire.
-static bool8 Fishing8(struct Task *task)
+static bool8 Fishing_WaitForA(struct Task *task)
 {
-    const s16 reelTimeouts[3] = {36, 33, 30};
+    const s16 reelTimeouts[3] = {
+        [OLD_ROD]   = 36, 
+        [GOOD_ROD]  = 33, 
+        [SUPER_ROD] = 30
+    };
 
     AlignFishingAnimationFrames();
     task->tFrameCounter++;
@@ -1882,13 +1884,13 @@ static bool8 Fishing8(struct Task *task)
 }
 
 // Determine if we're going to play the dot game again
-static bool8 Fishing9(struct Task *task)
+static bool8 Fishing_CheckMoreDots(struct Task *task)
 {
-    const s16 arr[][2] =
+    const s16 moreDotsChance[][2] =
     {
-        {0, 0},
-        {40, 10},
-        {70, 30}
+        [OLD_ROD]   = {0, 0},
+        [GOOD_ROD]  = {40, 10},
+        [SUPER_ROD] = {70, 30}
     };
 
     AlignFishingAnimationFrames();
@@ -1902,13 +1904,13 @@ static bool8 Fishing9(struct Task *task)
         // probability of having to play another round
         s16 probability = Random() % 100;
 
-        if (arr[task->tFishingRod][task->tRoundsPlayed] > probability)
+        if (moreDotsChance[task->tFishingRod][task->tRoundsPlayed] > probability)
             task->tStep = FISHING_START_ROUND;
     }
     return FALSE;
 }
 
-static bool8 Fishing10(struct Task *task)
+static bool8 Fishing_MonOnHook(struct Task *task)
 {
     AlignFishingAnimationFrames();
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -1918,7 +1920,7 @@ static bool8 Fishing10(struct Task *task)
     return FALSE;
 }
 
-static bool8 Fishing11(struct Task *task)
+static bool8 Fishing_StartEncounter(struct Task *task)
 {
     if (task->tFrameCounter == 0)
         AlignFishingAnimationFrames();
@@ -1934,7 +1936,7 @@ static bool8 Fishing11(struct Task *task)
             ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
             ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
             if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-                sub_8155604(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
+                SetSurfBobWhileFishingState(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
             gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
             gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
             ClearDialogWindowAndFrame(0, TRUE);
@@ -1948,14 +1950,13 @@ static bool8 Fishing11(struct Task *task)
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         FishingWildEncounter(task->tFishingRod);
-        sub_80ED950(1);
+        RecordFishingAttemptForTV(TRUE);
         DestroyTask(FindTaskIdByFunc(Task_Fishing));
     }
     return FALSE;
 }
 
-// Not even a nibble
-static bool8 Fishing12(struct Task *task)
+static bool8 Fishing_NotEvenNibble(struct Task *task)
 {
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
@@ -1965,8 +1966,7 @@ static bool8 Fishing12(struct Task *task)
     return TRUE;
 }
 
-// It got away
-static bool8 Fishing13(struct Task *task)
+static bool8 Fishing_GotAway(struct Task *task)
 {
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
@@ -1976,15 +1976,14 @@ static bool8 Fishing13(struct Task *task)
     return TRUE;
 }
 
-// Wait one second
-static bool8 Fishing14(struct Task *task)
+static bool8 Fishing_NoMon(struct Task *task)
 {
     AlignFishingAnimationFrames();
     task->tStep++;
     return FALSE;
 }
 
-static bool8 Fishing15(struct Task *task)
+static bool8 Fishing_PutRodAway(struct Task *task)
 {
     AlignFishingAnimationFrames();
     if (gSprites[gPlayerAvatar.spriteId].animEnded)
@@ -1994,7 +1993,7 @@ static bool8 Fishing15(struct Task *task)
         ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
         ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-            sub_8155604(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
+            SetSurfBobWhileFishingState(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
         gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
         gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
         task->tStep++;
@@ -2002,7 +2001,7 @@ static bool8 Fishing15(struct Task *task)
     return FALSE;
 }
 
-static bool8 Fishing16(struct Task *task)
+static bool8 Fishing_EndNoMon(struct Task *task)
 {
     RunTextPrinters();
     if (!IsTextPrinterActive(0))
@@ -2011,7 +2010,7 @@ static bool8 Fishing16(struct Task *task)
         ScriptContext2_Disable();
         UnfreezeObjectEvents();
         ClearDialogWindowAndFrame(0, TRUE);
-        sub_80ED950(0);
+        RecordFishingAttemptForTV(FALSE);
         DestroyTask(FindTaskIdByFunc(Task_Fishing));
     }
     return FALSE;
@@ -2053,7 +2052,7 @@ static void AlignFishingAnimationFrames(void)
     if (animType == 10 || animType == 11)
         playerSprite->pos2.y = 8;
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-        sub_8155604(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->pos2.y);
+        SetSurfBobWhileFishingState(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->pos2.y);
 }
 
 void sub_808D074(u8 a0)

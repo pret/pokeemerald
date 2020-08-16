@@ -1836,31 +1836,25 @@ static void TryEndMassOutbreak(u16 days)
         gSaveBlock1Ptr->outbreakDaysLeft -= days;
 }
 
-void sub_80ED950(bool8 flag)
+void RecordFishingAttemptForTV(bool8 caughtFish)
 {
-    if (flag)
+    if (caughtFish)
     {
         if (sPokemonAnglerAttemptCounters >> 8 > 4)
-        {
             PutFishingAdviceShowOnTheAir();
-        }
+
         sPokemonAnglerAttemptCounters &= 0xFF;
         if (sPokemonAnglerAttemptCounters != 0xFF)
-        {
             sPokemonAnglerAttemptCounters += 0x01;
-        }
     }
     else
     {
         if ((u8)sPokemonAnglerAttemptCounters > 4)
-        {
             PutFishingAdviceShowOnTheAir();
-        }
+
         sPokemonAnglerAttemptCounters &= 0xFF00;
         if (sPokemonAnglerAttemptCounters >> 8 != 0xFF)
-        {
             sPokemonAnglerAttemptCounters += 0x0100;
-        }
     }
 }
 
@@ -1930,7 +1924,7 @@ void sub_80EDA80(void)
     }
 }
 
-void sub_80EDB44(void)
+void TryPutTodaysRivalTrainerOnAir(void)
 {
     TVShow *show;
     u32 i;
@@ -3448,7 +3442,7 @@ void ChangePokemonNickname(void)
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(3, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), ChangePokemonNickname_CB);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), ChangePokemonNickname_CB);
 }
 
 void ChangePokemonNickname_CB(void)
@@ -3464,7 +3458,7 @@ void ChangeBoxPokemonNickname(void)
     boxMon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
     GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
     GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(3, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL), ChangeBoxPokemonNickname_CB);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL), ChangeBoxPokemonNickname_CB);
 }
 
 void ChangeBoxPokemonNickname_CB(void)

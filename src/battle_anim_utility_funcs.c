@@ -569,7 +569,7 @@ static void sub_81172EC(u8 taskId)
             if (gTasks[taskId].data[12] == 0)
             {
                 sub_80A477C(0);
-                gTasks[taskId].data[15]++;;
+                gTasks[taskId].data[15]++;
             }
         }
         break;

@@ -24,7 +24,6 @@
 #include "constants/items.h"
 #include "constants/species.h"
 #include "constants/tv.h"
-#include "constants/vars.h"
 #include "constants/battle_frontier.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);

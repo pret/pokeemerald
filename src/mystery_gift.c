@@ -410,7 +410,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         break;
     case 1:
         LoadPalette(gUnkTextboxBorderPal, 0, 0x20);
-        LoadPalette(stdpal_get(2), 0xd0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
         Menu_LoadStdPalAt(0xC0);
         LoadUserWindowBorderGfx(0, 0xA, 0xE0);
         LoadUserWindowBorderGfx_(0, 0x1, 0xF0);

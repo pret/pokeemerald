@@ -1,3 +1,8 @@
+.set LOCALID_ATTENDANT_SINGLES, 1
+.set LOCALID_ATTENDANT_DOUBLES, 7
+.set LOCALID_ATTENDANT_MULTIS, 8
+.set LOCALID_ATTENDANT_LINK_MULTIS, 9
+
 BattleFrontier_BattleTowerLobby_MapScripts:: @ 823E67B
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerLobby_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerLobby_OnTransition
@@ -706,19 +711,19 @@ BattleFrontier_BattleTowerLobby_EventScript_SetAttendantTalkedTo:: @ 823F1E8
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToSinglesAttendant:: @ 823F215
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToDoublesAttendant:: @ 823F21B
-	setvar VAR_LAST_TALKED, 7
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToMultisAttendant:: @ 823F221
-	setvar VAR_LAST_TALKED, 8
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_MULTIS
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToLinkMultisAttendant:: @ 823F227
-	setvar VAR_LAST_TALKED, 9
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_LINK_MULTIS
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoord:: @ 823F22D

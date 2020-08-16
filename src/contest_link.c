@@ -7,7 +7,6 @@
 #include "random.h"
 #include "task.h"
 #include "contest_link.h"
-#include "constants/flags.h"
 
 static void Task_LinkContest_StartInitFlags(u8);
 static void Task_LinkContest_InitFlags(u8);

@@ -581,10 +581,10 @@ bool32 sub_81CE754(u8 a0, u16 a1, bool8 a2)
             str = sub_81CDD24(a1);
             AddTextPrinterParameterized(structPtr->unk1820, 1, str, 0, 17, 0, NULL);
             text[0] = EXT_CTRL_CODE_BEGIN;
-            text[1] = 4;
-            text[2] = 8;
-            text[3] = 0;
-            text[4] = 9;
+            text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+            text[2] = TEXT_COLOR_BLUE;
+            text[3] = TEXT_COLOR_TRANSPARENT;
+            text[4] = TEXT_COLOR_LIGHT_BLUE;
             StringCopy(text + 5, gText_Number2);
             AddTextPrinterParameterized(structPtr->unk1821, 1, text, 4, 1, 0, NULL);
             ConvertIntToDecimalStringN(text + 5, sub_81CDD48(), STR_CONV_MODE_RIGHT_ALIGN, 4);

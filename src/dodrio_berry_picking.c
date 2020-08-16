@@ -4629,7 +4629,7 @@ static void sub_802A7A8(void)
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
     InitStandardTextBoxWindows();
-    sub_8197200();
+    InitTextBoxGfxAndPrinters();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetBgTilemapBuffer(3, gUnknown_02022CF8->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, gUnknown_02022CF8->tilemapBuffers[1]);
@@ -4657,7 +4657,7 @@ static bool32 sub_802A8E8(void)
             return FALSE;
         break;
     case 5:
-        LoadPalette(stdpal_get(3), 0xD0, 0x20);
+        LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
         break;
     default:
         gUnknown_02022CF8->unk3018 = 0;

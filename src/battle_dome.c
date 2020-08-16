@@ -4692,7 +4692,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             allocatedArray[NUM_STATS] += allocatedArray[STAT_HP];
 
             // Add the EVs with the nature modifier for this mon and and track number of negative natures
-            for (j = 0; j < NUM_EV_STATS; j++)
+            for (j = 0; j < NUM_NATURE_STATS; j++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
                     nature = GetFrontierBrainMonNature(i);
@@ -4706,7 +4706,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 else if (gNatureStatTable[nature][j] < 0)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
-                    allocatedArray[j + NUM_STATS + NUM_EV_STATS + 2]++;
+                    allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
                 }
                 else
                 {
@@ -4742,7 +4742,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             }
 
             allocatedArray[NUM_STATS] += allocatedArray[STAT_HP];
-            for (j = 0; j < NUM_EV_STATS; j++)
+            for (j = 0; j < NUM_NATURE_STATS; j++)
             {
                 nature = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].nature;
                 if (gNatureStatTable[nature][j] > 0)
@@ -4752,7 +4752,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 else if (gNatureStatTable[nature][j] < 0)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
-                    allocatedArray[j + NUM_STATS + NUM_EV_STATS + 2]++;
+                    allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
                 }
                 else
                 {
