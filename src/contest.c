@@ -2,12 +2,6 @@
 #include "gpu_regs.h"
 #include "bg.h"
 #include "malloc.h"
-#include "constants/items.h"
-#include "constants/event_objects.h"
-#include "constants/moves.h"
-#include "constants/songs.h"
-#include "constants/species.h"
-#include "constants/flags.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "contest.h"
@@ -42,8 +36,15 @@
 #include "contest_link.h"
 #include "international_string_util.h"
 #include "data.h"
-#include "constants/rgb.h"
 #include "contest_ai.h"
+#include "constants/event_objects.h"
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/tv.h"
 
 // This file's functions.
 static void LoadContestPalettes(void);
@@ -113,7 +114,7 @@ static void SetBottomSliderHeartsInvisibility(bool8);
 static void CreateNextTurnSprites(void);
 static void CreateApplauseMeterSprite(void);
 static void CreateJudgeAttentionEyeTask(void);
-static void sub_80DC7EC(void);
+static void CreateUnusedBlendTask(void);
 static void ContestDebugDoPrint(void);
 static void DrawContestantWindows(void);
 static void ApplyNextTurnOrder(void);
@@ -164,9 +165,9 @@ static void Task_UpdateAppealHearts(u8);
 static void SpriteCB_UpdateHeartSlider(struct Sprite *);
 static void Task_FlashJudgeAttentionEye(u8);
 static void Task_StopFlashJudgeAttentionEye(u8);
-static void sub_80DC8D0(u8);
-static void sub_80DC81C(u8);
-static void sub_80DC87C(u8);
+static void Task_UnusedBlend(u8);
+static void InitUnusedBlendTaskData(u8);
+static void UpdateBlendTaskContestantData(u8);
 static void SpriteCB_BlinkContestantBox(struct Sprite *);
 static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite);
 static u8 StartApplauseOverflowAnimation(void);
@@ -183,9 +184,9 @@ static void Task_WaitRaiseCurtainAtRoundEnd(u8);
 static void Task_StartRaiseCurtainAtRoundEnd(u8);
 static void Task_WaitForSliderHeartAnim(u8);
 static void SetBattleTargetSpritePosition(void);
-static void sub_80DF250(void);
-static void sub_80DF4F8(void);
-static void sub_80DF080(u8);
+static void CalculateContestLiveUpdateData(void);
+static void SetConestLiveUpdateTVData(void);
+static void SetContestLiveUpdateFlags(u8);
 static void ContestDebugPrintBitStrings(void);
 static void StripPlayerNameForLinkContest(u8 *);
 static void StripMonNameForLinkContest(u8 *, s32);
@@ -231,6 +232,13 @@ enum {
     STAT_SYMBOL_X,
     STAT_SYMBOL_SWIRL,
     STAT_SYMBOL_SQUARE,
+};
+
+enum {
+    CONTEST_DEBUG_MODE_OFF,
+    CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL,
+    CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS,
+    CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS
 };
 
 #define MOVE_WINDOWS_START WIN_MOVE0
@@ -964,9 +972,9 @@ void LoadContestBgAfterMoveAnim(void)
     LoadContestPalettes();
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        u32 contestantWindowId = MOVE_WINDOWS_START + i;
+        u32 contestantWindowId = 5 + i;
 
-        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId], 16 * (MOVE_WINDOWS_START + gContestantTurnOrder[i]), sizeof((eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId])));
+        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId], 16 * (5 + gContestantTurnOrder[i]), sizeof((eUnknownHeap1A004.cachedWindowPalettes[contestantWindowId])));
     }
 }
 
@@ -1257,9 +1265,9 @@ static bool8 SetupContestGraphics(u8 *stateVar)
     case 5:
         LoadCompressedPalette(gOldContestPalette, 0, 0x200);
         CpuCopy32(gPlttBufferUnfaded + 128, tempPalette1, 16 * sizeof(u16));
-        CpuCopy32(gPlttBufferUnfaded + (MOVE_WINDOWS_START + gContestPlayerMonIndex) * 16, tempPalette2, 16 * sizeof(u16));
+        CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, tempPalette2, 16 * sizeof(u16));
         CpuCopy32(tempPalette2, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
-        CpuCopy32(tempPalette1, gPlttBufferUnfaded + (MOVE_WINDOWS_START + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
+        CpuCopy32(tempPalette1, gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
         DmaCopy32Defvars(3, gPlttBufferUnfaded, eUnknownHeap1A004.cachedWindowPalettes, sizeof(eUnknownHeap1A004.cachedWindowPalettes));
         LoadContestPalettes();
         break;
@@ -1272,7 +1280,7 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CreateNextTurnSprites();
         CreateApplauseMeterSprite();
         CreateJudgeAttentionEyeTask();
-        sub_80DC7EC();
+        CreateUnusedBlendTask();
         gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
         gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
@@ -1591,7 +1599,7 @@ static void Task_HideMoveSelectScreen(u8 taskId)
     gBattle_BG2_Y = 0;
     SetBottomSliderHeartsInvisibility(FALSE);
 
-    for (i = 0; i < CONTESTANT_COUNT; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         FillWindowPixelBuffer(MOVE_WINDOWS_START + i, PIXEL_FILL(0));
         PutWindowTilemap(MOVE_WINDOWS_START + i);
@@ -1751,7 +1759,7 @@ static void Task_DoAppeals(u8 taskId)
             gTasks[taskId].tState = APPEALSTATE_2;
         return;
     case APPEALSTATE_2:
-        sub_80DF080(contestant);
+        SetContestLiveUpdateFlags(contestant);
         ContestDebugPrintBitStrings();
         if (eContestantStatus[contestant].numTurnsSkipped != 0
             || eContestantStatus[contestant].noMoreTurns)
@@ -2170,8 +2178,8 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_UPDATE_HEARTS_FROM_REPEAT:
         if (!Contest_RunTextPrinters())
         {
-            UpdateAppealHearts(eContestantStatus[contestant].appeal2, -eContestantStatus[contestant].unk18, contestant);
-            eContestantStatus[contestant].appeal2 -= eContestantStatus[contestant].unk18;
+            UpdateAppealHearts(eContestantStatus[contestant].appeal2, -eContestantStatus[contestant].repeatJam, contestant);
+            eContestantStatus[contestant].appeal2 -= eContestantStatus[contestant].repeatJam;
             gTasks[taskId].tState = APPEALSTATE_WAIT_HEARTS_FROM_REPEAT;
         }
         return;
@@ -2659,8 +2667,8 @@ static void Task_EndAppeals(u8 taskId)
         BravoTrainerPokemonProfile_BeforeInterview1(eContestantStatus[gContestPlayerMonIndex].prevMove);
     else
     {
-        sub_80DF250();
-        sub_80DF4F8();
+        CalculateContestLiveUpdateData();
+        SetConestLiveUpdateTVData();
         ContestDebugPrintBitStrings();
     }
     gContestRngValue = gRngValue;
@@ -3990,7 +3998,7 @@ static void Task_StopFlashJudgeAttentionEye(u8 taskId)
     {
         gTasks[eContest.judgeAttentionTaskId].data[contestant * 4 + 0] = 0xFF;
         gTasks[eContest.judgeAttentionTaskId].data[contestant * 4 + 1] = 0;
-        BlendPalette((eContest.prevTurnOrder[contestant] + MOVE_WINDOWS_START) * 16 + 6, 2, 0, RGB(31, 31, 18));
+        BlendPalette((eContest.prevTurnOrder[contestant] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
         DestroyTask(taskId);
     }
 }
@@ -4014,58 +4022,62 @@ static void Task_FlashJudgeAttentionEye(u8 taskId)
              || gTasks[taskId].data[offset + 0] == 0)
                 gTasks[taskId].data[offset + 1] ^= 1;
 
-            BlendPalette(
-              (eContest.prevTurnOrder[i] + MOVE_WINDOWS_START) * 16 + 6,
-              2,
-              gTasks[taskId].data[offset + 0],
-              RGB(31, 31, 18));
+            BlendPalette((eContest.prevTurnOrder[i] + 5) * 16 + 6, 2, gTasks[taskId].data[offset + 0], RGB(31, 31, 18));
         }
     }
 }
 
-static void sub_80DC7EC(void)
+// Note: While the below task is run for the entire Appeals portion of the contest,
+//       because data[i * 4] is always 0xFF it never does anything
+//       If turned on by setting that data between 0 and 16, it blends
+//       an odd selection of palette colors (e.g. the text box, the appeal hearts
+//       for only one contestant, the heart outlines in the move selection box, etc)
+//       Given the similarities, it's possible this was an incorrect attempt
+//       at something similar to what CreateJudgeAttentionEyeTask does
+static void CreateUnusedBlendTask(void)
 {
     s32 i;
 
-    eContest.unk19212 = CreateTask(sub_80DC8D0, 30);
+    eContest.blendTaskId = CreateTask(Task_UnusedBlend, 30);
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        sub_80DC81C(i);
+        InitUnusedBlendTaskData(i);
 }
 
-static void sub_80DC81C(u8 contestant)
+static void InitUnusedBlendTaskData(u8 contestant)
 {
-    gTasks[eContest.unk19212].data[contestant * 4 + 0] = 0xFF;
-    gTasks[eContest.unk19212].data[contestant * 4 + 1] = 0;
+    gTasks[eContest.blendTaskId].data[contestant * 4] = 0xFF;
+    gTasks[eContest.blendTaskId].data[contestant * 4 + 1] = 0;
 }
 
-static void sub_80DC864(void)
+static void UpdateBlendTaskContestantsData(void)
 {
     s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        sub_80DC87C(i);
+        UpdateBlendTaskContestantData(i);
 }
 
-static void sub_80DC87C(u8 contestant)
+static void UpdateBlendTaskContestantData(u8 contestant)
 {
-    u32 windowId1;
-    u32 windowId2;
+    u32 palOffset1;
+    u32 palOffset2;
 
-    sub_80DC81C(contestant);
+    InitUnusedBlendTaskData(contestant);
 
-    windowId1 = contestant + MOVE_WINDOWS_START;
+    palOffset1 = contestant + 5;
     DmaCopy16Defvars(3,
-                     gPlttBufferUnfaded + windowId1 * 16 + 10,
-                     gPlttBufferFaded   + windowId1 * 16 + 10,
+                     gPlttBufferUnfaded + palOffset1 * 16 + 10,
+                     gPlttBufferFaded   + palOffset1 * 16 + 10,
                      2);
-    windowId2 = (contestant + MOVE_WINDOWS_START) * 16 + 12 + contestant;
+    palOffset2 = (contestant + 5) * 16 + 12 + contestant;
     DmaCopy16Defvars(3,
-                     gPlttBufferUnfaded + windowId2,
-                     gPlttBufferFaded + windowId2,
+                     gPlttBufferUnfaded + palOffset2,
+                     gPlttBufferFaded + palOffset2,
                      2);
 }
 
-static void sub_80DC8D0(u8 taskId)
+// See comments on CreateUnusedBlendTask
+static void Task_UnusedBlend(u8 taskId)
 {
     u8 i;
 
@@ -4073,23 +4085,24 @@ static void sub_80DC8D0(u8 taskId)
     {
         u8 idx = i * 4;
 
-        if (gTasks[taskId].data[idx + 0] != 0xFF)
+        // Below is never true
+        if (gTasks[taskId].data[idx] != 0xFF)
         {
             if (++gTasks[taskId].data[idx + 2] > 2)
             {
                 gTasks[taskId].data[idx + 2] = 0;
 
                 if (gTasks[taskId].data[idx + 1] == 0)
-                    gTasks[taskId].data[idx + 0]++;
+                    gTasks[taskId].data[idx]++;
                 else
-                    gTasks[taskId].data[idx + 0]--;
+                    gTasks[taskId].data[idx]--;
 
-                if (gTasks[taskId].data[idx + 0] == 16
-                 || gTasks[taskId].data[idx + 0] == 0)
+                if (gTasks[taskId].data[idx] == 16
+                 || gTasks[taskId].data[idx] == 0)
                     gTasks[taskId].data[idx + 1] ^= 1;
 
-                BlendPalette((i + MOVE_WINDOWS_START) * 16 + 10,     1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
-                BlendPalette((i + MOVE_WINDOWS_START) * 16 + 12 + i, 1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
+                BlendPalette((i + 5) * 16 + 10,     1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
+                BlendPalette((i + 5) * 16 + 12 + i, 1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
             }
         }
     }
@@ -4241,8 +4254,8 @@ static void ContestDebugDoPrint(void)
     {
     case CONTEST_DEBUG_MODE_OFF:
         break;
-    case CONTEST_DEBUG_MODE_PRINT_UNK_C:
-    case CONTEST_DEBUG_MODE_PRINT_UNK_D:
+    case CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS:
+    case CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS:
         ContestDebugPrintBitStrings();
         break;
     // The only other possible value is 1, which is only set by ContestDebugTogglePointTotal.
@@ -4401,8 +4414,8 @@ static void DrawContestantWindows(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        s32 windowId = i + MOVE_WINDOWS_START;
-        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[windowId], (gContestantTurnOrder[i] + MOVE_WINDOWS_START) * 16, sizeof(eUnknownHeap1A004.cachedWindowPalettes[0]));
+        s32 windowId = i + 5;
+        LoadPalette(eUnknownHeap1A004.cachedWindowPalettes[windowId], (gContestantTurnOrder[i] + 5) * 16, sizeof(eUnknownHeap1A004.cachedWindowPalettes[0]));
     }
     DrawContestantWindowText();
 }
@@ -4486,7 +4499,7 @@ static void CalculateAppealMoveImpact(u8 contestant)
         }
     }
     if (eContestantStatus[contestant].repeatedMove)
-        eContestantStatus[contestant].unk18 = (eContestantStatus[contestant].moveRepeatCount + 1) * 10;
+        eContestantStatus[contestant].repeatJam = (eContestantStatus[contestant].moveRepeatCount + 1) * 10;
 
     if (eContestantStatus[contestant].nervous)
     {
@@ -5145,7 +5158,7 @@ static void Task_ResetForNextRound(u8 taskId)
         for (i = 0; i < CONTESTANT_COUNT; i++)
             eContest.prevTurnOrder[i] = gContestantTurnOrder[i];
         FillContestantWindowBgs();
-        sub_80DC864();
+        UpdateBlendTaskContestantsData();
         DrawConditionStars();
         DrawContestantWindows();
         ShowHideNextTurnGfx(TRUE);
@@ -5393,12 +5406,12 @@ static void SetMoveTargetPosition(u16 move)
     }
 }
 
-static void Contest_PrintTextToBg0WindowStd(u32 a, const u8 *b)
+static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
 {
     struct TextPrinterTemplate printerTemplate;
 
     printerTemplate.currentChar = b;
-    printerTemplate.windowId = a;
+    printerTemplate.windowId = windowId;
     printerTemplate.fontId = 1;
     printerTemplate.x = 0;
     printerTemplate.y = 1;
@@ -5412,7 +5425,7 @@ static void Contest_PrintTextToBg0WindowStd(u32 a, const u8 *b)
     printerTemplate.shadowColor = 8;
 
     AddTextPrinter(&printerTemplate, 0, 0);
-    PutWindowTilemap(a);
+    PutWindowTilemap(windowId);
     Contest_SetBgCopyFlags(0);
 }
 
@@ -5610,8 +5623,7 @@ void ClearContestWinnerPicsInContestHall(void)
         gSaveBlock1Ptr->contestWinners[i] = gUnknown_08587FA4[i];
 }
 
-// The functions below are probably related to Contests in TV.
-static void sub_80DF080(u8 contestant)
+static void SetContestLiveUpdateFlags(u8 contestant)
 {
     s32 i;
 
@@ -5619,278 +5631,292 @@ static void sub_80DF080(u8 contestant)
         && eContestExcitement.moveExcitement > 0
         && !eContestantStatus[contestant].repeatedMove)
     {
-        gContestResources->tv[contestant].unkC |= 1;
-        gContestResources->tv[contestant].unkE_2 = 1;
+        gContestResources->tv[contestant].winnerFlags |= CONTESTLIVE_FLAG_EXCITING_APPEAL;
+        gContestResources->tv[contestant].madeExcitingAppeal = TRUE;
     }
 
     if (eContestantStatus[contestant].nervous)
-        gContestResources->tv[contestant].unkC |= 2;
+        gContestResources->tv[contestant].winnerFlags |= CONTESTLIVE_FLAG_GOT_NERVOUS;
 
     if (!eContestExcitement.frozen
         && eContestExcitement.moveExcitement != 0
         && eContestExcitement.excitementAppealBonus == 60)
     {
-        gContestResources->tv[contestant].unkC |= 4;
+        gContestResources->tv[contestant].winnerFlags |= CONTESTLIVE_FLAG_MAXED_EXCITEMENT;
     }
 
     if (eContestantStatus[contestant].usedComboMove
         && eContestantStatus[contestant].completedCombo)
     {
-        gContestResources->tv[contestant].unkC |= 8;
+        gContestResources->tv[contestant].winnerFlags |= CONTESTLIVE_FLAG_USED_COMBO;
     }
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (i != contestant && eContestantStatus[i].jam != 0)
         {
-            gContestResources->tv[contestant].unkC |= 0x10;
-            gContestResources->tv[i].unkC |= 0x40;
+            gContestResources->tv[contestant].winnerFlags |= CONTESTLIVE_FLAG_STARTLED_OTHER;
+            gContestResources->tv[i].winnerFlags |= CONTESTLIVE_FLAG_GOT_STARTLED;
         }
     }
 
     if (eContestantStatus[contestant].numTurnsSkipped != 0
         || eContestantStatus[contestant].noMoreTurns)
     {
-        gContestResources->tv[contestant].unkC |= 0x20;
+        gContestResources->tv[contestant].winnerFlags |= CONTESTLIVE_FLAG_SKIPPED_TURN;
     }
     else if (!eContestantStatus[contestant].nervous)
     {
-        gContestResources->tv[contestant].unkC |= 0x80;
-        gContestResources->tv[contestant].unkE_1 = 1;
-        gContestResources->tv[contestant].unk0[eContest.appealNumber] = eContestantStatus[contestant].currMove;
+        gContestResources->tv[contestant].winnerFlags |= CONTESTLIVE_FLAG_MADE_APPEAL;
+        gContestResources->tv[contestant].madeAppeal = TRUE;
+        gContestResources->tv[contestant].appeals[eContest.appealNumber] = eContestantStatus[contestant].currMove;
     }
 
     if (eContestantStatus[contestant].repeatedMove)
-        gContestResources->tv[contestant].unkD |= 2;
+        gContestResources->tv[contestant].loserFlags |= CONTESTLIVE_FLAG_REPEATED_MOVE;
 
     if (eContest.applauseLevel == 4
         && !eContestExcitement.frozen
         && eContestExcitement.moveExcitement < 0)
     {
-        gContestResources->tv[contestant].unkD |= 0x20;
+        gContestResources->tv[contestant].loserFlags |= CONTESTLIVE_FLAG_MISSED_EXCITEMENT;
     }
 }
 
-static void sub_80DF250(void)
+static void CalculateContestLiveUpdateData(void)
 {
-    u8 r1;
+    u8 loser;
     s32 i, j;
-    bool32 r12, r8;
-    u16 sp0[6];
-    u8 spC[6];
-    u16 sp14[5];
-    u8 var_38;
-    u8 r3;
-    u8 count;
+    bool32 notLastInRound1, notLastInRound2;
+    u16 appealMoves[CONTEST_NUM_APPEALS + 1];
+    u8 numMoveUses[CONTEST_NUM_APPEALS + 1];
+    u16 moveCandidates[CONTEST_NUM_APPEALS];
+    u8 winner;
+    u8 mostUses;
+    u8 numMoveCandidates;
 
-    r1 = 0;
-    var_38 = 0;
+    loser = 0;
+    winner = 0;
 
+    // Get loser/winner ids
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (gContestFinalStandings[i] == 0)
-            var_38 = i;
-        else if (gContestFinalStandings[i] == 3)
-            r1 = i;
+            winner = i;
+        else if (gContestFinalStandings[i] == CONTESTANT_COUNT - 1)
+            loser = i;
     }
 
-    gContestResources->tv[r1].unkD |= 1;
+    // Set flags for commenting on loser
+    gContestResources->tv[loser].loserFlags |= CONTESTLIVE_FLAG_LOST;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (i != var_38 && gContestMonTotalPoints[var_38] - gContestMonTotalPoints[i] <= 50)
-            gContestResources->tv[i].unkD |= 4;
+        if (i != winner && gContestMonTotalPoints[winner] - gContestMonTotalPoints[i] <= 50)
+            gContestResources->tv[i].loserFlags |= CONTESTLIVE_FLAG_LOST_SMALL_MARGIN;
 
-        if (!gContestResources->tv[i].unkE_2)
-            gContestResources->tv[i].unkD |= 8;
+        if (!gContestResources->tv[i].madeExcitingAppeal)
+            gContestResources->tv[i].loserFlags |= CONTESTLIVE_FLAG_NO_EXCITEMENT;
 
         for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             if (gContestMonRound1Points[i] < gContestMonRound1Points[j])
                 break;
         }
-        if (j == 4 && gContestFinalStandings[i] != 0)
-            gContestResources->tv[i].unkD |= 0x10;
+        if (j == CONTESTANT_COUNT && gContestFinalStandings[i] != 0)
+            gContestResources->tv[i].loserFlags |= CONTESTLIVE_FLAG_BLEW_LEAD;
 
-        r12 = FALSE;
-        r8 = FALSE;
+        notLastInRound1 = FALSE;
+        notLastInRound2 = FALSE;
         for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             if (gContestMonRound1Points[i] > gContestMonRound1Points[j])
-                r12 = TRUE;
+                notLastInRound1 = TRUE;
             if (gContestMonRound2Points[i] > gContestMonRound2Points[j])
-                r8 = TRUE;
+                notLastInRound2 = TRUE;
         }
-        if (!r12 && !r8)
-            gContestResources->tv[i].unkD |= 0x40;
+        if (!notLastInRound1 && !notLastInRound2)
+            gContestResources->tv[i].loserFlags |= CONTESTLIVE_FLAG_LAST_BOTH_ROUNDS;
 
-        if (!gContestResources->tv[i].unkE_1)
-            gContestResources->tv[i].unkD |= 0x80;
+        if (!gContestResources->tv[i].madeAppeal)
+            gContestResources->tv[i].loserFlags |= CONTESTLIVE_FLAG_NO_APPEALS;
     }
 
-    for (i = 0; i < 5; i++)
+    // Get what moves the winner used and how many times they used them
+    for (i = 0; i < CONTEST_NUM_APPEALS; i++)
     {
-        sp0[i] = 0;
-        spC[i] = 0;
+        appealMoves[i] = MOVE_NONE;
+        numMoveUses[i] = 0;
     }
-    sp0[5] = 0xFFFF;
-    spC[5] = 0;
+    appealMoves[CONTEST_NUM_APPEALS] = 0xFFFF;
+    numMoveUses[CONTEST_NUM_APPEALS] = 0;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < CONTEST_NUM_APPEALS; i++)
     {
-        if (gContestResources->tv[var_38].unk0[i] != 0)
+        if (gContestResources->tv[winner].appeals[i] != MOVE_NONE)
         {
-            for (j = 0; j < 5; j++)
+            for (j = 0; j < CONTEST_NUM_APPEALS; j++)
             {
-                if (gContestResources->tv[var_38].unk0[i] != sp0[j])
+                if (gContestResources->tv[winner].appeals[i] != appealMoves[j])
                 {
-                    if (sp0[j] == 0)
+                    if (appealMoves[j] == MOVE_NONE)
                     {
-                        sp0[j] = gContestResources->tv[var_38].unk0[i];
-                        spC[j]++;
+                        appealMoves[j] = gContestResources->tv[winner].appeals[i];
+                        numMoveUses[j]++;
                     }
                 }
                 else
                 {
-                    spC[j]++;
+                    numMoveUses[j]++;
                 }
             }
         }
     }
 
-    sp14[0] = sp0[0];
-    r3 = spC[0];
-    count = 0;
-    for (i = 1; sp0[i] != 0xFFFF; i++)
+    // Choose an appeal move to comment on for the winner (most commonly used)
+    moveCandidates[0] = appealMoves[0];
+    mostUses = numMoveUses[0];
+    numMoveCandidates = 0;
+    for (i = 1; appealMoves[i] != 0xFFFF; i++)
     {
-        if (r3 < spC[i])
+        if (mostUses < numMoveUses[i])
         {
-            sp14[0] = sp0[i];
-            r3 = spC[i];
-            count = 1;
+            moveCandidates[0] = appealMoves[i];
+            mostUses = numMoveUses[i];
+            numMoveCandidates = 1;
         }
-        else if (r3 == spC[i])
+        else if (mostUses == numMoveUses[i])
         {
-            sp14[count] = sp0[i];
-            count++;
+            moveCandidates[numMoveCandidates] = appealMoves[i];
+            numMoveCandidates++;
         }
     }
 
-    gContestResources->tv[var_38].unkA = sp14[Random() % count];
+    gContestResources->tv[winner].move = moveCandidates[Random() % numMoveCandidates];
 }
 
-static void sub_80DF4F8(void)
+static void SetConestLiveUpdateTVData(void)
 {
     s32 i;
-    u32 bits;
-    u8 r7;
-    u8 r9, r10;
+    u32 flags;
+    u8 winner;
+    u8 round1Placing, round2Placing;
     u8 count;
-    u8 r5;
-    u8 r2;
-    u16 var;
-    u8 r4;
-    u8 r6;
-    u8 sp0[4];
+    u8 randAction;
+    u8 numLoserCandidates;
+    u8 flagId;
+    u16 winnerFlag;
+    u8 loserFlag;
+    u8 loser;
+    u8 loserCandidates[CONTESTANT_COUNT - 1];
 
+    // Players mon didn't win, don't generate show
     if (gContestFinalStandings[gContestPlayerMonIndex] != 0)
         return;
 
-    r7 = 0;
+    // Get winner id (unnecessary, we now know it's gContestPlayerMonIndex)
+    winner = 0;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (gContestFinalStandings[i] == 0)
-            r7 = i;
+            winner = i;
     }
 
-    r9 = 0;
-    r10 = 0;
+    // Get winner's placement in Round 1 and 2
+    round1Placing = 0;
+    round2Placing = 0;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        if (gContestMonRound1Points[r7] < gContestMonRound1Points[i])
-            r9++;
-        if (gContestMonRound2Points[r7] < gContestMonRound2Points[i])
-            r10++;
+        if (gContestMonRound1Points[winner] < gContestMonRound1Points[i])
+            round1Placing++;
+        if (gContestMonRound2Points[winner] < gContestMonRound2Points[i])
+            round2Placing++;
     }
 
-    bits = gContestResources->tv[r7].unkC;
+    // Count how many TV comment-worthy actions the winner took
+    flags = gContestResources->tv[winner].winnerFlags;
     count = 0;
-    for (i = 0; i < 8; bits >>= 1, i++)
+    for (i = 0; i < 8; flags >>= 1, i++)
     {
-        if (bits & 1)
+        if (flags & 1)
             count++;
     }
 
-    r5 = Random() % count;
-    bits = gContestResources->tv[r7].unkC;
+    // Randomly choose one of these actions to comment on
+    randAction = Random() % count;
+    flags = gContestResources->tv[winner].winnerFlags;
     count = 0;
-    r2 = 0;
-    for (i = 0; i < 8; bits >>= 1, r2++, i++)
+    flagId = 0;
+    for (i = 0; i < 8; flags >>= 1, flagId++, i++)
     {
-        if (!(bits & 1))
+        if (!(flags & 1))
             continue;
-        if (r5 == count)
+        if (randAction == count)
             break;
         count++;
     }
+    winnerFlag = 1 << flagId;
 
-    var = 1 << r2;
-    if (r7 == 0)
+    // Pick a losing player with the highest severity of bad actions to comment on
+    if (winner == 0)
     {
-        sp0[0] = 1;
-        r4 = gContestResources->tv[1].unkD;
+        loserCandidates[0] = 1;
+        loserFlag = gContestResources->tv[1].loserFlags;
         i = 2;
     }
     else
     {
-        sp0[0] = 0;
-        r4 = gContestResources->tv[0].unkD;
+        loserCandidates[0] = 0;
+        loserFlag = gContestResources->tv[0].loserFlags;
         i = 1;
     }
 
-    r5 = 1;
+    numLoserCandidates = 1;
     for (; i < CONTESTANT_COUNT; i++)
     {
-        if (i != r7)
+        if (i != winner)
         {
-            if (r4 < gContestResources->tv[i].unkD)
+            if (loserFlag < gContestResources->tv[i].loserFlags)
             {
-                sp0[0] = i;
-                r4 = gContestResources->tv[i].unkD;
-                r5 = 1;
+                // Losing player currently has the worst (highest) set of flags, only candidate
+                loserCandidates[0] = i;
+                loserFlag = gContestResources->tv[i].loserFlags;
+                numLoserCandidates = 1;
             }
-            else if (r4 == gContestResources->tv[i].unkD)
+            else if (loserFlag == gContestResources->tv[i].loserFlags)
             {
-                sp0[r5] = i;
-                r5++;
+                // Tie, increment number of loser candidates
+                loserCandidates[numLoserCandidates] = i;
+                numLoserCandidates++;
             }
         }
     }
+    loser = loserCandidates[Random() % numLoserCandidates];
 
-    r6 = sp0[Random() % r5];
-    r2 = 0x80;
-    for (i = 0; i < 8; r2 >>= 1, i++)
+    // Choose the "worst" action to comment on (flag with highest value)
+    flagId = CONTESTLIVE_FLAG_NO_APPEALS;
+    for (i = 0; i < 8; flagId >>= 1, i++)
     {
-        r4 = gContestResources->tv[r6].unkD & r2;
-        if (r4)
+        loserFlag = gContestResources->tv[loser].loserFlags & flagId;
+        if (loserFlag)
             break;
     }
 
-    ContestLiveUpdates_BeforeInterview_1(r9);
-    ContestLiveUpdates_BeforeInterview_2(r10);
-    ContestLiveUpdates_BeforeInterview_3(var);
-    ContestLiveUpdates_BeforeInterview_4(gContestResources->tv[r7].unkA);
-    ContestLiveUpdates_BeforeInterview_5(r4, r6);
+    ContestLiveUpdates_Init(round1Placing);
+    ContestLiveUpdates_SetRound2Placing(round2Placing);
+    ContestLiveUpdates_SetWinnerAppealFlag(winnerFlag);
+    ContestLiveUpdates_SetWinnerMoveUsed(gContestResources->tv[winner].move);
+    ContestLiveUpdates_SetLoserData(loserFlag, loser);
 }
 
 // Unused
-void ContestDebugToggleBitfields(bool8 showUnkD)
+void ContestDebugToggleBitfields(bool8 loserFlags)
 {
     if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
     {
-        if (!showUnkD)
-            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_UNK_C;
+        if (!loserFlags)
+            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS;
         else
-            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_UNK_D;
+            eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS;
     }
     else
     {
@@ -5920,19 +5946,19 @@ static void ContestDebugPrintBitStrings(void)
     if (!gEnableContestDebugging)
         return;
     
-    if (eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_UNK_C && eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_UNK_D)
+    if (eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS && eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS)
         return;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
 
-    if (eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_UNK_C)
+    if (eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS)
     {
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             txtPtr = StringCopy(text1, gText_CDot);
             Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, 7);
-            bits = gContestResources->tv[i].unkC;
+            bits = gContestResources->tv[i].winnerFlags;
             for (j = 7; j > -1; j--) // Weird loop.
             {
                 txtPtr = ConvertIntToDecimalStringN(txtPtr, bits & 1, STR_CONV_MODE_LEFT_ALIGN, 1);
@@ -5947,12 +5973,12 @@ static void ContestDebugPrintBitStrings(void)
             Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, 7);
         }
     }
-    else
+    else // CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS
     {
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             StringCopy(text1, gText_BDot);
-            bits = gContestResources->tv[i].unkD;
+            bits = gContestResources->tv[i].loserFlags;
             txtPtr = &text1[2];
             for (j = 7; j > -1; j--) // Weird loop.
             {

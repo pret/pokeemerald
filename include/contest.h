@@ -6,17 +6,6 @@
 
 enum
 {
-    CONTEST_DEBUG_MODE_OFF,
-    // Prints the totalPoints value for each contestant.
-    CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL,
-    // Prints the ContestTV::unk_C value as a bitstring for each contestant.
-    CONTEST_DEBUG_MODE_PRINT_UNK_C,
-    // Prints the ContestTV::unk_D value as a bitstring for each contestant.
-    CONTEST_DEBUG_MODE_PRINT_UNK_D
-};
-
-enum
-{
     CONTEST_STRING_MORE_CONSCIOUS,
     CONTEST_STRING_NO_APPEAL,
     CONTEST_STRING_SETTLE_DOWN,
@@ -153,7 +142,7 @@ struct Contest
     u8 mainTaskId;
     u8 unk1920D[4];
     u8 judgeAttentionTaskId;
-    u8 unk19212;
+    u8 blendTaskId;
     u8 filler19213;
     u8 turnNumber;
     u8 currentContestant;
@@ -211,7 +200,7 @@ struct ContestantStatus
     bool8 usedComboMove:1;
     bool8 completedCombo;
     u8 comboAppealBonus;
-    u8 unk18;
+    u8 repeatJam;
     u8 nextTurnOrder;  // turn position
     u8 attentionLevel;  // How much the Pokemon "stood out"
     u8 contestantAnimTarget;
@@ -271,12 +260,12 @@ struct ContestFinalStandings
 
 struct ContestTV
 {
-    u16 unk0[5];
-    s16 unkA;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE_1:1;
-    u8 unkE_2:1;
+    u16 appeals[CONTEST_NUM_APPEALS];
+    s16 move;
+    u8 winnerFlags;
+    u8 loserFlags;
+    u8 madeAppeal:1;
+    u8 madeExcitingAppeal:1;
 };
 
 struct ContestUnused

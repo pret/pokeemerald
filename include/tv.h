@@ -59,11 +59,11 @@ void SaveRecordedItemPurchasesForTVShow(void);
 bool8 ShouldAirFrontierTVShow(void);
 void sub_80EE8C8(u16 winStreak, u8 facilityAndMode);
 void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace);
-void ContestLiveUpdates_BeforeInterview_1(u8 a0);
-void ContestLiveUpdates_BeforeInterview_2(u8 a0);
-void ContestLiveUpdates_BeforeInterview_3(u8 a0);
-void ContestLiveUpdates_BeforeInterview_4(u16 a0);
-void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1);
+void ContestLiveUpdates_Init(u8 round1Placing);
+void ContestLiveUpdates_SetRound2Placing(u8 round2Placing);
+void ContestLiveUpdates_SetWinnerAppealFlag(u8 flag);
+void ContestLiveUpdates_SetWinnerMoveUsed(u16 move);
+void ContestLiveUpdates_SetLoserData(u8 flag, u8 loser);
 void ResetGabbyAndTy(void);
 
 #endif //GUARD_TV_H
