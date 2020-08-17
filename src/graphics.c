@@ -1313,10 +1313,9 @@ const u16 gContestResults_Tilemap[] = INCBIN_U16("graphics/contest/results_scree
 
 // pokenav
 
-const u16 gPokenavCondition_Pal[] = INCBIN_U16("graphics/pokenav/condition.gbapal");
-
-const u32 gPokenavCondition_Gfx[] = INCBIN_U32("graphics/pokenav/condition.4bpp.lz");
-const u32 gPokenavCondition_Tilemap[] = INCBIN_U32("graphics/pokenav/condition.bin.lz");
+const u16 gPokenavCondition_Pal[] = INCBIN_U16("graphics/pokenav/condition/graph.gbapal");
+const u32 gPokenavCondition_Gfx[] = INCBIN_U32("graphics/pokenav/condition/graph.4bpp.lz");
+const u32 gPokenavCondition_Tilemap[] = INCBIN_U32("graphics/pokenav/condition/graph.bin.lz");
 
 const u16 gPokenavOptions_Tilemap[] = INCBIN_U16("graphics/pokenav/options/options.bin");
 const u32 gPokenavOptions_Gfx[] = INCBIN_U32("graphics/pokenav/options/options.4bpp.lz");
@@ -1347,11 +1346,11 @@ const u32 gPokenavMessageBox_Tilemap[] = INCBIN_U32("graphics/pokenav/message.bi
 const u16 gRegionMapCityZoomTiles_Pal[] = INCBIN_U16("graphics/pokenav/zoom_tiles.gbapal");
 const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_text.4bpp.lz");
 
-const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/cancel.gbapal");
-const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/cancel.4bpp");
+const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
+const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/cancel.4bpp");
 
-const u16 gPokenavConditionMarker_Pal[] = INCBIN_U16("graphics/pokenav/marker.gbapal");
-const u8 gPokenavConditionMarker_Gfx[] = INCBIN_U8("graphics/pokenav/marker.4bpp");
+const u16 gPokenavConditionMarker_Pal[] = INCBIN_U16("graphics/pokenav/condition/marker.gbapal");
+const u8 gPokenavConditionMarker_Gfx[] = INCBIN_U8("graphics/pokenav/condition/marker.4bpp");
 
 const u16 gBerryBlenderMiscPalette[] = INCBIN_U16("graphics/berry_blender/misc.gbapal");
 
