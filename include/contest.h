@@ -99,7 +99,7 @@ struct ContestPokemon
     u8 sheen;
     u8 highestRank;
     bool8 gameCleared;
-    u8 unk2C[10];
+    u8 unused[10];
     u32 personality;
     u32 otId;
 };
