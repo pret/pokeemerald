@@ -6814,7 +6814,9 @@ static void sub_806F160(struct Unknown_806F160_Struct* structPtr)
         structPtr->templates[i] = gUnknown_08329D98[i];
         for (j = 0; j < structPtr->field_1; j++)
         {
-            asm("");
+            #ifndef NONMATCHING
+                asm("");
+            #endif
             structPtr->frameImages[i * structPtr->field_1 + j].data = &structPtr->byteArrays[i][j * 0x800];
         }
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_1];

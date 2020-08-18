@@ -1239,7 +1239,9 @@ static void sub_80C6104(u8 cursorArea, u8 previousCursorArea)
 
     if (!var)
     {
-        asm("":::"r4");
+        #ifndef NONMATCHING
+            asm("":::"r4");
+        #endif
         if (previousCursorArea == CURSOR_AREA_NOTHING || previousCursorArea > CURSOR_AREA_CANCEL)
             return;
     }
