@@ -1285,7 +1285,7 @@ const u8 *const gRoundsStringTable[DOME_ROUNDS_COUNT] =
 };
 
 const u8 gText_TheGreatNewHope[] = _("The great new hope!\p");
-const u8 gText_WillChampinshipDreamComeTrue[] = _("Will the championship dream come true?!\p");
+const u8 gText_WillChampionshipDreamComeTrue[] = _("Will the championship dream come true?!\p");
 const u8 gText_AFormerChampion[] = _("A former CHAMPION!\p");
 const u8 gText_ThePreviousChampion[] = _("The previous CHAMPION!\p");
 const u8 gText_TheUnbeatenChampion[] = _("The unbeaten CHAMPION!\p");
