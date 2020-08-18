@@ -3426,7 +3426,7 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = 2,
         .fieldUseFunc = ItemUseOutOfBattle_Rod,
-        .secondaryId = 0,
+        .secondaryId = OLD_ROD,
     },
 
     [ITEM_GOOD_ROD] =
@@ -3440,7 +3440,7 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = 2,
         .fieldUseFunc = ItemUseOutOfBattle_Rod,
-        .secondaryId = 1,
+        .secondaryId = GOOD_ROD,
     },
 
     [ITEM_SUPER_ROD] =
@@ -3454,7 +3454,7 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = 2,
         .fieldUseFunc = ItemUseOutOfBattle_Rod,
-        .secondaryId = 2,
+        .secondaryId = SUPER_ROD,
     },
 
     [ITEM_SS_TICKET] =

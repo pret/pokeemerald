@@ -116,8 +116,8 @@ struct BerryBlenderData
     u16 field_116;
     u16 field_118;
     u16 field_11A;
-    u16 bg_X;
-    u16 bg_Y;
+    s16 bg_X;
+    s16 bg_Y;
     u8 field_120[3];
     u8 field_123;
     u16 scores[BLENDER_MAX_PLAYERS][BLENDER_SCORES_NO];
@@ -3166,13 +3166,13 @@ static void sub_80832E8(s16* a0)
 
 static void sub_808330C(void)
 {
-    sub_80832E8(&sBerryBlenderData->bg_X);
-    sub_80832E8(&sBerryBlenderData->bg_Y);
+    sub_80832E8((s16 *)&sBerryBlenderData->bg_X);
+    sub_80832E8((s16 *)&sBerryBlenderData->bg_Y);
 }
 
 static void sub_8083334(s16* a0, u16 a1)
 {
-    s32 var;
+    u8 var;
 
     if (a1 < 10)
         var = 16;

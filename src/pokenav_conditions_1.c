@@ -25,7 +25,7 @@ struct PokenavSub11
     u8 fill2[0x6320 - 0x6308];
     u8 unk6320[3][24];
     u8 unk6368[3][64];
-    struct UnknownStruct_81D1ED4 unk6428;
+    struct ConditionGraph unk6428;
     u8 unk6780[3];
     u8 unk6783[3];
     s8 unk6786;
@@ -337,10 +337,10 @@ u8 *sub_81CD624(u8 *str, u16 id, bool8 arg3)
     boxId = unkPtr->unk4[id].boxId;
     monId = unkPtr->unk4[id].monId;
     *(str++) = EXT_CTRL_CODE_BEGIN;
-    *(str++) = 4;
-    *(str++) = 8;
-    *(str++) = 0;
-    *(str++) = 9;
+    *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *(str++) = TEXT_COLOR_BLUE;
+    *(str++) = TEXT_COLOR_TRANSPARENT;
+    *(str++) = TEXT_COLOR_LIGHT_BLUE;
 
     if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
         return StringCopyPadded(str, gText_EggNickname, CHAR_SPACE, 12);
@@ -368,40 +368,40 @@ u8 *sub_81CD624(u8 *str, u16 id, bool8 arg3)
         (str_++);
 
     *(str_++) = EXT_CTRL_CODE_BEGIN;
-    *(str_++) = 0x12;
-    *(str_++) = 0x3C;
+    *(str_++) = EXT_CTRL_CODE_SKIP;
+    *(str_++) = 60;
     switch (gender)
     {
     default:
-        *(str_++) = 0x77;
+        *(str_++) = CHAR_UNK_SPACER;
         break;
     case MON_MALE:
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_COLOR;
-        *(str_++) = 4;
+        *(str_++) = TEXT_COLOR_RED;
         *(str_++) = EXT_CTRL_CODE_BEGIN;
-        *(str_++) = 3;
-        *(str_++) = 5;
+        *(str_++) = EXT_CTRL_CODE_SHADOW;
+        *(str_++) = TEXT_COLOR_LIGHT_RED;
         *(str_++) = CHAR_MALE;
         break;
     case MON_FEMALE:
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_COLOR;
-        *(str_++) = 6;
+        *(str_++) = TEXT_COLOR_GREEN;
         *(str_++) = EXT_CTRL_CODE_BEGIN;
-        *(str_++) = 3;
-        *(str_++) = 7;
+        *(str_++) = EXT_CTRL_CODE_SHADOW;
+        *(str_++) = TEXT_COLOR_LIGHT_GREEN;
         *(str_++) = CHAR_FEMALE;
         break;
     }
 
     *(str_++) = EXT_CTRL_CODE_BEGIN;
-    *(str_++) = 4;
-    *(str_++) = 8;
-    *(str_++) = 0;
-    *(str_++) = 9;
+    *(str_++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *(str_++) = TEXT_COLOR_BLUE;
+    *(str_++) = TEXT_COLOR_TRANSPARENT;
+    *(str_++) = TEXT_COLOR_LIGHT_BLUE;
     *(str_++) = CHAR_SLASH;
-    *(str_++) = CHAR_SPECIAL_F9;
+    *(str_++) = CHAR_EXTRA_SYMBOL;
     *(str_++) = CHAR_LV_2;
     txtPtr = str_;
     str_ = ConvertIntToDecimalStringN(str_, level, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -429,10 +429,10 @@ void sub_81CD824(s16 arg0, u8 arg1)
         sub_81CD624(structPtr->unk6368[arg1], arg0, FALSE);
         boxId = unkPtr->unk4[arg0].boxId;
         structPtr->unk6320[arg1][0] = EXT_CTRL_CODE_BEGIN;
-        structPtr->unk6320[arg1][1] = 4;
-        structPtr->unk6320[arg1][2] = 8;
-        structPtr->unk6320[arg1][3] = 0;
-        structPtr->unk6320[arg1][4] = 9;
+        structPtr->unk6320[arg1][1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        structPtr->unk6320[arg1][2] = TEXT_COLOR_BLUE;
+        structPtr->unk6320[arg1][3] = TEXT_COLOR_TRANSPARENT;
+        structPtr->unk6320[arg1][4] = TEXT_COLOR_LIGHT_BLUE;
         if (boxId == TOTAL_BOXES_COUNT)
             sub_81CD5CC(&structPtr->unk6320[arg1][5], gText_InParty, 8);
         else
@@ -546,7 +546,7 @@ u16 sub_81CDC60(void)
     return unkPtr->unk2;
 }
 
-struct UnknownStruct_81D1ED4 *sub_81CDC70(void)
+struct ConditionGraph *sub_81CDC70(void)
 {
     struct PokenavSub11 *structPtr = GetSubstructPtr(11);
     return &structPtr->unk6428;

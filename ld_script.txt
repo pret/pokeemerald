@@ -237,7 +237,7 @@ SECTIONS {
         src/battle_message.o(.text);
         src/cable_car.o(.text);
         src/math_util.o(.text);
-        src/roulette_util.o(.text);
+        src/palette_util.o(.text);
         src/confetti_util.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
@@ -440,7 +440,7 @@ SECTIONS {
         gflib/window.o(.rodata);
         gflib/text.o(.rodata);
         gflib/sprite.o(.rodata);
-        data/io_reg.o(.rodata);
+        gflib/io_reg.o(.rodata);
         gflib/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);

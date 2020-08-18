@@ -1331,7 +1331,7 @@ void ResetBerryTreeSparkleFlags(void)
     s16 bottom;
     int i;
 
-    GetCameraCoords(&cam_left, &cam_top);
+    GetCameraCoords((u16*)&cam_left, (u16*)&cam_top);
     left = cam_left;
     top = cam_top + 3;
     right = cam_left + 14;

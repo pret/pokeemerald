@@ -6,7 +6,7 @@ Roulette_EventScript_Table1:: @ 82A5AB1
 	getpricereduction POKENEWS_GAME_CORNER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Roulette_EventScript_Play
-	addvar VAR_0x8004, 128
+	addvar VAR_0x8004, ROULETTE_SPECIAL_RATE
 	goto Roulette_EventScript_Play
 	end
 
@@ -18,7 +18,7 @@ Roulette_EventScript_Table2:: @ 82A5ADF
 	getpricereduction POKENEWS_GAME_CORNER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Roulette_EventScript_Play
-	addvar VAR_0x8004, 128
+	addvar VAR_0x8004, ROULETTE_SPECIAL_RATE
 	goto Roulette_EventScript_Play
 	end
 
