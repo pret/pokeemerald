@@ -26,9 +26,7 @@ void MultiBootInit(struct MultiBootParam *mp)
 
 int MultiBootMain(struct MultiBootParam *mp)
 {
-    int i;
-    int j;
-    int k;
+    int i, j, k;
 
     if (MultiBootCheckComplete(mp))
     {
@@ -123,13 +121,10 @@ output_burst:
         {
             mp->check_wait--;
         }
-        else
+        else if (mp->response_bit != mp->client_bit)
         {
-            if (mp->response_bit != mp->client_bit)
-            {
-                MultiBootStartProbe(mp);
-                goto case_1;
-            }
+            MultiBootStartProbe(mp);
+            goto case_1;
         }
 
     output_master_info:
@@ -288,9 +283,7 @@ output_burst:
 
 static int MultiBootSend(struct MultiBootParam *mp, u16 data)
 {
-    int i;
-
-    i = REG_SIOCNT & (SIO_MULTI_BUSY | SIO_MULTI_SD | SIO_MULTI_SI);
+    const int i = REG_SIOCNT & (SIO_MULTI_BUSY | SIO_MULTI_SD | SIO_MULTI_SI);
     if (i != SIO_MULTI_SD)
     {
         MultiBootInit(mp);
@@ -437,21 +430,23 @@ static int MultiBootHandShake(struct MultiBootParam *mp)
 
 static NOINLINE void MultiBootWaitCycles(u32 cycles)
 {
+    asm(".syntax unified");
     asm("mov r2, pc");
-    asm("lsr r2, #24");
-    asm("mov r1, #12");
+    asm("lsrs r2, #24");
+    asm("movs r1, #12");
     asm("cmp r2, #0x02");
     asm("beq MultiBootWaitCyclesLoop");
 
-    asm("mov r1, #13");
+    asm("movs r1, #13");
     asm("cmp r2, #0x08");
     asm("beq MultiBootWaitCyclesLoop");
 
-    asm("mov r1, #4");
+    asm("movs r1, #4");
 
     asm("MultiBootWaitCyclesLoop:");
-    asm("sub r0, r1");
+    asm("subs r0, r1");
     asm("bgt MultiBootWaitCyclesLoop");
+    asm(".syntax divided");
 }
 
 static void MultiBootWaitSendDone(void)

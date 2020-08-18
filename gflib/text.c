@@ -461,7 +461,6 @@ u8 GetLastTextColor(u8 colorType)
         return 0;
     }
 }
-
 #define GLYPH_COPY(fromY_, toY_, fromX_, toX_, unk)                                                                 \
 {                                                                                                                   \
     u32 i, j, *ptr, toY, fromX, toX, r5, bits;                                                                      \
@@ -561,6 +560,7 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
         }
     }
 }
+
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 {
     struct Window *window;
@@ -592,7 +592,7 @@ u16 Font0Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 0;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -1014,10 +1014,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
             case EXT_CTRL_CODE_JPN:
-                textPrinter->japanese = TRUE;
+                textPrinter->japanese = 1;
                 return 2;
             case EXT_CTRL_CODE_ENG:
-                textPrinter->japanese = FALSE;
+                textPrinter->japanese = 0;
                 return 2;
             }
             break;
@@ -1078,10 +1078,13 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentX += width;
             }
         }
-        else if (textPrinter->japanese)
-            textPrinter->printerTemplate.currentX += (gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing);
         else
-            textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
+        {
+            if (textPrinter->japanese)
+                textPrinter->printerTemplate.currentX += (gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing);
+            else
+                textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
+        }
         return 0;
     case 1:
         if (TextPrinterWait(textPrinter))

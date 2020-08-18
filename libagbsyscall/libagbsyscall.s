@@ -145,7 +145,7 @@ HuffUnComp:
 	.endif
 
 	.ifdef L_SoftResetExram
-	arm_func_start SoftResetExram
+	thumb_func_start SoftResetExram
 SoftResetExram:
 	ldr r3, =REG_IME
 	movs r2, #0
@@ -153,14 +153,14 @@ SoftResetExram:
 	ldr r3, =SOFT_RESET_DIRECT_BUF
 	movs r2, #1
 	strb r2, [r3, #0]
-	subs r3, #SOFT_RESET_DIRECT_BUF - 0x3007f00
+	sub r3, #SOFT_RESET_DIRECT_BUF - 0x3007f00
 	mov sp, r3
 	movs r2, #RESET_EX_WRAM_FLAG
-	bics r0, r2
+	bic r0, r2
 	svc #1
 	svc #0
 	.pool
-	arm_func_end SoftResetExram
+	thumb_func_end SoftResetExram
 	.endif
 
 	.ifdef L_MusicPlayerFadeOut
