@@ -478,7 +478,7 @@ static void ContestEffect_WorsenConditionOfPrevMons(void)
             CanUnnerveContestant(i))
         {
             eContestantStatus[i].condition = 0;
-            eContestantStatus[i].conditionMod = 2;
+            eContestantStatus[i].conditionMod = CONDITION_LOSE;
             SetContestantEffectStringID(i, CONTEST_STRING_REGAINED_FORM);
             numHit++;
         }
@@ -724,7 +724,7 @@ static void ContestEffect_ImproveConditionPreventNervousness(void)
     if (eContestantStatus[eContestAppealResults.contestant].condition < 30)
     {
         eContestantStatus[eContestAppealResults.contestant].condition += 10;
-        eContestantStatus[eContestAppealResults.contestant].conditionMod = 1;
+        eContestantStatus[eContestAppealResults.contestant].conditionMod = CONDITION_GAIN;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_CONDITION_ROSE);
     }
     else

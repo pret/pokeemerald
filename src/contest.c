@@ -1935,7 +1935,7 @@ static void Task_DoAppeals(u8 taskId)
             gTasks[taskId].tState = APPEALSTATE_TRY_JUDGE_STAR;
         return;
     case APPEALSTATE_TRY_JUDGE_STAR:
-        if (eContestantStatus[contestant].conditionMod == 1)
+        if (eContestantStatus[contestant].conditionMod == CONDITION_GAIN)
             DoJudgeSpeechBubble(JUDGE_SYMBOL_STAR);
         gTasks[taskId].tState = APPEALSTATE_WAIT_JUDGE_STAR;
         return;
@@ -3270,26 +3270,26 @@ static bool8 UpdateConditionStars(u8 contestantIdx, bool8 resetMod)
     u8 contestantOffset;
     s32 numStars;
 
-    if (eContestantStatus[contestantIdx].conditionMod == 0)
+    if (eContestantStatus[contestantIdx].conditionMod == CONDITION_NO_CHANGE)
         return FALSE;
     contestantOffset = gContestantTurnOrder[contestantIdx] * 5 + 2;
     numStars = eContestantStatus[contestantIdx].condition / 10;
-    if (eContestantStatus[contestantIdx].conditionMod == 1)
+    if (eContestantStatus[contestantIdx].conditionMod == CONDITION_GAIN)
     {
         ContestBG_FillBoxWithTile(0, GetStarTileOffset(), 19, contestantOffset, 1, numStars, 17);
         if (resetMod)
         {
             PlaySE(SE_EXPMAX);
-            eContestantStatus[contestantIdx].conditionMod = 0;
+            eContestantStatus[contestantIdx].conditionMod = CONDITION_NO_CHANGE;
         }
     }
-    else
+    else // CONDITION_LOSE
     {
         ContestBG_FillBoxWithTile(0, 0, 19, contestantOffset + numStars, 1, 3 - numStars, 17);
         if (resetMod)
         {
             PlaySE(SE_FU_ZAKU2);
-            eContestantStatus[contestantIdx].conditionMod = 0;
+            eContestantStatus[contestantIdx].conditionMod = CONDITION_NO_CHANGE;
         }
     }
     return TRUE;
@@ -3510,7 +3510,7 @@ static void ResetContestantStatuses(void)
         eContestantStatus[i].nervous = FALSE;
         eContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
         eContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
-        eContestantStatus[i].conditionMod = 0;
+        eContestantStatus[i].conditionMod = CONDITION_NO_CHANGE;
         eContestantStatus[i].repeatedPrevMove = eContestantStatus[i].repeatedMove;
         eContestantStatus[i].repeatedMove = FALSE;
         eContestantStatus[i].turnOrderModAction = 0;
@@ -4464,7 +4464,7 @@ static void CalculateAppealMoveImpact(u8 contestant)
 
     gContestEffectFuncs[effect]();
 
-    if (eContestantStatus[contestant].conditionMod == 1)
+    if (eContestantStatus[contestant].conditionMod == CONDITION_GAIN)
         eContestantStatus[contestant].appeal += eContestantStatus[contestant].condition - 10;
     else if (eContestantStatus[contestant].appealTripleCondition)
         eContestantStatus[contestant].appeal += eContestantStatus[contestant].condition * 3;

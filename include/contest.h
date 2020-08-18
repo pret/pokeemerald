@@ -77,6 +77,13 @@ enum {
     CONTEST_FILTER_ONLY_POSTGAME
 };
 
+// Constants for changing in-contest Condition (the stars that appear during appeals)
+enum {
+    CONDITION_NO_CHANGE,
+    CONDITION_GAIN,
+    CONDITION_LOSE,
+};
+
 struct ContestPokemon
 {
     u16 species;
