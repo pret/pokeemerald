@@ -155,7 +155,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_PETALBURG_GYM_WALLYS_UNCLE"
+      "flag": "FLAG_HIDE_PETALBURG_GYM_WALLYS_DAD"
     }
   ],
   "warp_events": [
