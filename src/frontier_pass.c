@@ -735,7 +735,7 @@ static bool32 InitFrontierPass(void)
     case 8:
         LoadPalette(gUnknown_08DE07C8[0], 0, 0x1A0);
         LoadPalette(gUnknown_08DE07C8[1 + sPassData->trainerStars], 0x10, 0x20);
-        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         sub_80C629C();
         sub_80C6104(sPassData->cursorArea, sPassData->previousCursorArea);
         if (sPassData->unkE == 1 || sPassData->unkE == 2)
@@ -1378,7 +1378,7 @@ static bool32 InitFrontierMap(void)
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
         LoadPalette(gUnknown_08DE07C8[0], 0, 0x1A0);
-        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         CopyToBgTilemapBuffer(2, gUnknown_08570E00, 0, 0);
         CopyBgTilemapBufferToVram(2);
         break;

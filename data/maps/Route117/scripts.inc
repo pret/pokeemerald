@@ -1,3 +1,5 @@
+.set LOCALID_DAYCARE_MAN, 3
+
 Route117_MapScripts:: @ 81F397D
 	map_script MAP_SCRIPT_ON_TRANSITION, Route117_OnTransition
 	.byte 0
@@ -8,7 +10,7 @@ Route117_OnTransition: @ 81F3983
 
 Route117_EventScript_TryMoveDayCareMan:: @ 81F3989
 	goto_if_unset FLAG_PENDING_DAYCARE_EGG, Route117_EventScript_StopMoveDayCareMan
-	setobjectxyperm 3, 47, 6
+	setobjectxyperm LOCALID_DAYCARE_MAN, 47, 6
 Route117_EventScript_StopMoveDayCareMan:: @ 81F3999
 	return
 

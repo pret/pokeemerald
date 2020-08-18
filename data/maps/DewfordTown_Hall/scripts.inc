@@ -1,3 +1,8 @@
+.set LOCALID_EXPERT_M, 4
+.set LOCALID_TWIN, 5
+.set LOCALID_SCHOOL_KID_M, 7
+.set LOCALID_PSYCHIC_M, 8
+
 DewfordTown_Hall_MapScripts:: @ 81FD4CF
 	.byte 0
 
@@ -53,7 +58,7 @@ DewfordTown_Hall_EventScript_ExpertM:: @ 81FD547
 	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_TVShowAboutTrend, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_EXPERT_M, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -64,7 +69,7 @@ DewfordTown_Hall_EventScript_Twin:: @ 81FD563
 	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_IsTrendMorePopularAcrossSea, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_TWIN, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -189,7 +194,7 @@ DewfordTown_Hall_EventScript_DontMovePlayer1:: @ 81FD739
 	return
 
 DewfordTown_Hall_EventScript_DebateReact1:: @ 81FD73A
-	applymovement 8, DewfordTown_Hall_Movement_PsychicWalkInPlaceLeft
+	applymovement LOCALID_PSYCHIC_M, DewfordTown_Hall_Movement_PsychicWalkInPlaceLeft
 	waitmovement 0
 	compare VAR_0x8008, 0
 	goto_if_eq DewfordTown_Hall_EventScript_PlayerReactWest
@@ -208,7 +213,7 @@ DewfordTown_Hall_EventScript_DontMovePlayer2:: @ 81FD771
 	return
 
 DewfordTown_Hall_EventScript_DebateReact2:: @ 81FD772
-	applymovement 7, DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight
+	applymovement LOCALID_SCHOOL_KID_M, DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight
 	waitmovement 0
 	compare VAR_0x8008, 0
 	goto_if_eq DewfordTown_Hall_EventScript_PlayerReactNorthSouth

@@ -282,7 +282,7 @@ static void HflipTile(unsigned char * tile, int bitDepth)
         for (i = 0; i < 8; i++)
         {
             SWAP_NYBBLES(&tile[4 * i + 0], &tile[4 * i + 3]);
-            SWAP_NYBBLES(&tile[4 * i + 1], &tile[4 * i + 2]);;
+            SWAP_NYBBLES(&tile[4 * i + 1], &tile[4 * i + 2]);
         }
         break;
     case 8:

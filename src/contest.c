@@ -7,7 +7,6 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "constants/flags.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "contest.h"

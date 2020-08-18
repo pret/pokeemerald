@@ -4145,7 +4145,7 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     inches = (inches - (feet * 120)) / 10;
 
     buffer[i++] = EXT_CTRL_CODE_BEGIN;
-    buffer[i++] = 0x13;
+    buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
     if (feet / 10 == 0)
     {
         buffer[i++] = 18;
@@ -4521,7 +4521,11 @@ static void UnusedPrintMonName(u8 windowId, const u8* name, u8 left, u8 top)
         ;
     for (i = 0; i < nameLength; i++)
         str[ARRAY_COUNT(str) - nameLength + i] = name[i];
+#ifdef UBFIX
+    str[ARRAY_COUNT(str) - 1] = EOS;
+#else
     str[ARRAY_COUNT(str)] = EOS;
+#endif
     PrintInfoSubMenuText(windowId, str, left, top);
 }
 
@@ -5113,9 +5117,9 @@ static void Task_SelectSearchMenuItem(u8 taskId)
     u16 *scrollOffset;
 
     DrawOrEraseSearchParameterBox(FALSE);
-    menuItem = gTasks[taskId].tMenuItem;
-    cursorPos = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataCursorPos];
-    scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
+    menuItem = (u16)gTasks[taskId].tMenuItem;
+    cursorPos = (u16*)&gTasks[taskId].data[sSearchOptions[menuItem].taskDataCursorPos];
+    scrollOffset = (u16*)&gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
     gTasks[taskId].tCursorPos = *cursorPos;
     gTasks[taskId].tScrollOffset = *scrollOffset;
     PrintSearchParameterText(taskId);

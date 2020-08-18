@@ -117,7 +117,7 @@ EWRAM_DATA static struct PokeblockSavedData sSavedPokeblockData = {0};
 EWRAM_DATA static struct PokeblockMenuStruct *sPokeblockMenu = NULL;
 
 // const rom data
-const s8 gPokeblockFlavorCompatibilityTable[] =
+const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT] =
 {
     // Cool, Beauty, Cute, Smart, Tough
           0,      0,    0,     0,     0, // Hardy
@@ -475,7 +475,7 @@ static void CB2_PokeblockMenu(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -507,7 +507,7 @@ static bool8 InitPokeblockMenu(void)
     {
     case 0:
         SetVBlankHBlankCallbacksToNull();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:
@@ -725,8 +725,8 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
     u8 *txtPtr = StringCopy(dst, gPokeblockNames[pkblock->color]);
 
     *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
-    *(txtPtr++) = 0x12;
-    *(txtPtr++) = 0x57;
+    *(txtPtr++) = EXT_CTRL_CODE_SKIP;
+    *(txtPtr++) = 87;
 
     ConvertIntToDecimalStringN(gStringVar1, GetHighestPokeblocksFlavorLevel(pkblock), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(txtPtr, gText_LvVar1);
@@ -1386,7 +1386,7 @@ s16 PokeblockGetGain(u8 nature, const struct Pokeblock *pokeblock)
     {
         curGain = GetPokeblockData(pokeblock, flavor + PBLOCK_SPICY);
         if (curGain > 0)
-            totalGain += curGain * gPokeblockFlavorCompatibilityTable[5 * nature + flavor];
+            totalGain += curGain * gPokeblockFlavorCompatibilityTable[FLAVOR_COUNT * nature + flavor];
     }
 
     return totalGain;

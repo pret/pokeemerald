@@ -39,7 +39,7 @@ static void CameraPanningCB_PanAhead(void);
 static struct FieldCameraOffset sFieldCameraOffset;
 static s16 sHorizontalCameraPan;
 static s16 sVerticalCameraPan;
-static u8 gUnknown_03000E2C;
+static bool8 gUnknown_03000E2C;
 static void (*sFieldCameraPanningCallback)(void);
 
 struct CameraObject gFieldCamera;
@@ -47,7 +47,7 @@ u16 gTotalCameraPixelOffsetY;
 u16 gTotalCameraPixelOffsetX;
 
 // text
-static void move_tilemap_camera_to_upper_left_corner_(struct FieldCameraOffset *cameraOffset)
+static void ResetCameraOffset(struct FieldCameraOffset *cameraOffset)
 {
     cameraOffset->xTileOffset = 0;
     cameraOffset->yTileOffset = 0;
@@ -56,23 +56,23 @@ static void move_tilemap_camera_to_upper_left_corner_(struct FieldCameraOffset *
     cameraOffset->copyBGToVRAM = TRUE;
 }
 
-static void tilemap_move_something(struct FieldCameraOffset *cameraOffset, u32 b, u32 c)
+static void AddCameraTileOffset(struct FieldCameraOffset *cameraOffset, u32 xOffset, u32 yOffset)
 {
-    cameraOffset->xTileOffset += b;
+    cameraOffset->xTileOffset += xOffset;
     cameraOffset->xTileOffset %= 32;
-    cameraOffset->yTileOffset += c;
+    cameraOffset->yTileOffset += yOffset;
     cameraOffset->yTileOffset %= 32;
 }
 
-static void coords8_add(struct FieldCameraOffset *cameraOffset, u32 b, u32 c)
+static void AddCameraPixelOffset(struct FieldCameraOffset *cameraOffset, u32 xOffset, u32 yOffset)
 {
-    cameraOffset->xPixelOffset += b;
-    cameraOffset->yPixelOffset += c;
+    cameraOffset->xPixelOffset += xOffset;
+    cameraOffset->yPixelOffset += yOffset;
 }
 
-void move_tilemap_camera_to_upper_left_corner(void)
+void ResetFieldCamera(void)
 {
-    move_tilemap_camera_to_upper_left_corner_(&sFieldCameraOffset);
+    ResetCameraOffset(&sFieldCameraOffset);
 }
 
 void FieldUpdateBgTilemapScroll(void)
@@ -89,10 +89,10 @@ void FieldUpdateBgTilemapScroll(void)
     SetGpuReg(REG_OFFSET_BG3VOFS, r4);
 }
 
-void sub_8089C08(s16 *a, s16 *b)
+void sub_8089C08(s16 *x, s16 *y)
 {
-    *a = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
-    *b = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
+    *x = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
+    *y = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
 }
 
 void DrawWholeMapView(void)
@@ -418,11 +418,11 @@ void CameraUpdate(void)
         UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
         ResetBerryTreeSparkleFlags();
-        tilemap_move_something(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
+        AddCameraTileOffset(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
         RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
     }
 
-    coords8_add(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
+    AddCameraPixelOffset(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
     gTotalCameraPixelOffsetX -= movementSpeedX;
     gTotalCameraPixelOffsetY -= movementSpeedY;
 }
@@ -436,9 +436,9 @@ void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
     gTotalCameraPixelOffsetY -= deltaY * 16;
 }
 
-void SetCameraPanningCallback(void (*a)(void))
+void SetCameraPanningCallback(void (*callback)(void))
 {
-    sFieldCameraPanningCallback = a;
+    sFieldCameraPanningCallback = callback;
 }
 
 void SetCameraPanning(s16 a, s16 b)
@@ -450,7 +450,7 @@ void SetCameraPanning(s16 a, s16 b)
 void InstallCameraPanAheadCallback(void)
 {
     sFieldCameraPanningCallback = CameraPanningCB_PanAhead;
-    gUnknown_03000E2C = 0;
+    gUnknown_03000E2C = FALSE;
     sHorizontalCameraPan = 0;
     sVerticalCameraPan = 32;
 }
@@ -478,12 +478,12 @@ static void CameraPanningCB_PanAhead(void)
         if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         {
             gUnknown_03000E2C ^= 1;
-            if (gUnknown_03000E2C == 0)
+            if (gUnknown_03000E2C == FALSE)
                 return;
         }
         else
         {
-            gUnknown_03000E2C = 0;
+            gUnknown_03000E2C = FALSE;
         }
 
         var = GetPlayerMovementDirection();

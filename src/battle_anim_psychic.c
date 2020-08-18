@@ -1101,7 +1101,7 @@ static void AnimTask_TransparentCloneGrowAndShrink_Step(u8 taskId)
         break;
     case 1:
         task->data[1] -= 4;
-        task->data[2] = 256 - (gSineTable[task->data[1]] >> 1);;
+        task->data[2] = 256 - (gSineTable[task->data[1]] >> 1);
         SetSpriteRotScale(task->data[15], task->data[2], task->data[2], 0);
         SetBattlerSpriteYOffsetFromOtherYScale(task->data[15], task->data[13]);
         if (task->data[1] == 0)

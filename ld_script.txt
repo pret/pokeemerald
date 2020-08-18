@@ -237,7 +237,7 @@ SECTIONS {
         src/battle_message.o(.text);
         src/cable_car.o(.text);
         src/math_util.o(.text);
-        src/roulette_util.o(.text);
+        src/palette_util.o(.text);
         src/confetti_util.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
@@ -331,7 +331,7 @@ SECTIONS {
         src/walda_phrase.o(.text);
         src/contest_link_util.o(.text);
         src/gym_leader_rematch.o(.text);
-        src/unk_transition.o(.text);
+        src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
     } =0
 
@@ -440,7 +440,7 @@ SECTIONS {
         gflib/window.o(.rodata);
         gflib/text.o(.rodata);
         gflib/sprite.o(.rodata);
-        data/io_reg.o(.rodata);
+        gflib/io_reg.o(.rodata);
         gflib/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);
@@ -685,7 +685,7 @@ SECTIONS {
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         src/gym_leader_rematch.o(.rodata);
-        src/unk_transition.o(.rodata);
+        src/battle_transition_frontier.o(.rodata);
         src/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);

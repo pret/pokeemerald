@@ -8,13 +8,12 @@
 #include "gpu_regs.h"
 #include "menu.h"
 #include "random.h"
-#include "roulette_util.h"
+#include "palette_util.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "window.h"
-#include "constants/flags.h"
 #include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -110,24 +109,24 @@ const struct SpriteSheet gMirageTowerCeilingCrumbleSpriteSheets[] =
 
 static const struct MetatileCoords sInvisibleMirageTowerMetatiles[] =
 {
-    {18, 53, METATILE_ID(Mauville, DeepSand_Center)},
-    {19, 53, METATILE_ID(Mauville, DeepSand_Center)},
-    {20, 53, METATILE_ID(Mauville, DeepSand_Center)},
-    {18, 54, METATILE_ID(Mauville, DeepSand_Center)},
-    {19, 54, METATILE_ID(Mauville, DeepSand_Center)},
-    {20, 54, METATILE_ID(Mauville, DeepSand_Center)},
-    {18, 55, METATILE_ID(Mauville, DeepSand_Center)},
-    {19, 55, METATILE_ID(Mauville, DeepSand_Center)},
-    {20, 55, METATILE_ID(Mauville, DeepSand_Center)},
-    {18, 56, METATILE_ID(Mauville, DeepSand_Center)},
-    {19, 56, METATILE_ID(Mauville, DeepSand_Center)},
-    {20, 56, METATILE_ID(Mauville, DeepSand_Center)},
-    {18, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
-    {19, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
-    {20, 57, METATILE_ID(Mauville, DeepSand_BottomMid)},
-    {18, 58, METATILE_ID(General, SandPit_Center)},
-    {19, 58, METATILE_ID(General, SandPit_Center)},
-    {20, 58, METATILE_ID(General, SandPit_Center)},
+    {18, 53, METATILE_Mauville_DeepSand_Center},
+    {19, 53, METATILE_Mauville_DeepSand_Center},
+    {20, 53, METATILE_Mauville_DeepSand_Center},
+    {18, 54, METATILE_Mauville_DeepSand_Center},
+    {19, 54, METATILE_Mauville_DeepSand_Center},
+    {20, 54, METATILE_Mauville_DeepSand_Center},
+    {18, 55, METATILE_Mauville_DeepSand_Center},
+    {19, 55, METATILE_Mauville_DeepSand_Center},
+    {20, 55, METATILE_Mauville_DeepSand_Center},
+    {18, 56, METATILE_Mauville_DeepSand_Center},
+    {19, 56, METATILE_Mauville_DeepSand_Center},
+    {20, 56, METATILE_Mauville_DeepSand_Center},
+    {18, 57, METATILE_Mauville_DeepSand_BottomMid},
+    {19, 57, METATILE_Mauville_DeepSand_BottomMid},
+    {20, 57, METATILE_Mauville_DeepSand_BottomMid},
+    {18, 58, METATILE_General_SandPit_Center},
+    {19, 58, METATILE_General_SandPit_Center},
+    {20, 58, METATILE_General_SandPit_Center},
 };
 
 static const union AnimCmd gSpriteAnim_8617DEC[] =
@@ -169,7 +168,7 @@ const struct PulseBlendSettings gMirageTowerPulseBlendSettings = {
     .numColors = 15,
     .delay = 5,
     .numFadeCycles = -1,
-    .maxBlendCoeff = 11,
+    .maxBlendCoeff = -5,
     .fadeType = 1,
     .restorePaletteOnUnload = FALSE,
     .unk7_7 = 1,
@@ -413,10 +412,9 @@ void DoMirageTowerCeilingCrumble(void)
 
 static void WaitCeilingCrumble(u8 taskId)
 {
-    u16 *data = gTasks[taskId].data;
-    data[1]++;
+    u16 *data = (u16 *)gTasks[taskId].data;
     // Either wait 1000 frames, or until all 16 crumble sprites and the one screen-shake task are completed.
-    if (data[1] == 1000 || data[0] == 17)
+    if (++data[1] == 1000 || data[0] == 17)
         gTasks[taskId].func = FinishCeilingCrumbleTask;
 }
 
@@ -692,7 +690,7 @@ static void DoFossilFallAndSink(u8 taskId)
         if (gSprites[sUnknown_0203CF0C->spriteId].callback != SpriteCallbackDummy)
             return;
         DestroySprite(&gSprites[sUnknown_0203CF0C->spriteId]);
-        FREE_AND_SET_NULL(sUnknown_0203CF0C->unkC);;
+        FREE_AND_SET_NULL(sUnknown_0203CF0C->unkC);
         FREE_AND_SET_NULL(sUnknown_0203CF0C->frameImage);
         FREE_AND_SET_NULL(sUnknown_0203CF0C->frameImageTiles);
         FREE_AND_SET_NULL(sUnknown_0203CF0C);
