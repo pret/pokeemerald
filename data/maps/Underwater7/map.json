@@ -2,7 +2,7 @@
   "id": "MAP_UNDERWATER7",
   "name": "Underwater7",
   "layout": "LAYOUT_UNDERWATER7",
-  "music": "MUS_DEEPDEEP",
+  "music": "MUS_UNDERWATER",
   "region_map_section": "MAPSEC_UNDERWATER_UNK1",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",

@@ -302,7 +302,7 @@ static void Task_RecordMixing_SoundEffect(u8 taskId)
 {
     if (++gTasks[taskId].tCounter == 50)
     {
-        PlaySE(SE_W213);
+        PlaySE(SE_M_ATTRACT);
         gTasks[taskId].tCounter = 0;
     }
 }
@@ -343,7 +343,7 @@ static void Task_RecordMixing_Main(u8 taskId)
     case 2:
         data[10] = CreateTask(Task_DoRecordMixing, 10);
         tState = 3;
-        PlaySE(SE_W226);
+        PlaySE(SE_M_BATON_PASS);
         break;
     case 3: // wait for Task_DoRecordMixing
         if (!gTasks[data[10]].isActive)

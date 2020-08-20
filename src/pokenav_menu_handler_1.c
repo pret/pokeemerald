@@ -273,14 +273,14 @@ static u32 HandleMainMenuInputTutorial(struct Pokenav1Struct *state)
         }
         else
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             return POKENAV_MENU_FUNC_NONE;
         }
     }
     
     if (gMain.newKeys & B_BUTTON)
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         return POKENAV_MENU_FUNC_NONE;
     }
     
@@ -298,7 +298,7 @@ static u32 HandleMainMenuInputEndTutorial(struct Pokenav1Struct *state)
         u32 menuItem = sMenuItems[state->menuType][state->cursorPos];
         if (menuItem != POKENAV_MENUITEM_MATCH_CALL && menuItem != POKENAV_MENUITEM_SWITCH_OFF)
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             return POKENAV_MENU_FUNC_NONE;
         }
         else if (menuItem == POKENAV_MENUITEM_MATCH_CALL)

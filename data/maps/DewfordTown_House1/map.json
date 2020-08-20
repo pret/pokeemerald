@@ -2,7 +2,7 @@
   "id": "MAP_DEWFORD_TOWN_HOUSE1",
   "name": "DewfordTown_House1",
   "layout": "LAYOUT_HOUSE3",
-  "music": "MUS_HIGHTOWN",
+  "music": "MUS_DEWFORD",
   "region_map_section": "MAPSEC_DEWFORD_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

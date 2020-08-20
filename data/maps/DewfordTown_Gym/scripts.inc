@@ -80,43 +80,43 @@ DewfordTown_Gym_EventScript_NoLightChange:: @ 81FC71A
 
 @ NOTE: A little confusingly, a larger animateflash param value is a smaller flash radius
 DewfordTown_Gym_EventScript_AnimateFlash1Trainer:: @ 81FC71B
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	animateflash 6
 	call DewfordTown_Gym_EventScript_SetFlashRadius
 	return
 
 DewfordTown_Gym_EventScript_AnimateFlash2Trainers:: @ 81FC726
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	animateflash 5
 	call DewfordTown_Gym_EventScript_SetFlashRadius
 	return
 
 DewfordTown_Gym_EventScript_AnimateFlash3Trainers:: @ 81FC731
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	animateflash 4
 	call DewfordTown_Gym_EventScript_SetFlashRadius
 	return
 
 DewfordTown_Gym_EventScript_AnimateFlash4Trainers:: @ 81FC73C
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	animateflash 3
 	call DewfordTown_Gym_EventScript_SetFlashRadius
 	return
 
 DewfordTown_Gym_EventScript_AnimateFlash5Trainers:: @ 81FC747
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	animateflash 2
 	call DewfordTown_Gym_EventScript_SetFlashRadius
 	return
 
 DewfordTown_Gym_EventScript_AnimateFlash6Trainers:: @ 81FC752
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	animateflash 1
 	call DewfordTown_Gym_EventScript_SetFlashRadius
 	return
 
 DewfordTown_Gym_EventScript_AnimateFlashFullBrightness:: @ 81FC75D
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	animateflash 0
 	call DewfordTown_Gym_EventScript_SetFlashRadius
 	return
@@ -169,7 +169,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	call DewfordTown_Gym_EventScript_GiveBulkUp
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox DewfordTown_Gym_Text_RegisteredBrawly, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage

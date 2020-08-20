@@ -871,10 +871,10 @@ static void CB2_ReturnFromRecord(void)
     switch (InBattlePyramid())
     {
     case 1:
-        PlayBGM(MUS_PYRAMID);
+        PlayBGM(MUS_B_PYRAMID);
         break;
     case 2:
-        PlayBGM(MUS_PYRAMID_TOP);
+        PlayBGM(MUS_B_PYRAMID_TOP);
         break;
     default:
         Overworld_PlaySpecialMapMusic();
@@ -1705,5 +1705,5 @@ static void HandleFrontierMapCursorMove(u8 direction)
         CopyWindowToVram(i, 3);
 
     CopyBgTilemapBufferToVram(0);
-    PlaySE(SE_Z_SCROLL);
+    PlaySE(SE_DEX_SCROLL);
 }

@@ -162,7 +162,7 @@ bool8 FldEff_UseRockSmash(void)
 // The actual rock smashing is handled by EventScript_SmashRock, so this function does very little
 static void FieldMove_RockSmash(void)
 {
-    PlaySE(SE_W088);
+    PlaySE(SE_M_ROCK_THROW);
     FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);
     EnableBothScriptContexts();
 }

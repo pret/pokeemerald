@@ -570,7 +570,7 @@ static void CB2_CreateTradeMenu(void)
         sTradeMenuData->bg3hofs = 0;
         SetTradePartyMonsVisible();
         gMain.state++;
-        PlayBGM(MUS_P_SCHOOL);
+        PlayBGM(MUS_SCHOOL);
         break;
     case 15:
         SetTradePartyLiveStatuses(TRADE_PARTNER);
@@ -2573,7 +2573,7 @@ static void sub_807AA28(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 10)
     {
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
         sprite->data[0] = 0;
     }
 }
@@ -2582,7 +2582,7 @@ static void sub_807AA4C(struct Sprite *sprite)
 {
     if (!sprite->invisible && ++sprite->data[0] == 10)
     {
-        PlaySE(SE_W207B);
+        PlaySE(SE_M_SWAGGER2);
         sprite->data[0] = 0;
     }
 }
@@ -2620,7 +2620,7 @@ static void sub_807AB04(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 15)
     {
-        PlaySE(SE_W107);
+        PlaySE(SE_M_MINIMIZE);
         sprite->data[0] = 0;
     }
 }
@@ -3289,7 +3289,7 @@ static bool8 AnimateTradeSequenceCable(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y = gMonFrontPicCoords[sTradeData->monSpecies[TRADE_PLAYER]].y_offset;
         sTradeData->state++;
         sTradeData->cachedMapMusic = GetCurrentMapMusic();
-        PlayNewMapMusic(MUS_SHINKA);
+        PlayNewMapMusic(MUS_EVOLUTION);
         break;
     case 1:
         if (sTradeData->bg2hofs > 0)
@@ -3449,7 +3449,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case 32:
         if (!gPaletteFade.active)
         {
-            PlaySE(SE_TK_WARPOUT);
+            PlaySE(SE_WARP_OUT);
             sTradeData->state++;
         }
         gSprites[sTradeData->unk_90].pos2.y -= 3;
@@ -3503,7 +3503,7 @@ static bool8 AnimateTradeSequenceCable(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PARTNER]].pos2.y += 3;
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -160 && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -163)
         {
-            PlaySE(SE_TK_WARPIN);
+            PlaySE(SE_WARP_IN);
         }
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -222)
         {
@@ -3600,7 +3600,7 @@ static bool8 AnimateTradeSequenceCable(void)
             DestroySprite(&gSprites[sTradeData->unk_91]);
             SetTradeSequenceBgGpuRegs(6);
             sTradeData->state++;
-            PlaySE(SE_W028);
+            PlaySE(SE_M_SAND_ATTACK);
         }
         break;
     case 51:
@@ -3704,7 +3704,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case 68:
         if (++sTradeData->timer == 10)
         {
-            PlayFanfare(MUS_FANFA5);
+            PlayFanfare(MUS_EVOLVED);
         }
         if (sTradeData->timer == 250)
         {
@@ -3781,7 +3781,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y = gMonFrontPicCoords[sTradeData->monSpecies[TRADE_PLAYER]].y_offset;
         sTradeData->state++;
         sTradeData->cachedMapMusic = GetCurrentMapMusic();
-        PlayNewMapMusic(MUS_SHINKA);
+        PlayNewMapMusic(MUS_EVOLUTION);
         break;
     case 1:
         if (sTradeData->bg2hofs > 0)
@@ -3946,7 +3946,7 @@ static bool8 AnimateTradeSequenceWireless(void)
     case 32:
         if (!gPaletteFade.active)
         {
-            PlaySE(SE_TK_WARPOUT);
+            PlaySE(SE_WARP_OUT);
             sTradeData->state++;
         }
         gSprites[sTradeData->unk_90].pos2.y -= 3;
@@ -4001,7 +4001,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PARTNER]].pos2.y += 3;
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -160 && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -163)
         {
-            PlaySE(SE_TK_WARPIN);
+            PlaySE(SE_WARP_IN);
         }
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -222)
         {
@@ -4116,7 +4116,7 @@ static bool8 AnimateTradeSequenceWireless(void)
             DestroySprite(&gSprites[sTradeData->unk_91]);
             SetTradeSequenceBgGpuRegs(6);
             sTradeData->state++;
-            PlaySE(SE_W028);
+            PlaySE(SE_M_SAND_ATTACK);
         }
         break;
     case 51:
@@ -4219,7 +4219,7 @@ static bool8 AnimateTradeSequenceWireless(void)
     case 68:
         if (++sTradeData->timer == 10)
         {
-            PlayFanfare(MUS_FANFA5);
+            PlayFanfare(MUS_EVOLVED);
         }
         if (sTradeData->timer == 250)
         {
@@ -4361,10 +4361,10 @@ static void sub_807E5D8(struct Sprite *sprite)
 {
     sprite->pos2.y += sTradeBallVerticalVelocityTable[sprite->data[0]];
     if (sprite->data[0] == 22)
-        PlaySE(SE_KON);
+        PlaySE(SE_BALL_BOUNCE_1);
     if (++ sprite->data[0] == 44)
     {
-        PlaySE(SE_W025);
+        PlaySE(SE_M_MEGA_KICK);
         sprite->callback = sub_807E64C;
         sprite->data[0] = 0;
         BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, RGB_WHITEALPHA);
@@ -4394,17 +4394,17 @@ static void sub_807E6AC(struct Sprite *sprite)
         {
             sprite->data[2] ++;
             sprite->data[0] = 0x16;
-            PlaySE(SE_KON);
+            PlaySE(SE_BALL_BOUNCE_1);
         }
     }
     else
     {
         if (sprite->data[0] == 0x42)
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
         if (sprite->data[0] == 0x5c)
-            PlaySE(SE_KON3);
+            PlaySE(SE_BALL_BOUNCE_3);
         if (sprite->data[0] == 0x6b)
-            PlaySE(SE_KON4);
+            PlaySE(SE_BALL_BOUNCE_4);
         sprite->pos2.y += sTradeBallVerticalVelocityTable[sprite->data[0]];
         if (++sprite->data[0] == 0x6c)
             sprite->callback = SpriteCallbackDummy;
@@ -4809,7 +4809,7 @@ static void Task_AnimateWirelessSignal(u8 taskId)
     }
 
     if (sWirelessSignalTiming[idx][0] == 0 && counter == 0)
-        PlaySE(SE_W215);
+        PlaySE(SE_M_HEAL_BELL);
 
     if (counter == sWirelessSignalTiming[idx][1])
     {

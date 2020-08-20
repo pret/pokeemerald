@@ -144,7 +144,7 @@ SecretBase_EventScript_ShrubEnter:: @ 8275B4D
 
 SecretBase_EventScript_InitSecretBase:: @ 8275B5B
 	closemessage
-	playse SE_KAIDAN
+	playse SE_EXIT
 	setvar VAR_INIT_SECRET_BASE, 0
 	setflag FLAG_DECORATION_0
 	special SetPlayerSecretBase
@@ -164,7 +164,7 @@ SecretBase_EventScript_FirstEntrance:: @ 8275B81
 	compare VAR_RESULT, YES
 	goto_if_eq SecretBase_EventScript_SetAsBase
 	closemessage
-	playse SE_KAIDAN
+	playse SE_EXIT
 	special ClearAndLeaveSecretBase
 	end
 
@@ -183,7 +183,7 @@ SecretBase_Movement_275BB4: @ 8275BB4
 SecretBase_EventScript_Enter:: @ 8275BB7
 	lockall
 	setvar VAR_INIT_SECRET_BASE, 1
-	playse SE_KAIDAN
+	playse SE_EXIT
 	special IsCurSecretBaseOwnedByAnotherPlayer
 	compare VAR_RESULT, FALSE
 	goto_if_eq SecretBase_EventScript_EnterPlayersBase

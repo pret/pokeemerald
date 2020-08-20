@@ -713,13 +713,13 @@ static void DoMoveRelearnerMain(void)
         {
             FormatAndPrintText(gText_MoveRelearnerPkmnForgotMoveAndLearnedNew);
             sMoveRelearnerStruct->state = MENU_STATE_PRINT_TEXT_THEN_FANFARE;
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
         }
         break;
     case MENU_STATE_PRINT_TEXT_THEN_FANFARE:
         if (!MoveRelearnerRunTextPrinters())
         {
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
             sMoveRelearnerStruct->state = MENU_STATE_WAIT_FOR_FANFARE;
         }
         break;

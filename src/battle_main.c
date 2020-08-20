@@ -1869,7 +1869,7 @@ static void FreeRestoreBattleData(void)
     gScanlineEffect.state = 3;
     gMain.inBattle = 0;
     ZeroEnemyPartyMons();
-    m4aSongNumStop(SE_HINSI);
+    m4aSongNumStop(SE_LOW_HEALTH);
     FreeMonSpritesGfx();
     FreeBattleSpritesData();
     FreeBattleResources();
@@ -2114,7 +2114,7 @@ void sub_8038B74(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, 1);
     sprite->callback = sub_8038B04;
-    PlaySE(SE_BT_START);
+    PlaySE(SE_MUGSHOT);
 }
 
 static void sub_8038B94(u8 taskId)
@@ -5019,9 +5019,9 @@ static void HandleEndTurn_BattleWon(void)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
 
         if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-            PlayBGM(MUS_KACHI3);
+            PlayBGM(MUS_VICTORY_GYM_LEADER);
         else
-            PlayBGM(MUS_KACHI1);
+            PlayBGM(MUS_VICTORY_TRAINER);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -5032,7 +5032,7 @@ static void HandleEndTurn_BattleWon(void)
         {
         case TRAINER_CLASS_ELITE_FOUR:
         case TRAINER_CLASS_CHAMPION:
-            PlayBGM(MUS_KACHI5);
+            PlayBGM(MUS_VICTORY_LEAGUE);
             break;
         case TRAINER_CLASS_TEAM_AQUA:
         case TRAINER_CLASS_TEAM_MAGMA:
@@ -5040,13 +5040,13 @@ static void HandleEndTurn_BattleWon(void)
         case TRAINER_CLASS_AQUA_LEADER:
         case TRAINER_CLASS_MAGMA_ADMIN:
         case TRAINER_CLASS_MAGMA_LEADER:
-            PlayBGM(MUS_KACHI4);
+            PlayBGM(MUS_VICTORY_AQUA_MAGMA);
             break;
         case TRAINER_CLASS_LEADER:
-            PlayBGM(MUS_KACHI3);
+            PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:
-            PlayBGM(MUS_KACHI1);
+            PlayBGM(MUS_VICTORY_TRAINER);
             break;
         }
     }
@@ -5279,7 +5279,7 @@ static void ReturnFromBattleToOverworld(void)
             SetRoamerInactive();
     }
 
-    m4aSongNumStop(SE_HINSI);
+    m4aSongNumStop(SE_LOW_HEALTH);
     SetMainCallback2(gMain.savedCallback);
 }
 
@@ -5826,7 +5826,7 @@ static void HandleAction_GoNear(void)
 static void HandleAction_SafariZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
-    PlaySE(SE_NIGERU);
+    PlaySE(SE_FLEE);
     gCurrentTurnActionNumber = gBattlersCount;
     gBattleOutcome = B_OUTCOME_RAN;
 }

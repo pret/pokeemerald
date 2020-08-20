@@ -1018,13 +1018,13 @@ static void Task_TryJoinLinkGroup(u8 taskId)
                         // Trading is allowed, or not trading at all
                         AskToJoinRfuGroup(data, id);
                         data->state = LG_STATE_ASK_JOIN_GROUP;
-                        PlaySE(SE_PN_ON);
+                        PlaySE(SE_POKENAV_ON);
                     }
                     else
                     {
                         StringCopy(gStringVar4, sCantTransmitToTrainerTexts[readyStatus - 1]);
                         data->state = LG_STATE_TRADE_NOT_READY;
-                        PlaySE(SE_PN_ON);
+                        PlaySE(SE_POKENAV_ON);
                     }
                 }
                 else
@@ -2118,7 +2118,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
                     RedrawListMenu(data->listTaskId);
                     IntlConvPartnerUname7(gStringVar1, &data->field_0->arr[data->leaderId]);
                     CreateTask_RfuReconnectWithParent(data->field_0->arr[data->leaderId].gname_uname.playerName, ReadAsU16(data->field_0->arr[data->leaderId].gname_uname.gname.unk_00.playerTrainerId));
-                    PlaySE(SE_PN_ON);
+                    PlaySE(SE_POKENAV_ON);
                     data->state = 4;
                 }
                 else
@@ -2279,7 +2279,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
                         LoadWirelessStatusIndicatorSpriteGfx();
                         CreateWirelessStatusIndicatorSprite(0, 0);
                         CreateTask_RfuReconnectWithParent(data->field_0->arr[0].gname_uname.playerName, ReadAsU16(data->field_0->arr[0].gname_uname.gname.unk_00.playerTrainerId));
-                        PlaySE(SE_PN_ON);
+                        PlaySE(SE_POKENAV_ON);
                         data->state = 4;
                     }
                     else
@@ -2846,7 +2846,7 @@ static void Task_RunUnionRoom(u8 taskId)
             uroom->state = UR_STATE_START_ACTIVITY_FREE_UROOM;
         break;
     case UR_STATE_PLAYER_CONTACTED_YOU:
-        PlaySE(SE_PINPON);
+        PlaySE(SE_DING_DONG);
         sub_800EF7C();
         uroom->state = UR_STATE_RECV_CONTACT_DATA;
         uroom->recvActivityRequest[0] = 0;

@@ -776,7 +776,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
         if (GetPlayerSpeed() != 1)
             affineAnimation += 8;
 
-        PlaySE(SE_HI_TURUN);
+        PlaySE(SE_ROTATING_GATE);
         StartSpriteAffineAnim(sprite, affineAnimation);
     }
     else if (rotationDirection == ROTATE_CLOCKWISE)
@@ -786,7 +786,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
         if (GetPlayerSpeed() != 1)
             affineAnimation += 8;
 
-        PlaySE(SE_HI_TURUN);
+        PlaySE(SE_ROTATING_GATE);
         StartSpriteAffineAnim(sprite, affineAnimation);
     }
 

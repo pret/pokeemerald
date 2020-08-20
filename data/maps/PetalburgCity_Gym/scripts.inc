@@ -91,7 +91,7 @@ PetalburgCity_Gym_EventScript_ReturnFromWallyTutorial:: @ 82049A4
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	applymovement LOCALID_WALLY, PetalburgCity_Gym_Movement_WallyExitGym
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject LOCALID_WALLY
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	delay 30
@@ -203,7 +203,7 @@ PetalburgCity_Gym_EventScript_BeginWallyTutorial:: @ 8204AAC
 	msgbox PetalburgCity_Gym_Text_WouldYouReallyComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_TSURETEK, 0
+	playbgm MUS_FOLLOW_ME, 0
 	compare VAR_0x8008, 0
 	call_if_eq PetalburgCity_Gym_EventScript_ExitGymWithWallySouth
 	compare VAR_0x8008, 1
@@ -487,7 +487,7 @@ PetalburgCity_Gym_EventScript_WallysDadArrives:: @ 8204F13
 	msgbox PetalburgCity_Gym_Text_LetMeBorrowPlayer, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_TSURETEK, 0
+	playbgm MUS_FOLLOW_ME, 0
 	compare VAR_0x8008, 1
 	call_if_eq PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth
 	compare VAR_0x8008, 2
