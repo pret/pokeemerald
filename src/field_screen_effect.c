@@ -194,7 +194,7 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         task->data[0]++;
         break;
     case 1:
@@ -227,7 +227,7 @@ void Task_ReturnToFieldRecordMixing(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         task->data[0]++;
         break;
     case 1:
@@ -625,7 +625,7 @@ static void Task_ReturnToWorldFromLinkRoom(u8 taskId)
     case 1:
         if (!PaletteFadeActive() && BGMusicStopped())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             data[0]++;
         }
         break;

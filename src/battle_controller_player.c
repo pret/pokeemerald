@@ -886,9 +886,9 @@ void sub_80587B0(void)
             if (IsLinkTaskFinished())
             {
                 if (gWirelessCommType == 0)
-                    sub_800AC34();
+                    SetCloseLinkCallback();
                 else
-                    sub_800ADF8();
+                    SetLinkStandbyCallback();
 
                 gBattlerControllerFuncs[gActiveBattler] = sub_80586F8;
             }

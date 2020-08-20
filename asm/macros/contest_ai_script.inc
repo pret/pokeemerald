@@ -5,34 +5,40 @@
 	.byte \score
 	.endm
 
-@ turn (AKA "Appeal No.")
-
-	.macro get_turn
+	.macro get_appeal_num
 	.byte 0x01
 	.endm
 
-	.macro if_turn_less_than param, addr
+	.macro if_appeal_num_less_than param, addr
 	.byte 0x02
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro if_turn_more_than param, addr
+	.macro if_appeal_num_more_than param, addr
 	.byte 0x03
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro if_turn_eq param, addr
+	.macro if_appeal_num_eq param, addr
 	.byte 0x04
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro if_turn_not_eq param, addr
+	.macro if_appeal_num_not_eq param, addr
 	.byte 0x05
 	.byte \param
 	.4byte \addr
+	.endm
+
+	.macro if_last_appeal addr:req
+	if_appeal_num_eq CONTEST_LAST_APPEAL, \addr
+	.endm
+
+	.macro if_not_last_appeal addr:req
+	if_appeal_num_not_eq CONTEST_LAST_APPEAL, \addr
 	.endm
 
 @ audience excitement
@@ -65,7 +71,7 @@
 	.4byte \addr
 	.endm
 
-@ the order that the user goes in the current turn
+@ the order that the user goes in the current appeal
 
 	.macro get_user_order
 	.byte 0x0B

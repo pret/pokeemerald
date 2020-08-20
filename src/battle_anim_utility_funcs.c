@@ -318,7 +318,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
 
     if (IsContest())
     {
-        species = gContestResources->field_18->species;
+        species = gContestResources->moveAnim->species;
     }
     else
     {
@@ -440,7 +440,7 @@ static void sub_8116F04(u8 taskId)
 
     if (IsContest())
     {
-        sAnimStatsChangeData->species = gContestResources->field_18->species;
+        sAnimStatsChangeData->species = gContestResources->moveAnim->species;
     }
     else
     {
@@ -810,7 +810,7 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 
     if (IsContest())
     {
-        species = gContestResources->field_18->species;
+        species = gContestResources->moveAnim->species;
     }
     else
     {

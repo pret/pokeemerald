@@ -20,7 +20,7 @@
 #include "union_room.h"
 #include "mevent2.h"
 #include "script.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "string_util.h"
@@ -203,7 +203,7 @@ static void sub_80B2600(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
     {
-        sub_800A4D8(2);
+        SendBlockRequest(2);
         DestroyTask(taskId);
     }
 }
@@ -357,7 +357,7 @@ static void Task_LinkupExchangeDataWithLeader(u8 taskId)
     if (gSpecialVar_Result == LINKUP_DIFF_SELECTIONS 
      || gSpecialVar_Result == LINKUP_WRONG_NUM_PLAYERS)
     {
-        sub_800AC34();
+        SetCloseLinkCallback();
         HideFieldMessageBox();
         gTasks[taskId].func = Task_StopLinkup;
     }
@@ -392,7 +392,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
     {
         if (!Link_AnyPartnersPlayingRubyOrSapphire())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             HideFieldMessageBox();
             gTasks[taskId].func = Task_StopLinkup;
         }
@@ -405,7 +405,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
     }
     else if (gSpecialVar_Result == LINKUP_DIFF_SELECTIONS)
     {
-        sub_800AC34();
+        SetCloseLinkCallback();
         HideFieldMessageBox();
         gTasks[taskId].func = Task_StopLinkup;
     }
@@ -426,7 +426,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
         card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
         card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
-        sub_800A4D8(2);
+        SendBlockRequest(2);
     }
 }
 
@@ -481,7 +481,7 @@ static void FinishLinkup(u16 *linkupStatus, u32 taskId)
             {
                 // Unsuccessful battle tower linkup
                 *linkupStatus = LINKUP_FAILED_BATTLE_TOWER;
-                sub_800AC34();
+                SetCloseLinkCallback();
                 gTasks[taskId].func = Task_StopLinkup;
             }
             else
@@ -503,7 +503,7 @@ static void FinishLinkup(u16 *linkupStatus, u32 taskId)
     else
     {
         // Unsuccessful linkup
-        sub_800AC34();
+        SetCloseLinkCallback();
         gTasks[taskId].func = Task_StopLinkup;
     }
 }
@@ -686,7 +686,7 @@ static void Task_ValidateMixingGameLanguage(u8 taskId)
             if (mixingForeignGames)
             {
                 gSpecialVar_Result = LINKUP_FOREIGN_GAME;
-                sub_800AD10();
+                SetCloseLinkCallbackHandleJP();
                 gTasks[taskId].tState = 1;
                 return;
             }
@@ -856,7 +856,7 @@ static void Task_StartWiredCableClubBattle(u8 taskId)
             task->tState++;
         break;
     case 3:
-        sub_800AC34();
+        SetCloseLinkCallback();
         task->tState++;
         break;
     case 4:
@@ -919,7 +919,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             tState = 5;
         break;
     case 5:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState = 6;
         break;
     case 6:
@@ -974,7 +974,7 @@ static void CB2_ReturnFromUnionRoomBattle(void)
         }
         else
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             gMain.state = 1;
         }
         break;
@@ -1113,7 +1113,7 @@ static void Task_StartWiredTrade(u8 taskId)
         gSelectedTradeMonPositions[TRADE_PLAYER] = 0;
         gSelectedTradeMonPositions[TRADE_PARTNER] = 0;
         m4aMPlayAllStop();
-        sub_800AC34();
+        SetCloseLinkCallback();
         task->tState++;
         break;
     case 3:
@@ -1146,7 +1146,7 @@ static void Task_StartWirelessTrade(u8 taskId)
         gSelectedTradeMonPositions[TRADE_PLAYER] = 0;
         gSelectedTradeMonPositions[TRADE_PARTNER] = 0;
         m4aMPlayAllStop();
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState++;
         break;
     case 3:
@@ -1264,7 +1264,7 @@ static void sub_80B3AAC(u8 taskId)
 // Unused
 static void sub_80B3AD0(u8 taskId)
 {
-    sub_800AC34();
+    SetCloseLinkCallback();
     gTasks[taskId].func = sub_80B3AAC;
 }
 

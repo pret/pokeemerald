@@ -1,3 +1,5 @@
+#include "constants/global.h"
+#include "constants/contest.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/contest_ai_script.inc"
 	.include "constants/constants.inc"
@@ -12,13 +14,13 @@
 
 	.align 2
 gContestAIChecks:: @ 82DE350
-	.4byte AI_CheckForBadMove   // 0x00000001
-	.4byte AI_CheckForCombo     // 0x00000002
-	.4byte AI_CheckBoring       // 0x00000004
-	.4byte AI_CheckExcitement   // 0x00000008
-	.4byte AI_CheckOrder        // 0x00000010
-	.4byte AI_CheckForGoodMove  // 0x00000020
-	.4byte AI_Erratic           // 0x00000040
+	.4byte AI_CheckForBadMove   @ CONTEST_AI_CHECK_BAD_MOVE
+	.4byte AI_CheckForCombo     @ CONTEST_AI_CHECK_COMBO
+	.4byte AI_CheckBoring       @ CONTEST_AI_CHECK_BORING
+	.4byte AI_CheckExcitement   @ CONTEST_AI_CHECK_EXCITEMENT
+	.4byte AI_CheckOrder        @ CONTEST_AI_CHECK_ORDER
+	.4byte AI_CheckForGoodMove  @ CONTEST_AI_CHECK_GOOD_MOVE
+	.4byte AI_Erratic           @ CONTEST_AI_ERRATIC
 	.4byte AI_Nothing           // 0x00000080
 	.4byte AI_Nothing           // 0x00000100
 	.4byte AI_Nothing           // 0x00000200
@@ -47,9 +49,9 @@ gContestAIChecks:: @ 82DE350
 
 
 @ Unreferenced AI routine to encourage moves that improve condition on the first
-@ turn. Additionally, it checks the appeal order of the user and the effect
+@ appeal. Additionally, it checks the turn order of the user and the effect
 @ type, but the code is buggy and doesn't affect the score.
-	if_turn_not_eq 0, ContestUnreferenced_80
+	if_appeal_num_not_eq 0, ContestUnreferenced_80
 	if_effect_not_eq CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS, ContestUnreferenced_80
 	score +10
 ContestUnreferenced_80:
@@ -64,11 +66,11 @@ ContestUnreferenced_end:
 	end
 
 @ Unreferenced AI routine that doesn't make much sense.
-	if_turn_eq 0, ContestUnreferenced_0F_1
-	if_turn_eq 1, ContestUnreferenced_0F_2
-	if_turn_eq 2, ContestUnreferenced_0F_3
-	if_turn_eq 3, ContestUnreferenced_0F_4
-	if_turn_eq 4, ContestUnreferenced_0F_5
+	if_appeal_num_eq 0, ContestUnreferenced_0F_1
+	if_appeal_num_eq 1, ContestUnreferenced_0F_2
+	if_appeal_num_eq 2, ContestUnreferenced_0F_3
+	if_appeal_num_eq 3, ContestUnreferenced_0F_4
+	if_last_appeal ContestUnreferenced_0F_5
 	end
 ContestUnreferenced_0F_1:
 	if_user_order_not_eq MON_1, ContestUnreferenced_2B_1
@@ -122,25 +124,26 @@ ContestUnreferenced_score2:
 	end
 
 AI_CheckBoring:
-	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_end_081DC27F
-	if_move_used_count_eq 1, AI_score1_081DC27F
-	if_move_used_count_eq 2, AI_score2_081DC27F
-	if_move_used_count_eq 3, AI_score3_081DC27F
-	if_move_used_count_eq 4, AI_score4_081DC27F
+	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_CheckBoring_NotBoring
+	if_move_used_count_eq 1, AI_CheckBoring_FirstRepeat
+	if_move_used_count_eq 2, AI_CheckBoring_SecondRepeat
+	if_move_used_count_eq 3, AI_CheckBoring_ThirdRepeat
+	if_move_used_count_eq 4, AI_CheckBoring_FourthRepeat
+	@ No repeats
 	end
-AI_score1_081DC27F:
+AI_CheckBoring_FirstRepeat:
 	score -5
 	end
-AI_score2_081DC27F:
+AI_CheckBoring_SecondRepeat:
 	score -15
 	end
-AI_score3_081DC27F:
+AI_CheckBoring_ThirdRepeat:
 	score -20
 	end
-AI_score4_081DC27F:
+AI_CheckBoring_FourthRepeat:
 	score -25
 	end
-AI_end_081DC27F:
+AI_CheckBoring_NotBoring:
 	end
 
 AI_CheckExcitement:
@@ -165,7 +168,7 @@ AI_contest7D_1_081DC2AB:
 	end
 AI_contest0F_2_081DC2AB:
 	if_user_order_not_eq MON_1, AI_contest7D_3_081DC2AB
-	if_turn_eq 4, AI_score_081DC2AB
+	if_last_appeal AI_score_081DC2AB
 AI_contest7D_2_081DC2AB:
 	if_random 51, AI_end_081DC2AB
 	score +10
@@ -221,22 +224,22 @@ AI_score_081DC348:
 	score +25
 	end
 AI_contest04_1_081DC348:
-	if_turn_eq 4, AI_contest7D_081DC348
+	if_last_appeal AI_contest7D_081DC348
 	if_random 150, AI_end_081DC348
 	score +10
 	end
 AI_contest04_2_081DC348:
-	if_turn_eq 4, AI_contest7D_081DC348
+	if_last_appeal AI_contest7D_081DC348
 	if_random 125, AI_end_081DC348
 	score +10
 	end
 AI_contest04_3_081DC348:
-	if_turn_eq 4, AI_contest7D_081DC348
+	if_last_appeal AI_contest7D_081DC348
 	if_random 50, AI_end_081DC348
 	score +10
 	end
 AI_contest04_4_081DC348:
-	if_turn_eq 4, AI_contest7D_081DC348
+	if_last_appeal AI_contest7D_081DC348
 	score +10
 	end
 AI_contest7D_081DC348:
@@ -301,7 +304,7 @@ ContestEffect3:
 	if_random 50, ContestEffectEnd
 	score +15
 	end
-	if_turn_eq 4, ContestEffect3_7D
+	if_last_appeal ContestEffect3_7D
 	if_random 220, ContestEffect3_score
 	score +10
 	end
@@ -323,8 +326,8 @@ ContestEffect38_score1:
 	score -10
 	end
 ContestEffect38_contest04:
-	if_turn_eq 4, ContestEffect38_score2
-	if_turn_eq 0, ContestEffect38_random
+	if_last_appeal ContestEffect38_score2
+	if_appeal_num_eq 0, ContestEffect38_random
 	if_move_used_count_eq 1, ContestEffectEnd
 	if_random 125, ContestEffectEnd
 	score +10
@@ -341,7 +344,7 @@ ContestEffect47:
 	if_move_used_count_eq 1, ContestEffectEnd
 	if_user_order_eq MON_1, ContestEffect47_random
 	if_user_order_eq MON_2, ContestEffect47_random
-	if_turn_not_eq 4, ContestEffectEnd
+	if_not_last_appeal ContestEffectEnd
 	if_user_has_exciting_move ContestEffectEnd
 	if_excitement_less_than 1, ContestEffectEnd
 	score +10
@@ -408,7 +411,7 @@ ContestEffect46:
 	if_user_order_more_than MON_1, ContestEffect46_score4
 	end
 ContestEffect46_05:
-	if_turn_not_eq 0, ContestEffect46_score1
+	if_appeal_num_not_eq 0, ContestEffect46_score1
 	if_excitement_eq 4, ContestEffect46_score2
 	if_excitement_eq 3, ContestEffect46_score3
 	end
@@ -565,7 +568,7 @@ ContestEffect_FollowingMonsNervous_CheckMon2:
 	end
 
 ContestEffect18:
-	if_turn_eq 4, ContestEffect18_score1
+	if_last_appeal ContestEffect18_score1
 	jump ContestEffect18_0E
 	end
 ContestEffect18_score1:
@@ -599,9 +602,9 @@ ContestEffectEnd:
 
 @ Randomly encourage moves in Cute, Smart, and Tough contests.
 AI_Erratic:
-	if_contest_type_eq CONTEST_CUTE, Erratic_CuteSmartTough
-	if_contest_type_eq CONTEST_SMART, Erratic_CuteSmartTough
-	if_contest_type_eq CONTEST_TOUGH, Erratic_CuteSmartTough
+	if_contest_type_eq CONTEST_CATEGORY_CUTE, Erratic_CuteSmartTough
+	if_contest_type_eq CONTEST_CATEGORY_SMART, Erratic_CuteSmartTough
+	if_contest_type_eq CONTEST_CATEGORY_TOUGH, Erratic_CuteSmartTough
 	end
 Erratic_CuteSmartTough:
 	if_random 125, Erratic_NoScoreIncrease
@@ -762,11 +765,11 @@ ContestEffect2_4_score3:
 	end
 
 ContestEffect2_2:
-	if_turn_eq 0, ContestEffect2_2_score1
-	if_turn_eq 1, ContestEffect2_2_score2
-	if_turn_eq 2, ContestEffect2_2_score3
-	if_turn_eq 3, ContestEffect2_2_score4
-	if_turn_eq 4, ContestEffect2_2_score5
+	if_appeal_num_eq 0, ContestEffect2_2_score1
+	if_appeal_num_eq 1, ContestEffect2_2_score2
+	if_appeal_num_eq 2, ContestEffect2_2_score3
+	if_appeal_num_eq 3, ContestEffect2_2_score4
+	if_last_appeal ContestEffect2_2_score5
 	end
 ContestEffect2_2_score1:
 	if_random 20, ContestEffectEnd2

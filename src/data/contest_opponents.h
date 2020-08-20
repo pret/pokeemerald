@@ -203,7 +203,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 3,
         .tough = 4,
         .sheen = 50,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -232,7 +231,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 1,
         .tough = 2,
         .sheen = 60,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -261,7 +259,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 12,
         .tough = 4,
         .sheen = 70,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -290,7 +287,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 2,
         .tough = 7,
         .sheen = 80,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -319,7 +315,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 5,
         .tough = 4,
         .sheen = 90,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -348,7 +343,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 7,
         .tough = 8,
         .sheen = 100,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -377,7 +371,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 2,
         .tough = 2,
         .sheen = 50,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -406,7 +399,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 10,
         .sheen = 60,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -435,7 +427,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 5,
         .tough = 18,
         .sheen = 70,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -464,7 +455,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 2,
         .tough = 7,
         .sheen = 80,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -493,7 +483,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 8,
         .tough = 1,
         .sheen = 90,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -522,7 +511,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 2,
         .sheen = 100,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -551,7 +539,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 2,
         .tough = 10,
         .sheen = 50,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -580,7 +567,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 5,
         .sheen = 60,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -609,7 +595,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 1,
         .tough = 1,
         .sheen = 70,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -638,7 +623,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 4,
         .sheen = 50,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -667,7 +651,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 4,
         .sheen = 60,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -696,7 +679,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 2,
         .tough = 3,
         .sheen = 70,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -725,7 +707,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 5,
         .tough = 10,
         .sheen = 80,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -754,7 +735,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 3,
         .tough = 10,
         .sheen = 90,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -783,7 +763,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 1,
         .tough = 5,
         .sheen = 100,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -812,7 +791,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 6,
         .tough = 2,
         .sheen = 90,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -841,7 +819,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 5,
         .tough = 3,
         .sheen = 80,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -870,7 +847,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 8,
         .tough = 10,
         .sheen = 70,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -899,7 +875,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 20,
         .sheen = 100,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -928,7 +903,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 85,
         .tough = 35,
         .sheen = 110,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -957,7 +931,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 25,
         .sheen = 120,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -986,7 +959,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 65,
         .tough = 25,
         .sheen = 130,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1015,7 +987,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 100,
         .sheen = 140,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1044,7 +1015,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 35,
         .tough = 35,
         .sheen = 150,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1073,7 +1043,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 40,
         .tough = 40,
         .sheen = 100,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1102,7 +1071,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 10,
         .tough = 25,
         .sheen = 110,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1131,7 +1099,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 30,
         .tough = 25,
         .sheen = 120,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1160,7 +1127,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 40,
         .tough = 30,
         .sheen = 130,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1189,7 +1155,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 75,
         .tough = 35,
         .sheen = 140,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1218,7 +1183,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 30,
         .tough = 25,
         .sheen = 150,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1247,7 +1211,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 25,
         .tough = 15,
         .sheen = 100,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1276,7 +1239,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 60,
         .tough = 20,
         .sheen = 110,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1305,7 +1267,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 15,
         .tough = 75,
         .sheen = 120,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1334,7 +1295,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 30,
         .tough = 20,
         .sheen = 100,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1363,7 +1323,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 20,
         .tough = 20,
         .sheen = 110,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1392,7 +1351,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 20,
         .tough = 20,
         .sheen = 120,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1421,7 +1379,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 30,
         .tough = 45,
         .sheen = 130,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1450,7 +1407,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 20,
         .tough = 45,
         .sheen = 140,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1479,7 +1435,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 20,
         .tough = 20,
         .sheen = 150,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1508,7 +1463,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 25,
         .tough = 25,
         .sheen = 140,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1537,7 +1491,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 20,
         .tough = 20,
         .sheen = 130,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1566,7 +1519,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 45,
         .tough = 20,
         .sheen = 120,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1595,7 +1547,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 100,
         .tough = 90,
         .sheen = 200,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1624,7 +1575,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 35,
         .tough = 70,
         .sheen = 210,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1653,7 +1603,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 70,
         .tough = 70,
         .sheen = 220,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1682,7 +1631,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 75,
         .tough = 40,
         .sheen = 230,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1711,7 +1659,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 70,
         .tough = 70,
         .sheen = 240,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1740,7 +1687,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 80,
         .tough = 100,
         .sheen = 250,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1769,7 +1715,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 70,
         .tough = 90,
         .sheen = 200,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1798,7 +1743,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 50,
         .tough = 65,
         .sheen = 210,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1827,7 +1771,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 60,
         .tough = 50,
         .sheen = 220,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1856,7 +1799,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 45,
         .tough = 70,
         .sheen = 230,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1885,7 +1827,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 40,
         .tough = 100,
         .sheen = 240,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1914,7 +1855,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 50,
         .tough = 30,
         .sheen = 250,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1943,7 +1883,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 50,
         .tough = 160,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -1972,7 +1911,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 70,
         .tough = 50,
         .sheen = 210,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2001,7 +1939,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 35,
         .tough = 35,
         .sheen = 220,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2030,7 +1967,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 100,
         .tough = 80,
         .sheen = 200,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2059,7 +1995,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 35,
         .tough = 100,
         .sheen = 210,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2088,7 +2023,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 50,
         .tough = 100,
         .sheen = 220,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2117,7 +2051,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 40,
         .tough = 95,
         .sheen = 230,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2146,7 +2079,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 50,
         .tough = 100,
         .sheen = 240,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2175,7 +2107,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 80,
         .tough = 80,
         .sheen = 250,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2204,7 +2135,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 40,
         .tough = 110,
         .sheen = 240,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2233,7 +2163,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 25,
         .tough = 80,
         .sheen = 230,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2262,7 +2191,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 35,
         .tough = 40,
         .sheen = 220,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2291,7 +2219,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 40,
         .tough = 160,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2320,7 +2247,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 150,
         .tough = 160,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2349,7 +2275,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 185,
         .tough = 60,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2378,7 +2303,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 110,
         .tough = 150,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2407,7 +2331,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 30,
         .tough = 90,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2436,7 +2359,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 230,
         .tough = 80,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2465,7 +2387,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 130,
         .tough = 40,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2494,7 +2415,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 150,
         .tough = 160,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2523,7 +2443,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 130,
         .tough = 170,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2552,7 +2471,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 75,
         .tough = 100,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2581,7 +2499,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 40,
         .tough = 190,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2610,7 +2527,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 240,
         .tough = 140,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2639,7 +2555,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 35,
         .tough = 50,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2668,7 +2583,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 115,
         .tough = 120,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2697,7 +2611,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 220,
         .tough = 210,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2726,7 +2639,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 80,
         .tough = 180,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2755,7 +2667,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 130,
         .tough = 130,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2784,7 +2695,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 120,
         .tough = 150,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2813,7 +2723,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 170,
         .tough = 80,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2842,7 +2751,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 150,
         .tough = 120,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2871,7 +2779,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 120,
         .tough = 80,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2900,7 +2807,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 80,
         .tough = 150,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2929,7 +2835,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 110,
         .tough = 170,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     },
@@ -2958,7 +2863,6 @@ const struct ContestPokemon gContestOpponents[] =
         .smart = 80,
         .tough = 190,
         .sheen = 255,
-        .unk2C = {0},
         .personality = 0,
         .otId = 0xFFFF
     }

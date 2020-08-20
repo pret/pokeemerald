@@ -1267,7 +1267,7 @@ static void Chat_Exit(void)
     case 5:
         if (IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1302,7 +1302,7 @@ static void Chat_Drop(void)
     case 1:
         if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1348,7 +1348,7 @@ static void Chat_Disbanded(void)
     case 2:
         if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }

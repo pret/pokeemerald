@@ -192,7 +192,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
         }
         break;
     case 4:
-        sub_800ABF4(0);
+        SetCloseLinkCallbackAndType(0);
         *arg0 = 5;
         break;
     case 5:
@@ -403,7 +403,7 @@ static void sub_81D5084(u8 taskId)
         break;
     case 15:
         data->unkE = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
-        sub_800ABF4(data->unkE);
+        SetCloseLinkCallbackAndType(data->unkE);
         data->unk8 = 16;
         break;
     case 16:
