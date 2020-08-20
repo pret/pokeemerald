@@ -1774,7 +1774,7 @@ static int GetNumOwnedBadges(void)
 static bool32 sub_8196D74(int matchCallId)
 {
     int dayCount;
-    int otId;
+    u32 otId;
     u16 easyChatWord;
     int numRematchTrainersFought;
     int var0, var1, var2;
