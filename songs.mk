@@ -831,10 +831,10 @@ $(MID_SUBDIR)/se_contest_icon_clear.s: %.s: %.mid
 $(MID_SUBDIR)/se_card.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
 
-$(MID_SUBDIR)/se_pike_curtain_open.s: %.s: %.mid
+$(MID_SUBDIR)/se_pike_curtain_close.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
 
-$(MID_SUBDIR)/se_pike_curtain_close.s: %.s: %.mid
+$(MID_SUBDIR)/se_pike_curtain_open.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
 
 $(MID_SUBDIR)/se_ledge.s: %.s: %.mid

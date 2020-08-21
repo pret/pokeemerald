@@ -111,7 +111,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter:: @ 825D2FB
 	applymovement OBJ_EVENT_ID_CAMERA, BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanUp
 	applymovement LOCALID_OBJ_1, BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCExitForLucy
 	waitmovement 0
-	playse SE_PIKE_CURTAIN_OPEN
+	playse SE_PIKE_CURTAIN_CLOSE
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesLittleClosed
 	delay 4
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed
@@ -120,7 +120,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter:: @ 825D2FB
 	delay 4
 	waitse
 	delay 60
-	playse SE_PIKE_CURTAIN_CLOSE
+	playse SE_PIKE_CURTAIN_OPEN
 	delay 65
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed
 	showobjectat LOCALID_OBJ_0, MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL

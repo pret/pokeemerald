@@ -273,8 +273,8 @@
 #define SE_POKENAV_HANG_UP          264 // SE_TOREOFF
 #define SE_ARENA_TIMEUP1            265 // SE_HANTEI1
 #define SE_ARENA_TIMEUP2            266 // SE_HANTEI2
-#define SE_PIKE_CURTAIN_OPEN        267 // SE_CURTAIN
-#define SE_PIKE_CURTAIN_CLOSE       268 // SE_CURTAIN1
+#define SE_PIKE_CURTAIN_CLOSE       267 // SE_CURTAIN
+#define SE_PIKE_CURTAIN_OPEN        268 // SE_CURTAIN1
 #define SE_SUDOWOODO_SHAKE          269 // SE_USSOKI
 
 // Music
