@@ -1463,10 +1463,10 @@ void SetUpTrainerEncounterMusic(void)
             music = MUS_ENCOUNTER_GIRL;
             break;
         case TRAINER_ENCOUNTER_MUSIC_INTENSE:
-            music = MUS_ENCOUNTER_PSYCHIC;
+            music = MUS_ENCOUNTER_INTENSE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_COOL:
-            music = MUS_ENCOUNTER_COOLTRAINER;
+            music = MUS_ENCOUNTER_COOL;
             break;
         case TRAINER_ENCOUNTER_MUSIC_AQUA:
             music = MUS_ENCOUNTER_AQUA;
@@ -1490,10 +1490,10 @@ void SetUpTrainerEncounterMusic(void)
             music = MUS_ENCOUNTER_INTERVIEWER;
             break;
         case TRAINER_ENCOUNTER_MUSIC_RICH:
-            music = MUS_ENCOUNTER_GENTLEMAN;
+            music = MUS_ENCOUNTER_RICH;
             break;
         default:
-            music = MUS_ENCOUNTER_HEX_MANIAC;
+            music = MUS_ENCOUNTER_SUSPICIOUS;
         }
         PlayNewMapMusic(music);
     }

@@ -12,7 +12,7 @@ $(MID_SUBDIR)/mus_encounter_aqua.s: %.s: %.mid
 $(MID_SUBDIR)/mus_route111.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G055 -V076
 
-$(MID_SUBDIR)/mus_encounter_hex_maniac.s: %.s: %.mid
+$(MID_SUBDIR)/mus_encounter_suspicious.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G069 -V078
 
 $(MID_SUBDIR)/mus_b_arena.s: %.s: %.mid
@@ -186,7 +186,7 @@ $(MID_SUBDIR)/mus_rustboro.s: %.s: %.mid
 $(MID_SUBDIR)/mus_route119.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G048 -V096
 
-$(MID_SUBDIR)/mus_encounter_psychic.s: %.s: %.mid
+$(MID_SUBDIR)/mus_encounter_intense.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G062 -V078
 
 $(MID_SUBDIR)/mus_weather_groudon.s: %.s: %.mid
@@ -219,7 +219,7 @@ $(MID_SUBDIR)/mus_victory_league.s: %.s: %.mid
 $(MID_SUBDIR)/mus_caught.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G025 -V080
 
-$(MID_SUBDIR)/mus_encounter_cooltrainer.s: %.s: %.mid
+$(MID_SUBDIR)/mus_encounter_cool.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G063 -V086
 
 $(MID_SUBDIR)/mus_trick_house.s: %.s: %.mid
@@ -588,7 +588,7 @@ $(MID_SUBDIR)/mus_encounter_girl.s: %.s: %.mid
 $(MID_SUBDIR)/mus_intro_battle.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G088 -V088
 
-$(MID_SUBDIR)/mus_encounter_gentleman.s: %.s: %.mid
+$(MID_SUBDIR)/mus_encounter_rich.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G043 -V094
 
 $(MID_SUBDIR)/mus_link_contest_p1.s: %.s: %.mid

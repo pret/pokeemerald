@@ -1014,7 +1014,7 @@ SECTIONS {
         sound/songs/midi/mus_link_contest_p2.o(.rodata);
         sound/songs/midi/mus_link_contest_p3.o(.rodata);
         sound/songs/midi/mus_link_contest_p4.o(.rodata);
-        sound/songs/midi/mus_encounter_gentleman.o(.rodata);
+        sound/songs/midi/mus_encounter_rich.o(.rodata);
         sound/songs/midi/mus_verdanturf.o(.rodata);
         sound/songs/midi/mus_rustboro.o(.rodata);
         sound/songs/midi/mus_poke_center.o(.rodata);
@@ -1033,14 +1033,14 @@ SECTIONS {
         sound/songs/midi/mus_title.o(.rodata);
         sound/songs/midi/mus_intro.o(.rodata);
         sound/songs/midi/mus_encounter_may.o(.rodata);
-        sound/songs/midi/mus_encounter_psychic.o(.rodata);
-        sound/songs/midi/mus_encounter_cooltrainer.o(.rodata);
+        sound/songs/midi/mus_encounter_intense.o(.rodata);
+        sound/songs/midi/mus_encounter_cool.o(.rodata);
         sound/songs/midi/mus_route113.o(.rodata);
         sound/songs/midi/mus_encounter_aqua.o(.rodata);
         sound/songs/midi/mus_follow_me.o(.rodata);
         sound/songs/midi/mus_encounter_brendan.o(.rodata);
         sound/songs/midi/mus_ever_grande.o(.rodata);
-        sound/songs/midi/mus_encounter_hex_maniac.o(.rodata);
+        sound/songs/midi/mus_encounter_suspicious.o(.rodata);
         sound/songs/midi/mus_victory_aqua_magma.o(.rodata);
         sound/songs/midi/mus_cable_car.o(.rodata);
         sound/songs/midi/mus_game_corner.o(.rodata);

@@ -398,7 +398,7 @@ gSongTable:: @ 86B49F0
 	song mus_link_contest_p2, 0, 0
 	song mus_link_contest_p3, 0, 0
 	song mus_link_contest_p4, 0, 0
-	song mus_encounter_gentleman, 0, 0
+	song mus_encounter_rich, 0, 0
 	song mus_verdanturf, 0, 0
 	song mus_rustboro, 0, 0
 	song mus_poke_center, 0, 0
@@ -417,14 +417,14 @@ gSongTable:: @ 86B49F0
 	song mus_title, 0, 0
 	song mus_intro, 0, 0
 	song mus_encounter_may, 0, 0
-	song mus_encounter_psychic, 0, 0
-	song mus_encounter_cooltrainer, 0, 0
+	song mus_encounter_intense, 0, 0
+	song mus_encounter_cool, 0, 0
 	song mus_route113, 0, 0
 	song mus_encounter_aqua, 0, 0
 	song mus_follow_me, 0, 0
 	song mus_encounter_brendan, 0, 0
 	song mus_ever_grande, 0, 0
-	song mus_encounter_hex_maniac, 0, 0
+	song mus_encounter_suspicious, 0, 0
 	song mus_victory_aqua_magma, 0, 0
 	song mus_cable_car, 0, 0
 	song mus_game_corner, 0, 0
