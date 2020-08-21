@@ -3974,7 +3974,9 @@ static bool8 Phase2_FrontierLogoWave_Func4(struct Task *task)
     for (i = 0; i < 160; i++, var6 += var8)
     {
         s16 index = var6 / 256;
-        asm("");
+        #ifndef NONMATCHING
+            asm("");
+        #endif
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(index, amplitude);
     }
 

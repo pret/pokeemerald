@@ -475,15 +475,15 @@ u8 GetLastTextColor(u8 colorType)
                                                                                                                     \
     for (; i < toY; i++)                                                                                            \
     {                                                                                                               \
-        asm("":::"sl");                                                                                             \
+        asm("":::"sl"); /* NONMATCHING */                                                                           \
         r5 = *(ptr++);                                                                                              \
         for (j = fromX; j < toX; j++)                                                                               \
         {                                                                                                           \
             const u32 toOrr = r5 & 0xF;                                                                             \
             if (toOrr)                                                                                              \
             {                                                                                                       \
-                dst = windowTiles + ((j / 8) * 32) + ((j & 7) >> 1) + ((i / 8) * widthOffset) + ((i & 7) * 4);    \
-                bits = ((j & 1) * 4);                                                                              \
+                dst = windowTiles + ((j / 8) * 32) + ((j & 7) >> 1) + ((i / 8) * widthOffset) + ((i & 7) * 4);      \
+                bits = ((j & 1) * 4);                                                                               \
                 *dst = (toOrr << bits) | ((0xF0 >> bits) & *dst);                                                   \
             }                                                                                                       \
             r5 >>= 4;                                                                                               \

@@ -1466,7 +1466,9 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].facilityClass];
-            asm("");
+            #ifndef NONMATCHING
+                asm("");
+            #endif
         }
     }
     else
@@ -1478,7 +1480,9 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass];
-            asm("");
+            #ifndef NONMATCHING
+                asm("");
+            #endif
         }
     }
 
