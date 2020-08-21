@@ -90,7 +90,7 @@ struct ContestPokemon
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
     u8 trainerGfxId;
-    u32 aiChecks;
+    u32 aiFlags;
     u8 whichRank:2;
     u8 aiPool_Cool:1;
     u8 aiPool_Beauty:1;
@@ -201,7 +201,7 @@ struct ContestantStatus
     bool8 repeatedMove:1;
     bool8 unused2:1;
     bool8 repeatedPrevMove:1; // never read
-    bool8 unk15_3:1;
+    bool8 completedComboFlag:1;
     bool8 hasJudgesAttention:1;
     bool8 judgesAttentionWasRemoved:1;
     bool8 usedComboMove:1;
@@ -231,10 +231,10 @@ struct ContestAIInfo
     /*0x05*/ u8 moveScores[MAX_MON_MOVES];
     /*0x09*/ u8 aiAction;
     /*0x0A*/ u8 filler[6];
-    /*0x10*/ u8 currentAICheck;
-    /*0x14*/ u32 aiChecks;
+    /*0x10*/ u8 currentAIFlag;
+    /*0x14*/ u32 aiFlags;
     /*0x18*/ s16 scriptResult;
-    /*0x1A*/ s16 scriptArr[3];
+    /*0x1A*/ s16 vars[3];
     /*0x20*/ const u8 *stack[8];
     /*0x40*/ u8 stackSize;
     /*0x41*/ u8 contestantId;
