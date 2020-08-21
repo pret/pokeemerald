@@ -3490,7 +3490,7 @@ static bool8 ContestantCanUseTurn(u8 contestant)
         return TRUE;
 }
 
-static void ResetContestantStatuses(void)
+static void SetContestantStatusesForNextRound(void)
 {
     s32 i;
 
@@ -4483,7 +4483,7 @@ static void CalculateAppealMoveImpact(u8 contestant)
             eContestantStatus[contestant].usedComboMove = TRUE;
             eContestantStatus[contestant].hasJudgesAttention = FALSE;
             eContestantStatus[contestant].comboAppealBonus = eContestantStatus[contestant].baseAppeal * eContestantStatus[contestant].completedCombo;
-            eContestantStatus[contestant].unk15_3 = TRUE;
+            eContestantStatus[contestant].completedComboFlag = TRUE; // Redundant with completedCombo, used by AI
         }
         else
         {
@@ -5172,7 +5172,7 @@ static void Task_ResetForNextRound(u8 taskId)
 
             eContest.waitForLink = TRUE;
             if (IsPlayerLinkLeader())
-                ResetContestantStatuses();
+                SetContestantStatusesForNextRound();
             taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
             SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
             ContestPrintLinkStandby();
@@ -5180,7 +5180,7 @@ static void Task_ResetForNextRound(u8 taskId)
         }
         else
         {
-            ResetContestantStatuses();
+            SetContestantStatusesForNextRound();
             gTasks[taskId].data[0] = 3;
         }
         break;

@@ -159,29 +159,29 @@ AI_contest09_081DC2AB:
 	end
 AI_contest0F_1_081DC2AB:
 	if_user_order_not_eq MON_1, AI_contest7D_1_081DC2AB
-	if_random 51, AI_end_081DC2AB
+	if_random_less_than 51, AI_end_081DC2AB
 	score +20
 	end
 AI_contest7D_1_081DC2AB:
-	if_random 127, AI_end_081DC2AB
+	if_random_less_than 127, AI_end_081DC2AB
 	score -10
 	end
 AI_contest0F_2_081DC2AB:
 	if_user_order_not_eq MON_1, AI_contest7D_3_081DC2AB
 	if_last_appeal AI_score_081DC2AB
 AI_contest7D_2_081DC2AB:
-	if_random 51, AI_end_081DC2AB
+	if_random_less_than 51, AI_end_081DC2AB
 	score +10
 	end
 AI_score_081DC2AB:
 	score +15
 	end
 AI_contest7D_3_081DC2AB:
-	if_random 127, AI_end_081DC2AB
+	if_random_less_than 127, AI_end_081DC2AB
 	score +10
 	end
 AI_contest7D_4_081DC2AB:
-	if_random 127, AI_end_081DC2AB
+	if_random_less_than 127, AI_end_081DC2AB
 	score +10
 	end
 AI_contest3D_081DC2AB:
@@ -191,7 +191,7 @@ AI_contest3D_081DC2AB:
 	score +30
 	end
 AI_contest7D_5_081DC2AB:
-	if_random 100, AI_end_081DC2AB
+	if_random_less_than 100, AI_end_081DC2AB
 	score +10
 	end
 AI_contest29_081DC2AB:
@@ -225,17 +225,17 @@ AI_score_081DC348:
 	end
 AI_contest04_1_081DC348:
 	if_last_appeal AI_contest7D_081DC348
-	if_random 150, AI_end_081DC348
+	if_random_less_than 150, AI_end_081DC348
 	score +10
 	end
 AI_contest04_2_081DC348:
 	if_last_appeal AI_contest7D_081DC348
-	if_random 125, AI_end_081DC348
+	if_random_less_than 125, AI_end_081DC348
 	score +10
 	end
 AI_contest04_3_081DC348:
 	if_last_appeal AI_contest7D_081DC348
-	if_random 50, AI_end_081DC348
+	if_random_less_than 50, AI_end_081DC348
 	score +10
 	end
 AI_contest04_4_081DC348:
@@ -243,7 +243,7 @@ AI_contest04_4_081DC348:
 	score +10
 	end
 AI_contest7D_081DC348:
-	if_random 125, AI_end_081DC348
+	if_random_less_than 125, AI_end_081DC348
 	score -15
 	end
 AI_end_081DC348:
@@ -276,11 +276,11 @@ ContestEffect39_score1:
 	score +20
 	end
 ContestEffect39_score2:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +15
 	end
 ContestEffect39_score3:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +5
 	end
 ContestEffect39_score4:
@@ -289,27 +289,27 @@ ContestEffect39_score4:
 
 ContestEffect40:
 	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_IF_FIRST, ContestEffectEnd
-	if_random 50, ContestEffectEnd
+	if_random_less_than 50, ContestEffectEnd
 	score +20
 	end
 
 ContestEffect41:
 	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_IF_LAST, ContestEffectEnd
-	if_random 50, ContestEffectEnd
+	if_random_less_than 50, ContestEffectEnd
 	score +20
 	end
 
 ContestEffect3:
 	if_user_order_not_eq MON_4, ContestEffectEnd
-	if_random 50, ContestEffectEnd
+	if_random_less_than 50, ContestEffectEnd
 	score +15
 	end
 	if_last_appeal ContestEffect3_7D
-	if_random 220, ContestEffect3_score
+	if_random_less_than 220, ContestEffect3_score
 	score +10
 	end
 ContestEffect3_7D:
-	if_random 20, ContestEffectEnd
+	if_random_less_than 20, ContestEffectEnd
 	score +15
 	end
 ContestEffect3_score:
@@ -319,7 +319,7 @@ ContestEffect3_score:
 ContestEffect38:
 	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION, ContestEffect38_contest04
 	if_user_condition_eq 3, ContestEffect38_score1
-	if_random 50, ContestEffectEnd
+	if_random_less_than 50, ContestEffectEnd
 	score +15
 	end
 ContestEffect38_score1:
@@ -329,11 +329,11 @@ ContestEffect38_contest04:
 	if_last_appeal ContestEffect38_score2
 	if_appeal_num_eq 0, ContestEffect38_random
 	if_move_used_count_eq 1, ContestEffectEnd
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +10
 	end
 ContestEffect38_random:
-	if_random 100, ContestEffectEnd
+	if_random_less_than 100, ContestEffectEnd
 	score +10
 	end
 ContestEffect38_score2:
@@ -350,7 +350,7 @@ ContestEffect47:
 	score +10
 	end
 ContestEffect47_random:
-	if_random 127, ContestEffectEnd
+	if_random_less_than 127, ContestEffectEnd
 	score +10
 	end
 
@@ -385,7 +385,7 @@ ContestEffect32_score2:
 ContestEffect32_score3:
 	if_cannot_participate MON_1, ContestEffect32_score4
 	score +5
-	jump ContestEffect32_score4
+	goto ContestEffect32_score4
 	end
 ContestEffect32_score4:
 	if_cannot_participate MON_2, ContestEffectEnd
@@ -394,12 +394,12 @@ ContestEffect32_score4:
 ContestEffect32_score5:
 	if_cannot_participate MON_1, ContestEffect32_score6
 	score +5
-	jump ContestEffect32_score6
+	goto ContestEffect32_score6
 	end
 ContestEffect32_score6:
 	if_cannot_participate MON_2, ContestEffect32_score7
 	score +5
-	jump ContestEffect32_score7
+	goto ContestEffect32_score7
 	end
 ContestEffect32_score7:
 	if_cannot_participate MON_3, ContestEffectEnd
@@ -416,25 +416,25 @@ ContestEffect46_05:
 	if_excitement_eq 3, ContestEffect46_score3
 	end
 ContestEffect46_score1:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score -15
 	end
 ContestEffect46_score2:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +20
 	end
 ContestEffect46_score3:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +15
 	end
 ContestEffect46_score4:
-	if_random 178, ContestEffectEnd
+	if_random_less_than 178, ContestEffectEnd
 	score +10
 	end
 
 ContestEffect27:
 	if_user_order_eq MON_1, ContestEffectEnd
-	jump ContestEffect27_55_1
+	goto ContestEffect27_55_1
 	end
 ContestEffect27_55_1:
 	if_cannot_participate MON_1, ContestEffect27_noscore
@@ -444,17 +444,17 @@ ContestEffect27_55_1:
 	if_condition_eq MON_1, 3, ContestEffect27_score3
 	end
 ContestEffect27_score1:
-	if_random 125, ContestEffect27_55_2
+	if_random_less_than 125, ContestEffect27_55_2
 	score +5
 	if_user_order_more_than MON_2, ContestEffect27_55_2
 	end
 ContestEffect27_score2:
-	if_random 125, ContestEffect27_55_2
+	if_random_less_than 125, ContestEffect27_55_2
 	score +10
 	if_user_order_more_than MON_2, ContestEffect27_55_2
 	end
 ContestEffect27_score3:
-	if_random 125, ContestEffect27_55_2
+	if_random_less_than 125, ContestEffect27_55_2
 	score +15
 	if_user_order_more_than MON_2, ContestEffect27_55_2
 	end
@@ -469,17 +469,17 @@ ContestEffect27_55_2:
 	if_condition_eq MON_2, 3, ContestEffect27_score6
 	end
 ContestEffect27_score4:
-	if_random 125, ContestEffect27_55_3
+	if_random_less_than 125, ContestEffect27_55_3
 	score +5
 	if_user_order_more_than MON_3, ContestEffect27_55_3
 	end
 ContestEffect27_score5:
-	if_random 125, ContestEffect27_55_3
+	if_random_less_than 125, ContestEffect27_55_3
 	score +10
 	if_user_order_more_than MON_3, ContestEffect27_55_3
 	end
 ContestEffect27_score6:
-	if_random 125, ContestEffect27_55_3
+	if_random_less_than 125, ContestEffect27_55_3
 	score +15
 	if_user_order_more_than MON_3, ContestEffect27_55_3
 	end
@@ -494,15 +494,15 @@ ContestEffect27_55_3:
 	if_condition_eq MON_3, 3, ContestEffect27_score9
 	end
 ContestEffect27_score7:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +5
 	end
 ContestEffect27_score8:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +10
 	end
 ContestEffect27_score9:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +15
 	end
 ContestEffect27_end:
@@ -510,44 +510,44 @@ ContestEffect27_end:
 
 ContestEffect16or17:
 	if_user_order_eq MON_1, ContestEffectEnd
-	jump ContestEffect16or17_55
+	goto ContestEffect16or17_55
 	end
 ContestEffect16or17_55:
 	if_cannot_participate MON_1, ContestEffect16or17_0E_1
 	if_used_combo_starter_eq MON_1, TRUE, ContestEffect16or17_0E_1
-	if_random 125, ContestEffect16or17_0E_1
+	if_random_less_than 125, ContestEffect16or17_0E_1
 	score +2
-	contest_58 MON_1, ContestEffect16or17_0E_1
+	if_not_completed_combo MON_1, ContestEffect16or17_0E_1
 	score +8
 	end
 ContestEffect16or17_0E_1:
 	if_user_order_eq MON_2, ContestEffectEnd
 	if_cannot_participate MON_2, ContestEffect16or17_0E_2
 	if_used_combo_starter_eq MON_2, TRUE, ContestEffect16or17_0E_2
-	if_random 125, ContestEffect16or17_0E_2
+	if_random_less_than 125, ContestEffect16or17_0E_2
 	score +2
-	contest_58 MON_2, ContestEffect16or17_0E_2
+	if_not_completed_combo MON_2, ContestEffect16or17_0E_2
 	score +8
 	end
 ContestEffect16or17_0E_2:
 	if_user_order_eq MON_3, ContestEffectEnd
 	if_cannot_participate MON_3, ContestEffectEnd
 	if_used_combo_starter_eq MON_3, TRUE, ContestEffectEnd
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +2
-	contest_58 MON_3, ContestEffectEnd
+	if_not_completed_combo MON_3, ContestEffectEnd
 	score +8
 	end
 
 ContestEffect_FollowingMonsNervous:
 	if_user_order_eq MON_4, ContestEffectEnd
-	jump ContestEffect_FollowingMonsNervous_CheckMon4
+	goto ContestEffect_FollowingMonsNervous_CheckMon4
 	end
 ContestEffect_FollowingMonsNervous_CheckMon4:
 	if_cannot_participate MON_4, ContestEffect_FollowingMonsNervous_CheckMon3
 	if_used_combo_starter_eq MON_4, FALSE, ContestEffect_FollowingMonsNervous_CheckMon3
 	score +5
-	if_random 125, ContestEffect16or17_0E_1
+	if_random_less_than 125, ContestEffect16or17_0E_1
 	score +5
 	end
 ContestEffect_FollowingMonsNervous_CheckMon3:
@@ -555,7 +555,7 @@ ContestEffect_FollowingMonsNervous_CheckMon3:
 	if_cannot_participate MON_3, ContestEffect_FollowingMonsNervous_CheckMon2
 	if_used_combo_starter_eq MON_3, FALSE, ContestEffect_FollowingMonsNervous_CheckMon2
 	score +5
-	if_random 125, ContestEffect16or17_0E_2
+	if_random_less_than 125, ContestEffect16or17_0E_2
 	score +5
 	end
 ContestEffect_FollowingMonsNervous_CheckMon2:
@@ -563,17 +563,17 @@ ContestEffect_FollowingMonsNervous_CheckMon2:
 	if_cannot_participate MON_2, ContestEffectEnd
 	if_used_combo_starter_eq MON_2, FALSE, ContestEffectEnd
 	score +5
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +5
 	end
 
 ContestEffect18:
 	if_last_appeal ContestEffect18_score1
-	jump ContestEffect18_0E
+	goto ContestEffect18_0E
 	end
 ContestEffect18_score1:
 	score +5
-	jump ContestEffect18_0E
+	goto ContestEffect18_0E
 	end
 ContestEffect18_0E:
 	if_user_order_eq MON_1, ContestEffect18_score2
@@ -585,15 +585,15 @@ ContestEffect18_score2:
 	score -15
 	end
 ContestEffect18_random1:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score -10
 	end
 ContestEffect18_random2:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +5
 	end
 ContestEffect18_random3:
-	if_random 125, ContestEffectEnd
+	if_random_less_than 125, ContestEffectEnd
 	score +15
 	end
 
@@ -607,7 +607,7 @@ AI_Erratic:
 	if_contest_type_eq CONTEST_CATEGORY_TOUGH, Erratic_CuteSmartTough
 	end
 Erratic_CuteSmartTough:
-	if_random 125, Erratic_NoScoreIncrease
+	if_random_less_than 125, Erratic_NoScoreIncrease
 	score +10
 	end
 Erratic_NoScoreIncrease:
@@ -772,23 +772,23 @@ ContestEffect2_2:
 	if_last_appeal ContestEffect2_2_score5
 	end
 ContestEffect2_2_score1:
-	if_random 20, ContestEffectEnd2
+	if_random_less_than 20, ContestEffectEnd2
 	score -15
 	end
 ContestEffect2_2_score2:
-	if_random 40, ContestEffectEnd2
+	if_random_less_than 40, ContestEffectEnd2
 	score -15
 	end
 ContestEffect2_2_score3:
-	if_random 60, ContestEffectEnd2
+	if_random_less_than 60, ContestEffectEnd2
 	score -15
 	end
 ContestEffect2_2_score4:
-	if_random 80, ContestEffectEnd2
+	if_random_less_than 80, ContestEffectEnd2
 	score -15
 	end
 ContestEffect2_2_score5:
-	if_random 20, ContestEffectEnd2
+	if_random_less_than 20, ContestEffectEnd2
 	score +20
 	end
 
@@ -813,7 +813,7 @@ AI_score2_081DCA4C:
 	score -15
 	end
 AI_random1_081DCA4C:
-	if_random 100, ContestEffectEnd2
+	if_random_less_than 100, ContestEffectEnd2
 	score +10
 	end
 AI_effectcheck2_081DCA4C:
@@ -824,7 +824,7 @@ AI_score3_081DCA4C:
 	score -5
 	end
 AI_random2_081DCA4C:
-	if_random 125, ContestEffectEnd2
+	if_random_less_than 125, ContestEffectEnd2
 	score +10
 	end
 AI_effectcheck3_081DCA4C:
@@ -851,7 +851,7 @@ AI_score6_081DCA4C:
 	score -10
 	end
 AI_random3_081DCA4C:
-	if_random 125, ContestEffectEnd2
+	if_random_less_than 125, ContestEffectEnd2
 	score +10
 	end
 AI_score7_081DCA4C:

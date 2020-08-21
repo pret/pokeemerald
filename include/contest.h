@@ -201,7 +201,7 @@ struct ContestantStatus
     bool8 repeatedMove:1;
     bool8 unused2:1;
     bool8 repeatedPrevMove:1; // never read
-    bool8 unk15_3:1;
+    bool8 completedComboFlag:1;
     bool8 hasJudgesAttention:1;
     bool8 judgesAttentionWasRemoved:1;
     bool8 usedComboMove:1;
@@ -234,7 +234,7 @@ struct ContestAIInfo
     /*0x10*/ u8 currentAICheck;
     /*0x14*/ u32 aiChecks;
     /*0x18*/ s16 scriptResult;
-    /*0x1A*/ s16 scriptArr[3];
+    /*0x1A*/ s16 vars[3];
     /*0x20*/ const u8 *stack[8];
     /*0x40*/ u8 stackSize;
     /*0x41*/ u8 contestantId;
