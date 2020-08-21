@@ -7,7 +7,7 @@
 #include "constants/moves.h"
 
 extern const u8 *gAIScriptPtr;
-extern const u8 *gContestAIChecks[];
+extern const u8 *gContestAI_ScriptsTable[];
 
 static void ContestAICmd_score(void);
 static void ContestAICmd_get_appeal_num(void);
@@ -144,7 +144,7 @@ static void ContestAICmd_if_user_has_exciting_move(void);
 static void ContestAICmd_if_user_doesnt_have_exciting_move(void);
 static void ContestAICmd_check_user_has_move(void);
 static void ContestAICmd_if_user_has_move(void);
-static void ContestAICmd_if_effect_in_user_moveset(void);
+static void ContestAICmd_if_user_doesnt_have_move(void);
 
 typedef void (* ContestAICmdFunc)(void);
 
@@ -285,7 +285,7 @@ static const ContestAICmdFunc sContestAICmdTable[] =
     ContestAICmd_if_user_doesnt_have_exciting_move,   // 0x84
     ContestAICmd_check_user_has_move,                 // 0x85
     ContestAICmd_if_user_has_move,                    // 0x86
-    ContestAICmd_if_effect_in_user_moveset,           // 0x87
+    ContestAICmd_if_user_doesnt_have_move,            // 0x87
 };
 
 static void ContestAI_DoAIProcessing(void);
@@ -303,20 +303,20 @@ void ContestAI_ResetAI(u8 contestantAI)
 
     eContestAI.contestantId = contestantAI;
     eContestAI.stackSize = 0;
-    eContestAI.aiChecks = gContestMons[eContestAI.contestantId].aiChecks;
+    eContestAI.aiFlags = gContestMons[eContestAI.contestantId].aiFlags;
 }
 
 u8 ContestAI_GetActionToUse(void)
 {
-    while (eContestAI.aiChecks != 0)
+    while (eContestAI.aiFlags != 0)
     {
-        if (eContestAI.aiChecks & 1)
+        if (eContestAI.aiFlags & 1)
         {
             eContestAI.aiState = CONTESTAI_SETTING_UP;
             ContestAI_DoAIProcessing();
         }
-        eContestAI.aiChecks >>= 1;
-        eContestAI.currentAICheck++;
+        eContestAI.aiFlags >>= 1;
+        eContestAI.currentAIFlag++;
         eContestAI.nextMoveIndex = 0;
     }
 
@@ -346,7 +346,7 @@ static void ContestAI_DoAIProcessing(void)
             case CONTESTAI_DO_NOT_PROCESS:
                 break;
             case CONTESTAI_SETTING_UP:
-                gAIScriptPtr = gContestAIChecks[eContestAI.currentAICheck];
+                gAIScriptPtr = gContestAI_ScriptsTable[eContestAI.currentAIFlag];
 
                 if (gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex] == MOVE_NONE)
                     eContestAI.nextMove = MOVE_NONE; // don't process a move that doesn't exist.
@@ -1627,7 +1627,8 @@ static void ContestAICmd_if_not_eq_var(void)
 }
 
 // UB: Should just be comparing to gAIScriptPtr[1] in the functions below
-// With the values passed to if_random_less_than this goes way OOB on vars
+// The values passed via gAIScriptPtr[1] range from 0-255
+// and vars is an s16[3], so this goes way out of bounds
 static void ContestAICmd_if_random_less_than(void)
 {
 #ifndef UBFIX
@@ -1729,6 +1730,12 @@ static void ContestAICmd_if_user_doesnt_have_exciting_move(void)
         gAIScriptPtr += 4;
 }
 
+// BUG: This is checking if the user has a specific move, but when it's used in the AI script
+//      they're checking for an effect. Checking for a specific effect would make more sense,
+//      but given that effects are normally read as a single byte and this reads 2 bytes, it 
+//      seems reading a move was intended and the AI script is using it incorrectly.
+//      In any case, to fix it to correctly check for effects replace the u16 move assignment with
+//      u16 move = gContestMoves[gContestMons[eContestAI.contestantId].moves[i]].effect;
 static void ContestAICmd_check_user_has_move(void)
 {
     int hasMove = FALSE;
@@ -1759,7 +1766,7 @@ static void ContestAICmd_if_user_has_move(void)
         gAIScriptPtr += 4;
 }
 
-static void ContestAICmd_if_effect_in_user_moveset(void)
+static void ContestAICmd_if_user_doesnt_have_move(void)
 {
     ContestAICmd_check_user_has_move();
 

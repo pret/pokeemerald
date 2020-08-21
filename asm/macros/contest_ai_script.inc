@@ -510,6 +510,14 @@
 	.4byte \destination
 	.endm
 
+	.macro if_used_combo_starter mon:req, destination:req
+	if_used_combo_starter_eq \mon, TRUE, \destination
+	.endm
+
+	.macro if_not_used_combo_starter mon:req, destination:req
+	if_used_combo_starter_eq \mon, FALSE, \destination
+	.endm
+
 @ whether the mon can make an appeal
 
 	.macro check_can_participate mon:req
@@ -803,7 +811,7 @@
 	.4byte \destination
 	.endm
 
-	@ NOTE: Random is broken (see ContestAICmd_if_random_less_than)
+	@ NOTE: The random commands are broken (see ContestAICmd_if_random_less_than)
 	.macro if_random_less_than num:req, destination:req
 	.byte 0x7D
 	.byte \num
@@ -844,6 +852,7 @@
 	.4byte \destination
 	.endm
 
+	@ This is used incorrectly to check for an effect; see ContestAICmd_check_user_has_move
 	.macro check_user_has_move move:req
 	.byte 0x85
 	.2byte \move
@@ -855,8 +864,8 @@
 	.4byte \destination
 	.endm
 
-	.macro if_effect_in_user_moveset effect:req, destination:req
+	.macro if_user_doesnt_have_move move:req, destination:req
 	.byte 0x87
-	.2byte \effect
+	.2byte \move
 	.4byte \destination
 	.endm
