@@ -48,15 +48,24 @@
 #define EXTRACT_LINK_ERRORS(status) \
 (((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
 
+#define LINKCMD_0x1111                0x1111
 #define LINKCMD_SEND_LINK_TYPE        0x2222
+#define LINKCMD_BLENDER_SCORE_MISS    0x2345
+#define LINKCMD_0x2F00                0x2F00
 #define LINKCMD_READY_EXIT_STANDBY    0x2FFE
+#define LINKCMD_0x2FFF                0x2FFF
+#define LINKCMD_0x4400                0x4400
 #define LINKCMD_SEND_HELD_KEYS        0x4444
+#define LINKCMD_BLENDER_SCORE_BEST    0x4523
+#define LINKCMD_BLENDER_SCORE_GOOD    0x5432
 #define LINKCMD_0x5555                0x5555
 #define LINKCMD_0x5566                0x5566
 #define LINKCMD_READY_CLOSE_LINK      0x5FFF
 #define LINKCMD_0x6666                0x6666
 #define LINKCMD_0x7777                0x7777
+#define LINKCMD_0x7779                0x7779
 #define LINKCMD_CONT_BLOCK            0x8888
+#define LINKCMD_0x9999                0x9999
 #define LINKCMD_0xAAAA                0xAAAA
 #define LINKCMD_0xAAAB                0xAAAB
 #define LINKCMD_READY_TO_TRADE        0xAABB
