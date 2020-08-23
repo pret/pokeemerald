@@ -34,8 +34,8 @@ struct BgConfig2
     u32 unk_3:18;
 
     void* tilemap;
-    s32 bg_x;
-    s32 bg_y;
+    u32 bg_x;
+    u32 bg_y;
 };
 
 static struct BgControl sGpuBgConfigs;
