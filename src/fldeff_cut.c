@@ -241,7 +241,7 @@ bool8 SetUpFieldMove_Cut(void)
                 {
                     if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
                     {
-                        const u8 tileArrayId = ((sHyperCutStruct[i].y * 5) + 12) + (sHyperCutStruct[i].x);
+                        u8 tileArrayId = ((sHyperCutStruct[i].y * 5) + 12) + (sHyperCutStruct[i].x);
                         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                         if (MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
                         || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
