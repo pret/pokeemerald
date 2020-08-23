@@ -2157,7 +2157,7 @@ static void Cb2_EnterPSS(u8 boxOption)
 {
     ResetTasks();
     sCurrentBoxOption = boxOption;
-    sPSSData = Alloc(sizeof(*sPSSData));
+    sPSSData = Alloc(sizeof(struct PokemonStorageSystemData));
     if (sPSSData == NULL)
     {
         SetMainCallback2(Cb2_ExitPSS);
@@ -2177,7 +2177,7 @@ static void Cb2_EnterPSS(u8 boxOption)
 static void Cb2_ReturnToPSS(void)
 {
     ResetTasks();
-    sPSSData = Alloc(sizeof(*sPSSData));
+    sPSSData = Alloc(sizeof(struct PokemonStorageSystemData));
     if (sPSSData == NULL)
     {
         SetMainCallback2(Cb2_ExitPSS);

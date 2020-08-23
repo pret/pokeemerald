@@ -1075,17 +1075,17 @@ s8 Menu_ProcessInputNoWrapAround_other(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    if (gMain.newKeys & B_BUTTON)
     {
         return MENU_B_PRESSED;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
             PlaySE(SE_SELECT);
