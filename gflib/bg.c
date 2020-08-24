@@ -621,17 +621,15 @@ s32 GetBgX(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return -1;
-    else if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
+    if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
         return -1;
-    else
-        return sGpuBgConfigs2[bg].bg_x;
+    return sGpuBgConfigs2[bg].bg_x;
 }
 
 s32 ChangeBgY(u8 bg, s32 value, u8 op)
 {
     u8 mode;
-    u16 temp1;
-    u16 temp2;
+    u16 temp1, temp2;
 
     if (IsInvalidBg32(bg) || !GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
     {
