@@ -262,15 +262,15 @@ static void sub_802EAB0(u8 taskId)
 
     if (gReceivedRemoteLinkPlayers != 0)
     {
-        if (gRecvCmds[0][1] == 0x7FFF)
+        if (gRecvCmds[0][1] == LINKCMD_0x7FFF)
             data[11] = gRecvCmds[0][2];
         if (GetMultiplayerId() == 0)
         {
             data[12]++;
             memset(packet, 0, sizeof(packet));
-            packet[0] = 0x7FFF;
+            packet[0] = LINKCMD_0x7FFF;
             packet[1] = data[12];
-            sub_800FE50(packet);
+            Rfu_SendPacket(packet);
         }
     }
     else

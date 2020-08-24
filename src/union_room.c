@@ -2677,7 +2677,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 if (input == -2 || input == IN_UNION_ROOM)
                 {
                     uroom->playerSendBuffer[0] = IN_UNION_ROOM;
-                    sub_800FE50(uroom->playerSendBuffer);
+                    Rfu_SendPacket(uroom->playerSendBuffer);
                     StringCopy(gStringVar4, sIfYouWantToDoSomethingTexts[gLinkPlayers[0].gender]);
                     uroom->state = UR_STATE_REQUEST_DECLINED;
                 }
@@ -2692,7 +2692,7 @@ static void Task_RunUnionRoom(u8 taskId)
                     else
                     {
                         uroom->playerSendBuffer[0] = gPlayerCurrActivity | IN_UNION_ROOM;
-                        sub_800FE50(uroom->playerSendBuffer);
+                        Rfu_SendPacket(uroom->playerSendBuffer);
                         uroom->state = UR_STATE_SEND_ACTIVITY_REQUEST;
                     }
                 }
@@ -2721,7 +2721,7 @@ static void Task_RunUnionRoom(u8 taskId)
         uroom->playerSendBuffer[0] = ACTIVITY_TRADE | IN_UNION_ROOM;
         uroom->playerSendBuffer[1] = sUnionRoomTrade.species;
         uroom->playerSendBuffer[2] = sUnionRoomTrade.level;
-        sub_800FE50(uroom->playerSendBuffer);
+        Rfu_SendPacket(uroom->playerSendBuffer);
         uroom->state = UR_STATE_WAIT_FOR_RESPONSE_TO_REQUEST;
         break;
     case UR_STATE_WAIT_FOR_RESPONSE_TO_REQUEST:
@@ -2908,32 +2908,32 @@ static void Task_RunUnionRoom(u8 taskId)
                 if (!HasAtLeastTwoMonsOfLevel30OrLower())
                 {
                     uroom->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
-                    sub_800FE50(uroom->playerSendBuffer);
+                    Rfu_SendPacket(uroom->playerSendBuffer);
                     uroom->state = UR_STATE_DECLINE_ACTIVITY_REQUEST;
                     StringCopy(gStringVar4, sText_NeedTwoMonsOfLevel30OrLower2);
                 }
                 else
                 {
-                    sub_800FE50(uroom->playerSendBuffer);
+                    Rfu_SendPacket(uroom->playerSendBuffer);
                     uroom->state = UR_STATE_PRINT_START_ACTIVITY_MSG;
                 }
             }
             else if (gPlayerCurrActivity == (ACTIVITY_CARD | IN_UNION_ROOM))
             {
-                sub_800FE50(uroom->playerSendBuffer);
+                Rfu_SendPacket(uroom->playerSendBuffer);
                 ViewURoomPartnerTrainerCard(gStringVar4, uroom, TRUE);
                 uroom->state = UR_STATE_PRINT_CARD_INFO;
             }
             else
             {
-                sub_800FE50(uroom->playerSendBuffer);
+                Rfu_SendPacket(uroom->playerSendBuffer);
                 uroom->state = UR_STATE_PRINT_START_ACTIVITY_MSG;
             }
             break;
         case 1: // DECLINE
         case -1:
             uroom->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
-            sub_800FE50(uroom->playerSendBuffer);
+            Rfu_SendPacket(uroom->playerSendBuffer);
             uroom->state = UR_STATE_DECLINE_ACTIVITY_REQUEST;
             GetYouDeclinedTheOfferMessage(gStringVar4, gPlayerCurrActivity);
             break;

@@ -180,21 +180,21 @@ static const struct BgTemplate sBgTemplatesForPokeblockMenu[] =
 
 const u8 *const gPokeblockNames[] =
 {
-    NULL,
-    gText_RedPokeblock,
-    gText_BluePokeblock,
-    gText_PinkPokeblock,
-    gText_GreenPokeblock,
-    gText_YellowPokeblock,
-    gText_PurplePokeblock,
-    gText_IndigoPokeblock,
-    gText_BrownPokeblock,
-    gText_LiteBluePokeblock,
-    gText_OlivePokeblock,
-    gText_GrayPokeblock,
-    gText_BlackPokeblock,
-    gText_WhitePokeblock,
-    gText_GoldPokeblock
+    [PBLOCK_CLR_NONE]      = NULL,
+    [PBLOCK_CLR_RED]       = gText_RedPokeblock,
+    [PBLOCK_CLR_BLUE]      = gText_BluePokeblock,
+    [PBLOCK_CLR_PINK]      = gText_PinkPokeblock,
+    [PBLOCK_CLR_GREEN]     = gText_GreenPokeblock,
+    [PBLOCK_CLR_YELLOW]    = gText_YellowPokeblock,
+    [PBLOCK_CLR_PURPLE]    = gText_PurplePokeblock,
+    [PBLOCK_CLR_INDIGO]    = gText_IndigoPokeblock,
+    [PBLOCK_CLR_BROWN]     = gText_BrownPokeblock,
+    [PBLOCK_CLR_LITE_BLUE] = gText_LiteBluePokeblock,
+    [PBLOCK_CLR_OLIVE]     = gText_OlivePokeblock,
+    [PBLOCK_CLR_GRAY]      = gText_GrayPokeblock,
+    [PBLOCK_CLR_BLACK]     = gText_BlackPokeblock,
+    [PBLOCK_CLR_WHITE]     = gText_WhitePokeblock,
+    [PBLOCK_CLR_GOLD]      = gText_GoldPokeblock
 };
 
 static const struct MenuAction sPokeblockMenuActions[] =
@@ -726,7 +726,7 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
 
     *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
     *(txtPtr++) = EXT_CTRL_CODE_SKIP;
-    *(txtPtr++) = 87;
+    *(txtPtr++) = CHAR_BLOCK_1;
 
     ConvertIntToDecimalStringN(gStringVar1, GetHighestPokeblocksFlavorLevel(pkblock), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(txtPtr, gText_LvVar1);
@@ -804,7 +804,7 @@ static void CompactPokeblockSlots(void)
     {
         for (j = i + 1; j < POKEBLOCKS_COUNT; j++)
         {
-            if (gSaveBlock1Ptr->pokeblocks[i].color == 0)
+            if (gSaveBlock1Ptr->pokeblocks[i].color == PBLOCK_CLR_NONE)
             {
                 struct Pokeblock temp = gSaveBlock1Ptr->pokeblocks[i];
                 gSaveBlock1Ptr->pokeblocks[i] = gSaveBlock1Ptr->pokeblocks[j];
@@ -856,7 +856,7 @@ static void SetMenuItemsCountAndMaxShowed(void)
 
     for (sPokeblockMenu->itemsNo = 0, i = 0; i < POKEBLOCKS_COUNT; i++)
     {
-        if (gSaveBlock1Ptr->pokeblocks[i].color != 0)
+        if (gSaveBlock1Ptr->pokeblocks[i].color != PBLOCK_CLR_NONE)
             sPokeblockMenu->itemsNo++;
     }
 
@@ -1322,7 +1322,7 @@ s8 GetFirstFreePokeblockSlot(void)
 
     for (i = 0; i < POKEBLOCKS_COUNT; i++)
     {
-        if (gSaveBlock1Ptr->pokeblocks[i].color == 0)
+        if (gSaveBlock1Ptr->pokeblocks[i].color == PBLOCK_CLR_NONE)
             return i;
     }
 
@@ -1346,7 +1346,7 @@ bool32 AddPokeblock(const struct Pokeblock *pokeblock)
 
 bool32 TryClearPokeblock(u8 pkblId)
 {
-    if (gSaveBlock1Ptr->pokeblocks[pkblId].color == 0)
+    if (gSaveBlock1Ptr->pokeblocks[pkblId].color == PBLOCK_CLR_NONE)
     {
         return FALSE;
     }
