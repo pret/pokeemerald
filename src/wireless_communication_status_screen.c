@@ -237,7 +237,7 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
     WCSS_AddTextPrinterParameterized(0, 1, sHeaderTexts[0], GetStringCenterAlignXOffset(1, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
-    for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++) //UB: sizeOf returns the size of the pointer, not the array itself in this case.
     {
         WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
     }
