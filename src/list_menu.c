@@ -1282,7 +1282,7 @@ void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, st
         {
             subsprites[id] = sSubsprite_RedOutline3;
             subsprites[id].x = i - 120;
-            subsprites[id].y = 136;
+            subsprites[id].y = -120;
             id++;
 
             subsprites[id] = sSubsprite_RedOutline6;
