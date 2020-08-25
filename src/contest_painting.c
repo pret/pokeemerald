@@ -386,7 +386,7 @@ static void InitContestMonPixels(u16 species, u8 whichSprite)
 
 static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
 {
-    u16 tileY, tileX, pixelY, pixelX, temp;
+    u16 tileY, tileX, pixelY, pixelX;
     u8 colorIndex;
 
     for (tileY = 0; tileY < 8; tileY++)
@@ -402,6 +402,7 @@ static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)
                         colorIndex >>= 4;
                     else
                         colorIndex &= 0xF; // %=16 works here too. Both match
+
                     if (colorIndex == 0)   // transparent pixel
                         (*destPixels)[((tileY * 8) + pixelY)][((tileX * 8) + pixelX)] = 0x8000;
                     else
