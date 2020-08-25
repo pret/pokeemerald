@@ -43,7 +43,6 @@
 #include "trainer_card.h"
 #include "window.h"
 #include "constants/songs.h"
-#include "rom_8011DC0.h"
 #include "union_room.h"
 #include "constants/rgb.h"
 

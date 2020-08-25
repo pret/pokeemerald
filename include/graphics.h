@@ -3310,8 +3310,8 @@ extern const u32 gBerryTag_Pal[];
 
 // rayquaza scene gfx
 extern const u32 gRaySceneGroudon_Gfx[];
-extern const u32 gRaySceneGroudon2_Gfx[];
-extern const u32 gRaySceneGroudon3_Gfx[];
+extern const u32 gRaySceneGroudonShoulder_Gfx[];
+extern const u32 gRaySceneGroudonClaw_Gfx[];
 extern const u32 gRaySceneKyogre_Gfx[];
 extern const u32 gRaySceneKyogre2_Gfx[];
 extern const u32 gRaySceneKyogre3_Gfx[];

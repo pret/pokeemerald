@@ -384,7 +384,7 @@ static void InitContestMonPixels(u16 species, u8 whichSprite)
     }
 }
 
-#ifdef NONMATCHING
+//#ifdef NONMATCHING
 // functionally equivalent.
 static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
 {
@@ -399,23 +399,22 @@ static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)
             {
                 for (pixelX = 0; pixelX < 8; pixelX++)
                 {
-                    int offset = 32 * (8 * tileY + tileX) + (pixelY * 4 + pixelX / 2);
-                    colorIndex = spriteGfx[offset];
+                    colorIndex = spriteGfx[(((tileY * 8) + tileX) * 32) + (pixelY << 2) + (pixelX >> 1)];
                     if (pixelX & 1)
                         colorIndex >>= 4;
                     else
                         colorIndex &= 0xF;
 
                     if (colorIndex == 0) // transparent pixel
-                        (*destPixels)[8 * tileY + pixelY][tileX * 8 + pixelX] = 0x8000;
+                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = 0x8000;
                     else
-                        (*destPixels)[8 * tileY + pixelY][tileX * 8 + pixelX] = palette[colorIndex];
+                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = palette[colorIndex];
                 }
             }
         }
     }
 }
-#else
+/*#else
 NAKED
 static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
 {
@@ -517,7 +516,7 @@ _081303F8:\n\
     pop {r0}\n\
     bx r0");
 }
-#endif
+#endif*/
 
 #define VRAM_PICTURE_DATA(x, y) (((u16 *)(BG_SCREEN_ADDR(12)))[(y) * 32 + (x)])
 
