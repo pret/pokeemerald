@@ -404,9 +404,9 @@ static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)
                         colorIndex &= 0xF; // %=16 works here too. Both match
 
                     if (colorIndex == 0)   // transparent pixel
-                        (*destPixels)[(tileY * 8 + pixelY)][(tileX * 8 + pixelX)] = 0x8000;
+                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = 0x8000;
                     else
-                        (*destPixels)[(tileY * 8 + pixelY)][(tileX * 8 + pixelX)] = palette[colorIndex];
+                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = palette[colorIndex];
                 }
             }
         }
