@@ -172,19 +172,19 @@ struct PokedexView
     u16 ownCount;
     u16 monSpriteIds[MAX_MONS_ON_SCREEN];
     u16 selectedMonSpriteId;
-    u16 pokeBallRotationStep;
-    u16 pokeBallRotationBackup;
+    s16 pokeBallRotationStep;
+    s16 pokeBallRotationBackup;
     u8 pokeBallRotation;
     u8 initialVOffset;
     u8 scrollTimer;
     u8 scrollDirection;
     s16 listVOffset;
     s16 listMovingVOffset;
-    u16 scrollMonIncrement;
-    u16 maxScrollTimer;
+    s16 scrollMonIncrement;
+    s16 maxScrollTimer;
     u16 scrollSpeed;
     u16 unkArr1[4]; // Cleared, never read
-    u8 filler[8];
+    u16 filler[4];
     u8 currentPage;
     u8 currentPageBackup;
     bool8 isSearchResults:1;
