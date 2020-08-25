@@ -420,8 +420,8 @@ static const u8 sPlayerArrowPos[BLENDER_MAX_PLAYERS][2] =
 static const u8 sPlayerIdMap[BLENDER_MAX_PLAYERS - 1][BLENDER_MAX_PLAYERS] =
 {
     {NO_PLAYER, 0, 1, NO_PLAYER}, // 2 Players
-    {NO_PLAYER, 0, 1, 2},         // 3 Players
-    {0, 1, 2, 3}                  // 4 Players
+    {NO_PLAYER, 0, 1,         2}, // 3 Players
+    {        0, 1, 2,         3}  // 4 Players
 };
 
 
@@ -871,7 +871,7 @@ static const u8 sOpponentBerrySets[NUM_NPC_BERRIES * 2][3] =
     // These sets are used if the player chose one of the 5 NPC berries
     {ITEM_TO_BERRY(ITEM_ASPEAR_BERRY) - 1, ITEM_TO_BERRY(ITEM_RAWST_BERRY) - 1,  ITEM_TO_BERRY(ITEM_PECHA_BERRY) - 1},   // player chose Cheri Berry
     {ITEM_TO_BERRY(ITEM_CHERI_BERRY) - 1,  ITEM_TO_BERRY(ITEM_ASPEAR_BERRY) - 1, ITEM_TO_BERRY(ITEM_RAWST_BERRY) - 1},   // player chose Chesto Berry
-    {ITEM_TO_BERRY(ITEM_CHESTO_BERRY) - 1,  ITEM_TO_BERRY(ITEM_CHERI_BERRY) - 1,  ITEM_TO_BERRY(ITEM_ASPEAR_BERRY) - 1}, // player chose Pecha Berry
+    {ITEM_TO_BERRY(ITEM_CHESTO_BERRY) - 1, ITEM_TO_BERRY(ITEM_CHERI_BERRY) - 1,  ITEM_TO_BERRY(ITEM_ASPEAR_BERRY) - 1},  // player chose Pecha Berry
     {ITEM_TO_BERRY(ITEM_PECHA_BERRY) - 1,  ITEM_TO_BERRY(ITEM_CHESTO_BERRY) - 1, ITEM_TO_BERRY(ITEM_CHERI_BERRY) - 1},   // player chose Rawst Berry
     {ITEM_TO_BERRY(ITEM_RAWST_BERRY) - 1,  ITEM_TO_BERRY(ITEM_PECHA_BERRY) - 1,  ITEM_TO_BERRY(ITEM_CHESTO_BERRY) - 1},  // player chose Aspear Berry
     
