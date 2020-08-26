@@ -59,6 +59,8 @@ enum
 #define TAG_CHASE_RAYQUAZA_TAIL       30570
 #define TAG_CHASE_SPLASH              30571
 
+#define MAX_SMOKE 10
+
 struct RayquazaScene
 {
     MainCallback exitCallback;
@@ -101,7 +103,7 @@ static u8 CreateDuoFightKyogreSprites(void);
 static void Task_RayTakesFlightAnim(u8 taskId);
 static void Task_HandleRayTakesFlight(u8 taskId);
 static void Task_RayTakesFlightEnd(u8 taskId);
-static void sub_81D81A4(u8 taskId);
+static void Task_TakesFlight_CreateSmoke(u8 taskId);
 static void SpriteCB_TakesFlight_Smoke(struct Sprite *sprite);
 
 // RAY_ANIM_DESCENDS
@@ -840,7 +842,7 @@ static const struct SpriteTemplate sSpriteTemplate_TakesFlight_Smoke =
     .callback = SpriteCB_TakesFlight_Smoke,
 };
 
-static const s8 sUnknown_0862AAB8[][2] =
+static const s8 sTakesFlight_SmokeCoords[MAX_SMOKE][2] =
 {
     {-1,  5},
     {-3, -4},
@@ -1972,6 +1974,24 @@ static void DuoFight_SlideKyogreDown(struct Sprite *sprite)
     }
 }
 
+#undef tCounter
+#undef tHelperTaskId
+#undef tGroudonSpriteId
+#undef tKyogreSpriteId
+
+#undef sGroudonBodySpriteId
+#undef sGroudonShoulderSpriteId
+#undef sGroudonClawSpriteId
+
+#define tState      data[0]
+#define tTimer      data[1]
+#define tScale      data[2]
+#define tScaleSpeed data[3]
+#define tYCoord     data[4]
+#define tYSpeed     data[5]
+#define tYOffset    data[6]
+#define tYOffsetDir data[7]
+
 static void InitTakesFlightSceneBgs(void)
 {
     ResetVramOamAndBgCntRegs();
@@ -1994,7 +2014,7 @@ static void InitTakesFlightSceneBgs(void)
 static void LoadTakesFlightSceneGfx(void)
 {
     ResetTempTileDataBuffers();
-    DecompressAndCopyTileDataToVram(0, gRaySceneDuoFight_Clouds_Gfx, 0, 0, 0);
+    DecompressAndCopyTileDataToVram(0, gRaySceneDuoFight_Clouds_Gfx, 0, 0, 0); // Re-uses clouds from previous scene
     DecompressAndCopyTileDataToVram(1, gRaySceneTakesFlight_Bg_Gfx, 0, 0, 0);
     DecompressAndCopyTileDataToVram(2, gRaySceneTakesFlight_Rayquaza_Gfx, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
@@ -2002,7 +2022,7 @@ static void LoadTakesFlightSceneGfx(void)
     LZDecompressWram(gRaySceneDuoFight_Clouds2_Tilemap, sRayScene->tilemapBuffers[0]);
     LZDecompressWram(gRaySceneTakesFlight_Bg_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneTakesFlight_Rayquaza_Tilemap, sRayScene->tilemapBuffers[2]);
-    LoadCompressedPalette(gRaySceneTakesFlight_Rayquaza_Pal, 0, 0x40);
+    LoadCompressedPalette(gRaySceneTakesFlight_Rayquaza_Pal, 0, 64);
     LoadCompressedSpriteSheet(&sSpriteSheet_TakesFlight_Smoke);
     LoadCompressedSpritePalette(&sSpritePal_TakesFlight_Smoke);
 }
@@ -2015,74 +2035,92 @@ static void Task_RayTakesFlightAnim(u8 taskId)
     LoadTakesFlightSceneGfx();
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
-    BlendPalettes(-1, 0x10, 0);
+    BlendPalettes(-1, 16, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
-    CreateTask(sub_81D81A4, 0);
-    data[0] = 0;
-    data[1] = 0;
+    CreateTask(Task_TakesFlight_CreateSmoke, 0);
+    tState = 0;
+    tTimer = 0;
     gTasks[taskId].func = Task_HandleRayTakesFlight;
 }
 
+// Animate Rayquaza (flying up and down, and changing size as it gets further from the screen)
+// In this scene Rayquaza is a bg tilemap on bg 2, not a sprite
 static void Task_HandleRayTakesFlight(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        if (data[1] == 8)
+        // Delay, then fade in
+        if (tTimer == 8)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
-            data[2] = 0;
-            data[3] = 30;
-            data[4] = 0;
-            data[5] = 7;
-            data[1] = 0;
-            data[0]++;
+            tScale = 0;
+            tScaleSpeed = 30;
+            tYCoord = 0;
+            tYSpeed = 7;
+            tTimer = 0;
+            tState++;
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
         break;
     case 1:
-        data[2] += data[3];
-        data[4] += data[5];
-        if (data[3] > 3)
-            data[3] -= 3;
-        if (data[5] != 0)
-            data[5]--;
-        if (data[2] > 255)
+        // Fly in
+        tScale += tScaleSpeed;
+        tYCoord += tYSpeed;
+
+        if (tScaleSpeed > 3)
+            tScaleSpeed -= 3;
+
+        if (tYSpeed != 0)
+            tYSpeed--;
+
+        if (tScale > 255)
         {
-            data[2] = 256;
-            data[3] = 0;
-            data[6] = 12;
-            data[7] = -1;
-            data[1] = 0;
-            data[0]++;
+            tScale = 256;
+            tScaleSpeed = 0;
+            tYOffset = 12;
+            tYOffsetDir = -1;
+            tTimer = 0;
+            tState++;
         }
-        SetBgAffine(2, 0x7800, 0x1800, 0x78, data[4] + 32, data[2], data[2], 0);
+        SetBgAffine(2, 0x7800, 0x1800, 0x78, tYCoord + 32, tScale, tScale, 0);
         break;
     case 2:
-        data[1]++;
-        SetBgAffine(2, 0x7800, 0x1800, 0x78, data[4] + 32 + (data[6] >> 2), data[2], data[2], 0);
-        data[6] += data[7];
-        if (data[6] == 12 || data[6] == -12)
+        // Float up and down
+        tTimer++;
+        SetBgAffine(2, 0x7800, 0x1800, 0x78, tYCoord + 32 + (tYOffset >> 2), tScale, tScale, 0);
+        tYOffset += tYOffsetDir;
+        if (tYOffset == 12 || tYOffset == -12)
         {
-            data[7] *= -1;
-            if (data[1] > 295)
+            tYOffsetDir *= -1;
+            if (tTimer > 295)
             {
-                data[0]++;
+                tState++;
                 BeginNormalPaletteFade(0xFFFFFFFF, 6, 0, 0x10, RGB_BLACK);
             }
         }
         break;
     case 3:
-        data[2] += 16;
-        SetBgAffine(2, 0x7800, 0x1800, 0x78, data[4] + 32, data[2], data[2], 0);
+        // Fly away, fade out
+        tScale += 16;
+        SetBgAffine(2, 0x7800, 0x1800, 0x78, tYCoord + 32, tScale, tScale, 0);
         Task_RayTakesFlightEnd(taskId);
         break;
     }
 }
+
+#undef tState
+#undef tTimer
+#undef tScale
+#undef tScaleSpeed
+#undef tYCoord
+#undef tYSpeed
+#undef tYOffset
+#undef tYOffsetDir
 
 static void Task_RayTakesFlightEnd(u8 taskId)
 {
@@ -2095,50 +2133,62 @@ static void Task_RayTakesFlightEnd(u8 taskId)
     }
 }
 
-static void sub_81D81A4(u8 taskId)
+#define tSmokeId data[0]
+#define tTimer   data[1]
+
+#define sSmokeId data[0]
+#define sTimer   data[1]
+
+static void Task_TakesFlight_CreateSmoke(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if ((data[1] & 3) == 0)
+    if ((tTimer & 3) == 0)
     {
         u8 spriteId = CreateSprite(&sSpriteTemplate_TakesFlight_Smoke,
-                                   (sUnknown_0862AAB8[data[0]][0] * 4) + 120,
-                                   (sUnknown_0862AAB8[data[0]][1] * 4) + 80,
+                                   (sTakesFlight_SmokeCoords[tSmokeId][0] * 4) + 120,
+                                   (sTakesFlight_SmokeCoords[tSmokeId][1] * 4) + 80,
                                    0);
-        gSprites[spriteId].data[0] = (s8)(data[0]);
+        gSprites[spriteId].sSmokeId = (s8)(tSmokeId);
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
         gSprites[spriteId].oam.priority = 2;
         InitSpriteAffineAnim(&gSprites[spriteId]);
-        if (data[0] == 9)
+        if (tSmokeId == MAX_SMOKE - 1)
         {
             DestroyTask(taskId);
             return;
         }
         else
         {
-            data[0]++;
+            tSmokeId++;
         }
     }
 
-    data[1]++;
+    tTimer++;
 }
 
 static void SpriteCB_TakesFlight_Smoke(struct Sprite *sprite)
 {
-    if (sprite->data[1] == 0)
+    if (sprite->sTimer == 0)
     {
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
     }
     else
     {
-        sprite->pos2.x += sUnknown_0862AAB8[sprite->data[0]][0];
-        sprite->pos2.y += sUnknown_0862AAB8[sprite->data[0]][1];
+        sprite->pos2.x += sTakesFlight_SmokeCoords[sprite->sSmokeId][0];
+        sprite->pos2.y += sTakesFlight_SmokeCoords[sprite->sSmokeId][1];
     }
 
-    sprite->data[1]++;
-    sprite->data[1] &= 0xF;
+    sprite->sTimer++;
+    sprite->sTimer &= 0xF;
 }
+
+#undef tSmokeId
+#undef tTimer
+
+#undef sSmokeId
+#undef sTimer
 
 static void InitDescendsSceneBgs(void)
 {
