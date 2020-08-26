@@ -3609,20 +3609,20 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
     gBattleMainFunc = BattleIntroRecordMonsToDex;
 }
 
-#ifdef NONMATCHING
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        position = B_POSITION_OPPONENT_LEFT;
-    else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            position = B_POSITION_OPPONENT_LEFT;
+    if ((gBattleTypeFlags & BATTLE_TYPE_RECORDED))
+        if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
+                position = B_POSITION_OPPONENT_LEFT;
+            else
+                position = B_POSITION_PLAYER_LEFT;
+        }
         else
-            position = B_POSITION_PLAYER_LEFT;
-    }
+            position = B_POSITION_OPPONENT_LEFT;
     else
         position = B_POSITION_OPPONENT_LEFT;
 
@@ -3645,93 +3645,6 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
 
     gBattleMainFunc = BattleIntroRecordMonsToDex;
 }
-#else
-NAKED
-static void BattleIntroOpponent1SendsOutMonAnimation(void)
-{
-    asm(".syntax unified\n\
-            push {r4-r6,lr}\n\
-    ldr r0, =gBattleTypeFlags\n\
-    ldr r2, [r0]\n\
-    movs r0, 0x80\n\
-    lsls r0, 17\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0803B298\n\
-    movs r0, 0x80\n\
-    lsls r0, 18\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _0803B298\n\
-    movs r1, 0x80\n\
-    lsls r1, 24\n\
-    ands r1, r2\n\
-    negs r0, r1\n\
-    orrs r0, r1\n\
-    lsrs r5, r0, 31\n\
-    b _0803B29A\n\
-    .pool\n\
-_0803B288:\n\
-    ldr r1, =gBattleMainFunc\n\
-    ldr r0, =BattleIntroOpponent2SendsOutMonAnimation\n\
-    b _0803B2F0\n\
-    .pool\n\
-_0803B298:\n\
-    movs r5, 0x1\n\
-_0803B29A:\n\
-    ldr r0, =gBattleControllerExecFlags\n\
-    ldr r2, [r0]\n\
-    cmp r2, 0\n\
-    bne _0803B2F2\n\
-    ldr r0, =gActiveBattler\n\
-    strb r2, [r0]\n\
-    ldr r1, =gBattlersCount\n\
-    adds r4, r0, 0\n\
-    ldrb r1, [r1]\n\
-    cmp r2, r1\n\
-    bcs _0803B2EC\n\
-    adds r6, r4, 0\n\
-_0803B2B2:\n\
-    ldrb r0, [r4]\n\
-    bl GetBattlerPosition\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, r5\n\
-    bne _0803B2D8\n\
-    movs r0, 0\n\
-    bl BtlController_EmitIntroTrainerBallThrow\n\
-    ldrb r0, [r4]\n\
-    bl MarkBattlerForControllerExec\n\
-    ldr r0, =gBattleTypeFlags\n\
-    ldr r0, [r0]\n\
-    ldr r1, =0x00008040\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0803B288\n\
-_0803B2D8:\n\
-    ldrb r0, [r6]\n\
-    adds r0, 0x1\n\
-    strb r0, [r6]\n\
-    ldr r1, =gBattlersCount\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    ldr r4, =gActiveBattler\n\
-    ldrb r1, [r1]\n\
-    cmp r0, r1\n\
-    bcc _0803B2B2\n\
-_0803B2EC:\n\
-    ldr r1, =gBattleMainFunc\n\
-    ldr r0, =BattleIntroRecordMonsToDex\n\
-_0803B2F0:\n\
-    str r0, [r1]\n\
-_0803B2F2:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-        .syntax divided");
-}
-#endif // NONMATCHING
 
 static void BattleIntroRecordMonsToDex(void)
 {
