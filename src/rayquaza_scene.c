@@ -68,8 +68,8 @@ struct RayquazaScene
     u16 unk; // never read
     u8 animId;
     bool8 endEarly;
-    s16 field_2008;
-    s16 field_200A;
+    s16 revealedLightLine;
+    s16 revealedLightTimer;
     u8 unused[12];
 };
 
@@ -90,14 +90,14 @@ static void DuoFight_AnimateRain(void);
 static void DuoFight_Lightning1(void);
 static void DuoFight_Lightning2(void);
 static void DuoFight_LightningLong(void);
-static void SpriteCB_DuoFightPre_Groudon(struct Sprite *sprite);
-static void SpriteCB_DuoFightPre_Kyogre(struct Sprite *sprite);
-static void DuoFight_SlideGroudonDown(struct Sprite *sprite);
-static void DuoFight_SlideKyogreDown(struct Sprite *sprite);
-static void SpriteCB_DuoFight_Groudon(struct Sprite *sprite);
-static void SpriteCB_DuoFight_Kyogre(struct Sprite *sprite);
 static u8 CreateDuoFightGroudonSprites(void);
 static u8 CreateDuoFightKyogreSprites(void);
+static void SpriteCB_DuoFightPre_Groudon(struct Sprite *sprite);
+static void SpriteCB_DuoFightPre_Kyogre(struct Sprite *sprite);
+static void SpriteCB_DuoFight_Groudon(struct Sprite *sprite);
+static void SpriteCB_DuoFight_Kyogre(struct Sprite *sprite);
+static void DuoFight_SlideGroudonDown(struct Sprite *sprite);
+static void DuoFight_SlideKyogreDown(struct Sprite *sprite);
 
 // RAY_ANIM_TAKES_FLIGHT
 static void Task_RayTakesFlightAnim(u8 taskId);
@@ -110,8 +110,8 @@ static void SpriteCB_TakesFlight_Smoke(struct Sprite *sprite);
 static void Task_RayDescendsAnim(u8 taskId);
 static void Task_HandleRayDescends(u8 taskId);
 static void Task_RayDescendsEnd(u8 taskId);
-static void sub_81D874C(struct Sprite *sprite);
-static u8 sub_81D86CC(void);
+static u8 CreateDescendsRayquazaSprite(void);
+static void SpriteCB_Descends_Rayquaza(struct Sprite *sprite);
 
 // RAY_ANIM_CHARGES
 static void Task_RayChargesAnim(u8 taskId);
@@ -1351,7 +1351,7 @@ static void Task_SetNextAnim(u8 taskId)
 
 static void sub_81D68C8(void)
 {
-    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL);
     SetGpuReg(REG_OFFSET_WINOUT, 0);
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, DISPLAY_WIDTH));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(24, DISPLAY_HEIGHT - 24));
@@ -1361,8 +1361,8 @@ static void sub_81D68C8(void)
 
 static void sub_81D6904(void)
 {
-    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
-    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL);
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_ALL);
 }
 
 #define tCounter         data[0]
@@ -2167,6 +2167,9 @@ static void Task_TakesFlight_CreateSmoke(u8 taskId)
     tTimer++;
 }
 
+#undef tSmokeId
+#undef tTimer
+
 static void SpriteCB_TakesFlight_Smoke(struct Sprite *sprite)
 {
     if (sprite->sTimer == 0)
@@ -2183,9 +2186,6 @@ static void SpriteCB_TakesFlight_Smoke(struct Sprite *sprite)
     sprite->sTimer++;
     sprite->sTimer &= 0xF;
 }
-
-#undef tSmokeId
-#undef tTimer
 
 #undef sSmokeId
 #undef sTimer
@@ -2217,8 +2217,8 @@ static void LoadDescendsSceneGfx(void)
     ResetTempTileDataBuffers();
     DecompressAndCopyTileDataToVram(0, gRaySceneDescends_Light_Gfx, 0, 0, 0);
     DecompressAndCopyTileDataToVram(1, gRaySceneDescends_Bg_Gfx, 0, 0, 0);
-    while (FreeTempTileDataBuffersIfPossible());
-
+    while (FreeTempTileDataBuffersIfPossible())
+        ;
     LZDecompressWram(gRaySceneDescends_Light_Tilemap, sRayScene->tilemapBuffers[0]);
     LZDecompressWram(gRaySceneDescends_Bg_Tilemap, sRayScene->tilemapBuffers[3]);
     CpuFastFill16(0, sRayScene->tilemapBuffers[2], BG_SCREEN_SIZE);
@@ -2233,29 +2233,36 @@ static void LoadDescendsSceneGfx(void)
     LoadCompressedSpritePalette(&sSpritePal_Descends_Rayquaza);
 }
 
+// Draw ray of light emerging from the clouds
 static void HBlankCB_RayDescends(void)
 {
-    u16 VCOUNT = GetGpuReg(REG_OFFSET_VCOUNT);
-    if (VCOUNT >= 24 && VCOUNT <= 135 && VCOUNT - 24 <= sRayScene->field_2008)
-        REG_BLDALPHA = 0xD08;
+    u16 vcount = GetGpuReg(REG_OFFSET_VCOUNT);
+    if (vcount >= 24 && vcount <= 135 && vcount - 24 <= sRayScene->revealedLightLine)
+        REG_BLDALPHA = 0xD08; // This line is above where light has been revealed, draw it
     else
-        REG_BLDALPHA = 0x1000;
+        REG_BLDALPHA = 0x1000; // Below where light has been revealed, hide it
 
-    if (VCOUNT == 0)
+    if (vcount == 0)
     {
-        if (sRayScene->field_2008 <= 0x1FFF)
+        if (sRayScene->revealedLightLine <= 0x1FFF)
         {
-            if (sRayScene->field_2008 <= 39)
-                sRayScene->field_2008 += 4;
-            else if (sRayScene->field_2008 <= 79)
-                sRayScene->field_2008 += 2;
+            // Increase the number of pixel rows of the light that have been revealed
+            // Gradually slows as it reaches the bottom
+            if (sRayScene->revealedLightLine <= 39)
+                sRayScene->revealedLightLine += 4;
+            else if (sRayScene->revealedLightLine <= 79)
+                sRayScene->revealedLightLine += 2;
             else
-                sRayScene->field_2008 += 1;
+                sRayScene->revealedLightLine += 1;
         }
 
-        sRayScene->field_200A++;
+        // Pointless
+        sRayScene->revealedLightTimer++;
     }
 }
+
+#define tState data[0]
+#define tTimer data[1]
 
 static void Task_RayDescendsAnim(u8 taskId)
 {
@@ -2266,10 +2273,10 @@ static void Task_RayDescendsAnim(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     BlendPalettes(-1, 0x10, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
-    sRayScene->field_2008 = 0;
-    sRayScene->field_200A = 0;
-    data[0] = 0;
-    data[1] = 0;
+    sRayScene->revealedLightLine = 0;
+    sRayScene->revealedLightTimer = 0;
+    tState = 0;
+    tTimer = 0;
     data[2] = 0;
     data[3] = 0;
     data[4] = 0x1000;
@@ -2279,56 +2286,61 @@ static void Task_RayDescendsAnim(u8 taskId)
 static void Task_HandleRayDescends(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        if (data[1] == 8)
+        // Delay, then fade in
+        if (tTimer == 8)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
-            data[1] = 0;
-            data[0]++;
+            tTimer = 0;
+            tState++;
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
         break;
     case 1:
         if (!gPaletteFade.active)
         {
-            if (data[1] == 10)
+            // Delay, then start ray of light
+            if (tTimer == 10)
             {
-                data[1] = 0;
-                data[0]++;
+                tTimer = 0;
+                tState++;
                 SetHBlankCallback(HBlankCB_RayDescends);
                 EnableInterrupts(INTR_FLAG_HBLANK | INTR_FLAG_VBLANK);
             }
             else
             {
-                data[1]++;
+                tTimer++;
             }
         }
         break;
     case 2:
-        if (data[1] == 80)
+        // Delay, then start Rayquaza emerging from clouds
+        if (tTimer == 80)
         {
-            data[1] = 0;
-            data[0]++;
-            sub_81D86CC();
+            tTimer = 0;
+            tState++;
+            CreateDescendsRayquazaSprite();
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
         break;
     case 3:
-        if (++data[1] == 368)
+        // Wait while Rayquaza descends
+        if (++tTimer == 368)
         {
-            data[1] = 0;
-            data[0]++;
+            tTimer = 0;
+            tState++;
         }
         break;
     case 4:
+        // Fade out
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_RayDescendsEnd;
         break;
@@ -2347,70 +2359,83 @@ static void Task_RayDescendsEnd(u8 taskId)
     }
 }
 
-static u8 sub_81D86CC(void)
+#define sTailSpriteId data[0]
+#define sTimer        data[2]
+#define sXMovePeriod  data[3]
+#define sYMovePeriod  data[4]
+
+static u8 CreateDescendsRayquazaSprite(void)
 {
     u8 spriteId = CreateSprite(&sSpriteTemplate_Descends_Rayquaza, 160, 0, 0);
     s16 *data = gSprites[spriteId].data;
-    data[0] = CreateSprite(&sSpriteTemplate_Descends_RayquazaTail, 184, -48, 0);
-    gSprites[spriteId].callback = sub_81D874C;
+    sTailSpriteId = CreateSprite(&sSpriteTemplate_Descends_RayquazaTail, 184, -48, 0);
+    gSprites[spriteId].callback = SpriteCB_Descends_Rayquaza;
     gSprites[spriteId].oam.priority = 3;
-    gSprites[data[0]].oam.priority = 3;
+    gSprites[sTailSpriteId].oam.priority = 3;
     return spriteId;
 }
 
-static void sub_81D874C(struct Sprite *sprite)
+static void SpriteCB_Descends_Rayquaza(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
-    s16 counter = data[2];
-    if (counter == 0)
+    s16 frame = sTimer;
+    
+    // Updates to Rayquaza's coords occur more frequently
+    // as time goes on (it accelerates as it emerges)
+    if (frame == 0)
     {
-        data[3] = 12;
-        data[4] = 8;
+        sXMovePeriod = 12;
+        sYMovePeriod = 8;
     }
-    else if (counter == 256)
+    else if (frame == 256)
     {
-        data[3] = 9;
-        data[4] = 7;
+        sXMovePeriod = 9;
+        sYMovePeriod = 7;
     }
-    else if (counter == 268)
+    else if (frame == 268)
     {
-        data[3] = 8;
-        data[4] = 6;
+        sXMovePeriod = 8;
+        sYMovePeriod = 6;
     }
-    else if (counter == 280)
+    else if (frame == 280)
     {
-        data[3] = 7;
-        data[4] = 5;
+        sXMovePeriod = 7;
+        sYMovePeriod = 5;
     }
-    else if (counter == 292)
+    else if (frame == 292)
     {
-        data[3] = 6;
-        data[4] = 4;
+        sXMovePeriod = 6;
+        sYMovePeriod = 4;
     }
-    else if (counter == 304)
+    else if (frame == 304)
     {
-        data[3] = 5;
-        data[4] = 3;
+        sXMovePeriod = 5;
+        sYMovePeriod = 3;
     }
-    else if (counter == 320)
+    else if (frame == 320)
     {
-        data[3] = 4;
-        data[4] = 2;
+        sXMovePeriod = 4;
+        sYMovePeriod = 2;
     }
 
-    if (data[2] % data[3] == 0)
+    if (sTimer % sXMovePeriod == 0)
     {
         sprite->pos2.x--;
-        gSprites[data[0]].pos2.x--;
+        gSprites[sTailSpriteId].pos2.x--;
     }
-    if (data[2] % data[4] == 0)
+    if (sTimer % sYMovePeriod == 0)
     {
         sprite->pos2.y++;
-        gSprites[data[0]].pos2.y++;
+        gSprites[sTailSpriteId].pos2.y++;
     }
 
-    data[2]++;
+    sTimer++;
 }
+
+#undef sTailSpriteId
+#undef sTimer
+#undef sXMovePeriod
+#undef sYMovePeriod
 
 static void InitChargesSceneBgs(void)
 {
