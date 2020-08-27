@@ -77,15 +77,15 @@ static EWRAM_DATA struct RayquazaScene *sRayScene = NULL;
 
 static void CB2_InitRayquazaScene(void);
 static void CB2_RayquazaScene(void);
-static void Task_EndAfterFadeScreen(u8 taskId);
+static void Task_EndAfterFadeScreen(u8);
 
 // RAY_ANIM_DUO_FIGHT_PRE / RAY_ANIM_DUO_FIGHT
-static void Task_DuoFightAnim(u8 taskId);
-static void Task_HandleDuoFight(u8 taskId);
-static void Task_DuoFightEnd(u8 taskId);
-static void DuoFightEnd(u8 taskId, s8 palDelay);
-static void Task_DuoFight_AnimateClouds(u8 taskId);
-static void DuoFight_PanOffScene(u8 taskId);
+static void Task_DuoFightAnim(u8);
+static void Task_HandleDuoFight(u8);
+static void Task_DuoFightEnd(u8);
+static void DuoFightEnd(u8, s8);
+static void Task_DuoFight_AnimateClouds(u8);
+static void DuoFight_PanOffScene(u8);
 static void DuoFight_AnimateRain(void);
 static void DuoFight_Lightning1(void);
 static void DuoFight_Lightning2(void);
@@ -94,50 +94,50 @@ static u8 DuoFightPre_CreateGroudonSprites(void);
 static u8 DuoFightPre_CreateKyogreSprites(void);
 static u8 DuoFight_CreateGroudonSprites(void);
 static u8 DuoFight_CreateKyogreSprites(void);
-static void SpriteCB_DuoFightPre_Groudon(struct Sprite *sprite);
-static void SpriteCB_DuoFightPre_Kyogre(struct Sprite *sprite);
-static void SpriteCB_DuoFight_Groudon(struct Sprite *sprite);
-static void SpriteCB_DuoFight_Kyogre(struct Sprite *sprite);
-static void DuoFight_SlideGroudonDown(struct Sprite *sprite);
-static void DuoFight_SlideKyogreDown(struct Sprite *sprite);
+static void SpriteCB_DuoFightPre_Groudon(struct Sprite *);
+static void SpriteCB_DuoFightPre_Kyogre(struct Sprite *);
+static void SpriteCB_DuoFight_Groudon(struct Sprite *);
+static void SpriteCB_DuoFight_Kyogre(struct Sprite *);
+static void DuoFight_SlideGroudonDown(struct Sprite *);
+static void DuoFight_SlideKyogreDown(struct Sprite *);
 
 // RAY_ANIM_TAKES_FLIGHT
-static void Task_RayTakesFlightAnim(u8 taskId);
-static void Task_HandleRayTakesFlight(u8 taskId);
-static void Task_RayTakesFlightEnd(u8 taskId);
-static void Task_TakesFlight_CreateSmoke(u8 taskId);
-static void SpriteCB_TakesFlight_Smoke(struct Sprite *sprite);
+static void Task_RayTakesFlightAnim(u8);
+static void Task_HandleRayTakesFlight(u8);
+static void Task_RayTakesFlightEnd(u8);
+static void Task_TakesFlight_CreateSmoke(u8);
+static void SpriteCB_TakesFlight_Smoke(struct Sprite *);
 
 // RAY_ANIM_DESCENDS
-static void Task_RayDescendsAnim(u8 taskId);
-static void Task_HandleRayDescends(u8 taskId);
-static void Task_RayDescendsEnd(u8 taskId);
+static void Task_RayDescendsAnim(u8);
+static void Task_HandleRayDescends(u8);
+static void Task_RayDescendsEnd(u8);
 static u8 CreateDescendsRayquazaSprite(void);
-static void SpriteCB_Descends_Rayquaza(struct Sprite *sprite);
+static void SpriteCB_Descends_Rayquaza(struct Sprite *);
 
 // RAY_ANIM_CHARGES
-static void Task_RayChargesAnim(u8 taskId);
-static void Task_HandleRayCharges(u8 taskId);
-static void Task_RayChargesEnd(u8 taskId);
-static void Task_RayCharges_ShakeRayquaza(u8 taskId);
-static void Task_RayCharges_FlyOffscreen(u8 taskId);
+static void Task_RayChargesAnim(u8);
+static void Task_HandleRayCharges(u8);
+static void Task_RayChargesEnd(u8);
+static void Task_RayCharges_ShakeRayquaza(u8);
+static void Task_RayCharges_FlyOffscreen(u8);
 static void RayCharges_AnimateBg(void);
 
 // RAY_ANIM_CHASES_AWAY
-static void Task_RayChasesAwayAnim(u8 taskId);
-static void Task_HandleRayChasesAway(u8 taskId);
-static void Task_RayChasesAwayEnd(u8 taskId);
-static void sub_81D8FB0(u8 taskId);
-static void sub_81D94D4(u8 taskId);
-static void sub_81D93D8(u8 taskId);
-static void sub_81D90A8(u8 taskId);
-static void sub_81D98B4(u8 taskId);
-static void sub_81D9420(struct Sprite *sprite);
-static void sub_81D97E0(struct Sprite *sprite);
-static void sub_81D9528(struct Sprite *sprite);
-static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite);
-static void sub_81D9338(struct Sprite *sprite);
-static void sub_81D9868(struct Sprite *sprite, u8 animNum, s16 x, s16 y);
+static void Task_RayChasesAwayAnim(u8);
+static void Task_HandleRayChasesAway(u8);
+static void Task_RayChasesAwayEnd(u8);
+static void Task_ChasesAway_AnimateBg(u8);
+static void ChasesAway_KyogreStartLeave(u8);
+static void ChasesAway_GroudonStartLeave(u8);
+static void ChasesAway_CreateTrioSprites(u8);
+static void Task_ChasesAway_AnimateRing(u8);
+static void SpriteCB_ChasesAway_GroudonLeave(struct Sprite *);
+static void SpriteCB_ChasesAway_KyogreLeave(struct Sprite *);
+static void SpriteCB_ChasesAway_RayquazaFloat(struct Sprite *);
+static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *);
+static void SpriteCB_ChasesAway_DuoRingPush(struct Sprite *);
+static void ChasesAway_SetRayquazaAnim(struct Sprite *, u8, s16, s16);
 
 static const TaskFunc sTasksForAnimations[] =
 {
@@ -2091,12 +2091,12 @@ static void Task_HandleRayTakesFlight(u8 taskId)
             tTimer = 0;
             tState++;
         }
-        SetBgAffine(2, 0x7800, 0x1800, 0x78, tYCoord + 32, tScale, tScale, 0);
+        SetBgAffine(2, 0x7800, 0x1800, 120, tYCoord + 32, tScale, tScale, 0);
         break;
     case 2:
         // Float up and down
         tTimer++;
-        SetBgAffine(2, 0x7800, 0x1800, 0x78, tYCoord + 32 + (tYOffset >> 2), tScale, tScale, 0);
+        SetBgAffine(2, 0x7800, 0x1800, 120, tYCoord + 32 + (tYOffset >> 2), tScale, tScale, 0);
         tYOffset += tYOffsetDir;
         if (tYOffset == 12 || tYOffset == -12)
         {
@@ -2111,7 +2111,7 @@ static void Task_HandleRayTakesFlight(u8 taskId)
     case 3:
         // Fly away, fade out
         tScale += 16;
-        SetBgAffine(2, 0x7800, 0x1800, 0x78, tYCoord + 32, tScale, tScale, 0);
+        SetBgAffine(2, 0x7800, 0x1800, 120, tYCoord + 32, tScale, tScale, 0);
         Task_RayTakesFlightEnd(taskId);
         break;
     }
@@ -2653,7 +2653,6 @@ static void LoadChasesAwaySceneGfx(void)
     DecompressAndCopyTileDataToVram(0, gRaySceneChasesAway_Bg_Gfx, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-
     LZDecompressWram(gRaySceneChasesAway_Ring_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneChasesAway_Bg_Tilemap, sRayScene->tilemapBuffers[0]);
     LZDecompressWram(gRaySceneChasesAway_Ring_Map, sRayScene->tilemapBuffers[2]);
@@ -2670,6 +2669,10 @@ static void LoadChasesAwaySceneGfx(void)
     LoadCompressedSpritePalette(&sSpritePal_ChasesAway_KyogreSplash);
 }
 
+#define tState    data[0]
+#define tTimer    data[1]
+#define tBgTaskId data[2]
+
 static void Task_RayChasesAwayAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -2681,61 +2684,66 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 14));
     BlendPalettes(-1, 0x10, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
-    data[0] = 0;
-    data[1] = 0;
+    tState = 0;
+    tTimer = 0;
     gTasks[taskId].func = Task_HandleRayChasesAway;
-    data[2] = CreateTask(sub_81D8FB0, 0);
-    gTasks[data[2]].data[0] = 0;
-    gTasks[data[2]].data[1] = 0;
-    gTasks[data[2]].data[2] = 0;
-    gTasks[data[2]].data[3] = 1;
-    gTasks[data[2]].data[4] = 1;
+    tBgTaskId = CreateTask(Task_ChasesAway_AnimateBg, 0);
+    gTasks[tBgTaskId].data[0] = 0;
+    gTasks[tBgTaskId].data[1] = 0;
+    gTasks[tBgTaskId].data[2] = 0;
+    gTasks[tBgTaskId].data[3] = 1;
+    gTasks[tBgTaskId].data[4] = 1;
 }
 
 static void Task_HandleRayChasesAway(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        if (data[1] == 8)
+        // Delay, then fade in
+        if (tTimer == 8)
         {
-            sub_81D90A8(taskId);
+            ChasesAway_CreateTrioSprites(taskId);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
-            data[1] = 0;
-            data[0]++;
+            tTimer = 0;
+            tState++;
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
         break;
     case 1:
-        if (gSprites[data[5]].callback == sub_81D97E0)
+        // Wait for Rayquaza to enter and finish shout anim
+        if (gSprites[data[5]].callback == SpriteCB_ChasesAway_RayquazaFloat)
         {
-            if (data[1] == 64)
+            // Delay, then start Groudon/Kyogre leaving
+            if (tTimer == 64)
             {
-                sub_81D94D4(taskId);
-                sub_81D93D8(taskId);
-                data[1] = 0;
-                data[0]++;
+                ChasesAway_KyogreStartLeave(taskId);
+                ChasesAway_GroudonStartLeave(taskId);
+                tTimer = 0;
+                tState++;
             }
             else
             {
-                data[1]++;
+                tTimer++;
             }
         }
         break;
     case 2:
-        if (data[1] == 448)
+        // Wait for Groudon/Kyogre to leave
+        if (tTimer == 448)
         {
-            data[1] = 0;
-            data[0]++;
+            tTimer = 0;
+            tState++;
         }
         else
         {
-            data[1]++;
-            if (data[1] % 144 == 0)
+            // Flash bg white and trio black a few times
+            tTimer++;
+            if (tTimer % 144 == 0)
             {
                 BlendPalettesGradually(0x0000FFFE, 0, 16, 0, RGB_WHITEALPHA, 0, 0);
                 BlendPalettesGradually(0xFFFF0000, 0, 16, 0, RGB_BLACK,      0, 1);
@@ -2743,28 +2751,47 @@ static void Task_HandleRayChasesAway(u8 taskId)
         }
         break;
     case 3:
+        // Fade out
         BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_RayChasesAwayEnd;
         break;
     }
 }
 
-static void sub_81D8FB0(u8 taskId)
+#undef tState
+#undef tTimer
+
+#define tTimer      data[0]
+#define tBlendHi    data[1]
+#define tBlendLo    data[2]
+#define tBlendHiDir data[3]
+#define tBlendLoDir data[4]
+
+// Flickers the ray of light behind Rayquaza
+static void Task_ChasesAway_AnimateBg(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if ((data[0] & 0xF) == 0)
+    if ((tTimer & 0xF) == 0)
     {
-        SetGpuReg(REG_OFFSET_BLDALPHA, ((data[1] + 14) << 8 & 0x1F00) | ((data[2] + 9) & 0xF));
-        data[1] -= data[3];
-        data[2] += data[4];
-        if (data[1] == -3 || data[1] == 0)
-            data[3] *= -1;
-        if (data[2] == 3 || data[2] == 0)
-            data[4] *= -1;
+        SetGpuReg(REG_OFFSET_BLDALPHA, ((tBlendHi + 14) << 8 & 0x1F00) | ((tBlendLo + 9) & 0xF));
+        tBlendHi -= tBlendHiDir;
+        tBlendLo += tBlendLoDir;
+        if (tBlendHi == -3 || tBlendHi == 0)
+            tBlendHiDir *= -1;
+        if (tBlendLo == 3 || tBlendLo == 0)
+            tBlendLoDir *= -1;
     }
 
-    data[0]++;
+    tTimer++;
 }
+
+#undef tTimer
+#undef tBlendHi
+#undef tBlendLo
+#undef tBlendHiDir
+#undef tBlendLoDir
+
+#define tTimer data[1]
 
 static void Task_RayChasesAwayEnd(u8 taskId)
 {
@@ -2772,112 +2799,134 @@ static void Task_RayChasesAwayEnd(u8 taskId)
     if (!gPaletteFade.active)
     {
         StopMapMusic();
-        if (data[1] == 0)
+        if (tTimer == 0)
         {
             SetVBlankCallback(NULL);
             ResetWindowDimensions();
             ResetSpriteData();
             FreeAllSpritePalettes();
-            DestroyTask(data[2]);
+            DestroyTask(tBgTaskId);
         }
 
-        if (data[1] == 32)
+        if (tTimer == 32)
         {
-            data[1] = 0;
+            tTimer = 0;
             gTasks[taskId].func = Task_SetNextAnim;
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
     }
 }
 
-static void sub_81D90A8(u8 taskId)
+#undef tTimer
+#undef tBgTaskId
+
+#define tGroudonSpriteId  taskData[3]
+#define tKyogreSpriteId   taskData[4]
+#define tRayquazaSpriteId taskData[5]
+
+static void ChasesAway_CreateTrioSprites(u8 taskId)
 {
     s16 *taskData, *spriteData;
 
     taskData = gTasks[taskId].data;
 
-    taskData[3] = CreateSprite(&sSpriteTemplate_ChasesAway_Groudon, 64, 120, 0);
-    spriteData = gSprites[taskData[3]].data;
+    tGroudonSpriteId = CreateSprite(&sSpriteTemplate_ChasesAway_Groudon, 64, 120, 0);
+    spriteData = gSprites[tGroudonSpriteId].data;
     spriteData[0] = CreateSprite(&sSpriteTemplate_ChasesAway_GroudonTail, 16, 130, 0);
-    gSprites[taskData[3]].oam.priority = 1;
+    gSprites[tGroudonSpriteId].oam.priority = 1;
     gSprites[spriteData[0]].oam.priority = 1;
 
-    taskData[4] = CreateSprite(&sSpriteTemplate_ChasesAway_Kyogre, 160, 128, 1);
-    spriteData = gSprites[taskData[4]].data;
+    tKyogreSpriteId = CreateSprite(&sSpriteTemplate_ChasesAway_Kyogre, 160, 128, 1);
+    spriteData = gSprites[tKyogreSpriteId].data;
     spriteData[0] = CreateSprite(&sSpriteTemplate_ChasesAway_Kyogre, 192, 128, 1);
     spriteData[1] = CreateSprite(&sSpriteTemplate_ChasesAway_Kyogre, 224, 128, 1);
-    gSprites[taskData[4]].oam.priority = 1;
+    gSprites[tKyogreSpriteId].oam.priority = 1;
     gSprites[spriteData[0]].oam.priority = 1;
     gSprites[spriteData[1]].oam.priority = 1;
     StartSpriteAnim(&gSprites[spriteData[0]], 1);
     StartSpriteAnim(&gSprites[spriteData[1]], 2);
 
-    taskData[5] = CreateSprite(&sSpriteTemplate_ChasesAway_Rayquaza, 120, -65, 0);
-    spriteData = gSprites[taskData[5]].data;
+    tRayquazaSpriteId = CreateSprite(&sSpriteTemplate_ChasesAway_Rayquaza, 120, -65, 0);
+    spriteData = gSprites[tRayquazaSpriteId].data;
     spriteData[0] = CreateSprite(&sSpriteTemplate_ChasesAway_RayquazaTail, 120, -113, 0);
-    gSprites[taskData[5]].oam.priority = 1;
+    gSprites[tRayquazaSpriteId].oam.priority = 1;
     gSprites[spriteData[0]].oam.priority = 1;
 }
 
-static void sub_81D9274(u8 taskId)
+#define sBodyPartSpriteId1 data[0]
+#define sBodyPartSpriteId2 data[1]
+#define sTimer             data[4]
+#define sDecel             data[5]
+#define sSpeed             data[6]
+#define sIsKyogre          data[7]
+
+static void ChasesAway_PushDuoBack(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    gSprites[taskData[3]].callback = sub_81D9338;
-    gSprites[taskData[3]].data[4] = 0;
-    gSprites[taskData[3]].data[5] = 0;
-    gSprites[taskData[3]].data[6] = 4;
-    gSprites[taskData[3]].data[7] = 0;
+    gSprites[tGroudonSpriteId].callback = SpriteCB_ChasesAway_DuoRingPush;
+    gSprites[tGroudonSpriteId].sTimer = 0;
+    gSprites[tGroudonSpriteId].sDecel = 0;
+    gSprites[tGroudonSpriteId].sSpeed = 4;
+    gSprites[tGroudonSpriteId].sIsKyogre = FALSE;
 
-    gSprites[taskData[4]].callback = sub_81D9338;
-    gSprites[taskData[4]].data[4] = 0;
-    gSprites[taskData[4]].data[5] = 0;
-    gSprites[taskData[4]].data[6] = 4;
-    gSprites[taskData[4]].data[7] = 1;
+    gSprites[tKyogreSpriteId].callback = SpriteCB_ChasesAway_DuoRingPush;
+    gSprites[tKyogreSpriteId].sTimer = 0;
+    gSprites[tKyogreSpriteId].sDecel = 0;
+    gSprites[tKyogreSpriteId].sSpeed = 4;
+    gSprites[tKyogreSpriteId].sIsKyogre = TRUE;
 }
 
-static void sub_81D9338(struct Sprite *sprite)
+// Pushes Groudon/Kyogre back slightly, for when Rayquaza's hyper voice ring comes out
+static void SpriteCB_ChasesAway_DuoRingPush(struct Sprite *sprite)
 {
-    if ((sprite->data[4] & 7) == 0)
+    if ((sprite->sTimer & 7) == 0)
     {
-        if (sprite->data[7] == 0)
+        if (!sprite->sIsKyogre)
         {
-            sprite->pos1.x -= sprite->data[6];
-            gSprites[sprite->data[0]].pos1.x -= sprite->data[6];
+            sprite->pos1.x -= sprite->sSpeed;
+            gSprites[sprite->sBodyPartSpriteId1].pos1.x -= sprite->sSpeed;
         }
         else
         {
-            sprite->pos1.x += sprite->data[6];
-            gSprites[sprite->data[0]].pos1.x += sprite->data[6];
-            gSprites[sprite->data[1]].pos1.x += sprite->data[6];
+            sprite->pos1.x += sprite->sSpeed;
+            gSprites[sprite->sBodyPartSpriteId1].pos1.x += sprite->sSpeed;
+            gSprites[sprite->sBodyPartSpriteId2].pos1.x += sprite->sSpeed;
         }
 
-        sprite->data[5]++;
-        sprite->data[6] -= sprite->data[5];
-        if (sprite->data[5] == 3)
+        sprite->sDecel++;
+        sprite->sSpeed -= sprite->sDecel;
+        if (sprite->sDecel == 3)
         {
-            sprite->data[4] = 0;
-            sprite->data[5] = 0;
-            sprite->data[6] = 0;
+            sprite->sTimer = 0;
+            sprite->sDecel = 0;
+            sprite->sSpeed = 0;
             sprite->callback = SpriteCallbackDummy;
             return;
         }
     }
 
-    sprite->data[4]++;
+    sprite->sTimer++;
 }
 
-static void sub_81D93D8(u8 taskId)
+#undef sBodyPartSpriteId1
+#undef sBodyPartSpriteId2
+#undef sTimer
+#undef sDecel
+#undef sSpeed
+#undef sIsKyogre
+
+static void ChasesAway_GroudonStartLeave(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
-    gSprites[taskData[3]].callback = sub_81D9420;
-    StartSpriteAnim(&gSprites[taskData[3]], 1);
+    gSprites[tGroudonSpriteId].callback = SpriteCB_ChasesAway_GroudonLeave;
+    StartSpriteAnim(&gSprites[tGroudonSpriteId], 1);
 }
 
-static void sub_81D9420(struct Sprite *sprite)
+static void SpriteCB_ChasesAway_GroudonLeave(struct Sprite *sprite)
 {
     switch (sprite->animCmdIndex)
     {
@@ -2902,19 +2951,19 @@ static void sub_81D9420(struct Sprite *sprite)
     }
 }
 
-static void sub_81D94D4(u8 taskId)
+static void ChasesAway_KyogreStartLeave(u8 taskId)
 {
     s16 *taskData, *spriteData;
 
     taskData = gTasks[taskId].data;
-    spriteData = gSprites[taskData[4]].data;
+    spriteData = gSprites[tKyogreSpriteId].data;
 
-    gSprites[taskData[4]].callback = sub_81D9528;
-    gSprites[spriteData[0]].callback = sub_81D9528;
-    gSprites[spriteData[1]].callback = sub_81D9528;
+    gSprites[tKyogreSpriteId].callback = SpriteCB_ChasesAway_KyogreLeave;
+    gSprites[spriteData[0]].callback = SpriteCB_ChasesAway_KyogreLeave;
+    gSprites[spriteData[1]].callback = SpriteCB_ChasesAway_KyogreLeave;
 }
 
-static void sub_81D9528(struct Sprite *sprite)
+static void SpriteCB_ChasesAway_KyogreLeave(struct Sprite *sprite)
 {
     if ((sprite->data[4] & 3) == 0)
     {
@@ -2951,145 +3000,169 @@ static void sub_81D9528(struct Sprite *sprite)
     sprite->data[4]++;
 }
 
+#define sTailSpriteId data[0]
+#define sYOffset      data[4]
+#define sYOffsetDir   data[5]
+#define sFloatTimer   data[6]
+#define sTimer        data[7]
+
+#define sTailFloatDelay  data[4]
+#define sTailFloatPeak   data[5]
+
 static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
 {
-    s16 counter = sprite->data[7];
-    if (counter <= 64)
+    s16 frame = sprite->sTimer;
+    if (frame <= 64)
     {
         sprite->pos2.y += 2;
-        gSprites[sprite->data[0]].pos2.y += 2;
-        if (sprite->data[7] == 64)
+        gSprites[sprite->sTailSpriteId].pos2.y += 2;
+        if (sprite->sTimer == 64)
         {
-            sub_81D9868(sprite, 1, 0, -48);
-            sprite->data[4] = 5;
-            sprite->data[5] = -1;
-            gSprites[sprite->data[0]].data[4] = 3;
-            gSprites[sprite->data[0]].data[5] = 5;
+            ChasesAway_SetRayquazaAnim(sprite, 1, 0, -48);
+            sprite->sYOffset = 5;
+            sprite->sYOffsetDir = -1;
+            gSprites[sprite->sTailSpriteId].sTailFloatDelay = 3;
+            gSprites[sprite->sTailSpriteId].sTailFloatPeak = 5;
         }
     }
-    else if (counter <= 111)
+    else if (frame <= 111)
     {
-        sub_81D97E0(sprite);
-        if (sprite->data[4] == 0)
+        SpriteCB_ChasesAway_RayquazaFloat(sprite);
+        if (sprite->sYOffset == 0)
             PlaySE(SE_BT_START);
-        if (sprite->data[4] == -3)
-            sub_81D9868(sprite, 2, 48, 16);
+        if (sprite->sYOffset == -3)
+            ChasesAway_SetRayquazaAnim(sprite, 2, 48, 16);
     }
-    else if (counter == 112)
+    else if (frame == 112)
     {
-        gSprites[sprite->data[0]].data[4] = 7;
-        gSprites[sprite->data[0]].data[5] = 3;
-        sub_81D97E0(sprite);
+        gSprites[sprite->sTailSpriteId].sTailFloatDelay = 7;
+        gSprites[sprite->sTailSpriteId].sTailFloatPeak = 3;
+        SpriteCB_ChasesAway_RayquazaFloat(sprite);
     }
-    else if (counter <= 327)
+    else if (frame <= 327)
     {
-        sub_81D97E0(sprite);
+        SpriteCB_ChasesAway_RayquazaFloat(sprite);
     }
-    else if (counter == 328)
+    else if (frame == 328)
     {
-        sub_81D97E0(sprite);
-        sub_81D9868(sprite, 3, 48, 16);
+        SpriteCB_ChasesAway_RayquazaFloat(sprite);
+        ChasesAway_SetRayquazaAnim(sprite, 3, 48, 16);
         sprite->pos2.x = 1;
-        gSprites[sprite->data[0]].pos2.x = 1;
+        gSprites[sprite->sTailSpriteId].pos2.x = 1;
         PlayCry1(SPECIES_RAYQUAZA, 0);
-        CreateTask(sub_81D98B4, 0);
+        CreateTask(Task_ChasesAway_AnimateRing, 0);
     }
     else
     {
-        switch (counter)
+        switch (frame)
         {
         case 376:
             sprite->pos2.x = 0;
-            gSprites[sprite->data[0]].pos2.x = 0;
-            sub_81D97E0(sprite);
-            sub_81D9868(sprite, 2, 48, 16);
-            sprite->callback = sub_81D97E0;
+            gSprites[sprite->sTailSpriteId].pos2.x = 0;
+            SpriteCB_ChasesAway_RayquazaFloat(sprite);
+            ChasesAway_SetRayquazaAnim(sprite, 2, 48, 16);
+            sprite->callback = SpriteCB_ChasesAway_RayquazaFloat;
             return;
         case 352:
-            sub_81D9274(FindTaskIdByFunc(Task_HandleRayChasesAway));
+            ChasesAway_PushDuoBack(FindTaskIdByFunc(Task_HandleRayChasesAway));
             break;
         }
     }
 
-    if (sprite->data[7] > 328 && (sprite->data[7] & 1) == 0)
+    if (sprite->sTimer > 328 && (sprite->sTimer & 1) == 0)
     {
         sprite->pos2.x *= -1;
-        gSprites[sprite->data[0]].pos2.x = sprite->pos2.x;
+        gSprites[sprite->sTailSpriteId].pos2.x = sprite->pos2.x;
     }
 
-    sprite->data[7]++;
+    sprite->sTimer++;
 }
 
-static void sub_81D97E0(struct Sprite *sprite)
+static void SpriteCB_ChasesAway_RayquazaFloat(struct Sprite *body)
 {
-    struct Sprite *sprite2 = &gSprites[sprite->data[0]];
-    if (!(sprite->data[6] & sprite2->data[4]))
+    struct Sprite *tail = &gSprites[body->sTailSpriteId];
+    if (!(body->sFloatTimer & tail->sTailFloatDelay))
     {
-        sprite->pos2.y += sprite->data[4];
-        gSprites[sprite->data[0]].pos2.y += sprite->data[4];
-        sprite->data[4] += sprite->data[5];
-        if (sprite->data[4] >= sprite2->data[5] || sprite->data[4] <= -sprite2->data[5])
+        body->pos2.y += body->sYOffset;
+        gSprites[body->sTailSpriteId].pos2.y += body->sYOffset; // why access gSprites again? tail->pos2.y would be sufficient
+        body->sYOffset += body->sYOffsetDir;
+        if (body->sYOffset >= tail->sTailFloatPeak || body->sYOffset <= -tail->sTailFloatPeak)
         {
-            if (sprite->data[4] > sprite2->data[5])
-                sprite->data[4] = sprite2->data[5];
-            else if (sprite->data[4] < -sprite2->data[5])
-                sprite->data[4] = -sprite2->data[5];
+            if (body->sYOffset > tail->sTailFloatPeak)
+                body->sYOffset = tail->sTailFloatPeak;
+            else if (body->sYOffset < -tail->sTailFloatPeak)
+                body->sYOffset = -tail->sTailFloatPeak;
 
-            sprite->data[5] *= -1;
+            body->sYOffsetDir *= -1;
         }
     }
 
-    sprite->data[6]++;
+    body->sFloatTimer++;
 }
 
-static void sub_81D9868(struct Sprite *sprite, u8 animNum, s16 x, s16 y)
+static void ChasesAway_SetRayquazaAnim(struct Sprite *body, u8 animNum, s16 x, s16 y)
 {
-    struct Sprite *sprite2 = &gSprites[sprite->data[0]];
+    struct Sprite *tail = &gSprites[body->sTailSpriteId];
 
-    sprite2->pos1.x = sprite->pos1.x + x;
-    sprite2->pos1.y = sprite->pos1.y + y;
+    tail->pos1.x = body->pos1.x + x;
+    tail->pos1.y = body->pos1.y + y;
 
-    sprite2->pos2.x = sprite->pos2.x;
-    sprite2->pos2.y = sprite->pos2.y;
+    tail->pos2.x = body->pos2.x;
+    tail->pos2.y = body->pos2.y;
 
-    StartSpriteAnim(sprite, animNum);
-    StartSpriteAnim(sprite2, animNum);
+    StartSpriteAnim(body, animNum);
+    StartSpriteAnim(tail, animNum);
 }
 
-static void sub_81D98B4(u8 taskId)
+#undef sTailSpriteId
+#undef sYOffset
+#undef sYOffsetDir
+#undef sFloatTimer
+#undef sTimer
+#undef sTailFloatDelay
+#undef sTailFloatPeak
+
+#define tState      data[0]
+#define tScale      data[1]
+#define tNumRings   data[2]
+#define tScaleTimer data[3]
+#define tScaleSpeed data[4]
+#define tSoundTimer data[5]
+
+static void Task_ChasesAway_AnimateRing(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        SetBgAffine(2, 0x4000, 0x4000, 0x78, 0x40, 0x100, 0x100, 0);
+        SetBgAffine(2, 0x4000, 0x4000, 120, 64, 256, 256, 0);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
-        data[4] = 16;
-        data[0]++;
+        tScaleSpeed = 16;
+        tState++;
         break;
     case 1:
-        if (data[5] == 8)
+        if (tSoundTimer == 8)
             PlaySE(SE_JIDO_DOA);
-        if (data[2] == 2)
+        if (tNumRings == 2)
         {
-            data[0]++;
+            tState++;
         }
         else
         {
-            data[1] += data[4];
-            data[5]++;
-            if (data[3] % 3 == 0 && data[4] != 4)
-                data[4] -= 2;
+            tScale += tScaleSpeed;
+            tSoundTimer++;
+            if (tScaleTimer % 3 == 0 && tScaleSpeed != 4)
+                tScaleSpeed -= 2;
 
-            data[3]++;
-            SetBgAffine(2, 0x4000, 0x4000, 0x78, 0x40, 0x100 - data[1], 0x100 - data[1], 0);
-            if (data[1] > 255)
+            tScaleTimer++;
+            SetBgAffine(2, 0x4000, 0x4000, 120, 64, 256 - tScale, 256 - tScale, 0);
+            if (tScale > 255)
             {
-                data[1] = 0;
-                data[3] = 0;
-                data[5] = 0;
-                data[4] = 16;
-                data[2]++;
+                tScale = 0;
+                tScaleTimer = 0;
+                tSoundTimer = 0;
+                tScaleSpeed = 16;
+                tNumRings++;
             }
         }
         break;
