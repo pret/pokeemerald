@@ -220,7 +220,7 @@ static void PrepareSongText(void)
         if (lineNum == 0)
         {
             *(wordEnd++) = EXT_CTRL_CODE_BEGIN;
-            *(wordEnd++) = 15;
+            *(wordEnd++) = EXT_CTRL_CODE_FILL_WINDOW;
         }
     }
 }

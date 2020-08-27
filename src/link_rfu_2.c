@@ -148,10 +148,7 @@ static const u8 sUnknown_082ED6A5[] = {
     0, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0
 };
 
-static const struct {
-    u8 *buffer;
-    u32 size;
-} sUnknown_082ED6B8[] = {
+static const struct BlockRequest sBlockRequests[] = {
     { gBlockSendBuffer, 200 },
     { gBlockSendBuffer, 200 },
     { gBlockSendBuffer, 100 },
@@ -1072,15 +1069,15 @@ static void RfuHandleReceiveCommand(u8 unused)
                 }
             }
             break;
-        case RFU_COMMAND_0xA100:
-            Rfu_InitBlockSend(sUnknown_082ED6B8[gRecvCmds[i][1]].buffer, (u16)sUnknown_082ED6B8[gRecvCmds[i][1]].size);
+        case RFU_COMMAND_SEND_BLOCK_REQ:
+            Rfu_InitBlockSend(sBlockRequests[gRecvCmds[i][1]].address, (u16)sBlockRequests[gRecvCmds[i][1]].size);
             break;
-        case RFU_COMMAND_0x5F00:
-            Rfu.unk_e4[i] = 1;
+        case RFU_COMMAND_READY_CLOSE_LINK:
+            Rfu.readyCloseLink[i] = TRUE;
             break;
-        case RFU_COMMAND_0x6600:
+        case RFU_COMMAND_READY_EXIT_STANDBY:
             if (Rfu.unk_100 == gRecvCmds[i][1])
-                Rfu.unk_e9[i] = 1;
+                Rfu.readyExitStandby[i] = TRUE;
             break;
         case RFU_COMMAND_0xED00:
             if (Rfu.parentChild == MODE_CHILD)
@@ -1194,9 +1191,9 @@ static void RfuPrepareSendBuffer(u16 command)
         gSendCmd[1] = Rfu.sendBlock.count;
         gSendCmd[2] = Rfu.sendBlock.owner + 0x80;
         break;
-    case RFU_COMMAND_0xA100:
+    case RFU_COMMAND_SEND_BLOCK_REQ:
         if (AreNoPlayersReceiving())
-            gSendCmd[1] = Rfu.unk_5a;
+            gSendCmd[1] = Rfu.blockRequestType;
         break;
     case RFU_COMMAND_0x7700:
     case RFU_COMMAND_0x7800:
@@ -1207,8 +1204,8 @@ static void RfuPrepareSendBuffer(u16 command)
         for (i = 0; i < RFU_CHILD_MAX; i++)
             buff[i] = Rfu.linkPlayerIdx[i];
         break;
-    case RFU_COMMAND_0x6600:
-    case RFU_COMMAND_0x5F00:
+    case RFU_COMMAND_READY_EXIT_STANDBY:
+    case RFU_COMMAND_READY_CLOSE_LINK:
         gSendCmd[1] = Rfu.unk_100;
         break;
     case RFU_COMMAND_0x4400:
@@ -1327,10 +1324,10 @@ static void SendLastBlock(void)
         Rfu.callback = NULL;
 }
 
-bool8 sub_8010100(u8 blockRequestType)
+bool8 Rfu_SendBlockRequest(u8 type)
 {
-    Rfu.unk_5a = blockRequestType;
-    RfuPrepareSendBuffer(RFU_COMMAND_0xA100);
+    Rfu.blockRequestType = type;
+    RfuPrepareSendBuffer(RFU_COMMAND_SEND_BLOCK_REQ);
     return TRUE;
 }
 
@@ -1343,14 +1340,14 @@ static void sub_801011C(void)
     Rfu.callback = NULL;
 }
 
-static void sub_8010148(void)
+static void DisconnectRfu(void)
 {
     rfu_REQ_disconnect(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
     rfu_waitREQComplete();
     sub_801011C();
 }
 
-static void sub_8010168(void)
+static void TryDisconnectRfu(void)
 {
     if (Rfu.parentChild == MODE_CHILD)
     {
@@ -1358,7 +1355,7 @@ static void sub_8010168(void)
         Rfu.unk_ce4 = 2;
     }
     else
-        Rfu.callback = sub_8010148;
+        Rfu.callback = DisconnectRfu;
 }
 
 void LinkRfu_FatalError(void)
@@ -1368,131 +1365,137 @@ void LinkRfu_FatalError(void)
     Rfu.unk_ce3 = gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag;
 }
 
-static void sub_80101CC(void)
+// RFU equivalent of LinkCB_WaitCloseLink
+static void WaitAllReadyToCloseLink(void)
 {
     s32 i;
     u8 playerCount = Rfu.playerCount;
     s32 count = 0;
 
+    // Wait for all players to be ready
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        if (Rfu.unk_e4[i])
+        if (Rfu.readyCloseLink[i])
             count++;
     }
     if (count == playerCount)
     {
+        // All ready, close link
         gBattleTypeFlags &= ~BATTLE_TYPE_20;
         if (Rfu.parentChild == MODE_CHILD)
         {
             Rfu.errorState = 3;
-            sub_8010168();
+            TryDisconnectRfu();
         }
         else
-            Rfu.callback = sub_8010168;
+            Rfu.callback = TryDisconnectRfu;
     }
 }
 
-static void sub_801022C(void)
+static void SendReadyCloseLink(void)
 {
     if (gSendCmd[0] == 0 && Rfu.unk_ce8 == 0)
     {
-        RfuPrepareSendBuffer(RFU_COMMAND_0x5F00);
-        Rfu.callback = sub_80101CC;
+        RfuPrepareSendBuffer(RFU_COMMAND_READY_CLOSE_LINK);
+        Rfu.callback = WaitAllReadyToCloseLink;
     }
 }
 
-static void sub_8010264(u8 taskId)
+static void Task_TryReadyCloseLink(u8 taskId)
 {
     if (Rfu.callback == NULL)
     {
         Rfu.unk_cd9 = 1;
-        Rfu.callback = sub_801022C;
+        Rfu.callback = SendReadyCloseLink;
         DestroyTask(taskId);
     }
 }
 
-void task_add_05_task_del_08FA224_when_no_RfuFunc(void)
+void Rfu_SetCloseLinkCallback(void)
 {
-    if (!FuncIsActiveTask(sub_8010264))
-        CreateTask(sub_8010264, 5);
+    if (!FuncIsActiveTask(Task_TryReadyCloseLink))
+        CreateTask(Task_TryReadyCloseLink, 5);
 }
 
-static void sub_80102B8(void)
+static void SendReadyExitStandbyUntilAllReady(void)
 {
     u8 playerCount;
     u8 i;
 
     if (GetMultiplayerId() != 0)
     {
-        if (Rfu.recvQueue.count == 0 && Rfu.unk_fe > 60)
+        if (Rfu.recvQueue.count == 0 && Rfu.resendExitStandbyTimer > 60)
         {
-            RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
-            Rfu.unk_fe = 0;
+            RfuPrepareSendBuffer(RFU_COMMAND_READY_EXIT_STANDBY);
+            Rfu.resendExitStandbyTimer = 0;
         }
     }
     playerCount = GetLinkPlayerCount();
     for (i = 0; i < playerCount; i++)
     {
-        if (Rfu.unk_e9[i] == 0)
+        if (!Rfu.readyExitStandby[i])
             break;
     }
     if (i == playerCount)
     {
         for (i = 0; i < MAX_RFU_PLAYERS; i++)
-            Rfu.unk_e9[i] = 0;
+            Rfu.readyExitStandby[i] = FALSE;
         Rfu.unk_100++;
         Rfu.callback = NULL;
     }
-    Rfu.unk_fe++;
+    Rfu.resendExitStandbyTimer++;
 }
 
-static void sub_8010358(void)
+static void LinkLeaderReadyToExitStandby(void)
 {
     if (Rfu.recvQueue.count == 0 && gSendCmd[0] == 0)
     {
-        RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
-        Rfu.callback = sub_80102B8;
+        RfuPrepareSendBuffer(RFU_COMMAND_READY_EXIT_STANDBY);
+        Rfu.callback = SendReadyExitStandbyUntilAllReady;
     }
 }
 
-static void sub_8010390(void)
+// RFU equivalent of LinkCB_Standby and LinkCB_StandbyForAll
+static void Rfu_LinkStandby(void)
 {
     u8 i;
     u8 playerCount;
 
     if (GetMultiplayerId() != 0)
     {
+        // Not link leader, send exit standby when ready
         if (Rfu.recvQueue.count == 0 && gSendCmd[0] == 0)
         {
-            RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
-            Rfu.callback = sub_80102B8;
+            RfuPrepareSendBuffer(RFU_COMMAND_READY_EXIT_STANDBY);
+            Rfu.callback = SendReadyExitStandbyUntilAllReady;
         }
     }
     else
     {
+        // Link leader, wait for all members to send exit ready
         playerCount = GetLinkPlayerCount();
         for (i = 1; i < playerCount; i++)
         {
-            if (Rfu.unk_e9[i] == 0)
+            if (!Rfu.readyExitStandby[i])
                 break;
         }
         if (i == playerCount)
         {
             if (Rfu.recvQueue.count == 0 && gSendCmd[0] == 0)
             {
-                RfuPrepareSendBuffer(RFU_COMMAND_0x6600);
-                Rfu.callback = sub_8010358;
+                RfuPrepareSendBuffer(RFU_COMMAND_READY_EXIT_STANDBY);
+                Rfu.callback = LinkLeaderReadyToExitStandby;
             }
         }
     }
 }
 
-void sub_8010434(void)
+void Rfu_SetLinkStandbyCallback(void)
 {
     if (Rfu.callback == NULL)
     {
-        Rfu.callback = sub_8010390;
-        Rfu.unk_fe = 0;
+        Rfu.callback = Rfu_LinkStandby;
+        Rfu.resendExitStandbyTimer = 0;
     }
 }
 
@@ -1724,8 +1727,8 @@ static void sub_801084C(u8 taskId)
         {
             if (AreNoPlayersReceiving())
             {
-                Rfu.unk_5a = 0;
-                RfuPrepareSendBuffer(RFU_COMMAND_0xA100);
+                Rfu.blockRequestType = 0;
+                RfuPrepareSendBuffer(RFU_COMMAND_SEND_BLOCK_REQ);
                 gTasks[taskId].data[0]++;
             }
         }

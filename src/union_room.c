@@ -32,7 +32,7 @@
 #include "random.h"
 #include "save_location.h"
 #include "script.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "string_util.h"
@@ -1483,7 +1483,7 @@ static void Task_ExchangeCards(u8 taskId)
     {
     case 0:
         if (GetMultiplayerId() == 0)
-            sub_800A4D8(2);
+            SendBlockRequest(2);
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -1759,7 +1759,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
             }
             else
             {
-                sub_800ADF8();
+                SetLinkStandbyCallback();
                 data[0] = 3;
             }
         }
@@ -1795,7 +1795,7 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
         DestroyTask(taskId);
         break;
     case 7:
-        sub_800AC34();
+        SetCloseLinkCallback();
         data[0] = 8;
         break;
     case 8:
@@ -2018,7 +2018,7 @@ static void Task_MEvent_Leader(u8 taskId)
         Free(data->field_8);
         Free(data->field_0);
         Free(data->field_4);
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         data->state++;
         break;
     case 17:
@@ -2188,7 +2188,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         break;
     case 11:
         data->state++;
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         break;
     case 12:
         if (IsLinkTaskFinished())
@@ -2367,7 +2367,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         break;
     case 13:
         data->state++;
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         break;
     case 14:
         if (IsLinkTaskFinished())
@@ -2714,7 +2714,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_REQUEST_DECLINED:
-        sub_800AC34();
+        SetCloseLinkCallback();
         uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
         break;
     case UR_STATE_SEND_TRADE_REQUST:
@@ -2763,7 +2763,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (PrintOnTextbox(&uroom->textState, gStringVar4))
         {
             uroom->state = UR_STATE_WAIT_FINISH_READING_CARD;
-            sub_800ADF8();
+            SetLinkStandbyCallback();
             uroom->partnerYesNoResponse = 0;
             uroom->recvActivityRequest[0] = 0;
         }
@@ -2940,7 +2940,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_DECLINE_ACTIVITY_REQUEST:
-        sub_800AC34();
+        SetCloseLinkCallback();
         uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
         break;
     case UR_STATE_CANCEL_REQUEST_PRINT_MSG:
@@ -2962,7 +2962,7 @@ static void Task_RunUnionRoom(u8 taskId)
         ScheduleFieldMessageWithFollowupState(UR_STATE_START_ACTIVITY_LINK, gStringVar4);
         break;
     case UR_STATE_START_ACTIVITY_LINK:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         uroom->state = UR_STATE_START_ACTIVITY_WAIT_FOR_LINK;
         break;
     case UR_STATE_START_ACTIVITY_WAIT_FOR_LINK:
@@ -3231,7 +3231,7 @@ static bool32 UnionRoom_HandleContactFromOtherPlayer(struct WirelessLink_URoom *
         else if (id == 2) // No activity
         {
             uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
-            sub_800AC34();
+            SetCloseLinkCallback();
             return FALSE;
         }
     }

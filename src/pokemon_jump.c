@@ -1463,7 +1463,7 @@ static bool32 sub_802BC60(void)
     case 4:
         if (!gPaletteFade.active)
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             gUnknown_02022CFC->unkA++;
         }
         break;

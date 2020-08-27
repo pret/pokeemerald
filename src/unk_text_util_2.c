@@ -57,19 +57,19 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                     char_ = *textPrinter->printerTemplate.currentChar++;
                     switch (char_)
                     {
-                        case 1:
+                        case EXT_CTRL_CODE_COLOR:
                             textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar++;
                             GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                             return 2;
-                        case 2:
+                        case EXT_CTRL_CODE_HIGHLIGHT:
                             textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar++;
                             GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                             return 2;
-                        case 3:
+                        case EXT_CTRL_CODE_SHADOW:
                             textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar++;
                             GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                             return 2;
-                        case 4:
+                        case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
                             textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
                             textPrinter->printerTemplate.bgColor = *++textPrinter->printerTemplate.currentChar;
                             textPrinter->printerTemplate.shadowColor = *++textPrinter->printerTemplate.currentChar;
@@ -77,43 +77,43 @@ u16 Font6Func(struct TextPrinter *textPrinter)
 
                             GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                             return 2;
-                        case 5:
+                        case EXT_CTRL_CODE_PALETTE:
                             textPrinter->printerTemplate.currentChar++;
                             return 2;
-                        case 6:
+                        case EXT_CTRL_CODE_SIZE:
                             subStruct->glyphId = *textPrinter->printerTemplate.currentChar;
                             textPrinter->printerTemplate.currentChar++;
                             return 2;
-                        case 7:
+                        case EXT_CTRL_CODE_RESET_SIZE:
                             return 2;
-                        case 8:
+                        case EXT_CTRL_CODE_PAUSE:
                             textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar++;
                             textPrinter->state = 6;
                             return 2;
-                        case 9:
+                        case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
                             textPrinter->state = 1;
                             if (gTextFlags.autoScroll)
                             {
                                 subStruct->autoScrollDelay = 0;
                             }
                             return 3;
-                        case 10:
+                        case EXT_CTRL_CODE_WAIT_SE:
                             textPrinter->state = 5;
                             return 3;
-                        case 11:
-                        case 16:
+                        case EXT_CTRL_CODE_PLAY_BGM:
+                        case EXT_CTRL_CODE_PLAY_SE:
                             textPrinter->printerTemplate.currentChar += 2;
                             return 2;
-                        case 12:
+                        case EXT_CTRL_CODE_ESCAPE:
                             char_ = *++textPrinter->printerTemplate.currentChar;
                             break;
-                        case 13:
+                        case EXT_CTRL_CODE_SHIFT_TEXT:
                             textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x + *textPrinter->printerTemplate.currentChar++;
                             return 2;
-                        case 14:
+                        case EXT_CTRL_CODE_SHIFT_DOWN:
                             textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y + *textPrinter->printerTemplate.currentChar++;
                             return 2;
-                        case 15:
+                        case EXT_CTRL_CODE_FILL_WINDOW:
                             FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                             return 2;
                     }
@@ -126,10 +126,10 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                     textPrinter->state = 3;
                     TextPrinterInitDownArrowCounters(textPrinter);
                     return 3;
-                case 0xF9:
+                case CHAR_EXTRA_SYMBOL:
                     char_ = *textPrinter->printerTemplate.currentChar++| 0x100;
                     break;
-                case 0xF8:
+                case CHAR_KEYPAD_ICON:
                     textPrinter->printerTemplate.currentChar++;
                     return 0;
             }

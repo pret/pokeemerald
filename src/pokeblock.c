@@ -475,7 +475,7 @@ static void CB2_PokeblockMenu(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -507,7 +507,7 @@ static bool8 InitPokeblockMenu(void)
     {
     case 0:
         SetVBlankHBlankCallbacksToNull();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:
@@ -725,8 +725,8 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
     u8 *txtPtr = StringCopy(dst, gPokeblockNames[pkblock->color]);
 
     *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
-    *(txtPtr++) = 0x12;
-    *(txtPtr++) = 0x57;
+    *(txtPtr++) = EXT_CTRL_CODE_SKIP;
+    *(txtPtr++) = 87;
 
     ConvertIntToDecimalStringN(gStringVar1, GetHighestPokeblocksFlavorLevel(pkblock), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(txtPtr, gText_LvVar1);
