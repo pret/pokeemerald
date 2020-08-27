@@ -1267,7 +1267,7 @@ static void Chat_Exit(void)
     case 5:
         if (IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1302,7 +1302,7 @@ static void Chat_Drop(void)
     case 1:
         if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1348,7 +1348,7 @@ static void Chat_Disbanded(void)
     case 2:
         if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1646,7 +1646,7 @@ static void AppendTextToMessage(void)
         charsStr = sUnionRoomKeyboardText[sChat->currentPage][sChat->currentRow];
         for (i = 0; i < sChat->currentCol; i++)
         {
-            if (*charsStr == CHAR_SPECIAL_F9)
+            if (*charsStr == CHAR_EXTRA_SYMBOL)
                 charsStr++;
             charsStr++;
         }
@@ -1670,7 +1670,7 @@ static void AppendTextToMessage(void)
     str = GetEndOfMessagePtr();
     while (--strLength != -1 && sChat->bufferCursorPos < MAX_MESSAGE_LENGTH)
     {
-        if (*charsStr == CHAR_SPECIAL_F9)
+        if (*charsStr == CHAR_EXTRA_SYMBOL)
         {
             *str = *charsStr;
             charsStr++;
@@ -1705,7 +1705,7 @@ static void SwitchCaseOfLastMessageCharacter(void)
 
     sChat->lastBufferCursorPos = sChat->bufferCursorPos - 1;
     str = GetLastCharOfMessagePtr();
-    if (*str != CHAR_SPECIAL_F9)
+    if (*str != CHAR_EXTRA_SYMBOL)
     {
         character = sCaseToggleTable[*str];
         if (character)
@@ -1763,7 +1763,7 @@ static u8 *GetLastCharOfMessagePtr(void)
     while (*currChar != EOS)
     {
         lastChar = currChar;
-        if (*currChar == CHAR_SPECIAL_F9)
+        if (*currChar == CHAR_EXTRA_SYMBOL)
             currChar++;
         currChar++;
     }
@@ -1784,7 +1784,7 @@ static u16 GetNumOverflowCharsInMessage(void)
         strLength -= 10;
         for (i = 0; i < strLength; i++)
         {
-            if (*str == CHAR_SPECIAL_F9)
+            if (*str == CHAR_EXTRA_SYMBOL)
                 str++;
 
             str++;
@@ -1925,7 +1925,7 @@ static u8 *GetLimitedMessageStartPtr(void)
     u8 *str = sChat->messageEntryBuffer;
     for (i = 0; i < numChars; i++)
     {
-        if (*str == CHAR_SPECIAL_F9)
+        if (*str == CHAR_EXTRA_SYMBOL)
             *str++;
 
         str++;
@@ -1942,7 +1942,7 @@ static u16 GetLimitedMessageStartPos(void)
     u8 *str = sChat->messageEntryBuffer;
     for (count = 0, i = 0; i < numChars; count++, i++)
     {
-        if (*str == CHAR_SPECIAL_F9)
+        if (*str == CHAR_EXTRA_SYMBOL)
             str++;
 
         str++;

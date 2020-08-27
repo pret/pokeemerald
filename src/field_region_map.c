@@ -116,7 +116,7 @@ static void MCB2_InitRegionMapRegisters(void)
     InitWindows(sFieldRegionMapWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 0x27, 0xd0);
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     SetMainCallback2(MCB2_FieldUpdateRegionMap);
     SetVBlankCallback(VBCB_FieldUpdateRegionMap);
 }
@@ -134,7 +134,7 @@ static void MCB2_FieldUpdateRegionMap(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
 }
 
 static void FieldUpdateRegionMap(void)

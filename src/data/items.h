@@ -3756,7 +3756,7 @@ const struct Item gItems[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = 2,
         .fieldUseFunc = ItemUseOutOfBattle_Rod,
-        .secondaryId = 2,
+        .secondaryId = SUPER_ROD,
     },
 
     [ITEM_SS_TICKET] =

@@ -2297,7 +2297,7 @@ void AnimTask_TransformMon(u8 taskId)
         LoadBgTiles(1, animBg.bgTiles, 0x800, animBg.tilesOffset);
         if (IsContest())
         {
-            if (IsSpeciesNotUnown(gContestResources->field_18->species) != IsSpeciesNotUnown(gContestResources->field_18->unk2))
+            if (IsSpeciesNotUnown(gContestResources->moveAnim->species) != IsSpeciesNotUnown(gContestResources->moveAnim->targetSpecies))
             {
                 bgTilemap = (u16 *)animBg.bgTilemap;
                 for (i = 0; i < 8; i++)
@@ -2319,7 +2319,7 @@ void AnimTask_TransformMon(u8 taskId)
                 }
             }
 
-            if (IsSpeciesNotUnown(gContestResources->field_18->unk2))
+            if (IsSpeciesNotUnown(gContestResources->moveAnim->targetSpecies))
                 gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gUnknown_082FF6C0;
             else
                 gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gUnknown_082FF694;
@@ -3196,10 +3196,10 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     GetAnimBattlerSpriteId(ANIM_ATTACKER);
     if (IsContest())
     {
-        isBackPic = 1;
-        personality = gContestResources->field_18->unk10;
-        otId = gContestResources->field_18->unkC;
-        species = gContestResources->field_18->unk2;
+        isBackPic = TRUE;
+        personality = gContestResources->moveAnim->targetPersonality;
+        otId = gContestResources->moveAnim->otId;
+        species = gContestResources->moveAnim->targetSpecies;
         xOffset = 20;
         priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
     }
@@ -5031,9 +5031,9 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     case 1:
         if (IsContest())
         {
-            personality = gContestResources->field_18->unk8;
-            otId = gContestResources->field_18->unkC;
-            species = gContestResources->field_18->species;
+            personality = gContestResources->moveAnim->personality;
+            otId = gContestResources->moveAnim->otId;
+            species = gContestResources->moveAnim->species;
             subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
             isBackPic = 0;
             x = -32;

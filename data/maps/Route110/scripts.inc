@@ -448,7 +448,7 @@ Route110_EventScript_MayDefeated:: @ 81EF84A
 	end
 
 Route110_EventScript_BrendanBattle:: @ 81EF865
-	msgbox Route110_Text_BrendayLetsBattle, MSGBOX_DEFAULT
+	msgbox Route110_Text_BrendanLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_BrendanBattleTreecko
 	case 1, Route110_EventScript_BrendanBattleTorchic
@@ -814,7 +814,7 @@ Route110_Text_MayExplainItemfinder: @ 81EFD58
 	.string "me, but I think you should train a lot\l"
 	.string "harder for the next time.$"
 
-Route110_Text_BrendayLetsBattle: @ 81EFE3F
+Route110_Text_BrendanLetsBattle: @ 81EFE3F
 	.string "BRENDAN: Hey, {PLAYER}.\n"
 	.string "So this is where you were.\l"
 	.string "How's it going?\p"

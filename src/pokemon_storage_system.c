@@ -2146,7 +2146,7 @@ static void VblankCb_PSS(void)
 static void Cb2_PSS(void)
 {
     RunTasks();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     ScrollBackground();
     sub_80CAA14();
     AnimateSprites();
@@ -2214,7 +2214,7 @@ static void sub_80C7E98(void)
     gReservedSpriteTileCount = 0x280;
     sub_80D2A90(&sPSSData->unk_0020, sPSSData->unk_0028, 8);
     gKeyRepeatStartDelay = 20;
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     sub_80D259C(3);
     sub_80D2644(0, 1, gUnknown_0857239C, 8, 4);
     sub_80D2770(0, 1, 0);
@@ -2360,11 +2360,11 @@ static void Cb_ShowPSS(u8 taskId)
     {
     case 0:
         PlaySE(SE_PC_LOGIN);
-        sub_80F9BCC(0x14, 0, 1);
+        ComputerScreenOpenEffect(20, 0, 1);
         sPSSData->state++;
         break;
     case 1:
-        if (!sub_80F9C1C())
+        if (!IsComputerScreenOpenEffectActive())
             SetPSSCallback(Cb_MainPSS);
         break;
     }
@@ -3781,11 +3781,11 @@ static void Cb_OnCloseBoxPressed(u8 taskId)
         }
         break;
     case 3:
-        sub_80F9BF4(0x14, 0, 1);
+        ComputerScreenCloseEffect(20, 0, 1);
         sPSSData->state++;
         break;
     case 4:
-        if (!sub_80F9C30())
+        if (!IsComputerScreenCloseEffectActive())
         {
             sub_80CABE0();
             gPlayerPartyCount = CalculatePlayerPartyCount();
@@ -3842,11 +3842,11 @@ static void Cb_OnBPressed(u8 taskId)
         }
         break;
     case 3:
-        sub_80F9BF4(0x14, 0, 0);
+        ComputerScreenCloseEffect(20, 0, 0);
         sPSSData->state++;
         break;
     case 4:
-        if (!sub_80F9C30())
+        if (!IsComputerScreenCloseEffectActive())
         {
             sub_80CABE0();
             gPlayerPartyCount = CalculatePlayerPartyCount();
@@ -6869,36 +6869,36 @@ static void SetCursorMonData(void *pokemon, u8 mode)
 
         txtPtr = sPSSData->cursorMonGenderLvlText;
         *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
-        *(txtPtr)++ = 4;
+        *(txtPtr)++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         switch (gender)
         {
         case MON_MALE:
-            *(txtPtr)++ = 4;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 5;
+            *(txtPtr)++ = TEXT_COLOR_RED;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
             *(txtPtr)++ = CHAR_MALE;
             break;
         case MON_FEMALE:
-            *(txtPtr)++ = 6;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 7;
+            *(txtPtr)++ = TEXT_COLOR_GREEN;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;
             *(txtPtr)++ = CHAR_FEMALE;
             break;
         default:
-            *(txtPtr)++ = 2;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 3;
-            *(txtPtr)++ = 0x77;
+            *(txtPtr)++ = TEXT_COLOR_DARK_GREY;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREY;
+            *(txtPtr)++ = CHAR_UNK_SPACER;
             break;
         }
 
         *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
-        *(txtPtr++) = 4;
-        *(txtPtr++) = 2;
-        *(txtPtr++) = 1;
-        *(txtPtr++) = 3;
-        *(txtPtr++) = 0;
-        *(txtPtr++) = CHAR_SPECIAL_F9;
+        *(txtPtr++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *(txtPtr++) = TEXT_COLOR_DARK_GREY;
+        *(txtPtr++) = TEXT_COLOR_WHITE;
+        *(txtPtr++) = TEXT_COLOR_LIGHT_GREY;
+        *(txtPtr++) = CHAR_SPACE;
+        *(txtPtr++) = CHAR_EXTRA_SYMBOL;
         *(txtPtr++) = CHAR_LV_2;
 
         txtPtr = ConvertIntToDecimalStringN(txtPtr, sPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -8097,7 +8097,7 @@ static bool8 sub_80D0344(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             sub_80CFE84();
-            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
             ShowBg(0);
             return FALSE;
         }
@@ -8203,7 +8203,7 @@ static bool8 sub_80D04C8(void)
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
             sub_80CFE84();
             ShowBg(0);
             return FALSE;

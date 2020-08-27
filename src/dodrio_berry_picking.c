@@ -558,7 +558,7 @@ static void sub_8024BC8(u8 taskId)
     case 2:
         if (!sub_802A770())
         {
-            sub_8010434();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_02022C98->unk0C++;
         }
         break;
@@ -671,7 +671,7 @@ static void sub_8024E38(void)
         gUnknown_02022C98->unk10++;
         break;
     case 1:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         gUnknown_02022C98->unk10++;
         break;
     case 2:
@@ -690,7 +690,7 @@ static void sub_8024E38(void)
     case 4:
         if (++gUnknown_02022C98->unk30 > 5)
         {
-            sub_8010434();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_02022C98->unk10++;
         }
         break;
@@ -1081,7 +1081,7 @@ static void sub_8025644(void)
     switch (gUnknown_02022C98->unk10)
     {
     case 0:
-        sub_800AC34();
+        SetCloseLinkCallback();
         sub_80292E0(7);
         gUnknown_02022C98->unk10++;
         break;
@@ -4629,7 +4629,7 @@ static void sub_802A7A8(void)
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
     InitStandardTextBoxWindows();
-    sub_8197200();
+    InitTextBoxGfxAndPrinters();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetBgTilemapBuffer(3, gUnknown_02022CF8->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, gUnknown_02022CF8->tilemapBuffers[1]);
@@ -4657,7 +4657,7 @@ static bool32 sub_802A8E8(void)
             return FALSE;
         break;
     case 5:
-        LoadPalette(stdpal_get(3), 0xD0, 0x20);
+        LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
         break;
     default:
         gUnknown_02022CF8->unk3018 = 0;

@@ -18,7 +18,7 @@ ContestHall_OnTransition: @ 823B79F
 
 ContestHall_EventScript_ReadyContestMusic:: @ 823B7AF
 	call ContestHall_EventScript_TryWaitForLink
-	special ScriptGetMultiplayerId
+	special GetContestMultiplayerId
 	compare VAR_RESULT, 0
 	call_if_eq ContestHall_EventScript_SaveContestMusicPlayer1
 	compare VAR_RESULT, 1
@@ -136,7 +136,7 @@ ContestHall_EventScript_SetRandomAudience7:: @ 823B8ED
 
 ContestHall_EventScript_GetRandomAudienceGfxId:: @ 823B8F8
 	setvar VAR_RESULT, 32
-	special ScriptRandom
+	special GenerateContestRand
 	addvar VAR_RESULT, 1
 	switch VAR_RESULT
 	case 1, ContestHall_EventScript_RandomAudienceNinjaBoy

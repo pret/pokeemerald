@@ -49,11 +49,11 @@
 (((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
 
 #define LINKCMD_SEND_LINK_TYPE        0x2222
-#define LINKCMD_0x2FFE                0x2FFE
+#define LINKCMD_READY_EXIT_STANDBY    0x2FFE
 #define LINKCMD_SEND_HELD_KEYS        0x4444
 #define LINKCMD_0x5555                0x5555
 #define LINKCMD_0x5566                0x5566
-#define LINKCMD_0x5FFF                0x5FFF
+#define LINKCMD_READY_CLOSE_LINK      0x5FFF
 #define LINKCMD_0x6666                0x6666
 #define LINKCMD_0x7777                0x7777
 #define LINKCMD_CONT_BLOCK            0x8888
@@ -64,7 +64,7 @@
 #define LINKCMD_INIT_BLOCK            0xBBBB
 #define LINKCMD_READY_CANCEL_TRADE    0xBBCC
 #define LINKCMD_SEND_HELD_KEYS_2      0xCAFE
-#define LINKCMD_0xCCCC                0xCCCC
+#define LINKCMD_SEND_BLOCK_REQ        0xCCCC
 #define LINKCMD_START_TRADE           0xCCDD
 #define LINKCMD_CONFIRM_FINISH_TRADE  0xDCBA
 #define LINKCMD_SET_MONS_TO_TRADE     0xDDDD 
@@ -273,11 +273,11 @@ bool32 InUnionRoom(void);
 void LoadWirelessStatusIndicatorSpriteGfx(void);
 bool8 IsLinkTaskFinished(void);
 void CreateWirelessStatusIndicatorSprite(u8, u8);
-void sub_800ADF8(void);
+void SetLinkStandbyCallback(void);
 void SetWirelessCommType1(void);
 void CheckShouldAdvanceLinkState(void);
 u8 IsLinkMaster(void);
-void sub_800AC34(void);
+void SetCloseLinkCallback(void);
 bool8 HandleLinkConnection(void);
 void SetLinkDebugValues(u32 seed, u32 flags);
 void sub_800A418(void);
@@ -305,9 +305,9 @@ extern u16 gLinkHeldKeys;
 extern u32 gLinkStatus;
 extern u8 gUnknown_030030E4;
 extern u8 gUnknown_030030E8;
-extern u8 gUnknown_030030EC[MAX_LINK_PLAYERS];
-extern u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
-extern u16 gUnknown_030030F4;
+extern bool8 gReadyToExitStandby[MAX_LINK_PLAYERS];
+extern bool8 gReadyToCloseLink[MAX_LINK_PLAYERS];
+extern u16 gReadyCloseLinkType;
 extern u8 gSuppressLinkErrorMessage;
 extern u8 gWirelessCommType;
 extern bool8 gSavedLinkPlayerCount;
@@ -334,15 +334,15 @@ bool32 LinkDummy_Return2(void);
 void SetLocalLinkPlayerId(u8);
 u8 GetSavedPlayerCount(void);
 void sub_8009FAC(void);
-bool8 sub_800A4D8(u8 a0);
+bool8 SendBlockRequest(u8 type);
 u8 GetLinkPlayerCountAsBitFlags(void);
 u8 sub_800A0C8(s32, s32);
 u8 GetSavedLinkPlayerCountAsBitFlags(void);
-void sub_800AD10(void);
+void SetCloseLinkCallbackHandleJP(void);
 void CheckLinkPlayersMatchSaved(void);
 void StartSendingKeysToLink(void);
 bool8 DoesLinkPlayerCountMatchSaved(void);
-void sub_800ABF4(u16 a0);
+void SetCloseLinkCallbackAndType(u16 type);
 bool32 IsSendingKeysToLink(void);
 u32 GetLinkRecvQueueLength(void);
 

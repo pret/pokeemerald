@@ -1244,7 +1244,7 @@ void DoRayquazaScene(u8 animId, bool8 onlyOneAnim, void (*callback)(void))
 static void CB2_InitRayquazaScene(void)
 {
     SetVBlankHBlankCallbacksToNull();
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     FreeAllSpritePalettes();
     ResetPaletteFade();
@@ -1260,7 +1260,7 @@ static void CB2_RayquazaScene(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 

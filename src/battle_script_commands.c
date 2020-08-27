@@ -1130,13 +1130,13 @@ static void Cmd_accuracycheck(void)
         else
         {
             u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-            buff = acc + 6 - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
+            buff = acc + DEFAULT_STAT_STAGE - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
         }
 
-        if (buff < 0)
-            buff = 0;
-        if (buff > 0xC)
-            buff = 0xC;
+        if (buff < MIN_STAT_STAGE)
+            buff = MIN_STAT_STAGE;
+        if (buff > MAX_STAT_STAGE)
+            buff = MAX_STAT_STAGE;
 
         moveAcc = gBattleMoves[move].accuracy;
         // check Thunder on sunny weather
@@ -3491,7 +3491,6 @@ static void Cmd_getexp(void)
     }
 }
 
-#ifdef NONMATCHING
 static void Cmd_unknown_24(void)
 {
     u16 HP_count = 0;
@@ -3502,7 +3501,7 @@ static void Cmd_unknown_24(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < MULTI_PARTY_SIZE; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
@@ -3523,7 +3522,9 @@ static void Cmd_unknown_24(void)
     if (HP_count == 0)
         gBattleOutcome |= B_OUTCOME_LOST;
 
-    for (HP_count = 0, i = 0; i < PARTY_SIZE; i++)
+    HP_count = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
@@ -3537,33 +3538,31 @@ static void Cmd_unknown_24(void)
 
     if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
     {
-        s32 foundPlayer;
-        s32 foundOpponent;
-
-        // Impossible to decompile loops.
-        for (foundPlayer = 0, i = 0; i < gBattlersCount; i += 2)
+        s32 foundPlayer = 0, foundOpponent;
+        for (i = 0; i < gBattlersCount; i += 2)
         {
-            if (HITMARKER_FAINTED2(i) & gHitMarker && !gSpecialStatuses[i].flag40)
+            if ((gHitMarker & HITMARKER_FAINTED2(i)) && (!gSpecialStatuses[i].flag40))
                 foundPlayer++;
         }
 
-        for (foundOpponent = 0, i = 1; i < gBattlersCount; i += 2)
+        foundOpponent = 0;
+        for (i = 1; i < gBattlersCount; i += 2)
         {
-            if (HITMARKER_FAINTED2(i) & gHitMarker && !gSpecialStatuses[i].flag40)
+            if ((gHitMarker & HITMARKER_FAINTED2(i)) && (!gSpecialStatuses[i].flag40))
                 foundOpponent++;
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             if (foundOpponent + foundPlayer > 1)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = (u8*) T2_READ_32(gBattlescriptCurrInstr + 1);
             else
                 gBattlescriptCurrInstr += 5;
         }
         else
         {
             if (foundOpponent != 0 && foundPlayer != 0)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = (u8*) T2_READ_32(gBattlescriptCurrInstr + 1);
             else
                 gBattlescriptCurrInstr += 5;
         }
@@ -3573,301 +3572,6 @@ static void Cmd_unknown_24(void)
         gBattlescriptCurrInstr += 5;
     }
 }
-#else
-NAKED
-static void Cmd_unknown_24(void)
-{
-    asm("\n\
-        .syntax unified\n\
-        push {r4-r7,lr}\n\
-        mov r7, r8\n\
-        push {r7}\n\
-        movs r6, 0\n\
-        ldr r0, =gBattleControllerExecFlags\n\
-        ldr r0, [r0]\n\
-        cmp r0, 0\n\
-        beq _0804ACE2\n\
-        b _0804AF22\n\
-    _0804ACE2:\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r0, [r0]\n\
-        movs r1, 0x80\n\
-        lsls r1, 15\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AD48\n\
-        ldr r0, =gPartnerTrainerId\n\
-        ldrh r1, [r0]\n\
-        ldr r0, =0x00000c03\n\
-        cmp r1, r0\n\
-        bne _0804AD48\n\
-        movs r5, 0\n\
-    _0804ACFC:\n\
-        movs r0, 0x64\n\
-        adds r1, r5, 0\n\
-        muls r1, r0\n\
-        ldr r0, =gPlayerParty\n\
-        adds r4, r1, r0\n\
-        adds r0, r4, 0\n\
-        movs r1, 0xB\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        beq _0804AD2C\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x2D\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _0804AD2C\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x39\n\
-        bl GetMonData\n\
-        adds r0, r6, r0\n\
-        lsls r0, 16\n\
-        lsrs r6, r0, 16\n\
-    _0804AD2C:\n\
-        adds r5, 0x1\n\
-        cmp r5, 0x2\n\
-        ble _0804ACFC\n\
-        b _0804ADA8\n\
-        .pool\n\
-    _0804AD48:\n\
-        movs r5, 0\n\
-    _0804AD4A:\n\
-        movs r0, 0x64\n\
-        adds r1, r5, 0\n\
-        muls r1, r0\n\
-        ldr r0, =gPlayerParty\n\
-        adds r4, r1, r0\n\
-        adds r0, r4, 0\n\
-        movs r1, 0xB\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        beq _0804ADA2\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x2D\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _0804ADA2\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r0, [r0]\n\
-        movs r1, 0x80\n\
-        lsls r1, 11\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AD94\n\
-        ldr r0, =gBattleStruct\n\
-        ldr r0, [r0]\n\
-        movs r1, 0xA8\n\
-        lsls r1, 2\n\
-        adds r0, r1\n\
-        ldrb r1, [r0]\n\
-        ldr r2, =gBitTable\n\
-        lsls r0, r5, 2\n\
-        adds r0, r2\n\
-        ldr r0, [r0]\n\
-        ands r1, r0\n\
-        cmp r1, 0\n\
-        bne _0804ADA2\n\
-    _0804AD94:\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x39\n\
-        bl GetMonData\n\
-        adds r0, r6, r0\n\
-        lsls r0, 16\n\
-        lsrs r6, r0, 16\n\
-    _0804ADA2:\n\
-        adds r5, 0x1\n\
-        cmp r5, 0x5\n\
-        ble _0804AD4A\n\
-    _0804ADA8:\n\
-        cmp r6, 0\n\
-        bne _0804ADB6\n\
-        ldr r0, =gBattleOutcome\n\
-        ldrb r1, [r0]\n\
-        movs r2, 0x2\n\
-        orrs r1, r2\n\
-        strb r1, [r0]\n\
-    _0804ADB6:\n\
-        movs r6, 0\n\
-        movs r5, 0\n\
-    _0804ADBA:\n\
-        movs r0, 0x64\n\
-        adds r1, r5, 0\n\
-        muls r1, r0\n\
-        ldr r0, =gEnemyParty\n\
-        adds r4, r1, r0\n\
-        adds r0, r4, 0\n\
-        movs r1, 0xB\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        beq _0804AE10\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x2D\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _0804AE10\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r0, [r0]\n\
-        movs r1, 0x80\n\
-        lsls r1, 11\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AE02\n\
-        ldr r0, =gBattleStruct\n\
-        ldr r0, [r0]\n\
-        ldr r1, =0x000002a1\n\
-        adds r0, r1\n\
-        ldrb r1, [r0]\n\
-        ldr r2, =gBitTable\n\
-        lsls r0, r5, 2\n\
-        adds r0, r2\n\
-        ldr r0, [r0]\n\
-        ands r1, r0\n\
-        cmp r1, 0\n\
-        bne _0804AE10\n\
-    _0804AE02:\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x39\n\
-        bl GetMonData\n\
-        adds r0, r6, r0\n\
-        lsls r0, 16\n\
-        lsrs r6, r0, 16\n\
-    _0804AE10:\n\
-        adds r5, 0x1\n\
-        cmp r5, 0x5\n\
-        ble _0804ADBA\n\
-        ldr r2, =gBattleOutcome\n\
-        cmp r6, 0\n\
-        bne _0804AE24\n\
-        ldrb r0, [r2]\n\
-        movs r1, 0x1\n\
-        orrs r0, r1\n\
-        strb r0, [r2]\n\
-    _0804AE24:\n\
-        ldrb r0, [r2]\n\
-        cmp r0, 0\n\
-        bne _0804AF1A\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r1, [r0]\n\
-        ldr r2, =0x02000002\n\
-        ands r1, r2\n\
-        mov r8, r0\n\
-        cmp r1, 0\n\
-        beq _0804AF1A\n\
-        movs r3, 0\n\
-        movs r5, 0\n\
-        ldr r0, =gBattlersCount\n\
-        ldrb r1, [r0]\n\
-        mov r12, r0\n\
-        ldr r7, =gBattlescriptCurrInstr\n\
-        cmp r3, r1\n\
-        bge _0804AE70\n\
-        ldr r0, =gHitMarker\n\
-        movs r6, 0x80\n\
-        lsls r6, 21\n\
-        ldr r4, [r0]\n\
-        adds r2, r1, 0\n\
-        ldr r1, =gSpecialStatuses\n\
-    _0804AE54:\n\
-        adds r0, r6, 0\n\
-        lsls r0, r5\n\
-        ands r0, r4\n\
-        cmp r0, 0\n\
-        beq _0804AE68\n\
-        ldrb r0, [r1]\n\
-        lsls r0, 25\n\
-        cmp r0, 0\n\
-        blt _0804AE68\n\
-        adds r3, 0x1\n\
-    _0804AE68:\n\
-        adds r1, 0x28\n\
-        adds r5, 0x2\n\
-        cmp r5, r2\n\
-        blt _0804AE54\n\
-    _0804AE70:\n\
-        movs r2, 0\n\
-        movs r5, 0x1\n\
-        mov r4, r12\n\
-        ldrb r1, [r4]\n\
-        cmp r5, r1\n\
-        bge _0804AEAA\n\
-        ldr r0, =gHitMarker\n\
-        movs r4, 0x80\n\
-        lsls r4, 21\n\
-        mov r12, r4\n\
-        ldr r6, [r0]\n\
-        ldr r0, =gSpecialStatuses\n\
-        adds r4, r1, 0\n\
-        adds r1, r0, 0\n\
-        adds r1, 0x14\n\
-    _0804AE8E:\n\
-        mov r0, r12\n\
-        lsls r0, r5\n\
-        ands r0, r6\n\
-        cmp r0, 0\n\
-        beq _0804AEA2\n\
-        ldrb r0, [r1]\n\
-        lsls r0, 25\n\
-        cmp r0, 0\n\
-        blt _0804AEA2\n\
-        adds r2, 0x1\n\
-    _0804AEA2:\n\
-        adds r1, 0x28\n\
-        adds r5, 0x2\n\
-        cmp r5, r4\n\
-        blt _0804AE8E\n\
-    _0804AEAA:\n\
-        mov r1, r8\n\
-        ldr r0, [r1]\n\
-        movs r1, 0x40\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AEF0\n\
-        adds r0, r2, r3\n\
-        cmp r0, 0x1\n\
-        bgt _0804AEF8\n\
-        b _0804AF12\n\
-        .pool\n\
-    _0804AEF0:\n\
-        cmp r2, 0\n\
-        beq _0804AF12\n\
-        cmp r3, 0\n\
-        beq _0804AF12\n\
-    _0804AEF8:\n\
-        ldr r2, [r7]\n\
-        ldrb r1, [r2, 0x1]\n\
-        ldrb r0, [r2, 0x2]\n\
-        lsls r0, 8\n\
-        adds r1, r0\n\
-        ldrb r0, [r2, 0x3]\n\
-        lsls r0, 16\n\
-        adds r1, r0\n\
-        ldrb r0, [r2, 0x4]\n\
-        lsls r0, 24\n\
-        adds r1, r0\n\
-        str r1, [r7]\n\
-        b _0804AF22\n\
-    _0804AF12:\n\
-        ldr r0, [r7]\n\
-        adds r0, 0x5\n\
-        str r0, [r7]\n\
-        b _0804AF22\n\
-    _0804AF1A:\n\
-        ldr r1, =gBattlescriptCurrInstr\n\
-        ldr r0, [r1]\n\
-        adds r0, 0x5\n\
-        str r0, [r1]\n\
-    _0804AF22:\n\
-        pop {r3}\n\
-        mov r8, r3\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .pool\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 static void MoveValuesCleanUp(void)
 {
@@ -4387,7 +4091,7 @@ static void Cmd_playstatchangeanimation(void)
             {
                 if (gBattlescriptCurrInstr[3] & STAT_CHANGE_CANT_PREVENT)
                 {
-                    if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
+                    if (gBattleMons[gActiveBattler].statStages[currStat] > MIN_STAT_STAGE)
                     {
                         statAnimId = startingStatAnimId + currStat;
                         changeableStatsCount++;
@@ -4399,7 +4103,7 @@ static void Cmd_playstatchangeanimation(void)
                         && !(gBattleMons[gActiveBattler].ability == ABILITY_KEEN_EYE && currStat == STAT_ACC)
                         && !(gBattleMons[gActiveBattler].ability == ABILITY_HYPER_CUTTER && currStat == STAT_ATK))
                 {
-                    if (gBattleMons[gActiveBattler].statStages[currStat] > 0)
+                    if (gBattleMons[gActiveBattler].statStages[currStat] > MIN_STAT_STAGE)
                     {
                         statAnimId = startingStatAnimId + currStat;
                         changeableStatsCount++;
@@ -4427,7 +4131,7 @@ static void Cmd_playstatchangeanimation(void)
 
         while (statsToCheck != 0)
         {
-            if (statsToCheck & 1 && gBattleMons[gActiveBattler].statStages[currStat] < 0xC)
+            if (statsToCheck & 1 && gBattleMons[gActiveBattler].statStages[currStat] < MAX_STAT_STAGE)
             {
                 statAnimId = startingStatAnimId + currStat;
                 changeableStatsCount++;
@@ -4497,7 +4201,7 @@ static void Cmd_moveend(void)
                 && gBattleMons[gBattlerTarget].hp != 0 && gBattlerAttacker != gBattlerTarget
                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && TARGET_TURN_DAMAGED
-                && gBattleMoves[gCurrentMove].power && gBattleMons[gBattlerTarget].statStages[STAT_ATK] <= 0xB)
+                && gBattleMoves[gCurrentMove].power && gBattleMons[gBattlerTarget].statStages[STAT_ATK] < MAX_STAT_STAGE)
             {
                 gBattleMons[gBattlerTarget].statStages[STAT_ATK]++;
                 BattleScriptPushCursor();
@@ -5473,7 +5177,7 @@ static void Cmd_switchineffects(void)
     s32 i;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    sub_803FA70(gActiveBattler);
+    UpdateSentPokesToOpponentValue(gActiveBattler);
 
     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
     gSpecialStatuses[gActiveBattler].flag40 = 0;
@@ -5833,8 +5537,8 @@ static void Cmd_hitanimation(void)
 static u32 GetTrainerMoneyToGive(u16 trainerId)
 {
     u32 i = 0;
-    u32 lastMonLevel = 0;
-    u32 moneyReward = 0;
+    u32 moneyReward;
+    u8 lastMonLevel = 0;
 
     if (trainerId == TRAINER_SECRET_BASE)
     {
@@ -6342,15 +6046,13 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     AddTextPrinter(&printerTemplate, 0xFF, NULL);
 
     txtPtr = gStringVar4;
-    gStringVar4[0] = CHAR_SPECIAL_F9;
-    txtPtr++;
-    txtPtr[0] = CHAR_LV_2;
-    txtPtr++;
+    *(txtPtr)++ = CHAR_EXTRA_SYMBOL;
+    *(txtPtr)++ = CHAR_LV_2;
 
     var = (u32)(txtPtr);
     txtPtr = ConvertIntToDecimalStringN(txtPtr, monLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     var = (u32)(txtPtr) - var;
-    txtPtr = StringFill(txtPtr, 0x77, 4 - var);
+    txtPtr = StringFill(txtPtr, CHAR_UNK_SPACER, 4 - var);
 
     if (monGender != MON_GENDERLESS)
     {
@@ -7290,7 +6992,7 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
             index++;
             gBattleTextBuff2[index] = B_BUFF_EOS;
 
-            if (gBattleMons[gActiveBattler].statStages[statId] == 0)
+            if (gBattleMons[gActiveBattler].statStages[statId] == MIN_STAT_STAGE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler);
@@ -7317,17 +7019,17 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
         index++;
         gBattleTextBuff2[index] = B_BUFF_EOS;
 
-        if (gBattleMons[gActiveBattler].statStages[statId] == 0xC)
+        if (gBattleMons[gActiveBattler].statStages[statId] == MAX_STAT_STAGE)
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         else
             gBattleCommunication[MULTISTRING_CHOOSER] = (gBattlerTarget == gActiveBattler);
     }
 
     gBattleMons[gActiveBattler].statStages[statId] += statValue;
-    if (gBattleMons[gActiveBattler].statStages[statId] < 0)
-        gBattleMons[gActiveBattler].statStages[statId] = 0;
-    if (gBattleMons[gActiveBattler].statStages[statId] > 0xC)
-        gBattleMons[gActiveBattler].statStages[statId] = 0xC;
+    if (gBattleMons[gActiveBattler].statStages[statId] < MIN_STAT_STAGE)
+        gBattleMons[gActiveBattler].statStages[statId] = MIN_STAT_STAGE;
+    if (gBattleMons[gActiveBattler].statStages[statId] > MAX_STAT_STAGE)
+        gBattleMons[gActiveBattler].statStages[statId] = MAX_STAT_STAGE;
 
     if (gBattleCommunication[MULTISTRING_CHOOSER] == 2 && flags & STAT_BUFF_ALLOW_PTR)
         gMoveResultFlags |= MOVE_RESULT_MISSED;
@@ -7352,7 +7054,7 @@ static void Cmd_normalisebuffs(void) // haze
     for (i = 0; i < gBattlersCount; i++)
     {
         for (j = 0; j < NUM_BATTLE_STATS; j++)
-            gBattleMons[i].statStages[j] = 6;
+            gBattleMons[i].statStages[j] = DEFAULT_STAT_STAGE;
     }
 
     gBattlescriptCurrInstr++;
@@ -8752,7 +8454,7 @@ static void Cmd_rolloutdamagecalculation(void)
 static void Cmd_jumpifconfusedandstatmaxed(void)
 {
     if (gBattleMons[gBattlerTarget].status2 & STATUS2_CONFUSION
-        && gBattleMons[gBattlerTarget].statStages[gBattlescriptCurrInstr[1]] == 0xC)
+        && gBattleMons[gBattlerTarget].statStages[gBattlescriptCurrInstr[1]] == MAX_STAT_STAGE)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
     else
         gBattlescriptCurrInstr += 6;
@@ -8959,10 +8661,10 @@ static void Cmd_maxattackhalvehp(void) // belly drum
     if (!(gBattleMons[gBattlerAttacker].maxHP / 2))
         halfHp = 1;
 
-    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < 12
+    if (gBattleMons[gBattlerAttacker].statStages[STAT_ATK] < MAX_STAT_STAGE
         && gBattleMons[gBattlerAttacker].hp > halfHp)
     {
-        gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = 12;
+        gBattleMons[gBattlerAttacker].statStages[STAT_ATK] = MAX_STAT_STAGE;
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
@@ -9236,8 +8938,8 @@ static void Cmd_sethail(void)
 
 static void Cmd_jumpifattackandspecialattackcannotfall(void) // memento
 {
-    if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] == 0
-        && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == 0
+    if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] == MIN_STAT_STAGE
+        && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == MIN_STAT_STAGE
         && gBattleCommunication[6] != 1)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
