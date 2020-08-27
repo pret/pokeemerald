@@ -3598,7 +3598,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_HOOPA] =
     {
         .size = 0x87,
-        .y_offset = 7,
+        .y_offset = 8,
     },
     [SPECIES_VOLCANION] =
     {
