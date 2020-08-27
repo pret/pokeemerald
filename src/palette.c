@@ -52,7 +52,7 @@ static u8 UpdateFastPaletteFade(void);
 static u8 UpdateHardwarePaletteFade(void);
 static void UpdateBlendRegisters(void);
 static bool8 IsSoftwarePaletteFadeFinishing(void);
-static void sub_80A2D54(u8 taskId);
+static void Task_BlendPalettesGradually(u8 taskId);
 
 // palette buffers require alignment with agbcc because
 // unaligned word reads are issued in BlendPalette otherwise
@@ -956,7 +956,7 @@ void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTa
 {
     u8 taskId;
 
-    taskId = CreateTask((void *)sub_80A2D54, priority);
+    taskId = CreateTask((void *)Task_BlendPalettesGradually, priority);
     gTasks[taskId].tCoeff = coeff;
     gTasks[taskId].tCoeffTarget = coeffTarget;
 
@@ -981,13 +981,13 @@ void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTa
 }
 
 // Unused
-static bool32 sub_80A2CF8(u8 id)
+static bool32 IsBlendPalettesGraduallyTaskActive(u8 id)
 {
     int i;
 
     for (i = 0; i < NUM_TASKS; i++)
         if ((gTasks[i].isActive == TRUE) 
-            && (gTasks[i].func == sub_80A2D54) 
+            && (gTasks[i].func == Task_BlendPalettesGradually) 
             && (gTasks[i].tId == id))
             return TRUE;
 
@@ -995,20 +995,20 @@ static bool32 sub_80A2CF8(u8 id)
 }
 
 // Unused
-static void sub_80A2D34(void)
+static void DestroyBlendPalettesGraduallyTask(void)
 {
     u8 taskId;
 
     while (1)
     {
-        taskId = FindTaskIdByFunc(sub_80A2D54);
+        taskId = FindTaskIdByFunc(Task_BlendPalettesGradually);
         if (taskId == 0xFF)
             break;
         DestroyTask(taskId);
     }
 }
 
-static void sub_80A2D54(u8 taskId)
+static void Task_BlendPalettesGradually(u8 taskId)
 {
     u32 palettes;
     s16 *data;
