@@ -29,7 +29,6 @@
 #include "window.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
-#include "constants/flags.h"
 #include "constants/lilycove_lady.h"
 #include "constants/mauville_old_man.h"
 #include "constants/songs.h"
@@ -2538,7 +2537,7 @@ u8 sub_811BBBC(void)
     return sEasyChatScreen->unk_0c;
 }
 
-void sub_811BBC8(u8 *arg0, u8 *arg1)
+static void sub_811BBC8(s8 *arg0, s8 *arg1)
 {
     *arg0 = sEasyChatScreen->unk_10;
     *arg1 = sEasyChatScreen->unk_11;
@@ -4530,18 +4529,18 @@ static void sub_811E30C(void)
     x = var0 * 13;
     x = x * 8 + 28;
     y = var1 * 16 + 96;
-    sub_811E34C(x, y);
+    sub_811E34C((u8)x, (u8)y);
 }
 
 static void sub_811E34C(u8 x, u8 y)
 {
-    if (sUnknown_0203A11C->unk2E4)
-    {
-        sUnknown_0203A11C->unk2E4->pos1.x = x;
-        sUnknown_0203A11C->unk2E4->pos1.y = y;
-        sUnknown_0203A11C->unk2E4->pos2.x = 0;
-        sUnknown_0203A11C->unk2E4->data[0] = 0;
-    }
+    if (!sUnknown_0203A11C->unk2E4)
+        return;
+
+    sUnknown_0203A11C->unk2E4->pos1.x = (s16)x;
+    sUnknown_0203A11C->unk2E4->pos1.y = (s16)y;
+    sUnknown_0203A11C->unk2E4->pos2.x = 0;
+    sUnknown_0203A11C->unk2E4->data[0] = 0;
 }
 
 static void sub_811E380(void)
@@ -5273,12 +5272,17 @@ void InitEasyChatPhrases(void)
             gSaveBlock1Ptr->mail[i].words[j] = 0xFFFF;
     }
 
+#ifndef UBFIX
     // BUG: This is supposed to clear 64 bits, but this loop is clearing 64 bytes.
     // However, this bug has no resulting effect on gameplay because only the
     // Mauville old man data is corrupted, which is initialized directly after
     // this function is called when starting a new game.
     for (i = 0; i < 64; i++)
         gSaveBlock1Ptr->additionalPhrases[i] = 0;
+#else
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->additionalPhrases); i++)
+        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+#endif
 }
 
 static bool8 sub_811F28C(void)

@@ -391,7 +391,7 @@ u32 sub_81CD070(void);
 void sub_81CD1C0(void);
 bool32 sub_81CD3C4(void);
 bool32 sub_81CDD5C(void);
-struct UnknownStruct_81D1ED4 *sub_81CDC70(void);
+struct ConditionGraph *sub_81CDC70(void);
 u16 sub_81CDC60(void);
 u16 sub_81CDC50(void);
 u8 sub_81CDDB0(void);

@@ -152,7 +152,7 @@ static void CB2_MysteryEventMenu(void)
         if (!IsTextPrinterActive(0))
         {
             gMain.state++;
-            gLinkType = LINKTYPE_0x5501;
+            gLinkType = LINKTYPE_MYSTERY_EVENT;
             OpenLink();
         }
         break;
@@ -206,9 +206,9 @@ static void CB2_MysteryEventMenu(void)
         {
             if (gReceivedRemoteLinkPlayers != 0)
             {
-                if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == 3)
+                if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == EXCHANGE_DIFF_SELECTIONS)
                 {
-                    sub_800AC34();
+                    SetCloseLinkCallback();
                     GetEventLoadMessage(gStringVar4, 1);
                     PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
                     gMain.state = 13;
@@ -249,7 +249,7 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 10:
-        sub_800AC34();
+        SetCloseLinkCallback();
         gMain.state++;
         break;
     case 11:

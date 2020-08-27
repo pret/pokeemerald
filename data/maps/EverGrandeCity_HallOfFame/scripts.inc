@@ -1,3 +1,5 @@
+.set LOCALID_WALLACE, 1
+
 EverGrandeCity_HallOfFame_MapScripts:: @ 822982C
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_HallOfFame_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_HallOfFame_OnWarp
@@ -17,24 +19,24 @@ EverGrandeCity_HallOfFame_OnFrame: @ 8229846
 
 EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: @ 8229850
 	lockall
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
+	applymovement LOCALID_WALLACE, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
 	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
 	waitmovement 0
-	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
+	applymovement LOCALID_WALLACE, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
 	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
 	waitmovement 0
 	delay 20
-	applymovement 1, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20

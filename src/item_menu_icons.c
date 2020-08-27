@@ -19,7 +19,7 @@ struct CompressedTilesPal
 
 // this file's functions
 static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
-static void SpriteCB_ShakeBagVisual(struct Sprite *sprite);
+static void SpriteCB_ShakeBagSprite(struct Sprite *sprite);
 static void SpriteCB_SwitchPocketRotatingBallInit(struct Sprite *sprite);
 static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 
@@ -456,17 +456,17 @@ static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite)
     }
 }
 
-void ShakeBagVisual(void)
+void ShakeBagSprite(void)
 {
     struct Sprite *sprite = &gSprites[gBagMenu->spriteId[0]];
     if (sprite->affineAnimEnded)
     {
         StartSpriteAffineAnim(sprite, 1);
-        sprite->callback = SpriteCB_ShakeBagVisual;
+        sprite->callback = SpriteCB_ShakeBagSprite;
     }
 }
 
-static void SpriteCB_ShakeBagVisual(struct Sprite *sprite)
+static void SpriteCB_ShakeBagSprite(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {

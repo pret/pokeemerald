@@ -1466,7 +1466,9 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].facilityClass];
-            asm("");
+            #ifndef NONMATCHING
+                asm("");
+            #endif
         }
     }
     else
@@ -1478,7 +1480,9 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass];
-            asm("");
+            #ifndef NONMATCHING
+                asm("");
+            #endif
         }
     }
 
@@ -2028,7 +2032,7 @@ void DoSpecialTrainerBattle(void)
         }
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(0));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(0));
         break;
     case SPECIAL_BATTLE_SECRET_BASE:
         for (i = 0; i < PARTY_SIZE; i++)
@@ -2038,7 +2042,7 @@ void DoSpecialTrainerBattle(void)
         }
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(12));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(12));
         break;
     case SPECIAL_BATTLE_EREADER:
         ZeroEnemyPartyMons();
@@ -2048,7 +2052,7 @@ void DoSpecialTrainerBattle(void)
         gTrainerBattleOpponent_A = 0;
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(13));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(13));
         break;
     case SPECIAL_BATTLE_DOME:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOME;
@@ -2058,7 +2062,7 @@ void DoSpecialTrainerBattle(void)
             FillFrontierTrainerParty(DOME_BATTLE_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         sub_806E694(0);
-        BattleTransition_StartOnField(sub_80B100C(3));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(3));
         break;
     case SPECIAL_BATTLE_PALACE:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE;
@@ -2070,7 +2074,7 @@ void DoSpecialTrainerBattle(void)
             FillTentTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(4));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(4));
         break;
     case SPECIAL_BATTLE_ARENA:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_ARENA;
@@ -2080,7 +2084,7 @@ void DoSpecialTrainerBattle(void)
             FillTentTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(5));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(5));
         break;
     case SPECIAL_BATTLE_FACTORY:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
@@ -2089,28 +2093,28 @@ void DoSpecialTrainerBattle(void)
         FillFactoryTrainerParty();
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(6));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(6));
         break;
     case SPECIAL_BATTLE_PIKE_SINGLE:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
         FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(7));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(7));
         break;
     case SPECIAL_BATTLE_PYRAMID:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID;
         FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(10));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(10));
         break;
     case SPECIAL_BATTLE_PIKE_DOUBLE:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
         FillFrontierTrainersParties(1);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(sub_80B100C(7));
+        BattleTransition_StartOnField(GetSpecialBattleTransition(7));
         break;
     case SPECIAL_BATTLE_STEVEN:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
@@ -2627,7 +2631,7 @@ static void LoadLinkMultiOpponentsData(void)
         }
         break;
     case 4:
-        sub_800AC34();
+        SetCloseLinkCallback();
         gSpecialVar_Result = 5;
         break;
     case 5:
@@ -2644,7 +2648,7 @@ static void LoadLinkMultiOpponentsData(void)
 static void sub_8164DCC(void)
 {
     if (gWirelessCommType != 0)
-        sub_800AC34();
+        SetCloseLinkCallback();
 }
 
 static void SetMultiPartnerGfx(void)

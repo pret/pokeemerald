@@ -1849,8 +1849,8 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     }
     else
     {
-        for (i = 0; i < 4; i++)
-            gAnimBattlerSpecies[i] = gContestResources->field_18->species;
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+            gAnimBattlerSpecies[i] = gContestResources->moveAnim->species;
     }
 
     if (!isMoveAnim)
@@ -2311,7 +2311,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
         gBattle_BG1_X =  -(gSprites[battlerSpriteId].pos1.x + gSprites[battlerSpriteId].pos2.x) + 0x20;
-        if (IsContest() && IsSpeciesNotUnown(gContestResources->field_18->species))
+        if (IsContest() && IsSpeciesNotUnown(gContestResources->moveAnim->species))
             gBattle_BG1_X--;
 
         gBattle_BG1_Y =  -(gSprites[battlerSpriteId].pos1.y + gSprites[battlerSpriteId].pos2.y) + 0x20;
@@ -2369,7 +2369,7 @@ static void sub_80A46A0(void)
     struct BattleAnimBgData animBg;
     u16 *ptr;
 
-    if (IsSpeciesNotUnown(gContestResources->field_18->species))
+    if (IsSpeciesNotUnown(gContestResources->moveAnim->species))
     {
         sub_80A6B30(&animBg);
         ptr = animBg.bgTilemap;

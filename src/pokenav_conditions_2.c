@@ -24,8 +24,8 @@ u32 sub_81CE700(s32);
 
 BSS_DATA u8 gUnknown_030012BC;
 
-const u16 gUnknown_086231E8[] = INCBIN_U16("graphics/pokenav/86231E8.gbapal");
-const u16 gUnknown_08623208[] = INCBIN_U16("graphics/pokenav/8623208.gbapal");
+const u16 gConditionGraphData_Pal[] = INCBIN_U16("graphics/pokenav/condition/graph_data.gbapal");
+const u16 gConditionText_Pal[] = INCBIN_U16("graphics/pokenav/condition/text.gbapal");
 const u32 gUnknown_08623228[] = INCBIN_U32("graphics/pokenav/8623228.4bpp.lz");
 const u32 gUnknown_0862323C[] = INCBIN_U32("graphics/pokenav/862323C.bin.lz");
 const u16 gUnknown_08623338[] = INCBIN_U16("graphics/pokenav/8623338.gbapal");
@@ -134,7 +134,7 @@ struct Pokenav7Struct
     u8 unk1823;
     struct PokemonMarkMenu monMarks;
     struct Sprite *unk28dc;
-    struct Sprite *unk28e0[10];
+    struct Sprite *unk28e0[MAX_CONDITION_SPARKLES];
     u8 unk2908;
     u8 filler2[0x38ac - 0x2909];
 };
@@ -208,15 +208,15 @@ u32 sub_81CDE94(s32 state)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
-        decompress_and_copy_tile_data_to_vram(3, gPokenavCondition_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, gPokenavCondition_Gfx, 0, 0, 0);
         return LT_INC_AND_PAUSE;
     case 2:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        decompress_and_copy_tile_data_to_vram(2, gUnknown_08623228, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, gUnknown_08623228, 0, 0, 0);
         return LT_INC_AND_PAUSE;
     case 3:
-         if (free_temp_tile_data_buffers_if_possible())
+         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
         LZ77UnCompVram(gPokenavCondition_Tilemap, structPtr->tilemapBuffers[0]);
@@ -226,17 +226,17 @@ u32 sub_81CDE94(s32 state)
 
         CopyBgTilemapBufferToVram(3);
         CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, 0x10, 0x20);
-        CopyPaletteIntoBufferUnfaded(gUnknown_08623208, 0xF0, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionText_Pal, 0xF0, 0x20);
         structPtr->unk1814 = -80;
         return LT_INC_AND_PAUSE;
     case 4:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
         LZ77UnCompVram(gUnknown_0862323C, structPtr->tilemapBuffers[2]);
         SetBgTilemapBuffer(2, structPtr->tilemapBuffers[2]);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(gUnknown_086231E8, 0x30, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, 0x30, 0x20);
         sub_81D21DC(2);
         return LT_INC_AND_PAUSE;
     case 5:
@@ -246,7 +246,7 @@ u32 sub_81CDE94(s32 state)
         SetBgTilemapBuffer(1, structPtr->tilemapBuffers[1]);
         return LT_INC_AND_PAUSE;
     case 6:
-        if (free_temp_tile_data_buffers_if_possible())
+        if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
         structPtr->unk1820 = AddWindow(&gUnknown_08623364);
@@ -323,11 +323,11 @@ u32 sub_81CDE94(s32 state)
         sub_81CEE74(TRUE);
         return LT_INC_AND_PAUSE;
     case 20:
-        if (!sub_81D3178(sub_81CDC70(), &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOn(sub_81CDC70(), &structPtr->unk1814))
         {
-            sub_81D3464(structPtr->unk28e0);
+            ResetConditionSparkleSprites(structPtr->unk28e0);
             if (sub_81CDD5C() == TRUE || sub_81CDC60() != sub_81CDC50())
-                sub_81D3480(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
+                CreateConditionSparkleSprites(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
 
             return LT_FINISH;
         }
@@ -345,10 +345,10 @@ u32 sub_81CE2D0(s32 state)
     {
     case 0:
         sub_81CEEC8();
-        sub_81D3520(structPtr->unk28e0);
+        DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 1:
-        if (sub_81D31A4(sub_81CDC70(), &structPtr->unk1814))
+        if (TryUpdateConditionMonTransitionOff(sub_81CDC70(), &structPtr->unk1814))
             return 2;
         sub_81CEE74(FALSE);
         return 1;
@@ -360,7 +360,7 @@ u32 sub_81CE2D0(s32 state)
     case 3:
         if (IsPaletteFadeActive() || MainMenuLoopedTaskIsBusy())
             return 2;
-        sub_81D354C(structPtr->unk28e0);
+        FreeConditionSparkles(structPtr->unk28e0);
         HideBg(1);
         HideBg(2);
         HideBg(3);
@@ -373,7 +373,7 @@ u32 sub_81CE2D0(s32 state)
 u32 sub_81CE37C(s32 state)
 {
     struct Pokenav7Struct *structPtr = GetSubstructPtr(0xC);
-    struct UnknownStruct_81D1ED4 *unkPtr = sub_81CDC70();
+    struct ConditionGraph *unkPtr = sub_81CDC70();
 
     switch (state)
     {
@@ -385,13 +385,13 @@ u32 sub_81CE37C(s32 state)
         return 1;
     case 2:
         sub_81CD548(2);
-        sub_81D3520(structPtr->unk28e0);
+        DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 3:
-        sub_81D2074(unkPtr);
+        TransitionConditionGraph(unkPtr);
         return 1;
     case 4:
-        if (!sub_81D3150(&structPtr->unk1814))
+        if (!MoveConditionMonOffscreen(&structPtr->unk1814))
         {
             sub_81CED30(sub_81CDC84());
             return 1;
@@ -412,13 +412,13 @@ u32 sub_81CE37C(s32 state)
         return 2;
     case 9:
         unkPtr = sub_81CDC70();
-        if (!sub_81D3178(unkPtr, &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOn(unkPtr, &structPtr->unk1814))
         {
-            sub_81D3464(structPtr->unk28e0);
+            ResetConditionSparkleSprites(structPtr->unk28e0);
             if (sub_81CDD5C() != TRUE && sub_81CDC60() == sub_81CDC50())
                 return 1;
 
-            sub_81D3480(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
+            CreateConditionSparkleSprites(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
             return 1;
         }
         return 2;
@@ -459,10 +459,10 @@ u32 sub_81CE4D8(s32 state)
             return 1;
         return 2;
     case 8:
-        if (!sub_81D3178(sub_81CDC70(), &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOn(sub_81CDC70(), &structPtr->unk1814))
         {
-            sub_81D3464(structPtr->unk28e0);
-            sub_81D3480(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
+            ResetConditionSparkleSprites(structPtr->unk28e0);
+            CreateConditionSparkleSprites(structPtr->unk28e0, structPtr->unk1816, sub_81CDDB0());
             return 1;
         }
         return 2;
@@ -485,10 +485,10 @@ u32 sub_81CE5E4(s32 state)
         return 1;
     case 2:
         sub_81CD548(2);
-        sub_81D3520(structPtr->unk28e0);
+        DestroyConditionSparkleSprites(structPtr->unk28e0);
         return 1;
     case 3:
-        if (!sub_81D31A4(sub_81CDC70(), &structPtr->unk1814))
+        if (!TryUpdateConditionMonTransitionOff(sub_81CDC70(), &structPtr->unk1814))
             return 1;
         return 2;
     case 4:
@@ -581,10 +581,10 @@ bool32 sub_81CE754(u8 a0, u16 a1, bool8 a2)
             str = sub_81CDD24(a1);
             AddTextPrinterParameterized(structPtr->unk1820, 1, str, 0, 17, 0, NULL);
             text[0] = EXT_CTRL_CODE_BEGIN;
-            text[1] = 4;
-            text[2] = 8;
-            text[3] = 0;
-            text[4] = 9;
+            text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+            text[2] = TEXT_COLOR_BLUE;
+            text[3] = TEXT_COLOR_TRANSPARENT;
+            text[4] = TEXT_COLOR_LIGHT_BLUE;
             StringCopy(text + 5, gText_Number2);
             AddTextPrinterParameterized(structPtr->unk1821, 1, text, 4, 1, 0, NULL);
             ConvertIntToDecimalStringN(text + 5, sub_81CDD48(), STR_CONV_MODE_RIGHT_ALIGN, 4);
@@ -663,7 +663,7 @@ void sub_81CE9E4(void)
     u16 i, spriteId;
     struct Pokenav7Struct *structPtr = GetSubstructPtr(0xC);
 
-    sub_81D321C(sprSheets, &sprTemplate, sprPals);
+    LoadConditionSelectionIcons(sprSheets, &sprTemplate, sprPals);
     if (sub_81CDD5C() == TRUE)
     {
         structPtr->monMarks.baseTileTag = 0x6A;
@@ -728,7 +728,7 @@ void sub_81CE9E4(void)
         }
     }
 
-    sub_81D32B0(&sprSheet, &sprPals[0]);
+    LoadConditionSparkle(&sprSheet, &sprPals[0]);
     LoadSpriteSheet(&sprSheet);
     sprPals[1].data = NULL;
     Pokenav_AllocAndLoadPalettes(sprPals);
@@ -804,7 +804,7 @@ void sub_81CED30(u8 var)
 
     if (structPtr->unk1816 == 0xFF)
     {
-        sub_81D31D0(&sprSheet, &sprTemplate, &sprPal);
+        LoadConditionMonPicTemplate(&sprSheet, &sprTemplate, &sprPal);
         sprSheet.data = sub_81CDCB4(var);
         sprPal.data = sub_81CDCD4(var);
         structPtr->unk1818 = LoadSpritePalette(&sprPal);
@@ -834,7 +834,7 @@ void sub_81CED30(u8 var)
 
 void sub_81CEE44(void)
 {
-    struct UnknownStruct_81D1ED4 *unk = sub_81CDC70();
+    struct ConditionGraph *unk = sub_81CDC70();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -857,17 +857,17 @@ void sub_81CEE74(bool8 showBg)
 
 void sub_81CEE90(void)
 {
-    struct UnknownStruct_81D1ED4 *unk = sub_81CDC70();
+    struct ConditionGraph *unk = sub_81CDC70();
     u8 id = sub_81CDC84();
 
     gUnknown_030012BC = id;
     sub_81D1F84(unk, unk->unk14[3], unk->unk14[id]);
-    sub_81D2074(unk);
+    TransitionConditionGraph(unk);
 }
 
 void sub_81CEEC8(void)
 {
-    struct UnknownStruct_81D1ED4 *unk = sub_81CDC70();
+    struct ConditionGraph *unk = sub_81CDC70();
 
     if (sub_81CDD5C() || sub_81CDC60() != sub_81CDC50() - 1)
         sub_81D1F84(unk, unk->unk14[sub_81CDC84()], unk->unk14[3]);

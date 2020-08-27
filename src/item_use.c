@@ -38,11 +38,9 @@
 #include "text.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
-#include "constants/flags.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/songs.h"
-#include "constants/vars.h"
 
 static void SetUpItemUseCallback(u8 taskId);
 static void FieldCB_UseItemOnField(void);
@@ -107,7 +105,7 @@ static void SetUpItemUseCallback(u8 taskId)
         type = ItemId_GetType(gSpecialVar_ItemId) - 1;
     if (!InBattlePyramid())
     {
-        gBagMenu->mainCallback2 = sItemUseCallbacks[type];
+        gBagMenu->exitCallback = sItemUseCallbacks[type];
         Task_FadeAndCloseBagMenu(taskId);
     }
     else
@@ -192,7 +190,7 @@ static void CB2_CheckMail(void)
 
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
-    gBagMenu->mainCallback2 = CB2_CheckMail;
+    gBagMenu->exitCallback = CB2_CheckMail;
     Task_FadeAndCloseBagMenu(taskId);
 }
 
@@ -399,7 +397,7 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     u32 localOffset;
     s32 localLength;
 
-    struct MapHeader const *const mapHeader = mapconnection_get_mapheader(connection);
+    struct MapHeader const *const mapHeader = GetMapHeaderFromConnection(connection);
 
     switch (connection->direction)
     {
@@ -611,13 +609,13 @@ static void Task_StandingOnHiddenItem(u8 taskId)
 
 void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
 {
-    if (sub_81221AC() == TRUE) // link func
+    if (MenuHelpers_LinkSomething() == TRUE) // link func
     {
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
     }
     else if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
     {
-        gBagMenu->mainCallback2 = CB2_OpenPokeblockCaseOnField;
+        gBagMenu->exitCallback = CB2_OpenPokeblockCaseOnField;
         Task_FadeAndCloseBagMenu(taskId);
     }
     else
@@ -679,7 +677,7 @@ void ItemUseOutOfBattle_Berry(u8 taskId)
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_Berry;
         gFieldCallback = FieldCB_UseItemOnField;
-        gBagMenu->mainCallback2 = CB2_ReturnToField;
+        gBagMenu->exitCallback = CB2_ReturnToField;
         Task_FadeAndCloseBagMenu(taskId);
     }
     else
@@ -723,7 +721,7 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 
 static bool8 TryToWaterSudowoodo(void)
 {
-    u16 x, y;
+    s16 x, y;
     u8 z;
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -1003,7 +1001,7 @@ static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
 {
     if (!InBattlePyramid())
     {
-        gBagMenu->mainCallback2 = ChooseMonForInBattleItem;
+        gBagMenu->exitCallback = ChooseMonForInBattleItem;
         Task_FadeAndCloseBagMenu(taskId);
     }
     else

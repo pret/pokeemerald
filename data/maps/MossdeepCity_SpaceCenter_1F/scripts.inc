@@ -1,3 +1,10 @@
+.set LOCALID_SCIENTIST_1, 1
+.set LOCALID_SCIENTIST_2, 2
+.set LOCALID_SAILOR, 3
+.set LOCALID_OLD_MAN, 4
+.set LOCALID_WOMAN, 5
+.set LOCALID_STAIR_GRUNT, 9
+
 MossdeepCity_SpaceCenter_1F_MapScripts:: @ 8222F41
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_SpaceCenter_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_1F_OnTransition
@@ -9,15 +16,15 @@ MossdeepCity_SpaceCenter_1F_OnTransition: @ 8222F4C
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma:: @ 8222F58
-	setobjectxyperm 3, 1, 9
-	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectxyperm 5, 0, 8
-	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectxyperm 4, 1, 6
-	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectxyperm 1, 3, 4
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
-	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_SAILOR, 1, 9
+	setobjectmovementtype LOCALID_SAILOR, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_WOMAN, 0, 8
+	setobjectmovementtype LOCALID_WOMAN, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_OLD_MAN, 1, 6
+	setobjectmovementtype LOCALID_OLD_MAN, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_SCIENTIST_1, 3, 4
+	setobjectmovementtype LOCALID_SCIENTIST_1, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype LOCALID_SCIENTIST_2, MOVEMENT_TYPE_FACE_RIGHT
 	compare VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 1
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft
 	compare VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 2
@@ -27,16 +34,16 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma:: @ 8222F58
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft:: @ 8222FAA
-	setobjectxyperm 9, 12, 2
+	setobjectxyperm LOCALID_STAIR_GRUNT, 12, 2
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown:: @ 8222FB2
-	setobjectxyperm 9, 13, 3
+	setobjectxyperm LOCALID_STAIR_GRUNT, 13, 3
 	end
 
 @ Functionally unused. See comment on MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast
 MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight:: @ 8222FBA
-	setobjectxyperm 9, 14, 2
+	setobjectxyperm LOCALID_STAIR_GRUNT, 14, 2
 	end
 
 MossdeepCity_SpaceCenter_1F_OnLoad: @ 8222FC2
@@ -120,7 +127,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan:: @ 822308E
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone
 	msgbox MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt, MSGBOX_DEFAULT
 	giveitem ITEM_SUN_STONE
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers, MSGBOX_DEFAULT
@@ -136,7 +143,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma:: @ 82230DA
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma
 	msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_SUN_STONE
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma, MSGBOX_DEFAULT
@@ -237,11 +244,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_Grunt2:: @ 822321F
 	msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt2Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_2, MossdeepCity_SpaceCenter_1F_Text_Grunt2Defeat
 	setflag FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F
-	copyobjectxytoperm 9
+	copyobjectxytoperm LOCALID_STAIR_GRUNT
 	switch VAR_FACING
 	case DIR_WEST, MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsWest
 	case DIR_WEST, MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast  @ BUG: This was meant to be case DIR_EAST
-	applymovement 9, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs
+	applymovement LOCALID_STAIR_GRUNT, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 2
 	release
@@ -253,7 +260,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated:: @ 822326E
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsWest:: @ 8223278
-	applymovement 9, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsWest
+	applymovement LOCALID_STAIR_GRUNT, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsWest
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 1
 	release
@@ -262,7 +269,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsWest:: @ 8223278
 @ Functionally unused by mistake. The movement is handled anyway after the switch (see above)
 @ This also means VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE can never be 3
 MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast:: @ 8223289
-	applymovement 9, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsEast
+	applymovement LOCALID_STAIR_GRUNT, MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairsEast
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 3
 	release

@@ -483,7 +483,7 @@ $(ROULETTEGFXDIR)/roulette_tilt.4bpp: $(ROULETTEGFXDIR)/shroomish.4bpp \
 									  $(ROULETTEGFXDIR)/tailow.4bpp
 	@cat $^ >$@
 
-$(ROULETTEGFXDIR)/poke_icons2.4bpp: $(ROULETTEGFXDIR)/wynaut.4bpp \
+$(ROULETTEGFXDIR)/wheel_icons.4bpp: $(ROULETTEGFXDIR)/wynaut.4bpp \
 									$(ROULETTEGFXDIR)/azurill.4bpp \
 									$(ROULETTEGFXDIR)/skitty.4bpp \
 									$(ROULETTEGFXDIR)/makuhita.4bpp
@@ -684,7 +684,7 @@ $(OBJEVENTGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
 $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 8
 	
-$(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
+$(BATTRANSGFXDIR)/frontier_logo_center.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 43
 
 

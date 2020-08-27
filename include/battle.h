@@ -124,22 +124,22 @@ struct ProtectStruct
     u32 flinchImmobility:1;
     u32 notFirstStrike:1;
     u32 palaceUnableToUseMove:1;
-    u32 physicalDmg;
-    u32 specialDmg;
+    s32 physicalDmg;
+    s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
 };
 
 struct SpecialStatus
 {
-    u8 statLowered:1;
-    u8 lightningRodRedirected:1;
-    u8 restoredBattlerSprite: 1;
-    u8 intimidatedMon:1;
-    u8 traced:1;
-    u8 ppNotAffectedByPressure:1;
-    u8 flag40:1;
-    u8 focusBanded:1;
+    u32 statLowered:1;
+    u32 lightningRodRedirected:1;
+    u32 restoredBattlerSprite: 1;
+    u32 intimidatedMon:1;
+    u32 traced:1;
+    u32 ppNotAffectedByPressure:1;
+    u32 flag40:1;
+    u32 focusBanded:1;
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;
@@ -254,7 +254,7 @@ struct BattleResults
     u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
-    u8 filler35[1];           // 0x35
+    u8 filler35;              // 0x35
     u8 catchAttempts[11];     // 0x36
 };
 
@@ -390,7 +390,7 @@ struct BattleStruct
     u8 expGetterBattlerId;
     u8 unused_5;
     u8 field_91; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
-    u8 field_92; // battle palace related
+    u8 palaceFlags; // First 4 bits are "is < 50% HP and not asleep" for each battler, last 4 bits are selected moves to pass to AI
     u8 field_93; // related to choosing pokemon?
     u8 wallyBattleState;
     u8 wallyMovesState;

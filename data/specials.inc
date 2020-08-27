@@ -39,7 +39,7 @@ gSpecials:: @ 81DBA64
 	def_special TryBattleLinkup
 	def_special TryTradeLinkup
 	def_special TryRecordMixLinkup
-	def_special sub_80B2EA8
+	def_special ValidateMixingGameLanguage
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered
 	def_special PlayerEnteredTradeSeat
@@ -149,7 +149,7 @@ gSpecials:: @ 81DBA64
 	def_special SaveMuseumContestPainting
 	def_special DoesContestCategoryHaveWinner
 	def_special CountPlayerContestPaintings
-	def_special ShowContestWinner
+	def_special ShowContestWinnerPainting
 	def_special MauvilleGymSetDefaultBarriers
 	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
@@ -336,7 +336,7 @@ gSpecials:: @ 81DBA64
 	def_special BattleSetup_StartLatiBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather
-	def_special ScriptGetMultiplayerId
+	def_special GetContestMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
 	def_special TryInitBattleTowerAwardManObjectEvent
@@ -350,7 +350,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferLottoTicketNumber
 	def_special TryHideBattleTowerReporter
 	def_special DoesPartyHaveEnigmaBerry
-	def_special ScriptRandom
+	def_special GenerateContestRand
 	def_special SetChampionSaveWarp
 	def_special TryPutTreasureInvestigatorsOnAir
 	def_special TryPutLotteryWinnerReportOnAir
@@ -426,8 +426,8 @@ gSpecials:: @ 81DBA64
 	def_special IsWirelessAdapterConnected
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
-	def_special UnionRoomSpecial
-	def_special sub_801A42C
+	def_special RunUnionRoom
+	def_special ShowWirelessCommunicationScreen
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
 	def_special sub_801DC20
@@ -498,11 +498,11 @@ gSpecials:: @ 81DBA64
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
-	def_special DoConfettiEffect
+	def_special DoDomeConfetti
 	def_special CreateAbnormalWeatherEvent
 	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId
-	def_special sub_80A08CC
+	def_special SaveForBattleTowerLink
 	def_special Unused_SetWeatherSunny
 	def_special SetUnlockedPokedexFlags
 	def_special IsTrainerRegistered
@@ -511,14 +511,14 @@ gSpecials:: @ 81DBA64
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice
 	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen
-	def_special sub_81D4A90
+	def_special SetMewAboveGrass
 	def_special ShouldDistributeEonTicket
 	def_special LinkRetireStatusWithBattleTowerPartner
 	def_special sub_813B534
 	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene @ Listed twice
 	def_special LoopWingFlapSE
-	def_special sub_81D4BEC
+	def_special DestroyMewEmergingGrassSprite
 	def_special ShowBerryCrushRankings
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen

@@ -1,3 +1,11 @@
+@ Note: local IDs shared with scripts.inc for LilycoveCity_ContestLobby
+.set LOCALID_MAN, 3
+.set LOCALID_BOY, 9
+.set LOCALID_TWIN, 10
+.set LOCALID_POKEFAN_F, 15
+.set LOCALID_EXPERT_M, 16
+.set LOCALID_GIRL, 17
+
 BerryBlender_Text_WantToMakePokeblocks: @ 8292DEE
 	.string "Oh? Did you want to make some {POKEBLOCK}S\n"
 	.string "with this old-timer?$"
@@ -236,7 +244,7 @@ BerryBlender_EventScript_BerryBlender1:: @ 8293C3E
 	lockall
 	goto_if_unset FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER, BerryBlender_EventScript_BlendMasterPresent
 	setvar VAR_0x8009, 1
-	applymovement 16, BerryBlender_Movement_BlendLeaderWalkInPlace
+	applymovement LOCALID_EXPERT_M, BerryBlender_Movement_BlendLeaderWalkInPlace
 	waitmovement 0
 	msgbox BerryBlender_Text_WantToMakePokeblocks, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -321,8 +329,8 @@ BerryBlender_EventScript_Blender1NoCase: @ 8293D43
 BerryBlender_EventScript_BerryBlender2:: @ 8293D4D
 	lockall
 	setvar VAR_0x8009, 2
-	applymovement 10, Common_Movement_FaceOriginalDirection
-	applymovement 3, BerryBlender_Movement_BlendLeaderWalkInPlace
+	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_MAN, BerryBlender_Movement_BlendLeaderWalkInPlace
 	waitmovement 0
 	msgbox BerryBlender_Text_WantToBlendPokeblocksWithUs, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -384,10 +392,10 @@ BerryBlender_EventScript_Blender2NoCase: @ 8293E14
 
 BerryBlender_EventScript_BerryBlender3:: @ 8293E1E
 	lockall
-	setvar VAR_0x8008, 15
+	setvar VAR_0x8008, LOCALID_POKEFAN_F
 	setvar VAR_0x8009, 3
-	applymovement 9, Common_Movement_FaceOriginalDirection
-	applymovement 17, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_BOY, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_GIRL, Common_Movement_FaceOriginalDirection
 	applymovement VAR_0x8008, BerryBlender_Movement_BlendLeaderWalkInPlace
 	waitmovement 0
 	msgbox BerryBlender_Text_LookGoodAtBlendingJoinUs, MSGBOX_YESNO
@@ -600,15 +608,15 @@ BerryBlender_EventScript_TryDoLinkBlender: @ 82940BB
 	waitmessage
 	special TryBerryBlenderLinkup
 	waitstate
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BerryBlender_EventScript_SpawnLinkPartners
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
 	goto_if_eq BerryBlender_EventScript_CloseLinkNotReady
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq BerryBlender_EventScript_CloseLinkDifferentSelections
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BerryBlender_EventScript_CloseLink
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq BerryBlender_EventScript_LinkError
 	end
 
@@ -630,9 +638,9 @@ BerryBlender_EventScript_FourPlayerLink: @ 8294139
 BerryBlender_EventScript_DoLinkBerryBlending: @ 8294147
 	setvar VAR_0x8004, 0
 	fadescreen FADE_TO_BLACK
-	removeobject 240
-	removeobject 239
-	removeobject 238
+	removeobject 240 @ Unclear where these local IDs come from,
+	removeobject 239 @ but presumably they'd be the 4 link players
+	removeobject 238 
 	removeobject 237
 	special DoBerryBlending
 	waitstate
@@ -712,22 +720,22 @@ BerryBlender_EventScript_DecideLinkLeader: @ 82941F8
 
 BerryBlender_EventScript_TryLeadGroup: @ 8294235
 	call BerryBlender_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BerryBlender_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BerryBlender_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq BerryBlender_EventScript_TryLeadGroup
 	release
 	end
 
 BerryBlender_EventScript_TryJoinGroup: @ 829425D
 	call BerryBlender_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BerryBlender_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq BerryBlender_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq BerryBlender_EventScript_TryJoinGroup
 	release
 	end

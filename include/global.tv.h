@@ -18,6 +18,13 @@ typedef union // size = 0x24
         /*0x23*/ u8 trainerIdHi;
     } common;
 
+    // Common init (used for initialization loop)
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 pad02[34];
+    } commonInit;
+
     // Local shows
     // TVSHOW_FAN_CLUB_LETTER
     struct {
@@ -117,18 +124,18 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 winningSpecies;
-        /*0x04*/ u8 winningTrainerName[8];
-        /*0x0C*/ u8 appealFlags2;
-        /*0x0D*/ u8 round1Rank;
-        /*0x0e*/ u8 round2Rank;
-        /*0x0f*/ u8 appealFlags1;
+        /*0x02*/ u16 losingSpecies;
+        /*0x04*/ u8 losingTrainerName[8];
+        /*0x0C*/ u8 loserAppealFlag;
+        /*0x0D*/ u8 round1Placing;
+        /*0x0e*/ u8 round2Placing;
+        /*0x0f*/ u8 winnerAppealFlag;
         /*0x10*/ u16 move;
-        /*0x12*/ u16 species;
-        /*0x14*/ u8 playerName[8];
+        /*0x12*/ u16 winningSpecies;
+        /*0x14*/ u8 winningTrainerName[8];
         /*0x1C*/ u8 category;
-        /*0x1D*/ u8 language;
-        /*0x1E*/ u8 winningTrainerLanguage;
+        /*0x1D*/ u8 winningTrainerLanguage;
+        /*0x1E*/ u8 losingTrainerLanguage;
     } contestLiveUpdates;
 
     // TVSHOW_3_CHEERS_FOR_POKEBLOCKS

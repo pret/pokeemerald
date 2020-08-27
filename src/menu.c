@@ -18,7 +18,6 @@
 #include "task.h"
 #include "text_window.h"
 #include "window.h"
-#include "constants/flags.h"
 #include "constants/songs.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
@@ -57,9 +56,9 @@ static EWRAM_DATA u8 sPaletteNum = 0;
 static EWRAM_DATA u8 sYesNoWindowId = 0;
 static EWRAM_DATA u8 sWindowId = 0;
 static EWRAM_DATA u16 sFiller = 0;  // needed to align
-static EWRAM_DATA bool8 gUnknown_0203CDA4[4] = {FALSE};
-static EWRAM_DATA u16 gUnknown_0203CDA8 = 0;
-static EWRAM_DATA void *gUnknown_0203CDAC[0x20] = {NULL};
+static EWRAM_DATA bool8 sScheduledBgCopiesToVram[4] = {FALSE};
+static EWRAM_DATA u16 sTempTileDataBufferIdx = 0;
+static EWRAM_DATA void *sTempTileDataBuffer[0x20] = {NULL};
 
 const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
 
@@ -154,7 +153,7 @@ void FreeAllOverworldWindowBuffers(void)
     FreeAllWindowBuffers();
 }
 
-void sub_8197200(void)
+void InitTextBoxGfxAndPrinters(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -1737,63 +1736,63 @@ u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCurso
     return sMenu.cursorPos;
 }
 
-void clear_scheduled_bg_copies_to_vram(void)
+void ClearScheduledBgCopiesToVram(void)
 {
-    memset(gUnknown_0203CDA4, 0, sizeof(gUnknown_0203CDA4));
+    memset(sScheduledBgCopiesToVram, 0, sizeof(sScheduledBgCopiesToVram));
 }
 
-void schedule_bg_copy_tilemap_to_vram(u8 bgId)
+void ScheduleBgCopyTilemapToVram(u8 bgId)
 {
-    gUnknown_0203CDA4[bgId] = TRUE;
+    sScheduledBgCopiesToVram[bgId] = TRUE;
 }
 
-void do_scheduled_bg_tilemap_copies_to_vram(void)
+void DoScheduledBgTilemapCopiesToVram(void)
 {
-    if (gUnknown_0203CDA4[0] == TRUE)
+    if (sScheduledBgCopiesToVram[0] == TRUE)
     {
         CopyBgTilemapBufferToVram(0);
-        gUnknown_0203CDA4[0] = FALSE;
+        sScheduledBgCopiesToVram[0] = FALSE;
     }
-    if (gUnknown_0203CDA4[1] == TRUE)
+    if (sScheduledBgCopiesToVram[1] == TRUE)
     {
         CopyBgTilemapBufferToVram(1);
-        gUnknown_0203CDA4[1] = FALSE;
+        sScheduledBgCopiesToVram[1] = FALSE;
     }
-    if (gUnknown_0203CDA4[2] == TRUE)
+    if (sScheduledBgCopiesToVram[2] == TRUE)
     {
         CopyBgTilemapBufferToVram(2);
-        gUnknown_0203CDA4[2] = FALSE;
+        sScheduledBgCopiesToVram[2] = FALSE;
     }
-    if (gUnknown_0203CDA4[3] == TRUE)
+    if (sScheduledBgCopiesToVram[3] == TRUE)
     {
         CopyBgTilemapBufferToVram(3);
-        gUnknown_0203CDA4[3] = FALSE;
+        sScheduledBgCopiesToVram[3] = FALSE;
     }
 }
 
-void reset_temp_tile_data_buffers(void)
+void ResetTempTileDataBuffers(void)
 {
     int i;
-    for (i = 0; i < (s32)ARRAY_COUNT(gUnknown_0203CDAC); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sTempTileDataBuffer); i++)
     {
-        gUnknown_0203CDAC[i] = NULL;
+        sTempTileDataBuffer[i] = NULL;
     }
-    gUnknown_0203CDA8 = 0;
+    sTempTileDataBufferIdx = 0;
 }
 
-bool8 free_temp_tile_data_buffers_if_possible(void)
+bool8 FreeTempTileDataBuffersIfPossible(void)
 {
     int i;
 
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        if (gUnknown_0203CDA8)
+        if (sTempTileDataBufferIdx)
         {
-            for (i = 0; i < gUnknown_0203CDA8; i++)
+            for (i = 0; i < sTempTileDataBufferIdx; i++)
             {
-                FREE_AND_SET_NULL(gUnknown_0203CDAC[i]);
+                FREE_AND_SET_NULL(sTempTileDataBuffer[i]);
             }
-            gUnknown_0203CDA8 = 0;
+            sTempTileDataBufferIdx = 0;
         }
         return FALSE;
     }
@@ -1803,10 +1802,10 @@ bool8 free_temp_tile_data_buffers_if_possible(void)
     }
 }
 
-void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
+void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
-    if (gUnknown_0203CDA8 < ARRAY_COUNT(gUnknown_0203CDAC))
+    if (sTempTileDataBufferIdx < ARRAY_COUNT(sTempTileDataBuffer))
     {
         void *ptr = malloc_and_decompress(src, &sizeOut);
         if (!size)
@@ -1814,7 +1813,7 @@ void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, u32 size, 
         if (ptr)
         {
             copy_decompressed_tile_data_to_vram(bgId, ptr, size, offset, mode);
-            gUnknown_0203CDAC[gUnknown_0203CDA8++] = ptr;
+            sTempTileDataBuffer[sTempTileDataBufferIdx++] = ptr;
         }
         return ptr;
     }
@@ -2107,7 +2106,7 @@ void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
     BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality, 1), x, y, 32, 32);
 }
 
-void sub_819A2BC(u8 palOffset, u8 palId)
+void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
 {
     const u16 *palette;
 

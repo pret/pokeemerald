@@ -1,3 +1,8 @@
+.equ LOCALID_JACE, 1
+.equ LOCALID_KEEGAN, 2
+.equ LOCALID_JEFF, 3
+.equ LOCALID_ELI, 4
+
 LavaridgeTown_Gym_B1F_MapScripts:: @ 81FF87E
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_Gym_B1F_OnTransition
 	.byte 0
@@ -29,16 +34,16 @@ LavaridgeTown_Gym_B1F_EventScript_EndSetTrainerTempVars:: @ 81FF8DB
 
 LavaridgeTown_Gym_B1F_EventScript_CheckHideTrainers:: @ 81FF8DC
 	goto_if_defeated TRAINER_KEEGAN, LavaridgeTown_Gym_B1F_EventScript_CheckHideJace
-	setobjectmovementtype 2, MOVEMENT_TYPE_HIDDEN
+	setobjectmovementtype LOCALID_KEEGAN, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_B1F_EventScript_CheckHideJace:: @ 81FF8E9
 	goto_if_defeated TRAINER_JACE, LavaridgeTown_Gym_B1F_EventScript_CheckHideJeff
-	setobjectmovementtype 1, MOVEMENT_TYPE_HIDDEN
+	setobjectmovementtype LOCALID_JACE, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_B1F_EventScript_CheckHideJeff:: @ 81FF8F6
 	goto_if_defeated TRAINER_JEFF, LavaridgeTown_Gym_B1F_EventScript_CheckHideEli
-	setobjectmovementtype 3, MOVEMENT_TYPE_HIDDEN
+	setobjectmovementtype LOCALID_JEFF, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_B1F_EventScript_CheckHideEli:: @ 81FF903
 	goto_if_defeated TRAINER_ELI, LavaridgeTown_Gym_B1F_EventScript_EndCheckHideTrainers
-	setobjectmovementtype 4, MOVEMENT_TYPE_HIDDEN
+	setobjectmovementtype LOCALID_ELI, MOVEMENT_TYPE_HIDDEN
 LavaridgeTown_Gym_B1F_EventScript_EndCheckHideTrainers:: @ 81FF910
 	return
 

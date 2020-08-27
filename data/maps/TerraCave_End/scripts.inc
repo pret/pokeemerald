@@ -1,3 +1,5 @@
+.set LOCALID_GROUDON, 1
+
 TerraCave_End_MapScripts:: @ 823B0B0
 	map_script MAP_SCRIPT_ON_RESUME, TerraCave_End_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, TerraCave_End_OnTransition
@@ -11,7 +13,7 @@ TerraCave_End_EventScript_TryRemoveGroudon:: @ 823B0C5
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject 1
+	removeobject LOCALID_GROUDON
 	return
 
 TerraCave_End_OnTransition: @ 823B0D9
@@ -27,13 +29,13 @@ TerraCave_End_EventScript_Groudon:: @ 823B0EC
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement 1, TerraCave_End_Movement_GroudonApproach
+	applymovement LOCALID_GROUDON, TerraCave_End_Movement_GroudonApproach
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_GROUDON, 2
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_GROUDON
 	setwildbattle SPECIES_GROUDON, 70, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle

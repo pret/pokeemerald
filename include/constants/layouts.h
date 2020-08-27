@@ -1,6 +1,10 @@
 #ifndef GUARD_CONSTANTS_LAYOUTS_H
 #define GUARD_CONSTANTS_LAYOUTS_H
 
+//
+// DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json
+//
+
 #define LAYOUT_PETALBURG_CITY 1
 #define LAYOUT_SLATEPORT_CITY 2
 #define LAYOUT_MAUVILLE_CITY 3

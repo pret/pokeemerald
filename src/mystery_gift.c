@@ -30,6 +30,7 @@
 #include "link_rfu.h"
 #include "mevent_news.h"
 #include "mevent_server.h"
+#include "constants/cable_club.h"
 
 void bgid_upload_textbox_1(u8 bgId);
 void task_add_00_mystery_gift(void);
@@ -409,7 +410,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         break;
     case 1:
         LoadPalette(gUnkTextboxBorderPal, 0, 0x20);
-        LoadPalette(stdpal_get(2), 0xd0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
         Menu_LoadStdPalAt(0xC0);
         LoadUserWindowBorderGfx(0, 0xA, 0xE0);
         LoadUserWindowBorderGfx_(0, 0x1, 0xF0);
@@ -1242,21 +1243,21 @@ void task00_mystery_gift(u8 taskId)
         case 0:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(0x15);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_CARD2);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(0x15);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_CARD2);
             }
             break;
         case 1:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(0x16);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WONDER_NEWS2);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(0x16);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WONDER_NEWS2);
             }
             break;
         }
@@ -1269,7 +1270,7 @@ void task00_mystery_gift(u8 taskId)
             data->state = 7;
             mevent_client_do_init(data->IsCardOrNews);
         }
-        else if (gSpecialVar_Result == 5)
+        else if (gSpecialVar_Result == LINKUP_FAILED)
         {
             ClearScreenInBg0(TRUE);
             data->state = 3;
@@ -1283,7 +1284,7 @@ void task00_mystery_gift(u8 taskId)
         switch (mevent_client_do_exec(&data->curPromptWindowId))
         {
         case 6:
-            task_add_05_task_del_08FA224_when_no_RfuFunc();
+            Rfu_SetCloseLinkCallback();
             data->prevPromptWindowId = data->curPromptWindowId;
             data->state = 13;
             break;
@@ -1599,10 +1600,10 @@ void task00_mystery_gift(u8 taskId)
             switch (data->IsCardOrNews)
             {
             case 0:
-                MEvent_CreateTask_Leader(21);
+                MEvent_CreateTask_Leader(ACTIVITY_WONDER_CARD2);
                 break;
             case 1:
-                MEvent_CreateTask_Leader(22);
+                MEvent_CreateTask_Leader(ACTIVITY_WONDER_NEWS2);
                 break;
             }
             data->source = 1;
@@ -1615,7 +1616,7 @@ void task00_mystery_gift(u8 taskId)
             ClearScreenInBg0(1);
             data->state = 31;
         }
-        else if (gSpecialVar_Result == 5)
+        else if (gSpecialVar_Result == LINKUP_FAILED)
         {
             ClearScreenInBg0(1);
             data->state = 18;
@@ -1646,7 +1647,7 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 33:
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_SetCloseLinkCallback();
         StringCopy(gStringVar1, gLinkPlayers[1].name);
         data->state = 34;
         break;

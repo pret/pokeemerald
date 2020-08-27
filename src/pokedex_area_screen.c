@@ -21,7 +21,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "constants/vars.h"
 
 #define AREA_SCREEN_WIDTH 32
 #define AREA_SCREEN_HEIGHT 20
@@ -310,11 +309,11 @@ static bool8 DrawAreaGlow(void)
         BuildAreaGlowTilemap();
         break;
     case 2:
-        decompress_and_copy_tile_data_to_vram(2, sAreaGlow_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, sAreaGlow_Gfx, 0, 0, 0);
         LoadBgTilemap(2, sPokedexAreaScreen->areaGlowTilemap, 0x500, 0);
         break;
     case 3:
-        if (!free_temp_tile_data_buffers_if_possible())
+        if (!FreeTempTileDataBuffersIfPossible())
         {
             CpuCopy32(sAreaGlow_Pal, gPlttBufferUnfaded + 0xA0, 0x20);
             sPokedexAreaScreen->drawAreaGlowState++;

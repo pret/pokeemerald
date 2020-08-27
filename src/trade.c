@@ -52,6 +52,7 @@
 #include "constants/rgb.h"
 #include "constants/species.h"
 #include "constants/songs.h"
+#include "constants/union_room.h"
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
@@ -234,7 +235,7 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 static bool8 SendLinkData(const void *linkData, u32 size)
 {
-    if (gUnknown_02022C2C == 29)
+    if (gPlayerCurrActivity == ACTIVITY_29)
     {
         rfu_NI_setSendData(lman.acceptSlot_flag, 84, linkData, size);
         return TRUE;
@@ -245,14 +246,14 @@ static bool8 SendLinkData(const void *linkData, u32 size)
     }
 }
 
-static void sub_80771AC(u8 a0)
+static void RequestLinkData(u8 type)
 {
-    sub_800A4D8(a0);
+    SendBlockRequest(type);
 }
 
 static bool32 sub_80771BC(void)
 {
-    if (gUnknown_02022C2C == 29)
+    if (gPlayerCurrActivity == ACTIVITY_29)
     {
         if (gRfuSlotStatusNI[sub_800E87C(lman.acceptSlot_flag)]->send.state == 0)
             return TRUE;
@@ -288,15 +289,15 @@ static void TradeResetReceivedFlag(u32 who)
 
 static bool32 IsWirelessTrade(void)
 {
-    if (gWirelessCommType && gUnknown_02022C2C == 29)
+    if (gWirelessCommType && gPlayerCurrActivity == ACTIVITY_29)
         return TRUE;
     else
         return FALSE;
 }
 
-static void sub_8077288(u8 unused)
+static void SetTradeLinkStandbyCallback(u8 unused)
 {
-    sub_800ADF8();
+    SetLinkStandbyCallback();
 }
 
 static bool32 _IsLinkTaskFinished(void)
@@ -388,20 +389,20 @@ static void CB2_CreateTradeMenu(void)
 
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = LINKTYPE_0x1122;
+            gLinkType = LINKTYPE_TRADE_CONNECTING;
             sTradeMenuData->timer = 0;
 
             if (gWirelessCommType)
             {
-                sub_800B488();
+                SetWirelessCommType1();
                 OpenLink();
-                sub_8011BA4();
+                CreateTask_RfuIdle();
             }
             else
             {
                 OpenLink();
                 gMain.state++;
-                CreateTask(task00_08081A90, 1);
+                CreateTask(Task_WaitForLinkPlayerConnection, 1);
             }
         }
         else
@@ -437,14 +438,14 @@ static void CB2_CreateTradeMenu(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            sub_8011BD0();
+            DestroyTask_RfuIdle();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuData->timer = 0;
             if (gWirelessCommType)
             {
                 sub_801048C(TRUE);
-                sub_800ADF8();
+                SetLinkStandbyCallback();
             }
         }
         break;
@@ -824,7 +825,7 @@ static void LinkTradeWaitForFade(void)
         }
         else
         {
-            sub_800ABF4(32);
+            SetCloseLinkCallbackAndType(32);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_START_LINK_TRADE;
         }
     }
@@ -982,7 +983,7 @@ static bool8 BufferTradeParties(void)
     case 3:
         if (id == 0)
         {
-            sub_80771AC(1);
+            RequestLinkData(1);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1001,7 +1002,7 @@ static bool8 BufferTradeParties(void)
     case 7:
         if (id == 0)
         {
-            sub_80771AC(1);
+            RequestLinkData(1);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1020,7 +1021,7 @@ static bool8 BufferTradeParties(void)
     case 11:
         if (id == 0)
         {
-            sub_80771AC(1);
+            RequestLinkData(1);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1039,7 +1040,7 @@ static bool8 BufferTradeParties(void)
     case 15:
         if (id == 0)
         {
-            sub_80771AC(3);
+            RequestLinkData(3);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1058,7 +1059,7 @@ static bool8 BufferTradeParties(void)
     case 19:
         if (id == 0)
         {
-            sub_80771AC(4);
+            RequestLinkData(4);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1651,11 +1652,11 @@ static void CancelTrade_1(void)
     {
         if (gWirelessCommType)
         {
-            sub_800ADF8();
+            SetLinkStandbyCallback();
         }
         else
         {
-            sub_800ABF4(12);
+            SetCloseLinkCallbackAndType(12);
         }
 
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_CANCEL_TRADE_2;
@@ -1691,7 +1692,7 @@ static void LinkTradeWaitForQueue(void)
 {
     if (!sub_801048C(FALSE) && GetNumQueuedActions() == 0)
     {
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_START_LINK_TRADE;
     }
 }
@@ -2749,7 +2750,7 @@ void CB2_LinkTrade(void)
     case 0:
         if (!gReceivedRemoteLinkPlayers)
         {
-            gLinkType = LINKTYPE_0x1144;
+            gLinkType = LINKTYPE_TRADE_DISCONNECTED;
             CloseLink();
         }
         sTradeData = AllocZeroed(sizeof(*sTradeData));
@@ -4565,7 +4566,7 @@ static void CB2_SaveAndEndTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        sub_8077288(0);
+        SetTradeLinkStandbyCallback(0);
         gMain.state = 100;
         sTradeData->timer = 0;
         break;
@@ -4596,7 +4597,7 @@ static void CB2_SaveAndEndTrade(void)
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
         if (gWirelessCommType)
         {
-            sub_801B990(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+            RecordIdOfWonderCardSenderByEventType(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
         }
         SetContinueGameWarpStatusToDynamicWarp();
         sub_8153380();
@@ -4643,7 +4644,7 @@ static void CB2_SaveAndEndTrade(void)
     case 41:
         if (sTradeData->timer == 0)
         {
-            sub_8077288(1);
+            SetTradeLinkStandbyCallback(1);
             gMain.state = 42;
         }
         else
@@ -4662,7 +4663,7 @@ static void CB2_SaveAndEndTrade(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            sub_8077288(2);
+            SetTradeLinkStandbyCallback(2);
         }
         break;
     case 6:
@@ -4684,11 +4685,11 @@ static void CB2_SaveAndEndTrade(void)
         {
             if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
             {
-                sub_8077288(3);
+                SetTradeLinkStandbyCallback(3);
             }
             else
             {
-                sub_800AC34();
+                SetCloseLinkCallback();
             }
             gMain.state++;
         }
@@ -4901,7 +4902,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        sub_8077288(0);
+        SetTradeLinkStandbyCallback(0);
         gMain.state = 2;
         sTradeData->timer = 0;
         break;
@@ -4949,7 +4950,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     case 7:
         if (sTradeData->timer == 0)
         {
-            sub_8077288(1);
+            SetTradeLinkStandbyCallback(1);
             gMain.state = 8;
         }
         else
@@ -4968,7 +4969,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            sub_8077288(2);
+            SetTradeLinkStandbyCallback(2);
         }
         break;
     case 10:
@@ -4982,7 +4983,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     case 11:
         if (!gPaletteFade.active && IsBGMStopped() == TRUE)
         {
-            sub_8077288(3);
+            SetTradeLinkStandbyCallback(3);
             gMain.state = 12;
         }
         break;

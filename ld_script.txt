@@ -65,6 +65,7 @@ SECTIONS {
         src/union_room.o(.text);
         src/mystery_gift.o(.text);
         src/union_room_player_avatar.o(.text);
+        src/wireless_communication_status_screen.o(.text);
         src/union_room_battle.o(.text);
         src/mevent2.o(.text);
         src/mevent_801BAAC.o(.text);
@@ -168,15 +169,15 @@ SECTIONS {
         src/record_mixing.o(.text);
         src/secret_base.o(.text);
         src/tv.o(.text);
-        src/contest_link_80F57C4.o(.text);
-        src/script_pokemon_util_80F87D8.o(.text);
+        src/contest_util.o(.text);
+        src/script_pokemon_util.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         src/fldeff_misc.o(.text);
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
-        src/contest_link_80FC4F4.o(.text);
+        src/contest_link.o(.text);
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
         src/battle_anim_effects_2.o(.text);
@@ -236,8 +237,8 @@ SECTIONS {
         src/battle_message.o(.text);
         src/cable_car.o(.text);
         src/math_util.o(.text);
-        src/roulette_util.o(.text);
-        src/rom_81520A8.o(.text);
+        src/palette_util.o(.text);
+        src/confetti_util.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
         src/field_effect_helpers.o(.text);
@@ -328,9 +329,9 @@ SECTIONS {
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
-        src/contest_link_81D9DE4.o(.text);
+        src/contest_link_util.o(.text);
         src/gym_leader_rematch.o(.text);
-        src/unk_transition.o(.text);
+        src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
     } =0
 
@@ -439,7 +440,7 @@ SECTIONS {
         gflib/window.o(.rodata);
         gflib/text.o(.rodata);
         gflib/sprite.o(.rodata);
-        data/io_reg.o(.rodata);
+        gflib/io_reg.o(.rodata);
         gflib/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);
@@ -450,6 +451,7 @@ SECTIONS {
         src/union_room.o(.rodata);
         src/mystery_gift.o(.rodata);
         src/union_room_player_avatar.o(.rodata);
+        src/wireless_communication_status_screen.o(.rodata);
         src/union_room_battle.o(.rodata);
         src/mevent2.o(.rodata);
         src/mevent_801BAAC.o(.rodata);
@@ -542,13 +544,13 @@ SECTIONS {
         src/record_mixing.o(.rodata);
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
-        src/contest_link_80F57C4.o(.rodata);
-        src/script_pokemon_util_80F87D8.o(.rodata);
+        src/contest_util.o(.rodata);
+        src/script_pokemon_util.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         src/fldeff_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
-        src/contest_link_80FC4F4.o(.rodata);
+        src/contest_link.o(.rodata);
         src/item_use.o(.rodata);
         src/battle_anim_effects_1.o(.rodata);
         src/battle_anim_effects_2.o(.rodata);
@@ -683,7 +685,7 @@ SECTIONS {
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         src/gym_leader_rematch.o(.rodata);
-        src/unk_transition.o(.rodata);
+        src/battle_transition_frontier.o(.rodata);
         src/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);

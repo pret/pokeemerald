@@ -40,6 +40,7 @@
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/pokemon.h"
+#include "constants/roulette.h"
 #include "constants/script_menu.h"
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
@@ -775,8 +776,8 @@ EventScript_HideMrBriney:: @ 82721F8
 	return
 
 RusturfTunnel_EventScript_SetRusturfTunnelOpen:: @ 8272216
-	removeobject 1
-	removeobject 10
+	removeobject LOCALID_WANDAS_BF
+	removeobject LOCALID_WANDA
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDAS_BOYFRIEND
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDA
 	setvar VAR_RUSTURF_TUNNEL_STATE, 6

@@ -25,9 +25,8 @@
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "contest_util.h"
 #include "constants/songs.h"
-#include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
@@ -498,7 +497,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         break;
     case STATE_WAIT_LINK_PARTNER:
-        sub_800AC34();
+        SetCloseLinkCallback();
         DrawDialogueFrame(0, 1);
         AddTextPrinterParameterized(0, 1, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
         CopyWindowToVram(0, 3);
