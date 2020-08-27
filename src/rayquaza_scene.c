@@ -90,8 +90,10 @@ static void DuoFight_AnimateRain(void);
 static void DuoFight_Lightning1(void);
 static void DuoFight_Lightning2(void);
 static void DuoFight_LightningLong(void);
-static u8 CreateDuoFightGroudonSprites(void);
-static u8 CreateDuoFightKyogreSprites(void);
+static u8 DuoFightPre_CreateGroudonSprites(void);
+static u8 DuoFightPre_CreateKyogreSprites(void);
+static u8 DuoFight_CreateGroudonSprites(void);
+static u8 DuoFight_CreateKyogreSprites(void);
 static void SpriteCB_DuoFightPre_Groudon(struct Sprite *sprite);
 static void SpriteCB_DuoFightPre_Kyogre(struct Sprite *sprite);
 static void SpriteCB_DuoFight_Groudon(struct Sprite *sprite);
@@ -117,9 +119,9 @@ static void SpriteCB_Descends_Rayquaza(struct Sprite *sprite);
 static void Task_RayChargesAnim(u8 taskId);
 static void Task_HandleRayCharges(u8 taskId);
 static void Task_RayChargesEnd(u8 taskId);
-static void sub_81D8AD8(u8 taskId);
-static void sub_81D8B2C(u8 taskId);
-static void sub_81D8BB4(void);
+static void Task_RayCharges_ShakeRayquaza(u8 taskId);
+static void Task_RayCharges_FlyOffscreen(u8 taskId);
+static void RayCharges_AnimateBg(void);
 
 // RAY_ANIM_CHASES_AWAY
 static void Task_RayChasesAwayAnim(u8 taskId);
@@ -1349,7 +1351,9 @@ static void Task_SetNextAnim(u8 taskId)
     }
 }
 
-static void sub_81D68C8(void)
+// The cutscene window is cropped to a narrower view, with black borders on each vertical edge
+// This function is used in scenes where sprites in these borders need to be hidden
+static void SetWindowsHideVertBorders(void)
 {
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL);
     SetGpuReg(REG_OFFSET_WINOUT, 0);
@@ -1359,7 +1363,7 @@ static void sub_81D68C8(void)
     gPlttBufferFaded[0] = 0;
 }
 
-static void sub_81D6904(void)
+static void ResetWindowDimensions(void)
 {
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_ALL);
@@ -1406,7 +1410,7 @@ static void Task_HandleDuoFightPre(u8 taskId)
     }
 }
 
-static u8 CreateDuoFightPreGroudonSprites(void)
+static u8 DuoFightPre_CreateGroudonSprites(void)
 {
     u8 spriteId;
     s16 *data;
@@ -1458,7 +1462,7 @@ static void SpriteCB_DuoFightPre_Groudon(struct Sprite *sprite)
     }
 }
 
-static u8 CreateDuoFightPreKyogreSprites(void)
+static u8 DuoFightPre_CreateKyogreSprites(void)
 {
     u8 spriteId;
     s16 *data;
@@ -1608,14 +1612,14 @@ static void Task_DuoFightAnim(u8 taskId)
     tHelperTaskId = CreateTask(Task_DuoFight_AnimateClouds, 0);
     if (sRayScene->animId == RAY_ANIM_DUO_FIGHT_PRE)
     {
-        tGroudonSpriteId = CreateDuoFightPreGroudonSprites();
-        tKyogreSpriteId = CreateDuoFightPreKyogreSprites();
+        tGroudonSpriteId = DuoFightPre_CreateGroudonSprites();
+        tKyogreSpriteId = DuoFightPre_CreateKyogreSprites();
         gTasks[taskId].func = Task_HandleDuoFightPre;
     }
     else
     {
-        tGroudonSpriteId = CreateDuoFightGroudonSprites();
-        tKyogreSpriteId = CreateDuoFightKyogreSprites();
+        tGroudonSpriteId = DuoFight_CreateGroudonSprites();
+        tKyogreSpriteId = DuoFight_CreateKyogreSprites();
         gTasks[taskId].func = Task_HandleDuoFight;
         StopMapMusic();
     }
@@ -1798,7 +1802,7 @@ static void Task_DuoFightEnd(u8 taskId)
     }
 }
 
-static u8 CreateDuoFightGroudonSprites(void)
+static u8 DuoFight_CreateGroudonSprites(void)
 {
     u8 spriteId;
     s16 *data;
@@ -1862,7 +1866,7 @@ static void DuoFight_SlideGroudonDown(struct Sprite *sprite)
     }
 }
 
-static u8 CreateDuoFightKyogreSprites(void)
+static u8 DuoFight_CreateKyogreSprites(void)
 {
     u8 spriteId;
     s16 *data;
@@ -2277,7 +2281,7 @@ static void Task_RayDescendsAnim(u8 taskId)
     sRayScene->revealedLightTimer = 0;
     tState = 0;
     tTimer = 0;
-    data[2] = 0;
+    data[2] = 0; // Below data assignments do nothing
     data[3] = 0;
     data[4] = 0x1000;
     gTasks[taskId].func = Task_HandleRayDescends;
@@ -2474,110 +2478,136 @@ static void LoadChargesSceneGfx(void)
     LoadCompressedPalette(gRaySceneCharges_Bg_Pal, 0, 0x80);
 }
 
+#define tState          data[0]
+#define tTimer          data[1]
+#define tRayquazaTaskId data[2]
+#define tSoundTimer     data[3]
+
 static void Task_RayChargesAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     InitChargesSceneBgs();
     LoadChargesSceneGfx();
-    sub_81D68C8();
+    SetWindowsHideVertBorders();
     BlendPalettes(-1, 0x10, 0);
     SetVBlankCallback(VBlankCB_RayquazaScene);
-    data[0] = 0;
-    data[1] = 0;
-    data[2] = CreateTask(sub_81D8AD8, 0);
+    tState = 0;
+    tTimer = 0;
+    tRayquazaTaskId = CreateTask(Task_RayCharges_ShakeRayquaza, 0);
     gTasks[taskId].func = Task_HandleRayCharges;
 }
 
 static void Task_HandleRayCharges(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    sub_81D8BB4();
-    if ((data[3] & 7) == 0 && data[0] <= 1 && data[1] <= 89)
+    RayCharges_AnimateBg();
+    if ((tSoundTimer & 7) == 0 && tState <= 1 && tTimer <= 89)
         PlaySE(SE_OP_BASYU);
 
-    data[3]++;
-    switch (data[0])
+    tSoundTimer++;
+    switch (tState)
     {
     case 0:
-        if (data[1] == 8)
+        // Delay, then fade in
+        if (tTimer == 8)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
-            data[1] = 0;
-            data[0]++;
+            tTimer = 0;
+            tState++;
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
         break;
     case 1:
-        if (data[1] == 127)
+        // Delay while Rayquaza shakes, then start Rayquaza moving offscreen
+        if (tTimer == 127)
         {
-            data[1] = 0;
-            data[0]++;
-            gTasks[data[2]].func = sub_81D8B2C;
+            tTimer = 0;
+            tState++;
+            gTasks[tRayquazaTaskId].func = Task_RayCharges_FlyOffscreen;
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
         break;
     case 2:
-        if (data[1] == 12)
+        // Delay for Rayquaza's flying animation
+        if (tTimer == 12)
         {
-            data[1] = 0;
-            data[0]++;
+            tTimer = 0;
+            tState++;
         }
         else
         {
-            data[1]++;
+            tTimer++;
         }
         break;
     case 3:
+        // Fade out
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_RayChargesEnd;
         break;
     }
 }
 
-// These two, BG scrolling for Rayquaza charge
-static void sub_81D8AD8(u8 taskId)
+#undef tState
+#undef tTimer
+#undef tSoundTimer
+
+#define tState    data[0]
+#define tOffset   data[1]
+#define tShakeDir data[2]
+#define tTimer    data[15]
+
+static void Task_RayCharges_ShakeRayquaza(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if ((data[15] & 3) == 0)
+    if ((tTimer & 3) == 0)
     {
         ChangeBgX(1, (Random() % 8 - 4) << 8, 0);
         ChangeBgY(1, (Random() % 8 - 4) << 8, 0);
     }
 
-    data[15]++;
+    tTimer++;
 }
 
-static void sub_81D8B2C(u8 taskId)
+// Rayquaza backs up then launches forward
+static void Task_RayCharges_FlyOffscreen(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (data[0] == 0)
+    if (tState == 0)
     {
         ChangeBgX(1, 0, 0);
         ChangeBgY(1, 0, 0);
-        data[0]++;
-        data[1] = 10;
-        data[2] = -1;
+        tState++;
+        tOffset = 10;
+        tShakeDir = -1;
     }
-    else if (data[0] == 1)
+    else if (tState == 1)
     {
-        ChangeBgX(1, data[1] << 8, 2);
-        ChangeBgY(1, data[1] << 8, 1);
-        data[1] += data[2];
-        if (data[1] == -10)
-            data[2] *= -1;
+        ChangeBgX(1, tOffset << 8, 2);
+        ChangeBgY(1, tOffset << 8, 1);
+        tOffset += tShakeDir;
+        if (tOffset == -10)
+            tShakeDir *= -1;
     }
 }
 
-static void sub_81D8BB4(void)
+#undef tState
+#undef tOffset
+#undef tShakeDir
+#undef tTimer
+
+static void RayCharges_AnimateBg(void)
 {
+    // Update yellow orbs
     ChangeBgX(2, 0x400, 2);
     ChangeBgY(2, 0x400, 1);
+
+    // Update blue streaks
     ChangeBgX(0, 0x800, 2);
     ChangeBgY(0, 0x800, 1);
 }
@@ -2585,15 +2615,17 @@ static void sub_81D8BB4(void)
 static void Task_RayChargesEnd(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    sub_81D8BB4();
+    RayCharges_AnimateBg();
     if (!gPaletteFade.active)
     {
         SetVBlankCallback(NULL);
-        sub_81D6904();
-        DestroyTask(data[2]);
+        ResetWindowDimensions();
+        DestroyTask(tRayquazaTaskId);
         gTasks[taskId].func = Task_SetNextAnim;
     }
 }
+
+#undef tRayquazaTaskId
 
 static void InitChasesAwaySceneBgs(void)
 {
@@ -2643,7 +2675,7 @@ static void Task_RayChasesAwayAnim(u8 taskId)
     s16 *data = gTasks[taskId].data;
     InitChasesAwaySceneBgs();
     LoadChasesAwaySceneGfx();
-    sub_81D68C8();
+    SetWindowsHideVertBorders();
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(9, 14));
@@ -2743,7 +2775,7 @@ static void Task_RayChasesAwayEnd(u8 taskId)
         if (data[1] == 0)
         {
             SetVBlankCallback(NULL);
-            sub_81D6904();
+            ResetWindowDimensions();
             ResetSpriteData();
             FreeAllSpritePalettes();
             DestroyTask(data[2]);
