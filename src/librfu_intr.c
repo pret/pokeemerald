@@ -148,7 +148,11 @@ static void sio32intr_clock_slave(void)
 {
     u32 regSIODATA32;
     u32 r0;
-    register u32 reqLen asm("r2");
+    #ifndef NONMATCHING
+        register u32 reqLen asm("r2");
+    #else
+        u32 reqLen;
+    #endif
 
     gSTWIStatus->timerActive = 0;
     STWI_set_timer_in_RAM(100);

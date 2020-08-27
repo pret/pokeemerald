@@ -912,7 +912,7 @@ void Task_LinkSave(u8 taskId)
         tState = 1;
         break;
     case 1:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState = 2;
         break;
     case 2:
@@ -949,7 +949,7 @@ void Task_LinkSave(u8 taskId)
     case 7:
         if (!tPartialSave)
             ClearContinueGameWarpStatus2();
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState = 8;
         break;
     case 8:
@@ -960,7 +960,7 @@ void Task_LinkSave(u8 taskId)
         }
         break;
     case 9:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState = 10;
         break;
     case 10:

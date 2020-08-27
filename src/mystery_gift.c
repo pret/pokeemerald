@@ -410,7 +410,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         break;
     case 1:
         LoadPalette(gUnkTextboxBorderPal, 0, 0x20);
-        LoadPalette(stdpal_get(2), 0xd0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
         Menu_LoadStdPalAt(0xC0);
         LoadUserWindowBorderGfx(0, 0xA, 0xE0);
         LoadUserWindowBorderGfx_(0, 0x1, 0xF0);
@@ -1284,7 +1284,7 @@ void task00_mystery_gift(u8 taskId)
         switch (mevent_client_do_exec(&data->curPromptWindowId))
         {
         case 6:
-            task_add_05_task_del_08FA224_when_no_RfuFunc();
+            Rfu_SetCloseLinkCallback();
             data->prevPromptWindowId = data->curPromptWindowId;
             data->state = 13;
             break;
@@ -1647,7 +1647,7 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 33:
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_SetCloseLinkCallback();
         StringCopy(gStringVar1, gLinkPlayers[1].name);
         data->state = 34;
         break;

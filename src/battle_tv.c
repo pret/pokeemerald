@@ -1398,9 +1398,9 @@ static void TrySetBattleSeminarShow(void)
         return;
     else if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return;
-    else if (gBattleMons[gBattlerAttacker].statStages[STAT_ACC] <= 5)
+    else if (gBattleMons[gBattlerAttacker].statStages[STAT_ACC] < DEFAULT_STAT_STAGE)
         return;
-    else if (gBattleMons[gBattlerTarget].statStages[STAT_EVASION] > 6)
+    else if (gBattleMons[gBattlerTarget].statStages[STAT_EVASION] > DEFAULT_STAT_STAGE)
         return;
     else if (gCurrentMove == MOVE_HIDDEN_POWER || gCurrentMove == MOVE_WEATHER_BALL)
         return;

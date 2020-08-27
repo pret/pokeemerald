@@ -384,7 +384,7 @@ static void CB2_InitLearnMove(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->partyMon = gSpecialVar_0x8004;
     SetVBlankCallback(VBlankCB_MoveRelearner);
@@ -412,7 +412,7 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->state = MENU_STATE_FADE_FROM_SUMMARY_SCREEN;
     sMoveRelearnerStruct->partyMon = gSpecialVar_0x8004;
@@ -452,7 +452,7 @@ static void CB2_MoveRelearnerMain(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 

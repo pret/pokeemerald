@@ -108,6 +108,7 @@
 #define TEST_BUTTON(field, button) ({(field) & (button);})
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
 #define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
+#define JOY_REPEAT(button) TEST_BUTTON(gMain.newAndRepeatedKeys, button)
 
 #define S16TOPOSFLOAT(val)   \
 ({                           \
@@ -485,7 +486,7 @@ struct SaveBlock2
     /*0x20C*/ struct BerryPickingResults berryPick;
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][2][3]; // From record mixing.
     /*0x57C*/ struct RankingHall2P hallRecords2P[2][3]; // From record mixing.
-    /*0x624*/ u16 contestLinkResults[5][4]; // 4 positions for 5 categories.
+    /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
 }; // sizeof=0xF2C
 
@@ -494,7 +495,7 @@ extern struct SaveBlock2 *gSaveBlock2Ptr;
 struct SecretBaseParty
 {
     u32 personality[PARTY_SIZE];
-    u16 moves[PARTY_SIZE * 4];
+    u16 moves[PARTY_SIZE * MAX_MON_MOVES];
     u16 species[PARTY_SIZE];
     u16 heldItems[PARTY_SIZE];
     u8 levels[PARTY_SIZE];

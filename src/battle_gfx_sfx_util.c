@@ -865,14 +865,14 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
     if (IsContest())
     {
         position = 0;
-        targetSpecies = gContestResources->field_18->unk2;
-        personalityValue = gContestResources->field_18->unk8;
-        otId = gContestResources->field_18->unkC;
+        targetSpecies = gContestResources->moveAnim->targetSpecies;
+        personalityValue = gContestResources->moveAnim->personality;
+        otId = gContestResources->moveAnim->otId;
 
         HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[targetSpecies],
                                                   gMonSpritesGfxPtr->sprites[0],
                                                   targetSpecies,
-                                                  gContestResources->field_18->unk10);
+                                                  gContestResources->moveAnim->targetPersonality);
     }
     else
     {

@@ -577,7 +577,7 @@ void ResetSentPokesToOpponentValue(void)
         gSentPokesToOpponent[(i & BIT_FLANK) >> 1] = bits;
 }
 
-void sub_803F9EC(u8 battler)
+void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler)
 {
     s32 i = 0;
     u32 bits = 0;
@@ -597,11 +597,11 @@ void sub_803F9EC(u8 battler)
     }
 }
 
-void sub_803FA70(u8 battler)
+void UpdateSentPokesToOpponentValue(u8 battler)
 {
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
-        sub_803F9EC(battler);
+        OpponentSwitchInResetSentPokesToOpponentValue(battler);
     }
     else
     {
@@ -2075,7 +2075,7 @@ bool8 HandleFaintedMonActions(void)
             gBattleStruct->faintedActionsState = 3;
             break;
         case 2:
-            sub_803F9EC(gBattlerFainted);
+            OpponentSwitchInResetSentPokesToOpponentValue(gBattlerFainted);
             if (++gBattleStruct->faintedActionsBattlerId == gBattlersCount)
                 gBattleStruct->faintedActionsState = 3;
             else
@@ -4409,9 +4409,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_RESTORE_STATS:
                 for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
-                    if (gBattleMons[battlerId].statStages[i] < 6)
+                    if (gBattleMons[battlerId].statStages[i] < DEFAULT_STAT_STAGE)
                     {
-                        gBattleMons[battlerId].statStages[i] = 6;
+                        gBattleMons[battlerId].statStages[i] = DEFAULT_STAT_STAGE;
                         effect = ITEM_STATS_CHANGE;
                     }
                 }
@@ -4984,9 +4984,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_RESTORE_STATS:
                 for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
-                    if (gBattleMons[battlerId].statStages[i] < 6)
+                    if (gBattleMons[battlerId].statStages[i] < DEFAULT_STAT_STAGE)
                     {
-                        gBattleMons[battlerId].statStages[i] = 6;
+                        gBattleMons[battlerId].statStages[i] = DEFAULT_STAT_STAGE;
                         effect = ITEM_STATS_CHANGE;
                     }
                 }

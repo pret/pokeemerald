@@ -660,7 +660,7 @@ static void LoadWallClockGraphics(void)
     InitWindows(gUnknown_085B21DC);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 0x250, 0xd0);
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
@@ -780,7 +780,7 @@ static void WallClockMainCallback(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 

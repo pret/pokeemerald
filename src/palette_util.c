@@ -1,208 +1,217 @@
 #include "global.h"
 #include "palette.h"
-#include "roulette.h"
-#include "roulette_util.h"
+#include "palette_util.h"
 #include "util.h"
 
-void sub_8151678(struct UnkStruct0 *r0)
+// "RouletteFlash" is more accurately a general flashing/fading util
+// this file handles fading the palettes for the color/icon selections on the Roulette wheel
+// but it also handles the "pulse blend" effect of Mirage Tower
+
+void RouletteFlash_Reset(struct RouletteFlashUtil *flash)
 {
-    r0->var00 = 0;
-    r0->var02 = 0;
-    memset(&r0->var04, 0, sizeof(r0->var04));
+    flash->enabled = 0;
+    flash->flags = 0;
+    memset(&flash->palettes, 0, sizeof(flash->palettes));
 }
 
-u8 sub_815168C(struct UnkStruct0 *r0, u8 r1, const struct UnkStruct1 *r2)
+u8 RouletteFlash_Add(struct RouletteFlashUtil *flash, u8 id, const struct RouletteFlashSettings *settings)
 {
-    if (!(r1 < 16) || (r0->var04[r1].var00_7))
+    if (id >= ARRAY_COUNT(flash->palettes) || flash->palettes[id].available)
         return 0xFF;
 
-    r0->var04[r1].var04.var00 = r2->var00;
-    r0->var04[r1].var04.var02 = r2->var02;
-    r0->var04[r1].var04.var04 = r2->var04;
-    r0->var04[r1].var04.var05 = r2->var05;
-    r0->var04[r1].var04.var06 = r2->var06;
-    r0->var04[r1].var04.var07_0 = r2->var07_0;
-    r0->var04[r1].var04.var07_5 = r2->var07_5;
-    r0->var04[r1].var04.var07_7 = r2->var07_7;
-    r0->var04[r1].var00_0 = 0;
-    r0->var04[r1].var00_7 = 1;
-    r0->var04[r1].var02 = 0;
-    r0->var04[r1].var01 = 0;
-    if (r0->var04[r1].var04.var07_7 < 0)
-        r0->var04[r1].var03 = 0xFF;
+    flash->palettes[id].settings.color = settings->color;
+    flash->palettes[id].settings.paletteOffset = settings->paletteOffset;
+    flash->palettes[id].settings.numColors = settings->numColors;
+    flash->palettes[id].settings.delay = settings->delay;
+    flash->palettes[id].settings.unk6 = settings->unk6;
+    flash->palettes[id].settings.numFadeCycles = settings->numFadeCycles;
+    flash->palettes[id].settings.unk7_5 = settings->unk7_5;
+    flash->palettes[id].settings.colorDeltaDir = settings->colorDeltaDir;
+    flash->palettes[id].state = 0;
+    flash->palettes[id].available = TRUE;
+    flash->palettes[id].fadeCycleCounter = 0;
+    flash->palettes[id].delayCounter = 0;
+    if (flash->palettes[id].settings.colorDeltaDir < 0)
+        flash->palettes[id].colorDelta = -1;
     else
-        r0->var04[r1].var03 = 1;
+        flash->palettes[id].colorDelta = 1;
 
-    return r1;
+    return id;
 }
 
-u8 sub_8151710(struct UnkStruct0 *r0, u8 r1)
+// Unused
+static u8 RouletteFlash_Remove(struct RouletteFlashUtil *flash, u8 id)
 {
-    if (r1 >= 16)
+    if (id >= ARRAY_COUNT(flash->palettes))
         return 0xFF;
-    if (!r0->var04[r1].var00_7)
+    if (!flash->palettes[id].available)
         return 0xFF;
 
-    memset(&r0->var04[r1], 0, sizeof(r0->var04[r1]));
-    return r1;
+    memset(&flash->palettes[id], 0, sizeof(flash->palettes[id]));
+    return id;
 }
 
-u8 sub_8151744(struct UnkStruct3 *r0)
+static u8 RouletteFlash_FadePalette(struct RouletteFlashPalette *pal)
 {
     u8 i;
     u8 returnval;
 
-    for (i = 0; i < r0->var04.var04; i++)
+    for (i = 0; i < pal->settings.numColors; i++)
     {
-        struct PlttData *faded =   (struct PlttData *)&gPlttBufferFaded[r0->var04.var02 + i];
-        struct PlttData *unfaded = (struct PlttData *)&gPlttBufferUnfaded[r0->var04.var02 + i];
+        struct PlttData *faded =   (struct PlttData *)&gPlttBufferFaded[pal->settings.paletteOffset + i];
+        struct PlttData *unfaded = (struct PlttData *)&gPlttBufferUnfaded[pal->settings.paletteOffset + i];
 
-        switch (r0->var00_0)
+        switch (pal->state)
         {
         case 1:
-            if (faded->r + r0->var03 >= 0 && faded->r + r0->var03 < 32)
-                faded->r += r0->var03;
-            if (faded->g + r0->var03 >= 0 && faded->g + r0->var03 < 32)
-                faded->g += r0->var03;
-            if (faded->b + r0->var03 >= 0 && faded->b + r0->var03 < 32)
-                faded->b += r0->var03;
+            // Fade color
+            if (faded->r + pal->colorDelta >= 0 && faded->r + pal->colorDelta < 32)
+                faded->r += pal->colorDelta;
+            if (faded->g + pal->colorDelta >= 0 && faded->g + pal->colorDelta < 32)
+                faded->g += pal->colorDelta;
+            if (faded->b + pal->colorDelta >= 0 && faded->b + pal->colorDelta < 32)
+                faded->b += pal->colorDelta;
             break;
         case 2:
-            if (r0->var03 < 0)
+            // Fade back to original color
+            if (pal->colorDelta < 0)
             {
-                if (faded->r + r0->var03 >= unfaded->r)
-                    faded->r += r0->var03;
-                if (faded->g + r0->var03 >= unfaded->g)
-                    faded->g += r0->var03;
-                if (faded->b + r0->var03 >= unfaded->b)
-                    faded->b += r0->var03;
+                if (faded->r + pal->colorDelta >= unfaded->r)
+                    faded->r += pal->colorDelta;
+                if (faded->g + pal->colorDelta >= unfaded->g)
+                    faded->g += pal->colorDelta;
+                if (faded->b + pal->colorDelta >= unfaded->b)
+                    faded->b += pal->colorDelta;
             }
             else
             {
-                if (faded->r + r0->var03 <= unfaded->r)
-                    faded->r += r0->var03;
-                if (faded->g + r0->var03 <= unfaded->g)
-                    faded->g += r0->var03;
-                if (faded->b + r0->var03 <= unfaded->b)
-                    faded->b += r0->var03;
+                if (faded->r + pal->colorDelta <= unfaded->r)
+                    faded->r += pal->colorDelta;
+                if (faded->g + pal->colorDelta <= unfaded->g)
+                    faded->g += pal->colorDelta;
+                if (faded->b + pal->colorDelta <= unfaded->b)
+                    faded->b += pal->colorDelta;
             }
             break;
         }
     }
-    if ((u32)r0->var02++ != r0->var04.var07_0)
+    if ((u32)pal->fadeCycleCounter++ != pal->settings.numFadeCycles)
     {
         returnval = 0;
     }
     else
     {
-        r0->var02 = 0;
-        r0->var03 *= -1;
-        if (r0->var00_0 == 1)
-            r0->var00_0++;
+        pal->fadeCycleCounter = 0;
+        pal->colorDelta *= -1;
+        if (pal->state == 1)
+            pal->state++;
         else
-            r0->var00_0--;
+            pal->state--;
         returnval = 1;
     }
     return returnval;
 }
 
-u8 sub_815194C(struct UnkStruct3 *r0)
+static u8 RouletteFlash_FlashPalette(struct RouletteFlashPalette *pal)
 {
-    u8 rg2 = 0;
-
-    switch (r0->var00_0)
+    u8 i = 0;
+    switch (pal->state)
     {
     case 1:
-        for (rg2 = 0; rg2 < r0->var04.var04; rg2++)
-            gPlttBufferFaded[r0->var04.var02 + rg2] = r0->var04.var00;
-        r0->var00_0++;
+        // Flash to color
+        for (; i < pal->settings.numColors; i++)
+            gPlttBufferFaded[pal->settings.paletteOffset + i] = pal->settings.color;
+        pal->state++;
         break;
     case 2:
-        for (rg2 = 0; rg2 < r0->var04.var04; rg2++)
-            gPlttBufferFaded[r0->var04.var02 + rg2] = gPlttBufferUnfaded[r0->var04.var02 + rg2];
-        r0->var00_0--;
+        // Restore to original color
+        for (; i < pal->settings.numColors; i++)
+            gPlttBufferFaded[pal->settings.paletteOffset + i] = gPlttBufferUnfaded[pal->settings.paletteOffset + i];
+        pal->state--;
         break;
     }
     return 1;
 }
 
-void task_tutorial_controls_fadein(struct UnkStruct0 *r0)
+void RouletteFlash_Run(struct RouletteFlashUtil *flash)
 {
     u8 i = 0;
 
-    if (r0->var00)
+    if (flash->enabled)
     {
-        for (i = 0; i < 16; i++)
+        for (i = 0; i < ARRAY_COUNT(flash->palettes); i++)
         {
-            if ((r0->var02 >> i) & 1)
+            if ((flash->flags >> i) & 1)
             {
-                if (--r0->var04[i].var01 == 0xFF) // if underflow ?
+                if (--flash->palettes[i].delayCounter == (u8)-1)
                 {
-                    if (r0->var04[i].var04.var00 & 0x8000) // PlttData->unused_15 ?
-                        sub_8151744(&r0->var04[i]);
+                    if (flash->palettes[i].settings.color & FLASHUTIL_USE_EXISTING_COLOR)
+                        RouletteFlash_FadePalette(&flash->palettes[i]);
                     else
-                        sub_815194C(&r0->var04[i]);
+                        RouletteFlash_FlashPalette(&flash->palettes[i]);
 
-                    r0->var04[i].var01 = r0->var04[i].var04.var05;
+                    flash->palettes[i].delayCounter = flash->palettes[i].settings.delay;
                 }
             }
         }
     }
 }
 
-void sub_8151A48(struct UnkStruct0 *r0, u16 r1)
+void RouletteFlash_Enable(struct RouletteFlashUtil *flash, u16 flags)
 {
     u8 i = 0;
 
-    r0->var00++;
-    for (i = 0; i < 16; i++)
+    flash->enabled++;
+    for (i = 0; i < ARRAY_COUNT(flash->palettes); i++)
     {
-        if ((r1 >> i) & 1)
+        if ((flags >> i) & 1)
         {
-            if (r0->var04[i].var00_7)
+            if (flash->palettes[i].available)
             {
-                r0->var02 |= 1 << i;
-                r0->var04[i].var00_0 = 1;
+                flash->flags |= 1 << i;
+                flash->palettes[i].state = 1;
             }
         }
     }
 }
 
-void sub_8151A9C(struct UnkStruct0 *r0, u16 r1)
+void RouletteFlash_Stop(struct RouletteFlashUtil *flash, u16 flags)
 {
     u8 i;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < ARRAY_COUNT(flash->palettes); i++)
     {
-        if ((r0->var02 >> i) & 1)
+        if ((flash->flags >> i) & 1)
         {
-            if (r0->var04[i].var00_7)
+            if (flash->palettes[i].available)
             {
-                if ((r1 >> i) & 1)
+                if ((flags >> i) & 1)
                 {
-                    u32 offset = r0->var04[i].var04.var02;
+                    u32 offset = flash->palettes[i].settings.paletteOffset;
                     u16 *faded = &gPlttBufferFaded[offset];
                     u16 *unfaded = &gPlttBufferUnfaded[offset];
-                    memcpy(faded, unfaded, r0->var04[i].var04.var04 * 2);
-                    r0->var04[i].var00_0 = 0;
-                    r0->var04[i].var02 = 0;
-                    r0->var04[i].var01 = 0;
-                    if (r0->var04[i].var04.var07_7 < 0)
-                        r0->var04[i].var03 = 0xFF;
+                    memcpy(faded, unfaded, flash->palettes[i].settings.numColors * 2);
+                    flash->palettes[i].state = 0;
+                    flash->palettes[i].fadeCycleCounter = 0;
+                    flash->palettes[i].delayCounter = 0;
+                    if (flash->palettes[i].settings.colorDeltaDir < 0)
+                        flash->palettes[i].colorDelta = -1;
                     else
-                        r0->var04[i].var03 = 0x1;
+                        flash->palettes[i].colorDelta = 1;
                 }
             }
         }
     }
-    if (r1 == 0xFFFF)
+
+    if (flags == 0xFFFF)
     {
-        r0->var00 = 0;
-        r0->var02 = 0;
+        // Stopped all
+        flash->enabled = 0;
+        flash->flags = 0;
     }
     else
     {
-        r0->var02 = r0->var02 & ~r1;
+        flash->flags &= ~flags;
     }
 }
 
@@ -429,7 +438,8 @@ void UpdatePulseBlend(struct PulseBlend *pulseBlend)
     }
 }
 
-void sub_8152008(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
+// Below used for the Roulette grid
+void ClearTilemapRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
 {
     u16 *_dest;
     u8 i;
@@ -446,7 +456,7 @@ void sub_8152008(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
     }
 }
 
-void sub_8152058(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
+void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
 {
     u16 *_dest;
     u16 *_src = src;

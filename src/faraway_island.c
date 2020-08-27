@@ -6,6 +6,7 @@
 #include "metatile_behavior.h"
 #include "sprite.h"
 #include "constants/event_objects.h"
+#include "constants/field_effects.h"
 #include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 
@@ -23,7 +24,7 @@ static s16 sPlayerToMewDeltaX;
 static s16 sPlayerToMewDeltaY;
 static u8 sMewDirectionCandidates[4];
 
-extern const struct SpritePalette gFieldEffectObjectPaletteInfo1;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
 static const s16 sFarawayIslandRockCoords[4][2] =
@@ -392,13 +393,13 @@ void SetMewAboveGrass(void)
         if (gSpecialVar_Facing != DIR_NORTH)
             gSprites[mew->spriteId].subpriority = 1;
 
-        LoadSpritePalette(&gFieldEffectObjectPaletteInfo1);
-        UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(gFieldEffectObjectPaletteInfo1.tag));
+        LoadSpritePalette(&gSpritePalette_GeneralFieldEffect1);
+        UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(gSpritePalette_GeneralFieldEffect1.tag));
 
         x = mew->currentCoords.x;
         y = mew->currentCoords.y;
         SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
-        sGrassSpriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[15], x, y, gSprites[mew->spriteId].subpriority - 1);
+        sGrassSpriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_LONG_GRASS], x, y, gSprites[mew->spriteId].subpriority - 1);
         if (sGrassSpriteId != MAX_SPRITES)
         {
             struct Sprite *sprite = &gSprites[sGrassSpriteId];
