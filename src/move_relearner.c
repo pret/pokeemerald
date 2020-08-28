@@ -150,20 +150,22 @@
 #define JAM_HEART_EMPTY 2
 #define JAM_HEART_FULL 3
 
+#define MAX_RELEARNER_MOVES (MAX_LEVEL_UP_MOVES > 25 ? MAX_LEVEL_UP_MOVES : 25)
+
 static EWRAM_DATA struct
 {
     u8 state;
-    u8 heartSpriteIds[16];              /*0x001*/
-    u16 movesToLearn[25];               /*0x01A*/
-    u8 partyMon;                        /*0x044*/
-    u8 moveSlot;                        /*0x045*/
-    struct ListMenuItem menuItems[25];  /*0x0E8*/
-    u8 numMenuChoices;                  /*0x110*/
-    u8 numToShowAtOnce;                 /*0x111*/
-    u8 moveListMenuTask;                /*0x112*/
-    u8 moveListScrollArrowTask;         /*0x113*/
-    u8 moveDisplayArrowTask;            /*0x114*/
-    u16 scrollOffset;                   /*0x116*/
+    u8 heartSpriteIds[16];                               /*0x001*/
+    u16 movesToLearn[MAX_RELEARNER_MOVES];               /*0x01A*/
+    u8 partyMon;                                         /*0x044*/
+    u8 moveSlot;                                         /*0x045*/
+    struct ListMenuItem menuItems[MAX_RELEARNER_MOVES];  /*0x0E8*/
+    u8 numMenuChoices;                                   /*0x110*/
+    u8 numToShowAtOnce;                                  /*0x111*/
+    u8 moveListMenuTask;                                 /*0x112*/
+    u8 moveListScrollArrowTask;                          /*0x113*/
+    u8 moveDisplayArrowTask;                             /*0x114*/
+    u16 scrollOffset;                                    /*0x116*/
 } *sMoveRelearnerStruct = {0};
 
 static EWRAM_DATA struct {
