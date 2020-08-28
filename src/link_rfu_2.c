@@ -876,8 +876,7 @@ static void sub_800F498(u16 *a0, u8 *a1)
 
 static bool32 RfuProcessEnqueuedRecvBlock(void)
 {
-    u8 i;
-    u8 j;
+    u8 i, j;
     u8 sp00[MAX_RFU_PLAYERS * (2 * (CMD_LENGTH - 1))];
     u8 sp48[2 * (CMD_LENGTH - 1)];
     u8 status;
@@ -936,11 +935,12 @@ static void HandleSendFailure(u8 unused, u32 flags)
                 temp = j << 1;
                 sResendBlock16[j + 1] = (r10[i * 12 + temp + 1] << 8) | r10[i * 12 + temp];
             }
+
             for (j = 0; j < 7; j++)
             {
                 temp = j << 1;
                 sResendBlock8[temp + 1] = sResendBlock16[j] >> 8;
-                sResendBlock8[temp + 0] = sResendBlock16[j]&0xff;
+                sResendBlock8[temp + 0] = sResendBlock16[j] & 0xff;
             }
             RfuSendQueue_Enqueue(&Rfu.sendQueue, sResendBlock8);
             Rfu.sendBlock.failedFlags |= (1 << i);
@@ -1417,16 +1417,12 @@ void Rfu_SetCloseLinkCallback(void)
 
 static void SendReadyExitStandbyUntilAllReady(void)
 {
-    u8 playerCount;
-    u8 i;
+    u8 i, playerCount;
 
-    if (GetMultiplayerId() != 0)
+    if (GetMultiplayerId() != 0 && Rfu.recvQueue.count == 0 && Rfu.resendExitStandbyTimer > 60)
     {
-        if (Rfu.recvQueue.count == 0 && Rfu.resendExitStandbyTimer > 60)
-        {
-            RfuPrepareSendBuffer(RFU_COMMAND_READY_EXIT_STANDBY);
-            Rfu.resendExitStandbyTimer = 0;
-        }
+        RfuPrepareSendBuffer(RFU_COMMAND_READY_EXIT_STANDBY);
+        Rfu.resendExitStandbyTimer = 0;
     }
     playerCount = GetLinkPlayerCount();
     for (i = 0; i < playerCount; i++)
@@ -1552,9 +1548,11 @@ static bool8 CheckForLeavingGroupMembers(void)
     bool8 memberLeft = FALSE;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Rfu.partnerSendStatuses[i] == RFU_STATUS_JOIN_GROUP_OK || Rfu.partnerSendStatuses[i] == RFU_STATUS_JOIN_GROUP_NO)
+        if (Rfu.partnerSendStatuses[i] == RFU_STATUS_JOIN_GROUP_OK
+            || Rfu.partnerSendStatuses[i] == RFU_STATUS_JOIN_GROUP_NO)
             continue;
-        if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS || gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
+        if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS
+            || gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
         {
             if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_LEAVE_GROUP_NOTICE)
             {
@@ -2089,8 +2087,7 @@ static void sub_80111FC(void)
 
 static void sub_801120C(u8 msg, u8 paramCount)
 {
-    u8 i;
-    u8 disconnectFlag = 0;
+    u8 i, disconnectFlag = 0;
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
