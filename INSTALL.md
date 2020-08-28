@@ -1,24 +1,20 @@
 # Prerequisites
 
-| Linux | macOS | Windows 10
-| - | - | -
-| none | [Xcode Command Line Tools Package][xcode] | [Windows Terminal][terminal] and [Windows Subsystem for Linux (WSL)][wsl]
+| macOS | Windows 10
+| - | -
+| [Xcode Command Line Tools Package][xcode] | [Windows Terminal][terminal] and [Windows Subsystem for Linux (WSL)][wsl]
 
 [xcode]: https://developer.apple.com/library/archive/technotes/tn2339/_index.html
 [terminal]: https://docs.microsoft.com/windows/terminal/get-started
 [wsl]: https://docs.microsoft.com/windows/wsl/install-win10
 
-Make sure that the `gcc`, `g++`, `make`, `git`, and `libpng` packages or their equivalents are installed. The package names and installation methods vary with each OS.
+Independently from the specific OS, make sure that the `gcc`, `g++`, `make`, `git`, and `libpng` packages or their equivalents are installed and accessible to the development tools that are used by the project (this means that, for example, on Windows, the packages have to be installed in the WSL environment). The package names and installation methods may vary with each OS.
 
-Install the devkitARM toolchain of devkitPro as per [the instructions on their wiki](https://devkitpro.org/wiki/devkitPro_pacman). On Windows, WSL is the development environment, thus any steps about the Windows installer do not apply.
+Install the devkitARM toolchain of devkitPro as per [the instructions on their wiki](https://devkitpro.org/wiki/devkitPro_pacman). On Windows, follow the Linux instructions inside WSL as any steps about the Windows installer do not apply.
 
-The following tools are necessary depending on your needs:
+**Debian-based distro users:** This applies if you use Debian, Ubuntu, and similar distros, including in WSL. If necessary, install the `libarchive13`, `pkg-config`, and `gdebi-core` packages to be able to install devkitPro.
 
-* [porymap](https://github.com/huderlem/porymap) for viewing and editing maps
-* [poryscript](https://github.com/huderlem/poryscript) for scripting ([VS Code extension](https://marketplace.visualstudio.com/items?itemName=karathan.poryscript))
-* [Tilemap Studio](https://github.com/Rangi42/tilemap-studio) for viewing and editing tilemaps
-
-**Windows 10 users:** WSL 2 is included starting in the 2004 release (build 19041) and will eventually become [the default for new installations](https://devblogs.microsoft.com/commandline/the-windows-subsystem-for-linux-build-2020-summary/#wsl2-default), therefore existing WSL 1 and [prerelease WSL](https://docs.microsoft.com/windows/wsl/install-legacy) users are recommended to update. Right-click the Start button and choose System to determine the Windows version.
+**Windows 10 users:** WSL 2 is available in the 1903 release (build 18362) and later, therefore existing WSL 1 and [prerelease WSL](https://docs.microsoft.com/windows/wsl/install-legacy) users are recommended to update. Right-click the Start button or press `Win`+`X` and choose System to determine the Windows version. Also check Windows Update to make sure your installation is up-to-date.
 
 **Windows 7 and 8.1 users:** pret is no longer focusing on support in pokeemerald for [old versions of Windows](https://support.microsoft.com/help/13853) so consider upgrading to a current release of Windows 10 or try a third-party guide like [this one](https://www.pokecommunity.com/showthread.php?t=425246) instead.
 
@@ -91,3 +87,10 @@ The following is an example:
 	make TOOLCHAIN="/usr/local/arm-none-eabi"
 
 To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
+
+
+# Useful additional tools
+
+* [porymap](https://github.com/huderlem/porymap) for viewing and editing maps
+* [poryscript](https://github.com/huderlem/poryscript) for scripting ([VS Code extension](https://marketplace.visualstudio.com/items?itemName=karathan.poryscript))
+* [Tilemap Studio](https://github.com/Rangi42/tilemap-studio) for viewing and editing tilemaps
