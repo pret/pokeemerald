@@ -27,7 +27,7 @@ PetalburgCity_EventScript_MoveGymBoyToWestEntrance:: @ 81DC307
 
 PetalburgCity_EventScript_DisableMapNameAndMusic:: @ 81DC30F
 	setflag FLAG_HIDE_MAP_NAME_POPUP
-	savebgm MUS_TSURETEK
+	savebgm MUS_FOLLOW_ME
 	return
 
 PetalburgCity_EventScript_SetGymDoorsUnlocked:: @ 81DC316
@@ -271,7 +271,7 @@ PetalburgCity_EventScript_ShowGymToPlayer3:: @ 81DC4BE
 PetalburgCity_EventScript_ShowGymToPlayer:: @ 81DC4CA
 	applymovement LOCALID_GYM_BOY, Common_Movement_FacePlayer
 	waitmovement 0
-	playbgm MUS_TSURETEK, 0
+	playbgm MUS_FOLLOW_ME, 0
 	playse SE_PIN
 	applymovement LOCALID_GYM_BOY, Common_Movement_ExclamationMark
 	waitmovement 0

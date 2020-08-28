@@ -460,7 +460,7 @@ MauvilleCity_EventScript_RegisterWallyCall:: @ 81DF7BA
 	pokenavcall MauvilleCity_Text_WallyPokenavCall
 	waitmessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox MauvilleCity_Text_RegisteredWally, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage

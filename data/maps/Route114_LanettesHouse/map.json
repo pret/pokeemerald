@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE114_LANETTES_HOUSE",
   "name": "Route114_LanettesHouse",
   "layout": "LAYOUT_ROUTE114_LANETTES_HOUSE",
-  "music": "MUS_TONEKUSA",
+  "music": "MUS_FALLARBOR",
   "region_map_section": "MAPSEC_ROUTE_114",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

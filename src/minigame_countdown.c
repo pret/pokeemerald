@@ -227,7 +227,7 @@ static void sub_802E938(struct Sprite *sprite)
         sprite->invisible = FALSE;
     case 1:
     case 2:
-        PlaySE(SE_KON);
+        PlaySE(SE_BALL_BOUNCE_1);
         StartSpriteAnim(sprite, sprite->data[2]);
         break;
     case 3:
@@ -249,7 +249,7 @@ static void sub_802E938(struct Sprite *sprite)
 static void sub_802EA50(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    PlaySE(SE_KON);
+    PlaySE(SE_BALL_BOUNCE_1);
     gSprites[data[13]].callback = sub_802E938;
     gSprites[data[13]].invisible = FALSE;
     gTasks[taskId].data[0] = 3;
@@ -350,7 +350,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         // fallthrough
     case 1:
         if (sprite->data[2] == 0)
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
         if (++sprite->data[2] >= 20)
         {
             sprite->data[2] = 0;
@@ -443,7 +443,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         sprite->pos2.y = data[5] >> 4;
         if (sprite->pos2.y >= 0)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             sprite->pos2.y = 0;
             data[0]++;
         }
@@ -452,7 +452,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         data[1] += 12;
         if (data[1] >= 128)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             data[1] = 0;
             data[0]++;
         }
@@ -463,7 +463,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         data[1] += 16;
         if (data[1] >= 128)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             data[1] = 0;
             data[0]++;
         }

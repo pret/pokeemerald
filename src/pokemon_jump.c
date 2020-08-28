@@ -576,7 +576,7 @@ static void sub_802ACA0(u8 taskId)
     case 2:
         if (!sub_802D0F0() && IsNotWaitingForBGMStop() == TRUE)
         {
-            FadeOutAndPlayNewMapMusic(MUS_RG_JUMP, 8);
+            FadeOutAndPlayNewMapMusic(MUS_RG_POKE_JUMP, 8);
             gUnknown_02022CFC->unk8++;
         }
         break;
@@ -1721,7 +1721,7 @@ static void sub_802C1BC(void)
     gUnknown_02022CFC->unk83AC->unk10 = 0;
 }
 
-static const u16 gUnknown_082FB654[] = {SE_REGI, SE_REAPOKE, SE_W234, SE_RG_EXCELLENT};
+static const u16 gUnknown_082FB654[] = {SE_SHOP, SE_SHINY, SE_M_MORNING_SUN, SE_RG_POKE_JUMP_SUCCESS};
 
 static void sub_802C1DC(void)
 {
@@ -1798,9 +1798,9 @@ static void sub_802C280(void)
     }
 
     if (whichSound & 0x2)
-        PlaySE(SE_RG_NAWAMISS);
+        PlaySE(SE_RG_POKE_JUMP_FAILURE);
     else if (whichSound & 0x1)
-        PlaySE(SE_DANSA);
+        PlaySE(SE_LEDGE);
 }
 
 static const s8 gUnknown_082FB65C[][48] =
@@ -2702,7 +2702,7 @@ static void sub_802CDD4(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        PlaySE(SE_JITE_PYOKO);
+        PlaySE(SE_BIKE_HOP);
         sprite->data[1] = 0;
         sprite->data[0]++;
         // fall through
@@ -3275,7 +3275,7 @@ static void sub_802D7E8(u16 itemId, u16 quantity)
     gUnknown_02022D00->unk12 = sub_802DA9C(4, 8, 22, 4);
     AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gUnknown_02022D00->strBuff, 0, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(gUnknown_02022D00->unk12, 2);
-    gUnknown_02022D00->unk14 = MUS_FANFA1;
+    gUnknown_02022D00->unk14 = MUS_LEVEL_UP;
     gUnknown_02022D00->unkD = 0;
 }
 

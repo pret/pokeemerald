@@ -1623,7 +1623,7 @@ static void AttemptPlaceDecoration_(u8 taskId)
     }
     else
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         StringExpandPlaceholders(gStringVar4, gText_CantBePlacedHere);
         DisplayItemMessageOnField(taskId, gStringVar4, CantPlaceDecorationPrompt);
     }

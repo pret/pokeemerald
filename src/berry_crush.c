@@ -825,7 +825,7 @@ u32 sub_8020C0C(MainCallback callback)
     if (callback == CB2_ReturnToField)
     {
         gTextFlags.autoScroll = TRUE;
-        PlayNewMapMusic(MUS_POKECEN);
+        PlayNewMapMusic(MUS_POKE_CENTER);
         SetMainCallback1(CB1_Overworld);
     }
 
@@ -1344,9 +1344,9 @@ void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
         else
         {
             if (sp4 == 1)
-                PlaySE(SE_TOY_DANGO);
+                PlaySE(SE_MUD_BALL);
             else
-                PlaySE(SE_TOY_KABE);
+                PlaySE(SE_BREAKABLE_DOOR);
 
             arg0->unk25_2 = 1;
         }
@@ -2115,7 +2115,7 @@ static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     case 1:
         if (IsLinkTaskFinished())
         {
-            PlayNewMapMusic(MUS_RG_SLOT);
+            PlayNewMapMusic(MUS_RG_GAME_CORNER);
             sub_8022BEC(7, 1, NULL);
             r4->unk12 = 3;
             r4->unkC = 0;
@@ -2226,7 +2226,7 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 2:
         r4->unk138.unk38[r4->unk138.unk0]->callback = sub_8021608;
         r4->unk138.unk38[r4->unk138.unk0]->affineAnimPaused = FALSE;
-        PlaySE(SE_NAGERU);
+        PlaySE(SE_BALL_THROW);
         break;
     case 3:
         if (r4->unk138.unk38[r4->unk138.unk0]->callback == sub_8021608)
@@ -2252,7 +2252,7 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 6:
         if (!IsLinkTaskFinished())
             return 0;
-        PlaySE(SE_RU_HYUU);
+        PlaySE(SE_FALL);
         sub_8022BEC(11, 1, NULL);
         r4->unk12 = 5;
         r4->unkC = 0;
@@ -2274,7 +2274,7 @@ static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         r4->unk138.unk1 = 4;
         r4->unk138.unk0 = 0;
         r4->unk138.unk2 = gUnknown_082F326C[r4->unk138.unk1][0];
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         break;
     case 1:
         r4->unk2C = gUnknown_082F326C[r4->unk138.unk1][r4->unk138.unk0];
@@ -2667,7 +2667,7 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     {
     case 0:
         r4->unk12 = 8;
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 31, 0));
         r4->unk138.unk0 = 2;
         break;
@@ -2724,7 +2724,7 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     {
     case 0:
         r5->unk12 = 9;
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 0, 0));
         r5->unk138.unk0 = 4;
         break;

@@ -1565,7 +1565,7 @@ static void Task_DuoFightAnim(u8 taskId)
     BlendPalettes(-1, 0x10, 0);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
     SetVBlankCallback(VBlankCB_DuoFight);
-    PlaySE(SE_T_OOAME);
+    PlaySE(SE_DOWNPOUR);
 }
 
 static void sub_81D7228(u8 taskId)
@@ -1670,14 +1670,14 @@ static void Task_HandleDuoFight(u8 taskId)
 
 static void sub_81D7438(void)
 {
-    PlaySE(SE_T_KAMI);
+    PlaySE(SE_THUNDER);
     sub_80A2C44(0x7FFF, 0, 0x10, 0, -1, 0, 0);
     sub_80A2C44(0xFFFF0000, 0, 0x10, 0, 0, 0, 1);
 }
 
 static void sub_81D7480(void)
 {
-    PlaySE(SE_T_KAMI);
+    PlaySE(SE_THUNDER);
     sub_80A2C44(0x7FFF, 0, 0x10, 0x10, -1, 0, 0);
     sub_80A2C44(0xFFFF0000, 0, 0x10, 0x10, 0, 0, 1);
 }
@@ -1714,7 +1714,7 @@ static void sub_81D752C(u8 taskId)
 
 static void DuoFightEnd(u8 taskId, s8 palDelay)
 {
-    PlaySE(SE_T_OOAME_E);
+    PlaySE(SE_DOWNPOUR_STOP);
     BeginNormalPaletteFade(0xFFFFFFFF, palDelay, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_DuoFightEnd;
 }
@@ -1950,7 +1950,7 @@ static void sub_81D7E9C(void)
 static void Task_RayTakesFlightAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    PlayNewMapMusic(MUS_REKKUU_KOURIN);
+    PlayNewMapMusic(MUS_RAYQUAZA_APPEARS);
     sub_81D7E10();
     sub_81D7E9C();
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
@@ -2358,7 +2358,7 @@ static void Task_HandleRayCharges(u8 taskId)
     s16 *data = gTasks[taskId].data;
     sub_81D8BB4();
     if ((data[3] & 7) == 0 && data[0] <= 1 && data[1] <= 89)
-        PlaySE(SE_OP_BASYU);
+        PlaySE(SE_INTRO_BLAST);
 
     data[3]++;
     switch (data[0])
@@ -2777,7 +2777,7 @@ static void sub_81D9528(struct Sprite *sprite)
     }
 
     if (sprite->data[4] % 64 == 0)
-        PlaySE(SE_W250);
+        PlaySE(SE_M_WHIRLPOOL);
 
     sprite->data[4]++;
 }
@@ -2802,7 +2802,7 @@ static void sub_81D961C(struct Sprite *sprite)
     {
         sub_81D97E0(sprite);
         if (sprite->data[4] == 0)
-            PlaySE(SE_BT_START);
+            PlaySE(SE_MUGSHOT);
         if (sprite->data[4] == -3)
             sub_81D9868(sprite, 2, 48, 16);
     }
@@ -2900,7 +2900,7 @@ static void sub_81D98B4(u8 taskId)
         break;
     case 1:
         if (data[5] == 8)
-            PlaySE(SE_JIDO_DOA);
+            PlaySE(SE_SLIDING_DOOR);
         if (data[2] == 2)
         {
             data[0]++;

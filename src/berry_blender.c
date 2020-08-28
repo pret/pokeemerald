@@ -1161,7 +1161,7 @@ static void SpriteCB_Berry(struct Sprite* sprite)
         if (++sprite->sBounces > 3)
             DestroySprite(sprite);
         else
-            PlaySE(SE_TB_KARA);
+            PlaySE(SE_BALL_TRAY_EXIT);
     }
     sprite->pos1.x = sprite->sX;
     sprite->pos1.y = sprite->sY;
@@ -1417,7 +1417,7 @@ static void CB2_StartBlenderLink(void)
         {
             sBerryBlender->mainState++;
             DrawBlenderCenter(&sBerryBlender->bgAffineSrc);
-            PlaySE(SE_RU_HYUU);
+            PlaySE(SE_FALL);
             ShowBg(2);
         }
         break;
@@ -1432,7 +1432,7 @@ static void CB2_StartBlenderLink(void)
             sBerryBlender->centerScale = 256;
             sBerryBlender->arrowPos = sArrowStartPos[sArrowStartPosIds[sBerryBlender->numPlayers - 2]];
             sBerryBlender->framesToWait = 0;
-            PlaySE(SE_TRACK_DOOR);
+            PlaySE(SE_TRUCK_DOOR);
             SetPlayerIdMaps();
             PrintPlayerNames();
         }
@@ -1714,7 +1714,7 @@ static void CB2_StartBlenderLocal(void)
     case 13:
         sBerryBlender->mainState++;
         SetPlayerIdMaps();
-        PlaySE(SE_RU_HYUU);
+        PlaySE(SE_FALL);
         DrawBlenderCenter(&sBerryBlender->bgAffineSrc);
         ShowBg(2);
         break;
@@ -1729,7 +1729,7 @@ static void CB2_StartBlenderLocal(void)
             sBerryBlender->arrowPos = sArrowStartPos[sArrowStartPosIds[sBerryBlender->numPlayers - 2]];
             SetGpuRegBits(REG_OFFSET_BG2CNT, 2);
             sBerryBlender->framesToWait = 0;
-            PlaySE(SE_TRACK_DOOR);
+            PlaySE(SE_TRUCK_DOOR);
             PrintPlayerNames();
         }
         DrawBlenderCenter(&sBerryBlender->bgAffineSrc);
@@ -1784,7 +1784,7 @@ static void CB2_StartBlenderLocal(void)
             sBerryBlender->savedMusic = GetCurrentMapMusic();
 
         PlayBGM(MUS_CYCLING);
-        PlaySE(SE_MOTER);
+        PlaySE(SE_BERRY_BLENDER);
         UpdateHitPitch();
         break;
     }
@@ -2020,17 +2020,17 @@ static void CreateScoreSymbolSprite(u16 cmd, u8 arrowId)
     {
         StartSpriteAnim(&gSprites[spriteId], SCOREANIM_BEST_FLASH);
         gSprites[spriteId].callback = SpriteCB_ScoreSymbolBest;
-        PlaySE(SE_RU_GASHIN);
+        PlaySE(SE_ICE_STAIRS);
     }
     else if (cmd == LINKCMD_BLENDER_SCORE_GOOD)
     {
         StartSpriteAnim(&gSprites[spriteId], SCOREANIM_GOOD);
-        PlaySE(SE_SEIKAI);
+        PlaySE(SE_SUCCESS);
     }
     else if (cmd == LINKCMD_BLENDER_SCORE_MISS)
     {
         StartSpriteAnim(&gSprites[spriteId], SCOREANIM_MISS);
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
     }
     CreateParticleSprites();
 }
@@ -3228,7 +3228,7 @@ static void SpriteCB_CountdownNumber(struct Sprite* sprite)
         {
             sprite->sYPos = DISPLAY_HEIGHT / 2 + 8;
             sprite->sState++;
-            PlaySE(SE_KON);
+            PlaySE(SE_BALL_BOUNCE_1);
         }
         break;
     case 1:
@@ -3788,7 +3788,7 @@ static void Task_PlayPokeblockFanfare(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        PlayFanfare(MUS_FANFA1);
+        PlayFanfare(MUS_LEVEL_UP);
         gTasks[taskId].data[0]++;
     }
     if (IsFanfareTaskInactive())

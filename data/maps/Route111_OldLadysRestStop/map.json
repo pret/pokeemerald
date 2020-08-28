@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE111_OLD_LADYS_REST_STOP",
   "name": "Route111_OldLadysRestStop",
   "layout": "LAYOUT_HOUSE3",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_ROUTE_111",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

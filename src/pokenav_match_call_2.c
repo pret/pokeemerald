@@ -601,7 +601,7 @@ u32 DoMatchCallMessage(s32 taskState)
             return LT_PAUSE;
 
         PrintCallingDots(state);
-        PlaySE(SE_TOREEYE);
+        PlaySE(SE_POKENAV_CALL);
         state->unkE = 0;
         return LT_INC_AND_PAUSE;
     case 2:
@@ -654,7 +654,7 @@ u32 sub_81CB888(s32 taskState)
     {
     case 0:
         if (!state->unkE)
-            PlaySE(SE_TOREOFF);
+            PlaySE(SE_POKENAV_HANG_UP);
 
         PlaySE(SE_SELECT);
         break;
