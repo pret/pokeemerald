@@ -43,7 +43,7 @@ RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
 	setvar VAR_ROUTE104_STATE, 1
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerWalkDown
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 10
 	addobject LOCALID_SCIENTIST
 	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistApproachPlayer
@@ -62,13 +62,13 @@ RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
 	setflag FLAG_HAS_MATCH_CALL
 	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 10
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 10
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 10
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 20
 	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
@@ -103,7 +103,7 @@ RustboroCity_EventScript_MatchCallTutorial:: @ 81E07BD
 	closemessage
 	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistLeave
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject LOCALID_SCIENTIST
 	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	setvar VAR_RUSTBORO_CITY_STATE, 7
@@ -294,7 +294,7 @@ RustboroCity_EventScript_StolenGoodsTrigger4:: @ 81E09B6
 RustboroCity_EventScript_StolenGoodsScene:: @ 81E09CD
 	msgbox RustboroCity_Text_OutOfTheWay, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_AQA_0, 0
+	playbgm MUS_ENCOUNTER_AQUA, 0
 	addobject LOCALID_GRUNT
 	addobject LOCALID_DEVON_EMPLOYEE
 	applymovement LOCALID_GRUNT, RustboroCity_Movement_GruntEscape
@@ -706,11 +706,11 @@ RustboroCity_EventScript_PlayRivalMusic:: @ 81E0DD1
 	return
 
 RustboroCity_EventScript_PlayMayMusic:: @ 81E0DE9
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	return
 
 RustboroCity_EventScript_PlayBrendanMusic:: @ 81E0DEE
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	return
 
 RustboroCity_EventScript_RivalTrigger0:: @ 81E0DF3
@@ -856,7 +856,7 @@ RustboroCity_EventScript_MayEncounter:: @ 81E100B
 	msgbox RustboroCity_Text_MayHiLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox RustboroCity_Text_RegisteredMay, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -927,7 +927,7 @@ RustboroCity_EventScript_BrendanEncounter:: @ 81E1114
 	msgbox RustboroCity_Text_BrendanHiLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox RustboroCity_Text_RegisteredBrendan, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage

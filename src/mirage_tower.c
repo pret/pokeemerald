@@ -370,7 +370,7 @@ static void StartScreenShake(u8 yShakeOffset, u8 xShakeOffset, u8 numShakes, u8 
     gTasks[taskId].data[3] = shakeDelay;
     gTasks[taskId].data[4] = yShakeOffset;
     SetCameraPanningCallback(NULL);
-    PlaySE(SE_W070);
+    PlaySE(SE_M_STRENGTH);
 }
 
 static void DoScreenShake(u8 taskId)

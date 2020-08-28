@@ -101,11 +101,11 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	call Common_EventScript_SetGymTrainers
 	special MauvilleGymDeactivatePuzzle
 	special DrawWholeMapView
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	call MauvilleCity_Gym_EventScript_GiveShockWave
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox MauvilleCity_Gym_Text_RegisteredWattson, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -185,7 +185,7 @@ MauvilleCity_Gym_EventScript_PressFloorSwitch:: @ 820E08D
 	special MauvilleGymSetDefaultBarriers
 	special MauvilleGymPressSwitch
 	special DrawWholeMapView
-	playse SE_KI_GASYAN
+	playse SE_UNLOCK
 	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_ClearBarriersAltState
 	goto_if_unset FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_SetBarriersAltState
 	releaseall

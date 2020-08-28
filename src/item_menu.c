@@ -1190,7 +1190,7 @@ void Task_BagMenu_HandleInput(u8 taskId)
             case LIST_CANCEL:
                 if (gBagPositionStruct.location == ITEMMENULOCATION_BERRY_BLENDER_CRUSH)
                 {
-                    PlaySE(SE_HAZURE);
+                    PlaySE(SE_FAILURE);
                     break;
                 }
                 PlaySE(SE_SELECT);
@@ -2091,7 +2091,7 @@ static void BagMenu_Sell_UpdateItemListAndMoney(u8 taskId)
     u16* scrollPos = &gBagPositionStruct.scrollPosition[gBagPositionStruct.pocket];
     u16* cursorPos = &gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket];
 
-    PlaySE(SE_REGI);
+    PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, tItemCount);
     AddMoney(&gSaveBlock1Ptr->money, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * tItemCount);
     DestroyListMenuTask(data[0], scrollPos, cursorPos);

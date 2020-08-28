@@ -410,11 +410,11 @@ Route110_EventScript_RivalScene:: @ 81EF76E
 	end
 
 Route110_EventScript_PlayMayMusic:: @ 81EF7E1
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	return
 
 Route110_EventScript_PlayBrendanMusic:: @ 81EF7E6
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	return
 
 Route110_EventScript_MayBattle:: @ 81EF7EB
@@ -648,7 +648,7 @@ Route110_EventScript_BirchScene:: @ 81EF9F7
 	msgbox Route110_Text_HeardYouInstallMatchCall, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox Route110_Text_RegisteredBirchInPokenav, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage

@@ -2,7 +2,7 @@
   "id": "MAP_MAUVILLE_CITY_HOUSE1",
   "name": "MauvilleCity_House1",
   "layout": "LAYOUT_HOUSE2",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_MAUVILLE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

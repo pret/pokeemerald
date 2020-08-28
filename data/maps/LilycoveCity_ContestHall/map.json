@@ -2,7 +2,7 @@
   "id": "MAP_LILYCOVE_CITY_CONTEST_HALL",
   "name": "LilycoveCity_ContestHall",
   "layout": "LAYOUT_LILYCOVE_CITY_CONTEST_HALL",
-  "music": "MUS_CONLOBBY",
+  "music": "MUS_CONTEST_LOBBY",
   "region_map_section": "MAPSEC_LILYCOVE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

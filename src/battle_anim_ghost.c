@@ -252,7 +252,7 @@ static void AnimConfuseRayBallBounce_Step1(struct Sprite *sprite)
         return;
     if (r0 <= 0)
         return;
-    PlaySE12WithPanning(SE_W109, gAnimCustomPanning);
+    PlaySE12WithPanning(SE_M_CONFUSE_RAY, gAnimCustomPanning);
 }
 
 static void AnimConfuseRayBallBounce_Step2(struct Sprite *sprite)
@@ -271,7 +271,7 @@ static void AnimConfuseRayBallBounce_Step2(struct Sprite *sprite)
     if (r2 == 0 || r2 > 196)
     {
         if (r0 > 0)
-            PlaySE(SE_W109);
+            PlaySE(SE_M_CONFUSE_RAY);
     }
 
     if (sprite->data[6] == 0)

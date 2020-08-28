@@ -1242,7 +1242,7 @@ static bool8 sub_810B430(struct Task *task, u8 taskId)
     if (task->data[4] == 0 && task->data[5] > 0)
     {
         task->data[14] += task->data[15];
-        PlaySE12WithPanning(SE_W085, task->data[14]);
+        PlaySE12WithPanning(SE_M_THUNDERBOLT, task->data[14]);
     }
 
     if ((task->data[5] < 0 && task->data[7] <= task->data[8])
