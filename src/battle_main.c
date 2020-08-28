@@ -4851,40 +4851,34 @@ static void SetActionsAndBattlersTurnOrder(void)
             gBattleStruct->focusPunchBattlerId = 0;
             return;
         }
-        else
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
-            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+            if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_ITEM || gChosenActionByBattler[gActiveBattler] == B_ACTION_SWITCH)
             {
-                if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_ITEM || gChosenActionByBattler[gActiveBattler] == B_ACTION_SWITCH)
-                {
-                    gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
-                    gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
-                    turnOrderId++;
-                }
+                gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
+                gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
+                turnOrderId++;
             }
-            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+        }
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+        {
+            if (gChosenActionByBattler[gActiveBattler] != B_ACTION_USE_ITEM && gChosenActionByBattler[gActiveBattler] != B_ACTION_SWITCH)
             {
-                if (gChosenActionByBattler[gActiveBattler] != B_ACTION_USE_ITEM && gChosenActionByBattler[gActiveBattler] != B_ACTION_SWITCH)
-                {
-                    gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
-                    gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
-                    turnOrderId++;
-                }
+                gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
+                gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
+                turnOrderId++;
             }
-            for (i = 0; i < gBattlersCount - 1; i++)
+        }
+        for (i = 0; i < gBattlersCount - 1; i++)
+        {
+            for (j = i + 1; j < gBattlersCount; j++)
             {
-                for (j = i + 1; j < gBattlersCount; j++)
+                u8 battler1 = gBattlerByTurnOrder[i];
+                u8 battler2 = gBattlerByTurnOrder[j];
+                if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM && gActionsByTurnOrder[i] != B_ACTION_SWITCH && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
                 {
-                    u8 battler1 = gBattlerByTurnOrder[i];
-                    u8 battler2 = gBattlerByTurnOrder[j];
-                    if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
-                        && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
-                        && gActionsByTurnOrder[i] != B_ACTION_SWITCH
-                        && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
-                    {
-                        if (GetWhoStrikesFirst(battler1, battler2, FALSE))
-                            SwapTurnOrder(i, j);
-                    }
+                    if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                        SwapTurnOrder(i, j);
                 }
             }
         }
@@ -4986,13 +4980,10 @@ static void RunTurnActionsFunctions(void)
         gHitMarker &= ~(HITMARKER_x100000);
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }
-    else
+    else if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
     {
-        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
-        {
-            gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
-            gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
-        }
+        gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
+        gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
     }
 }
 
