@@ -155,17 +155,17 @@
 static EWRAM_DATA struct
 {
     u8 state;
-    u8 heartSpriteIds[16];             					 /*0x001*/
+    u8 heartSpriteIds[16];                               /*0x001*/
     u16 movesToLearn[MAX_RELEARNER_MOVES];               /*0x01A*/
-    u8 partyMon;                       				     /*0x044*/
-    u8 moveSlot;                     					 /*0x045*/
+    u8 partyMon;                                         /*0x044*/
+    u8 moveSlot;                                         /*0x045*/
     struct ListMenuItem menuItems[MAX_RELEARNER_MOVES];  /*0x0E8*/
-    u8 numMenuChoices;                  				 /*0x110*/
-    u8 numToShowAtOnce;             					 /*0x111*/
-    u8 moveListMenuTask;               					 /*0x112*/
-    u8 moveListScrollArrowTask;       					 /*0x113*/
-    u8 moveDisplayArrowTask;            				 /*0x114*/
-    u16 scrollOffset;                   				 /*0x116*/
+    u8 numMenuChoices;                                   /*0x110*/
+    u8 numToShowAtOnce;                                  /*0x111*/
+    u8 moveListMenuTask;                                 /*0x112*/
+    u8 moveListScrollArrowTask;                          /*0x113*/
+    u8 moveDisplayArrowTask;                             /*0x114*/
+    u16 scrollOffset;                                    /*0x116*/
 } *sMoveRelearnerStruct = {0};
 
 static EWRAM_DATA struct {
