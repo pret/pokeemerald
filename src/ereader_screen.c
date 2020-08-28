@@ -153,7 +153,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
     case 2:
         if (GetLinkPlayerCount_2() == 2)
         {
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
             CheckShouldAdvanceLinkState();
             *arg1 = 0;
             *arg0 = 3;
@@ -192,7 +192,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
         }
         break;
     case 4:
-        sub_800ABF4(0);
+        SetCloseLinkCallbackAndType(0);
         *arg0 = 5;
         break;
     case 5:
@@ -403,7 +403,7 @@ static void sub_81D5084(u8 taskId)
         break;
     case 15:
         data->unkE = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
-        sub_800ABF4(data->unkE);
+        SetCloseLinkCallbackAndType(data->unkE);
         data->unk8 = 16;
         break;
     case 16:
@@ -431,7 +431,7 @@ static void sub_81D5084(u8 taskId)
         if (sub_81D5064(&data->unk0, 120))
         {
             AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
-            PlayFanfare(MUS_FANFA4);
+            PlayFanfare(MUS_OBTAIN_ITEM);
             data->unk8 = 19;
         }
         break;

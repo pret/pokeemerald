@@ -467,7 +467,7 @@ void StartDodrioBerryPicking(u16 a0, void (*callback)(void))
         sub_80273F0();
         sub_8026B5C(gUnknown_02022C98->unk24, &gUnknown_02022C98->unk44, &gUnknown_02022C98->unk48);
         StopMapMusic();
-        PlayNewMapMusic(MUS_RG_KINOMIKUI);
+        PlayNewMapMusic(MUS_RG_BERRY_PICK);
     }
     else
     {
@@ -558,7 +558,7 @@ static void sub_8024BC8(u8 taskId)
     case 2:
         if (!sub_802A770())
         {
-            sub_8010434();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_02022C98->unk0C++;
         }
         break;
@@ -671,7 +671,7 @@ static void sub_8024E38(void)
         gUnknown_02022C98->unk10++;
         break;
     case 1:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         gUnknown_02022C98->unk10++;
         break;
     case 2:
@@ -690,7 +690,7 @@ static void sub_8024E38(void)
     case 4:
         if (++gUnknown_02022C98->unk30 > 5)
         {
-            sub_8010434();
+            Rfu_SetLinkStandbyCallback();
             gUnknown_02022C98->unk10++;
         }
         break;
@@ -877,7 +877,7 @@ static void sub_8025198(void)
         if (WaitFanfare(TRUE))
         {
             sub_8026240(6);
-            FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
+            FadeOutAndPlayNewMapMusic(MUS_RG_VICTORY_WILD, 4);
         }
         break;
     }
@@ -916,7 +916,7 @@ static void sub_8025230(void)
         if (WaitFanfare(TRUE)) {
             gUnknown_02022C98->unk114 = gUnknown_02022C98->unk4A[gUnknown_02022C98->multiplayerId][5];
             sub_8026240(6);
-            FadeOutAndPlayNewMapMusic(MUS_RG_WIN_YASEI, 4);
+            FadeOutAndPlayNewMapMusic(MUS_RG_VICTORY_WILD, 4);
         }
         break;
     }
@@ -1081,7 +1081,7 @@ static void sub_8025644(void)
     switch (gUnknown_02022C98->unk10)
     {
     case 0:
-        sub_800AC34();
+        SetCloseLinkCallback();
         sub_80292E0(7);
         gUnknown_02022C98->unk10++;
         break;
@@ -1174,7 +1174,7 @@ static void sub_8025758(void)
         gUnknown_02022C98->unk10++;
         break;
     case 4:
-        PlayNewMapMusic(MUS_RG_KINOMIKUI);
+        PlayNewMapMusic(MUS_RG_BERRY_PICK);
         sub_8028E4C();
         gUnknown_02022C98->unk10++;
         break;
@@ -1458,8 +1458,8 @@ static void sub_8025F48(void)
     {
         if (gUnknown_02022C98->unk144 == 0)
         {
-            m4aSongNumStop(SE_SEIKAI);
-            PlaySE(SE_SEIKAI);
+            m4aSongNumStop(SE_SUCCESS);
+            PlaySE(SE_SUCCESS);
             gUnknown_02022C98->unk144 = 1;
         }
     }
@@ -1480,7 +1480,7 @@ static void sub_8025F48(void)
     }
     else if (gUnknown_02022C98->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(11); // MUS_ME_ZANNEN
+        PlayFanfareByFanfareNum(11); // MUS_TOO_BAD
         gUnknown_02022C98->unk154 = 2;
     }
 }
@@ -1501,8 +1501,8 @@ static void sub_8026044(void)
     {
         if (gUnknown_02022C98->unk144 == 0)
         {
-            m4aSongNumStop(SE_SEIKAI);
-            PlaySE(SE_SEIKAI);
+            m4aSongNumStop(SE_SUCCESS);
+            PlaySE(SE_SUCCESS);
             gUnknown_02022C98->unk144 = 1;
         }
     }
@@ -1522,7 +1522,7 @@ static void sub_8026044(void)
         {
             if (gUnknown_02022C98->unk148[r4] == 0)
             {
-                PlaySE(SE_FUUSEN1 + ptr->unk0[r4]);
+                PlaySE(SE_BALLOON_RED + ptr->unk0[r4]);
                 gUnknown_02022C98->unk148[r4] = 1;
             }
         }
@@ -1538,7 +1538,7 @@ static void sub_8026044(void)
     }
     else if (gUnknown_02022C98->unk154 == 1)
     {
-        PlayFanfareByFanfareNum(11); // MUS_ME_ZANNEN
+        PlayFanfareByFanfareNum(11); // MUS_TOO_BAD
         gUnknown_02022C98->unk154 = 2;
     }
 }
@@ -1792,7 +1792,7 @@ static void sub_802671C(void)
                 if (gUnknown_02022C98->unk148[i] == 0)
                 {
                     gUnknown_02022C98->unk148[i] = 1;
-                    PlaySE(SE_FUUSEN1 + ptr->unk32CC.unk14.unk0[i]);
+                    PlaySE(SE_BALLOON_RED + ptr->unk32CC.unk14.unk0[i]);
                 }
                 if (gUnknown_02022C98->unk40 < 10 || r10 == 1)
                 {
@@ -2359,19 +2359,19 @@ static void sub_8027554(void)
         {
             gUnknown_02022C98->unk31A0[gUnknown_02022C98->multiplayerId].unk2C.unk0 = 2;
             gUnknown_02022C98->unkB0[gUnknown_02022C98->multiplayerId] = 6;
-            PlaySE(SE_W204);
+            PlaySE(SE_M_CHARM);
         }
         else if (gMain.newKeys & DPAD_LEFT)
         {
             gUnknown_02022C98->unk31A0[gUnknown_02022C98->multiplayerId].unk2C.unk0 = 3;
             gUnknown_02022C98->unkB0[gUnknown_02022C98->multiplayerId] = 6;
-            PlaySE(SE_W204);
+            PlaySE(SE_M_CHARM);
         }
         else if (gMain.newKeys & DPAD_RIGHT)
         {
             gUnknown_02022C98->unk31A0[gUnknown_02022C98->multiplayerId].unk2C.unk0 = 1;
             gUnknown_02022C98->unkB0[gUnknown_02022C98->multiplayerId] = 6;
-            PlaySE(SE_W204);
+            PlaySE(SE_M_CHARM);
         }
         else
         {
@@ -3450,7 +3450,7 @@ static u32 sub_80285AC(struct Sprite *sprite)
     u8 mod = (++sprite->data[1] / 13) % 4;
 
     if (sprite->data[1] % 13 == 0 && mod != 0)
-        PlaySE(SE_W204);
+        PlaySE(SE_M_CHARM);
     if (sprite->data[1] >= 104)
     {
         sprite->data[0] = 0;
@@ -3567,7 +3567,7 @@ static bool32 sub_8028828(void)
                 continue;
             gUnknown_02022CF4->unkC[i] = 1;
             gUnknown_02022CF4->unk16[i] = -16;
-            PlaySE(SE_TK_KASYA);
+            PlaySE(SE_CLICK);
         }
         sprite->pos1.y += gUnknown_02022CF4->unk16[i];
     }
@@ -4320,7 +4320,7 @@ static void sub_802988C(void)
         }
         break;
     case 9:
-        PlayNewMapMusic(MUS_FANFA1);
+        PlayNewMapMusic(MUS_LEVEL_UP);
         FillWindowPixelBuffer(gUnknown_02022CF8->unk3008[0], PIXEL_FILL(1));
         FillWindowPixelBuffer(gUnknown_02022CF8->unk3008[1], PIXEL_FILL(1));
         strWidth = GetStringWidth(1, gText_AnnouncingPrizes, -1);
@@ -4354,7 +4354,7 @@ static void sub_802988C(void)
             PutWindowTilemap(gUnknown_02022CF8->unk3008[1]);
         }
         CopyBgTilemapBufferToVram(0);
-        FadeOutAndFadeInNewMapMusic(MUS_RG_WIN_YASEI, 20, 10);
+        FadeOutAndFadeInNewMapMusic(MUS_RG_VICTORY_WILD, 20, 10);
         gUnknown_02022CF8->state++;
         break;
     case 11:

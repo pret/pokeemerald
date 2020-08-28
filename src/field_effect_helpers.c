@@ -623,7 +623,7 @@ u32 FldEff_Splash(void)
         sprite->data[1] = gFieldEffectArguments[1];
         sprite->data[2] = gFieldEffectArguments[2];
         sprite->pos2.y = (graphicsInfo->height >> 1) - 4;
-        PlaySE(SE_MIZU);
+        PlaySE(SE_PUDDLE);
     }
     return 0;
 }
@@ -733,7 +733,7 @@ static void UpdateFeetInFlowingWaterFieldEffect(struct Sprite *sprite)
             sprite->data[4] = objectEvent->currentCoords.y;
             if (!sprite->invisible)
             {
-                PlaySE(SE_MIZU);
+                PlaySE(SE_PUDDLE);
             }
         }
     }

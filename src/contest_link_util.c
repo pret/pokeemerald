@@ -1,148 +1,158 @@
 #include "global.h"
 #include "contest.h"
+#include "contest_link.h"
 #include "event_data.h"
 #include "link.h"
 #include "random.h"
 #include "task.h"
 
-static void sub_81D9F14(u8);
-static void sub_81D9F30(u8);
-static void sub_81D9F4C(u8);
-static void sub_81D9F68(u8);
-static void sub_81DA10C(u8);
-static void sub_81DA138(u8);
-static void sub_81DA160(u8);
-static void sub_81DA244(u8);
-static void sub_81DA2E8(u8);
-static void sub_81DA3B8(u8);
-static void sub_81DA488(u8);
+/*
+    The functions in this file handle preliminary communication
+    for Emerald-only link contests. If the link contest has an RS
+    player linked, none of these functions are used.
 
-void sub_81D9DE4(u8 taskId)
+    The equivalent functions for RS-linked contests are spread
+    between contest_link.c and contest_util.c, and are suffixed RS
+    instead of Em
+*/
+
+static void Task_LinkContest_CommunicateMonsEm(u8);
+static void Task_LinkContest_StartCommunicateRngEm(u8);
+static void Task_LinkContest_CommunicateRngEm(u8);
+static void Task_LinkContest_StartCommunicateLeaderIdsEm(u8);
+static void Task_LinkContest_CommunicateLeaderIdsEm(u8);
+static void Task_LinkContest_StartCommunicateCategoryEm(u8);
+static void Task_LinkContest_CommunicateCategoryEm(u8);
+static void Task_LinkContest_SetUpContestEm(u8);
+static void Task_LinkContest_CommunicateAIMonsEm(u8);
+static void Task_LinkContest_CalculateRound1Em(u8);
+static void Task_LinkContest_CalculateTurnOrderEm(u8);
+
+#define tCategory data[9]
+
+void Task_LinkContest_StartCommunicationEm(u8 taskId)
 {
     int gameCleared;
 
-    switch (gTasks[taskId].data[9])
+    switch (gTasks[taskId].tCategory)
     {
-    case 0:
+    case CONTEST_CATEGORY_COOL:
         gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
         break;
-    case 1:
+    case CONTEST_CATEGORY_BEAUTY:
         gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
         break;
-    case 2:
+    case CONTEST_CATEGORY_CUTE:
         gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
         break;
-    case 3:
+    case CONTEST_CATEGORY_SMART:
         gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
         break;
-    case 4:
+    case CONTEST_CATEGORY_TOUGH:
     default:
         gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
         break;
     }
 
-    gContestMons[gContestPlayerMonIndex].unk2C[0] = gHighestRibbonRank;
+    gContestMons[gContestPlayerMonIndex].highestRank = gHighestRibbonRank;
     gameCleared = FlagGet(FLAG_SYS_GAME_CLEAR) > 0;
-    gContestMons[gContestPlayerMonIndex].unk2C[1] = gameCleared;
-    SetTaskFuncWithFollowupFunc(taskId, sub_81DA160, sub_81D9F14);
+    gContestMons[gContestPlayerMonIndex].gameCleared = gameCleared;
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonsEm, Task_LinkContest_StartCommunicateRngEm);
 }
 
-static void sub_81D9F14(u8 taskId)
+static void Task_LinkContest_StartCommunicateRngEm(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_81DA244, sub_81D9F30);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRngEm, Task_LinkContest_StartCommunicateLeaderIdsEm);
 }
 
-static void sub_81D9F30(u8 taskId)
+static void Task_LinkContest_StartCommunicateLeaderIdsEm(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_81DA2E8, sub_81D9F4C);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateLeaderIdsEm, Task_LinkContest_StartCommunicateCategoryEm);
 }
 
-static void sub_81D9F4C(u8 taskId)
+static void Task_LinkContest_StartCommunicateCategoryEm(u8 taskId)
 {
-    SetTaskFuncWithFollowupFunc(taskId, sub_81DA3B8, sub_81D9F68);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateCategoryEm, Task_LinkContest_SetUpContestEm);
 }
 
-static void sub_81D9F68(u8 taskId)
+static void Task_LinkContest_SetUpContestEm(u8 taskId)
 {
     u8 i;
     u8 rank;
     int gameCleared;
-    u8 data1[4];
-    u8 data2[4];
+    u8 categories[CONTESTANT_COUNT];
+    u8 leaderIds[CONTESTANT_COUNT];
 
-    memset(data1, 0, sizeof(data1));
-    memset(data2, 0, sizeof(data2));
+    memset(categories, 0, sizeof(categories));
+    memset(leaderIds, 0, sizeof(leaderIds));
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
-        data1[i] = gTasks[taskId].data[i + 1];
+        categories[i] = gTasks[taskId].data[i + 1];
     
-    i = 0;
-    if (i < gNumLinkContestPlayers)
-    {
-        while (++i < gNumLinkContestPlayers)
-        {
-            if (data1[0] != data1[i])
-                break;
-        }
-    }
+    // Ensure all players are doing the same category
+    for (i = 0; i < gNumLinkContestPlayers && categories[0] == categories[i]; i++)
+        ;
 
     if (i == gNumLinkContestPlayers)
-        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8004 = FALSE; // Category choices the same
     else
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_0x8004 = TRUE; // Category choices differ
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
-        data2[i] = gTasks[taskId].data[i + 5];
+        leaderIds[i] = gTasks[taskId].data[i + 5];
     
-    if (gNumLinkContestPlayers != 4 && GetMultiplayerId() == 0)
+    // If < 4 players and player is leader, set AI contestants based on rank and game clear
+    if (gNumLinkContestPlayers != CONTESTANT_COUNT && GetMultiplayerId() == 0)
     {
-        rank = gContestMons[0].unk2C[0];
+        rank = gContestMons[0].highestRank;
         for (i = 1; i < gNumLinkContestPlayers; i++)
         {
-            if (rank < gContestMons[i].unk2C[0])
-                rank = gContestMons[i].unk2C[0];
+            if (rank < gContestMons[i].highestRank)
+                rank = gContestMons[i].highestRank;
         }
 
         if (rank)
             rank--;
         
-        gameCleared = 1;
+        gameCleared = TRUE;
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
-            if (!gContestMons[i].unk2C[1])
+            if (!gContestMons[i].gameCleared)
             {
-                gameCleared = 0;
+                gameCleared = FALSE;
                 break;
             }
         }
 
-        sub_80DACBC(data1[0], rank, gameCleared);
+        SetLinkAIContestants(categories[0], rank, gameCleared);
     }
 
-    gUnknown_02039F2B = sub_80F86E0(data2);
-    if (gNumLinkContestPlayers < 4)
-        SetTaskFuncWithFollowupFunc(taskId, sub_81DA488, sub_81DA10C);
+    // Assign link leader. After initial communication all players will read data only from them
+    gContestLinkLeaderIndex = LinkContest_GetLeaderIndex(leaderIds);
+
+    if (gNumLinkContestPlayers < CONTESTANT_COUNT)
+        SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateAIMonsEm, Task_LinkContest_CalculateRound1Em);
     else
-        gTasks[taskId].func = sub_81DA10C;
+        gTasks[taskId].func = Task_LinkContest_CalculateRound1Em;
 }
 
-static void sub_81DA10C(u8 taskId)
+static void Task_LinkContest_CalculateRound1Em(u8 taskId)
 {
-    sub_80DB09C(gSpecialVar_ContestCategory);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FCF40, sub_81DA138);
+    CalculateRound1Points(gSpecialVar_ContestCategory);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateRound1Points, Task_LinkContest_CalculateTurnOrderEm);
 }
 
-static void sub_81DA138(u8 taskId)
+static void Task_LinkContest_CalculateTurnOrderEm(u8 taskId)
 {
     SortContestants(FALSE);
-    SetTaskFuncWithFollowupFunc(taskId, sub_80FCFD0, sub_80F8714);
+    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateTurnOrder, Task_LinkContest_FinalizeConnection);
 }
 
-static void sub_81DA160(u8 taskId)
+static void Task_LinkContest_CommunicateMonsEm(u8 taskId)
 {
     int i;
 
-    if (!sub_80FC670(&gTasks[taskId].data[12]))
+    if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
 
     switch (gTasks[taskId].data[0])
@@ -155,17 +165,17 @@ static void sub_81DA160(u8 taskId)
     case 0:
         if (IsLinkTaskFinished())
         {
-            if (sub_80FC4F4(&gContestMons[gContestPlayerMonIndex], sizeof(struct ContestPokemon)) == 1)
+            if (LinkContest_SendBlock(&gContestMons[gContestPlayerMonIndex], sizeof(struct ContestPokemon)) == 1)
                 gTasks[taskId].data[0]++;
         }
         break;
     case 1:
-        if (sub_80FC55C())
+        if (LinkContest_GetBlockReceivedFromAllPlayers())
         {
             for (i = 0; i < gNumLinkContestPlayers; i++)
             {
                 memcpy(&gContestMons[i], gBlockRecvBuffer[i], sizeof(struct ContestPokemon));
-                sub_80DFA08(&gContestMons[i], gLinkPlayers[i].language);
+                StripPlayerAndMonNamesForLinkContest(&gContestMons[i], gLinkPlayers[i].language);
             }
 
             gTasks[taskId].data[0]++;
@@ -174,9 +184,9 @@ static void sub_81DA160(u8 taskId)
     }
 }
 
-static void sub_81DA244(u8 taskId)
+static void Task_LinkContest_CommunicateRngEm(u8 taskId)
 {
-    if (!sub_80FC670(&gTasks[taskId].data[12]))
+    if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
 
     switch (gTasks[taskId].data[0])
@@ -189,19 +199,22 @@ static void sub_81DA244(u8 taskId)
     case 0:
         if (GetMultiplayerId() == 0)
         {
+            // Only the leader sends the RNG seed
             if (!IsLinkTaskFinished())
                 return;
             
-            if (sub_80FC4F4(&gRngValue, sizeof(gRngValue)) == 1)
+            if (LinkContest_SendBlock(&gRngValue, sizeof(gRngValue)) == 1)
                 gTasks[taskId].data[0]++;
         }
         else
         {
+            // Other link members skip to waiting
             gTasks[taskId].data[0]++;
         }
         break;
     case 1:
-        if (sub_80FC530(0))
+        // Wait to receive RNG data
+        if (LinkContest_GetBlockReceived(0))
         {
             memcpy(&gRngValue, gBlockRecvBuffer[0], sizeof(gRngValue));
             memcpy(&gContestRngValue, gBlockRecvBuffer[0], sizeof(gContestRngValue));
@@ -211,13 +224,13 @@ static void sub_81DA244(u8 taskId)
     }
 }
 
-static void sub_81DA2E8(u8 taskId)
+static void Task_LinkContest_CommunicateLeaderIdsEm(u8 taskId)
 {
     int i;
-    u16 data[4];
-    u16 var0;
+    u16 data[CONTESTANT_COUNT];
+    u16 leaderId;
 
-    if (!sub_80FC670(&gTasks[taskId].data[12]))
+    if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
 
     switch (gTasks[taskId].data[0])
@@ -230,13 +243,13 @@ static void sub_81DA2E8(u8 taskId)
     case 0:
         if (IsLinkTaskFinished())
         {
-            var0 = 0x6E;
-            if (sub_80FC4F4(&var0, sizeof(var0)) == 1)
+            leaderId = 0x6E;
+            if (LinkContest_SendBlock(&leaderId, sizeof(leaderId)) == 1)
                 gTasks[taskId].data[0]++;
         }
         break;
     case 1:
-        if (sub_80FC55C())
+        if (LinkContest_GetBlockReceivedFromAllPlayers())
         {
             for (i = 0; i < gNumLinkContestPlayers; i++)
             {
@@ -250,13 +263,13 @@ static void sub_81DA2E8(u8 taskId)
     }
 }
 
-static void sub_81DA3B8(u8 taskId)
+static void Task_LinkContest_CommunicateCategoryEm(u8 taskId)
 {
     int i;
-    u16 data[4];
-    u16 var0;
+    u16 data[CONTESTANT_COUNT];
+    u16 category;
 
-    if (!sub_80FC670(&gTasks[taskId].data[12]))
+    if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
 
     switch (gTasks[taskId].data[0])
@@ -269,13 +282,13 @@ static void sub_81DA3B8(u8 taskId)
     case 0:
         if (IsLinkTaskFinished())
         {
-            var0 = gTasks[taskId].data[9];
-            if (sub_80FC4F4(&var0, sizeof(var0)) == 1)
+            category = gTasks[taskId].tCategory;
+            if (LinkContest_SendBlock(&category, sizeof(category)) == 1)
                 gTasks[taskId].data[0]++;
         }
         break;
     case 1:
-        if (sub_80FC55C())
+        if (LinkContest_GetBlockReceivedFromAllPlayers())
         {
             for (i = 0; i < gNumLinkContestPlayers; i++)
             {
@@ -289,11 +302,11 @@ static void sub_81DA3B8(u8 taskId)
     }
 }
 
-static void sub_81DA488(u8 taskId)
+static void Task_LinkContest_CommunicateAIMonsEm(u8 taskId)
 {
     int i;
 
-    if (!sub_80FC670(&gTasks[taskId].data[12]))
+    if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
 
     switch (gTasks[taskId].data[0])
@@ -309,7 +322,7 @@ static void sub_81DA488(u8 taskId)
             if (!IsLinkTaskFinished())
                 return;
             
-            if (sub_80FC4F4(&gContestMons[gNumLinkContestPlayers], (4 - gNumLinkContestPlayers) * sizeof(struct ContestPokemon)) == 1)
+            if (LinkContest_SendBlock(&gContestMons[gNumLinkContestPlayers], (CONTESTANT_COUNT - gNumLinkContestPlayers) * sizeof(struct ContestPokemon)) == 1)
                 gTasks[taskId].data[0]++;
         }
         else
@@ -318,11 +331,11 @@ static void sub_81DA488(u8 taskId)
         }
         break;
     case 1:
-        if (sub_80FC530(0))
+        if (LinkContest_GetBlockReceived(0))
         {
-            memcpy(&gContestMons[gNumLinkContestPlayers], gBlockRecvBuffer[0], (4 - gNumLinkContestPlayers) * sizeof(struct ContestPokemon));
-            for (i = gNumLinkContestPlayers; i < 4; i++)
-                sub_80DFA08(&gContestMons[i], gLinkPlayers[0].language);
+            memcpy(&gContestMons[gNumLinkContestPlayers], gBlockRecvBuffer[0], (CONTESTANT_COUNT - gNumLinkContestPlayers) * sizeof(struct ContestPokemon));
+            for (i = gNumLinkContestPlayers; i < CONTESTANT_COUNT; i++)
+                StripPlayerAndMonNamesForLinkContest(&gContestMons[i], gLinkPlayers[0].language);
 
             gTasks[taskId].data[0]++;
         }

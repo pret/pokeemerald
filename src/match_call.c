@@ -1119,7 +1119,7 @@ static void StartMatchCall(void)
         sub_808BCF4();
     }
 
-    PlaySE(SE_TOREEYE);
+    PlaySE(SE_POKENAV_CALL);
     CreateTask(ExecuteMatchCall, 1);
 }
 
@@ -1257,7 +1257,7 @@ static bool32 sub_8196330(u8 taskId)
     {
         FillWindowPixelBuffer(taskData[2], PIXEL_FILL(8));
         CopyWindowToVram(taskData[2], 2);
-        PlaySE(SE_TOREOFF);
+        PlaySE(SE_POKENAV_HANG_UP);
         return TRUE;
     }
 

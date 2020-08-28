@@ -1,6 +1,6 @@
 .set LOCALID_WALLY, 2
 .set LOCALID_BOY, 3
-.set LOCALID_WALLYS_UNCLE, 5
+.set LOCALID_WALLYS_DAD, 5
 .set LOCALID_GYM_BOY, 8
 .set LOCALID_SCOTT, 9
 
@@ -27,7 +27,7 @@ PetalburgCity_EventScript_MoveGymBoyToWestEntrance:: @ 81DC307
 
 PetalburgCity_EventScript_DisableMapNameAndMusic:: @ 81DC30F
 	setflag FLAG_HIDE_MAP_NAME_POPUP
-	savebgm MUS_TSURETEK
+	savebgm MUS_FOLLOW_ME
 	return
 
 PetalburgCity_EventScript_SetGymDoorsUnlocked:: @ 81DC316
@@ -68,17 +68,17 @@ PetalburgCity_EventScript_WallyTutorial:: @ 81DC32E
 PetalburgCity_EventScript_WalkToWallyHouse:: @ 81DC390
 	lockall
 	setflag FLAG_HIDE_MAP_NAME_POPUP
-	applymovement LOCALID_WALLYS_UNCLE, PetalburgCity_Movement_WalkToWallyHouseUncle
+	applymovement LOCALID_WALLYS_DAD, PetalburgCity_Movement_WalkToWallyHouseWallysDad
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WalkToWallyHousePlayer
 	waitmovement 0
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 5
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
-	applymovement LOCALID_WALLYS_UNCLE, PetalburgCity_Movement_WalkInsideHouseUncle
+	applymovement LOCALID_WALLYS_DAD, PetalburgCity_Movement_WalkInsideHouseWallysDad
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WalkInsideHousePlayer
 	waitmovement 0
-	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
@@ -100,7 +100,7 @@ PetalburgCity_EventScript_Boy:: @ 81DC3E6
 	release
 	end
 
-PetalburgCity_EventScript_WallyAunt:: @ 81DC3FD
+PetalburgCity_EventScript_WallysMom:: @ 81DC3FD
 	msgbox PetalburgCity_Text_WhereIsWally, MSGBOX_NPC
 	end
 
@@ -129,7 +129,7 @@ PetalburgCity_Movement_WalkInsideHousePlayer: @ 81DC418
 	walk_up
 	step_end
 
-PetalburgCity_Movement_WalkToWallyHouseUncle: @ 81DC41B
+PetalburgCity_Movement_WalkToWallyHouseWallysDad: @ 81DC41B
 	delay_8
 	walk_down
 	walk_down
@@ -149,7 +149,7 @@ PetalburgCity_Movement_WalkToWallyHouseUncle: @ 81DC41B
 	walk_up
 	step_end
 
-PetalburgCity_Movement_WalkInsideHouseUncle: @ 81DC42D
+PetalburgCity_Movement_WalkInsideHouseWallysDad: @ 81DC42D
 	walk_up
 	set_invisible
 	step_end
@@ -271,7 +271,7 @@ PetalburgCity_EventScript_ShowGymToPlayer3:: @ 81DC4BE
 PetalburgCity_EventScript_ShowGymToPlayer:: @ 81DC4CA
 	applymovement LOCALID_GYM_BOY, Common_Movement_FacePlayer
 	waitmovement 0
-	playbgm MUS_TSURETEK, 0
+	playbgm MUS_FOLLOW_ME, 0
 	playse SE_PIN
 	applymovement LOCALID_GYM_BOY, Common_Movement_ExclamationMark
 	waitmovement 0

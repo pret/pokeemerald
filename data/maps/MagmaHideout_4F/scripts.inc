@@ -11,17 +11,17 @@ MagmaHideout_4F_MapScripts:: @ 823A55F
 
 MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	lockall
-	playbgm MUS_MGM0, 0
+	playbgm MUS_ENCOUNTER_MAGMA, 0
 	msgbox MagmaHideout_4F_Text_MaxieAwakenGroudon, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	setvar VAR_RESULT, 1
-	playse SE_W197
+	playse SE_M_DETECT
 	dofieldeffectsparkle 18, 42, 0
 	waitfieldeffect FLDEFF_SPARKLE
 	setvar VAR_RESULT, 1
-	playfanfare MUS_ME_TAMA
-	playse SE_TAMA
+	playfanfare MUS_AWAKEN_LEGEND
+	playse SE_ORB
 	special DoOrbEffect
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0

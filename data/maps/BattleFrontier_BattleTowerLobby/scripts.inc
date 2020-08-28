@@ -81,7 +81,7 @@ BattleFrontier_BattleTowerLobby_EventScript_GiveRibbons:: @ 823E780
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_GiveBattlePoints
 	message BattleFrontier_BattleTowerLobby_Text_HereAreSomeRibbons
 	waitmessage
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	msgbox BattleFrontier_BattleTowerLobby_Text_PutRibbonOnMons, MSGBOX_DEFAULT
 BattleFrontier_BattleTowerLobby_EventScript_GiveBattlePoints:: @ 823E7A5

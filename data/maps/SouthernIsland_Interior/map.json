@@ -2,7 +2,7 @@
   "id": "MAP_SOUTHERN_ISLAND_INTERIOR",
   "name": "SouthernIsland_Interior",
   "layout": "LAYOUT_SOUTHERN_ISLAND_INTERIOR",
-  "music": "MUS_DAN02",
+  "music": "MUS_ABANDONED_SHIP",
   "region_map_section": "MAPSEC_SOUTHERN_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",

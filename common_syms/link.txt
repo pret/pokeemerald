@@ -12,9 +12,9 @@ gRecvCmds
 gLinkStatus
 gLinkDummy1
 gLinkDummy2
-gUnknown_030030EC
-gUnknown_030030F0
-gUnknown_030030F4
+gReadyToExitStandby
+gReadyToCloseLink
+gReadyCloseLinkType
 gSuppressLinkErrorMessage
 gWirelessCommType
 gSavedLinkPlayerCount

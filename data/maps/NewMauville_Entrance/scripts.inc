@@ -40,7 +40,7 @@ NewMauville_Entrance_EventScript_Door:: @ 82372FF
 	setmetatile 4, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile4, 0
 	setmetatile 5, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile5, 1
 	special DrawWholeMapView
-	playse SE_BAN
+	playse SE_BANG
 	setvar VAR_NEW_MAUVILLE_STATE, 1
 	releaseall
 	end

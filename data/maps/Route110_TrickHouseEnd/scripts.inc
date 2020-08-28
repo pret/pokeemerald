@@ -194,7 +194,7 @@ Route110_TrickHouseEnd_EventScript_GiveBlueTent:: @ 826AFC7
 Route110_TrickHouseEnd_EventScript_TrickMasterExit:: @ 826AFCF
 	applymovement LOCALID_TRICK_MASTER, Route110_TrickHouse_Movement_TrickMasterSpin
 	waitmovement 0
-	playse SE_W153
+	playse SE_M_EXPLOSION
 	applymovement LOCALID_TRICK_MASTER, Route110_TrickHouse_Movement_TrickMasterJumpAway
 	waitmovement 0
 	removeobject LOCALID_TRICK_MASTER
@@ -242,7 +242,7 @@ Route110_TrickHouseEnd_EventScript_TrickMasterExitTrigger:: @ 826B041
 	delay 20
 	applymovement LOCALID_TRICK_MASTER, Route110_TrickHouseEnd_Movement_TrickMasterSurprise
 	waitmovement 0
-	playse SE_W153
+	playse SE_M_EXPLOSION
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_YoureIgnoringMe, MSGBOX_DEFAULT

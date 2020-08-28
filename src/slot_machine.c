@@ -1220,7 +1220,7 @@ static bool8 SlotAction_HandleBetInput(struct Task *task)
             sSlotMachine->coins -= (MAX_BET - sSlotMachine->bet);
             sSlotMachine->bet = MAX_BET;
             sSlotMachine->state = SLOT_ACTION_START_SPIN;
-            PlaySE(SE_REGI);
+            PlaySE(SE_SHOP);
         }
         else  // you didn't have enough coins to bet the max
         {
@@ -1232,7 +1232,7 @@ static bool8 SlotAction_HandleBetInput(struct Task *task)
         // Increase bet
         if (JOY_NEW(DPAD_DOWN) && sSlotMachine->coins != 0)
         {
-            PlaySE(SE_REGI);
+            PlaySE(SE_SHOP);
             LightenBetTiles(sSlotMachine->bet);
             sSlotMachine->coins--;
             sSlotMachine->bet++;
@@ -1335,7 +1335,7 @@ static bool8 SlotAction_AwaitReelStop(struct Task *task)
 {
     if (JOY_NEW(A_BUTTON))
     {
-        PlaySE(SE_JYUNI);
+        PlaySE(SE_CONTEST_PLACE);
         StopSlotReel(sSlotMachine->currReel);
         PressStopReelButton(sSlotMachine->currReel);
         sSlotMachine->state = SLOT_ACTION_AWAIT_ALL_REELS_STOP;
@@ -1381,17 +1381,17 @@ static bool8 SlotAction_CheckMatches(struct Task *task)
         }
         if (sSlotMachine->matchedSymbols & ((1 << MATCHED_777_BLUE) | (1 << MATCHED_777_RED)))
         {
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
             CreateDigitalDisplayScene(DIG_DISPLAY_BONUS_BIG);
         }
         else if (sSlotMachine->matchedSymbols & (1 << MATCHED_777_MIXED))
         {
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
             CreateDigitalDisplayScene(DIG_DISPLAY_BONUS_REG);
         }
         else
         {
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
             CreateDigitalDisplayScene(DIG_DISPLAY_WIN);
         }
         // if you matched 777...
@@ -3098,7 +3098,7 @@ static void ReelTime_Init(struct Task *task)
     CreateReelTimeNumberGapSprite();
     GetReeltimeDraw();
     StopMapMusic();
-    PlayNewMapMusic(MUS_BD_TIME);
+    PlayNewMapMusic(MUS_ROULETTE);
 }
 
 static void ReelTime_WindowEnter(struct Task *task)
@@ -3240,7 +3240,7 @@ static void ReelTime_PikachuReact(struct Task *task)
         {
             task->data[4] = 0xa0;
             StartSpriteAnimIfDifferent(&gSprites[sSlotMachine->reelTimePikachuSpriteId], 5);
-            PlayFanfare(MUS_ME_ZANNEN);
+            PlayFanfare(MUS_TOO_BAD);
         }
         else
         {
@@ -3252,7 +3252,7 @@ static void ReelTime_PikachuReact(struct Task *task)
                 ResetPikaPowerBolts();
                 sSlotMachine->pikaPower = 0;
             }
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
         }
     }
 }
@@ -3328,8 +3328,8 @@ static void ReelTime_ExplodeMachine(struct Task *task)
     task->data[4] = 4;
     task->data[5] = 0;
     StopMapMusic();
-    PlayFanfare(MUS_ME_ZANNEN);
-    PlaySE(SE_W153);
+    PlayFanfare(MUS_TOO_BAD);
+    PlaySE(SE_M_EXPLOSION);
 }
 
 static void ReelTime_WaitExplode(struct Task *task)

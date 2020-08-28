@@ -343,7 +343,7 @@ static void CableCarMainCallback_Setup(void)
         break;
     case 8:
         BeginNormalPaletteFade(0xFFFFFFFF, 3, 16, 0, RGB(0, 0, 0));
-        FadeInNewBGM(MUS_ROPEWAY, 1);
+        FadeInNewBGM(MUS_CABLE_CAR, 1);
         sub_8150B6C(1);
         gMain.state++;
         break;

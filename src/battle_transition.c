@@ -2227,7 +2227,7 @@ static bool8 Phase2_Mugshot_Func4(struct Task *task)
     SetTrainerPicSlideTable(task->tPlayerSpriteId, 1);
     IncrementTrainerPicState(task->tOpponentSpriteId);
 
-    PlaySE(SE_BT_START);
+    PlaySE(SE_MUGSHOT);
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
@@ -3974,7 +3974,9 @@ static bool8 Phase2_FrontierLogoWave_Func4(struct Task *task)
     for (i = 0; i < 160; i++, var6 += var8)
     {
         s16 index = var6 / 256;
-        asm("");
+        #ifndef NONMATCHING
+            asm("");
+        #endif
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(index, amplitude);
     }
 

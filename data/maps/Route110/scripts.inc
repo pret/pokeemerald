@@ -410,11 +410,11 @@ Route110_EventScript_RivalScene:: @ 81EF76E
 	end
 
 Route110_EventScript_PlayMayMusic:: @ 81EF7E1
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	return
 
 Route110_EventScript_PlayBrendanMusic:: @ 81EF7E6
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	return
 
 Route110_EventScript_MayBattle:: @ 81EF7EB
@@ -448,7 +448,7 @@ Route110_EventScript_MayDefeated:: @ 81EF84A
 	end
 
 Route110_EventScript_BrendanBattle:: @ 81EF865
-	msgbox Route110_Text_BrendayLetsBattle, MSGBOX_DEFAULT
+	msgbox Route110_Text_BrendanLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_BrendanBattleTreecko
 	case 1, Route110_EventScript_BrendanBattleTorchic
@@ -648,7 +648,7 @@ Route110_EventScript_BirchScene:: @ 81EF9F7
 	msgbox Route110_Text_HeardYouInstallMatchCall, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox Route110_Text_RegisteredBirchInPokenav, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -814,7 +814,7 @@ Route110_Text_MayExplainItemfinder: @ 81EFD58
 	.string "me, but I think you should train a lot\l"
 	.string "harder for the next time.$"
 
-Route110_Text_BrendayLetsBattle: @ 81EFE3F
+Route110_Text_BrendanLetsBattle: @ 81EFE3F
 	.string "BRENDAN: Hey, {PLAYER}.\n"
 	.string "So this is where you were.\l"
 	.string "How's it going?\p"

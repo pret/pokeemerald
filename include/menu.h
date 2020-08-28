@@ -8,6 +8,12 @@
 #define MENU_NOTHING_CHOSEN -2
 #define MENU_B_PRESSED -1
 
+#define MENU_CURSOR_DELTA_NONE   0
+#define MENU_CURSOR_DELTA_UP    -1
+#define MENU_CURSOR_DELTA_DOWN   1
+#define MENU_CURSOR_DELTA_LEFT  -1
+#define MENU_CURSOR_DELTA_RIGHT  1
+
 enum
 {
     SAVE_MENU_NAME,
@@ -77,7 +83,7 @@ void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8);
 void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8);
 u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos);
-u8 sub_8199134(s8, s8);
+u8 ChangeListMenuCursorPosition(s8 deltaX, s8 deltaY);
 u8 GetStartMenuWindowId(void);
 void ListMenuLoadStdPalAt(u8, u8);
 u8 Menu_MoveCursor(s8 cursorDelta);

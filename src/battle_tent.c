@@ -355,7 +355,11 @@ static void GenerateOpponentMons(void)
 {
     u16 trainerId;
     s32 i, j, k;
-    register const u16 *monSet asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
+    #ifndef NONMATCHING
+        register const u16 *monSet asm("r9"); // Fix me. Compiler insists on moving that variable into stack.
+    #else
+        const u16 *monSet;
+    #endif
     u16 species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
     s32 monId = 0;

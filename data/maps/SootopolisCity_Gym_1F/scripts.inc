@@ -46,7 +46,7 @@ SootopolisCity_Gym_1F_OnFrame: @ 8224ECB
 SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs:: @ 8224EED
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse SE_RU_GASHIN
+	playse SE_ICE_STAIRS
 	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special DrawWholeMapView
 	end
@@ -54,7 +54,7 @@ SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs:: @ 8224EED
 SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs:: @ 8224F01
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse SE_RU_GASHIN
+	playse SE_ICE_STAIRS
 	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special DrawWholeMapView
 	end
@@ -62,7 +62,7 @@ SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs:: @ 8224F01
 SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs:: @ 8224F15
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse SE_RU_GASHIN
+	playse SE_ICE_STAIRS
 	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special DrawWholeMapView
 	end
@@ -72,7 +72,7 @@ SootopolisCity_Gym_1F_EventScript_FallThroughIce:: @ 8224F29
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Gym_1F_Movement_FallThroughIce
 	waitmovement 0
-	playse SE_RU_HYUU
+	playse SE_FALL
 	delay 60
 	warphole MAP_SOOTOPOLIS_CITY_GYM_B1F
 	waitstate
@@ -110,7 +110,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 	call SootopolisCity_Gym_1F_EventScript_GiveWaterPulse
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox SootopolisCity_Gym_1F_Text_RegisteredJuan, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage

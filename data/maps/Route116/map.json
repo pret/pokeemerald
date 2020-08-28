@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE116",
   "name": "Route116",
   "layout": "LAYOUT_ROUTE116",
-  "music": "MUS_NEXTROAD",
+  "music": "MUS_ROUTE104",
   "region_map_section": "MAPSEC_ROUTE_116",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

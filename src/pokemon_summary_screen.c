@@ -1903,7 +1903,7 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
             }
             else
             {
-                PlaySE(SE_HAZURE);
+                PlaySE(SE_FAILURE);
             }
         }
         else if (gMain.newKeys & B_BUTTON)
@@ -2191,7 +2191,7 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                 }
                 else
                 {
-                    PlaySE(SE_HAZURE);
+                    PlaySE(SE_FAILURE);
                     ShowCantForgetHMsWindow(taskId);
                 }
             }
