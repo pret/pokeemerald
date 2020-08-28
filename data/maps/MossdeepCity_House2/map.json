@@ -2,7 +2,7 @@
   "id": "MAP_MOSSDEEP_CITY_HOUSE2",
   "name": "MossdeepCity_House2",
   "layout": "LAYOUT_HOUSE1",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_MOSSDEEP_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

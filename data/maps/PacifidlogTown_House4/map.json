@@ -2,7 +2,7 @@
   "id": "MAP_PACIFIDLOG_TOWN_HOUSE4",
   "name": "PacifidlogTown_House4",
   "layout": "LAYOUT_PACIFIDLOG_TOWN_HOUSE2",
-  "music": "MUS_MINAMO",
+  "music": "MUS_LILYCOVE",
   "region_map_section": "MAPSEC_PACIFIDLOG_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

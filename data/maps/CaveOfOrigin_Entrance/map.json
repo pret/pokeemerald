@@ -2,7 +2,7 @@
   "id": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
   "name": "CaveOfOrigin_Entrance",
   "layout": "LAYOUT_CAVE_OF_ORIGIN_ENTRANCE",
-  "music": "MUS_DAN03",
+  "music": "MUS_CAVE_OF_ORIGIN",
   "region_map_section": "MAPSEC_CAVE_OF_ORIGIN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

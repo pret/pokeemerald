@@ -124,7 +124,7 @@ Route119_WeatherInstitute_2F_EventScript_SendCastformToPC:: @ 82700D0
 	end
 
 Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare:: @ 82700DB
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform
 	waitmessage
 	waitfanfare

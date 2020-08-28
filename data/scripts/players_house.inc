@@ -73,7 +73,7 @@ PlayersHouse_2F_EventScript_WallClock:: @ 8292799
 	call_if_eq PlayersHouse_2F_EventScript_MomComesUpstairsMale
 	compare VAR_RESULT, FEMALE
 	call_if_eq PlayersHouse_2F_EventScript_MomComesUpstairsFemale
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject VAR_0x8008
 	releaseall
 	end
@@ -159,7 +159,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale:: @ 829286D
 	call PlayersHouse_1F_EventScript_MomNoticeGymBroadcast
 	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymMale
 	waitmovement 0
-	playbgm MUS_INTER_V, 0
+	playbgm MUS_ENCOUNTER_INTERVIEWER, 0
 	msgbox PlayersHouse_1F_Text_MaybeDadWillBeOn, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomMakeRoomToSeeTVMale
@@ -184,7 +184,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale:: @ 82928DC
 	call PlayersHouse_1F_EventScript_MomNoticeGymBroadcast
 	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymFemale
 	waitmovement 0
-	playbgm MUS_INTER_V, 0
+	playbgm MUS_ENCOUNTER_INTERVIEWER, 0
 	msgbox PlayersHouse_1F_Text_MaybeDadWillBeOn, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomMakeRoomToSeeTVFemale
@@ -334,7 +334,7 @@ PlayersHouse_1F_EventScript_TryRegisterMom:: @ 8292A19
 	msgbox PlayersHouse_1F_Text_IsThatAPokenav, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox PlayersHouse_1F_Text_RegisteredMom, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage

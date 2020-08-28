@@ -1631,7 +1631,7 @@ static void Task_DuoFightAnim(u8 taskId)
     BlendPalettes(-1, 0x10, 0);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
     SetVBlankCallback(VBlankCB_DuoFight);
-    PlaySE(SE_T_OOAME);
+    PlaySE(SE_DOWNPOUR);
 }
 
 static void Task_DuoFight_AnimateClouds(u8 taskId)
@@ -1738,14 +1738,14 @@ static void Task_HandleDuoFight(u8 taskId)
 // and gradually fades them back to original color to simulate lightning
 static void DuoFight_Lightning1(void)
 {
-    PlaySE(SE_T_KAMI);
+    PlaySE(SE_THUNDER);
     BlendPalettesGradually(0x00007FFF, 0, 16, 0, RGB_WHITEALPHA, 0, 0);
     BlendPalettesGradually(0xFFFF0000, 0, 16, 0, RGB_BLACK,      0, 1);
 }
 
 static void DuoFight_Lightning2(void)
 {
-    PlaySE(SE_T_KAMI);
+    PlaySE(SE_THUNDER);
     BlendPalettesGradually(0x00007FFF, 0, 16, 16, RGB_WHITEALPHA, 0, 0);
     BlendPalettesGradually(0xFFFF0000, 0, 16, 16, RGB_BLACK,      0, 1);
 }
@@ -1784,7 +1784,7 @@ static void DuoFight_PanOffScene(u8 taskId)
 
 static void DuoFightEnd(u8 taskId, s8 palDelay)
 {
-    PlaySE(SE_T_OOAME_E);
+    PlaySE(SE_DOWNPOUR_STOP);
     BeginNormalPaletteFade(0xFFFFFFFF, palDelay, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_DuoFightEnd;
 }
@@ -2041,7 +2041,7 @@ static void LoadTakesFlightSceneGfx(void)
 static void Task_RayTakesFlightAnim(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    PlayNewMapMusic(MUS_REKKUU_KOURIN);
+    PlayNewMapMusic(MUS_RAYQUAZA_APPEARS);
     InitTakesFlightSceneBgs();
     LoadTakesFlightSceneGfx();
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG1 | BLDCNT_EFFECT_BLEND);
@@ -2515,7 +2515,7 @@ static void Task_HandleRayCharges(u8 taskId)
     s16 *data = gTasks[taskId].data;
     RayCharges_AnimateBg();
     if ((tSoundTimer & 7) == 0 && tState <= 1 && tTimer <= 89)
-        PlaySE(SE_OP_BASYU);
+        PlaySE(SE_INTRO_BLAST);
 
     tSoundTimer++;
     switch (tState)
@@ -3011,7 +3011,7 @@ static void SpriteCB_ChasesAway_KyogreLeave(struct Sprite *sprite)
     }
 
     if (sprite->data[4] % 64 == 0)
-        PlaySE(SE_W250);
+        PlaySE(SE_M_WHIRLPOOL);
 
     sprite->data[4]++;
 }
@@ -3045,7 +3045,7 @@ static void SpriteCB_ChasesAway_Rayquaza(struct Sprite *sprite)
     {
         SpriteCB_ChasesAway_RayquazaFloat(sprite);
         if (sprite->sYOffset == 0)
-            PlaySE(SE_BT_START);
+            PlaySE(SE_MUGSHOT);
         if (sprite->sYOffset == -3)
             ChasesAway_SetRayquazaAnim(sprite, 2, 48, 16);
     }
@@ -3158,7 +3158,7 @@ static void Task_ChasesAway_AnimateRing(u8 taskId)
         break;
     case 1:
         if (tSoundTimer == 8)
-            PlaySE(SE_JIDO_DOA);
+            PlaySE(SE_SLIDING_DOOR);
         if (tNumRings == 2)
         {
             tState++;

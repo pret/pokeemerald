@@ -2,7 +2,7 @@
   "id": "MAP_AQUA_HIDEOUT_UNUSED_RUBY_MAP1",
   "name": "AquaHideout_UnusedRubyMap1",
   "layout": "LAYOUT_AQUA_HIDEOUT_UNUSED_RUBY_MAP1",
-  "music": "MUS_AJITO",
+  "music": "MUS_AQUA_MAGMA_HIDEOUT",
   "region_map_section": "MAPSEC_AQUA_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

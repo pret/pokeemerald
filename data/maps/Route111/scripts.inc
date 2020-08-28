@@ -126,7 +126,7 @@ Route111_EventScript_MirageTowerDisappear:: @ 81F0E60
 	special StartMirageTowerShake
 	waitstate
 	delay 24
-	playse SE_RU_HYUU
+	playse SE_FALL
 	addobject LOCALID_PLAYER_FALLING
 	special StartPlayerDescendMirageTower
 	waitstate
@@ -268,14 +268,14 @@ Route111_Movement_PushRightFromRoute: @ 81F0FAE
 
 Route111_EventScript_SunTrigger:: @ 81F0FB0
 	setweather WEATHER_SUNNY
-	fadenewbgm MUS_DOORO_X1
+	fadenewbgm MUS_ROUTE110
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_SandstormTrigger:: @ 81F0FBD
 	setweather WEATHER_SANDSTORM
-	fadenewbgm MUS_ASHROAD
+	fadenewbgm MUS_ROUTE111
 	doweather
 	end
 

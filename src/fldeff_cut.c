@@ -311,7 +311,7 @@ bool8 FldEff_CutGrass(void)
     s16 x, y;
     u8 i = 0;
 
-    PlaySE(SE_W015);
+    PlaySE(SE_M_CUT);
     PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     for (i = 0; i < CUT_HYPER_AREA; i++)
     {
@@ -634,7 +634,7 @@ void FixLongGrassMetatilesWindowBottom(s16 x, s16 y)
 
 static void StartCutTreeFieldEffect(void)
 {
-    PlaySE(SE_W015);
+    PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
     EnableBothScriptContexts();
 }

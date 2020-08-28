@@ -118,7 +118,7 @@ static u32 CB2_HandleMatchCallInput(struct Pokenav3Struct *state)
         else
         {
             // Cant exit Match Call menu before calling Mr Stone during tutorial
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
         }
     }
 

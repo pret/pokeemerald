@@ -1076,11 +1076,11 @@ u16 GetLocationMusic(struct WarpData *warp)
     if (NoMusicInSotopolisWithLegendaries(warp) == TRUE)
         return 0xFFFF;
     else if (ShouldLegendaryMusicPlayAtLocation(warp) == TRUE)
-        return MUS_OOAME;
+        return MUS_ABNORMAL_WEATHER;
     else if (IsInflitratedSpaceCenter(warp) == TRUE)
-        return MUS_MGM0;
+        return MUS_ENCOUNTER_MAGMA;
     else if (IsInfiltratedWeatherInstitute(warp) == TRUE)
-        return MUS_TOZAN;
+        return MUS_MT_CHIMNEY;
     else
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
 }
@@ -1093,26 +1093,26 @@ u16 GetCurrLocationDefaultMusic(void)
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)
      && GetSav1Weather() == WEATHER_SANDSTORM)
-        return MUS_ASHROAD;
+        return MUS_ROUTE111;
 
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
-    if (music != MUS_ROUTE_118)
+    if (music != MUS_ROUTE118)
     {
         return music;
     }
     else
     {
         if (gSaveBlock1Ptr->pos.x < 24)
-            return MUS_DOORO_X1;
+            return MUS_ROUTE110;
         else
-            return MUS_GRANROAD;
+            return MUS_ROUTE119;
     }
 }
 
 u16 GetWarpDestinationMusic(void)
 {
     u16 music = GetLocationMusic(&sWarpDestination);
-    if (music != MUS_ROUTE_118)
+    if (music != MUS_ROUTE118)
     {
         return music;
     }
@@ -1120,9 +1120,9 @@ u16 GetWarpDestinationMusic(void)
     {
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAUVILLE_CITY)
          && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAUVILLE_CITY))
-            return MUS_DOORO_X1;
+            return MUS_ROUTE110;
         else
-            return MUS_GRANROAD;
+            return MUS_ROUTE119;
     }
 }
 
@@ -1135,14 +1135,14 @@ void Overworld_PlaySpecialMapMusic(void)
 {
     u16 music = GetCurrLocationDefaultMusic();
 
-    if (music != MUS_OOAME && music != 0xFFFF)
+    if (music != MUS_ABNORMAL_WEATHER && music != 0xFFFF)
     {
         if (gSaveBlock1Ptr->savedMusic)
             music = gSaveBlock1Ptr->savedMusic;
         else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
-            music = MUS_DEEPDEEP;
+            music = MUS_UNDERWATER;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-            music = MUS_NAMINORI;
+            music = MUS_SURF;
     }
 
     if (music != GetCurrentMapMusic())
@@ -1165,12 +1165,12 @@ static void TransitionMapMusic(void)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
-        if (newMusic != MUS_OOAME && newMusic != 0xFFFF)
+        if (newMusic != MUS_ABNORMAL_WEATHER && newMusic != 0xFFFF)
         {
-            if (currentMusic == MUS_DEEPDEEP || currentMusic == MUS_NAMINORI)
+            if (currentMusic == MUS_UNDERWATER || currentMusic == MUS_SURF)
                 return;
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-                newMusic = MUS_NAMINORI;
+                newMusic = MUS_SURF;
         }
         if (newMusic != currentMusic)
         {
@@ -1192,7 +1192,7 @@ void Overworld_ChangeMusicToDefault(void)
 void Overworld_ChangeMusicTo(u16 newMusic)
 {
     u16 currentMusic = GetCurrentMapMusic();
-    if (currentMusic != newMusic && currentMusic != MUS_OOAME)
+    if (currentMusic != newMusic && currentMusic != MUS_ABNORMAL_WEATHER)
         FadeOutAndPlayNewMapMusic(newMusic, 8);
 }
 
@@ -1211,7 +1211,7 @@ void TryFadeOutOldMapMusic(void)
     u16 warpMusic = GetWarpDestinationMusic();
     if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE && warpMusic != GetCurrentMapMusic())
     {
-        if (currentMusic == MUS_NAMINORI
+        if (currentMusic == MUS_SURF
             && VarGet(VAR_SKY_PILLAR_STATE) == 2
             && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SOOTOPOLIS_CITY)

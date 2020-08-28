@@ -1389,7 +1389,7 @@ static void Task_RaiseCurtainAtStart(u8 taskId)
         if (gTasks[taskId].data[1]++ <= 60)
             break;
         gTasks[taskId].data[1] = 0;
-        PlaySE12WithPanning(SE_C_MAKU_U, 0);
+        PlaySE12WithPanning(SE_CONTEST_CURTAIN_RISE, 0);
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -1961,7 +1961,7 @@ static void Task_DoAppeals(u8 taskId)
         return;
     case APPEALSTATE_UPDATE_MOVE_USERS_STATUS:
         if (DrawStatusSymbol(contestant))
-            PlaySE(SE_C_PASI);
+            PlaySE(SE_CONTEST_ICON_CHANGE);
         gTasks[taskId].tState = APPEALSTATE_UPDATE_OPPONENTS;
         return;
     case APPEALSTATE_UPDATE_OPPONENTS:
@@ -2052,9 +2052,9 @@ static void Task_DoAppeals(u8 taskId)
                 break;
         }
         if (DrawStatusSymbol(i))
-            PlaySE(SE_C_PASI);
+            PlaySE(SE_CONTEST_ICON_CHANGE);
         else
-            PlaySE(SE_C_SYU);
+            PlaySE(SE_CONTEST_ICON_CLEAR);
         if (eContestantStatus[i].judgesAttentionWasRemoved)
         {
             StopFlashJudgeAttentionEye(i);
@@ -2243,7 +2243,7 @@ static void Task_DoAppeals(u8 taskId)
         {
         case 0:
             BlendAudienceBackground(-1, 1);
-            PlayFanfare(MUS_ME_ZANNEN);
+            PlayFanfare(MUS_TOO_BAD);
             gTasks[taskId].tCounter++;
             break;
         case 1:
@@ -2288,7 +2288,7 @@ static void Task_DoAppeals(u8 taskId)
             if (!eContest.waitForAudienceBlend)
             {
                 AnimateAudience();
-                PlaySE(SE_W227B);
+                PlaySE(SE_M_ENCORE2);
                 ShowAndUpdateApplauseMeter(1);
                 gTasks[taskId].tCounter++;
             }
@@ -2683,7 +2683,7 @@ static void Task_WaitForOutOfTimeMsg(u8 taskId)
         SetBgForCurtainDrop();
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 160;
-        PlaySE12WithPanning(SE_C_MAKU_D, 0);
+        PlaySE12WithPanning(SE_CONTEST_CURTAIN_FALL, 0);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = Task_DropCurtainAtAppealsEnd;
     }
@@ -3277,7 +3277,7 @@ static bool8 UpdateConditionStars(u8 contestantIdx, bool8 resetMod)
         ContestBG_FillBoxWithTile(0, GetStarTileOffset(), 19, contestantOffset, 1, numStars, 17);
         if (resetMod)
         {
-            PlaySE(SE_EXPMAX);
+            PlaySE(SE_EXP_MAX);
             eContestantStatus[contestantIdx].conditionMod = CONDITION_NO_CHANGE;
         }
     }
@@ -3286,7 +3286,7 @@ static bool8 UpdateConditionStars(u8 contestantIdx, bool8 resetMod)
         ContestBG_FillBoxWithTile(0, 0, 19, contestantOffset + numStars, 1, 3 - numStars, 17);
         if (resetMod)
         {
-            PlaySE(SE_FU_ZAKU2);
+            PlaySE(SE_CONTEST_CONDITION_LOSE);
             eContestantStatus[contestantIdx].conditionMod = CONDITION_NO_CHANGE;
         }
     }
@@ -3814,7 +3814,7 @@ static void Task_UpdateAppealHearts(u8 taskId)
         ContestBG_FillBoxWithTile(0, heartOffset, newNumHearts + 22, gContestantTurnOrder[contestant] * 5 + 2 + onSecondLine,  1, 1, 17);
         if (heartsDelta > 0)
         {
-            PlaySE(SE_C_GAJI);
+            PlaySE(SE_CONTEST_HEART);
             m4aMPlayImmInit(&gMPlayInfo_SE1);
             m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, pitchMod * 256);
         }
@@ -4189,7 +4189,7 @@ static void BlinkContestantBox(u8 spriteId, bool8 b)
     gSprites[spriteId].callback = SpriteCB_BlinkContestantBox;
     gSprites[spriteId2].callback = SpriteCallbackDummy;
     if (b == FALSE)
-        PlaySE(SE_C_PIKON);
+        PlaySE(SE_CONTEST_MONS_TURN);
     else
         PlaySE(SE_PC_LOGIN);
 }
@@ -4678,36 +4678,36 @@ static void DoJudgeSpeechBubble(u8 symbolId)
     case JUDGE_SYMBOL_SWIRL:
     case JUDGE_SYMBOL_SWIRL_UNUSED:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0];
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         break;
     case JUDGE_SYMBOL_ONE_EXCLAMATION:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 4;
-        PlaySE(SE_SEIKAI);
+        PlaySE(SE_SUCCESS);
         break;
     case JUDGE_SYMBOL_TWO_EXCLAMATIONS:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 8;
-        PlaySE(SE_SEIKAI);
+        PlaySE(SE_SUCCESS);
         break;
     case JUDGE_SYMBOL_NUMBER_ONE_UNUSED: // Identical to JUDGE_SYMBOL_NUMBER_ONE
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     case JUDGE_SYMBOL_NUMBER_ONE:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     case JUDGE_SYMBOL_NUMBER_FOUR:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 16;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     case JUDGE_SYMBOL_STAR:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 24;
-        PlaySE(SE_W215);
+        PlaySE(SE_M_HEAL_BELL);
         break;
     case JUDGE_SYMBOL_QUESTION_MARK:
     default:
         gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 20;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
         break;
     }
     gSprites[spriteId].data[1] = 0;
@@ -5042,7 +5042,7 @@ static void DrawUnnervedSymbols(void)
             ContestBG_FillBoxWithIncrementingTile(0, symbolOffset, 20, contestantOffset, 2, 1, 17, 1);
             symbolOffset += 16;
             ContestBG_FillBoxWithIncrementingTile(0, symbolOffset, 20, contestantOffset + 1, 2, 1, 17, 1);
-            PlaySE(SE_C_PASI);
+            PlaySE(SE_CONTEST_ICON_CHANGE);
         }
     }
 }
@@ -5123,7 +5123,7 @@ static void Task_StartDropCurtainAtRoundEnd(u8 taskId)
 {
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = DISPLAY_HEIGHT;
-    PlaySE12WithPanning(SE_C_MAKU_D, 0);
+    PlaySE12WithPanning(SE_CONTEST_CURTAIN_FALL, 0);
     gTasks[taskId].func = Task_UpdateCurtainDropAtRoundEnd;
 }
 
@@ -5235,7 +5235,7 @@ static void Task_StartRaiseCurtainAtRoundEnd(u8 taskId)
     else
     {
         gTasks[taskId].data[2] = 0;
-        PlaySE12WithPanning(SE_C_MAKU_U, 0);
+        PlaySE12WithPanning(SE_CONTEST_CURTAIN_RISE, 0);
         gTasks[taskId].func = Task_UpdateRaiseCurtainAtRoundEnd;
     }
 }

@@ -1058,7 +1058,7 @@ static void sub_807FD08(struct Sprite* sprite)
         if (++sprite->data[5] > 3)
             DestroySprite(sprite);
         else
-            PlaySE(SE_TB_KARA);
+            PlaySE(SE_BALL_TRAY_EXIT);
     }
     sprite->pos1.x = sprite->data[1];
     sprite->pos1.y = sprite->data[2];
@@ -1295,7 +1295,7 @@ static void sub_8080018(void)
         {
             sBerryBlenderData->mainState++;
             sub_8082CB4(&sBerryBlenderData->bgAffineSrc);
-            PlaySE(SE_RU_HYUU);
+            PlaySE(SE_FALL);
             ShowBg(2);
         }
         break;
@@ -1310,7 +1310,7 @@ static void sub_8080018(void)
             sBerryBlenderData->field_11A = 0x100;
             sBerryBlenderData->arrowPos = sUnknown_083399DC[sUnknown_083399E4[sBerryBlenderData->playersNo - 2]];
             sBerryBlenderData->framesToWait = 0;
-            PlaySE(SE_TRACK_DOOR);
+            PlaySE(SE_TRUCK_DOOR);
             sub_808074C();
             Blender_PrintPlayerNames();
         }
@@ -1582,7 +1582,7 @@ static void sub_80808D4(void)
     case 13:
         sBerryBlenderData->mainState++;
         sub_808074C();
-        PlaySE(SE_RU_HYUU);
+        PlaySE(SE_FALL);
         sub_8082CB4(&sBerryBlenderData->bgAffineSrc);
         ShowBg(2);
         break;
@@ -1597,7 +1597,7 @@ static void sub_80808D4(void)
             sBerryBlenderData->arrowPos = sUnknown_083399DC[sUnknown_083399E4[sBerryBlenderData->playersNo - 2]];
             SetGpuRegBits(REG_OFFSET_BG2CNT, 2);
             sBerryBlenderData->framesToWait = 0;
-            PlaySE(SE_TRACK_DOOR);
+            PlaySE(SE_TRUCK_DOOR);
             Blender_PrintPlayerNames();
         }
         sub_8082CB4(&sBerryBlenderData->bgAffineSrc);
@@ -1648,7 +1648,7 @@ static void sub_80808D4(void)
             sBerryBlenderData->field_154 = GetCurrentMapMusic();
 
         PlayBGM(MUS_CYCLING);
-        PlaySE(SE_MOTER);
+        PlaySE(SE_BERRY_BLENDER);
         Blender_ControlHitPitch();
         break;
     }
@@ -1873,17 +1873,17 @@ static void sub_8081288(u16 a0, u8 a1)
     {
         StartSpriteAnim(&gSprites[spriteId], 2);
         gSprites[spriteId].callback = sub_8082F9C;
-        PlaySE(SE_RU_GASHIN);
+        PlaySE(SE_ICE_STAIRS);
     }
     else if (a0 == 0x5432)
     {
         StartSpriteAnim(&gSprites[spriteId], 0);
-        PlaySE(SE_SEIKAI);
+        PlaySE(SE_SUCCESS);
     }
     else if (a0 == 0x2345)
     {
         StartSpriteAnim(&gSprites[spriteId], 1);
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
     }
     sub_8082E84();
 }
@@ -3025,7 +3025,7 @@ static void sub_8083010(struct Sprite* sprite)
         {
             sprite->data[1] = 88;
             sprite->data[0]++;
-            PlaySE(SE_KON);
+            PlaySE(SE_BALL_BOUNCE_1);
         }
         break;
     case 1:
@@ -3567,7 +3567,7 @@ static void sub_8083F3C(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        PlayFanfare(MUS_FANFA1);
+        PlayFanfare(MUS_LEVEL_UP);
         gTasks[taskId].data[0]++;
     }
     if (IsFanfareTaskInactive())

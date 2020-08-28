@@ -2,7 +2,7 @@
   "id": "MAP_UNDERWATER_ROUTE134",
   "name": "Underwater_Route134",
   "layout": "LAYOUT_UNDERWATER_ROUTE134",
-  "music": "MUS_DEEPDEEP",
+  "music": "MUS_UNDERWATER",
   "region_map_section": "MAPSEC_UNDERWATER_SEALED_CHAMBER",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",

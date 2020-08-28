@@ -153,7 +153,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
     case 2:
         if (GetLinkPlayerCount_2() == 2)
         {
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
             CheckShouldAdvanceLinkState();
             *arg1 = 0;
             *arg0 = 3;
@@ -431,7 +431,7 @@ static void sub_81D5084(u8 taskId)
         if (sub_81D5064(&data->unk0, 120))
         {
             AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
-            PlayFanfare(MUS_FANFA4);
+            PlayFanfare(MUS_OBTAIN_ITEM);
             data->unk8 = 19;
         }
         break;

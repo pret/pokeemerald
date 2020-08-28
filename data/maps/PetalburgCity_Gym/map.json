@@ -2,7 +2,7 @@
   "id": "MAP_PETALBURG_CITY_GYM",
   "name": "PetalburgCity_Gym",
   "layout": "LAYOUT_PETALBURG_CITY_GYM",
-  "music": "MUS_GIM",
+  "music": "MUS_GYM",
   "region_map_section": "MAPSEC_PETALBURG_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

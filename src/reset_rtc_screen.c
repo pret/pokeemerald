@@ -611,7 +611,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         if (TrySavingData(SAVE_NORMAL) == SAVE_STATUS_OK)
         {
             ShowMessage(gText_SaveCompleted);
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
         }
         else
         {
