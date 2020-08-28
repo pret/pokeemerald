@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE119_HOUSE",
   "name": "Route119_House",
   "layout": "LAYOUT_HOUSE1",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_ROUTE_119",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

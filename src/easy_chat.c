@@ -2023,7 +2023,7 @@ static int sub_811B368(void)
 {
     if (sEasyChatScreen->type == EASY_CHAT_TYPE_BARD_SONG)
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         return 0;
     }
     else
@@ -2038,7 +2038,7 @@ static int sub_811B394(void)
     u16 easyChatWord = sub_811F578(sub_811B940());
     if (sub_811BF88(easyChatWord))
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         return 0;
     }
     else

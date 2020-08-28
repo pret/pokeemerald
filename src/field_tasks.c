@@ -357,7 +357,7 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
                 data[2] = x;
                 data[3] = y;
                 if (MetatileBehavior_IsPacifidlogLog(MapGridGetMetatileBehaviorAt(x, y)))
-                    PlaySE(SE_MIZU);
+                    PlaySE(SE_PUDDLE);
             }
             break;
         case 2:
@@ -443,7 +443,7 @@ static void FortreeBridgePerStepCallback(u8 taskId)
                 flag = 1;
 
             if (flag && (isFortreeBridgeCur == 1 || isFortreeBridgePrev == 1))
-                PlaySE(SE_HASHI);
+                PlaySE(SE_BRIDGE_WALK);
 
             if (isFortreeBridgePrev)
             {
@@ -583,7 +583,7 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
             {
                 x = data[4];
                 y = data[5];
-                PlaySE(SE_RU_BARI);
+                PlaySE(SE_ICE_CRACK);
                 MapGridSetMetatileIdAt(x, y, METATILE_SootopolisGym_Ice_Cracked);
                 CurrentMapDrawMetatileAt(x, y);
                 MarkIcePuzzleCoordVisited(x - 7, y - 7);
@@ -599,7 +599,7 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
             {
                 x = data[4];
                 y = data[5];
-                PlaySE(SE_RU_GASYAN);
+                PlaySE(SE_ICE_BREAK);
                 MapGridSetMetatileIdAt(x, y, METATILE_SootopolisGym_Ice_Broken);
                 CurrentMapDrawMetatileAt(x, y);
                 data[1] = 1;

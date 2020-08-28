@@ -105,11 +105,11 @@ LavaridgeTown_EventScript_RivalExit:: @ 81EA5FF
 	end
 
 LavaridgeTown_EventScript_PlayMayMusic:: @ 81EA630
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	return
 
 LavaridgeTown_EventScript_PlayBrendanMusic:: @ 81EA635
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	return
 
 LavaridgeTown_EventScript_RivalNoticePlayer:: @ 81EA63A
@@ -258,7 +258,7 @@ LavaridgeTown_EventScript_EggWoman:: @ 81EA744
 	goto_if_eq LavaridgeTown_EventScript_NoRoomForEgg
 	msgbox LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message LavaridgeTown_Text_ReceivedTheEgg
 	waitfanfare
 	giveegg SPECIES_WYNAUT

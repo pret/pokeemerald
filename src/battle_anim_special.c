@@ -788,7 +788,7 @@ static void sub_8171030(u8 taskId)
 {
     if (gSprites[gBattlerSpriteIds[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]].animCmdIndex == 1)
     {
-        PlaySE12WithPanning(SE_NAGERU, 0);
+        PlaySE12WithPanning(SE_BALL_THROW, 0);
         gSprites[gTasks[taskId].data[0]].callback = sub_8171104;
         CreateTask(sub_81710A8, 10);
         gTasks[taskId].func = sub_8170EF0;
@@ -873,7 +873,7 @@ static void sub_8171240(struct Sprite *sprite)
     taskId = sprite->data[5];
 
     if (++gTasks[taskId].data[1] == 11)
-        PlaySE(SE_SUIKOMU);
+        PlaySE(SE_BALL_TRADE);
 
     switch (gTasks[taskId].data[0])
     {
@@ -952,16 +952,16 @@ static void sub_81713D0(struct Sprite *sprite)
             switch (bounceCount)
             {
             case 1:
-                PlaySE(SE_KON);
+                PlaySE(SE_BALL_BOUNCE_1);
                 break;
             case 2:
-                PlaySE(SE_KON2);
+                PlaySE(SE_BALL_BOUNCE_2);
                 break;
             case 3:
-                PlaySE(SE_KON3);
+                PlaySE(SE_BALL_BOUNCE_3);
                 break;
             default:
-                PlaySE(SE_KON4);
+                PlaySE(SE_BALL_BOUNCE_4);
                 break;
             }
         }
@@ -1005,7 +1005,7 @@ static void sub_81714D4(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, 1);
         gBattleSpritesDataPtr->animationData->field_C = 0;
         sprite->callback = sub_8171520;
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
     }
 }
 
@@ -1147,7 +1147,7 @@ static void sub_8171520(struct Sprite *sprite)
             else
                 StartSpriteAffineAnim(sprite, 1);
 
-            PlaySE(SE_BOWA);
+            PlaySE(SE_BALL);
         }
         break;
     }
@@ -1178,7 +1178,7 @@ static void sub_81717F8(struct Sprite *sprite)
     sprite->data[4]++;
     if (sprite->data[4] == 40)
     {
-        PlaySE(SE_RG_GETTING);
+        PlaySE(SE_RG_BALL_CLICK);
         BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB(0, 0, 0));
         sub_81719EC(sprite);
     }
@@ -1191,7 +1191,7 @@ static void sub_81717F8(struct Sprite *sprite)
         gDoingBattleAnim = 0;
         UpdateOamPriorityInAllHealthboxes(1);
         m4aMPlayAllStop();
-        PlaySE(MUS_RG_FAN6);
+        PlaySE(MUS_RG_CAUGHT_INTRO);
     }
     else if (sprite->data[4] == 315)
     {
@@ -1403,7 +1403,7 @@ u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId)
     gTasks[taskId].data[3] = priority;
     gTasks[taskId].data[4] = subpriority;
     gTasks[taskId].data[15] = ballId;
-    PlaySE(SE_BOWA2);
+    PlaySE(SE_BALL_OPEN);
 
     return taskId;
 }
@@ -2113,7 +2113,7 @@ static void sub_8172FEC(u8 taskId)
             else
                 pan = 63;
 
-            PlaySE12WithPanning(SE_REAPOKE, pan);
+            PlaySE12WithPanning(SE_SHINY, pan);
         }
     }
 

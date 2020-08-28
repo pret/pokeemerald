@@ -1239,7 +1239,7 @@ void CB2_StartCreditsSequence(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(CreditsVBlankCallback);
-    m4aSongNumStart(MUS_THANKFOR);
+    m4aSongNumStart(MUS_CREDITS);
     SetMainCallback2(CB2_RunCreditsSequence);
     gUnknown_0203BCE5 = 0;
     sCreditsData = AllocZeroed(sizeof(struct CreditsData));

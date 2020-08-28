@@ -2,7 +2,7 @@
   "id": "MAP_VICTORY_ROAD_1F",
   "name": "VictoryRoad_1F",
   "layout": "LAYOUT_VICTORY_ROAD_1F",
-  "music": "MUS_C_ROAD",
+  "music": "MUS_VICTORY_ROAD",
   "region_map_section": "MAPSEC_VICTORY_ROAD",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

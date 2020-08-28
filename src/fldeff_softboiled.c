@@ -61,13 +61,13 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
     }
 
     // Take away Softboiled user's health first (-1)
-    PlaySE(SE_KAIFUKU);
+    PlaySE(SE_USE_ITEM);
     PartyMenuModifyHP(taskId, userPartyId, -1, GetMonData(&gPlayerParty[userPartyId], MON_DATA_MAX_HP)/5, Task_SoftboiledRestoreHealth);
 }
 
 static void Task_SoftboiledRestoreHealth(u8 taskId)
 {
-    PlaySE(SE_KAIFUKU);
+    PlaySE(SE_USE_ITEM);
     PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MAX_HP)/5, Task_DisplayHPRestoredMessage);
 }
 

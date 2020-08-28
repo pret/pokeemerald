@@ -104,7 +104,7 @@ static void FieldCallback_Flash(void)
 
 static void FldEff_UseFlash(void)
 {
-    PlaySE(SE_W115);
+    PlaySE(SE_M_REFLECT);
     FlagSet(FLAG_SYS_USE_FLASH);
     ScriptContext1_SetupScript(EventScript_UseFlash);
 }

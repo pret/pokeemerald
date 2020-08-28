@@ -2,7 +2,7 @@
   "id": "MAP_SAFARI_ZONE_NORTH",
   "name": "SafariZone_North",
   "layout": "LAYOUT_SAFARI_ZONE_NORTH",
-  "music": "MUS_SAFARI",
+  "music": "MUS_SAFARI_ZONE",
   "region_map_section": "MAPSEC_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

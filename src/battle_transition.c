@@ -2227,7 +2227,7 @@ static bool8 Phase2_Mugshot_Func4(struct Task *task)
     SetTrainerPicSlideTable(task->tPlayerSpriteId, 1);
     IncrementTrainerPicState(task->tOpponentSpriteId);
 
-    PlaySE(SE_BT_START);
+    PlaySE(SE_MUGSHOT);
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
