@@ -4875,7 +4875,11 @@ static void SetActionsAndBattlersTurnOrder(void)
             {
                 u8 battler1 = gBattlerByTurnOrder[i];
                 u8 battler2 = gBattlerByTurnOrder[j];
-                if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM && gActionsByTurnOrder[i] != B_ACTION_SWITCH && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
+
+                if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
+                    && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
+                    && gActionsByTurnOrder[i] != B_ACTION_SWITCH
+                    && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
                 {
                     if (GetWhoStrikesFirst(battler1, battler2, FALSE))
                         SwapTurnOrder(i, j);

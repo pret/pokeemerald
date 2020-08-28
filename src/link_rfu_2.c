@@ -1549,10 +1549,13 @@ static bool8 CheckForLeavingGroupMembers(void)
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (Rfu.partnerSendStatuses[i] == RFU_STATUS_JOIN_GROUP_OK
-            || Rfu.partnerSendStatuses[i] == RFU_STATUS_JOIN_GROUP_NO)
+         || Rfu.partnerSendStatuses[i] == RFU_STATUS_JOIN_GROUP_NO)
+        {
             continue;
+        }
+
         if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS
-            || gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
+         || gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
         {
             if (Rfu.partnerRecvStatuses[i] == RFU_STATUS_LEAVE_GROUP_NOTICE)
             {

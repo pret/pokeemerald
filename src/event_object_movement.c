@@ -8847,8 +8847,7 @@ u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct
     }
     else
     {
-        u8 i;
-        u8 firstFreeSlot;
+        u8 i, firstFreeSlot;
         bool32 found;
         for (firstFreeSlot = 16, found = FALSE, i = 0; i < 16; i++)
         {

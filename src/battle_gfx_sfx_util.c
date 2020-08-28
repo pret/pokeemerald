@@ -1014,15 +1014,12 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
         palOffset = (battlerId * 16) + 0x100;
         LoadCompressedPalette(gSubstituteDollPal, palOffset, 32);
     }
-    else
+    else if (!IsContest())
     {
-        if (!IsContest())
-        {
-            if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-                BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
-            else
-                BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
-        }
+        if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
+            BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
+        else
+            BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
     }
 }
 
