@@ -5236,83 +5236,26 @@ static void Task_ExitSearchWaitForFade(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
-// This doesn't match because gcc flips the naming of the r7 and r6
-// registers. It also does one of the additions backwards.
 void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
 {
     u16 i;
-    u16* ptr = GetBgTilemapBuffer(3);
+    u32 ptr = (u32)GetBgTilemapBuffer(3); //this should be a pointer, but this only matches as a u32.
 
-    u16* temp;
+    u16 temp; //This would have been better as a pointer but here we are
     for (i = 0; i < width; i++)
     {
-        // This addition is supposed to be done in this order; however,
-        // gcc will always do it in ptr + (y * 32) order.
-        temp = (y * 32) + ptr;
-        temp[x + i] %= 0x1000;
-        temp[x + i] |= flags * 0x1000;
+        temp = *(u16 *)(ptr + y * 64 + (x + i) * 2);
 
-        temp[x + i + 32] %= 0x1000;
-        temp[x + i + 32] |= flags * 0x1000;
+        temp &= 0xFFF;
+        temp |= (flags << 12);
+        *(u16 *)(ptr + (y*64 + (x + i)*2) = temp;
+
+        temp = *(u16 *)(ptr + (y + 1)*64 + (x + i)*2);
+        temp &= 0xFFF;
+        temp |= (flags << 12);
+       *(u16 *)(ptr + (y + 1)*64 + (x + i)*2) = temp;
     }
 }
-#else
-NAKED
-void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    adds r4, r3, 0\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r8, r1\n\
-    lsls r2, 24\n\
-    lsrs r5, r2, 24\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    movs r0, 0x3\n\
-    bl GetBgTilemapBuffer\n\
-    adds r2, r0, 0\n\
-    movs r3, 0\n\
-    cmp r3, r4\n\
-    bcs _080C1DEC\n\
-    lsls r0, r5, 6\n\
-    adds r7, r0, r2\n\
-    ldr r5, =0x00000fff\n\
-    lsls r2, r6, 12\n\
-_080C1DC8:\n\
-    mov r0, r8\n\
-    adds r1, r0, r3\n\
-    lsls r1, 1\n\
-    adds r1, r7\n\
-    ldrh r0, [r1]\n\
-    ands r0, r5\n\
-    orrs r0, r2\n\
-    strh r0, [r1]\n\
-    adds r1, 0x40\n\
-    ldrh r0, [r1]\n\
-    ands r0, r5\n\
-    orrs r0, r2\n\
-    strh r0, [r1]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, r4\n\
-    bcc _080C1DC8\n\
-_080C1DEC:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif
 
 #define SEARCH_BG_SEARCH                SEARCH_TOPBAR_SEARCH
 #define SEARCH_BG_SHIFT                 SEARCH_TOPBAR_SHIFT
