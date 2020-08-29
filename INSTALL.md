@@ -1,8 +1,8 @@
 # Prerequisites
 
-| macOS | Windows 10
-| - | -
-| [Xcode Command Line Tools Package][xcode] | [Windows Terminal][terminal] and [Windows Subsystem for Linux (WSL)][wsl]
+| Linux | macOS | Windows 10
+| - | - | -
+| none | [Xcode Command Line Tools Package][xcode] | [Windows Terminal][terminal] and [Windows Subsystem for Linux (WSL)][wsl]
 
 [xcode]: https://developer.apple.com/library/archive/technotes/tn2339/_index.html
 [terminal]: https://docs.microsoft.com/windows/terminal/get-started
