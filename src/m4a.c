@@ -431,8 +431,6 @@ void m4aSoundMode(u32 mode)
 
         soundInfo->maxChans = temp >> SOUND_MODE_MAXCHN_SHIFT;
 
-        temp = MAX_DIRECTSOUND_CHANNELS;
-
         for (temp = MAX_DIRECTSOUND_CHANNELS, chan = soundInfo->chans; temp != 0; temp--,chan++)
         {
             chan->status = 0;

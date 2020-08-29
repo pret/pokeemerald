@@ -140,9 +140,9 @@ struct SoundChannel
     struct WaveData *wav;
     u32 cp;
     struct MusicPlayerTrack *track;
-    void* pp;
-    void* np;
-    void* d4;
+    void *pp;
+    void *np;
+    void *d4;
     u16 xpi;
     u16 xpc;
 };

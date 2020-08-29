@@ -6,7 +6,7 @@
 	.text
 
 	.set SOFT_RESET_DIRECT_BUF, 0x03007FFA
-	.set USER_STACK,			0x03007F00
+	.set USER_STACK,            0x03007F00
 	.set RESET_EX_WRAM_FLAG,           0x1
 
 	.ifdef NO_GRANULAR_AGBSYSCALL
