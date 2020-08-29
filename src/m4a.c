@@ -514,7 +514,7 @@ void m4aSoundVSyncOff(void)
 void m4aSoundVSyncOn(void)
 {
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
-    const u32 ident = soundInfo->ident;
+    u32 ident = soundInfo->ident;
 
     if (ident == ID_NUMBER)
         return;
