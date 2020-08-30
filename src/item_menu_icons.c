@@ -310,51 +310,51 @@ static const struct SpriteTemplate gBerryPicRotatingSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
-static const struct CompressedTilesPal gBerryPicTable[] =
+static const struct CompressedTilesPal sBerryPicTable[] =
 {
-    {gBerryPic_Cheri,  gBerryPalette_Cheri},
-    {gBerryPic_Chesto, gBerryPalette_Chesto},
-    {gBerryPic_Pecha,  gBerryPalette_Pecha},
-    {gBerryPic_Rawst,  gBerryPalette_Rawst},
-    {gBerryPic_Aspear, gBerryPalette_Aspear},
-    {gBerryPic_Leppa,  gBerryPalette_Leppa},
-    {gBerryPic_Oran,   gBerryPalette_Oran},
-    {gBerryPic_Persim, gBerryPalette_Persim},
-    {gBerryPic_Lum,    gBerryPalette_Lum},
-    {gBerryPic_Sitrus, gBerryPalette_Sitrus},
-    {gBerryPic_Figy,   gBerryPalette_Figy},
-    {gBerryPic_Wiki,   gBerryPalette_Wiki},
-    {gBerryPic_Mago,   gBerryPalette_Mago},
-    {gBerryPic_Aguav,  gBerryPalette_Aguav},
-    {gBerryPic_Iapapa, gBerryPalette_Iapapa},
-    {gBerryPic_Razz,   gBerryPalette_Razz},
-    {gBerryPic_Bluk,   gBerryPalette_Bluk},
-    {gBerryPic_Nanab,  gBerryPalette_Nanab},
-    {gBerryPic_Wepear, gBerryPalette_Wepear},
-    {gBerryPic_Pinap,  gBerryPalette_Pinap},
-    {gBerryPic_Pomeg,  gBerryPalette_Pomeg},
-    {gBerryPic_Kelpsy, gBerryPalette_Kelpsy},
-    {gBerryPic_Qualot, gBerryPalette_Qualot},
-    {gBerryPic_Hondew, gBerryPalette_Hondew},
-    {gBerryPic_Grepa,  gBerryPalette_Grepa},
-    {gBerryPic_Tamato, gBerryPalette_Tamato},
-    {gBerryPic_Cornn,  gBerryPalette_Cornn},
-    {gBerryPic_Magost, gBerryPalette_Magost},
-    {gBerryPic_Rabuta, gBerryPalette_Rabuta},
-    {gBerryPic_Nomel,  gBerryPalette_Nomel},
-    {gBerryPic_Spelon, gBerryPalette_Spelon},
-    {gBerryPic_Pamtre, gBerryPalette_Pamtre},
-    {gBerryPic_Watmel, gBerryPalette_Watmel},
-    {gBerryPic_Durin,  gBerryPalette_Durin},
-    {gBerryPic_Belue,  gBerryPalette_Belue},
-    {gBerryPic_Liechi, gBerryPalette_Liechi},
-    {gBerryPic_Ganlon, gBerryPalette_Ganlon},
-    {gBerryPic_Salac,  gBerryPalette_Salac},
-    {gBerryPic_Petaya, gBerryPalette_Petaya},
-    {gBerryPic_Apicot, gBerryPalette_Apicot},
-    {gBerryPic_Lansat, gBerryPalette_Lansat},
-    {gBerryPic_Starf,  gBerryPalette_Starf},
-    {gBerryPic_Enigma, gBerryPalette_Enigma},
+    [ITEM_TO_BERRY(ITEM_CHERI_BERRY)  - 1] = {gBerryPic_Cheri,  gBerryPalette_Cheri},
+    [ITEM_TO_BERRY(ITEM_CHESTO_BERRY) - 1] = {gBerryPic_Chesto, gBerryPalette_Chesto},
+    [ITEM_TO_BERRY(ITEM_PECHA_BERRY)  - 1] = {gBerryPic_Pecha,  gBerryPalette_Pecha},
+    [ITEM_TO_BERRY(ITEM_RAWST_BERRY)  - 1] = {gBerryPic_Rawst,  gBerryPalette_Rawst},
+    [ITEM_TO_BERRY(ITEM_ASPEAR_BERRY) - 1] = {gBerryPic_Aspear, gBerryPalette_Aspear},
+    [ITEM_TO_BERRY(ITEM_LEPPA_BERRY)  - 1] = {gBerryPic_Leppa,  gBerryPalette_Leppa},
+    [ITEM_TO_BERRY(ITEM_ORAN_BERRY)   - 1] = {gBerryPic_Oran,   gBerryPalette_Oran},
+    [ITEM_TO_BERRY(ITEM_PERSIM_BERRY) - 1] = {gBerryPic_Persim, gBerryPalette_Persim},
+    [ITEM_TO_BERRY(ITEM_LUM_BERRY)    - 1] = {gBerryPic_Lum,    gBerryPalette_Lum},
+    [ITEM_TO_BERRY(ITEM_SITRUS_BERRY) - 1] = {gBerryPic_Sitrus, gBerryPalette_Sitrus},
+    [ITEM_TO_BERRY(ITEM_FIGY_BERRY)   - 1] = {gBerryPic_Figy,   gBerryPalette_Figy},
+    [ITEM_TO_BERRY(ITEM_WIKI_BERRY)   - 1] = {gBerryPic_Wiki,   gBerryPalette_Wiki},
+    [ITEM_TO_BERRY(ITEM_MAGO_BERRY)   - 1] = {gBerryPic_Mago,   gBerryPalette_Mago},
+    [ITEM_TO_BERRY(ITEM_AGUAV_BERRY)  - 1] = {gBerryPic_Aguav,  gBerryPalette_Aguav},
+    [ITEM_TO_BERRY(ITEM_IAPAPA_BERRY) - 1] = {gBerryPic_Iapapa, gBerryPalette_Iapapa},
+    [ITEM_TO_BERRY(ITEM_RAZZ_BERRY)   - 1] = {gBerryPic_Razz,   gBerryPalette_Razz},
+    [ITEM_TO_BERRY(ITEM_BLUK_BERRY)   - 1] = {gBerryPic_Bluk,   gBerryPalette_Bluk},
+    [ITEM_TO_BERRY(ITEM_NANAB_BERRY)  - 1] = {gBerryPic_Nanab,  gBerryPalette_Nanab},
+    [ITEM_TO_BERRY(ITEM_WEPEAR_BERRY) - 1] = {gBerryPic_Wepear, gBerryPalette_Wepear},
+    [ITEM_TO_BERRY(ITEM_PINAP_BERRY)  - 1] = {gBerryPic_Pinap,  gBerryPalette_Pinap},
+    [ITEM_TO_BERRY(ITEM_POMEG_BERRY)  - 1] = {gBerryPic_Pomeg,  gBerryPalette_Pomeg},
+    [ITEM_TO_BERRY(ITEM_KELPSY_BERRY) - 1] = {gBerryPic_Kelpsy, gBerryPalette_Kelpsy},
+    [ITEM_TO_BERRY(ITEM_QUALOT_BERRY) - 1] = {gBerryPic_Qualot, gBerryPalette_Qualot},
+    [ITEM_TO_BERRY(ITEM_HONDEW_BERRY) - 1] = {gBerryPic_Hondew, gBerryPalette_Hondew},
+    [ITEM_TO_BERRY(ITEM_GREPA_BERRY)  - 1] = {gBerryPic_Grepa,  gBerryPalette_Grepa},
+    [ITEM_TO_BERRY(ITEM_TAMATO_BERRY) - 1] = {gBerryPic_Tamato, gBerryPalette_Tamato},
+    [ITEM_TO_BERRY(ITEM_CORNN_BERRY)  - 1] = {gBerryPic_Cornn,  gBerryPalette_Cornn},
+    [ITEM_TO_BERRY(ITEM_MAGOST_BERRY) - 1] = {gBerryPic_Magost, gBerryPalette_Magost},
+    [ITEM_TO_BERRY(ITEM_RABUTA_BERRY) - 1] = {gBerryPic_Rabuta, gBerryPalette_Rabuta},
+    [ITEM_TO_BERRY(ITEM_NOMEL_BERRY)  - 1] = {gBerryPic_Nomel,  gBerryPalette_Nomel},
+    [ITEM_TO_BERRY(ITEM_SPELON_BERRY) - 1] = {gBerryPic_Spelon, gBerryPalette_Spelon},
+    [ITEM_TO_BERRY(ITEM_PAMTRE_BERRY) - 1] = {gBerryPic_Pamtre, gBerryPalette_Pamtre},
+    [ITEM_TO_BERRY(ITEM_WATMEL_BERRY) - 1] = {gBerryPic_Watmel, gBerryPalette_Watmel},
+    [ITEM_TO_BERRY(ITEM_DURIN_BERRY)  - 1] = {gBerryPic_Durin,  gBerryPalette_Durin},
+    [ITEM_TO_BERRY(ITEM_BELUE_BERRY)  - 1] = {gBerryPic_Belue,  gBerryPalette_Belue},
+    [ITEM_TO_BERRY(ITEM_LIECHI_BERRY) - 1] = {gBerryPic_Liechi, gBerryPalette_Liechi},
+    [ITEM_TO_BERRY(ITEM_GANLON_BERRY) - 1] = {gBerryPic_Ganlon, gBerryPalette_Ganlon},
+    [ITEM_TO_BERRY(ITEM_SALAC_BERRY)  - 1] = {gBerryPic_Salac,  gBerryPalette_Salac},
+    [ITEM_TO_BERRY(ITEM_PETAYA_BERRY) - 1] = {gBerryPic_Petaya, gBerryPalette_Petaya},
+    [ITEM_TO_BERRY(ITEM_APICOT_BERRY) - 1] = {gBerryPic_Apicot, gBerryPalette_Apicot},
+    [ITEM_TO_BERRY(ITEM_LANSAT_BERRY) - 1] = {gBerryPic_Lansat, gBerryPalette_Lansat},
+    [ITEM_TO_BERRY(ITEM_STARF_BERRY)  - 1] = {gBerryPic_Starf,  gBerryPalette_Starf},
+    [ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1] = {gBerryPic_Enigma, gBerryPalette_Enigma},
 };
 
 const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet =
@@ -581,10 +581,10 @@ static void LoadBerryGfx(u8 berryId)
         // unknown empty if statement
     }
 
-    pal.data = gBerryPicTable[berryId].pal;
+    pal.data = sBerryPicTable[berryId].pal;
     pal.tag = TAG_BERRY_PIC_PAL;
     LoadCompressedSpritePalette(&pal);
-    LZDecompressWram(gBerryPicTable[berryId].tiles, &gDecompressionBuffer[0x1000]);
+    LZDecompressWram(sBerryPicTable[berryId].tiles, &gDecompressionBuffer[0x1000]);
     sub_80D5018(&gDecompressionBuffer[0x1000], &gDecompressionBuffer[0]);
 }
 
@@ -599,7 +599,8 @@ void FreeBerryTagSpritePalette(void)
     FreeSpritePaletteByTag(TAG_BERRY_PIC_PAL);
 }
 
-u8 LoadSpinningBerryPicGfx(u8 berryId, u8 x, u8 y, bool8 startAffine)
+// For throwing berries into the Berry Blender
+u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine)
 {
     u8 spriteId;
 

@@ -534,14 +534,16 @@ void CB2_BagMenuFromBattle(void)
         GoToBattlePyramidBagMenu(1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
+// Choosing berry to plant
 void CB2_ChooseBerry(void)
 {
     GoToBagMenu(ITEMMENULOCATION_BERRY_TREE, BERRIES_POCKET, CB2_ReturnToFieldContinueScript);
 }
 
-void ChooseBerrySetCallback(void (*callback)(void))
+// Choosing berry for Berry Blender or Berry Crush
+void ChooseBerryForMachine(void (*exitCallback)(void))
 {
-    GoToBagMenu(ITEMMENULOCATION_BERRY_BLENDER_CRUSH, BERRIES_POCKET, callback);
+    GoToBagMenu(ITEMMENULOCATION_BERRY_BLENDER_CRUSH, BERRIES_POCKET, exitCallback);
 }
 
 void CB2_GoToSellMenu(void)
