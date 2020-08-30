@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE118",
   "name": "Route118",
   "layout": "LAYOUT_ROUTE118",
-  "music": "MUS_ROUTE_118",
+  "music": "MUS_ROUTE118",
   "region_map_section": "MAPSEC_ROUTE_118",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

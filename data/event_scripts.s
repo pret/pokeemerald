@@ -40,6 +40,7 @@
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/pokemon.h"
+#include "constants/roulette.h"
 #include "constants/script_menu.h"
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
@@ -712,13 +713,13 @@ Common_EventScript_SetAbnormalWeather:: @ 827207A
 	return
 
 Common_EventScript_PlayGymBadgeFanfare:: @ 827207E
-	playfanfare MUS_ME_BACHI
+	playfanfare MUS_OBTAIN_BADGE
 	waitfanfare
 	return
 
 Common_EventScript_OutOfCenterPartyHeal:: @ 8272083
 	fadescreen FADE_TO_BLACK
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 	fadescreen FADE_FROM_BLACK
@@ -735,7 +736,7 @@ EventScript_RegionMap:: @ 827208F
 
 Common_EventScript_PlayBrineysBoatMusic:: @ 82720A0
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_M_BOAT, 0
+	playbgm MUS_SAILING, 0
 	return
 
 Common_EventScript_StopBrineysBoatMusic:: @ 82720A8
@@ -819,7 +820,7 @@ Common_EventScript_NameReceivedPartyMon:: @ 82723DD
 
 Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	bufferitemname 0, VAR_0x8004
-	playfanfare MUS_ME_WAZA
+	playfanfare MUS_OBTAIN_TMHM
 	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare

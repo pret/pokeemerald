@@ -56,9 +56,9 @@ static EWRAM_DATA u8 sPaletteNum = 0;
 static EWRAM_DATA u8 sYesNoWindowId = 0;
 static EWRAM_DATA u8 sWindowId = 0;
 static EWRAM_DATA u16 sFiller = 0;  // needed to align
-static EWRAM_DATA bool8 gUnknown_0203CDA4[4] = {FALSE};
-static EWRAM_DATA u16 gUnknown_0203CDA8 = 0;
-static EWRAM_DATA void *gUnknown_0203CDAC[0x20] = {NULL};
+static EWRAM_DATA bool8 sScheduledBgCopiesToVram[4] = {FALSE};
+static EWRAM_DATA u16 sTempTileDataBufferIdx = 0;
+static EWRAM_DATA void *sTempTileDataBuffer[0x20] = {NULL};
 
 const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
 
@@ -153,7 +153,7 @@ void FreeAllOverworldWindowBuffers(void)
     FreeAllWindowBuffers();
 }
 
-void sub_8197200(void)
+void InitTextBoxGfxAndPrinters(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -1299,10 +1299,12 @@ u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, 
     else
         sMenu.cursorPos = pos;
 
-    sub_8199134(0, 0);
+    // Why call this when it's not gonna move?
+    ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_NONE);
     return sMenu.cursorPos;
 }
 
+// Unused
 u8 sub_8198FD4(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7)
 {
     u8 cursorHeight = GetMenuCursorDimensionByFont(fontId, 1);
@@ -1333,40 +1335,28 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
                       0);
 }
 
-u8 sub_8199134(s8 deltaX, s8 deltaY)
+u8 ChangeListMenuCursorPosition(s8 deltaX, s8 deltaY)
 {
     u8 oldPos = sMenu.cursorPos;
 
     if (deltaX != 0)
     {
         if ((sMenu.cursorPos % sMenu.columns) + deltaX < 0)
-        {
             sMenu.cursorPos += sMenu.columns - 1;
-        }
         else if ((sMenu.cursorPos % sMenu.columns) + deltaX >= sMenu.columns)
-        {
             sMenu.cursorPos = (sMenu.cursorPos / sMenu.columns) * sMenu.columns;
-        }
         else
-        {
             sMenu.cursorPos += deltaX;
-        }
     }
 
     if (deltaY != 0)
     {
         if ((sMenu.cursorPos / sMenu.columns) + deltaY < 0)
-        {
             sMenu.cursorPos += sMenu.columns * (sMenu.rows - 1);
-        }
         else if ((sMenu.cursorPos / sMenu.columns) + deltaY >= sMenu.rows)
-        {
             sMenu.cursorPos -= sMenu.columns * (sMenu.rows - 1);
-        }
         else
-        {
             sMenu.cursorPos += (sMenu.columns * deltaY);
-        }
     }
 
     if (sMenu.cursorPos > sMenu.maxCursorPos)
@@ -1381,7 +1371,7 @@ u8 sub_8199134(s8 deltaX, s8 deltaY)
     }
 }
 
-u8 sub_81991F8(s8 deltaX, s8 deltaY)
+u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
 {
     u8 oldPos = sMenu.cursorPos;
 
@@ -1429,25 +1419,25 @@ s8 sub_8199284(void)
     else if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(0, -1);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(0, 1);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
     else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(-1, 0);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
     else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(1, 0);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
 
@@ -1469,25 +1459,25 @@ s8 Menu_ProcessInputGridLayout(void)
     }
     else if (gMain.newKeys & DPAD_UP)
     {
-        if (oldPos != sub_81991F8(0, -1))
+        if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        if (oldPos != sub_81991F8(0, 1))
+        if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
     {
-        if (oldPos != sub_81991F8(-1, 0))
+        if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
     {
-        if (oldPos != sub_81991F8(1, 0))
+        if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
@@ -1509,31 +1499,32 @@ s8 sub_81993D8(void)
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(0, -1);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(0, 1);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(-1, 0);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
-        sub_8199134(1, 0);
+        ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
 
     return MENU_NOTHING_CHOSEN;
 }
 
+//Unused
 s8 sub_8199484(void)
 {
     u8 oldPos = sMenu.cursorPos;
@@ -1549,25 +1540,25 @@ s8 sub_8199484(void)
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
     {
-        if (oldPos != sub_81991F8(0, -1))
+        if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
     {
-        if (oldPos != sub_81991F8(0, 1))
+        if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
-        if (oldPos != sub_81991F8(-1, 0))
+        if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
-        if (oldPos != sub_81991F8(1, 0))
+        if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
@@ -1732,52 +1723,53 @@ u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCurso
     else
         sMenu.cursorPos = pos;
 
-    sub_8199134(0, 0);
+    // Why call this when it's not gonna move?
+    ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_NONE);
     return sMenu.cursorPos;
 }
 
-void clear_scheduled_bg_copies_to_vram(void)
+void ClearScheduledBgCopiesToVram(void)
 {
-    memset(gUnknown_0203CDA4, 0, sizeof(gUnknown_0203CDA4));
+    memset(sScheduledBgCopiesToVram, 0, sizeof(sScheduledBgCopiesToVram));
 }
 
 void ScheduleBgCopyTilemapToVram(u8 bgId)
 {
-    gUnknown_0203CDA4[bgId] = TRUE;
+    sScheduledBgCopiesToVram[bgId] = TRUE;
 }
 
-void do_scheduled_bg_tilemap_copies_to_vram(void)
+void DoScheduledBgTilemapCopiesToVram(void)
 {
-    if (gUnknown_0203CDA4[0] == TRUE)
+    if (sScheduledBgCopiesToVram[0] == TRUE)
     {
         CopyBgTilemapBufferToVram(0);
-        gUnknown_0203CDA4[0] = FALSE;
+        sScheduledBgCopiesToVram[0] = FALSE;
     }
-    if (gUnknown_0203CDA4[1] == TRUE)
+    if (sScheduledBgCopiesToVram[1] == TRUE)
     {
         CopyBgTilemapBufferToVram(1);
-        gUnknown_0203CDA4[1] = FALSE;
+        sScheduledBgCopiesToVram[1] = FALSE;
     }
-    if (gUnknown_0203CDA4[2] == TRUE)
+    if (sScheduledBgCopiesToVram[2] == TRUE)
     {
         CopyBgTilemapBufferToVram(2);
-        gUnknown_0203CDA4[2] = FALSE;
+        sScheduledBgCopiesToVram[2] = FALSE;
     }
-    if (gUnknown_0203CDA4[3] == TRUE)
+    if (sScheduledBgCopiesToVram[3] == TRUE)
     {
         CopyBgTilemapBufferToVram(3);
-        gUnknown_0203CDA4[3] = FALSE;
+        sScheduledBgCopiesToVram[3] = FALSE;
     }
 }
 
 void ResetTempTileDataBuffers(void)
 {
     int i;
-    for (i = 0; i < (s32)ARRAY_COUNT(gUnknown_0203CDAC); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sTempTileDataBuffer); i++)
     {
-        gUnknown_0203CDAC[i] = NULL;
+        sTempTileDataBuffer[i] = NULL;
     }
-    gUnknown_0203CDA8 = 0;
+    sTempTileDataBufferIdx = 0;
 }
 
 bool8 FreeTempTileDataBuffersIfPossible(void)
@@ -1786,13 +1778,13 @@ bool8 FreeTempTileDataBuffersIfPossible(void)
 
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        if (gUnknown_0203CDA8)
+        if (sTempTileDataBufferIdx)
         {
-            for (i = 0; i < gUnknown_0203CDA8; i++)
+            for (i = 0; i < sTempTileDataBufferIdx; i++)
             {
-                FREE_AND_SET_NULL(gUnknown_0203CDAC[i]);
+                FREE_AND_SET_NULL(sTempTileDataBuffer[i]);
             }
-            gUnknown_0203CDA8 = 0;
+            sTempTileDataBufferIdx = 0;
         }
         return FALSE;
     }
@@ -1805,7 +1797,7 @@ bool8 FreeTempTileDataBuffersIfPossible(void)
 void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
     u32 sizeOut;
-    if (gUnknown_0203CDA8 < ARRAY_COUNT(gUnknown_0203CDAC))
+    if (sTempTileDataBufferIdx < ARRAY_COUNT(sTempTileDataBuffer))
     {
         void *ptr = malloc_and_decompress(src, &sizeOut);
         if (!size)
@@ -1813,7 +1805,7 @@ void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 of
         if (ptr)
         {
             copy_decompressed_tile_data_to_vram(bgId, ptr, size, offset, mode);
-            gUnknown_0203CDAC[gUnknown_0203CDA8++] = ptr;
+            sTempTileDataBuffer[sTempTileDataBufferIdx++] = ptr;
         }
         return ptr;
     }

@@ -2,7 +2,7 @@
   "id": "MAP_SLATEPORT_CITY_MART",
   "name": "SlateportCity_Mart",
   "layout": "LAYOUT_MART",
-  "music": "MUS_FRIENDLY",
+  "music": "MUS_POKE_MART",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

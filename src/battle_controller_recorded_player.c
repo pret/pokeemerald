@@ -1286,7 +1286,7 @@ static void RecordedPlayerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            PlaySE12WithPanning(SE_POKE_DEAD, -64);
+            PlaySE12WithPanning(SE_FAINT, -64);
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8039C00;

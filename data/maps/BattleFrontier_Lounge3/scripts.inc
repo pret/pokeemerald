@@ -74,7 +74,7 @@ BattleFrontier_Lounge3_EventScript_PlaceBet:: @ 8261E75
 	special TakeFrontierBattlePoints
 	setvar VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET
 	special UpdateBattlePointsWindow
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox BattleFrontier_Lounge3_Text_ThanksOffYouGo, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_FinishBet
 	end

@@ -816,7 +816,7 @@ static void AnimTask_ThrowBall_StandingTrainer_Step(u8 taskId)
 {
     if (gSprites[gBattlerSpriteIds[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]].animCmdIndex == 1)
     {
-        PlaySE12WithPanning(SE_NAGERU, 0);
+        PlaySE12WithPanning(SE_BALL_THROW, 0);
         gSprites[gTasks[taskId].tSpriteId].callback = SpriteCB_Ball_Throw;
         CreateTask(Task_PlayerThrow_Wait, 10);
         gTasks[taskId].func = AnimTask_ThrowBall_Step;
@@ -935,7 +935,7 @@ static void SpriteCB_Ball_MonShrink_Step(struct Sprite *sprite)
     taskId = sprite->sTaskId;
 
     if (++gTasks[taskId].sTimer == 11)
-        PlaySE(SE_SUIKOMU);
+        PlaySE(SE_BALL_TRADE);
 
     switch (gTasks[taskId].tState)
     {
@@ -1042,16 +1042,16 @@ static void SpriteCB_Ball_Bounce_Step(struct Sprite *sprite)
             switch (bounceCount)
             {
             case 1:
-                PlaySE(SE_KON);
+                PlaySE(SE_BALL_BOUNCE_1);
                 break;
             case 2:
-                PlaySE(SE_KON2);
+                PlaySE(SE_BALL_BOUNCE_2);
                 break;
             case 3:
-                PlaySE(SE_KON3);
+                PlaySE(SE_BALL_BOUNCE_3);
                 break;
             default:
-                PlaySE(SE_KON4);
+                PlaySE(SE_BALL_BOUNCE_4);
                 break;
             }
         }
@@ -1111,7 +1111,7 @@ static void SpriteCB_Ball_Wobble(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, BALL_ROTATE_RIGHT);
         gBattleSpritesDataPtr->animationData->ballSubpx = 0;
         sprite->callback = SpriteCB_Ball_Wobble_Step;
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
     }
 }
 
@@ -1258,7 +1258,7 @@ static void SpriteCB_Ball_Wobble_Step(struct Sprite *sprite)
             else
                 StartSpriteAffineAnim(sprite, BALL_ROTATE_RIGHT);
 
-            PlaySE(SE_BOWA);
+            PlaySE(SE_BALL);
         }
         break;
     }
@@ -1303,7 +1303,7 @@ static void SpriteCB_Ball_Capture_Step(struct Sprite *sprite)
     sprite->sTimer++;
     if (sprite->sTimer == 40)
     {
-        PlaySE(SE_RG_GETTING);
+        PlaySE(SE_RG_BALL_CLICK);
         BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB(0, 0, 0));
         MakeCaptureStars(sprite);
     }
@@ -1316,7 +1316,7 @@ static void SpriteCB_Ball_Capture_Step(struct Sprite *sprite)
         gDoingBattleAnim = FALSE;
         UpdateOamPriorityInAllHealthboxes(1);
         m4aMPlayAllStop();
-        PlaySE(MUS_RG_FAN6);
+        PlaySE(MUS_RG_CAUGHT_INTRO);
     }
     else if (sprite->sTimer == 315)
     {
@@ -1570,7 +1570,7 @@ u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId)
     gTasks[taskId].data[3] = priority;
     gTasks[taskId].data[4] = subpriority;
     gTasks[taskId].data[15] = ballId;
-    PlaySE(SE_BOWA2);
+    PlaySE(SE_BALL_OPEN);
 
     return taskId;
 }
@@ -2309,7 +2309,7 @@ static void Task_ShinyStars(u8 taskId)
             else
                 pan = 63;
 
-            PlaySE12WithPanning(SE_REAPOKE, pan);
+            PlaySE12WithPanning(SE_SHINY, pan);
         }
     }
 

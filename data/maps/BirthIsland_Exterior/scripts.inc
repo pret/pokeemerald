@@ -71,9 +71,9 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
 	setfieldeffectargument 1, 58
 	setfieldeffectargument 2, 26
-	dofieldeffect FLDEFF_65
-	playbgm MUS_RG_DEOEYE, 0
-	waitfieldeffect FLDEFF_65
+	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
+	playbgm MUS_RG_ENCOUNTER_DEOXYS, 0
+	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	addobject LOCALID_DEOXYS
 	applymovement LOCALID_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
 	waitmovement 0

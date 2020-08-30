@@ -2884,7 +2884,11 @@ static void sub_8181C2C(struct Sprite *sprite)
     }
     else
     {
-        register s32 var asm("r4") = sUnknown_03001240[sprite->data[0]].field_8;
+        #ifndef NONMATCHING
+            register s32 var asm("r4") = sUnknown_03001240[sprite->data[0]].field_8;
+        #else
+            s32 var = sUnknown_03001240[sprite->data[0]].field_8;
+        #endif
 
         sprite->pos2.x = (var << 3) * (counter % 128) / 128 - (sUnknown_03001240[sprite->data[0]].field_8 * 8);
         sprite->pos2.y = -(Sin(counter % 128, 8));

@@ -84,6 +84,10 @@
 #define NUM_NATURE_STATS NUM_STATS - 1 // excludes HP
 #define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
 
+#define MIN_STAT_STAGE     0
+#define DEFAULT_STAT_STAGE 6
+#define MAX_STAT_STAGE    12
+
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
 
@@ -200,6 +204,8 @@
 #define LEVEL_UP_MOVE_LV   0xFE00
 #define LEVEL_UP_END       0xFFFF
 
+#define MAX_LEVEL_UP_MOVES       20
+
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
@@ -226,6 +232,7 @@
 #define STATUS_PRIMARY_POKERUS   6
 #define STATUS_PRIMARY_FAINTED   7
 
+#define MAX_PER_STAT_EVS 255
 #define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT 100
 

@@ -416,7 +416,7 @@ static void CB2_BuyMenu(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -446,7 +446,7 @@ static void CB2_InitBuyMenu(void)
         ResetPaletteFade();
         ResetSpriteData();
         ResetTasks();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gShopDataPtr = AllocZeroed(sizeof(struct ShopData));
         gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
         gShopDataPtr->itemSpriteIds[0] = 0xFF;
@@ -1089,7 +1089,7 @@ static void BuyMenuSubtractMoney(u8 taskId)
 {
     IncrementGameStat(GAME_STAT_SHOPPED);
     RemoveMoney(&gSaveBlock1Ptr->money, gShopDataPtr->totalCost);
-    PlaySE(SE_REGI);
+    PlaySE(SE_SHOP);
     PrintMoneyAmountInMoneyBox(0, GetMoney(&gSaveBlock1Ptr->money), 0);
 
     if (gMartInfo.martType == MART_TYPE_NORMAL)

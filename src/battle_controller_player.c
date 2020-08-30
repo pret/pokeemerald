@@ -853,7 +853,7 @@ static void sub_80586F8(void)
     {
         if (gReceivedRemoteLinkPlayers == 0)
         {
-            m4aSongNumStop(SE_HINSI);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = 0;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(sub_8038D64);
@@ -866,7 +866,7 @@ static void sub_80586F8(void)
     {
         if (IsLinkTaskFinished())
         {
-            m4aSongNumStop(SE_HINSI);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = 0;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(sub_8038D64);
@@ -886,16 +886,16 @@ void sub_80587B0(void)
             if (IsLinkTaskFinished())
             {
                 if (gWirelessCommType == 0)
-                    sub_800AC34();
+                    SetCloseLinkCallback();
                 else
-                    sub_800ADF8();
+                    SetLinkStandbyCallback();
 
                 gBattlerControllerFuncs[gActiveBattler] = sub_80586F8;
             }
         }
         else
         {
-            m4aSongNumStop(SE_HINSI);
+            m4aSongNumStop(SE_LOW_HEALTH);
             gMain.inBattle = 0;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);
@@ -1468,8 +1468,7 @@ static void MoveSelectionDisplayPpNumber(void)
     SetPpNumbersPaletteInMoveSelection();
     moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    txtPtr[0] = CHAR_SLASH;
-    txtPtr++;
+    *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
 
     BattlePutTextOnWindow(gDisplayedStringBattle, 9);
@@ -1481,12 +1480,9 @@ static void MoveSelectionDisplayMoveType(void)
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
 
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
-    txtPtr[0] = EXT_CTRL_CODE_BEGIN;
-    txtPtr++;
-    txtPtr[0] = 6;
-    txtPtr++;
-    txtPtr[0] = 1;
-    txtPtr++;
+    *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
+    *(txtPtr)++ = EXT_CTRL_CODE_SIZE;
+    *(txtPtr)++ = 1;
 
     StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, 10);
@@ -2396,7 +2392,7 @@ static void PlayerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_ATTACKER);
+            PlaySE12WithPanning(SE_FAINT, SOUND_PAN_ATTACKER);
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8039C00;

@@ -2,7 +2,7 @@
   "id": "MAP_PETALBURG_CITY",
   "name": "PetalburgCity",
   "layout": "LAYOUT_PETALBURG_CITY",
-  "music": "MUS_MACHI_S2",
+  "music": "MUS_PETALBURG",
   "region_map_section": "MAPSEC_PETALBURG_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -35,8 +35,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_WallyAunt",
-      "flag": "FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT"
+      "script": "PetalburgCity_EventScript_WallysMom",
+      "flag": "FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WALLY",
@@ -88,7 +88,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE"
+      "flag": "FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",

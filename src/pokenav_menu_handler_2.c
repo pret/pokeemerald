@@ -465,7 +465,7 @@ static u32 LoopedTask_OpenMenu(s32 state)
             PokenavFadeScreen(1);
         else
         {
-            PlaySE(SE_PN_ON);
+            PlaySE(SE_POKENAV_ON);
             PokenavFadeScreen(3);
         }
         switch (GetPokenavMenuType())
@@ -675,7 +675,7 @@ static u32 LoopedTask_SelectRibbonsNoWinners(s32 state)
     switch (state)
     {
     case 0:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintNoRibbonWinners();
         return LT_INC_AND_PAUSE;
     case 1:

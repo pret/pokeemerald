@@ -467,7 +467,7 @@ void CB2_InitResetRtcScreen(void)
 
 static void sub_809F048(void)
 {
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     ScheduleBgCopyTilemapToVram(0);
@@ -483,7 +483,7 @@ static void CB2_ResetRtcScreen(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -611,7 +611,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         if (TrySavingData(SAVE_NORMAL) == SAVE_STATUS_OK)
         {
             ShowMessage(gText_SaveCompleted);
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
         }
         else
         {

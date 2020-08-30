@@ -749,7 +749,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_Pokeball[] =
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 4105,
+    .paletteTag = FLDEFF_PAL_TAG_POKEBALL,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_Pokeball,
     .images = sSpriteImage_Pokeball,
@@ -798,7 +798,7 @@ static const union AnimCmd *const sSpriteAnimTable_UnusedBrendanLass[] =
 static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 4106,
+    .paletteTag = 0x100A,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,
     .images = sImageTable_UnusedBrendan,
@@ -809,7 +809,7 @@ static const struct SpriteTemplate sSpriteTemplate_UnusedBrendan =
 static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
 {
     .tileTag = 0xFFFF,
-    .paletteTag = 4106,
+    .paletteTag = 0x100A,
     .oam = &sOam_UnusedBrendanLass,
     .anims = sSpriteAnimTable_UnusedBrendanLass,
     .images = sImageTable_UnusedLass,
@@ -817,12 +817,9 @@ static const struct SpriteTemplate sSpriteTemplate_UnusedLass =
     .callback = SpriteCb_TrainerPic
 };
 
-static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/field_effects/palettes/10.gbapal");
+static const u16 sFieldEffectPal_Pokeball[] = INCBIN_U16("graphics/field_effects/palettes/pokeball.gbapal");
 
-const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
-{
-    gFieldEffectObjectPalette10, 0x1009
-};
+const struct SpritePalette gSpritePalette_Pokeball = {sFieldEffectPal_Pokeball, FLDEFF_PAL_TAG_POKEBALL};
 
 static const u16 sMugshotPal_Sidney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
 static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
@@ -848,10 +845,7 @@ static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
 };
 
 static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
-static const struct SpritePalette sSpritePalette_UnusedTrainer =
-{
-    sUnusedTrainerPalette, 0x100A
-};
+static const struct SpritePalette sSpritePalette_UnusedTrainer = {sUnusedTrainerPalette, 0x100A};
 
 static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");
 static const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/elite_four_bg_map.bin");
@@ -1323,7 +1317,7 @@ static bool8 Phase2_BigPokeball_Func1(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     CpuFill16(0, tilemap, 0x800);
     CpuCopy16(sBigPokeball_Tileset, tileset, 0x580);
-    LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
+    LoadPalette(sFieldEffectPal_Pokeball, 0xF0, 0x20);
 
     task->tState++;
     return FALSE;
@@ -1629,7 +1623,7 @@ static bool8 Phase2_PokeballsTrail_Func1(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     CpuSet(sPokeballTrail_Tileset, tileset, 0x20);
     CpuFill32(0, tilemap, 0x800);
-    LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
+    LoadPalette(sFieldEffectPal_Pokeball, 0xF0, 0x20);
 
     task->tState++;
     return FALSE;
@@ -2233,7 +2227,7 @@ static bool8 Phase2_Mugshot_Func4(struct Task *task)
     SetTrainerPicSlideTable(task->tPlayerSpriteId, 1);
     IncrementTrainerPicState(task->tOpponentSpriteId);
 
-    PlaySE(SE_BT_START);
+    PlaySE(SE_MUGSHOT);
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
@@ -2919,7 +2913,7 @@ static bool8 Phase2_RectangularSpiral_Func1(struct Task *task)
     CpuCopy16(sShrinkingBoxTileset, tileset, 0x20);
     CpuCopy16(sShrinkingBoxTileset + 0x70, tileset + 0x20, 0x20);
     CpuFill16(0xF000, tilemap, 0x800);
-    LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
+    LoadPalette(sFieldEffectPal_Pokeball, 0xF0, 0x20);
 
     task->tData3 = 1;
     task->tState++;
@@ -3428,7 +3422,7 @@ static bool8 Phase2_GridSquares_Func1(struct Task *task)
     GetBg0TilesDst(&tilemap, &tileset);
     CpuSet(sShrinkingBoxTileset, tileset, 0x10);
     CpuFill16(0xF000, tilemap, 0x800);
-    LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
+    LoadPalette(sFieldEffectPal_Pokeball, 0xF0, 0x20);
 
     task->tState++;
     return FALSE;
@@ -3980,7 +3974,9 @@ static bool8 Phase2_FrontierLogoWave_Func4(struct Task *task)
     for (i = 0; i < 160; i++, var6 += var8)
     {
         s16 index = var6 / 256;
-        asm("");
+        #ifndef NONMATCHING
+            asm("");
+        #endif
         gScanlineEffectRegBuffers[0][i] = sTransitionStructPtr->field_16 + Sin(index, amplitude);
     }
 

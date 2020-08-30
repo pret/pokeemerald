@@ -52,7 +52,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter:: @ 820090F
 	applymovement LOCALID_OPPONENT, FallarborTown_BattleTentBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	applymovement LOCALID_ATTENDANT, FallarborTown_BattleTentBattleRoom_Movement_AttendantJump
-	playse SE_W187
+	playse SE_M_BELLY_DRUM
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_SetKOTourneyBegin, MSGBOX_DEFAULT
@@ -63,7 +63,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter:: @ 820090F
 	switch VAR_RESULT
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent
 	applymovement LOCALID_ATTENDANT, FallarborTown_BattleTentBattleRoom_Movement_AttendantJump
-	playse SE_W173
+	playse SE_M_SNORE
 	waitse
 	waitmovement 0
 	fallarbortent_getopponentname
@@ -76,7 +76,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost:: @ 820097E
 
 FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent:: @ 820099C
 	applymovement LOCALID_ATTENDANT, FallarborTown_BattleTentBattleRoom_Movement_AttendantJump
-	playse SE_BAN
+	playse SE_BANG
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsPlayer, MSGBOX_DEFAULT
@@ -98,7 +98,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum:: @ 82009B3
 	special LoadPlayerParty
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge:: @ 8200A2A

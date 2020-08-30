@@ -44,7 +44,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader);
 static void LoadSavedMapView(void);
 static bool8 SkipCopyingMetatileFromSavedMap(u16* mapMetatilePtr, u16 mapWidth, u8 yMode);
 
-struct MapHeader const *const mapconnection_get_mapheader(struct MapConnection *connection)
+struct MapHeader const *const GetMapHeaderFromConnection(struct MapConnection *connection)
 {
     return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
@@ -124,7 +124,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
         gMapConnectionFlags = sDummyConnectionFlags;
         for (i = 0; i < count; i++, connection++)
         {
-            struct MapHeader const *cMap = mapconnection_get_mapheader(connection);
+            struct MapHeader const *cMap = GetMapHeaderFromConnection(connection);
             u32 offset = connection->offset;
             switch (connection->direction)
             {
@@ -741,7 +741,7 @@ int CanCameraMoveInDirection(int direction)
 void sub_80887F8(struct MapConnection *connection, int direction, int x, int y)
 {
     struct MapHeader const *mapHeader;
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
     switch (direction)
     {
     case CONNECTION_EAST:
@@ -812,7 +812,7 @@ struct MapConnection *sub_8088950(u8 direction, int x, int y)
 bool8 sub_80889A8(u8 direction, int x, int y, struct MapConnection *connection)
 {
     struct MapHeader const *mapHeader;
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
     switch (direction)
     {
     case CONNECTION_SOUTH:
@@ -853,7 +853,7 @@ int sub_8088A38(int x, int width)
 int sub_8088A4C(struct MapConnection *connection, int x, int y)
 {
     struct MapHeader const *mapHeader;
-    mapHeader = mapconnection_get_mapheader(connection);
+    mapHeader = GetMapHeaderFromConnection(connection);
     switch (connection->direction)
     {
     case CONNECTION_SOUTH:
@@ -900,7 +900,7 @@ struct MapConnection *GetConnectionAtCoords(s16 x, s16 y)
     return NULL;
 }
 
-void sub_8088B3C(u16 x, u16 y)
+void SetCameraFocusCoords(u16 x, u16 y)
 {
     gSaveBlock1Ptr->pos.x = x - 7;
     gSaveBlock1Ptr->pos.y = y - 7;
@@ -912,7 +912,8 @@ void GetCameraFocusCoords(u16 *x, u16 *y)
     *y = gSaveBlock1Ptr->pos.y + 7;
 }
 
-void SetPlayerCoords(u16 x, u16 y)
+// Unused
+static void SetCameraCoords(u16 x, u16 y)
 {
     gSaveBlock1Ptr->pos.x = x;
     gSaveBlock1Ptr->pos.y = y;
@@ -945,12 +946,12 @@ static bool8 SkipCopyingMetatileFromSavedMap(u16* mapMetatilePtr, u16 mapWidth, 
     else
         mapMetatilePtr += mapWidth;
 
-    if (sub_80FADE4(*mapMetatilePtr & METATILE_ID_MASK, yMode) == 1)
+    if (IsLargeBreakableDecoration(*mapMetatilePtr & METATILE_ID_MASK, yMode) == TRUE)
         return TRUE;
     return FALSE;
 }
 
-void copy_tileset_patterns_to_vram(struct Tileset const *tileset, u16 numTiles, u16 offset)
+static void CopyTilesetToVram(struct Tileset const *tileset, u16 numTiles, u16 offset)
 {
     if (tileset)
     {
@@ -961,7 +962,7 @@ void copy_tileset_patterns_to_vram(struct Tileset const *tileset, u16 numTiles, 
     }
 }
 
-void copy_tileset_patterns_to_vram2(struct Tileset const *tileset, u16 numTiles, u16 offset)
+static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTiles, u16 offset)
 {
     if (tileset)
     {
@@ -982,7 +983,7 @@ void nullsub_90(void)
 
 }
 
-void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u16 size)
+void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size)
 {
     u16 black = RGB_BLACK;
 
@@ -1007,45 +1008,45 @@ void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u1
     }
 }
 
-void copy_map_tileset1_to_vram(struct MapLayout const *mapLayout)
+void CopyPrimaryTilesetToVram(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+    CopyTilesetToVram(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
 }
 
-void copy_map_tileset2_to_vram(struct MapLayout const *mapLayout)
+void CopySecondaryTilesetToVram(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
-void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout)
+void CopySecondaryTilesetToVramUsingHeap(struct MapLayout const *mapLayout)
 {
-    copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
-void apply_map_tileset1_palette(struct MapLayout const *mapLayout)
+static void LoadPrimaryTilesetPalette(struct MapLayout const *mapLayout)
 {
-    apply_map_tileset_palette(mapLayout->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
+    LoadTilesetPalette(mapLayout->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
 }
 
-void apply_map_tileset2_palette(struct MapLayout const *mapLayout)
+void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout)
 {
-    apply_map_tileset_palette(mapLayout->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
+    LoadTilesetPalette(mapLayout->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
 }
 
-void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout)
+void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)
 {
     if (mapLayout)
     {
-        copy_tileset_patterns_to_vram2(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
-        copy_tileset_patterns_to_vram2(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+        CopyTilesetToVramUsingHeap(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+        CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
     }
 }
 
-void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout)
+void LoadMapTilesetPalettes(struct MapLayout const *mapLayout)
 {
     if (mapLayout)
     {
-        apply_map_tileset1_palette(mapLayout);
-        apply_map_tileset2_palette(mapLayout);
+        LoadPrimaryTilesetPalette(mapLayout);
+        LoadSecondaryTilesetPalette(mapLayout);
     }
 }

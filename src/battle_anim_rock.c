@@ -631,7 +631,7 @@ static void AnimTask_Rollout_Step(u8 taskId)
             task->data[0]++;
         }
 
-        PlaySE12WithPanning(SE_W029, task->data[13]);
+        PlaySE12WithPanning(SE_M_HEADBUTT, task->data[13]);
         break;
     case 1:
         if (--task->data[11] == 0)
@@ -661,7 +661,7 @@ static void AnimTask_Rollout_Step(u8 taskId)
             task->data[9] = 0;
             sub_8111214(task);
             task->data[13] += task->data[14];
-            PlaySE12WithPanning(SE_W091, task->data[13]);
+            PlaySE12WithPanning(SE_M_DIG, task->data[13]);
         }
 
         if (--task->data[8] == 0)

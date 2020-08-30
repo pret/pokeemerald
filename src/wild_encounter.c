@@ -185,13 +185,6 @@ static u8 ChooseWildMonIndex_WaterRock(void)
         return 4;
 }
 
-enum
-{
-    OLD_ROD,
-    GOOD_ROD,
-    SUPER_ROD
-};
-
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
     u8 wildMonIndex = 0;

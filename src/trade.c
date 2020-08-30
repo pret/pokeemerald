@@ -246,9 +246,9 @@ static bool8 SendLinkData(const void *linkData, u32 size)
     }
 }
 
-static void sub_80771AC(u8 a0)
+static void RequestLinkData(u8 type)
 {
-    sub_800A4D8(a0);
+    SendBlockRequest(type);
 }
 
 static bool32 sub_80771BC(void)
@@ -295,9 +295,9 @@ static bool32 IsWirelessTrade(void)
         return FALSE;
 }
 
-static void sub_8077288(u8 unused)
+static void SetTradeLinkStandbyCallback(u8 unused)
 {
-    sub_800ADF8();
+    SetLinkStandbyCallback();
 }
 
 static bool32 _IsLinkTaskFinished(void)
@@ -445,7 +445,7 @@ static void CB2_CreateTradeMenu(void)
             if (gWirelessCommType)
             {
                 sub_801048C(TRUE);
-                sub_800ADF8();
+                SetLinkStandbyCallback();
             }
         }
         break;
@@ -570,7 +570,7 @@ static void CB2_CreateTradeMenu(void)
         sTradeMenuData->bg3hofs = 0;
         SetTradePartyMonsVisible();
         gMain.state++;
-        PlayBGM(MUS_P_SCHOOL);
+        PlayBGM(MUS_SCHOOL);
         break;
     case 15:
         SetTradePartyLiveStatuses(TRADE_PARTNER);
@@ -825,7 +825,7 @@ static void LinkTradeWaitForFade(void)
         }
         else
         {
-            sub_800ABF4(32);
+            SetCloseLinkCallbackAndType(32);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_START_LINK_TRADE;
         }
     }
@@ -983,7 +983,7 @@ static bool8 BufferTradeParties(void)
     case 3:
         if (id == 0)
         {
-            sub_80771AC(1);
+            RequestLinkData(1);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1002,7 +1002,7 @@ static bool8 BufferTradeParties(void)
     case 7:
         if (id == 0)
         {
-            sub_80771AC(1);
+            RequestLinkData(1);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1021,7 +1021,7 @@ static bool8 BufferTradeParties(void)
     case 11:
         if (id == 0)
         {
-            sub_80771AC(1);
+            RequestLinkData(1);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1040,7 +1040,7 @@ static bool8 BufferTradeParties(void)
     case 15:
         if (id == 0)
         {
-            sub_80771AC(3);
+            RequestLinkData(3);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1059,7 +1059,7 @@ static bool8 BufferTradeParties(void)
     case 19:
         if (id == 0)
         {
-            sub_80771AC(4);
+            RequestLinkData(4);
         }
         sTradeMenuData->bufferPartyState++;
         break;
@@ -1652,11 +1652,11 @@ static void CancelTrade_1(void)
     {
         if (gWirelessCommType)
         {
-            sub_800ADF8();
+            SetLinkStandbyCallback();
         }
         else
         {
-            sub_800ABF4(12);
+            SetCloseLinkCallbackAndType(12);
         }
 
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_CANCEL_TRADE_2;
@@ -1692,7 +1692,7 @@ static void LinkTradeWaitForQueue(void)
 {
     if (!sub_801048C(FALSE) && GetNumQueuedActions() == 0)
     {
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_START_LINK_TRADE;
     }
 }
@@ -2573,7 +2573,7 @@ static void sub_807AA28(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 10)
     {
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
         sprite->data[0] = 0;
     }
 }
@@ -2582,7 +2582,7 @@ static void sub_807AA4C(struct Sprite *sprite)
 {
     if (!sprite->invisible && ++sprite->data[0] == 10)
     {
-        PlaySE(SE_W207B);
+        PlaySE(SE_M_SWAGGER2);
         sprite->data[0] = 0;
     }
 }
@@ -2620,7 +2620,7 @@ static void sub_807AB04(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 15)
     {
-        PlaySE(SE_W107);
+        PlaySE(SE_M_MINIMIZE);
         sprite->data[0] = 0;
     }
 }
@@ -3289,7 +3289,7 @@ static bool8 AnimateTradeSequenceCable(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y = gMonFrontPicCoords[sTradeData->monSpecies[TRADE_PLAYER]].y_offset;
         sTradeData->state++;
         sTradeData->cachedMapMusic = GetCurrentMapMusic();
-        PlayNewMapMusic(MUS_SHINKA);
+        PlayNewMapMusic(MUS_EVOLUTION);
         break;
     case 1:
         if (sTradeData->bg2hofs > 0)
@@ -3449,7 +3449,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case 32:
         if (!gPaletteFade.active)
         {
-            PlaySE(SE_TK_WARPOUT);
+            PlaySE(SE_WARP_OUT);
             sTradeData->state++;
         }
         gSprites[sTradeData->unk_90].pos2.y -= 3;
@@ -3503,7 +3503,7 @@ static bool8 AnimateTradeSequenceCable(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PARTNER]].pos2.y += 3;
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -160 && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -163)
         {
-            PlaySE(SE_TK_WARPIN);
+            PlaySE(SE_WARP_IN);
         }
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -222)
         {
@@ -3600,7 +3600,7 @@ static bool8 AnimateTradeSequenceCable(void)
             DestroySprite(&gSprites[sTradeData->unk_91]);
             SetTradeSequenceBgGpuRegs(6);
             sTradeData->state++;
-            PlaySE(SE_W028);
+            PlaySE(SE_M_SAND_ATTACK);
         }
         break;
     case 51:
@@ -3704,7 +3704,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case 68:
         if (++sTradeData->timer == 10)
         {
-            PlayFanfare(MUS_FANFA5);
+            PlayFanfare(MUS_EVOLVED);
         }
         if (sTradeData->timer == 250)
         {
@@ -3781,7 +3781,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y = gMonFrontPicCoords[sTradeData->monSpecies[TRADE_PLAYER]].y_offset;
         sTradeData->state++;
         sTradeData->cachedMapMusic = GetCurrentMapMusic();
-        PlayNewMapMusic(MUS_SHINKA);
+        PlayNewMapMusic(MUS_EVOLUTION);
         break;
     case 1:
         if (sTradeData->bg2hofs > 0)
@@ -3946,7 +3946,7 @@ static bool8 AnimateTradeSequenceWireless(void)
     case 32:
         if (!gPaletteFade.active)
         {
-            PlaySE(SE_TK_WARPOUT);
+            PlaySE(SE_WARP_OUT);
             sTradeData->state++;
         }
         gSprites[sTradeData->unk_90].pos2.y -= 3;
@@ -4001,7 +4001,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PARTNER]].pos2.y += 3;
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -160 && gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y >= -163)
         {
-            PlaySE(SE_TK_WARPIN);
+            PlaySE(SE_WARP_IN);
         }
         if (gSprites[sTradeData->pokePicSpriteIdxs[TRADE_PLAYER]].pos2.y < -222)
         {
@@ -4116,7 +4116,7 @@ static bool8 AnimateTradeSequenceWireless(void)
             DestroySprite(&gSprites[sTradeData->unk_91]);
             SetTradeSequenceBgGpuRegs(6);
             sTradeData->state++;
-            PlaySE(SE_W028);
+            PlaySE(SE_M_SAND_ATTACK);
         }
         break;
     case 51:
@@ -4219,7 +4219,7 @@ static bool8 AnimateTradeSequenceWireless(void)
     case 68:
         if (++sTradeData->timer == 10)
         {
-            PlayFanfare(MUS_FANFA5);
+            PlayFanfare(MUS_EVOLVED);
         }
         if (sTradeData->timer == 250)
         {
@@ -4361,10 +4361,10 @@ static void sub_807E5D8(struct Sprite *sprite)
 {
     sprite->pos2.y += sTradeBallVerticalVelocityTable[sprite->data[0]];
     if (sprite->data[0] == 22)
-        PlaySE(SE_KON);
+        PlaySE(SE_BALL_BOUNCE_1);
     if (++ sprite->data[0] == 44)
     {
-        PlaySE(SE_W025);
+        PlaySE(SE_M_MEGA_KICK);
         sprite->callback = sub_807E64C;
         sprite->data[0] = 0;
         BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, RGB_WHITEALPHA);
@@ -4394,17 +4394,17 @@ static void sub_807E6AC(struct Sprite *sprite)
         {
             sprite->data[2] ++;
             sprite->data[0] = 0x16;
-            PlaySE(SE_KON);
+            PlaySE(SE_BALL_BOUNCE_1);
         }
     }
     else
     {
         if (sprite->data[0] == 0x42)
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
         if (sprite->data[0] == 0x5c)
-            PlaySE(SE_KON3);
+            PlaySE(SE_BALL_BOUNCE_3);
         if (sprite->data[0] == 0x6b)
-            PlaySE(SE_KON4);
+            PlaySE(SE_BALL_BOUNCE_4);
         sprite->pos2.y += sTradeBallVerticalVelocityTable[sprite->data[0]];
         if (++sprite->data[0] == 0x6c)
             sprite->callback = SpriteCallbackDummy;
@@ -4566,7 +4566,7 @@ static void CB2_SaveAndEndTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        sub_8077288(0);
+        SetTradeLinkStandbyCallback(0);
         gMain.state = 100;
         sTradeData->timer = 0;
         break;
@@ -4644,7 +4644,7 @@ static void CB2_SaveAndEndTrade(void)
     case 41:
         if (sTradeData->timer == 0)
         {
-            sub_8077288(1);
+            SetTradeLinkStandbyCallback(1);
             gMain.state = 42;
         }
         else
@@ -4663,7 +4663,7 @@ static void CB2_SaveAndEndTrade(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            sub_8077288(2);
+            SetTradeLinkStandbyCallback(2);
         }
         break;
     case 6:
@@ -4685,11 +4685,11 @@ static void CB2_SaveAndEndTrade(void)
         {
             if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
             {
-                sub_8077288(3);
+                SetTradeLinkStandbyCallback(3);
             }
             else
             {
-                sub_800AC34();
+                SetCloseLinkCallback();
             }
             gMain.state++;
         }
@@ -4809,7 +4809,7 @@ static void Task_AnimateWirelessSignal(u8 taskId)
     }
 
     if (sWirelessSignalTiming[idx][0] == 0 && counter == 0)
-        PlaySE(SE_W215);
+        PlaySE(SE_M_HEAL_BELL);
 
     if (counter == sWirelessSignalTiming[idx][1])
     {
@@ -4902,7 +4902,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        sub_8077288(0);
+        SetTradeLinkStandbyCallback(0);
         gMain.state = 2;
         sTradeData->timer = 0;
         break;
@@ -4950,7 +4950,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     case 7:
         if (sTradeData->timer == 0)
         {
-            sub_8077288(1);
+            SetTradeLinkStandbyCallback(1);
             gMain.state = 8;
         }
         else
@@ -4969,7 +4969,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            sub_8077288(2);
+            SetTradeLinkStandbyCallback(2);
         }
         break;
     case 10:
@@ -4983,7 +4983,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     case 11:
         if (!gPaletteFade.active && IsBGMStopped() == TRUE)
         {
-            sub_8077288(3);
+            SetTradeLinkStandbyCallback(3);
             gMain.state = 12;
         }
         break;

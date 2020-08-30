@@ -1466,7 +1466,9 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].facilityClass];
-            asm("");
+            #ifndef NONMATCHING
+                asm("");
+            #endif
         }
     }
     else
@@ -1478,7 +1480,9 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass];
-            asm("");
+            #ifndef NONMATCHING
+                asm("");
+            #endif
         }
     }
 
@@ -2627,7 +2631,7 @@ static void LoadLinkMultiOpponentsData(void)
         }
         break;
     case 4:
-        sub_800AC34();
+        SetCloseLinkCallback();
         gSpecialVar_Result = 5;
         break;
     case 5:
@@ -2644,7 +2648,7 @@ static void LoadLinkMultiOpponentsData(void)
 static void sub_8164DCC(void)
 {
     if (gWirelessCommType != 0)
-        sub_800AC34();
+        SetCloseLinkCallback();
 }
 
 static void SetMultiPartnerGfx(void)

@@ -402,7 +402,7 @@ static void sub_81C501C(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -424,7 +424,7 @@ static bool8 sub_81C5078(void)
     {
         case 0:
             SetVBlankHBlankCallbacksToNull();
-            clear_scheduled_bg_copies_to_vram();
+            ClearScheduledBgCopiesToVram();
             gMain.state++;
             break;
         case 1:
@@ -970,7 +970,7 @@ static void HandleMenuActionInput(u8 taskId)
             if (id > 0 && IsValidMenuAction(id - 2))
             {
                 PlaySE(SE_SELECT);
-                sub_8199134(0, -1);
+                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
             }
         }
         else if (gMain.newKeys & DPAD_DOWN)
@@ -978,7 +978,7 @@ static void HandleMenuActionInput(u8 taskId)
             if (id < gPyramidBagResources->menuActionsCount - 2 && IsValidMenuAction(id + 2))
             {
                 PlaySE(SE_SELECT);
-                sub_8199134(0, 1);
+                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
             }
         }
         else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
@@ -986,7 +986,7 @@ static void HandleMenuActionInput(u8 taskId)
             if (id & 1 && IsValidMenuAction(id - 1))
             {
                 PlaySE(SE_SELECT);
-                sub_8199134(-1, 0);
+                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
             }
         }
         else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
@@ -994,7 +994,7 @@ static void HandleMenuActionInput(u8 taskId)
             if (!(id & 1) && IsValidMenuAction(id + 1))
             {
                 PlaySE(SE_SELECT);
-                sub_8199134(1, 0);
+                ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
             }
         }
         else if (gMain.newKeys & A_BUTTON)
