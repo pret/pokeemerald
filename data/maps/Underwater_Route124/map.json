@@ -1,7 +1,7 @@
 {
-  "id": "MAP_UNDERWATER1",
-  "name": "Underwater1",
-  "layout": "LAYOUT_UNDERWATER1",
+  "id": "MAP_UNDERWATER_ROUTE124",
+  "name": "Underwater_Route124",
+  "layout": "LAYOUT_UNDERWATER_ROUTE124",
   "music": "MUS_UNDERWATER",
   "region_map_section": "MAPSEC_UNDERWATER_124",
   "requires_flash": false,
@@ -16,7 +16,7 @@
     {
       "direction": "down",
       "offset": 0,
-      "map": "MAP_UNDERWATER2"
+      "map": "MAP_UNDERWATER_ROUTE126"
     },
     {
       "direction": "emerge",
@@ -34,7 +34,7 @@
       "y": 51,
       "elevation": 0,
       "item": "ITEM_CARBOS",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_1_CARBOS"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CARBOS"
     },
     {
       "type": "hidden_item",
@@ -42,7 +42,7 @@
       "y": 40,
       "elevation": 0,
       "item": "ITEM_GREEN_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_1_GREEN_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_GREEN_SHARD"
     },
     {
       "type": "hidden_item",
@@ -50,7 +50,7 @@
       "y": 34,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_1_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL"
     },
     {
       "type": "hidden_item",
@@ -58,7 +58,7 @@
       "y": 54,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_1_BIG_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL"
     },
     {
       "type": "hidden_item",
@@ -66,7 +66,7 @@
       "y": 64,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_1_HEART_SCALE_1"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_1"
     },
     {
       "type": "hidden_item",
@@ -74,7 +74,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_CALCIUM",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_1_CALCIUM"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM"
     },
     {
       "type": "hidden_item",
@@ -82,7 +82,7 @@
       "y": 36,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_1_HEART_SCALE_2"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_2"
     }
   ]
 }
