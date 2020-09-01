@@ -4547,7 +4547,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 2;
     textPrinter.lineSpacing = 0;
-    textPrinter.unk = 0;
+    textPrinter.style = 0;
     textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
     textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
@@ -5080,7 +5080,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
-    textPrinter.unk = 0;
+    textPrinter.style = 0;
     textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
     textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
@@ -5534,7 +5534,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        sTilemapBuffer = AllocZeroed(0x800);
+        sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
         LZDecompressWram(gDomeTourneyLineMask_Tilemap, sTilemapBuffer);
         SetBgTilemapBuffer(1, sTilemapBuffer);
         CopyBgTilemapBufferToVram(1);
@@ -5578,7 +5578,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         textPrinter.lineSpacing = 0;
         textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x70, textPrinter.letterSpacing);
         textPrinter.currentY = 1;
-        textPrinter.unk = 0;
+        textPrinter.style = 0;
         textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
         textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
         textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
@@ -5759,7 +5759,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
             textPrinter.y = 0;
             textPrinter.letterSpacing = 2;
             textPrinter.lineSpacing = 0;
-            textPrinter.unk = 0;
+            textPrinter.style = 0;
             textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
             textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
             textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;

@@ -2201,7 +2201,7 @@ static void AddContestTextPrinter(int windowId, u8 *str, int x)
     textPrinter.currentY = 2;
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
-    textPrinter.unk = 0;
+    textPrinter.style = 0;
     textPrinter.fgColor = 1;
     textPrinter.bgColor = 0;
     textPrinter.shadowColor = 8;
