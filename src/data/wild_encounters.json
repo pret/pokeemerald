@@ -2265,8 +2265,8 @@
           }
         },
         {
-          "map": "MAP_UNDERWATER2",
-          "base_label": "gUnderwater2",
+          "map": "MAP_UNDERWATER_ROUTE126",
+          "base_label": "gUnderwater_Route126",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
@@ -9075,8 +9075,8 @@
           }
         },
         {
-          "map": "MAP_UNDERWATER1",
-          "base_label": "gUnderwater1",
+          "map": "MAP_UNDERWATER_ROUTE124",
+          "base_label": "gUnderwater_Route124",
           "water_mons": {
             "encounter_rate": 4,
             "mons": [
