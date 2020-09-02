@@ -192,18 +192,18 @@ static const struct OamData sOamData_858D7F0 =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_858D7F8 = 
+static const struct SpriteTemplate sSpriteTemplate_858D7F8 =
 {
-    .tileTag = 3009, 
-    .paletteTag = 3009, 
-    .oam = &sOamData_858D7F0, 
-    .anims = gDummySpriteAnimTable, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = 3009,
+    .paletteTag = 3009,
+    .oam = &sOamData_858D7F0,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteSheet sUnknown_0858D810[] = 
+static const struct SpriteSheet sUnknown_0858D810[] =
 {
     { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3009 },
     { .data = gMiscBlank_Gfx, .size = 0x400, .tag = 3010 },
@@ -240,26 +240,26 @@ static const struct OamData sOamData_Confetti =
 
 static const struct SpriteTemplate sSpriteTemplate_Confetti =
 {
-    .tileTag = TAG_CONFETTI, 
-    .paletteTag = TAG_CONFETTI, 
-    .oam = &sOamData_Confetti, 
-    .anims = gDummySpriteAnimTable, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = TAG_CONFETTI,
+    .paletteTag = TAG_CONFETTI,
+    .oam = &sOamData_Confetti,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Confetti
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_Confetti =
 {
-    .data = gConfetti_Gfx, 
-    .size = 0x220, 
+    .data = gConfetti_Gfx,
+    .size = 0x220,
     .tag = TAG_CONFETTI
 };
 
 
 static const struct CompressedSpritePalette sSpritePalette_Confetti =
 {
-    .data = gConfetti_Pal, 
+    .data = gConfetti_Pal,
     .tag = TAG_CONFETTI
 };
 
@@ -282,7 +282,7 @@ static const struct BgTemplate sBgTemplates[] =
         .paletteMode = 0,
         .priority = 3,
         .baseTile = 0,
-    }, 
+    },
     {
         .bg = 2,
         .charBaseIndex = 0,
@@ -291,7 +291,7 @@ static const struct BgTemplate sBgTemplates[] =
         .paletteMode = 0,
         .priority = 3,
         .baseTile = 0,
-    }, 
+    },
     {
         .bg = 3,
         .charBaseIndex = 0,
@@ -306,39 +306,39 @@ static const struct BgTemplate sBgTemplates[] =
 static const struct WindowTemplate sWindowTemplates[] =
 {
     {
-        .bg = 1, 
-        .tilemapLeft = 7, 
-        .tilemapTop = 4, 
-        .width = 12, 
-        .height = 2, 
-        .paletteNum = 15, 
+        .bg = 1,
+        .tilemapLeft = 7,
+        .tilemapTop = 4,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 770
     },
     {
-        .bg = 1, 
-        .tilemapLeft = 7, 
-        .tilemapTop = 7, 
-        .width = 12, 
-        .height = 2, 
-        .paletteNum = 15, 
+        .bg = 1,
+        .tilemapLeft = 7,
+        .tilemapTop = 7,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 794
     },
     {
-        .bg = 1, 
-        .tilemapLeft = 7, 
-        .tilemapTop = 10, 
-        .width = 12, 
-        .height = 2, 
-        .paletteNum = 15, 
+        .bg = 1,
+        .tilemapLeft = 7,
+        .tilemapTop = 10,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 818
     },
     {
-        .bg = 1, 
-        .tilemapLeft = 7, 
-        .tilemapTop = 13, 
-        .width = 12, 
-        .height = 2, 
-        .paletteNum = 15, 
+        .bg = 1,
+        .tilemapLeft = 7,
+        .tilemapTop = 13,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
         .baseBlock = 842
     },
     DUMMY_WIN_TEMPLATE,
@@ -364,19 +364,19 @@ static const struct OamData sUnknown_0858D8C0 =
 
 static const struct SpriteTemplate sSpriteTemplate_858D8C8 =
 {
-    .tileTag = 22222, 
-    .paletteTag = 0, 
-    .oam = &sUnknown_0858D8C0, 
-    .anims = gDummySpriteAnimTable, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .tileTag = 22222,
+    .paletteTag = 0,
+    .oam = &sUnknown_0858D8C0,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteSheet sUnknown_0858D8E0 = 
+static const struct SpriteSheet sUnknown_0858D8E0 =
 {
-    .data = gMiscBlank_Gfx, 
-    .size = 0x200, 
+    .data = gMiscBlank_Gfx,
+    .size = 0x200,
     .tag = 22222
 };
 
@@ -1219,8 +1219,8 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 NAKED
 static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 {
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
+    asm_unified(
+    "push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\
@@ -2787,8 +2787,8 @@ bool8 GiveMonArtistRibbon(void)
     u8 hasArtistRibbon;
 
     hasArtistRibbon = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
-    if (!hasArtistRibbon 
-        && gContestFinalStandings[gContestPlayerMonIndex] == 0 
+    if (!hasArtistRibbon
+        && gContestFinalStandings[gContestPlayerMonIndex] == 0
         && gSpecialVar_ContestRank == CONTEST_RANK_MASTER
         && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
@@ -2905,8 +2905,8 @@ static void Task_ShowContestEntryMonPic(u8 taskId)
 
 void GetContestMultiplayerId(void)
 {
-    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) 
-        && gNumLinkContestPlayers == CONTESTANT_COUNT 
+    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+        && gNumLinkContestPlayers == CONTESTANT_COUNT
         && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
         gSpecialVar_Result = GetMultiplayerId();
     else

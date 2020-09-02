@@ -2539,8 +2539,8 @@ void CreateFrontierBrainPokemon(void)
 NAKED
 void CreateFrontierBrainPokemon(void)
 {
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
+    asm_unified(
+    "push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\
@@ -2768,8 +2768,7 @@ _081A4FD0:\n\
     pop {r4-r7}\n\
     pop {r0}\n\
     bx r0\n\
-    .pool\n\
-");
+    .pool");
 }
 #endif
 

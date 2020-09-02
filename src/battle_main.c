@@ -3649,8 +3649,8 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
 NAKED
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
-    asm(".syntax unified\n\
-            push {r4-r6,lr}\n\
+    asm_unified(
+    "push {r4-r6,lr}\n\
     ldr r0, =gBattleTypeFlags\n\
     ldr r2, [r0]\n\
     movs r0, 0x80\n\
@@ -3728,8 +3728,7 @@ _0803B2F2:\n\
     pop {r4-r6}\n\
     pop {r0}\n\
     bx r0\n\
-    .pool\n\
-        .syntax divided");
+    .pool");
 }
 #endif // NONMATCHING
 
