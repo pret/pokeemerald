@@ -484,8 +484,8 @@ void sub_81C79BC(const u16 *a0, const u16 *a1, s32 a2, s32 a3, s32 a4, u16 *pale
     }
     else
     {
-        int r, g, b;
-        int r1, g1, b1;
+        s32 r, g, b;
+        s32 r1, g1, b1;
         while (a2--)
         {
 
