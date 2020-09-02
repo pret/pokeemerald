@@ -1148,349 +1148,70 @@ static void TryCreateWirelessSprites(void)
     }
 }
 
-// Functionally equivalent, the same except compiler generated variables from
-// src are placed on different stack positions.
-
-#ifdef NONMATCHING
 static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 {
-    u8 *windowTilesPtr;
     u16 windowId;
-    int origWidth;
-    struct WindowTemplate windowTemplate;
-    int strWidth;
+    s32 origWidth, strWidth;
     u8 *spriteTilePtrs[4];
     u8 *dst;
-    int i;
-    struct Sprite *sprite;
-    const u8 *src; // The culprit.
 
-    memset(&windowTemplate, 0, sizeof(windowTemplate));
-    windowTemplate.width = 30;
-    windowTemplate.height = 2;
-    windowId = AddWindow(&windowTemplate);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-
-    origWidth = GetStringWidth(1, text, 0);
-    strWidth = (origWidth + 9) / 8;
-    if (strWidth > 30)
-     strWidth = 30;
-
-    AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
-    windowTilesPtr = (u8 *)(GetWindowAttribute(windowId, WINDOW_TILE_DATA));
-    src = (u8 *)(sUnknown_0858D6D0);
-
-    sprite = &gSprites[spriteId];
-    spriteTilePtrs[0] = (u8 *)(sprite->oam.tileNum * 32 + VRAM + 0x10000);
-
-    for (i = 1; i < 4; i++)
-        spriteTilePtrs[i] = (void*)(gSprites[sprite->data[i - 1]].oam.tileNum * 32 + VRAM + 0x10000);
-
-    for (i = 0; i < 4; i++)
-        CpuFill32(0, spriteTilePtrs[i], 0x400);
-
-    dst = spriteTilePtrs[0];
-    CpuCopy32(src, dst, 0x20);
-    CpuCopy32(src + 128, dst + 0x100, 0x20);
-    CpuCopy32(src + 128, dst + 0x200, 0x20);
-    CpuCopy32(src + 64,  dst + 0x300, 0x20);
-
-    for (i = 0; i < strWidth; i++)
     {
-        dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
-        CpuCopy32(src + 192, dst, 0x20);
-        CpuCopy32(windowTilesPtr, dst + 0x100, 0x20);
-        CpuCopy32(windowTilesPtr + 960, dst + 0x200, 0x20);
-        CpuCopy32(src + 224, dst + 0x300, 0x20);
-        windowTilesPtr += 0x20;
+        struct WindowTemplate windowTemplate; //It's important the lifetime of this struct ends after the clear
+        memset(&windowTemplate, 0, sizeof(windowTemplate));
+        windowTemplate.width = 30;
+        windowTemplate.height = 2;
+        windowId = AddWindow(&windowTemplate);
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     }
 
-    dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
-    CpuCopy32(src + 32,  dst, 0x20);
-    CpuCopy32(src + 160, dst + 0x100, 0x20);
-    CpuCopy32(src + 160, dst + 0x200, 0x20);
-    CpuCopy32(src + 96,  dst + 0x300, 0x20);
+    origWidth = GetStringWidth(1, text, 0);
+    if ((strWidth = (origWidth + 9) / 8) > 30)
+        strWidth = 30;
+
+    AddTextPrinterParameterized3(windowId, 1, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, -1, text);
+
+    {
+        s32 i;
+        struct Sprite *sprite;
+        const u8 *src, *windowTilesPtr;
+        windowTilesPtr = (const u8 *)(GetWindowAttribute(windowId, WINDOW_TILE_DATA));
+        src = sUnknown_0858D6D0;
+
+        sprite = &gSprites[spriteId];
+        spriteTilePtrs[0] = (u8 *)((OBJ_VRAM0) + sprite->oam.tileNum * 32);
+
+        for (i = 1; i < 4; i++)
+            spriteTilePtrs[i] = (u8 *)((OBJ_VRAM0) + gSprites[sprite->data[i - 1]].oam.tileNum * 32);
+
+        for (i = 0; i < 4; i++)
+            CpuFill32(0, spriteTilePtrs[i], 0x400);
+
+        dst = spriteTilePtrs[0];
+        CpuCopy32(src, dst, 0x20);
+        CpuCopy32(src + 128, dst + 0x100, 0x20);
+        CpuCopy32(src + 128, dst + 0x200, 0x20);
+        CpuCopy32(src + 64, dst + 0x300, 0x20);
+
+        for (i = 0; i < strWidth; i++)
+        {
+            dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
+            CpuCopy32(src + 192, dst, 0x20);
+            CpuCopy32(windowTilesPtr, dst + 0x100, 0x20);
+            CpuCopy32(windowTilesPtr + 960, dst + 0x200, 0x20);
+            CpuCopy32(src + 224, dst + 0x300, 0x20);
+            windowTilesPtr += 0x20;
+        }
+
+        dst = &spriteTilePtrs[(i + 1) / 8][((i + 1) % 8) * 32];
+        CpuCopy32(src + 32, dst, 0x20);
+        CpuCopy32(src + 160, dst + 0x100, 0x20);
+        CpuCopy32(src + 160, dst + 0x200, 0x20);
+        CpuCopy32(src + 96, dst + 0x300, 0x20);
+    }
     RemoveWindow(windowId);
 
     return (240 - (strWidth + 2) * 8) / 2;
 }
-
-#else
-NAKED
-static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x44\n\
-    adds r5, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r7, r1, 24\n\
-    add r4, sp, 0x20\n\
-    adds r0, r4, 0\n\
-    movs r1, 0\n\
-    movs r2, 0x8\n\
-    bl memset\n\
-    movs r0, 0x1E\n\
-    strb r0, [r4, 0x3]\n\
-    movs r0, 0x2\n\
-    strb r0, [r4, 0x4]\n\
-    adds r0, r4, 0\n\
-    bl AddWindow\n\
-    lsls r6, r0, 24\n\
-    lsrs r4, r6, 24\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x11\n\
-    bl FillWindowPixelBuffer\n\
-    movs r0, 0x1\n\
-    adds r1, r5, 0\n\
-    movs r2, 0\n\
-    bl GetStringWidth\n\
-    adds r2, r0, 0\n\
-    adds r2, 0x9\n\
-    cmp r2, 0\n\
-    bge _080F6BC4\n\
-    adds r2, 0x7\n\
-_080F6BC4:\n\
-    asrs r2, 3\n\
-    mov r10, r2\n\
-    cmp r2, 0x1E\n\
-    ble _080F6BD0\n\
-    movs r1, 0x1E\n\
-    mov r10, r1\n\
-_080F6BD0:\n\
-    mov r1, r10\n\
-    lsls r2, r1, 3\n\
-    subs r2, r0\n\
-    lsrs r0, r2, 31\n\
-    adds r2, r0\n\
-    asrs r2, 1\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    ldr r0, =sContestLinkTextColors\n\
-    str r0, [sp]\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    str r0, [sp, 0x4]\n\
-    str r5, [sp, 0x8]\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x1\n\
-    movs r3, 0x1\n\
-    bl AddTextPrinterParameterized3\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x7\n\
-    bl GetWindowAttribute\n\
-    mov r9, r0\n\
-    ldr r2, =sUnknown_0858D6D0\n\
-    mov r8, r2\n\
-    lsls r1, r7, 4\n\
-    adds r1, r7\n\
-    lsls r1, 2\n\
-    ldr r3, =gSprites\n\
-    adds r1, r3\n\
-    ldrh r0, [r1, 0x4]\n\
-    lsls r0, 22\n\
-    lsrs r0, 17\n\
-    ldr r2, =0x06010000\n\
-    adds r0, r2\n\
-    str r0, [sp, 0xC]\n\
-    str r6, [sp, 0x38]\n\
-    mov r7, sp\n\
-    adds r7, 0x1C\n\
-    str r7, [sp, 0x2C]\n\
-    mov r0, r10\n\
-    adds r0, 0x2\n\
-    str r0, [sp, 0x30]\n\
-    movs r5, 0\n\
-    add r7, sp, 0x10\n\
-    mov r12, r7\n\
-    adds r6, r1, 0\n\
-    adds r6, 0x2E\n\
-    movs r4, 0x2\n\
-_080F6C34:\n\
-    adds r0, r6, r5\n\
-    movs r7, 0\n\
-    ldrsh r1, [r0, r7]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    ldrh r0, [r0, 0x4]\n\
-    lsls r0, 22\n\
-    lsrs r0, 17\n\
-    adds r0, r2\n\
-    mov r1, r12\n\
-    adds r1, 0x4\n\
-    mov r12, r1\n\
-    subs r1, 0x4\n\
-    stm r1!, {r0}\n\
-    adds r5, 0x2\n\
-    subs r4, 0x1\n\
-    cmp r4, 0\n\
-    bge _080F6C34\n\
-    mov r7, r8\n\
-    adds r7, 0x80\n\
-    mov r2, r8\n\
-    adds r2, 0x40\n\
-    str r2, [sp, 0x28]\n\
-    mov r0, r8\n\
-    adds r0, 0x20\n\
-    str r0, [sp, 0x3C]\n\
-    mov r1, r8\n\
-    adds r1, 0xA0\n\
-    str r1, [sp, 0x40]\n\
-    adds r2, 0x20\n\
-    str r2, [sp, 0x34]\n\
-    add r5, sp, 0xC\n\
-    movs r6, 0\n\
-    movs r4, 0x3\n\
-_080F6C7C:\n\
-    str r6, [sp, 0x1C]\n\
-    ldm r5!, {r1}\n\
-    ldr r0, [sp, 0x2C]\n\
-    ldr r2, =0x05000100\n\
-    bl CpuSet\n\
-    subs r4, 0x1\n\
-    cmp r4, 0\n\
-    bge _080F6C7C\n\
-    ldr r5, [sp, 0xC]\n\
-    ldr r6, =0x04000008\n\
-    mov r0, r8\n\
-    adds r1, r5, 0\n\
-    adds r2, r6, 0\n\
-    bl CpuSet\n\
-    movs r0, 0x80\n\
-    lsls r0, 1\n\
-    adds r1, r5, r0\n\
-    adds r0, r7, 0\n\
-    adds r2, r6, 0\n\
-    bl CpuSet\n\
-    movs r2, 0x80\n\
-    lsls r2, 2\n\
-    adds r1, r5, r2\n\
-    adds r0, r7, 0\n\
-    adds r2, r6, 0\n\
-    bl CpuSet\n\
-    movs r7, 0xC0\n\
-    lsls r7, 2\n\
-    adds r1, r5, r7\n\
-    ldr r0, [sp, 0x28]\n\
-    adds r2, r6, 0\n\
-    bl CpuSet\n\
-    movs r4, 0\n\
-    cmp r4, r10\n\
-    bge _080F6D32\n\
-    adds r7, r6, 0\n\
-_080F6CCE:\n\
-    adds r6, r4, 0x1\n\
-    adds r0, r6, 0\n\
-    cmp r6, 0\n\
-    bge _080F6CDA\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x8\n\
-_080F6CDA:\n\
-    asrs r0, 3\n\
-    lsls r1, r0, 2\n\
-    add r1, sp\n\
-    adds r1, 0xC\n\
-    lsls r0, 3\n\
-    subs r0, r6, r0\n\
-    lsls r0, 5\n\
-    ldr r1, [r1]\n\
-    adds r5, r1, r0\n\
-    mov r0, r8\n\
-    adds r0, 0xC0\n\
-    adds r1, r5, 0\n\
-    adds r2, r7, 0\n\
-    bl CpuSet\n\
-    movs r0, 0x80\n\
-    lsls r0, 1\n\
-    adds r1, r5, r0\n\
-    mov r0, r9\n\
-    adds r2, r7, 0\n\
-    bl CpuSet\n\
-    movs r0, 0xF0\n\
-    lsls r0, 2\n\
-    add r0, r9\n\
-    movs r2, 0x80\n\
-    lsls r2, 2\n\
-    adds r1, r5, r2\n\
-    adds r2, r7, 0\n\
-    bl CpuSet\n\
-    movs r0, 0xC0\n\
-    lsls r0, 2\n\
-    adds r1, r5, r0\n\
-    mov r0, r8\n\
-    adds r0, 0xE0\n\
-    adds r2, r7, 0\n\
-    bl CpuSet\n\
-    movs r1, 0x20\n\
-    add r9, r1\n\
-    adds r4, r6, 0\n\
-    cmp r4, r10\n\
-    blt _080F6CCE\n\
-_080F6D32:\n\
-    adds r2, r4, 0x1\n\
-    adds r0, r2, 0\n\
-    cmp r2, 0\n\
-    bge _080F6D3E\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x8\n\
-_080F6D3E:\n\
-    asrs r0, 3\n\
-    lsls r1, r0, 2\n\
-    add r1, sp\n\
-    adds r1, 0xC\n\
-    lsls r0, 3\n\
-    subs r0, r2, r0\n\
-    lsls r0, 5\n\
-    ldr r1, [r1]\n\
-    adds r5, r1, r0\n\
-    ldr r4, =0x04000008\n\
-    ldr r0, [sp, 0x3C]\n\
-    adds r1, r5, 0\n\
-    adds r2, r4, 0\n\
-    bl CpuSet\n\
-    movs r2, 0x80\n\
-    lsls r2, 1\n\
-    adds r1, r5, r2\n\
-    ldr r0, [sp, 0x40]\n\
-    adds r2, r4, 0\n\
-    bl CpuSet\n\
-    movs r7, 0x80\n\
-    lsls r7, 2\n\
-    adds r1, r5, r7\n\
-    ldr r0, [sp, 0x40]\n\
-    adds r2, r4, 0\n\
-    bl CpuSet\n\
-    movs r0, 0xC0\n\
-    lsls r0, 2\n\
-    adds r1, r5, r0\n\
-    ldr r0, [sp, 0x34]\n\
-    adds r2, r4, 0\n\
-    bl CpuSet\n\
-    ldr r1, [sp, 0x38]\n\
-    lsrs r0, r1, 24\n\
-    bl RemoveWindow\n\
-    ldr r2, [sp, 0x30]\n\
-    lsls r1, r2, 3\n\
-    movs r0, 0xF0\n\
-    subs r0, r1\n\
-    asrs r0, 1\n\
-    add sp, 0x44\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void LoadContestResultSprites(void)
 {
