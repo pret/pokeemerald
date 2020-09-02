@@ -486,14 +486,13 @@ void sub_81C79BC(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *pale
         int r1, g1, b1;
         while (a2--)
         {
+            r = GET_R(*a0);
+            g = GET_G(*a0);
+            b = GET_B(*a0);
 
-            r = R(*a0);
-            g = G(*a0);
-            b = B(*a0);
-
-            r1 = ((((R(*a1) << 8) - (r << 8)) / a3) * a4) >> 8;
-            g1 = ((((G(*a1) << 8) - (g << 8)) / a3) * a4) >> 8;
-            b1 = ((((B(*a1) << 8) - (b << 8)) / a3) * a4) >> 8;
+            r1 = ((((GET_R(*a1) << 8) - (r << 8)) / a3) * a4) >> 8;
+            g1 = ((((GET_G(*a1) << 8) - (g << 8)) / a3) * a4) >> 8;
+            b1 = ((((GET_B(*a1) << 8) - (b << 8)) / a3) * a4) >> 8;
 
             r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match; I have to assign the value of (r + r1 & 0x1F)
             g = (g + g1) & 0x1F; //See above

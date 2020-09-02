@@ -1,9 +1,9 @@
 #ifndef GUARD_RGB_H
 #define GUARD_RGB_H
 
-#define R(color) ((color) & 0x1F)
-#define G(color) (((color) >> 5) & 0x1F)
-#define B(color) (((color) >> 10) & 0x1F)
+#define GET_R(color) ((color) & 0x1F)
+#define GET_G(color) (((color) >> 5) & 0x1F)
+#define GET_B(color) (((color) >> 10) & 0x1F)
 
 #define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 #define RGB2(r, g, b) (((b) << 10) | ((g) << 5) | (r))

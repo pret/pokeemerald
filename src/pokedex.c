@@ -5238,20 +5238,20 @@ static void Task_ExitSearchWaitForFade(u8 taskId)
 
 void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
 {
-    u16 i, temp; //This would have been better as a pointer but here we are
-    u32 ptr = (u32)GetBgTilemapBuffer(3); //this should be a pointer, but this only matches as a u32.
+    u16 i, temp;                          //This would have been better as a pointer but here we are
+    u32 ptr = (u32)GetBgTilemapBuffer(3); //This should be a pointer, but this only matches as a u32.
 
     for (i = 0; i < width; i++)
     {
-        temp = *(u16 *)(ptr + (y+0)*64 + (x+i)*2);
-		temp &= 0x0fff;
-		temp |= (flags << 12);
-		*(u16 *)(ptr + (y+0)*64 + (x+i)*2) = temp;
-   		
-		temp = *(u16 *)(ptr + (y+1)*64 + (x+i)*2);
-		temp &= 0x0fff;
-		temp |= (flags << 12);
-		*(u16 *)(ptr + (y+1)*64 + (x+i)*2) = temp;
+        temp = *(u16 *)(ptr + (y + 0) * 64 + (x + i) * 2);
+        temp &= 0x0fff;
+        temp |= (flags << 12);
+        *(u16 *)(ptr + (y + 0) * 64 + (x + i) * 2) = temp;
+
+        temp = *(u16 *)(ptr + (y + 1) * 64 + (x + i) * 2);
+        temp &= 0x0fff;
+        temp |= (flags << 12);
+        *(u16 *)(ptr + (y + 1) * 64 + (x + i) * 2) = temp;
     }
 }
 
