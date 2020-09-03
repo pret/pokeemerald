@@ -436,9 +436,10 @@ static u32 LoopedTask_ScrollMenuHeaderUp(s32 a0)
     if (ChangeBgY(0, 384, 2) <= 0)
     {
         ChangeBgY(0, 0, 0);
-        return 4;
+        return LT_FINISH;
     }
-    return 2;
+
+    return LT_PAUSE;
 }
 
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size)
@@ -494,7 +495,7 @@ void sub_81C79BC(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *pale
             g1 = ((((GET_G(*a1) << 8) - (g << 8)) / a3) * a4) >> 8;
             b1 = ((((GET_B(*a1) << 8) - (b << 8)) / a3) * a4) >> 8;
 
-            r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match; I have to assign the value of (r + r1 & 0x1F)
+            r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match; I have to assign the value of ((r + r1) & 0x1F) to r1
             g = (g + g1) & 0x1F; //See above
             b = (b + b1) & 0x1F; //See above
 
