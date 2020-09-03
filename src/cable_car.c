@@ -68,7 +68,7 @@ struct CableCar
 static EWRAM_DATA struct CableCar *sCableCar = NULL;
 static EWRAM_DATA u8 sGroundX_Up = 0;
 static EWRAM_DATA u8 sGroundY_Up = 0;
-static EWRAM_DATA u8 sGroundSegemntY_Up = 0;
+static EWRAM_DATA u8 sGroundSegmentY_Up = 0;
 static EWRAM_DATA u8 sGroundX_Down = 0;
 static EWRAM_DATA u8 sGroundY_Down = 0;
 static EWRAM_DATA u8 sGroundSegmentY_Down = 0;
@@ -989,13 +989,13 @@ static void DrawNextGroundSegmentGoingUp(void)
     sCableCar->groundYBase = sCableCar->bg0VerticalOffset;
     sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 30) % 32;
     sCableCar->groundTileIdx -= 2;
-    sGroundSegemntY_Up = (sCableCar->groundSegmentYStart + 23) % 32;
+    sGroundSegmentY_Up = (sCableCar->groundSegmentYStart + 23) % 32;
 
     // Draw next segment
     for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {
         sGroundX_Up = sCableCar->groundSegmentXStart;
-        sGroundY_Up = (sGroundSegemntY_Up + i) % 32;
+        sGroundY_Up = (sGroundSegmentY_Up + i) % 32;
         FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx], sGroundX_Up, sGroundY_Up, 1, 1, 17);
         sGroundX_Up = (sGroundX_Up + 1) % 32;
         FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx + 1], sGroundX_Up, sGroundY_Up, 1, 1, 17);
