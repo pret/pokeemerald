@@ -648,12 +648,10 @@ static void UpdateSaveAddresses(void)
         gRamSaveSectionLocations[i].size = sSaveSectionOffsets[i].size;
     }
 
-    for (i = SECTOR_ID_PKMN_STORAGE_START; i <= SECTOR_ID_PKMN_STORAGE_END; i++)
+    for (; i <= SECTOR_ID_PKMN_STORAGE_END; i++) //i = SECTOR_ID_PKMN_STORAGE_START; in the initialization clause does not match
     {
         gRamSaveSectionLocations[i].data = (void*)(gPokemonStoragePtr) + sSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = sSaveSectionOffsets[i].size;
-
-        i++;i--; // needed to match
     }
 }
 
