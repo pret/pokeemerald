@@ -373,8 +373,8 @@ struct Struct_03002F90
     u32 unk20[8];
     u32 unk40[8];
     u32 unk60[8];
-    u8 unk80;
-    u8 unk81;
+    u8 width;
+    u8 height;
 };
 
 extern TextFlags gTextFlags;
