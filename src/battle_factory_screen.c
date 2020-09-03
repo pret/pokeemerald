@@ -165,7 +165,7 @@ static void Select_SetBallSpritePaletteNum(u8 id);
 static void sub_819F444(struct UnkFactoryStruct arg0, bool8 *arg1);
 static void sub_819B958(u8 windowId);
 static void sub_819F2B4(u8 *arg0, bool8 *arg1, bool8 swapScreen);
-static void sub_819F3F8(struct UnkFactoryStruct arg0, bool8 *arg1, bool8 swapScreen);
+static void CloseMonPic(struct UnkFactoryStruct arg0, bool8 *arg1, bool8 swapScreen);
 static u8 Select_RunMenuOptionFunc(void);
 static u8 sub_819BC9C(void);
 static u8 Select_OptionSummary(void);
@@ -182,7 +182,7 @@ static void sub_819EA64(u8 windowId);
 static void sub_819D770(u8 taskId);
 static void Task_HandleSwapScreenChooseMons(u8 taskId);
 static void sub_819D588(u8 taskId);
-static void sub_819F7B4(u8 taskId);
+static void Task_CloseMonPic(u8 taskId);
 static void Swap_PrintOnInfoWindow(const u8 *str);
 static void Swap_ShowMenuOptions(void);
 static void Swap_PrintMenuOptions(void);
@@ -204,16 +204,16 @@ static void Swap_OptionSwap(u8 taskId);
 static void Swap_OptionSummary(u8 taskId);
 static void Swap_OptionRechoose(u8 taskId);
 static void Swap_RunActionFunc(u8 taskId);
-static void sub_819F69C(u8 taskId);
+static void Task_OpenMonPic(u8 taskId);
 static void Task_SwapCantHaveSameMons(u8 taskId);
-static void Swap_ShowMonSprite(void);
+static void Swap_CreateMonSprite(void);
 static void Swap_PrintActionStrings(void);
 static void Swap_PrintActionStrings2(void);
 static void Swap_PrintOneActionString(u8 which);
 static void Swap_InitActions(u8 id);
 static void sub_819E838(u8 arg0);
 static bool8 Swap_AlreadyHasSameSpecies(u8 monId);
-static void sub_819F600(struct Sprite *sprite);
+static void SpriteCB_OpenMonPic(struct Sprite *sprite);
 static void Swap_ActionMon(u8 taskId);
 static void Swap_ActionCancel(u8 taskId);
 static void Swap_ActionPkmnForSwap(u8 taskId);
@@ -1569,7 +1569,7 @@ static void Task_HandleSelectionScreenMenu(u8 taskId)
         else if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_819F3F8(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
+            CloseMonPic(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
             sub_819B958(3);
             sFactorySelectScreen->unk2A2 = TRUE;
             gTasks[taskId].data[0] = 1;
@@ -1645,7 +1645,7 @@ static void Task_HandleSelectionScreenChooseMons(u8 taskId)
             if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_SELECT);
-                sub_819F3F8(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
+                CloseMonPic(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
                 Select_PrintSelectMonString();
                 sFactorySelectScreen->unk2A2 = TRUE;
                 gTasks[taskId].data[0] = 1;
@@ -1880,7 +1880,7 @@ static u8 Select_OptionRentDeselect(void)
     }
     else
     {
-        sub_819F3F8(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
+        CloseMonPic(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
         Select_HandleMonSelectionChange();
         Select_PrintSelectMonString();
         sub_819B958(3);
@@ -1910,7 +1910,7 @@ static u8 Select_OptionSummary(void)
 
 static u8 Select_OptionOthers(void)
 {
-    sub_819F3F8(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
+    CloseMonPic(sFactorySelectScreen->unk294[1], &sFactorySelectScreen->unk2A0, FALSE);
     sub_819B958(3);
     return 1;
 }
@@ -1933,7 +1933,7 @@ static void Select_PrintMonCategory(void)
     }
 }
 
-static void Summary_ShowMonSprite(void)
+static void Summary_CreateMonSprite(void)
 {
     u8 monId = sFactorySelectScreen->cursorPos;
     struct Pokemon *mon = &sFactorySelectScreen->mons[monId].monData;
@@ -2439,7 +2439,7 @@ static void sub_819CC24(u8 taskId)
 
 static void sub_819CC74(u8 taskId)
 {
-    sub_819F3F8(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
+    CloseMonPic(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
     if (gTasks[taskId].data[1] == 1)
     {
         gTasks[taskId].data[0] = 0;
@@ -2496,7 +2496,7 @@ static void Task_HandleSwapScreenMenu(u8 taskId)
             else if (gMain.newKeys & B_BUTTON)
             {
                 PlaySE(SE_SELECT);
-                sub_819F3F8(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
+                CloseMonPic(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
                 sub_819EA64(3);
                 gTasks[taskId].data[0] = 0;
                 gTasks[taskId].data[6] = (u32)(Task_HandleSwapScreenChooseMons) >> 16;
@@ -3799,7 +3799,7 @@ static void Swap_RunMenuOptionFunc(u8 taskId)
 
 static void Swap_OptionSwap(u8 taskId)
 {
-    sub_819F3F8(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
+    CloseMonPic(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
     sFactorySwapScreen->playerMonId = sFactorySwapScreen->cursorPos;
     sub_819EA64(3);
     gTasks[taskId].data[0] = 0;
@@ -3814,7 +3814,7 @@ static void Swap_OptionSummary(u8 taskId)
 
 static void Swap_OptionRechoose(u8 taskId)
 {
-    sub_819F3F8(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
+    CloseMonPic(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
     sub_819EA64(3);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[6] = (u32)(Task_HandleSwapScreenChooseMons) >> 0x10;
@@ -3876,7 +3876,7 @@ static void Swap_ActionMon(u8 taskId)
 static void sub_819F2B4(u8 *arg0, bool8 *arg1, bool8 swapScreen)
 {
     *arg0 = CreateSprite(&sSpriteTemplate_Swap_MonPicBgAnim, 120, 64, 1);
-    gSprites[*arg0].callback = sub_819F600;
+    gSprites[*arg0].callback = SpriteCB_OpenMonPic;
     gSprites[*arg0].data[7] = swapScreen;
     *arg1 = TRUE;
 }
@@ -3902,13 +3902,20 @@ static void Swap_ShowSummaryMonSprite(void)
     gSprites[sFactorySwapScreen->unk2C.field1].invisible = TRUE;
 }
 
-static void sub_819F3F8(struct UnkFactoryStruct arg0, bool8 *arg1, bool8 swapScreen)
+#define tState        data[0]
+#define tWinLeft      data[3]
+#define tWinRight     data[24] // UB: Copied typo? Should be data[4], 24 is out of bounds
+#define tWinTop       data[5]
+#define tWinBottom    data[8]
+#define tIsSwapScreen data[7]
+
+static void CloseMonPic(struct UnkFactoryStruct arg0, bool8 *arg1, bool8 swapScreen)
 {
     u8 taskId;
 
     FreeAndDestroyMonPicSprite(arg0.field0);
-    taskId = CreateTask(sub_819F7B4, 1);
-    gTasks[taskId].data[7] = swapScreen;
+    taskId = CreateTask(Task_CloseMonPic, 1);
+    gTasks[taskId].tIsSwapScreen = swapScreen;
     gTasks[taskId].data[6] = arg0.field1;
     gTasks[taskId].func(taskId);
     *arg1 = TRUE;
@@ -3938,7 +3945,7 @@ static void Task_SwapCantHaveSameMons(u8 taskId)
         if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_819F3F8(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
+            CloseMonPic(sFactorySwapScreen->unk2C, &sFactorySwapScreen->unk30, TRUE);
             gTasks[taskId].data[0]++;
         }
         break;
@@ -3977,15 +3984,15 @@ static bool8 Swap_AlreadyHasSameSpecies(u8 monId)
     return FALSE;
 }
 
-static void sub_819F600(struct Sprite *sprite)
+static void SpriteCB_OpenMonPic(struct Sprite *sprite)
 {
     u8 taskId;
 
     if (sprite->affineAnimEnded)
     {
         sprite->invisible = TRUE;
-        taskId = CreateTask(sub_819F69C, 1);
-        gTasks[taskId].data[7] = sprite->data[7];
+        taskId = CreateTask(Task_OpenMonPic, 1);
+        gTasks[taskId].tIsSwapScreen = sprite->data[7];
         gTasks[taskId].func(taskId);
         sprite->callback = SpriteCallbackDummy;
     }
@@ -4004,18 +4011,18 @@ static void sub_819F654(struct Sprite *sprite)
     }
 }
 
-static void sub_819F69C(u8 taskId)
+static void Task_OpenMonPic(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
     case 0:
-        task->data[3] = 88;
-        task->data[24] = 152; // BUG: writing outside the array's bounds.
+        task->tWinLeft = 88;
+        task->tWinRight = 152; // BUG: writing outside the array's bounds.
         task->data[5] = 64;
         task->data[8] = 65;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[24]));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->tWinLeft, task->tWinRight));
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[8]));
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_CLR | WINOUT_WIN01_OBJ);
@@ -4040,23 +4047,23 @@ static void sub_819F69C(u8 taskId)
     default:
         DestroyTask(taskId);
         // UB: Should not use the task after it has been deleted.
-        if (gTasks[taskId].data[7] == TRUE)
-            Swap_ShowMonSprite();
+        if (gTasks[taskId].tIsSwapScreen == TRUE)
+            Swap_CreateMonSprite();
         else
-            Summary_ShowMonSprite();
+            Summary_CreateMonSprite();
         return;
     }
     task->data[0]++;
 }
 
-static void sub_819F7B4(u8 taskId)
+static void Task_CloseMonPic(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    switch (task->data[0])
+    switch (task->tState)
     {
     default:
         HideBg(3);
-        gSprites[task->data[6]].data[7] = task->data[7];
+        gSprites[task->data[6]].data[7] = task->tIsSwapScreen;
         gSprites[task->data[6]].invisible = FALSE;
         gSprites[task->data[6]].callback = sub_819F654;
         StartSpriteAffineAnim(&gSprites[task->data[6]], 1);
@@ -4064,12 +4071,12 @@ static void sub_819F7B4(u8 taskId)
         DestroyTask(taskId);
         break;
     case 0:
-        task->data[3] = 88;
-        task->data[24] = 152; // BUG: writing outside the array's bounds.
+        task->tWinLeft = 88;
+        task->tWinRight = 152;
         task->data[5] = 32;
         task->data[8] = 96;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[24]));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->tWinLeft, task->tWinRight));
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[8]));
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_CLR | WINOUT_WIN01_OBJ);
@@ -4090,7 +4097,7 @@ static void sub_819F7B4(u8 taskId)
     }
 }
 
-static void Swap_ShowMonSprite(void)
+static void Swap_CreateMonSprite(void)
 {
     struct Pokemon *mon;
     u16 species;
