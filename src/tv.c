@@ -529,7 +529,7 @@ static const u8 *const sTVFindThatGamerTextGroup[] = {
     gTVFindThatGamerText03
 };
 
-static const u8 *const sTVBreakinsNewsTextGroup[] = {
+static const u8 *const sTVBreakingNewsTextGroup[] = {
     gTVBreakingNewsText00,
     gTVBreakingNewsText01,
     gTVBreakingNewsText02,
@@ -6253,7 +6253,7 @@ static void DoTVShowBreakingNewsTV(void)
             TVShowDone();
             break;
     }
-    ShowFieldMessage(sTVBreakinsNewsTextGroup[state]);
+    ShowFieldMessage(sTVBreakingNewsTextGroup[state]);
 }
 
 static void DoTVShowSecretBaseVisit(void)
