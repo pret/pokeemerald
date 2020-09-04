@@ -925,7 +925,7 @@ void RecordMixTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {
-        int i, j;
+        s32 i, j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[5];
         struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));
@@ -982,7 +982,7 @@ void RecordMixTrainerNames(void)
 
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
@@ -997,7 +997,7 @@ bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 
 void WipeTrainerNameRecords(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
