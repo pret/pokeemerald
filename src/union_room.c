@@ -3245,7 +3245,9 @@ void InitUnionRoom(void)
 
     sUnionRoomPlayerName[0] = EOS;
     CreateTask(Task_InitUnionRoom, 0);
+    #ifndef NONMATCHING
     sWirelessLinkMain.uRoom = sWirelessLinkMain.uRoom; // Needed to match.
+    #endif
     sWirelessLinkMain.uRoom = data = AllocZeroed(sizeof(struct WirelessLink_URoom));
     sURoom = sWirelessLinkMain.uRoom;
     data->state = 0;

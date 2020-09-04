@@ -533,7 +533,9 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 if (i == (sBattler_AI ^ BIT_FLANK) && bestMovePointsForTarget[i] < 100)
                 {
                     bestMovePointsForTarget[i] = -1;
+                    #ifndef NONMATCHING
                     mostViableMovesScores[0] = mostViableMovesScores[0]; // Needed to match.
+                    #endif
                 }
             }
         }
