@@ -2044,8 +2044,7 @@ void sub_80110B8(u32 a0)
             if ((r8 >> i) & 1)
             {
                 child_sprite_genders |= ((0x80 | ((gLinkPlayers[Rfu.linkPlayerIdx[i]].gender & 1) << 3) | (gLinkPlayers[Rfu.linkPlayerIdx[i]].trainerId & 7)) << (numConnectedChildren << 3));
-                numConnectedChildren++;
-                if (numConnectedChildren == a0 - 1)
+                if (++numConnectedChildren == a0 - 1)
                     break;
             }
         }

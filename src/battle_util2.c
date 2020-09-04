@@ -13,9 +13,7 @@
 
 void AllocateBattleResources(void)
 {
-    #ifndef NONMATCHING
     gBattleResources = gBattleResources; // something dumb needed to match
-    #endif
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         InitTrainerHillBattleStruct();
