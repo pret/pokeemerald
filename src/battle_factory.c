@@ -614,7 +614,6 @@ static void GetOpponentMostCommonMonType(void)
     }
 
     gSpecialVar_Result = gSpecialVar_Result; // Needed to match. Don't ask me why.
-
     if (typesCount[usedType[0]] != 0 && (typesCount[usedType[0]] > typesCount[usedType[1]] || usedType[0] == usedType[1]))
         gSpecialVar_Result = usedType[0];
     else
