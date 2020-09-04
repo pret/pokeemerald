@@ -309,8 +309,7 @@ static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
 
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     for (i = 0; i < RECV_QUEUE_NUM_SLOTS; i++)
     {
@@ -327,8 +326,7 @@ void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 
 void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     for (i = 0; i < SEND_QUEUE_NUM_SLOTS; i++)
     {
@@ -345,8 +343,7 @@ void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 
 static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     for (i = 0; i < UNUSED_QUEUE_NUM_SLOTS; i++)
     {
@@ -631,7 +628,7 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
 
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             if (flags & 1)
             {
@@ -928,8 +925,7 @@ void RecordMixTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {
-        s32 i;
-        s32 j;
+        int i, j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[5];
         struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));
@@ -986,7 +982,7 @@ void RecordMixTrainerNames(void)
 
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
@@ -1001,7 +997,7 @@ bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 
 void WipeTrainerNameRecords(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
