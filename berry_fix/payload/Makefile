@@ -33,13 +33,12 @@ endif
 
 SHELL := /bin/bash -o pipefail
 
-CPPFLAGS := -I ../../tools/agbcc/include -I ../../tools/agbcc -iquote include -nostdinc -undef
+CPPFLAGS := -I ../../tools/agbcc/include -I ../../tools/agbcc -iquote include -nostdinc -nostdlib -undef
 
 ROM := payload.gba
 OBJ_DIR := build
 CC1             := ../../tools/agbcc/bin/agbcc$(EXE)
 override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
-
 
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
@@ -52,9 +51,9 @@ C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi
+ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork
 
-LDFLAGS = -Map ../$(MAP)
+LDFLAGS = -Map ../$(MAP) -nostdinc -nostdlib
 
 LIB := -L ../../../tools/agbcc/lib -lgcc
 

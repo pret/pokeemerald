@@ -37,7 +37,7 @@ REVISION   := 0
 
 SHELL := /bin/bash -o pipefail
 
-CPPFLAGS := -I ../tools/agbcc/include -I ../tools/agbcc -iquote include -nostdinc -undef
+CPPFLAGS := -I ../tools/agbcc/include -I ../tools/agbcc -iquote include -nostdinc nostdlib -undef
 
 ROM := berry_fix.gba
 OBJ_DIR := build
@@ -56,9 +56,9 @@ C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi
+ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork
 
-LDFLAGS = -Map ../$(MAP)
+LDFLAGS = -Map ../$(MAP) -nostdinc -nostdlib
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := ../tools/gbagfx/gbagfx$(EXE)
