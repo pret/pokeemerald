@@ -81,8 +81,6 @@ void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
 
-#define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
-
 void AgbMain()
 {
     RegisterRamReset(RESET_ALL);
