@@ -5258,11 +5258,11 @@ void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
+    asm_unified(
+    "push {r4-r7,lr}\n\
     mov r7, r8\n\
     push {r7}\n\
     adds r4, r3, 0\n\
@@ -5310,8 +5310,7 @@ _080C1DEC:\n\
     pop {r4-r7}\n\
     pop {r0}\n\
     bx r0\n\
-    .pool\n\
-    .syntax divided\n");
+    .pool");
 }
 #endif
 

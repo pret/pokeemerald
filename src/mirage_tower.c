@@ -762,8 +762,8 @@ static void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e)
 NAKED
 static void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e)
 {
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
+    asm_unified(
+    "push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\
@@ -861,7 +861,6 @@ static void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e)
     pop {r4-r7}\n\
     pop {r0}\n\
     bx r0\n\
-    .pool\n\
-                ");
+    .pool");
 }
 #endif // NONMATCHING

@@ -49,7 +49,7 @@
 // An 'Info Card' is a trainer or match information page that can be viewed on the Tourney Tree
 struct TourneyTreeInfoCard
 {
-    u8 spriteIds[NUM_INFOCARD_SPRITES]; 
+    u8 spriteIds[NUM_INFOCARD_SPRITES];
     u8 pos;
     u8 tournamentIds[NUM_INFOCARD_TRAINERS];
 };
@@ -499,7 +499,7 @@ static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
     [MOVE_PSYCHO_BOOST]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
 };
 
-// This array is searched in-order to determine what battle style a tourney trainer uses. 
+// This array is searched in-order to determine what battle style a tourney trainer uses.
 // If the sum of the points for the party's moves meets/exceeds all the point totals of an element, then they use that battle style
 static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_POINT_TYPES] =
 {
@@ -1188,11 +1188,11 @@ static const u8 sIdToMatchNumber[DOME_TOURNAMENT_TRAINERS_COUNT][DOME_ROUNDS_COU
     { 7, 11, 13, 14},
 };
 
-static const u8 sLastMatchCardNum[DOME_ROUNDS_COUNT] = 
+static const u8 sLastMatchCardNum[DOME_ROUNDS_COUNT] =
 {
-    [DOME_ROUND1]    = 23, 
-    [DOME_ROUND2]    = 27, 
-    [DOME_SEMIFINAL] = 29, 
+    [DOME_ROUND1]    = 23,
+    [DOME_ROUND2]    = 27,
+    [DOME_SEMIFINAL] = 29,
     [DOME_FINAL]     = 30
 };
 
@@ -1324,12 +1324,12 @@ static const u8 sSpeciesNameTextYCoords[] = {0, 4, 0};
 
 // Offsets within sBattleDomeOpponentStatsTexts for stat combinations
 // SPDEF has no offset because by then all stat combinations have been reached, so it has no combination texts
-static const u8 sStatTextOffsets[NUM_STATS - 1] = 
+static const u8 sStatTextOffsets[NUM_STATS - 1] =
 {
-    DOME_TEXT_HP, 
-    DOME_TEXT_ATK, 
-    DOME_TEXT_DEF, 
-    DOME_TEXT_SPEED, 
+    DOME_TEXT_HP,
+    DOME_TEXT_ATK,
+    DOME_TEXT_DEF,
+    DOME_TEXT_SPEED,
     DOME_TEXT_SPATK
 };
 
@@ -1421,7 +1421,7 @@ static const u8 sTrainerNamePositions[DOME_TOURNAMENT_TRAINERS_COUNT][2] =
 static const u8 sTourneyTreePokeballCoords[DOME_TOURNAMENT_TRAINERS_COUNT + DOME_TOURNAMENT_MATCHES_COUNT][2] =
 {
     { 68,  33}, // Left side trainers
-    { 68,  49}, 
+    { 68,  49},
     { 68,  65},
     { 68,  81},
     { 68,  97},
@@ -1495,7 +1495,7 @@ static const u8 sTourneyTreePokeballCoords[DOME_TOURNAMENT_TRAINERS_COUNT + DOME
     {.src = 0x6021,  .y = 0x10, .x = 0x09},   \
     {.src = 0x6023,  .y = 0x10, .x = 0x0a},   \
     {.src = 0x6047,  .y = 0x11, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x11, .x = 0x0b}, 
+    {.src = lastSrc, .y = 0x11, .x = 0x0b},
 
 #define LINESECTION_ROUND1_TRAINER4(lastSrc) \
     {.src = 0x602b,  .y = 0x12, .x = 0x09},  \
@@ -2395,7 +2395,7 @@ static void InitDomeTrainers(void)
         rankingScores[i] += (monTypesCount * monLevel) / 20;
     }
 
-    // Seed tourney trainers according to their ranking 
+    // Seed tourney trainers according to their ranking
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT - 1; i++)
     {
         for (j = i + 1; j < DOME_TOURNAMENT_TRAINERS_COUNT; j++)
@@ -2676,7 +2676,7 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
         partyPositions[i] = i;
 
     // All party mons have equal move score totals, choose randomly
-    if (partyMovePoints[0] == partyMovePoints[1] 
+    if (partyMovePoints[0] == partyMovePoints[1]
      && partyMovePoints[0] == partyMovePoints[2])
     {
         if (allowRandom)
@@ -2852,8 +2852,8 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 NAKED
 static int GetTypeEffectivenessPoints(int move, int species, int arg2)
 {
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
+    asm_unified(
+    "push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\
@@ -3085,8 +3085,7 @@ _08190156:\n\
     mov r10, r5\n\
     pop {r4-r7}\n\
     pop {r1}\n\
-    bx r1\n\
-                ");
+    bx r1");
 }
 #endif // NONMATCHING
 
@@ -4538,7 +4537,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         if (flags & MOVE_CARD)
             gSprites[sInfoCard->spriteIds[2 + i + arrId]].invisible = TRUE;
     }
-    
+
     // Initialize the text printer
     textPrinter.fontId = 2;
     textPrinter.x = 0;
@@ -4776,7 +4775,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             // If 2 good stats have been found already, choose which to use
             if (i == 2)
             {
-                
+
                 if (allocatedArray[6] < allocatedArray[k])
                 {
                     if (allocatedArray[7] < allocatedArray[k])
@@ -4893,7 +4892,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
     for (i = sCompetitorRangeByMatch[matchNum][0]; i < sCompetitorRangeByMatch[matchNum][0] + sCompetitorRangeByMatch[matchNum][1]; i++)
     {
         tournamentId = sTourneyTreeTrainerIds2[i];
-        
+
         if (DOME_TRAINERS[tournamentId].isEliminated
             && DOME_TRAINERS[tournamentId].eliminatedAt >= sCompetitorRangeByMatch[matchNum][2])
         {
@@ -5353,7 +5352,7 @@ static void ResolveDomeRoundWinners(void)
         DOME_TRAINERS[TrainerIdToTournamentId(gTrainerBattleOpponent_A)].isEliminated = TRUE;
         DOME_TRAINERS[TrainerIdToTournamentId(gTrainerBattleOpponent_A)].eliminatedAt = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
         gSaveBlock2Ptr->frontier.domeWinningMoves[TrainerIdToTournamentId(gTrainerBattleOpponent_A)] = gBattleResults.lastUsedMovePlayer;
-        
+
         // If the player's match was the final one, no NPC vs NPC matches to decide
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < DOME_FINAL)
             DecideRoundWinners(gSaveBlock2Ptr->frontier.curChallengeBattleNum);
@@ -5363,7 +5362,7 @@ static void ResolveDomeRoundWinners(void)
         DOME_TRAINERS[TrainerIdToTournamentId(TRAINER_PLAYER)].isEliminated = TRUE;
         DOME_TRAINERS[TrainerIdToTournamentId(TRAINER_PLAYER)].eliminatedAt = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
         gSaveBlock2Ptr->frontier.domeWinningMoves[TrainerIdToTournamentId(TRAINER_PLAYER)] = gBattleResults.lastUsedMoveOpponent;
-        
+
         if (gBattleOutcome == B_OUTCOME_FORFEITED || gSpecialVar_0x8005 == DOME_PLAYER_RETIRED)
             DOME_TRAINERS[TrainerIdToTournamentId(TRAINER_PLAYER)].forfeited = TRUE;
 
@@ -5401,7 +5400,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
                 movePower = 40;
             else if (movePower == 1)
                 movePower = 60;
-            else if (moveIds[i * MAX_MON_MOVES + j] == MOVE_SELF_DESTRUCT 
+            else if (moveIds[i * MAX_MON_MOVES + j] == MOVE_SELF_DESTRUCT
                   || moveIds[i * MAX_MON_MOVES + j] == MOVE_EXPLOSION)
                 movePower /= 2;
 
@@ -5558,7 +5557,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         {
             for (i = 0; i < ARRAY_COUNT(sTourneyTreePokeballCoords); i++)
                 CreateSprite(&sTourneyTreePokeballSpriteTemplate, sTourneyTreePokeballCoords[i][0], sTourneyTreePokeballCoords[i][1], 0);
-            
+
             if (gTasks[taskId].tIsPrevTourneyTree)
                 CreateSprite(&sExitButtonSpriteTemplate, 218, 12, 0);
             else
@@ -5698,7 +5697,7 @@ static void Task_ShowTourneyTree(u8 taskId)
             gTasks[i].tState = 0;
         }
         ScanlineEffect_Clear();
-        
+
         i = 0;
         while (i < 91)
         {
@@ -5713,7 +5712,7 @@ static void Task_ShowTourneyTree(u8 taskId)
             gScanlineEffectRegBuffers[1][i] =  BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_CHARBASE(2) | BGCNT_TXT256x256;
             i++;
         }
-        
+
         ScanlineEffect_SetParams(sTourneyTreeScanlineEffectParams);
         DestroyTask(taskId);
         break;
@@ -5851,67 +5850,67 @@ static void HblankCb_TourneyTree(void)
 
     if (vCount < 42)
     {
-        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ 
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
                 | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
         SET_WIN0H_WIN1H(0, 0);
     }
     else if (vCount < 50)
     {
-        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR 
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
                     | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
         SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
     }
     else if (vCount < 58)
     {
-        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ 
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
                 | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
         SET_WIN0H_WIN1H(0, 0);
     }
     else if (vCount < 75)
     {
-        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR 
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
                     | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
         SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
     }
     else if (vCount < 82)
     {
-        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR 
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
                     | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
         SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
     }
     else if (vCount < 95)
     {
-        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ 
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
                 | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
         SET_WIN0H_WIN1H(0, 0);
     }
     else if (vCount < 103)
     {
-        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR 
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
                     | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
         SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
     }
     else if (vCount < 119)
     {
-        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR 
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
                     | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
         SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
     }
     else if (vCount < 127)
     {
-        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ 
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
                 | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
         SET_WIN0H_WIN1H(0, 0);
     }
     else if (vCount < 135)
     {
-        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR 
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
                     | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
         SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
     }
     else
     {
-        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ 
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
                 | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
         SET_WIN0H_WIN1H(0, 0);
     }

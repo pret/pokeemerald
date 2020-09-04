@@ -293,7 +293,7 @@ static const struct SpriteTemplate sUnknown_0861FB44 =
 bool32 InitPokenavMainMenu(void)
 {
     struct PokenavMainMenuResources *structPtr;
-    
+
     structPtr = AllocSubstruct(0, sizeof(struct PokenavMainMenuResources));
     if (structPtr == NULL)
         return FALSE;
@@ -474,8 +474,8 @@ void sub_81C7990(u32 a0, u16 a1)
 NAKED
 void sub_81C79BC(const u16 *a0, const u16 *a1, u32 a2, u32 a3, u32 a4, u16 *a5)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
+    asm_unified(
+    "push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\
@@ -603,8 +603,7 @@ _081C7AAE:\n\
     mov r10, r5\n\
     pop {r4-r7}\n\
     pop {r0}\n\
-    bx r0\n\
-    .syntax divided");
+    bx r0");
 }
 
 void PokenavFadeScreen(s32 fadeType)
