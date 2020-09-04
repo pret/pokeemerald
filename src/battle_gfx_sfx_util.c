@@ -1006,7 +1006,6 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
         for (i = 1; i < 4; i++)
         {
             u8 (*ptr)[4][0x800] = gMonSpritesGfxPtr->sprites[position];
-
             ptr++;ptr--; // Needed to match.
 
             DmaCopy32Defvars(3, (*ptr)[0], (*ptr)[i], 0x800);

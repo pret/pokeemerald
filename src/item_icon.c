@@ -55,16 +55,12 @@ const struct SpriteTemplate gItemIconSpriteTemplate =
 // code
 bool8 AllocItemIconTemporaryBuffers(void)
 {
-    #ifndef NONMATCHING
     gItemIconDecompressionBuffer = gItemIconDecompressionBuffer; // needed to match
-    #endif
     gItemIconDecompressionBuffer = Alloc(0x120);
     if (gItemIconDecompressionBuffer == NULL)
         return FALSE;
 
-    #ifndef NONMATCHING
     gItemIcon4x4Buffer = gItemIcon4x4Buffer; // needed to match
-    #endif
     gItemIcon4x4Buffer = AllocZeroed(0x200);
     if (gItemIcon4x4Buffer == NULL)
     {
