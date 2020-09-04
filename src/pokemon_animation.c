@@ -4100,8 +4100,10 @@ static void sub_8183574(struct Sprite *sprite)
     u8 var2 = var5;
     if (var5 != 0xFF)
         var5 = sprite->data[7];
+    #ifndef NONMATCHING
     else
         var5 = 0xFF; // needed to match
+    #endif
 
     var6 = sUnknown_0860AA80[sprite->data[5]][1];
     var7 = 0;
