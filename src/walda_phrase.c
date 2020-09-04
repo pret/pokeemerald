@@ -173,9 +173,7 @@ static void sub_81D9C90(u8 *array, s32 arg1, s32 arg2)
     {
         var1 = (array[0] & 0x80) >> 7;
 
-        #ifndef NONMATCHING
         var1++; var1--; // needed to match
-        #endif
 
         for (j = arg1 - 1; j >= 0; j--)
         {
