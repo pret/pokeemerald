@@ -81,10 +81,7 @@ void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
 
-#define RESET_KEY_COMBO (gMain.heldKeysRaw & A_BUTTON)\
-         && (gMain.heldKeysRaw & B_BUTTON)\
-         && (gMain.heldKeysRaw & START_BUTTON)\
-         && (gMain.heldKeysRaw & SELECT_BUTTON) \
+#define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
 void AgbMain()
 {
@@ -120,7 +117,10 @@ void AgbMain()
         ReadKeys();
 
         if (!gSoftResetDisabled
-         && (RESET_KEY_COMBO)) //The reset key combo A + B + START + SELECT
+         && (gMain.heldKeysRaw & A_BUTTON)
+         && (gMain.heldKeysRaw & B_BUTTON)
+         && (gMain.heldKeysRaw & START_BUTTON)
+         && (gMain.heldKeysRaw & SELECT_BUTTON)) //The reset key combo A + B + START + SELECT
         {
             rfu_REQ_stopMode();
             rfu_waitREQComplete();
