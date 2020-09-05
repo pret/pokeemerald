@@ -407,6 +407,7 @@ struct RfuTgtData
     u16 serialNo;                              // Game serial number of parent candidate                 Game serial number of connection partner
     u8  gname[RFU_GAME_NAME_LENGTH + 2];       // Game name of parent candidate                          Game name of connection partner
     u8  uname[RFU_USER_NAME_LENGTH + 1];       // User name for parent candidate                         User name for connection partner
+    u8 padding[2];
 };
 
 struct RfuLinkStatus
