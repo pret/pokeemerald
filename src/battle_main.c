@@ -3556,7 +3556,7 @@ static void BattleIntroPrintWildMonAttacked(void)
 
 static void BattleIntroPrintOpponentSendsOut(void)
 {
-    u8 position;
+    u32 position;
 
     if (gBattleControllerExecFlags)
         return;
@@ -3579,7 +3579,7 @@ static void BattleIntroPrintOpponentSendsOut(void)
 
 static void BattleIntroOpponent2SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_OPPONENT_RIGHT;
@@ -3608,7 +3608,7 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
 #ifdef NONMATCHING
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_OPPONENT_LEFT;
@@ -3781,7 +3781,7 @@ static void BattleIntroPrintPlayerSendsOut(void)
 
 static void BattleIntroPlayer2SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_RIGHT;
@@ -3813,7 +3813,7 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
 
 static void BattleIntroPlayer1SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_LEFT;
@@ -5556,14 +5556,16 @@ static void HandleAction_UseItem(void)
             break;
         case AI_ITEM_CURE_CONDITION:
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            if ((*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1)
-            && (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 0x3E))
+            if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1)
+            {
+                if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 0x3E)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 5;
+            }
             else
             {
-                while (!(*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1))
+                while (!(*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1))
                 {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
                 }
             }
@@ -5581,7 +5583,7 @@ static void HandleAction_UseItem(void)
 
                 while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
                 {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
                     gBattleTextBuff1[2]++;
                 }
 
@@ -5597,7 +5599,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2)];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + (gBattlerAttacker >> 1))];
     }
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
