@@ -1614,26 +1614,26 @@ static u16 sub_811ACDC(void)
         {
             return sub_811B150();
         }
-        else if (JOY_NEW(START_BUTTON))
+        if (JOY_NEW(START_BUTTON))
         {
             return sub_811B1B4();
         }
-        else if (JOY_NEW(DPAD_UP))
+        if (JOY_NEW(DPAD_UP))
         {
             sEasyChatScreen->mainCursorRow--;
             break;
         }
-        else if (JOY_NEW(DPAD_LEFT))
+        if (JOY_NEW(DPAD_LEFT))
         {
             sEasyChatScreen->mainCursorColumn--;
             break;
         }
-        else if (JOY_NEW(DPAD_DOWN))
+        if (JOY_NEW(DPAD_DOWN))
         {
             sEasyChatScreen->mainCursorRow = 0;
             break;
         }
-        else if (JOY_NEW(DPAD_RIGHT))
+        if (JOY_NEW(DPAD_RIGHT))
         {
             sEasyChatScreen->mainCursorColumn++;
             break;
