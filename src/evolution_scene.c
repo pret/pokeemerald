@@ -630,14 +630,14 @@ static void Task_EvolutionScene(u8 taskID)
     case 3:
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteID)) // wait for animation, play tu du SE
         {
-            PlaySE(MUS_ME_SHINKA);
+            PlaySE(MUS_EVOLUTION_INTRO);
             gTasks[taskID].tState++;
         }
         break;
     case 4: // play evolution music and fade screen black
         if (!IsSEPlaying())
         {
-            PlayNewMapMusic(MUS_SHINKA);
+            PlayNewMapMusic(MUS_EVOLUTION);
             gTasks[taskID].tState++;
             BeginNormalPaletteFade(0x1C, 4, 0, 0x10, RGB_BLACK);
         }
@@ -713,7 +713,7 @@ static void Task_EvolutionScene(u8 taskID)
         {
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             BattlePutTextOnWindow(gStringVar4, 0);
-            PlayBGM(MUS_FANFA5);
+            PlayBGM(MUS_EVOLVED);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
             CalculateMonStats(mon);
@@ -808,7 +808,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (!IsTextPrinterActive(0) && !IsSEPlaying())
         {
             BufferMoveToLearnIntoBattleTextBuff2();
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_ID_ADDER]);
             BattlePutTextOnWindow(gDisplayedStringBattle, 0);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
@@ -859,21 +859,21 @@ static void Task_EvolutionScene(u8 taskID)
             }
             break;
         case 4:
-            if (gMain.newKeys & DPAD_UP && sEvoCursorPos != 0)
+            if (JOY_NEW(DPAD_UP) && sEvoCursorPos != 0)
             {
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(sEvoCursorPos);
                 sEvoCursorPos = 0;
                 BattleCreateYesNoCursorAt(0);
             }
-            if (gMain.newKeys & DPAD_DOWN && sEvoCursorPos == 0)
+            if (JOY_NEW(DPAD_DOWN) && sEvoCursorPos == 0)
             {
                 PlaySE(SE_SELECT);
                 BattleDestroyYesNoCursorAt(sEvoCursorPos);
                 sEvoCursorPos = 1;
                 BattleCreateYesNoCursorAt(1);
             }
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);
@@ -889,7 +889,7 @@ static void Task_EvolutionScene(u8 taskID)
                         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                 }
             }
-            if (gMain.newKeys & B_BUTTON)
+            if (JOY_NEW(B_BUTTON))
             {
                 HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);
@@ -998,15 +998,15 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 2:
         if (IsCryFinished())
         {
-            m4aSongNumStop(MUS_SHINKA);
-            PlaySE(MUS_ME_SHINKA);
+            m4aSongNumStop(MUS_EVOLUTION);
+            PlaySE(MUS_EVOLUTION_INTRO);
             gTasks[taskID].tState++;
         }
         break;
     case 3:
         if (!IsSEPlaying())
         {
-            PlayBGM(MUS_SHINKA);
+            PlayBGM(MUS_EVOLUTION);
             gTasks[taskID].tState++;
             BeginNormalPaletteFade(0x1C, 4, 0, 0x10, RGB_BLACK);
         }
@@ -1076,7 +1076,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         {
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             DrawTextOnTradeWindow(0, gStringVar4, 1);
-            PlayFanfare(MUS_FANFA5);
+            PlayFanfare(MUS_EVOLVED);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (&gTasks[taskID].tPostEvoSpecies));
             CalculateMonStats(mon);
@@ -1109,7 +1109,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             else
             {
-                PlayBGM(MUS_SHINKA);
+                PlayBGM(MUS_EVOLUTION);
                 DrawTextOnTradeWindow(0, gText_CommunicationStandby5, 1);
                 gTasks[taskID].tState++;
             }
@@ -1153,7 +1153,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         if (!IsTextPrinterActive(0) && !IsSEPlaying())
         {
             BufferMoveToLearnIntoBattleTextBuff2();
-            PlayFanfare(MUS_FANFA1);
+            PlayFanfare(MUS_LEVEL_UP);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_ID_ADDER]);
             DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter

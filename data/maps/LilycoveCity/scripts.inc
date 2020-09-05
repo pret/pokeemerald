@@ -241,7 +241,7 @@ LilycoveCity_EventScript_Rival:: @ 81E2DDE
 	end
 
 LilycoveCity_EventScript_May:: @ 81E2DF8
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattle
 	compare VAR_RESULT, NO
@@ -270,7 +270,7 @@ LilycoveCity_EventScript_DeclineMayBattle:: @ 81E2E5A
 	end
 
 LilycoveCity_EventScript_Brendan:: @ 81E2E6B
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattle
 	compare VAR_RESULT, NO

@@ -21,7 +21,7 @@ Route101_EventScript_HideMapNamePopup:: @ 81EBCD5
 
 Route101_EventScript_StartBirchRescue:: @ 81EBCDE
 	lockall
-	playbgm MUS_EVENT0, 1
+	playbgm MUS_HELP, 1
 	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
 	closemessage
 	setobjectxy LOCALID_BIRCH, 0, 15

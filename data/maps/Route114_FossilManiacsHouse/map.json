@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE114_FOSSIL_MANIACS_HOUSE",
   "name": "Route114_FossilManiacsHouse",
   "layout": "LAYOUT_ROUTE114_FOSSIL_MANIACS_HOUSE",
-  "music": "MUS_TONEKUSA",
+  "music": "MUS_FALLARBOR",
   "region_map_section": "MAPSEC_ROUTE_114",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

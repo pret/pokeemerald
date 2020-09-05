@@ -74,7 +74,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMay:: @ 81F934A
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth
 	compare VAR_FACING, DIR_SOUTH

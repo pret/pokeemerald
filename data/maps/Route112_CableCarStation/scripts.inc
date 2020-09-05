@@ -47,7 +47,7 @@ Route112_CableCarStation_EventScript_RideCableCar:: @ 822AB38
 	applymovement LOCALID_ATTENDANT, Route112_CableCarStation_Movement_LeadPlayerToCableCar
 	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_BoardCableCar
 	waitmovement 0
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, FALSE  @ Going up
 	setvar VAR_CABLE_CAR_STATION_STATE, 1
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp

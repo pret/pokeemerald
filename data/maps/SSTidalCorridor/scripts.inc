@@ -17,7 +17,7 @@ SSTidalCorridor_EventScript_DepartSlateportForLilycove:: @ 823BFFF
 	special SetSSTidalFlag
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_DEPART_SLATEPORT
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SSTidal_Text_FastCurrentsHopeYouEnjoyVoyage, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -25,7 +25,7 @@ SSTidalCorridor_EventScript_DepartSlateportForLilycove:: @ 823BFFF
 SSTidalCorridor_EventScript_DepartLilycoveForSlateport:: @ 823C015
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_DEPART_LILYCOVE
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SSTidal_Text_HopeYouEnjoyVoyage, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -33,14 +33,14 @@ SSTidalCorridor_EventScript_DepartLilycoveForSlateport:: @ 823C015
 SSTidalRooms_EventScript_HalfwayToSlateport:: @ 823C028
 	special SetSSTidalFlag
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_HALFWAY_SLATEPORT
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SSTidal_Text_FastCurrentsHopeYouEnjoyVoyage, MSGBOX_DEFAULT
 	return
 
 SSTidalRooms_EventScript_ArrivedInLilycove:: @ 823C03C
 	special ResetSSTidalFlag
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_LILYCOVE
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SSTidal_Text_MadeLandInLilycove, MSGBOX_DEFAULT
 	return
 
@@ -55,7 +55,7 @@ SSTidalCorridor_EventScript_HalfwayToLilycove:: @ 823C067
 	special ResetSSTidalFlag
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_HALFWAY_LILYCOVE
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SSTidal_Text_HopeYouEnjoyVoyage, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -64,7 +64,7 @@ SSTidalCorridor_EventScript_ArrivedInSlateport:: @ 823C07D
 	special ResetSSTidalFlag
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_SLATEPORT
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SSTidal_Text_MadeLandInSlateport, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -72,7 +72,7 @@ SSTidalCorridor_EventScript_ArrivedInSlateport:: @ 823C07D
 SSTidalRooms_EventScript_ArrivedInSlateport:: @ 823C093
 	special ResetSSTidalFlag
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_SLATEPORT
-	playse SE_PINPON
+	playse SE_DING_DONG
 	msgbox SSTidal_Text_MadeLandInSlateport, MSGBOX_DEFAULT
 	return
 
@@ -204,7 +204,7 @@ SSTidalCorridor_EventScript_ScottScene:: @ 823C219
 	applymovement LOCALID_SAILOR, SSTidalCorridor_Movement_SailorMoveForScott
 	applymovement LOCALID_SCOTT, SSTidalCorridor_Movement_ScottExit
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	waitse
 	removeobject LOCALID_SCOTT
 	applymovement LOCALID_SAILOR, SSTidalCorridor_Movement_SailorReturn

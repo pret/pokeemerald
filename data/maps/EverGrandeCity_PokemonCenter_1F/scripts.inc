@@ -45,7 +45,7 @@ EverGrandeCity_PokemonCenter_1F_EventScript_Scott:: @ 8229A79
 	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE
-	playse SE_KAIDAN
+	playse SE_EXIT
 	waitse
 	removeobject LOCALID_SCOTT
 	release

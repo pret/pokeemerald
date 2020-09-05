@@ -147,7 +147,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2:: @ 81F78D6
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_MeetRival:: @ 81F78E2
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 10
 	addobject LOCALID_RIVAL
 	delay 30
@@ -158,7 +158,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival:: @ 81F78E2
 	waitmovement 0
 	compare VAR_0x8008, 1
 	call_if_ne LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0
 	compare VAR_0x8008, 1
@@ -173,7 +173,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival:: @ 81F78E2
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs1
 	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs2
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject LOCALID_RIVAL
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL

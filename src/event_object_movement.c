@@ -8216,15 +8216,13 @@ bool8 FreezeObjectEvent(struct ObjectEvent *objectEvent)
     {
         return TRUE;
     }
-    else
-    {
-        objectEvent->frozen = 1;
-        objectEvent->spriteAnimPausedBackup = gSprites[objectEvent->spriteId].animPaused;
-        objectEvent->spriteAffineAnimPausedBackup = gSprites[objectEvent->spriteId].affineAnimPaused;
-        gSprites[objectEvent->spriteId].animPaused = 1;
-        gSprites[objectEvent->spriteId].affineAnimPaused = 1;
-        return FALSE;
-    }
+
+    objectEvent->frozen = 1;
+    objectEvent->spriteAnimPausedBackup = gSprites[objectEvent->spriteId].animPaused;
+    objectEvent->spriteAffineAnimPausedBackup = gSprites[objectEvent->spriteId].affineAnimPaused;
+    gSprites[objectEvent->spriteId].animPaused = 1;
+    gSprites[objectEvent->spriteId].affineAnimPaused = 1;
+    return FALSE;
 }
 
 void FreezeObjectEvents(void)
@@ -8397,8 +8395,8 @@ bool8 sub_80976EC(struct Sprite *sprite)
 
     if (sprite->data[5] > 15)
         return TRUE;
-    else
-        return FALSE;
+
+    return FALSE;
 }
 
 static const s8 sFigure8XOffsets[FIGURE_8_LENGTH] = {
@@ -8478,15 +8476,15 @@ static bool8 AnimateSpriteInFigure8(struct Sprite *sprite)
     return finished;
 }
 
-static const s8 gUnknown_0850E802[] = {
+static const s8 gUnknown_0850E802[16] = {
     -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
 };
 
-static const s8 gUnknown_0850E812[] = {
+static const s8 gUnknown_0850E812[16] = {
     0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
 };
 
-static const s8 gUnknown_0850E822[] = {
+static const s8 gUnknown_0850E822[16] = {
     -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
 };
 
@@ -8509,23 +8507,11 @@ void sub_809783C(struct Sprite *sprite, u8 a2, u8 a3, u8 a4)
     sprite->data[6] = 0;
 }
 
-static const s16 gUnknown_0850E840[] = {
-    16, 16, 32,
-};
-
-static const u8 gUnknown_0850E846[] = {
-    0, 0, 1,
-};
-
 u8 sub_809785C(struct Sprite *sprite)
 {
-    s16 v5[3];
-    u8 v6[3];
-    u8 v2;
-
-    memcpy(v5, gUnknown_0850E840, 6); // TODO: get rid of memcpy
-    memcpy(v6, gUnknown_0850E846, 3);
-    v2 = 0;
+    s16 v5[] = {16, 16, 32};
+    u8 v6[] = {0, 0, 1};
+    u8 v2 = 0;
 
     if (sprite->data[4])
         Step1(sprite, sprite->data[3]);
@@ -8546,23 +8532,11 @@ u8 sub_809785C(struct Sprite *sprite)
     return v2;
 }
 
-static const s16 gUnknown_0850E84A[] = {
-    32, 32, 64,
-};
-
-static const u8 gUnknown_0850E850[] = {
-    1, 1, 2,
-};
-
 u8 sub_80978E4(struct Sprite *sprite)
 {
-    s16 v5[3];
-    u8 v6[3];
-    u8 v2;
-
-    memcpy(v5, gUnknown_0850E84A, 6);
-    memcpy(v6, gUnknown_0850E850, 3);
-    v2 = 0;
+    s16 v5[] = {32, 32, 64};
+    u8 v6[] = {1, 1, 2};
+    u8 v2 = 0;
 
     if (sprite->data[4] && !(sprite->data[6] & 1))
         Step1(sprite, sprite->data[3]);
@@ -8590,12 +8564,9 @@ static void SetMovementDelay(struct Sprite *sprite, s16 timer)
 
 static bool8 WaitForMovementDelay(struct Sprite *sprite)
 {
-    sprite->data[3]--;
-
-    if (sprite->data[3] == 0)
+    if (--sprite->data[3] == 0)
         return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 void SetAndStartSpriteAnim(struct Sprite *sprite, u8 animNum, u8 animCmdIndex)
@@ -8609,8 +8580,7 @@ bool8 SpriteAnimEnded(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible)
@@ -8789,13 +8759,13 @@ static void UpdateObjectEventSpritePosition(struct Sprite *sprite)
 {
     switch(sprite->tAnimNum)
     {
+        case 0:
+            break;
         case UNION_ROOM_SPAWN_IN:
             MoveUnionRoomObjectDown(sprite);
             break;
         case UNION_ROOM_SPAWN_OUT:
             MoveUnionRoomObjectUp(sprite);
-            break;
-        case 0:
             break;
         default:
             sprite->tAnimNum = 0;
@@ -8877,8 +8847,7 @@ u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct
     }
     else
     {
-        u8 i;
-        u8 firstFreeSlot;
+        u8 i, firstFreeSlot;
         bool32 found;
         for (firstFreeSlot = 16, found = FALSE, i = 0; i < 16; i++)
         {

@@ -145,7 +145,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F
 	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade
 	updatemoneybox 0, 0
 	bufferitemname 0, VAR_TEMP_0
-	playse SE_JIHANKI
+	playse SE_VEND
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
@@ -157,7 +157,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F
 	checkitemspace VAR_TEMP_0, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink
-	playse SE_JIHANKI
+	playse SE_VEND
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
@@ -169,7 +169,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F
 	checkitemspace VAR_TEMP_0, 1
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink
-	playse SE_JIHANKI
+	playse SE_VEND
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0

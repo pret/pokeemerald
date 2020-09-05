@@ -31,7 +31,7 @@ Route103_EventScript_Rival:: @ 81EC3C1
 Route103_EventScript_RivalMay:: @ 81EC3DA
 	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
@@ -48,7 +48,7 @@ Route103_EventScript_RivalMay:: @ 81EC3DA
 Route103_EventScript_RivalBrendan:: @ 81EC434
 	msgbox Route103_Text_BrendanRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
@@ -115,7 +115,7 @@ Route103_EventScript_RivalExitFacingNorth:: @ 81EC53D
 	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingNorth
 	applymovement LOCALID_RIVAL, Route103_Movement_RivalExitFacingNorth1
 	waitmovement 0
-	playse SE_DANSA
+	playse SE_LEDGE
 	applymovement LOCALID_RIVAL, Route103_EventScript_RivalExitFacingNorth2
 	waitmovement 0
 	goto Route103_EventScript_RivalEnd
@@ -125,7 +125,7 @@ Route103_EventScript_RivalExitFacingEastOrWest:: @ 81EC561
 	applymovement OBJ_EVENT_ID_PLAYER, Route103_Movement_WatchRivalExitFacingEastOrWest
 	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit1
 	waitmovement 0
-	playse SE_DANSA
+	playse SE_LEDGE
 	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit2
 	waitmovement 0
 	goto Route103_EventScript_RivalEnd
@@ -134,7 +134,7 @@ Route103_EventScript_RivalExitFacingEastOrWest:: @ 81EC561
 Route103_EventScript_RivalExitFacingSouth:: @ 81EC585
 	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit1
 	waitmovement 0
-	playse SE_DANSA
+	playse SE_LEDGE
 	applymovement LOCALID_RIVAL, Route103_Movement_RivalExit2
 	waitmovement 0
 	goto Route103_EventScript_RivalEnd

@@ -53,7 +53,7 @@ SlateportCity_BattleTentLobby_EventScript_GivePrize:: @ 82087E9
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	message BattleFrontier_BattleTowerLobby_Text_ReceivedPrize  @ Odd that it uses Tower's instead of Factory's or its own
 	waitmessage
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	goto SlateportCity_BattleTentLobby_EventScript_EndGivePrize
 

@@ -401,13 +401,13 @@ ContestHall_EventScript_ShowContestMonPic:: @ 827A1D2
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_CheckIfContestWithRSPlayer
 	addobject LOCALID_POKEBALL
-	playse SE_DANSA
+	playse SE_LEDGE
 	lockall
 	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	waitmovement 0
 	releaseall
 	addvar VAR_0x8006, -1
-	playse SE_BOWA2
+	playse SE_BALL_OPEN
 	special ShowContestEntryMonPic
 	call ContestHall_EventScript_EntryXTrainersMon
 	return
@@ -427,7 +427,7 @@ ContestHall_EventScript_EntryXTrainersMonLink:: @ 827A229
 ContestHall_EventScript_AudienceVote:: @ 827A230
 	call ContestHall_EventScript_AudienceWillVote
 	call ContestHall_EventScript_VotingUnderWay
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	waitmessage
 	call ContestHall_EventScript_AudienceLookAround
 	applymovement LOCALID_MC, ContestHall_Movement_MCFaceJudge2
@@ -481,7 +481,7 @@ ContestHall_EventScript_AudienceReactToContestant:: @ 827A2D5
 	call ContestHall_EventScript_TryWaitForLink
 	applymovement LOCALID_MC, ContestHall_Movement_AudienceMemberLookLeft
 	waitmovement 0
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call ContestHall_EventScript_VObjectAudienceLookAround
 	applymovement LOCALID_AUDIENCE_5, ContestHall_Movement_AudienceMemberLookRight
 	applymovement LOCALID_AUDIENCE_2, ContestHall_Movement_AudienceMemberLookDown
@@ -542,7 +542,7 @@ ContestHall_EventScript_AudienceHeartEmotes:: @ 827A34F
 
 ContestHall_EventScript_DisplayHearts:: @ 827A3E5
 	setvar VAR_RESULT, 8
-	special ScriptRandom
+	special GenerateContestRand
 	compare VAR_RESULT, 0
 	call_if_eq ContestHall_EventScript_TryDisplayHeartAudienceMember1
 	compare VAR_RESULT, 1
@@ -916,7 +916,7 @@ ContestHall_EventScript_ContestResults:: @ 827A8A5
 	setvar VAR_TEMP_9, 1
 	showcontestresults
 	setvar VAR_TEMP_9, 0
-	playbgm MUS_CON_FAN, 0
+	playbgm MUS_CONTEST_WINNER, 0
 	return
 
 ContestHall_EventScript_ThatsItForJudging:: @ 827A8FB
@@ -1005,7 +1005,7 @@ ContestHall_EventScript_CongratulateWinner:: @ 827A9D4
 	call ContestHall_EventScript_CongratsWinner
 	applymovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp
 	waitmovement 0
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	setvar VAR_TEMP_1, 0
 	return
 
@@ -1117,7 +1117,7 @@ ContestHall_EventScript_GiveWinnerPrize:: @ 827AB36
 	releaseall
 	call ContestHall_EventScript_WinnerApproachForPrize
 	call ContestHall_EventScript_GivePrizeIfWinner
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	setvar VAR_TEMP_1, 0
 	call ContestHall_EventScript_AudienceLookAround
 	delay 30
@@ -1266,7 +1266,7 @@ ContestHall_EventScript_ReceiveContestRibbon:: @ 827ACDF
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox ContestHall_Text_ConferRibbonAsPrize, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	msgbox ContestHall_Text_ReceivedRibbon, MSGBOX_DEFAULT
 	waitfanfare
 	special BufferContestWinnerMonName

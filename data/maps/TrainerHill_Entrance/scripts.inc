@@ -69,7 +69,7 @@ TrainerHill_Entrance_EventScript_ExitElevator:: @ 8268160
 	waitmovement 0
 	setmetatile 17, 10, METATILE_TrainerHill_CounterDoor, 1
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	waitse
 	setvar VAR_TEMP_D, 0
 	releaseall

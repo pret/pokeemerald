@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE131",
   "name": "Route131",
   "layout": "LAYOUT_ROUTE131",
-  "music": "MUS_GRANROAD",
+  "music": "MUS_ROUTE119",
   "region_map_section": "MAPSEC_ROUTE_131",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

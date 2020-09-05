@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE113",
   "name": "Route113",
   "layout": "LAYOUT_ROUTE113",
-  "music": "MUS_KAZANBAI",
+  "music": "MUS_ROUTE113",
   "region_map_section": "MAPSEC_ROUTE_113",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

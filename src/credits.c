@@ -1143,7 +1143,7 @@ static void CB2_RunCreditsSequence(void)
     RunTasks();
     AnimateSprites();
 
-    if ((gMain.heldKeys & B_BUTTON)
+    if ((JOY_HELD(B_BUTTON))
      && gHasHallOfFameRecords != 0
      && gTasks[gUnknown_0203BCE2].func == Task_ProgressCreditTasks)
     {
@@ -1160,7 +1160,7 @@ static void sub_8175548(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBackgroundTemplates, 1);
-    SetBgTilemapBuffer(0, AllocZeroed(0x800));
+    SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
     LoadPalette(gUnknown_085E56F0, 0x80, 0x40);
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
@@ -1239,7 +1239,7 @@ void CB2_StartCreditsSequence(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(CreditsVBlankCallback);
-    m4aSongNumStart(MUS_THANKFOR);
+    m4aSongNumStart(MUS_CREDITS);
     SetMainCallback2(CB2_RunCreditsSequence);
     gUnknown_0203BCE5 = 0;
     sCreditsData = AllocZeroed(sizeof(struct CreditsData));

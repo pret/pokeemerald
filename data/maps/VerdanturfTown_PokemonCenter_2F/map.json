@@ -2,7 +2,7 @@
   "id": "MAP_VERDANTURF_TOWN_POKEMON_CENTER_2F",
   "name": "VerdanturfTown_PokemonCenter_2F",
   "layout": "LAYOUT_POKEMON_CENTER_2F",
-  "music": "MUS_POKECEN",
+  "music": "MUS_POKE_CENTER",
   "region_map_section": "MAPSEC_VERDANTURF_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -32,7 +32,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving:: @ 8250768
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_DidntSaveBeforeQuittingTakeBag
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	closemessage
 	pyramid_set PYRAMID_DATA_WIN_STREAK, 0
@@ -63,7 +63,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints:: @ 82507DA
 	special HealPlayerParty
 	message BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_GiveYouTheseBattlePoints, MSGBOX_DEFAULT
 	frontier_givepoints
@@ -88,7 +88,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge:: @ 8250852
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	message BattleFrontier_BattlePyramidLobby_Text_RecordResultsWait
 	waitmessage
@@ -388,7 +388,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag:: @ 8250D94
 BattleFrontier_BattlePyramidLobby_EventScript_ReceiveBattleBag:: @ 8250D9C
 	message BattleFrontier_BattlePyramidLobby_Text_ExchangedBagForBattleBag
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_StepOnFloorPanel, MSGBOX_DEFAULT
 	closemessage

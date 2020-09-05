@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE104_PROTOTYPE_PRETTY_PETAL_FLOWER_SHOP",
   "name": "Route104_PrototypePrettyPetalFlowerShop",
   "layout": "LAYOUT_ROUTE104_PRETTY_PETAL_FLOWER_SHOP",
-  "music": "MUS_NEXTROAD",
+  "music": "MUS_ROUTE104",
   "region_map_section": "MAPSEC_ROUTE_104",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

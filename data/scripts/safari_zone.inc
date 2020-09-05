@@ -24,7 +24,7 @@ SafariZone_EventScript_Retire:: @ 82A4B85
 
 SafariZone_EventScript_TimesUp:: @ 82A4B8A
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	message SafariZone_Text_TimesUp
 	waitmessage
 	waitbuttonpress
@@ -33,7 +33,7 @@ SafariZone_EventScript_TimesUp:: @ 82A4B8A
 
 SafariZone_EventScript_OutOfBalls:: @ 82A4B9B
 	lockall
-	playse SE_PINPON
+	playse SE_DING_DONG
 	message SafariZone_Text_OutOfBalls
 	waitmessage
 	waitbuttonpress

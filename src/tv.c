@@ -387,39 +387,39 @@ static const u8 *const sTVBravoTrainerBattleTowerTextGroup[] = {
 };
 
 static const u8 *const sTVContestLiveUpdatesTextGroup[] = {
-    gTVContestLiveUpdatesText00,
-    gTVContestLiveUpdatesText01,
-    gTVContestLiveUpdatesText02,
-    gTVContestLiveUpdatesText03,
-    gTVContestLiveUpdatesText04,
-    gTVContestLiveUpdatesText05,
-    gTVContestLiveUpdatesText06,
-    gTVContestLiveUpdatesText07,
-    gTVContestLiveUpdatesText08,
-    gTVContestLiveUpdatesText09,
-    gTVContestLiveUpdatesText10,
-    gTVContestLiveUpdatesText11,
-    gTVContestLiveUpdatesText12,
-    gTVContestLiveUpdatesText13,
-    gTVContestLiveUpdatesText14,
-    gTVContestLiveUpdatesText15,
-    gTVContestLiveUpdatesText16,
-    gTVContestLiveUpdatesText17,
-    gTVContestLiveUpdatesText18,
-    gTVContestLiveUpdatesText19,
-    gTVContestLiveUpdatesText20,
-    gTVContestLiveUpdatesText21,
-    gTVContestLiveUpdatesText22,
-    gTVContestLiveUpdatesText23,
-    gTVContestLiveUpdatesText24,
-    gTVContestLiveUpdatesText25,
-    gTVContestLiveUpdatesText26,
-    gTVContestLiveUpdatesText27,
-    gTVContestLiveUpdatesText28,
-    gTVContestLiveUpdatesText29,
-    gTVContestLiveUpdatesText30,
-    gTVContestLiveUpdatesText31,
-    gTVContestLiveUpdatesText32
+    [CONTESTLIVE_STATE_INTRO]                 = ContestLiveUpdates_Text_Intro,
+    [CONTESTLIVE_STATE_WON_BOTH_ROUNDS]       = ContestLiveUpdates_Text_WonBothRounds,
+    [CONTESTLIVE_STATE_BETTER_ROUND2]         = ContestLiveUpdates_Text_BetterRound2,
+    [CONTESTLIVE_STATE_EQUAL_ROUNDS]          = ContestLiveUpdates_Text_EqualRounds,
+    [CONTESTLIVE_STATE_BETTER_ROUND1]         = ContestLiveUpdates_Text_BetterRound1,
+    [CONTESTLIVE_STATE_GOT_NERVOUS]           = ContestLiveUpdates_Text_GotNervous,
+    [CONTESTLIVE_STATE_STARTLED_OTHER]        = ContestLiveUpdates_Text_StartledFoes,
+    [CONTESTLIVE_STATE_USED_COMBO]            = ContestLiveUpdates_Text_UsedCombo,
+    [CONTESTLIVE_STATE_EXCITING_APPEAL]       = ContestLiveUpdates_Text_ExcitingAppeal,
+    [CONTESTLIVE_STATE_COOL]                  = ContestLiveUpdates_Text_WasCool,
+    [CONTESTLIVE_STATE_BEAUTIFUL]             = ContestLiveUpdates_Text_WasBeautiful,
+    [CONTESTLIVE_STATE_CUTE]                  = ContestLiveUpdates_Text_WasCute,
+    [CONTESTLIVE_STATE_SMART]                 = ContestLiveUpdates_Text_WasSmart,
+    [CONTESTLIVE_STATE_TOUGH]                 = ContestLiveUpdates_Text_WasTough,
+    [CONTESTLIVE_STATE_VERY_EXCITING_APPEAL]  = ContestLiveUpdates_Text_VeryExcitingAppeal,
+    [CONTESTLIVE_STATE_VERY_COOL]             = ContestLiveUpdates_Text_VeryCool,
+    [CONTESTLIVE_STATE_VERY_BEAUTIFUL]        = ContestLiveUpdates_Text_VeryBeautiful,
+    [CONTESTLIVE_STATE_VERY_CUTE]             = ContestLiveUpdates_Text_VeryCute,
+    [CONTESTLIVE_STATE_VERY_SMART]            = ContestLiveUpdates_Text_VerySmart,
+    [CONTESTLIVE_STATE_VERY_TOUGH]            = ContestLiveUpdates_Text_VeryTough,
+    [CONTESTLIVE_STATE_TOOK_BREAK]            = ContestLiveUpdates_Text_TookBreak,
+    [CONTESTLIVE_STATE_GOT_STARTLED]          = ContestLiveUpdates_Text_GotStartled,
+    [CONTESTLIVE_STATE_USED_MOVE]             = ContestLiveUpdates_Text_MoveWonderful,
+    [CONTESTLIVE_STATE_TALK_ABOUT_LOSER]      = ContestLiveUpdates_Text_TalkAboutAnotherMon,
+    [CONTESTLIVE_STATE_NO_APPEALS]            = ContestLiveUpdates_Text_FailedToAppeal,
+    [CONTESTLIVE_STATE_LAST_BOTH]             = ContestLiveUpdates_Text_LastInBothRounds,
+    [CONTESTLIVE_STATE_NOT_EXCITING_ENOUGH]   = ContestLiveUpdates_Text_NotExcitingEnough,
+    [CONTESTLIVE_STATE_LOST_AFTER_ROUND1_WIN] = ContestLiveUpdates_Text_LostAfterWinningRound1,
+    [CONTESTLIVE_STATE_NO_EXCITING_APPEALS]   = ContestLiveUpdates_Text_NeverExciting,
+    [CONTESTLIVE_STATE_LOST_SMALL_MARGIN]     = ContestLiveUpdates_Text_LostBySmallMargin,
+    [CONTESTLIVE_STATE_REPEATED_APPEALS]      = ContestLiveUpdates_Text_RepeatedAppeals,
+    [CONTESTLIVE_STATE_LOST]                  = ContestLiveUpdates_Text_ValiantEffortButLost,
+    [CONTESTLIVE_STATE_OUTRO]                 = ContestLiveUpdates_Text_Outro
 };
 
 static const u8 *const sTVPokemonBattleUpdateTextGroup[] = {
@@ -529,7 +529,7 @@ static const u8 *const sTVFindThatGamerTextGroup[] = {
     gTVFindThatGamerText03
 };
 
-static const u8 *const sTVBreakinsNewsTextGroup[] = {
+static const u8 *const sTVBreakingNewsTextGroup[] = {
     gTVBreakingNewsText00,
     gTVBreakingNewsText01,
     gTVBreakingNewsText02,
@@ -1268,19 +1268,19 @@ static void InterviewAfter_ContestLiveUpdates(void)
         show2 = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show2->contestLiveUpdates.kind = TVSHOW_CONTEST_LIVE_UPDATES;
         show2->contestLiveUpdates.active = TRUE;
-        StringCopy(show2->contestLiveUpdates.playerName, gSaveBlock2Ptr->playerName);
+        StringCopy(show2->contestLiveUpdates.winningTrainerName, gSaveBlock2Ptr->playerName); // Show only begins running if player won, so always load players name
         show2->contestLiveUpdates.category = gSpecialVar_ContestCategory;
-        show2->contestLiveUpdates.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
-        show2->contestLiveUpdates.winningSpecies = show->contestLiveUpdates.winningSpecies;
-        show2->contestLiveUpdates.appealFlags2 = show->contestLiveUpdates.appealFlags2;
-        show2->contestLiveUpdates.round1Rank = show->contestLiveUpdates.round1Rank;
-        show2->contestLiveUpdates.round2Rank = show->contestLiveUpdates.round2Rank;
+        show2->contestLiveUpdates.winningSpecies = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
+        show2->contestLiveUpdates.losingSpecies = show->contestLiveUpdates.losingSpecies;
+        show2->contestLiveUpdates.loserAppealFlag = show->contestLiveUpdates.loserAppealFlag;
+        show2->contestLiveUpdates.round1Placing = show->contestLiveUpdates.round1Placing;
+        show2->contestLiveUpdates.round2Placing = show->contestLiveUpdates.round2Placing;
         show2->contestLiveUpdates.move = show->contestLiveUpdates.move;
-        show2->contestLiveUpdates.appealFlags1 = show->contestLiveUpdates.appealFlags1;
-        StringCopy(show2->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerName);
+        show2->contestLiveUpdates.winnerAppealFlag = show->contestLiveUpdates.winnerAppealFlag;
+        StringCopy(show2->contestLiveUpdates.losingTrainerName, show->contestLiveUpdates.losingTrainerName);
         tv_store_id_2x(show2);
-        show2->contestLiveUpdates.language = gGameLanguage;
-        show2->contestLiveUpdates.winningTrainerLanguage = show->contestLiveUpdates.winningTrainerLanguage;
+        show2->contestLiveUpdates.winningTrainerLanguage = gGameLanguage;
+        show2->contestLiveUpdates.losingTrainerLanguage = show->contestLiveUpdates.losingTrainerLanguage;
         DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, LAST_TVSHOW_IDX);
     }
 }
@@ -1332,7 +1332,7 @@ void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlaye
     }
 }
 
-bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language)
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 color, u8 sheen, u8 language)
 {
     TVShow *show;
     u8 name[32];
@@ -1355,7 +1355,7 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unus
     StripExtCtrlCodes(name);
     StringCopy(show->threeCheers.worstBlenderName, name);
     show->threeCheers.flavor = flavor;
-    show->threeCheers.unk_03_3 = unused;
+    show->threeCheers.color = color;
     show->threeCheers.sheen = sheen;
     tv_store_id_2x(show);
     show->threeCheers.language = gGameLanguage;
@@ -1399,7 +1399,7 @@ void PutFanClubSpecialOnTheAir(void)
     }
 }
 
-void ContestLiveUpdates_BeforeInterview_1(u8 a0)
+void ContestLiveUpdates_Init(u8 round1Placing)
 {
     TVShow *show;
 
@@ -1408,12 +1408,12 @@ void ContestLiveUpdates_BeforeInterview_1(u8 a0)
     if (sCurTVShowSlot != -1)
     {
         show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
-        show->contestLiveUpdates.round1Rank = a0;
+        show->contestLiveUpdates.round1Placing = round1Placing;
         show->contestLiveUpdates.kind = TVSHOW_CONTEST_LIVE_UPDATES;
     }
 }
 
-void ContestLiveUpdates_BeforeInterview_2(u8 a0)
+void ContestLiveUpdates_SetRound2Placing(u8 round2Placing)
 {
     TVShow *show;
 
@@ -1421,11 +1421,11 @@ void ContestLiveUpdates_BeforeInterview_2(u8 a0)
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        show->contestLiveUpdates.round2Rank = a0;
+        show->contestLiveUpdates.round2Placing = round2Placing;
     }
 }
 
-void ContestLiveUpdates_BeforeInterview_3(u8 a0)
+void ContestLiveUpdates_SetWinnerAppealFlag(u8 flag)
 {
     TVShow *show;
 
@@ -1433,11 +1433,11 @@ void ContestLiveUpdates_BeforeInterview_3(u8 a0)
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        show->contestLiveUpdates.appealFlags1 = a0;
+        show->contestLiveUpdates.winnerAppealFlag = flag;
     }
 }
 
-void ContestLiveUpdates_BeforeInterview_4(u16 a0)
+void ContestLiveUpdates_SetWinnerMoveUsed(u16 move)
 {
     TVShow *show;
 
@@ -1445,11 +1445,11 @@ void ContestLiveUpdates_BeforeInterview_4(u16 a0)
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        show->contestLiveUpdates.move = a0;
+        show->contestLiveUpdates.move = move;
     }
 }
 
-void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1)
+void ContestLiveUpdates_SetLoserData(u8 flag, u8 loser)
 {
     TVShow *show;
 
@@ -1457,21 +1457,21 @@ void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1)
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        show->contestLiveUpdates.winningSpecies = gContestMons[a1].species;
-        StringCopy(show->contestLiveUpdates.winningTrainerName, gContestMons[a1].trainerName);
-        StripExtCtrlCodes(show->contestLiveUpdates.winningTrainerName);
-        show->contestLiveUpdates.appealFlags2 = a0;
-        if (a1 + 1 > gNumLinkContestPlayers)
+        show->contestLiveUpdates.losingSpecies = gContestMons[loser].species;
+        StringCopy(show->contestLiveUpdates.losingTrainerName, gContestMons[loser].trainerName);
+        StripExtCtrlCodes(show->contestLiveUpdates.losingTrainerName);
+        show->contestLiveUpdates.loserAppealFlag = flag;
+        if (loser + 1 > gNumLinkContestPlayers)
         {
-            show->contestLiveUpdates.winningTrainerLanguage = gLinkPlayers[0].language;
+            show->contestLiveUpdates.losingTrainerLanguage = gLinkPlayers[0].language;
         }
-        else if (gGameLanguage == LANGUAGE_JAPANESE || gLinkPlayers[a1].language == LANGUAGE_JAPANESE)
+        else if (gGameLanguage == LANGUAGE_JAPANESE || gLinkPlayers[loser].language == LANGUAGE_JAPANESE)
         {
-            show->contestLiveUpdates.winningTrainerLanguage = LANGUAGE_JAPANESE;
+            show->contestLiveUpdates.losingTrainerLanguage = LANGUAGE_JAPANESE;
         }
         else
         {
-            show->contestLiveUpdates.winningTrainerLanguage = gLinkPlayers[a1].language;
+            show->contestLiveUpdates.losingTrainerLanguage = gLinkPlayers[loser].language;
         }
     }
 }
@@ -3804,9 +3804,9 @@ static void sub_80F0708(void) // FIXME: register allocation shenanigans
         switch (gSaveBlock1Ptr->tvShows[i].common.kind)
         {
             case TVSHOW_CONTEST_LIVE_UPDATES:
-                j = (&gSaveBlock1Ptr->tvShows[i])->contestLiveUpdates.species;
-                sub_80F0B24(j, i);
                 j = (&gSaveBlock1Ptr->tvShows[i])->contestLiveUpdates.winningSpecies;
+                sub_80F0B24(j, i);
+                j = (&gSaveBlock1Ptr->tvShows[i])->contestLiveUpdates.losingSpecies;
                 sub_80F0B24(j, i);
                 break;
             case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
@@ -4301,8 +4301,8 @@ static void sub_80F12A4(TVShow *shows)
                 curShow->bravoTrainerTower.pokemonNameLanguage = TV_GetStringLanguage(curShow->bravoTrainerTower.pokemonName);
                 break;
             case TVSHOW_CONTEST_LIVE_UPDATES:
-                curShow->contestLiveUpdates.language = TV_GetStringLanguage(curShow->contestLiveUpdates.playerName);
                 curShow->contestLiveUpdates.winningTrainerLanguage = TV_GetStringLanguage(curShow->contestLiveUpdates.winningTrainerName);
+                curShow->contestLiveUpdates.losingTrainerLanguage = TV_GetStringLanguage(curShow->contestLiveUpdates.losingTrainerName);
                 break;
             case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
                 curShow->threeCheers.language = TV_GetStringLanguage(curShow->threeCheers.playerName);
@@ -5167,6 +5167,12 @@ static void DoTVShowPokemonNewsMassOutbreak(void)
     ShowFieldMessage(sTVMassOutbreakTextGroup[sTVShowState]);
 }
 
+// TV Show that plays after a Link Contest. 
+// First talks about the winner and something they did, then about a losing player and something they did
+// The show is only generated when the player wins, but can be record mixed to other games
+// Each state buffers any needed data for a message to print from sTVContestLiveUpdatesTextGroup
+// Many cases in this function are identical, and its size can be reduced a good deal by collapsing them
+// Can't get this to match while collapsing them though
 static void DoTVShowPokemonContestLiveUpdates(void)
 {
     TVShow *show;
@@ -5177,339 +5183,338 @@ static void DoTVShowPokemonContestLiveUpdates(void)
     state = sTVShowState;
     switch (state)
     {
-        case  0:
-            BufferContestName(gStringVar1, show->contestLiveUpdates.category);
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
-            if (show->contestLiveUpdates.round1Rank == show->contestLiveUpdates.round2Rank)
+    case CONTESTLIVE_STATE_INTRO:
+        BufferContestName(gStringVar1, show->contestLiveUpdates.category);
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
+        if (show->contestLiveUpdates.round1Placing == show->contestLiveUpdates.round2Placing)
+        {
+            if (show->contestLiveUpdates.round1Placing == 0)
             {
-                if (show->contestLiveUpdates.round1Rank == 0)
-                {
-                    sTVShowState = 1;
-                }
-                else
-                {
-                    sTVShowState = 3;
-                }
-            }
-            else if (show->contestLiveUpdates.round1Rank > show->contestLiveUpdates.round2Rank)
-            {
-                sTVShowState = 2;
+                sTVShowState = CONTESTLIVE_STATE_WON_BOTH_ROUNDS;
             }
             else
             {
-                sTVShowState = 4;
+                sTVShowState = CONTESTLIVE_STATE_EQUAL_ROUNDS;
             }
+        }
+        else if (show->contestLiveUpdates.round1Placing > show->contestLiveUpdates.round2Placing)
+        {
+            sTVShowState = CONTESTLIVE_STATE_BETTER_ROUND2;
+        }
+        else
+        {
+            sTVShowState = CONTESTLIVE_STATE_BETTER_ROUND1;
+        }
+        break;
+    case CONTESTLIVE_STATE_WON_BOTH_ROUNDS:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        switch (show->contestLiveUpdates.winnerAppealFlag)
+        {
+        case CONTESTLIVE_FLAG_EXCITING_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_EXCITING_APPEAL;
             break;
-        case  1:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            switch (show->contestLiveUpdates.appealFlags1)
-            {
-                case 0x01:
-                    sTVShowState = 8;
-                    break;
-                case 0x02:
-                    sTVShowState = 5;
-                    break;
-                case 0x04:
-                    sTVShowState = 14;
-                    break;
-                case 0x08:
-                    sTVShowState = 7;
-                    break;
-                case 0x10:
-                    sTVShowState = 6;
-                    break;
-                case 0x20:
-                    sTVShowState = 20;
-                    break;
-                case 0x40:
-                    sTVShowState = 21;
-                    break;
-                case 0x80:
-                    sTVShowState = 22;
-                    break;
-            }
+        case CONTESTLIVE_FLAG_GOT_NERVOUS:
+            sTVShowState = CONTESTLIVE_STATE_GOT_NERVOUS;
             break;
-        case  2:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            switch (show->contestLiveUpdates.appealFlags1)
-            {
-                case 0x01:
-                    sTVShowState = 8;
-                    break;
-                case 0x02:
-                    sTVShowState = 5;
-                    break;
-                case 0x04:
-                    sTVShowState = 14;
-                    break;
-                case 0x08:
-                    sTVShowState = 7;
-                    break;
-                case 0x10:
-                    sTVShowState = 6;
-                    break;
-                case 0x20:
-                    sTVShowState = 20;
-                    break;
-                case 0x40:
-                    sTVShowState = 21;
-                    break;
-                case 0x80:
-                    sTVShowState = 22;
-                    break;
-            }
+        case CONTESTLIVE_FLAG_MAXED_EXCITEMENT:
+            sTVShowState = CONTESTLIVE_STATE_VERY_EXCITING_APPEAL;
             break;
-        case  3:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
-            switch (show->contestLiveUpdates.appealFlags1)
-            {
-                case 0x01:
-                    sTVShowState = 8;
-                    break;
-                case 0x02:
-                    sTVShowState = 5;
-                    break;
-                case 0x04:
-                    sTVShowState = 14;
-                    break;
-                case 0x08:
-                    sTVShowState = 7;
-                    break;
-                case 0x10:
-                    sTVShowState = 6;
-                    break;
-                case 0x20:
-                    sTVShowState = 20;
-                    break;
-                case 0x40:
-                    sTVShowState = 21;
-                    break;
-                case 0x80:
-                    sTVShowState = 22;
-                    break;
-            }
+        case CONTESTLIVE_FLAG_USED_COMBO:
+            sTVShowState = CONTESTLIVE_STATE_USED_COMBO;
             break;
-        case  4:
-            switch (show->contestLiveUpdates.category)
-            {
-                case 0:
-                    StringCopy(gStringVar1, gText_Cool);
-                    break;
-                case 1:
-                    StringCopy(gStringVar1, gText_Beauty);
-                    break;
-                case 2:
-                    StringCopy(gStringVar1, gText_Cute);
-                    break;
-                case 3:
-                    StringCopy(gStringVar1, gText_Smart);
-                    break;
-                case 4:
-                    StringCopy(gStringVar1, gText_Tough);
-                    break;
-            }
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            switch (show->contestLiveUpdates.appealFlags1)
-            {
-                case 0x01:
-                    sTVShowState = 8;
-                    break;
-                case 0x02:
-                    sTVShowState = 5;
-                    break;
-                case 0x04:
-                    sTVShowState = 14;
-                    break;
-                case 0x08:
-                    sTVShowState = 7;
-                    break;
-                case 0x10:
-                    sTVShowState = 6;
-                    break;
-                case 0x20:
-                    sTVShowState = 20;
-                    break;
-                case 0x40:
-                    sTVShowState = 21;
-                    break;
-                case 0x80:
-                    sTVShowState = 22;
-                    break;
-            }
+        case CONTESTLIVE_FLAG_STARTLED_OTHER:
+            sTVShowState = CONTESTLIVE_STATE_STARTLED_OTHER;
             break;
-        case  5:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_SKIPPED_TURN:
+            sTVShowState = CONTESTLIVE_STATE_TOOK_BREAK;
             break;
-        case  6:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_GOT_STARTLED:
+            sTVShowState = CONTESTLIVE_STATE_GOT_STARTLED;
             break;
-        case  7:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_MADE_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_USED_MOVE;
             break;
-        case  8:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            switch (show->contestLiveUpdates.category)
-            {
-                case 0:
-                    sTVShowState = 9;
-                    break;
-                case 1:
-                    sTVShowState = 10;
-                    break;
-                case 2:
-                    sTVShowState = 11;
-                    break;
-                case 3:
-                    sTVShowState = 12;
-                    break;
-                case 4:
-                    sTVShowState = 13;
-                    break;
-            }
+        }
+        break;
+    case CONTESTLIVE_STATE_BETTER_ROUND2:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        switch (show->contestLiveUpdates.winnerAppealFlag)
+        {
+        case CONTESTLIVE_FLAG_EXCITING_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_EXCITING_APPEAL;
             break;
-        case  9:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_GOT_NERVOUS:
+            sTVShowState = CONTESTLIVE_STATE_GOT_NERVOUS;
             break;
-        case 10:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_MAXED_EXCITEMENT:
+            sTVShowState = CONTESTLIVE_STATE_VERY_EXCITING_APPEAL;
             break;
-        case 11:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_USED_COMBO:
+            sTVShowState = CONTESTLIVE_STATE_USED_COMBO;
             break;
-        case 12:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_STARTLED_OTHER:
+            sTVShowState = CONTESTLIVE_STATE_STARTLED_OTHER;
             break;
-        case 13:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_SKIPPED_TURN:
+            sTVShowState = CONTESTLIVE_STATE_TOOK_BREAK;
             break;
-        case 14:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            switch (show->contestLiveUpdates.category)
-            {
-                case 0:
-                    sTVShowState = 15;
-                    break;
-                case 1:
-                    sTVShowState = 16;
-                    break;
-                case 2:
-                    sTVShowState = 17;
-                    break;
-                case 3:
-                    sTVShowState = 18;
-                    break;
-                case 4:
-                    sTVShowState = 19;
-                    break;
-            }
+        case CONTESTLIVE_FLAG_GOT_STARTLED:
+            sTVShowState = CONTESTLIVE_STATE_GOT_STARTLED;
             break;
-        case 15:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_MADE_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_USED_MOVE;
             break;
-        case 16:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        }
+        break;
+    case CONTESTLIVE_STATE_EQUAL_ROUNDS:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
+        switch (show->contestLiveUpdates.winnerAppealFlag)
+        {
+        case CONTESTLIVE_FLAG_EXCITING_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_EXCITING_APPEAL;
             break;
-        case 17:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_GOT_NERVOUS:
+            sTVShowState = CONTESTLIVE_STATE_GOT_NERVOUS;
             break;
-        case 18:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_MAXED_EXCITEMENT:
+            sTVShowState = CONTESTLIVE_STATE_VERY_EXCITING_APPEAL;
             break;
-        case 19:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_USED_COMBO:
+            sTVShowState = CONTESTLIVE_STATE_USED_COMBO;
             break;
-        case 20:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_STARTLED_OTHER:
+            sTVShowState = CONTESTLIVE_STATE_STARTLED_OTHER;
             break;
-        case 21:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_SKIPPED_TURN:
+            sTVShowState = CONTESTLIVE_STATE_TOOK_BREAK;
             break;
-        case 22:
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            StringCopy(gStringVar3, gMoveNames[show->contestLiveUpdates.move]);
-            sTVShowState = 23;
+        case CONTESTLIVE_FLAG_GOT_STARTLED:
+            sTVShowState = CONTESTLIVE_STATE_GOT_STARTLED;
             break;
-        case 23:
-            StringCopy(gStringVar1, gSpeciesNames[show->contestLiveUpdates.species]);
-            TVShowConvertInternationalString(gStringVar2, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
-            StringCopy(gStringVar3, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
-            switch (show->contestLiveUpdates.appealFlags2)
-            {
-                case 0x01:
-                    sTVShowState = 31;
-                    break;
-                case 0x02:
-                    sTVShowState = 30;
-                    break;
-                case 0x04:
-                    sTVShowState = 29;
-                    break;
-                case 0x08:
-                    sTVShowState = 28;
-                    break;
-                case 0x10:
-                    sTVShowState = 27;
-                    break;
-                case 0x20:
-                    sTVShowState = 26;
-                    break;
-                case 0x40:
-                    sTVShowState = 25;
-                    break;
-                case 0x80:
-                    sTVShowState = 24;
-                    break;
-            }
+        case CONTESTLIVE_FLAG_MADE_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_USED_MOVE;
             break;
-        case 24:
-            StringCopy(gStringVar1, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
-            sTVShowState = 32;
+        }
+        break;
+    case CONTESTLIVE_STATE_BETTER_ROUND1:
+        switch (show->contestLiveUpdates.category)
+        {
+        case CONTEST_CATEGORY_COOL:
+            StringCopy(gStringVar1, gText_Cool);
             break;
-        case 25:
-            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
-            sTVShowState = 32;
+        case CONTEST_CATEGORY_BEAUTY:
+            StringCopy(gStringVar1, gText_Beauty);
             break;
-        case 28:
-            sTVShowState = 32;
+        case CONTEST_CATEGORY_CUTE:
+            StringCopy(gStringVar1, gText_Cute);
             break;
-        case 29:
-            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
-            sTVShowState = 32;
+        case CONTEST_CATEGORY_SMART:
+            StringCopy(gStringVar1, gText_Smart);
             break;
-        case 26:
-        case 27:
-        case 30:
-        case 31:
-            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
-            sTVShowState = 32;
+        case CONTEST_CATEGORY_TOUGH:
+            StringCopy(gStringVar1, gText_Tough);
             break;
-        case 32:
-
-            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
-            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
-            TVShowDone();
+        }
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        switch (show->contestLiveUpdates.winnerAppealFlag)
+        {
+        case CONTESTLIVE_FLAG_EXCITING_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_EXCITING_APPEAL;
             break;
+        case CONTESTLIVE_FLAG_GOT_NERVOUS:
+            sTVShowState = CONTESTLIVE_STATE_GOT_NERVOUS;
+            break;
+        case CONTESTLIVE_FLAG_MAXED_EXCITEMENT:
+            sTVShowState = CONTESTLIVE_STATE_VERY_EXCITING_APPEAL;
+            break;
+        case CONTESTLIVE_FLAG_USED_COMBO:
+            sTVShowState = CONTESTLIVE_STATE_USED_COMBO;
+            break;
+        case CONTESTLIVE_FLAG_STARTLED_OTHER:
+            sTVShowState = CONTESTLIVE_STATE_STARTLED_OTHER;
+            break;
+        case CONTESTLIVE_FLAG_SKIPPED_TURN:
+            sTVShowState = CONTESTLIVE_STATE_TOOK_BREAK;
+            break;
+        case CONTESTLIVE_FLAG_GOT_STARTLED:
+            sTVShowState = CONTESTLIVE_STATE_GOT_STARTLED;
+            break;
+        case CONTESTLIVE_FLAG_MADE_APPEAL:
+            sTVShowState = CONTESTLIVE_STATE_USED_MOVE;
+            break;
+        }
+        break;
+    case CONTESTLIVE_STATE_GOT_NERVOUS:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_STARTLED_OTHER:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_USED_COMBO:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_EXCITING_APPEAL:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        switch (show->contestLiveUpdates.category)
+        {
+        case CONTEST_CATEGORY_COOL:
+            sTVShowState = CONTESTLIVE_STATE_COOL;
+            break;
+        case CONTEST_CATEGORY_BEAUTY:
+            sTVShowState = CONTESTLIVE_STATE_BEAUTIFUL;
+            break;
+        case CONTEST_CATEGORY_CUTE:
+            sTVShowState = CONTESTLIVE_STATE_CUTE;
+            break;
+        case CONTEST_CATEGORY_SMART:
+            sTVShowState = CONTESTLIVE_STATE_SMART;
+            break;
+        case CONTEST_CATEGORY_TOUGH:
+            sTVShowState = CONTESTLIVE_STATE_TOUGH;
+            break;
+        }
+        break;
+    case CONTESTLIVE_STATE_COOL:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_BEAUTIFUL:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_CUTE:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_SMART:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_TOUGH:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_VERY_EXCITING_APPEAL:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        switch (show->contestLiveUpdates.category)
+        {
+        case CONTEST_CATEGORY_COOL:
+            sTVShowState = CONTESTLIVE_STATE_VERY_COOL;
+            break;
+        case CONTEST_CATEGORY_BEAUTY:
+            sTVShowState = CONTESTLIVE_STATE_VERY_BEAUTIFUL;
+            break;
+        case CONTEST_CATEGORY_CUTE:
+            sTVShowState = CONTESTLIVE_STATE_VERY_CUTE;
+            break;
+        case CONTEST_CATEGORY_SMART:
+            sTVShowState = CONTESTLIVE_STATE_VERY_SMART;
+            break;
+        case CONTEST_CATEGORY_TOUGH:
+            sTVShowState = CONTESTLIVE_STATE_VERY_TOUGH;
+            break;
+        }
+        break;
+    case CONTESTLIVE_STATE_VERY_COOL:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_VERY_BEAUTIFUL:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_VERY_CUTE:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_VERY_SMART:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_VERY_TOUGH:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_TOOK_BREAK:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_GOT_STARTLED:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_USED_MOVE:
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        StringCopy(gStringVar3, gMoveNames[show->contestLiveUpdates.move]);
+        sTVShowState = CONTESTLIVE_STATE_TALK_ABOUT_LOSER;
+        break;
+    case CONTESTLIVE_STATE_TALK_ABOUT_LOSER:
+        StringCopy(gStringVar1, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        TVShowConvertInternationalString(gStringVar2, show->contestLiveUpdates.losingTrainerName, show->contestLiveUpdates.losingTrainerLanguage);
+        StringCopy(gStringVar3, gSpeciesNames[show->contestLiveUpdates.losingSpecies]);
+        switch (show->contestLiveUpdates.loserAppealFlag)
+        {
+        case CONTESTLIVE_FLAG_LOST:
+            sTVShowState = CONTESTLIVE_STATE_LOST;
+            break;
+        case CONTESTLIVE_FLAG_REPEATED_MOVE:
+            sTVShowState = CONTESTLIVE_STATE_REPEATED_APPEALS;
+            break;
+        case CONTESTLIVE_FLAG_LOST_SMALL_MARGIN:
+            sTVShowState = CONTESTLIVE_STATE_LOST_SMALL_MARGIN;
+            break;
+        case CONTESTLIVE_FLAG_NO_EXCITEMENT:
+            sTVShowState = CONTESTLIVE_STATE_NO_EXCITING_APPEALS;
+            break;
+        case CONTESTLIVE_FLAG_BLEW_LEAD:
+            sTVShowState = CONTESTLIVE_STATE_LOST_AFTER_ROUND1_WIN;
+            break;
+        case CONTESTLIVE_FLAG_MISSED_EXCITEMENT:
+            sTVShowState = CONTESTLIVE_STATE_NOT_EXCITING_ENOUGH;
+            break;
+        case CONTESTLIVE_FLAG_LAST_BOTH_ROUNDS:
+            sTVShowState = CONTESTLIVE_STATE_LAST_BOTH;
+            break;
+        case CONTESTLIVE_FLAG_NO_APPEALS:
+            sTVShowState = CONTESTLIVE_STATE_NO_APPEALS;
+            break;
+        }
+        break;
+    case CONTESTLIVE_STATE_NO_APPEALS:
+        StringCopy(gStringVar1, gSpeciesNames[show->contestLiveUpdates.losingSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_OUTRO;
+        break;
+    case CONTESTLIVE_STATE_LAST_BOTH:
+        TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.losingTrainerName, show->contestLiveUpdates.losingTrainerLanguage);
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.losingSpecies]);
+        sTVShowState = CONTESTLIVE_STATE_OUTRO;
+        break;
+    case CONTESTLIVE_STATE_NO_EXCITING_APPEALS:
+        sTVShowState = CONTESTLIVE_STATE_OUTRO;
+        break;
+    case CONTESTLIVE_STATE_LOST_SMALL_MARGIN:
+        TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.losingTrainerName, show->contestLiveUpdates.losingTrainerLanguage);
+        sTVShowState = CONTESTLIVE_STATE_OUTRO;
+        break;
+    case CONTESTLIVE_STATE_NOT_EXCITING_ENOUGH:
+    case CONTESTLIVE_STATE_LOST_AFTER_ROUND1_WIN:
+    case CONTESTLIVE_STATE_REPEATED_APPEALS:
+    case CONTESTLIVE_STATE_LOST:
+        TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.losingTrainerName, show->contestLiveUpdates.losingTrainerLanguage);
+        sTVShowState = CONTESTLIVE_STATE_OUTRO;
+        break;
+    case CONTESTLIVE_STATE_OUTRO:
+        TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.winningTrainerName, show->contestLiveUpdates.winningTrainerLanguage);
+        StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.winningSpecies]);
+        TVShowDone();
+        break;
     }
     ShowFieldMessage(sTVContestLiveUpdatesTextGroup[state]);
 }
@@ -6248,7 +6253,7 @@ static void DoTVShowBreakingNewsTV(void)
             TVShowDone();
             break;
     }
-    ShowFieldMessage(sTVBreakinsNewsTextGroup[state]);
+    ShowFieldMessage(sTVBreakingNewsTextGroup[state]);
 }
 
 static void DoTVShowSecretBaseVisit(void)

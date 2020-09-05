@@ -91,7 +91,7 @@ SlateportCity_EventScript_ScottScene:: @ 81DCD1C
 	msgbox SlateportCity_Text_LetsRegisterEachOther, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox SlateportCity_Text_RegisteredScott, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -170,7 +170,7 @@ SlateportCity_EventScript_EffortRibbonWoman:: @ 81DCDE4
 	compare VAR_RESULT, FALSE
 	call_if_eq SlateportCity_EventScript_MonEVsNotMaxed
 	msgbox SlateportCity_Text_PleaseGiveItThisEffortRibbon, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message SlateportCity_Text_ReceivedEffortRibbon
 	waitfanfare
 	msgbox SlateportCity_Text_PutEffortRibbonOnMon, MSGBOX_DEFAULT
@@ -603,7 +603,7 @@ SlateportCity_EventScript_CaptStern:: @ 81DD1F8
 	applymovement LOCALID_CAPT_STERN, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SlateportCity_Text_OhPlayerWeMadeDiscovery, MSGBOX_DEFAULT
-	playbgm MUS_AQA_0, 0
+	playbgm MUS_ENCOUNTER_AQUA, 0
 	msgbox SlateportCity_Text_AquaWillAssumeControlOfSubmarine, MSGBOX_DEFAULT
 	applymovement LOCALID_COOK, Common_Movement_WalkInPlaceFastestLeft
 	applymovement LOCALID_FAT_MAN, Common_Movement_WalkInPlaceFastestLeft

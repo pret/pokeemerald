@@ -302,7 +302,7 @@ static void Task_RecordMixing_SoundEffect(u8 taskId)
 {
     if (++gTasks[taskId].tCounter == 50)
     {
-        PlaySE(SE_W213);
+        PlaySE(SE_M_ATTRACT);
         gTasks[taskId].tCounter = 0;
     }
 }
@@ -343,7 +343,7 @@ static void Task_RecordMixing_Main(u8 taskId)
     case 2:
         data[10] = CreateTask(Task_DoRecordMixing, 10);
         tState = 3;
-        PlaySE(SE_W226);
+        PlaySE(SE_M_BATON_PASS);
         break;
     case 3: // wait for Task_DoRecordMixing
         if (!gTasks[data[10]].isActive)
@@ -501,7 +501,7 @@ static void Task_SendPacket(u8 taskId)
         break;
     case 1:
         if (GetMultiplayerId() == 0)
-            sub_800A4D8(1);
+            SendBlockRequest(1);
         task->data[0]++;
         break;
     case 2:
@@ -872,8 +872,12 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
             var2 = sub_80E7A9C(&_src->mail[1]);
             if (!var1 && var2)
             {
-                register u8 one asm("r0") = 1; // boo, a fakematch
-                sp24[j][1] = one;
+                #ifndef NONMATCHING
+                    register u8 one asm("r0") = 1; // boo, a fakematch
+                    sp24[j][1] = one;
+                #else
+                    sp24[j][1] = 1;
+                #endif
             }
             else if ((var1 && var2) || (!var1 && !var2))
             {
@@ -973,7 +977,7 @@ static void Task_DoRecordMixing(u8 taskId)
     case 4: // Wait 10 frames
         if (++task->data[1] > 10)
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             task->data[0] ++;
         }
         break;
@@ -1005,7 +1009,7 @@ static void Task_DoRecordMixing(u8 taskId)
         }
         break;
     case 8:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         task->data[0] ++;
         break;
     case 9:

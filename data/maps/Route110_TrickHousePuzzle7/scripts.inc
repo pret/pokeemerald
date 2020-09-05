@@ -125,7 +125,7 @@ Route110_TrickHousePuzzle7_EventScript_Switch1:: @ 826E1FE
 	call_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn
 	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOff
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	goto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1On
 	goto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1Off
 	end
@@ -136,7 +136,7 @@ Route110_TrickHousePuzzle7_EventScript_Switch2:: @ 826E22D
 	call_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn
 	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOff
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	goto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2On
 	goto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2Off
 	end
@@ -147,7 +147,7 @@ Route110_TrickHousePuzzle7_EventScript_Switch3:: @ 826E25C
 	call_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn
 	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOff
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	goto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3On
 	goto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3Off
 	end
@@ -158,7 +158,7 @@ Route110_TrickHousePuzzle7_EventScript_Switch4:: @ 826E28B
 	call_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn
 	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOff
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	goto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4On
 	goto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4Off
 	end
@@ -169,7 +169,7 @@ Route110_TrickHousePuzzle7_EventScript_Switch5:: @ 826E2BA
 	call_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn
 	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	goto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5On
 	goto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5Off
 	end
@@ -227,9 +227,9 @@ Route110_TrickHousePuzzle7_EventScript_SetSwitch5Off:: @ 826E316
 
 @ From here is where the new, actually used puzzle scripts begin
 Route110_TrickHousePuzzle7_EventScript_YellowButton:: @ 826E31B
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	waitse
-	playse SE_TU_SAA
+	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 0
 	waitmovement 0
@@ -239,9 +239,9 @@ Route110_TrickHousePuzzle7_EventScript_YellowButton:: @ 826E31B
 	end
 
 Route110_TrickHousePuzzle7_EventScript_BlueButton:: @ 826E331
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	waitse
-	playse SE_TU_SAA
+	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 1
 	waitmovement 0
@@ -251,9 +251,9 @@ Route110_TrickHousePuzzle7_EventScript_BlueButton:: @ 826E331
 	end
 
 Route110_TrickHousePuzzle7_EventScript_GreenButton:: @ 826E347
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	waitse
-	playse SE_TU_SAA
+	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 2
 	waitmovement 0
@@ -263,9 +263,9 @@ Route110_TrickHousePuzzle7_EventScript_GreenButton:: @ 826E347
 	end
 
 Route110_TrickHousePuzzle7_EventScript_PurpleButton:: @ 826E35D
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	waitse
-	playse SE_TU_SAA
+	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 3
 	waitmovement 0
@@ -276,9 +276,9 @@ Route110_TrickHousePuzzle7_EventScript_PurpleButton:: @ 826E35D
 
 @ Unused
 Route110_TrickHousePuzzle7_EventScript_RedButton:: @ 826E373
-	playse SE_MU_PACHI
+	playse SE_SWITCH
 	waitse
-	playse SE_TU_SAA
+	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 4
 	waitmovement 0

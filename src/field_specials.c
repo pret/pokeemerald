@@ -827,7 +827,7 @@ void PetalburgGymSlideOpenRoomDoors(void)
 {
     sSlidingDoorNextFrameCounter = 0;
     sSlidingDoorFrame = 0;
-    PlaySE(SE_KI_GASYAN);
+    PlaySE(SE_UNLOCK);
     CreateTask(Task_PetalburgGymSlideOpenRoomDoors, 8);
 }
 
@@ -1509,7 +1509,7 @@ void ShakeCamera(void)
     gTasks[taskId].delay = gSpecialVar_0x8007;
     gTasks[taskId].verticalPan = gSpecialVar_0x8004;
     SetCameraPanningCallback(NULL);
-    PlaySE(SE_W070);
+    PlaySE(SE_M_STRENGTH);
 }
 
 static void Task_ShakeCamera(u8 taskId)
@@ -1880,7 +1880,7 @@ void MoveElevator(void)
 
     SetCameraPanningCallback(NULL);
     MoveElevatorWindowLights(floorDelta, data[6]);
-    PlaySE(SE_ELEBETA);
+    PlaySE(SE_ELEVATOR);
 }
 
 static void Task_MoveElevator(u8 taskId)
@@ -1897,7 +1897,7 @@ static void Task_MoveElevator(u8 taskId)
         // arrived at floor
         if (data[2] == data[5])
         {
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
             DestroyTask(taskId);
             EnableBothScriptContexts();
             InstallCameraPanAheadCallback();
@@ -3438,9 +3438,9 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
-        PlaySE(SE_W109);
+        PlaySE(SE_M_CONFUSE_RAY);
     else
-        PlaySE(SE_RG_DEOMOV);
+        PlaySE(SE_RG_DEOXYS_MOVE);
 
     CreateTask(WaitForDeoxysRockMovement, 8);
     gFieldEffectArguments[0] = 1;
@@ -3649,14 +3649,14 @@ bool8 AbnormalWeatherHasExpired(void)
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER3))
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_ROUTE127))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
             {
-                case MAP_NUM(UNDERWATER3):
-                case MAP_NUM(UNDERWATER5):
-                case MAP_NUM(UNDERWATER6):
-                case MAP_NUM(UNDERWATER7):
+                case MAP_NUM(UNDERWATER_ROUTE127):
+                case MAP_NUM(UNDERWATER_ROUTE129):
+                case MAP_NUM(UNDERWATER_ROUTE105):
+                case MAP_NUM(UNDERWATER_ROUTE125):
                     VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
                     return FALSE;
                 default:
@@ -3864,7 +3864,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
         case 7:
             if (IsLinkTaskFinished() == 1)
             {
-                sub_800ADF8();
+                SetLinkStandbyCallback();
                 gTasks[taskId].data[0]++;
             }
             break;
@@ -3877,7 +3877,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
         case 9:
             if (gWirelessCommType == 0)
             {
-                sub_800AC34();
+                SetCloseLinkCallback();
             }
             gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
             EnableBothScriptContexts();
@@ -3888,12 +3888,14 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
 
 void Script_DoRayquazaScene(void)
 {
-    if (gSpecialVar_0x8004 == 0)
+    if (!gSpecialVar_0x8004)
     {
+        // Groudon/Kyogre fight scene
         DoRayquazaScene(0, TRUE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
     else
     {
+        // Rayquaza arrives scene
         DoRayquazaScene(1, FALSE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }
@@ -3904,7 +3906,7 @@ void Script_DoRayquazaScene(void)
 void LoopWingFlapSE(void)
 {
     CreateTask(Task_LoopWingFlapSE, 8);
-    PlaySE(SE_W017);
+    PlaySE(SE_M_WING_ATTACK);
 }
 
 static void Task_LoopWingFlapSE(u8 taskId)
@@ -3916,7 +3918,7 @@ static void Task_LoopWingFlapSE(u8 taskId)
     {
         playCount++;
         delay = 0;
-        PlaySE(SE_W017);
+        PlaySE(SE_M_WING_ATTACK);
     }
 
     if (playCount == gSpecialVar_0x8004 - 1)

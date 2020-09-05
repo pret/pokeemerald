@@ -42,7 +42,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveDecor:: @ 825F0E5
 	special TakeFrontierBattlePoints
 	adddecoration VAR_0x8009
 	special UpdateBattlePointsWindow
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC, MSGBOX_DEFAULT
 	compare VAR_TEMP_2, EXCHANGE_CORNER_DECOR1_CLERK
 	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1
@@ -63,7 +63,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveItem:: @ 825F12A
 	special TakeFrontierBattlePoints
 	additem VAR_0x8009
 	special UpdateBattlePointsWindow
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize, MSGBOX_DEFAULT
 	compare VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK
 	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin

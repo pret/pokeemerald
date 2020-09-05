@@ -181,7 +181,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival2:: @ 81F8A7F
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_MeetRival:: @ 81F8A8B
-	playse SE_KAIDAN
+	playse SE_EXIT
 	delay 10
 	addobject LOCALID_RIVAL
 	delay 30
@@ -192,7 +192,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival:: @ 81F8A8B
 	waitmovement 0
 	compare VAR_0x8008, 1
 	call_if_ne LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
 	compare VAR_0x8008, 1
@@ -207,7 +207,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival:: @ 81F8A8B
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
 	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject LOCALID_RIVAL
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL

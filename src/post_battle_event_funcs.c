@@ -5,7 +5,7 @@
 #include "hall_of_fame.h"
 #include "load_save.h"
 #include "overworld.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "tv.h"
 #include "constants/heal_locations.h"
 #include "constants/tv.h"

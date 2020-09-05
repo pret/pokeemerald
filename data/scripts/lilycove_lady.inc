@@ -259,9 +259,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse:: @ 82A8689
     end
 
 LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse:: @ 82A86B0
-    playse SE_SEIKAI
+    playse SE_SUCCESS
     delay 10
-    playse SE_SEIKAI
+    playse SE_SUCCESS
     msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRight, MSGBOX_DEFAULT
     goto LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize
     end
@@ -269,9 +269,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse:: @ 82A86B0
 LilycoveCity_PokemonCenter_1F_EventScript_IncorrectResponse:: @ 82A86C7
     special BufferQuizCorrectAnswer
     special BufferQuizPrizeName
-    playse SE_HAZURE
+    playse SE_FAILURE
     delay 10
-    playse SE_HAZURE
+    playse SE_FAILURE
     msgbox LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs, MSGBOX_DEFAULT
     msgbox LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize, MSGBOX_DEFAULT
     goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz

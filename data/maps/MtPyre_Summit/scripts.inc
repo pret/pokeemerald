@@ -39,7 +39,7 @@ MtPyre_Summit_EventScript_TeamAquaTrigger2:: @ 8232030
 	end
 
 MtPyre_Summit_EventScript_TeamAquaExits:: @ 823203C
-	playbgm MUS_AQA_0, 0
+	playbgm MUS_ENCOUNTER_AQUA, 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestDown

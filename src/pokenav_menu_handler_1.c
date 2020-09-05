@@ -216,7 +216,7 @@ static u32 HandleMainMenuInput(struct Pokenav1Struct *state)
     if (UpdateMenuCursorPos(state))
         return POKENAV_MENU_FUNC_MOVE_CURSOR;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         switch (sMenuItems[state->menuType][state->cursorPos])
         {
@@ -251,7 +251,7 @@ static u32 HandleMainMenuInput(struct Pokenav1Struct *state)
         }
     }
     
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         return -1;
 
     return POKENAV_MENU_FUNC_NONE;
@@ -263,7 +263,7 @@ static u32 HandleMainMenuInputTutorial(struct Pokenav1Struct *state)
     if (UpdateMenuCursorPos(state))
         return POKENAV_MENU_FUNC_MOVE_CURSOR;
     
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (sMenuItems[state->menuType][state->cursorPos] == POKENAV_MENUITEM_MATCH_CALL)
         {
@@ -273,14 +273,14 @@ static u32 HandleMainMenuInputTutorial(struct Pokenav1Struct *state)
         }
         else
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             return POKENAV_MENU_FUNC_NONE;
         }
     }
     
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         return POKENAV_MENU_FUNC_NONE;
     }
     
@@ -293,12 +293,12 @@ static u32 HandleMainMenuInputEndTutorial(struct Pokenav1Struct *state)
     if (UpdateMenuCursorPos(state))
         return POKENAV_MENU_FUNC_MOVE_CURSOR;
     
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         u32 menuItem = sMenuItems[state->menuType][state->cursorPos];
         if (menuItem != POKENAV_MENUITEM_MATCH_CALL && menuItem != POKENAV_MENUITEM_SWITCH_OFF)
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             return POKENAV_MENU_FUNC_NONE;
         }
         else if (menuItem == POKENAV_MENUITEM_MATCH_CALL)
@@ -312,7 +312,7 @@ static u32 HandleMainMenuInputEndTutorial(struct Pokenav1Struct *state)
             return -1;
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return -1;
     }
@@ -329,7 +329,7 @@ static u32 HandleCantOpenRibbonsInput(struct Pokenav1Struct *state)
         return POKENAV_MENU_FUNC_MOVE_CURSOR;
     }
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         state->callback = GetMainMenuInputHandler();
         return POKENAV_MENU_FUNC_RESHOW_DESCRIPTION;
@@ -343,7 +343,7 @@ static u32 HandleConditionMenuInput(struct Pokenav1Struct *state)
     if (UpdateMenuCursorPos(state))
         return POKENAV_MENU_FUNC_MOVE_CURSOR;
     
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         switch (sMenuItems[state->menuType][state->cursorPos])
         {
@@ -363,7 +363,7 @@ static u32 HandleConditionMenuInput(struct Pokenav1Struct *state)
             return POKENAV_MENU_FUNC_RETURN_TO_MAIN;
         }
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         if (state->cursorPos != sLastCursorPositions[state->menuType])
         {
@@ -387,7 +387,7 @@ static u32 HandleConditionSearchMenuInput(struct Pokenav1Struct *state)
     if (UpdateMenuCursorPos(state))
         return POKENAV_MENU_FUNC_MOVE_CURSOR;
     
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         u8 menuItem = sMenuItems[state->menuType][state->cursorPos];
         if (menuItem != POKENAV_MENUITEM_CONDITION_SEARCH_CANCEL)
@@ -404,7 +404,7 @@ static u32 HandleConditionSearchMenuInput(struct Pokenav1Struct *state)
             return POKENAV_MENU_FUNC_RETURN_TO_CONDITION;
         }
     }
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         if (state->cursorPos != sLastCursorPositions[state->menuType])
         {
@@ -463,7 +463,7 @@ static void ReturnToConditionMenu(struct Pokenav1Struct *state)
 
 static bool32 UpdateMenuCursorPos(struct Pokenav1Struct *state)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         if (--state->cursorPos < 0)
             state->cursorPos = sLastCursorPositions[state->menuType];
@@ -471,7 +471,7 @@ static bool32 UpdateMenuCursorPos(struct Pokenav1Struct *state)
         state->currMenuItem = sMenuItems[state->menuType][state->cursorPos];
         return TRUE;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         state->cursorPos++;
         if (state->cursorPos > sLastCursorPositions[state->menuType])

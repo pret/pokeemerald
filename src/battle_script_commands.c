@@ -1977,11 +1977,11 @@ static void Cmd_effectivenesssound(void)
         switch (gMoveResultFlags & (u8)(~(MOVE_RESULT_MISSED)))
         {
         case MOVE_RESULT_SUPER_EFFECTIVE:
-            BtlController_EmitPlaySE(0, SE_KOUKA_H);
+            BtlController_EmitPlaySE(0, SE_SUPER_EFFECTIVE);
             MarkBattlerForControllerExec(gActiveBattler);
             break;
         case MOVE_RESULT_NOT_VERY_EFFECTIVE:
-            BtlController_EmitPlaySE(0, SE_KOUKA_L);
+            BtlController_EmitPlaySE(0, SE_NOT_EFFECTIVE);
             MarkBattlerForControllerExec(gActiveBattler);
             break;
         case MOVE_RESULT_DOESNT_AFFECT_FOE:
@@ -1994,17 +1994,17 @@ static void Cmd_effectivenesssound(void)
         default:
             if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             {
-                BtlController_EmitPlaySE(0, SE_KOUKA_H);
+                BtlController_EmitPlaySE(0, SE_SUPER_EFFECTIVE);
                 MarkBattlerForControllerExec(gActiveBattler);
             }
             else if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
             {
-                BtlController_EmitPlaySE(0, SE_KOUKA_L);
+                BtlController_EmitPlaySE(0, SE_NOT_EFFECTIVE);
                 MarkBattlerForControllerExec(gActiveBattler);
             }
             else if (!(gMoveResultFlags & (MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)))
             {
-                BtlController_EmitPlaySE(0, SE_KOUKA_M);
+                BtlController_EmitPlaySE(0, SE_EFFECTIVE);
                 MarkBattlerForControllerExec(gActiveBattler);
             }
             break;
@@ -3320,7 +3320,7 @@ static void Cmd_getexp(void)
                 if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && gBattleMons[0].hp && !gBattleStruct->wildVictorySong)
                 {
                     BattleStopLowHpSound();
-                    PlayBGM(MUS_KACHI2);
+                    PlayBGM(MUS_VICTORY_WILD);
                     gBattleStruct->wildVictorySong++;
                 }
 
@@ -3489,7 +3489,6 @@ static void Cmd_getexp(void)
     }
 }
 
-#ifdef NONMATCHING
 static void Cmd_unknown_24(void)
 {
     u16 HP_count = 0;
@@ -3521,7 +3520,9 @@ static void Cmd_unknown_24(void)
     if (HP_count == 0)
         gBattleOutcome |= B_OUTCOME_LOST;
 
-    for (HP_count = 0, i = 0; i < PARTY_SIZE; i++)
+    HP_count = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
@@ -3535,33 +3536,31 @@ static void Cmd_unknown_24(void)
 
     if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
     {
-        s32 foundPlayer;
-        s32 foundOpponent;
-
-        // Impossible to decompile loops.
-        for (foundPlayer = 0, i = 0; i < gBattlersCount; i += 2)
+        s32 foundPlayer = 0, foundOpponent;
+        for (i = 0; i < gBattlersCount; i += 2)
         {
-            if (HITMARKER_FAINTED2(i) & gHitMarker && !gSpecialStatuses[i].flag40)
+            if ((gHitMarker & HITMARKER_FAINTED2(i)) && (!gSpecialStatuses[i].flag40))
                 foundPlayer++;
         }
 
-        for (foundOpponent = 0, i = 1; i < gBattlersCount; i += 2)
+        foundOpponent = 0;
+        for (i = 1; i < gBattlersCount; i += 2)
         {
-            if (HITMARKER_FAINTED2(i) & gHitMarker && !gSpecialStatuses[i].flag40)
+            if ((gHitMarker & HITMARKER_FAINTED2(i)) && (!gSpecialStatuses[i].flag40))
                 foundOpponent++;
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             if (foundOpponent + foundPlayer > 1)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = (u8*) T2_READ_32(gBattlescriptCurrInstr + 1);
             else
                 gBattlescriptCurrInstr += 5;
         }
         else
         {
             if (foundOpponent != 0 && foundPlayer != 0)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = (u8*) T2_READ_32(gBattlescriptCurrInstr + 1);
             else
                 gBattlescriptCurrInstr += 5;
         }
@@ -3571,301 +3570,6 @@ static void Cmd_unknown_24(void)
         gBattlescriptCurrInstr += 5;
     }
 }
-#else
-NAKED
-static void Cmd_unknown_24(void)
-{
-    asm("\n\
-        .syntax unified\n\
-        push {r4-r7,lr}\n\
-        mov r7, r8\n\
-        push {r7}\n\
-        movs r6, 0\n\
-        ldr r0, =gBattleControllerExecFlags\n\
-        ldr r0, [r0]\n\
-        cmp r0, 0\n\
-        beq _0804ACE2\n\
-        b _0804AF22\n\
-    _0804ACE2:\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r0, [r0]\n\
-        movs r1, 0x80\n\
-        lsls r1, 15\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AD48\n\
-        ldr r0, =gPartnerTrainerId\n\
-        ldrh r1, [r0]\n\
-        ldr r0, =0x00000c03\n\
-        cmp r1, r0\n\
-        bne _0804AD48\n\
-        movs r5, 0\n\
-    _0804ACFC:\n\
-        movs r0, 0x64\n\
-        adds r1, r5, 0\n\
-        muls r1, r0\n\
-        ldr r0, =gPlayerParty\n\
-        adds r4, r1, r0\n\
-        adds r0, r4, 0\n\
-        movs r1, 0xB\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        beq _0804AD2C\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x2D\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _0804AD2C\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x39\n\
-        bl GetMonData\n\
-        adds r0, r6, r0\n\
-        lsls r0, 16\n\
-        lsrs r6, r0, 16\n\
-    _0804AD2C:\n\
-        adds r5, 0x1\n\
-        cmp r5, 0x2\n\
-        ble _0804ACFC\n\
-        b _0804ADA8\n\
-        .pool\n\
-    _0804AD48:\n\
-        movs r5, 0\n\
-    _0804AD4A:\n\
-        movs r0, 0x64\n\
-        adds r1, r5, 0\n\
-        muls r1, r0\n\
-        ldr r0, =gPlayerParty\n\
-        adds r4, r1, r0\n\
-        adds r0, r4, 0\n\
-        movs r1, 0xB\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        beq _0804ADA2\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x2D\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _0804ADA2\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r0, [r0]\n\
-        movs r1, 0x80\n\
-        lsls r1, 11\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AD94\n\
-        ldr r0, =gBattleStruct\n\
-        ldr r0, [r0]\n\
-        movs r1, 0xA8\n\
-        lsls r1, 2\n\
-        adds r0, r1\n\
-        ldrb r1, [r0]\n\
-        ldr r2, =gBitTable\n\
-        lsls r0, r5, 2\n\
-        adds r0, r2\n\
-        ldr r0, [r0]\n\
-        ands r1, r0\n\
-        cmp r1, 0\n\
-        bne _0804ADA2\n\
-    _0804AD94:\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x39\n\
-        bl GetMonData\n\
-        adds r0, r6, r0\n\
-        lsls r0, 16\n\
-        lsrs r6, r0, 16\n\
-    _0804ADA2:\n\
-        adds r5, 0x1\n\
-        cmp r5, 0x5\n\
-        ble _0804AD4A\n\
-    _0804ADA8:\n\
-        cmp r6, 0\n\
-        bne _0804ADB6\n\
-        ldr r0, =gBattleOutcome\n\
-        ldrb r1, [r0]\n\
-        movs r2, 0x2\n\
-        orrs r1, r2\n\
-        strb r1, [r0]\n\
-    _0804ADB6:\n\
-        movs r6, 0\n\
-        movs r5, 0\n\
-    _0804ADBA:\n\
-        movs r0, 0x64\n\
-        adds r1, r5, 0\n\
-        muls r1, r0\n\
-        ldr r0, =gEnemyParty\n\
-        adds r4, r1, r0\n\
-        adds r0, r4, 0\n\
-        movs r1, 0xB\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        beq _0804AE10\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x2D\n\
-        bl GetMonData\n\
-        cmp r0, 0\n\
-        bne _0804AE10\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r0, [r0]\n\
-        movs r1, 0x80\n\
-        lsls r1, 11\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AE02\n\
-        ldr r0, =gBattleStruct\n\
-        ldr r0, [r0]\n\
-        ldr r1, =0x000002a1\n\
-        adds r0, r1\n\
-        ldrb r1, [r0]\n\
-        ldr r2, =gBitTable\n\
-        lsls r0, r5, 2\n\
-        adds r0, r2\n\
-        ldr r0, [r0]\n\
-        ands r1, r0\n\
-        cmp r1, 0\n\
-        bne _0804AE10\n\
-    _0804AE02:\n\
-        adds r0, r4, 0\n\
-        movs r1, 0x39\n\
-        bl GetMonData\n\
-        adds r0, r6, r0\n\
-        lsls r0, 16\n\
-        lsrs r6, r0, 16\n\
-    _0804AE10:\n\
-        adds r5, 0x1\n\
-        cmp r5, 0x5\n\
-        ble _0804ADBA\n\
-        ldr r2, =gBattleOutcome\n\
-        cmp r6, 0\n\
-        bne _0804AE24\n\
-        ldrb r0, [r2]\n\
-        movs r1, 0x1\n\
-        orrs r0, r1\n\
-        strb r0, [r2]\n\
-    _0804AE24:\n\
-        ldrb r0, [r2]\n\
-        cmp r0, 0\n\
-        bne _0804AF1A\n\
-        ldr r0, =gBattleTypeFlags\n\
-        ldr r1, [r0]\n\
-        ldr r2, =0x02000002\n\
-        ands r1, r2\n\
-        mov r8, r0\n\
-        cmp r1, 0\n\
-        beq _0804AF1A\n\
-        movs r3, 0\n\
-        movs r5, 0\n\
-        ldr r0, =gBattlersCount\n\
-        ldrb r1, [r0]\n\
-        mov r12, r0\n\
-        ldr r7, =gBattlescriptCurrInstr\n\
-        cmp r3, r1\n\
-        bge _0804AE70\n\
-        ldr r0, =gHitMarker\n\
-        movs r6, 0x80\n\
-        lsls r6, 21\n\
-        ldr r4, [r0]\n\
-        adds r2, r1, 0\n\
-        ldr r1, =gSpecialStatuses\n\
-    _0804AE54:\n\
-        adds r0, r6, 0\n\
-        lsls r0, r5\n\
-        ands r0, r4\n\
-        cmp r0, 0\n\
-        beq _0804AE68\n\
-        ldrb r0, [r1]\n\
-        lsls r0, 25\n\
-        cmp r0, 0\n\
-        blt _0804AE68\n\
-        adds r3, 0x1\n\
-    _0804AE68:\n\
-        adds r1, 0x28\n\
-        adds r5, 0x2\n\
-        cmp r5, r2\n\
-        blt _0804AE54\n\
-    _0804AE70:\n\
-        movs r2, 0\n\
-        movs r5, 0x1\n\
-        mov r4, r12\n\
-        ldrb r1, [r4]\n\
-        cmp r5, r1\n\
-        bge _0804AEAA\n\
-        ldr r0, =gHitMarker\n\
-        movs r4, 0x80\n\
-        lsls r4, 21\n\
-        mov r12, r4\n\
-        ldr r6, [r0]\n\
-        ldr r0, =gSpecialStatuses\n\
-        adds r4, r1, 0\n\
-        adds r1, r0, 0\n\
-        adds r1, 0x14\n\
-    _0804AE8E:\n\
-        mov r0, r12\n\
-        lsls r0, r5\n\
-        ands r0, r6\n\
-        cmp r0, 0\n\
-        beq _0804AEA2\n\
-        ldrb r0, [r1]\n\
-        lsls r0, 25\n\
-        cmp r0, 0\n\
-        blt _0804AEA2\n\
-        adds r2, 0x1\n\
-    _0804AEA2:\n\
-        adds r1, 0x28\n\
-        adds r5, 0x2\n\
-        cmp r5, r4\n\
-        blt _0804AE8E\n\
-    _0804AEAA:\n\
-        mov r1, r8\n\
-        ldr r0, [r1]\n\
-        movs r1, 0x40\n\
-        ands r0, r1\n\
-        cmp r0, 0\n\
-        beq _0804AEF0\n\
-        adds r0, r2, r3\n\
-        cmp r0, 0x1\n\
-        bgt _0804AEF8\n\
-        b _0804AF12\n\
-        .pool\n\
-    _0804AEF0:\n\
-        cmp r2, 0\n\
-        beq _0804AF12\n\
-        cmp r3, 0\n\
-        beq _0804AF12\n\
-    _0804AEF8:\n\
-        ldr r2, [r7]\n\
-        ldrb r1, [r2, 0x1]\n\
-        ldrb r0, [r2, 0x2]\n\
-        lsls r0, 8\n\
-        adds r1, r0\n\
-        ldrb r0, [r2, 0x3]\n\
-        lsls r0, 16\n\
-        adds r1, r0\n\
-        ldrb r0, [r2, 0x4]\n\
-        lsls r0, 24\n\
-        adds r1, r0\n\
-        str r1, [r7]\n\
-        b _0804AF22\n\
-    _0804AF12:\n\
-        ldr r0, [r7]\n\
-        adds r0, 0x5\n\
-        str r0, [r7]\n\
-        b _0804AF22\n\
-    _0804AF1A:\n\
-        ldr r1, =gBattlescriptCurrInstr\n\
-        ldr r0, [r1]\n\
-        adds r0, 0x5\n\
-        str r0, [r1]\n\
-    _0804AF22:\n\
-        pop {r3}\n\
-        mov r8, r3\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .pool\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 static void MoveValuesCleanUp(void)
 {
@@ -5656,21 +5360,21 @@ static void Cmd_yesnoboxlearnmove(void)
         BattleCreateYesNoCursorAt(0);
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
             BattleCreateYesNoCursorAt(0);
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
@@ -5684,7 +5388,7 @@ static void Cmd_yesnoboxlearnmove(void)
                 gBattleScripting.learnMoveState = 5;
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattleScripting.learnMoveState = 5;
@@ -5773,21 +5477,21 @@ static void Cmd_yesnoboxstoplearningmove(void)
         BattleCreateYesNoCursorAt(0);
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
             BattleCreateYesNoCursorAt(0);
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
 
@@ -5798,7 +5502,7 @@ static void Cmd_yesnoboxstoplearningmove(void)
 
             HandleBattleWindow(0x18, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
@@ -5831,8 +5535,8 @@ static void Cmd_hitanimation(void)
 static u32 GetTrainerMoneyToGive(u16 trainerId)
 {
     u32 i = 0;
-    u32 lastMonLevel = 0;
-    u32 moneyReward = 0;
+    u32 moneyReward;
+    u8 lastMonLevel = 0;
 
     if (trainerId == TRAINER_SECRET_BASE)
     {
@@ -6068,28 +5772,28 @@ static void Cmd_yesnobox(void)
         BattleCreateYesNoCursorAt(0);
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
             BattleCreateYesNoCursorAt(0);
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
             HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
             gBattlescriptCurrInstr++;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
@@ -6332,7 +6036,7 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     printerTemplate.currentY = 0;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.unk = 0;
+    printerTemplate.style = 0;
     printerTemplate.fgColor = TEXT_COLOR_WHITE;
     printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
     printerTemplate.shadowColor = TEXT_COLOR_DARK_GREY;
@@ -6724,7 +6428,7 @@ static void Cmd_various(void)
             gBattleOutcome = B_OUTCOME_MON_TELEPORTED;
         break;
     case VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC:
-        BtlController_EmitPlayFanfareOrBGM(0, MUS_KACHI1, TRUE);
+        BtlController_EmitPlayFanfareOrBGM(0, MUS_VICTORY_TRAINER, TRUE);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
     }
@@ -10189,6 +9893,7 @@ static void Cmd_handleballthrow(void)
             else // not caught
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = shakes;
+                // Maybe inject SpriteCB_TestBallThrow here
                 gBattlescriptCurrInstr = BattleScript_ShakeBallThrow;
             }
         }
@@ -10371,21 +10076,21 @@ static void Cmd_trygivecaughtmonnick(void)
         BattleCreateYesNoCursorAt(0);
         break;
     case 1:
-        if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
+        if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
             BattleCreateYesNoCursorAt(0);
         }
-        if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
+        if (JOY_NEW(DPAD_DOWN) && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
             BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
             BattleCreateYesNoCursorAt(1);
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gBattleCommunication[CURSOR_POSITION] == 0)
@@ -10398,7 +10103,7 @@ static void Cmd_trygivecaughtmonnick(void)
                 gBattleCommunication[MULTIUSE_STATE] = 4;
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattleCommunication[MULTIUSE_STATE] = 4;

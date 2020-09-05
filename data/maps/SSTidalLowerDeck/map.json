@@ -2,7 +2,7 @@
   "id": "MAP_SS_TIDAL_LOWER_DECK",
   "name": "SSTidalLowerDeck",
   "layout": "LAYOUT_SS_TIDAL_LOWER_DECK",
-  "music": "MUS_M_BOAT",
+  "music": "MUS_SAILING",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

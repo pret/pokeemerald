@@ -74,7 +74,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendan:: @ 81F8497
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanNorth
 	compare VAR_FACING, DIR_SOUTH

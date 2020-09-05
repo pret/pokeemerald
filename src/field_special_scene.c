@@ -171,7 +171,7 @@ void Task_HandleTruckSequence(u8 taskId)
             data[1] = 0; // reset the timer.
             data[2] = CreateTask(Task_Truck1, 0xA);
             data[0] = 1; // run the next case.
-            PlaySE(SE_TRACK_MOVE);
+            PlaySE(SE_TRUCK_MOVE);
         }
         break;
     case 1:
@@ -191,7 +191,7 @@ void Task_HandleTruckSequence(u8 taskId)
             DestroyTask(data[2]);
             data[3] = CreateTask(Task_Truck2, 0xA);
             data[0] = 3;
-            PlaySE(SE_TRACK_STOP);
+            PlaySE(SE_TRUCK_STOP);
         }
         break;
     case 3:
@@ -206,7 +206,7 @@ void Task_HandleTruckSequence(u8 taskId)
         data[1]++;
         if (data[1] == 90)
         {
-            PlaySE(SE_TRACK_HAIKI);
+            PlaySE(SE_TRUCK_UNLOAD);
             data[1] = 0;
             data[0] = 5;
         }
@@ -219,7 +219,7 @@ void Task_HandleTruckSequence(u8 taskId)
             MapGridSetMetatileIdAt(11, 9, METATILE_InsideOfTruck_ExitLight_Mid);
             MapGridSetMetatileIdAt(11, 10, METATILE_InsideOfTruck_ExitLight_Bottom);
             DrawWholeMapView();
-            PlaySE(SE_TRACK_DOOR);
+            PlaySE(SE_TRUCK_DOOR);
             DestroyTask(taskId);
             ScriptContext2_Disable();
         }
@@ -280,7 +280,7 @@ void Task_HandlePorthole(u8 taskId)
         }
         break;
     case IDLE_CHECK:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             data[1] = 1;
         if (!ScriptMovement_IsObjectMovementFinished(OBJ_EVENT_ID_PLAYER, location->mapNum, location->mapGroup))
             return;

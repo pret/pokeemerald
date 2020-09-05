@@ -83,7 +83,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_WonHardBattle:: @ 825D285
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_RestoreToFullHealth, MSGBOX_DEFAULT
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge2, MSGBOX_DEFAULT
@@ -111,7 +111,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter:: @ 825D2FB
 	applymovement OBJ_EVENT_ID_CAMERA, BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanUp
 	applymovement LOCALID_OBJ_1, BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCExitForLucy
 	waitmovement 0
-	playse SE_CURTAIN
+	playse SE_PIKE_CURTAIN_CLOSE
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesLittleClosed
 	delay 4
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed
@@ -120,7 +120,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter:: @ 825D2FB
 	delay 4
 	waitse
 	delay 60
-	playse SE_CURTAIN1
+	playse SE_PIKE_CURTAIN_OPEN
 	delay 65
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed
 	showobjectat LOCALID_OBJ_0, MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL
@@ -154,7 +154,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver:: @ 825D3DA
 	goto_if_ne BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_LucyShowMeFrontierPass, MSGBOX_DEFAULT
 	waitmessage
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattlePikeRoomNormal_Text_ReceivedLuckSymbol
 	waitmessage
 	waitfanfare
@@ -182,7 +182,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold:: @ 825D460
 	goto_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_LucyFrontierPass, MSGBOX_DEFAULT
 	waitmessage
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattlePikeRoomNormal_Text_LuckSymbolTookGoldenShine
 	waitmessage
 	waitfanfare
@@ -211,14 +211,14 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenNoHeal:: @ 825D4DC
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealOneMon:: @ 825D4EA
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomHealOne, MSGBOX_DEFAULT
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealTwoMons:: @ 825D4FC
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomHealTwo, MSGBOX_DEFAULT
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter
 	end
@@ -230,7 +230,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom:: @ 825D50E
 	waitmovement 0
 	message BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreToFullHealth
 	waitmessage
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge, MSGBOX_DEFAULT
@@ -573,7 +573,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_HealNPC:: @ 825D83E
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreTwoMons
 	compare VAR_RESULT, 1
 	call_if_eq BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreOneMon
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell, MSGBOX_DEFAULT
 	closemessage

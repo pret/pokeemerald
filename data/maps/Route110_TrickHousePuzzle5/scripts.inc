@@ -454,7 +454,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3:: @ 826D12F
 
 Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer:: @ 826D152
 	waitse
-	playse SE_HAZURE
+	playse SE_FAILURE
 	msgbox Route110_TrickHousePuzzle5_Text_DisappointmentError, MSGBOX_DEFAULT
 	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_MechadollShake
 	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_MechadollShake
@@ -472,7 +472,7 @@ Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer:: @ 826D152
 
 Route110_TrickHousePuzzle5_EventScript_CorrectAnswer:: @ 826D1A0
 	waitse
-	playse SE_SEIKAI
+	playse SE_SUCCESS
 	goto Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough
 	end
 

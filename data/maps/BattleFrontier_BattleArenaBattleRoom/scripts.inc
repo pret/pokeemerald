@@ -66,7 +66,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers:: @ 825752E
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceDown
-	playse SE_W187
+	playse SE_M_BELLY_DRUM
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward, MSGBOX_DEFAULT
@@ -74,7 +74,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers:: @ 825752E
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaBattleRoom_Movement_PlayerStepForward
 	waitmovement 0
 	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceDown
-	playse SE_W187
+	playse SE_M_BELLY_DRUM
 	waitse
 	waitmovement 0
 	arena_gettrainername
@@ -83,7 +83,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers:: @ 825752E
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentStepForward
 	waitmovement 0
 	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceDown
-	playse SE_W187
+	playse SE_M_BELLY_DRUM
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_SetKOTourneyBegin, MSGBOX_DEFAULT
@@ -103,7 +103,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DeclareOpponentWinner:: @ 82575
 	applymovement LOCALID_BLACK_BELT_2, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceDown
 	applymovement LOCALID_BLACK_BELT_3, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceUp
 	applymovement LOCALID_BLACK_BELT_4, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceUp
-	playse SE_W173
+	playse SE_M_SNORE
 	waitse
 	waitmovement 0
 	arena_gettrainername
@@ -131,7 +131,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedOpponent:: @ 8257630
 	special LoadPlayerParty
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 BattleFrontier_BattleArenaBattleRoom_EventScript_AskReadyForOpponent:: @ 82576B0
@@ -286,7 +286,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta:: @ 8257961
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceDown
-	playse SE_W187
+	playse SE_M_BELLY_DRUM
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward, MSGBOX_DEFAULT
@@ -294,7 +294,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_BattleGreta:: @ 8257961
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaBattleRoom_Movement_PlayerStepForwardLong
 	waitmovement 0
 	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceDown
-	playse SE_W187
+	playse SE_M_BELLY_DRUM
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_MakeWayForGreta, MSGBOX_DEFAULT
@@ -336,7 +336,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaSilver:: @ 8257A5C
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentStepForwardLong
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureToughAfterAll, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleArenaBattleRoom_Text_ReceivedGutsSymbol
 	waitmessage
 	waitfanfare
@@ -373,7 +373,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DefeatedGretaGold:: @ 8257B15
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentStepForwardLong
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_GretaBlownAway, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleArenaBattleRoom_Text_GutsSymbolTookGoldenShine
 	waitmessage
 	waitfanfare
@@ -406,7 +406,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DeclarePlayerWinner:: @ 8257BA9
 	applymovement LOCALID_BLACK_BELT_2, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceDown
 	applymovement LOCALID_BLACK_BELT_3, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceUp
 	applymovement LOCALID_BLACK_BELT_4, BattleFrontier_BattleArenaBattleRoom_Movement_JumpInPlaceUp
-	playse SE_BAN
+	playse SE_BANG
 	waitse
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsPlayer, MSGBOX_DEFAULT

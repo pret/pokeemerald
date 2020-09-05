@@ -17,7 +17,7 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -33,7 +33,7 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	compare VAR_FACING, DIR_EAST
 	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject LOCALID_STEVEN
 	release
 	end

@@ -53,7 +53,7 @@ BattleFrontier_BattlePyramidTop_OnFrame: @ 825516E
 	.2byte 0
 
 BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic:: @ 8255180
-	playbgm MUS_PYRAMID_TOP, 0
+	playbgm MUS_B_PYRAMID_TOP, 0
 	setvar VAR_TEMP_E, 1
 	end
 
@@ -88,7 +88,7 @@ BattleFrontier_BattlePyramidTop_EventScript_Attendant:: @ 82551D0
 	waitmovement 0
 	message BattleFrontier_BattlePyramidTop_Text_PlayerConqueredPyramid
 	waitmessage
-	playfanfare MUS_ME_POINTGET
+	playfanfare MUS_OBTAIN_B_POINTS
 	waitfanfare
 	closemessage
 BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon:: @ 825521A
@@ -136,7 +136,7 @@ BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardSilverSpeech:: @ 82552D0
 BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonSilver:: @ 82552DA
 	msgbox BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle
-	playbgm MUS_PYRAMID_TOP, 0
+	playbgm MUS_B_PYRAMID_TOP, 0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver
 	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
@@ -146,7 +146,7 @@ BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonSilver:: @ 82552FB
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon
 	msgbox BattleFrontier_BattlePyramidTop_Text_BrandonFrontierPassPlease, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattlePyramidTop_Text_ReceivedBraveSymbol
 	waitmessage
 	waitfanfare
@@ -176,7 +176,7 @@ BattleFrontier_BattlePyramidTop_EventScript_BrandonHeardGoldSpeech:: @ 8255388
 BattleFrontier_BattlePyramidTop_EventScript_BattleBrandonGold:: @ 8255392
 	msgbox BattleFrontier_BattlePyramidTop_Text_EverythingYouHave, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle
-	playbgm MUS_PYRAMID_TOP, 0
+	playbgm MUS_B_PYRAMID_TOP, 0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold
 	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
@@ -186,7 +186,7 @@ BattleFrontier_BattlePyramidTop_EventScript_DefeatedBrandonGold:: @ 82553B3
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon
 	msgbox BattleFrontier_BattlePyramidTop_Text_BrandonRemarkableHaveThis, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattlePyramidTop_Text_BraveSymbolTookGoldenShine
 	waitmessage
 	waitfanfare
