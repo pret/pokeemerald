@@ -655,19 +655,16 @@ static void CB2_InitBattleInternal(void)
         gBattle_WIN0V = 0x5051;
         ScanlineEffect_Clear();
 
-        i = 0;
-        while (i < 80)
+        for (i = 0; i < 80; i++)
         {
             gScanlineEffectRegBuffers[0][i] = 0xF0;
             gScanlineEffectRegBuffers[1][i] = 0xF0;
-            i++;
         }
 
-        while (i < 160)
+        for (; i < 160; i++)
         {
             gScanlineEffectRegBuffers[0][i] = 0xFF10;
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
-            i++;
         }
 
         ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
@@ -794,8 +791,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
 static void SetAllPlayersBerryData(void)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -3560,7 +3556,7 @@ static void BattleIntroPrintWildMonAttacked(void)
 
 static void BattleIntroPrintOpponentSendsOut(void)
 {
-    u32 position;
+    u8 position;
 
     if (gBattleControllerExecFlags)
         return;
@@ -3583,7 +3579,7 @@ static void BattleIntroPrintOpponentSendsOut(void)
 
 static void BattleIntroOpponent2SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_OPPONENT_RIGHT;
@@ -3612,7 +3608,7 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
 #ifdef NONMATCHING
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_OPPONENT_LEFT;
@@ -3785,7 +3781,7 @@ static void BattleIntroPrintPlayerSendsOut(void)
 
 static void BattleIntroPlayer2SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_RIGHT;
@@ -3817,7 +3813,7 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
 
 static void BattleIntroPlayer1SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_LEFT;
