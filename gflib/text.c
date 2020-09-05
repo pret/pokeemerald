@@ -1737,9 +1737,9 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
     {
         glyphs = gFont2JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
         DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
-        DecompressGlyphTile(glyphs + 0x8, gUnknown_03002F90.unk20);   // gUnknown_03002F90 + 0x40
-        DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);  // gUnknown_03002F90 + 0x20
-        DecompressGlyphTile(glyphs + 0x88, gUnknown_03002F90.unk60);  // gUnknown_03002F90 + 0x60
+        DecompressGlyphTile(glyphs + 0x8, gUnknown_03002F90.unk20);
+        DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);
+        DecompressGlyphTile(glyphs + 0x88, gUnknown_03002F90.unk60);
         gUnknown_03002F90.width = gFont2JapaneseGlyphWidths[glyphId]; // gGlyphWidth
         gUnknown_03002F90.height = 14;    // gGlyphHeight
     }
