@@ -317,9 +317,9 @@ struct SoundInfo
     u8 pcmDmaPeriod; // number of V-blanks per PCM DMA
     u8 maxLines;
     u8 gap[3];
-    u32 pcmSamplesPerVBlank;
-    u32 pcmFreq;
-    u32 divFreq;
+    s32 pcmSamplesPerVBlank;
+    s32 pcmFreq;
+    s32 divFreq;
     struct CgbChannel *cgbChans;
     void (*func)();
     u32 intp;
