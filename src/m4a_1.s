@@ -20,7 +20,7 @@ __umul3232H32:
 	thumb_func_start SoundMain
 SoundMain:
 	ldr r0, lt_SOUND_INFO_PTR
-	ldr r0, [r0]
+	ldr r0, [r0] @ Set the SoundInfo pointer to sound area
 	ldr r2, lt_ID_NUMBER
 	ldr r3, [r0, #o_SoundInfo_ident]
 	cmp r2, r3
