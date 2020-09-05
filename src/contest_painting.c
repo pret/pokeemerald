@@ -248,7 +248,7 @@ static void HoldContestPainting(void)
             gContestPaintingFadeCounter--;
         break;
     case 1:
-        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
         {
             gContestPaintingState++;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));

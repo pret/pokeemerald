@@ -937,14 +937,14 @@ static void Task_HandleFrontierPassInput(u8 taskId)
 {
     u8 var = FALSE; // Reused, first informs whether the cursor moves, then used as the new cursor area.
 
-    if (gMain.heldKeys & DPAD_UP && sPassGfx->cursorSprite->pos1.y >= 9)
+    if (JOY_HELD(DPAD_UP) && sPassGfx->cursorSprite->pos1.y >= 9)
     {
         sPassGfx->cursorSprite->pos1.y -= 2;
         if (sPassGfx->cursorSprite->pos1.y <= 7)
             sPassGfx->cursorSprite->pos1.y = 2;
         var = TRUE;
     }
-    if (gMain.heldKeys & DPAD_DOWN && sPassGfx->cursorSprite->pos1.y <= 135)
+    if (JOY_HELD(DPAD_DOWN) && sPassGfx->cursorSprite->pos1.y <= 135)
     {
         sPassGfx->cursorSprite->pos1.y += 2;
         if (sPassGfx->cursorSprite->pos1.y >= 137)
@@ -952,14 +952,14 @@ static void Task_HandleFrontierPassInput(u8 taskId)
         var = TRUE;
     }
 
-    if (gMain.heldKeys & DPAD_LEFT && sPassGfx->cursorSprite->pos1.x >= 6)
+    if (JOY_HELD(DPAD_LEFT) && sPassGfx->cursorSprite->pos1.x >= 6)
     {
         sPassGfx->cursorSprite->pos1.x -= 2;
         if (sPassGfx->cursorSprite->pos1.x <= 4)
             sPassGfx->cursorSprite->pos1.x = 5;
         var = TRUE;
     }
-    if (gMain.heldKeys & DPAD_RIGHT && sPassGfx->cursorSprite->pos1.x <= 231)
+    if (JOY_HELD(DPAD_RIGHT) && sPassGfx->cursorSprite->pos1.x <= 231)
     {
         sPassGfx->cursorSprite->pos1.x += 2;
         if (sPassGfx->cursorSprite->pos1.x >= 233)
@@ -969,7 +969,7 @@ static void Task_HandleFrontierPassInput(u8 taskId)
 
     if (!var) // Cursor did not change.
     {
-        if (sPassData->cursorArea != CURSOR_AREA_NOTHING && gMain.newKeys & A_BUTTON)
+        if (sPassData->cursorArea != CURSOR_AREA_NOTHING && JOY_NEW(A_BUTTON))
         {
             if (sPassData->cursorArea <= CURSOR_AREA_RECORD) // Map, Card, Record
             {
@@ -986,7 +986,7 @@ static void Task_HandleFrontierPassInput(u8 taskId)
             }
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_PC_OFF);
             SetMainCallback2(CB2_HideFrontierPass);
@@ -1471,19 +1471,19 @@ static void Task_HandleFrontierMap(u8 taskId)
             break;
         return;
     case 1:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_PC_OFF);
             data[0] = 4;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             if (sMapData->cursorPos >= NUM_FRONTIER_FACILITIES - 1)
                 HandleFrontierMapCursorMove(0);
             else
                 data[0] = 2;
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             if (sMapData->cursorPos == 0)
                 HandleFrontierMapCursorMove(1);

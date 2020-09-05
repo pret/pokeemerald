@@ -795,7 +795,7 @@ static void Task_SetClock_HandleInput(u8 taskId)
     {
         gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;
         gTasks[taskId].tHourHandAngle = (gTasks[taskId].tHours % 12) * 30 + (gTasks[taskId].tMinutes / 10) * 5;
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gTasks[taskId].func = Task_SetClock_AskConfirm;
         }
@@ -803,10 +803,10 @@ static void Task_SetClock_HandleInput(u8 taskId)
         {
             gTasks[taskId].tMoveDir = MOVE_NONE;
 
-            if (gMain.heldKeys & DPAD_LEFT)
+            if (JOY_HELD(DPAD_LEFT))
                 gTasks[taskId].tMoveDir = MOVE_BACKWARD;
 
-            if (gMain.heldKeys & DPAD_RIGHT)
+            if (JOY_HELD(DPAD_RIGHT))
                 gTasks[taskId].tMoveDir = MOVE_FORWARD;
 
             if (gTasks[taskId].tMoveDir != MOVE_NONE)
@@ -878,7 +878,7 @@ static void Task_ViewClock_WaitFadeIn(u8 taskId)
 static void Task_ViewClock_HandleInput(u8 taskId)
 {
     InitClockWithRtc(taskId);
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
         gTasks[taskId].func = Task_ViewClock_FadeOut;
 }
 

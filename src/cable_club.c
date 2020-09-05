@@ -163,7 +163,7 @@ static bool32 CheckLinkErrored(u8 taskId)
 
 static bool32 CheckLinkCanceledBeforeConnection(u8 taskId)
 {
-    if ((gMain.newKeys & B_BUTTON)
+    if ((JOY_NEW(B_BUTTON))
      && IsLinkConnectionEstablished() == FALSE)
     {
         gLinkType = 0;
@@ -178,7 +178,7 @@ static bool32 CheckLinkCanceled(u8 taskId)
     if (IsLinkConnectionEstablished())
         SetSuppressLinkErrorMessage(TRUE);
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gLinkType = 0;
         gTasks[taskId].func = Task_LinkupFailed;
@@ -277,7 +277,7 @@ static void Task_LinkupAwaitConfirmation(u8 taskId)
 
     UpdateLinkPlayerCountDisplay(taskId, linkPlayerCount);
 
-    if (!(gMain.newKeys & A_BUTTON))
+    if (!(JOY_NEW(A_BUTTON)))
         return;
 
     if (linkPlayerCount < tMinPlayers)
@@ -304,12 +304,12 @@ static void Task_LinkupTryConfirmation(u8 taskId)
             ShowFieldAutoScrollMessage(gText_ConfirmLinkWhenPlayersReady);
             gTasks[taskId].func = Task_LinkupConfirmWhenReady;
         }
-        else if (gMain.heldKeys & B_BUTTON)
+        else if (JOY_HELD(B_BUTTON))
         {
             ShowFieldAutoScrollMessage(gText_ConfirmLinkWhenPlayersReady);
             gTasks[taskId].func = Task_LinkupConfirmWhenReady;
         }
-        else if (gMain.heldKeys & A_BUTTON)
+        else if (JOY_HELD(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             CheckShouldAdvanceLinkState();

@@ -170,21 +170,21 @@ static bool32 sub_81CF010(struct PokenavSub7 *structPtr)
 
 static u32 sub_81CF030(struct PokenavSub7 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
         return 1;
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_DOWN))
         return 2;
-    else if (gMain.newKeys & DPAD_LEFT)
+    else if (JOY_NEW(DPAD_LEFT))
         return 3;
-    else if (gMain.newKeys & DPAD_RIGHT)
+    else if (JOY_NEW(DPAD_RIGHT))
         return 4;
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         structPtr->unk1C = 0;
         structPtr->unk0 = sub_81CF0B0;
         return 5;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         structPtr->unkPtr->unk2 = GetSelectedMatchCall();
         structPtr->unk1C = 1;

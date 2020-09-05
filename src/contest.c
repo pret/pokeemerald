@@ -1493,7 +1493,7 @@ static void Task_DisplayAppealNumberText(u8 taskId)
 static void Task_TryShowMoveSelectScreen(u8 taskId)
 {
     // Wait for button press to show move select screen
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
+    if ((JOY_NEW(A_BUTTON)) || (gMain.newKeys == B_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
@@ -1559,7 +1559,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
             numMoves++;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].func = Task_SelectedMove;
