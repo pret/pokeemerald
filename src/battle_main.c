@@ -5563,11 +5563,11 @@ static void HandleAction_UseItem(void)
             }
             else
             {
-                while (!(*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1))
+                do
                 {
                     *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
-                }
+                } while (!(*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1));
             }
             break;
         case AI_ITEM_X_STAT:
