@@ -135,10 +135,10 @@ void AgbMain()
         ReadKeys();
 
         if (!gSoftResetDisabled
-         && (gMain.heldKeysRaw & A_BUTTON)
-         && (gMain.heldKeysRaw & B_BUTTON)
-         && (gMain.heldKeysRaw & START_BUTTON)
-         && (gMain.heldKeysRaw & SELECT_BUTTON)) //The reset key combo A + B + START + SELECT
+         && JOY_HELD_RAW(A_BUTTON)
+         && JOY_HELD_RAW(B_BUTTON)
+         && JOY_HELD_RAW(START_BUTTON)
+         && JOY_HELD_RAW(SELECT_BUTTON)) //The reset key combo A + B + START + SELECT
         {
             rfu_REQ_stopMode();
             rfu_waitREQComplete();
