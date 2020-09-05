@@ -1523,7 +1523,7 @@ static u16 sub_811AB68(void)
 {
     do
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             sub_811BF78();
             sEasyChatScreen->state = 2;
@@ -1532,30 +1532,30 @@ static u16 sub_811AB68(void)
             sEasyChatScreen->unk_0c = 0;
             return 9;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             return sub_811B150();
         }
-        else if (gMain.newKeys & START_BUTTON)
+        else if (JOY_NEW(START_BUTTON))
         {
             return sub_811B1B4();
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             sEasyChatScreen->mainCursorRow--;
             break;
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             sEasyChatScreen->mainCursorColumn--;
             break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             sEasyChatScreen->mainCursorRow++;
             break;
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             sEasyChatScreen->mainCursorColumn++;
             break;
@@ -1595,7 +1595,7 @@ static u16 sub_811ACDC(void)
 {
     do
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             switch (sEasyChatScreen->mainCursorColumn)
             {
@@ -1610,30 +1610,30 @@ static u16 sub_811ACDC(void)
             }
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             return sub_811B150();
         }
-        else if (gMain.newKeys & START_BUTTON)
+        if (JOY_NEW(START_BUTTON))
         {
             return sub_811B1B4();
         }
-        else if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             sEasyChatScreen->mainCursorRow--;
             break;
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        if (JOY_NEW(DPAD_LEFT))
         {
             sEasyChatScreen->mainCursorColumn--;
             break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        if (JOY_NEW(DPAD_DOWN))
         {
             sEasyChatScreen->mainCursorRow = 0;
             break;
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        if (JOY_NEW(DPAD_RIGHT))
         {
             sEasyChatScreen->mainCursorColumn++;
             break;
@@ -1666,10 +1666,10 @@ static u16 sub_811ACDC(void)
 
 static u16 sub_811AE44(void)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         return sub_811B32C();
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (sEasyChatScreen->unk_0a != -1)
             return sub_811B2B0();
@@ -1685,19 +1685,19 @@ static u16 sub_811AE44(void)
         }
     }
 
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
         return sub_811B33C();
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
         return sub_811B528(2);
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPEAT(DPAD_DOWN))
         return sub_811B528(3);
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPEAT(DPAD_LEFT))
         return sub_811B528(1);
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPEAT(DPAD_RIGHT))
         return sub_811B528(0);
 
     return 0;
@@ -1705,31 +1705,31 @@ static u16 sub_811AE44(void)
 
 static u16 sub_811AF00(void)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         sEasyChatScreen->state = 2;
         return 14;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         return sub_811B394();
 
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
         return sub_811B794(4);
 
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
         return sub_811B794(5);
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
         return sub_811B794(2);
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPEAT(DPAD_DOWN))
         return sub_811B794(3);
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPEAT(DPAD_LEFT))
         return sub_811B794(1);
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPEAT(DPAD_RIGHT))
         return sub_811B794(0);
 
     return 0;
@@ -1794,10 +1794,10 @@ static u16 sub_811B040(void)
 
 static u16 sub_811B08C(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         return 26;
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         return sub_811B150();
 
     return 0;
@@ -1805,7 +1805,7 @@ static u16 sub_811B08C(void)
 
 static u16 sub_811B0BC(void)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         sEasyChatScreen->state = sub_811B2A4();
         return 7;

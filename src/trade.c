@@ -1353,24 +1353,24 @@ static void SetReadyToTrade(void)
 
 static void TradeMenuProcessInput(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
     {
         TradeMenuMoveCursor(&sTradeMenuData->cursorPosition, 0);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_DOWN))
     {
         TradeMenuMoveCursor(&sTradeMenuData->cursorPosition, 1);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    else if (JOY_REPEAT(DPAD_LEFT))
     {
         TradeMenuMoveCursor(&sTradeMenuData->cursorPosition, 2);
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPEAT(DPAD_RIGHT))
     {
         TradeMenuMoveCursor(&sTradeMenuData->cursorPosition, 3);
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
 
@@ -1451,7 +1451,7 @@ static void TradeMenuProcessInput_SelectedMon(void)
 
 static void ChooseMonAfterButtonPress(void)
 {
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
     {
         PlaySE(SE_SELECT);
         TradeMenuChooseMon();
@@ -1626,7 +1626,7 @@ static void RedrawTradeMenuAfterPressA(void)
 {
     int i;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         rbox_fill_rectangle(0);
@@ -1698,7 +1698,7 @@ static void LinkTradeWaitForQueue(void)
 
 static void PartnersMonWasInvalid(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         SetLinkData(LINKCMD_READY_CANCEL_TRADE, 0);
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_STANDBY;
@@ -3728,7 +3728,7 @@ static bool8 AnimateTradeSequenceCable(void)
         {
             return TRUE;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             sTradeData->state++;
         }
@@ -4243,7 +4243,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         {
             return TRUE;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             sTradeData->state++;
         }

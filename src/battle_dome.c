@@ -2731,9 +2731,6 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
 #define TYPE_x2     40
 #define TYPE_x4     80
 
-// Functionally equivalent, while loop is impossible to match.
-// arg2 is either 2, a personality, or an OTID
-#ifdef NONMATCHING
 static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 {
     int defType1, defType2, defAbility, moveType;
@@ -2762,13 +2759,15 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
                 i += 3;
                 continue;
             }
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
             {
-                // BUG: * 2 is not necessary and makes the condition always false if the ability is wonder guard.
-                if (TYPE_EFFECT_DEF_TYPE(i) == defType1 && (defAbility != ABILITY_WONDER_GUARD || TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE * 2))
-                    typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
-                if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2 && (defAbility != ABILITY_WONDER_GUARD || TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE * 2))
-                    typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                // BUG: TYPE_x2 is not necessary and makes the condition always false if the ability is wonder guard.
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_x2) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = typePower * TYPE_EFFECT_MULTIPLIER(i) / 10;
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == TYPE_x2) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = typePower * TYPE_EFFECT_MULTIPLIER(i) / 10;
             }
             i += 3;
         }
@@ -2779,10 +2778,10 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
     case 0:
         switch (typePower)
         {
-        case TYPE_x0_50:
-        case TYPE_x0_25:
-        case TYPE_x0:
         default:
+        case TYPE_x0:
+        case TYPE_x0_25:
+        case TYPE_x0_50:
             typePower = 0;
             break;
         case TYPE_x1:
@@ -2799,18 +2798,18 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
     case 1:
         switch (typePower)
         {
-        default:
-        case TYPE_x1:
-            typePower = 0;
+        case TYPE_x0:
+            typePower = 8;
             break;
         case TYPE_x0_25:
             typePower = 4;
             break;
-        case TYPE_x0:
-            typePower = 8;
-            break;
         case TYPE_x0_50:
             typePower = 2;
+            break;
+        default:
+        case TYPE_x1:
+            typePower = 0;
             break;
         case TYPE_x2:
             typePower = -2;
@@ -2829,8 +2828,8 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
         case TYPE_x0_25:
             typePower = -8;
             break;
-        case TYPE_x0_50:
         default:
+        case TYPE_x0_50:
             typePower = 0;
             break;
         case TYPE_x1:
@@ -2848,246 +2847,6 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 
     return typePower;
 }
-#else
-NAKED
-static int GetTypeEffectivenessPoints(int move, int species, int arg2)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    adds r3, r0, 0\n\
-    adds r4, r1, 0\n\
-    str r2, [sp]\n\
-    movs r6, 0\n\
-    movs r2, 0x14\n\
-    cmp r3, 0\n\
-    beq _0818FFF0\n\
-    ldr r0, =0x0000ffff\n\
-    cmp r3, r0\n\
-    beq _0818FFF0\n\
-    ldr r0, =gBattleMoves\n\
-    lsls r1, r3, 1\n\
-    adds r1, r3\n\
-    lsls r1, 2\n\
-    adds r3, r1, r0\n\
-    ldrb r0, [r3, 0x1]\n\
-    cmp r0, 0\n\
-    bne _0818FFFC\n\
-_0818FFF0:\n\
-    movs r0, 0\n\
-    b _08190156\n\
-    .pool\n\
-_0818FFFC:\n\
-    ldr r1, =gBaseStats\n\
-    lsls r0, r4, 3\n\
-    subs r0, r4\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r1, [r0, 0x6]\n\
-    mov r10, r1\n\
-    ldrb r1, [r0, 0x7]\n\
-    mov r9, r1\n\
-    ldrb r0, [r0, 0x16]\n\
-    mov r8, r0\n\
-    ldrb r3, [r3, 0x2]\n\
-    str r3, [sp, 0x4]\n\
-    cmp r0, 0x1A\n\
-    bne _0819002C\n\
-    cmp r3, 0x4\n\
-    bne _0819002C\n\
-    ldr r0, [sp]\n\
-    cmp r0, 0x1\n\
-    bne _081900AA\n\
-    movs r2, 0x8\n\
-    b _081900A4\n\
-    .pool\n\
-_0819002C:\n\
-    ldr r0, =gTypeEffectiveness\n\
-    adds r1, r6, r0\n\
-    ldrb r0, [r1]\n\
-    ldr r7, =gTypeEffectiveness\n\
-    cmp r0, 0xFF\n\
-    beq _081900A4\n\
-    adds r4, r1, 0\n\
-_0819003A:\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0xFE\n\
-    beq _08190096\n\
-    ldrb r0, [r4]\n\
-    ldr r1, [sp, 0x4]\n\
-    cmp r0, r1\n\
-    bne _08190096\n\
-    ldrb r0, [r4, 0x1]\n\
-    adds r5, r6, 0x1\n\
-    cmp r0, r10\n\
-    bne _0819006C\n\
-    adds r1, r6, 0x2\n\
-    mov r0, r8\n\
-    cmp r0, 0x19\n\
-    bne _0819005E\n\
-    ldrb r0, [r4, 0x2]\n\
-    cmp r0, 0x28\n\
-    bne _0819006C\n\
-_0819005E:\n\
-    adds r0, r1, r7\n\
-    ldrb r0, [r0]\n\
-    muls r0, r2\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    adds r2, r0, 0\n\
-_0819006C:\n\
-    adds r0, r5, r7\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r9\n\
-    bne _08190096\n\
-    cmp r10, r9\n\
-    beq _08190096\n\
-    adds r1, r6, 0x2\n\
-    mov r0, r8\n\
-    cmp r0, 0x19\n\
-    bne _08190088\n\
-    adds r0, r1, r7\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x28\n\
-    bne _08190096\n\
-_08190088:\n\
-    adds r0, r1, r7\n\
-    ldrb r0, [r0]\n\
-    muls r0, r2\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    adds r2, r0, 0\n\
-_08190096:\n\
-    adds r4, 0x3\n\
-    adds r6, 0x3\n\
-    ldr r1, =gTypeEffectiveness\n\
-    adds r0, r6, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0xFF\n\
-    bne _0819003A\n\
-_081900A4:\n\
-    ldr r0, [sp]\n\
-    cmp r0, 0x1\n\
-    beq _081900E0\n\
-_081900AA:\n\
-    ldr r1, [sp]\n\
-    cmp r1, 0x1\n\
-    bgt _081900BC\n\
-    cmp r1, 0\n\
-    beq _081900C4\n\
-    b _08190154\n\
-    .pool\n\
-_081900BC:\n\
-    ldr r0, [sp]\n\
-    cmp r0, 0x2\n\
-    beq _08190114\n\
-    b _08190154\n\
-_081900C4:\n\
-    cmp r2, 0xA\n\
-    beq _08190146\n\
-    cmp r2, 0xA\n\
-    ble _08190146\n\
-    cmp r2, 0x28\n\
-    beq _0819014A\n\
-    cmp r2, 0x28\n\
-    bgt _081900DA\n\
-    cmp r2, 0x14\n\
-    beq _08190104\n\
-    b _08190146\n\
-_081900DA:\n\
-    cmp r2, 0x50\n\
-    bne _08190146\n\
-    b _08190100\n\
-_081900E0:\n\
-    cmp r2, 0xA\n\
-    beq _08190104\n\
-    cmp r2, 0xA\n\
-    bgt _081900F2\n\
-    cmp r2, 0\n\
-    beq _08190100\n\
-    cmp r2, 0x5\n\
-    beq _0819014A\n\
-    b _08190146\n\
-_081900F2:\n\
-    cmp r2, 0x28\n\
-    beq _08190108\n\
-    cmp r2, 0x28\n\
-    ble _08190146\n\
-    cmp r2, 0x50\n\
-    beq _0819010E\n\
-    b _08190146\n\
-_08190100:\n\
-    movs r2, 0x8\n\
-    b _08190154\n\
-_08190104:\n\
-    movs r2, 0x2\n\
-    b _08190154\n\
-_08190108:\n\
-    movs r2, 0x2\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_0819010E:\n\
-    movs r2, 0x4\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_08190114:\n\
-    cmp r2, 0xA\n\
-    beq _08190146\n\
-    cmp r2, 0xA\n\
-    bgt _08190126\n\
-    cmp r2, 0\n\
-    beq _0819013A\n\
-    cmp r2, 0x5\n\
-    beq _08190140\n\
-    b _08190146\n\
-_08190126:\n\
-    cmp r2, 0x28\n\
-    beq _0819014E\n\
-    cmp r2, 0x28\n\
-    bgt _08190134\n\
-    cmp r2, 0x14\n\
-    beq _0819014A\n\
-    b _08190146\n\
-_08190134:\n\
-    cmp r2, 0x50\n\
-    beq _08190152\n\
-    b _08190146\n\
-_0819013A:\n\
-    movs r2, 0x10\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_08190140:\n\
-    movs r2, 0x8\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_08190146:\n\
-    movs r2, 0\n\
-    b _08190154\n\
-_0819014A:\n\
-    movs r2, 0x4\n\
-    b _08190154\n\
-_0819014E:\n\
-    movs r2, 0xC\n\
-    b _08190154\n\
-_08190152:\n\
-    movs r2, 0x14\n\
-_08190154:\n\
-    adds r0, r2, 0\n\
-_08190156:\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1");
-}
-#endif // NONMATCHING
 
 // Duplicate of GetFrontierTrainerFixedIvs
 // NOTE: In CreateDomeOpponentMon a tournament trainer ID (0-15) is passed instead, resulting in all IVs of 3
@@ -4352,7 +4111,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     u8 tourneyId = sTourneyTreeTrainerIds[position];
     u16 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
         input = INFOCARD_INPUT_AB;
 
     // Next opponent card cant scroll
@@ -4363,7 +4122,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     {
         // For trainer info cards, pos is 0 when on a trainer info card (not viewing that trainer's match progression)
         // Scrolling up/down from a trainer info card goes to other trainer info cards
-        if (gMain.newKeys & DPAD_UP && sInfoCard->pos == 0)
+        if (JOY_NEW(DPAD_UP) && sInfoCard->pos == 0)
         {
             if (position == 0)
                 position = DOME_TOURNAMENT_TRAINERS_COUNT - 1;
@@ -4371,7 +4130,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
                 position--;
             input = TRAINERCARD_INPUT_UP;
         }
-        else if (gMain.newKeys & DPAD_DOWN && sInfoCard->pos == 0)
+        else if (JOY_NEW(DPAD_DOWN) && sInfoCard->pos == 0)
         {
             if (position == DOME_TOURNAMENT_TRAINERS_COUNT - 1)
                 position = 0;
@@ -4380,13 +4139,13 @@ static u8 Task_GetInfoCardInput(u8 taskId)
             input = TRAINERCARD_INPUT_DOWN;
         }
         // Scrolling left can only be done after scrolling right
-        else if (gMain.newKeys & DPAD_LEFT && sInfoCard->pos != 0)
+        else if (JOY_NEW(DPAD_LEFT) && sInfoCard->pos != 0)
         {
             sInfoCard->pos--;
             input = TRAINERCARD_INPUT_LEFT;
         }
         // Scrolling right from a trainer info card shows their match progression
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             // Can only scroll right from a trainer card until the round they were eliminated
             if (DOME_TRAINERS[tourneyId].isEliminated && sInfoCard->pos - 1 < DOME_TRAINERS[tourneyId].eliminatedAt)
@@ -4414,7 +4173,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     {
         // For match info cards, pos is 1 when on the match card, 0 when on the left trainer, and 1 when on the right trainer
         // Scrolling up/down from a match info card goes to the next/previous match
-        if (gMain.newKeys & DPAD_UP && sInfoCard->pos == 1)
+        if (JOY_NEW(DPAD_UP) && sInfoCard->pos == 1)
         {
             if (position == DOME_TOURNAMENT_TRAINERS_COUNT)
                 position = sLastMatchCardNum[roundId];
@@ -4422,7 +4181,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
                 position--;
             input = MATCHCARD_INPUT_UP;
         }
-        else if (gMain.newKeys & DPAD_DOWN && sInfoCard->pos == 1)
+        else if (JOY_NEW(DPAD_DOWN) && sInfoCard->pos == 1)
         {
             if (position == sLastMatchCardNum[roundId])
                 position = DOME_TOURNAMENT_TRAINERS_COUNT;
@@ -4431,12 +4190,12 @@ static u8 Task_GetInfoCardInput(u8 taskId)
             input = MATCHCARD_INPUT_DOWN;
         }
         // Scrolling left/right from a match info card shows the trainer info card of the competitors for that match
-        else if (gMain.newKeys & DPAD_LEFT && sInfoCard->pos != 0)
+        else if (JOY_NEW(DPAD_LEFT) && sInfoCard->pos != 0)
         {
             input = MATCHCARD_INPUT_LEFT;
             sInfoCard->pos--;
         }
-        else if (gMain.newKeys & DPAD_RIGHT && (sInfoCard->pos == 0 || sInfoCard->pos == 1))
+        else if (JOY_NEW(DPAD_RIGHT) && (sInfoCard->pos == 0 || sInfoCard->pos == 1))
         {
             input = MATCHCARD_INPUT_RIGHT;
             sInfoCard->pos++;
@@ -5284,12 +5043,12 @@ static u8 UpdateTourneyTreeCursor(u8 taskId)
     int tourneyTreeCursorSpriteId = gTasks[taskId].data[1];
     int roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
-    if (gMain.newKeys == B_BUTTON || (gMain.newKeys & A_BUTTON && tourneyTreeCursorSpriteId == TOURNEY_TREE_CLOSE_BUTTON))
+    if (gMain.newKeys == B_BUTTON || (JOY_NEW(A_BUTTON) && tourneyTreeCursorSpriteId == TOURNEY_TREE_CLOSE_BUTTON))
     {
         PlaySE(SE_SELECT);
         selection = TOURNEY_TREE_SELECTED_CLOSE;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (tourneyTreeCursorSpriteId < DOME_TOURNAMENT_TRAINERS_COUNT)
         {
@@ -5793,7 +5552,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
             gTasks[taskId].tState = STATE_WAIT_FOR_INPUT;
         break;
     case STATE_WAIT_FOR_INPUT:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_CLOSE_TOURNEY_TREE;

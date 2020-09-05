@@ -1143,7 +1143,7 @@ static void CB2_RunCreditsSequence(void)
     RunTasks();
     AnimateSprites();
 
-    if ((gMain.heldKeys & B_BUTTON)
+    if ((JOY_HELD(B_BUTTON))
      && gHasHallOfFameRecords != 0
      && gTasks[gUnknown_0203BCE2].func == Task_ProgressCreditTasks)
     {

@@ -1245,7 +1245,7 @@ static bool32 sub_802B8CC(void)
             break;
         // fall through
     case 1:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             sub_802C164();
             sub_802AE14(3);
@@ -1336,7 +1336,7 @@ static bool32 sub_802BA58(void)
     case 2:
     case 5:
         gUnknown_02022CFC->unk3C++;
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON) || gUnknown_02022CFC->unk3C > 180)
+        if (JOY_NEW(A_BUTTON | B_BUTTON) || gUnknown_02022CFC->unk3C > 180)
         {
             sub_802DA14();
             gUnknown_02022CFC->unkA++;
@@ -3922,7 +3922,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
             data[0]++;
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             rbox_fill_rectangle(data[1]);
             CopyWindowToVram(data[1], 1);
