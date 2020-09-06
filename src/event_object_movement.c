@@ -8840,7 +8840,6 @@ u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct
     {
         gLockedAnimObjectEvents = AllocZeroed(sizeof(struct LockedAnimObjectEvents));
         gLockedAnimObjectEvents->objectEventIds[0] = objectEvent->localId;
-        // needed to match
         gLockedAnimObjectEvents->count = 1;
         ableToStore = TRUE;
     }
