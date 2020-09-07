@@ -3610,17 +3610,22 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
     u8 position;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        position = B_POSITION_OPPONENT_LEFT;
-    else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            position = B_POSITION_OPPONENT_LEFT;
+        if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
+                position = B_POSITION_OPPONENT_LEFT;
+            else
+                position = B_POSITION_PLAYER_LEFT;
+        }
         else
-            position = B_POSITION_PLAYER_LEFT;
+            position = B_POSITION_OPPONENT_LEFT;
     }
     else
+    {
         position = B_POSITION_OPPONENT_LEFT;
+    }
 
     if (gBattleControllerExecFlags)
         return;
@@ -5099,14 +5104,14 @@ static void HandleEndTurn_RanFromBattle(void)
     {
         switch (gProtectStructs[gBattlerAttacker].fleeFlag)
         {
-        default:
-            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
-            break;
         case 1:
             gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
             break;
         case 2:
             gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
+            break;
+        default:
+            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
             break;
         }
     }
@@ -5191,10 +5196,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;
         }
-        else
-        {
-            gBattleMainFunc = TryEvolvePokemon;
-        }
+        gBattleMainFunc = TryEvolvePokemon;
     }
 
     FreeAllWindowBuffers();
@@ -5530,7 +5532,9 @@ static void HandleAction_UseItem(void)
     gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
+
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
+
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
 
     if (gLastUsedItem <= LAST_BALL) // is ball
