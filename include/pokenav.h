@@ -313,7 +313,7 @@ bool32 WaitForHelpBar(void);
 void sub_81C78A0(void);
 bool32 MainMenuLoopedTaskIsBusy(void);
 void sub_81C7FDC(void);
-void sub_81C79BC(const u16 *a0, const u16 *a1, u32 a2, u32 a3, u32 a4, u16 *a5);
+void sub_81C79BC(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette);
 void sub_81C7B40(void);
 struct Sprite *PauseSpinningPokenavSprite(void);
 void ResumeSpinningPokenavSprite(void);

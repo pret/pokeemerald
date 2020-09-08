@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE123",
   "name": "Route123",
   "layout": "LAYOUT_ROUTE123",
-  "music": "MUS_DOORO_X4",
+  "music": "MUS_ROUTE122",
   "region_map_section": "MAPSEC_ROUTE_123",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

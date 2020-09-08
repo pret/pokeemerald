@@ -1105,7 +1105,7 @@ void InitLinkBattleVsScreen(u8 taskId)
             if (gTasks[taskId].data[5] != 0)
                 DrawLinkBattleVsScreenOutcomeText();
 
-            PlaySE(SE_W231);
+            PlaySE(SE_M_HARDEN);
             DestroyTask(taskId);
             gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = FALSE;
             gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = FALSE;
@@ -1126,7 +1126,7 @@ void DrawBattleEntryBackground(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         LZDecompressVram(gUnknown_08D778F0, (void*)(BG_CHAR_ADDR(1)));
-        LZDecompressVram(gVsLettersGfx, (void*)(VRAM + 0x10000));
+        LZDecompressVram(gVsLettersGfx, (void*)(OBJ_VRAM0));
         LoadCompressedPalette(gUnknown_08D77AE4, 0x60, 0x20);
         SetBgAttribute(1, BG_ATTR_SCREENSIZE, 1);
         SetGpuReg(REG_OFFSET_BG1CNT, 0x5C04);

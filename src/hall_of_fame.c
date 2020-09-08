@@ -396,7 +396,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HallOfFame);
-            PlayBGM(MUS_DENDOU);
+            PlayBGM(MUS_HALL_OF_FAME);
             return FALSE;
         }
         break;
@@ -648,7 +648,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
     }
 
     HallOfFame_PrintWelcomeText(0, 15);
-    PlaySE(SE_DENDOU);
+    PlaySE(SE_APPLAUSE);
     gTasks[taskId].tFrameCount = 400;
     gTasks[taskId].func = Task_Hof_DoConfetti;
 }
@@ -730,7 +730,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
 
 static void Task_Hof_ExitOnKeyPressed(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         FadeOutBGM(4);
         gTasks[taskId].func = Task_Hof_HandlePaletteOnExit;
@@ -992,7 +992,7 @@ static void Task_HofPC_HandleInput(u8 taskId)
 {
     u16 i;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskId].tCurrTeamNo != 0) // prepare another team to view
         {
@@ -1020,7 +1020,7 @@ static void Task_HofPC_HandleInput(u8 taskId)
             gTasks[taskId].func = Task_HofPC_HandlePaletteOnExit;
         }
     }
-    else if (gMain.newKeys & B_BUTTON) // turn off hall of fame PC
+    else if (JOY_NEW(B_BUTTON)) // turn off hall of fame PC
     {
         if (IsCryPlayingOrClearCrySongs())
         {
@@ -1029,12 +1029,12 @@ static void Task_HofPC_HandleInput(u8 taskId)
         }
         gTasks[taskId].func = Task_HofPC_HandlePaletteOnExit;
     }
-    else if (gMain.newKeys & DPAD_UP && gTasks[taskId].tCurrMonId != 0) // change mon -1
+    else if (JOY_NEW(DPAD_UP) && gTasks[taskId].tCurrMonId != 0) // change mon -1
     {
         gTasks[taskId].tCurrMonId--;
         gTasks[taskId].func = Task_HofPC_PrintMonInfo;
     }
-    else if (gMain.newKeys & DPAD_DOWN && gTasks[taskId].tCurrMonId < gTasks[taskId].tMonNo - 1) // change mon +1
+    else if (JOY_NEW(DPAD_DOWN) && gTasks[taskId].tCurrMonId < gTasks[taskId].tMonNo - 1) // change mon +1
     {
         gTasks[taskId].tCurrMonId++;
         gTasks[taskId].func = Task_HofPC_PrintMonInfo;
@@ -1098,7 +1098,7 @@ static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 
 static void Task_HofPC_ExitOnButtonPress(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         gTasks[taskId].func = Task_HofPC_HandlePaletteOnExit;
 }
 

@@ -67,7 +67,7 @@ void DoBounceEffect(u8 battlerId, u8 b, s8 c, s8 d);
 void EndBounceEffect(u8 battlerId, bool8 b);
 void SpriteCb_PlayerMonFromBall(struct Sprite *sprite);
 void sub_8039E60(struct Sprite *sprite);
-void sub_8039E84(struct Sprite *sprite);
+void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void sub_8039E9C(struct Sprite *sprite);
 void nullsub_20(void);
 void BeginBattleIntro(void);

@@ -30,21 +30,18 @@ static void nullsub_8(void)
 
 bool16 InitWindows(const struct WindowTemplate *templates)
 {
-    int i;
-    void *bgTilemapBuffer;
-    int j;
-    u8 bgLayer;
-    u16 attrib;
+    int i, j;
     u8* allocatedTilemapBuffer;
+    u16 attrib;
     int allocatedBaseBlock;
+    u8 bgLayer;
 
     for (i = 0; i < 0x4; ++i)
     {
-        bgTilemapBuffer = GetBgTilemapBuffer(i);
-        if (bgTilemapBuffer != NULL)
+        if (GetBgTilemapBuffer(i) != NULL)
             gUnknown_03002F70[i] = nullsub_8;
         else
-            gUnknown_03002F70[i] = bgTilemapBuffer;
+            gUnknown_03002F70[i] = NULL;
     }
 
     for (i = 0; i < 0x20; ++i)
@@ -567,19 +564,19 @@ u32 GetWindowAttribute(u8 windowId, u8 attributeId)
     switch (attributeId)
     {
     case WINDOW_BG:
-        return gWindows[windowId].window.bg;
+        return (u32)gWindows[windowId].window.bg;
     case WINDOW_TILEMAP_LEFT:
-        return gWindows[windowId].window.tilemapLeft;
+        return (u32)gWindows[windowId].window.tilemapLeft;
     case WINDOW_TILEMAP_TOP:
-        return gWindows[windowId].window.tilemapTop;
+        return (u32)gWindows[windowId].window.tilemapTop;
     case WINDOW_WIDTH:
-        return gWindows[windowId].window.width;
+        return (u32)gWindows[windowId].window.width;
     case WINDOW_HEIGHT:
-        return gWindows[windowId].window.height;
+        return (u32)gWindows[windowId].window.height;
     case WINDOW_PALETTE_NUM:
-        return gWindows[windowId].window.paletteNum;
+        return (u32)gWindows[windowId].window.paletteNum;
     case WINDOW_BASE_BLOCK:
-        return gWindows[windowId].window.baseBlock;
+        return (u32)gWindows[windowId].window.baseBlock;
     case WINDOW_TILE_DATA:
         return (u32)(gWindows[windowId].tileData);
     default:
@@ -643,12 +640,9 @@ u16 AddWindow8Bit(const struct WindowTemplate *template)
         }
         return 0xFF;
     }
-    else
-    {
-        gWindows[windowId].tileData = memAddress;
-        gWindows[windowId].window = *template;
-        return windowId;
-    }
+    gWindows[windowId].tileData = memAddress;
+    gWindows[windowId].window = *template;
+    return windowId;
 }
 
 void FillWindowPixelBuffer8Bit(u8 windowId, u8 fillValue)

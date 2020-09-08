@@ -535,9 +535,9 @@ static void sub_81170EC(u8 taskId)
     gTasks[taskId].func = sub_81172EC;
 
     if (sAnimStatsChangeData->data[0] == 0)
-        PlaySE12WithPanning(SE_W287, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_M_STAT_INCREASE, BattleAnimAdjustPanning2(-64));
     else
-        PlaySE12WithPanning(SE_W287B, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_M_STAT_DECREASE, BattleAnimAdjustPanning2(-64));
 }
 
 static void sub_81172EC(u8 taskId)

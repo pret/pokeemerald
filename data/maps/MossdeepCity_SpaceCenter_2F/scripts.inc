@@ -204,7 +204,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_Steven:: @ 8223F7A
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playse SE_KOUKA_L
+	playse SE_NOT_EFFECTIVE
 	switch VAR_FACING
 	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_StevenFightMovementSouth
 	applymovement LOCALID_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFight

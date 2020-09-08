@@ -2,7 +2,7 @@
   "id": "MAP_ABANDONED_SHIP_ROOMS2_1F",
   "name": "AbandonedShip_Rooms2_1F",
   "layout": "LAYOUT_ABANDONED_SHIP_ROOMS2_1F",
-  "music": "MUS_DAN02",
+  "music": "MUS_ABANDONED_SHIP",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",

@@ -1129,7 +1129,7 @@ static void Task_IntroFadeIn(u8 taskId)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
     gTasks[taskId].func = Task_IntroWaterDrops;
     gIntroFrameCounter = 0;
-    m4aSongNumStart(MUS_DEMO1);
+    m4aSongNumStart(MUS_INTRO);
     ResetSerial();
 }
 
@@ -1563,7 +1563,7 @@ static void Task_IntroLoadPart3Graphics(u8 taskId)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
     gTasks[taskId].func = Task_IntroSpinAndZoomPokeball;
     gIntroFrameCounter = 0;
-    m4aSongNumStart(MUS_T_BATTLE);
+    m4aSongNumStart(MUS_INTRO_BATTLE);
 }
 
 static void Task_IntroSpinAndZoomPokeball(u8 taskId)
@@ -2355,7 +2355,7 @@ static void Task_IntroRayquazaGlowScene_1(u8 taskId)
             if (data[1] == 6)
             {
                 spriteId = CreateSprite(&gIntroRayquazaHyperbeamSprite, 120, 88, 15);
-                PlaySE(SE_OP_BASYU);
+                PlaySE(SE_INTRO_BLAST);
                 gSprites[spriteId].invisible = TRUE;
                 gSprites[spriteId].data[3] = data[4];
                 data[0]++;

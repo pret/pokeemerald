@@ -93,7 +93,7 @@ void DoBrailleDigEffect(void)
     MapGridSetMetatileIdAt(17, 9, METATILE_Cave_SealedChamberEntrance_BottomMid);
     MapGridSetMetatileIdAt(18, 9, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
-    PlaySE(SE_BAN);
+    PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
     ScriptContext2_Disable();
 }
@@ -140,7 +140,7 @@ void DoBrailleRegirockEffect(void)
     MapGridSetMetatileIdAt(15, 27, 563);
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
-    PlaySE(SE_BAN);
+    PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }
@@ -186,7 +186,7 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(15, 27, 563);
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
-    PlaySE(SE_BAN);
+    PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }
@@ -286,7 +286,7 @@ void DoBrailleRegirockEffect(void)
     MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
     MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
-    PlaySE(SE_BAN);
+    PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }
@@ -325,7 +325,7 @@ void DoBrailleRegisteelEffect(void)
     MapGridSetMetatileIdAt(15, 27, METATILE_Cave_SealedChamberEntrance_BottomMid);
     MapGridSetMetatileIdAt(16, 27, METATILE_Cave_SealedChamberEntrance_BottomRight | METATILE_COLLISION_MASK);
     DrawWholeMapView();
-    PlaySE(SE_BAN);
+    PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }

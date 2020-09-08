@@ -2,7 +2,7 @@
   "id": "MAP_SEAFLOOR_CAVERN_ROOM8",
   "name": "SeafloorCavern_Room8",
   "layout": "LAYOUT_SEAFLOOR_CAVERN_ROOM8",
-  "music": "MUS_TOZAN",
+  "music": "MUS_MT_CHIMNEY",
   "region_map_section": "MAPSEC_SEAFLOOR_CAVERN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -282,7 +282,7 @@ enum
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
     FONTATTR_LINE_SPACING,
-    FONTATTR_UNKNOWN,   // dunno what this is yet
+    FONTATTR_STYLE,
     FONTATTR_COLOR_FOREGROUND,
     FONTATTR_COLOR_BACKGROUND,
     FONTATTR_COLOR_SHADOW
@@ -310,7 +310,7 @@ struct TextPrinterTemplate
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;   // 0xC
+    u8 style:4;   // 0xC
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
@@ -339,7 +339,7 @@ struct FontInfo
     u8 maxLetterHeight;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;
+    u8 style:4; //unused
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
@@ -373,8 +373,8 @@ struct Struct_03002F90
     u32 unk20[8];
     u32 unk40[8];
     u32 unk60[8];
-    u8 unk80;
-    u8 unk81;
+    u8 width;
+    u8 height;
 };
 
 extern TextFlags gTextFlags;
