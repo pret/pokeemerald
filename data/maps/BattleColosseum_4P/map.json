@@ -2,7 +2,7 @@
   "id": "MAP_BATTLE_COLOSSEUM_4P",
   "name": "BattleColosseum_4P",
   "layout": "LAYOUT_BATTLE_COLOSSEUM_4P",
-  "music": "MUS_RAINBOW",
+  "music": "MUS_EVER_GRANDE",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

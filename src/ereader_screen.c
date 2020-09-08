@@ -137,7 +137,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
         {
             *arg0 = 1;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             *arg0 = 0;
             return 1;
@@ -153,12 +153,12 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
     case 2:
         if (GetLinkPlayerCount_2() == 2)
         {
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
             CheckShouldAdvanceLinkState();
             *arg1 = 0;
             *arg0 = 3;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             *arg0 = 0;
             return 1;
@@ -288,7 +288,7 @@ static void sub_81D5084(u8 taskId)
             OpenEReaderLink();
             data->unk8 = 6;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             sub_81D505C(&data->unk0);
             PlaySE(SE_SELECT);
@@ -296,7 +296,7 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 6:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -431,12 +431,12 @@ static void sub_81D5084(u8 taskId)
         if (sub_81D5064(&data->unk0, 120))
         {
             AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
-            PlayFanfare(MUS_FANFA4);
+            PlayFanfare(MUS_OBTAIN_ITEM);
             data->unk8 = 19;
         }
         break;
     case 19:
-        if (IsFanfareTaskInactive() && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
+        if (IsFanfareTaskInactive() && (JOY_NEW(A_BUTTON | B_BUTTON)))
             data->unk8 = 26;
         break;
     case 23:

@@ -1021,7 +1021,7 @@ void PlayerTurnInPlace(u8 direction)
 
 void PlayerJumpLedge(u8 direction)
 {
-    PlaySE(SE_DANSA);
+    PlaySE(SE_LEDGE);
     PlayerSetAnimId(GetJump2MovementAction(direction), 8);
 }
 
@@ -1055,28 +1055,28 @@ void PlayerEndWheelie(u8 direction)
 // wheelie hopping standing
 void PlayerStandingHoppingWheelie(u8 a)
 {
-    PlaySE(SE_JITE_PYOKO);
+    PlaySE(SE_BIKE_HOP);
     PlayerSetAnimId(GetAcroWheelieHopFaceDirectionMovementAction(a), 1);
 }
 
 // wheelie hopping moving
 void PlayerMovingHoppingWheelie(u8 a)
 {
-    PlaySE(SE_JITE_PYOKO);
+    PlaySE(SE_BIKE_HOP);
     PlayerSetAnimId(GetAcroWheelieHopDirectionMovementAction(a), 2);
 }
 
 // wheelie hopping ledge
 void PlayerLedgeHoppingWheelie(u8 a)
 {
-    PlaySE(SE_JITE_PYOKO);
+    PlaySE(SE_BIKE_HOP);
     PlayerSetAnimId(GetAcroWheelieJumpDirectionMovementAction(a), 8);
 }
 
 // acro turn jump
 void PlayerAcroTurnJump(u8 direction)
 {
-    PlaySE(SE_JITE_PYOKO);
+    PlaySE(SE_BIKE_HOP);
     PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
 }
 
@@ -1501,7 +1501,7 @@ static bool8 PushBoulder_Move(struct Task *task, struct ObjectEvent *playerObjec
         gFieldEffectArguments[2] = strengthObject->previousElevation;
         gFieldEffectArguments[3] = gSprites[strengthObject->spriteId].oam.priority;
         FieldEffectStart(FLDEFF_DUST);
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         task->data[0]++;
     }
     return FALSE;
@@ -1540,7 +1540,7 @@ static u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEvent
     gPlayerAvatar.preventStep = TRUE;
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        PlaySE(SE_DANSA);
+        PlaySE(SE_LEDGE);
         ObjectEventSetHeldMovement(objectEvent, GetJumpInPlaceMovementAction(objectEvent->facingDirection));
         task->data[1]++;
         if (task->data[1] > 1)
@@ -1574,7 +1574,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct Objec
     task->data[1] = objectEvent->movementDirection;
     gPlayerAvatar.preventStep = TRUE;
     ScriptContext2_Enable();
-    PlaySE(SE_TK_WARPIN);
+    PlaySE(SE_WARP_IN);
     return TRUE;
 }
 
@@ -1789,7 +1789,7 @@ static bool8 Fishing_ShowDots(struct Task *task)
 
     AlignFishingAnimationFrames();
     task->tFrameCounter++;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         task->tStep = FISHING_NO_BITE;
         if (task->tRoundsPlayed != 0)
@@ -1878,7 +1878,7 @@ static bool8 Fishing_WaitForA(struct Task *task)
     task->tFrameCounter++;
     if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
         task->tStep = FISHING_GOT_AWAY;
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
         task->tStep++;
     return FALSE;
 }

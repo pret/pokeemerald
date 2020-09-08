@@ -265,7 +265,7 @@ BattleFrontier_BattlePikeLobby_EventScript_ExitRules:: @ 825BB47
 	end
 
 BattleFrontier_BattlePike_EventScript_CloseCurtain:: @ 825BB49
-	playse SE_CURTAIN
+	playse SE_PIKE_CURTAIN_CLOSE
 	special CloseBattlePikeCurtain
 	waitstate
 	waitse

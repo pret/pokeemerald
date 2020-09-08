@@ -2,7 +2,7 @@
   "id": "MAP_MAGMA_HIDEOUT_3F_1R",
   "name": "MagmaHideout_3F_1R",
   "layout": "LAYOUT_MAGMA_HIDEOUT_3F_1R",
-  "music": "MUS_AJITO",
+  "music": "MUS_AQUA_MAGMA_HIDEOUT",
   "region_map_section": "MAPSEC_MAGMA_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

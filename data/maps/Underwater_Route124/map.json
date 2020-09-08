@@ -1,0 +1,88 @@
+{
+  "id": "MAP_UNDERWATER_ROUTE124",
+  "name": "Underwater_Route124",
+  "layout": "LAYOUT_UNDERWATER_ROUTE124",
+  "music": "MUS_UNDERWATER",
+  "region_map_section": "MAPSEC_UNDERWATER_124",
+  "requires_flash": false,
+  "weather": "WEATHER_UNDERWATER_BUBBLES",
+  "map_type": "MAP_TYPE_UNDERWATER",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "down",
+      "offset": 0,
+      "map": "MAP_UNDERWATER_ROUTE126"
+    },
+    {
+      "direction": "emerge",
+      "offset": 0,
+      "map": "MAP_ROUTE124"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 42,
+      "y": 51,
+      "elevation": 0,
+      "item": "ITEM_CARBOS",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CARBOS"
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 40,
+      "elevation": 0,
+      "item": "ITEM_GREEN_SHARD",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_GREEN_SHARD"
+    },
+    {
+      "type": "hidden_item",
+      "x": 66,
+      "y": 34,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 64,
+      "y": 54,
+      "elevation": 3,
+      "item": "ITEM_BIG_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 70,
+      "y": 64,
+      "elevation": 3,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_1"
+    },
+    {
+      "type": "hidden_item",
+      "x": 42,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_CALCIUM",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM"
+    },
+    {
+      "type": "hidden_item",
+      "x": 45,
+      "y": 36,
+      "elevation": 3,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_2"
+    }
+  ]
+}

@@ -84,11 +84,11 @@ Route104_EventScript_PlayRivalMusic:: @ 81ECD11
 	return
 
 Route104_EventScript_PlayMayMusic:: @ 81ECD29
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	return
 
 Route104_EventScript_PlayBrendanMusic:: @ 81ECD2E
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	return
 
 Route104_EventScript_RivalEncounter:: @ 81ECD33
@@ -106,7 +106,7 @@ Route104_EventScript_MayEncounter:: @ 81ECD4B
 	msgbox Route104_Text_MayWeShouldRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox Route104_Text_RegisteredMay, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -195,7 +195,7 @@ Route104_EventScript_BrendanEncounter:: @ 81ECE6F
 	msgbox Route104_Text_BrendanWeShouldRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox Route104_Text_RegisteredBrendan, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -387,7 +387,7 @@ Route104_EventScript_SailToDewfordDadCalls:: @ 81ED0EF
 	pokenavcall Route104_Text_DadPokenavCall
 	waitmessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox Route104_Text_RegisteredDadInPokenav, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage

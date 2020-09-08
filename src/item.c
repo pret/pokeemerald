@@ -247,7 +247,8 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
 NAKED
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
-    asm_unified("push {r4-r7,lr}\n\
+    asm_unified(
+    "push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\

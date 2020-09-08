@@ -34,8 +34,8 @@ struct BgConfig2
     u32 unk_3:18;
 
     void* tilemap;
-    s32 bg_x;
-    s32 bg_y;
+    s32 bg_x; // Maybe unsigned, but game treats it as if it is signed a LOT.
+    s32 bg_y; // Same for this variable.
 };
 
 static struct BgControl sGpuBgConfigs;
@@ -621,17 +621,15 @@ s32 GetBgX(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return -1;
-    else if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
+    if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
         return -1;
-    else
-        return sGpuBgConfigs2[bg].bg_x;
+    return sGpuBgConfigs2[bg].bg_x;
 }
 
 s32 ChangeBgY(u8 bg, s32 value, u8 op)
 {
     u8 mode;
-    u16 temp1;
-    u16 temp2;
+    u16 temp1, temp2;
 
     if (IsInvalidBg32(bg) || !GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
     {
@@ -700,8 +698,7 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op)
 s32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
 {
     u8 mode;
-    u16 temp1;
-    u16 temp2;
+    u16 temp1, temp2;
 
     if (IsInvalidBg32(bg) || !GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
     {
@@ -772,10 +769,9 @@ s32 GetBgY(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return -1;
-    else if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
+    if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
         return -1;
-    else
-        return sGpuBgConfigs2[bg].bg_y;
+    return sGpuBgConfigs2[bg].bg_y;
 }
 
 void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
@@ -874,81 +870,77 @@ void* GetBgTilemapBuffer(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return NULL;
-    else if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
+    if (!GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
         return NULL;
-    else
-        return sGpuBgConfigs2[bg].tilemap;
+    return sGpuBgConfigs2[bg].tilemap;
 }
 
 void CopyToBgTilemapBuffer(u8 bg, const void *src, u16 mode, u16 destOffset)
 {
-    if (!IsInvalidBg32(bg) && !IsTileMapOutsideWram(bg))
-    {
-        if (mode != 0)
-            CpuCopy16(src, (void *)(sGpuBgConfigs2[bg].tilemap + (destOffset * 2)), mode);
-        else
-            LZ77UnCompWram(src, (void *)(sGpuBgConfigs2[bg].tilemap + (destOffset * 2)));
-    }
+    if (IsInvalidBg32(bg) || IsTileMapOutsideWram(bg))
+        return;
+    if (mode != 0)
+        CpuCopy16(src, (void *)(sGpuBgConfigs2[bg].tilemap + (destOffset * 2)), mode);
+    else
+        LZ77UnCompWram(src, (void *)(sGpuBgConfigs2[bg].tilemap + (destOffset * 2)));
 }
 
 void CopyBgTilemapBufferToVram(u8 bg)
 {
     u16 sizeToLoad;
 
-    if (!IsInvalidBg32(bg) && !IsTileMapOutsideWram(bg))
+    if (IsInvalidBg32(bg) || IsTileMapOutsideWram(bg))
+        return;
+
+    switch (GetBgType(bg))
     {
-        switch (GetBgType(bg))
-        {
-        case 0:
-            sizeToLoad = GetBgMetricTextMode(bg, 0) * 0x800;
-            break;
-        case 1:
-            sizeToLoad = GetBgMetricAffineMode(bg, 0) * 0x100;
-            break;
-        default:
-            sizeToLoad = 0;
-            break;
-        }
-        LoadBgVram(bg, sGpuBgConfigs2[bg].tilemap, sizeToLoad, 0, 2);
+    case 0:
+        sizeToLoad = GetBgMetricTextMode(bg, 0) * 0x800;
+        break;
+    case 1:
+        sizeToLoad = GetBgMetricAffineMode(bg, 0) * 0x100;
+        break;
+    default:
+        sizeToLoad = 0;
+        break;
     }
+    LoadBgVram(bg, sGpuBgConfigs2[bg].tilemap, sizeToLoad, 0, 2);
 }
 
-void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u8 bg, const void *src, u8 destX, u8 destY, u8 width, u8 height)
 {
-    u16 destX16;
-    u16 destY16;
+    u16 destX16, destY16;
     u16 mode;
 
-    if (!IsInvalidBg32(bg) && !IsTileMapOutsideWram(bg))
+    if (IsInvalidBg32(bg) || IsTileMapOutsideWram(bg))
+        return;
+    switch (GetBgType(bg))
     {
-        switch (GetBgType(bg))
+    case 0:
+    {
+        const u16 *srcCopy = src;
+        for (destY16 = destY; destY16 < (destY + height); destY16++)
         {
-        case 0:
-        {
-            const u16 * srcCopy = src;
-            for (destY16 = destY; destY16 < (destY + height); destY16++)
+            for (destX16 = destX; destX16 < (destX + width); destX16++)
             {
-                for (destX16 = destX; destX16 < (destX + width); destX16++)
-                {
-                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *srcCopy++;
-                }
+                ((u16 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *srcCopy++;
             }
-            break;
         }
-        case 1:
+        break;
+    }
+    case 1:
+    {
+        const u8 *srcCopy = src;
+        mode = GetBgMetricAffineMode(bg, 0x1);
+        for (destY16 = destY; destY16 < (destY + height); destY16++)
         {
-            const u8 * srcCopy = src;
-            mode = GetBgMetricAffineMode(bg, 0x1);
-            for (destY16 = destY; destY16 < (destY + height); destY16++)
+            for (destX16 = destX; destX16 < (destX + width); destX16++)
             {
-                for (destX16 = destX; destX16 < (destX + width); destX16++)
-                {
-                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
-                }
+                ((u8 *)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *srcCopy++;
             }
-            break;
         }
-        }
+        break;
+    }
     }
 }
 

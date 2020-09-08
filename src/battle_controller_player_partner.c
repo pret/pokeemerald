@@ -544,10 +544,10 @@ static void sub_81BB9A0(void)
 
 static void sub_81BB9F4(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1)
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
 
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
@@ -565,10 +565,10 @@ static void sub_81BB9F4(void)
 
 static void sub_81BBAE8(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim
         && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
     {
-        sub_8172EF0(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+        TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
     }
 
     if (gSprites[gUnknown_03005D7C[gActiveBattler]].callback == SpriteCallbackDummy
@@ -1370,7 +1370,7 @@ static void PlayerPartnerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_ATTACKER);
+            PlaySE12WithPanning(SE_FAINT, SOUND_PAN_ATTACKER);
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8039C00;

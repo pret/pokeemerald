@@ -285,10 +285,13 @@ static void CompleteOnChosenItem(void)
 
 static void sub_816864C(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
-        sub_8172EF0(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
-        sub_8172EF0(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim 
+     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
+        TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim 
+     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
+        TryShinyAnimation(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
 
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive
         && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive
@@ -320,14 +323,14 @@ static void sub_8168818(void)
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         r4 = TRUE;
 
-    if (r4 && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1
-        && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].field_1_x1)
+    if (r4 && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim
+        && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
 
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80 = 0;
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].field_1_x1 = 0;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim = FALSE;
 
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
@@ -1075,7 +1078,7 @@ static void WallyHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 
@@ -1085,7 +1088,7 @@ static void WallyHandleBallThrowAnim(void)
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW_WITH_TRAINER);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedAnimation;
 }
 

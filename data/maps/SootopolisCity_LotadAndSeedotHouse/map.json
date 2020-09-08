@@ -2,7 +2,7 @@
   "id": "MAP_SOOTOPOLIS_CITY_LOTAD_AND_SEEDOT_HOUSE",
   "name": "SootopolisCity_LotadAndSeedotHouse",
   "layout": "LAYOUT_SOOTOPOLIS_CITY_LOTAD_AND_SEEDOT_HOUSE",
-  "music": "MUS_RUNECITY",
+  "music": "MUS_SOOTOPOLIS",
   "region_map_section": "MAPSEC_SOOTOPOLIS_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -64,12 +64,12 @@ Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone:: @ 822BC48
 	checkmoney 500, 0
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_NotEnoughMoney
-	playse SE_REGI
+	playse SE_SHOP
 	msgbox Route121_SafariZoneEntrance_Text_ThatWillBe500Please, MSGBOX_DEFAULT
 	removemoney 500, 0
 	updatemoneybox 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message Route121_SafariZoneEntrance_Text_Received30SafariBalls
 	waitfanfare
 	msgbox Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT

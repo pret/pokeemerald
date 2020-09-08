@@ -151,13 +151,13 @@ gStdScripts_End:: @ 81DC2CC
 	.include "data/maps/Route132/scripts.inc"
 	.include "data/maps/Route133/scripts.inc"
 	.include "data/maps/Route134/scripts.inc"
-	.include "data/maps/Underwater1/scripts.inc"
-	.include "data/maps/Underwater2/scripts.inc"
-	.include "data/maps/Underwater3/scripts.inc"
-	.include "data/maps/Underwater4/scripts.inc"
-	.include "data/maps/Underwater5/scripts.inc"
-	.include "data/maps/Underwater6/scripts.inc"
-	.include "data/maps/Underwater7/scripts.inc"
+	.include "data/maps/Underwater_Route124/scripts.inc"
+	.include "data/maps/Underwater_Route126/scripts.inc"
+	.include "data/maps/Underwater_Route127/scripts.inc"
+	.include "data/maps/Underwater_Route128/scripts.inc"
+	.include "data/maps/Underwater_Route129/scripts.inc"
+	.include "data/maps/Underwater_Route105/scripts.inc"
+	.include "data/maps/Underwater_Route125/scripts.inc"
 	.include "data/maps/LittlerootTown_BrendansHouse_1F/scripts.inc"
 	.include "data/maps/LittlerootTown_BrendansHouse_2F/scripts.inc"
 	.include "data/maps/LittlerootTown_MaysHouse_1F/scripts.inc"
@@ -713,13 +713,13 @@ Common_EventScript_SetAbnormalWeather:: @ 827207A
 	return
 
 Common_EventScript_PlayGymBadgeFanfare:: @ 827207E
-	playfanfare MUS_ME_BACHI
+	playfanfare MUS_OBTAIN_BADGE
 	waitfanfare
 	return
 
 Common_EventScript_OutOfCenterPartyHeal:: @ 8272083
 	fadescreen FADE_TO_BLACK
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 	fadescreen FADE_FROM_BLACK
@@ -736,7 +736,7 @@ EventScript_RegionMap:: @ 827208F
 
 Common_EventScript_PlayBrineysBoatMusic:: @ 82720A0
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	playbgm MUS_M_BOAT, 0
+	playbgm MUS_SAILING, 0
 	return
 
 Common_EventScript_StopBrineysBoatMusic:: @ 82720A8
@@ -820,7 +820,7 @@ Common_EventScript_NameReceivedPartyMon:: @ 82723DD
 
 Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	bufferitemname 0, VAR_0x8004
-	playfanfare MUS_ME_WAZA
+	playfanfare MUS_OBTAIN_TMHM
 	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
