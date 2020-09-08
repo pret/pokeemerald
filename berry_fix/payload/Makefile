@@ -38,7 +38,7 @@ CPPFLAGS := -I ../../tools/agbcc/include -I ../../tools/agbcc -iquote include -n
 ROM := payload.gba
 OBJ_DIR := build
 CC1             := ../../tools/agbcc/bin/agbcc$(EXE)
-override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -nostdlib
 
 
 ELF = $(ROM:.gba=.elf)
@@ -52,7 +52,7 @@ C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi
+ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork
 
 LDFLAGS = -Map ../$(MAP)
 

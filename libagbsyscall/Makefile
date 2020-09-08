@@ -31,7 +31,7 @@ else
 EXE :=
 endif
 
-ASFLAGS := -mcpu=arm7tdmi
+ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork
 ARFLAGS := rc
 
 SYSCALLS := IntrWait \
