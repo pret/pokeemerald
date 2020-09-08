@@ -38,7 +38,7 @@ CPPFLAGS := -I ../../tools/agbcc/include -I ../../tools/agbcc -iquote include -n
 ROM := payload.gba
 OBJ_DIR := build
 CC1             := ../../tools/agbcc/bin/agbcc$(EXE)
-override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -nostdlib
+override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 
 ELF = $(ROM:.gba=.elf)

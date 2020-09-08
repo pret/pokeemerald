@@ -2686,8 +2686,7 @@ static void sub_80398BC(struct Sprite *sprite) // unused?
 
 static void sub_80398D0(struct Sprite *sprite)
 {
-    sprite->data[4]--;
-    if (sprite->data[4] == 0)
+    if (--sprite->data[4] == 0)
     {
         sprite->data[4] = 8;
         sprite->invisible ^= 1;
@@ -3418,17 +3417,13 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             }
         }
 
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT))
         {
-            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
-             || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
-            {
-                BtlController_EmitDrawTrainerPic(0);
-                MarkBattlerForControllerExec(gActiveBattler);
-            }
+            BtlController_EmitDrawTrainerPic(0);
+            MarkBattlerForControllerExec(gActiveBattler);
         }
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
+        if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && (GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT))
         {
             BtlController_EmitDrawTrainerPic(0);
             MarkBattlerForControllerExec(gActiveBattler);
@@ -3961,11 +3956,7 @@ u8 IsRunningFromBattleImpossible(void)
 
     gPotentialItemEffectBattler = gActiveBattler;
 
-    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
-        return 0;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return 0;
-    if (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
+    if ((holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN) || (gBattleTypeFlags & BATTLE_TYPE_LINK) || (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY))
         return 0;
 
     side = GetBattlerSide(gActiveBattler);
