@@ -28,7 +28,6 @@
 #include "international_string_util.h"
 #include "safari_zone.h"
 #include "sound.h"
-#include "sprite.h"
 #include "task.h"
 #include "trig.h"
 #include "window.h"
