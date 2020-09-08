@@ -2,7 +2,7 @@
   "id": "MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR",
   "name": "VerdanturfTown_BattleTentCorridor",
   "layout": "LAYOUT_BATTLE_TENT_CORRIDOR",
-  "music": "MUS_B_TOWER",
+  "music": "MUS_B_TOWER_RS",
   "region_map_section": "MAPSEC_VERDANTURF_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

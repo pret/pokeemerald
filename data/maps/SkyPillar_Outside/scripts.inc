@@ -81,7 +81,7 @@ SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
 	delay 30
 	msgbox SkyPillar_Outside_Text_GotToGoBackForSootopolis, MSGBOX_DEFAULT
 	closemessage
-	playse SE_KAIDAN
+	playse SE_EXIT
 	fadescreenswapbuffers FADE_TO_BLACK
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 4

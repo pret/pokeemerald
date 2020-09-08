@@ -52,7 +52,7 @@ static u8 UpdateFastPaletteFade(void);
 static u8 UpdateHardwarePaletteFade(void);
 static void UpdateBlendRegisters(void);
 static bool8 IsSoftwarePaletteFadeFinishing(void);
-static void sub_80A2D54(u8 taskId);
+static void Task_BlendPalettesGradually(u8 taskId);
 
 // palette buffers require alignment with agbcc because
 // unaligned word reads are issued in BlendPalette otherwise
@@ -940,91 +940,105 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
     }
 }
 
-void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
+#define tCoeff       data[0]
+#define tCoeffTarget data[1]
+#define tCoeffDelta  data[2]
+#define tDelay       data[3]
+#define tDelayTimer  data[4]
+#define tPalettes    5 // data[5] and data[6], set/get via Set/GetWordTaskArg
+#define tColor       data[7]
+#define tId          data[8]
+
+// Blend the selected palettes in a series of steps toward or away from the color.
+// Only used by the Groudon/Kyogre fight scene to flash the screen for lightning
+// One call is used to fade the bg from white, while another fades the duo from black
+void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTarget, u16 color, u8 priority, u8 id)
 {
     u8 taskId;
 
-    taskId = CreateTask((void *)sub_80A2D54, a6);
-    gTasks[taskId].data[0] = a3;
-    gTasks[taskId].data[1] = a4;
+    taskId = CreateTask((void *)Task_BlendPalettesGradually, priority);
+    gTasks[taskId].tCoeff = coeff;
+    gTasks[taskId].tCoeffTarget = coeffTarget;
 
-    if (a2 >= 0)
+    if (delay >= 0)
     {
-        gTasks[taskId].data[3] = a2;
-        gTasks[taskId].data[2] = 1;
+        gTasks[taskId].tDelay = delay;
+        gTasks[taskId].tCoeffDelta = 1;
     }
     else
     {
-        gTasks[taskId].data[3] = 0;
-        gTasks[taskId].data[2] = -a2 + 1;
+        gTasks[taskId].tDelay = 0;
+        gTasks[taskId].tCoeffDelta = -delay + 1;
     }
 
-    if (a4 < a3)
-        gTasks[taskId].data[2] *= -1;
+    if (coeffTarget < coeff)
+        gTasks[taskId].tCoeffDelta *= -1;
 
-    SetWordTaskArg(taskId, 5, a1);
-    gTasks[taskId].data[7] = a5;
-    gTasks[taskId].data[8] = a7;
+    SetWordTaskArg(taskId, tPalettes, selectedPalettes);
+    gTasks[taskId].tColor = color;
+    gTasks[taskId].tId = id;
     gTasks[taskId].func(taskId);
 }
 
-bool32 sub_80A2CF8(u8 var)
+// Unused
+static bool32 IsBlendPalettesGraduallyTaskActive(u8 id)
 {
     int i;
 
-    for (i = 0; i < NUM_TASKS; i++) // check all the tasks.
-        if ((gTasks[i].isActive == TRUE) && (gTasks[i].func == sub_80A2D54) && (gTasks[i].data[8] == var))
+    for (i = 0; i < NUM_TASKS; i++)
+        if ((gTasks[i].isActive == TRUE) 
+            && (gTasks[i].func == Task_BlendPalettesGradually) 
+            && (gTasks[i].tId == id))
             return TRUE;
 
     return FALSE;
 }
 
-void sub_80A2D34(void)
+// Unused
+static void DestroyBlendPalettesGraduallyTask(void)
 {
     u8 taskId;
 
     while (1)
     {
-        taskId = FindTaskIdByFunc(sub_80A2D54);
+        taskId = FindTaskIdByFunc(Task_BlendPalettesGradually);
         if (taskId == 0xFF)
             break;
         DestroyTask(taskId);
     }
 }
 
-void sub_80A2D54(u8 taskId)
+static void Task_BlendPalettesGradually(u8 taskId)
 {
-    u32 wordVar;
+    u32 palettes;
     s16 *data;
-    s16 temp;
+    s16 target;
 
     data = gTasks[taskId].data;
-    wordVar = GetWordTaskArg(taskId, 5);
+    palettes = GetWordTaskArg(taskId, tPalettes);
 
-    if (++data[4] > data[3])
+    if (++tDelayTimer > tDelay)
     {
-        data[4] = 0;
-        BlendPalettes(wordVar, data[0], data[7]);
-        temp = data[1];
-        if (data[0] == temp)
+        tDelayTimer = 0;
+        BlendPalettes(palettes, tCoeff, tColor);
+        target = tCoeffTarget;
+        if (tCoeff == target)
         {
             DestroyTask(taskId);
         }
         else
         {
-            data[0] += data[2];
-            if (data[2] >= 0)
+            tCoeff += tCoeffDelta;
+            if (tCoeffDelta >= 0)
             {
-                if (data[0] < temp)
-                {
+                if (tCoeff < target)
                     return;
-                }
             }
-            else if (data[0] > temp)
+            else if (tCoeff > target)
             {
                 return;
             }
-            data[0] = temp;
+            tCoeff = target;
         }
     }
 }

@@ -2,7 +2,7 @@
   "id": "MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY",
   "name": "FallarborTown_BattleTentLobby",
   "layout": "LAYOUT_BATTLE_TENT_LOBBY",
-  "music": "MUS_B_TOWER",
+  "music": "MUS_B_TOWER_RS",
   "region_map_section": "MAPSEC_FALLARBOR_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

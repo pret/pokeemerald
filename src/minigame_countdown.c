@@ -227,7 +227,7 @@ static void sub_802E938(struct Sprite *sprite)
         sprite->invisible = FALSE;
     case 1:
     case 2:
-        PlaySE(SE_KON);
+        PlaySE(SE_BALL_BOUNCE_1);
         StartSpriteAnim(sprite, sprite->data[2]);
         break;
     case 3:
@@ -249,7 +249,7 @@ static void sub_802E938(struct Sprite *sprite)
 static void sub_802EA50(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    PlaySE(SE_KON);
+    PlaySE(SE_BALL_BOUNCE_1);
     gSprites[data[13]].callback = sub_802E938;
     gSprites[data[13]].invisible = FALSE;
     gTasks[taskId].data[0] = 3;
@@ -262,15 +262,15 @@ static void sub_802EAB0(u8 taskId)
 
     if (gReceivedRemoteLinkPlayers != 0)
     {
-        if (gRecvCmds[0][1] == 0x7FFF)
+        if (gRecvCmds[0][1] == LINKCMD_0x7FFF)
             data[11] = gRecvCmds[0][2];
         if (GetMultiplayerId() == 0)
         {
             data[12]++;
             memset(packet, 0, sizeof(packet));
-            packet[0] = 0x7FFF;
+            packet[0] = LINKCMD_0x7FFF;
             packet[1] = data[12];
-            sub_800FE50(packet);
+            Rfu_SendPacket(packet);
         }
     }
     else
@@ -350,7 +350,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         // fallthrough
     case 1:
         if (sprite->data[2] == 0)
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
         if (++sprite->data[2] >= 20)
         {
             sprite->data[2] = 0;
@@ -443,7 +443,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         sprite->pos2.y = data[5] >> 4;
         if (sprite->pos2.y >= 0)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             sprite->pos2.y = 0;
             data[0]++;
         }
@@ -452,7 +452,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         data[1] += 12;
         if (data[1] >= 128)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             data[1] = 0;
             data[0]++;
         }
@@ -463,7 +463,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         data[1] += 16;
         if (data[1] >= 128)
         {
-            PlaySE(SE_KON2);
+            PlaySE(SE_BALL_BOUNCE_2);
             data[1] = 0;
             data[0]++;
         }

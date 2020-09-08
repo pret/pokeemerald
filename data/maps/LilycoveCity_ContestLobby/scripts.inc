@@ -99,7 +99,7 @@ LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon:: @ 821A314
 	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistReturnToPlayer
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_TakeMementoOfPainting, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	msgbox LilycoveCity_ContestLobby_Text_ReceivedARibbon, MSGBOX_DEFAULT
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon, MSGBOX_DEFAULT
@@ -272,7 +272,7 @@ LilycoveCity_ContestLobby_EventScript_ReceivedLinkArtistRibbon:: @ 821A4E4
 	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistReturnToPlayer
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_TakeMementoOfPainting, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	msgbox LilycoveCity_ContestLobby_Text_ReceivedARibbon, MSGBOX_DEFAULT
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon, MSGBOX_DEFAULT
@@ -417,13 +417,13 @@ LilycoveCity_ContestLobby_EventScript_LeadToContestHall:: @ 821A670
 	lockall
 	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistApproachCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 12, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 12, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistExitCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 12, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 12, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView
@@ -938,13 +938,13 @@ LilycoveCity_ContestLobby_EventScript_LeadToLinkContestHall:: @ 821AC49
 	closemessage
 	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistApproachCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 17, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 17, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
 	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistExitCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 17, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 17, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView

@@ -529,7 +529,7 @@ static const u8 *const sTVFindThatGamerTextGroup[] = {
     gTVFindThatGamerText03
 };
 
-static const u8 *const sTVBreakinsNewsTextGroup[] = {
+static const u8 *const sTVBreakingNewsTextGroup[] = {
     gTVBreakingNewsText00,
     gTVBreakingNewsText01,
     gTVBreakingNewsText02,
@@ -1332,7 +1332,7 @@ void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlaye
     }
 }
 
-bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unused, u8 sheen, u8 language)
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 color, u8 sheen, u8 language)
 {
     TVShow *show;
     u8 name[32];
@@ -1355,7 +1355,7 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unus
     StripExtCtrlCodes(name);
     StringCopy(show->threeCheers.worstBlenderName, name);
     show->threeCheers.flavor = flavor;
-    show->threeCheers.unk_03_3 = unused;
+    show->threeCheers.color = color;
     show->threeCheers.sheen = sheen;
     tv_store_id_2x(show);
     show->threeCheers.language = gGameLanguage;
@@ -6253,7 +6253,7 @@ static void DoTVShowBreakingNewsTV(void)
             TVShowDone();
             break;
     }
-    ShowFieldMessage(sTVBreakinsNewsTextGroup[state]);
+    ShowFieldMessage(sTVBreakingNewsTextGroup[state]);
 }
 
 static void DoTVShowSecretBaseVisit(void)

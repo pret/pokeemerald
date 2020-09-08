@@ -1823,7 +1823,7 @@ static void DeleteTextCharacter(void)
     // It incorrectly leaves the Back key 1 shade lighter than its default
     if (keyRole == KEY_ROLE_CHAR || keyRole == KEY_ROLE_BACKSPACE)
         TryStartButtonFlash(BUTTON_BACK, FALSE, TRUE);
-    PlaySE(SE_BOWA);
+    PlaySE(SE_BALL);
 }
 
 // Returns TRUE if the text entry is now full

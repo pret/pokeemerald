@@ -144,7 +144,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RestoreParty:: @ 8249121
 	frontier_setpartyorder FRONTIER_MULTI_PARTY_SIZE
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
 	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_249514
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponents:: @ 8249143

@@ -32,23 +32,23 @@ ContestHall_EventScript_ReadyContestMusic:: @ 823B7AF
 	return
 
 ContestHall_EventScript_SaveContestMusicPlayer1:: @ 823B7EF
-	savebgm MUS_TEST1
+	savebgm MUS_LINK_CONTEST_P1
 	return
 
 ContestHall_EventScript_SaveContestMusicPlayer2:: @ 823B7F3
-	savebgm MUS_TEST2
+	savebgm MUS_LINK_CONTEST_P2
 	return
 
 ContestHall_EventScript_SaveContestMusicPlayer3:: @ 823B7F7
-	savebgm MUS_TEST3
+	savebgm MUS_LINK_CONTEST_P3
 	return
 
 ContestHall_EventScript_SaveContestMusicPlayer4:: @ 823B7FB
-	savebgm MUS_TEST4
+	savebgm MUS_LINK_CONTEST_P4
 	return
 
 ContestHall_EventScript_SaveContestMusic:: @ 823B7FF
-	savebgm MUS_CONTEST0
+	savebgm MUS_CONTEST
 	return
 
 ContestHall_OnResume: @ 823B803

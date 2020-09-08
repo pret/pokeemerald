@@ -188,26 +188,26 @@ void sub_81D04B8(void)
 
 u32 sub_81D04C4(struct PokenavSub13 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP && structPtr->field_8->unk2 != 0)
+    if (JOY_REPEAT(DPAD_UP) && structPtr->field_8->unk2 != 0)
     {
         structPtr->field_8->unk2--;
         structPtr->field_C = 0;
         sub_81D0814(structPtr);
         return 1;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && structPtr->field_8->unk2 < structPtr->field_8->unk0 - 1)
+    if (JOY_REPEAT(DPAD_DOWN) && structPtr->field_8->unk2 < structPtr->field_8->unk0 - 1)
     {
         structPtr->field_8->unk2++;
         structPtr->field_C = 0;
         sub_81D0814(structPtr);
         return 1;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         structPtr->field_98 = sub_81D0548;
         return 2;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         structPtr->field_98 = sub_81D05D4;
         return 5;
@@ -217,15 +217,15 @@ u32 sub_81D04C4(struct PokenavSub13 *structPtr)
 
 u32 sub_81D0548(struct PokenavSub13 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP && sub_81D05DC(structPtr))
+    if (JOY_REPEAT(DPAD_UP) && sub_81D05DC(structPtr))
         return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && sub_81D061C(structPtr))
+    if (JOY_REPEAT(DPAD_DOWN) && sub_81D061C(structPtr))
         return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT && sub_81D0664(structPtr))
+    if (JOY_REPEAT(DPAD_LEFT) && sub_81D0664(structPtr))
         return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT && sub_81D0688(structPtr))
+    if (JOY_REPEAT(DPAD_RIGHT) && sub_81D0688(structPtr))
         return 3;
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         structPtr->field_98 = sub_81D04C4;
         return 4;

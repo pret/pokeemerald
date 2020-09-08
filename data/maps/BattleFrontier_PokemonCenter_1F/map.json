@@ -2,7 +2,7 @@
   "id": "MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F",
   "name": "BattleFrontier_PokemonCenter_1F",
   "layout": "LAYOUT_POKEMON_CENTER_1F",
-  "music": "MUS_POKECEN",
+  "music": "MUS_POKE_CENTER",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -636,14 +636,14 @@ struct BattleAnimationInfo
     u8 isCriticalCapture:1;
     u8 criticalCaptureSuccess:1;
     u8 field_9_x1:1;
-    u8 field_9_x2:1;
+    u8 wildMonInvisible:1;
     u8 field_9_x1C:3;
     u8 field_9_x20:1;
     u8 field_9_x40:1;
     u8 field_9_x80:1;
-    u8 field_A;
+    u8 numBallParticles;
     u8 field_B;
-    s16 field_C;
+    s16 ballSubpx;
     u8 field_E;
     u8 field_F;
 };
@@ -657,8 +657,8 @@ struct BattleHealthboxInfo
     u8 statusAnimActive:1; // x10
     u8 animFromTableActive:1; // x20
     u8 specialAnimActive:1; // x40
-    u8 flag_x80:1;
-    u8 field_1_x1:1;
+    u8 triedShinyMonAnim:1;
+    u8 finishedShinyMonAnim:1;
     u8 field_1_x1E:4;
     u8 field_1_x20:1;
     u8 field_1_x40:1;

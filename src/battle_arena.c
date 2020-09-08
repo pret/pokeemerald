@@ -563,7 +563,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         }
         break;
     case 4:
-        PlaySE(SE_HANTEI1);
+        PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 40, ARENA_CATEGORY_MIND, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 40, ARENA_CATEGORY_MIND, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
@@ -572,7 +572,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         ret = 1;
         break;
     case 5:
-        PlaySE(SE_HANTEI1);
+        PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 56, ARENA_CATEGORY_SKILL, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 56, ARENA_CATEGORY_SKILL, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
@@ -581,7 +581,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         ret = 1;
         break;
     case 6:
-        PlaySE(SE_HANTEI1);
+        PlaySE(SE_ARENA_TIMEUP1);
         ShowJudgmentSprite(80, 72, ARENA_CATEGORY_BODY, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 72, ARENA_CATEGORY_BODY, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgement);
@@ -590,7 +590,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         ret = 1;
         break;
     case 7:
-        PlaySE(SE_HANTEI2);
+        PlaySE(SE_ARENA_TIMEUP2);
         if (gBattleTextBuff1[0] > gBattleTextBuff2[0])
         {
             ret = 2;

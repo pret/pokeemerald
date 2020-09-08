@@ -293,7 +293,7 @@ static const struct SpriteTemplate sUnknown_0861FB44 =
 bool32 InitPokenavMainMenu(void)
 {
     struct PokenavMainMenuResources *structPtr;
-    
+
     structPtr = AllocSubstruct(0, sizeof(struct PokenavMainMenuResources));
     if (structPtr == NULL)
         return FALSE;
@@ -312,7 +312,7 @@ u32 PokenavMainMenuLoopedTaskIsActive(void)
 
 void ShutdownPokenav(void)
 {
-    PlaySE(SE_PN_OFF);
+    PlaySE(SE_POKENAV_OFF);
     sub_81CAADC();
     BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
 }
@@ -436,9 +436,10 @@ static u32 LoopedTask_ScrollMenuHeaderUp(s32 a0)
     if (ChangeBgY(0, 384, 2) <= 0)
     {
         ChangeBgY(0, 0, 0);
-        return 4;
+        return LT_FINISH;
     }
-    return 2;
+
+    return LT_PAUSE;
 }
 
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size)
@@ -458,11 +459,9 @@ void Pokenav_AllocAndLoadPalettes(const struct SpritePalette *palettes)
         {
             break;
         }
-        else
-        {
-            index = (index * 16) + 0x100;
-            CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
-        }
+
+        index = (index * 16) + 0x100;
+        CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
     }
 }
 
@@ -471,140 +470,41 @@ void sub_81C7990(u32 a0, u16 a1)
     CpuFill16(a1, gPlttBufferFaded + 0x100 + (a0 * 16), 16 * sizeof(u16));
 }
 
-NAKED
-void sub_81C79BC(const u16 *a0, const u16 *a1, u32 a2, u32 a3, u32 a4, u16 *a5)
+void sub_81C79BC(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    str r0, [sp]\n\
-    str r1, [sp, 0x4]\n\
-    mov r10, r2\n\
-    str r3, [sp, 0x8]\n\
-    ldr r0, [sp, 0x2C]\n\
-    cmp r0, 0\n\
-    bne _081C79E4\n\
-    ldr r2, =0x001fffff\n\
-    mov r1, r10\n\
-    ands r2, r1\n\
-    ldr r0, [sp]\n\
-    b _081C79F4\n\
-    .pool\n\
-_081C79E4:\n\
-    ldr r2, [sp, 0x2C]\n\
-    ldr r0, [sp, 0x8]\n\
-    cmp r2, r0\n\
-    blt _081C7A00\n\
-    ldr r2, =0x001fffff\n\
-    mov r1, r10\n\
-    ands r2, r1\n\
-    ldr r0, [sp, 0x4]\n\
-_081C79F4:\n\
-    ldr r1, [sp, 0x30]\n\
-    bl CpuSet\n\
-    b _081C7AAE\n\
-    .pool\n\
-_081C7A00:\n\
-    movs r2, 0x1\n\
-    negs r2, r2\n\
-    add r10, r2\n\
-    b _081C7AA6\n\
-_081C7A08:\n\
-    ldr r1, [sp]\n\
-    ldrh r0, [r1]\n\
-    movs r2, 0x1F\n\
-    mov r9, r2\n\
-    mov r1, r9\n\
-    ands r1, r0\n\
-    mov r9, r1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 21\n\
-    movs r1, 0x1F\n\
-    ands r1, r2\n\
-    mov r8, r1\n\
-    lsrs r7, r0, 26\n\
-    movs r2, 0x1F\n\
-    ands r7, r2\n\
-    ldr r0, [sp, 0x4]\n\
-    ldrh r4, [r0]\n\
-    movs r0, 0x1F\n\
-    ands r0, r4\n\
-    mov r1, r9\n\
-    subs r0, r1\n\
-    lsls r0, 8\n\
-    ldr r1, [sp, 0x8]\n\
-    bl __divsi3\n\
-    ldr r2, [sp, 0x2C]\n\
-    adds r6, r0, 0\n\
-    muls r6, r2\n\
-    asrs r6, 8\n\
-    lsls r4, 16\n\
-    lsrs r0, r4, 21\n\
-    movs r1, 0x1F\n\
-    ands r0, r1\n\
-    mov r2, r8\n\
-    subs r0, r2\n\
-    lsls r0, 8\n\
-    ldr r1, [sp, 0x8]\n\
-    bl __divsi3\n\
-    ldr r1, [sp, 0x2C]\n\
-    adds r5, r0, 0\n\
-    muls r5, r1\n\
-    asrs r5, 8\n\
-    lsrs r4, 26\n\
-    movs r2, 0x1F\n\
-    ands r4, r2\n\
-    subs r4, r7\n\
-    lsls r4, 8\n\
-    adds r0, r4, 0\n\
-    ldr r1, [sp, 0x8]\n\
-    bl __divsi3\n\
-    ldr r1, [sp, 0x2C]\n\
-    muls r0, r1\n\
-    asrs r0, 8\n\
-    add r6, r9\n\
-    movs r2, 0x1F\n\
-    ands r6, r2\n\
-    add r5, r8\n\
-    ands r5, r2\n\
-    adds r0, r7, r0\n\
-    ands r0, r2\n\
-    lsls r0, 10\n\
-    lsls r5, 5\n\
-    orrs r0, r5\n\
-    orrs r0, r6\n\
-    ldr r1, [sp, 0x30]\n\
-    strh r0, [r1]\n\
-    ldr r2, [sp]\n\
-    adds r2, 0x2\n\
-    str r2, [sp]\n\
-    ldr r0, [sp, 0x4]\n\
-    adds r0, 0x2\n\
-    str r0, [sp, 0x4]\n\
-    adds r1, 0x2\n\
-    str r1, [sp, 0x30]\n\
-    movs r1, 0x1\n\
-    negs r1, r1\n\
-    add r10, r1\n\
-_081C7AA6:\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    cmp r10, r0\n\
-    bne _081C7A08\n\
-_081C7AAE:\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided");
+
+    if (a4 == 0)
+    {
+        CpuCopy16(a0, palette, a2 * 2);
+    }
+    else if (a4 >= a3)
+    {
+        CpuCopy16(a1, palette, a2 * 2);
+    }
+    else
+    {
+        int r, g, b;
+        int r1, g1, b1;
+        while (a2--)
+        {
+            r = GET_R(*a0);
+            g = GET_G(*a0);
+            b = GET_B(*a0);
+
+            r1 = ((((GET_R(*a1) << 8) - (r << 8)) / a3) * a4) >> 8;
+            g1 = ((((GET_G(*a1) << 8) - (g << 8)) / a3) * a4) >> 8;
+            b1 = ((((GET_B(*a1) << 8) - (b << 8)) / a3) * a4) >> 8;
+
+            r = (r + r1) & 0x1F; //_RGB(r + r1, g + g1, b + b1); doesn't match; I have to assign the value of ((r + r1) & 0x1F) to r1
+            g = (g + g1) & 0x1F; //See above
+            b = (b + b1) & 0x1F; //See above
+
+            *palette = RGB2(r, g, b); //See above comment
+
+            a0++, a1++;
+            palette++;
+        }
+    }
 }
 
 void PokenavFadeScreen(s32 fadeType)
@@ -781,7 +681,7 @@ static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
     size = GetDecompressedDataSize(sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].data);
     LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], (IndexOfSpritePaletteTag(1) * 16) + 0x100, 0x20);
     LZ77UnCompWram(sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].data, gDecompressionBuffer);
-    RequestDma3Copy(gDecompressionBuffer, (void *)VRAM + 0x10000 + (GetSpriteTileStartByTag(2) * 32), size, 1);
+    RequestDma3Copy(gDecompressionBuffer, (void *)OBJ_VRAM0 + (GetSpriteTileStartByTag(2) * 32), size, 1);
     structPtr->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sPokenavMenuLeftHeaderSpriteSheets[menuGfxId].size;
 
     if (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT || menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_IN)
