@@ -52,7 +52,7 @@ C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork
+ASFLAGS := -mcpu=arm7tdmi
 
 LDFLAGS = -Map ../$(MAP)
 

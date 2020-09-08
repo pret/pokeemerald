@@ -42,7 +42,7 @@ CPPFLAGS := -I ../tools/agbcc/include -I ../tools/agbcc -iquote include -nostdin
 ROM := berry_fix.gba
 OBJ_DIR := build
 CC1             := ../tools/agbcc/bin/agbcc$(EXE)
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -nostdlib
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
 
 ELF = $(ROM:.gba=.elf)
@@ -56,7 +56,7 @@ C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork
+ASFLAGS := -mcpu=arm7tdmi
 
 LDFLAGS = -Map ../$(MAP)
 
