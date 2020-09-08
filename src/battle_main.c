@@ -655,19 +655,16 @@ static void CB2_InitBattleInternal(void)
         gBattle_WIN0V = 0x5051;
         ScanlineEffect_Clear();
 
-        i = 0;
-        while (i < 80)
+        for (i = 0; i < 80; i++)
         {
             gScanlineEffectRegBuffers[0][i] = 0xF0;
             gScanlineEffectRegBuffers[1][i] = 0xF0;
-            i++;
         }
 
-        while (i < 160)
+        for (; i < 160; i++)
         {
             gScanlineEffectRegBuffers[0][i] = 0xFF10;
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
-            i++;
         }
 
         ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
@@ -794,8 +791,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
 static void SetAllPlayersBerryData(void)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -3560,7 +3556,7 @@ static void BattleIntroPrintWildMonAttacked(void)
 
 static void BattleIntroPrintOpponentSendsOut(void)
 {
-    u32 position;
+    u8 position;
 
     if (gBattleControllerExecFlags)
         return;
@@ -3583,7 +3579,7 @@ static void BattleIntroPrintOpponentSendsOut(void)
 
 static void BattleIntroOpponent2SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_OPPONENT_RIGHT;
@@ -3612,19 +3608,24 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
 #ifdef NONMATCHING
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        position = B_POSITION_OPPONENT_LEFT;
-    else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            position = B_POSITION_OPPONENT_LEFT;
+        if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
+                position = B_POSITION_OPPONENT_LEFT;
+            else
+                position = B_POSITION_PLAYER_LEFT;
+        }
         else
-            position = B_POSITION_PLAYER_LEFT;
+            position = B_POSITION_OPPONENT_LEFT;
     }
     else
+    {
         position = B_POSITION_OPPONENT_LEFT;
+    }
 
     if (gBattleControllerExecFlags)
         return;
@@ -3752,7 +3753,7 @@ static void BattleIntroRecordMonsToDex(void)
     }
 }
 
-void sub_803B3AC(void) // unused
+static void sub_803B3AC(void) // unused
 {
     if (gBattleControllerExecFlags == 0)
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
@@ -3785,7 +3786,7 @@ static void BattleIntroPrintPlayerSendsOut(void)
 
 static void BattleIntroPlayer2SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_RIGHT;
@@ -3817,7 +3818,7 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
 
 static void BattleIntroPlayer1SendsOutMonAnimation(void)
 {
-    u32 position;
+    u8 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_LEFT;
@@ -3855,7 +3856,7 @@ static void BattleIntroPlayer1SendsOutMonAnimation(void)
     gBattleMainFunc = TryDoEventsBeforeFirstTurn;
 }
 
-void sub_803B598(void) // unused
+static void sub_803B598(void) // unused
 {
     if (gBattleControllerExecFlags == 0)
     {
@@ -3878,8 +3879,7 @@ void sub_803B598(void) // unused
 
 static void TryDoEventsBeforeFirstTurn(void)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
     u8 effect = 0;
 
     if (gBattleControllerExecFlags)
@@ -5103,14 +5103,14 @@ static void HandleEndTurn_RanFromBattle(void)
     {
         switch (gProtectStructs[gBattlerAttacker].fleeFlag)
         {
-        default:
-            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
-            break;
         case 1:
             gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
             break;
         case 2:
             gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
+            break;
+        default:
+            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
             break;
         }
     }
@@ -5195,10 +5195,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;
         }
-        else
-        {
-            gBattleMainFunc = TryEvolvePokemon;
-        }
+        gBattleMainFunc = TryEvolvePokemon;
     }
 
     FreeAllWindowBuffers();
@@ -5534,7 +5531,9 @@ static void HandleAction_UseItem(void)
     gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
+
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
+
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
 
     if (gLastUsedItem <= LAST_BALL) // is ball
@@ -5560,18 +5559,18 @@ static void HandleAction_UseItem(void)
             break;
         case AI_ITEM_CURE_CONDITION:
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1)
+            if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1)
             {
-                if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 0x3E)
+                if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 0x3E)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 5;
             }
             else
             {
-                while (!(*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1))
+                do
                 {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
-                }
+                } while (!(*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1));
             }
             break;
         case AI_ITEM_X_STAT:
@@ -5587,7 +5586,7 @@ static void HandleAction_UseItem(void)
 
                 while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
                 {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
                     gBattleTextBuff1[2]++;
                 }
 
@@ -5603,7 +5602,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2)];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + (gBattlerAttacker >> 1))];
     }
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
