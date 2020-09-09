@@ -6858,7 +6858,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
         structPtr->field_0_0 = 7;
         structPtr->field_0_1 = 7;
         structPtr->field_1 = 4;
-        structPtr->field_3_0 = 1;
+        structPtr->size = 1;
         structPtr->field_3_1 = 2;
         break;
     case 0:
@@ -6866,12 +6866,12 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
         structPtr->field_0_0 = 4;
         structPtr->field_0_1 = 4;
         structPtr->field_1 = 4;
-        structPtr->field_3_0 = 1;
+        structPtr->size = 1;
         structPtr->field_3_1 = 0;
         break;
     }
 
-    structPtr->bytes = AllocZeroed(structPtr->field_3_0 * 0x800 * 4 * structPtr->field_0_0);
+    structPtr->bytes = AllocZeroed(structPtr->size * 0x800 * 4 * structPtr->field_0_0);
     structPtr->byteArrays = AllocZeroed(structPtr->field_0_0 * 32);
     if (structPtr->bytes == NULL || structPtr->byteArrays == NULL)
     {
@@ -6880,7 +6880,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
     else
     {
         for (i = 0; i < structPtr->field_0_0; i++)
-            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 0xD));
+            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->size * (i << 0xD));
     }
 
     structPtr->templates = AllocZeroed(sizeof(struct SpriteTemplate) * structPtr->field_0_0);
@@ -6899,8 +6899,8 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
         case 2:
             sub_806F1FC(structPtr);
             break;
-        case 0:
         case 1:
+        case 0:
         default:
             sub_806F160(structPtr);
             break;
