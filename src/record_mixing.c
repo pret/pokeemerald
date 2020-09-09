@@ -866,27 +866,22 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
         }
         else if (sp1c[i][0] == TRUE && sp1c[i][1] == TRUE)
         {
-            u32 var1, var2;
+            u8 mail1, mail2;
 
             sp24[j][0] = i;
-            var1 = sub_80E7A9C(&_src->mail[0]);
-            var2 = sub_80E7A9C(&_src->mail[1]);
-            if (!var1 && var2)
+            mail1 = sub_80E7A9C(&_src->mail[0]);
+            mail2 = sub_80E7A9C(&_src->mail[1]);
+            if (!(mail1 || mail2) || (mail1 && mail2)) //Logical (not bitwise) XOR. Should be ((mail1 || mail2) && !(mail1 && mail2)), but that doesn't match. 
             {
-                #ifndef NONMATCHING
-                    register u8 one asm("r0") = 1; // boo, a fakematch
-                    sp24[j][1] = one;
-                #else
-                    sp24[j][1] = 1;
-                #endif
+                sp24[j][1] = Random2() % 2;
             }
-            else if ((var1 && var2) || (!var1 && !var2))
-            {
-                 sp24[j][1] = Random2() % 2;
-            }
-            else if (var1 && !var2)
+            else if (mail1 && !mail2)
             {
                 sp24[j][1] = 0;
+            }
+            else if (!mail1 && mail2)
+            {
+                sp24[j][1] = 1;
             }
             j++;
         }
@@ -921,8 +916,8 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
     }
 
     _src = (void *)src + which * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &_src->mail[0], sizeof(struct DayCareMail));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &_src->mail[1], sizeof(struct DayCareMail));
+    gSaveBlock1Ptr->daycare.mons[0].mail = _src->mail[0];
+    gSaveBlock1Ptr->daycare.mons[1].mail = _src->mail[1];
     SeedRng(oldSeed);
 }
 
