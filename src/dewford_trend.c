@@ -219,20 +219,37 @@ void BufferTrendyPhraseString(void)
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }
 
+#ifndef NONMATCHING
 void TrendyPhraseIsOld(void)
 {
-    u16 result = 0;
+    u8 result = 0;
+
+    do
+    {
+        if (gSaveBlock1Ptr->easyChatPairs[0].unk0_0 - gSaveBlock1Ptr->easyChatPairs[1].unk0_0 > 1)
+            break;
+        if (gSaveBlock1Ptr->easyChatPairs[0].unk1_6)
+            break;
+        if (!gSaveBlock1Ptr->easyChatPairs[1].unk1_6)
+            break;
+        result = 1;
+    } while (0);
+
+    gSpecialVar_Result = result;
+}
+#else
+void TrendyPhraseIsOld(void)
+{
+    u8 result = 0;
 
     if (gSaveBlock1Ptr->easyChatPairs[0].unk0_0 - gSaveBlock1Ptr->easyChatPairs[1].unk0_0 < 2)
     {
-        #ifndef NONMATCHING
-            asm("":::"r2"); //Force the compiler to store address of gSaveBlock1 in r3 instead of r2
-        #endif
         if (!gSaveBlock1Ptr->easyChatPairs[0].unk1_6 && gSaveBlock1Ptr->easyChatPairs[1].unk1_6)
             result = 1;
     }
     gSpecialVar_Result = result;
 }
+#endif
 
 void GetDewfordHallPaintingNameIndex(void)
 {
