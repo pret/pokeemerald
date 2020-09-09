@@ -7248,16 +7248,18 @@ static void Cmd_forcerandomswitch(void)
         {
             if (TryDoForceSwitchOut())
             {
+                do{
                 do
                 {
                     i = Random() % monsCount;
                     i += firstMonId;
                 }
                 while (i == battler2PartyId
-                       || i == battler1PartyId
-                       || GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
+                       || i == battler1PartyId);
+
+                }while(GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
                        || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
-                       || GetMonData(&party[i], MON_DATA_HP) == 0);
+                       || GetMonData(&party[i], MON_DATA_HP) == 0); // Should be one while loop, conjoined by an ||, but that doesn't match. Equivalent logic though
             }
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
