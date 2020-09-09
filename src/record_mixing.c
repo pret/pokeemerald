@@ -713,17 +713,18 @@ static u8 sub_80E7A9C(struct DayCareMail *rmMail)
     return rmMail->message.itemId;
 }
 
-static void sub_80E7AA4(struct RecordMixingDayCareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
+static void ExchangeMail(struct RecordMixingDayCareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
 {
     struct DayCareMail buffer;
     struct RecordMixingDayCareMail *mail1;
     struct RecordMixingDayCareMail *mail2;
 
     mail1 = (void *)src + recordSize * idxs[which0][0];
-    memcpy(&buffer, &mail1->mail[idxs[which0][1]], sizeof(struct DayCareMail));
+    buffer = mail1->mail[idxs[which0][1]];
+
     mail2 = (void *)src + recordSize * idxs[which1][0];
-    memcpy(&mail1->mail[idxs[which0][1]], &mail2->mail[idxs[which1][1]], sizeof(struct DayCareMail));
-    memcpy(&mail2->mail[idxs[which1][1]], &buffer, sizeof(struct DayCareMail));
+    mail1->mail[idxs[which0][1]] = mail2->mail[idxs[which1][1]];
+    mail2->mail[idxs[which1][1]] = buffer;
 }
 
 static void sub_80E7B2C(const u8 *src)
@@ -901,21 +902,21 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
     switch (sp34)
     {
     case 2:
-        sub_80E7AA4(src, recordSize, sp24, 0, 1);
+        ExchangeMail(src, recordSize, sp24, 0, 1);
         break;
     case 3:
         which0 = gUnknown_0858CFB8[tableId][0];
         which1 = gUnknown_0858CFB8[tableId][1];
-        sub_80E7AA4(src, recordSize, sp24, which0, which1);
+        ExchangeMail(src, recordSize, sp24, which0, which1);
         break;
     case 4:
         ptr = sp24;
         which0 = gUnknown_0858CFBE[tableId][0];
         which1 = gUnknown_0858CFBE[tableId][1];
-        sub_80E7AA4(src, recordSize, ptr, which0, which1);
+        ExchangeMail(src, recordSize, ptr, which0, which1);
         which0 = gUnknown_0858CFBE[tableId][2];
         which1 = gUnknown_0858CFBE[tableId][3];
-        sub_80E7AA4(src, recordSize, ptr, which0, which1);
+        ExchangeMail(src, recordSize, ptr, which0, which1);
         break;
     }
 
