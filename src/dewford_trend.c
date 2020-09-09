@@ -245,46 +245,46 @@ static bool8 sub_8122A58(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
     {
     case 0:
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         break;
     case 1:
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         break;
     case 2:
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         if (a->unk2 > b->unk2)
-            return 1;
+            return TRUE;
         if (a->unk2 < b->unk2)
-            return 0;
+            return FALSE;
         if (a->words[0] > b->words[0])
-            return 1;
+            return TRUE;
         if (a->words[0] < b->words[0])
-            return 0;
+            return FALSE;
         if (a->words[1] > b->words[1])
-            return 1;
+            return TRUE;
         if (a->words[1] < b->words[1])
-            return 0;
-        return 1;
+            return FALSE;
+        return TRUE;
     }
     return Random() & 1;
 }
