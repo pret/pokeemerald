@@ -7134,11 +7134,11 @@ static void Cmd_forcerandomswitch(void)
         register s32 lastMonId asm("r8") = 0; // + 1
     #endif // NONMATCHING
 
-    s32 firstMonId = 0;
-    s32 monsCount = 0;
+    s32 firstMonId;
+    s32 monsCount;
     struct Pokemon* party = NULL;
     s32 validMons = 0;
-    s32 minNeeded = 0;
+    s32 minNeeded;
 
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
     {
