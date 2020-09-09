@@ -672,22 +672,17 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+static u16 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 {
-    u16 var0, var1;
-    #ifndef NONMATCHING
-    register u16 var2 asm("r3"); //compiler keeps wanting to "mov r3, 0x80" instead of "mov r2 0x80" and then later "add r3, r2, 0"
-    #else
+    u8 var0;
+    u16 var1;
     u16 var2;
-    #endif
-    u16 var3;
 
     var0 = (sHillData->floors[floorId].display.unk3A0[arg2] >> (15 - bit) & 1);
-    var1 = sHillData->floors[floorId].display.data[arg3 * arg2 + bit];
-    var2 = 0x200;
-    var3 = 0x3000;
+    var1 = sHillData->floors[floorId].display.data[arg3 * arg2 + bit] + 0x200;
+    var2 = 0x3000;
 
-    return ((var0 << 10) | var3) | (var1 | var2);
+    return (((var0 << 10) & 0xc00) | var2) | (var1 & 0x3ff);
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
