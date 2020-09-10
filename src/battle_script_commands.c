@@ -4661,8 +4661,10 @@ static void Cmd_jumpifcantswitch(void)
             || (gStatuses3[gActiveBattler] & STATUS3_ROOTED)))
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+        return;
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         #ifndef NONMATCHING
             asm("":::"r5");
