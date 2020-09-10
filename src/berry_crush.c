@@ -146,38 +146,49 @@ struct BerryCrushGame
 {
     MainCallback unk0;
     u32 (* unk4)(struct BerryCrushGame *, u8 *);
+
     u8 unk8;
     u8 unk9;
     u8 unkA;
     u8 unkB;
+
     u8 unkC;
     u8 unkD;
+
     u8 unkE;
     u8 unkF;
+
     u16 unk10;
     u16 unk12;
     u16 unk14;
+
     u16 unk16;
     s16 unk18;
     s16 unk1A;
     s32 unk1C;
     s32 unk20;
     u8 unk24;
+
     u8 unk25_0:1;
     u8 unk25_1:1;
     u8 unk25_2:1;
     u8 unk25_3:1;
     u8 unk25_4:1;
     u8 unk25_5:3;
+
     u16 unk26;
+
     u16 unk28;
     s16 unk2A;
     s16 unk2C;
+
     s16 unk2E;
     s16 unk30;
     s16 unk32;
     s16 unk34;
+
     u8 unk36[0xA];
+
     struct BerryCrushGame_40 unk40;
     struct BerryCrushGame_5C unk5C;
     union BerryCrushGame_68 unk68;
