@@ -1247,17 +1247,14 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
 
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
-    bool8 isJapanese;
-    int minGlyphWidth;
+    u32 width, lineWidth;
+    s32 localLetterSpacing;
     u32 (*func)(u16 glyphId, bool32 isJapanese);
-    s32 result;
-    int localLetterSpacing;
-    u32 lineWidth;
-    const u8 *bufferPointer;
-    int glyphWidth;
-    s32 width;
 
-    isJapanese = 0;
+    const u8 *bufferPointer;
+    bool32 isJapanese = FALSE;
+    s32 minGlyphWidth, glyphWidth;
+
     minGlyphWidth = 0;
 
     func = GetFontWidthFunc(fontId);
@@ -1374,7 +1371,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case CHAR_KEYPAD_ICON:
         case CHAR_EXTRA_SYMBOL:
             if (*str == CHAR_EXTRA_SYMBOL)
-                glyphWidth = func(*++str | 0x100, isJapanese);
+                glyphWidth = func(*++str + 0x100, isJapanese);
             else
                 glyphWidth = GetKeypadIconWidth(*++str);
 

@@ -380,10 +380,10 @@ static void AnimTask_AnimateGustTornadoPalette_Step(u8 taskId)
 {
     u8 data2;
     u16 temp;
+    int i, base;
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[1])
     {
-        int i, base;
         gTasks[taskId].data[10] = 0;
         data2 = gTasks[taskId].data[2];
         temp = gPlttBufferFaded[16 * data2 + 0x108];

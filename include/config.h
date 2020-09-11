@@ -32,6 +32,9 @@
 #ifndef UBFIX
 #define UBFIX
 #endif
+#ifndef NONMATCHING
+#define NONMATCHING
+#endif
 #endif
 
 #endif // GUARD_CONFIG_H

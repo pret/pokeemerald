@@ -79,7 +79,6 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0x00000034, 0x00000000, 0x00000000
 
 	.arm
-	.align 2, 0
 	.global Init
 Init: @ 8000204
 	mov r0, #PSR_IRQ_MODE
@@ -91,7 +90,7 @@ Init: @ 8000204
 	ldr r1, =INTR_VECTOR
 	adr r0, IntrMain
 	str r0, [r1]
-	ldr r1, =AgbMain + 1
+	ldr r1, =AgbMain
 	mov lr, pc
 	bx r1
 	b Init
@@ -166,7 +165,7 @@ IntrMain_FoundIntr:
 	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
-	mov r1, 0x8
+	mov r1, #INTR_FLAG_TIMER0
 	lsl r0, r1, r0
 	orr r0, r0, #INTR_FLAG_GAMEPAK
 	orr r1, r0, #INTR_FLAG_SERIAL | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_HBLANK
@@ -188,7 +187,7 @@ IntrMain_RetAddr:
 	bic r3, r3, #PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK
 	orr r3, r3, #PSR_I_BIT | PSR_IRQ_MODE
 	msr cpsr_cf, r3
-	ldmia sp!, {r0-r3,lr}
+	ldmfd sp!, {r0-r3,lr}
 	strh r2, [r3, #OFFSET_REG_IE - 0x200]
 	strh r1, [r3, #OFFSET_REG_IME - 0x200]
 	msr spsr_cf, r0

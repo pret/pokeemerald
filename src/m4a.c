@@ -124,13 +124,9 @@ void m4aSongNumStartOrChange(u16 n)
     {
         MPlayStart(mplay->info, song->header);
     }
-    else
+    else if ((mplay->info->status & MUSICPLAYER_STATUS_TRACK) == 0 || (mplay->info->status & MUSICPLAYER_STATUS_PAUSE))
     {
-        if ((mplay->info->status & MUSICPLAYER_STATUS_TRACK) == 0
-         || (mplay->info->status & MUSICPLAYER_STATUS_PAUSE))
-        {
-            MPlayStart(mplay->info, song->header);
-        }
+        MPlayStart(mplay->info, song->header);
     }
 }
 
