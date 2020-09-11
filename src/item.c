@@ -1034,7 +1034,14 @@ void DrawHeaderBox(void)
 {
     struct WindowTemplate template;
     u16 item = gSpecialVar_0x8006;
+    u8 headerType = gSpecialVar_0x8007;
     u8 textY;
+    u8 *dst;
+    
+    if (headerType == 1)
+        dst = gStringVar3;
+    else
+        dst = gStringVar1;
     
     if (GetSetItemObtained(item, FLAG_GET_OBTAINED))
     {
@@ -1049,13 +1056,13 @@ void DrawHeaderBox(void)
     CopyWindowToVram(sHeaderBoxWindowId, 3);
     DrawStdFrameWithCustomTileAndPalette(sHeaderBoxWindowId, FALSE, 0x214, 14);
     
-    if (ReformatItemDescription(item, gStringVar1) == 1)
+    if (ReformatItemDescription(item, dst) == 1)
         textY = 4;
     else
         textY = 0;
     
     ShowItemIconSprite(item, TRUE);
-    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, gStringVar1, ITEM_ICON_X + 2, textY, 0, NULL);
+    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, dst, ITEM_ICON_X + 2, textY, 0, NULL);
 }
 
 void HideHeaderBox(void)
@@ -1104,11 +1111,8 @@ static void ShowItemIconSprite(u16 item, bool8 firstTime)
 
 static void DestroyItemIconSprite(void)
 {    
-    //DestroySpriteAndFreeResources(&gSprites[sItemIconSpriteId]);
-    ///*
 	FreeSpriteTilesByTag(ITEM_TAG);
 	FreeSpritePaletteByTag(ITEM_TAG);
 	FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId]);
 	DestroySprite(&gSprites[sItemIconSpriteId]);
-    //*/
 }

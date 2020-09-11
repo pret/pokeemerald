@@ -1607,8 +1607,18 @@
 	.2byte \quantity
 	.endm
     
-    .macro showitemdesc
+    .macro showdescription
     .byte 0xe3
+    .endm
+    
+    .macro showitemdesc
+    setvar VAR_0x8007, 0
+    showdescription
+    .endm
+    
+    .macro showberrydesc
+    setvar VAR_0x8007, 1
+    showdescription
     .endm
     
     .macro hideitemdesc
