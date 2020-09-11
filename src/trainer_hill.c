@@ -688,7 +688,8 @@ static u16 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
 {
     s32 i, j;
-    u16 *src, *dst;
+    const u16 *src;
+    u16 *dst;
     u8 mapId = GetCurrentTrainerHillMapId();
 
     if (mapId == TRAINER_HILL_ENTRANCE)

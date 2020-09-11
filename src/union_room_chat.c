@@ -2915,7 +2915,7 @@ static void PrintCurrentKeyboardPage(void)
             }
             else
             {
-                int length = StringLength_Multibyte(str2);
+                s32 length = StringLength_Multibyte(str2);
                 do
                 {
                     length--;

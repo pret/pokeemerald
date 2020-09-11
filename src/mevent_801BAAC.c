@@ -412,7 +412,7 @@ void sub_801C178(u8 whichWindow)
             }
             break;
     }
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void sub_801C4C0(void)
