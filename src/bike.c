@@ -108,7 +108,7 @@ static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
 };
 
 // used with bikeFrameCounter from mach bike
-static const u16 sMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
+static const s16 sMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
 
 // this is a list of timers to compare against later, terminated with 0. the only timer being compared against is 4 frames in this list.
 static const u8 sAcroBikeJumpTimerList[] = {4, 0};
@@ -144,7 +144,7 @@ static u8 GetMachBikeTransition(u8 *dirTraveling)
     u8 direction = GetPlayerMovementDirection();
 
     // is the player standing still?
-    if (*dirTraveling == 0)
+    if (*dirTraveling == DIR_NONE)
     {
         *dirTraveling = direction; // update the direction, since below we either faced a direction or we started moving.
         if (gPlayerAvatar.bikeSpeed == SPEED_STANDING)
@@ -210,35 +210,35 @@ static void MachBikeTransition_TrySpeedUp(u8 direction)
             MachBikeTransition_TrySlowDown(playerObjEvent->movementDirection);
         else
             MachBikeTransition_FaceDirection(playerObjEvent->movementDirection);
+
+        return;
     }
-    else
+
+    collision = GetBikeCollision(direction);
+    if (collision && collision < COLLISION_VERTICAL_RAIL)
     {
-        collision = GetBikeCollision(direction);
-        if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
+        // we hit a solid object, but check to see if its a ledge and then jump.
+        if (collision == COLLISION_LEDGE_JUMP)
         {
-            // we hit a solid object, but check to see if its a ledge and then jump.
-            if (collision == COLLISION_LEDGE_JUMP)
-            {
-                PlayerJumpLedge(direction);
-            }
-            else
-            {
-                // we hit a solid object that is not a ledge, so perform the collision.
-                Bike_SetBikeStill();
-                if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
-                    PlayerOnBikeCollideWithFarawayIslandMew(direction);
-                else if (collision < COLLISION_STOP_SURFING || collision > COLLISION_ROTATING_GATE)
-                    PlayerOnBikeCollide(direction);
-            }
+            PlayerJumpLedge(direction);
         }
         else
         {
-            // we did not hit anything that can slow us down, so perform the advancement callback depending on the bikeFrameCounter and try to increase the mach bike's speed.
-            sMachBikeSpeedCallbacks[gPlayerAvatar.bikeFrameCounter](direction);
-            gPlayerAvatar.bikeSpeed = gPlayerAvatar.bikeFrameCounter + (gPlayerAvatar.bikeFrameCounter >> 1); // same as dividing by 2, but compiler is insistent on >> 1
-            if (gPlayerAvatar.bikeFrameCounter < 2) // do not go faster than the last element in the mach bike array
-                gPlayerAvatar.bikeFrameCounter++;
+            // we hit a solid object that is not a ledge, so perform the collision.
+            Bike_SetBikeStill();
+            if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
+                PlayerOnBikeCollideWithFarawayIslandMew(direction);
+            else if (collision < COLLISION_STOP_SURFING || collision > COLLISION_ROTATING_GATE)
+                PlayerOnBikeCollide(direction);
         }
+    }
+    else
+    {
+        // we did not hit anything that can slow us down, so perform the advancement callback depending on the bikeFrameCounter and try to increase the mach bike's speed.
+        sMachBikeSpeedCallbacks[gPlayerAvatar.bikeFrameCounter](direction);
+        gPlayerAvatar.bikeSpeed = gPlayerAvatar.bikeFrameCounter + (gPlayerAvatar.bikeFrameCounter >> 1); // same as dividing by 2, but compiler is insistent on >> 1
+        if (gPlayerAvatar.bikeFrameCounter < 2)                                                           // do not go faster than the last element in the mach bike array
+            gPlayerAvatar.bikeFrameCounter++;
     }
 }
 
@@ -251,7 +251,7 @@ static void MachBikeTransition_TrySlowDown(u8 direction)
 
     collision = GetBikeCollision(direction);
 
-    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
+    if (collision && collision < COLLISION_VERTICAL_RAIL)
     {
         if (collision == COLLISION_LEDGE_JUMP)
         {
@@ -400,7 +400,7 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 
         Bike_SetBikeStill();
         return ACRO_TRANS_WHEELIE_MOVING;
     }
-    if (*newDirection == 0)
+    if (*newDirection == DIR_NONE)
     {
         *newDirection = direction;
         return ACRO_TRANS_WHEELIE_IDLE;
@@ -515,7 +515,7 @@ static u8 AcroBikeHandleInputSidewaysJump(u8 *ptr, u16 newKeys, u16 heldKeys)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    playerObjEvent->facingDirectionLocked = 0;
+    playerObjEvent->facingDirectionLocked = FALSE;
     SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
     gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
     return CheckMovementInputAcroBike(ptr, newKeys, heldKeys);
@@ -552,7 +552,7 @@ static void AcroBikeTransition_Moving(u8 direction)
         return;
     }
     collision = GetBikeCollision(direction);
-    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
+    if (collision && collision < COLLISION_VERTICAL_RAIL)
     {
         if (collision == COLLISION_LEDGE_JUMP)
             PlayerJumpLedge(direction);
@@ -614,27 +614,27 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
         return;
     }
     collision = GetBikeCollision(direction);
-    // TODO: Try to get rid of this goto
-    if (collision == 0 || collision == COLLISION_WHEELIE_HOP)
+
+    if (collision && collision != COLLISION_WHEELIE_HOP)
     {
-        goto derp;
-    }
-    else if (collision == COLLISION_LEDGE_JUMP)
-    {
-        PlayerLedgeHoppingWheelie(direction);
-    }
-    else if (collision < COLLISION_STOP_SURFING || collision > COLLISION_ROTATING_GATE)
-    {
+
+        if (collision == COLLISION_LEDGE_JUMP)
+        {
+            PlayerLedgeHoppingWheelie(direction);
+            return;
+        }
+        if (collision >= COLLISION_STOP_SURFING && collision <= COLLISION_ROTATING_GATE) //Inverting this loop opens the door to optimization by removing an unneeded check, but that does not match
+        {
+            return;
+        }
+
         if (collision < COLLISION_VERTICAL_RAIL)
         {
             AcroBikeTransition_WheelieHoppingStanding(direction);
-        }
-        else
-        {
-        derp:
-            PlayerMovingHoppingWheelie(direction);
+            return;
         }
     }
+    PlayerMovingHoppingWheelie(direction);
 }
 
 static void AcroBikeTransition_SideJump(u8 direction)
@@ -660,8 +660,8 @@ static void AcroBikeTransition_SideJump(u8 direction)
     }
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     PlaySE(SE_BIKE_HOP);
-    playerObjEvent->facingDirectionLocked = 1;
-    PlayerSetAnimId(GetJumpMovementAction(direction), 2);
+    playerObjEvent->facingDirectionLocked = TRUE;
+    PlayerSetAnimId(GetJumpMovementAction(direction), ACRO_TRANS_MOVING);
 }
 
 static void AcroBikeTransition_TurnJump(u8 direction)
@@ -674,13 +674,15 @@ static void AcroBikeTransition_WheelieMoving(u8 direction)
     u8 collision;
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
-    if (CanBikeFaceDirOnMetatile(direction, playerObjEvent->currentMetatileBehavior) == 0)
+    if (!CanBikeFaceDirOnMetatile(direction, playerObjEvent->currentMetatileBehavior))
     {
         PlayerIdleWheelie(playerObjEvent->movementDirection);
         return;
     }
+
     collision = GetBikeCollision(direction);
-    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
+
+    if (collision && collision < COLLISION_VERTICAL_RAIL)
     {
         if (collision == COLLISION_LEDGE_JUMP)
         {
@@ -714,7 +716,7 @@ static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
         return;
     }
     collision = GetBikeCollision(direction);
-    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
+    if (collision && collision < COLLISION_VERTICAL_RAIL)
     {
         if (collision == COLLISION_LEDGE_JUMP)
         {
@@ -748,7 +750,7 @@ static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
         return;
     }
     collision = GetBikeCollision(direction);
-    if (collision > 0 && collision < COLLISION_VERTICAL_RAIL)
+    if (collision && collision < COLLISION_VERTICAL_RAIL)
     {
         if (collision == COLLISION_LEDGE_JUMP)
             PlayerJumpLedge(direction);
@@ -893,10 +895,9 @@ static u8 GetBikeCollisionAt(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 d
 
 bool8 RS_IsRunningDisallowed(u8 tile)
 {
-    if (IsRunningDisallowedByMetatile(tile) != FALSE || gMapHeader.mapType == MAP_TYPE_INDOOR)
+    if (IsRunningDisallowedByMetatile(tile) || gMapHeader.mapType == MAP_TYPE_INDOOR)
         return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 static bool8 IsRunningDisallowedByMetatile(u8 tile)
@@ -910,7 +911,7 @@ static bool8 IsRunningDisallowedByMetatile(u8 tile)
 
 static void Bike_TryAdvanceCyclingRoadCollisions(void)
 {
-    if (gBikeCyclingChallenge != FALSE && gBikeCollisions < 100)
+    if (gBikeCyclingChallenge && gBikeCollisions < 100)
         gBikeCollisions++;
 }
 
@@ -967,15 +968,14 @@ bool8 player_should_look_direction_be_enforced_upon_movement(void)
 {
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) != FALSE)
         return FALSE;
-    else
-        return TRUE;
+    return TRUE;
 }
 
 void GetOnOffBike(u8 transitionFlags)
 {
     gUnusedBikeCameraAheadPanback = FALSE;
 
-    if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_BIKE)
     {
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
         Overworld_ClearSavedMusic();
@@ -1022,18 +1022,17 @@ static void Bike_SetBikeStill(void)
 s16 GetPlayerSpeed(void)
 {
     // because the player pressed a direction, it won't ever return a speed of 0 since this function returns the player's current speed.
-    s16 machSpeeds[3];
+    s16 machSpeeds[3]; //TODO: sMachBikeSpeeds SHOULD be local to this function instead of using memcpy, as this is the only function that USES said array, but that doesn't yet match
 
     memcpy(machSpeeds, sMachBikeSpeeds, sizeof(machSpeeds));
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         return machSpeeds[gPlayerAvatar.bikeFrameCounter];
-    else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
         return SPEED_FASTER;
-    else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))
+    if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))
         return SPEED_FAST;
-    else
-        return SPEED_NORMAL;
+    return SPEED_NORMAL;
 }
 
 void Bike_HandleBumpySlopeJump(void)

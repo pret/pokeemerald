@@ -5453,7 +5453,8 @@ static void PrintSearchParameterText(u8 taskId)
     const u16 *cursorPos = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataCursorPos];
     const u16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataScrollOffset];
 
-    u16 i, j;
+    u16 i;
+    u16 j;
 
     ClearSearchParameterBoxText();
 
@@ -5542,7 +5543,8 @@ static bool8 SearchParamCantScrollUp(u8 taskId)
 
     if (lastOption > MAX_SEARCH_PARAM_CURSOR_POS && *scrollOffset != 0)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 static bool8 SearchParamCantScrollDown(u8 taskId)
@@ -5553,7 +5555,8 @@ static bool8 SearchParamCantScrollDown(u8 taskId)
 
     if (lastOption > MAX_SEARCH_PARAM_CURSOR_POS && *scrollOffset < lastOption - MAX_SEARCH_PARAM_CURSOR_POS)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 #define sTaskId      data[0]

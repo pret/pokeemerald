@@ -3596,7 +3596,7 @@ static s8 UnionRoomHandleYesNo(u8 *state, bool32 noDraw)
     case 1:
         if (noDraw)
         {
-            sub_8198C78();
+            DestroyYesOrNoWindow();
             *state = 0;
             return -3;
         }

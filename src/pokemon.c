@@ -2861,7 +2861,12 @@ void CalculateMonStats(struct Pokemon *mon)
         if (currentHP == 0 && oldMaxHP == 0)
             currentHP = newMaxHP;
         else if (currentHP != 0)
-            currentHP += newMaxHP - oldMaxHP;
+        {
+            currentHP += newMaxHP - oldMaxHP; //This is the cause of the infamous POMEG Berry glitch, resulting in an underflow
+            #ifdef UBFIX
+            if (currentHP <= 0) currentHP = 1;
+            #endif
+        }
         else
             return;
     }

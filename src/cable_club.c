@@ -101,7 +101,7 @@ static void PrintNumPlayersInLink(u16 windowId, u32 numPlayers)
     StringExpandPlaceholders(gStringVar4, gText_NumPlayerLink);
     xPos = GetStringCenterAlignXOffset(1, gStringVar4, 88);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, xPos, 1, 0xFF, NULL);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 static void ClearLinkPlayerCountWindow(u16 windowId)
@@ -109,7 +109,7 @@ static void ClearLinkPlayerCountWindow(u16 windowId)
     // Following this call with a copy-to-vram with mode 3 is identical to
     // calling ClearStdWindowAndFrame(windowId, TRUE).
     ClearStdWindowAndFrame(windowId, FALSE);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 numPlayers)

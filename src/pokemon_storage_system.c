@@ -5616,8 +5616,7 @@ static void sub_80CCF64(struct Sprite *sprite)
 
 static void sub_80CCF9C(void)
 {
-    u8 boxId = StorageGetCurrentBox();
-    u8 wallpaperId = GetBoxWallpaper(boxId);
+    const u8 wallpaperId = GetBoxWallpaper(StorageGetCurrentBox());
     if (sPSSData->field_6F8 == 0)
         CpuCopy16(gUnknown_08577574[wallpaperId], gPlttBufferUnfaded + sPSSData->field_71C, 4);
     else

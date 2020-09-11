@@ -16,6 +16,14 @@
 
 enum
 {
+    WINDOW_COPY_NOTHING,
+    WINDOW_COPY_PALETTE,
+    WINDOW_COPY_TILE,
+    WINDOW_COPY_ALL,
+};
+
+enum
+{
     SAVE_MENU_NAME,
     SAVE_MENU_CAUGHT,
     SAVE_MENU_PLAY_TIME,
@@ -114,7 +122,7 @@ void sub_8198314(void);
 void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram);
 void ResetBgPositions(void);
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
-void sub_8198C78(void);
+void DestroyYesOrNoWindow(void);
 void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs);
 
 #endif // GUARD_MENU_H
