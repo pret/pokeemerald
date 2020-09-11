@@ -25,6 +25,10 @@
 #define STD_WINDOW_PALETTE_NUM 14
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
+#define CHAR_HFLIP 0x400
+#define CHAR_VFLIP 0x800
+#define CHAR_HVFLIP CHAR_HFLIP + CHAR_VFLIP
+
 struct MoveMenuInfoIcon
 {
     u8 width;
@@ -39,12 +43,15 @@ struct Menu
     s8 cursorPos;
     s8 minCursorPos;
     s8 maxCursorPos;
+
     u8 windowId;
     u8 fontId;
     u8 optionWidth;
     u8 optionHeight;
+
     u8 columns;
     u8 rows;
+
     bool8 APressMuted;
 };
 
@@ -72,26 +79,26 @@ static const u8 sTextSpeedFrameDelays[] =
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
 {
     {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = 27,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 0x194
+        .bg = MESSAGE_WIN,
+        .tilemapLeft = MESSAGE_TILEMAP_LEFT,
+        .tilemapTop = MESSAGE_TILEMAP_TOP,
+        .width = MESSAGE_WIN_WIDTH,
+        .height = MESSAGE_WIN_HEIGHT,
+        .paletteNum = MESSAGE_WIN_PALETTE,
+        .baseBlock = MESSAGE_WIN_BASEBLOCK
     },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sYesNo_WindowTemplates =
 {
-    .bg = 0,
-    .tilemapLeft = 21,
-    .tilemapTop = 9,
-    .width = 5,
-    .height = 4,
-    .paletteNum = 15,
-    .baseBlock = 0x125
+    .bg = MESSAGE_WIN,
+    .tilemapLeft = YESNO_MENU_LEFT,
+    .tilemapTop = YESNO_MENU_TOP,
+    .width = YESNO_MENU_WIDTH,
+    .height = YESNO_MENU_HEIGHT,
+    .paletteNum = YESNO_MENU_PALETTE,
+    .baseBlock = YESNO_MENU_BASEBLOCK
 };
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
@@ -138,7 +145,7 @@ void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
 void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8, u8, u8, u8, u8, u8);
 void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8, u8, u8, u8, u8, u8);
 void WindowFunc_ClearStdWindowAndFrameToTransparent(u8, u8, u8, u8, u8, u8);
-void sub_8198C78(void);
+void DestroyYesOrNoWindow(void);
 void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
 void InitStandardTextBoxWindows(void)
@@ -164,7 +171,7 @@ void InitTextBoxGfxAndPrinters(void)
 u16 RunTextPrintersAndIsPrinter0Active(void)
 {
     RunTextPrinters();
-    return IsTextPrinterActive(0);
+    return IsTextPrinterActive(MESSAGE_WIN);
 }
 
 u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
@@ -220,7 +227,7 @@ void DrawDialogueFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
@@ -229,7 +236,7 @@ void DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
@@ -238,7 +245,7 @@ void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram)
@@ -247,7 +254,7 @@ void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -459,7 +466,7 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
 {
     LoadMessageBoxAndBorderGfx();
     DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, 1, GetPlayerTextSpeedDelay(), string, callback);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(MESSAGE_WIN, WINDOW_COPY_ALL);
 }
 
 void DisplayYesNoMenuDefaultYes(void)
@@ -561,7 +568,7 @@ void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 // Never used.
@@ -573,7 +580,7 @@ void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 tileNum)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -678,7 +685,7 @@ void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -694,7 +701,7 @@ void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 bas
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 // Never used.
@@ -706,7 +713,7 @@ void DrawStdFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 baseTileNum)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void WindowFunc_DrawStdFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -775,7 +782,7 @@ void ClearStdWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 void WindowFunc_ClearStdWindowAndFrameToTransparent(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
@@ -828,7 +835,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
                   0,
                   string);
         if (copyToVram)
-            CopyWindowToVram(sWindowId, 3);
+            CopyWindowToVram(sWindowId, WINDOW_COPY_ALL);
     }
 }
 
@@ -866,14 +873,14 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
         }
         AddTextPrinterParameterized4(sWindowId, 1, 4, 1, 0, 0, color, 0, string);
         if (copyToVram)
-            CopyWindowToVram(sWindowId, 3);
+            CopyWindowToVram(sWindowId, WINDOW_COPY_ALL);
     }
 }
 
 void sub_81982D8(void)
 {
     if (sWindowId != 0xFF)
-        CopyWindowToVram(sWindowId, 3);
+        CopyWindowToVram(sWindowId, WINDOW_COPY_ALL);
 }
 
 void sub_81982F0(void)
@@ -881,7 +888,7 @@ void sub_81982F0(void)
     if (sWindowId != 0xFF)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
-        CopyWindowToVram(sWindowId, 3);
+        CopyWindowToVram(sWindowId, WINDOW_COPY_ALL);
     }
 }
 
@@ -891,7 +898,7 @@ void sub_8198314(void)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sWindowId);
-        CopyWindowToVram(sWindowId, 3);
+        CopyWindowToVram(sWindowId, WINDOW_COPY_ALL);
         RemoveWindow(sWindowId);
         sWindowId = 0xFF;
     }
@@ -987,17 +994,20 @@ s8 Menu_ProcessInput(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (JOY_NEW(B_BUTTON))
+    
+    if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_NEW(DPAD_UP))
+    
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_DOWN))
+    
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -1017,17 +1027,20 @@ s8 Menu_ProcessInputNoWrap(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (JOY_NEW(B_BUTTON))
+    
+    if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_NEW(DPAD_UP))
+    
+    if (JOY_NEW(DPAD_UP))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_DOWN))
+    
+    if (JOY_NEW(DPAD_DOWN))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
             PlaySE(SE_SELECT);
@@ -1045,17 +1058,20 @@ s8 ProcessMenuInput_other(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (JOY_NEW(B_BUTTON))
+    
+    if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -1212,11 +1228,11 @@ s8 Menu_ProcessInputNoWrapClearOnChoose(void)
 {
     s8 result = Menu_ProcessInputNoWrap();
     if (result != MENU_NOTHING_CHOSEN)
-        sub_8198C78();
+        DestroyYesOrNoWindow();
     return result;
 }
 
-void sub_8198C78(void)
+void DestroyYesOrNoWindow(void)
 {
     ClearStdWindowAndFrameToTransparent(sYesNoWindowId, TRUE);
     RemoveWindow(sYesNoWindowId);
@@ -1224,8 +1240,7 @@ void sub_8198C78(void)
 
 void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7, const struct MenuAction *strs)
 {
-    u8 i;
-    u8 j;
+    u8 i, j;
     for (i = 0; i < a7; i++)
     {
         for (j = 0; j < a6; j++)
@@ -1311,11 +1326,15 @@ u8 sub_8198FD4(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 
     u8 numChoices = a5 * a6;
     return sub_8198F58(windowId, fontId, left, top, a4, cursorHeight, a5, a6, numChoices, a7);
 }
-
-void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
+enum
 {
-    u8 cursorWidth = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
-    u8 cursorHeight = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
+    CURSOR_FONT_WIDTH,
+    CURSOR_FONT_HEIGHT,
+};
+static void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
+{
+    u8 cursorWidth = GetMenuCursorDimensionByFont(sMenu.fontId, CURSOR_FONT_WIDTH);
+    u8 cursorHeight = GetMenuCursorDimensionByFont(sMenu.fontId, CURSOR_FONT_HEIGHT);
     u8 xPos = (oldCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
     u8 yPos = (oldCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
     FillWindowPixelRect(sMenu.windowId,
@@ -1364,11 +1383,9 @@ u8 ChangeListMenuCursorPosition(s8 deltaX, s8 deltaY)
         sMenu.cursorPos = oldPos;
         return sMenu.cursorPos;
     }
-    else
-    {
-        sub_8199060(oldPos, sMenu.cursorPos);
-        return sMenu.cursorPos;
-    }
+    
+    sub_8199060(oldPos, sMenu.cursorPos);
+    return sMenu.cursorPos;
 }
 
 u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
@@ -1398,43 +1415,46 @@ u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
         sMenu.cursorPos = oldPos;
         return sMenu.cursorPos;
     }
-    else
-    {
-        sub_8199060(oldPos, sMenu.cursorPos);
-        return sMenu.cursorPos;
-    }
+
+    sub_8199060(oldPos, sMenu.cursorPos);
+    return sMenu.cursorPos;
 }
 
-s8 sub_8199284(void)
+s8 UnusedMoveCursorFunction(void) //unused
 {
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (JOY_NEW(B_BUTTON))
+    
+    if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_NEW(DPAD_UP))
+    
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_DOWN))
+    
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+    
+    if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+    
+    if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1453,29 +1473,34 @@ s8 Menu_ProcessInputGridLayout(void)
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (JOY_NEW(B_BUTTON))
+
+    if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_NEW(DPAD_UP))
+
+    if (JOY_NEW(DPAD_UP))
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_DOWN))
+
+    if (JOY_NEW(DPAD_DOWN))
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+
+    if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+    
+    if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -1492,29 +1517,34 @@ s8 sub_81993D8(void)
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (JOY_NEW(B_BUTTON))
+    
+    if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1534,29 +1564,34 @@ s8 sub_8199484(void)
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (JOY_NEW(B_BUTTON))
+    
+    if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -1672,8 +1707,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
 
 void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
 {
-    u8 i;
-    u8 j;
+    u8 i, j;
     struct TextPrinterTemplate printer;
 
     printer.windowId = windowId;

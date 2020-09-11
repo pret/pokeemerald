@@ -387,8 +387,7 @@ static void npc_clear_strange_bits(struct ObjectEvent *objEvent)
 
 static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
-     || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_BIKE)
         MovePlayerOnBike(direction, newKeys, heldKeys);
     else
         MovePlayerNotOnBike(direction, heldKeys);
@@ -588,16 +587,14 @@ static u8 CheckMovementInputNotOnBike(u8 direction)
         gPlayerAvatar.runningState = NOT_MOVING;
         return 0;
     }
-    else if (direction != GetPlayerMovementDirection() && gPlayerAvatar.runningState != MOVING)
+    if (direction != GetPlayerMovementDirection() && gPlayerAvatar.runningState != MOVING)
     {
         gPlayerAvatar.runningState = TURN_DIRECTION;
         return 1;
     }
-    else
-    {
-        gPlayerAvatar.runningState = MOVING;
-        return 2;
-    }
+
+    gPlayerAvatar.runningState = MOVING;
+    return 2;
 }
 
 static void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
@@ -621,7 +618,8 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
             PlayerJumpLedge(direction);
             return;
         }
-        else if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
+
+        if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
         {
             PlayerNotOnBikeCollideWithFarawayIslandMew(direction);
             return;
@@ -647,7 +645,6 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     {
         PlayerRun(direction);
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
-        return;
     }
     else
     {
@@ -722,10 +719,8 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
         CreateStopSurfingTask(direction);
         return TRUE;
     }
-    else
-    {
-        return FALSE;
-    }
+
+    return FALSE;
 }
 
 static bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
@@ -794,14 +789,11 @@ bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction)
 
     if (mewPrevX == playerX)
     {
-        if (object->previousCoords.y != playerY
-            || object->currentCoords.x != mewPrevX
-            || object->currentCoords.y != object->previousCoords.y)
-        {
-            if (object->previousCoords.x == playerX &&
-                object->previousCoords.y == playerY)
-                return TRUE;
-        }
+        if (object->previousCoords.y == playerY && object->currentCoords.x == mewPrevX && object->currentCoords.y == object->previousCoords.y)
+            return FALSE;
+        if (object->previousCoords.x == playerX &&
+            object->previousCoords.y == playerY)
+            return TRUE;
     }
     return FALSE;
 }
@@ -1106,17 +1098,17 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 a)
     s16 x, y;
     u8 metatileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
 
-    if (!sArrowWarpMetatileBehaviorChecks[a - 1](metatileBehavior))
+    if (sArrowWarpMetatileBehaviorChecks[a - 1](metatileBehavior))
+        return;
+
+    if (a == DIR_NORTH)
     {
-        if (a == 2)
-        {
-            PlayerGetDestCoords(&x, &y);
-            MoveCoords(2, &x, &y);
-            if (MetatileBehavior_IsWarpDoor(MapGridGetMetatileBehaviorAt(x, y)))
-                return;
-        }
-        PlaySE(SE_WALL_HIT);
+        PlayerGetDestCoords(&x, &y);
+        MoveCoords(2, &x, &y);
+        if (MetatileBehavior_IsWarpDoor(MapGridGetMetatileBehaviorAt(x, y)))
+            return;
     }
+    PlaySE(SE_WALL_HIT);
 }
 
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y)
@@ -1213,7 +1205,7 @@ void sub_808BCF4(void)
 
     npc_clear_strange_bits(playerObjEvent);
     SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
     {
         Bike_HandleBumpySlopeJump();
         Bike_UpdateBikeCounterSpeed(0);

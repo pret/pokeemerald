@@ -16,6 +16,15 @@
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
 
+#define MAPNAME_V_OFFSET_START 40
+#define MAPNAME_V_OFFSET_END 0
+#define MAPNAME_DISP_TIME 120
+#define MAPNAME_SPEED 2
+
+#define MAPNAME_XPOS 0
+#define MAPNAME_YPOS 2
+
+#define MAPNAME_WIDTH 80
 // enums
 enum MapPopUp_Themes
 {
@@ -25,6 +34,17 @@ enum MapPopUp_Themes
     MAPPOPUP_THEME_BRICK,
     MAPPOPUP_THEME_UNDERWATER,
     MAPPOPUP_THEME_STONE2,
+};
+
+enum MapState
+{
+    MAPSTATE_MOVEDOWN,
+    MAPSTATE_PAUSE,
+    MAPSTATE_HIDE,
+    MAPSTATE_ERASE,
+    MAPSTATE_CLEAR,
+    MAPSTATE_QUIT,
+    MAPSTATE_WAIT,
 };
 
 // static functions
@@ -198,7 +218,7 @@ static const u8 * const gBattlePyramid_MapHeaderStrings[] =
 };
 
 // text
-bool8 sub_80D47D4(void)
+bool8 DebugMapName(void) //This appears to be a leftover debug function GF forgot to put in a debug macro
 {
     HideStartMenu();
     ShowMapNamePopup();
@@ -207,21 +227,21 @@ bool8 sub_80D47D4(void)
 
 void ShowMapNamePopup(void)
 {
-    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE)
+    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) == TRUE)
+        return;
+
+    if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
     {
-        if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
-        {
-            sPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
-            SetGpuReg(REG_OFFSET_BG0VOFS, 40);
-            gTasks[sPopupTaskId].data[0] = 6;
-            gTasks[sPopupTaskId].data[2] = 40;
-        }
-        else
-        {
-            if (gTasks[sPopupTaskId].data[0] != 2)
-                gTasks[sPopupTaskId].data[0] = 2;
-            gTasks[sPopupTaskId].data[3] = 1;
-        }
+        sPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
+        SetGpuReg(REG_OFFSET_BG0VOFS, MAPNAME_V_OFFSET_START);
+        gTasks[sPopupTaskId].data[0] = MAPSTATE_WAIT;
+        gTasks[sPopupTaskId].data[2] = MAPNAME_V_OFFSET_START;
+    }
+    else
+    {
+        if (gTasks[sPopupTaskId].data[0] != MAPSTATE_HIDE)
+            gTasks[sPopupTaskId].data[0] = MAPSTATE_HIDE;
+        gTasks[sPopupTaskId].data[3] = 1;
     }
 }
 
@@ -231,55 +251,53 @@ static void Task_MapNamePopUpWindow(u8 taskId)
 
     switch (task->data[0])
     {
-    case 6:
-        task->data[4]++;
-        if (task->data[4] > 30)
+    case MAPSTATE_WAIT:
+        if (++task->data[4] > 30)
         {
-            task->data[0] = 0;
+            task->data[0] = MAPSTATE_MOVEDOWN;
             task->data[4] = 0;
             ShowMapNamePopUpWindow();
         }
         break;
-    case 0:
-        task->data[2] -= 2;
-        if (task->data[2] <= 0 )
+    case MAPSTATE_MOVEDOWN:
+        task->data[2] -= MAPNAME_SPEED;
+        if (task->data[2] <= MAPNAME_V_OFFSET_END)
         {
-            task->data[2] = 0;
-            task->data[0] = 1;
+            task->data[2] = MAPNAME_V_OFFSET_END;
+            task->data[0] = MAPSTATE_PAUSE;
             gTasks[sPopupTaskId].data[1] = 0;
         }
         break;
-    case 1:
-        task->data[1]++;
-        if (task->data[1] > 120 )
+    case MAPSTATE_PAUSE:
+        if (++task->data[1] > MAPNAME_DISP_TIME)
         {
             task->data[1] = 0;
-            task->data[0] = 2;
+            task->data[0] = MAPSTATE_HIDE;
         }
         break;
-    case 2:
-        task->data[2] += 2;
-        if (task->data[2] > 39)
+    case MAPSTATE_HIDE:
+        task->data[2] += MAPNAME_SPEED;
+        if (task->data[2] >= MAPNAME_V_OFFSET_START)
         {
-            task->data[2] = 40;
+            task->data[2] = MAPNAME_V_OFFSET_START;
             if (task->data[3])
             {
-                task->data[0] = 6;
+                task->data[0] = MAPSTATE_WAIT;
                 task->data[4] = 0;
                 task->data[3] = 0;
             }
             else
             {
-                task->data[0] = 4;
+                task->data[0] = MAPSTATE_CLEAR;
                 return;
             }
         }
         break;
-    case 4:
+    case MAPSTATE_CLEAR:
         ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
-        task->data[0] = 5;
+        task->data[0] = MAPSTATE_QUIT;
         break;
-    case 5:
+    case MAPSTATE_QUIT:
         HideMapNamePopUpWindow();
         return;
     }
@@ -299,33 +317,27 @@ void HideMapNamePopUpWindow(void)
 
 static void ShowMapNamePopUpWindow(void)
 {
-    u8 mapDisplayHeader[24];
-    u8 *withoutPrefixPtr;
+    u8 mapDisplayHeader[22];
     u8 x;
-    const u8* mapDisplayHeaderSource;
 
     if (InBattlePyramid())
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
         {
-            withoutPrefixPtr = &(mapDisplayHeader[3]);
-            mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[7];
+            StringCopy(&(mapDisplayHeader[3]), gBattlePyramid_MapHeaderStrings[7]);
         }
         else
         {
-            withoutPrefixPtr = &(mapDisplayHeader[3]);
-            mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->frontier.curChallengeBattleNum];
+            StringCopy(&(mapDisplayHeader[3]), gBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
         }
-        StringCopy(withoutPrefixPtr, mapDisplayHeaderSource);
     }
     else
     {
-        withoutPrefixPtr = &(mapDisplayHeader[3]);
-        GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
+        GetMapName(&(mapDisplayHeader[3]), gMapHeader.regionMapSectionId, 0);
     }
     AddMapNamePopUpWindow();
     LoadMapNamePopUpWindowBg();
-    x = GetStringCenterAlignXOffset(7, withoutPrefixPtr, 80);
+    x = GetStringCenterAlignXOffset(7, &(mapDisplayHeader[3]), MAPNAME_WIDTH);
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;

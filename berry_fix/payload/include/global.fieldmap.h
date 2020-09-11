@@ -17,10 +17,10 @@ struct Tileset
 {
     /*0x00*/ bool8 isCompressed;
     /*0x01*/ bool8 isSecondary;
-    /*0x04*/ void *tiles;
-    /*0x08*/ void *palettes;
-    /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
+    /*0x04*/ const void *tiles;
+    /*0x08*/ const void *palettes;
+    /*0x0c*/ const void *metatiles;
+    /*0x10*/ const void *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 
@@ -28,10 +28,10 @@ struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
-    /*0x08*/ u16 *border;
-    /*0x0c*/ u16 *map;
-    /*0x10*/ struct Tileset *primaryTileset;
-    /*0x14*/ struct Tileset *secondaryTileset;
+    /*0x08*/ const u16 *border;
+    /*0x0c*/ const u16 *map;
+    /*0x10*/ const struct Tileset *primaryTileset;
+    /*0x14*/ const struct Tileset *secondaryTileset;
 };
 
 struct BackupMapLayout
@@ -115,7 +115,7 @@ struct MapEvents
 struct MapConnection
 {
  /*0x00*/ u8 direction;
- /*0x01*/ u32 offset;
+ /*0x01*/ s32 offset;
  /*0x05*/ u8 mapGroup;
  /*0x06*/ u8 mapNum;
 };
@@ -123,7 +123,7 @@ struct MapConnection
 struct MapConnections
 {
     s32 count;
-    struct MapConnection *connections;
+    const struct MapConnection *connections;
 };
 
 struct MapHeader
@@ -155,7 +155,7 @@ struct EventObject
              u32 heldMovementActive:1;
              u32 heldMovementFinished:1;
     /*0x01*/ u32 frozen:1;
-             u32 facingDirectionLocked:1;
+             bool32 facingDirectionLocked:1;
              u32 disableAnim:1; // used to disable forced movement sliding animations (like on ice)
              u32 enableAnim:1;
              u32 inanimate:1;
@@ -234,6 +234,8 @@ struct EventObjectGraphicsInfo
 #define PLAYER_AVATAR_FLAG_5          (1 << 5)
 #define PLAYER_AVATAR_FLAG_6          (1 << 6)
 #define PLAYER_AVATAR_FLAG_DASH       (1 << 7)
+
+#define PLAYER_AVATAR_FLAG_BIKE (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE)
 
 enum
 {

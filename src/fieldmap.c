@@ -35,7 +35,7 @@ struct BackupMapLayout gBackupMapLayout;
 static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
 static void InitMapLayoutData(struct MapHeader *mapHeader);
-static void InitBackupMapLayoutData(u16 *map, u16 width, u16 height);
+static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height);
 static void FillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 static void FillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
 static void FillWestConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
@@ -44,7 +44,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader);
 static void LoadSavedMapView(void);
 static bool8 SkipCopyingMetatileFromSavedMap(u16* mapMetatilePtr, u16 mapWidth, u8 yMode);
 
-struct MapHeader const *const GetMapHeaderFromConnection(struct MapConnection *connection)
+struct MapHeader const *const GetMapHeaderFromConnection(const struct MapConnection *connection)
 {
     return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
@@ -97,7 +97,7 @@ static void InitMapLayoutData(struct MapHeader *mapHeader)
     }
 }
 
-static void InitBackupMapLayoutData(u16 *map, u16 width, u16 height)
+static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
 {
     u16 *dest;
     int y;
@@ -114,7 +114,7 @@ static void InitBackupMapLayoutData(u16 *map, u16 width, u16 height)
 static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
 {
     int count;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     int i;
 
     if (mapHeader->connections)
@@ -125,7 +125,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
         for (i = 0; i < count; i++, connection++)
         {
             struct MapHeader const *cMap = GetMapHeaderFromConnection(connection);
-            u32 offset = connection->offset;
+            s32 offset = connection->offset;
             switch (connection->direction)
             {
             case CONNECTION_SOUTH:
@@ -152,7 +152,7 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
 static void sub_8087F54(int x, int y, struct MapHeader const *connectedMapHeader, int x2, int y2, int width, int height)
 {
     int i;
-    u16 *src;
+    const u16 *src;
     u16 *dest;
     int mapWidth;
 
@@ -370,7 +370,7 @@ u8 MapGridGetZCoordAt(int x, int y)
 {
     u16 block;
     int i;
-    u16 *border;
+    const u16 *border;
 
     if (x >= 0 && x < gBackupMapLayout.width
      && y >= 0 && y < gBackupMapLayout.height)
@@ -398,7 +398,7 @@ u8 MapGridIsImpassableAt(int x, int y)
 {
     u16 block;
     int i;
-    u16 *border;
+    const u16 *border;
 
     if (x >= 0 && x < gBackupMapLayout.width
      && y >= 0 && y < gBackupMapLayout.height)
@@ -422,12 +422,10 @@ u8 MapGridIsImpassableAt(int x, int y)
 
 u32 MapGridGetMetatileIdAt(int x, int y)
 {
-    u16 block;
-    int i;
-    int j;
+    u16 block, block2;
+    int i, j;
     struct MapLayout const *mapLayout;
-    u16 *border;
-    u16 block2;
+    const u16 *border;
 
     if (x >= 0 && x < gBackupMapLayout.width
      && y >= 0 && y < gBackupMapLayout.height)
@@ -492,21 +490,18 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 
 u16 GetBehaviorByMetatileId(u16 metatile)
 {
-    u16 *attributes;
+    const u16 *attributes;
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
         return attributes[metatile];
     }
-    else if (metatile < NUM_METATILES_TOTAL)
+    if (metatile < NUM_METATILES_TOTAL)
     {
         attributes = gMapHeader.mapLayout->secondaryTileset->metatileAttributes;
         return attributes[metatile - NUM_METATILES_IN_PRIMARY];
     }
-    else
-    {
-        return 0xFF;
-    }
+    return 0xFF;
 }
 
 void save_serialize_map(void)
@@ -738,7 +733,7 @@ int CanCameraMoveInDirection(int direction)
     return 1;
 }
 
-void sub_80887F8(struct MapConnection *connection, int direction, int x, int y)
+static void sub_80887F8(const struct MapConnection *connection, int direction, int x, int y)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -766,7 +761,7 @@ void sub_80887F8(struct MapConnection *connection, int direction, int x, int y)
 bool8 CameraMove(int x, int y)
 {
     unsigned int direction;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     int old_x, old_y;
     gCamera.active = FALSE;
     direction = GetPostCameraMoveMapBorderId(x, y);
@@ -794,10 +789,10 @@ bool8 CameraMove(int x, int y)
     return gCamera.active;
 }
 
-struct MapConnection *sub_8088950(u8 direction, int x, int y)
+const struct MapConnection *sub_8088950(u8 direction, int x, int y)
 {
     int count;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     int i;
     count = gMapHeader.connections->count;
     connection = gMapHeader.connections->connections;
@@ -809,7 +804,7 @@ struct MapConnection *sub_8088950(u8 direction, int x, int y)
     return NULL;
 }
 
-bool8 sub_80889A8(u8 direction, int x, int y, struct MapConnection *connection)
+bool8 sub_80889A8(u8 direction, int x, int y, const struct MapConnection *connection)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -850,7 +845,7 @@ int sub_8088A38(int x, int width)
     return FALSE;
 }
 
-int sub_8088A4C(struct MapConnection *connection, int x, int y)
+static int sub_8088A4C(const struct MapConnection *connection, int x, int y)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -866,10 +861,10 @@ int sub_8088A4C(struct MapConnection *connection, int x, int y)
     return FALSE;
 }
 
-struct MapConnection *GetConnectionAtCoords(s16 x, s16 y)
+const struct MapConnection *GetConnectionAtCoords(s16 x, s16 y)
 {
     int count;
-    struct MapConnection *connection;
+    const struct MapConnection *connection;
     int i;
     u8 direction;
     if (!gMapHeader.connections)

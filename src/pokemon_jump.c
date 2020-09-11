@@ -3152,7 +3152,7 @@ static void sub_802D598(void)
     {
     case 0:
         sub_802DA14();
-        sub_8198C78();
+        DestroyYesOrNoWindow();
         CopyBgTilemapBufferToVram(0);
         gUnknown_02022D00->unk4++;
         break;

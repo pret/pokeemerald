@@ -26,10 +26,10 @@ struct Tileset
 {
     /*0x00*/ bool8 isCompressed;
     /*0x01*/ bool8 isSecondary;
-    /*0x04*/ void *tiles;
-    /*0x08*/ void *palettes;
-    /*0x0c*/ u16 *metatiles;
-    /*0x10*/ u16 *metatileAttributes;
+    /*0x04*/ const void *tiles;
+    /*0x08*/ const void *palettes;
+    /*0x0c*/ const u16 *metatiles;
+    /*0x10*/ const u16 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 
@@ -37,10 +37,10 @@ struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
-    /*0x08*/ u16 *border;
-    /*0x0c*/ u16 *map;
-    /*0x10*/ struct Tileset *primaryTileset;
-    /*0x14*/ struct Tileset *secondaryTileset;
+    /*0x08*/ const u16 *border;
+    /*0x0c*/ const u16 *map;
+    /*0x10*/ const struct Tileset *primaryTileset;
+    /*0x14*/ const struct Tileset *secondaryTileset;
 };
 
 struct BackupMapLayout
@@ -115,7 +115,7 @@ struct MapEvents
 struct MapConnection
 {
     u8 direction;
-    u32 offset;
+    s32 offset;
     u8 mapGroup;
     u8 mapNum;
 };
@@ -123,7 +123,7 @@ struct MapConnection
 struct MapConnections
 {
     s32 count;
-    struct MapConnection *connections;
+    const struct MapConnection *connections;
 };
 
 struct MapHeader
@@ -164,7 +164,7 @@ struct ObjectEvent
              u32 heldMovementActive:1;
              u32 heldMovementFinished:1;
     /*0x01*/ u32 frozen:1;
-             u32 facingDirectionLocked:1;
+             bool32 facingDirectionLocked:1;
              u32 disableAnim:1;
              u32 enableAnim:1;
              u32 inanimate:1;
@@ -255,6 +255,8 @@ enum {
 #define PLAYER_AVATAR_FLAG_5           (1 << 5)
 #define PLAYER_AVATAR_FLAG_FORCED_MOVE (1 << 6)
 #define PLAYER_AVATAR_FLAG_DASH        (1 << 7)
+
+#define PLAYER_AVATAR_FLAG_BIKE (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE)
 
 enum
 {

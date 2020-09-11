@@ -373,7 +373,7 @@ static void CreatePCMultichoice(void)
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, numChoices, 0);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
 }
 
@@ -533,7 +533,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         }
 
         InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, count - 1);
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
         InitMultichoiceCheckWrap(FALSE, count, windowId, MULTI_SSTIDAL_LILYCOVE);
     }
 }
@@ -698,7 +698,7 @@ static void CreateStartMenuForPokenavTutorial(void)
     AddTextPrinterParameterized(windowId, 1, gText_MenuOptionExit, 8, 121, TEXT_SPEED_FF, NULL);
     sub_81983AC(windowId, 1, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
     InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
 }
 
 #define tWindowId       data[6]
@@ -730,36 +730,33 @@ static int DisplayTextAndGetWidthInternal(const u8 *str)
     return GetStringWidth(1, temp, 0);
 }
 
-int DisplayTextAndGetWidth(const u8 *str, int prevWidth)
+s32 DisplayTextAndGetWidth(const u8 *str, s32 prevWidth)
 {
-    int width = DisplayTextAndGetWidthInternal(str);
-    if (width < prevWidth)
-    {
-        width = prevWidth;
-    }
-    return width;
+    const s32 width = DisplayTextAndGetWidthInternal(str);
+
+    return max(width, prevWidth);
 }
 
-int ConvertPixelWidthToTileWidth(int width)
+s32 ConvertPixelWidthToTileWidth(s32 width)
 {
-    return (((width + 9) / 8) + 1) > MAX_MULTICHOICE_WIDTH ? MAX_MULTICHOICE_WIDTH : (((width + 9) / 8) + 1);
+    const s32 convertedWidth = ((width + 9) / 8) + 1;
+    return min(convertedWidth, MAX_MULTICHOICE_WIDTH);
 }
 
-int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width)
+s32 ScriptMenu_AdjustLeftCoordFromWidth(s32 left, s32 width)
 {
-    int adjustedLeft = left;
 
     if (left + width > MAX_MULTICHOICE_WIDTH)
     {
         if (MAX_MULTICHOICE_WIDTH - width < 0)
         {
-            adjustedLeft = 0;
+            left = 0;
         }
         else
         {
-            adjustedLeft = MAX_MULTICHOICE_WIDTH - width;
+            left = MAX_MULTICHOICE_WIDTH - width;
         }
     }
 
-    return adjustedLeft;
+    return left;
 }
