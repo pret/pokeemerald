@@ -1141,7 +1141,7 @@ static void PokeballGlowEffect_PlaceBalls(struct Sprite *sprite)
         gSprites[spriteId].sEffectSpriteId = sprite->sSpriteId;
         sprite->sCounter++;
         sprite->sNumMons--;
-        PlaySE(SE_BOWA);
+        PlaySE(SE_BALL);
     }
     if (sprite->sNumMons == 0)
     {
@@ -1160,7 +1160,7 @@ static void PokeballGlowEffect_TryPlaySe(struct Sprite *sprite)
         sprite->data[3] = 0;
         if (sprite->sPlayHealSe)
         {
-            PlayFanfare(MUS_ME_ASA);
+            PlayFanfare(MUS_HEAL);
         }
     }
 }
@@ -1464,7 +1464,7 @@ static bool8 FallWarpEffect_StartFall(struct Task *task)
     task->tFallOffset = 1;
     task->tTotalFall = 0;
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
-    PlaySE(SE_RU_HYUU);
+    PlaySE(SE_FALL);
     task->tState++;
     return FALSE;
 }
@@ -1493,7 +1493,7 @@ static bool8 FallWarpEffect_Fall(struct Task *task)
     }
     if (sprite->pos2.y >= 0)
     {
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         objectEvent->triggerGroundEffectsOnStop = 1;
         objectEvent->landingJump = 1;
         sprite->pos2.y = 0;
@@ -1589,7 +1589,7 @@ static bool8 EscalatorWarpOut_WaitForPlayer(struct Task *task)
         {
             task->tState = 4; // jump to EscalatorWarpOut_Down_Ride
         }
-        PlaySE(SE_ESUKA);
+        PlaySE(SE_ESCALATOR);
     }
     return FALSE;
 }
@@ -1978,7 +1978,7 @@ static bool8 LavaridgeGymB1FWarpEffect_Launch(struct Task *task, struct ObjectEv
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_ASH_LAUNCH);
-    PlaySE(SE_W153);
+    PlaySE(SE_M_EXPLOSION);
     task->data[0]++;
     return TRUE;
 }
@@ -2092,7 +2092,7 @@ static bool8 LavaridgeGymB1FWarpExitEffect_PopOut(struct Task *task, struct Obje
         task->data[0]++;
         objectEvent->invisible = FALSE;
         CameraObjectReset1();
-        PlaySE(SE_W091);
+        PlaySE(SE_M_DIG);
         ObjectEventSetHeldMovement(objectEvent, GetJumpMovementAction(DIR_EAST));
     }
     return FALSE;
@@ -2163,7 +2163,7 @@ static bool8 LavaridgeGym1FWarpEffect_AshPuff(struct Task *task, struct ObjectEv
         {
             task->data[1]++;
             ObjectEventSetHeldMovement(objectEvent, GetWalkInPlaceFastestMovementAction(objectEvent->facingDirection));
-            PlaySE(SE_FU_ZUZUZU);
+            PlaySE(SE_LAVARIDGE_FALL_WARP);
         }
     }
     return FALSE;
@@ -2381,7 +2381,7 @@ static void TeleportWarpOutFieldEffect_SpinGround(struct Task *task)
         task->data[1] = 4;
         task->data[2] = 8;
         task->data[3] = 1;
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
     }
 }
 
@@ -2472,7 +2472,7 @@ static void TeleportWarpInFieldEffect_Init(struct Task *task)
         task->data[2] = 1;
         task->data[14] = sprite->subspriteMode;
         task->data[15] = GetPlayerFacingDirection();
-        PlaySE(SE_TK_WARPIN);
+        PlaySE(SE_WARP_IN);
     }
 }
 
@@ -2974,7 +2974,7 @@ u8 FldEff_UseSurf(void)
     u8 taskId = CreateTask(Task_SurfFieldEffect, 0xff);
     gTasks[taskId].tMonId = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
-    Overworld_ChangeMusicTo(MUS_NAMINORI);
+    Overworld_ChangeMusicTo(MUS_SURF);
     return FALSE;
 }
 
@@ -3111,7 +3111,7 @@ u8 FldEff_NPCFlyOut(void)
     sprite->oam.priority = 1;
     sprite->callback = SpriteCB_NPCFlyOut;
     sprite->data[1] = gFieldEffectArguments[0];
-    PlaySE(SE_W019);
+    PlaySE(SE_M_FLY);
     return spriteId;
 }
 
@@ -3228,7 +3228,7 @@ static void FlyOutFieldEffect_BirdSwoopDown(struct Task *task)
     if ((task->tTimer == 0 || (--task->tTimer) == 0) && ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         task->tState++;
-        PlaySE(SE_W019);
+        PlaySE(SE_M_FLY);
         StartFlyBirdSwoopDown(task->tBirdSpriteId);
     }
 }
@@ -3692,7 +3692,7 @@ static void Task_DestroyDeoxysRock(u8 taskId)
 static void DestroyDeoxysRockEffect_CameraShake(s16* data, u8 taskId)
 {
     u8 newTaskId = CreateTask(Task_DeoxysRockCameraShake, 90);
-    PlaySE(SE_T_KAMI2);
+    PlaySE(SE_THUNDER2);
     tCameraTaskId = newTaskId;
     tState++;
 }
@@ -3706,7 +3706,7 @@ static void DestroyDeoxysRockEffect_RockFragments(s16* data, u8 taskId)
         BlendPalettes(0x0000FFFF, 0x10, RGB_WHITE);
         BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITE);
         CreateDeoxysRockFragments(sprite);
-        PlaySE(SE_T_KAMI);
+        PlaySE(SE_THUNDER);
         StartEndingDeoxysRockCameraShake(tCameraTaskId);
         tTimer = 0;
         tState++;

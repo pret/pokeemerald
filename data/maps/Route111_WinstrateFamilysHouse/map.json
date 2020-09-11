@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE111_WINSTRATE_FAMILYS_HOUSE",
   "name": "Route111_WinstrateFamilysHouse",
   "layout": "LAYOUT_HOUSE2",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_ROUTE_111",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

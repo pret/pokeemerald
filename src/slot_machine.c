@@ -252,8 +252,8 @@ struct SlotMachine
     /*0x0E*/ s16 payout;
     /*0x10*/ s16 netCoinLoss; // coins lost to machine (but never goes below 0)
     /*0x12*/ s16 bet;
-    /*0x14*/ s16 reeltimePixelOffset;
-    /*0x16*/ s16 reeltimePosition;
+    /*0x14*/ s16 reelTimePixelOffset;
+    /*0x16*/ s16 reelTimePosition;
     /*0x18*/ s16 currReel;
     /*0x1A*/ s16 reelIncrement; // speed of reel
     /*0x1C*/ s16 reelPixelOffsets[NUM_REELS];
@@ -584,7 +584,7 @@ static const u16 *const sDigitalDisplay_Pal;
 static const s16 sInitialReelPositions[NUM_REELS][2];
 static const u8 sLuckyFlagProbabilities_Top3[][6];
 static const u8 sLuckyFlagProbabilities_NotTop3[][6];
-static const u8 sReeltimeProbabilities_UnluckyGame[][17];
+static const u8 sReelTimeProbabilities_UnluckyGame[][17];
 static const u8 sReelTimeProbabilities_LuckyGame[][17];
 static const u8 sSymToMatch[];
 static const u8 sReelTimeTags[];
@@ -682,7 +682,7 @@ static const struct WindowTemplate sWindowTemplate_InfoBox =
     .baseBlock = 1
 };
 
-static const u8 sColors_ReeltimeHelp[] = {TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
+static const u8 sColors_ReelTimeHelp[] = {TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY};
 
 static bool8 (*const sSlotActions[])(struct Task *task) =
 {
@@ -1220,7 +1220,7 @@ static bool8 SlotAction_HandleBetInput(struct Task *task)
             sSlotMachine->coins -= (MAX_BET - sSlotMachine->bet);
             sSlotMachine->bet = MAX_BET;
             sSlotMachine->state = SLOT_ACTION_START_SPIN;
-            PlaySE(SE_REGI);
+            PlaySE(SE_SHOP);
         }
         else  // you didn't have enough coins to bet the max
         {
@@ -1232,7 +1232,7 @@ static bool8 SlotAction_HandleBetInput(struct Task *task)
         // Increase bet
         if (JOY_NEW(DPAD_DOWN) && sSlotMachine->coins != 0)
         {
-            PlaySE(SE_REGI);
+            PlaySE(SE_SHOP);
             LightenBetTiles(sSlotMachine->bet);
             sSlotMachine->coins--;
             sSlotMachine->bet++;
@@ -1335,7 +1335,7 @@ static bool8 SlotAction_AwaitReelStop(struct Task *task)
 {
     if (JOY_NEW(A_BUTTON))
     {
-        PlaySE(SE_JYUNI);
+        PlaySE(SE_CONTEST_PLACE);
         StopSlotReel(sSlotMachine->currReel);
         PressStopReelButton(sSlotMachine->currReel);
         sSlotMachine->state = SLOT_ACTION_AWAIT_ALL_REELS_STOP;
@@ -1381,17 +1381,17 @@ static bool8 SlotAction_CheckMatches(struct Task *task)
         }
         if (sSlotMachine->matchedSymbols & ((1 << MATCHED_777_BLUE) | (1 << MATCHED_777_RED)))
         {
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
             CreateDigitalDisplayScene(DIG_DISPLAY_BONUS_BIG);
         }
         else if (sSlotMachine->matchedSymbols & (1 << MATCHED_777_MIXED))
         {
-            PlayFanfare(MUS_ME_B_BIG);
+            PlayFanfare(MUS_SLOTS_JACKPOT);
             CreateDigitalDisplayScene(DIG_DISPLAY_BONUS_REG);
         }
         else
         {
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
             CreateDigitalDisplayScene(DIG_DISPLAY_WIN);
         }
         // if you matched 777...
@@ -1744,13 +1744,13 @@ static u8 AttemptsAtLuckyFlags_NotTop3(void)
 
 static u8 GetReelTimeProbability(u8 reelTimeDraw)
 {
-    if (sSlotMachine->luckyGame == FALSE)
-        return sReeltimeProbabilities_UnluckyGame[reelTimeDraw][sSlotMachine->pikaPower];
-    else
-        return sReelTimeProbabilities_LuckyGame[reelTimeDraw][sSlotMachine->pikaPower];
+    if (!sSlotMachine->luckyGame)
+        return sReelTimeProbabilities_UnluckyGame[reelTimeDraw][sSlotMachine->pikaPower];
+
+    return sReelTimeProbabilities_LuckyGame[reelTimeDraw][sSlotMachine->pikaPower];
 }
 
-static void GetReeltimeDraw(void)
+static void GetReelTimeDraw(void)
 {
     u8 rval;
     s16 reelTimeDraw;
@@ -1773,15 +1773,13 @@ static bool8 ShouldReelTimeMachineExplode(u16 i)
     u16 rval = Random() & 0xff;
     if (rval < sReelTimeExplodeProbability[i])
         return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 static u16 SlowReelSpeed(void)
 {
     u8 i = 0;
-    u8 rval;
-    u8 value;
+    u8 rval, value;
     if (sSlotMachine->netCoinLoss >= 300)
         i = 4;
     else if (sSlotMachine->netCoinLoss >= 250)
@@ -1911,8 +1909,7 @@ static bool8 IsFinalTask_RunAwardPayoutActions(void)
 {
     if (FindTaskIdByFunc(RunAwardPayoutActions) == TAIL_SENTINEL)
         return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 static void RunAwardPayoutActions(u8 taskId)
@@ -1945,7 +1942,7 @@ static bool8 AwardPayoutAction_GivePayoutToPlayer(struct Task *task)
         if (sSlotMachine->coins < MAX_COINS)
             sSlotMachine->coins++;
         task->data[1] = 8;
-        if (gMain.heldKeys & A_BUTTON)
+        if (JOY_HELD(A_BUTTON))
             task->data[1] = 4;
     }
     if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))
@@ -2000,7 +1997,7 @@ static u8 GetTag(u8 reel, s16 offset)
 
 static u8 GetNearbyReelTimeTag(s16 n)
 {
-    s16 newPosition = (sSlotMachine->reeltimePosition + n) % 6;
+    s16 newPosition = (sSlotMachine->reelTimePosition + n) % 6;
     if (newPosition < 0)
         newPosition += 6;
     return sReelTimeTags[newPosition];
@@ -2026,22 +2023,22 @@ s16 AdvanceSlotReelToNextTag(u8 reelIndex, s16 value)
     return offset;
 }
 
-static void AdvanceReeltimeReel(s16 value)
+static void AdvanceReelTimeReel(s16 value)
 {
-    sSlotMachine->reeltimePixelOffset += value;
-    sSlotMachine->reeltimePixelOffset %= 120;
-    sSlotMachine->reeltimePosition = 6 - sSlotMachine->reeltimePixelOffset / 20;
+    sSlotMachine->reelTimePixelOffset += value;
+    sSlotMachine->reelTimePixelOffset %= 120;
+    sSlotMachine->reelTimePosition = 6 - sSlotMachine->reelTimePixelOffset / 20;
 }
 
-s16 AdvanceReeltimeReelToNextTag(s16 value)
+s16 AdvanceReelTimeReelToNextTag(s16 value)
 {
-    s16 offset = sSlotMachine->reeltimePixelOffset % 20;
+    s16 offset = sSlotMachine->reelTimePixelOffset % 20;
     if (offset != 0)
     {
         if (offset < value)
             value = offset;
-        AdvanceReeltimeReel(value);
-        offset = sSlotMachine->reeltimePixelOffset % 20;
+        AdvanceReelTimeReel(value);
+        offset = sSlotMachine->reelTimePixelOffset % 20;
     }
     return offset;
 }
@@ -3080,8 +3077,8 @@ static void Task_ReelTime(u8 taskId)
 static void ReelTime_Init(struct Task *task)
 {
     sSlotMachine->reelTimeSpinsLeft = 0;
-    sSlotMachine->reeltimePixelOffset = 0;
-    sSlotMachine->reeltimePosition = 0;
+    sSlotMachine->reelTimePixelOffset = 0;
+    sSlotMachine->reelTimePosition = 0;
     task->tState++;
     task->data[1] = 0;
     task->data[2] = 30;
@@ -3096,9 +3093,9 @@ static void ReelTime_Init(struct Task *task)
     CreateReelTimeNumberSprites();
     CreateReelTimeShadowSprites();
     CreateReelTimeNumberGapSprite();
-    GetReeltimeDraw();
+    GetReelTimeDraw();
     StopMapMusic();
-    PlayNewMapMusic(MUS_BD_TIME);
+    PlayNewMapMusic(MUS_ROULETTE);
 }
 
 static void ReelTime_WindowEnter(struct Task *task)
@@ -3119,12 +3116,12 @@ static void ReelTime_WindowEnter(struct Task *task)
         task->tState++;
         task->data[3] = 0;
     }
-    AdvanceReeltimeReel(task->data[4] >> 8);
+    AdvanceReelTimeReel(task->data[4] >> 8);
 }
 
 static void ReelTime_WaitStartPikachu(struct Task *task)
 {
-    AdvanceReeltimeReel(task->data[4] >> 8);
+    AdvanceReelTimeReel(task->data[4] >> 8);
     if (++task->data[5] >= 60)
     {
         task->tState++;
@@ -3144,7 +3141,7 @@ static void ReelTime_PikachuSpeedUp1(struct Task *task)
     memcpy(reelTimeBoltDelays, sReelTimeBoltDelays, sizeof(sReelTimeBoltDelays));
     memcpy(pikachuAuraFlashDelays, sPikachuAuraFlashDelays, sizeof(sPikachuAuraFlashDelays));
 
-    AdvanceReeltimeReel(task->data[4] >> 8);
+    AdvanceReelTimeReel(task->data[4] >> 8);
     // gradually slow down the reel
     task->data[4] -= 4;
     i = 4 - (task->data[4] >> 8);
@@ -3162,7 +3159,7 @@ static void ReelTime_PikachuSpeedUp1(struct Task *task)
 
 static void ReelTime_PikachuSpeedUp2(struct Task *task)
 {
-    AdvanceReeltimeReel(task->data[4] >> 8);
+    AdvanceReelTimeReel(task->data[4] >> 8);
     if (++task->data[5] >= 80)
     {
         task->tState++;
@@ -3174,7 +3171,7 @@ static void ReelTime_PikachuSpeedUp2(struct Task *task)
 
 static void ReelTime_WaitReel(struct Task *task)
 {
-    AdvanceReeltimeReel(task->data[4] >> 8);
+    AdvanceReelTimeReel(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x80;
     if (++task->data[5] >= 80)
     {
@@ -3185,7 +3182,7 @@ static void ReelTime_WaitReel(struct Task *task)
 
 static void ReelTime_CheckExplode(struct Task *task)
 {
-    AdvanceReeltimeReel(task->data[4] >> 8);
+    AdvanceReelTimeReel(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x40;
     if (++task->data[5] >= 40)
     {
@@ -3209,19 +3206,19 @@ static void ReelTime_CheckExplode(struct Task *task)
 
 static void ReelTime_LandOnOutcome(struct Task *task)
 {
-    s16 reeltimePixelOffset = sSlotMachine->reeltimePixelOffset % 20;
-    if (reeltimePixelOffset)
+    s16 reelTimePixelOffset = sSlotMachine->reelTimePixelOffset % 20;
+    if (reelTimePixelOffset)
     {
-        reeltimePixelOffset = AdvanceReeltimeReelToNextTag(task->data[4] >> 8);
+        reelTimePixelOffset = AdvanceReelTimeReelToNextTag(task->data[4] >> 8);
         task->data[4] = (u8)task->data[4] + 0x40;
     }
     else if (GetNearbyReelTimeTag(1) != sSlotMachine->reelTimeDraw)
     {
-        AdvanceReeltimeReel(task->data[4] >> 8);
-        reeltimePixelOffset = sSlotMachine->reeltimePixelOffset % 20;
+        AdvanceReelTimeReel(task->data[4] >> 8);
+        reelTimePixelOffset = sSlotMachine->reelTimePixelOffset % 20;
         task->data[4] = (u8)task->data[4] + 0x40;
     }
-    if (reeltimePixelOffset == 0 && GetNearbyReelTimeTag(1) == sSlotMachine->reelTimeDraw)
+    if (reelTimePixelOffset == 0 && GetNearbyReelTimeTag(1) == sSlotMachine->reelTimeDraw)
     {
         task->data[4] = 0;  // stop moving
         task->tState++;
@@ -3240,7 +3237,7 @@ static void ReelTime_PikachuReact(struct Task *task)
         {
             task->data[4] = 0xa0;
             StartSpriteAnimIfDifferent(&gSprites[sSlotMachine->reelTimePikachuSpriteId], 5);
-            PlayFanfare(MUS_ME_ZANNEN);
+            PlayFanfare(MUS_TOO_BAD);
         }
         else
         {
@@ -3252,7 +3249,7 @@ static void ReelTime_PikachuReact(struct Task *task)
                 ResetPikaPowerBolts();
                 sSlotMachine->pikaPower = 0;
             }
-            PlayFanfare(MUS_ME_B_SMALL);
+            PlayFanfare(MUS_SLOTS_WIN);
         }
     }
 }
@@ -3328,8 +3325,8 @@ static void ReelTime_ExplodeMachine(struct Task *task)
     task->data[4] = 4;
     task->data[5] = 0;
     StopMapMusic();
-    PlayFanfare(MUS_ME_ZANNEN);
-    PlaySE(SE_W153);
+    PlayFanfare(MUS_TOO_BAD);
+    PlaySE(SE_M_EXPLOSION);
 }
 
 static void ReelTime_WaitExplode(struct Task *task)
@@ -3444,7 +3441,7 @@ static void InfoBox_DrawWindow(struct Task *task)
 
 static void InfoBox_AddText(struct Task *task)
 {
-    AddTextPrinterParameterized3(1, 1, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
+    AddTextPrinterParameterized3(1, 1, 2, 5, sColors_ReelTimeHelp, 0, gText_ReelTimeHelp);
     CopyWindowToVram(1, 3);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     task->tState++;
@@ -3774,7 +3771,7 @@ static void CreateReelTimeNumberSprites(void)
 
 static void SpriteCB_ReelTimeNumbers(struct Sprite *sprite)
 {
-    s16 r0 = (u16)(sSlotMachine->reeltimePixelOffset + sprite->data[7]);
+    s16 r0 = (u16)(sSlotMachine->reelTimePixelOffset + sprite->data[7]);
     r0 %= 40;
     sprite->pos1.y = r0 + 59;
     StartSpriteAnimIfDifferent(sprite, GetNearbyReelTimeTag(r0 / 20));
@@ -4830,7 +4827,7 @@ static const u8 sLuckyFlagProbabilities_NotTop3[][6] = {
     {40, 40, 35, 35, 40, 40}
 };
 
-static const u8 sReeltimeProbabilities_UnluckyGame[][17] = {
+static const u8 sReelTimeProbabilities_UnluckyGame[][17] = {
     {243, 243, 243,  80,  80,  80,  80,  40,  40,  40,  40,  40,  40,   5,   5,   5,   5},
     {  5,   5,   5, 150, 150, 150, 150, 130, 130, 130, 130, 130, 130, 100, 100, 100,   5},
     {  4,   4,   4,  20,  20,  20,  20,  80,  80,  80,  80,  80,  80, 100, 100, 100,  40},

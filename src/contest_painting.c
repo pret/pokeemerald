@@ -248,7 +248,7 @@ static void HoldContestPainting(void)
             gContestPaintingFadeCounter--;
         break;
     case 1:
-        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
         {
             gContestPaintingState++;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -501,20 +501,20 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 arg1)
 
 static void InitPaintingMonOamData(u8 contestWinnerId)
 {
-    //Some hacks just to get the asm to match
-#ifndef NONMATCHING
-    asm(""::"r"(contestWinnerId));
-#endif
 
     gMain.oamBuffer[0] = sContestPaintingMonOamData;
     gMain.oamBuffer[0].tileNum = 0;
 
-#ifndef NONMATCHING
-    if (contestWinnerId) contestWinnerId = gMain.oamBuffer[0].tileNum;
-#endif
-
-    gMain.oamBuffer[0].x = 88;
-    gMain.oamBuffer[0].y = 24;
+    if (contestWinnerId > 1)
+    {
+        gMain.oamBuffer[0].x = 88;
+        gMain.oamBuffer[0].y = 24;
+    }
+    else
+    {
+        gMain.oamBuffer[0].x = 88; // Duplicated Code
+        gMain.oamBuffer[0].y = 24;
+    }
 }
 
 static u8 GetImageEffectForContestWinner(u8 contestWinnerId)
