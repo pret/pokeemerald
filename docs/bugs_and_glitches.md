@@ -42,7 +42,7 @@ And edit `AgbMain`:
 	...
 ```
 
-**Altenate Fix:**Edit the following function in [src/title_screen.c](https://github.com/pret/pokeemerald/blob/master/src/title_screen.c):
+**Altenate Fix:** Edit the following function in [src/title_screen.c](https://github.com/pret/pokeemerald/blob/master/src/title_screen.c):
 
 ```diff
 void CB2_InitTitleScreen(void)
@@ -52,7 +52,7 @@ void CB2_InitTitleScreen(void)
     default:
     case 0:
         SetVBlankCallback(NULL);
-	+	StartTimer1();
++		StartTimer1();
 	    SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
