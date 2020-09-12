@@ -42,6 +42,24 @@ And edit `AgbMain`:
 	...
 ```
 
+**Altenate Fix:**Edit the following function in [src/title_screen.c](https://github.com/pret/pokeemerald/blob/master/src/title_screen.c):
+
+```diff
+void CB2_InitTitleScreen(void)
+{
+    switch (gMain.state)
+    {
+    default:
+    case 0:
+        SetVBlankCallback(NULL);
+	+	StartTimer1();
+	    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+	...
+```
+That matches the code of FR/LG and does what GF originally wanted to do.
+
 ## Scrolling through items in the bag causes the image to flicker
 
 **Fix:** Add the following function to [src/item_menu_icons.c](https://github.com/pret/pokeemerald/blob/master/src/item_menu_icons.c):
