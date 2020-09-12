@@ -42,7 +42,7 @@ And edit `AgbMain`:
 	...
 ```
 
-**Altenate Fix:** Edit the following function in [src/title_screen.c](https://github.com/pret/pokeemerald/blob/master/src/title_screen.c):
+**Alternate Fix:** Edit the following function in [src/title_screen.c](https://github.com/pret/pokeemerald/blob/master/src/title_screen.c):
 
 ```diff
 void CB2_InitTitleScreen(void)
