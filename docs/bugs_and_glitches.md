@@ -52,11 +52,11 @@ void CB2_InitTitleScreen(void)
     default:
     case 0:
         SetVBlankCallback(NULL);
-+		StartTimer1();
-	    SetGpuReg(REG_OFFSET_BLDCNT, 0);
++				StartTimer1();
+				SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
-	...
+				...
 ```
 That matches the code of FR/LG and does what GF originally wanted to do.
 
