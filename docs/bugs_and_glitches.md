@@ -42,6 +42,8 @@ And edit `AgbMain`:
 	...
 ```
 
+This restores the code of Ruby/Sapphire.
+
 **Alternate Fix:** Edit the following function in [src/title_screen.c](https://github.com/pret/pokeemerald/blob/master/src/title_screen.c):
 
 ```diff
