@@ -58,7 +58,7 @@ void CB2_InitTitleScreen(void)
 		SetGpuReg(REG_OFFSET_BLDY, 0);
 		...
 ```
-That matches the code of FR/LG and does what GF originally wanted to do.
+This matches with the code of FR/LG and does what GF originally wanted to do.
 
 ## Scrolling through items in the bag causes the image to flicker
 
