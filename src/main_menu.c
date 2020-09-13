@@ -2242,7 +2242,7 @@ static void NewGameBirchSpeech_ClearGenderWindow(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+        CopyWindowToVram(windowId, 3);
 }
 
 static void NewGameBirchSpeech_ClearWindow(u8 windowId)
@@ -2280,7 +2280,7 @@ static void NewGameBirchSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+        CopyWindowToVram(windowId, 3);
 }
 
 static void NewGameBirchSpeech_CreateDialogueWindowBorder(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f)

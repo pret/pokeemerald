@@ -373,7 +373,7 @@ static void CreatePCMultichoice(void)
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, numChoices, 0);
-    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+    CopyWindowToVram(windowId, 3);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
 }
 
@@ -533,7 +533,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         }
 
         InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, count, count - 1);
-        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+        CopyWindowToVram(windowId, 3);
         InitMultichoiceCheckWrap(FALSE, count, windowId, MULTI_SSTIDAL_LILYCOVE);
     }
 }
@@ -698,7 +698,7 @@ static void CreateStartMenuForPokenavTutorial(void)
     AddTextPrinterParameterized(windowId, 1, gText_MenuOptionExit, 8, 121, TEXT_SPEED_FF, NULL);
     sub_81983AC(windowId, 1, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
     InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
-    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+    CopyWindowToVram(windowId, 3);
 }
 
 #define tWindowId       data[6]

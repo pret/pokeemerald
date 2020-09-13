@@ -3039,7 +3039,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
     if (copyToVram)
     {
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+        CopyWindowToVram(windowId, 3);
     }
 }
 

@@ -86,7 +86,7 @@ Init: @ 8000204
 	ldr sp, sp_irq
 	mov r0, #PSR_SYS_MODE
 	msr cpsr_cf, r0
-	ldr sp, sp_usr
+	ldr sp, sp_sys
 	ldr r1, =INTR_VECTOR
 	adr r0, IntrMain
 	str r0, [r1]
@@ -96,7 +96,7 @@ Init: @ 8000204
 	b Init
 
 	.align 2, 0
-sp_usr: .word IWRAM_END - 0x1c0
+sp_sys: .word IWRAM_END - 0x1c0
 sp_irq: .word IWRAM_END - 0x60
 
 	.pool

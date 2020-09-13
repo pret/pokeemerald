@@ -4344,7 +4344,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId;
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+    CopyWindowToVram(windowId, 3);
     AddTextPrinter(&textPrinter, 0, NULL);
     textPrinter.letterSpacing = 0;
 

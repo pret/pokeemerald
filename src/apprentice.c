@@ -705,7 +705,7 @@ static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height)
 
     windowId = AddWindow(&winTemplate);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, WINDOW_COPY_ALL);
+    CopyWindowToVram(windowId, 3);
     return windowId;
 }
 
