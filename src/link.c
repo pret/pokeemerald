@@ -445,27 +445,27 @@ static void TestBlockTransfer(u8 nothing, u8 is, u8 used)
 
 static void LinkTestProcessKeyInput(void)
 {
-    if (JOY_NEW(A_BUTTON))
+    if (gMain.newKeys & A_BUTTON)
     {
         gShouldAdvanceLinkState = 1;
     }
-    if (JOY_HELD(B_BUTTON))
+    if (gMain.heldKeys & B_BUTTON)
     {
         InitBlockSend(gHeap + 0x4000, 0x00002004);
     }
-    if (JOY_NEW(L_BUTTON))
+    if (gMain.newKeys & L_BUTTON)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
     }
-    if (JOY_NEW(START_BUTTON))
+    if (gMain.newKeys & START_BUTTON)
     {
         SetSuppressLinkErrorMessage(TRUE);
     }
-    if (JOY_NEW(R_BUTTON))
+    if (gMain.newKeys & R_BUTTON)
     {
         TrySavingData(SAVE_LINK);
     }
-    if (JOY_NEW(SELECT_BUTTON))
+    if (gMain.newKeys & SELECT_BUTTON)
     {
         SetCloseLinkCallback();
     }
@@ -1754,7 +1754,7 @@ static void CB2_PrintErrorMessage(void)
     {
         if (gWirelessCommType == 1)
         {
-            if (JOY_NEW(A_BUTTON))
+            if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
@@ -1764,7 +1764,7 @@ static void CB2_PrintErrorMessage(void)
         }
         else if (gWirelessCommType == 2)
         {
-            if (JOY_NEW(A_BUTTON))
+            if (gMain.newKeys & A_BUTTON)
             {
                 rfu_REQ_stopMode();
                 rfu_waitREQComplete();

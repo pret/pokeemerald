@@ -430,7 +430,7 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
 // code
 void OpenPokeblockCase(u8 caseId, void (*callback)(void))
 {
-    sPokeblockMenu = Alloc(sizeof(struct PokeblockMenuStruct));
+    sPokeblockMenu = Alloc(sizeof(*sPokeblockMenu));
     sPokeblockMenu->caseId = caseId;
     sPokeblockMenu->callbackOnUse = NULL;
     sPokeblockMenu->unkTaskId = 0xFF;
@@ -984,7 +984,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
 
     if (!gPaletteFade.active && MenuHelpers_CallLinkSomething() != TRUE)
     {
-        if (JOY_NEW(SELECT_BUTTON))
+        if (gMain.newKeys & SELECT_BUTTON)
         {
             ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
             if (sSavedPokeblockData.lastItemPage + sSavedPokeblockData.lastItemPos != sPokeblockMenu->itemsNo - 1)
@@ -1035,7 +1035,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
     if (MenuHelpers_CallLinkSomething() == TRUE)
         return;
 
-    if (JOY_NEW(SELECT_BUTTON))
+    if (gMain.newKeys & SELECT_BUTTON)
     {
         PlaySE(SE_SELECT);
         ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
@@ -1069,7 +1069,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
             break;
         case LIST_CANCEL: // same id as STOW CASE field
             PlaySE(SE_SELECT);
-            if (JOY_NEW(A_BUTTON))
+            if (gMain.newKeys & A_BUTTON)
                 HandlePokeblocksSwap(taskId, FALSE);
             else
                 HandlePokeblocksSwap(taskId, TRUE);
@@ -1193,7 +1193,7 @@ static void TossPokeblockChoice_Yes(u8 taskId)
 
 static void HandleErasePokeblock(u8 taskId)
 {
-    if (JOY_NEW(A_BUTTON | B_BUTTON))
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         s16 *data;
         u16 *lastPage, *lastPos;

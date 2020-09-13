@@ -356,7 +356,7 @@ static void SetUpDataStruct(void)
 {
     if (sHillData == NULL)
     {
-        sHillData = AllocZeroed(sizeof(struct TrHillStruct2));
+        sHillData = AllocZeroed(sizeof(*sHillData));
         sHillData->floorId = gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
         CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag) + 4 * sizeof(struct TrHillFloor));
         nullsub_2();
@@ -672,18 +672,70 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u16 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+// Functionally equivalent.
+#ifdef NONMATCHING
+static u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 {
-    u8 var0;
-    u16 var1;
-    u16 var2;
+    u32 var0, var1, var2, var3;
 
-    var0 = (sHillData->floors[floorId].display.unk3A0[arg2] >> (15 - bit) & 1);
-    var1 = sHillData->floors[floorId].display.data[arg3 * arg2 + bit] + 0x200;
+    var0 = (sHillData->floors[floorId].display.unk3A0[arg2] >> (15 - bit)) & 1;
+    var1 = sHillData->floors[floorId].display.data[arg2 * arg3 + bit];
+    var3 = 0x200;
     var2 = 0x3000;
 
-    return (((var0 << 10) & 0xc00) | var2) | (var1 & 0x3ff);
+    return ((var0 << 10) | var2) | (var1 | var3);
 }
+#else
+NAKED
+static u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+{
+    asm_unified("\n\
+    push {r4,r5,lr}\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	ldr r4, =sHillData\n\
+	ldr r4, [r4]\n\
+	mov r12, r4\n\
+	lsls r4, r2, 1\n\
+	lsls r5, r0, 4\n\
+	subs r5, r0\n\
+	lsls r5, 3\n\
+	subs r5, r0\n\
+	lsls r5, 3\n\
+	adds r4, r5\n\
+	movs r0, 0xE8\n\
+	lsls r0, 2\n\
+	add r0, r12\n\
+	adds r0, r4\n\
+	ldrh r0, [r0]\n\
+	movs r4, 0xF\n\
+	subs r4, r1\n\
+	asrs r0, r4\n\
+	movs r4, 0x1\n\
+	ands r0, r4\n\
+	muls r2, r3\n\
+	adds r2, r1\n\
+	adds r2, r5\n\
+	movs r1, 0xA8\n\
+	lsls r1, 2\n\
+	add r1, r12\n\
+	adds r1, r2\n\
+	ldrb r1, [r1]\n\
+	movs r2, 0x80\n\
+	lsls r2, 2\n\
+	adds r3, r2, 0\n\
+	movs r2, 0xC0\n\
+	lsls r2, 6\n\
+	lsls r0, 10\n\
+	orrs r0, r2\n\
+	orrs r1, r3\n\
+	orrs r0, r1\n\
+	pop {r4,r5}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.pool");
+}
+#endif // NONMATCHING
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
 {

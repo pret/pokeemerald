@@ -788,8 +788,8 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
-    s16 x;
-    s16 y;
+    u16 x;
+    u16 y;
 
     PlayerGetDestCoords(&x, &y);
     if (mapGroup == 0xFF && mapNum == 0xFF)
@@ -1325,9 +1325,9 @@ bool8 ScrCmd_closemessage(struct ScriptContext *ctx)
 
 static bool8 WaitForAorBPress(void)
 {
-    if (JOY_NEW(A_BUTTON))
+    if (gMain.newKeys & A_BUTTON)
         return TRUE;
-    if (JOY_NEW(B_BUTTON))
+    if (gMain.newKeys & B_BUTTON)
         return TRUE;
     return FALSE;
 }

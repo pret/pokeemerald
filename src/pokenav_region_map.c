@@ -219,7 +219,7 @@ static u32 HandleRegionMapInput(struct Pokenav5Struct *state)
 
 static u32 HandleRegionMapInputZoomDisabled(struct Pokenav5Struct *state)
 {
-    if (JOY_NEW(B_BUTTON))
+    if (gMain.newKeys & B_BUTTON)
     {
         state->callback = GetExitRegionMapMenuId;
         return POKENAV_MAP_FUNC_EXIT;

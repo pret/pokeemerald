@@ -999,6 +999,8 @@ void ResetLinkContestBoolean(void)
 
 static void SetupContestGpuRegs(void)
 {
+    u16 savedIme;
+
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1493,7 +1495,7 @@ static void Task_DisplayAppealNumberText(u8 taskId)
 static void Task_TryShowMoveSelectScreen(u8 taskId)
 {
     // Wait for button press to show move select screen
-    if ((JOY_NEW(A_BUTTON)) || (gMain.newKeys == B_BUTTON))
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
@@ -1559,7 +1561,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
             numMoves++;
     }
 
-    if (JOY_NEW(A_BUTTON))
+    if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].func = Task_SelectedMove;
@@ -3408,7 +3410,8 @@ static void GetAllChosenMoves(void)
 
 static void RankContestants(void)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
     s16 arr[CONTESTANT_COUNT];
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -3483,7 +3486,8 @@ static bool8 ContestantCanUseTurn(u8 contestant)
 {
     if (eContestantStatus[contestant].numTurnsSkipped != 0 || eContestantStatus[contestant].noMoreTurns)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 static void SetContestantStatusesForNextRound(void)
@@ -3537,7 +3541,8 @@ bool8 Contest_IsMonsTurnDisabled(u8 contestant)
 {
     if (eContestantStatus[contestant].numTurnsSkipped != 0 || eContestantStatus[contestant].noMoreTurns)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static void CalculateTotalPointsForContestant(u8 contestant)
@@ -4137,12 +4142,12 @@ static u8 CreateContestantBoxBlinkSprites(u8 contestant)
     CpuFill32(0, gContestResources->boxBlinkTiles2 + 0x500, 0x300);
 
     RequestDma3Copy(gContestResources->boxBlinkTiles1,
-                    (u8 *)(OBJ_VRAM0 + gSprites[spriteId1].oam.tileNum * 32),
+                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId1].oam.tileNum * 32),
                     0x800,
                     1);
 
     RequestDma3Copy(gContestResources->boxBlinkTiles2,
-                    (u8 *)(OBJ_VRAM0 + gSprites[spriteId2].oam.tileNum * 32),
+                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId2].oam.tileNum * 32),
                     0x800,
                     1);
 
@@ -4480,14 +4485,17 @@ static void CalculateAppealMoveImpact(u8 contestant)
             eContestantStatus[contestant].comboAppealBonus = eContestantStatus[contestant].baseAppeal * eContestantStatus[contestant].completedCombo;
             eContestantStatus[contestant].completedComboFlag = TRUE; // Redundant with completedCombo, used by AI
         }
-        else if (gContestMoves[eContestantStatus[contestant].currMove].comboStarterId != 0)
-        {
-            eContestantStatus[contestant].hasJudgesAttention = TRUE;
-            eContestantStatus[contestant].usedComboMove = TRUE;
-        }
         else
         {
-            eContestantStatus[contestant].hasJudgesAttention = FALSE;
+            if (gContestMoves[eContestantStatus[contestant].currMove].comboStarterId != 0)
+            {
+                eContestantStatus[contestant].hasJudgesAttention = TRUE;
+                eContestantStatus[contestant].usedComboMove = TRUE;
+            }
+            else
+            {
+                eContestantStatus[contestant].hasJudgesAttention = FALSE;
+            }
         }
     }
     if (eContestantStatus[contestant].repeatedMove)
@@ -4728,8 +4736,8 @@ static void UpdateApplauseMeter(void)
             src = &gContestApplauseMeterGfx[64];
         else
             src = gContestApplauseMeterGfx;
-        CpuCopy32(src, (void *)(OBJ_VRAM0 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
-        CpuCopy32(src + 32, (void *)(OBJ_VRAM0 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
+        CpuCopy32(src, (void *)(VRAM + 0x10000 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
+        CpuCopy32(src + 32, (void *)(VRAM + 0x10000 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
 
         if (eContest.applauseLevel > 4)
             StartApplauseOverflowAnimation();
@@ -5411,7 +5419,7 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
     printerTemplate.currentY = 1;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.style = 0;
+    printerTemplate.unk = 0;
     printerTemplate.fgColor = 15;
     printerTemplate.bgColor = 0;
     printerTemplate.shadowColor = 8;
@@ -5434,7 +5442,7 @@ void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s3
     printerTemplate.currentY = y;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.style = 0;
+    printerTemplate.unk = 0;
     printerTemplate.fgColor = 15;
     printerTemplate.bgColor = 0;
     printerTemplate.shadowColor = 8;
@@ -5458,7 +5466,7 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     printerTemplate.currentY = 1;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.style = 0;
+    printerTemplate.unk = 0;
     printerTemplate.fgColor = 1;
     printerTemplate.bgColor = 0;
     printerTemplate.shadowColor = 8;

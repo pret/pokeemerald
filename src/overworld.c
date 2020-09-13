@@ -2454,19 +2454,20 @@ static void UpdateHeldKeyCode(u16 key)
 
 static u16 KeyInterCB_ReadButtons(u32 key)
 {
-    if (JOY_HELD(DPAD_UP))
+    if (gMain.heldKeys & DPAD_UP)
         return LINK_KEY_CODE_DPAD_UP;
-    if (JOY_HELD(DPAD_DOWN))
+    else if (gMain.heldKeys & DPAD_DOWN)
         return LINK_KEY_CODE_DPAD_DOWN;
-    if (JOY_HELD(DPAD_LEFT))
+    else if (gMain.heldKeys & DPAD_LEFT)
         return LINK_KEY_CODE_DPAD_LEFT;
-    if (JOY_HELD(DPAD_RIGHT))
+    else if (gMain.heldKeys & DPAD_RIGHT)
         return LINK_KEY_CODE_DPAD_RIGHT;
-    if (JOY_NEW(START_BUTTON))
+    else if (gMain.newKeys & START_BUTTON)
         return LINK_KEY_CODE_START_BUTTON;
-    if (JOY_NEW(A_BUTTON))
+    else if (gMain.newKeys & A_BUTTON)
         return LINK_KEY_CODE_A_BUTTON;
-    return LINK_KEY_CODE_EMPTY;
+    else
+        return LINK_KEY_CODE_EMPTY;
 }
 
 static u16 GetDirectionForDpadKey(u16 a1)
@@ -2573,7 +2574,7 @@ static u16 sub_8087170(u32 keyOrPlayerId)
 {
     if (sPlayerTradingStates[keyOrPlayerId] == PLAYER_TRADING_STATE_UNK_2)
     {
-        if (JOY_NEW(B_BUTTON))
+        if (gMain.newKeys & B_BUTTON)
         {
             SetKeyInterceptCallback(KeyInterCB_DoNothingAndKeepAlive);
             return LINK_KEY_CODE_UNK_7;
@@ -3188,7 +3189,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
     sprite->oam.priority = ZCoordToPriority(objEvent->previousElevation);
 
-    if (linkPlayerObjEvent->movementMode == MOVEMENT_MODE_FREE)
+    if (!linkPlayerObjEvent->movementMode != MOVEMENT_MODE_FREE)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(objEvent->range.as_byte));
     else
         StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(objEvent->range.as_byte));

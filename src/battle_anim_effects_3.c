@@ -5003,11 +5003,11 @@ void AnimTask_GetReturnPowerLevel(u8 taskId)
 void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
     u8 spriteId, spriteId2;
-    u32 personality;
-    u32 otId;
+    int personality;
+    int otId;
     u16 species;
     u8 subpriority;
-    bool8 isBackPic;
+    u8 isBackPic;
     s16 x;
 
     switch (gTasks[taskId].data[0])
@@ -5035,34 +5035,37 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             otId = gContestResources->moveAnim->otId;
             species = gContestResources->moveAnim->species;
             subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
-            isBackPic = FALSE;
+            isBackPic = 0;
             x = -32;
-        }
-        else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-        {
-            personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-            otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-            if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
-                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-            else
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
-
-            subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
-            isBackPic = FALSE;
-            x = 272;
         }
         else
         {
-            personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-            otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-            if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
-                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-            else
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
+            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+            {
+                personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+                if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+                    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+                else
+                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
 
-            subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
-            isBackPic = TRUE;
-            x = -32;
+                subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
+                isBackPic = 0;
+                x = 272;
+            }
+            else
+            {
+                personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+                if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+                    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+                else
+                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
+
+                subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
+                isBackPic = 1;
+                x = -32;
+            }
         }
 
         spriteId2 = sub_80A8394(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, 0);
@@ -5089,7 +5092,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 if (x < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[7] = -1;
+                    gBattleAnimArgs[7] = 0xFFFF;
                 }
             }
             else
@@ -5097,7 +5100,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 if (x > GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[7] = -1;
+                    gBattleAnimArgs[7] = 0xFFFF;
                 }
             }
         }
@@ -5135,7 +5138,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 gSprites[spriteId].pos2.x = 0;
         }
 
-        gTasks[taskId].data[1] &= 0xFF;
+        gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1];
         if (gSprites[spriteId].pos2.x == 0)
             DestroyAnimVisualTask(taskId);
         break;

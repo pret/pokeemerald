@@ -394,7 +394,7 @@ bool8 sub_811FBA4(void)
 {
     u16 i;
 
-    if (JOY_NEW(DPAD_UP))
+    if (gMain.newKeys & DPAD_UP)
     {
         s8 pos;
         PlaySE(SE_SELECT);
@@ -404,7 +404,7 @@ bool8 sub_811FBA4(void)
         return TRUE;
     }
 
-    if (JOY_NEW(DPAD_DOWN))
+    if (gMain.newKeys & DPAD_DOWN)
     {
         s8 pos;
         PlaySE(SE_SELECT);
@@ -414,7 +414,7 @@ bool8 sub_811FBA4(void)
         return TRUE;
     }
 
-    if (JOY_NEW(A_BUTTON))
+    if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
 
@@ -433,7 +433,7 @@ bool8 sub_811FBA4(void)
         return TRUE;
     }
 
-    if (JOY_NEW(B_BUTTON))
+    if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
         return FALSE;

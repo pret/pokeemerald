@@ -162,21 +162,21 @@ static u32 sub_81CFA68(struct PokenavSub9 *structPtr)
 
 static u32 sub_81CFA88(struct PokenavSub9 *structPtr)
 {
-    if (JOY_REPEAT(DPAD_UP))
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
         return 1;
-    if (JOY_REPEAT(DPAD_DOWN))
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         return 2;
-    if (JOY_NEW(DPAD_LEFT))
+    if (gMain.newKeys & DPAD_LEFT)
         return 3;
-    if (JOY_NEW(DPAD_RIGHT))
+    if (gMain.newKeys & DPAD_RIGHT)
         return 4;
-    if (JOY_NEW(B_BUTTON))
+    if (gMain.newKeys & B_BUTTON)
     {
         structPtr->unk18 = 0;
         structPtr->unk0 = sub_81CFB08;
         return 5;
     }
-    if (JOY_NEW(A_BUTTON))
+    if (gMain.newKeys & A_BUTTON)
     {
         structPtr->unk1C->unk2 = GetSelectedMatchCall();
         structPtr->unk18 = 1;

@@ -21,7 +21,7 @@ static u16 gLastTextFgColor;
 static u16 gLastTextShadowColor;
 
 const struct FontInfo *gFonts;
-bool8 gUnknown_03002F84;
+u8 gUnknown_03002F84;
 struct Struct_03002F90 gUnknown_03002F90;
 TextFlags gTextFlags;
 
@@ -154,7 +154,7 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
     printerTemplate.currentY = y;
     printerTemplate.letterSpacing = gFonts[fontId].letterSpacing;
     printerTemplate.lineSpacing = gFonts[fontId].lineSpacing;
-    printerTemplate.style = gFonts[fontId].style;
+    printerTemplate.unk = gFonts[fontId].unk;
     printerTemplate.fgColor = gFonts[fontId].fgColor;
     printerTemplate.bgColor = gFonts[fontId].bgColor;
     printerTemplate.shadowColor = gFonts[fontId].shadowColor;
@@ -205,7 +205,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
             CopyWindowToVram(gTempTextPrinter.printerTemplate.windowId, 2);
         gTextPrinters[printerTemplate->windowId].active = 0;
     }
-    gUnknown_03002F84 = FALSE;
+    gUnknown_03002F84 = 0;
     return TRUE;
 }
 
@@ -213,7 +213,7 @@ void RunTextPrinters(void)
 {
     int i;
 
-    if (!gUnknown_03002F84)
+    if (gUnknown_03002F84 == 0)
     {
         for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
         {
@@ -451,52 +451,54 @@ u8 GetLastTextColor(u8 colorType)
 {
     switch (colorType)
     {
-    case COLOR_FOREGROUND:
+    case 0:
         return gLastTextFgColor;
-    case COLOR_BACKGROUND:
+    case 2:
         return gLastTextBgColor;
-    case COLOR_SHADOW:
+    case 1:
         return gLastTextShadowColor;
     default:
         return 0;
     }
 }
 
-#define GLYPH_COPY(fromY_, toY_, fromX_, toX_, unk)                                                               \
-    {                                                                                                             \
-        u32 i, j, *ptr, toY, fromX, toX, r5, bits;                                                                \
-        u8 *dst;                                                                                                  \
-        j = fromX_;                                                                                               \
-        i = fromY_;                                                                                               \
-        ptr = unk;                                                                                                \
-        toX = toX_;                                                                                               \
-        toY = toY_;                                                                                               \
-        fromX = fromX_;                                                                                           \
-                                                                                                                  \
-        for (; i < toY; i++)                                                                                      \
-        {                                                                                                         \
-            asm("":::"sl"); /* NONMATCHING */                                                                     \
-            r5 = *(ptr++);                                                                                        \
-            for (j = fromX; j < toX; j++)                                                                         \
-            {                                                                                                     \
-                const u32 toOrr = r5 & 0xF;                                                                       \
-                if (toOrr)                                                                                        \
-                {                                                                                                 \
-                    dst = windowTiles + ((j / 8) * 32) + ((j % 8) / 2) + ((i / 8) * widthOffset) + ((i % 8) * 4); \
-                    bits = ((j & 1) * 4);                                                                         \
-                    *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));                                             \
-                }                                                                                                 \
-                r5 >>= 4;                                                                                         \
-            }                                                                                                     \
-        }                                                                                                         \
-    }
+#ifdef NONMATCHING
+
+#define GLYPH_COPY(fromY_, toY_, fromX_, toX_, unk)                                                                 \
+{                                                                                                                   \
+    u32 i, j, *ptr, toY, fromX, toX, r5, toOrr, bits;                                                               \
+    u8 *dst;                                                                                                        \
+                                                                                                                    \
+    j = fromX_;                                                                                                     \
+    i = fromY_;                                                                                                     \
+    ptr = unk;                                                                                                      \
+    toX = toX_;                                                                                                     \
+    toY = toY_;                                                                                                     \
+    fromX = fromX_;                                                                                                 \
+                                                                                                                    \
+    for (; i < toY; i++)                                                                                            \
+    {                                                                                                               \
+        r5 = *(ptr++);                                                                                              \
+        for (j = fromX; j < toX; j++)                                                                               \
+        {                                                                                                           \
+            toOrr = r5 & 0xF;                                                                                       \
+            if (toOrr)                                                                                              \
+            {                                                                                                       \
+                dst = windowTiles + ((j / 8) * 32) + ((j & 7) / 2) + ((i / 8) * widthOffset) + ((i & 7) * 4);       \
+                bits = ((j & 1) << 2);                                                                              \
+                *dst = ((toOrr << bits) | (*dst & (0xF0 >> bits)));                                                 \
+            }                                                                                                       \
+            r5 >>= 4;                                                                                               \
+        }                                                                                                           \
+    }                                                                                                               \
+}
 
 void CopyGlyphToWindow(struct TextPrinter *textPrinter)
 {
     struct Window *win;
     struct WindowTemplate *winTempl;
     struct Struct_03002F90 *unkStruct;
-    u32 currX, currY, widthOffset;
+    u32 currX, widthOffset, currY;
     s32 r4, r0;
     u8 *windowTiles;
 
@@ -504,12 +506,12 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     winTempl = &win->window;
 
     r4 = (winTempl->width * 8) - textPrinter->printerTemplate.currentX;
-    if (r4 > gUnknown_03002F90.width)
-        r4 = gUnknown_03002F90.width;
+    if (r4 > gUnknown_03002F90.unk80)
+        r4 = gUnknown_03002F90.unk80;
 
     r0 = (winTempl->height * 8) - textPrinter->printerTemplate.currentY;
-    if (r0 > gUnknown_03002F90.height)
-        r0 = gUnknown_03002F90.height;
+    if (r0 > gUnknown_03002F90.unk81)
+        r0 = gUnknown_03002F90.unk81;
 
     currX = textPrinter->printerTemplate.currentX;
     currY = textPrinter->printerTemplate.currentY;
@@ -517,9 +519,9 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     windowTiles = win->tileData;
     widthOffset = winTempl->width * 32;
 
-    if (r4 < 9)
+    if (r4 <= 8)
     {
-        if (r0 < 9)
+        if (r0 <= 8)
         {
             GLYPH_COPY(currY, currY + r0, currX, currX + r4, unkStruct->unk0);
         }
@@ -534,9 +536,9 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     }
     else
     {
-        u32 temp;
-        if (r0 < 9)
+        if (r0 <= 8)
         {
+            u32 temp;
             GLYPH_COPY(currY, currY + r0, currX, currX + 8, unkStruct->unk0);
 
             temp = currX + 8;
@@ -544,6 +546,7 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
         }
         else
         {
+            u32 temp;
             GLYPH_COPY(currY, currY + 8, currX, currX + 8, unkStruct->unk0);
 
             temp = currX + 8;
@@ -560,6 +563,711 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
         }
     }
 }
+#else
+NAKED
+void CopyGlyphToWindow(struct TextPrinter *x)
+{
+    asm("push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, #0x8C\n\
+    add r3, r0, #0\n\
+    ldrb r1, [r3, #0x4]\n\
+    lsl r0, r1, #1\n\
+    add r0, r1\n\
+    lsl r0, #2\n\
+    ldr r1, =gWindows\n\
+    add r1, r0, r1\n\
+    add r2, r1, #0\n\
+    ldrb r7, [r1, #0x3]\n\
+    lsl r0, r7, #3\n\
+    ldrb r6, [r3, #0x8]\n\
+    sub r4, r0, r6\n\
+    ldr r5, =gUnknown_03002F90\n\
+    add r0, r5, #0\n\
+    add r0, #0x80\n\
+    ldrb r0, [r0]\n\
+    cmp r4, r0\n\
+    ble _08004DD2\n\
+    add r4, r0, #0\n\
+_08004DD2:\n\
+    ldrb r0, [r1, #0x4]\n\
+    lsl r0, #3\n\
+    ldrb r3, [r3, #0x9]\n\
+    sub r0, r3\n\
+    add r1, r5, #0\n\
+    add r1, #0x81\n\
+    ldrb r1, [r1]\n\
+    cmp r0, r1\n\
+    ble _08004DE6\n\
+    add r0, r1, #0\n\
+_08004DE6:\n\
+    str r6, [sp]\n\
+    mov r8, r3\n\
+    add r3, r5, #0\n\
+    ldr r2, [r2, #0x8]\n\
+    mov r9, r2\n\
+    lsl r1, r7, #5\n\
+    str r1, [sp, #0x4]\n\
+    cmp r4, #0x8\n\
+    ble _08004DFA\n\
+    b _08004F94\n\
+_08004DFA:\n\
+    cmp r0, #0x8\n\
+    bgt _08004E84\n\
+    mov r1, r8\n\
+    str r3, [sp, #0x8]\n\
+    add r2, r6, #0\n\
+    add r2, r4\n\
+    mov r8, r2\n\
+    add r0, r1, r0\n\
+    str r0, [sp, #0xC]\n\
+    str r6, [sp, #0x10]\n\
+    cmp r1, r0\n\
+    bcc _08004E14\n\
+    b _080052AA\n\
+_08004E14:\n\
+    ldr r3, [sp, #0x8]\n\
+    ldm r3!, {r5}\n\
+    str r3, [sp, #0x8]\n\
+    ldr r4, [sp, #0x10]\n\
+    add r0, r1, #0x1\n\
+    mov r10, r0\n\
+    cmp r4, r8\n\
+    bcs _08004E72\n\
+    mov r2, #0x7\n\
+    mov r12, r2\n\
+    lsr r0, r1, #3\n\
+    ldr r2, [sp, #0x4]\n\
+    add r3, r0, #0\n\
+    mul r3, r2\n\
+    add r7, r3, #0\n\
+    mov r3, r12\n\
+    and r1, r3\n\
+    lsl r6, r1, #2\n\
+_08004E38:\n\
+    add r3, r5, #0\n\
+    mov r0, #0xF\n\
+    and r3, r0\n\
+    cmp r3, #0\n\
+    beq _08004E6A\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_08004E6A:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _08004E38\n\
+_08004E72:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0xC]\n\
+    cmp r1, r2\n\
+    bcc _08004E14\n\
+    b _080052AA\n\
+    .pool\n\
+_08004E84:\n\
+    mov r1, r8\n\
+    str r3, [sp, #0x14]\n\
+    ldr r3, [sp]\n\
+    add r3, r4\n\
+    mov r12, r3\n\
+    add r2, r1, #0\n\
+    add r2, #0x8\n\
+    str r2, [sp, #0x18]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x1C]\n\
+    mov r2, r12\n\
+    str r2, [sp, #0x74]\n\
+    ldr r3, [sp, #0x18]\n\
+    str r3, [sp, #0x88]\n\
+    sub r0, #0x8\n\
+    str r0, [sp, #0x80]\n\
+    cmp r1, r3\n\
+    bcs _08004F0E\n\
+_08004EA8:\n\
+    ldr r0, [sp, #0x14]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x14]\n\
+    ldr r4, [sp, #0x1C]\n\
+    add r2, r1, #0x1\n\
+    mov r8, r2\n\
+    cmp r4, r12\n\
+    bcs _08004F06\n\
+    mov r3, #0x7\n\
+    mov r10, r3\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r10\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
+_08004ECC:\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _08004EFE\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r10\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_08004EFE:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r12\n\
+    bcc _08004ECC\n\
+_08004F06:\n\
+    mov r1, r8\n\
+    ldr r2, [sp, #0x18]\n\
+    cmp r1, r2\n\
+    bcc _08004EA8\n\
+_08004F0E:\n\
+    ldr r1, [sp, #0x88]\n\
+    ldr r3, =gUnknown_03002F90 + 0x40\n\
+    str r3, [sp, #0x20]\n\
+    ldr r0, [sp, #0x74]\n\
+    mov r8, r0\n\
+    ldr r2, [sp, #0x80]\n\
+    add r2, r1, r2\n\
+    str r2, [sp, #0x24]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x28]\n\
+    cmp r1, r2\n\
+    bcc _08004F28\n\
+    b _080052AA\n\
+_08004F28:\n\
+    ldr r0, [sp, #0x20]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x20]\n\
+    ldr r4, [sp, #0x28]\n\
+    add r2, r1, #0x1\n\
+    mov r10, r2\n\
+    cmp r4, r8\n\
+    bcs _08004F86\n\
+    mov r3, #0x7\n\
+    mov r12, r3\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
+_08004F4C:\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _08004F7E\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_08004F7E:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _08004F4C\n\
+_08004F86:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x24]\n\
+    cmp r1, r2\n\
+    bcc _08004F28\n\
+    b _080052AA\n\
+    .pool\n\
+_08004F94:\n\
+    cmp r0, #0x8\n\
+    ble _08004F9A\n\
+    b _080050A4\n\
+_08004F9A:\n\
+    mov r1, r8\n\
+    str r3, [sp, #0x2C]\n\
+    ldr r3, [sp]\n\
+    add r3, #0x8\n\
+    mov r12, r3\n\
+    add r0, r8\n\
+    str r0, [sp, #0x30]\n\
+    ldr r0, [sp]\n\
+    str r0, [sp, #0x34]\n\
+    ldr r2, [sp, #0x30]\n\
+    str r2, [sp, #0x78]\n\
+    str r3, [sp, #0x84]\n\
+    sub r4, #0x8\n\
+    str r4, [sp, #0x7C]\n\
+    cmp r8, r2\n\
+    bcs _0800501C\n\
+_08004FBA:\n\
+    ldr r0, [sp, #0x2C]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x2C]\n\
+    ldr r4, [sp, #0x34]\n\
+    add r2, r1, #0x1\n\
+    mov r10, r2\n\
+    cmp r4, r12\n\
+    bcs _08005014\n\
+    lsr r0, r1, #3\n\
+    ldr r2, [sp, #0x4]\n\
+    add r3, r0, #0\n\
+    mul r3, r2\n\
+    add r7, r3, #0\n\
+    mov r3, #0x7\n\
+    and r1, r3\n\
+    lsl r6, r1, #2\n\
+_08004FDA:\n\
+    add r3, r5, #0\n\
+    mov r0, #0xF\n\
+    and r3, r0\n\
+    cmp r3, #0\n\
+    beq _0800500C\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, #0x7\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_0800500C:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r12\n\
+    bcc _08004FDA\n\
+_08005014:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x30]\n\
+    cmp r1, r2\n\
+    bcc _08004FBA\n\
+_0800501C:\n\
+    mov r1, r8\n\
+    ldr r3, =gUnknown_03002F90 + 0x20\n\
+    str r3, [sp, #0x38]\n\
+    ldr r0, [sp, #0x84]\n\
+    ldr r2, [sp, #0x7C]\n\
+    add r0, r2\n\
+    mov r8, r0\n\
+    ldr r3, [sp, #0x78]\n\
+    str r3, [sp, #0x3C]\n\
+    ldr r0, [sp, #0x84]\n\
+    str r0, [sp, #0x40]\n\
+    cmp r1, r3\n\
+    bcc _08005038\n\
+    b _080052AA\n\
+_08005038:\n\
+    ldr r2, [sp, #0x38]\n\
+    ldm r2!, {r5}\n\
+    str r2, [sp, #0x38]\n\
+    ldr r4, [sp, #0x40]\n\
+    add r3, r1, #0x1\n\
+    mov r10, r3\n\
+    cmp r4, r8\n\
+    bcs _08005096\n\
+    mov r0, #0x7\n\
+    mov r12, r0\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
+_0800505C:\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800508E\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_0800508E:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _0800505C\n\
+_08005096:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x3C]\n\
+    cmp r1, r2\n\
+    bcc _08005038\n\
+    b _080052AA\n\
+    .pool\n\
+_080050A4:\n\
+    mov r1, r8\n\
+    str r5, [sp, #0x44]\n\
+    ldr r3, [sp]\n\
+    add r3, #0x8\n\
+    mov r12, r3\n\
+    mov r2, r8\n\
+    add r2, #0x8\n\
+    str r2, [sp, #0x48]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x4C]\n\
+    str r2, [sp, #0x88]\n\
+    sub r0, #0x8\n\
+    str r0, [sp, #0x80]\n\
+    mov r0, r12\n\
+    str r0, [sp, #0x84]\n\
+    sub r4, #0x8\n\
+    str r4, [sp, #0x7C]\n\
+    cmp r8, r2\n\
+    bcs _0800512C\n\
+_080050CA:\n\
+    ldr r2, [sp, #0x44]\n\
+    ldm r2!, {r5}\n\
+    str r2, [sp, #0x44]\n\
+    ldr r4, [sp, #0x4C]\n\
+    add r3, r1, #0x1\n\
+    mov r10, r3\n\
+    cmp r4, r12\n\
+    bcs _08005124\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, #0x7\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
+_080050EA:\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800511C\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, #0x7\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_0800511C:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r12\n\
+    bcc _080050EA\n\
+_08005124:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x48]\n\
+    cmp r1, r2\n\
+    bcc _080050CA\n\
+_0800512C:\n\
+    mov r1, r8\n\
+    ldr r3, =gUnknown_03002F90 + 0x20\n\
+    str r3, [sp, #0x50]\n\
+    ldr r0, [sp, #0x84]\n\
+    ldr r2, [sp, #0x7C]\n\
+    add r0, r2\n\
+    mov r8, r0\n\
+    ldr r3, [sp, #0x88]\n\
+    str r3, [sp, #0x54]\n\
+    ldr r0, [sp, #0x84]\n\
+    str r0, [sp, #0x58]\n\
+    cmp r1, r3\n\
+    bcs _080051AC\n\
+_08005146:\n\
+    ldr r2, [sp, #0x50]\n\
+    ldm r2!, {r5}\n\
+    str r2, [sp, #0x50]\n\
+    ldr r4, [sp, #0x58]\n\
+    add r3, r1, #0x1\n\
+    mov r10, r3\n\
+    cmp r4, r8\n\
+    bcs _080051A4\n\
+    mov r0, #0x7\n\
+    mov r12, r0\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
+_0800516A:\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800519C\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_0800519C:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _0800516A\n\
+_080051A4:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x54]\n\
+    cmp r1, r2\n\
+    bcc _08005146\n\
+_080051AC:\n\
+    ldr r1, [sp, #0x88]\n\
+    ldr r3, =gUnknown_03002F90 + 0x40\n\
+    str r3, [sp, #0x5C]\n\
+    ldr r0, [sp, #0x84]\n\
+    mov r8, r0\n\
+    ldr r2, [sp, #0x80]\n\
+    add r2, r1, r2\n\
+    str r2, [sp, #0x60]\n\
+    ldr r3, [sp]\n\
+    str r3, [sp, #0x64]\n\
+    cmp r1, r2\n\
+    bcs _0800522A\n\
+_080051C4:\n\
+    ldr r0, [sp, #0x5C]\n\
+    ldm r0!, {r5}\n\
+    str r0, [sp, #0x5C]\n\
+    ldr r4, [sp, #0x64]\n\
+    add r2, r1, #0x1\n\
+    mov r10, r2\n\
+    cmp r4, r8\n\
+    bcs _08005222\n\
+    mov r3, #0x7\n\
+    mov r12, r3\n\
+    lsr r0, r1, #3\n\
+    ldr r3, [sp, #0x4]\n\
+    add r2, r0, #0\n\
+    mul r2, r3\n\
+    add r7, r2, #0\n\
+    mov r0, r12\n\
+    and r1, r0\n\
+    lsl r6, r1, #2\n\
+_080051E8:\n\
+    add r3, r5, #0\n\
+    mov r1, #0xF\n\
+    and r3, r1\n\
+    cmp r3, #0\n\
+    beq _0800521A\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_0800521A:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _080051E8\n\
+_08005222:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x60]\n\
+    cmp r1, r2\n\
+    bcc _080051C4\n\
+_0800522A:\n\
+    ldr r4, [sp, #0x84]\n\
+    ldr r1, [sp, #0x88]\n\
+    ldr r3, =gUnknown_03002F90 + 0x60\n\
+    str r3, [sp, #0x68]\n\
+    ldr r0, [sp, #0x7C]\n\
+    add r0, r4\n\
+    mov r8, r0\n\
+    ldr r2, [sp, #0x80]\n\
+    add r2, r1, r2\n\
+    str r2, [sp, #0x6C]\n\
+    str r4, [sp, #0x70]\n\
+    cmp r1, r2\n\
+    bcs _080052AA\n\
+_08005244:\n\
+    ldr r3, [sp, #0x68]\n\
+    ldm r3!, {r5}\n\
+    str r3, [sp, #0x68]\n\
+    ldr r4, [sp, #0x70]\n\
+    add r0, r1, #0x1\n\
+    mov r10, r0\n\
+    cmp r4, r8\n\
+    bcs _080052A2\n\
+    mov r2, #0x7\n\
+    mov r12, r2\n\
+    lsr r0, r1, #3\n\
+    ldr r2, [sp, #0x4]\n\
+    add r3, r0, #0\n\
+    mul r3, r2\n\
+    add r7, r3, #0\n\
+    mov r3, r12\n\
+    and r1, r3\n\
+    lsl r6, r1, #2\n\
+_08005268:\n\
+    add r3, r5, #0\n\
+    mov r0, #0xF\n\
+    and r3, r0\n\
+    cmp r3, #0\n\
+    beq _0800529A\n\
+    lsr r2, r4, #3\n\
+    lsl r2, #5\n\
+    add r2, r9\n\
+    add r0, r4, #0\n\
+    mov r1, r12\n\
+    and r0, r1\n\
+    lsr r0, #1\n\
+    add r2, r0\n\
+    add r2, r7\n\
+    add r2, r6\n\
+    mov r1, #0x1\n\
+    and r1, r4\n\
+    lsl r1, #2\n\
+    lsl r3, r1\n\
+    mov r0, #0xF0\n\
+    asr r0, r1\n\
+    ldrb r1, [r2]\n\
+    and r0, r1\n\
+    orr r3, r0\n\
+    strb r3, [r2]\n\
+_0800529A:\n\
+    lsr r5, #4\n\
+    add r4, #0x1\n\
+    cmp r4, r8\n\
+    bcc _08005268\n\
+_080052A2:\n\
+    mov r1, r10\n\
+    ldr r2, [sp, #0x6C]\n\
+    cmp r1, r2\n\
+    bcc _08005244\n\
+_080052AA:\n\
+    add sp, #0x8C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool");
+}
+#endif // NONMATCHING
+
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 {
     struct Window *window;
@@ -575,7 +1283,7 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
         pixels_data.height = window->window.height << 3;
 
         gUnk = &gUnknown_03002F90;
-        glyphHeight = &gUnk->height;
+        glyphHeight = &gUnk->unk81;
 
         FillBitmapRect4Bit(
             &pixels_data,
@@ -591,7 +1299,7 @@ u16 Font0Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 0;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -603,7 +1311,7 @@ u16 Font1Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 1;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -615,7 +1323,7 @@ u16 Font2Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 2;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -627,7 +1335,7 @@ u16 Font3Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 3;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -639,7 +1347,7 @@ u16 Font4Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 4;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -651,7 +1359,7 @@ u16 Font5Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 5;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -663,7 +1371,7 @@ u16 Font7Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 7;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -675,7 +1383,7 @@ u16 Font8Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (!subStruct->hasGlyphIdBeenSet)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
         subStruct->glyphId = 8;
         subStruct->hasGlyphIdBeenSet = TRUE;
@@ -687,7 +1395,7 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
-    if (gTextFlags.autoScroll == TRUE)
+    if (gTextFlags.autoScroll == 1)
     {
         subStruct->autoScrollDelay = 0;
     }
@@ -703,7 +1411,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
     const u8 *arrowTiles;
 
-    if (!gTextFlags.autoScroll)
+    if (gTextFlags.autoScroll == 0)
     {
         if (subStruct->downArrowDelay != 0)
         {
@@ -779,14 +1487,14 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
     bool8 result = FALSE;
-    if (gTextFlags.autoScroll)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
     else
     {
         TextPrinterDrawDownArrow(textPrinter);
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
             result = TRUE;
             PlaySE(SE_SELECT);
@@ -798,14 +1506,17 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
     bool16 result = FALSE;
-    if (gTextFlags.autoScroll)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
-    else if (JOY_NEW(A_BUTTON | B_BUTTON))
+    else
     {
-        result = TRUE;
-        PlaySE(SE_SELECT);
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        {
+            result = TRUE;
+            PlaySE(SE_SELECT);
+        }
     }
     return result;
 }
@@ -821,7 +1532,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
     else
     {
         FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 0x8, 0x10);
-        if (!drawArrow)
+        if (drawArrow == 0)
         {
             switch (gTextFlags.useAlternateDownArrow)
             {
@@ -862,13 +1573,13 @@ u16 RenderText(struct TextPrinter *textPrinter)
     switch (textPrinter->state)
     {
     case 0:
-        if ((JOY_HELD(A_BUTTON | B_BUTTON)) && subStruct->hasPrintBeenSpedUp)
+        if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && subStruct->hasPrintBeenSpedUp)
             textPrinter->delayCounter = 0;
 
         if (textPrinter->delayCounter && textPrinter->textSpeed)
         {
             textPrinter->delayCounter--;
-            if (gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON)))
+            if (gTextFlags.canABSpeedUpPrint && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
             {
                 subStruct->hasPrintBeenSpedUp = TRUE;
                 textPrinter->delayCounter = 0;
@@ -1013,10 +1724,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
             case EXT_CTRL_CODE_JPN:
-                textPrinter->japanese = TRUE;
+                textPrinter->japanese = 1;
                 return 2;
             case EXT_CTRL_CODE_ENG:
-                textPrinter->japanese = FALSE;
+                textPrinter->japanese = 0;
                 return 2;
             }
             break;
@@ -1034,8 +1745,8 @@ u16 RenderText(struct TextPrinter *textPrinter)
             break;
         case CHAR_KEYPAD_ICON:
             currChar = *textPrinter->printerTemplate.currentChar++;
-            gUnknown_03002F90.width = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
-            textPrinter->printerTemplate.currentX += gUnknown_03002F90.width + textPrinter->printerTemplate.letterSpacing;
+            gUnknown_03002F90.unk80 = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
+            textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing;
             return 0;
         case EOS:
             return 1;
@@ -1069,18 +1780,21 @@ u16 RenderText(struct TextPrinter *textPrinter)
 
         if (textPrinter->minLetterSpacing)
         {
-            textPrinter->printerTemplate.currentX += gUnknown_03002F90.width;
-            width = textPrinter->minLetterSpacing - gUnknown_03002F90.width;
+            textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
+            width = textPrinter->minLetterSpacing - gUnknown_03002F90.unk80;
             if (width > 0)
             {
                 ClearTextSpan(textPrinter, width);
                 textPrinter->printerTemplate.currentX += width;
             }
         }
-        else if (textPrinter->japanese)
-            textPrinter->printerTemplate.currentX += (gUnknown_03002F90.width + textPrinter->printerTemplate.letterSpacing);
         else
-            textPrinter->printerTemplate.currentX += gUnknown_03002F90.width;
+        {
+            if (textPrinter->japanese)
+                textPrinter->printerTemplate.currentX += (gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing);
+            else
+                textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
+        }
         return 0;
     case 1:
         if (TextPrinterWait(textPrinter))
@@ -1566,7 +2280,7 @@ void SetDefaultFontsPointer(void)
 
 u8 GetFontAttribute(u8 fontId, u8 attributeId)
 {
-    u8 result = 0;
+    int result = 0;
     switch (attributeId)
     {
         case FONTATTR_MAX_LETTER_WIDTH:
@@ -1581,8 +2295,8 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
         case FONTATTR_LINE_SPACING:
             result = gFontInfos[fontId].lineSpacing;
             break;
-        case FONTATTR_STYLE:
-            result = gFontInfos[fontId].style;
+        case FONTATTR_UNKNOWN:
+            result = gFontInfos[fontId].unk;
             break;
         case FONTATTR_COLOR_FOREGROUND:
             result = gFontInfos[fontId].fgColor;
@@ -1611,15 +2325,15 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
         glyphs = gFont0JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
         DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
         DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);    // gUnknown_03002F90 + 0x40
-        gUnknown_03002F90.width = 8;     // gGlyphWidth
-        gUnknown_03002F90.height = 12;   // gGlyphHeight
+        gUnknown_03002F90.unk80 = 8;     // gGlyphWidth
+        gUnknown_03002F90.unk81 = 12;    // gGlyphHeight
     }
     else
     {
         glyphs = gFont0LatinGlyphs + (0x20 * glyphId);
-        gUnknown_03002F90.width = gFont0LatinGlyphWidths[glyphId];
+        gUnknown_03002F90.unk80 = gFont0LatinGlyphWidths[glyphId];
 
-        if (gUnknown_03002F90.width <= 8)
+        if (gUnknown_03002F90.unk80 <= 8)
         {
             DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
             DecompressGlyphTile(glyphs + 0x10, gUnknown_03002F90.unk40);
@@ -1632,7 +2346,7 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
             DecompressGlyphTile(glyphs + 0x18, gUnknown_03002F90.unk60);
         }
 
-        gUnknown_03002F90.height = 13;
+        gUnknown_03002F90.unk81 = 13;
     }
 }
 
@@ -1654,15 +2368,15 @@ void DecompressGlyphFont7(u16 glyphId, bool32 isJapanese)
         glyphs = gFont1JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & (eff = 0xF)));  // shh, no questions, only matching now
         DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
         DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);    // gUnknown_03002F90 + 0x40
-        gUnknown_03002F90.width = 8;     // gGlyphWidth
-        gUnknown_03002F90.height = 15;   // gGlyphHeight
+        gUnknown_03002F90.unk80 = 8;     // gGlyphWidth
+        gUnknown_03002F90.unk81 = 15;    // gGlyphHeight
     }
     else
     {
         glyphs = gFont7LatinGlyphs + (0x20 * glyphId);
-        gUnknown_03002F90.width = gFont7LatinGlyphWidths[glyphId];
+        gUnknown_03002F90.unk80 = gFont7LatinGlyphWidths[glyphId];
 
-        if (gUnknown_03002F90.width <= 8)
+        if (gUnknown_03002F90.unk80 <= 8)
         {
             DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
             DecompressGlyphTile(glyphs + 0x10, gUnknown_03002F90.unk40);
@@ -1675,7 +2389,7 @@ void DecompressGlyphFont7(u16 glyphId, bool32 isJapanese)
             DecompressGlyphTile(glyphs + 0x18, gUnknown_03002F90.unk60);
         }
 
-        gUnknown_03002F90.height = 15;
+        gUnknown_03002F90.unk81 = 15;
     }
 }
 
@@ -1696,15 +2410,15 @@ void DecompressGlyphFont8(u16 glyphId, bool32 isJapanese)
         glyphs = gFont0JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
         DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
         DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);    // gUnknown_03002F90 + 0x40
-        gUnknown_03002F90.width = 8;     // gGlyphWidth
-        gUnknown_03002F90.height = 12;   // gGlyphHeight
+        gUnknown_03002F90.unk80 = 8;     // gGlyphWidth
+        gUnknown_03002F90.unk81 = 12;    // gGlyphHeight
     }
     else
     {
         glyphs = gFont8LatinGlyphs + (0x20 * glyphId);
-        gUnknown_03002F90.width = gFont8LatinGlyphWidths[glyphId];
+        gUnknown_03002F90.unk80 = gFont8LatinGlyphWidths[glyphId];
 
-        if (gUnknown_03002F90.width <= 8)
+        if (gUnknown_03002F90.unk80 <= 8)
         {
             DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
             DecompressGlyphTile(glyphs + 0x10, gUnknown_03002F90.unk40);
@@ -1717,7 +2431,7 @@ void DecompressGlyphFont8(u16 glyphId, bool32 isJapanese)
             DecompressGlyphTile(glyphs + 0x18, gUnknown_03002F90.unk60);
         }
 
-        gUnknown_03002F90.height = 12;
+        gUnknown_03002F90.unk81 = 12;
     }
 }
 
@@ -1737,18 +2451,18 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
     {
         glyphs = gFont2JapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
         DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
-        DecompressGlyphTile(glyphs + 0x8, gUnknown_03002F90.unk20);
-        DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);
-        DecompressGlyphTile(glyphs + 0x88, gUnknown_03002F90.unk60);
-        gUnknown_03002F90.width = gFont2JapaneseGlyphWidths[glyphId]; // gGlyphWidth
-        gUnknown_03002F90.height = 14;    // gGlyphHeight
+        DecompressGlyphTile(glyphs + 0x8, gUnknown_03002F90.unk20);    // gUnknown_03002F90 + 0x40
+        DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);    // gUnknown_03002F90 + 0x20
+        DecompressGlyphTile(glyphs + 0x88, gUnknown_03002F90.unk60);    // gUnknown_03002F90 + 0x60
+        gUnknown_03002F90.unk80 = gFont2JapaneseGlyphWidths[glyphId];     // gGlyphWidth
+        gUnknown_03002F90.unk81 = 14;    // gGlyphHeight
     }
     else
     {
         glyphs = gFont2LatinGlyphs + (0x20 * glyphId);
-        gUnknown_03002F90.width = gFont2LatinGlyphWidths[glyphId];
+        gUnknown_03002F90.unk80 = gFont2LatinGlyphWidths[glyphId];
 
-        if (gUnknown_03002F90.width <= 8)
+        if (gUnknown_03002F90.unk80 <= 8)
         {
             DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
             DecompressGlyphTile(glyphs + 0x10, gUnknown_03002F90.unk40);
@@ -1761,7 +2475,7 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese)
             DecompressGlyphTile(glyphs + 0x18, gUnknown_03002F90.unk60);
         }
 
-        gUnknown_03002F90.height = 14;
+        gUnknown_03002F90.unk81 = 14;
     }
 }
 
@@ -1783,15 +2497,15 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
         glyphs = gFont1JapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & (eff = 0xF)));  // shh, no questions, only matching now
         DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
         DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);    // gUnknown_03002F90 + 0x40
-        gUnknown_03002F90.width = 8;     // gGlyphWidth
-        gUnknown_03002F90.height = 15;   // gGlyphHeight
+        gUnknown_03002F90.unk80 = 8;     // gGlyphWidth
+        gUnknown_03002F90.unk81 = 15;    // gGlyphHeight
     }
     else
     {
         glyphs = gFont1LatinGlyphs + (0x20 * glyphId);
-        gUnknown_03002F90.width = gFont1LatinGlyphWidths[glyphId];
+        gUnknown_03002F90.unk80 = gFont1LatinGlyphWidths[glyphId];
 
-        if (gUnknown_03002F90.width <= 8)
+        if (gUnknown_03002F90.unk80 <= 8)
         {
             DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
             DecompressGlyphTile(glyphs + 0x10, gUnknown_03002F90.unk40);
@@ -1804,7 +2518,7 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
             DecompressGlyphTile(glyphs + 0x18, gUnknown_03002F90.unk60);
         }
 
-        gUnknown_03002F90.height = 15;
+        gUnknown_03002F90.unk81 = 15;
     }
 }
 
@@ -1823,6 +2537,6 @@ void DecompressGlyphFont9(u16 glyphId)
     glyphs = gFont9JapaneseGlyphs + (0x100 * (glyphId >> 4)) + (0x8 * (glyphId & 0xF));
     DecompressGlyphTile(glyphs, gUnknown_03002F90.unk0);
     DecompressGlyphTile(glyphs + 0x80, gUnknown_03002F90.unk40);
-    gUnknown_03002F90.width = 8;
-    gUnknown_03002F90.height = 12;
+    gUnknown_03002F90.unk80 = 8;
+    gUnknown_03002F90.unk81 = 12;
 }

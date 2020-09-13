@@ -1411,7 +1411,7 @@ static u16 PartyMenuButtonHandler(s8 *slotPtr)
         break;
     }
 
-    if (JOY_NEW(START_BUTTON))
+    if (gMain.newKeys & START_BUTTON)
         return 8;
 
     if (movementDir)
@@ -1421,10 +1421,10 @@ static u16 PartyMenuButtonHandler(s8 *slotPtr)
     }
 
     // Pressed Cancel
-    if ((JOY_NEW(A_BUTTON)) && *slotPtr == PARTY_SIZE + 1)
+    if ((gMain.newKeys & A_BUTTON) && *slotPtr == PARTY_SIZE + 1)
         return 2;
 
-    return JOY_NEW(A_BUTTON | B_BUTTON);
+    return gMain.newKeys & (A_BUTTON | B_BUTTON);
 }
 
 static void UpdateCurrentPartySelection(s8 *slotPtr, s8 movementDir)
@@ -1862,7 +1862,7 @@ u8 GetMonAilment(struct Pokemon *mon)
 
 static void SetPartyMonsAllowedInMinigame(void)
 {
-    s16 *ptr;
+    u16 *ptr;
 
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MINIGAME)
     {
@@ -3765,7 +3765,7 @@ static u16 GetFieldMoveMonSpecies(void)
 
 static void Task_CancelAfterAorBPress(u8 taskId)
 {
-    if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
         CursorCb_Cancel1(taskId);
 }
 
@@ -4722,7 +4722,7 @@ static void Task_DoLearnedMoveFanfareAfterText(u8 taskId)
 
 static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
 {
-    if (IsFanfareTaskInactive() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
+    if (IsFanfareTaskInactive() && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         if (gPartyMenu.learnMoveState == 1)
             Task_TryLearningNextMove(taskId);
@@ -4931,7 +4931,7 @@ static void UpdateMonDisplayInfoAfterRareCandy(u8 slot, struct Pokemon *mon)
 
 static void Task_DisplayLevelUpStatsPg1(u8 taskId)
 {
-    if (WaitFanfare(FALSE) && IsPartyMenuTextPrinterActive() != TRUE && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
+    if (WaitFanfare(FALSE) && IsPartyMenuTextPrinterActive() != TRUE && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         PlaySE(SE_SELECT);
         DisplayLevelUpStatsPg1(taskId);
@@ -4941,7 +4941,7 @@ static void Task_DisplayLevelUpStatsPg1(u8 taskId)
 
 static void Task_DisplayLevelUpStatsPg2(u8 taskId)
 {
-    if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
     {
         PlaySE(SE_SELECT);
         DisplayLevelUpStatsPg2(taskId);
@@ -4951,9 +4951,9 @@ static void Task_DisplayLevelUpStatsPg2(u8 taskId)
 
 static void DisplayLevelUpStatsPg1(u8 taskId)
 {
-    u16 *arrayPtr = (u16*)sPartyMenuInternal->data;
+    s16 *arrayPtr = sPartyMenuInternal->data;
 
-    arrayPtr[12] = (u16)CreateLevelUpStatsWindow();
+    arrayPtr[12] = CreateLevelUpStatsWindow();
     DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     CopyWindowToVram(arrayPtr[12], 2);
     ScheduleBgCopyTilemapToVram(2);
@@ -4961,7 +4961,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
 
 static void DisplayLevelUpStatsPg2(u8 taskId)
 {
-    u16 *arrayPtr = (u16 *)sPartyMenuInternal->data;
+    s16 *arrayPtr = sPartyMenuInternal->data;
 
     DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     CopyWindowToVram(arrayPtr[12], 2);
@@ -4972,7 +4972,7 @@ static void Task_TryLearnNewMoves(u8 taskId)
 {
     u16 learnMove;
 
-    if (WaitFanfare(0) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
+    if (WaitFanfare(0) && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         RemoveLevelUpStatsWindow();
         learnMove = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], TRUE);
@@ -5609,7 +5609,7 @@ static void Task_ValidateChosenHalfParty(u8 taskId)
 
 static void Task_ContinueChoosingHalfParty(u8 taskId)
 {
-    if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
     {
         PlaySE(SE_SELECT);
         DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);

@@ -73,6 +73,8 @@ void nullsub_20(void);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(void);
 void FaintClearSetData(void);
+void sub_803B3AC(void); // unused
+void sub_803B598(void); // unused
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
 void SwitchPartyOrder(u8 battlerId);
@@ -81,7 +83,6 @@ u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
-void SpecialStatusesClear(void);
 
 extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
 

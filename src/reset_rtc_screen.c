@@ -380,7 +380,7 @@ static void Task_ResetRtc_1(u8 taskId)
     u8 selection = data[2];
     const struct ResetRtcStruct *selectionInfo = &sUnknown_08510428[selection - 1];
 
-    if (JOY_NEW(B_BUTTON))
+    if (gMain.newKeys & B_BUTTON)
     {
         gTasks[taskId].func = Task_ResetRtc_2;
         data[1] = 0;
@@ -389,7 +389,7 @@ static void Task_ResetRtc_1(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(DPAD_RIGHT))
+    if (gMain.newKeys & DPAD_RIGHT)
     {
         if (selectionInfo->right)
         {
@@ -399,7 +399,7 @@ static void Task_ResetRtc_1(u8 taskId)
         }
     }
 
-    if (JOY_NEW(DPAD_LEFT))
+    if (gMain.newKeys & DPAD_LEFT)
     {
         if (selectionInfo->left)
         {
@@ -411,7 +411,7 @@ static void Task_ResetRtc_1(u8 taskId)
 
     if (selection == 5)
     {
-        if (JOY_NEW(A_BUTTON))
+        if (gMain.newKeys & A_BUTTON)
         {
             gLocalTime.days = data[3];
             gLocalTime.hours = data[4];
@@ -423,7 +423,7 @@ static void Task_ResetRtc_1(u8 taskId)
             data[2] = 6;
         }
     }
-    else if (MoveTimeUpDown(&data[selectionInfo->dataIndex], selectionInfo->minVal, selectionInfo->maxVal, JOY_REPEAT(DPAD_UP | DPAD_DOWN)))
+    else if (MoveTimeUpDown(&data[selectionInfo->dataIndex], selectionInfo->minVal, selectionInfo->maxVal, gMain.newAndRepeatedKeys & (DPAD_UP | DPAD_DOWN)))
     {
         PlaySE(SE_SELECT);
         PrintTime(data[8], 0, 1, data[3], data[4], data[5], data[6]);
@@ -532,12 +532,12 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
         ScheduleBgCopyTilemapToVram(0);
         data[0]++;
     case 1:
-        if (JOY_NEW(B_BUTTON))
+        if (gMain.newKeys & B_BUTTON)
         {
             DestroyTask(taskId);
             DoSoftReset();
         }
-        else if (JOY_NEW(A_BUTTON))
+        else if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
             DestroyTask(taskId);
@@ -620,7 +620,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         }
         data[0] = 5;
     case 5:
-        if (JOY_NEW(A_BUTTON))
+        if (gMain.newKeys & A_BUTTON)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 0x10, RGB_WHITEALPHA);
             data[0] = 6;
