@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "dma3.h"
 #include "pokeblock.h"
 #include "malloc.h"
 #include "decompress.h"
@@ -1240,8 +1241,7 @@ static void UpdateMonPic(u8 loadId)
     }
     else
     {
-        do {} while(0); // Only needed to match, feel free to remove.
-        DmaCopy16Defvars(3, sMenu->partySheets[loadId], sMenu->curMonTileStart, 0x800);
+        Dma3CopyLarge16_(sMenu->partySheets[loadId], sMenu->curMonTileStart, 0x800);
         LoadPalette(sMenu->partyPalettes[loadId], sMenu->curMonPalette, 32);
     }
 }
