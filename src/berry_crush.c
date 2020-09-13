@@ -1779,22 +1779,15 @@ void sub_8022600(struct BerryCrushGame *r6)
 void sub_80226D0(struct BerryCrushGame *r6)
 {
     u8 r5 = 0;
-    const u32 *r0 = gUnknown_08DE3FD4;
-#ifndef NONMATCHING // r4, r5, r6 register roulette
-    register u8 *r4 asm("r4") = gDecompressionBuffer;
-    register u32 r0_ asm("r0");
-#else
-    u8 *r4 = gDecompressionBuffer;
-    u32 r0_;
-#endif
+    u8 * r4;
 
-    LZ77UnCompWram(r0, r4);
-    for (; r5 < r6->unk9; ++r5)
+    LZ77UnCompWram(gUnknown_08DE3FD4, gDecompressionBuffer); // required for matching
+
+    for (r4 = gDecompressionBuffer; r5 < r6->unk9; ++r5)
     {
-        r0_ = r6->unk138.unkC[r5]->unk0;
         CopyToBgTilemapBufferRect(
             3,
-            &r4[r0_ * 40],
+            &r4[r6->unk138.unkC[r5]->unk0 * 40],
             r6->unk138.unkC[r5]->unk1,
             r6->unk138.unkC[r5]->unk2,
             10,
