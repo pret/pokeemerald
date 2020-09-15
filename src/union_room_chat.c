@@ -2915,11 +2915,10 @@ static void PrintCurrentKeyboardPage(void)
             }
             else
             {
-                s32 length = StringLength_Multibyte(str2);
+                int length = StringLength_Multibyte(str2);
                 do
                 {
-                    length--;
-                    StringCopyN_Multibyte(str, str2, length);
+                    StringCopyN_Multibyte(str, str2, --length);
                 } while (GetStringWidth(0, str, 0) > 35);
 
                 AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
