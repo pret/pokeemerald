@@ -5751,11 +5751,14 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 
 u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 {
-    u16 retVal;
     // Dont modify HP, Accuracy, or Evasion by nature
     if (statIndex <= STAT_HP || statIndex > NUM_NATURE_STATS)
     {
-        return n;
+        // Should just be "return n", but it wouldn't match without this.
+        u16 retVal = n;
+        retVal++;
+        retVal--;
+        return retVal;
     }
 
     switch (gNatureStatTable[nature][statIndex - 1])
@@ -5773,7 +5776,7 @@ u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
         break;
     }
 
-    return retVal;
+    return n;
 }
 
 #define IS_LEAGUE_BATTLE                                                                \
