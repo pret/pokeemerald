@@ -1370,7 +1370,6 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case CHAR_KEYPAD_ICON:
         case CHAR_EXTRA_SYMBOL:
         {
-            glyphWidth;
             if (*str == CHAR_EXTRA_SYMBOL)
                 glyphWidth = func(*++str + 0x100, isJapanese);
             else
@@ -1407,7 +1406,8 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 
     if (lineWidth > width)
         return lineWidth;
-    return width;
+    else
+        return width;
 }
 
 u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
