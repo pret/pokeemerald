@@ -540,9 +540,11 @@ bool8 AddPCItem(u16 itemId, u16 count)
             Free(newItems);
             return FALSE;
         }
-        
-        newItems[freeSlot].itemId = itemId;
-        SetPCItemQuantity(&newItems[freeSlot].quantity, count);
+        else
+        {
+            newItems[freeSlot].itemId = itemId;
+            SetPCItemQuantity(&newItems[freeSlot].quantity, count);
+        }
     }
 
     // Copy items back to the PC
