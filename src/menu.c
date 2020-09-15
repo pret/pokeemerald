@@ -25,10 +25,6 @@
 #define STD_WINDOW_PALETTE_NUM 14
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
-#define CHAR_HFLIP 0x400
-#define CHAR_VFLIP 0x800
-#define CHAR_HVFLIP CHAR_HFLIP + CHAR_VFLIP
-
 struct MoveMenuInfoIcon
 {
     u8 width;
@@ -43,15 +39,12 @@ struct Menu
     s8 cursorPos;
     s8 minCursorPos;
     s8 maxCursorPos;
-
     u8 windowId;
     u8 fontId;
     u8 optionWidth;
     u8 optionHeight;
-
     u8 columns;
     u8 rows;
-
     bool8 APressMuted;
 };
 
@@ -994,20 +987,17 @@ s8 Menu_ProcessInput(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    
-    if (JOY_NEW(DPAD_UP))
+    else if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -1027,20 +1017,17 @@ s8 Menu_ProcessInputNoWrap(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    
-    if (JOY_NEW(DPAD_UP))
+    else if (JOY_NEW(DPAD_UP))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
             PlaySE(SE_SELECT);
@@ -1058,20 +1045,17 @@ s8 ProcessMenuInput_other(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -1091,17 +1075,17 @@ s8 Menu_ProcessInputNoWrapAround_other(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
             PlaySE(SE_SELECT);
@@ -1240,7 +1224,8 @@ void DestroyYesOrNoWindow(void)
 
 void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7, const struct MenuAction *strs)
 {
-    u8 i, j;
+    u8 i;
+    u8 j;
     for (i = 0; i < a7; i++)
     {
         for (j = 0; j < a6; j++)
