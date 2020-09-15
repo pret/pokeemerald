@@ -12,7 +12,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void);
 s32 ConvertPixelWidthToTileWidth(s32 width);
 u8 CreateWindowFromRect(u8 x, u8 y, u8 width, u8 height);
 void ClearToTransparentAndRemoveWindow(u8 windowId);
-s32 DisplayTextAndGetWidth(const u8* str, s32 width);
+s32 DisplayTextAndGetWidth(const u8* str, s32 prevWidth);
 s32 ScriptMenu_AdjustLeftCoordFromWidth(s32 left, s32 width);
 bool16 ScriptMenu_CreatePCMultichoice(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
