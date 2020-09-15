@@ -968,7 +968,8 @@ bool8 player_should_look_direction_be_enforced_upon_movement(void)
 {
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE) != FALSE && MetatileBehavior_IsBumpySlope(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) != FALSE)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 void GetOnOffBike(u8 transitionFlags)
@@ -1028,11 +1029,12 @@ s16 GetPlayerSpeed(void)
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         return machSpeeds[gPlayerAvatar.bikeFrameCounter];
-    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
+    else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
         return SPEED_FASTER;
-    if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))
+    else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))
         return SPEED_FAST;
-    return SPEED_NORMAL;
+    else
+        return SPEED_NORMAL;
 }
 
 void Bike_HandleBumpySlopeJump(void)
