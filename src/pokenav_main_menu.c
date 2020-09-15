@@ -459,11 +459,9 @@ void Pokenav_AllocAndLoadPalettes(const struct SpritePalette *palettes)
         {
             break;
         }
-        else
-        {
-            index = (index * 16) + 0x100;
-            CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
-        }
+
+        index = (index * 16) + 0x100;
+        CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
     }
 }
 
@@ -472,7 +470,7 @@ void sub_81C7990(u32 a0, u16 a1)
     CpuFill16(a1, gPlttBufferFaded + 0x100 + (a0 * 16), 16 * sizeof(u16));
 }
 
-void sub_81C79BC(const u16 *a0, const u16 *a1, s32 a2, s32 a3, s32 a4, u16 *palette)
+void sub_81C79BC(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette)
 {
 
     if (a4 == 0)
@@ -485,8 +483,8 @@ void sub_81C79BC(const u16 *a0, const u16 *a1, s32 a2, s32 a3, s32 a4, u16 *pale
     }
     else
     {
-        s32 r, g, b;
-        s32 r1, g1, b1;
+        int r, g, b;
+        int r1, g1, b1;
         while (a2--)
         {
             r = GET_R(*a0);
