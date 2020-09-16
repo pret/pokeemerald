@@ -1102,17 +1102,17 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 a)
     s16 x, y;
     u8 metatileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
 
-    if (sArrowWarpMetatileBehaviorChecks[a - 1](metatileBehavior))
-        return;
-
-    if (a == DIR_NORTH)
+    if (!sArrowWarpMetatileBehaviorChecks[a - 1](metatileBehavior))
     {
-        PlayerGetDestCoords(&x, &y);
-        MoveCoords(2, &x, &y);
-        if (MetatileBehavior_IsWarpDoor(MapGridGetMetatileBehaviorAt(x, y)))
-            return;
+        if (a == DIR_NORTH)
+        {
+            PlayerGetDestCoords(&x, &y);
+            MoveCoords(2, &x, &y);
+            if (MetatileBehavior_IsWarpDoor(MapGridGetMetatileBehaviorAt(x, y)))
+                return;
+        }
+        PlaySE(SE_WALL_HIT);
     }
-    PlaySE(SE_WALL_HIT);
 }
 
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y)

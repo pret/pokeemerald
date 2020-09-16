@@ -496,12 +496,15 @@ u16 GetBehaviorByMetatileId(u16 metatile)
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
         return attributes[metatile];
     }
-    if (metatile < NUM_METATILES_TOTAL)
+    else if (metatile < NUM_METATILES_TOTAL)
     {
         attributes = gMapHeader.mapLayout->secondaryTileset->metatileAttributes;
         return attributes[metatile - NUM_METATILES_IN_PRIMARY];
     }
-    return 0xFF;
+    else
+    {
+        return 0xFF;
+    }
 }
 
 void save_serialize_map(void)

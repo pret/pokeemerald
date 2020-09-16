@@ -1368,9 +1368,11 @@ u8 ChangeListMenuCursorPosition(s8 deltaX, s8 deltaY)
         sMenu.cursorPos = oldPos;
         return sMenu.cursorPos;
     }
-    
-    sub_8199060(oldPos, sMenu.cursorPos);
-    return sMenu.cursorPos;
+    else
+    {
+        sub_8199060(oldPos, sMenu.cursorPos);
+        return sMenu.cursorPos;
+    }
 }
 
 u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
@@ -1400,9 +1402,11 @@ u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
         sMenu.cursorPos = oldPos;
         return sMenu.cursorPos;
     }
-
-    sub_8199060(oldPos, sMenu.cursorPos);
-    return sMenu.cursorPos;
+    else
+    {
+        sub_8199060(oldPos, sMenu.cursorPos);
+        return sMenu.cursorPos;
+    }
 }
 
 s8 UnusedMoveCursorFunction(void) //unused

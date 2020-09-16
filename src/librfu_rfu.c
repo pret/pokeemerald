@@ -1206,7 +1206,7 @@ static void rfu_STC_fastCopy(const u8 **src_p, u8 **dst_p, s32 size)
     u8 *dst = *dst_p;
     s32 i;
 
-    for (i = size - 1; i != -1; --i) //Since I is not used, it should decrement to 0 instead of -1, but that doesn't match
+    for (i = size - 1; i != -1; --i)
         *dst++ = *src++;
     *src_p = src;
     *dst_p = dst;
