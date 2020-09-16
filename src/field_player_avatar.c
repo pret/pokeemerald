@@ -620,8 +620,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
             PlayerJumpLedge(direction);
             return;
         }
-
-        if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
+        else if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
         {
             PlayerNotOnBikeCollideWithFarawayIslandMew(direction);
             return;
