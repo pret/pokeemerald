@@ -484,7 +484,7 @@ u8 GetLastTextColor(u8 colorType)
                 {                                                                                                 \
                     dst = windowTiles + ((j / 8) * 32) + ((j % 8) / 2) + ((i / 8) * widthOffset) + ((i % 8) * 4); \
                     bits = ((j & 1) * 4);                                                                         \
-                    *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));                                             \
+                    *dst = (toOrr << bits) | ((0xF0 >> bits) & *dst);                                             \
                 }                                                                                                 \
                 r5 >>= 4;                                                                                         \
             }                                                                                                     \
