@@ -471,8 +471,7 @@ static bool32 UpdateMenuCursorPos(struct Pokenav1Struct *state)
         state->currMenuItem = sMenuItems[state->menuType][state->cursorPos];
         return TRUE;
     }
-    
-    if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN))
     {
         state->cursorPos++;
         if (state->cursorPos > sLastCursorPositions[state->menuType])
@@ -481,8 +480,10 @@ static bool32 UpdateMenuCursorPos(struct Pokenav1Struct *state)
         state->currMenuItem = sMenuItems[state->menuType][state->cursorPos];
         return TRUE;
     }
-    
-    return FALSE;
+    else
+    {
+        return FALSE;
+    }
 }
 
 int GetPokenavMenuType(void)
