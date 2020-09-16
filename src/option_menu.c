@@ -428,8 +428,12 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 
 static void TextSpeed_DrawChoices(u8 selection)
 {
-    u8 styles[3] = {0, 0, 0}
+    u8 styles[3];
     s32 widthSlow, widthMid, widthFast, xMid;
+
+    styles[0] = 0; //Should just assign {0,0,0} to styles, but that doesn't match
+    styles[1] = 0;
+    styles[2] = 0;
 
     styles[selection] = 1;
 
