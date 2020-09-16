@@ -1944,7 +1944,7 @@ static void CopyTile(u8 *dest, u16 tile)
             dest[4 * i + 3] = buffer[4 * (7 - i) + 3];
         }
         break;
-    case BG_TILE_H_FLIP(BG_TILE_V_FLIP(0)) >> 10:
+    case BG_TILE_HV_FLIP(0) >> 10:
         for (i = 0; i < 32; i++)
         {
             dest[i] = (buffer[31 - i] >> 4) + ((buffer[31 - i] & 0x0F) << 4);

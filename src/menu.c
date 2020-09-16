@@ -1416,34 +1416,29 @@ s8 UnusedMoveCursorFunction(void) //unused
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    
-    if (JOY_NEW(DPAD_UP))
+    else if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1462,34 +1457,29 @@ s8 Menu_ProcessInputGridLayout(void)
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-
-    if (JOY_NEW(DPAD_UP))
+    else if (JOY_NEW(DPAD_UP))
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-
-    if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-
-    if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -1506,34 +1496,29 @@ s8 sub_81993D8(void)
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1553,34 +1538,29 @@ s8 sub_8199484(void)
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -1696,7 +1676,8 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
 
 void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
 {
-    u8 i, j;
+    u8 i
+    u8 j;
     struct TextPrinterTemplate printer;
 
     printer.windowId = windowId;

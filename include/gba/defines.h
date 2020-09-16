@@ -49,6 +49,7 @@
 
 #define BG_TILE_H_FLIP(n) (0x400 + (n))
 #define BG_TILE_V_FLIP(n) (0x800 + (n))
+#define BG_TILE_HV_FLIP(n) (0x400 + 0x800 + (n))
 
 // text-mode BG
 #define OBJ_VRAM0      (VRAM + 0x10000)
