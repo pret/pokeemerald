@@ -434,7 +434,6 @@ static void TextSpeed_DrawChoices(u8 selection)
     styles[0] = 0; //Should just assign {0,0,0} to styles, but that doesn't match
     styles[1] = 0;
     styles[2] = 0;
-
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_TextSpeedSlow, 104, YPOS_TEXTSPEED, styles[0]);
