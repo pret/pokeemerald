@@ -271,89 +271,88 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    u8 previousOption;
     if (JOY_NEW(A_BUTTON))
     {
         if (gTasks[taskId].data[TD_MENUSELECTION] == MENUITEM_CANCEL)
             gTasks[taskId].func = Task_OptionMenuSave;
-        return;
     }
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_OptionMenuSave;
-        return;
     }
-    if (JOY_NEW(DPAD_UP))
+    else if (JOY_NEW(DPAD_UP))
     {
         if (gTasks[taskId].data[TD_MENUSELECTION] > 0)
             gTasks[taskId].data[TD_MENUSELECTION]--;
         else
             gTasks[taskId].data[TD_MENUSELECTION] = MENUITEM_CANCEL;
         HighlightOptionMenuItem(gTasks[taskId].data[TD_MENUSELECTION]);
-        return;
     }
-    if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (gTasks[taskId].data[TD_MENUSELECTION] < MENUITEM_CANCEL)
             gTasks[taskId].data[TD_MENUSELECTION]++;
         else
             gTasks[taskId].data[TD_MENUSELECTION] = 0;
         HighlightOptionMenuItem(gTasks[taskId].data[TD_MENUSELECTION]);
-        return;
     }
-
-    switch (gTasks[taskId].data[TD_MENUSELECTION])
+    else
     {
-    case MENUITEM_TEXTSPEED:
-        previousOption = gTasks[taskId].data[TD_TEXTSPEED];
-        gTasks[taskId].data[TD_TEXTSPEED] = TextSpeed_ProcessInput(gTasks[taskId].data[TD_TEXTSPEED]);
+        u8 previousOption;
 
-        if (previousOption != gTasks[taskId].data[TD_TEXTSPEED])
-            TextSpeed_DrawChoices(gTasks[taskId].data[TD_TEXTSPEED]);
-        break;
-    case MENUITEM_BATTLESCENE:
-        previousOption = gTasks[taskId].data[TD_BATTLESCENE];
-        gTasks[taskId].data[TD_BATTLESCENE] = BattleScene_ProcessInput(gTasks[taskId].data[TD_BATTLESCENE]);
+        switch (gTasks[taskId].data[TD_MENUSELECTION])
+        {
+        case MENUITEM_TEXTSPEED:
+            previousOption = gTasks[taskId].data[TD_TEXTSPEED];
+            gTasks[taskId].data[TD_TEXTSPEED] = TextSpeed_ProcessInput(gTasks[taskId].data[TD_TEXTSPEED]);
 
-        if (previousOption != gTasks[taskId].data[TD_BATTLESCENE])
-            BattleScene_DrawChoices(gTasks[taskId].data[TD_BATTLESCENE]);
-        break;
-    case MENUITEM_BATTLESTYLE:
-        previousOption = gTasks[taskId].data[TD_BATTLESTYLE];
-        gTasks[taskId].data[TD_BATTLESTYLE] = BattleStyle_ProcessInput(gTasks[taskId].data[TD_BATTLESTYLE]);
+            if (previousOption != gTasks[taskId].data[TD_TEXTSPEED])
+                TextSpeed_DrawChoices(gTasks[taskId].data[TD_TEXTSPEED]);
+            break;
+        case MENUITEM_BATTLESCENE:
+            previousOption = gTasks[taskId].data[TD_BATTLESCENE];
+            gTasks[taskId].data[TD_BATTLESCENE] = BattleScene_ProcessInput(gTasks[taskId].data[TD_BATTLESCENE]);
 
-        if (previousOption != gTasks[taskId].data[TD_BATTLESTYLE])
-            BattleStyle_DrawChoices(gTasks[taskId].data[TD_BATTLESTYLE]);
-        break;
-    case MENUITEM_SOUND:
-        previousOption = gTasks[taskId].data[TD_SOUND];
-        gTasks[taskId].data[TD_SOUND] = Sound_ProcessInput(gTasks[taskId].data[TD_SOUND]);
+            if (previousOption != gTasks[taskId].data[TD_BATTLESCENE])
+                BattleScene_DrawChoices(gTasks[taskId].data[TD_BATTLESCENE]);
+            break;
+        case MENUITEM_BATTLESTYLE:
+            previousOption = gTasks[taskId].data[TD_BATTLESTYLE];
+            gTasks[taskId].data[TD_BATTLESTYLE] = BattleStyle_ProcessInput(gTasks[taskId].data[TD_BATTLESTYLE]);
 
-        if (previousOption != gTasks[taskId].data[TD_SOUND])
-            Sound_DrawChoices(gTasks[taskId].data[TD_SOUND]);
-        break;
-    case MENUITEM_BUTTONMODE:
-        previousOption = gTasks[taskId].data[TD_BUTTONMODE];
-        gTasks[taskId].data[TD_BUTTONMODE] = ButtonMode_ProcessInput(gTasks[taskId].data[TD_BUTTONMODE]);
+            if (previousOption != gTasks[taskId].data[TD_BATTLESTYLE])
+                BattleStyle_DrawChoices(gTasks[taskId].data[TD_BATTLESTYLE]);
+            break;
+        case MENUITEM_SOUND:
+            previousOption = gTasks[taskId].data[TD_SOUND];
+            gTasks[taskId].data[TD_SOUND] = Sound_ProcessInput(gTasks[taskId].data[TD_SOUND]);
 
-        if (previousOption != gTasks[taskId].data[TD_BUTTONMODE])
-            ButtonMode_DrawChoices(gTasks[taskId].data[TD_BUTTONMODE]);
-        break;
-    case MENUITEM_FRAMETYPE:
-        previousOption = gTasks[taskId].data[TD_FRAMETYPE];
-        gTasks[taskId].data[TD_FRAMETYPE] = FrameType_ProcessInput(gTasks[taskId].data[TD_FRAMETYPE]);
+            if (previousOption != gTasks[taskId].data[TD_SOUND])
+                Sound_DrawChoices(gTasks[taskId].data[TD_SOUND]);
+            break;
+        case MENUITEM_BUTTONMODE:
+            previousOption = gTasks[taskId].data[TD_BUTTONMODE];
+            gTasks[taskId].data[TD_BUTTONMODE] = ButtonMode_ProcessInput(gTasks[taskId].data[TD_BUTTONMODE]);
 
-        if (previousOption != gTasks[taskId].data[TD_FRAMETYPE])
-            FrameType_DrawChoices(gTasks[taskId].data[TD_FRAMETYPE]);
-        break;
-    default:
-        return;
-    }
+            if (previousOption != gTasks[taskId].data[TD_BUTTONMODE])
+                ButtonMode_DrawChoices(gTasks[taskId].data[TD_BUTTONMODE]);
+            break;
+        case MENUITEM_FRAMETYPE:
+            previousOption = gTasks[taskId].data[TD_FRAMETYPE];
+            gTasks[taskId].data[TD_FRAMETYPE] = FrameType_ProcessInput(gTasks[taskId].data[TD_FRAMETYPE]);
 
-    if (sArrowPressed)
-    {
-        sArrowPressed = FALSE;
-        CopyWindowToVram(WIN_OPTIONS, 2);
+            if (previousOption != gTasks[taskId].data[TD_FRAMETYPE])
+                FrameType_DrawChoices(gTasks[taskId].data[TD_FRAMETYPE]);
+            break;
+        default:
+            return;
+        }
+
+        if (sArrowPressed)
+        {
+            sArrowPressed = FALSE;
+            CopyWindowToVram(WIN_OPTIONS, 2);
+        }
     }
 }
 
@@ -391,7 +390,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     u8 dst[16];
     u16 i;
 
-    for (i = 0; *text != EOS && i < 15; i++)
+    for (i = 0; *text != EOS && i <= 14; i++)
         dst[i] = *(text++);
 
     if (style != 0)
@@ -429,12 +428,9 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 
 static void TextSpeed_DrawChoices(u8 selection)
 {
-    u8 styles[3];
+    u8 styles[3] = {0, 0, 0}
     s32 widthSlow, widthMid, widthFast, xMid;
 
-    styles[0] = 0;
-    styles[1] = 0;
-    styles[2] = 0;
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_TextSpeedSlow, 104, YPOS_TEXTSPEED, styles[0]);
