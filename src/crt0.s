@@ -79,6 +79,7 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0x00000034, 0x00000000, 0x00000000
 
 	.arm
+	.align 2, 0
 	.global Init
 Init: @ 8000204
 	mov r0, #PSR_IRQ_MODE

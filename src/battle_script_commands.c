@@ -4663,7 +4663,7 @@ static void Cmd_jumpifcantswitch(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
         return;
     }
-    
+
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         #ifndef NONMATCHING

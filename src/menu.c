@@ -1311,11 +1311,13 @@ u8 sub_8198FD4(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 
     u8 numChoices = a5 * a6;
     return sub_8198F58(windowId, fontId, left, top, a4, cursorHeight, a5, a6, numChoices, a7);
 }
+
 enum
 {
     CURSOR_FONT_WIDTH,
     CURSOR_FONT_HEIGHT,
 };
+
 static void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
 {
     u8 cursorWidth = GetMenuCursorDimensionByFont(sMenu.fontId, CURSOR_FONT_WIDTH);
@@ -1676,7 +1678,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
 
 void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
 {
-    u8 i
+    u8 i;
     u8 j;
     struct TextPrinterTemplate printer;
 
