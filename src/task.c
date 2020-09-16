@@ -41,7 +41,7 @@ u8 CreateTask(TaskFunc func, u8 priority)
         }
     }
 
-    return 0; //Error. Should not happen
+    return 0; // Error. Should not happen
 }
 
 static void InsertTask(u8 newTaskId)
@@ -207,5 +207,6 @@ u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
     if (dataElem <= TASK_SPACE)
         return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
-    return 0;
+    else
+        return 0;
 }
