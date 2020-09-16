@@ -428,7 +428,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 
 static void TextSpeed_DrawChoices(u8 selection)
 {
-    u8 styles[3] = {0, 0, 0}
+    u8 styles[3] = {0, 0, 0};
     s32 widthSlow, widthMid, widthFast, xMid;
 
     styles[selection] = 1;
@@ -459,10 +459,8 @@ static u8 BattleScene_ProcessInput(u8 selection)
 
 static void BattleScene_DrawChoices(u8 selection)
 {
-    u8 styles[2];
+    u8 styles[2] = {0, 0};
 
-    styles[0] = 0;
-    styles[1] = 0;
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_BattleSceneOn, 104, YPOS_BATTLESCENE, styles[0]);
@@ -482,10 +480,8 @@ static u8 BattleStyle_ProcessInput(u8 selection)
 
 static void BattleStyle_DrawChoices(u8 selection)
 {
-    u8 styles[2];
+    u8 styles[2] = {0, 0};
 
-    styles[0] = 0;
-    styles[1] = 0;
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_BattleStyleShift, 104, YPOS_BATTLESTYLE, styles[0]);
@@ -506,10 +502,8 @@ static u8 Sound_ProcessInput(u8 selection)
 
 static void Sound_DrawChoices(u8 selection)
 {
-    u8 styles[2];
+    u8 styles[2] = {0, 0};
 
-    styles[0] = 0;
-    styles[1] = 0;
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_SoundMono, 104, YPOS_SOUND, styles[0]);
