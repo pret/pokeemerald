@@ -184,7 +184,7 @@ struct PokedexView
     s16 maxScrollTimer;
     u16 scrollSpeed;
     u16 unkArr1[4]; // Cleared, never read
-    u8 filler[8];
+    u16 filler[4];
     u8 currentPage;
     u8 currentPageBackup;
     bool8 isSearchResults:1;
