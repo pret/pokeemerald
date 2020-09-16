@@ -1023,7 +1023,7 @@ static void Bike_SetBikeStill(void)
 s16 GetPlayerSpeed(void)
 {
     // because the player pressed a direction, it won't ever return a speed of 0 since this function returns the player's current speed.
-    s16 machSpeeds[3]; //TODO: sMachBikeSpeeds SHOULD be local to this function instead of using memcpy, as this is the only function that USES said array, but that doesn't yet match
+    s16 machSpeeds[3];
 
     memcpy(machSpeeds, sMachBikeSpeeds, sizeof(machSpeeds));
 
