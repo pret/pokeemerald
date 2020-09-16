@@ -210,35 +210,35 @@ static void MachBikeTransition_TrySpeedUp(u8 direction)
             MachBikeTransition_TrySlowDown(playerObjEvent->movementDirection);
         else
             MachBikeTransition_FaceDirection(playerObjEvent->movementDirection);
-
-        return;
-    }
-
-    collision = GetBikeCollision(direction);
-    if (collision && collision < COLLISION_VERTICAL_RAIL)
-    {
-        // we hit a solid object, but check to see if its a ledge and then jump.
-        if (collision == COLLISION_LEDGE_JUMP)
-        {
-            PlayerJumpLedge(direction);
-        }
-        else
-        {
-            // we hit a solid object that is not a ledge, so perform the collision.
-            Bike_SetBikeStill();
-            if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
-                PlayerOnBikeCollideWithFarawayIslandMew(direction);
-            else if (collision < COLLISION_STOP_SURFING || collision > COLLISION_ROTATING_GATE)
-                PlayerOnBikeCollide(direction);
-        }
     }
     else
     {
-        // we did not hit anything that can slow us down, so perform the advancement callback depending on the bikeFrameCounter and try to increase the mach bike's speed.
-        sMachBikeSpeedCallbacks[gPlayerAvatar.bikeFrameCounter](direction);
-        gPlayerAvatar.bikeSpeed = gPlayerAvatar.bikeFrameCounter + (gPlayerAvatar.bikeFrameCounter >> 1); // same as dividing by 2, but compiler is insistent on >> 1
-        if (gPlayerAvatar.bikeFrameCounter < 2)                                                           // do not go faster than the last element in the mach bike array
-            gPlayerAvatar.bikeFrameCounter++;
+        collision = GetBikeCollision(direction);
+        if (collision && collision < COLLISION_VERTICAL_RAIL)
+        {
+            // we hit a solid object, but check to see if its a ledge and then jump.
+            if (collision == COLLISION_LEDGE_JUMP)
+            {
+                PlayerJumpLedge(direction);
+            }
+            else
+            {
+                // we hit a solid object that is not a ledge, so perform the collision.
+                Bike_SetBikeStill();
+                if (collision == COLLISION_OBJECT_EVENT && IsPlayerCollidingWithFarawayIslandMew(direction))
+                    PlayerOnBikeCollideWithFarawayIslandMew(direction);
+                else if (collision < COLLISION_STOP_SURFING || collision > COLLISION_ROTATING_GATE)
+                    PlayerOnBikeCollide(direction);
+            }
+        }
+        else
+        {
+            // we did not hit anything that can slow us down, so perform the advancement callback depending on the bikeFrameCounter and try to increase the mach bike's speed.
+            sMachBikeSpeedCallbacks[gPlayerAvatar.bikeFrameCounter](direction);
+            gPlayerAvatar.bikeSpeed = gPlayerAvatar.bikeFrameCounter + (gPlayerAvatar.bikeFrameCounter >> 1); // same as dividing by 2, but compiler is insistent on >> 1
+            if (gPlayerAvatar.bikeFrameCounter < 2)                                                           // do not go faster than the last element in the mach bike array
+                gPlayerAvatar.bikeFrameCounter++;
+        }
     }
 }
 
@@ -897,7 +897,8 @@ bool8 RS_IsRunningDisallowed(u8 tile)
 {
     if (IsRunningDisallowedByMetatile(tile) || gMapHeader.mapType == MAP_TYPE_INDOOR)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static bool8 IsRunningDisallowedByMetatile(u8 tile)

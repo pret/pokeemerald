@@ -587,14 +587,16 @@ static u8 CheckMovementInputNotOnBike(u8 direction)
         gPlayerAvatar.runningState = NOT_MOVING;
         return 0;
     }
-    if (direction != GetPlayerMovementDirection() && gPlayerAvatar.runningState != MOVING)
+    else if (direction != GetPlayerMovementDirection() && gPlayerAvatar.runningState != MOVING)
     {
         gPlayerAvatar.runningState = TURN_DIRECTION;
         return 1;
     }
-
-    gPlayerAvatar.runningState = MOVING;
-    return 2;
+    else
+    {
+        gPlayerAvatar.runningState = MOVING;
+        return 2;
+    }
 }
 
 static void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
@@ -719,8 +721,10 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
         CreateStopSurfingTask(direction);
         return TRUE;
     }
-
-    return FALSE;
+    else
+    {
+        return FALSE;
+    }
 }
 
 static bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
