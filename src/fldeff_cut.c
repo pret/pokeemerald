@@ -228,8 +228,7 @@ bool8 SetUpFieldMove_Cut(void)
                 tileCuttable = TRUE;
 
                 for (j = 0; j < 2; ++j) {
-                    if (sHyperCutStruct[i].unk2[j] == 0)
-                        break;
+                    if (sHyperCutStruct[i].unk2[j] == 0) break; // one line required to match -g
                     if (cutTiles[(u8)(sHyperCutStruct[i].unk2[j] - 1)] == FALSE)
                     {
                         tileCuttable = FALSE;

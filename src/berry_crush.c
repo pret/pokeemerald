@@ -202,7 +202,7 @@ struct BerryCrushGame
 static void VBlankCB(void);
 static void MainCB(void);
 static void MainTask(u8);
-static void InitGame(struct BerryCrushGame *);
+static void ParseName_Options(struct BerryCrushGame *);
 void sub_8022BEC(u16, u8, u8 *);
 static void BerryCrush_SetPaletteFadeParams(u8 *, bool8, u32, s8, u8, u8, u16);
 static int sub_8021450(struct BerryCrushGame *);
@@ -880,7 +880,7 @@ void StartBerryCrush(MainCallback callback)
     gBerryCrushGame->unk0 = callback;
     gBerryCrushGame->unk8 = multiplayerId;
     gBerryCrushGame->unk9 = playerCount;
-    InitGame(gBerryCrushGame);
+    ParseName_Options(gBerryCrushGame);
     gBerryCrushGame->unk12 = 1;
     gBerryCrushGame->unkE = 1;
     gBerryCrushGame->unkF = 6;
@@ -907,23 +907,23 @@ static void GetBerryFromBag(void)
     SetMainCallback2(MainCB);
 }
 
-static void InitMainTask(void)
+static void BerryCrush_SetupMainTask(void)
 {
     DestroyTask(gBerryCrushGame->mainTask);
     ChooseBerryForMachine(GetBerryFromBag);
 }
 
-static void SetVBlankCB(void)
+static void BerryCrush_SetVBlankCB(void)
 {
     SetVBlankCallback(VBlankCB);
 }
 
-static void InitVBlankCB(void)
+static void BerryCrush_InitVBlankCB(void)
 {
     SetVBlankCallback(NULL);
 }
 
-static void SaveResults(void)
+static void BerryCrush_SaveResults(void)
 {
     u32 var0, var1;
 
@@ -1002,7 +1002,7 @@ static void MainTask(u8 taskId)
     + offsetof(struct BerryCrushGame_68_x, unk30)    \
     + sizeof(struct BerryCrushGame_Player) * (i))
 
-static void InitGame(struct BerryCrushGame *arg0)
+static void ParseName_Options(struct BerryCrushGame *arg0)
 {
     u8 i = 0;
 
@@ -1028,7 +1028,7 @@ static void InitGame(struct BerryCrushGame *arg0)
     }
 }
 
-// TODO: Everything from here on is likely in a separate file.
+// TODO: Everything from here on is likely in separate files.
 s32 InitBerryCrushDisplay(void)
 {
     struct BerryCrushGame *game = GetBerryCrushGame();
@@ -1118,7 +1118,7 @@ s32 InitBerryCrushDisplay(void)
         ShowBg(2);
         ShowBg(3);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        SetVBlankCB();
+        BerryCrush_SetVBlankCB();
         game->unkC = 0;
         return 1;
     }
@@ -2155,7 +2155,7 @@ static u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5)
 static u32 sub_8022F04(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
 {
     r0->unk4 = NULL;
-    SetMainCallback2(InitMainTask);
+    SetMainCallback2(BerryCrush_SetupMainTask);
     return 0;
 }
 
@@ -2942,7 +2942,7 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
         r7->unk10 = 0;
         break;
     case 7:
-        SaveResults();
+        BerryCrush_SaveResults();
         sub_8022BEC(18, 1, NULL);
         r7->unk12 = 11;
         r7->unkC = 0;
