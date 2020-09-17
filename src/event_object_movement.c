@@ -1232,8 +1232,8 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     objectEvent->previousCoords.y = y;
     objectEvent->currentElevation = template->elevation;
     objectEvent->previousElevation = template->elevation;
-    objectEvent->range.as_nybbles.x = template->movementRangeX;
-    objectEvent->range.as_nybbles.y = template->movementRangeY;
+    objectEvent->rangeX = template->movementRangeX;
+    objectEvent->rangeY = template->movementRangeY;
     objectEvent->trainerType = template->trainerType;
     objectEvent->mapNum = mapNum; //redundant, but needed to match
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
@@ -1242,13 +1242,13 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
     SetObjectEventDynamicGraphicsId(objectEvent);
     if (gRangedMovementTypes[objectEvent->movementType])
     {
-        if (objectEvent->range.as_nybbles.x == 0)
+        if (objectEvent->rangeX == 0)
         {
-            objectEvent->range.as_nybbles.x++;
+            objectEvent->rangeX++;
         }
-        if (objectEvent->range.as_nybbles.y == 0)
+        if (objectEvent->rangeY == 0)
         {
-            objectEvent->range.as_nybbles.y++;
+            objectEvent->rangeY++;
         }
     }
     return objectEventId;
@@ -4755,19 +4755,19 @@ static bool8 IsCoordOutsideObjectEventMovementRange(struct ObjectEvent *objectEv
     s16 top;
     s16 bottom;
 
-    if (objectEvent->range.as_nybbles.x != 0)
+    if (objectEvent->rangeX != 0)
     {
-        left = objectEvent->initialCoords.x - objectEvent->range.as_nybbles.x;
-        right = objectEvent->initialCoords.x + objectEvent->range.as_nybbles.x;
+        left = objectEvent->initialCoords.x - objectEvent->rangeX;
+        right = objectEvent->initialCoords.x + objectEvent->rangeX;
         if (left > x || right < x)
         {
             return TRUE;
         }
     }
-    if (objectEvent->range.as_nybbles.y != 0)
+    if (objectEvent->rangeY != 0)
     {
-        top = objectEvent->initialCoords.y - objectEvent->range.as_nybbles.y;
-        bottom = objectEvent->initialCoords.y + objectEvent->range.as_nybbles.y;
+        top = objectEvent->initialCoords.y - objectEvent->rangeY;
+        bottom = objectEvent->initialCoords.y + objectEvent->rangeY;
         if (top > y || bottom < y)
         {
             return TRUE;
