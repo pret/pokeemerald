@@ -616,8 +616,8 @@ static void RecordLastUsedMoveByTarget(void)
     {
         if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
-        if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] != gLastMoves[gBattlerTarget]  // HACK: This redundant condition is a hack to make the asm match.
-         && BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == MOVE_NONE)
+
+        if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == MOVE_NONE)
         {
             BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] = gLastMoves[gBattlerTarget];
             break;
