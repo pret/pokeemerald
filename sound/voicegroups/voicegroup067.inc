@@ -17,14 +17,14 @@ voicegroup067:: @ 8688874
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868891C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688928
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688934
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 210  @ 8688940
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 210  @ 8688940
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868894C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688958
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688964
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688970
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868897C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688988
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 249, 25, 76  @ 8688994
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 249, 25, 76  @ 8688994
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86889A0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86889AC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86889B8
@@ -38,7 +38,7 @@ voicegroup067:: @ 8688874
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688A18
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688A24
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688A30
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 8688A3C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 8688A3C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688A48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688A54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688A60
@@ -73,7 +73,7 @@ voicegroup067:: @ 8688874
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688BBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688BC8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688BD4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 127  @ 8688BE0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 127  @ 8688BE0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688BEC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688BF8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8688C04

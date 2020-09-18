@@ -19,8 +19,8 @@ voicegroup109:: @ 8697670
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8697730
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869773C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8697748
-	voice_directsound 60, 0, DirectSoundWaveData_unknown_church_organ, 255, 76, 154, 188  @ 8697754
-	voice_directsound 60, 0, DirectSoundWaveData_emu_ii_pipe_organ, 255, 76, 154, 188  @ 8697760
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_church_organ3_low, 255, 76, 154, 188  @ 8697754
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_church_organ3_high, 255, 76, 154, 188  @ 8697760
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869776C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8697778
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8697784
@@ -35,7 +35,7 @@ voicegroup109:: @ 8697670
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86977F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86977FC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8697808
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 188  @ 8697814
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 188  @ 8697814
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8697820
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869782C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8697838

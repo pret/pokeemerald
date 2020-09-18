@@ -14,7 +14,7 @@ voicegroup037:: @ 867E314
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E398
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E3A4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E3B0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 216, 90, 242  @ 867E3BC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 216, 90, 242  @ 867E3BC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E3C8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E3D4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E3E0
@@ -46,8 +46,8 @@ voicegroup037:: @ 867E314
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E518
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E524
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E530
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 246, 0, 235  @ 867E53C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 867E548
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 246, 0, 235  @ 867E53C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 867E548
 	voice_keysplit voicegroup006, KeySplitTable2  @ 867E554
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E560
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E56C

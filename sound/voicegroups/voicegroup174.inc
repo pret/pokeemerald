@@ -17,11 +17,11 @@ voicegroup174:: @ 86AF76C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF814
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF820
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF82C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 127  @ 86AF838
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 127  @ 86AF838
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF844
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF850
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF85C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_accordion, 255, 0, 255, 165  @ 86AF868
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_accordion, 255, 0, 255, 165  @ 86AF868
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF874
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF880
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF88C
@@ -38,7 +38,7 @@ voicegroup174:: @ 86AF76C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF910
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF91C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF928
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 165  @ 86AF934
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 165  @ 86AF934
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF940
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF94C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AF958
@@ -152,7 +152,7 @@ voicegroup174:: @ 86AF76C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AFE68
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AFE74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AFE80
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 165, 154, 127  @ 86AFE8C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 165, 154, 127  @ 86AFE8C
 	voice_keysplit_all voicegroup002  @ 86AFE98
 	voice_square_1_alt 60, 0, 0, 2, 0, 2, 3, 1  @ 86AFEA4
 	voice_square_2_alt 60, 0, 2, 0, 2, 3, 1  @ 86AFEB0

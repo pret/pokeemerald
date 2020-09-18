@@ -17,14 +17,14 @@ voicegroup143:: @ 86A4BF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4C9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4CA8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4CB4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 128, 160, 123, 165  @ 86A4CC0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 128, 160, 123, 165  @ 86A4CC0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4CCC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4CD8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4CE4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4CF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4CFC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4D08
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 249, 25, 0  @ 86A4D14
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 249, 25, 0  @ 86A4D14
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4D20
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4D2C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A4D38

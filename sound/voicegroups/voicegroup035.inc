@@ -47,7 +47,7 @@ voicegroup035:: @ 867D918
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867DB28
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867DB34
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867DB40
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 867DB4C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 867DB4C
 	voice_keysplit voicegroup006, KeySplitTable2  @ 867DB58
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867DB64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867DB70

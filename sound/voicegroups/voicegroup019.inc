@@ -45,7 +45,7 @@ voicegroup019:: @ 86799C4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679BBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679BC8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679BD4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pizzicato_strings, 255, 216, 0, 165  @ 8679BE0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 255, 216, 0, 165  @ 8679BE0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679BEC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679BF8
 	voice_keysplit voicegroup006, KeySplitTable2  @ 8679C04
@@ -73,7 +73,7 @@ voicegroup019:: @ 86799C4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679D0C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679D18
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679D24
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 127, 231, 127  @ 8679D30
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 127, 231, 127  @ 8679D30
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679D3C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679D48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679D54

@@ -14,7 +14,7 @@ voicegroup151:: @ 86A7840
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A78C4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A78D0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A78DC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 86A78E8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 86A78E8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A78F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A7900
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A790C
@@ -47,7 +47,7 @@ voicegroup151:: @ 86A7840
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A7A50
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A7A5C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A7A68
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 193, 127  @ 86A7A74
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 193, 127  @ 86A7A74
 	voice_keysplit voicegroup006, KeySplitTable2  @ 86A7A80
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A7A8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A7A98

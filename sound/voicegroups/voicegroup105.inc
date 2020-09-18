@@ -13,7 +13,7 @@ voicegroup105:: @ 869608C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8696104
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8696110
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869611C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_xylophone, 255, 235, 0, 216  @ 8696128
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_xylophone, 255, 235, 0, 216  @ 8696128
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8696134
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8696140
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869614C

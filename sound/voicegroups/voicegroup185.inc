@@ -14,7 +14,7 @@ voicegroup185:: @ 86B264C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B26D0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B26DC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B26E8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 86B26F4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 86B26F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2700
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B270C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2718
@@ -33,21 +33,21 @@ voicegroup185:: @ 86B264C
 	voice_directsound 60, 0, DirectSoundWaveData_sd90_classical_distortion_guitar_high, 128, 0, 255, 206  @ 86B27B4
 	voice_directsound 60, 0, DirectSoundWaveData_sd90_special_scream_drive, 255, 0, 255, 165  @ 86B27C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B27CC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pick_bass, 255, 253, 0, 149  @ 86B27D8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fingered_bass, 255, 253, 0, 149  @ 86B27D8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B27E4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 188  @ 86B27F0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 188  @ 86B27F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B27FC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2808
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 86B2814
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 86B2814
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2820
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B282C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2838
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2844
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2850
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B285C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pizzicato_strings, 255, 216, 0, 165  @ 86B2868
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 255, 216, 0, 165  @ 86B2868
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2874
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 86B2880
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 86B2880
 	voice_keysplit voicegroup006, KeySplitTable2  @ 86B288C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B2898
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B28A4

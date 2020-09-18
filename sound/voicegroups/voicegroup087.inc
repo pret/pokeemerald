@@ -36,9 +36,9 @@ voicegroup087:: @ 868F87C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA08
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA14
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA20
-	voice_directsound 60, 0, DirectSoundWaveData_jv1080_slap_bass, 255, 235, 128, 99  @ 868FA2C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_slap_bass, 255, 235, 128, 99  @ 868FA2C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA38
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 868FA44
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 868FA44
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA50
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA5C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA68
@@ -47,7 +47,7 @@ voicegroup087:: @ 868F87C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FA98
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FAA4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 180, 246  @ 868FAB0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 180, 246  @ 868FAB0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FABC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FAC8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868FAD4

@@ -72,7 +72,7 @@ voicegroup130:: @ 86A0754
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A0A90
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A0A9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A0AA8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_accordion_duplicate, 255, 249, 25, 248  @ 86A0AB4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_accordion_duplicate, 255, 249, 25, 248  @ 86A0AB4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A0AC0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A0ACC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A0AD8

@@ -47,7 +47,7 @@ voicegroup170:: @ 86AE338
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE548
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE554
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE560
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 86AE56C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 86AE56C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE578
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE584
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE590
@@ -73,7 +73,7 @@ voicegroup170:: @ 86AE338
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE680
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE68C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE698
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 127, 231, 127  @ 86AE6A4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 127, 231, 127  @ 86AE6A4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE6B0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE6BC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86AE6C8

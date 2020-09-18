@@ -38,7 +38,7 @@ voicegroup136:: @ 86A29D4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2B78
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2B84
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2B90
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 86A2B9C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 86A2B9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2BA8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2BB4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2BC0

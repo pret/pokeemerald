@@ -17,7 +17,7 @@ voicegroup038:: @ 867E740
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E7E8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E7F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E800
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 127  @ 867E80C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 127  @ 867E80C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E818
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E824
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E830
@@ -38,7 +38,7 @@ voicegroup038:: @ 867E740
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E8E4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E8F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E8FC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 867E908
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 867E908
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E914
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E920
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867E92C

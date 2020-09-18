@@ -17,7 +17,7 @@ voicegroup045:: @ 8680AB0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680B58
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680B64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680B70
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 210  @ 8680B7C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 210  @ 8680B7C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680B88
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680B94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680BA0
@@ -38,7 +38,7 @@ voicegroup045:: @ 8680AB0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680C54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680C60
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680C6C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 216  @ 8680C78
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 216  @ 8680C78
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680C84
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680C90
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680C9C
@@ -73,7 +73,7 @@ voicegroup045:: @ 8680AB0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680DF8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680E04
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680E10
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 165  @ 8680E1C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 165  @ 8680E1C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680E28
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680E34
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8680E40

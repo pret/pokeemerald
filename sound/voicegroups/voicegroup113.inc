@@ -12,9 +12,9 @@ voicegroup113:: @ 8698C54
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B48E0, 0, 7, 15, 1  @ 8698CC0
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B48F0, 0, 7, 15, 1  @ 8698CCC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698CD8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_xylophone, 255, 235, 0, 204  @ 8698CE4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_xylophone, 255, 235, 0, 204  @ 8698CE4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698CF0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 8698CFC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 8698CFC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698D08
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698D14
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698D20
@@ -35,10 +35,10 @@ voicegroup113:: @ 8698C54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698DD4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698DE0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698DEC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 188  @ 8698DF8
-	voice_directsound 60, 0, DirectSoundWaveData_jv1080_slap_bass, 255, 235, 128, 99  @ 8698E04
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 188  @ 8698DF8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_slap_bass, 255, 235, 128, 99  @ 8698E04
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698E10
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 8698E1C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 8698E1C
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4920, 0, 7, 15, 1  @ 8698E28
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698E34
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698E40
@@ -47,7 +47,7 @@ voicegroup113:: @ 8698C54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698E64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698E70
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698E7C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 180, 246  @ 8698E88
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 180, 246  @ 8698E88
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698E94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698EA0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698EAC
@@ -73,7 +73,7 @@ voicegroup113:: @ 8698C54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698F9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698FA8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698FB4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 127  @ 8698FC0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 127  @ 8698FC0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698FCC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698FD8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698FE4

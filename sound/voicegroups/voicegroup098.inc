@@ -73,7 +73,7 @@ voicegroup098:: @ 8693A7C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8693DC4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8693DD0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8693DDC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 127  @ 8693DE8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 127  @ 8693DE8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8693DF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8693E00
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8693E0C
@@ -126,6 +126,6 @@ voicegroup098:: @ 8693A7C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8694040
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869404C
 	voice_directsound 60, 0, DirectSoundWaveData_873ECD8, 255, 255, 255, 127  @ 8694058
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_standard_hand_clap, 255, 255, 255, 127  @ 8694064
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tr909_hand_clap, 255, 255, 255, 127  @ 8694064
 	voice_noise_alt 60, 0, 0, 0, 1, 0, 0  @ 8694070
 

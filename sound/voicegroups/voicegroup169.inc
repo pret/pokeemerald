@@ -17,7 +17,7 @@ voicegroup169:: @ 86ADD38
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADDE0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADDEC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADDF8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 210  @ 86ADE04
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 210  @ 86ADE04
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADE10
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADE1C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADE28
@@ -35,7 +35,7 @@ voicegroup169:: @ 86ADD38
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADEB8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADEC4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADED0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 188  @ 86ADEDC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 188  @ 86ADEDC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADEE8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADEF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86ADF00

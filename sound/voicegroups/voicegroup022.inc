@@ -22,7 +22,7 @@ voicegroup022:: @ 867A438
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A51C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A528
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A534
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 127, 231, 127  @ 867A540
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 127, 231, 127  @ 867A540
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A54C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A558
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A564
@@ -36,11 +36,11 @@ voicegroup022:: @ 867A438
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4870, 0, 7, 15, 0  @ 867A5C4
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4870, 0, 7, 15, 1  @ 867A5D0
 	voice_square_1_alt 60, 0, 0, 0, 0, 0, 7, 0  @ 867A5DC
-	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88_standard_kick, 255, 0, 255, 242  @ 867A5E8
+	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88pro_rnd_kick, 255, 0, 255, 242  @ 867A5E8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A5F4
-	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88_standard3_snare, 255, 0, 255, 242  @ 867A600
+	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88pro_rnd_snare, 255, 0, 255, 242  @ 867A600
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A60C
-	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88_orchestra_snare, 255, 0, 255, 242  @ 867A618
+	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88pro_orchestra_snare, 255, 0, 255, 242  @ 867A618
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A624
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A630
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A63C
@@ -54,7 +54,7 @@ voicegroup022:: @ 867A438
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A69C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A6A8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A6B4
-	voice_directsound_no_resample 32, 34, DirectSoundWaveData_unknown_tambourine, 255, 127, 77, 204  @ 867A6C0
+	voice_directsound_no_resample 32, 34, DirectSoundWaveData_sc88pro_tambourine, 255, 127, 77, 204  @ 867A6C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A6CC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A6D8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A6E4
@@ -62,7 +62,7 @@ voicegroup022:: @ 867A438
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A6FC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A708
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A714
-	voice_directsound_no_resample 72, 67, DirectSoundWaveData_sc88_bongo, 255, 0, 255, 0  @ 867A720
+	voice_directsound_no_resample 72, 67, DirectSoundWaveData_sc88pro_mute_high_conga, 255, 0, 255, 0  @ 867A720
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A72C
-	voice_directsound_no_resample 72, 61, DirectSoundWaveData_sc88_bongo_low, 255, 0, 255, 0  @ 867A738
+	voice_directsound_no_resample 72, 61, DirectSoundWaveData_sc88pro_open_low_conga, 255, 0, 255, 0  @ 867A738
 

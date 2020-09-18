@@ -9,12 +9,12 @@ voicegroup059:: @ 8685A48
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_86B4870, 0, 7, 15, 0  @ 8685A90
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685A9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685AA8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_glockenspiel, 255, 165, 51, 242  @ 8685AB4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_glockenspiel, 255, 165, 51, 242  @ 8685AB4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685AC0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685ACC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685AD8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685AE4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 8685AF0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 8685AF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685AFC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685B08
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685B14
@@ -46,8 +46,8 @@ voicegroup059:: @ 8685A48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685C4C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685C58
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685C64
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 242, 51, 242  @ 8685C70
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 180, 239  @ 8685C7C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 242, 51, 242  @ 8685C70
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 180, 239  @ 8685C7C
 	voice_keysplit voicegroup006, KeySplitTable2  @ 8685C88
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685C94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685CA0
@@ -73,7 +73,7 @@ voicegroup059:: @ 8685A48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685D90
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685D9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685DA8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 165  @ 8685DB4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 165  @ 8685DB4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685DC0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685DCC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685DD8

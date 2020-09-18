@@ -13,7 +13,7 @@ voicegroup060:: @ 8685E74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685EEC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685EF8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685F04
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_xylophone, 255, 235, 0, 204  @ 8685F10
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_xylophone, 255, 235, 0, 204  @ 8685F10
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685F1C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685F28
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8685F34
@@ -45,9 +45,9 @@ voicegroup060:: @ 8685E74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868606C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8686078
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8686084
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pizzicato_strings, 128, 226, 0, 38  @ 8686090
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 242, 51, 242  @ 868609C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 180, 246  @ 86860A8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 128, 226, 0, 38  @ 8686090
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 242, 51, 242  @ 868609C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 180, 246  @ 86860A8
 	voice_keysplit voicegroup006, KeySplitTable2  @ 86860B4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86860C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86860CC
@@ -73,7 +73,7 @@ voicegroup060:: @ 8685E74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86861BC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86861C8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86861D4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 127  @ 86861E0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 127  @ 86861E0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86861EC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86861F8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8686204

@@ -13,7 +13,7 @@ voicegroup146:: @ 86A5DF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5E6C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5E78
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5E84
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_xylophone, 255, 235, 0, 204  @ 86A5E90
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_xylophone, 255, 235, 0, 204  @ 86A5E90
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5E9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5EA8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5EB4
@@ -24,7 +24,7 @@ voicegroup146:: @ 86A5DF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5EF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5EFC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5F08
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 85, 249, 25, 226  @ 86A5F14
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 85, 249, 25, 226  @ 86A5F14
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5F20
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5F2C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A5F38

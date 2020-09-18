@@ -14,7 +14,7 @@ voicegroup153:: @ 86A8260
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A82E4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A82F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A82FC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 97, 236  @ 86A8308
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 97, 236  @ 86A8308
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8314
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8320
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A832C
@@ -46,8 +46,8 @@ voicegroup153:: @ 86A8260
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8464
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8470
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A847C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 246, 0, 235  @ 86A8488
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 127, 154, 235  @ 86A8494
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 246, 0, 235  @ 86A8488
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 127, 154, 235  @ 86A8494
 	voice_keysplit voicegroup006, KeySplitTable2  @ 86A84A0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A84AC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A84B8
@@ -73,7 +73,7 @@ voicegroup153:: @ 86A8260
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A85A8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A85B4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A85C0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 127, 231, 127  @ 86A85CC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 127, 231, 127  @ 86A85CC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A85D8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A85E4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A85F0

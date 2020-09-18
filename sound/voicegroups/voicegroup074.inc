@@ -13,7 +13,7 @@ voicegroup074:: @ 868B274
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B2EC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B2F8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B304
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_xylophone, 255, 235, 0, 204  @ 868B310
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_xylophone, 255, 235, 0, 204  @ 868B310
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B31C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B328
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B334
@@ -35,7 +35,7 @@ voicegroup074:: @ 868B274
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B3F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B400
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B40C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 188  @ 868B418
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 188  @ 868B418
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B424
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B430
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B43C
@@ -47,7 +47,7 @@ voicegroup074:: @ 868B274
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B484
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B490
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B49C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 180, 216  @ 868B4A8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 180, 216  @ 868B4A8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B4B4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B4C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B4CC
