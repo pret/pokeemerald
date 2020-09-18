@@ -8,7 +8,7 @@
 [terminal]: https://docs.microsoft.com/windows/terminal/get-started
 [wsl]: https://docs.microsoft.com/windows/wsl/install-win10
 
-Independently from the specific OS, make sure that the `gcc`, `g++`, `make`, `git`, and `libpng` packages or their equivalents are installed and accessible to the development tools that are used by the project (this means that, for example, on Windows, the packages have to be installed in the WSL environment). The package names and installation methods may vary with each OS.
+Independently from the specific OS, make sure that the `gcc`, `g++`, `make`, `git`, and `libpng-dev` packages or their equivalents are installed and accessible to the development tools that are used by the project (this means that, for example, on Windows, the packages have to be installed in the WSL environment). The package names and installation methods may vary with each OS.
 
 Install the devkitARM toolchain of devkitPro as per [the instructions on their wiki](https://devkitpro.org/wiki/devkitPro_pacman). On Windows, follow the Linux instructions inside WSL as any steps about the Windows installer do not apply.
 
