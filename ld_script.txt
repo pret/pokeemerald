@@ -22,7 +22,7 @@ SECTIONS {
         INCLUDE "sym_ewram.ld"
 
         . = 0x40000;
-}
+    }
 
     . = 0x3000000;
 
