@@ -672,7 +672,7 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u16 getMetatileForFloor(u8 floorId, u32 x, u32 y, u32 stride) // stride is always 16
+static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 stride) // stride is always 16
 {
     bool8 impassable;
     u16 metatile;
@@ -682,7 +682,7 @@ static u16 getMetatileForFloor(u8 floorId, u32 x, u32 y, u32 stride) // stride i
     metatile = sHillData->floors[floorId].display.metatileData[stride * y + x] + 0x200;
     elevation = 0x3000;
 
-    return (((impassable << 10) & 0xc00) | elevation) | (metatile & 0x3ff);
+    return (((impassable << 10) & METATILE_COLLISION_MASK) | elevation) | (metatile & METATILE_ID_MASK);
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
@@ -722,7 +722,7 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg)
     for (i = 0; i < 16; i++)
     {
         for (j = 0; j < 16; j++)
-            dst[j] = getMetatileForFloor(mapId, j, i, 0x10);
+            dst[j] = GetMetatileForFloor(mapId, j, i, 0x10);
         dst += 31;
     }
 
