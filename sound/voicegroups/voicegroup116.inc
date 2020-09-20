@@ -17,14 +17,14 @@ voicegroup116:: @ 8699E54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699EFC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F08
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F14
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 128, 146, 190, 115  @ 8699F20
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 128, 146, 190, 115  @ 8699F20
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F2C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F38
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F44
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_accordion, 255, 0, 255, 165  @ 8699F50
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_accordion, 255, 0, 255, 165  @ 8699F50
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F5C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F68
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 165, 128, 216  @ 8699F74
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 165, 128, 216  @ 8699F74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F80
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699F98
@@ -33,12 +33,12 @@ voicegroup116:: @ 8699E54
 	voice_directsound 60, 0, DirectSoundWaveData_sd90_classical_distortion_guitar_high, 255, 0, 255, 127  @ 8699FBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699FC8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699FD4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pick_bass, 255, 253, 0, 149  @ 8699FE0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fingered_bass, 255, 253, 0, 149  @ 8699FE0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699FEC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8699FF8
-	voice_directsound 60, 0, DirectSoundWaveData_unused_sc88_unison_slap, 255, 165, 180, 216  @ 869A004
+	voice_directsound 60, 0, DirectSoundWaveData_unused_sc88pro_unison_slap, 255, 165, 180, 216  @ 869A004
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869A010
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 869A01C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 869A01C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869A028
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869A034
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869A040

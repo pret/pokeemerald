@@ -14,7 +14,7 @@ voicegroup082:: @ 868DC8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD10
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD1C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD28
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 868DD34
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 868DD34
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD40
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD4C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD58
@@ -24,7 +24,7 @@ voicegroup082:: @ 868DC8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD88
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DD94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DDA0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 249, 25, 76  @ 868DDAC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 249, 25, 76  @ 868DDAC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DDB8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DDC4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DDD0
@@ -47,7 +47,7 @@ voicegroup082:: @ 868DC8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DE9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DEA8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DEB4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 180, 246  @ 868DEC0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 180, 246  @ 868DEC0
 	voice_keysplit voicegroup006, KeySplitTable2  @ 868DECC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DED8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868DEE4

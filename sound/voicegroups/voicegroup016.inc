@@ -36,11 +36,11 @@ voicegroup016:: @ 8678C74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678E00
 	voice_noise_alt 60, 0, 0, 0, 2, 0, 2  @ 8678E0C
 	voice_noise_alt 60, 0, 0, 0, 1, 0, 1  @ 8678E18
-	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88_standard_kick, 255, 0, 255, 242  @ 8678E24
+	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88pro_rnd_kick, 255, 0, 255, 242  @ 8678E24
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678E30
-	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88_standard3_snare, 255, 0, 255, 242  @ 8678E3C
+	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88pro_rnd_snare, 255, 0, 255, 242  @ 8678E3C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678E48
-	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88_orchestra_snare, 255, 0, 255, 242  @ 8678E54
+	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88pro_orchestra_snare, 255, 0, 255, 242  @ 8678E54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678E60
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678E6C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678E78
@@ -54,7 +54,7 @@ voicegroup016:: @ 8678C74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678ED8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678EE4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678EF0
-	voice_directsound_no_resample 32, 74, DirectSoundWaveData_unknown_tambourine, 255, 127, 77, 204  @ 8678EFC
+	voice_directsound_no_resample 32, 74, DirectSoundWaveData_sc88pro_tambourine, 255, 127, 77, 204  @ 8678EFC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678F08
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678F14
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678F20
@@ -62,7 +62,7 @@ voicegroup016:: @ 8678C74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678F38
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678F44
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678F50
-	voice_directsound_no_resample 72, 66, DirectSoundWaveData_sc88_bongo, 255, 0, 255, 0  @ 8678F5C
+	voice_directsound_no_resample 72, 66, DirectSoundWaveData_sc88pro_mute_high_conga, 255, 0, 255, 0  @ 8678F5C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8678F68
-	voice_directsound_no_resample 72, 62, DirectSoundWaveData_sc88_bongo_low, 255, 0, 255, 0  @ 8678F74
+	voice_directsound_no_resample 72, 62, DirectSoundWaveData_sc88pro_open_low_conga, 255, 0, 255, 0  @ 8678F74
 

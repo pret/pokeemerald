@@ -17,14 +17,14 @@ voicegroup040:: @ 867F118
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F1C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F1CC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F1D8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 165  @ 867F1E4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 165  @ 867F1E4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F1F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F1FC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F208
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F214
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F220
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F22C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 249, 25, 76  @ 867F238
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 249, 25, 76  @ 867F238
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F244
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F250
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F25C
@@ -36,7 +36,7 @@ voicegroup040:: @ 867F118
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F2A4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F2B0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F2BC
-	voice_directsound 60, 0, DirectSoundWaveData_jv1080_slap_bass, 255, 235, 128, 99  @ 867F2C8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_slap_bass, 255, 235, 128, 99  @ 867F2C8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F2D4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F2E0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F2EC
@@ -73,7 +73,7 @@ voicegroup040:: @ 867F118
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F460
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F46C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F478
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 127  @ 867F484
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 127  @ 867F484
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F490
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F49C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867F4A8

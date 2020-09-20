@@ -45,7 +45,7 @@ voicegroup020:: @ 8679DC0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679FB8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679FC4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679FD0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pizzicato_strings, 255, 216, 0, 165  @ 8679FDC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 255, 216, 0, 165  @ 8679FDC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679FE8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8679FF4
 	voice_keysplit voicegroup006, KeySplitTable2  @ 867A000

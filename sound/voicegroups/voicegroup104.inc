@@ -46,7 +46,7 @@ voicegroup104:: @ 8695B7C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8695D80
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8695D8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8695D98
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 242, 51, 242  @ 8695DA4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 242, 51, 242  @ 8695DA4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8695DB0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8695DBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8695DC8

@@ -35,7 +35,7 @@ voicegroup023:: @ 867A744
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A8C4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A8D0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A8DC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 149  @ 867A8E8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 149  @ 867A8E8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A8F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A900
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A90C
@@ -46,7 +46,7 @@ voicegroup023:: @ 867A744
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A948
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A954
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A960
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 246, 0, 235  @ 867A96C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 246, 0, 235  @ 867A96C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A978
 	voice_keysplit voicegroup006, KeySplitTable2  @ 867A984
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867A990

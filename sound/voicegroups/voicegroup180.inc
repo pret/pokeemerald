@@ -126,6 +126,6 @@ voicegroup180:: @ 86B0FF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B15B4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B15C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B15CC
-	voice_directsound_no_resample 60, 0, DirectSoundWaveData_sc88_standard_hand_clap, 255, 255, 255, 127  @ 86B15D8
+	voice_directsound_no_resample 60, 0, DirectSoundWaveData_sc88pro_tr909_hand_clap, 255, 255, 255, 127  @ 86B15D8
 	voice_noise_alt 60, 0, 0, 0, 1, 0, 0  @ 86B15E4
 

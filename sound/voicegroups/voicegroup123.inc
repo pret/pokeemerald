@@ -14,7 +14,7 @@ voicegroup123:: @ 869BCF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BD74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BD80
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BD8C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 216, 90, 242  @ 869BD98
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 216, 90, 242  @ 869BD98
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BDA4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BDB0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BDBC
@@ -33,7 +33,7 @@ voicegroup123:: @ 869BCF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BE58
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BE64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BE70
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pick_bass, 255, 253, 0, 149  @ 869BE7C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fingered_bass, 255, 253, 0, 149  @ 869BE7C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BE88
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BE94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BEA0
@@ -47,7 +47,7 @@ voicegroup123:: @ 869BCF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BF00
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BF0C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BF18
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 869BF24
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 869BF24
 	voice_keysplit voicegroup006, KeySplitTable2  @ 869BF30
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BF3C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869BF48
@@ -73,7 +73,7 @@ voicegroup123:: @ 869BCF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C038
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C044
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C050
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 165  @ 869C05C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 165  @ 869C05C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C068
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C074
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C080
@@ -127,5 +127,5 @@ voicegroup123:: @ 869BCF0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C2C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C2CC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869C2D8
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_orchestra_cymbal_crash, 255, 246, 0, 216  @ 869C2E4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_orchestra_cymbal_crash, 255, 246, 0, 216  @ 869C2E4
 

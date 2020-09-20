@@ -46,5 +46,5 @@ voicegroup181:: @ 86B15F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B17F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B1800
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B180C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 242, 51, 242  @ 86B1818
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 242, 51, 242  @ 86B1818
 

@@ -17,14 +17,14 @@ voicegroup187:: @ 86B324C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B32F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3300
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B330C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 76, 133, 137  @ 86B3318
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 76, 133, 137  @ 86B3318
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3324
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3330
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B333C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_accordion, 64, 188, 108, 165  @ 86B3348
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_accordion, 64, 188, 108, 165  @ 86B3348
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3354
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3360
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 249, 25, 127  @ 86B336C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 249, 25, 127  @ 86B336C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3378
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3384
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3390
@@ -46,7 +46,7 @@ voicegroup187:: @ 86B324C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3450
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B345C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3468
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 246, 0, 235  @ 86B3474
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 246, 0, 235  @ 86B3474
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3480
 	voice_keysplit voicegroup006, KeySplitTable2  @ 86B348C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3498
@@ -73,7 +73,7 @@ voicegroup187:: @ 86B324C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B3594
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B35A0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B35AC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 127, 231, 127  @ 86B35B8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 127, 231, 127  @ 86B35B8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B35C4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B35D0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B35DC

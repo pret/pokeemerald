@@ -14,7 +14,7 @@ voicegroup089:: @ 869047C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690500
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869050C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690518
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 8690524
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 8690524
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690530
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869053C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690548
@@ -73,7 +73,7 @@ voicegroup089:: @ 869047C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86907C4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86907D0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86907DC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 127  @ 86907E8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 127  @ 86907E8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86907F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8690800
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869080C

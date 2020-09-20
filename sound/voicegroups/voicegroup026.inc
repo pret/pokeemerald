@@ -47,7 +47,7 @@ voicegroup026:: @ 867B3A4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867B5B4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867B5C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867B5CC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 867B5D8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 867B5D8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867B5E4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867B5F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867B5FC

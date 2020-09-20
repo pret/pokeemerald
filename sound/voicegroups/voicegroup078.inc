@@ -14,7 +14,7 @@ voicegroup078:: @ 868CA74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CAF8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB04
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB10
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 868CB1C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 868CB1C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB28
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB34
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB40
@@ -24,7 +24,7 @@ voicegroup078:: @ 868CA74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB70
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB7C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CB88
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 249, 25, 76  @ 868CB94
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 249, 25, 76  @ 868CB94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CBA0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CBAC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CBB8
@@ -35,7 +35,7 @@ voicegroup078:: @ 868CA74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CBF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC00
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC0C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 196  @ 868CC18
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 196  @ 868CC18
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC24
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC30
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC3C
@@ -45,9 +45,9 @@ voicegroup078:: @ 868CA74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC6C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC78
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC84
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pizzicato_strings, 255, 226, 0, 38  @ 868CC90
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 255, 226, 0, 38  @ 868CC90
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CC9C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 0, 180, 246  @ 868CCA8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 0, 180, 246  @ 868CCA8
 	voice_keysplit voicegroup006, KeySplitTable2  @ 868CCB4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CCC0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868CCCC

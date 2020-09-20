@@ -45,9 +45,9 @@ voicegroup024:: @ 867AB70
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AD68
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AD74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AD80
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pizzicato_strings, 255, 216, 0, 165  @ 867AD8C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 255, 216, 0, 165  @ 867AD8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AD98
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 867ADA4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 867ADA4
 	voice_keysplit voicegroup006, KeySplitTable2  @ 867ADB0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867ADBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867ADC8
@@ -73,7 +73,7 @@ voicegroup024:: @ 867AB70
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AEB8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AEC4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AED0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 127, 231, 127  @ 867AEDC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 127, 231, 127  @ 867AEDC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AEE8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AEF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867AF00

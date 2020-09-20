@@ -35,7 +35,7 @@ voicegroup032:: @ 867CB44
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CCC4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CCD0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CCDC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_pick_bass, 255, 250, 0, 149  @ 867CCE8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fingered_bass, 255, 250, 0, 149  @ 867CCE8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CCF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CD00
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CD0C
@@ -73,7 +73,7 @@ voicegroup032:: @ 867CB44
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CE8C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CE98
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CEA4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 127, 231, 127  @ 867CEB0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 127, 231, 127  @ 867CEB0
 	voice_programmable_wave 60, 0, ProgrammableWaveData_86B4830, 0, 7, 15, 1  @ 867CEBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CEC8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 867CED4

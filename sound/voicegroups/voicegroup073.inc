@@ -13,18 +13,18 @@ voicegroup073:: @ 868AC74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868ACEC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868ACF8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD04
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_xylophone, 255, 235, 0, 204  @ 868AD10
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_xylophone, 255, 235, 0, 204  @ 868AD10
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD1C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD28
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD34
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 210  @ 868AD40
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 210  @ 868AD40
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD4C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD58
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD70
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD7C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AD88
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 249, 25, 76  @ 868AD94
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 249, 25, 76  @ 868AD94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868ADA0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868ADAC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868ADB8
@@ -35,10 +35,10 @@ voicegroup073:: @ 868AC74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868ADF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE00
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE0C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_fretless_bass, 255, 253, 0, 188  @ 868AE18
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 253, 0, 188  @ 868AE18
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE24
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE30
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_synth_bass, 255, 252, 0, 115  @ 868AE3C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 252, 0, 115  @ 868AE3C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE54
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE60
@@ -46,7 +46,7 @@ voicegroup073:: @ 868AC74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE78
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE84
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AE90
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_harp, 255, 242, 51, 242  @ 868AE9C
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 242, 51, 242  @ 868AE9C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AEA8
 	voice_keysplit voicegroup006, KeySplitTable2  @ 868AEB4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AEC0
@@ -73,7 +73,7 @@ voicegroup073:: @ 868AC74
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AFBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AFC8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AFD4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_flute, 255, 0, 255, 127  @ 868AFE0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_flute, 255, 0, 255, 127  @ 868AFE0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AFEC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868AFF8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 868B004

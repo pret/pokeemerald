@@ -1,8 +1,8 @@
 	.align 2
 voicegroup007:: @ 8676AE4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_trumpet_60, 255, 0, 193, 127  @ 8676AE4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_trumpet_72, 255, 0, 193, 127  @ 8676AF0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_trumpet_84, 255, 0, 193, 127  @ 8676AFC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_60, 255, 0, 193, 127  @ 8676AE4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_72, 255, 0, 193, 127  @ 8676AF0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_trumpet_84, 255, 0, 193, 127  @ 8676AFC
 	voice_square_1_alt 60, 0, 38, 2, 1, 0, 0, 0  @ 8676B08
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8676B14
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8676B20

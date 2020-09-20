@@ -24,7 +24,7 @@ voicegroup147:: @ 86A63F4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A64F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A64FC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A6508
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 64, 249, 25, 226  @ 86A6514
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 64, 249, 25, 226  @ 86A6514
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A6520
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A652C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A6538

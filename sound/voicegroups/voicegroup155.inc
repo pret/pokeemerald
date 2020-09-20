@@ -14,18 +14,18 @@ voicegroup155:: @ 86A8CBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8D40
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8D4C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8D58
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_tubular_bell, 255, 165, 90, 216  @ 86A8D64
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_tubular_bell, 255, 165, 90, 216  @ 86A8D64
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8D70
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8D7C
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 127  @ 86A8D88
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 127  @ 86A8D88
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8D94
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8DA0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8DAC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8DB8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8DC4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8DD0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 128, 249, 25, 127  @ 86A8DDC
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_nylon_str_guitar, 255, 165, 128, 204  @ 86A8DE8
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 128, 249, 25, 127  @ 86A8DDC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_nylon_str_guitar, 255, 165, 128, 204  @ 86A8DE8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8DF4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8E00
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8E0C
@@ -47,7 +47,7 @@ voicegroup155:: @ 86A8CBC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8ECC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8ED8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8EE4
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_timpani, 255, 246, 0, 226  @ 86A8EF0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_timpani, 255, 246, 0, 226  @ 86A8EF0
 	voice_keysplit voicegroup006, KeySplitTable2  @ 86A8EFC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8F08
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A8F14

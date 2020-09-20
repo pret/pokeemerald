@@ -17,7 +17,7 @@ voicegroup111:: @ 8698054
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86980FC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698108
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698114
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_organ2, 255, 0, 255, 127  @ 8698120
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_organ2, 255, 0, 255, 127  @ 8698120
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 869812C
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698138
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8698144

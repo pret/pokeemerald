@@ -21,7 +21,7 @@ voicegroup135:: @ 86A25F0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A26C8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A26D4
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A26E0
-	voice_directsound 60, 0, DirectSoundWaveData_sc88_accordion, 85, 137, 180, 204  @ 86A26EC
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_accordion, 85, 137, 180, 204  @ 86A26EC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A26F8
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2704
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A2710
