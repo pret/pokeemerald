@@ -926,7 +926,7 @@ void sub_8020E4C(void)
 
 void sub_8020E58(void)
 {
-    u32 var0, var1;
+    s32 var0, var1;
 
     var0 = gUnknown_02022C90->unk68.as_four_players.unk00.unk04;
     var0 = Q_24_8(var0);
