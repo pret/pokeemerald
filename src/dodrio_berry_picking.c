@@ -300,7 +300,7 @@ static const u8 gUnknown_082F449C[5][5][11] =
     },
 };
 
-static const u8 gUknnown_082F45AF[5][5][3] =
+static const u8 gUnknown_082F45AF[5][5][3] =
 {
     {
         {4, 5, 6},
@@ -1742,7 +1742,7 @@ static bool32 sub_8026634(u8 a0, u8 a1, u8 a2)
     }
     if (ptr->unkB[a2] == 6 || ptr->unkB[a2] == 7)
     {
-        if (a2 == gUknnown_082F45AF[r5][a0][r7])
+        if (a2 == gUnknown_082F45AF[r5][a0][r7])
         {
             if (gUnknown_02022C98->unkC4[a2] == 1 || gUnknown_02022C98->unkC4[a2] == 2)
             {
@@ -1757,7 +1757,7 @@ static bool32 sub_8026634(u8 a0, u8 a1, u8 a2)
     }
     else
     {
-        if (a2 == gUknnown_082F45AF[r5][a0][r7])
+        if (a2 == gUnknown_082F45AF[r5][a0][r7])
         {
             gUnknown_02022C98->unkA8[a0] = 4;
             gUnknown_02022C98->unk31A0[a0].unk2C.unk8 = 1;
