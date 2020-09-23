@@ -672,17 +672,17 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u16 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 stride) // stride is always 16
 {
-    u8 var0;
-    u16 var1;
-    u16 var2;
+    bool8 impassable;
+    u16 metatile;
+    u16 elevation;
 
-    var0 = (sHillData->floors[floorId].display.unk3A0[arg2] >> (15 - bit) & 1);
-    var1 = sHillData->floors[floorId].display.data[arg3 * arg2 + bit] + 0x200;
-    var2 = 0x3000;
+    impassable = (sHillData->floors[floorId].display.collisionData[y] >> (15 - x) & 1);
+    metatile = sHillData->floors[floorId].display.metatileData[stride * y + x] + 0x200;
+    elevation = 0x3000;
 
-    return (((var0 << 10) & 0xc00) | var2) | (var1 & 0x3ff);
+    return (((impassable << 10) & METATILE_COLLISION_MASK) | elevation) | (metatile & METATILE_ID_MASK);
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
@@ -722,7 +722,7 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg)
     for (i = 0; i < 16; i++)
     {
         for (j = 0; j < 16; j++)
-            dst[j] = sub_81D5F58(mapId, j, i, 0x10);
+            dst[j] = GetMetatileForFloor(mapId, j, i, 0x10);
         dst += 31;
     }
 
