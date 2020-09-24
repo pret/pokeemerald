@@ -33,7 +33,7 @@ voicegroup004:: @ 8676658
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86767C0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86767CC
 	voice_directsound_no_resample 64, 104, DirectSoundWaveData_ethnic_flavours_atarigane, 255, 0, 255, 0  @ 86767D8
-	voice_directsound 63, 64, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 0  @ 86767E4
+	voice_directsound 63, 64, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 0  @ 86767E4
 	voice_directsound 50, 84, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 86767F0
 	voice_directsound 64, 84, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 86767FC
 	voice_directsound 62, 64, DirectSoundWaveData_drum_and_percussion_kick, 255, 0, 255, 0  @ 8676808
@@ -50,7 +50,7 @@ voicegroup004:: @ 8676658
 	voice_directsound 76, 84, DirectSoundWaveData_sd90_ambient_tom, 255, 0, 255, 226  @ 867688C
 	voice_directsound 80, 94, DirectSoundWaveData_sd90_ambient_tom, 255, 0, 255, 226  @ 8676898
 	voice_directsound 56, 89, DirectSoundWaveData_sc88pro_orchestra_cymbal_crash, 255, 235, 0, 231  @ 86768A4
-	voice_directsound 64, 104, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 235  @ 86768B0
+	voice_directsound 64, 104, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 235  @ 86768B0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86768BC
 	voice_directsound 63, 64, DirectSoundWaveData_sc88pro_orchestra_cymbal_crash, 255, 235, 0, 231  @ 86768C8
 	voice_directsound_no_resample 64, 24, DirectSoundWaveData_dance_drums_ride_bell, 255, 165, 103, 231  @ 86768D4
@@ -87,7 +87,7 @@ voicegroup004:: @ 8676658
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8676A48
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8676A54
 	voice_directsound 64, 104, DirectSoundWaveData_ethnic_flavours_atarigane, 255, 0, 255, 0  @ 8676A60
-	voice_directsound 63, 64, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 0  @ 8676A6C
+	voice_directsound 63, 64, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 0  @ 8676A6C
 	voice_directsound 50, 84, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 8676A78
 	voice_directsound 64, 84, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 8676A84
 

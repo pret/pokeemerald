@@ -87,7 +87,7 @@ voicegroup177:: @ 86B0378
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B0768
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86B0774
 	voice_directsound_no_resample 64, 64, DirectSoundWaveData_ethnic_flavours_atarigane, 255, 0, 255, 0  @ 86B0780
-	voice_directsound 63, 64, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 0  @ 86B078C
+	voice_directsound 63, 64, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 0  @ 86B078C
 	voice_directsound 50, 64, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 86B0798
 	voice_directsound 64, 64, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 86B07A4
 
