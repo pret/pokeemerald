@@ -143,8 +143,8 @@ DirectSoundWaveData_ethnic_flavours_atarigane::
 	.incbin "sound/direct_sound_samples/ethnic_flavours_atarigane.bin"
 
 	.align 2
-DirectSoundWaveData_unknown_taiko::
-	.incbin "sound/direct_sound_samples/unknown_taiko.bin"
+DirectSoundWaveData_sc88pro_taiko::
+	.incbin "sound/direct_sound_samples/sc88pro_taiko.bin"
 
 	.align 2
 DirectSoundWaveData_ethnic_flavours_kotsuzumi::
