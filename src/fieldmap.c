@@ -416,7 +416,7 @@ u8 MapGridIsImpassableAt(int x, int y)
     return (block & METATILE_COLLISION_MASK) >> METATILE_COLLISION_SHIFT;
 }
 
-u32 MapGridGetMetatileIdAt(int x, int y)
+u16 MapGridGetMetatileIdAt(int x, int y)
 {
     u16 block;
     int i;
@@ -444,13 +444,12 @@ u32 MapGridGetMetatileIdAt(int x, int y)
         j += ((y + 1) & 1) * 2;
         block2 = gMapHeader.mapLayout->border[j];
         // This OR is completely pointless.
-        block2 |= METATILE_COLLISION_MASK;
         return block2 & METATILE_ID_MASK;
     }
     return block & METATILE_ID_MASK;
 }
 
-u32 MapGridGetMetatileBehaviorAt(int x, int y)
+u16 MapGridGetMetatileBehaviorAt(int x, int y)
 {
     u16 metatile;
     metatile = MapGridGetMetatileIdAt(x, y);

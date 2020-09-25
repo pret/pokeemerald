@@ -13,8 +13,8 @@
 
 extern struct BackupMapLayout gBackupMapLayout;
 
-u32 MapGridGetMetatileIdAt(int, int);
-u32 MapGridGetMetatileBehaviorAt(int, int);
+u16 MapGridGetMetatileIdAt(int, int);
+u16 MapGridGetMetatileBehaviorAt(int, int);
 void MapGridSetMetatileIdAt(int, int, u16);
 void MapGridSetMetatileEntryAt(int, int, u16);
 void GetCameraCoords(u16*, u16*);
