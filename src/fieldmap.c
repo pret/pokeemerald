@@ -535,7 +535,7 @@ static bool32 SavedMapViewIsEmpty(void)
 
 #ifndef UBFIX
     // BUG: This loop extends past the bounds of the mapView array. Its size is only 0x100.
-    for (i = 0; i < 0x200; i++)
+    for (i = 0; i < sizeof(gSaveBlock1Ptr->mapView); i++)
         marker |= gSaveBlock1Ptr->mapView[i];
 #else
     // UBFIX: Only iterate over 0x100
