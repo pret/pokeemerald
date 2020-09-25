@@ -610,7 +610,7 @@ void sub_80885C4(u8 a1)
     {
         i = 0;
         j = 0;
-        for (x = 0; x < x2; x++)
+        for (x = 0; x < x2; x++) //FIX THIS
         {
             desti = width * (y + y0);
             srci = (y + r8) * 15 + r9;
