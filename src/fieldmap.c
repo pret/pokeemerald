@@ -81,20 +81,16 @@ void InitTrainerHillMap(void)
 static void InitMapLayoutData(struct MapHeader *mapHeader)
 {
     struct MapLayout const *mapLayout;
-    int width;
-    int height;
     mapLayout = mapHeader->mapLayout;
     CpuFastFill16(0x03ff, gBackupMapData, sizeof(gBackupMapData));
     gBackupMapLayout.map = gBackupMapData;
-    width = mapLayout->width + 15;
-    gBackupMapLayout.width = width;
-    height = mapLayout->height + 14;
-    gBackupMapLayout.height = height;
-    if (width * height <= MAX_MAP_DATA_SIZE)
-    {
-        InitBackupMapLayoutData(mapLayout->map, mapLayout->width, mapLayout->height);
-        InitBackupMapLayoutConnections(mapHeader);
-    }
+    gBackupMapLayout.width = mapLayout->width + 15;
+    gBackupMapLayout.height = mapLayout->height + 14;
+    if (gBackupMapLayout.width * gBackupMapLayout.height > MAX_MAP_DATA_SIZE)
+        return;
+
+    InitBackupMapLayoutData(mapLayout->map, mapLayout->width, mapLayout->height);
+    InitBackupMapLayoutConnections(mapHeader);
 }
 
 static void InitBackupMapLayoutData(u16 *map, u16 width, u16 height)
