@@ -1231,10 +1231,7 @@ u32 GetBgType(u8 bg)
 
 bool32 IsInvalidBg32(u8 bg)
 {
-    if (bg > 3)
-        return TRUE;
-    else
-        return FALSE;
+    return (bg > 3);
 }
 
 bool32 IsTileMapOutsideWram(u8 bg)
