@@ -33,9 +33,9 @@ struct BgConfig2
     u32 basePalette:4;
     u32 unk_3:18;
 
-    void* tilemap;
-    s32 bg_x; // Maybe unsigned, but game treats it as if it is signed a LOT.
-    s32 bg_y; // Same for this variable.
+    const void* tilemap;
+    u32 bg_x; // Maybe unsigned, but game treats it as if it is signed a LOT.
+    u32 bg_y; // Same for this variable.
 };
 
 static struct BgControl sGpuBgConfigs;
