@@ -1239,10 +1239,9 @@ bool32 IsInvalidBg32(u8 bg)
 
 bool32 IsTileMapOutsideWram(u8 bg)
 {
-    if (sGpuBgConfigs2[bg].tilemap > (void*)IWRAM_END)
+    if (sGpuBgConfigs2[bg].tilemap > (const void*)IWRAM_END)
         return TRUE;
-    else if (sGpuBgConfigs2[bg].tilemap == NULL)
+    if (sGpuBgConfigs2[bg].tilemap == NULL)
         return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
