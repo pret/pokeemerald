@@ -687,16 +687,16 @@ int GetPostCameraMoveMapBorderId(int x, int y)
     return GetMapBorderIdAt(gSaveBlock1Ptr->pos.x + 7 + x, gSaveBlock1Ptr->pos.y + 7 + y);
 }
 
-int CanCameraMoveInDirection(int direction)
+bool32 CanCameraMoveInDirection(int direction)
 {
     int x, y;
     x = gSaveBlock1Ptr->pos.x + 7 + gDirectionToVectors[direction].x;
     y = gSaveBlock1Ptr->pos.y + 7 + gDirectionToVectors[direction].y;
     if (GetMapBorderIdAt(x, y) == -1)
     {
-        return 0;
+        return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
 void sub_80887F8(struct MapConnection *connection, int direction, int x, int y)
