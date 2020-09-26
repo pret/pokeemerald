@@ -574,11 +574,8 @@ void sub_80885C4(u8 a1)
     u16 *mapView;
     int x0, y0;
     int x2, y2;
-    u16 *src, *dest;
-    int srci, desti;
     int r9, r8;
     int x, y;
-    int i, j;
     mapView = gSaveBlock1Ptr->mapView;
     width = gBackupMapLayout.width;
     r9 = 0;
@@ -608,17 +605,9 @@ void sub_80885C4(u8 a1)
     }
     for (y = 0; y < y2; y++)
     {
-        i = 0;
-        j = 0;
         for (x = 0; x < x2; x++) //FIX THIS
         {
-            desti = width * (y + y0);
-            srci = (y + r8) * 15 + r9;
-            src = &mapView[srci + i];
-            dest = &gBackupMapData[x0 + desti + j];
-            *dest = *src;
-            i++;
-            j++;
+            gBackupMapData[x + x0 + width * (y + y0)] = mapView[x + r9 + (y + r8) * 15];
         }
     }
     ClearSavedMapView();
