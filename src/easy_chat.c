@@ -5193,28 +5193,6 @@ u16 GetNewHipsterPhraseToTeach(void)
     return 0xFFFF;
 }
 
-// Unused
-u16 GetRandomTaughtHipsterPhrase(void)
-{
-    u16 i;
-    u16 additionalPhraseId = GetNumAdditionalPhrasesUnlocked();
-    if (additionalPhraseId == 0)
-        return 0xFFFF;
-
-    additionalPhraseId = Random() % additionalPhraseId;
-    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
-    {
-        if (IsAdditionalPhraseUnlocked(i))
-        {
-            if (additionalPhraseId)
-                additionalPhraseId--;
-            else
-                return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
-        }
-    }
-
-    return 0xFFFF;
-}
 
 static bool8 EasyChatIsNationalPokedexEnabled(void)
 {
