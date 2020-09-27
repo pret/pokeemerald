@@ -5250,7 +5250,6 @@ void InitEasyChatPhrases(void)
             gSaveBlock1Ptr->mail[i].words[j] = 0xFFFF;
     }
 
-
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->additionalPhrases); i++)
         gSaveBlock1Ptr->additionalPhrases[i] = 0;
 }
