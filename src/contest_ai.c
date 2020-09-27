@@ -1631,23 +1631,15 @@ static void ContestAICmd_if_not_eq_var(void)
 // and vars is an s16[3], so this goes way out of bounds
 static void ContestAICmd_if_random_less_than(void)
 {
-#ifndef UBFIX
-    if ((Random() & 0xFF) < eContestAI.vars[gAIScriptPtr[1]])
-#else
     if ((Random() & 0xFF) < gAIScriptPtr[1])
-#endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
 
 static void ContestAICmd_if_random_greater_than(void)
-{
-#ifndef UBFIX
-    if (((Random()) & 0xFF) > eContestAI.vars[gAIScriptPtr[1]])
-#else
+
     if (((Random()) & 0xFF) > gAIScriptPtr[1])
-#endif
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
