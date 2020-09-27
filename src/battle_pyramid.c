@@ -1771,7 +1771,9 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
 
         r7 &= 1;
     }
-    // FREE_AND_SET_NULL(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
+    #ifdef UBFIX
+    FREE_AND_SET_NULL(floorLayoutOffsets);
+    #endif
 
     return (numObjects / 2) > numPlacedObjects;
 }
@@ -1823,8 +1825,10 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
         if (r8 == 4)
             break;
     }
-    // FREE_AND_SET_NULL(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
-
+    #ifdef UBFIX
+    FREE_AND_SET_NULL(floorLayoutOffsets);
+    #endif
+ 
     return (numObjects / 2) > numPlacedObjects;
 }
 
