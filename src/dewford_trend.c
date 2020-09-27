@@ -311,7 +311,7 @@ static void sub_8122B28(struct EasyChatPair *s)
 
 static bool8 SB1ContainsWords(u16 *a)
 {
-    u16 i;
+    u8 i;
 
     for (i = 0; i < 5; i++)
     {
@@ -323,7 +323,7 @@ static bool8 SB1ContainsWords(u16 *a)
 
 static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
 {
-    u16 i;
+    u8 i;
 
     for (i = 0; i < 2; i++)
     {
