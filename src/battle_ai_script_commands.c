@@ -1819,7 +1819,8 @@ static void Cmd_if_doesnt_have_move(void)
     switch(gAIScriptPtr[1])
     {
     case AI_USER:
-    case AI_USER_PARTNER: // UB: no separate check for user partner.
+    // case AI_TARGET_PARTNER:
+    case AI_USER_PARTNER: // UB: no separate check for target partner.
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMons[sBattler_AI].moves[i] == *movePtr)
