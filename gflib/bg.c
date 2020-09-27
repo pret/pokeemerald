@@ -707,8 +707,8 @@ s32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
 
     switch (op)
     {
-    case 0:
     default:
+    case 0:
         sGpuBgConfigs2[bg].bg_y = value;
         break;
     case 1:
