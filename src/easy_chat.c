@@ -220,7 +220,7 @@ static void sub_811E0EC(s8, s8);
 static void sub_811E1A4(s8, s8);
 static void sub_811E2DC(struct Sprite *);
 static void sub_811E34C(u8, u8);
-static bool8 EasyChatIsNationalPokedexEnabled(void);
+static inline bool8 EasyChatIsNationalPokedexEnabled(void);
 static u16 GetRandomUnlockedEasyChatPokemon(void);
 static void sub_811F2D4(void);
 static void sub_811F46C(void);
@@ -5194,7 +5194,7 @@ u16 GetNewHipsterPhraseToTeach(void)
 }
 
 
-static bool8 EasyChatIsNationalPokedexEnabled(void)
+static inline bool8 EasyChatIsNationalPokedexEnabled(void)
 {
     return IsNationalPokedexEnabled();
 }
