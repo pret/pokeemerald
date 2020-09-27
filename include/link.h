@@ -172,9 +172,9 @@ struct LinkPlayer
 
 struct LinkPlayerBlock
 {
-    char magic1[16];
+    const char magic1[16];
     struct LinkPlayer linkPlayer;
-    char magic2[16];
+    const char magic2[16];
 };
 
 // circular queues
