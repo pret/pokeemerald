@@ -113,7 +113,7 @@ EWRAM_DATA struct {
     u8 lastRecvQueueCount;
     u8 lastSendQueueCount;
     u8 unk_06;
-} sLinkErrorBuffer = {};
+} sLinkErrorBuffer = {0};
 static EWRAM_DATA u16 sReadyCloseLinkAttempts = 0; // never read
 static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
 
