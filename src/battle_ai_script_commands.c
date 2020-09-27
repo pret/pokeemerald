@@ -1606,7 +1606,7 @@ static void Cmd_if_status_not_in_party(void)
         if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
         {
             gAIScriptPtr += 10; // UB: Still bugged in Emerald. Uncomment the return statement to fix.
-            // return;
+            return;
         }
     }
 
@@ -1819,6 +1819,7 @@ static void Cmd_if_doesnt_have_move(void)
     switch(gAIScriptPtr[1])
     {
     case AI_USER:
+    // case AI_TARGET_PARTNER:
     case AI_USER_PARTNER: // UB: no separate check for user partner.
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
