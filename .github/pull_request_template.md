@@ -7,7 +7,6 @@
 <!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
 - [ ] Decompilation (matching, fixing nonmatching, fakematching, etc.)
 - [ ] Documentation (naming symbols, commenting, etc.)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Style (code style refactors, typo, etc.)
 - [ ] Other: <!--- replace this comment with your type of change -->
 
