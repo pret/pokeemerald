@@ -220,7 +220,6 @@ static void sub_811E0EC(s8, s8);
 static void sub_811E1A4(s8, s8);
 static void sub_811E2DC(struct Sprite *);
 static void sub_811E34C(u8, u8);
-static inline bool8 EasyChatIsNationalPokedexEnabled(void);
 static u16 GetRandomUnlockedEasyChatPokemon(void);
 static void sub_811F2D4(void);
 static void sub_811F46C(void);
@@ -4824,7 +4823,7 @@ static bool8 IsEasyChatGroupUnlocked(u8 groupId)
     case EC_GROUP_MOVE_2:
         return FlagGet(FLAG_SYS_GAME_CLEAR);
     case EC_GROUP_POKEMON_2:
-        return EasyChatIsNationalPokedexEnabled();
+        return IsNationalPokedexEnabled();
     default:
         return TRUE;
     }
@@ -5191,12 +5190,6 @@ u16 GetNewHipsterPhraseToTeach(void)
     }
 
     return 0xFFFF;
-}
-
-
-static inline bool8 EasyChatIsNationalPokedexEnabled(void)
-{
-    return IsNationalPokedexEnabled();
 }
 
 static u16 GetRandomUnlockedEasyChatPokemon(void)
