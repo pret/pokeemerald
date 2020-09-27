@@ -1580,7 +1580,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         }
     }
     RunOnLoadMapScript();
-    free(floorLayoutOffsets);
+    FREE_AND_SET_NULL(floorLayoutOffsets);
 }
 
 void LoadBattlePyramidObjectEventTemplates(void)
@@ -1709,7 +1709,7 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
         } while (!(bits & 4) && TrySetPyramidObjectEventPositionInSquare(objType, floorLayoutOffsets, squareId, objectStartIndex + i));
         bits &= 1;
     }
-    free(floorLayoutOffsets);
+    FREE_AND_SET_NULL(floorLayoutOffsets);
 }
 
 static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
@@ -1771,7 +1771,7 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
 
         r7 &= 1;
     }
-    // free(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
+    // FREE_AND_SET_NULL(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
 
     return (numObjects / 2) > numPlacedObjects;
 }
@@ -1823,7 +1823,7 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
         if (r8 == 4)
             break;
     }
-    // free(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
+    // FREE_AND_SET_NULL(floorLayoutOffsets); BUG: floorLayoutOffsets memory not freed
 
     return (numObjects / 2) > numPlacedObjects;
 }
