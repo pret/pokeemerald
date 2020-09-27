@@ -1260,7 +1260,7 @@ static void LinkCB_RequestPlayerDataExchange(void)
 
 static void Task_PrintTestData(u8 taskId)
 {
-    char sp[32];
+    char sp[30];
     int i;
 
     strcpy(sp, sASCIITestPrint);
