@@ -1,17 +1,23 @@
-# Pull request into pret/pokeemerald
+<!--- Provide a general summary of your changes in the Title above -->
 
-## Instructions
-Please complete both the questionnaire and the checklist below. This is required for the PR to be merged. Failure to do this may result in a ban from contributions.
+## Description
+<!--- Describe your changes in detail -->
 
-## Questionnaire
-1. What is your Discord username? (name#numbers, e.g. PikalaxALT#5823)
-2. What is the purpose of this pull request? (decompilation, documentation, bug fixes, typo correction, code style refactor)
-
+## Type of changes
+<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
+- [ ] Decompilation (matching, fixing nonmatching, fakematching, etc.)
+- [ ] Documentation (naming symbols, commenting, etc.)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] Style (code style refactors, typo, etc.)
+- [ ] Other: <!--- replace this comment with your type of change -->
 
 ## Checklist
-- [ ] I am a member of the [pret discord server](https://discord.gg/d5dubZ3).
-- [ ] I have run `make compare modern` on my local machine to ensure that the project compiles correctly.
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+- [ ] I am a member of the [pret Discord server](https://discord.gg/d5dubZ3).
+- [ ] `make compare` and `make compare modern` on my local machine outputs ![OK](https://cdn.discordapp.com/emojis/504128071524286475.png?v=1).
+- [ ] My code follows the code style of this project.
 - [ ] If I am fixing a bug or undefined behavior in the modern build, I have documented the bug and tested the fix locally.
-- [ ] My changes are not informed by the leaked source code, or I have disclosed my use of the leaks in the discord.
-- [ ] I have answered all questions truthfully, including this one.
-- [ ] I am not a robot.
+- [ ] All my usage, if any, of the leaked source code has been disclosed in pret's server.
+
+## **Discord contact info**
+<!--- formatted as name#numbers, e.g. PikalaxALT#5823 -->
