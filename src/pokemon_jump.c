@@ -2648,7 +2648,7 @@ static void sub_802CC88(struct PokemonJump2 *arg0, int multiplayerId)
 
 static void sub_802CCB0(struct PokemonJump2 *arg0)
 {
-    int i;
+    u16 i;
     u16 numPlayers = sub_802C8AC();
     for (i = 0; i < numPlayers; i++)
     {
@@ -2672,7 +2672,7 @@ static void sub_802CD08(struct Sprite *sprite)
 
 static void sub_802CD3C(struct PokemonJump2 *arg0)
 {
-    int i;
+    u16 i;
     u16 numPlayers = sub_802C8AC();
     for (i = 0; i < numPlayers; i++)
         arg0->unk81A8[i]->subpriority = arg0->unk81FC[i];
@@ -2686,7 +2686,7 @@ static void sub_802CD70(struct PokemonJump2 *arg0, int multiplayerId)
 
 static bool32 sub_802CD98(struct PokemonJump2 *arg0)
 {
-    int i;
+    u16 i;
     u16 numPlayers = sub_802C8AC();
     for (i = 0; i < numPlayers; i++)
     {
@@ -2735,8 +2735,8 @@ static void sub_802CE48(struct PokemonJump2 *arg0, s16 x, s16 y, u8 multiplayerI
 
 static void sub_802CE9C(struct PokemonJump2 *arg0)
 {
-    int i;
-    int count;
+    u8 i;
+    u8 count;
     u8 spriteId;
 
     count = 0;
