@@ -5462,6 +5462,12 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 if (gEvolutionTable[species][i].param <= beauty)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            //Start Change 20200928_0.01_alpha
+            case EVO_MOVE:
+                if (MonKnowsMove(&gPlayerParty[i], gEvolutionTable[species][i].param) == TRUE)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            //End Change 20200928_0.01_alpha
             }
         }
         break;
