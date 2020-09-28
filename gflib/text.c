@@ -136,7 +136,7 @@ void SetFontsPointer(const struct FontInfo *fonts)
 
 void DeactivateAllTextPrinters(void)
 {
-    int printer;
+    u8 printer;
     for (printer = 0; printer < NUM_TEXT_PRINTERS; ++printer)
         gTextPrinters[printer].active = 0;
 }
