@@ -470,7 +470,7 @@ inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u3
 
     xAdd = j + width;
     yAdd = i + height;
-    dummyX = j; // :masuda:
+    dummyX = j;
     for (; i < yAdd; i++)
     {
         r5 = *ptr++;
