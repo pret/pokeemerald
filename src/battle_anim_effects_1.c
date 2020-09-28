@@ -5521,7 +5521,7 @@ static void AnimFollowMeFinger(struct Sprite* sprite)
 
     sprite->pos1.x = GetBattlerSpriteCoord(battler, 0);
     sprite->pos1.y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_TOP);
-    if (sprite->pos1.y <= 9)
+    if (sprite->pos1.y < 10)
         sprite->pos1.y = 10;
 
     sprite->data[0] = 1;
