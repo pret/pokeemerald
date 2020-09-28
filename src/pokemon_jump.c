@@ -2725,7 +2725,7 @@ static void sub_802CDD4(struct Sprite *sprite)
 
 static void sub_802CE48(struct PokemonJump2 *arg0, s16 x, s16 y, u8 multiplayerId)
 {
-    u8 spriteId = CreateSprite(&gUnknown_082FC00C, x, y, 1);
+    const u8 spriteId = CreateSprite(&gUnknown_082FC00C, x, y, 1);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].invisible = 1;
@@ -2743,16 +2743,14 @@ static void sub_802CE9C(struct PokemonJump2 *arg0)
     for (i = 0; i < 4; i++)
     {
         spriteId = CreateSprite(gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i][0], 2);
-        arg0->unk81D0[count] = &gSprites[spriteId];
-        count++;
+        arg0->unk81D0[count++] = &gSprites[spriteId];
     }
 
     for (i = 3; i >= 0; i--)
     {
         spriteId = CreateSprite(gUnknown_082FBEB8[i], gUnknown_082FBEA8[count], gUnknown_082FBE58[i][0], 2);
         arg0->unk81D0[count] = &gSprites[spriteId];
-        arg0->unk81D0[count]->hFlip = 1;
-        count++;
+        arg0->unk81D0[count++]->hFlip = 1;
     }
 }
 
