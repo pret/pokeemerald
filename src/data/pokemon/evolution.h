@@ -42,7 +42,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_POLIWHIRL]  = {{EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH},
     //Start Change 20200929_0.01_alpha
                             // {EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}},
-                            {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}},
+                            {EVO_HELD_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}},
     //End Change 20200929_0.01_alpha
     [SPECIES_ABRA]       = {{EVO_LEVEL, 16, SPECIES_KADABRA}},
     //Start Change 20200928_0.01_alpha
@@ -63,7 +63,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SLOWPOKE]   = {{EVO_LEVEL, 37, SPECIES_SLOWBRO},
     //Start Change 20200929_0.01_alpha
     //                      {EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}},
-                            {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}},
+                            {EVO_HELD_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}},
     //End Change 20200929_0.01_alpha
     [SPECIES_MAGNEMITE]  = {{EVO_LEVEL, 30, SPECIES_MAGNETON}},
     [SPECIES_DODUO]      = {{EVO_LEVEL, 31, SPECIES_DODRIO}},
@@ -77,7 +77,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     //End Change 20200928_0.01_alpha
     //Start Change 20200929_0.01_alpha
     // [SPECIES_ONIX]       = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_STEELIX}},
-    [SPECIES_ONIX]       = {{EVO_ITEM, ITEM_METAL_COAT, SPECIES_STEELIX}},
+    [SPECIES_ONIX]       = {{EVO_HELD_ITEM, ITEM_METAL_COAT, SPECIES_STEELIX}},
     //End Change 20200929_0.01_alpha
     [SPECIES_DROWZEE]    = {{EVO_LEVEL, 26, SPECIES_HYPNO}},
     [SPECIES_KRABBY]     = {{EVO_LEVEL, 28, SPECIES_KINGLER}},
@@ -93,7 +93,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_STARYU]     = {{EVO_ITEM, ITEM_WATER_STONE, SPECIES_STARMIE}},
     //Start Change 20200929_0.01_alpha
     // [SPECIES_SCYTHER]    = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR}},
-    [SPECIES_SCYTHER]    = {{EVO_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR}},
+    [SPECIES_SCYTHER]    = {{EVO_HELD_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR}},
     //End Change 20200929_0.01_alpha
     [SPECIES_MAGIKARP]   = {{EVO_LEVEL, 20, SPECIES_GYARADOS}},
     [SPECIES_EEVEE]      = {{EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
