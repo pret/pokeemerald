@@ -4330,7 +4330,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
 
 u8 SendMonToPC(struct Pokemon *mon)
 {
-    s32 boxNo, boxPos;
+    u8 boxNo, boxPos;
 
     SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
 
@@ -4354,8 +4354,7 @@ u8 SendMonToPC(struct Pokemon *mon)
             }
         }
 
-        boxNo++;
-        if (boxNo == TOTAL_BOXES_COUNT)
+        if (++boxNo == TOTAL_BOXES_COUNT)
             boxNo = 0;
     } while (boxNo != StorageGetCurrentBox());
 
