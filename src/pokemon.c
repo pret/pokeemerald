@@ -4472,14 +4472,12 @@ void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
-    u8 facilityClass = sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
-    return gFacilityClassToPicIndex[facilityClass];
+    return gFacilityClassToPicIndex[sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5]];
 }
 
 u8 GetSecretBaseTrainerClass(void)
 {
-    u8 facilityClass = sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
-    return gFacilityClassToTrainerClass[facilityClass];
+    return gFacilityClassToTrainerClass[sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5]];
 }
 
 bool8 IsPlayerPartyAndPokemonStorageFull(void)
