@@ -5639,7 +5639,7 @@ u8 GetPlayerFlankId(void)
     {
     case 0:
     case 3:
-        flankId = 0;
+        // flankId = 0;
         break;
     case 1:
     case 2:
