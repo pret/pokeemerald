@@ -2917,7 +2917,7 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 
 u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move)
 {
-    s32 i;
+    u8 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
