@@ -5326,7 +5326,7 @@ u8 GetNatureFromPersonality(u32 personality)
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 {
-    int i;
+    u8 i;
     u16 targetSpecies = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
