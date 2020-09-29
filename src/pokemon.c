@@ -5151,7 +5151,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     const u8 *temp;
     const u8 *itemEffect;
     u8 offset;
-    int i;
+    u8 i;
     u8 j;
     u8 val;
 
