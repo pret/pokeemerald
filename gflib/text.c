@@ -240,12 +240,11 @@ bool16 IsTextPrinterActive(u8 id)
 u32 RenderFont(struct TextPrinter *textPrinter)
 {
     u32 ret;
-    while (TRUE)
+    do
     {
         ret = gFonts[textPrinter->printerTemplate.fontId].fontFunction(textPrinter);
-        if (ret != 2)
-            return ret;
-    }
+    } while (ret == 2);
+    return ret;
 }
 
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
