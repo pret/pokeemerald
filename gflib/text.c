@@ -464,7 +464,6 @@ u8 GetLastTextColor(u8 colorType)
 
 inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *ptr, s32 width, s32 height)                                           //
 {
-    // WHYYYYYYYYY is dummyX needed aaaaaaaaaaaaaaaaaaaaa
     u32 xAdd, yAdd, r5, bits, toOrr, dummyX;
     u8 *dst;
 
@@ -476,7 +475,6 @@ inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u3
         r5 = *ptr++;
         for (j = dummyX; j < xAdd; j++)
         {
-            // This inline assignent turns out to be needed as well.
             if ((toOrr = r5 & 0xF))
             {
                 dst = windowTiles + ((j / 8) * 32) + ((j % 8) / 2) + ((i / 8) * widthOffset) + ((i % 8) * 4);
@@ -500,7 +498,6 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     win = &gWindows[textPrinter->printerTemplate.windowId];
     winTempl = &win->window;
 
-    // these inline assignments are required as well to match. Compiler is super fucking sensitive and needs like SEVERAL changes.
     if ((r4 = (winTempl->width * 8) - textPrinter->printerTemplate.currentX) > gUnknown_03002F90.width)
         r4 = gUnknown_03002F90.width;
 
@@ -509,8 +506,6 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
 
     currX = textPrinter->printerTemplate.currentX;
     currY = textPrinter->printerTemplate.currentY;
-    // i could only get this to work as a u32 due to lvalue bullshit and the macro
-    // really needs to be an inline to avoid temp bullshit below. It might work as a macro too, but...
     unkStruct = (u32 *)&gUnknown_03002F90.unk0;
     windowTiles = win->tileData;
     widthOffset = winTempl->width * 32;
