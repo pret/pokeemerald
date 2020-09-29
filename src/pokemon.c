@@ -1,3 +1,5 @@
+//Changes from vanilla emerald:
+//0.01_alpha    Added new evolution methods to replace trade induced evolutions
 #include "global.h"
 #include "malloc.h"
 #include "apprentice.h"

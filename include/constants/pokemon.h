@@ -1,3 +1,5 @@
+//Changes from vanilla Emerald:
+//0.01_alpha    Added new evolution methods to replace trade induced evolutions
 #ifndef GUARD_CONSTANTS_POKEMON_H
 #define GUARD_CONSTANTS_POKEMON_H
 
