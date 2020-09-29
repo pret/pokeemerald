@@ -4387,12 +4387,12 @@ u8 CalculateEnemyPartyCount(void)
 
 u8 GetMonsStateToDoubles(void)
 {
-    s32 aliveCount = 0;
-    s32 i;
+    u8 aliveCount = 0;
+    u8 i;
     CalculatePlayerPartyCount();
 
     if (gPlayerPartyCount == 1)
-        return gPlayerPartyCount; // PLAYER_HAS_ONE_MON
+        return PLAYER_HAS_ONE_MON; // PLAYER_HAS_ONE_MON
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
@@ -4405,8 +4405,8 @@ u8 GetMonsStateToDoubles(void)
 
 u8 GetMonsStateToDoubles_2(void)
 {
-    s32 aliveCount = 0;
-    s32 i;
+    u8 aliveCount = 0;
+    u8 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
