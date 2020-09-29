@@ -5634,12 +5634,13 @@ void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
 // 0 is the left (top in  party menu), 1 is right (bottom in party menu)
 u8 GetPlayerFlankId(void)
 {
-    u8 flankId = 0;
+    u8 flankId;
     switch (gLinkPlayers[GetMultiplayerId()].id)
     {
+    default:
     case 0:
     case 3:
-        // flankId = 0;
+        flankId = 0;
         break;
     case 1:
     case 2:
