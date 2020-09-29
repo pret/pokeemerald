@@ -4505,7 +4505,7 @@ bool8 IsPokemonStorageFull(void)
 
 void GetSpeciesName(u8 *name, u16 species)
 {
-    s32 i;
+    u8 i;
 
     for (i = 0; i <= POKEMON_NAME_LENGTH; i++)
     {
@@ -4523,7 +4523,7 @@ void GetSpeciesName(u8 *name, u16 species)
 
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex)
 {
-    u8 basePP = gBattleMoves[move].pp;
+    const u8 basePP = gBattleMoves[move].pp;
     return basePP + ((basePP * 20 * ((gPPUpGetMask[moveIndex] & ppBonuses) >> (2 * moveIndex))) / 100);
 }
 
@@ -5143,10 +5143,7 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask,
             gBattleMons[battlerId].status1 &= ~healMask;
         return FALSE;
     }
-    else
-    {
-        return TRUE;
-    }
+    return TRUE;
 }
 
 u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
