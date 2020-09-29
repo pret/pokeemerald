@@ -5535,16 +5535,16 @@ void sub_806D544(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA && dest != gMonSpritesGfxPtr->sprites[0] && dest != gMonSpritesGfxPtr->sprites[2])
     {
-        int i;
+        u8 i;
         for (i = 0; i < 4; i++)
         {
-            int j;
+            u8 j;
             u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
             u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
 
             for (j = 0; j < 16; j++)
             {
-                int k;
+                u8 k;
                 s32 row = gSpindaSpotGraphics[i].image[j];
 
                 for (k = x; k < x + 16; k++)
@@ -5580,16 +5580,16 @@ void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4)
 {
     if (species == SPECIES_SPINDA && a4)
     {
-        int i;
+        u8 i;
         for (i = 0; i < 4; i++)
         {
-            int j;
+            u8 j;
             u8 x = gSpindaSpotGraphics[i].x + ((personality & 0x0F) - 8);
             u8 y = gSpindaSpotGraphics[i].y + (((personality & 0xF0) >> 4) - 8);
 
             for (j = 0; j < 16; j++)
             {
-                int k;
+                u8 k;
                 s32 row = gSpindaSpotGraphics[i].image[j];
 
                 for (k = x; k < x + 16; k++)
