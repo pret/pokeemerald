@@ -2161,14 +2161,14 @@ void ZeroMonData(struct Pokemon *mon)
 
 void ZeroPlayerPartyMons(void)
 {
-    s32 i;
+    u8 i;
     for (i = 0; i < PARTY_SIZE; i++)
         ZeroMonData(&gPlayerParty[i]);
 }
 
 void ZeroEnemyPartyMons(void)
 {
-    s32 i;
+    u8 i;
     for (i = 0; i < PARTY_SIZE; i++)
         ZeroMonData(&gEnemyParty[i]);
 }
