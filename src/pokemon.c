@@ -5259,7 +5259,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-static void BufferStatRoseMessage(s32 arg0)
+static void BufferStatRoseMessage(u8 arg0)
 {
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[arg0]]);
@@ -5269,7 +5269,7 @@ static void BufferStatRoseMessage(s32 arg0)
 
 u8 *UseStatIncreaseItem(u16 itemId)
 {
-    int i;
+    u8 i;
     const u8 *itemEffect;
 
     if (itemId == ITEM_ENIGMA_BERRY)
