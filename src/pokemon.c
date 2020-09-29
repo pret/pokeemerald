@@ -5467,6 +5467,13 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 if (MonKnowsMove(&gPlayerParty[i], gEvolutionTable[species][i].param) == TRUE)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            case EVO_HELD_ITEM:
+                if (gEvolutionTable[species][i].param == heldItem)
+                {
+                    heldItem = 0;
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
             //End Change 20200928_0.01_alpha
             }
         }

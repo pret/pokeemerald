@@ -286,6 +286,7 @@
 #define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
 //Start Change 20200928_0.01_alpha
 #define EVO_MOVE             0x0010 // Pokemon levels up while knowing a specific move
+#define EVO_HELD_ITEM        0x0011 // Pokemon levels up while holding a specific item
 //End Change 20200928_0.01_alpha
 
 #define EVOS_PER_MON 5
