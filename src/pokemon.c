@@ -4493,7 +4493,7 @@ bool8 IsPlayerPartyAndPokemonStorageFull(void)
 
 bool8 IsPokemonStorageFull(void)
 {
-    s32 i, j;
+    u8 i, j;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
         for (j = 0; j < IN_BOX_COUNT; j++)
