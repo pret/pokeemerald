@@ -4482,7 +4482,7 @@ u8 GetSecretBaseTrainerClass(void)
 
 bool8 IsPlayerPartyAndPokemonStorageFull(void)
 {
-    s32 i;
+    u8 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
