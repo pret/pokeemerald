@@ -407,7 +407,7 @@ static u8 GetFirstOamId(u8 oamCount)
     }
 
     if (firstOamId + oamCount < 128)
-        return firstOamId;
+        return (u8)firstOamId;
     return 0xFF;
 }
 
