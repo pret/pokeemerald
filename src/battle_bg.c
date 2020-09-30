@@ -693,17 +693,6 @@ static const struct BattleBackground gBattleTerrainTable[] =
 
 static void sub_8035648(void);
 
-// Unused
-static void sub_8035608(void)
-{
-    u8 spriteId;
-
-    ResetSpriteData();
-    spriteId = CreateSprite(&gUnknown_0831AC88, 0, 0, 0);
-    gSprites[spriteId].invisible = TRUE;
-    SetMainCallback2(sub_8035648);
-}
-
 static void sub_8035648(void)
 {
     AnimateSprites();
