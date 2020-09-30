@@ -691,14 +691,6 @@ static const struct BattleBackground gBattleTerrainTable[] =
     },
 };
 
-static void sub_8035648(void);
-
-static void sub_8035648(void)
-{
-    AnimateSprites();
-    BuildOamBuffer();
-}
-
 void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
