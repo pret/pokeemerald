@@ -33,6 +33,9 @@ struct BattleBackground
     const void *palette;
 };
 
+// .rodata
+// static const u16 sUnrefArray[] = {0x0300, 0x0000}; //const value that is actually 0x300
+
 static const struct OamData sVsLetter_V_OamData =
 {
     .y = 0,
