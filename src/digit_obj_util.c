@@ -406,10 +406,9 @@ static u8 GetFirstOamId(u8 oamCount)
         }
     }
 
-    if (firstOamId + oamCount + 1 > 128)
-        return 0xFF;
-    else
+    if (firstOamId + oamCount < 128)
         return firstOamId;
+    return 0xFF;
 }
 
 static bool32 SharesTileWithAnyActive(u32 id)
