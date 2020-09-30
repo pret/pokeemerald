@@ -402,7 +402,7 @@ static u8 GetFirstOamId(u8 oamCount)
         }
         else
         {
-            firstOamId += 1 + sOamWork->array[i].oamCount;
+            firstOamId += sOamWork->array[i].oamCount + 1;
         }
     }
 
