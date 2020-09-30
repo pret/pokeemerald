@@ -271,7 +271,7 @@ static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, s32 num, bool3
 
     while (pow10 != 0)
     {
-        u32 digit = num / pow10;
+        const u32 digit = num / pow10;
         num -= (digit * pow10);
         pow10 /= 10;
 
