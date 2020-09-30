@@ -365,23 +365,23 @@ void DigitObjUtil_DeletePrinter(u32 id)
 
 void DigitObjUtil_HideOrShow(u32 id, bool32 hide)
 {
-    s32 oamId, oamCount, i;
+    u8 oamId, oamCount, i;
 
     if (sOamWork == NULL)
         return;
     if (!sOamWork->array[id].isActive)
         return;
 
-    oamCount = sOamWork->array[id].oamCount + 1;
+    oamCount = sOamWork->array[id].oamCount;
     oamId = sOamWork->array[id].firstOamId;
     if (hide)
     {
-        for (i = 0; i < oamCount; i++, oamId++)
+        for (i = 0; i <= oamCount; i++, oamId++)
             gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
     }
     else
     {
-        for (i = 0; i < oamCount; i++, oamId++)
+        for (i = 0; i <= oamCount; i++, oamId++)
             gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_OFF;
 
         DigitObjUtil_PrintNumOn(id, sOamWork->array[id].lastPrinted);
