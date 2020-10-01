@@ -23,7 +23,6 @@
 #include "constants/game_stat.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 struct Pokenav4Struct
 {

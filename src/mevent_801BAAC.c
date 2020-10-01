@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/species.h"
 #include "bg.h"
 #include "gpu_regs.h"
 #include "palette.h"

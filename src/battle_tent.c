@@ -17,7 +17,6 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 
 // This file's functions.

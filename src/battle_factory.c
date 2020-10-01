@@ -8,7 +8,6 @@
 #include "frontier_util.h"
 #include "battle_tower.h"
 #include "random.h"
-#include "constants/species.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_frontier.h"

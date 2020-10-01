@@ -60,7 +60,6 @@
 #include "constants/script_menu.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/battle_frontier.h"

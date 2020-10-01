@@ -12,7 +12,6 @@
 #include "strings.h"
 #include "text.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 struct PokenavSub11
 {
