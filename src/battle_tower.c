@@ -35,7 +35,6 @@
 #include "constants/trainers.h"
 #include "constants/event_objects.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 #include "constants/easy_chat.h"
 #include "constants/tv.h"
 

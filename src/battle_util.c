@@ -21,7 +21,6 @@
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 #include "constants/weather.h"
 #include "battle_arena.h"
 #include "battle_pyramid.h"
