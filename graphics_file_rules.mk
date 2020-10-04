@@ -1,4 +1,5 @@
 CASTFORMGFXDIR := graphics/pokemon/castform
+CHERRIMGFXDIR := graphics/pokemon/cherrim
 TILESETGFXDIR := data/tilesets
 FONTGFXDIR := graphics/fonts
 INTERFACEGFXDIR := graphics/interface
@@ -18,7 +19,7 @@ PSSGFXDIR := graphics/pokemon_storage
 OBJEVENTGFXDIR := graphics/object_events
 MISCGFXDIR := graphics/misc
 
-types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
+types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy
 contest_types := cool beauty cute smart tough
 
 
@@ -56,6 +57,23 @@ $(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/shiny_normal_form.gbapal \
 	@cat $^ >$@
 
 
+### Cherrim ###
+
+$(CHERRIMGFXDIR)/front.4bpp: $(CHERRIMGFXDIR)/front_normal.4bpp \
+							  $(CHERRIMGFXDIR)/front_sun.4bpp
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/back.4bpp: $(CHERRIMGFXDIR)/back_normal.4bpp \
+							 $(CHERRIMGFXDIR)/back_sun.4bpp
+	@cat $^ >$@
+	
+$(CHERRIMGFXDIR)/normal.gbapal: $(CHERRIMGFXDIR)/normal_normal.gbapal \
+								 $(CHERRIMGFXDIR)/normal_sun.gbapal
+	@cat $^ >$@
+
+$(CHERRIMGFXDIR)/shiny.gbapal: $(CHERRIMGFXDIR)/shiny_normal.gbapal \
+								$(CHERRIMGFXDIR)/shiny_sun.gbapal
+	@cat $^ >$@
 
 ### Tilesets ###
 

@@ -1,3 +1,4 @@
+
 	.align 2
 gCryTable:: @ 869DCF4
 	cry Cry_Bulbasaur  @ 869DCF4
@@ -251,143 +252,664 @@ gCryTable:: @ 869DCF4
 	cry Cry_Lugia  @ 869E894
 	cry Cry_HoOh  @ 869E8A0
 	cry Cry_Celebi  @ 869E8AC
-	cry Cry_Kecleon  @ 869E8B8
-	cry Cry_Roselia  @ 869E8C4
-	cry Cry_Torkoal  @ 869E8D0
-	cry Cry_Electrike  @ 869E8DC
-	cry Cry_Manectric  @ 869E8E8
-	cry Cry_Duskull  @ 869E8F4
-	cry Cry_Latias  @ 869E900
-	cry Cry_Wynaut  @ 869E90C
-	cry Cry_Seviper  @ 869E918
-	cry Cry_Sharpedo  @ 869E924
-	cry Cry_Zangoose  @ 869E930
-	cry Cry_Azurill  @ 869E93C
-	cry Cry_Swablu  @ 869E948
-	cry Cry_Altaria  @ 869E954
-	cry Cry_Unused265  @ 869E960
-	cry Cry_Taillow  @ 869E96C
-	cry Cry_Swellow  @ 869E978
-	cry Cry_Unused268  @ 869E984
-	cry Cry_Spinda  @ 869E990
-	cry Cry_Torchic  @ 869E99C
-	cry Cry_Combusken  @ 869E9A8
-	cry Cry_Blaziken  @ 869E9B4
-	cry Cry_Treecko  @ 869E9C0
-	cry Cry_Grovyle  @ 869E9CC
-	cry Cry_Sceptile  @ 869E9D8
-	cry Cry_Mudkip  @ 869E9E4
-	cry Cry_Marshtomp  @ 869E9F0
-	cry Cry_Swampert  @ 869E9FC
-	cry Cry_Pelipper  @ 869EA08
-	cry Cry_Wingull  @ 869EA14
-	cry Cry_Banette  @ 869EA20
-	cry Cry_Shuppet  @ 869EA2C
-	cry Cry_Lotad  @ 869EA38
-	cry Cry_Lombre  @ 869EA44
-	cry Cry_Ludicolo  @ 869EA50
-	cry Cry_Seedot  @ 869EA5C
-	cry Cry_Nuzleaf  @ 869EA68
-	cry Cry_Shiftry  @ 869EA74
-	cry Cry_Carvanha  @ 869EA80
-	cry Cry_Wurmple  @ 869EA8C
-	cry Cry_Silcoon  @ 869EA98
-	cry Cry_Beautifly  @ 869EAA4
-	cry Cry_Cascoon  @ 869EAB0
-	cry Cry_Dustox  @ 869EABC
-	cry Cry_Ralts  @ 869EAC8
-	cry Cry_Kirlia  @ 869EAD4
-	cry Cry_Gardevoir  @ 869EAE0
-	cry Cry_Slakoth  @ 869EAEC
-	cry Cry_Vigoroth  @ 869EAF8
-	cry Cry_Slaking  @ 869EB04
-	cry Cry_Nincada  @ 869EB10
-	cry Cry_Ninjask  @ 869EB1C
-	cry Cry_Shedinja  @ 869EB28
-	cry Cry_Makuhita  @ 869EB34
-	cry Cry_Hariyama  @ 869EB40
-	cry Cry_Nosepass  @ 869EB4C
-	cry Cry_Glalie  @ 869EB58
-	cry Cry_Plusle  @ 869EB64
-	cry Cry_Minun  @ 869EB70
-	cry Cry_Surskit  @ 869EB7C
-	cry Cry_Masquerain  @ 869EB88
-	cry Cry_Skitty  @ 869EB94
-	cry Cry_Delcatty  @ 869EBA0
-	cry Cry_Gulpin  @ 869EBAC
-	cry Cry_Swalot  @ 869EBB8
-	cry Cry_Numel  @ 869EBC4
-	cry Cry_Camerupt  @ 869EBD0
-	cry Cry_Barboach  @ 869EBDC
-	cry Cry_Whiscash  @ 869EBE8
-	cry Cry_Corphish  @ 869EBF4
-	cry Cry_Crawdaunt  @ 869EC00
-	cry Cry_Spoink  @ 869EC0C
-	cry Cry_Grumpig  @ 869EC18
-	cry Cry_Trapinch  @ 869EC24
-	cry Cry_Vibrava  @ 869EC30
-	cry Cry_Flygon  @ 869EC3C
-	cry Cry_Cacnea  @ 869EC48
-	cry Cry_Cacturne  @ 869EC54
-	cry Cry_Baltoy  @ 869EC60
-	cry Cry_Claydol  @ 869EC6C
-	cry Cry_Lunatone  @ 869EC78
-	cry Cry_Solrock  @ 869EC84
-	cry Cry_Feebas  @ 869EC90
-	cry Cry_Milotic  @ 869EC9C
-	cry Cry_Absol  @ 869ECA8
-	cry Cry_Meditite  @ 869ECB4
-	cry Cry_Medicham  @ 869ECC0
-	cry Cry_Spheal  @ 869ECCC
-	cry Cry_Sealeo  @ 869ECD8
-	cry Cry_Walrein  @ 869ECE4
-	cry Cry_Clamperl  @ 869ECF0
-	cry Cry_Huntail  @ 869ECFC
-	cry Cry_Gorebyss  @ 869ED08
-	cry Cry_Lileep  @ 869ED14
-	cry Cry_Cradily  @ 869ED20
-	cry Cry_Anorith  @ 869ED2C
-	cry Cry_Armaldo  @ 869ED38
-	cry Cry_Beldum  @ 869ED44
-	cry Cry_Metang  @ 869ED50
-	cry Cry_Metagross  @ 869ED5C
-	cry Cry_Bagon  @ 869ED68
-	cry Cry_Shelgon  @ 869ED74
-	cry Cry_Regirock  @ 869ED80
-	cry Cry_Regice  @ 869ED8C
-	cry Cry_Registeel  @ 869ED98
-	cry Cry_Castform  @ 869EDA4
-	cry Cry_Volbeat  @ 869EDB0
-	cry Cry_Illumise  @ 869EDBC
-	cry Cry_Poochyena  @ 869EDC8
-	cry Cry_Mightyena  @ 869EDD4
-	cry Cry_Dusclops  @ 869EDE0
-	cry Cry_Sableye  @ 869EDEC
-	cry Cry_Mawile  @ 869EDF8
-	cry Cry_Aron  @ 869EE04
-	cry Cry_Lairon  @ 869EE10
-	cry Cry_Aggron  @ 869EE1C
-	cry Cry_Relicanth  @ 869EE28
-	cry Cry_Luvdisc  @ 869EE34
-	cry Cry_Groudon  @ 869EE40
-	cry Cry_Kyogre  @ 869EE4C
-	cry Cry_Rayquaza  @ 869EE58
-	cry Cry_Salamence  @ 869EE64
-	cry Cry_Breloom  @ 869EE70
-	cry Cry_Shroomish  @ 869EE7C
-	cry Cry_Linoone  @ 869EE88
-	cry Cry_Tropius  @ 869EE94
-	cry Cry_Wailmer  @ 869EEA0
-	cry Cry_Zigzagoon  @ 869EEAC
-	cry Cry_Exploud  @ 869EEB8
-	cry Cry_Loudred  @ 869EEC4
-	cry Cry_Wailord  @ 869EED0
-	cry Cry_Whismur  @ 869EEDC
-	cry Cry_Snorunt  @ 869EEE8
-	cry Cry_Latios  @ 869EEF4
-	cry Cry_Jirachi  @ 869EF00
-	cry Cry_Deoxys  @ 869EF0C
-	cry Cry_Chimecho  @ 869EF18
+	cry Cry_Treecko
+	cry Cry_Grovyle
+	cry Cry_Sceptile
+	cry Cry_Torchic
+	cry Cry_Combusken
+	cry Cry_Blaziken
+	cry Cry_Mudkip
+	cry Cry_Marshtomp
+	cry Cry_Swampert
+	cry Cry_Poochyena
+	cry Cry_Mightyena
+	cry Cry_Zigzagoon
+	cry Cry_Linoone
+	cry Cry_Wurmple
+	cry Cry_Silcoon
+	cry Cry_Beautifly
+	cry Cry_Cascoon
+	cry Cry_Dustox
+	cry Cry_Lotad
+	cry Cry_Lombre
+	cry Cry_Ludicolo
+	cry Cry_Seedot
+	cry Cry_Nuzleaf
+	cry Cry_Shiftry
+	cry Cry_Taillow
+	cry Cry_Swellow
+	cry Cry_Wingull
+	cry Cry_Pelipper
+	cry Cry_Ralts
+	cry Cry_Kirlia
+	cry Cry_Gardevoir
+	cry Cry_Surskit
+	cry Cry_Masquerain
+	cry Cry_Shroomish
+	cry Cry_Breloom
+	cry Cry_Slakoth
+	cry Cry_Vigoroth
+	cry Cry_Slaking
+	cry Cry_Nincada
+	cry Cry_Ninjask
+	cry Cry_Shedinja
+	cry Cry_Whismur
+	cry Cry_Loudred
+	cry Cry_Exploud
+	cry Cry_Makuhita
+	cry Cry_Hariyama
+	cry Cry_Azurill
+	cry Cry_Nosepass
+	cry Cry_Skitty
+	cry Cry_Delcatty
+	cry Cry_Sableye
+	cry Cry_Mawile
+	cry Cry_Aron
+	cry Cry_Lairon
+	cry Cry_Aggron
+	cry Cry_Meditite
+	cry Cry_Medicham
+	cry Cry_Electrike
+	cry Cry_Manectric
+	cry Cry_Plusle
+	cry Cry_Minun
+	cry Cry_Volbeat
+	cry Cry_Illumise
+	cry Cry_Roselia
+	cry Cry_Gulpin
+	cry Cry_Swalot
+	cry Cry_Carvanha
+	cry Cry_Sharpedo
+	cry Cry_Wailmer
+	cry Cry_Wailord
+	cry Cry_Numel
+	cry Cry_Camerupt
+	cry Cry_Torkoal
+	cry Cry_Spoink
+	cry Cry_Grumpig
+	cry Cry_Spinda
+	cry Cry_Trapinch
+	cry Cry_Vibrava
+	cry Cry_Flygon
+	cry Cry_Cacnea
+	cry Cry_Cacturne
+	cry Cry_Swablu
+	cry Cry_Altaria
+	cry Cry_Zangoose
+	cry Cry_Seviper
+	cry Cry_Lunatone
+	cry Cry_Solrock
+	cry Cry_Barboach
+	cry Cry_Whiscash
+	cry Cry_Corphish
+	cry Cry_Crawdaunt
+	cry Cry_Baltoy
+	cry Cry_Claydol
+	cry Cry_Lileep
+	cry Cry_Cradily
+	cry Cry_Anorith
+	cry Cry_Armaldo
+	cry Cry_Feebas
+	cry Cry_Milotic
+	cry Cry_Castform
+	cry Cry_Kecleon
+	cry Cry_Shuppet
+	cry Cry_Banette
+	cry Cry_Duskull
+	cry Cry_Dusclops
+	cry Cry_Tropius
+	cry Cry_Chimecho
+	cry Cry_Absol
+	cry Cry_Wynaut
+	cry Cry_Snorunt
+	cry Cry_Glalie
+	cry Cry_Spheal
+	cry Cry_Sealeo
+	cry Cry_Walrein
+	cry Cry_Clamperl
+	cry Cry_Huntail
+	cry Cry_Gorebyss
+	cry Cry_Relicanth
+	cry Cry_Luvdisc
+	cry Cry_Bagon
+	cry Cry_Shelgon
+	cry Cry_Salamence
+	cry Cry_Beldum
+	cry Cry_Metang
+	cry Cry_Metagross
+	cry Cry_Regirock
+	cry Cry_Regice
+	cry Cry_Registeel
+	cry Cry_Latias
+	cry Cry_Latios
+	cry Cry_Kyogre
+	cry Cry_Groudon
+	cry Cry_Rayquaza
+	cry Cry_Jirachi
+	cry Cry_Deoxys
+	cry_not Cry_Turtwig
+	cry_not Cry_Grotle
+	cry_not Cry_Torterra
+	cry_not Cry_Chimchar
+	cry_not Cry_Monferno
+	cry_not Cry_Infernape
+	cry_not Cry_Piplup
+	cry_not Cry_Prinplup
+	cry_not Cry_Empoleon
+	cry_not Cry_Starly
+	cry_not Cry_Staravia
+	cry_not Cry_Staraptor
+	cry_not Cry_Bidoof
+	cry_not Cry_Bibarel
+	cry_not Cry_Kricketot
+	cry_not Cry_Kricketune
+	cry_not Cry_Shinx
+	cry_not Cry_Luxio
+	cry_not Cry_Luxray
+	cry_not Cry_Budew
+	cry_not Cry_Roserade
+	cry_not Cry_Cranidos
+	cry_not Cry_Rampardos
+	cry_not Cry_Shieldon
+	cry_not Cry_Bastiodon
+	cry_not Cry_Burmy
+	cry_not Cry_Wormadam
+	cry_not Cry_Mothim
+	cry_not Cry_Combee
+	cry_not Cry_Vespiquen
+	cry_not Cry_Pachirisu
+	cry_not Cry_Buizel
+	cry_not Cry_Floatzel
+	cry_not Cry_Cherubi
+	cry_not Cry_Cherrim
+	cry_not Cry_Shellos
+	cry_not Cry_Gastrodon
+	cry_not Cry_Ambipom
+	cry_not Cry_Drifloon
+	cry_not Cry_Drifblim
+	cry_not Cry_Buneary
+	cry_not Cry_Lopunny
+	cry_not Cry_Mismagius
+	cry_not Cry_Honchkrow
+	cry_not Cry_Glameow
+	cry_not Cry_Purugly
+	cry_not Cry_Chingling
+	cry_not Cry_Stunky
+	cry_not Cry_Skuntank
+	cry_not Cry_Bronzor
+	cry_not Cry_Bronzong
+	cry_not Cry_Bonsly
+	cry_not Cry_Mimejr
+	cry_not Cry_Happiny
+	cry_not Cry_Chatot
+	cry_not Cry_Spiritomb
+	cry_not Cry_Gible
+	cry_not Cry_Gabite
+	cry_not Cry_Garchomp
+	cry_not Cry_Munchlax
+	cry_not Cry_Riolu
+	cry_not Cry_Lucario
+	cry_not Cry_Hippopotas
+	cry_not Cry_Hippowdon
+	cry_not Cry_Skorupi
+	cry_not Cry_Drapion
+	cry_not Cry_Croagunk
+	cry_not Cry_Toxicroak
+	cry_not Cry_Carnivine
+	cry_not Cry_Finneon
+	cry_not Cry_Lumineon
+	cry_not Cry_Mantyke
+	cry_not Cry_Snover
+	cry_not Cry_Abomasnow
+	cry_not Cry_Weavile
+	cry_not Cry_Magnezone
+	cry_not Cry_Lickilicky
+	cry_not Cry_Rhyperior
+	cry_not Cry_Tangrowth
+	cry_not Cry_Electivire
+	cry_not Cry_Magmortar
+	cry_not Cry_Togekiss
+	cry_not Cry_Yanmega
+	cry_not Cry_Leafeon
+	cry_not Cry_Glaceon
+	cry_not Cry_Gliscor
+	cry_not Cry_Mamoswine
+	cry_not Cry_PorygonZ
+	cry_not Cry_Gallade
+	cry_not Cry_Probopass
+	cry_not Cry_Dusknoir
+	cry_not Cry_Froslass
+	cry_not Cry_Rotom
+	cry_not Cry_Uxie
+	cry_not Cry_Mesprit
+	cry_not Cry_Azelf
+	cry_not Cry_Dialga
+	cry_not Cry_Palkia
+	cry_not Cry_Heatran
+	cry_not Cry_Regigigas
+	cry_not Cry_Giratina
+	cry_not Cry_Cresselia
+	cry_not Cry_Phione
+	cry_not Cry_Manaphy
+	cry_not Cry_Darkrai
+	cry_not Cry_Shaymin
+	cry_not Cry_Arceus
+	cry_not Cry_Victini
+	cry_not Cry_Snivy
+	cry_not Cry_Servine
+	cry_not Cry_Serperior
+	cry_not Cry_Tepig
+	cry_not Cry_Pignite
+	cry_not Cry_Emboar
+	cry_not Cry_Oshawott
+	cry_not Cry_Dewott
+	cry_not Cry_Samurott
+	cry_not Cry_Patrat
+	cry_not Cry_Watchog
+	cry_not Cry_Lillipup
+	cry_not Cry_Herdier
+	cry_not Cry_Stoutland
+	cry_not Cry_Purrloin
+	cry_not Cry_Liepard
+	cry_not Cry_Pansage
+	cry_not Cry_Simisage
+	cry_not Cry_Pansear
+	cry_not Cry_Simisear
+	cry_not Cry_Panpour
+	cry_not Cry_Simipour
+	cry_not Cry_Munna
+	cry_not Cry_Musharna
+	cry_not Cry_Pidove
+	cry_not Cry_Tranquill
+	cry_not Cry_Unfezant
+	cry_not Cry_Blitzle
+	cry_not Cry_Zebstrika
+	cry_not Cry_Roggenrola
+	cry_not Cry_Boldore
+	cry_not Cry_Gigalith
+	cry_not Cry_Woobat
+	cry_not Cry_Swoobat
+	cry_not Cry_Drilbur
+	cry_not Cry_Excadrill
+	cry_not Cry_Audino
+	cry_not Cry_Timburr
+	cry_not Cry_Gurdurr
+	cry_not Cry_Conkeldurr
+	cry_not Cry_Tympole
+	cry_not Cry_Palpitoad
+	cry_not Cry_Seismitoad
+	cry_not Cry_Throh
+	cry_not Cry_Sawk
+	cry_not Cry_Sewaddle
+	cry_not Cry_Swadloon
+	cry_not Cry_Leavanny
+	cry_not Cry_Venipede
+	cry_not Cry_Whirlipede
+	cry_not Cry_Scolipede
+	cry_not Cry_Cottonee
+	cry_not Cry_Whimsicott
+	cry_not Cry_Petilil
+	cry_not Cry_Lilligant
+	cry_not Cry_Basculin
+	cry_not Cry_Sandile
+	cry_not Cry_Krokorok
+	cry_not Cry_Krookodile
+	cry_not Cry_Darumaka
+	cry_not Cry_Darmanitan
+	cry_not Cry_Maractus
+	cry_not Cry_Dwebble
+	cry_not Cry_Crustle
+	cry_not Cry_Scraggy
+	cry_not Cry_Scrafty
+	cry_not Cry_Sigilyph
+	cry_not Cry_Yamask
+	cry_not Cry_Cofagrigus
+	cry_not Cry_Tirtouga
+	cry_not Cry_Carracosta
+	cry_not Cry_Archen
+	cry_not Cry_Archeops
+	cry_not Cry_Trubbish
+	cry_not Cry_Garbodor
+	cry_not Cry_Zorua
+	cry_not Cry_Zoroark
+	cry_not Cry_Minccino
+	cry_not Cry_Cinccino
+	cry_not Cry_Gothita
+	cry_not Cry_Gothorita
+	cry_not Cry_Gothitelle
+	cry_not Cry_Solosis
+	cry_not Cry_Duosion
+	cry_not Cry_Reuniclus
+	cry_not Cry_Ducklett
+	cry_not Cry_Swanna
+	cry_not Cry_Vanillite
+	cry_not Cry_Vanillish
+	cry_not Cry_Vanilluxe
+	cry_not Cry_Deerling
+	cry_not Cry_Sawsbuck
+	cry_not Cry_Emolga
+	cry_not Cry_Karrablast
+	cry_not Cry_Escavalier
+	cry_not Cry_Foongus
+	cry_not Cry_Amoonguss
+	cry_not Cry_Frillish
+	cry_not Cry_Jellicent
+	cry_not Cry_Alomomola
+	cry_not Cry_Joltik
+	cry_not Cry_Galvantula
+	cry_not Cry_Ferroseed
+	cry_not Cry_Ferrothorn
+	cry_not Cry_Klink
+	cry_not Cry_Klang
+	cry_not Cry_Klinklang
+	cry_not Cry_Tynamo
+	cry_not Cry_Eelektrik
+	cry_not Cry_Eelektross
+	cry_not Cry_Elgyem
+	cry_not Cry_Beheeyem
+	cry_not Cry_Litwick
+	cry_not Cry_Lampent
+	cry_not Cry_Chandelure
+	cry_not Cry_Axew
+	cry_not Cry_Fraxure
+	cry_not Cry_Haxorus
+	cry_not Cry_Cubchoo
+	cry_not Cry_Beartic
+	cry_not Cry_Cryogonal
+	cry_not Cry_Shelmet
+	cry_not Cry_Accelgor
+	cry_not Cry_Stunfisk
+	cry_not Cry_Mienfoo
+	cry_not Cry_Mienshao
+	cry_not Cry_Druddigon
+	cry_not Cry_Golett
+	cry_not Cry_Golurk
+	cry_not Cry_Pawniard
+	cry_not Cry_Bisharp
+	cry_not Cry_Bouffalant
+	cry_not Cry_Rufflet
+	cry_not Cry_Braviary
+	cry_not Cry_Vullaby
+	cry_not Cry_Mandibuzz
+	cry_not Cry_Heatmor
+	cry_not Cry_Durant
+	cry_not Cry_Deino
+	cry_not Cry_Zweilous
+	cry_not Cry_Hydreigon
+	cry_not Cry_Larvesta
+	cry_not Cry_Volcarona
+	cry_not Cry_Cobalion
+	cry_not Cry_Terrakion
+	cry_not Cry_Virizion
+	cry_not Cry_Tornadus
+	cry_not Cry_Thundurus
+	cry_not Cry_Reshiram
+	cry_not Cry_Zekrom
+	cry_not Cry_Landorus
+	cry_not Cry_Kyurem
+	cry_not Cry_Keldeo
+	cry_not Cry_Meloetta
+	cry_not Cry_Genesect
+	cry_not Cry_Chespin
+	cry_not Cry_Quilladin
+	cry_not Cry_Chesnaught
+	cry_not Cry_Fennekin
+	cry_not Cry_Braixen
+	cry_not Cry_Delphox
+	cry_not Cry_Froakie
+	cry_not Cry_Frogadier
+	cry_not Cry_Greninja
+	cry_not Cry_Bunnelby
+	cry_not Cry_Diggersby
+	cry_not Cry_Fletchling
+	cry_not Cry_Fletchinder
+	cry_not Cry_Talonflame
+	cry_not Cry_Scatterbug
+	cry_not Cry_Spewpa
+	cry_not Cry_Vivillon
+	cry_not Cry_Litleo
+	cry_not Cry_Pyroar
+	cry_not Cry_Flabebe
+	cry_not Cry_Floette
+	cry_not Cry_Florges
+	cry_not Cry_Skiddo
+	cry_not Cry_Gogoat
+	cry_not Cry_Pancham
+	cry_not Cry_Pangoro
+	cry_not Cry_Furfrou
+	cry_not Cry_Espurr
+	cry_not Cry_Meowstic
+	cry_not Cry_Honedge
+	cry_not Cry_Doublade
+	cry_not Cry_Aegislash
+	cry_not Cry_Spritzee
+	cry_not Cry_Aromatisse
+	cry_not Cry_Swirlix
+	cry_not Cry_Slurpuff
+	cry_not Cry_Inkay
+	cry_not Cry_Malamar
+	cry_not Cry_Binacle
+	cry_not Cry_Barbaracle
+	cry_not Cry_Skrelp
+	cry_not Cry_Dragalge
+	cry_not Cry_Clauncher
+	cry_not Cry_Clawitzer
+	cry_not Cry_Helioptile
+	cry_not Cry_Heliolisk
+	cry_not Cry_Tyrunt
+	cry_not Cry_Tyrantrum
+	cry_not Cry_Amaura
+	cry_not Cry_Aurorus
+	cry_not Cry_Sylveon
+	cry_not Cry_Hawlucha
+	cry_not Cry_Dedenne
+	cry_not Cry_Carbink
+	cry_not Cry_Goomy
+	cry_not Cry_Sliggoo
+	cry_not Cry_Goodra
+	cry_not Cry_Klefki
+	cry_not Cry_Phantump
+	cry_not Cry_Trevenant
+	cry_not Cry_Pumpkaboo
+	cry_not Cry_Gourgeist
+	cry_not Cry_Bergmite
+	cry_not Cry_Avalugg
+	cry_not Cry_Noibat
+	cry_not Cry_Noivern
+	cry_not Cry_Xerneas
+	cry_not Cry_Yveltal
+	cry_not Cry_Zygarde
+	cry_not Cry_Diancie
+	cry_not Cry_Hoopa
+	cry_not Cry_Volcanion
+	cry_not Cry_Rowlet
+	cry_not Cry_Dartrix
+	cry_not Cry_Decidueye
+	cry_not Cry_Litten
+	cry_not Cry_Torracat
+	cry_not Cry_Incineroar
+	cry_not Cry_Popplio
+	cry_not Cry_Brionne
+	cry_not Cry_Primarina
+	cry_not Cry_Pikipek
+	cry_not Cry_Trumbeak
+	cry_not Cry_Toucannon
+	cry_not Cry_Yungoos
+	cry_not Cry_Gumshoos
+	cry_not Cry_Grubbin
+	cry_not Cry_Charjabug
+	cry_not Cry_Vikavolt
+	cry_not Cry_Crabrawler
+	cry_not Cry_Crabominable
+	cry_not Cry_Oricorio
+	cry_not Cry_Cutiefly
+	cry_not Cry_Ribombee
+	cry_not Cry_Rockruff
+	cry_not Cry_Lycanroc
+	cry_not Cry_Wishiwashi
+	cry_not Cry_Mareanie
+	cry_not Cry_Toxapex
+	cry_not Cry_Mudbray
+	cry_not Cry_Mudsdale
+	cry_not Cry_Dewpider
+	cry_not Cry_Araquanid
+	cry_not Cry_Fomantis
+	cry_not Cry_Lurantis
+	cry_not Cry_Morelull
+	cry_not Cry_Shiinotic
+	cry_not Cry_Salandit
+	cry_not Cry_Salazzle
+	cry_not Cry_Stufful
+	cry_not Cry_Bewear
+	cry_not Cry_Bounsweet
+	cry_not Cry_Steenee
+	cry_not Cry_Tsareena
+	cry_not Cry_Comfey
+	cry_not Cry_Oranguru
+	cry_not Cry_Passimian
+	cry_not Cry_Wimpod
+	cry_not Cry_Golisopod
+	cry_not Cry_Sandygast
+	cry_not Cry_Palossand
+	cry_not Cry_Pyukumuku
+	cry_not Cry_Type_null
+	cry_not Cry_Silvally
+	cry_not Cry_Minior
+	cry_not Cry_Komala
+	cry_not Cry_Turtonator
+	cry_not Cry_Togedemaru
+	cry_not Cry_Mimikyu
+	cry_not Cry_Bruxish
+	cry_not Cry_Drampa
+	cry_not Cry_Dhelmise
+	cry_not Cry_Jangmo_o
+	cry_not Cry_Hakamo_o
+	cry_not Cry_Kommo_o
+	cry_not Cry_Tapu_koko
+	cry_not Cry_Tapu_lele
+	cry_not Cry_Tapu_bulu
+	cry_not Cry_Tapu_fini
+	cry_not Cry_Cosmog
+	cry_not Cry_Cosmoem
+	cry_not Cry_Solgaleo
+	cry_not Cry_Lunala
+	cry_not Cry_Nihilego
+	cry_not Cry_Buzzwole
+	cry_not Cry_Pheromosa
+	cry_not Cry_Xurkitree
+	cry_not Cry_Celesteela
+	cry_not Cry_Kartana
+	cry_not Cry_Guzzlord
+	cry_not Cry_Necrozma
+	cry_not Cry_Magearna
+	cry_not Cry_Marshadow
+	cry_not Cry_Poipole
+	cry_not Cry_Naganadel
+	cry_not Cry_Stakataka
+	cry_not Cry_Blacephalon
+	cry_not Cry_Zeraora
+	cry_not Cry_Meltan
+	cry_not Cry_Melmetal
+	@ Megas
+	cry_not Cry_Mega_Ampharos
+	cry_not Cry_Mega_Venusaur
+	cry_not Cry_Mega_Charizard_X
+	cry_not Cry_Mega_Charizard_Y
+	cry_not Cry_Mega_Mewtwo_X
+	cry_not Cry_Mega_Mewtwo_Y
+	cry_not Cry_Mega_Blaziken
+	cry_not Cry_Mega_Medicham
+	cry_not Cry_Mega_Houndoom
+	cry_not Cry_Mega_Aggron
+	cry_not Cry_Mega_Banette
+	cry_not Cry_Mega_Tyranitar
+	cry_not Cry_Mega_Scizor
+	cry_not Cry_Mega_Pinsir
+	cry_not Cry_Mega_Aerodactyl
+	cry_not Cry_Mega_Lucario
+	cry_not Cry_Mega_Abomasnow
+	cry_not Cry_Mega_Blastoise
+	cry_not Cry_Mega_Kangaskhan
+	cry_not Cry_Mega_Gyarados
+	cry_not Cry_Mega_Absol
+	cry_not Cry_Mega_Alakazam
+	cry_not Cry_Mega_Heracross
+	cry_not Cry_Mega_Mawile
+	cry_not Cry_Mega_Manectric
+	cry_not Cry_Mega_Garchomp
+	cry_not Cry_Mega_Latios
+	cry_not Cry_Mega_Latias
+	cry_not Cry_Mega_Swampert
+	cry_not Cry_Mega_Sceptile
+	cry_not Cry_Mega_Sableye
+	cry_not Cry_Mega_Altaria
+	cry_not Cry_Mega_Gallade
+	cry_not Cry_Mega_Audino
+	cry_not Cry_Mega_Sharpedo
+	cry_not Cry_Mega_Slowbro
+	cry_not Cry_Mega_Steelix
+	cry_not Cry_Mega_Pidgeot
+	cry_not Cry_Mega_Glalie
+	cry_not Cry_Mega_Diancie
+	cry_not Cry_Mega_Metagross
+	cry_not Cry_Mega_Rayquaza
+	cry_not Cry_Mega_Camerupt
+	cry_not Cry_Mega_Lopunny
+	cry_not Cry_Mega_Salamence
+	cry_not Cry_Mega_Beedrill
+	cry_not Cry_Mega_Gengar
+	cry_not Cry_Mega_Gardevoir
+	@ Forms
+	cry_not Cry_Burmy_Sandy
+	cry_not Cry_Burmy_Trash
+	cry_not Cry_Wormadam_Sandy
+	cry_not Cry_Wormadam_Trash
+	cry_not Cry_Rotom_Heat
+	cry_not Cry_Rotom_Wash
+	cry_not Cry_Rotom_Frost
+	cry_not Cry_Rotom_Fan
+	cry_not Cry_Rotom_Mow
+	cry_not Cry_Kyurem_Black
+	cry_not Cry_Kyurem_White
+	cry_not Cry_Meowstic_F
+	@ Alolan Forms
+	cry Cry_Alolan_Rattata
+	cry Cry_Alolan_Raticate
+	cry Cry_Alolan_Raichu
+	cry Cry_Alolan_Sandshrew
+	cry Cry_Alolan_Sandslash
+	cry Cry_Alolan_Vulpix
+	cry Cry_Alolan_Ninetales
+	cry Cry_Alolan_Diglett
+	cry Cry_Alolan_Dugtrio
+	cry Cry_Alolan_Meowth
+	cry Cry_Alolan_Persian
+	cry Cry_Alolan_Geodude
+	cry Cry_Alolan_Graveler
+	cry Cry_Alolan_Golem
+	cry Cry_Alolan_Grimer
+	cry Cry_Alolan_Muk
+	cry Cry_Alolan_Exeggutor
+	cry Cry_Alolan_Marowak
+	@ Form Changes
+	cry_not Cry_Primal_Kyogre
+	cry_not Cry_Primal_Groudon
+	cry_not Cry_Shaymin_Sky
+	cry_not Cry_Giratina_Origin
+	cry_not Cry_Darmanitan_Zen
+	cry_not Cry_Tornadus_Therian
+	cry_not Cry_Thundurus_Therian
+	cry_not Cry_Landorus_Therian
+	cry_not Cry_Meloetta_Pirouette
+	cry_not Cry_Aegislash_Blade
+	cry_not Cry_Hoopa_Unbound
+	cry_not Cry_Minior_Core
+	cry_not Cry_Wishiwashi_School
+	cry_not Cry_Mimikyu_Busted
+	cry_not Cry_Lycanroc_Midnight
+	cry_not Cry_Lycanroc_Dusk
+	cry_not Cry_Zygarde_10
+	cry_not Cry_Zygarde_Complete
 
 	.align 2
 gCryTable2:: @ 869EF24
@@ -642,140 +1164,661 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Lugia  @ 869FAC4
 	cry2 Cry_HoOh  @ 869FAD0
 	cry2 Cry_Celebi  @ 869FADC
-	cry2 Cry_Kecleon  @ 869FAE8
-	cry2 Cry_Roselia  @ 869FAF4
-	cry2 Cry_Torkoal  @ 869FB00
-	cry2 Cry_Electrike  @ 869FB0C
-	cry2 Cry_Manectric  @ 869FB18
-	cry2 Cry_Duskull  @ 869FB24
-	cry2 Cry_Latias  @ 869FB30
-	cry2 Cry_Wynaut  @ 869FB3C
-	cry2 Cry_Seviper  @ 869FB48
-	cry2 Cry_Sharpedo  @ 869FB54
-	cry2 Cry_Zangoose  @ 869FB60
-	cry2 Cry_Azurill  @ 869FB6C
-	cry2 Cry_Swablu  @ 869FB78
-	cry2 Cry_Altaria  @ 869FB84
-	cry2 Cry_Unused265  @ 869FB90
-	cry2 Cry_Taillow  @ 869FB9C
-	cry2 Cry_Swellow  @ 869FBA8
-	cry2 Cry_Unused268  @ 869FBB4
-	cry2 Cry_Spinda  @ 869FBC0
-	cry2 Cry_Torchic  @ 869FBCC
-	cry2 Cry_Combusken  @ 869FBD8
-	cry2 Cry_Blaziken  @ 869FBE4
-	cry2 Cry_Treecko  @ 869FBF0
-	cry2 Cry_Grovyle  @ 869FBFC
-	cry2 Cry_Sceptile  @ 869FC08
-	cry2 Cry_Mudkip  @ 869FC14
-	cry2 Cry_Marshtomp  @ 869FC20
-	cry2 Cry_Swampert  @ 869FC2C
-	cry2 Cry_Pelipper  @ 869FC38
-	cry2 Cry_Wingull  @ 869FC44
-	cry2 Cry_Banette  @ 869FC50
-	cry2 Cry_Shuppet  @ 869FC5C
-	cry2 Cry_Lotad  @ 869FC68
-	cry2 Cry_Lombre  @ 869FC74
-	cry2 Cry_Ludicolo  @ 869FC80
-	cry2 Cry_Seedot  @ 869FC8C
-	cry2 Cry_Nuzleaf  @ 869FC98
-	cry2 Cry_Shiftry  @ 869FCA4
-	cry2 Cry_Carvanha  @ 869FCB0
-	cry2 Cry_Wurmple  @ 869FCBC
-	cry2 Cry_Silcoon  @ 869FCC8
-	cry2 Cry_Beautifly  @ 869FCD4
-	cry2 Cry_Cascoon  @ 869FCE0
-	cry2 Cry_Dustox  @ 869FCEC
-	cry2 Cry_Ralts  @ 869FCF8
-	cry2 Cry_Kirlia  @ 869FD04
-	cry2 Cry_Gardevoir  @ 869FD10
-	cry2 Cry_Slakoth  @ 869FD1C
-	cry2 Cry_Vigoroth  @ 869FD28
-	cry2 Cry_Slaking  @ 869FD34
-	cry2 Cry_Nincada  @ 869FD40
-	cry2 Cry_Ninjask  @ 869FD4C
-	cry2 Cry_Shedinja  @ 869FD58
-	cry2 Cry_Makuhita  @ 869FD64
-	cry2 Cry_Hariyama  @ 869FD70
-	cry2 Cry_Nosepass  @ 869FD7C
-	cry2 Cry_Glalie  @ 869FD88
-	cry2 Cry_Plusle  @ 869FD94
-	cry2 Cry_Minun  @ 869FDA0
-	cry2 Cry_Surskit  @ 869FDAC
-	cry2 Cry_Masquerain  @ 869FDB8
-	cry2 Cry_Skitty  @ 869FDC4
-	cry2 Cry_Delcatty  @ 869FDD0
-	cry2 Cry_Gulpin  @ 869FDDC
-	cry2 Cry_Swalot  @ 869FDE8
-	cry2 Cry_Numel  @ 869FDF4
-	cry2 Cry_Camerupt  @ 869FE00
-	cry2 Cry_Barboach  @ 869FE0C
-	cry2 Cry_Whiscash  @ 869FE18
-	cry2 Cry_Corphish  @ 869FE24
-	cry2 Cry_Crawdaunt  @ 869FE30
-	cry2 Cry_Spoink  @ 869FE3C
-	cry2 Cry_Grumpig  @ 869FE48
-	cry2 Cry_Trapinch  @ 869FE54
-	cry2 Cry_Vibrava  @ 869FE60
-	cry2 Cry_Flygon  @ 869FE6C
-	cry2 Cry_Cacnea  @ 869FE78
-	cry2 Cry_Cacturne  @ 869FE84
-	cry2 Cry_Baltoy  @ 869FE90
-	cry2 Cry_Claydol  @ 869FE9C
-	cry2 Cry_Lunatone  @ 869FEA8
-	cry2 Cry_Solrock  @ 869FEB4
-	cry2 Cry_Feebas  @ 869FEC0
-	cry2 Cry_Milotic  @ 869FECC
-	cry2 Cry_Absol  @ 869FED8
-	cry2 Cry_Meditite  @ 869FEE4
-	cry2 Cry_Medicham  @ 869FEF0
-	cry2 Cry_Spheal  @ 869FEFC
-	cry2 Cry_Sealeo  @ 869FF08
-	cry2 Cry_Walrein  @ 869FF14
-	cry2 Cry_Clamperl  @ 869FF20
-	cry2 Cry_Huntail  @ 869FF2C
-	cry2 Cry_Gorebyss  @ 869FF38
-	cry2 Cry_Lileep  @ 869FF44
-	cry2 Cry_Cradily  @ 869FF50
-	cry2 Cry_Anorith  @ 869FF5C
-	cry2 Cry_Armaldo  @ 869FF68
-	cry2 Cry_Beldum  @ 869FF74
-	cry2 Cry_Metang  @ 869FF80
-	cry2 Cry_Metagross  @ 869FF8C
-	cry2 Cry_Bagon  @ 869FF98
-	cry2 Cry_Shelgon  @ 869FFA4
-	cry2 Cry_Regirock  @ 869FFB0
-	cry2 Cry_Regice  @ 869FFBC
-	cry2 Cry_Registeel  @ 869FFC8
-	cry2 Cry_Castform  @ 869FFD4
-	cry2 Cry_Volbeat  @ 869FFE0
-	cry2 Cry_Illumise  @ 869FFEC
-	cry2 Cry_Poochyena  @ 869FFF8
-	cry2 Cry_Mightyena  @ 86A0004
-	cry2 Cry_Dusclops  @ 86A0010
-	cry2 Cry_Sableye  @ 86A001C
-	cry2 Cry_Mawile  @ 86A0028
-	cry2 Cry_Aron  @ 86A0034
-	cry2 Cry_Lairon  @ 86A0040
-	cry2 Cry_Aggron  @ 86A004C
-	cry2 Cry_Relicanth  @ 86A0058
-	cry2 Cry_Luvdisc  @ 86A0064
-	cry2 Cry_Groudon  @ 86A0070
-	cry2 Cry_Kyogre  @ 86A007C
-	cry2 Cry_Rayquaza  @ 86A0088
-	cry2 Cry_Salamence  @ 86A0094
-	cry2 Cry_Breloom  @ 86A00A0
-	cry2 Cry_Shroomish  @ 86A00AC
-	cry2 Cry_Linoone  @ 86A00B8
-	cry2 Cry_Tropius  @ 86A00C4
-	cry2 Cry_Wailmer  @ 86A00D0
-	cry2 Cry_Zigzagoon  @ 86A00DC
-	cry2 Cry_Exploud  @ 86A00E8
-	cry2 Cry_Loudred  @ 86A00F4
-	cry2 Cry_Wailord  @ 86A0100
-	cry2 Cry_Whismur  @ 86A010C
-	cry2 Cry_Snorunt  @ 86A0118
-	cry2 Cry_Latios  @ 86A0124
-	cry2 Cry_Jirachi  @ 86A0130
-	cry2 Cry_Deoxys  @ 86A013C
-	cry2 Cry_Chimecho  @ 86A0148
+	cry2 Cry_Treecko
+	cry2 Cry_Grovyle
+	cry2 Cry_Sceptile
+	cry2 Cry_Torchic
+	cry2 Cry_Combusken
+	cry2 Cry_Blaziken
+	cry2 Cry_Mudkip
+	cry2 Cry_Marshtomp
+	cry2 Cry_Swampert
+	cry2 Cry_Poochyena
+	cry2 Cry_Mightyena
+	cry2 Cry_Zigzagoon
+	cry2 Cry_Linoone
+	cry2 Cry_Wurmple
+	cry2 Cry_Silcoon
+	cry2 Cry_Beautifly
+	cry2 Cry_Cascoon
+	cry2 Cry_Dustox
+	cry2 Cry_Lotad
+	cry2 Cry_Lombre
+	cry2 Cry_Ludicolo
+	cry2 Cry_Seedot
+	cry2 Cry_Nuzleaf
+	cry2 Cry_Shiftry
+	cry2 Cry_Taillow
+	cry2 Cry_Swellow
+	cry2 Cry_Wingull
+	cry2 Cry_Pelipper
+	cry2 Cry_Ralts
+	cry2 Cry_Kirlia
+	cry2 Cry_Gardevoir
+	cry2 Cry_Surskit
+	cry2 Cry_Masquerain
+	cry2 Cry_Shroomish
+	cry2 Cry_Breloom
+	cry2 Cry_Slakoth
+	cry2 Cry_Vigoroth
+	cry2 Cry_Slaking
+	cry2 Cry_Nincada
+	cry2 Cry_Ninjask
+	cry2 Cry_Shedinja
+	cry2 Cry_Whismur
+	cry2 Cry_Loudred
+	cry2 Cry_Exploud
+	cry2 Cry_Makuhita
+	cry2 Cry_Hariyama
+	cry2 Cry_Azurill
+	cry2 Cry_Nosepass
+	cry2 Cry_Skitty
+	cry2 Cry_Delcatty
+	cry2 Cry_Sableye
+	cry2 Cry_Mawile
+	cry2 Cry_Aron
+	cry2 Cry_Lairon
+	cry2 Cry_Aggron
+	cry2 Cry_Meditite
+	cry2 Cry_Medicham
+	cry2 Cry_Electrike
+	cry2 Cry_Manectric
+	cry2 Cry_Plusle
+	cry2 Cry_Minun
+	cry2 Cry_Volbeat
+	cry2 Cry_Illumise
+	cry2 Cry_Roselia
+	cry2 Cry_Gulpin
+	cry2 Cry_Swalot
+	cry2 Cry_Carvanha
+	cry2 Cry_Sharpedo
+	cry2 Cry_Wailmer
+	cry2 Cry_Wailord
+	cry2 Cry_Numel
+	cry2 Cry_Camerupt
+	cry2 Cry_Torkoal
+	cry2 Cry_Spoink
+	cry2 Cry_Grumpig
+	cry2 Cry_Spinda
+	cry2 Cry_Trapinch
+	cry2 Cry_Vibrava
+	cry2 Cry_Flygon
+	cry2 Cry_Cacnea
+	cry2 Cry_Cacturne
+	cry2 Cry_Swablu
+	cry2 Cry_Altaria
+	cry2 Cry_Zangoose
+	cry2 Cry_Seviper
+	cry2 Cry_Lunatone
+	cry2 Cry_Solrock
+	cry2 Cry_Barboach
+	cry2 Cry_Whiscash
+	cry2 Cry_Corphish
+	cry2 Cry_Crawdaunt
+	cry2 Cry_Baltoy
+	cry2 Cry_Claydol
+	cry2 Cry_Lileep
+	cry2 Cry_Cradily
+	cry2 Cry_Anorith
+	cry2 Cry_Armaldo
+	cry2 Cry_Feebas
+	cry2 Cry_Milotic
+	cry2 Cry_Castform
+	cry2 Cry_Kecleon
+	cry2 Cry_Shuppet
+	cry2 Cry_Banette
+	cry2 Cry_Duskull
+	cry2 Cry_Dusclops
+	cry2 Cry_Tropius
+	cry2 Cry_Chimecho
+	cry2 Cry_Absol
+	cry2 Cry_Wynaut
+	cry2 Cry_Snorunt
+	cry2 Cry_Glalie
+	cry2 Cry_Spheal
+	cry2 Cry_Sealeo
+	cry2 Cry_Walrein
+	cry2 Cry_Clamperl
+	cry2 Cry_Huntail
+	cry2 Cry_Gorebyss
+	cry2 Cry_Relicanth
+	cry2 Cry_Luvdisc
+	cry2 Cry_Bagon
+	cry2 Cry_Shelgon
+	cry2 Cry_Salamence
+	cry2 Cry_Beldum
+	cry2 Cry_Metang
+	cry2 Cry_Metagross
+	cry2 Cry_Regirock
+	cry2 Cry_Regice
+	cry2 Cry_Registeel
+	cry2 Cry_Latias
+	cry2 Cry_Latios
+	cry2 Cry_Kyogre
+	cry2 Cry_Groudon
+	cry2 Cry_Rayquaza
+	cry2 Cry_Jirachi
+	cry2 Cry_Deoxys
+	cry2_not Cry_Turtwig
+	cry2_not Cry_Grotle
+	cry2_not Cry_Torterra
+	cry2_not Cry_Chimchar
+	cry2_not Cry_Monferno
+	cry2_not Cry_Infernape
+	cry2_not Cry_Piplup
+	cry2_not Cry_Prinplup
+	cry2_not Cry_Empoleon
+	cry2_not Cry_Starly
+	cry2_not Cry_Staravia
+	cry2_not Cry_Staraptor
+	cry2_not Cry_Bidoof
+	cry2_not Cry_Bibarel
+	cry2_not Cry_Kricketot
+	cry2_not Cry_Kricketune
+	cry2_not Cry_Shinx
+	cry2_not Cry_Luxio
+	cry2_not Cry_Luxray
+	cry2_not Cry_Budew
+	cry2_not Cry_Roserade
+	cry2_not Cry_Cranidos
+	cry2_not Cry_Rampardos
+	cry2_not Cry_Shieldon
+	cry2_not Cry_Bastiodon
+	cry2_not Cry_Burmy
+	cry2_not Cry_Wormadam
+	cry2_not Cry_Mothim
+	cry2_not Cry_Combee
+	cry2_not Cry_Vespiquen
+	cry2_not Cry_Pachirisu
+	cry2_not Cry_Buizel
+	cry2_not Cry_Floatzel
+	cry2_not Cry_Cherubi
+	cry2_not Cry_Cherrim
+	cry2_not Cry_Shellos
+	cry2_not Cry_Gastrodon
+	cry2_not Cry_Ambipom
+	cry2_not Cry_Drifloon
+	cry2_not Cry_Drifblim
+	cry2_not Cry_Buneary
+	cry2_not Cry_Lopunny
+	cry2_not Cry_Mismagius
+	cry2_not Cry_Honchkrow
+	cry2_not Cry_Glameow
+	cry2_not Cry_Purugly
+	cry2_not Cry_Chingling
+	cry2_not Cry_Stunky
+	cry2_not Cry_Skuntank
+	cry2_not Cry_Bronzor
+	cry2_not Cry_Bronzong
+	cry2_not Cry_Bonsly
+	cry2_not Cry_Mimejr
+	cry2_not Cry_Happiny
+	cry2_not Cry_Chatot
+	cry2_not Cry_Spiritomb
+	cry2_not Cry_Gible
+	cry2_not Cry_Gabite
+	cry2_not Cry_Garchomp
+	cry2_not Cry_Munchlax
+	cry2_not Cry_Riolu
+	cry2_not Cry_Lucario
+	cry2_not Cry_Hippopotas
+	cry2_not Cry_Hippowdon
+	cry2_not Cry_Skorupi
+	cry2_not Cry_Drapion
+	cry2_not Cry_Croagunk
+	cry2_not Cry_Toxicroak
+	cry2_not Cry_Carnivine
+	cry2_not Cry_Finneon
+	cry2_not Cry_Lumineon
+	cry2_not Cry_Mantyke
+	cry2_not Cry_Snover
+	cry2_not Cry_Abomasnow
+	cry2_not Cry_Weavile
+	cry2_not Cry_Magnezone
+	cry2_not Cry_Lickilicky
+	cry2_not Cry_Rhyperior
+	cry2_not Cry_Tangrowth
+	cry2_not Cry_Electivire
+	cry2_not Cry_Magmortar
+	cry2_not Cry_Togekiss
+	cry2_not Cry_Yanmega
+	cry2_not Cry_Leafeon
+	cry2_not Cry_Glaceon
+	cry2_not Cry_Gliscor
+	cry2_not Cry_Mamoswine
+	cry2_not Cry_PorygonZ
+	cry2_not Cry_Gallade
+	cry2_not Cry_Probopass
+	cry2_not Cry_Dusknoir
+	cry2_not Cry_Froslass
+	cry2_not Cry_Rotom
+	cry2_not Cry_Uxie
+	cry2_not Cry_Mesprit
+	cry2_not Cry_Azelf
+	cry2_not Cry_Dialga
+	cry2_not Cry_Palkia
+	cry2_not Cry_Heatran
+	cry2_not Cry_Regigigas
+	cry2_not Cry_Giratina
+	cry2_not Cry_Cresselia
+	cry2_not Cry_Phione
+	cry2_not Cry_Manaphy
+	cry2_not Cry_Darkrai
+	cry2_not Cry_Shaymin
+	cry2_not Cry_Arceus
+	cry2_not Cry_Victini
+	cry2_not Cry_Snivy
+	cry2_not Cry_Servine
+	cry2_not Cry_Serperior
+	cry2_not Cry_Tepig
+	cry2_not Cry_Pignite
+	cry2_not Cry_Emboar
+	cry2_not Cry_Oshawott
+	cry2_not Cry_Dewott
+	cry2_not Cry_Samurott
+	cry2_not Cry_Patrat
+	cry2_not Cry_Watchog
+	cry2_not Cry_Lillipup
+	cry2_not Cry_Herdier
+	cry2_not Cry_Stoutland
+	cry2_not Cry_Purrloin
+	cry2_not Cry_Liepard
+	cry2_not Cry_Pansage
+	cry2_not Cry_Simisage
+	cry2_not Cry_Pansear
+	cry2_not Cry_Simisear
+	cry2_not Cry_Panpour
+	cry2_not Cry_Simipour
+	cry2_not Cry_Munna
+	cry2_not Cry_Musharna
+	cry2_not Cry_Pidove
+	cry2_not Cry_Tranquill
+	cry2_not Cry_Unfezant
+	cry2_not Cry_Blitzle
+	cry2_not Cry_Zebstrika
+	cry2_not Cry_Roggenrola
+	cry2_not Cry_Boldore
+	cry2_not Cry_Gigalith
+	cry2_not Cry_Woobat
+	cry2_not Cry_Swoobat
+	cry2_not Cry_Drilbur
+	cry2_not Cry_Excadrill
+	cry2_not Cry_Audino
+	cry2_not Cry_Timburr
+	cry2_not Cry_Gurdurr
+	cry2_not Cry_Conkeldurr
+	cry2_not Cry_Tympole
+	cry2_not Cry_Palpitoad
+	cry2_not Cry_Seismitoad
+	cry2_not Cry_Throh
+	cry2_not Cry_Sawk
+	cry2_not Cry_Sewaddle
+	cry2_not Cry_Swadloon
+	cry2_not Cry_Leavanny
+	cry2_not Cry_Venipede
+	cry2_not Cry_Whirlipede
+	cry2_not Cry_Scolipede
+	cry2_not Cry_Cottonee
+	cry2_not Cry_Whimsicott
+	cry2_not Cry_Petilil
+	cry2_not Cry_Lilligant
+	cry2_not Cry_Basculin
+	cry2_not Cry_Sandile
+	cry2_not Cry_Krokorok
+	cry2_not Cry_Krookodile
+	cry2_not Cry_Darumaka
+	cry2_not Cry_Darmanitan
+	cry2_not Cry_Maractus
+	cry2_not Cry_Dwebble
+	cry2_not Cry_Crustle
+	cry2_not Cry_Scraggy
+	cry2_not Cry_Scrafty
+	cry2_not Cry_Sigilyph
+	cry2_not Cry_Yamask
+	cry2_not Cry_Cofagrigus
+	cry2_not Cry_Tirtouga
+	cry2_not Cry_Carracosta
+	cry2_not Cry_Archen
+	cry2_not Cry_Archeops
+	cry2_not Cry_Trubbish
+	cry2_not Cry_Garbodor
+	cry2_not Cry_Zorua
+	cry2_not Cry_Zoroark
+	cry2_not Cry_Minccino
+	cry2_not Cry_Cinccino
+	cry2_not Cry_Gothita
+	cry2_not Cry_Gothorita
+	cry2_not Cry_Gothitelle
+	cry2_not Cry_Solosis
+	cry2_not Cry_Duosion
+	cry2_not Cry_Reuniclus
+	cry2_not Cry_Ducklett
+	cry2_not Cry_Swanna
+	cry2_not Cry_Vanillite
+	cry2_not Cry_Vanillish
+	cry2_not Cry_Vanilluxe
+	cry2_not Cry_Deerling
+	cry2_not Cry_Sawsbuck
+	cry2_not Cry_Emolga
+	cry2_not Cry_Karrablast
+	cry2_not Cry_Escavalier
+	cry2_not Cry_Foongus
+	cry2_not Cry_Amoonguss
+	cry2_not Cry_Frillish
+	cry2_not Cry_Jellicent
+	cry2_not Cry_Alomomola
+	cry2_not Cry_Joltik
+	cry2_not Cry_Galvantula
+	cry2_not Cry_Ferroseed
+	cry2_not Cry_Ferrothorn
+	cry2_not Cry_Klink
+	cry2_not Cry_Klang
+	cry2_not Cry_Klinklang
+	cry2_not Cry_Tynamo
+	cry2_not Cry_Eelektrik
+	cry2_not Cry_Eelektross
+	cry2_not Cry_Elgyem
+	cry2_not Cry_Beheeyem
+	cry2_not Cry_Litwick
+	cry2_not Cry_Lampent
+	cry2_not Cry_Chandelure
+	cry2_not Cry_Axew
+	cry2_not Cry_Fraxure
+	cry2_not Cry_Haxorus
+	cry2_not Cry_Cubchoo
+	cry2_not Cry_Beartic
+	cry2_not Cry_Cryogonal
+	cry2_not Cry_Shelmet
+	cry2_not Cry_Accelgor
+	cry2_not Cry_Stunfisk
+	cry2_not Cry_Mienfoo
+	cry2_not Cry_Mienshao
+	cry2_not Cry_Druddigon
+	cry2_not Cry_Golett
+	cry2_not Cry_Golurk
+	cry2_not Cry_Pawniard
+	cry2_not Cry_Bisharp
+	cry2_not Cry_Bouffalant
+	cry2_not Cry_Rufflet
+	cry2_not Cry_Braviary
+	cry2_not Cry_Vullaby
+	cry2_not Cry_Mandibuzz
+	cry2_not Cry_Heatmor
+	cry2_not Cry_Durant
+	cry2_not Cry_Deino
+	cry2_not Cry_Zweilous
+	cry2_not Cry_Hydreigon
+	cry2_not Cry_Larvesta
+	cry2_not Cry_Volcarona
+	cry2_not Cry_Cobalion
+	cry2_not Cry_Terrakion
+	cry2_not Cry_Virizion
+	cry2_not Cry_Tornadus
+	cry2_not Cry_Thundurus
+	cry2_not Cry_Reshiram
+	cry2_not Cry_Zekrom
+	cry2_not Cry_Landorus
+	cry2_not Cry_Kyurem
+	cry2_not Cry_Keldeo
+	cry2_not Cry_Meloetta
+	cry2_not Cry_Genesect
+	cry2_not Cry_Chespin
+	cry2_not Cry_Quilladin
+	cry2_not Cry_Chesnaught
+	cry2_not Cry_Fennekin
+	cry2_not Cry_Braixen
+	cry2_not Cry_Delphox
+	cry2_not Cry_Froakie
+	cry2_not Cry_Frogadier
+	cry2_not Cry_Greninja
+	cry2_not Cry_Bunnelby
+	cry2_not Cry_Diggersby
+	cry2_not Cry_Fletchling
+	cry2_not Cry_Fletchinder
+	cry2_not Cry_Talonflame
+	cry2_not Cry_Scatterbug
+	cry2_not Cry_Spewpa
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Litleo
+	cry2_not Cry_Pyroar
+	cry2_not Cry_Flabebe
+	cry2_not Cry_Floette
+	cry2_not Cry_Florges
+	cry2_not Cry_Skiddo
+	cry2_not Cry_Gogoat
+	cry2_not Cry_Pancham
+	cry2_not Cry_Pangoro
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Espurr
+	cry2_not Cry_Meowstic
+	cry2_not Cry_Honedge
+	cry2_not Cry_Doublade
+	cry2_not Cry_Aegislash
+	cry2_not Cry_Spritzee
+	cry2_not Cry_Aromatisse
+	cry2_not Cry_Swirlix
+	cry2_not Cry_Slurpuff
+	cry2_not Cry_Inkay
+	cry2_not Cry_Malamar
+	cry2_not Cry_Binacle
+	cry2_not Cry_Barbaracle
+	cry2_not Cry_Skrelp
+	cry2_not Cry_Dragalge
+	cry2_not Cry_Clauncher
+	cry2_not Cry_Clawitzer
+	cry2_not Cry_Helioptile
+	cry2_not Cry_Heliolisk
+	cry2_not Cry_Tyrunt
+	cry2_not Cry_Tyrantrum
+	cry2_not Cry_Amaura
+	cry2_not Cry_Aurorus
+	cry2_not Cry_Sylveon
+	cry2_not Cry_Hawlucha
+	cry2_not Cry_Dedenne
+	cry2_not Cry_Carbink
+	cry2_not Cry_Goomy
+	cry2_not Cry_Sliggoo
+	cry2_not Cry_Goodra
+	cry2_not Cry_Klefki
+	cry2_not Cry_Phantump
+	cry2_not Cry_Trevenant
+	cry2_not Cry_Pumpkaboo
+	cry2_not Cry_Gourgeist
+	cry2_not Cry_Bergmite
+	cry2_not Cry_Avalugg
+	cry2_not Cry_Noibat
+	cry2_not Cry_Noivern
+	cry2_not Cry_Xerneas
+	cry2_not Cry_Yveltal
+	cry2_not Cry_Zygarde
+	cry2_not Cry_Diancie
+	cry2_not Cry_Hoopa
+	cry2_not Cry_Volcanion
+	cry2_not Cry_Rowlet
+	cry2_not Cry_Dartrix
+	cry2_not Cry_Decidueye
+	cry2_not Cry_Litten
+	cry2_not Cry_Torracat
+	cry2_not Cry_Incineroar
+	cry2_not Cry_Popplio
+	cry2_not Cry_Brionne
+	cry2_not Cry_Primarina
+	cry2_not Cry_Pikipek
+	cry2_not Cry_Trumbeak
+	cry2_not Cry_Toucannon
+	cry2_not Cry_Yungoos
+	cry2_not Cry_Gumshoos
+	cry2_not Cry_Grubbin
+	cry2_not Cry_Charjabug
+	cry2_not Cry_Vikavolt
+	cry2_not Cry_Crabrawler
+	cry2_not Cry_Crabominable
+	cry2_not Cry_Oricorio
+	cry2_not Cry_Cutiefly
+	cry2_not Cry_Ribombee
+	cry2_not Cry_Rockruff
+	cry2_not Cry_Lycanroc
+	cry2_not Cry_Wishiwashi
+	cry2_not Cry_Mareanie
+	cry2_not Cry_Toxapex
+	cry2_not Cry_Mudbray
+	cry2_not Cry_Mudsdale
+	cry2_not Cry_Dewpider
+	cry2_not Cry_Araquanid
+	cry2_not Cry_Fomantis
+	cry2_not Cry_Lurantis
+	cry2_not Cry_Morelull
+	cry2_not Cry_Shiinotic
+	cry2_not Cry_Salandit
+	cry2_not Cry_Salazzle
+	cry2_not Cry_Stufful
+	cry2_not Cry_Bewear
+	cry2_not Cry_Bounsweet
+	cry2_not Cry_Steenee
+	cry2_not Cry_Tsareena
+	cry2_not Cry_Comfey
+	cry2_not Cry_Oranguru
+	cry2_not Cry_Passimian
+	cry2_not Cry_Wimpod
+	cry2_not Cry_Golisopod
+	cry2_not Cry_Sandygast
+	cry2_not Cry_Palossand
+	cry2_not Cry_Pyukumuku
+	cry2_not Cry_Type_null
+	cry2_not Cry_Silvally
+	cry2_not Cry_Minior
+	cry2_not Cry_Komala
+	cry2_not Cry_Turtonator
+	cry2_not Cry_Togedemaru
+	cry2_not Cry_Mimikyu
+	cry2_not Cry_Bruxish
+	cry2_not Cry_Drampa
+	cry2_not Cry_Dhelmise
+	cry2_not Cry_Jangmo_o
+	cry2_not Cry_Hakamo_o
+	cry2_not Cry_Kommo_o
+	cry2_not Cry_Tapu_koko
+	cry2_not Cry_Tapu_lele
+	cry2_not Cry_Tapu_bulu
+	cry2_not Cry_Tapu_fini
+	cry2_not Cry_Cosmog
+	cry2_not Cry_Cosmoem
+	cry2_not Cry_Solgaleo
+	cry2_not Cry_Lunala
+	cry2_not Cry_Nihilego
+	cry2_not Cry_Buzzwole
+	cry2_not Cry_Pheromosa
+	cry2_not Cry_Xurkitree
+	cry2_not Cry_Celesteela
+	cry2_not Cry_Kartana
+	cry2_not Cry_Guzzlord
+	cry2_not Cry_Necrozma
+	cry2_not Cry_Magearna
+	cry2_not Cry_Marshadow
+	cry2_not Cry_Poipole
+	cry2_not Cry_Naganadel
+	cry2_not Cry_Stakataka
+	cry2_not Cry_Blacephalon
+	cry2_not Cry_Zeraora
+	cry2_not Cry_Meltan
+	cry2_not Cry_Melmetal
+	@ Megas
+	cry2_not Cry_Mega_Ampharos
+	cry2_not Cry_Mega_Venusaur
+	cry2_not Cry_Mega_Charizard_X
+	cry2_not Cry_Mega_Charizard_Y
+	cry2_not Cry_Mega_Mewtwo_X
+	cry2_not Cry_Mega_Mewtwo_Y
+	cry2_not Cry_Mega_Blaziken
+	cry2_not Cry_Mega_Medicham
+	cry2_not Cry_Mega_Houndoom
+	cry2_not Cry_Mega_Aggron
+	cry2_not Cry_Mega_Banette
+	cry2_not Cry_Mega_Tyranitar
+	cry2_not Cry_Mega_Scizor
+	cry2_not Cry_Mega_Pinsir
+	cry2_not Cry_Mega_Aerodactyl
+	cry2_not Cry_Mega_Lucario
+	cry2_not Cry_Mega_Abomasnow
+	cry2_not Cry_Mega_Blastoise
+	cry2_not Cry_Mega_Kangaskhan
+	cry2_not Cry_Mega_Gyarados
+	cry2_not Cry_Mega_Absol
+	cry2_not Cry_Mega_Alakazam
+	cry2_not Cry_Mega_Heracross
+	cry2_not Cry_Mega_Mawile
+	cry2_not Cry_Mega_Manectric
+	cry2_not Cry_Mega_Garchomp
+	cry2_not Cry_Mega_Latios
+	cry2_not Cry_Mega_Latias
+	cry2_not Cry_Mega_Swampert
+	cry2_not Cry_Mega_Sceptile
+	cry2_not Cry_Mega_Sableye
+	cry2_not Cry_Mega_Altaria
+	cry2_not Cry_Mega_Gallade
+	cry2_not Cry_Mega_Audino
+	cry2_not Cry_Mega_Sharpedo
+	cry2_not Cry_Mega_Slowbro
+	cry2_not Cry_Mega_Steelix
+	cry2_not Cry_Mega_Pidgeot
+	cry2_not Cry_Mega_Glalie
+	cry2_not Cry_Mega_Diancie
+	cry2_not Cry_Mega_Metagross
+	cry2_not Cry_Mega_Rayquaza
+	cry2_not Cry_Mega_Camerupt
+	cry2_not Cry_Mega_Lopunny
+	cry2_not Cry_Mega_Salamence
+	cry2_not Cry_Mega_Beedrill
+	cry2_not Cry_Mega_Gengar
+	cry2_not Cry_Mega_Gardevoir
+	@ Forms
+	cry2_not Cry_Burmy_Sandy
+	cry2_not Cry_Burmy_Trash
+	cry2_not Cry_Wormadam_Sandy
+	cry2_not Cry_Wormadam_Trash
+	cry2_not Cry_Rotom_Heat
+	cry2_not Cry_Rotom_Wash
+	cry2_not Cry_Rotom_Frost
+	cry2_not Cry_Rotom_Fan
+	cry2_not Cry_Rotom_Mow
+	cry2_not Cry_Kyurem_Black
+	cry2_not Cry_Kyurem_White
+	cry2_not Cry_Meowstic_F
+	@ Alolan Forms
+	cry2 Cry_Alolan_Rattata
+	cry2 Cry_Alolan_Raticate
+	cry2 Cry_Alolan_Raichu
+	cry2 Cry_Alolan_Sandshrew
+	cry2 Cry_Alolan_Sandslash
+	cry2 Cry_Alolan_Vulpix
+	cry2 Cry_Alolan_Ninetales
+	cry2 Cry_Alolan_Diglett
+	cry2 Cry_Alolan_Dugtrio
+	cry2 Cry_Alolan_Meowth
+	cry2 Cry_Alolan_Persian
+	cry2 Cry_Alolan_Geodude
+	cry2 Cry_Alolan_Graveler
+	cry2 Cry_Alolan_Golem
+	cry2 Cry_Alolan_Grimer
+	cry2 Cry_Alolan_Muk
+	cry2 Cry_Alolan_Exeggutor
+	cry2 Cry_Alolan_Marowak
+	@ Form Changes
+	cry2_not Cry_Primal_Kyogre
+	cry2_not Cry_Primal_Groudon
+	cry2_not Cry_Shaymin_Sky
+	cry2_not Cry_Giratina_Origin
+	cry2_not Cry_Darmanitan_Zen
+	cry2_not Cry_Tornadus_Therian
+	cry2_not Cry_Thundurus_Therian
+	cry2_not Cry_Landorus_Therian
+	cry2_not Cry_Meloetta_Pirouette
+	cry2_not Cry_Aegislash_Blade
+	cry2_not Cry_Hoopa_Unbound
+	cry2_not Cry_Minior_Core
+	cry2_not Cry_Wishiwashi_School
+	cry2_not Cry_Mimikyu_Busted
+	cry2_not Cry_Lycanroc_Midnight
+	cry2_not Cry_Lycanroc_Dusk
+	cry2_not Cry_Zygarde_10
+	cry2_not Cry_Zygarde_Complete
