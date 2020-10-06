@@ -15,7 +15,7 @@
 #define FREE_EXTRA_SEEN_FLAGS           //free up extra pokedex seen flags. Frees up 104 bytes
 #define FREE_FIELD_3598                 //frees up unused saveblock data. 384 bytes
 #define FREE_TRAINER_HILL               //frees up trainer hill data. 28 bytes 
-#define FREE_MYSTERY_EVENT_BUFFERS      //frees up mystery event. 876 bytes
+#define FREE_MYSTERY_EVENT_BUFFERS      //frees up mystery event and ramScript. roughly 1880 bytes
 #define FREE_MATCH_CALL                 //frees up match call data. 104 bytes
 #define FREE_UNION_ROOM_CHAT            //frees up field unk3C88. 210 bytes
 #define FREE_ENIGMA_BERRY               //frees up enigma berry. 52 bytes
@@ -1072,7 +1072,9 @@ struct SaveBlock1
     #ifndef FREE_TRAINER_HILL
     /*0x3718*/ u32 trainerHillTimes[4]; //16 bytes
     #endif
+    #ifndef FREE_MYSTERY_EVENT_BUFFERS
     /*0x3728*/ struct RamScript ramScript;
+    #endif
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     #ifndef FREE_EXTRA_SEEN_FLAGS
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];  //52 bytes
