@@ -118,16 +118,16 @@ MtChimney_EventScript_LavaCookieLady:: @ 822EEF3
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare VAR_RESULT, TRUE
 	call_if_eq MtChimney_EventScript_RemoveMoney
+    hidemoneybox
 	giveitem ITEM_LAVA_COOKIE
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_BagIsFull
-	hidemoneybox
 	release
 	end
 
 MtChimney_EventScript_BagIsFull:: @ 822EF51
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	hidemoneybox
+	@hidemoneybox
 	release
 	end
 
