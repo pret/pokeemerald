@@ -116,7 +116,7 @@ voicegroup129:: @ 86A0154
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A06A0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A06AC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A06B8
-	voice_directsound 60, 0, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 0  @ 86A06C4
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 0  @ 86A06C4
 	voice_directsound 60, 0, DirectSoundWaveData_sd90_ambient_tom, 255, 0, 255, 226  @ 86A06D0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A06DC
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 86A06E8

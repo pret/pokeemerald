@@ -33,10 +33,10 @@ voicegroup003:: @ 86763D0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8676538
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8676544
 	voice_directsound_no_resample 64, 104, DirectSoundWaveData_ethnic_flavours_atarigane, 255, 0, 255, 0  @ 8676550
-	voice_directsound 63, 64, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 0  @ 867655C
+	voice_directsound 63, 64, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 0  @ 867655C
 	voice_directsound 50, 84, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 8676568
 	voice_directsound 64, 84, DirectSoundWaveData_ethnic_flavours_kotsuzumi, 255, 0, 255, 0  @ 8676574
-	voice_directsound_no_resample 60, 64, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 0  @ 8676580
+	voice_directsound_no_resample 60, 64, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 0  @ 8676580
 	voice_directsound_no_resample 64, 64, DirectSoundWaveData_sd90_solo_snare, 255, 180, 175, 228  @ 867658C
 	voice_directsound_no_resample 64, 64, DirectSoundWaveData_sd90_solo_snare, 255, 0, 255, 242  @ 8676598
 	voice_directsound_no_resample 64, 54, DirectSoundWaveData_sc88pro_tr909_hand_clap, 255, 255, 255, 127  @ 86765A4
@@ -50,7 +50,7 @@ voicegroup003:: @ 86763D0
 	voice_directsound 76, 84, DirectSoundWaveData_sd90_ambient_tom, 255, 0, 255, 226  @ 8676604
 	voice_directsound 80, 94, DirectSoundWaveData_sd90_ambient_tom, 255, 0, 255, 226  @ 8676610
 	voice_directsound_no_resample 33, 89, DirectSoundWaveData_sc88pro_orchestra_cymbal_crash, 255, 235, 0, 231  @ 867661C
-	voice_directsound 64, 104, DirectSoundWaveData_unknown_taiko, 255, 0, 255, 235  @ 8676628
+	voice_directsound 64, 104, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 235  @ 8676628
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0  @ 8676634
 	voice_directsound 63, 64, DirectSoundWaveData_sc88pro_orchestra_cymbal_crash, 255, 235, 0, 231  @ 8676640
 	voice_directsound_no_resample 64, 24, DirectSoundWaveData_dance_drums_ride_bell, 255, 165, 103, 231  @ 867664C

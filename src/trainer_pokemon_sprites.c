@@ -2,7 +2,6 @@
 #include "sprite.h"
 #include "window.h"
 #include "malloc.h"
-#include "constants/species.h"
 #include "palette.h"
 #include "decompress.h"
 #include "trainer_pokemon_sprites.h"

@@ -1,3 +1,4 @@
+#include "global.h"
 #include "gba/gba.h"
 #include "multiboot.h"
 
@@ -435,23 +436,23 @@ static int MultiBootHandShake(struct MultiBootParam *mp)
 #undef must_data
 }
 
-static NOINLINE void MultiBootWaitCycles(u32 cycles)
+NAKED
+static void MultiBootWaitCycles(u32 cycles)
 {
-    asm("mov r2, pc");
-    asm("lsr r2, #24");
-    asm("mov r1, #12");
-    asm("cmp r2, #0x02");
-    asm("beq MultiBootWaitCyclesLoop");
-
-    asm("mov r1, #13");
-    asm("cmp r2, #0x08");
-    asm("beq MultiBootWaitCyclesLoop");
-
-    asm("mov r1, #4");
-
-    asm("MultiBootWaitCyclesLoop:");
-    asm("sub r0, r1");
-    asm("bgt MultiBootWaitCyclesLoop");
+    asm_unified("\
+    mov  r2, pc\n\
+    lsrs r2, 24\n\
+    movs r1, 12\n\
+    cmp  r2, 2\n\
+    beq  MultiBootWaitCyclesLoop\n\
+    movs r1, 13\n\
+    cmp  r2, 8\n\
+    beq  MultiBootWaitCyclesLoop\n\
+    movs r1, 4\n\
+MultiBootWaitCyclesLoop:\n\
+    subs r0, r1\n\
+    bgt  MultiBootWaitCyclesLoop\n\
+    bx   lr\n");
 }
 
 static void MultiBootWaitSendDone(void)
