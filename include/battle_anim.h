@@ -214,8 +214,8 @@ void AnimDirtScatter(struct Sprite *sprite);
 void AnimMudSportDirtRising(struct Sprite *sprite);
 extern const union AffineAnimCmd *const gAffineAnims_SpinningBone[];
 
-// battle_anim_special.c
-void sub_8172EF0(u8 battler, struct Pokemon *mon);
+// battle_anim_throw.c
+void TryShinyAnimation(u8 battler, struct Pokemon *mon);
 u8 ItemIdToBallId(u16 itemId);
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);

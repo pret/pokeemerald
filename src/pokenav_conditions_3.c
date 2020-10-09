@@ -170,29 +170,28 @@ static bool32 sub_81CF010(struct PokenavSub7 *structPtr)
 
 static u32 sub_81CF030(struct PokenavSub7 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
         return 1;
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPEAT(DPAD_DOWN))
         return 2;
-    else if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
         return 3;
-    else if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
         return 4;
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         structPtr->unk1C = 0;
         structPtr->unk0 = sub_81CF0B0;
         return 5;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         structPtr->unkPtr->unk2 = GetSelectedMatchCall();
         structPtr->unk1C = 1;
         structPtr->unk0 = sub_81CF0B8;
         return 6;
     }
-    else
-        return 0;
+    return 0;
 }
 
 static u32 sub_81CF0B0(struct PokenavSub7 *structPtr)
@@ -707,7 +706,7 @@ static void sub_81CF8E4(struct PokenavMonList * item, u8 * dest)
     }
     s = StringCopy(gStringVar1, genderStr);
     *s++ = CHAR_SLASH;
-    *s++ = CHAR_SPECIAL_F9;
+    *s++ = CHAR_EXTRA_SYMBOL;
     *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     sub_81DB494(dest, 1, gStringVar1, 40);

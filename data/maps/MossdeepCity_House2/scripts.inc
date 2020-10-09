@@ -1,3 +1,5 @@
+.set LOCALID_WINGULL, 3
+
 MossdeepCity_House2_MapScripts:: @ 82220DE
 	.byte 0
 
@@ -23,17 +25,17 @@ MossdeepCity_House2_EventScript_Wingull:: @ 82220F1
 	call_if_eq MossdeepCity_House2_EventScript_WingullExitNorth
 	compare VAR_FACING, DIR_WEST
 	call_if_eq MossdeepCity_House2_EventScript_WingullExitWest
-	removeobject 3
+	removeobject LOCALID_WINGULL
 	release
 	end
 
 MossdeepCity_House2_EventScript_WingullExitNorth:: @ 8222124
-	applymovement 3, MossdeepCity_House2_Movement_WingullExitNorth
+	applymovement LOCALID_WINGULL, MossdeepCity_House2_Movement_WingullExitNorth
 	waitmovement 0
 	return
 
 MossdeepCity_House2_EventScript_WingullExitWest:: @ 822212F
-	applymovement 3, MossdeepCity_House2_Movement_WingullExitEast
+	applymovement LOCALID_WINGULL, MossdeepCity_House2_Movement_WingullExitEast
 	waitmovement 0
 	return
 

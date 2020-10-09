@@ -1,37 +1,40 @@
+.set LOCALID_GRUNT, 3
+.set LOCALID_DEVON_EMPLOYEE, 4
+
 PetalburgWoods_MapScripts:: @ 822DFD6
 	.byte 0
 
 PetalburgWoods_EventScript_DevonResearcherLeft:: @ 822DFD7
 	lockall
 	call PetalburgWoods_EventScript_DevonResearcherIntro
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherApproachPlayerLeft
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherApproachPlayerLeft
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HaveYouSeenShroomish, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_AQA_0, 0
-	applymovement 3, PetalburgWoods_Movement_AquaEntrance
+	playbgm MUS_ENCOUNTER_AQUA, 0
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaEntrance
 	waitmovement 0
 	msgbox PetalburgWoods_Text_IWasGoingToAmbushYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, PetalburgWoods_Movement_AquaApproachResearcherLeft
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachResearcherLeft
 	waitmovement 0
-	applymovement 4, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HandOverThosePapers, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherFleeToPlayerLeft
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherFleeToPlayerLeft
 	waitmovement 0
 	msgbox PetalburgWoods_Text_YouHaveToHelpMe, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, PetalburgWoods_Movement_AquaApproachPlayer
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachPlayer
 	waitmovement 0
 	msgbox PetalburgWoods_Text_NoOneCrossesTeamAqua, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe
-	applymovement 3, PetalburgWoods_Movement_AquaBackOff
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaBackOff
 	waitmovement 0
 	call PetalburgWoods_EventScript_DevonResearcherPostBattle
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgWoods_Movement_WatchResearcherLeave
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherExitLeft
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherExitLeft
 	waitmovement 0
 	goto PetalburgWoods_EventScript_RemoveDevonResearcher
 	end
@@ -39,41 +42,41 @@ PetalburgWoods_EventScript_DevonResearcherLeft:: @ 822DFD7
 PetalburgWoods_EventScript_DevonResearcherRight:: @ 822E079
 	lockall
 	call PetalburgWoods_EventScript_DevonResearcherIntro
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherApproachPlayerRight
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherApproachPlayerRight
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HaveYouSeenShroomish, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_AQA_0, 0
-	applymovement 3, PetalburgWoods_Movement_AquaEntrance
+	playbgm MUS_ENCOUNTER_AQUA, 0
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaEntrance
 	waitmovement 0
 	msgbox PetalburgWoods_Text_IWasGoingToAmbushYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, PetalburgWoods_Movement_AquaApproachResearcherRight
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachResearcherRight
 	waitmovement 0
-	applymovement 4, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HandOverThosePapers, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherFleeToPlayerRight
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherFleeToPlayerRight
 	waitmovement 0
 	msgbox PetalburgWoods_Text_YouHaveToHelpMe, MSGBOX_DEFAULT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_NoOneCrossesTeamAqua, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe
-	applymovement 3, PetalburgWoods_Movement_AquaBackOff
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaBackOff
 	waitmovement 0
 	call PetalburgWoods_EventScript_DevonResearcherPostBattle
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgWoods_Movement_WatchResearcherLeave
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherExitRight
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherExitRight
 	waitmovement 0
 	goto PetalburgWoods_EventScript_RemoveDevonResearcher
 	end
 
 PetalburgWoods_EventScript_DevonResearcherIntro:: @ 822E124
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherLookAround
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherLookAround
 	waitmovement 0
 	msgbox PetalburgWoods_Text_NotAOneToBeFound, MSGBOX_DEFAULT
 	closemessage
@@ -82,14 +85,14 @@ PetalburgWoods_EventScript_DevonResearcherIntro:: @ 822E124
 PetalburgWoods_EventScript_DevonResearcherPostBattle:: @ 822E138
 	msgbox PetalburgWoods_Text_YouveGotSomeNerve, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, PetalburgWoods_Movement_AquaRunAway
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaRunAway
 	waitmovement 0
-	removeobject 3
+	removeobject LOCALID_GRUNT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox PetalburgWoods_Text_ThatWasAwfullyClose, MSGBOX_DEFAULT
 	giveitem ITEM_GREAT_BALL
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq PetalburgWoods_EventScript_BagFull
 	goto PetalburgWoods_EventScript_DevonResearcherFinish
 	end
@@ -101,14 +104,14 @@ PetalburgWoods_EventScript_BagFull:: @ 822E17D
 
 PetalburgWoods_EventScript_DevonResearcherFinish:: @ 822E18B
 	msgbox PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro, MSGBOX_DEFAULT
-	applymovement 4, PetalburgWoods_Movement_DevonResearcherStartExit
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherStartExit
 	waitmovement 0
 	msgbox PetalburgWoods_Text_ICantBeWastingTime, MSGBOX_DEFAULT
 	closemessage
 	return
 
 PetalburgWoods_EventScript_RemoveDevonResearcher:: @ 822E1A7
-	removeobject 4
+	removeobject LOCALID_DEVON_EMPLOYEE
 	setvar VAR_PETALBURG_WOODS_STATE, 1
 	releaseall
 	end
@@ -252,7 +255,7 @@ PetalburgWoods_EventScript_Girl:: @ 822E222
 	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_ExplainMiracleSeed
 	msgbox PetalburgWoods_Text_TryUsingThisItem, MSGBOX_DEFAULT
 	giveitem ITEM_MIRACLE_SEED
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MIRACLE_SEED
 	release
@@ -279,11 +282,11 @@ PetalburgWoods_EventScript_Lyle:: @ 822E26D
 PetalburgWoods_EventScript_James:: @ 822E284
 	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, PetalburgWoods_EventScript_TryRegisterJames
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq PetalburgWoods_EventScript_JamesRematch
 	setvar VAR_0x8004, TRAINER_JAMES_1
 	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq PetalburgWoods_EventScript_TryRegisterJames2
 	msgbox PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT
 	release

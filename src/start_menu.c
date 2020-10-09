@@ -43,7 +43,6 @@
 #include "trainer_card.h"
 #include "window.h"
 #include "constants/songs.h"
-#include "rom_8011DC0.h"
 #include "union_room.h"
 #include "constants/rgb.h"
 
@@ -463,7 +462,7 @@ static bool32 InitStartMenuStep(void)
         sInitStartMenuData[0]++;
         break;
     case 4:
-        if (PrintStartMenuActions(&sInitStartMenuData[1], 2))
+        if (PrintStartMenuActions((s8 *)&sInitStartMenuData[1], 2))
             sInitStartMenuData[0]++;
         break;
     case 5:
@@ -551,19 +550,19 @@ void ShowStartMenu(void)
 
 static bool8 HandleStartMenuInput(void)
 {
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(-1);
     }
 
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(1);
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
@@ -585,7 +584,7 @@ static bool8 HandleStartMenuInput(void)
         return FALSE;
     }
 
-    if (gMain.newKeys & (START_BUTTON | B_BUTTON))
+    if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
         RemoveExtraStartMenuWindows();
         HideStartMenu();
@@ -907,12 +906,12 @@ static bool8 SaveSuccesTimer(void)
 {
     sSaveDialogTimer--;
 
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return TRUE;
     }
-    else if (sSaveDialogTimer == 0)
+    if (sSaveDialogTimer == 0)
     {
         return TRUE;
     }
@@ -926,7 +925,7 @@ static bool8 SaveErrorTimer(void)
     {
         sSaveDialogTimer--;
     }
-    else if (gMain.heldKeys & A_BUTTON)
+    else if (JOY_HELD(A_BUTTON))
     {
         return TRUE;
     }

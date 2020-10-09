@@ -5,18 +5,18 @@
 #include "link.h"
 #include "AgbRfu_LinkManager.h"
 
-#define RFU_COMMAND_0x4400 0x4400
-#define RFU_COMMAND_0x8800 0x8800
-#define RFU_COMMAND_0x8900 0x8900
-#define RFU_COMMAND_0xA100 0xA100
-#define RFU_COMMAND_0x7700 0x7700
-#define RFU_COMMAND_0x7800 0x7800
-#define RFU_COMMAND_0x6600 0x6600
-#define RFU_COMMAND_0x5F00 0x5F00
-#define RFU_COMMAND_0x2F00 0x2F00
-#define RFU_COMMAND_0xBE00 0xBE00
-#define RFU_COMMAND_0xEE00 0xEE00
-#define RFU_COMMAND_0xED00 0xED00
+#define RFUCMD_SEND_PACKET         0x2F00
+#define RFUCMD_BLENDER_SEND_KEYS   0x4400
+#define RFUCMD_READY_CLOSE_LINK    0x5F00
+#define RFUCMD_READY_EXIT_STANDBY  0x6600
+#define RFUCMD_0x7700              0x7700
+#define RFUCMD_0x7800              0x7800
+#define RFUCMD_0x8800              0x8800
+#define RFUCMD_0x8900              0x8900
+#define RFUCMD_SEND_BLOCK_REQ      0xA100
+#define RFUCMD_SEND_HELD_KEYS      0xBE00
+#define RFUCMD_0xED00              0xED00
+#define RFUCMD_0xEE00              0xEE00
 
 #define RFU_SERIAL_7F7D 0x7F7D
 
@@ -28,6 +28,8 @@
 
 #define BACKUP_QUEUE_NUM_SLOTS 2
 #define BACKUP_QUEUE_SLOT_LENGTH 14
+
+#define RFU_PACKET_SIZE 6
 
 #define RFU_STATUS_OK                   0
 #define RFU_STATUS_FATAL_ERROR          1
@@ -125,7 +127,7 @@ struct GFRfuManager
     /* 0x012 */ u16 unk_12;
     /* 0x014 */ u8 unk_14[RFU_CHILD_MAX][14];
     /* 0x04c */ u8 unk_4c[14];
-    /* 0x05a */ u8 unk_5a;
+    /* 0x05a */ u8 blockRequestType;
     /* 0x05b */ u8 unk_5b;
     /* 0x05c */ bool8 blockReceived[MAX_RFU_PLAYERS];
     /* 0x061 */ bool8 numBlocksReceived[MAX_RFU_PLAYERS];
@@ -134,14 +136,14 @@ struct GFRfuManager
     /* 0x068 */ u8 filler_68[4];
     /* 0x06c */ struct RfuBlockSend sendBlock;
     /* 0x080 */ struct RfuBlockSend recvBlock[MAX_RFU_PLAYERS];
-    /* 0x0e4 */ u8 unk_e4[5];
-    /* 0x0e9 */ u8 unk_e9[5];
+    /* 0x0e4 */ bool8 readyCloseLink[MAX_RFU_PLAYERS];
+    /* 0x0e9 */ bool8 readyExitStandby[MAX_RFU_PLAYERS];
     /* 0x0ee */ vu8 errorState;
     /* 0x0ef */ bool8 isShuttingDown;
     /* 0x0f0 */ u8 linkLossRecoveryState;
     /* 0x0f1 */ u8 status;
-    /* 0x0f2 */ u16 unk_f2[6];
-    /* 0x0fe */ u16 unk_fe;
+    /* 0x0f2 */ u16 packet[RFU_PACKET_SIZE];
+    /* 0x0fe */ u16 resendExitStandbyTimer;
     /* 0x100 */ u16 unk_100;
     /* 0x102 */ u8 unk_102;
     /* 0x103 */ u8 filler_103[0x10A - 0x103];
@@ -197,17 +199,17 @@ void Rfu_SetBlockReceivedFlag(u8 who);
 void Rfu_ResetBlockReceivedFlag(u8 who);
 bool32 IsSendingKeysToRfu(void);
 void StartSendingKeysToRfu(void);
-void sub_800F850(void);
+void Rfu_SetBerryBlenderLinkCallback(void);
 u8 Rfu_GetBlockReceivedStatus(void);
 bool32 Rfu_InitBlockSend(const u8 *src, size_t size);
 void ClearLinkRfuCallback(void);
 u8 Rfu_GetLinkPlayerCount(void);
 u8 Rfu_GetMultiplayerId(void);
-bool8 sub_8010100(u8 a0);
+bool8 Rfu_SendBlockRequest(u8 type);
 bool8 IsLinkRfuTaskFinished(void);
 bool8 Rfu_IsMaster(void);
-void task_add_05_task_del_08FA224_when_no_RfuFunc(void);
-void sub_8010434(void);
+void Rfu_SetCloseLinkCallback(void);
+void Rfu_SetLinkStandbyCallback(void);
 void ResetLinkRfuGFLayer(void);
 void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
@@ -250,7 +252,7 @@ void SetTradeBoardRegisteredMonInfo(u32 type, u32 species, u32 level);
 void InitializeRfuLinkManager_EnterUnionRoom(void);
 void sub_8012188(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
 bool32 IsUnionRoomListenTaskActive(void);
-void sub_800FE50(void *a0);
+void Rfu_SendPacket(void *data);
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
 void sub_8011DE0(u32 arg0);
 u8 sub_801100C(s32 a0);

@@ -2,7 +2,7 @@
   "id": "MAP_LITTLEROOT_TOWN",
   "name": "LittlerootTown",
   "layout": "LAYOUT_LITTLEROOT_TOWN",
-  "music": "MUS_MISHIRO",
+  "music": "MUS_LITTLEROOT",
   "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

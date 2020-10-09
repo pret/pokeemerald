@@ -1,3 +1,5 @@
+.set LOCALID_WALLACE, 1
+
 CaveOfOrigin_B1F_MapScripts:: @ 82357A8
 	.byte 0
 
@@ -6,16 +8,16 @@ CaveOfOrigin_B1F_EventScript_Wallace:: @ 82357A9
 	faceplayer
 	msgbox CaveOfOrigin_B1F_Text_WallaceStory, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 60
 	playse SE_PIN
-	applymovement 1, Common_Movement_ExclamationMark
+	applymovement LOCALID_WALLACE, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Common_Movement_Delay48
+	applymovement LOCALID_WALLACE, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
-	applymovement 1, Common_Movement_FacePlayer
+	applymovement LOCALID_WALLACE, Common_Movement_FacePlayer
 	waitmovement 0
 	message CaveOfOrigin_B1F_Text_WhereIsRayquaza
 	waitmessage
@@ -49,11 +51,11 @@ CaveOfOrigin_B1F_EventScript_DontRemember:: @ 8235842
 CaveOfOrigin_B1F_EventScript_AtSkyPillar:: @ 823584D
 	msgbox CaveOfOrigin_B1F_Text_WellHeadToSkyPillar, MSGBOX_DEFAULT
 	closemessage
-	playse SE_KAIDAN
+	playse SE_EXIT
 	fadescreenspeed FADE_TO_BLACK, 4
 	setflag FLAG_WALLACE_GOES_TO_SKY_PILLAR
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 3
-	removeobject 1
+	removeobject LOCALID_WALLACE
 	clearflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	fadescreen FADE_FROM_BLACK
 	release

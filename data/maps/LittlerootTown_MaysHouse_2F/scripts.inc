@@ -1,3 +1,5 @@
+.set LOCALID_RIVAL, 1
+
 LittlerootTown_MaysHouse_2F_MapScripts:: @ 81F9296
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MaysHouse_2F_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MaysHouse_2F_OnWarp
@@ -26,8 +28,8 @@ LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos:: @ 81F92E6
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_Ret
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_Ret
-	setobjectxyperm 1, 8, 2
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_RIVAL, 8, 2
+	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_Ret:: @ 81F9309
@@ -63,16 +65,16 @@ LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall:: @ 81F9334
 
 LittlerootTown_MaysHouse_2F_EventScript_MeetMay:: @ 81F934A
 	delay 10
-	addobject 1
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayEnters
+	addobject LOCALID_RIVAL
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayEnters
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Common_Movement_ExclamationMark
+	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Common_Movement_Delay48
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth
 	compare VAR_FACING, DIR_SOUTH
@@ -91,49 +93,49 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMay:: @ 81F934A
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth:: @ 81F93BA
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth:: @ 81F93E9
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest:: @ 81F9418
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast:: @ 81F9440
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast
+	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast
 	waitmovement 0
 	return
 

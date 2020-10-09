@@ -220,9 +220,9 @@ static const u8 sWireless_RSEtoASCIITable[256] = {
     [CHAR_y] = 'y', 
     [CHAR_z] = 'z', 
     0x20, 0x20, 0x2b, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 
-    [CHAR_SPECIAL_F7] = ' ',
-    [CHAR_SPECIAL_F8] = ' ', 
-    [CHAR_SPECIAL_F9] = ' ', 
+    [CHAR_DYNAMIC] = ' ',
+    [CHAR_KEYPAD_ICON] = ' ', 
+    [CHAR_EXTRA_SYMBOL] = ' ', 
     [CHAR_PROMPT_SCROLL] = ' ', 
     [CHAR_PROMPT_CLEAR] = ' ', 
     [EXT_CTRL_CODE_BEGIN] = ' ', 
@@ -309,8 +309,7 @@ static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
 
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     for (i = 0; i < RECV_QUEUE_NUM_SLOTS; i++)
     {
@@ -327,8 +326,7 @@ void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 
 void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     for (i = 0; i < SEND_QUEUE_NUM_SLOTS; i++)
     {
@@ -345,8 +343,7 @@ void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 
 static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
 {
-    s32 i;
-    s32 j;
+    s32 i, j;
 
     for (i = 0; i < UNUSED_QUEUE_NUM_SLOTS; i++)
     {
@@ -623,105 +620,39 @@ static void ASCIIToPkmnStr(u8 *pkmnStr, const u8 *asciiStr)
     pkmnStr[i] = EOS;
 }
 
-#ifdef NONMATCHING
 static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     u8 flagCount = 0;
-    u32 flags = gRfuLinkStatus->connSlotFlag;
+    u8 flags = gRfuLinkStatus->connSlotFlag;
     u8 i;
 
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
-        for (i = 0; i < 4; flags >>= 1, i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             if (flags & 1)
             {
                 if (maxFlags == flagCount + 1)
+                {
                     return gRfuLinkStatus->strength[i];
+                    break; // This break is needed to match
+                }
                 flagCount++;
             }
+            flags >>= 1;
         }
     }
     else
     {
-        for (i = 0; i < 4; flags >>= 1, i++)
+        for (i = 0; i < 4; i++)
         {
             if (flags & 1)
                 return gRfuLinkStatus->strength[i];
+             flags >>= 1;
         }
     }
     return 0;
 }
-#else
-NAKED 
-static u8 GetConnectedChildStrength(u8 maxFlags)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tmovs r6, 0\n"
-                "\tldr r0, =gRfuLinkStatus\n"
-                "\tldr r4, [r0]\n"
-                "\tldrb r2, [r4, 0x2]\n"
-                "\tldrb r1, [r4]\n"
-                "\tadds r7, r0, 0\n"
-                "\tcmp r1, 0x1\n"
-                "\tbne _0800DD72\n"
-                "\tmovs r3, 0\n"
-                "\tands r1, r2\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _0800DD4E\n"
-                "\tcmp r5, 0x1\n"
-                "\tbne _0800DD48\n"
-                "\tldrb r0, [r4, 0xA]\n"
-                "\tb _0800DD8C\n"
-                "\t.pool\n"
-                "_0800DD48:\n"
-                "\tadds r0, r6, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "_0800DD4E:\n"
-                "\tlsrs r2, 1\n"
-                "\tadds r0, r3, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x3\n"
-                "\tbhi _0800DD8A\n"
-                "\tmovs r0, 0x1\n"
-                "\tands r0, r2\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0800DD4E\n"
-                "\tadds r0, r6, 0x1\n"
-                "\tcmp r5, r0\n"
-                "\tbne _0800DD48\n"
-                "_0800DD68:\n"
-                "\tldr r0, [r7]\n"
-                "\tadds r0, 0xA\n"
-                "\tadds r0, r3\n"
-                "\tldrb r0, [r0]\n"
-                "\tb _0800DD8C\n"
-                "_0800DD72:\n"
-                "\tmovs r3, 0\n"
-                "\tmovs r1, 0x1\n"
-                "_0800DD76:\n"
-                "\tadds r0, r2, 0\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0800DD68\n"
-                "\tlsrs r2, 1\n"
-                "\tadds r0, r3, 0x1\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r3, r0, 24\n"
-                "\tcmp r3, 0x3\n"
-                "\tbls _0800DD76\n"
-                "_0800DD8A:\n"
-                "\tmovs r0, 0\n"
-                "_0800DD8C:\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1");
-}
-#endif
 
 void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders)
 {
@@ -991,8 +922,7 @@ void RecordMixTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {
-        s32 i;
-        s32 j;
+        s32 i, j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[5];
         struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));

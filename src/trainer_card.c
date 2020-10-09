@@ -25,7 +25,7 @@
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "contest_util.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/battle_frontier.h"
@@ -422,7 +422,7 @@ static void Task_TrainerCard(u8 taskId)
     case 8:
         if (!UpdatePaletteFade() && !IsDma3ManagerBusyWithBgCopy())
         {
-            PlaySE(SE_RG_CARD3);
+            PlaySE(SE_RG_CARD_OPEN);
             sData->mainState = STATE_HANDLE_INPUT_FRONT;
         }
         break;
@@ -438,13 +438,13 @@ static void Task_TrainerCard(u8 taskId)
             DrawTrainerCardWindow(1);
             sData->timeColonNeedDraw = FALSE;
         }
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             FlipTrainerCard();
-            PlaySE(SE_RG_CARD1);
+            PlaySE(SE_RG_CARD_FLIP);
             sData->mainState = STATE_WAIT_FLIP_TO_BACK;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom() == TRUE)
             {
@@ -460,12 +460,12 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_WAIT_FLIP_TO_BACK:
         if (IsCardFlipTaskActive() && sub_8087598() != TRUE)
         {
-            PlaySE(SE_RG_CARD3);
+            PlaySE(SE_RG_CARD_OPEN);
             sData->mainState = STATE_HANDLE_INPUT_BACK;
         }
         break;
     case STATE_HANDLE_INPUT_BACK:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom() == TRUE)
             {
@@ -480,10 +480,10 @@ static void Task_TrainerCard(u8 taskId)
             {
                 FlipTrainerCard();
                 sData->mainState = STATE_WAIT_FLIP_TO_FRONT;
-                PlaySE(SE_RG_CARD1);
+                PlaySE(SE_RG_CARD_FLIP);
             }
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
            if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom() == TRUE)
            {
@@ -497,7 +497,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         break;
     case STATE_WAIT_LINK_PARTNER:
-        sub_800AC34();
+        SetCloseLinkCallback();
         DrawDialogueFrame(0, 1);
         AddTextPrinterParameterized(0, 1, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
         CopyWindowToVram(0, 3);
@@ -518,7 +518,7 @@ static void Task_TrainerCard(u8 taskId)
         if (IsCardFlipTaskActive() && sub_8087598() != TRUE)
         {
             sData->mainState = STATE_HANDLE_INPUT_FRONT;
-            PlaySE(SE_RG_CARD3);
+            PlaySE(SE_RG_CARD_OPEN);
         }
         break;
    }
@@ -1730,7 +1730,7 @@ static bool8 Task_SetCardFlipped(struct Task* task)
     sData->onBack ^= 1;
     task->tFlipState++;
     sData->allowDMACopy = TRUE;
-    PlaySE(SE_RG_CARD2);
+    PlaySE(SE_RG_CARD_FLIPPING);
     return FALSE;
 }
 

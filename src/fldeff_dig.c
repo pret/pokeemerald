@@ -10,8 +10,8 @@
 #include "constants/field_effects.h"
 
 // static functions
-static void hm2_dig(void);
-static void sub_8135780(void);
+static void FieldCallback_Dig(void);
+static void StartDigFieldEffect(void);
 
 // text
 bool8 SetUpFieldMove_Dig(void)
@@ -19,7 +19,7 @@ bool8 SetUpFieldMove_Dig(void)
     if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = hm2_dig;
+        gPostMenuFieldCallback = FieldCallback_Dig;
         return TRUE;
     }
     else
@@ -28,7 +28,7 @@ bool8 SetUpFieldMove_Dig(void)
     }
 }
 
-static void hm2_dig(void)
+static void FieldCallback_Dig(void)
 {
     Overworld_ResetStateAfterDigEscRope();
     FieldEffectStart(FLDEFF_USE_DIG);
@@ -37,16 +37,16 @@ static void hm2_dig(void)
 
 bool8 FldEff_UseDig(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldMoveTask();
 
-    gTasks[taskId].data[8] = (u32)sub_8135780 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_8135780;
+    gTasks[taskId].data[8] = (u32)StartDigFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartDigFieldEffect;
     if (!ShouldDoBrailleDigEffect())
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     return FALSE;
 }
 
-static void sub_8135780(void)
+static void StartDigFieldEffect(void)
 {
     u8 taskId;
 

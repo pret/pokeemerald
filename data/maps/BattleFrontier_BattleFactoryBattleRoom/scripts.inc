@@ -1,3 +1,12 @@
+.set LOCALID_SCIENTIST_1, 1
+.set LOCALID_OPPONENT, 2
+.set LOCALID_SCIENTIST_2, 3
+.set LOCALID_SCIENTIST_3, 4
+.set LOCALID_SCIENTIST_4, 5
+.set LOCALID_SCIENTIST_5, 6
+.set LOCALID_SCIENTIST_6, 7
+.set LOCALID_PLAYER, 8
+
 BattleFrontier_BattleFactoryBattleRoom_MapScripts:: @ 825ADAB
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleFactoryBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryBattleRoom_OnWarp
@@ -5,7 +14,7 @@ BattleFrontier_BattleFactoryBattleRoom_MapScripts:: @ 825ADAB
 	.byte 0
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by object event 8, which has the gfx id VAR_OBJ_GFX_ID_F
+	@ The player is represented instead by LOCALID_PLAYER, which has the gfx id VAR_OBJ_GFX_ID_F
 
 BattleFrontier_BattleFactoryBattleRoom_OnTransition: @ 825ADBB
 	frontier_settrainers
@@ -22,7 +31,7 @@ BattleFrontier_BattleFactoryBattleRoom_OnTransition: @ 825ADBB
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_SetUpFactoryHeadObj:: @ 825ADF3
 	call BattleFrontier_EventScript_SetBrainObjectGfx
-	setobjectxyperm 2, 7, 9
+	setobjectxyperm LOCALID_OPPONENT, 7, 9
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_OnWarp: @ 825AE00
@@ -34,7 +43,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_HideObjects:: @ 825AE0A
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 	compare VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects
-	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	hideobjectat LOCALID_OPPONENT, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects:: @ 825AE24
 	end
 
@@ -53,8 +62,8 @@ BattleFrontier_BattleFactoryBattleRoom_OnFrame: @ 825AE31
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle:: @ 825AE3B
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_GetAMoveOn, MSGBOX_DEFAULT
 	closemessage
-	applymovement 2, BattleFrontier_BattleFactoryBattleRoom_Movement_NolandMoveToBattle
-	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleFactoryBattleRoom_Movement_NolandMoveToBattle
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle
@@ -64,15 +73,15 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle:: 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoom:: @ 825AE67
 	compare VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle
-	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle
 	factory_setopponentgfx
-	removeobject 2
-	setobjectxyperm 2, 7, 1
-	addobject 2
-	applymovement 2, BattleFrontier_BattleFactoryBattleRoom_Movement_OpponentEnter
+	removeobject LOCALID_OPPONENT
+	setobjectxyperm LOCALID_OPPONENT, 7, 1
+	addobject LOCALID_OPPONENT
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleFactoryBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleOpponent:: @ 825AEA7
 	compare VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY
@@ -139,9 +148,9 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver:: @ 825B
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass, MSGBOX_DEFAULT
 	closemessage
-	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
 	waitmovement 0
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol
 	waitmessage
 	waitfanfare
@@ -168,9 +177,9 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold:: @ 825B09
 	goto_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass, MSGBOX_DEFAULT
 	waitmessage
-	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
 	waitmovement 0
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleFactoryBattleRoom_Text_KnowledgeSymbolTookGoldenShine
 	waitmessage
 	waitfanfare
@@ -248,12 +257,12 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles:: @ 825B1A
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle:: @ 825B1B4
-	applymovement 1, Common_Movement_WalkInPlaceFastestRight
-	applymovement 3, Common_Movement_WalkInPlaceFastestRight
-	applymovement 4, Common_Movement_WalkInPlaceFastestRight
-	applymovement 5, Common_Movement_WalkInPlaceFastestLeft
-	applymovement 6, Common_Movement_WalkInPlaceFastestLeft
-	applymovement 7, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_SCIENTIST_1, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_SCIENTIST_2, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_SCIENTIST_3, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_SCIENTIST_4, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_SCIENTIST_5, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_SCIENTIST_6, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 

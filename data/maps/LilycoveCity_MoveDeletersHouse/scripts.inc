@@ -1,9 +1,11 @@
+.set LOCALID_MOVE_DELETER, 1
+
 LilycoveCity_MoveDeletersHouse_MapScripts:: @ 821EA0A
 	.byte 0
 
 LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter:: @ 821EA0B
 	lockall
-	applymovement 1, Common_Movement_FacePlayer
+	applymovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
 	switch VAR_RESULT
@@ -43,7 +45,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove:: @ 821EAB0
 	compare VAR_RESULT, TRUE
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
 	special MoveDeleterForgetMove
-	playfanfare MUS_ME_WASURE
+	playfanfare MUS_MOVE_DELETED
 	waitfanfare
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove, MSGBOX_DEFAULT
 	releaseall

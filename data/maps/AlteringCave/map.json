@@ -2,7 +2,7 @@
   "id": "MAP_ALTERING_CAVE",
   "name": "AlteringCave",
   "layout": "LAYOUT_ALTERING_CAVE",
-  "music": "MUS_RG_NANADUNGEON",
+  "music": "MUS_RG_SEVII_CAVE",
   "region_map_section": "MAPSEC_ALTERING_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

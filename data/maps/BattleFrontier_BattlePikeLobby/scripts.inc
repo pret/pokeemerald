@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeLobby_OnWarp
@@ -200,7 +202,7 @@ BattleFrontier_BattlePikeLobby_EventScript_ShowResults:: @ 825BA80
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor:: @ 825BA94
-	applymovement 1, BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeLobby_Movement_PlayerWalkToCorridor
 	waitmovement 0
 	return
@@ -263,7 +265,7 @@ BattleFrontier_BattlePikeLobby_EventScript_ExitRules:: @ 825BB47
 	end
 
 BattleFrontier_BattlePike_EventScript_CloseCurtain:: @ 825BB49
-	playse SE_CURTAIN
+	playse SE_PIKE_CURTAIN_CLOSE
 	special CloseBattlePikeCurtain
 	waitstate
 	waitse

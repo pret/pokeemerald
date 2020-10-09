@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 FallarborTown_BattleTentLobby_MapScripts:: @ 81FFE66
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_BattleTentLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FallarborTown_BattleTentLobby_OnWarp
@@ -53,7 +55,7 @@ FallarborTown_BattleTentLobby_EventScript_GivePrize:: @ 81FFF27
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	message FallarborTown_BattleTentLobby_Text_ReceivedPrize
 	waitmessage
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	msgbox FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT
 	closemessage
@@ -193,12 +195,12 @@ FallarborTown_BattleTentLobby_EventScript_EndCancelChallenge:: @ 82001CD
 	end
 
 FallarborTown_BattleTentLobby_EventScript_WalkToDoor:: @ 82001CF
-	applymovement 1, FallarborTown_BattleTentLobby_Movement_AttendantWalkToDoor
+	applymovement LOCALID_ATTENDANT, FallarborTown_BattleTentLobby_Movement_AttendantWalkToDoor
 	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_PlayerWalkToDoor
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
-	applymovement 1, FallarborTown_BattleTentLobby_Movement_AttendantEnterDoor
+	applymovement LOCALID_ATTENDANT, FallarborTown_BattleTentLobby_Movement_AttendantEnterDoor
 	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 6, 1

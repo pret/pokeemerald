@@ -12,16 +12,16 @@
 
 	.align 2
 gBattleAI_ScriptsTable:: @ 82DBEF8
-	.4byte AI_CheckBadMove
-	.4byte AI_TryToFaint
-	.4byte AI_CheckViability
-	.4byte AI_SetupFirstTurn
-	.4byte AI_Risky
-	.4byte AI_PreferStrongestMove
-	.4byte AI_PreferBatonPass
-	.4byte AI_DoubleBattle
-	.4byte AI_HPAware
-	.4byte AI_Unknown
+	.4byte AI_CheckBadMove          @ AI_SCRIPT_CHECK_BAD_MOVE
+	.4byte AI_TryToFaint            @ AI_SCRIPT_TRY_TO_FAINT
+	.4byte AI_CheckViability        @ AI_SCRIPT_CHECK_VIABILITY
+	.4byte AI_SetupFirstTurn        @ AI_SCRIPT_SETUP_FIRST_TURN
+	.4byte AI_Risky                 @ AI_SCRIPT_RISKY
+	.4byte AI_PreferStrongestMove   @ AI_SCRIPT_PREFER_STRONGEST_MOVE
+	.4byte AI_PreferBatonPass       @ AI_SCRIPT_PREFER_BATON_PASS
+	.4byte AI_DoubleBattle 	        @ AI_SCRIPT_DOUBLE_BATTLE
+	.4byte AI_HPAware               @ AI_SCRIPT_HP_AWARE
+	.4byte AI_Unknown               @ AI_SCRIPT_UNKNOWN
 	.4byte AI_Ret
 	.4byte AI_Ret
 	.4byte AI_Ret
@@ -41,9 +41,9 @@ gBattleAI_ScriptsTable:: @ 82DBEF8
 	.4byte AI_Ret
 	.4byte AI_Ret
 	.4byte AI_Ret
-	.4byte AI_Roaming
-	.4byte AI_Safari
-	.4byte AI_FirstBattle
+	.4byte AI_Roaming               @ AI_SCRIPT_ROAMING
+	.4byte AI_Safari                @ AI_SCRIPT_SAFARI
+	.4byte AI_FirstBattle           @ AI_SCRIPT_FIRST_BATTLE
 
 AI_CheckBadMove:
 	if_target_is_ally AI_Ret
@@ -268,6 +268,18 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_TRICK_ROOM, AI_CBM_TrickRoom
 	if_effect EFFECT_WONDER_ROOM, AI_CBM_WonderRoom
 	if_effect EFFECT_MAGIC_ROOM, AI_CBM_MagicRoom
+	if_effect EFFECT_SOAK, AI_CBM_Soak
+	if_effect EFFECT_LOCK_ON, AI_CBM_LockOn
+	end
+	
+AI_CBM_LockOn:
+	if_status3 AI_TARGET, STATUS3_ALWAYS_HITS, Score_Minus10
+	if_ability AI_TARGET, ABILITY_NO_GUARD, Score_Minus10
+	if_ability AI_USER, ABILITY_NO_GUARD, Score_Minus10
+	end
+	
+AI_CBM_Soak:
+	if_type AI_TARGET, TYPE_WATER, Score_Minus10
 	end
 	
 AI_CBM_TrickRoom:
@@ -559,11 +571,11 @@ AI_CBM_AttackUp: @ 82DC348
 	end
 
 AI_CBM_DefenseUp: @ 82DC351
-	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_DEF, MAX_STAT_STAGE, Score_Minus10
 	end
 
 AI_CBM_SpeedUp: @ 82DC35A
-	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPEED, MAX_STAT_STAGE, Score_Minus10
 	end
 
 AI_CBM_SpAtkUp: @ 82DC363
@@ -574,19 +586,19 @@ AI_CBM_SpAtkUp: @ 82DC363
 	end
 
 AI_CBM_SpDefUp: @ 82DC36C
-	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPDEF, MAX_STAT_STAGE, Score_Minus10
 	end
 
 AI_CBM_AccUp: @ 82DC375
-	if_stat_level_equal AI_USER, STAT_ACC, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ACC, MAX_STAT_STAGE, Score_Minus10
 	end
 
 AI_CBM_EvasionUp: @ 82DC37E
-	if_stat_level_equal AI_USER, STAT_EVASION, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_EVASION, MAX_STAT_STAGE, Score_Minus10
 	end
 
 AI_CBM_AttackDown: @ 82DC387
-	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_ATK, MIN_STAT_STAGE, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_HYPER_CUTTER, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
@@ -598,26 +610,26 @@ AI_CBM_DefenseDown: @ 82DC39C
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpeedDown: @ 82DC3A9
-	if_stat_level_equal AI_TARGET, STAT_SPEED, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPEED, MIN_STAT_STAGE, Score_Minus10
 	if_ability AI_TARGET, ABILITY_SPEED_BOOST, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpAtkDown: @ 82DC3BF
-	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPATK, MIN_STAT_STAGE, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpDefDown: @ 82DC3CC
-	if_stat_level_equal AI_TARGET, STAT_SPDEF, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPDEF, MIN_STAT_STAGE, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_AccDown: @ 82DC3D9
-	if_stat_level_equal AI_TARGET, STAT_ACC, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_ACC, MIN_STAT_STAGE, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_KEEN_EYE, Score_Minus10
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_EvasionDown: @ 82DC3EE
-	if_stat_level_equal AI_TARGET, STAT_EVASION, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_EVASION, MIN_STAT_STAGE, Score_Minus10
 
 CheckIfAbilityBlocksStatChange: @ 82DC3F6
 	get_ability AI_TARGET
@@ -626,20 +638,20 @@ CheckIfAbilityBlocksStatChange: @ 82DC3F6
 	end
 
 AI_CBM_Haze: @ 82DC405
-	if_stat_level_less_than AI_USER, STAT_ATK, 6, AI_CBM_Haze_End
-	if_stat_level_less_than AI_USER, STAT_DEF, 6, AI_CBM_Haze_End
-	if_stat_level_less_than AI_USER, STAT_SPEED, 6, AI_CBM_Haze_End
-	if_stat_level_less_than AI_USER, STAT_SPATK, 6, AI_CBM_Haze_End
-	if_stat_level_less_than AI_USER, STAT_SPDEF, 6, AI_CBM_Haze_End
-	if_stat_level_less_than AI_USER, STAT_ACC, 6, AI_CBM_Haze_End
-	if_stat_level_less_than AI_USER, STAT_EVASION, 6, AI_CBM_Haze_End
-	if_stat_level_more_than AI_TARGET, STAT_ATK, 6, AI_CBM_Haze_End
-	if_stat_level_more_than AI_TARGET, STAT_DEF, 6, AI_CBM_Haze_End
-	if_stat_level_more_than AI_TARGET, STAT_SPEED, 6, AI_CBM_Haze_End
-	if_stat_level_more_than AI_TARGET, STAT_SPATK, 6, AI_CBM_Haze_End
-	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 6, AI_CBM_Haze_End
-	if_stat_level_more_than AI_TARGET, STAT_ACC, 6, AI_CBM_Haze_End
-	if_stat_level_more_than AI_TARGET, STAT_EVASION, 6, AI_CBM_Haze_End
+	if_stat_level_less_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_less_than AI_USER, STAT_DEF, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_less_than AI_USER, STAT_SPEED, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_less_than AI_USER, STAT_SPATK, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_less_than AI_USER, STAT_SPDEF, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_less_than AI_USER, STAT_ACC, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_less_than AI_USER, STAT_EVASION, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_more_than AI_TARGET, STAT_ATK, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_more_than AI_TARGET, STAT_DEF, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_more_than AI_TARGET, STAT_SPEED, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_more_than AI_TARGET, STAT_ACC, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, DEFAULT_STAT_STAGE, AI_CBM_Haze_End
 	goto Score_Minus10
 
 AI_CBM_Haze_End: @ 82DC47A
@@ -747,8 +759,8 @@ AI_CBM_CantEscape: @ 82DC5B0
 	end
 
 AI_CBM_Curse: @ 82DC5BB
-	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_ATK, MAX_STAT_STAGE, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_DEF, MAX_STAT_STAGE, Score_Minus8
 	end
 
 AI_CBM_Spikes: @ 82DC5CC
@@ -806,8 +818,8 @@ AI_CBM_Safeguard: @ 82DC635
 	end
 
 AI_CBM_Memento: @ 82DC640
-	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
-	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus8
+	if_stat_level_equal AI_TARGET, STAT_ATK, MIN_STAT_STAGE, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPATK, MIN_STAT_STAGE, Score_Minus8
 
 AI_CBM_BatonPass: @ 82DC650
 	count_usable_party_mons AI_USER
@@ -897,18 +909,18 @@ AI_CBM_MudSport: @ 82DC71E
 	end
 
 AI_CBM_Tickle: @ 82DC729
-	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
-	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus8
+	if_stat_level_equal AI_TARGET, STAT_ATK, MIN_STAT_STAGE, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_DEF, MIN_STAT_STAGE, Score_Minus8
 	end
 
 AI_CBM_CosmicPower: @ 82DC73A
-	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
-	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_DEF, MAX_STAT_STAGE, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPDEF, MAX_STAT_STAGE, Score_Minus8
 	end
 
 AI_CBM_BulkUp: @ 82DC74B
-	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_ATK, MAX_STAT_STAGE, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_DEF, MAX_STAT_STAGE, Score_Minus8
 	end
 
 AI_CBM_WaterSport: @ 82DC75C
@@ -916,13 +928,13 @@ AI_CBM_WaterSport: @ 82DC75C
 	end
 
 AI_CBM_CalmMind: @ 82DC767
-	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_SPATK, MAX_STAT_STAGE, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPDEF, MAX_STAT_STAGE, Score_Minus8
 	end
 
 AI_CBM_DragonDance: @ 82DC778
-	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
-	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_ATK, MAX_STAT_STAGE, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPEED, MAX_STAT_STAGE, Score_Minus8
 	end
 
 Score_Minus1:
@@ -1122,6 +1134,7 @@ AI_CheckViability:
 	if_effect EFFECT_MIRROR_COAT, AI_CV_MirrorCoat
 	if_effect EFFECT_SKULL_BASH, AI_CV_ChargeUpMove
 	if_effect EFFECT_SOLARBEAM, AI_CV_ChargeUpMove
+	if_effect EFFECT_GEOMANCY, AI_CV_Geomancy
 	if_effect EFFECT_SEMI_INVULNERABLE, AI_CV_SemiInvulnerable
 	if_effect EFFECT_SOFTBOILED, AI_CV_Heal
 	if_effect EFFECT_FAKE_OUT, AI_CV_FakeOut
@@ -1551,7 +1564,7 @@ AI_CV_EvasionUp7:
 
 AI_CV_EvasionUp8:
 	if_hp_more_than AI_USER, 70, AI_CV_EvasionUp_End
-	if_stat_level_equal AI_USER, STAT_EVASION, 6, AI_CV_EvasionUp_End
+	if_stat_level_equal AI_USER, STAT_EVASION, DEFAULT_STAT_STAGE, AI_CV_EvasionUp_End
 	if_hp_less_than AI_USER, 40, AI_CV_EvasionUp_ScoreDown2
 	if_hp_less_than AI_TARGET, 40, AI_CV_EvasionUp_ScoreDown2
 	if_random_less_than 70, AI_CV_EvasionUp_End
@@ -1580,7 +1593,7 @@ AI_CV_AlwaysHit_End:
 	end
 
 AI_CV_AttackDown: @ 82DCDF8
-	if_stat_level_equal AI_TARGET, STAT_ATK, 6, AI_CV_AttackDown3
+	if_stat_level_equal AI_TARGET, STAT_ATK, DEFAULT_STAT_STAGE, AI_CV_AttackDown3
 	score -1
 	if_hp_more_than AI_USER, 90, AI_CV_AttackDown2
 	score -1
@@ -1646,7 +1659,7 @@ AI_CV_SpeedDown_End: @ 82DCE96
 	end
 
 AI_CV_SpAtkDown:
-	if_stat_level_equal AI_TARGET, STAT_ATK, 6, AI_CV_SpAtkDown3
+	if_stat_level_equal AI_TARGET, STAT_ATK, DEFAULT_STAT_STAGE, AI_CV_SpAtkDown3
 	score -1
 	if_hp_more_than AI_USER, 90, AI_CV_SpAtkDown2
 	score -1
@@ -1732,7 +1745,7 @@ AI_CV_AccuracyDown7:
 
 AI_CV_AccuracyDown8:
 	if_hp_more_than AI_USER, 70, AI_CV_AccuracyDown_End
-	if_stat_level_equal AI_TARGET, STAT_ACC, 6, AI_CV_AccuracyDown_End
+	if_stat_level_equal AI_TARGET, STAT_ACC, DEFAULT_STAT_STAGE, AI_CV_AccuracyDown_End
 	if_hp_less_than AI_USER, 40, AI_CV_AccuracyDown_ScoreDown2
 	if_hp_less_than AI_TARGET, 40, AI_CV_AccuracyDown_ScoreDown2
 	if_random_less_than 70, AI_CV_AccuracyDown_End
@@ -1970,6 +1983,7 @@ AI_CV_Rest_End:
 	end
 
 AI_CV_OneHitKO:
+	if_status3 AI_TARGET, STATUS3_ALWAYS_HITS, Score_Plus5
 	end
 
 AI_CV_SuperFang:
@@ -2034,6 +2048,9 @@ AI_CV_FocusEnergy2:
 	goto AI_CV_FocusEnergy3
 
 AI_CV_Swagger:
+	if_doesnt_have_move_with_effect AI_USER, EFFECT_FOUL_PLAY, AI_CV_Swagger2
+	score +1
+AI_CV_Swagger2:
 	if_has_move AI_USER, MOVE_PSYCH_UP, AI_CV_SwaggerHasPsychUp
 
 AI_CV_Flatter:
@@ -2386,10 +2403,32 @@ AI_CV_PainSplit_ScoreDown1:
 
 AI_CV_PainSplit_End:
 	end
+	
+AI_EncourageIfHasOHKO:
+	if_level_cond 1, AI_EncourageIfHasOHKORet
+	if_has_move_with_effect AI_USER, EFFECT_OHKO, Score_Plus3
+AI_EncourageIfHasOHKORet:
+	end
+	
+AI_EncourageIfHasLowAccuracyMove:
+	if_ability AI_USER, ABILITY_COMPOUND_EYES, AI_EncourageIfHasVeryLowAccuracyMove
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_WIDE_LENS, AI_EncourageIfHasVeryLowAccuracyMove
+	if_equal HOLD_EFFECT_ZOOM_LENS, AI_EncourageIfHasVeryLowAccuracyMove
+	if_has_move_with_accuracy_lt AI_USER, 86, Score_Plus3
+	if_has_move_with_accuracy_lt AI_USER, 91, Score_Plus1
+	goto Score_Minus1
+AI_EncourageIfHasVeryLowAccuracyMove:
+	if_has_move_with_accuracy_lt AI_USER, 81, Score_Plus3
+	if_has_move_with_accuracy_lt AI_USER, 86, Score_Plus1
+	goto Score_Minus1
 
 AI_CV_LockOn:
+	call AI_EncourageIfHasOHKO
+	call AI_EncourageIfHasLowAccuracyMove
+AI_CV_LockOn2:
 	if_random_less_than 128, AI_CV_LockOn_End
-	score +2
+	score +1
 
 AI_CV_LockOn_End:
 	end
@@ -2854,8 +2893,15 @@ AI_CV_MirrorCoat_ScoreDown1:
 
 AI_CV_MirrorCoat_End:
 	end
+	
+AI_CV_Geomancy:
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_POWER_HERB, AI_CV_ChargeUpMove_ScoreUp2
+	end
 
 AI_CV_ChargeUpMove:
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_POWER_HERB, AI_CV_ChargeUpMove_ScoreUp2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_ChargeUpMove_ScoreDown2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_ChargeUpMove_ScoreDown2
 	if_has_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_ChargeUpMove_ScoreDown2
@@ -2868,8 +2914,13 @@ AI_CV_ChargeUpMove_ScoreDown2:
 
 AI_CV_ChargeUpMove_End:
 	end
+AI_CV_ChargeUpMove_ScoreUp2:
+	score +2
+	goto AI_CV_ChargeUpMove_End
 
 AI_CV_SemiInvulnerable:
+	get_hold_effect AI_USER
+	if_equal HOLD_EFFECT_POWER_HERB, AI_CV_ChargeUpMove_ScoreUp2
 	if_doesnt_have_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_SemiInvulnerable2
 	score -1
 	goto AI_CV_SemiInvulnerable_End
@@ -3132,7 +3183,7 @@ AI_CV_ChangeSelfAbility_AbilitiesToEncourage:
 AI_CV_Superpower:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Superpower_ScoreDown1
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Superpower_ScoreDown1
-	if_stat_level_less_than AI_USER, STAT_ATK, 6, AI_CV_Superpower_ScoreDown1
+	if_stat_level_less_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE, AI_CV_Superpower_ScoreDown1
 	if_target_faster AI_CV_Superpower2
 	if_hp_more_than AI_USER, 40, AI_CV_Superpower_ScoreDown1
 	goto AI_CV_Superpower_End
@@ -3593,12 +3644,12 @@ AI_PreferBatonPass3:
 AI_PreferBatonPass_EncourageIfHighStats:
 	get_turn_count
 	if_equal 0, Score_Minus2
-	if_stat_level_more_than AI_USER, STAT_ATK, 8, Score_Plus3
-	if_stat_level_more_than AI_USER, STAT_ATK, 7, Score_Plus2
-	if_stat_level_more_than AI_USER, STAT_ATK, 6, Score_Plus1
-	if_stat_level_more_than AI_USER, STAT_SPATK, 8, Score_Plus3
-	if_stat_level_more_than AI_USER, STAT_SPATK, 7, Score_Plus2
-	if_stat_level_more_than AI_USER, STAT_SPATK, 6, Score_Plus1
+	if_stat_level_more_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE + 2, Score_Plus3
+	if_stat_level_more_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE + 1, Score_Plus2
+	if_stat_level_more_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE, Score_Plus1
+	if_stat_level_more_than AI_USER, STAT_SPATK, DEFAULT_STAT_STAGE + 2, Score_Plus3
+	if_stat_level_more_than AI_USER, STAT_SPATK, DEFAULT_STAT_STAGE + 1, Score_Plus2
+	if_stat_level_more_than AI_USER, STAT_SPATK, DEFAULT_STAT_STAGE, Score_Plus1
 	end
 AI_PreferBatonPassEnd:
 	end

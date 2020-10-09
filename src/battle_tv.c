@@ -713,19 +713,17 @@ void BattleTv_SetDataBasedOnAnimation(u8 animationId)
     }
 }
 
-#ifdef NONMATCHING
-// for loop has an unused stack variable
 void TryPutLinkBattleTvShowOnAir(void)
 {
-    u16 playerBestSpecies = 0, opponentBestSpecies = 0;
-    s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
+    u16 playerBestSpecies = 0, opponentBestSpecies = 0, moveId = 0;
+    s16 sum = 0, playerBestSum = 0, opponentBestSum = SHRT_MAX;
     u8 playerBestMonId = 0, opponentBestMonId = 0;
     struct BattleTvMovePoints *movePoints = NULL;
     u8 countPlayer = 0, countOpponent = 0;
-    s16 sum = 0;
-    u16 species = 0;
-    u16 moveId = 0;
+    u16 species;
     s32 i, j;
+
+    int zero = 0, one = 1; // stupid variables needed to match. Feel free to get rid of them.
 
     if (gBattleStruct->anyMonHasTransformed)
         return;
@@ -748,7 +746,7 @@ void TryPutLinkBattleTvShowOnAir(void)
         if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
         {
             for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
-                sum += movePoints->points[0][i * 4 + j];
+                sum += movePoints->points[zero][i * 4 + j];
 
             if (playerBestSum < sum)
             {
@@ -762,7 +760,7 @@ void TryPutLinkBattleTvShowOnAir(void)
         if (species != SPECIES_NONE && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
         {
             for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
-                sum += movePoints->points[1][i * 4 + j];
+                sum += movePoints->points[one][i * 4 + j];
 
             if (opponentBestSum == sum)
             {
@@ -784,9 +782,9 @@ void TryPutLinkBattleTvShowOnAir(void)
 
     for (sum = 0, i = 0, j = 0; j < MAX_MON_MOVES; j++)
     {
-        if (sum < movePoints->points[0][playerBestMonId * 4 + j])
+        if (sum < movePoints->points[zero][playerBestMonId * 4 + j])
         {
-            sum = movePoints->points[0][playerBestMonId * 4 + j];
+            sum = movePoints->points[zero][playerBestMonId * 4 + j];
             i = j;
         }
     }
@@ -809,333 +807,6 @@ void TryPutLinkBattleTvShowOnAir(void)
         PutBattleUpdateOnTheAir(gBattleScripting.multiplayerId ^ 1, moveId, playerBestSpecies, opponentBestSpecies);
     }
 }
-
-#else
-NAKED
-void TryPutLinkBattleTvShowOnAir(void)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x20\n\
-    movs r0, 0\n\
-    str r0, [sp]\n\
-    movs r1, 0\n\
-    str r1, [sp, 0x4]\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x8]\n\
-    ldr r3, =0x00007fff\n\
-    str r3, [sp, 0xC]\n\
-    movs r4, 0\n\
-    str r4, [sp, 0x10]\n\
-    movs r7, 0\n\
-    str r7, [sp, 0x14]\n\
-    mov r8, r0\n\
-    ldr r0, =gBattleStruct\n\
-    ldr r1, [r0]\n\
-    adds r0, r1, 0\n\
-    adds r0, 0xB3\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _0817E42A\n\
-    b _0817E670\n\
-_0817E42A:\n\
-    movs r2, 0xD2\n\
-    lsls r2, 1\n\
-    adds r2, r1\n\
-    mov r10, r2\n\
-    movs r6, 0\n\
-_0817E434:\n\
-    movs r0, 0x64\n\
-    adds r4, r6, 0\n\
-    muls r4, r0\n\
-    ldr r0, =gPlayerParty\n\
-    adds r0, r4, r0\n\
-    movs r1, 0xB\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0817E454\n\
-    mov r0, r8\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-_0817E454:\n\
-    ldr r5, =gEnemyParty\n\
-    adds r0, r4, r5\n\
-    movs r1, 0xB\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0817E46A\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-_0817E46A:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x5\n\
-    ble _0817E434\n\
-    ldr r0, =gBattleTypeFlags\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0817E47E\n\
-    b _0817E670\n\
-_0817E47E:\n\
-    cmp r8, r7\n\
-    beq _0817E484\n\
-    b _0817E670\n\
-_0817E484:\n\
-    movs r6, 0\n\
-    lsls r3, r6, 1\n\
-    str r3, [sp, 0x18]\n\
-    movs r4, 0x64\n\
-    mov r8, r4\n\
-_0817E48E:\n\
-    mov r1, r8\n\
-    muls r1, r6\n\
-    ldr r0, =gPlayerParty\n\
-    adds r4, r1, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    adds r0, r6, 0x1\n\
-    mov r9, r0\n\
-    cmp r7, 0\n\
-    beq _0817E4EE\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2D\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _0817E4EE\n\
-    movs r4, 0\n\
-    lsls r0, r6, 3\n\
-    mov r2, r10\n\
-    adds r1, r0, r2\n\
-    movs r3, 0x3\n\
-_0817E4C4:\n\
-    lsls r0, r4, 16\n\
-    asrs r0, 16\n\
-    ldrh r4, [r1]\n\
-    adds r0, r4\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    adds r1, 0x2\n\
-    subs r3, 0x1\n\
-    cmp r3, 0\n\
-    bge _0817E4C4\n\
-    ldr r1, [sp, 0x8]\n\
-    lsls r0, r1, 16\n\
-    lsls r1, r4, 16\n\
-    cmp r0, r1\n\
-    bge _0817E4EE\n\
-    lsls r0, r6, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0x10]\n\
-    lsrs r1, 16\n\
-    str r1, [sp, 0x8]\n\
-    str r7, [sp]\n\
-_0817E4EE:\n\
-    mov r0, r8\n\
-    muls r0, r6\n\
-    ldr r2, =gEnemyParty\n\
-    adds r4, r0, r2\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    ldr r3, [sp, 0x8]\n\
-    lsls r3, 16\n\
-    str r3, [sp, 0x1C]\n\
-    cmp r7, 0\n\
-    beq _0817E5A0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2D\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _0817E5A0\n\
-    movs r4, 0\n\
-    ldr r0, [sp, 0xC]\n\
-    lsls r2, r0, 16\n\
-    movs r3, 0x1\n\
-    lsls r1, r3, 1\n\
-    adds r1, 0x1\n\
-    lsls r1, 4\n\
-    lsls r0, r6, 3\n\
-    adds r0, r1\n\
-    mov r3, r10\n\
-    adds r1, r0, r3\n\
-    movs r3, 0x3\n\
-_0817E534:\n\
-    lsls r0, r4, 16\n\
-    asrs r0, 16\n\
-    ldrh r4, [r1]\n\
-    adds r0, r4\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    adds r1, 0x2\n\
-    subs r3, 0x1\n\
-    cmp r3, 0\n\
-    bge _0817E534\n\
-    asrs r1, r2, 16\n\
-    lsls r5, r4, 16\n\
-    asrs r0, r5, 16\n\
-    cmp r1, r0\n\
-    bne _0817E590\n\
-    mov r0, r8\n\
-    muls r0, r6\n\
-    ldr r1, =gEnemyParty\n\
-    adds r0, r1\n\
-    movs r1, 0x19\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    ldr r2, [sp, 0x14]\n\
-    mov r0, r8\n\
-    muls r0, r2\n\
-    ldr r3, =gEnemyParty\n\
-    adds r0, r3\n\
-    movs r1, 0x19\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    cmp r4, r0\n\
-    bls _0817E5A0\n\
-    b _0817E594\n\
-    .pool\n\
-_0817E590:\n\
-    cmp r1, r0\n\
-    ble _0817E5A0\n\
-_0817E594:\n\
-    lsls r0, r6, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0x14]\n\
-    lsrs r5, 16\n\
-    str r5, [sp, 0xC]\n\
-    str r7, [sp, 0x4]\n\
-_0817E5A0:\n\
-    mov r6, r9\n\
-    cmp r6, 0x5\n\
-    bgt _0817E5A8\n\
-    b _0817E48E\n\
-_0817E5A8:\n\
-    movs r4, 0\n\
-    movs r6, 0\n\
-    movs r3, 0\n\
-    ldr r5, =gPlayerParty\n\
-    ldr r7, [sp, 0x10]\n\
-    lsls r0, r7, 3\n\
-    mov r1, r10\n\
-    adds r2, r0, r1\n\
-_0817E5B8:\n\
-    lsls r0, r4, 16\n\
-    asrs r0, 16\n\
-    movs r7, 0\n\
-    ldrsh r1, [r2, r7]\n\
-    cmp r0, r1\n\
-    bge _0817E5C8\n\
-    ldrh r4, [r2]\n\
-    adds r6, r3, 0\n\
-_0817E5C8:\n\
-    adds r2, 0x2\n\
-    adds r3, 0x1\n\
-    cmp r3, 0x3\n\
-    ble _0817E5B8\n\
-    movs r0, 0x64\n\
-    ldr r1, [sp, 0x10]\n\
-    muls r0, r1\n\
-    adds r0, r5\n\
-    adds r1, r6, 0\n\
-    adds r1, 0xD\n\
-    movs r2, 0\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    ldr r2, [sp, 0x1C]\n\
-    cmp r2, 0\n\
-    beq _0817E670\n\
-    cmp r4, 0\n\
-    beq _0817E670\n\
-    ldr r0, =gBattleTypeFlags\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0817E65C\n\
-    ldr r3, [sp, 0x10]\n\
-    cmp r3, 0x2\n\
-    bhi _0817E620\n\
-    ldr r0, =gBattleScripting\n\
-    adds r0, 0x25\n\
-    ldrb r0, [r0]\n\
-    bl GetLinkTrainerFlankId\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    beq _0817E630\n\
-    b _0817E670\n\
-    .pool\n\
-_0817E620:\n\
-    ldr r0, =gBattleScripting\n\
-    adds r0, 0x25\n\
-    ldrb r0, [r0]\n\
-    bl GetLinkTrainerFlankId\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    beq _0817E670\n\
-_0817E630:\n\
-    movs r3, 0\n\
-    ldr r7, [sp, 0x14]\n\
-    cmp r7, 0x2\n\
-    bls _0817E63A\n\
-    movs r3, 0x1\n\
-_0817E63A:\n\
-    lsls r0, r3, 24\n\
-    lsrs r0, 24\n\
-    ldr r1, =gBattleScripting\n\
-    adds r1, 0x25\n\
-    ldrb r1, [r1]\n\
-    bl sub_806EF84\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    adds r1, r4, 0\n\
-    ldr r2, [sp]\n\
-    ldr r3, [sp, 0x4]\n\
-    bl PutBattleUpdateOnTheAir\n\
-    b _0817E670\n\
-    .pool\n\
-_0817E65C:\n\
-    ldr r0, =gBattleScripting\n\
-    adds r0, 0x25\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x1\n\
-    eors r0, r1\n\
-    adds r1, r4, 0\n\
-    ldr r2, [sp]\n\
-    ldr r3, [sp, 0x4]\n\
-    bl PutBattleUpdateOnTheAir\n\
-_0817E670:\n\
-    add sp, 0x20\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif
 
 static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
 {
@@ -1398,9 +1069,9 @@ static void TrySetBattleSeminarShow(void)
         return;
     else if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return;
-    else if (gBattleMons[gBattlerAttacker].statStages[STAT_ACC] <= 5)
+    else if (gBattleMons[gBattlerAttacker].statStages[STAT_ACC] < DEFAULT_STAT_STAGE)
         return;
-    else if (gBattleMons[gBattlerTarget].statStages[STAT_EVASION] > 6)
+    else if (gBattleMons[gBattlerTarget].statStages[STAT_EVASION] > DEFAULT_STAT_STAGE)
         return;
     else if (gCurrentMove == MOVE_HIDDEN_POWER || gCurrentMove == MOVE_WEATHER_BALL)
         return;

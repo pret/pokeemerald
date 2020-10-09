@@ -179,6 +179,7 @@ static void Cmd_get_considered_move_split(void);
 static void Cmd_get_considered_move_target(void);
 static void Cmd_compare_speeds(void);
 static void Cmd_is_wakeup_turn(void);
+static void Cmd_if_has_move_with_accuracy_lt(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -310,6 +311,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_get_considered_move_target,                 // 0x76
     Cmd_compare_speeds,                             // 0x77
     Cmd_is_wakeup_turn,                             // 0x78
+    Cmd_if_has_move_with_accuracy_lt,               // 0x79
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -595,9 +597,9 @@ static u8 ChooseMoveOrAction_Doubles(void)
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                BattleAI_SetupAIData(gBattleStruct->field_92 >> 4);
+                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> 4);
             else
-                BattleAI_SetupAIData(0xF);
+                BattleAI_SetupAIData((1 << MAX_MON_MOVES) - 1);
 
             gBattlerTarget = i;
 
@@ -2591,15 +2593,18 @@ static void Cmd_if_cant_use_last_resort(void)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
 }
 
+static u16 *GetMovesArray(u32 battler)
+{
+    if (IsBattlerAIControlled(battler) || IsBattlerAIControlled(BATTLE_PARTNER(battler)))
+        return gBattleMons[battler].moves;
+    else
+        return gBattleResources->battleHistory->usedMoves[battler];
+}
+
 static bool32 HasMoveWithSplit(u32 battler, u32 split)
 {
     s32 i;
-    u16 *moves;
-
-    if (IsBattlerAIControlled(battler) || IsBattlerAIControlled(BATTLE_PARTNER(battler)))
-        moves = gBattleMons[battler].moves;
-    else
-        moves = gBattleResources->battleHistory->usedMoves[battler];
+    u16 *moves = GetMovesArray(battler);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2631,14 +2636,9 @@ static void Cmd_if_has_no_move_with_split(void)
 static bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split)
 {
     s32 i, moveType;
-    u16 *moves;
     u32 usable = 0;
     u32 unusable = CheckMoveLimitations(attacker, 0, 0xFF);
-
-    if (IsBattlerAIControlled(attacker))
-        moves = gBattleMons[attacker].moves;
-    else
-        moves = gBattleResources->battleHistory->usedMoves[attacker];
+    u16 *moves = GetMovesArray(attacker);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -2698,12 +2698,7 @@ static void Cmd_if_cant_use_belch(void)
 static void Cmd_if_has_move_with_type(void)
 {
     u32 i, moveType, battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
-    u16 *moves;
-
-    if (IsBattlerAIControlled(battler))
-        moves = gBattleMons[battler].moves;
-    else
-        moves = BATTLE_HISTORY->usedMoves[battler];
+    u16 *moves = GetMovesArray(battler);
 
     for (i = 0; i < 4; i++)
     {
@@ -2725,12 +2720,7 @@ static void Cmd_if_has_move_with_type(void)
 static void Cmd_if_has_move_with_flag(void)
 {
     u32 i, flag, battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
-    u16 *moves;
-
-    if (IsBattlerAIControlled(battler))
-        moves = gBattleMons[battler].moves;
-    else
-        moves = BATTLE_HISTORY->usedMoves[battler];
+    u16 *moves = GetMovesArray(battler);
 
     flag = T1_READ_32(gAIScriptPtr + 2);
     for (i = 0; i < 4; i++)
@@ -2857,4 +2847,26 @@ static void Cmd_is_wakeup_turn(void)
         AI_THINKING_STRUCT->funcResult = FALSE;
 
     gAIScriptPtr += 2;
+}
+
+static void Cmd_if_has_move_with_accuracy_lt(void)
+{
+    u32 i;
+    u32 battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u32 toCmp = gAIScriptPtr[2];
+    u16 *moves = GetMovesArray(battler);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE
+            && gBattleMoves[moves[i]].effect != EFFECT_OHKO
+            && gBattleMoves[moves[i]].accuracy > 1
+            && gBattleMoves[moves[i]].accuracy < toCmp)
+            break;
+    }
+
+    if (i == MAX_MON_MOVES)
+        gAIScriptPtr += 7;
+    else
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
 }

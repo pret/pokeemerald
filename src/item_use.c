@@ -329,7 +329,7 @@ static void Task_UseItemfinder(u8 taskId)
             }
             return;
         }
-        PlaySE(SE_DAUGI);
+        PlaySE(SE_ITEMFINDER);
         tItemfinderBeeps++;
     }
     tCounter = (tCounter + 1) & 0x1F;
@@ -398,7 +398,7 @@ static bool8 IsHiddenItemPresentInConnection(struct MapConnection *connection, i
     u32 localOffset;
     s32 localLength;
 
-    struct MapHeader const *const mapHeader = mapconnection_get_mapheader(connection);
+    struct MapHeader const *const mapHeader = GetMapHeaderFromConnection(connection);
 
     switch (connection->direction)
     {
@@ -722,7 +722,7 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 
 static bool8 TryToWaterSudowoodo(void)
 {
-    u16 x, y;
+    s16 x, y;
     u8 z;
     u8 objId;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -793,7 +793,7 @@ static void BootUpSoundTMHM(u8 taskId)
 
 static void Task_ShowTMHMContainedMessage(u8 taskId)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gText_TMHMContainedVar1);
@@ -846,7 +846,7 @@ static void Task_StartUseRepel(u8 taskId)
     if (++data[8] > 7)
     {
         data[8] = 0;
-        PlaySE(SE_TU_SAA);
+        PlaySE(SE_REPEL);
         gTasks[taskId].func = Task_UseRepel;
     }
 }
@@ -868,7 +868,7 @@ static void Task_UsedBlackWhiteFlute(u8 taskId)
 {
     if(++gTasks[taskId].data[8] > 7)
     {
-        PlaySE(SE_BIDORO);
+        PlaySE(SE_GLASS_FLUTE);
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
         else
@@ -978,7 +978,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
 
 static void Task_CloseStatIncreaseMessage(u8 taskId)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         if (!InBattlePyramid())
             Task_FadeAndCloseBagMenu(taskId);
@@ -991,7 +991,7 @@ static void Task_UseStatIncreaseItem(u8 taskId)
 {
     if(++gTasks[taskId].data[8] > 7)
     {
-        PlaySE(SE_KAIFUKU);
+        PlaySE(SE_USE_ITEM);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, 1, UseStatIncreaseItem(gSpecialVar_ItemId), Task_CloseStatIncreaseMessage);

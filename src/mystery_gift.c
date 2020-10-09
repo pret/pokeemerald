@@ -410,7 +410,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         break;
     case 1:
         LoadPalette(gUnkTextboxBorderPal, 0, 0x20);
-        LoadPalette(stdpal_get(2), 0xd0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xd0, 0x20);
         Menu_LoadStdPalAt(0xC0);
         LoadUserWindowBorderGfx(0, 0xA, 0xE0);
         LoadUserWindowBorderGfx_(0, 0x1, 0xF0);
@@ -431,7 +431,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
     case 3:
         ShowBg(0);
         ShowBg(3);
-        PlayBGM(MUS_RG_OKURIMONO);
+        PlayBGM(MUS_RG_MYSTERY_GIFT);
         SetVBlankCallback(vblankcb_mystery_gift_e_reader_run);
         EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
         return TRUE;
@@ -561,7 +561,7 @@ bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
         goto inc;
     case 1:
         DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
-        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
         {
         inc:
             (*textState)++;
@@ -595,7 +595,7 @@ bool32 unref_HideDownArrowAndWaitButton(u8 * textState)
     {
     case 0:
         HideDownArrow();
-        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
         {
             (*textState)++;
         }
@@ -930,7 +930,7 @@ static bool32 mevent_save_game(u8 * state)
         (*state)++;
         break;
     case 3:
-        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
         {
             (*state)++;
         }
@@ -1023,7 +1023,7 @@ static bool32 PrintMGSuccessMessage(u8 * state, const u8 * arg1, u16 * arg2)
         {
             AddTextPrinterToWindow1(arg1);
         }
-        PlayFanfare(MUS_FANFA4);
+        PlayFanfare(MUS_OBTAIN_ITEM);
         *arg2 = 0;
         (*state)++;
         break;
@@ -1284,7 +1284,7 @@ void task00_mystery_gift(u8 taskId)
         switch (mevent_client_do_exec(&data->curPromptWindowId))
         {
         case 6:
-            task_add_05_task_del_08FA224_when_no_RfuFunc();
+            Rfu_SetCloseLinkCallback();
             data->prevPromptWindowId = data->curPromptWindowId;
             data->state = 13;
             break;
@@ -1458,11 +1458,11 @@ void task00_mystery_gift(u8 taskId)
     case 20:
         if (data->IsCardOrNews == 0)
         {
-            if (({gMain.newKeys & A_BUTTON;}))
+            if (({JOY_NEW(A_BUTTON);}))
             {
                 data->state = 21;
             }
-            if (({gMain.newKeys & B_BUTTON;}))
+            if (({JOY_NEW(B_BUTTON);}))
             {
                 data->state = 27;
             }
@@ -1647,7 +1647,7 @@ void task00_mystery_gift(u8 taskId)
         }
         break;
     case 33:
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_SetCloseLinkCallback();
         StringCopy(gStringVar1, gLinkPlayers[1].name);
         data->state = 34;
         break;

@@ -1,3 +1,6 @@
+.set LOCALID_LILYCOVE_LADY, 4
+.set LOCALID_LADYS_MON, 5
+
 LilycoveCity_PokemonCenter_1F_EventScript_LilycoveLady:: @ 82A836B
     special Script_GetLilycoveLadyId
     switch VAR_RESULT
@@ -256,9 +259,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse:: @ 82A8689
     end
 
 LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse:: @ 82A86B0
-    playse SE_SEIKAI
+    playse SE_SUCCESS
     delay 10
-    playse SE_SEIKAI
+    playse SE_SUCCESS
     msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRight, MSGBOX_DEFAULT
     goto LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize
     end
@@ -266,9 +269,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse:: @ 82A86B0
 LilycoveCity_PokemonCenter_1F_EventScript_IncorrectResponse:: @ 82A86C7
     special BufferQuizCorrectAnswer
     special BufferQuizPrizeName
-    playse SE_HAZURE
+    playse SE_FAILURE
     delay 10
-    playse SE_HAZURE
+    playse SE_FAILURE
     msgbox LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs, MSGBOX_DEFAULT
     msgbox LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize, MSGBOX_DEFAULT
     goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
@@ -444,10 +447,10 @@ LilycoveCity_PokemonCenter_1F_EventScript_GivePokeblock:: @ 82A88F6
 
 @ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_FeedPokeblock:: @ 82A890A
-    applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon
+    applymovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon
     waitmovement 0
     delay 60
-    applymovement 5, LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady
+    applymovement LOCALID_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady
     waitmovement 0
     delay 60
     waitse
@@ -461,11 +464,11 @@ LilycoveCity_PokemonCenter_1F_EventScript_FeedPokeblock:: @ 82A890A
 
 @ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_MonEnjoyPokeblock:: @ 82A893F
-    applymovement 5, LilycoveCity_PokemonCenter_1F_Movement_MonJump
+    applymovement LOCALID_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonJump
     waitmovement 0
     delay 60
 LilycoveCity_PokemonCenter_1F_EventScript_FinishFeedPokeblock:: @ 82A894C
-    applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer
+    applymovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer
     waitmovement 0
     delay 60
     compare VAR_0x8004, 0

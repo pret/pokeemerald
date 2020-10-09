@@ -139,8 +139,8 @@ struct ProtectStruct
     u32 usedGravityPreventedMove:1;
     u32 powderSelfDmg:1;
     u32 usedThroatChopPreventedMove:1;
-    u32 physicalDmg;
-    u32 specialDmg;
+    s32 physicalDmg;
+    s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
 };
@@ -315,7 +315,7 @@ struct BattleResults
     u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
-    u8 filler35[1];           // 0x35
+    u8 filler35;              // 0x35
     u8 catchAttempts[11];     // 0x36
 };
 
@@ -466,7 +466,7 @@ struct BattleStruct
     u8 stringMoveType;
     u8 expGetterBattlerId;
     u8 field_91; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
-    u8 field_92; // battle palace related
+    u8 palaceFlags; // First 4 bits are "is < 50% HP and not asleep" for each battler, last 4 bits are selected moves to pass to AI
     u8 field_93; // related to choosing pokemon?
     u8 wallyBattleState;
     u8 wallyMovesState;
@@ -538,6 +538,7 @@ struct BattleStruct
     bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
     u8 sameMoveTurns[MAX_BATTLERS_COUNT]; // For Metronome, number of times the same moves has been SUCCESFULLY used.
     u16 moveEffect2; // For Knock Off
+    u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -635,14 +636,14 @@ struct BattleAnimationInfo
     u8 isCriticalCapture:1;
     u8 criticalCaptureSuccess:1;
     u8 field_9_x1:1;
-    u8 field_9_x2:1;
+    u8 wildMonInvisible:1;
     u8 field_9_x1C:3;
     u8 field_9_x20:1;
     u8 field_9_x40:1;
     u8 field_9_x80:1;
-    u8 field_A;
+    u8 numBallParticles;
     u8 field_B;
-    s16 field_C;
+    s16 ballSubpx;
     u8 field_E;
     u8 field_F;
 };
@@ -656,8 +657,8 @@ struct BattleHealthboxInfo
     u8 statusAnimActive:1; // x10
     u8 animFromTableActive:1; // x20
     u8 specialAnimActive:1; // x40
-    u8 flag_x80:1;
-    u8 field_1_x1:1;
+    u8 triedShinyMonAnim:1;
+    u8 finishedShinyMonAnim:1;
     u8 field_1_x1E:4;
     u8 field_1_x20:1;
     u8 field_1_x40:1;

@@ -1,3 +1,6 @@
+.set LOCALID_STEVEN, 1
+.set LOCALID_BELDUM_BALL, 2
+
 MossdeepCity_StevensHouse_MapScripts:: @ 8222784
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_StevensHouse_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_StevensHouse_OnTransition
@@ -18,8 +21,8 @@ MossdeepCity_StevensHouse_OnTransition: @ 82227A8
 	end
 
 MossdeepCity_StevensHouse_EventScript_SetStevenPos:: @ 82227B4
-	setobjectxyperm 1, 6, 5
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_STEVEN, 6, 5
+	setobjectmovementtype LOCALID_STEVEN, MOVEMENT_TYPE_FACE_UP
 	return
 
 MossdeepCity_StevensHouse_OnFrame: @ 82227C0
@@ -28,14 +31,14 @@ MossdeepCity_StevensHouse_OnFrame: @ 82227C0
 
 MossdeepCity_StevensHouse_EventScript_StevenGivesDive:: @ 82227CA
 	lockall
-	applymovement 1, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Common_Movement_ExclamationMark
+	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Common_Movement_Delay48
+	applymovement LOCALID_STEVEN, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 1, MossdeepCity_StevensHouse_Movement_StevenApproachPlayer
+	applymovement LOCALID_STEVEN, MossdeepCity_StevensHouse_Movement_StevenApproachPlayer
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_YouveEarnedHMDive, MSGBOX_DEFAULT
 	giveitem ITEM_HM08
@@ -44,7 +47,7 @@ MossdeepCity_StevensHouse_EventScript_StevenGivesDive:: @ 82227CA
 	msgbox MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement 1, MossdeepCity_StevensHouse_Movement_StevenReturn
+	applymovement LOCALID_STEVEN, MossdeepCity_StevensHouse_Movement_StevenReturn
 	waitmovement 0
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT
@@ -119,8 +122,8 @@ MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC:: @ 82228E0
 
 MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare:: @ 82228EB
 	bufferspeciesname 1, SPECIES_BELDUM
-	removeobject 2
-	playfanfare MUS_FANFA4
+	removeobject LOCALID_BELDUM_BALL
+	playfanfare MUS_OBTAIN_ITEM
 	message MossdeepCity_StevensHouse_Text_ObtainedBeldum
 	waitmessage
 	waitfanfare

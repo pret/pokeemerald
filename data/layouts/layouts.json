@@ -502,34 +502,34 @@
       "blockdata_filepath": "data/layouts/Route134/map.bin"
     },
     {
-      "id": "LAYOUT_UNDERWATER2",
-      "name": "Underwater2_Layout",
+      "id": "LAYOUT_UNDERWATER_ROUTE126",
+      "name": "Underwater_Route126_Layout",
       "width": 80,
       "height": 80,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Underwater",
-      "border_filepath": "data/layouts/Underwater2/border.bin",
-      "blockdata_filepath": "data/layouts/Underwater2/map.bin"
+      "border_filepath": "data/layouts/Underwater_Route126/border.bin",
+      "blockdata_filepath": "data/layouts/Underwater_Route126/map.bin"
     },
     {
-      "id": "LAYOUT_UNDERWATER3",
-      "name": "Underwater3_Layout",
+      "id": "LAYOUT_UNDERWATER_ROUTE127",
+      "name": "Underwater_Route127_Layout",
       "width": 80,
       "height": 80,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Underwater",
-      "border_filepath": "data/layouts/Underwater3/border.bin",
-      "blockdata_filepath": "data/layouts/Underwater3/map.bin"
+      "border_filepath": "data/layouts/Underwater_Route127/border.bin",
+      "blockdata_filepath": "data/layouts/Underwater_Route127/map.bin"
     },
     {
-      "id": "LAYOUT_UNDERWATER4",
-      "name": "Underwater4_Layout",
+      "id": "LAYOUT_UNDERWATER_ROUTE128",
+      "name": "Underwater_Route128_Layout",
       "width": 120,
       "height": 40,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Underwater",
-      "border_filepath": "data/layouts/Underwater4/border.bin",
-      "blockdata_filepath": "data/layouts/Underwater4/map.bin"
+      "border_filepath": "data/layouts/Underwater_Route128/border.bin",
+      "blockdata_filepath": "data/layouts/Underwater_Route128/map.bin"
     },
     {
       "id": "LAYOUT_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
@@ -2732,14 +2732,14 @@
       "blockdata_filepath": "data/layouts/LilycoveCity_DepartmentStoreElevator/map.bin"
     },
     {
-      "id": "LAYOUT_UNDERWATER1",
-      "name": "Underwater1_Layout",
+      "id": "LAYOUT_UNDERWATER_ROUTE124",
+      "name": "Underwater_Route124_Layout",
       "width": 80,
       "height": 80,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Underwater",
-      "border_filepath": "data/layouts/Underwater1/border.bin",
-      "blockdata_filepath": "data/layouts/Underwater1/map.bin"
+      "border_filepath": "data/layouts/Underwater_Route124/border.bin",
+      "blockdata_filepath": "data/layouts/Underwater_Route124/map.bin"
     },
     {
       "id": "LAYOUT_MOSSDEEP_CITY_SPACE_CENTER_1F",
@@ -4092,34 +4092,34 @@
       "blockdata_filepath": "data/layouts/TerraCave_End/map.bin"
     },
     {
-      "id": "LAYOUT_UNDERWATER6",
-      "name": "Underwater6_Layout",
+      "id": "LAYOUT_UNDERWATER_ROUTE105",
+      "name": "Underwater_Route105_Layout",
       "width": 40,
       "height": 80,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Underwater",
-      "border_filepath": "data/layouts/Underwater6/border.bin",
-      "blockdata_filepath": "data/layouts/Underwater6/map.bin"
+      "border_filepath": "data/layouts/Underwater_Route105/border.bin",
+      "blockdata_filepath": "data/layouts/Underwater_Route105/map.bin"
     },
     {
-      "id": "LAYOUT_UNDERWATER7",
-      "name": "Underwater7_Layout",
+      "id": "LAYOUT_UNDERWATER_ROUTE125",
+      "name": "Underwater_Route125_Layout",
       "width": 80,
       "height": 40,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Underwater",
-      "border_filepath": "data/layouts/Underwater7/border.bin",
-      "blockdata_filepath": "data/layouts/Underwater7/map.bin"
+      "border_filepath": "data/layouts/Underwater_Route125/border.bin",
+      "blockdata_filepath": "data/layouts/Underwater_Route125/map.bin"
     },
     {
-      "id": "LAYOUT_UNDERWATER5",
-      "name": "Underwater5_Layout",
+      "id": "LAYOUT_UNDERWATER_ROUTE129",
+      "name": "Underwater_Route129_Layout",
       "width": 80,
       "height": 40,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Underwater",
-      "border_filepath": "data/layouts/Underwater5/border.bin",
-      "blockdata_filepath": "data/layouts/Underwater5/map.bin"
+      "border_filepath": "data/layouts/Underwater_Route129/border.bin",
+      "blockdata_filepath": "data/layouts/Underwater_Route129/map.bin"
     },
     {
       "id": "LAYOUT_MARINE_CAVE_END",

@@ -162,21 +162,21 @@ static u32 sub_81CFA68(struct PokenavSub9 *structPtr)
 
 static u32 sub_81CFA88(struct PokenavSub9 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
         return 1;
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPEAT(DPAD_DOWN))
         return 2;
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
         return 3;
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
         return 4;
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         structPtr->unk18 = 0;
         structPtr->unk0 = sub_81CFB08;
         return 5;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         structPtr->unk1C->unk2 = GetSelectedMatchCall();
         structPtr->unk18 = 1;
@@ -724,7 +724,7 @@ static void BufferRibbonMonInfoText(struct PokenavMonList * item0, u8 * dest)
 
     s = StringCopy(gStringVar1, genderStr);
     *s++ = CHAR_SLASH;
-    *s++ = CHAR_SPECIAL_F9;
+    *s++ = CHAR_EXTRA_SYMBOL;
     *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     dest = sub_81DB494(dest, 1, gStringVar1, 54);

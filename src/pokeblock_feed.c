@@ -84,7 +84,7 @@ EWRAM_DATA static struct PokeblockFeedStruct *sPokeblockFeed = NULL;
 EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
 
 // const rom data
-static const u8 sNatureToMonPokeblockAnim[][2] =
+static const u8 sNatureToMonPokeblockAnim[NUM_NATURES][2] =
 {
     [NATURE_HARDY] = {  0, 0 },
     [NATURE_LONELY] = {  3, 0 },
@@ -382,22 +382,23 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
+// - 1 excludes PBLOCK_CLR_NONE
 static const u32* const sPokeblocksPals[] =
 {
-    gPokeblockRed_Pal,
-    gPokeblockBlue_Pal,
-    gPokeblockPink_Pal,
-    gPokeblockGreen_Pal,
-    gPokeblockYellow_Pal,
-    gPokeblockPurple_Pal,
-    gPokeblockIndigo_Pal,
-    gPokeblockBrown_Pal,
-    gPokeblockLiteBlue_Pal,
-    gPokeblockOlive_Pal,
-    gPokeblockGray_Pal,
-    gPokeblockBlack_Pal,
-    gPokeblockWhite_Pal,
-    gPokeblockGold_Pal
+    [PBLOCK_CLR_RED - 1]       = gPokeblockRed_Pal,
+    [PBLOCK_CLR_BLUE - 1]      = gPokeblockBlue_Pal,
+    [PBLOCK_CLR_PINK - 1]      = gPokeblockPink_Pal,
+    [PBLOCK_CLR_GREEN - 1]     = gPokeblockGreen_Pal,
+    [PBLOCK_CLR_YELLOW - 1]    = gPokeblockYellow_Pal,
+    [PBLOCK_CLR_PURPLE - 1]    = gPokeblockPurple_Pal,
+    [PBLOCK_CLR_INDIGO - 1]    = gPokeblockIndigo_Pal,
+    [PBLOCK_CLR_BROWN - 1]     = gPokeblockBrown_Pal,
+    [PBLOCK_CLR_LITE_BLUE - 1] = gPokeblockLiteBlue_Pal,
+    [PBLOCK_CLR_OLIVE - 1]     = gPokeblockOlive_Pal,
+    [PBLOCK_CLR_GRAY - 1]      = gPokeblockGray_Pal,
+    [PBLOCK_CLR_BLACK - 1]     = gPokeblockBlack_Pal,
+    [PBLOCK_CLR_WHITE - 1]     = gPokeblockWhite_Pal,
+    [PBLOCK_CLR_GOLD - 1]      = gPokeblockGold_Pal
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_84120DC[] =
@@ -518,7 +519,7 @@ static void CB2_PokeblockFeed(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -536,7 +537,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
     case 0:
         sPokeblockFeed = AllocZeroed(sizeof(*sPokeblockFeed));
         SetVBlankHBlankCallbacksToNull();
-        clear_scheduled_bg_copies_to_vram();
+        ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:

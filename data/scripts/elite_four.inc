@@ -20,7 +20,7 @@ PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles:: @ 82723F8
 PokemonLeague_EliteFour_EventScript_WalkInCloseDoor:: @ 8272475
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp6
 	waitmovement 0
-	playse SE_TRACK_DOOR
+	playse SE_TRUCK_DOOR
 	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
 	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
 	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1

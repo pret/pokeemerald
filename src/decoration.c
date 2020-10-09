@@ -1147,7 +1147,7 @@ static void DontTossDecoration(u8 taskId)
 
 static void ReturnToDecorationItemsAfterInvalidSelection(u8 taskId)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         ClearDialogWindowAndFrame(0, 0);
         AddDecorationWindow(WINDOW_DECORATION_CATEGORIES);
@@ -1623,7 +1623,7 @@ static void AttemptPlaceDecoration_(u8 taskId)
     }
     else
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         StringExpandPlaceholders(gStringVar4, gText_CantBePlacedHere);
         DisplayItemMessageOnField(taskId, gStringVar4, CantPlaceDecorationPrompt);
     }
@@ -1803,7 +1803,7 @@ static bool8 ApplyCursorMovement_IsInvalid(u8 taskId)
 
 static bool8 IsHoldingDirection(void)
 {
-    u16 heldKeys = gMain.heldKeys & DPAD_ANY;
+    u16 heldKeys = JOY_HELD(DPAD_ANY);
     if (heldKeys != DPAD_UP && heldKeys != DPAD_DOWN && heldKeys != DPAD_LEFT && heldKeys != DPAD_RIGHT)
         return FALSE;
 
@@ -1827,13 +1827,14 @@ static void Task_SelectLocation(u8 taskId)
             sPlacePutAwayYesNoFunctions[tDecorationItemsMenuCommand].yesFunc(taskId);
             return;
         }
-        else if (tButton == B_BUTTON)
+        
+        if (tButton == B_BUTTON)
         {
             sPlacePutAwayYesNoFunctions[tDecorationItemsMenuCommand].noFunc(taskId);
             return;
         }
 
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_UP)
+        if ((JOY_HELD(DPAD_ANY)) == DPAD_UP)
         {
             sDecorationLastDirectionMoved = DIR_SOUTH;
             gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  0;
@@ -1841,7 +1842,7 @@ static void Task_SelectLocation(u8 taskId)
             tCursorY--;
         }
 
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_DOWN)
+        if ((JOY_HELD(DPAD_ANY)) == DPAD_DOWN)
         {
             sDecorationLastDirectionMoved = DIR_NORTH;
             gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  0;
@@ -1849,7 +1850,7 @@ static void Task_SelectLocation(u8 taskId)
             tCursorY++;
         }
 
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_LEFT)
+        if ((JOY_HELD(DPAD_ANY)) == DPAD_LEFT)
         {
             sDecorationLastDirectionMoved = DIR_WEST;
             gSprites[sDecor_CameraSpriteObjectIdx1].data[2] = -2;
@@ -1857,7 +1858,7 @@ static void Task_SelectLocation(u8 taskId)
             tCursorX--;
         }
 
-        if ((gMain.heldKeys & DPAD_ANY) == DPAD_RIGHT)
+        if ((JOY_HELD(DPAD_ANY)) == DPAD_RIGHT)
         {
             sDecorationLastDirectionMoved = DIR_EAST;
             gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  2;
@@ -1877,10 +1878,10 @@ static void Task_SelectLocation(u8 taskId)
 
     if (!tButton)
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             tButton = A_BUTTON;
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             tButton = B_BUTTON;
     }
 }
@@ -1895,7 +1896,7 @@ static void ContinueDecorating(u8 taskId)
 
 static void CantPlaceDecorationPrompt(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         ContinueDecorating(taskId);
 }
 
@@ -1928,7 +1929,7 @@ static void CopyTile(u8 *dest, u16 tile)
     case BG_TILE_H_FLIP(0) >> 10:
         for (i = 0; i < 8; i++)
         {
-            dest[4 * i] = (buffer[4 * (i + 1) - 1] >> 4) + ((buffer[4 * (i + 1) - 1] & 0x0F) << 4);
+            dest[4 * i + 0] = (buffer[4 * (i + 1) - 1] >> 4) + ((buffer[4 * (i + 1) - 1] & 0x0F) << 4);
             dest[4 * i + 1] = (buffer[4 * (i + 1) - 2] >> 4) + ((buffer[4 * (i + 1) - 2] & 0x0F) << 4);
             dest[4 * i + 2] = (buffer[4 * (i + 1) - 3] >> 4) + ((buffer[4 * (i + 1) - 3] & 0x0F) << 4);
             dest[4 * i + 3] = (buffer[4 * (i + 1) - 4] >> 4) + ((buffer[4 * (i + 1) - 4] & 0x0F) << 4);
@@ -1937,7 +1938,7 @@ static void CopyTile(u8 *dest, u16 tile)
     case BG_TILE_V_FLIP(0) >> 10:
         for (i = 0; i < 8; i++)
         {
-            dest[4 * i] = buffer[4 * (7 - i)];
+            dest[4 * i + 0] = buffer[4 * (7 - i) + 0];
             dest[4 * i + 1] = buffer[4 * (7 - i) + 1];
             dest[4 * i + 2] = buffer[4 * (7 - i) + 2];
             dest[4 * i + 3] = buffer[4 * (7 - i) + 3];
@@ -2386,7 +2387,7 @@ static void AttemptPutAwayDecoration_(u8 taskId)
 
 static void ContinuePuttingAwayDecorationsPrompt(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         ContinuePuttingAwayDecorations(taskId);
 }
 

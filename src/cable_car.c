@@ -22,66 +22,74 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 
+#define GOING_DOWN gSpecialVar_0x8004
+
+#define STATE_END 0xFF
+
+#define TAG_CABLE_CAR 1
+#define TAG_DOOR      2
+#define TAG_CABLE     3
+
 struct CableCar
 {
-    u8 taskId;
+    u8 bgTaskId;
     u8 state;
     u8 weather;
-    u16 unk4;
+    u16 weatherDelay;
     u16 timer;
     u8 bg0HorizontalOffset;
     u8 bg0VerticalOffset;
-    u8 fillerA[0x2];
+    u8 unused0[2];
     u8 bg1HorizontalOffset;
     u8 bg1VerticalOffset;
-    u8 fillerE[0x6];
+    u8 unused1[6];
     u8 bg3HorizontalOffset;
     u8 bg3VerticalOffset;
-    u8 filler16[0x2];
-    u8 unk18;
-    u8 unk19;
-    u8 unk1A;
-    u8 unk1B;
-    u8 unk1C;
-    u8 unk1D;
-    u8 unk1E;
-    u8 unk1F;
-    u8 unk20;
-    u16 unk22[9][12];
-    u8 fillerFA[0x2];
-    /*0x00FC*/ u16 bgTilemapBuffers[4][0x800];
-    /*0x40FC*/ u16 *mtChimneyTilemap;
-    /*0x4100*/ u16 *treeTilemap;
-    /*0x4104*/ u16 *mountainTilemap;
-    /*0x4108*/ const u16 *pylonHookTilemapEntries;
-    /*0x410C*/ u8 *pylonStemTilemap;
+    u8 unused2[2];
+    u8 groundTileIdx;
+    u8 groundSegmentXStart;
+    u8 groundSegmentYStart;
+    u8 groundTilemapOffset;
+    u8 groundTimer; // Incremented, but does nothing
+    u8 groundXOffset;
+    u8 groundYOffset;
+    u8 groundXBase;
+    u8 groundYBase;
+    u16 groundTileBuffer[9][12];
+    u8 unused3[2];
+    u16 bgTilemapBuffers[4][BG_SCREEN_SIZE];
+    u16 *groundTilemap;
+    u16 *treesTilemap;
+    u16 *bgMountainsTilemap;
+    const u16 *pylonHookTilemapEntries;
+    u8 *pylonStemTilemap;
 };
 
 static EWRAM_DATA struct CableCar *sCableCar = NULL;
-EWRAM_DATA u8 gUnknown_0203ABB0 = 0;
-EWRAM_DATA u8 gUnknown_0203ABB1 = 0;
-EWRAM_DATA u8 gUnknown_0203ABB2 = 0;
-EWRAM_DATA u8 gUnknown_0203ABB3 = 0;
-EWRAM_DATA u8 gUnknown_0203ABB4 = 0;
-EWRAM_DATA u8 gUnknown_0203ABB5 = 0;
+static EWRAM_DATA u8 sGroundX_Up = 0;
+static EWRAM_DATA u8 sGroundY_Up = 0;
+static EWRAM_DATA u8 sGroundSegmentY_Up = 0;
+static EWRAM_DATA u8 sGroundX_Down = 0;
+static EWRAM_DATA u8 sGroundY_Down = 0;
+static EWRAM_DATA u8 sGroundSegmentY_Down = 0;
 
-static void CableCarMainCallback_Setup(void);
-static void sub_8150B6C(u8);
-static void LoadCableCarSprites(void);
-static void sub_81514C8(u8);
-static void sub_81503E4(u8);
-static void sub_8150550(u8);
-static void sub_8150664(u8);
-static void CableCarVblankCallback(void);
-static void CableCarMainCallback_Run(void);
-static void sub_815115C(void);
-static void sub_81511B8(void);
-static void sub_8150868(struct Sprite *);
-static void nullsub_58(struct Sprite *);
-static void sub_8151214(void);
-static void sub_8151388(void);
+static void CB2_LoadCableCar(void);
+static void SetBgRegs(bool8);
+static void CreateCableCarSprites(void);
+static void InitGroundTilemapData(bool8);
+static void Task_CableCar(u8);
+static void Task_AnimateBgGoingUp(u8);
+static void Task_AnimateBgGoingDown(u8);
+static void VBlankCB_CableCar(void);
+static void CB2_CableCar(void);
+static void AnimateGroundGoingUp(void);
+static void AnimateGroundGoingDown(void);
+static void SpriteCB_CableCar(struct Sprite *);
+static void SpriteCB_Cable(struct Sprite *);
+static void DrawNextGroundSegmentGoingUp(void);
+static void DrawNextGroundSegmentGoingDown(void);
 
-const struct BgTemplate gCableCarBgTemplates[4] = {
+static const struct BgTemplate sBgTemplates[4] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -120,11 +128,11 @@ const struct BgTemplate gCableCarBgTemplates[4] = {
     },
 };
 
-const u8 gCableCarMtChimneyTilemap[] = INCBIN_U8("graphics/misc/cable_car_mt_chimney_map.bin.lz");
-const u8 gCableCarTreeTilemap[] = INCBIN_U8("graphics/misc/cable_car_tree_map.bin.lz");
-const u8 gCableCarMountainTilemap[] = INCBIN_U8("graphics/misc/cable_car_mountain_map.bin.lz");
+static const u8 sGround_Tilemap[] = INCBIN_U8("graphics/cable_car/ground.bin.lz");
+static const u8 sTrees_Tilemap[] = INCBIN_U8("graphics/cable_car/trees.bin.lz");
+static const u8 sBgMountains_Tilemap[] = INCBIN_U8("graphics/cable_car/bg_mountains.bin.lz");
 
-const u16 gCableCarPylonHookTilemapEntries[] = {
+static const u16 sPylonHook_TilemapEntries[] = {
     0x3000,
     0x3001,
     0x3002,
@@ -137,21 +145,21 @@ const u16 gCableCarPylonHookTilemapEntries[] = {
     0x3009,
 };
 
-const u8 gCableCarPylonStemTilemap[] = INCBIN_U8("graphics/misc/cable_car_pylon_stem_map.bin.lz");
+static const u8 sPylonStems_Tilemap[] = INCBIN_U8("graphics/cable_car/pylons.bin.lz");
 
-const struct CompressedSpriteSheet gUnknown_085CDB54[] = {
-    { gCableCar_Gfx,     0x800, 1 },
-    { gCableCarDoor_Gfx,  0x40, 2 },
-    { gCableCarCord_Gfx,  0x80, 3 },
+static const struct CompressedSpriteSheet sSpriteSheets[] = {
+    { gCableCar_Gfx,      0x800, TAG_CABLE_CAR },
+    { gCableCarDoor_Gfx,   0x40, TAG_DOOR },
+    { gCableCarCable_Gfx,  0x80, TAG_CABLE },
     { },
 };
 
-const struct SpritePalette gUnknown_085CDB74[] = {
-    { gCableCar_Pal, 1 },
+static const struct SpritePalette sSpritePalettes[] = {
+    { gCableCar_Pal, TAG_CABLE_CAR },
     { }
 };
 
-const struct OamData gOamData_85CDB84 =
+static const struct OamData sOam_CableCar =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -165,7 +173,7 @@ const struct OamData gOamData_85CDB84 =
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_85CDB8C =
+static const struct OamData sOam_CableCarDoor =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -179,7 +187,7 @@ const struct OamData gOamData_85CDB8C =
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_85CDB94 =
+static const struct OamData sOam_Cable =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -193,43 +201,43 @@ const struct OamData gOamData_85CDB94 =
     .paletteNum = 0,
 };
 
-const struct SpriteTemplate gSpriteTemplate_85CDB9C[] =
+static const struct SpriteTemplate sSpriteTemplate_CableCar[] =
 {
     {
-        .tileTag = 1,
-        .paletteTag = 1,
-        .oam = &gOamData_85CDB84,
+        .tileTag = TAG_CABLE_CAR,
+        .paletteTag = TAG_CABLE_CAR,
+        .oam = &sOam_CableCar,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = sub_8150868,
+        .callback = SpriteCB_CableCar,
     },
     {
-        .tileTag = 2,
-        .paletteTag = 1,
-        .oam = &gOamData_85CDB8C,
+        .tileTag = TAG_DOOR,
+        .paletteTag = TAG_CABLE_CAR,
+        .oam = &sOam_CableCarDoor,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = sub_8150868,
+        .callback = SpriteCB_CableCar,
     },
 };
 
-const struct SpriteTemplate gSpriteTemplate_85CDBCC = {
-    .tileTag = 3,
-    .paletteTag = 1,
-    .oam = &gOamData_85CDB94,
+static const struct SpriteTemplate sSpriteTemplate_Cable = {
+    .tileTag = TAG_CABLE,
+    .paletteTag = TAG_CABLE_CAR,
+    .oam = &sOam_Cable,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = nullsub_58,
+    .callback = SpriteCB_Cable,
 };
 
-static void CableCarTask1(u8 taskId)
+static void Task_LoadCableCar(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(CableCarMainCallback_Setup);
+        SetMainCallback2(CB2_LoadCableCar);
         DestroyTask(taskId);
     }
 }
@@ -237,11 +245,11 @@ static void CableCarTask1(u8 taskId)
 void CableCar(void)
 {
     ScriptContext2_Enable();
-    CreateTask(CableCarTask1, 1);
+    CreateTask(Task_LoadCableCar, 1);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
-static void CableCarMainCallback_Setup(void)
+static void CB2_LoadCableCar(void)
 {
     u16 imebak;
     u8 i = 0;
@@ -252,7 +260,7 @@ static void CableCarMainCallback_Setup(void)
     case 0:
     default:
         SetVBlankCallback(NULL);
-        sub_8150B6C(0);
+        SetBgRegs(FALSE);
         ScanlineEffect_Stop();
         DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
         DmaFill32Defvars(3, 0, (void *)OAM, OAM_SIZE);
@@ -267,13 +275,13 @@ static void CableCarMainCallback_Setup(void)
         ResetPaletteFade();
         ResetTempTileDataBuffers();
         StartWeather();
-        for (i = 0; i < 20; i++)
+        for (i = 0; i < NUM_ASH_SPRITES; i++)
             gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
 
         InitMapMusic();
         ResetMapMusic();
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gCableCarBgTemplates, ARRAY_COUNT(gCableCarBgTemplates));
+        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         SetBgTilemapBuffer(0, sCableCar->bgTilemapBuffers[0]);
         SetBgTilemapBuffer(1, sCableCar->bgTilemapBuffers[1]);
         SetBgTilemapBuffer(2, sCableCar->bgTilemapBuffers[2]);
@@ -282,27 +290,27 @@ static void CableCarMainCallback_Setup(void)
         gMain.state++;
         break;
     case 2:
-        for (i = 0; i < 3; i++)
-            LoadCompressedSpriteSheet(&gUnknown_085CDB54[i]);
+        for (i = 0; i < ARRAY_COUNT(sSpriteSheets) - 1; i++)
+            LoadCompressedSpriteSheet(&sSpriteSheets[i]);
 
-        LoadSpritePalettes(gUnknown_085CDB74);
-        sCableCar->mtChimneyTilemap = malloc_and_decompress(gCableCarMtChimneyTilemap, &sizeOut);
-        sCableCar->treeTilemap = malloc_and_decompress(gCableCarTreeTilemap, &sizeOut);
-        sCableCar->mountainTilemap = malloc_and_decompress(gCableCarMountainTilemap, &sizeOut);
-        sCableCar->pylonStemTilemap = malloc_and_decompress(gCableCarPylonStemTilemap, &sizeOut);
-        sCableCar->pylonHookTilemapEntries = gCableCarPylonHookTilemapEntries;
-        DecompressAndCopyTileDataToVram(0, gUnknown_08DBA5B8, 0, 0, 0);
+        LoadSpritePalettes(sSpritePalettes);
+        sCableCar->groundTilemap = malloc_and_decompress(sGround_Tilemap, &sizeOut);
+        sCableCar->treesTilemap = malloc_and_decompress(sTrees_Tilemap, &sizeOut);
+        sCableCar->bgMountainsTilemap = malloc_and_decompress(sBgMountains_Tilemap, &sizeOut);
+        sCableCar->pylonStemTilemap = malloc_and_decompress(sPylonStems_Tilemap, &sizeOut);
+        sCableCar->pylonHookTilemapEntries = sPylonHook_TilemapEntries;
+        DecompressAndCopyTileDataToVram(0, gCableCarBg_Gfx, 0, 0, 0);
         gMain.state++;
         break;
     case 3:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            LoadPalette(gUnknown_08DBA518, 0, 0x80);
+            LoadPalette(gCableCarBg_Pal, 0, 0x80);
             gMain.state++;
         }
         break;
     case 4:
-        LoadCableCarSprites();
+        CreateCableCarSprites();
         RunTasks();
         gMain.state++;
         break;
@@ -313,7 +321,7 @@ static void CableCarMainCallback_Setup(void)
         }
         else if (gWeatherPtr->sprites.s2.ashSprites[0])
         {
-            for (i = 0; i < 20; i++)
+            for (i = 0; i < NUM_ASH_SPRITES; i++)
             {
                 if (gWeatherPtr->sprites.s2.ashSprites[i])
                     gWeatherPtr->sprites.s2.ashSprites[i]->oam.priority = 0;
@@ -323,28 +331,28 @@ static void CableCarMainCallback_Setup(void)
         }
         break;
     case 6:
-        CopyToBgTilemapBufferRect_ChangePalette(1, sCableCar->treeTilemap, 0, 17, 32, 15, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(2, sCableCar->mountainTilemap, 0, 0, 30, 20, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(1, sCableCar->treesTilemap, 0, 17, 32, 15, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(2, sCableCar->bgMountainsTilemap, 0, 0, 30, 20, 17);
         CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonHookTilemapEntries, 0, 0, 5, 2, 17);
         CopyToBgTilemapBufferRect_ChangePalette(3, sCableCar->pylonStemTilemap, 0, 2, 2, 20, 17);
         gMain.state++;
         break;
     case 7:
-        sub_81514C8(gSpecialVar_0x8004);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +  0x48,  0, 14, 12, 3, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +  0x6C, 12, 17, 12, 3, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +  0x90, 24, 20, 12, 3, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +   0x0,  0, 17, 12, 3, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +  0x24,  0, 20, 12, 3, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +   0x0, 12, 20, 12, 3, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +  0x24, 12, 23, 12, 3, 17);
-        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap +   0x0, 24, 23, 12, 3, 17);
+        InitGroundTilemapData(GOING_DOWN);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +  0x48,  0, 14, 12, 3, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +  0x6C, 12, 17, 12, 3, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +  0x90, 24, 20, 12, 3, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +   0x0,  0, 17, 12, 3, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +  0x24,  0, 20, 12, 3, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +   0x0, 12, 20, 12, 3, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +  0x24, 12, 23, 12, 3, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap +   0x0, 24, 23, 12, 3, 17);
         gMain.state++;
         break;
     case 8:
         BeginNormalPaletteFade(0xFFFFFFFF, 3, 16, 0, RGB(0, 0, 0));
-        FadeInNewBGM(MUS_ROPEWAY, 1);
-        sub_8150B6C(1);
+        FadeInNewBGM(MUS_CABLE_CAR, 1);
+        SetBgRegs(TRUE);
         gMain.state++;
         break;
     case 9:
@@ -352,18 +360,18 @@ static void CableCarMainCallback_Setup(void)
         REG_IME = 0;
         REG_IE |= INTR_FLAG_VBLANK;
         REG_IME = imebak;
-        SetVBlankCallback(CableCarVblankCallback);
-        SetMainCallback2(CableCarMainCallback_Run);
-        CreateTask(sub_81503E4, 0);
-        if (gSpecialVar_0x8004 == 0)
-            sCableCar->taskId = CreateTask(sub_8150550, 1);
+        SetVBlankCallback(VBlankCB_CableCar);
+        SetMainCallback2(CB2_CableCar);
+        CreateTask(Task_CableCar, 0);
+        if (!GOING_DOWN)
+            sCableCar->bgTaskId = CreateTask(Task_AnimateBgGoingUp, 1);
         else
-            sCableCar->taskId = CreateTask(sub_8150664, 1);
+            sCableCar->bgTaskId = CreateTask(Task_AnimateBgGoingDown, 1);
         break;
     }
 }
 
-static void CableCarMainCallback_Run(void)
+static void CB2_CableCar(void)
 {
     RunTasks();
     AnimateSprites();
@@ -372,7 +380,7 @@ static void CableCarMainCallback_Run(void)
     MapMusicMain();
 }
 
-static void CleanupCableCar(void)
+static void CB2_EndCableCar(void)
 {
     u8 i = 0;
 
@@ -380,10 +388,10 @@ static void CleanupCableCar(void)
     HideBg(1);
     HideBg(2);
     HideBg(3);
-    sub_8150B6C(0);
+    SetBgRegs(FALSE);
     gSpriteCoordOffsetX = 0;
     SetCurrentAndNextWeatherNoDelay(WEATHER_NONE);
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < NUM_ASH_SPRITES; i++)
         gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
 
     ResetTasks();
@@ -396,9 +404,9 @@ static void CleanupCableCar(void)
     ResetBgsAndClearDma3BusyFlags(0);
     sCableCar->pylonHookTilemapEntries = NULL;
     FREE_AND_SET_NULL(sCableCar->pylonStemTilemap);
-    FREE_AND_SET_NULL(sCableCar->mountainTilemap);
-    FREE_AND_SET_NULL(sCableCar->treeTilemap);
-    FREE_AND_SET_NULL(sCableCar->mtChimneyTilemap);
+    FREE_AND_SET_NULL(sCableCar->bgMountainsTilemap);
+    FREE_AND_SET_NULL(sCableCar->treesTilemap);
+    FREE_AND_SET_NULL(sCableCar->groundTilemap);
     FREE_AND_SET_NULL(sCableCar);
     DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaFill32Defvars(3, 0, (void *)OAM, OAM_SIZE);
@@ -408,7 +416,7 @@ static void CleanupCableCar(void)
     SetMainCallback2(CB2_LoadMap);
 }
 
-static void sub_81503E4(u8 taskId)
+static void Task_CableCar(u8 taskId)
 {
     u8 i = 0;
 
@@ -416,13 +424,15 @@ static void sub_81503E4(u8 taskId)
     switch (sCableCar->state)
     {
     case 0:
-        if (sCableCar->timer == sCableCar->unk4)
+        // Wait to change weather
+        if (sCableCar->timer == sCableCar->weatherDelay)
         {
             SetNextWeather(sCableCar->weather);
             sCableCar->state = 1;
         }
         break;
     case 1:
+        // Update ash sprites
         switch (sCableCar->weather)
         {
         case WEATHER_VOLCANIC_ASH:
@@ -442,7 +452,7 @@ static void sub_81503E4(u8 taskId)
             {
                 sCableCar->state = 2;
             }
-            else if (sCableCar->timer >= sCableCar->unk4 + 8)
+            else if (sCableCar->timer >= sCableCar->weatherDelay + 8)
             {
                 for (; i < NUM_ASH_SPRITES; i++)
                 {
@@ -454,6 +464,7 @@ static void sub_81503E4(u8 taskId)
         }
         break;
     case 2:
+        // Wait to fade out
         if (sCableCar->timer == 570)
         {
             sCableCar->state = 3;
@@ -462,21 +473,22 @@ static void sub_81503E4(u8 taskId)
         }
         break;
     case 3:
+        // Wait for fade out
         if (!gPaletteFade.active)
-            sCableCar->state = 0xFF;
+            sCableCar->state = STATE_END;
         break;
-    case 0xFF:
+    case STATE_END:
         SetVBlankCallback(NULL);
         DestroyTask(taskId);
-        DestroyTask(sCableCar->taskId);
-        SetMainCallback2(CleanupCableCar);
+        DestroyTask(sCableCar->bgTaskId);
+        SetMainCallback2(CB2_EndCableCar);
         break;
     }
 }
 
-static void sub_8150550(u8 taskId)
+static void Task_AnimateBgGoingUp(u8 taskId)
 {
-    if (sCableCar->state != 0xFF)
+    if (sCableCar->state != STATE_END)
     {
         sCableCar->bg3HorizontalOffset--;
         if ((sCableCar->timer % 2) == 0)
@@ -507,13 +519,13 @@ static void sub_8150550(u8 taskId)
         }
     }
 
-    sub_815115C();
+    AnimateGroundGoingUp();
     gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 1) % 128;
 }
 
-static void sub_8150664(u8 taskId)
+static void Task_AnimateBgGoingDown(u8 taskId)
 {
-    if (sCableCar->state != 0xFF)
+    if (sCableCar->state != STATE_END)
     {
         sCableCar->bg3HorizontalOffset++;
         if ((sCableCar->timer % 2) == 0)
@@ -548,14 +560,14 @@ static void sub_8150664(u8 taskId)
         }
     }
 
-    sub_81511B8();
-    if (sCableCar->timer < sCableCar->unk4)
+    AnimateGroundGoingDown();
+    if (sCableCar->timer < sCableCar->weatherDelay)
         gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 247) % 248;
     else
         gWeatherPtr->ashBaseSpritesX = (gWeatherPtr->ashBaseSpritesX + 247) % 248;
 }
 
-static void CableCarVblankCallback(void)
+static void VBlankCB_CableCar(void)
 {
     CopyBgTilemapBufferToVram(0);
     CopyBgTilemapBufferToVram(3);
@@ -570,83 +582,100 @@ static void CableCarVblankCallback(void)
     TransferPlttBuffer();
 }
 
-static void nullsub_58(struct Sprite *sprite)
+static void SpriteCB_Cable(struct Sprite *sprite)
 {
+
 }
 
-static void sub_8150868(struct Sprite *sprite)
+#define sXPos  data[0]
+#define sYPos  data[1]
+
+static void SpriteCB_CableCar(struct Sprite *sprite)
 {
-    if (sCableCar->state != 0xFF)
+    if (sCableCar->state != STATE_END)
     {
-        if (gSpecialVar_0x8004 == 0)
+        if (!GOING_DOWN)
         {
-            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.x = sprite->sXPos - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.y = sprite->sYPos - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
         else
         {
-            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.x = sprite->sXPos + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.y = sprite->sYPos + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
     }
 }
 
-void sub_8150948(struct Sprite *sprite)
+#define sState data[2]
+#define sTimer data[3]
+
+static void SpriteCB_Player(struct Sprite *sprite)
 {
-    if (sCableCar->state != 255)
+    if (sCableCar->state != STATE_END)
     {
-        if (!gSpecialVar_0x8004)
+        // Move along with cable car
+        if (!GOING_DOWN)
         {
-            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.x = sprite->sXPos - (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.y = sprite->sYPos - (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
         else
         {
-            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
-            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.x = sprite->sXPos + (u8)(0.14f * S16TOPOSFLOAT(sCableCar->timer));
+            sprite->pos1.y = sprite->sYPos + (u8)(0.067f * S16TOPOSFLOAT(sCableCar->timer));
         }
 
-        switch (sprite->data[2])
+        // Bounce up and down
+        switch (sprite->sState)
         {
         case 0:
             sprite->pos2.y = 17;
-            if (sprite->data[3] ++ > 9)
+            if (sprite->sTimer++ > 9)
             {
-                sprite->data[3] = 0;
-                sprite->data[2] ++;
+                sprite->sTimer = 0;
+                sprite->sState++;
             }
             break;
         default:
             sprite->pos2.y = 16;
-            if (sprite->data[3] ++ > 9)
+            if (sprite->sTimer++ > 9)
             {
-                sprite->data[3] = 0;
-                sprite->data[2] = 0;
+                sprite->sTimer = 0;
+                sprite->sState = 0;
             }
             break;
         }
     }
 }
 
-static void sub_8150A68(struct Sprite *sprite)
+#undef sState
+#undef sTimer
+
+#define sTimer      data[0]
+#define sSameDir    data[1] // Whether or not the hiker is headed the same dir as the Cable Car
+#define sDelay      data[2]
+
+static void SpriteCB_HikerGoingUp(struct Sprite *sprite)
 {
-    if (sprite->data[0] == 0)
+    if (sprite->sTimer == 0)
     {
         sprite->pos1.x += 2 * sprite->centerToCornerVecX;
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     }
 
-    if (++sprite->data[0] >= sprite->data[2])
+    if (++sprite->sTimer >= sprite->sDelay)
     {
-        switch (sprite->data[1])
+        switch (sprite->sSameDir)
         {
-        case 0:
+        case FALSE:
             sprite->pos1.x++;
-            if ((sprite->data[0] % 4) == 0)
+            if ((sprite->sTimer % 4) == 0)
                 sprite->pos1.y++;
             break;
-        case 1:
-            if ((sprite->data[0] % 2) != 0)
+        case TRUE:
+            // Hiker moves slower if travelling with the Cable Car
+            if ((sprite->sTimer % 2) != 0)
             {
                 sprite->pos1.x++;
                 if ((sprite->pos1.x % 4) == 0)
@@ -660,22 +689,23 @@ static void sub_8150A68(struct Sprite *sprite)
     }
 }
 
-static void sub_8150AF4(struct Sprite *sprite)
+static void SpriteCB_HikerGoingDown(struct Sprite *sprite)
 {
-    if (sprite->data[0] == 0)
+    if (sprite->sTimer == 0)
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
 
-    if (++sprite->data[0] >= sprite->data[2])
+    if (++sprite->sTimer >= sprite->sDelay)
     {
-        switch (sprite->data[1])
+        switch (sprite->sSameDir)
         {
-        case 0:
+        case FALSE:
             sprite->pos1.x--;
-            if ((sprite->data[0] % 4) == 0)
+            if ((sprite->sTimer % 4) == 0)
                 sprite->pos1.y--;
             break;
-        case 1:
-            if ((sprite->data[0] % 2) != 0)
+        case TRUE:
+            // Hiker moves slower if travelling with the Cable Car
+            if ((sprite->sTimer % 2) != 0)
             {
                 sprite->pos1.x--;
                 if ((sprite->pos1.x % 4) == 0)
@@ -689,9 +719,11 @@ static void sub_8150AF4(struct Sprite *sprite)
     }
 }
 
-static void sub_8150B6C(bool8 which)
+#undef sTimer
+
+static void SetBgRegs(bool8 active)
 {
-    switch (which)
+    switch (active)
     {
     case FALSE:
     default:
@@ -723,7 +755,7 @@ static void sub_8150B6C(bool8 which)
         SetGpuReg(REG_OFFSET_WIN1H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WIN1V, 0);
-        if (gSpecialVar_0x8004 == 0)
+        if (!GOING_DOWN)
         {
             sCableCar->bg3HorizontalOffset = 176;
             sCableCar->bg3VerticalOffset = 16;
@@ -762,14 +794,14 @@ static void sub_8150B6C(bool8 which)
     }
 }
 
-static void LoadCableCarSprites(void)
+static void CreateCableCarSprites(void)
 {
     u8 spriteId;
     u8 i;
 
     u8 playerGraphicsIds[2] = {
-        OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
-        OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+        [MALE]   = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
+        [FEMALE] = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
     };
     u16 rval = Random();
     u8 hikerGraphicsIds[4] = {
@@ -779,248 +811,264 @@ static void LoadCableCarSprites(void)
         OBJ_EVENT_GFX_ZIGZAGOON_1
     };
     s16 hikerCoords[2][2] = {
-        {   0,  80 },
-        { 240, 146 }
+        {   0,  80 }, // Going up
+        { 240, 146 }  // Going down
     };
-    u8 hikerMovementDelayTable[4] = {
-        0,
-        60,
-        120,
-        170
-    };
-    void (*callbacks[2])(struct Sprite *) = {
-        sub_8150A68,
-        sub_8150AF4
+    u8 hikerMovementDelayTable[4] = { 0, 60, 120, 170};
+    void (*hikerCallbacks[2])(struct Sprite *) = {
+        SpriteCB_HikerGoingUp,
+        SpriteCB_HikerGoingDown
     };
 
-    switch (gSpecialVar_0x8004)
+    switch (GOING_DOWN)
     {
-        case 0:
+        case FALSE:
         default:
-            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], sub_8150948, 200, 73, 102);
+            // Create player sprite
+            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 200, 73, 102);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
                 gSprites[spriteId].pos2.x = 8;
                 gSprites[spriteId].pos2.y = 16;
-                gSprites[spriteId].data[0] = 0xc8;
-                gSprites[spriteId].data[1] = 0x49;
+                gSprites[spriteId].sXPos = 200;
+                gSprites[spriteId].sYPos = 73;
             }
-            spriteId = CreateSprite(&gSpriteTemplate_85CDB9C[0], 176, 43, 0x67);
+            // Create car sprite
+            spriteId = CreateSprite(&sSpriteTemplate_CableCar[0], 176, 43, 0x67);
             gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 32;
-            gSprites[spriteId].data[0] = 176;
-            gSprites[spriteId].data[1] = 43;
-            spriteId = CreateSprite(&gSpriteTemplate_85CDB9C[1], 200, 99, 0x65);
+            gSprites[spriteId].sXPos = 176;
+            gSprites[spriteId].sYPos = 43;
+            // Create door sprite
+            spriteId = CreateSprite(&sSpriteTemplate_CableCar[1], 200, 99, 0x65);
             gSprites[spriteId].pos2.x = 8;
             gSprites[spriteId].pos2.y = 4;
-            gSprites[spriteId].data[0] = 200;
-            gSprites[spriteId].data[1] = 99;
+            gSprites[spriteId].sXPos = 200;
+            gSprites[spriteId].sYPos = 99;
+            // Init weather
             sCableCar->weather = WEATHER_VOLCANIC_ASH;
-            sCableCar->unk4 = 0x15e;
+            sCableCar->weatherDelay = 350;
             SetCurrentAndNextWeatherNoDelay(WEATHER_SUNNY);
             break;
-        case 1:
-            CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->mtChimneyTilemap + 0x24, 24, 26, 12, 3, 17);
-            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], sub_8150948, 128, 39, 102);
+        case TRUE:
+            CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap + 0x24, 24, 26, 12, 3, 17);
+            // Create player sprite
+            spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 128, 39, 102);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
                 gSprites[spriteId].pos2.x = 8;
                 gSprites[spriteId].pos2.y = 16;
-                gSprites[spriteId].data[0] = 0x80;
-                gSprites[spriteId].data[1] = 0x27;
+                gSprites[spriteId].sXPos = 128;
+                gSprites[spriteId].sYPos = 39;
             }
-            spriteId = CreateSprite(&gSpriteTemplate_85CDB9C[0], 104, 9, 0x67);
-            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 0x20;
-            gSprites[spriteId].data[0] = 104;
-            gSprites[spriteId].data[1] = 9;
-            spriteId = CreateSprite(&gSpriteTemplate_85CDB9C[1], 128, 65, 0x65);
+            // Create car sprite
+            spriteId = CreateSprite(&sSpriteTemplate_CableCar[0], 104, 9, 0x67);
+            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 32;
+            gSprites[spriteId].sXPos = 104;
+            gSprites[spriteId].sYPos = 9;
+            // Create door sprite
+            spriteId = CreateSprite(&sSpriteTemplate_CableCar[1], 128, 65, 0x65);
             gSprites[spriteId].pos2.x = 8;
             gSprites[spriteId].pos2.y = 4;
-            gSprites[spriteId].data[0] = 0x80;
-            gSprites[spriteId].data[1] = 0x41;
+            gSprites[spriteId].sXPos = 128;
+            gSprites[spriteId].sYPos = 65;
+            // Init weather
             sCableCar->weather = WEATHER_SUNNY;
-            sCableCar->unk4 = 0x109;
+            sCableCar->weatherDelay = 265;
             SetCurrentAndNextWeatherNoDelay(WEATHER_VOLCANIC_ASH);
             break;
     }
     for (i = 0; i < 9; i++)
     {
-        spriteId = CreateSprite(&gSpriteTemplate_85CDBCC, 16 * i + 96, 8 * i - 8, 0x68);
+        spriteId = CreateSprite(&sSpriteTemplate_Cable, 16 * i + 96, 8 * i - 8, 0x68);
         gSprites[spriteId].pos2.x = 8;
         gSprites[spriteId].pos2.y = 8;
     }
+
+    // 1/64 chance for an NPC to appear hiking on the ground below the Cable Car
     if ((rval % 64) == 0)
     {
-        spriteId = AddPseudoObjectEvent(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
+        // Unclear if this was intentional, but the - 1 in the below ARRAY_COUNT means the Zigzagoon is never used
+        spriteId = AddPseudoObjectEvent(hikerGraphicsIds[rval % (ARRAY_COUNT(hikerGraphicsIds) - 1)], hikerCallbacks[GOING_DOWN], hikerCoords[GOING_DOWN][0], hikerCoords[GOING_DOWN][1], 106);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].pos2.x = -gSprites[spriteId].centerToCornerVecX;
             gSprites[spriteId].pos2.y = -gSprites[spriteId].centerToCornerVecY;
-            if (gSpecialVar_0x8004 == 0)
+            
+            // Randomly choose which direction the NPC is going
+            if (!GOING_DOWN)
             {
                 if (rval % 2)
                 {
+                    // Do walking west anim
                     StartSpriteAnim(&gSprites[spriteId], 6);
-                    gSprites[spriteId].data[1] = 1;
+                    gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].pos1.y += 2;
                 }
                 else
                 {
+                    // Do walking east anim
                     StartSpriteAnim(&gSprites[spriteId], 7);
-                    gSprites[spriteId].data[1] = 0;
+                    gSprites[spriteId].sSameDir = FALSE;
                 }
             }
             else
             {
                 if (rval % 2)
                 {
+                    // Do walking east anim
                     StartSpriteAnim(&gSprites[spriteId], 7);
-                    gSprites[spriteId].data[1] = 1;
+                    gSprites[spriteId].sSameDir = TRUE;
                     gSprites[spriteId].pos1.y += 2;
                 }
                 else
                 {
+                    // Do walking west anim
                     StartSpriteAnim(&gSprites[spriteId], 6);
-                    gSprites[spriteId].data[1] = 0;
+                    gSprites[spriteId].sSameDir = FALSE;
                 }
             }
-            gSprites[spriteId].data[2] = hikerMovementDelayTable[rval % 4];
+            gSprites[spriteId].sDelay = hikerMovementDelayTable[rval % ARRAY_COUNT(hikerMovementDelayTable)];
         }
     }
 }
 
-void sub_8151088(void)
+static void BufferNextGroundSegment(void)
 {
-    u8 i;
-    u8 j;
-    u8 k;
+    u8 i, j, k;
     u8 offset;
 
-    for (i = 0, k = 0, offset = 0x24 * (sCableCar->unk1B + 2); i < 3; i++)
+    for (i = 0, k = 0, offset = 0x24 * (sCableCar->groundTilemapOffset + 2); i < 3; i++)
     {
-        for (j = 0; j < 12; j++)
+        for (j = 0; j < ARRAY_COUNT(sCableCar->groundTileBuffer[0]); j++)
         {
-            sCableCar->unk22[i][j] = sCableCar->mtChimneyTilemap[offset++];
-            sCableCar->unk22[i + 3][j] = sCableCar->mtChimneyTilemap[k];
-            sCableCar->unk22[i + 6][j] = (sCableCar->mtChimneyTilemap + 0x24)[k];
+            sCableCar->groundTileBuffer[i][j] = sCableCar->groundTilemap[offset++];
+            sCableCar->groundTileBuffer[i + 3][j] = sCableCar->groundTilemap[k];
+            sCableCar->groundTileBuffer[i + 6][j] = (sCableCar->groundTilemap + 0x24)[k];
             k++;
         }
     }
 
-    sCableCar->unk1B = (sCableCar->unk1B + 1) % 3;
+    sCableCar->groundTilemapOffset = (sCableCar->groundTilemapOffset + 1) % 3;
 }
 
-static void sub_815115C(void)
+static void AnimateGroundGoingUp(void)
 {
-    sCableCar->unk1C = (sCableCar->unk1C + 1) % 0x60;
-    sCableCar->bg0HorizontalOffset = sCableCar->unk1F - sCableCar->unk1D;
-    sCableCar->bg0VerticalOffset = sCableCar->unk20 - sCableCar->unk1E;
-    sCableCar->unk1D++;
-    if ((sCableCar->unk1D % 4) == 0)
-        sCableCar->unk1E++;
+    sCableCar->groundTimer = (sCableCar->groundTimer + 1) % 96;
+    sCableCar->bg0HorizontalOffset = sCableCar->groundXBase - sCableCar->groundXOffset;
+    sCableCar->bg0VerticalOffset = sCableCar->groundYBase - sCableCar->groundYOffset;
+    sCableCar->groundXOffset++;
+    if ((sCableCar->groundXOffset % 4) == 0)
+        sCableCar->groundYOffset++;
 
-    if (sCableCar->unk1D > 16)
-        sub_8151214();
+    if (sCableCar->groundXOffset > 16)
+        DrawNextGroundSegmentGoingUp();
 }
 
-static void sub_81511B8(void)
+static void AnimateGroundGoingDown(void)
 {
-    sCableCar->unk1C = (sCableCar->unk1C + 1) % 0x60;
-    sCableCar->bg0HorizontalOffset = sCableCar->unk1F + sCableCar->unk1D;
-    sCableCar->bg0VerticalOffset = sCableCar->unk20 + sCableCar->unk1E;
-    sCableCar->unk1D++;
-    if ((sCableCar->unk1D % 4) == 0)
-        sCableCar->unk1E++;
+    sCableCar->groundTimer = (sCableCar->groundTimer + 1) % 96;
+    sCableCar->bg0HorizontalOffset = sCableCar->groundXBase + sCableCar->groundXOffset;
+    sCableCar->bg0VerticalOffset = sCableCar->groundYBase + sCableCar->groundYOffset;
+    sCableCar->groundXOffset++;
+    if ((sCableCar->groundXOffset % 4) == 0)
+        sCableCar->groundYOffset++;
 
-    if (sCableCar->unk1D > 16)
-        sub_8151388();
+    if (sCableCar->groundXOffset > 16)
+        DrawNextGroundSegmentGoingDown();
 }
 
-static void sub_8151214(void)
-{
-    u8 i = 0;
-
-    sCableCar->unk1D = sCableCar->unk1E = 0;
-    sCableCar->unk1F = sCableCar->bg0HorizontalOffset;
-    sCableCar->unk20 = sCableCar->bg0VerticalOffset;
-    sCableCar->unk19 = (sCableCar->unk19 + 30) % 32;
-    sCableCar->unk18 -= 2;
-    gUnknown_0203ABB2 = (sCableCar->unk1A + 23) % 32;
-    for (i = 0; i < 9; i++)
-    {
-        gUnknown_0203ABB0 = sCableCar->unk19;
-        gUnknown_0203ABB1 = (gUnknown_0203ABB2 + i) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->unk22[i][sCableCar->unk18], gUnknown_0203ABB0, gUnknown_0203ABB1, 1, 1, 17);
-        gUnknown_0203ABB0 = (gUnknown_0203ABB0 + 1) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->unk22[i][sCableCar->unk18 + 1], gUnknown_0203ABB0, gUnknown_0203ABB1, 1, 1, 17);
-    }
-
-    gUnknown_0203ABB0 = (sCableCar->unk19 + 30) % 32;
-    FillBgTilemapBufferRect(0, 0, gUnknown_0203ABB0, 0, 2, 32, 17);
-    if (sCableCar->unk18 == 0)
-    {
-        sCableCar->unk1A = (sCableCar->unk1A + 29) % 32;
-        sCableCar->unk18 = 12;
-        sub_8151088();
-        gUnknown_0203ABB0 = (sCableCar->unk1A + 1) % 32;
-        FillBgTilemapBufferRect(0, 0, 0, gUnknown_0203ABB0, 32, 9, 17);
-    }
-}
-
-static void sub_8151388(void)
+static void DrawNextGroundSegmentGoingUp(void)
 {
     u8 i = 0;
 
-    sCableCar->unk1D = sCableCar->unk1E = 0;
-    sCableCar->unk1F = sCableCar->bg0HorizontalOffset;
-    sCableCar->unk20 = sCableCar->bg0VerticalOffset;
-    sCableCar->unk19 = (sCableCar->unk19 + 2) % 32;
-    sCableCar->unk18 += 2;
-    gUnknown_0203ABB5 = sCableCar->unk1A;
-    for (i = 0; i < 9; i++)
+    sCableCar->groundXOffset = sCableCar->groundYOffset = 0;
+    sCableCar->groundXBase = sCableCar->bg0HorizontalOffset;
+    sCableCar->groundYBase = sCableCar->bg0VerticalOffset;
+    sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 30) % 32;
+    sCableCar->groundTileIdx -= 2;
+    sGroundSegmentY_Up = (sCableCar->groundSegmentYStart + 23) % 32;
+
+    // Draw next segment
+    for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {
-        gUnknown_0203ABB3 = sCableCar->unk19;
-        gUnknown_0203ABB4 = (gUnknown_0203ABB5 + i) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->unk22[i][sCableCar->unk18], gUnknown_0203ABB3, gUnknown_0203ABB4, 1, 1, 17);
-        gUnknown_0203ABB3 = (gUnknown_0203ABB3 + 1) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->unk22[i][sCableCar->unk18 + 1], gUnknown_0203ABB3, gUnknown_0203ABB4, 1, 1, 17);
+        sGroundX_Up = sCableCar->groundSegmentXStart;
+        sGroundY_Up = (sGroundSegmentY_Up + i) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx], sGroundX_Up, sGroundY_Up, 1, 1, 17);
+        sGroundX_Up = (sGroundX_Up + 1) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx + 1], sGroundX_Up, sGroundY_Up, 1, 1, 17);
     }
 
-    gUnknown_0203ABB4 = (sCableCar->unk1A + 23) % 32;
-    FillBgTilemapBufferRect(0, 0, sCableCar->unk19, gUnknown_0203ABB4, 2, 9, 17);
-    if (sCableCar->unk18 == 10)
+    // Erase old segment
+    sGroundX_Up = (sCableCar->groundSegmentXStart + 30) % 32;
+    FillBgTilemapBufferRect(0, 0, sGroundX_Up, 0, 2, 32, 17);
+    if (sCableCar->groundTileIdx == 0)
     {
-        sCableCar->unk1A = (sCableCar->unk1A + 3) % 32;
-        sCableCar->unk18 = 0xfe;
-        sub_8151088();
+        sCableCar->groundSegmentYStart = (sCableCar->groundSegmentYStart + 29) % 32;
+        sCableCar->groundTileIdx = 12;
+        BufferNextGroundSegment();
+        sGroundX_Up = (sCableCar->groundSegmentYStart + 1) % 32;
+        FillBgTilemapBufferRect(0, 0, 0, sGroundX_Up, 32, 9, 17);
     }
 }
 
-static void sub_81514C8(u8 arg0)
+static void DrawNextGroundSegmentGoingDown(void)
 {
-    switch (arg0)
+    u8 i = 0;
+
+    sCableCar->groundXOffset = sCableCar->groundYOffset = 0;
+    sCableCar->groundXBase = sCableCar->bg0HorizontalOffset;
+    sCableCar->groundYBase = sCableCar->bg0VerticalOffset;
+    sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 2) % 32;
+    sCableCar->groundTileIdx += 2;
+    sGroundSegmentY_Down = sCableCar->groundSegmentYStart;
+    
+    // Draw next segment
+    for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {
-        case 0:
+        sGroundX_Down = sCableCar->groundSegmentXStart;
+        sGroundY_Down = (sGroundSegmentY_Down + i) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx], sGroundX_Down, sGroundY_Down, 1, 1, 17);
+        sGroundX_Down = (sGroundX_Down + 1) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx + 1], sGroundX_Down, sGroundY_Down, 1, 1, 17);
+    }
+
+    // Erase old segment
+    sGroundY_Down = (sCableCar->groundSegmentYStart + 23) % 32;
+    FillBgTilemapBufferRect(0, 0, sCableCar->groundSegmentXStart, sGroundY_Down, 2, 9, 17);
+    if (sCableCar->groundTileIdx == 10)
+    {
+        sCableCar->groundSegmentYStart = (sCableCar->groundSegmentYStart + 3) % 32;
+        sCableCar->groundTileIdx = -2;
+        BufferNextGroundSegment();
+    }
+}
+
+static void InitGroundTilemapData(bool8 goingDown)
+{
+    switch (goingDown)
+    {
+        case FALSE:
         default:
-            sCableCar->unk1B = 2;
-            sCableCar->unk19 = 0;
-            sCableCar->unk1A = 20;
-            sCableCar->unk18 = 12;
-            sub_8151088();
-            sub_8151214();
+            sCableCar->groundTilemapOffset = 2;
+            sCableCar->groundSegmentXStart = 0;
+            sCableCar->groundSegmentYStart = 20;
+            sCableCar->groundTileIdx = 12;
+            BufferNextGroundSegment();
+            DrawNextGroundSegmentGoingUp();
             break;
-        case 1:
-            sCableCar->unk1B = 2;
-            sCableCar->unk19 = 28;
-            sCableCar->unk1A = 20;
-            sCableCar->unk18 = 4;
-            sub_8151088();
-            sub_8151388();
+        case TRUE:
+            sCableCar->groundTilemapOffset = 2;
+            sCableCar->groundSegmentXStart = 28;
+            sCableCar->groundSegmentYStart = 20;
+            sCableCar->groundTileIdx = 4;
+            BufferNextGroundSegment();
+            DrawNextGroundSegmentGoingDown();
             break;
     }
 
-    sCableCar->unk1C = 0;
+    sCableCar->groundTimer = 0;
 }
 

@@ -73,11 +73,11 @@ void Task_Truck1(u8 taskId)
     s16 box1, box2, box3;
 
     box1 = GetTruckBoxMovement(data[0] + 30) * 4; // top box.
-    sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, box1 + 3);
+    SetObjectEventSpritePosByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, box1 + 3);
     box2 = GetTruckBoxMovement(data[0]) * 2; // bottom left box.
-    sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, box2 - 3);
+    SetObjectEventSpritePosByLocalIdAndMap(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, box2 - 3);
     box3 = GetTruckBoxMovement(data[0]) * 4; // bottom right box.
-    sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, box3);
+    SetObjectEventSpritePosByLocalIdAndMap(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, box3);
 
     if (++data[0] == SECONDS(500)) // this will never run
         data[0] = 0; // reset the timer if it gets stuck.
@@ -116,11 +116,11 @@ void Task_Truck2(u8 taskId)
         cameraYpan = GetTruckCameraBobbingY(data[2]);
         SetCameraPanning(cameraXpan, cameraYpan);
         box1 = GetTruckBoxMovement(data[2] + 30) * 4;
-        sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, box1 + 3);
+        SetObjectEventSpritePosByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, box1 + 3);
         box2 = GetTruckBoxMovement(data[2]) * 2;
-        sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, box2 - 3);
+        SetObjectEventSpritePosByLocalIdAndMap(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, box2 - 3);
         box3 = GetTruckBoxMovement(data[2]) * 4;
-        sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, box3);
+        SetObjectEventSpritePosByLocalIdAndMap(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, box3);
     }
 }
 
@@ -147,9 +147,9 @@ static void Task_Truck3(u8 taskId)
        cameraXpan = gTruckCamera_HorizontalTable[data[1]];
        cameraYpan = 0;
        SetCameraPanning(cameraXpan, 0);
-       sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
-       sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, cameraYpan - 3);
-       sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, cameraYpan);
+       SetObjectEventSpritePosByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
+       SetObjectEventSpritePosByLocalIdAndMap(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, cameraYpan - 3);
+       SetObjectEventSpritePosByLocalIdAndMap(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, cameraYpan);
    }
 }
 
@@ -171,7 +171,7 @@ void Task_HandleTruckSequence(u8 taskId)
             data[1] = 0; // reset the timer.
             data[2] = CreateTask(Task_Truck1, 0xA);
             data[0] = 1; // run the next case.
-            PlaySE(SE_TRACK_MOVE);
+            PlaySE(SE_TRUCK_MOVE);
         }
         break;
     case 1:
@@ -191,7 +191,7 @@ void Task_HandleTruckSequence(u8 taskId)
             DestroyTask(data[2]);
             data[3] = CreateTask(Task_Truck2, 0xA);
             data[0] = 3;
-            PlaySE(SE_TRACK_STOP);
+            PlaySE(SE_TRUCK_STOP);
         }
         break;
     case 3:
@@ -206,7 +206,7 @@ void Task_HandleTruckSequence(u8 taskId)
         data[1]++;
         if (data[1] == 90)
         {
-            PlaySE(SE_TRACK_HAIKI);
+            PlaySE(SE_TRUCK_UNLOAD);
             data[1] = 0;
             data[0] = 5;
         }
@@ -215,11 +215,11 @@ void Task_HandleTruckSequence(u8 taskId)
         data[1]++;
         if (data[1] == 120)
         {
-            MapGridSetMetatileIdAt(11, 8, METATILE_ID(InsideOfTruck, ExitLight_Top));
-            MapGridSetMetatileIdAt(11, 9, METATILE_ID(InsideOfTruck, ExitLight_Mid));
-            MapGridSetMetatileIdAt(11, 10, METATILE_ID(InsideOfTruck, ExitLight_Bottom));
+            MapGridSetMetatileIdAt(11, 8, METATILE_InsideOfTruck_ExitLight_Top);
+            MapGridSetMetatileIdAt(11, 9, METATILE_InsideOfTruck_ExitLight_Mid);
+            MapGridSetMetatileIdAt(11, 10, METATILE_InsideOfTruck_ExitLight_Bottom);
             DrawWholeMapView();
-            PlaySE(SE_TRACK_DOOR);
+            PlaySE(SE_TRUCK_DOOR);
             DestroyTask(taskId);
             ScriptContext2_Disable();
         }
@@ -229,9 +229,9 @@ void Task_HandleTruckSequence(u8 taskId)
 
 void ExecuteTruckSequence(void)
 {
-    MapGridSetMetatileIdAt(11, 8, METATILE_ID(InsideOfTruck, DoorClosedFloor_Top));
-    MapGridSetMetatileIdAt(11, 9, METATILE_ID(InsideOfTruck, DoorClosedFloor_Mid));
-    MapGridSetMetatileIdAt(11, 10, METATILE_ID(InsideOfTruck, DoorClosedFloor_Bottom));
+    MapGridSetMetatileIdAt(11, 8, METATILE_InsideOfTruck_DoorClosedFloor_Top);
+    MapGridSetMetatileIdAt(11, 9, METATILE_InsideOfTruck_DoorClosedFloor_Mid);
+    MapGridSetMetatileIdAt(11, 10, METATILE_InsideOfTruck_DoorClosedFloor_Bottom);
     DrawWholeMapView();
     ScriptContext2_Enable();
     CpuFastFill(0, gPlttBufferFaded, 0x400);
@@ -242,9 +242,9 @@ void EndTruckSequence(u8 taskId)
 {
     if (!FuncIsActiveTask(Task_HandleTruckSequence))
     {
-        sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3, 3);
-        sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, -3);
-        sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3, 0);
+        SetObjectEventSpritePosByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3, 3);
+        SetObjectEventSpritePosByLocalIdAndMap(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, -3);
+        SetObjectEventSpritePosByLocalIdAndMap(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3, 0);
     }
 }
 
@@ -280,7 +280,7 @@ void Task_HandlePorthole(u8 taskId)
         }
         break;
     case IDLE_CHECK:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             data[1] = 1;
         if (!ScriptMovement_IsObjectMovementFinished(OBJ_EVENT_ID_PLAYER, location->mapNum, location->mapGroup))
             return;
