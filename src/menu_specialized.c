@@ -319,7 +319,7 @@ void sub_81D1EC0(void)
     Free(sUnknown_0203CF4C);
 }
 
-void sub_81D1ED4(struct ConditionGraph *a0)
+void InitConditionGraphData(struct ConditionGraph *graph)
 {
     u8 i, j;
 
@@ -327,22 +327,22 @@ void sub_81D1ED4(struct ConditionGraph *a0)
     {
         for (i = 0; i < 10; i++)
         {
-            a0->unk64[i][j].unk0 = 0;
-            a0->unk64[i][j].unk2 = 0;
+            graph->unk64[i][j].unk0 = 0;
+            graph->unk64[i][j].unk2 = 0;
         }
         for (i = 0; i < 4; i++)
         {
-            a0->unk0[i][j] = 0;
-            a0->unk14[i][j].unk0 = 0x9B;
-            a0->unk14[i][j].unk2 = 0x5B;
+            graph->stat[i][j] = 0;
+            graph->unk14[i][j].unk0 = 155;
+            graph->unk14[i][j].unk2 = 91;
         }
 
-        a0->unk12C[j].unk0 = 0;
-        a0->unk12C[j].unk2 = 0;
+        graph->unk12C[j].unk0 = 0;
+        graph->unk12C[j].unk2 = 0;
     }
 
-    a0->unk354 = 0;
-    a0->unk352 = 0;
+    graph->unk354 = 0;
+    graph->unk352 = 0;
 }
 
 void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2)
@@ -350,7 +350,7 @@ void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *
     u16 i, j;
     s32 r5, r6;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < FLAVOR_COUNT; i++)
     {
         r5 = arg1[i].unk0 << 8;
         r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / 10;
@@ -387,25 +387,25 @@ bool32 TransitionConditionGraph(struct ConditionGraph *graph)
     }
 }
 
-void sub_81D20AC(struct ConditionGraph *a0)
+void InitConditionGraphState(struct ConditionGraph *graph)
 {
-    a0->unk355 = 0;
+    graph->state = 0;
 }
 
-bool8 sub_81D20BC(struct ConditionGraph *graph)
+bool8 SetupConditionGraphScanlineParams(struct ConditionGraph *graph)
 {
     struct ScanlineEffectParams params;
 
-    switch (graph->unk355)
+    switch (graph->state)
     {
     case 0:
         ScanlineEffect_Clear();
-        graph->unk355++;
+        graph->state++;
         return TRUE;
     case 1:
         params = sConditionGraphScanline;
         ScanlineEffect_SetParams(params);
-        graph->unk355++;
+        graph->state++;
         return FALSE;
     default:
         return FALSE;
@@ -431,7 +431,7 @@ void sub_81D2108(struct ConditionGraph *graph)
     graph->unk354 = 0;
 }
 
-void sub_81D21DC(u8 bg)
+void SetConditionGraphIOWindows(u8 bg)
 {
     u32 flags;
 
@@ -1025,23 +1025,23 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 
 
     if (partyId != numMons)
     {
-        graph->unk0[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        graph->unk0[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        graph->unk0[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        graph->unk0[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        graph->unk0[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        graph->stat[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        graph->stat[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        graph->stat[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        graph->stat[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        graph->stat[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
 
         sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
                  ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
                  : 9;
 
-        sub_81D2754(graph->unk0[id], graph->unk14[id]);
+        sub_81D2754(graph->stat[id], graph->unk14[id]);
     }
     else
     {
         for (i = 0; i < FLAVOR_COUNT; i++)
         {
-            graph->unk0[id][i] = 0;
+            graph->stat[id][i] = 0;
             graph->unk14[id][i].unk0 = 155;
             graph->unk14[id][i].unk2 = 91;
         }
