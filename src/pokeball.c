@@ -341,11 +341,8 @@ u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
 
 static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
-    u16 throwCaseId;
-    u8 battlerId;
-    u16 itemId, ballId;
-    u8 ballSpriteId;
-    bool8 notSendOut = FALSE;
+    u32 throwCaseId, ballId, battlerId, ballSpriteId;
+    bool32 notSendOut = FALSE;
 
     if (gTasks[taskId].tFrames == 0)
     {
@@ -355,13 +352,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     throwCaseId = gTasks[taskId].tThrowId;
     battlerId = gTasks[taskId].tBattler;
-
-    if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-        itemId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
-    else
-        itemId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
-
-    ballId = ItemIdToBallId(itemId);
+    ballId = ItemIdToBallId(GetBattlerPokeballItemId(battlerId));
     LoadBallGfx(ballId);
     ballSpriteId = CreateSprite(&gBallSpriteTemplates[ballId], 32, 80, 29);
     gSprites[ballSpriteId].data[0] = 0x80;
@@ -744,8 +735,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
     if (gMain.inBattle)
     {
-        struct Pokemon *mon;
-        u16 species;
+        struct Pokemon *mon, *illusionMon;
         s8 pan;
         u16 wantedCryCase;
         u8 taskId;
@@ -761,7 +751,6 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             pan = -25;
         }
 
-        species = GetMonData(mon, MON_DATA_SPECIES);
         if ((battlerId == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || battlerId == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1)
         {
@@ -784,9 +773,14 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             wantedCryCase = 2;
 
         gBattleSpritesDataPtr->healthBoxesData[battlerId].field_1_x40 = 1;
-
         taskId = CreateTask(Task_PlayCryWhenReleasedFromBall, 3);
-        gTasks[taskId].tCryTaskSpecies = species;
+
+        illusionMon = GetIllusionMonPtr(battlerId);
+        if (illusionMon != NULL)
+            gTasks[taskId].tCryTaskSpecies = GetMonData(illusionMon, MON_DATA_SPECIES);
+        else
+            gTasks[taskId].tCryTaskSpecies = GetMonData(mon, MON_DATA_SPECIES);
+
         gTasks[taskId].tCryTaskPan = pan;
         gTasks[taskId].tCryTaskWantedCry = wantedCryCase;
         gTasks[taskId].tCryTaskBattler = battlerId;
@@ -1270,8 +1264,16 @@ void FreeBallGfx(u8 ballId)
 
 static u16 GetBattlerPokeballItemId(u8 battlerId)
 {
+    struct Pokemon *mon, *illusionMon;
+
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
+        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
     else
-        return GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
+        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
+
+    illusionMon = GetIllusionMonPtr(battlerId);
+    if (illusionMon != NULL)
+        mon = illusionMon;
+
+    return GetMonData(mon, MON_DATA_POKEBALL);
 }

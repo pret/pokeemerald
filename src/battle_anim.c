@@ -17,6 +17,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "constants/battle_anim.h"
+#include "constants/battle_config.h"
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
@@ -108,7 +109,7 @@ EWRAM_DATA static u16 sSoundAnimFramesToWait = 0;
 EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gAnimMoveTurn = 0;
 EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
-EWRAM_DATA static u16 sAnimMoveIndex = 0; // Set but unused.
+EWRAM_DATA u16 gAnimMoveIndex = 0; // Set but unused.
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
@@ -1130,8 +1131,16 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Pencil, 0x0200, ANIM_TAG_PENCIL},
     {gBattleAnimSpriteGfx_AirWave, 0x0100, ANIM_TAG_AIR_WAVE},
     {gBattleAnimSpriteGfx_Orb, 0x0200, ANIM_TAG_ORB},
+    #if NEW_SWORD_PARTICLE
+    {gBattleAnimSpriteGfx_NewSword, 0x0400, ANIM_TAG_SWORD},
+    #else
     {gBattleAnimSpriteGfx_Sword, 0x0400, ANIM_TAG_SWORD},
+    #endif
+    #if NEW_LEECH_SEED_PARTICLE
+    {gBattleAnimSpriteGfx_NewLeechSeed, 0x0180, ANIM_TAG_SEED},
+    #else
     {gBattleAnimSpriteGfx_Seed, 0x0180, ANIM_TAG_SEED},
+    #endif
     {gBattleAnimSpriteGfx_Explosion6, 0x0800, ANIM_TAG_EXPLOSION_6},
     {gBattleAnimSpriteGfx_PinkOrb, 0x0020, ANIM_TAG_PINK_ORB},
     {gBattleAnimSpriteGfx_Gust, 0x0400, ANIM_TAG_GUST},
@@ -1154,7 +1163,11 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_HitDuplicate, 0x0A00, ANIM_TAG_HIT_DUPLICATE},
     {gBattleAnimSpriteGfx_Leer, 0x0A00, ANIM_TAG_LEER},
     {gBattleAnimSpriteGfx_BlueBurst, 0x0A00, ANIM_TAG_BLUE_BURST},
+    #if NEW_EMBER_PARTICLES
+    {gBattleAnimSpriteGfx_NewEmbers, 0x0A00, ANIM_TAG_SMALL_EMBER},
+    #else
     {gBattleAnimSpriteGfx_SmallEmber, 0x0A00, ANIM_TAG_SMALL_EMBER},
+    #endif
     {gBattleAnimSpriteGfx_GraySmoke, 0x0A00, ANIM_TAG_GRAY_SMOKE},
     {gBattleAnimSpriteGfx_BlueStar, 0x0E00, ANIM_TAG_BLUE_STAR},
     {gBattleAnimSpriteGfx_BubbleBurst, 0x0380, ANIM_TAG_BUBBLE_BURST},
@@ -1183,12 +1196,20 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_RedFist, 0x0200, ANIM_TAG_RED_FIST},
     {gBattleAnimSpriteGfx_SlamHit, 0x1000, ANIM_TAG_SLAM_HIT},
     {gBattleAnimSpriteGfx_Ring, 0x0180, ANIM_TAG_RING},
+    #if NEW_ROCKS_PARTICLE
+    {gBattleAnimSpriteGfx_NewRocks, 0x0C00, ANIM_TAG_ROCKS},
+    #else
     {gBattleAnimSpriteGfx_Rocks, 0x0C00, ANIM_TAG_ROCKS},
+    #endif
     {gBattleAnimSpriteGfx_Z, 0x0100, ANIM_TAG_Z},
     {gBattleAnimSpriteGfx_YellowUnk2, 0x0040, ANIM_TAG_YELLOW_UNK_2},
     {gBattleAnimSpriteGfx_AirSlash, 0x0180, ANIM_TAG_AIR_SLASH},
     {gBattleAnimSpriteGfx_SpinningGreenOrbs, 0x0800, ANIM_TAG_SPINNING_GREEN_ORBS},
+    #if NEW_LEAF_PARTICLE
+    {gBattleAnimSpriteGfx_NewLeaf, 0x0480, ANIM_TAG_LEAF},
+    #else
     {gBattleAnimSpriteGfx_Leaf, 0x0480, ANIM_TAG_LEAF},
+    #endif
     {gBattleAnimSpriteGfx_Finger, 0x0200, ANIM_TAG_FINGER},
     {gBattleAnimSpriteGfx_PoisonPowder, 0x0200, ANIM_TAG_POISON_POWDER},
     {gBattleAnimSpriteGfx_BrownTriangle, 0x0100, ANIM_TAG_BROWN_TRIANGLE},
@@ -1252,7 +1273,11 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Shock2, 0x0600, ANIM_TAG_SHOCK_2},
     {gBattleAnimSpriteGfx_ClosingEye2, 0x0200, ANIM_TAG_CLOSING_EYE_2},
     {gBattleAnimSpriteGfx_MetalBall, 0x0080, ANIM_TAG_METAL_BALL},
+    #if NEW_SUBSTITUTE_PARTICLE
+    {gBattleAnimSpriteGfx_NewSubstituteFront, 0x0200, ANIM_TAG_MONSTER_DOLL},
+    #else
     {gBattleAnimSpriteGfx_MonsterDoll, 0x0200, ANIM_TAG_MONSTER_DOLL},
+    #endif
     {gBattleAnimSpriteGfx_Whirlwind, 0x0800, ANIM_TAG_WHIRLWIND},
     {gBattleAnimSpriteGfx_Whirlwind2, 0x0080, ANIM_TAG_WHIRLWIND_2},
     {gBattleAnimSpriteGfx_Explosion4, 0x0a00, ANIM_TAG_EXPLOSION_4},
@@ -1264,11 +1289,19 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_CircleImpact, 0x0020, ANIM_TAG_CIRCLE_IMPACT},
     {gBattleAnimSpriteGfx_Scratch, 0x0a00, ANIM_TAG_SCRATCH},
     {gBattleAnimSpriteGfx_Cut, 0x0800, ANIM_TAG_CUT},
+    #if NEW_TEETH_PARTICLE
+    {gBattleAnimSpriteGfx_NewTeeth, 0x0800, ANIM_TAG_SHARP_TEETH},
+    #else
     {gBattleAnimSpriteGfx_SharpTeeth, 0x0800, ANIM_TAG_SHARP_TEETH},
+    #endif
     {gBattleAnimSpriteGfx_RainbowRings, 0x00c0, ANIM_TAG_RAINBOW_RINGS},
     {gBattleAnimSpriteGfx_IceCrystals, 0x01c0, ANIM_TAG_ICE_CRYSTALS},
     {gBattleAnimSpriteGfx_IceSpikes, 0x0100, ANIM_TAG_ICE_SPIKES},
+    #if NEW_HANDS_FEET_PARTICLE
+    {gBattleAnimSpriteGfx_NewHandsAndFeet, 0x0800, ANIM_TAG_HANDS_AND_FEET},
+    #else
     {gBattleAnimSpriteGfx_HandsAndFeet, 0x0800, ANIM_TAG_HANDS_AND_FEET},
+    #endif
     {gBattleAnimSpriteGfx_MistCloud, 0x0200, ANIM_TAG_MIST_CLOUD},
     {gBattleAnimSpriteGfx_Clamp, 0x0800, ANIM_TAG_CLAMP},
     {gBattleAnimSpriteGfx_Bubble, 0x0180, ANIM_TAG_BUBBLE},
@@ -1277,11 +1310,19 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_WaterOrb, 0x0200, ANIM_TAG_WATER_ORB},
     {gBattleAnimSpriteGfx_PoisonBubble, 0x0180, ANIM_TAG_POISON_BUBBLE},
     {gBattleAnimSpriteGfx_ToxicBubble, 0x0400, ANIM_TAG_TOXIC_BUBBLE},
+    #if NEW_SPIKES_PARTICLE
+    {gBattleAnimSpriteGfx_NewSpikes, 0x0080, ANIM_TAG_SPIKES},
+    #else
     {gBattleAnimSpriteGfx_Spikes, 0x0080, ANIM_TAG_SPIKES},
+    #endif
     {gBattleAnimSpriteGfx_HornHit2, 0x0100, ANIM_TAG_HORN_HIT_2},
     {gBattleAnimSpriteGfx_AirWave2, 0x0100, ANIM_TAG_AIR_WAVE_2},
     {gBattleAnimSpriteGfx_SmallBubbles, 0x0140, ANIM_TAG_SMALL_BUBBLES},
+    #if NEW_FLY_BUBBLE_PARTICLE
+    {gBattleAnimSpriteGfx_NewFly, 0x0800, ANIM_TAG_ROUND_SHADOW},
+    #else
     {gBattleAnimSpriteGfx_RoundShadow, 0x0800, ANIM_TAG_ROUND_SHADOW},
+    #endif
     {gBattleAnimSpriteGfx_Sunlight, 0x0200, ANIM_TAG_SUNLIGHT},
     {gBattleAnimSpriteGfx_Spore, 0x0100, ANIM_TAG_SPORE},
     {gBattleAnimSpriteGfx_Flower, 0x00a0, ANIM_TAG_FLOWER},
@@ -1312,7 +1353,11 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_FocusEnergy, 0x0400, ANIM_TAG_FOCUS_ENERGY},
     {gBattleAnimSpriteGfx_SphereToCube, 0x0a00, ANIM_TAG_SPHERE_TO_CUBE},
     {gBattleAnimSpriteGfx_Tendrils, 0x1000, ANIM_TAG_TENDRILS},
+    #if NEW_MEAN_LOOK_PARTICLE
+    {gBattleAnimSpriteGfx_NewEye, 0x0800, ANIM_TAG_EYE},
+    #else
     {gBattleAnimSpriteGfx_Eye, 0x0800, ANIM_TAG_EYE},
+    #endif
     {gBattleAnimSpriteGfx_WhiteShadow, 0x0400, ANIM_TAG_WHITE_SHADOW},
     {gBattleAnimSpriteGfx_TealAlert, 0x0200, ANIM_TAG_TEAL_ALERT},
     {gBattleAnimSpriteGfx_OpeningEye, 0x0800, ANIM_TAG_OPENING_EYE},
@@ -1324,7 +1369,11 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Spiral, 0x0800, ANIM_TAG_SPIRAL},
     {gBattleAnimSpriteGfx_SnoreZ, 0x0200, ANIM_TAG_SNORE_Z},
     {gBattleAnimSpriteGfx_Explosion, 0x0800, ANIM_TAG_EXPLOSION},
+    #if NEW_CURSE_NAIL_PARTICLE
+    {gBattleAnimSpriteGfx_NewNail, 0x0400, ANIM_TAG_NAIL},
+    #else
     {gBattleAnimSpriteGfx_Nail, 0x0400, ANIM_TAG_NAIL},
+    #endif
     {gBattleAnimSpriteGfx_GhostlySpirit, 0x0200, ANIM_TAG_GHOSTLY_SPIRIT},
     {gBattleAnimSpriteGfx_WarmRock, 0x0a80, ANIM_TAG_WARM_ROCK},
     {gBattleAnimSpriteGfx_BreakingEgg, 0x0600, ANIM_TAG_BREAKING_EGG},
@@ -1351,7 +1400,11 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Roots, 0x0800, ANIM_TAG_ROOTS},
     {gBattleAnimSpriteGfx_ItemBag, 0x0200, ANIM_TAG_ITEM_BAG},
     {gBattleAnimSpriteGfx_JaggedMusicNote, 0x0400, ANIM_TAG_JAGGED_MUSIC_NOTE},
+    #if NEW_BATON_PASS_BALL_PARTICLE
+    {gBattleAnimSpriteGfx_NewPokeball, 0x0080, ANIM_TAG_POKEBALL},
+    #else
     {gBattleAnimSpriteGfx_Pokeball, 0x0080, ANIM_TAG_POKEBALL},
+    #endif
     {gBattleAnimSpriteGfx_Spotlight, 0x0800, ANIM_TAG_SPOTLIGHT},
     {gBattleAnimSpriteGfx_LetterZ, 0x0200, ANIM_TAG_LETTER_Z},
     {gBattleAnimSpriteGfx_RapidSpin, 0x0300, ANIM_TAG_RAPID_SPIN},
@@ -1366,7 +1419,11 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_PinkPetal, 0x0080, ANIM_TAG_PINK_PETAL},
     {gBattleAnimSpriteGfx_PainSplit, 0x0180, ANIM_TAG_PAIN_SPLIT},
     {gBattleAnimSpriteGfx_Confetti, 0x0180, ANIM_TAG_CONFETTI},
+    #if NEW_MORNING_SUN_STAR_PARTICLE
+    {gBattleAnimSpriteGfx_NewGreenStar, 0x0200, ANIM_TAG_GREEN_STAR},
+    #else
     {gBattleAnimSpriteGfx_GreenStar, 0x0200, ANIM_TAG_GREEN_STAR},
+    #endif
     {gBattleAnimSpriteGfx_PinkCloud, 0x0200, ANIM_TAG_PINK_CLOUD},
     {gBattleAnimSpriteGfx_SweatDrop, 0x0020, ANIM_TAG_SWEAT_DROP},
     {gBattleAnimSpriteGfx_GuardRing, 0x0400, ANIM_TAG_GUARD_RING},
@@ -1414,6 +1471,99 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Slash, 0x0800, ANIM_TAG_SLASH_2},
     {gBattleAnimSpriteGfx_SlamHit, 0x1000, ANIM_TAG_WHIP_HIT},
     {gBattleAnimSpriteGfx_GoldRing, 0x0100, ANIM_TAG_BLUE_RING_2},
+    {gBattleAnimSpriteGfx_WhiteStreak, 0x0200, ANIM_TAG_WHITE_STREAK},
+    {gBattleAnimSpriteGfx_PurpleJab, 0x0100, ANIM_TAG_PURPLE_JAB},
+    {gBattleAnimSpriteGfx_Spikes, 0x0080, ANIM_TAG_TOXIC_SPIKES},
+    {gBattleAnimSpriteGfx_EnergyBall, 0x0200, ANIM_TAG_ENERGY_BALL},
+    {gBattleAnimSpriteGfx_SeedBrown, 0x0080, ANIM_TAG_SEED_BROWN},
+    {gBattleAnimSpriteGfx_Feint, 0x0800, ANIM_TAG_FEINT},
+    {gBattleAnimSpriteGfx_MegaStone, 0x800, ANIM_TAG_MEGA_STONE},
+    {gBattleAnimSpriteGfx_MegaSymbol, 0x0200, ANIM_TAG_MEGA_SYMBOL},
+    {gBattleAnimSpriteGfx_MegaParticles, 0x0180, ANIM_TAG_MEGA_PARTICLES},
+    {gBattleAnimSpriteGfx_TrumpCard, 0x0180, ANIM_TAG_TRUMP_CARD},
+    {gBattleAnimSpriteGfx_TrumpCardParticles, 0x0060, ANIM_TAG_TRUMP_CARD_PARTICLES},
+    {gBattleAnimSpriteGfx_Accupressure, 0x0200, ANIM_TAG_ACCUPRESSURE},
+    {gBattleAnimSpriteGfx_WringOut, 0x0200, ANIM_TAG_WRING_OUT},
+    {gBattleAnimSpriteGfx_ColoredOrbs, 0x0300, ANIM_TAG_COLORED_ORBS},
+    {gBattleAnimSpriteGfx_WorrySeed, 0x0080, ANIM_TAG_WORRY_SEED},
+    {gBattleAnimSpriteGfx_SmallCloud, 0x0080, ANIM_TAG_SMALL_CLOUD},
+    {gBattleAnimSpriteGfx_AttackOrder, 0x0480, ANIM_TAG_ATTACK_ORDER},
+    {gBattleAnimSpriteGfx_DragonPulse, 0x0100, ANIM_TAG_DRAGON_PULSE},
+    {gBattleAnimSpriteGfx_WoodHammer, 0x0C00, ANIM_TAG_WOOD_HAMMER},
+    {gBattleAnimSpriteGfx_PsychoCut, 0x0200, ANIM_TAG_PSYCHO_CUT},
+    {gBattleAnimSpriteGfx_PowerGem, 0x0080, ANIM_TAG_POWER_GEM},
+    {gBattleAnimSpriteGfx_StoneEdge, 0x0A00, ANIM_TAG_STONE_EDGE},
+    {gBattleAnimSpriteGfx_StealthRock, 0x0080, ANIM_TAG_STEALTH_ROCK},
+    {gBattleAnimSpriteGfx_PoisonJab, 0x0080, ANIM_TAG_POISON_JAB},
+    {gBattleAnimSpriteGfx_PoisonBubble, 0x0180, ANIM_TAG_GREEN_POISON_BUBBLE},
+    {gBattleAnimSpriteGfx_FlashCannonBall, 0x200, ANIM_TAG_FLASH_CANNON_BALL},
+    {gBattleAnimSpriteGfx_WaterGun, 0x180, ANIM_TAG_WATER_GUN},
+    {gBattleAnimSpriteGfx_Punishment, 0xa00, ANIM_TAG_PUNISHMENT_BLADES},
+    {gBattleAnimSpriteGfx_QuickGuard, 0x200, ANIM_TAG_QUICK_GUARD_HAND},
+    {gBattleAnimSpriteGfx_ShellRight, 0x800, ANIM_TAG_SHELL_RIGHT},
+    {gBattleAnimSpriteGfx_ShellLeft, 0x800, ANIM_TAG_SHELL_LEFT},
+    {gBattleAnimSpriteGfx_RazorShell, 0x200, ANIM_TAG_RAZOR_SHELL},
+    {gBattleAnimSpriteGfx_HydroPump, 0x200, ANIM_TAG_HYDRO_PUMP},
+    {gBattleAnimSpriteGfx_Brine, 0xc00, ANIM_TAG_BRINE},
+    {gBattleAnimSpriteGfx_Gear, 0x200, ANIM_TAG_GEAR},
+    {gBattleAnimSpriteGfx_AssuranceHand, 0x200, ANIM_TAG_ASSURANCE_HAND},
+    {gBattleAnimSpriteGfx_AcupressureFinger, 0x200, ANIM_TAG_ACUPRESSURE_FINGER},
+    {gBattleAnimSpriteGfx_Fishies, 0x480, ANIM_TAG_WISHIWASHI_FISH},
+    {gBattleAnimSpriteGfx_ZygardeHexes, 0x480, ANIM_TAG_ZYGARDE_HEXES},
+    {gBattleAnimSpriteGfx_AuraSphere, 0x200, ANIM_TAG_AURA_SPHERE},
+    {gBattleAnimSpriteGfx_OmegaStone, 0x800, ANIM_TAG_OMEGA_STONE},
+    {gBattleAnimSpriteGfx_AlphaStone, 0x800, ANIM_TAG_ALPHA_STONE},
+    {gBattleAnimSpriteGfx_BerryNormal, 0x400, ANIM_TAG_BERRY_NORMAL},
+    {gBattleAnimSpriteGfx_BerryEaten, 0x200, ANIM_TAG_BERRY_EATEN},
+    {gBattleAnimSpriteGfx_PurpleDrake, 0x800, ANIM_TAG_DRAGON_ASCENT},
+    {gBattleAnimSpriteGfx_PinkDiamond, 0x40, ANIM_TAG_PINK_DIAMOND},
+    {gBattleAnimSpriteGfx_SteamEruption, 0xa00, ANIM_TAG_STEAM_ERUPTION},
+    {gBattleAnimSpriteGfx_Confide, 0x800, ANIM_TAG_CONFIDE},
+    {gBattleAnimSpriteGfx_Arrows, 0x480, ANIM_TAG_VERTICAL_HEX},
+    {NULL, 0x0, ANIM_TAG_UNAVAILABLE_1},
+    {NULL, 0x0, ANIM_TAG_UNAVAILABLE_2},
+    {gBattleAnimSpriteGfx_PowerTrick, 0x800, ANIM_TAG_POWER_TRICK},
+    {gBattleAnimSpriteGfx_ChainLink, 0x200, ANIM_TAG_CHAIN_LINK},
+    {gBattleAnimSpriteGfx_Anchor, 0x200, ANIM_TAG_ANCHOR},
+    {gBattleAnimSpriteGfx_HorseshoeFist, 0x800, ANIM_TAG_HORSESHOE_SIDE_FIST},
+    {gBattleAnimSpriteGfx_PurpleDrake, 0x800, ANIM_TAG_DRAGON_ASCENT_FOE},
+    {gBattleAnimSpriteGfx_CraftyShield, 0x80, ANIM_TAG_CRAFTY_SHIELD},
+    {gBattleAnimSpriteGfx_BlacephalonHead, 0x200, ANIM_TAG_BLACEPHALON_HEAD},
+    {gBattleAnimSpriteGfx_FairyLockChains, 0x400, ANIM_TAG_FAIRY_LOCK_CHAINS},
+    {gBattleAnimSpriteGfx_LightningRain, 0x700, ANIM_TAG_IONS},
+    {gBattleAnimSpriteGfx_Chop, 0x200, ANIM_TAG_CHOP},
+    {gBattleAnimSpriteGfx_HeartStamp, 0x400, ANIM_TAG_HEART_STAMP},
+    {gBattleAnimSpriteGfx_HornLeech, 0x200, ANIM_TAG_HORN_LEECH},
+    {gBattleAnimSpriteGfx_Steamroller, 0x800, ANIM_TAG_STEAMROLLER},
+    {gBattleAnimSpriteGfx_HoopaHand, 0x80, ANIM_TAG_HOOPA_HAND},
+    {gBattleAnimSpriteGfx_HoopaRing, 0x200, ANIM_TAG_HOOPA_RING},
+    {gBattleAnimSpriteGfx_MetalBits, 0x140, ANIM_TAG_METAL_BITS},
+    {gBattleAnimSpriteGfx_RocksSmall, 0x140, ANIM_TAG_SMALL_ROCK},
+    {gBattleAnimSpriteGfx_SpiritShackleArrow, 0x200, ANIM_TAG_SPIRIT_ARROW},
+    {gBattleAnimSpriteGfx_NecrozmaStar, 0x200, ANIM_TAG_ULTRA_BURST_SYMBOL},
+    {gBattleAnimSpriteGfx_ZMoveSymbol, 0x800, ANIM_TAG_Z_MOVE_SYMBOL},
+    {gBattleAnimSpriteGfx_BigRock, 0x800, ANIM_TAG_REALLY_BIG_ROCK},
+    {gBattleAnimSpriteGfx_Cacoon, 0x800, ANIM_TAG_COCOON},
+    {gBattleAnimSpriteGfx_Drill, 0x800, ANIM_TAG_CORKSCREW},
+    {gBattleAnimSpriteGfx_GigavoltHavocSpear, 0x800, ANIM_TAG_HAVOC_SPEAR},
+    {gBattleAnimSpriteGfx_PurpleDrake, 0x800, ANIM_TAG_PURPLE_DRAKE},
+    {gBattleAnimSpriteGfx_MudBomb, 0x800, ANIM_TAG_MUD_BOMB},
+    {gBattleAnimSpriteGfx_Branch, 0x200, ANIM_TAG_BRANCH},
+    {gBattleAnimSpriteGfx_Apple, 0x200, ANIM_TAG_APPLE},
+    {gBattleAnimSpriteGfx_Obstruct, 0x200, ANIM_TAG_OBSTRUCT_CROSS},
+    {gBattleAnimSpriteGfx_PoisonColumn, 0x2000, ANIM_TAG_POISON_COLUMN},
+    {gBattleAnimSpriteGfx_PoisonColumn, 0x2000, ANIM_TAG_GARBAGE_COLUMN},
+    {gBattleAnimSpriteGfx_LargeSpike, 0x1000, ANIM_TAG_LARGE_SPIKE},
+    {gBattleAnimSpriteGfx_DragonPulseRing, 0x200, ANIM_TAG_DRAGON_PULSE_RING},
+    {gBattleAnimSpriteGfx_StonePillar, 0x2000, ANIM_TAG_STONE_PILLAR},
+    {gBattleAnimSpriteGfx_Mushroom, 0x800, ANIM_TAG_MUSHROOM},
+    {gBattleAnimSpriteGfx_GoldenApple, 0x800, ANIM_TAG_GOLDEN_APPLE},
+    {gBattleAnimSpriteGfx_IceRock, 0x2800, ANIM_TAG_ICE_ROCK},
+    {gBattleAnimSpriteGfx_Tornado, 0x1800, ANIM_TAG_TORNADO},
+    {gBattleAnimSpriteGfx_StraightBeam, 0x180, ANIM_TAG_STRAIGHT_BEAM},
+    {gBattleAnimSpriteGfx_DreepyMissile, 0x200, ANIM_TAG_DREEPY},
+    {gBattleAnimSpriteGfx_IceRock, 0x1800, ANIM_TAG_ICE_ROCK_SINGLE},
+    {gBattleAnimSpriteGfx_StonePillar, 0x1800, ANIM_TAG_STONE_PILLAR_MULTI},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1423,8 +1573,16 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Pencil, ANIM_TAG_PENCIL},
     {gBattleAnimSpritePal_AirWave, ANIM_TAG_AIR_WAVE},
     {gBattleAnimSpritePal_Orb, ANIM_TAG_ORB},
+    #if NEW_SWORD_PARTICLE
+    {gBattleAnimSpritePal_NewSword, ANIM_TAG_SWORD},
+    #else
     {gBattleAnimSpritePal_Sword, ANIM_TAG_SWORD},
+    #endif
+    #if NEW_LEECH_SEED_PARTICLE
+    {gBattleAnimSpritePal_NewLeechSeed, ANIM_TAG_SEED},
+    #else
     {gBattleAnimSpritePal_Seed, ANIM_TAG_SEED},
+    #endif
     {gBattleAnimSpritePal_Explosion6, ANIM_TAG_EXPLOSION_6},
     {gBattleAnimSpritePal_PinkOrb, ANIM_TAG_PINK_ORB},
     {gBattleAnimSpritePal_Gust, ANIM_TAG_GUST},
@@ -1438,7 +1596,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_BlackSmoke, ANIM_TAG_BLACK_BALL},
     {gBattleAnimSpritePal_Conversion, ANIM_TAG_CONVERSION},
     {gBattleAnimSpritePal_Glass, ANIM_TAG_GLASS},
+    #if NEW_HORN_ATTACK_PARTICLE
+    {gBattleAnimSpritePal_NewHornHit, ANIM_TAG_HORN_HIT},
+    #else
     {gBattleAnimSpritePal_HornHit, ANIM_TAG_HORN_HIT},
+    #endif
     {gBattleAnimSpritePal_Hit, ANIM_TAG_HIT},
     {gBattleAnimSpritePal_Hit2, ANIM_TAG_HIT_2},
     {gBattleAnimSpritePal_BlueShards, ANIM_TAG_BLUE_SHARDS},
@@ -1447,7 +1609,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_HitDuplicate, ANIM_TAG_HIT_DUPLICATE},
     {gBattleAnimSpritePal_Leer, ANIM_TAG_LEER},
     {gBattleAnimSpritePal_BlueBurst, ANIM_TAG_BLUE_BURST},
+    #if NEW_EMBER_PARTICLES
+    {gBattleAnimSpritePal_NewEmbers, ANIM_TAG_SMALL_EMBER},
+    #else
     {gBattleAnimSpritePal_SmallEmber, ANIM_TAG_SMALL_EMBER},
+    #endif
     {gBattleAnimSpritePal_GraySmoke, ANIM_TAG_GRAY_SMOKE},
     {gBattleAnimSpritePal_BlueStar, ANIM_TAG_BLUE_STAR},
     {gBattleAnimSpritePal_BubbleBurst, ANIM_TAG_BUBBLE_BURST},
@@ -1476,12 +1642,20 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_HumanoidFoot, ANIM_TAG_RED_FIST},
     {gBattleAnimSpritePal_SlamHit, ANIM_TAG_SLAM_HIT},
     {gBattleAnimSpritePal_Ring, ANIM_TAG_RING},
+    #if NEW_ROCKS_PARTICLE
+    {gBattleAnimSpritePal_NewRocks, ANIM_TAG_ROCKS},
+    #else
     {gBattleAnimSpritePal_Rocks, ANIM_TAG_ROCKS},
+    #endif
     {gBattleAnimSpritePal_Z, ANIM_TAG_Z},
     {gBattleAnimSpritePal_YellowUnk2, ANIM_TAG_YELLOW_UNK_2},
     {gBattleAnimSpritePal_AirSlash, ANIM_TAG_AIR_SLASH},
     {gBattleAnimSpritePal_SpinningGreenOrbs, ANIM_TAG_SPINNING_GREEN_ORBS},
+    #if NEW_LEAF_PARTICLE
+    {gBattleAnimSpritePal_NewLeaf, ANIM_TAG_LEAF},
+    #else
     {gBattleAnimSpritePal_Leaf, ANIM_TAG_LEAF},
+    #endif
     {gBattleAnimSpritePal_Finger, ANIM_TAG_FINGER},
     {gBattleAnimSpritePal_PoisonPowder, ANIM_TAG_POISON_POWDER},
     {gBattleAnimSpritePal_BrownTriangle, ANIM_TAG_BROWN_TRIANGLE},
@@ -1545,7 +1719,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Shock2, ANIM_TAG_SHOCK_2},
     {gBattleAnimSpritePal_ClosingEye2, ANIM_TAG_CLOSING_EYE_2},
     {gBattleAnimSpritePal_MetalBall, ANIM_TAG_METAL_BALL},
+    #if NEW_SUBSTITUTE_PARTICLE
+    {gBattleAnimSpritePal_NewSubstituteFront, ANIM_TAG_MONSTER_DOLL},
+    #else
     {gBattleAnimSpritePal_MonsterDoll, ANIM_TAG_MONSTER_DOLL},
+    #endif
     {gBattleAnimSpritePal_Whirlwind, ANIM_TAG_WHIRLWIND},
     {gBattleAnimSpritePal_Whirlwind, ANIM_TAG_WHIRLWIND_2},
     {gBattleAnimSpritePal_Explosion4, ANIM_TAG_EXPLOSION_4},
@@ -1553,15 +1731,27 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Tongue, ANIM_TAG_TONGUE},
     {gBattleAnimSpritePal_Smoke, ANIM_TAG_SMOKE},
     {gBattleAnimSpritePal_Smoke, ANIM_TAG_SMOKE_2},
+    #if NEW_IMPACT_PALETTE
+    {gBattleAnimSpritePal_NewImpact, ANIM_TAG_IMPACT},
+    #else
     {gBattleAnimSpritePal_Impact, ANIM_TAG_IMPACT},
+    #endif
     {gBattleAnimSpritePal_CircleImpact, ANIM_TAG_CIRCLE_IMPACT},
     {gBattleAnimSpritePal_Impact, ANIM_TAG_SCRATCH},
     {gBattleAnimSpritePal_Impact, ANIM_TAG_CUT},
+    #if NEW_TEETH_PARTICLE
+    {gBattleAnimSpritePal_NewTeeth, ANIM_TAG_SHARP_TEETH},
+    #else
     {gBattleAnimSpritePal_SharpTeeth, ANIM_TAG_SHARP_TEETH},
+    #endif
     {gBattleAnimSpritePal_RainbowRings, ANIM_TAG_RAINBOW_RINGS},
     {gBattleAnimSpritePal_IceCrystals, ANIM_TAG_ICE_CRYSTALS},
     {gBattleAnimSpritePal_IceCrystals, ANIM_TAG_ICE_SPIKES},
+    #if NEW_HANDS_FEET_PARTICLE
+    {gBattleAnimSpritePal_NewHandsAndFeet, ANIM_TAG_HANDS_AND_FEET},
+    #else
     {gBattleAnimSpritePal_HandsAndFeet, ANIM_TAG_HANDS_AND_FEET},
+    #endif
     {gBattleAnimSpritePal_MistCloud, ANIM_TAG_MIST_CLOUD},
     {gBattleAnimSpritePal_SharpTeeth, ANIM_TAG_CLAMP},
     {gBattleAnimSpritePal_RainDrops, ANIM_TAG_BUBBLE},
@@ -1570,11 +1760,19 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_WaterImpact, ANIM_TAG_WATER_ORB},
     {gBattleAnimSpritePal_PoisonBubble, ANIM_TAG_POISON_BUBBLE},
     {gBattleAnimSpritePal_PoisonBubble, ANIM_TAG_TOXIC_BUBBLE},
+    #if NEW_SPIKES_PARTICLE
+    {gBattleAnimSpritePal_NewSpikes, ANIM_TAG_SPIKES},
+    #else
     {gBattleAnimSpritePal_Spikes, ANIM_TAG_SPIKES},
+    #endif
     {gBattleAnimSpritePal_HornHit2, ANIM_TAG_HORN_HIT_2},
     {gBattleAnimSpritePal_AirWave2, ANIM_TAG_AIR_WAVE_2},
     {gBattleAnimSpritePal_SmallBubbles, ANIM_TAG_SMALL_BUBBLES},
+    #if NEW_FLY_BUBBLE_PARTICLE
+    {gBattleAnimSpritePal_NewFly, ANIM_TAG_ROUND_SHADOW},
+    #else
     {gBattleAnimSpritePal_RoundShadow, ANIM_TAG_ROUND_SHADOW},
+    #endif
     {gBattleAnimSpritePal_Sunlight, ANIM_TAG_SUNLIGHT},
     {gBattleAnimSpritePal_Spore, ANIM_TAG_SPORE},
     {gBattleAnimSpritePal_Flower, ANIM_TAG_FLOWER},
@@ -1605,7 +1803,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_FocusEnergy, ANIM_TAG_FOCUS_ENERGY},
     {gBattleAnimSpritePal_SphereToCube, ANIM_TAG_SPHERE_TO_CUBE},
     {gBattleAnimSpritePal_Tendrils, ANIM_TAG_TENDRILS},
+    #if NEW_MEAN_LOOK_PARTICLE
+    {gBattleAnimSpritePal_NewEye, ANIM_TAG_EYE},
+    #else
     {gBattleAnimSpritePal_Eye, ANIM_TAG_EYE},
+    #endif
     {gBattleAnimSpritePal_WhiteShadow, ANIM_TAG_WHITE_SHADOW},
     {gBattleAnimSpritePal_TealAlert, ANIM_TAG_TEAL_ALERT},
     {gBattleAnimSpritePal_OpeningEye, ANIM_TAG_OPENING_EYE},
@@ -1644,7 +1846,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Roots, ANIM_TAG_ROOTS},
     {gBattleAnimSpritePal_ItemBag, ANIM_TAG_ITEM_BAG},
     {gBattleAnimSpritePal_JaggedMusicNote, ANIM_TAG_JAGGED_MUSIC_NOTE},
+    #if NEW_BATON_PASS_BALL_PARTICLE
+    {gBattleAnimSpritePal_NewPokeball, ANIM_TAG_POKEBALL},
+    #else
     {gBattleAnimSpritePal_Pokeball, ANIM_TAG_POKEBALL},
+    #endif
     {gBattleAnimSpritePal_Pokeball, ANIM_TAG_SPOTLIGHT},
     {gBattleAnimSpritePal_LetterZ, ANIM_TAG_LETTER_Z},
     {gBattleAnimSpritePal_RapidSpin, ANIM_TAG_RAPID_SPIN},
@@ -1659,7 +1865,11 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_PinkPetal, ANIM_TAG_PINK_PETAL},
     {gBattleAnimSpritePal_PainSplit, ANIM_TAG_PAIN_SPLIT},
     {gBattleAnimSpritePal_Confetti, ANIM_TAG_CONFETTI},
+    #if NEW_MORNING_SUN_STAR_PARTICLE
+    {gBattleAnimSpritePal_NewGreenStar, ANIM_TAG_GREEN_STAR},
+    #else
     {gBattleAnimSpritePal_GreenStar, ANIM_TAG_GREEN_STAR},
+    #endif
     {gBattleAnimSpritePal_PinkCloud, ANIM_TAG_PINK_CLOUD},
     {gBattleAnimSpritePal_SweatDrop, ANIM_TAG_SWEAT_DROP},
     {gBattleAnimSpritePal_GuardRing, ANIM_TAG_GUARD_RING},
@@ -1707,6 +1917,100 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Slash2, ANIM_TAG_SLASH_2},
     {gBattleAnimSpritePal_WhipHit, ANIM_TAG_WHIP_HIT},
     {gBattleAnimSpritePal_BlueRing2, ANIM_TAG_BLUE_RING_2},
+    {gBattleAnimSpritePal_WhiteStreak, ANIM_TAG_WHITE_STREAK},
+    {gBattleAnimSpritePal_PurpleJab, ANIM_TAG_PURPLE_JAB},
+    //new particles
+    {gBattleAnimSpritePal_ToxicSpikes, ANIM_TAG_TOXIC_SPIKES},
+    {gBattleAnimSpritePal_EnergyBall, ANIM_TAG_ENERGY_BALL},
+    {gBattleAnimSpritePal_SeedBrown, ANIM_TAG_SEED_BROWN},
+    {gBattleAnimSpritePal_Feint, ANIM_TAG_FEINT},
+    {gBattleAnimSpritePal_MegaStone, ANIM_TAG_MEGA_STONE},
+    {gBattleAnimSpritePal_MegaSymbol, ANIM_TAG_MEGA_SYMBOL},
+    {gBattleAnimSpritePal_MegaParticles, ANIM_TAG_MEGA_PARTICLES},
+    {gBattleAnimSpritePal_TrumpCard, ANIM_TAG_TRUMP_CARD},
+    {gBattleAnimSpritePal_TrumpCardParticles, ANIM_TAG_TRUMP_CARD_PARTICLES},
+    {gBattleAnimSpritePal_Accupressure, ANIM_TAG_ACCUPRESSURE},
+    {gBattleAnimSpritePal_WringOut, ANIM_TAG_WRING_OUT},
+    {gBattleAnimSpritePal_ColoredOrbs, ANIM_TAG_COLORED_ORBS},
+    {gBattleAnimSpritePal_WorrySeed, ANIM_TAG_WORRY_SEED},
+    {gBattleAnimSpritePal_SmallCloud, ANIM_TAG_SMALL_CLOUD},
+    {gBattleAnimSpritePal_AttackOrder, ANIM_TAG_ATTACK_ORDER},
+    {gBattleAnimSpritePal_DragonPulse, ANIM_TAG_DRAGON_PULSE},
+    {gBattleAnimSpritePal_WoodHammer, ANIM_TAG_WOOD_HAMMER},
+    {gBattleAnimSpritePal_PsychoCut, ANIM_TAG_PSYCHO_CUT},
+    {gBattleAnimSpritePal_PowerGem, ANIM_TAG_POWER_GEM},
+    {gBattleAnimSpritePal_StoneEdge, ANIM_TAG_STONE_EDGE},
+    {gBattleAnimSpritePal_StealthRock, ANIM_TAG_STEALTH_ROCK},
+    {gBattleAnimSpritePal_PoisonJab, ANIM_TAG_POISON_JAB},
+    {gBattleAnimSpritePal_Vine, ANIM_TAG_GREEN_POISON_BUBBLE},
+    {gBattleAnimSpritePal_FlashCannonBall,	ANIM_TAG_FLASH_CANNON_BALL},
+    {gBattleAnimSpritePal_WaterGun,	ANIM_TAG_WATER_GUN},
+    {gBattleAnimSpritePal_Punishment,	ANIM_TAG_PUNISHMENT_BLADES},
+    {gBattleAnimSpritePal_QuickGuard,	ANIM_TAG_QUICK_GUARD_HAND},
+    {gBattleAnimSpritePal_ShellLeft,	ANIM_TAG_SHELL_RIGHT},
+    {gBattleAnimSpritePal_ShellLeft,	ANIM_TAG_SHELL_LEFT},
+    {gBattleAnimSpritePal_RazorShell,	ANIM_TAG_RAZOR_SHELL},
+    {gBattleAnimSpritePal_HydroPump,	ANIM_TAG_HYDRO_PUMP},
+    {gBattleAnimSpritePal_Brine,	ANIM_TAG_BRINE},
+    {gBattleAnimSpritePal_Gear,	ANIM_TAG_GEAR},
+    {gBattleAnimSpritePal_AssuranceHand,	ANIM_TAG_ASSURANCE_HAND},
+    {gBattleAnimSpritePal_AcupressureFinger,	ANIM_TAG_ACUPRESSURE_FINGER},
+    {gBattleAnimSpritePal_Fishies,	ANIM_TAG_WISHIWASHI_FISH},
+    {gBattleAnimSpritePal_ZygardeHexes,	ANIM_TAG_ZYGARDE_HEXES},
+    {gBattleAnimSpritePal_AuraSphere,	ANIM_TAG_AURA_SPHERE},
+    {gBattleAnimSpritePal_OmegaStone,	ANIM_TAG_OMEGA_STONE},
+    {gBattleAnimSpritePal_AlphaStone,	ANIM_TAG_ALPHA_STONE},
+    {gBattleAnimSpritePal_BerryNormal,	ANIM_TAG_BERRY_NORMAL},
+    {gBattleAnimSpritePal_SpacialRendSlices,	ANIM_TAG_BERRY_EATEN},
+    {gBattleAnimSpritePal_GreenDrake,	ANIM_TAG_DRAGON_ASCENT},
+    {gBattleAnimSpritePal_PinkDiamond,	ANIM_TAG_PINK_DIAMOND},
+    {gBattleAnimSpritePal_SteamEruption,	ANIM_TAG_STEAM_ERUPTION},
+    {gBattleAnimSpritePal_Confide,	ANIM_TAG_CONFIDE},
+    {gBattleAnimSpritePal_FusionFlare,	ANIM_TAG_VERTICAL_HEX},
+    {NULL, ANIM_TAG_UNAVAILABLE_1},
+    {NULL, ANIM_TAG_UNAVAILABLE_2},
+    {gBattleAnimSpritePal_PowerTrick,	ANIM_TAG_POWER_TRICK},
+    {gBattleAnimSpritePal_ChainLink,	ANIM_TAG_CHAIN_LINK},
+    {gBattleAnimSpritePal_NaturalGiftRing,	ANIM_TAG_ANCHOR},
+    {gBattleAnimSpritePal_HorseshoeFist,	ANIM_TAG_HORSESHOE_SIDE_FIST},
+    {gBattleAnimSpritePal_AvalancheRocks,	ANIM_TAG_DRAGON_ASCENT_FOE},
+    {gBattleAnimSpritePal_CraftyShield,	ANIM_TAG_CRAFTY_SHIELD},
+    {gBattleAnimSpritePal_BlacephalonHead,	ANIM_TAG_BLACEPHALON_HEAD},
+    {gBattleAnimSpritePal_DracoMeteor,	ANIM_TAG_FAIRY_LOCK_CHAINS},
+    {gBattleAnimSpritePal_LightningRain, ANIM_TAG_IONS},
+    {gBattleAnimSpritePal_Chop, ANIM_TAG_CHOP},
+    [ANIM_TAG_HEART_STAMP - ANIM_SPRITES_START] = {gBattleAnimSpritePal_HeartStamp, ANIM_TAG_HEART_STAMP},
+    {gBattleAnimSpritePal_HornLeech,	ANIM_TAG_HORN_LEECH},
+    {gBattleAnimSpritePal_Steamroller, ANIM_TAG_STEAMROLLER},
+    {gBattleAnimSpritePal_HoopaHand,	ANIM_TAG_HOOPA_HAND},
+    {gBattleAnimSpritePal_HoopaRing, ANIM_TAG_HOOPA_RING},
+    {gBattleAnimSpritePal_BlueFlare,	ANIM_TAG_METAL_BITS},
+    {gBattleAnimSpritePal_NewRocks,	ANIM_TAG_SMALL_ROCK},
+    {gBattleAnimSpritePal_SpiritShackleArrow, ANIM_TAG_SPIRIT_ARROW},
+    {gBattleAnimSpritePal_NecrozmaStar,	ANIM_TAG_ULTRA_BURST_SYMBOL},
+    {gBattleAnimSpritePal_ZMoveSymbol, ANIM_TAG_Z_MOVE_SYMBOL},
+    {gBattleAnimSpritePal_BigRock, ANIM_TAG_REALLY_BIG_ROCK},
+    {gBattleAnimSpritePal_Cacoon,	ANIM_TAG_COCOON},
+    {gBattleAnimSpritePal_Drill,	ANIM_TAG_CORKSCREW},
+    {gBattleAnimSpritePal_GigavoltHavocSpear, ANIM_TAG_HAVOC_SPEAR},
+    {gBattleAnimSpritePal_PurpleDrake, ANIM_TAG_PURPLE_DRAKE},
+    {gBattleAnimSpritePal_MudBomb, ANIM_TAG_MUD_BOMB},
+    {gBattleAnimSpritePal_Branch, ANIM_TAG_BRANCH},
+    {gBattleAnimSpritePal_Apple, ANIM_TAG_APPLE},
+    {gBattleAnimSpritePal_Obstruct, ANIM_TAG_OBSTRUCT_CROSS},
+    {gBattleAnimSpritePal_PoisonColumn, ANIM_TAG_POISON_COLUMN},
+    {gBattleAnimSpritePal_GarbagePoisonPillar, ANIM_TAG_GARBAGE_COLUMN},
+    {gBattleAnimSpritePal_LargeSpike, ANIM_TAG_LARGE_SPIKE},
+    {gBattleAnimSpritePal_DragonPulseRing, ANIM_TAG_DRAGON_PULSE_RING},
+    {gBattleAnimSpritePal_StonePillar, ANIM_TAG_STONE_PILLAR},
+    {gBattleAnimSpritePal_Mushroom, ANIM_TAG_MUSHROOM},
+    {gBattleAnimSpritePal_GoldenApple, ANIM_TAG_GOLDEN_APPLE},
+    {gBattleAnimSpritePal_IceRock, ANIM_TAG_ICE_ROCK},
+    {gBattleAnimSpritePal_Tornado, ANIM_TAG_TORNADO},
+    {gBattleAnimSpritePal_StraightBeam, ANIM_TAG_STRAIGHT_BEAM},
+    {gBattleAnimSpritePal_DreepyMissile, ANIM_TAG_DREEPY},
+    {gBattleAnimSpritePal_IceRock, ANIM_TAG_ICE_ROCK_SINGLE},
+    {gBattleAnimSpritePal_StonePillar, ANIM_TAG_STONE_PILLAR_MULTI},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
@@ -1738,6 +2042,58 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_SOLARBEAM_OPPONENT] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_Solarbeam, gBattleAnimBgTilemap_ImpactOpponent},
     [BG_SOLARBEAM_PLAYER] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_Solarbeam, gBattleAnimBgTilemap_ImpactPlayer},
     [BG_SOLARBEAM_CONTESTS] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_Solarbeam, gBattleAnimBgTilemap_ImpactContests},
+    //new bgs
+    [BG_MAGMA_STORM] = {gBattleAnimBgImage_InAir, gBattleAnimBgPalette_MagmaStorm, gBattleAnimBgTilemap_InAir},
+    [BG_GIGA_IMPACT_OPPONENT] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_ImpactOpponent},
+    [BG_GIGA_IMPACT_PLAYER] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_ImpactPlayer},
+    [BG_GIGA_IMPACT_CONTEST] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_GigaImpact, gBattleAnimBgTilemap_ImpactContests},
+    [BG_TRICK_ROOM] = {gBattleAnimBgImage_TrickRoom, gBattleAnimBgPalette_TrickRoom, gBattleAnimBgTilemap_TrickRoom},
+    [BG_ROCK_WRECKER] = {gBattleAnimBgImage_RockWrecker, gBattleAnimBgPalette_RockWrecker, gBattleAnimBgTilemap_RockWrecker},
+    [BG_SPACIAL_REND_ON_OPPONENT] = {gBattleAnimBgImage_SpacialRendOpponent, gBattleAnimBgPalette_SpacialRendOpponent, gBattleAnimBgTilemap_SpacialRendOpponent},
+    [BG_SPACIAL_REND_ON_PLAYER] = {gBattleAnimBgImage_SpacialRendPlayer, gBattleAnimBgPalette_SpacialRendPlayer, gBattleAnimBgTilemap_SpacialRendPlayer},
+    [BG_DARK_VOID] = {gBattleAnimBgImage_DarkVoid, gBattleAnimBgPalette_DarkVoid, gBattleAnimBgTilemap_DarkVoid},
+    [BG_WATER] = {gBattleAnimBgImage_HydroPump, gBattleAnimBgPalette_HydroPump, gBattleAnimBgTilemap_HydroPump},
+    [BG_NIGHTMARE] = {gBattleAnimBgImage_Nightmare, gBattleAnimBgPalette_Nightmare, gBattleAnimBgTilemap_Nightmare},
+    [BG_LEAF_STORM] = {gBattleAnimBgImage_LeafStorm, gBattleAnimBgPalette_LeafStorm, gBattleAnimBgTilemap_LeafStorm},
+    [BG_FIRE] = {gBattleAnimBgImage_Fire1, gBattleAnimBgPalette_Fire1, gBattleAnimBgTilemap_Fire1},
+    [BG_FIRE_2] = {gBattleAnimBgImage_Fire1, gBattleAnimBgPalette_Fire2, gBattleAnimBgTilemap_Fire1},
+    [BG_WATER_2] = {gBattleAnimBgImage_Waterfall, gBattleAnimBgPalette_Waterfall, gBattleAnimBgTilemap_Waterfall},
+    [BG_POISON] = {gBattleAnimBgImage_Waterfall, gBattleAnimBgPalette_PoisonFalls, gBattleAnimBgTilemap_Waterfall},
+    [BG_AEROBLAST] = {gBattleAnimBgImage_Aeroblast, gBattleAnimBgPalette_Aeroblast, gBattleAnimBgTilemap_Aeroblast},
+    [BG_HIGH_SPEED] = {gBattleAnimBgImage_HighSpeed, gBattleAnimBgPalette_HighSpeed, gBattleAnimBgTilemap_HighSpeed},
+    [BG_ELECTRIC_TERRAIN] = {gBattleAnimBgImage_ElectricTerrain, gBattleAnimBgPalette_ElectricTerrain, gBattleAnimBgTilemap_ElectricTerrain},
+    [BG_GRASSY_TERRAIN] = {gBattleAnimBgImage_GrassyTerrain, gBattleAnimBgPalette_GrassyTerrain, gBattleAnimBgTilemap_GrassyTerrain},
+    [BG_MISTY_TERRAIN] = {gBattleAnimBgImage_MistyTerrain, gBattleAnimBgPalette_MistyTerrain, gBattleAnimBgTilemap_MistyTerrain},
+    [BG_PSYCHIC_TERRAIN] = {gBattleAnimBgImage_PsychicTerrain, gBattleAnimBgPalette_PsychicTerrain, gBattleAnimBgTilemap_PsychicTerrain},
+    [BG_FOCUS_BLAST] = {gBattleAnimBgImage_FocusBlast, gBattleAnimBgPalette_FocusBlast, gBattleAnimBgTilemap_FocusBlast},
+    [BG_GUNK_SHOT] = {gBattleAnimBgImage_FocusBlast, gBattleAnimBgPalette_GunkShot, gBattleAnimBgTilemap_FocusBlast},
+    [BG_HYDRO_CANNON] = {gBattleAnimBgImage_HydroCannon, gBattleAnimBgPalette_HydroCannon, gBattleAnimBgTilemap_HydroCannon},
+    [BG_WONDER_ROOM] = {gBattleAnimBgImage_TrickRoom, gBattleAnimBgPalette_WonderRoom, gBattleAnimBgTilemap_TrickRoom},
+    [BG_MAGIC_ROOM] = {gBattleAnimBgImage_TrickRoom, gBattleAnimBgPalette_MagicRoom, gBattleAnimBgTilemap_TrickRoom},
+    [BG_HYPERSPACE_FURY] = {gBattleAnimBgImage_Psychic, gBattleAnimBgPalette_HyperspaceFury, gBattleAnimBgTilemap_Psychic},
+    [BG_BOLT_STRIKE] = {gBattleAnimBgImage_BoltStrike, gBattleAnimBgPalette_BoltStrike, gBattleAnimBgTilemap_BoltStrike},
+    [BG_ZMOVE_ACTIVATE] = {gBattleAnimBgImage_ZMoveActivate, gBattleAnimBgPalette_ZMoveActivate, gBattleAnimBgTilemap_ZMoveActivate},
+    [BG_TECTONIC_RAGE] = {gBattleAnimBgImage_InAir, gBattleAnimBgPalette_TectonicRage, gBattleAnimBgTilemap_InAir},
+    [BG_BLUE_SKY_DAY] = {gBattleAnimBgImage_SkyDay, gBattleAnimBgPalette_SkyDay, gBattleAnimBgTilemap_SkyDay},
+    [BG_BLUE_SKY_AFTERNOON] = {gBattleAnimBgImage_SkyDay, gBattleAnimBgPalette_SkyAfternoon, gBattleAnimBgTilemap_SkyDay},
+    [BG_BLUE_SKY_NIGHT] = {gBattleAnimBgImage_SkyDay, gBattleAnimBgPalette_SkyNight, gBattleAnimBgTilemap_SkyDay},
+    [BG_ZMOVE_MOUNTAIN] = {gBattleAnimBgImage_ZMoveMountain, gBattleAnimBgPalette_ZMoveMountain, gBattleAnimBgTilemap_ZMoveMountain},
+    [BG_NEVERENDING_NIGHTMARE] = {gBattleAnimBgImage_NeverendingNightmare, gBattleAnimBgPalette_NeverendingNightmare, gBattleAnimBgTilemap_NeverendingNightmare},
+    [BG_WATER_PULSE] = {gBattleAnimBgImage_WaterPulse, gBattleAnimBgPalette_WaterPulse, gBattleAnimBgTilemap_WaterPulse},
+    [BG_INFERNO_OVERDRIVE] = {gBattleAnimBgImage_InfernoOverdrive, gBattleAnimBgPalette_InfernoOverdrive, gBattleAnimBgTilemap_InfernoOverdrive},
+    [BG_BLOOM_DOOM] = {gBattleAnimBgImage_BloomDoom, gBattleAnimBgPalette_BloomDoom, gBattleAnimBgTilemap_BloomDoom},
+    [BG_SHATTERED_PSYCHE] = {gBattleAnimBgImage_ShatteredPsyche, gBattleAnimBgPalette_ShatteredPsyche, gBattleAnimBgTilemap_ShatteredPsyche},
+    [BG_TWINKLE_TACKLE] = {gBattleAnimBgImage_TwinkleTackle, gBattleAnimBgPalette_TwinkleTackle, gBattleAnimBgTilemap_TwinkleTackle},
+    [BG_BLACKHOLE_ECLIPSE] = {gBattleAnimBgImage_BlackholeEclipse, gBattleAnimBgPalette_BlackholeEclipse, gBattleAnimBgTilemap_BlackholeEclipse},
+    [BG_SOULSTEALING_7STAR_STRIKE] = {gBattleAnimBgImage_SoulStealing7StarStrike, gBattleAnimBgPalette_SoulStealing7StarStrike, gBattleAnimBgTilemap_SoulStealing7StarStrike},
+    [BG_MALICIOUS_MOONSAULT] = {gBattleAnimBgImage_MaliciousMoonsault, gBattleAnimBgPalette_MaliciousMoonsault, gBattleAnimBgTilemap_MaliciousMoonsault},
+    [BG_CLANGOROUS_SOULBLAZE] = {gBattleAnimBgImage_ClangorousSoulblaze, gBattleAnimBgPalette_ClangorousSoulblaze, gBattleAnimBgTilemap_ClangorousSoulblaze},
+    [BG_SNUGGLE_FOREVER] = {gBattleAnimBgImage_SnuggleForever, gBattleAnimBgPalette_SnuggleForever, gBattleAnimBgTilemap_SnuggleForever},
+    [BG_MAX_LIGHTNING] = {gBattleAnimBgImage_MaxLightning, gBattleAnimBgPalette_MaxLightning, gBattleAnimBgTilemap_MaxLightning},
+    [BG_GARBAGE_FALLS] = {gBattleAnimBgImage_Waterfall, gBattleAnimBgPalette_GarbageFalls, gBattleAnimBgTilemap_Waterfall},
+    [BG_HYPER_BEAM] = {gBattleAnimBgImage_HydroCannon, gBattleAnimBgPalette_HyperBeam, gBattleAnimBgTilemap_HydroCannon},
+    [BG_DYNAMAX_CANNON] = {gBattleAnimBgImage_HydroCannon, gBattleAnimBgPalette_DynamaxCannon, gBattleAnimBgTilemap_HydroCannon},
+    [BG_AURA_SPHERE] = {gBattleAnimBgImage_FocusBlast, gBattleAnimBgPalette_AuraSphere, gBattleAnimBgTilemap_FocusBlast},
 };
 
 static void (* const sScriptCmdTable[])(void) =
@@ -1818,7 +2174,7 @@ void ClearBattleAnimationVars(void)
     sMonAnimTaskIdArray[1] = 0xFF;
     gAnimMoveTurn = 0;
     sAnimBackgroundFadeState = 0;
-    sAnimMoveIndex = 0;
+    gAnimMoveIndex = 0;
     gBattleAnimAttacker = 0;
     gBattleAnimTarget = 0;
     gAnimCustomPanning = 0;
@@ -1828,6 +2184,15 @@ void DoMoveAnim(u16 move)
 {
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gBattlerTarget;
+    // Make sure the anim target of moves hitting everyone is at the opposite side.
+    if (gBattleMoves[move].target & MOVE_TARGET_FOES_AND_ALLY && IsDoubleBattle())
+    {
+        while (GET_BATTLER_SIDE(gBattleAnimAttacker) == GET_BATTLER_SIDE(gBattleAnimTarget))
+        {
+            if (++gBattleAnimTarget >= MAX_BATTLERS_COUNT)
+                gBattleAnimTarget = 0;
+        }
+    }
     LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
 }
 
@@ -1854,9 +2219,9 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     }
 
     if (!isMoveAnim)
-        sAnimMoveIndex = 0;
+        gAnimMoveIndex = 0;
     else
-        sAnimMoveIndex = tableId;
+        gAnimMoveIndex = tableId;
 
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
@@ -2259,6 +2624,18 @@ static void ScriptCmd_monbg(void)
     sBattleAnimScriptPtr++;
     gAnimFramesToWait = 1;
     gAnimScriptCallback = WaitAnimFrameCount;
+}
+
+u8 GetAnimBattlerId(u8 wantedBattler)
+{
+    if (wantedBattler == ANIM_ATTACKER)
+        return gBattleAnimAttacker;
+    else if (wantedBattler == ANIM_TARGET)
+        return gBattleAnimTarget;
+    else if (wantedBattler == ANIM_ATK_PARTNER)
+        return BATTLE_PARTNER(gBattleAnimAttacker);
+    else
+        return BATTLE_PARTNER(gBattleAnimTarget);
 }
 
 bool8 IsBattlerSpriteVisible(u8 battlerId)

@@ -8,21 +8,15 @@
 
 static void unc_080B08A0(struct Sprite *);
 static void AnimSlideHandOrFootToTarget(struct Sprite *);
-static void AnimJumpKick(struct Sprite *);
-static void AnimBasicFistOrFoot(struct Sprite *);
 static void AnimFistOrFootRandomPos(struct Sprite *);
 static void AnimFistOrFootRandomPos_Step(struct Sprite *);
 static void AnimCrossChopHand(struct Sprite *);
 static void AnimCrossChopHand_Step(struct Sprite *);
 static void AnimSlidingKick(struct Sprite *);
 static void AnimSlidingKick_Step(struct Sprite *);
-static void AnimSpinningKickOrPunch(struct Sprite *);
-static void AnimStompFoot(struct Sprite *);
 static void AnimStompFoot_Step(struct Sprite *);
 static void AnimStompFoot_End(struct Sprite *);
-static void AnimDizzyPunchDuck(struct Sprite *);
 static void AnimBrickBreakWall(struct Sprite *);
-static void AnimBrickBreakWall_Step(struct Sprite *);
 static void AnimBrickBreakWallShard(struct Sprite *);
 static void AnimBrickBreakWallShard_Step(struct Sprite *);
 static void AnimSuperpowerOrb(struct Sprite *);
@@ -33,9 +27,8 @@ static void AnimSuperpowerRock_Step2(struct Sprite *);
 static void AnimSuperpowerFireball(struct Sprite *);
 static void AnimArmThrustHit(struct Sprite *);
 static void AnimArmThrustHit_Step(struct Sprite *sprite);
-static void AnimRevengeScratch(struct Sprite *);
 static void AnimFocusPunchFist(struct Sprite *);
-static void AnimSpinningKickOrPunchFinish(struct Sprite *);
+static void AnimForcePalm(struct Sprite *sprite);
 
 extern struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 
@@ -81,7 +74,7 @@ static const union AnimCmd sAnim_CrossChopHand_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnims_HandOrFoot[] =
+const union AnimCmd *const gAnims_HandOrFoot[] =
 {
     sAnim_HandOrFoot,
 };
@@ -103,7 +96,7 @@ const struct SpriteTemplate gKarateChopSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSlideHandOrFootToTarget,
@@ -114,7 +107,7 @@ const struct SpriteTemplate gJumpKickSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimJumpKick,
@@ -125,7 +118,7 @@ const struct SpriteTemplate gFistFootSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimBasicFistOrFoot,
@@ -136,7 +129,7 @@ const struct SpriteTemplate gFistFootRandomPosSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFistOrFootRandomPos,
@@ -171,7 +164,7 @@ static const union AffineAnimCmd sAffineAnim_SpinningHandOrFoot[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-static const union AffineAnimCmd *const sAffineAnims_SpinningHandOrFoot[] =
+const union AffineAnimCmd *const gAffineAnims_SpinningHandOrFoot[] =
 {
     sAffineAnim_SpinningHandOrFoot,
 };
@@ -182,9 +175,9 @@ const struct SpriteTemplate gSpinningHandOrFootSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
-    .affineAnims = sAffineAnims_SpinningHandOrFoot,
+    .affineAnims = gAffineAnims_SpinningHandOrFoot,
     .callback = AnimSpinningKickOrPunch,
 };
 
@@ -195,7 +188,7 @@ static const union AffineAnimCmd sAffineAnim_MegaPunchKick[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-static const union AffineAnimCmd *const sAffineAnims_MegaPunchKick[] =
+const union AffineAnimCmd *const gAffineAnims_MegaPunchKick[] =
 {
     sAffineAnim_MegaPunchKick,
 };
@@ -205,9 +198,9 @@ const struct SpriteTemplate gMegaPunchKickSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
-    .affineAnims = sAffineAnims_MegaPunchKick,
+    .affineAnims = gAffineAnims_MegaPunchKick,
     .callback = AnimSpinningKickOrPunch,
 };
 
@@ -307,7 +300,7 @@ const struct SpriteTemplate gArmThrustHandSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimArmThrustHit,
@@ -376,7 +369,7 @@ static const union AnimCmd sAnim_RevengeBigScratch_2[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnims_RevengeBigScratch[] =
+const union AnimCmd *const gAnims_RevengeBigScratch[] =
 {
     sAnim_RevengeBigScratch_0,
     sAnim_RevengeBigScratch_1,
@@ -388,7 +381,7 @@ const struct SpriteTemplate gRevengeBigScratchSpriteTemplate =
     .tileTag = ANIM_TAG_PURPLE_SWIPE,
     .paletteTag = ANIM_TAG_PURPLE_SWIPE,
     .oam = &gOamData_AffineOff_ObjNormal_64x64,
-    .anims = sAnims_RevengeBigScratch,
+    .anims = gAnims_RevengeBigScratch,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimRevengeScratch,
@@ -411,11 +404,91 @@ const struct SpriteTemplate gFocusPunchFistSpriteTemplate =
     .tileTag = ANIM_TAG_HANDS_AND_FEET,
     .paletteTag = ANIM_TAG_HANDS_AND_FEET,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
-    .anims = sAnims_HandOrFoot,
+    .anims = gAnims_HandOrFoot,
     .images = NULL,
     .affineAnims = sAffineAnims_FocusPunchFist,
     .callback = AnimFocusPunchFist,
 };
+
+const struct SpriteTemplate gPalmSpriteTemplate =
+{
+	.tileTag = ANIM_TAG_PURPLE_HAND_OUTLINE,
+	.paletteTag = ANIM_TAG_PURPLE_HAND_OUTLINE,
+	.oam = &gOamData_AffineOff_ObjNormal_32x32,
+	.anims = gAnims_HandOrFoot,
+	.images = NULL,
+	.affineAnims = gDummySpriteAffineAnimTable,
+	.callback = AnimBasicFistOrFoot,
+};
+
+const struct SpriteTemplate gAuraSphereBlast =
+{
+	.tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+	.paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+	.oam = &gOamData_AffineOff_ObjNormal_64x64,
+	.anims = gDummySpriteAnimTable,
+	.images = NULL,
+	.affineAnims = gDummySpriteAffineAnimTable,
+	.callback = AnimSuperpowerFireball,
+};
+
+const union AffineAnimCmd gForcePalmAffineAnimCmd_1[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gForcePalmAffineAnimCmd_2[] =
+{
+    AFFINEANIMCMD_FRAME(0xD8, 0xD8, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gForcePalmAffineAnimCmd_3[] =
+{
+    AFFINEANIMCMD_FRAME(0xB0, 0xB0, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gForcePalmAffineAnimCmd_4[] =
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gForcePalmAffineAnims[] =
+{
+    gForcePalmAffineAnimCmd_1,
+    gForcePalmAffineAnimCmd_2,
+    gForcePalmAffineAnimCmd_3,
+    gForcePalmAffineAnimCmd_4,
+};
+
+const struct SpriteTemplate gForcePalmSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_SHADOW_BALL,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gForcePalmAffineAnims,
+    .callback = AnimForcePalm,
+};
+
+static void AnimForcePalm(struct Sprite *sprite)
+{
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
+    if (gBattleAnimArgs[2] == 0)
+        InitSpritePosToAnimAttacker(sprite, 1);
+    else
+        InitSpritePosToAnimTarget(sprite, TRUE);
+
+    sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
 
 static void unc_080B08A0(struct Sprite *sprite)
 {
@@ -439,7 +512,7 @@ static void AnimSlideHandOrFootToTarget(struct Sprite *sprite)
     AnimTravelDiagonally(sprite);
 }
 
-static void AnimJumpKick(struct Sprite *sprite)
+void AnimJumpKick(struct Sprite *sprite)
 {
     if (IsContest())
     {
@@ -457,7 +530,7 @@ static void AnimJumpKick(struct Sprite *sprite)
 // arg 2: duration
 // arg 3: ? (todo: related to initial pixel offsets)
 // arg 4: anim num
-static void AnimBasicFistOrFoot(struct Sprite *sprite)
+void AnimBasicFistOrFoot(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
 
@@ -617,7 +690,7 @@ static void AnimSlidingKick_Step(struct Sprite *sprite)
 // arg 1: initial y pixel offset
 // arg 2: anim num
 // arg 3: spin duration
-static void AnimSpinningKickOrPunch(struct Sprite *sprite)
+void AnimSpinningKickOrPunch(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     StartSpriteAnim(sprite, gBattleAnimArgs[2]);
@@ -627,7 +700,7 @@ static void AnimSpinningKickOrPunch(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, AnimSpinningKickOrPunchFinish);
 }
 
-static void AnimSpinningKickOrPunchFinish(struct Sprite *sprite)
+void AnimSpinningKickOrPunchFinish(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, 0);
     sprite->affineAnimPaused = 1;
@@ -641,7 +714,7 @@ static void AnimSpinningKickOrPunchFinish(struct Sprite *sprite)
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: initial wait duration
-static void AnimStompFoot(struct Sprite *sprite)
+void AnimStompFoot(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];
@@ -670,7 +743,7 @@ static void AnimStompFoot_End(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-static void AnimDizzyPunchDuck(struct Sprite *sprite)
+void AnimDizzyPunchDuck(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -718,7 +791,7 @@ static void AnimBrickBreakWall(struct Sprite *sprite)
     sprite->callback = AnimBrickBreakWall_Step;
 }
 
-static void AnimBrickBreakWall_Step(struct Sprite *sprite)
+void AnimBrickBreakWall_Step(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -969,7 +1042,7 @@ static void AnimArmThrustHit(struct Sprite *sprite)
     sprite->callback = AnimArmThrustHit_Step;
 }
 
-static void AnimRevengeScratch(struct Sprite *sprite)
+void AnimRevengeScratch(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
         InitSpritePosToAnimAttacker(sprite, 0);

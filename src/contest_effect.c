@@ -59,22 +59,22 @@ static s16 RoundUp(s16);
 
 bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove)
 {
-    u8 nextMoveComboMoves[4];
+    int i;
     u8 lastMoveComboStarterId = gContestMoves[lastMove].comboStarterId;
-    nextMoveComboMoves[0] = gContestMoves[nextMove].comboMoves[0];
-    nextMoveComboMoves[1] = gContestMoves[nextMove].comboMoves[1];
-    nextMoveComboMoves[2] = gContestMoves[nextMove].comboMoves[2];
-    nextMoveComboMoves[3] = gContestMoves[nextMove].comboMoves[3];
 
     if (lastMoveComboStarterId == 0)
+    {
         return FALSE;
-    else if (lastMoveComboStarterId == nextMoveComboMoves[0] 
-          || lastMoveComboStarterId == nextMoveComboMoves[1] 
-          || lastMoveComboStarterId == nextMoveComboMoves[2] 
-          || lastMoveComboStarterId == nextMoveComboMoves[3])
-        return gComboStarterLookupTable[lastMoveComboStarterId];
+    }
     else
+    {
+        for (i = 0; i < MAX_COMBO_MOVES; i++)
+        {
+            if (lastMoveComboStarterId == gContestMoves[nextMove].comboMoves[i])
+                return TRUE;
+        }
         return FALSE;
+    }
 }
 
 // A highly appealing move.
@@ -132,7 +132,7 @@ static void ContestEffect_UserLessEasilyStartled(void)
     SetContestantEffectStringID(eContestAppealResults.contestant,CONTEST_STRING_STOPPED_CARING);
 }
 
-// Slightly startles the POKÃ©MON in front.
+// Slightly startles the POKéMON in front.
 static void ContestEffect_StartleFrontMon(void)
 {
     u8 idx = 0;
@@ -179,7 +179,7 @@ static void ContestEffect_StartlePrevMons(void)
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Startles the POKÃ©MON that appealed before the user.
+// Startles the POKéMON that appealed before the user.
 static void ContestEffect_StartlePrevMon2(void)
 {
     u8 rval = Random() % 10;
@@ -196,7 +196,7 @@ static void ContestEffect_StartlePrevMon2(void)
     ContestEffect_StartleFrontMon();
 }
 
-// Startles all POKÃ©MON that appealed before the user.
+// Startles all POKéMON that appealed before the user.
 static void ContestEffect_StartlePrevMons2(void)
 {
     u8 numStartled = 0;
@@ -272,7 +272,7 @@ static void ContestEffect_ShiftJudgeAttention(void)
     }
 }
 
-// Startles the POKÃ©MON that has the JUDGE's attention.
+// Startles the POKéMON that has the JUDGE's attention.
 static void ContestEffect_StartleMonWithJudgesAttention(void)
 {
     u8 numStartled = 0;
@@ -310,7 +310,7 @@ static void ContestEffect_JamsOthersButMissOneTurn(void)
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Startles POKÃ©MON that made a same-type appeal.
+// Startles POKéMON that made a same-type appeal.
 static void ContestEffect_StartleMonsSameTypeAppeal(void)
 {
     u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
@@ -318,42 +318,42 @@ static void ContestEffect_StartleMonsSameTypeAppeal(void)
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Badly startles POKÃ©MON that made COOL appeals.
+// Badly startles POKéMON that made COOL appeals.
 static void ContestEffect_StartleMonsCoolAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_COOL);
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Badly startles POKÃ©MON that made BEAUTY appeals.
+// Badly startles POKéMON that made BEAUTY appeals.
 static void ContestEffect_StartleMonsBeautyAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_BEAUTY);
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Badly startles POKÃ©MON that made CUTE appeals.
+// Badly startles POKéMON that made CUTE appeals.
 static void ContestEffect_StartleMonsCuteAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_CUTE);
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Badly startles POKÃ©MON that made SMART appeals.
+// Badly startles POKéMON that made SMART appeals.
 static void ContestEffect_StartleMonsSmartAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_SMART);
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Badly startles POKÃ©MON that made TOUGH appeals.
+// Badly startles POKéMON that made TOUGH appeals.
 static void ContestEffect_StartleMonsToughAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_TOUGH);
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-// Makes one POKÃ©MON after the user nervous.
+// Makes one POKéMON after the user nervous.
 static void ContestEffect_MakeFollowingMonNervous(void)
 {
     bool32 hitAny = FALSE;
@@ -385,7 +385,7 @@ static void ContestEffect_MakeFollowingMonNervous(void)
         SetContestantEffectStringID2(eContestAppealResults.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
-// Makes all POKÃ©MON after the user nervous.
+// Makes all POKéMON after the user nervous.
 static void ContestEffect_MakeFollowingMonsNervous(void)
 {
     u8 numUnnerved = 0;
@@ -427,7 +427,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestantStatus[i].hasJudgesAttention && IsContestantAllowedToCombo(i))
-            oddsMod[i] = gComboStarterLookupTable[gContestMoves[eContestantStatus[i].prevMove].comboStarterId] * 10;
+            oddsMod[i] = gContestMoves[eContestantStatus[i].prevMove].comboStarterId == 0 ? 0 : 10;
         else
             oddsMod[i] = 0;
         oddsMod[i] -= (eContestantStatus[i].condition / 10) * 10;
@@ -492,7 +492,7 @@ static void ContestEffect_WorsenConditionOfPrevMons(void)
         SetContestantEffectStringID2(eContestAppealResults.contestant, CONTEST_STRING_IGNORED);
 }
 
-// Badly startles POKÃ©MON in good condition.
+// Badly startles POKéMON in good condition.
 static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
 {
     u8 numHit = 0;
@@ -891,7 +891,7 @@ static void ContestEffect_ExciteAudienceInAnyContest(void)
     }
 }
 
-// Badly startles all POKÃ©MON that made good appeals.
+// Badly startles all POKéMON that made good appeals.
 static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
 {
     int i;

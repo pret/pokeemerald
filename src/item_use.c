@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "berry.h"
@@ -510,7 +511,7 @@ static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 itemDistanceX, s16 ite
         }
         else
         {
-            if (oldItemAbsX + oldItemAbsY == newItemAbsX + newItemAbsY 
+            if (oldItemAbsX + oldItemAbsY == newItemAbsX + newItemAbsY
             && (oldItemAbsY > newItemAbsY || (oldItemAbsY == newItemAbsY && tItemDistanceY < itemDistanceY)))
             {
                 // If items are equal distance, use whichever is closer on the Y axis or further south
@@ -938,7 +939,27 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) // There are two present pokemon.
+    {
+        static const u8 textCantThrowPokeBall[] = _("Cannot throw a ball!\nThere are two pokemon out there!\p");
+
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, textCantThrowPokeBall, BagMenu_InitListsMenu);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, Task_CloseBattlePyramidBagMessage);
+    }
+    else if (gBattlerInMenuId == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
+             && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))) // Attempting to throw a ball with the second pokemon while both are alive.
+    {
+        static const u8 textCantThrowPokeBall[] = _("Cannot throw a ball!\p");
+
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, textCantThrowPokeBall, BagMenu_InitListsMenu);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, Task_CloseBattlePyramidBagMessage);
+    }
+    else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
@@ -946,12 +967,13 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             CloseBattlePyramidBagAndSetCallback(taskId);
     }
-    else if (!InBattlePyramid())
-    {
-        DisplayItemMessage(taskId, 1, gText_BoxFull, BagMenu_InitListsMenu);
-    }
     else
-        DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+    {
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, gText_BoxFull, BagMenu_InitListsMenu);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+    }
 }
 
 static void Task_CloseStatIncreaseMessage(u8 taskId)

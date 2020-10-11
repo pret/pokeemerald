@@ -1064,3 +1064,27 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void AnimTask_IsDoubleBattle(u8 taskId)
+{
+    gBattleAnimArgs[7] = (IsDoubleBattle() && !IsContest());
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_CanBattlerSwitch(u8 taskId)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        gBattleAnimArgs[ARG_RET_ID] = FALSE;
+    else
+        gBattleAnimArgs[ARG_RET_ID] = CanBattlerSwitch(GetAnimBattlerId(gBattleAnimArgs[0]));
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_SetInvisible(u8 taskId)
+{
+    u32 battlerId = GetAnimBattlerId(gBattleAnimArgs[0]);
+    u32 spriteId = gBattlerSpriteIds[battlerId];
+
+    gSprites[spriteId].invisible = gBattleSpritesDataPtr->battlerData[battlerId].invisible = gBattleAnimArgs[1];
+    DestroyAnimVisualTask(taskId);
+}

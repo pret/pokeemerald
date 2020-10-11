@@ -67,11 +67,9 @@ struct TrainerBattleParameter
 // this file's functions
 static void DoBattlePikeWildBattle(void);
 static void DoSafariBattle(void);
-static void DoStandardWildBattle(void);
+static void DoStandardWildBattle(bool32 isDouble);
 static void CB2_EndWildBattle(void);
 static void CB2_EndScriptedWildBattle(void);
-static u8 GetWildBattleTransition(void);
-static u8 GetTrainerBattleTransition(void);
 static void TryUpdateGymLeaderRematchFromWild(void);
 static void TryUpdateGymLeaderRematchFromTrainer(void);
 static void CB2_GiveStarter(void);
@@ -387,7 +385,12 @@ void BattleSetup_StartWildBattle(void)
     if (GetSafariZoneFlag())
         DoSafariBattle();
     else
-        DoStandardWildBattle();
+        DoStandardWildBattle(FALSE);
+}
+
+void BattleSetup_StartDoubleWildBattle(void)
+{
+    DoStandardWildBattle(TRUE);
 }
 
 void BattleSetup_StartBattlePikeWildBattle(void)
@@ -395,13 +398,15 @@ void BattleSetup_StartBattlePikeWildBattle(void)
     DoBattlePikeWildBattle();
 }
 
-static void DoStandardWildBattle(void)
+static void DoStandardWildBattle(bool32 isDouble)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
     sub_808BCF4();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
+    if (isDouble)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     if (InBattlePyramid())
     {
         VarSet(VAR_TEMP_E, 0);
@@ -780,7 +785,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     return sum;
 }
 
-static u8 GetWildBattleTransition(void)
+u8 GetWildBattleTransition(void)
 {
     u8 transitionType = GetBattleTransitionTypeByMap();
     u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
@@ -802,7 +807,7 @@ static u8 GetWildBattleTransition(void)
     }
 }
 
-static u8 GetTrainerBattleTransition(void)
+u8 GetTrainerBattleTransition(void)
 {
     u8 minPartyCount;
     u8 transitionType;
@@ -1104,7 +1109,8 @@ void SetMapVarsToTrainer(void)
 
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
-    InitTrainerBattleVariables();
+    if (TrainerBattleLoadArg8(data) != TRAINER_BATTLE_SET_TRAINER_B)
+        InitTrainerBattleVariables();
     sTrainerBattleMode = TrainerBattleLoadArg8(data);
 
     switch (sTrainerBattleMode)
@@ -1161,10 +1167,10 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         return EventScript_TryDoNormalTrainerBattle;
     case TRAINER_BATTLE_SET_TRAINER_A:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
-        return NULL;
+        return sTrainerBattleEndScript;
     case TRAINER_BATTLE_SET_TRAINER_B:
         TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
-        return NULL;
+        return sTrainerBattleEndScript;
     case TRAINER_BATTLE_HILL:
         if (gApproachingTrainerId == 0)
         {
