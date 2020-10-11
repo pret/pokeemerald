@@ -142,7 +142,7 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeSearchResultSubstruct1,
         .free2 = FreeSearchResultSubstruct2,
     },
-    [POKENAV_MENU_CONDITION_GRAPH_FROM_SEARCH - POKENAV_MENU_IDS_START] = 
+    [POKENAV_CONDITION_GRAPH_FROM_SEARCH - POKENAV_MENU_IDS_START] = 
     {
         .init = PokenavCallback_Init_ConditionGraphFromSearch,
         .callback = GetPartyConditionCallback,

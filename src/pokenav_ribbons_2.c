@@ -159,12 +159,12 @@ static const struct BgTemplate gUnknown_08624B98[] =
 
 static const LoopedTask sRibbonsSummaryMenuLoopTaskFuncs[] =
 {
-    [RIBBONS_SUMMARY_FUNC_NONE] = NULL,
-    [RIBBONS_SUMMARY_FUNC_MOVED_CURSOR] = LoopedTask_UpdateRibbonsSummaryInfo,
-    [RIBBONS_SUMMARY_FUNC_SELECT_RIBBON] = LoopedTask_ExpandSelectedRibbon,
+    [RIBBONS_SUMMARY_FUNC_NONE]                 = NULL,
+    [RIBBONS_SUMMARY_FUNC_MOVED_CURSOR]         = LoopedTask_UpdateRibbonsSummaryInfo,
+    [RIBBONS_SUMMARY_FUNC_SELECT_RIBBON]        = LoopedTask_ExpandSelectedRibbon,
     [RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE] = LoopedTask_MoveRibbonsCursorExpanded,
-    [RIBBONS_SUMMARY_FUNC_EXPANDED_CANCEL] = LoopedTask_ShrinkExpandedRibbon,
-    [RIBBONS_SUMMARY_FUNC_EXIT] = LoopedTask_ExitRibbonsSummaryMenu
+    [RIBBONS_SUMMARY_FUNC_EXPANDED_CANCEL]      = LoopedTask_ShrinkExpandedRibbon,
+    [RIBBONS_SUMMARY_FUNC_EXIT]                 = LoopedTask_ExitRibbonsSummaryMenu
 };
 
 // code

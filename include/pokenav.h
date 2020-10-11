@@ -122,7 +122,7 @@ enum
 	POKENAV_REGION_MAP,
 	POKENAV_CONDITION_PARTY,
 	POKENAV_CONDITION_SEARCH_RESULTS,
-	POKENAV_MENU_CONDITION_GRAPH_FROM_SEARCH, // opening condition graph from search list
+	POKENAV_CONDITION_GRAPH_FROM_SEARCH, // opening condition graph from search list
 	POKENAV_RETURN_CONDITION_SEARCH,    //return to search list from condition graph
 	POKENAV_MATCH_CALL,
 	POKENAV_RIBBONS_MON_LIST,

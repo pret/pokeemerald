@@ -107,12 +107,12 @@ const struct WindowTemplate sUnusedWindowTemplate2 =
 
 const LoopedTask sPartyConditionLoopedTaskFuncs[] =
 {
-    [PARTY_CONDITION_FUNC_NONE] = NULL,
-    [PARTY_CONDITION_FUNC_SLIDE_MON_IN] = LoopedTask_TransitionMons,
-    [PARTY_CONDITION_FUNC_RETURN] = LoopedTask_ExitPartyConditionMenu,
-    [PARTY_CONDITION_FUNC_NO_TRANSITION] = LoopedTask_MoveCursorNoTransition,
-    [PARTY_CONDITION_FUNC_SLIDE_MON_OUT] = LoopedTask_SlideMonOut,
-    [PARTY_CONDITION_FUNC_ADD_MARKINGS] = LoopedTask_OpenMonMarkingsWindow,
+    [PARTY_CONDITION_FUNC_NONE]           = NULL,
+    [PARTY_CONDITION_FUNC_SLIDE_MON_IN]   = LoopedTask_TransitionMons,
+    [PARTY_CONDITION_FUNC_RETURN]         = LoopedTask_ExitPartyConditionMenu,
+    [PARTY_CONDITION_FUNC_NO_TRANSITION]  = LoopedTask_MoveCursorNoTransition,
+    [PARTY_CONDITION_FUNC_SLIDE_MON_OUT]  = LoopedTask_SlideMonOut,
+    [PARTY_CONDITION_FUNC_ADD_MARKINGS]   = LoopedTask_OpenMonMarkingsWindow,
     [PARTY_CONDITION_FUNC_CLOSE_MARKINGS] = LoopedTask_CloseMonMarkingsWindow
 };
 
@@ -139,7 +139,7 @@ struct Pokenav7Struct
     u8 filler2[0x38ac - 0x2909];
 };
 
-extern s8 GetMonMarkIndex(void); // This function's declaration here is different than its definition in pokenav_unk_6. u8/s8
+extern s8 GetMonMarkIndex(void); // This function's declaration here is s8 vs. u8 in pokenav_conditions_1.c
 
 u32 LoopedTask_OpenPartyConditionGraph(s32 state);
 u32 GetPartyConditionLoopedTaskActive(void);

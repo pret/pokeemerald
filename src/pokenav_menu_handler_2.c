@@ -81,14 +81,14 @@ static void InitMenuOptionGlow(void);
 static void Task_CurrentMenuOptionGlow(u8 taskId);
 static void SetMenuOptionGlow(void);
 
-static const u16 sPokenavBgDotsPal[] = INCBIN_U16("graphics/pokenav/bg.gbapal");
-static const u32 sPokenavBgDotsTiles[] = INCBIN_U32("graphics/pokenav/bg.4bpp.lz");
+static const u16 sPokenavBgDotsPal[] = INCBIN_U16("graphics/pokenav/bg_dots.gbapal");
+static const u32 sPokenavBgDotsTiles[] = INCBIN_U32("graphics/pokenav/bg_dots.4bpp.lz");
 static const u32 sPokenavBgDotsTilemap[] = INCBIN_U32("graphics/pokenav/bg.bin.lz");
-static const u16 sPokenavDeviceBgPal[] = INCBIN_U16("graphics/pokenav/outline.gbapal");
-static const u32 sPokenavDeviceBgTiles[] = INCBIN_U32("graphics/pokenav/outline.4bpp.lz");
-static const u32 sPokenavDeviceBgTilemap[] = INCBIN_U32("graphics/pokenav/outline_map.bin.lz");
-static const u16 gUnknown_08620104[] = INCBIN_U16("graphics/pokenav/blue_light.gbapal");
-static const u32 gUnknown_08620124[] = INCBIN_U32("graphics/pokenav/blue_light.4bpp.lz");
+static const u16 sPokenavDeviceBgPal[] = INCBIN_U16("graphics/pokenav/device_outline.gbapal");
+static const u32 sPokenavDeviceBgTiles[] = INCBIN_U32("graphics/pokenav/device_outline.4bpp.lz");
+static const u32 sPokenavDeviceBgTilemap[] = INCBIN_U32("graphics/pokenav/device_outline_map.bin.lz");
+static const u16 sMatchCallBlueLightPal[] = INCBIN_U16("graphics/pokenav/blue_light.gbapal");
+static const u32 sMatchCallBlueLightTiles[] = INCBIN_U32("graphics/pokenav/blue_light.4bpp.lz");
 
 static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
     {
@@ -118,7 +118,8 @@ static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
     }
 };
 
-static const LoopedTask sMenuHandlerLoopTaskFuncs[] = {
+static const LoopedTask sMenuHandlerLoopTaskFuncs[] = 
+{
     [POKENAV_MENU_FUNC_NONE]                  = NULL,
     [POKENAV_MENU_FUNC_MOVE_CURSOR]           = LoopedTask_MoveMenuCursor,
     [POKENAV_MENU_FUNC_OPEN_CONDITION]        = LoopedTask_OpenConditionMenu,
@@ -138,7 +139,7 @@ static const struct CompressedSpriteSheet sPokenavOptionsSpriteSheets[] =
         .tag = 0x0003
     },
     {
-        .data = gUnknown_08620124,
+        .data = sMatchCallBlueLightTiles,
         .size = 0x0100,
         .tag = 0x0001
     }
@@ -151,7 +152,7 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
     {gPokenavOptions_Pal + 0x20, 6},
     {gPokenavOptions_Pal + 0x30, 7},
     {gPokenavOptions_Pal + 0x40, 8},
-    {gUnknown_08620104, 3},
+    {sMatchCallBlueLightPal, 3},
     {}
 };
 

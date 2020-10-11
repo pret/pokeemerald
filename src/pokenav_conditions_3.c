@@ -29,7 +29,7 @@ struct PokenavSub7
     s32 boxId;
     s32 monId;
     u32 conditionDataId;
-    u32 unk18;
+    u32 returnFromGraph;
     u32 isPartyCondition;
     struct PokenavSub18 *monList;
 };
@@ -45,7 +45,7 @@ struct PokenavSub8
 
 static u32 HandleConditionSearchInput_WaitSetup(struct PokenavSub7 *structPtr);
 static u32 HandleConditionSearchInput(struct PokenavSub7 *structPtr);
-static u32 sub_81CF0B8(struct PokenavSub7 *structPtr);
+static u32 OpenConditionGraphFromSearchList(struct PokenavSub7 *structPtr);
 static u32 ReturnToConditionSearchList(struct PokenavSub7 *structPtr);
 static u32 GetConditionSearchLoopedTask(s32 state);
 static u32 BuildPartyMonSearchResults(s32 state);
@@ -104,12 +104,12 @@ static const struct BgTemplate sConditionSearchResultBgTemplates[] =
 
 static const LoopedTask sSearchResultLoopTaskFuncs[] = 
 {
-    [CONDITION_SEARCH_FUNC_NONE] = NULL,
-    [CONDITION_SEARCH_FUNC_MOVE_UP] = LoopedTask_MoveSearchListCursorUp,
-    [CONDITION_SEARCH_FUNC_MOVE_DOWN] = LoopedTask_MoveSearchListCursorDown,
-    [CONDITION_SEARCH_FUNC_PAGE_UP] = LoopedTask_MoveSearchListPageUp,
-    [CONDITION_SEARCH_FUNC_PAGE_DOWN] = LoopedTask_MoveSearchListPageDown,
-    [CONDITION_SEARCH_FUNC_EXIT] = LoopedTask_ExitConditionSearchMenu,
+    [CONDITION_SEARCH_FUNC_NONE]       = NULL,
+    [CONDITION_SEARCH_FUNC_MOVE_UP]    = LoopedTask_MoveSearchListCursorUp,
+    [CONDITION_SEARCH_FUNC_MOVE_DOWN]  = LoopedTask_MoveSearchListCursorDown,
+    [CONDITION_SEARCH_FUNC_PAGE_UP]    = LoopedTask_MoveSearchListPageUp,
+    [CONDITION_SEARCH_FUNC_PAGE_DOWN]  = LoopedTask_MoveSearchListPageDown,
+    [CONDITION_SEARCH_FUNC_EXIT]       = LoopedTask_ExitConditionSearchMenu,
     [CONDITION_SEARCH_FUNC_SELECT_MON] = LoopedTask_SelectSearchResult
 };
 
@@ -140,7 +140,7 @@ bool32 PokenavCallback_Init_ConditionSearch(void)
 
     structPtr->callback = HandleConditionSearchInput_WaitSetup;
     structPtr->loopedTaskId = CreateLoopedTask(GetConditionSearchLoopedTask, 1);
-    structPtr->unk18 = 0;
+    structPtr->returnFromGraph = 0;
     structPtr->conditionDataId = sSearchMonDataIds[GetSelectedConditionSearch()];
     return TRUE;
 }
@@ -154,7 +154,7 @@ bool32 PokenavCallback_Init_ReturnToMonSearchList(void)
 
     structPtr->monList = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     structPtr->callback = HandleConditionSearchInput;
-    structPtr->unk18 = 1;
+    structPtr->returnFromGraph = 1;
     structPtr->conditionDataId = sSearchMonDataIds[GetSelectedConditionSearch()];
     return TRUE;
 }
@@ -200,7 +200,7 @@ static u32 HandleConditionSearchInput(struct PokenavSub7 *structPtr)
     {
         structPtr->monList->currIndex = GetSelectedPokenavListIndex();
         structPtr->isPartyCondition = 1;
-        structPtr->callback = sub_81CF0B8;
+        structPtr->callback = OpenConditionGraphFromSearchList;
         return CONDITION_SEARCH_FUNC_SELECT_MON;
     }
     return CONDITION_SEARCH_FUNC_NONE;
@@ -211,15 +211,15 @@ static u32 ReturnToConditionSearchList(struct PokenavSub7 *structPtr)
     return POKENAV_CONDITION_SEARCH_MENU;
 }
 
-static u32 sub_81CF0B8(struct PokenavSub7 *structPtr)
+static u32 OpenConditionGraphFromSearchList(struct PokenavSub7 *structPtr)
 {
-    return POKENAV_MENU_CONDITION_GRAPH_FROM_SEARCH;
+    return POKENAV_CONDITION_GRAPH_FROM_SEARCH;
 }
 
 static u32 sub_81CF0C0(void)
 {
     struct PokenavSub7 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
-    return structPtr->unk18;
+    return structPtr->returnFromGraph;
 }
 
 static struct PokenavMonList * GetSearchResultsMonDataList(void)
@@ -339,7 +339,7 @@ static u32 sub_81CF278(s32 state)
             ptr->monList->monData[i].data = i + 1;
         }
     }
-    ptr->unk18 = 1;
+    ptr->returnFromGraph = 1;
     return LT_FINISH;
 }
 
