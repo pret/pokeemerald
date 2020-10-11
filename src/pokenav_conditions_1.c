@@ -18,98 +18,98 @@ struct PokenavSub11
     u32 monPal[3][0x20];
     u8 fill[0x180];
     u32 monPicGfx[3][0x800];
-    u8 unk6300;
-    s16 unk6302;
-    u32 (*unk6304)(struct PokenavSub11 *);
+    u8 searchMode;
+    s16 monIndex;
+    u32 (*callback)(struct PokenavSub11 *);
     u8 fill2[0x6320 - 0x6308];
-    u8 unk6320[3][24];
-    u8 unk6368[3][64];
-    struct ConditionGraph unk6428;
-    u8 unk6780[3];
-    u8 unk6783[3];
-    s8 unk6786;
+    u8 searchLocBuffer[3][24];
+    u8 nameBuffer[3][64];
+    struct ConditionGraph conditionData;
+    u8 sheen[3];
+    u8 monMarks[3];
+    s8 mark;
     s8 unk6787;
     s8 unk6788;
     s8 unk6789;
-    u8 unk678A;
+    u8 state;
 };
 
-void sub_81CD970(void);
+void InitPartyConditionListParameters(void);
 void sub_81CD9F8(void);
-u32 sub_81CD08C(struct PokenavSub11 *structPtr);
-u32 sub_81CD19C(struct PokenavSub11 *structPtr);
-u32 sub_81CD110(struct PokenavSub11 *structPtr);
-u8 sub_81CD1E4(struct PokenavSub11 *structPtr);
-u8 sub_81CD258(u8 arg0);
-void sub_81CD824(s16 arg0, u8 arg1);
-void sub_81CDA1C(s16 arg0, u8 arg1);
-void sub_81CDB98(s16 arg0, u8 arg1);
+u32 HandlePartyConditionInput(struct PokenavSub11 *structPtr);
+u32 GetConditionReturnCallback(struct PokenavSub11 *structPtr);
+u32 ConditionMenu_OpenMarkingsMenu(struct PokenavSub11 *structPtr);
+u8 ConditionGraphHandleDpadInput(struct PokenavSub11 *structPtr);
+u8 SwitchConditionSummaryIndex(u8 moveUp);
+void CopyMonNameGenderLocation(s16 id, u8 arg1);
+void GetMonConditionGraphData(s16 id, u8 arg1);
+void ConditionGraphDrawMonPic(s16 id, u8 arg1);
 
 // code
-bool32 PokenavCallback_Init_7(void)
+bool32 PokenavCallback_Init_PartyCondition(void)
 {
-    struct PokenavSub11 *structPtr = AllocSubstruct(11, sizeof(struct PokenavSub11));
+    struct PokenavSub11 *structPtr = AllocSubstruct(POKENAV_SUBSTRUCT_CONDITION_GRAPH, sizeof(struct PokenavSub11));
 
     if (structPtr == NULL)
         return FALSE;
 
-    sub_81D1ED4(&structPtr->unk6428);
-    sub_81CD970();
+    InitConditionGraphData(&structPtr->conditionData);
+    InitPartyConditionListParameters();
     gKeyRepeatStartDelay = 20;
-    structPtr->unk6304 = sub_81CD08C;
+    structPtr->callback = HandlePartyConditionInput;
     return TRUE;
 }
 
-bool32 PokenavCallback_Init_9(void)
+bool32 PokenavCallback_Init_ConditionGraphFromSearch(void)
 {
-    struct PokenavSub11 *structPtr = AllocSubstruct(11, sizeof(struct PokenavSub11));
+    struct PokenavSub11 *structPtr = AllocSubstruct(POKENAV_SUBSTRUCT_CONDITION_GRAPH, sizeof(struct PokenavSub11));
 
     if (structPtr == NULL)
         return FALSE;
 
-    sub_81D1ED4(&structPtr->unk6428);
+    InitConditionGraphData(&structPtr->conditionData);
     sub_81CD9F8();
     gKeyRepeatStartDelay = 20;
-    structPtr->unk6304 = sub_81CD08C;
+    structPtr->callback = HandlePartyConditionInput;
     return TRUE;
 }
 
-u32 sub_81CD070(void)
+u32 GetPartyConditionCallback(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
 
-    return structPtr->unk6304(structPtr);
+    return structPtr->callback(structPtr);
 }
 
-u32 sub_81CD08C(struct PokenavSub11 *structPtr)
+u32 HandlePartyConditionInput(struct PokenavSub11 *structPtr)
 {
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
-    u32 ret = sub_81CD1E4(structPtr);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    u32 ret = ConditionGraphHandleDpadInput(structPtr);
 
-    if (ret == 0)
+    if (ret == PARTY_CONDITION_FUNC_NONE)
     {
         if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            structPtr->unk6304 = sub_81CD19C;
-            ret = 2;
+            structPtr->callback = GetConditionReturnCallback;
+            ret = PARTY_CONDITION_FUNC_RETURN;
         }
         else if (JOY_NEW(A_BUTTON))
         {
-            if (structPtr->unk6300 == 0)
+            if (structPtr->searchMode == 0)
             {
-                if (unkPtr->unk2 == unkPtr->unk0 - 1)
+                if (monListPtr->currIndex == monListPtr->listCount - 1)
                 {
                     PlaySE(SE_SELECT);
-                    structPtr->unk6304 = sub_81CD19C;
-                    ret = 2;
+                    structPtr->callback = GetConditionReturnCallback;
+                    ret = PARTY_CONDITION_FUNC_RETURN;
                 }
             }
             else
             {
                 PlaySE(SE_SELECT);
-                ret = 5;
-                structPtr->unk6304 = sub_81CD110;
+                ret = PARTY_CONDITION_FUNC_ADD_MARKINGS;
+                structPtr->callback = ConditionMenu_OpenMarkingsMenu;
             }
         }
     }
@@ -117,204 +117,204 @@ u32 sub_81CD08C(struct PokenavSub11 *structPtr)
     return ret;
 }
 
-u32 sub_81CD110(struct PokenavSub11 *structPtr)
+u32 ConditionMenu_OpenMarkingsMenu(struct PokenavSub11 *structPtr)
 {
-    struct PokenavSub18 *unkPtr;
+    struct PokenavSub18 *monListPtr;
     u8 markings;
-    u32 ret = 0, boxId, monId;
+    u32 ret = PARTY_CONDITION_FUNC_NONE, boxId, monId;
 
-    if (!sub_811FBA4())
+    if (!MonMarkingsMenuHandleInput())
     {
-        structPtr->unk6783[structPtr->unk6786] = sub_81CEF14();
-        unkPtr = GetSubstructPtr(18);
-        boxId = unkPtr->unk4[unkPtr->unk2].boxId;
-        monId = unkPtr->unk4[unkPtr->unk2].monId;
-        markings = structPtr->unk6783[structPtr->unk6786];
+        structPtr->monMarks[structPtr->mark] = GetMonMarkingsData();
+        monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+        boxId = monListPtr->monData[monListPtr->currIndex].boxId;
+        monId = monListPtr->monData[monListPtr->currIndex].monId;
+        markings = structPtr->monMarks[structPtr->mark];
 
         if (boxId == TOTAL_BOXES_COUNT)
             SetMonData(&gPlayerParty[monId], MON_DATA_MARKINGS, &markings);
         else
             SetBoxMonDataAt(boxId, monId, MON_DATA_MARKINGS, &markings);
 
-        structPtr->unk6304 = sub_81CD08C;
-        ret = 6;
+        structPtr->callback = HandlePartyConditionInput;
+        ret = PARTY_CONDITION_FUNC_CLOSE_MARKINGS;
     }
 
     return ret;
 }
 
-u32 sub_81CD19C(struct PokenavSub11 *structPtr)
+u32 GetConditionReturnCallback(struct PokenavSub11 *structPtr)
 {
-    if (structPtr->unk6300 == 0)
+    if (structPtr->searchMode == 0)
         return POKENAV_CONDITION_MENU;
     else
-        return POKENAV_MENU_A;
+        return POKENAV_RETURN_CONDITION_SEARCH;
 }
 
-void sub_81CD1C0(void)
+void FreePartyConditionSubstruct1(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    if (structPtr->unk6300 == 0)
-        FreePokenavSubstruct(18);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    if (structPtr->searchMode == 0)
+        FreePokenavSubstruct(POKENAV_SUBSTRUCT_MON_LIST);
 
-    FreePokenavSubstruct(11);
+    FreePokenavSubstruct(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
 }
 
-u8 sub_81CD1E4(struct PokenavSub11 *structPtr)
+u8 ConditionGraphHandleDpadInput(struct PokenavSub11 *structPtr)
 {
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     u8 ret = 0;
 
     if (JOY_HELD(DPAD_UP))
     {
-        if (structPtr->unk6300 == 0 || unkPtr->unk2 != 0)
+        if (structPtr->searchMode == 0 || monListPtr->currIndex != 0)
         {
             PlaySE(SE_SELECT);
-            ret = sub_81CD258(1);
+            ret = SwitchConditionSummaryIndex(1);
         }
     }
     else if (JOY_HELD(DPAD_DOWN))
     {
-        if (structPtr->unk6300 == 0 || unkPtr->unk2 < unkPtr->unk0 - 1)
+        if (structPtr->searchMode == 0 || monListPtr->currIndex < monListPtr->listCount - 1)
         {
             PlaySE(SE_SELECT);
-            ret = sub_81CD258(0);
+            ret = SwitchConditionSummaryIndex(0);
         }
     }
 
     return ret;
 }
 
-u8 sub_81CD258(u8 arg0)
+u8 SwitchConditionSummaryIndex(u8 moveUp)
 {
     u16 r7;
-    bool8 r6, r0;
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
+    bool8 wasNotLastMon, isNotLastMon;
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
-    r7 = (arg0) ? structPtr->unk6788 : structPtr->unk6787;
-    sub_81D1F84(&structPtr->unk6428, structPtr->unk6428.unk14[structPtr->unk6786], structPtr->unk6428.unk14[r7]);
-    r6 = (unkPtr->unk2 != ((sub_81CDD5C() != 0) ? unkPtr->unk0 : unkPtr->unk0 - 1));
-    if (arg0)
+    r7 = (moveUp) ? structPtr->unk6788 : structPtr->unk6787;
+    sub_81D1F84(&structPtr->conditionData, structPtr->conditionData.unk14[structPtr->mark], structPtr->conditionData.unk14[r7]);
+    wasNotLastMon = (monListPtr->currIndex != ((IsConditionMenuSearchMode() != 0) ? monListPtr->listCount : monListPtr->listCount - 1));
+    if (moveUp)
     {
         structPtr->unk6788 = structPtr->unk6787;
-        structPtr->unk6787 = structPtr->unk6786;
-        structPtr->unk6786 = r7;
+        structPtr->unk6787 = structPtr->mark;
+        structPtr->mark = r7;
         structPtr->unk6789 = structPtr->unk6788;
 
-        unkPtr->unk2 = (unkPtr->unk2 == 0) ? unkPtr->unk0 - 1 : unkPtr->unk2 - 1;
-        structPtr->unk6302 = (unkPtr->unk2 != 0) ? unkPtr->unk2 - 1 : unkPtr->unk0 - 1;
+        monListPtr->currIndex = (monListPtr->currIndex == 0) ? monListPtr->listCount - 1 : monListPtr->currIndex - 1;
+        structPtr->monIndex = (monListPtr->currIndex != 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1;
     }
     else
     {
         structPtr->unk6787 = structPtr->unk6788;
-        structPtr->unk6788 = structPtr->unk6786;
-        structPtr->unk6786 = r7;
+        structPtr->unk6788 = structPtr->mark;
+        structPtr->mark = r7;
         structPtr->unk6789 = structPtr->unk6787;
 
-        unkPtr->unk2 = (unkPtr->unk2 < unkPtr->unk0 - 1) ? unkPtr->unk2 + 1 : 0;
-        structPtr->unk6302 = (unkPtr->unk2 < unkPtr->unk0 - 1) ? unkPtr->unk2 + 1 : 0;
+        monListPtr->currIndex = (monListPtr->currIndex < monListPtr->listCount - 1) ? monListPtr->currIndex + 1 : 0;
+        structPtr->monIndex = (monListPtr->currIndex < monListPtr->listCount - 1) ? monListPtr->currIndex + 1 : 0;
     }
 
-    r0 = (unkPtr->unk2 != ((sub_81CDD5C() != 0) ? unkPtr->unk0 : unkPtr->unk0 - 1));
-
-    if (!r6)
-        return 3;
-    else if (!r0)
-        return 4;
+    isNotLastMon = (monListPtr->currIndex != ((IsConditionMenuSearchMode() != 0) ? monListPtr->listCount : monListPtr->listCount - 1));
+    
+    if (!wasNotLastMon)
+        return PARTY_CONDITION_FUNC_NO_TRANSITION;
+    else if (!isNotLastMon)
+        return PARTY_CONDITION_FUNC_SLIDE_MON_OUT;
     else
-        return 1;
+        return PARTY_CONDITION_FUNC_SLIDE_MON_IN;
 }
 
-bool32 sub_81CD3C4(void)
+bool32 LoadPartyConditionMenuGfx(void)
 {
     s32 var;
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
-    switch (structPtr->unk678A)
+    switch (structPtr->state)
     {
     case 0:
-        sub_81CD824(unkPtr->unk2, 0);
+        CopyMonNameGenderLocation(monListPtr->currIndex, 0);
         break;
     case 1:
-        sub_81CDA1C(unkPtr->unk2, 0);
+        GetMonConditionGraphData(monListPtr->currIndex, 0);
         break;
     case 2:
-        sub_81CDB98(unkPtr->unk2, 0);
+        ConditionGraphDrawMonPic(monListPtr->currIndex, 0);
         break;
     case 3:
-        if (unkPtr->unk0 == 1)
+        if (monListPtr->listCount == 1)
         {
-            structPtr->unk6786 = 0;
+            structPtr->mark = 0;
             structPtr->unk6787 = 0;
             structPtr->unk6788 = 0;
-            structPtr->unk678A = 0;
+            structPtr->state = 0;
             return TRUE;
         }
         else
         {
-            structPtr->unk6786 = 0;
+            structPtr->mark = 0;
             structPtr->unk6787 = 1;
             structPtr->unk6788 = 2;
         }
         break;
     // These were probably ternaries just like cases 7-9, but couldn't match it any other way.
     case 4:
-        var = unkPtr->unk2 + 1;
-        if (var >= unkPtr->unk0)
+        var = monListPtr->currIndex + 1;
+        if (var >= monListPtr->listCount)
             var = 0;
-        sub_81CD824(var, 1);
+        CopyMonNameGenderLocation(var, 1);
         break;
     case 5:
-        var = unkPtr->unk2 + 1;
-        if (var >= unkPtr->unk0)
+        var = monListPtr->currIndex + 1;
+        if (var >= monListPtr->listCount)
             var = 0;
-        sub_81CDA1C(var, 1);
+        GetMonConditionGraphData(var, 1);
         break;
     case 6:
-        var = unkPtr->unk2 + 1;
-        if (var >= unkPtr->unk0)
+        var = monListPtr->currIndex + 1;
+        if (var >= monListPtr->listCount)
             var = 0;
-        sub_81CDB98(var, 1);
+        ConditionGraphDrawMonPic(var, 1);
         break;
     case 7:
-        sub_81CD824((unkPtr->unk2 - 1 >= 0) ? unkPtr->unk2 - 1 : unkPtr->unk0 - 1, 2);
+        CopyMonNameGenderLocation((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, 2);
         break;
     case 8:
-        sub_81CDA1C((unkPtr->unk2 - 1 >= 0) ? unkPtr->unk2 - 1 : unkPtr->unk0 - 1, 2);
+        GetMonConditionGraphData((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, 2);
         break;
     case 9:
-        sub_81CDB98((unkPtr->unk2 - 1 >= 0) ? unkPtr->unk2 - 1 : unkPtr->unk0 - 1, 2);
-        structPtr->unk678A = 0;
+        ConditionGraphDrawMonPic((monListPtr->currIndex - 1 >= 0) ? monListPtr->currIndex - 1 : monListPtr->listCount - 1, 2);
+        structPtr->state = 0;
         return TRUE;
     }
 
-    structPtr->unk678A++;
+    structPtr->state++;
     return FALSE;
 }
 
-bool32 sub_81CD548(u8 arg0)
+bool32 SetConditionGraphData(u8 mode)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
 
-    switch (arg0)
+    switch (mode)
     {
     case 0:
-        sub_81CD824(structPtr->unk6302, structPtr->unk6789);
+        CopyMonNameGenderLocation(structPtr->monIndex, structPtr->unk6789);
         break;
     case 1:
-        sub_81CDA1C(structPtr->unk6302, structPtr->unk6789);
+        GetMonConditionGraphData(structPtr->monIndex, structPtr->unk6789);
         break;
     case 2:
-        sub_81CDB98(structPtr->unk6302, structPtr->unk6789);
+        ConditionGraphDrawMonPic(structPtr->monIndex, structPtr->unk6789);
         return TRUE;
     }
 
     return FALSE;
 }
 
-u8 *sub_81CD5CC(u8 *dst, const u8 *src, s16 n)
+u8 *CopyStringLeftAlignedToConditionData(u8 *dst, const u8 *src, s16 n)
 {
     while (*src != EOS)
         *dst++ = *src++, n--;
@@ -326,15 +326,15 @@ u8 *sub_81CD5CC(u8 *dst, const u8 *src, s16 n)
     return dst;
 }
 
-u8 *sub_81CD624(u8 *str, u16 id, bool8 arg3)
+u8 *CopyMonConditionNameGender(u8 *str, u16 id, bool8 arg3)
 {
     u16 boxId, monId, gender, species, level, lvlDigits;
     struct BoxPokemon *boxMon;
     u8 *txtPtr, *str_;
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
-    boxId = unkPtr->unk4[id].boxId;
-    monId = unkPtr->unk4[id].monId;
+    boxId = monListPtr->monData[id].boxId;
+    monId = monListPtr->monData[id].monId;
     *(str++) = EXT_CTRL_CODE_BEGIN;
     *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
     *(str++) = TEXT_COLOR_BLUE;
@@ -417,115 +417,115 @@ u8 *sub_81CD624(u8 *str, u16 id, bool8 arg3)
     return str_;
 }
 
-void sub_81CD824(s16 arg0, u8 arg1)
+void CopyMonNameGenderLocation(s16 id, u8 arg1)
 {
     u16 boxId, i;
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
-    if (arg0 != (sub_81CDD5C() != 0 ? unkPtr->unk0 : unkPtr->unk0 - 1))
+    if (id != (IsConditionMenuSearchMode() != 0 ? monListPtr->listCount : monListPtr->listCount - 1))
     {
-        sub_81CD624(structPtr->unk6368[arg1], arg0, FALSE);
-        boxId = unkPtr->unk4[arg0].boxId;
-        structPtr->unk6320[arg1][0] = EXT_CTRL_CODE_BEGIN;
-        structPtr->unk6320[arg1][1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-        structPtr->unk6320[arg1][2] = TEXT_COLOR_BLUE;
-        structPtr->unk6320[arg1][3] = TEXT_COLOR_TRANSPARENT;
-        structPtr->unk6320[arg1][4] = TEXT_COLOR_LIGHT_BLUE;
+        CopyMonConditionNameGender(structPtr->nameBuffer[arg1], id, FALSE);
+        boxId = monListPtr->monData[id].boxId;
+        structPtr->searchLocBuffer[arg1][0] = EXT_CTRL_CODE_BEGIN;
+        structPtr->searchLocBuffer[arg1][1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        structPtr->searchLocBuffer[arg1][2] = TEXT_COLOR_BLUE;
+        structPtr->searchLocBuffer[arg1][3] = TEXT_COLOR_TRANSPARENT;
+        structPtr->searchLocBuffer[arg1][4] = TEXT_COLOR_LIGHT_BLUE;
         if (boxId == TOTAL_BOXES_COUNT)
-            sub_81CD5CC(&structPtr->unk6320[arg1][5], gText_InParty, 8);
+            CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], gText_InParty, 8);
         else
-            sub_81CD5CC(&structPtr->unk6320[arg1][5], GetBoxNamePtr(boxId), 8);
+            CopyStringLeftAlignedToConditionData(&structPtr->searchLocBuffer[arg1][5], GetBoxNamePtr(boxId), 8);
     }
     else
     {
         for (i = 0; i < 12; i++)
-            structPtr->unk6368[arg1][i] = CHAR_SPACE;
-        structPtr->unk6368[arg1][i] = EOS;
+            structPtr->nameBuffer[arg1][i] = CHAR_SPACE;
+        structPtr->nameBuffer[arg1][i] = EOS;
 
         for (i = 0; i < 8; i++)
-            structPtr->unk6320[arg1][i] = CHAR_SPACE;
-        structPtr->unk6320[arg1][i] = EOS;
+            structPtr->searchLocBuffer[arg1][i] = CHAR_SPACE;
+        structPtr->searchLocBuffer[arg1][i] = EOS;
     }
 }
 
-void sub_81CD970(void)
+void InitPartyConditionListParameters(void)
 {
     u16 i, count;
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    struct PokenavSub18 *unkPtr = AllocSubstruct(18, sizeof(struct PokenavSub18));
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    struct PokenavSub18 *monListPtr = AllocSubstruct(POKENAV_SUBSTRUCT_MON_LIST, sizeof(struct PokenavSub18));
 
-    structPtr->unk6300 = 0;
+    structPtr->searchMode = 0;
     for (i = 0, count = 0; i < CalculatePlayerPartyCount(); i++)
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            unkPtr->unk4[count].boxId = TOTAL_BOXES_COUNT;
-            unkPtr->unk4[count].monId = i;
-            unkPtr->unk4[count].data = 0;
+            monListPtr->monData[count].boxId = TOTAL_BOXES_COUNT;
+            monListPtr->monData[count].monId = i;
+            monListPtr->monData[count].data = 0;
             count++;
         }
     }
 
-    unkPtr->unk4[count].boxId = 0;
-    unkPtr->unk4[count].monId = 0;
-    unkPtr->unk4[count].data = 0;
-    unkPtr->unk2 = 0;
-    unkPtr->unk0 = count + 1;
-    structPtr->unk678A = 0;
+    monListPtr->monData[count].boxId = 0;
+    monListPtr->monData[count].monId = 0;
+    monListPtr->monData[count].data = 0;
+    monListPtr->currIndex = 0;
+    monListPtr->listCount = count + 1;
+    structPtr->state = 0;
 }
 
 void sub_81CD9F8(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    structPtr->unk6300 = 1;
-    structPtr->unk678A = 0;
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    structPtr->searchMode = 1;
+    structPtr->state = 0;
 }
 
-void sub_81CDA1C(s16 arg0, u8 arg1)
+void GetMonConditionGraphData(s16 id, u8 arg1)
 {
     u16 boxId, monId, i;
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
-    if (arg0 != (sub_81CDD5C() != 0 ? unkPtr->unk0 : unkPtr->unk0 - 1))
+    if (id != (IsConditionMenuSearchMode() != 0 ? monListPtr->listCount : monListPtr->listCount - 1))
     {
-        boxId = unkPtr->unk4[arg0].boxId;
-        monId = unkPtr->unk4[arg0].monId;
-        structPtr->unk6428.unk0[arg1][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        structPtr->unk6428.unk0[arg1][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        structPtr->unk6428.unk0[arg1][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        structPtr->unk6428.unk0[arg1][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        structPtr->unk6428.unk0[arg1][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
-        structPtr->unk6780[arg1] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 255)
+        boxId = monListPtr->monData[id].boxId;
+        monId = monListPtr->monData[id].monId;
+        structPtr->conditionData.stat[arg1][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        structPtr->conditionData.stat[arg1][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        structPtr->conditionData.stat[arg1][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        structPtr->conditionData.stat[arg1][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        structPtr->conditionData.stat[arg1][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        structPtr->sheen[arg1] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 255)
                                  ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
                                  : 9;
-        structPtr->unk6783[arg1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_MARKINGS, NULL);
-        sub_81D2754(structPtr->unk6428.unk0[arg1], structPtr->unk6428.unk14[arg1]);
+        structPtr->monMarks[arg1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_MARKINGS, NULL);
+        sub_81D2754(structPtr->conditionData.stat[arg1], structPtr->conditionData.unk14[arg1]);
     }
     else
     {
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < FLAVOR_COUNT; i++)
         {
-            structPtr->unk6428.unk0[arg1][i] = 0;
-            structPtr->unk6428.unk14[arg1][i].unk0 = 155;
-            structPtr->unk6428.unk14[arg1][i].unk2 = 91;
+            structPtr->conditionData.stat[arg1][i] = 0;
+            structPtr->conditionData.unk14[arg1][i].unk0 = 155;
+            structPtr->conditionData.unk14[arg1][i].unk2 = 91;
         }
     }
 }
 
-void sub_81CDB98(s16 arg0, u8 arg1)
+void ConditionGraphDrawMonPic(s16 index, u8 arg1)
 {
     u16 boxId, monId, species;
     u32 personality, tid;
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 
-    if (arg0 == (sub_81CDD5C() != 0 ? unkPtr->unk0 : unkPtr->unk0 - 1))
+    if (index == (IsConditionMenuSearchMode() != 0 ? monListPtr->listCount : monListPtr->listCount - 1))
         return;
 
-    boxId = unkPtr->unk4[arg0].boxId;
-    monId = unkPtr->unk4[arg0].monId;
+    boxId = monListPtr->monData[index].boxId;
+    monId = monListPtr->monData[index].monId;
     species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
     tid = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
     personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
@@ -533,92 +533,92 @@ void sub_81CDB98(s16 arg0, u8 arg1)
     LZ77UnCompWram(GetMonSpritePalFromSpeciesAndPersonality(species, tid, personality), structPtr->monPal[arg1]);
 }
 
-u16 sub_81CDC50(void)
+u16 GetMonListCount(void)
 {
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
-    return unkPtr->unk0;
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    return monListPtr->listCount;
 }
 
-u16 sub_81CDC60(void)
+u16 GetConditionGraphCurrentMonIndex(void)
 {
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
-    return unkPtr->unk2;
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    return monListPtr->currIndex;
 }
 
-struct ConditionGraph *sub_81CDC70(void)
+struct ConditionGraph *GetConditionGraphDataPtr(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    return &structPtr->unk6428;
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    return &structPtr->conditionData;
 }
 
-u8 sub_81CDC84(void)
+u8 GetMonMarkIndex(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    return structPtr->unk6786;
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    return structPtr->mark;
 }
 
 u8 sub_81CDC9C(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    return structPtr->unk6302;
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    return structPtr->monIndex;
 }
 
-void *sub_81CDCB4(u8 id)
+void *GetConditionMonPicGfx(u8 id)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
     return structPtr->monPicGfx[id];
 }
 
-void *sub_81CDCD4(u8 id)
+void *GetConditionMonPal(u8 id)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
     return structPtr->monPal[id];
 }
 
 u8 sub_81CDCEC(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
     return structPtr->unk6789;
 }
 
-u8 *sub_81CDD04(u8 id)
+u8 *GetConditionMonNameBuffer(u8 id)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    return structPtr->unk6368[id];
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    return structPtr->nameBuffer[id];
 }
 
-u8 *sub_81CDD24(u8 id)
+u8 *GetConditionMonLocationBuffer(u8 id)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    return structPtr->unk6320[id];
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    return structPtr->searchLocBuffer[id];
 }
 
-u16 sub_81CDD48(void)
+u16 GetConditionMonDataBuffer(void)
 {
-    struct PokenavSub18 *unkPtr = GetSubstructPtr(18);
-    return unkPtr->unk4[unkPtr->unk2].data;
+    struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    return monListPtr->monData[monListPtr->currIndex].data;
 }
 
-bool32 sub_81CDD5C(void)
+bool32 IsConditionMenuSearchMode(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    if (structPtr->unk6300 == 1)
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    if (structPtr->searchMode == 1)
         return TRUE;
     else
         return FALSE;
 }
 
-u8 sub_81CDD7C(void)
+u8 TryGetMonMarkId(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    if (structPtr->unk6300 == 1)
-        return structPtr->unk6783[structPtr->unk6786];
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    if (structPtr->searchMode == 1)
+        return structPtr->monMarks[structPtr->mark];
     else
         return 0;
 }
 
-u8 sub_81CDDB0(void)
+u8 GetMonSheen(void)
 {
-    struct PokenavSub11 *structPtr = GetSubstructPtr(11);
-    return structPtr->unk6780[structPtr->unk6786];
+    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
+    return structPtr->sheen[structPtr->mark];
 }
