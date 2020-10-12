@@ -3183,7 +3183,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
         sPSSData->state++;
         break;
     case 1:
-        if (!sub_811FBA4())
+        if (!MonMarkingsMenuHandleInput())
         {
             sub_811FAF8();
             ClearBottomWindow();
