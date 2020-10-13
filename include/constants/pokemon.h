@@ -286,21 +286,21 @@
 #define EVO_LEVEL_NINJASK                 13     // Pokémon reaches the specified level (special value for Ninjask)
 #define EVO_LEVEL_SHEDINJA                14     // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY                        15     // Pokémon levels up with beauty ≥ specified value
-#define EVO_LEVEL_FEMALE                  17     // Pokémon reaches the specified level, is female
-#define EVO_LEVEL_MALE                    18     // Pokémon reaches the specified level, is male
-#define EVO_LEVEL_NIGHT                   19     // Pokémon reaches the specified level, is night
-#define EVO_LEVEL_DAY                     20     // Pokémon reaches the specified level, is day
-#define EVO_LEVEL_DUSK                    21     // Pokémon reaches the specified level, is dusk (5-6 P.M)
-#define EVO_ITEM_HOLD_DAY                 22     // Pokémon levels up, holds specified item at day
-#define EVO_ITEM_HOLD_NIGHT               23     // Pokémon levels up, holds specified item at night
-#define EVO_MOVE                          24     // Pokémon levels up, knows specified move
-#define EVO_MOVE_TYPE                     25     // Pokémon levels up, knows move with specified type
-#define EVO_MAP                           26     // Pokémon levels up on specified map
-#define EVO_ITEM_MALE                     27     // specified item is used on a male Pokémon
-#define EVO_ITEM_FEMALE                   28     // specified item is used on a female Pokémon
-#define EVO_LEVEL_RAIN                    29     // Pokémon reaches the specified level while it's raining
-#define EVO_SPECIFIC_MON_IN_PARTY         30     // Pokémon levels up with a specified Pokémon in party
-#define EVO_LEVEL_DARK_TYPE_MON_IN_PARTY  31     // Pokémon reaches the specified level with a Dark Type Pokémon in party
+#define EVO_LEVEL_FEMALE                  16     // Pokémon reaches the specified level, is female
+#define EVO_LEVEL_MALE                    17     // Pokémon reaches the specified level, is male
+#define EVO_LEVEL_NIGHT                   18     // Pokémon reaches the specified level, is night
+#define EVO_LEVEL_DAY                     19     // Pokémon reaches the specified level, is day
+#define EVO_LEVEL_DUSK                    20     // Pokémon reaches the specified level, is dusk (5-6 P.M)
+#define EVO_ITEM_HOLD_DAY                 21     // Pokémon levels up, holds specified item at day
+#define EVO_ITEM_HOLD_NIGHT               22     // Pokémon levels up, holds specified item at night
+#define EVO_MOVE                          23     // Pokémon levels up, knows specified move
+#define EVO_MOVE_TYPE                     24     // Pokémon levels up, knows move with specified type
+#define EVO_MAP                           25     // Pokémon levels up on specified map
+#define EVO_ITEM_MALE                     26     // specified item is used on a male Pokémon
+#define EVO_ITEM_FEMALE                   27     // specified item is used on a female Pokémon
+#define EVO_LEVEL_RAIN                    28     // Pokémon reaches the specified level while it's raining
+#define EVO_SPECIFIC_MON_IN_PARTY         29     // Pokémon levels up with a specified Pokémon in party
+#define EVO_LEVEL_DARK_TYPE_MON_IN_PARTY  30     // Pokémon reaches the specified level with a Dark Type Pokémon in party
 
 #define EVOS_PER_MON 8
 
