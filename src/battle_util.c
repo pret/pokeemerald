@@ -334,7 +334,9 @@ void HandleAction_UseItem(void)
     gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
+
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
+
     gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
 
     if (gLastUsedItem <= LAST_BALL) // is ball
@@ -360,18 +362,18 @@ void HandleAction_UseItem(void)
             break;
         case AI_ITEM_CURE_CONDITION:
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1)
+            if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1)
             {
-                if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 0x3E)
+                if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 0x3E)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 5;
             }
             else
             {
-                while (!(*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1))
+                do
                 {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
-                }
+                } while (!(*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1));
             }
             break;
         case AI_ITEM_X_STAT:
@@ -387,7 +389,7 @@ void HandleAction_UseItem(void)
 
                 while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
                 {
-                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
                     gBattleTextBuff1[2]++;
                 }
 
@@ -403,7 +405,7 @@ void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2)];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + (gBattlerAttacker >> 1))];
     }
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
@@ -577,6 +579,8 @@ void HandleAction_ThrowPokeblock(void)
         gBattleStruct->safariPkblThrowCounter++;
     if (gBattleStruct->safariEscapeFactor > 1)
     {
+        // BUG: The safariEscapeFactor is unintetionally able to become 0 (but it can not become negative!). This causes the pokeblock throw glitch.
+        // To fix that change the < in the if statement below to <=. 
         if (gBattleStruct->safariEscapeFactor < sPkblToEscapeFactor[gBattleStruct->safariPkblThrowCounter][gBattleCommunication[MULTISTRING_CHOOSER]])
             gBattleStruct->safariEscapeFactor = 1;
         else

@@ -5019,8 +5019,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
 
         ret = (i != PARTY_SIZE);
     }
-
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
             party = gEnemyParty;
