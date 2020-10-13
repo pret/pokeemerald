@@ -16,7 +16,6 @@
 #include "trainer_hill.h"
 #include "constants/field_poison.h"
 #include "constants/party_menu.h"
-#include "constants/species.h"
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
 {

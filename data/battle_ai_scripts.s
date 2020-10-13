@@ -48,7 +48,7 @@ gBattleAI_ScriptsTable:: @ 82DBEF8
 AI_CheckBadMove:
 	if_target_is_ally AI_Ret
 @ Check powder moves
-	if_move_flag FLAG_POWDER AI_CBM_PowderMoves
+	if_move_flag FLAG_POWDER, AI_CBM_PowderMoves
 	goto AI_CBM_CheckIfNegatesType
 AI_CBM_PowderMoves:
 	if_type AI_TARGET, TYPE_GRASS, Score_Minus10
@@ -3439,7 +3439,7 @@ AI_TryToFaint_DoubleSuperEffective:
 AI_TryToFaint_Can:
 	if_effect EFFECT_EXPLOSION, AI_TryToFaint_CheckIfDanger
 	if_user_faster AI_TryToFaint_ScoreUp4
-	if_move_flag FLAG_HIGH_CRIT AI_TryToFaint_ScoreUp4
+	if_move_flag FLAG_HIGH_CRIT, AI_TryToFaint_ScoreUp4
 	score +2
 	goto AI_TryToFaint_CheckIfDanger
 AI_TryToFaint_ScoreUp4:
@@ -3560,7 +3560,7 @@ AI_PreferStrongestMove_End:
 AI_Risky:
 	if_target_is_ally AI_Ret
 	get_considered_move_effect
-	if_move_flag FLAG_HIGH_CRIT AI_Risky_RandChance
+	if_move_flag FLAG_HIGH_CRIT, AI_Risky_RandChance
 	if_not_in_bytes AI_Risky_EffectsToEncourage, AI_Risky_End
 AI_Risky_RandChance:
 	if_random_less_than 128, AI_Risky_End

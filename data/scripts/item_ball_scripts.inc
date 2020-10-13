@@ -398,7 +398,7 @@ MeteorFalls_B1F_2R_EventScript_ItemTM02:: @ 82911DF
 	finditem ITEM_TM02
 	end
 
-NewMauville_Inside_EventScript_ItemUltraRope:: @ 82911EC
+NewMauville_Inside_EventScript_ItemUltraBall:: @ 82911EC
 	finditem ITEM_ULTRA_BALL
 	end
 
