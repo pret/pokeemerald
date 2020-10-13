@@ -29,7 +29,6 @@
 #include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/maps.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
@@ -672,22 +671,17 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 stride) // stride is always 16
 {
-    u16 var0, var1;
-    #ifndef NONMATCHING
-    register u16 var2 asm("r3"); //compiler keeps wanting to "mov r3, 0x80" instead of "mov r2 0x80" and then later "add r3, r2, 0"
-    #else
-    u16 var2;
-    #endif
-    u16 var3;
+    bool8 impassable;
+    u16 metatile;
+    u16 elevation;
 
-    var0 = (sHillData->floors[floorId].display.unk3A0[arg2] >> (15 - bit) & 1);
-    var1 = sHillData->floors[floorId].display.data[arg3 * arg2 + bit];
-    var2 = 0x200;
-    var3 = 0x3000;
+    impassable = (sHillData->floors[floorId].display.collisionData[y] >> (15 - x) & 1);
+    metatile = sHillData->floors[floorId].display.metatileData[stride * y + x] + 0x200;
+    elevation = 0x3000;
 
-    return ((var0 << 10) | var3) | (var1 | var2);
+    return (((impassable << 10) & METATILE_COLLISION_MASK) | elevation) | (metatile & METATILE_ID_MASK);
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
@@ -727,7 +721,7 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg)
     for (i = 0; i < 16; i++)
     {
         for (j = 0; j < 16; j++)
-            dst[j] = sub_81D5F58(mapId, j, i, 0x10);
+            dst[j] = GetMetatileForFloor(mapId, j, i, 0x10);
         dst += 31;
     }
 

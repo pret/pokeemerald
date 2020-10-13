@@ -15,7 +15,6 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/battle_anim.h"
-#include "constants/species.h"
 
 #define GET_UNOWN_LETTER(personality) ((        \
       (((personality & 0x03000000) >> 24) << 6) \

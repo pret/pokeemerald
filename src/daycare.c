@@ -22,7 +22,6 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
-#include "constants/species.h"
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);
