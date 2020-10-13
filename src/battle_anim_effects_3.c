@@ -21,7 +21,6 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/weather.h"
 
 extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
