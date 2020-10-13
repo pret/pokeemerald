@@ -49,7 +49,6 @@
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
-#include "constants/species.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
 
