@@ -5304,7 +5304,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         // Evolution stone
                     case 7:
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item, 0);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item, SPECIES_NONE);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
