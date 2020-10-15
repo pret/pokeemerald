@@ -2618,8 +2618,60 @@ static const u8 sPLASMA_FISTSDescription[] = _(
 	"Normal moves become Electric.");
 
 static const u8 sPHOTON_GEYSERDescription[] = _(
-	"The foe's highest offensive\n"
+	"The user's highest offensive\n"
 	"determines its category.");
+
+static const u8 sZIPPY_ZAPDescription[] = _(
+    "An attack that is always goes\n"
+    "first with a critical hit.");
+
+static const u8 sSPLISHY_SPLASHDescription[] = _(
+    "A huge electrified wave that\n"
+    "may paralyze the foe.");
+
+static const u8 sFLOATY_FALLDescription[] = _(
+    "Floats in the air to fall as\n"
+    "an attack. May cause flinch.");
+
+static const u8 sPIKA_POWDescription[] = _(
+    "Pikachu's love increases its\n"
+    "power. It never misses.");
+
+static const u8 sBOUNCY_BUBBLEDescription[] = _(
+    "An attack that absorbs\n"
+    "half the damage inflicted.");
+
+static const u8 sBUZZY_BUZZDescription[] = _(
+    "Shoots a jolt of electricity\n"
+    "that always paralyzes.");
+
+static const u8 sSIZZLY_SLIDEDescription[] = _(
+    "Cloaks itself in fire to\n"
+    "charge, burning the target.");
+
+static const u8 sGLITZY_GLOWDescription[] = _(
+    "Creates a Light Screen after\n"
+    "a telekinetic attack.");
+
+static const u8 sBADDY_BADDescription[] = _(
+    "Creates a Reflect wall after\n"
+    "acting bad and attacking.");
+
+static const u8 sSAPPY_SEEDDescription[] = _(
+    "Grows a stalk that spreads\n"
+    "damaging Leech Seeds.");
+
+static const u8 sFREEZY_FROSTDescription[] = _(
+	"A frozen haze attack that\n"
+	"eliminates all stat changes.");
+
+static const u8 sSPARKLY_SWIRLDescription[] = _(
+    "Heals all status problems\n"
+    "with a whirlwind of scent.");
+
+static const u8 sVEEVEE_VOLLEYDescription[] = _(
+    "Eevee's love increases its\n"
+    "power. It never misses.");
 
 static const u8 sDOUBLE_IRON_BASHDescription[] = _(
     "The user spins and hits with\n"
@@ -2766,9 +2818,96 @@ static const u8 sSTEEL_BEAMDescription[] = _(
     "Fires a beam of steel from\n"
     "its body. It hurts the user.");
 
+static const u8 sEXPANDING_FORCEDescription[] = _(
+    "A Psychic attack that's more\n"
+    "powerful in Psychic Terrain.");
+
+static const u8 sSTEEL_ROLLERDescription[] = _(
+    "Destroys the current terrain."
+    "Otherwise, it fails.");
+
+static const u8 sSCALE_SHOTDescription[] = _(
+    "Shoots scales 2 to 5 times.\n"
+    "Ups Speed, lowers defense.");
+
+static const u8 sMETEOR_BEAMDescription[] = _(
+    "A 2-turn move that raises\n"
+    "Sp. Attack before attacking.");
+
+static const u8 sSHELL_SIDE_ARMDescription[] = _(
+	"Its category depends on\n"
+	"which one will damage more.");
+
+static const u8 sMISTY_EXPLOSIONDescription[] = _(
+    "Boosted by Misty Terrain, it\n"
+    "makes the user faint.");
+
+static const u8 sGRASSY_GLIDEDescription[] = _(
+    "On Grassy Terrain, the user\n"
+    "will always strike first.");
+
+static const u8 sRISING_VOLTAGEDescription[] = _(
+    "Its power doubles while\n"
+    "on Electric Terrain.");
+
+static const u8 sTERRAIN_PULSEDescription[] = _(
+    "Type changes depending on\n"
+    "terrain. Power also doubles.");
+
+static const u8 sSKITTER_SMACKDescription[] = _(
+    "User skitters behind target\n"
+    "to attack. Lowers Sp. Atk.");
+
+static const u8 sBURNING_JEALOUSYDescription[] = _(
+    "Burns whoever their stats\n"
+    "raised on the same turn.");
+
+static const u8 sLASH_OUTDescription[] = _(
+    "Power doubles if stats were\n"
+    "lowered on the same turn.");
+
+static const u8 sPOLTERGEISTDescription[] = _(
+    "Only works if the target\n"
+    "is holding an item.");
+
+static const u8 sCORROSIVE_GASDescription[] = _(
+    "Melts all surrounding items\n"
+    "with highly acidic gas.");
+
+static const u8 sCOACHINGDescription[] = _(
+    "The user coaches an ally to\n"
+    "raise their Atk. and Def.");
+
+static const u8 sFLIP_TURNDescription[] = _(
+	"Does damage then switches\n"
+	"out the user.");
+
+static const u8 sTRIPLE_AXELDescription[] = _(
+    "A 3-kick attack that gets\n"
+    "stronger on each hit.");
+
+static const u8 sDUAL_WINGBEATDescription[] = _(
+	"The user uses its wings to\n"
+	"slam the target twice.");
+
+static const u8 sSCORCHING_SANDSDescription[] = _(
+	"It throws scorching sand\n"
+	"that may burn the target.");
+
+static const u8 sJUNGLE_HEALINGDescription[] = _(
+	"Becomes one with the jungle\n"
+	"to heal the team's health.");
+
+static const u8 sWICKED_BLOWDescription[] = _(
+	"By mastering the Dark style,\n"
+	"always does a critical hit.");
+
+static const u8 sSURGING_STRIKESDescription[] = _(
+	"The Water style allows to\n"
+	"do 3 critical hits in a row.");
+
 static const u8 sNotDoneYetDescription[] = _(
 	"Not done yet.");
-
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
@@ -3448,7 +3587,21 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_MIND_BLOWN - 1] = sMIND_BLOWNDescription,
     [MOVE_PLASMA_FISTS - 1] = sPLASMA_FISTSDescription,
     [MOVE_PHOTON_GEYSER - 1] = sPHOTON_GEYSERDescription,
+    [MOVE_ZIPPY_ZAP - 1] = sZIPPY_ZAPDescription,
+    [MOVE_SPLISHY_SPLASH - 1] = sSPLISHY_SPLASHDescription,
+    [MOVE_FLOATY_FALL - 1] = sFLOATY_FALLDescription,
+    [MOVE_PIKA_POW - 1] = sPIKA_POWDescription,
+    [MOVE_BOUNCY_BUBBLE - 1] = sBOUNCY_BUBBLEDescription,
+    [MOVE_BUZZY_BUZZ - 1] = sBUZZY_BUZZDescription,
+    [MOVE_SIZZLY_SLIDE - 1] = sSIZZLY_SLIDEDescription,
+    [MOVE_GLITZY_GLOW - 1] = sGLITZY_GLOWDescription,
+    [MOVE_BADDY_BAD - 1] = sBADDY_BADDescription,
+    [MOVE_SAPPY_SEED - 1] = sSAPPY_SEEDDescription,
+    [MOVE_FREEZY_FROST - 1] = sFREEZY_FROSTDescription,
+    [MOVE_SPARKLY_SWIRL - 1] = sSPARKLY_SWIRLDescription,
+    [MOVE_VEEVEE_VOLLEY - 1] = sVEEVEE_VOLLEYDescription,
     [MOVE_DOUBLE_IRON_BASH - 1] = sDOUBLE_IRON_BASHDescription,
+
     //GEN 8
     [MOVE_DYNAMAX_CANNON - 1] = sDYNAMAX_CANNONDescription,
     [MOVE_SNIPE_SHOT - 1] = sSNIPE_SHOTDescription,
@@ -3485,4 +3638,27 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_METEOR_ASSAULT - 1] = sMETEOR_ASSAULTDescription,
     [MOVE_ETERNABEAM - 1] = sETERNABEAMDescription,
     [MOVE_STEEL_BEAM - 1] = sSTEEL_BEAMDescription,
+    [MOVE_EXPANDING_FORCE - 1] = sEXPANDING_FORCEDescription,
+    [MOVE_STEEL_ROLLER - 1] = sSTEEL_ROLLERDescription,
+    [MOVE_SCALE_SHOT - 1] = sSCALE_SHOTDescription,
+    [MOVE_METEOR_BEAM - 1] = sMETEOR_BEAMDescription,
+    [MOVE_SHELL_SIDE_ARM - 1] = sSHELL_SIDE_ARMDescription,
+    [MOVE_MISTY_EXPLOSION - 1] = sMISTY_EXPLOSIONDescription,
+    [MOVE_GRASSY_GLIDE - 1] = sGRASSY_GLIDEDescription,
+    [MOVE_RISING_VOLTAGE - 1] = sRISING_VOLTAGEDescription,
+    [MOVE_TERRAIN_PULSE - 1] = sTERRAIN_PULSEDescription,
+    [MOVE_SKITTER_SMACK - 1] = sSKITTER_SMACKDescription,
+    [MOVE_BURNING_JEALOUSY - 1] = sBURNING_JEALOUSYDescription,
+    [MOVE_LASH_OUT - 1] = sLASH_OUTDescription,
+    [MOVE_POLTERGEIST - 1] = sPOLTERGEISTDescription,
+    [MOVE_CORROSIVE_GAS - 1] = sCORROSIVE_GASDescription,
+    [MOVE_COACHING - 1] = sCOACHINGDescription,
+    [MOVE_FLIP_TURN - 1] = sFLIP_TURNDescription,
+    [MOVE_TRIPLE_AXEL - 1] = sTRIPLE_AXELDescription,
+    [MOVE_DUAL_WINGBEAT - 1] = sDUAL_WINGBEATDescription,
+    [MOVE_SCORCHING_SANDS - 1] = sSCORCHING_SANDSDescription,
+    [MOVE_JUNGLE_HEALING - 1] = sJUNGLE_HEALINGDescription,
+    [MOVE_WICKED_BLOW - 1] = sWICKED_BLOWDescription,
+    [MOVE_SURGING_STRIKES - 1] = sSURGING_STRIKESDescription,
+
 };

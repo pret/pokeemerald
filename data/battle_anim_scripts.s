@@ -692,6 +692,19 @@ gBattleAnims_Moves::
 	.4byte Move_MIND_BLOWN
 	.4byte Move_PLASMA_FISTS
 	.4byte Move_PHOTON_GEYSER
+    .4byte Move_ZIPPY_ZAP
+    .4byte Move_SPLISHY_SPLASH
+    .4byte Move_FLOATY_FALL
+    .4byte Move_PIKA_POW
+    .4byte Move_BOUNCY_BUBBLE
+    .4byte Move_BUZZY_BUZZ
+    .4byte Move_SIZZLY_SLIDE
+    .4byte Move_GLITZY_GLOW
+    .4byte Move_BADDY_BAD
+    .4byte Move_SAPPY_SEED
+    .4byte Move_FREEZY_FROST
+    .4byte Move_SPARKLY_SWIRL
+    .4byte Move_VEEVEE_VOLLEY
     .4byte Move_DOUBLE_IRON_BASH
 @@@@@@@@@@@@ GEN 8 @@@@@@@@@@@@
 	.4byte Move_DYNAMAX_CANNON
@@ -702,7 +715,7 @@ gBattleAnims_Moves::
 	.4byte Move_TAR_SHOT
 	.4byte Move_MAGIC_POWDER
 	.4byte Move_DRAGON_DARTS
-	.4byte Move_TEA_TIME
+	.4byte Move_TEATIME
 	.4byte Move_OCTOLOCK
 	.4byte Move_BOLT_BEAK
 	.4byte Move_FISHIOUS_REND
@@ -729,7 +742,29 @@ gBattleAnims_Moves::
 	.4byte Move_METEOR_ASSAULT
 	.4byte Move_ETERNA_BEAM
 	.4byte Move_STEEL_BEAM
-	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
+    .4byte Move_EXPANDING_FORCE
+    .4byte Move_STEEL_ROLLER
+    .4byte Move_SCALE_SHOT
+    .4byte Move_METEOR_BEAM
+    .4byte Move_SHELL_SIDE_ARM
+    .4byte Move_MISTY_EXPLOSION
+    .4byte Move_GRASSY_GLIDE
+    .4byte Move_RISING_VOLTAGE
+    .4byte Move_TERRAIN_PULSE
+    .4byte Move_SKITTER_SMACK
+    .4byte Move_BURNING_JEALOUSY
+    .4byte Move_LASH_OUT
+    .4byte Move_POLTERGEIST
+    .4byte Move_CORROSIVE_GAS
+    .4byte Move_COACHING
+    .4byte Move_FLIP_TURN
+    .4byte Move_TRIPLE_AXEL
+    .4byte Move_DUAL_WINGBEAT
+    .4byte Move_SCORCHING_SANDS
+    .4byte Move_JUNGLE_HEALING
+    .4byte Move_WICKED_BLOW
+    .4byte Move_SURGING_STRIKES
+	.4byte Move_COUNT @ cannot be reached, because last move is Surging Strikes
 
 	.align 2
 gBattleAnims_StatusConditions::
@@ -13174,6 +13209,44 @@ PhotonGeyserBeam:
 	launchtemplate gPhotonGeyserBeam 0x83, 0x6, 0, -77, ANIM_TARGET, 180, 2, 0
 	return
 
+Move_ZIPPY_ZAP::
+    end @to do:
+
+Move_SPLISHY_SPLASH::
+    end @to do:
+
+Move_FLOATY_FALL::
+    end @to do:
+
+Move_PIKA_POW::
+    end @to do:
+
+Move_BOUNCY_BUBBLE::
+    end @to do:
+
+Move_BUZZY_BUZZ::
+    end @to do:
+
+Move_SIZZLY_SLIDE::
+    end @to do:
+
+Move_GLITZY_GLOW::
+    end @to do:
+
+Move_BADDY_BAD::
+    end @to do:
+
+Move_SAPPY_SEED::
+    end @to do:
+
+Move_FREEZY_FROST::
+    end @to do:
+
+Move_SPARKLY_SWIRL::
+    end @to do:
+
+Move_VEEVEE_VOLLEY::
+    end @to do:
 
 Move_DOUBLE_IRON_BASH::
 	loadspritegfx ANIM_TAG_GUST
@@ -13366,7 +13439,7 @@ Move_DRAGON_DARTS::
 	end
 
 
-Move_TEA_TIME::
+Move_TEATIME::
 	goto Move_MILK_DRINK
 
     
@@ -14047,6 +14120,72 @@ SteelBeamShards:
 	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0x14 0xa
 	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0xffec 0xfff6
 	delay 0x2
+
+Move_EXPANDING_FORCE::
+    end @to do:
+
+Move_STEEL_ROLLER::
+    end @to do:
+
+Move_SCALE_SHOT::
+    end @to do:
+
+Move_METEOR_BEAM::
+    end @to do:
+
+Move_SHELL_SIDE_ARM::
+    end @to do:
+
+Move_MISTY_EXPLOSION::
+    end @to do:
+
+Move_GRASSY_GLIDE::
+    end @to do:
+
+Move_RISING_VOLTAGE::
+    end @to do:
+
+Move_TERRAIN_PULSE::
+    end @to do:
+
+Move_SKITTER_SMACK::
+    end @to do:
+
+Move_BURNING_JEALOUSY::
+    end @to do:
+
+Move_LASH_OUT::
+    end @to do:
+
+Move_POLTERGEIST::
+    end @to do:
+
+Move_CORROSIVE_GAS::
+    end @to do:
+
+Move_COACHING::
+    end @to do:
+
+Move_FLIP_TURN::
+    end @to do:
+
+Move_TRIPLE_AXEL::
+    end @to do:
+
+Move_DUAL_WINGBEAT::
+    end @to do:
+
+Move_SCORCHING_SANDS::
+    end @to do:
+
+Move_JUNGLE_HEALING::
+    end @to do:
+
+Move_WICKED_BLOW::
+    end @to do:
+
+Move_SURGING_STRIKES::
+    end @to do:
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
 Move_NONE:
