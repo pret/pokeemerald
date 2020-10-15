@@ -35,7 +35,6 @@
 #include "constants/trainers.h"
 #include "constants/event_objects.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 #include "constants/easy_chat.h"
 #include "constants/tv.h"
 
@@ -47,7 +46,7 @@ EWRAM_DATA const struct BattleFrontierTrainer *gFacilityTrainers = NULL;
 EWRAM_DATA const struct FacilityMon *gFacilityTrainerMons = NULL;
 
 // IWRAM common
-u16 gUnknown_03006298[MAX_FRONTIER_PARTY_SIZE];
+u16 gFrontierTempParty[MAX_FRONTIER_PARTY_SIZE];
 
 // This file's functions.
 static void InitTowerChallenge(void);
@@ -1447,7 +1446,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     }
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        trainerClass = GetFrontierBrainTrainerClass();
+        return GetFrontierBrainTrainerClass(); // This sticks out like a sore thumb, but this is the only other way that matches. Maybe it SHOULD be assigned to ret, or all early returns. I don't know.
     }
     else if (trainerId == TRAINER_STEVEN_PARTNER)
     {
@@ -1470,9 +1469,6 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].facilityClass];
-            #ifndef NONMATCHING
-                asm("");
-            #endif
         }
     }
     else
@@ -1484,9 +1480,6 @@ u8 GetFrontierOpponentClass(u16 trainerId)
         else
         {
             trainerClass = gFacilityClassToTrainerClass[gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass];
-            #ifndef NONMATCHING
-                asm("");
-            #endif
         }
     }
 
@@ -1872,7 +1865,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     otID = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        u16 monId = gUnknown_03006298[i];
+        u16 monId = gFrontierTempParty[i];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[firstMonId + i],
                                              gFacilityTrainerMons[monId].species,
                                              level,
@@ -1900,7 +1893,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        u16 monId = gUnknown_03006298[i];
+        u16 monId = gFrontierTempParty[i];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[firstMonId + i],
                                              gFacilityTrainerMons[monId].species,
                                              level,
@@ -2275,11 +2268,11 @@ static void GetApprenticeMultiPartnerParty(u16 trainerId)
         }
     }
 
-    gUnknown_03006298[0] = validSpecies[Random() % count];
+    gFrontierTempParty[0] = validSpecies[Random() % count];
     do
     {
-        gUnknown_03006298[1] = validSpecies[Random() % count];
-    } while (gUnknown_03006298[0] == gUnknown_03006298[1]);
+        gFrontierTempParty[1] = validSpecies[Random() % count];
+    } while (gFrontierTempParty[0] == gFrontierTempParty[1]);
 }
 
 static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
@@ -2303,11 +2296,11 @@ static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
         }
     }
 
-    gUnknown_03006298[2] = validSpecies[Random() % count];
+    gFrontierTempParty[2] = validSpecies[Random() % count];
     do
     {
-        gUnknown_03006298[3] = validSpecies[Random() % count];
-    } while (gUnknown_03006298[2] == gUnknown_03006298[3]);
+        gFrontierTempParty[3] = validSpecies[Random() % count];
+    } while (gFrontierTempParty[2] == gFrontierTempParty[3]);
 }
 
 static void LoadMultiPartnerCandidatesData(void)
@@ -2471,15 +2464,15 @@ static void sub_81646BC(u16 trainerId, u16 monId)
         }
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         {
-            move = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[gUnknown_03006298[gSpecialVar_0x8005 + 1]].moves[0];
-            species = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[gUnknown_03006298[gSpecialVar_0x8005 + 1]].species;
+            move = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[gFrontierTempParty[gSpecialVar_0x8005 + 1]].moves[0];
+            species = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[gFrontierTempParty[gSpecialVar_0x8005 + 1]].species;
         }
         else
         {
             s32 i;
 
-            move = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].party[gUnknown_03006298[gSpecialVar_0x8005 - 1]].moves[0];
-            species = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].party[gUnknown_03006298[gSpecialVar_0x8005 - 1]].species;
+            move = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].party[gFrontierTempParty[gSpecialVar_0x8005 - 1]].moves[0];
+            species = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].party[gFrontierTempParty[gSpecialVar_0x8005 - 1]].species;
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 gStringVar3[i] = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].playerName[i];
             gStringVar3[i] = EOS;
@@ -2548,13 +2541,13 @@ static void ShowPartnerCandidateMessage(void)
         }
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         {
-            gSaveBlock2Ptr->frontier.trainerIds[18] = gUnknown_03006298[2];
-            gSaveBlock2Ptr->frontier.trainerIds[19] = gUnknown_03006298[3];
+            gSaveBlock2Ptr->frontier.trainerIds[18] = gFrontierTempParty[2];
+            gSaveBlock2Ptr->frontier.trainerIds[19] = gFrontierTempParty[3];
         }
         else
         {
-            gSaveBlock2Ptr->frontier.trainerIds[18] = gUnknown_03006298[0];
-            gSaveBlock2Ptr->frontier.trainerIds[19] = gUnknown_03006298[1];
+            gSaveBlock2Ptr->frontier.trainerIds[18] = gFrontierTempParty[0];
+            gSaveBlock2Ptr->frontier.trainerIds[19] = gFrontierTempParty[1];
         }
         for (k = 0; k < 14; k++)
         {

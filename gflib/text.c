@@ -462,40 +462,35 @@ u8 GetLastTextColor(u8 colorType)
     }
 }
 
-#define GLYPH_COPY(fromY_, toY_, fromX_, toX_, unk)                                                               \
-    {                                                                                                             \
-        u32 i, j, *ptr, toY, fromX, toX, r5, bits;                                                                \
-        u8 *dst;                                                                                                  \
-        j = fromX_;                                                                                               \
-        i = fromY_;                                                                                               \
-        ptr = unk;                                                                                                \
-        toX = toX_;                                                                                               \
-        toY = toY_;                                                                                               \
-        fromX = fromX_;                                                                                           \
-                                                                                                                  \
-        for (; i < toY; i++)                                                                                      \
-        {                                                                                                         \
-            asm("":::"sl"); /* NONMATCHING */                                                                     \
-            r5 = *(ptr++);                                                                                        \
-            for (j = fromX; j < toX; j++)                                                                         \
-            {                                                                                                     \
-                const u32 toOrr = r5 & 0xF;                                                                       \
-                if (toOrr)                                                                                        \
-                {                                                                                                 \
-                    dst = windowTiles + ((j / 8) * 32) + ((j % 8) / 2) + ((i / 8) * widthOffset) + ((i % 8) * 4); \
-                    bits = ((j & 1) * 4);                                                                         \
-                    *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));                                             \
-                }                                                                                                 \
-                r5 >>= 4;                                                                                         \
-            }                                                                                                     \
-        }                                                                                                         \
+inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *ptr, s32 width, s32 height)                                           //
+{
+    u32 xAdd, yAdd, r5, bits, toOrr, dummyX;
+    u8 *dst;
+
+    xAdd = j + width;
+    yAdd = i + height;
+    dummyX = j;
+    for (; i < yAdd; i++)
+    {
+        r5 = *ptr++;
+        for (j = dummyX; j < xAdd; j++)
+        {
+            if ((toOrr = r5 & 0xF))
+            {
+                dst = windowTiles + ((j / 8) * 32) + ((j % 8) / 2) + ((i / 8) * widthOffset) + ((i % 8) * 4);
+                bits = ((j & 1) * 4);
+                *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));
+            }
+            r5 >>= 4;
+        }
     }
+}
 
 void CopyGlyphToWindow(struct TextPrinter *textPrinter)
 {
     struct Window *win;
     struct WindowTemplate *winTempl;
-    struct Struct_03002F90 *unkStruct;
+    u32 *unkStruct;
     u32 currX, currY, widthOffset;
     s32 r4, r0;
     u8 *windowTiles;
@@ -503,17 +498,15 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     win = &gWindows[textPrinter->printerTemplate.windowId];
     winTempl = &win->window;
 
-    r4 = (winTempl->width * 8) - textPrinter->printerTemplate.currentX;
-    if (r4 > gUnknown_03002F90.width)
+    if ((r4 = (winTempl->width * 8) - textPrinter->printerTemplate.currentX) > gUnknown_03002F90.width)
         r4 = gUnknown_03002F90.width;
 
-    r0 = (winTempl->height * 8) - textPrinter->printerTemplate.currentY;
-    if (r0 > gUnknown_03002F90.height)
+    if ((r0 = (winTempl->height * 8) - textPrinter->printerTemplate.currentY) > gUnknown_03002F90.height)
         r0 = gUnknown_03002F90.height;
 
     currX = textPrinter->printerTemplate.currentX;
     currY = textPrinter->printerTemplate.currentY;
-    unkStruct = &gUnknown_03002F90;
+    unkStruct = (u32 *)&gUnknown_03002F90.unk0;
     windowTiles = win->tileData;
     widthOffset = winTempl->width * 32;
 
@@ -521,45 +514,31 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     {
         if (r0 < 9)
         {
-            GLYPH_COPY(currY, currY + r0, currX, currX + r4, unkStruct->unk0);
+            GLYPH_COPY(windowTiles, widthOffset, currX, currY, unkStruct, r4, r0);
         }
         else
         {
-            u32 temp;
-            GLYPH_COPY(currY, currY + 8, currX, currX + r4, unkStruct->unk0);
-
-            temp = currY + 8;
-            GLYPH_COPY(temp, (temp - 8) + r0, currX, currX + r4, unkStruct->unk40);
+            GLYPH_COPY(windowTiles, widthOffset, currX, currY, unkStruct, r4, 8);
+            GLYPH_COPY(windowTiles, widthOffset, currX, currY + 8, unkStruct + 16, r4, r0 - 8);
         }
     }
     else
     {
-        u32 temp;
         if (r0 < 9)
         {
-            GLYPH_COPY(currY, currY + r0, currX, currX + 8, unkStruct->unk0);
-
-            temp = currX + 8;
-            GLYPH_COPY(currY, currY + r0, temp, (temp - 8) + r4, unkStruct->unk20);
+            GLYPH_COPY(windowTiles, widthOffset, currX, currY, unkStruct, 8, r0);
+            GLYPH_COPY(windowTiles, widthOffset, currX + 8, currY, unkStruct + 8, r4 - 8, r0);
         }
         else
         {
-            GLYPH_COPY(currY, currY + 8, currX, currX + 8, unkStruct->unk0);
-
-            temp = currX + 8;
-            GLYPH_COPY(currY, currY + 8, temp, temp - 8 + r4, unkStruct->unk20);
-
-            temp = currY + 8;
-            GLYPH_COPY(temp, temp - 8 + r0, currX, currX + 8, unkStruct->unk40);
-            {
-                u32 tempX, tempY;
-                tempX = currX + 8;
-                tempY = currY + 8;
-                GLYPH_COPY(tempY, tempY - 8 + r0, tempX, tempX - 8 + r4, unkStruct->unk60);
-            }
+            GLYPH_COPY(windowTiles, widthOffset, currX, currY, unkStruct, 8, 8);
+            GLYPH_COPY(windowTiles, widthOffset, currX + 8, currY, unkStruct + 8, r4 - 8, 8);
+            GLYPH_COPY(windowTiles, widthOffset, currX, currY + 8, unkStruct + 16, 8, r0 - 8);
+            GLYPH_COPY(windowTiles, widthOffset, currX + 8, currY + 8, unkStruct + 24, r4 - 8, r0 - 8);
         }
     }
 }
+
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 {
     struct Window *window;

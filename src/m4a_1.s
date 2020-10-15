@@ -1392,10 +1392,10 @@ _081DD9F6:
 	bl ChnVolSetAsm
 	cmp r6, 0
 	beq _081DDA14
-	ldrb r0, [r4, o_CgbChannel_mo]
+	ldrb r0, [r4, #o_CgbChannel_mo]
 	movs r1, 0x1
 	orrs r0, r1
-	strb r0, [r4, o_CgbChannel_mo]
+	strb r0, [r4, #o_CgbChannel_mo]
 _081DDA14:
 	ldrb r3, [r5, #o_MusicPlayerTrack_flags]
 	movs r0, 0xC
@@ -1416,11 +1416,11 @@ _081DDA28:
 	ldrb r2, [r5, #o_MusicPlayerTrack_pitM]
 	adds r0, r6, 0
 	bl call_r3
-	str r0, [r4, o_CgbChannel_fr]
-	ldrb r0, [r4, o_CgbChannel_mo]
+	str r0, [r4, #o_CgbChannel_fr]
+	ldrb r0, [r4, #o_CgbChannel_mo]
 	movs r1, 0x2
 	orrs r0, r1
-	strb r0, [r4, o_CgbChannel_mo]
+	strb r0, [r4, #o_CgbChannel_mo]
 	b _081DDA52
 _081DDA46:
 	adds r1, r2, 0
