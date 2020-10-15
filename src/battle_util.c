@@ -4247,7 +4247,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && gBattleMoves[gCurrentMove].split == SPLIT_PHYSICAL
+             && GetBattleMoveSplit(gCurrentMove) == SPLIT_PHYSICAL
              && (gBattleMons[battler].statStages[STAT_SPEED] != 12 || gBattleMons[battler].statStages[STAT_DEF] != 0))
             {
                 BattleScriptPushCursor();
@@ -7664,4 +7664,14 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
     }
 
     return FALSE;
+}
+
+u8 GetBattleMoveSplit(u32 moveId)
+{
+    if (IS_MOVE_STATUS(moveId) || B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
+        return gBattleMoves[moveId].split;
+    else if (gBattleMoves[moveId].type < TYPE_MYSTERY)
+        return SPLIT_PHYSICAL;
+    else
+        return SPLIT_SPECIAL;
 }

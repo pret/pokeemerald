@@ -4288,7 +4288,7 @@ s8 GetMovePriority(u32 battlerId, u16 move)
         priority++;
     }
     else if (GetBattlerAbility(battlerId) == ABILITY_PRANKSTER
-        && gBattleMoves[move].split == SPLIT_STATUS)
+        && GetBattleMoveSplit(move) == SPLIT_STATUS)
     {
         priority++;
     }
