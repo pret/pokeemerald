@@ -8,6 +8,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
+#include "constants/battle_config.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
@@ -3823,6 +3824,7 @@ BattleScript_EffectBatonPass::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectRapidSpin::
+.if B_SPEED_BUFFING_RAPID_SPIN == GEN_8
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
@@ -3854,6 +3856,10 @@ BattleScript_EffectRapidSpinEnd::
 	tryfaintmon BS_TARGET, FALSE, NULL
 	moveendall
 	end
+.else
+	setmoveeffect MOVE_EFFECT_RAPIDSPIN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+.endif
+	goto BattleScript_EffectHit
 
 BattleScript_EffectSonicboom::
 	attackcanceler
