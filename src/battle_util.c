@@ -19,7 +19,6 @@
 #include "berry.h"
 #include "pokedex.h"
 #include "mail.h"
-#include "constants/battle_config.h"
 #include "field_weather.h"
 #include "constants/abilities.h"
 #include "constants/battle_anim.h"
