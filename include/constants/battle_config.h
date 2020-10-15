@@ -72,7 +72,7 @@
 #define B_PSYWAVE_DMG               GEN_6 // Psywave's damage formula. See Cmd_psywavedamageeffect.
 
 // Move settings
-#define B_PHYSICAL_SPECIAL_SPLIT    GEN_3 // In Gen3, the move's type determines if it will do physical or special damage.
+#define B_PHYSICAL_SPECIAL_SPLIT    GEN_6 // In Gen3, the move's type determines if it will do physical or special damage. The split icon in the summary will reflect this.
 #define B_FELL_STINGER_STAT_RAISE   GEN_6 // In Gen7+, it raises Atk by 3 stages instead of 2 if it causes the target to faint.
 #define B_SOUND_SUBSTITUTE          GEN_6 // In Gen6+, sound moves bypass Substitute.
 #define B_TOXIC_NEVER_MISS          GEN_6 // In Gen6+, if Toxic is used by a Poison type, it will never miss.
@@ -98,29 +98,32 @@
 #define B_HP_BERRIES                GEN_6 // In Gen4+, berries which restore hp activate immediately after hp drops to half. In gen3, the effect occurs at the end of the turn.
 #define B_BERRIES_INSTANT           GEN_6 // In Gen4+, most berries activate on battle start/switch-in if applicable. In gen3, they only activate either at the move end or turn end.
 
-// Other
-#define B_FLAG_INVERSE_BATTLE       0     // If this flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water. 0 disables the feature.
+// Interface settings
 #define B_FAST_INTRO                TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
 #define B_SHOW_TARGETS              TRUE  // If set to TRUE, all available targets, for moves hitting 2 or 3 Pokémon, will be shown before selecting a move.
+#define B_SHOW_SPLIT_ICON           TRUE  // If set to TRUE, it will show an icon in the summary showing the move's category split.
+
+// Other
+#define B_FLAG_INVERSE_BATTLE       0     // If this flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water. 0 disables the feature.
 #define B_SLEEP_TURNS               GEN_6 // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
 #define B_PARALYZE_ELECTRIC         GEN_6 // In Gen6+, Electric type Pokémon can't be paralyzed.
 #define B_POWDER_GRASS              GEN_6 // In Gen6+, Grass type Pokémon are immune to powder and spore moves.
 
 // Animation Settings
-#define NEW_SWORD_PARTICLE              TRUE    // update swords dance particle
-#define NEW_LEECH_SEED_PARTICLE         TRUE    //update leech seed's animation particle
-#define NEW_HORN_ATTACK_PARTICLE        TRUE    //update horn attack's horn
-#define NEW_LEAF_PARTICLE               TRUE    // update leaf particle
-#define NEW_EMBER_PARTICLES             TRUE    //updates ember fire particle
-#define NEW_MEAN_LOOK_PARTICLE          TRUE    //update mean look eye
-#define NEW_TEETH_PARTICLE              TRUE    //update bite/crunch teeth particle
-#define NEW_HANDS_FEET_PARTICLE         TRUE    //update chop/kick/punch particles
-#define NEW_SPIKES_PARTICLE             TRUE    //update spikes particle
-#define NEW_FLY_BUBBLE_PARTICLE         TRUE    //update fly 'bubble' particle
-#define NEW_CURSE_NAIL_PARTICLE         TRUE    //updates curse nail
-#define NEW_BATON_PASS_BALL_PARTICLE    TRUE    //update baton pass pokeball sprite
-#define NEW_MORNING_SUN_STAR_PARTICLE   TRUE    //updates morning sun star particles
-#define NEW_IMPACT_PALETTE              TRUE    //updates the basic 'hit' particle
-#define NEW_SURF_PARTICLE_PALETTE       TRUE    //updates the surf wave palette
+#define NEW_SWORD_PARTICLE              TRUE    // If set to TRUE, it updates Swords Dance's particle.
+#define NEW_LEECH_SEED_PARTICLE         TRUE    // If set to TRUE, it updates Leech Seed's animation particle.
+#define NEW_HORN_ATTACK_PARTICLE        TRUE    // If set to TRUE, it updates Horn Attack's horn particle.
+#define NEW_LEAF_PARTICLE               TRUE    // If set to TRUE, it updates leaf particle.
+#define NEW_EMBER_PARTICLES             TRUE    // If set to TRUE, it updates Ember's fire particle.
+#define NEW_MEAN_LOOK_PARTICLE          TRUE    // If set to TRUE, it updates Mean Look's eye particle.
+#define NEW_TEETH_PARTICLE              TRUE    // If set to TRUE, it updates Bite/Crunch teeth particle.
+#define NEW_HANDS_FEET_PARTICLE         TRUE    // If set to TRUE, it updates chop/kick/punch particles.
+#define NEW_SPIKES_PARTICLE             TRUE    // If set to TRUE, it updates Spikes particle.
+#define NEW_FLY_BUBBLE_PARTICLE         TRUE    // If set to TRUE, it updates Fly's 'bubble' particle.
+#define NEW_CURSE_NAIL_PARTICLE         TRUE    // If set to TRUE, it updates Curse's nail.
+#define NEW_BATON_PASS_BALL_PARTICLE    TRUE    // If set to TRUE, it updates Baton Pass' Poké Ball sprite.
+#define NEW_MORNING_SUN_STAR_PARTICLE   TRUE    // If set to TRUE, it updates Morning Sun's star particles.
+#define NEW_IMPACT_PALETTE              TRUE    // If set to TRUE, it updates the basic 'hit' palette.
+#define NEW_SURF_PARTICLE_PALETTE       TRUE    // If set to TRUE, it updates Surf's wave palette.
 
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
