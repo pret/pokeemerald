@@ -60,7 +60,7 @@ void StopScript(struct ScriptContext *ctx)
 
 bool8 RunScriptCommand(struct ScriptContext *ctx)
 {
-    if (ctx->mode == 0) 
+    if (ctx->mode == 0)
         return FALSE;
 
     switch (ctx->mode)
