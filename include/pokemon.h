@@ -3,6 +3,7 @@
 
 #include "constants/pokemon.h"
 #include "sprite.h"
+#include "constants/region_map_sections.h"
 
 struct PokemonSubstruct0
 {
