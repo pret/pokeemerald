@@ -659,7 +659,6 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
             mplayInfo->fadeOI = 0;
         }
     }
-
     else
     {
         if ((s16)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
