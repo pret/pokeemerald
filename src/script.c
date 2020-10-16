@@ -60,12 +60,12 @@ void StopScript(struct ScriptContext *ctx)
 
 bool8 RunScriptCommand(struct ScriptContext *ctx)
 {
-    if (ctx->mode == 0)
+    if (ctx->mode == 0) 
         return FALSE;
 
     switch (ctx->mode)
     {
-    case 0:
+    case 0: //Already handled in above if statement
         return FALSE;
     case 2:
         if (ctx->nativePtr)
@@ -81,13 +81,13 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
             u8 cmdCode;
             ScrCmdFunc *func;
 
-            if (!ctx->scriptPtr)
+            if (ctx->scriptPtr == NULL)
             {
                 ctx->mode = 0;
                 return FALSE;
             }
 
-            if (ctx->scriptPtr == gNullScriptPtr)
+            if (ctx->scriptPtr == gNullScriptPtr) //Dead code; above if statement already handles ctx->scriptPtr being NULL; this will never execute
             {
                 while (1)
                     asm("svc 2"); // HALT
