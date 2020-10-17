@@ -18,5 +18,6 @@
 #define P_KEY_FOSSILS           GEN_7   // In Gen4+, all Gen 3 fossils became regular items.
 #define P_KEY_ESCAPE_ROPE       GEN_7   // In Gen8, Escape Rope became a Key Item.
 #define P_LURE_BALL_MODIFIER    GEN_7   // In Gen7+, Lure Ball's catch multiplier is x5 instead of x3.
+#define P_HEAVY_BALL_MODIFIER   GEN_7   // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
