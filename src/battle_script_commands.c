@@ -9824,7 +9824,11 @@ static void Cmd_handleballthrow(void)
                     #endif
                 break;
             case ITEM_TIMER_BALL:
-                ballMultiplier = gBattleResults.battleTurnCounter + 10;
+                #if P_TIMER_BALL_MODIFIER >= GEN_5
+                    ballMultiplier = (gBattleResults.battleTurnCounter * 3) + 10;
+                #else
+                    ballMultiplier = gBattleResults.battleTurnCounter + 10;
+                #endif
                 if (ballMultiplier > 40)
                     ballMultiplier = 40;
                 break;

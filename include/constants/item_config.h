@@ -24,5 +24,6 @@
 #define P_NET_BALL_MODIFIER     GEN_7   // In Gen7+, Net Ball's catch multiplier is x5 instead of x3.
 #define P_NEST_BALL_MODIFIER    GEN_7   // Nest Ball's formula varies depending on the Gen. See Cmd_handleballthrow.
 #define P_REPEAT_BALL_MODIFIER  GEN_7   // In Gen7+, Net Ball's catch multiplier is x3.5 instead of x3.
+#define P_TIMER_BALL_MODIFIER   GEN_7   // In Gen5+, Timer Ball's effectiveness increases by x0.3 per turn instead of x0.1
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
