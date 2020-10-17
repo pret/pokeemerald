@@ -28,5 +28,6 @@
 #define P_DIVE_BALL_MODIFIER    GEN_3   // In Gen4+, Dive Ball's effectiveness increases by when Surfing or Fishing.
 #define P_DUSK_BALL_MODIFIER    GEN_7   // In Gen7+, Net Ball's catch multiplier is x3 instead of x3.5.
 #define P_QUICK_BALL_MODIFIER   GEN_7   // In Gen5+, Quick Ball's catch multiplier is x5 instead of x4.
+#define P_DREAM_BALL_MODIFIER   GEN_8   // In Gen8+, Dream Ball's catch multiplier is x4 when the target is asleep.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
