@@ -9817,7 +9817,11 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_REPEAT_BALL:
                 if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
-                    ballMultiplier = 30;
+                    #if P_REPEAT_BALL_MODIFIER >= GEN_7
+                        ballMultiplier = 35;
+                    #else
+                        ballMultiplier = 30;
+                    #endif
                 break;
             case ITEM_TIMER_BALL:
                 ballMultiplier = gBattleResults.battleTurnCounter + 10;
