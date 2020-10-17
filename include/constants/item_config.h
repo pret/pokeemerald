@@ -20,14 +20,14 @@
 
 // Ball config
 #define P_LURE_BALL_MODIFIER    GEN_7   // In Gen7+, Lure Ball's catch multiplier is x5 instead of x3.
-#define P_HEAVY_BALL_MODIFIER   GEN_7   // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
 #define P_NET_BALL_MODIFIER     GEN_7   // In Gen7+, Net Ball's catch multiplier is x5 instead of x3.
-#define P_NEST_BALL_MODIFIER    GEN_7   // Nest Ball's formula varies depending on the Gen. See Cmd_handleballthrow.
 #define P_REPEAT_BALL_MODIFIER  GEN_7   // In Gen7+, Net Ball's catch multiplier is x3.5 instead of x3.
-#define P_TIMER_BALL_MODIFIER   GEN_7   // In Gen5+, Timer Ball's effectiveness increases by x0.3 per turn instead of x0.1
-#define P_DIVE_BALL_MODIFIER    GEN_3   // In Gen4+, Dive Ball's effectiveness increases by when Surfing or Fishing.
 #define P_DUSK_BALL_MODIFIER    GEN_7   // In Gen7+, Net Ball's catch multiplier is x3 instead of x3.5.
 #define P_QUICK_BALL_MODIFIER   GEN_7   // In Gen5+, Quick Ball's catch multiplier is x5 instead of x4.
 #define P_DREAM_BALL_MODIFIER   GEN_8   // In Gen8+, Dream Ball's catch multiplier is x4 when the target is asleep.
+#define P_TIMER_BALL_MODIFIER   GEN_7   // In Gen5+, Timer Ball's effectiveness increases by x0.3 per turn instead of x0.1
+#define P_DIVE_BALL_MODIFIER    GEN_3   // In Gen4+, Dive Ball's effectiveness increases by when Surfing or Fishing.
+#define P_HEAVY_BALL_MODIFIER   GEN_7   // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
+#define P_NEST_BALL_MODIFIER    GEN_7   // Nest Ball's formula varies depending on the Gen. See Cmd_handleballthrow.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
