@@ -17,5 +17,6 @@
 #define P_SHINY_CHARM_REROLLS   3       // Amount of re-rolls if the player has the Shiny Charm. Set to 0 to disable Shiny Charm's effects.
 #define P_KEY_FOSSILS           GEN_7   // In Gen4+, all Gen 3 fossils became regular items.
 #define P_KEY_ESCAPE_ROPE       GEN_7   // In Gen8, Escape Rope became a Key Item.
+#define P_LURE_BALL_MODIFIER    GEN_7   // In Gen7+, Lure Ball's catch multiplier is x5 instead of x3.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
