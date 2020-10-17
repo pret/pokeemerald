@@ -5073,6 +5073,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     if (!gPaletteFade.active)
     {
         gIsFishingEncounter = FALSE;
+        gIsSurfingEncounter = FALSE;
         ResetSpriteData();
         if (gLeveledUpInBattle == 0 || gBattleOutcome != B_OUTCOME_WON)
         {
