@@ -9786,7 +9786,11 @@ static void Cmd_handleballthrow(void)
             {
             case ITEM_NET_BALL:
                 if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BUG))
-                    ballMultiplier = 30;
+                    #if P_NET_BALL_MODIFIER >= GEN_7
+                        ballMultiplier = 50;
+                    #else
+                        ballMultiplier = 30;
+                    #endif
                 break;
             case ITEM_DIVE_BALL:
                 if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
