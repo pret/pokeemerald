@@ -9916,7 +9916,11 @@ static void Cmd_handleballthrow(void)
             case ITEM_DUSK_BALL:
                 RtcCalcLocalTime();
                 if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
-                    ballMultiplier = 30;
+                    #if P_DUSK_BALL_MODIFIER >= GEN_7
+                        ballMultiplier = 30;
+                    #else
+                        ballMultiplier = 35;
+                    #endif
                 break;
             }
         }
