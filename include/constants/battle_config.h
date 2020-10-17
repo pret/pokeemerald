@@ -93,7 +93,6 @@
 #define B_SPEED_BUFFING_RAPID_SPIN  GEN_8 // In Gen8, Rapid Spin raises the user's Speed by 1 stage.
 
 // Ability settings
-#define B_ABILITY_POP_UP            GEN_6 // In Gen5+, the Pokémon abilities are displayed in a pop-up, when they activate in battle.
 #define B_ABILITY_WEATHER           GEN_6 // In Gen5+, weather caused by abilities lasts the same amount of turns as induced from a move. Before, they lasted till the battle's end or weather change by a move.
 #define B_GALE_WINGS                GEN_6 // In Gen7+ requires full HP to trigger.
 #define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7+, Aegislash's form change does not happen, if the Pokémon cannot use a move, because of confusion, paralysis, etc. In gen6, the form change occurs despite not being able to move.
@@ -107,13 +106,16 @@
 #define B_BERRIES_INSTANT           GEN_6 // In Gen4+, most berries activate on battle start/switch-in if applicable. In gen3, they only activate either at the move end or turn end.
 
 // Flag settings. Replace the 0s with defined flags to be able to toggle the following features using those flags.
-#define B_FLAG_INVERSE_BATTLE       0 // If the flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water.
-#define B_FLAG_FORCE_DOUBLE_WILD    0 // If the flag is set, all wild battles will be double battles.
+#define B_FLAG_INVERSE_BATTLE       0     // If the flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water.
+#define B_FLAG_FORCE_DOUBLE_WILD    0     // If the flag is set, all land and surfing wild battles will be double battles.
+
+// Interface settings
+#define B_ABILITY_POP_UP            TRUE  // In Gen5+, the Pokémon abilities are displayed in a pop-up, when they activate in battle.
+#define B_FAST_INTRO                TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
+#define B_SHOW_TARGETS              TRUE  // If set to TRUE, all available targets, for moves hitting 2 or 3 Pokémon, will be shown before selecting a move.
 
 // Other
 #define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
-#define B_FAST_INTRO                TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
-#define B_SHOW_TARGETS              TRUE  // If set to TRUE, all available targets, for moves hitting 2 or 3 Pokémon, will be shown before selecting a move.
 #define B_SLEEP_TURNS               GEN_6 // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
 #define B_PARALYZE_ELECTRIC         GEN_6 // In Gen6+, Electric type Pokémon can't be paralyzed.
 #define B_POWDER_GRASS              GEN_6 // In Gen6+, Grass type Pokémon are immune to powder and spore moves.
