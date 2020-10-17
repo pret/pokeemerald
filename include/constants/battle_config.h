@@ -1,61 +1,69 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONFIG_H
 #define GUARD_CONSTANTS_BATTLE_CONFIG_H
 
-// Species with peculiar battle effects. Remove them if they're properly placed in constant/species.h
-#define SPECIES_DIALGA 0
-#define SPECIES_PALKIA 0
-#define SPECIES_GIRATINA 0
-#define SPECIES_CHERRIM 0
-#define SPECIES_ARCEUS 0
-#define SPECIES_SILVALLY 0
-#define SPECIES_GENESECT 0
-#define SPECIES_AEGISLASH 0
-#define SPECIES_AEGISLASH_BLADE 10000
-#define SPECIES_MIMIKYU 0
-#define SPECIES_MIMIKYU_BUSTED 10001
-#define SPECIES_DARMANITAN 0
-#define SPECIES_DARMANITAN_ZEN 10002
-#define SPECIES_MINIOR_CORE 0
-#define SPECIES_MINIOR 10003
-#define SPECIES_WISHIWASHI 0
-#define SPECIES_WISHIWASHI_SCHOOL 10004
-#define SPECIES_ZYGARDE 0 // 50%
-#define SPECIES_ZYGARDE_10 10005 // 10 %
-#define SPECIES_ZYGARDE_COMPLETE 10006 // 100 %
+#define BATTLE_ENGINE
 
-// Items with peculiar battle effects. Remove them if they're properly placed in constant/items.h
-#define ITEM_GRISEOUS_ORB 0
-#define ITEM_OCCA_BERRY 204
-#define ITEM_PASSHO_BERRY 205
-#define ITEM_WACAN_BERRY 206
-#define ITEM_RINDO_BERRY 207
-#define ITEM_YACHE_BERRY 208
-#define ITEM_CHOPLE_BERRY 177
-#define ITEM_KEBIA_BERRY 178
-#define ITEM_SHUCA_BERRY 179
-#define ITEM_COBA_BERRY 180
-#define ITEM_PAYAPA_BERRY 181
-#define ITEM_TANGA_BERRY 182
-#define ITEM_CHARTI_BERRY 183
-#define ITEM_KASIB_BERRY 184
-#define ITEM_HABAN_BERRY 185
-#define ITEM_COLBUR_BERRY 186
-#define ITEM_BABIRI_BERRY 187
-#define ITEM_CHILAN_BERRY 188
-#define ITEM_ROSELI_BERRY 189
-#define ITEM_MICLE_BERRY 197
-#define ITEM_CUSTAP_BERRY 199
-#define ITEM_JABOCA_BERRY 200
-#define ITEM_ROWAP_BERRY 201
-#define ITEM_KEE_BERRY 202
-#define ITEM_MARANGA_BERRY 203
+// Species with peculiar battle effects.
+#ifndef POKEMON_EXPANSION
+    #define SPECIES_DIALGA            0
+    #define SPECIES_PALKIA            0
+    #define SPECIES_GIRATINA          0
+    #define SPECIES_CHERRIM           0
+    #define SPECIES_ARCEUS            0
+    #define SPECIES_SILVALLY          0
+    #define SPECIES_GENESECT          0
+    #define SPECIES_AEGISLASH         0
+    #define SPECIES_AEGISLASH_BLADE   10000
+    #define SPECIES_MIMIKYU           0
+    #define SPECIES_MIMIKYU_BUSTED    10001
+    #define SPECIES_DARMANITAN        0
+    #define SPECIES_DARMANITAN_ZEN    10002
+    #define SPECIES_MINIOR_CORE       0
+    #define SPECIES_MINIOR            10003
+    #define SPECIES_WISHIWASHI        0
+    #define SPECIES_WISHIWASHI_SCHOOL 10004
+    #define SPECIES_ZYGARDE           0     // 50%
+    #define SPECIES_ZYGARDE_10        10005 // 10 %
+    #define SPECIES_ZYGARDE_COMPLETE  10006 // 100 %
+#endif
 
-#define GEN_3 0
-#define GEN_4 1
-#define GEN_5 2
-#define GEN_6 3
-#define GEN_7 4
-#define GEN_8 5
+// Items with peculiar battle effects.
+#ifndef ITEM_EXPANSION
+    #define ITEM_CHOPLE_BERRY   177
+    #define ITEM_KEBIA_BERRY    178
+    #define ITEM_SHUCA_BERRY    179
+    #define ITEM_COBA_BERRY     180
+    #define ITEM_PAYAPA_BERRY   181
+    #define ITEM_TANGA_BERRY    182
+    #define ITEM_CHARTI_BERRY   183
+    #define ITEM_KASIB_BERRY    184
+    #define ITEM_HABAN_BERRY    185
+    #define ITEM_COLBUR_BERRY   186
+    #define ITEM_BABIRI_BERRY   187
+    #define ITEM_CHILAN_BERRY   188
+    #define ITEM_ROSELI_BERRY   189
+    #define ITEM_MICLE_BERRY    197
+    #define ITEM_CUSTAP_BERRY   199
+    #define ITEM_JABOCA_BERRY   200
+    #define ITEM_ROWAP_BERRY    201
+    #define ITEM_KEE_BERRY      202
+    #define ITEM_MARANGA_BERRY  203
+    #define ITEM_OCCA_BERRY     204
+    #define ITEM_PASSHO_BERRY   205
+    #define ITEM_WACAN_BERRY    206
+    #define ITEM_RINDO_BERRY    207
+    #define ITEM_YACHE_BERRY    208
+    #define ITEM_GRISEOUS_ORB   369
+#endif
+
+#ifndef GEN_3
+    #define GEN_3 0
+    #define GEN_4 1
+    #define GEN_5 2
+    #define GEN_6 3
+    #define GEN_7 4
+    #define GEN_8 5
+#endif
 
 // Calculation settings
 #define B_CRIT_CHANCE               GEN_6 // Chances of a critical hit landing. See CalcCritChanceStage.
@@ -107,20 +115,20 @@
 #define B_POWDER_GRASS              GEN_6 // In Gen6+, Grass type Pokémon are immune to powder and spore moves.
 
 // Animation Settings
-#define NEW_SWORD_PARTICLE              TRUE    // update swords dance particle
-#define NEW_LEECH_SEED_PARTICLE         TRUE    //update leech seed's animation particle
-#define NEW_HORN_ATTACK_PARTICLE        TRUE    //update horn attack's horn
-#define NEW_LEAF_PARTICLE               TRUE    // update leaf particle
-#define NEW_EMBER_PARTICLES             TRUE    //updates ember fire particle
-#define NEW_MEAN_LOOK_PARTICLE          TRUE    //update mean look eye
-#define NEW_TEETH_PARTICLE              TRUE    //update bite/crunch teeth particle
-#define NEW_HANDS_FEET_PARTICLE         TRUE    //update chop/kick/punch particles
-#define NEW_SPIKES_PARTICLE             TRUE    //update spikes particle
-#define NEW_FLY_BUBBLE_PARTICLE         TRUE    //update fly 'bubble' particle
-#define NEW_CURSE_NAIL_PARTICLE         TRUE    //updates curse nail
-#define NEW_BATON_PASS_BALL_PARTICLE    TRUE    //update baton pass pokeball sprite
-#define NEW_MORNING_SUN_STAR_PARTICLE   TRUE    //updates morning sun star particles
-#define NEW_IMPACT_PALETTE              TRUE    //updates the basic 'hit' particle
-#define NEW_SURF_PARTICLE_PALETTE       TRUE    //updates the surf wave palette
+#define B_NEW_SWORD_PARTICLE            TRUE    // update swords dance particle
+#define B_NEW_LEECH_SEED_PARTICLE       TRUE    //update leech seed's animation particle
+#define B_NEW_HORN_ATTACK_PARTICLE      TRUE    //update horn attack's horn
+#define B_NEW_LEAF_PARTICLE             TRUE    // update leaf particle
+#define B_NEW_EMBER_PARTICLES           TRUE    //updates ember fire particle
+#define B_NEW_MEAN_LOOK_PARTICLE        TRUE    //update mean look eye
+#define B_NEW_TEETH_PARTICLE            TRUE    //update bite/crunch teeth particle
+#define B_NEW_HANDS_FEET_PARTICLE       TRUE    //update chop/kick/punch particles
+#define B_NEW_SPIKES_PARTICLE           TRUE    //update spikes particle
+#define B_NEW_FLY_BUBBLE_PARTICLE       TRUE    //update fly 'bubble' particle
+#define B_NEW_CURSE_NAIL_PARTICLE       TRUE    //updates curse nail
+#define B_NEW_BATON_PASS_BALL_PARTICLE  TRUE    //update baton pass pokeball sprite
+#define B_NEW_MORNING_SUN_STAR_PARTICLE TRUE    //updates morning sun star particles
+#define B_NEW_IMPACT_PALETTE            TRUE    //updates the basic 'hit' particle
+#define B_NEW_SURF_PARTICLE_PALETTE     TRUE    //updates the surf wave palette
 
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
