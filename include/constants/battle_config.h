@@ -106,8 +106,12 @@
 #define B_HP_BERRIES                GEN_6 // In Gen4+, berries which restore hp activate immediately after hp drops to half. In gen3, the effect occurs at the end of the turn.
 #define B_BERRIES_INSTANT           GEN_6 // In Gen4+, most berries activate on battle start/switch-in if applicable. In gen3, they only activate either at the move end or turn end.
 
+// Flag settings. Replace the 0s with defined flags to be able to toggle the following features using those flags.
+#define B_FLAG_INVERSE_BATTLE       0 // If the flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water.
+#define B_FLAG_FORCE_DOUBLE_WILD    0 // If the flag is set, all wild battles will be double battles.
+
 // Other
-#define B_FLAG_INVERSE_BATTLE       0     // If this flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water. 0 disables the feature.
+#define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
 #define B_FAST_INTRO                TRUE  // If set to TRUE, battle intro texts print at the same time as animation of a Pokémon, as opposing to waiting for the animation to end.
 #define B_SHOW_TARGETS              TRUE  // If set to TRUE, all available targets, for moves hitting 2 or 3 Pokémon, will be shown before selecting a move.
 #define B_SLEEP_TURNS               GEN_6 // In Gen5+, sleep lasts for 1-3 turns instead of 2-5 turns.
