@@ -9797,12 +9797,23 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = 35;
                 break;
             case ITEM_NEST_BALL:
-                if (gBattleMons[gBattlerTarget].level < 40)
-                {
-                    ballMultiplier = 40 - gBattleMons[gBattlerTarget].level;
-                    if (ballMultiplier <= 9)
-                        ballMultiplier = 10;
-                }
+                #if P_NEST_BALL_MODIFIER >= GEN_6
+                    //((41 - Pokémon's level) ÷ 10)× if Pokémon's level is between 1 and 29, 1× otherwise.
+                    if (gBattleMons[gBattlerTarget].level < 30)
+                        ballMultiplier = 41 - gBattleMons[gBattlerTarget].level;
+                #elif P_NEST_BALL_MODIFIER == GEN_5
+                    //((41 - Pokémon's level) ÷ 10)×, minimum 1×
+                    if (gBattleMons[gBattlerTarget].level < 31)
+                        ballMultiplier = 41 - gBattleMons[gBattlerTarget].level;
+                #else
+                    //((40 - Pokémon's level) ÷ 10)×, minimum 1×
+                    if (gBattleMons[gBattlerTarget].level < 40)
+                    {
+                        ballMultiplier = 40 - gBattleMons[gBattlerTarget].level;
+                        if (ballMultiplier <= 9)
+                            ballMultiplier = 10;
+                    }
+                #endif
                 break;
             case ITEM_REPEAT_BALL:
                 if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))

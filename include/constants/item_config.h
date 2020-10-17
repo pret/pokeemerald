@@ -22,5 +22,6 @@
 #define P_LURE_BALL_MODIFIER    GEN_7   // In Gen7+, Lure Ball's catch multiplier is x5 instead of x3.
 #define P_HEAVY_BALL_MODIFIER   GEN_7   // In Gen7+, Heavy Ball's ranges change. See Cmd_handleballthrow.
 #define P_NET_BALL_MODIFIER     GEN_7   // In Gen7+, Net Ball's catch multiplier is x5 instead of x3.
+#define P_NEST_BALL_MODIFIER    GEN_7   // Nest Ball's formula varies depending on the Gen. See Cmd_handleballthrow.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H
