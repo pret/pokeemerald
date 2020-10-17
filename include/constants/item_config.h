@@ -27,5 +27,6 @@
 #define P_TIMER_BALL_MODIFIER   GEN_7   // In Gen5+, Timer Ball's effectiveness increases by x0.3 per turn instead of x0.1
 #define P_DIVE_BALL_MODIFIER    GEN_3   // In Gen4+, Dive Ball's effectiveness increases by when Surfing or Fishing.
 #define P_DUSK_BALL_MODIFIER    GEN_7   // In Gen7+, Net Ball's catch multiplier is x3 instead of x3.5.
+#define P_QUICK_BALL_MODIFIER   GEN_7   // In Gen5+, Quick Ball's catch multiplier is x5 instead of x4.
 
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H

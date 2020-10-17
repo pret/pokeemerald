@@ -9911,7 +9911,11 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_QUICK_BALL:
                 if (gBattleResults.battleTurnCounter == 0)
-                    ballMultiplier = 40;
+                    #if P_QUICK_BALL_MODIFIER >= GEN_5
+                        ballMultiplier = 50;
+                    #else
+                        ballMultiplier = 40;
+                    #endif
                 break;
             case ITEM_DUSK_BALL:
                 RtcCalcLocalTime();
