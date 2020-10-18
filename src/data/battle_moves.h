@@ -4553,7 +4553,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .accuracy = 85,
         #endif
         .type = TYPE_STEEL,
-        .accuracy = 90,
         .pp = 10,
         .secondaryEffectChance = 20,
         .target = MOVE_TARGET_SELECTED,
@@ -7505,7 +7504,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .power = 30,
         #endif
-        .power = 60,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 15,
