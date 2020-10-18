@@ -198,7 +198,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SWORDS_DANCE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 20,
         #else
             .pp = 30,
@@ -258,7 +258,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WHIRLWIND] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 0,
         #else
             .accuracy = 100,
@@ -276,7 +276,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLY] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 90,
         #else
             .power = 70,
@@ -294,7 +294,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BIND] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 85,
         #else
             .accuracy = 75,
@@ -326,10 +326,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_VINE_WHIP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 45,
             .pp = 25,
-        #elif B_UPDATED_MOVE_VALUES >= GEN_4
+        #elif B_UPDATED_MOVE_DATA >= GEN_4
             .power = 35,
             .pp = 15,
         #else
@@ -390,10 +390,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_JUMP_KICK] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 100,
             .pp = 10,
-        #elif B_UPDATED_MOVE_VALUES == GEN_4
+        #elif B_UPDATED_MOVE_DATA == GEN_4
             .power = 85,
             .pp = 25,
         #else
@@ -496,10 +496,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TACKLE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 40,
             .accuracy = 100,
-        #elif B_UPDATED_MOVE_VALUES >= GEN_5
+        #elif B_UPDATED_MOVE_DATA >= GEN_5
             .power = 50,
             .accuracy = 100,
         #else
@@ -532,7 +532,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WRAP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 90,
         #else
             .accuracy = 85,
@@ -564,7 +564,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_THRASH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 120,
             .pp = 10,
         #else
@@ -639,7 +639,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PIN_MISSILE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 25,
             .accuracy = 95,
         #else
@@ -700,7 +700,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ROAR] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 0,
         #else
             .accuracy = 100,
@@ -760,9 +760,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DISABLE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 100,
-        #elif B_UPDATED_MOVE_VALUES == GEN_4
+        #elif B_UPDATED_MOVE_DATA == GEN_4
             .accuracy = 80,
         #else
             .accuracy = 55,
@@ -808,7 +808,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLAMETHROWER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 90,
         #else
             .power = 95,
@@ -854,7 +854,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HYDRO_PUMP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 110,
         #else
             .power = 120,
@@ -872,7 +872,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SURF] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 90,
         #else
             .power = 95,
@@ -890,7 +890,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ICE_BEAM] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 90,
         #else
             .power = 95,
@@ -908,7 +908,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BLIZZARD] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 110,
         #else
             .power = 120,
@@ -1010,7 +1010,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SUBMISSION] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 20,
         #else
             .pp = 25,
@@ -1084,7 +1084,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ABSORB] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .pp = 25,
         #else
             .pp = 20,
@@ -1102,7 +1102,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MEGA_DRAIN] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .pp = 15,
         #else
             .pp = 10,
@@ -1134,7 +1134,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GROWTH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 20,
         #else
             .pp = 40,
@@ -1222,10 +1222,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PETAL_DANCE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 120,
             .pp = 10,
-        #elif B_UPDATED_MOVE_VALUES == GEN_4
+        #elif B_UPDATED_MOVE_DATA == GEN_4
             .power = 90,
             .pp = 20,
         #else
@@ -1272,7 +1272,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FIRE_SPIN] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 35,
             .accuracy = 85,
         #else
@@ -1305,7 +1305,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_THUNDERBOLT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 90,
         #else
             .power = 95,
@@ -1323,7 +1323,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_THUNDER_WAVE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .accuracy = 90,
         #else
             .accuracy = 100,
@@ -1341,7 +1341,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_THUNDER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 110,
         #else
             .power = 120,
@@ -1401,7 +1401,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DIG] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 80,
         #else
             .power = 60,
@@ -1419,7 +1419,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TOXIC] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 90,
         #else
             .accuracy = 85,
@@ -1605,7 +1605,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RECOVER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .pp = 10,
         #else
             .pp = 20,
@@ -1637,7 +1637,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MINIMIZE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 10,
         #else
             .pp = 20,
@@ -1711,7 +1711,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BARRIER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 20,
         #else
             .pp = 30,
@@ -1785,7 +1785,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BIDE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 0,
             .priority = 1,
         #else
@@ -1860,7 +1860,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LICK] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 30,
         #else
             .power = 20,
@@ -1878,7 +1878,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SMOG] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 30,
         #else
             .power = 20,
@@ -1924,7 +1924,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FIRE_BLAST] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 120,
         #else
             .power = 110,
@@ -1956,7 +1956,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CLAMP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 85,
             .pp = 15,
         #else
@@ -1989,7 +1989,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SKULL_BASH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 130,
             .pp = 10,
         #else
@@ -2078,10 +2078,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HI_JUMP_KICK] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 130,
             .pp = 10,
-        #elif B_UPDATED_MOVE_VALUES == GEN_4
+        #elif B_UPDATED_MOVE_DATA == GEN_4
             .power = 100,
             .pp = 20,
         #else
@@ -2100,9 +2100,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GLARE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 100,
-        #elif B_UPDATED_MOVE_VALUES == GEN_5
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .accuracy = 90,
         #else
             .accuracy = 75,
@@ -2134,9 +2134,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_POISON_GAS] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 90,
-        #elif B_UPDATED_MOVE_VALUES == GEN_5
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .accuracy = 80,
         #else
             .accuracy = 55,
@@ -2168,7 +2168,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LEECH_LIFE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 80,
             .pp = 10,
         #else
@@ -2230,7 +2230,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BUBBLE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 40,
         #else
             .power = 20,
@@ -2276,7 +2276,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLASH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 100,
         #else
             .accuracy = 70,
@@ -2294,7 +2294,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PSYWAVE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 100,
         #else
             .accuracy = 80,
@@ -2326,7 +2326,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ACID_ARMOR] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 20,
         #else
             .pp = 40,
@@ -2344,10 +2344,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CRABHAMMER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 100,
             .accuracy = 90,
-        #elif B_UPDATED_MOVE_VALUES == GEN_5
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .power = 90,
             .accuracy = 90,
         #else
@@ -2534,7 +2534,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STRUGGLE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 0,
         #else
             .accuracy = 100,
@@ -2580,7 +2580,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_THIEF] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
             .pp = 25,
         #else
@@ -2613,7 +2613,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MIND_READER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 0,
         #else
             .accuracy = 100,
@@ -2631,7 +2631,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_NIGHTMARE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 100,
         #else
             .accuracy = 0,
@@ -2663,7 +2663,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SNORE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 50,
         #else
             .power = 40,
@@ -2737,7 +2737,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_COTTON_SPORE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 100,
         #else
             .accuracy = 85,
@@ -2825,7 +2825,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SCARY_FACE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 100,
         #else
             .accuracy = 90,
@@ -2941,7 +2941,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ZAP_CANNON] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 120,
         #else
             .power = 100,
@@ -2959,7 +2959,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FORESIGHT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 0,
         #else
             .accuracy = 100,
@@ -3033,7 +3033,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BONE_RUSH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 90,
         #else
             .accuracy = 80,
@@ -3051,7 +3051,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LOCK_ON] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 100,
         #else
             .accuracy = 0,
@@ -3069,10 +3069,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_OUTRAGE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 120,
             .pp = 10,
-        #elif B_UPDATED_MOVE_VALUES == GEN_4
+        #elif B_UPDATED_MOVE_DATA == GEN_4
             .power = 120,
             .pp = 15,
         #else
@@ -3105,10 +3105,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GIGA_DRAIN] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 75,
             .pp = 10,
-        #elif B_UPDATED_MOVE_VALUES == GEN_4
+        #elif B_UPDATED_MOVE_DATA == GEN_4
             .power = 60,
             .pp = 10,
         #else
@@ -3183,7 +3183,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SWAGGER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .accuracy = 85,
         #else
             .accuracy = 90,
@@ -3229,9 +3229,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FURY_CUTTER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 40,
-        #elif B_UPDATED_MOVE_VALUES == GEN_5
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .power = 20,
         #else
             .power = 10,
@@ -3501,7 +3501,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_RAPID_SPIN] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 50,
         #else
             .power = 20,
@@ -3771,11 +3771,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FUTURE_SIGHT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 120,
             .accuracy = 100,
             .pp = 10,
-        #elif B_UPDATED_MOVE_VALUES == GEN_5
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .power = 100,
             .accuracy = 100,
             .pp = 10,
@@ -3795,7 +3795,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ROCK_SMASH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 40,
         #else
             .power = 20,
@@ -3813,7 +3813,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WHIRLPOOL] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 35,
             .accuracy = 85,
         #else
@@ -3864,7 +3864,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_UPROAR] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 90,
         #else
             .power = 50,
@@ -3882,7 +3882,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STOCKPILE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .pp = 20,
         #else
             .pp = 10,
@@ -3900,7 +3900,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SPIT_UP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 1,
         #else
             .power = 100,
@@ -3932,7 +3932,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HEAT_WAVE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 95,
         #else
             .power = 100,
@@ -3992,7 +3992,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WILL_O_WISP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 85,
         #else
             .accuracy = 75,
@@ -4052,7 +4052,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SMELLING_SALT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 70,
         #else
             .power = 60,
@@ -4295,7 +4295,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_KNOCK_OFF] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 65,
         #else
             .power = 20,
@@ -4425,7 +4425,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DIVE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 80,
         #else
             .power = 60,
@@ -4681,7 +4681,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_METEOR_MASH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 90,
             .accuracy = 90,
         #else
@@ -4756,7 +4756,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AIR_CUTTER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
         #else
             .power = 55,
@@ -4774,7 +4774,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_OVERHEAT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 130,
         #else
             .power = 140,
@@ -4792,7 +4792,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ODOR_SLEUTH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .accuracy = 0,
         #else
             .accuracy = 100,
@@ -4810,7 +4810,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ROCK_TOMB] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
             .accuracy = 95,
             .pp = 15,
@@ -4942,7 +4942,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_EXTRASENSORY] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 20,
         #else
             .pp = 30,
@@ -4974,7 +4974,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SAND_TOMB] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 35,
             .accuracy = 85,
         #else
@@ -5007,7 +5007,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MUDDY_WATER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 90,
         #else
             .power = 95,
@@ -5025,7 +5025,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BULLET_SEED] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 25,
         #else
             .power = 10,
@@ -5057,7 +5057,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ICICLE_SPEAR] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 25,
         #else
             .power = 10,
@@ -5202,10 +5202,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_COVET] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
             .pp = 25,
-        #elif B_UPDATED_MOVE_VALUES == GEN_5
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .power = 60,
             .pp = 40,
         #else
@@ -5281,7 +5281,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LEAF_BLADE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_4
+        #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 90,
         #else
             .power = 70,
@@ -5313,7 +5313,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ROCK_BLAST] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .accuracy = 90,
         #else
             .accuracy = 80,
@@ -5359,7 +5359,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DOOM_DESIRE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 140,
             .accuracy = 100,
         #else
@@ -5434,7 +5434,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WAKE_UP_SLAP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 70,
         #else
             .power = 60,
@@ -5523,7 +5523,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FEINT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 30,
         #else
             .power = 50,
@@ -5555,7 +5555,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TAILWIND] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 15,
         #else
             .pp = 30,
@@ -5643,7 +5643,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ASSURANCE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
         #else
             .power = 50,
@@ -5689,7 +5689,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PSYCHO_SHIFT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 100,
         #else
             .accuracy = 90,
@@ -5861,7 +5861,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LAST_RESORT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 140,
         #else
             .power = 130,
@@ -5893,7 +5893,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SUCKER_PUNCH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 70,
         #else
             .power = 80,
@@ -5996,7 +5996,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AURA_SPHERE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 80,
         #else
             .power = 90,
@@ -6098,7 +6098,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_AIR_SLASH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 15,
         #else
             .pp = 20,
@@ -6144,7 +6144,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DRAGON_PULSE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 85,
         #else
             .power = 90,
@@ -6176,7 +6176,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_POWER_GEM] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 80,
         #else
             .power = 70,
@@ -6194,7 +6194,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DRAIN_PUNCH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_5
             .power = 75,
             .pp = 10,
         #else
@@ -6241,7 +6241,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ENERGY_BALL] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 90,
         #else
             .power = 80,
@@ -6556,7 +6556,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DRACO_METEOR] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 130,
         #else
             .power = 140,
@@ -6602,7 +6602,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LEAF_STORM] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 130,
         #else
             .power = 140,
@@ -6662,7 +6662,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GUNK_SHOT] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 80,
         #else
             .accuracy = 70,
@@ -6764,7 +6764,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CHATTER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 65,
         #else
             .power = 60,
@@ -6978,10 +6978,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MAGMA_STORM] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 100,
             .accuracy = 75,
-        #elif B_UPDATED_MOVE_VALUES == GEN_5
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .power = 120,
             .accuracy = 75,
         #else
@@ -7000,7 +7000,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DARK_VOID] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .accuracy = 50,
         #else
             .accuracy = 80,
@@ -7229,7 +7229,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STORM_THROW] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
         #else
             .power = 40,
@@ -7303,7 +7303,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SYNCHRONOISE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 120,
             .pp = 10,
         #else
@@ -7378,7 +7378,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_LOW_SWEEP] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 65,
         #else
             .power = 60,
@@ -7607,7 +7607,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HEX] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 65,
         #else
             .power = 50,
@@ -7667,7 +7667,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_INCINERATE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
         #else
             .power = 30,
@@ -7783,7 +7783,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WATER_PLEDGE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 80,
         #else
             .power = 50,
@@ -7801,7 +7801,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FIRE_PLEDGE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 80,
         #else
             .power = 50,
@@ -7819,7 +7819,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GRASS_PLEDGE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 80,
         #else
             .power = 50,
@@ -7851,7 +7851,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STRUGGLE_BUG] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 50,
         #else
             .power = 30,
@@ -7883,7 +7883,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FROST_BREATH] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 60,
         #else
             .power = 40,
@@ -8013,7 +8013,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SACRED_SWORD] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .pp = 15,
         #else
             .pp = 20,
@@ -8143,7 +8143,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HURRICANE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 110,
         #else
             .power = 120,
@@ -8203,7 +8203,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TECHNO_BLAST] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_6
+        #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 120,
         #else
             .power = 85,
@@ -8405,7 +8405,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLYING_PRESS] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 100,
         #else
             .power = 80,
@@ -8481,7 +8481,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FELL_STINGER] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 50,
         #else
             .power = 30,
@@ -8557,7 +8557,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PARABOLIC_CHARGE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 65,
         #else
             .power = 50,
@@ -8646,7 +8646,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TOPSY_TURVY] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .accuracy = 0,
         #else
             .accuracy = 100,
@@ -8918,7 +8918,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MYSTICAL_FIRE] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 75,
         #else
             .power = 65,
@@ -10002,7 +10002,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MULTI_ATTACK] =
     {
-        #if B_UPDATED_MOVE_VALUES >= GEN_8
+        #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 120,
         #else
             .power = 90,
