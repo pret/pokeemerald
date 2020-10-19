@@ -452,19 +452,15 @@ static const struct BgTemplate sBgTemplates[] =
         .baseTile = 0
     }
 };
-static const struct WindowTemplate sWindowTemplates[] =
+static const struct WindowTemplate sWindowTemplate =
 {
-    {
-        .bg = 0,
-        .tilemapLeft = 3,
-        .tilemapTop = 15,
-        .width = 24,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = 0xC5
-    },
-    // BUG: Array not terminated properly
-    //DUMMY_WIN_TEMPLATE
+      .bg = 0;
+      .tilemapLeft = 3,
+      .tilemapTop = 15,
+      .width = 24,
+      .height = 4,
+      .paletteNum = 15,
+      .baseBlock = 0xC5
 };
 
 static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =
@@ -1093,7 +1089,7 @@ static void InitRouletteBgAndWindows(void)
     SetBgTilemapBuffer(0, sRoulette->tilemapBuffers[0]);
     SetBgTilemapBuffer(1, sRoulette->tilemapBuffers[2]);
     SetBgTilemapBuffer(2, sRoulette->tilemapBuffers[6]);
-    InitWindows(sWindowTemplates);
+    InitWindows(&sWindowTemplate);
     InitTextBoxGfxAndPrinters();
     sTextWindowId = 0;
     sRoulette->gridTilemap = malloc_and_decompress(sGrid_Tilemap, &size);
