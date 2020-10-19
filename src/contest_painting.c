@@ -248,7 +248,7 @@ static void HoldContestPainting(void)
             gContestPaintingFadeCounter--;
         break;
     case 1:
-        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
         {
             gContestPaintingState++;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
@@ -384,8 +384,6 @@ static void InitContestMonPixels(u16 species, u8 whichSprite)
     }
 }
 
-#ifdef NONMATCHING
-// functionally equivalent.
 static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
 {
     u16 tileY, tileX, pixelY, pixelX;
@@ -399,125 +397,21 @@ static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)
             {
                 for (pixelX = 0; pixelX < 8; pixelX++)
                 {
-                    int offset = 32 * (8 * tileY + tileX) + (pixelY * 4 + pixelX / 2);
-                    colorIndex = spriteGfx[offset];
+                    colorIndex = spriteGfx[((tileY * 8) + tileX) * 32 + (pixelY << 2) + (pixelX >> 1)];
                     if (pixelX & 1)
                         colorIndex >>= 4;
                     else
-                        colorIndex &= 0xF;
+                        colorIndex &= 0xF; // %=16 works here too. Both match
 
-                    if (colorIndex == 0) // transparent pixel
-                        (*destPixels)[8 * tileY + pixelY][tileX * 8 + pixelX] = 0x8000;
+                    if (colorIndex == 0)   // transparent pixel
+                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = 0x8000;
                     else
-                        (*destPixels)[8 * tileY + pixelY][tileX * 8 + pixelX] = palette[colorIndex];
+                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = palette[colorIndex];
                 }
             }
         }
     }
 }
-#else
-NAKED
-static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64])
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    mov r10, r0\n\
-    mov r9, r1\n\
-    str r2, [sp]\n\
-    movs r0, 0\n\
-_08130394:\n\
-    movs r3, 0\n\
-    adds r1, r0, 0x1\n\
-    str r1, [sp, 0x4]\n\
-    lsls r0, 3\n\
-    str r0, [sp, 0x8]\n\
-_0813039E:\n\
-    movs r1, 0\n\
-    adds r2, r3, 0x1\n\
-    mov r8, r2\n\
-    ldr r7, [sp, 0x8]\n\
-    adds r0, r7, r3\n\
-    lsls r0, 5\n\
-    mov r12, r0\n\
-    lsls r4, r3, 3\n\
-_081303AE:\n\
-    movs r3, 0\n\
-    lsls r0, r1, 2\n\
-    adds r6, r1, 0x1\n\
-    mov r2, r12\n\
-    adds r5, r2, r0\n\
-    ldr r7, [sp, 0x8]\n\
-    adds r0, r7, r1\n\
-    lsls r0, 7\n\
-    ldr r1, [sp]\n\
-    adds r2, r0, r1\n\
-_081303C2:\n\
-    lsrs r0, r3, 1\n\
-    adds r0, r5, r0\n\
-    add r0, r10\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _081303D6\n\
-    lsrs r1, 4\n\
-    b _081303DA\n\
-_081303D6:\n\
-    movs r0, 0xF\n\
-    ands r1, r0\n\
-_081303DA:\n\
-    cmp r1, 0\n\
-    bne _081303EC\n\
-    adds r0, r4, r3\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    movs r7, 0x80\n\
-    lsls r7, 8\n\
-    adds r1, r7, 0\n\
-    b _081303F8\n\
-_081303EC:\n\
-    adds r0, r4, r3\n\
-    lsls r0, 1\n\
-    adds r0, r2\n\
-    lsls r1, 1\n\
-    add r1, r9\n\
-    ldrh r1, [r1]\n\
-_081303F8:\n\
-    strh r1, [r0]\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, 0x7\n\
-    bls _081303C2\n\
-    lsls r0, r6, 16\n\
-    lsrs r1, r0, 16\n\
-    cmp r1, 0x7\n\
-    bls _081303AE\n\
-    mov r1, r8\n\
-    lsls r0, r1, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, 0x7\n\
-    bls _0813039E\n\
-    ldr r2, [sp, 0x4]\n\
-    lsls r0, r2, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x7\n\
-    bls _08130394\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0");
-}
-#endif
 
 #define VRAM_PICTURE_DATA(x, y) (((u16 *)(BG_SCREEN_ADDR(12)))[(y) * 32 + (x)])
 
@@ -607,20 +501,20 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 arg1)
 
 static void InitPaintingMonOamData(u8 contestWinnerId)
 {
-    //Some hacks just to get the asm to match
-#ifndef NONMATCHING
-    asm(""::"r"(contestWinnerId));
-#endif
 
     gMain.oamBuffer[0] = sContestPaintingMonOamData;
     gMain.oamBuffer[0].tileNum = 0;
 
-#ifndef NONMATCHING
-    if (contestWinnerId) contestWinnerId = gMain.oamBuffer[0].tileNum;
-#endif
-
-    gMain.oamBuffer[0].x = 88;
-    gMain.oamBuffer[0].y = 24;
+    if (contestWinnerId > 1)
+    {
+        gMain.oamBuffer[0].x = 88;
+        gMain.oamBuffer[0].y = 24;
+    }
+    else
+    {
+        gMain.oamBuffer[0].x = 88; // Duplicated Code
+        gMain.oamBuffer[0].y = 24;
+    }
 }
 
 static u8 GetImageEffectForContestWinner(u8 contestWinnerId)

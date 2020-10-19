@@ -219,16 +219,22 @@ void BufferTrendyPhraseString(void)
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }
 
+
 void TrendyPhraseIsOld(void)
 {
-    u16 result = 0;
+    u8 result = 0;
 
-    if (gSaveBlock1Ptr->easyChatPairs[0].unk0_0 - gSaveBlock1Ptr->easyChatPairs[1].unk0_0 < 2)
+    do
     {
-        asm("":::"r2"); //Force the compiler to store address of gSaveBlock1 in r3 instead of r2
-        if (!gSaveBlock1Ptr->easyChatPairs[0].unk1_6 && gSaveBlock1Ptr->easyChatPairs[1].unk1_6)
-            result = 1;
-    }
+        if (gSaveBlock1Ptr->easyChatPairs[0].unk0_0 - gSaveBlock1Ptr->easyChatPairs[1].unk0_0 > 1)
+            break;
+        if (gSaveBlock1Ptr->easyChatPairs[0].unk1_6)
+            break;
+        if (!gSaveBlock1Ptr->easyChatPairs[1].unk1_6)
+            break;
+        result = 1;
+    } while (0);
+
     gSpecialVar_Result = result;
 }
 
@@ -243,46 +249,46 @@ static bool8 sub_8122A58(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
     {
     case 0:
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         break;
     case 1:
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         break;
     case 2:
         if (a->unk0_0 > b->unk0_0)
-            return 1;
+            return TRUE;
         if (a->unk0_0 < b->unk0_0)
-            return 0;
+            return FALSE;
         if (a->unk0_7 > b->unk0_7)
-            return 1;
+            return TRUE;
         if (a->unk0_7 < b->unk0_7)
-            return 0;
+            return FALSE;
         if (a->unk2 > b->unk2)
-            return 1;
+            return TRUE;
         if (a->unk2 < b->unk2)
-            return 0;
+            return FALSE;
         if (a->words[0] > b->words[0])
-            return 1;
+            return TRUE;
         if (a->words[0] < b->words[0])
-            return 0;
+            return FALSE;
         if (a->words[1] > b->words[1])
-            return 1;
+            return TRUE;
         if (a->words[1] < b->words[1])
-            return 0;
-        return 1;
+            return FALSE;
+        return TRUE;
     }
     return Random() & 1;
 }

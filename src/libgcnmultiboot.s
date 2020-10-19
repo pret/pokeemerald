@@ -22,7 +22,7 @@ GameCubeMultiBoot_Hash: @ 82DED70
 	movs r2, 0x20
 
 GameCubeMultiBoot_Hash_Loop:
-	lsrs r3, 1
+	lsrs r3, #1
 	bcc GameCubeMultiBoot_Hash_SkipEor
 
 	eors r3, r4
@@ -37,8 +37,8 @@ GameCubeMultiBoot_Hash_SkipEor:
 	thumb_func_start GameCubeMultiBoot_Main
 @ void GameCubeMultiBoot_Main(struct GameCubeMultiBoot *mb);
 GameCubeMultiBoot_Main: @ 82DED84
-	ldr r1, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
-	cmp r1, 0
+	ldr r1, [r0, #GCMB_STRUCT_SERIAL_INTR_HANDLER]
+	cmp r1, #0
 	beq _082DEDAA
 	ldrb r1, [r0, 0x1]
 	adds r1, 0x1
@@ -47,30 +47,30 @@ GameCubeMultiBoot_Main: @ 82DED84
 	cmp r1, 0x2
 	beq _082DEDF4
 	ldr r3, pool_InterruptRegs
-	ldrh r2, [r3, OFFSET_REG_IME - 0x200]
+	ldrh r2, [r3, #OFFSET_REG_IME - 0x200]
 	movs r1, 0
-	strh r1, [r3, OFFSET_REG_IME - 0x200]
+	strh r1, [r3, #OFFSET_REG_IME - 0x200]
 	ldrb r1, [r0]
 	cmp r1, 0xA
 	bgt _082DEDA8
 	adds r1, 0x1
 	strb r1, [r0]
 _082DEDA8:
-	strh r2, [r3, OFFSET_REG_IME - 0x200]
+	strh r2, [r3, #OFFSET_REG_IME - 0x200]
 _082DEDAA:
 	bcs GameCubeMultiBoot_Init
 	ldrb r1, [r0, 0x2]
 	cmp r1, 0
 	bne _082DEDF6
-	ldr r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
-	ldr r2, [r0, GCMB_STRUCT_BASE_DEST_PTR]
+	ldr r1, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
+	ldr r2, [r0, #GCMB_STRUCT_BASE_DEST_PTR]
 	subs r1, r2
 	beq _082DEE76
 	cmp r1, 0xA0
 	bcc _082DEE76
 	push {r4-r6}
 	movs r1, 0x98
-	adds r2, ROM_HEADER_NINTENDO_LOGO_OFFSET
+	adds r2, #ROM_HEADER_NINTENDO_LOGO_OFFSET
 	ldr r4, pool_NintendoLogo
 _082DEDC6:
 	ldm r2!, {r5}
@@ -82,8 +82,8 @@ _082DEDC6:
 	ldm r2!, {r5}
 	ldm r4!, {r6}
 	eors r5, r6
-	lsrs r5, 8
-	str r2, [r0, GCMB_STRUCT_BASE_DEST_PTR]
+	lsrs r5, #8
+	str r2, [r0, #GCMB_STRUCT_BASE_DEST_PTR]
 _082DEDDC:
 	pop {r4-r6}
 	bne GameCubeMultiBoot_Init
@@ -100,11 +100,11 @@ _082DEDDC:
 _082DEDF4:
 	bx lr
 _082DEDF6:
-	ldr r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
+	ldr r1, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
 	mov r12, r1
 	ldr r3, [r0, 0x18]
 	push {r4-r7}
-	ldr r4, [r0, GCMB_STRUCT_BASE_DEST_PTR]
+	ldr r4, [r0, #GCMB_STRUCT_BASE_DEST_PTR]
 	ldr r5, pool_Kawa
 	ldr r6, [r0, 0x14]
 	ldr r7, pool_HashVal
@@ -118,7 +118,7 @@ _082DEE06:
 	eors r3, r1
 	movs r2, 0x20
 _082DEE16:
-	lsrs r3, 1
+	lsrs r3, #1
 	bcc _082DEE1C
 	eors r3, r7
 _082DEE1C:
@@ -128,22 +128,22 @@ _082DEE1C:
 	adds r6, 0x1
 	b _082DEE06
 _082DEE26:
-	str r4, [r0, GCMB_STRUCT_BASE_DEST_PTR]
+	str r4, [r0, #GCMB_STRUCT_BASE_DEST_PTR]
 	str r6, [r0, 0x14]
 	pop {r4-r7}
 	str r3, [r0, 0x18]
 	ldrh r1, [r0, 0x12]
-	cmp r1, 0
+	cmp r1, #0
 	bne _082DEE76
-	ldr r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
-	ldr r2, [r0, GCMB_STRUCT_BASE_DEST_PTR]
+	ldr r1, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
+	ldr r2, [r0, #GCMB_STRUCT_BASE_DEST_PTR]
 	cmp r1, r2
 	bne _082DEE76
 	ldr r1, [r0, 0xC]
-	cmp r1, 0
+	cmp r1, #0
 	beq _082DEE60
 	ldrh r1, [r0, 0x10]
-	cmp r1, 0
+	cmp r1, #0
 	beq _082DEDF4
 	mov r12, lr
 	movs r1, 0xBB
@@ -159,11 +159,11 @@ _082DEE26:
 _082DEE60:
 	mov r12, lr
 	ldrb r1, [r0, 0x3]
-	lsls r1, 24
+	lsls r1, #24
 	subs r1, 0x1
 	str r1, [r0, 0xC]
 	bl GameCubeMultiBoot_Hash
-	lsls r3, 8
+	lsls r3, #8
 	adds r3, 0xFF
 	str r3, [r0, 0x1C]
 	bx r12
@@ -186,8 +186,8 @@ GameCubeMultiBoot_ExecuteProgram: @ 82DEE84
 	cmp r1, 0x2
 	bne GameCubeMultiBoot_ExecuteProgram_Fail
 	ldr r3, pool_InterruptRegs
-	movs r1, 0
-	strh r1, [r3, OFFSET_REG_IME - 0x200]
+	movs r1, #0
+	strh r1, [r3, #OFFSET_REG_IME - 0x200]
 	ldr r1, pool_MultiBootLoadAddr
 	adds r1, 0xC0
 	bx r1
@@ -201,25 +201,25 @@ GameCubeMultiBoot_Init: @ 82DEE98
 	ldr r3, pool_InterruptRegs
 
 @ Save IME register.
-	ldrh r2, [r3, OFFSET_REG_IME - 0x200]
+	ldrh r2, [r3, #OFFSET_REG_IME - 0x200]
 
 @ Disable interrupts.
 	movs r1, 0
-	strh r1, [r3, OFFSET_REG_IME - 0x200]
+	strh r1, [r3, #OFFSET_REG_IME - 0x200]
 
 @ Set the handler to the "Stop" routine.
 @ Unless the first command that is received is a device reset command, the
 @ "Stop" routine will be executed and no further commands will be processed.
 	adr r3, GcMbIntrHandler_Stop
-	str r3, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
+	str r3, [r0, #GCMB_STRUCT_SERIAL_INTR_HANDLER]
 
 	ldrb r3, [r0, 0x3]
 	push {r3}
 	ldrb r3, [r0, 0x1]
 	push {r0,r3}
 
-	adds r3, r0, 0
-	adds r3, GCMB_STRUCT_BASE_DEST_PTR
+	adds r3, r0, #0
+	adds r3, #GCMB_STRUCT_BASE_DEST_PTR
 
 @ clear all but the last 3 fields of the struct
 GameCubeMultiBoot_Init_ClearStructLoop:
@@ -261,7 +261,7 @@ GameCubeMultiBoot_Init_ClearStructLoop:
 	strh r1, [r3, OFFSET_REG_IE - 0x200]
 
 @ Restore IME register.
-	strh r2, [r3, OFFSET_REG_IME - 0x200]
+	strh r2, [r3, #OFFSET_REG_IME - 0x200]
 
 	bx lr
 	thumb_func_end GameCubeMultiBoot_Init
@@ -275,11 +275,11 @@ GameCubeMultiBoot_HandleSerialInterrupt: @ 82DEEE2
 	ldrh r1, [r3, OFFSET_REG_JOYCNT - 0x120]
 	strh r1, [r3, OFFSET_REG_JOYCNT - 0x120]
 
-	movs r2, 0
+	movs r2, #0
 	strb r2, [r0]
 
-	ldr r2, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
-	cmp r2, 0
+	ldr r2, [r0, #GCMB_STRUCT_SERIAL_INTR_HANDLER]
+	cmp r2, #0
 	beq GameCubeMultiBoot_HandleSerialInterruptDone
 
 	lsrs r1, 1 @ was a device reset command received?
@@ -297,7 +297,7 @@ GcMbIntrHandler_Stop:
 	strh r2, [r3, OFFSET_REG_JOYSTAT - 0x120]
 
 GameCubeMultiBoot_SetInterruptHandler:
-	str r2, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
+	str r2, [r0, #GCMB_STRUCT_SERIAL_INTR_HANDLER]
 
 GameCubeMultiBoot_ReadVCount:
 	ldr r3, pool_RegDispstat
@@ -319,8 +319,8 @@ GameCubeMultiBoot_BeginHandshake:
 	cmp r1, 0
 	bne GcMbIntrHandler_Stop
 	ldr r1, pool_MultiBootLoadAddr
-	str r1, [r0, GCMB_STRUCT_BASE_DEST_PTR]
-	str r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
+	str r1, [r0, #GCMB_STRUCT_BASE_DEST_PTR]
+	str r1, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
 	adr r2, GcMbIntrHandler_CheckGameCodeSent
 	b GameCubeMultiBoot_SetInterruptHandler
 
@@ -417,8 +417,8 @@ _082DEF94:
 _082DEFA6:
 	bne GcMbIntrHandler_Stop
 	ldr r1, pool_MultiBootLoadAddr
-	str r1, [r0, GCMB_STRUCT_BASE_DEST_PTR]
-	str r1, [r0, GCMB_STRUCT_CUR_DEST_PTR]
+	str r1, [r0, #GCMB_STRUCT_BASE_DEST_PTR]
+	str r1, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
 	adr r2, GcMbIntrHandler_82DEFB4
 	b GameCubeMultiBoot_SetInterruptHandler
 
@@ -427,7 +427,7 @@ _082DEFA6:
 GcMbIntrHandler_82DEFB4: @ 82DEFB4
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
-	ldr r2, [r0, GCMB_STRUCT_CUR_DEST_PTR]
+	ldr r2, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
 	movs r1, 0x4
 	ands r1, r2
 	adds r1, 0x8
@@ -435,7 +435,7 @@ GcMbIntrHandler_82DEFB4: @ 82DEFB4
 	strh r1, [r3, OFFSET_REG_JOYSTAT - 0x120]
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
 	stm r2!, {r1}
-	str r2, [r0, GCMB_STRUCT_CUR_DEST_PTR]
+	str r2, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
 	ldrh r1, [r0, 0x12]
 	subs r1, 0x1
 	strh r1, [r0, 0x12]
@@ -500,11 +500,11 @@ GameCubeMultiBoot_Quit: @ 82DF012
 	ldr r3, pool_InterruptRegs
 
 @ Save IME register.
-	ldrh r2, [r3, OFFSET_REG_IME - 0x200]
+	ldrh r2, [r3, #OFFSET_REG_IME - 0x200]
 
 @ Disable interrupts.
 	movs r1, 0
-	strh r1, [r3, OFFSET_REG_IME - 0x200]
+	strh r1, [r3, #OFFSET_REG_IME - 0x200]
 
 	ldr r3, pool_SerialRegs
 
@@ -528,7 +528,7 @@ GameCubeMultiBoot_Quit: @ 82DF012
 	strh r1, [r3, OFFSET_REG_IE - 0x200]
 
 @ Restore IME register.
-	strh r2, [r3, OFFSET_REG_IME - 0x200]
+	strh r2, [r3, #OFFSET_REG_IME - 0x200]
 
 	bx lr
 	thumb_func_end GameCubeMultiBoot_Quit

@@ -1,7 +1,6 @@
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 
 static const u16 sContestLadyMonGfxId[] =

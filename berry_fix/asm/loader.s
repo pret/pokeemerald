@@ -75,21 +75,21 @@ _send: @ 14c
 _150:
 	bl _recv
 	bne _150
-	mov r2, 0
+	mov r2, #0
 	strh r2, [r0, 0xa] @ SIOMLT_SEND
-	cmp r1, 0
+	cmp r1, #0
 	bne _150
 	mov r2, 0x8000
 _16c:
-	mov r1, 0
+	mov r1, #0
 _170:
 	strh r1, [r0, 0xa] @ SIOMLT_SEND
 	bl _recv
 	bne _150
 	cmp r1, r2
 	bne _16c
-	lsr r2, 5
-	cmp r1, 0
+	lsr r2, #5
+	cmp r1, #0
 	bne _170
 	ldr r3, =BerryFixMBHeaderGameCode
 	ldrh r2, [r3]
@@ -105,11 +105,11 @@ _1a0:
 	bne _1a0
 	cmp r1, r2
 	bne _1a0
-	mov r1, 0
+	mov r1, #0
 	strh r1, [r0, 0xa] @ SIOMLT_SEND
 	ldr r0, =_data_2f0
 	ldr r1, =gCode
-	swi 0x11 << 16
+	svc 0x11 << 16
 	ldr lr, =gCode
 	bx lr
 	.pool

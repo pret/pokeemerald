@@ -32,7 +32,6 @@
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 
 struct MatchCallState
@@ -1119,7 +1118,7 @@ static void StartMatchCall(void)
         sub_808BCF4();
     }
 
-    PlaySE(SE_TOREEYE);
+    PlaySE(SE_POKENAV_CALL);
     CreateTask(ExecuteMatchCall, 1);
 }
 
@@ -1253,11 +1252,11 @@ static bool32 sub_81962D8(u8 taskId)
 static bool32 sub_8196330(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
-    if (!ExecuteMatchCallTextPrinter(taskData[2]) && !IsSEPlaying() && gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (!ExecuteMatchCallTextPrinter(taskData[2]) && !IsSEPlaying() && JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(taskData[2], PIXEL_FILL(8));
         CopyWindowToVram(taskData[2], 2);
-        PlaySE(SE_TOREOFF);
+        PlaySE(SE_POKENAV_HANG_UP);
         return TRUE;
     }
 
@@ -1335,7 +1334,7 @@ static void InitMatchCallTextPrinter(int windowId, const u8 *str)
     printerTemplate.currentY = 1;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.unk = 0;
+    printerTemplate.style = 0;
     printerTemplate.fgColor = 10;
     printerTemplate.bgColor = 8;
     printerTemplate.shadowColor = 14;
@@ -1346,7 +1345,7 @@ static void InitMatchCallTextPrinter(int windowId, const u8 *str)
 
 static bool32 ExecuteMatchCallTextPrinter(int windowId)
 {
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
         gTextFlags.canABSpeedUpPrint = 1;
     else
         gTextFlags.canABSpeedUpPrint = 0;
@@ -1774,7 +1773,7 @@ static int GetNumOwnedBadges(void)
 static bool32 sub_8196D74(int matchCallId)
 {
     int dayCount;
-    int otId;
+    u32 otId;
     u16 easyChatWord;
     int numRematchTrainersFought;
     int var0, var1, var2;

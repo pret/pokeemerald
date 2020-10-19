@@ -81,8 +81,6 @@ void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
 
-#define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
-
 void AgbMain()
 {
 #if MODERN
@@ -136,9 +134,11 @@ void AgbMain()
     {
         ReadKeys();
 
-        if (gSoftResetDisabled == FALSE
-         && (gMain.heldKeysRaw & A_BUTTON)
-         && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
+        if (!gSoftResetDisabled
+         && JOY_HELD_RAW(A_BUTTON)
+         && JOY_HELD_RAW(B_BUTTON)
+         && JOY_HELD_RAW(START_BUTTON)
+         && JOY_HELD_RAW(SELECT_BUTTON)) //The reset key combo A + B + START + SELECT
         {
             rfu_REQ_stopMode();
             rfu_waitREQComplete();
@@ -262,9 +262,7 @@ static void ReadKeys(void)
 
     if (keyInput != 0 && gMain.heldKeys == keyInput)
     {
-        gMain.keyRepeatCounter--;
-
-        if (gMain.keyRepeatCounter == 0)
+        if (--gMain.keyRepeatCounter == 0)
         {
             gMain.newAndRepeatedKeys = keyInput;
             gMain.keyRepeatCounter = gKeyRepeatContinueDelay;
@@ -282,10 +280,10 @@ static void ReadKeys(void)
     // Remap L to A if the L=A option is enabled.
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
     {
-        if (gMain.newKeys & L_BUTTON)
+        if (JOY_NEW(L_BUTTON))
             gMain.newKeys |= A_BUTTON;
 
-        if (gMain.heldKeys & L_BUTTON)
+        if (JOY_HELD(L_BUTTON))
             gMain.heldKeys |= A_BUTTON;
     }
 
@@ -343,7 +341,7 @@ static void VBlankIntr(void)
 {
     if (gWirelessCommType != 0)
         RfuVSync();
-    else if (gLinkVSyncDisabled == FALSE)
+    else if (!gLinkVSyncDisabled)
         LinkVSync();
 
     gMain.vblankCounter1++;

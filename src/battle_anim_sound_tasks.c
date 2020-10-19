@@ -5,7 +5,6 @@
 #include "sound.h"
 #include "task.h"
 #include "constants/battle_anim.h"
-#include "constants/species.h"
 
 // this file's functions
 static void sub_8158B98(u8 taskId);
@@ -134,7 +133,7 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            species = gContestResources->field_18->species;
+            species = gContestResources->moveAnim->species;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
@@ -180,7 +179,7 @@ void SoundTask_PlayDoubleCry(u8 taskId)
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            species = gContestResources->field_18->species;
+            species = gContestResources->moveAnim->species;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
@@ -284,7 +283,7 @@ void SoundTask_PlayCryWithEcho(u8 taskId)
     pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
 
     if (IsContest())
-        species = gContestResources->field_18->species;
+        species = gContestResources->moveAnim->species;
     else
         species = gAnimBattlerSpecies[gBattleAnimAttacker];
 

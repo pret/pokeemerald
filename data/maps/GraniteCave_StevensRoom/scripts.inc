@@ -1,3 +1,5 @@
+.set LOCALID_STEVEN, 1
+
 GraniteCave_StevensRoom_MapScripts:: @ 822DC7A
 	.byte 0
 
@@ -15,7 +17,7 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -31,25 +33,25 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	compare VAR_FACING, DIR_EAST
 	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
-	playse SE_KAIDAN
-	removeobject 1
+	playse SE_EXIT
+	removeobject LOCALID_STEVEN
 	release
 	end
 
 GraniteCave_StevensRoom_EventScript_StevenExitNorth:: @ 822DD0D
-	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExit
+	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_StevenExitWestEast:: @ 822DD18
 	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
-	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExit
+	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_StevenExitSouth:: @ 822DD2A
 	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
-	applymovement 1, GraniteCave_StevensRoom_Movement_StevenExitSouth
+	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
 	return
 

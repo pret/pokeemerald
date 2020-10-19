@@ -735,7 +735,7 @@ static bool32 InitFrontierPass(void)
     case 8:
         LoadPalette(gUnknown_08DE07C8[0], 0, 0x1A0);
         LoadPalette(gUnknown_08DE07C8[1 + sPassData->trainerStars], 0x10, 0x20);
-        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         sub_80C629C();
         sub_80C6104(sPassData->cursorArea, sPassData->previousCursorArea);
         if (sPassData->unkE == 1 || sPassData->unkE == 2)
@@ -871,10 +871,10 @@ static void CB2_ReturnFromRecord(void)
     switch (InBattlePyramid())
     {
     case 1:
-        PlayBGM(MUS_PYRAMID);
+        PlayBGM(MUS_B_PYRAMID);
         break;
     case 2:
-        PlayBGM(MUS_PYRAMID_TOP);
+        PlayBGM(MUS_B_PYRAMID_TOP);
         break;
     default:
         Overworld_PlaySpecialMapMusic();
@@ -937,14 +937,14 @@ static void Task_HandleFrontierPassInput(u8 taskId)
 {
     u8 var = FALSE; // Reused, first informs whether the cursor moves, then used as the new cursor area.
 
-    if (gMain.heldKeys & DPAD_UP && sPassGfx->cursorSprite->pos1.y >= 9)
+    if (JOY_HELD(DPAD_UP) && sPassGfx->cursorSprite->pos1.y >= 9)
     {
         sPassGfx->cursorSprite->pos1.y -= 2;
         if (sPassGfx->cursorSprite->pos1.y <= 7)
             sPassGfx->cursorSprite->pos1.y = 2;
         var = TRUE;
     }
-    if (gMain.heldKeys & DPAD_DOWN && sPassGfx->cursorSprite->pos1.y <= 135)
+    if (JOY_HELD(DPAD_DOWN) && sPassGfx->cursorSprite->pos1.y <= 135)
     {
         sPassGfx->cursorSprite->pos1.y += 2;
         if (sPassGfx->cursorSprite->pos1.y >= 137)
@@ -952,14 +952,14 @@ static void Task_HandleFrontierPassInput(u8 taskId)
         var = TRUE;
     }
 
-    if (gMain.heldKeys & DPAD_LEFT && sPassGfx->cursorSprite->pos1.x >= 6)
+    if (JOY_HELD(DPAD_LEFT) && sPassGfx->cursorSprite->pos1.x >= 6)
     {
         sPassGfx->cursorSprite->pos1.x -= 2;
         if (sPassGfx->cursorSprite->pos1.x <= 4)
             sPassGfx->cursorSprite->pos1.x = 5;
         var = TRUE;
     }
-    if (gMain.heldKeys & DPAD_RIGHT && sPassGfx->cursorSprite->pos1.x <= 231)
+    if (JOY_HELD(DPAD_RIGHT) && sPassGfx->cursorSprite->pos1.x <= 231)
     {
         sPassGfx->cursorSprite->pos1.x += 2;
         if (sPassGfx->cursorSprite->pos1.x >= 233)
@@ -969,7 +969,7 @@ static void Task_HandleFrontierPassInput(u8 taskId)
 
     if (!var) // Cursor did not change.
     {
-        if (sPassData->cursorArea != CURSOR_AREA_NOTHING && gMain.newKeys & A_BUTTON)
+        if (sPassData->cursorArea != CURSOR_AREA_NOTHING && JOY_NEW(A_BUTTON))
         {
             if (sPassData->cursorArea <= CURSOR_AREA_RECORD) // Map, Card, Record
             {
@@ -986,7 +986,7 @@ static void Task_HandleFrontierPassInput(u8 taskId)
             }
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_PC_OFF);
             SetMainCallback2(CB2_HideFrontierPass);
@@ -1173,73 +1173,47 @@ static void sub_80C5F58(bool8 arg0, bool8 arg1)
 
 static void sub_80C6104(u8 cursorArea, u8 previousCursorArea)
 {
-    bool32 var;
-
     switch (previousCursorArea)
     {
     case CURSOR_AREA_MAP:
         CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk24, 16, 3, 12, 7, 17);
-        var = TRUE;
         break;
     case CURSOR_AREA_CARD:
         CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk24 + 336, 16, 10, 12, 7, 17);
-        var = TRUE;
         break;
     case CURSOR_AREA_RECORD:
-        if (!sPassData->hasBattleRecord)
-        {
-            var = FALSE;
-        }
-        else
-        {
+        if (sPassData->hasBattleRecord)
             CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk28, 2, 10, 12, 3, 17);
-            var = TRUE;
-        }
+        else if (cursorArea == CURSOR_AREA_NOTHING || cursorArea > CURSOR_AREA_CANCEL)
+            return;
         break;
     case CURSOR_AREA_CANCEL:
         CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_08DE3350, 21, 0, 9, 2, 17);
-        var = TRUE;
         break;
     default:
-        var = FALSE;
-        break;
-    }
-
-    if (!var)
-    {
         if (cursorArea == CURSOR_AREA_NOTHING || cursorArea > CURSOR_AREA_CANCEL)
             return;
+        break;
     }
 
     switch (cursorArea)
     {
     case CURSOR_AREA_MAP:
         CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk24 + 168, 16, 3, 12, 7, 17);
-        var = TRUE;
         break;
     case CURSOR_AREA_CARD:
         CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk24 + 504, 16, 10, 12, 7, 17);
-        var = TRUE;
         break;
     case CURSOR_AREA_RECORD:
-        if (!sPassData->hasBattleRecord)
+        if (sPassData->hasBattleRecord)
+            CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk28 + 72, 2, 10, 12, 3, 17);
+        else
             return;
-
-        CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->unk28 + 72, 2, 10, 12, 3, 17);
-        var = TRUE;
-        break;
+        break; // needed
     case CURSOR_AREA_CANCEL:
         CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_08DE3374, 21, 0, 9, 2, 17);
-        var = TRUE;
         break;
     default:
-        var = FALSE;
-        break;
-    }
-
-    if (!var)
-    {
-        asm("":::"r4");
         if (previousCursorArea == CURSOR_AREA_NOTHING || previousCursorArea > CURSOR_AREA_CANCEL)
             return;
     }
@@ -1378,7 +1352,7 @@ static bool32 InitFrontierMap(void)
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
         LoadPalette(gUnknown_08DE07C8[0], 0, 0x1A0);
-        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         CopyToBgTilemapBuffer(2, gUnknown_08570E00, 0, 0);
         CopyBgTilemapBufferToVram(2);
         break;
@@ -1469,19 +1443,19 @@ static void Task_HandleFrontierMap(u8 taskId)
             break;
         return;
     case 1:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_PC_OFF);
             data[0] = 4;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             if (sMapData->cursorPos >= NUM_FRONTIER_FACILITIES - 1)
                 HandleFrontierMapCursorMove(0);
             else
                 data[0] = 2;
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             if (sMapData->cursorPos == 0)
                 HandleFrontierMapCursorMove(1);
@@ -1705,5 +1679,5 @@ static void HandleFrontierMapCursorMove(u8 direction)
         CopyWindowToVram(i, 3);
 
     CopyBgTilemapBufferToVram(0);
-    PlaySE(SE_Z_SCROLL);
+    PlaySE(SE_DEX_SCROLL);
 }

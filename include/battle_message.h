@@ -145,7 +145,7 @@
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_STRING;                                 \
-    textVar[2] = stringId;                                      \
+    textVar[2] = (stringId & 0xFF);                             \
     textVar[3] = (stringId & 0xFF00) >> 8;                      \
     textVar[4] = B_BUFF_EOS;                                    \
 }
@@ -274,7 +274,7 @@ extern const u8 gText_PkmnGettingPumped[];
 extern const u8 gText_PkmnShroudedInMist[];
 extern const u8 gText_PkmnsXPreventsSwitching[];
 extern const u8 gText_TheGreatNewHope[];
-extern const u8 gText_WillChampinshipDreamComeTrue[];
+extern const u8 gText_WillChampionshipDreamComeTrue[];
 extern const u8 gText_AFormerChampion[];
 extern const u8 gText_ThePreviousChampion[];
 extern const u8 gText_TheUnbeatenChampion[];

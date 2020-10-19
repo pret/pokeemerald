@@ -132,7 +132,7 @@ CableClub_EventScript_ExitLinkRoom:: @ 8276C85
 	call CableClub_EventScript_CloseLinkAndExitLinkRoom
 	call CableClub_EventScript_CloseDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -142,7 +142,7 @@ CableClub_EventScript_ExitMinigameRoom:: @ 8276C9D
 	call CableClub_EventScript_CloseLinkAndExitLinkRoom
 	call EventScript_CloseMossdeepGameCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -165,7 +165,7 @@ CableClub_EventScript_ExitTradeCenter:: @ 8276CE7
 	call CableClub_EventScript_PlayerExitTradeCenter
 	call CableClub_EventScript_CloseDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -187,7 +187,7 @@ CableClub_EventScript_ExitRecordCorner:: @ 8276D2C
 	call CableClub_EventScript_PlayerExitRecordCorner
 	call CableClub_EventScript_CloseDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -209,7 +209,7 @@ CableClub_EventScript_ExitUnionRoom:: @ 8276D6C
 	call CableClub_EventScript_PlayerExitUnionRoom
 	call CableClub_EventScript_CloseUnionRoomBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -372,7 +372,7 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -477,7 +477,7 @@ CableClub_EventScript_EnterTradeCenter:: @ 827713A
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -552,7 +552,7 @@ CableClub_EventScript_EnterRecordCorner:: @ 827724C
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -955,7 +955,7 @@ CableClub_EventScript_EnterUnionRoom:: @ 827759F
 	copyvar VAR_CABLE_CLUB_STATE, VAR_0x8004
 	call CableClub_EventScript_OpenUnionRoomBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -1285,7 +1285,7 @@ CableClub_EventScript_EnterWirelessLinkRoom:: @ 8277B3A
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -1481,7 +1481,7 @@ MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom:: @ 8277E0E
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call EventScript_OpenMossdeepGameCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0

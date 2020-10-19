@@ -146,38 +146,49 @@ struct BerryCrushGame
 {
     MainCallback unk0;
     u32 (* unk4)(struct BerryCrushGame *, u8 *);
+
     u8 unk8;
     u8 unk9;
     u8 unkA;
     u8 unkB;
+
     u8 unkC;
     u8 unkD;
+
     u8 unkE;
     u8 unkF;
+
     u16 unk10;
     u16 unk12;
     u16 unk14;
+
     u16 unk16;
     s16 unk18;
     s16 unk1A;
-    int unk1C;
+    s32 unk1C;
     s32 unk20;
     u8 unk24;
+
     u8 unk25_0:1;
     u8 unk25_1:1;
     u8 unk25_2:1;
     u8 unk25_3:1;
     u8 unk25_4:1;
     u8 unk25_5:3;
+
     u16 unk26;
+
     u16 unk28;
     s16 unk2A;
     s16 unk2C;
+
     s16 unk2E;
     s16 unk30;
     s16 unk32;
     s16 unk34;
+
     u8 unk36[0xA];
+
     struct BerryCrushGame_40 unk40;
     struct BerryCrushGame_5C unk5C;
     union BerryCrushGame_68 unk68;
@@ -204,7 +215,7 @@ void sub_8022524(struct BerryCrushGame_138 *, u16);
 void sub_8022B28(struct Sprite *);
 void sub_8022554(struct BerryCrushGame_138 *r0);
 void sub_8024578(struct BerryCrushGame *);
-void sub_8024644(u8 *, u32, u32, u32, u32);
+void sub_8024644(u8 *, u8, u8, u16, u8);
 static void sub_8022A20(struct Sprite *sprite);
 static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *r6, u8 *r1);
 static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5);
@@ -825,7 +836,7 @@ u32 sub_8020C0C(MainCallback callback)
     if (callback == CB2_ReturnToField)
     {
         gTextFlags.autoScroll = TRUE;
-        PlayNewMapMusic(MUS_POKECEN);
+        PlayNewMapMusic(MUS_POKE_CENTER);
         SetMainCallback1(CB1_Overworld);
     }
 
@@ -900,7 +911,7 @@ static void sub_8020D8C(void)
 void sub_8020E1C(void)
 {
     DestroyTask(gUnknown_02022C90->unkA);
-    ChooseBerrySetCallback(sub_8020D8C);
+    ChooseBerryForMachine(sub_8020D8C);
 }
 
 static void sub_8020E3C(void)
@@ -1076,7 +1087,7 @@ int sub_802104C(void)
             return 0;
 
         InitStandardTextBoxWindows();
-        sub_8197200();
+        InitTextBoxGfxAndPrinters();
         sub_8022588(var0);
         sub_8022600(var0);
         gPaletteFade.bufferTransferDisabled = TRUE;
@@ -1125,7 +1136,7 @@ int sub_802130C(void)
     switch (var0->unkC)
     {
     case 0:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 1:
         if (!IsLinkTaskFinished())
@@ -1344,9 +1355,9 @@ void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
         else
         {
             if (sp4 == 1)
-                PlaySE(SE_TOY_DANGO);
+                PlaySE(SE_MUD_BALL);
             else
-                PlaySE(SE_TOY_KABE);
+                PlaySE(SE_BREAKABLE_DOOR);
 
             arg0->unk25_2 = 1;
         }
@@ -1665,7 +1676,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
         CopyWindowToVram(data[1], 3);
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
             break;
         else
             return;
@@ -1986,29 +1997,29 @@ static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *game,
     // byte 9: if TRUE, communicate on fade complete
 
     u16 color;
-    u32 selectedPals;
-    selectedPals = ({
-#ifndef NONMATCHING
-        register u32 value asm("r2");
-        register u32 b asm("r3");
-#else
-        u32 value;
-        u32 b;
-#endif //NONMATCHING
-        value  =      params[0] << 0;
-        value |= (b = params[1] << 8);
-        value |= (b = params[2] << 16);
-        value |= (b = params[3] << 24);
-        value;
-    });
+    u32 selectedPals[2];
 
+    selectedPals[0] = (u32)params[0];
+    selectedPals[1] = (u32)params[1];
+    selectedPals[1] <<= 8;
+
+    selectedPals[0] |= selectedPals[1];
+    selectedPals[1] = (u32)params[2];
+    selectedPals[1] <<= 16;
+
+    selectedPals[0] |= selectedPals[1];
+    selectedPals[1] = (u32)params[3];
+    selectedPals[1] <<= 24;
+
+    selectedPals[0] |= selectedPals[1];
     params[0] = params[9];
 
-    color  = params[8] << 8;
-    color |= params[7] << 0;
+    color = params[8];
+    color <<= 8;
+    color |= params[7];
 
     gPaletteFade.bufferTransferDisabled = FALSE;
-    BeginNormalPaletteFade(selectedPals, params[4], params[5], params[6], color);
+    BeginNormalPaletteFade(selectedPals[0], params[4], params[5], params[6], color);
     UpdatePaletteFade();
     game->unkE = 2;
     return 0;
@@ -2027,7 +2038,7 @@ static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5)
             r4->unkC = 3;
         return 0;
     case 1:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         ++r4->unkC;
         return 0;
     case 2:
@@ -2110,12 +2121,12 @@ static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     switch (r4->unkC)
     {
     case 0:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 1:
         if (IsLinkTaskFinished())
         {
-            PlayNewMapMusic(MUS_RG_SLOT);
+            PlayNewMapMusic(MUS_RG_GAME_CORNER);
             sub_8022BEC(7, 1, NULL);
             r4->unk12 = 3;
             r4->unkC = 0;
@@ -2167,7 +2178,7 @@ static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
         sub_8022BEC(3, 1, NULL);
         return 0;
     case 1:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 2:
         if (!IsLinkTaskFinished())
@@ -2213,7 +2224,7 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     {
     case 0:
         sub_80214A8(r4, &r4->unk138);
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 1:
         if (!IsLinkTaskFinished())
@@ -2226,14 +2237,14 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 2:
         r4->unk138.unk38[r4->unk138.unk0]->callback = sub_8021608;
         r4->unk138.unk38[r4->unk138.unk0]->affineAnimPaused = FALSE;
-        PlaySE(SE_NAGERU);
+        PlaySE(SE_BALL_THROW);
         break;
     case 3:
         if (r4->unk138.unk38[r4->unk138.unk0]->callback == sub_8021608)
             return 0;
         r4->unk138.unk38[r4->unk138.unk0] = NULL;
         ++r4->unk138.unk0;
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 4:
         if (!IsLinkTaskFinished())
@@ -2247,12 +2258,12 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         break;
     case 5:
         sub_80216A8(r4, &r4->unk138);
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 6:
         if (!IsLinkTaskFinished())
             return 0;
-        PlaySE(SE_RU_HYUU);
+        PlaySE(SE_FALL);
         sub_8022BEC(11, 1, NULL);
         r4->unk12 = 5;
         r4->unkC = 0;
@@ -2274,7 +2285,7 @@ static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         r4->unk138.unk1 = 4;
         r4->unk138.unk0 = 0;
         r4->unk138.unk2 = gUnknown_082F326C[r4->unk138.unk1][0];
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         break;
     case 1:
         r4->unk2C = gUnknown_082F326C[r4->unk138.unk1][r4->unk138.unk0];
@@ -2295,7 +2306,7 @@ static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
         SetGpuReg(REG_OFFSET_BG2VOFS, 0);
         SetGpuReg(REG_OFFSET_BG3VOFS, 0);
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 3:
         if (!IsLinkTaskFinished())
@@ -2323,7 +2334,7 @@ static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
             return 0;
         // fallthrough
     case 0:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 3:
         if (!IsLinkTaskFinished())
@@ -2357,7 +2368,7 @@ void sub_802339C(struct BerryCrushGame *r4)
     for (r7 = 0; r7 < r4->unk9; ++r7)
     {
         r2 = gRecvCmds[r7];
-        if ((r2[0] & 0xFF00) == 0x2F00
+        if ((r2[0] & 0xFF00) == RFUCMD_SEND_PACKET
          && r2[1] == 2)
         {
             if ((u8)r2[2] & 4)
@@ -2390,7 +2401,7 @@ void sub_802339C(struct BerryCrushGame *r4)
             }
         }
     }
-    if (r8 > 1)
+    if (r8 >= 2)
     {
         for (r7 = 0; r7 < r4->unk9; ++r7)
         {
@@ -2498,9 +2509,9 @@ void sub_8023558(struct BerryCrushGame *r3)
 
 void sub_80236B8(struct BerryCrushGame *r5)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         r5->unk5C.unk02_2 = 1;
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
     {
         if (r5->unk68.as_four_players.others[r5->unk8].unk4.as_hwords[5] < r5->unk28)
             ++r5->unk68.as_four_players.others[r5->unk8].unk4.as_hwords[5];
@@ -2559,7 +2570,7 @@ void sub_80236B8(struct BerryCrushGame *r5)
     r5->unk5C.unk02_1 = r5->unk25_4;
     r5->unk5C.unk0A = r5->unk25_5;
     memcpy(r5->unk40.unk2, &r5->unk5C, sizeof(r5->unk40.unk2));
-    sub_800FE50(r5->unk40.unk2);
+    Rfu_SendPacket(r5->unk40.unk2);
 }
 
 void sub_802385C(struct BerryCrushGame *r5)
@@ -2580,7 +2591,8 @@ void sub_802385C(struct BerryCrushGame *r5)
     for (r4 = 0; r4 < r5->unk9; ++r4)
         r5->unk68.as_four_players.others[r4].unk4.as_2d_bytes[1][5] = 0;
 #endif
-    if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00
+
+    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET
      || gRecvCmds[0][1] != 2)
     {
         r5->unk25_2 = 0;
@@ -2667,7 +2679,7 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     {
     case 0:
         r4->unk12 = 8;
-        PlaySE(SE_W070);
+        PlaySE(SE_M_STRENGTH);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 31, 0));
         r4->unk138.unk0 = 2;
         break;
@@ -2703,7 +2715,7 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     case 4:
         if (!sub_80218D4(r4, &r4->unk138))
             return 0;
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         r4->unk10 = 0;
         break;
     case 5:
@@ -2724,7 +2736,7 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     {
     case 0:
         r5->unk12 = 9;
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 0, 0));
         r5->unk138.unk0 = 4;
         break;
@@ -2737,7 +2749,7 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     case 2:
         if (!sub_80218D4(r5, &r5->unk138))
             return 0;
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         r5->unk10 = 0;
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
         SetGpuReg(REG_OFFSET_BG2VOFS, 0);
@@ -2966,7 +2978,7 @@ static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
             --r5->unk138.unk0;
             return 0;
         }
-        if (!(gMain.newKeys & A_BUTTON))
+        if (!(JOY_NEW(A_BUTTON)))
             return 0;
         PlaySE(SE_SELECT);
         sub_802222C(r5);
@@ -3005,7 +3017,7 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
         r5->unkC = 0;
         return 0;
     case 1:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 2:
         if (!IsLinkTaskFinished())
@@ -3084,7 +3096,7 @@ static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     switch (r4->unkC)
     {
     case 0:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 1:
         if (!IsLinkTaskFinished())
@@ -3184,12 +3196,12 @@ static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     switch (r5->unkC)
     {
     case 0:
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
         break;
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        sub_800AC34();
+        SetCloseLinkCallback();
         break;
     case 2:
         if (gReceivedRemoteLinkPlayers != 0)
@@ -3269,14 +3281,11 @@ static void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, 
     params[9] = communicateAfter;
 }
 
-void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
+void sub_8024644(u8 *r0, u8 r1, u8 r2, u16 r3, u8 r5)
 {
-    u8 sp[4];
-
-    0[(u16 *)sp] = r3;
     r0[0] = r1;
     r0[1] = r2;
-    r0[2] = sp[0];
-    r0[3] = sp[1];
+    r0[2] = ((u8 *)&r3)[0];
+    r0[3] = ((u8 *)&r3)[1];
     r0[4] = r5;
 }

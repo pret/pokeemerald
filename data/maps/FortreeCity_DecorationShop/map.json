@@ -2,7 +2,7 @@
   "id": "MAP_FORTREE_CITY_DECORATION_SHOP",
   "name": "FortreeCity_DecorationShop",
   "layout": "LAYOUT_FORTREE_CITY_DECORATION_SHOP",
-  "music": "MUS_MACHI_S3",
+  "music": "MUS_FORTREE",
   "region_map_section": "MAPSEC_FORTREE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

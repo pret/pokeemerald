@@ -1,15 +1,17 @@
+.set LOCALID_WALLYS_DAD, 1
+
 PetalburgCity_WallysHouse_MapScripts:: @ 8204229
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_WallysHouse_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_WallysHouse_OnWarp
 	.byte 0
 
 PetalburgCity_WallysHouse_OnWarp: @ 8204234
-	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_WallysHouse_EventScript_PlayerUncleFaceEachOther
+	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther
 	.2byte 0
 
-PetalburgCity_WallysHouse_EventScript_PlayerUncleFaceEachOther:: @ 820423E
+PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther:: @ 820423E
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
-	turnobject 1, DIR_WEST
+	turnobject LOCALID_WALLYS_DAD, DIR_WEST
 	end
 
 PetalburgCity_WallysHouse_OnFrame: @ 8204247
@@ -26,7 +28,7 @@ PetalburgCity_WallysHouse_EventScript_GiveHM03Surf:: @ 8204251
 	releaseall
 	end
 
-PetalburgCity_WallysHouse_EventScript_WallyUncle:: @ 8204278
+PetalburgCity_WallysHouse_EventScript_WallysDad:: @ 8204278
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad
@@ -52,7 +54,7 @@ PetalburgCity_WallysHouse_EventScript_PlayedWithWally:: @ 82042B6
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_WallyAunt:: @ 82042C0
+PetalburgCity_WallysHouse_EventScript_WallysMom:: @ 82042C0
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf

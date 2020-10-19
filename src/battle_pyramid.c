@@ -35,7 +35,6 @@
 #include "constants/layouts.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 
 extern const struct MapLayout *const gMapLayouts[];
@@ -521,6 +520,19 @@ static const u8 sTrainerTextGroups[50][2] =
     {FACILITY_CLASS_LASS, 3},
     {FACILITY_CLASS_BUG_CATCHER, 0},
     {FACILITY_CLASS_HIKER, 4},
+};
+
+enum
+{
+    HINT_EXIT_DIRECTION,
+    HINT_REMAINING_ITEMS,
+    HINT_REMAINING_TRAINERS,
+    HINT_EXIT_SHORT_REMAINING_TRAINERS,
+    HINT_EXIT_SHORT_REMAINING_ITEMS,
+    HINT_EXIT_MEDIUM_REMAINING_TRAINERS,
+    HINT_EXIT_MEDIUM_REMAINING_ITEMS,
+    HINT_EXIT_FAR_REMAINING_TRAINERS,
+    HINT_EXIT_FAR_REMAINING_ITEMS,
 };
 
 static const u8 *const sExitDirectionHintTexts1[] =

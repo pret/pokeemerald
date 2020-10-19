@@ -1,3 +1,6 @@
+.set LOCALID_WOMAN_1, 19
+.set LOCALID_MAN_1, 20
+
 LilycoveCity_MapScripts:: @ 81E2B3C
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, LilycoveCity_OnLoad
@@ -134,13 +137,13 @@ LilycoveCity_EventScript_FatMan:: @ 81E2CD4
 LilycoveCity_EventScript_Man1:: @ 81E2CDD
 	lockall
 	msgbox LilycoveCity_Text_JustArrivedAndSawRarePokemon, MSGBOX_NPC
-	applymovement 20, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_MAN_1, Common_Movement_FaceOriginalDirection
 	end
 
 LilycoveCity_EventScript_Woman1:: @ 81E2CEE
 	lockall
 	msgbox LilycoveCity_Text_HoneymoonVowToSeeRarePokemon, MSGBOX_NPC
-	applymovement 19, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_WOMAN_1, Common_Movement_FaceOriginalDirection
 	end
 
 LilycoveCity_EventScript_CitySign:: @ 81E2CFF
@@ -238,7 +241,7 @@ LilycoveCity_EventScript_Rival:: @ 81E2DDE
 	end
 
 LilycoveCity_EventScript_May:: @ 81E2DF8
-	playbgm MUS_GIRL_SUP, 1
+	playbgm MUS_ENCOUNTER_MAY, 1
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattle
 	compare VAR_RESULT, NO
@@ -267,7 +270,7 @@ LilycoveCity_EventScript_DeclineMayBattle:: @ 81E2E5A
 	end
 
 LilycoveCity_EventScript_Brendan:: @ 81E2E6B
-	playbgm MUS_BOY_SUP, 1
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattle
 	compare VAR_RESULT, NO

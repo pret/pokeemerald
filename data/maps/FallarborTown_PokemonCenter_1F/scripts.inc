@@ -1,3 +1,6 @@
+.set LOCALID_NURSE, 1
+.set LOCALID_LANETTE, 4
+
 FallarborTown_PokemonCenter_1F_MapScripts:: @ 8200BCD
 	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -8,9 +11,8 @@ FallarborTown_PokemonCenter_1F_OnTransition: @ 8200BD8
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-@ VAR_0x800B is the Nurse's object event id
 FallarborTown_PokemonCenter_1F_EventScript_Nurse:: @ 8200BE1
-	setvar VAR_0x800B, 1
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -36,20 +38,20 @@ FallarborTown_PokemonCenter_1F_EventScript_Lanette:: @ 8200C01
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth:: @ 8200C28
-	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth
+	applymovement LOCALID_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth
 	waitmovement 0
 	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest:: @ 8200C38
-	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest
+	applymovement LOCALID_LANETTE, FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest
 	waitmovement 0
 	goto FallarborTown_PokemonCenter_1F_EventScript_LanetteExited
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_LanetteExited:: @ 8200C48
-	playse SE_JIDO_DOA
-	removeobject 4
+	playse SE_SLIDING_DOOR
+	removeobject LOCALID_LANETTE
 	clearflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
 	release
 	end

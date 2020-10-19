@@ -8,6 +8,7 @@
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
+#include "constants/species.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -65,8 +66,6 @@
 // Converts a Q24.8 fixed-point format number to a regular integer
 #define Q_24_8_TO_INT(n) ((int)((n) >> 8))
 
-#define POKEMON_SLOTS_NUMBER 412
-
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
@@ -99,9 +98,11 @@
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
 // Macros for checking the joypad
-#define TEST_BUTTON(field, button) ({(field) & (button);})
+#define TEST_BUTTON(field, button) ((field) & (button))
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
 #define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
+#define JOY_HELD_RAW(button) TEST_BUTTON(gMain.heldKeysRaw, button)
+#define JOY_REPEAT(button) TEST_BUTTON(gMain.newAndRepeatedKeys, button)
 
 #define S16TOPOSFLOAT(val)   \
 ({                           \
@@ -113,7 +114,7 @@
 
 #define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
 
-#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER))
+#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(NUM_SPECIES))
 #define NUM_FLAG_BYTES (ROUND_BITS_TO_BYTES(FLAGS_COUNT))
 
 struct Coords8
@@ -479,7 +480,7 @@ struct SaveBlock2
     /*0x20C*/ struct BerryPickingResults berryPick;
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][2][3]; // From record mixing.
     /*0x57C*/ struct RankingHall2P hallRecords2P[2][3]; // From record mixing.
-    /*0x624*/ u16 contestLinkResults[5][4]; // 4 positions for 5 categories.
+    /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
 }; // sizeof=0xF2C
 
@@ -488,7 +489,7 @@ extern struct SaveBlock2 *gSaveBlock2Ptr;
 struct SecretBaseParty
 {
     u32 personality[PARTY_SIZE];
-    u16 moves[PARTY_SIZE * 4];
+    u16 moves[PARTY_SIZE * MAX_MON_MOVES];
     u16 species[PARTY_SIZE];
     u16 heldItems[PARTY_SIZE];
     u8 levels[PARTY_SIZE];

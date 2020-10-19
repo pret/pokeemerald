@@ -1101,7 +1101,7 @@ static void AnimTask_TransparentCloneGrowAndShrink_Step(u8 taskId)
         break;
     case 1:
         task->data[1] -= 4;
-        task->data[2] = 256 - (gSineTable[task->data[1]] >> 1);;
+        task->data[2] = 256 - (gSineTable[task->data[1]] >> 1);
         SetSpriteRotScale(task->data[15], task->data[2], task->data[2], 0);
         SetBattlerSpriteYOffsetFromOtherYScale(task->data[15], task->data[13]);
         if (task->data[1] == 0)
@@ -1137,7 +1137,7 @@ static void AnimPsychoBoost(struct Sprite *sprite)
     case 1:
         if (sprite->affineAnimEnded)
         {
-            PlaySE12WithPanning(SE_W100, BattleAnimAdjustPanning(-64));
+            PlaySE12WithPanning(SE_M_TELEPORT, BattleAnimAdjustPanning(-64));
             ChangeSpriteAffineAnim(sprite, 1);
             sprite->data[0]++;
         }

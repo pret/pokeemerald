@@ -126,12 +126,12 @@ struct Pokemon
 
 struct Unknown_806F160_Struct
 {
-    u8 field_0_0:4;
-    u8 field_0_1:4;
-    u8 field_1;
-    u8 magic;
-    u8 field_3_0:4;
-    u8 field_3_1:4;
+    u32 field_0_0:4;
+    u32 field_0_1:4;
+    u32 field_1:8;
+    u16 magic:8;
+    u32 size:4;
+    u16 field_3_1:4;
     void *bytes;
     u8 **byteArrays;
     struct SpriteTemplate *templates;
@@ -257,7 +257,7 @@ extern const u16 *const gLevelUpLearnsets[];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpSetMask[];
 extern const u8 gPPUpAddMask[];
-extern const u8 gStatStageRatios[][2];
+extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
 extern const u16 gLinkPlayerFacilityClasses[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const s8 gNatureStatTable[][5];

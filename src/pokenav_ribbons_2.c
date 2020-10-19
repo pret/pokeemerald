@@ -13,28 +13,38 @@
 #include "window.h"
 #include "constants/songs.h"
 
+enum
+{
+    RIBBONS_SUMMARY_FUNC_NONE,
+    RIBBONS_SUMMARY_FUNC_MOVED_CURSOR,
+    RIBBONS_SUMMARY_FUNC_SELECT_RIBBON,
+    RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE,
+    RIBBONS_SUMMARY_FUNC_EXPANDED_CANCEL,
+    RIBBONS_SUMMARY_FUNC_EXIT,
+};
+
 struct PokenavSub13
 {
     u8 filler0[0x8];
-    struct PokenavSub18 *field_8;
+    struct PokenavSub18 *monList;
     u16 field_C;
     u16 field_E;
     u16 field_10;
     u16 field_12;
     u32 field_14[25];
     u32 field_78[8];
-    u32 (*field_98)(struct PokenavSub13 *structPtr);
+    u32 (*callback)(struct PokenavSub13 *structPtr);
 };
 
 struct PokenavSub14
 {
-    u32 (*field_0)(void);
+    u32 (*callback)(void);
     u32 loopedTaskId;
-    u16 field_8;
-    u16 field_A;
-    u16 field_C;
+    u16 nameWindowId;
+    u16 ribbonCountWindowId;
+    u16 listIdxWindowId;
     u16 field_E;
-    u16 field_10;
+    u16 monSpriteId;
     struct Sprite *field_14;
     u32 filler;
     u8 tilemapBuffers[2][BG_SCREEN_SIZE];
@@ -43,48 +53,48 @@ struct PokenavSub14
 static u32 gUnknown_030012C0;
 static u32 gUnknown_030012C4;
 
-void sub_81D0E84(struct PokenavSub14 *structPtr);
-void sub_81D0FF0(struct PokenavSub14 *structPtr);
-void sub_81D10D0(struct PokenavSub14 *structPtr);
+void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr);
+void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr);
+void PrintRibbonsMonListIndex(struct PokenavSub14 *structPtr);
 void sub_81D1500(struct PokenavSub14 *structPtr);
 void sub_81D0EFC(struct PokenavSub14 *structPtr);
-void sub_81D1148(struct PokenavSub14 *structPtr);
-void sub_81D10A4(struct PokenavSub14 *structPtr);
-void sub_81D1178(struct PokenavSub14 *structPtr);
+void ResetSpritesAndDrawRibbonsMonFrontPic(struct PokenavSub14 *structPtr);
+void AddRibbonListIndexWindow(struct PokenavSub14 *structPtr);
+void DestroyRibbonsMonFrontPic(struct PokenavSub14 *structPtr);
 void sub_81D11D8(struct PokenavSub14 *structPtr);
 void sub_81D11FC(struct PokenavSub14 *structPtr);
-void sub_81D0E60(struct PokenavSub14 *structPtr);
+void AddRibbonCountWindow(struct PokenavSub14 *structPtr);
 void sub_81D1448(struct PokenavSub14 *structPtr);
 void sub_81D13FC(struct PokenavSub14 *structPtr);
-void sub_81D0FCC(struct PokenavSub14 *structPtr);
+void AddRibbonSummaryMonNameWindow(struct PokenavSub14 *structPtr);
 void sub_81D12D8(struct PokenavSub14 *structPtr);
 bool32 sub_81D1524(struct PokenavSub14 *structPtr);
 bool32 sub_81D1234(struct PokenavSub14 *structPtr);
 void sub_81D0814(struct PokenavSub13 *structPtr);
-u32 sub_81D0548(struct PokenavSub13 *structPtr);
-u32 sub_81D04C4(struct PokenavSub13 *structPtr);
-u32 sub_81D05D4(struct PokenavSub13 *structPtr);
+u32 HandleExpandedRibbonInput(struct PokenavSub13 *structPtr);
+u32 RibbonsSummaryHandleInput(struct PokenavSub13 *structPtr);
+u32 ReturnToRibbonsListFromSummary(struct PokenavSub13 *structPtr);
 bool32 sub_81D05DC(struct PokenavSub13 *structPtr);
 bool32 sub_81D0688(struct PokenavSub13 *structPtr);
 bool32 sub_81D0664(struct PokenavSub13 *structPtr);
 bool32 sub_81D061C(struct PokenavSub13 *structPtr);
 bool32 sub_81D0688(struct PokenavSub13 *structPtr);
-bool32 sub_81D0A58(void);
-u32 sub_81D06C4(void);
-u32 sub_81D06D4(void);
-u16 sub_81D1184(s32 unused0, s32 unused1);
+bool32 GetCurrentLoopedTaskActive(void);
+u32 GetRibbonsSummaryCurrentIndex(void);
+u32 GetRibbonsSummaryMonListCount(void);
+u16 DrawRibbonsMonFrontPic(s32 unused0, s32 unused1);
 void sub_81D1258(struct Sprite *sprite, s32 arg1, s32 arg2, s32 arg3);
 void sub_81D1284(struct Sprite *sprite);
 void sub_81D1350(void);
 void sub_81D13BC(u16 *dst, u32 id);
 void sub_81D1370(u32 arg0, u32 id);
 void sub_81D1538(struct Sprite *sprite);
-u32 sub_81D0A6C(s32 state);
-u32 sub_81D0C84(s32 state);
-u32 sub_81D0D2C(s32 state);
-u32 sub_81D0D8C(s32 state);
-u32 sub_81D0E00(s32 state);
-u32 sub_81D0C54(s32 state);
+u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state);
+u32 LoopedTask_UpdateRibbonsSummaryInfo(s32 state);
+u32 LoopedTask_ExpandSelectedRibbon(s32 state);
+u32 LoopedTask_MoveRibbonsCursorExpanded(s32 state);
+u32 LoopedTask_ShrinkExpandedRibbon(s32 state);
+u32 LoopedTask_ExitRibbonsSummaryMenu(s32 state);
 
 struct
 {
@@ -147,95 +157,95 @@ static const struct BgTemplate gUnknown_08624B98[] =
     }
 };
 
-static const LoopedTask gUnknown_08624BA0[] =
+static const LoopedTask sRibbonsSummaryMenuLoopTaskFuncs[] =
 {
-    NULL,
-    sub_81D0C84,
-    sub_81D0D2C,
-    sub_81D0D8C,
-    sub_81D0E00,
-    sub_81D0C54
+    [RIBBONS_SUMMARY_FUNC_NONE]                 = NULL,
+    [RIBBONS_SUMMARY_FUNC_MOVED_CURSOR]         = LoopedTask_UpdateRibbonsSummaryInfo,
+    [RIBBONS_SUMMARY_FUNC_SELECT_RIBBON]        = LoopedTask_ExpandSelectedRibbon,
+    [RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE] = LoopedTask_MoveRibbonsCursorExpanded,
+    [RIBBONS_SUMMARY_FUNC_EXPANDED_CANCEL]      = LoopedTask_ShrinkExpandedRibbon,
+    [RIBBONS_SUMMARY_FUNC_EXIT]                 = LoopedTask_ExitRibbonsSummaryMenu
 };
 
 // code
-bool32 PokenavCallback_Init_13(void)
+bool32 PokenavCallback_Init_RibbonsSummaryMenu(void)
 {
-    struct PokenavSub13 *structPtr = AllocSubstruct(13, sizeof(struct PokenavSub13));
+    struct PokenavSub13 *structPtr = AllocSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST, sizeof(struct PokenavSub13));
     if (structPtr == NULL)
         return FALSE;
 
-    structPtr->field_8 = GetSubstructPtr(18);
-    if (structPtr->field_8 == NULL)
+    structPtr->monList = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
+    if (structPtr->monList == NULL)
         return FALSE;
 
     sub_81D0814(structPtr);
-    structPtr->field_98 = sub_81D04C4;
+    structPtr->callback = RibbonsSummaryHandleInput;
     gKeyRepeatContinueDelay = 3;
     gKeyRepeatStartDelay = 10;
     return TRUE;
 }
 
-u32 sub_81D04A0(void)
+u32 GetRibbonsSummaryMenuCallback(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
-    return structPtr->field_98(structPtr);
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    return structPtr->callback(structPtr);
 }
 
-void sub_81D04B8(void)
+void FreeRibbonsSummaryScreen1(void)
 {
-    FreePokenavSubstruct(13);
+    FreePokenavSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
 }
 
-u32 sub_81D04C4(struct PokenavSub13 *structPtr)
+u32 RibbonsSummaryHandleInput(struct PokenavSub13 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP && structPtr->field_8->unk2 != 0)
+    if (JOY_REPEAT(DPAD_UP) && structPtr->monList->currIndex != 0)
     {
-        structPtr->field_8->unk2--;
+        structPtr->monList->currIndex--;
         structPtr->field_C = 0;
         sub_81D0814(structPtr);
-        return 1;
+        return RIBBONS_SUMMARY_FUNC_MOVED_CURSOR;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && structPtr->field_8->unk2 < structPtr->field_8->unk0 - 1)
+    if (JOY_REPEAT(DPAD_DOWN) && structPtr->monList->currIndex < structPtr->monList->listCount - 1)
     {
-        structPtr->field_8->unk2++;
+        structPtr->monList->currIndex++;
         structPtr->field_C = 0;
         sub_81D0814(structPtr);
-        return 1;
+        return RIBBONS_SUMMARY_FUNC_MOVED_CURSOR;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
-        structPtr->field_98 = sub_81D0548;
-        return 2;
+        structPtr->callback = HandleExpandedRibbonInput;
+        return RIBBONS_SUMMARY_FUNC_SELECT_RIBBON;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
-        structPtr->field_98 = sub_81D05D4;
-        return 5;
+        structPtr->callback = ReturnToRibbonsListFromSummary;
+        return RIBBONS_SUMMARY_FUNC_EXIT;
     }
-    return 0;
+    return RIBBONS_SUMMARY_FUNC_NONE;
 }
 
-u32 sub_81D0548(struct PokenavSub13 *structPtr)
+u32 HandleExpandedRibbonInput(struct PokenavSub13 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP && sub_81D05DC(structPtr))
-        return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && sub_81D061C(structPtr))
-        return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT && sub_81D0664(structPtr))
-        return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT && sub_81D0688(structPtr))
-        return 3;
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_REPEAT(DPAD_UP) && sub_81D05DC(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_REPEAT(DPAD_DOWN) && sub_81D061C(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_REPEAT(DPAD_LEFT) && sub_81D0664(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_REPEAT(DPAD_RIGHT) && sub_81D0688(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_NEW(B_BUTTON))
     {
-        structPtr->field_98 = sub_81D04C4;
-        return 4;
+        structPtr->callback = RibbonsSummaryHandleInput;
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CANCEL;
     }
-    return 0;
+    return RIBBONS_SUMMARY_FUNC_NONE;
 }
 
-u32 sub_81D05D4(struct PokenavSub13 *structPtr)
+u32 ReturnToRibbonsListFromSummary(struct PokenavSub13 *structPtr)
 {
-    return POKENAV_MENU_E;
+    return POKENAV_RIBBONS_RETURN_TO_MON_LIST;
 }
 
 bool32 sub_81D05DC(struct PokenavSub13 *structPtr)
@@ -320,23 +330,23 @@ bool32 sub_81D0688(struct PokenavSub13 *structPtr)
     return FALSE;
 }
 
-u32 sub_81D06C4(void)
+u32 GetRibbonsSummaryCurrentIndex(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
-    return structPtr->field_8->unk2;
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    return structPtr->monList->currIndex;
 }
 
-u32 sub_81D06D4(void)
+u32 GetRibbonsSummaryMonListCount(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
-    return structPtr->field_8->unk0;
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    return structPtr->monList->listCount;
 }
 
 static void GetCurrMonInfo1(u8 *nick, u8 *level, u8 *gender)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
-    struct PokenavSub18 *mons = structPtr->field_8;
-    struct PokenavMonList *monInfo = &mons->unk4[mons->unk2];
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    struct PokenavSub18 *mons = structPtr->monList;
+    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
@@ -357,9 +367,9 @@ static void GetCurrMonInfo1(u8 *nick, u8 *level, u8 *gender)
 
 static void GetCurrMonInfo2(u16 *species, u32 *personality, u32 *otId)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
-    struct PokenavSub18 *mons = structPtr->field_8;
-    struct PokenavMonList *monInfo = &mons->unk4[mons->unk2];
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    struct PokenavSub18 *mons = structPtr->monList;
+    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
@@ -379,9 +389,9 @@ static void GetCurrMonInfo2(u16 *species, u32 *personality, u32 *otId)
 
 static u32 GetCurrMonRibbonCount(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
-    struct PokenavSub18 *mons = structPtr->field_8;
-    struct PokenavMonList *monInfo = &mons->unk4[mons->unk2];
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
+    struct PokenavSub18 *mons = structPtr->monList;
+    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
         return GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBON_COUNT);
@@ -393,8 +403,8 @@ void sub_81D0814(struct PokenavSub13 *structPtr)
 {
     u32 ribbons;
     s32 i, j;
-    struct PokenavSub18 *mons = structPtr->field_8;
-    struct PokenavMonList *monInfo = &mons->unk4[mons->unk2];
+    struct PokenavSub18 *mons = structPtr->monList;
+    struct PokenavMonList *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
         ribbons = GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBONS);
@@ -433,27 +443,27 @@ void sub_81D0814(struct PokenavSub13 *structPtr)
 
 u32 *sub_81D0914(u32 *arg0)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     *arg0 = structPtr->field_10;
     return structPtr->field_14;
 }
 
 u32 *sub_81D092C(u32 *arg0)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     *arg0 = structPtr->field_12;
     return structPtr->field_78;
 }
 
 u16 sub_81D0944(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     return structPtr->field_C;
 }
 
 u32 sub_81D0954(void)
 {
-    struct PokenavSub13 *structPtr = GetSubstructPtr(13);
+    struct PokenavSub13 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     int var = structPtr->field_C;
     if (var <= 24)
         return structPtr->field_14[var];
@@ -461,38 +471,38 @@ u32 sub_81D0954(void)
         return structPtr->field_78[var - 27];
 }
 
-bool32 sub_81D0978(void)
+bool32 OpenRibbonsSummaryMenu(void)
 {
-    struct PokenavSub14 *structPtr = AllocSubstruct(14, sizeof(struct PokenavSub14));
+    struct PokenavSub14 *structPtr = AllocSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU, sizeof(struct PokenavSub14));
     if (structPtr == NULL)
         return FALSE;
 
-    structPtr->loopedTaskId = CreateLoopedTask(sub_81D0A6C, 1);
-    structPtr->field_0 = sub_81D0A58;
+    structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_OpenRibbonsSummaryMenu, 1);
+    structPtr->callback = GetCurrentLoopedTaskActive;
     return TRUE;
 }
 
-void sub_81D09B0(s32 id)
+void CreateRibbonsSummaryLoopedTask(s32 id)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
-    structPtr->loopedTaskId = CreateLoopedTask(gUnknown_08624BA0[id], 1);
-    structPtr->field_0 = sub_81D0A58;
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    structPtr->loopedTaskId = CreateLoopedTask(sRibbonsSummaryMenuLoopTaskFuncs[id], 1);
+    structPtr->callback = GetCurrentLoopedTaskActive;
 }
 
-u32 sub_81D09E0(void)
+u32 IsRibbonsSummaryLoopedTaskActive(void)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
-    return structPtr->field_0();
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    return structPtr->callback();
 }
 
-void sub_81D09F4(void)
+void FreeRibbonsSummaryScreen2(void)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
-    RemoveWindow(structPtr->field_A);
-    RemoveWindow(structPtr->field_8);
-    RemoveWindow(structPtr->field_C);
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
+    RemoveWindow(structPtr->ribbonCountWindowId);
+    RemoveWindow(structPtr->nameWindowId);
+    RemoveWindow(structPtr->listIdxWindowId);
     RemoveWindow(structPtr->field_E);
-    sub_81D1178(structPtr);
+    DestroyRibbonsMonFrontPic(structPtr);
     FreeSpriteTilesByTag(9);
     FreeSpritePaletteByTag(0xF);
     FreeSpritePaletteByTag(0x10);
@@ -501,18 +511,18 @@ void sub_81D09F4(void)
     FreeSpritePaletteByTag(0x13);
     FreeSpriteOamMatrix(structPtr->field_14);
     DestroySprite(structPtr->field_14);
-    FreePokenavSubstruct(14);
+    FreePokenavSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
 }
 
-bool32 sub_81D0A58(void)
+bool32 GetCurrentLoopedTaskActive(void)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     return IsLoopedTaskActive(structPtr->loopedTaskId);
 }
 
-u32 sub_81D0A6C(s32 state)
+u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
@@ -539,21 +549,21 @@ u32 sub_81D0A6C(s32 state)
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            sub_81D0E60(structPtr);
+            AddRibbonCountWindow(structPtr);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
     case 3:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            sub_81D0FCC(structPtr);
+            AddRibbonSummaryMonNameWindow(structPtr);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
     case 4:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            sub_81D10A4(structPtr);
+            AddRibbonListIndexWindow(structPtr);
             return LT_INC_AND_PAUSE;
         }
         return LT_PAUSE;
@@ -567,7 +577,7 @@ u32 sub_81D0A6C(s32 state)
     case 6:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81D1148(structPtr);
+            ResetSpritesAndDrawRibbonsMonFrontPic(structPtr);
             return LT_INC_AND_CONTINUE;
         }
         return LT_PAUSE;
@@ -598,7 +608,7 @@ u32 sub_81D0A6C(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81D0C54(s32 state)
+u32 LoopedTask_ExitRibbonsSummaryMenu(s32 state)
 {
     switch (state)
     {
@@ -614,9 +624,9 @@ u32 sub_81D0C54(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81D0C84(s32 state)
+u32 LoopedTask_UpdateRibbonsSummaryInfo(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
@@ -626,7 +636,7 @@ u32 sub_81D0C84(s32 state)
     case 1:
         if (!sub_81D1234(structPtr))
         {
-            sub_81D0FF0(structPtr);
+            PrintRibbbonsSummaryMonInfo(structPtr);
             return LT_INC_AND_CONTINUE;
         }
         return LT_PAUSE;
@@ -634,10 +644,10 @@ u32 sub_81D0C84(s32 state)
         sub_81D12D8(structPtr);
         return LT_INC_AND_CONTINUE;
     case 3:
-        sub_81D10D0(structPtr);
+        PrintRibbonsMonListIndex(structPtr);
         return LT_INC_AND_CONTINUE;
     case 4:
-        sub_81D0E84(structPtr);
+        PrintCurrentMonRibbonCount(structPtr);
         return LT_INC_AND_CONTINUE;
     case 5:
         if (!IsDma3ManagerBusyWithBgCopy())
@@ -654,9 +664,9 @@ u32 sub_81D0C84(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81D0D2C(s32 state)
+u32 LoopedTask_ExpandSelectedRibbon(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
@@ -678,9 +688,9 @@ u32 sub_81D0D2C(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81D0D8C(s32 state)
+u32 LoopedTask_MoveRibbonsCursorExpanded(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
@@ -708,9 +718,9 @@ u32 sub_81D0D8C(s32 state)
     return LT_FINISH;
 }
 
-u32 sub_81D0E00(s32 state)
+u32 LoopedTask_ShrinkExpandedRibbon(s32 state)
 {
-    struct PokenavSub14 *structPtr = GetSubstructPtr(14);
+    struct PokenavSub14 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU);
     switch (state)
     {
     case 0:
@@ -720,7 +730,7 @@ u32 sub_81D0E00(s32 state)
     case 1:
         if (!sub_81D1524(structPtr))
         {
-            sub_81D0E84(structPtr);
+            PrintCurrentMonRibbonCount(structPtr);
             PrintHelpBarText(HELPBAR_RIBBONS_LIST);
             return LT_INC_AND_PAUSE;
         }
@@ -732,7 +742,7 @@ u32 sub_81D0E00(s32 state)
     return LT_FINISH;
 }
 
-static const struct WindowTemplate gUnknown_08624BB8 =
+static const struct WindowTemplate sRibbonCountWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 12,
@@ -743,14 +753,14 @@ static const struct WindowTemplate gUnknown_08624BB8 =
     .baseBlock = 0x14,
 };
 
-void sub_81D0E60(struct PokenavSub14 *structPtr)
+void AddRibbonCountWindow(struct PokenavSub14 *structPtr)
 {
-    structPtr->field_A = AddWindow(&gUnknown_08624BB8);
-    PutWindowTilemap(structPtr->field_A);
-    sub_81D0E84(structPtr);
+    structPtr->ribbonCountWindowId = AddWindow(&sRibbonCountWindowTemplate);
+    PutWindowTilemap(structPtr->ribbonCountWindowId);
+    PrintCurrentMonRibbonCount(structPtr);
 }
 
-void sub_81D0E84(struct PokenavSub14 *structPtr)
+void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
 {
     u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
@@ -758,9 +768,9 @@ void sub_81D0E84(struct PokenavSub14 *structPtr)
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_RibbonsF700);
-    FillWindowPixelBuffer(structPtr->field_A, PIXEL_FILL(4));
-    AddTextPrinterParameterized3(structPtr->field_A, 1, 0, 1, color, -1, gStringVar4);
-    CopyWindowToVram(structPtr->field_A, 2);
+    FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
+    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, 1, color, -1, gStringVar4);
+    CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
 }
 
 void sub_81D0EFC(struct PokenavSub14 *structPtr)
@@ -769,11 +779,11 @@ void sub_81D0EFC(struct PokenavSub14 *structPtr)
     u32 ribbonId = sub_81D0954();
     u8 color[] = {TEXT_COLOR_RED, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
-    FillWindowPixelBuffer(structPtr->field_A, PIXEL_FILL(4));
+    FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
     if (ribbonId < 25)
     {
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->field_A, 1, 0, (i * 16) + 1, color, -1, gRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, (i * 16) + 1, color, -1, gRibbonDescriptionPointers[ribbonId][i]);
     }
     else
     {
@@ -783,13 +793,13 @@ void sub_81D0EFC(struct PokenavSub14 *structPtr)
 
         ribbonId--;
         for (i = 0; i < 2; i++)
-            AddTextPrinterParameterized3(structPtr->field_A, 1, 0, (i * 16) + 1, color, -1, gGiftRibbonDescriptionPointers[ribbonId][i]);
+            AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, (i * 16) + 1, color, -1, gGiftRibbonDescriptionPointers[ribbonId][i]);
     }
 
-    CopyWindowToVram(structPtr->field_A, 2);
+    CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
 }
 
-static const struct WindowTemplate gUnknown_08624BC4 =
+static const struct WindowTemplate sRibbonSummaryMonNameWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 14,
@@ -800,23 +810,23 @@ static const struct WindowTemplate gUnknown_08624BC4 =
     .baseBlock = 0x54,
 };
 
-void sub_81D0FCC(struct PokenavSub14 *structPtr)
+void AddRibbonSummaryMonNameWindow(struct PokenavSub14 *structPtr)
 {
-    structPtr->field_8 = AddWindow(&gUnknown_08624BC4);
-    PutWindowTilemap(structPtr->field_8);
-    sub_81D0FF0(structPtr);
+    structPtr->nameWindowId = AddWindow(&sRibbonSummaryMonNameWindowTemplate);
+    PutWindowTilemap(structPtr->nameWindowId);
+    PrintRibbbonsSummaryMonInfo(structPtr);
 }
 
 static const u8 sMaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 static const u8 sFemaleIconString[] = _("{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}");
 static const u8 sGenderlessIconString[] = _("{UNK_SPACER}");
 
-void sub_81D0FF0(struct PokenavSub14 *structPtr)
+void PrintRibbbonsSummaryMonInfo(struct PokenavSub14 *structPtr)
 {
     const u8 *genderTxt;
     u8 *txtPtr;
     u8 level, gender;
-    u16 windowId = structPtr->field_8;
+    u16 windowId = structPtr->nameWindowId;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     GetCurrMonInfo1(gStringVar3, &level, &gender);
@@ -836,14 +846,14 @@ void sub_81D0FF0(struct PokenavSub14 *structPtr)
 
     txtPtr = StringCopy(gStringVar1, genderTxt);
     *(txtPtr++) = CHAR_SLASH;
-    *(txtPtr++) = CHAR_SPECIAL_F9;
+    *(txtPtr++) = CHAR_EXTRA_SYMBOL;
     *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized(windowId, 1, gStringVar1, 60, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(windowId, 2);
 }
 
-static const struct WindowTemplate gUnknown_08624BE8[] =
+static const struct WindowTemplate sRibbonMonListIndexWindowTemplate[] =
 {
     {
         .bg = 2,
@@ -857,46 +867,46 @@ static const struct WindowTemplate gUnknown_08624BE8[] =
     {},
 };
 
-void sub_81D10A4(struct PokenavSub14 *structPtr)
+void AddRibbonListIndexWindow(struct PokenavSub14 *structPtr)
 {
-    structPtr->field_C = AddWindow(gUnknown_08624BE8);
-    FillWindowPixelBuffer(structPtr->field_C, PIXEL_FILL(1));
-    PutWindowTilemap(structPtr->field_C);
-    sub_81D10D0(structPtr);
+    structPtr->listIdxWindowId = AddWindow(sRibbonMonListIndexWindowTemplate);
+    FillWindowPixelBuffer(structPtr->listIdxWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(structPtr->listIdxWindowId);
+    PrintRibbonsMonListIndex(structPtr);
 }
 
-void sub_81D10D0(struct PokenavSub14 *structPtr)
+void PrintRibbonsMonListIndex(struct PokenavSub14 *structPtr)
 {
     s32 x;
     u8 *txtPtr;
-    u32 id = sub_81D06C4() + 1;
-    u32 count = sub_81D06D4();
+    u32 id = GetRibbonsSummaryCurrentIndex() + 1;
+    u32 count = GetRibbonsSummaryMonListCount();
 
     txtPtr = ConvertIntToDecimalStringN(gStringVar1, id, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *(txtPtr++) = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, count, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(1, gStringVar1, 56);
-    AddTextPrinterParameterized(structPtr->field_C, 1, gStringVar1, x, 1, TEXT_SPEED_FF, NULL);
-    CopyWindowToVram(structPtr->field_C, 2);
+    AddTextPrinterParameterized(structPtr->listIdxWindowId, 1, gStringVar1, x, 1, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(structPtr->listIdxWindowId, 2);
 }
 
-void sub_81D1148(struct PokenavSub14 *structPtr)
+void ResetSpritesAndDrawRibbonsMonFrontPic(struct PokenavSub14 *structPtr)
 {
     u16 species;
     u32 personality, otId;
 
     GetCurrMonInfo2(&species, &personality, &otId);
     ResetAllPicSprites();
-    structPtr->field_10 = sub_81D1184(40, 104);
-    sub_81C7990(15, 0);
+    structPtr->monSpriteId = DrawRibbonsMonFrontPic(40, 104);
+    PokenavFillPalette(15, 0);
 }
 
-void sub_81D1178(struct PokenavSub14 *structPtr)
+void DestroyRibbonsMonFrontPic(struct PokenavSub14 *structPtr)
 {
-    FreeAndDestroyMonPicSprite(structPtr->field_10);
+    FreeAndDestroyMonPicSprite(structPtr->monSpriteId);
 }
 
-u16 sub_81D1184(s32 unused0, s32 unused1)
+u16 DrawRibbonsMonFrontPic(s32 unused0, s32 unused1)
 {
     u16 species, spriteId;
     u32 personality, otId;
@@ -909,19 +919,19 @@ u16 sub_81D1184(s32 unused0, s32 unused1)
 
 void sub_81D11D8(struct PokenavSub14 *structPtr)
 {
-    sub_81D1258(&gSprites[structPtr->field_10], 40, -32, 6);
+    sub_81D1258(&gSprites[structPtr->monSpriteId], 40, -32, 6);
 }
 
 void sub_81D11FC(struct PokenavSub14 *structPtr)
 {
-    FreeAndDestroyMonPicSprite(structPtr->field_10);
-    structPtr->field_10 = sub_81D1184(-32, 104);
-    sub_81D1258(&gSprites[structPtr->field_10], -32, 40, 6);
+    FreeAndDestroyMonPicSprite(structPtr->monSpriteId);
+    structPtr->monSpriteId = DrawRibbonsMonFrontPic(-32, 104);
+    sub_81D1258(&gSprites[structPtr->monSpriteId], -32, 40, 6);
 }
 
 bool32 sub_81D1234(struct PokenavSub14 *structPtr)
 {
-    return (gSprites[structPtr->field_10].callback != SpriteCallbackDummy);
+    return (gSprites[structPtr->monSpriteId].callback != SpriteCallbackDummy);
 }
 
 void sub_81D1258(struct Sprite *sprite, s32 arg1, s32 arg2, s32 arg3)

@@ -41,7 +41,7 @@ bool8 FldEff_SweetScent(void)
     u8 taskId;
 
     SetWeatherScreenFadeOut();
-    taskId = oei_task_add();
+    taskId = CreateFieldMoveTask();
     gTasks[taskId].data[8] = (u32)StartSweetScentFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartSweetScentFieldEffect;
     return FALSE;
@@ -51,7 +51,7 @@ static void StartSweetScentFieldEffect(void)
 {
     u8 taskId;
 
-    PlaySE(SE_W230);
+    PlaySE(SE_M_SWEET_SCENT);
     CpuFastSet(gPlttBufferUnfaded, gPaletteDecompressionBuffer, 0x100);
     CpuFastSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x100);
     BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 0, 8, RGB_RED);

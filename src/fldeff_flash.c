@@ -96,7 +96,7 @@ bool8 SetUpFieldMove_Flash(void)
 
 static void FieldCallback_Flash(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldMoveTask();
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     gTasks[taskId].data[8] = (uintptr_t)FldEff_UseFlash >> 16;
     gTasks[taskId].data[9] = (uintptr_t)FldEff_UseFlash;
@@ -104,9 +104,9 @@ static void FieldCallback_Flash(void)
 
 static void FldEff_UseFlash(void)
 {
-    PlaySE(SE_W115);
+    PlaySE(SE_M_REFLECT);
     FlagSet(FLAG_SYS_USE_FLASH);
-    ScriptContext1_SetupScript(EventScript_FldEffFlash);
+    ScriptContext1_SetupScript(EventScript_UseFlash);
 }
 
 static void CB2_ChangeMapMain(void)

@@ -23,8 +23,8 @@
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
+#include "constants/berry.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -33,13 +33,13 @@ EWRAM_DATA static u8 sUnknown_0203CF48[3] = {0};
 EWRAM_DATA static struct ListMenuItem *sUnknown_0203CF4C = NULL;
 
 static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void sub_81D24A4(struct UnknownStruct_81D1ED4 *a0);
-static void sub_81D2634(struct UnknownStruct_81D1ED4 *a0);
+static void sub_81D24A4(struct ConditionGraph *a0);
+static void sub_81D2634(struct ConditionGraph *a0);
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void nullsub_79(void);
-static void sub_81D3408(struct Sprite *sprite);
-static void sub_81D3564(struct Sprite *sprite);
-static void sub_81D35E8(struct Sprite *sprite);
+static void SetNextConditionSparkle(struct Sprite *sprite);
+static void SpriteCB_ConditionSparkle(struct Sprite *sprite);
+static void ShowAllConditionSparkles(struct Sprite *sprite);
 
 static const struct WindowTemplate sUnknown_086253E8[] =
 {
@@ -79,7 +79,7 @@ static const u8 sPlayerNameTextColors[] =
 
 static const u8 sEmptyItemName[] = _("");
 
-static const struct ScanlineEffectParams sUnknown_08625404 =
+static const struct ScanlineEffectParams sConditionGraphScanline =
 {
     .dmaDest = (void*)REG_ADDR_WIN0H,
     .dmaControl = SCANLINE_EFFECT_DMACNT_32BIT,
@@ -249,7 +249,7 @@ void sub_81D1D04(u8 a0)
     sUnknown_0203CF48[a0] = 0xFF;
 }
 
-static u8 sub_81D1D34(u8 a0)
+static u8 sub_81D1D34(u8 a0) // unused
 {
     return sUnknown_0203CF48[a0];
 }
@@ -319,67 +319,67 @@ void sub_81D1EC0(void)
     Free(sUnknown_0203CF4C);
 }
 
-void sub_81D1ED4(struct UnknownStruct_81D1ED4 *a0)
+void InitConditionGraphData(struct ConditionGraph *graph)
 {
     u8 i, j;
 
-    for (j = 0; j < 5; j++)
+    for (j = 0; j < FLAVOR_COUNT; j++)
     {
         for (i = 0; i < 10; i++)
         {
-            a0->unk64[i][j].unk0 = 0;
-            a0->unk64[i][j].unk2 = 0;
+            graph->unk64[i][j].unk0 = 0;
+            graph->unk64[i][j].unk2 = 0;
         }
         for (i = 0; i < 4; i++)
         {
-            a0->unk0[i][j] = 0;
-            a0->unk14[i][j].unk0 = 0x9B;
-            a0->unk14[i][j].unk2 = 0x5B;
+            graph->stat[i][j] = 0;
+            graph->unk14[i][j].unk0 = 155;
+            graph->unk14[i][j].unk2 = 91;
         }
 
-        a0->unk12C[j].unk0 = 0;
-        a0->unk12C[j].unk2 = 0;
+        graph->unk12C[j].unk0 = 0;
+        graph->unk12C[j].unk2 = 0;
     }
 
-    a0->unk354 = 0;
-    a0->unk352 = 0;
+    graph->unk354 = 0;
+    graph->unk352 = 0;
 }
 
-void sub_81D1F84(struct UnknownStruct_81D1ED4 *arg0, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2)
+void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2)
 {
     u16 i, j;
     s32 r5, r6;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < FLAVOR_COUNT; i++)
     {
         r5 = arg1[i].unk0 << 8;
         r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / 10;
         for (j = 0; j < 9; j++)
         {
-            arg0->unk64[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
+            graph->unk64[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
             r5 += r6;
         }
-        arg0->unk64[j][i].unk0 = arg2[i].unk0;
+        graph->unk64[j][i].unk0 = arg2[i].unk0;
 
         r5 = arg1[i].unk2 << 8;
         r6 = ((arg2[i].unk2 - arg1[i].unk2) << 8) / 10;
         for (j = 0; j < 9; j++)
         {
-            arg0->unk64[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
+            graph->unk64[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
             r5 += r6;
         }
-        arg0->unk64[j][i].unk2 = arg2[i].unk2;
+        graph->unk64[j][i].unk2 = arg2[i].unk2;
     }
 
-    arg0->unk352 = 0;
+    graph->unk352 = 0;
 }
 
-bool32 sub_81D2074(struct UnknownStruct_81D1ED4 *a0)
+bool32 TransitionConditionGraph(struct ConditionGraph *graph)
 {
-    if (a0->unk352 < 10)
+    if (graph->unk352 < 10)
     {
-        sub_81D2230(a0);
-        return (++a0->unk352 != 10);
+        sub_81D2230(graph);
+        return (++graph->unk352 != 10);
     }
     else
     {
@@ -387,51 +387,51 @@ bool32 sub_81D2074(struct UnknownStruct_81D1ED4 *a0)
     }
 }
 
-void sub_81D20AC(struct UnknownStruct_81D1ED4 *a0)
+void InitConditionGraphState(struct ConditionGraph *graph)
 {
-    a0->unk355 = 0;
+    graph->state = 0;
 }
 
-bool8 sub_81D20BC(struct UnknownStruct_81D1ED4 *arg0)
+bool8 SetupConditionGraphScanlineParams(struct ConditionGraph *graph)
 {
     struct ScanlineEffectParams params;
 
-    switch (arg0->unk355)
+    switch (graph->state)
     {
     case 0:
         ScanlineEffect_Clear();
-        arg0->unk355++;
+        graph->state++;
         return TRUE;
     case 1:
-        params = sUnknown_08625404;
+        params = sConditionGraphScanline;
         ScanlineEffect_SetParams(params);
-        arg0->unk355++;
+        graph->state++;
         return FALSE;
     default:
         return FALSE;
     }
 }
 
-void sub_81D2108(struct UnknownStruct_81D1ED4 *arg0)
+void sub_81D2108(struct ConditionGraph *graph)
 {
     u16 i;
 
-    if (arg0->unk354 == 0)
+    if (graph->unk354 == 0)
         return;
 
-    sub_81D24A4(arg0);
-    sub_81D2634(arg0);
+    sub_81D24A4(graph);
+    sub_81D2634(graph);
 
     for (i = 0; i < 66; i++)
     {
-        gScanlineEffectRegBuffers[1][(i + 55) * 2]     = gScanlineEffectRegBuffers[0][(i + 55) * 2]     = (arg0->unk140[i][0] << 8) | (arg0->unk140[i][1]);
-        gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (arg0->unk248[i][0] << 8) | (arg0->unk248[i][1]);
+        gScanlineEffectRegBuffers[1][(i + 55) * 2]     = gScanlineEffectRegBuffers[0][(i + 55) * 2]     = (graph->unk140[i][0] << 8) | (graph->unk140[i][1]);
+        gScanlineEffectRegBuffers[1][(i + 55) * 2 + 1] = gScanlineEffectRegBuffers[0][(i + 55) * 2 + 1] = (graph->unk248[i][0] << 8) | (graph->unk248[i][1]);
     }
 
-    arg0->unk354 = 0;
+    graph->unk354 = 0;
 }
 
-void sub_81D21DC(u8 bg)
+void SetConditionGraphIOWindows(u8 bg)
 {
     u32 flags;
 
@@ -441,24 +441,24 @@ void sub_81D21DC(u8 bg)
     // Unset the WINOUT flag for the bg.
     flags = (WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ) & ~(1 << bg);
 
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 0xF0));
-    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0, 0x9B));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0x38, 0x79));
-    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(0x38, 0x79));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE( 0, DISPLAY_WIDTH));
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE( 0, 155));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(56, 121));
+    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(56, 121));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, flags);
 }
 
-void sub_81D2230(struct UnknownStruct_81D1ED4 *arg0)
+void sub_81D2230(struct ConditionGraph *graph)
 {
     u16 i;
-    for (i = 0; i < 5; i++)
-        arg0->unk12C[i] = arg0->unk64[arg0->unk352][i];
+    for (i = 0; i < FLAVOR_COUNT; i++)
+        graph->unk12C[i] = graph->unk64[graph->unk352][i];
 
-    arg0->unk354 = 1;
+    graph->unk354 = 1;
 }
 
-static void sub_81D2278(struct UnknownStruct_81D1ED4 *arg0, u16 *arg1, struct UnknownSubStruct_81D1ED4 *arg2, struct UnknownSubStruct_81D1ED4 *arg3, u8 arg4, u16 *arg5)
+static void sub_81D2278(struct ConditionGraph *graph, u16 *arg1, struct UnknownSubStruct_81D1ED4 *arg2, struct UnknownSubStruct_81D1ED4 *arg3, u8 arg4, u16 *arg5)
 {
     u16 i, r8, r10, r0, var_30;
     u16 *ptr;
@@ -509,8 +509,8 @@ static void sub_81D2278(struct UnknownStruct_81D1ED4 *arg0, u16 *arg1, struct Un
                 break;
         }
 
-        arg0->unk350 = r10 + i;
-        arg1 += (arg0->unk350 - 56) * 2;
+        graph->unk350 = r10 + i;
+        arg1 += (graph->unk350 - 56) * 2;
         for (; i < r8; i++)
         {
             arg1[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
@@ -535,8 +535,8 @@ static void sub_81D2278(struct UnknownStruct_81D1ED4 *arg0, u16 *arg1, struct Un
             arg1 += 2;
         }
 
-        arg0->unk350 = r10 + i;
-        arg5 += (arg0->unk350 - 56) * 2;
+        graph->unk350 = r10 + i;
+        arg5 += (graph->unk350 - 56) * 2;
         for (; i < r8; i++)
         {
             arg5[arg4] = (r4 >> 10) + ((r4 >> 9) & 1) + arg4;
@@ -548,7 +548,7 @@ static void sub_81D2278(struct UnknownStruct_81D1ED4 *arg0, u16 *arg1, struct Un
     }
     else
     {
-        arg0->unk350 = r10;
+        graph->unk350 = r10;
         arg1 += (r10 - 56) * 2;
         arg5 += (r10 - 56) * 2;
         arg1[1] = arg2->unk0 + 1;
@@ -560,87 +560,87 @@ static void sub_81D2278(struct UnknownStruct_81D1ED4 *arg0, u16 *arg1, struct Un
     ptr[arg4] = arg4 + var_30;
 }
 
-static void sub_81D24A4(struct UnknownStruct_81D1ED4 *arg0)
+static void sub_81D24A4(struct ConditionGraph *graph)
 {
     u16 i, r6, varMax;
 
-    if (arg0->unk12C[0].unk2 < arg0->unk12C[1].unk2)
+    if (graph->unk12C[0].unk2 < graph->unk12C[1].unk2)
     {
-        r6 = arg0->unk12C[0].unk2;
-        sub_81D2278(arg0, arg0->unk140[0], &arg0->unk12C[0], &arg0->unk12C[1], 1, NULL);
+        r6 = graph->unk12C[0].unk2;
+        sub_81D2278(graph, graph->unk140[0], &graph->unk12C[0], &graph->unk12C[1], 1, NULL);
     }
     else
     {
-        r6 = arg0->unk12C[1].unk2;
-        sub_81D2278(arg0, arg0->unk140[0], &arg0->unk12C[1], &arg0->unk12C[0], 0, NULL);
+        r6 = graph->unk12C[1].unk2;
+        sub_81D2278(graph, graph->unk140[0], &graph->unk12C[1], &graph->unk12C[0], 0, NULL);
     }
 
-    sub_81D2278(arg0, arg0->unk140[0], &arg0->unk12C[1], &arg0->unk12C[2], 1, NULL);
+    sub_81D2278(graph, graph->unk140[0], &graph->unk12C[1], &graph->unk12C[2], 1, NULL);
 
-    i = (arg0->unk12C[2].unk2 <= arg0->unk12C[3].unk2);
-    sub_81D2278(arg0, arg0->unk140[0], &arg0->unk12C[2], &arg0->unk12C[3], i, arg0->unk248[0]);
+    i = (graph->unk12C[2].unk2 <= graph->unk12C[3].unk2);
+    sub_81D2278(graph, graph->unk140[0], &graph->unk12C[2], &graph->unk12C[3], i, graph->unk248[0]);
     for (i = 56; i < r6; i++)
     {
-        arg0->unk140[i - 56][0] = 0;
-        arg0->unk140[i - 56][1] = 0;
+        graph->unk140[i - 56][0] = 0;
+        graph->unk140[i - 56][1] = 0;
     }
 
-    for (i = arg0->unk12C[0].unk2; i <= arg0->unk350; i++)
-        arg0->unk140[i - 56][0] = 155;
+    for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
+        graph->unk140[i - 56][0] = 155;
 
-    varMax = max(arg0->unk350, arg0->unk12C[2].unk2);
+    varMax = max(graph->unk350, graph->unk12C[2].unk2);
     for (i = varMax + 1; i < 122; i++)
     {
-        arg0->unk140[i - 56][0] = 0;
-        arg0->unk140[i - 56][1] = 0;
+        graph->unk140[i - 56][0] = 0;
+        graph->unk140[i - 56][1] = 0;
     }
 
     for (i = 56; i < 122; i++)
     {
-        if (arg0->unk140[i - 56][0] == 0 && arg0->unk140[i - 56][1] != 0)
-            arg0->unk140[i - 56][0] = 155;
+        if (graph->unk140[i - 56][0] == 0 && graph->unk140[i - 56][1] != 0)
+            graph->unk140[i - 56][0] = 155;
     }
 }
 
-static void sub_81D2634(struct UnknownStruct_81D1ED4 *arg0)
+static void sub_81D2634(struct ConditionGraph *graph)
 {
     s32 i, r6, varMax;
 
-    if (arg0->unk12C[0].unk2 < arg0->unk12C[4].unk2)
+    if (graph->unk12C[0].unk2 < graph->unk12C[4].unk2)
     {
-        r6 = arg0->unk12C[0].unk2;
-        sub_81D2278(arg0, arg0->unk248[0], &arg0->unk12C[0], &arg0->unk12C[4], 0, NULL);
+        r6 = graph->unk12C[0].unk2;
+        sub_81D2278(graph, graph->unk248[0], &graph->unk12C[0], &graph->unk12C[4], 0, NULL);
     }
     else
     {
-        r6 = arg0->unk12C[4].unk2;
-        sub_81D2278(arg0, arg0->unk248[0], &arg0->unk12C[4], &arg0->unk12C[0], 1, NULL);
+        r6 = graph->unk12C[4].unk2;
+        sub_81D2278(graph, graph->unk248[0], &graph->unk12C[4], &graph->unk12C[0], 1, NULL);
     }
 
-    sub_81D2278(arg0, arg0->unk248[0], &arg0->unk12C[4], &arg0->unk12C[3], 0, NULL);
+    sub_81D2278(graph, graph->unk248[0], &graph->unk12C[4], &graph->unk12C[3], 0, NULL);
 
     for (i = 56; i < r6; i++)
     {
-        arg0->unk140[i + 10][0] = 0;
-        arg0->unk140[i + 10][1] = 0;
+        graph->unk140[i + 10][0] = 0;
+        graph->unk140[i + 10][1] = 0;
     }
 
-    for (i = arg0->unk12C[0].unk2; i <= arg0->unk350; i++)
-        arg0->unk140[i + 10][1] = 155;
+    for (i = graph->unk12C[0].unk2; i <= graph->unk350; i++)
+        graph->unk140[i + 10][1] = 155;
 
-    varMax = max(arg0->unk350, arg0->unk12C[3].unk2 + 1);
+    varMax = max(graph->unk350, graph->unk12C[3].unk2 + 1);
     for (i = varMax; i < 122; i++)
     {
-        arg0->unk140[i + 10][0] = 0;
-        arg0->unk140[i + 10][1] = 0;
+        graph->unk140[i + 10][0] = 0;
+        graph->unk140[i + 10][1] = 0;
     }
 
     for (i = 0; i < 66; i++)
     {
-        if (arg0->unk248[i][0] >= arg0->unk248[i][1])
+        if (graph->unk248[i][0] >= graph->unk248[i][1])
         {
-            arg0->unk248[i][1] = 0;
-            arg0->unk248[i][0] = 0;
+            graph->unk248[i][1] = 0;
+            graph->unk248[i][0] = 0;
         }
     }
 }
@@ -877,94 +877,93 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
     return ret;
 }
 
-static u8 *sub_81D2CD0(u8 *dst, u16 boxId, u16 monId)
+// Gets the name/gender/level string for the condition menu
+static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
 {
     u16 species, level, gender;
     struct BoxPokemon *boxMon;
     u8 *str;
 
     *(dst++) = EXT_CTRL_CODE_BEGIN;
-    *(dst++) = 4;
-    *(dst++) = 8;
-    *(dst++) = 0;
-    *(dst++) = 9;
+    *(dst++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *(dst++) = TEXT_COLOR_BLUE;
+    *(dst++) = TEXT_COLOR_TRANSPARENT;
+    *(dst++) = TEXT_COLOR_LIGHT_BLUE;
     if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
     {
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
     }
+    GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
+    StringGetEnd10(dst);
+    species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
+    if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+    {
+        level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+        gender = GetMonGender(&gPlayerParty[monId]);
+    }
     else
     {
-        GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
-        StringGetEnd10(dst);
-        species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
-        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
-        {
-            level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-            gender = GetMonGender(&gPlayerParty[monId]);
-        }
-        else
-        {
-            // Needed to match, feel free to remove.
-            boxId++;boxId--;
-            monId++;monId--;
+        // Needed to match, feel free to remove.
+        boxId++, boxId--;
+        monId++, monId--;
 
-            boxMon = GetBoxedMonPtr(boxId, monId);
-            gender = GetBoxMonGender(boxMon);
-            level = GetLevelFromBoxMonExp(boxMon);
-        }
-
-        if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
-            gender = MON_GENDERLESS;
-
-        for (str = dst; *str != EOS; str++)
-            ;
-
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = 0x12;
-        *(str++) = 0x3C;
-
-        switch (gender)
-        {
-        default:
-            *(str++) = CHAR_SPACE;
-            break;
-        case MON_MALE:
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = 4;
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = 3;
-            *(str++) = 5;
-            *(str++) = CHAR_MALE;
-            break;
-        case MON_FEMALE:
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = EXT_CTRL_CODE_COLOR;
-            *(str++) = 6;
-            *(str++) = EXT_CTRL_CODE_BEGIN;
-            *(str++) = 3;
-            *(str++) = 7;
-            *(str++) = CHAR_FEMALE;
-            break;
-        }
-
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = 4;
-        *(str++) = 8;
-        *(str++) = 0;
-        *(str++) = 9;
-        *(str++) = CHAR_SLASH;
-        *(str++) = CHAR_SPECIAL_F9;
-        *(str++) = CHAR_LV_2;
-        str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-        *(str++) = CHAR_SPACE;
-        *str = EOS;
-
-        return str;
+        boxMon = GetBoxedMonPtr(boxId, monId);
+        gender = GetBoxMonGender(boxMon);
+        level = GetLevelFromBoxMonExp(boxMon);
     }
+
+    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+        gender = MON_GENDERLESS;
+
+    for (str = dst; *str != EOS; str++)
+        ;
+
+    *(str++) = EXT_CTRL_CODE_BEGIN;
+    *(str++) = EXT_CTRL_CODE_SKIP;
+    *(str++) = 60;
+
+    switch (gender)
+    {
+    default:
+        *(str++) = CHAR_SPACE;
+        break;
+    case MON_MALE:
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_COLOR;
+        *(str++) = TEXT_COLOR_RED;
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_SHADOW;
+        *(str++) = TEXT_COLOR_LIGHT_RED;
+        *(str++) = CHAR_MALE;
+        break;
+    case MON_FEMALE:
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_COLOR;
+        *(str++) = TEXT_COLOR_GREEN;
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_SHADOW;
+        *(str++) = TEXT_COLOR_LIGHT_GREEN;
+        *(str++) = CHAR_FEMALE;
+        break;
+    }
+
+    *(str++) = EXT_CTRL_CODE_BEGIN;
+    *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *(str++) = TEXT_COLOR_BLUE;
+    *(str++) = TEXT_COLOR_TRANSPARENT;
+    *(str++) = TEXT_COLOR_LIGHT_BLUE;
+    *(str++) = CHAR_SLASH;
+    *(str++) = CHAR_EXTRA_SYMBOL;
+    *(str++) = CHAR_LV_2;
+    str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *(str++) = CHAR_SPACE;
+    *str = EOS;
+
+    return str;
 }
 
-static u8 *sub_81D2E7C(u8 *dst, const u8 *src, s16 n)
+// Buffers the string in src to dest up to n chars. If src is less than n chars, fill with spaces
+static u8 *BufferConditionMenuSpacedStringN(u8 *dst, const u8 *src, s16 n)
 {
     while (*src != EOS)
     {
@@ -978,80 +977,83 @@ static u8 *sub_81D2E7C(u8 *dst, const u8 *src, s16 n)
     return dst;
 }
 
-void sub_81D2ED4(u8 *dst, u8 *nameDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
-    if (!arg7)
-        arg6--;
+    // In this and the below 2 functions, numMons is passed as the number of menu selections (which includes Cancel)
+    // To indicate that the Cancel needs to be subtracted they pass an additional bool
+    // Unclear why they didn't just subtract 1 when it gets passed instead
+    if (!excludesCancel)
+        numMons--;
 
-    if (arg5 != arg6)
+    if (partyId != numMons)
     {
-        sub_81D2CD0(nameDst, boxId, monId);
-        dst[0] = EXT_CTRL_CODE_BEGIN;
-        dst[1] = 4;
-        dst[2] = 8;
-        dst[3] = 0;
-        dst[4] = 9;
+        GetConditionMenuMonString(nameDst, boxId, monId);
+        locationDst[0] = EXT_CTRL_CODE_BEGIN;
+        locationDst[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        locationDst[2] = TEXT_COLOR_BLUE;
+        locationDst[3] = TEXT_COLOR_TRANSPARENT;
+        locationDst[4] = TEXT_COLOR_LIGHT_BLUE;
         if (boxId == TOTAL_BOXES_COUNT) // Party mon.
         {
-            sub_81D2E7C(dst + 5, gText_InParty, 8);
+            BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, 8);
         }
         else
         {
             boxId++;boxId--; // Again...Someone fix this maybe?
-            sub_81D2E7C(dst + 5, GetBoxNamePtr(boxId), 8);
+            BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(boxId), 8);
         }
     }
     else
     {
-        for (i = 0; i < 12; i++)
+        for (i = 0; i < POKEMON_NAME_LENGTH + 2; i++)
             nameDst[i] = CHAR_SPACE;
         nameDst[i] = EOS;
         for (i = 0; i < 8; i++)
-            dst[i] = CHAR_SPACE;
-        dst[i] = EOS;
+            locationDst[i] = CHAR_SPACE;
+        locationDst[i] = EOS;
     }
 }
 
-void sub_81D2F78(struct UnknownStruct_81D1ED4 *arg0, u8 *sheen, u16 boxId, u16 monId, u16 arg5, u16 id, u16 arg7, bool8 arg8)
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
-    if (!arg8)
-        arg7--;
+    if (!excludesCancel)
+        numMons--;
 
-    if (arg5 != arg7)
+    if (partyId != numMons)
     {
-        arg0->unk0[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        arg0->unk0[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        arg0->unk0[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        arg0->unk0[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        arg0->unk0[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        graph->stat[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        graph->stat[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        graph->stat[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        graph->stat[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        graph->stat[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
 
         sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
                  ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
                  : 9;
 
-        sub_81D2754(arg0->unk0[id], arg0->unk14[id]);
+        sub_81D2754(graph->stat[id], graph->unk14[id]);
     }
     else
     {
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < FLAVOR_COUNT; i++)
         {
-            arg0->unk0[id][i] = 0;
-            arg0->unk14[id][i].unk0 = 155;
-            arg0->unk14[id][i].unk2 = 91;
+            graph->stat[id][i] = 0;
+            graph->unk14[id][i].unk0 = 155;
+            graph->unk14[id][i].unk2 = 91;
         }
     }
 }
 
-void sub_81D3094(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 arg5, u16 arg6, bool8 arg7)
+void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
 {
-    if (!arg7)
-        arg6--;
+    if (!excludesCancel)
+        numMons--;
 
-    if (arg5 != arg6)
+    if (partyId != numMons)
     {
         u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
         u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
@@ -1062,46 +1064,46 @@ void sub_81D3094(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 arg5, u
     }
 }
 
-bool8 sub_81D312C(s16 *var)
+bool8 MoveConditionMonOnscreen(s16 *x)
 {
-    *var += 24;
-    if (*var > 0)
-        *var = 0;
+    *x += 24;
+    if (*x > 0)
+        *x = 0;
 
-    return (*var != 0);
+    return (*x != 0);
 }
 
-bool8 sub_81D3150(s16 *var)
+bool8 MoveConditionMonOffscreen(s16 *x)
 {
-    *var -= 24;
-    if (*var < -80)
-        *var = -80;
+    *x -= 24;
+    if (*x < -80)
+        *x = -80;
 
-    return (*var != -80);
+    return (*x != -80);
 }
 
-bool8 sub_81D3178(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+bool8 TryUpdateConditionMonTransitionOn(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 var1 = sub_81D2074(arg0);
-    bool8 var2 = sub_81D312C(arg1);
+    bool8 graphUpdating = TransitionConditionGraph(graph);
+    bool8 monUpdating = MoveConditionMonOnscreen(x);
 
-    return ((var1 != 0) || (var2 != 0));
+    return (graphUpdating || monUpdating);
 }
 
-bool8 sub_81D31A4(struct UnknownStruct_81D1ED4 *arg0, s16 *arg1)
+bool8 TryUpdateConditionMonTransitionOff(struct ConditionGraph *graph, s16 *x)
 {
-    bool8 var1 = sub_81D2074(arg0);
-    bool8 var2 = sub_81D3150(arg1);
+    bool8 graphUpdating = TransitionConditionGraph(graph);
+    bool8 monUpdating = MoveConditionMonOffscreen(x);
 
-    return ((var1 != 0) || (var2 != 0));
+    return (graphUpdating || monUpdating);
 }
 
-static const u32 gUnknown_08625560[] = INCBIN_U32("graphics/pokenav/pokeball.4bpp");
-static const u32 gUnknown_08625660[] = INCBIN_U32("graphics/pokenav/pokeball_placeholder.4bpp");
-static const u16 gUnknown_08625680[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
-static const u32 gUnknown_086256A0[] = INCBIN_U32("graphics/pokenav/sparkle.4bpp");
+static const u32 sConditionPokeball_Gfx[] = INCBIN_U32("graphics/pokenav/condition/pokeball.4bpp");
+static const u32 sConditionPokeballPlaceholder_Gfx[] = INCBIN_U32("graphics/pokenav/condition/pokeball_placeholder.4bpp");
+static const u16 sConditionSparkle_Gfx[] = INCBIN_U16("graphics/pokenav/condition/sparkle.gbapal");
+static const u32 sConditionSparkle_Pal[] = INCBIN_U32("graphics/pokenav/condition/sparkle.4bpp");
 
-static const struct OamData sOamData_8625A20 =
+static const struct OamData sOam_ConditionMonPic =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1118,7 +1120,7 @@ static const struct OamData sOamData_8625A20 =
     .affineParam = 0
 };
 
-static const struct OamData sOamData_8625A28 =
+static const struct OamData sOam_ConditionSelectionIcon =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1135,71 +1137,73 @@ static const struct OamData sOamData_8625A28 =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpriteAnim_8625A30[] =
+static const union AnimCmd sAnim_ConditionSelectionIcon_Selected[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_8625A38[] =
+static const union AnimCmd sAnim_ConditionSelectionIcon_Unselected[] =
 {
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_8625A40[] =
+static const union AnimCmd *const sAnims_ConditionSelectionIcon[] =
 {
-    sSpriteAnim_8625A30,
-    sSpriteAnim_8625A38
+    sAnim_ConditionSelectionIcon_Selected,
+    sAnim_ConditionSelectionIcon_Unselected
 };
 
-void sub_81D31D0(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
+// Just loads the generic data, up to the caller to load the actual sheet/pal for the specific mon
+void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {NULL, 0x800, 100};
+    struct SpriteSheet dataSheet = {NULL, 0x800, TAG_CONDITION_MON};
 
     struct SpriteTemplate dataTemplate =
     {
-        .tileTag = 100,
-        .paletteTag = 100,
-        .oam = &sOamData_8625A20,
+        .tileTag = TAG_CONDITION_MON,
+        .paletteTag = TAG_CONDITION_MON,
+        .oam = &sOam_ConditionMonPic,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
     };
 
-    struct SpritePalette dataPal = {NULL, 100};
+    struct SpritePalette dataPal = {NULL, TAG_CONDITION_MON};
 
     *sheet = dataSheet;
     *template = dataTemplate;
     *pal = dataPal;
 }
 
-void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
+void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals)
 {
     u8 i;
 
     struct SpriteSheet dataSheets[] =
     {
-        {gUnknown_08625560, 0x100, 101},
-        {gUnknown_08625660, 0x20, 103},
-        {gPokenavConditionCancel_Gfx, 0x100, 102},
+        {sConditionPokeball_Gfx, 0x100, TAG_CONDITION_BALL},
+        {sConditionPokeballPlaceholder_Gfx, 0x20, TAG_CONDITION_BALL_PLACEHOLDER},
+        {gPokenavConditionCancel_Gfx, 0x100, TAG_CONDITION_CANCEL},
         {},
     };
 
     struct SpritePalette dataPals[] =
     {
-        {gPokenavConditionCancel_Pal, 101},
-        {gPokenavConditionCancel_Pal + 16, 102},
+        {gPokenavConditionCancel_Pal, TAG_CONDITION_BALL},
+        {gPokenavConditionCancel_Pal + 16, TAG_CONDITION_CANCEL},
         {},
     };
 
+    // Tag is overwritten for the other selection icons
     struct SpriteTemplate dataTemplate =
     {
-        .tileTag = 101,
-        .paletteTag = 101,
-        .oam = &sOamData_8625A28,
-        .anims = sSpriteAnimTable_8625A40,
+        .tileTag = TAG_CONDITION_BALL,
+        .paletteTag = TAG_CONDITION_BALL,
+        .oam = &sOam_ConditionSelectionIcon,
+        .anims = sAnims_ConditionSelectionIcon,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy,
@@ -1214,34 +1218,41 @@ void sub_81D321C(struct SpriteSheet *sheets, struct SpriteTemplate * template, s
         *(pals++) = dataPals[i];
 }
 
-void sub_81D32B0(struct SpriteSheet *sheet, struct SpritePalette *pal)
+#define sSparkleId           data[0]
+#define sDelayTimer          data[1]
+#define sNumExtraSparkles    data[2]
+#define sCurSparkleId        data[3]
+#define sMonSpriteId         data[4]
+#define sNextSparkleSpriteId data[5]
+
+void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {gUnknown_086256A0, 0x380, 104};
-    struct SpritePalette dataPal = {gUnknown_08625680, 104};
+    struct SpriteSheet dataSheet = {sConditionSparkle_Pal, 0x380, TAG_CONDITION_SPARKLE};
+    struct SpritePalette dataPal = {sConditionSparkle_Gfx, TAG_CONDITION_SPARKLE};
 
     *sheet = dataSheet;
     *pal = dataPal;
 }
 
-static void sub_81D32D4(struct Sprite *sprite)
+static void SpriteCB_ConditionSparkle_DoNextAfterDelay(struct Sprite *sprite)
 {
-    if (++sprite->data[1] > 60)
+    if (++sprite->sDelayTimer > 60)
     {
-        sprite->data[1] = 0;
-        sub_81D3408(sprite);
+        sprite->sDelayTimer = 0;
+        SetNextConditionSparkle(sprite);
     }
 }
 
-static void sub_81D32F4(struct Sprite *sprite)
+static void SpriteCB_ConditionSparkle_WaitForAllAnim(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
-        sprite->data[1] = 0;
-        sprite->callback = sub_81D32D4;
+        sprite->sDelayTimer = 0;
+        sprite->callback = SpriteCB_ConditionSparkle_DoNextAfterDelay;
     }
 }
 
-static const struct OamData sOamData_8625AD0 =
+static const struct OamData sOam_ConditionSparkle =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -1253,7 +1264,7 @@ static const struct OamData sOamData_8625AD0 =
     .priority = 0,
 };
 
-static const union AnimCmd sSpriteAnim_8625AD8[] =
+static const union AnimCmd sAnim_ConditionSparkle[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 5),
@@ -1265,133 +1276,120 @@ static const union AnimCmd sSpriteAnim_8625AD8[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_8625AF8[] =
+static const union AnimCmd *const sAnims_ConditionSparkle[] =
 {
-    sSpriteAnim_8625AD8,
-    sSpriteAnim_8625AD8 + 2,
+    &sAnim_ConditionSparkle[0], // Only this entry is used
+    &sAnim_ConditionSparkle[2],
+    &sAnim_ConditionSparkle[4],
+    &sAnim_ConditionSparkle[6],
+    &sAnim_ConditionSparkle[8], // Here below OOB, will crash if used
+    &sAnim_ConditionSparkle[10],
+    &sAnim_ConditionSparkle[12],
 };
 
-// unused
-static const union AnimCmd *const sSpriteAnimTable_8625B00[] =
+static const struct SpriteTemplate sSpriteTemplate_ConditionSparkle =
 {
-    sSpriteAnim_8625AD8 + 4,
-    sSpriteAnim_8625AD8 + 6,
-};
-
-// unused
-static const union AnimCmd *const sSpriteAnimTable_8625B08[] =
-{
-    sSpriteAnim_8625AD8 + 8,
-    sSpriteAnim_8625AD8 + 10,
-};
-
-// unused
-static const union AnimCmd *const *const sUnknown_08625B10 = sSpriteAnimTable_8625B08;
-
-const struct SpriteTemplate gUnknown_08625B14 =
-{
-    .tileTag = 104,
-    .paletteTag = 104,
-    .oam = &sOamData_8625AD0,
-    .anims = sSpriteAnimTable_8625AF8,
+    .tileTag = TAG_CONDITION_SPARKLE,
+    .paletteTag = TAG_CONDITION_SPARKLE,
+    .oam = &sOam_ConditionSparkle,
+    .anims = sAnims_ConditionSparkle,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81D3564,
+    .callback = SpriteCB_ConditionSparkle,
 };
 
-static const s16 gUnknown_08625B2C[][2] =
+static const s16 sConditionSparkleCoords[MAX_CONDITION_SPARKLES][2] =
 {
-    {0,   -35},
-    {20,  -28},
-    {33,  -10},
-    {33,   10},
-    {20,   28},
-    {0,    35},
-    {-20,  28},
-    {-33,  10},
-    {-33, -10},
-    {-20, -28},
+    {  0,  -35},
+    { 20,  -28},
+    { 33,  -10},
+    { 33,   10},
+    { 20,   28},
+    {  0,   35},
+    {-20,   28},
+    {-33,   10},
+    {-33,  -10},
+    {-20,  -28},
 };
 
-void sub_81D3314(struct Sprite *sprite)
+static void SetConditionSparklePosition(struct Sprite *sprite)
 {
-    struct Sprite *sprite2 = &gSprites[sprite->data[4]];
+    struct Sprite *mon = &gSprites[sprite->sMonSpriteId];
 
-    if (sprite2 != NULL)
+    if (mon != NULL)
     {
-        sprite->pos1.x = sprite2->pos1.x + sprite2->pos2.x + gUnknown_08625B2C[sprite->data[0]][0];
-        sprite->pos1.y = sprite2->pos1.y + sprite2->pos2.y + gUnknown_08625B2C[sprite->data[0]][1];
+        sprite->pos1.x = mon->pos1.x + mon->pos2.x + sConditionSparkleCoords[sprite->sSparkleId][0];
+        sprite->pos1.y = mon->pos1.y + mon->pos2.y + sConditionSparkleCoords[sprite->sSparkleId][1];
     }
     else
     {
-        sprite->pos1.x = gUnknown_08625B2C[sprite->data[0]][0] + 40;
-        sprite->pos1.y = gUnknown_08625B2C[sprite->data[0]][1] + 104;
+        sprite->pos1.x = sConditionSparkleCoords[sprite->sSparkleId][0] + 40;
+        sprite->pos1.y = sConditionSparkleCoords[sprite->sSparkleId][1] + 104;
     }
 }
 
-void sub_81D338C(u8 arg0, u8 arg1, struct Sprite **sprites)
+static void InitConditionSparkles(u8 count, bool8 allowFirstShowAll, struct Sprite **sprites)
 {
     u16 i;
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
     {
         if (sprites[i] != NULL)
         {
-            sprites[i]->data[0] = i;
-            sprites[i]->data[1] = (i * 16) + 1;
-            sprites[i]->data[2] = arg0;
-            sprites[i]->data[3] = i;
-            if (arg1 == 0 || arg0 != 9)
+            sprites[i]->sSparkleId = i;
+            sprites[i]->sDelayTimer = (i * 16) + 1;
+            sprites[i]->sNumExtraSparkles = count;
+            sprites[i]->sCurSparkleId = i;
+            if (!allowFirstShowAll || count != MAX_CONDITION_SPARKLES - 1)
             {
-                sprites[i]->callback = sub_81D3564;
+                sprites[i]->callback = SpriteCB_ConditionSparkle;
             }
             else
             {
-                sub_81D3314(sprites[i]);
-                sub_81D35E8(sprites[i]);
-                sprites[i]->callback = sub_81D32F4;
+                SetConditionSparklePosition(sprites[i]);
+                ShowAllConditionSparkles(sprites[i]);
+                sprites[i]->callback = SpriteCB_ConditionSparkle_WaitForAllAnim;
                 sprites[i]->invisible = FALSE;
             }
         }
     }
 }
 
-static void sub_81D3408(struct Sprite *sprite)
+static void SetNextConditionSparkle(struct Sprite *sprite)
 {
     u16 i;
-    u8 id = sprite->data[5];
-
-    for (i = 0; i < sprite->data[2] + 1; i++)
+    u8 id = sprite->sNextSparkleSpriteId;
+    for (i = 0; i < sprite->sNumExtraSparkles + 1; i++)
     {
-        gSprites[id].data[1] = (gSprites[id].data[0] * 16) + 1;
-        gSprites[id].callback = sub_81D3564;
-        id = gSprites[id].data[5];
+        gSprites[id].sDelayTimer = (gSprites[id].sSparkleId * 16) + 1;
+        gSprites[id].callback = SpriteCB_ConditionSparkle;
+        id = gSprites[id].sNextSparkleSpriteId;
     }
 }
 
-void sub_81D3464(struct Sprite **sprites)
+void ResetConditionSparkleSprites(struct Sprite **sprites)
 {
     u8 i;
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
         sprites[i] = NULL;
 }
 
-void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2)
+void CreateConditionSparkleSprites(struct Sprite **sprites, u8 monSpriteId, u8 _count)
 {
     u16 i, spriteId, firstSpriteId = 0;
-    u8 count = arg2;
+    u8 count = _count;
 
     for (i = 0; i < count + 1; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08625B14, 0, 0, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_ConditionSparkle, 0, 0, 0);
         if (spriteId != MAX_SPRITES)
         {
             sprites[i] = &gSprites[spriteId];
             sprites[i]->invisible = TRUE;
-            sprites[i]->data[4] = arg1;
+            sprites[i]->sMonSpriteId = monSpriteId;
             if (i != 0)
-                sprites[i - 1]->data[5] = spriteId;
+                sprites[i - 1]->sNextSparkleSpriteId = spriteId;
             else
                 firstSpriteId = spriteId;
         }
@@ -1401,15 +1399,15 @@ void sub_81D3480(struct Sprite **sprites, u8 arg1, u8 arg2)
         }
     }
 
-    sprites[count]->data[5] = firstSpriteId;
-    sub_81D338C(count, 1, sprites);
+    sprites[count]->sNextSparkleSpriteId = firstSpriteId;
+    InitConditionSparkles(count, TRUE, sprites);
 }
 
-void sub_81D3520(struct Sprite **sprites)
+void DestroyConditionSparkleSprites(struct Sprite **sprites)
 {
     u16 i;
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < MAX_CONDITION_SPARKLES; i++)
     {
         if (sprites[i] != NULL)
         {
@@ -1423,38 +1421,41 @@ void sub_81D3520(struct Sprite **sprites)
     }
 }
 
-void sub_81D354C(struct Sprite **sprites)
+void FreeConditionSparkles(struct Sprite **sprites)
 {
-    sub_81D3520(sprites);
-    FreeSpriteTilesByTag(104);
-    FreeSpritePaletteByTag(104);
+    DestroyConditionSparkleSprites(sprites);
+    FreeSpriteTilesByTag(TAG_CONDITION_SPARKLE);
+    FreeSpritePaletteByTag(TAG_CONDITION_SPARKLE);
 }
 
-static void sub_81D3564(struct Sprite *sprite)
+static void SpriteCB_ConditionSparkle(struct Sprite *sprite)
 {
-    if (sprite->data[1] != 0)
+    // Delay, then do sparkle anim
+    if (sprite->sDelayTimer != 0)
     {
-        if (--sprite->data[1] != 0)
+        if (--sprite->sDelayTimer != 0)
             return;
 
         SeekSpriteAnim(sprite, 0);
         sprite->invisible = FALSE;
     }
 
-    sub_81D3314(sprite);
+    SetConditionSparklePosition(sprite);
+
+    // Set up next sparkle
     if (sprite->animEnded)
     {
         sprite->invisible = TRUE;
-        if (sprite->data[3] == sprite->data[2])
+        if (sprite->sCurSparkleId == sprite->sNumExtraSparkles)
         {
-            if (sprite->data[3] == 9)
+            if (sprite->sCurSparkleId == MAX_CONDITION_SPARKLES - 1)
             {
-                sub_81D35E8(sprite);
-                sprite->callback = sub_81D32F4;
+                ShowAllConditionSparkles(sprite);
+                sprite->callback = SpriteCB_ConditionSparkle_WaitForAllAnim;
             }
             else
             {
-                sprite->callback = sub_81D32D4;
+                sprite->callback = SpriteCB_ConditionSparkle_DoNextAfterDelay;
             }
         }
         else
@@ -1464,17 +1465,24 @@ static void sub_81D3564(struct Sprite *sprite)
     }
 }
 
-static void sub_81D35E8(struct Sprite *sprite)
+static void ShowAllConditionSparkles(struct Sprite *sprite)
 {
-    u8 i, id = sprite->data[5];
+    u8 i, id = sprite->sNextSparkleSpriteId;
 
-    for (i = 0; i < sprite->data[2] + 1; i++)
+    for (i = 0; i < sprite->sNumExtraSparkles + 1; i++)
     {
         SeekSpriteAnim(&gSprites[id], 0);
         gSprites[id].invisible = FALSE;
-        id = gSprites[id].data[5];
+        id = gSprites[id].sNextSparkleSpriteId;
     }
 }
+
+#undef sSparkleId
+#undef sDelayTimer
+#undef sNumExtraSparkles
+#undef sCurSparkleId
+#undef sMonSpriteId
+#undef sNextSparkleSpriteId
 
 static const u8 *const sLvlUpStatStrings[NUM_STATS] =
 {

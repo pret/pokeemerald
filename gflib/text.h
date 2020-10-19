@@ -169,9 +169,9 @@
 #define CHAR_a_DIAERESIS       0xF4
 #define CHAR_o_DIAERESIS       0xF5
 #define CHAR_u_DIAERESIS       0xF6
-#define CHAR_SPECIAL_F7        0xF7
-#define CHAR_SPECIAL_F8        0xF8
-#define CHAR_SPECIAL_F9        0xF9
+#define CHAR_DYNAMIC           0xF7
+#define CHAR_KEYPAD_ICON       0xF8
+#define CHAR_EXTRA_SYMBOL      0xF9
 #define CHAR_PROMPT_SCROLL     0xFA // waits for button press and scrolls dialog
 #define CHAR_PROMPT_CLEAR      0xFB // waits for button press and clears dialog
 #define EXT_CTRL_CODE_BEGIN    0xFC // extended control code
@@ -179,7 +179,22 @@
 #define CHAR_NEWLINE           0xFE
 #define EOS                    0xFF // end of string
 
-// Special F9 chars
+// CHAR_KEYPAD_ICON chars
+#define CHAR_A_BUTTON       0x00
+#define CHAR_B_BUTTON       0x01
+#define CHAR_L_BUTTON       0x02
+#define CHAR_R_BUTTON       0x03
+#define CHAR_START_BUTTON   0x04
+#define CHAR_SELECT_BUTTON  0x05
+#define CHAR_DPAD_UP        0x06
+#define CHAR_DPAD_DOWN      0x07
+#define CHAR_DPAD_LEFT      0x08
+#define CHAR_DPAD_RIGHT     0x09
+#define CHAR_DPAD_UPDOWN    0x0A
+#define CHAR_DPAD_LEFTRIGHT 0x0B
+#define CHAR_DPAD_NONE      0x0C
+
+// CHAR_EXTRA_SYMBOL chars
 #define CHAR_UP_ARROW_2    0x00
 #define CHAR_DOWN_ARROW_2  0x01
 #define CHAR_LEFT_ARROW_2  0x02
@@ -191,18 +206,30 @@
 #define CHAR_NO            0x08
 #define CHAR_UNDERSCORE    0x09
 
-#define EXT_CTRL_CODE_COLOR     0x1
-#define EXT_CTRL_CODE_HIGHLIGHT 0x2
-#define EXT_CTRL_CODE_SHADOW    0x3
-//
-#define EXT_CTRL_CODE_UNKNOWN_7 0x7
-//
-#define EXT_CTRL_CODE_CLEAR     0x11
-//
-#define EXT_CTRL_CODE_CLEAR_TO  0x13
-#define EXT_CTRL_CODE_MIN_LETTER_SPACING 0x14
-#define EXT_CTRL_CODE_JPN       0x15
-#define EXT_CTRL_CODE_ENG       0x16
+#define EXT_CTRL_CODE_COLOR                  0x01
+#define EXT_CTRL_CODE_HIGHLIGHT              0x02
+#define EXT_CTRL_CODE_SHADOW                 0x03
+#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 0x04
+#define EXT_CTRL_CODE_PALETTE                0x05
+#define EXT_CTRL_CODE_SIZE                   0x06
+#define EXT_CTRL_CODE_RESET_SIZE             0x07
+#define EXT_CTRL_CODE_PAUSE                  0x08
+#define EXT_CTRL_CODE_PAUSE_UNTIL_PRESS      0x09
+#define EXT_CTRL_CODE_WAIT_SE                0x0A
+#define EXT_CTRL_CODE_PLAY_BGM               0x0B
+#define EXT_CTRL_CODE_ESCAPE                 0x0C
+#define EXT_CTRL_CODE_SHIFT_TEXT             0x0D
+#define EXT_CTRL_CODE_SHIFT_DOWN             0x0E
+#define EXT_CTRL_CODE_FILL_WINDOW            0x0F
+#define EXT_CTRL_CODE_PLAY_SE                0x10
+#define EXT_CTRL_CODE_CLEAR                  0x11
+#define EXT_CTRL_CODE_SKIP                   0x12
+#define EXT_CTRL_CODE_CLEAR_TO               0x13
+#define EXT_CTRL_CODE_MIN_LETTER_SPACING     0x14
+#define EXT_CTRL_CODE_JPN                    0x15
+#define EXT_CTRL_CODE_ENG                    0x16
+#define EXT_CTRL_CODE_PAUSE_MUSIC            0x17
+#define EXT_CTRL_CODE_RESUME_MUSIC           0x18
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -244,11 +271,18 @@
 
 enum
 {
+    COLOR_FOREGROUND,
+    COLOR_SHADOW,
+    COLOR_BACKGROUND
+};
+
+enum
+{
     FONTATTR_MAX_LETTER_WIDTH,
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
     FONTATTR_LINE_SPACING,
-    FONTATTR_UNKNOWN,   // dunno what this is yet
+    FONTATTR_STYLE,
     FONTATTR_COLOR_FOREGROUND,
     FONTATTR_COLOR_BACKGROUND,
     FONTATTR_COLOR_SHADOW
@@ -276,7 +310,7 @@ struct TextPrinterTemplate
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;   // 0xC
+    u8 style:4;   // 0xC
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
@@ -295,7 +329,7 @@ struct TextPrinter
     u8 delayCounter;
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
-    u8 japanese;
+    bool8 japanese;
 };
 
 struct FontInfo
@@ -305,7 +339,7 @@ struct FontInfo
     u8 maxLetterHeight;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;
+    u8 style:4; //unused
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
@@ -339,13 +373,13 @@ struct Struct_03002F90
     u32 unk20[8];
     u32 unk40[8];
     u32 unk60[8];
-    u8 unk80;
-    u8 unk81;
+    u8 width;
+    u8 height;
 };
 
 extern TextFlags gTextFlags;
 
-extern u8 gUnknown_03002F84;
+extern bool8 gUnknown_03002F84;
 extern struct Struct_03002F90 gUnknown_03002F90;
 
 void SetFontsPointer(const struct FontInfo *fonts);

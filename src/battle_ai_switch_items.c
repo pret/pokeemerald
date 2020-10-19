@@ -9,7 +9,6 @@
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 
 // this file's functions
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
@@ -314,8 +313,8 @@ static bool8 AreStatsRaised(void)
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
     {
-        if (gBattleMons[gActiveBattler].statStages[i] > 6)
-            buffedStatsValue += gBattleMons[gActiveBattler].statStages[i] - 6;
+        if (gBattleMons[gActiveBattler].statStages[i] > DEFAULT_STAT_STAGE)
+            buffedStatsValue += gBattleMons[gActiveBattler].statStages[i] - DEFAULT_STAT_STAGE;
     }
 
     return (buffedStatsValue > 3);

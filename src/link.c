@@ -75,9 +75,9 @@ u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 u32 gLinkStatus;
 bool8 gLinkDummy1; // Never read
 bool8 gLinkDummy2; // Never read
-bool8 gUnknown_030030EC[MAX_LINK_PLAYERS];
-bool8 gUnknown_030030F0[MAX_LINK_PLAYERS];
-u16 gUnknown_030030F4;
+bool8 gReadyToExitStandby[MAX_LINK_PLAYERS];
+bool8 gReadyToCloseLink[MAX_LINK_PLAYERS];
+u16 gReadyCloseLinkType; // Never read
 u8 gSuppressLinkErrorMessage;
 bool8 gWirelessCommType;
 bool8 gSavedLinkPlayerCount;
@@ -99,7 +99,7 @@ u16 gLinkSavedIme;
 
 EWRAM_DATA u8 gLinkTestDebugValuesEnabled = 0;
 EWRAM_DATA u8 gUnknown_020223BD = 0;
-EWRAM_DATA u32 gUnknown_020223C0 = 0;
+EWRAM_DATA u32 gBerryBlenderKeySendAttempts = 0;
 EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
 EWRAM_DATA u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE] = {};
 EWRAM_DATA bool8 gLinkOpen = FALSE;
@@ -114,7 +114,7 @@ EWRAM_DATA struct {
     u8 lastSendQueueCount;
     u8 unk_06;
 } sLinkErrorBuffer = {};
-static EWRAM_DATA u16 sUnknown_02022B08 = 0;
+static EWRAM_DATA u16 sReadyCloseLinkAttempts = 0; // never read
 static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
 
 // Static ROM declarations
@@ -135,12 +135,12 @@ static void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8 taskId);
 
-static void sub_800AC80(void);
-static void sub_800ACAC(void);
-static void sub_800AD5C(void);
-static void sub_800AD88(void);
-static void sub_800AE30(void);
-static void sub_800AE5C(void);
+static void LinkCB_ReadyCloseLink(void);
+static void LinkCB_WaitCloseLink(void);
+static void LinkCB_ReadyCloseLinkWithJP(void);
+static void LinkCB_WaitCloseLinkWithJP(void);
+static void LinkCB_Standby(void);
+static void LinkCB_StandbyForAll(void);
 
 static void CheckErrorStatus(void);
 static void CB2_PrintErrorMessage(void);
@@ -379,7 +379,7 @@ void OpenLink(void)
         sDummy1 = FALSE;
         gLinkDummy2 = FALSE;
         gLinkDummy1 = FALSE;
-        gUnknown_030030F4 = 0;
+        gReadyCloseLinkType = 0;
         CreateTask(Task_TriggerHandshake, 2);
     }
     else
@@ -390,8 +390,8 @@ void OpenLink(void)
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         gRemoteLinkPlayersNotReceived[i] = TRUE;
-        gUnknown_030030F0[i] = FALSE;
-        gUnknown_030030EC[i] = FALSE;
+        gReadyToCloseLink[i] = FALSE;
+        gReadyToExitStandby[i] = FALSE;
     }
 }
 
@@ -445,29 +445,29 @@ static void TestBlockTransfer(u8 nothing, u8 is, u8 used)
 
 static void LinkTestProcessKeyInput(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         gShouldAdvanceLinkState = 1;
     }
-    if (gMain.heldKeys & B_BUTTON)
+    if (JOY_HELD(B_BUTTON))
     {
         InitBlockSend(gHeap + 0x4000, 0x00002004);
     }
-    if (gMain.newKeys & L_BUTTON)
+    if (JOY_NEW(L_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
     }
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
     {
         SetSuppressLinkErrorMessage(TRUE);
     }
-    if (gMain.newKeys & R_BUTTON)
+    if (JOY_NEW(R_BUTTON))
     {
         TrySavingData(SAVE_LINK);
     }
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
     {
-        sub_800AC34();
+        SetCloseLinkCallback();
     }
     if (gLinkTestDebugValuesEnabled)
     {
@@ -552,7 +552,7 @@ static void ProcessRecvCmds(u8 unused)
                 InitBlockSend(block, sizeof(*block));
                 break;
             }
-            case LINKCMD_SEND_HELD_KEYS:
+            case LINKCMD_BLENDER_SEND_KEYS:
                 gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
                 break;
             case LINKCMD_0x5555:
@@ -630,19 +630,19 @@ static void ProcessRecvCmds(u8 unused)
                 }
             }
                 break;
-            case LINKCMD_0x5FFF:
-                gUnknown_030030F0[i] = TRUE;
+            case LINKCMD_READY_CLOSE_LINK:
+                gReadyToCloseLink[i] = TRUE;
                 break;
-            case LINKCMD_0x2FFE:
-                gUnknown_030030EC[i] = TRUE;
+            case LINKCMD_READY_EXIT_STANDBY:
+                gReadyToExitStandby[i] = TRUE;
                 break;
-            case LINKCMD_0xAAAA:
-                sub_800A418();
+            case LINKCMD_BLENDER_NO_PBLOCK_SPACE:
+                SetBerryBlenderLinkCallback();
                 break;
-            case LINKCMD_0xCCCC:
+            case LINKCMD_SEND_BLOCK_REQ:
                 SendBlock(0, sBlockRequests[gRecvCmds[i][1]].address, sBlockRequests[gRecvCmds[i][1]].size);
                 break;
-            case LINKCMD_SEND_HELD_KEYS_2:
+            case LINKCMD_SEND_HELD_KEYS:
                 gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
                 break;
         }
@@ -657,11 +657,11 @@ static void BuildSendCmd(u16 command)
             gSendCmd[0] = LINKCMD_SEND_LINK_TYPE;
             gSendCmd[1] = gLinkType;
             break;
-        case LINKCMD_0x2FFE:
-            gSendCmd[0] = LINKCMD_0x2FFE;
+        case LINKCMD_READY_EXIT_STANDBY:
+            gSendCmd[0] = LINKCMD_READY_EXIT_STANDBY;
             break;
-        case LINKCMD_SEND_HELD_KEYS:
-            gSendCmd[0] = LINKCMD_SEND_HELD_KEYS;
+        case LINKCMD_BLENDER_SEND_KEYS:
+            gSendCmd[0] = LINKCMD_BLENDER_SEND_KEYS;
             gSendCmd[1] = gMain.heldKeys;
             break;
         case LINKCMD_0x5555:
@@ -687,30 +687,30 @@ static void BuildSendCmd(u16 command)
             gSendCmd[1] = sBlockSend.size;
             gSendCmd[2] = sBlockSend.multiplayerId + 0x80;
             break;
-        case LINKCMD_0xAAAA:
-            gSendCmd[0] = LINKCMD_0xAAAA;
+        case LINKCMD_BLENDER_NO_PBLOCK_SPACE:
+            gSendCmd[0] = LINKCMD_BLENDER_NO_PBLOCK_SPACE;
             break;
         case LINKCMD_0xAAAB:
             gSendCmd[0] = LINKCMD_0xAAAB;
             gSendCmd[1] = gSpecialVar_ItemId;
             break;
-        case LINKCMD_0xCCCC:
-            gSendCmd[0] = LINKCMD_0xCCCC;
+        case LINKCMD_SEND_BLOCK_REQ:
+            gSendCmd[0] = LINKCMD_SEND_BLOCK_REQ;
             gSendCmd[1] = gBlockRequestType;
             break;
-        case LINKCMD_0x5FFF:
-            gSendCmd[0] = LINKCMD_0x5FFF;
-            gSendCmd[1] = gUnknown_030030F4;
+        case LINKCMD_READY_CLOSE_LINK:
+            gSendCmd[0] = LINKCMD_READY_CLOSE_LINK;
+            gSendCmd[1] = gReadyCloseLinkType;
             break;
         case LINKCMD_0x5566:
             gSendCmd[0] = LINKCMD_0x5566;
             break;
-        case LINKCMD_SEND_HELD_KEYS_2:
+        case LINKCMD_SEND_HELD_KEYS:
             if (gHeldKeyCodeToSend == 0 || gLinkTransferringData)
             {
                 break;
             }
-            gSendCmd[0] = LINKCMD_SEND_HELD_KEYS_2;
+            gSendCmd[0] = LINKCMD_SEND_HELD_KEYS;
             gSendCmd[1] = gHeldKeyCodeToSend;
             break;
     }
@@ -738,7 +738,7 @@ bool32 IsSendingKeysToLink(void)
 static void LinkCB_SendHeldKeys(void)
 {
     if (gReceivedRemoteLinkPlayers == TRUE)
-        BuildSendCmd(LINKCMD_SEND_HELD_KEYS_2);
+        BuildSendCmd(LINKCMD_SEND_HELD_KEYS);
 }
 
 void ClearLinkCallback(void)
@@ -1009,34 +1009,36 @@ static void LinkCB_BlockSendEnd(void)
     gLinkCallback = NULL;
 }
 
-static void sub_800A3F8(void)
+static void LinkCB_BerryBlenderSendHeldKeys(void)
 {
     GetMultiplayerId();
-    BuildSendCmd(LINKCMD_SEND_HELD_KEYS);
-    gUnknown_020223C0++;
+    BuildSendCmd(LINKCMD_BLENDER_SEND_KEYS);
+    gBerryBlenderKeySendAttempts++;
 }
 
-void sub_800A418(void)
+void SetBerryBlenderLinkCallback(void)
 {
-    gUnknown_020223C0 = 0;
+    gBerryBlenderKeySendAttempts = 0;
     if (gWirelessCommType)
     {
-        sub_800F850();
+        Rfu_SetBerryBlenderLinkCallback();
     }
     else
     {
-        gLinkCallback = sub_800A3F8;
+        gLinkCallback = LinkCB_BerryBlenderSendHeldKeys;
     }
 }
 
-u32 sub_800A44C(void)
+// Unused
+static u32 GetBerryBlenderKeySendAttempts(void)
 {
-    return gUnknown_020223C0;
+    return gBerryBlenderKeySendAttempts;
 }
 
-void sub_800A458(void)
+// Unused
+static void SendBerryBlenderNoSpaceForPokeblocks(void)
 {
-    BuildSendCmd(LINKCMD_0xAAAA);
+    BuildSendCmd(LINKCMD_BLENDER_NO_PBLOCK_SPACE);
 }
 
 u8 GetMultiplayerId(void)
@@ -1065,16 +1067,16 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
     return InitBlockSend(src, size);
 }
 
-bool8 sub_800A4D8(u8 a0)
+bool8 SendBlockRequest(u8 blockReqType)
 {
     if (gWirelessCommType == TRUE)
     {
-        return sub_8010100(a0);
+        return Rfu_SendBlockRequest(blockReqType);
     }
     if (gLinkCallback == NULL)
     {
-        gBlockRequestType = a0;
-        BuildSendCmd(LINKCMD_0xCCCC);
+        gBlockRequestType = blockReqType;
+        BuildSendCmd(LINKCMD_SEND_BLOCK_REQ);
         return TRUE;
     }
     return FALSE;
@@ -1423,70 +1425,70 @@ static u8 GetDummy2(void)
     return sDummy2;
 }
 
-void sub_800ABF4(u16 a0)
+void SetCloseLinkCallbackAndType(u16 type)
 {
     if (gWirelessCommType == TRUE)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_SetCloseLinkCallback();
     }
     else
     {
         if (gLinkCallback == NULL)
         {
-            gLinkCallback = sub_800AC80;
+            gLinkCallback = LinkCB_ReadyCloseLink;
             gLinkDummy1 = FALSE;
-            gUnknown_030030F4 = a0;
+            gReadyCloseLinkType = type;
         }
     }
 }
 
-void sub_800AC34(void)
+void SetCloseLinkCallback(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_SetCloseLinkCallback();
     }
     else
     {
         if (gLinkCallback != NULL)
         {
-            sUnknown_02022B08++;
+            sReadyCloseLinkAttempts++;
         }
         else
         {
-            gLinkCallback = sub_800AC80;
+            gLinkCallback = LinkCB_ReadyCloseLink;
             gLinkDummy1 = FALSE;
-            gUnknown_030030F4 = 0;
+            gReadyCloseLinkType = 0;
         }
     }
 }
 
-static void sub_800AC80(void)
+static void LinkCB_ReadyCloseLink(void)
 {
     if (gLastRecvQueueCount == 0)
     {
-        BuildSendCmd(LINKCMD_0x5FFF);
-        gLinkCallback = sub_800ACAC;
+        BuildSendCmd(LINKCMD_READY_CLOSE_LINK);
+        gLinkCallback = LinkCB_WaitCloseLink;
     }
 }
 
-static void sub_800ACAC(void)
+static void LinkCB_WaitCloseLink(void)
 {
     int i;
     unsigned count;
-    u8 linkPlayerCount;
 
-    linkPlayerCount = GetLinkPlayerCount();
+    // Wait for all players to be ready
+    u8 linkPlayerCount = GetLinkPlayerCount();
     count = 0;
     for (i = 0; i < linkPlayerCount; i++)
     {
-        if (gUnknown_030030F0[i])
-        {
+        if (gReadyToCloseLink[i])
             count++;
-        }
     }
+
     if (count == linkPlayerCount)
     {
+        // All ready, close link
         gBattleTypeFlags &= ~BATTLE_TYPE_20;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
@@ -1495,37 +1497,38 @@ static void sub_800ACAC(void)
     }
 }
 
-void sub_800AD10(void)
+// Used instead of SetCloseLinkCallback when disconnecting from an attempt to link with a foreign game
+void SetCloseLinkCallbackHandleJP(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_SetCloseLinkCallback();
     }
     else
     {
         if (gLinkCallback != NULL)
         {
-            sUnknown_02022B08++;
+            sReadyCloseLinkAttempts++;
         }
         else
         {
-            gLinkCallback = sub_800AD5C;
+            gLinkCallback = LinkCB_ReadyCloseLinkWithJP;
             gLinkDummy1 = FALSE;
-            gUnknown_030030F4 = 0;
+            gReadyCloseLinkType = 0;
         }
     }
 }
 
-static void sub_800AD5C(void)
+static void LinkCB_ReadyCloseLinkWithJP(void)
 {
     if (gLastRecvQueueCount == 0)
     {
-        BuildSendCmd(LINKCMD_0x5FFF);
-        gLinkCallback = sub_800AD88;
+        BuildSendCmd(LINKCMD_READY_CLOSE_LINK);
+        gLinkCallback = LinkCB_WaitCloseLinkWithJP;
     }
 }
 
-static void sub_800AD88(void)
+static void LinkCB_WaitCloseLinkWithJP(void)
 {
     int i;
     unsigned count;
@@ -1533,19 +1536,21 @@ static void sub_800AD88(void)
 
     linkPlayerCount = GetLinkPlayerCount();
     count = 0;
+
+    // Wait for all non-foreign players to be ready
     for (i = 0; i < linkPlayerCount; i++)
     {
+        // Rather than communicate with the foreign game
+        // just assume they're ready to disconnect
         if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
-        {
             count++;
-        }
-        else if (gUnknown_030030F0[i])
-        {
+        else if (gReadyToCloseLink[i])
             count++;
-        }
     }
+
     if (count == linkPlayerCount)
     {
+        // All ready, close link
         gBattleTypeFlags &= ~BATTLE_TYPE_20;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
@@ -1554,50 +1559,47 @@ static void sub_800AD88(void)
     }
 }
 
-void sub_800ADF8(void)
+void SetLinkStandbyCallback(void)
 {
     if (gWirelessCommType == TRUE)
     {
-        sub_8010434();
+        Rfu_SetLinkStandbyCallback();
     }
     else
     {
         if (gLinkCallback == NULL)
         {
-            gLinkCallback = sub_800AE30;
+            gLinkCallback = LinkCB_Standby;
         }
         gLinkDummy1 = FALSE;
     }
 }
 
-static void sub_800AE30(void)
+static void LinkCB_Standby(void)
 {
     if (gLastRecvQueueCount == 0)
     {
-        BuildSendCmd(LINKCMD_0x2FFE);
-        gLinkCallback = sub_800AE5C;
+        BuildSendCmd(LINKCMD_READY_EXIT_STANDBY);
+        gLinkCallback = LinkCB_StandbyForAll;
     }
 }
 
-static void sub_800AE5C(void)
+static void LinkCB_StandbyForAll(void)
 {
     u8 i;
-    u8 linkPlayerCount;
-
-    linkPlayerCount = GetLinkPlayerCount();
+    u8 linkPlayerCount = GetLinkPlayerCount();
     for (i = 0; i < linkPlayerCount; i++)
     {
-        if (!gUnknown_030030EC[i])
-        {
+        if (!gReadyToExitStandby[i])
             break;
-        }
     }
+
+    // If true, all players ready to exit standby
     if (i == linkPlayerCount)
     {
         for (i = 0; i < MAX_LINK_PLAYERS; i++)
-        {
-            gUnknown_030030EC[i] = FALSE;
-        }
+            gReadyToExitStandby[i] = FALSE;
+
         gLinkCallback = NULL;
     }
 }
@@ -1752,7 +1754,7 @@ static void CB2_PrintErrorMessage(void)
     {
         if (gWirelessCommType == 1)
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
@@ -1762,7 +1764,7 @@ static void CB2_PrintErrorMessage(void)
         }
         else if (gWirelessCommType == 2)
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 rfu_REQ_stopMode();
                 rfu_waitREQComplete();

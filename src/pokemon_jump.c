@@ -29,7 +29,6 @@
 #include "pokemon_jump.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 struct PokemonJump1_MonInfo
 {
@@ -406,7 +405,7 @@ void StartPokemonJump(u16 partyIndex, MainCallback callback)
 
     if (gReceivedRemoteLinkPlayers)
     {
-        gUnknown_02022CFC = Alloc(sizeof(*gUnknown_02022CFC));
+        gUnknown_02022CFC = Alloc(sizeof(struct PokemonJump1));
         if (gUnknown_02022CFC)
         {
             ResetTasks();
@@ -576,7 +575,7 @@ static void sub_802ACA0(u8 taskId)
     case 2:
         if (!sub_802D0F0() && IsNotWaitingForBGMStop() == TRUE)
         {
-            FadeOutAndPlayNewMapMusic(MUS_RG_JUMP, 8);
+            FadeOutAndPlayNewMapMusic(MUS_RG_POKE_JUMP, 8);
             gUnknown_02022CFC->unk8++;
         }
         break;
@@ -1245,7 +1244,7 @@ static bool32 sub_802B8CC(void)
             break;
         // fall through
     case 1:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             sub_802C164();
             sub_802AE14(3);
@@ -1336,7 +1335,7 @@ static bool32 sub_802BA58(void)
     case 2:
     case 5:
         gUnknown_02022CFC->unk3C++;
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON) || gUnknown_02022CFC->unk3C > 180)
+        if (JOY_NEW(A_BUTTON | B_BUTTON) || gUnknown_02022CFC->unk3C > 180)
         {
             sub_802DA14();
             gUnknown_02022CFC->unkA++;
@@ -1463,7 +1462,7 @@ static bool32 sub_802BC60(void)
     case 4:
         if (!gPaletteFade.active)
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             gUnknown_02022CFC->unkA++;
         }
         break;
@@ -1721,7 +1720,7 @@ static void sub_802C1BC(void)
     gUnknown_02022CFC->unk83AC->unk10 = 0;
 }
 
-static const u16 gUnknown_082FB654[] = {SE_REGI, SE_REAPOKE, SE_W234, SE_RG_EXCELLENT};
+static const u16 gUnknown_082FB654[] = {SE_SHOP, SE_SHINY, SE_M_MORNING_SUN, SE_RG_POKE_JUMP_SUCCESS};
 
 static void sub_802C1DC(void)
 {
@@ -1798,9 +1797,9 @@ static void sub_802C280(void)
     }
 
     if (whichSound & 0x2)
-        PlaySE(SE_RG_NAWAMISS);
+        PlaySE(SE_RG_POKE_JUMP_FAILURE);
     else if (whichSound & 0x1)
-        PlaySE(SE_DANSA);
+        PlaySE(SE_LEDGE);
 }
 
 static const s8 gUnknown_082FB65C[][48] =
@@ -2702,7 +2701,7 @@ static void sub_802CDD4(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        PlaySE(SE_JITE_PYOKO);
+        PlaySE(SE_BIKE_HOP);
         sprite->data[1] = 0;
         sprite->data[0]++;
         // fall through
@@ -3275,7 +3274,7 @@ static void sub_802D7E8(u16 itemId, u16 quantity)
     gUnknown_02022D00->unk12 = sub_802DA9C(4, 8, 22, 4);
     AddTextPrinterParameterized(gUnknown_02022D00->unk12, 1, gUnknown_02022D00->strBuff, 0, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(gUnknown_02022D00->unk12, 2);
-    gUnknown_02022D00->unk14 = MUS_FANFA1;
+    gUnknown_02022D00->unk14 = MUS_LEVEL_UP;
     gUnknown_02022D00->unkD = 0;
 }
 
@@ -3684,14 +3683,14 @@ static void sub_802E0AC(struct PokemonJump1_MonInfo *arg0)
     packet.species = arg0->species,
     packet.otId = arg0->otId,
     packet.personality = arg0->personality,
-    sub_800FE50(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 static bool32 sub_802E0D0(int multiplayerId, struct PokemonJump1_MonInfo *arg0)
 {
     struct MonInfoPacket packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != 0x2F00)
+    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -3718,7 +3717,7 @@ static void sub_802E120(u32 arg0)
     struct UnkPacket2 packet;
     packet.id = 2;
     packet.unk4 = arg0;
-    sub_800FE50(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 struct UnkPacket3
@@ -3746,14 +3745,14 @@ static void sub_802E138(struct PokemonJump1_82E4 *arg0, struct PokemonJump1Sub *
     packet.unk2 = arg0->unk10;
     packet.unk3_1 = arg0->unk14;
     packet.unk4 = arg0->unkE;
-    sub_800FE50(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 static bool32 sub_802E1BC(struct PokemonJump1_82E4 *arg0, struct PokemonJump1Sub *arg1)
 {
     struct UnkPacket3 packet;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00)
+    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[0][1], sizeof(packet));
@@ -3792,14 +3791,14 @@ static void sub_802E234(struct PokemonJump1_82E4 *arg0, u8 arg1, u16 arg2)
     packet.unk4 = arg0->unkE;
     packet.unk6 = arg1;
     packet.unk8 = arg2;
-    sub_800FE50(&packet);
+    Rfu_SendPacket(&packet);
 }
 
 static bool32 sub_802E264(struct PokemonJump1_82E4 *arg0, int multiplayerId, u8 *arg2, u16 *arg3)
 {
     struct UnkPacket4 packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != 0x2F00)
+    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -3819,7 +3818,7 @@ static bool32 sub_802E2D0(struct PokemonJump1_82E4 *arg0, int multiplayerId)
 {
     struct UnkPacket4 packet;
 
-    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != 0x2F00)
+    if ((gRecvCmds[multiplayerId][0] & 0xFF00) != RFUCMD_SEND_PACKET)
         return FALSE;
 
     memcpy(&packet, &gRecvCmds[multiplayerId][1], sizeof(packet));
@@ -3922,7 +3921,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
             data[0]++;
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             rbox_fill_rectangle(data[1]);
             CopyWindowToVram(data[1], 1);

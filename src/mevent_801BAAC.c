@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/species.h"
 #include "bg.h"
 #include "gpu_regs.h"
 #include "palette.h"
@@ -208,7 +207,7 @@ s32 FadeToWonderCardMenu(void)
         case 3:
             if (FreeTempTileDataBuffersIfPossible())
                 return 0;
-            LoadPalette(stdpal_get(1), 0x20, 0x20);
+            LoadPalette(GetTextWindowPalette(1), 0x20, 0x20);
             gPaletteFade.bufferTransferDisabled = TRUE;
             LoadPalette(sWonderCardData->unk_0170->pal, 0x10, 0x20);
             LZ77UnCompWram(sWonderCardData->unk_0170->map, sWonderCardData->buffer_045C);
@@ -607,7 +606,7 @@ s32 FadeToWonderNewsMenu(void)
         case 3:
             if (FreeTempTileDataBuffersIfPossible())
                 return 0;
-            LoadPalette(stdpal_get(1), 0x20, 0x20);
+            LoadPalette(GetTextWindowPalette(1), 0x20, 0x20);
             gPaletteFade.bufferTransferDisabled = TRUE;
             LoadPalette(sWonderNewsData->unk_01BC->pal, 0x10, 0x20);
             LZ77UnCompWram(sWonderNewsData->unk_01BC->map, sWonderNewsData->buffer_03A4);

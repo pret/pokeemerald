@@ -181,221 +181,67 @@ bool8 HasAtLeastOneBerry(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
-// Refuses to match.
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
-    u8 i;
+    u8 i, pocket;
+    u16 slotCapacity, ownedCount;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
 
-    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
+    if (InBattlePyramid() || (FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE))
     {
         return CheckPyramidBagHasSpace(itemId, count);
     }
+
+    pocket = ItemId_GetPocket(itemId) - 1;
+    if (pocket != BERRIES_POCKET)
+        slotCapacity = MAX_BAG_ITEM_CAPACITY;
     else
+        slotCapacity = MAX_BERRY_CAPACITY;
+
+    // Check space in any existing item slots that already contain this item
+    for (i = 0; i < gBagPockets[pocket].capacity; i++)
     {
-        u8 pocket;
-        u16 slotCapacity;
-        u16 ownedCount;
+        if (gBagPockets[pocket].itemSlots[i].itemId == itemId)
+        {
+            ownedCount = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
+            if (ownedCount + count <= slotCapacity)
+                return TRUE;
+            if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
+                return FALSE;
+            count -= (slotCapacity - ownedCount);
+            if (count == 0)
+                break; //Should just be "return TRUE", since setting count to 0 means all the remaining checks until return will be false anyway, but that doesn't match
+        }
+    }
 
-        pocket = ItemId_GetPocket(itemId) - 1;
-        if (pocket != BERRIES_POCKET)
-            slotCapacity = MAX_BAG_ITEM_CAPACITY;
-        else
-            slotCapacity = MAX_BERRY_CAPACITY;
-
-        // Check space in any existing item slots that already contain this item
+    // Check space in empty item slots
+    if (count > 0) //if (count !=0) also works here; both match
+    {
         for (i = 0; i < gBagPockets[pocket].capacity; i++)
         {
-            if (gBagPockets[pocket].itemSlots[i].itemId == itemId)
+            if (gBagPockets[pocket].itemSlots[i].itemId == 0)
             {
-                ownedCount = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
-                if (ownedCount + count <= slotCapacity)
-                    return TRUE;
-                if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
-                    return FALSE;
-                count -= slotCapacity - ownedCount;
-                if (count == 0)
-                    return TRUE;
-            }
-        }
-
-        // Check space in empty item slots
-        if (count > 0)
-        {
-            for (i = 0; i < gBagPockets[pocket].capacity; i++)
-            {
-                if (gBagPockets[pocket].itemSlots[i].itemId == 0)
+                if (count > slotCapacity)
                 {
-                    if (count <= slotCapacity)
-                        return TRUE;
                     if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
                         return FALSE;
                     count -= slotCapacity;
                 }
+                else
+                {
+                    count = 0; //Should just be "return TRUE", since setting count to 0 means all the remaining checks until return will be false anyway, but that doesn't match
+                    break;
+                }
             }
-            if (count > 0)
-                return FALSE; // No more item slots. The bag is full
         }
-
-        return TRUE;
+        if (count > 0)    //if (count !=0) also works here; both match
+            return FALSE; // No more item slots. The bag is full
     }
+
+    return TRUE;
 }
-#else
-NAKED
-bool8 CheckBagHasSpace(u16 itemId, u16 count)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    lsls r1, 16\n\
-    lsrs r5, r1, 16\n\
-    bl ItemId_GetPocket\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080D6906\n\
-    bl InBattlePyramid\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080D6838\n\
-    ldr r0, =0x00004004\n\
-    bl FlagGet\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _080D684C\n\
-_080D6838:\n\
-    mov r0, r8\n\
-    adds r1, r5, 0\n\
-    bl CheckPyramidBagHasSpace\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    b _080D6916\n\
-    .pool\n\
-_080D684C:\n\
-    mov r0, r8\n\
-    bl ItemId_GetPocket\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    ldr r7, =0x000003e7\n\
-    cmp r2, 0x3\n\
-    beq _080D6860\n\
-    movs r7, 0x63\n\
-_080D6860:\n\
-    movs r6, 0\n\
-    ldr r1, =gBagPockets\n\
-    lsls r4, r2, 3\n\
-    adds r0, r4, r1\n\
-    mov r9, r4\n\
-    ldrb r0, [r0, 0x4]\n\
-    cmp r6, r0\n\
-    bcs _080D68BC\n\
-    subs r0, r2, 0x2\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-_080D6878:\n\
-    adds r0, r4, r1\n\
-    ldr r1, [r0]\n\
-    lsls r0, r6, 2\n\
-    adds r1, r0, r1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r8\n\
-    bne _080D68AC\n\
-    adds r0, r1, 0x2\n\
-    str r2, [sp]\n\
-    bl GetBagItemQuantity\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    adds r0, r1, r5\n\
-    ldr r2, [sp]\n\
-    cmp r0, r7\n\
-    ble _080D6914\n\
-    mov r0, r10\n\
-    cmp r0, 0x1\n\
-    bls _080D6906\n\
-    subs r0, r7, r1\n\
-    subs r0, r5, r0\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0\n\
-    beq _080D6914\n\
-_080D68AC:\n\
-    adds r0, r6, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    ldr r1, =gBagPockets\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0, 0x4]\n\
-    cmp r6, r0\n\
-    bcc _080D6878\n\
-_080D68BC:\n\
-    cmp r5, 0\n\
-    beq _080D6914\n\
-    movs r6, 0\n\
-    ldr r3, =gBagPockets\n\
-    mov r1, r9\n\
-    adds r0, r1, r3\n\
-    ldrb r0, [r0, 0x4]\n\
-    cmp r6, r0\n\
-    bcs _080D6902\n\
-    adds r4, r3, 0\n\
-    subs r0, r2, 0x2\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-_080D68D6:\n\
-    adds r0, r1, r4\n\
-    ldr r1, [r0]\n\
-    lsls r0, r6, 2\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _080D68F2\n\
-    cmp r5, r7\n\
-    bls _080D6914\n\
-    cmp r2, 0x1\n\
-    bls _080D6906\n\
-    subs r0, r5, r7\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-_080D68F2:\n\
-    adds r0, r6, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    mov r1, r9\n\
-    adds r0, r1, r3\n\
-    ldrb r0, [r0, 0x4]\n\
-    cmp r6, r0\n\
-    bcc _080D68D6\n\
-_080D6902:\n\
-    cmp r5, 0\n\
-    beq _080D6914\n\
-_080D6906:\n\
-    movs r0, 0\n\
-    b _080D6916\n\
-    .pool\n\
-_080D6914:\n\
-    movs r0, 0x1\n\
-_080D6916:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1");
-}
-#endif // NONMATCHING
 
 bool8 AddBagItem(u16 itemId, u16 count)
 {

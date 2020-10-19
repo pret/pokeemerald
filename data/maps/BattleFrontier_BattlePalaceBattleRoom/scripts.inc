@@ -1,3 +1,9 @@
+.set LOCALID_PLAYER, 1
+.set LOCALID_OPPONENT, 2
+.set LOCALID_ATTENDANT, 3
+.set LOCALID_DUSCLOPS, 4
+.set LOCALID_AZURILL, 5
+
 BattleFrontier_BattlePalaceBattleRoom_MapScripts:: @ 824F815
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePalaceBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceBattleRoom_OnFrame
@@ -5,8 +11,8 @@ BattleFrontier_BattlePalaceBattleRoom_MapScripts:: @ 824F815
 	.byte 0
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by object event 1, which has the gfx id VAR_OBJ_GFX_ID_0
-	@ The opponent is represented by object event 2, which has the gfx id VAR_OBJ_GFX_ID_1
+	@ The player is represented instead by LOCALID_PLAYER, which has the gfx id VAR_OBJ_GFX_ID_0
+	@ The opponent is represented by LOCALID_OPPONENT, which has the gfx id VAR_OBJ_GFX_ID_1
 
 BattleFrontier_BattlePalaceBattleRoom_OnTransition: @ 824F825
 	frontier_settrainers
@@ -37,24 +43,24 @@ BattleFrontier_BattlePalaceBattleRoom_OnFrame: @ 824F861
 	.2byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_EnterRoom:: @ 824F86B
-	showobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	showobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_BeginChallenge
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_PlayerReturnToChallenge
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_PlayerReturnToChallenge
 	waitmovement 0
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
 	setvar VAR_TEMP_2, 1
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponent
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_BeginChallenge:: @ 824F8B5
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_PlayerEnterRoom
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_PlayerEnterRoom
 	waitmovement 0
 BattleFrontier_BattlePalaceBattleRoom_EventScript_NextOpponentEnter:: @ 824F8BF
 	tower_setopponent
-	addobject 2
-	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_OpponentEnter
+	addobject LOCALID_OPPONENT
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattlePalaceBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	palace_getopponentintro
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -73,17 +79,17 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedOpponent:: @ 824F911
 	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon
-	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_OpponentExit
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattlePalaceBattleRoom_Movement_OpponentExit
 	waitmovement 0
-	removeobject 2
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
+	removeobject LOCALID_OPPONENT
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_LetMeRestoreYourMons, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponent:: @ 824F98A
@@ -153,8 +159,8 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_AskRetireChallenge:: @ 824FAE2
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceBattleRoom_EventScript_AskReadyForOpponent
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_ContinueChallenge:: @ 824FB14
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
 	closemessage
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_NextOpponentEnter
 
@@ -203,16 +209,16 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_BattleSpenser:: @ 824FC06
 	call BattleFrontier_EventScript_SetBrainObjectGfx
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_AnnounceArrivalOfSpenser, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
-	setobjectxyperm 2, 15, 1
-	addobject 2
-	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
-	setobjectxy 2, 13, 1
-	setobjectxyperm 2, 13, 1
-	applymovement 4, BattleFrontier_BattlePalaceBattleRoom_Movement_DusclopsEnter
-	applymovement 5, BattleFrontier_BattlePalaceBattleRoom_Movement_AzurillEnter
-	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_SpenserEnter
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceRight
+	setobjectxyperm LOCALID_OPPONENT, 15, 1
+	addobject LOCALID_OPPONENT
+	hideobjectat LOCALID_OPPONENT, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	setobjectxy LOCALID_OPPONENT, 13, 1
+	setobjectxyperm LOCALID_OPPONENT, 13, 1
+	applymovement LOCALID_DUSCLOPS, BattleFrontier_BattlePalaceBattleRoom_Movement_DusclopsEnter
+	applymovement LOCALID_AZURILL, BattleFrontier_BattlePalaceBattleRoom_Movement_AzurillEnter
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattlePalaceBattleRoom_Movement_SpenserEnter
 	waitmovement 0
 	switch VAR_TEMP_F
 	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePalaceBattleRoom_EventScript_IntroSpenserGold
@@ -236,18 +242,18 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserSilver:: @ 824F
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SpenserPostSilverBattle, MSGBOX_DEFAULT
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_LetsSeeFrontierPass, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattlePalaceBattleRoom_Text_ReceivedSpiritsSymbol
 	waitmessage
 	waitfanfare
 	frontier_givesymbol
-	applymovement 2, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_OPPONENT, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	applymovement 1, Common_Movement_WalkInPlaceFastestRight
-	applymovement 3, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SpenserAwaitNextTime, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon
@@ -271,18 +277,18 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_DefeatedSpenserGold:: @ 824FD8
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SpenserYourTeamIsAdmirable, MSGBOX_DEFAULT
-	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp
-	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceUp
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_HurryWithFrontierPass, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattlePalaceBattleRoom_Text_SpiritsSymbolTookGoldenShine
 	waitmessage
 	waitfanfare
 	frontier_givesymbol
-	applymovement 2, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_OPPONENT, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
-	applymovement 1, Common_Movement_WalkInPlaceFastestRight
-	applymovement 3, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_SpenserComeSeeMeAgain, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobbyWon
@@ -306,13 +312,13 @@ BattleFrontier_BattlePalaceBattleRoom_OnWarp: @ 824FE34
 	.2byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_SetUpRoomObjects:: @ 824FE3E
-	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
+	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfx
 	setvar VAR_TEMP_1, 1
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_SetInvisible
-	removeobject 2
-	applymovement 4, BattleFrontier_BattlePalaceBattleRoom_Movement_SetInvisible
-	applymovement 5, BattleFrontier_BattlePalaceBattleRoom_Movement_SetInvisible
+	removeobject LOCALID_OPPONENT
+	applymovement LOCALID_DUSCLOPS, BattleFrontier_BattlePalaceBattleRoom_Movement_SetInvisible
+	applymovement LOCALID_AZURILL, BattleFrontier_BattlePalaceBattleRoom_Movement_SetInvisible
 	end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_ReadyFor2ndOpponent:: @ 824FE66

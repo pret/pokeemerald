@@ -635,8 +635,6 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
 
 static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
 {
-    u8 pos;
-    u16 i;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -849,7 +847,7 @@ void AnimTask_MetallicShine(u8 taskId)
 
     if (IsContest())
     {
-        species = gContestResources->field_18->species;
+        species = gContestResources->moveAnim->species;
     }
     else
     {

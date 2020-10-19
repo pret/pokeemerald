@@ -27,7 +27,6 @@
 #include "constants/items.h"
 #include "constants/pokemon.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
@@ -1297,13 +1296,13 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
 // Functionally unused
 static void Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         SwitchTaskToFollowupFunc(taskId);
 }
 
 static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         gApprenticeFunc = (void*)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
         gApprenticeFunc();

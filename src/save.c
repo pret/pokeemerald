@@ -13,7 +13,7 @@
 #include "link.h"
 #include "constants/game_stat.h"
 
-static u16 CalculateChecksum(void *data, u16 size);
+static u16 CalculateChecksum(const void *data, u16 size);
 static bool8 DoReadFlashWholeSection(u8 sector, struct SaveSection *section);
 static u8 GetSaveValidStatus(const struct SaveSectionLocation *location);
 static u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location);
@@ -621,7 +621,7 @@ static bool8 DoReadFlashWholeSection(u8 sector, struct SaveSection *section)
     return TRUE;
 }
 
-static u16 CalculateChecksum(void *data, u16 size)
+static u16 CalculateChecksum(const void *data, u16 size)
 {
     u16 i;
     u32 checksum = 0;
@@ -648,12 +648,10 @@ static void UpdateSaveAddresses(void)
         gRamSaveSectionLocations[i].size = sSaveSectionOffsets[i].size;
     }
 
-    for (i = SECTOR_ID_PKMN_STORAGE_START; i <= SECTOR_ID_PKMN_STORAGE_END; i++)
+    for (; i <= SECTOR_ID_PKMN_STORAGE_END; i++) //i = SECTOR_ID_PKMN_STORAGE_START; in the initialization clause does not match
     {
         gRamSaveSectionLocations[i].data = (void*)(gPokemonStoragePtr) + sSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = sSaveSectionOffsets[i].size;
-
-        i++;i--; // needed to match
     }
 }
 
@@ -912,7 +910,7 @@ void Task_LinkSave(u8 taskId)
         tState = 1;
         break;
     case 1:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState = 2;
         break;
     case 2:
@@ -949,7 +947,7 @@ void Task_LinkSave(u8 taskId)
     case 7:
         if (!tPartialSave)
             ClearContinueGameWarpStatus2();
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState = 8;
         break;
     case 8:
@@ -960,7 +958,7 @@ void Task_LinkSave(u8 taskId)
         }
         break;
     case 9:
-        sub_800ADF8();
+        SetLinkStandbyCallback();
         tState = 10;
         break;
     case 10:

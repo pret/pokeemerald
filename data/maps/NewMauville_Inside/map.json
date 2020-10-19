@@ -2,7 +2,7 @@
   "id": "MAP_NEW_MAUVILLE_INSIDE",
   "name": "NewMauville_Inside",
   "layout": "LAYOUT_NEW_MAUVILLE_INSIDE",
-  "music": "MUS_M_DUNGON",
+  "music": "MUS_MT_PYRE",
   "region_map_section": "MAPSEC_NEW_MAUVILLE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NewMauville_Inside_EventScript_ItemUltraRope",
+      "script": "NewMauville_Inside_EventScript_ItemUltraBall",
       "flag": "FLAG_ITEM_NEW_MAUVILLE_ULTRA_BALL"
     },
     {

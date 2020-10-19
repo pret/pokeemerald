@@ -380,7 +380,7 @@ static void Task_ResetRtc_1(u8 taskId)
     u8 selection = data[2];
     const struct ResetRtcStruct *selectionInfo = &sUnknown_08510428[selection - 1];
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_ResetRtc_2;
         data[1] = 0;
@@ -389,7 +389,7 @@ static void Task_ResetRtc_1(u8 taskId)
         return;
     }
 
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (selectionInfo->right)
         {
@@ -399,7 +399,7 @@ static void Task_ResetRtc_1(u8 taskId)
         }
     }
 
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (selectionInfo->left)
         {
@@ -411,7 +411,7 @@ static void Task_ResetRtc_1(u8 taskId)
 
     if (selection == 5)
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gLocalTime.days = data[3];
             gLocalTime.hours = data[4];
@@ -423,7 +423,7 @@ static void Task_ResetRtc_1(u8 taskId)
             data[2] = 6;
         }
     }
-    else if (MoveTimeUpDown(&data[selectionInfo->dataIndex], selectionInfo->minVal, selectionInfo->maxVal, gMain.newAndRepeatedKeys & (DPAD_UP | DPAD_DOWN)))
+    else if (MoveTimeUpDown(&data[selectionInfo->dataIndex], selectionInfo->minVal, selectionInfo->maxVal, JOY_REPEAT(DPAD_UP | DPAD_DOWN)))
     {
         PlaySE(SE_SELECT);
         PrintTime(data[8], 0, 1, data[3], data[4], data[5], data[6]);
@@ -467,7 +467,7 @@ void CB2_InitResetRtcScreen(void)
 
 static void sub_809F048(void)
 {
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     ScheduleBgCopyTilemapToVram(0);
@@ -483,7 +483,7 @@ static void CB2_ResetRtcScreen(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
 }
 
@@ -532,12 +532,12 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
         ScheduleBgCopyTilemapToVram(0);
         data[0]++;
     case 1:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             DestroyTask(taskId);
             DoSoftReset();
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             DestroyTask(taskId);
@@ -611,7 +611,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         if (TrySavingData(SAVE_NORMAL) == SAVE_STATUS_OK)
         {
             ShowMessage(gText_SaveCompleted);
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
         }
         else
         {
@@ -620,7 +620,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         }
         data[0] = 5;
     case 5:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 0x10, RGB_WHITEALPHA);
             data[0] = 6;
