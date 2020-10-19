@@ -9528,11 +9528,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .split = SPLIT_PHYSICAL,
     },
 
-    [MOVE_PIKA_POW] =
+    [MOVE_PIKA_PAPOW] =
     {
         .effect = EFFECT_RETURN,
         .power = 1,
-        .type = TYPE_FLYING,
+        .type = TYPE_ELECTRIC,
         .accuracy = 0,
         .pp = 20,
         .secondaryEffectChance = 0,

@@ -695,7 +695,7 @@ gBattleAnims_Moves::
     .4byte Move_ZIPPY_ZAP
     .4byte Move_SPLISHY_SPLASH
     .4byte Move_FLOATY_FALL
-    .4byte Move_PIKA_POW
+    .4byte Move_PIKA_PAPOW
     .4byte Move_BOUNCY_BUBBLE
     .4byte Move_BUZZY_BUZZ
     .4byte Move_SIZZLY_SLIDE
@@ -13218,7 +13218,7 @@ Move_SPLISHY_SPLASH::
 Move_FLOATY_FALL::
     end @to do:
 
-Move_PIKA_POW::
+Move_PIKA_PAPOW::
     end @to do:
 
 Move_BOUNCY_BUBBLE::

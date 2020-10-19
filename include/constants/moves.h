@@ -696,7 +696,7 @@
 #define MOVE_ZIPPY_ZAP          676
 #define MOVE_SPLISHY_SPLASH     677
 #define MOVE_FLOATY_FALL        678
-#define MOVE_PIKA_POW           679
+#define MOVE_PIKA_PAPOW         679
 #define MOVE_BOUNCY_BUBBLE      680
 #define MOVE_BUZZY_BUZZ         681
 #define MOVE_SIZZLY_SLIDE       682

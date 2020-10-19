@@ -2633,7 +2633,7 @@ static const u8 sFLOATY_FALLDescription[] = _(
     "Floats in the air to fall as\n"
     "an attack. May cause flinch.");
 
-static const u8 sPIKA_POWDescription[] = _(
+static const u8 sPIKA_PAPOWDescription[] = _(
     "Pikachu's love increases its\n"
     "power. It never misses.");
 
@@ -3590,7 +3590,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_ZIPPY_ZAP - 1] = sZIPPY_ZAPDescription,
     [MOVE_SPLISHY_SPLASH - 1] = sSPLISHY_SPLASHDescription,
     [MOVE_FLOATY_FALL - 1] = sFLOATY_FALLDescription,
-    [MOVE_PIKA_POW - 1] = sPIKA_POWDescription,
+    [MOVE_PIKA_PAPOW - 1] = sPIKA_PAPOWDescription,
     [MOVE_BOUNCY_BUBBLE - 1] = sBOUNCY_BUBBLEDescription,
     [MOVE_BUZZY_BUZZ - 1] = sBUZZY_BUZZDescription,
     [MOVE_SIZZLY_SLIDE - 1] = sSIZZLY_SLIDEDescription,
