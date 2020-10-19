@@ -2302,3 +2302,23 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
+
+bool8 ScrCmd_setdoublewildbattle(struct ScriptContext *ctx)
+{
+    u16 species1 = ScriptReadHalfword(ctx);
+    u8 level1 = ScriptReadByte(ctx);
+    u16 item1 = ScriptReadHalfword(ctx);
+    u16 species2 = ScriptReadHalfword(ctx);
+    u8 level2 = ScriptReadByte(ctx);
+    u16 item2 = ScriptReadHalfword(ctx);
+
+    CreateScriptedDoubleWildMon(species1, level1, item1, species2, level2, item2);
+    return FALSE;
+}
+
+bool8 ScrCmd_dodoublewildbattle(struct ScriptContext *ctx)
+{
+    BattleSetup_StartScriptedDoubleWildBattle();
+    ScriptContext1_Stop();
+    return TRUE;
+}
