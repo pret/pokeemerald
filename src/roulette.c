@@ -454,7 +454,7 @@ static const struct BgTemplate sBgTemplates[] =
 };
 static const struct WindowTemplate sWindowTemplate =
 {
-      .bg = 0;
+      .bg = 0,
       .tilemapLeft = 3,
       .tilemapTop = 15,
       .width = 24,
