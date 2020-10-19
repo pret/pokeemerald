@@ -1930,16 +1930,24 @@ static void AnimWaterPulseRing_Step(struct Sprite *sprite)
     sprite->data[0]++;
 }
 
-#ifdef NONMATCHING
 static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
 {
-    s16 something = sprite->data[0] / 2;
-    s16 combinedX = sprite->pos1.x + sprite->pos2.x;
-    s16 combinedY = sprite->pos1.y + sprite->pos2.y;
-    s16 randomSomethingY = yDiff + (Random2() % 10) - 5;
-    s16 randomSomethingX = -xDiff + (Random2() % 10) - 5;
+    s16 combinedX;
+    s16 combinedY;
     s16 i;
+    s16 something;
+    s16 unusedVar = 1; //unusedVar is needed to match
+    s16 randomSomethingY;
+    s16 randomSomethingX;
     u8 spriteId;
+    
+    something = sprite->data[0] / 2;
+    combinedX = sprite->pos1.x + sprite->pos2.x;
+    combinedY = sprite->pos1.y + sprite->pos2.y;
+    if (yDiff < 0)
+        unusedVar *= -1; //Needed to match
+    randomSomethingY = yDiff + (Random2() % 10) - 5;
+    randomSomethingX = -xDiff + (Random2() % 10) - 5;
 
     for (i = 0; i <= 0; i++)
     {
@@ -1964,182 +1972,3 @@ static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yD
             gSprites[spriteId].data[2] = randomSomethingX;
     }
 }
-#else
-NAKED
-static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x18\n\
-	adds r4, r1, 0\n\
-	adds r5, r2, 0\n\
-	movs r2, 0x2E\n\
-	ldrsh r1, [r0, r2]\n\
-	lsrs r2, r1, 31\n\
-	adds r1, r2\n\
-	lsls r1, 15\n\
-	lsrs r1, 16\n\
-	str r1, [sp]\n\
-	ldrh r1, [r0, 0x24]\n\
-	ldrh r3, [r0, 0x20]\n\
-	adds r1, r3\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	mov r8, r1\n\
-	ldrh r1, [r0, 0x26]\n\
-	ldrh r0, [r0, 0x22]\n\
-	adds r1, r0\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	mov r10, r1\n\
-	bl Random2\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0xA\n\
-	bl __umodsi3\n\
-	adds r0, r5, r0\n\
-	subs r0, 0x5\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r9, r0\n\
-	bl Random2\n\
-	negs r4, r4\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0xA\n\
-	bl __umodsi3\n\
-	adds r4, r0\n\
-	subs r4, 0x5\n\
-	lsls r4, 16\n\
-	lsrs r7, r4, 16\n\
-	movs r6, 0\n\
-	mov r0, r8\n\
-	lsls r0, 16\n\
-	mov r8, r0\n\
-	mov r1, r10\n\
-	lsls r1, 16\n\
-	str r1, [sp, 0xC]\n\
-	ldr r2, [sp]\n\
-	lsls r2, 16\n\
-	str r2, [sp, 0x10]\n\
-	asrs r1, 16\n\
-	lsls r0, r7, 16\n\
-	asrs r5, r0, 16\n\
-	str r0, [sp, 0x14]\n\
-	negs r3, r5\n\
-	str r3, [sp, 0x4]\n\
-	asrs r0, r2, 16\n\
-	adds r1, r0\n\
-	lsls r1, 16\n\
-	mov r10, r1\n\
-_08108DE2:\n\
-	ldr r0, =gWaterPulseRingBubbleSpriteTemplate\n\
-	mov r2, r8\n\
-	asrs r1, r2, 16\n\
-	mov r3, r10\n\
-	asrs r2, r3, 16\n\
-	movs r3, 0x82\n\
-	bl CreateSprite\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	ldr r1, =gSprites\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r4, r0, r1\n\
-	movs r0, 0x14\n\
-	strh r0, [r4, 0x2E]\n\
-	mov r0, r9\n\
-	strh r0, [r4, 0x30]\n\
-	ldr r0, =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSpriteSubpriority\n\
-	subs r0, 0x1\n\
-	adds r1, r4, 0\n\
-	adds r1, 0x43\n\
-	strb r0, [r1]\n\
-	cmp r5, 0\n\
-	bge _08108E30\n\
-	mov r1, sp\n\
-	ldrh r1, [r1, 0x4]\n\
-	strh r1, [r4, 0x32]\n\
-	b _08108E32\n\
-	.pool\n\
-_08108E30:\n\
-	strh r7, [r4, 0x32]\n\
-_08108E32:\n\
-	lsls r0, r6, 16\n\
-	movs r2, 0x80\n\
-	lsls r2, 9\n\
-	adds r0, r2\n\
-	lsrs r6, r0, 16\n\
-	cmp r0, 0\n\
-	ble _08108DE2\n\
-	movs r6, 0\n\
-	ldr r3, [sp, 0xC]\n\
-	asrs r1, r3, 16\n\
-	ldr r0, [sp, 0x14]\n\
-	asrs r5, r0, 16\n\
-	negs r2, r5\n\
-	str r2, [sp, 0x8]\n\
-	ldr r3, [sp, 0x10]\n\
-	asrs r0, r3, 16\n\
-	subs r1, r0\n\
-	lsls r1, 16\n\
-	mov r10, r1\n\
-_08108E58:\n\
-	ldr r0, =gWaterPulseRingBubbleSpriteTemplate\n\
-	mov r2, r8\n\
-	asrs r1, r2, 16\n\
-	mov r3, r10\n\
-	asrs r2, r3, 16\n\
-	movs r3, 0x82\n\
-	bl CreateSprite\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	ldr r1, =gSprites\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r4, r0, r1\n\
-	movs r0, 0x14\n\
-	strh r0, [r4, 0x2E]\n\
-	mov r0, r9\n\
-	strh r0, [r4, 0x30]\n\
-	ldr r0, =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSpriteSubpriority\n\
-	subs r0, 0x1\n\
-	adds r1, r4, 0\n\
-	adds r1, 0x43\n\
-	strb r0, [r1]\n\
-	cmp r5, 0\n\
-	ble _08108EA8\n\
-	mov r1, sp\n\
-	ldrh r1, [r1, 0x8]\n\
-	strh r1, [r4, 0x32]\n\
-	b _08108EAA\n\
-	.pool\n\
-_08108EA8:\n\
-	strh r7, [r4, 0x32]\n\
-_08108EAA:\n\
-	lsls r0, r6, 16\n\
-	movs r2, 0x80\n\
-	lsls r2, 9\n\
-	adds r0, r2\n\
-	lsrs r6, r0, 16\n\
-	cmp r0, 0\n\
-	ble _08108E58\n\
-	add sp, 0x18\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n");
-}
-#endif
