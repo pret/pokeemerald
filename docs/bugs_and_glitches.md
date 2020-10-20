@@ -89,9 +89,9 @@ Then edit `BagMenu_MoveCursorCallback` in [src/item_menu.c](https://github.com/p
 ```diff
 	...
 {
--	RemoveBagItemIconSprite(1 ^ gBagMenu->unk81B_1);
-+	HideBagItemIconSprite(gBagMenu->unk81B_1 ^ 1);
-+	RemoveBagItemIconSprite(gBagMenu->unk81B_1);
-	if (a != -2)
+-	RemoveBagItemIconSprite(gBagMenu->itemIconSlot ^ 1);
++	HideBagItemIconSprite(gBagMenu->itemIconSlot ^ 1);
++	RemoveBagItemIconSprite(gBagMenu->itemIconSlot ^ 1);
+	if (itemIndex != LIST_CANCEL)
 	...
 ```
