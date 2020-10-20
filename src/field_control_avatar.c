@@ -3,6 +3,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "debug.h"
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -130,6 +131,35 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
+
+
+    //DEBUG
+    if (heldKeys & R_BUTTON) 
+    {
+        if(input->pressedSelectButton)
+        {
+            input->input_field_1_0 = TRUE;
+            input->pressedSelectButton = FALSE;
+        }else if(input->pressedStartButton) 
+        {
+            input->input_field_1_2 = TRUE;
+            input->pressedStartButton = FALSE;
+        }
+    }
+    if (heldKeys & L_BUTTON) 
+    {
+        if(input->pressedSelectButton)
+        {
+            input->input_field_1_1 = TRUE;
+            input->pressedSelectButton = FALSE;
+        }else if(input->pressedStartButton) 
+        {
+            input->input_field_1_3 = TRUE;
+            input->pressedStartButton = FALSE;
+        }
+    }
+    //
+
 }
 
 int ProcessPlayerFieldInput(struct FieldInput *input)
@@ -188,6 +218,15 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
+
+#if DEBUG
+    if (input->input_field_1_2)
+    {
+        PlaySE(SE_WIN_OPEN);
+        Debug_ShowMainMenu();
+        return TRUE;
+    }
+#endif
 
     return FALSE;
 }
@@ -668,6 +707,9 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
+    if (FlagGet(FLAG_SYS_NO_ENCOUNTER)) //DEBUG
+        return FALSE;//
+
     if (sWildEncounterImmunitySteps < 4)
     {
         sWildEncounterImmunitySteps++;
@@ -683,7 +725,7 @@ static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
     }
 
     sPreviousPlayerMetatileBehavior = metatileBehavior;
-    return FALSE;
+    return FALSE;   
 }
 
 static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8 direction)
