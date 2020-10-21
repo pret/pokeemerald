@@ -462,7 +462,7 @@ u8 GetLastTextColor(u8 colorType)
     }
 }
 
-inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *ptr, s32 width, s32 height)                                           //
+static inline void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *ptr, s32 width, s32 height)                                           //
 {
     u32 xAdd, yAdd, r5, bits, toOrr, dummyX;
     u8 *dst;
