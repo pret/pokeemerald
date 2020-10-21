@@ -797,11 +797,15 @@ static void AnimSmallBubblePair_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-#ifdef NONMATCHING
 void AnimTask_CreateSurfWave(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 taskId2;
+    u16 *x;
+    u16 *y;
+
+    x = &gBattle_BG1_X;
+    y = &gBattle_BG1_Y;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
@@ -832,30 +836,30 @@ void AnimTask_CreateSurfWave(u8 taskId)
     gTasks[taskId2].data[2] = 0x1000;
     if (IsContest())
     {
-        gBattle_BG1_X = -80;
-        gBattle_BG1_Y = -48;
+        *x = -80;
+        *y = -48;
         gTasks[taskId].data[0] = 2;
         gTasks[taskId].data[1] = 1;
         gTasks[taskId2].data[3] = 0;
     }
     else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
     {
-        gBattle_BG1_X = -224;
-        gBattle_BG1_Y = 256;
+        *x = -224;
+        *y = 256;
         gTasks[taskId].data[0] = 2;
         gTasks[taskId].data[1] = -1;
         gTasks[taskId2].data[3] = 1;
     }
     else
     {
-        gBattle_BG1_X = 0;
-        gBattle_BG1_Y = -48;
+        *x = 0;
+        *y = -48;
         gTasks[taskId].data[0] = -2;
         gTasks[taskId].data[1] = 1;
         gTasks[taskId2].data[3] = 0;
     }
-    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
-    SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
+    SetGpuReg(REG_OFFSET_BG1HOFS, *x);
+    SetGpuReg(REG_OFFSET_BG1VOFS, *y);
     if (gTasks[taskId2].data[3] == 0)
     {
         gTasks[taskId2].data[4] = 48;
@@ -869,235 +873,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     gTasks[taskId].data[6] = 1;
     gTasks[taskId].func = AnimTask_CreateSurfWave_Step1;
 }
-#else
-NAKED
-void AnimTask_CreateSurfWave(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x10\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r10, r0\n\
-	ldr r1, =0x00003f42\n\
-	movs r0, 0x50\n\
-	bl SetGpuReg\n\
-	movs r1, 0x80\n\
-	lsls r1, 5\n\
-	movs r0, 0x52\n\
-	bl SetGpuReg\n\
-	movs r0, 0x1\n\
-	movs r1, 0x4\n\
-	movs r2, 0x1\n\
-	bl SetAnimBgAttribute\n\
-	movs r0, 0x1\n\
-	movs r1, 0\n\
-	movs r2, 0x1\n\
-	bl SetAnimBgAttribute\n\
-	mov r0, sp\n\
-	bl sub_80A6B30\n\
-	bl IsContest\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _081079E0\n\
-	movs r0, 0x1\n\
-	movs r1, 0x3\n\
-	movs r2, 0x1\n\
-	bl SetAnimBgAttribute\n\
-	ldr r0, =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _081079D0\n\
-	mov r0, sp\n\
-	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gBattleAnimBgTilemap_SurfOpponent\n\
-	bl AnimLoadCompressedBgTilemap\n\
-	b _081079EA\n\
-	.pool\n\
-_081079D0:\n\
-	mov r0, sp\n\
-	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gBattleAnimBgTilemap_SurfPlayer\n\
-	bl AnimLoadCompressedBgTilemap\n\
-	b _081079EA\n\
-	.pool\n\
-_081079E0:\n\
-	ldr r1, =gBattleAnimBgTilemap_SurfContest\n\
-	mov r0, sp\n\
-	movs r2, 0x1\n\
-	bl AnimLoadCompressedBgTilemapHandleContest\n\
-_081079EA:\n\
-	mov r0, sp\n\
-	ldrb r0, [r0, 0x9]\n\
-	ldr r1, =gBattleAnimBgImage_Surf\n\
-	mov r2, sp\n\
-	ldrh r2, [r2, 0xA]\n\
-	bl AnimLoadCompressedBgGfx\n\
-	ldr r0, =gBattleAnimArgs\n\
-	movs r1, 0\n\
-	ldrsh r0, [r0, r1]\n\
-	cmp r0, 0\n\
-	bne _08107A24\n\
-	ldr r0, =gBattleAnimBgPalette_Surf\n\
-	mov r1, sp\n\
-	ldrb r1, [r1, 0x8]\n\
-	lsls r1, 4\n\
-	movs r2, 0x20\n\
-	bl LoadCompressedPalette\n\
-	b _08107A32\n\
-	.pool\n\
-_08107A24:\n\
-	ldr r0, =gBattleAnimBackgroundImageMuddyWater_Pal\n\
-	mov r1, sp\n\
-	ldrb r1, [r1, 0x8]\n\
-	lsls r1, 4\n\
-	movs r2, 0x20\n\
-	bl LoadCompressedPalette\n\
-_08107A32:\n\
-	ldr r0, =AnimTask_SurfWaveScanlineEffect\n\
-	ldr r4, =gTasks\n\
-	mov r2, r10\n\
-	lsls r5, r2, 2\n\
-	adds r1, r5, r2\n\
-	lsls r1, 3\n\
-	adds r6, r1, r4\n\
-	ldrb r1, [r6, 0x7]\n\
-	adds r1, 0x1\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	bl CreateTask\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	movs r0, 0\n\
-	mov r9, r0\n\
-	mov r1, r8\n\
-	strh r1, [r6, 0x26]\n\
-	mov r2, r8\n\
-	lsls r0, r2, 2\n\
-	add r0, r8\n\
-	lsls r0, 3\n\
-	adds r7, r0, r4\n\
-	mov r0, r9\n\
-	strh r0, [r7, 0x8]\n\
-	movs r0, 0x80\n\
-	lsls r0, 5\n\
-	strh r0, [r7, 0xA]\n\
-	strh r0, [r7, 0xC]\n\
-	bl IsContest\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0\n\
-	beq _08107AB4\n\
-	ldr r1, =0x0000ffb0\n\
-	adds r0, r1, 0\n\
-	ldr r2, =gBattle_BG1_X\n\
-	strh r0, [r2]\n\
-	adds r1, 0x20\n\
-	adds r0, r1, 0\n\
-	ldr r2, =gBattle_BG1_Y\n\
-	strh r0, [r2]\n\
-	movs r0, 0x2\n\
-	strh r0, [r6, 0x8]\n\
-	movs r0, 0x1\n\
-	strh r0, [r6, 0xA]\n\
-	mov r0, r9\n\
-	strh r0, [r7, 0xE]\n\
-	b _08107B0E\n\
-	.pool\n\
-_08107AB4:\n\
-	ldr r0, =gBattleAnimAttacker\n\
-	ldrb r0, [r0]\n\
-	bl GetBattlerSide\n\
-	lsls r0, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0x1\n\
-	bne _08107AF8\n\
-	ldr r2, =0x0000ff20\n\
-	adds r0, r2, 0\n\
-	ldr r2, =gBattle_BG1_X\n\
-	strh r0, [r2]\n\
-	movs r2, 0x80\n\
-	lsls r2, 1\n\
-	adds r0, r2, 0\n\
-	ldr r2, =gBattle_BG1_Y\n\
-	strh r0, [r2]\n\
-	movs r0, 0x2\n\
-	strh r0, [r6, 0x8]\n\
-	ldr r0, =0x0000ffff\n\
-	strh r0, [r6, 0xA]\n\
-	strh r1, [r7, 0xE]\n\
-	b _08107B0E\n\
-	.pool\n\
-_08107AF8:\n\
-	ldr r0, =gBattle_BG1_X\n\
-	strh r4, [r0]\n\
-	ldr r1, =0x0000ffd0\n\
-	adds r0, r1, 0\n\
-	ldr r2, =gBattle_BG1_Y\n\
-	strh r0, [r2]\n\
-	ldr r0, =0x0000fffe\n\
-	strh r0, [r6, 0x8]\n\
-	movs r0, 0x1\n\
-	strh r0, [r6, 0xA]\n\
-	strh r4, [r7, 0xE]\n\
-_08107B0E:\n\
-	ldr r0, =gBattle_BG1_X\n\
-	ldrh r1, [r0]\n\
-	movs r0, 0x14\n\
-	bl SetGpuReg\n\
-	ldr r2, =gBattle_BG1_Y\n\
-	ldrh r1, [r2]\n\
-	movs r0, 0x16\n\
-	bl SetGpuReg\n\
-	ldr r1, =gTasks\n\
-	mov r2, r8\n\
-	lsls r0, r2, 2\n\
-	add r0, r8\n\
-	lsls r0, 3\n\
-	adds r1, r0, r1\n\
-	movs r2, 0xE\n\
-	ldrsh r0, [r1, r2]\n\
-	cmp r0, 0\n\
-	bne _08107B54\n\
-	movs r0, 0x30\n\
-	strh r0, [r1, 0x10]\n\
-	movs r0, 0x70\n\
-	b _08107B58\n\
-	.pool\n\
-_08107B54:\n\
-	movs r0, 0\n\
-	strh r0, [r1, 0x10]\n\
-_08107B58:\n\
-	strh r0, [r1, 0x12]\n\
-	ldr r1, =gTasks\n\
-	mov r2, r10\n\
-	adds r0, r5, r2\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	movs r1, 0x1\n\
-	strh r1, [r0, 0x14]\n\
-	ldr r1, =AnimTask_CreateSurfWave_Step1\n\
-	str r1, [r0]\n\
-	add sp, 0x10\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n");
-}
-#endif
 
-#ifdef NONMATCHING
 static void AnimTask_CreateSurfWave_Step1(u8 taskId)
 {
     struct BattleAnimBgData animBg;
@@ -1105,7 +881,6 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
     u16 rgbBuffer;
     u16 *BGptrX = &gBattle_BG1_X;
     u16 *BGptrY = &gBattle_BG1_Y;
-    s16 unkUse;
     u32 palOffset;
     u16 palNum;
 
@@ -1118,9 +893,7 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
         rgbBuffer = gPlttBufferFaded[animBg.paletteId * 16 + 7];
         for (i = 6; i != 0; i--)
         {
-            palNum = animBg.paletteId * 16;
-            palOffset = 1 + i;
-            gPlttBufferFaded[palNum + palOffset] = gPlttBufferFaded[palNum + palOffset - 1];
+            gPlttBufferFaded[animBg.paletteId * 16 + 1 + i] = gPlttBufferFaded[animBg.paletteId * 16 + 1 + i - 1]; // 1 + i - 1 is needed to match for some bizarre reason
         }
         gPlttBufferFaded[animBg.paletteId * 16 + 1] = rgbBuffer;
         gTasks[taskId].data[5] = 0;
@@ -1128,16 +901,15 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
     if (++gTasks[taskId].data[6] > 1)
     {
         gTasks[taskId].data[6] = 0;
-        unkUse = ++gTasks[taskId].data[3];
-        if (unkUse <= 13)
+        if (++gTasks[taskId].data[3] <= 13)
         {
-            gTasks[gTasks[taskId].data[15]].data[1] = unkUse | ((16 - unkUse) * 256);
+            gTasks[gTasks[taskId].data[15]].data[1] = (s16)((gTasks[taskId].data[3]) | ((16 - gTasks[taskId].data[3]) << 8));
             gTasks[taskId].data[4]++;
         }
         if (gTasks[taskId].data[3] > 54)
         {
-            unkUse = --gTasks[taskId].data[4];
-            gTasks[gTasks[taskId].data[15]].data[1] = unkUse | ((16 - unkUse) * 256);
+            gTasks[taskId].data[4]--;
+            gTasks[gTasks[taskId].data[15]].data[1] = (s16)((gTasks[taskId].data[4]) | ((16 - gTasks[taskId].data[4]) << 8));
         }
     }
     if (!(gTasks[gTasks[taskId].data[15]].data[1] & 0x1F))
@@ -1146,167 +918,6 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
         gTasks[taskId].func = AnimTask_CreateSurfWave_Step2;
     }
 }
-#else
-NAKED
-static void AnimTask_CreateSurfWave_Step1(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	sub sp, 0x10\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	ldr r1, =gBattle_BG1_X\n\
-	ldr r2, =gBattle_BG1_Y\n\
-	ldr r0, =gTasks\n\
-	lsls r4, r5, 2\n\
-	adds r4, r5\n\
-	lsls r4, 3\n\
-	adds r4, r0\n\
-	ldrh r0, [r4, 0x8]\n\
-	ldrh r3, [r1]\n\
-	adds r0, r3\n\
-	strh r0, [r1]\n\
-	ldrh r0, [r4, 0xA]\n\
-	ldrh r1, [r2]\n\
-	adds r0, r1\n\
-	strh r0, [r2]\n\
-	mov r0, sp\n\
-	bl sub_80A6B30\n\
-	ldrh r0, [r4, 0xA]\n\
-	ldrh r3, [r4, 0xC]\n\
-	adds r0, r3\n\
-	strh r0, [r4, 0xC]\n\
-	ldrh r0, [r4, 0x12]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x12]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x4\n\
-	bne _08107C18\n\
-	ldr r1, =gPlttBufferFaded\n\
-	mov r0, sp\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 4\n\
-	adds r0, 0x7\n\
-	lsls r0, 1\n\
-	adds r0, r1\n\
-	ldrh r6, [r0]\n\
-	movs r2, 0x6\n\
-	adds r7, r1, 0\n\
-	adds r3, r7, 0\n\
-	mov r4, sp\n\
-_08107BDE:\n\
-	ldrb r0, [r4, 0x8]\n\
-	lsls r0, 4\n\
-	adds r1, r2, 0x1\n\
-	adds r0, r1\n\
-	lsls r1, r0, 1\n\
-	adds r1, r3\n\
-	subs r0, 0x1\n\
-	lsls r0, 1\n\
-	adds r0, r3\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	subs r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	cmp r2, 0\n\
-	bne _08107BDE\n\
-	mov r0, sp\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 4\n\
-	adds r0, 0x1\n\
-	lsls r0, 1\n\
-	adds r0, r7\n\
-	strh r6, [r0]\n\
-	ldr r1, =gTasks\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	strh r2, [r0, 0x12]\n\
-_08107C18:\n\
-	ldr r1, =gTasks\n\
-	lsls r2, r5, 2\n\
-	adds r0, r2, r5\n\
-	lsls r0, 3\n\
-	adds r3, r0, r1\n\
-	ldrh r0, [r3, 0x14]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0x14]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	adds r4, r1, 0\n\
-	adds r6, r2, 0\n\
-	cmp r0, 0x1\n\
-	ble _08107C86\n\
-	movs r0, 0\n\
-	strh r0, [r3, 0x14]\n\
-	ldrh r0, [r3, 0xE]\n\
-	adds r2, r0, 0x1\n\
-	strh r2, [r3, 0xE]\n\
-	lsls r0, r2, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0xD\n\
-	bgt _08107C62\n\
-	movs r1, 0x26\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r1, r0, 2\n\
-	adds r1, r0\n\
-	lsls r1, 3\n\
-	adds r1, r4\n\
-	movs r0, 0x10\n\
-	subs r0, r2\n\
-	lsls r0, 8\n\
-	orrs r2, r0\n\
-	strh r2, [r1, 0xA]\n\
-	ldrh r0, [r3, 0x10]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0x10]\n\
-_08107C62:\n\
-	movs r1, 0xE\n\
-	ldrsh r0, [r3, r1]\n\
-	cmp r0, 0x36\n\
-	ble _08107C86\n\
-	ldrh r2, [r3, 0x10]\n\
-	subs r2, 0x1\n\
-	strh r2, [r3, 0x10]\n\
-	movs r1, 0x26\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r1, r0, 2\n\
-	adds r1, r0\n\
-	lsls r1, 3\n\
-	adds r1, r4\n\
-	movs r0, 0x10\n\
-	subs r0, r2\n\
-	lsls r0, 8\n\
-	orrs r2, r0\n\
-	strh r2, [r1, 0xA]\n\
-_08107C86:\n\
-	adds r0, r6, r5\n\
-	lsls r0, 3\n\
-	adds r2, r0, r4\n\
-	movs r3, 0x26\n\
-	ldrsh r1, [r2, r3]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r4\n\
-	ldrh r0, [r0, 0xA]\n\
-	movs r3, 0x1F\n\
-	ands r3, r0\n\
-	cmp r3, 0\n\
-	bne _08107CA8\n\
-	strh r3, [r2, 0x8]\n\
-	ldr r0, =AnimTask_CreateSurfWave_Step2\n\
-	str r0, [r2]\n\
-_08107CA8:\n\
-	add sp, 0x10\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n");
-}
-#endif
 
 static void AnimTask_CreateSurfWave_Step2(u8 taskId)
 {
