@@ -7686,7 +7686,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId)
     return FALSE;
 }
 
-static bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
+bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
 {
     if (B_BADGE_BOOST != GEN_3)
         return FALSE;
