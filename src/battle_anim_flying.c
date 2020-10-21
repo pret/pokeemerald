@@ -570,7 +570,7 @@ struct FeatherDanceData
 static void AnimFallingFeather(struct Sprite *sprite)
 {
     u8 battler, matrixNum, sinIndex;
-    s16 spriteCoord, sinVal;
+    s16 spriteCoord;
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
 
@@ -633,22 +633,11 @@ static void AnimFallingFeather(struct Sprite *sprite)
     matrixNum = sprite->oam.matrixNum;
 
     sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
-    sinVal = gSineTable[sinIndex];
+    spriteCoord = gSineTable[sinIndex];
 
     gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
-    // The comparison below is completely pointless. 'sprite' is sure to be a valid pointer and
-    // both the 'if' and 'else' parts are exactly the same.
-    // The only reason for this is making sure the compiler generates the exact ASM.
-    if (sprite)
-    {
-        gOamMatrices[matrixNum].b = sinVal;
-        gOamMatrices[matrixNum].c = -sinVal;
-    }
-    else
-    {
-        gOamMatrices[matrixNum].b = sinVal;
-        gOamMatrices[matrixNum].c = -sinVal;
-    }
+    gOamMatrices[matrixNum].b = spriteCoord;
+    gOamMatrices[matrixNum].c = -spriteCoord;
 
     sprite->callback = sub_810E520;
 }
@@ -671,13 +660,13 @@ static void sub_810E520(struct Sprite *sprite)
         switch (data->unk2 / 64)
         {
         case 0: 
-            if (data->unk0_1 << 24 >> 24 == 1) // the shifts have to be here
+            if ((u8)data->unk0_1 == 1) //casts to u8 here are necessary for matching
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 3)
+            else if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -724,13 +713,13 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 0;
             break;
         case 1:
-            if (data->unk0_1 << 24 >> 24 == 0)
+            if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 2)
+            else if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -775,13 +764,13 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 1;
             break;
         case 2:
-            if (data->unk0_1 << 24 >> 24 == 3)
+            if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 1)
+            else if ((u8)data->unk0_1 == 1)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -826,11 +815,11 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 2;
             break;
         case 3:
-            if (data->unk0_1 << 24 >> 24 == 2)
+            if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0d = 1;
             }
-            else if (data->unk0_1 << 24 >> 24 == 0)
+            else if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -876,10 +865,8 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 3;
             break;
         }
-        #ifndef NONMATCHING
-            asm("":::"r8");
-        #endif
-        sprite->pos2.x = (data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
+
+        sprite->pos2.x = ((s32)data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
         matrixNum = sprite->oam.matrixNum;
 
         sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
