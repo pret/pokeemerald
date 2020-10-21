@@ -1733,14 +1733,21 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         gTasks[taskId].data[3] = 1;
         gTasks[taskId].data[4] = 0;
 
+        // StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
+        // ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
+        // StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+        // StringCopy(gStringVar1, gAbilityNames[gTasks[taskId].data[3]]);
+        // StringExpandPlaceholders(gStringVar4, gDebugText_PokemonAbility);
+        // AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+
+        // gTasks[taskId].func = DebugAction_Give_Pokemon_SelectAbility;
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringCopy(gStringVar1, gAbilityNames[gTasks[taskId].data[3]]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonAbility);
+        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIVs);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
-        gTasks[taskId].func = DebugAction_Give_Pokemon_SelectAbility;
+        gTasks[taskId].func = DebugAction_Give_Pokemon_SelectIVs;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
