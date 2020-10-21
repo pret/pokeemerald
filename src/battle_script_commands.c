@@ -3650,7 +3650,7 @@ static void Cmd_getexp(void)
                 if (holdEffect == HOLD_EFFECT_EXP_SHARE)
                     viaExpShare++;
             }
-            if (B_SCALED_EXP == GEN_5) // I'm not sure if gens 7+ should use /5, but it felt too high in testing
+            if ((B_SCALED_EXP >= GEN_5) && (B_SCALED_EXP != GEN_6))
                 calculatedExp = gBaseStats[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 5;
             else
                 calculatedExp = gBaseStats[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
