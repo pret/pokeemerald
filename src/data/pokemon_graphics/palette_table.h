@@ -910,6 +910,9 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(LYCANROC_DUSK, gMonPalette_LycanrocDusk),
     SPECIES_PAL(ZYGARDE_10, gMonPalette_Zygarde10),
     SPECIES_PAL(ZYGARDE_COMPLETE, gMonPalette_ZygardeComplete),
+    SPECIES_PAL(DEOXYS_ATTACK, gMonPalette_DeoxysAttack),
+    SPECIES_PAL(DEOXYS_DEFENSE, gMonPalette_DeoxysDefense),
+    SPECIES_PAL(DEOXYS_SPEED, gMonPalette_DeoxysSpeed),
 
     SPECIES_PAL(UNOWN_A, gMonPalette_Unown),
     SPECIES_PAL(UNOWN_B, gMonPalette_Unown),
