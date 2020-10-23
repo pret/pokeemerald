@@ -741,11 +741,11 @@ const u16 gSpeciesToNationalPokedexNum[NUM_SPECIES] = // Assigns all species to 
 	SPECIES_TO_NATIONAL(SHIELDON),
 	SPECIES_TO_NATIONAL(BASTIODON),
 	SPECIES_TO_NATIONAL(BURMY),
-	[SPECIES_BURMY_SANDY - 1] = NATIONAL_DEX_BURMY,
-	[SPECIES_BURMY_TRASH - 1] = NATIONAL_DEX_BURMY,
+	[SPECIES_BURMY_SANDY_CLOAK - 1] = NATIONAL_DEX_BURMY,
+	[SPECIES_BURMY_TRASH_CLOAK - 1] = NATIONAL_DEX_BURMY,
 	SPECIES_TO_NATIONAL(WORMADAM),
-	[SPECIES_WORMADAM_SANDY - 1] = NATIONAL_DEX_WORMADAM,
-	[SPECIES_WORMADAM_TRASH - 1] = NATIONAL_DEX_WORMADAM,
+	[SPECIES_WORMADAM_SANDY_CLOAK - 1] = NATIONAL_DEX_WORMADAM,
+	[SPECIES_WORMADAM_TRASH_CLOAK - 1] = NATIONAL_DEX_WORMADAM,
 	SPECIES_TO_NATIONAL(MOTHIM),
 	SPECIES_TO_NATIONAL(COMBEE),
 	SPECIES_TO_NATIONAL(VESPIQUEN),
@@ -3723,7 +3723,13 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 
 u32 GetUnownSpeciesId(u32 personality)
 {
-    return GetUnownLetterByPersonality(personality) + SPECIES_UNOWN_A;
+    return GetUnownLetterByPersonality(personality) + SPECIES_UNOWN_B - 1; //TODO
+    /*
+    u16 unownLetter = GetUnownLetterByPersonality(personality);
+    if (unownLetter == 0)
+        return SPECIES_UNOWN;
+    return unownLetter + SPECIES_UNOWN_B - 1;
+    */
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
