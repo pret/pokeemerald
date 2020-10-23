@@ -3650,13 +3650,13 @@ static void Cmd_getexp(void)
                 if (holdEffect == HOLD_EFFECT_EXP_SHARE)
                     viaExpShare++;
             }
-            if ((B_SCALED_EXP >= GEN_5) && (B_SCALED_EXP != GEN_6))
+            #if (B_SCALED_EXP == GEN_5) && (B_SCALED_EXP != GEN_6)
                 calculatedExp = gBaseStats[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 5;
-            else
+            #else
                 calculatedExp = gBaseStats[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
+            #endif
 
-            if (B_SPLIT_EXP < GEN_6)
-            {
+            #if B_SPLIT_EXP < GEN_6
                 if (viaExpShare) // at least one mon is getting exp via exp share
                 {
                     *exp = calculatedExp / 2 / viaSentIn;
@@ -3674,14 +3674,12 @@ static void Cmd_getexp(void)
                         *exp = 1;
                     gExpShareExp = 0;
                 }
-            }
-            else
-            {
+            #else
                 *exp = calculatedExp;
                 gExpShareExp = calculatedExp / 2;
                 if (gExpShareExp == 0)
                     gExpShareExp = 1;
-            }
+            #endif
 
             gBattleScripting.getexpState++;
             gBattleStruct->expGetterMonId = 0;
@@ -3738,13 +3736,12 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && B_TRAINER_EXP_MULTIPLIER <= GEN_7)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
-                    if ((B_SCALED_EXP >= GEN_5) && (B_SCALED_EXP != GEN_6))
-                    {
+                    #if (B_SCALED_EXP == GEN_5) && (B_SCALED_EXP != GEN_6)
                         gBattleMoveDamage *= sExperienceScalingFactors[(gBattleMons[gBattlerFainted].level * 2) + 10];
                         gBattleMoveDamage /= sExperienceScalingFactors[gBattleMons[gBattlerFainted].level + 
                             GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) + 10];
                         gBattleMoveDamage++;
-                    }
+                    #endif
 
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]))
                     {
