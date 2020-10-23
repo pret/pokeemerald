@@ -4828,14 +4828,14 @@ static void Cmd_moveend(void)
                     BattleScriptPushCursor();
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER || GetBattlerSide(i) == B_SIDE_PLAYER)
                     {
-                        if (B_ABILITY_POP_UP >= GEN_6)
+                        if (B_ABILITY_POP_UP)
                             gBattlescriptCurrInstr = BattleScript_EmergencyExit;
                         else
                             gBattlescriptCurrInstr = BattleScript_EmergencyExitNoPopUp;
                     }
                     else
                     {
-                        if (B_ABILITY_POP_UP >= GEN_6)
+                        if (B_ABILITY_POP_UP)
                             gBattlescriptCurrInstr = BattleScript_EmergencyExitWild;
                         else
                             gBattlescriptCurrInstr = BattleScript_EmergencyExitWildNoPopUp;
