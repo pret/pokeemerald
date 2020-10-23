@@ -1817,7 +1817,7 @@ static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
         }
         *topicTextId = 3;
         break;
-    case FRONTIER_FACILITY_FACTORY:  //BUG: Should be "case FRONTIER_FACILITY_PIKE"
+    case FRONTIER_FACILITY_FACTORY: //BUG: Should be "case FRONTIER_FACILITY_PIKE"
         for (i = 0; i < 2; i++)
         {
             if (streak < gSaveBlock2Ptr->frontier.pikeRecordStreaks[i])
