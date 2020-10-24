@@ -2813,7 +2813,7 @@ static void Cmd_get_considered_move_split(void)
 
 static void Cmd_get_considered_move_target(void)
 {
-    AI_THINKING_STRUCT->funcResult = GetBattleMoveSplit(AI_THINKING_STRUCT->moveConsidered);
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].target;
     gAIScriptPtr += 1;
 }
 
