@@ -7898,7 +7898,11 @@ const struct BaseStats gBaseStats[] =
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup1 = EGG_GROUP_HUMAN_LIKE,
+        #else
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
+        #endif
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_SYNCHRONIZE, ABILITY_TRACE},
         #ifdef BATTLE_ENGINE
@@ -7930,7 +7934,11 @@ const struct BaseStats gBaseStats[] =
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup1 = EGG_GROUP_HUMAN_LIKE,
+        #else
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
+        #endif
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_SYNCHRONIZE, ABILITY_TRACE},
         #ifdef BATTLE_ENGINE
@@ -7962,7 +7970,11 @@ const struct BaseStats gBaseStats[] =
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup1 = EGG_GROUP_HUMAN_LIKE,
+        #else
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
+        #endif
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_SYNCHRONIZE, ABILITY_TRACE},
         #ifdef BATTLE_ENGINE
@@ -9259,7 +9271,11 @@ const struct BaseStats gBaseStats[] =
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_BUG,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup2 = EGG_GROUP_DRAGON,
+        #else
         .eggGroup2 = EGG_GROUP_BUG,
+        #endif
         .abilities = {ABILITY_HYPER_CUTTER, ABILITY_ARENA_TRAP},
         #ifdef BATTLE_ENGINE
         .abilityHidden = ABILITY_SHEER_FORCE,
@@ -9287,7 +9303,11 @@ const struct BaseStats gBaseStats[] =
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_BUG,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup2 = EGG_GROUP_DRAGON,
+        #else
         .eggGroup2 = EGG_GROUP_BUG,
+        #endif
         .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
@@ -9312,7 +9332,11 @@ const struct BaseStats gBaseStats[] =
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_BUG,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup2 = EGG_GROUP_DRAGON,
+        #else
         .eggGroup2 = EGG_GROUP_BUG,
+        #endif
         .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
@@ -13460,7 +13484,11 @@ const struct BaseStats gBaseStats[] =
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup1 = EGG_GROUP_HUMAN_LIKE,
+        #else
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
+        #endif
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         #ifdef BATTLE_ENGINE
         .abilities = {ABILITY_STEADFAST, ABILITY_NONE},
@@ -20123,7 +20151,11 @@ const struct BaseStats gBaseStats[] =
         .eggCycles = 20,
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup1 = EGG_GROUP_FLYING,
+        #else
         .eggGroup1 = EGG_GROUP_HUMAN_LIKE,
+        #endif
         .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
         #ifdef BATTLE_ENGINE
         .abilities = {ABILITY_LIMBER, ABILITY_UNBURDEN},
@@ -20442,7 +20474,11 @@ const struct BaseStats gBaseStats[] =
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_MONSTER,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
         .eggGroup2 = EGG_GROUP_MONSTER,
+        #else
+        .eggGroup2 = EGG_GROUP_MINERAL,
+        #endif
         #ifdef BATTLE_ENGINE
         .abilities = {ABILITY_OWN_TEMPO, ABILITY_ICE_BODY},
         #else
@@ -20471,7 +20507,11 @@ const struct BaseStats gBaseStats[] =
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_MONSTER,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
         .eggGroup2 = EGG_GROUP_MONSTER,
+        #else
+        .eggGroup2 = EGG_GROUP_MINERAL,
+        #endif
         #ifdef BATTLE_ENGINE
         .abilities = {ABILITY_OWN_TEMPO, ABILITY_ICE_BODY},
         #else
@@ -20500,7 +20540,11 @@ const struct BaseStats gBaseStats[] =
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FLYING,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup2 = EGG_GROUP_DRAGON,
+        #else
         .eggGroup2 = EGG_GROUP_FLYING,
+        #endif
         #ifdef BATTLE_ENGINE
         .abilities = {ABILITY_FRISK, ABILITY_INFILTRATOR},
         .abilityHidden = ABILITY_TELEPATHY,
@@ -20529,7 +20573,11 @@ const struct BaseStats gBaseStats[] =
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FLYING,
+        #if P_UPDATED_EGG_GROUPS >= GEN_8
+        .eggGroup2 = EGG_GROUP_DRAGON,
+        #else
         .eggGroup2 = EGG_GROUP_FLYING,
+        #endif
         #ifdef BATTLE_ENGINE
         .abilities = {ABILITY_FRISK, ABILITY_INFILTRATOR},
         .abilityHidden = ABILITY_TELEPATHY,
