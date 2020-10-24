@@ -9781,6 +9781,19 @@ static void Cmd_handleballthrow(void)
         else
             catchRate = gBaseStats[gBattleMons[gBattlerTarget].species].catchRate;
 
+        
+        #ifdef POKEMON_EXPANSION
+        if (IS_ULTRA_BEAST(gBattleMons[gBattlerTarget].species))
+        {
+            if (gLastUsedItem == ITEM_BEAST_BALL)
+                ballMultiplier = 50;
+            else
+                ballMultiplier = 1;
+        }
+        else
+        {
+        #endif
+
         if (gLastUsedItem > ITEM_SAFARI_BALL)
         {
             switch (gLastUsedItem)
@@ -9944,10 +9957,17 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = 10;
                 #endif
                 break;
+            case ITEM_BEAST_BALL:
+                ballMultiplier = 1;
+                break;
             }
         }
         else
             ballMultiplier = sBallCatchBonuses[gLastUsedItem - ITEM_ULTRA_BALL];
+
+        #ifdef POKEMON_EXPANSION
+        }
+        #endif
 
         odds = ((catchRate + ballAddition) * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
