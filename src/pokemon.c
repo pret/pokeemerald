@@ -5304,7 +5304,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         // Evolution stone
                     case 7:
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item, SPECIES_NONE);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
@@ -5669,7 +5669,7 @@ u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u16 tradePartnerSpecies)
 {
     int i, j;
     u16 targetSpecies = 0;
@@ -5856,6 +5856,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 }
+                break;
+            case EVO_TRADE_SPECIFIC_MON:
+                if (gEvolutionTable[species][i].param == tradePartnerSpecies)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
         }

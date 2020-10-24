@@ -908,4 +908,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_LYCANROC_DUSK] = _("Lycanroc"),
     [SPECIES_ZYGARDE_10] = _("Zygarde"),
     [SPECIES_ZYGARDE_COMPLETE] = _("Zygarde"),
+    [SPECIES_DEOXYS_ATTACK] = _("Deoxys"),
+    [SPECIES_DEOXYS_DEFENSE] = _("Deoxys"),
+    [SPECIES_DEOXYS_SPEED] = _("Deoxys"),
 };

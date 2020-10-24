@@ -910,6 +910,9 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(LYCANROC_DUSK, gMonFrontPic_LycanrocDusk),
     SPECIES_SPRITE(ZYGARDE_10, gMonFrontPic_Zygarde10),
     SPECIES_SPRITE(ZYGARDE_COMPLETE, gMonFrontPic_ZygardeComplete),
+    SPECIES_SPRITE(DEOXYS_ATTACK, gMonFrontPic_DeoxysAttack),
+    SPECIES_SPRITE(DEOXYS_DEFENSE, gMonFrontPic_DeoxysDefense),
+    SPECIES_SPRITE(DEOXYS_SPEED, gMonFrontPic_DeoxysSpeed),
 
     SPECIES_SPRITE(UNOWN_A, gMonFrontPic_UnownA),
     SPECIES_SPRITE(UNOWN_B, gMonFrontPic_UnownB),
