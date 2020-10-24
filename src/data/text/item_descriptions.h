@@ -2030,9 +2030,9 @@ static const u8 sLifeOrbDesc[] = _(
     "of some HP per turn.");
 
 static const u8 sPowerHerbDesc[] = _(
-    "It allows to immedi-\n"
-    "ately use a move\n"
-    "that charges first.");
+    "Allows immediate\n"
+    "use of a move that\n"
+    "charges first.");
 
 static const u8 sToxicOrbDesc[] = _(
     "A bizarre orb that\n"
@@ -2050,9 +2050,9 @@ static const u8 sQuickPowderDesc[] = _(
     "powder boosts Speed.");
 
 static const u8 sFocusSashDesc[] = _(
-    "If the holder is at\n"
-    "full HP, it can\n"
-    "prevent fainting.");
+    "If the holder has\n"
+    "full HP, it endures\n"
+    "KO hits with 1 HP.");
 
 static const u8 sZoomLensDesc[] = _(
     "If the holder moves\n"
@@ -2780,9 +2780,9 @@ static const u8 sAdrenalineOrbDesc[] = _(
     "but only one time.");
 
 static const u8 sHoneyDesc[] = _(
-    "Sweet honey. It can\n"
-    "be sold to shops at\n"
-    "a low price.");
+    "Sweet honey that\n"
+    "attracts wild\n"
+    "Pokémon when used.");
 
 static const u8 sHealthWingDesc[] = _(
     "An item that raises\n"
