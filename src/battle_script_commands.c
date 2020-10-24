@@ -9786,14 +9786,14 @@ static void Cmd_handleballthrow(void)
             {
             case ITEM_NET_BALL:
                 if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BUG))
-                    #if P_NET_BALL_MODIFIER >= GEN_7
+                    #if I_NET_BALL_MODIFIER >= GEN_7
                         ballMultiplier = 50;
                     #else
                         ballMultiplier = 30;
                     #endif
                 break;
             case ITEM_DIVE_BALL:
-                #if P_DIVE_BALL_MODIFIER >= GEN_4
+                #if I_DIVE_BALL_MODIFIER >= GEN_4
                     if (GetCurrentMapType() == MAP_TYPE_UNDERWATER || gIsFishingEncounter || gIsSurfingEncounter)
                         ballMultiplier = 35;
                 #else
@@ -9802,11 +9802,11 @@ static void Cmd_handleballthrow(void)
                 #endif
                 break;
             case ITEM_NEST_BALL:
-                #if P_NEST_BALL_MODIFIER >= GEN_6
+                #if I_NEST_BALL_MODIFIER >= GEN_6
                     //((41 - Pokémon's level) ÷ 10)× if Pokémon's level is between 1 and 29, 1× otherwise.
                     if (gBattleMons[gBattlerTarget].level < 30)
                         ballMultiplier = 41 - gBattleMons[gBattlerTarget].level;
-                #elif P_NEST_BALL_MODIFIER == GEN_5
+                #elif I_NEST_BALL_MODIFIER == GEN_5
                     //((41 - Pokémon's level) ÷ 10)×, minimum 1×
                     if (gBattleMons[gBattlerTarget].level < 31)
                         ballMultiplier = 41 - gBattleMons[gBattlerTarget].level;
@@ -9822,14 +9822,14 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_REPEAT_BALL:
                 if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
-                    #if P_REPEAT_BALL_MODIFIER >= GEN_7
+                    #if I_REPEAT_BALL_MODIFIER >= GEN_7
                         ballMultiplier = 35;
                     #else
                         ballMultiplier = 30;
                     #endif
                 break;
             case ITEM_TIMER_BALL:
-                #if P_TIMER_BALL_MODIFIER >= GEN_5
+                #if I_TIMER_BALL_MODIFIER >= GEN_5
                     ballMultiplier = (gBattleResults.battleTurnCounter * 3) + 10;
                 #else
                     ballMultiplier = gBattleResults.battleTurnCounter + 10;
@@ -9857,7 +9857,7 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_LURE_BALL:
                 if (gIsFishingEncounter)
-                    #if P_LURE_BALL_MODIFIER >= GEN_7
+                    #if I_LURE_BALL_MODIFIER >= GEN_7
                         ballMultiplier = 50;
                     #else
                         ballMultiplier = 30;
@@ -9883,7 +9883,7 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_HEAVY_BALL:
                 i = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1);
-                #if P_HEAVY_BALL_MODIFIER >= GEN_7
+                #if I_HEAVY_BALL_MODIFIER >= GEN_7
                     if (i < 1000)
                         ballMultiplier = 5;
                     else if (i < 2000)
@@ -9911,7 +9911,7 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_QUICK_BALL:
                 if (gBattleResults.battleTurnCounter == 0)
-                    #if P_QUICK_BALL_MODIFIER >= GEN_5
+                    #if I_QUICK_BALL_MODIFIER >= GEN_5
                         ballMultiplier = 50;
                     #else
                         ballMultiplier = 40;
@@ -9920,14 +9920,14 @@ static void Cmd_handleballthrow(void)
             case ITEM_DUSK_BALL:
                 RtcCalcLocalTime();
                 if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
-                    #if P_DUSK_BALL_MODIFIER >= GEN_7
+                    #if I_DUSK_BALL_MODIFIER >= GEN_7
                         ballMultiplier = 30;
                     #else
                         ballMultiplier = 35;
                     #endif
                 break;
             case ITEM_DREAM_BALL:
-                #if P_DREAM_BALL_MODIFIER >= GEN_8
+                #if I_DREAM_BALL_MODIFIER >= GEN_8
                     if (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP)
                         ballMultiplier = 40;
                 #else

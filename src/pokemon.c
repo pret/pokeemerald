@@ -2233,7 +2233,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 personality = Random32();
                 shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
                 rolls++;
-            } while (shinyValue >= SHINY_ODDS && rolls < P_SHINY_CHARM_REROLLS);
+            } while (shinyValue >= SHINY_ODDS && rolls < I_SHINY_CHARM_REROLLS);
         }
     }
 

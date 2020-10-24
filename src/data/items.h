@@ -1282,7 +1282,7 @@ const struct Item gItems[] =
         .name = _("Escape Rope"),
         .itemId = ITEM_ESCAPE_ROPE,
         .description = sEscapeRopeDesc,
-        #if P_KEY_ESCAPE_ROPE >= GEN_8
+        #if I_KEY_ESCAPE_ROPE >= GEN_8
         .price = 0,
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
@@ -4820,7 +4820,7 @@ const struct Item gItems[] =
         .itemId = ITEM_OLD_AMBER,
         .price = 0,
         .description = sOldAmberDesc,
-        #if P_KEY_FOSSILS >= GEN_4
+        #if I_KEY_FOSSILS >= GEN_4
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         #else
@@ -4890,7 +4890,7 @@ const struct Item gItems[] =
         .itemId = ITEM_HELIX_FOSSIL,
         .price = 0,
         .description = sHelixFossilDesc,
-        #if P_KEY_FOSSILS >= GEN_4
+        #if I_KEY_FOSSILS >= GEN_4
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         #else
@@ -4908,7 +4908,7 @@ const struct Item gItems[] =
         .itemId = ITEM_DOME_FOSSIL,
         .price = 0,
         .description = sDomeFossilDesc,
-        #if P_KEY_FOSSILS >= GEN_4
+        #if I_KEY_FOSSILS >= GEN_4
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         #else
@@ -4926,7 +4926,7 @@ const struct Item gItems[] =
         .itemId = ITEM_ROOT_FOSSIL,
         .price = 0,
         .description = sRootFossilDesc,
-        #if P_KEY_FOSSILS >= GEN_4
+        #if I_KEY_FOSSILS >= GEN_4
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         #else
@@ -4944,7 +4944,7 @@ const struct Item gItems[] =
         .itemId = ITEM_CLAW_FOSSIL,
         .price = 0,
         .description = sClawFossilDesc,
-        #if P_KEY_FOSSILS >= GEN_4
+        #if I_KEY_FOSSILS >= GEN_4
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         #else
