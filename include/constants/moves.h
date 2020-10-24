@@ -359,7 +359,7 @@
 
 #define MOVES_COUNT_GEN3 355
 
-// Gen4 moves.
+// Gen 4 moves.
 #define MOVE_ROOST 355
 #define MOVE_GRAVITY 356
 #define MOVE_MIRACLE_EYE 357
@@ -476,7 +476,7 @@
 
 #define MOVES_COUNT_GEN4 468
 
-// Gen5 moves.
+// Gen 5 moves.
 #define MOVE_HONE_CLAWS 468
 #define MOVE_WIDE_GUARD 469
 #define MOVE_GUARD_SPLIT 470
@@ -572,7 +572,7 @@
 
 #define MOVES_COUNT_GEN5 560
 
-// Gen6 moves.
+// Gen 6 moves.
 #define MOVE_FLYING_PRESS 560
 #define MOVE_MAT_BLOCK 561
 #define MOVE_BELCH 562
@@ -631,6 +631,7 @@
 #define MOVE_THOUSAND_WAVES 615
 #define MOVE_LANDS_WRATH 616
 #define MOVE_LIGHT_OF_RUIN 617
+// ORAS Moves
 #define MOVE_ORIGIN_PULSE 618
 #define MOVE_PRECIPICE_BLADES 619
 #define MOVE_DRAGON_ASCENT 620
@@ -638,7 +639,7 @@
 
 #define MOVES_COUNT_GEN6 622
 
-// Gen7 moves.
+// Gen 7 moves.
 #define MOVE_SHORE_UP 622
 #define MOVE_FIRST_IMPRESSION 623
 #define MOVE_BANEFUL_BUNKER 624
@@ -690,9 +691,11 @@
 #define MOVE_ZING_ZAP 670
 #define MOVE_NATURES_MADNESS 671
 #define MOVE_MULTI_ATTACK 672
+// USUM Moves
 #define MOVE_MIND_BLOWN 673
 #define MOVE_PLASMA_FISTS 674
 #define MOVE_PHOTON_GEYSER 675
+// LGPE Moves
 #define MOVE_ZIPPY_ZAP          676
 #define MOVE_SPLISHY_SPLASH     677
 #define MOVE_FLOATY_FALL        678
@@ -746,6 +749,7 @@
 #define MOVE_METEOR_ASSAULT     722
 #define MOVE_ETERNABEAM         723
 #define MOVE_STEEL_BEAM         724
+// Isle of Armor Moves
 #define MOVE_EXPANDING_FORCE    725
 #define MOVE_STEEL_ROLLER       726
 #define MOVE_SCALE_SHOT         727

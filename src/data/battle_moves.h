@@ -10347,7 +10347,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FLOATY_FALL] =
     {
         .effect = EFFECT_FLINCH_HIT,
-        .power = 90,
+        .power = 95,
         .type = TYPE_FLYING,
         .accuracy = 90,
         .pp = 15,
@@ -10500,7 +10500,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DOUBLE_IRON_BASH] =
     {
-        .effect = EFFECT_FLINCH_HIT,
+        .effect = EFFECT_PLACEHOLDER,   //TODO (EFFECT_FLINCH_HIT + EFFECT_DOUBLE_HIT)
         .power = 60,
         .type = TYPE_STEEL,
         .accuracy = 100,

@@ -2823,8 +2823,8 @@ static const u8 sEXPANDING_FORCEDescription[] = _(
     "powerful in Psychic Terrain.");
 
 static const u8 sSTEEL_ROLLERDescription[] = _(
-    "Destroys the current terrain."
-    "Otherwise, it fails.");
+    "Destroys any active terrain.\n"
+    "Without one, it fails.");
 
 static const u8 sSCALE_SHOTDescription[] = _(
     "Shoots scales 2 to 5 times.\n"
@@ -2903,8 +2903,8 @@ static const u8 sWICKED_BLOWDescription[] = _(
     "always does a critical hit.");
 
 static const u8 sSURGING_STRIKESDescription[] = _(
-    "The Water style allows to\n"
-    "do 3 critical hits in a row.");
+    "By mastering the Water style\n"
+    "it lands with 3 critical hits.");
 
 static const u8 sNotDoneYetDescription[] = _(
     "Not done yet.");
