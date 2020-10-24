@@ -9751,6 +9751,7 @@ static void Cmd_removelightscreenreflect(void) // brick break
 static void Cmd_handleballthrow(void)
 {
     u8 ballMultiplier = 10;
+    s8 ballAddition = 0;
 
     if (gBattleControllerExecFlags)
         return;
@@ -9885,24 +9886,33 @@ static void Cmd_handleballthrow(void)
                 i = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1);
                 #if I_HEAVY_BALL_MODIFIER >= GEN_7
                     if (i < 1000)
-                        ballMultiplier = 5;
+                        ballAddition = -20;
                     else if (i < 2000)
-                        ballMultiplier = 10;
+                        ballAddition = 0;
                     else if (i < 3000)
-                        ballMultiplier = 20;
+                        ballAddition = 20;
                     else
-                        ballMultiplier = 30;
+                        ballAddition = 30;
+                #elif I_HEAVY_BALL_MODIFIER >= GEN_4
+                    if (i < 2028)
+                        ballAddition = -20;
+                    else if (i < 3072)
+                        ballAddition = 20;
+                    else if (i < 4096)
+                        ballAddition = 30;
+                    else
+                        ballAddition = 40;
                 #else
                     if (i < 1024)
-                        ballMultiplier = 5;
+                        ballAddition = -20;
                     else if (i < 2048)
-                        ballMultiplier = 10;
+                        ballAddition = 0;
                     else if (i < 3072)
-                        ballMultiplier = 20;
+                        ballAddition = 20;
                     else if (i < 4096)
-                        ballMultiplier = 30;
+                        ballAddition = 30;
                     else
-                        ballMultiplier = 40;
+                        ballAddition = 40;
                 #endif
                 break;
             case ITEM_FAST_BALL:
@@ -9939,7 +9949,7 @@ static void Cmd_handleballthrow(void)
         else
             ballMultiplier = sBallCatchBonuses[gLastUsedItem - ITEM_ULTRA_BALL];
 
-        odds = (catchRate * ballMultiplier / 10)
+        odds = ((catchRate + ballAddition) * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
