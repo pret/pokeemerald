@@ -1972,7 +1972,7 @@ static void LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
 
-    if (i != OBJ_EVENT_PAL_TAG_NONE) // BUG: FindObjectEventPatelleIndex should be returning a u16 with the result of OBJ_EVENT_PAL_TAG_NONE. Because of this bug, this condition is always true
+    if (i != OBJ_EVENT_PAL_TAG_NONE) // BUG: FindObjectEventPaletteIndexByTag should be returning a u16 with the result of OBJ_EVENT_PAL_TAG_NONE. Because of this bug, this condition is always true
     {
         sub_808E8F4(&sObjectEventSpritePalettes[i]);
     }
