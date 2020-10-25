@@ -1281,13 +1281,12 @@ const struct Item gItems[] =
     {
         .name = _("Escape Rope"),
         .itemId = ITEM_ESCAPE_ROPE,
+        .price = 550,
         .description = sEscapeRopeDesc,
         #if I_KEY_ESCAPE_ROPE >= GEN_8
-        .price = 0,
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         #else
-        .price = 550,
         .importance = 0,
         .pocket = POCKET_ITEMS,
         #endif
