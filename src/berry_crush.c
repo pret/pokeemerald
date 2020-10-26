@@ -1986,29 +1986,29 @@ static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *game,
     // byte 9: if TRUE, communicate on fade complete
 
     u16 color;
-    u32 selectedPals;
-    selectedPals = ({
-#ifndef NONMATCHING
-        register u32 value asm("r2");
-        register u32 b asm("r3");
-#else
-        u32 value;
-        u32 b;
-#endif //NONMATCHING
-        value  =      params[0] << 0;
-        value |= (b = params[1] << 8);
-        value |= (b = params[2] << 16);
-        value |= (b = params[3] << 24);
-        value;
-    });
+    u32 selectedPals[2];
 
+    selectedPals[0] = (u32)params[0];
+    selectedPals[1] = (u32)params[1];
+    selectedPals[1] <<= 8;
+
+    selectedPals[0] |= selectedPals[1];
+    selectedPals[1] = (u32)params[2];
+    selectedPals[1] <<= 16;
+
+    selectedPals[0] |= selectedPals[1];
+    selectedPals[1] = (u32)params[3];
+    selectedPals[1] <<= 24;
+
+    selectedPals[0] |= selectedPals[1];
     params[0] = params[9];
 
-    color  = params[8] << 8;
-    color |= params[7] << 0;
+    color = params[8];
+    color <<= 8;
+    color |= params[7];
 
     gPaletteFade.bufferTransferDisabled = FALSE;
-    BeginNormalPaletteFade(selectedPals, params[4], params[5], params[6], color);
+    BeginNormalPaletteFade(selectedPals[0], params[4], params[5], params[6], color);
     UpdatePaletteFade();
     game->unkE = 2;
     return 0;
