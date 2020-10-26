@@ -33,7 +33,6 @@
 #include "graphics.h"
 #include "constants/battle_dome.h"
 #include "constants/frontier_util.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/trainers.h"

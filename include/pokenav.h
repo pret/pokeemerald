@@ -27,17 +27,17 @@ struct PokenavListTemplate
         struct PokenavMonList *monList;
         struct PokenavMatchCallEntries *matchCallEntries;
     } list;
-    u16 unk4;
+    u16 count;
     u16 unk6;
     u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
+    u8 item_X;
+    u8 windowWidth;
+    u8 listTop;
+    u8 maxShowed;
+    u8 fillValue;
+    u8 fontId;
     union {
-        void (*unk10_1)(struct PokenavMonList *, u8 *a1);
+        void (*printMonFunc)(struct PokenavMonList *item, u8 *dest);
         void (*unk10_2)(struct PokenavMatchCallEntries *, u8 *a1);
     } listFunc;
     void (*unk14)(u16 a0, u32 a1, u32 a2);
@@ -45,9 +45,9 @@ struct PokenavListTemplate
 
 struct PokenavSub18
 {
-    u16 unk0;
-    u16 unk2;
-    struct PokenavMonList unk4[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
+    u16 listCount;
+    u16 currIndex;
+    struct PokenavMonList monData[TOTAL_BOXES_COUNT * IN_BOX_COUNT + PARTY_SIZE];
 };
 
 // Return values of LoopedTask functions.
@@ -63,6 +63,31 @@ enum
     POKENAV_MODE_NORMAL,           // Chosen from Start menu.
     POKENAV_MODE_FORCE_CALL_READY, // Pokenav tutorial before calling Mr. Stone
     POKENAV_MODE_FORCE_CALL_EXIT,  // Pokenav tutorial after calling Mr. Stone
+};
+
+// TODO - refine these names
+enum Substructures
+{
+    POKENAV_SUBSTRUCT_MAIN_MENU,
+    POKENAV_SUBSTRUCT_MAIN_MENU_HANDLER,
+    POKENAV_SUBSTRUCT_MENU_ICONS,
+    POKENAV_SUBSTRUCT_REGION_MAP_STATE,
+    POKENAV_SUBSTRUCT_REGION_MAP_ZOOM,
+    POKENAV_SUBSTRUCT_MATCH_CALL_MAIN,
+    POKENAV_SUBSTRUCT_MATCH_CALL_OPEN,
+    POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS,
+    POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULT_LIST,
+    POKENAV_SUBSTRUCT_RIBBONS_MON_LIST,
+    POKENAV_SUBSTRUCT_RIBBONS_MON_MENU,
+    POKENAV_SUBSTRUCT_CONDITION_GRAPH,
+    POKENAV_SUBSTRUCT_MON_MARK_MENU,
+    POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST,
+    POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU,
+    POKENAV_SUBSTRUCT_15,   //unused
+    POKENAV_SUBSTRUCT_REGION_MAP,
+    POKENAV_SUBSTRUCT_MATCH_CALL_LIST,
+    POKENAV_SUBSTRUCT_MON_LIST,
+    POKENAV_SUBSTRUCT_COUNT,
 };
 
 enum
@@ -97,12 +122,12 @@ enum
 	POKENAV_REGION_MAP,
 	POKENAV_CONDITION_PARTY,
 	POKENAV_CONDITION_SEARCH_RESULTS,
-	POKENAV_MENU_9, // Condition
-	POKENAV_MENU_A, // Condition
+	POKENAV_CONDITION_GRAPH_FROM_SEARCH, // opening condition graph from search list
+	POKENAV_RETURN_CONDITION_SEARCH,    //return to search list from condition graph
 	POKENAV_MATCH_CALL,
 	POKENAV_RIBBONS_MON_LIST,
-	POKENAV_MENU_D, // Ribbons
-	POKENAV_MENU_E, // Ribbons
+	POKENAV_RIBBONS_SUMMARY_SCREEN,
+	POKENAV_RIBBONS_RETURN_TO_MON_LIST,
 };
 
 enum
@@ -207,7 +232,7 @@ enum
 // Pokenav Function IDs
 // Indices into the LoopedTask tables for each of the main Pokenav features
 
-enum
+enum RegionMapFuncIds
 {
     POKENAV_MENU_FUNC_NONE,
     POKENAV_MENU_FUNC_MOVE_CURSOR,
@@ -219,6 +244,19 @@ enum
     POKENAV_MENU_FUNC_RESHOW_DESCRIPTION,
     POKENAV_MENU_FUNC_OPEN_FEATURE,
 };
+
+enum PartyConditionFuncIds
+{
+    PARTY_CONDITION_FUNC_NONE,
+    PARTY_CONDITION_FUNC_SLIDE_MON_IN,
+    PARTY_CONDITION_FUNC_RETURN,
+    PARTY_CONDITION_FUNC_NO_TRANSITION,
+    PARTY_CONDITION_FUNC_SLIDE_MON_OUT,
+    PARTY_CONDITION_FUNC_ADD_MARKINGS,
+    PARTY_CONDITION_FUNC_CLOSE_MARKINGS,
+};
+
+#define POKENAV_MENU_FUNC_EXIT  -1
 
 enum
 {
@@ -268,17 +306,17 @@ void SetPokenavVBlankCallback(void);
 void SetVBlankCallback_(IntrCallback callback);
 
 // pokenav_match_call_ui.c
-u32 GetSelectedMatchCall(void);
+u32 GetSelectedPokenavListIndex(void);
 bool32 sub_81C8224(void);
 int MatchCall_MoveCursorUp(void);
 int MatchCall_MoveCursorDown(void);
 int MatchCall_PageDown(void);
 int MatchCall_PageUp(void);
-bool32 sub_81C8630(void);
+bool32 IsMonListLoopedTaskActive(void);
 void ToggleMatchCallVerticalArrows(bool32 shouldHide);
 void sub_81C8838(void);
 void sub_81C877C(void);
-bool32 sub_81C8820(void);
+bool32 IsMatchCallListTaskActive(void);
 void PrintCheckPageInfo(s16 a0);
 u32 GetMatchCallListTopIndex(void);
 void sub_81C87F0(void);
@@ -300,30 +338,30 @@ void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name);
 // pokenav_main_menu.c
 bool32 InitPokenavMainMenu(void);
 void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size);
-void sub_81C7850(u32 a0);
-u32 sub_81C786C(void);
+void RunMainMenuLoopedTask(u32 a0);
+u32 IsActiveMenuLoopTaskActive(void);
 void LoadLeftHeaderGfxForIndex(u32 arg0);
-void sub_81C7FA0(u32 arg0, bool32 arg1, bool32 arg2);
+void ShowLeftHeaderGfx(u32 menugfxId, bool32 arg1, bool32 isOnRightSide);
 void PokenavFadeScreen(s32 fadeType);
-bool32 sub_81C8010(void);
+bool32 AreLeftHeaderSpritesMoving(void);
 void InitBgTemplates(const struct BgTemplate *templates, int count);
 bool32 IsPaletteFadeActive(void);
 void PrintHelpBarText(u32 textId);
 bool32 WaitForHelpBar(void);
-void sub_81C78A0(void);
+void SlideMenuHeaderDown(void);
 bool32 MainMenuLoopedTaskIsBusy(void);
-void sub_81C7FDC(void);
-void sub_81C79BC(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette);
+void SetLeftHeaderSpritesInvisibility(void);
+void PokenavCopyPalette(const u16 *a0, const u16 *a1, int a2, int a3, int a4, u16 *palette);
 void sub_81C7B40(void);
 struct Sprite *PauseSpinningPokenavSprite(void);
 void ResumeSpinningPokenavSprite(void);
-void sub_81C7E14(u32 arg0);
-void sub_81C7FC4(u32 arg0, bool32 arg1);
-void sub_81C7880(void);
-void sub_81C7990(u32 a0, u16 a1);
+void UpdateRegionMapRightHeaderTiles(u32 arg0);
+void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide);
+void SlideMenuHeaderUp(void);
+void PokenavFillPalette(u32 palIndex, u16 fillValue);
 u32 PokenavMainMenuLoopedTaskIsActive(void);
 bool32 WaitForPokenavShutdownFade(void);
-void sub_81C7834(void *func1, void *func2);
+void SetActiveMenuLoopTasks(void *func1, void *func2);
 void ShutdownPokenav(void);
 
 // pokenav_menu_handler_1.c
@@ -345,7 +383,7 @@ bool32 OpenPokenavMenuNotInitial(void);
 void CreateMenuHandlerLoopedTask(s32 ltIdx);
 bool32 IsMenuHandlerLoopedTaskActive(void);
 void FreeMenuHandlerSubstruct2(void);
-void sub_81CAADC(void);
+void ResetBldCnt_(void);
 
 // pokenav_match_call_1.c
 bool32 PokenavCallback_Init_MatchCall(void);
@@ -364,7 +402,7 @@ const u8 *GetMatchCallMessageText(int index, u8 *arg1);
 u16 GetMatchCallOptionCursorPos(void);
 u16 GetMatchCallOptionId(int arg0);
 void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntries * arg0, u8 *str);
-u8 sub_81CB0C8(int rematchIndex);
+u8 GetMatchTableMapSectionId(int rematchIndex);
 int GetIndexDeltaOfNextCheckPageDown(int index);
 int GetIndexDeltaOfNextCheckPageUp(int index);
 bool32 IsRematchEntryRegistered(int index);
@@ -385,60 +423,60 @@ void FreeRegionMapSubstruct1(void);
 void FreeRegionMapSubstruct2(void);
 
 // pokenav_conditions_1.c
-u32 PokenavCallback_Init_7(void);
-u32 PokenavCallback_Init_9(void);
-u32 sub_81CD070(void);
-void sub_81CD1C0(void);
-bool32 sub_81CD3C4(void);
-bool32 sub_81CDD5C(void);
-struct ConditionGraph *sub_81CDC70(void);
-u16 sub_81CDC60(void);
-u16 sub_81CDC50(void);
-u8 sub_81CDDB0(void);
-bool32 sub_81CD548(u8 arg0);
-u8 sub_81CDD7C(void);
-u8 *sub_81CDD04(u8 id);
-u8 *sub_81CDD24(u8 id);
-u16 sub_81CDD48(void);
-void *sub_81CDCB4(u8 id);
-void *sub_81CDCD4(u8 id);
+u32 PokenavCallback_Init_PartyCondition(void);
+u32 PokenavCallback_Init_ConditionGraphFromSearch(void);
+u32 GetPartyConditionCallback(void);
+void FreePartyConditionSubstruct1(void);
+bool32 LoadPartyConditionMenuGfx(void);
+bool32 IsConditionMenuSearchMode(void);
+struct ConditionGraph *GetConditionGraphDataPtr(void);
+u16 GetConditionGraphCurrentMonIndex(void);
+u16 GetMonListCount(void);
+u8 GetMonSheen(void);
+bool32 SetConditionGraphData(u8 arg0);
+u8 TryGetMonMarkId(void);
+u8 *GetConditionMonNameBuffer(u8 id);
+u8 *GetConditionMonLocationBuffer(u8 id);
+u16 GetConditionMonDataBuffer(void);
+void *GetConditionMonPicGfx(u8 id);
+void *GetConditionMonPal(u8 id);
 
 // pokenav_conditions_2.c
-bool32 sub_81CDDD4(void);
-void sub_81CDE2C(s32);
-u32 sub_81CDE64(void);
-void sub_81CECA0(void);
-u8 sub_81CEF14(void);
+bool32 OpenPartyConditionMenu(void);
+void CreatePartyConditionLoopedTask(s32);
+u32 IsPartyConditionLoopedTaskActive(void);
+void FreePartyConditionSubstruct2(void);
+u8 GetMonMarkingsData(void);
 
 // pokenav_conditions_3.c
-u32 PokenavCallback_Init_8(void);
-u32 PokenavCallback_Init_10(void);
-u32 sub_81CEFDC(void);
-void sub_81CEFF0(void);
-bool32 sub_81CF330(void);
-bool32 sub_81CF368(void);
-void sub_81CF3A0(s32);
-u32 sub_81CF3D0(void);
-void sub_81CF3F8(void);
+u32 PokenavCallback_Init_ConditionSearch(void);
+u32 PokenavCallback_Init_ReturnToMonSearchList(void);
+u32 GetConditionSearchResultsCallback(void);
+void FreeSearchResultSubstruct1(void);
+bool32 OpenConditionSearchResults(void);
+bool32 OpenConditionSearchListFromGraph(void);
+void CreateSearchResultsLoopedTask(s32);
+u32 IsSearchResultLoopedTaskActive(void);
+void FreeSearchResultSubstruct2(void);
 
 // pokenav_ribbons_1.c
-u32 PokenavCallback_Init_12(void);
-u32 PokenavCallback_Init_14(void);
-u32 sub_81CFA34(void);
-void sub_81CFA48(void);
-bool32 sub_81CFDD0(void);
-bool32 sub_81CFE08(void);
-void sub_81CFE40(s32);
-u32 sub_81CFE70(void);
-void sub_81CFE98(void);
+u32 PokenavCallback_Init_MonRibbonList(void);
+u32 PokenavCallback_Init_RibbonsMonListFromSummary(void);
+u32 GetRibbonsMonListCallback(void);
+void FreeRibbonsMonList1(void);
+bool32 OpenRibbonsMonList(void);
+bool32 OpenRibbonsMonListFromRibbonsSummary(void);
+void CreateRibbonsMonListLoopedTask(s32);
+u32 IsRibbonsMonListLoopedTaskActive(void);
+void FreeRibbonsMonList2(void);
 
 // pokenav_ribbons_2.c
-u32 PokenavCallback_Init_13(void);
-u32 sub_81D04A0(void);
-void sub_81D04B8(void);
-bool32 sub_81D0978(void);
-void sub_81D09B0(s32);
-u32 sub_81D09E0(void);
-void sub_81D09F4(void);
+u32 PokenavCallback_Init_RibbonsSummaryMenu(void);
+u32 GetRibbonsSummaryMenuCallback(void);
+void FreeRibbonsSummaryScreen1(void);
+bool32 OpenRibbonsSummaryMenu(void);
+void CreateRibbonsSummaryLoopedTask(s32);
+u32 IsRibbonsSummaryLoopedTaskActive(void);
+void FreeRibbonsSummaryScreen2(void);
 
 #endif // GUARD_POKENAV_H

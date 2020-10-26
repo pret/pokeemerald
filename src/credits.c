@@ -22,7 +22,6 @@
 #include "pokedex.h"
 #include "event_data.h"
 #include "random.h"
-#include "constants/species.h"
 
 enum
 {

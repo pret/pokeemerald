@@ -29,8 +29,8 @@ bool8 sub_811F960(void);
 void sub_811FA90(void);
 void sub_811FAA4(u8 markings, s16 x, s16 y);
 void sub_811FAF8(void);
-bool8 sub_811FBA4(void);
-struct Sprite *sub_811FF94(u16 tileTag, u16 paletteTag, const u16 *palette);
+bool8 MonMarkingsMenuHandleInput(void);
+struct Sprite *CreateMonMarkingsSpriteWithPal(u16 tileTag, u16 paletteTag, const u16 *palette);
 struct Sprite *sub_811FFB4(u16 tileTag, u16 paletteTag, const u16 *palette);
 void sub_8120084(u8 markings, void *dest);
 

@@ -390,7 +390,7 @@ void sub_811FAF8(void)
     }
 }
 
-bool8 sub_811FBA4(void)
+bool8 MonMarkingsMenuHandleInput(void)
 {
     u16 i;
 
@@ -564,7 +564,7 @@ static void sub_811FF7C(struct Sprite *sprite)
     sprite->pos1.y = (16 * sMenu->cursorPos) + sprite->data[0];
 }
 
-struct Sprite *sub_811FF94(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite *CreateMonMarkingsSpriteWithPal(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (!palette)
         palette = gUnknown_0859E65C;

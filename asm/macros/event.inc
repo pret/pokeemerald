@@ -1434,6 +1434,7 @@
 
 	@ Sets the color of the text in standard message boxes. 0x00 produces blue (male) text, 0x01 produces red (female) text, 
 	@ 0xFF resets the color to the default for the current OW's gender, and all other values produce black text.
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro textcolor color:req
 	.byte 0xc7
 	.byte \color
@@ -1441,6 +1442,7 @@
 
 	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom 
 	@ of the screen when the Main Menu is opened.
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro loadhelp pointer:req
 	.byte 0xc8
 	.4byte \pointer
@@ -1448,21 +1450,25 @@
 
 	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom of
 	@ the screen when the Main Menu is opened.
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro unloadhelp
 	.byte 0xc9
 	.endm
 
 	@ After using this command, all standard message boxes will use the signpost frame.
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro signmsg
 	.byte 0xca
 	.endm
 
 	@ Ends the effects of signmsg, returning message box frames to normal.
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro normalmsg
 	.byte 0xcb
 	.endm
 
 	@ Compares the value of a hidden variable to a dword.
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro comparehiddenvar a:req, value:req
 	.byte 0xcc
 	.byte \a
@@ -1489,6 +1495,7 @@
 	.endm
 
 	@ Sets worldmapflag to 1. This allows the player to Fly to the corresponding map, if that map has a flightspot.
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro setworldmapflag worldmapflag:req
 	.byte 0xd0
 	.2byte \worldmapflag
