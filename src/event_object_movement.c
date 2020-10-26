@@ -8865,15 +8865,13 @@ u8 (*const gMovementActionFuncs_FlyDown[])(struct ObjectEvent *, struct Sprite *
 
 u8 MovementAction_StoreAndLockAnim_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    u32 one;
     bool32 ableToStore = FALSE;
     if (gLockedAnimObjectEvents == NULL)
     {
         gLockedAnimObjectEvents = AllocZeroed(sizeof(struct LockedAnimObjectEvents));
         gLockedAnimObjectEvents->objectEventIds[0] = objectEvent->localId;
-        // needed to match
-        gLockedAnimObjectEvents->count = (one = 1);
-        ableToStore = one;
+        gLockedAnimObjectEvents->count = 1;
+        ableToStore = TRUE;
     }
     else
     {
