@@ -10347,9 +10347,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FLOATY_FALL] =
     {
         .effect = EFFECT_FLINCH_HIT,
-        .power = 95,
+        .power = 90,
         .type = TYPE_FLYING,
-        .accuracy = 90,
+        .accuracy = 95,
         .pp = 15,
         .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
