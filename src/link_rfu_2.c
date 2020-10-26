@@ -929,10 +929,14 @@ static void HandleSendFailure(u8 unused, u32 flags)
         if (!(flags & 1))
         {
             sResendBlock16[0] = RFUCMD_0x8900 | i;
+            #ifndef UBFIX
             for (j = 0; j < 7; j++)
+            #else
+            for (j = 0; j < 6; j++) //stop at 6, which is the 7th element
+            #endif
             {
                 temp = j << 1;
-                sResendBlock16[j + 1] = (r10[i * 12 + temp + 1] << 8) | r10[i * 12 + temp];
+                sResendBlock16[j + 1] = (r10[i * 12 + temp + 1] << 8) | r10[i * 12 + temp]; // On iteration 7, this will go beyond array boundaries.
             }
 
             for (j = 0; j < 7; j++)
