@@ -1505,9 +1505,10 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     gTasks[taskId].data[3] = 1;            //Current ID
     gTasks[taskId].data[4] = 0;            //Digit Selected
     gTasks[taskId].data[5] = 1;             //Species ID
-    gTasks[taskId].data[6] = CreateMonIcon(1, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
+    FreeMonIconPalettes(); //Free space for new palletes
+    LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
+    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
-    LoadMonIconPalettes();
     gTasks[taskId].data[7] = 1; //Simple 0 or complex 1
     gTasks[taskId].data[8] = 0; //Level
     gTasks[taskId].data[9] = 0; //Shiny: no 0, yes 1
@@ -1557,9 +1558,10 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]);
+        FreeMonIconPalettes(); //Free space for new pallete
+        LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
         gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create new pokemon sprite
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
-        //LoadMonIconPalettes();
     }
 
     if (gMain.newKeys & A_BUTTON)
@@ -1579,6 +1581,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
+        FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
         DebugAction_DestroyExtraWindow(taskId);
     }
@@ -1621,6 +1624,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
+        FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
         if (gTasks[taskId].data[7] == 0)
         {
@@ -1644,6 +1648,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
+        FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
         DebugAction_DestroyExtraWindow(taskId);
     }
