@@ -6808,19 +6808,14 @@ static bool8 ShouldSkipFriendshipChange(void)
     return FALSE;
 }
 
-#define FORCE_SIGNED(x)(-(x * (-1)))
-
 static void sub_806F160(struct Unknown_806F160_Struct* structPtr)
 {
     u16 i, j;
-    for (i = 0; i < FORCE_SIGNED(structPtr->field_0_0); i++)
+    for (i = 0; i < structPtr->field_0_0; i++)
     {
         structPtr->templates[i] = gUnknown_08329D98[i];
         for (j = 0; j < structPtr->field_1; j++)
         {
-            #ifndef NONMATCHING
-                asm("");
-            #endif
             structPtr->frameImages[i * structPtr->field_1 + j].data = &structPtr->byteArrays[i][j * 0x800];
         }
         structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_1];
@@ -6830,7 +6825,7 @@ static void sub_806F160(struct Unknown_806F160_Struct* structPtr)
 static void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
 {
     u16 i, j;
-    for (i = 0; i < FORCE_SIGNED(structPtr->field_0_0); i++)
+    for (i = 0; i < structPtr->field_0_0; i++)
     {
         structPtr->templates[i] = gUnknown_08329F28;
         for (j = 0; j < structPtr->field_1; j++)
@@ -6882,7 +6877,7 @@ struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
     }
     else
     {
-        for (i = 0; i < FORCE_SIGNED(structPtr->field_0_0); i++)
+        for (i = 0; i < structPtr->field_0_0; i++)
             structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 0xD));
     }
 
@@ -6978,7 +6973,7 @@ u8 *sub_806F4F8(u8 id, u8 arg1)
     }
     else
     {
-        if (arg1 >= FORCE_SIGNED(structPtr->field_0_0))
+        if (arg1 >= structPtr->field_0_0)
             arg1 = 0;
 
         return structPtr->byteArrays[arg1];
