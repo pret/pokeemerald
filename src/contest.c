@@ -998,7 +998,6 @@ void ResetLinkContestBoolean(void)
 
 static void SetupContestGpuRegs(void)
 {
-    u16 savedIme;
 
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -6099,5 +6098,4 @@ void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 langua
         name[PLAYER_NAME_LENGTH] = EOS;
     }
 }
-
 
