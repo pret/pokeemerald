@@ -8418,19 +8418,57 @@ static const union AnimCmd sAnim_ZYGARDE_COMPLETE_1[] =
 
 static const union AnimCmd sAnim_DEOXYS_ATTACK_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 26),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 16),
+};
+
+static const union AnimCmd sAnim_DEOXYS_ATTACK_2[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(2, 20),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(2, 20),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_DEOXYS_DEFENSE_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 26),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_DEOXYS_DEFENSE_2[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(2, 20),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(2, 20),
     ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_DEOXYS_SPEED_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 26),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_DEOXYS_SPEED_2[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(2, 20),
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(2, 20),
     ANIMCMD_END,
 };
 
@@ -13147,16 +13185,19 @@ static const union AnimCmd *const sAnims_ZYGARDE_COMPLETE[] ={
 static const union AnimCmd *const sAnims_DEOXYS_ATTACK[] ={
     sAnim_GeneralFrame0,
     sAnim_DEOXYS_ATTACK_1,
+    sAnim_DEOXYS_ATTACK_2,
 };
 
 static const union AnimCmd *const sAnims_DEOXYS_DEFENSE[] ={
     sAnim_GeneralFrame0,
     sAnim_DEOXYS_DEFENSE_1,
+    sAnim_DEOXYS_DEFENSE_2,
 };
 
 static const union AnimCmd *const sAnims_DEOXYS_SPEED[] ={
     sAnim_GeneralFrame0,
     sAnim_DEOXYS_SPEED_1,
+    sAnim_DEOXYS_SPEED_2,
 };
 
 #define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
