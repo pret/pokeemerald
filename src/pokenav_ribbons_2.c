@@ -198,26 +198,26 @@ void FreeRibbonsSummaryScreen1(void)
 
 u32 RibbonsSummaryHandleInput(struct PokenavSub13 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP && structPtr->monList->currIndex != 0)
+    if (JOY_REPEAT(DPAD_UP) && structPtr->monList->currIndex != 0)
     {
         structPtr->monList->currIndex--;
         structPtr->field_C = 0;
         sub_81D0814(structPtr);
         return RIBBONS_SUMMARY_FUNC_MOVED_CURSOR;
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && structPtr->monList->currIndex < structPtr->monList->listCount - 1)
+    if (JOY_REPEAT(DPAD_DOWN) && structPtr->monList->currIndex < structPtr->monList->listCount - 1)
     {
         structPtr->monList->currIndex++;
         structPtr->field_C = 0;
         sub_81D0814(structPtr);
         return RIBBONS_SUMMARY_FUNC_MOVED_CURSOR;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         structPtr->callback = HandleExpandedRibbonInput;
         return RIBBONS_SUMMARY_FUNC_SELECT_RIBBON;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         structPtr->callback = ReturnToRibbonsListFromSummary;
         return RIBBONS_SUMMARY_FUNC_EXIT;
@@ -227,15 +227,15 @@ u32 RibbonsSummaryHandleInput(struct PokenavSub13 *structPtr)
 
 u32 HandleExpandedRibbonInput(struct PokenavSub13 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP && sub_81D05DC(structPtr))
-        return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && sub_81D061C(structPtr))
-        return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT && sub_81D0664(structPtr))
-        return 3;
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT && sub_81D0688(structPtr))
-        return 3;
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_REPEAT(DPAD_UP) && sub_81D05DC(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_REPEAT(DPAD_DOWN) && sub_81D061C(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_REPEAT(DPAD_LEFT) && sub_81D0664(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_REPEAT(DPAD_RIGHT) && sub_81D0688(structPtr))
+        return RIBBONS_SUMMARY_FUNC_EXPANDED_CURSOR_MOVE;
+    if (JOY_NEW(B_BUTTON))
     {
         structPtr->callback = RibbonsSummaryHandleInput;
         return RIBBONS_SUMMARY_FUNC_EXPANDED_CANCEL;

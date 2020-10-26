@@ -182,15 +182,15 @@ static bool32 HandleConditionSearchInput_WaitSetup(struct PokenavSub7 *structPtr
 
 static u32 HandleConditionSearchInput(struct PokenavSub7 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
-        return 1;
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
-        return 2;
-    else if (gMain.newKeys & DPAD_LEFT)
-        return 3;
-    else if (gMain.newKeys & DPAD_RIGHT)
-        return 4;
-    else if (gMain.newKeys & B_BUTTON)
+    if (JOY_REPEAT(DPAD_UP))
+        return CONDITION_SEARCH_FUNC_MOVE_UP;
+    else if (JOY_REPEAT(DPAD_DOWN))
+        return CONDITION_SEARCH_FUNC_MOVE_DOWN;
+    else if (JOY_NEW(DPAD_LEFT))
+        return CONDITION_SEARCH_FUNC_PAGE_UP;
+    else if (JOY_NEW(DPAD_RIGHT))
+        return CONDITION_SEARCH_FUNC_PAGE_DOWN;
+    else if (JOY_NEW(B_BUTTON))
     {
         structPtr->isPartyCondition = 0;
         structPtr->callback = ReturnToConditionSearchList;
@@ -204,7 +204,7 @@ static u32 HandleConditionSearchInput(struct PokenavSub7 *structPtr)
         return CONDITION_SEARCH_FUNC_SELECT_MON;
     }
     else
-        return 0;
+        return CONDITION_SEARCH_FUNC_NONE;
 }
 
 static u32 ReturnToConditionSearchList(struct PokenavSub7 *structPtr)

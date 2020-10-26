@@ -671,14 +671,14 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u32 GetMetatileForFloor(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 stride) // stride is always 16
 {
     bool8 impassable;
     u16 metatile;
     u16 elevation;
 
-    impassable = (sHillData->floors[floorId].display.collisionData[arg2] >> (15 - bit)) & 1;
-    metatile = sHillData->floors[floorId].display.metatileData[arg2 * arg3 + bit] + 0x200;
+    impassable = (sHillData->floors[floorId].display.collisionData[y] >> (15 - x) & 1);
+    metatile = sHillData->floors[floorId].display.metatileData[stride * y + x] + 0x200;
     elevation = 0x3000;
 
     return (((impassable << 10) & METATILE_COLLISION_MASK) | elevation) | (metatile & METATILE_ID_MASK);

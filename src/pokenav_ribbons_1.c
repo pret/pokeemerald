@@ -174,21 +174,21 @@ static u32 HandleRibbonsMonListInput_WaitListInit(struct PokenavSub9 *structPtr)
 
 static u32 HandleRibbonsMonListInput(struct PokenavSub9 *structPtr)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
-        return 1;
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
-        return 2;
-    if (gMain.newKeys & DPAD_LEFT)
-        return 3;
-    if (gMain.newKeys & DPAD_RIGHT)
-        return 4;
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_REPEAT(DPAD_UP))
+        return RIBBONS_MON_LIST_FUNC_MOVE_UP;
+    if (JOY_REPEAT(DPAD_DOWN))
+        return RIBBONS_MON_LIST_FUNC_MOVE_DOWN;
+    if (JOY_NEW(DPAD_LEFT))
+        return RIBBONS_MON_LIST_FUNC_PAGE_UP;
+    if (JOY_NEW(DPAD_RIGHT))
+        return RIBBONS_MON_LIST_FUNC_PAGE_DOWN;
+    if (JOY_NEW(B_BUTTON))
     {
         structPtr->saveMonList = 0;
         structPtr->callback = RibbonsMonMenu_ReturnToMainMenu;
         return RIBBONS_MON_LIST_FUNC_EXIT;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         structPtr->monList->currIndex = GetSelectedPokenavListIndex();
         structPtr->saveMonList = 1;
