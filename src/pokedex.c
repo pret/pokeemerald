@@ -4167,21 +4167,17 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
 
 static void PrintMonWeight(u16 weight, u8 left, u8 top)
 {
-#ifndef NONMATCHING
-    asm("":::"r9");
-{
-#endif
     u8 buffer[16];
     bool8 output;
-    u8 i = 0;
+    u8 i;
     u32 lbs = (weight * 100000) / 4536;
 
     if (lbs % 10u >= 5)
         lbs += 10;
+    i = 0;
     output = FALSE;
 
-    buffer[i] = (lbs / 100000) + CHAR_0;
-    if (buffer[i] == CHAR_0)
+    if ((buffer[i] = (lbs / 100000) + CHAR_0) == CHAR_0 && !output)
     {
         buffer[i++] = 0x77;
     }
@@ -4192,8 +4188,7 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     }
 
     lbs %= 100000;
-    buffer[i] = (lbs / 10000) + CHAR_0;
-    if (buffer[i] == CHAR_0 && !output)
+    if ((buffer[i] = (lbs / 10000) + CHAR_0) == CHAR_0 && !output)
     {
         buffer[i++] = 0x77;
     }
@@ -4204,13 +4199,13 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     }
 
     lbs %= 10000;
-    buffer[i] = (lbs / 1000) + CHAR_0;
-    if (buffer[i] == CHAR_0 && !output)
+    if ((buffer[i] = (lbs / 1000) + CHAR_0) == CHAR_0 && !output)
     {
         buffer[i++] = 0x77;
     }
     else
     {
+        output = TRUE;
         i++;
     }
 
@@ -4226,9 +4221,6 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
-#ifndef NONMATCHING
-}
-#endif
 }
 
 const u8 *GetPokedexCategoryName(u16 dexNum) // unused
