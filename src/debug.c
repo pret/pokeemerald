@@ -1467,9 +1467,10 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     gTasks[taskId].data[3] = 1;            //Current ID
     gTasks[taskId].data[4] = 0;            //Digit Selected
     gTasks[taskId].data[5] = 1;             //Species ID
-    gTasks[taskId].data[6] = CreateMonIcon(1, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
+    FreeMonIconPalettes(); //Free space for new pallete
+    LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
+    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
-    LoadMonIconPalettes();
     gTasks[taskId].data[7] = 0; //Simple 0 or complex 1
     gTasks[taskId].data[8] = 0; //Level
     gTasks[taskId].data[9] = 0; //Shiny: no 0, yes 1
