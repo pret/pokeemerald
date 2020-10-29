@@ -2456,10 +2456,10 @@ static void RemoveMoneyWindow(void)
 void BagMenu_PrepareTMHMMoveWindow(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(0));
-    blit_move_info_icon(3, 19, 0, 0);
-    blit_move_info_icon(3, 20, 0, 12);
-    blit_move_info_icon(3, 21, 0, 24);
-    blit_move_info_icon(3, 22, 0, 36);
+    BlitMenuInfoIcon(3, MENU_INFO_ICON_TYPE, 0, 0);
+    BlitMenuInfoIcon(3, MENU_INFO_ICON_POWER, 0, 12);
+    BlitMenuInfoIcon(3, MENU_INFO_ICON_ACCURACY, 0, 24);
+    BlitMenuInfoIcon(3, MENU_INFO_ICON_PP, 0, 36);
     CopyWindowToVram(3, 2);
 }
 
@@ -2479,7 +2479,7 @@ void PrintTMHMMoveData(u16 itemId)
     else
     {
         moveId = ItemIdToBattleMoveId(itemId);
-        blit_move_info_icon(4, gBattleMoves[moveId].type + 1, 0, 0);
+        BlitMenuInfoIcon(4, gBattleMoves[moveId].type + 1, 0, 0);
         if (gBattleMoves[moveId].power <= 1)
         {
             text = gText_ThreeDashes;
