@@ -128,5 +128,6 @@ struct Pokemon *GetIllusionMonPtr(u32 battlerId);
 void ClearIllusionMon(u32 battlerId);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
+u8 GetBattleMoveSplit(u32 moveId);
 
 #endif // GUARD_BATTLE_UTIL_H
