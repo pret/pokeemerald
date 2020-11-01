@@ -15528,7 +15528,9 @@ const struct BaseStats gBaseStats[] =
         #if P_UPDATED_ABILITIES >= GEN6
             .abilityHidden = ABILITY_SPEED_BOOST,
         #else
-            .abilityHidden = ABILITY_QUICK_FEET,
+            #ifdef BATTLE_ENGINE
+                .abilityHidden = ABILITY_QUICK_FEET,
+            #endif
         #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
@@ -15558,7 +15560,9 @@ const struct BaseStats gBaseStats[] =
         #if P_UPDATED_ABILITIES >= GEN6
             .abilityHidden = ABILITY_SPEED_BOOST,
         #else
-            .abilityHidden = ABILITY_QUICK_FEET,
+            #ifdef BATTLE_ENGINE
+                .abilityHidden = ABILITY_QUICK_FEET,
+            #endif
         #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
@@ -15592,7 +15596,9 @@ const struct BaseStats gBaseStats[] =
         #if P_UPDATED_ABILITIES >= GEN6
             .abilityHidden = ABILITY_SPEED_BOOST,
         #else
-            .abilityHidden = ABILITY_QUICK_FEET,
+            #ifdef BATTLE_ENGINE
+                .abilityHidden = ABILITY_QUICK_FEET,
+            #endif
         #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
