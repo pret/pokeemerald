@@ -109,8 +109,8 @@ static const u8 sAftermathDescription[] = _("Fainting damages the foe.");
 static const u8 sAnticipationDescription[] = _("Senses dangerous moves.");
 static const u8 sForewarnDescription[] = _("Determines a foe's move.");
 static const u8 sUnawareDescription[] = _("Ignores stat changes.");
-static const u8 sTintedLensDescription[] = _("Ups “not very effective“.");
-static const u8 sFilterDescription[] = _("Weakens “super effective.“.");
+static const u8 sTintedLensDescription[] = _("Ups “not very effective”.");
+static const u8 sFilterDescription[] = _("Weakens “super effective”.");
 static const u8 sSlowStartDescription[] = _("Takes a while to get going.");
 static const u8 sScrappyDescription[] = _("Hits Ghost-type Pokémon.");
 static const u8 sStormDrainDescription[] = _("Draws in Water moves.");
@@ -220,7 +220,7 @@ static const u8 sPsychicSurgeDescription[] = _("Field becomes weird.");
 static const u8 sMistySurgeDescription[] = _("Field becomes misty.");
 static const u8 sGrassySurgeDescription[] = _("Field becomes grassy.");
 static const u8 sFullMetalBodyDescription[] = _("Prevents stat reduction.");
-static const u8 sNeuroforceDescription[] = _("Ups “super effective.“.");
+static const u8 sNeuroforceDescription[] = _("Ups “super effective”.");
 
 const u8 gAbilityNames[ABILITIES_COUNT_GEN7][ABILITY_NAME_LENGTH + 1] =
 {
