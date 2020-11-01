@@ -17379,8 +17379,10 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_FLASH_FIRE, ABILITY_FLAME_BODY},
-        #ifdef BATTLE_ENGINE && P_UPDATED_ABILITY >= GEN_6
-            .abilityHidden = ABILITY_INFILTRATOR,
+        #if P_UPDATED_ABILITY >= GEN_6
+            #ifdef BATTLE_ENGINE
+                .abilityHidden = ABILITY_INFILTRATOR,
+            #endif
         #else
             .abilityHidden = ABILITY_SHADOW_TAG,
         #endif
@@ -17408,8 +17410,10 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_FLASH_FIRE, ABILITY_FLAME_BODY},
-        #ifdef BATTLE_ENGINE && P_UPDATED_ABILITY >= GEN_6
-            .abilityHidden = ABILITY_INFILTRATOR,
+        #if P_UPDATED_ABILITY >= GEN_6
+            #ifdef BATTLE_ENGINE
+                .abilityHidden = ABILITY_INFILTRATOR,
+            #endif
         #else
             .abilityHidden = ABILITY_SHADOW_TAG,
         #endif
@@ -17437,8 +17441,10 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_FLASH_FIRE, ABILITY_FLAME_BODY},
-        #ifdef BATTLE_ENGINE && P_UPDATED_ABILITY >= GEN_6
-            .abilityHidden = ABILITY_INFILTRATOR,
+        #if P_UPDATED_ABILITY >= GEN_6
+            #ifdef BATTLE_ENGINE
+                .abilityHidden = ABILITY_INFILTRATOR,
+            #endif
         #else
             .abilityHidden = ABILITY_SHADOW_TAG,
         #endif
