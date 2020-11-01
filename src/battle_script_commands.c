@@ -12389,25 +12389,34 @@ static void Cmd_metalburstdamagecalculator(void)
 
 static bool32 CriticalCapture(u32 odds)
 {
-    u16 numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+    #if CRITICAL_CAPTURE == TRUE
+        u16 numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
 
-    if (numCaught <= 30)
-        odds = 0;
-    else if (numCaught <= 150)
-        odds /= 2;
-    else if (numCaught <= 300)
-        ;
-    else if (numCaught <= 450)
-        odds = (odds * 150) / 100;
-    else if (numCaught <= 600)
-        odds *= 2;
-    else
-        odds = (odds * 250) / 100;
+        if (numCaught <= 30)
+            odds = 0;
+        else if (numCaught <= 150)
+            odds /= 2;
+        else if (numCaught <= 300)
+            ;
+        else if (numCaught <= 450)
+            odds = (odds * 150) / 100;
+        else if (numCaught <= 600)
+            odds *= 2;
+        else
+            odds = (odds * 250) / 100;
 
-    odds /= 6;
-    if ((Random() % 255) < odds)
-        return TRUE;
+        #ifdef ITEM_CATCHING_CHARM
+        if (CheckBagHasItem(ITEM_CATCHING_CHARM, 1))
+            odds = (odds * (100 + CATCHING_CHARM_BOOST)) / 100;
+        #endif
 
-    return FALSE;
+        odds /= 6;
+        if ((Random() % 255) < odds)
+            return TRUE;
+
+        return FALSE;
+    #else
+        return FALSE;
+    #endif
 }
 
