@@ -3740,8 +3740,7 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     #if (B_SCALED_EXP >= GEN_5) && (B_SCALED_EXP != GEN_6)
                         gBattleMoveDamage *= sExperienceScalingFactors[(gBattleMons[gBattlerFainted].level * 2) + 10];
-                        gBattleMoveDamage /= sExperienceScalingFactors[gBattleMons[gBattlerFainted].level + 
-                            GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) + 10];
+                        gBattleMoveDamage /= sExperienceScalingFactors[gBattleMons[gBattlerFainted].level + GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) + 10];
                         gBattleMoveDamage++;
                     #endif
 
