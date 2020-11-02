@@ -131,8 +131,8 @@
 #define B_POWDER_GRASS              GEN_6 // In Gen6+, Grass type Pokémon are immune to powder and spore moves.
 
 // Critical Capture
-#define CRITICAL_CAPTURE            TRUE    // if set to TRUE, critical capture will be enabled
-#define CATCHING_CHARM_BOOST        20  // % boost in critical capture odds if player has the catching charm
+#define CRITICAL_CAPTURE            TRUE // if set to TRUE, critical capture will be enabled
+#define CATCHING_CHARM_BOOST        20   // % boost in critical capture odds if player has the catching charm
 
 // Animation Settings
 #define B_NEW_SWORD_PARTICLE            TRUE    // If set to TRUE, it updates Swords Dance's particle.
