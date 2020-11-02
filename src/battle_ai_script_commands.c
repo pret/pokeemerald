@@ -14,7 +14,6 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
@@ -1299,7 +1298,7 @@ static void Cmd_count_usable_party_mons(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        u32 position;
+        u8 position;
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
         position = GetBattlerPosition(battlerId) ^ BIT_FLANK;
         battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(position)];

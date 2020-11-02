@@ -181,40 +181,36 @@ u32 GetMewMoveDirection(void)
     {
         if (ShouldMewMoveEast(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else if (ShouldMewMoveWest(mew, 1))
+        if (ShouldMewMoveWest(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else
-            return DIR_NORTH;
+        return DIR_NORTH;
     }
 
     if (ShouldMewMoveSouth(mew, 0))
     {
         if (ShouldMewMoveEast(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else if (ShouldMewMoveWest(mew, 1))
+        if (ShouldMewMoveWest(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else
-            return DIR_SOUTH;
+         return DIR_SOUTH;
     }
 
     if (ShouldMewMoveEast(mew, 0))
     {
         if (ShouldMewMoveNorth(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else if (ShouldMewMoveSouth(mew, 1))
+        if (ShouldMewMoveSouth(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else
-            return DIR_EAST;
+        return DIR_EAST;
     }
 
     if (ShouldMewMoveWest(mew, 0))
     {
         if (ShouldMewMoveNorth(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else if (ShouldMewMoveSouth(mew, 1))
+        if (ShouldMewMoveSouth(mew, 1))
             return GetRandomMewDirectionCandidate(2);
-        else
-            return DIR_WEST;
+        return DIR_WEST;
     }
 
     // If this point is reached, Mew cannot move without getting closer to the player
@@ -315,8 +311,7 @@ static u8 GetValidMewMoveDirection(u8 ignoredDir)
 
     if (count > 1)
         return sMewDirectionCandidates[VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER) % count];
-    else
-        return sMewDirectionCandidates[0];
+    return sMewDirectionCandidates[0];
 }
 
 void UpdateFarawayIslandStepCounter(void)

@@ -4,6 +4,7 @@
 #include "task.h"
 #include "text.h"
 #include "window.h"
+#include "constants/pokemon.h"
 
 #define MENU_NOTHING_CHOSEN -2
 #define MENU_B_PRESSED -1
@@ -13,6 +14,14 @@
 #define MENU_CURSOR_DELTA_DOWN   1
 #define MENU_CURSOR_DELTA_LEFT  -1
 #define MENU_CURSOR_DELTA_RIGHT  1
+
+#define MENU_INFO_ICON_TYPE      (NUMBER_OF_MON_TYPES + 1)
+#define MENU_INFO_ICON_POWER     (NUMBER_OF_MON_TYPES + 2)
+#define MENU_INFO_ICON_ACCURACY  (NUMBER_OF_MON_TYPES + 3)
+#define MENU_INFO_ICON_PP        (NUMBER_OF_MON_TYPES + 4)
+#define MENU_INFO_ICON_EFFECT    (NUMBER_OF_MON_TYPES + 5)
+#define MENU_INFO_ICON_BALL_RED  (NUMBER_OF_MON_TYPES + 6)
+#define MENU_INFO_ICON_BALL_BLUE (NUMBER_OF_MON_TYPES + 7)
 
 enum
 {
@@ -61,7 +70,7 @@ u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 numItems, u8 i
 u8 Menu_GetCursorPos(void);
 s8 Menu_ProcessInput(void);
 s8 Menu_ProcessInputNoWrap(void);
-void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
+void BlitMenuInfoIcon(u8 winId, u8 a2, u16 x, u16 y);
 void ResetTempTileDataBuffers(void);
 void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 bool8 FreeTempTileDataBuffersIfPossible(void);
