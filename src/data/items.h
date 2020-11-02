@@ -1281,9 +1281,16 @@ const struct Item gItems[] =
     {
         .name = _("Escape Rope"),
         .itemId = ITEM_ESCAPE_ROPE,
-        .price = 550,
         .description = sEscapeRopeDesc,
+        #if I_KEY_ESCAPE_ROPE >= GEN_8
+        .price = 0,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        #else
+        .price = 550,
+        .importance = 0,
         .pocket = POCKET_ITEMS,
+        #endif
         .type = 2,
         .fieldUseFunc = ItemUseOutOfBattle_EscapeRope,
         .secondaryId = 0,
@@ -4883,8 +4890,13 @@ const struct Item gItems[] =
         .itemId = ITEM_OLD_AMBER,
         .price = 0,
         .description = sOldAmberDesc,
+        #if I_KEY_FOSSILS >= GEN_4
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
+        #else
+        .importance = 0,
+        .pocket = POCKET_ITEMS,
+        #endif
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
@@ -4948,8 +4960,13 @@ const struct Item gItems[] =
         .itemId = ITEM_HELIX_FOSSIL,
         .price = 0,
         .description = sHelixFossilDesc,
+        #if I_KEY_FOSSILS >= GEN_4
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        #else
         .importance = 0,
         .pocket = POCKET_ITEMS,
+        #endif
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
@@ -4961,8 +4978,13 @@ const struct Item gItems[] =
         .itemId = ITEM_DOME_FOSSIL,
         .price = 0,
         .description = sDomeFossilDesc,
+        #if I_KEY_FOSSILS >= GEN_4
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        #else
         .importance = 0,
         .pocket = POCKET_ITEMS,
+        #endif
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
@@ -4974,8 +4996,13 @@ const struct Item gItems[] =
         .itemId = ITEM_ROOT_FOSSIL,
         .price = 0,
         .description = sRootFossilDesc,
+        #if I_KEY_FOSSILS >= GEN_4
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        #else
         .importance = 0,
         .pocket = POCKET_ITEMS,
+        #endif
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
@@ -4987,8 +5014,13 @@ const struct Item gItems[] =
         .itemId = ITEM_CLAW_FOSSIL,
         .price = 0,
         .description = sClawFossilDesc,
+        #if I_KEY_FOSSILS >= GEN_4
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        #else
         .importance = 0,
         .pocket = POCKET_ITEMS,
+        #endif
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
