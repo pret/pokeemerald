@@ -28,7 +28,6 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 enum
 {

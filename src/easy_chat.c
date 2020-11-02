@@ -32,7 +32,6 @@
 #include "constants/lilycove_lady.h"
 #include "constants/mauville_old_man.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/rgb.h"
 
 #define EZCHAT_TASK_STATE        0

@@ -44,7 +44,6 @@
 #include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 
 struct SpeciesItem
@@ -2837,9 +2836,9 @@ void CalculateMonStats(struct Pokemon *mon)
         newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
     }
 
-    gBattleScripting.field_23 = newMaxHP - oldMaxHP;
-    if (gBattleScripting.field_23 == 0)
-        gBattleScripting.field_23 = 1;
+    gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
+    if (gBattleScripting.levelUpHP == 0)
+        gBattleScripting.levelUpHP = 1;
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
 
@@ -2861,6 +2860,8 @@ void CalculateMonStats(struct Pokemon *mon)
         if (currentHP == 0 && oldMaxHP == 0)
             currentHP = newMaxHP;
         else if (currentHP != 0)
+            // BUG: currentHP is unintentionally able to become <= 0 after the instruction below. This causes the pomeg berry glitch.
+            // To fix that set currentHP = 1 if currentHP <= 0.
             currentHP += newMaxHP - oldMaxHP;
         else
             return;
@@ -4911,19 +4912,21 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 break;
                             }
                         }
+
+                        // Get amount of HP to restore
                         dataUnsigned = itemEffect[var_3C++];
                         switch (dataUnsigned)
                         {
-                        case 0xFF:
+                        case ITEM6_HEAL_FULL:
                             dataUnsigned = GetMonData(mon, MON_DATA_MAX_HP, NULL) - GetMonData(mon, MON_DATA_HP, NULL);
                             break;
-                        case 0xFE:
+                        case ITEM6_HEAL_HALF:
                             dataUnsigned = GetMonData(mon, MON_DATA_MAX_HP, NULL) / 2;
                             if (dataUnsigned == 0)
                                 dataUnsigned = 1;
                             break;
-                        case 0xFD:
-                            dataUnsigned = gBattleScripting.field_23;
+                        case ITEM6_HEAL_LVL_UP:
+                            dataUnsigned = gBattleScripting.levelUpHP;
                             break;
                         }
                         if (GetMonData(mon, MON_DATA_MAX_HP, NULL) != GetMonData(mon, MON_DATA_HP, NULL))

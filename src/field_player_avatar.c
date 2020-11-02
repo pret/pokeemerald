@@ -29,7 +29,6 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainer_types.h"
 
 static EWRAM_DATA u8 gUnknown_0203734C = 0;

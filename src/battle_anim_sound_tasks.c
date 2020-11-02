@@ -5,7 +5,6 @@
 #include "sound.h"
 #include "task.h"
 #include "constants/battle_anim.h"
-#include "constants/species.h"
 
 // this file's functions
 static void sub_8158B98(u8 taskId);

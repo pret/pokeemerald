@@ -33,7 +33,7 @@ struct DigitPrinterAlloc
 };
 
 // this file's functions
-static u8 GetFirstOamId(u8 oamCount);;
+static u8 GetFirstOamId(u8 oamCount);
 static void CopyWorkToOam(struct DigitPrinter *objWork);
 static void DrawNumObjsLeadingZeros(struct DigitPrinter *objWork, s32 num, bool32 sign);
 static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, s32 num, bool32 sign);
