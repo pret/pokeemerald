@@ -9973,7 +9973,7 @@ static void Cmd_handleballthrow(void)
         if (catchRate < 21 && ballAddition == -20)
             catchRate = 1;
         else
-            catchRate = catchRate - ballAddition;
+            catchRate = catchRate + ballAddition;
 
         odds = ((catchRate) * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
