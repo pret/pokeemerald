@@ -9907,7 +9907,7 @@ static void Cmd_handleballthrow(void)
                     else
                         ballAddition = 30;
                 #elif I_HEAVY_BALL_MODIFIER >= GEN_4
-                    if (i < 2028)
+                    if (i < 2048)
                         ballAddition = -20;
                     else if (i < 3072)
                         ballAddition = 20;
@@ -9969,7 +9969,13 @@ static void Cmd_handleballthrow(void)
         }
         #endif
 
-        odds = ((catchRate + ballAddition) * ballMultiplier / 10)
+        // catchRate is unsigned, which means that it may potentially overflow if sum is applied directly.
+        if (catchRate < 21 && ballAddition == -20)
+            catchRate = 1;
+        else
+            catchRate = catchRate - ballAddition;
+
+        odds = ((catchRate) * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
