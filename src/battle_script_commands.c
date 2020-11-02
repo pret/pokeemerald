@@ -12389,7 +12389,7 @@ static void Cmd_metalburstdamagecalculator(void)
 
 static bool32 CriticalCapture(u32 odds)
 {
-    #if CRITICAL_CAPTURE == TRUE
+    #if B_CRITICAL_CAPTURE == TRUE
         u16 numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
 
         if (numCaught <= 30)
@@ -12407,7 +12407,7 @@ static bool32 CriticalCapture(u32 odds)
 
         #ifdef ITEM_CATCHING_CHARM
         if (CheckBagHasItem(ITEM_CATCHING_CHARM, 1))
-            odds = (odds * (100 + CATCHING_CHARM_BOOST)) / 100;
+            odds = (odds * (100 + B_CATCHING_CHARM_BOOST)) / 100;
         #endif
 
         odds /= 6;
