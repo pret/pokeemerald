@@ -8509,23 +8509,11 @@ void sub_809783C(struct Sprite *sprite, u8 a2, u8 a3, u8 a4)
     sprite->data[6] = 0;
 }
 
-static const s16 gUnknown_0850E840[] = {
-    16, 16, 32,
-};
-
-static const u8 gUnknown_0850E846[] = {
-    0, 0, 1,
-};
-
 u8 sub_809785C(struct Sprite *sprite)
 {
-    s16 v5[3];
-    u8 v6[3];
-    u8 v2;
-
-    memcpy(v5, gUnknown_0850E840, 6); // TODO: get rid of memcpy
-    memcpy(v6, gUnknown_0850E846, 3);
-    v2 = 0;
+    s16 v5[] = {16, 16, 32};
+    u8 v6[] = {0, 0, 1};
+    u8 v2 = 0;
 
     if (sprite->data[4])
         Step1(sprite, sprite->data[3]);
@@ -8546,23 +8534,11 @@ u8 sub_809785C(struct Sprite *sprite)
     return v2;
 }
 
-static const s16 gUnknown_0850E84A[] = {
-    32, 32, 64,
-};
-
-static const u8 gUnknown_0850E850[] = {
-    1, 1, 2,
-};
-
 u8 sub_80978E4(struct Sprite *sprite)
 {
-    s16 v5[3];
-    u8 v6[3];
-    u8 v2;
-
-    memcpy(v5, gUnknown_0850E84A, 6);
-    memcpy(v6, gUnknown_0850E850, 3);
-    v2 = 0;
+    s16 v5[] = {32, 32, 64};
+    u8 v6[] = {1, 1, 2};
+    u8 v2 = 0;
 
     if (sprite->data[4] && !(sprite->data[6] & 1))
         Step1(sprite, sprite->data[3]);

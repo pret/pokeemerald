@@ -1199,7 +1199,7 @@ static void AnimSkyAttackBird(struct Sprite *sprite)
     sprite->data[7] = ((posy - sprite->pos1.y) << 4) / 12;
 
     rotation = ArcTan2Neg(posx - sprite->pos1.x, posy - sprite->pos1.y);
-    rotation += 49152;
+    rotation -= 16384;
 
     TrySetSpriteRotScale(sprite, 1, 0x100, 0x100, rotation);
 

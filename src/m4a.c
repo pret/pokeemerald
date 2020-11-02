@@ -635,7 +635,7 @@ void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader
             track++;
         }
 
-        if (songHeader->reverb & 0x80)
+        if (songHeader->reverb & SOUND_MODE_REVERB_SET)
             m4aSoundMode(songHeader->reverb);
 
         mplayInfo->ident = ID_NUMBER;

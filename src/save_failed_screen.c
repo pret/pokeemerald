@@ -349,7 +349,7 @@ static void VBlankCB_UpdateClockGraphics(void)
 
     gMain.oamBuffer[0] = sClockOamData;
     gMain.oamBuffer[0].x = 112;
-    gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;;
+    gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;
 
     if (gSaveFailedClockInfo[CLOCK_RUNNING] != FALSE)
     {

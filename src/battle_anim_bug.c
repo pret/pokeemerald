@@ -387,13 +387,8 @@ static void AnimTranslateStinger(struct Sprite *sprite)
         if (GetBattlerPosition(gBattleAnimTarget) == B_POSITION_PLAYER_LEFT
          || GetBattlerPosition(gBattleAnimTarget) == B_POSITION_OPPONENT_LEFT)
         {
-            s16 temp1, temp2;
-
-            temp1 = gBattleAnimArgs[2];
-            gBattleAnimArgs[2] = -temp1;
-
-            temp2 = gBattleAnimArgs[0];
-            gBattleAnimArgs[0] = -temp2;
+            gBattleAnimArgs[2] *= -1;
+            gBattleAnimArgs[0] *= -1;
         }
     }
 
