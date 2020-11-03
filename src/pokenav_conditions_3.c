@@ -196,7 +196,7 @@ static u32 HandleConditionSearchInput(struct PokenavSub7 *structPtr)
         structPtr->callback = ReturnToConditionSearchList;
         return CONDITION_SEARCH_FUNC_EXIT;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         structPtr->monList->currIndex = GetSelectedPokenavListIndex();
         structPtr->isPartyCondition = 1;

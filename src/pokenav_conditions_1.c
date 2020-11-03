@@ -88,13 +88,13 @@ u32 HandlePartyConditionInput(struct PokenavSub11 *structPtr)
 
     if (ret == PARTY_CONDITION_FUNC_NONE)
     {
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             structPtr->callback = GetConditionReturnCallback;
             ret = PARTY_CONDITION_FUNC_RETURN;
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             if (structPtr->searchMode == 0)
             {
@@ -165,7 +165,7 @@ u8 ConditionGraphHandleDpadInput(struct PokenavSub11 *structPtr)
     struct PokenavSub18 *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
     u8 ret = 0;
 
-    if (gMain.heldKeys & DPAD_UP)
+    if (JOY_HELD(DPAD_UP))
     {
         if (structPtr->searchMode == 0 || monListPtr->currIndex != 0)
         {
@@ -173,7 +173,7 @@ u8 ConditionGraphHandleDpadInput(struct PokenavSub11 *structPtr)
             ret = SwitchConditionSummaryIndex(1);
         }
     }
-    else if (gMain.heldKeys & DPAD_DOWN)
+    else if (JOY_HELD(DPAD_DOWN))
     {
         if (structPtr->searchMode == 0 || monListPtr->currIndex < monListPtr->listCount - 1)
         {
