@@ -1665,7 +1665,7 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
         CopyWindowToVram(data[1], 3);
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
             break;
         else
             return;
@@ -2498,9 +2498,9 @@ void sub_8023558(struct BerryCrushGame *r3)
 
 void sub_80236B8(struct BerryCrushGame *r5)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         r5->unk5C.unk02_2 = 1;
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
     {
         if (r5->unk68.as_four_players.others[r5->unk8].unk4.as_hwords[5] < r5->unk28)
             ++r5->unk68.as_four_players.others[r5->unk8].unk4.as_hwords[5];
@@ -2966,7 +2966,7 @@ static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
             --r5->unk138.unk0;
             return 0;
         }
-        if (!(gMain.newKeys & A_BUTTON))
+        if (!(JOY_NEW(A_BUTTON)))
             return 0;
         PlaySE(SE_SELECT);
         sub_802222C(r5);

@@ -444,7 +444,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         break;
     case LL_STATE_AWAIT_PLAYERS:
         Leader_SetStateIfMemberListChanged(data, LL_STATE_ACCEPT_NEW_MEMBER_PROMPT, LL_STATE_MEMBER_LEFT);
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             if (data->playerCount == 1)
                 data->state = LL_STATE_SHUTDOWN_AND_FAIL;
@@ -457,7 +457,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
             && data->playerCount > GROUP_MIN(sPlayerActivityGroupSize) - 1
             && GROUP_MAX(sPlayerActivityGroupSize) != 0
             && sub_8012240()
-            && gMain.newKeys & START_BUTTON)
+            && JOY_NEW(START_BUTTON))
         {
             data->state = LL_STATE_MEMBERS_OK_PROMPT;
             LinkRfu_StopManagerAndFinalizeSlots();
@@ -1004,7 +1004,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             break;
         case 0:
             id = ListMenu_ProcessInput(data->listTaskId);
-            if (gMain.newKeys & A_BUTTON && id != -1)
+            if (JOY_NEW(A_BUTTON) && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 activity = data->field_0->arr[id].gname_uname.gname.activity;
@@ -1031,7 +1031,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
                     PlaySE(SE_WALL_HIT);
                 }
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 data->state = LG_STATE_CANCEL_CHOOSE_LEADER;
             }
@@ -1134,7 +1134,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             break;
         }
 
-        if (RfuGetStatus() == RFU_STATUS_OK && gMain.newKeys & B_BUTTON)
+        if (RfuGetStatus() == RFU_STATUS_OK && JOY_NEW(B_BUTTON))
             data->state = LG_STATE_ASK_LEAVE_GROUP;
         break;
     case LG_STATE_ASK_LEAVE_GROUP:
@@ -1888,7 +1888,7 @@ static void Task_MEvent_Leader(u8 taskId)
         break;
     case 4:
         Leader_SetStateIfMemberListChanged(data, 5, 6);
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             data->state = 13;
             DestroyWirelessStatusIndicatorSprite();
@@ -2103,7 +2103,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             break;
         case 0:
             id = ListMenu_ProcessInput(data->listTaskId);
-            if (gMain.newKeys & A_BUTTON && id != -1)
+            if (JOY_NEW(A_BUTTON) && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
@@ -2125,7 +2125,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
                     PlaySE(SE_WALL_HIT);
                 }
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 data->state = 6;
             }
@@ -2288,7 +2288,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
                     }
                 }
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 data->state = 6;
                 data->refreshTimer = 0;
@@ -2546,7 +2546,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         else if (ScriptContext2_IsEnabled() != TRUE)
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 if (TryInteractWithUnionRoomMember(uroom->field_0, &taskData[0], &taskData[1], uroom->spriteIds))
                 {
@@ -2880,7 +2880,7 @@ static void Task_RunUnionRoom(u8 taskId)
         break;
     case UR_STATE_HANDLE_CONTACT_DATA:
         ReceiveUnionRoomActivityPacket(uroom);
-        if (UnionRoom_HandleContactFromOtherPlayer(uroom) && gMain.newKeys & B_BUTTON)
+        if (UnionRoom_HandleContactFromOtherPlayer(uroom) && JOY_NEW(B_BUTTON))
         {
             sub_8011DE0(1);
             StringCopy(gStringVar4, sText_ChatEnded);

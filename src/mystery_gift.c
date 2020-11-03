@@ -561,7 +561,7 @@ bool32 MG_PrintTextOnWindow1AndWaitButton(u8 *textState, const u8 *str)
         goto inc;
     case 1:
         DrawDownArrow(1, 0xD0, 0x14, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
-        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
         {
         inc:
             (*textState)++;
@@ -595,7 +595,7 @@ bool32 unref_HideDownArrowAndWaitButton(u8 * textState)
     {
     case 0:
         HideDownArrow();
-        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
         {
             (*textState)++;
         }
@@ -930,7 +930,7 @@ static bool32 mevent_save_game(u8 * state)
         (*state)++;
         break;
     case 3:
-        if (({gMain.newKeys & (A_BUTTON | B_BUTTON);}))
+        if (({JOY_NEW(A_BUTTON | B_BUTTON);}))
         {
             (*state)++;
         }
@@ -1458,11 +1458,11 @@ void task00_mystery_gift(u8 taskId)
     case 20:
         if (data->IsCardOrNews == 0)
         {
-            if (({gMain.newKeys & A_BUTTON;}))
+            if (({JOY_NEW(A_BUTTON);}))
             {
                 data->state = 21;
             }
-            if (({gMain.newKeys & B_BUTTON;}))
+            if (({JOY_NEW(B_BUTTON);}))
             {
                 data->state = 27;
             }

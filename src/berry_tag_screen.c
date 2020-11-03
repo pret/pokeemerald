@@ -536,12 +536,12 @@ static void Task_HandleInput(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u16 arrowKeys = gMain.newAndRepeatedKeys & DPAD_ANY;
+        u16 arrowKeys = JOY_REPEAT(DPAD_ANY);
         if (arrowKeys == DPAD_UP)
             TryChangeDisplayedBerry(taskId, -1);
         else if (arrowKeys == DPAD_DOWN)
             TryChangeDisplayedBerry(taskId, 1);
-        else if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        else if (JOY_NEW(A_BUTTON | B_BUTTON))
             PrepareToCloseBerryTagScreen(taskId);
     }
 }

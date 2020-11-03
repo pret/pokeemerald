@@ -2354,19 +2354,19 @@ static void sub_8027554(void)
 {
     if (gUnknown_02022C98->unkB0[gUnknown_02022C98->multiplayerId] == 0)
     {
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             gUnknown_02022C98->unk31A0[gUnknown_02022C98->multiplayerId].unk2C.unk0 = 2;
             gUnknown_02022C98->unkB0[gUnknown_02022C98->multiplayerId] = 6;
             PlaySE(SE_M_CHARM);
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             gUnknown_02022C98->unk31A0[gUnknown_02022C98->multiplayerId].unk2C.unk0 = 3;
             gUnknown_02022C98->unkB0[gUnknown_02022C98->multiplayerId] = 6;
             PlaySE(SE_M_CHARM);
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             gUnknown_02022C98->unk31A0[gUnknown_02022C98->multiplayerId].unk2C.unk0 = 1;
             gUnknown_02022C98->unkB0[gUnknown_02022C98->multiplayerId] = 6;
@@ -2652,7 +2652,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
             data[0]++;
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             rbox_fill_rectangle(data[1]);
             CopyWindowToVram(data[1], 1);
@@ -4265,7 +4265,7 @@ static void sub_802988C(void)
         gUnknown_02022CF8->state++;
         break;
     case 4:
-        if (++gUnknown_02022CF8->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        if (++gUnknown_02022CF8->unk301C >= 30 && JOY_NEW(A_BUTTON))
         {
             gUnknown_02022CF8->unk301C = 0;
             PlaySE(SE_SELECT);
@@ -4297,7 +4297,7 @@ static void sub_802988C(void)
         gUnknown_02022CF8->state++;
         break;
     case 8:
-        if (++gUnknown_02022CF8->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        if (++gUnknown_02022CF8->unk301C >= 30 && JOY_NEW(A_BUTTON))
         {
             gUnknown_02022CF8->unk301C = 0;
             PlaySE(SE_SELECT);
@@ -4357,7 +4357,7 @@ static void sub_802988C(void)
         gUnknown_02022CF8->state++;
         break;
     case 11:
-        if (++gUnknown_02022CF8->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        if (++gUnknown_02022CF8->unk301C >= 30 && JOY_NEW(A_BUTTON))
         {
             gUnknown_02022CF8->unk301C = 0;
             PlaySE(SE_SELECT);
@@ -4423,14 +4423,14 @@ static void sub_802A010(void)
         AddTextPrinterParameterized(gUnknown_02022CF8->unk3008[1], 1, gText_SelectorArrow2, 0, ((y - 1) * 16) + 1, -1, NULL);
         CopyWindowToVram(gUnknown_02022CF8->unk3008[1], 3);
         // Increment state only if A or B button have been pressed.
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gUnknown_02022CF8->unk3020 == 0)
                 gUnknown_02022CF8->unk3020 = 1;
             gUnknown_02022CF8->state++;
         }
-        else if (gMain.newKeys & (DPAD_UP | DPAD_DOWN))
+        else if (JOY_NEW(DPAD_UP | DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             switch (gUnknown_02022CF8->unk3020)
@@ -4446,7 +4446,7 @@ static void sub_802A010(void)
                 break;
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gUnknown_02022CF8->unk3020 = 2;
