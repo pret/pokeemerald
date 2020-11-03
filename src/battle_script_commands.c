@@ -12390,17 +12390,17 @@ static void Cmd_metalburstdamagecalculator(void)
 static bool32 CriticalCapture(u32 odds)
 {
     #if B_CRITICAL_CAPTURE == TRUE
-        u16 numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+        u32 numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
 
-        if (numCaught <= 30)
+        if (numCaught <= (NUM_SPECIES * 30) / 650)
             odds = 0;
-        else if (numCaught <= 150)
+        else if (numCaught <= (NUM_SPECIES * 150) / 650)
             odds /= 2;
-        else if (numCaught <= 300)
-            ;
-        else if (numCaught <= 450)
+        else if (numCaught <= (NUM_SPECIES * 300) / 650)
+            ;   // odds = (odds * 100) / 100;
+        else if (numCaught <= (NUM_SPECIES * 450) / 650)
             odds = (odds * 150) / 100;
-        else if (numCaught <= 600)
+        else if (numCaught <= (NUM_SPECIES * 600) / 650)
             odds *= 2;
         else
             odds = (odds * 250) / 100;
