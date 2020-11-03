@@ -309,7 +309,8 @@ static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
 
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
 
     for (i = 0; i < RECV_QUEUE_NUM_SLOTS; i++)
     {
@@ -326,7 +327,8 @@ void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 
 void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
 
     for (i = 0; i < SEND_QUEUE_NUM_SLOTS; i++)
     {
@@ -343,7 +345,8 @@ void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 
 static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
 
     for (i = 0; i < UNUSED_QUEUE_NUM_SLOTS; i++)
     {
@@ -623,32 +626,30 @@ static void ASCIIToPkmnStr(u8 *pkmnStr, const u8 *asciiStr)
 static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     u8 flagCount = 0;
-    u8 flags = gRfuLinkStatus->connSlotFlag;
+    u32 flags = gRfuLinkStatus->connSlotFlag;
     u8 i;
 
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
-        for (i = 0; i < RFU_CHILD_MAX; i++)
+        for (i = 0; i < 4; flags >>= 1, i++)
         {
             if (flags & 1)
             {
                 if (maxFlags == flagCount + 1)
                 {
                     return gRfuLinkStatus->strength[i];
-                    break; // This break is needed to match
+                    break;
                 }
                 flagCount++;
             }
-            flags >>= 1;
         }
     }
     else
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < 4; flags >>= 1, i++)
         {
             if (flags & 1)
                 return gRfuLinkStatus->strength[i];
-             flags >>= 1;
         }
     }
     return 0;
@@ -922,7 +923,8 @@ void RecordMixTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {
-        s32 i, j;
+        s32 i;
+        s32 j;
         s32 nextSpace;
         s32 connectedTrainerRecordIndices[5];
         struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));

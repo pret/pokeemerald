@@ -124,8 +124,8 @@ struct ProtectStruct
     u32 flinchImmobility:1;
     u32 notFirstStrike:1;
     u32 palaceUnableToUseMove:1;
-    s32 physicalDmg;
-    s32 specialDmg;
+    u32 physicalDmg;
+    u32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
 };
@@ -254,7 +254,7 @@ struct BattleResults
     u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
-    u8 filler35;              // 0x35
+    u8 filler35;           // 0x35
     u8 catchAttempts[11];     // 0x36
 };
 

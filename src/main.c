@@ -81,6 +81,8 @@ void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
 
+#define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
+
 void AgbMain()
 {
 #if MODERN
@@ -134,11 +136,9 @@ void AgbMain()
     {
         ReadKeys();
 
-        if (!gSoftResetDisabled
-         && JOY_HELD_RAW(A_BUTTON)
-         && JOY_HELD_RAW(B_BUTTON)
-         && JOY_HELD_RAW(START_BUTTON)
-         && JOY_HELD_RAW(SELECT_BUTTON)) //The reset key combo A + B + START + SELECT
+        if (gSoftResetDisabled == FALSE
+         && (gMain.heldKeysRaw & A_BUTTON)
+         && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
         {
             rfu_REQ_stopMode();
             rfu_waitREQComplete();
@@ -262,7 +262,9 @@ static void ReadKeys(void)
 
     if (keyInput != 0 && gMain.heldKeys == keyInput)
     {
-        if (--gMain.keyRepeatCounter == 0)
+        gMain.keyRepeatCounter--;
+
+        if (gMain.keyRepeatCounter == 0)
         {
             gMain.newAndRepeatedKeys = keyInput;
             gMain.keyRepeatCounter = gKeyRepeatContinueDelay;
@@ -341,7 +343,7 @@ static void VBlankIntr(void)
 {
     if (gWirelessCommType != 0)
         RfuVSync();
-    else if (!gLinkVSyncDisabled)
+    else if (gLinkVSyncDisabled == FALSE)
         LinkVSync();
 
     gMain.vblankCounter1++;

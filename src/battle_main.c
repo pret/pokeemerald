@@ -127,7 +127,6 @@ static void HandleEndTurn_RanFromBattle(void);
 static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
 
-
 // EWRAM vars
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -633,16 +632,19 @@ static void CB2_InitBattleInternal(void)
         gBattle_WIN0V = 0x5051;
         ScanlineEffect_Clear();
 
-        for (i = 0; i < 80; i++)
+        i = 0;
+        while (i < 80)
         {
             gScanlineEffectRegBuffers[0][i] = 0xF0;
             gScanlineEffectRegBuffers[1][i] = 0xF0;
+            i++;
         }
 
-        for (; i < 160; i++)
+        while (i < 160)
         {
             gScanlineEffectRegBuffers[0][i] = 0xFF10;
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
+            i++;
         }
 
         ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
@@ -769,7 +771,8 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
 static void SetAllPlayersBerryData(void)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -2685,7 +2688,8 @@ static void sub_80398BC(struct Sprite *sprite) // unused?
 
 static void sub_80398D0(struct Sprite *sprite)
 {
-    if (--sprite->data[4] == 0)
+    sprite->data[4]--;
+    if (sprite->data[4] == 0)
     {
         sprite->data[4] = 8;
         sprite->invisible ^= 1;
@@ -3416,13 +3420,17 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             }
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT))
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            BtlController_EmitDrawTrainerPic(0);
-            MarkBattlerForControllerExec(gActiveBattler);
+            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
+             || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
+            {
+                BtlController_EmitDrawTrainerPic(0);
+                MarkBattlerForControllerExec(gActiveBattler);
+            }
         }
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && (GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT))
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
         {
             BtlController_EmitDrawTrainerPic(0);
             MarkBattlerForControllerExec(gActiveBattler);
@@ -3529,7 +3537,7 @@ static void BattleIntroPrintWildMonAttacked(void)
 
 static void BattleIntroPrintOpponentSendsOut(void)
 {
-    u8 position;
+    u32 position;
 
     if (gBattleControllerExecFlags)
         return;
@@ -3552,7 +3560,7 @@ static void BattleIntroPrintOpponentSendsOut(void)
 
 static void BattleIntroOpponent2SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_OPPONENT_RIGHT;
@@ -3580,7 +3588,7 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
 
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
     {
@@ -3595,9 +3603,7 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
             position = B_POSITION_OPPONENT_LEFT;
     }
     else
-    {
         position = B_POSITION_OPPONENT_LEFT;
-    }
 
     if (gBattleControllerExecFlags)
         return;
@@ -3639,7 +3645,7 @@ static void BattleIntroRecordMonsToDex(void)
     }
 }
 
-static void sub_803B3AC(void) // unused
+void sub_803B3AC(void) // unused
 {
     if (gBattleControllerExecFlags == 0)
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
@@ -3672,7 +3678,7 @@ static void BattleIntroPrintPlayerSendsOut(void)
 
 static void BattleIntroPlayer2SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_RIGHT;
@@ -3704,7 +3710,7 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
 
 static void BattleIntroPlayer1SendsOutMonAnimation(void)
 {
-    u8 position;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         position = B_POSITION_PLAYER_LEFT;
@@ -3742,7 +3748,7 @@ static void BattleIntroPlayer1SendsOutMonAnimation(void)
     gBattleMainFunc = TryDoEventsBeforeFirstTurn;
 }
 
-static void sub_803B598(void) // unused
+void sub_803B598(void) // unused
 {
     if (gBattleControllerExecFlags == 0)
     {
@@ -3765,7 +3771,8 @@ static void sub_803B598(void) // unused
 
 static void TryDoEventsBeforeFirstTurn(void)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
     u8 effect = 0;
 
     if (gBattleControllerExecFlags)
@@ -3955,7 +3962,11 @@ u8 IsRunningFromBattleImpossible(void)
 
     gPotentialItemEffectBattler = gActiveBattler;
 
-    if ((holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN) || (gBattleTypeFlags & BATTLE_TYPE_LINK) || (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY))
+    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
+        return 0;
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        return 0;
+    if (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
         return 0;
 
     side = GetBattlerSide(gActiveBattler);
@@ -4732,38 +4743,40 @@ static void SetActionsAndBattlersTurnOrder(void)
             gBattleStruct->focusPunchBattlerId = 0;
             return;
         }
-        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+        else
         {
-            if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_ITEM || gChosenActionByBattler[gActiveBattler] == B_ACTION_SWITCH)
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
-                gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
-                gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
-                turnOrderId++;
-            }
-        }
-        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
-        {
-            if (gChosenActionByBattler[gActiveBattler] != B_ACTION_USE_ITEM && gChosenActionByBattler[gActiveBattler] != B_ACTION_SWITCH)
-            {
-                gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
-                gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
-                turnOrderId++;
-            }
-        }
-        for (i = 0; i < gBattlersCount - 1; i++)
-        {
-            for (j = i + 1; j < gBattlersCount; j++)
-            {
-                u8 battler1 = gBattlerByTurnOrder[i];
-                u8 battler2 = gBattlerByTurnOrder[j];
-
-                if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
-                    && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
-                    && gActionsByTurnOrder[i] != B_ACTION_SWITCH
-                    && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
+                if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_ITEM || gChosenActionByBattler[gActiveBattler] == B_ACTION_SWITCH)
                 {
-                    if (GetWhoStrikesFirst(battler1, battler2, FALSE))
-                        SwapTurnOrder(i, j);
+                    gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
+                    gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
+                    turnOrderId++;
+                }
+            }
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+            {
+                if (gChosenActionByBattler[gActiveBattler] != B_ACTION_USE_ITEM && gChosenActionByBattler[gActiveBattler] != B_ACTION_SWITCH)
+                {
+                    gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
+                    gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
+                    turnOrderId++;
+                }
+            }
+            for (i = 0; i < gBattlersCount - 1; i++)
+            {
+                for (j = i + 1; j < gBattlersCount; j++)
+                {
+                    u8 battler1 = gBattlerByTurnOrder[i];
+                    u8 battler2 = gBattlerByTurnOrder[j];
+                    if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
+                        && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
+                        && gActionsByTurnOrder[i] != B_ACTION_SWITCH
+                        && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
+                    {
+                        if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                            SwapTurnOrder(i, j);
+                    }
                 }
             }
         }
@@ -4841,8 +4854,8 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     }
 
     TryClearRageStatuses();
-    gCurrentTurnActionNumber = 0; //See comment underneath
-    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber]; //Should be gActionsByTurnOrder[(gCurrentTurnActionNumber = 0)], but that doesn't match
+    gCurrentTurnActionNumber = 0;
+    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleMainFunc = RunTurnActionsFunctions;
@@ -4865,10 +4878,13 @@ static void RunTurnActionsFunctions(void)
         gHitMarker &= ~(HITMARKER_x100000);
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }
-    else if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
+    else
     {
-        gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
-        gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
+        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
+        {
+            gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
+            gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
+        }
     }
 }
 
@@ -4985,14 +5001,14 @@ static void HandleEndTurn_RanFromBattle(void)
     {
         switch (gProtectStructs[gBattlerAttacker].fleeFlag)
         {
+        default:
+            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
+            break;
         case 1:
             gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
             break;
         case 2:
             gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
-            break;
-        default:
-            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
             break;
         }
     }
@@ -5077,7 +5093,10 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;
         }
-        gBattleMainFunc = TryEvolvePokemon;
+        else
+        {
+            gBattleMainFunc = TryEvolvePokemon;
+        }
     }
 
     FreeAllWindowBuffers();
@@ -5172,4 +5191,3 @@ void RunBattleScriptCommands(void)
     if (gBattleControllerExecFlags == 0)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
-
