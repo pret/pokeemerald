@@ -1145,7 +1145,11 @@ static void CB2_InitSelectScreen(void)
         LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
         LoadPalette(gUnknown_0861046C, 0xF0, 8);
         LoadPalette(gUnknown_0861046C, 0xE0, 10);
+        #if MODERN
+        if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+        #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+        #endif
             gPlttBufferUnfaded[228] = sFactorySelectScreen->unk2A4;
         LoadPalette(gUnknown_0861039C, 0x20, 4);
         gMain.state++;
@@ -1167,7 +1171,11 @@ static void CB2_InitSelectScreen(void)
         SetVBlankCallback(Select_VblankCb);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
+        #if MODERN
+        if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+        #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+        #endif
         {
             Select_SetWinRegs(88, 152, 32, 96);
             ShowBg(3);
@@ -1181,7 +1189,11 @@ static void CB2_InitSelectScreen(void)
         gMain.state++;
         break;
     case 5:
+        #if MODERN
+        if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+        #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+        #endif
             sFactorySelectScreen->cursorPos = gLastViewedMonIndex;
         Select_InitMonsData();
         Select_InitAllSprites();
@@ -3170,7 +3182,11 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 5:
+        #if MODERN
+        if (sFactorySwapScreen && sFactorySwapScreen->fromSummaryScreen)
+        #else
         if (sFactorySwapScreen->fromSummaryScreen == TRUE)
+        #endif
             sFactorySwapScreen->cursorPos = gLastViewedMonIndex;
         gMain.state++;
         break;
