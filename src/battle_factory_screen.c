@@ -3084,7 +3084,7 @@ static void sub_819D9EC(u8 taskId)
     }
 }
 
-// This should be called at the top of CB2_InitSelectScreen
+// This should be called at the top of CB2_InitSwapScreen
 // sFactorySwapScreen is dereferenced prior to being allocated otherwise
 static NOINLINE void Swap_InitStruct(void)
 {
