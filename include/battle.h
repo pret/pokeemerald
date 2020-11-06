@@ -12,6 +12,8 @@
 #include "battle_util2.h"
 #include "battle_bg.h"
 
+#include "pokeball.h" // i'm not sure about this one
+
 #define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
 #define GET_BATTLER_SIDE(battler)         (GetBattlerPosition(battler) & BIT_SIDE)
 #define GET_BATTLER_SIDE2(battler)        (GET_BATTLER_POSITION(battler) & BIT_SIDE)
@@ -255,7 +257,7 @@ struct BattleResults
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
     u8 filler35;           // 0x35
-    u8 catchAttempts[11];     // 0x36
+    u8 catchAttempts[POKEBALL_COUNT-1];     // 0x36 Doesn't include Master ball
 };
 
 struct BattleTv_Side
