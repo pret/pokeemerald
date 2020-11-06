@@ -943,3 +943,8 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(UNOWN_EMARK, gMonFrontPic_UnownExclamationMark),
     SPECIES_SPRITE(UNOWN_QMARK, gMonFrontPic_UnownQuestionMark),
 };
+
+const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
+{
+    SPECIES_SPRITE(EEVEE, gMonFrontPic_EeveeF),
+};

@@ -169,6 +169,7 @@ extern const u32 gMonFrontPic_Gyarados[];
 extern const u32 gMonFrontPic_Lapras[];
 extern const u32 gMonFrontPic_Ditto[];
 extern const u32 gMonFrontPic_Eevee[];
+extern const u32 gMonFrontPic_EeveeF[];
 extern const u32 gMonFrontPic_Vaporeon[];
 extern const u32 gMonFrontPic_Jolteon[];
 extern const u32 gMonFrontPic_Flareon[];
