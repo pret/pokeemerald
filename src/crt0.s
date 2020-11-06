@@ -93,7 +93,7 @@ Init: @ 8000204
 	str r0, [r1]
 	.if MODERN
 	mov r0, #255 @ RESET_ALL
-	swi #1 << 16
+	svc #1 << 16
 	.endif @ MODERN
 	ldr r1, =AgbMain + 1
 	mov lr, pc
