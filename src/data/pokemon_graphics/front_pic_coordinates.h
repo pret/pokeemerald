@@ -4052,344 +4052,344 @@ const struct MonCoords gMonFrontPicCoords[] =
         .y_offset = 4,
     },
     // Megas
-    [SPECIES_MEGA_VENUSAUR] =
+    [SPECIES_VENUSAUR_MEGA] =
     {
         .size = 0,
         .y_offset = 6,
     },
-    [SPECIES_MEGA_CHARIZARD_X] =
+    [SPECIES_CHARIZARD_MEGA_X] =
     {
         .size = 0,
         .y_offset = 1,
     },
-    [SPECIES_MEGA_CHARIZARD_Y] =
+    [SPECIES_CHARIZARD_MEGA_Y] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_BLASTOISE] =
+    [SPECIES_BLASTOISE_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_BEEDRILL] =
+    [SPECIES_BEEDRILL_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_PIDGEOT] =
+    [SPECIES_PIDGEOT_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_ALAKAZAM] =
+    [SPECIES_ALAKAZAM_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_SLOWBRO] =
+    [SPECIES_SLOWBRO_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_GENGAR] =
+    [SPECIES_GENGAR_MEGA] =
     {
         .size = 0,
         .y_offset = 8,
     },
-    [SPECIES_MEGA_KANGASKHAN] =
+    [SPECIES_KANGASKHAN_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_PINSIR] =
+    [SPECIES_PINSIR_MEGA] =
     {
         .size = 0,
         .y_offset = 4,
     },
-    [SPECIES_MEGA_GYARADOS] =
+    [SPECIES_GYARADOS_MEGA] =
     {
         .size = 0,
         .y_offset = 1,
     },
-    [SPECIES_MEGA_AERODACTYL] =
+    [SPECIES_AERODACTYL_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_MEWTWO_X] =
+    [SPECIES_MEWTWO_MEGA_X] =
     {
         .size = 0,
         .y_offset = 1,
     },
-    [SPECIES_MEGA_MEWTWO_Y] =
+    [SPECIES_MEWTWO_MEGA_Y] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_AMPHAROS] =
+    [SPECIES_AMPHAROS_MEGA] =
     {
         .size = 0,
         .y_offset = 2,
     },
-    [SPECIES_MEGA_STEELIX] =
+    [SPECIES_STEELIX_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_SCIZOR] =
+    [SPECIES_SCIZOR_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_HERACROSS] =
+    [SPECIES_HERACROSS_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_HOUNDOOM] =
+    [SPECIES_HOUNDOOM_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_TYRANITAR] =
+    [SPECIES_TYRANITAR_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_SCEPTILE] =
+    [SPECIES_SCEPTILE_MEGA] =
     {
         .size = 0,
         .y_offset = 2,
     },
-    [SPECIES_MEGA_BLAZIKEN] =
+    [SPECIES_BLAZIKEN_MEGA] =
     {
         .size = 0,
         .y_offset = 1,
     },
-    [SPECIES_MEGA_SWAMPERT] =
+    [SPECIES_SWAMPERT_MEGA] =
     {
         .size = 0,
         .y_offset = 4,
     },
-    [SPECIES_MEGA_GARDEVOIR] =
+    [SPECIES_GARDEVOIR_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_SABLEYE] =
+    [SPECIES_SABLEYE_MEGA] =
     {
         .size = 0,
         .y_offset = 7,
     },
-    [SPECIES_MEGA_MAWILE] =
+    [SPECIES_MAWILE_MEGA] =
     {
         .size = 0,
         .y_offset = 5,
     },
-    [SPECIES_MEGA_AGGRON] =
+    [SPECIES_AGGRON_MEGA] =
     {
         .size = 0,
         .y_offset = 2,
     },
-    [SPECIES_MEGA_MEDICHAM] =
+    [SPECIES_MEDICHAM_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_MANECTRIC] =
+    [SPECIES_MANECTRIC_MEGA] =
     {
         .size = 0,
         .y_offset = 3,
     },
-    [SPECIES_MEGA_SHARPEDO] =
+    [SPECIES_SHARPEDO_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_CAMERUPT] =
+    [SPECIES_CAMERUPT_MEGA] =
     {
         .size = 0,
         .y_offset = 6,
     },
-    [SPECIES_MEGA_ALTARIA] =
+    [SPECIES_ALTARIA_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_BANETTE] =
+    [SPECIES_BANETTE_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_ABSOL] =
+    [SPECIES_ABSOL_MEGA] =
     {
         .size = 0,
         .y_offset = 5,
     },
-    [SPECIES_MEGA_GLALIE] =
+    [SPECIES_GLALIE_MEGA] =
     {
         .size = 0,
         .y_offset = 4,
     },
-    [SPECIES_MEGA_SALAMENCE] =
+    [SPECIES_SALAMENCE_MEGA] =
     {
         .size = 0,
         .y_offset = 5,
     },
-    [SPECIES_MEGA_METAGROSS] =
+    [SPECIES_METAGROSS_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_LATIAS] =
+    [SPECIES_LATIAS_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_LATIOS] =
+    [SPECIES_LATIOS_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_LOPUNNY] =
+    [SPECIES_LOPUNNY_MEGA] =
     {
         .size = 0,
         .y_offset = 2,
     },
-    [SPECIES_MEGA_GARCHOMP] =
+    [SPECIES_GARCHOMP_MEGA] =
     {
         .size = 0,
         .y_offset = 3,
     },
-    [SPECIES_MEGA_LUCARIO] =
+    [SPECIES_LUCARIO_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_ABOMASNOW] =
+    [SPECIES_ABOMASNOW_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_MEGA_GALLADE] =
+    [SPECIES_GALLADE_MEGA] =
     {
         .size = 0,
         .y_offset = 1,
     },
-    [SPECIES_MEGA_AUDINO] =
+    [SPECIES_AUDINO_MEGA] =
     {
         .size = 0,
         .y_offset = 5,
     },
-    [SPECIES_MEGA_DIANCIE] =
+    [SPECIES_DIANCIE_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
     // Special Mega + Primals
-    [SPECIES_MEGA_RAYQUAZA] =
+    [SPECIES_RAYQUAZA_MEGA] =
     {
         .size = 0,
         .y_offset = 0,
     },
-    [SPECIES_PRIMAL_KYOGRE] =
+    [SPECIES_KYOGRE_PRIMAL] =
     {
         .size = 0x87,
         .y_offset = 0,
     },
-    [SPECIES_PRIMAL_GROUDON] =
+    [SPECIES_GROUDON_PRIMAL] =
     {
         .size = 0x88,
         .y_offset = 0,
     },
     // Alolan Forms
-    [SPECIES_ALOLAN_RATTATA] =
+    [SPECIES_RATTATA_ALOLAN] =
     {
         .size = 0x44,
         .y_offset = 13,
     },
-    [SPECIES_ALOLAN_RATICATE] =
+    [SPECIES_RATICATE_ALOLAN] =
     {
         .size = 0x66,
         .y_offset = 6,
     },
-    [SPECIES_ALOLAN_RAICHU] =
+    [SPECIES_RAICHU_ALOLAN] =
     {
         .size = 0x67,
         .y_offset = 3,
     },
-    [SPECIES_ALOLAN_SANDSHREW] =
+    [SPECIES_SANDSHREW_ALOLAN] =
     {
         .size = 0x55,
         .y_offset = 11,
     },
-    [SPECIES_ALOLAN_SANDSLASH] =
+    [SPECIES_SANDSLASH_ALOLAN] =
     {
         .size = 0x76,
         .y_offset = 6,
     },
-    [SPECIES_ALOLAN_VULPIX] =
+    [SPECIES_VULPIX_ALOLAN] =
     {
         .size = 0x65,
         .y_offset = 11,
     },
-    [SPECIES_ALOLAN_NINETALES] =
+    [SPECIES_NINETALES_ALOLAN] =
     {
         .size = 0x88,
         .y_offset = 3,
     },
-    [SPECIES_ALOLAN_DIGLETT] =
+    [SPECIES_DIGLETT_ALOLAN] =
     {
         .size = 0x54,
         .y_offset = 17,
     },
-    [SPECIES_ALOLAN_DUGTRIO] =
+    [SPECIES_DUGTRIO_ALOLAN] =
     {
         .size = 0x75,
         .y_offset = 11,
     },
-    [SPECIES_ALOLAN_MEOWTH] =
+    [SPECIES_MEOWTH_ALOLAN] =
     {
         .size = 0x55,
         .y_offset = 10,
     },
-    [SPECIES_ALOLAN_PERSIAN] =
+    [SPECIES_PERSIAN_ALOLAN] =
     {
         .size = 0x77,
         .y_offset = 4,
     },
-    [SPECIES_ALOLAN_GEODUDE] =
+    [SPECIES_GEODUDE_ALOLAN] =
     {
         .size = 0x54,
         .y_offset = 19,
     },
-    [SPECIES_ALOLAN_GRAVELER] =
+    [SPECIES_GRAVELER_ALOLAN] =
     {
         .size = 0x87,
         .y_offset = 9,
     },
-    [SPECIES_ALOLAN_GOLEM] =
+    [SPECIES_GOLEM_ALOLAN] =
     {
         .size = 0x77,
         .y_offset = 6,
     },
-    [SPECIES_ALOLAN_GRIMER] =
+    [SPECIES_GRIMER_ALOLAN] =
     {
         .size = 0x65,
         .y_offset = 9,
     },
-    [SPECIES_ALOLAN_MUK] =
+    [SPECIES_MUK_ALOLAN] =
     {
         .size = 0x87,
         .y_offset = 7,
     },
-    [SPECIES_ALOLAN_EXEGGUTOR] =
+    [SPECIES_EXEGGUTOR_ALOLAN] =
     {
         .size = 0x88,
         .y_offset = 0,
     },
-    [SPECIES_ALOLAN_MAROWAK] =
+    [SPECIES_MAROWAK_ALOLAN] =
     {
         .size = 0x76,
         .y_offset = 8,
@@ -5126,7 +5126,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .y_offset = 3,
     },
     // Meowstic
-    [SPECIES_MEOWSTIC_F] =
+    [SPECIES_MEOWSTIC_FEMALE] =
     {
         .size = 0x45,
         .y_offset = 6,

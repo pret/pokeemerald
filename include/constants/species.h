@@ -817,78 +817,78 @@
 #define FORMS_START SPECIES_MELMETAL
 
 // Megas
-#define SPECIES_MEGA_VENUSAUR               FORMS_START + 1
-#define SPECIES_MEGA_CHARIZARD_X            FORMS_START + 2
-#define SPECIES_MEGA_CHARIZARD_Y            FORMS_START + 3
-#define SPECIES_MEGA_BLASTOISE              FORMS_START + 4
-#define SPECIES_MEGA_BEEDRILL               FORMS_START + 5
-#define SPECIES_MEGA_PIDGEOT                FORMS_START + 6
-#define SPECIES_MEGA_ALAKAZAM               FORMS_START + 7
-#define SPECIES_MEGA_SLOWBRO                FORMS_START + 8
-#define SPECIES_MEGA_GENGAR                 FORMS_START + 9
-#define SPECIES_MEGA_KANGASKHAN             FORMS_START + 10
-#define SPECIES_MEGA_PINSIR                 FORMS_START + 11
-#define SPECIES_MEGA_GYARADOS               FORMS_START + 12
-#define SPECIES_MEGA_AERODACTYL             FORMS_START + 13
-#define SPECIES_MEGA_MEWTWO_X               FORMS_START + 14
-#define SPECIES_MEGA_MEWTWO_Y               FORMS_START + 15
-#define SPECIES_MEGA_AMPHAROS               FORMS_START + 16
-#define SPECIES_MEGA_STEELIX                FORMS_START + 17
-#define SPECIES_MEGA_SCIZOR                 FORMS_START + 18
-#define SPECIES_MEGA_HERACROSS              FORMS_START + 19
-#define SPECIES_MEGA_HOUNDOOM               FORMS_START + 20
-#define SPECIES_MEGA_TYRANITAR              FORMS_START + 21
-#define SPECIES_MEGA_SCEPTILE               FORMS_START + 22
-#define SPECIES_MEGA_BLAZIKEN               FORMS_START + 23
-#define SPECIES_MEGA_SWAMPERT               FORMS_START + 24
-#define SPECIES_MEGA_GARDEVOIR              FORMS_START + 25
-#define SPECIES_MEGA_SABLEYE                FORMS_START + 26
-#define SPECIES_MEGA_MAWILE                 FORMS_START + 27
-#define SPECIES_MEGA_AGGRON                 FORMS_START + 28
-#define SPECIES_MEGA_MEDICHAM               FORMS_START + 29
-#define SPECIES_MEGA_MANECTRIC              FORMS_START + 30
-#define SPECIES_MEGA_SHARPEDO               FORMS_START + 31
-#define SPECIES_MEGA_CAMERUPT               FORMS_START + 32
-#define SPECIES_MEGA_ALTARIA                FORMS_START + 33
-#define SPECIES_MEGA_BANETTE                FORMS_START + 34
-#define SPECIES_MEGA_ABSOL                  FORMS_START + 35
-#define SPECIES_MEGA_GLALIE                 FORMS_START + 36
-#define SPECIES_MEGA_SALAMENCE              FORMS_START + 37
-#define SPECIES_MEGA_METAGROSS              FORMS_START + 38
-#define SPECIES_MEGA_LATIAS                 FORMS_START + 39
-#define SPECIES_MEGA_LATIOS                 FORMS_START + 40
-#define SPECIES_MEGA_LOPUNNY                FORMS_START + 41
-#define SPECIES_MEGA_GARCHOMP               FORMS_START + 42
-#define SPECIES_MEGA_LUCARIO                FORMS_START + 43
-#define SPECIES_MEGA_ABOMASNOW              FORMS_START + 44
-#define SPECIES_MEGA_GALLADE                FORMS_START + 45
-#define SPECIES_MEGA_AUDINO                 FORMS_START + 46
-#define SPECIES_MEGA_DIANCIE                FORMS_START + 47
+#define SPECIES_VENUSAUR_MEGA               FORMS_START + 1
+#define SPECIES_CHARIZARD_MEGA_X            FORMS_START + 2
+#define SPECIES_CHARIZARD_MEGA_Y            FORMS_START + 3
+#define SPECIES_BLASTOISE_MEGA              FORMS_START + 4
+#define SPECIES_BEEDRILL_MEGA               FORMS_START + 5
+#define SPECIES_PIDGEOT_MEGA                FORMS_START + 6
+#define SPECIES_ALAKAZAM_MEGA               FORMS_START + 7
+#define SPECIES_SLOWBRO_MEGA                FORMS_START + 8
+#define SPECIES_GENGAR_MEGA                 FORMS_START + 9
+#define SPECIES_KANGASKHAN_MEGA             FORMS_START + 10
+#define SPECIES_PINSIR_MEGA                 FORMS_START + 11
+#define SPECIES_GYARADOS_MEGA               FORMS_START + 12
+#define SPECIES_AERODACTYL_MEGA             FORMS_START + 13
+#define SPECIES_MEWTWO_MEGA_X               FORMS_START + 14
+#define SPECIES_MEWTWO_MEGA_Y               FORMS_START + 15
+#define SPECIES_AMPHAROS_MEGA               FORMS_START + 16
+#define SPECIES_STEELIX_MEGA                FORMS_START + 17
+#define SPECIES_SCIZOR_MEGA                 FORMS_START + 18
+#define SPECIES_HERACROSS_MEGA              FORMS_START + 19
+#define SPECIES_HOUNDOOM_MEGA               FORMS_START + 20
+#define SPECIES_TYRANITAR_MEGA              FORMS_START + 21
+#define SPECIES_SCEPTILE_MEGA               FORMS_START + 22
+#define SPECIES_BLAZIKEN_MEGA               FORMS_START + 23
+#define SPECIES_SWAMPERT_MEGA               FORMS_START + 24
+#define SPECIES_GARDEVOIR_MEGA              FORMS_START + 25
+#define SPECIES_SABLEYE_MEGA                FORMS_START + 26
+#define SPECIES_MAWILE_MEGA                 FORMS_START + 27
+#define SPECIES_AGGRON_MEGA                 FORMS_START + 28
+#define SPECIES_MEDICHAM_MEGA               FORMS_START + 29
+#define SPECIES_MANECTRIC_MEGA              FORMS_START + 30
+#define SPECIES_SHARPEDO_MEGA               FORMS_START + 31
+#define SPECIES_CAMERUPT_MEGA               FORMS_START + 32
+#define SPECIES_ALTARIA_MEGA                FORMS_START + 33
+#define SPECIES_BANETTE_MEGA                FORMS_START + 34
+#define SPECIES_ABSOL_MEGA                  FORMS_START + 35
+#define SPECIES_GLALIE_MEGA                 FORMS_START + 36
+#define SPECIES_SALAMENCE_MEGA              FORMS_START + 37
+#define SPECIES_METAGROSS_MEGA              FORMS_START + 38
+#define SPECIES_LATIAS_MEGA                 FORMS_START + 39
+#define SPECIES_LATIOS_MEGA                 FORMS_START + 40
+#define SPECIES_LOPUNNY_MEGA                FORMS_START + 41
+#define SPECIES_GARCHOMP_MEGA               FORMS_START + 42
+#define SPECIES_LUCARIO_MEGA                FORMS_START + 43
+#define SPECIES_ABOMASNOW_MEGA              FORMS_START + 44
+#define SPECIES_GALLADE_MEGA                FORMS_START + 45
+#define SPECIES_AUDINO_MEGA                 FORMS_START + 46
+#define SPECIES_DIANCIE_MEGA                FORMS_START + 47
 
 // Special Mega + Primals
-#define SPECIES_MEGA_RAYQUAZA               FORMS_START + 48
-#define SPECIES_PRIMAL_KYOGRE               FORMS_START + 49
-#define SPECIES_PRIMAL_GROUDON              FORMS_START + 50
+#define SPECIES_RAYQUAZA_MEGA               FORMS_START + 48
+#define SPECIES_KYOGRE_PRIMAL               FORMS_START + 49
+#define SPECIES_GROUDON_PRIMAL              FORMS_START + 50
 
 // Alolan Forms
-#define SPECIES_ALOLAN_RATTATA              FORMS_START + 51
-#define SPECIES_ALOLAN_RATICATE             FORMS_START + 52
-#define SPECIES_ALOLAN_RAICHU               FORMS_START + 53
-#define SPECIES_ALOLAN_SANDSHREW            FORMS_START + 54
-#define SPECIES_ALOLAN_SANDSLASH            FORMS_START + 55
-#define SPECIES_ALOLAN_VULPIX               FORMS_START + 56
-#define SPECIES_ALOLAN_NINETALES            FORMS_START + 57
-#define SPECIES_ALOLAN_DIGLETT              FORMS_START + 58
-#define SPECIES_ALOLAN_DUGTRIO              FORMS_START + 59
-#define SPECIES_ALOLAN_MEOWTH               FORMS_START + 60
-#define SPECIES_ALOLAN_PERSIAN              FORMS_START + 61
-#define SPECIES_ALOLAN_GEODUDE              FORMS_START + 62
-#define SPECIES_ALOLAN_GRAVELER             FORMS_START + 63
-#define SPECIES_ALOLAN_GOLEM                FORMS_START + 64
-#define SPECIES_ALOLAN_GRIMER               FORMS_START + 65
-#define SPECIES_ALOLAN_MUK                  FORMS_START + 66
-#define SPECIES_ALOLAN_EXEGGUTOR            FORMS_START + 67
-#define SPECIES_ALOLAN_MAROWAK              FORMS_START + 68
+#define SPECIES_RATTATA_ALOLAN              FORMS_START + 51
+#define SPECIES_RATICATE_ALOLAN             FORMS_START + 52
+#define SPECIES_RAICHU_ALOLAN               FORMS_START + 53
+#define SPECIES_SANDSHREW_ALOLAN            FORMS_START + 54
+#define SPECIES_SANDSLASH_ALOLAN            FORMS_START + 55
+#define SPECIES_VULPIX_ALOLAN               FORMS_START + 56
+#define SPECIES_NINETALES_ALOLAN            FORMS_START + 57
+#define SPECIES_DIGLETT_ALOLAN              FORMS_START + 58
+#define SPECIES_DUGTRIO_ALOLAN              FORMS_START + 59
+#define SPECIES_MEOWTH_ALOLAN               FORMS_START + 60
+#define SPECIES_PERSIAN_ALOLAN              FORMS_START + 61
+#define SPECIES_GEODUDE_ALOLAN              FORMS_START + 62
+#define SPECIES_GRAVELER_ALOLAN             FORMS_START + 63
+#define SPECIES_GOLEM_ALOLAN                FORMS_START + 64
+#define SPECIES_GRIMER_ALOLAN               FORMS_START + 65
+#define SPECIES_MUK_ALOLAN                  FORMS_START + 66
+#define SPECIES_EXEGGUTOR_ALOLAN            FORMS_START + 67
+#define SPECIES_MAROWAK_ALOLAN              FORMS_START + 68
 
 // Misc Forms
 
@@ -1093,7 +1093,7 @@
 #define SPECIES_FURFROU_PHARAOH_TRIM        FORMS_START + 208
 
 // Meowstic
-#define SPECIES_MEOWSTIC_F                  FORMS_START + 209
+#define SPECIES_MEOWSTIC_FEMALE             FORMS_START + 209
 
 // Aegislash
 #define SPECIES_AEGISLASH_BLADE             FORMS_START + 210

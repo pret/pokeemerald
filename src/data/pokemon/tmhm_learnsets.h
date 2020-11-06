@@ -19187,7 +19187,7 @@ const u32 gTMHMLearnsets[][2] =
 
     [SPECIES_MELMETAL]       = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
 
-    [SPECIES_ALOLAN_RATTATA] = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
+    [SPECIES_RATTATA_ALOLAN] = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                | TMHM(HM01_CUT)
                                                | TMHM(TM28_DIG)
                                                | TMHM(TM42_FACADE)
@@ -19200,7 +19200,7 @@ const u32 gTMHMLearnsets[][2] =
                                                | TMHM(TM12_TAUNT)
                                                | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_RATICATE] = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
+    [SPECIES_RATICATE_ALOLAN] = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                 | TMHM(TM08_BULK_UP)
                                                 | TMHM(HM01_CUT)
                                                 | TMHM(TM28_DIG)
@@ -19215,7 +19215,7 @@ const u32 gTMHMLearnsets[][2] =
                                                 | TMHM(TM12_TAUNT)
                                                 | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_RAICHU]      = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
+    [SPECIES_RAICHU_ALOLAN]      = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
                                                    | TMHM(TM04_CALM_MIND)
                                                    | TMHM(TM28_DIG)
                                                    | TMHM(TM42_FACADE)
@@ -19233,7 +19233,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(TM25_THUNDER)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_SANDSHREW]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
+    [SPECIES_SANDSHREW_ALOLAN]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                    | TMHM(TM31_BRICK_BREAK)
                                                    | TMHM(HM01_CUT)
                                                    | TMHM(TM28_DIG)
@@ -19247,7 +19247,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(HM04_STRENGTH)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_SANDSLASH]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
+    [SPECIES_SANDSLASH_ALOLAN]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                    | TMHM(TM31_BRICK_BREAK)
                                                    | TMHM(HM01_CUT)
                                                    | TMHM(TM28_DIG)
@@ -19262,7 +19262,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(HM04_STRENGTH)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_VULPIX]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
+    [SPECIES_VULPIX_ALOLAN]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                 | TMHM(TM28_DIG)
                                                 | TMHM(TM42_FACADE)
                                                 | TMHM(TM13_ICE_BEAM)
@@ -19272,7 +19272,7 @@ const u32 gTMHMLearnsets[][2] =
                                                 | TMHM(TM44_REST)
                                                 | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_NINETALES]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
+    [SPECIES_NINETALES_ALOLAN]   = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                    | TMHM(TM04_CALM_MIND)
                                                    | TMHM(TM28_DIG)
                                                    | TMHM(TM42_FACADE)
@@ -19284,7 +19284,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(TM44_REST)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_DIGLETT]     = TMHM_LEARNSET(TMHM(HM01_CUT)
+    [SPECIES_DIGLETT_ALOLAN]     = TMHM_LEARNSET(TMHM(HM01_CUT)
                                                    | TMHM(TM28_DIG)
                                                    | TMHM(TM26_EARTHQUAKE)
                                                    | TMHM(TM42_FACADE)
@@ -19294,7 +19294,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(TM36_SLUDGE_BOMB)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_DUGTRIO]     = TMHM_LEARNSET(TMHM(HM01_CUT)
+    [SPECIES_DUGTRIO_ALOLAN]     = TMHM_LEARNSET(TMHM(HM01_CUT)
                                                    | TMHM(TM28_DIG)
                                                    | TMHM(TM26_EARTHQUAKE)
                                                    | TMHM(TM42_FACADE)
@@ -19305,7 +19305,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(TM36_SLUDGE_BOMB)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_MEOWTH]      = TMHM_LEARNSET(TMHM(HM01_CUT)
+    [SPECIES_MEOWTH_ALOLAN]      = TMHM_LEARNSET(TMHM(HM01_CUT)
                                                    | TMHM(TM42_FACADE)
                                                    | TMHM(HM05_FLASH)
                                                    | TMHM(TM23_IRON_TAIL)
@@ -19317,7 +19317,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(TM25_THUNDER)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_PERSIAN]      = TMHM_LEARNSET(TMHM(HM01_CUT)
+    [SPECIES_PERSIAN_ALOLAN]      = TMHM_LEARNSET(TMHM(HM01_CUT)
                                                     | TMHM(TM42_FACADE)
                                                     | TMHM(HM05_FLASH)
                                                     | TMHM(TM15_HYPER_BEAM)
@@ -19330,7 +19330,7 @@ const u32 gTMHMLearnsets[][2] =
                                                     | TMHM(TM25_THUNDER)
                                                     | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_GEODUDE]     = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
+    [SPECIES_GEODUDE_ALOLAN]     = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
                                                    | TMHM(TM28_DIG)
                                                    | TMHM(TM42_FACADE)
                                                    | TMHM(TM38_FIRE_BLAST)
@@ -19344,7 +19344,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(TM25_THUNDER)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_GRAVELER]     = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
+    [SPECIES_GRAVELER_ALOLAN]     = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
                                                     | TMHM(TM28_DIG)
                                                     | TMHM(TM26_EARTHQUAKE)
                                                     | TMHM(TM42_FACADE)
@@ -19358,7 +19358,7 @@ const u32 gTMHMLearnsets[][2] =
                                                     | TMHM(TM25_THUNDER)
                                                     | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_GOLEM]     = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
+    [SPECIES_GOLEM_ALOLAN]     = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
                                                  | TMHM(TM28_DIG)
                                                  | TMHM(TM26_EARTHQUAKE)
                                                  | TMHM(TM42_FACADE)
@@ -19373,7 +19373,7 @@ const u32 gTMHMLearnsets[][2] =
                                                  | TMHM(TM25_THUNDER)
                                                  | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_GRIMER]      = TMHM_LEARNSET(TMHM(TM28_DIG)
+    [SPECIES_GRIMER_ALOLAN]      = TMHM_LEARNSET(TMHM(TM28_DIG)
                                                    | TMHM(TM42_FACADE)
                                                    | TMHM(TM38_FIRE_BLAST)
                                                    | TMHM(TM35_FLAMETHROWER)
@@ -19385,7 +19385,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(TM12_TAUNT)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_MUK]      = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
+    [SPECIES_MUK_ALOLAN]      = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
                                                 | TMHM(TM28_DIG)
                                                 | TMHM(TM42_FACADE)
                                                 | TMHM(TM38_FIRE_BLAST)
@@ -19400,7 +19400,7 @@ const u32 gTMHMLearnsets[][2] =
                                                 | TMHM(TM12_TAUNT)
                                                 | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_EXEGGUTOR]   = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
+    [SPECIES_EXEGGUTOR_ALOLAN]   = TMHM_LEARNSET(TMHM(TM31_BRICK_BREAK)
                                                    | TMHM(TM26_EARTHQUAKE)
                                                    | TMHM(TM42_FACADE)
                                                    | TMHM(TM35_FLAMETHROWER)
@@ -19417,7 +19417,7 @@ const u32 gTMHMLearnsets[][2] =
                                                    | TMHM(HM04_STRENGTH)
                                                    | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ALOLAN_MAROWAK]     = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
+    [SPECIES_MAROWAK_ALOLAN]     = TMHM_LEARNSET(TMHM(TM14_BLIZZARD)
                                                    | TMHM(TM31_BRICK_BREAK)
                                                    | TMHM(TM28_DIG)
                                                    | TMHM(TM26_EARTHQUAKE)
@@ -22235,7 +22235,7 @@ const u32 gTMHMLearnsets[][2] =
                                             | TMHM(HM03_SURF)
                                             | TMHM(TM06_TOXIC)),
 
-    [SPECIES_MEOWSTIC_F] = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+    [SPECIES_MEOWSTIC_FEMALE] = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           | TMHM(TM04_CALM_MIND)
                                           | TMHM(HM01_CUT)
                                           | TMHM(TM28_DIG)
