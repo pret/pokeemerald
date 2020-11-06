@@ -1020,6 +1020,7 @@ extern const u32 gMonBackPic_Gyarados[];
 extern const u32 gMonBackPic_Lapras[];
 extern const u32 gMonBackPic_Ditto[];
 extern const u32 gMonBackPic_Eevee[];
+extern const u32 gMonBackPic_EeveeF[];
 extern const u32 gMonBackPic_Vaporeon[];
 extern const u32 gMonBackPic_Jolteon[];
 extern const u32 gMonBackPic_Flareon[];
