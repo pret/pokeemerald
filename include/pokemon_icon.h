@@ -2,8 +2,9 @@
 #define GUARD_POKEMON_ICON_H
 
 extern const u8 gMonIconPaletteIndices[];
+extern const u8 gMonIconPaletteIndicesFemale[];
 
-const u8 *GetMonIconTiles(u16 species, bool32);
+const u8 *GetMonIconTiles(u16 species, bool32, u32 personality);
 void sub_80D304C(u16 offset);
 u8 GetValidMonIconPalIndex(u16 species);
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);

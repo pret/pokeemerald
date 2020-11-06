@@ -4,6 +4,7 @@
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
+#include "data.h"
 
 #define POKE_ICON_BASE_PAL_TAG 56000
 
@@ -962,7 +963,10 @@ const u8 *const gMonIconTable[] =
     [SPECIES_UNOWN_Z] = gMonIcon_UnownZ,
     [SPECIES_UNOWN_EMARK] = gMonIcon_UnownExclamationMark,
     [SPECIES_UNOWN_QMARK] = gMonIcon_UnownQuestionMark,
-
+};
+const u8 *const gMonIconTableFemale[] =
+{
+    [SPECIES_EEVEE] = gMonIcon_Eevee,
 };
 
 const u8 gMonIconPaletteIndices[] =
@@ -1876,6 +1880,11 @@ const u8 gMonIconPaletteIndices[] =
     [SPECIES_EGG] = 1,
 };
 
+const u8 gMonIconPaletteIndicesFemale[] =
+{
+    [SPECIES_EEVEE] = 2,
+};
+
 const struct SpritePalette gMonIconPaletteTable[] =
 {
     { gMonIconPalettes[0], POKE_ICON_BASE_PAL_TAG + 0 },
@@ -2004,6 +2013,8 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 
     if (species > NUM_SPECIES)
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
+    else if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+        iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndicesFemale[species];
 
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
@@ -2025,7 +2036,7 @@ u8 sub_80D2D78(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 
         .paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species],
     };
 
-    iconTemplate.image = GetMonIconTiles(species, extra);
+    iconTemplate.image = GetMonIconTiles(species, extra, 0);
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
     UpdateMonIconFrame(&gSprites[spriteId]);
@@ -2080,7 +2091,7 @@ u16 sub_80D2E84(u16 species)
 
 const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 handleDeoxys)
 {
-    return GetMonIconTiles(GetIconSpecies(species, personality), handleDeoxys);
+    return GetMonIconTiles(GetIconSpecies(species, personality), handleDeoxys, personality);
 }
 
 void FreeAndDestroyMonIconSprite(struct Sprite *sprite)
@@ -2142,12 +2153,16 @@ void SpriteCB_MonIcon(struct Sprite *sprite)
     UpdateMonIconFrame(sprite);
 }
 
-const u8* GetMonIconTiles(u16 species, bool32 handleDeoxys)
+const u8* GetMonIconTiles(u16 species, bool32 handleDeoxys, u32 personality)
 {
     const u8* iconSprite = gMonIconTable[species];
     if (species == SPECIES_DEOXYS && handleDeoxys == TRUE)
     {
         iconSprite = (const u8*)(0x400 + (u32)iconSprite); // use the specific Deoxys form icon (Speed in this case)
+    }
+    else if (SpeciesHasGenderDifference[species] && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+    {
+        iconSprite = gMonIconTableFemale[species];
     }
     return iconSprite;
 }
