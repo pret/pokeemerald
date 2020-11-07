@@ -176,8 +176,8 @@ typedef struct linkManagerTag
     /* 0x024 */ VBL_TIMER nameAcceptTimer;
     /* 0x030 */ VBL_TIMER linkRecoveryTimer;
     /* 0x03c */ INIT_PARAM *init_param;
-    /* 0x040 */ void (*LMAN_callback)(u8 msg, u8  paramCount);
-    /* 0x044 */ void (*MSC_callback)(u16 REQ_commandID);
+    /* 0x040 */ void (*LMAN_callback)(u8, u8);
+    /* 0x044 */ void (*MSC_callback)(u16);
 } LINK_MANAGER;
 
 extern struct linkManagerTag lman;

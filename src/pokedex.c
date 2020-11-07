@@ -171,16 +171,16 @@ struct PokedexView
     u16 ownCount;
     u16 monSpriteIds[MAX_MONS_ON_SCREEN];
     u16 selectedMonSpriteId;
-    s16 pokeBallRotationStep;
-    s16 pokeBallRotationBackup;
+    u16 pokeBallRotationStep;
+    u16 pokeBallRotationBackup;
     u8 pokeBallRotation;
     u8 initialVOffset;
     u8 scrollTimer;
     u8 scrollDirection;
     s16 listVOffset;
     s16 listMovingVOffset;
-    s16 scrollMonIncrement;
-    s16 maxScrollTimer;
+    u16 scrollMonIncrement;
+    u16 maxScrollTimer;
     u16 scrollSpeed;
     u16 unkArr1[4]; // Cleared, never read
     u8 filler[8];
@@ -2597,7 +2597,7 @@ static u16 TryDoPokedexScroll(u16 selectedMon, u16 ignored)
         CreateMonListEntry(1, selectedMon, ignored);
         PlaySE(SE_DEX_SCROLL);
     }
-    else if (JOY_HELD(DPAD_DOWN) && (selectedMon < sPokedexView->pokemonListCount - 1))
+    else if ((JOY_HELD(DPAD_DOWN)) && (selectedMon < sPokedexView->pokemonListCount - 1))
     {
         scrollDir = 2;
         selectedMon = GetNextPosition(0, selectedMon, 0, sPokedexView->pokemonListCount - 1);
@@ -2605,7 +2605,7 @@ static u16 TryDoPokedexScroll(u16 selectedMon, u16 ignored)
         CreateMonListEntry(2, selectedMon, ignored);
         PlaySE(SE_DEX_SCROLL);
     }
-    else if (JOY_NEW(DPAD_LEFT) && (selectedMon > 0))
+    else if ((JOY_NEW(DPAD_LEFT)) && (selectedMon > 0))
     {
         startingPos = selectedMon;
 
@@ -3399,8 +3399,8 @@ static void Task_HandleInfoScreenInput(u8 taskId)
         }
         return;
     }
-    if ((JOY_NEW(DPAD_LEFT)
-     || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    if (((JOY_NEW(DPAD_LEFT))
+     || ((JOY_NEW(L_BUTTON)) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
      && sPokedexView->selectedScreen > 0)
     {
         sPokedexView->selectedScreen--;
@@ -3408,8 +3408,8 @@ static void Task_HandleInfoScreenInput(u8 taskId)
         PlaySE(SE_DEX_PAGE);
         return;
     }
-    if ((JOY_NEW(DPAD_RIGHT)
-     || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    if (((JOY_NEW(DPAD_RIGHT))
+     || ((JOY_NEW(R_BUTTON)) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
      && sPokedexView->selectedScreen < CANCEL_SCREEN)
     {
         sPokedexView->selectedScreen++;
@@ -3656,8 +3656,8 @@ static void Task_HandleCryScreenInput(u8 taskId)
             PlaySE(SE_DEX_PAGE);
             return;
         }
-        if (JOY_NEW(DPAD_RIGHT)
-         || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        if ((JOY_NEW(DPAD_RIGHT))
+         || ((JOY_NEW(R_BUTTON)) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             if (!sPokedexListItem->owned)
             {
@@ -4167,13 +4167,12 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
 static void PrintMonWeight(u16 weight, u8 left, u8 top)
 {
     u8 buffer[16];
-    u8 i;
     bool8 output;
+    u8 i;
     u32 lbs = (weight * 100000) / 4536;
 
     if (lbs % 10u >= 5)
         lbs += 10;
-
     i = 0;
     output = FALSE;
 
@@ -4228,19 +4227,13 @@ const u8 *GetPokedexCategoryName(u16 dexNum) // unused
     return gPokedexEntries[dexNum].categoryName;
 }
 
-enum
-{
-    HEIGHT,
-    WEIGHT,
-};
-
 u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
 {
     switch (data)
     {
-    case HEIGHT:
+    case 0:  // height
         return gPokedexEntries[dexNum].height;
-    case WEIGHT:
+    case 1:  // weight
         return gPokedexEntries[dexNum].weight;
     default:
         return 1;
@@ -5029,7 +5022,7 @@ static void Task_HandleSearchMenuInput(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if (JOY_NEW(DPAD_RIGHT) && movementMap[gTasks[taskId].tMenuItem][1] != 0xFF)
+    if ((JOY_NEW(DPAD_RIGHT)) && movementMap[gTasks[taskId].tMenuItem][1] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].tMenuItem = movementMap[gTasks[taskId].tMenuItem][1];
@@ -5115,9 +5108,9 @@ static void Task_SelectSearchMenuItem(u8 taskId)
     u16 *scrollOffset;
 
     DrawOrEraseSearchParameterBox(FALSE);
-    menuItem = (u16)gTasks[taskId].tMenuItem;
-    cursorPos = (u16*)&gTasks[taskId].data[sSearchOptions[menuItem].taskDataCursorPos];
-    scrollOffset = (u16*)&gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
+    menuItem = gTasks[taskId].tMenuItem;
+    cursorPos = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataCursorPos];
+    scrollOffset = &gTasks[taskId].data[sSearchOptions[menuItem].taskDataScrollOffset];
     gTasks[taskId].tCursorPos = *cursorPos;
     gTasks[taskId].tScrollOffset = *scrollOffset;
     PrintSearchParameterText(taskId);
@@ -5236,8 +5229,9 @@ static void Task_ExitSearchWaitForFade(u8 taskId)
 
 void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
 {
-    u16 i, temp;                          //This would have been better as a pointer but here we are
-    u32 ptr = (u32)GetBgTilemapBuffer(3); //This should be a pointer, but this only matches as a u32.
+    u16 i;
+    u16 temp; //should be a pointer, but does not match as one
+    u32 ptr = (u32)GetBgTilemapBuffer(3); //same as above
 
     for (i = 0; i < width; i++)
     {
@@ -5245,7 +5239,7 @@ void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width)
         temp &= 0x0fff;
         temp |= (flags << 12);
         *(u16 *)(ptr + (y + 0) * 64 + (x + i) * 2) = temp;
-
+        
         temp = *(u16 *)(ptr + (y + 1) * 64 + (x + i) * 2);
         temp &= 0x0fff;
         temp |= (flags << 12);
@@ -5451,8 +5445,8 @@ static void PrintSearchParameterText(u8 taskId)
     const struct SearchOptionText *texts = sSearchOptions[gTasks[taskId].tMenuItem].texts;
     const u16 *cursorPos = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataCursorPos];
     const u16 *scrollOffset = &gTasks[taskId].data[sSearchOptions[gTasks[taskId].tMenuItem].taskDataScrollOffset];
-
-    u16 i, j;
+    u16 i;
+    u16 j;
 
     ClearSearchParameterBoxText();
 
@@ -5541,7 +5535,8 @@ static bool8 SearchParamCantScrollUp(u8 taskId)
 
     if (lastOption > MAX_SEARCH_PARAM_CURSOR_POS && *scrollOffset != 0)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 static bool8 SearchParamCantScrollDown(u8 taskId)
@@ -5552,7 +5547,8 @@ static bool8 SearchParamCantScrollDown(u8 taskId)
 
     if (lastOption > MAX_SEARCH_PARAM_CURSOR_POS && *scrollOffset < lastOption - MAX_SEARCH_PARAM_CURSOR_POS)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 #define sTaskId      data[0]
