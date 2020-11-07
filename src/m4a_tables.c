@@ -83,7 +83,7 @@ const u8 gScaleTable[] =
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
 };
 
-const u32 gFreqTable[12] =
+const u32 gFreqTable[] =
 {
     2147483648u,
     2275179671u,
@@ -99,7 +99,7 @@ const u32 gFreqTable[12] =
     4053909305u,
 };
 
-const u16 gPcmSamplesPerVBlankTable[12] =
+const u16 gPcmSamplesPerVBlankTable[] =
 {
     96,
     132,
@@ -130,7 +130,7 @@ const u8 gCgbScaleTable[] =
     0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB,
 };
 
-const s16 gCgbFreqTable[12] =
+const s16 gCgbFreqTable[] =
 {
     -2004,
     -1891,

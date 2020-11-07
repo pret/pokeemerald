@@ -1298,7 +1298,7 @@ static void Cmd_count_usable_party_mons(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        u8 position;
+        u32 position;
         battlerOnField1 = gBattlerPartyIndexes[battlerId];
         position = GetBattlerPosition(battlerId) ^ BIT_FLANK;
         battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(position)];
