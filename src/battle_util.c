@@ -1,19 +1,31 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_util.h"
 #include "battle_anim.h"
+#include "battle_arena.h"
+#include "battle_pyramid.h"
+#include "battle_util.h"
 #include "pokemon.h"
+#include "international_string_util.h"
 #include "item.h"
 #include "util.h"
 #include "battle_scripts.h"
 #include "random.h"
+#include "text.h"
+#include "safari_zone.h"
+#include "sound.h"
+#include "sprite.h"
 #include "string_util.h"
+#include "task.h"
+#include "trig.h"
+#include "window.h"
+#include "battle_message.h"
 #include "battle_ai_script_commands.h"
 #include "battle_controllers.h"
 #include "event_data.h"
 #include "link.h"
 #include "field_weather.h"
 #include "constants/abilities.h"
+#include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
 #include "constants/battle_string_ids.h"
@@ -21,16 +33,16 @@
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/weather.h"
-#include "battle_arena.h"
-#include "battle_pyramid.h"
-#include "international_string_util.h"
-#include "safari_zone.h"
-#include "sound.h"
-#include "task.h"
-#include "trig.h"
-#include "window.h"
 #include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/weather.h"
+
+/*
+NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
+are actually part of battle_main.c. They needed to be moved to this file in order to
+match the ROM; this is also why sSoundMovesTable's declaration is in the middle of
+functions instead of at the top of the file with the other declarations.
+*/
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];
@@ -282,9 +294,7 @@ void HandleAction_UseItem(void)
     gBattlerAttacker = gBattlerTarget = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
-
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
 
     if (gLastUsedItem <= LAST_BALL) // is ball
@@ -310,18 +320,18 @@ void HandleAction_UseItem(void)
             break;
         case AI_ITEM_CURE_CONDITION:
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1)
+            if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1)
             {
-                if (*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 0x3E)
+                if (*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 0x3E)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 5;
             }
             else
             {
-                do
+                while (!(*(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) & 1))
                 {
-                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
-                } while (!(*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) & 1));
+                }
             }
             break;
         case AI_ITEM_X_STAT:
@@ -337,7 +347,7 @@ void HandleAction_UseItem(void)
 
                 while (!((*(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1))) & 1))
                 {
-                    *(gBattleStruct->AI_itemFlags + (gBattlerAttacker >> 1)) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + gBattlerAttacker / 2) >>= 1;
                     gBattleTextBuff1[2]++;
                 }
 
@@ -353,7 +363,7 @@ void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + (gBattlerAttacker >> 1))];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBattlerAttacker / 2)];
     }
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }

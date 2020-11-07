@@ -405,7 +405,7 @@ void StartPokemonJump(u16 partyIndex, MainCallback callback)
 
     if (gReceivedRemoteLinkPlayers)
     {
-        gUnknown_02022CFC = Alloc(sizeof(struct PokemonJump1));
+        gUnknown_02022CFC = Alloc(sizeof(*gUnknown_02022CFC));
         if (gUnknown_02022CFC)
         {
             ResetTasks();

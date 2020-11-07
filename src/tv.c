@@ -32,6 +32,7 @@
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
+#include "pokeball.h"
 #include "data.h"
 #include "constants/battle_frontier.h"
 #include "constants/contest.h"
@@ -963,7 +964,7 @@ void GabbyAndTyBeforeInterview(void)
     }
     if (!gBattleResults.usedMasterBall)
     {
-        for (i = 0; i < 11; i ++)
+        for (i = 0; i < POKEBALL_COUNT - 1; i ++)
         {
             if (gBattleResults.catchAttempts[i])
             {
@@ -1135,7 +1136,7 @@ void PutPokemonTodayCaughtOnAir(void)
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_POKEMON_TODAY_CAUGHT, FALSE) != TRUE)
             {
-                for (i = 0; i < 11; i ++)
+                for (i = 0; i < POKEBALL_COUNT - 1; i ++)
                 {
                     ct += gBattleResults.catchAttempts[i];
                 }
@@ -1152,7 +1153,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     }
                     else
                     {
-                        for (i = 0; i < 11; i ++)
+                        for (i = 0; i < POKEBALL_COUNT - 1; i ++)
                         {
                             ct += gBattleResults.catchAttempts[i];
                         }
@@ -1203,7 +1204,7 @@ void PutPokemonTodayFailedOnTheAir(void)
 
     if (!rbernoulli(1, 1))
     {
-        for (i = 0, ct = 0; i < 11; i ++)
+        for (i = 0, ct = 0; i < POKEBALL_COUNT - 1; i ++)
         {
             ct += gBattleResults.catchAttempts[i];
         }
@@ -2228,7 +2229,7 @@ void sub_80EE184(void)
         show->breakingNews.kind = TVSHOW_BREAKING_NEWS;
         show->breakingNews.active = FALSE;
         balls = 0;
-        for (i = 0; i < 11; i ++)
+        for (i = 0; i < POKEBALL_COUNT - 1; i ++)
         {
             balls += gBattleResults.catchAttempts[i];
         }
