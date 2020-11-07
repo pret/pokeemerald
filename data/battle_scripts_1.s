@@ -6136,6 +6136,20 @@ BattleScript_MegaEvolution::
 	switchinabilities BS_ATTACKER
 	end2
 
+BattleScript_WishMegaEvolution::
+	printstring STRINGID_FERVENTWISHREACHED
+	waitmessage 0x40
+	setbyte gIsCriticalHit, 0
+	handlemegaevo BS_ATTACKER, 0
+	handlemegaevo BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_MEGA_EVOLUTION, NULL
+	waitanimation
+	handlemegaevo BS_ATTACKER, 2
+	printstring STRINGID_MEGAEVOEVOLVED
+	waitmessage 0x40
+	switchinabilities BS_ATTACKER
+	end2
+
 BattleScript_AttackerFormChange::
 	pause 0x5
 	copybyte gBattlerAbility, gBattlerAttacker

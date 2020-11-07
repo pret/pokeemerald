@@ -4552,7 +4552,10 @@ static void CheckMegaEvolutionBeforeTurn(void)
             {
                 gBattleStruct->mega.toEvolve &= ~(gBitTable[gActiveBattler]);
                 gLastUsedItem = gBattleMons[gActiveBattler].item;
-                BattleScriptExecute(BattleScript_MegaEvolution);
+                if (gBattleStruct->mega.isWishMegaEvo == TRUE)
+                    BattleScriptExecute(BattleScript_WishMegaEvolution);
+                else
+                    BattleScriptExecute(BattleScript_MegaEvolution);
                 return;
             }
         }
