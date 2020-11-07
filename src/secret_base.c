@@ -963,7 +963,7 @@ static void HandleRegistryMenuInput(u8 taskId)
 
     data = gTasks[taskId].data;
     input = ListMenu_ProcessInput(data[5]);
-    ListMenuGetScrollAndRow(data[5], (u16 *)&data[2], (u16 *)&data[1]);
+    ListMenuGetScrollAndRow(data[5], &data[2], &data[1]);
     switch (input)
     {
     case LIST_NOTHING_CHOSEN:
@@ -1044,10 +1044,10 @@ void DeleteRegistry_Yes_Callback(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, 0);
-    DestroyListMenuTask((u8)data[5], (u16 *)&data[2], (u16 *)&data[1]);
+    DestroyListMenuTask(data[5], &data[2], &data[1]);
     gSaveBlock1Ptr->secretBases[data[4]].registryStatus = 0;
     BuildRegistryMenuItems(taskId);
-    sub_812225C((u16 *)&data[2], (u16 *)&data[1], (u16)data[3], (u16)data[0]);
+    sub_812225C(&data[2], &data[1], data[3], data[0]);
     FinalizeRegistryMenu(taskId);
     gTasks[taskId].func = HandleRegistryMenuInput;
 }
@@ -1061,7 +1061,7 @@ static void DeleteRegistry_No(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, 0);
-    DestroyListMenuTask((u8)data[5], (u16 *)&data[2], (u16 *)&data[1]);
+    DestroyListMenuTask(data[5], &data[2], &data[1]);
     FinalizeRegistryMenu(taskId);
     gTasks[taskId].func = HandleRegistryMenuInput;
 }

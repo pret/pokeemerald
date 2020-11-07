@@ -184,26 +184,27 @@ static u32 HandleConditionSearchInput(struct PokenavSub7 *structPtr)
 {
     if (JOY_REPEAT(DPAD_UP))
         return CONDITION_SEARCH_FUNC_MOVE_UP;
-    if (JOY_REPEAT(DPAD_DOWN))
+    else if (JOY_REPEAT(DPAD_DOWN))
         return CONDITION_SEARCH_FUNC_MOVE_DOWN;
-    if (JOY_NEW(DPAD_LEFT))
+    else if (JOY_NEW(DPAD_LEFT))
         return CONDITION_SEARCH_FUNC_PAGE_UP;
-    if (JOY_NEW(DPAD_RIGHT))
+    else if (JOY_NEW(DPAD_RIGHT))
         return CONDITION_SEARCH_FUNC_PAGE_DOWN;
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         structPtr->isPartyCondition = 0;
         structPtr->callback = ReturnToConditionSearchList;
         return CONDITION_SEARCH_FUNC_EXIT;
     }
-    if (JOY_NEW(A_BUTTON))
+    else if (JOY_NEW(A_BUTTON))
     {
         structPtr->monList->currIndex = GetSelectedPokenavListIndex();
         structPtr->isPartyCondition = 1;
         structPtr->callback = OpenConditionGraphFromSearchList;
         return CONDITION_SEARCH_FUNC_SELECT_MON;
     }
-    return CONDITION_SEARCH_FUNC_NONE;
+    else
+        return CONDITION_SEARCH_FUNC_NONE;
 }
 
 static u32 ReturnToConditionSearchList(struct PokenavSub7 *structPtr)

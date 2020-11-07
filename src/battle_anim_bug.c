@@ -372,11 +372,14 @@ static void AnimTranslateStinger(struct Sprite *sprite)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
-    else if (GetBattlerSide(gBattleAnimAttacker))
+    else
     {
-        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
-        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-        gBattleAnimArgs[3] = -gBattleAnimArgs[3];
+        if (GetBattlerSide(gBattleAnimAttacker))
+        {
+            gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+            gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+            gBattleAnimArgs[3] = -gBattleAnimArgs[3];
+        }
     }
 
     if (!IsContest() && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
@@ -440,24 +443,28 @@ static void AnimMissileArc_Step(struct Sprite *sprite)
     else
     {
         s16 tempData[8];
-        s16 xpos, ypos;
+        u16 *data = sprite->data;
+        u16 x1 = sprite->pos1.x;
+        s16 x2 = sprite->pos2.x;
+        u16 y1 = sprite->pos1.y;
+        s16 y2 = sprite->pos2.y;
         int i;
 
         for (i = 0; i < 8; i++)
-            tempData[i] = sprite->data[i];
+            tempData[i] = data[i];
 
-        xpos = sprite->pos1.x + sprite->pos2.x;
-        ypos = sprite->pos1.y + sprite->pos2.y;
+        x2 += x1;
+        y2 += y1;
 
         if (!TranslateAnimHorizontalArc(sprite))
         {
-            u16 rotation = ArcTan2Neg(sprite->pos1.x + sprite->pos2.x - xpos, //Isn't this zero lol
-                                  sprite->pos1.y + sprite->pos2.y - ypos);
+            u16 rotation = ArcTan2Neg(sprite->pos1.x + sprite->pos2.x - x2,
+                                  sprite->pos1.y + sprite->pos2.y - y2);
             rotation += 0xC000;
             TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);
 
             for (i = 0; i < 8; i++)
-                sprite->data[i] = tempData[i];
+                data[i] = tempData[i];
         }
     }
 }

@@ -146,49 +146,38 @@ struct BerryCrushGame
 {
     MainCallback unk0;
     u32 (* unk4)(struct BerryCrushGame *, u8 *);
-
     u8 unk8;
     u8 unk9;
     u8 unkA;
     u8 unkB;
-
     u8 unkC;
     u8 unkD;
-
     u8 unkE;
     u8 unkF;
-
     u16 unk10;
     u16 unk12;
     u16 unk14;
-
     u16 unk16;
     s16 unk18;
     s16 unk1A;
-    s32 unk1C;
+    int unk1C;
     s32 unk20;
     u8 unk24;
-
     u8 unk25_0:1;
     u8 unk25_1:1;
     u8 unk25_2:1;
     u8 unk25_3:1;
     u8 unk25_4:1;
     u8 unk25_5:3;
-
     u16 unk26;
-
     u16 unk28;
     s16 unk2A;
     s16 unk2C;
-
     s16 unk2E;
     s16 unk30;
     s16 unk32;
     s16 unk34;
-
     u8 unk36[0xA];
-
     struct BerryCrushGame_40 unk40;
     struct BerryCrushGame_5C unk5C;
     union BerryCrushGame_68 unk68;
@@ -215,7 +204,7 @@ void sub_8022524(struct BerryCrushGame_138 *, u16);
 void sub_8022B28(struct Sprite *);
 void sub_8022554(struct BerryCrushGame_138 *r0);
 void sub_8024578(struct BerryCrushGame *);
-void sub_8024644(u8 *, u8, u8, u16, u8);
+void sub_8024644(u8 *, u32, u32, u32, u32);
 static void sub_8022A20(struct Sprite *sprite);
 static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *r6, u8 *r1);
 static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5);
@@ -2401,7 +2390,7 @@ void sub_802339C(struct BerryCrushGame *r4)
             }
         }
     }
-    if (r8 >= 2)
+    if (r8 > 1)
     {
         for (r7 = 0; r7 < r4->unk9; ++r7)
         {
@@ -2591,7 +2580,6 @@ void sub_802385C(struct BerryCrushGame *r5)
     for (r4 = 0; r4 < r5->unk9; ++r4)
         r5->unk68.as_four_players.others[r4].unk4.as_2d_bytes[1][5] = 0;
 #endif
-
     if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET
      || gRecvCmds[0][1] != 2)
     {
@@ -3281,11 +3269,14 @@ static void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, 
     params[9] = communicateAfter;
 }
 
-void sub_8024644(u8 *r0, u8 r1, u8 r2, u16 r3, u8 r5)
+void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
 {
+    u8 sp[4];
+
+    0[(u16 *)sp] = r3;
     r0[0] = r1;
     r0[1] = r2;
-    r0[2] = ((u8 *)&r3)[0];
-    r0[3] = ((u8 *)&r3)[1];
+    r0[2] = sp[0];
+    r0[3] = sp[1];
     r0[4] = r5;
 }
