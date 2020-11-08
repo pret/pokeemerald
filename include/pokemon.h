@@ -127,8 +127,8 @@ struct Unknown_806F160_Struct
     u32 field_0_1:4;
     u32 field_1:8;
     u16 magic:8;
-    u32 size:4;
-    u16 field_3_1:4;
+    u32 field_3_0:4;
+    u32 field_3_1:4;
     void *bytes;
     u8 **byteArrays;
     struct SpriteTemplate *templates;

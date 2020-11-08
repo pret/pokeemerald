@@ -352,7 +352,7 @@ static bool8 rfu_LMAN_linkWatcher(u16 REQ_commandID)
             {
                 for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
-                    if (bm_linkLossSlot & (1 << i))
+                    if ((bm_linkLossSlot >> i) & 1)
                     {
                         lman.linkRecoveryTimer.active |= (1 << i);
                         lman.linkRecoveryTimer.count[i] = lman.linkRecoveryTimer.count_max;
@@ -396,7 +396,7 @@ static bool8 rfu_LMAN_linkWatcher(u16 REQ_commandID)
             bm_disconnectSlot = 0;
             for (i = 0; i < RFU_CHILD_MAX; i++)
             {
-                if ((lman.linkRecoveryTimer.active) & (1 << i) && lman.linkRecoveryTimer.count[i] && --lman.linkRecoveryTimer.count[i] == 0)
+                if ((lman.linkRecoveryTimer.active >> i) & 1 && lman.linkRecoveryTimer.count[i] && --lman.linkRecoveryTimer.count[i] == 0)
                 {
                     lman.linkRecoveryTimer.active &= ~(1 << i);
                     bm_disconnectSlot |= (1 << i);

@@ -1613,26 +1613,26 @@ static u16 sub_811ACDC(void)
         {
             return sub_811B150();
         }
-        if (JOY_NEW(START_BUTTON))
+        else if (JOY_NEW(START_BUTTON))
         {
             return sub_811B1B4();
         }
-        if (JOY_NEW(DPAD_UP))
+        else if (JOY_NEW(DPAD_UP))
         {
             sEasyChatScreen->mainCursorRow--;
             break;
         }
-        if (JOY_NEW(DPAD_LEFT))
+        else if (JOY_NEW(DPAD_LEFT))
         {
             sEasyChatScreen->mainCursorColumn--;
             break;
         }
-        if (JOY_NEW(DPAD_DOWN))
+        else if (JOY_NEW(DPAD_DOWN))
         {
             sEasyChatScreen->mainCursorRow = 0;
             break;
         }
-        if (JOY_NEW(DPAD_RIGHT))
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             sEasyChatScreen->mainCursorColumn++;
             break;
@@ -2536,7 +2536,7 @@ u8 sub_811BBBC(void)
     return sEasyChatScreen->unk_0c;
 }
 
-static void sub_811BBC8(s8 *arg0, s8 *arg1)
+void sub_811BBC8(u8 *arg0, u8 *arg1)
 {
     *arg0 = sEasyChatScreen->unk_10;
     *arg1 = sEasyChatScreen->unk_11;
@@ -4528,18 +4528,18 @@ static void sub_811E30C(void)
     x = var0 * 13;
     x = x * 8 + 28;
     y = var1 * 16 + 96;
-    sub_811E34C((u8)x, (u8)y);
+    sub_811E34C(x, y);
 }
 
 static void sub_811E34C(u8 x, u8 y)
 {
-    if (!sUnknown_0203A11C->unk2E4)
-        return;
-
-    sUnknown_0203A11C->unk2E4->pos1.x = (s16)x;
-    sUnknown_0203A11C->unk2E4->pos1.y = (s16)y;
-    sUnknown_0203A11C->unk2E4->pos2.x = 0;
-    sUnknown_0203A11C->unk2E4->data[0] = 0;
+    if (sUnknown_0203A11C->unk2E4)
+    {
+        sUnknown_0203A11C->unk2E4->pos1.x = x;
+        sUnknown_0203A11C->unk2E4->pos1.y = y;
+        sUnknown_0203A11C->unk2E4->pos2.x = 0;
+        sUnknown_0203A11C->unk2E4->data[0] = 0;
+    }
 }
 
 static void sub_811E380(void)

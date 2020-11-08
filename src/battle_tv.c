@@ -714,15 +714,16 @@ void BattleTv_SetDataBasedOnAnimation(u8 animationId)
 
 void TryPutLinkBattleTvShowOnAir(void)
 {
-    u16 playerBestSpecies = 0, opponentBestSpecies = 0, moveId = 0;
-    s16 sum = 0, playerBestSum = 0, opponentBestSum = SHRT_MAX;
+    u16 playerBestSpecies = 0, opponentBestSpecies = 0;
+    s16 playerBestSum = 0, opponentBestSum = SHRT_MAX;
     u8 playerBestMonId = 0, opponentBestMonId = 0;
     struct BattleTvMovePoints *movePoints = NULL;
     u8 countPlayer = 0, countOpponent = 0;
-    u16 species;
+    s16 sum = 0;
+    u16 species = 0;
+    u16 moveId = 0;
     s32 i, j;
-
-    int zero = 0, one = 1; // stupid variables needed to match. Feel free to get rid of them.
+    int zero = 0, one = 1; //needed for matching
 
     if (gBattleStruct->anyMonHasTransformed)
         return;
