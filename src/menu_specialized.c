@@ -249,7 +249,7 @@ void sub_81D1D04(u8 a0)
     sUnknown_0203CF48[a0] = 0xFF;
 }
 
-static u8 sub_81D1D34(u8 a0) // unused
+static u8 sub_81D1D34(u8 a0)
 {
     return sUnknown_0203CF48[a0];
 }
@@ -893,73 +893,76 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
     {
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
     }
-    GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
-    StringGetEnd10(dst);
-    species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
-    if (boxId == TOTAL_BOXES_COUNT) // Party mon.
-    {
-        level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-        gender = GetMonGender(&gPlayerParty[monId]);
-    }
     else
     {
-        // Needed to match, feel free to remove.
-        boxId++, boxId--;
-        monId++, monId--;
+        GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
+        StringGetEnd10(dst);
+        species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
+        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+        {
+            level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+            gender = GetMonGender(&gPlayerParty[monId]);
+        }
+        else
+        {
+            // Needed to match, feel free to remove.
+            boxId++;boxId--;
+            monId++;monId--;
 
-        boxMon = GetBoxedMonPtr(boxId, monId);
-        gender = GetBoxMonGender(boxMon);
-        level = GetLevelFromBoxMonExp(boxMon);
-    }
+            boxMon = GetBoxedMonPtr(boxId, monId);
+            gender = GetBoxMonGender(boxMon);
+            level = GetLevelFromBoxMonExp(boxMon);
+        }
 
-    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
-        gender = MON_GENDERLESS;
+        if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+            gender = MON_GENDERLESS;
 
-    for (str = dst; *str != EOS; str++)
-        ;
+        for (str = dst; *str != EOS; str++)
+            ;
 
-    *(str++) = EXT_CTRL_CODE_BEGIN;
-    *(str++) = EXT_CTRL_CODE_SKIP;
-    *(str++) = 60;
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_SKIP;
+        *(str++) = 60;
 
-    switch (gender)
-    {
-    default:
+        switch (gender)
+        {
+        default:
+            *(str++) = CHAR_SPACE;
+            break;
+        case MON_MALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = TEXT_COLOR_RED;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_SHADOW;
+            *(str++) = TEXT_COLOR_LIGHT_RED;
+            *(str++) = CHAR_MALE;
+            break;
+        case MON_FEMALE:
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_COLOR;
+            *(str++) = TEXT_COLOR_GREEN;
+            *(str++) = EXT_CTRL_CODE_BEGIN;
+            *(str++) = EXT_CTRL_CODE_SHADOW;
+            *(str++) = TEXT_COLOR_LIGHT_GREEN;
+            *(str++) = CHAR_FEMALE;
+            break;
+        }
+
+        *(str++) = EXT_CTRL_CODE_BEGIN;
+        *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *(str++) = TEXT_COLOR_BLUE;
+        *(str++) = TEXT_COLOR_TRANSPARENT;
+        *(str++) = TEXT_COLOR_LIGHT_BLUE;
+        *(str++) = CHAR_SLASH;
+        *(str++) = CHAR_EXTRA_SYMBOL;
+        *(str++) = CHAR_LV_2;
+        str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
         *(str++) = CHAR_SPACE;
-        break;
-    case MON_MALE:
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = EXT_CTRL_CODE_COLOR;
-        *(str++) = TEXT_COLOR_RED;
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = EXT_CTRL_CODE_SHADOW;
-        *(str++) = TEXT_COLOR_LIGHT_RED;
-        *(str++) = CHAR_MALE;
-        break;
-    case MON_FEMALE:
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = EXT_CTRL_CODE_COLOR;
-        *(str++) = TEXT_COLOR_GREEN;
-        *(str++) = EXT_CTRL_CODE_BEGIN;
-        *(str++) = EXT_CTRL_CODE_SHADOW;
-        *(str++) = TEXT_COLOR_LIGHT_GREEN;
-        *(str++) = CHAR_FEMALE;
-        break;
+        *str = EOS;
+
+        return str;
     }
-
-    *(str++) = EXT_CTRL_CODE_BEGIN;
-    *(str++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-    *(str++) = TEXT_COLOR_BLUE;
-    *(str++) = TEXT_COLOR_TRANSPARENT;
-    *(str++) = TEXT_COLOR_LIGHT_BLUE;
-    *(str++) = CHAR_SLASH;
-    *(str++) = CHAR_EXTRA_SYMBOL;
-    *(str++) = CHAR_LV_2;
-    str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    *(str++) = CHAR_SPACE;
-    *str = EOS;
-
-    return str;
 }
 
 // Buffers the string in src to dest up to n chars. If src is less than n chars, fill with spaces
