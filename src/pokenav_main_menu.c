@@ -438,7 +438,6 @@ static u32 LoopedTask_SlideMenuHeaderDown(s32 a0)
         ChangeBgY(0, 0, 0);
         return LT_FINISH;
     }
-
     return LT_PAUSE;
 }
 
@@ -459,9 +458,11 @@ void Pokenav_AllocAndLoadPalettes(const struct SpritePalette *palettes)
         {
             break;
         }
-
-        index = (index * 16) + 0x100;
-        CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
+        else
+        {
+            index = (index * 16) + 0x100;
+            CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
+        }
     }
 }
 

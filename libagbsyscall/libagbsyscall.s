@@ -1,12 +1,9 @@
 	.include "../constants/gba_constants.inc"
 	.include "../asm/macros/function.inc"
-	
-	.syntax unified
 
 	.text
 
 	.set SOFT_RESET_DIRECT_BUF, 0x03007FFA
-	.set USER_STACK,            0x03007F00
 	.set RESET_EX_WRAM_FLAG,           0x1
 
 	.ifdef NO_GRANULAR_AGBSYSCALL
@@ -109,7 +106,7 @@ SoundDriverVSyncOn:
 	thumb_func_start Mod
 Mod:
 	svc #6
-	adds r0, r1, #0
+	mov r0, r1
 	bx lr
 	thumb_func_end Mod
 	.endif
@@ -148,7 +145,7 @@ HuffUnComp:
 	.endif
 
 	.ifdef L_SoftResetExram
-	thumb_func_start SoftResetExram
+	arm_func_start SoftResetExram
 SoftResetExram:
 	ldr r3, =REG_IME
 	movs r2, #0
@@ -156,14 +153,14 @@ SoftResetExram:
 	ldr r3, =SOFT_RESET_DIRECT_BUF
 	movs r2, #1
 	strb r2, [r3, #0]
-	subs r3, #SOFT_RESET_DIRECT_BUF - USER_STACK
+	subs r3, #SOFT_RESET_DIRECT_BUF - 0x3007f00
 	mov sp, r3
 	movs r2, #RESET_EX_WRAM_FLAG
 	bics r0, r2
 	svc #1
 	svc #0
 	.pool
-	thumb_func_end SoftResetExram
+	arm_func_end SoftResetExram
 	.endif
 
 	.ifdef L_MusicPlayerFadeOut
@@ -234,7 +231,7 @@ DivArm:
 	thumb_func_start ModArm
 ModArm:
 	svc #7
-	adds r0, r1, #0
+	mov r0, r1
 	bx lr
 	thumb_func_end ModArm
 	.endif
@@ -274,7 +271,7 @@ Diff8bitUnFilterWram:
 	.ifdef L_MultiBoot
 	thumb_func_start MultiBoot
 MultiBoot:
-	movs r1, #1
+	mov r1, #1
 	svc #37
 	bx lr
 	thumb_func_end MultiBoot
@@ -329,7 +326,7 @@ SoftResetRom:
 	ldr r3, =SOFT_RESET_DIRECT_BUF
 	movs r2, #0
 	strb r2, [r3, #0]
-	subs r3, #SOFT_RESET_DIRECT_BUF - USER_STACK
+	sub r3, #SOFT_RESET_DIRECT_BUF - 0x3007f00
 	mov sp, r3
 	svc #1
 	svc #0
@@ -416,7 +413,7 @@ SoftReset:
 	ldr r3, =REG_IME
 	movs r2, #0
 	strb r2, [r3, #0]
-	ldr r1, =USER_STACK
+	ldr r1, =0x3007f00
 	mov sp, r1
 	svc #1
 	svc #0

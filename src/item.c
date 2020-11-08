@@ -183,13 +183,15 @@ bool8 HasAtLeastOneBerry(void)
 
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
-    u8 i, pocket;
-    u16 slotCapacity, ownedCount;
+    u8 i;
+    u8 pocket;
+    u16 slotCapacity;
+    u16 ownedCount;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
 
-    if (InBattlePyramid() || (FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE))
+    if (InBattlePyramid() || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
     {
         return CheckPyramidBagHasSpace(itemId, count);
     }
@@ -212,12 +214,12 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
                 return FALSE;
             count -= (slotCapacity - ownedCount);
             if (count == 0)
-                break; //Should just be "return TRUE", since setting count to 0 means all the remaining checks until return will be false anyway, but that doesn't match
+                break; //should be return TRUE, but that doesn't match
         }
     }
 
     // Check space in empty item slots
-    if (count > 0) //if (count !=0) also works here; both match
+    if (count > 0)
     {
         for (i = 0; i < gBagPockets[pocket].capacity; i++)
         {
@@ -231,12 +233,12 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
                 }
                 else
                 {
-                    count = 0; //Should just be "return TRUE", since setting count to 0 means all the remaining checks until return will be false anyway, but that doesn't match
+                    count = 0; //should be return TRUE, but that doesn't match
                     break;
                 }
             }
         }
-        if (count > 0)    //if (count !=0) also works here; both match
+        if (count > 0)
             return FALSE; // No more item slots. The bag is full
     }
 
