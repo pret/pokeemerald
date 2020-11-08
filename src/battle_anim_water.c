@@ -52,7 +52,7 @@ static void CreateWaterSpoutLaunchDroplets(struct Task*, u8);
 static void CreateWaterSpoutRainDroplet(struct Task*, u8);
 static void AnimTask_WaterSport_Step(u8);
 static void CreateWaterSportDroplet(struct Task*);
-static void CreateWaterPulseRingBubbles(struct Sprite*, s32, s32);
+static void CreateWaterPulseRingBubbles(struct Sprite*, int, int);
 
 // Both unused
 const u8 gUnknown_8593C80[] = INCBIN_U8("graphics/unknown/unknown_593C80.4bpp");
@@ -631,13 +631,13 @@ static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 
     if (++gTasks[taskId].data[10] == 3)
     {
-        u16 tempPlt;
+        u16 rgbBuffer;
         gTasks[taskId].data[10] = 0;
         palIndex = gTasks[taskId].data[2] + 1;
-        tempPlt = gPlttBufferFaded[palIndex];
+        rgbBuffer = gPlttBufferFaded[palIndex];
         for (i = 1; i < 8; i++)
             gPlttBufferFaded[palIndex + i - 1] = gPlttBufferFaded[palIndex + i];
-        gPlttBufferFaded[palIndex + 7] = tempPlt;
+        gPlttBufferFaded[palIndex + 7] = rgbBuffer;
     }
     if (++gTasks[taskId].data[11] == gTasks[taskId].data[0])
         DestroyAnimVisualTask(taskId);
@@ -748,7 +748,6 @@ static void AnimHydroCannonBeam(struct Sprite *sprite)
         if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_LEFT)
             gBattleAnimArgs[0] *= -1;
     }
-
     if ((gBattleAnimArgs[5] & 0xFF00) == 0)
         animType = TRUE;
     else
@@ -794,7 +793,7 @@ static void AnimSmallBubblePair_Step(struct Sprite *sprite)
     sprite->pos2.x = Sin(sprite->data[0], 4);
     sprite->data[1] += 48;
     sprite->pos2.y = -(sprite->data[1] >> 8);
-    if (sprite->data[7]-- == 0)
+    if (--sprite->data[7] == -1)
         DestroyAnimSprite(sprite);
 }
 
@@ -802,17 +801,17 @@ void AnimTask_CreateSurfWave(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 taskId2;
-    u16 *x, *y; //These pointers are needed to match
+    u16 *x;
+    u16 *y;
 
     x = &gBattle_BG1_X;
     y = &gBattle_BG1_Y;
 
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1);
-    SetGpuReg(REG_OFFSET_BLDALPHA, (16 << 8));
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
     SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 1);
     sub_80A6B30(&animBg);
-    
     if (!IsContest())
     {
         SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
@@ -877,13 +876,13 @@ void AnimTask_CreateSurfWave(u8 taskId)
 
 static void AnimTask_CreateSurfWave_Step1(u8 taskId)
 {
-    u16 rgbBuffer;
-    u8 i;
-    u16 *BGptrX, *BGptrY;
     struct BattleAnimBgData animBg;
-
-    BGptrX = &gBattle_BG1_X;
-    BGptrY = &gBattle_BG1_Y;
+    u8 i;
+    u16 rgbBuffer;
+    u16 *BGptrX = &gBattle_BG1_X;
+    u16 *BGptrY = &gBattle_BG1_Y;
+    u32 palOffset;
+    u16 palNum;
 
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
@@ -891,18 +890,18 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
     gTasks[taskId].data[2] += gTasks[taskId].data[1];
     if (++gTasks[taskId].data[5] == 4)
     {
-        rgbBuffer = gPlttBufferFaded[16 * animBg.paletteId + 7];
-        for (i = 6; i != 0; i--) // i > 0 generates the exact same code in this context
+        rgbBuffer = gPlttBufferFaded[animBg.paletteId * 16 + 7];
+        for (i = 6; i != 0; i--)
         {
-            gPlttBufferFaded[16 * animBg.paletteId + 1 + i] = gPlttBufferFaded[16 * animBg.paletteId + 1 + i - 1]; // 1 + i - 1 is needed to match for some bizarre reason
+            gPlttBufferFaded[animBg.paletteId * 16 + 1 + i] = gPlttBufferFaded[animBg.paletteId * 16 + 1 + i - 1]; // 1 + i - 1 is needed to match for some bizarre reason
         }
-        gPlttBufferFaded[16 * animBg.paletteId + 1] = rgbBuffer;
+        gPlttBufferFaded[animBg.paletteId * 16 + 1] = rgbBuffer;
         gTasks[taskId].data[5] = 0;
     }
     if (++gTasks[taskId].data[6] > 1)
     {
         gTasks[taskId].data[6] = 0;
-        if (++gTasks[taskId].data[3] < 14)
+        if (++gTasks[taskId].data[3] <= 13)
         {
             gTasks[gTasks[taskId].data[15]].data[1] = (s16)((gTasks[taskId].data[3]) | ((16 - gTasks[taskId].data[3]) << 8));
             gTasks[taskId].data[4]++;
@@ -919,7 +918,6 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
         gTasks[taskId].func = AnimTask_CreateSurfWave_Step2;
     }
 }
-
 
 static void AnimTask_CreateSurfWave_Step2(u8 taskId)
 {
@@ -1543,50 +1541,45 @@ static void AnimWaterPulseRing_Step(struct Sprite *sprite)
     sprite->data[0]++;
 }
 
-static void CreateWaterPulseRingBubbles(struct Sprite *sprite, s32 xDiff, s32 yDiff)
+static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
 {
-    s16 combinedX, combinedY;
-    s16 i, something;
+    s16 combinedX;
+    s16 combinedY;
+    s16 i;
+    s16 something;
     s16 unusedVar = 1; //unusedVar is needed to match
-    s16 somethingRandomX, somethingRandomY;
+    s16 randomSomethingY;
+    s16 randomSomethingX;
     u8 spriteId;
-
+    
     something = sprite->data[0] / 2;
     combinedX = sprite->pos1.x + sprite->pos2.x;
     combinedY = sprite->pos1.y + sprite->pos2.y;
     if (yDiff < 0)
-        unusedVar *= -1; //Needed to Match
-    somethingRandomY = yDiff + (Random2() % 10) - 5;
-    somethingRandomX = -xDiff + (Random2() % 10) - 5;
+        unusedVar *= -1; //Needed to match
+    randomSomethingY = yDiff + (Random2() % 10) - 5;
+    randomSomethingX = -xDiff + (Random2() % 10) - 5;
 
-    for (i = 0; i < 1; i++)
+    for (i = 0; i <= 0; i++)
     {
         spriteId = CreateSprite(&gWaterPulseRingBubbleSpriteTemplate, combinedX, combinedY + something, 130);
         gSprites[spriteId].data[0] = 20;
-        gSprites[spriteId].data[1] = somethingRandomY;
+        gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
-        if (somethingRandomX < 0)
-        {
-            gSprites[spriteId].data[2] = -somethingRandomX;
-        }
+        if (randomSomethingX < 0)
+            gSprites[spriteId].data[2] = -randomSomethingX;
         else
-        {
-            gSprites[spriteId].data[2] = somethingRandomX;
-        }
+            gSprites[spriteId].data[2] = randomSomethingX;
     }
-    for (i = 0; i < 1; i++)
+    for (i = 0; i <= 0; i++)
     {
         spriteId = CreateSprite(&gWaterPulseRingBubbleSpriteTemplate, combinedX, combinedY - something, 130);
         gSprites[spriteId].data[0] = 20;
-        gSprites[spriteId].data[1] = somethingRandomY;
+        gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
-        if (somethingRandomX > 0)
-        {
-            gSprites[spriteId].data[2] = -somethingRandomX;
-        }
+        if (randomSomethingX > 0)
+            gSprites[spriteId].data[2] = -randomSomethingX;
         else
-        {
-            gSprites[spriteId].data[2] = somethingRandomX;
-        }
+            gSprites[spriteId].data[2] = randomSomethingX;
     }
 }

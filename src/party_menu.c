@@ -1861,7 +1861,7 @@ u8 GetMonAilment(struct Pokemon *mon)
 
 static void SetPartyMonsAllowedInMinigame(void)
 {
-    s16 *ptr;
+    u16 *ptr;
 
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MINIGAME)
     {
@@ -4325,9 +4325,13 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     u16 hp = 0;
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
-    bool8 canHeal;
+    bool8 canHeal, cannotUse;
 
-    if (NotUsingHPEVItemOnShedinja(mon, item))
+    if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
+    {
+        cannotUse = TRUE;
+    }
+    else
     {
         canHeal = IsHPRecoveryItem(item);
         if (canHeal == TRUE)
@@ -4336,50 +4340,49 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             if (hp == GetMonData(mon, MON_DATA_MAX_HP))
                 canHeal = FALSE;
         }
-        if (ExecuteTableBasedItemEffect_(gPartyMenu.slotId, item, 0))
-        {
-            iTriedHonestlyIDid:
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-            ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = task;
-            return;
-        }
+        cannotUse = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, item, 0);
     }
-    else
+
+    if (cannotUse != FALSE)
     {
-        goto iTriedHonestlyIDid; //TODO: resolve this goto
-    }
-    gPartyMenuUseExitCallback = TRUE;
-    if (!IsItemFlute(item))
-    {
-        PlaySE(SE_USE_ITEM);
-        if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM)
-            RemoveBagItem(item, 1);
-    }
-    else
-    {
-        PlaySE(SE_GLASS_FLUTE);
-    }
-    SetPartyMonAilmentGfx(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
-    if (gSprites[sPartyMenuBoxes[gPartyMenu.slotId].statusSpriteId].invisible)
-        DisplayPartyPokemonLevelCheck(mon, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
-    if (canHeal == TRUE)
-    {
-        if (hp == 0)
-            AnimatePartySlot(gPartyMenu.slotId, 1);
-        PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_DisplayHPRestoredMessage);
-        ResetHPTaskData(taskId, 0, hp);
-        return;
-    }
-    else
-    {
-        GetMonNickname(mon, gStringVar1);
-        GetMedicineItemEffectMessage(item);
-        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        if (!IsItemFlute(item))
+        {
+            PlaySE(SE_USE_ITEM);
+            if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM)
+                RemoveBagItem(item, 1);
+        }
+        else
+        {
+            PlaySE(SE_GLASS_FLUTE);
+        }
+        SetPartyMonAilmentGfx(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
+        if (gSprites[sPartyMenuBoxes[gPartyMenu.slotId].statusSpriteId].invisible)
+            DisplayPartyPokemonLevelCheck(mon, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
+        if (canHeal == TRUE)
+        {
+            if (hp == 0)
+                AnimatePartySlot(gPartyMenu.slotId, 1);
+            PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_DisplayHPRestoredMessage);
+            ResetHPTaskData(taskId, 0, hp);
+            return;
+        }
+        else
+        {
+            GetMonNickname(mon, gStringVar1);
+            GetMedicineItemEffectMessage(item);
+            DisplayPartyMenuMessage(gStringVar4, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = task;
+        }
     }
 }
 
@@ -4950,9 +4953,9 @@ static void Task_DisplayLevelUpStatsPg2(u8 taskId)
 
 static void DisplayLevelUpStatsPg1(u8 taskId)
 {
-    u16 *arrayPtr = (u16*)sPartyMenuInternal->data;
+    s16 *arrayPtr = sPartyMenuInternal->data;
 
-    arrayPtr[12] = (u16)CreateLevelUpStatsWindow();
+    arrayPtr[12] = CreateLevelUpStatsWindow();
     DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     CopyWindowToVram(arrayPtr[12], 2);
     ScheduleBgCopyTilemapToVram(2);
@@ -4960,7 +4963,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
 
 static void DisplayLevelUpStatsPg2(u8 taskId)
 {
-    u16 *arrayPtr = (u16 *)sPartyMenuInternal->data;
+    s16 *arrayPtr = sPartyMenuInternal->data;
 
     DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     CopyWindowToVram(arrayPtr[12], 2);

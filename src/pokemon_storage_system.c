@@ -2156,7 +2156,7 @@ static void Cb2_EnterPSS(u8 boxOption)
 {
     ResetTasks();
     sCurrentBoxOption = boxOption;
-    sPSSData = Alloc(sizeof(struct PokemonStorageSystemData));
+    sPSSData = Alloc(sizeof(*sPSSData));
     if (sPSSData == NULL)
     {
         SetMainCallback2(Cb2_ExitPSS);
@@ -2176,7 +2176,7 @@ static void Cb2_EnterPSS(u8 boxOption)
 static void Cb2_ReturnToPSS(void)
 {
     ResetTasks();
-    sPSSData = Alloc(sizeof(struct PokemonStorageSystemData));
+    sPSSData = Alloc(sizeof(*sPSSData));
     if (sPSSData == NULL)
     {
         SetMainCallback2(Cb2_ExitPSS);
@@ -7440,7 +7440,7 @@ static u8 HandleInput_OnButtons(void)
             sPSSData->field_CD7 = 1;
             break;
         }
-        
+
         if (JOY_REPEAT(DPAD_DOWN | START_BUTTON))
         {
             retVal = 1;
