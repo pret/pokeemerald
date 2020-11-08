@@ -2170,7 +2170,7 @@ static const u8 sFUSION_BOLTDescription[] = _(
     "Works well with a fireball.");
 
 static const u8 sFLYING_PRESSDescription[] = _(
-    "This attack does FightingDash\n"
+    "This attack does Fighting\n"
     "and Flying-type damage.");
 
 static const u8 sMAT_BLOCKDescription[] = _(
@@ -2218,7 +2218,7 @@ static const u8 sPETAL_BLIZZARDDescription[] = _(
     "of petals to attack.");
 
 static const u8 sFREEZE_DRYDescription[] = _(
-    "Super effective on WaterDash\n"
+    "Super effective on Water-\n"
     "types. May cause freezing.");
 
 static const u8 sDISARMING_VOICEDescription[] = _(

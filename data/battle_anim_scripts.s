@@ -6617,8 +6617,8 @@ Move_HURRICANE:
 	call UnsetPsychicBg
 	end
 HurricaneGust:
-	launchtemplate gPoisonBubbleSpriteTemplate 0x82, 2 0 0xfff0
-	launchtask AnimTask_AnimateGustTornadoPalette 5 2 1 0x46
+	createsprite gEllipticalGustSpriteTemplate, ANIM_ATTACKER, 2, 0, -16
+	createvisualtask AnimTask_AnimateGustTornadoPalette, 5, 1, 70
 	return
     
 	
