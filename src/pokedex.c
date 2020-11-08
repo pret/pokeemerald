@@ -355,8 +355,8 @@ static void DestroySplitIcon(void); //Physical/Special Split from BE
 
 //Physical/Special Split from BE
 #define TAG_SPLIT_ICONS 30004
-static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
-static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
+// static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
+// static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
 static const struct OamData sOamData_SplitIcons =
 {
     .size = SPRITE_SIZE(16x16),
@@ -6070,9 +6070,10 @@ static void Task_LoadStatsScreen(u8 taskId)
         CopyToBgTilemapBuffer(3, gPokedexStatsScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
-        // PutWindowTilemap(WIN_FOOTPRINT);
-        // PrintFootprint(WIN_FOOTPRINT, sPokedexListItem->dexNum);
-        // CopyWindowToVram(WIN_FOOTPRINT, 2);
+        CopyWindowToVram(WIN_INFO, 3);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(3);
         gMain.state++;
         break;
     case 2:
@@ -6118,10 +6119,6 @@ static void Task_LoadStatsScreen(u8 taskId)
         PrintMonStatsToggle(taskId);
         if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
-        CopyWindowToVram(WIN_INFO, 3);
-        CopyBgTilemapBufferToVram(1);
-        CopyBgTilemapBufferToVram(2);
-        CopyBgTilemapBufferToVram(3);
         gMain.state++;
         break;
     case 7:
