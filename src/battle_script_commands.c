@@ -12392,15 +12392,15 @@ static bool32 CriticalCapture(u32 odds)
     #if B_CRITICAL_CAPTURE == TRUE
         u32 numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
 
-        if (numCaught <= (NUM_SPECIES * 30) / 650)
+        if (numCaught <= (NATIONAL_DEX_COUNT * 30) / 650)
             odds = 0;
-        else if (numCaught <= (NUM_SPECIES * 150) / 650)
+        else if (numCaught <= (NATIONAL_DEX_COUNT * 150) / 650)
             odds /= 2;
-        else if (numCaught <= (NUM_SPECIES * 300) / 650)
+        else if (numCaught <= (NATIONAL_DEX_COUNT * 300) / 650)
             ;   // odds = (odds * 100) / 100;
-        else if (numCaught <= (NUM_SPECIES * 450) / 650)
+        else if (numCaught <= (NATIONAL_DEX_COUNT * 450) / 650)
             odds = (odds * 150) / 100;
-        else if (numCaught <= (NUM_SPECIES * 600) / 650)
+        else if (numCaught <= (NATIONAL_DEX_COUNT * 600) / 650)
             odds *= 2;
         else
             odds = (odds * 250) / 100;

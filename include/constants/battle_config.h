@@ -125,8 +125,8 @@
 #define B_SHOW_SPLIT_ICON           TRUE  // If set to TRUE, it will show an icon in the summary showing the move's category split.
 
 // Critical Capture
-#define B_CRITICAL_CAPTURE            TRUE // If set to TRUE, Critical Capture will be enabled.
-#define B_CATCHING_CHARM_BOOST        20   // % boost in Critical Capture odds if player has the Catching Charm.
+#define B_CRITICAL_CAPTURE          TRUE  // If set to TRUE, Critical Capture will be enabled.
+#define B_CATCHING_CHARM_BOOST      20    // % boost in Critical Capture odds if player has the Catching Charm.
 
 // Other
 #define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
