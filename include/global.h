@@ -117,6 +117,10 @@
 #define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(NUM_SPECIES))
 #define NUM_FLAG_BYTES (ROUND_BITS_TO_BYTES(FLAGS_COUNT))
 
+// Branch defines:
+// Used by other branches to detect each other.
+#define ITEM_EXPANSION
+
 struct Coords8
 {
     s8 x;
