@@ -1,9 +1,6 @@
 #ifndef GUARD_CONSTANTS_POKEMON_CONFIG_H
 #define GUARD_CONSTANTS_POKEMON_CONFIG_H
 
-// Used by other branches to communicate with each other.
-#define POKEMON_EXPANSION
-
 #ifndef GEN_3
 #define GEN_3 0
 #define GEN_4 1
