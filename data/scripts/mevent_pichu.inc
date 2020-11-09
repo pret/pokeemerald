@@ -68,7 +68,7 @@ sText_MysteryGiftEgg:
 	.string "Thank you for using the Mystery\n"
 	.string "Gift System.\p"
 	.string "From the Pokémon Center we\n"
-	.string "have a gift--a Pokémon egg!\p"
+	.string "have a gift--a Pokémon Egg!\p"
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
 
