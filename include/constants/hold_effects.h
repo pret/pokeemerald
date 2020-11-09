@@ -134,6 +134,7 @@
 #define HOLD_EFFECT_SEEDS            151
 #define HOLD_EFFECT_ADRENALINE_ORB   152
 #define HOLD_EFFECT_MEMORY           153
+#define HOLD_EFFECT_PLATE            154
 
 #define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
 
