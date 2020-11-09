@@ -7506,7 +7506,6 @@ u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16
 
 bool32 CanMegaEvolve(u8 battlerId)
 {
-    u8 i;
     u32 itemId, holdEffect, species;
     struct Pokemon *mon;
     u8 battlerPosition = GetBattlerPosition(battlerId);
