@@ -7494,7 +7494,7 @@ u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16
 
     for (i = 0; i < EVOS_PER_MON; i++)
     {
-        if (gEvolutionTable[preEvoSpecies][i].method == EVO_WISH_MEGA_EVOLUTION)
+        if (gEvolutionTable[preEvoSpecies][i].method == EVO_MOVE_MEGA_EVOLUTION)
         {
             par = gEvolutionTable[preEvoSpecies][i].param;
             if (par == moveId1 || par == moveId2 || par == moveId3 || par == moveId4)
