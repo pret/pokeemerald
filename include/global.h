@@ -119,7 +119,7 @@
 })
 
 // Branch defines: Used by other branches to detect each other.
-// Each define must be here for each of rhh's branch you have pulled.
+// Each define must be here for each of RHH's branch you have pulled.
 // e.g. If you have both the battle_engine and pokemon_expansion branch,
 //      then both BATTLE_ENGINE and POKEMON_EXPANSION must be defined here.
 #define BATTLE_ENGINE
