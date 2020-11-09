@@ -1,9 +1,6 @@
 #ifndef GUARD_CONSTANTS_ITEM_CONFIG_H
 #define GUARD_CONSTANTS_ITEM_CONFIG_H
 
-// Used by other branches to communicate with each other.
-#define ITEM_EXPANSION
-
 #ifndef GEN_3
 #define GEN_3 0
 #define GEN_4 1
