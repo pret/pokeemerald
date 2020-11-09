@@ -168,8 +168,8 @@ struct BerryBlender
     u16 progressBarValue;
     u16 maxProgressBarValue;
     u16 centerScale;
-    s16 bg_X;
-    s16 bg_Y;
+    u16 bg_X;
+    u16 bg_Y;
     u8 opponentTaskIds[BLENDER_MAX_PLAYERS - 1];
     u8 perfectOpponents; // for debugging, NPCs will always hit Best
     u16 scores[BLENDER_MAX_PLAYERS][NUM_SCORE_TYPES];
@@ -3387,13 +3387,13 @@ static void RestoreBgCoord(s16* coord)
 // For "unshaking" the screen after ShakeBgCoordForHit is called
 static void RestoreBgCoords(void)
 {
-    RestoreBgCoord((s16 *)&sBerryBlender->bg_X);
-    RestoreBgCoord((s16 *)&sBerryBlender->bg_Y);
+    RestoreBgCoord(&sBerryBlender->bg_X);
+    RestoreBgCoord(&sBerryBlender->bg_Y);
 }
 
 static void BlenderLandShakeBgCoord(s16* coord, u16 timer)
 {
-    u8 strength;
+    s32 strength;
 
     if (timer < 10)
         strength = 16;
