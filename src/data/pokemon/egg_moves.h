@@ -4034,7 +4034,7 @@ const u16 gEggMoves[] = {
 		MOVE_REVERSAL,
 		MOVE_DRAGON_BREATH),
 
-	egg_moves(ALOLAN_RATTATA,
+	egg_moves(RATTATA_ALOLAN,
 		MOVE_COUNTER,
 		MOVE_FINAL_GAMBIT,
 		MOVE_FURY_SWIPES,
@@ -4047,7 +4047,7 @@ const u16 gEggMoves[] = {
 		MOVE_SWITCHEROO,
 		MOVE_UPROAR),
 
-	egg_moves(ALOLAN_SANDSHREW,
+	egg_moves(SANDSHREW_ALOLAN,
 		MOVE_AMNESIA,
 		MOVE_CHIP_AWAY,
 		MOVE_COUNTER,
@@ -4061,7 +4061,7 @@ const u16 gEggMoves[] = {
 		MOVE_METAL_CLAW,
 		MOVE_NIGHT_SLASH),
 
-	egg_moves(ALOLAN_VULPIX,
+	egg_moves(VULPIX_ALOLAN,
 		MOVE_AGILITY,
 		MOVE_CHARM,
 		MOVE_DISABLE,
@@ -4077,7 +4077,7 @@ const u16 gEggMoves[] = {
 		MOVE_SECRET_POWER,
 		MOVE_TAIL_SLAP),
 
-	egg_moves(ALOLAN_DIGLETT,
+	egg_moves(DIGLETT_ALOLAN,
 		MOVE_ANCIENT_POWER,
 		MOVE_BEAT_UP,
 		MOVE_ENDURE,
@@ -4090,7 +4090,7 @@ const u16 gEggMoves[] = {
 		MOVE_REVERSAL,
 		MOVE_THRASH),
 
-	egg_moves(ALOLAN_MEOWTH,
+	egg_moves(MEOWTH_ALOLAN,
 		MOVE_AMNESIA,
 		MOVE_ASSIST,
 		MOVE_CHARM,
@@ -4104,7 +4104,7 @@ const u16 gEggMoves[] = {
 		MOVE_SNATCH,
 		MOVE_SPITE),
 
-	egg_moves(ALOLAN_GEODUDE,
+	egg_moves(GEODUDE_ALOLAN,
 		MOVE_AUTOTOMIZE,
 		MOVE_BLOCK,
 		MOVE_COUNTER,
@@ -4116,7 +4116,7 @@ const u16 gEggMoves[] = {
 		MOVE_SCREECH,
 		MOVE_WIDE_GUARD),
 
-	egg_moves(ALOLAN_GRIMER,
+	egg_moves(GRIMER_ALOLAN,
 		MOVE_ASSURANCE,
 		MOVE_CLEAR_SMOG,
 		MOVE_CURSE,
