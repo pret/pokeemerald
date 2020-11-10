@@ -1131,12 +1131,12 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Pencil, 0x0200, ANIM_TAG_PENCIL},
     {gBattleAnimSpriteGfx_AirWave, 0x0100, ANIM_TAG_AIR_WAVE},
     {gBattleAnimSpriteGfx_Orb, 0x0200, ANIM_TAG_ORB},
-    #if NEW_SWORD_PARTICLE
+    #if B_NEW_SWORD_PARTICLE
     {gBattleAnimSpriteGfx_NewSword, 0x0400, ANIM_TAG_SWORD},
     #else
     {gBattleAnimSpriteGfx_Sword, 0x0400, ANIM_TAG_SWORD},
     #endif
-    #if NEW_LEECH_SEED_PARTICLE
+    #if B_NEW_LEECH_SEED_PARTICLE
     {gBattleAnimSpriteGfx_NewLeechSeed, 0x0180, ANIM_TAG_SEED},
     #else
     {gBattleAnimSpriteGfx_Seed, 0x0180, ANIM_TAG_SEED},
@@ -1163,7 +1163,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_HitDuplicate, 0x0A00, ANIM_TAG_HIT_DUPLICATE},
     {gBattleAnimSpriteGfx_Leer, 0x0A00, ANIM_TAG_LEER},
     {gBattleAnimSpriteGfx_BlueBurst, 0x0A00, ANIM_TAG_BLUE_BURST},
-    #if NEW_EMBER_PARTICLES
+    #if B_NEW_EMBER_PARTICLES
     {gBattleAnimSpriteGfx_NewEmbers, 0x0A00, ANIM_TAG_SMALL_EMBER},
     #else
     {gBattleAnimSpriteGfx_SmallEmber, 0x0A00, ANIM_TAG_SMALL_EMBER},
@@ -1205,7 +1205,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_YellowUnk2, 0x0040, ANIM_TAG_YELLOW_UNK_2},
     {gBattleAnimSpriteGfx_AirSlash, 0x0180, ANIM_TAG_AIR_SLASH},
     {gBattleAnimSpriteGfx_SpinningGreenOrbs, 0x0800, ANIM_TAG_SPINNING_GREEN_ORBS},
-    #if NEW_LEAF_PARTICLE
+    #if B_NEW_LEAF_PARTICLE
     {gBattleAnimSpriteGfx_NewLeaf, 0x0480, ANIM_TAG_LEAF},
     #else
     {gBattleAnimSpriteGfx_Leaf, 0x0480, ANIM_TAG_LEAF},
@@ -1289,7 +1289,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_CircleImpact, 0x0020, ANIM_TAG_CIRCLE_IMPACT},
     {gBattleAnimSpriteGfx_Scratch, 0x0a00, ANIM_TAG_SCRATCH},
     {gBattleAnimSpriteGfx_Cut, 0x0800, ANIM_TAG_CUT},
-    #if NEW_TEETH_PARTICLE
+    #if B_NEW_TEETH_PARTICLE
     {gBattleAnimSpriteGfx_NewTeeth, 0x0800, ANIM_TAG_SHARP_TEETH},
     #else
     {gBattleAnimSpriteGfx_SharpTeeth, 0x0800, ANIM_TAG_SHARP_TEETH},
@@ -1297,7 +1297,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_RainbowRings, 0x00c0, ANIM_TAG_RAINBOW_RINGS},
     {gBattleAnimSpriteGfx_IceCrystals, 0x01c0, ANIM_TAG_ICE_CRYSTALS},
     {gBattleAnimSpriteGfx_IceSpikes, 0x0100, ANIM_TAG_ICE_SPIKES},
-    #if NEW_HANDS_FEET_PARTICLE
+    #if B_NEW_HANDS_FEET_PARTICLE
     {gBattleAnimSpriteGfx_NewHandsAndFeet, 0x0800, ANIM_TAG_HANDS_AND_FEET},
     #else
     {gBattleAnimSpriteGfx_HandsAndFeet, 0x0800, ANIM_TAG_HANDS_AND_FEET},
@@ -1310,7 +1310,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_WaterOrb, 0x0200, ANIM_TAG_WATER_ORB},
     {gBattleAnimSpriteGfx_PoisonBubble, 0x0180, ANIM_TAG_POISON_BUBBLE},
     {gBattleAnimSpriteGfx_ToxicBubble, 0x0400, ANIM_TAG_TOXIC_BUBBLE},
-    #if NEW_SPIKES_PARTICLE
+    #if B_NEW_SPIKES_PARTICLE
     {gBattleAnimSpriteGfx_NewSpikes, 0x0080, ANIM_TAG_SPIKES},
     #else
     {gBattleAnimSpriteGfx_Spikes, 0x0080, ANIM_TAG_SPIKES},
@@ -1318,7 +1318,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_HornHit2, 0x0100, ANIM_TAG_HORN_HIT_2},
     {gBattleAnimSpriteGfx_AirWave2, 0x0100, ANIM_TAG_AIR_WAVE_2},
     {gBattleAnimSpriteGfx_SmallBubbles, 0x0140, ANIM_TAG_SMALL_BUBBLES},
-    #if NEW_FLY_BUBBLE_PARTICLE
+    #if B_NEW_FLY_BUBBLE_PARTICLE
     {gBattleAnimSpriteGfx_NewFly, 0x0800, ANIM_TAG_ROUND_SHADOW},
     #else
     {gBattleAnimSpriteGfx_RoundShadow, 0x0800, ANIM_TAG_ROUND_SHADOW},
@@ -1353,7 +1353,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_FocusEnergy, 0x0400, ANIM_TAG_FOCUS_ENERGY},
     {gBattleAnimSpriteGfx_SphereToCube, 0x0a00, ANIM_TAG_SPHERE_TO_CUBE},
     {gBattleAnimSpriteGfx_Tendrils, 0x1000, ANIM_TAG_TENDRILS},
-    #if NEW_MEAN_LOOK_PARTICLE
+    #if B_NEW_MEAN_LOOK_PARTICLE
     {gBattleAnimSpriteGfx_NewEye, 0x0800, ANIM_TAG_EYE},
     #else
     {gBattleAnimSpriteGfx_Eye, 0x0800, ANIM_TAG_EYE},
@@ -1369,7 +1369,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Spiral, 0x0800, ANIM_TAG_SPIRAL},
     {gBattleAnimSpriteGfx_SnoreZ, 0x0200, ANIM_TAG_SNORE_Z},
     {gBattleAnimSpriteGfx_Explosion, 0x0800, ANIM_TAG_EXPLOSION},
-    #if NEW_CURSE_NAIL_PARTICLE
+    #if B_NEW_CURSE_NAIL_PARTICLE
     {gBattleAnimSpriteGfx_NewNail, 0x0400, ANIM_TAG_NAIL},
     #else
     {gBattleAnimSpriteGfx_Nail, 0x0400, ANIM_TAG_NAIL},
@@ -1400,7 +1400,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Roots, 0x0800, ANIM_TAG_ROOTS},
     {gBattleAnimSpriteGfx_ItemBag, 0x0200, ANIM_TAG_ITEM_BAG},
     {gBattleAnimSpriteGfx_JaggedMusicNote, 0x0400, ANIM_TAG_JAGGED_MUSIC_NOTE},
-    #if NEW_BATON_PASS_BALL_PARTICLE
+    #if B_NEW_BATON_PASS_BALL_PARTICLE
     {gBattleAnimSpriteGfx_NewPokeball, 0x0080, ANIM_TAG_POKEBALL},
     #else
     {gBattleAnimSpriteGfx_Pokeball, 0x0080, ANIM_TAG_POKEBALL},
@@ -1419,7 +1419,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_PinkPetal, 0x0080, ANIM_TAG_PINK_PETAL},
     {gBattleAnimSpriteGfx_PainSplit, 0x0180, ANIM_TAG_PAIN_SPLIT},
     {gBattleAnimSpriteGfx_Confetti, 0x0180, ANIM_TAG_CONFETTI},
-    #if NEW_MORNING_SUN_STAR_PARTICLE
+    #if B_NEW_MORNING_SUN_STAR_PARTICLE
     {gBattleAnimSpriteGfx_NewGreenStar, 0x0200, ANIM_TAG_GREEN_STAR},
     #else
     {gBattleAnimSpriteGfx_GreenStar, 0x0200, ANIM_TAG_GREEN_STAR},
@@ -1573,12 +1573,12 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Pencil, ANIM_TAG_PENCIL},
     {gBattleAnimSpritePal_AirWave, ANIM_TAG_AIR_WAVE},
     {gBattleAnimSpritePal_Orb, ANIM_TAG_ORB},
-    #if NEW_SWORD_PARTICLE
+    #if B_NEW_SWORD_PARTICLE
     {gBattleAnimSpritePal_NewSword, ANIM_TAG_SWORD},
     #else
     {gBattleAnimSpritePal_Sword, ANIM_TAG_SWORD},
     #endif
-    #if NEW_LEECH_SEED_PARTICLE
+    #if B_NEW_LEECH_SEED_PARTICLE
     {gBattleAnimSpritePal_NewLeechSeed, ANIM_TAG_SEED},
     #else
     {gBattleAnimSpritePal_Seed, ANIM_TAG_SEED},
@@ -1596,7 +1596,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_BlackSmoke, ANIM_TAG_BLACK_BALL},
     {gBattleAnimSpritePal_Conversion, ANIM_TAG_CONVERSION},
     {gBattleAnimSpritePal_Glass, ANIM_TAG_GLASS},
-    #if NEW_HORN_ATTACK_PARTICLE
+    #if B_NEW_HORN_ATTACK_PARTICLE
     {gBattleAnimSpritePal_NewHornHit, ANIM_TAG_HORN_HIT},
     #else
     {gBattleAnimSpritePal_HornHit, ANIM_TAG_HORN_HIT},
@@ -1609,7 +1609,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_HitDuplicate, ANIM_TAG_HIT_DUPLICATE},
     {gBattleAnimSpritePal_Leer, ANIM_TAG_LEER},
     {gBattleAnimSpritePal_BlueBurst, ANIM_TAG_BLUE_BURST},
-    #if NEW_EMBER_PARTICLES
+    #if B_NEW_EMBER_PARTICLES
     {gBattleAnimSpritePal_NewEmbers, ANIM_TAG_SMALL_EMBER},
     #else
     {gBattleAnimSpritePal_SmallEmber, ANIM_TAG_SMALL_EMBER},
@@ -1651,7 +1651,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_YellowUnk2, ANIM_TAG_YELLOW_UNK_2},
     {gBattleAnimSpritePal_AirSlash, ANIM_TAG_AIR_SLASH},
     {gBattleAnimSpritePal_SpinningGreenOrbs, ANIM_TAG_SPINNING_GREEN_ORBS},
-    #if NEW_LEAF_PARTICLE
+    #if B_NEW_LEAF_PARTICLE
     {gBattleAnimSpritePal_NewLeaf, ANIM_TAG_LEAF},
     #else
     {gBattleAnimSpritePal_Leaf, ANIM_TAG_LEAF},
@@ -1731,7 +1731,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Tongue, ANIM_TAG_TONGUE},
     {gBattleAnimSpritePal_Smoke, ANIM_TAG_SMOKE},
     {gBattleAnimSpritePal_Smoke, ANIM_TAG_SMOKE_2},
-    #if NEW_IMPACT_PALETTE
+    #if B_NEW_IMPACT_PALETTE
     {gBattleAnimSpritePal_NewImpact, ANIM_TAG_IMPACT},
     #else
     {gBattleAnimSpritePal_Impact, ANIM_TAG_IMPACT},
@@ -1739,7 +1739,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_CircleImpact, ANIM_TAG_CIRCLE_IMPACT},
     {gBattleAnimSpritePal_Impact, ANIM_TAG_SCRATCH},
     {gBattleAnimSpritePal_Impact, ANIM_TAG_CUT},
-    #if NEW_TEETH_PARTICLE
+    #if B_NEW_TEETH_PARTICLE
     {gBattleAnimSpritePal_NewTeeth, ANIM_TAG_SHARP_TEETH},
     #else
     {gBattleAnimSpritePal_SharpTeeth, ANIM_TAG_SHARP_TEETH},
@@ -1747,7 +1747,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_RainbowRings, ANIM_TAG_RAINBOW_RINGS},
     {gBattleAnimSpritePal_IceCrystals, ANIM_TAG_ICE_CRYSTALS},
     {gBattleAnimSpritePal_IceCrystals, ANIM_TAG_ICE_SPIKES},
-    #if NEW_HANDS_FEET_PARTICLE
+    #if B_NEW_HANDS_FEET_PARTICLE
     {gBattleAnimSpritePal_NewHandsAndFeet, ANIM_TAG_HANDS_AND_FEET},
     #else
     {gBattleAnimSpritePal_HandsAndFeet, ANIM_TAG_HANDS_AND_FEET},
@@ -1760,7 +1760,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_WaterImpact, ANIM_TAG_WATER_ORB},
     {gBattleAnimSpritePal_PoisonBubble, ANIM_TAG_POISON_BUBBLE},
     {gBattleAnimSpritePal_PoisonBubble, ANIM_TAG_TOXIC_BUBBLE},
-    #if NEW_SPIKES_PARTICLE
+    #if B_NEW_SPIKES_PARTICLE
     {gBattleAnimSpritePal_NewSpikes, ANIM_TAG_SPIKES},
     #else
     {gBattleAnimSpritePal_Spikes, ANIM_TAG_SPIKES},
@@ -1768,7 +1768,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_HornHit2, ANIM_TAG_HORN_HIT_2},
     {gBattleAnimSpritePal_AirWave2, ANIM_TAG_AIR_WAVE_2},
     {gBattleAnimSpritePal_SmallBubbles, ANIM_TAG_SMALL_BUBBLES},
-    #if NEW_FLY_BUBBLE_PARTICLE
+    #if B_NEW_FLY_BUBBLE_PARTICLE
     {gBattleAnimSpritePal_NewFly, ANIM_TAG_ROUND_SHADOW},
     #else
     {gBattleAnimSpritePal_RoundShadow, ANIM_TAG_ROUND_SHADOW},
@@ -1803,7 +1803,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_FocusEnergy, ANIM_TAG_FOCUS_ENERGY},
     {gBattleAnimSpritePal_SphereToCube, ANIM_TAG_SPHERE_TO_CUBE},
     {gBattleAnimSpritePal_Tendrils, ANIM_TAG_TENDRILS},
-    #if NEW_MEAN_LOOK_PARTICLE
+    #if B_NEW_MEAN_LOOK_PARTICLE
     {gBattleAnimSpritePal_NewEye, ANIM_TAG_EYE},
     #else
     {gBattleAnimSpritePal_Eye, ANIM_TAG_EYE},
@@ -1846,7 +1846,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Roots, ANIM_TAG_ROOTS},
     {gBattleAnimSpritePal_ItemBag, ANIM_TAG_ITEM_BAG},
     {gBattleAnimSpritePal_JaggedMusicNote, ANIM_TAG_JAGGED_MUSIC_NOTE},
-    #if NEW_BATON_PASS_BALL_PARTICLE
+    #if B_NEW_BATON_PASS_BALL_PARTICLE
     {gBattleAnimSpritePal_NewPokeball, ANIM_TAG_POKEBALL},
     #else
     {gBattleAnimSpritePal_Pokeball, ANIM_TAG_POKEBALL},
@@ -1865,7 +1865,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_PinkPetal, ANIM_TAG_PINK_PETAL},
     {gBattleAnimSpritePal_PainSplit, ANIM_TAG_PAIN_SPLIT},
     {gBattleAnimSpritePal_Confetti, ANIM_TAG_CONFETTI},
-    #if NEW_MORNING_SUN_STAR_PARTICLE
+    #if B_NEW_MORNING_SUN_STAR_PARTICLE
     {gBattleAnimSpritePal_NewGreenStar, ANIM_TAG_GREEN_STAR},
     #else
     {gBattleAnimSpritePal_GreenStar, ANIM_TAG_GREEN_STAR},
