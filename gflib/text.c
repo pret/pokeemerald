@@ -50,7 +50,7 @@ const u8 gDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_RS.4bpp");
 const u8 gUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
 const u8 gUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 const u8 gDownArrowYCoords[] = { 0x0, 0x1, 0x2, 0x1 };
-const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x0 };
+const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x8, 0x0 };
 
 const struct GlyphWidthFunc gGlyphWidthFuncs[] =
 {
@@ -212,27 +212,39 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 void RunTextPrinters(void)
 {
     int i;
+    bool8 isInstant = GetPlayerTextSpeed() == OPTIONS_TEXT_SPEED_INSTANT;
 
     if (gUnknown_03002F84 == 0)
     {
         for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
         {
-            if (gTextPrinters[i].active)
-            {
-                u16 temp = RenderFont(&gTextPrinters[i]);
-                switch (temp)
+            do {
+                bool8 isActive = gTextPrinters[i].active;
+                if (isActive)
                 {
-                case 0:
-                    CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
-                case 3:
-                    if (gTextPrinters[i].callback != 0)
-                        gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
-                    break;
-                case 1:
-                    gTextPrinters[i].active = 0;
+                    u16 temp = RenderFont(&gTextPrinters[i]);
+                    switch (temp)
+                    {
+                    case 0:
+                        CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
+                        if (gTextPrinters[i].callback != 0)
+                            gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
+                        break;
+                    case 3:
+                        if (gTextPrinters[i].callback != 0)
+                            gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
+                        isActive = 0;
+                        break;
+                    case 1:
+                        gTextPrinters[i].active = 0;
+                        isActive = 0;
+                        break;
+                    }
+                }
+                if (!isActive) {
                     break;
                 }
-            }
+            } while (isInstant);
         }
     }
 }

@@ -124,7 +124,8 @@ enum
 {
     OPTIONS_TEXT_SPEED_SLOW,
     OPTIONS_TEXT_SPEED_MID,
-    OPTIONS_TEXT_SPEED_FAST
+    OPTIONS_TEXT_SPEED_FAST,
+    OPTIONS_TEXT_SPEED_INSTANT
 };
 
 enum
@@ -825,7 +826,7 @@ struct SaveBlock2 /* 0x02024EA4 */
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
     /*0x13*/ u8 optionsButtonMode;         // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    /*0x14*/ u16 optionsTextSpeed:3;       // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+    /*0x14*/ u16 optionsTextSpeed:4;       // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/INSTANT]
     u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
     u16 optionsSound:1;           // OPTIONS_SOUND_[MONO/STEREO]
     u16 optionsBattleStyle:1;     // OPTIONS_BATTLE_STYLE_[SHIFT/SET]

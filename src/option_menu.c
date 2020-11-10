@@ -407,7 +407,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 {
     if (JOY_NEW(DPAD_RIGHT))
     {
-        if (selection <= 1)
+        if (selection <= 2)
             selection++;
         else
             selection = 0;
@@ -419,7 +419,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
         if (selection != 0)
             selection--;
         else
-            selection = 2;
+            selection = 3;
 
         sArrowPressed = TRUE;
     }
@@ -428,12 +428,13 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 
 static void TextSpeed_DrawChoices(u8 selection)
 {
-    u8 styles[3];
-    s32 widthSlow, widthMid, widthFast, xMid;
+    u8 styles[4];
+    s32 widthSlow, widthMid, widthFast, widthInst, xMid, gap;
 
     styles[0] = 0;
     styles[1] = 0;
     styles[2] = 0;
+    styles[3] = 0;
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_TextSpeedSlow, 104, YPOS_TEXTSPEED, styles[0]);
@@ -441,12 +442,16 @@ static void TextSpeed_DrawChoices(u8 selection)
     widthSlow = GetStringWidth(1, gText_TextSpeedSlow, 0);
     widthMid = GetStringWidth(1, gText_TextSpeedMid, 0);
     widthFast = GetStringWidth(1, gText_TextSpeedFast, 0);
+    widthInst = GetStringWidth(1, gText_TextSpeedInstant, 0);
 
-    widthMid -= 94;
-    xMid = (widthSlow - widthMid - widthFast) / 2 + 104;
+    gap = ((198 - 104 - widthSlow - widthMid - widthFast - widthInst) / 3) + 1;
+    xMid = 104 + widthSlow + gap;
     DrawOptionMenuChoice(gText_TextSpeedMid, xMid, YPOS_TEXTSPEED, styles[1]);
 
-    DrawOptionMenuChoice(gText_TextSpeedFast, GetStringRightAlignXOffset(1, gText_TextSpeedFast, 198), YPOS_TEXTSPEED, styles[2]);
+    DrawOptionMenuChoice(gText_TextSpeedFast, xMid + widthMid + gap, YPOS_TEXTSPEED, styles[2]);
+
+    DrawOptionMenuChoice(gText_TextSpeedInstant, 198 - widthInst, YPOS_TEXTSPEED, styles[3]);
+    //DrawOptionMenuChoice(gText_TextSpeedInstant, GetStringRightAlignXOffset(1, gText_TextSpeedInstant, 198), YPOS_TEXTSPEED, styles[3]);
 }
 
 static u8 BattleScene_ProcessInput(u8 selection)

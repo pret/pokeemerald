@@ -1015,6 +1015,9 @@ void sub_8020FC4(struct BerryCrushGame *arg0)
     case OPTIONS_TEXT_SPEED_FAST:
         arg0->unkB = 1;
         break;
+    case OPTIONS_TEXT_SPEED_INSTANT:
+        arg0->unkB = 1;
+        break;
     }
 }
 
