@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONFIG_H
 #define GUARD_CONSTANTS_BATTLE_CONFIG_H
 
-#define BATTLE_ENGINE
-
 // Species with peculiar battle effects.
 #ifndef POKEMON_EXPANSION
     #define SPECIES_DIALGA            0
