@@ -2768,10 +2768,10 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
     case 0:
         switch (typePower)
         {
-        default:
-        case TYPE_x0:
-        case TYPE_x0_25:
         case TYPE_x0_50:
+        case TYPE_x0_25:
+        case TYPE_x0:
+        default:
             typePower = 0;
             break;
         case TYPE_x1:
@@ -2788,18 +2788,18 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
     case 1:
         switch (typePower)
         {
-        case TYPE_x0:
-            typePower = 8;
+        default:
+        case TYPE_x1:
+            typePower = 0;
             break;
         case TYPE_x0_25:
             typePower = 4;
             break;
+        case TYPE_x0:
+            typePower = 8;
+            break;
         case TYPE_x0_50:
             typePower = 2;
-            break;
-        default:
-        case TYPE_x1:
-            typePower = 0;
             break;
         case TYPE_x2:
             typePower = -2;
@@ -2818,8 +2818,8 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
         case TYPE_x0_25:
             typePower = -8;
             break;
-        default:
         case TYPE_x0_50:
+        default:
             typePower = 0;
             break;
         case TYPE_x1:
@@ -4295,7 +4295,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 2;
     textPrinter.lineSpacing = 0;
-    textPrinter.style = 0;
+    textPrinter.unk = 0;
     textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
     textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
@@ -4827,7 +4827,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
-    textPrinter.style = 0;
+    textPrinter.unk = 0;
     textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
     textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
@@ -5325,7 +5325,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         textPrinter.lineSpacing = 0;
         textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x70, textPrinter.letterSpacing);
         textPrinter.currentY = 1;
-        textPrinter.style = 0;
+        textPrinter.unk = 0;
         textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
         textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
         textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
@@ -5506,7 +5506,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
             textPrinter.y = 0;
             textPrinter.letterSpacing = 2;
             textPrinter.lineSpacing = 0;
-            textPrinter.style = 0;
+            textPrinter.unk = 0;
             textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
             textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
             textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;

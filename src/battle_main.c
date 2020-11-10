@@ -118,7 +118,6 @@ static void HandleEndTurn_RanFromBattle(void);
 static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
 
-
 // EWRAM vars
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -496,16 +495,19 @@ static void CB2_InitBattleInternal(void)
         gBattle_WIN0V = 0x5051;
         ScanlineEffect_Clear();
 
-        for (i = 0; i < 80; i++)
+        i = 0;
+        while (i < 80)
         {
             gScanlineEffectRegBuffers[0][i] = 0xF0;
             gScanlineEffectRegBuffers[1][i] = 0xF0;
+            i++;
         }
 
-        for (; i < 160; i++)
+        while (i < 160)
         {
             gScanlineEffectRegBuffers[0][i] = 0xFF10;
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
+            i++;
         }
 
         ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
@@ -632,7 +634,8 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
 static void SetAllPlayersBerryData(void)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -2541,7 +2544,8 @@ void SpriteCallbackDummy_2(struct Sprite *sprite)
 
 static void sub_80398D0(struct Sprite *sprite)
 {
-    if (--sprite->data[4] == 0)
+    sprite->data[4]--;
+    if (sprite->data[4] == 0)
     {
         sprite->data[4] = 8;
         sprite->invisible ^= 1;
@@ -4456,38 +4460,40 @@ static void SetActionsAndBattlersTurnOrder(void)
             gBattleStruct->mega.battlerId = 0;
             return;
         }
-        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+        else
         {
-            if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_ITEM || gChosenActionByBattler[gActiveBattler] == B_ACTION_SWITCH)
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
-                gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
-                gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
-                turnOrderId++;
-            }
-        }
-        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
-        {
-            if (gChosenActionByBattler[gActiveBattler] != B_ACTION_USE_ITEM && gChosenActionByBattler[gActiveBattler] != B_ACTION_SWITCH)
-            {
-                gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
-                gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
-                turnOrderId++;
-            }
-        }
-        for (i = 0; i < gBattlersCount - 1; i++)
-        {
-            for (j = i + 1; j < gBattlersCount; j++)
-            {
-                u8 battler1 = gBattlerByTurnOrder[i];
-                u8 battler2 = gBattlerByTurnOrder[j];
-
-                if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
-                    && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
-                    && gActionsByTurnOrder[i] != B_ACTION_SWITCH
-                    && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
+                if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_ITEM || gChosenActionByBattler[gActiveBattler] == B_ACTION_SWITCH)
                 {
-                    if (GetWhoStrikesFirst(battler1, battler2, FALSE))
-                        SwapTurnOrder(i, j);
+                    gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
+                    gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
+                    turnOrderId++;
+                }
+            }
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+            {
+                if (gChosenActionByBattler[gActiveBattler] != B_ACTION_USE_ITEM && gChosenActionByBattler[gActiveBattler] != B_ACTION_SWITCH)
+                {
+                    gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[gActiveBattler];
+                    gBattlerByTurnOrder[turnOrderId] = gActiveBattler;
+                    turnOrderId++;
+                }
+            }
+            for (i = 0; i < gBattlersCount - 1; i++)
+            {
+                for (j = i + 1; j < gBattlersCount; j++)
+                {
+                    u8 battler1 = gBattlerByTurnOrder[i];
+                    u8 battler2 = gBattlerByTurnOrder[j];
+                    if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
+                        && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
+                        && gActionsByTurnOrder[i] != B_ACTION_SWITCH
+                        && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
+                    {
+                        if (GetWhoStrikesFirst(battler1, battler2, FALSE))
+                            SwapTurnOrder(i, j);
+                    }
                 }
             }
         }
@@ -4616,10 +4622,13 @@ static void RunTurnActionsFunctions(void)
         gHitMarker &= ~(HITMARKER_x100000);
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }
-    else if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
+    else
     {
-        gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
-        gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
+        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
+        {
+            gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
+            gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
+        }
     }
 }
 
@@ -4736,14 +4745,14 @@ static void HandleEndTurn_RanFromBattle(void)
     {
         switch (gProtectStructs[gBattlerAttacker].fleeFlag)
         {
+        default:
+            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
+            break;
         case 1:
             gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
             break;
         case 2:
             gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
-            break;
-        default:
-            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
             break;
         }
     }
