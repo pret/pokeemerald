@@ -1009,7 +1009,10 @@ void AnimTask_CreateSurfWave(u8 taskId)
     {
     case ANIM_SURF_PAL_SURF:
     default:
-        LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
+        if (B_NEW_SURF_PARTICLE_PALETTE == TRUE)
+            LoadCompressedPalette(gBattleAnimSpritePal_NewSurf, animBg.paletteId * 16, 32);
+        else
+            LoadCompressedPalette(gBattleAnimBgPalette_Surf, animBg.paletteId * 16, 32);
         break;
     case ANIM_SURF_PAL_MUDDY_WATER:
         LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
