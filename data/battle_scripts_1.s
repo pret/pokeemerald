@@ -6554,7 +6554,7 @@ BattleScript_DefiantActivates::
 BattleScript_AbilityPopUp:
 	showabilitypopup BS_ABILITY_BATTLER
 	recordability BS_ABILITY_BATTLER
-	pause 0x10
+	pause 40
 	return
 
 BattleScript_SpeedBoostActivates::
