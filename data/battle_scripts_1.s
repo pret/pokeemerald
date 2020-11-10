@@ -6776,7 +6776,10 @@ BattleScript_IntimidateActivatesReturn:
 	return
 BattleScript_IntimidatePrevented:
 	pause 0x20
-	printstring STRINGID_PREVENTEDFROMWORKING
+	call BattleScript_AbilityPopUp
+	setbyte gBattleCommunication STAT_ATK
+	stattextbuffer BS_ATTACKER
+	printstring STRINGID_STATWASNOTLOWERED
 	waitmessage 0x40
 	call BattleScript_TryAdrenalineOrb
 	goto BattleScript_IntimidateActivatesLoopIncrement
