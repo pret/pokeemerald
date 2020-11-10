@@ -1126,3 +1126,8 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
 
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
+
+const struct CompressedSpriteSheet gMonFrontPicTableFemale[] =
+{
+    SPECIES_SPRITE(EEVEE, gMonFrontPic_EeveeF),
+};

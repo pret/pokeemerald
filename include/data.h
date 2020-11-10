@@ -93,8 +93,11 @@ extern const union AnimCmd *const gUnknown_082FF70C[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gMonBackPicCoords[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
+extern const struct CompressedSpriteSheet gMonBackPicTableFemale[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
+extern const struct CompressedSpritePalette gMonPaletteTableFemale[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+extern const struct CompressedSpritePalette gMonShinyPaletteTableFemale[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
@@ -108,6 +111,8 @@ extern const u8 gEnemyMonElevation[NUM_SPECIES];
 
 extern const union AnimCmd *const *const gMonFrontAnimsPtrTable[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const struct CompressedSpriteSheet gMonFrontPicTableFemale[];
+extern const bool8 SpeciesHasGenderDifference[NUM_SPECIES];
 
 extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];
