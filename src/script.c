@@ -26,9 +26,9 @@ void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTable
     s32 i;
 
     ctx->mode = 0;
-    ctx->scriptPtr = NULL;
+    ctx->scriptPtr = 0;
     ctx->stackDepth = 0;
-    ctx->nativePtr = NULL;
+    ctx->nativePtr = 0;
     ctx->cmdTable = cmdTable;
     ctx->cmdTableEnd = cmdTableEnd;
 
@@ -55,7 +55,7 @@ void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void))
 void StopScript(struct ScriptContext *ctx)
 {
     ctx->mode = 0;
-    ctx->scriptPtr = NULL;
+    ctx->scriptPtr = 0;
 }
 
 bool8 RunScriptCommand(struct ScriptContext *ctx)

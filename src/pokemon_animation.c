@@ -2889,10 +2889,9 @@ static void sub_8181C2C(struct Sprite *sprite)
     }
     else
     {
+        s32 var = sUnknown_03001240[sprite->data[0]].field_8;
 
-        const s16 var = sUnknown_03001240[sprite->data[0]].field_8;
-
-        sprite->pos2.x = var * ((counter % 128) * 8) / 128 + 8 * -var; //Should be - 8 * var instead of + 8 * -var, but that doesn't match
+        sprite->pos2.x = var * ((counter % 128) * 8) / 128 + 8 * -var;
         sprite->pos2.y = -(Sin(counter % 128, 8));
     }
 
