@@ -7498,9 +7498,25 @@ u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId)
     return SPECIES_NONE;
 }
 
+u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4)
+{
+    u32 i, par;
+
+    for (i = 0; i < EVOS_PER_MON; i++)
+    {
+        if (gEvolutionTable[preEvoSpecies][i].method == EVO_MOVE_MEGA_EVOLUTION)
+        {
+            par = gEvolutionTable[preEvoSpecies][i].param;
+            if (par == moveId1 || par == moveId2 || par == moveId3 || par == moveId4)
+                return gEvolutionTable[preEvoSpecies][i].targetSpecies;
+        }
+    }
+    return SPECIES_NONE;
+}
+
 bool32 CanMegaEvolve(u8 battlerId)
 {
-    u32 itemId, holdEffect;
+    u32 itemId, holdEffect, species;
     struct Pokemon *mon;
     u8 battlerPosition = GetBattlerPosition(battlerId);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
@@ -7516,29 +7532,42 @@ bool32 CanMegaEvolve(u8 battlerId)
             return FALSE;
     }
 
-    // Check if the pokemon holds an appropriate item.
+    // Gets mon data.
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
         mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
     else
         mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
 
+    species = GetMonData(mon, MON_DATA_SPECIES);
     itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
-    if (USE_BATTLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
-        holdEffect = gBattleStruct->debugHoldEffects[battlerId];
-    else if (itemId == ITEM_ENIGMA_BERRY)
-        holdEffect = gEnigmaBerries[battlerId].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(itemId);
 
-    if (holdEffect != HOLD_EFFECT_MEGA_STONE)
-        return FALSE;
+    // Check if there is an entry in the evolution table for regular Mega Evolution.
+    if (GetMegaEvolutionSpecies(species, itemId) != SPECIES_NONE)
+    {
+        if (USE_BATTLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
+            holdEffect = gBattleStruct->debugHoldEffects[battlerId];
+        else if (itemId == ITEM_ENIGMA_BERRY)
+            holdEffect = gEnigmaBerries[battlerId].holdEffect;
+        else
+            holdEffect = ItemId_GetHoldEffect(itemId);
 
-    // Check if there is an entry in the evolution table.
-    if (GetMegaEvolutionSpecies(GetMonData(mon, MON_DATA_SPECIES), itemId) == SPECIES_NONE)
-        return FALSE;
+        // Can Mega Evolve via Item.
+        if (holdEffect == HOLD_EFFECT_MEGA_STONE)
+        {
+            gBattleStruct->mega.isWishMegaEvo = FALSE;
+            return TRUE;
+        }
+    }
 
-    // All checks passed, the mon CAN mega evolve.
-    return TRUE;
+    // Check if there is an entry in the evolution table for Wish Mega Evolution.
+    if (GetWishMegaEvolutionSpecies(species, GetMonData(mon, MON_DATA_MOVE1), GetMonData(mon, MON_DATA_MOVE2), GetMonData(mon, MON_DATA_MOVE3), GetMonData(mon, MON_DATA_MOVE4)))
+    {
+        gBattleStruct->mega.isWishMegaEvo = TRUE;
+        return TRUE;
+    }
+
+    // No checks passed, the mon CAN'T mega evolve.
+    return FALSE;
 }
 
 void UndoMegaEvolution(u32 monId)
