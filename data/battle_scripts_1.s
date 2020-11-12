@@ -7691,7 +7691,7 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 
 BattleScript_Pickpocket::
 	call BattleScript_AbilityPopUp
-    swapattackerwithtarget
-    seteffectsecondary
-    swapattackerwithtarget
-    return
+	swapattackerwithtarget
+	seteffectsecondary
+	swapattackerwithtarget
+	return
