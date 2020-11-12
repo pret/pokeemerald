@@ -7688,3 +7688,10 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	atk57
 	waitmessage 0x40
 	end2
+
+BattleScript_Pickpocket::
+	call BattleScript_AbilityPopUp
+    swapattackerwithtarget
+    seteffectsecondary
+    swapattackerwithtarget
+    return

@@ -4518,6 +4518,24 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 effect++;
             }
             break;
+        case ABILITY_PICKPOCKET:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && IsBattlerAlive(gBattlerAttacker)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+             && TARGET_TURN_DAMAGED
+             && IsBattlerAlive(gBattlerTarget)
+             && gBattleMons[gBattlerAttacker].item != ITEM_NONE
+             && gBattleMons[gBattlerTarget].item == ITEM_NONE
+             && GetBattlerAbility(gBattlerAttacker) != ABILITY_STICKY_HOLD)
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_STEAL_ITEM;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_Pickpocket;
+                gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+                effect++;
+            }
+            break;
         }
         break;
     case ABILITYEFFECT_MOVE_END_ATTACKER: // Same as above, but for attacker
