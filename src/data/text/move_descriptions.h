@@ -2622,16 +2622,16 @@ static const u8 sPHOTON_GEYSERDescription[] = _(
     "determines its category.");
 
 static const u8 sZIPPY_ZAPDescription[] = _(
-    "An attack that is always goes\n"
-    "first with a critical hit.");
+    "Electric bursts always go\n"
+    "first and land a critical hit.");
 
 static const u8 sSPLISHY_SPLASHDescription[] = _(
     "A huge electrified wave that\n"
     "may paralyze the foe.");
 
 static const u8 sFLOATY_FALLDescription[] = _(
-    "Floats in the air to fall as\n"
-    "an attack. May cause flinch.");
+    "Floats in air and dives at\n"
+    "angle. May cause flinching.");
 
 static const u8 sPIKA_PAPOWDescription[] = _(
     "Pikachu's love increases its\n"
@@ -2639,35 +2639,35 @@ static const u8 sPIKA_PAPOWDescription[] = _(
 
 static const u8 sBOUNCY_BUBBLEDescription[] = _(
     "An attack that absorbs\n"
-    "half the damage inflicted.");
+    "all the damage inflicted.");
 
 static const u8 sBUZZY_BUZZDescription[] = _(
     "Shoots a jolt of electricity\n"
     "that always paralyzes.");
 
 static const u8 sSIZZLY_SLIDEDescription[] = _(
-    "Cloaks itself in fire to\n"
-    "charge, burning the target.");
+    "User cloaked in fire charges.\n"
+    "Leaves the foe with a burn.");
 
 static const u8 sGLITZY_GLOWDescription[] = _(
-    "Creates a Light Screen after\n"
-    "a telekinetic attack.");
+    "Telekinetic force that sets\n"
+    "wall, lowering Sp. Atk damage.");
 
 static const u8 sBADDY_BADDescription[] = _(
-    "Creates a Reflect wall after\n"
-    "acting bad and attacking.");
+    "Acting badly, attacks. Sets\n"
+    "wall, lowering Attack damage.");
 
 static const u8 sSAPPY_SEEDDescription[] = _(
-    "Grows a stalk that spreads\n"
-    "damaging Leech Seeds.");
+    "Giant stalk scatters seeds\n"
+    "that drain HP every turn.");
 
 static const u8 sFREEZY_FROSTDescription[] = _(
-    "A frozen haze attack that\n"
-    "eliminates all stat changes.");
+    "Crystal from cold haze hits.\n"
+    "Eliminates all stat changes.");
 
 static const u8 sSPARKLY_SWIRLDescription[] = _(
-    "Heals all status problems\n"
-    "with a whirlwind of scent.");
+    "Wrap foe with whirlwind of\n"
+    "scent. Heals party's status.");
 
 static const u8 sVEEVEE_VOLLEYDescription[] = _(
     "Eevee's love increases its\n"
@@ -2819,12 +2819,12 @@ static const u8 sSTEEL_BEAMDescription[] = _(
     "its body. It hurts the user.");
 
 static const u8 sEXPANDING_FORCEDescription[] = _(
-    "A Psychic attack that's more\n"
-    "powerful in Psychic Terrain.");
+    "Power goes up and damages\n"
+    "all foes on Psychic Terrain.");
 
 static const u8 sSTEEL_ROLLERDescription[] = _(
-    "Destroys any active terrain.\n"
-    "Without one, it fails.");
+    "Destroys terrain. Fails if\n"
+    "ground isn't terrain.");
 
 static const u8 sSCALE_SHOTDescription[] = _(
     "Shoots scales 2 to 5 times.\n"
@@ -2835,76 +2835,76 @@ static const u8 sMETEOR_BEAMDescription[] = _(
     "Sp. Attack before attacking.");
 
 static const u8 sSHELL_SIDE_ARMDescription[] = _(
-    "Its category depends on\n"
-    "which one will damage more.");
+    "Uses higher of physical and \n"
+    "special damage. May poison.");
 
 static const u8 sMISTY_EXPLOSIONDescription[] = _(
-    "Boosted by Misty Terrain, it\n"
-    "makes the user faint.");
+    "Hit everything and faint.\n"
+    "Powers up on Misty Terrain.");
 
 static const u8 sGRASSY_GLIDEDescription[] = _(
-    "On Grassy Terrain, the user\n"
-    "will always strike first.");
+    "Gliding on ground, hits. Goes\n"
+    "first on Grassy Terrain.");
 
 static const u8 sRISING_VOLTAGEDescription[] = _(
-    "Its power doubles while\n"
-    "on Electric Terrain.");
+    "This move's power doubles\n"
+    "when on Electric Terrain.");
 
 static const u8 sTERRAIN_PULSEDescription[] = _(
-    "Type changes depending on\n"
-    "terrain. Power also doubles.");
+    "Type and power changes\n"
+    "depending on the terrain.");
 
 static const u8 sSKITTER_SMACKDescription[] = _(
-    "User skitters behind target\n"
-    "to attack. Lowers Sp. Atk.");
+    "User skitters behind foe to\n"
+    "attack. Lowers foe’s Sp. Atk.");
 
 static const u8 sBURNING_JEALOUSYDescription[] = _(
-    "Burns whoever their stats\n"
-    "raised on the same turn.");
+    "Foes that have stats upped\n"
+    "during the turn get burned.");
 
 static const u8 sLASH_OUTDescription[] = _(
-    "Power doubles if stats were\n"
-    "lowered on the same turn.");
+    "If stats lowered during this\n"
+    "turn, power is doubled.");
 
 static const u8 sPOLTERGEISTDescription[] = _(
-    "Only works if the target\n"
-    "is holding an item.");
+    "Control foe’s item to attack.\n"
+    "Fails if foe has no item.");
 
 static const u8 sCORROSIVE_GASDescription[] = _(
-    "Melts all surrounding items\n"
-    "with highly acidic gas.");
+    "Highly acidic gas melts items\n"
+    "held by surrounding Pokémon.");
 
 static const u8 sCOACHINGDescription[] = _(
-    "The user coaches an ally to\n"
-    "raise their Atk. and Def.");
+    "Properly coaches allies to\n"
+    "up their Attack and Defense.");
 
 static const u8 sFLIP_TURNDescription[] = _(
-    "Does damage then switches\n"
-    "out the user.");
+    "Attacks and rushes back to\n"
+    "switch with a party Pokémon.");
 
 static const u8 sTRIPLE_AXELDescription[] = _(
     "A 3-kick attack that gets\n"
-    "stronger on each hit.");
+    "more powerful with each hit.");
 
 static const u8 sDUAL_WINGBEATDescription[] = _(
-    "The user uses its wings to\n"
-    "slam the target twice.");
+    "User slams the target with\n"
+    "wings and hits twice in a row.");
 
 static const u8 sSCORCHING_SANDSDescription[] = _(
-    "It throws scorching sand\n"
-    "that may burn the target.");
+    "Throws scorching sand at\n"
+    "the target. May leave a burn.");
 
 static const u8 sJUNGLE_HEALINGDescription[] = _(
-    "Becomes one with the jungle\n"
-    "to heal the team's health.");
+    "Heals HP and status of\n"
+    "itself and allies in battle.");
 
 static const u8 sWICKED_BLOWDescription[] = _(
-    "By mastering the Dark style,\n"
-    "always does a critical hit.");
+    "Mastering the Dark style,\n"
+    "strikes with a critical hit.");
 
 static const u8 sSURGING_STRIKESDescription[] = _(
-    "By mastering the Water style\n"
-    "it lands with 3 critical hits.");
+    "Mastering the Water style,\n"
+    "strikes with 3 critical hits.");
 
 static const u8 sNotDoneYetDescription[] = _(
     "Not done yet.");
