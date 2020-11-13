@@ -2419,9 +2419,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
         && !primary && gBattleScripting.moveEffect <= 7)
         INCREMENT_RESET_RETURN
 
-    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE
-        && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST
-        && affectsUser != MOVE_EFFECT_AFFECTS_USER)
+    if (TestSheerForceFlag(gBattlerAttacker, gCurrentMove) && affectsUser != MOVE_EFFECT_AFFECTS_USER)
         INCREMENT_RESET_RETURN
 
     if (gBattleMons[gEffectBattler].hp == 0
@@ -2924,36 +2922,12 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
                 {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+                    if (!ItemCanBeStolen(gBattleMons[gBattlerTarget].item, gBattlerAttacker))
                     {
                         gBattlescriptCurrInstr++;
                         break;
                     }
-
-                    side = GetBattlerSide(gBattlerAttacker);
-                    if (gLastUsedAbility != ABILITY_PICKPOCKET  //we need to swap attacker and target so this check otherwise fails
-                        && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
-                        && !(gBattleTypeFlags &
-                             (BATTLE_TYPE_EREADER_TRAINER
-                              | BATTLE_TYPE_FRONTIER
-                              | BATTLE_TYPE_LINK
-                              | BATTLE_TYPE_x2000000
-                              | BATTLE_TYPE_SECRET_BASE)))
-                    {
-                        gBattlescriptCurrInstr++;
-                    }
-                    else if (!(gBattleTypeFlags &
-                          (BATTLE_TYPE_EREADER_TRAINER
-                           | BATTLE_TYPE_FRONTIER
-                           | BATTLE_TYPE_LINK
-                           | BATTLE_TYPE_x2000000
-                           | BATTLE_TYPE_SECRET_BASE))
-                        && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
-                    {
-                        gBattlescriptCurrInstr++;
-                    }
-                    else if (gBattleMons[gBattlerTarget].item
-                        && gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD)
+                    else if (gBattleMons[gBattlerTarget].item && gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD)
                     {
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_NoItemSteal;
@@ -2972,7 +2946,11 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     {
                         gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
                         gBattleMons[gBattlerTarget].item = 0;
-
+                        
+                        RecordItemEffectBattle(gBattlerTarget, 0);
+                        RecordItemEffectBattle(gBattlerAttacker, ItemId_GetHoldEffect(gLastUsedItem));
+                        //item assignment doesn't happen yet
+                        
                         CheckSetUnburden(gBattlerTarget);
                         gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
 
@@ -5010,7 +4988,7 @@ static void Cmd_moveend(void)
         case MOVEEND_LIFE_ORB:
             if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIFE_ORB
                 && IsBattlerAlive(gBattlerAttacker)
-                && !(GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST)
+                && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
                 && gSpecialStatuses[gBattlerAttacker].damagedMons)
             {
@@ -5021,6 +4999,38 @@ static void Cmd_moveend(void)
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_ItemHurtRet;
                 gLastUsedItem = gBattleMons[gBattlerAttacker].item;
+            }
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_PICKPOCKET:
+            if (IsBattlerAlive(gBattlerAttacker)
+              && GetBattlerAbility(gBattlerAttacker) != ABILITY_STICKY_HOLD
+              && gBattleMons[gBattlerAttacker].item != ITEM_NONE    //attacker must be holding an item
+              && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))     //pickpocket doesn't activate for sheer force
+              && IsMoveMakingContact(gCurrentMove, gBattlerAttacker) //pickpocket requires contact
+              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))     //obviously attack needs to have worked
+            {
+                u8 battlers[4] = {0, 1, 2, 3};
+                SortBattlersBySpeed(battlers, FALSE); //pickpocket activates for fastest mon without item
+                for (i = 0; i < gBattlersCount; i++)
+                {
+                    u8 battler = battlers[i];
+                    
+                    if (battler != gBattlerAttacker     //cannot pickpocket yourself
+                      && GetBattlerAbility(battler) == ABILITY_PICKPOCKET        //'target' must have pickpocket ability
+                      && BATTLER_DAMAGED(battler)    //obviously battler needs to have been damaged as well
+                      && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)  //subsitute unaffected
+                      && IsBattlerAlive(battler)   //battler must be alive to be pickpocketed
+                      && gBattleMons[battler].item == ITEM_NONE //pickpocketer can't have an item already
+                      && ItemCanBeStolen(gBattleMons[gBattlerAttacker].item, battler))  //cannot steal plates, mega stones, etc
+                    {
+                        gBattlerTarget = gBattlerAbility = battler;
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_Pickpocket;
+                        effect = TRUE;
+                        break; // pickpocket activates on fastest mon, so exit loop.
+                    }
+                }
             }
             gBattleScripting.moveendState++;
             break;
@@ -8301,6 +8311,35 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_MOVEEND_ITEM_EFFECTS:
+        ItemBattleEffects(1, gActiveBattler, FALSE);
+        break;
+    case VARIOUS_PICKPOCKET:
+        {
+            // different from MOVE_EFFECT_STEAL_ITEM in that it immediately assigns the stolen item to the 'attacker'
+            gEffectBattler = gBattlerTarget;
+            gBattleScripting.battler = gBattlerAttacker;
+            gLastUsedItem = gBattleMons[gEffectBattler].item;
+            gBattleMons[gEffectBattler].item = 0;
+            gBattleMons[gBattlerAttacker].item = gLastUsedItem;
+            
+            RecordItemEffectBattle(gBattlerTarget, 0);
+            RecordItemEffectBattle(gBattlerAttacker, ItemId_GetHoldEffect(gLastUsedItem));
+            
+            CheckSetUnburden(gEffectBattler); //Give target Unburden boost
+            gBattleResources->flags->flags[gBattlerTarget] &= ~(RESOURCE_FLAG_UNBURDEN);    //remove attacker boost
+
+            gActiveBattler = gBattlerAttacker;
+            BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
+            MarkBattlerForControllerExec(gActiveBattler);
+
+            gActiveBattler = gEffectBattler;
+            BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
+            MarkBattlerForControllerExec(gActiveBattler);
+
+            gBattleStruct->choicedMove[gEffectBattler] = 0;
+        }
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

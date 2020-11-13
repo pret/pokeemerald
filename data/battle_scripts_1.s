@@ -7691,7 +7691,11 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 
 BattleScript_Pickpocket::
 	call BattleScript_AbilityPopUp
+	setmoveeffect MOVE_EFFECT_STEAL_ITEM
 	swapattackerwithtarget
-	seteffectsecondary
+	pickpocketsteal
+	call BattleScript_ItemSteal
 	swapattackerwithtarget
+	activateitemeffects BS_TARGET
 	return
+

@@ -4227,7 +4227,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && gBattleStruct->hpBefore[battler] > gBattleMons[battler].maxHP / 2
              && gBattleMons[battler].hp < gBattleMons[battler].maxHP / 2
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
-             && !(GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST)
+             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
              && gBattleMons[battler].statStages[STAT_SPATK] != 12)
             {
                 SET_STATCHANGER(STAT_SPATK, 1, FALSE);
@@ -4245,7 +4245,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
              && gBattleStruct->hpBefore[battler] > gBattleMons[battler].maxHP / 2
              && gBattleMons[battler].hp < gBattleMons[battler].maxHP / 2
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
-             && !(GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST)
+             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
              && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
              && !(gBattleTypeFlags & BATTLE_TYPE_ARENA))
             {
@@ -4515,24 +4515,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_IllusionOff;
-                effect++;
-            }
-            break;
-        case ABILITY_PICKPOCKET:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && IsBattlerAlive(gBattlerAttacker)
-             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-             && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
-             && TARGET_TURN_DAMAGED
-             && IsBattlerAlive(gBattlerTarget)
-             && gBattleMons[gBattlerAttacker].item != ITEM_NONE
-             && gBattleMons[gBattlerTarget].item == ITEM_NONE
-             && GetBattlerAbility(gBattlerAttacker) != ABILITY_STICKY_HOLD)
-            {
-                gBattleScripting.moveEffect = MOVE_EFFECT_STEAL_ITEM;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_Pickpocket;
-                gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
                 effect++;
             }
             break;
@@ -7762,3 +7744,110 @@ u8 GetBattleMoveSplit(u32 moveId)
     else
         return SPLIT_SPECIAL;
 }
+
+// sort an array of battlers by speed
+//  useful for effects like pickpocket, eject button, red card, dancer
+void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast)
+{
+	int i, j, key, keyBank;
+	u16 speeds[4] = {0};
+    
+	for (i = 0; i < gBattlersCount; i++)
+		speeds[i] = GetBattlerTotalSpeedStat(battlers[i]);
+
+	for (i = 1; i < gBattlersCount; i++)
+	{
+		keyBank = battlers[i];
+		key = speeds[i];
+		j = i - 1;
+
+		if (slowToFast)
+		{
+			while (j >= 0 && speeds[j] > key)
+			{
+				battlers[j + 1] = battlers[j];
+				speeds[j + 1] = speeds[j];
+				j = j - 1;
+			}
+		}
+		else
+		{
+			while (j >= 0 && speeds[j] < key)
+			{
+				battlers[j + 1] = battlers[j];
+				speeds[j + 1] = speeds[j];
+				j = j - 1;
+			}
+		}
+
+		battlers[j + 1] = keyBank;
+		speeds[j + 1] = key;
+	}
+}
+
+bool32 TestSheerForceFlag(u8 battler, u16 move)
+{
+    if (GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && gBattleMoves[move].flags & FLAG_SHEER_FORCE_BOOST)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool32 ItemCanBeStolen(u16 item, u8 battlerId)
+{
+    u8 effect = ItemId_GetHoldEffect(item);
+    
+    if (item == ITEM_ENIGMA_BERRY)
+        return FALSE;
+    
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+        return FALSE;
+
+    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT
+        && !(gBattleTypeFlags &
+             (BATTLE_TYPE_EREADER_TRAINER
+              | BATTLE_TYPE_FRONTIER
+              | BATTLE_TYPE_LINK
+              | BATTLE_TYPE_x2000000
+              | BATTLE_TYPE_SECRET_BASE)))
+    {
+        return FALSE;
+    }
+    else if (!(gBattleTypeFlags &
+          (BATTLE_TYPE_EREADER_TRAINER
+           | BATTLE_TYPE_FRONTIER
+           | BATTLE_TYPE_LINK
+           | BATTLE_TYPE_x2000000
+           | BATTLE_TYPE_SECRET_BASE))
+        && (gWishFutureKnock.knockedOffMons[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]]))
+    {
+        return FALSE;
+    }
+    
+    if (IS_ITEM_MAIL(item))
+        return FALSE;
+    
+    switch (effect)
+    {
+    case HOLD_EFFECT_MEGA_STONE:
+    #ifdef HOLD_EFFECT_MEMORY
+    case HOLD_EFFECT_MEMORY:
+    #endif
+    #ifdef HOLD_EFFECT_Z_CRYSTAL
+    case HOLD_EFFECT_Z_CRYSTAL:
+    #endif
+    #ifdef HOLD_EFFECT_DRIVE
+    case HOLD_EFFECT_DRIVE:
+    #endif
+    #ifdef HOLD_EFFECT_GEMS
+    case HOLD_EFFECT_GEMS:
+    #endif
+    #ifdef HOLD_EFFECT_GRISEOUS_ORB
+    case HOLD_EFFECT_GRISEOUS_ORB:
+    #endif
+        return FALSE;
+    }
+    
+    return TRUE;
+}
+

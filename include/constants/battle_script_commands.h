@@ -165,6 +165,8 @@
 #define VARIOUS_SET_LAST_USED_ITEM              99
 #define VARIOUS_PARALYZE_TYPE_IMMUNITY          100
 #define VARIOUS_JUMP_IF_ABSENT                  101
+#define VARIOUS_MOVEEND_ITEM_EFFECTS            102
+#define VARIOUS_PICKPOCKET                      103
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -189,7 +191,7 @@
 #define STAT_CHANGE_ONLY_MULTIPLE    0x4
 #define STAT_CHANGE_CANT_PREVENT 	 0x8
 
-// cases for Cmd_moveend
+// cases for Cmd_moveend - reference https://bulbapedia.bulbagarden.net/wiki/User:FIQ/Turn_sequence
 #define MOVEEND_PROTECT_LIKE_EFFECT 0
 #define MOVEEND_RAGE 1
 #define MOVEEND_DEFROST 2
@@ -212,10 +214,11 @@
 #define MOVEEND_MIRROR_MOVE 19
 #define MOVEEND_NEXT_TARGET 20
 #define MOVEEND_LIFE_ORB 21
-#define MOVEEND_DANCER 22
-#define MOVEEND_EMERGENCY_EXIT 23
-#define MOVEEND_CLEAR_BITS 24
-#define MOVEEND_COUNT 25
+#define MOVEEND_PICKPOCKET 22
+#define MOVEEND_DANCER 23
+#define MOVEEND_EMERGENCY_EXIT 24
+#define MOVEEND_CLEAR_BITS 25
+#define MOVEEND_COUNT 26
 
 // stat flags for Cmd_playstatchangeanimation
 #define BIT_HP                      0x1
