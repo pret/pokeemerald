@@ -26873,7 +26873,7 @@ const struct BaseStats gBaseStats[] =
             .abilities = {ABILITY_ROCK_HEAD, ABILITY_ADAPTABILITY},
             .abilityHidden = ABILITY_MOLD_BREAKER,
         #else
-            .abilities = {ABILITY_NONE, ABILITY_NONE},
+            .abilities = {ABILITY_ROCK_HEAD, ABILITY_NONE},
         #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
