@@ -888,7 +888,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(PIKACHU_POP_STAR, gMonBackPic_PikachuPopStar),
     SPECIES_SPRITE(PIKACHU_PH_D, gMonBackPic_PikachuPhD),
     SPECIES_SPRITE(PIKACHU_LIBRE, gMonBackPic_PikachuLibre),
-    
+
     SPECIES_SPRITE(PIKACHU_ORIGINAL_CAP, gMonBackPic_PikachuOriginalCap),
     SPECIES_SPRITE(PIKACHU_HOENN_CAP, gMonBackPic_PikachuHoennCap),
     SPECIES_SPRITE(PIKACHU_SINNOH_CAP, gMonBackPic_PikachuSinnohCap),
@@ -896,7 +896,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(PIKACHU_KALOS_CAP, gMonBackPic_PikachuKalosCap),
     SPECIES_SPRITE(PIKACHU_ALOLA_CAP, gMonBackPic_PikachuAlolaCap),
     SPECIES_SPRITE(PIKACHU_PARTNER_CAP, gMonBackPic_PikachuPartnerCap),
-    
+
     SPECIES_SPRITE(PICHU_SPIKY_EARED, gMonBackPic_PichuSpikyEared),
 
     SPECIES_SPRITE(UNOWN_B, gMonBackPic_UnownB),
@@ -926,15 +926,15 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(UNOWN_Z, gMonBackPic_UnownZ),
     SPECIES_SPRITE(UNOWN_EMARK, gMonBackPic_UnownExclamationMark),
     SPECIES_SPRITE(UNOWN_QMARK, gMonBackPic_UnownQuestionMark),
-    
+
     SPECIES_SPRITE(CASTFORM_SUNNY, gMonBackPic_CastformSunny),
     SPECIES_SPRITE(CASTFORM_RAINY, gMonBackPic_CastformRainy),
     SPECIES_SPRITE(CASTFORM_SNOWY, gMonBackPic_CastformSnowy),
-    
+
     SPECIES_SPRITE(DEOXYS_ATTACK, gMonBackPic_DeoxysAttack),
     SPECIES_SPRITE(DEOXYS_DEFENSE, gMonBackPic_DeoxysDefense),
     SPECIES_SPRITE(DEOXYS_SPEED, gMonBackPic_DeoxysSpeed),
-    
+
     SPECIES_SPRITE(BURMY_SANDY_CLOAK, gMonBackPic_BurmySandyCloak),
     SPECIES_SPRITE(BURMY_TRASH_CLOAK, gMonBackPic_BurmyTrashCloak),
 
@@ -944,7 +944,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(CHERRIM_SUNSHINE, gMonBackPic_CherrimSunshine),
 
     SPECIES_SPRITE(SHELLOS_EAST_SEA, gMonBackPic_ShellosEastSea),
-    
+
     SPECIES_SPRITE(GASTRODON_EAST_SEA, gMonBackPic_GastrodonEastSea),
 
     SPECIES_SPRITE(ROTOM_HEAT, gMonBackPic_RotomHeat),
@@ -1025,7 +1025,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(VIVILLON_JUNGLE, gMonBackPic_VivillonJungle),
     SPECIES_SPRITE(VIVILLON_FANCY, gMonBackPic_VivillonFancy),
     SPECIES_SPRITE(VIVILLON_POKE_BALL, gMonBackPic_VivillonPokeBall),
-    
+
     SPECIES_SPRITE(FLABEBE_YELLOW_FLOWER, gMonBackPic_Flabebe),
     SPECIES_SPRITE(FLABEBE_ORANGE_FLOWER, gMonBackPic_Flabebe),
     SPECIES_SPRITE(FLABEBE_BLUE_FLOWER, gMonBackPic_Flabebe),

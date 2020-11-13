@@ -881,14 +881,14 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(MUK_ALOLAN, gMonShinyPalette_MukAlolan),
     SPECIES_SHINY_PAL(EXEGGUTOR_ALOLAN, gMonShinyPalette_ExeggutorAlolan),
     SPECIES_SHINY_PAL(MAROWAK_ALOLAN, gMonShinyPalette_MarowakAlolan),
-    
+
     SPECIES_SHINY_PAL(PIKACHU_COSPLAY, gMonShinyPalette_PikachuCosplay),
     SPECIES_SHINY_PAL(PIKACHU_ROCK_STAR, gMonShinyPalette_PikachuRockStar),
     SPECIES_SHINY_PAL(PIKACHU_BELLE, gMonShinyPalette_PikachuBelle),
     SPECIES_SHINY_PAL(PIKACHU_POP_STAR, gMonShinyPalette_PikachuPopStar),
     SPECIES_SHINY_PAL(PIKACHU_PH_D, gMonShinyPalette_PikachuPhD),
     SPECIES_SHINY_PAL(PIKACHU_LIBRE, gMonShinyPalette_PikachuLibre),
-    
+
     SPECIES_SHINY_PAL(PIKACHU_ORIGINAL_CAP, gMonShinyPalette_PikachuOriginalCap),
     SPECIES_SHINY_PAL(PIKACHU_HOENN_CAP, gMonShinyPalette_PikachuHoennCap),
     SPECIES_SHINY_PAL(PIKACHU_SINNOH_CAP, gMonShinyPalette_PikachuSinnohCap),
@@ -896,7 +896,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(PIKACHU_KALOS_CAP, gMonShinyPalette_PikachuKalosCap),
     SPECIES_SHINY_PAL(PIKACHU_ALOLA_CAP, gMonShinyPalette_PikachuAlolaCap),
     SPECIES_SHINY_PAL(PIKACHU_PARTNER_CAP, gMonShinyPalette_PikachuPartnerCap),
-    
+
     SPECIES_SHINY_PAL(PICHU_SPIKY_EARED, gMonShinyPalette_PichuSpikyEared),
 
     SPECIES_SHINY_PAL(UNOWN_B, gMonShinyPalette_Unown),
@@ -926,15 +926,15 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(UNOWN_Z, gMonShinyPalette_Unown),
     SPECIES_SHINY_PAL(UNOWN_EMARK, gMonShinyPalette_Unown),
     SPECIES_SHINY_PAL(UNOWN_QMARK, gMonShinyPalette_Unown),
-    
+
     SPECIES_SHINY_PAL(CASTFORM_SUNNY, gMonShinyPalette_CastformSunny),
     SPECIES_SHINY_PAL(CASTFORM_RAINY, gMonShinyPalette_CastformRainy),
     SPECIES_SHINY_PAL(CASTFORM_SNOWY, gMonShinyPalette_CastformSnowy),
-    
+
     SPECIES_SHINY_PAL(DEOXYS_ATTACK, gMonShinyPalette_DeoxysAttack),
     SPECIES_SHINY_PAL(DEOXYS_DEFENSE, gMonShinyPalette_DeoxysDefense),
     SPECIES_SHINY_PAL(DEOXYS_SPEED, gMonShinyPalette_DeoxysSpeed),
-    
+
     SPECIES_SHINY_PAL(BURMY_SANDY_CLOAK, gMonShinyPalette_BurmySandyCloak),
     SPECIES_SHINY_PAL(BURMY_TRASH_CLOAK, gMonShinyPalette_BurmyTrashCloak),
 
@@ -944,7 +944,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(CHERRIM_SUNSHINE, gMonShinyPalette_CherrimSunshine),
 
     SPECIES_SHINY_PAL(SHELLOS_EAST_SEA, gMonShinyPalette_ShellosEastSea),
-    
+
     SPECIES_SHINY_PAL(GASTRODON_EAST_SEA, gMonShinyPalette_GastrodonEastSea),
 
     SPECIES_SHINY_PAL(ROTOM_HEAT, gMonShinyPalette_RotomHeat),
@@ -1025,7 +1025,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(VIVILLON_JUNGLE, gMonShinyPalette_VivillonJungle),
     SPECIES_SHINY_PAL(VIVILLON_FANCY, gMonShinyPalette_VivillonFancy),
     SPECIES_SHINY_PAL(VIVILLON_POKE_BALL, gMonShinyPalette_VivillonPokeBall),
-    
+
     SPECIES_SHINY_PAL(FLABEBE_YELLOW_FLOWER, gMonShinyPalette_FlabebeYellowFlower),
     SPECIES_SHINY_PAL(FLABEBE_ORANGE_FLOWER, gMonShinyPalette_FlabebeOrangeFlower),
     SPECIES_SHINY_PAL(FLABEBE_BLUE_FLOWER, gMonShinyPalette_FlabebeBlueFlower),

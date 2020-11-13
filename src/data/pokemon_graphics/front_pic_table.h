@@ -881,14 +881,14 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(MUK_ALOLAN, gMonFrontPic_MukAlolan),
     SPECIES_SPRITE(EXEGGUTOR_ALOLAN, gMonFrontPic_ExeggutorAlolan),
     SPECIES_SPRITE(MAROWAK_ALOLAN, gMonFrontPic_MarowakAlolan),
-    
+
     SPECIES_SPRITE(PIKACHU_COSPLAY, gMonFrontPic_PikachuCosplay),
     SPECIES_SPRITE(PIKACHU_ROCK_STAR, gMonFrontPic_PikachuRockStar),
     SPECIES_SPRITE(PIKACHU_BELLE, gMonFrontPic_PikachuBelle),
     SPECIES_SPRITE(PIKACHU_POP_STAR, gMonFrontPic_PikachuPopStar),
     SPECIES_SPRITE(PIKACHU_PH_D, gMonFrontPic_PikachuPhD),
     SPECIES_SPRITE(PIKACHU_LIBRE, gMonFrontPic_PikachuLibre),
-    
+
     SPECIES_SPRITE(PIKACHU_ORIGINAL_CAP, gMonFrontPic_PikachuOriginalCap),
     SPECIES_SPRITE(PIKACHU_HOENN_CAP, gMonFrontPic_PikachuHoennCap),
     SPECIES_SPRITE(PIKACHU_SINNOH_CAP, gMonFrontPic_PikachuSinnohCap),
@@ -896,7 +896,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(PIKACHU_KALOS_CAP, gMonFrontPic_PikachuKalosCap),
     SPECIES_SPRITE(PIKACHU_ALOLA_CAP, gMonFrontPic_PikachuAlolaCap),
     SPECIES_SPRITE(PIKACHU_PARTNER_CAP, gMonFrontPic_PikachuPartnerCap),
-    
+
     SPECIES_SPRITE(PICHU_SPIKY_EARED, gMonFrontPic_PichuSpikyEared),
 
     SPECIES_SPRITE(UNOWN_B, gMonFrontPic_UnownB),
@@ -926,15 +926,15 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(UNOWN_Z, gMonFrontPic_UnownZ),
     SPECIES_SPRITE(UNOWN_EMARK, gMonFrontPic_UnownExclamationMark),
     SPECIES_SPRITE(UNOWN_QMARK, gMonFrontPic_UnownQuestionMark),
-    
+
     SPECIES_SPRITE(CASTFORM_SUNNY, gMonFrontPic_CastformSunny),
     SPECIES_SPRITE(CASTFORM_RAINY, gMonFrontPic_CastformRainy),
     SPECIES_SPRITE(CASTFORM_SNOWY, gMonFrontPic_CastformSnowy),
-    
-    SPECIES_SPRITE(DEOXYS_ATTACK, gMonFrontPic_Deoxys),
-    SPECIES_SPRITE(DEOXYS_DEFENSE, gMonFrontPic_Deoxys),
-    SPECIES_SPRITE(DEOXYS_SPEED, gMonFrontPic_Deoxys),
-    
+
+    SPECIES_SPRITE(DEOXYS_ATTACK, gMonFrontPic_DeoxysAttack),
+    SPECIES_SPRITE(DEOXYS_DEFENSE, gMonFrontPic_DeoxysDefense),
+    SPECIES_SPRITE(DEOXYS_SPEED, gMonFrontPic_DeoxysSpeed),
+
     SPECIES_SPRITE(BURMY_SANDY_CLOAK, gMonFrontPic_BurmySandyCloak),
     SPECIES_SPRITE(BURMY_TRASH_CLOAK, gMonFrontPic_BurmyTrashCloak),
 
@@ -944,7 +944,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(CHERRIM_SUNSHINE, gMonFrontPic_CherrimSunshine),
 
     SPECIES_SPRITE(SHELLOS_EAST_SEA, gMonFrontPic_ShellosEastSea),
-    
+
     SPECIES_SPRITE(GASTRODON_EAST_SEA, gMonFrontPic_GastrodonEastSea),
 
     SPECIES_SPRITE(ROTOM_HEAT, gMonFrontPic_RotomHeat),
@@ -1025,7 +1025,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(VIVILLON_JUNGLE, gMonFrontPic_VivillonJungle),
     SPECIES_SPRITE(VIVILLON_FANCY, gMonFrontPic_VivillonFancy),
     SPECIES_SPRITE(VIVILLON_POKE_BALL, gMonFrontPic_VivillonPokeBall),
-    
+
     SPECIES_SPRITE(FLABEBE_YELLOW_FLOWER, gMonFrontPic_Flabebe),
     SPECIES_SPRITE(FLABEBE_ORANGE_FLOWER, gMonFrontPic_Flabebe),
     SPECIES_SPRITE(FLABEBE_BLUE_FLOWER, gMonFrontPic_Flabebe),

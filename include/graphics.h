@@ -5120,8 +5120,6 @@ extern const u8 gMonIcon_OricorioPau[];
 extern const u8 gMonIcon_OricorioSensu[];
 extern const u8 gMonIcon_LycanrocMidnight[];
 extern const u8 gMonIcon_LycanrocDusk[];
-extern const u8 gMonIcon_Zygarde10[];
-extern const u8 gMonIcon_ZygardeComplete[];
 extern const u8 gMonIcon_WishiwashiSchool[];
 extern const u8 gMonIcon_MiniorCoreRed[];
 extern const u8 gMonIcon_MiniorCoreOrange[];

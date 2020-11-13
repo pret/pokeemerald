@@ -881,14 +881,14 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(MUK_ALOLAN, gMonPalette_MukAlolan),
     SPECIES_PAL(EXEGGUTOR_ALOLAN, gMonPalette_ExeggutorAlolan),
     SPECIES_PAL(MAROWAK_ALOLAN, gMonPalette_MarowakAlolan),
-    
+
     SPECIES_PAL(PIKACHU_COSPLAY, gMonPalette_PikachuCosplay),
     SPECIES_PAL(PIKACHU_ROCK_STAR, gMonPalette_PikachuRockStar),
     SPECIES_PAL(PIKACHU_BELLE, gMonPalette_PikachuBelle),
     SPECIES_PAL(PIKACHU_POP_STAR, gMonPalette_PikachuPopStar),
     SPECIES_PAL(PIKACHU_PH_D, gMonPalette_PikachuPhD),
     SPECIES_PAL(PIKACHU_LIBRE, gMonPalette_PikachuLibre),
-    
+
     SPECIES_PAL(PIKACHU_ORIGINAL_CAP, gMonPalette_PikachuOriginalCap),
     SPECIES_PAL(PIKACHU_HOENN_CAP, gMonPalette_PikachuHoennCap),
     SPECIES_PAL(PIKACHU_SINNOH_CAP, gMonPalette_PikachuSinnohCap),
@@ -896,7 +896,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(PIKACHU_KALOS_CAP, gMonPalette_PikachuKalosCap),
     SPECIES_PAL(PIKACHU_ALOLA_CAP, gMonPalette_PikachuAlolaCap),
     SPECIES_PAL(PIKACHU_PARTNER_CAP, gMonPalette_PikachuPartnerCap),
-    
+
     SPECIES_PAL(PICHU_SPIKY_EARED, gMonPalette_PichuSpikyEared),
 
     SPECIES_PAL(UNOWN_B, gMonPalette_Unown),
@@ -926,15 +926,15 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(UNOWN_Z, gMonPalette_Unown),
     SPECIES_PAL(UNOWN_EMARK, gMonPalette_Unown),
     SPECIES_PAL(UNOWN_QMARK, gMonPalette_Unown),
-    
+
     SPECIES_PAL(CASTFORM_SUNNY, gMonPalette_CastformSunny),
     SPECIES_PAL(CASTFORM_RAINY, gMonPalette_CastformRainy),
     SPECIES_PAL(CASTFORM_SNOWY, gMonPalette_CastformSnowy),
-    
+
     SPECIES_PAL(DEOXYS_ATTACK, gMonPalette_DeoxysAttack),
     SPECIES_PAL(DEOXYS_DEFENSE, gMonPalette_DeoxysDefense),
     SPECIES_PAL(DEOXYS_SPEED, gMonPalette_DeoxysSpeed),
-    
+
     SPECIES_PAL(BURMY_SANDY_CLOAK, gMonPalette_BurmySandyCloak),
     SPECIES_PAL(BURMY_TRASH_CLOAK, gMonPalette_BurmyTrashCloak),
 
@@ -944,7 +944,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(CHERRIM_SUNSHINE, gMonPalette_CherrimSunshine),
 
     SPECIES_PAL(SHELLOS_EAST_SEA, gMonPalette_ShellosEastSea),
-    
+
     SPECIES_PAL(GASTRODON_EAST_SEA, gMonPalette_GastrodonEastSea),
 
     SPECIES_PAL(ROTOM_HEAT, gMonPalette_RotomHeat),
@@ -1025,7 +1025,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(VIVILLON_JUNGLE, gMonPalette_VivillonJungle),
     SPECIES_PAL(VIVILLON_FANCY, gMonPalette_VivillonFancy),
     SPECIES_PAL(VIVILLON_POKE_BALL, gMonPalette_VivillonPokeBall),
-    
+
     SPECIES_PAL(FLABEBE_YELLOW_FLOWER, gMonPalette_FlabebeYellowFlower),
     SPECIES_PAL(FLABEBE_ORANGE_FLOWER, gMonPalette_FlabebeOrangeFlower),
     SPECIES_PAL(FLABEBE_BLUE_FLOWER, gMonPalette_FlabebeBlueFlower),
