@@ -7006,7 +7006,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_JUDGMENT] =
     {
-        .effect = EFFECT_JUDGMENT,
+        .effect = EFFECT_CHANGE_TYPE_ON_ITEM,
         .power = 100,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -7016,6 +7016,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         .split = SPLIT_SPECIAL,
+        .argument = HOLD_EFFECT_PLATE,
     },
 
     [MOVE_BUG_BITE] =
@@ -8456,7 +8457,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .power = 85,
         #endif
-        .effect = EFFECT_TECHNO_BLAST,
+        .effect = EFFECT_CHANGE_TYPE_ON_ITEM,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 5,
@@ -8465,6 +8466,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         .split = SPLIT_SPECIAL,
+        .argument = HOLD_EFFECT_DRIVE
     },
 
     [MOVE_RELIC_SONG] =
@@ -10263,7 +10265,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .power = 90,
         #endif
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_CHANGE_TYPE_ON_ITEM,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,
@@ -10272,6 +10274,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         .split = SPLIT_PHYSICAL,
+        .argument = HOLD_EFFECT_MEMORY,
     },
 
     [MOVE_MIND_BLOWN] =
