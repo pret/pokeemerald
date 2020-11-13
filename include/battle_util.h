@@ -133,5 +133,6 @@ u8 GetBattleMoveSplit(u32 moveId);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 TestSheerForceFlag(u8 battler, u16 move);
 void TryRestoreStolenItems(void);
+bool8 CanStealItem(u8 battlerId, u16 item);
 
 #endif // GUARD_BATTLE_UTIL_H

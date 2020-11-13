@@ -2951,7 +2951,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
                 {
-                    if (!CanBattlerGetOrLoseItem(gBattlerAttacker, gBattleMons[gBattlerTarget].item))
+                    if (!CanStealItem(gBattlerAttacker, gBattleMons[gBattlerTarget].item))
                     {
                         gBattlescriptCurrInstr++;
                         break;
@@ -5032,7 +5032,7 @@ static void Cmd_moveend(void)
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)  //subsitute unaffected
                       && IsBattlerAlive(battler)   //battler must be alive to be pickpocketed
                       && gBattleMons[battler].item == ITEM_NONE //pickpocketer can't have an item already
-                      && CanBattlerGetOrLoseItem(battler, gBattleMons[gBattlerAttacker].item))  //cannot steal plates, mega stones, etc
+                      && CanStealItem(battler, gBattleMons[gBattlerAttacker].item))  //cannot steal plates, mega stones, etc
                     {
                         gBattlerTarget = gBattlerAbility = battler;
                         BattleScriptPushCursor();
