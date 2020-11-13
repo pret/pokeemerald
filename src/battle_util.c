@@ -7793,61 +7793,16 @@ bool32 TestSheerForceFlag(u8 battler, u16 move)
         return FALSE;
 }
 
-bool32 ItemCanBeStolen(u16 item, u8 battlerId)
+void TryRestoreStolenItems(void)
 {
-    u8 effect = ItemId_GetHoldEffect(item);
+    u32 i;
+    u16 stolenItem = ITEM_NONE;
     
-    if (item == ITEM_ENIGMA_BERRY)
-        return FALSE;
-    
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-        return FALSE;
-
-    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT
-        && !(gBattleTypeFlags &
-             (BATTLE_TYPE_EREADER_TRAINER
-              | BATTLE_TYPE_FRONTIER
-              | BATTLE_TYPE_LINK
-              | BATTLE_TYPE_x2000000
-              | BATTLE_TYPE_SECRET_BASE)))
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        return FALSE;
+        stolenItem = gBattleStruct->itemStolen[i];
+        if (stolenItem != ITEM_NONE && ItemId_GetPocket(stolenItem) != POCKET_BERRIES)
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &stolenItem);  //restore stolen non-berry items
     }
-    else if (!(gBattleTypeFlags &
-          (BATTLE_TYPE_EREADER_TRAINER
-           | BATTLE_TYPE_FRONTIER
-           | BATTLE_TYPE_LINK
-           | BATTLE_TYPE_x2000000
-           | BATTLE_TYPE_SECRET_BASE))
-        && (gWishFutureKnock.knockedOffMons[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]]))
-    {
-        return FALSE;
-    }
-    
-    if (IS_ITEM_MAIL(item))
-        return FALSE;
-    
-    switch (effect)
-    {
-    case HOLD_EFFECT_MEGA_STONE:
-    #ifdef HOLD_EFFECT_MEMORY
-    case HOLD_EFFECT_MEMORY:
-    #endif
-    #ifdef HOLD_EFFECT_Z_CRYSTAL
-    case HOLD_EFFECT_Z_CRYSTAL:
-    #endif
-    #ifdef HOLD_EFFECT_DRIVE
-    case HOLD_EFFECT_DRIVE:
-    #endif
-    #ifdef HOLD_EFFECT_GEMS
-    case HOLD_EFFECT_GEMS:
-    #endif
-    #ifdef HOLD_EFFECT_GRISEOUS_ORB
-    case HOLD_EFFECT_GRISEOUS_ORB:
-    #endif
-        return FALSE;
-    }
-    
-    return TRUE;
 }
 

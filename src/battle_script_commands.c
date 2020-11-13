@@ -2369,6 +2369,35 @@ static void CheckSetUnburden(u8 battlerId)
     }
 }
 
+//slight difference in thief/pickpocket requires this
+static void StealTargetItem(void)
+{
+    gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
+    gBattleMons[gBattlerTarget].item = 0;
+    
+    RecordItemEffectBattle(gBattlerTarget, 0);
+    RecordItemEffectBattle(gBattlerAttacker, ItemId_GetHoldEffect(gLastUsedItem));
+    //item assignment doesn't happen yet for thief
+    
+    CheckSetUnburden(gBattlerTarget);
+    gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
+
+    gActiveBattler = gBattlerAttacker;
+    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
+    MarkBattlerForControllerExec(gBattlerAttacker);
+
+    gActiveBattler = gBattlerTarget;
+    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gBattlerTarget].item);
+    MarkBattlerForControllerExec(gBattlerTarget);
+    
+    gBattleStruct->choicedMove[gBattlerTarget] = 0;
+    
+    #if B_TRAINERS_STEAL_ITEMS
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
+            gBattleStruct->itemStolen[gBattlerPartyIndexes[gBattlerTarget]] = gLastUsedItem;
+    #endif
+}
+
 #define INCREMENT_RESET_RETURN                  \
 {                                               \
     gBattlescriptCurrInstr++;                   \
@@ -2922,7 +2951,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
                 {
-                    if (!ItemCanBeStolen(gBattleMons[gBattlerTarget].item, gBattlerAttacker))
+                    if (!CanBattlerGetOrLoseItem(gBattlerAttacker, gBattleMons[gBattlerTarget].item))
                     {
                         gBattlescriptCurrInstr++;
                         break;
@@ -2944,28 +2973,9 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     }
                     else
                     {
-                        gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
-                        gBattleMons[gBattlerTarget].item = 0;
-                        
-                        RecordItemEffectBattle(gBattlerTarget, 0);
-                        RecordItemEffectBattle(gBattlerAttacker, ItemId_GetHoldEffect(gLastUsedItem));
-                        //item assignment doesn't happen yet
-                        
-                        CheckSetUnburden(gBattlerTarget);
-                        gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
-
-                        gActiveBattler = gBattlerAttacker;
-                        BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
-                        MarkBattlerForControllerExec(gBattlerAttacker);
-
-                        gActiveBattler = gBattlerTarget;
-                        BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gBattlerTarget].item);
-                        MarkBattlerForControllerExec(gBattlerTarget);
-
+                        StealTargetItem();
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
-
-                        gBattleStruct->choicedMove[gBattlerTarget] = 0;
                     }
 
                 }
@@ -5022,7 +5032,7 @@ static void Cmd_moveend(void)
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)  //subsitute unaffected
                       && IsBattlerAlive(battler)   //battler must be alive to be pickpocketed
                       && gBattleMons[battler].item == ITEM_NONE //pickpocketer can't have an item already
-                      && ItemCanBeStolen(gBattleMons[gBattlerAttacker].item, battler))  //cannot steal plates, mega stones, etc
+                      && CanBattlerGetOrLoseItem(battler, gBattleMons[gBattlerAttacker].item))  //cannot steal plates, mega stones, etc
                     {
                         gBattlerTarget = gBattlerAbility = battler;
                         BattleScriptPushCursor();
@@ -8316,28 +8326,9 @@ static void Cmd_various(void)
         break;
     case VARIOUS_PICKPOCKET:
         {
-            // different from MOVE_EFFECT_STEAL_ITEM in that it immediately assigns the stolen item to the 'attacker'
-            gEffectBattler = gBattlerTarget;
             gBattleScripting.battler = gBattlerAttacker;
-            gLastUsedItem = gBattleMons[gEffectBattler].item;
-            gBattleMons[gEffectBattler].item = 0;
+            StealTargetItem();
             gBattleMons[gBattlerAttacker].item = gLastUsedItem;
-            
-            RecordItemEffectBattle(gBattlerTarget, 0);
-            RecordItemEffectBattle(gBattlerAttacker, ItemId_GetHoldEffect(gLastUsedItem));
-            
-            CheckSetUnburden(gEffectBattler); //Give target Unburden boost
-            gBattleResources->flags->flags[gBattlerTarget] &= ~(RESOURCE_FLAG_UNBURDEN);    //remove attacker boost
-
-            gActiveBattler = gBattlerAttacker;
-            BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
-            MarkBattlerForControllerExec(gActiveBattler);
-
-            gActiveBattler = gEffectBattler;
-            BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
-            MarkBattlerForControllerExec(gActiveBattler);
-
-            gBattleStruct->choicedMove[gEffectBattler] = 0;
         }
         break;
     }
@@ -11066,7 +11057,11 @@ static void Cmd_tryswapitems(void) // trick
                                   | BATTLE_TYPE_EREADER_TRAINER
                                   | BATTLE_TYPE_FRONTIER
                                   | BATTLE_TYPE_SECRET_BASE
-                                  | BATTLE_TYPE_x2000000))))
+                                  | BATTLE_TYPE_x2000000
+                                  #if B_TRAINERS_STEAL_ITEMS
+                                  | BATTLE_TYPE_TRAINER
+                                  #endif
+                                  ))))
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -11130,6 +11125,16 @@ static void Cmd_tryswapitems(void) // trick
 
             PREPARE_ITEM_BUFFER(gBattleTextBuff1, *newItemAtk)
             PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
+            
+            #if B_TRAINERS_STEAL_ITEMS
+            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            {
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                    gBattleStruct->itemStolen[gBattlerPartyIndexes[gBattlerAttacker]] = oldItemAtk;
+                if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
+                    gBattleStruct->itemStolen[gBattlerPartyIndexes[gBattlerTarget]] = *newItemAtk;
+            }
+            #endif
 
             if (oldItemAtk != 0 && *newItemAtk != 0)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2; // attacker's item -> <- target's item

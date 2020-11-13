@@ -132,6 +132,6 @@ bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 u8 GetBattleMoveSplit(u32 moveId);
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast);
 bool32 TestSheerForceFlag(u8 battler, u16 move);
-bool32 ItemCanBeStolen(u16 item, u8 battlerId);
+void TryRestoreStolenItems(void);
 
 #endif // GUARD_BATTLE_UTIL_H
