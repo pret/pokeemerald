@@ -1005,8 +1005,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_GENESECT_BURN_DRIVE] = _("Genesect"),
     [SPECIES_GENESECT_CHILL_DRIVE] = _("Genesect"),
     // Greninja
-    [SPECIES_GRENINJA_BATTLE_BOND] = _("Giratina"),
-    [SPECIES_GRENINJA_ASH] = _("Giratina"),
+    [SPECIES_GRENINJA_BATTLE_BOND] = _("Greninja"),
+    [SPECIES_GRENINJA_ASH] = _("Greninja"),
     // Vivillon
     [SPECIES_VIVILLON_POLAR] = _("Vivillon"),
     [SPECIES_VIVILLON_TUNDRA] = _("Vivillon"),
