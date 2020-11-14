@@ -10321,11 +10321,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 80,
             .pp = 10,
-            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         #else
             .power = 50,
             .pp = 15,
-            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED,
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         #endif
         .effect = EFFECT_ALWAYS_CRIT,
         .type = TYPE_ELECTRIC,
@@ -10339,9 +10339,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_SPLISHY_SPLASH] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_8
-            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         #else
-            .flags = FLAG_PROTECT_AFFECTED,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         #endif
         .effect = EFFECT_PARALYZE_HIT,
         .power = 90,
@@ -10396,6 +10396,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .power = 60,
             .pp = 20,
             .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+            .argument = 100, // restores 100% HP instead of 50% HP
         #else
             .power = 90,
             .pp = 15,
@@ -10408,7 +10409,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_SPECIAL,
-        .argument = 100, // restores 100% HP instead of 50% HP
     },
 
     [MOVE_BUZZY_BUZZ] =
@@ -10497,12 +10497,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
             .power = 100,
             .accuracy = 90,
             .pp = 10,
-            .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         #else
             .power = 90,
             .accuracy = 100,
             .pp = 15,
-            .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         #endif
         .effect = EFFECT_PLACEHOLDER,   //TODO (Leech Seed + Hit)
         .type = TYPE_GRASS,

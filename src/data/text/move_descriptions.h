@@ -2639,7 +2639,11 @@ static const u8 sPIKA_PAPOWDescription[] = _(
 
 static const u8 sBOUNCY_BUBBLEDescription[] = _(
     "An attack that absorbs\n"
+#if B_UPDATED_MOVE_DATA >= GEN_8
     "all the damage inflicted.");
+#else
+    "half the damage inflicted.");
+#endif
 
 static const u8 sBUZZY_BUZZDescription[] = _(
     "Shoots a jolt of electricity\n"
@@ -2835,7 +2839,7 @@ static const u8 sMETEOR_BEAMDescription[] = _(
     "Sp. Attack before attacking.");
 
 static const u8 sSHELL_SIDE_ARMDescription[] = _(
-    "Uses higher of physical and \n"
+    "Uses higher of physical and\n"
     "special damage. May poison.");
 
 static const u8 sMISTY_EXPLOSIONDescription[] = _(
@@ -2856,7 +2860,7 @@ static const u8 sTERRAIN_PULSEDescription[] = _(
 
 static const u8 sSKITTER_SMACKDescription[] = _(
     "User skitters behind foe to\n"
-    "attack. Lowers foe’s Sp. Atk.");
+    "attack. Lowers foe's Sp. Atk.");
 
 static const u8 sBURNING_JEALOUSYDescription[] = _(
     "Foes that have stats upped\n"
@@ -2867,7 +2871,7 @@ static const u8 sLASH_OUTDescription[] = _(
     "turn, power is doubled.");
 
 static const u8 sPOLTERGEISTDescription[] = _(
-    "Control foe’s item to attack.\n"
+    "Control foe's item to attack.\n"
     "Fails if foe has no item.");
 
 static const u8 sCORROSIVE_GASDescription[] = _(
