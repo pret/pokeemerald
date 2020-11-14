@@ -1501,6 +1501,9 @@ static const struct SearchOptionText sDexSearchTypeOptions[] =
     {gText_DexEmptyString, gTypeNames[TYPE_ICE]},
     {gText_DexEmptyString, gTypeNames[TYPE_DRAGON]},
     {gText_DexEmptyString, gTypeNames[TYPE_DARK]},
+    #ifdef BATTLE_ENGINE
+    {gText_DexEmptyString, gTypeNames[TYPE_FAIRY]},
+    #endif
     {},
 };
 
@@ -1535,6 +1538,9 @@ static const u8 sDexSearchTypeIds[] =
     TYPE_ICE,
     TYPE_DRAGON,
     TYPE_DARK,
+    #ifdef BATTLE_ENGINE
+    TYPE_FAIRY,
+    #endif
 };
 
 // Number pairs are the task data for tracking the cursor pos and scroll offset of each option list
@@ -6810,12 +6816,16 @@ static void PrintMonStatsToggle(u8 taskId)
         {
             PrintInfoScreenTextSmallWhite(gAbilityNames[gBaseStats[species].abilities[1]], abilities_x, abilities_y + 30);
             PrintInfoScreenTextSmall(gAbilityDescriptionPointers[gBaseStats[species].abilities[1]], abilities_x, abilities_y + 44);
-        }
-    // }else{ //For PokemonExpansion
-        // ability0 = gBaseStats[species].abilityHidden;
-        // PrintInfoScreenTextSmallWhite(gAbilityNames[ability0], abilities_x, abilities_y);
-        // PrintInfoScreenTextSmall(gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 14);
+        }  
     }
+    #if defined (BATTLE_ENGINE) && defined (POKEMON_EXPANSION)
+    else //Hidden abilities
+    {
+        ability0 = gBaseStats[species].abilityHidden;
+        PrintInfoScreenTextSmallWhite(gAbilityNames[ability0], abilities_x, abilities_y);
+        PrintInfoScreenTextSmall(gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 14);
+    }
+    #endif
 
 }
 static void Task_SwitchScreensFromStatsScreen(u8 taskId)
