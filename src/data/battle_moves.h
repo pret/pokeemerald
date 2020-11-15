@@ -8923,8 +8923,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
-        .split = SPLIT_SPECIAL, // restores 75% HP instead of 50% HP
-        .argument = 75,
+        .split = SPLIT_SPECIAL,
+        .argument = 75, // restores 75% HP instead of 50% HP
     },
 
     [MOVE_CRAFTY_SHIELD] =
@@ -10319,15 +10319,271 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .split = SPLIT_SPECIAL,
     },
 
+    [MOVE_ZIPPY_ZAP] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 80,
+            .pp = 10,
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 50,
+            .pp = 15,
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_ALWAYS_CRIT,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 2,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_SPLISHY_SPLASH] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_PARALYZE_HIT,
+        .power = 90,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_FLOATY_FALL] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        #else
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED,
+        #endif
+        .effect = EFFECT_FLINCH_HIT,
+        .power = 90,
+        .type = TYPE_FLYING,
+        .accuracy = 95,
+        .pp = 15,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_PIKA_PAPOW] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_RETURN,
+        .power = 1,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 0,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_BOUNCY_BUBBLE] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 60,
+            .pp = 20,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+            .argument = 100, // restores 100% HP instead of 50% HP
+        #else
+            .power = 90,
+            .pp = 15,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_ABSORB,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_BUZZY_BUZZ] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 60,
+            .pp = 20,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 90,
+            .pp = 15,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_PARALYZE_HIT,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_SIZZLY_SLIDE] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 60,
+            .pp = 20,
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 90,
+            .pp = 15,
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_BURN_HIT,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_GLITZY_GLOW] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 80,
+            .accuracy = 95,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 90,
+            .accuracy = 100,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_PLACEHOLDER,   //TODO (Light Screen + Hit)
+        .type = TYPE_PSYCHIC,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_BADDY_BAD] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 80,
+            .accuracy = 95,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 90,
+            .accuracy = 100,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_PLACEHOLDER,   //TODO (Reflect + Hit)
+        .type = TYPE_DARK,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_SAPPY_SEED] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 100,
+            .accuracy = 90,
+            .pp = 10,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 90,
+            .accuracy = 100,
+            .pp = 15,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_PLACEHOLDER,   //TODO (Leech Seed + Hit)
+        .type = TYPE_GRASS,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_FREEZY_FROST] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 100,
+            .accuracy = 90,
+            .pp = 10,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 90,
+            .accuracy = 100,
+            .pp = 15,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_PLACEHOLDER,   //TODO (Haze + Hit)
+        .type = TYPE_ICE,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_SPARKLY_SWIRL] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .power = 120,
+            .accuracy = 85,
+            .pp = 5,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .power = 90,
+            .accuracy = 100,
+            .pp = 15,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_PLACEHOLDER,   //TODO (Heal Bell + Hit)
+        .type = TYPE_FAIRY,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_VEEVEE_VOLLEY] =
+    {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #else
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        #endif
+        .effect = EFFECT_RETURN,
+        .power = 1,
+        .type = TYPE_NORMAL,
+        .accuracy = 0,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_PHYSICAL,
+    },
+
     [MOVE_DOUBLE_IRON_BASH] =
     {
-        .effect = EFFECT_FLINCH_HIT,
+        .effect = EFFECT_PLACEHOLDER,   //TODO (EFFECT_FLINCH_HIT + EFFECT_DOUBLE_HIT)
         .power = 60,
         .type = TYPE_STEEL,
         .accuracy = 100,
         .pp = 5,
         .secondaryEffectChance = 30,
-        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_DMG_MINIMIZE | FLAG_IRON_FIST_BOOST,
         .split = SPLIT_PHYSICAL,
@@ -10822,5 +11078,312 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_EXPANDING_FORCE] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 80,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_STEEL_ROLLER] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 130,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_SCALE_SHOT] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO (EFFECT_MULTI_HIT + ABILITY_WEAK_ARMOR,
+        .power = 25,
+        .type = TYPE_DRAGON,
+        .accuracy = 90,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_METEOR_BEAM] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 120,
+        .type = TYPE_ROCK,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_SHELL_SIDE_ARM] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 90,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_MISTY_EXPLOSION] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 100,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_GRASSY_GLIDE] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 70,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_RISING_VOLTAGE] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 70,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_TERRAIN_PULSE] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 50,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_MEGA_LAUNCHER_BOOST,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_SKITTER_SMACK] =
+    {
+        .effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
+        .power = 70,
+        .type = TYPE_BUG,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_BURNING_JEALOUSY] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 70,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_LASH_OUT] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 75,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_POLTERGEIST] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 110,
+        .type = TYPE_GHOST,
+        .accuracy = 90,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_CORROSIVE_GAS] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 0,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 40,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGICCOAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_STATUS,
+    },
+
+    [MOVE_COACHING] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 0,
+        .type = TYPE_FIGHTING,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_ALLY,
+        .priority = 0,
+        .flags = 0,
+        .split = SPLIT_STATUS,
+    },
+
+    [MOVE_FLIP_TURN] =
+    {
+        .effect = EFFECT_HIT_ESCAPE,
+        .power = 60,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_TRIPLE_AXEL] =
+    {
+        .effect = EFFECT_TRIPLE_KICK,   //TODO: Increase damage by 20 instead of 10
+        .power = 20,
+        .type = TYPE_ICE,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_DUAL_WINGBEAT] =
+    {
+        .effect = EFFECT_DOUBLE_HIT,
+        .power = 40,
+        .type = TYPE_FLYING,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_SCORCHING_SANDS] =
+    {
+        .effect = EFFECT_SCALD,
+        .power = 70,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+    },
+
+    [MOVE_JUNGLE_HEALING] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .power = 0,
+        .type = TYPE_GRASS,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .split = SPLIT_STATUS,
+    },
+
+    [MOVE_WICKED_BLOW] =
+    {
+        .effect = EFFECT_ALWAYS_CRIT,
+        .power = 80,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_IRON_FIST_BOOST,
+        .split = SPLIT_PHYSICAL,
+    },
+
+    [MOVE_SURGING_STRIKES] =
+    {
+        .effect = EFFECT_PLACEHOLDER,   //TODO (Multi hit + Always Crit)
+        .power = 25,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_IRON_FIST_BOOST,
+        .split = SPLIT_PHYSICAL,
     },
 };

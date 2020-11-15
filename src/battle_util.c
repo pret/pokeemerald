@@ -1318,6 +1318,7 @@ static bool32 IsGravityPreventingMove(u32 move)
     case MOVE_SKY_DROP:
     case MOVE_SPLASH:
     case MOVE_TELEKINESIS:
+    case MOVE_FLOATY_FALL:
         return TRUE;
     default:
         return FALSE;
