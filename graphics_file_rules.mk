@@ -24,57 +24,6 @@ contest_types := cool beauty cute smart tough
 
 
 
-### Castform ###
-
-$(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/front_normal_form.4bpp \
-							  $(CASTFORMGFXDIR)/front_sunny_form.4bpp \
-							  $(CASTFORMGFXDIR)/front_rainy_form.4bpp \
-							  $(CASTFORMGFXDIR)/front_snowy_form.4bpp
-	@cat $^ >$@
-
-$(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/back_normal_form.4bpp \
-							 $(CASTFORMGFXDIR)/back_sunny_form.4bpp \
-							 $(CASTFORMGFXDIR)/back_rainy_form.4bpp \
-							 $(CASTFORMGFXDIR)/back_snowy_form.4bpp
-	@cat $^ >$@
-
-$(CASTFORMGFXDIR)/anim_front.4bpp: $(CASTFORMGFXDIR)/anim_front_normal_form.4bpp \
-								   $(CASTFORMGFXDIR)/anim_front_sunny_form.4bpp \
-								   $(CASTFORMGFXDIR)/anim_front_rainy_form.4bpp \
-								   $(CASTFORMGFXDIR)/anim_front_snowy_form.4bpp
-	@cat $^ >$@
-
-$(CASTFORMGFXDIR)/normal.gbapal: $(CASTFORMGFXDIR)/normal_normal_form.gbapal \
-								 $(CASTFORMGFXDIR)/normal_sunny_form.gbapal \
-								 $(CASTFORMGFXDIR)/normal_rainy_form.gbapal \
-								 $(CASTFORMGFXDIR)/normal_snowy_form.gbapal
-	@cat $^ >$@
-
-$(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/shiny_normal_form.gbapal \
-								$(CASTFORMGFXDIR)/shiny_sunny_form.gbapal \
-								$(CASTFORMGFXDIR)/shiny_rainy_form.gbapal \
-								$(CASTFORMGFXDIR)/shiny_snowy_form.gbapal
-	@cat $^ >$@
-
-
-### Cherrim ###
-
-$(CHERRIMGFXDIR)/front.4bpp: $(CHERRIMGFXDIR)/front_normal.4bpp \
-							  $(CHERRIMGFXDIR)/front_sun.4bpp
-	@cat $^ >$@
-
-$(CHERRIMGFXDIR)/back.4bpp: $(CHERRIMGFXDIR)/back_normal.4bpp \
-							 $(CHERRIMGFXDIR)/back_sun.4bpp
-	@cat $^ >$@
-	
-$(CHERRIMGFXDIR)/normal.gbapal: $(CHERRIMGFXDIR)/normal_normal.gbapal \
-								 $(CHERRIMGFXDIR)/normal_sun.gbapal
-	@cat $^ >$@
-
-$(CHERRIMGFXDIR)/shiny.gbapal: $(CHERRIMGFXDIR)/shiny_normal.gbapal \
-								$(CHERRIMGFXDIR)/shiny_sun.gbapal
-	@cat $^ >$@
-
 ### Tilesets ###
 
 $(TILESETGFXDIR)/secondary/petalburg/tiles.4bpp: %.4bpp: %.png
