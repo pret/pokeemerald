@@ -551,8 +551,8 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
         // BUG: Instead of removing the IV that was just picked (like in RS and FRLG), this
         // removes position 0 (HP) then position 1 (DEF), then position 2. This is why HP and DEF
         // have a lower chance to be inherited in Emerald and why the IV picked for inheritance can
-        // be repeated. Uncomment the remove the existing expression to get the intended behavior and 
-        // to match the other Gen 3 games. This bug was also in DP and never fixed until Platinum.
+        // be repeated. Uncomment the inline comment and remove the existing expression to get the
+        // intended behavior and  to match the other Gen 3 games. 
         RemoveIVIndexFromList(availableIVs, i /*selectedIvs[i]*/);
     }
 
