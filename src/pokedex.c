@@ -6818,7 +6818,7 @@ static void PrintMonStatsToggle(u8 taskId)
             PrintInfoScreenTextSmall(gAbilityDescriptionPointers[gBaseStats[species].abilities[1]], abilities_x, abilities_y + 44);
         }  
     }
-    #if defined (BATTLE_ENGINE) && defined (POKEMON_EXPANSION)
+    #ifdef POKEMON_EXPANSION
     else //Hidden abilities
     {
         ability0 = gBaseStats[species].abilityHidden;
