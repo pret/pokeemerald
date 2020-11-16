@@ -1,3 +1,6 @@
+.set LOCALID_ATTENDANT, 1
+.set LOCALID_HINT_GIVER, 2
+
 BattleFrontier_BattlePyramidLobby_MapScripts:: @ 8250716
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePyramidLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomeLobby_OnWarp
@@ -29,7 +32,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving:: @ 8250768
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_DidntSaveBeforeQuittingTakeBag
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	closemessage
 	pyramid_set PYRAMID_DATA_WIN_STREAK, 0
@@ -60,7 +63,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints:: @ 82507DA
 	special HealPlayerParty
 	message BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_GiveYouTheseBattlePoints, MSGBOX_DEFAULT
 	frontier_givepoints
@@ -85,7 +88,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge:: @ 8250852
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	message BattleFrontier_BattlePyramidLobby_Text_RecordResultsWait
 	waitmessage
@@ -206,7 +209,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge:: @ 8250ACC
 
 BattleFrontier_BattlePyramidLobby_EventScript_HintGiver:: @ 8250ACE
 	lockall
-	applymovement 2, Common_Movement_FacePlayer
+	applymovement LOCALID_HINT_GIVER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidLobby_EventScript_GiveHint
@@ -370,7 +373,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_ShowResults:: @ 8250D42
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_WalkToPanelAndReceiveBag:: @ 8250D56
-	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_AttendantWalkToPanel
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePyramidLobby_Movement_AttendantWalkToPanel
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerWalkToPanel
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping, MSGBOX_DEFAULT
@@ -385,11 +388,11 @@ BattleFrontier_BattlePyramidLobby_EventScript_ReceiveNewBattleBag:: @ 8250D94
 BattleFrontier_BattlePyramidLobby_EventScript_ReceiveBattleBag:: @ 8250D9C
 	message BattleFrontier_BattlePyramidLobby_Text_ExchangedBagForBattleBag
 	waitmessage
-	playse SE_EXPMAX
+	playse SE_EXP_MAX
 	waitse
 	msgbox BattleFrontier_BattlePyramidLobby_Text_StepOnFloorPanel, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_AttendantMoveAside
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePyramidLobby_Movement_AttendantMoveAside
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_PlayerStepOnPanel
 	waitmovement 0

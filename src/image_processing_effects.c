@@ -5,7 +5,7 @@
 
 // IWRAM common
 u8 gCanvasColumnStart;
-u16 (*gCanvasPixels)[][32];
+u16 *gCanvasPixels;
 u8 gCanvasRowEnd;
 u8 gCanvasHeight;
 u8 gCanvasColumnEnd;
@@ -125,7 +125,7 @@ static void ApplyImageEffect_RedChannelGrayscale(u8 delta)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -150,7 +150,7 @@ static void ApplyImageEffect_RedChannelGrayscaleHighlight(u8 highlight)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -179,7 +179,7 @@ static void ApplyImageEffect_Grayscale(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -195,7 +195,7 @@ static void ApplyImageEffect_Blur(void)
 
     for (i = 0; i < gCanvasColumnEnd; i++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][gCanvasRowStart * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[gCanvasRowStart * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart + i];
         u16 prevPixel = *pixel;
 
@@ -221,7 +221,7 @@ static void ApplyImageEffect_PersonalityColor(u8 personality)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -237,7 +237,7 @@ static void ApplyImageEffect_BlackAndWhite(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -255,7 +255,7 @@ static void ApplyImageEffect_BlackOutline(void)
     // Handle top row of pixels first.
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         pixel = &pixelRow[gCanvasColumnStart];
         *pixel = QuantizePixel_BlackOutline(pixel, pixel + 1);
         for (i = 1, pixel++; i < gCanvasColumnEnd - 1; i++, pixel++)
@@ -270,7 +270,7 @@ static void ApplyImageEffect_BlackOutline(void)
     // Handle each column from left to right.
     for (i = 0; i < gCanvasColumnEnd; i++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][gCanvasRowStart * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[gCanvasRowStart * gCanvasWidth];
         pixel = &pixelRow[gCanvasColumnStart + i];
         *pixel = QuantizePixel_BlackOutline(pixel, pixel + gCanvasWidth);
         for (j = 1, pixel += gCanvasWidth; j < gCanvasRowEnd - 1; j++, pixel += gCanvasWidth)
@@ -289,7 +289,7 @@ static void ApplyImageEffect_Invert(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -306,7 +306,7 @@ static void ApplyImageEffect_Shimmer(void)
     u16 prevPixel;
 
     // First, invert all of the colors.
-    pixel = (*gCanvasPixels)[0];
+    pixel = gCanvasPixels;
     for (i = 0; i < 64; i++)
     {
         for (j = 0; j < 64; j++, pixel++)
@@ -319,7 +319,7 @@ static void ApplyImageEffect_Shimmer(void)
     // Blur the pixels twice.
     for (j = 0; j < 64; j++)
     {
-        pixel = &(*gCanvasPixels)[0][j];
+        pixel = &gCanvasPixels[j];
         prevPixel = *pixel;
         *pixel = 0x8000;
         for (i = 1, pixel += 64; i < 63; i++, pixel += 64)
@@ -332,7 +332,7 @@ static void ApplyImageEffect_Shimmer(void)
         }
 
         *pixel = 0x8000;
-        pixel = &(*gCanvasPixels)[0][j];
+        pixel = &gCanvasPixels[j];
         prevPixel = *pixel;
         *pixel = 0x8000;
         for (i = 1, pixel += 64; i < 63; i++, pixel += 64)
@@ -350,7 +350,7 @@ static void ApplyImageEffect_Shimmer(void)
     // Finally, invert colors back to the original color space.
     // The above blur causes the outline areas to darken, which makes
     // this inversion give the effect of light outlines.
-    pixel = (*gCanvasPixels)[0];
+    pixel = gCanvasPixels;
     for (i = 0; i < 64; i++)
     {
         for (j = 0; j < 64; j++, pixel++)
@@ -367,7 +367,7 @@ static void ApplyImageEffect_BlurRight(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         u16 prevPixel = *pixel;
         for (i = 1, pixel++; i < gCanvasColumnEnd - 1; i++, pixel++)
@@ -387,7 +387,7 @@ static void ApplyImageEffect_BlurDown(void)
 
     for (i = 0; i < gCanvasColumnEnd; i++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][gCanvasRowStart * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[gCanvasRowStart * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart + i];
         u16 prevPixel = *pixel;
         for (j = 1, pixel += gCanvasWidth; j < gCanvasRowEnd - 1; j++, pixel += gCanvasWidth)
@@ -445,7 +445,7 @@ static void AddPointillismPoints(u16 arg0)
 
     for (i = 0; i < points[0].delta; i++)
     {
-        u16 *pixel = &(*gCanvasPixels)[points[i].row * 2][points[i].column];
+        u16 *pixel = &gCanvasPixels[points[i].row * 64] + points[i].column;
 
         if (!(0x8000 & *pixel))
         {
@@ -910,7 +910,7 @@ static void QuantizePalette_Standard(bool8 useLimitedPalette)
     gCanvasPalette[maxIndex] = RGB2(15, 15, 15);
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -978,7 +978,7 @@ static void QuantizePalette_BlackAndWhite(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -1009,7 +1009,7 @@ static void QuantizePalette_GrayscaleSmall(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -1027,7 +1027,7 @@ static void QuantizePalette_Grayscale(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {
@@ -1045,7 +1045,7 @@ static void QuantizePalette_PrimaryColors(void)
 
     for (j = 0; j < gCanvasRowEnd; j++)
     {
-        u16 *pixelRow = &(*gCanvasPixels)[0][(gCanvasRowStart + j) * gCanvasWidth];
+        u16 *pixelRow = &gCanvasPixels[(gCanvasRowStart + j) * gCanvasWidth];
         u16 *pixel = &pixelRow[gCanvasColumnStart];
         for (i = 0; i < gCanvasColumnEnd; i++, pixel++)
         {

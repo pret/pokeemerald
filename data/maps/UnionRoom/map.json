@@ -2,7 +2,7 @@
   "id": "MAP_UNION_ROOM",
   "name": "UnionRoom",
   "layout": "LAYOUT_UNION_ROOM",
-  "music": "MUS_RAINBOW",
+  "music": "MUS_EVER_GRANDE",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

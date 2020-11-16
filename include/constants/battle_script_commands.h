@@ -34,6 +34,7 @@
 #define sSAVED_MOVE_EFFECT gBattleScripting + 0x2C
 #define sMOVE_EFFECT gBattleScripting + 0x2E
 #define sMULTIHIT_EFFECT gBattleScripting + 0x30
+#define sILLUSION_NICK_HACK gBattleScripting + 0x32
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 
@@ -70,8 +71,10 @@
 #define VARIOUS_SET_MAGIC_COAT_TARGET           1
 #define VARIOUS_IS_RUNNING_IMPOSSIBLE           2
 #define VARIOUS_GET_MOVE_TARGET                 3
+#define VARIOUS_GET_BATTLER_FAINTED             4
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
+#define VARIOUS_PALACE_FLAVOR_TEXT              8
 #define VARIOUS_ARENA_JUDGMENT_WINDOW           9
 #define VARIOUS_ARENA_OPPONENT_MON_LOST         10
 #define VARIOUS_ARENA_PLAYER_MON_LOST           11
@@ -115,7 +118,7 @@
 #define VARIOUS_TRY_LAST_RESORT                 52
 #define VARIOUS_ARGUMENT_STATUS_EFFECT          53
 #define VARIOUS_TRY_HIT_SWITCH_TARGET           54
-#define VARIOUS_TRY_AUTONOMIZE                  55
+#define VARIOUS_TRY_AUTOTOMIZE                  55
 #define VARIOUS_TRY_COPYCAT                     56
 #define VARIOUS_ABILITY_POPUP                   57
 #define VARIOUS_DEFOG                           58
@@ -156,10 +159,12 @@
 #define VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED  93
 #define VARIOUS_TRY_FAIRY_LOCK                  94
 #define VARIOUS_JUMP_IF_NO_ALLY                 95
-#define VARIOUS_HANDLE_TYPE_IMMUNITY            96
+#define VARIOUS_POISON_TYPE_IMMUNITY            96
 #define VARIOUS_JUMP_IF_NO_HOLD_EFFECT          97
 #define VARIOUS_INFATUATE_WITH_BATTLER          98
 #define VARIOUS_SET_LAST_USED_ITEM              99
+#define VARIOUS_PARALYZE_TYPE_IMMUNITY          100
+#define VARIOUS_JUMP_IF_ABSENT                  101
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -199,16 +204,18 @@
 #define MOVEEND_ATTACKER_VISIBLE 11
 #define MOVEEND_TARGET_VISIBLE 12
 #define MOVEEND_ITEM_EFFECTS_TARGET 13
-#define MOVEEND_ITEM_EFFECTS_ALL 14
-#define MOVEEND_KINGSROCK_SHELLBELL 15
-#define MOVEEND_SUBSTITUTE 16
-#define MOVEEND_UPDATE_LAST_MOVES 17
-#define MOVEEND_MIRROR_MOVE 18
-#define MOVEEND_NEXT_TARGET 19
-#define MOVEEND_LIFE_ORB 20
-#define MOVEEND_DANCER 21
-#define MOVEEND_CLEAR_BITS 22
-#define MOVEEND_COUNT 23
+#define MOVEEND_MOVE_EFFECTS2 14
+#define MOVEEND_ITEM_EFFECTS_ALL 15
+#define MOVEEND_KINGSROCK_SHELLBELL 16
+#define MOVEEND_SUBSTITUTE 17
+#define MOVEEND_UPDATE_LAST_MOVES 18
+#define MOVEEND_MIRROR_MOVE 19
+#define MOVEEND_NEXT_TARGET 20
+#define MOVEEND_LIFE_ORB 21
+#define MOVEEND_DANCER 22
+#define MOVEEND_EMERGENCY_EXIT 23
+#define MOVEEND_CLEAR_BITS 24
+#define MOVEEND_COUNT 25
 
 // stat flags for Cmd_playstatchangeanimation
 #define BIT_HP                      0x1

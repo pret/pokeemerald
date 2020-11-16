@@ -15,7 +15,6 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/battle_anim.h"
-#include "constants/species.h"
 
 #define GET_UNOWN_LETTER(personality) ((        \
       (((personality & 0x03000000) >> 24) << 6) \
@@ -142,10 +141,10 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
     default:
         if (IsContest())
         {
-            if (gContestResources->field_18->unk4_0)
-                species = gContestResources->field_18->unk2;
+            if (gContestResources->moveAnim->hasTargetAnim)
+                species = gContestResources->moveAnim->targetSpecies;
             else
-                species = gContestResources->field_18->species;
+                species = gContestResources->moveAnim->species;
         }
         else
         {
@@ -187,10 +186,10 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
         {
             if (IsContest())
             {
-                if (gContestResources->field_18->unk4_0)
-                    personality = gContestResources->field_18->unk10;
+                if (gContestResources->moveAnim->hasTargetAnim)
+                    personality = gContestResources->moveAnim->targetPersonality;
                 else
-                    personality = gContestResources->field_18->unk8;
+                    personality = gContestResources->moveAnim->personality;
             }
             else
             {
@@ -304,10 +303,10 @@ u8 GetBattlerSpriteCoord2(u8 battlerId, u8 coordType)
     {
         if (IsContest())
         {
-            if (gContestResources->field_18->unk4_0)
-                species = gContestResources->field_18->unk2;
+            if (gContestResources->moveAnim->hasTargetAnim)
+                species = gContestResources->moveAnim->targetSpecies;
             else
-                species = gContestResources->field_18->species;
+                species = gContestResources->moveAnim->species;
         }
         else
         {
@@ -791,6 +790,46 @@ void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffse
     }
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
+}
+
+void InitSpritePosToAnimAttackerPartner(struct Sprite *sprite, bool8 respectMonPicOffsets)
+{
+    if (!respectMonPicOffsets)
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X);
+        sprite->pos1.y = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y);
+    }
+    else
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X_2);
+        sprite->pos1.y = GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->pos1.y += gBattleAnimArgs[1];
+}
+
+bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool8 respectMonPicOffsets)
+{
+    u32 battlerId = GetAnimBattlerId(animBattlerId);
+    if (GetAnimBattlerSpriteId(animBattlerId) == 0xFF || !IsBattlerSpriteVisible(battlerId))
+    {
+        DestroyAnimSprite(sprite);
+        return FALSE;
+    }
+
+    if (!respectMonPicOffsets)
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_X);
+        sprite->pos1.y = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_Y);
+    }
+    else if (animBattlerId != ANIM_TARGET)
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_X_2);
+        sprite->pos1.y = GetBattlerSpriteCoord2(battlerId, BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->pos1.y += gBattleAnimArgs[1];
+    return TRUE;
 }
 
 u8 GetBattlerSide(u8 battlerId)
@@ -1466,10 +1505,14 @@ void AnimSpriteOnMonPos(struct Sprite *sprite)
             var = TRUE;
         else
             var = FALSE;
-        if (!gBattleAnimArgs[2])
+
+        if (gBattleAnimArgs[2] == 0)
             InitSpritePosToAnimAttacker(sprite, var);
-        else
+        else if (gBattleAnimArgs[2] == 1)
             InitSpritePosToAnimTarget(sprite, var);
+        else if (gBattleAnimArgs[2] == 2)
+            InitSpritePosToAnimAttackerPartner(sprite, var);
+
         sprite->data[0]++;
 
     }
@@ -1743,7 +1786,7 @@ void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union Aff
 
 bool8 RunAffineAnimFromTaskData(struct Task *task)
 {
-    gAnimTaskAffineAnim = LoadPointerFromVars(task->data[13], task->data[14]) + (task->data[7] << 3);
+    gAnimTaskAffineAnim = &((union AffineAnimCmd *)LoadPointerFromVars(task->data[13], task->data[14]))[task->data[7]];
     switch (gAnimTaskAffineAnim->type)
     {
     default:
@@ -1851,7 +1894,7 @@ static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId)
         {
             if (IsContest())
             {
-                species = gContestResources->field_18->species;
+                species = gContestResources->moveAnim->species;
                 return gMonBackPicCoords[species].y_offset;
             }
             else
@@ -2103,15 +2146,15 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
 
     if (IsContest())
     {
-        if (gContestResources->field_18->unk4_0)
+        if (gContestResources->moveAnim->hasTargetAnim)
         {
-            species = gContestResources->field_18->unk2;
-            personality = gContestResources->field_18->unk10;
+            species = gContestResources->moveAnim->targetSpecies;
+            personality = gContestResources->moveAnim->targetPersonality;
         }
         else
         {
-            species = gContestResources->field_18->species;
-            personality = gContestResources->field_18->unk8;
+            species = gContestResources->moveAnim->species;
+            personality = gContestResources->moveAnim->personality;
         }
         if (species == SPECIES_UNOWN)
         {

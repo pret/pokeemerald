@@ -29,11 +29,9 @@
 #include "window.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
-#include "constants/flags.h"
 #include "constants/lilycove_lady.h"
 #include "constants/mauville_old_man.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/rgb.h"
 
 #define EZCHAT_TASK_STATE        0
@@ -1524,7 +1522,7 @@ static u16 sub_811AB68(void)
 {
     do
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             sub_811BF78();
             sEasyChatScreen->state = 2;
@@ -1533,30 +1531,30 @@ static u16 sub_811AB68(void)
             sEasyChatScreen->unk_0c = 0;
             return 9;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             return sub_811B150();
         }
-        else if (gMain.newKeys & START_BUTTON)
+        else if (JOY_NEW(START_BUTTON))
         {
             return sub_811B1B4();
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             sEasyChatScreen->mainCursorRow--;
             break;
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             sEasyChatScreen->mainCursorColumn--;
             break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             sEasyChatScreen->mainCursorRow++;
             break;
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             sEasyChatScreen->mainCursorColumn++;
             break;
@@ -1596,7 +1594,7 @@ static u16 sub_811ACDC(void)
 {
     do
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             switch (sEasyChatScreen->mainCursorColumn)
             {
@@ -1611,30 +1609,30 @@ static u16 sub_811ACDC(void)
             }
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             return sub_811B150();
         }
-        else if (gMain.newKeys & START_BUTTON)
+        else if (JOY_NEW(START_BUTTON))
         {
             return sub_811B1B4();
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             sEasyChatScreen->mainCursorRow--;
             break;
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             sEasyChatScreen->mainCursorColumn--;
             break;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             sEasyChatScreen->mainCursorRow = 0;
             break;
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             sEasyChatScreen->mainCursorColumn++;
             break;
@@ -1667,10 +1665,10 @@ static u16 sub_811ACDC(void)
 
 static u16 sub_811AE44(void)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         return sub_811B32C();
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (sEasyChatScreen->unk_0a != -1)
             return sub_811B2B0();
@@ -1686,19 +1684,19 @@ static u16 sub_811AE44(void)
         }
     }
 
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
         return sub_811B33C();
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
         return sub_811B528(2);
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPEAT(DPAD_DOWN))
         return sub_811B528(3);
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPEAT(DPAD_LEFT))
         return sub_811B528(1);
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPEAT(DPAD_RIGHT))
         return sub_811B528(0);
 
     return 0;
@@ -1706,31 +1704,31 @@ static u16 sub_811AE44(void)
 
 static u16 sub_811AF00(void)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         sEasyChatScreen->state = 2;
         return 14;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         return sub_811B394();
 
-    if (gMain.newKeys & START_BUTTON)
+    if (JOY_NEW(START_BUTTON))
         return sub_811B794(4);
 
-    if (gMain.newKeys & SELECT_BUTTON)
+    if (JOY_NEW(SELECT_BUTTON))
         return sub_811B794(5);
 
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
         return sub_811B794(2);
 
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPEAT(DPAD_DOWN))
         return sub_811B794(3);
 
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPEAT(DPAD_LEFT))
         return sub_811B794(1);
 
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPEAT(DPAD_RIGHT))
         return sub_811B794(0);
 
     return 0;
@@ -1795,10 +1793,10 @@ static u16 sub_811B040(void)
 
 static u16 sub_811B08C(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         return 26;
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         return sub_811B150();
 
     return 0;
@@ -1806,7 +1804,7 @@ static u16 sub_811B08C(void)
 
 static u16 sub_811B0BC(void)
 {
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         sEasyChatScreen->state = sub_811B2A4();
         return 7;
@@ -2024,7 +2022,7 @@ static int sub_811B368(void)
 {
     if (sEasyChatScreen->type == EASY_CHAT_TYPE_BARD_SONG)
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         return 0;
     }
     else
@@ -2039,7 +2037,7 @@ static int sub_811B394(void)
     u16 easyChatWord = sub_811F578(sub_811B940());
     if (sub_811BF88(easyChatWord))
     {
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         return 0;
     }
     else
@@ -2794,7 +2792,7 @@ static bool8 sub_811BFA4(void)
         DeactivateAllTextPrinters();
         sub_811CF64();
         sub_811CF04();
-        CpuFastFill(0, (void *)VRAM + 0x1000000, 0x400);
+        CpuFastFill(0, (void *)OAM, OAM_SIZE);
         break;
     case 1:
         DecompressAndLoadBgGfxUsingHeap(3, gEasyChatWindow_Gfx, 0, 0, 0);
@@ -2828,8 +2826,12 @@ static bool8 sub_811BFA4(void)
         else
         {
             sub_811DE5C(0, 0, 0, 0);
-            SetGpuReg(REG_OFFSET_WININ, WIN_RANGE(0, 63));
-            SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0, 59));
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+            SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0
+                                       | WINOUT_WIN01_BG1
+                                       | WINOUT_WIN01_BG3
+                                       | WINOUT_WIN01_OBJ
+                                       | WINOUT_WIN01_CLR);
             ShowBg(3);
             ShowBg(1);
             ShowBg(2);
@@ -5269,12 +5271,17 @@ void InitEasyChatPhrases(void)
             gSaveBlock1Ptr->mail[i].words[j] = 0xFFFF;
     }
 
+#ifndef UBFIX
     // BUG: This is supposed to clear 64 bits, but this loop is clearing 64 bytes.
     // However, this bug has no resulting effect on gameplay because only the
     // Mauville old man data is corrupted, which is initialized directly after
     // this function is called when starting a new game.
     for (i = 0; i < 64; i++)
         gSaveBlock1Ptr->additionalPhrases[i] = 0;
+#else
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->additionalPhrases); i++)
+        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+#endif
 }
 
 static bool8 sub_811F28C(void)

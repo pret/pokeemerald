@@ -306,7 +306,7 @@ static void CB2_GameplayCannotBeContinued(void)
 {
     gSaveFailedClockInfo[CLOCK_RUNNING] = FALSE;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_FILL(1));
         SaveFailedScreenTextPrint(gText_GamePlayCannotBeContinued, 1, 0);
@@ -319,7 +319,7 @@ static void CB2_FadeAndReturnToTitleScreen(void)
 {
     gSaveFailedClockInfo[CLOCK_RUNNING] = FALSE;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB);
@@ -349,7 +349,7 @@ static void VBlankCB_UpdateClockGraphics(void)
 
     gMain.oamBuffer[0] = sClockOamData;
     gMain.oamBuffer[0].x = 112;
-    gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;;
+    gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;
 
     if (gSaveFailedClockInfo[CLOCK_RUNNING] != FALSE)
     {

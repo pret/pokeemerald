@@ -45,6 +45,19 @@ struct TypePower
 
 extern const struct TypePower gNaturalGiftTable[];
 
+void HandleAction_UseMove(void);
+void HandleAction_Switch(void);
+void HandleAction_UseItem(void);
+void HandleAction_Run(void);
+void HandleAction_WatchesCarefully(void);
+void HandleAction_SafariZoneBallThrow(void);
+void HandleAction_ThrowPokeblock(void);
+void HandleAction_GoNear(void);
+void HandleAction_SafariZoneRun(void);
+void HandleAction_WallyBallThrow(void);
+void HandleAction_TryFinish(void);
+void HandleAction_NothingIsFainted(void);
+void HandleAction_ActionFinished(void);
 u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
@@ -57,8 +70,8 @@ void CancelMultiTurnMoves(u8 battlerId);
 bool8 WasUnableToUseMove(u8 battlerId);
 void PrepareStringBattle(u16 stringId, u8 battlerId);
 void ResetSentPokesToOpponentValue(void);
-void sub_803F9EC(u8 battlerId);
-void sub_803FA70(u8 battlerId);
+void OpponentSwitchInResetSentPokesToOpponentValue(u8 battlerId);
+void UpdateSentPokesToOpponentValue(u8 battlerId);
 void BattleScriptPush(const u8* bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
@@ -106,6 +119,7 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilit
 u16 GetTypeModifier(u8 atkType, u8 defType);
 s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId);
 u16 GetMegaEvolutionSpecies(u16 preEvoSpecies, u16 heldItemId);
+u16 GetWishMegaEvolutionSpecies(u16 preEvoSpecies, u16 moveId1, u16 moveId2, u16 moveId3, u16 moveId4);
 bool32 CanMegaEvolve(u8 battlerId);
 void UndoMegaEvolution(u32 monId);
 void UndoFormChange(u32 monId, u32 side);
@@ -114,5 +128,7 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId);
 struct Pokemon *GetIllusionMonPtr(u32 battlerId);
 void ClearIllusionMon(u32 battlerId);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
+bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
+u8 GetBattleMoveSplit(u32 moveId);
 
 #endif // GUARD_BATTLE_UTIL_H

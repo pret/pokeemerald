@@ -1,3 +1,8 @@
+@ Local IDs are the same for both players houses
+.set LOCALID_MOM, 1
+.set LOCALID_DAD, 5
+.set LOCALID_MOM_2F, 14
+
 PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet:: @ 82926FE
 	setvar VAR_LITTLEROOT_INTRO_STATE, 5
 	return
@@ -68,13 +73,13 @@ PlayersHouse_2F_EventScript_WallClock:: @ 8292799
 	call_if_eq PlayersHouse_2F_EventScript_MomComesUpstairsMale
 	compare VAR_RESULT, FEMALE
 	call_if_eq PlayersHouse_2F_EventScript_MomComesUpstairsFemale
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject VAR_0x8008
 	releaseall
 	end
 
 PlayersHouse_2F_EventScript_MomComesUpstairsMale:: @ 82927DF
-	setvar VAR_0x8008, 14
+	setvar VAR_0x8008, LOCALID_MOM_2F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersMale
 	waitmovement 0
@@ -87,7 +92,7 @@ PlayersHouse_2F_EventScript_MomComesUpstairsMale:: @ 82927DF
 	return
 
 PlayersHouse_2F_EventScript_MomComesUpstairsFemale:: @ 829280F
-	setvar VAR_0x8008, 14
+	setvar VAR_0x8008, LOCALID_MOM_2F
 	addobject VAR_0x8008
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomEntersFemale
 	waitmovement 0
@@ -154,7 +159,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale:: @ 829286D
 	call PlayersHouse_1F_EventScript_MomNoticeGymBroadcast
 	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymMale
 	waitmovement 0
-	playbgm MUS_INTER_V, 0
+	playbgm MUS_ENCOUNTER_INTERVIEWER, 0
 	msgbox PlayersHouse_1F_Text_MaybeDadWillBeOn, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomMakeRoomToSeeTVMale
@@ -179,7 +184,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale:: @ 82928DC
 	call PlayersHouse_1F_EventScript_MomNoticeGymBroadcast
 	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerApproachTVForGymFemale
 	waitmovement 0
-	playbgm MUS_INTER_V, 0
+	playbgm MUS_ENCOUNTER_INTERVIEWER, 0
 	msgbox PlayersHouse_1F_Text_MaybeDadWillBeOn, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomMakeRoomToSeeTVFemale
@@ -329,7 +334,7 @@ PlayersHouse_1F_EventScript_TryRegisterMom:: @ 8292A19
 	msgbox PlayersHouse_1F_Text_IsThatAPokenav, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox PlayersHouse_1F_Text_RegisteredMom, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -514,14 +519,14 @@ PlayersHouse_1F_EventScript_AirLatiBroadcast:: @ 8292C72
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale:: @ 8292C76
 	setvar VAR_0x8008, MALE
-	setvar VAR_0x8009, 5  @ Dad object event ID
-	setvar VAR_0x800A, 1  @ Mom object event ID
+	setvar VAR_0x8009, LOCALID_DAD
+	setvar VAR_0x800A, LOCALID_MOM
 	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale:: @ 8292C86
 	setvar VAR_0x8008, FEMALE
-	setvar VAR_0x8009, 5  @ Dad object event ID
-	setvar VAR_0x800A, 1  @ Mom object event ID
+	setvar VAR_0x8009, LOCALID_DAD
+	setvar VAR_0x800A, LOCALID_MOM
 	return
 
 PlayersHouse_1F_EventScript_DadApproachPlayerMale:: @ 8292C96

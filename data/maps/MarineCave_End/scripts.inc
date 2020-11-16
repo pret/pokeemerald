@@ -1,3 +1,5 @@
+.set LOCALID_KYOGRE, 1
+
 MarineCave_End_MapScripts:: @ 823AFDF
 	map_script MAP_SCRIPT_ON_RESUME, MarineCave_End_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, MarineCave_End_OnTransition
@@ -11,7 +13,7 @@ MarineCave_End_EventScript_TryRemoveKyogre:: @ 823AFF4
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject 1
+	removeobject LOCALID_KYOGRE
 	return
 
 MarineCave_End_OnTransition: @ 823B008
@@ -27,13 +29,13 @@ MarineCave_End_EventScript_Kyogre:: @ 823B01B
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement 1, MarineCave_End_Movement_KyogreApproach
+	applymovement LOCALID_KYOGRE, MarineCave_End_Movement_KyogreApproach
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KYOGRE, 2
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_KYOGRE
 	setwildbattle SPECIES_KYOGRE, 70, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle

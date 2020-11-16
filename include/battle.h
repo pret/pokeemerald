@@ -11,6 +11,7 @@
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
 #include "battle_bg.h"
+#include "pokeball.h"
 #include "battle_debug.h"
 
 #define GET_BATTLER_POSITION(battler)     (gBattlerPositions[battler])
@@ -51,16 +52,6 @@
 #define MSG_DISPLAY             0x7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
 
-#define MOVE_TARGET_SELECTED            0x0
-#define MOVE_TARGET_DEPENDS             0x1
-#define MOVE_TARGET_USER_OR_SELECTED    0x2
-#define MOVE_TARGET_RANDOM              0x4
-#define MOVE_TARGET_BOTH                0x8
-#define MOVE_TARGET_USER                0x10
-#define MOVE_TARGET_FOES_AND_ALLY       0x20
-#define MOVE_TARGET_OPPONENTS_FIELD     0x40
-#define MOVE_TARGET_ALLY                0x80
-
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
 struct ResourceFlags
@@ -68,11 +59,12 @@ struct ResourceFlags
     u32 flags[4];
 };
 
-#define RESOURCE_FLAG_FLASH_FIRE    0x1
-#define RESOURCE_FLAG_ROOST         0x2
-#define RESOURCE_FLAG_UNBURDEN      0x4
-#define RESOURCE_FLAG_INTIMIDATED   0x8
-#define RESOURCE_FLAG_TRACED        0x10
+#define RESOURCE_FLAG_FLASH_FIRE     0x1
+#define RESOURCE_FLAG_ROOST          0x2
+#define RESOURCE_FLAG_UNBURDEN       0x4
+#define RESOURCE_FLAG_INTIMIDATED    0x8
+#define RESOURCE_FLAG_TRACED         0x10
+#define RESOURCE_FLAG_EMERGENCY_EXIT 0x20
 
 struct DisableStruct
 {
@@ -107,7 +99,7 @@ struct DisableStruct
     u8 truantSwitchInHack:1;
     u8 mimickedMoves:4;
     u8 rechargeTimer;
-    u8 autonomizeCount;
+    u8 autotomizeCount;
     u8 slowStartTimer;
     u8 embargoTimer;
     u8 magnetRiseTimer;
@@ -238,7 +230,7 @@ struct WishFutureKnock
 struct AI_SavedBattleMon
 {
     u16 ability;
-    u16 moves[4];
+    u16 moves[MAX_MON_MOVES];
     u16 heldItem;
     u16 species;
 };
@@ -258,17 +250,15 @@ struct AI_ThinkingStruct
     bool8 switchMon; // Because all available moves have no/little effect.
 };
 
-struct UsedMoves
-{
-    u16 moves[MAX_MON_MOVES];
-    u16 unknown[MAX_MON_MOVES];
-};
+#define AI_MOVE_HISTORY_COUNT 3
 
 struct BattleHistory
 {
-    struct UsedMoves usedMoves[MAX_BATTLERS_COUNT];
     u16 abilities[MAX_BATTLERS_COUNT];
     u8 itemEffects[MAX_BATTLERS_COUNT];
+    u16 usedMoves[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    u16 moveHistory[MAX_BATTLERS_COUNT][AI_MOVE_HISTORY_COUNT]; // 3 last used moves for each battler
+    u8 moveHistoryIndex[MAX_BATTLERS_COUNT];
     u16 trainerItems[MAX_BATTLERS_COUNT];
     u8 itemsNo;
 };
@@ -326,8 +316,8 @@ struct BattleResults
     u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];     // 0x2A
-    u8 filler35[1];           // 0x35
-    u8 catchAttempts[11];     // 0x36
+    u8 filler35;           // 0x35
+    u8 catchAttempts[POKEBALL_COUNT - 1];     // 0x36 Doesn't include Master ball
 };
 
 struct BattleTv_Side
@@ -425,14 +415,15 @@ struct MegaEvolutionData
     u8 battlerId;
     bool8 playerSelect;
     u8 triggerSpriteId;
-    u8 indicatorSpriteIds[MAX_BATTLERS_COUNT];
+    bool8 isWishMegaEvo;
 };
 
 struct Illusion
 {
-    u8 on:1;
-    u8 broken:1;
-    u8 partyId:3;
+    u8 on;
+    u8 set;
+    u8 broken;
+    u8 partyId;
     struct Pokemon *mon;
 };
 
@@ -477,7 +468,7 @@ struct BattleStruct
     u8 stringMoveType;
     u8 expGetterBattlerId;
     u8 field_91; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
-    u8 field_92; // battle palace related
+    u8 palaceFlags; // First 4 bits are "is < 50% HP and not asleep" for each battler, last 4 bits are selected moves to pass to AI
     u8 field_93; // related to choosing pokemon?
     u8 wallyBattleState;
     u8 wallyMovesState;
@@ -548,6 +539,8 @@ struct BattleStruct
     u8 friskedBattler; // Frisk needs to identify 2 battlers in double battles.
     bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
     u8 sameMoveTurns[MAX_BATTLERS_COUNT]; // For Metronome, number of times the same moves has been SUCCESFULLY used.
+    u16 moveEffect2; // For Knock Off
+    u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -558,8 +551,9 @@ struct BattleStruct
         typeArg = gBattleMoves[move].type;                  \
 }
 
-#define IS_MOVE_PHYSICAL(move)(gBattleMoves[move].split == SPLIT_PHYSICAL)
-#define IS_MOVE_SPECIAL(move)(gBattleMoves[move].split == SPLIT_SPECIAL)
+#define IS_MOVE_PHYSICAL(move)(GetBattleMoveSplit(move) == SPLIT_PHYSICAL)
+#define IS_MOVE_SPECIAL(move)(GetBattleMoveSplit(move) == SPLIT_SPECIAL)
+#define IS_MOVE_STATUS(move)(gBattleMoves[move].split == SPLIT_STATUS)
 
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
@@ -607,7 +601,7 @@ struct BattleScripting
     u8 savedBattler;
     u8 reshowMainState;
     u8 reshowHelperState;
-    u8 field_23;
+    u8 levelUpHP;
     u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
     u8 specialTrainerBattleType;
@@ -616,6 +610,7 @@ struct BattleScripting
     u16 savedMoveEffect; // For moves hitting multiple targets.
     u16 moveEffect;
     u16 multihitMoveEffect;
+    u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
 };
 
 // rom_80A5C6C
@@ -640,16 +635,18 @@ struct BattleAnimationInfo
     u8 field_5;
     u8 field_6;
     u8 field_7;
-    u8 ballThrowCaseId;
+    u8 ballThrowCaseId:6;
+    u8 isCriticalCapture:1;
+    u8 criticalCaptureSuccess:1;
     u8 field_9_x1:1;
-    u8 field_9_x2:1;
+    u8 wildMonInvisible:1;
     u8 field_9_x1C:3;
     u8 field_9_x20:1;
     u8 field_9_x40:1;
     u8 field_9_x80:1;
-    u8 field_A;
+    u8 numBallParticles;
     u8 field_B;
-    s16 field_C;
+    s16 ballSubpx;
     u8 field_E;
     u8 field_F;
 };
@@ -663,8 +660,8 @@ struct BattleHealthboxInfo
     u8 statusAnimActive:1; // x10
     u8 animFromTableActive:1; // x20
     u8 specialAnimActive:1; // x40
-    u8 flag_x80:1;
-    u8 field_1_x1:1;
+    u8 triedShinyMonAnim:1;
+    u8 finishedShinyMonAnim:1;
     u8 field_1_x1E:4;
     u8 field_1_x20:1;
     u8 field_1_x40:1;

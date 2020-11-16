@@ -1,3 +1,9 @@
+@ Note: data/scripts/berry_blender.inc is for the same map, so shares local IDs
+.set LOCALID_RECEPTIONIST, 1
+.set LOCALID_LINK_RECEPTIONIST, 2
+.set LOCALID_ARTIST, 4
+.set LOCALID_ARTIST_LINK, 11
+
 LilycoveCity_ContestLobby_MapScripts:: @ 821A211
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestLobby_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_ContestLobby_OnFrame
@@ -35,15 +41,15 @@ LilycoveCity_ContestLobby_EventScript_TryDoContestArtist:: @ 821A255
 
 LilycoveCity_ContestLobby_EventScript_ContestArtist:: @ 821A264
 	lockall
-	addobject 4
-	applymovement 4, LilycoveCity_ContestLobby_Movement_ArtistApproachPlayer
-	waitmovement 4
+	addobject LOCALID_ARTIST
+	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistApproachPlayer
+	waitmovement LOCALID_ARTIST
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerFaceArtist
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 0
+	showcontestwinner CONTEST_WINNER_ARTIST
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -61,9 +67,9 @@ LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum:: @ 821A2AA
 	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, TRUE
 	call_if_eq LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon
-	applymovement 4, LilycoveCity_ContestLobby_Movement_ArtistExit
+	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistExit
 	waitmovement 0
-	removeobject 4
+	removeobject LOCALID_ARTIST
 	call LilycoveCity_ContestLobby_EventScript_UpdateMuseumPatrons
 	call LilycoveCity_ContestLobby_EventScript_SetPaintingFlag
 	releaseall
@@ -75,25 +81,25 @@ LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePainting:: @ 821A2E4
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseum
 	msgbox LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, LilycoveCity_ContestLobby_Movement_ArtistExit
+	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistExit
 	waitmovement 0
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	removeobject 4
+	removeobject LOCALID_ARTIST
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ReceivedArtistRibbon:: @ 821A314
 	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	special BufferContestWinnerMonName
-	applymovement 4, LilycoveCity_ContestLobby_Movement_ArtistBeginToExit
+	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistBeginToExit
 	waitmovement 0
 	playse SE_PIN
-	applymovement 4, Common_Movement_ExclamationMark
+	applymovement LOCALID_ARTIST, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, LilycoveCity_ContestLobby_Movement_ArtistReturnToPlayer
+	applymovement LOCALID_ARTIST, LilycoveCity_ContestLobby_Movement_ArtistReturnToPlayer
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_TakeMementoOfPainting, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	msgbox LilycoveCity_ContestLobby_Text_ReceivedARibbon, MSGBOX_DEFAULT
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon, MSGBOX_DEFAULT
@@ -209,15 +215,15 @@ LilycoveCity_ContestLobby_EventScript_TryDoLinkContestArtist:: @ 821A427
 
 LilycoveCity_ContestLobby_EventScript_LinkContestArtist:: @ 821A436
 	lockall
-	addobject 11
-	applymovement 11, LilycoveCity_ContestLobby_Movement_LinkArtistApproachPlayer
-	waitmovement 11
+	addobject LOCALID_ARTIST_LINK
+	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistApproachPlayer
+	waitmovement LOCALID_ARTIST_LINK
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerFaceLinkArtist
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint, MSGBOX_DEFAULT
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 0
+	showcontestwinner CONTEST_WINNER_ARTIST
 	msgbox LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink
@@ -233,9 +239,9 @@ LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink:: @ 821A47A
 	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, TRUE
 	call_if_eq LilycoveCity_ContestLobby_EventScript_ReceivedLinkArtistRibbon
-	applymovement 11, LilycoveCity_ContestLobby_Movement_LinkArtistExit
+	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistExit
 	waitmovement 0
-	removeobject 11
+	removeobject LOCALID_ARTIST_LINK
 	call LilycoveCity_ContestLobby_EventScript_UpdateMuseumPatrons
 	call LilycoveCity_ContestLobby_EventScript_SetPaintingFlag
 	releaseall
@@ -247,10 +253,10 @@ LilycoveCity_ContestLobby_EventScript_ConfirmDontTakePaintingLink:: @ 821A4B4
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TakePaintingToMuseumLink
 	msgbox LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs, MSGBOX_DEFAULT
 	closemessage
-	applymovement 11, LilycoveCity_ContestLobby_Movement_LinkArtistExit
+	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistExit
 	waitmovement 0
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	removeobject 11
+	removeobject LOCALID_ARTIST_LINK
 	releaseall
 	end
 
@@ -258,15 +264,15 @@ LilycoveCity_ContestLobby_EventScript_ReceivedLinkArtistRibbon:: @ 821A4E4
 	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
 	special BufferContestWinnerMonName
-	applymovement 11, LilycoveCity_ContestLobby_Movement_LinkArtistBeginExit
+	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistBeginExit
 	waitmovement 0
 	playse SE_PIN
-	applymovement 11, Common_Movement_ExclamationMark
+	applymovement LOCALID_ARTIST_LINK, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 11, LilycoveCity_ContestLobby_Movement_LinkArtistReturnToPlayer
+	applymovement LOCALID_ARTIST_LINK, LilycoveCity_ContestLobby_Movement_LinkArtistReturnToPlayer
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_TakeMementoOfPainting, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	msgbox LilycoveCity_ContestLobby_Text_ReceivedARibbon, MSGBOX_DEFAULT
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon, MSGBOX_DEFAULT
@@ -409,26 +415,26 @@ LilycoveCity_ContestLobby_EventScript_WarpToToughContestHall:: @ 821A663
 
 LilycoveCity_ContestLobby_EventScript_LeadToContestHall:: @ 821A670
 	lockall
-	applymovement 1, LilycoveCity_ContestLobby_Movement_ReceptionistApproachCounter
+	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistApproachCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 12, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 12, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
-	applymovement 1, LilycoveCity_ContestLobby_Movement_ReceptionistExitCounter
+	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistExitCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 12, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 12, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView
 	delay 20
-	applymovement 1, LilycoveCity_ContestLobby_Movement_ReceptionistFacePlayer
+	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistFacePlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerApproachReceptionist
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_ComeThroughHere, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LilycoveCity_ContestLobby_Movement_ReceptionistWalkToContestHall
+	applymovement LOCALID_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistWalkToContestHall
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerWalkToContestHall
 	waitmovement 0
 	releaseall
@@ -505,42 +511,42 @@ LilycoveCity_ContestLobby_EventScript_NinjaBoy:: @ 821A735
 LilycoveCity_ContestLobby_EventScript_ContestWinner1:: @ 821A73E
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 1
+	showcontestwinner CONTEST_WINNER_HALL_1
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner2:: @ 821A745
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 2
+	showcontestwinner CONTEST_WINNER_HALL_2
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner3:: @ 821A74C
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 3
+	showcontestwinner CONTEST_WINNER_HALL_3
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner4:: @ 821A753
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 4
+	showcontestwinner CONTEST_WINNER_HALL_4
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner5:: @ 821A75A
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 5
+	showcontestwinner CONTEST_WINNER_HALL_5
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_ContestWinner6:: @ 821A761
 	lockall
 	fadescreen FADE_TO_BLACK
-	showcontestwinner 6
+	showcontestwinner CONTEST_WINNER_HALL_6
 	releaseall
 	end
 
@@ -767,15 +773,15 @@ LilycoveCity_ContestLobby_EventScript_TrySetUpLinkContest:: @ 821AA15
 	call_if_eq LilycoveCity_ContestLobby_EventScript_TryLinkGMode
 	compare VAR_TEMP_C, 2
 	goto_if_ge LilycoveCity_ContestLobby_EventScript_CancelLinkContest
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentChoices
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkContest
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkError
-	compare VAR_RESULT, 10
+	compare VAR_RESULT, LINKUP_FAILED_CONTEST_GMODE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkModeDifference
 	message3 LilycoveCity_ContestLobby_Text_Transmitting
 	contestlinktransfer
@@ -889,22 +895,22 @@ LilycoveCity_ContestLobby_EventScript_DecideLinkLeader:: @ 821ABA6
 
 LilycoveCity_ContestLobby_EventScript_TryLeadGroup:: @ 821ABE3
 	call LilycoveCity_ContestLobby_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TryLeadGroup
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_TryJoinGroup:: @ 821AC0B
 	call LilycoveCity_ContestLobby_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_DecideLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_TryJoinGroup
 	release
 	end
@@ -930,20 +936,20 @@ LilycoveCity_ContestLobby_EventScript_LeadToLinkContestHall:: @ 821AC49
 	waitmessage
 	delay 20
 	closemessage
-	applymovement 2, LilycoveCity_ContestLobby_Movement_LinkReceptionistApproachCounter
+	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistApproachCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 17, 2, METATILE_Contest_WallShadow, 1
 	setmetatile 17, 3, METATILE_Contest_FloorShadow, 1
 	special DrawWholeMapView
-	applymovement 2, LilycoveCity_ContestLobby_Movement_LinkReceptionistExitCounter
+	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistExitCounter
 	waitmovement 0
-	playse SE_HASHI
+	playse SE_BRIDGE_WALK
 	setmetatile 17, 2, METATILE_Contest_CounterFlap_Top, 1
 	setmetatile 17, 3, METATILE_Contest_CounterFlap_Bottom, 1
 	special DrawWholeMapView
 	delay 20
-	applymovement 2, LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer
+	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistFacePlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerApproachLinkReceptionist
 	waitmovement 0
@@ -952,7 +958,7 @@ LilycoveCity_ContestLobby_EventScript_LeadToLinkContestHall:: @ 821AC49
 	delay 20
 	closemessage
 	call LilycoveCity_ContestLobby_EventScript_DelayIfContestWithRSPlayer
-	applymovement 2, LilycoveCity_ContestLobby_Movement_LinkReceptionistWalkToContestHall
+	applymovement LOCALID_LINK_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_LinkReceptionistWalkToContestHall
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerWalkToLinkContestHall
 	waitmovement 0
 	release

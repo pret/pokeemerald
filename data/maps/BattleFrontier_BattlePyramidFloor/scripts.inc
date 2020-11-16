@@ -33,7 +33,7 @@ BattleFrontier_BattlePyramidFloor_EventScript_ShowMapName:: @ 8252A8F
 	end
 
 BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic:: @ 8252A98
-	playbgm MUS_PYRAMID, 0
+	playbgm MUS_B_PYRAMID, 0
 	setvar VAR_TEMP_E, 1
 	end
 

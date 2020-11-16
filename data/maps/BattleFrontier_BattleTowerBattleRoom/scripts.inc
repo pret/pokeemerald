@@ -1,3 +1,7 @@
+.set LOCALID_OPPONENT, 1
+.set LOCALID_ATTENDANT_1, 2
+.set LOCALID_ATTENDANT_2, 3
+
 BattleFrontier_BattleTowerBattleRoom_MapScripts:: @ 8241B40
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerBattleRoom_OnWarp
@@ -9,7 +13,7 @@ BattleFrontier_BattleTowerBattleRoom_OnWarp: @ 8241B4B
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_SetUpObjects:: @ 8241B55
 	setvar VAR_TEMP_1, 1
-	applymovement 3, BattleFrontier_BattleTowerBattleRoom_Movement_SetInvisible
+	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerBattleRoom_Movement_SetInvisible
 	end
 
 BattleFrontier_BattleTowerBattleRoom_OnFrame: @ 8241B62
@@ -23,7 +27,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_EnterRoom:: @ 8241B6C
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter
-	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer
+	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant
 	waitmovement 0
@@ -33,8 +37,8 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_EnterRoom:: @ 8241B6C
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter:: @ 8241BC3
 	tower_setopponent
-	addobject 1
-	applymovement 1, BattleFrontier_BattleTowerBattleRoom_Movement_OpponentEnter
+	addobject LOCALID_OPPONENT
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleTowerBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	tower_getopponentintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -45,7 +49,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter:: @ 8241BC3
 BattleFrontier_BattleTower_EventScript_WarpToLobbyLost:: @ 8241C03
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	tower_set TOWER_DATA_LVL_MODE
-	setvar VAR_0x8004, 3
+	setvar VAR_0x8004, FANCOUNTER_USED_BATTLE_TOWER
 	special Script_TryGainNewFanFromCounter
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby
 
@@ -54,18 +58,18 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedOpponent:: @ 8241C2F
 	tower_setbattlewon
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon
-	applymovement 1, BattleFrontier_BattleTowerBattleRoom_Movement_OpponentExit
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleTowerBattleRoom_Movement_OpponentExit
 	waitmovement 0
-	removeobject 1
+	removeobject LOCALID_OPPONENT
 	frontier_getbrainstatus
 	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	call_if_ne BattleFrontier_BattleTowerBattleRoom_EventScript_SecondAttendantEnter
-	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer
+	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth, MSGBOX_DEFAULT
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 BattleFrontier_BattleTowerBattleRoom_EventScript_AskReadyForOpponent:: @ 8241C8F
@@ -127,14 +131,14 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_ContinueChallenge:: @ 8241DDC
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceBattle
 	waitmovement 0
-	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantReturnToPos
+	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantReturnToPos
 	waitmovement 0
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon:: @ 8241DF6
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
 	tower_set TOWER_DATA_LVL_MODE
-	setvar VAR_0x8004, 3
+	setvar VAR_0x8004, FANCOUNTER_USED_BATTLE_TOWER
 	special Script_TryGainNewFanFromCounter
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby
 
@@ -193,19 +197,19 @@ BattleFrontier_EventScript_IncrementWinStreak:: @ 8241EBA
 	return
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_SecondAttendantEnter:: @ 8241EC3
-	applymovement 3, BattleFrontier_BattleTowerBattleRoom_Movement_SecondAttendantEnter
+	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerBattleRoom_Movement_SecondAttendantEnter
 	waitmovement 0
-	applymovement 3, Common_Movement_WalkInPlaceLeft
+	applymovement LOCALID_ATTENDANT_2, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 2, Common_Movement_ExclamationMark
+	applymovement LOCALID_ATTENDANT_1, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Common_Movement_Delay48
+	applymovement LOCALID_ATTENDANT_1, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 3, BattleFrontier_BattleTowerBattleRoom_Movement_SecondAttendantDelay
-	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantFaceSecondAttendant
+	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerBattleRoom_Movement_SecondAttendantDelay
+	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantFaceSecondAttendant
 	waitmovement 0
-	applymovement 3, BattleFrontier_BattleTowerBattleRoom_Movement_SecondAttendantExit
+	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerBattleRoom_Movement_SecondAttendantExit
 	waitmovement 0
 	return
 
@@ -241,10 +245,10 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_BattleAnabel:: @ 8241FAF
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceBattle
 	waitmovement 0
-	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantReturnToPos
+	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerBattleRoom_Movement_AttendantReturnToPos
 	waitmovement 0
-	addobject 1
-	applymovement 1, BattleFrontier_BattleTowerBattleRoom_Movement_AnabelEnter
+	addobject LOCALID_OPPONENT
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleTowerBattleRoom_Movement_AnabelEnter
 	waitmovement 0
 	switch VAR_TEMP_F
 	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleTowerBattleRoom_EventScript_AnabelGoldIntro
@@ -268,7 +272,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelSilver:: @ 824204
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_AnabelTalentShallBeRecognized, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleTowerBattleRoom_Text_ReceivedAbilitySymbol
 	waitmessage
 	waitfanfare
@@ -295,7 +299,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_DefeatedAnabelGold:: @ 82420CF
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyWon
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_AnabelCongratsYourPassPlease, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleTowerBattleRoom_Text_AbilitySymbolTookGoldenShine
 	waitmessage
 	waitfanfare

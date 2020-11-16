@@ -125,7 +125,7 @@ void ReadPng(char *path, struct Image *image)
     free(row_pointers);
     fclose(fp);
 
-    if (bit_depth != image->bitDepth)
+    if (bit_depth != image->bitDepth && image->tilemap.data.affine == NULL)
     {
         unsigned char *src = image->pixels;
 

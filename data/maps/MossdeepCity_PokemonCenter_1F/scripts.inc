@@ -1,3 +1,5 @@
+.set LOCALID_NURSE, 1
+
 MossdeepCity_PokemonCenter_1F_MapScripts:: @ 822223F
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -7,9 +9,8 @@ MossdeepCity_PokemonCenter_1F_OnTransition: @ 822224A
 	setrespawn HEAL_LOCATION_MOSSDEEP_CITY
 	end
 
-@ VAR_0x800B is the Nurse's object event id
 MossdeepCity_PokemonCenter_1F_EventScript_Nurse:: @ 822224E
-	setvar VAR_0x800B, 1
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

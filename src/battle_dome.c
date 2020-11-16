@@ -29,11 +29,10 @@
 #include "international_string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
-#include "script_pokemon_util_80F87D8.h"
+#include "script_pokemon_util.h"
 #include "graphics.h"
 #include "constants/battle_dome.h"
 #include "constants/frontier_util.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
@@ -2731,7 +2730,6 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
 #define TYPE_x2     40
 #define TYPE_x4     80
 
-// Functionally equivalent, while loop is impossible to match.
 // arg2 is either 2, a personality, or an OTID
 static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 {
@@ -4103,7 +4101,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     u8 tourneyId = sTourneyTreeTrainerIds[position];
     u16 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
         input = INFOCARD_INPUT_AB;
 
     // Next opponent card cant scroll
@@ -4114,7 +4112,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     {
         // For trainer info cards, pos is 0 when on a trainer info card (not viewing that trainer's match progression)
         // Scrolling up/down from a trainer info card goes to other trainer info cards
-        if (gMain.newKeys & DPAD_UP && sInfoCard->pos == 0)
+        if (JOY_NEW(DPAD_UP) && sInfoCard->pos == 0)
         {
             if (position == 0)
                 position = DOME_TOURNAMENT_TRAINERS_COUNT - 1;
@@ -4122,7 +4120,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
                 position--;
             input = TRAINERCARD_INPUT_UP;
         }
-        else if (gMain.newKeys & DPAD_DOWN && sInfoCard->pos == 0)
+        else if (JOY_NEW(DPAD_DOWN) && sInfoCard->pos == 0)
         {
             if (position == DOME_TOURNAMENT_TRAINERS_COUNT - 1)
                 position = 0;
@@ -4131,13 +4129,13 @@ static u8 Task_GetInfoCardInput(u8 taskId)
             input = TRAINERCARD_INPUT_DOWN;
         }
         // Scrolling left can only be done after scrolling right
-        else if (gMain.newKeys & DPAD_LEFT && sInfoCard->pos != 0)
+        else if (JOY_NEW(DPAD_LEFT) && sInfoCard->pos != 0)
         {
             sInfoCard->pos--;
             input = TRAINERCARD_INPUT_LEFT;
         }
         // Scrolling right from a trainer info card shows their match progression
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             // Can only scroll right from a trainer card until the round they were eliminated
             if (DOME_TRAINERS[tourneyId].isEliminated && sInfoCard->pos - 1 < DOME_TRAINERS[tourneyId].eliminatedAt)
@@ -4165,7 +4163,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     {
         // For match info cards, pos is 1 when on the match card, 0 when on the left trainer, and 1 when on the right trainer
         // Scrolling up/down from a match info card goes to the next/previous match
-        if (gMain.newKeys & DPAD_UP && sInfoCard->pos == 1)
+        if (JOY_NEW(DPAD_UP) && sInfoCard->pos == 1)
         {
             if (position == DOME_TOURNAMENT_TRAINERS_COUNT)
                 position = sLastMatchCardNum[roundId];
@@ -4173,7 +4171,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
                 position--;
             input = MATCHCARD_INPUT_UP;
         }
-        else if (gMain.newKeys & DPAD_DOWN && sInfoCard->pos == 1)
+        else if (JOY_NEW(DPAD_DOWN) && sInfoCard->pos == 1)
         {
             if (position == sLastMatchCardNum[roundId])
                 position = DOME_TOURNAMENT_TRAINERS_COUNT;
@@ -4182,12 +4180,12 @@ static u8 Task_GetInfoCardInput(u8 taskId)
             input = MATCHCARD_INPUT_DOWN;
         }
         // Scrolling left/right from a match info card shows the trainer info card of the competitors for that match
-        else if (gMain.newKeys & DPAD_LEFT && sInfoCard->pos != 0)
+        else if (JOY_NEW(DPAD_LEFT) && sInfoCard->pos != 0)
         {
             input = MATCHCARD_INPUT_LEFT;
             sInfoCard->pos--;
         }
-        else if (gMain.newKeys & DPAD_RIGHT && (sInfoCard->pos == 0 || sInfoCard->pos == 1))
+        else if (JOY_NEW(DPAD_RIGHT) && (sInfoCard->pos == 0 || sInfoCard->pos == 1))
         {
             input = MATCHCARD_INPUT_RIGHT;
             sInfoCard->pos++;
@@ -4442,7 +4440,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             allocatedArray[NUM_STATS] += allocatedArray[STAT_HP];
 
             // Add the EVs with the nature modifier for this mon and and track number of negative natures
-            for (j = 0; j < NUM_EV_STATS; j++)
+            for (j = 0; j < NUM_NATURE_STATS; j++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
                     nature = GetFrontierBrainMonNature(i);
@@ -4456,7 +4454,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 else if (gNatureStatTable[nature][j] < 0)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
-                    allocatedArray[j + NUM_STATS + NUM_EV_STATS + 2]++;
+                    allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
                 }
                 else
                 {
@@ -4492,7 +4490,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
             }
 
             allocatedArray[NUM_STATS] += allocatedArray[STAT_HP];
-            for (j = 0; j < NUM_EV_STATS; j++)
+            for (j = 0; j < NUM_NATURE_STATS; j++)
             {
                 nature = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].nature;
                 if (gNatureStatTable[nature][j] > 0)
@@ -4502,7 +4500,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 else if (gNatureStatTable[nature][j] < 0)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
-                    allocatedArray[j + NUM_STATS + NUM_EV_STATS + 2]++;
+                    allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
                 }
                 else
                 {
@@ -5034,12 +5032,12 @@ static u8 UpdateTourneyTreeCursor(u8 taskId)
     int tourneyTreeCursorSpriteId = gTasks[taskId].data[1];
     int roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
-    if (gMain.newKeys == B_BUTTON || (gMain.newKeys & A_BUTTON && tourneyTreeCursorSpriteId == TOURNEY_TREE_CLOSE_BUTTON))
+    if (gMain.newKeys == B_BUTTON || (JOY_NEW(A_BUTTON) && tourneyTreeCursorSpriteId == TOURNEY_TREE_CLOSE_BUTTON))
     {
         PlaySE(SE_SELECT);
         selection = TOURNEY_TREE_SELECTED_CLOSE;
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (tourneyTreeCursorSpriteId < DOME_TOURNAMENT_TRAINERS_COUNT)
         {
@@ -5283,7 +5281,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        sTilemapBuffer = AllocZeroed(0x800);
+        sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
         LZDecompressWram(gDomeTourneyLineMask_Tilemap, sTilemapBuffer);
         SetBgTilemapBuffer(1, sTilemapBuffer);
         CopyBgTilemapBufferToVram(1);
@@ -5543,7 +5541,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
             gTasks[taskId].tState = STATE_WAIT_FOR_INPUT;
         break;
     case STATE_WAIT_FOR_INPUT:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_CLOSE_TOURNEY_TREE;
@@ -5596,66 +5594,74 @@ static void VblankCb_TourneyInfoCard(void)
 
 static void HblankCb_TourneyTree(void)
 {
-    register u32 vCount asm("r0") = REG_VCOUNT;
-    register u32 vCount_ asm("r1") = vCount;
-    if (vCount > 41)
-    {
-        if (vCount < 50)
-        {
-            REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
-                      | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-            SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
-            return;
-        }
-        else if (vCount > 57)
-        {
-            if (vCount < 75)
-            {
-                REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
-                          | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
-                return;
-            }
-            else if (vCount < 82)
-            {
-                REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
-                          | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
-                return;
-            }
-            else if (vCount > 94)
-            {
-                if (vCount < 103)
-                {
-                    REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
-                              | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                    SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
-                    return;
-                }
-                else if (vCount < 119)
-                {
-                    REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
-                              | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                    SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
-                    return;
-                }
-                else if (vCount > 126)
-                {
-                    if (vCount_ < 135)
-                    {
-                        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
-                                  | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
-                        SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
-                        return;
-                    }
-                }
-            }
-        }
-    }
+    u16 vCount = REG_VCOUNT;
 
-    REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
-              | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
-    SET_WIN0H_WIN1H(0, 0);
+    if (vCount < 42)
+    {
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
+                | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
+        SET_WIN0H_WIN1H(0, 0);
+    }
+    else if (vCount < 50)
+    {
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
+                    | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+        SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
+    }
+    else if (vCount < 58)
+    {
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
+                | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
+        SET_WIN0H_WIN1H(0, 0);
+    }
+    else if (vCount < 75)
+    {
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
+                    | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+        SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
+    }
+    else if (vCount < 82)
+    {
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR
+                    | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+        SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
+    }
+    else if (vCount < 95)
+    {
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
+                | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
+        SET_WIN0H_WIN1H(0, 0);
+    }
+    else if (vCount < 103)
+    {
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
+                    | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+        SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
+    }
+    else if (vCount < 119)
+    {
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
+                    | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+        SET_WIN0H_WIN1H(WIN_RANGE(144, 152), WIN_RANGE(88, 96));
+    }
+    else if (vCount < 127)
+    {
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
+                | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
+        SET_WIN0H_WIN1H(0, 0);
+    }
+    else if (vCount < 135)
+    {
+        REG_WININ = WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR
+                    | WININ_WIN1_BG0 | WININ_WIN1_BG1 | WININ_WIN1_BG2 | WININ_WIN1_OBJ | WININ_WIN1_CLR;
+        SET_WIN0H_WIN1H(WIN_RANGE(152, 155), WIN_RANGE(85, 88));
+    }
+    else
+    {
+        REG_WININ = WININ_WIN0_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ
+                | WININ_WIN1_BG_ALL | WININ_WIN1_CLR | WININ_WIN1_OBJ;
+        SET_WIN0H_WIN1H(0, 0);
+    }
 }
 
 static void VblankCb_TourneyTree(void)

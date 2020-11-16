@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/flags.h"
 #include "random.h"
 #include "event_data.h"
 #include "battle_setup.h"

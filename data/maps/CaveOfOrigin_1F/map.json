@@ -2,7 +2,7 @@
   "id": "MAP_CAVE_OF_ORIGIN_1F",
   "name": "CaveOfOrigin_1F",
   "layout": "LAYOUT_CAVE_OF_ORIGIN_1F",
-  "music": "MUS_DAN03",
+  "music": "MUS_CAVE_OF_ORIGIN",
   "region_map_section": "MAPSEC_CAVE_OF_ORIGIN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

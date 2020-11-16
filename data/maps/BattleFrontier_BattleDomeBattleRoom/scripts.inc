@@ -1,3 +1,10 @@
+.set LOCALID_ANNOUNCER, 1
+.set LOCALID_AUDIENCE_TWIN, 2
+.set LOCALID_AUDIENCE_WALKING, 6
+.set LOCALID_REFEREE, 9
+.set LOCALID_PLAYER, 13
+.set LOCALID_OPPONENT, 15
+
 BattleFrontier_BattleDomeBattleRoom_MapScripts:: @ 824BC9C
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleDomeBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomeBattleRoom_OnFrame
@@ -43,24 +50,24 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom:: @ 824BD0A
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum
 	compare VAR_RESULT, DOME_ROUND1
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayer
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerHasEnteredDome, MSGBOX_DEFAULT
 	closemessage
-	showobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
+	showobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	compare VAR_TEMP_F, DOME_FINAL
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter
 	compare VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker
 BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter:: @ 824BD4E
-	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnter
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnter
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker:: @ 824BD5A
-	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnterForTucker
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnterForTucker
 BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer:: @ 824BD61
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitmovement 0
 	compare VAR_TEMP_F, DOME_FINAL
@@ -71,8 +78,8 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent:: @ 824BD82
 	dome_getopponentname
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTrainer, MSGBOX_DEFAULT
 	closemessage
-	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward
-	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_OpponentStepForward
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_OpponentStepForward
 	waitmovement 0
 	tower_getopponentintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -88,15 +95,15 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent:: @ 824BD82
 BattleFrontier_BattleDomeBattleRoom_EventScript_Draw:: @ 824BDF7
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_RefereeDecisionPleaseWait, MSGBOX_DEFAULT
 	closemessage
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
-	applymovement 9, BattleFrontier_BattleDomeBattleRoom_Movement_TieRefereeEnter
+	applymovement LOCALID_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter
 	waitmovement 0
-	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeFaceLeft
+	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerFaceLeft
 	waitmovement 0
 	delay 180
-	applymovement 9, BattleFrontier_BattleDomeBattleRoom_Movement_TieRefereeExit
+	applymovement LOCALID_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit
 	waitmovement 0
 	compare VAR_TEMP_2, DRAW_TUCKER  @ Tucker always wins on a draw
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent
@@ -104,7 +111,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_Draw:: @ 824BDF7
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent
 BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent:: @ 824BE4F
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	dome_getopponentname
 	compare VAR_TEMP_2, NO_DRAW
@@ -113,7 +120,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent:: @ 824BE4F
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw
 	compare VAR_TEMP_2, DRAW_TUCKER
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
 BattleFrontier_BattleDomeBattleRoom_EventScript_LostTourney:: @ 824BE8D
@@ -140,13 +147,13 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw:: @ 824BED9
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent:: @ 824BEE0
-	applymovement 1, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	compare VAR_TEMP_2, NO_DRAW
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWon
 	compare VAR_TEMP_2, DRAW_TRAINER
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
 	dome_getroundtext
@@ -161,7 +168,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent:: @ 824BEE0
 	waitstate
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney:: @ 824BF62
-	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerApproachAudience
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerApproachAudience
 	waitmovement 0
 	frontier_get FRONTIER_DATA_LVL_MODE
 	switch VAR_RESULT
@@ -172,8 +179,8 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney:: @ 824BF62
 BattleFrontier_BattleDomeBattleRoom_EventScript_WonLvOpenTourney:: @ 824BF96
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp, MSGBOX_DEFAULT
 BattleFrontier_BattleDomeBattleRoom_EventScript_CelebrateWin:: @ 824BF9E
-	special DoConfettiEffect
-	playse SE_W227B
+	special DoDomeConfetti
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
@@ -351,28 +358,28 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTuckerGold:: @ 824C209
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_LegendHasReturnedDomeAceTucker, MSGBOX_DEFAULT
 BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerEnter:: @ 824C211
 	closemessage
-	applymovement 2, BattleFrontier_BattleDomeBattleRoom_Movement_AudienceTwinJump
-	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeMoveForTuckerEntrance
-	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerEnterAndDance
-	playse SE_W227B
+	applymovement LOCALID_AUDIENCE_TWIN, BattleFrontier_BattleDomeBattleRoom_Movement_AudienceTwinJump
+	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerMoveForTuckerEntrance
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerEnterAndDance
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
 	waitmovement 0
 	message BattleFrontier_BattleDomeBattleRoom_Text_SpectatorTuckerChant
 	waitmessage
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
 	switch VAR_TEMP_E
@@ -397,10 +404,10 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver:: @ 824C2B9
 	compare VAR_RESULT, 0
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
 	closemessage
-	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer
 	waitmovement 0
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_SeeYourFrontierPass, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleDomeBattleRoom_Text_ReceivedTacticsSymbol
 	waitmessage
 	waitfanfare
@@ -427,10 +434,10 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold:: @ 824C373
 	compare VAR_RESULT, 2
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
 	closemessage
-	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer
 	waitmovement 0
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_NeverLostWhenPowerUnleashed, MSGBOX_DEFAULT
-	playfanfare MUS_ME_SYMBOLGET
+	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleDomeBattleRoom_Text_TacticsSymbolTookGoldenShine
 	waitmessage
 	waitfanfare
@@ -441,15 +448,15 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold:: @ 824C373
 BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle:: @ 824C400
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTucker, MSGBOX_DEFAULT
 	closemessage
-	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward2
-	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerStepForward
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward2
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerStepForward
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker:: @ 824C420
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_WinnerIsTucker, MSGBOX_DEFAULT
-	playse SE_W227B
+	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_LostTourney
@@ -477,7 +484,7 @@ BattleFrontier_BattleDomeBattleRoom_OnWarp: @ 824C481
 	.2byte 0
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects:: @ 824C48B
-	hideobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
+	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AddAudience
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx
 	setvar VAR_TEMP_1, 1
@@ -490,10 +497,10 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects:: @ 824C48B
 	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects
 	call BattleFrontier_EventScript_SetBrainObjectGfx
-	setobjectxyperm 15, 13, 9
-	removeobject 15
-	addobject 15
-	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisibleFacingUp
+	setobjectxyperm LOCALID_OPPONENT, 13, 9
+	removeobject LOCALID_OPPONENT
+	addobject LOCALID_OPPONENT
+	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisibleFacingUp
 BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects:: @ 824C4EF
 	end
 
@@ -746,7 +753,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_TuckerEnterAndDance: @ 824C78E
 	walk_left
 	step_end
 
-BattleFrontier_BattleDomeBattleRoom_Movement_RefereeMoveForTuckerEntrance: @ 824C7F9
+BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerMoveForTuckerEntrance: @ 824C7F9
 	delay_16
 	delay_16
 	walk_left
@@ -893,14 +900,14 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos:: @ 
 	copyvar VAR_TEMP_D, VAR_RESULT
 	compare VAR_TEMP_D, 0
 	goto_if_eq Common_EventScript_NopReturn
-	setobjectxyperm 6, 2, 0
-	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_AUDIENCE_WALKING, 2, 0
+	setobjectmovementtype LOCALID_AUDIENCE_WALKING, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat:: @ 824C938
 	compare VAR_TEMP_D, 0
 	goto_if_eq Common_EventScript_NopReturn
-	applymovement 6, BattleFrontier_BattleDomeBattleRoom_Movement_AudienceMemberWalkToSeat
+	applymovement LOCALID_AUDIENCE_WALKING, BattleFrontier_BattleDomeBattleRoom_Movement_AudienceMemberWalkToSeat
 	return
 
 BattleFrontier_BattleDomeBattleRoom_Movement_AudienceTwinJump: @ 824C94B
@@ -932,18 +939,18 @@ BattleFrontier_BattleDomeBattleRoom_Movement_AudienceMemberWalkToSeat: @ 824C95E
 	walk_in_place_fastest_down
 	step_end
 
-BattleFrontier_BattleDomeBattleRoom_Movement_TieRefereeEnter: @ 824C964
+BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter: @ 824C964
 	walk_right
 	walk_right
 	walk_right
 	walk_right
 	step_end
 
-BattleFrontier_BattleDomeBattleRoom_Movement_RefereeFaceLeft: @ 824C969
+BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerFaceLeft: @ 824C969
 	walk_in_place_fastest_left
 	step_end
 
-BattleFrontier_BattleDomeBattleRoom_Movement_TieRefereeExit: @ 824C96B
+BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit: @ 824C96B
 	walk_left
 	walk_left
 	walk_left

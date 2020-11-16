@@ -1,3 +1,5 @@
+.set LOCALID_DEVON_EMPLOYEE, 2
+
 RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_3F_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, RustboroCity_DevonCorp_3F_OnWarp
@@ -10,8 +12,8 @@ RustboroCity_DevonCorp_3F_OnTransition: @ 821243D
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_SetEmployeePos:: @ 8212449
-	setobjectxyperm 2, 3, 2
-	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 3, 2
+	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 RustboroCity_DevonCorp_3F_OnWarp: @ 8212455
@@ -30,27 +32,27 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident:: @ 821246E
 	lockall
 	msgbox RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere, MSGBOX_DEFAULT
 	closemessage
-	applymovement 2, RustboroCity_DevonCorp_3F_Movement_EmployeeWalkOffscreen
+	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_DevonCorp_3F_Movement_EmployeeWalkOffscreen
 	waitmovement 0
 	delay 80
-	applymovement 2, RustboroCity_DevonCorp_3F_Movement_EmployeeReturnToPlayer
+	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_DevonCorp_3F_Movement_EmployeeReturnToPlayer
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe, MSGBOX_DEFAULT
 	closemessage
-	playbgm MUS_TSURETEK, 0
-	applymovement 2, RustboroCity_DevonCorp_3F_Movement_LeadPlayerToPresident
+	playbgm MUS_FOLLOW_ME, 0
+	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_DevonCorp_3F_Movement_LeadPlayerToPresident
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerFollowToPresident
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_PleaseGoAhead, MSGBOX_DEFAULT
 	closemessage
 	fadedefaultbgm
-	applymovement 2, RustboroCity_DevonCorp_3F_Movement_EmployeeFaceDesk
+	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_DevonCorp_3F_Movement_EmployeeFaceDesk
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor, MSGBOX_DEFAULT
 	giveitem ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message RustboroCity_DevonCorp_3F_Text_ReceivedPokenav
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET
@@ -162,7 +164,7 @@ RustboroCity_DevonCorp_3F_EventScript_MrStone:: @ 821256C
 RustboroCity_DevonCorp_3F_EventScript_GiveExpShare:: @ 8212595
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
 	giveitem ITEM_EXP_SHARE
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_ExplainExpShare, MSGBOX_DEFAULT

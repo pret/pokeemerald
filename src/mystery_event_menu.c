@@ -152,7 +152,7 @@ static void CB2_MysteryEventMenu(void)
         if (!IsTextPrinterActive(0))
         {
             gMain.state++;
-            gLinkType = LINKTYPE_0x5501;
+            gLinkType = LINKTYPE_MYSTERY_EVENT;
             OpenLink();
         }
         break;
@@ -163,7 +163,7 @@ static void CB2_MysteryEventMenu(void)
             PrintMysteryMenuText(0, gText_PressAToLoadEvent, 1, 2, 1);
             gMain.state++;
         }
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -177,7 +177,7 @@ static void CB2_MysteryEventMenu(void)
     case 5:
         if (GetLinkPlayerCount_2() == 2)
         {
-            if (gMain.newKeys & A_BUTTON)
+            if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 CheckShouldAdvanceLinkState();
@@ -187,7 +187,7 @@ static void CB2_MysteryEventMenu(void)
                 CopyWindowToVram(1, 3);
                 gMain.state++;
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 CloseLink();
@@ -206,9 +206,9 @@ static void CB2_MysteryEventMenu(void)
         {
             if (gReceivedRemoteLinkPlayers != 0)
             {
-                if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == 3)
+                if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == EXCHANGE_DIFF_SELECTIONS)
                 {
-                    sub_800AC34();
+                    SetCloseLinkCallback();
                     GetEventLoadMessage(gStringVar4, 1);
                     PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
                     gMain.state = 13;
@@ -227,7 +227,7 @@ static void CB2_MysteryEventMenu(void)
                 }
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -249,7 +249,7 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 10:
-        sub_800AC34();
+        SetCloseLinkCallback();
         gMain.state++;
         break;
     case 11:
@@ -274,7 +274,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 14:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             gMain.state++;

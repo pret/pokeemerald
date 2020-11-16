@@ -2,7 +2,7 @@
   "id": "MAP_CONTEST_HALL_SMART",
   "name": "ContestHallSmart",
   "layout": "LAYOUT_CONTEST_HALL_SMART",
-  "music": "MUS_CONTEST0",
+  "music": "MUS_CONTEST",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

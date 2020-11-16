@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 MtChimney_CableCarStation_MapScripts:: @ 822ABFA
 	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_CableCarStation_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MtChimney_CableCarStation_OnFrame
@@ -9,8 +11,8 @@ MtChimney_CableCarStation_OnTransition: @ 822AC05
 	end
 
 MtChimney_CableCarStation_EventScript_MoveAttendantAside:: @ 822AC11
-	setobjectxyperm 1, 5, 4
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_ATTENDANT, 5, 4
+	setobjectmovementtype LOCALID_ATTENDANT, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 MtChimney_CableCarStation_OnFrame: @ 822AC1D
@@ -20,11 +22,11 @@ MtChimney_CableCarStation_OnFrame: @ 822AC1D
 MtChimney_CableCarStation_EventScript_ExitCableCar:: @ 822AC27
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, MtChimney_CableCarStation_Movement_ExitCableCar
-	applymovement 1, MtChimney_CableCarStation_Movement_FollowPlayerOutFromCableCar
+	applymovement LOCALID_ATTENDANT, MtChimney_CableCarStation_Movement_FollowPlayerOutFromCableCar
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
-	setobjectxyperm 1, 6, 7
-	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_ATTENDANT, 6, 7
+	setobjectmovementtype LOCALID_ATTENDANT, MOVEMENT_TYPE_FACE_DOWN
 	releaseall
 	end
 
@@ -41,10 +43,10 @@ MtChimney_CableCarStation_EventScript_Attendant:: @ 822AC4B
 MtChimney_CableCarStation_EventScript_RideCableCar:: @ 822AC6C
 	msgbox MtChimney_CableCarStation_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, MtChimney_CableCarStation_Movement_LeadPlayerToCableCar
+	applymovement LOCALID_ATTENDANT, MtChimney_CableCarStation_Movement_LeadPlayerToCableCar
 	applymovement OBJ_EVENT_ID_PLAYER, MtChimney_CableCarStation_Movement_BoardCableCar
 	waitmovement 0
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, TRUE  @ Going down
 	setvar VAR_CABLE_CAR_STATION_STATE, 2
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp

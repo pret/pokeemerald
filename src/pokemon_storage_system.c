@@ -41,7 +41,6 @@
 #include "constants/moves.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 struct WallpaperTable
 {
@@ -128,7 +127,7 @@ struct PokemonStorageSystemData
     u16 field_B0[528 / 2];
     u16 field_2C0;
     u16 field_2C2;
-    u8 field_2C4;
+    u8 field_2C4; // Unused
     u8 field_2C5;
     u8 showPartyMenuState;
     u8 unk_02C7;
@@ -136,21 +135,21 @@ struct PokemonStorageSystemData
     bool8 unk_02C9;
     s16 newCurrBoxId;
     u16 bg2_X;
-    s16 field_2CE;
+    s16 wallpaperScrollSpeed;
     u16 field_2D0;
     u8 field_2D2;
-    u8 field_2D3;
-    u8 field_2D4;
-    u16 field_2D6;
-    s16 field_2D8;
-    u16 field_2DA;
-    u16 field_2DC;
-    u16 field_2DE;
-    u16 field_2E0;
+    u8 field_2D3; // Written to, but never read.
+    u8 field_2D4; // Written to, but never read.
+    u16 field_2D6; // Written to, but never read.
+    s16 field_2D8; // Written to, but never read.
+    u16 field_2DA; // Written to, but never read.
+    u16 field_2DC; // Written to, but never read.
+    u16 field_2DE; // Written to, but never read.
+    u16 field_2E0; // Written to, but never read.
     u8 filler[22];
     u8 field_2F8[1024];
     u8 field_6F8;
-    u8 field_6F9;
+    u8 field_6F9; // Written to, but never read.
     u8 field_6FA;
     s8 field_6FB;
     u16 field_6FC[16];
@@ -160,14 +159,14 @@ struct PokemonStorageSystemData
     struct Sprite *field_728[2];
     struct Sprite *field_730[2];
     u32 field_738;
-    u8 field_73C[80];
-    u16 field_78C;
+    u8 field_73C[80]; // Unused
+    u16 field_78C; // Written to, but never read.
     s16 wallpaperSetId;
     s16 wallpaperId;
     u16 field_792[360];
     u8 wallpaperChangeState;
     u8 field_A63;
-    u8 field_A64;
+    u8 boxScrollDestination;
     s8 field_A65;
     u8 *wallpaperTiles;
     struct Sprite *movingMonSprite;
@@ -189,12 +188,12 @@ struct PokemonStorageSystemData
     u8 field_C68;
     s8 field_C69;
     u8 field_C6A;
-    u8 field_C6B;
+    u8 field_C6B; // Written to, but never read.
     struct WindowTemplate menuWindow;
     struct StorageMenu menuItems[7];
     u8 menuItemsCount;
     u8 menuWidth;
-    u8 field_CAE;
+    u8 field_CAE; // Written to, but never read.
     u16 field_CB0;
     struct Sprite *field_CB4;
     struct Sprite *field_CB8;
@@ -247,7 +246,7 @@ struct PokemonStorageSystemData
     u16 field_2176[8];
     u8 field_2186;
     u8 field_2187;
-    u8 field_2188;
+    u8 pokemonSummaryScreenMode;
     union
     {
         struct Pokemon *mon;
@@ -262,13 +261,13 @@ struct PokemonStorageSystemData
     struct UnkStorageStruct field_2204[3];
     u16 movingItem;
     u16 field_2236;
-    u8 field_2238;
+    u8 field_2238; // Unused
     u16 field_223A;
     u16 *field_223C;
     struct Sprite *cursorMonSprite;
     u16 field_2244[0x40];
     u8 field_22C4[0x800];
-    u8 field_2AC4[0x1800];
+    u8 field_2AC4[0x1800]; // Unused
     u8 field_42C4[0x800];
     u8 field_4AC4[0x1000];
     u8 field_5AC4[0x800];
@@ -658,7 +657,7 @@ static void SetBoxSpeciesAndPersonalities(u8 boxId);
 static void sub_80CB9D0(struct Sprite *sprite, u16 partyId);
 static void sub_80CC370(u8 taskId);
 static void sub_80CCB50(u8 boxId);
-static s8 sub_80CC644(u8 boxId);
+static s8 DetermineBoxScrollDirection(u8 boxId);
 static void sub_80CCA3C(const void *tilemap, s8 direction, u8 arg2);
 static s16 sub_80CD00C(const u8 *string);
 static bool8 MonPlaceChange_Shift(void);
@@ -1756,10 +1755,10 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         {
         case MENU_NOTHING_CHOSEN:
             task->data[3] = task->data[1];
-            if (gMain.newKeys & DPAD_UP && --task->data[3] < 0)
+            if (JOY_NEW(DPAD_UP) && --task->data[3] < 0)
                 task->data[3] = 4;
 
-            if (gMain.newKeys & DPAD_DOWN && ++task->data[3] > 4)
+            if (JOY_NEW(DPAD_DOWN) && ++task->data[3] > 4)
                 task->data[3] = 0;
             if (task->data[1] != task->data[3])
             {
@@ -1798,13 +1797,13 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         }
         break;
     case 3:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             if (--task->data[1] < 0)
                 task->data[1] = 4;
@@ -1814,7 +1813,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             if (++task->data[1] > 3)
                 task->data[1] = 0;
@@ -1976,22 +1975,22 @@ static void sub_80C78E4(void)
 
 static u8 HandleBoxChooseSelectionInput(void)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         return 201;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return gUnknown_02039D04->curBox;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
         sub_80C7BB4();
     }
-    else if (gMain.newKeys & DPAD_RIGHT)
+    else if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         sub_80C7B80();
@@ -2146,7 +2145,7 @@ static void VblankCb_PSS(void)
 static void Cb2_PSS(void)
 {
     RunTasks();
-    do_scheduled_bg_tilemap_copies_to_vram();
+    DoScheduledBgTilemapCopiesToVram();
     ScrollBackground();
     sub_80CAA14();
     AnimateSprites();
@@ -2214,7 +2213,7 @@ static void sub_80C7E98(void)
     gReservedSpriteTileCount = 0x280;
     sub_80D2A90(&sPSSData->unk_0020, sPSSData->unk_0028, 8);
     gKeyRepeatStartDelay = 20;
-    clear_scheduled_bg_copies_to_vram();
+    ClearScheduledBgCopiesToVram();
     sub_80D259C(3);
     sub_80D2644(0, 1, gUnknown_0857239C, 8, 4);
     sub_80D2770(0, 1, 0);
@@ -2360,11 +2359,11 @@ static void Cb_ShowPSS(u8 taskId)
     {
     case 0:
         PlaySE(SE_PC_LOGIN);
-        sub_80F9BCC(0x14, 0, 1);
+        ComputerScreenOpenEffect(20, 0, 1);
         sPSSData->state++;
         break;
     case 1:
-        if (!sub_80F9C1C())
+        if (!IsComputerScreenOpenEffectActive())
             SetPSSCallback(Cb_MainPSS);
         break;
     }
@@ -2393,7 +2392,7 @@ static void Cb_ReshowPSS(u8 taskId)
         }
         break;
     case 2:
-        if (!IsDma3ManagerBusyWithBgCopy() && gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (!IsDma3ManagerBusyWithBgCopy() && JOY_NEW(A_BUTTON | B_BUTTON))
         {
             ClearBottomWindow();
             sPSSData->state++;
@@ -2576,7 +2575,7 @@ static void Cb_MainPSS(u8 taskId)
             sPSSData->state = 7;
             break;
         case 24:
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             break;
         }
         break;
@@ -2615,24 +2614,24 @@ static void Cb_MainPSS(u8 taskId)
         }
         break;
     case 3:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             sPSSData->state = 0;
         }
         break;
     case 4:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_LAST_POKE);
         sPSSData->state = 6;
         break;
     case 5:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
         sPSSData->state = 6;
         break;
     case 6:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -2843,22 +2842,22 @@ static void Cb_OnSelectedMon(u8 taskId)
         }
         break;
     case 3:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_LAST_POKE);
         sPSSData->state = 6;
         break;
     case 5:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_CANT_RELEASE_EGG);
         sPSSData->state = 6;
         break;
     case 4:
-        PlaySE(SE_HAZURE);
+        PlaySE(SE_FAILURE);
         PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
         sPSSData->state = 6;
         break;
     case 6:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -2943,7 +2942,7 @@ static void Cb_WithdrawMon(u8 taskId)
         }
         break;
     case 1:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -3034,7 +3033,7 @@ static void Cb_DepositMenu(u8 taskId)
         }
         break;
     case 4:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
             sPSSData->state = 1;
@@ -3095,14 +3094,14 @@ static void Cb_ReleaseMon(u8 taskId)
         sPSSData->state++;
         break;
     case 4:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             PrintStorageActionText(PC_TEXT_BYE_BYE);
             sPSSData->state++;
         }
         break;
     case 5:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             if (sInPartyMenu)
@@ -3134,14 +3133,14 @@ static void Cb_ReleaseMon(u8 taskId)
         sPSSData->state++;
         break;
     case 9:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             PrintStorageActionText(PC_TEXT_SURPRISE);
             sPSSData->state++;
         }
         break;
     case 10:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             sub_80CC064();
@@ -3157,14 +3156,14 @@ static void Cb_ReleaseMon(u8 taskId)
         }
         break;
     case 12:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             PrintStorageActionText(PC_TEXT_WORRIED);
             sPSSData->state++;
         }
         break;
     case 13:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -3184,7 +3183,7 @@ static void Cb_ShowMarkMenu(u8 taskId)
         sPSSData->state++;
         break;
     case 1:
-        if (!sub_811FBA4())
+        if (!MonMarkingsMenuHandleInput())
         {
             sub_811FAF8();
             ClearBottomWindow();
@@ -3257,7 +3256,7 @@ static void Cb_GiveMovingItemToMon(u8 taskId)
         }
         break;
     case 3:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             sPSSData->state++;
@@ -3277,7 +3276,7 @@ static void Cb_ItemToBag(u8 taskId)
     case 0:
         if (!AddBagItem(sPSSData->cursorMonItem, 1))
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             PrintStorageActionText(PC_TEXT_BAG_FULL);
             sPSSData->state = 3;
         }
@@ -3296,7 +3295,7 @@ static void Cb_ItemToBag(u8 taskId)
         }
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             sub_80CE00C();
@@ -3309,7 +3308,7 @@ static void Cb_ItemToBag(u8 taskId)
             SetPSSCallback(Cb_MainPSS);
         break;
     case 3:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -3349,7 +3348,7 @@ static void Cb_SwitchSelectedItem(u8 taskId)
         }
         break;
     case 3:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             sPSSData->state++;
@@ -3388,7 +3387,7 @@ static void Cb_ShowItemInfo(u8 taskId)
             sPSSData->state++;
         break;
     case 4:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             PlaySE(SE_WIN_OPEN);
             sPSSData->state++;
@@ -3438,7 +3437,7 @@ static void Cb_CloseBoxWhileHoldingItem(u8 taskId)
         }
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             sPSSData->state = 5;
@@ -3494,7 +3493,7 @@ static void Cb_PrintCantStoreMail(u8 taskId)
             sPSSData->state++;
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             sPSSData->state++;
@@ -3742,7 +3741,7 @@ static void Cb_OnCloseBoxPressed(u8 taskId)
     case 0:
         if (IsMonBeingMoved())
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             PrintStorageActionText(PC_TEXT_HOLDING_POKE);
             sPSSData->state = 1;
         }
@@ -3759,7 +3758,7 @@ static void Cb_OnCloseBoxPressed(u8 taskId)
         }
         break;
     case 1:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -3781,11 +3780,11 @@ static void Cb_OnCloseBoxPressed(u8 taskId)
         }
         break;
     case 3:
-        sub_80F9BF4(0x14, 0, 1);
+        ComputerScreenCloseEffect(20, 0, 1);
         sPSSData->state++;
         break;
     case 4:
-        if (!sub_80F9C30())
+        if (!IsComputerScreenCloseEffectActive())
         {
             sub_80CABE0();
             gPlayerPartyCount = CalculatePlayerPartyCount();
@@ -3803,7 +3802,7 @@ static void Cb_OnBPressed(u8 taskId)
     case 0:
         if (IsMonBeingMoved())
         {
-            PlaySE(SE_HAZURE);
+            PlaySE(SE_FAILURE);
             PrintStorageActionText(PC_TEXT_HOLDING_POKE);
             sPSSData->state = 1;
         }
@@ -3820,7 +3819,7 @@ static void Cb_OnBPressed(u8 taskId)
         }
         break;
     case 1:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -3842,11 +3841,11 @@ static void Cb_OnBPressed(u8 taskId)
         }
         break;
     case 3:
-        sub_80F9BF4(0x14, 0, 0);
+        ComputerScreenCloseEffect(20, 0, 0);
         sPSSData->state++;
         break;
     case 4:
-        if (!sub_80F9C30())
+        if (!IsComputerScreenCloseEffectActive())
         {
             sub_80CABE0();
             gPlayerPartyCount = CalculatePlayerPartyCount();
@@ -3879,7 +3878,7 @@ static void Cb_ChangeScreen(u8 taskId)
         boxMons = sPSSData->field_218C.box;
         monIndex = sPSSData->field_2187;
         maxMonIndex = sPSSData->field_2186;
-        mode = sPSSData->field_2188;
+        mode = sPSSData->pokemonSummaryScreenMode;
         FreePSSData();
         if (mode == PSS_MODE_NORMAL && boxMons == &gUnknown_02039D14.box)
             ShowPokemonSummaryScreenSet40EF(mode, boxMons, monIndex, maxMonIndex, Cb2_ReturnToPSS);
@@ -3892,7 +3891,7 @@ static void Cb_ChangeScreen(u8 taskId)
         break;
     case SCREEN_CHANGE_ITEM_FROM_BAG:
         FreePSSData();
-        GoToBagMenu(11, 0, Cb2_ReturnToPSS);
+        GoToBagMenu(ITEMMENULOCATION_PCBOX, 0, Cb2_ReturnToPSS);
         break;
     }
 
@@ -3944,7 +3943,7 @@ static void LoadPSSMenuGfx(void)
     LZ77UnCompWram(gUnknown_085722A0, sPSSData->field_5AC4);
     SetBgTilemapBuffer(1, sPSSData->field_5AC4);
     ShowBg(1);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static bool8 InitPSSWindows(void)
@@ -4010,7 +4009,7 @@ static void RefreshCursorMonData(void)
     LoadCursorMonGfx(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality);
     PrintCursorMonInfo();
     sub_80CA65C();
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void BoxSetMosaic(void)
@@ -4154,7 +4153,7 @@ static void sub_80CA65C(void)
     }
 
     sub_80D2918(0);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void sub_80CA704(void)
@@ -4181,7 +4180,7 @@ static void sub_80CA704(void)
         sub_80D2918(2);
     }
 
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
     sPSSData->unk_02C7 = 0;
 }
 
@@ -4202,7 +4201,7 @@ static bool8 ShowPartyMenu(void)
     sPSSData->field_2C2++;
     sub_80D27F4(1, 3, 1);
     sub_80D2918(1);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
     sub_80CBAF0(8);
     if (++sPSSData->field_2C5 == 20)
     {
@@ -4236,7 +4235,7 @@ static bool8 HidePartyMenu(void)
         sub_80CBAF0(-8);
         if (++sPSSData->field_2C5 != 20)
         {
-            schedule_bg_copy_tilemap_to_vram(1);
+            ScheduleBgCopyTilemapToVram(1);
             return TRUE;
         }
         else
@@ -4246,7 +4245,7 @@ static bool8 HidePartyMenu(void)
             CompactPartySlots();
             sub_80D27AC(2, 0, 0, 9, 2);
             sub_80D2918(2);
-            schedule_bg_copy_tilemap_to_vram(1);
+            ScheduleBgCopyTilemapToVram(1);
             return FALSE;
         }
     }
@@ -4262,7 +4261,7 @@ static void sub_80CA984(bool8 arg0)
         sub_80D27AC(2, 0, 2, 9, 2);
 
     sub_80D2918(2);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void sub_80CA9C0(void)
@@ -4331,7 +4330,7 @@ static void sub_80CAB20(void)
     sub_80CAA74();
     sub_80D27AC(1, 0, 0, 12, 22);
     sub_80D2918(1);
-    schedule_bg_copy_tilemap_to_vram(1);
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void SetUpDoShowPartyMenu(void)
@@ -4422,7 +4421,7 @@ static void PrintStorageActionText(u8 id)
     DrawTextBorderOuter(1, 2, 14);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void ShowYesNoWindow(s8 cursorPos)
@@ -4434,7 +4433,7 @@ static void ShowYesNoWindow(s8 cursorPos)
 static void ClearBottomWindow(void)
 {
     ClearStdWindowAndFrameToTransparent(1, FALSE);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void AddWallpaperSetsMenu(void)
@@ -5276,9 +5275,9 @@ static void sub_80CC370(u8 taskId)
 
 static void SetUpScrollToBox(u8 boxId)
 {
-    s8 direction = sub_80CC644(boxId);
+    s8 direction = DetermineBoxScrollDirection(boxId);
 
-    sPSSData->field_2CE = (direction > 0) ? 6 : -6;
+    sPSSData->wallpaperScrollSpeed = (direction > 0) ? 6 : -6;
     sPSSData->field_2D3 = (direction > 0) ? 1 : 2;
     sPSSData->field_2D0 = 32;
     sPSSData->field_2D4 = boxId;
@@ -5288,7 +5287,7 @@ static void SetUpScrollToBox(u8 boxId)
     sPSSData->field_2DC = (direction <= 0) ? 5 : 0;
     sPSSData->field_2DE = 0;
     sPSSData->field_2E0 = 2;
-    sPSSData->field_A64 = boxId;
+    sPSSData->boxScrollDestination = boxId;
     sPSSData->field_A65 = direction;
     sPSSData->field_A63 = 0;
 }
@@ -5300,21 +5299,21 @@ static bool8 ScrollToBox(void)
     switch (sPSSData->field_A63)
     {
     case 0:
-        LoadWallpaperGfx(sPSSData->field_A64, sPSSData->field_A65);
+        LoadWallpaperGfx(sPSSData->boxScrollDestination, sPSSData->field_A65);
         sPSSData->field_A63++;
     case 1:
         if (!WaitForWallpaperGfxLoad())
             return TRUE;
 
-        sub_80CB4CC(sPSSData->field_A64, sPSSData->field_A65);
-        sub_80CCCFC(sPSSData->field_A64, sPSSData->field_A65);
+        sub_80CB4CC(sPSSData->boxScrollDestination, sPSSData->field_A65);
+        sub_80CCCFC(sPSSData->boxScrollDestination, sPSSData->field_A65);
         sub_80CD0B8(sPSSData->field_A65);
         break;
     case 2:
         var = sub_80CB584();
         if (sPSSData->field_2D0 != 0)
         {
-            sPSSData->bg2_X += sPSSData->field_2CE;
+            sPSSData->bg2_X += sPSSData->wallpaperScrollSpeed;
             if (--sPSSData->field_2D0 != 0)
                 return TRUE;
             sub_80CCEE0();
@@ -5327,7 +5326,7 @@ static bool8 ScrollToBox(void)
     return TRUE;
 }
 
-static s8 sub_80CC644(u8 boxId)
+static s8 DetermineBoxScrollDirection(u8 boxId)
 {
     u8 i;
     u8 currentBox = StorageGetCurrentBox();
@@ -5462,7 +5461,7 @@ static void sub_80CCA3C(const void *tilemap, s8 direction, u8 arg2)
 
     if (direction == 0)
         return;
-    else if (direction > 0)
+    if (direction > 0)
         x *= 1, x += 0x14; // x * 1 is needed to match, but can be safely removed as it makes no functional difference
     else
         x -= 4;
@@ -5735,7 +5734,7 @@ static void sub_80CD210(struct Sprite *sprite)
         sprite->data[0] = 3;
         break;
     case 3:
-        sprite->pos1.x -= sPSSData->field_2CE;
+        sprite->pos1.x -= sPSSData->wallpaperScrollSpeed;
         if (sprite->pos1.x < 73 || sprite->pos1.x > 247)
             sprite->invisible = TRUE;
         if (--sprite->data[1] == 0)
@@ -5746,7 +5745,7 @@ static void sub_80CD210(struct Sprite *sprite)
         }
         break;
     case 4:
-        sprite->pos1.x -= sPSSData->field_2CE;
+        sprite->pos1.x -= sPSSData->wallpaperScrollSpeed;
         break;
     }
 }
@@ -6632,21 +6631,21 @@ static void sub_80CE7E8(void)
         sPSSData->field_218C.mon = &gUnknown_02039D14;
         sPSSData->field_2187 = 0;
         sPSSData->field_2186 = 0;
-        sPSSData->field_2188 = 0;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_NORMAL;
     }
     else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
     {
         sPSSData->field_218C.mon = gPlayerParty;
         sPSSData->field_2187 = sBoxCursorPosition;
         sPSSData->field_2186 = CountPartyMons() - 1;
-        sPSSData->field_2188 = 0;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_NORMAL;
     }
     else
     {
         sPSSData->field_218C.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
         sPSSData->field_2187 = sBoxCursorPosition;
         sPSSData->field_2186 = IN_BOX_COUNT - 1;
-        sPSSData->field_2188 = 2;
+        sPSSData->pokemonSummaryScreenMode = PSS_MODE_BOX;
     }
 }
 
@@ -6869,36 +6868,36 @@ static void SetCursorMonData(void *pokemon, u8 mode)
 
         txtPtr = sPSSData->cursorMonGenderLvlText;
         *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
-        *(txtPtr)++ = 4;
+        *(txtPtr)++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         switch (gender)
         {
         case MON_MALE:
-            *(txtPtr)++ = 4;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 5;
+            *(txtPtr)++ = TEXT_COLOR_RED;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
             *(txtPtr)++ = CHAR_MALE;
             break;
         case MON_FEMALE:
-            *(txtPtr)++ = 6;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 7;
+            *(txtPtr)++ = TEXT_COLOR_GREEN;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;
             *(txtPtr)++ = CHAR_FEMALE;
             break;
         default:
-            *(txtPtr)++ = 2;
-            *(txtPtr)++ = 1;
-            *(txtPtr)++ = 3;
-            *(txtPtr)++ = 0x77;
+            *(txtPtr)++ = TEXT_COLOR_DARK_GREY;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREY;
+            *(txtPtr)++ = CHAR_UNK_SPACER;
             break;
         }
 
         *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
-        *(txtPtr++) = 4;
-        *(txtPtr++) = 2;
-        *(txtPtr++) = 1;
-        *(txtPtr++) = 3;
-        *(txtPtr++) = 0;
-        *(txtPtr++) = CHAR_SPECIAL_F9;
+        *(txtPtr++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *(txtPtr++) = TEXT_COLOR_DARK_GREY;
+        *(txtPtr++) = TEXT_COLOR_WHITE;
+        *(txtPtr++) = TEXT_COLOR_LIGHT_GREY;
+        *(txtPtr++) = CHAR_SPACE;
+        *(txtPtr++) = CHAR_EXTRA_SYMBOL;
         *(txtPtr++) = CHAR_LV_2;
 
         txtPtr = ConvertIntToDecimalStringN(txtPtr, sPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -6926,22 +6925,21 @@ static u8 HandleInput_InBox(void)
     }
 }
 
-// This group of four functions handling input simply CANNOT be matched.
-// GF must have written them in a really weird way, a way not a sane person could dream to reproduce.
-#ifdef NONMATCHING
 static u8 InBoxInput_Normal(void)
 {
     u8 retVal;
-    s8 cursorArea = sBoxCursorArea;
-    s8 cursorPosition = sBoxCursorPosition;
-
-    sPSSData->field_CD2 = 0;
-    sPSSData->field_CD3 = 0;
-    sPSSData->field_CD7 = 0;
+    s8 cursorArea;
+    s8 cursorPosition;
 
     do
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        cursorArea = sBoxCursorArea;
+        cursorPosition = sBoxCursorPosition;
+        sPSSData->field_CD2 = 0;
+        sPSSData->field_CD3 = 0;
+        sPSSData->field_CD7 = 0;
+
+        if (JOY_REPEAT(DPAD_UP))
         {
             retVal = TRUE;
             if (sBoxCursorPosition >= IN_BOX_ROWS)
@@ -6955,7 +6953,7 @@ static u8 InBoxInput_Normal(void)
             }
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             retVal = TRUE;
             cursorPosition += IN_BOX_ROWS;
@@ -6969,7 +6967,7 @@ static u8 InBoxInput_Normal(void)
             }
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        else if (JOY_REPEAT(DPAD_LEFT))
         {
             retVal = TRUE;
             if (sBoxCursorPosition % IN_BOX_ROWS != 0)
@@ -6983,7 +6981,7 @@ static u8 InBoxInput_Normal(void)
             }
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             retVal = TRUE;
             if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
@@ -6997,7 +6995,7 @@ static u8 InBoxInput_Normal(void)
             }
             break;
         }
-        else if (gMain.newKeys & START_BUTTON)
+        else if (JOY_NEW(START_BUTTON))
         {
             retVal = TRUE;
             cursorArea = CURSOR_AREA_BOX;
@@ -7005,7 +7003,7 @@ static u8 InBoxInput_Normal(void)
             break;
         }
 
-        if ((gMain.newKeys & A_BUTTON) && sub_80CFA5C())
+        if ((JOY_NEW(A_BUTTON)) && sub_80CFA5C())
         {
             if (!sCanOnlyMove)
                 return 8;
@@ -7039,18 +7037,18 @@ static u8 InBoxInput_Normal(void)
             }
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             return 19;
 
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
-            if (gMain.heldKeys & L_BUTTON)
+            if (JOY_HELD(L_BUTTON))
                 return 10;
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 return 9;
         }
 
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_80CFDC4();
             return 0;
@@ -7065,316 +7063,12 @@ static u8 InBoxInput_Normal(void)
 
     return retVal;
 }
-#else
-NAKED
-static u8 InBoxInput_Normal(void)
-{
-    asm_unified("\n\
-                    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    ldr r0, =sBoxCursorArea\n\
-    ldrb r0, [r0]\n\
-    mov r8, r0\n\
-    ldr r2, =sBoxCursorPosition\n\
-    ldrb r4, [r2]\n\
-    ldr r5, =sPSSData\n\
-    ldr r0, [r5]\n\
-    ldr r1, =0x00000cd2\n\
-    mov r10, r1\n\
-    add r0, r10\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    ldr r0, [r5]\n\
-    ldr r7, =0x00000cd3\n\
-    adds r0, r7\n\
-    strb r1, [r0]\n\
-    ldr r0, [r5]\n\
-    ldr r3, =0x00000cd7\n\
-    mov r9, r3\n\
-    add r0, r9\n\
-    strb r1, [r0]\n\
-    ldr r6, =gMain\n\
-    ldrh r1, [r6, 0x30]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    adds r3, r2, 0\n\
-    cmp r0, 0\n\
-    beq _080CF14C\n\
-    b _080CF33C\n\
-_080CF14C:\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF1A8\n\
-    movs r6, 0x1\n\
-    lsls r0, r4, 24\n\
-    movs r1, 0xC0\n\
-    lsls r1, 19\n\
-    adds r0, r1\n\
-    lsrs r4, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x1D\n\
-    bgt _080CF168\n\
-    b _080CF358\n\
-_080CF168:\n\
-    movs r2, 0x3\n\
-    mov r8, r2\n\
-    subs r0, 0x1E\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    movs r1, 0x3\n\
-    bl __divsi3\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    ldr r0, [r5]\n\
-    add r0, r10\n\
-    strb r6, [r0]\n\
-    ldr r0, [r5]\n\
-    add r0, r9\n\
-    strb r6, [r0]\n\
-    b _080CF358\n\
-    .pool\n\
-_080CF1A8:\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF1DE\n\
-    movs r6, 0x1\n\
-    movs r0, 0\n\
-    ldrsb r0, [r3, r0]\n\
-    movs r1, 0x6\n\
-    bl __modsi3\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080CF1CA\n\
-    lsls r0, r4, 24\n\
-    movs r3, 0xFF\n\
-    lsls r3, 24\n\
-    b _080CF34C\n\
-_080CF1CA:\n\
-    ldr r0, [r5]\n\
-    adds r0, r7\n\
-    movs r1, 0xFF\n\
-    strb r1, [r0]\n\
-    lsls r0, r4, 24\n\
-    movs r1, 0xA0\n\
-    lsls r1, 19\n\
-    adds r0, r1\n\
-    lsrs r4, r0, 24\n\
-    b _080CF358\n\
-_080CF1DE:\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF212\n\
-    movs r6, 0x1\n\
-    movs r0, 0\n\
-    ldrsb r0, [r3, r0]\n\
-    adds r0, 0x1\n\
-    movs r1, 0x6\n\
-    bl __modsi3\n\
-    cmp r0, 0\n\
-    beq _080CF204\n\
-    lsls r0, r4, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r2\n\
-    lsrs r4, r0, 24\n\
-    b _080CF358\n\
-_080CF204:\n\
-    ldr r0, [r5]\n\
-    adds r0, r7\n\
-    strb r6, [r0]\n\
-    lsls r0, r4, 24\n\
-    movs r3, 0xFB\n\
-    lsls r3, 24\n\
-    b _080CF34C\n\
-_080CF212:\n\
-    ldrh r1, [r6, 0x2E]\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF220\n\
-    movs r6, 0x1\n\
-    b _080CF352\n\
-_080CF220:\n\
-    movs r4, 0x1\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF2E4\n\
-    bl sub_80CFA5C\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080CF2E4\n\
-    ldr r0, =sCanOnlyMove\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _080CF244\n\
-    movs r0, 0x8\n\
-    b _080CF366\n\
-    .pool\n\
-_080CF244:\n\
-    ldr r1, [r5]\n\
-    ldrb r0, [r1, 0x1]\n\
-    cmp r0, 0x2\n\
-    bne _080CF254\n\
-    ldr r0, =sIsMonBeingMoved\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1\n\
-    bne _080CF2D4\n\
-_080CF254:\n\
-    movs r0, 0\n\
-    bl sub_80CFF98\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0xE\n\
-    bhi _080CF2E4\n\
-    lsls r0, 2\n\
-    ldr r1, =_080CF278\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_080CF278:\n\
-    .4byte _080CF2B4\n\
-    .4byte _080CF2B8\n\
-    .4byte _080CF2BC\n\
-    .4byte _080CF2C0\n\
-    .4byte _080CF2C4\n\
-    .4byte _080CF2E4\n\
-    .4byte _080CF2E4\n\
-    .4byte _080CF2E4\n\
-    .4byte _080CF2E4\n\
-    .4byte _080CF2E4\n\
-    .4byte _080CF2E4\n\
-    .4byte _080CF2C8\n\
-    .4byte _080CF2CC\n\
-    .4byte _080CF2E4\n\
-    .4byte _080CF2D0\n\
-_080CF2B4:\n\
-    movs r0, 0xB\n\
-    b _080CF366\n\
-_080CF2B8:\n\
-    movs r0, 0xC\n\
-    b _080CF366\n\
-_080CF2BC:\n\
-    movs r0, 0xD\n\
-    b _080CF366\n\
-_080CF2C0:\n\
-    movs r0, 0xE\n\
-    b _080CF366\n\
-_080CF2C4:\n\
-    movs r0, 0xF\n\
-    b _080CF366\n\
-_080CF2C8:\n\
-    movs r0, 0x10\n\
-    b _080CF366\n\
-_080CF2CC:\n\
-    movs r0, 0x11\n\
-    b _080CF366\n\
-_080CF2D0:\n\
-    movs r0, 0x12\n\
-    b _080CF366\n\
-_080CF2D4:\n\
-    ldr r2, =0x000021ff\n\
-    adds r0, r1, r2\n\
-    strb r4, [r0]\n\
-    movs r0, 0x14\n\
-    b _080CF366\n\
-    .pool\n\
-_080CF2E4:\n\
-    ldr r2, =gMain\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF2F8\n\
-    movs r0, 0x13\n\
-    b _080CF366\n\
-    .pool\n\
-_080CF2F8:\n\
-    ldr r0, =gSaveBlock2Ptr\n\
-    ldr r0, [r0]\n\
-    ldrb r0, [r0, 0x13]\n\
-    cmp r0, 0x1\n\
-    bne _080CF326\n\
-    ldrh r1, [r2, 0x2C]\n\
-    movs r0, 0x80\n\
-    lsls r0, 2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF318\n\
-    movs r0, 0xA\n\
-    b _080CF366\n\
-    .pool\n\
-_080CF318:\n\
-    movs r0, 0x80\n\
-    lsls r0, 1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF326\n\
-    movs r0, 0x9\n\
-    b _080CF366\n\
-_080CF326:\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF338\n\
-    bl sub_80CFDC4\n\
-    movs r0, 0\n\
-    b _080CF366\n\
-_080CF338:\n\
-    movs r6, 0\n\
-    b _080CF364\n\
-_080CF33C:\n\
-    movs r6, 0x1\n\
-    movs r0, 0\n\
-    ldrsb r0, [r2, r0]\n\
-    cmp r0, 0x5\n\
-    ble _080CF352\n\
-    lsls r0, r4, 24\n\
-    movs r3, 0xFA\n\
-    lsls r3, 24\n\
-_080CF34C:\n\
-    adds r0, r3\n\
-    lsrs r4, r0, 24\n\
-    b _080CF358\n\
-_080CF352:\n\
-    movs r0, 0x2\n\
-    mov r8, r0\n\
-    movs r4, 0\n\
-_080CF358:\n\
-    cmp r6, 0\n\
-    beq _080CF364\n\
-    mov r0, r8\n\
-    adds r1, r4, 0\n\
-    bl sub_80CD894\n\
-_080CF364:\n\
-    adds r0, r6, 0\n\
-_080CF366:\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-                ");
-}
-#endif
 
 static u8 InBoxInput_GrabbingMultiple(void)
 {
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPEAT(DPAD_UP))
         {
             if (sBoxCursorPosition / IN_BOX_ROWS != 0)
             {
@@ -7386,7 +7080,7 @@ static u8 InBoxInput_GrabbingMultiple(void)
                 return 24;
             }
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             if (sBoxCursorPosition + IN_BOX_ROWS < IN_BOX_COUNT)
             {
@@ -7398,7 +7092,7 @@ static u8 InBoxInput_GrabbingMultiple(void)
                 return 24;
             }
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        else if (JOY_REPEAT(DPAD_LEFT))
         {
             if (sBoxCursorPosition % IN_BOX_ROWS != 0)
             {
@@ -7410,7 +7104,7 @@ static u8 InBoxInput_GrabbingMultiple(void)
                 return 24;
             }
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
             {
@@ -7447,7 +7141,7 @@ static u8 InBoxInput_GrabbingMultiple(void)
 
 static u8 InBoxInput_MovingMultiple(void)
 {
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPEAT(DPAD_UP))
     {
         if (sub_80D0580(0))
         {
@@ -7459,7 +7153,7 @@ static u8 InBoxInput_MovingMultiple(void)
             return 24;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_DOWN))
     {
         if (sub_80D0580(1))
         {
@@ -7471,7 +7165,7 @@ static u8 InBoxInput_MovingMultiple(void)
             return 24;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    else if (JOY_REPEAT(DPAD_LEFT))
     {
         if (sub_80D0580(2))
         {
@@ -7483,7 +7177,7 @@ static u8 InBoxInput_MovingMultiple(void)
             return 10;
         }
     }
-    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    else if (JOY_REPEAT(DPAD_RIGHT))
     {
         if (sub_80D0580(3))
         {
@@ -7495,7 +7189,7 @@ static u8 InBoxInput_MovingMultiple(void)
             return 9;
         }
     }
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
     {
         if (sub_80D0BC0())
         {
@@ -7508,7 +7202,7 @@ static u8 InBoxInput_MovingMultiple(void)
             return 24;
         }
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return 24;
     }
@@ -7516,9 +7210,9 @@ static u8 InBoxInput_MovingMultiple(void)
     {
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
-            if (gMain.heldKeys & L_BUTTON)
+            if (JOY_HELD(L_BUTTON))
                 return 10;
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 return 9;
         }
 
@@ -7526,23 +7220,24 @@ static u8 InBoxInput_MovingMultiple(void)
     }
 }
 
-#ifdef NONMATCHING
 static u8 HandleInput_InParty(void)
 {
     u8 retVal;
     bool8 gotoBox;
-    s8 cursorArea = sBoxCursorArea;
-    s8 cursorPosition = sBoxCursorPosition;
-
-    sPSSData->field_CD3 = 0;
-    sPSSData->field_CD2 = 0;
-    sPSSData->field_CD7 = 0;
-    gotoBox = FALSE;
-    retVal = 0;
+    s8 cursorArea;
+    s8 cursorPosition;
 
     do
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        cursorArea = sBoxCursorArea;
+        cursorPosition = sBoxCursorPosition;
+        sPSSData->field_CD3 = 0;
+        sPSSData->field_CD2 = 0;
+        sPSSData->field_CD7 = 0;
+        gotoBox = FALSE;
+        retVal = 0;
+
+        if (JOY_REPEAT(DPAD_UP))
         {
             if (--cursorPosition < 0)
                 cursorPosition = PARTY_SIZE;
@@ -7550,7 +7245,7 @@ static u8 HandleInput_InParty(void)
                 retVal = 1;
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             if (++cursorPosition > PARTY_SIZE)
                 cursorPosition = 0;
@@ -7558,14 +7253,14 @@ static u8 HandleInput_InParty(void)
                 retVal = 1;
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_LEFT && sBoxCursorPosition != 0)
+        else if (JOY_REPEAT(DPAD_LEFT) && sBoxCursorPosition != 0)
         {
             retVal = 1;
             sPSSData->field_CD6 = sBoxCursorPosition;
             cursorPosition = 0;
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             if (sBoxCursorPosition == 0)
             {
@@ -7581,7 +7276,7 @@ static u8 HandleInput_InParty(void)
             break;
         }
 
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             if (sBoxCursorPosition == PARTY_SIZE)
             {
@@ -7617,7 +7312,7 @@ static u8 HandleInput_InParty(void)
             }
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             if (sPSSData->boxOption == BOX_OPTION_DEPOSIT)
                 return 19;
@@ -7631,7 +7326,7 @@ static u8 HandleInput_InParty(void)
             cursorArea = CURSOR_AREA_IN_BOX;
             cursorPosition = 0;
         }
-        else if (gMain.newKeys & SELECT_BUTTON)
+        else if (JOY_NEW(SELECT_BUTTON))
         {
             sub_80CFDC4();
             return 0;
@@ -7647,291 +7342,20 @@ static u8 HandleInput_InParty(void)
 
     return retVal;
 }
-#else
-NAKED
-static u8 HandleInput_InParty(void)
-{
-    asm_unified("\n\
-                    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    ldr r0, =sBoxCursorArea\n\
-    ldrb r0, [r0]\n\
-    mov r9, r0\n\
-    ldr r6, =sBoxCursorPosition\n\
-    ldrb r4, [r6]\n\
-    ldr r2, =sPSSData\n\
-    ldr r0, [r2]\n\
-    ldr r1, =0x00000cd3\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    ldr r0, [r2]\n\
-    ldr r3, =0x00000cd2\n\
-    adds r0, r3\n\
-    strb r1, [r0]\n\
-    ldr r0, [r2]\n\
-    adds r3, 0x5\n\
-    adds r0, r3\n\
-    strb r1, [r0]\n\
-    mov r8, r1\n\
-    movs r7, 0\n\
-    ldr r1, =gMain\n\
-    ldrh r3, [r1, 0x30]\n\
-    movs r0, 0x40\n\
-    ands r0, r3\n\
-    adds r5, r6, 0\n\
-    mov r12, r1\n\
-    cmp r0, 0\n\
-    beq _080CF608\n\
-    b _080CF7A8\n\
-_080CF608:\n\
-    movs r0, 0x80\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _080CF64C\n\
-    lsls r0, r4, 24\n\
-    movs r1, 0x80\n\
-    lsls r1, 17\n\
-    adds r0, r1\n\
-    lsrs r4, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x6\n\
-    ble _080CF622\n\
-    movs r4, 0\n\
-_080CF622:\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    movs r1, 0\n\
-    ldrsb r1, [r5, r1]\n\
-    cmp r0, r1\n\
-    bne _080CF630\n\
-    b _080CF7C6\n\
-_080CF630:\n\
-    movs r7, 0x1\n\
-    b _080CF7CA\n\
-    .pool\n\
-_080CF64C:\n\
-    movs r0, 0x20\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _080CF670\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0\n\
-    ldrsb r0, [r5, r0]\n\
-    cmp r0, 0\n\
-    beq _080CF670\n\
-    movs r7, 0x1\n\
-    ldr r0, [r2]\n\
-    ldr r2, =0x00000cd6\n\
-    adds r0, r2\n\
-    strb r1, [r0]\n\
-    movs r4, 0\n\
-    b _080CF7C6\n\
-    .pool\n\
-_080CF670:\n\
-    mov r3, r12\n\
-    ldrh r1, [r3, 0x30]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF69E\n\
-    movs r0, 0\n\
-    ldrsb r0, [r5, r0]\n\
-    cmp r0, 0\n\
-    bne _080CF694\n\
-    movs r7, 0x1\n\
-    ldr r0, [r2]\n\
-    ldr r1, =0x00000cd6\n\
-    adds r0, r1\n\
-    ldrb r4, [r0]\n\
-    b _080CF7C6\n\
-    .pool\n\
-_080CF694:\n\
-    movs r7, 0x6\n\
-    movs r2, 0\n\
-    mov r9, r2\n\
-    movs r4, 0\n\
-    b _080CF7C6\n\
-_080CF69E:\n\
-    mov r3, r12\n\
-    ldrh r1, [r3, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF75C\n\
-    movs r0, 0\n\
-    ldrsb r0, [r5, r0]\n\
-    cmp r0, 0x6\n\
-    bne _080CF6C4\n\
-    ldr r0, [r2]\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0x1\n\
-    bne _080CF6BE\n\
-    movs r0, 0x4\n\
-    b _080CF7D8\n\
-_080CF6BE:\n\
-    movs r0, 0x1\n\
-    mov r8, r0\n\
-    b _080CF75C\n\
-_080CF6C4:\n\
-    bl sub_80CFA5C\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080CF75C\n\
-    ldr r0, =sCanOnlyMove\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _080CF6E0\n\
-    movs r0, 0x8\n\
-    b _080CF7D8\n\
-    .pool\n\
-_080CF6E0:\n\
-    movs r0, 0\n\
-    bl sub_80CFF98\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0xE\n\
-    bhi _080CF75C\n\
-    lsls r0, 2\n\
-    ldr r1, =_080CF700\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_080CF700:\n\
-    .4byte _080CF73C\n\
-    .4byte _080CF740\n\
-    .4byte _080CF744\n\
-    .4byte _080CF748\n\
-    .4byte _080CF74C\n\
-    .4byte _080CF75C\n\
-    .4byte _080CF75C\n\
-    .4byte _080CF75C\n\
-    .4byte _080CF75C\n\
-    .4byte _080CF75C\n\
-    .4byte _080CF75C\n\
-    .4byte _080CF750\n\
-    .4byte _080CF754\n\
-    .4byte _080CF75C\n\
-    .4byte _080CF758\n\
-_080CF73C:\n\
-    movs r0, 0xB\n\
-    b _080CF7D8\n\
-_080CF740:\n\
-    movs r0, 0xC\n\
-    b _080CF7D8\n\
-_080CF744:\n\
-    movs r0, 0xD\n\
-    b _080CF7D8\n\
-_080CF748:\n\
-    movs r0, 0xE\n\
-    b _080CF7D8\n\
-_080CF74C:\n\
-    movs r0, 0xF\n\
-    b _080CF7D8\n\
-_080CF750:\n\
-    movs r0, 0x10\n\
-    b _080CF7D8\n\
-_080CF754:\n\
-    movs r0, 0x11\n\
-    b _080CF7D8\n\
-_080CF758:\n\
-    movs r0, 0x12\n\
-    b _080CF7D8\n\
-_080CF75C:\n\
-    ldr r2, =gMain\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    mov r12, r2\n\
-    cmp r0, 0\n\
-    beq _080CF784\n\
-    ldr r0, =sPSSData\n\
-    ldr r0, [r0]\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0x1\n\
-    bne _080CF780\n\
-    movs r0, 0x13\n\
-    b _080CF7D8\n\
-    .pool\n\
-_080CF780:\n\
-    movs r1, 0x1\n\
-    mov r8, r1\n\
-_080CF784:\n\
-    mov r2, r8\n\
-    cmp r2, 0\n\
-    beq _080CF794\n\
-    movs r7, 0x6\n\
-    movs r3, 0\n\
-    mov r9, r3\n\
-    movs r4, 0\n\
-    b _080CF7C6\n\
-_080CF794:\n\
-    mov r0, r12\n\
-    ldrh r1, [r0, 0x2E]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF7C6\n\
-    bl sub_80CFDC4\n\
-    movs r0, 0\n\
-    b _080CF7D8\n\
-_080CF7A8:\n\
-    lsls r0, r4, 24\n\
-    movs r1, 0xFF\n\
-    lsls r1, 24\n\
-    adds r0, r1\n\
-    lsrs r4, r0, 24\n\
-    cmp r0, 0\n\
-    bge _080CF7B8\n\
-    movs r4, 0x6\n\
-_080CF7B8:\n\
-    lsls r0, r4, 24\n\
-    asrs r0, 24\n\
-    movs r1, 0\n\
-    ldrsb r1, [r6, r1]\n\
-    cmp r0, r1\n\
-    beq _080CF7C6\n\
-    movs r7, 0x1\n\
-_080CF7C6:\n\
-    cmp r7, 0\n\
-    beq _080CF7D6\n\
-_080CF7CA:\n\
-    cmp r7, 0x6\n\
-    beq _080CF7D6\n\
-    mov r0, r9\n\
-    adds r1, r4, 0\n\
-    bl sub_80CD894\n\
-_080CF7D6:\n\
-    adds r0, r7, 0\n\
-_080CF7D8:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1");
-}
-#endif
 
-#ifdef NONMATCHING
 static u8 HandleInput_OnBox(void)
 {
     u8 retVal;
     s8 cursorArea;
     s8 cursorPosition;
 
-    sPSSData->field_CD3 = 0;
-    sPSSData->field_CD2 = 0;
-    sPSSData->field_CD7 = 0;
-
     do
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        sPSSData->field_CD3 = 0;
+        sPSSData->field_CD2 = 0;
+        sPSSData->field_CD7 = 0;
+
+        if (JOY_REPEAT(DPAD_UP))
         {
             retVal = 1;
             cursorArea = CURSOR_AREA_BUTTONS;
@@ -7939,7 +7363,7 @@ static u8 HandleInput_OnBox(void)
             sPSSData->field_CD7 = 1;
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             retVal = 1;
             cursorArea = CURSOR_AREA_IN_BOX;
@@ -7947,30 +7371,30 @@ static u8 HandleInput_OnBox(void)
             break;
         }
 
-        if (gMain.heldKeys & DPAD_LEFT)
+        if (JOY_HELD(DPAD_LEFT))
             return 10;
-        if (gMain.heldKeys & DPAD_RIGHT)
+        if (JOY_HELD(DPAD_RIGHT))
             return 9;
 
         if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
         {
-            if (gMain.heldKeys & L_BUTTON)
+            if (JOY_HELD(L_BUTTON))
                 return 10;
-            if (gMain.heldKeys & R_BUTTON)
+            if (JOY_HELD(R_BUTTON))
                 return 9;
         }
 
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             sub_80CD1A8(FALSE);
             AddBoxMenu();
             return 7;
         }
 
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             return 19;
 
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_80CFDC4();
             return 0;
@@ -7989,156 +7413,35 @@ static u8 HandleInput_OnBox(void)
 
     return retVal;
 }
-#else
-NAKED
-static u8 HandleInput_OnBox(void)
-{
-    asm_unified("\n\
-                    push {r4-r6,lr}\n\
-    ldr r3, =sPSSData\n\
-    ldr r0, [r3]\n\
-    ldr r1, =0x00000cd3\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    ldr r0, [r3]\n\
-    ldr r2, =0x00000cd2\n\
-    adds r0, r2\n\
-    strb r1, [r0]\n\
-    ldr r0, [r3]\n\
-    ldr r5, =0x00000cd7\n\
-    adds r0, r5\n\
-    strb r1, [r0]\n\
-    ldr r1, =gMain\n\
-    ldrh r2, [r1, 0x30]\n\
-    movs r0, 0x40\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _080CF8AA\n\
-    movs r0, 0x80\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _080CF834\n\
-    movs r4, 0x1\n\
-    movs r1, 0\n\
-    movs r6, 0x2\n\
-    b _080CF8B6\n\
-    .pool\n\
-_080CF834:\n\
-    ldrh r2, [r1, 0x2C]\n\
-    movs r0, 0x20\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _080CF85A\n\
-    movs r0, 0x10\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    bne _080CF86E\n\
-    ldr r0, =gSaveBlock2Ptr\n\
-    ldr r0, [r0]\n\
-    ldrb r0, [r0, 0x13]\n\
-    cmp r0, 0x1\n\
-    bne _080CF872\n\
-    movs r0, 0x80\n\
-    lsls r0, 2\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _080CF864\n\
-_080CF85A:\n\
-    movs r0, 0xA\n\
-    b _080CF8D2\n\
-    .pool\n\
-_080CF864:\n\
-    movs r0, 0x80\n\
-    lsls r0, 1\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _080CF872\n\
-_080CF86E:\n\
-    movs r0, 0x9\n\
-    b _080CF8D2\n\
-_080CF872:\n\
-    ldrh r1, [r1, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF88A\n\
-    movs r0, 0\n\
-    bl sub_80CD1A8\n\
-    bl AddBoxMenu\n\
-    movs r0, 0x7\n\
-    b _080CF8D2\n\
-_080CF88A:\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF896\n\
-    movs r0, 0x13\n\
-    b _080CF8D2\n\
-_080CF896:\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF8A6\n\
-    bl sub_80CFDC4\n\
-    movs r0, 0\n\
-    b _080CF8D2\n\
-_080CF8A6:\n\
-    movs r4, 0\n\
-    b _080CF8D0\n\
-_080CF8AA:\n\
-    movs r4, 0x1\n\
-    movs r1, 0x3\n\
-    movs r6, 0\n\
-    ldr r0, [r3]\n\
-    adds r0, r5\n\
-    strb r4, [r0]\n\
-_080CF8B6:\n\
-    cmp r4, 0\n\
-    beq _080CF8D0\n\
-    lsls r5, r1, 24\n\
-    cmp r1, 0x2\n\
-    beq _080CF8C6\n\
-    movs r0, 0\n\
-    bl sub_80CD1A8\n\
-_080CF8C6:\n\
-    lsrs r0, r5, 24\n\
-    lsls r1, r6, 24\n\
-    lsrs r1, 24\n\
-    bl sub_80CD894\n\
-_080CF8D0:\n\
-    adds r0, r4, 0\n\
-_080CF8D2:\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-                ");
-}
-#endif
 
-#ifdef NONMATCHING
 static u8 HandleInput_OnButtons(void)
 {
     u8 retVal;
-    s8 cursorArea = sBoxCursorArea;
-    s8 cursorPosition = sBoxCursorPosition;
-
-    sPSSData->field_CD3 = 0;
-    sPSSData->field_CD2 = 0;
-    sPSSData->field_CD7 = 0;
+    s8 cursorArea;
+    s8 cursorPosition;
 
     do
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        cursorArea = sBoxCursorArea;
+        cursorPosition = sBoxCursorPosition;
+        sPSSData->field_CD3 = 0;
+        sPSSData->field_CD2 = 0;
+        sPSSData->field_CD7 = 0;
+
+        if (JOY_REPEAT(DPAD_UP))
         {
             retVal = 1;
             cursorArea = CURSOR_AREA_IN_BOX;
             sPSSData->field_CD2 = -1;
-            cursorPosition = (sBoxCursorPosition == 0) ? IN_BOX_COUNT - 1 - 5 : IN_BOX_COUNT - 1;
+            if (sBoxCursorPosition == 0)
+                cursorPosition = IN_BOX_COUNT - 1 - 5;
+            else 
+                cursorPosition = IN_BOX_COUNT - 1;
             sPSSData->field_CD7 = 1;
             break;
         }
-        else if (gMain.newAndRepeatedKeys & (DPAD_DOWN | START_BUTTON))
+
+        if (JOY_REPEAT(DPAD_DOWN | START_BUTTON))
         {
             retVal = 1;
             cursorArea = CURSOR_AREA_BOX;
@@ -8147,14 +7450,14 @@ static u8 HandleInput_OnButtons(void)
             break;
         }
 
-        if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        if (JOY_REPEAT(DPAD_LEFT))
         {
             retVal = 1;
             if (--cursorPosition < 0)
                 cursorPosition = 1;
             break;
         }
-        else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             retVal = 1;
             if (++cursorPosition > 1)
@@ -8162,12 +7465,12 @@ static u8 HandleInput_OnButtons(void)
             break;
         }
 
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
             return (cursorPosition == 0) ? 5 : 4;
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
             return 19;
 
-        if (gMain.newKeys & SELECT_BUTTON)
+        if (JOY_NEW(SELECT_BUTTON))
         {
             sub_80CFDC4();
             return 0;
@@ -8181,148 +7484,6 @@ static u8 HandleInput_OnButtons(void)
 
     return retVal;
 }
-#else
-NAKED
-static u8 HandleInput_OnButtons(void)
-{
-    asm_unified("\n\
-                    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    ldr r0, =sBoxCursorArea\n\
-    ldrb r0, [r0]\n\
-    mov r8, r0\n\
-    ldr r0, =sBoxCursorPosition\n\
-    mov r12, r0\n\
-    ldrb r2, [r0]\n\
-    ldr r3, =sPSSData\n\
-    ldr r0, [r3]\n\
-    ldr r1, =0x00000cd3\n\
-    adds r0, r1\n\
-    movs r1, 0\n\
-    strb r1, [r0]\n\
-    ldr r0, [r3]\n\
-    ldr r6, =0x00000cd2\n\
-    adds r0, r6\n\
-    strb r1, [r0]\n\
-    ldr r0, [r3]\n\
-    ldr r5, =0x00000cd7\n\
-    adds r0, r5\n\
-    strb r1, [r0]\n\
-    ldr r7, =gMain\n\
-    ldrh r1, [r7, 0x30]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    adds r4, r3, 0\n\
-    cmp r0, 0\n\
-    bne _080CF9B2\n\
-    movs r0, 0x88\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF944\n\
-    movs r7, 0x1\n\
-    movs r0, 0x2\n\
-    mov r8, r0\n\
-    movs r2, 0\n\
-    ldr r0, [r4]\n\
-    b _080CF9D0\n\
-    .pool\n\
-_080CF944:\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF960\n\
-    movs r7, 0x1\n\
-    lsls r0, r2, 24\n\
-    movs r1, 0xFF\n\
-    lsls r1, 24\n\
-    adds r0, r1\n\
-    lsrs r2, r0, 24\n\
-    cmp r0, 0\n\
-    bge _080CF9D4\n\
-    movs r2, 0x1\n\
-    b _080CF9D4\n\
-_080CF960:\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF97E\n\
-    movs r7, 0x1\n\
-    lsls r0, r2, 24\n\
-    movs r1, 0x80\n\
-    lsls r1, 17\n\
-    adds r0, r1\n\
-    lsrs r2, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x1\n\
-    ble _080CF9D4\n\
-    movs r2, 0\n\
-    b _080CF9D4\n\
-_080CF97E:\n\
-    ldrh r1, [r7, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF992\n\
-    movs r0, 0x4\n\
-    cmp r2, 0\n\
-    bne _080CF9E2\n\
-    movs r0, 0x5\n\
-    b _080CF9E2\n\
-_080CF992:\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF99E\n\
-    movs r0, 0x13\n\
-    b _080CF9E2\n\
-_080CF99E:\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080CF9AE\n\
-    bl sub_80CFDC4\n\
-    movs r0, 0\n\
-    b _080CF9E2\n\
-_080CF9AE:\n\
-    movs r7, 0\n\
-    b _080CF9E0\n\
-_080CF9B2:\n\
-    movs r7, 0x1\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    ldr r0, [r3]\n\
-    adds r0, r6\n\
-    movs r1, 0xFF\n\
-    strb r1, [r0]\n\
-    mov r1, r12\n\
-    movs r0, 0\n\
-    ldrsb r0, [r1, r0]\n\
-    movs r2, 0x1D\n\
-    cmp r0, 0\n\
-    bne _080CF9CE\n\
-    movs r2, 0x18\n\
-_080CF9CE:\n\
-    ldr r0, [r3]\n\
-_080CF9D0:\n\
-    adds r0, r5\n\
-    strb r7, [r0]\n\
-_080CF9D4:\n\
-    cmp r7, 0\n\
-    beq _080CF9E0\n\
-    mov r0, r8\n\
-    adds r1, r2, 0\n\
-    bl sub_80CD894\n\
-_080CF9E0:\n\
-    adds r0, r7, 0\n\
-_080CF9E2:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1");
-}
-#endif
 
 static u8 HandleInput(void)
 {
@@ -8743,7 +7904,7 @@ static void AddMenu(void)
     DrawStdFrameWithCustomTileAndPalette(sPSSData->field_CB0, FALSE, 11, 14);
     PrintMenuTable(sPSSData->field_CB0, sPSSData->menuItemsCount, (void*)sPSSData->menuItems);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sPSSData->field_CB0, sPSSData->menuItemsCount, 0);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     sPSSData->field_CAE = 0;
 }
 
@@ -8758,23 +7919,23 @@ static s16 sub_80D00AC(void)
 
     do
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             textId = Menu_GetCursorPos();
             break;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             textId = -1;
         }
 
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(-1);
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             Menu_MoveCursor(1);
@@ -8936,7 +8097,7 @@ static bool8 sub_80D0344(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             sub_80CFE84();
-            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
             ShowBg(0);
             return FALSE;
         }
@@ -9042,7 +8203,7 @@ static bool8 sub_80D04C8(void)
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            LoadPalette(GetTextWindowPalette(3), 0xD0, 0x20);
             sub_80CFE84();
             ShowBg(0);
             return FALSE;
@@ -9966,7 +9127,7 @@ static bool8 sub_80D18E4(void)
         sub_80D19B4(var);
 
     FillBgTilemapBufferRect(0, 0, var + 1, 12, 1, 9, 0x11);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
     return TRUE;
 }
 
@@ -9980,7 +9141,7 @@ static void sub_80D19B4(u32 arg0)
     FillBgTilemapBufferRect(0, 0x13B, arg0, 0xD, 1, 7, 0xFu);
     FillBgTilemapBufferRect(0, 0x13C, arg0, 0xC, 1, 1, 0xFu);
     FillBgTilemapBufferRect(0, 0x13D, arg0, 0x14, 1, 1, 0xFu);
-    schedule_bg_copy_tilemap_to_vram(0);
+    ScheduleBgCopyTilemapToVram(0);
 }
 
 static void sub_80D1A48(struct Sprite *sprite)

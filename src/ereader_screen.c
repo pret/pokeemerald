@@ -85,10 +85,10 @@ static u8 sub_81D4DE8(struct Unk03006370 *arg0)
     return var0;
 }
 
-static void sub_81D4E30(void)
+static void OpenEReaderLink(void)
 {
     memset(gDecompressionBuffer, 0, 0x2000);
-    gLinkType = LINKTYPE_0x5503;
+    gLinkType = LINKTYPE_EREADER;
     OpenLink();
     SetSuppressLinkErrorMessage(TRUE);
 }
@@ -137,7 +137,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
         {
             *arg0 = 1;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             *arg0 = 0;
             return 1;
@@ -153,12 +153,12 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
     case 2:
         if (GetLinkPlayerCount_2() == 2)
         {
-            PlaySE(SE_PINPON);
+            PlaySE(SE_DING_DONG);
             CheckShouldAdvanceLinkState();
             *arg1 = 0;
             *arg0 = 3;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             *arg0 = 0;
             return 1;
@@ -192,7 +192,7 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
         }
         break;
     case 4:
-        sub_800ABF4(0);
+        SetCloseLinkCallbackAndType(0);
         *arg0 = 5;
         break;
     case 5:
@@ -255,7 +255,7 @@ static void sub_81D5084(u8 taskId)
             data->unk8 = 1;
         break;
     case 1:
-        sub_81D4E30();
+        OpenEReaderLink();
         sub_81D505C(&data->unk0);
         data->unk8 = 2;
         break;
@@ -285,10 +285,10 @@ static void sub_81D5084(u8 taskId)
     case 5:
         if (sub_81D5064(&data->unk0, 90))
         {
-            sub_81D4E30();
+            OpenEReaderLink();
             data->unk8 = 6;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             sub_81D505C(&data->unk0);
             PlaySE(SE_SELECT);
@@ -296,7 +296,7 @@ static void sub_81D5084(u8 taskId)
         }
         break;
     case 6:
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseLink();
@@ -319,7 +319,7 @@ static void sub_81D5084(u8 taskId)
         else if (sub_81D5064(&data->unk0, 10))
         {
             CloseLink();
-            sub_81D4E30();
+            OpenEReaderLink();
             sub_81D505C(&data->unk0);
         }
         break;
@@ -360,7 +360,7 @@ static void sub_81D5084(u8 taskId)
             data->unk8 = 12;
         break;
     case 12:
-        sub_81D4E30();
+        OpenEReaderLink();
         AddTextPrinterToWindow1(gJPText_AllowEReaderToLoadCard);
         data->unk8 = 13;
         break;
@@ -403,7 +403,7 @@ static void sub_81D5084(u8 taskId)
         break;
     case 15:
         data->unkE = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
-        sub_800ABF4(data->unkE);
+        SetCloseLinkCallbackAndType(data->unkE);
         data->unk8 = 16;
         break;
     case 16:
@@ -431,12 +431,12 @@ static void sub_81D5084(u8 taskId)
         if (sub_81D5064(&data->unk0, 120))
         {
             AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
-            PlayFanfare(MUS_FANFA4);
+            PlayFanfare(MUS_OBTAIN_ITEM);
             data->unk8 = 19;
         }
         break;
     case 19:
-        if (IsFanfareTaskInactive() && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
+        if (IsFanfareTaskInactive() && (JOY_NEW(A_BUTTON | B_BUTTON)))
             data->unk8 = 26;
         break;
     case 23:

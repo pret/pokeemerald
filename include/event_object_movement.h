@@ -16,11 +16,7 @@ enum SpinnerRunnerFollowPatterns
     RUNFOLLOW_SOUTH_EAST_WEST
 };
 
-struct UnkStruct_085094AC
-{
-    const union AnimCmd *const *anims;
-    u8 animPos[4];
-};
+#define FIGURE_8_LENGTH 72
 
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE    (1 << 1)
@@ -42,6 +38,12 @@ struct UnkStruct_085094AC
 #define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
+
+struct UnkStruct_085094AC
+{
+    const union AnimCmd *const *anims;
+    u8 animPos[4];
+};
 
 struct PairedPalettes
 {
@@ -81,11 +83,11 @@ void sub_808E16C(s16, s16);
 void OverrideSecretBaseDecorationSpriteScript(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat);
 void sub_8092FF0(s16, s16, s16 *, s16 *);
 u8 GetFaceDirectionAnimNum(u8);
-void sub_80930E0(s16 *, s16 *, s16, s16);
+void SetSpritePosToOffsetMapCoords(s16 *, s16 *, s16, s16);
 void ObjectEventClearHeldMovement(struct ObjectEvent *);
 void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *);
 void TrySpawnObjectEvents(s16, s16);
-u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction);
+u8 CreateObjectSprite(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction);
 u8 AddPseudoObjectEvent(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 TrySpawnObjectEvent(u8, u8, u8);
 u8 SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z);
@@ -98,7 +100,7 @@ void ObjectEventTurnByLocalIdAndMap(u8, u8, u8, u8);
 const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u8 graphicsId);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void FreeAndReserveObjectSpritePalettes(void);
-void sub_808E82C(u8, u8, u8, s16, s16);
+void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void sub_808E7E4(u8, u8, u8);
 void sub_808E78C(u8, u8, u8, u8);
 void sub_808E75C(s16, s16);
@@ -174,13 +176,11 @@ u8 sub_809785C(struct Sprite *);
 u8 sub_80978E4(struct Sprite *);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
-void sub_8097750(struct Sprite *);
-bool8 sub_8097758(struct Sprite *);
 void CreateLevitateMovementTask(struct ObjectEvent *);
 void DestroyExtraMovementTask(u8);
 void UnfreezeObjectEvents(void);
 void FreezeObjectEventsExceptOne(u8 objectEventId);
-void sub_8097B78(u8, u8);
+void TurnObjectEventSprite(u8, u8);
 void sub_8098074(u8 var1, u8 var2);
 void FreezeObjectEvents(void);
 bool8 FreezeObjectEvent(struct ObjectEvent *objectEvent);
@@ -191,10 +191,10 @@ u8 GetLedgeJumpDirection(s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 u16 GetObjectPaletteTag(u8 palSlot);
 void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible);
-s16 sub_809773C(s16 a1);
-s16 sub_8097728(s16 a1);
+s16 GetFigure8XOffset(s16 idx);
+s16 GetFigure8YOffset(s16 idx);
 void CameraObjectReset2(void);
-u8 ObjectEventGetBerryTreeId(u8 objectEventId);
+u8 GetObjectEventBerryTreeId(u8 objectEventId);
 void sub_8092EF0(u8 mapId, u8 mapNumber, u8 mapGroup);
 bool8 IsBerryTreeSparkling(u8, u8, u8);
 
@@ -414,10 +414,10 @@ u8 MovementType_RunInPlace_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_Invisible_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_Invisible_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementType_Invisible_Step2(struct ObjectEvent *, struct Sprite *);
-void sub_8097C44(u8 var, bool32 var2);
-bool32 sub_8097C8C(u8 var);
-void sub_8097BB4(u8 var1, u8 graphicsId);
-void sub_8097CC4(u8 var1, u8 var2);
-bool32 sub_8097D9C(u8 var);
+void SetObjectEventSpriteInvisibility(u8 var, bool32 var2);
+bool32 IsObjectEventSpriteInvisible(u8 var);
+void SetObjectEventSpriteGraphics(u8 var1, u8 graphicsId);
+void SetObjectEventSpriteAnim(u8 var1, u8 var2);
+bool32 IsObjectEventSpriteAnimating(u8 var);
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

@@ -16,7 +16,6 @@
 #include "util.h"
 #include "gpu_regs.h"
 #include "battle_message.h"
-#include "constants/species.h"
 #include "pokedex.h"
 #include "palette.h"
 #include "international_string_util.h"
@@ -710,10 +709,19 @@ static const struct SpriteTemplate sSpriteTemplate_MegaIndicator =
 
 // data fields for healthboxRight
 #define hOther_HealthBoxSpriteId    data[5]
+#define hOther_IndicatorSpriteId    data[6] // For Mega Evo
 
 // data fields for healthbar
 #define hBar_HealthBoxSpriteId      data[5]
 #define hBar_Data6                  data[6]
+
+u8 GetMegaIndicatorSpriteId(u32 healthboxSpriteId)
+{
+    u8 spriteId = gSprites[healthboxSpriteId].oam.affineParam;
+    if (spriteId >= MAX_SPRITES)
+        return 0xFF;
+    return gSprites[spriteId].hOther_IndicatorSpriteId;
+}
 
 u8 CreateBattlerHealthboxSprites(u8 battlerId)
 {
@@ -791,6 +799,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     gSprites[healthboxLeftSpriteId].invisible = TRUE;
 
     gSprites[healthboxRightSpriteId].invisible = TRUE;
+    gSprites[healthboxRightSpriteId].hOther_IndicatorSpriteId = 0xFF;
 
     healthBarSpritePtr->hBar_HealthBoxSpriteId = healthboxLeftSpriteId;
     healthBarSpritePtr->hBar_Data6 = data6;
@@ -820,6 +829,8 @@ u8 CreateSafariPlayerHealthboxSprites(void)
 
     gSprites[healthboxLeftSpriteId].oam.affineParam = healthboxRightSpriteId;
     gSprites[healthboxRightSpriteId].hOther_HealthBoxSpriteId = healthboxLeftSpriteId;
+
+    gSprites[healthboxRightSpriteId].hOther_IndicatorSpriteId = 0xFF;
 
     gSprites[healthboxRightSpriteId].callback = SpriteCB_HealthBoxOther;
 
@@ -860,7 +871,7 @@ static void SpriteCB_HealthBar(struct Sprite *sprite)
 static void SpriteCB_HealthBoxOther(struct Sprite *sprite)
 {
     u8 healthboxMainSpriteId = sprite->hOther_HealthBoxSpriteId;
-    u8 megaSpriteId = gBattleStruct->mega.indicatorSpriteIds[gSprites[healthboxMainSpriteId].hMain_Battler];
+    u8 megaSpriteId = sprite->hOther_IndicatorSpriteId;
 
     sprite->pos1.x = gSprites[healthboxMainSpriteId].pos1.x + 64;
     sprite->pos1.y = gSprites[healthboxMainSpriteId].pos1.y;
@@ -886,7 +897,7 @@ void SetBattleBarStruct(u8 battlerId, u8 healthboxSpriteId, s32 maxVal, s32 oldV
 
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
 {
-    DestroyMegaIndicatorSprite(gSprites[healthboxSpriteId].hMain_Battler);
+    DestroyMegaIndicatorSprite(healthboxSpriteId);
     gSprites[healthboxSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = TRUE;
@@ -901,8 +912,9 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = FALSE;
     if (gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]])
     {
-        if (gBattleStruct->mega.indicatorSpriteIds[battlerId] != 0xFF)
-            gSprites[gBattleStruct->mega.indicatorSpriteIds[battlerId]].invisible = FALSE;
+        u8 spriteId = GetMegaIndicatorSpriteId(healthboxSpriteId);
+        if (spriteId != 0xFF)
+            gSprites[spriteId].invisible = FALSE;
         else
             CreateMegaIndicatorSprite(battlerId, 0);
     }
@@ -916,7 +928,7 @@ static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
 
 void DestoryHealthboxSprite(u8 healthboxSpriteId)
 {
-    DestroyMegaIndicatorSprite(gSprites[healthboxSpriteId].hMain_Battler);
+    DestroyMegaIndicatorSprite(healthboxSpriteId);
     DestroySprite(&gSprites[gSprites[healthboxSpriteId].oam.affineParam]);
     DestroySprite(&gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId]);
     DestroySprite(&gSprites[healthboxSpriteId]);
@@ -927,21 +939,82 @@ void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerO
 
 }
 
+static void TryToggleHealboxVisibility(u8 priority, u8 healthboxLeftSpriteId, u8 healthboxRightSpriteId, u8 healthbarSpriteId, u8 indicatorSpriteId)
+{
+    u8 spriteIds[4] = {healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId, indicatorSpriteId};
+    int i;
+    
+    switch (gBattleResources->bufferA[gBattleAnimAttacker][0])
+    {
+    case CONTROLLER_MOVEANIMATION:
+        if (gBattleResources->bufferA[gBattleAnimAttacker][1] == MOVE_TRANSFORM)
+            return;
+        break;
+    case CONTROLLER_BALLTHROWANIM:
+        return;   //throwing ball does not hide hp boxes
+    case CONTROLLER_BATTLEANIMATION:
+        //check special anims that hide health boxes
+        switch (gBattleResources->bufferA[gBattleAnimAttacker][1])
+        {
+        case B_ANIM_TURN_TRAP:
+        case B_ANIM_LEECH_SEED_DRAIN:
+        case B_ANIM_MON_HIT:
+        case B_ANIM_SNATCH_MOVE:
+        case B_ANIM_FUTURE_SIGHT_HIT:
+        case B_ANIM_DOOM_DESIRE_HIT:
+        case B_ANIM_WISH_HEAL:
+        //new
+        case B_ANIM_MEGA_EVOLUTION:
+        case B_ANIM_TERRAIN_MISTY:
+        case B_ANIM_TERRAIN_GRASSY:
+        case B_ANIM_TERRAIN_ELECTRIC:
+        case B_ANIM_TERRAIN_PSYCHIC:
+            break;
+        }
+        return; //all other special anims dont hide
+    default:
+        return;
+    }
+    
+    // if we've reached here, we should hide hp boxes
+    for (i = 0; i < NELEMS(spriteIds); i++)
+    {
+        if (spriteIds[i] == 0xFF)
+            continue;
+        
+        switch (priority)
+        {
+        case 0: //start of anim -> make invisible
+            gSprites[spriteIds[i]].invisible = TRUE;
+            break;
+        case 1: //end of anim -> make visible
+            gSprites[spriteIds[i]].invisible = FALSE;
+            break;
+        }
+    }
+}
+
 void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
     s32 i;
-
+    
     for (i = 0; i < gBattlersCount; i++)
     {
         u8 healthboxLeftSpriteId = gHealthboxSpriteIds[i];
         u8 healthboxRightSpriteId = gSprites[gHealthboxSpriteIds[i]].oam.affineParam;
         u8 healthbarSpriteId = gSprites[gHealthboxSpriteIds[i]].hMain_HealthBarSpriteId;
+        u8 indicatorSpriteId = GetMegaIndicatorSpriteId(healthboxLeftSpriteId);
 
         gSprites[healthboxLeftSpriteId].oam.priority = priority;
         gSprites[healthboxRightSpriteId].oam.priority = priority;
         gSprites[healthbarSpriteId].oam.priority = priority;
-        if (gBattleStruct->mega.indicatorSpriteIds[i] != 0xFF)
-            gSprites[gBattleStruct->mega.indicatorSpriteIds[i]].oam.priority = priority;
+        if (indicatorSpriteId != 0xFF)
+            gSprites[indicatorSpriteId].oam.priority = priority;
+        
+        #if HIDE_HEALTHBOXES_DURING_ANIMS
+        if (IsBattlerAlive(i))
+            TryToggleHealboxVisibility(priority, healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId, indicatorSpriteId);
+        #endif
     }
 }
 
@@ -1491,26 +1564,26 @@ u32 CreateMegaIndicatorSprite(u32 battlerId, u32 which)
         y += sIndicatorPosSingles[position][1];
     }
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_MegaIndicator, x, y, 0);
-    gBattleStruct->mega.indicatorSpriteIds[battlerId] = spriteId;
+    gSprites[gSprites[gHealthboxSpriteIds[battlerId]].oam.affineParam].hOther_IndicatorSpriteId = spriteId;
 
     gSprites[spriteId].tBattler = battlerId;
     return spriteId;
 }
 
-void DestroyMegaIndicatorSprite(u8 battlerId)
+void DestroyMegaIndicatorSprite(u32 healthboxSpriteId)
 {
     u32 i;
+    s16 *spriteId = &gSprites[gSprites[healthboxSpriteId].oam.affineParam].hOther_IndicatorSpriteId;
 
-    if (gBattleStruct->mega.indicatorSpriteIds[battlerId] != 0xFF)
+    if (*spriteId != 0xFF)
     {
-        if (gBattleStruct->mega.indicatorSpriteIds[battlerId] != 0) // If called before initialized to 0xFF.
-            DestroySprite(&gSprites[gBattleStruct->mega.indicatorSpriteIds[battlerId]]);
-        gBattleStruct->mega.indicatorSpriteIds[battlerId] = 0xFF;
+        DestroySprite(&gSprites[*spriteId]);
+        *spriteId = 0xFF;
     }
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        if (gBattleStruct->mega.indicatorSpriteIds[i] != 0xFF)
+        if (gSprites[gSprites[gHealthboxSpriteIds[i]].oam.affineParam].hOther_IndicatorSpriteId != 0xFF)
             break;
     }
     // Free Sprite pal/tiles only if no indicator sprite is active for all battlers.
@@ -1523,8 +1596,7 @@ void DestroyMegaIndicatorSprite(u8 battlerId)
 
 static void SpriteCb_MegaIndicator(struct Sprite *sprite)
 {
-    if (gBattleStruct->mega.indicatorSpriteIds[sprite->tBattler] == 0xFF)
-        DestroySprite(sprite);
+
 }
 
 #undef tBattler
@@ -1738,7 +1810,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         gBattleSpritesDataPtr->animationData->field_9_x1C++;
     }
 
-    PlaySE12WithPanning(SE_TB_START, 0);
+    PlaySE12WithPanning(SE_BALL_TRAY_ENTER, 0);
     return taskId;
 }
 
@@ -1941,9 +2013,9 @@ static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite)
             pan = SOUND_PAN_ATTACKER;
 
         if (sprite->data[7] != 0)
-            PlaySE2WithPanning(SE_TB_KARA, pan);
+            PlaySE2WithPanning(SE_BALL_TRAY_EXIT, pan);
         else
-            PlaySE1WithPanning(SE_TB_KON, pan);
+            PlaySE1WithPanning(SE_BALL_TRAY_BALL, pan);
 
         sprite->callback = SpriteCallbackDummy;
     }
@@ -2786,8 +2858,8 @@ static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTi
 {
     u32 windowId, i;
     u8 *windowTileData;
-    u8 text1[MAX_CHARS_PRINTED + 1];
-    u8 text2[MAX_CHARS_PRINTED + 1];
+    u8 text1[MAX_CHARS_PRINTED + 2];
+    u8 text2[MAX_CHARS_PRINTED + 2];
 
     for (i = 0; i < MAX_CHARS_PRINTED + 1; i++)
     {
@@ -2944,7 +3016,7 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
     const s16 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
 
-    if (B_ABILITY_POP_UP < GEN_5)
+    if (!B_ABILITY_POP_UP)
         return;
 
     if (!gBattleStruct->activeAbilityPopUps)

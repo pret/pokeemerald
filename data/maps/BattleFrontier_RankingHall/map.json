@@ -2,7 +2,7 @@
   "id": "MAP_BATTLE_FRONTIER_RANKING_HALL",
   "name": "BattleFrontier_RankingHall",
   "layout": "LAYOUT_BATTLE_FRONTIER_RANKING_HALL",
-  "music": "MUS_BIJYUTU",
+  "music": "MUS_LILYCOVE_MUSEUM",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

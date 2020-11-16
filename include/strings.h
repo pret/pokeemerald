@@ -84,9 +84,28 @@ extern const u8 gText_SoSo[];
 extern const u8 gText_Bad[];
 extern const u8 gText_TheWorst[];
 
+extern const u8 Roulette_Text_ControlsInstruction[];
+extern const u8 Roulette_Text_KeepPlaying[];
+extern const u8 Roulette_Text_Jackpot[];
+extern const u8 Roulette_Text_ItsAHit[];
+extern const u8 Roulette_Text_NothingDoing[];
+extern const u8 Roulette_Text_YouveWonXCoins[];
+extern const u8 Roulette_Text_BoardWillBeCleared[];
+extern const u8 Roulette_Text_CoinCaseIsFull[];
+extern const u8 Roulette_Text_NoCoinsLeft[];
+extern const u8 Roulette_Text_PlayMinimumWagerIsX[];
+extern const u8 Roulette_Text_SpecialRateTable[];
+extern const u8 Roulette_Text_NotEnoughCoins[];
+
 extern const u8 gText_Slots[];
 extern const u8 gText_Roulette[];
 extern const u8 gText_Jackpot[];
+
+extern const u8 gText_YouDontHaveThreeCoins[];
+extern const u8 gText_QuitTheGame[];
+extern const u8 gText_YouveGot9999Coins[];
+extern const u8 gText_YouveRunOutOfCoins[];
+extern const u8 gText_ReelTimeHelp[];
 
 extern const u8 gText_First[];
 extern const u8 gText_Second[];
@@ -373,6 +392,9 @@ extern const u8 gText_DefaultNameLillie[];
 extern const u8 gText_DefaultNameTerra[];
 extern const u8 gText_DefaultNameLucy[];
 extern const u8 gText_DefaultNameHalie[];
+
+extern const u8 gText_BirchInTrouble[];
+extern const u8 gText_ConfirmStarterChoice[];
 
 // mystery event menu text
 extern const u8 gText_EventSafelyLoaded[];
@@ -962,7 +984,7 @@ extern const u8 gText_TwoDashes[];
 
 extern const u8 *const gReturnToXStringsTable2[];
 
-extern const u8 gText_XPLink[];
+extern const u8 gText_NumPlayerLink[];
 extern const u8 gText_ConfirmLinkWhenPlayersReady[];
 extern const u8 gText_ConfirmStartLinkWithXPlayers[];
 extern const u8 gText_AwaitingLinkup[];
@@ -2494,7 +2516,7 @@ extern const u8 gText_CommunicationStandby[];
 extern const u8 gText_AnnouncingResults[];
 extern const u8 gText_PreliminaryResults[];
 extern const u8 gText_Round2Results[];
-extern const u8 gText_Var1sVar2Won[];
+extern const u8 gText_ContestantsMonWon[];
 
 // Trainer Card
 extern const u8 gText_LinkCableBattles[];
@@ -2815,10 +2837,10 @@ extern const u8 gText_RegisterTextHere[];
 extern const u8 gText_InputText[];
 extern const u8 gText_ExitingChat[];
 extern const u8 gText_LeaderLeftEndingChat[];
-extern const u8 gText_RegisteredTextChanged[];
-extern const u8 gText_AlreadySavedFile_Unused[];
-extern const u8 gText_SavingDontTurnOff_Unused[];
-extern const u8 gText_PlayerSavedGame_Unused[];
+extern const u8 gText_RegisteredTextChangedOKToSave[];
+extern const u8 gText_AlreadySavedFile_Chat[];
+extern const u8 gText_SavingDontTurnOff_Chat[];
+extern const u8 gText_PlayerSavedGame_Chat[];
 extern const u8 gText_IfLeaderLeavesChatEnds[];
 extern const u8 gText_Upper[];
 extern const u8 gText_Lower[];
@@ -2960,5 +2982,10 @@ extern const u8 gText_Toughness[];
 extern const u8 gText_Smartness[];
 extern const u8 gText_Cuteness[];
 extern const u8 gText_Beauty3[];
+
+// Berry Blender
+extern const u8 gText_SavingDontTurnOff2[];
+extern const u8 gText_BlenderMaxSpeedRecord[];
+extern const u8 gText_234Players[];
 
 #endif // GUARD_STRINGS_H

@@ -2,7 +2,7 @@
   "id": "MAP_SKY_PILLAR_1F",
   "name": "SkyPillar_1F",
   "layout": "LAYOUT_SKY_PILLAR_1F",
-  "music": "MUS_TOZAN",
+  "music": "MUS_MT_CHIMNEY",
   "region_map_section": "MAPSEC_SKY_PILLAR",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

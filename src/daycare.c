@@ -22,7 +22,6 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
-#include "constants/species.h"
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);
@@ -892,11 +891,11 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             TriggerPendingDaycareEgg();
     }
 
-    // Hatch Egg
+    // Try to hatch Egg
     if (++daycare->stepCounter == 255)
     {
-        u32 steps;
-        u8 toSub = GetEggStepsToSubtract();
+        u32 eggCycles;
+        u8 toSub = GetEggCyclesToSubtract();
 
         for (i = 0; i < gPlayerPartyCount; i++)
         {
@@ -905,15 +904,15 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG))
                 continue;
 
-            steps = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
-            if (steps != 0)
+            eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
+            if (eggCycles != 0)
             {
-                if (steps >= toSub)
-                    steps -= toSub;
+                if (eggCycles >= toSub)
+                    eggCycles -= toSub;
                 else
-                    steps -= 1;
+                    eggCycles -= 1;
 
-                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &steps);
+                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &eggCycles);
             }
             else 
             {
@@ -1237,7 +1236,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
 {
     u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuListTaskId);
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         switch (input)
         {
@@ -1255,7 +1254,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
         DestroyTask(taskId);
         EnableBothScriptContexts();
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gSpecialVar_Result = DAYCARE_EXITED_LEVEL_MENU;
         DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);

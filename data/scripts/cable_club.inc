@@ -132,7 +132,7 @@ CableClub_EventScript_ExitLinkRoom:: @ 8276C85
 	call CableClub_EventScript_CloseLinkAndExitLinkRoom
 	call CableClub_EventScript_CloseDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -142,7 +142,7 @@ CableClub_EventScript_ExitMinigameRoom:: @ 8276C9D
 	call CableClub_EventScript_CloseLinkAndExitLinkRoom
 	call EventScript_CloseMossdeepGameCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -165,7 +165,7 @@ CableClub_EventScript_ExitTradeCenter:: @ 8276CE7
 	call CableClub_EventScript_PlayerExitTradeCenter
 	call CableClub_EventScript_CloseDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -187,7 +187,7 @@ CableClub_EventScript_ExitRecordCorner:: @ 8276D2C
 	call CableClub_EventScript_PlayerExitRecordCorner
 	call CableClub_EventScript_CloseDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -209,7 +209,7 @@ CableClub_EventScript_ExitUnionRoom:: @ 8276D6C
 	call CableClub_EventScript_PlayerExitUnionRoom
 	call CableClub_EventScript_CloseUnionRoomBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -349,17 +349,17 @@ CableClub_EventScript_TryEnterColosseum:: @ 8276F60
 	waitmessage
 	special TryBattleLinkup
 	waitstate
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterColosseum
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
 	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq CableClub_EventScript_AbortLinkDifferentSelections
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq CableClub_EventScript_AbortLinkIncorrectNumberOfBattlers
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_AbortLink
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
 	end
 
@@ -372,7 +372,7 @@ CableClub_EventScript_EnterColosseum:: @ 8276FBD
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -452,21 +452,21 @@ CableClub_EventScript_TradeCenter:: @ 82770B2
 	waitmessage
 	special TryTradeLinkup
 	waitstate
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterTradeCenter
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
 	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq CableClub_EventScript_AbortLinkDifferentSelections
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_AbortLink
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
-	compare VAR_RESULT, 7
+	compare VAR_RESULT, LINKUP_PLAYER_NOT_READY
 	goto_if_eq CableClub_EventScript_AbortLinkPlayerNotReady
-	compare VAR_RESULT, 9
+	compare VAR_RESULT, LINKUP_PARTNER_NOT_READY
 	goto_if_eq CableClub_EventScript_AbortLinkOtherTrainerNotReady
 	end
 
@@ -477,7 +477,7 @@ CableClub_EventScript_EnterTradeCenter:: @ 827713A
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -527,21 +527,21 @@ CableClub_EventScript_RecordCorner:: @ 82771DB
 	waitmessage
 	special TryRecordMixLinkup
 	waitstate
-	special sub_80B2EA8
+	special ValidateMixingGameLanguage
 	waitstate
-	compare VAR_RESULT, 12
+	compare VAR_RESULT, LINKUP_FOREIGN_GAME
 	goto_if_eq CableClub_EventScript_AbortLinkForeignGame
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterRecordCorner
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
 	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
-	compare VAR_RESULT, 3
+	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
 	goto_if_eq CableClub_EventScript_AbortLinkDifferentSelections
-	compare VAR_RESULT, 4
+	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_AbortLink
-	compare VAR_RESULT, 6
+	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
 	end
 
@@ -552,7 +552,7 @@ CableClub_EventScript_EnterRecordCorner:: @ 827724C
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -955,7 +955,7 @@ CableClub_EventScript_EnterUnionRoom:: @ 827759F
 	copyvar VAR_CABLE_CLUB_STATE, VAR_0x8004
 	call CableClub_EventScript_OpenUnionRoomBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -972,7 +972,7 @@ CableClub_EventScript_EnterUnionRoom:: @ 827759F
 	special SetCableClubWarp
 	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
 	waitstate
-	special UnionRoomSpecial
+	special RunUnionRoom
 	waitstate
 	end
 
@@ -1181,22 +1181,22 @@ CableClub_EventScript_ChooseLinkLeaderFrom2:: @ 8277989
 
 CableClub_EventScript_TryLeadGroup2Players:: @ 82779C6
 	call CableClub_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom2
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq CableClub_EventScript_TryLeadGroup2Players
 	release
 	return
 
 CableClub_EventScript_TryJoinGroup2Players:: @ 82779EE
 	call CableClub_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom2
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq CableClub_EventScript_TryJoinGroup2Players
 	release
 	return
@@ -1214,22 +1214,22 @@ CableClub_EventScript_ChooseLinkLeaderFrom4:: @ 8277A16
 
 CableClub_EventScript_TryLeadGroup4Players:: @ 8277A53
 	call CableClub_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom4
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq CableClub_EventScript_TryLeadGroup4Players
 	release
 	return
 
 CableClub_EventScript_TryJoinGroup4Players:: @ 8277A7B
 	call CableClub_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom4
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq CableClub_EventScript_TryJoinGroup4Players
 	release
 	return
@@ -1247,22 +1247,22 @@ CableClub_EventScript_ChooseLinkLeader:: @ 8277AA3
 
 CableClub_EventScript_TryLeadGroupXPlayers:: @ 8277AE0
 	call CableClub_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_ChooseLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq CableClub_EventScript_TryLeadGroupXPlayers
 	release
 	return
 
 CableClub_EventScript_TryJoinGroupXPlayers:: @ 8277B08
 	call CableClub_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq CableClub_EventScript_ChooseLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq CableClub_EventScript_TryJoinGroupXPlayers
 	release
 	return
@@ -1285,7 +1285,7 @@ CableClub_EventScript_EnterWirelessLinkRoom:: @ 8277B3A
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
@@ -1310,7 +1310,7 @@ EventScript_WirelessBoxResults:: @ 8277B8A
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_AdapterNotConnected
 	fadescreen FADE_TO_BLACK
-	special sub_801A42C
+	special ShowWirelessCommunicationScreen
 	waitstate
 	msgbox CableClub_Text_ParticipantsStepUpToCounter, MSGBOX_DEFAULT
 	releaseall
@@ -1453,22 +1453,22 @@ MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader:: @ 8277D81
 
 MossdeepCity_GameCorner_1F_EventScript_TryBecomeLinkLeader:: @ 8277DBE
 	call CableClub_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_TryBecomeLinkLeader
 	release
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_TryJoinLinkGroup:: @ 8277DE6
 	call CableClub_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom
-	compare VAR_RESULT, 5
+	compare VAR_RESULT, LINKUP_FAILED
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
-	compare VAR_RESULT, 8
+	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_TryJoinLinkGroup
 	release
 	return
@@ -1481,7 +1481,7 @@ MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom:: @ 8277E0E
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call EventScript_OpenMossdeepGameCornerBarrier
 	special DrawWholeMapView
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 60
 	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0

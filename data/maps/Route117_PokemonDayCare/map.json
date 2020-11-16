@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE117_POKEMON_DAY_CARE",
   "name": "Route117_PokemonDayCare",
   "layout": "LAYOUT_ROUTE117_POKEMON_DAY_CARE",
-  "music": "MUS_GOTOWN",
+  "music": "MUS_RUSTBORO",
   "region_map_section": "MAPSEC_ROUTE_117",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

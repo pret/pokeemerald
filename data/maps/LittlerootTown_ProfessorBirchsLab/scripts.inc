@@ -1,3 +1,10 @@
+.set LOCALID_AIDE, 1
+.set LOCALID_BIRCH, 2
+.set LOCALID_RIVAL, 3
+.set LOCALID_BALL_CYNDAQUIL, 4
+.set LOCALID_BALL_TOTODILE, 5
+.set LOCALID_BALL_CHIKORITA, 6
+
 LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_ProfessorBirchsLab_OnWarp
@@ -34,8 +41,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter:: @ 81F9
 	specialvar VAR_RESULT, HasAllHoennMons
 	compare VAR_RESULT, TRUE
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter
-	setobjectmovementtype 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
-	setobjectxyperm 3, 5, 10
+	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
+	setobjectxyperm LOCALID_RIVAL, 5, 10
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter:: @ 81F9CE9
@@ -48,8 +55,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout:: @ 81F9CF3
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout:: @ 81F9CF7
 	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
-	setobjectmovementtype 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
-	setobjectxyperm 3, 5, 10
+	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
+	setobjectxyperm LOCALID_RIVAL, 5, 10
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnWarp: @ 81F9D06
@@ -68,35 +75,35 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter:: @ 
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade:: @ 81F9D45
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
-	addobject 2
-	addobject 3
-	turnobject 3, DIR_NORTH
-	setobjectxy 3, 5, 5
-	turnobject 2, DIR_SOUTH
-	setobjectxy 2, 6, 4
-	turnobject 1, DIR_EAST
-	setobjectxy 1, 10, 10
+	addobject LOCALID_BIRCH
+	addobject LOCALID_RIVAL
+	turnobject LOCALID_RIVAL, DIR_NORTH
+	setobjectxy LOCALID_RIVAL, 5, 5
+	turnobject LOCALID_BIRCH, DIR_SOUTH
+	setobjectxy LOCALID_BIRCH, 6, 4
+	turnobject LOCALID_AIDE, DIR_EAST
+	setobjectxy LOCALID_AIDE, 10, 10
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject:: @ 81F9D71
-	addobject 3
+	addobject LOCALID_RIVAL
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters:: @ 81F9D75
-	addobject 4
-	addobject 5
-	addobject 6
-	addobject 3
-	turnobject 4, DIR_SOUTH
-	setobjectxy 4, 8, 4
-	turnobject 5, DIR_SOUTH
-	setobjectxy 5, 9, 4
-	turnobject 6, DIR_SOUTH
-	setobjectxy 6, 10, 4
-	turnobject 2, DIR_SOUTH
-	setobjectxy 2, 6, 4
-	turnobject 3, DIR_EAST
-	setobjectxy 3, 5, 5
+	addobject LOCALID_BALL_CYNDAQUIL
+	addobject LOCALID_BALL_TOTODILE
+	addobject LOCALID_BALL_CHIKORITA
+	addobject LOCALID_RIVAL
+	turnobject LOCALID_BALL_CYNDAQUIL, DIR_SOUTH
+	setobjectxy LOCALID_BALL_CYNDAQUIL, 8, 4
+	turnobject LOCALID_BALL_TOTODILE, DIR_SOUTH
+	setobjectxy LOCALID_BALL_TOTODILE, 9, 4
+	turnobject LOCALID_BALL_CHIKORITA, DIR_SOUTH
+	setobjectxy LOCALID_BALL_CHIKORITA, 10, 4
+	turnobject LOCALID_BIRCH, DIR_SOUTH
+	setobjectxy LOCALID_BIRCH, 6, 4
+	turnobject LOCALID_RIVAL, DIR_EAST
+	setobjectxy LOCALID_RIVAL, 5, 5
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame: @ 81F9DB9
@@ -113,7 +120,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent:: @ 81F9DDB
 	bufferleadmonspeciesname 0
 	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
 	waitmessage
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -173,18 +180,18 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex:: @ 81F9E80
 	delay 30
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational, MSGBOX_DEFAULT
 	closemessage
-	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_BirchRetrievePokedexes
+	applymovement LOCALID_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchRetrievePokedexes
 	waitmovement 0
 	delay 20
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 10
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 10
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 10
-	playse SE_TK_KASYA
+	playse SE_CLICK
 	delay 20
-	applymovement 3, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFastestRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	checkplayergender
@@ -195,13 +202,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex:: @ 81F9E80
 	playse SE_PC_ON
 	waitse
 	delay 20
-	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex
+	applymovement LOCALID_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex
 	waitmovement 0
-	applymovement 3, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFastestUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OkayAllDone, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_PokedexUpgradedToNational
 	waitmessage
 	waitfanfare
@@ -303,7 +310,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil:: @ 81F9FBB
 	release
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement 2, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	showmonpic SPECIES_CYNDAQUIL, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil, MSGBOX_YESNO
@@ -316,7 +323,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Totodile:: @ 81F9FEF
 	release
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement 2, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	showmonpic SPECIES_TOTODILE, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile, MSGBOX_YESNO
@@ -329,7 +336,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita:: @ 81FA023
 	release
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement 2, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	showmonpic SPECIES_CHIKORITA, 10, 3
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita, MSGBOX_YESNO
@@ -363,7 +370,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil:: @ 81FA06C
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty:: @ 81FA0A1
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject 4
+	removeobject LOCALID_BALL_CYNDAQUIL
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
@@ -374,7 +381,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty:: @ 81FA0A1
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC:: @ 81FA0CC
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject 4
+	removeobject LOCALID_BALL_CYNDAQUIL
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC
@@ -408,7 +415,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile:: @ 81FA10D
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty:: @ 81FA142
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject 5
+	removeobject LOCALID_BALL_TOTODILE
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
@@ -419,7 +426,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty:: @ 81FA142
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC:: @ 81FA16D
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject 5
+	removeobject LOCALID_BALL_TOTODILE
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC
@@ -453,7 +460,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita:: @ 81FA1AE
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty:: @ 81FA1E3
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject 6
+	removeobject LOCALID_BALL_CHIKORITA
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
@@ -464,7 +471,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty:: @ 81FA1E3
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC:: @ 81FA20E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject 6
+	removeobject LOCALID_BALL_CHIKORITA
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC
@@ -485,7 +492,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita:: @ 81FA23F
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter:: @ 81FA24F
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter
 	waitmessage
 	waitfanfare
@@ -529,7 +536,7 @@ EventScript_RegisterProfBirch:: @ 81FA2D2
 	msgbox MatchCall_Text_BirchRegisterCall, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox MatchCall_Text_RegisteredBirch, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -544,7 +551,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
+	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
@@ -580,7 +587,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls:: @ 81FA37F
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex:: @ 81FA3AC
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET

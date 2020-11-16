@@ -70,6 +70,7 @@
 #define NATURE_SASSY    22
 #define NATURE_CAREFUL  23
 #define NATURE_QUIRKY   24
+#define NUM_NATURES     25
 
 // Pokemon Stats
 #define STAT_HP      0
@@ -81,39 +82,12 @@
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_EV_STATS     NUM_STATS - 1 // excludes HP
+#define NUM_NATURE_STATS NUM_STATS - 1 // excludes HP
 #define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
 
-// Move flags.
-#define FLAG_MAKES_CONTACT          0x1
-#define FLAG_PROTECT_AFFECTED       0x2
-#define FLAG_MAGICCOAT_AFFECTED     0x4
-#define FLAG_SNATCH_AFFECTED        0x8
-#define FLAG_MIRROR_MOVE_AFFECTED   0x10
-#define FLAG_KINGSROCK_AFFECTED     0x20
-#define FLAG_HIGH_CRIT              0x40
-#define FLAG_RECKLESS_BOOST         0x80
-#define FLAG_IRON_FIST_BOOST        0x100
-#define FLAG_SHEER_FORCE_BOOST      0x200
-#define FLAG_STRONG_JAW_BOOST       0x400
-#define FLAG_MEGA_LAUNCHER_BOOST    0x800
-#define FLAG_STAT_STAGES_IGNORED    0x1000
-#define FLAG_DMG_MINIMIZE           0x2000
-#define FLAG_DMG_UNDERGROUND        0x4000
-#define FLAG_DMG_UNDERWATER         0x8000
-#define FLAG_SOUND                  0x10000
-#define FLAG_BALLISTIC              0x20000
-#define FLAG_PROTECTION_MOVE        0x40000
-#define FLAG_POWDER                 0x80000
-#define FLAG_TARGET_ABILITY_IGNORED 0x100000
-#define FLAG_DANCE                  0x200000
-#define FLAG_DMG_IN_AIR             0x400000 // X2 dmg on air, always hits target on air
-#define FLAG_HIT_IN_AIR             0x800000 // dmg is normal, always hits target on air
-
-// Split defines.
-#define SPLIT_PHYSICAL  0x0
-#define SPLIT_SPECIAL   0x1
-#define SPLIT_STATUS    0x2
+#define MIN_STAT_STAGE     0
+#define DEFAULT_STAT_STAGE 6
+#define MAX_STAT_STAGE    12
 
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
@@ -231,6 +205,8 @@
 #define LEVEL_UP_MOVE_LV   0xFE00
 #define LEVEL_UP_END       0xFFFF
 
+#define MAX_LEVEL_UP_MOVES       20
+
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
@@ -257,18 +233,42 @@
 #define STATUS_PRIMARY_POKERUS   6
 #define STATUS_PRIMARY_FAINTED   7
 
+#define MAX_PER_STAT_EVS 255
 #define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT 100
 
 #define UNOWN_FORM_COUNT 28
 
 // Battle move flags
-#define FLAG_MAKES_CONTACT          0x1
-#define FLAG_PROTECT_AFFECTED       0x2
-#define FLAG_MAGICCOAT_AFFECTED     0x4
-#define FLAG_SNATCH_AFFECTED        0x8
-#define FLAG_MIRROR_MOVE_AFFECTED   0x10
-#define FLAG_KINGSROCK_AFFECTED     0x20
+#define FLAG_MAKES_CONTACT          (1 << 0)
+#define FLAG_PROTECT_AFFECTED       (1 << 1)
+#define FLAG_MAGICCOAT_AFFECTED     (1 << 2)
+#define FLAG_SNATCH_AFFECTED        (1 << 3)
+#define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
+#define FLAG_KINGSROCK_AFFECTED     (1 << 5)
+#define FLAG_HIGH_CRIT              (1 << 6)
+#define FLAG_RECKLESS_BOOST         (1 << 7)
+#define FLAG_IRON_FIST_BOOST        (1 << 8)
+#define FLAG_SHEER_FORCE_BOOST      (1 << 9)
+#define FLAG_STRONG_JAW_BOOST       (1 << 10)
+#define FLAG_MEGA_LAUNCHER_BOOST    (1 << 11)
+#define FLAG_STAT_STAGES_IGNORED    (1 << 12)
+#define FLAG_DMG_MINIMIZE           (1 << 13)
+#define FLAG_DMG_UNDERGROUND        (1 << 14)
+#define FLAG_DMG_UNDERWATER         (1 << 15)
+#define FLAG_SOUND                  (1 << 16)
+#define FLAG_BALLISTIC              (1 << 17)
+#define FLAG_PROTECTION_MOVE        (1 << 18)
+#define FLAG_POWDER                 (1 << 19)
+#define FLAG_TARGET_ABILITY_IGNORED (1 << 20)
+#define FLAG_DANCE                  (1 << 21)
+#define FLAG_DMG_IN_AIR             (1 << 22) // X2 dmg on air, always hits target on air
+#define FLAG_HIT_IN_AIR             (1 << 23) // dmg is normal, always hits target on air
+
+// Split defines.
+#define SPLIT_PHYSICAL  0x0
+#define SPLIT_SPECIAL   0x1
+#define SPLIT_STATUS    0x2
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
@@ -292,23 +292,24 @@
 
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 
-// Evolution type flags
-#define EVO_MEGA_EVOLUTION   0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
-#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
-#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
-#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
-#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
-#define EVO_TRADE            0x0005 // Pokémon is traded
-#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
-#define EVO_ITEM             0x0007 // specified item is used on Pokémon
-#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
-#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
-#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
-#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
-#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
-#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
-#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
-#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
+// Evolution types
+#define EVO_MEGA_EVOLUTION      0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
+#define EVO_MOVE_MEGA_EVOLUTION 0xfffe // Mega Evolution that checks for a move instead of held item.
+#define EVO_FRIENDSHIP       1      // Pokémon levels up with friendship ≥ 220
+#define EVO_FRIENDSHIP_DAY   2      // Pokémon levels up during the day with friendship ≥ 220
+#define EVO_FRIENDSHIP_NIGHT 3      // Pokémon levels up at night with friendship ≥ 220
+#define EVO_LEVEL            4      // Pokémon reaches the specified level
+#define EVO_TRADE            5      // Pokémon is traded
+#define EVO_TRADE_ITEM       6      // Pokémon is traded while it's holding the specified item
+#define EVO_ITEM             7      // specified item is used on Pokémon
+#define EVO_LEVEL_ATK_GT_DEF 8      // Pokémon reaches the specified level with attack > defense
+#define EVO_LEVEL_ATK_EQ_DEF 9      // Pokémon reaches the specified level with attack = defense
+#define EVO_LEVEL_ATK_LT_DEF 10     // Pokémon reaches the specified level with attack < defense
+#define EVO_LEVEL_SILCOON    11     // Pokémon reaches the specified level with a Silcoon personality value
+#define EVO_LEVEL_CASCOON    12     // Pokémon reaches the specified level with a Cascoon personality value
+#define EVO_LEVEL_NINJASK    13     // Pokémon reaches the specified level (special value for Ninjask)
+#define EVO_LEVEL_SHEDINJA   14     // Pokémon reaches the specified level (special value for Shedinja)
+#define EVO_BEAUTY           15     // Pokémon levels up with beauty ≥ specified value
 
 #define EVOS_PER_MON 5
 

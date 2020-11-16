@@ -8,100 +8,125 @@
 #include "union_room.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
-#include "constants/flags.h"
 
-EWRAM_DATA struct UnkStruct_8019BA8 * gUnknown_02022C64 = NULL;
-EWRAM_DATA u32 gUnknown_02022C68 = 0;
+#define UR_SPRITE_START_ID (MAX_SPRITES - MAX_UNION_ROOM_PLAYERS)
+#define UR_PLAYER_SPRITE_ID(playerIdx, facingDir)(5 * playerIdx + facingDir)
 
-static u8 sub_8019DF4(void);
-static u32 sub_8019F8C(u32 playerIdx, u32 arg1);
-static void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2);
+static EWRAM_DATA struct UnionRoomObject * sUnionObjWork = NULL;
+static EWRAM_DATA u32 sUnionObjRefreshTimer = 0;
 
-ALIGNED(4) const u8 gUnknown_082F072C[][10] = {
-    {0x21, 0x2c, 0x1f, 0x23, 0x25, 0x24, 0x41, 0x42},
-    {0x22, 0x28, 0x20, 0x2f, 0x2f, 0x0e, 0x14, 0x2d}
+static u8 CreateTask_AnimateUnionRoomPlayers(void);
+static u32 IsUnionRoomPlayerInvisible(u32, u32);
+static void SetUnionRoomObjectFacingDirection(s32, s32, u8);
+
+static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][MAX_UNION_ROOM_PLAYERS + 2] = {
+    [MALE] = {
+        OBJ_EVENT_GFX_MAN_3, 
+        OBJ_EVENT_GFX_BLACK_BELT, 
+        OBJ_EVENT_GFX_CAMPER, 
+        OBJ_EVENT_GFX_YOUNGSTER, 
+        OBJ_EVENT_GFX_PSYCHIC_M, 
+        OBJ_EVENT_GFX_BUG_CATCHER, 
+        OBJ_EVENT_GFX_MAN_4, 
+        OBJ_EVENT_GFX_MAN_5
+    },
+    [FEMALE] = {
+        OBJ_EVENT_GFX_WOMAN_5, 
+        OBJ_EVENT_GFX_HEX_MANIAC, 
+        OBJ_EVENT_GFX_PICNICKER, 
+        OBJ_EVENT_GFX_LASS, 
+        OBJ_EVENT_GFX_LASS, 
+        OBJ_EVENT_GFX_GIRL_3, 
+        OBJ_EVENT_GFX_WOMAN_2, 
+        OBJ_EVENT_GFX_BEAUTY
+    }
 };
 
-static const s16 gUnknown_082F0740[][2] = {
-    {0x4, 0x6},
-    {0xd, 0x8},
-    {0xa, 0x6},
-    {0x1, 0x8},
-    {0xd, 0x4},
-    {0x7, 0x4},
-    {0x1, 0x4},
-    {0x7, 0x8}
+static const s16 sUnionRoomPlayerCoords[MAX_UNION_ROOM_PLAYERS][2] = {
+    { 4,  6},
+    {13,  8},
+    {10,  6},
+    { 1,  8},
+    {13,  4},
+    { 7,  4},
+    { 1,  4},
+    { 7,  8}
 };
 
-static const s8 gUnknown_082F0760[][2] = {
-    { 0,  0},
-    { 1,  0},
-    { 0, -1},
-    {-1,  0},
-    { 0,  1}
+static const s8 sFacingDirectionOffsets[][2] = {
+    [DIR_NONE]  = { 0,  0},
+    [DIR_SOUTH] = { 1,  0},
+    [DIR_NORTH] = { 0, -1},
+    [DIR_WEST]  = {-1,  0},
+    [DIR_EAST]  = { 0,  1}
 };
 
-static const u8 gUnknown_082F076A[] = {
-    0x00, 0x02, 0x01, 0x04, 0x03
+static const u8 sOppositeFacingDirection[] = {
+    [DIR_NONE]  = DIR_NONE,
+    [DIR_SOUTH] = DIR_NORTH,
+    [DIR_NORTH] = DIR_SOUTH,
+    [DIR_WEST]  = DIR_EAST,
+    [DIR_EAST]  = DIR_WEST
 };
 
-static const u8 gUnknown_082F076F[] = {
-    0x01, 0x03, 0x01, 0x04, 0x02
+static const u8 sNextFacingDirection[] = {
+    [DIR_NONE]  = DIR_SOUTH,
+    [DIR_SOUTH] = DIR_WEST,
+    [DIR_NORTH] = DIR_SOUTH,
+    [DIR_WEST]  = DIR_EAST,
+    [DIR_EAST]  = DIR_NORTH
 };
 
-static const u8 gUnknown_082F0774[] = {
-    0x09, 0x08, 0x07, 0x02, 0x06, 0x05, 0x04, 0x03,
-    0xbf, 0x02, 0xc0, 0x02, 0xc1, 0x02, 0xc2, 0x02,
-    0xc3, 0x02, 0xc4, 0x02, 0xc5, 0x02, 0xc6, 0x02
+// Local id 1 is the Nurse/Attendant, 2-9 are link players
+static const u8 sUnionRoomLocalIds[] = { 9, 8, 7, 2, 6, 5, 4, 3 };
+
+static const u16 sUnknown[] = {
+    0x2BF, 
+    0x2C0, 
+    0x2C1, 
+    0x2C2, 
+    0x2C3, 
+    0x2C4, 
+    0x2C5, 
+    0x2C6
 };
 
-static const u8 gUnknown_082F078C[2] = {
+static const u8 sMovement_UnionPlayerExit[2] = {
     MOVEMENT_ACTION_FLY_UP,
     MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 gUnknown_082F078E[2] = {
+static const u8 sMovement_UnionPlayerEnter[2] = {
     MOVEMENT_ACTION_FLY_DOWN,
     MOVEMENT_ACTION_STEP_END
 };
 
-static bool32 is_walking_or_running(void)
+static bool32 IsPlayerStandingStill(void)
 {
-    if (gPlayerAvatar.tileTransitionState == 2 || gPlayerAvatar.tileTransitionState == 0)
-    {
+    if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
-static u8 sub_8019978(u32 a0, u32 a1)
+static u8 GetUnionRoomPlayerGraphicsId(u32 gender, u32 id)
 {
-    return gUnknown_082F072C[a0][a1 % 8];
+    return sUnionRoomObjGfxIds[gender][id % MAX_UNION_ROOM_PLAYERS];
 }
 
-static void sub_8019990(u32 a0, u32 a1, s32 * a2, s32 * a3)
+static void GetUnionRoomPlayerFacingCoords(u32 playerIdx, u32 direction, s32 * x, s32 * y)
 {
-    *a2 = gUnknown_082F0740[a0][0] + gUnknown_082F0760[a1][0] + 7;
-    *a3 = gUnknown_082F0740[a0][1] + gUnknown_082F0760[a1][1] + 7;
+    *x = sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0] + 7;
+    *y = sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1] + 7;
 }
 
-static bool32 sub_80199E0(u32 a0, u32 a1, s32 a2, s32 a3)
+static bool32 IsUnionRoomPlayerFacingTileAt(u32 playerIdx, u32 direction, s32 x, s32 y)
 {
-    if (gUnknown_082F0740[a0][0] + gUnknown_082F0760[a1][0] + 7 != a2)
-    {
-        return FALSE;
-    }
-    else if (gUnknown_082F0740[a0][1] + gUnknown_082F0760[a1][1] + 7 != a3)
-    {
-        return FALSE;
-    }
-    else
-    {
+    if ((sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0] + 7 == x)
+    &&  (sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1] + 7 == y))
         return TRUE;
-    }
+    else
+        return FALSE;
 }
 
 static bool32 IsUnionRoomPlayerHidden(u32 player_idx)
@@ -126,19 +151,19 @@ static void SetUnionRoomPlayerGfx(u32 playerIdx, u32 gfxId)
 
 static void CreateUnionRoomPlayerObjectEvent(u32 playerIdx)
 {
-    TrySpawnObjectEvent(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    TrySpawnObjectEvent(sUnionRoomLocalIds[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 static void RemoveUnionRoomPlayerObjectEvent(u32 playerIdx)
 {
-    RemoveObjectEventByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(sUnionRoomLocalIds[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 static bool32 SetUnionRoomPlayerEnterExitMovement(u32 playerIdx, const u8 * movement)
 {
     u8 objectId;
     struct ObjectEvent * object;
-    if (TryGetObjectEventIdByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
+    if (TryGetObjectEventIdByLocalIdAndMap(sUnionRoomLocalIds[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
     {
         return FALSE;
     }
@@ -154,11 +179,11 @@ static bool32 SetUnionRoomPlayerEnterExitMovement(u32 playerIdx, const u8 * move
     return TRUE;
 }
 
-static bool32 sub_8019B3C(u32 playerIdx)
+static bool32 TryReleaseUnionRoomPlayerObjectEvent(u32 playerIdx)
 {
     u8 objectId;
     struct ObjectEvent * object;
-    if (TryGetObjectEventIdByLocalIdAndMap(gUnknown_082F0774[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
+    if (TryGetObjectEventIdByLocalIdAndMap(sUnionRoomLocalIds[playerIdx], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
     {
         return TRUE;
     }
@@ -178,39 +203,39 @@ static bool32 sub_8019B3C(u32 playerIdx)
     return TRUE;
 }
 
-u8 sub_8019BA8(struct UnkStruct_8019BA8 * ptr)
+u8 InitUnionRoomPlayerObjects(struct UnionRoomObject * players)
 {
     s32 i;
 
-    gUnknown_02022C68 = 0;
-    gUnknown_02022C64 = ptr;
-    for (i = 0; i < 8; i++)
+    sUnionObjRefreshTimer = 0;
+    sUnionObjWork = players;
+    for (i = 0; i < MAX_UNION_ROOM_PLAYERS; i++)
     {
-        ptr[i].field_0 = 0;
-        ptr[i].field_1 = 0;
-        ptr[i].field_2 = 0;
-        ptr[i].field_3 = 0;
+        players[i].state = 0;
+        players[i].gfxId = 0;
+        players[i].animState = 0;
+        players[i].schedAnim = UNION_ROOM_SPAWN_NONE;
     }
-    return sub_8019DF4();
+    return CreateTask_AnimateUnionRoomPlayers();
 }
 
-static bool32 sub_8019BDC(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
+static bool32 AnimateUnionRoomPlayerDespawn(s8 * state, u32 playerIdx, struct UnionRoomObject * ptr)
 {
-    switch (*a0)
+    switch (*state)
     {
     case 0:
-        if (SetUnionRoomPlayerEnterExitMovement(playerIdx, gUnknown_082F078C) == TRUE)
+        if (SetUnionRoomPlayerEnterExitMovement(playerIdx, sMovement_UnionPlayerExit) == TRUE)
         {
             HideUnionRoomPlayer(playerIdx);
-            (*a0)++;
+            (*state)++;
         }
         break;
     case 1:
-        if (sub_8019B3C(playerIdx))
+        if (TryReleaseUnionRoomPlayerObjectEvent(playerIdx))
         {
             RemoveUnionRoomPlayerObjectEvent(playerIdx);
             HideUnionRoomPlayer(playerIdx);
-            *a0 = 0;
+            *state = 0;
             return TRUE;
         }
         break;
@@ -218,42 +243,42 @@ static bool32 sub_8019BDC(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr
     return FALSE;
 }
 
-static bool32 sub_8019C38(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
+static bool32 AnimateUnionRoomPlayerSpawn(s8 * state, u32 playerIdx, struct UnionRoomObject * ptr)
 {
     s16 x, y;
 
-    switch (*a0)
+    switch (*state)
     {
     case 0:
-        if (!is_walking_or_running())
+        if (!IsPlayerStandingStill())
         {
             break;
         }
         PlayerGetDestCoords(&x, &y);
-        if (sub_80199E0(playerIdx, 0, x, y) == 1)
+        if (IsUnionRoomPlayerFacingTileAt(playerIdx, 0, x, y) == TRUE)
         {
             break;
         }
         player_get_pos_including_state_based_drift(&x, &y);
-        if (sub_80199E0(playerIdx, 0, x, y) == 1)
+        if (IsUnionRoomPlayerFacingTileAt(playerIdx, 0, x, y) == TRUE)
         {
             break;
         }
-        SetUnionRoomPlayerGfx(playerIdx, ptr->field_1);
+        SetUnionRoomPlayerGfx(playerIdx, ptr->gfxId);
         CreateUnionRoomPlayerObjectEvent(playerIdx);
         ShowUnionRoomPlayer(playerIdx);
-        (*a0)++;
+        (*state)++;
         // fallthrough
     case 3: // incorrect?
-        if (SetUnionRoomPlayerEnterExitMovement(playerIdx, gUnknown_082F078E) == 1)
+        if (SetUnionRoomPlayerEnterExitMovement(playerIdx, sMovement_UnionPlayerEnter) == TRUE)
         {
-            (*a0)++;
+            (*state)++;
         }
         break;
     case 2:
-        if (sub_8019B3C(playerIdx))
+        if (TryReleaseUnionRoomPlayerObjectEvent(playerIdx))
         {
-            *a0 = 0;
+            *state = 0;
             return TRUE;
         }
         break;
@@ -261,44 +286,38 @@ static bool32 sub_8019C38(s8 * a0, u32 playerIdx, struct UnkStruct_8019BA8 * ptr
     return FALSE;
 }
 
-static bool32 sub_8019CF0(u32 playerIdx, u32 a1, u32 a2)
+static bool32 SpawnGroupLeader(u32 playerIdx, u32 gender, u32 id)
 {
-    struct UnkStruct_8019BA8 * ptr = &gUnknown_02022C64[playerIdx];
-    ptr->field_3 = 1;
-    ptr->field_1 = sub_8019978(a1, a2);
-    if (ptr->field_0 == 0)
-    {
+    struct UnionRoomObject * ptr = &sUnionObjWork[playerIdx];
+    ptr->schedAnim = UNION_ROOM_SPAWN_IN;
+    ptr->gfxId = GetUnionRoomPlayerGraphicsId(gender, id);
+
+    if (ptr->state == 0)
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
-static bool32 sub_8019D20(u32 playerIdx)
+static bool32 DespawnGroupLeader(u32 playerIdx)
 {
-    struct UnkStruct_8019BA8 * ptr = &gUnknown_02022C64[playerIdx];
-    ptr->field_3 = 2;
-    if (ptr->field_0 == 1)
-    {
+    struct UnionRoomObject * ptr = &sUnionObjWork[playerIdx];
+    ptr->schedAnim = UNION_ROOM_SPAWN_OUT;
+
+    if (ptr->state == 1)
         return TRUE;
-    }
     else
-    {
         return FALSE;
-    }
 }
 
-static void sub_8019D44(u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
+static void AnimateUnionRoomPlayer(u32 playerIdx, struct UnionRoomObject * ptr)
 {
-    switch (ptr->field_0)
+    switch (ptr->state)
     {
     case 0:
-        if (ptr->field_3 == 1)
+        if (ptr->schedAnim == UNION_ROOM_SPAWN_IN)
         {
-            ptr->field_0 = 2;
-            ptr->field_2 = 0;
+            ptr->state = 2;
+            ptr->animState = 0;
         }
         else
         {
@@ -306,23 +325,23 @@ static void sub_8019D44(u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
         }
         // fallthrough
     case 2:
-        if (!sub_8019F8C(playerIdx, 0) && ptr->field_3 == 2)
+        if (!IsUnionRoomPlayerInvisible(playerIdx, 0) && ptr->schedAnim == UNION_ROOM_SPAWN_OUT)
         {
-            ptr->field_0 = 0;
-            ptr->field_2 = 0;
+            ptr->state = 0;
+            ptr->animState = 0;
             RemoveUnionRoomPlayerObjectEvent(playerIdx);
             HideUnionRoomPlayer(playerIdx);
         }
-        else if (sub_8019C38(&ptr->field_2, playerIdx, ptr) == 1)
+        else if (AnimateUnionRoomPlayerSpawn(&ptr->animState, playerIdx, ptr) == TRUE)
         {
-            ptr->field_0 = 1;
+            ptr->state = 1;
         }
         break;
     case 1:
-        if (ptr->field_3 == 2)
+        if (ptr->schedAnim == UNION_ROOM_SPAWN_OUT)
         {
-            ptr->field_0 = 3;
-            ptr->field_2 = 0;
+            ptr->state = 3;
+            ptr->animState = 0;
         }
         else
         {
@@ -330,49 +349,43 @@ static void sub_8019D44(u32 playerIdx, struct UnkStruct_8019BA8 * ptr)
         }
         // fallthrough
     case 3:
-        if (sub_8019BDC(&ptr->field_2, playerIdx, ptr) == 1)
+        if (AnimateUnionRoomPlayerDespawn(&ptr->animState, playerIdx, ptr) == 1)
         {
-            ptr->field_0 = 0;
+            ptr->state = 0;
         }
         break;
     }
-    ptr->field_3 = 0;
+    ptr->schedAnim = UNION_ROOM_SPAWN_NONE;
 }
 
-static void sub_8019DD0(u8 taskId)
+static void Task_AnimateUnionRoomPlayers(u8 taskId)
 {
     s32 i;
-    for (i = 0; i < 8; i++)
-    {
-        sub_8019D44(i, &gUnknown_02022C64[i]);
-    }
+    for (i = 0; i < MAX_UNION_ROOM_PLAYERS; i++)
+        AnimateUnionRoomPlayer(i, &sUnionObjWork[i]);
 }
 
-static u8 sub_8019DF4(void)
+static u8 CreateTask_AnimateUnionRoomPlayers(void)
 {
-    if (FuncIsActiveTask(sub_8019DD0) == 1)
-    {
+    if (FuncIsActiveTask(Task_AnimateUnionRoomPlayers) == TRUE)
         return NUM_TASKS;
-    }
     else
-    {
-        return CreateTask(sub_8019DD0, 5);
-    }
+        return CreateTask(Task_AnimateUnionRoomPlayers, 5);
 }
 
-static void sub_8019E20(void)
+static void DestroyTask_AnimateUnionRoomPlayers(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_8019DD0);
+    u8 taskId = FindTaskIdByFunc(Task_AnimateUnionRoomPlayers);
     if (taskId < NUM_TASKS)
     {
         DestroyTask(taskId);
     }
 }
 
-void sub_8019E3C(void)
+void DestroyUnionRoomPlayerObjects(void)
 {
     s32 i;
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < MAX_UNION_ROOM_PLAYERS; i++)
     {
         if (!IsUnionRoomPlayerHidden(i))
         {
@@ -380,233 +393,232 @@ void sub_8019E3C(void)
             HideUnionRoomPlayer(i);
         }
     }
-    gUnknown_02022C64 = NULL;
-    sub_8019E20();
+    sUnionObjWork = NULL;
+    DestroyTask_AnimateUnionRoomPlayers();
 }
 
-void sub_8019E70(u8 * sp8, s32 r9)
+void CreateGroupMemberSpritesInvisible(u8 * spriteIds, s32 playerIdx)
 {
-    s32 r7;
+    s32 direction;
 
-    for (r7 = 0; r7 < 5; r7++)
+    for (direction = DIR_NONE; direction <= DIR_EAST; direction++)
     {
-        s32 r5 = 5 * r9 + r7;
-        sp8[r5] = sprite_new(OBJ_EVENT_GFX_MAN_4, r5 - 0x38, gUnknown_082F0740[r9][0] + gUnknown_082F0760[r7][0], gUnknown_082F0740[r9][1] + gUnknown_082F0760[r7][1], 3, 1);
-        sub_8097C44(r5 - 0x38, TRUE);
+        s32 id = UR_PLAYER_SPRITE_ID(playerIdx, direction);
+        spriteIds[id] = CreateObjectSprite(OBJ_EVENT_GFX_MAN_4, 
+                                           id - UR_SPRITE_START_ID, 
+                                           sUnionRoomPlayerCoords[playerIdx][0] + sFacingDirectionOffsets[direction][0], 
+                                           sUnionRoomPlayerCoords[playerIdx][1] + sFacingDirectionOffsets[direction][1], 
+                                           3, 1);
+        SetObjectEventSpriteInvisibility(id - UR_SPRITE_START_ID, TRUE);
     }
 }
 
-void sub_8019F04(u8 * r5)
+void DestroyGroupMemberSprites(u8 * spriteIds)
 {
     s32 i;
-    for (i = 0; i < 40; i++)
-    {
-        DestroySprite(&gSprites[r5[i]]);
-    }
+    for (i = 0; i < UR_PLAYER_SPRITE_ID(MAX_UNION_ROOM_PLAYERS, 0); i++)
+        DestroySprite(&gSprites[spriteIds[i]]);
 }
 
-void sub_8019F2C(void)
+void SetTilesAroundUnionRoomPlayersPassable(void)
 {
-    s32 i, j, x, y;
-    for (i = 0; i < 8; i++)
+    s32 i, direction, x, y;
+    for (i = 0; i < MAX_UNION_ROOM_PLAYERS; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (direction = DIR_NONE; direction <= DIR_EAST; direction++)
         {
-            sub_8019990(i, j, &x, &y);
-            sub_8088B94(x, y, 0);
+            GetUnionRoomPlayerFacingCoords(i, direction, &x, &y);
+            MapGridSetMetatileImpassabilityAt(x, y, FALSE);
         }
     }
 }
 
-static u8 sub_8019F64(u32 r1, u32 unused, struct GFtgtGname * r2)
+static u8 GetNewFacingDirectionForUnionRoomPlayer(u32 direction, u32 playerIdx, struct GFtgtGname * gname)
 {
-    if (r1 != 0)
-    {
-        return gUnknown_082F076F[r1];
-    }
-    else if (r2->activity == 0x45)
-    {
-        return 1;
-    }
+    if (direction != DIR_NONE)
+        return sNextFacingDirection[direction];
+    else if (gname->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
+        return DIR_SOUTH;
     else
-    {
-        return 4;
-    }
+        return DIR_EAST;
 }
 
-static u32 sub_8019F8C(u32 a0, u32 a1)
+static bool32 IsUnionRoomPlayerInvisible(u32 playerIdx, u32 direction)
 {
-    return sub_8097C8C(5 * a0 + a1 - 0x38);
+    return IsObjectEventSpriteInvisible(UR_PLAYER_SPRITE_ID(playerIdx, direction) - UR_SPRITE_START_ID);
 }
 
-static void sub_8019FA4(u32 r5, u32 r6, u8 r8, struct GFtgtGname * r9)
+static void SpawnGroupMember(u32 playerIdx, u32 direction, u8 graphicsId, struct GFtgtGname * gname)
 {
     s32 x, y;
-    s32 r7 = 5 * r5 + r6;
-    if (sub_8019F8C(r5, r6) == 1)
+    s32 id = UR_PLAYER_SPRITE_ID(playerIdx, direction);
+    if (IsUnionRoomPlayerInvisible(playerIdx, direction) == TRUE)
     {
-        sub_8097C44(r7 - 0x38, FALSE);
-        sub_8097CC4(r7 - 0x38, 1);
+        SetObjectEventSpriteInvisibility(id - UR_SPRITE_START_ID, FALSE);
+        SetObjectEventSpriteAnim(id - UR_SPRITE_START_ID, UNION_ROOM_SPAWN_IN);
     }
-    sub_8097BB4(r7 - 0x38, r8);
-    sub_801A3B0(r6, r5, sub_8019F64(r6, r5, r9));
-    sub_8019990(r5, r6, &x, &y);
-    sub_8088B94(x, y, 1);
+    SetObjectEventSpriteGraphics(id - UR_SPRITE_START_ID, graphicsId);
+    SetUnionRoomObjectFacingDirection(direction, playerIdx, GetNewFacingDirectionForUnionRoomPlayer(direction, playerIdx, gname));
+    GetUnionRoomPlayerFacingCoords(playerIdx, direction, &x, &y);
+    MapGridSetMetatileImpassabilityAt(x, y, TRUE);
 }
 
-static void sub_801A02C(u32 a0, u32 a1)
+static void DespawnGroupMember(u32 playerIdx, u32 direction)
 {
     s32 x, y;
-    sub_8097CC4(5 * a0 + a1 - 0x38, 2);
-    sub_8019990(a0, a1, &x, &y);
-    sub_8088B94(x, y, 0);
+    SetObjectEventSpriteAnim(UR_PLAYER_SPRITE_ID(playerIdx, direction) - UR_SPRITE_START_ID, UNION_ROOM_SPAWN_OUT);
+    GetUnionRoomPlayerFacingCoords(playerIdx, direction, &x, &y);
+    MapGridSetMetatileImpassabilityAt(x, y, FALSE);
 }
 
-static void sub_801A064(u32 r7, struct GFtgtGname * r8)
+static void AssembleGroup(u32 playerIdx, struct GFtgtGname * gname)
 {
     s16 x, y, x2, y2;
     s32 i;
 
     PlayerGetDestCoords(&x, &y);
     player_get_pos_including_state_based_drift(&x2, &y2);
-    if (sub_8097C8C(5 * r7 - 0x38) == 1)
+    if (IsObjectEventSpriteInvisible(UR_PLAYER_SPRITE_ID(playerIdx, 0) - UR_SPRITE_START_ID) == TRUE)
     {
-        if (sub_80199E0(r7, 0, x, y) == 1 || sub_80199E0(r7, 0, x2, y2) == 1)
+        if (IsUnionRoomPlayerFacingTileAt(playerIdx, 0, x, y) == TRUE || IsUnionRoomPlayerFacingTileAt(playerIdx, 0, x2, y2) == TRUE)
         {
             return;
         }
-        sub_8019FA4(r7, 0, sub_8019978(r8->playerGender, r8->unk_00.playerTrainerId[0]), r8);
+        SpawnGroupMember(playerIdx, 0, GetUnionRoomPlayerGraphicsId(gname->playerGender, gname->unk_00.playerTrainerId[0]), gname);
     }
     for (i = 1; i < 5; i++)
     {
-        if (r8->child_sprite_gender[i - 1] == 0)
+        if (gname->child_sprite_gender[i - 1] == 0)
         {
-            sub_801A02C(r7, i);
+            DespawnGroupMember(playerIdx, i);
         }
-        else if (sub_80199E0(r7, i, x, y) == 0 && sub_80199E0(r7, i, x2, y2) == 0)
+        else if (IsUnionRoomPlayerFacingTileAt(playerIdx, i, x, y) == FALSE && IsUnionRoomPlayerFacingTileAt(playerIdx, i, x2, y2) == FALSE)
         {
-            sub_8019FA4(r7, i, sub_8019978((r8->child_sprite_gender[i - 1] >> 3) & 1, r8->child_sprite_gender[i - 1] & 7), r8);
+            SpawnGroupMember(playerIdx, i, GetUnionRoomPlayerGraphicsId((gname->child_sprite_gender[i - 1] >> 3) & 1, gname->child_sprite_gender[i - 1] & 7), gname);
         }
     }
 }
 
-static void sub_801A16C(u32 r5, struct GFtgtGname * r4)
+static void SpawnGroupLeaderAndMembers(u32 playerIdx, struct GFtgtGname * gname)
 {
     u32 i;
-    switch (r4->activity)
+    switch (gname->activity)
     {
-    case 0x40:
-    case 0x54:
-        sub_8019CF0(r5, r4->playerGender, r4->unk_00.playerTrainerId[0]);
+    case ACTIVITY_NONE | IN_UNION_ROOM:
+    case ACTIVITY_PLYRTALK | IN_UNION_ROOM:
+        SpawnGroupLeader(playerIdx, gname->playerGender, gname->unk_00.playerTrainerId[0]);
         for (i = 0; i < 5; i++)
         {
-            sub_801A02C(r5, i);
+            DespawnGroupMember(playerIdx, i);
         }
         break;
-    case 0x41:
-    case 0x44:
-    case 0x45:
-    case 0x48:
-    case 0x51:
-    case 0x52:
-    case 0x53:
-        sub_8019D20(r5);
-        sub_801A064(r5, r4);
+    case ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM:
+    case ACTIVITY_TRADE | IN_UNION_ROOM:
+    case ACTIVITY_CHAT | IN_UNION_ROOM:
+    case ACTIVITY_CARD | IN_UNION_ROOM:
+    case ACTIVITY_ACCEPT | IN_UNION_ROOM:
+    case ACTIVITY_DECLINE | IN_UNION_ROOM:
+    case ACTIVITY_NPCTALK | IN_UNION_ROOM:
+        DespawnGroupLeader(playerIdx);
+        AssembleGroup(playerIdx, gname);
         break;
     }
 }
 
-static void sub_801A214(u32 r5, struct GFtgtGname * unused)
+static void DespawnGroupLeaderAndMembers(u32 r5, struct GFtgtGname *gname)
 {
     s32 i;
-    sub_8019D20(r5);
+    DespawnGroupLeader(r5);
     for (i = 0; i < 5; i++)
     {
-        sub_801A02C(r5, i);
+        DespawnGroupMember(r5, i);
     }
 }
 
-static void sub_801A234(struct UnkStruct_URoom *r0)
+static void UpdateUnionRoomPlayerSprites(struct WirelessLink_URoom *uroom)
 {
     s32 i;
     struct UnkStruct_x20 * r4;
-    gUnknown_02022C68 = 0;
-    for (i = 0, r4 = r0->field_0->arr; i < 8; i++)
+    sUnionObjRefreshTimer = 0;
+    for (i = 0, r4 = uroom->field_0->arr; i < MAX_UNION_ROOM_PLAYERS; i++)
     {
-        if (r4[i].field_1A_0 == 1)
+        if (r4[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
-            sub_801A16C(i, &r4[i].unk.field_0);
+            SpawnGroupLeaderAndMembers(i, &r4[i].gname_uname.gname);
         }
-        else if (r4[i].field_1A_0 == 2)
+        else if (r4[i].groupScheduledAnim == UNION_ROOM_SPAWN_OUT)
         {
-            sub_801A214(i, &r4[i].unk.field_0);
+            DespawnGroupLeaderAndMembers(i, &r4[i].gname_uname.gname);
         }
     }
 }
 
-void sub_801A274(struct UnkStruct_URoom *unused)
+void ScheduleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom)
 {
-    gUnknown_02022C68 = 300;
+    sUnionObjRefreshTimer = 300;
 }
 
-void sub_801A284(struct UnkStruct_URoom *r2)
+void HandleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom)
 {
-    if (++gUnknown_02022C68 > 300)
+    if (++sUnionObjRefreshTimer > 300)
     {
-        sub_801A234(r2);
+        UpdateUnionRoomPlayerSprites(uroom);
     }
 }
 
-bool32 sub_801A2A8(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
+bool32 TryInteractWithUnionRoomMember(struct UnkStruct_Main0 *main0, s16 *directionPtr, s16 *playerIdxPtr, u8 *spriteIds)
 {
     s16 x, y;
-    s32 i, j;
+    s32 i, direction;
     struct UnkStruct_x20 * r4;
-    if (!is_walking_or_running())
+    if (!IsPlayerStandingStill())
     {
         return FALSE;
     }
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    for (i = 0, r4 = arg0->arr; i < 8; i++)
+    for (i = 0, r4 = main0->arr; i < MAX_UNION_ROOM_PLAYERS; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (direction = DIR_NONE; direction <= DIR_EAST; direction++)
         {
-            s32 r3 = 5 * i + j;
-            if (x != gUnknown_082F0740[i][0] + gUnknown_082F0760[j][0] + 7)
+            s32 id = UR_PLAYER_SPRITE_ID(i, direction);
+            if (x != sUnionRoomPlayerCoords[i][0] + sFacingDirectionOffsets[direction][0] + 7)
             {
                 continue;
             }
-            if (y != gUnknown_082F0740[i][1] + gUnknown_082F0760[j][1] + 7)
+            if (y != sUnionRoomPlayerCoords[i][1] + sFacingDirectionOffsets[direction][1] + 7)
             {
                 continue;
             }
-            if (sub_8097C8C(r3 - 0x38) != 0)
+            if (IsObjectEventSpriteInvisible(id - UR_SPRITE_START_ID))
             {
                 continue;
             }
-            if (sub_8097D9C(r3 - 0x38) != 0)
+            if (IsObjectEventSpriteAnimating(id - UR_SPRITE_START_ID))
             {
                 continue;
             }
-            if (r4[i].field_1A_0 != 1)
+            if (r4[i].groupScheduledAnim != UNION_ROOM_SPAWN_IN)
             {
                 continue;
             }
-            sub_801A3B0(j, i, gUnknown_082F076A[GetPlayerFacingDirection()]);
-            *arg1 = j;
-            *arg2 = i;
+            // Face player
+            SetUnionRoomObjectFacingDirection(direction, i, sOppositeFacingDirection[GetPlayerFacingDirection()]);
+            *directionPtr = direction;
+            *playerIdxPtr = i;
             return TRUE;
         }
     }
     return FALSE;
 }
 
-static void sub_801A3B0(s32 arg0, s32 arg1, u8 arg2)
+static void SetUnionRoomObjectFacingDirection(s32 currDirection, s32 playerIdx, u8 newDirection)
 {
-    sub_8097B78(5 * arg1 - 0x38 + arg0, arg2);
+    TurnObjectEventSprite(5 * playerIdx - UR_SPRITE_START_ID + currDirection, newDirection);
+    // should be line below, but order is swapped here
+    // TurnObjectEventSprite(UR_PLAYER_SPRITE_ID(playerIdx, currDirection) - UR_SPRITE_START_ID, newDirection);
 }
 
-void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)
+void UpdateUnionRoomMemberFacing(u32 currDirection, u32 playerIdx, struct UnkStruct_Main0 *main0)
 {
-    return sub_801A3B0(arg0, arg1, sub_8019F64(arg0, arg1, &arg2->arr[arg1].unk.field_0));
+    return SetUnionRoomObjectFacingDirection(currDirection, playerIdx, GetNewFacingDirectionForUnionRoomPlayer(currDirection, playerIdx, &main0->arr[playerIdx].gname_uname.gname));
 }

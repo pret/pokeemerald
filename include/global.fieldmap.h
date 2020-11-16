@@ -54,7 +54,7 @@ struct ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
-    /*0x02*/ u8 unk2;
+    /*0x02*/ u8 inConnection; // Leftover from FRLG
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
@@ -247,14 +247,14 @@ enum {
     PLAYER_AVATAR_STATE_WATERING,
 };
 
-#define PLAYER_AVATAR_FLAG_ON_FOOT    (1 << PLAYER_AVATAR_STATE_NORMAL)
-#define PLAYER_AVATAR_FLAG_MACH_BIKE  (1 << PLAYER_AVATAR_STATE_MACH_BIKE)
-#define PLAYER_AVATAR_FLAG_ACRO_BIKE  (1 << PLAYER_AVATAR_STATE_ACRO_BIKE)
-#define PLAYER_AVATAR_FLAG_SURFING    (1 << PLAYER_AVATAR_STATE_SURFING)
-#define PLAYER_AVATAR_FLAG_UNDERWATER (1 << PLAYER_AVATAR_STATE_UNDERWATER)
-#define PLAYER_AVATAR_FLAG_5          (1 << PLAYER_AVATAR_STATE_FIELD_MOVE)
-#define PLAYER_AVATAR_FLAG_6          (1 << PLAYER_AVATAR_STATE_FISHING)
-#define PLAYER_AVATAR_FLAG_DASH       (1 << PLAYER_AVATAR_STATE_WATERING)
+#define PLAYER_AVATAR_FLAG_ON_FOOT     (1 << 0)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE   (1 << 1)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE   (1 << 2)
+#define PLAYER_AVATAR_FLAG_SURFING     (1 << 3)
+#define PLAYER_AVATAR_FLAG_UNDERWATER  (1 << 4)
+#define PLAYER_AVATAR_FLAG_5           (1 << 5)
+#define PLAYER_AVATAR_FLAG_FORCED_MOVE (1 << 6)
+#define PLAYER_AVATAR_FLAG_DASH        (1 << 7)
 
 enum
 {

@@ -37,7 +37,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 	call FortreeCity_Gym_EventScript_GiveAerialAce
 	closemessage
 	delay 30
-	playfanfare MUS_ME_TORE_EYE
+	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox FortreeCity_Gym_Text_RegisteredWinona, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
@@ -50,7 +50,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 
 FortreeCity_Gym_EventScript_GiveAerialAce2:: @ 8216646
 	giveitem ITEM_TM40
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40
@@ -59,7 +59,7 @@ FortreeCity_Gym_EventScript_GiveAerialAce2:: @ 8216646
 
 FortreeCity_Gym_EventScript_GiveAerialAce:: @ 821666A
 	giveitem ITEM_TM40
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40

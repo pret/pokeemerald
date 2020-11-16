@@ -12,10 +12,6 @@ static void AnimEllipticalGust(struct Sprite *);
 static void AnimEllipticalGust_Step(struct Sprite *);
 static void AnimGustToTarget(struct Sprite *);
 static void AnimGustToTarget_Step(struct Sprite *);
-static void AnimFlyBallUp(struct Sprite *);
-static void AnimFlyBallUp_Step(struct Sprite *);
-static void AnimFlyBallAttack(struct Sprite *);
-static void AnimFlyBallAttack_Step(struct Sprite *);
 static void AnimFallingFeather(struct Sprite *);
 static void sub_810E520(struct Sprite *);
 static void sub_810EB40(struct Sprite *);
@@ -104,7 +100,7 @@ static const union AffineAnimCmd sAffineAnim_FlyBallUp[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const sAffineAnims_FlyBallUp[] =
+const union AffineAnimCmd *const gAffineAnims_FlyBallUp[] =
 {
     sAffineAnim_FlyBallUp,
 };
@@ -121,7 +117,7 @@ static const union AffineAnimCmd sAffineAnim_FlyBallAttack_1[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd *const sAffineAnims_FlyBallAttack[] =
+const union AffineAnimCmd *const gAffineAnims_FlyBallAttack[] =
 {
     sAffineAnim_FlyBallAttack_0,
     sAffineAnim_FlyBallAttack_1,
@@ -134,7 +130,7 @@ const struct SpriteTemplate gFlyBallUpSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sAffineAnims_FlyBallUp,
+    .affineAnims = gAffineAnims_FlyBallUp,
     .callback = AnimFlyBallUp,
 };
 
@@ -145,7 +141,7 @@ const struct SpriteTemplate gFlyBallAttackSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sAffineAnims_FlyBallAttack,
+    .affineAnims = gAffineAnims_FlyBallAttack,
     .callback = AnimFlyBallAttack,
 };
 
@@ -464,7 +460,7 @@ void AnimAirWaveCrescent(struct Sprite *sprite)
     SeekSpriteAnim(sprite, gBattleAnimArgs[5]);
 }
 
-static void AnimFlyBallUp(struct Sprite *sprite)
+void AnimFlyBallUp(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];
@@ -473,7 +469,7 @@ static void AnimFlyBallUp(struct Sprite *sprite)
     gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].invisible = TRUE;
 }
 
-static void AnimFlyBallUp_Step(struct Sprite *sprite)
+void AnimFlyBallUp_Step(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -489,7 +485,7 @@ static void AnimFlyBallUp_Step(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void AnimFlyBallAttack(struct Sprite *sprite)
+void AnimFlyBallAttack(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -514,7 +510,7 @@ static void AnimFlyBallAttack(struct Sprite *sprite)
     sprite->callback = AnimFlyBallAttack_Step;
 }
 
-static void AnimFlyBallAttack_Step(struct Sprite *sprite)
+void AnimFlyBallAttack_Step(struct Sprite *sprite)
 {
     sprite->data[0] = 1;
     AnimTranslateLinear(sprite);
@@ -570,7 +566,7 @@ struct FeatherDanceData
 static void AnimFallingFeather(struct Sprite *sprite)
 {
     u8 battler, matrixNum, sinIndex;
-    s16 spriteCoord, sinVal;
+    s16 spriteCoord;
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;
 
@@ -633,22 +629,11 @@ static void AnimFallingFeather(struct Sprite *sprite)
     matrixNum = sprite->oam.matrixNum;
 
     sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
-    sinVal = gSineTable[sinIndex];
+    spriteCoord = gSineTable[sinIndex];
 
     gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sinIndex + 64];
-    // The comparison below is completely pointless. 'sprite' is sure to be a valid pointer and
-    // both the 'if' and 'else' parts are exactly the same.
-    // The only reason for this is making sure the compiler generates the exact ASM.
-    if (sprite)
-    {
-        gOamMatrices[matrixNum].b = sinVal;
-        gOamMatrices[matrixNum].c = -sinVal;
-    }
-    else
-    {
-        gOamMatrices[matrixNum].b = sinVal;
-        gOamMatrices[matrixNum].c = -sinVal;
-    }
+    gOamMatrices[matrixNum].b = spriteCoord;
+    gOamMatrices[matrixNum].c = -spriteCoord;
 
     sprite->callback = sub_810E520;
 }
@@ -670,14 +655,14 @@ static void sub_810E520(struct Sprite *sprite)
     {
         switch (data->unk2 / 64)
         {
-        case 0:
-            if (data->unk0_1 << 24 >> 24 == 1) // the shifts have to be here
+        case 0: 
+            if ((u8)data->unk0_1 == 1) //casts to u8 here are necessary for matching
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 3)
+            else if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -724,13 +709,13 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 0;
             break;
         case 1:
-            if (data->unk0_1 << 24 >> 24 == 0)
+            if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 2)
+            else if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -775,13 +760,13 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 1;
             break;
         case 2:
-            if (data->unk0_1 << 24 >> 24 == 3)
+            if ((u8)data->unk0_1 == 3)
             {
                 data->unk0_0d = 1;
                 data->unk0_0a = 1;
                 data->unk1 = 0;
             }
-            else if (data->unk0_1 << 24 >> 24 == 1)
+            else if ((u8)data->unk0_1 == 1)
             {
                 data->unk0_0a = 1;
                 data->unk1 = 0;
@@ -826,11 +811,11 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 2;
             break;
         case 3:
-            if (data->unk0_1 << 24 >> 24 == 2)
+            if ((u8)data->unk0_1 == 2)
             {
                 data->unk0_0d = 1;
             }
-            else if (data->unk0_1 << 24 >> 24 == 0)
+            else if ((u8)data->unk0_1 == 0)
             {
                 data->unk0_0b ^= 1;
                 data->unk0_0a = 1;
@@ -876,10 +861,8 @@ static void sub_810E520(struct Sprite *sprite)
             data->unk0_1 = 3;
             break;
         }
-        #ifndef NONMATCHING
-            asm("":::"r8");
-        #endif
-        sprite->pos2.x = (data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
+
+        sprite->pos2.x = ((s32)data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
         matrixNum = sprite->oam.matrixNum;
 
         sinIndex = (-sprite->pos2.x >> 1) + data->unkA;
@@ -1212,7 +1195,7 @@ static void AnimSkyAttackBird(struct Sprite *sprite)
     sprite->data[7] = ((posy - sprite->pos1.y) << 4) / 12;
 
     rotation = ArcTan2Neg(posx - sprite->pos1.x, posy - sprite->pos1.y);
-    rotation += 49152;
+    rotation -= 16384;
 
     TrySetSpriteRotScale(sprite, 1, 0x100, 0x100, rotation);
 

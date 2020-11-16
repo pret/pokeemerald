@@ -1,3 +1,5 @@
+.set LOCALID_STEVEN, 19
+
 Route118_MapScripts:: @ 81F3DBC
 	map_script MAP_SCRIPT_ON_TRANSITION, Route118_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route118_OnLoad
@@ -71,7 +73,7 @@ Route118_EventScript_StevenTrigger0:: @ 81F3E8E
 	setvar VAR_0x8008, 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement 19, Route118_Movement_StevenApproachLedge0
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenApproachLedge0
 	waitmovement 0
 	goto Route118_EventScript_StevenTrigger
 	end
@@ -89,14 +91,14 @@ Route118_EventScript_StevenTrigger2:: @ 81F3EC4
 	setvar VAR_0x8008, 2
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement 19, Route118_Movement_StevenApproachLedge2
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenApproachLedge2
 	waitmovement 0
 	goto Route118_EventScript_StevenTrigger
 	end
 
 Route118_EventScript_StevenTrigger:: @ 81F3EE4
-	playse SE_DANSA
-	applymovement 19, Route118_Movement_StevenJumpLedge
+	playse SE_LEDGE
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenJumpLedge
 	waitmovement 0
 	delay 30
 	msgbox Route118_Text_StevenQuestions, MSGBOX_DEFAULT
@@ -108,25 +110,25 @@ Route118_EventScript_StevenTrigger:: @ 81F3EE4
 	compare VAR_0x8008, 2
 	call_if_eq Route118_EventScript_StevenExit2
 	setvar VAR_ROUTE118_STATE, 1
-	removeobject 19
+	removeobject LOCALID_STEVEN
 	releaseall
 	end
 
 Route118_EventScript_StevenExit0:: @ 81F3F28
 	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
-	applymovement 19, Route118_Movement_StevenExit0
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenExit0
 	waitmovement 0
 	return
 
 Route118_EventScript_StevenExit1:: @ 81F3F3A
 	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
-	applymovement 19, Route118_Movement_StevenExit1
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenExit1
 	waitmovement 0
 	return
 
 Route118_EventScript_StevenExit2:: @ 81F3F4C
 	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
-	applymovement 19, Route118_Movement_StevenExit2
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenExit2
 	waitmovement 0
 	return
 
