@@ -308,9 +308,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 178,
         .evYield_SpAttack  = 2,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SILVER_POWDER,
-        #endif
+        .item2 = ITEM_SILVER_POWDER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -392,9 +390,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 178,
         .evYield_Attack    = 2,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -563,9 +559,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 52,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SHARP_BEAK,
-        #endif
+        .item2 = ITEM_SHARP_BEAK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -593,9 +587,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 155,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SHARP_BEAK,
-        #endif
+        .item2 = ITEM_SHARP_BEAK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -686,9 +678,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 10,
         .friendship = 70,
@@ -990,9 +980,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 150,
         .expYield = 113,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MOON_STONE,
-        #endif
+        .item2 = ITEM_MOON_STONE,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 10,
         .friendship = 140,
@@ -1031,9 +1019,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 25,
         .expYield = 217,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MOON_STONE,
-        #endif
+        .item2 = ITEM_MOON_STONE,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 10,
         .friendship = 140,
@@ -1063,9 +1049,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 60,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CHARCOAL,
-        #endif
+        .item2 = ITEM_CHARCOAL,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 20,
         .friendship = 70,
@@ -1092,9 +1076,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 177,
         .evYield_Speed     = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CHARCOAL,
-        #endif
+        .item2 = ITEM_CHARCOAL,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 20,
         .friendship = 70,
@@ -1125,9 +1107,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 170,
         .expYield = 95,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MOON_STONE,
-        #endif
+        .item2 = ITEM_MOON_STONE,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 10,
         .friendship = 70,
@@ -1166,9 +1146,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 50,
         .expYield = 196,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MOON_STONE,
-        #endif
+        .item2 = ITEM_MOON_STONE,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 10,
         .friendship = 70,
@@ -1340,10 +1318,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 57,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1374,10 +1350,8 @@ const struct BaseStats gBaseStats[] =
         .expYield = 142,
         .evYield_Attack    = 2,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1469,9 +1443,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 53,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SOFT_SAND,
-        #endif
+        .item2 = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1503,9 +1475,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 50,
         .expYield = 149,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SOFT_SAND,
-        #endif
+        .item2 = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1533,9 +1503,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 58,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_QUICK_CLAW,
-        #endif
+        .item2 = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1565,9 +1533,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 154,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_QUICK_CLAW,
-        #endif
+        .item2 = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1784,9 +1750,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 135,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_KINGS_ROCK,
-        #endif
+        .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1816,9 +1780,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 230,
         .evYield_Defense   = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_KINGS_ROCK,
-        #endif
+        .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -1844,9 +1806,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 200,
         .expYield = 62,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_TWISTED_SPOON,
-        #endif
+        .item2 = ITEM_TWISTED_SPOON,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -1874,9 +1834,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 100,
         .expYield = 140,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_TWISTED_SPOON,
-        #endif
+        .item2 = ITEM_TWISTED_SPOON,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -1908,9 +1866,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 50,
         .expYield = 225,
         .evYield_SpAttack  = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_TWISTED_SPOON,
-        #endif
+        .item2 = ITEM_TWISTED_SPOON,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -1938,9 +1894,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 180,
         .expYield = 61,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_FOCUS_BAND,
-        #endif
+        .item2 = ITEM_FOCUS_BAND,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -1970,9 +1924,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 142,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_FOCUS_BAND,
-        #endif
+        .item2 = ITEM_FOCUS_BAND,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -2002,9 +1954,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 227,
         .evYield_Attack    = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_FOCUS_BAND,
-        #endif
+        .item2 = ITEM_FOCUS_BAND,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -2119,9 +2069,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 67,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2147,9 +2095,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 180,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2175,9 +2121,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 60,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_EVERSTONE,
-        #endif
+        .item2 = ITEM_EVERSTONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -2203,9 +2147,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 137,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_EVERSTONE,
-        #endif
+        .item2 = ITEM_EVERSTONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -2235,9 +2177,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 223,
         .evYield_Defense   = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_EVERSTONE,
-        #endif
+        .item2 = ITEM_EVERSTONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -2343,9 +2283,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 172,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_KINGS_ROCK,
-        #endif
+        .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2373,9 +2311,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 65,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -2403,9 +2339,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 163,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -2437,9 +2371,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 132,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STICK,
-        #endif
+        .item2 = ITEM_STICK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2467,9 +2399,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 62,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SHARP_BEAK,
-        #endif
+        .item2 = ITEM_SHARP_BEAK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2501,9 +2431,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 165,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SHARP_BEAK,
-        #endif
+        .item2 = ITEM_SHARP_BEAK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2620,7 +2548,9 @@ const struct BaseStats gBaseStats[] =
         .expYield = 175,
         .evYield_HP        = 1,
         .evYield_Attack    = 1,
-        .item1 = ITEM_NONE, // ITEM_BLACK_SLUDGE,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_BLACK_SLUDGE,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2648,10 +2578,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 61,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_PEARL,
-            .item2 = ITEM_BIG_PEARL,
-        #endif
+        .item1 = ITEM_PEARL,
+        .item2 = ITEM_BIG_PEARL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -2681,10 +2609,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 184,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_PEARL,
-            .item2 = ITEM_BIG_PEARL,
-        #endif
+        .item1 = ITEM_PEARL,
+        .item2 = ITEM_BIG_PEARL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3052,9 +2978,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 64,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_THICK_CLUB,
-        #endif
+        .item2 = ITEM_THICK_CLUB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3080,9 +3004,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 149,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_THICK_CLUB,
-        #endif
+        .item2 = ITEM_THICK_CLUB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3194,9 +3116,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 68,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SMOKE_BALL,
-        #endif
+        .item2 = ITEM_SMOKE_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3221,9 +3141,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 172,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SMOKE_BALL,
-        #endif
+        .item2 = ITEM_SMOKE_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3302,7 +3220,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 30,
         .expYield = 395,
         .evYield_HP        = 2,
-        .item1 = ITEM_NONE, // ITEM_LUCKY_PUNCH,
+        .item1 = ITEM_LUCKY_PUNCH,
         .genderRatio = MON_FEMALE,
         .eggCycles = 40,
         .friendship = 140,
@@ -3388,9 +3306,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 59,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_SCALE,
-        #endif
+        .item2 = ITEM_DRAGON_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3421,9 +3337,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_SCALE,
-        #endif
+        .item2 = ITEM_DRAGON_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3453,9 +3367,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 64,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3481,9 +3393,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 158,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -3509,10 +3419,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 68,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_STARDUST,
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item1 = ITEM_STARDUST,
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -3540,10 +3448,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 182,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_STARDUST,
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item1 = ITEM_STARDUST,
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -3832,10 +3738,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 187,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_MYSTIC_WATER,
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item1 = ITEM_MYSTIC_WATER,
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
@@ -3865,8 +3769,8 @@ const struct BaseStats gBaseStats[] =
         .evYield_HP        = 1,
         #ifdef ITEM_EXPANSION
             .item1 = ITEM_QUICK_POWDER,
-            .item2 = ITEM_METAL_POWDER,
         #endif
+        .item2 = ITEM_METAL_POWDER,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -4166,10 +4070,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 25,
         .expYield = 189,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_LEFTOVERS,
-            .item2 = ITEM_LEFTOVERS,
-        #endif
+        .item1 = ITEM_LEFTOVERS,
+        .item2 = ITEM_LEFTOVERS,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggCycles = 40,
         .friendship = 70,
@@ -4278,9 +4180,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 60,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_SCALE,
-        #endif
+        .item2 = ITEM_DRAGON_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
@@ -4306,9 +4206,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 147,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_SCALE,
-        #endif
+        .item2 = ITEM_DRAGON_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
@@ -4334,9 +4232,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 270,
         .evYield_Attack    = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_SCALE,
-        #endif
+        .item2 = ITEM_DRAGON_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
@@ -4391,10 +4287,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 270,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_LUM_BERRY,
-            .item2 = ITEM_LUM_BERRY,
-        #endif
+        .item1 = ITEM_LUM_BERRY,
+        .item2 = ITEM_LUM_BERRY,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 100,
@@ -4912,9 +4806,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 66,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_SCALE,
-        #endif
+        .item2 = ITEM_DEEP_SEA_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -4940,9 +4832,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 161,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_SCALE,
-        #endif
+        .item2 = ITEM_DEEP_SEA_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -4998,9 +4888,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 150,
         .expYield = 44,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MOON_STONE,
-        #endif
+        .item2 = ITEM_MOON_STONE,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 10,
         .friendship = 140,
@@ -5391,9 +5279,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 225,
         .evYield_SpDefense = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_KINGS_ROCK,
-        #endif
+        .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -5760,9 +5646,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 70,
         .expYield = 172,
         .evYield_SpDefense = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_KINGS_ROCK,
-        #endif
+        .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -5999,9 +5883,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 25,
         .expYield = 179,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -6099,9 +5981,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 88,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -6157,10 +6037,8 @@ const struct BaseStats gBaseStats[] =
         .expYield = 177,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_BERRY_JUICE,
-            .item2 = ITEM_BERRY_JUICE,
-        #endif
+        .item1 = ITEM_BERRY_JUICE,
+        .item2 = ITEM_BERRY_JUICE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -6217,9 +6095,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 86,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_QUICK_CLAW,
-        #endif
+        .item2 = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 35,
@@ -6573,9 +6449,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 25,
         .expYield = 163,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -6659,9 +6533,7 @@ const struct BaseStats gBaseStats[] =
         .evYield_Attack    = 1,
         .evYield_SpAttack  = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_SCALE,
-        #endif
+        .item2 = ITEM_DRAGON_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -6972,10 +6844,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 172,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_MOOMOO_MILK,
-            .item2 = ITEM_MOOMOO_MILK,
-        #endif
+        .item1 = ITEM_MOOMOO_MILK,
+        .item2 = ITEM_MOOMOO_MILK,
         .genderRatio = MON_FEMALE,
         .eggCycles = 20,
         .friendship = 70,
@@ -7005,9 +6875,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 30,
         .expYield = 608,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LUCKY_EGG,
-        #endif
+        .item2 = ITEM_LUCKY_EGG,
         .genderRatio = MON_FEMALE,
         .eggCycles = 40,
         .friendship = 140,
@@ -7228,10 +7096,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 3,
         .expYield = 306,
         .evYield_SpDefense = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_SACRED_ASH,
-            .item2 = ITEM_SACRED_ASH,
-        #endif
+        .item1 = ITEM_SACRED_ASH,
+        .item2 = ITEM_SACRED_ASH,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 0,
@@ -7259,10 +7125,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 270,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_LUM_BERRY,
-            .item2 = ITEM_LUM_BERRY,
-        #endif
+        .item1 = ITEM_LUM_BERRY,
+        .item2 = ITEM_LUM_BERRY,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 100,
@@ -7577,10 +7441,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 56,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_POTION,
-            .item2 = ITEM_REVIVE,
-        #endif
+        .item1 = ITEM_POTION,
+        .item2 = ITEM_REVIVE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -7610,10 +7472,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 147,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_POTION,
-            .item2 = ITEM_MAX_REVIVE,
-        #endif
+        .item1 = ITEM_POTION,
+        .item2 = ITEM_MAX_REVIVE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -7643,10 +7503,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 56,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_PECHA_BERRY,
-            .item2 = ITEM_BRIGHT_POWDER,
-        #endif
+        .item1 = ITEM_PECHA_BERRY,
+        .item2 = ITEM_BRIGHT_POWDER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -7782,9 +7640,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 44,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -7810,9 +7666,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 119,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -7838,9 +7692,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 216,
         .evYield_SpDefense = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -8014,7 +7866,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 54,
         .evYield_Speed     = 1,
-        .item1 = ITEM_NONE, // ITEM_PRETTY_WING,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_PRETTY_WING,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -8048,7 +7902,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 154,
         .evYield_Defense   = 2,
-        .item1 = ITEM_NONE, // ITEM_PRETTY_WING,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_PRETTY_WING,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -8182,7 +8038,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 200,
         .expYield = 54,
         .evYield_Speed     = 1,
-        .item1 = ITEM_NONE, // ITEM_HONEY,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_HONEY,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -8214,9 +8072,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 159,
         .evYield_SpAttack  = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SILVER_POWDER,
-        #endif
+        .item2 = ITEM_SILVER_POWDER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -8244,10 +8100,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 59,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -8277,10 +8131,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 161,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -8382,9 +8234,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 53,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SOFT_SAND,
-        #endif
+        .item2 = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -8546,9 +8396,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 180,
         .expYield = 47,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_BLACK_BELT,
-        #endif
+        .item2 = ITEM_BLACK_BELT,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -8576,9 +8424,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 200,
         .expYield = 166,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_KINGS_ROCK,
-        #endif
+        .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
         .friendship = 70,
@@ -8638,9 +8484,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 75,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MAGNET,
-        #endif
+        .item2 = ITEM_MAGNET,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -8800,9 +8644,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 180,
         .expYield = 66,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 35,
         .friendship = 35,
@@ -8830,9 +8672,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 151,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 35,
         .friendship = 35,
@@ -8860,9 +8700,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 239,
         .evYield_Defense   = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 35,
         .friendship = 35,
@@ -9055,9 +8893,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 150,
         .expYield = 151,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_BRIGHT_POWDER,
-        #endif
+        .item2 = ITEM_BRIGHT_POWDER,
         .genderRatio = MON_MALE,
         .eggCycles = 15,
         .friendship = 70,
@@ -9090,9 +8926,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 150,
         .expYield = 151,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_BRIGHT_POWDER,
-        #endif
+        .item2 = ITEM_BRIGHT_POWDER,
         .genderRatio = MON_FEMALE,
         .eggCycles = 15,
         .friendship = 70,
@@ -9122,9 +8956,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 150,
         .expYield = 140,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -9152,10 +8984,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 60,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_ORAN_BERRY,
-            .item2 = ITEM_SITRUS_BERRY,
-        #endif
+        .item1 = ITEM_ORAN_BERRY,
+        .item2 = ITEM_SITRUS_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -9183,10 +9013,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 163,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_ORAN_BERRY,
-            .item2 = ITEM_SITRUS_BERRY,
-        #endif
+        .item1 = ITEM_ORAN_BERRY,
+        .item2 = ITEM_SITRUS_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -9214,9 +9042,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 61,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_TOOTH,
-        #endif
+        .item2 = ITEM_DEEP_SEA_TOOTH,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 35,
@@ -9242,9 +9068,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 161,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_TOOTH,
-        #endif
+        .item2 = ITEM_DEEP_SEA_TOOTH,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 35,
@@ -9379,9 +9203,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 165,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CHARCOAL,
-        #endif
+        .item2 = ITEM_CHARCOAL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -9490,9 +9312,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 58,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SOFT_SAND,
-        #endif
+        .item2 = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -9691,9 +9511,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 160,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_QUICK_CLAW,
-        #endif
+        .item2 = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -9756,10 +9574,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 161,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_STARDUST,
-            .item2 = ITEM_MOON_STONE,
-        #endif
+        .item1 = ITEM_STARDUST,
+        .item2 = ITEM_MOON_STONE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -9788,10 +9604,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 161,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_STARDUST,
-            .item2 = ITEM_SUN_STONE,
-        #endif
+        .item1 = ITEM_STARDUST,
+        .item2 = ITEM_SUN_STONE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -10148,10 +9962,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 147,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_MYSTIC_WATER,
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item1 = ITEM_MYSTIC_WATER,
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -10203,9 +10015,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 59,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 35,
@@ -10235,9 +10045,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 159,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 35,
@@ -10267,9 +10075,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 59,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 35,
@@ -10298,9 +10104,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 159,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 35,
@@ -10364,9 +10168,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 159,
         .evYield_SpAttack  = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CLEANSE_TAG,
-        #endif
+        .item2 = ITEM_CLEANSE_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -10595,10 +10397,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 69,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_PEARL,
-            .item2 = ITEM_BIG_PEARL,
-        #endif
+        .item1 = ITEM_PEARL,
+        .item2 = ITEM_BIG_PEARL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -10627,9 +10427,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 170,
         .evYield_Attack    = 1,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_TOOTH,
-        #endif
+        .item2 = ITEM_DEEP_SEA_TOOTH,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -10655,9 +10453,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 170,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_SCALE,
-        #endif
+        .item2 = ITEM_DEEP_SEA_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -10686,9 +10482,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 170,
         .evYield_HP        = 1,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_SCALE,
-        #endif
+        .item2 = ITEM_DEEP_SEA_SCALE,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggCycles = 40,
         .friendship = 70,
@@ -10714,7 +10508,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 116,
         .evYield_Speed     = 1,
-        .item1 = ITEM_NONE, // ITEM_HEART_SCALE,
+        .item1 = ITEM_HEART_SCALE,
         .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 20,
         .friendship = 70,
@@ -10742,9 +10536,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 60,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_FANG,
-        #endif
+        .item2 = ITEM_DRAGON_FANG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
@@ -10772,9 +10564,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 147,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_FANG,
-        #endif
+        .item2 = ITEM_DRAGON_FANG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
@@ -10802,9 +10592,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 270,
         .evYield_Attack    = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_FANG,
-        #endif
+        .item2 = ITEM_DRAGON_FANG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 35,
@@ -10832,9 +10620,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 3,
         .expYield = 60,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 40,
         .friendship = 35,
@@ -10862,9 +10648,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 3,
         .expYield = 147,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 40,
         .friendship = 35,
@@ -10892,9 +10676,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 3,
         .expYield = 270,
         .evYield_Defense   = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 40,
         .friendship = 35,
@@ -11123,10 +10905,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 3,
         .expYield = 270,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_STAR_PIECE,
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item1 = ITEM_STAR_PIECE,
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 100,
@@ -11707,9 +11487,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 56,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -11741,9 +11519,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 232,
         .evYield_SpAttack  = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -11906,9 +11682,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 148,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SILVER_POWDER,
-        #endif
+        .item2 = ITEM_SILVER_POWDER,
         .genderRatio = MON_FEMALE,
         .eggCycles = 15,
         .friendship = 70,
@@ -11939,9 +11713,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 148,
         .evYield_Attack    = 1,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SILVER_POWDER,
-        #endif
+        .item2 = ITEM_SILVER_POWDER,
         .genderRatio = MON_MALE,
         .eggCycles = 15,
         .friendship = 70,
@@ -12002,9 +11774,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 166,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = MON_FEMALE,
         .eggCycles = 15,
         .friendship = 70,
@@ -12107,9 +11877,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 55,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MIRACLE_SEED,
-        #endif
+        .item2 = ITEM_MIRACLE_SEED,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -12134,9 +11902,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 158,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MIRACLE_SEED,
-        #endif
+        .item2 = ITEM_MIRACLE_SEED,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -12474,9 +12240,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 57,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CLEANSE_TAG,
-        #endif
+        .item2 = ITEM_CLEANSE_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -12559,9 +12323,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 60,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -12592,9 +12354,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 175,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -12685,7 +12445,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 130,
         .expYield = 110,
         .evYield_HP        = 1,
-        .item1 = ITEM_NONE, // ITEM_OVAL_STONE,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_OVAL_STONE,
+        #endif
         .genderRatio = MON_FEMALE,
         .eggCycles = 40,
         .friendship = 140,
@@ -12848,10 +12610,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 50,
         .expYield = 78,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_LEFTOVERS,
-            .item2 = ITEM_LEFTOVERS,
-        #endif
+        .item1 = ITEM_LEFTOVERS,
+        .item2 = ITEM_LEFTOVERS,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggCycles = 40,
         .friendship = 70,
@@ -12992,9 +12752,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 66,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -13024,9 +12782,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 175,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -13227,9 +12983,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 67,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_NEVER_MELT_ICE,
-        #endif
+        .item2 = ITEM_NEVER_MELT_ICE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -13260,9 +13014,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 173,
         .evYield_Attack    = 1,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_NEVER_MELT_ICE,
-        #endif
+        .item2 = ITEM_NEVER_MELT_ICE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -13293,9 +13045,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 179,
         .evYield_Attack    = 1,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_QUICK_CLAW,
-        #endif
+        .item2 = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 35,
@@ -13323,9 +13073,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 30,
         .expYield = 241,
         .evYield_SpAttack  = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_METAL_COAT,
-        #endif
+        .item2 = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 20,
         .friendship = 70,
@@ -13741,9 +13489,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 184,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MAGNET,
-        #endif
+        .item2 = ITEM_MAGNET,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -13772,9 +13518,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 236,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 35,
@@ -14175,10 +13919,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 270,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_LUM_BERRY,
-            .item2 = ITEM_LUM_BERRY,
-        #endif
+        .item1 = ITEM_LUM_BERRY,
+        .item2 = ITEM_LUM_BERRY,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 100,
@@ -15072,10 +14814,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 56,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_EVERSTONE,
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item1 = ITEM_EVERSTONE,
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15106,10 +14846,8 @@ const struct BaseStats gBaseStats[] =
         .expYield = 137,
         .evYield_Attack    = 1,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_EVERSTONE,
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item1 = ITEM_EVERSTONE,
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15143,10 +14881,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 232,
         .evYield_Attack    = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_EVERSTONE,
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item1 = ITEM_EVERSTONE,
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15294,10 +15030,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 390,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_ORAN_BERRY,
-            .item2 = ITEM_SITRUS_BERRY,
-        #endif
+        .item1 = ITEM_ORAN_BERRY,
+        .item2 = ITEM_SITRUS_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -15505,9 +15239,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 163,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_BLACK_BELT,
-        #endif
+        .item2 = ITEM_BLACK_BELT,
         .genderRatio = MON_MALE,
         .eggCycles = 20,
         .friendship = 70,
@@ -15535,9 +15267,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 163,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_BLACK_BELT,
-        #endif
+        .item2 = ITEM_BLACK_BELT,
         .genderRatio = MON_MALE,
         .eggCycles = 20,
         .friendship = 70,
@@ -15565,9 +15295,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 62,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15595,9 +15323,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 133,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15631,9 +15357,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 225,
         .evYield_Attack    = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15661,9 +15385,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 52,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15695,9 +15417,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 126,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -15733,9 +15453,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 218,
         .evYield_Speed     = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -15901,9 +15619,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 25,
         .expYield = 161,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_TOOTH,
-        #endif
+        .item2 = ITEM_DEEP_SEA_TOOTH,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
@@ -15933,9 +15649,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 180,
         .expYield = 58,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_BLACK_GLASSES,
-        #endif
+        .item2 = ITEM_BLACK_GLASSES,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -15965,9 +15679,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 123,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_BLACK_GLASSES,
-        #endif
+        .item2 = ITEM_BLACK_GLASSES,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16001,7 +15713,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 234,
         .evYield_Attack    = 3,
-        .item1 = ITEM_NONE, // ITEM_BLACK_GLASSES,
+        .item1 = ITEM_BLACK_GLASSES,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16085,9 +15797,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 161,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MIRACLE_SEED,
-        #endif
+        .item2 = ITEM_MIRACLE_SEED,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16115,9 +15825,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 65,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16149,9 +15857,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 170,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_HARD_STONE,
-        #endif
+        .item2 = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16273,9 +15979,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 61,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -16304,9 +16008,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 169,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -16449,9 +16151,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 66,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SILK_SCARF,
-        #endif
+        .item2 = ITEM_SILK_SCARF,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16479,8 +16179,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 166,
         .evYield_Attack    = 2,
+        .item1 = ITEM_SILK_SCARF,
         #ifdef ITEM_EXPANSION
-            .item1 = ITEM_SILK_SCARF,
             .item2 = ITEM_BLACK_SLUDGE,
         #endif
         .genderRatio = PERCENT_FEMALE(50),
@@ -16858,9 +16558,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 61,
         .evYield_SpAttack  = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_NEVER_MELT_ICE,
-        #endif
+        .item2 = ITEM_NEVER_MELT_ICE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16890,9 +16588,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 138,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_NEVER_MELT_ICE,
-        #endif
+        .item2 = ITEM_NEVER_MELT_ICE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -16922,7 +16618,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 241,
         .evYield_SpAttack  = 3,
-        .item1 = ITEM_NONE, // ITEM_NEVER_MELT_ICE,
+        .item1 = ITEM_NEVER_MELT_ICE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -17091,10 +16787,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 59,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -17122,10 +16816,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 162,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -17813,9 +17505,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 25,
         .expYield = 180,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_NEVER_MELT_ICE,
-        #endif
+        .item2 = ITEM_NEVER_MELT_ICE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -17898,9 +17588,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 165,
         .evYield_HP        = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SOFT_SAND,
-        #endif
+        .item2 = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -17984,9 +17672,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 170,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DRAGON_FANG,
-        #endif
+        .item2 = ITEM_DRAGON_FANG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 30,
         .friendship = 70,
@@ -18434,10 +18120,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 15,
         .expYield = 248,
         .evYield_SpAttack  = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_SILVER_POWDER,
-            .item2 = ITEM_SILVER_POWDER,
-        #endif
+        .item1 = ITEM_SILVER_POWDER,
+        .item2 = ITEM_SILVER_POWDER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
@@ -18746,10 +18430,8 @@ const struct BaseStats gBaseStats[] =
         .evYield_Speed     = 1,
         .evYield_SpAttack  = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_STAR_PIECE,
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item1 = ITEM_STAR_PIECE,
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 100,
@@ -19474,9 +19156,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 220,
         .expYield = 70,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -19506,9 +19186,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 65,
         .expYield = 173,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MENTAL_HERB,
-        #endif
+        .item2 = ITEM_MENTAL_HERB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -20262,9 +19940,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 100,
         .expYield = 175,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_KINGS_ROCK,
-        #endif
+        .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21121,9 +20797,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 53,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_ORAN_BERRY,
-        #endif
+        .item2 = ITEM_ORAN_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -21153,9 +20827,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 124,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SITRUS_BERRY,
-        #endif
+        .item2 = ITEM_SITRUS_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -21185,9 +20857,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 218,
         .evYield_Attack    = 3,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_RAWST_BERRY,
-        #endif
+        .item2 = ITEM_RAWST_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -21217,9 +20887,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 51,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_PECHA_BERRY,
-        #endif
+        .item2 = ITEM_PECHA_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -21249,9 +20917,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 127,
         .expYield = 146,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_PECHA_BERRY,
-        #endif
+        .item2 = ITEM_PECHA_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -21360,9 +21026,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 225,
         .expYield = 68,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_ASPEAR_BERRY,
-        #endif
+        .item2 = ITEM_ASPEAR_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21392,9 +21056,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 167,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CHERI_BERRY,
-        #endif
+        .item2 = ITEM_CHERI_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21603,9 +21265,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 61,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21635,9 +21295,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 173,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_POISON_BARB,
-        #endif
+        .item2 = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21731,9 +21389,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 200,
         .expYield = 54,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -21763,9 +21419,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 100,
         .expYield = 159,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -21795,9 +21449,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 50,
         .evYield_Attack    = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MIRACLE_SEED,
-        #endif
+        .item2 = ITEM_MIRACLE_SEED,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21827,9 +21479,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 168,
         .evYield_Attack    = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MIRACLE_SEED,
-        #endif
+        .item2 = ITEM_MIRACLE_SEED,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21859,10 +21509,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 57,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21888,10 +21536,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 142,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_TINY_MUSHROOM,
-            .item2 = ITEM_BIG_MUSHROOM,
-        #endif
+        .item1 = ITEM_TINY_MUSHROOM,
+        .item2 = ITEM_BIG_MUSHROOM,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -21917,9 +21563,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 120,
         .expYield = 64,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SMOKE_BALL,
-        #endif
+        .item2 = ITEM_SMOKE_BALL,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggCycles = 20,
         .friendship = 70,
@@ -21949,9 +21593,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 168,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SMOKE_BALL,
-        #endif
+        .item2 = ITEM_SMOKE_BALL,
         .genderRatio = MON_FEMALE,
         .eggCycles = 20,
         .friendship = 70,
@@ -22103,7 +21745,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 230,
         .evYield_Attack    = 3,
-        .item1 = ITEM_NONE, // ITEM_GRASSY_SEED,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_GRASSY_SEED,
+        #endif
         .genderRatio = MON_FEMALE,
         .eggCycles = 20,
         .friendship = 70,
@@ -22279,9 +21923,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 140,
         .expYield = 64,
         .evYield_Defense   = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -22311,9 +21953,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 60,
         .expYield = 168,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SPELL_TAG,
-        #endif
+        .item2 = ITEM_SPELL_TAG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -22425,9 +22065,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -22484,9 +22122,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 70,
         .expYield = 170,
         .evYield_Defense   = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CHARCOAL,
-        #endif
+        .item2 = ITEM_CHARCOAL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -22543,9 +22179,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 167,
         .evYield_SpDefense = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_CHESTO_BERRY,
-        #endif
+        .item2 = ITEM_CHESTO_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -22606,9 +22240,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 70,
         .expYield = 170,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_PERSIM_BERRY,
-        #endif
+        .item2 = ITEM_PERSIM_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -22730,7 +22362,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 270,
         .evYield_Defense   = 3,
-        .item1 = ITEM_NONE, // ITEM_RAZOR_CLAW,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_RAZOR_CLAW,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
@@ -24819,9 +24453,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 51,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_PECHA_BERRY,
-        #endif
+        .item2 = ITEM_PECHA_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -24851,9 +24483,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 127,
         .expYield = 145,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_PECHA_BERRY,
-        #endif
+        .item2 = ITEM_PECHA_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = 70,
@@ -25034,9 +24664,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 53,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SOFT_SAND,
-        #endif
+        .item2 = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -25066,9 +24694,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 50,
         .expYield = 149,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_SOFT_SAND,
-        #endif
+        .item2 = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -25098,9 +24724,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 58,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_QUICK_CLAW,
-        #endif
+        .item2 = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -25130,9 +24754,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 154,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_QUICK_CLAW,
-        #endif
+        .item2 = ITEM_QUICK_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -25369,9 +24991,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 10,
         .friendship = 70,
@@ -25397,9 +25017,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 10,
         .friendship = 70,
@@ -25425,9 +25043,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 10,
         .friendship = 70,
@@ -25453,9 +25069,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 10,
         .friendship = 70,
@@ -25481,9 +25095,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 10,
         .friendship = 70,
@@ -25509,9 +25121,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 10,
         .friendship = 70,
@@ -25537,9 +25147,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = MON_MALE,
         .eggCycles = 10,
         .friendship = 70,
@@ -25565,9 +25173,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = MON_MALE,
         .eggCycles = 10,
         .friendship = 70,
@@ -25593,9 +25199,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = MON_MALE,
         .eggCycles = 10,
         .friendship = 70,
@@ -25621,9 +25225,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = MON_MALE,
         .eggCycles = 10,
         .friendship = 70,
@@ -25649,9 +25251,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = MON_MALE,
         .eggCycles = 10,
         .friendship = 70,
@@ -25677,9 +25277,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = MON_MALE,
         .eggCycles = 10,
         .friendship = 70,
@@ -25705,9 +25303,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 112,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_LIGHT_BALL,
-        #endif
+        .item2 = ITEM_LIGHT_BALL,
         .genderRatio = MON_MALE,
         .eggCycles = 10,
         .friendship = 70,
@@ -26433,10 +26029,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 147,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_MYSTIC_WATER,
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item1 = ITEM_MYSTIC_WATER,
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -26461,10 +26055,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 147,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_MYSTIC_WATER,
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item1 = ITEM_MYSTIC_WATER,
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -26489,10 +26081,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 147,
         .evYield_HP        = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_MYSTIC_WATER,
-            .item2 = ITEM_MYSTIC_WATER,
-        #endif
+        .item1 = ITEM_MYSTIC_WATER,
+        .item2 = ITEM_MYSTIC_WATER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 70,
@@ -26700,9 +26290,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 158,
         .evYield_SpAttack  = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_MIRACLE_SEED,
-        #endif
+        .item2 = ITEM_MIRACLE_SEED,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -26938,10 +26526,8 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 270,
         .evYield_HP        = 3,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_LUM_BERRY,
-            .item2 = ITEM_LUM_BERRY,
-        #endif
+        .item1 = ITEM_LUM_BERRY,
+        .item2 = ITEM_LUM_BERRY,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 100,
@@ -27442,9 +27028,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 25,
         .expYield = 161,
         .evYield_Speed     = 2,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_DEEP_SEA_SCALE,
-        #endif
+        .item2 = ITEM_DEEP_SEA_SCALE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 40,
         .friendship = 70,
@@ -27839,10 +27423,8 @@ const struct BaseStats gBaseStats[] =
         .evYield_Attack  = 1,
         .evYield_Defense = 1,
         .evYield_Speed     = 1,
-        #ifdef ITEM_EXPANSION
-            .item1 = ITEM_STAR_PIECE,
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item1 = ITEM_STAR_PIECE,
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
         .friendship = 100,
@@ -30305,9 +29887,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30337,9 +29917,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30369,9 +29947,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30401,9 +29977,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30433,9 +30007,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30465,9 +30037,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30497,9 +30067,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30529,9 +30097,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30561,9 +30127,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30593,9 +30157,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30625,9 +30187,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30657,9 +30217,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
@@ -30689,9 +30247,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 154,
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
-        #ifdef ITEM_EXPANSION
-            .item2 = ITEM_STAR_PIECE,
-        #endif
+        .item2 = ITEM_STAR_PIECE,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 25,
         .friendship = 70,
