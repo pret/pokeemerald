@@ -999,7 +999,7 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
         return FALSE;
 
     winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
         u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         u32 recordHasData = 0;
@@ -1010,7 +1010,7 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
             checksum += record[j];
         }
         validMons = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_FRONTIER_PARTY_SIZE; j++)
         {
             if (gSaveBlock2Ptr->frontier.towerRecords[i].party[j].species != 0
                 && gSaveBlock2Ptr->frontier.towerRecords[i].party[j].level <= GetFrontierEnemyMonLevel(lvlMode))
@@ -1324,7 +1324,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
     struct EmeraldBattleTowerRecord *newRecord = newRecordEm; // Needed to match.
 
     // Find a record slot of the same player and replace it.
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
         k = 0;
         for (j = 0; j < TRAINER_ID_LENGTH; j++)
@@ -1350,19 +1350,19 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
         if (k == PLAYER_NAME_LENGTH)
             break;
     }
-    if (i < 5)
+    if (i < BATTLE_TOWER_RECORD_COUNT)
     {
         gSaveBlock2Ptr->frontier.towerRecords[i] = *newRecord;
         return;
     }
 
     // Find an empty record slot.
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
         if (gSaveBlock2Ptr->frontier.towerRecords[i].winStreak == 0)
             break;
     }
-    if (i < 5)
+    if (i < BATTLE_TOWER_RECORD_COUNT)
     {
         gSaveBlock2Ptr->frontier.towerRecords[i] = *newRecord;
         return;
@@ -1373,7 +1373,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
     slotIds[0] = 0;
     slotsCount++;
 
-    for (i = 1; i < 5; i++)
+    for (i = 1; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
         for (j = 0; j < slotsCount; j++)
         {
@@ -2240,7 +2240,7 @@ static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
     u16 species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
 
     count = 0;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
     {
         if (gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[i].species != species1
             && gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[i].species != species2
@@ -2362,7 +2362,7 @@ static void LoadMultiPartnerCandidatesData(void)
     }
 
     r10 = 0;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
         u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         u32 recordHasData = 0;
@@ -2379,7 +2379,7 @@ static void LoadMultiPartnerCandidatesData(void)
             && gSaveBlock2Ptr->frontier.towerRecords[i].checksum == checksum)
         {
             k = 0;
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_FRONTIER_PARTY_SIZE; j++)
             {
                 if (species1 != gSaveBlock2Ptr->frontier.towerRecords[i].party[j].species
                     && species2 != gSaveBlock2Ptr->frontier.towerRecords[i].party[j].species
@@ -2682,7 +2682,7 @@ static void ValidateBattleTowerRecordChecksums(void)
     if (gSaveBlock2Ptr->frontier.towerPlayer.checksum != checksum)
         ClearBattleTowerRecord(&gSaveBlock2Ptr->frontier.towerPlayer);
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
         record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         checksum = 0;
