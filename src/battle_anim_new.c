@@ -65,6 +65,20 @@ static const union AffineAnimCmd sSquishTargetAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
+//// GEN 4
+// power trick
+const struct SpriteTemplate gPowerTrickSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_POWER_TRICK,
+    .paletteTag = ANIM_TAG_POWER_TRICK,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_SpinningBone,
+    .callback = SpriteCB_SpriteOnMonForDuration
+};
+
+
 //// GEN 5
 //wide guard
 const struct SpriteTemplate gWideGuardBlueConversionTemplate =

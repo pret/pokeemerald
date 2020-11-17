@@ -1403,21 +1403,15 @@ Move_WRING_OUT:
 	end
 
 Move_POWER_TRICK:
-	loadspritegfx ANIM_TAG_THIN_RING
-	monbg ANIM_ATK_PARTNER
+	loadspritegfx ANIM_TAG_POWER_TRICK
+	loopsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET 0xa 0x3
+	createvisualtask AnimTask_UproarDistortion 0x2, 0x0
+	createsprite gPowerTrickSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0, 0, SOUND_PAN_TARGET, 0
+	delay 0x10
+	createvisualtask AnimTask_UproarDistortion 0x2, 0x0
+	delay 0x10
+	createvisualtask AnimTask_UproarDistortion 0x2, 0x0
 	waitforvisualfinish
-	createsprite gThinRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0
-	playsewithpan SE_M_SUPERSONIC, -64
-	delay 14
-	createsprite gThinRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0
-	playsewithpan SE_M_SUPERSONIC, -64
-	delay 14
-	createsprite gThinRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0
-	playsewithpan SE_M_SUPERSONIC, -64
-	waitforvisualfinish
-	createvisualtask AnimTask_SetAllNonAttackersInvisiblity, 5, 0
-	waitforvisualfinish
-	clearmonbg ANIM_ATK_PARTNER
 	end
 
 Move_GASTRO_ACID:
