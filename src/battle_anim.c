@@ -3204,8 +3204,10 @@ static void LoadDefaultBg(void)
 {
     if (IsContest())
         LoadContestBgAfterMoveAnim();
+    #if B_TERRAIN_BG_CHANGE == TRUE
     else if (gFieldStatuses & STATUS_TERRAIN_ANY)
         DrawTerrainTypeBattleBackground();
+    #endif
     else
         DrawMainBattleBackground();
 }
