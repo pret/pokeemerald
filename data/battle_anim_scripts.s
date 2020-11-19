@@ -815,7 +815,7 @@ gBattleAnims_General::
 	.4byte General_IllusionOff
 	.4byte General_FormChange
 	.4byte General_SlideOffScreen
-    .4byte General_TotemFlare
+	.4byte General_TotemFlare
 
 	.align 2
 gBattleAnims_Special::

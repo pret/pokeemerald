@@ -1755,11 +1755,11 @@
 	various \battler, VARIOUS_JUMP_IF_ABSENT
 	.4byte \ptr
 	.endm
-    
-    .macro gettotemboost ptr:req
-    various BS_ATTACKER, VARIOUS_TOTEM_BOOST
-    .4byte \ptr
-    .endm
+
+	.macro gettotemboost ptr:req
+	various BS_ATTACKER, VARIOUS_TOTEM_BOOST
+	.4byte \ptr
+	.endm
 	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
