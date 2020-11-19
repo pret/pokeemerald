@@ -137,8 +137,7 @@ ASM_SRCS := $(wildcard $(ASM_SUBDIR)/*.s)
 ASM_OBJS := $(patsubst $(ASM_SUBDIR)/%.s,$(ASM_BUILDDIR)/%.o,$(ASM_SRCS))
 
 # get all the data/*.s files EXCEPT the ones with specific rules
-REGULAR_DATA_ASM_SRCS := $(wildcard $(DATA_ASM_SUBDIR)/*.s)
-REGULAR_DATA_ASM_SRCS := $(filter-out $(DATA_ASM_SUBDIR)/maps.s $(DATA_ASM_SUBDIR)/map_events.s, $(REGULAR_DATA_ASM_SRCS))
+REGULAR_DATA_ASM_SRCS := $(filter-out $(DATA_ASM_SUBDIR)/maps.s $(DATA_ASM_SUBDIR)/map_events.s, $(wildcard $(DATA_ASM_SUBDIR)/*.s))
 
 DATA_ASM_SRCS := $(wildcard $(DATA_ASM_SUBDIR)/*.s)
 DATA_ASM_OBJS := $(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o,$(DATA_ASM_SRCS))
@@ -301,6 +300,7 @@ $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
 else
 define DATA_ASM_DEP
 $1: $2 $$(shell $(SCANINC) -I include -I "" $2)
+	#echo "hello"
 	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include | $$(AS) $$(ASFLAGS) -o $$@
 endef
 $(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call DATA_ASM_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
