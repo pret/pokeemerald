@@ -35,6 +35,7 @@
 #define sMOVE_EFFECT gBattleScripting + 0x2E
 #define sMULTIHIT_EFFECT gBattleScripting + 0x30
 #define sILLUSION_NICK_HACK gBattleScripting + 0x32
+#define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 
@@ -165,6 +166,7 @@
 #define VARIOUS_SET_LAST_USED_ITEM              99
 #define VARIOUS_PARALYZE_TYPE_IMMUNITY          100
 #define VARIOUS_JUMP_IF_ABSENT                  101
+#define VARIOUS_DESTROY_ABILITY_POPUP           102
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
