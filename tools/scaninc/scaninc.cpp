@@ -108,7 +108,7 @@ int main(int argc, char **argv)
                     break;
                 }
             }
-            if (!exists && file.FileType() == SourceFileType::Asm)
+            if (!exists && (file.FileType() == SourceFileType::Asm || file.FileType() == SourceFileType::Inc))
             {
                 path = include;
             }
