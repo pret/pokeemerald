@@ -8300,6 +8300,40 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_TOTEM_BOOST:
+        gActiveBattler = gBattlerAttacker;
+        if (gTotemBoosts[gActiveBattler].stats == 0)
+        {
+            gBattlescriptCurrInstr += 7;    //stats done, exit
+        }
+        else
+        {
+            for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
+            {
+                if (gTotemBoosts[gActiveBattler].stats & (1 << i))
+                {
+                    bool8 negative = (gTotemBoosts[gActiveBattler].statChanges[i] & 0x80) ? TRUE : FALSE;
+                    u8 change = gTotemBoosts[gActiveBattler].statChanges[i] & 0x7F;
+                    
+                    gTotemBoosts[gActiveBattler].stats &= ~(1 << i);
+                    SET_STATCHANGER(i + 1, change, negative);
+                    gBattleScripting.battler = gActiveBattler;
+                    gBattlerTarget = gActiveBattler;
+                    if (gTotemBoosts[gActiveBattler].stats & 0x80)
+                    {
+                        gTotemBoosts[gActiveBattler].stats &= ~0x80;
+                        gBattlescriptCurrInstr = BattleScript_TotemFlaredToLife;
+                    }
+                    else
+                    {
+                        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   //do boost
+                    }
+                    return;
+                }
+            }
+            gBattlescriptCurrInstr += 7;    //exit if loop failed (failsafe)
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;

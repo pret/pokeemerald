@@ -709,6 +709,12 @@ struct MonSpritesGfx
     u16 *buffer;
 };
 
+struct TotemBoost
+{
+    u8 stats;   //bitfield for each battle stat
+    u8 statChanges[NUM_BATTLE_STATS - 1];    //highest bit is decrease
+}; /* size = 8 */
+
 // All battle variables are declared in battle_main.c
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -817,6 +823,7 @@ extern u32 gFieldStatuses;
 extern struct FieldTimer gFieldTimers;
 extern u8 gBattlerAbility;
 extern u16 gPartnerSpriteId;
+extern struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT];
 
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);

@@ -7688,3 +7688,23 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	atk57
 	waitmessage 0x40
 	end2
+
+
+BattleScript_TotemFlaredToLife::
+	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
+	printstring STRINGID_AURAFLAREDTOLIFE
+	waitmessage 0x40
+	goto BattleScript_ApplyTotemVarBoost
+
+BattleScript_TotemVar::
+	gettotemboost BattleScript_ApplyTotemVarBoost
+BattleScript_TotemVarEnd:
+	end2
+BattleScript_ApplyTotemVarBoost:
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_TotemVarEnd
+	setgraphicalstatchangevalues
+	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_TotemVarPrintStatMsg:
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+	goto BattleScript_TotemVar  @loop until stats bitfield is empty
