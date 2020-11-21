@@ -122,6 +122,8 @@ BerryTree_EventScript_PickBerry:: @ 8274448
 	special IncrementDailyPickedBerries
 	special ObjectEventInteractionRemoveBerryTree
 	message BerryTree_Text_PickedTheBerry
+    delay 10
+    showberrydesc
 	playfanfare MUS_OBTAIN_BERRY
 	waitmessage
 	waitfanfare
@@ -129,6 +131,7 @@ BerryTree_EventScript_PickBerry:: @ 8274448
 	message BerryTree_Text_PutAwayBerry
 	waitmessage
 	waitbuttonpress
+    hideitemdesc
 	release
 	end
 

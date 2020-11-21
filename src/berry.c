@@ -1286,6 +1286,8 @@ void ObjectEventInteractionGetBerryCountString(void)
     u8 treeId = GetObjectEventBerryTreeId(gSelectedObjectEvent);
     u8 berry = GetBerryTypeByBerryTreeId(treeId);
     u8 count = GetBerryCountByBerryTreeId(treeId);
+    
+    gSpecialVar_0x8006 = BerryTypeToItemId(berry);
     GetBerryCountStringByBerryType(berry, gStringVar1, count);
 }
 
