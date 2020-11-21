@@ -310,6 +310,10 @@ PetalburgCity_EventScript_ItemEther:: @ 82910C1
 	finditem ITEM_ETHER
 	end
 
+PetalburgCity_EventScript_ItemTM15:: @ 82910C1
+	finditem ITEM_TM15
+	end
+
 MauvilleCity_EventScript_ItemXSpeed:: @ 82910CE
 	finditem ITEM_X_SPEED
 	end
@@ -318,12 +322,28 @@ RustboroCity_EventScript_ItemXDefend:: @ 82910DB
 	finditem ITEM_X_DEFEND
 	end
 
+RustboroCity_EventScript_ItemTM17:: @ 82910DB
+	finditem ITEM_TM17
+	end
+
 LilycoveCity_EventScript_ItemMaxRepel:: @ 82910E8
 	finditem ITEM_MAX_REPEL
 	end
 
+LilycoveCity_EventScript_ItemTM20:: @ 82910E8
+	finditem ITEM_TM20
+	end
+
 MossdeepCity_EventScript_ItemNetBall:: @ 82910F5
 	finditem ITEM_NET_BALL
+	end
+
+MossdeepCity_EventScript_ItemTM16:: @ 82910F5
+	finditem ITEM_TM16
+	end
+
+MossdeepCity_EventScript_ItemTM32:: @ 82910F5
+	finditem ITEM_TM32
 	end
 
 PetalburgWoods_EventScript_ItemXAttack:: @ 8291102
@@ -364,6 +384,10 @@ GraniteCave_B2F_EventScript_ItemRepel:: @ 829116A
 
 GraniteCave_B2F_EventScript_ItemRareCandy:: @ 8291177
 	finditem ITEM_RARE_CANDY
+	end
+
+GraniteCave_B2F_EventScript_ItemTM21:: @ 8291177
+	finditem ITEM_TM21
 	end
 
 JaggedPass_EventScript_ItemBurnHeal:: @ 8291184
@@ -416,6 +440,10 @@ NewMauville_Inside_EventScript_ItemFullHeal:: @ 8291213
 
 NewMauville_Inside_EventScript_ItemParalyzeHeal:: @ 8291220
 	finditem ITEM_PARALYZE_HEAL
+	end
+
+NewMauville_Inside_EventScript_ItemTM25:: @ 8291206
+	finditem ITEM_TM25
 	end
 
 AbandonedShip_Rooms_1F_EventScript_ItemHarborMail:: @ 829122D
@@ -480,6 +508,10 @@ SafariZone_Northeast_EventScript_ItemNugget:: @ 82912E3
 
 SafariZone_Southeast_EventScript_ItemBigPearl:: @ 82912F0
 	finditem ITEM_BIG_PEARL
+	end
+
+MtChimney_EventScript_ItemTM35:: @ 82912FD
+	finditem ITEM_TM35
 	end
 
 MtPyre_2F_EventScript_ItemUltraBall:: @ 82912FD
@@ -562,8 +594,16 @@ ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce:: @ 82913F4
 	finditem ITEM_NEVER_MELT_ICE
 	end
 
+ShoalCave_LowTideIceRoom_EventScript_ItemTM14:: @ 82913F4
+	finditem ITEM_TM14
+	end
+
 SeafloorCavern_Room9_EventScript_ItemTM26:: @ 8291401
 	finditem ITEM_TM26
+	end
+
+SealedChamber_InnerRoom_EventScript_ItemTM33:: @ 8291401
+	finditem ITEM_TM33
 	end
 
 Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail:: @ 829140E
@@ -652,6 +692,10 @@ MagmaHideout_3F_2R_EventScript_ItemPPMax:: @ 8291512
 
 MagmaHideout_4F_EventScript_MaxRevive:: @ 829151F
 	finditem ITEM_MAX_REVIVE
+	end
+
+MagmaHideout_4F_EventScript_ItemTM38:: @ 829151F
+	finditem ITEM_TM38
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope:: @ 829152C

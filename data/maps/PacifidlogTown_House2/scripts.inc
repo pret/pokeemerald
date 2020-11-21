@@ -41,7 +41,7 @@ PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM:: @ 8203812
 
 PacifidlogTown_House2_EventScript_GiveReturn:: @ 8203816
 	msgbox PacifidlogTown_House2_Text_AdoringPokemonTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM27
+	giveitem ITEM_LUCKY_EGG
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
@@ -57,7 +57,7 @@ PacifidlogTown_House2_EventScript_PutInEffort:: @ 8203845
 
 PacifidlogTown_House2_EventScript_GiveFrustration:: @ 820384F
 	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM21
+	giveitem ITEM_SOOTHE_BELL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
@@ -110,7 +110,7 @@ PacifidlogTown_House2_Text_AhYourPokemon: @ 820395B
 PacifidlogTown_House2_Text_AdoringPokemonTakeThis: @ 820396D
 	.string "It clearly likes you very much.\p"
 	.string "A POKéMON that adoring and adorable\n"
-	.string "deserves a TM like this, no?$"
+	.string "deserves an item, no?$"
 
 PacifidlogTown_House2_Text_PutInSomeMoreEffort: @ 82039CE
 	.string "Hmm…\n"
@@ -121,7 +121,7 @@ PacifidlogTown_House2_Text_PutInSomeMoreEffort: @ 82039CE
 PacifidlogTown_House2_Text_ViciousPokemonTakeThis: @ 8203A2F
 	.string "It has a vicious look to it.\p"
 	.string "A frightening POKéMON like that\n"
-	.string "deserves a TM like this.$"
+	.string "deserves an item.$"
 
 PacifidlogTown_House2_Text_ExplainReturnFrustration: @ 8203A85
 	.string "If a POKéMON likes you a lot, RETURN's\n"
@@ -131,9 +131,9 @@ PacifidlogTown_House2_Text_ExplainReturnFrustration: @ 8203A85
 
 PacifidlogTown_House2_Text_GetGoodTMInXDays: @ 8203AF4
 	.string "Oh, yes. In about {STR_VAR_1} or so days,\n"
-	.string "I should be getting a good TM or two.\p"
+	.string "I should be getting a good item.\p"
 	.string "You should come see me then.\n"
-	.string "I'll give you a TM that's suitable for\l"
+	.string "I'll give you an item for\l"
 	.string "your POKéMON.$"
 
 PacifidlogTown_House2_Text_Rurii: @ 8203B8D

@@ -364,6 +364,11 @@ static const u8 sRepelDesc[] = _(
     "steps.");
 
 // Evolution stones
+static const u8 sItem05CDesc[] = _(
+    "Makes certain\n"
+    "species of POKéMON\n"
+    "evolve.");
+
 static const u8 sSunStoneDesc[] = _(
     "Makes certain\n"
     "species of POKéMON\n"

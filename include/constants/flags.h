@@ -1216,17 +1216,17 @@
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0x491
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 
-#define FLAG_UNUSED_0x493                                           0x493 // Unused Flag
-#define FLAG_UNUSED_0x494                                           0x494 // Unused Flag
-#define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
-#define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
-#define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
-#define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
-#define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
-#define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
-#define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
-#define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
-#define FLAG_UNUSED_0x49D                                           0x49D // Unused Flag
+#define FLAG_UNUSED_0x493                                           0x493 // Used now for TM14
+#define FLAG_UNUSED_0x494                                           0x494 // Used now for TM15
+#define FLAG_UNUSED_0x495                                           0x495 // Used now for TM16
+#define FLAG_UNUSED_0x496                                           0x496 // Used now for TM17
+#define FLAG_UNUSED_0x497                                           0x497 // Used now for TM20
+#define FLAG_UNUSED_0x498                                           0x498 // Used now for TM21
+#define FLAG_UNUSED_0x499                                           0x499 // Used now for TM25
+#define FLAG_UNUSED_0x49A                                           0x49A // Used now for TM32
+#define FLAG_UNUSED_0x49B                                           0x49B // Used now for TM33
+#define FLAG_UNUSED_0x49C                                           0x49C // Used now for TM35
+#define FLAG_UNUSED_0x49D                                           0x49D // Used now for TM38
 #define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag
 #define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
 #define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
