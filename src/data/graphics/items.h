@@ -182,6 +182,9 @@ const u32 gItemIconPalette_Repel[] = INCBIN_U32("graphics/items/icon_palettes/re
 
 // Evolution stones
 
+const u32 gItemIcon_Item05C[] = INCBIN_U32("graphics/items/icons/trade_link.4bpp.lz");
+const u32 gItemIconPalette_Item05C[] = INCBIN_U32("graphics/items/icon_palettes/trade_link.gbapal.lz");
+
 const u32 gItemIcon_SunStone[] = INCBIN_U32("graphics/items/icons/sun_stone.4bpp.lz");
 const u32 gItemIconPalette_SunStone[] = INCBIN_U32("graphics/items/icon_palettes/sun_stone.gbapal.lz");
 

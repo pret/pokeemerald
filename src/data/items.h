@@ -1226,19 +1226,19 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+// Evolution stones
+
     [ITEM_05C] =
     {
-        .name = _("????????"),
+        .name = _("TRADE LINK"),
         .itemId = ITEM_05C,
-        .price = 2500,
+        .price = 3500,
         .description = sItem05CDesc,
         .pocket = POCKET_ITEMS,
         .type = 1,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
         .secondaryId = 0,
     },
-
-// Evolution stones
 
     [ITEM_SUN_STONE] =
     {
