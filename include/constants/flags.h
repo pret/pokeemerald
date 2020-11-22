@@ -1227,7 +1227,7 @@
 #define FLAG_UNUSED_0x49B                                           0x49B // Used now for TM33
 #define FLAG_UNUSED_0x49C                                           0x49C // Used now for TM35
 #define FLAG_UNUSED_0x49D                                           0x49D // Used now for TM38
-#define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag
+#define FLAG_UNUSED_0x49E                                           0x49E // Used now for Birch's Event
 #define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
 #define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
 #define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused Flag

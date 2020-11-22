@@ -315,10 +315,43 @@ BattleFrontier_OutsideWest_EventScript_Man4:: @ 823D6D7
 	release
 	end
 
+BattleFrontier_OutsideWest_EventScript_BirchGivingEventItems:: @ 823D518
+	lock
+	faceplayer
+	msgbox BattleFrontier_OutsideWest_Text_BirchText, MSGBOX_NPC
+	waitmessage
+	fadescreen 1
+	additem ITEM_EON_TICKET
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	setvar VAR_DISTRIBUTE_EON_TICKET, 0
+	additem ITEM_MYSTIC_TICKET
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	setflag FLAG_RECEIVED_MYSTIC_TICKET
+	additem ITEM_AURORA_TICKET
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	setflag FLAG_RECEIVED_AURORA_TICKET
+	additem ITEM_OLD_SEA_MAP
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	setflag FLAG_RECEIVED_OLD_SEA_MAP
+	setflag FLAG_UNUSED_0x49E
+	removeobject 25
+	fadescreen 0
+	release
+	end
+
 BattleFrontier_OutsideWest_EventScript_PokefanF:: @ 823D6EE
 	msgbox BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier, MSGBOX_NPC
 	end
 
+BattleFrontier_OutsideWest_Text_BirchText:
+	.string "Hello again {PLAYER}.\p"
+	.string "You've become a lot stronger in\n"
+	.string "a short time.\p"
+	.string "You should take these {COLOR GREEN}maps{COLOR DARK_GREY}.\p"
+	.string "It contains the locations of\n"
+	.string "various rare Pokémons.\p"
+	.string "Good luck and be prepared.\n"
+	.string "They will be a good challenge for you.$"
 BattleFrontier_OutsideWest_Text_BattleDomeSign: @ 823D6F7
 	.string "This is the BATTLE DOME!\n"
 	.string "Your path to the invincible superstar!$"
