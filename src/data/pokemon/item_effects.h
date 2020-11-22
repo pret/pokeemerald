@@ -284,6 +284,10 @@ const u8 gItemEffect_XSpecial[8] = {
     [7] = 1,
 };
 
+const u8 gItemEffect_ITEM05C[6] = {
+    [4] = ITEM4_EVO_STONE,
+};
+
 const u8 gItemEffect_SunStone[6] = {
     [4] = ITEM4_EVO_STONE,
 };
@@ -450,6 +454,7 @@ const u8 *const gItemEffectTable[] =
     [ITEM_X_SPEED - ITEM_POTION] = gItemEffect_XSpeed,
     [ITEM_X_ACCURACY - ITEM_POTION] = gItemEffect_XAccuracy,
     [ITEM_X_SPECIAL - ITEM_POTION] = gItemEffect_XSpecial,
+    [ITEM_05C - ITEM_POTION] = gItemEffect_ITEM05C,
     [ITEM_SUN_STONE - ITEM_POTION] = gItemEffect_SunStone,
     [ITEM_MOON_STONE - ITEM_POTION] = gItemEffect_MoonStone,
     [ITEM_FIRE_STONE - ITEM_POTION] = gItemEffect_FireStone,
