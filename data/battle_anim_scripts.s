@@ -23929,6 +23929,7 @@ General_TurnTrap:
 	jumpargeq 0, TRAP_ANIM_WHIRLPOOL, Status_Whirlpool
 	jumpargeq 0, TRAP_ANIM_CLAMP,     Status_Clamp
 	jumpargeq 0, TRAP_ANIM_SAND_TOMB, Status_SandTomb
+	jumpargeq 0, TRAP_ANIM_INFESTATION, Status_Infestation
 	goto Status_BindWrap
 Status_BindWrap:
 	loadspritegfx ANIM_TAG_TENDRILS
@@ -24000,6 +24001,25 @@ Status_SandTomb:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 4, 2, 7, 0, RGB(19, 17, 0)
 	waitforvisualfinish
 	stopsound
+	end
+
+Status_Infestation:
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET @black color
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES @circle particles
+	monbg ANIM_DEF_PARTNER
+	monbgprio_28 ANIM_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_DEF, 0x2, 0x0, 0x9, 0x7320
+	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_TARGET 0x3 0x0 0x4f 0x1
+	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0x0, 0x4F
+	call InfestationVortex
+	call InfestationVortex
+	call InfestationVortex
+	call InfestationVortex
+	call InfestationVortex
+	waitforvisualfinish
+	launchtask AnimTask_BlendBattleAnimPal 0xA 0x5 ANIM_PAL_DEF 0x2 0x9 0x0 0x7320
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
 	end
 
 General_HeldItemEffect:
