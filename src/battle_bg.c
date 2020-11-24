@@ -865,7 +865,11 @@ void LoadBattleTextboxAndBackground(void)
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
     LoadBattleMenuWindowGfx();
-    DrawMainBattleBackground();
+    #if B_TERRAIN_BG_CHANGE == TRUE
+        DrawTerrainTypeBattleBackground();
+    #else
+        DrawMainBattleBackground();
+    #endif
 }
 
 static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 bgId, u8 destX, u8 destY)
