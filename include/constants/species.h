@@ -2221,4 +2221,9 @@
 
 #define HOENN_DEX_COUNT 212
 
+// species flags
+#define F_ULTRA_BEAST   (1 << 0)
+#define F_ALOLAN_FORM   (1 << 1)
+#define F_GALARIAN_FORM (1 << 2)
+
 #endif  // GUARD_CONSTANTS_SPECIES_H
