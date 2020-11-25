@@ -1,27 +1,26 @@
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
 
-# check if dkP's base_tools makefile exists
-ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
-    include $(TOOLCHAIN)/base_tools
-# otherwise, either use the bin files or the
-# arm-none-eabi binaries on the system
-else
-    ifneq ($(TOOLCHAIN),)
-    export PATH := $(TOOLCHAIN)/bin:$(PATH)
-    endif
-    PREFIX := arm-none-eabi-
-    OBJCOPY := $(PREFIX)objcopy
-    export MODERNCC := $(PREFIX)gcc
-    export AS := $(PREFIX)as
-endif
+# don't use dkP's base_tools anymore
+# because the redefinition of $(CC) conflicts
+# with when we want to use $(CC) to preprocess files
+# thus, manually create the variables for the bin
+# files, or use arm-none-eabi binaries on the system
+# if dkP is not installed on tihs system
 
 ifneq ($(TOOLCHAIN),)
-export CPP := $(PREFIX)cpp
-else
-export CPP := $(CC) -E
+export PATH := $(TOOLCHAIN)/bin:$(PATH)
 endif
-export LD := $(PREFIX)ld
+
+PREFIX := arm-none-eabi-
+OBJCOPY := $(PREFIX)objcopy
+AS := $(PREFIX)as
+CPP := $(CC) -E
+LD := $(PREFIX)ld
+
+# note: the makefile must be set up so MODERNCC is never called
+# if MODERN=0
+MODERNCC := $(PREFIX)gcc
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
