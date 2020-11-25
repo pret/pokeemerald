@@ -47,7 +47,7 @@ cd /mnt/c/Users/<user>/Desktop/decomps
 ```
 Note that the directory **must exist** in Windows. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Windows Explorer) before executing the `cd` command.
  
-(The Windows C:\ drive is called /mnt/c/ in WSL. Replace <user> in the example path with your **Windows** username, and the drive letter with the letter of the drive where you want to save pokeemerald. Windows path names are case-insensitive so adhereing to capitalization isn't needed)
+(The Windows C:\ drive is called /mnt/c/ in WSL. Replace *\<user>* in the example path with your **Windows** username, and the drive letter with the letter of the drive where you want to save pokeemerald. Windows path names are case-insensitive so adhereing to capitalization isn't needed)
 
 If this works, then proceed to [Installation](#Installation).
 
@@ -150,7 +150,7 @@ Change directory to where the package was downloaded. For example, if the packag
 ```bash
 cd /mnt/c/Users/<user>/Downloads
 ```
-(Replace <user> with your Windows username)
+(Replace *\<user>* with your Windows username)
 
 Once the directory has been changed to the folder containing the devkitPro package, run the following commands to install devkitPro.
 ```bash
