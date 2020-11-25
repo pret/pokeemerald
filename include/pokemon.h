@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "constants/region_map_sections.h"
 #include "constants/pokemon_config.h"
+#include "constants/map_groups.h"
 
 struct PokemonSubstruct0
 {
