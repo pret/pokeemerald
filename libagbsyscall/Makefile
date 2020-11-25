@@ -1,30 +1,27 @@
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
 
-ifeq ($(CC),)
-HOSTCC := gcc
-else
-HOSTCC := $(CC)
-endif
-
-ifeq ($(CXX),)
-HOSTCXX := g++
-else
-HOSTCXX := $(CXX)
-endif
-
+# check if dkP's base_tools makefile exists
 ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
-include $(TOOLCHAIN)/base_tools
+    include $(TOOLCHAIN)/base_tools
+# otherwise, either use the bin files or the
+# arm-none-eabi binaries on the system
 else
-export PATH := $(TOOLCHAIN)/bin:$(PATH)
-PREFIX := arm-none-eabi-
-OBJCOPY := $(PREFIX)objcopy
-export CC := $(PREFIX)gcc
-export AS := $(PREFIX)as
+    ifneq ($(TOOLCHAIN),)
+    export PATH := $(TOOLCHAIN)/bin:$(PATH)
+    endif
+    PREFIX := arm-none-eabi-
+    OBJCOPY := $(PREFIX)objcopy
+    export MODERNCC := $(PREFIX)gcc
+    export AS := $(PREFIX)as
 endif
-export CPP := $(PREFIX)cpp
-export LD := $(PREFIX)ld
 
+ifneq ($(TOOLCHAIN),)
+export CPP := $(PREFIX)cpp
+else
+export CPP := $(CC) -E
+endif
+export LD := $(PREFIX)ld
 ifeq ($(OS),Windows_NT)
 EXE := .exe
 else
