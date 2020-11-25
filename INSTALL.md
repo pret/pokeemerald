@@ -8,7 +8,7 @@ If you run into trouble, ask for help on IRC or Discord (see [README.md](README.
 WSL1 is the preferred terminal to build **pokeemerald**. The following instructions will explain how to install WSL1. These steps can be skipped if WSL1 is already installed.
 
 ### Installing WSL1
-Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Shift+Insert is paste in the terminal).
+Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Right Click or Shift+Insert is paste in the Powershell).
 ```
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
@@ -21,7 +21,7 @@ Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubunt
 ### Setting up WSL1
 Open **Ubuntu** (e.g. using Search). WSL/Ubuntu will set up its own installation when it runs for the first time. Once WSL/Ubuntu finishes installing, it will ask for a username and password (to be input in). Note that there will be no visible response when typing in the password, but the terminal will still read in input.
 
-A few notes before proceeding
+A few notes before proceeding:
 - In the terminal, Copy and Paste is either done via
     - **right-click** (selection + right click to Copy, right click with no selection to Paste)
     - **Ctrl+Shift+C/Ctrl+Shift+V** (enabled by right-clicking the title bar, going to Properties, then checking the checkbox next to "Use Ctrl+Shift+C/V as Copy/Paste").
