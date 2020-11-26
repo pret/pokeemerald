@@ -4654,6 +4654,7 @@ static void Cmd_jumpifcantswitch(void)
 {
     s32 i;
     s32 lastMonId;
+    u8 battlerIn1, battlerIn2;
     struct Pokemon *party;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(SWITCH_IGNORE_ESCAPE_PREVENTION));
@@ -4663,22 +4664,21 @@ static void Cmd_jumpifcantswitch(void)
             || (gStatuses3[gActiveBattler] & STATUS3_ROOTED)))
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+        return;
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        #ifndef NONMATCHING
-            asm("":::"r5");
-        #endif // NONMATCHING
         if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
             party = gEnemyParty;
         else
             party = gPlayerParty;
 
-        i = 0;
+        lastMonId = 0;
         if (gActiveBattler & 2)
-            i = 3;
+            lastMonId = 3;
 
-        for (lastMonId = i + 3; i < lastMonId; i++)
+        for (i = lastMonId; i < lastMonId + 3; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -4687,7 +4687,7 @@ static void Cmd_jumpifcantswitch(void)
                 break;
         }
 
-        if (i == lastMonId)
+        if (i == lastMonId + 3)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
@@ -4700,18 +4700,18 @@ static void Cmd_jumpifcantswitch(void)
             {
                 party = gPlayerParty;
 
-                i = 0;
+                lastMonId = 0;
                 if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
-                    i = 3;
+                    lastMonId = 3;
             }
             else
             {
                 party = gEnemyParty;
 
                 if (gActiveBattler == 1)
-                    i = 0;
+                    lastMonId = 0;
                 else
-                    i = 3;
+                    lastMonId = 3;
             }
         }
         else
@@ -4721,12 +4721,12 @@ static void Cmd_jumpifcantswitch(void)
             else
                 party = gPlayerParty;
 
-            i = 0;
+            lastMonId = 0;
             if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
-                i = 3;
+                lastMonId = 3;
         }
 
-        for (lastMonId = i + 3; i < lastMonId; i++)
+        for (i = lastMonId; i < lastMonId + 3; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -4735,7 +4735,7 @@ static void Cmd_jumpifcantswitch(void)
                 break;
         }
 
-        if (i == lastMonId)
+        if (i == lastMonId + 3)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
@@ -4744,11 +4744,11 @@ static void Cmd_jumpifcantswitch(void)
     {
         party = gEnemyParty;
 
-        i = 0;
+        lastMonId = 0;
         if (gActiveBattler == B_POSITION_OPPONENT_RIGHT)
-            i = 3;
+            lastMonId = 3;
 
-        for (lastMonId = i + 3; i < lastMonId; i++)
+        for (i = lastMonId; i < lastMonId + 3; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -4757,15 +4757,13 @@ static void Cmd_jumpifcantswitch(void)
                 break;
         }
 
-        if (i == lastMonId)
+        if (i == lastMonId + 3)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
         else
             gBattlescriptCurrInstr += 6;
     }
     else
     {
-        u8 battlerIn1, battlerIn2;
-
         if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
         {
             battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
