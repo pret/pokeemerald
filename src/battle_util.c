@@ -7504,7 +7504,7 @@ s32 GetStealthHazardDamage(u8 hazardType, u8 battlerId)
     return dmg;
 }
 
-static bool32 IsPartnerMonFromSameTrainer(u8 battlerId)
+bool32 IsPartnerMonFromSameTrainer(u8 battlerId)
 {
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         return FALSE;

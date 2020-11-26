@@ -4049,6 +4049,104 @@ const struct SpriteTemplate gSteelBeamSpikeShardTemplate =
     .callback = AnimDirtScatter
 };
 
+//// Z MOVES
+/*
+// breakneck blitz
+const struct SpriteTemplate gBreakneckBlitzDanceSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_HOLLOW_ORB,
+    .paletteTag = ANIM_TAG_FLAT_ROCK,
+    .oam = OAM_OFF_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = 0x80B7449
+};
+const struct SpriteTemplate gBreakneckBlitzSuperpowerSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_METEOR,
+    .paletteTag = ANIM_TAG_METEOR,
+    .oam = sGrowingSuperpowerOAM,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_GrowingSuperpower,
+    .callback = SpriteCB_GrowingSuperpower
+};
+const struct SpriteTemplate gBreakneckBlitzHitSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_FLAT_ROCK,
+    .oam = OAM_NORMAL_BLEND_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = 0x83E7BF8,
+    .callback = 0x80BA561
+};
+// all out pummelling
+const struct SpriteTemplate gAllOutPummelingOnslaughtSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_HANDS_AND_FEET,
+    .paletteTag = ANIM_TAG_IMPACT,
+    .oam = OAM_OFF_32x32,
+    .anims = 0x83E66CC,
+    .images = 0x0,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = 0x80B0929
+};
+// supersonic skystrike
+static const union AffineAnimCmd sSupersonicSkystrikeAffinePlayerSide = {
+    .hword 0,0,0x01b9,0,0x7fff,0,0,0
+};
+static const union AffineAnimCmd sSupersonicSkystrikeAffineOpponentSide = {
+    .hword 0,0,0x0150,0,0x7fff,0,0,0
+};
+static const union AffineAnimCmd* const sSupersonicSkystrikeAffineAnimTable[] = {
+    sSupersonicSkystrikeAffinePlayerSide,
+    sSupersonicSkystrikeAffineOpponentSide,
+};
+const struct SpriteTemplate gSupersonicSkystrikeFlySpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_BIRD,
+    .paletteTag = ANIM_TAG_BIRD,
+    .oam = OAM_NORMAL_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = 0x0,
+    .affineAnims = sSupersonicSkystrikeAffineAnimTable,
+    .callback = 0x80B1C3D
+};
+//acid downpour
+const struct SpriteTemplate gAcidDownpourReversalSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .oam = OAM_NORMAL_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = 0x0,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = 0x80E0E95
+};
+const struct SpriteTemplate gAcidDownpourAuraSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .oam = OAM_NORMAL_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = 0x0,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = 0x80B477D
+};
+//tectonic rage
+const struct SpriteTemplate gTectonicRageBlastBurnSpriteTemplate = 
+{
+TEC_RAGE_BLAST_BURN: objtemplate ANIM_TAG_FIRE_PLUME ANIM_TAG_FIRE_PLUME OAM_OFF_32x32 0x83E5C50 0x0 gDummySpriteAffineAnimTable BLASTBURN_TARGET_ASM+1
+};
+const struct SpriteTemplate gTectonicRageExplosionSpriteTemplate = 
+{
+TECTONIC_EXPLODE: objtemplate ANIM_TAG_UNUSED_EXPLOSION_2 ANIM_TAG_UNUSED_EXPLOSION_2 OAM_OFF_32x32 0x83E3F90 0x0 gDummySpriteAffineAnimTable SpriteCB_AnimSpriteOnMonPos
+};*/
+
+
+
 //// functions
 //general
 static u8 LoadBattleAnimTarget(u8 arg)

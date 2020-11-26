@@ -8,6 +8,7 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_tv.h"
+#include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
 #include "item.h"
@@ -101,8 +102,6 @@ static void PlayerCmdEnd(void);
 static void PlayerBufferRunCommand(void);
 static void HandleInputChooseTarget(void);
 static void HandleInputChooseMove(void);
-static void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
-static void MoveSelectionDestroyCursorAt(u8 cursorPos);
 static void MoveSelectionDisplayPpNumber(void);
 static void MoveSelectionDisplayPpString(void);
 static void MoveSelectionDisplayMoveType(void);
@@ -124,6 +123,8 @@ static void DoSwitchOutAnimation(void);
 static void PlayerDoMoveAnimation(void);
 static void task05_08033660(u8 taskId);
 static void sub_805CE38(void);
+
+static void ReloadMoveNames(void);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -372,7 +373,7 @@ static void HandleInputChooseTarget(void)
         else
             BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
-        HideMegaTriggerSprite();
+        HideTriggerSprites();
         PlayerBufferExecCompleted();
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -513,7 +514,7 @@ static void HandleInputShowTargets(void)
             BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
-        HideMegaTriggerSprite();
+        HideTriggerSprites();
         PlayerBufferExecCompleted();
     }
     else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
@@ -605,7 +606,7 @@ static void HandleInputChooseMove(void)
                 BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | RET_MEGA_EVOLUTION | (gMultiUsePlayerCursor << 8));
             else
                 BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
-            HideMegaTriggerSprite();
+            HideTriggerSprites();
             PlayerBufferExecCompleted();
         }
         else if (canSelectTarget == 1)
@@ -629,10 +630,18 @@ static void HandleInputChooseMove(void)
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
-        gBattleStruct->mega.playerSelect = FALSE;
-        BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
-        HideMegaTriggerSprite();
-        PlayerBufferExecCompleted();
+        if (gBattleStruct->zmove.viewingZMove)
+        {
+            ReloadMoveNames();
+        }
+        else
+        {
+            gBattleStruct->mega.playerSelect = FALSE;
+            gBattleStruct->zmove.viable = FALSE;
+            BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
+            HideTriggerSprites();
+            PlayerBufferExecCompleted();
+        }
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
@@ -644,6 +653,7 @@ static void HandleInputChooseMove(void)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
             MoveSelectionDisplayMoveType();
+            TryChangeZIndicator(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
     }
     else if (JOY_NEW(DPAD_RIGHT))
@@ -657,6 +667,7 @@ static void HandleInputChooseMove(void)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
             MoveSelectionDisplayMoveType();
+            TryChangeZIndicator(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
     }
     else if (JOY_NEW(DPAD_UP))
@@ -669,6 +680,7 @@ static void HandleInputChooseMove(void)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
             MoveSelectionDisplayMoveType();
+            TryChangeZIndicator(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
     }
     else if (JOY_NEW(DPAD_DOWN))
@@ -682,6 +694,7 @@ static void HandleInputChooseMove(void)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
             MoveSelectionDisplayPpNumber();
             MoveSelectionDisplayMoveType();
+            TryChangeZIndicator(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
     }
     else if (JOY_NEW(SELECT_BUTTON))
@@ -708,7 +721,30 @@ static void HandleInputChooseMove(void)
             ChangeMegaTriggerSprite(gBattleStruct->mega.triggerSpriteId, gBattleStruct->mega.playerSelect);
             PlaySE(SE_SELECT);
         }
+        else if (gBattleStruct->zmove.currZMove != MOVE_NONE)
+        {
+            // show z move name / info
+            //TODO: brighten z move symbol
+            //ChangeMegaTriggerSprite(gBattleStruct->zmove.triggerSpriteId, gBattleStruct->zmove.viable);
+            PlaySE(SE_SELECT);
+            
+            if (!gBattleStruct->zmove.viewingZMove)
+                MoveSelectionDisplayZMove(gBattleStruct->zmove.currZMove);
+            else
+                ReloadMoveNames();
+        }
     }
+}
+
+static void ReloadMoveNames(void)
+{
+    gBattleStruct->mega.playerSelect = FALSE;
+    gBattleStruct->zmove.viewingZMove = FALSE;
+    MoveSelectionDestroyCursorAt(0);
+    MoveSelectionDisplayMoveNames();
+    MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
+    MoveSelectionDisplayPpNumber();
+    MoveSelectionDisplayMoveType();
 }
 
 u32 sub_8057FBC(void) // unused
@@ -1587,7 +1623,7 @@ static void MoveSelectionDisplayMoveType(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 10);
 }
 
-static void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
+void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
 {
     u16 src[2];
     src[0] = arg1 + 1;
@@ -1597,7 +1633,7 @@ static void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
     CopyBgTilemapBufferToVram(0);
 }
 
-static void MoveSelectionDestroyCursorAt(u8 cursorPosition)
+void MoveSelectionDestroyCursorAt(u8 cursorPosition)
 {
     u16 src[2];
     src[0] = 0x1016;
@@ -2712,12 +2748,18 @@ static void PlayerHandleChooseMove(void)
     }
     else
     {
+        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+        
         InitMoveSelectionsVarsAndStrings();
         gBattleStruct->mega.playerSelect = FALSE;
         if (!IsMegaTriggerSpriteActive())
             gBattleStruct->mega.triggerSpriteId = 0xFF;
         if (CanMegaEvolve(gActiveBattler))
             CreateMegaTriggerSprite(gActiveBattler, 0);
+        if (!IsZMoveTriggerSpriteActive())
+            gBattleStruct->zmove.triggerSpriteId = 0xFF;
+        gBattleStruct->zmove.viable = IsViableZMove(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]); //is current move a z move
+        CreateZMoveTriggerSprite(gActiveBattler, gBattleStruct->zmove.viable);
         gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;
     }
 }

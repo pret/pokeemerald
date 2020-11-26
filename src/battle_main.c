@@ -5049,3 +5049,4 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
         gSpecialStatuses[battlerAtk].gemBoost = 1;
     }
 }
+

@@ -427,6 +427,18 @@ struct Illusion
     struct Pokemon *mon;
 };
 
+struct ZMoveData
+{
+    /*0x00*/ u8 battlerId;
+    /*0x01*/ u8 viable:1;    // current move can become a z move
+             u8 viewingZMove:1;  //if player is viewing the z move name instead of regular moves
+             u8 split:2;
+             u8 zUnused:4;
+    /*0x02*/ u16 currZMove;  //z move of cursor / selected z move
+    /*0x04*/ u16 baseMove;  //move turned into z move
+    /*0x06*/ u8 triggerSpriteId;
+}; /* size = 8 */
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -522,6 +534,7 @@ struct BattleStruct
     u8 activeAbilityPopUps; // as bits for each battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
+    struct ZMoveData zmove;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
     u8 introState;

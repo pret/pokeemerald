@@ -281,8 +281,8 @@ const u32 gBattleAnimSpritePal_NewHandsAndFeet[] = INCBIN_U32("graphics/battle_a
 const u32 gBattleAnimSpriteGfx_Tornado[] = INCBIN_U32("graphics/battle_anims/sprites/new/tornado.4bpp.lz");
 const u32 gBattleAnimSpritePal_Tornado[] = INCBIN_U32("graphics/battle_anims/sprites/new/tornado.gbapal.lz");
 
-const u32 gBattleAnimSpriteGfx_ZMoveSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/new/z_move_symbol.4bpp.lz");
-const u32 gBattleAnimSpritePal_ZMoveSymbol[] = INCBIN_U32("graphics/battle_anims/sprites/new/z_move_symbol.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_ZMoveSymbol[] = INCBIN_U8("graphics/battle_anims/sprites/new/z_move_symbol.4bpp.lz");
+const u32 gBattleAnimSpritePal_ZMoveSymbol[] = INCBIN_U16("graphics/battle_anims/sprites/new/z_move_symbol.gbapal.lz");
 
 
 // Battle anims

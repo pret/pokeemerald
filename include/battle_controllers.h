@@ -259,6 +259,8 @@ void c3_0802FDF4(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
 void InitMoveSelectionsVarsAndStrings(void);
+void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
+void MoveSelectionDestroyCursorAt(u8 cursorPosition);
 
 // recorded player controller
 void SetControllerToRecordedPlayer(void);
