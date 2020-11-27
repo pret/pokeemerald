@@ -4,8 +4,22 @@ These instructions explain how to set up the tools required to build **pokeemera
 
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
-## Windows 10
-WSL1 is the preferred terminal to build **pokeemerald**. The following instructions will explain how to install WSL1. These steps can be skipped if WSL1 is already installed.
+## Windows
+Windows has instructions for building with three possible terminals, if users encounter unexpected errors in following instructions for one of the terminals. These instructions are:
+- [Windows 10 (WSL1)](#windows-10-wsl1)
+- [Windows (msys2)](#windows-(msys2))
+- [Windows (Cygwin)](#windows-(cygwin))
+
+The instructions have been ordered by the performance of their respective terminal. Out of the provided terminals, **WSL1** builds pokeemerald the fastest, and is thus **highly recommended**, but is only available on Windows 10. **msys2** is the second fastest, and **Cygwin** is the slowest. For advanced users, **WSL2** is an option and is even faster than **WSL1** if files are stored on the WSL2 file system, but some tools such as [porymap](https://github.com/huderlem/porymap) cannot interact with said files due to problems [outside the control of maintainers](https://bugreports.qt.io/browse/QTBUG-86277).
+
+All of the Windows instructions assume that the default drive is C:\\. If this differs to your actual drive letter, then replace C with the correct the drive letter when reading the instructions.
+
+**A note of caution**: As Windows 7 is officially unsupported by Microsoft and Windows 8 has very little usage, some maintainers are unwilling to maintain the Windows 7/8 instructions. Thus, these instructions may break in the future with fixes taking longer than fixes to the Windows 10 instructions.
+
+## Windows 10 (WSL1)
+WSL1 is the preferred terminal to build **pokeemerald**. The following instructions will explain how to install WSL1 (referred interchangeably as WSL).
+
+If WSL is **not installed**, then go to [Installing WSL1](#Installing-WSL1). Otherwise, if WSL is installed, but it hasn't previously been set up for another decompilation project, then go to [Setting up WSL1](#Setting-up-WSL1). Otherwise, open WSL and go to [Choosing where to store pokeemerald (WSL1)](#Choosing-where-to-store-pokeemerald-(WSL1)).
 
 ### Installing WSL1
 Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Right Click or Shift+Insert is paste in the Powershell).
@@ -14,7 +28,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 ```
 Once the process finishes, restart your machine.
 
-The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice. Advanced users can pick a preferred Linux distribution, but build instructions may differ.
+The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice. Advanced users can pick a preferred Linux distribution, but setup instructions may differ.
 
 Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution. If the link does not work, then open the Microsoft Store manually, and search for the Ubuntu app (choose the one with no version number).
 
@@ -39,6 +53,7 @@ sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
 ```
 (If the above command does not work, try the above command but replacing `apt` with `apt-get`).
 
+### Choosing where to store pokeemerald (WSL1)
 WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install pokeemerald within Windows. You'll have to change the **current working directory** every time you open WSL.
 
 For example, if you want to store pokeemerald (and agbcc) in **C:\Users\\_\<user>_\Desktop\decomps**, enter this command:
@@ -47,14 +62,103 @@ cd /mnt/c/Users/<user>/Desktop/decomps
 ```
 Note that the directory **must exist** in Windows. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Windows Explorer) before executing the `cd` command.
  
-(The Windows C:\ drive is called /mnt/c/ in WSL. Replace *\<user>* in the example path with your **Windows** username, and the drive letter with the letter of the drive where you want to save pokeemerald. Windows path names are case-insensitive so adhereing to capitalization isn't needed)
+(The Windows C:\ drive is called /mnt/c/ in WSL. Replace *\<user>* in the example path with your **Windows** username. If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`. Windows path names are case-insensitive so adhereing to capitalization isn't needed)
 
 If this works, then proceed to [Installation](#Installation).
 
-Otherwise, continue reading below for [the older Windows instructions](#windows).
+Otherwise, continue reading below for [Windows instructions using msys2](#windows-(msys2)).
 
-## Windows
-TODO: add general Windows instructions
+## Windows (msys2)
+
+If devkitPro is not installed, or is installed but without the GBA Development component, then go to [Installing devkitPro](#installing-devkitpro). If devkitPro is installed, but msys2 hasn't previously been set up for another decompilation project, then go to [Setting up msys2](#setting-up-msys2). Otherwise, open msys2 and go to [Choosing where to store pokeemerald (msys2)](#choosing-where-to-store-pokeemerald-(msys2)).
+
+### Installing devkitPro
+Download the devkitPro installer [here](https://github.com/devkitPro/installer/releases).
+
+Run the devkitPro installer. In the "Choose Components" screen, uncheck everything except GBA Development unless if you plan to use devkitPro for other purposes. Keep the install location as C:\devkitPro and leave the Start Menu option unchanged.
+
+### Setting up msys2
+Open msys2 at C:\devkitPro\msys2\msys2_shell.bat.
+
+Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
+
+Certain packages are required to build pokeemerald. Install these by running the following command:
+```bash
+pacman -S make gcc zlib-devel git
+```
+(This command will ask for confirmation, just enter the yes action when prompted).
+
+Download [libpng](https://sourceforge.net/projects/libpng/files/libpng16/1.6.37/libpng-1.6.37.tar.xz/download).
+
+Change directory to where libpng was downloaded. By default, msys2 will start in the current user's profile folder, located at **C:\Users\\_<user>_**, where *\<user>* is your Windows username. In most cases, libpng should be saved within a subfolder of the profile folder. For example, if libpng was saved to **C:\Users\\_\<user>_\Downloads** (the Downloads location for most users), enter this command:
+```bash
+cd Downloads
+```
+(While not shown, msys uses forward slashes `/` instead of backwards slashes `\` as the directory separator. Windows path names are case-insensitive so adhereing to capitalization isn’t needed.  If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Downloads/My Downloads"`. If libpng was saved elsewhere, you will need to specify the full path to where libpng was downloaded, e.g. `cd c:/devkitpro/msys2` if it was saved there)
+
+Run the following command to uncompress and install libpng.
+```bash
+tar xf libpng-1.6.37
+cd libpng-1.6.37
+./configure --prefix=/usr
+make check
+make install
+```
+Then finally, run the following command to change back to the user profile folder.
+```bash
+cd
+```
+
+### Choosing where to store pokeemerald (msys2)
+At this point, you can choose a folder to store pokeemerald into. If so, you'll have to change the **current working directory** every time you open msys2. If you're okay with storing pokeemerald in the user profile folder, then proceed to [Installation](#installation).
+
+For example, if you want to store pokeemerald (and agbcc) in **C:\Users\\_\<user>_\Desktop\decomps**, enter this command:
+```bash
+cd Desktop/decomps
+```
+Note that the directory **must exist** in Windows. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Windows Explorer) before executing the `cd` command.
+
+If this works, then proceed to [Installation](#Installation).
+
+Otherwise, continue reading below for [Windows instructions using Cygwin](#windows-(cygwin)).
+
+## Windows (Cygwin)
+If devkitPro is not installed, or is installed but without the GBA Development component, then follow the instructions used to [install devkitPro](#installing-devkitpro) for the msys2 setup before continuing.
+
+If Cygwin is not installed, or does not have all of the required packages installed, then go to [Installing Cygwin](#installing-cygwin). Otherwise, go to [Choosing where to store pokeemerald (Cygwin)](#choosing-where-to-store-pokeemerald-(cygwin))
+
+### Installing Cygwin
+Download [Cygwin](https://cygwin.com/install.html): setup-x86_64.exe for 64-bit Windows, setup-x86.exe for 32-bit.
+
+Run the Cygwin setup and leave the default settings. At "Select Packages", set the view to "Full" and choose to install the following:
+- `make`
+- `git`
+- `gcc-core`
+- `gcc-g++`
+- `libpng-devel`
+
+To quickly find these, use the search bar and type the name of each package. Ensure that the selected package name is the **exact** same as the one you're trying to download, e.g. `cmake` is **NOT** the same as `make`.
+
+Double click on the text that says "**Skip**" next to each package to select the most recent version to install. If the text says anything other than "**Skip**", (e.g. Keep or a version number), then the package is or will be installed and you don't need to do anything.
+
+Once all required packages have been selected, finish the installation.
+
+### Choosing where to store pokeemerald (Cygwin)
+Open **Cygwin**.
+
+Note that in Cygwin, Copy is Ctrl+Insert and Paste is Shift+Insert.
+
+Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\_\<user>_**. If you don't want to store pokeemerald there, you'll have to change the **current working directory** every time you open Cygwin.
+
+For example, if you want to store pokeemerald (and agbcc) in **C:\Users\\_\<user>_\Desktop\decomps**, enter this command:
+```bash
+cd c:/Users/<user>/Desktop/decomps
+```
+Note that the directory **must exist** in Windows. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Windows Explorer) before executing the `cd` command.
+
+(Replace *\<user>* in the example path with your **Windows** username. If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`. Windows path names are case-insensitive so adhereing to capitalization isn't needed)
+
+If this works, then proceed to [Installation](#Installation). Otherwise, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## macOS
 TODO: add macOS instructions
@@ -63,14 +167,21 @@ TODO: add macOS instructions
 TODO: add Linux instructions
 
 ## Installation
-To download the pokeemerald repository:
+If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
 ```bash
 git clone https://github.com/pret/pokeemerald
 ```
-If agbcc isn't built, run the following commands to build and install it into pokeemerald:
+If agbcc has not been built before, run the following commands to build and install it into pokeemerald:
 ```
 git clone https://github.com/pret/agbcc
 cd agbcc
+./build.sh
+./install.sh ../pokeemerald
+```
+If agbcc has been built before, but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald:
+```
+cd agbcc
+git clean -fX
 ./build.sh
 ./install.sh ../pokeemerald
 ```
@@ -93,7 +204,7 @@ To build **pokeemerald.gba** for the first time and confirm it matches the offic
 ```bash
 make compare
 ```
-If an OK is returned, then the installation went smoothly.
+If an OK is returned, then the installation went smoothly. **Note:** if you switched from Cygwin to msys2, you must run `make clean-tools` once before any subsequent `make` commands.
 
 To build **pokeemerald.gba** with your changes:
 ```bash
