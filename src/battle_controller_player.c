@@ -630,7 +630,7 @@ static void HandleInputChooseMove(void)
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
-        if (gBattleStruct->zmove.viewingZMove)
+        if (gBattleStruct->zmove.viewing)
         {
             ReloadMoveNames();
         }
@@ -697,7 +697,7 @@ static void HandleInputChooseMove(void)
             TryChangeZIndicator(gActiveBattler, moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]);
         }
     }
-    else if (JOY_NEW(SELECT_BUTTON))
+    else if (JOY_NEW(SELECT_BUTTON) && !gBattleStruct->zmove.viewing)
     {
         if (gNumberOfMovesToChoose > 1 && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
         {
@@ -725,10 +725,8 @@ static void HandleInputChooseMove(void)
         {
             // show z move name / info
             //TODO: brighten z move symbol
-            //ChangeMegaTriggerSprite(gBattleStruct->zmove.triggerSpriteId, gBattleStruct->zmove.viable);
             PlaySE(SE_SELECT);
-            
-            if (!gBattleStruct->zmove.viewingZMove)
+            if (!gBattleStruct->zmove.viewing)
                 MoveSelectionDisplayZMove(gBattleStruct->zmove.currZMove);
             else
                 ReloadMoveNames();
@@ -739,7 +737,7 @@ static void HandleInputChooseMove(void)
 static void ReloadMoveNames(void)
 {
     gBattleStruct->mega.playerSelect = FALSE;
-    gBattleStruct->zmove.viewingZMove = FALSE;
+    gBattleStruct->zmove.viewing = FALSE;
     MoveSelectionDestroyCursorAt(0);
     MoveSelectionDisplayMoveNames();
     MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);

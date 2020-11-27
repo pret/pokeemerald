@@ -429,10 +429,10 @@ struct Illusion
 
 struct ZMoveData
 {
-    /*0x00*/ u8 battlerId;
-    /*0x01*/ u8 viable:1;    // current move can become a z move
-             u8 viewingZMove:1;  //if player is viewing the z move name instead of regular moves
+    /*0x00*/ u8 viable:1;    // current move can become a z move
+             u8 viewing:1;  //if player is viewing the z move name instead of regular moves
              u8 split:2;
+             u8 active:1;   //is z move being used this turn
              u8 zUnused:4;
     /*0x02*/ u16 currZMove;  //z move of cursor / selected z move
     /*0x04*/ u16 baseMove;  //move turned into z move

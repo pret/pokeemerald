@@ -7686,3 +7686,18 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	atk57
 	waitmessage 0x40
 	end2
+
+BattleScript_ZMoveActivateStatus::
+	printstring STRINGID_ZPOWERSURROUNDS
+	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
+	setzeffect
+	printstring STRINGID_ZMOVEUNLEASHED
+	waitmessage 0x40
+	return
+
+BattleScript_ZMoveActivateDamaging::
+	printstring STRINGID_ZPOWERSURROUNDS
+	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
+	printstring STRINGID_ZMOVEUNLEASHED
+	waitmessage 0x40
+	return

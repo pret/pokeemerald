@@ -4050,6 +4050,47 @@ const struct SpriteTemplate gSteelBeamSpikeShardTemplate =
 };
 
 //// Z MOVES
+//activate
+const struct SpriteTemplate gZMoveSymbolSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_Z_MOVE_SYMBOL,
+    .paletteTag = ANIM_TAG_Z_MOVE_SYMBOL,
+    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_LusterPurgeCircle,
+    .callback = AnimSpriteOnMonPos
+};
+const struct SpriteTemplate gBlueZMoveEnergySpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FOCUS_ENERGY,
+    .paletteTag = ANIM_TAG_SWEAT_BEAD,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
+    .anims = gEndureEnergyAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimEndureEnergy,
+};
+const struct SpriteTemplate gGreenZMoveEnergySpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FOCUS_ENERGY,
+    .paletteTag = ANIM_TAG_WHIP_HIT,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
+    .anims = gEndureEnergyAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimEndureEnergy,
+};
+const struct SpriteTemplate gYellowZMoveEnergySpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FOCUS_ENERGY,
+    .paletteTag = ANIM_TAG_PAW_PRINT,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
+    .anims = gEndureEnergyAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimEndureEnergy,
+};
 /*
 // breakneck blitz
 const struct SpriteTemplate gBreakneckBlitzDanceSpriteTemplate = 

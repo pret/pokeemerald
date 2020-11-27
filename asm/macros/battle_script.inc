@@ -1756,6 +1756,10 @@
 	.4byte \ptr
 	.endm
 	
+	.macro setzeffect
+	various BS_ATTACKER, VARIOUS_SET_Z_EFFECT
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7

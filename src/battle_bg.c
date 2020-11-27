@@ -192,7 +192,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 55,
-        .width = 8,
+        .width = 12,    //for z move names
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x0300,
@@ -204,7 +204,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .width = 8,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0310,
+        .baseBlock = 0x0318,
     },
     { // 5 Bottom left move
         .bg = 0,
@@ -213,7 +213,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .width = 8,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0320,
+        .baseBlock = 0x0328,
     },
     { // 6 Bottom right move
         .bg = 0,
@@ -222,7 +222,7 @@ static const struct WindowTemplate gStandardBattleWindowTemplates[] =
         .width = 8,
         .height = 2,
         .paletteNum = 5,
-        .baseBlock = 0x0330,
+        .baseBlock = 0x0338,
     },
     {
         .bg = 0,

@@ -316,7 +316,6 @@ bool32 IsZMoveTriggerSpriteActive(void)
 void HideZMoveTriggerSprite(void)
 {
     struct Sprite *sprite = &gSprites[gBattleStruct->zmove.triggerSpriteId];
-    ChangeMegaTriggerSprite(gBattleStruct->zmove.triggerSpriteId, 0);
     sprite->tHide = TRUE;
     gBattleStruct->zmove.viable = FALSE;
 }
@@ -375,7 +374,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
     u16 move = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
     
     PlaySE(SE_SELECT);
-    gBattleStruct->zmove.viewingZMove = TRUE;
+    gBattleStruct->zmove.viewing = TRUE;
     if (zmove != MOVE_NONE)
     {
         // clear move slots

@@ -767,7 +767,44 @@ gBattleAnims_Moves::
 	.4byte Move_JUNGLE_HEALING
 	.4byte Move_WICKED_BLOW
 	.4byte Move_SURGING_STRIKES
-	.4byte Move_COUNT @ cannot be reached, because last move is Surging Strikes
+@@@@ Z MOVES
+	.4byte Move_BREAKNECK_BLITZ
+	.4byte Move_ALL_OUT_PUMMELING
+	.4byte Move_SUPERSONIC_SKYSTRIKE
+	.4byte Move_ACID_DOWNPOUR
+	.4byte Move_TECTONIC_RAGE
+	.4byte Move_CONTINENTAL_CRUSH
+	.4byte Move_SAVAGE_SPIN_OUT
+	.4byte Move_NEVER_ENDING_NIGHTMARE
+	.4byte Move_CORKSCREW_CRASH
+	.4byte Move_INFERNO_OVERDRIVE
+	.4byte Move_HYDRO_VORTEX
+	.4byte Move_BLOOM_DOOM
+	.4byte Move_GIGAVOLT_HAVOC
+	.4byte Move_SHATTERED_PSYCHE
+	.4byte Move_SUBZERO_SLAMMER
+	.4byte Move_DEVASTATING_DRAKE
+	.4byte Move_BLACK_HOLE_ECLIPSE
+	.4byte Move_TWINKLE_TACKLE
+	.4byte Move_CATASTROPIKA
+	.4byte Move_10000000_VOLT_THUNDERBOLT
+	.4byte Move_STOKED_SPARKSURFER
+	.4byte Move_EXTREME_EVOBOOST
+	.4byte Move_PULVERIZING_PANCAKE
+	.4byte Move_GENESIS_SUPERNOVA
+	.4byte Move_SINISTER_ARROW_RAID
+	.4byte Move_MALICIOUS_MOONSAULT
+	.4byte Move_OCEANIC_OPERETTA
+	.4byte Move_SPLINTERED_STORMSHARDS
+	.4byte Move_LETS_SNUGGLE_FOREVER
+	.4byte Move_CLANGOROUS_SOULBLAZE
+	.4byte Move_GUARDIAN_OF_ALOLA
+	.4byte Move_SEARING_SUNRAZE_SMASH
+	.4byte Move_MENACING_MOONRAZE_MAELSTROM
+	.4byte Move_LIGHT_THAT_BURNS_THE_SKY
+	.4byte Move_SOUL_STEALING_7_STAR_STRIKE
+@@@ Last Move - cannot be reached
+	.4byte Move_COUNT
 
 	.align 2
 gBattleAnims_StatusConditions::
@@ -815,6 +852,7 @@ gBattleAnims_General::
 	.4byte General_IllusionOff
 	.4byte General_FormChange
 	.4byte General_SlideOffScreen
+	.4byte General_ZMoveActivate
 
 	.align 2
 gBattleAnims_Special::
@@ -24320,6 +24358,41 @@ General_TerrainElectric:
 General_TerrainPsychic:
 	end
 
+General_ZMoveActivate:
+	loadspritegfx ANIM_TAG_FOCUS_ENERGY @focus energy
+	loadspritegfx ANIM_TAG_Z_MOVE_SYMBOL @Z-Move Symbol
+	loadspritegfx ANIM_TAG_WHIP_HIT @green color
+	loadspritegfx ANIM_TAG_SWEAT_BEAD @blue color
+	loadspritegfx ANIM_TAG_PAW_PRINT @yellow color
+	monbg ANIM_ATTACKER
+	setblends 0x80c
+	fadetobg BG_ZMOVE_ACTIVATE
+	waitbgfadein
+	launchtask AnimTask_StartSlidingBg 0x5 0x4 0x0 0x0 0x0 0xFFFF
+	playsewithpan SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER
+	launchtask AnimTask_BlendColorCycle, 0x2, 0x6, ANIM_PAL_ATK, 0x0, 0x6, 0x0, 0xb, 0x76BC
+	call ZMoveBuffEffect
+	call ZMoveBuffEffect
+	call ZMoveBuffEffect
+	launchtemplate gZMoveSymbolSpriteTemplate 0x29 0x4 0x0 0x0 0x0 0x0
+	call ZMoveBuffEffect
+	call ZMoveBuffEffect
+	waitforvisualfinish
+	call UnsetPsychicBg
+	blendoff
+	clearmonbg ANIM_ATTACKER
+	end
+ZMoveBuffEffect:
+	launchtemplate gBlueZMoveEnergySpriteTemplate 0x2 0x4 0x0 0xffe8 0x1a 0x2
+	delay 0x3
+	launchtemplate gEndureEnergySpriteTemplate 0x2 0x4 0x0 0xe 0x1c 0x1 @Red Buff
+	delay 0x3
+	launchtemplate gGreenZMoveEnergySpriteTemplate 0x2 0x4 0x0 0xfffb 0xa 0x2
+	delay 0x3
+	launchtemplate gYellowZMoveEnergySpriteTemplate 0x2 0x4 0x0 0x1c 0x1a 0x3
+	delay 0x3
+	return
+
 SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
 	jumprettrue SnatchMoveSwapSubstituteForMon
@@ -24412,4 +24485,42 @@ Special_CriticalCaptureBallThrow:
 	createvisualtask AnimTask_IsBallBlockedByTrainer, 2
 	jumpreteq -1, BallThrowTrainerBlock
 	goto BallThrowEnd
+
+@@@@@@@@@@ Z MOVES @@@@@@@@@@
+Move_BREAKNECK_BLITZ::
+Move_ALL_OUT_PUMMELING:
+Move_SUPERSONIC_SKYSTRIKE:
+Move_ACID_DOWNPOUR:
+Move_TECTONIC_RAGE:
+Move_CONTINENTAL_CRUSH::
+Move_SAVAGE_SPIN_OUT::
+Move_NEVER_ENDING_NIGHTMARE::
+Move_CORKSCREW_CRASH::
+Move_INFERNO_OVERDRIVE::
+Move_HYDRO_VORTEX::
+Move_BLOOM_DOOM::
+Move_GIGAVOLT_HAVOC::
+Move_SHATTERED_PSYCHE::
+Move_SUBZERO_SLAMMER::
+Move_DEVASTATING_DRAKE::
+Move_BLACK_HOLE_ECLIPSE::
+Move_TWINKLE_TACKLE::
+Move_CATASTROPIKA::
+Move_10000000_VOLT_THUNDERBOLT::
+Move_STOKED_SPARKSURFER::
+Move_EXTREME_EVOBOOST::
+Move_PULVERIZING_PANCAKE::
+Move_GENESIS_SUPERNOVA::
+Move_SINISTER_ARROW_RAID::
+Move_MALICIOUS_MOONSAULT::
+Move_OCEANIC_OPERETTA::
+Move_SPLINTERED_STORMSHARDS::
+Move_LETS_SNUGGLE_FOREVER::    
+Move_CLANGOROUS_SOULBLAZE::
+Move_GUARDIAN_OF_ALOLA::
+Move_SEARING_SUNRAZE_SMASH::
+Move_MENACING_MOONRAZE_MAELSTROM::
+Move_LIGHT_THAT_BURNS_THE_SKY::
+Move_SOUL_STEALING_7_STAR_STRIKE::
+	goto Move_TACKLE
 
