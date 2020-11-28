@@ -653,7 +653,7 @@ static void HandleInputChooseMove(void)
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
-        if (gMoveSelectionCursor[gActiveBattler] & 1)
+        if (!gBattleStruct->zmove.viewing && gMoveSelectionCursor[gActiveBattler] & 1)
         {
             MoveSelectionDestroyCursorAt(gMoveSelectionCursor[gActiveBattler]);
             gMoveSelectionCursor[gActiveBattler] ^= 1;
@@ -666,7 +666,7 @@ static void HandleInputChooseMove(void)
     }
     else if (JOY_NEW(DPAD_RIGHT))
     {
-        if (!(gMoveSelectionCursor[gActiveBattler] & 1)
+        if (!gBattleStruct->zmove.viewing && !(gMoveSelectionCursor[gActiveBattler] & 1)
          && (gMoveSelectionCursor[gActiveBattler] ^ 1) < gNumberOfMovesToChoose)
         {
             MoveSelectionDestroyCursorAt(gMoveSelectionCursor[gActiveBattler]);
@@ -680,7 +680,7 @@ static void HandleInputChooseMove(void)
     }
     else if (JOY_NEW(DPAD_UP))
     {
-        if (gMoveSelectionCursor[gActiveBattler] & 2)
+        if (!gBattleStruct->zmove.viewing && gMoveSelectionCursor[gActiveBattler] & 2)
         {
             MoveSelectionDestroyCursorAt(gMoveSelectionCursor[gActiveBattler]);
             gMoveSelectionCursor[gActiveBattler] ^= 2;
@@ -693,7 +693,7 @@ static void HandleInputChooseMove(void)
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
-        if (!(gMoveSelectionCursor[gActiveBattler] & 2)
+        if (!gBattleStruct->zmove.viewing && !(gMoveSelectionCursor[gActiveBattler] & 2)
          && (gMoveSelectionCursor[gActiveBattler] ^ 2) < gNumberOfMovesToChoose)
         {
             MoveSelectionDestroyCursorAt(gMoveSelectionCursor[gActiveBattler]);

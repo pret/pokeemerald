@@ -1627,7 +1627,14 @@ static void Cmd_ppreduce(void)
 
     if (gBattleControllerExecFlags)
         return;
-
+    
+    if (gBattleStruct->zmove.active)
+    {
+        gHitMarker &= ~(HITMARKER_NO_PPDEDUCT);
+        gBattlescriptCurrInstr++;
+        return;
+    }
+    
     if (!gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure)
     {
         switch (gBattleMoves[gCurrentMove].target)

@@ -109,7 +109,7 @@ static const union AnimCmd sSpriteAnim_853EE68[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_853EE80[] =
+const union AnimCmd *const gSpriteAnimTable_853EE80[] =
 {
     sSpriteAnim_853EE68
 };
@@ -119,7 +119,7 @@ const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sSpriteAnimTable_853EE80,
+    .anims = gSpriteAnimTable_853EE80,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpinningSparkle,

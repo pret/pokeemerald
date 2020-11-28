@@ -18,5 +18,6 @@ void HideZMoveTriggerSprite(void);
 bool32 IsZMoveTriggerSpriteActive(void);
 void DestroyZMoveTriggerSprite(void);
 bool32 MoveSelectionDisplayZMove(u16 zmove);
+const u8* GetZMoveName(u16 move);
 
 #endif // GUARD_BATTLE_Z_MOVE_H

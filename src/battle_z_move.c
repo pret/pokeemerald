@@ -42,7 +42,6 @@ static u16 GetSignatureZMove(u16 move, u16 species, u16 item);
 static u16 GetTypeBasedZMove(u16 move, u8 battler);
 static void ZMoveSelectionDisplayPpNumber(void);
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
-static const u8* GetZMoveName(u16 move);
 static void ShowZMoveTriggerSprite(void);
 
 // Const Data
@@ -517,7 +516,7 @@ static void ZMoveSelectionDisplayPpNumber(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 9);
 }
 
-static const u8* GetZMoveName(u16 move)
+const u8* GetZMoveName(u16 move)
 {
     if (IsZMove(move))
         return gZMoveNames[move - MOVE_BREAKNECK_BLITZ];

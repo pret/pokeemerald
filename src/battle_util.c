@@ -95,7 +95,7 @@ void HandleAction_UseMove(void)
         gCurrentMove = gChosenMove = gLockedMoves[gBattlerAttacker];
     }
     // encore forces you to use the same move
-    else if (gDisableStructs[gBattlerAttacker].encoredMove != MOVE_NONE
+    else if (!gBattleStruct->zmove.active && gDisableStructs[gBattlerAttacker].encoredMove != MOVE_NONE
              && gDisableStructs[gBattlerAttacker].encoredMove == gBattleMons[gBattlerAttacker].moves[gDisableStructs[gBattlerAttacker].encoredMovePos])
     {
         gCurrentMove = gChosenMove = gDisableStructs[gBattlerAttacker].encoredMove;
@@ -103,7 +103,7 @@ void HandleAction_UseMove(void)
         *(gBattleStruct->moveTarget + gBattlerAttacker) = GetMoveTarget(gCurrentMove, 0);
     }
     // check if the encored move wasn't overwritten
-    else if (gDisableStructs[gBattlerAttacker].encoredMove != MOVE_NONE
+    else if (!gBattleStruct->zmove.active && gDisableStructs[gBattlerAttacker].encoredMove != MOVE_NONE
              && gDisableStructs[gBattlerAttacker].encoredMove != gBattleMons[gBattlerAttacker].moves[gDisableStructs[gBattlerAttacker].encoredMovePos])
     {
         gCurrMovePos = gChosenMovePos = gDisableStructs[gBattlerAttacker].encoredMovePos;
@@ -121,6 +121,12 @@ void HandleAction_UseMove(void)
     else
     {
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+    }
+    
+    // check z move used
+    if (gBattleStruct->zmove.active)
+    {
+        gCurrentMove = gBattleStruct->zmove.currZMove;
     }
 
     if (gBattleMons[gBattlerAttacker].hp != 0)
@@ -3187,18 +3193,8 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;
                 //TODO - partner battles.
                 gBattleScripting.battler = gBattlerAttacker;
-                if (gBattleMoves[gCurrentMove].split == SPLIT_STATUS)
-                {
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
-                    //gBattleStruct->zmove.effect = gBattleMoves[gCurrentMove].z_move_effect;
-                    //gBattleStruct->zmove.effectApplied = TRUE;
-                }
-                else
-                {
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateDamaging;
-                }
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_ZMoveActivate;
                 effect = 1;
             }
             gBattleStruct->atkCancellerTracker++;

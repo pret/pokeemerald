@@ -24503,7 +24503,151 @@ Move_GIGAVOLT_HAVOC::
 Move_SHATTERED_PSYCHE::
 Move_SUBZERO_SLAMMER::
 Move_DEVASTATING_DRAKE::
+	goto Move_TACKLE
+
 Move_BLACK_HOLE_ECLIPSE::
+	loadspritegfx ANIM_TAG_FOCUS_ENERGY @focus energy
+	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @shock wave
+	loadspritegfx ANIM_TAG_SHADOW_BALL @shadow ball
+	loadspritegfx ANIM_TAG_THIN_RING @ring
+	loadspritegfx ANIM_TAG_ICE_CHUNK @blue
+	loadspritegfx ANIM_TAG_BLACK_BALL_2 @black
+	invisible ANIM_TARGET
+	launchtask AnimTask_AllBanksInvisibleExceptAttackerAndTarget 0xA 0x0
+	waitforvisualfinish
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	call EndureEffect
+	delay 0x8
+	launchtask AnimTask_BlendColorCycle 0x2 0x6 0x2 0x2 0x2 0x0 0xb 0x0000
+	launchtask AnimTask_ShakeMon2 0x2 0x5 0x0 0x1 0x0 0x20 0x1
+	call EndureEffect
+	delay 0x8
+	call EndureEffect
+	waitforvisualfinish
+	unloadspritegfx ANIM_TAG_FOCUS_ENERGY
+	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
+	launchtemplate gBlackHoleEclipseShockwaveSpriteTemplate 0x2 0x0
+	waitforvisualfinish
+	unloadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET @black
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
+	launchtemplate gBlackHoleEclipseHoleUserSpriteTemplate 0x2 0x4 0x0 0x0 ANIM_ATTACKER 0x0
+	launchtemplate gBlackHoleEclipseBlueRingSpriteTemplate 0x3 0x4 0x0 0x0 0x0 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseBlackRingSpriteTemplate 0x3 0x4 0x0 0x0 0x0 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseBlueRingSpriteTemplate 0x3 0x4 0x0 0x0 0x0 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseBlackRingSpriteTemplate 0x3 0x4 0x0 0x0 0x0 0x0
+	delay 0x8
+	waitforvisualfinish
+	stopsound
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0x0 0x07 0x0000
+	loadspritegfx ANIM_TAG_WISP_ORB @will o wisp
+	invisible ANIM_ATTACKER
+	loopsewithpan SE_M_FLAMETHROWER, SOUND_PAN_TARGET, 0x10, 0x5
+	launchtemplate gBlackHoleEclipseWispSpriteTemplate 0x2 0x3 0x0 0x10 0x0
+	delay 0x3
+	launchtemplate gBlackHoleEclipseWispSpriteTemplate 0x3 0x3 0x0 0x10 0x1
+	delay 0x3
+	launchtemplate gBlackHoleEclipseWispSpriteTemplate 0x4 0x3 0x0 0x10 0x2
+	delay 0x3
+	launchtemplate gBlackHoleEclipseWispSpriteTemplate 0x4 0x3 0x0 0x10 0x3
+	waitforvisualfinish
+	fadetobg BG_BLACKHOLE_ECLIPSE
+	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
+	loadspritegfx ANIM_TAG_VERTICAL_HEX @red
+	launchtemplate gBlackHoleEclipseRedRingSpriteTemplate 0x3 0x4 0x0 0x0 0x100 0x0
+	delay 0x4
+	launchtemplate gBlackHoleEclipseRedRingSpriteTemplate 0x3 0x4 0x0 0x0 0x100 0x0
+	delay 0x4
+	launchtemplate gBlackHoleEclipseRedRingSpriteTemplate 0x3 0x4 0x0 0x0 0x100 0x0
+	waitbgfadeout
+	unloadspritegfx ANIM_TAG_WISP_ORB
+	launchtemplate gBlackHoleEclipseHoleSpriteTemplate 0x2 0x4 0x0 0x0 ANIM_TARGET 0x0	@ eclipse at target origin
+	delay 0x10
+	launchtemplate gSlideMonToOffsetSpriteTemplate 0x2 0x5 ANIM_TARGET 0x35 0xffed 0x1 0x2	@ target down and left (instantaneously (last arg))
+	delay 0x2
+	visible ANIM_TARGET
+	loopsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET, 0xa, 0x5
+	launchtask AnimTask_RotateMonSpriteToSide 0x2 0x4 0x50 0xfc00 ANIM_TARGET 0x0 	@ spin target around (0x50 (time), -0x400 (rot speed))
+	launchtemplate gBlackHoleEclipseBlueRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseRedRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseRedRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gSlideMonToOriginalPosSpriteTemplate 0x2 0x3 ANIM_TARGET 0x0 0x30			@ target back to origin (slowly)
+	launchtemplate gBlackHoleEclipseBlueRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseRedRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseRedRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x15
+	invisible ANIM_TARGET
+	delay 0x8
+	launchtemplate gBlackHoleEclipseBlueRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseRedRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseRedRingInwardsSpriteTemplate 0x28 0x4 0x0 0x0 ANIM_TARGET 0x0
+	delay 0x8
+	launchtemplate gBlackHoleEclipseHoleShrinkSpriteTemplate 0x2 0x4 0x0 0x0 ANIM_TARGET 0x0
+	waitforvisualfinish
+	loadspritegfx ANIM_TAG_SPARKLE_4	@detect
+	launchtemplate gTargetTwinkleSpriteTemplate 0xd 0x3 0x0 0x0 ANIM_TARGET @detect star
+	delay 0x2
+	unloadspritegfx ANIM_TAG_SHADOW_BALL
+	unloadspritegfx ANIM_TAG_THIN_RING
+	unloadspritegfx ANIM_TAG_ICE_CHUNK
+	unloadspritegfx ANIM_TAG_BLACK_BALL_2
+	loadspritegfx ANIM_TAG_EXPLOSION_2
+	call BlackHoleEclipseExplosion
+	launchtask AnimTask_BlendBattleAnimPal, 0xa, 0x5, ANIM_PAL_ALL_BATTLERS | ANIM_PAL_BG, 0x1, 0x0, 0x10, 0x7fff	@ bg to white pal
+	call BlackHoleEclipseExplosion
+	waitforvisualfinish
+	delay 0x18
+	invisible ANIM_TARGET
+	launchtask AnimTask_RotateMonSpriteToSide 0x2 0x4 0x1 0x0 ANIM_TARGET 0x1	@ fix rotation
+	invisible ANIM_TARGET
+	delay 0x1
+	waitforvisualfinish
+	call ResetFromWhiteScreen
+	end
+
+BlackHoleEclipseExplosion:
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
+	launchtemplate gBlackHoleEclipseRedExplosionSpriteTemplate 0x3 0x4 0x0 0x0 ANIM_TARGET 0x1
+	delay 0x6
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
+	launchtemplate gBlackHoleEclipseRedExplosionSpriteTemplate 0x3 0x4 0x18 0xffe8 ANIM_TARGET 0x1
+	delay 0x6
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
+	launchtemplate gBlackHoleEclipseRedExplosionSpriteTemplate 0x3 0x4 0xfff0 0x10 ANIM_TARGET 0x1
+	delay 0x6
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
+	launchtemplate gBlackHoleEclipseRedExplosionSpriteTemplate 0x3 0x4 0xffe8 0xfff4 ANIM_TARGET 0x1
+	delay 0x6
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
+	launchtemplate gBlackHoleEclipseRedExplosionSpriteTemplate 0x3 0x4 0x10 0x10 ANIM_TARGET 0x1
+	delay 0x6
+	return
+
+ResetFromWhiteScreen:
+	launchtask AnimTask_AllBanksInvisible 0xA 0x0
+	waitforvisualfinish
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_ALL_BATTLERS 0x2 0x0 0x0 0x7FFF @everything from white
+	restorebg
+	waitbgfadeout
+	setarg 0x7 0xffff
+	launchtask AnimTask_AllBanksVisible 0xA 0x0
+	waitbgfadein
+	waitforvisualfinish
+	delay 0x5
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x0 0x0 0x0 0x7fff
+	waitforvisualfinish
+	return
+
 Move_TWINKLE_TACKLE::
 Move_CATASTROPIKA::
 Move_10000000_VOLT_THUNDERBOLT::
