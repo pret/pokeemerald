@@ -47,6 +47,8 @@ sudo apt update && sudo apt upgrade
 ```
 Note that these commands will likely take a long time to finish.
 
+*Note: If the repository you plan to build was created before 2020/XX/YY (e.g. modifications of pokeemerald that haven't updated) then follow the [legacy WSL1 instructions](docs/legacy_WSL1_INSTALL.md). These repositories can be identified by the [older revision](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md) of the INSTALL.md*
+
 Certain packages are required to build pokeemerald. Install these packages by running the following command:
 ```bash
 sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
