@@ -2067,7 +2067,7 @@ u8 DoFieldEndTurnEffects(void)
             break;
         }
     } while (effect == 0);
-
+    
     return (gBattleMainFunc != BattleTurnPassed);
 }
 
@@ -2843,6 +2843,7 @@ enum
     CANCELLER_POWDER_MOVE,
     CANCELLER_POWDER_STATUS,
     CANCELLER_THROAT_CHOP,
+    CANCELLER_Z_MOVES,
     CANCELLER_END,
     CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_END2,
@@ -3175,6 +3176,29 @@ u8 AtkCanceller_UnableToUseMove(void)
                 CancelMultiTurnMoves(gBattlerAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsThroatChopPrevented;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                effect = 1;
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_Z_MOVES:
+            if (gBattleStruct->zmove.active == TRUE)
+            {
+                RecordItemEffectBattle(gBattlerAttacker, HOLD_EFFECT_Z_CRYSTAL);
+                gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;
+                //TODO - partner battles.
+                gBattleScripting.battler = gBattlerAttacker;
+                if (gBattleMoves[gCurrentMove].split == SPLIT_STATUS)
+                {
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
+                    //gBattleStruct->zmove.effect = gBattleMoves[gCurrentMove].z_move_effect;
+                    //gBattleStruct->zmove.effectApplied = TRUE;
+                }
+                else
+                {
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateDamaging;
+                }
                 effect = 1;
             }
             gBattleStruct->atkCancellerTracker++;

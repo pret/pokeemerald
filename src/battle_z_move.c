@@ -140,6 +140,9 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     
     gBattleStruct->zmove.currZMove = MOVE_NONE; //init
     
+    if (gBattleStruct->zmove.used[battlerId])
+        return FALSE;
+    
     // Gets mon data.
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
         mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];

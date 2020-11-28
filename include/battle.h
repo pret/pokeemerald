@@ -437,6 +437,7 @@ struct ZMoveData
     /*0x02*/ u16 currZMove;  //z move of cursor / selected z move
     /*0x04*/ u16 baseMove;  //move turned into z move
     /*0x06*/ u8 triggerSpriteId;
+             u8 used[MAX_BATTLERS_COUNT];   //one per bank for multi-battles
 }; /* size = 8 */
 
 struct BattleStruct

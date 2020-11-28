@@ -5092,6 +5092,7 @@ static void Cmd_moveend(void)
             gSpecialStatuses[gBattlerAttacker].damagedMons = 0;
             gSpecialStatuses[gBattlerTarget].berryReduced = 0;
             gBattleScripting.moveEffect = 0;
+            gBattleStruct->zmove.active = FALSE;
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_COUNT:

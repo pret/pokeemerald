@@ -4055,7 +4055,7 @@ const struct SpriteTemplate gZMoveSymbolSpriteTemplate =
 {
     .tileTag = ANIM_TAG_Z_MOVE_SYMBOL,
     .paletteTag = ANIM_TAG_Z_MOVE_SYMBOL,
-    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gAffineAnims_LusterPurgeCircle,
