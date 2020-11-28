@@ -12,7 +12,7 @@ Windows has instructions for building with three possible terminals, if users en
 
 The instructions have been ordered by the performance of their respective terminal. Out of the provided terminals, **WSL1** builds pokeemerald the fastest, and is thus **highly recommended**, but is only available on Windows 10. **msys2** is the second fastest, and **Cygwin** is the slowest. For advanced users, **WSL2** is an option and is even faster than **WSL1** if files are stored on the WSL2 file system, but some tools such as [porymap](https://github.com/huderlem/porymap) cannot interact with said files due to problems [outside the control of maintainers](https://bugreports.qt.io/browse/QTBUG-86277).
 
-All of the Windows instructions assume that the default drive is C:\\. If this differs to your actual drive letter, then replace C with the correct the drive letter when reading the instructions.
+All of the Windows instructions assume that the default drive is C:\\. If this differs to your actual drive letter, then replace C with the correct drive letter when reading the instructions.
 
 **A note of caution**: As Windows 7 is officially unsupported by Microsoft and Windows 8 has very little usage, some maintainers are unwilling to maintain the Windows 7/8 instructions. Thus, these instructions may break in the future with fixes taking longer than fixes to the Windows 10 instructions.
 
