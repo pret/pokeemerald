@@ -15,7 +15,7 @@ For example, if the package file was saved to **C:\Users\\_\<user>_\Downloads** 
 cd /mnt/c/Users/<user>/Downloads
 ```
 
-(The Windows C:\ drive is called /mnt/c/ in WSL. Replace <user> in the example path with your **Windows** username. Windows path names are case-insensitive so adhereing to capitalization isn't needed)
+(The Windows C:\ drive is called /mnt/c/ in WSL. Replace <user> in the example path with your **Windows** username. If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "/mnt/c/users/<user>/Downloads folder"`. Windows path names are case-insensitive so adhereing to capitalization isn't needed)
 
 Once the directory has been changed to the folder containing the devkitPro package, run the following commands to install devkitPro.
 ```bash
