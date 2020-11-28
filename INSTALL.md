@@ -7,8 +7,8 @@ If you run into trouble, ask for help on IRC or Discord (see [README.md](README.
 ## Windows
 Windows has instructions for building with three possible terminals, if users encounter unexpected errors in following instructions for one of the terminals. These instructions are:
 - [Windows 10 (WSL1)](#windows-10-wsl1)
-- [Windows (msys2)](#windows-(msys2))
-- [Windows (Cygwin)](#windows-(cygwin))
+- [Windows (msys2)](#windows-msys2)
+- [Windows (Cygwin)](#windows-cygwin)
 
 The instructions have been ordered by the performance of their respective terminal. Out of the provided terminals, **WSL1** builds pokeemerald the fastest, and is thus **highly recommended**, but is only available on Windows 10. **msys2** is the second fastest, and **Cygwin** is the slowest. For advanced users, **WSL2** is an option and is even faster than **WSL1** if files are stored on the WSL2 file system, but some tools such as [porymap](https://github.com/huderlem/porymap) cannot interact with said files due to problems [outside the control of maintainers](https://bugreports.qt.io/browse/QTBUG-86277).
 
@@ -19,7 +19,7 @@ All of the Windows instructions assume that the default drive is C:\\. If this d
 ## Windows 10 (WSL1)
 WSL1 is the preferred terminal to build **pokeemerald**. The following instructions will explain how to install WSL1 (referred interchangeably as WSL).
 
-If WSL is **not installed**, then go to [Installing WSL1](#Installing-WSL1). Otherwise, if WSL is installed, but it hasn't previously been set up for another decompilation project, then go to [Setting up WSL1](#Setting-up-WSL1). Otherwise, open WSL and go to [Choosing where to store pokeemerald (WSL1)](#Choosing-where-to-store-pokeemerald-(WSL1)).
+If WSL is **not installed**, then go to [Installing WSL1](#Installing-WSL1). Otherwise, if WSL is installed, but it hasn't previously been set up for another decompilation project, then go to [Setting up WSL1](#Setting-up-WSL1). Otherwise, open WSL and go to [Choosing where to store pokeemerald (WSL1)](#Choosing-where-to-store-pokeemerald-WSL1).
 
 ### Installing WSL1
 Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Right Click or Shift+Insert is paste in the Powershell).
@@ -68,11 +68,11 @@ Note that the directory **must exist** in Windows. If you want to store pokeemer
 
 If this works, then proceed to [Installation](#Installation).
 
-Otherwise, continue reading below for [Windows instructions using msys2](#windows-(msys2)).
+Otherwise, continue reading below for [Windows instructions using msys2](#windows-msys2).
 
 ## Windows (msys2)
 
-If devkitPro is not installed, or is installed but without the GBA Development component, then go to [Installing devkitPro](#installing-devkitpro). If devkitPro is installed, but msys2 hasn't previously been set up for another decompilation project, then go to [Setting up msys2](#setting-up-msys2). Otherwise, open msys2 and go to [Choosing where to store pokeemerald (msys2)](#choosing-where-to-store-pokeemerald-(msys2)).
+If devkitPro is not installed, or is installed but without the GBA Development component, then go to [Installing devkitPro](#installing-devkitpro). If devkitPro is installed, but msys2 hasn't previously been set up for another decompilation project, then go to [Setting up msys2](#setting-up-msys2). Otherwise, open msys2 and go to [Choosing where to store pokeemerald (msys2)](#choosing-where-to-store-pokeemerald-msys2).
 
 ### Installing devkitPro
 Download the devkitPro installer [here](https://github.com/devkitPro/installer/releases).
@@ -122,12 +122,12 @@ Note that the directory **must exist** in Windows. If you want to store pokeemer
 
 If this works, then proceed to [Installation](#Installation).
 
-Otherwise, continue reading below for [Windows instructions using Cygwin](#windows-(cygwin)).
+Otherwise, continue reading below for [Windows instructions using Cygwin](#windows-cygwin).
 
 ## Windows (Cygwin)
 If devkitPro is not installed, or is installed but without the GBA Development component, then follow the instructions used to [install devkitPro](#installing-devkitpro) for the msys2 setup before continuing.
 
-If Cygwin is not installed, or does not have all of the required packages installed, then go to [Installing Cygwin](#installing-cygwin). Otherwise, go to [Choosing where to store pokeemerald (Cygwin)](#choosing-where-to-store-pokeemerald-(cygwin))
+If Cygwin is not installed, or does not have all of the required packages installed, then go to [Installing Cygwin](#installing-cygwin). Otherwise, go to [Choosing where to store pokeemerald (Cygwin)](#choosing-where-to-store-pokeemerald-cygwin)
 
 ### Installing Cygwin
 Download [Cygwin](https://cygwin.com/install.html): setup-x86_64.exe for 64-bit Windows, setup-x86.exe for 32-bit.
