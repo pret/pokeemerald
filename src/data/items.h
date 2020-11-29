@@ -4884,4 +4884,19 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
     },
+    
+    //TEST
+    [ITEM_DARKINIUM_Z] = 
+    {
+        .name = _("Darkinium Z"),
+        .itemId = ITEM_DARKINIUM_Z,
+        .price = 0,
+        .description = sDummyDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .holdEffectParam = TYPE_DARK,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+    },
 };

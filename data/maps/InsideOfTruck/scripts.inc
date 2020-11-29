@@ -50,7 +50,10 @@ InsideOfTruck_EventScript_SetIntroFlagsFemale:: @ 823BF46
 	end
 
 InsideOfTruck_EventScript_MovingBox:: @ 823BF6C
-	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
+	givemon SPECIES_SNEASEL, 70, ITEM_DARKINIUM_Z
+	setwildbattle SPECIES_WALREIN, 53, 0
+	dowildbattle
+	@msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
 	end
 
 InsideOfTruck_Text_BoxPrintedWithMonLogo: @ 823BF75

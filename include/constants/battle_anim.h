@@ -614,6 +614,12 @@
 #define ANIM_RIGHT_FIST  0
 #define ANIM_LEFT_FIST   2
 
+// fist/chop frames
+#define ANIM_FIST_1  0
+#define ANIM_FOOT_1  1
+#define ANIM_FOOT_2  2
+#define ANIM_CHOP    3
+
 // surf wave palettes
 #define ANIM_SURF_PAL_SURF           0
 #define ANIM_SURF_PAL_MUDDY_WATER    1

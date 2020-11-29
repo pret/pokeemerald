@@ -43,7 +43,7 @@ static const union AnimCmd sAnim_FlyingRock_2[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnims_FlyingRock[] =
+const union AnimCmd *const gAnims_FlyingRock[] =
 {
     sAnim_FlyingRock_0,
     sAnim_FlyingRock_1,
@@ -55,7 +55,7 @@ const struct SpriteTemplate gFallingRockSpriteTemplate =
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FlyingRock,
+    .anims = gAnims_FlyingRock,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFallingRock,
@@ -66,7 +66,7 @@ const struct SpriteTemplate gRockFragmentSpriteTemplate =
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FlyingRock,
+    .anims = gAnims_FlyingRock,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimRockFragment,
@@ -679,6 +679,54 @@ void AnimTask_Rollout(u8 taskId)
     else
         task->data[8] = 48 - (rolloutCounter * 8);
 
+    task->data[0] = 0;
+    task->data[11] = 0;
+    task->data[9] = 0;
+    task->data[12] = 1;
+
+    var5 = task->data[8];
+    if (var5 < 0)
+        var5 += 7;
+
+    task->data[10] = (var5 >> 3) - 1;
+
+    task->data[2] = var0 * 8;
+    task->data[3] = var1 * 8;
+    task->data[4] = ((var2 - var0) * 8) / task->data[8];
+    task->data[5] = ((var3 - var1) * 8) / task->data[8];
+    task->data[6] = 0;
+    task->data[7] = 0;
+
+    pan1 = BattleAnimAdjustPanning(-64);
+    pan2 = BattleAnimAdjustPanning(63);
+
+    task->data[13] = pan1;
+    task->data[14] = (pan2 - pan1) / task->data[8];
+    task->data[1] = rolloutCounter;
+    task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+
+    task->func = AnimTask_Rollout_Step;
+}
+
+void AnimTask_TectonicRageRollout(u8 taskId)
+{
+    u16 var0, var1, var2, var3;
+    int var5;
+    s16 pan1, pan2;
+    struct Task *task;
+    u8 rolloutCounter = 1;
+
+    task = &gTasks[taskId];
+
+    var0 = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    var1 = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 24;
+    var2 = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    var3 = GetBattlerSpriteCoord(gBattleAnimTarget, 1) + 24;
+
+    if (BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget)
+        var3 = var1;
+
+    task->data[8] = 48 - (rolloutCounter * 8);  //rollout speed
     task->data[0] = 0;
     task->data[11] = 0;
     task->data[9] = 0;
