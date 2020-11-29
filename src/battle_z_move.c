@@ -186,11 +186,11 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
         u16 zMove = GetSignatureZMove(move, gBattleMons[battlerId].species, item);
         if (zMove != MOVE_NONE)
         {
-            gBattleStruct->zmove.currZMove = MOVE_Z_SIGNATURE;  //signature z move exists
+            gBattleStruct->zmove.currZMove = zMove;  //signature z move exists
             return TRUE;
         }
         
-        if (move != MOVE_NONE && zMove != MOVE_Z_SIGNATURE && gBattleMoves[move].type == ItemId_GetHoldEffectParam(item))
+        if (move != MOVE_NONE && zMove != MOVE_Z_SIGNATURE && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
         {
             if (gBattleMoves[move].split == SPLIT_STATUS)
                 gBattleStruct->zmove.currZMove = MOVE_Z_SIGNATURE;
