@@ -7686,3 +7686,10 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	atk57
 	waitmessage 0x40
 	end2
+
+BattleScript_AnnounceAirLockCloudNine::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_AIRLOCKACTIVATES
+	waitmessage 0x40
+	call BattleScript_WeatherFormChanges
+	end3
