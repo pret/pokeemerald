@@ -683,6 +683,7 @@ static void DebugAction_Util_HealParty(u8 taskId)
 {
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
+    EnableBothScriptContexts();
     Debug_DestroyMenu(taskId);
 }
 static void DebugAction_Util_Fly(u8 taskId)
@@ -944,8 +945,8 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId)
         gSaveBlock2Ptr->playerGender = 1;
     else
         gSaveBlock2Ptr->playerGender = 0;
-    Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
+    Debug_DestroyMenu(taskId);
 }
 static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
