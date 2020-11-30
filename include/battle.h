@@ -433,11 +433,16 @@ struct ZMoveData
              u8 viewing:1;  //if player is viewing the z move name instead of regular moves
              u8 split:2;
              u8 active:1;   //is z move being used this turn
-             u8 zUnused:4;
+             u8 zStatusActive:1;
+             u8 healReplacement:1;  //TODO: z-parting shot
+             u8 zUnused:2;
     /*0x02*/ u16 currZMove;  //z move of cursor / selected z move
     /*0x04*/ u16 baseMove;  //move turned into z move
     /*0x06*/ u8 triggerSpriteId;
+             u8 effect;
              u8 used[MAX_BATTLERS_COUNT];   //one per bank for multi-battles
+             u16 toBeUsed[MAX_BATTLERS_COUNT];  //TODO z moves per battler to be used 
+             u8 splits[MAX_BATTLERS_COUNT];
 }; /* size = 8 */
 
 struct BattleStruct

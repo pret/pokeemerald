@@ -11132,7 +11132,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_10000000_VOLT_THUNDERBOLT] =
     {
-        .effect = EFFECT_HIT,//TODO: EFFECT_HIGH_CRITICAL,
+        .effect = EFFECT_HIT,
         .power = 195,
         .type = TYPE_ELECTRIC,
         .accuracy = 0,
@@ -11140,14 +11140,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = 0,
+        .flags = FLAG_HIGH_CRIT,
         .zMovePower = 0,
         .split = SPLIT_SPECIAL,
         .zMoveEffect = 0
     },
     [MOVE_STOKED_SPARKSURFER] =
     {
-        .effect = EFFECT_HIT, //EFFECT_PARALYZE_HIT,
+        .effect = EFFECT_PARALYZE_HIT,
         .power = 175,
         .type = TYPE_ELECTRIC,
         .accuracy = 0,
@@ -11162,7 +11162,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_EXTREME_EVOBOOST] =
     {
-        .effect = EFFECT_HIT,//TODO: EFFECT_EXTREME_EVOBOOST,
+        .effect = EFFECT_EXTREME_EVOBOOST,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -11192,7 +11192,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_GENESIS_SUPERNOVA] =
     {
-        .effect = EFFECT_HIT,//TODO: EFFECT_DAMAGE_SET_TERRAIN,
+        .effect = EFFECT_DAMAGE_SET_TERRAIN,
         .power = 185,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -11203,6 +11203,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = 0,
         .zMovePower = 0,
         .split = SPLIT_SPECIAL,
+        .argument = 0,  //psychic terrain
         .zMoveEffect = 0
     },
     [MOVE_SINISTER_ARROW_RAID] =
@@ -11252,7 +11253,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_SPLINTERED_STORMSHARDS] =
     {
-        .effect = EFFECT_HIT, //TODO removes terrain
+        .effect = EFFECT_DAMAGE_SET_TERRAIN,
         .power = 190,
         .type = TYPE_ROCK,
         .accuracy = 0,
@@ -11263,6 +11264,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = 0,
         .zMovePower = 0,
         .split = SPLIT_PHYSICAL,
+        .argument = 1,  //remove terrain
         .zMoveEffect = 0
     },
     [MOVE_LETS_SNUGGLE_FOREVER] =
@@ -11282,7 +11284,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_CLANGOROUS_SOULBLAZE] =
     {
-        .effect = EFFECT_HIT,//TODO: EFFECT_ALL_STATS_UP_HIT,
+        .effect = EFFECT_ALL_STATS_UP_HIT,
         .power = 185,
         .type = TYPE_DRAGON,
         .accuracy = 0,
@@ -11297,7 +11299,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     },
     [MOVE_GUARDIAN_OF_ALOLA] =
     {
-        .effect = EFFECT_HIT,//TODO: EFFECT_SUPER_FANG,
+        .effect = EFFECT_SUPER_FANG,
         .power = 1,
         .type = TYPE_FAIRY,
         .accuracy = 0,

@@ -680,9 +680,24 @@ static const u8 sText_CloakedInAFreezingLight[] = _("{B_ATK_NAME_WITH_PREFIX} be
 static const u8 sText_StatWasNotLowered[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas not lowered!");
 static const u8 sText_ZPowerSurrounds[] = _("{B_ATK_NAME_WITH_PREFIX} surrounds\nitself with its Z-Power!");
 static const u8 sText_ZPowerUnleashed[] = _("{B_ATK_NAME_WITH_PREFIX} unleashes\nits full-force Z-Move!");
+static const u8 sText_ZMoveResetsStats[] = _("");
+static const u8 sText_ZMoveAllStatsUp[] = _("");
+static const u8 sText_ZMoveBoostCrit[] = _("");
+static const u8 sText_ZMoveRestoreHp[] = _("");
+static const u8 sText_ZMoveStatUp[] = _("");
+static const u8 sText_ZMoveHpSwitchInTrap[] = _("");
+static const u8 sText_TerrainReturnedToNormal[] = _("The terrain returned to\nnormal!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_ZPOWERSURROUNDS - 12] = sText_ZPowerSurrounds,
+    [STRINGID_ZMOVEUNLEASHED - 12] = sText_ZPowerUnleashed,
+    [STRINGID_ZMOVERESETSSTATS - 12] = sText_ZMoveResetsStats,
+    [STRINGID_ZMOVEALLSTATSUP - 12] = sText_ZMoveAllStatsUp,
+    [STRINGID_ZMOVEZBOOSTCRIT - 12] = sText_ZMoveBoostCrit,
+    [STRINGID_ZMOVERESTOREHP - 12] = sText_ZMoveRestoreHp,
+    [STRINGID_ZMOVESTATUP - 12] = sText_ZMoveStatUp,
+    [STRINGID_ZMOVEHPTRAP - 12] = sText_ZMoveHpSwitchInTrap,
     [STRINGID_STATWASNOTLOWERED - 12] = sText_StatWasNotLowered,
     [STRINGID_CLOAKEDINAFREEZINGLIGHT - 12] = sText_CloakedInAFreezingLight,
     [STRINGID_DESTINYKNOTACTIVATES - 12] = sText_DestinyKnotActivates,
@@ -1221,13 +1236,23 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_GRASSYTERRAINHEALS - 12] = sText_GrassyTerrainHeals,
     [STRINGID_ELECTRICTERRAINPREVENTS - 12] = sText_ElectricTerrainPreventsSleep,
     [STRINGID_PSYCHICTERRAINPREVENTS - 12] = sText_PsychicTerrainPreventsPriority,
-    [STRINGID_ZPOWERSURROUNDS - 12] = sText_ZPowerSurrounds,
-    [STRINGID_ZMOVEUNLEASHED - 12] = sText_ZPowerUnleashed,
+    [STRINGID_TERRAINREMOVED - 12] = sText_TerrainReturnedToNormal,
+};
+
+const u16 gZEffectStringIds[] = 
+{
+    [MULTISTRING_Z_RESET_STATS] = STRINGID_ZMOVERESETSSTATS,
+    [MULTISTRING_Z_ALL_STATS_UP]= STRINGID_ZMOVEALLSTATSUP,
+    [MULTISTRING_Z_BOOST_CRITS] = STRINGID_ZMOVEZBOOSTCRIT,
+    [MULTISTRING_Z_FOLLOW_ME]   = STRINGID_PKMNCENTERATTENTION,
+    [MULTISTRING_Z_RECOVER_HP]  = STRINGID_ZMOVERESTOREHP,
+    [MULTISTRING_Z_STAT_UP]     = STRINGID_ZMOVESTATUP,
+    [MULTISTRING_Z_HP_TRAP]     = STRINGID_ZMOVEHPTRAP,
 };
 
 const u16 gTerrainStringIds[] =
 {
-    STRINGID_TERRAINBECOMESMISTY, STRINGID_TERRAINBECOMESGRASSY, STRINGID_TERRAINBECOMESELECTRIC, STRINGID_TERRAINBECOMESPSYCHIC
+    STRINGID_TERRAINBECOMESMISTY, STRINGID_TERRAINBECOMESGRASSY, STRINGID_TERRAINBECOMESELECTRIC, STRINGID_TERRAINBECOMESPSYCHIC, STRINGID_TERRAINREMOVED,
 };
 
 const u16 gTerrainPreventsStringIds[] =

@@ -349,6 +349,12 @@ extern const u8 BattleScript_EmergencyExitNoPopUp[];
 extern const u8 BattleScript_EmergencyExitWild[];
 extern const u8 BattleScript_EmergencyExitWildNoPopUp[];
 extern const u8 BattleScript_CheekPouchActivates[];
-extern const u8 BattleScript_ZMoveActivate[];
+// zmoves
+extern const u8 BattleScript_ZMoveActivateDamaging[];
+extern const u8 BattleScript_ZMoveActivateStatus[];
+extern const u8 BattleScript_ZEffectPrintString[];
+extern const u8 BattleScript_RecoverHPZMove[];
+extern const u8 BattleScript_StatUpZMove[];
+extern const u8 BattleScript_EffectExtremeEvoboost[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

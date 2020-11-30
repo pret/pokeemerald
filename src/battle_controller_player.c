@@ -564,6 +564,12 @@ static void HandleInputChooseMove(void)
         
         if (gBattleStruct->zmove.viewing)
         {
+            u16 chosenMove = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
+            
+            //gBattleStruct->zmove.toBeUsed[gActiveBattler] = gBattleStruct->zmove.currZMove;
+            
+            gBattleStruct->zmove.baseMove = chosenMove;
+            gBattleStruct->zmove.split = GetBattleMoveSplit(chosenMove);
             gBattleStruct->zmove.active = TRUE;
             gBattleStruct->zmove.viewing = FALSE;
             if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].split != SPLIT_STATUS)

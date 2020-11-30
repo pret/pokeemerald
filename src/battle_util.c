@@ -3190,11 +3190,21 @@ u8 AtkCanceller_UnableToUseMove(void)
             if (gBattleStruct->zmove.active == TRUE)
             {
                 RecordItemEffectBattle(gBattlerAttacker, HOLD_EFFECT_Z_CRYSTAL);
-                gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;
+                gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;                
                 //TODO - partner battles.
                 gBattleScripting.battler = gBattlerAttacker;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_ZMoveActivate;
+                
+                if (IS_MOVE_STATUS(gBattleStruct->zmove.baseMove))
+                {
+                    gBattleStruct->zmove.effect = gBattleMoves[gBattleStruct->zmove.baseMove].zMoveEffect;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
+                }
+                else
+                {
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateDamaging;
+                }
                 effect = 1;
             }
             gBattleStruct->atkCancellerTracker++;
@@ -6390,6 +6400,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     u32 i;
     u16 basePower = gBattleMoves[move].power;
     u32 weight, hpFraction, speed;
+    
+    if (gBattleStruct->zmove.active)
+        return gBattleMoves[gBattleStruct->zmove.baseMove].zMovePower;
 
     switch (gBattleMoves[move].effect)
     {
@@ -7794,7 +7807,10 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
 
 u8 GetBattleMoveSplit(u32 moveId)
 {
-    if (IS_MOVE_STATUS(moveId) || B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
+    //TODO - light that burns the sky, photon geyser
+    if (gBattleStruct->zmove.active && !IS_MOVE_STATUS(moveId))
+        return gBattleStruct->zmove.split;
+    else if (IS_MOVE_STATUS(moveId) || B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
         return gBattleMoves[moveId].split;
     else if (gBattleMoves[moveId].type < TYPE_MYSTERY)
         return SPLIT_PHYSICAL;

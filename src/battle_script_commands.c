@@ -6,6 +6,7 @@
 #include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
+#include "battle_z_move.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
 #include "item.h"
@@ -1469,6 +1470,12 @@ static bool32 AccuracyCalcHelper(u16 move)
             RecordAbilityBattle(gBattlerTarget, ABILITY_NO_GUARD);
         return TRUE;
     }
+    
+    if (gBattleStruct->zmove.active && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
+    {
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
 
     if ((gStatuses3[gBattlerTarget] & STATUS3_PHANTOM_FORCE)
         || (!(gBattleMoves[move].flags & FLAG_HIT_IN_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
@@ -1627,13 +1634,6 @@ static void Cmd_ppreduce(void)
 
     if (gBattleControllerExecFlags)
         return;
-    
-    if (gBattleStruct->zmove.active)
-    {
-        gHitMarker &= ~(HITMARKER_NO_PPDEDUCT);
-        gBattlescriptCurrInstr++;
-        return;
-    }
     
     if (!gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure)
     {
@@ -6929,12 +6929,12 @@ static bool32 HasAttackerFaintedTarget(void)
         return FALSE;
 }
 
-static void HandleTerrainMove(u32 moveEffect)
+static void HandleTerrainMove(u16 move)
 {
     u32 statusFlag = 0;
     u8 *timer = NULL;
-
-    switch (moveEffect)
+    
+    switch (gBattleMoves[move].effect)
     {
     case EFFECT_MISTY_TERRAIN:
         statusFlag = STATUS_FIELD_MISTY_TERRAIN, timer = &gFieldTimers.mistyTerrainTimer;
@@ -6951,6 +6951,31 @@ static void HandleTerrainMove(u32 moveEffect)
     case EFFECT_PSYCHIC_TERRAIN:
         statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.psychicTerrainTimer;
         gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+        break;
+    case EFFECT_DAMAGE_SET_TERRAIN:
+        switch (gBattleMoves[move].argument)
+        {
+        case 0: //genesis supernova
+            statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN, timer = &gFieldTimers.psychicTerrainTimer;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+            break;
+        case 1: //splintered stormshards
+            if (!(gFieldStatuses & (STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)))
+            {
+                //no terrain to remove -> jump to battle script pointer
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            }
+            else
+            {
+                // remove all terrain
+                gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN);
+                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+                gBattlescriptCurrInstr += 7;
+            }
+            return;
+        default:
+            break;
+        }
         break;
     }
 
@@ -7764,7 +7789,7 @@ static void Cmd_various(void)
         }
         break;
     case VARIOUS_SET_TERRAIN:
-        HandleTerrainMove(gBattleMoves[gCurrentMove].effect);
+        HandleTerrainMove(gCurrentMove);
         return;
     case VARIOUS_TRY_ME_FIRST:
         if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
@@ -8308,6 +8333,9 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_SET_Z_EFFECT:
+        SetZEffect();   //handles battle script jumping internally
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -8817,7 +8845,7 @@ static void Cmd_setdrainedhp(void)
     gBattlescriptCurrInstr++;
 }
 
-static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr)
+u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr)
 {
     bool32 certain = FALSE;
     bool32 notProtectAffected = FALSE;
