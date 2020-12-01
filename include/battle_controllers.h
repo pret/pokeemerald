@@ -113,6 +113,7 @@ struct ChooseMoveStruct
     u8 monType2;
     u8 monType3;
     struct MegaEvolutionData mega;
+    struct ZMoveData zmove;
 };
 
 enum

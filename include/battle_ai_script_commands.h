@@ -7,7 +7,7 @@
 #define AI_CHOICE_WATCH 5
 #define AI_CHOICE_SWITCH 7
 
-s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef);
+s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, bool32 considerZPower);
 s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon *mon);
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
 void BattleAI_SetupItems(void);

@@ -5,6 +5,7 @@
 #include "battle_ai_script_commands.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
+#include "battle_z_move.h"
 #include "data.h"
 #include "item.h"
 #include "pokemon.h"
@@ -422,9 +423,10 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
         {
             dmg = 0;
             move = gBattleMons[sBattler_AI].moves[i];
+            
             if (gBattleMoves[move].power != 0 && !(moveLimitations & gBitTable[i]))
             {
-                dmg = AI_CalcDamage(move, sBattler_AI, gBattlerTarget) * (100 - (Random() % 10)) / 100;
+                dmg = AI_CalcDamage(move, sBattler_AI, gBattlerTarget, TRUE) * (100 - (Random() % 10)) / 100;
                 if (dmg == 0)
                     dmg = 1;
             }
@@ -904,10 +906,16 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
     return isCrit;
 }
 
-s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
+s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef, bool32 considerZPower)
 {
     s32 dmg, moveType;
-
+    
+    if (considerZPower && IsViableZMove(battlerAtk, move))
+    {
+        gBattleStruct->zmove.baseMoves[battlerAtk] = move;
+        gBattleStruct->zmove.active = TRUE; //temporarily enable z moves for damage calcs
+    }
+    
     SaveBattlerData(battlerAtk);
     SaveBattlerData(battlerDef);
 
@@ -922,6 +930,8 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);
 
+    gBattleStruct->zmove.active = FALSE;
+    gBattleStruct->zmove.baseMoves[battlerAtk] = MOVE_NONE;
     return dmg;
 }
 
@@ -935,7 +945,7 @@ s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon
         battleMons[i] = gBattleMons[i];
 
     PokemonToBattleMon(mon, &gBattleMons[battlerAtk]);
-    dmg = AI_CalcDamage(move, battlerAtk, battlerDef);
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, TRUE);
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         gBattleMons[i] = battleMons[i];
@@ -2674,7 +2684,7 @@ static void Cmd_if_ai_can_go_down(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i])
-            && AI_CalcDamage(moves[i], gBattlerTarget, sBattler_AI) >= gBattleMons[sBattler_AI].hp)
+            && AI_CalcDamage(moves[i], gBattlerTarget, sBattler_AI, TRUE) >= gBattleMons[sBattler_AI].hp)
         {
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
             return;

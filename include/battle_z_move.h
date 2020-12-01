@@ -15,7 +15,7 @@ struct SignatureZMove
 
 void QueueZMove(u8 battlerId, u16 baseMove);
 bool32 IsViableZMove(u8 battlerId, u16 move);
-bool32 TryChangeZIndicator(u8 battlerId, u16 move);
+bool32 TryChangeZIndicator(u8 battlerId, u8 moveIndex);
 void CreateZMoveTriggerSprite(u8, bool8);
 void HideZMoveTriggerSprite(void);
 bool32 IsZMoveTriggerSpriteActive(void);
@@ -23,6 +23,8 @@ void DestroyZMoveTriggerSprite(void);
 bool32 MoveSelectionDisplayZMove(u16 zmove);
 const u8* GetZMoveName(u16 move);
 void SetZEffect(void);
-bool32 ShouldAIUseZMove(u8 activeId, u8 targetId, u16 *baseMove, u8 *chosenMoveId);
+bool32 ShouldAIUseZMove(u8 activeId, u8 targetId, u16 chosenMove);
+bool32 IsZMoveUsable(u8 battlerId, u16 moveIndex);
+void GetUsableZMoves(u8 battlerId, u16 *moves);
 
 #endif // GUARD_BATTLE_Z_MOVE_H

@@ -7,6 +7,7 @@
 #include "battle_interface.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+#include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
 #include "item_use.h"
@@ -1516,7 +1517,7 @@ static void PlayerPartnerHandleChooseMove(void)
 
     BattleAI_SetupAIData(0xF);
     chosenMoveId = BattleAI_ChooseMoveOrAction();
-
+        
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
         gBattlerTarget = gActiveBattler;
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
@@ -1525,6 +1526,9 @@ static void PlayerPartnerHandleChooseMove(void)
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
             gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
+    
+    if (ShouldAIUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
+        QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
 
     BtlController_EmitTwoReturnValues(1, 10, chosenMoveId | (gBattlerTarget << 8));
     PlayerPartnerBufferExecCompleted();

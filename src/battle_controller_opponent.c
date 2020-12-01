@@ -1576,26 +1576,18 @@ static void OpponentHandleChooseMove(void)
             default:
                 {
                     u16 chosenMove = moveInfo->moves[chosenMoveId];
-                    
-                    if (ShouldAIUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves, &chosenMoveId))
+                        
+                    if (gBattleMoves[chosenMove].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+                        gBattlerTarget = gActiveBattler;
+                    if (gBattleMoves[chosenMove].target & MOVE_TARGET_BOTH)
                     {
-                        QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
-                        chosenMove = moveInfo->moves[chosenMoveId];
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                             gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                     }
-                    else
-                    {
-                        if (gBattleMoves[chosenMove].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-                            gBattlerTarget = gActiveBattler;
-                        if (gBattleMoves[chosenMove].target & MOVE_TARGET_BOTH)
-                        {
-                            gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-                            if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-                                gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-                        }
-                    }
+                    
+                    if (ShouldAIUseZMove(gActiveBattler, gBattlerTarget, chosenMove))
+                        QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
                     
                     if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.
                         BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));

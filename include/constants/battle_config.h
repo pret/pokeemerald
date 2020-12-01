@@ -145,9 +145,6 @@
 #define B_INCINERATE_GEMS           GEN_6 // In Gen6+, Incinerate can destroy Gems.
 #define B_MINIMIZE_DMG_ACC          GEN_6 // In Gen6+, moves that causes double damage to minimized Pokémon will also skip accuracy checks.
 
-// AI Settings
-#define B_AI_PREFER_STATUS_Z_MOVES  FALSE // If TRUE, the AI will prefer z-status moves over damaging z moves
-
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_6 // In Gen5+, weather caused by abilities lasts the same amount of turns as induced from a move. Before, they lasted till the battle's end or weather change by a move.
 #define B_GALE_WINGS                GEN_6 // In Gen7+ requires full HP to trigger.
