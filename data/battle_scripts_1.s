@@ -316,8 +316,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectClearSmog
 	.4byte BattleScript_EffectHitSwitchTarget
 	.4byte BattleScript_EffectFinalGambit
-	.4byte BattleScript_EffectTechnoBlast
-	.4byte BattleScript_EffectJudgment
+	.4byte BattleScript_EffectChangeTypeOnItem
 	.4byte BattleScript_EffectAutotomize
 	.4byte BattleScript_EffectCopycat
 	.4byte BattleScript_EffectDefog
@@ -2046,8 +2045,7 @@ BattleScript_EffectPsyshock:
 BattleScript_EffectWeatherBall:
 BattleScript_EffectHiddenPower:
 BattleScript_EffectTwoTypedMove:
-BattleScript_EffectTechnoBlast:
-BattleScript_EffectJudgment:
+BattleScript_EffectChangeTypeOnItem:
 BattleScript_EffectFusionCombo:
 BattleScript_EffectRevelationDance:
 BattleScript_EffectBelch:
@@ -7689,7 +7687,6 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	waitmessage 0x40
 	end2
 
-
 BattleScript_TotemFlaredToLife::
 	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
 	printstring STRINGID_AURAFLAREDTOLIFE
@@ -7708,3 +7705,10 @@ BattleScript_TotemVarPrintStatMsg:
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 	goto BattleScript_TotemVar  @loop until stats bitfield is empty
+
+BattleScript_AnnounceAirLockCloudNine::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_AIRLOCKACTIVATES
+	waitmessage 0x40
+	call BattleScript_WeatherFormChanges
+	end3
