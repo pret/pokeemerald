@@ -142,7 +142,8 @@ void QueueZMove(u8 battlerId, u16 baseMove)
 {
     gBattleStruct->zmove.toBeUsed[battlerId] = gBattleStruct->zmove.chosenZMove;
     gBattleStruct->zmove.baseMoves[battlerId] = baseMove;
-    //TODO - light that burns the sky
+    if (gBattleStruct->zmove.chosenZMove == MOVE_LIGHT_THAT_BURNS_THE_SKY)
+        gBattleStruct->zmove.splits[battlerId] = GetSplitBasedOnStats(battlerId);
     gBattleStruct->zmove.splits[battlerId] = gBattleMoves[baseMove].split;
 }
 
@@ -174,7 +175,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
         return FALSE;
     
     #ifdef ITEM_Z_RING
-    if (!CheckBagHasItem(ITEM_Z_RING, 1))
+    if ((GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT || (!gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT) && !CheckBagHasItem(ITEM_Z_RING, 1))
         return FALSE;
     #endif
     
@@ -243,7 +244,6 @@ bool32 IsZMoveUsable(u8 battlerId, u16 moveIndex)
 
 bool32 TryChangeZIndicator(u8 battlerId, u8 moveIndex)
 {
-    //bool32 viableZMove = IsViableZMove(battlerId, move);
     bool32 viableZMove = IsZMoveUsable(battlerId, moveIndex);
     
     if (gBattleStruct->zmove.viable && !viableZMove)
@@ -269,7 +269,6 @@ void CreateZMoveTriggerSprite(u8 battlerId, bool8 viable)
 {
     s16 x, y;
     
-    // TODO: test mega trigger and z trigger together
     LoadSpritePalette(&sSpritePalette_ZMoveTrigger);
     if (GetSpriteTileStartByTag(TAG_ZMOVE_TRIGGER_TILE) == 0xFFFF)
         LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_ZMoveTrigger);

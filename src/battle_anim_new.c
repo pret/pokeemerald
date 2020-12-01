@@ -4688,7 +4688,7 @@ const struct SpriteTemplate gGigavoltHavocGeyserSpriteTemplate =
     .anims = gRazorLeafParticleAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Geyser
+    .callback = SpriteCB_GeyserTarget
 };
 
 // shattered psyche
