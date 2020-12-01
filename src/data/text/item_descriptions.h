@@ -2926,13 +2926,13 @@ static const u8 sFairiumZDesc[] = _(
 
 static const u8 sAloraichiumZDesc[] = _(
     "Upgrade Alolan\n"
-    "Raichu's Thunderbolt\n"
-    "into a Z-Move.");
+    "Raichu's Thunder-\n"
+    "bolt into a Z-Move.");
 
 static const u8 sDecidiumZDesc[] = _(
-    "Upgrade Decidueye's\n"
-    "Spirit Shackle\n"
-    "into a Z-Move.");
+    "Upgrade Decidu-\n"
+    "eye's Spirit Sha-\n"
+    "ckle into a Z-Move.");
 
 static const u8 sEeviumZDesc[] = _(
     "Upgrade Eevee's\n"
@@ -2940,9 +2940,9 @@ static const u8 sEeviumZDesc[] = _(
     "into a Z-Move.");
 
 static const u8 sInciniumZDesc[] = _(
-    "Upgrade Incineroar's\n"
-    "Darkest Lariat\n"
-    "into a Z-Move.");
+    "Upgrade Incine-\n"
+    "roar's Darkest La-\n"
+    "riat into a Z-Move.");
 
 static const u8 sKommoniumZDesc[] = _(
     "Upgrade Kommo-o's\n"
@@ -2960,9 +2960,9 @@ static const u8 sLycaniumZDesc[] = _(
     "into a Z-Move.");
 
 static const u8 sMarshadiumZDesc[] = _(
-    "Upgrade Marshadow's\n"
-    "Spectral Thief\n"
-    "into a Z-Move.");
+    "Upgrade Marsha-\n"
+    "dow's Spectral Thi-\n"
+    "ef into a Z-Move.");
 
 static const u8 sMewniumZDesc[] = _(
     "Upgrade Mew's\n"
@@ -3000,7 +3000,7 @@ static const u8 sSolganiumZDesc[] = _(
     "into a Z-Move.");
 
 static const u8 sTapuniumZDesc[] = _(
-    "Upgrade the Tapu's\n"
+    "Upgrade the Tapus'\n"
     "Nature's Madness\n"
     "into a Z-Move.");
 
