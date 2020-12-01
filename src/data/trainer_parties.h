@@ -429,18 +429,16 @@ static const struct TrainerMonNoItemCustomMoves sParty_Felix[] = {
     }
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_Violet[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Violet[] = {
     {
     .iv = 0,
-    .lvl = 45,
+    .lvl = 26,
     .species = SPECIES_ROSELIA,
-    .heldItem = ITEM_GRASSIUM_Z,
     },
     {
     .iv = 0,
-    .lvl = 40,
+    .lvl = 26,
     .species = SPECIES_GLOOM,
-    .heldItem = 0,
     }
 };
 

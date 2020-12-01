@@ -160,17 +160,8 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     if (gBattleStruct->zmove.used[battlerId])
         return FALSE;
     
-    // Gets mon data
     species = gBattleMons[battlerId].species;
     item = gBattleMons[battlerId].item;
-    /*if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
-        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
-    else
-        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
-    
-    species = GetMonData(mon, MON_DATA_SPECIES);
-    item = GetMonData(mon, MON_DATA_HELD_ITEM);*/
-    
     if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FRONTIER))
         return FALSE;
     

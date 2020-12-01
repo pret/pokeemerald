@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
-#define TEXT_BUFF_ARRAY_COUNT   20  //expanded for z move names
+#define TEXT_BUFF_ARRAY_COUNT   16
 
 // for 0xFD
 #define B_TXT_BUFF1 0x0
