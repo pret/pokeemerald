@@ -124,7 +124,7 @@ void HandleAction_UseMove(void)
     }
     
     // check z move used
-    if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker])
+    if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE && !IS_MOVE_STATUS(gCurrentMove))
     {
         gCurrentMove = gBattleStruct->zmove.toBeUsed[gBattlerAttacker];
     }
@@ -3198,7 +3198,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     gBattleStruct->zmove.used[BATTLE_PARTNER(gBattlerAttacker)] = TRUE; //if 1v1 double, set partner used flag as well
                 
                 gBattleScripting.battler = gBattlerAttacker;
-                if (IS_MOVE_STATUS(gBattleStruct->zmove.splits[gBattlerAttacker]))
+                if (gBattleStruct->zmove.activeSplit == SPLIT_STATUS)
                 {
                     gBattleStruct->zmove.effect = gBattleMoves[gBattleStruct->zmove.baseMoves[gBattlerAttacker]].zMoveEffect;
                     BattleScriptPushCursor();

@@ -430,18 +430,18 @@ struct Illusion
 struct ZMoveData
 {
     /*0x00*/ u8 viable:1;    // current move can become a z move
-             u8 viewing:1;  //if player is viewing the z move name instead of regular moves
-             u8 active:1;   //is z move being used this turn
+             u8 viewing:1;  // if player is viewing the z move name instead of regular moves
+             u8 active:1;   // is z move being used this turn
              u8 zStatusActive:1;
-             u8 healReplacement:1;  //TODO: z-parting shot
-             u8 activeSplit:1;  //active z move split
-             u8 zUnused:2;
+             u8 healReplacement:1;
+             u8 activeSplit:2;  // active z move split
+             u8 zUnused:1;
     /*0x01*/ u8 triggerSpriteId;
     /*0x02*/ u8 possibleZMoves[MAX_BATTLERS_COUNT];
-    /*0x02*/ u16 chosenZMove;  //z move of move cursor is on
+    /*0x02*/ u16 chosenZMove;  // z move of move cursor is on
              u8 effect;
              u8 used[MAX_BATTLERS_COUNT];   //one per bank for multi-battles
-             u16 toBeUsed[MAX_BATTLERS_COUNT];  //TODO z moves per battler to be used 
+             u16 toBeUsed[MAX_BATTLERS_COUNT];  // z moves per battler to be used
              u16 baseMoves[MAX_BATTLERS_COUNT];
              u8 splits[MAX_BATTLERS_COUNT];
 };

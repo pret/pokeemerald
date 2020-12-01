@@ -5866,6 +5866,16 @@ static void Cmd_switchineffects(void)
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_StickyWebOnSwitchIn;
     }
+    else if (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP && gBattleStruct->zmove.healReplacement)
+    {
+        gBattleStruct->zmove.healReplacement = FALSE;
+        gBattleMoveDamage = -1 * (gBattleMons[gActiveBattler].maxHP);
+        gBattleScripting.battler = gActiveBattler;
+        BattleScriptPushCursor();
+        gBattleCommunication[MULTISTRING_CHOOSER] = MULTISTRING_Z_HP_TRAP;
+        gBattlescriptCurrInstr = BattleScript_HealReplacementZMove;
+        return;
+    }
     else
     {
         // There is a hack here to ensure the truant counter will be 0 when the battler's next turn starts.

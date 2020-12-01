@@ -7701,8 +7701,8 @@ BattleScript_ZMoveActivateStatus::
 	printstring STRINGID_ZPOWERSURROUNDS
 	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
 	setzeffect
-	printstring STRINGID_ZMOVEUNLEASHED
-	waitmessage 0x40
+@	printstring STRINGID_ZMOVEUNLEASHED
+@	waitmessage 0x40
 	return
 
 BattleScript_ZEffectPrintString::
@@ -7719,11 +7719,21 @@ BattleScript_RecoverHPZMove::
 
 BattleScript_StatUpZMove::
 	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_StatUpZMoveEnd
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x3, BattleScript_StatUpZMoveEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_StatUpZMoveEnd
 	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printfromtable gZEffectStringIds
+	printstring STRINGID_ZMOVESTATUP
+	waitmessage 0x40
+	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_StatUpZMoveEnd:
+	return
+	
+BattleScript_HealReplacementZMove::
+	playanimation BS_SCRIPTING B_ANIM_WISH_HEAL 0x0
+	printfromtable gZEffectStringIds
+	waitmessage 0x40
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
 	return
 
 BattleScript_EffectExtremeEvoboost::

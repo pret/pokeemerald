@@ -680,12 +680,12 @@ static const u8 sText_CloakedInAFreezingLight[] = _("{B_ATK_NAME_WITH_PREFIX} be
 static const u8 sText_StatWasNotLowered[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas not lowered!");
 static const u8 sText_ZPowerSurrounds[] = _("{B_ATK_NAME_WITH_PREFIX} surrounds\nitself with its Z-Power!");
 static const u8 sText_ZPowerUnleashed[] = _("{B_ATK_NAME_WITH_PREFIX} unleashes\nits full-force Z-Move!");
-static const u8 sText_ZMoveResetsStats[] = _("");
-static const u8 sText_ZMoveAllStatsUp[] = _("");
-static const u8 sText_ZMoveBoostCrit[] = _("");
-static const u8 sText_ZMoveRestoreHp[] = _("");
-static const u8 sText_ZMoveStatUp[] = _("");
-static const u8 sText_ZMoveHpSwitchInTrap[] = _("");
+static const u8 sText_ZMoveResetsStats[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} returned its\ndecreased stats to normal using\lits Z-Power!");
+static const u8 sText_ZMoveAllStatsUp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted all\nof its stats using its Z-Power!");
+static const u8 sText_ZMoveBoostCrit[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted its\ncritical-hit ratio using its Z-Power!");
+static const u8 sText_ZMoveRestoreHp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} restored its\nHP using its Z-Power!");
+static const u8 sText_ZMoveStatUp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted\nits stats using its Z-Power!");
+static const u8 sText_ZMoveHpSwitchInTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s HP was restored by the Z-Power!");
 static const u8 sText_TerrainReturnedToNormal[] = _("The terrain returned to\nnormal!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
@@ -2579,7 +2579,7 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case STRINGID_USEDMOVE: // pokemon used a move msg
-        if (gBattleStruct->zmove.active)
+        if (gBattleStruct->zmove.active && gBattleStruct->zmove.activeSplit != SPLIT_STATUS)
             StringCopy(gBattleTextBuff3, GetZMoveName(gBattleMsgDataPtr->currentMove));
         else if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
             StringCopy(gBattleTextBuff3, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
