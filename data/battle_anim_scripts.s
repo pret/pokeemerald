@@ -24013,9 +24013,6 @@ Status_Infestation:
 	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0x0, 0x4F
 	call InfestationVortex
 	call InfestationVortex
-	call InfestationVortex
-	call InfestationVortex
-	call InfestationVortex
 	waitforvisualfinish
 	launchtask AnimTask_BlendBattleAnimPal 0xA 0x5 ANIM_PAL_DEF 0x2 0x9 0x0 0x7320
 	waitforvisualfinish
