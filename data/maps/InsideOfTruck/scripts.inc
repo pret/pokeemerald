@@ -50,12 +50,17 @@ InsideOfTruck_EventScript_SetIntroFlagsFemale:: @ 823BF46
 	end
 
 InsideOfTruck_EventScript_MovingBox:: @ 823BF6C
-	givemon SPECIES_MEW, 55, ITEM_MEWNIUM_Z
+	givemon SPECIES_STARMIE, 55, ITEM_WATERIUM_Z
 	givemon SPECIES_CHARIZARD, 50, ITEM_FIRIUM_Z
-	setwildbattle SPECIES_AGGRON, 40, 0
-	dowildbattle
+	
+	trainerbattle_no_intro TRAINER_VIOLET, sText_test
+	
+	@setwildbattle SPECIES_AGGRON, 40, 0
+	@dowildbattle
 	@msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
 	end
+sText_test:
+	.string "hi$"
 
 InsideOfTruck_Text_BoxPrintedWithMonLogo: @ 823BF75
 	.string "The box is printed with a POKéMON logo.\p"

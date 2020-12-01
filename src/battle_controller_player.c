@@ -566,11 +566,7 @@ static void HandleInputChooseMove(void)
         {
             u16 chosenMove = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
             
-            //gBattleStruct->zmove.toBeUsed[gActiveBattler] = gBattleStruct->zmove.currZMove;
-            
-            gBattleStruct->zmove.baseMove = chosenMove;
-            gBattleStruct->zmove.split = GetBattleMoveSplit(chosenMove);
-            gBattleStruct->zmove.active = TRUE;
+            QueueZMove(gActiveBattler, chosenMove);
             gBattleStruct->zmove.viewing = FALSE;
             if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].split != SPLIT_STATUS)
                 moveTarget = MOVE_TARGET_SELECTED;  //damaging z moves always have selected target

@@ -819,6 +819,4 @@
 #define MOVES_COUNT         MOVES_COUNT_GEN8
 #define MOVES_COUNT_Z       (MOVE_SOUL_STEALING_7_STAR_STRIKE + 1)
 
-#define MOVE_Z_SIGNATURE    0xFFFF  //signature z move
-
 #endif  // GUARD_CONSTANTS_MOVES_H

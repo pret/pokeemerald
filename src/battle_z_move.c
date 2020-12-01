@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "pokemon.h"
+#include "battle_ai_script_commands.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
@@ -38,6 +39,10 @@
 #include "constants/hold_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_move_effects.h"
+#include "constants/abilities.h"
+#include "constants/moves.h"
+
+#define STAT_STAGE(battler, stat) (gBattleMons[battler].statStages[stat - 1])
 
 // Function Declarations
 static void SpriteCB_ZMoveTrigger(struct Sprite *sprite);
@@ -46,7 +51,8 @@ static u16 GetTypeBasedZMove(u16 move, u8 battler);
 static void ZMoveSelectionDisplayPpNumber(void);
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
 static void ShowZMoveTriggerSprite(void);
-static bool32 AreMainStatsMaxed(u8 battlerId);
+static bool32 AreStatsMaxed(u8 battlerId, u8 n);
+static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove);
 
 // Const Data
 static const struct SignatureZMove sSignatureZMoves[] =
@@ -132,6 +138,13 @@ bool8 IsZMove(u16 move)
     return move >= FIRST_Z_MOVE && move <= LAST_Z_MOVE;
 }
 
+void QueueZMove(u8 battlerId, u16 baseMove)
+{
+    gBattleStruct->zmove.toBeUsed[battlerId] = gBattleStruct->zmove.currZMove;
+    gBattleStruct->zmove.baseMoves[battlerId] = baseMove;
+    gBattleStruct->zmove.splits[battlerId] = GetBattleMoveSplit(baseMove);
+}
+
 bool32 IsViableZMove(u8 battlerId, u16 move)
 {
     struct Pokemon *mon;
@@ -169,8 +182,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        if (IsPartnerMonFromSameTrainer(battlerId) 
-          && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
+        if (IsPartnerMonFromSameTrainer(battlerId) && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battlerId)])))
             return FALSE;   //partner has mega evolved or is about to mega evolve
     }
     
@@ -187,7 +199,6 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
     #endif
     {
-        //TODO: status z moves
         u16 zMove = GetSignatureZMove(move, gBattleMons[battlerId].species, item);
         if (zMove != MOVE_NONE)
         {
@@ -195,10 +206,10 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
             return TRUE;
         }
         
-        if (move != MOVE_NONE && zMove != MOVE_Z_SIGNATURE && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
+        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
         {
-            if (gBattleMoves[move].split == SPLIT_STATUS)
-                gBattleStruct->zmove.currZMove = MOVE_Z_SIGNATURE;
+            if (IS_MOVE_STATUS(gBattleMoves[move].split))
+                gBattleStruct->zmove.currZMove = MOVE_Z_STATUS;
             else
                 gBattleStruct->zmove.currZMove = GetTypeBasedZMove(move, battlerId);
             
@@ -392,7 +403,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
             BattlePutTextOnWindow(gDisplayedStringBattle, i + 3); 
         }
 
-        //if (zmove == MOVE_Z_SIGNATURE)
+        //if (zmove == MOVE_Z_STATUS)
         if (IS_MOVE_STATUS(move))
         {
             u8 zEffect = gBattleMoves[move].zMoveEffect;
@@ -500,18 +511,18 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
 
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
 {
-	u8 *txtPtr;
-	u16 power = gBattleMoves[move].zMovePower;
+    u8 *txtPtr;
+    u16 power = gBattleMoves[move].zMovePower;
 
-	if (zMove >= MOVE_CATASTROPIKA)
-		power = gBattleMoves[zMove].power;
+    if (zMove >= MOVE_CATASTROPIKA)
+        power = gBattleMoves[zMove].power;
 
-	if (gBattleMoves[move].split != SPLIT_STATUS)
-	{
-		txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
-		ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
-		BattlePutTextOnWindow(gDisplayedStringBattle, 5); //bottom left
-	}
+    if (gBattleMoves[move].split != SPLIT_STATUS)
+    {
+        txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
+        ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
+        BattlePutTextOnWindow(gDisplayedStringBattle, 5); //bottom left
+    }
 }
 
 static void ZMoveSelectionDisplayPpNumber(void)
@@ -568,7 +579,7 @@ void SetZEffect(void)
         gBattlescriptCurrInstr = BattleScript_ZEffectPrintString - Z_EFFECT_BS_LENGTH;
         break;
     case Z_EFFECT_ALL_STATS_UP_1:
-        if (!AreMainStatsMaxed(gBattlerAttacker))
+        if (!AreStatsMaxed(gBattlerAttacker, STAT_SPDEF))
         {
             for (i = 0; i < STAT_ACC - 1; i++) //Doesn't increase Acc or Evsn
             {
@@ -661,15 +672,270 @@ void SetZEffect(void)
     gBattleStruct->zmove.zStatusActive = FALSE;
 }
 
-#define STAT_STAGE(battler, stat) (gBattleMons[battler].statStages[stat - 1])
-static bool32 AreMainStatsMaxed(u8 battlerId)
+static bool32 AreStatsMaxed(u8 battlerId, u8 n)
 {
     u32 i;
-	for (i = STAT_ATK; i <= STAT_SPDEF; i++)
-	{
-		if (STAT_STAGE(battlerId, i) < MAX_STAT_STAGE)
-			return FALSE;
-	}
-	return TRUE;
+    for (i = STAT_ATK; i <= n; i++)
+    {
+        if (STAT_STAGE(battlerId, i) < MAX_STAT_STAGE)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+#define STAT_CAN_RISE(bank, stat) ((gBattleMons[bank].statStages[stat-1] < 12 && GetBattlerAbility(bank) != ABILITY_CONTRARY) || (GetBattlerAbility(bank) == ABILITY_CONTRARY && gBattleMons[bank].statStages[stat-1] > 0))
+#define STAT_CAN_FALL(bank, stat) ((gBattleMons[bank].statStages[stat-1] > 0 && GetBattlerAbility(bank) != ABILITY_CONTRARY) || (GetBattlerAbility(bank) == ABILITY_CONTRARY && gBattleMons[bank].statStages[stat-1] < 12))
+//TODO - this could be a lot better
+bool32 ShouldAIUseZMove(u8 battlerAtk, u8 battlerDef, u16 *baseMoves, u8 *chosenMoveId)
+{
+    u32 i;
+    u16 possibleZMoves[MAX_MON_MOVES];
+    u8 zMoveIndex = 0xFF;
+    u16 zMove = MOVE_NONE;
+    u8 scores[MAX_MON_MOVES] = {0};
+    
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && battlerDef == BATTLE_PARTNER(battlerAtk))
+        return FALSE; //don't use z move on partner
+    
+    if (gBattleStruct->zmove.used[battlerAtk])
+        return FALSE;   //cant use z move twice
+
+    // check possible z moves and select the 'best' one
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (baseMoves[i] != MOVE_NONE && IsViableZMove(battlerAtk, baseMoves[i]))    //updates gBattleStruct->zmove.currZMove
+        {
+            if (zMove != MOVE_NONE)
+            {                
+                scores[i] = GetZMoveScore(battlerAtk, battlerDef, baseMoves[i], zMove);
+                // another z move option already exists. compare them
+                #if B_AI_PREFER_STATUS_Z_MOVES == TRUE
+                    if (scores[i] > scores[zMoveIndex] || (IS_MOVE_STATUS(gBattleStruct->zmove.currZMove) && !IS_MOVE_STATUS(zMove) && scores[i] != 0))
+                    {
+                        zMove = gBattleStruct->zmove.currZMove;
+                        zMoveIndex = i;
+                    }
+                #else
+                    if (scores[i] > scores[zMoveIndex] || (!IS_MOVE_STATUS(gBattleStruct->zmove.currZMove) && IS_MOVE_STATUS(zMove) && scores[i] != 0))
+                    {
+                        zMove = gBattleStruct->zmove.currZMove;
+                        zMoveIndex = i;
+                    }
+                #endif
+            }
+            else
+            {
+                zMove = gBattleStruct->zmove.currZMove;
+                zMoveIndex = i;
+            }
+        }
+    }
+    
+    if (zMoveIndex == 0xFF || scores[zMoveIndex] == 0)
+    {
+        return FALSE;   //no available z moves
+    }
+    else
+    {
+        *chosenMoveId = zMoveIndex;
+        gBattleStruct->zmove.baseMoves[battlerAtk] = baseMoves[*chosenMoveId];
+        gBattleStruct->zmove.currZMove = zMove; //z move the AI is looking at
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+        
+static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove)
+{
+    u8 score = 0;
+    u8 expectedDamage = 0;
+    u32 i;
+    
+    if (zMove != MOVE_Z_STATUS)
+    {
+        u8 defAbility = GetBattlerAbility(battlerDef);
+        u16 defSpecies = gBattleMons[battlerDef].species;
+
+        /*if (baseMove == MOVE_FAKE_OUT && gDisableStructs[battlerAtk].isFirstTurn)
+            return FALSE; //Prefer actual Fake Out over Breakneck Blitz*/
+
+        /*if (MoveBlockedBySubstitute(zMove, battlerAtk, battlerDef)
+         || (defMovePrediction == MOVE_SUBSTITUTE
+         && !MoveWouldHitFirst(zMove, battlerAtk, battlerDef)
+         && !MoveIgnoresSubstitutes(zMove, ABILITY(battlerAtk))))
+            return FALSE; //Don't use a Z-Move on a Substitute or if the enemy is going to go first and use Substitute*/
+
+        #ifdef POKEMON_EXPANSION
+        if (defAbility == ABILITY_DISGUISE && defSpecies == SPECIES_MIMIKYU)
+            return 0; //Don't waste a Z-Move busting Mimikyu's disguise
+        if (defAbility == ABILITY_ICEFACE && defSpecies == SPECIES_EISCUE && IS_MOVE_PHYSICAL(baseMove))
+            return 0; //Don't waste a Z-Move busting Eiscue's Ice Face
+        #endif
+
+        /*if (defMovePrediction == MOVE_PROTECT || defMovePrediction == MOVE_KINGSSHIELD || defMovePrediction == MOVE_SPIKYSHIELD || defMovePrediction == MOVE_OBSTRUCT
+        || (IsDynamaxed(battlerDef) && SPLIT(defMovePrediction) == SPLIT_STATUS))
+            return FALSE; //Don't waste a Z-Move on a Protect*/
+
+        /*if (IsRaidBattle() && gNewBS->dynamaxData.raidShieldsUp && SIDE(battlerAtk) == B_SIDE_PLAYER && SIDE(battlerDef) == B_SIDE_OPPONENT) //Partner AI on Raid Pokemon with shields up
+        {
+            if (gNewBS->dynamaxData.shieldCount - gNewBS->dynamaxData.shieldsDestroyed <= 2 //Less than 3 shields left
+            && gNewBS->dynamaxData.stormLevel < 3) //The Raid boss hasn't almost won
+                return FALSE; //Don't waste a Z-Move breaking a shield
+
+            u16 bankAtkPartner = BATTLE_PARTNER(battlerAtk);
+            u16 partnerMove = GetAIChosenMove(bankAtkPartner, battlerDef);
+
+            if (SPLIT(partnerMove) == SPLIT_STATUS
+            || MoveWouldHitFirst(partnerMove, bankAtkPartner, battlerAtk)
+            || (gChosenMovesByBanks[bankAtkPartner] != MOVE_NONE && gBattleStruct->moveTarget[bankAtkPartner] != battlerDef)) //Not targeting raid Pokemon
+                return FALSE; //Don't waste a Z-Move if partner can't destroy shield first
+        }*/
+
+        //These moves should always be turned into Z-Moves, regardless if they KO or not
+        switch (gBattleMoves[baseMove].effect)
+        {
+        case EFFECT_RECHARGE:
+        case EFFECT_SEMI_INVULNERABLE:
+        case EFFECT_SKULL_BASH:
+        case EFFECT_SOLARBEAM:
+        case EFFECT_LAST_RESORT:
+        //todo: sky drop
+            return 255;
+        }
+        if (baseMove == MOVE_SKY_ATTACK)
+            return 255;
+
+        gBattleStruct->zmove.active = TRUE; //for damage calc only
+        expectedDamage = AI_CalcDamage(baseMove, battlerAtk, battlerDef);
+        gBattleStruct->zmove.active = FALSE;
+        if (expectedDamage >= gBattleMons[battlerDef].hp)
+            return 0;   //base move knocks out already, no need for z move
+        
+        return (expectedDamage > 255) ? 255 : expectedDamage;
+    }
+    else //Status Move
+    {
+        u8 zEffect = gBattleMoves[baseMove].zMoveEffect;
+
+        switch (zEffect)
+        {
+        case Z_EFFECT_NONE:
+            return 0;
+        case Z_EFFECT_RESET_STATS:
+            for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+            {
+                if (i == STAT_ATK && !HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL)) //Only reset lowered Attack if useful
+                    continue;
+                else if (i == STAT_ATK && !HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL)) //Only reset lowered Special Attack if useful
+                    continue;
+
+                if (STAT_STAGE(battlerAtk, i) < 6)
+                    return 50; //Want to reset any negative stats
+            }
+            break;
+        case Z_EFFECT_ALL_STATS_UP_1:
+            if (!AreStatsMaxed(battlerAtk, STAT_EVASION))   //all battle stats maxed
+                return 80;
+            break;
+        case Z_EFFECT_BOOST_CRITS:
+            if (!(gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY))
+                return 30;  //kinda meh?
+            break;
+        case Z_EFFECT_FOLLOW_ME:
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                return 30;  //kinda meh?
+            break;
+        case Z_EFFECT_ATK_UP_1:
+            if (STAT_CAN_RISE(battlerAtk, STAT_ATK) && HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
+                return 60;
+            break;
+        case Z_EFFECT_ATK_UP_2:
+            if (STAT_CAN_RISE(battlerAtk, STAT_ATK) && HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
+                return 70;
+            break;
+        case Z_EFFECT_ATK_UP_3:
+            if (STAT_CAN_RISE(battlerAtk, STAT_ATK) && HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
+                return 80;
+            break;
+        case Z_EFFECT_DEF_UP_1:
+            if (STAT_CAN_RISE(battlerAtk, STAT_DEF))
+                return 50;
+            break;
+        case Z_EFFECT_DEF_UP_2:
+            if (STAT_CAN_RISE(battlerAtk, STAT_DEF))
+                return 60;
+            break;
+        case Z_EFFECT_DEF_UP_3:
+            if (STAT_CAN_RISE(battlerAtk, STAT_DEF))
+                return 70;
+            break;
+        case Z_EFFECT_SPATK_UP_1:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPATK) && HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
+                return 50;
+            break;
+        case Z_EFFECT_SPATK_UP_2:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPATK) && HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
+                return 60;
+            break;
+        case Z_EFFECT_SPATK_UP_3:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPATK) && HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
+                return 70;
+            break;
+        case Z_EFFECT_SPDEF_UP_1:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPDEF))
+                return 50;
+            break;
+        case Z_EFFECT_SPDEF_UP_2:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPDEF))
+                return 60;
+            break;
+        case Z_EFFECT_SPDEF_UP_3:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPDEF))
+                return 70;
+            break;
+        case Z_EFFECT_SPD_UP_1:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPEED))
+                return 50;
+            break;
+        case Z_EFFECT_SPD_UP_2:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPEED))
+                return 60;
+            break;
+        case Z_EFFECT_SPD_UP_3:
+            if (STAT_CAN_RISE(battlerAtk, STAT_SPEED))
+                return 70;
+            break;
+        case Z_EFFECT_ACC_UP_1:
+            if (STAT_CAN_RISE(battlerAtk, STAT_ACC))
+                return 20;    //TODO: only if knows low-accuracy move
+            break;
+        case Z_EFFECT_ACC_UP_2:
+            if (STAT_CAN_RISE(battlerAtk, STAT_ACC))
+                return 40;    //TODO: only if knows low-accuracy move
+            break;
+        case Z_EFFECT_ACC_UP_3:
+            //if (STAT_CAN_RISE(battlerAtk, STAT_ACC) && MoveInMovesetWithAccuracyLessThan(battlerAtk, battlerDef, 90, FALSE))
+            if (STAT_CAN_RISE(battlerAtk, STAT_ACC))
+                return 60;    //TODO: only if knows low-accuracy move
+            break;
+        case Z_EFFECT_EVSN_UP_1:
+            if (STAT_CAN_RISE(battlerAtk, STAT_EVASION))
+                return 40;
+            break;
+        case Z_EFFECT_EVSN_UP_2:
+            if (STAT_CAN_RISE(battlerAtk, STAT_EVASION))
+                return 60;
+            break;
+        case Z_EFFECT_EVSN_UP_3:
+            if (STAT_CAN_RISE(battlerAtk, STAT_EVASION))
+                return 80;
+            break;
+        default: //Recover HP
+            return 70;
+        }
+    }
+    
+    return score;
 }
 

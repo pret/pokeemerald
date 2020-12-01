@@ -2385,6 +2385,8 @@ static const struct LevelUpMove sStarmieLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_RECOVER),
     LEVEL_UP_MOVE( 1, MOVE_SWIFT),
     LEVEL_UP_MOVE(40, MOVE_CONFUSE_RAY),
+    LEVEL_UP_MOVE(40, MOVE_PSYCHIC),
+    LEVEL_UP_MOVE(50, MOVE_WATER_PULSE),
     LEVEL_UP_END
 };
 

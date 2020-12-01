@@ -436,12 +436,12 @@ struct ZMoveData
              u8 zStatusActive:1;
              u8 healReplacement:1;  //TODO: z-parting shot
              u8 zUnused:2;
-    /*0x02*/ u16 currZMove;  //z move of cursor / selected z move
-    /*0x04*/ u16 baseMove;  //move turned into z move
+    /*0x02*/ u16 currZMove;  //z move of move cursor is on
     /*0x06*/ u8 triggerSpriteId;
              u8 effect;
              u8 used[MAX_BATTLERS_COUNT];   //one per bank for multi-battles
              u16 toBeUsed[MAX_BATTLERS_COUNT];  //TODO z moves per battler to be used 
+             u16 baseMoves[MAX_BATTLERS_COUNT];
              u8 splits[MAX_BATTLERS_COUNT];
 }; /* size = 8 */
 

@@ -124,9 +124,9 @@ void HandleAction_UseMove(void)
     }
     
     // check z move used
-    if (gBattleStruct->zmove.active)
+    if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker])
     {
-        gCurrentMove = gBattleStruct->zmove.currZMove;
+        gCurrentMove = gBattleStruct->zmove.toBeUsed[gBattlerAttacker];
     }
 
     if (gBattleMons[gBattlerAttacker].hp != 0)
@@ -3187,16 +3187,17 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_Z_MOVES:
-            if (gBattleStruct->zmove.active == TRUE)
+            if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE)
             {
+                //attacker has a queued z move
+                gBattleStruct->zmove.active = TRUE;
                 RecordItemEffectBattle(gBattlerAttacker, HOLD_EFFECT_Z_CRYSTAL);
                 gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;                
-                //TODO - partner battles.
+                //TODO - partner battles
                 gBattleScripting.battler = gBattlerAttacker;
-                
-                if (IS_MOVE_STATUS(gBattleStruct->zmove.baseMove))
+                if (IS_MOVE_STATUS(gBattleStruct->zmove.splits[gBattlerAttacker]))
                 {
-                    gBattleStruct->zmove.effect = gBattleMoves[gBattleStruct->zmove.baseMove].zMoveEffect;
+                    gBattleStruct->zmove.effect = gBattleMoves[gBattleStruct->zmove.baseMoves[gBattlerAttacker]].zMoveEffect;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
                 }
@@ -6402,7 +6403,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     u32 weight, hpFraction, speed;
     
     if (gBattleStruct->zmove.active)
-        return gBattleMoves[gBattleStruct->zmove.baseMove].zMovePower;
+        return gBattleMoves[gBattleStruct->zmove.baseMoves[battlerAtk]].zMovePower;
 
     switch (gBattleMoves[move].effect)
     {
@@ -7589,6 +7590,9 @@ bool32 CanMegaEvolve(u8 battlerId)
     // Check if trainer already mega evolved a pokemon.
     if (mega->alreadyEvolved[battlerPosition])
         return FALSE;
+    if (gBattleStruct->zmove.toBeUsed[battlerId])
+        return FALSE;   //cannot use z move and mega evolve on same turn
+    
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         if (IsPartnerMonFromSameTrainer(battlerId)

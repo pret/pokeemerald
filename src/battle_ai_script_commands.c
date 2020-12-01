@@ -2600,7 +2600,7 @@ static u16 *GetMovesArray(u32 battler)
         return gBattleResources->battleHistory->usedMoves[battler];
 }
 
-static bool32 HasMoveWithSplit(u32 battler, u32 split)
+bool32 HasMoveWithSplit(u32 battler, u32 split)
 {
     s32 i;
     u16 *moves = GetMovesArray(battler);
