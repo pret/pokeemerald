@@ -1273,7 +1273,7 @@ static void Cmd_attackcanceler(void)
 
     // Check Protean activation.
     GET_MOVE_TYPE(gCurrentMove, moveType);
-    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_PROTEAN
+    if ((GetBattlerAbility(gBattlerAttacker) == ABILITY_PROTEAN || GetBattlerAbility(gBattlerAttacker) == ABILITY_LIBERO)
         && (gBattleMons[gBattlerAttacker].type1 != moveType || gBattleMons[gBattlerAttacker].type2 != moveType ||
             (gBattleMons[gBattlerAttacker].type3 != moveType && gBattleMons[gBattlerAttacker].type3 != TYPE_MYSTERY))
         && gCurrentMove != MOVE_STRUGGLE)
