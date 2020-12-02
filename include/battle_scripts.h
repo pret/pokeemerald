@@ -249,7 +249,7 @@ extern const u8 BattleScript_SturdiedMsg[];
 extern const u8 BattleScript_GravityEnds[];
 extern const u8 BattleScript_MoveStatDrain[];
 extern const u8 BattleScript_MoveStatDrain_PPLoss[];
-extern const u8 BattleScript_TargetAbilityStatRaise[];
+extern const u8 BattleScript_TargetAbilityStatRaiseOnMoveEnd[];
 extern const u8 BattleScript_AngryPointActivates[];
 extern const u8 BattleScript_AttackerAbilityStatRaise[];
 extern const u8 BattleScript_AttackerAbilityStatRaiseEnd3[];
@@ -350,5 +350,6 @@ extern const u8 BattleScript_EmergencyExitWild[];
 extern const u8 BattleScript_EmergencyExitWildNoPopUp[];
 extern const u8 BattleScript_CheekPouchActivates[];
 extern const u8 BattleScript_AnnounceAirLockCloudNine[];
+extern const u8 BattleScript_TargetAbilityStatRaiseOnSwitchin[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
