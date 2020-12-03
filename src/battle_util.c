@@ -140,7 +140,8 @@ void HandleAction_UseMove(void)
     if (gSideTimers[side].followmeTimer != 0
         && gBattleMoves[gCurrentMove].target == MOVE_TARGET_SELECTED
         && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gSideTimers[side].followmeTarget)
-        && gBattleMons[gSideTimers[side].followmeTarget].hp != 0)
+        && gBattleMons[gSideTimers[side].followmeTarget].hp != 0
+        && GetBattlerAbility(gBattlerAttacker) != ABILITY_PROPELLER_TAIL)
     {
         gBattlerTarget = gSideTimers[side].followmeTarget;
     }
@@ -158,9 +159,9 @@ void HandleAction_UseMove(void)
             if (side != GetBattlerSide(gActiveBattler)
                 && *(gBattleStruct->moveTarget + gBattlerAttacker) != gActiveBattler
                 && ((GetBattlerAbility(gActiveBattler) == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
-                    || (GetBattlerAbility(gActiveBattler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER)
-                   )
-                && GetBattlerTurnOrderNum(gActiveBattler) < var)
+                    || (GetBattlerAbility(gActiveBattler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
+                && GetBattlerTurnOrderNum(gActiveBattler) < var
+                && GetBattlerAbility(gBattlerAttacker) != ABILITY_PROPELLER_TAIL)
             {
                 var = GetBattlerTurnOrderNum(gActiveBattler);
             }
