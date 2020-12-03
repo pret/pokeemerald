@@ -812,8 +812,6 @@
 #define SPECIES_MELTAN 808
 #define SPECIES_MELMETAL 809
 
-#define IS_ULTRA_BEAST(speciesId)((speciesId >= SPECIES_NIHILEGO && speciesId <= SPECIES_GUZZLORD) || (speciesId >= SPECIES_POIPOLE && speciesId <= SPECIES_BLACEPHALON))
-
 #define FORMS_START SPECIES_MELMETAL
 
 // Megas
@@ -2220,5 +2218,10 @@
 #define HOENN_DEX_DEOXYS 211
 
 #define HOENN_DEX_COUNT 212
+
+// species flags
+#define F_ULTRA_BEAST   (1 << 0)
+#define F_ALOLAN_FORM   (1 << 1)
+#define F_GALARIAN_FORM (1 << 2)
 
 #endif  // GUARD_CONSTANTS_SPECIES_H
