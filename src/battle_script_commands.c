@@ -2371,7 +2371,7 @@ static void CheckSetUnburden(u8 battlerId)
 
 //slight difference in thief/pickpocket requires this
 static void StealTargetItem(void)
-{
+{    
     gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
     gBattleMons[gBattlerTarget].item = 0;
     
@@ -2392,7 +2392,7 @@ static void StealTargetItem(void)
     
     gBattleStruct->choicedMove[gBattlerTarget] = 0;
     
-    #if B_TRAINERS_STEAL_ITEMS
+    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
             gBattleStruct->itemStolen[gBattlerPartyIndexes[gBattlerTarget]] = gLastUsedItem;
     #endif
@@ -3421,7 +3421,7 @@ static void Cmd_jumpifability(void)
 {
     u32 battlerId;
     bool32 hasAbility = FALSE;
-    u32 ability = gBattlescriptCurrInstr[2];
+    u32 ability = T2_READ_16(gBattlescriptCurrInstr + 2);
 
     switch (gBattlescriptCurrInstr[1])
     {
@@ -3451,13 +3451,13 @@ static void Cmd_jumpifability(void)
     if (hasAbility)
     {
         gLastUsedAbility = ability;
-        gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
+        gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 4);
         RecordAbilityBattle(battlerId, gLastUsedAbility);
         gBattlerAbility = battlerId;
     }
     else
     {
-        gBattlescriptCurrInstr += 7;
+        gBattlescriptCurrInstr += 8;
     }
 }
 
@@ -4375,10 +4375,10 @@ static void Cmd_setroost(void)
 
 static void Cmd_jumpifabilitypresent(void)
 {
-    if (IsAbilityOnField(gBattlescriptCurrInstr[1]))
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+    if (IsAbilityOnField(T1_READ_16(gBattlescriptCurrInstr + 1)))
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
     else
-        gBattlescriptCurrInstr += 6;
+        gBattlescriptCurrInstr += 7;
 }
 
 static void Cmd_endselectionscript(void)
@@ -5025,12 +5025,12 @@ static void Cmd_moveend(void)
                 for (i = 0; i < gBattlersCount; i++)
                 {
                     u8 battler = battlers[i];
-                    
+                    //attacker is mon who made contact, battler is mon with pickpocket
                     if (battler != gBattlerAttacker     //cannot pickpocket yourself
-                      && GetBattlerAbility(battler) == ABILITY_PICKPOCKET        //'target' must have pickpocket ability
+                      && GetBattlerAbility(battler) == ABILITY_PICKPOCKET    //'target' must have pickpocket ability
                       && BATTLER_DAMAGED(battler)    //obviously battler needs to have been damaged as well
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)  //subsitute unaffected
-                      && IsBattlerAlive(battler)   //battler must be alive to be pickpocketed
+                      && IsBattlerAlive(battler)   //battler must be alive to pickpocket
                       && gBattleMons[battler].item == ITEM_NONE //pickpocketer can't have an item already
                       && CanStealItem(battler, gBattleMons[gBattlerAttacker].item))  //cannot steal plates, mega stones, etc
                     {
@@ -10313,7 +10313,7 @@ static void Cmd_healpartystatus(void)
 
             if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
-                u8 ability;
+                u16 ability;
 
                 if (gBattlerPartyIndexes[gBattlerAttacker] == i)
                     ability = gBattleMons[gBattlerAttacker].ability;
@@ -11058,7 +11058,7 @@ static void Cmd_tryswapitems(void) // trick
                                   | BATTLE_TYPE_FRONTIER
                                   | BATTLE_TYPE_SECRET_BASE
                                   | BATTLE_TYPE_x2000000
-                                  #if B_TRAINERS_STEAL_ITEMS
+                                  #if B_TRAINERS_KNOCK_OFF_ITEMS
                                   | BATTLE_TYPE_TRAINER
                                   #endif
                                   ))))
@@ -11126,7 +11126,7 @@ static void Cmd_tryswapitems(void) // trick
             PREPARE_ITEM_BUFFER(gBattleTextBuff1, *newItemAtk)
             PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
             
-            #if B_TRAINERS_STEAL_ITEMS
+            #if B_TRAINERS_KNOCK_OFF_ITEMS
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -11330,7 +11330,7 @@ static void Cmd_tryswapabilities(void) // skill swap
     }
     else
     {
-        u8 abilityAtk = gBattleMons[gBattlerAttacker].ability;
+        u16 abilityAtk = gBattleMons[gBattlerAttacker].ability;
         gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
         gBattleMons[gBattlerTarget].ability = abilityAtk;
 
@@ -11585,7 +11585,7 @@ static void Cmd_pickup(void)
 {
     s32 i;
     u16 species, heldItem;
-    u8 ability;
+    u16 ability;
     u8 lvlDivBy10;
 
     if (InBattlePike())

@@ -162,7 +162,7 @@ EWRAM_DATA s32 gBattleMoveDamage = 0;
 EWRAM_DATA s32 gHpDealt = 0;
 EWRAM_DATA s32 gTakenDmg[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastUsedItem = 0;
-EWRAM_DATA u8 gLastUsedAbility = 0;
+EWRAM_DATA u16 gLastUsedAbility = 0;
 EWRAM_DATA u8 gBattlerAttacker = 0;
 EWRAM_DATA u8 gBattlerTarget = 0;
 EWRAM_DATA u8 gBattlerFainted = 0;
@@ -4819,7 +4819,7 @@ static void HandleEndTurn_FinishBattle(void)
         sub_8186444();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-        #if B_TRAINERS_STEAL_ITEMS
+        #if B_TRAINERS_KNOCK_OFF_ITEMS
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             TryRestoreStolenItems();
         #endif
@@ -4841,7 +4841,7 @@ static void HandleEndTurn_FinishBattle(void)
 static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
-    {        
+    {
         ResetSpriteData();
         if (gLeveledUpInBattle && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
         {

@@ -2762,7 +2762,7 @@ static void PlayerHandleChoosePokemon(void)
         gTasks[gUnknown_03005D7C[gActiveBattler]].data[0] = gBattleResources->bufferA[gActiveBattler][1] & 0xF;
         *(&gBattleStruct->battlerPreventingSwitchout) = gBattleResources->bufferA[gActiveBattler][1] >> 4;
         *(&gBattleStruct->field_8B) = gBattleResources->bufferA[gActiveBattler][2];
-        *(&gBattleStruct->abilityPreventingSwitchout) = gBattleResources->bufferA[gActiveBattler][3];
+        *(&gBattleStruct->abilityPreventingSwitchout) = (gBattleResources->bufferA[gActiveBattler][3] & 0xFF) | (gBattleResources->bufferA[gActiveBattler][7] << 8);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
         gBattlerControllerFuncs[gActiveBattler] = OpenPartyMenuToChooseMon;
         gBattlerInMenuId = gActiveBattler;

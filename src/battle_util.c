@@ -1318,6 +1318,7 @@ static bool32 IsGravityPreventingMove(u32 move)
     case MOVE_SKY_DROP:
     case MOVE_SPLASH:
     case MOVE_TELEKINESIS:
+    case MOVE_FLOATY_FALL:
         return TRUE;
     default:
         return FALSE;
@@ -3472,8 +3473,14 @@ static bool32 ShouldChangeFormHpBased(u32 battler)
     // Ability,     form >, form <=, hp divided
     static const u16 forms[][4] =
     {
-        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN, SPECIES_DARMANITAN_ZEN, 2},
-        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR, SPECIES_MINIOR_CORE, 2},
+        {ABILITY_ZEN_MODE, SPECIES_DARMANITAN, SPECIES_DARMANITAN_ZEN_MODE, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR, SPECIES_MINIOR_CORE_RED, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_BLUE, SPECIES_MINIOR_CORE_BLUE, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_GREEN, SPECIES_MINIOR_CORE_GREEN, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_INDIGO, SPECIES_MINIOR_CORE_INDIGO, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_ORANGE, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_VIOLET, SPECIES_MINIOR_CORE_VIOLET, 2},
+        {ABILITY_SHIELDS_DOWN, SPECIES_MINIOR_METEOR_YELLOW, SPECIES_MINIOR_CORE_YELLOW, 2},
         {ABILITY_SCHOOLING, SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI, 4},
     };
     u32 i;
@@ -3557,7 +3564,7 @@ static u8 ForewarnChooseMove(u32 battler)
     free(data);
 }
 
-u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg)
+u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
     u32 speciesAtk, speciesDef;
@@ -3649,7 +3656,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITY_MOLD_BREAKER:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_MOLDBREAKER;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3658,7 +3665,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITY_TERAVOLT:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_TERAVOLT;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3667,7 +3674,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITY_TURBOBLAZE:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_TURBOBLAZE;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3677,7 +3684,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
                 gDisableStructs[battler].slowStartTimer = 5;
-                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_SLOWSTART;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3686,7 +3693,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITY_UNNERVE:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_UNNERVE;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3716,7 +3723,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
 
                 if (effect)
                 {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 5;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_ANTICIPATION;
                     gSpecialStatuses[battler].switchInAbilityDone = 1;
                     BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 }
@@ -3734,7 +3741,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
                 ForewarnChooseMove(battler);
-                gBattleCommunication[MULTISTRING_CHOOSER] = 6;
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_FOREWARN;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3775,6 +3782,60 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerAbilityStatRaiseEnd3);
                     effect++;
                 }
+            }
+            break;
+        case ABILITY_PRESSURE:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_PRESSURE;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_DARK_AURA:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_DARKAURA;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_FAIRY_AURA:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_FAIRYAURA;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_AURA_BREAK:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_AURABREAK;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_COMATOSE:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_COMATOSE;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_SCREEN_CLEANER:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_SCREENCLEANER;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
             }
             break;
         case ABILITY_DRIZZLE:
@@ -3858,16 +3919,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             break;
         case ABILITY_CLOUD_NINE:
         case ABILITY_AIR_LOCK:
-            for (i = 0; i < gBattlersCount; i++)
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                effect = TryWeatherFormChange(i);
-                if (effect != 0)
-                {
-                    BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                    gBattleScripting.battler = i;
-                    gBattleStruct->formToChangeInto = effect - 1;
-                    break;
-                }
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_AnnounceAirLockCloudNine);
+                effect++;
             }
             break;
         case ABILITY_SCHOOLING:
@@ -6915,6 +6971,10 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         if (gDisableStructs[battlerDef].isFirstTurn == 2) // just switched in
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
+    case ABILITY_GUTS:
+        if (gBattleMons[battlerAtk].status1 & STATUS1_ANY && IS_MOVE_PHYSICAL(move))
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
     }
 
     // target's abilities
@@ -7417,7 +7477,7 @@ u16 CalcTypeEffectivenessMultiplier(u16 move, u8 moveType, u8 battlerAtk, u8 bat
     return modifier;
 }
 
-u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u8 abilityDef)
+u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef)
 {
     u16 modifier = UQ_4_12(1.0);
     u8 moveType = gBattleMoves[move].type;
@@ -7615,8 +7675,14 @@ void UndoFormChange(u32 monId, u32 side)
     {
         {SPECIES_AEGISLASH_BLADE, SPECIES_AEGISLASH},
         {SPECIES_MIMIKYU_BUSTED, SPECIES_MIMIKYU},
-        {SPECIES_DARMANITAN_ZEN, SPECIES_DARMANITAN},
-        {SPECIES_MINIOR, SPECIES_MINIOR_CORE},
+        {SPECIES_DARMANITAN_ZEN_MODE, SPECIES_DARMANITAN},
+        {SPECIES_MINIOR, SPECIES_MINIOR_CORE_RED},
+        {SPECIES_MINIOR_METEOR_BLUE, SPECIES_MINIOR_CORE_BLUE},
+        {SPECIES_MINIOR_METEOR_GREEN, SPECIES_MINIOR_CORE_GREEN},
+        {SPECIES_MINIOR_METEOR_INDIGO, SPECIES_MINIOR_CORE_INDIGO},
+        {SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_ORANGE},
+        {SPECIES_MINIOR_METEOR_VIOLET, SPECIES_MINIOR_CORE_VIOLET},
+        {SPECIES_MINIOR_METEOR_YELLOW, SPECIES_MINIOR_CORE_YELLOW},
         {SPECIES_WISHIWASHI_SCHOOL, SPECIES_WISHIWASHI},
     };
 
@@ -7831,14 +7897,14 @@ bool8 CanStealItem(u8 battlerId, u16 item)
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         return FALSE;
 
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
+    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT
         && !(gBattleTypeFlags &
              (BATTLE_TYPE_EREADER_TRAINER
               | BATTLE_TYPE_FRONTIER
               | BATTLE_TYPE_LINK
               | BATTLE_TYPE_x2000000
               | BATTLE_TYPE_SECRET_BASE
-              #if B_TRAINERS_STEAL_ITEMS
+              #if B_TRAINERS_KNOCK_OFF_ITEMS
               | BATTLE_TYPE_TRAINER
               #endif
               )))
@@ -7851,11 +7917,11 @@ bool8 CanStealItem(u8 battlerId, u16 item)
            | BATTLE_TYPE_LINK
            | BATTLE_TYPE_x2000000
            | BATTLE_TYPE_SECRET_BASE))
-        && (gWishFutureKnock.knockedOffMons[GetBattlerSide(gBattlerAttacker)] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
+        && (gWishFutureKnock.knockedOffMons[GetBattlerSide(battlerId)] & gBitTable[gBattlerPartyIndexes[battlerId]]))
     {
         return FALSE;
     }
-                    
+    
     return CanBattlerGetOrLoseItem(battlerId, item);
 }
 
