@@ -228,6 +228,8 @@ EWRAM_DATA u32 gFieldStatuses = 0;
 EWRAM_DATA struct FieldTimer gFieldTimers = {0};
 EWRAM_DATA u8 gBattlerAbility = 0;
 EWRAM_DATA u16 gPartnerSpriteId = 0;
+EWRAM_DATA bool8 gHasFetchedBall = FALSE;
+EWRAM_DATA bool8 gLastUsedBall = 0;
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -2885,6 +2887,9 @@ static void BattleStartClearSetData(void)
 
     gLastUsedMove = 0;
     gFieldStatuses = 0;
+
+    gHasFetchedBall = FALSE;
+    gLastUsedBall = 0;
 
     gBattlerAttacker = 0;
     gBattlerTarget = 0;

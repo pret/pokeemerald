@@ -827,5 +827,7 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
+extern bool8 gHasFetchedBall;
+extern u8 gLastUsedBall;
 
 #endif // GUARD_BATTLE_H

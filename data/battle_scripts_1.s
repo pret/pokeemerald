@@ -6165,6 +6165,11 @@ BattleScript_AttackerFormChangeEnd3::
 	call BattleScript_AttackerFormChange
 	end3
 
+BattleScript_BallFetch::
+	printstring STRINGID_FETCHEDPOKEBALL
+	waitmessage 0x40
+	end3
+
 BattleScript_TargetFormChange::
 	pause 0x5
 	copybyte gBattlerAbility, gBattlerTarget

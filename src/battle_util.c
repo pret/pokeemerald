@@ -4126,6 +4126,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     effect++;
                 }
                 break;
+            case ABILITY_BALL_FETCH:
+                if (gBattleMons[battler].item == ITEM_NONE
+                    && gBattleResults.catchAttempts[gLastUsedBall] >= 1
+                    && !gHasFetchedBall)
+                {
+                    gBattleScripting.battler = battler;
+                    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedBall);
+                    MarkBattlerForControllerExec(battler);
+                    gHasFetchedBall = TRUE;
+                    gLastUsedItem = gLastUsedBall;
+                    BattleScriptPushCursorAndCallback(BattleScript_BallFetch);
+                    effect++;
+                }
+                break;
             }
         }
         break;

@@ -352,5 +352,6 @@ extern const u8 BattleScript_CheekPouchActivates[];
 extern const u8 BattleScript_AnnounceAirLockCloudNine[];
 extern const u8 BattleScript_TargetAbilityStatRaiseOnSwitchin[];
 extern const u8 BattleScript_CottonDownActivates[];
+extern const u8 BattleScript_BallFetch[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
