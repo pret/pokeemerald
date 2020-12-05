@@ -350,7 +350,7 @@ extern const u8 BattleScript_EmergencyExitWild[];
 extern const u8 BattleScript_EmergencyExitWildNoPopUp[];
 extern const u8 BattleScript_CheekPouchActivates[];
 extern const u8 BattleScript_AnnounceAirLockCloudNine[];
-extern const u8 BattleScript_TargetAbilityStatRaiseOnSwitchIn[];
+extern const u8 BattleScript_BattlerAbilityStatRaiseOnSwitchIn[];
 extern const u8 BattleScript_CottonDownActivates[];
 extern const u8 BattleScript_BallFetch[];
 
