@@ -7106,7 +7106,7 @@ BattleScript_AngryPointActivates::
 	waitmessage 0x40
 	return
 
-BattleScript_TargetAbilityStatRaiseOnSwitchin::
+BattleScript_TargetAbilityStatRaiseOnSwitchIn::
 	call BattleScript_AbilityPopUp
 	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
 	setgraphicalstatchangevalues
