@@ -14,6 +14,7 @@
 #include "battle_scripts.h"
 #include "battle_controllers.h"
 #include "constants/moves.h"
+#include "constants/hold_effects.h"
 
 //// function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite* sprite);
