@@ -6166,6 +6166,7 @@ BattleScript_AttackerFormChangeEnd3::
 	end3
 
 BattleScript_BallFetch::
+	call BattleScript_AbilityPopUp
 	printstring STRINGID_FETCHEDPOKEBALL
 	waitmessage 0x40
 	end3
