@@ -3484,6 +3484,19 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->overworldWeatherDone = TRUE;
         return;
     }
+    
+    // Totem boosts
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gTotemBoosts[i].stats != 0)
+        {
+            gBattlerAttacker = i;
+            BattleScriptExecute(BattleScript_TotemVar);
+            return;
+        }
+    }
+    memset(gTotemBoosts, 0, sizeof(gTotemBoosts));  // erase all totem boosts just to be safe
+    
     // Check all switch in abilities happening from the fastest mon to slowest.
     while (gBattleStruct->switchInAbilitiesCounter < gBattlersCount)
     {
@@ -3501,17 +3514,6 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter++], FALSE))
             return;
     }
-    // Totem
-    for (i = 0; i < gBattlersCount; i++)
-    {
-        if (gTotemBoosts[i].stats != 0)
-        {
-            gBattlerAttacker = i;
-            BattleScriptExecute(BattleScript_TotemVar);
-            return;
-        }
-    }
-    memset(gTotemBoosts, 0, sizeof(gTotemBoosts));  //erase all totem boosts just to be safe
     
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -5078,7 +5080,7 @@ void SetTotemBoost(void)
         {
             gTotemBoosts[battlerId].stats |= (1 << i);
             gTotemBoosts[battlerId].statChanges[i] = *(&gSpecialVar_0x8001 + i);
-            gTotemBoosts[battlerId].stats |= 0x80;  //used as a flag for the "totem flared to life" script
+            gTotemBoosts[battlerId].stats |= 0x80;  // used as a flag for the "totem flared to life" script
         }
     }
 }

@@ -88,7 +88,6 @@ static void Task_PanFromInitialToTarget(u8 taskId);
 static void Task_LoopAndPlaySE(u8 taskId);
 static void Task_WaitAndPlaySE(u8 taskId);
 static void LoadDefaultBg(void);
-static void LoadMoveBg(u16 bgId);
 
 // ewram
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
@@ -3177,7 +3176,7 @@ static void Task_FadeToBg(u8 taskId)
     }
 }
 
-static void LoadMoveBg(u16 bgId)
+void LoadMoveBg(u16 bgId)
 {
     if (IsContest())
     {
@@ -3205,6 +3204,10 @@ static void LoadDefaultBg(void)
 {
     if (IsContest())
         LoadContestBgAfterMoveAnim();
+    #if B_TERRAIN_BG_CHANGE == TRUE
+    else if (gFieldStatuses & STATUS_TERRAIN_ANY)
+        DrawTerrainTypeBattleBackground();
+    #endif
     else
         DrawMainBattleBackground();
 }
