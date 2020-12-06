@@ -520,7 +520,7 @@ struct BattleStruct
     u8 savedBattlerTarget;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u8 activeAbilityPopUps; // as bits for each battler
-    u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    //two per battler
+    u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
     const u8 *trainerSlideMsg;
