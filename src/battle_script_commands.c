@@ -8584,7 +8584,7 @@ static void Cmd_manipulatedamage(void)
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         if (B_RECOIL_IF_MISS_DMG >= GEN_5 || ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage))
-            gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
         break;
     case DMG_DOUBLED:
         gBattleMoveDamage *= 2;
