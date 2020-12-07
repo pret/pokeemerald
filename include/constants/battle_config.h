@@ -109,6 +109,7 @@
 #define B_DISABLE_TURNS             GEN_6 // Disable's turns. See Cmd_disablelastusedattack.
 #define B_INCINERATE_GEMS           GEN_6 // In Gen6+, Incinerate can destroy Gems.
 #define B_MINIMIZE_DMG_ACC          GEN_6 // In Gen6+, moves that causes double damage to minimized Pokémon will also skip accuracy checks.
+#define B_CRASH_IF_TARGET_IMMUNE    GEN_6 // In Gen4+, The user of Jump Kick or Hi Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
 
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_6 // In Gen5+, weather caused by abilities lasts the same amount of turns as induced from a move. Before, they lasted till the battle's end or weather change by a move.

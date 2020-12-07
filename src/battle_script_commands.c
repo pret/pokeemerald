@@ -8606,6 +8606,9 @@ static void Cmd_manipulatedamage(void)
     case DMG_1_2_ATTACKER_HP:
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
         break;
+    case DMG_RECOIL_FROM_IMMUNE:
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+        break;
     }
 
     gBattlescriptCurrInstr += 2;
