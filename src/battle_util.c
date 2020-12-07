@@ -4627,17 +4627,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             break;
         case ABILITY_COTTON_DOWN:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && gBattleMons[gBattlerTarget].hp != 0
+             && gBattleMons[gBattlerAttacker].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED)
             {
-                for (i = 0; i < gBattlersCount; i++)
-                {
-                    gBattlerAttacker = i;
-                    BattleScriptPushCursorAndCallback(BattleScript_CottonDownActivates);
-                    effect++;
-                    break;
-                }
+                gEffectBattler = gBattlerTarget;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_CottonDownActivates;
+                effect++;
             }
             break;
         }

@@ -6196,23 +6196,28 @@ BattleScript_IllusionOff::
 	return
 
 BattleScript_CottonDownActivates::
-	setbyte gBattlerTarget, 0x1
+	call BattleScript_AbilityPopUp
+	copybyte gEffectBattler, gBattlerTarget
+	savetarget
+	setbyte gBattlerTarget, 0x0
 BattleScript_CottonDownLoop:
 	setstatchanger STAT_SPEED, 1, TRUE
-	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | STAT_BUFF_ALLOW_PTR, BattleScript_CottonDownActivatesLoopIncrement
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_CottonDownEnd
-	call BattleScript_AbilityPopUp
+	jumpifbyteequal gBattlerTarget, gEffectBattler, BattleScript_CottonDownLoopIncrement
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_CottonDownTargetSpeedCantGoLower
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	setbyte gBattleCommunication STAT_SPEED
-	stattextbuffer BS_TARGET
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
-BattleScript_CottonDownActivatesLoopIncrement:
+	goto BattleScript_CottonDownLoopIncrement
+BattleScript_CottonDownTargetSpeedCantGoLower:
+	printstring STRINGID_STATSWONTDECREASE
+	waitmessage 0x40
+BattleScript_CottonDownLoopIncrement:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CottonDownLoop
-BattleScript_CottonDownEnd:
-	end3
+BattleScript_CottonDownReturn:
+	restoretarget
+	return
 
 BattleScript_AnticipationActivates::
 	pause 0x5
