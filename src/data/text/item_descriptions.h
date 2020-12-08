@@ -3000,7 +3000,11 @@ static const u8 sSolganiumZDesc[] = _(
     "into a Z-Move.");
 
 static const u8 sTapuniumZDesc[] = _(
-    "Upgrade the Tapus'\n"
+    "Upgrade the tapu's\n"
     "Nature's Madness\n"
     "into a Z-Move.");
 
+static const u8 sUltranecroziumZDesc[] = _(
+    "Upgrade Necrozma's\n"
+    "Photon Geyser\n"
+    "into a Z-Move.");

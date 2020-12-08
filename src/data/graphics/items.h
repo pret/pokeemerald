@@ -1627,3 +1627,6 @@ const u32 gItemIconPalette_SolganiumZ[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_TapuniumZ[] = INCBIN_U32("graphics/items/icons/tapunium_z.4bpp.lz");
 const u32 gItemIconPalette_TapuniumZ[] = INCBIN_U32("graphics/items/icon_palettes/tapunium_z.gbapal.lz");
 
+const u32 gItemIcon_UltranecroziumZ[] = INCBIN_U32("graphics/items/icons/ultranecrozium_z.4bpp.lz");
+const u32 gItemIconPalette_UltranecroziumZ[] = INCBIN_U32("graphics/items/icon_palettes/ultranecrozium_z.gbapal.lz");
+

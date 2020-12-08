@@ -4473,6 +4473,8 @@ extern const u32 gItemIcon_SolganiumZ[];
 extern const u32 gItemIconPalette_SolganiumZ[];
 extern const u32 gItemIcon_TapuniumZ[];
 extern const u32 gItemIconPalette_TapuniumZ[];
+extern const u32 gItemIcon_UltranecroziumZ[];
+extern const u32 gItemIconPalette_UltranecroziumZ[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];

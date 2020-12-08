@@ -692,8 +692,9 @@
 #define ITEM_SNORLIUM_Z               600
 #define ITEM_SOLGANIUM_Z              601
 #define ITEM_TAPUNIUM_Z               602
+#define ITEM_ULTRANECROZIUM_Z         603
 
-#define ITEMS_COUNT 603
+#define ITEMS_COUNT 604
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 #define FIRST_BERRY_INDEX             ITEM_CHERI_BERRY
