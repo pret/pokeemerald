@@ -123,6 +123,8 @@
 // Item settings
 #define B_HP_BERRIES                GEN_6 // In Gen4+, berries which restore hp activate immediately after hp drops to half. In gen3, the effect occurs at the end of the turn.
 #define B_BERRIES_INSTANT           GEN_6 // In Gen4+, most berries activate on battle start/switch-in if applicable. In gen3, they only activate either at the move end or turn end.
+#define X_ITEMS_REWORK              FALSE // This flag changes the way in which X Items' effects are implemented in the code and relies on the item_expansion to work.
+#define B_X_ITEMS_BUFF              GEN_7 // In Gen7+, the X Items raise a stat by 2 stages instead of 1. This flag relies on X_ITEMS_REWORK, and by extension, the item_expansion.
 
 // Flag settings.
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to. Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag for toggling the feature.
