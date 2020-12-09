@@ -3432,7 +3432,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             srcID += 2;
             break;
         case B_BUFF_ABILITY: // ability names
-            StringAppend(dst, gAbilityNames[src[srcID + 1]]);
+            StringAppend(dst, gAbilityNames[T1_READ_16(&src[srcID + 1])]);
             srcID += 3;
             break;
         case B_BUFF_ITEM: // item name
