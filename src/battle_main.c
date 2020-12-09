@@ -2941,6 +2941,9 @@ static void BattleStartClearSetData(void)
     gBattleStruct->arenaLostOpponentMons = 0;
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
+    
+    for (i = 0; i < PARTY_SIZE; i++)
+        gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 }
 
 void SwitchInClearSetData(void)

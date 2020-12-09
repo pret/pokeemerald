@@ -26,6 +26,7 @@ u32 IsFlowerVeilProtected(u32 battler);
 u32 IsLeafGuardProtected(u32 battler);
 bool32 IsShieldsDownProtected(u32 battler);
 u32 IsAbilityStatusProtected(u32 battler);
+void StealTargetItem(u8 battlerStealer, u8 battlerItem);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];

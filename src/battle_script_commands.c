@@ -2369,33 +2369,30 @@ static void CheckSetUnburden(u8 battlerId)
     }
 }
 
-//slight difference in thief/pickpocket requires this
-static void StealTargetItem(void)
-{    
-    gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
-    gBattleMons[gBattlerTarget].item = 0;
+// battlerStealer steals the item of battlerItem
+void StealTargetItem(u8 battlerStealer, u8 battlerItem)
+{ 
+    gLastUsedItem = gBattleMons[battlerItem].item;
+    gBattleMons[battlerItem].item = 0;
     
-    RecordItemEffectBattle(gBattlerTarget, 0);
-    RecordItemEffectBattle(gBattlerAttacker, ItemId_GetHoldEffect(gLastUsedItem));
-    //item assignment doesn't happen yet for thief
+    RecordItemEffectBattle(battlerItem, 0);
+    RecordItemEffectBattle(battlerStealer, ItemId_GetHoldEffect(gLastUsedItem));
+    gBattleMons[battlerStealer].item = gLastUsedItem;
     
-    CheckSetUnburden(gBattlerTarget);
-    gBattleResources->flags->flags[gBattlerAttacker] &= ~(RESOURCE_FLAG_UNBURDEN);
+    CheckSetUnburden(battlerItem);
+    gBattleResources->flags->flags[battlerStealer] &= ~(RESOURCE_FLAG_UNBURDEN);
 
-    gActiveBattler = gBattlerAttacker;
-    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
-    MarkBattlerForControllerExec(gBattlerAttacker);
+    gActiveBattler = battlerStealer;
+    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem); // set attacker item
+    MarkBattlerForControllerExec(battlerStealer);
 
-    gActiveBattler = gBattlerTarget;
-    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gBattlerTarget].item);
-    MarkBattlerForControllerExec(gBattlerTarget);
+    gActiveBattler = battlerItem;
+    BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[battlerItem].item);  // remove target item
+    MarkBattlerForControllerExec(battlerItem);
     
-    gBattleStruct->choicedMove[gBattlerTarget] = 0;
+    gBattleStruct->choicedMove[battlerItem] = 0;
     
-    #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-            gBattleStruct->itemStolen[gBattlerPartyIndexes[gBattlerTarget]] = gLastUsedItem;
-    #endif
+    TrySaveExchangedItem(battlerItem, gLastUsedItem);
 }
 
 #define INCREMENT_RESET_RETURN                  \
@@ -2951,7 +2948,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
                 {
-                    if (!CanStealItem(gBattlerAttacker, gBattleMons[gBattlerTarget].item))
+                    if (!CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item))
                     {
                         gBattlescriptCurrInstr++;
                         break;
@@ -2966,14 +2963,15 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     }
                     else if (gBattleMons[gBattlerAttacker].item != 0
                         || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY
-                        || IS_ITEM_MAIL(gBattleMons[gBattlerTarget].item)
                         || gBattleMons[gBattlerTarget].item == 0)
                     {
                         gBattlescriptCurrInstr++;
                     }
                     else
                     {
-                        StealTargetItem();
+                        StealTargetItem(gBattlerAttacker, gBattlerTarget);  //attacker steals target item
+                        gBattleMons[gBattlerAttacker].item = 0; //item assigned later on with thief (see MOVEEND_CHANGED_ITEMS)
+                        gBattleStruct->changedItems[gBattlerAttacker] = gLastUsedItem; // stolen item to be assigned later
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
                     }
@@ -5014,29 +5012,33 @@ static void Cmd_moveend(void)
             break;
         case MOVEEND_PICKPOCKET:
             if (IsBattlerAlive(gBattlerAttacker)
-              && GetBattlerAbility(gBattlerAttacker) != ABILITY_STICKY_HOLD
-              && gBattleMons[gBattlerAttacker].item != ITEM_NONE    //attacker must be holding an item
-              && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))     //pickpocket doesn't activate for sheer force
-              && IsMoveMakingContact(gCurrentMove, gBattlerAttacker) //pickpocket requires contact
-              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))     //obviously attack needs to have worked
+              && gBattleMons[gBattlerAttacker].item != ITEM_NONE        // attacker must be holding an item
+              && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))  // pickpocket doesn't activate for sheer force
+              && IsMoveMakingContact(gCurrentMove, gBattlerAttacker)    // pickpocket requires contact
+              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))           // obviously attack needs to have worked
             {
                 u8 battlers[4] = {0, 1, 2, 3};
-                SortBattlersBySpeed(battlers, FALSE); //pickpocket activates for fastest mon without item
+                SortBattlersBySpeed(battlers, FALSE); // pickpocket activates for fastest mon without item
                 for (i = 0; i < gBattlersCount; i++)
                 {
                     u8 battler = battlers[i];
-                    //attacker is mon who made contact, battler is mon with pickpocket
-                    if (battler != gBattlerAttacker     //cannot pickpocket yourself
-                      && GetBattlerAbility(battler) == ABILITY_PICKPOCKET    //'target' must have pickpocket ability
-                      && BATTLER_DAMAGED(battler)    //obviously battler needs to have been damaged as well
-                      && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)  //subsitute unaffected
-                      && IsBattlerAlive(battler)   //battler must be alive to pickpocket
-                      && gBattleMons[battler].item == ITEM_NONE //pickpocketer can't have an item already
-                      && CanStealItem(battler, gBattleMons[gBattlerAttacker].item))  //cannot steal plates, mega stones, etc
+                    // attacker is mon who made contact, battler is mon with pickpocket
+                    if (battler != gBattlerAttacker                                                     // cannot pickpocket yourself
+                      && GetBattlerAbility(battler) == ABILITY_PICKPOCKET                               // 'target' must have pickpocket ability
+                      && BATTLER_DAMAGED(battler)                                                       // target needs to have been damaged
+                      && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)              // subsitute unaffected
+                      && IsBattlerAlive(battler)                                                        // battler must be alive to pickpocket
+                      && gBattleMons[battler].item == ITEM_NONE                                         // pickpocketer can't have an item already
+                      && CanStealItem(battler, gBattlerAttacker, gBattleMons[gBattlerAttacker].item))   // cannot steal plates, mega stones, etc
                     {
                         gBattlerTarget = gBattlerAbility = battler;
+                        // battle scripting is super brittle so we shall do the item exchange now (if possible)
+                        if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STICKY_HOLD)
+                            StealTargetItem(gBattlerTarget, gBattlerAttacker);  // target takes attacker's item
+                        
+                        gEffectBattler = gBattlerAttacker;
                         BattleScriptPushCursor();
-                        gBattlescriptCurrInstr = BattleScript_Pickpocket;
+                        gBattlescriptCurrInstr = BattleScript_Pickpocket;   // includes sticky hold check to print separate string
                         effect = TRUE;
                         break; // pickpocket activates on fastest mon, so exit loop.
                     }
@@ -8322,14 +8324,8 @@ static void Cmd_various(void)
         }
         return;
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
-        ItemBattleEffects(1, gActiveBattler, FALSE);
-        break;
-    case VARIOUS_PICKPOCKET:
-        {
-            gBattleScripting.battler = gBattlerAttacker;
-            StealTargetItem();
-            gBattleMons[gBattlerAttacker].item = gLastUsedItem;
-        }
+        if (ItemBattleEffects(1, gActiveBattler, FALSE))
+            return;
         break;
     }
 
@@ -11126,15 +11122,14 @@ static void Cmd_tryswapitems(void) // trick
             PREPARE_ITEM_BUFFER(gBattleTextBuff1, *newItemAtk)
             PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
             
-            #if B_TRAINERS_KNOCK_OFF_ITEMS
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            if (!(sideAttacker == sideTarget && IsPartnerMonFromSameTrainer(gBattlerAttacker)))
             {
+                // if targeting your own side and you aren't in a multi battle, don't save items as stolen
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    gBattleStruct->itemStolen[gBattlerPartyIndexes[gBattlerAttacker]] = oldItemAtk;
+                    TrySaveExchangedItem(gBattlerAttacker, oldItemAtk);
                 if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-                    gBattleStruct->itemStolen[gBattlerPartyIndexes[gBattlerTarget]] = *newItemAtk;
+                    TrySaveExchangedItem(gBattlerTarget, *newItemAtk);
             }
-            #endif
 
             if (oldItemAtk != 0 && *newItemAtk != 0)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2; // attacker's item -> <- target's item

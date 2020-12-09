@@ -7700,10 +7700,25 @@ BattleScript_AnnounceAirLockCloudNine::
 
 BattleScript_Pickpocket::
 	call BattleScript_AbilityPopUp
-	setmoveeffect MOVE_EFFECT_STEAL_ITEM
+	jumpifability BS_ATTACKER, ABILITY_STICKY_HOLD, BattleScript_PickpocketPrevented
 	swapattackerwithtarget
-	pickpocketsteal
 	call BattleScript_ItemSteal
 	swapattackerwithtarget
 	activateitemeffects BS_TARGET
 	return
+
+BattleScript_PickpocketPrevented:
+	pause 0x20
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ITEMCANNOTBEREMOVED
+	waitmessage 0x40
+	return
+
+BattleScript_StickyBarbTransfer::
+	playanimation BS_TARGET, B_ANIM_ITEM_STEAL, NULL
+	printstring STRINGID_STICKYBARBTRANSFER
+	waitmessage 0x40
+	removeitem BS_TARGET
+	return
+	
