@@ -7103,12 +7103,12 @@ BattleScript_MummyActivates::
 	waitmessage 0x40
 	return
 
-BattleScript_AngryPointActivates::
+BattleScript_TargetsStatWasMaxedOut::
 	call BattleScript_AbilityPopUp
 	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring STRINGID_ANGRYPOINTACTIVATES
+	printstring STRINGID_TARGETSSTATWASMAXEDOUT
 	waitmessage 0x40
 	return
 
