@@ -234,7 +234,7 @@ bool8 SetUpFieldMove_Cut(void)
                         tileCuttable = FALSE;
                         break;
                     }
-                }
+                } while (++j <= 1);
 
                 if (tileCuttable == TRUE)
                 {
@@ -250,8 +250,11 @@ bool8 SetUpFieldMove_Cut(void)
                             sHyperCutTiles[tileArrayId] = TRUE;
                             ret = TRUE;
                         }
-                        else if (MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
-                            sHyperCutTiles[tileArrayId] = TRUE;
+                        else
+                        {
+                            if (MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
+                                sHyperCutTiles[tileArrayId] = TRUE;
+                        }
                     }
                 }
             }
