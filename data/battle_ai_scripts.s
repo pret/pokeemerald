@@ -21,29 +21,7 @@ gBattleAI_ScriptsTable:: @ 82DBEF8
 	.4byte AI_PreferBatonPass       @ AI_SCRIPT_PREFER_BATON_PASS
 	.4byte AI_DoubleBattle 	        @ AI_SCRIPT_DOUBLE_BATTLE
 	.4byte AI_HPAware               @ AI_SCRIPT_HP_AWARE
-	.4byte AI_Unknown               @ AI_SCRIPT_UNKNOWN
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Ret
-	.4byte AI_Roaming               @ AI_SCRIPT_ROAMING
-	.4byte AI_Safari                @ AI_SCRIPT_SAFARI
-	.4byte AI_FirstBattle           @ AI_SCRIPT_FIRST_BATTLE
+
 
 AI_CheckBadMove:
 	if_target_is_ally AI_Ret
@@ -4140,47 +4118,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP: @ 82DE2B1
     .byte EFFECT_DRAGON_DANCE
     .byte -1
 
-AI_Unknown:
-	if_target_is_ally AI_TryOnAlly
-	if_not_effect EFFECT_SUNNY_DAY, AI_Unknown_End
-	if_equal 0, AI_Unknown_End
-	is_first_turn_for AI_USER
-	if_equal 0, AI_Unknown_End
-	score +5
 
-AI_Unknown_End: @ 82DE308
-	end
-
-AI_Roaming:
-	if_status2 AI_USER, STATUS2_WRAPPED, AI_Roaming_End
-	if_status2 AI_USER, STATUS2_ESCAPE_PREVENTION, AI_Roaming_End
-	get_ability AI_TARGET
-	if_equal ABILITY_SHADOW_TAG, AI_Roaming_End
-	get_ability AI_USER
-	if_equal ABILITY_LEVITATE, AI_Roaming_Flee
-	get_ability AI_TARGET
-	if_equal ABILITY_ARENA_TRAP, AI_Roaming_End
-
-AI_Roaming_Flee: @ 82DE335
-	flee
-
-AI_Roaming_End: @ 82DE336
-	end
-
-AI_Safari:
-	if_random_safari_flee AI_Safari_Flee
-	watch
-
-AI_Safari_Flee:
-	flee
-
-AI_FirstBattle:
-	if_hp_equal AI_TARGET, 20, AI_FirstBattle_Flee
-	if_hp_less_than AI_TARGET, 20, AI_FirstBattle_Flee
-	end
-
-AI_FirstBattle_Flee:
-	flee
 
 AI_Ret:
 	end

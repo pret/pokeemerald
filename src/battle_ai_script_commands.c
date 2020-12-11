@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_ai_util.h"
 #include "battle_ai_script_commands.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
@@ -187,18 +188,18 @@ EWRAM_DATA static u8 sBattler_AI = 0;
 // const rom data
 typedef void (*BattleAICmdFunc)(void);
 
-static u8 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
-static u8 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
+static u8 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalScore);
 
 static u8 (*const sBattleAiFuncTable[])(u8, u8, u16, u8) =
 {
@@ -2933,53 +2934,79 @@ static void Cmd_if_has_move_with_accuracy_lt(void)
 
 
 // AI Functions
-static u8 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
 }
 
-static u8 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static void AI_Flee(void)
 {
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_FLEE | AI_ACTION_DO_NOT_ATTACK);
 }
 
-static u8 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static void AI_Watch(void)
 {
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK);
 }
 
-static u8 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+static u8 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
 {
+    if (IsBattlerTrapped(battlerAtk, FALSE))
+        return originalScore;
     
+    AI_Flee();
+    return originalScore;
+}
+
+static u8 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
+{
+    u8 safariFleeRate = gBattleStruct->safariEscapeFactor * 5; // Safari flee rate, from 0-20.
+
+	if ((Random() % 100) < safariFleeRate)
+		AI_Flee();
+	else
+		AI_Watch();
+
+	return originalScore;
+}
+
+static u8 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 move, u8 originalScore)
+{
+    if (GetHealthPercentage(battlerDef) <= 20)
+		AI_Flee();
+
+	return originalScore;
 }
 
 
