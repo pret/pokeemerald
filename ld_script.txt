@@ -590,6 +590,7 @@ SECTIONS {
         src/slot_machine.o(.rodata);
         src/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
+		src/battle_ai_util.o(.rodata);
         src/trader.o(.rodata);
         src/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);

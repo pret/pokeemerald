@@ -294,6 +294,9 @@ struct BattleResources
     u8 bufferB[MAX_BATTLERS_COUNT][0x200];
 };
 
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
+#define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
+
 struct BattleResults
 {
     u8 playerFaintCounter;    // 0x0
