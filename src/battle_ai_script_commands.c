@@ -187,6 +187,55 @@ EWRAM_DATA static u8 sBattler_AI = 0;
 // const rom data
 typedef void (*BattleAICmdFunc)(void);
 
+static u8 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+static u8 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability);
+
+static u8 (*const sBattleAiFuncTable[])(u8, u8, u16, u8) =
+{
+	[0] = AI_CheckBadMove,           // AI_SCRIPT_CHECK_BAD_MOVE
+	[1] = AI_TryToFaint,             // AI_SCRIPT_TRY_TO_FAINT
+	[2] = AI_CheckViability,         // AI_SCRIPT_CHECK_VIABILITY
+	[3] = AI_SetupFirstTurn,         // AI_SCRIPT_SETUP_FIRST_TURN
+	[4] = AI_Risky,                  // AI_SCRIPT_RISKY
+	[5] = AI_PreferStrongestMove,    // AI_SCRIPT_PREFER_STRONGEST_MOVE
+	[6] = AI_PreferBatonPass,        // AI_SCRIPT_PREFER_BATON_PASS
+	[7] = AI_DoubleBattle, 	        // AI_SCRIPT_DOUBLE_BATTLE
+	[8] = AI_HPAware,                // AI_SCRIPT_HP_AWARE
+	[9] = NULL,                      // Unused
+    [10] = NULL,                     // Unused
+    [11] = NULL,                     // Unused
+    [12] = NULL,                     // Unused
+    [13] = NULL,                     // Unused
+    [14] = NULL,                     // Unused
+    [15] = NULL,                     // Unused
+    [16] = NULL,                     // Unused
+    [17] = NULL,                     // Unused
+    [18] = NULL,                     // Unused
+    [19] = NULL,                     // Unused
+    [20] = NULL,                     // Unused
+    [21] = NULL,                     // Unused
+    [22] = NULL,                     // Unused
+    [23] = NULL,                     // Unused
+    [24] = NULL,                     // Unused
+    [25] = NULL,                     // Unused
+    [26] = NULL,                     // Unused
+    [27] = NULL,                     // Unused
+    [28] = NULL,                     // Unused   
+	[29] = AI_Roaming,              // AI_SCRIPT_ROAMING
+	[30] = AI_Safari,               // AI_SCRIPT_SAFARI
+	[31] = AI_FirstBattle,          // AI_SCRIPT_FIRST_BATTLE
+};
+
 static const BattleAICmdFunc sBattleAICmdTable[] =
 {
     Cmd_if_random_less_than,                        // 0x0
@@ -711,9 +760,17 @@ static void BattleAI_DoAIProcessing(void)
                 AI_THINKING_STRUCT->aiState++;
                 break;
             case AIState_Processing:
-                if (AI_THINKING_STRUCT->moveConsidered != 0)
-                {
-                    sBattleAICmdTable[*gAIScriptPtr](); // Run AI command.
+                if (AI_THINKING_STRUCT->moveConsidered != MOVE_NONE 
+                  && AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] > 0)
+                  {
+                        if (AI_THINKING_STRUCT->aiLogicId < ARRAY_COUNT(sBattleAiFuncTable)
+                          && sBattleAiFuncTable[AI_THINKING_STRUCT->aiLogicId] != NULL)
+                        {
+                        AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = sBattleAiFuncTable[AI_THINKING_STRUCT->aiLogicId](gBattlerAttacker,
+                          gBattlerTarget,
+                          AI_THINKING_STRUCT->moveConsidered,
+                          AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex]); //Run AI script
+                    }
                 }
                 else
                 {
@@ -2869,3 +2926,68 @@ static void Cmd_if_has_move_with_accuracy_lt(void)
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
 }
+
+
+
+
+
+
+// AI Functions
+static u8 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+}
+
+static u8 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 originalMove, u8 originalViability)
+{
+    
+}
+
+
+
+
+
+
+
+
+
+
