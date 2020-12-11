@@ -6738,6 +6738,15 @@ BattleScript_SandstreamActivates::
 	call BattleScript_WeatherFormChanges
 	end3
 
+BattleScript_SandSpitActivates::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ASANDSTORMKICKEDUP
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES, NULL
+	call BattleScript_WeatherFormChanges
+	return
+
 BattleScript_ShedSkinActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNSXCUREDYPROBLEM

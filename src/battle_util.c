@@ -4650,6 +4650,19 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_SAND_SPIT:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && TARGET_TURN_DAMAGED
+             && !(WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY)
+             && TryChangeBattleWeather(battler, ENUM_WEATHER_SANDSTORM, TRUE))
+            {
+                gBattleScripting.battler = gActiveBattler = battler;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_SandSpitActivates;
+                effect++;
+            }
+            break;
         }
         break;
     case ABILITYEFFECT_MOVE_END_ATTACKER: // Same as above, but for attacker
