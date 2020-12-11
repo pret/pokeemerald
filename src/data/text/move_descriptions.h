@@ -2910,6 +2910,38 @@ static const u8 sSURGING_STRIKESDescription[] = _(
     "Mastering the Water style,\n"
     "strikes with 3 critical hits.");
 
+static const u8 sTHUNDER_CAGEDescription[] = _(
+    "Traps the foe in a cage of\n"
+    "electricity for 2 to 5 turns.");
+
+static const u8 sDRAGON_ENERGYDescription[] = _(
+    "The higher the user's HP\n"
+    "the more damage caused.");
+
+static const u8 sFREEZING_GLAREDescription[] = _(
+    "Shoots psychic power from\n"
+    "the eyes. May freeze the foe.");
+
+static const u8 sFIERY_WRATHDescription[] = _(
+    "An attack fueled by your\n"
+    "wrath. May cause flinching.");
+
+static const u8 sTHUNDEROUS_KICKDescription[] = _(
+    "Uses a lightning-like kick\n"
+    "to hit. Lowers foe's DEFENSE.");
+
+static const u8 sGLACIAL_LANCEDescription[] = _(
+    "Strikes by hurling a blizzard-\n"
+    "cloaked icicle lance at a foe.");
+
+static const u8 sASTRAL_BARRAGEDescription[] = _(
+    "Strikes by sending a frightful\n"
+    "amount of ghosts at a foe.");
+
+static const u8 sEERIE_SPELLDescription[] = _(
+    "Eeriely inflicts damage and\n"
+    "cuts a foe's las move's PP.");
+
 static const u8 sNotDoneYetDescription[] = _(
     "Not done yet.");
 
@@ -3664,5 +3696,12 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_JUNGLE_HEALING - 1] = sJUNGLE_HEALINGDescription,
     [MOVE_WICKED_BLOW - 1] = sWICKED_BLOWDescription,
     [MOVE_SURGING_STRIKES - 1] = sSURGING_STRIKESDescription,
-
+    [MOVE_THUNDER_CAGE - 1] = sTHUNDER_CAGEDescription,
+    [MOVE_DRAGON_ENERGY - 1] = sDRAGON_ENERGYDescription,
+    [MOVE_FREEZING_GLARE - 1] = sFREEZING_GLAREDescription,
+    [MOVE_FIERY_WRATH - 1] = sFIERY_WRATHDescription,
+    [MOVE_THUNDEROUS_KICK - 1] = sTHUNDEROUS_KICKDescription,
+    [MOVE_GLACIAL_LANCE - 1] = sGLACIAL_LANCEDescription,
+    [MOVE_ASTRAL_BARRAGE - 1] = sASTRAL_BARRAGEDescription,
+    [MOVE_EERIE_SPELL - 1] = sEERIE_SPELLDescription,
 };

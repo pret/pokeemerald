@@ -6581,6 +6581,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (gBattleMoves[gLastUsedMove].effect == EFFECT_FUSION_COMBO && move != gLastUsedMove)
             basePower *= 2;
         break;
+    case EFFECT_DRAGON_ENERGY:
+        basePower = 150 * gBattleMons[battlerAtk].hp / gBattleMons[battlerAtk].maxHP;
+        break;
     }
 
     if (basePower == 0)

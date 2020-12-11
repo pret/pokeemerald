@@ -748,4 +748,12 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_JUNGLE_HEALING] = _("Jungle Heal"),
     [MOVE_WICKED_BLOW] = _("Wicked Blow"),
     [MOVE_SURGING_STRIKES] = _("SurgeStrikes"),
+    [MOVE_THUNDER_CAGE] = _("Thunder Cage"),
+    [MOVE_DRAGON_ENERGY] = _("DragonEnergy"),
+    [MOVE_FREEZING_GLARE] = _("FreezngGlare"),
+    [MOVE_FIERY_WRATH] = _("Fiery Wrath"),
+    [MOVE_THUNDEROUS_KICK] = _("ThnderusKick"),
+    [MOVE_GLACIAL_LANCE] = _("GlacialLance"),
+    [MOVE_ASTRAL_BARRAGE] = _("AstrlBarrage"),
+    [MOVE_EERIE_SPELL] = _("Eerie Spell"),
 };
