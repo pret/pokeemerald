@@ -22,7 +22,6 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
-#include "constants/species.h"
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);
@@ -549,7 +548,12 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     {
         // Randomly pick an IV from the available list and stop from being chosen again.
         selectedIvs[i] = availableIVs[Random() % (NUM_STATS - i)];
-        RemoveIVIndexFromList(availableIVs, i);
+        // BUG: Instead of removing the IV that was just picked (like in RS and FRLG), this
+        // removes position 0 (HP) then position 1 (DEF), then position 2. This is why HP and DEF
+        // have a lower chance to be inherited in Emerald and why the IV picked for inheritance can
+        // be repeated. Uncomment the inline comment and remove the existing expression to get the
+        // intended behavior and  to match the other Gen 3 games. 
+        RemoveIVIndexFromList(availableIVs, i /*selectedIvs[i]*/);
     }
 
     // Determine which parent each of the selected IVs should inherit from.
@@ -1183,7 +1187,7 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
     printer.y = y;
     printer.currentX = x;
     printer.currentY = y;
-    printer.style = 0;
+    printer.unk = 0;
     gTextFlags.useAlternateDownArrow = 0;
     printer.letterSpacing = 0;
     printer.lineSpacing = 1;

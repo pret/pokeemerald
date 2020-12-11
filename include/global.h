@@ -8,6 +8,7 @@
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
+#include "constants/species.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -65,8 +66,6 @@
 // Converts a Q24.8 fixed-point format number to a regular integer
 #define Q_24_8_TO_INT(n) ((int)((n) >> 8))
 
-#define POKEMON_SLOTS_NUMBER 412
-
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
@@ -99,7 +98,7 @@
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
 // Macros for checking the joypad
-#define TEST_BUTTON(field, button) ((field) & (button))
+#define TEST_BUTTON(field, button) ({(field) & (button);})
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
 #define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
 #define JOY_HELD_RAW(button) TEST_BUTTON(gMain.heldKeysRaw, button)
@@ -115,7 +114,7 @@
 
 #define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
 
-#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER))
+#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(NUM_SPECIES))
 #define NUM_FLAG_BYTES (ROUND_BITS_TO_BYTES(FLAGS_COUNT))
 
 struct Coords8
@@ -329,11 +328,12 @@ struct BattleDomeTrainer
 };
 
 #define DOME_TOURNAMENT_TRAINERS_COUNT 16
+#define BATTLE_TOWER_RECORD_COUNT 5
 
 struct BattleFrontier
 {
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
-    /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[5]; // From record mixing.
+    /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
     /*0xBEB*/ struct BattleTowerInterview towerInterview;
     /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0xCA8*/ u8 challengeStatus;

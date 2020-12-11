@@ -30,7 +30,6 @@
 #include "constants/coins.h"
 #include "constants/rgb.h"
 #include "constants/roulette.h"
-#include "constants/species.h"
 #include "constants/songs.h"
 
 #define BALLS_PER_ROUND 6

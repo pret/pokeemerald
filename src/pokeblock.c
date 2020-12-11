@@ -430,7 +430,7 @@ static const struct ListMenuTemplate sPokeblockListMenuTemplate =
 // code
 void OpenPokeblockCase(u8 caseId, void (*callback)(void))
 {
-    sPokeblockMenu = Alloc(sizeof(struct PokeblockMenuStruct));
+    sPokeblockMenu = Alloc(sizeof(*sPokeblockMenu));
     sPokeblockMenu->caseId = caseId;
     sPokeblockMenu->callbackOnUse = NULL;
     sPokeblockMenu->unkTaskId = 0xFF;

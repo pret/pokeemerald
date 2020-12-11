@@ -397,16 +397,16 @@ static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)
             {
                 for (pixelX = 0; pixelX < 8; pixelX++)
                 {
-                    colorIndex = spriteGfx[((tileY * 8) + tileX) * 32 + (pixelY << 2) + (pixelX >> 1)];
+                    colorIndex = spriteGfx[32 * (tileY * 8 + tileX) + (pixelY << 2) + (pixelX >> 1)];
                     if (pixelX & 1)
                         colorIndex >>= 4;
                     else
-                        colorIndex &= 0xF; // %=16 works here too. Both match
+                        colorIndex &= 0xF;
 
-                    if (colorIndex == 0)   // transparent pixel
-                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = 0x8000;
+                    if (colorIndex == 0) // transparent pixel
+                        (*destPixels)[8 * tileY + pixelY][tileX * 8 + pixelX] = 0x8000;
                     else
-                        (*destPixels)[tileY * 8 + pixelY][tileX * 8 + pixelX] = palette[colorIndex];
+                        (*destPixels)[8 * tileY + pixelY][tileX * 8 + pixelX] = palette[colorIndex];
                 }
             }
         }
@@ -501,7 +501,6 @@ static void LoadContestPaintingFrame(u8 contestWinnerId, bool8 arg1)
 
 static void InitPaintingMonOamData(u8 contestWinnerId)
 {
-
     gMain.oamBuffer[0] = sContestPaintingMonOamData;
     gMain.oamBuffer[0].tileNum = 0;
 
@@ -512,7 +511,7 @@ static void InitPaintingMonOamData(u8 contestWinnerId)
     }
     else
     {
-        gMain.oamBuffer[0].x = 88; // Duplicated Code
+        gMain.oamBuffer[0].x = 88; // Duplicated code
         gMain.oamBuffer[0].y = 24;
     }
 }
