@@ -1188,7 +1188,7 @@ void CgbSound(void)
         }
 
         /* 4. apply envelope & volume to HW registers */
-        if (channels->modify & CGB_CHANNEL_MO_VOL  )
+        if (channels->modify & CGB_CHANNEL_MO_VOL)
         {
             REG_NR51 = (REG_NR51 & ~channels->panMask) | channels->pan;
             if (ch == 3)
