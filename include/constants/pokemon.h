@@ -241,10 +241,10 @@
 // Battle move flags
 #define FLAG_MAKES_CONTACT          (1 << 0)
 #define FLAG_PROTECT_AFFECTED       (1 << 1)
-#define FLAG_MAGICCOAT_AFFECTED     (1 << 2)
+#define FLAG_MAGIC_COAT_AFFECTED    (1 << 2)
 #define FLAG_SNATCH_AFFECTED        (1 << 3)
 #define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
-#define FLAG_KINGSROCK_AFFECTED     (1 << 5)
+#define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
