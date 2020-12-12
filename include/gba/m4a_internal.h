@@ -195,7 +195,7 @@ struct SoundInfo
     u8 freq;
 
     u8 mode;
-    u8 c15;          // periodically counts from 14 downto 0 (15 states)
+    u8 c15;          // periodically counts from 14 down to 0 (15 states)
     u8 pcmDmaPeriod; // number of V-blanks per PCM DMA
     u8 maxLines;
     u8 gap[3];
