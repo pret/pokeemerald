@@ -1613,8 +1613,10 @@ static void Cmd_if_status_not_in_party(void)
 
         if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
         {
-            gAIScriptPtr += 10; // UB: Still bugged in Emerald. Uncomment the return statement to fix.
-            // return;
+            gAIScriptPtr += 10;
+            #ifdef BUGFIX
+            return;
+            #endif
         }
     }
 

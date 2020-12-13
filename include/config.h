@@ -15,9 +15,6 @@
 // printing system. Use NoCashGBAPrint() and NoCashGBAPrintf() like you
 // would normally use AGBPrint() and AGBPrintf().
 
-// NOTE: Don't try to enable assert right now as many pointers
-// still exist in defines and WILL likely result in a broken ROM.
-
 #define ENGLISH
 
 #ifdef ENGLISH
@@ -33,5 +30,8 @@
 #define UBFIX
 #endif
 #endif
+
+// Uncomment to fix some identified minor bugs
+//#define BUGFIX
 
 #endif // GUARD_CONFIG_H
