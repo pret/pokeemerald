@@ -22,6 +22,7 @@ gBattleAI_ScriptsTable:: @ 82DBEF8
 	.4byte AI_DoubleBattle 	        @ AI_SCRIPT_DOUBLE_BATTLE
 	.4byte AI_HPAware               @ AI_SCRIPT_HP_AWARE
 
+AI_TryToFaint:
 
 AI_CheckBadMove:
 	if_target_is_ally AI_Ret
@@ -3402,36 +3403,7 @@ AI_CV_DragonDance2:
 AI_CV_DragonDance_End:
 	end
 
-AI_TryToFaint:
-	if_target_is_ally AI_Ret
-	if_can_faint AI_TryToFaint_Can
-	get_how_powerful_move_is
-	if_equal MOVE_POWER_DISCOURAGED, Score_Minus1
-AI_TryToFaint2:
-	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_TryToFaint_DoubleSuperEffective
-	goto AI_TryToFaint_CheckIfDanger
-AI_TryToFaint_DoubleSuperEffective:
-	if_random_less_than 80, AI_TryToFaint_CheckIfDanger
-	score +2
-	goto AI_TryToFaint_CheckIfDanger
-AI_TryToFaint_Can:
-	if_effect EFFECT_EXPLOSION, AI_TryToFaint_CheckIfDanger
-	if_user_faster AI_TryToFaint_ScoreUp4
-	if_move_flag FLAG_HIGH_CRIT, AI_TryToFaint_ScoreUp4
-	score +2
-	goto AI_TryToFaint_CheckIfDanger
-AI_TryToFaint_ScoreUp4:
-	score +4
-AI_TryToFaint_CheckIfDanger:
-	if_user_faster AI_TryToFaint_End
-	if_ai_can_go_down AI_TryToFaint_Danger
-AI_TryToFaint_End:
-	end
-AI_TryToFaint_Danger:
-	get_how_powerful_move_is
-	if_not_equal MOVE_POWER_BEST, Score_Minus1
-	score +1
-	goto AI_TryToFaint_End
+
 
 AI_SetupFirstTurn:
 	if_target_is_ally AI_Ret

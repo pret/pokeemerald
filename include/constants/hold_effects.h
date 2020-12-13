@@ -136,6 +136,14 @@
 #define HOLD_EFFECT_MEMORY           153
 #define HOLD_EFFECT_PLATE            154
 
+// Gen8 hold effects
+#define HOLD_EFFECT_UTILITY_UMBRELLA    155
+#define HOLD_EFFECT_EJECT_PACK          156
+#define HOLD_EFFECT_ROOM_SERVICE        157
+#define HOLD_EFFECT_BLUNDER_POLICY      158
+#define HOLD_EFFECT_HEAVY_DUTY_BOOTS    159
+#define HOLD_EFFECT_THROAT_SPRAY        160
+
 #define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
 
 #endif // GUARD_HOLD_EFFECTS_H

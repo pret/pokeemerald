@@ -220,6 +220,8 @@
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
 #define SIDE_STATUS_MAT_BLOCK               (1 << 21)
 
+#define SIDE_HAZARDS_ANY    (SIDE_STATUS_SPIKES | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STEALTH_ROCK)
+
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM         0x1
 #define STATUS_FIELD_TRICK_ROOM         0x2

@@ -63,6 +63,131 @@ static const u8 sPkblToEscapeFactor[][3] = {{0, 0, 0}, {3, 5, 0}, {2, 3, 0}, {1,
 static const u8 sGoNearCounterToCatchFactor[] = {4, 3, 2, 1};
 static const u8 sGoNearCounterToEscapeFactor[] = {4, 4, 4, 4};
 
+static const u16 sSkillSwapBannedAbilities[] = 
+{
+    ABILITY_WONDER_GUARD,
+    ABILITY_MULTITYPE,
+    ABILITY_ILLUSION,
+    ABILITY_STANCE_CHANGE,
+    ABILITY_SCHOOLING,
+    ABILITY_COMATOSE,
+    ABILITY_SHIELDS_DOWN,
+    ABILITY_DISGUISE,
+    ABILITY_RKS_SYSTEM,
+    ABILITY_BATTLE_BOND,
+    ABILITY_POWER_CONSTRUCT,
+    ABILITY_NEUTRALIZING_GAS,
+    ABILITY_ICE_FACE,
+    ABILITY_HUNGER_SWITCH,
+    ABILITY_GULP_MISSILE,
+};
+
+static const u16 sRolePlayBannedAbilities[] = 
+{
+    ABILITY_TRACE,          
+    ABILITY_WONDER_GUARD,
+    ABILITY_FORECAST,
+    ABILITY_FLOWER_GIFT,
+    ABILITY_MULTITYPE,
+    ABILITY_ILLUSION,
+    ABILITY_ZEN_MODE,
+    ABILITY_IMPOSTER,
+    ABILITY_STANCE_CHANGE,
+    ABILITY_POWER_OF_ALCHEMY,
+    ABILITY_RECEIVER,
+    ABILITY_SCHOOLING,
+    ABILITY_COMATOSE,
+    ABILITY_SHIELDS_DOWN,
+    ABILITY_DISGUISE,
+    ABILITY_RKS_SYSTEM,
+    ABILITY_BATTLE_BOND,
+    ABILITY_POWER_CONSTRUCT,
+    ABILITY_ICE_FACE,
+    ABILITY_HUNGER_SWITCH,
+    ABILITY_GULP_MISSILE,
+};
+
+static const u16 sRolePlayBannedAttackerAbilities[] = 
+{
+    ABILITY_MULTITYPE,
+    ABILITY_ZEN_MODE,
+    ABILITY_STANCE_CHANGE,
+    ABILITY_SCHOOLING,
+    ABILITY_COMATOSE,
+    ABILITY_SHIELDS_DOWN,
+    ABILITY_DISGUISE,
+    ABILITY_RKS_SYSTEM,
+    ABILITY_BATTLE_BOND,
+    ABILITY_POWER_CONSTRUCT,
+    ABILITY_ICE_FACE,
+    ABILITY_GULP_MISSILE,
+};
+
+static const u16 sWorrySeedBannedAbilities[] = 
+{
+    ABILITY_MULTITYPE,
+    ABILITY_STANCE_CHANGE,
+    ABILITY_SCHOOLING,
+    ABILITY_COMATOSE,
+    ABILITY_SHIELDS_DOWN,
+    ABILITY_DISGUISE,
+    ABILITY_RKS_SYSTEM,
+    ABILITY_BATTLE_BOND,
+    ABILITY_POWER_CONSTRUCT,
+    ABILITY_TRUANT,
+    ABILITY_ICE_FACE,
+    ABILITY_GULP_MISSILE,
+};
+
+static const u16 sGastroAcidBannedAbilities[] = 
+{
+    ABILITY_MULTITYPE,
+    ABILITY_STANCE_CHANGE,
+    ABILITY_SCHOOLING,
+    ABILITY_COMATOSE,
+    ABILITY_SHIELDS_DOWN,
+    ABILITY_DISGUISE,
+    ABILITY_RKS_SYSTEM,
+    ABILITY_BATTLE_BOND,
+    ABILITY_POWER_CONSTRUCT,
+    ABILITY_ICE_FACE,
+    ABILITY_GULP_MISSILE,
+};
+
+static const u16 sEntrainmentBannedAttackerAbilities[] = 
+{
+    ABILITY_TRACE,
+    ABILITY_FORECAST,
+    ABILITY_FLOWER_GIFT,
+    ABILITY_ZEN_MODE,
+    ABILITY_ILLUSION,
+    ABILITY_IMPOSTER,
+    ABILITY_POWER_OF_ALCHEMY,
+    ABILITY_RECEIVER,
+    ABILITY_DISGUISE,
+    ABILITY_POWER_CONSTRUCT,
+    ABILITY_NEUTRALIZING_GAS,
+    ABILITY_ICE_FACE,
+    ABILITY_HUNGER_SWITCH,
+    ABILITY_GULP_MISSILE,
+};
+
+static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] = 
+{
+    ABILITY_TRUANT,
+    ABILITY_MULTITYPE,
+    ABILITY_STANCE_CHANGE,
+    ABILITY_SCHOOLING,
+    ABILITY_COMATOSE,
+    ABILITY_SHIELDS_DOWN,
+    ABILITY_DISGUISE,
+    ABILITY_RKS_SYSTEM,
+    ABILITY_BATTLE_BOND,
+    ABILITY_ICE_FACE,
+    ABILITY_GULP_MISSILE,
+};
+
+// Functions
 void HandleAction_UseMove(void)
 {
     u32 i, side, moveType, var = 4;
@@ -1325,11 +1450,11 @@ static bool32 IsGravityPreventingMove(u32 move)
     }
 }
 
-static bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
+bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
 {
     if (!(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
         return FALSE;
-
+    
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_ABSORB:
@@ -5339,10 +5464,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     u8 ppBonuses;
                     u16 move;
 
-                    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-                        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
-                    else
-                        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
+                    mon = GetBattlerPartyData(battlerId);
                     for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         move = GetMonData(mon, MON_DATA_MOVE1 + i);
@@ -7830,3 +7952,123 @@ u8 GetBattleMoveSplit(u32 moveId)
     else
         return SPLIT_SPECIAL;
 }
+
+bool32 TestMoveFlags(u16 move, u32 flag)
+{
+    if (gBattleMoves[move].flags & flag)
+        return TRUE;
+    return FALSE;
+}
+
+struct Pokemon *GetBattlerPartyData(u8 battlerId)
+{
+    struct Pokemon *mon;
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
+    else
+        mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
+    
+    return mon;
+}
+
+//Make sure the input bank is any bank on the specific mon's side
+bool32 CanFling(u8 battlerId)
+{
+    u16 item = gBattleMons[battlerId].item;
+    u16 itemEffect = ItemId_GetHoldEffect(item);
+
+    if (item == ITEM_NONE
+      || GetBattlerAbility(battlerId) == ABILITY_KLUTZ
+      || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
+      || gDisableStructs[battlerId].embargoTimer != 0
+      || !CanBattlerGetOrLoseItem(battlerId, item)
+      //|| itemEffect == HOLD_EFFECT_PRIMAL_ORB
+      || itemEffect == HOLD_EFFECT_GEMS
+      #ifdef ITEM_ABILITY_CAPSULE
+      || item == ITEM_ABILITY_CAPSULE
+      #endif
+      || (ItemId_GetPocket(item) == POCKET_BERRIES && IsAbilityOnSide(battlerId, ABILITY_UNNERVE))
+      || GetPocketByItemId(item) == POCKET_POKE_BALLS)
+        return FALSE;
+
+    return TRUE;
+}
+
+// ability checks
+bool32 IsRolePlayBannedAbilityAtk(u16 ability)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sRolePlayBannedAttackerAbilities); i++)
+    {
+        if (ability == sRolePlayBannedAttackerAbilities[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 IsRolePlayBannedAbility(u16 ability)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sRolePlayBannedAbilities); i++)
+    {
+        if (ability == sRolePlayBannedAbilities[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 IsSkillSwapBannedAbility(u16 ability)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sSkillSwapBannedAbilities); i++)
+    {
+        if (ability == sSkillSwapBannedAbilities[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 IsWorrySeedBannedAbility(u16 ability)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sWorrySeedBannedAbilities); i++)
+    {
+        if (ability == sWorrySeedBannedAbilities[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 IsGastroAcidBannedAbility(u16 ability)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sGastroAcidBannedAbilities); i++)
+    {
+        if (ability == sGastroAcidBannedAbilities[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 IsEntrainmentBannedAbilityAttacker(u16 ability)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sEntrainmentBannedAttackerAbilities); i++)
+    {
+        if (ability == sEntrainmentBannedAttackerAbilities[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sEntrainmentTargetSimpleBeamBannedAbilities); i++)
+    {
+        if (ability == sEntrainmentTargetSimpleBeamBannedAbilities[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
