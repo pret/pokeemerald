@@ -6203,6 +6203,7 @@ BattleScript_IllusionOff::
 	return
 
 BattleScript_CottonDownActivates::
+	setbyte sFIXED_ABILITY_POPUP, TRUE
 	call BattleScript_AbilityPopUp
 	copybyte gEffectBattler, gBattlerTarget
 	savetarget
@@ -6224,6 +6225,7 @@ BattleScript_CottonDownLoopIncrement:
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CottonDownLoop
 BattleScript_CottonDownReturn:
 	restoretarget
+	destroyabilitypopup
 	return
 
 BattleScript_AnticipationActivates::
