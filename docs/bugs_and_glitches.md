@@ -98,7 +98,7 @@ Then edit `BagMenu_MoveCursorCallback` in [src/item_menu.c](https://github.com/p
 
 ## Pokémon that have an affine transform as part of their entry animation glitch when going in and out of Poké Balls without a screen transition in between
 
-**Fix:** Edit sub_817F77C in [src/pokemon_animation.c](https://github.com/pret/pokeemerald/blob/master/src/pokemon_animation.c#L1028) and remove the ifdef/endif lines:
+**Fix:** Edit `sub_817F77C` in [src/pokemon_animation.c](https://github.com/pret/pokeemerald/blob/master/src/pokemon_animation.c#L1028) and remove the ifdef/endif lines:
 
 ```diff
     ...
