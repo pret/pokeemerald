@@ -815,6 +815,7 @@ gBattleAnims_General::
 	.4byte General_IllusionOff
 	.4byte General_FormChange
 	.4byte General_SlideOffScreen
+	.4byte General_RestoreBg
 
 	.align 2
 gBattleAnims_Special::
@@ -8453,6 +8454,8 @@ Move_GRASSY_TERRAIN::
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(31, 24, 31)
 	waitforvisualfinish
+	restorebg
+	waitbgfadein
 	end
 
 Move_MISTY_TERRAIN::
@@ -8491,6 +8494,8 @@ Move_MISTY_TERRAIN::
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 7, 0, RGB(31, 24, 31)
 	waitforvisualfinish
+	restorebg
+	waitbgfadein
 	end
 
 Move_ELECTRIFY::
@@ -9374,6 +9379,8 @@ Move_ELECTRIC_TERRAIN::
 	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(28, 28, 0)
 	waitforvisualfinish
+	restorebg
+	waitbgfadein
 	end
 
 Move_DAZZLING_GLEAM::
@@ -9451,6 +9458,7 @@ Move_BABY_DOLL_EYES::
 	loadspritegfx ANIM_TAG_PINK_CLOUD
 	loadspritegfx ANIM_TAG_OPENING_EYE @eye
 	setalpha 8, 8
+	monbg ANIM_DEF_PARTNER
 	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x0 0x0 0xA 0x7FFF
 	waitforvisualfinish
 	launchtemplate gOpeningEyeSpriteTemplate 0x5 0x4 0x0 0x0 0x1 0x0
@@ -9463,6 +9471,7 @@ Move_BABY_DOLL_EYES::
 	launchtask AnimTask_ShakeMon2 0x2 0x5 0x3 0x1 0x0 0x9 0x1
 	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x0 0xA 0x0 0x7FFF
 	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
 
@@ -11027,6 +11036,8 @@ Move_PSYCHIC_TERRAIN::
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(27, 0, 13)
 	waitforvisualfinish
+	restorebg
+	waitbgfadein
 	end
 
 Move_LUNGE::
@@ -24335,6 +24346,11 @@ General_TerrainElectric:
 	end
 
 General_TerrainPsychic:
+	end
+
+General_RestoreBg:
+	restorebg
+	waitbgfadein
 	end
 
 SnatchMoveTrySwapFromSubstitute:

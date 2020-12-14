@@ -525,6 +525,7 @@
 #define B_ANIM_ILLUSION_OFF             0x1C
 #define B_ANIM_FORM_CHANGE              0x1D
 #define B_ANIM_SLIDE_OFFSCREEN          0x1E // for Emergency Exit
+#define B_ANIM_RESTORE_BG               0x1F // for Terrain Endings
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0
