@@ -68,6 +68,7 @@ s16 KeepPanInRange(s16 a, int oldPan);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 void sub_80A4720(u16 a, u16 *b, u32 c, u8 d);
 void sub_80A477C(bool8);
+void LoadMoveBg(u16 bgId);
 
 // battle_intro.c
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
