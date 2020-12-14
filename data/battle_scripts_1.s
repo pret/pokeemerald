@@ -5386,6 +5386,12 @@ BattleScript_OverworldWeatherStarts::
 	playanimation2 BS_ATTACKER, sB_ANIM_ARG1, NULL
 	end3
 
+BattleScript_OverworldTerrain::
+	printfromtable gTerrainStringIds
+	waitmessage 0x40
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
+	end3
+
 BattleScript_SideStatusWoreOff::
 	printstring STRINGID_PKMNSXWOREOFF
 	waitmessage 0x40
@@ -6823,7 +6829,7 @@ BattleScript_ElectricSurgeActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESELECTRIC
 	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_ELECTRIC, NULL
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_MistySurgeActivates::
@@ -6831,7 +6837,7 @@ BattleScript_MistySurgeActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESMISTY
 	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_MISTY, NULL
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_GrassySurgeActivates::
@@ -6839,7 +6845,7 @@ BattleScript_GrassySurgeActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESGRASSY
 	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_GRASSY, NULL
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_PsychicSurgeActivates::
@@ -6847,7 +6853,7 @@ BattleScript_PsychicSurgeActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESPSYCHIC
 	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_PSYCHIC, NULL
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_BadDreamsActivates::
@@ -7035,7 +7041,9 @@ BattleScript_GrassyTerrainLoopIncrement::
 	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_GrassyTerrainLoop
 BattleScript_GrassyTerrainLoopEnd::
 	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_TERRAIN_PERMANENT, BattleScript_GrassyTerrainHealEnd
 	jumpifbyte CMP_EQUAL, gFieldTimers + 5, 0x0, BattleScript_GrassyTerrainEnds
+BattleScript_GrassyTerrainHealEnd:
 	end2
 
 BattleScript_AbilityNoSpecificStatLoss::

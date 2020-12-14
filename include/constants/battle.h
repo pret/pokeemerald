@@ -221,18 +221,19 @@
 #define SIDE_STATUS_MAT_BLOCK               (1 << 21)
 
 // Field affecting statuses.
-#define STATUS_FIELD_MAGIC_ROOM         0x1
-#define STATUS_FIELD_TRICK_ROOM         0x2
-#define STATUS_FIELD_WONDER_ROOM        0x4
-#define STATUS_FIELD_MUDSPORT           0x8
-#define STATUS_FIELD_WATERSPORT         0x10
-#define STATUS_FIELD_GRAVITY            0x20
-#define STATUS_FIELD_GRASSY_TERRAIN     0x40
-#define STATUS_FIELD_MISTY_TERRAIN      0x80
-#define STATUS_FIELD_ELECTRIC_TERRAIN   0x100
-#define STATUS_FIELD_PSYCHIC_TERRAIN    0x200
-#define STATUS_FIELD_ION_DELUGE         0x400
-#define STATUS_FIELD_FAIRY_LOCK         0x800
+#define STATUS_FIELD_MAGIC_ROOM                     (1 << 0)
+#define STATUS_FIELD_TRICK_ROOM                     (1 << 1)
+#define STATUS_FIELD_WONDER_ROOM                    (1 << 2)
+#define STATUS_FIELD_MUDSPORT                       (1 << 3)
+#define STATUS_FIELD_WATERSPORT                     (1 << 4)
+#define STATUS_FIELD_GRAVITY                        (1 << 5)
+#define STATUS_FIELD_GRASSY_TERRAIN                 (1 << 6)
+#define STATUS_FIELD_MISTY_TERRAIN                  (1 << 7)
+#define STATUS_FIELD_ELECTRIC_TERRAIN               (1 << 8)
+#define STATUS_FIELD_PSYCHIC_TERRAIN                (1 << 9)
+#define STATUS_FIELD_ION_DELUGE                     (1 << 10)
+#define STATUS_FIELD_FAIRY_LOCK                     (1 << 11)
+#define STATUS_FIELD_TERRAIN_PERMANENT              (1 << 12)   // Overworld thunderstorm generates electric terrain
 
 #define STATUS_TERRAIN_ANY              (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
 

@@ -518,14 +518,10 @@
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16
 #define B_ANIM_MEGA_EVOLUTION           0x17
-#define B_ANIM_TERRAIN_MISTY            0x18
-#define B_ANIM_TERRAIN_GRASSY           0x19
-#define B_ANIM_TERRAIN_ELECTRIC         0x1A
-#define B_ANIM_TERRAIN_PSYCHIC          0x1B
-#define B_ANIM_ILLUSION_OFF             0x1C
-#define B_ANIM_FORM_CHANGE              0x1D
-#define B_ANIM_SLIDE_OFFSCREEN          0x1E // for Emergency Exit
-#define B_ANIM_RESTORE_BG               0x1F // for Terrain Endings
+#define B_ANIM_ILLUSION_OFF             0x18
+#define B_ANIM_FORM_CHANGE              0x19
+#define B_ANIM_SLIDE_OFFSCREEN          0x1A // for Emergency Exit
+#define B_ANIM_RESTORE_BG               0x1B // for Terrain Endings, Surge abilities
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0

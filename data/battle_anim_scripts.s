@@ -808,10 +808,6 @@ gBattleAnims_General::
 	.4byte General_IngrainHeal
 	.4byte General_WishHeal
 	.4byte General_MegaEvolution
-	.4byte General_TerrainMisty
-	.4byte General_TerrainGrassy
-	.4byte General_TerrainElectric
-	.4byte General_TerrainPsychic
 	.4byte General_IllusionOff
 	.4byte General_FormChange
 	.4byte General_SlideOffScreen
@@ -24318,18 +24314,6 @@ MegaEvolutionParticles:
 	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
 	delay 3
 	return
-
-General_TerrainMisty:
-	end
-
-General_TerrainGrassy:
-	end
-
-General_TerrainElectric:
-	end
-
-General_TerrainPsychic:
-	end
 
 General_RestoreBg:
 	restorebg
