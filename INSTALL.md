@@ -10,7 +10,7 @@ Windows has instructions for building with three possible terminals, if users en
 - [Windows (msys2)](#windows-msys2)
 - [Windows (Cygwin)](#windows-cygwin)
 
-The instructions have been ordered by the performance of their respective terminal. Out of the provided terminals, **WSL1** builds pokeemerald the fastest, and is thus **highly recommended**, but is only available on Windows 10. **msys2** is the second fastest, and **Cygwin** is the slowest. For advanced users, **WSL2** is an option and is even faster than **WSL1** if files are stored on the WSL2 file system, but some tools such as [porymap](https://github.com/huderlem/porymap) cannot interact with said files due to problems [outside the control of maintainers](https://bugreports.qt.io/browse/QTBUG-86277).
+The instructions have been ordered by the performance of their respective terminal. Out of the provided terminals, **WSL1** builds pokeemerald the fastest, and is thus **highly recommended**, but is only available on Windows 10. **msys2** is the second fastest, and **Cygwin** is the slowest. Unscientific benchmarks suggest msys2 is 2x slower than WSL1, and Cygwin is **5-6x** slower than WSL1. For advanced users, **WSL2** is an option and is even faster than **WSL1** if files are stored on the WSL2 file system, but some tools such as [porymap](https://github.com/huderlem/porymap) cannot interact with said files due to problems [outside the control of maintainers](https://bugreports.qt.io/browse/QTBUG-86277).
 
 All of the Windows instructions assume that the default drive is C:\\. If this differs to your actual drive letter, then replace C with the correct drive letter when reading the instructions.
 
@@ -125,14 +125,14 @@ If this works, then proceed to [Installation](#Installation).
 Otherwise, continue reading below for [Windows instructions using Cygwin](#windows-cygwin).
 
 ## Windows (Cygwin)
-If devkitPro is not installed, or is installed but without the GBA Development component, then follow the instructions used to [install devkitPro](#installing-devkitpro) for the msys2 setup before continuing.
+If devkitPro is not installed, or is installed but without the GBA Development component, then follow the instructions used to [install devkitPro](#installing-devkitpro) for the msys2 setup before continuing. Remember to not continue following the msys2 instructions by mistake!
 
-If Cygwin is not installed, or does not have all of the required packages installed, then go to [Installing Cygwin](#installing-cygwin). Otherwise, go to [Choosing where to store pokeemerald (Cygwin)](#choosing-where-to-store-pokeemerald-cygwin)
+If Cygwin is not installed, or does not have all of the required packages installed, then go to [Installing Cygwin](#installing-cygwin). If Cygwin is installed, but is not configured to work with devkitPro, then go to [Configuring devkitPro for Cygwin](#configuring-devkitpro-for-cygwin). Otherwise, open Cygwin and go to [Choosing where to store pokeemerald (Cygwin)](#choosing-where-to-store-pokeemerald-cygwin)
 
 ### Installing Cygwin
 Download [Cygwin](https://cygwin.com/install.html): setup-x86_64.exe for 64-bit Windows, setup-x86.exe for 32-bit.
 
-Run the Cygwin setup and leave the default settings. At "Select Packages", set the view to "Full" and choose to install the following:
+Run the Cygwin setup and leave the default settings. At "Choose a Download Site", select any mirror within the Available Download Sites. At "Select Packages", set the view to "Full" (top left) and choose to install the following:
 - `make`
 - `git`
 - `gcc-core`
@@ -144,11 +144,21 @@ To quickly find these, use the search bar and type the name of each package. Ens
 Double click on the text that says "**Skip**" next to each package to select the most recent version to install. If the text says anything other than "**Skip**", (e.g. Keep or a version number), then the package is or will be installed and you don't need to do anything.
 
 Once all required packages have been selected, finish the installation.
-
-### Choosing where to store pokeemerald (Cygwin)
+### Configuring devkitPro for Cygwin
 Open **Cygwin**.
 
 Note that in Cygwin, Copy is Ctrl+Insert and Paste is Shift+Insert.
+
+Run the following commands to configure devkitPro to work with Cygwin.
+```bash
+export DEVKITPRO=/cygdrive/c/devkitpro
+echo export DEVKITPRO=$DEVKITPRO >> ~/.bashrc
+export DEVKITARM=$DEVKITPRO/devkitARM
+echo export DEVKITARM=$DEVKITARM >> ~/.bashrc
+```
+(Replace the drive letter c with the actual drive letter if it is not c).
+
+### Choosing where to store pokeemerald (Cygwin)
 
 Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\_\<user>_**. If you don't want to store pokeemerald there, you'll have to change the **current working directory** every time you open Cygwin.
 
@@ -163,10 +173,76 @@ Note that the directory **must exist** in Windows. If you want to store pokeemer
 If this works, then proceed to [Installation](#Installation). Otherwise, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## macOS
-TODO: add macOS instructions
+The [Xcode Command Line Tools Package](https://developer.apple.com/library/archive/technotes/tn2339/_index.html) is required. Open your Terminal and run the following command:
+```bash
+xcode-select --install
+```
+
+If devkitPro is not installed, then go to [Installing devkitPro (macOS)](#installing-devkitpro-macos). Otherwise, open the Terminal and go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos)
+
+### Installing devkitPro (macOS)
+Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
+
+Run the `open` command to install the devkitPro package. The command arguments depend on where the package was saved to. For example, if the package was saved to `~/Downloads` (the Downloads location for most users), enter this command:
+```bash
+open ~/Downloads/devkitpro-pacman-installer.pkg
+```
+(If the path has spaces, then the path must be wrapped with quotations, e.g. "~/Downloads/My Downloads/devkitpro-pacman-installer.pkg").
+
+Now devkitPro must be configured with the tools required for GBA development. Run the following commands:
+```bash
+sudo dkp-pacman -Sy
+sudo dkp-pacman -S gba-dev
+sudo dkp-pacman -S devkitarm-rules
+```
+At this point, press Enter to confirm the installation. After the tools are installed, devkitPro must now be made accessible from anywhere by the system. To do so, run the following commands:
+
+```
+export DEVKITPRO=$HOME/devkitpro
+echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+export DEVKITARM=$DEVKITPRO/devkitARM
+echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
+
+echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+```
+
+### Choosing where to store pokeemerald (macOS)
+At this point, you can choose a folder to store pokeemerald into. If so, you'll have to change the **current working directory** every time you open the Terminal. If you're okay with storing pokeemerald in the user profile folder, then proceed to [Installation](#installation).
+
+For example, if you want to store pokeemerald (and agbcc) in **~/Desktop/decomps**, enter this command:
+```bash
+cd Desktop/decomps
+```
+Note that the directory **must exist** in the folder system. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Finder) before executing the `cd` command.
+
+If this works, then proceed to [Installation](#Installation). Otherwise, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## Linux
-TODO: add Linux instructions
+Open Terminal and enter the following commands, depending on which distro you're using.
+
+### Debian or Ubuntu
+Run the following command to install the necessary packages:
+```bash
+sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
+```
+Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
+
+### Other distributions
+_(Instructions for other distributions would be greatly appreciated!)_
+
+If your distro is not listed here, try to find the required software in its repositories:
+- `gcc`
+- `g++`
+- `make`
+- `git`
+- `libpng-dev`
+
+Then, install the devkitARM toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) as per the instructions on their wiki.
+
+### Choosing where to store pokeemerald (Linux)
+At this point, you can choose a folder to store pokeemerald (and agbcc) into. If so, you'll have to change the current working directory every time you open the Terminal.
+
+If this works, then proceed to [Installation](#Installation). Otherwise, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## Installation
 If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
