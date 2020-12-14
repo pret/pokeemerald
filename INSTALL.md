@@ -247,11 +247,11 @@ If this works, then proceed to [Installation](#Installation). Otherwise, ask for
 ## Installation
 If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
 ```bash
-git clone https://github.com/pret/pokeemerald
+git clone https://github.com/luckytyphlosion/pokeemerald
 ```
 If agbcc has not been built before, run the following commands to build and install it into pokeemerald:
 ```
-git clone https://github.com/pret/agbcc
+git clone https://github.com/luckytyphlosion/agbcc
 cd agbcc
 ./build.sh
 ./install.sh ../pokeemerald
