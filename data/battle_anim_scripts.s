@@ -3,10 +3,10 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
+#include "constants/pokemon.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim_script.inc"
 	.include "constants/constants.inc"
-#include "constants/pokemon.h"
 
 	.section script_data, "aw", %progbits
 
