@@ -2127,10 +2127,7 @@ static void ResumeMap(bool32 a1)
     ResetAllPicSprites();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
-    if (!a1)
-        InitObjectEventPalettes(0);
-    else
-        InitObjectEventPalettes(1);
+    FreeAllSpritePalettes();
 
     FieldEffectActiveListClear();
     StartWeather();
