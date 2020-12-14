@@ -6952,7 +6952,7 @@ static void HandleTerrainMove(u32 moveEffect)
     }
     else
     {
-        gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN);
+        gFieldStatuses &= ~STATUS_TERRAIN_ANY;
         gFieldStatuses |= statusFlag;
         if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
             *timer = 8;
@@ -8300,6 +8300,9 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_DESTROY_ABILITY_POPUP:
+        DestroyAbilityPopUp(gActiveBattler);
+        break;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -10192,9 +10195,18 @@ static void Cmd_tryspiteppreduce(void)
                 break;
         }
 
+    #if B_CAN_SPITE_FAIL <= GEN_3
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > 1)
+    #else
+        if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] != 0)
+    #endif
         {
+        #if B_PP_REDUCED_BY_SPITE <= GEN_3
             s32 ppToDeduct = (Random() & 3) + 2;
+        #else
+            s32 ppToDeduct = 4;
+        #endif
+
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
 

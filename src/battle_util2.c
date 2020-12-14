@@ -45,7 +45,8 @@ void FreeBattleResources(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         FreeTrainerHillBattleStruct();
-
+    
+    gFieldStatuses = 0;
     if (gBattleResources != NULL)
     {
         FREE_AND_SET_NULL(gBattleStruct);
