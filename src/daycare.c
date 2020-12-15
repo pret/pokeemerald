@@ -625,10 +625,7 @@ static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
     for (i = 0; i < EGG_MOVES_ARRAY_COUNT; i++)
     {
         if (gEggMoves[eggMoveIdx + i] > EGG_MOVES_SPECIES_OFFSET)
-        {
-            // TODO: the curly braces around this if statement are required for a matching build.
             break;
-        }
 
         eggMoves[i] = gEggMoves[eggMoveIdx + i];
         numEggMoves++;
