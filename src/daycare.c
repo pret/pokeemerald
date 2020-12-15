@@ -551,13 +551,15 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
         // removes position 0 (HP) then position 1 (DEF), then position 2. This is why HP and DEF
         // have a lower chance to be inherited in Emerald and why the IV picked for inheritance can
         // be repeated. Amusingly, FRLG and RS also got this wrong. They remove selectedIvs[i], which
-        // is not an index! This means that it can sometimes remove the wrong stat. To fix, delete 
-        // the following two lines and uncomment the rest of the block.
+        // is not an index! This means that it can sometimes remove the wrong stat.
+        #ifndef BUGFIX
         selectedIvs[i] = availableIVs[Random() % (NUM_STATS - i)];
         RemoveIVIndexFromList(availableIVs, i);
-        // u8 index = Random() % (NUM_STATS - i);
-        // selectedIvs[i] = availableIVs[index];
-        // RemoveIVIndexFromList(availableIVs, index);
+        #else
+        u8 index = Random() % (NUM_STATS - i);
+        selectedIvs[i] = availableIVs[index];
+        RemoveIVIndexFromList(availableIVs, index);
+        #endif
     }
 
     // Determine which parent each of the selected IVs should inherit from.
