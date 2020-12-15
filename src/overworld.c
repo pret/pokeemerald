@@ -2948,13 +2948,13 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     ObjectEventUpdateZCoord(objEvent);
 }
 
-static void sub_80877DC(u8 linkPlayerId, u8 a2)
+static void sub_80877DC(u8 linkPlayerId, u8 dir)
 {
     if (gLinkPlayerObjectEvents[linkPlayerId].active)
     {
         u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
         struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-        linkDirection(objEvent) = a2;
+        linkDirection(objEvent) = dir;
     }
 }
 
