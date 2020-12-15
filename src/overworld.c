@@ -2931,7 +2931,7 @@ static void SpawnLinkPlayerObjectEvent(u8 linkPlayerId, s16 x, s16 y, u8 gender)
 
     objEvent->active = 1;
     linkGender(objEvent) = gender;
-    linkDirection(objEvent) = 2;
+    linkDirection(objEvent) = DIR_NORTH;
     objEvent->spriteId = 64;
 
     InitLinkPlayerObjectEventPos(objEvent, x, y);
