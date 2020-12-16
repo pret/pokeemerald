@@ -250,10 +250,22 @@ At this point, you can choose a folder to store pokeemerald (and agbcc) into. If
 If this works, then proceed to [Installation](#Installation). Otherwise, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## Installation
+
+**Windows users:** Consider adding an exception for the `pokeemerald`/`decomps` folder in Windows Security using [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from scanning them which might improve performance while building.
+
 If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
 ```bash
 git clone https://github.com/luckytyphlosion/pokeemerald
 ```
+Note for WSL1: If you get an error stating `fatal: could not set 'core.filemode' to 'false'`, then run the following commands:
+```bash
+cd
+sudo umount /mnt/c
+sudo mount -t drvfs C: /mnt/c -o metadata
+cd <folder where pokeemerald is to be stored>
+```
+Where *\<folder where pokeemerald is to be stored>* is the path of the folder [where you chose to store pokeemerald](#Choosing-where-to-store-pokeemerald-WSL1).
+
 If agbcc has not been built before, run the following commands to build and install it into pokeemerald:
 ```
 git clone https://github.com/luckytyphlosion/agbcc
@@ -293,8 +305,6 @@ To build **pokeemerald.gba** with your changes:
 ```bash
 make
 ```
-
-**Windows users:** Consider adding an exception for the `pokeemerald` folder in Windows Security using [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from scanning them which might improve performance while building.
 
 # Building guidance
 
