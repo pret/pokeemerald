@@ -30,7 +30,7 @@ Once the process finishes, restart your machine.
 
 The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice (Note for advanced users: Debian also works here). Advanced users can pick a preferred Linux distribution, but setup instructions may differ.
 
-Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution. If the link does not work, then open the Microsoft Store manually, and search for the Ubuntu app (choose the one with no version number).
+Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution. If the link does not work, then open the Microsoft Store manually, and search for the Ubuntu app (choose the one with no version number). If a dialog pops up asking for you to sign into a Microsoft Account, then just close the dialog.
 
 ### Setting up WSL1
 Open **Ubuntu** (e.g. using Search). WSL/Ubuntu will set up its own installation when it runs for the first time. Once WSL/Ubuntu finishes installing, it will ask for a username and password (to be input in). Note that there will be no visible response when typing in the password, but the terminal will still read in input.
