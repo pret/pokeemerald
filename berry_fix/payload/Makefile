@@ -8,7 +8,7 @@ COMPARE ?= 0
 # files, or use arm-none-eabi binaries on the system
 # if dkP is not installed on tihs system
 
-ifneq ($(TOOLCHAIN),)
+ifneq ($(wildcard $(TOOLCHAIN)/bin),)
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
 endif
 
