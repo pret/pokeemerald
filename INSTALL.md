@@ -19,7 +19,7 @@ All of the Windows instructions assume that the default drive is C:\\. If this d
 ## Windows 10 (WSL1)
 WSL1 is the preferred terminal to build **pokeemerald**. The following instructions will explain how to install WSL1 (referred interchangeably as WSL).
 
-If WSL is **not installed**, then go to [Installing WSL1](#Installing-WSL1). Otherwise, if WSL is installed, but it hasn't previously been set up for another decompilation project, then go to [Setting up WSL1](#Setting-up-WSL1). Otherwise, open WSL and go to [Choosing where to store pokeemerald (WSL1)](#Choosing-where-to-store-pokeemerald-WSL1).
+If WSL (Debian or Ubuntu) is **not installed**, then go to [Installing WSL1](#Installing-WSL1). Otherwise, if WSL is installed, but it hasn't previously been set up for another decompilation project, then go to [Setting up WSL1](#Setting-up-WSL1). Otherwise, open WSL and go to [Choosing where to store pokeemerald (WSL1)](#Choosing-where-to-store-pokeemerald-WSL1).
 
 ### Installing WSL1
 Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Right Click or Shift+Insert is paste in the Powershell).
@@ -28,7 +28,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 ```
 Once the process finishes, restart your machine.
 
-The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice. Advanced users can pick a preferred Linux distribution, but setup instructions may differ.
+The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice (Note for advanced users: Debian also works here). Advanced users can pick a preferred Linux distribution, but setup instructions may differ.
 
 Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution. If the link does not work, then open the Microsoft Store manually, and search for the Ubuntu app (choose the one with no version number).
 
@@ -173,7 +173,7 @@ Note that the directory **must exist** in Windows. If you want to store pokeemer
 If this works, then proceed to [Installation](#Installation). Otherwise, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## macOS
-The [Xcode Command Line Tools Package](https://developer.apple.com/library/archive/technotes/tn2339/_index.html) is required. Open your Terminal and run the following command:
+If the Xcode Command Line Tools are not installed, download the tools [here](https://developer.apple.com/library/archive/technotes/tn2339/_index.html), open your Terminal, and run the following command:
 ```bash
 xcode-select --install
 ```
@@ -183,13 +183,9 @@ If devkitPro is not installed, then go to [Installing devkitPro (macOS)](#instal
 ### Installing devkitPro (macOS)
 Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
 
-Run the `open` command to install the devkitPro package. The command arguments depend on where the package was saved to. For example, if the package was saved to `~/Downloads` (the Downloads location for most users), enter this command:
-```bash
-open ~/Downloads/devkitpro-pacman-installer.pkg
-```
-(If the path has spaces, then the path must be wrapped with quotations, e.g. "~/Downloads/My Downloads/devkitpro-pacman-installer.pkg").
+Open the package to install devkitPro pacman.
 
-Now devkitPro must be configured with the tools required for GBA development. Run the following commands:
+devkitPro must be configured with the tools required for GBA development. Run the following commands:
 ```bash
 sudo dkp-pacman -Sy
 sudo dkp-pacman -S gba-dev
@@ -207,7 +203,7 @@ echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
 ```
 
 ### Choosing where to store pokeemerald (macOS)
-At this point, you can choose a folder to store pokeemerald into. If so, you'll have to change the **current working directory** every time you open the Terminal. If you're okay with storing pokeemerald in the user profile folder, then proceed to [Installation](#installation).
+At this point, you can choose a folder to store pokeemerald into. If so, you'll have to change the **current working directory** every time you open the Terminal. If you're okay with storing pokeemerald in the user folder, then proceed to [Installation](#installation).
 
 For example, if you want to store pokeemerald (and agbcc) in **~/Desktop/decomps**, enter this command:
 ```bash
@@ -215,12 +211,14 @@ cd Desktop/decomps
 ```
 Note that the directory **must exist** in the folder system. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Finder) before executing the `cd` command.
 
+(If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Desktop/decomp folder"`)
+
 If this works, then proceed to [Installation](#Installation). Otherwise, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## Linux
 Open Terminal and enter the following commands, depending on which distro you're using.
 
-### Debian or Ubuntu
+### Debian/Ubuntu-based distributions
 Run the following command to install the necessary packages:
 ```bash
 sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
@@ -228,16 +226,23 @@ sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
 Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
 
 ### Other distributions
-_(Instructions for other distributions would be greatly appreciated!)_
+_(Specific instructions for other distributions would be greatly appreciated!)_
 
-If your distro is not listed here, try to find the required software in its repositories:
+Try to find the required software in its repositories:
 - `gcc`
 - `g++`
 - `make`
 - `git`
 - `libpng-dev`
 
-Then, install the devkitARM toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) as per the instructions on their wiki.
+Then, follow the instructions [here](https://devkitpro.org/wiki/devkitPro_pacman) to install devkitPro's pacman installer. As a reminder, the goal is to configure an existing pacman installation to recognize devkitPro's repositories.
+
+Once devkitPro pacman is configured, run the following commands:
+```bash
+sudo pacman -Sy
+sudo pacman -S gba-dev
+```
+Note: the last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
 
 ### Choosing where to store pokeemerald (Linux)
 At this point, you can choose a folder to store pokeemerald (and agbcc) into. If so, you'll have to change the current working directory every time you open the Terminal.
@@ -256,7 +261,7 @@ cd agbcc
 ./build.sh
 ./install.sh ../pokeemerald
 ```
-If agbcc has been built before, but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald:
+If agbcc has been built before (e.g. if the git clone above fails), but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald:
 ```
 cd agbcc
 git clean -fX
@@ -278,11 +283,11 @@ First, change directory to the pokeemerald folder:
 ```bash
 cd pokeemerald
 ```
-To build **pokeemerald.gba** for the first time and confirm it matches the official ROM image:
+To build **pokeemerald.gba** for the first time and confirm it matches the official ROM image (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
 ```bash
 make compare
 ```
-If an OK is returned, then the installation went smoothly. **Note:** if you switched from Cygwin to msys2, you must run `make clean-tools` once before any subsequent `make` commands.
+If an OK is returned, then the installation went smoothly. **Note:** if you switched terminals on Windows since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 
 To build **pokeemerald.gba** with your changes:
 ```bash
@@ -290,8 +295,6 @@ make
 ```
 
 **Windows users:** Consider adding an exception for the `pokeemerald` folder in Windows Security using [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from scanning them which might improve performance while building.
-
-**macOS users (this is probably outdated):** If the base tools are not found in new Terminal sessions after the first successful build, run `echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile` once to prevent the issue from occurring again. Verify that the `devkitarm-rules` package is installed as well; if not, install it by running `sudo dkp-pacman -S devkitarm-rules`.
 
 # Building guidance
 
@@ -320,7 +323,7 @@ make DINFO=1
 
 ## devkitARM's C compiler
 
-This project supports the `arm-none-eabi-gcc` compiler included with devkitARM. If devkitARM has already been installed as part of the platform-specific instructions, simply run:
+This project supports the `arm-none-eabi-gcc` compiler included with devkitARM. If devkitARM (a.k.a. gba-dev) has already been installed as part of the platform-specific instructions, simply run:
 ```bash
 make modern
 ```
@@ -350,6 +353,27 @@ sudo dkp-pacman -S gba-dev
 Note: the last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation. `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
 
 Run the following command to set devkitPro related environment variables (alternatively, close and re-open WSL):
+```bash
+source /etc/profile.d/devkit-env.sh
+```
+devkitARM is now installed.
+
+### Installing devkitARM on Debian/Ubuntu-based distributions
+If `gdebi-core` is not installed, run the following command:
+```bash
+sudo apt install gdebi-core
+```
+Download the devkitPro software package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
+
+Change directory to where the package was downloaded. Then, run the following commands to install devkitARM:
+```bash
+sudo gdebi devkitpro-pacman.amd64.deb
+sudo dkp-pacman -Sy
+sudo dkp-pacman -S gba-dev
+```
+Note: the last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation. `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
+
+Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
 ```bash
 source /etc/profile.d/devkit-env.sh
 ```
