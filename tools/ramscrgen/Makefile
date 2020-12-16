@@ -8,16 +8,10 @@ HEADERS := ramscrgen.h sym_file.h elf.h char_util.h
 
 .PHONY: all clean
 
-ifeq ($(OS),Windows_NT)
-EXE := .exe
-else
-EXE :=
-endif
-
-all: ramscrgen$(EXE)
+all: ramscrgen
 	@:
 
-ramscrgen$(EXE): $(SRCS) $(HEADERS)
+ramscrgen: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:

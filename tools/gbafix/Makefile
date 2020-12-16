@@ -3,16 +3,10 @@ CC ?= gcc
 
 SRCS = gbafix.c
 
-ifeq ($(OS),Windows_NT)
-EXE := .exe
-else
-EXE :=
-endif
-
-all: gbafix$(EXE)
+all: gbafix
 	@:
 
-gbafix$(EXE): $(SRCS)
+gbafix: $(SRCS)
 	$(CC) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
