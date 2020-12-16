@@ -59,6 +59,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_LATIOS] = 6,
     [SPECIES_JIRACHI] = 14,
     [SPECIES_CHIMECHO] = 16,
+    // Gen 4
     [SPECIES_MOTHIM] = 10,
     [SPECIES_COMBEE] = 8,
     [SPECIES_VESPIQUEN] = 4,
@@ -76,6 +77,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_AZELF] = 6,
     [SPECIES_CRESSELIA] = 3,
     [SPECIES_DARKRAI] = 4,
+    // Gen 5
     [SPECIES_WOOBAT] = 19,
     [SPECIES_SWOOBAT] = 12,
     [SPECIES_PETILIL] = 7,
@@ -94,15 +96,20 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_TORNADUS] = 7,
     [SPECIES_THUNDURUS] = 7,
     [SPECIES_LANDORUS] = 7,
-    // Gens 6 & 7
+    // Gen 6
     [SPECIES_FLETCHINDER] = 9,
     [SPECIES_TALONFLAME] = 7,
     [SPECIES_VIVILLON] = 9,
     [SPECIES_NOIBAT] = 8,
     [SPECIES_HOOPA] = 13,
+    // Gen 7
     [SPECIES_VIKAVOLT] = 8,
     [SPECIES_CUTIEFLY] = 10,
     [SPECIES_MINIOR] = 17,
+    // Gen 8
+    [SPECIES_CORVISQUIRE] = 6,
+    [SPECIES_DRAGAPULT] = 3,
+    [SPECIES_FROSMOTH] = 3,
     // Megas
     [SPECIES_LATIAS_MEGA] = 8,
     [SPECIES_LATIOS_MEGA] = 8,
@@ -118,7 +125,10 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_GYARADOS_MEGA] = 6,
     [SPECIES_PINSIR_MEGA] = 4,
     [SPECIES_ALAKAZAM_MEGA] = 7,
-    // Forms
+    // Galarian Forms
+    [SPECIES_WEEZING_GALARIAN] = 3,
+    [SPECIES_YAMASK_GALARIAN] = 4,
+    // Misc Forms
     [SPECIES_GIRATINA_ORIGIN] = 7,
     [SPECIES_THUNDURUS_THERIAN] = 7,
 };
