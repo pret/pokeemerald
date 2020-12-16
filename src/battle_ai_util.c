@@ -266,6 +266,63 @@ bool32 IsBattlerTrapped(u8 battler, bool8 checkSwitch)
     return FALSE;
 }
 
+// move checks
+static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
+{
+    bool32 isCrit;
+
+    switch (CalcCritChanceStage(battlerAtk, battlerDef, move, FALSE))
+    {
+    case -1:
+    case 0:
+    default:
+        isCrit = FALSE;
+        break;
+    case 1:
+        if (gBattleMoves[move].flags & FLAG_HIGH_CRIT && (Random() % 5 == 0))
+            isCrit = TRUE;
+        else
+            isCrit = FALSE;
+        break;
+    case 2:
+        if (gBattleMoves[move].flags & FLAG_HIGH_CRIT && (Random() % 2 == 0))
+            isCrit = TRUE;
+        else if (!(gBattleMoves[move].flags & FLAG_HIGH_CRIT) && (Random() % 4) == 0)
+            isCrit = TRUE;
+        else
+            isCrit = FALSE;
+        break;
+    case -2:
+    case 3:
+    case 4:
+        isCrit = TRUE;
+        break;
+    }
+
+    return isCrit;
+}
+
+s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
+{
+    s32 dmg, moveType;
+
+    SaveBattlerData(battlerAtk);
+    SaveBattlerData(battlerDef);
+
+    SetBattlerData(battlerAtk);
+    SetBattlerData(battlerDef);
+
+    gBattleStruct->dynamicMoveType = 0;
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+    dmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, AI_GetIfCrit(move, battlerAtk, battlerDef), FALSE, FALSE);
+
+    RestoreBattlerData(battlerAtk);
+    RestoreBattlerData(battlerDef);
+
+    return dmg;
+}
+
 // Checks if one of the moves has side effects or perks
 static u32 WhichMoveBetter(u32 move1, u32 move2)
 {
@@ -324,7 +381,7 @@ static u32 WhichMoveBetter(u32 move1, u32 move2)
     return 2;
 }
 
-u8 GetMovePowerResult(u16 move)
+u8 GetMoveDamageResult(u16 move)
 {
     s32 i, checkedMove, bestId, currId, hp;
     s32 moveDmgs[MAX_MON_MOVES];
@@ -458,8 +515,8 @@ u8 AI_GetMoveEffectiveness(u16 move)
     return damageVar;
 }
 
-// 0: is user(ai) faster
-// 1: is target faster
+// AI_CHECK_FASTER: is user(ai) faster
+// AI_CHECK_SLOWER: is target faster
 bool32 IsBattlerFaster(u8 battler)
 {
     u32 fasterAI = 0, fasterPlayer = 0, i;
@@ -517,6 +574,26 @@ bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
     {
         if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i])
             && AI_CalcDamage(moves[i], battlerDef, battlerAtk) >= gBattleMons[battlerAtk].hp)
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+// Check if target has means to faint ai mon after modding hp/dmg
+bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgMod)
+{
+    u32 i;
+    u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF & ~MOVE_LIMITATION_PP);
+    u16 *moves = gBattleResources->battleHistory->usedMoves[battlerDef];
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u32 dmg = AI_CalcDamage(moves[i], battlerDef, battlerAtk) + dmgMod;
+        u32 hpCheck = gBattleMons[battlerAtk].hp + hpMod;
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i]) && dmg >= hpCheck)
         {
             return TRUE;
         }
@@ -954,42 +1031,6 @@ bool32 CanAttackerFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index)
     return FALSE;
 }
 
-s32 CountUsablePartyMons(u8 battlerId)
-{
-    s32 battlerOnField1, battlerOnField2, i, ret;
-    struct Pokemon *party;
-
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-    {
-        battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(battlerId) ^ BIT_FLANK)];
-    }
-    else // In singles there's only one battlerId by side.
-    {
-        battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        battlerOnField2 = gBattlerPartyIndexes[battlerId];
-    }
-
-    ret = 0;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (i != battlerOnField1 && i != battlerOnField2
-         && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
-        {
-            ret++;
-        }
-    }
-
-    return ret;
-}
-
 u16 *GetMovesArray(u32 battler)
 {
     if (IsBattlerAIControlled(battler) || IsBattlerAIControlled(BATTLE_PARTNER(battler)))
@@ -1020,6 +1061,20 @@ bool32 HasMoveWithType(u32 battler, u8 type)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && gBattleMoves[moves[i]].type == type)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 HasMoveEffect(u32 battlerId, u16 moveEffect)
+{
+    s32 i;
+    u16 *moves = GetMovesArray(battlerId);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && gBattleMoves[moves[i]].effect == moveEffect)
             return TRUE;
     }
 
@@ -1251,7 +1306,7 @@ bool32 BattlerWillFaintFromWeather(u8 battler, u16 ability)
 }
 
 // status checks
-bool32 AI_ShouldPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
+bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
 {
     if (defAbility == ABILITY_INSOMNIA
       || defAbility == ABILITY_VITAL_SPIRIT
@@ -1264,7 +1319,7 @@ bool32 AI_ShouldPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 mov
     return TRUE;
 }
 
-bool32 AI_ShouldPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
+bool32 AI_CanPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
 {
     if (defAbility == ABILITY_IMMUNITY
       || defAbility == ABILITY_PASTEL_VEIL
@@ -1358,28 +1413,6 @@ bool32 AnyPartyMemberStatused(u8 battlerId, bool32 checkSoundproof)
     return FALSE;
 }
 
-bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
-{
-    struct Pokemon *party;
-    u32 i;
-    
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
-    
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (i != gBattlerPartyIndexes[battlerId]
-         && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
-         && GetMonData(&party[i], MON_DATA_HP) < GetMonData(&party[i], MON_DATA_MAX_HP))
-            return FALSE;
-    }
-    return TRUE;
-}
-
 u16 GetBattlerSideSpeedAverage(u8 battler)
 {
     u16 speed1 = 0;
@@ -1413,6 +1446,30 @@ bool32 ShouldUseRecoilMove(u8 battlerAtk, u8 battlerDef, u32 recoilDmg, u8 moveI
     }
     
     return TRUE;
+}
+
+bool32 ShouldRecover(u8 battlerAtk, u8 battlerDef, u16 move, s32 damage)
+{    
+    if (move == 0xFFFF || GetWhoStrikesFirst(sBattler_AI, gBattlerTarget, TRUE) == 0)
+    {
+        // using item or user goes first
+        u8 healPercent = (gBattleMoves[move].argument == 0) ? 50 : gBattleMoves[move].argument;
+        s32 healDmg = (healPercent * damage) / 100;
+        
+        if (CanTargetFaintAi(battlerDef, battlerAtk)
+          && !CanTargetFaintAiWithMod(battlerDef, battlerAtk, healDmg, 0))
+            return TRUE;    // target can faint attacker unless they heal
+        else if (!CanTargetFaintAi(battlerDef, battlerAtk) && GetHealthPercentage(battlerAtk) < 60 && (Random() % 3))
+            return TRUE;    // target can't faint attacker at all, attacker health is about half, 2/3rds rate of encouraging healing
+    }
+    else
+    {
+        // opponent goes first
+        if (!CanTargetFaintAi(battlerDef, battlerAtk))
+            return TRUE;
+    }
+    
+    return FALSE;
 }
 
 // Partner Logic
@@ -1554,5 +1611,84 @@ bool32 PartnerMoveIsSameNoTarget(u8 battlerAtkPartner, u16 move, u16 partnerMove
     if (gChosenMoveByBattler[battlerAtkPartner] != MOVE_NONE && move == partnerMove)
         return TRUE;
     return FALSE;
+}
+
+// party logic
+s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon *mon)
+{
+    s32 dmg;
+    u32 i;
+    struct BattlePokemon *battleMons = Alloc(sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
+
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        battleMons[i] = gBattleMons[i];
+
+    PokemonToBattleMon(mon, &gBattleMons[battlerAtk]);
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef);
+
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        gBattleMons[i] = battleMons[i];
+
+    Free(battleMons);
+
+    return dmg;
+}
+
+s32 CountUsablePartyMons(u8 battlerId)
+{
+    s32 battlerOnField1, battlerOnField2, i, ret;
+    struct Pokemon *party;
+
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        battlerOnField1 = gBattlerPartyIndexes[battlerId];
+        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerPosition(battlerId) ^ BIT_FLANK)];
+    }
+    else // In singles there's only one battlerId by side.
+    {
+        battlerOnField1 = gBattlerPartyIndexes[battlerId];
+        battlerOnField2 = gBattlerPartyIndexes[battlerId];
+    }
+
+    ret = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (i != battlerOnField1 && i != battlerOnField2
+         && GetMonData(&party[i], MON_DATA_HP) != 0
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        {
+            ret++;
+        }
+    }
+
+    return ret;
+}
+
+bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
+{
+    struct Pokemon *party;
+    u32 i;
+    
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+    
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (i != gBattlerPartyIndexes[battlerId]
+         && GetMonData(&party[i], MON_DATA_HP) != 0
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+         && GetMonData(&party[i], MON_DATA_HP) < GetMonData(&party[i], MON_DATA_MAX_HP))
+            return FALSE;
+    }
+    return TRUE;
 }
 

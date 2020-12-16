@@ -38,7 +38,7 @@
 // AI Flags. Most run specific functions to update score, new flags are used for internal logic in other scripts
 #define AI_FLAG_CHECK_BAD_MOVE          (1 << 0)
 #define AI_FLAG_TRY_TO_FAINT            (1 << 1)
-#define AI_FLAG_CHECK_VIABILITY         (1 << 2)
+#define AI_FLAG_CHECK_GOOD_MOVE         (1 << 2)    // was AI_SCRIPT_CHECK_VIABILITY
 #define AI_FLAG_SETUP_FIRST_TURN        (1 << 3)
 #define AI_FLAG_RISKY                   (1 << 4)
 #define AI_FLAG_PREFER_STRONGEST_MOVE   (1 << 5)
@@ -49,6 +49,7 @@
 #define AI_FLAG_NEGATE_AWARE            (1 << 9)   // AI is aware of negating effects like wonder room, mold breaker, etc (eg. smart trainers). TODO unfinished
 #define AI_FLAG_HELP_PARTNER            (1 << 10)  // AI can try to help partner. If not set, will tend not to target partner
 #define AI_FLAG_WILL_SUICIDE            (1 << 11)  // AI will use explosion / self destruct / final gambit / etc
+#define AI_FLAG_PREFER_STATUS_MOVES     (1 << 12)  // AI gets a score bonus for status moves. Should be combined with AI_FLAG_CHECK_BAD_MOVE to prevent using only status moves
 
 // 'other' ai logic flags
 #define AI_FLAG_ROAMING                 (1 << 29)
