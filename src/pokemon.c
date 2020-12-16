@@ -2861,8 +2861,11 @@ void CalculateMonStats(struct Pokemon *mon)
             currentHP = newMaxHP;
         else if (currentHP != 0)
             // BUG: currentHP is unintentionally able to become <= 0 after the instruction below. This causes the pomeg berry glitch.
-            // To fix that set currentHP = 1 if currentHP <= 0.
             currentHP += newMaxHP - oldMaxHP;
+            #ifdef BUGFIX
+            if (currentHP <= 0)
+                currentHP = 1;
+            #endif
         else
             return;
     }
@@ -5594,8 +5597,8 @@ u16 SpeciesToCryId(u16 species)
 void sub_806D544(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
-        && dest != gMonSpritesGfxPtr->sprites[0]
-        && dest != gMonSpritesGfxPtr->sprites[2])
+        && dest != gMonSpritesGfxPtr->sprites.ptr[0]
+        && dest != gMonSpritesGfxPtr->sprites.ptr[2])
     {
         int i;
         for (i = 0; i < 4; i++)
