@@ -261,10 +261,10 @@ Note for WSL1: If you get an error stating `fatal: could not set 'core.filemode'
 ```bash
 cd
 sudo umount /mnt/c
-sudo mount -t drvfs C: /mnt/c -o metadata
+sudo mount -t drvfs C: /mnt/c -o metadata,noatime
 cd <folder where pokeemerald is to be stored>
 ```
-Where *\<folder where pokeemerald is to be stored>* is the path of the folder [where you chose to store pokeemerald](#Choosing-where-to-store-pokeemerald-WSL1).
+Where *\<folder where pokeemerald is to be stored>* is the path of the folder [where you chose to store pokeemerald](#Choosing-where-to-store-pokeemerald-WSL1). Then run the `git clone` command again.
 
 If agbcc has not been built before, run the following commands to build and install it into pokeemerald:
 ```
