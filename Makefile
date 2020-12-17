@@ -18,12 +18,6 @@ PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
 AS := $(PREFIX)as
 
-ifneq ($(MODERN),1)
-CPP := $(CC) -E
-else
-CPP := $(PREFIX)cpp
-endif
-
 LD := $(PREFIX)ld
 
 # note: the makefile must be set up so MODERNCC is never called
@@ -41,6 +35,12 @@ GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
 MODERN      ?= 0
+
+ifneq ($(MODERN),1)
+CPP := $(CC) -E
+else
+CPP := $(PREFIX)cpp
+endif
 
 ROM_NAME := pokeemerald.gba
 ELF_NAME := $(ROM_NAME:.gba=.elf)
