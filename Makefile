@@ -17,7 +17,13 @@ endif
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
 AS := $(PREFIX)as
+
+ifneq ($(MODERN),1)
 CPP := $(CC) -E
+else
+CPP := $(PREFIX)cpp
+endif
+
 LD := $(PREFIX)ld
 
 # note: the makefile must be set up so MODERNCC is never called
