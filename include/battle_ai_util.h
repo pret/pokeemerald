@@ -49,8 +49,10 @@ bool32 BattlerHasAnyStatRaised(u8 battlerId);
 u32 CountPositiveStatStages(u8 battlerId);
 u32 CountNegativeStatStages(u8 battlerId);
 bool32 BattlerShouldRaiseAttacks(u8 battlerId, u16 ability);
+bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
 
 // move checks
+bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split);
 s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef);
 u8 GetMoveDamageResult(u16 move);
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
@@ -60,6 +62,7 @@ bool32 IsConfusionMoveEffect(u16 moveEffect);
 bool32 HasMoveWithSplit(u32 battler, u32 split);
 bool32 HasMoveWithType(u32 battler, u8 type);
 bool32 HasMoveEffect(u32 battlerId, u16 moveEffect);
+bool32 HasMoveWithLowAccuracy(u8, u8, u8, bool32, u16, u16, u16, u16, u16);
 bool32 TestMoveFlagsInMoveset(u8 battler, u32 flags);
 bool32 IsAromaVeilProtectedMove(u16 move);
 bool32 IsNonVolatileStatusMoveEffect(u16 moveEffect);

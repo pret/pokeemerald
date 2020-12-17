@@ -235,8 +235,29 @@ struct AI_SavedBattleMon
     u16 species;
 };
 
+struct AiLogicData
+{
+    //attacker data
+    u16 atkAbility;
+    u16 atkHoldEffect;
+    u8 atkParam;
+    // target data
+    u16 defAbility;
+    u16 defHoldEffect;
+    u8 defParam;
+    // attacker partner data
+    u8 battlerAtkPartner;
+    u16 partnerMove;
+    u16 atkPartnerAbility;
+    bool32 targetSameSide;
+    // target partner data
+    u8 battlerDefPartner;
+    u16 defPartnerAbility;
+};
+
 struct AI_ThinkingStruct
 {
+    struct AiLogicData *data;
     u8 aiState;
     u8 movesetIndex;
     u16 moveConsidered;
@@ -295,6 +316,7 @@ struct BattleResources
 };
 
 #define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
+#define AI_DATA ((struct AiLogicData *)(gBattleResources->ai->data))
 #define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
 
 struct BattleResults

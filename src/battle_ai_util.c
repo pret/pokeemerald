@@ -267,6 +267,32 @@ bool32 IsBattlerTrapped(u8 battler, bool8 checkSwitch)
 }
 
 // move checks
+// This function checks if all physical/special moves are either unusable or unreasonable to use.
+// Consider a pokemon boosting their attack against a ghost pokemon having only normal-type physical attacks.
+bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split)
+{
+    s32 i, moveType;
+    u32 usable = 0;
+    u32 unusable = CheckMoveLimitations(attacker, 0, 0xFF);
+    u16 *moves = GetMovesArray(attacker);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE
+             && moves[i] != 0xFFFF
+             && GetBattleMoveSplit(moves[i]) == split
+             && !(unusable & gBitTable[i]))
+        {
+            SetTypeBeforeUsingMove(moves[i], attacker);
+            GET_MOVE_TYPE(moves[i], moveType);
+            if (CalcTypeEffectivenessMultiplier(moves[i], moveType, attacker, target, FALSE) != 0)
+                usable |= gBitTable[i];
+        }
+    }
+
+    return (usable == 0);
+}
+
 static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
 {
     bool32 isCrit;
@@ -1022,6 +1048,21 @@ bool32 BattlerShouldRaiseAttacks(u8 battlerId, u16 ability)
     return TRUE;
 }
 
+bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+{
+    if (IsBattlerFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex))
+        return FALSE; //Don't bother lowering stats if can kill enemy.
+
+    if (gBattleMons[battlerDef].statStages[STAT_ATK] > 4 && HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL)
+      && defAbility != ABILITY_CONTRARY
+      && defAbility != ABILITY_CLEAR_BODY
+      && defAbility != ABILITY_WHITE_SMOKE
+      //&& defAbility != ABILITY_FULLMETALBODY
+      && defAbility != ABILITY_HYPER_CUTTER)
+        return TRUE;
+    return FALSE;
+}
+
 bool32 CanAttackerFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index)
 {
     s32 dmg = AI_THINKING_STRUCT->simulatedDmg[battlerAtk][battlerDef][index];
@@ -1078,6 +1119,33 @@ bool32 HasMoveEffect(u32 battlerId, u16 moveEffect)
             return TRUE;
     }
 
+    return FALSE;
+}
+
+bool32 HasMoveWithLowAccuracy(u8 battlerAtk, u8 battlerDef, u8 accCheck, bool32 ignoreStatus, u16 atkAbility, u16 defAbility, u16 atkHoldEffect, u16 defHoldEffect, u16 move)
+{
+    s32 i;
+    u16 *moves = GetMovesArray(battlerAtk);
+    u8 moveLimitations = CheckMoveLimitations(battlerAtk, 0, 0xFF);
+    
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] == MOVE_NONE || moves[i] == 0xFFFF)
+            continue;
+        
+        if (!(gBitTable[i] & moveLimitations))
+        {
+            if (ignoreStatus && IS_MOVE_STATUS(moves[i]))
+                continue;
+            else if ((!IS_MOVE_STATUS(moves[i]) && gBattleMoves[move].accuracy == 0)
+              || gBattleMoves[move].target & (MOVE_TARGET_USER | MOVE_TARGET_OPPONENTS_FIELD))
+                continue;
+            
+            if (AI_GetMoveAccuracy(battlerAtk, battlerDef, atkAbility, defAbility, atkHoldEffect, defHoldEffect, move) <= accCheck)
+                return TRUE;
+        }
+    }
+    
     return FALSE;
 }
 
