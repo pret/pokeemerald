@@ -6,16 +6,10 @@ CFLAGS = -Wall -Wextra -Werror -std=c11 -O2
 
 SRCS = bin2c.c
 
-ifeq ($(OS),Windows_NT)
-EXE := .exe
-else
-EXE :=
-endif
-
-all: bin2c$(EXE)
+all: bin2c
 	@:
 
-bin2c$(EXE): $(SRCS)
+bin2c: $(SRCS)
 	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
