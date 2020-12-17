@@ -8,12 +8,18 @@ SRCS := jsonproc.cpp
 
 HEADERS := jsonproc.h inja.hpp nlohmann/json.hpp
 
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
 .PHONY: all clean
 
-all: jsonproc
+all: jsonproc$(EXE)
 	@:
 
-jsonproc: $(SRCS) $(HEADERS)
+jsonproc$(EXE): $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
