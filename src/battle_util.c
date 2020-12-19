@@ -6778,7 +6778,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             MulModifier(&modifier, UQ_4_12(1.2));
         break;
     case ABILITY_PUNK_ROCK:
-        if (gBattleMoves[move].flags & FLAG_PUNK_ROCK_AFFECTED)
+        if ((gBattleMoves[move].flags & FLAG_SOUND) && !IS_MOVE_STATUS(move))
             MulModifier(&modifier, UQ_4_12(1.3));
         break;
     }
@@ -7234,7 +7234,7 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_PUNK_ROCK:
-        if (gBattleMoves[move].flags & FLAG_PUNK_ROCK_AFFECTED)
+        if ((gBattleMoves[move].flags & FLAG_SOUND) && !IS_MOVE_STATUS(move))
             MulModifier(&modifier, UQ_4_12(1.3));
         break;
     }
