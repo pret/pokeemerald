@@ -767,7 +767,15 @@ gBattleAnims_Moves::
 	.4byte Move_JUNGLE_HEALING
 	.4byte Move_WICKED_BLOW
 	.4byte Move_SURGING_STRIKES
-	.4byte Move_COUNT @ cannot be reached, because last move is Surging Strikes
+	.4byte Move_THUNDER_CAGE
+	.4byte Move_DRAGON_ENERGY
+	.4byte Move_FREEZING_GLARE
+	.4byte Move_FIERY_WRATH
+	.4byte Move_THUNDEROUS_KICK
+	.4byte Move_GLACIAL_LANCE
+	.4byte Move_ASTRAL_BARRAGE
+	.4byte Move_EERIE_SPELL
+	.4byte Move_COUNT @ cannot be reached, because last move is Eerie Spell
 
 	.align 2
 gBattleAnims_StatusConditions::
@@ -14004,6 +14012,30 @@ Move_WICKED_BLOW::
 	end @to do:
 
 Move_SURGING_STRIKES::
+	end @to do:
+
+Move_THUNDER_CAGE::
+	end @to do:
+
+Move_DRAGON_ENERGY::
+	end @to do:
+
+Move_FREEZING_GLARE::
+	end @to do:
+
+Move_FIERY_WRATH::
+	end @to do:
+
+Move_THUNDEROUS_KICK::
+	end @to do:
+
+Move_GLACIAL_LANCE::
+	end @to do:
+
+Move_ASTRAL_BARRAGE::
+	end @to do:
+
+Move_EERIE_SPELL::
 	end @to do:
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
