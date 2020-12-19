@@ -2928,7 +2928,7 @@ static const u8 sFIERY_WRATHDescription[] = _(
 
 static const u8 sTHUNDEROUS_KICKDescription[] = _(
     "Uses a lightning-like kick\n"
-    "to hit. Lowers foe's DEFENSE.");
+    "to hit. Lowers foe's Defense.");
 
 static const u8 sGLACIAL_LANCEDescription[] = _(
     "Strikes by hurling a blizzard-\n"
@@ -2939,8 +2939,8 @@ static const u8 sASTRAL_BARRAGEDescription[] = _(
     "amount of ghosts at a foe.");
 
 static const u8 sEERIE_SPELLDescription[] = _(
-    "Eeriely inflicts damage and\n"
-    "cuts a foe's las move's PP.");
+    "Attacks with psychic power.\n"
+    "Foe's last move has 3 PP cut.");
 
 static const u8 sNotDoneYetDescription[] = _(
     "Not done yet.");
