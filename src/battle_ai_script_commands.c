@@ -45,8 +45,6 @@ in order to read the next command correctly. refer to battle_ai_scripts.s for th
 AI scripts.
 */
 
-extern const u8 *const gBattleAI_ScriptsTable[];
-
 static u8 ChooseMoveOrAction_Singles(void);
 static u8 ChooseMoveOrAction_Doubles(void);
 static void BattleAI_DoAIProcessing(void);
@@ -755,7 +753,6 @@ static void BattleAI_DoAIProcessing(void)
             case AIState_DoNotProcess: // Needed to match.
                 break;
             case AIState_SettingUp:
-                gAIScriptPtr = gBattleAI_ScriptsTable[AI_THINKING_STRUCT->aiLogicId]; // set AI ptr to logic ID.
                 if (gBattleMons[sBattler_AI].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
                 {
                     AI_THINKING_STRUCT->moveConsidered = 0;
@@ -767,33 +764,30 @@ static void BattleAI_DoAIProcessing(void)
                 AI_THINKING_STRUCT->aiState++;
                 break;
             case AIState_Processing:
-                if (AI_THINKING_STRUCT->moveConsidered != MOVE_NONE)
-                {
-                    if (AI_THINKING_STRUCT->aiLogicId < ARRAY_COUNT(sBattleAiFuncTable) && sBattleAiFuncTable[AI_THINKING_STRUCT->aiLogicId] != NULL)
-                    {
-                        AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] += sBattleAiFuncTable[AI_THINKING_STRUCT->aiLogicId](sBattler_AI,
-                          gBattlerTarget, AI_THINKING_STRUCT->moveConsidered, AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex]);
-                        if (AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] < 0)
-                            AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = 0;    // limit to 0
-                    }
-                }
-                else
-                {
-                    AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = 0;
-                    AI_THINKING_STRUCT->aiAction |= AI_ACTION_DONE;
-                }
-                
-                if (AI_THINKING_STRUCT->aiAction & AI_ACTION_DONE)
-                {
-                   AI_THINKING_STRUCT->movesetIndex++;
+                if (AI_THINKING_STRUCT->moveConsidered != MOVE_NONE
+				  && AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] > 0)
+				{
+					if (AI_THINKING_STRUCT->aiLogicId < ARRAY_COUNT(sBattleAiFuncTable)
+					  && sBattleAiFuncTable[AI_THINKING_STRUCT->aiLogicId] != NULL)
+					{
+                        // Call AI function
+						AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] =
+							sBattleAiFuncTable[AI_THINKING_STRUCT->aiLogicId](gBattlerAttacker,
+                              gBattlerTarget,
+                              AI_THINKING_STRUCT->moveConsidered,
+                              AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex]);
+					}
+				}
+				else
+				{
+					AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = 0;
+				}
 
-                    if (AI_THINKING_STRUCT->movesetIndex < MAX_MON_MOVES && !(AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK))
-                        AI_THINKING_STRUCT->aiState = AIState_SettingUp;
-                    else
-                        AI_THINKING_STRUCT->aiState++;
-
-                    AI_THINKING_STRUCT->aiAction &= ~(AI_ACTION_DONE);
-                }
+				AI_THINKING_STRUCT->movesetIndex++;
+				if (AI_THINKING_STRUCT->movesetIndex < MAX_MON_MOVES && !(AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK))
+					AI_THINKING_STRUCT->aiState = AIState_SettingUp;
+				else
+					AI_THINKING_STRUCT->aiState++;
                 break;
         }
     }
@@ -4313,6 +4307,9 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
       && IS_MOVE_STATUS(move))
         score -= 10; //Don't use a status move if partner wants to help
     
+    if (score < 0)
+        score = 0;
+    
     return score;
 }
 
@@ -6151,10 +6148,12 @@ static s16 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 
 static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
+    return score;
 }
 
 static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
+    return score;
 }
 
 static void AI_Flee(void)
