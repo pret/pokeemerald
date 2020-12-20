@@ -2301,68 +2301,6 @@ AI_CV_Encore_End:
 	end
 
 AI_CV_Encore_EncouragedMovesToEncore:
-    .byte EFFECT_DREAM_EATER
-    .byte EFFECT_ATTACK_UP
-    .byte EFFECT_DEFENSE_UP
-    .byte EFFECT_SPEED_UP
-    .byte EFFECT_SPECIAL_ATTACK_UP
-    .byte EFFECT_HAZE
-    .byte EFFECT_ROAR
-    .byte EFFECT_CONVERSION
-    .byte EFFECT_TOXIC
-    .byte EFFECT_LIGHT_SCREEN
-    .byte EFFECT_REST
-    .byte EFFECT_SUPER_FANG
-    .byte EFFECT_SPECIAL_DEFENSE_UP_2
-    .byte EFFECT_CONFUSE
-    .byte EFFECT_POISON
-    .byte EFFECT_PARALYZE
-    .byte EFFECT_LEECH_SEED
-    .byte EFFECT_DO_NOTHING
-    .byte EFFECT_ATTACK_UP_2
-    .byte EFFECT_ENCORE
-    .byte EFFECT_CONVERSION_2
-    .byte EFFECT_LOCK_ON
-    .byte EFFECT_HEAL_BELL
-    .byte EFFECT_MEAN_LOOK
-    .byte EFFECT_NIGHTMARE
-    .byte EFFECT_PROTECT
-    .byte EFFECT_SKILL_SWAP
-    .byte EFFECT_FORESIGHT
-    .byte EFFECT_PERISH_SONG
-    .byte EFFECT_SANDSTORM
-    .byte EFFECT_ENDURE
-    .byte EFFECT_SWAGGER
-    .byte EFFECT_ATTRACT
-    .byte EFFECT_SAFEGUARD
-    .byte EFFECT_RAIN_DANCE
-    .byte EFFECT_SUNNY_DAY
-    .byte EFFECT_BELLY_DRUM
-    .byte EFFECT_PSYCH_UP
-    .byte EFFECT_FUTURE_SIGHT
-    .byte EFFECT_FAKE_OUT
-    .byte EFFECT_STOCKPILE
-    .byte EFFECT_SPIT_UP
-    .byte EFFECT_SWALLOW
-    .byte EFFECT_HAIL
-    .byte EFFECT_TORMENT
-    .byte EFFECT_WILL_O_WISP
-    .byte EFFECT_FOLLOW_ME
-    .byte EFFECT_CHARGE
-    .byte EFFECT_TRICK
-    .byte EFFECT_ROLE_PLAY
-    .byte EFFECT_INGRAIN
-    .byte EFFECT_RECYCLE
-    .byte EFFECT_KNOCK_OFF
-    .byte EFFECT_SKILL_SWAP
-    .byte EFFECT_IMPRISON
-    .byte EFFECT_REFRESH
-    .byte EFFECT_GRUDGE
-    .byte EFFECT_TEETER_DANCE
-    .byte EFFECT_MUD_SPORT
-    .byte EFFECT_WATER_SPORT
-    .byte EFFECT_DRAGON_DANCE
-    .byte EFFECT_CAMOUFLAGE
     .byte -1
 
 AI_CV_PainSplit:

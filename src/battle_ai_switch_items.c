@@ -417,7 +417,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
     return FALSE;
 }
 
-static bool8 ShouldSwitch(void)
+bool32 ShouldSwitch(void)
 {
     u8 battlerIn1, battlerIn2;
     s32 firstId;
