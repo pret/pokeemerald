@@ -3238,7 +3238,12 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
         break;
     case STAT_SPEED:
         if (IsAiFaster(AI_CHECK_SLOWER))
-            *score += 2;
+        {
+            if (gBattleMons[battlerAtk].statStages[STAT_SPEED] < STAT_UP_2_STAGE)
+                *score += 2;
+            else if (gBattleMons[battlerAtk].statStages[STAT_SPEED] < STAT_UP_STAGE)
+                *(score)++;
+        }
         break;
     case STAT_SPATK:
         if (HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL) && GetHealthPercentage(battlerAtk) > 40)
