@@ -3238,7 +3238,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
         break;
     case STAT_SPEED:
         if (IsAiFaster(AI_CHECK_SLOWER))
-            *score += 3;
+            *score += 2;
         break;
     case STAT_SPATK:
         if (HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL) && GetHealthPercentage(battlerAtk) > 40)
