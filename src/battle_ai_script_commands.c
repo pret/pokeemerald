@@ -5912,8 +5912,99 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     return score;
 }
 
+// Effects that are encouraged on the first turn of battle
 static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
+    if (IsTargetingPartner(battlerAtk, battlerDef)
+      || gBattleResults.battleTurnCounter != 0)
+        return score;
+    switch (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect)
+    {
+    case EFFECT_ATTACK_UP:
+    case EFFECT_DEFENSE_UP:
+    case EFFECT_SPEED_UP:
+    case EFFECT_SPECIAL_ATTACK_UP:
+    case EFFECT_SPECIAL_DEFENSE_UP:
+    case EFFECT_ACCURACY_UP:
+    case EFFECT_EVASION_UP:
+    case EFFECT_ATTACK_DOWN:
+    case EFFECT_DEFENSE_DOWN:
+    case EFFECT_SPEED_DOWN:
+    case EFFECT_SPECIAL_ATTACK_DOWN:
+    case EFFECT_SPECIAL_DEFENSE_DOWN:
+    case EFFECT_ACCURACY_DOWN:
+    case EFFECT_EVASION_DOWN:
+    case EFFECT_CONVERSION:
+    case EFFECT_LIGHT_SCREEN:
+    case EFFECT_FOCUS_ENERGY:
+    case EFFECT_CONFUSE:
+    case EFFECT_ATTACK_UP_2:
+    case EFFECT_DEFENSE_UP_2:
+    case EFFECT_SPEED_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_DEFENSE_UP_2:
+    case EFFECT_ACCURACY_UP_2:
+    case EFFECT_EVASION_UP_2:
+    case EFFECT_ATTACK_DOWN_2:
+    case EFFECT_DEFENSE_DOWN_2:
+    case EFFECT_SPEED_DOWN_2:
+    case EFFECT_SPECIAL_ATTACK_DOWN_2:
+    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+    case EFFECT_ACCURACY_DOWN_2:
+    case EFFECT_EVASION_DOWN_2:
+    case EFFECT_REFLECT:
+    case EFFECT_POISON:
+    case EFFECT_PARALYZE:
+    case EFFECT_SUBSTITUTE:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_MINIMIZE:
+    case EFFECT_CURSE:
+    case EFFECT_SWAGGER:
+    case EFFECT_CAMOUFLAGE:
+    case EFFECT_YAWN:
+    case EFFECT_DEFENSE_CURL:
+    case EFFECT_TORMENT:
+    case EFFECT_FLATTER:
+    case EFFECT_WILL_O_WISP:
+    case EFFECT_INGRAIN:
+    case EFFECT_IMPRISON:
+    case EFFECT_TEETER_DANCE:
+    case EFFECT_TICKLE:
+    case EFFECT_COSMIC_POWER:
+    case EFFECT_BULK_UP:
+    case EFFECT_CALM_MIND:
+    case EFFECT_ACUPRESSURE:
+    case EFFECT_AUTOTOMIZE:
+    case EFFECT_SHIFT_GEAR:
+    case EFFECT_SHELL_SMASH:
+    case EFFECT_GROWTH:
+    case EFFECT_QUIVER_DANCE:
+    case EFFECT_ATTACK_SPATK_UP:
+    case EFFECT_ATTACK_ACCURACY_UP:
+    case EFFECT_PSYCHIC_TERRAIN:
+    case EFFECT_GRASSY_TERRAIN:
+    case EFFECT_ELECTRIC_TERRAIN:
+    case EFFECT_MISTY_TERRAIN:
+    case EFFECT_STEALTH_ROCK:
+    case EFFECT_TOXIC_SPIKES:
+    case EFFECT_TRICK_ROOM:
+    case EFFECT_WONDER_ROOM:
+    case EFFECT_MAGIC_ROOM:
+    case EFFECT_TAILWIND:
+    case EFFECT_DRAGON_DANCE:
+    case EFFECT_STICKY_WEB:
+    case EFFECT_RAIN_DANCE:
+    case EFFECT_SUNNY_DAY:
+    case EFFECT_SANDSTORM:
+    case EFFECT_HAIL:
+    case EFFECT_GEOMANCY:
+        score += 2;
+        break;
+    default:
+        break;
+    }
+    
+    return score;
 }
 
 static s16 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
