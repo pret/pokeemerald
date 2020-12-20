@@ -2674,6 +2674,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_DEFENSE_UP:
         case EFFECT_DEFENSE_UP_2:
+        case EFFECT_DEFENSE_UP_3:
         case EFFECT_DEFENSE_CURL:
             if (move == MOVE_STUFF_CHEEKS)
             {
@@ -2728,6 +2729,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SPECIAL_ATTACK_UP:
         case EFFECT_SPECIAL_ATTACK_UP_2:
+        case EFFECT_SPECIAL_ATTACK_UP_3:
             if (AI_DATA->atkAbility == ABILITY_CONTRARY
               || !BattlerStatCanRise(battlerAtk, AI_DATA->atkAbility, STAT_SPATK)
               || !HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
@@ -4465,6 +4467,7 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_DEFENSE_UP:
     case EFFECT_DEFENSE_UP_2:
+    case EFFECT_DEFENSE_UP_3:
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_DEF, &score);
         break;
     case EFFECT_SPEED_UP:
@@ -4473,6 +4476,7 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_SPECIAL_ATTACK_UP:
     case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
         break;
     case EFFECT_SPECIAL_DEFENSE_UP:
@@ -5940,8 +5944,10 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_CONFUSE:
     case EFFECT_ATTACK_UP_2:
     case EFFECT_DEFENSE_UP_2:
+    case EFFECT_DEFENSE_UP_3:
     case EFFECT_SPEED_UP_2:
     case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
     case EFFECT_SPECIAL_DEFENSE_UP_2:
     case EFFECT_ACCURACY_UP_2:
     case EFFECT_EVASION_UP_2:
@@ -6007,6 +6013,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     return score;
 }
 
+// Adds score bonus to 'riskier' move effects and high crit moves
 static s16 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     if (IsTargetingPartner(battlerAtk, battlerDef))
@@ -6045,12 +6052,101 @@ static s16 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     return score;
 }
 
+// Adds score bonus to best powered move
 static s16 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
+    if (IsTargetingPartner(battlerAtk, battlerDef))
+        return score;
+    
+    if (GetMoveDamageResult(move) == MOVE_POWER_BEST)
+        score += 2;
+    
+    return score;
 }
 
+// Prefers moves that are good for baton pass
 static s16 AI_PreferBatonPass(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
+    u32 i;
+    
+    if (IsTargetingPartner(battlerAtk, battlerDef)
+      || CountUsablePartyMons(battlerAtk) == 0
+      || GetMoveDamageResult(move) != MOVE_POWER_DISCOURAGED
+      || !HasMoveEffect(battlerAtk, EFFECT_BATON_PASS)
+      || IsBattlerTrapped(battlerAtk, TRUE))
+        return score;
+        
+    switch (gBattleMoves[move].effect)
+    {
+	case EFFECT_ATTACK_UP:
+	case EFFECT_ATTACK_UP_2:
+	case EFFECT_DEFENSE_UP:
+	case EFFECT_DEFENSE_UP_2:
+    case EFFECT_DEFENSE_UP_3:
+	case EFFECT_SPEED_UP:
+	case EFFECT_SPEED_UP_2:
+	case EFFECT_SPECIAL_ATTACK_UP:
+	case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
+	case EFFECT_SPECIAL_DEFENSE_UP:
+	case EFFECT_SPECIAL_DEFENSE_UP_2:
+    case EFFECT_ACCURACY_UP:
+    case EFFECT_ACCURACY_UP_2:
+    case EFFECT_EVASION_UP:
+    case EFFECT_EVASION_UP_2:
+    case EFFECT_MINIMIZE:
+    case EFFECT_DEFENSE_CURL:
+    case EFFECT_CHARGE:
+	case EFFECT_CALM_MIND:
+    case EFFECT_COSMIC_POWER:
+	case EFFECT_DRAGON_DANCE:
+	case EFFECT_ACUPRESSURE:
+	case EFFECT_SHELL_SMASH:
+	case EFFECT_SHIFT_GEAR:
+	case EFFECT_ATTACK_ACCURACY_UP:
+	case EFFECT_ATTACK_SPATK_UP:
+	case EFFECT_GROWTH:
+	case EFFECT_COIL:
+	case EFFECT_QUIVER_DANCE:
+    case EFFECT_BULK_UP:
+    case EFFECT_GEOMANCY:
+    case EFFECT_STOCKPILE:
+        if (gBattleResults.battleTurnCounter == 0)
+            score += 5;
+        else if (GetHealthPercentage(battlerAtk) < 60)
+            score -= 10;
+        else
+            score++;
+        break;
+    case EFFECT_INGRAIN:
+        if (!(gStatuses3[battlerAtk] & STATUS3_ROOTED))
+            score += 2;
+        break;
+    case EFFECT_AQUA_RING:
+        if (!(gStatuses3[battlerAtk] & STATUS3_AQUA_RING))
+            score += 2;
+        break;
+    case EFFECT_PROTECT:
+        if (gLastMoves[battlerAtk] == MOVE_PROTECT || gLastMoves[battlerAtk] == MOVE_DETECT)
+            score -= 2;
+        else
+            score += 2;
+        break;
+    case EFFECT_BATON_PASS:
+        for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+        {
+            IncreaseStatUpScore(battlerAtk, battlerDef, i, &score);
+        }
+        if (gStatuses3[battlerAtk] & (STATUS3_ROOTED | STATUS3_AQUA_RING))
+            score += 2;
+        if (gStatuses3[battlerAtk] & STATUS3_LEECHSEED)
+            score -= 3; 
+        break;
+    default:
+        break;
+    }
+    
+    return score;
 }
 
 static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
@@ -6071,6 +6167,7 @@ static void AI_Watch(void)
     AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK);
 }
 
+// Roaming pokemon logic
 static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     if (IsBattlerTrapped(battlerAtk, FALSE))
@@ -6080,6 +6177,7 @@ static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     return score;
 }
 
+// Safari pokemon logic
 static s16 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     u8 safariFleeRate = gBattleStruct->safariEscapeFactor * 5; // Safari flee rate, from 0-20.
@@ -6092,6 +6190,7 @@ static s16 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     return score;
 }
 
+// First battle logic
 static s16 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     if (GetHealthPercentage(battlerDef) <= 20)

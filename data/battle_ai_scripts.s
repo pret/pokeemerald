@@ -3347,81 +3347,12 @@ AI_SetupFirstTurn:
 	end
 
 AI_PreferStrongestMove:
-	if_target_is_ally AI_Ret
-	get_how_powerful_move_is
-	if_not_equal MOVE_POWER_BEST, AI_PreferStrongestMove_End
-	if_random_less_than 100, AI_PreferStrongestMove_End
-	score +2
-AI_PreferStrongestMove_End:
 	end
 
 AI_Risky:
 	end
 
-
-.align 1
-sMovesTable_ProtectMoves:
-    .2byte MOVE_PROTECT
-    .2byte MOVE_DETECT
-    .2byte -1
-
-.align 1
-sEffectsStatRaise:
-	.2byte EFFECT_ATTACK_UP
-	.2byte EFFECT_ATTACK_UP_2
-	.2byte EFFECT_DEFENSE_UP
-	.2byte EFFECT_DEFENSE_UP_2
-	.2byte EFFECT_SPEED_UP
-	.2byte EFFECT_SPEED_UP_2
-	.2byte EFFECT_SPECIAL_ATTACK_UP
-	.2byte EFFECT_SPECIAL_ATTACK_UP_2
-	.2byte EFFECT_SPECIAL_DEFENSE_UP
-	.2byte EFFECT_SPECIAL_DEFENSE_UP_2
-	.2byte EFFECT_CALM_MIND
-	.2byte EFFECT_DRAGON_DANCE
-	.2byte EFFECT_ACUPRESSURE
-	.2byte EFFECT_SHELL_SMASH
-	.2byte EFFECT_SHIFT_GEAR
-	.2byte EFFECT_ATTACK_ACCURACY_UP
-	.2byte EFFECT_ATTACK_SPATK_UP
-	.2byte EFFECT_GROWTH
-	.2byte EFFECT_COIL
-	.2byte EFFECT_QUIVER_DANCE
-	.2byte -1
-
 AI_PreferBatonPass:
-	if_target_is_ally AI_Ret
-	count_usable_party_mons AI_USER
-	if_equal 0, AI_PreferBatonPassEnd
-	get_how_powerful_move_is
-	if_not_equal MOVE_POWER_DISCOURAGED, AI_PreferBatonPassEnd
-	if_doesnt_have_move_with_effect AI_USER, EFFECT_BATON_PASS, AI_PreferBatonPassEnd
-	get_considered_move_effect
-	if_in_hwords sEffectsStatRaise, AI_PreferBatonPass2
-	if_effect EFFECT_PROTECT, AI_PreferBatonPass3
-	if_move MOVE_BATON_PASS, AI_PreferBatonPass_EncourageIfHighStats
-	end
-AI_PreferBatonPass2:
-	get_turn_count
-	if_equal 0, Score_Plus5
-	if_hp_less_than AI_USER, 60, Score_Minus10
-	goto Score_Plus1
-AI_PreferBatonPass3:
-	get_last_used_bank_move AI_USER
-	if_in_hwords sMovesTable_ProtectMoves, Score_Minus2
-	score +2
-	end
-AI_PreferBatonPass_EncourageIfHighStats:
-	get_turn_count
-	if_equal 0, Score_Minus2
-	if_stat_level_more_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE + 2, Score_Plus3
-	if_stat_level_more_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE + 1, Score_Plus2
-	if_stat_level_more_than AI_USER, STAT_ATK, DEFAULT_STAT_STAGE, Score_Plus1
-	if_stat_level_more_than AI_USER, STAT_SPATK, DEFAULT_STAT_STAGE + 2, Score_Plus3
-	if_stat_level_more_than AI_USER, STAT_SPATK, DEFAULT_STAT_STAGE + 1, Score_Plus2
-	if_stat_level_more_than AI_USER, STAT_SPATK, DEFAULT_STAT_STAGE, Score_Plus1
-	end
-AI_PreferBatonPassEnd:
 	end
 	
 AI_ConsiderAllyChosenMove:
