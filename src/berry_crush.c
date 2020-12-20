@@ -40,22 +40,27 @@
 
 struct BerryCrushGame_Player
 {
-    u16 unk0;
-    u16 unk2;
-    union
-    {
-        u8 as_2d_bytes[2][8];
-        u16 as_hwords[8];
-    } unk4;
-    u8 unk14[12];
+    u8 unk0[PLAYER_NAME_LENGTH + 1 + 4];
+    u16 unkC;
+    u16 unkE;
+    u16 unk10;
+    u16 unk12;
+    u16 unk14;
+    u16 unk16;
+    u16 unk18;
+    u16 unk1A;
+    u8 unk1B;
+    u8 unk1C;
 };
 
-struct __attribute__((packed, aligned(2))) BerryCrushGame_4E
+struct BerryCrushGame_4E
 {
     u16 unk0;
     u16 filler2;
     u8 unk4_0:1;
     u8 unk4_1:1;
+    u8 unk4_2:1;
+    u8 unk4_3:5;
     s8 unk5;
     u16 unk6;
     u16 unk8;
@@ -63,54 +68,44 @@ struct __attribute__((packed, aligned(2))) BerryCrushGame_4E
     u16 unkC;
 };
 
-struct __attribute__((packed)) BerryCrushGame_40
+struct BerryCrushGame_40
 {
-    u8 unk0[2];
-    u16 unk2[6];
-    struct BerryCrushGame_4E unkE;
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+    s16 unkC;
+    s16 unkE;
 };
 
-struct BerryCrushGame_5C
+struct BerryCrushGame_5A
 {
     u16 unk00;
     u8 unk02_0:1;
     u8 unk02_1:1;
     u8 unk02_2:1;
     u8 unk02_3:5;
-    u8 unk03;
+    s8 unk03;
     u16 unk04;
     u16 unk06;
     u16 unk08;
     u16 unk0A;
 };
 
-union BerryCrushGame_68
+struct BerryCrushGame_66
 {
-    struct BerryCrushGame_68_x
-    {
-        struct BerryCrushGame_68_x_SubStruct
-        {
-            s32 unk00;
-            u16 unk04;
-            s16 unk06;
-            u16 unk08;
-            u16 unk0A;
-            u16 unk0C[2][5];
-            u8 filler20[16];
-        } unk00;
-        u8 unk30[12];
-        struct BerryCrushGame_Player others[4];
-        u8 fillerBC[20];
-    } as_four_players;
-    struct BerryCrushGame_68_y
-    {
-        u8 filler00[28];
-        struct BerryCrushGame_Player unk1C[5];
-        u8 fillerBC[20];
-    } as_five_players;
+    u32 unk00;
+    u16 unk04;
+    u16 unk06;
+    u16 unk08;
+    u16 unk0A;
+    u16 unk0C[2][5];
+    u8 filler20[2][8];
 };
 
-struct BerryCrushGame_138_C
+struct BerryCrushGame_136_C
 {
     u8 unk0;
     u8 unk1;
@@ -121,7 +116,7 @@ struct BerryCrushGame_138_C
     s16 unkA;
 };
 
-struct BerryCrushGame_138
+struct BerryCrushGame_136
 {
     u8 unk0;
     u8 unk1;
@@ -130,7 +125,7 @@ struct BerryCrushGame_138
     s16 unk4;
     s16 unk6;
     s16 unk8;
-    const struct BerryCrushGame_138_C *unkC[5];
+    const struct BerryCrushGame_136_C *unkC[5];
     struct Sprite *unk20;
     struct Sprite *unk24[5];
     struct Sprite *unk38[5];
@@ -140,6 +135,7 @@ struct BerryCrushGame_138
     u8 filler81;
     u8 unk82;
     u8 unk83[5];
+    u16 unk88[4][0x800];
 };
 
 struct BerryCrushGame
@@ -160,7 +156,7 @@ struct BerryCrushGame
     u16 unk16;
     s16 unk18;
     s16 unk1A;
-    int unk1C;
+    s32 unk1C;
     s32 unk20;
     u8 unk24;
     u8 unk25_0:1;
@@ -178,14 +174,12 @@ struct BerryCrushGame
     s16 unk32;
     s16 unk34;
     u8 unk36[0xA];
-    struct BerryCrushGame_40 unk40;
-    struct BerryCrushGame_5C unk5C;
-    union BerryCrushGame_68 unk68;
-    struct BerryCrushGame_138 unk138;
-    u8 unk1C0[0x1000];
-    u8 unk11C0[0x1000];
-    u8 unk21C0[0x1000];
-    u8 unk31C0[0x1000];
+    u16 unk40[6];
+    u16 unk4C[7];
+    struct BerryCrushGame_5A unk5A;
+    struct BerryCrushGame_66 unk66;
+    struct BerryCrushGame_Player unk96[5];
+    struct BerryCrushGame_136 unk136;
 };
 
 static void VBlankCB(void);
@@ -200,9 +194,9 @@ void sub_8022600(struct BerryCrushGame *);
 void sub_80226D0(struct BerryCrushGame *);
 void sub_8022730(struct BerryCrushGame *);
 void sub_8022960(struct BerryCrushGame *);
-void sub_8022524(struct BerryCrushGame_138 *, u16);
+void sub_8022524(struct BerryCrushGame_136 *, u16);
 void sub_8022B28(struct Sprite *);
-void sub_8022554(struct BerryCrushGame_138 *r0);
+void sub_8022554(struct BerryCrushGame_136 *r0);
 void sub_8024578(struct BerryCrushGame *);
 void sub_8024644(u8 *, u32, u32, u32, u32);
 static void sub_8022A20(struct Sprite *sprite);
@@ -452,7 +446,7 @@ static const u8 gUnknown_082F417C[][5] =
     {0, 1, 3, 2, 4},
 };
 
-static const struct BerryCrushGame_138_C gUnknown_082F4190[] =
+static const struct BerryCrushGame_136_C gUnknown_082F4190[] =
 {
     {
         .unk0 = 0,
@@ -887,7 +881,7 @@ static void GetBerryFromBag(void)
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
-    gBerryCrushGame->unk68.as_four_players.others[gBerryCrushGame->unk8].unk0 = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
+    gBerryCrushGame->unk96[gBerryCrushGame->unk8].unkC = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
     gBerryCrushGame->unkE = 1;
     gBerryCrushGame->unkF = 9;
     BerryCrush_SetPaletteFadeParams(gBerryCrushGame->unk36, 0, -1, 0, 16, 0, 0);
@@ -916,10 +910,10 @@ static void BerryCrush_SaveResults(void)
 {
     u32 var0, var1;
 
-    var0 = gBerryCrushGame->unk68.as_four_players.unk00.unk04;
+    var0 = gBerryCrushGame->unk66.unk04;
     var0 = Q_24_8(var0);
     var0 = MathUtil_Div32(var0, Q_24_8(60));
-    var1 = gBerryCrushGame->unk68.as_four_players.unk00.unk0A;
+    var1 = gBerryCrushGame->unk66.unk0A;
     var1 = Q_24_8(var1);
     var1 = MathUtil_Div32(var1, var0) & 0xFFFF;
     gBerryCrushGame->unk16 = var1;
@@ -955,7 +949,7 @@ static void BerryCrush_SaveResults(void)
         break;
     }
 
-    gBerryCrushGame->unk1C = gBerryCrushGame->unk68.as_four_players.unk00.unk00;
+    gBerryCrushGame->unk1C = gBerryCrushGame->unk66.unk00;
     if (GiveBerryPowder(gBerryCrushGame->unk1C))
         return;
 
@@ -985,22 +979,16 @@ static void MainTask(u8 taskId)
     sub_8021450(gBerryCrushGame);
 }
 
-#define PLAYER_UNK14(game, i)                        \
-    ((u8 *)(game)                                    \
-    + offsetof(struct BerryCrushGame, unk68)         \
-    + offsetof(struct BerryCrushGame_68_x, unk30)    \
-    + sizeof(struct BerryCrushGame_Player) * (i))
-
 static void ParseName_Options(struct BerryCrushGame *arg0)
 {
     u8 i = 0;
 
     for (; i < arg0->unk9; i++)
-        StringCopy(PLAYER_UNK14(arg0, i), gLinkPlayers[i].name);
+        StringCopy(arg0->unk96[i].unk0, gLinkPlayers[i].name);
     for (; i < 5; i++)
     {
-        memset(PLAYER_UNK14(arg0, i), 1, PLAYER_NAME_LENGTH);
-        arg0->unk68.as_five_players.unk1C[i].unk14[PLAYER_NAME_LENGTH] = EOS;
+        memset(arg0->unk96[i].unk0, 1, PLAYER_NAME_LENGTH);
+        arg0->unk96[i].unk0[PLAYER_NAME_LENGTH] = EOS;
     }
 
     switch (gSaveBlock2Ptr->optionsTextSpeed)
@@ -1046,9 +1034,9 @@ s32 InitBerryCrushDisplay(void)
     case 3:
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_082F32C8, ARRAY_COUNT(gUnknown_082F32C8));
-        SetBgTilemapBuffer(1, game->unk1C0);
-        SetBgTilemapBuffer(2, game->unk21C0);
-        SetBgTilemapBuffer(3, game->unk31C0);
+        SetBgTilemapBuffer(1, game->unk136.unk88[0]);
+        SetBgTilemapBuffer(2, game->unk136.unk88[2]);
+        SetBgTilemapBuffer(3, game->unk136.unk88[3]);
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
         ChangeBgX(2, 0, 0);
@@ -1182,7 +1170,7 @@ static int sub_8021450(struct BerryCrushGame *arg0)
     SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);
     if (arg0->unk12 == 7)
     {
-        sub_8022524(&arg0->unk138, arg0->unk28);
+        sub_8022524(&arg0->unk136, arg0->unk28);
     }
 
     return 0;
@@ -1196,7 +1184,7 @@ void sub_8021488(struct BerryCrushGame *arg0)
     gSpriteCoordOffsetY = -104;
 }
 
-void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
+void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_136 *arg1)
 {
     u8 i;
     u8 spriteId;
@@ -1212,7 +1200,7 @@ void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
             &gUnknown_082F436C,
             gUnknown_082F41E8[i],
             gUnknown_082F41E8[i],
-            arg0->unk68.as_four_players.others[i].unk0 + 133);
+            arg0->unk96[i].unkC + 133);
         arg1->unk38[i] = &gSprites[spriteId];
         arg1->unk38[i]->oam.priority = 3;
         arg1->unk38[i]->affineAnimPaused = TRUE;
@@ -1271,7 +1259,7 @@ void sub_8021608(struct Sprite *sprite)
     }
 }
 
-void sub_80216A8(struct BerryCrushGame *arg0, __attribute__((unused)) struct BerryCrushGame_138 *arg1)
+void sub_80216A8(struct BerryCrushGame *arg0, __attribute__((unused)) struct BerryCrushGame_136 *arg1)
 {
     u8 i;
     for (i = 0; i < arg0->unk9; i++)
@@ -1281,7 +1269,7 @@ void sub_80216A8(struct BerryCrushGame *arg0, __attribute__((unused)) struct Ber
     }
 }
 
-void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
+void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_136 *arg1)
 {
     u8 sp4;
     struct BerryCrushGame_4E *var4E;
@@ -1289,7 +1277,7 @@ void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
     u16 var, var2;
 
     sp4 = 0;
-    var4E = &arg0->unk40.unkE;
+    var4E = (struct BerryCrushGame_4E *)arg0->unk40;
     for (i = 0; i < arg0->unk9; i++)
     {
         var = var4E->unkA >> (i * 3);
@@ -1353,7 +1341,7 @@ void sub_80216E0(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
     }
 }
 
-bool32 sub_80218D4(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
+bool32 sub_80218D4(struct BerryCrushGame *arg0, struct BerryCrushGame_136 *arg1)
 {
     u8 i;
 
@@ -1375,7 +1363,7 @@ bool32 sub_80218D4(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
     return TRUE;
 }
 
-void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
+void sub_8021944(struct BerryCrushGame_136 *arg0, u16 arg1)
 {
     u8 i = 0;
     u32 r7 = 0;
@@ -1408,7 +1396,7 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
     u8 r2;
     s32 r3;
     u8 r7;
-    union BerryCrushGame_68 * sp24 = &sp0C->unk68;
+    struct BerryCrushGame_66 * sp24 = &sp0C->unk66;
     u32 xOffset;
     s32 r6;
 
@@ -1427,19 +1415,19 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
         switch (sp10)
         {
         case 0:
-            sp1C = sp24->as_five_players.unk1C[0].unk4.as_2d_bytes[sp10][r8];
-            if (r8 != 0 && sp24->as_four_players.unk00.unk0C[sp10][r8] != sp24->as_four_players.unk00.unk0C[sp10][r8 - 1])
+            sp1C = sp24->filler20[sp10][r8];
+            if (r8 != 0 && sp24->unk0C[sp10][r8] != sp24->unk0C[sp10][r8 - 1])
                 sp20 = r8;
-            ConvertIntToDecimalStringN(gStringVar4, sp24->as_four_players.unk00.unk0C[sp10][r8], STR_CONV_MODE_RIGHT_ALIGN, 4);
+            ConvertIntToDecimalStringN(gStringVar4, sp24->unk0C[sp10][r8], STR_CONV_MODE_RIGHT_ALIGN, 4);
             StringAppend(gStringVar4, gUnknown_082F43B4[sp10]);
             break;
         case 1:
-            sp1C = sp24->as_five_players.unk1C[0].unk4.as_2d_bytes[sp10][r8];
-            if (r8 != 0 && sp24->as_four_players.unk00.unk0C[sp10][r8] != sp24->as_four_players.unk00.unk0C[sp10][r8 - 1])
+            sp1C = sp24->filler20[sp10][r8];
+            if (r8 != 0 && sp24->unk0C[sp10][r8] != sp24->unk0C[sp10][r8 - 1])
                 sp20 = r8;
-            ConvertIntToDecimalStringN(gStringVar1, sp24->as_four_players.unk00.unk0C[sp10][r8] >> 4, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar1, sp24->unk0C[sp10][r8] >> 4, STR_CONV_MODE_RIGHT_ALIGN, 3);
             r3 = 0;
-            r7 = sp24->as_four_players.unk00.unk0C[sp10][r8] & 15;
+            r7 = sp24->unk0C[sp10][r8] & 15;
             for (r2 = 0; r2 < 4; ++r2)
                 if ((r7 >> (3 - r2)) & 1)
                     r3 += sPressingSpeedConversionTable[r2];
@@ -1450,7 +1438,7 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
         case 2:
             sp1C = r8;
             sp20 = r8;
-            r2 = sp0C->unk68.as_five_players.unk1C[r8].unk14[12];
+            r2 = sp0C->unk96[r8].unkC;
             if (r2 >= LAST_BERRY_INDEX - FIRST_BERRY_INDEX + 2)
                 r2 = 0;
             StringCopy(gStringVar1, gBerries[r2].name);
@@ -1458,15 +1446,15 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
             break;
         }
         xOffset = GetStringRightAlignXOffset(2, gStringVar4, sp14 - 4);
-        AddTextPrinterParameterized3(sp0C->unk138.unk82, 2, xOffset, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
+        AddTextPrinterParameterized3(sp0C->unk136.unk82, 2, xOffset, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
         if (sp1C == sp0C->unk8)
             StringCopy(gStringVar3, gText_1DotBlueF700);
         else
             StringCopy(gStringVar3, gText_1DotF700);
         gStringVar3[0] = sp20 + CHAR_1;
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, PLAYER_UNK14(sp0C, sp1C));
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sp0C->unk96[sp1C].unk0);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gStringVar3);
-        AddTextPrinterParameterized3(sp0C->unk138.unk82, 2, 4, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
+        AddTextPrinterParameterized3(sp0C->unk136.unk82, 2, 4, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
     }
 }
 
@@ -1475,28 +1463,28 @@ void sub_8021D34(struct BerryCrushGame *r8)
     u8 r10 = 0;
     u8 r6 = 0;
     u32 sp0C = 0;
-    union BerryCrushGame_68 *sp10 = &r8->unk68;
-    u8 r7 = GetWindowAttribute(r8->unk138.unk82, WINDOW_HEIGHT) * 8 - 42;
+    struct BerryCrushGame_66 *sp10 = &r8->unk66;
+    u8 r7 = GetWindowAttribute(r8->unk136.unk82, WINDOW_HEIGHT) * 8 - 42;
 
-    sub_8021944(&r8->unk138, sp10->as_four_players.unk00.unk04);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimeColon);
+    sub_8021944(&r8->unk136, sp10->unk04);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimeColon);
     r6 = 176 - (u8)GetStringWidth(2, gText_SpaceSec, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceSec);
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk6, STR_CONV_MODE_LEADING_ZEROS, 2);
-    ConvertIntToDecimalStringN(gStringVar2, r8->unk138.unk8, STR_CONV_MODE_LEADING_ZEROS, 2);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceSec);
+    ConvertIntToDecimalStringN(gStringVar1, r8->unk136.unk6, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar2, r8->unk136.unk8, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY2);
     r6 -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
     r6 -= GetStringWidth(2, gText_SpaceMin, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceMin);
-    ConvertIntToDecimalStringN(gStringVar1, r8->unk138.unk4, STR_CONV_MODE_LEADING_ZEROS, 1);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceMin);
+    ConvertIntToDecimalStringN(gStringVar1, r8->unk136.unk4, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringExpandPlaceholders(gStringVar4, gText_StrVar1);
     r6 -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
     r7 += 14;
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 0, r7, sBerryCrushTextColorTable[0], 0, gText_PressingSpeed);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, 0, r7, sBerryCrushTextColorTable[0], 0, gText_PressingSpeed);
     r6 = 176 - (u8)GetStringWidth(2, gText_TimesPerSec, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimesPerSec);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimesPerSec);
     for (; r10 < 8; ++r10)
         if (((u8)r8->unk16 >> (7 - r10)) & 1)
             sp0C += *(r10 + sPressingSpeedConversionTable); // It's accessed in a different way here for unknown reason
@@ -1505,18 +1493,18 @@ void sub_8021D34(struct BerryCrushGame *r8)
     StringExpandPlaceholders(gStringVar4, gText_XDotY3);
     r6 -= GetStringWidth(2, gStringVar4, -1);
     if (r8->unk25_1)
-        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[5], 0, gStringVar4);
+        AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[5], 0, gStringVar4);
     else
-        AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+        AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
     r7 += 14;
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, 0, r7, sBerryCrushTextColorTable[0], 0, gText_Silkiness);
-    ConvertIntToDecimalStringN(gStringVar1, sp10->as_four_players.unk00.unk08, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, 0, r7, sBerryCrushTextColorTable[0], 0, gText_Silkiness);
+    ConvertIntToDecimalStringN(gStringVar1, sp10->unk08, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
     r6 = 176 - (u8)GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
+    AddTextPrinterParameterized3(r8->unk136.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
 }
 
-bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
+bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_136 *r6)
 {
     u8 r5;
     struct WindowTemplate template;
@@ -1551,7 +1539,7 @@ bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
             r6->unk80 = 5;
             return FALSE;
         case 12:
-            sub_80219C8(r6->unk82, 20, 4, gUnknown_082F43B4[r4->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[0][7] + 3]);
+            sub_80219C8(r6->unk82, 20, 4, gUnknown_082F43B4[r4->unk66.filler20[0][7] + 3]);
             sub_8021A28(r4, 1, 0xA0, 8 * gUnknown_082F3344[0][r5]);
             r6->unk80 = 5;
             return FALSE;
@@ -1575,8 +1563,8 @@ bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
 
 void sub_802222C(struct BerryCrushGame *r4)
 {
-    ClearStdWindowAndFrameToTransparent(r4->unk138.unk82, 1);
-    RemoveWindow(r4->unk138.unk82);
+    ClearStdWindowAndFrameToTransparent(r4->unk136.unk82, 1);
+    RemoveWindow(r4->unk136.unk82);
     sub_8022600(r4);
 }
 
@@ -1694,7 +1682,7 @@ void ShowBerryCrushRankings(void)
     gTasks[taskId].data[5] = gSaveBlock2Ptr->berryCrush.berryCrushResults[3];
 }
 
-void sub_8022524(struct BerryCrushGame_138 *r4, u16 r1)
+void sub_8022524(struct BerryCrushGame_136 *r4, u16 r1)
 {
     sub_8021944(r4, r1);
     DigitObjUtil_PrintNumOn(0, r4->unk4);
@@ -1702,7 +1690,7 @@ void sub_8022524(struct BerryCrushGame_138 *r4, u16 r1)
     DigitObjUtil_PrintNumOn(2, r4->unk8);
 }
 
-void sub_8022554(struct BerryCrushGame_138 *r0)
+void sub_8022554(struct BerryCrushGame_136 *r0)
 {
     r0->unk78[0]->invisible = TRUE;
     r0->unk78[1]->invisible = TRUE;
@@ -1717,10 +1705,10 @@ void sub_8022588(struct BerryCrushGame *r5)
 
     for (r6 = 0; r6 < r5->unk9; ++r6)
     {
-        r5->unk138.unkC[r6] = &gUnknown_082F4190[gUnknown_082F417C[r5->unk9 - 2][r6]];
-        r5->unk138.unk83[r6] = AddWindow(&gUnknown_082F32F4[r5->unk138.unkC[r6]->unk0]);
-        PutWindowTilemap(r5->unk138.unk83[r6]);
-        FillWindowPixelBuffer(r5->unk138.unk83[r6], 0);
+        r5->unk136.unkC[r6] = &gUnknown_082F4190[gUnknown_082F417C[r5->unk9 - 2][r6]];
+        r5->unk136.unk83[r6] = AddWindow(&gUnknown_082F32F4[r5->unk136.unkC[r6]->unk0]);
+        PutWindowTilemap(r5->unk136.unk83[r6]);
+        FillWindowPixelBuffer(r5->unk136.unk83[r6], 0);
     }
 }
 
@@ -1731,36 +1719,36 @@ void sub_8022600(struct BerryCrushGame *r6)
 
     for (r7 = 0; r7 < r6->unk9; ++r7)
     {
-        PutWindowTilemap(r6->unk138.unk83[r7]);
+        PutWindowTilemap(r6->unk136.unk83[r7]);
         if (r7 == r6->unk8)
         {
             AddTextPrinterParameterized4(
-                r6->unk138.unk83[r7],
+                r6->unk136.unk83[r7],
                 2,
-                36 - GetStringWidth(2, PLAYER_UNK14(r6, r7), 0) / 2u,
+                36 - GetStringWidth(2, r6->unk96[r7].unk0, 0) / 2u,
                 1,
                 0,
                 0,
                 sBerryCrushTextColorTable[1],
                 0,
-                PLAYER_UNK14(r6, r7)
+                r6->unk96[r7].unk0
             );
         }
         else
         {
             AddTextPrinterParameterized4(
-                r6->unk138.unk83[r7],
+                r6->unk136.unk83[r7],
                 2,
-                36 - GetStringWidth(2, PLAYER_UNK14(r6, r7), 0) / 2u,
+                36 - GetStringWidth(2, r6->unk96[r7].unk0, 0) / 2u,
                 1,
                 0,
                 0,
                 sBerryCrushTextColorTable[2],
                 0,
-                PLAYER_UNK14(r6, r7)
+                r6->unk96[r7].unk0
             );
         }
-        CopyWindowToVram(r6->unk138.unk83[r7], 3);
+        CopyWindowToVram(r6->unk136.unk83[r7], 3);
     }
     CopyBgTilemapBufferToVram(0);
 }
@@ -1768,17 +1756,18 @@ void sub_8022600(struct BerryCrushGame *r6)
 void sub_80226D0(struct BerryCrushGame *r6)
 {
     u8 r5 = 0;
-    u8 * r4;
+    u16 * r4;
 
-    LZ77UnCompWram(gUnknown_08DE3FD4, gDecompressionBuffer); // required for matching
+    LZ77UnCompWram(gUnknown_08DE3FD4, gDecompressionBuffer);
+    r4 = (u16 *)gDecompressionBuffer;
 
-    for (r4 = gDecompressionBuffer; r5 < r6->unk9; ++r5)
+    for (; r5 < r6->unk9; ++r5)
     {
         CopyToBgTilemapBufferRect(
             3,
-            &r4[r6->unk138.unkC[r5]->unk0 * 40],
-            r6->unk138.unkC[r5]->unk1,
-            r6->unk138.unkC[r5]->unk2,
+            &r4[r6->unk136.unkC[r5]->unk0 * 40],
+            r6->unk136.unkC[r5]->unk1,
+            r6->unk136.unkC[r5]->unk2,
             10,
             2
         );
@@ -1799,25 +1788,25 @@ void sub_8022730(struct BerryCrushGame *r6)
         LoadCompressedSpriteSheet(&gUnknown_082F41F4[r5]);
     LoadSpritePalettes(gUnknown_082F421C);
     r2 = CreateSprite(&gUnknown_082F430C, 120, 88, 5);
-    r6->unk138.unk20 = &gSprites[r2];
-    r6->unk138.unk20->oam.priority = 3;
-    r6->unk138.unk20->coordOffsetEnabled = TRUE;
-    r6->unk138.unk20->animPaused = TRUE;
+    r6->unk136.unk20 = &gSprites[r2];
+    r6->unk136.unk20->oam.priority = 3;
+    r6->unk136.unk20->coordOffsetEnabled = TRUE;
+    r6->unk136.unk20->animPaused = TRUE;
     for (r5 = 0; r5 < r6->unk9; ++r5)
     {
         r2 = CreateSprite(
             &gUnknown_082F4324,
-            r6->unk138.unkC[r5]->unk4 + 120,
-            r6->unk138.unkC[r5]->unk6 + 32,
+            r6->unk136.unkC[r5]->unk4 + 120,
+            r6->unk136.unkC[r5]->unk6 + 32,
             0
         );
-        r6->unk138.unk24[r5] = &gSprites[r2];
-        r6->unk138.unk24[r5]->oam.priority = 1;
-        r6->unk138.unk24[r5]->invisible = TRUE;
-        r6->unk138.unk24[r5]->coordOffsetEnabled = TRUE;
-        r6->unk138.unk24[r5]->animPaused = TRUE;
+        r6->unk136.unk24[r5] = &gSprites[r2];
+        r6->unk136.unk24[r5]->oam.priority = 1;
+        r6->unk136.unk24[r5]->invisible = TRUE;
+        r6->unk136.unk24[r5]->coordOffsetEnabled = TRUE;
+        r6->unk136.unk24[r5]->animPaused = TRUE;
     }
-    for (r5 = 0; r5 < ARRAY_COUNT(r6->unk138.unk4C); ++r5)
+    for (r5 = 0; r5 < ARRAY_COUNT(r6->unk136.unk4C); ++r5)
     {
         r2 = CreateSprite(
             &gUnknown_082F433C,
@@ -1825,13 +1814,13 @@ void sub_8022730(struct BerryCrushGame *r6)
             gUnknown_082F41D2[r5][1] + 136,
             6
         );
-        r6->unk138.unk4C[r5] = &gSprites[r2];
-        r6->unk138.unk4C[r5]->oam.priority = 3;
-        r6->unk138.unk4C[r5]->invisible = TRUE;
-        r6->unk138.unk4C[r5]->animPaused = TRUE;
-        r6->unk138.unk4C[r5]->data[0] = r5;
+        r6->unk136.unk4C[r5] = &gSprites[r2];
+        r6->unk136.unk4C[r5]->oam.priority = 3;
+        r6->unk136.unk4C[r5]->invisible = TRUE;
+        r6->unk136.unk4C[r5]->animPaused = TRUE;
+        r6->unk136.unk4C[r5]->data[0] = r5;
     }
-    for (r5 = 0; r5 < ARRAY_COUNT(r6->unk138.unk78); ++r5)
+    for (r5 = 0; r5 < ARRAY_COUNT(r6->unk136.unk78); ++r5)
     {
         r2 = CreateSprite(
             &gUnknown_082F4354,
@@ -1839,16 +1828,16 @@ void sub_8022730(struct BerryCrushGame *r6)
             8,
             0
         );
-        r6->unk138.unk78[r5] = &gSprites[r2];
-        r6->unk138.unk78[r5]->oam.priority = 0;
-        r6->unk138.unk78[r5]->invisible = FALSE;
-        r6->unk138.unk78[r5]->animPaused = FALSE;
+        r6->unk136.unk78[r5] = &gSprites[r2];
+        r6->unk136.unk78[r5]->oam.priority = 0;
+        r6->unk136.unk78[r5]->invisible = FALSE;
+        r6->unk136.unk78[r5]->animPaused = FALSE;
     }
     DigitObjUtil_CreatePrinter(0, 0, &gUnknown_082F4384[0]);
     DigitObjUtil_CreatePrinter(1, 0, &gUnknown_082F4384[1]);
     DigitObjUtil_CreatePrinter(2, 0, &gUnknown_082F4384[2]);
     if (r6->unk12 == 1)
-        sub_8022554(&r6->unk138);
+        sub_8022554(&r6->unk136);
 }
 
 void sub_8022960(struct BerryCrushGame *r5)
@@ -1862,17 +1851,17 @@ void sub_8022960(struct BerryCrushGame *r5)
     FreeSpritePaletteByTag(4);
     FreeSpritePaletteByTag(2);
     FreeSpritePaletteByTag(1);
-    for (; r4 < ARRAY_COUNT(r5->unk138.unk78); ++r4)
-        DestroySprite(r5->unk138.unk78[r4]);
+    for (; r4 < ARRAY_COUNT(r5->unk136.unk78); ++r4)
+        DestroySprite(r5->unk136.unk78[r4]);
     DigitObjUtil_DeletePrinter(2);
     DigitObjUtil_DeletePrinter(1);
     DigitObjUtil_DeletePrinter(0);
-    for (r4 = 0; r4 < ARRAY_COUNT(r5->unk138.unk4C); ++r4)
-        DestroySprite(r5->unk138.unk4C[r4]);
+    for (r4 = 0; r4 < ARRAY_COUNT(r5->unk136.unk4C); ++r4)
+        DestroySprite(r5->unk136.unk4C[r4]);
     for (r4 = 0; r4 < r5->unk9; ++r4)
-        DestroySprite(r5->unk138.unk24[r4]);
-    if (r5->unk138.unk20->inUse)
-        DestroySprite(r5->unk138.unk20);
+        DestroySprite(r5->unk136.unk24[r4]);
+    if (r5->unk136.unk20->inUse)
+        DestroySprite(r5->unk136.unk20);
 }
 
 static void sub_8022A20(struct Sprite *sprite)
@@ -2165,9 +2154,9 @@ static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
     case 2:
         if (!IsLinkTaskFinished())
             return 0;
-        memset(r5->unk40.unk2, 0, sizeof(r5->unk40.unk2));
-        r5->unk40.unk2[0] = r5->unk68.as_four_players.others[r5->unk8].unk0;
-        SendBlock(0, r5->unk40.unk2, 2);
+        memset(r5->unk40, 0, sizeof(r5->unk40));
+        r5->unk40[0] = r5->unk96[r5->unk8].unkC;
+        SendBlock(0, r5->unk40, 2);
         break;
     case 3:
         if (!IsLinkTaskFinished())
@@ -2179,11 +2168,11 @@ static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
             return 0;
         for (r3 = 0; r3 < r5->unk9; ++r3)
         {
-            r5->unk68.as_four_players.others[r3].unk0 = gBlockRecvBuffer[r3][0];
-            if (r5->unk68.as_four_players.others[r3].unk0 > 0xB0)
-                r5->unk68.as_four_players.others[r3].unk0 = 0;
-            r5->unk18 += gUnknown_0858AB24[r5->unk68.as_four_players.others[r3].unk0].unk0;
-            r5->unk1C += gUnknown_0858AB24[r5->unk68.as_four_players.others[r3].unk0].unk1;
+            r5->unk96[r3].unkC = gBlockRecvBuffer[r3][0];
+            if (r5->unk96[r3].unkC > 0xB0)
+                r5->unk96[r3].unkC = 0;
+            r5->unk18 += gUnknown_0858AB24[r5->unk96[r3].unkC].unk0;
+            r5->unk1C += gUnknown_0858AB24[r5->unk96[r3].unkC].unk1;
         }
         r5->unk10 = 0;
         ResetBlockReceivedFlags();
@@ -2205,41 +2194,41 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     switch (r4->unkC)
     {
     case 0:
-        sub_80214A8(r4, &r4->unk138);
+        sub_80214A8(r4, &r4->unk136);
         Rfu_SetLinkStandbyCallback();
         break;
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        r4->unk138.unk0 = 0;
-        r4->unk138.unk1 = 0;
-        r4->unk138.unk2 = 0;
-        r4->unk138.unk3 = 0;
+        r4->unk136.unk0 = 0;
+        r4->unk136.unk1 = 0;
+        r4->unk136.unk2 = 0;
+        r4->unk136.unk3 = 0;
         break;
     case 2:
-        r4->unk138.unk38[r4->unk138.unk0]->callback = sub_8021608;
-        r4->unk138.unk38[r4->unk138.unk0]->affineAnimPaused = FALSE;
+        r4->unk136.unk38[r4->unk136.unk0]->callback = sub_8021608;
+        r4->unk136.unk38[r4->unk136.unk0]->affineAnimPaused = FALSE;
         PlaySE(SE_BALL_THROW);
         break;
     case 3:
-        if (r4->unk138.unk38[r4->unk138.unk0]->callback == sub_8021608)
+        if (r4->unk136.unk38[r4->unk136.unk0]->callback == sub_8021608)
             return 0;
-        r4->unk138.unk38[r4->unk138.unk0] = NULL;
-        ++r4->unk138.unk0;
+        r4->unk136.unk38[r4->unk136.unk0] = NULL;
+        ++r4->unk136.unk0;
         Rfu_SetLinkStandbyCallback();
         break;
     case 4:
         if (!IsLinkTaskFinished())
             return 0;
-        if (r4->unk138.unk0 < r4->unk9)
+        if (r4->unk136.unk0 < r4->unk9)
         {
             r4->unkC = 2;
             return 0;
         }
-        r4->unk138.unk0 = 0;
+        r4->unk136.unk0 = 0;
         break;
     case 5:
-        sub_80216A8(r4, &r4->unk138);
+        sub_80216A8(r4, &r4->unk136);
         Rfu_SetLinkStandbyCallback();
         break;
     case 6:
@@ -2264,24 +2253,24 @@ static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         if (r4->unk2A < 0)
             return 0;
         r4->unk2A = 0;
-        r4->unk138.unk1 = 4;
-        r4->unk138.unk0 = 0;
-        r4->unk138.unk2 = gUnknown_082F326C[r4->unk138.unk1][0];
+        r4->unk136.unk1 = 4;
+        r4->unk136.unk0 = 0;
+        r4->unk136.unk2 = gUnknown_082F326C[r4->unk136.unk1][0];
         PlaySE(SE_M_STRENGTH);
         break;
     case 1:
-        r4->unk2C = gUnknown_082F326C[r4->unk138.unk1][r4->unk138.unk0];
+        r4->unk2C = gUnknown_082F326C[r4->unk136.unk1][r4->unk136.unk0];
         SetGpuReg(REG_OFFSET_BG0VOFS, -r4->unk2C);
         SetGpuReg(REG_OFFSET_BG2VOFS, -r4->unk2C);
         SetGpuReg(REG_OFFSET_BG3VOFS, -r4->unk2C);
-        ++r4->unk138.unk0;
-        if (r4->unk138.unk0 < r4->unk138.unk2)
+        ++r4->unk136.unk0;
+        if (r4->unk136.unk0 < r4->unk136.unk2)
             return 0;
-        if (r4->unk138.unk1 == 0)
+        if (r4->unk136.unk1 == 0)
             break;
-        --r4->unk138.unk1;
-        r4->unk138.unk2 = gUnknown_082F326C[r4->unk138.unk1][0];
-        r4->unk138.unk0 = 0;
+        --r4->unk136.unk1;
+        r4->unk136.unk2 = gUnknown_082F326C[r4->unk136.unk1][0];
+        r4->unk136.unk0 = 0;
         return 0;
     case 2:
         r4->unk2C = 0;
@@ -2321,10 +2310,10 @@ static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 3:
         if (!IsLinkTaskFinished())
             return 0;
-        r4->unk138.unk0 = 0;
-        r4->unk138.unk1 = 0;
-        r4->unk138.unk2 = 0;
-        r4->unk138.unk3 = 0;
+        r4->unk136.unk0 = 0;
+        r4->unk136.unk1 = 0;
+        r4->unk136.unk2 = 0;
+        r4->unk136.unk3 = 0;
         r4->unk10 = 0;
         if (r4->unk8 == 0)
             sub_8022BEC(13, 1, NULL);
@@ -2341,45 +2330,44 @@ static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
 void sub_802339C(struct BerryCrushGame *r4)
 {
     u8 r8 = 0;
-    u16 r3;
-    u16 *r2;
     u8 r7 = 0;
+    u16 r3 = 0;
     s32 r2_ = 0;
-    s32 r0;
+    struct BerryCrushGame_4E *r2;
 
-    for (r7 = 0; r7 < r4->unk9; ++r7)
+    for (r7 = 0; r7 < r4->unk9; r7++)
     {
-        r2 = gRecvCmds[r7];
-        if ((r2[0] & 0xFF00) == RFUCMD_SEND_PACKET
-         && r2[1] == 2)
+        r2 = (struct BerryCrushGame_4E *)gRecvCmds[r7];
+        if ((r2->unk0 & 0xFF00) == RFUCMD_SEND_PACKET
+         && r2->filler2 == 2)
         {
-            if ((u8)r2[2] & 4)
+            if (r2->unk4_2)
             {
-                r4->unk5C.unk02_3 |= gUnknown_082F325C[r7];
-                r4->unk68.as_four_players.others[r7].unk4.as_2d_bytes[1][5] = 1;
-                ++r4->unk68.as_four_players.others[r7].unk4.as_hwords[3];
+                r4->unk5A.unk02_3 |= gUnknown_082F325C[r7];
+                r4->unk96[r7].unk1C = 1;
+                ++r4->unk96[r7].unk16;
                 ++r8;
-                r3 = r4->unk28 - r4->unk68.as_four_players.others[r7].unk2;
-                if (r3 >= r4->unk68.as_four_players.others[r7].unk4.as_hwords[1] - 1
-                 && r3 <= r4->unk68.as_four_players.others[r7].unk4.as_hwords[1] + 1)
+                r3 = r4->unk28 - r4->unk96[r7].unkE;
+                if (r3 >= r4->unk96[r7].unk12 - 1 && r3 <= r4->unk96[r7].unk12 + 1)
                 {
-                    ++r4->unk68.as_four_players.others[r7].unk4.as_hwords[0];
-                    r4->unk68.as_four_players.others[r7].unk4.as_hwords[1] = r3;
-                    if (r4->unk68.as_four_players.others[r7].unk4.as_hwords[0] > r4->unk68.as_four_players.others[r7].unk4.as_hwords[2])
-                        r4->unk68.as_four_players.others[r7].unk4.as_hwords[2] = r4->unk68.as_four_players.others[r7].unk4.as_hwords[0];
+                    ++r4->unk96[r7].unk10;
+                    r4->unk96[r7].unk12 = r3;
+                    if (r4->unk96[r7].unk10 > r4->unk96[r7].unk14)
+                        r4->unk96[r7].unk14 = r4->unk96[r7].unk10;
                 }
                 else
                 {
-                    r4->unk68.as_four_players.others[r7].unk4.as_hwords[0] = 0;
-                    r4->unk68.as_four_players.others[r7].unk4.as_hwords[1] = r3;
+                    r4->unk96[r7].unk10 = 0;
+                    r4->unk96[r7].unk12 = r3;
                 }
-                r4->unk68.as_four_players.others[r7].unk2 = r4->unk28;
-                if (++r4->unk68.as_four_players.others[r7].unk4.as_2d_bytes[1][4] > 2)
-                    r4->unk68.as_four_players.others[r7].unk4.as_2d_bytes[1][4] = 0;
+                r4->unk96[r7].unkE = r4->unk28;
+                ++r4->unk96[r7].unk1B;
+                if (r4->unk96[r7].unk1B > 2)
+                    r4->unk96[r7].unk1B = 0;
             }
             else
             {
-                r4->unk68.as_four_players.others[r7].unk4.as_2d_bytes[1][5] = 0;
+                r4->unk96[r7].unk1C = 0;
             }
         }
     }
@@ -2387,10 +2375,10 @@ void sub_802339C(struct BerryCrushGame *r4)
     {
         for (r7 = 0; r7 < r4->unk9; ++r7)
         {
-            if (r4->unk68.as_four_players.others[r7].unk4.as_2d_bytes[1][5] != 0)
+            if (r4->unk96[r7].unk1C != 0)
             {
-                r4->unk68.as_four_players.others[r7].unk4.as_2d_bytes[1][5] |= 2;
-                ++r4->unk68.as_four_players.others[r7].unk4.as_hwords[4];
+                r4->unk96[r7].unk1C |= 2;
+                ++r4->unk96[r7].unk18;
             }
         }
     }
@@ -2400,19 +2388,18 @@ void sub_802339C(struct BerryCrushGame *r4)
         r8 += gUnknown_082F3264[r8 - 1];
         r4->unk34 += r8;
         r4->unk1A += r8;
-        r0 = r4->unk18;
-        r2_ = r4->unk1A;
-        if (r0 - r2_ > 0)
+        if (r4->unk18 - r4->unk1A > 0)
         {
-            r2_ = Q_24_8(r2_);
+            r2_ = (s32)r4->unk1A;
+            r2_ <<= 8;
             r2_ = MathUtil_Div32(r2_, r4->unk20);
-            r2_ = Q_24_8_TO_INT(r2_);
-            r4->unk24 = r2_;
+            r2_ >>= 8;
+            r4->unk24 = (u8)r2_;
         }
         else
         {
             r4->unk24 = 32;
-            r4->unk5C.unk02_0 = 1;
+            r4->unk5A.unk02_0 = 1;
         }
     }
 }
@@ -2421,86 +2408,83 @@ void sub_8023558(struct BerryCrushGame *r3)
 {
     u8 r6 = 0;
     u16 r1 = 0;
+    u16 r2 = 0;
     u8 r4 = 0;
     
     for (r4 = 0; r4 < r3->unk9; ++r4)
     {
-        if (r3->unk68.as_four_players.others[r4].unk4.as_2d_bytes[1][5] != 0)
+        if (r3->unk96[r4].unk1C != 0)
         {
             ++r6;
-            r1 = r3->unk68.as_four_players.others[r4].unk4.as_2d_bytes[1][4] + 1;
-            if (r3->unk68.as_four_players.others[r4].unk4.as_2d_bytes[1][5] & 2)
+            r1 = r3->unk96[r4].unk1B + 1;
+            if (r3->unk96[r4].unk1C & 2)
                 r1 |= 4;
             r1 <<= 3 * r4;
-            r3->unk5C.unk08 |= r1;
+            r3->unk5A.unk08 |= r1;
         }
     }
-    r3->unk5C.unk04 = r3->unk24;
+    r2 = (u16)r3->unk24;
+    r3->unk5A.unk04 = r2;
     if (r6 == 0)
     {
-        if (r3->unk138.unk3 != 0)
-            ++r3->unk138.unk0;
+        if (r3->unk136.unk3 != 0)
+            ++r3->unk136.unk0;
+    }
+    else if (r3->unk136.unk3 != 0)
+    {
+        if (r6 != r3->unk136.unk1)
+        {
+            r3->unk136.unk1 = r6 - 1;
+            r3->unk136.unk2 = gUnknown_082F3290[r6 - 1][0];
+        }
         else
-            goto SET_UNK5F_0;
+        {
+            ++r3->unk136.unk0;
+        }
     }
     else
     {
-        if (r3->unk138.unk3 != 0)
-        {
-            if (r6 != r3->unk138.unk1)
-            {
-                r3->unk138.unk1 = r6 - 1;
-                r3->unk138.unk2 = gUnknown_082F3290[r6 - 1][0];
-            }
-            else
-            {
-                ++r3->unk138.unk0;
-            }
-        }
-        else
-        {
-            r3->unk138.unk0 = 0;
-            r3->unk138.unk1 = r6 - 1;
-            r3->unk138.unk2 = gUnknown_082F3290[r6 - 1][0];
-            r3->unk138.unk3 = 1;
-        }
+        r3->unk136.unk0 = 0;
+        r3->unk136.unk1 = r6 - 1;
+        r3->unk136.unk2 = gUnknown_082F3290[r6 - 1][0];
+        r3->unk136.unk3 = 1;
     }
-    if (r3->unk138.unk3 != 0)
+
+    if (r3->unk136.unk3 != 0)
     {
-        if (r3->unk138.unk0 >= r3->unk138.unk2)
+        if (r3->unk136.unk0 >= r3->unk136.unk2)
         {
-            r3->unk138.unk0 = 0;
-            r3->unk138.unk1 = 0;
-            r3->unk138.unk2 = 0;
-            r3->unk138.unk3 = 0;
+            r3->unk136.unk0 = 0;
+            r3->unk136.unk1 = 0;
+            r3->unk136.unk2 = 0;
+            r3->unk136.unk3 = 0;
             r1 = 0;
         }
         else
         {
-            r1 = gUnknown_082F3290[r3->unk138.unk1][r3->unk138.unk0 + 1];
+            r1 = gUnknown_082F3290[r3->unk136.unk1][r3->unk136.unk0 + 1];
         }
-        r3->unk5C.unk03 = r1;
+        r3->unk5A.unk03 = (u8)r1;
     }
     else
     {
-    SET_UNK5F_0:
-        r3->unk5C.unk03 = 0;
+        r3->unk5A.unk03 = 0;
     }
-    r3->unk5C.unk06 = r3->unk26;
+    r3->unk5A.unk06 = r3->unk26;
 }
 
 void sub_80236B8(struct BerryCrushGame *r5)
 {
     if (JOY_NEW(A_BUTTON))
-        r5->unk5C.unk02_2 = 1;
+        r5->unk5A.unk02_2 = 1;
     if (JOY_HELD(A_BUTTON))
     {
-        if (r5->unk68.as_four_players.others[r5->unk8].unk4.as_hwords[5] < r5->unk28)
-            ++r5->unk68.as_four_players.others[r5->unk8].unk4.as_hwords[5];
+        if (r5->unk96[r5->unk8].unk1A < r5->unk28)
+            ++r5->unk96[r5->unk8].unk1A;
     }
-    if (r5->unk8 != 0 && r5->unk5C.unk02_2 == 0)
+    if (r5->unk8 != 0 && r5->unk5A.unk02_2 == 0)
         return;
-    r5->unk5C.unk00 = 2;
+    r5->unk5A.unk00 = 2;
     if (r5->unk28 % 30 == 0)
     {
         if (r5->unk2E > gUnknown_082F4444[r5->unk9 - 2])
@@ -2539,7 +2523,7 @@ void sub_80236B8(struct BerryCrushGame *r5)
                 sub_8011AC8();
                 r5->unk10 = 0;
             }
-            else if (r5->unk5C.unk02_3 == 0)
+            else if (r5->unk5A.unk02_3 == 0)
             {
                 sub_8011AC8();
                 r5->unk10 = 0;
@@ -2548,53 +2532,47 @@ void sub_80236B8(struct BerryCrushGame *r5)
         
     }
     if (r5->unk28 >= 36000)
-        r5->unk5C.unk02_0 = 1;
-    r5->unk5C.unk02_1 = r5->unk25_4;
-    r5->unk5C.unk0A = r5->unk25_5;
-    memcpy(r5->unk40.unk2, &r5->unk5C, sizeof(r5->unk40.unk2));
-    Rfu_SendPacket(r5->unk40.unk2);
+        r5->unk5A.unk02_0 = 1;
+    r5->unk5A.unk02_1 = r5->unk25_4;
+    r5->unk5A.unk0A = r5->unk25_5;
+    memcpy(r5->unk40, &r5->unk5A, sizeof(r5->unk40));
+    Rfu_SendPacket(r5->unk40);
 }
 
 void sub_802385C(struct BerryCrushGame *r5)
 {
-    struct BerryCrushGame_4E *r4_;
-#ifndef NONMATCHING
-    register u32 r4 asm("r4");
-    register u32 r0 asm("r0");
+    u8 r4 = 0;
+    struct BerryCrushGame_4E *r4_ = NULL;
 
-    for (r4 = 0; r4 < r5->unk9; r4 = (u8)r0)
-    {
-        r5->unk68.as_four_players.others[r4].unk4.as_2d_bytes[1][5] = 0;
-        r0 = r4 + 1;
-    }
-#else
-    u8 r4;
-
-    for (r4 = 0; r4 < r5->unk9; ++r4)
-        r5->unk68.as_four_players.others[r4].unk4.as_2d_bytes[1][5] = 0;
-#endif
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET
-     || gRecvCmds[0][1] != 2)
+    for (r4 = 0; r4 < r5->unk9; r4++)
+        r5->unk96[r4].unk1C = 0;
+    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
     {
         r5->unk25_2 = 0;
+        return;
     }
-    else
+    if (gRecvCmds[0][1] != 2)
     {
-        r4_ = &r5->unk40.unkE;
-        memcpy(r4_, gRecvCmds, sizeof(struct BerryCrushGame_4E));
-        r5->unk2A = r4_->unk6;
-        r5->unk2C = r4_->unk5;
-        r5->unk28 = r4_->unk8;
-        sub_80216E0(r5, &r5->unk138);
-        if (r4_->unk4_0)
-            r5->unk25_3 = 1;
+        r5->unk25_2 = 0;
+        return;
+    }
+
+    memcpy(r5->unk4C, gRecvCmds[0], 14);
+    r4_ = (struct BerryCrushGame_4E *)&r5->unk4C;
+    r5->unk2A = r4_->unk6;
+    r5->unk2C = (s16)r4_->unk5;
+    r5->unk28 = r4_->unk8;
+    sub_80216E0(r5, &(r5->unk136));
+    if (r4_->unk4_0)
+    {
+        r5->unk25_3 = 1;
     }
 }
 
 static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
-    memset(&r4->unk5C, 0, sizeof(r4->unk5C));
-    memset(&r4->unk40.unkE, 0, sizeof(r4->unk40.unkE));
+    memset(&r4->unk5A, 0, sizeof(r4->unk5A));
+    memset(&r4->unk4C, 0, sizeof(r4->unk4C));
     sub_802385C(r4);
     SetGpuReg(REG_OFFSET_BG0VOFS, -r4->unk2C);
     SetGpuReg(REG_OFFSET_BG2VOFS, -r4->unk2C);
@@ -2626,8 +2604,8 @@ static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
 
 static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
-    memset(&r4->unk5C, 0, sizeof(r4->unk5C));
-    memset(&r4->unk40.unkE, 0, sizeof(r4->unk40.unkE));
+    memset(&r4->unk5A, 0, sizeof(r4->unk5A));
+    memset(&r4->unk4C, 0, sizeof(r4->unk4C));
     sub_802385C(r4);
     SetGpuReg(REG_OFFSET_BG0VOFS, -r4->unk2C);
     SetGpuReg(REG_OFFSET_BG2VOFS, -r4->unk2C);
@@ -2662,28 +2640,28 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
         r4->unk12 = 8;
         PlaySE(SE_M_STRENGTH);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 31, 0));
-        r4->unk138.unk0 = 2;
+        r4->unk136.unk0 = 2;
         break;
     case 1:
-        if (--r4->unk138.unk0 != 255)
+        if (--r4->unk136.unk0 != 255)
             return 0;
         BlendPalettes(0xFFFFFFFF, 0, RGB(31, 31, 0));
-        r4->unk138.unk1 = 4;
-        r4->unk138.unk0 = 0;
-        r4->unk138.unk2 = gUnknown_082F326C[r4->unk138.unk1][0];
+        r4->unk136.unk1 = 4;
+        r4->unk136.unk0 = 0;
+        r4->unk136.unk2 = gUnknown_082F326C[r4->unk136.unk1][0];
         break;
     case 2:
-        r4->unk2C = gUnknown_082F326C[r4->unk138.unk1][r4->unk138.unk0];
+        r4->unk2C = gUnknown_082F326C[r4->unk136.unk1][r4->unk136.unk0];
         SetGpuReg(REG_OFFSET_BG0VOFS, -r4->unk2C);
         SetGpuReg(REG_OFFSET_BG2VOFS, -r4->unk2C);
         SetGpuReg(REG_OFFSET_BG3VOFS, -r4->unk2C);
-        if (++r4->unk138.unk0 < r4->unk138.unk2)
+        if (++r4->unk136.unk0 < r4->unk136.unk2)
             return 0;
-        if (r4->unk138.unk1 != 0)
+        if (r4->unk136.unk1 != 0)
         {
-            --r4->unk138.unk1;
-            r4->unk138.unk2 = gUnknown_082F326C[r4->unk138.unk1][0];
-            r4->unk138.unk0 = 0;
+            --r4->unk136.unk1;
+            r4->unk136.unk2 = gUnknown_082F326C[r4->unk136.unk1][0];
+            r4->unk136.unk0 = 0;
             return 0;
         }
         break;
@@ -2694,7 +2672,7 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
         SetGpuReg(REG_OFFSET_BG3VOFS, 0);
         break;
     case 4:
-        if (!sub_80218D4(r4, &r4->unk138))
+        if (!sub_80218D4(r4, &r4->unk136))
             return 0;
         Rfu_SetLinkStandbyCallback();
         r4->unk10 = 0;
@@ -2719,16 +2697,16 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
         r5->unk12 = 9;
         PlaySE(SE_FAILURE);
         BlendPalettes(0xFFFFFFFF, 8, RGB(31, 0, 0));
-        r5->unk138.unk0 = 4;
+        r5->unk136.unk0 = 4;
         break;
     case 1:
-        if (--r5->unk138.unk0 != 255)
+        if (--r5->unk136.unk0 != 255)
             return 0;
         BlendPalettes(0xFFFFFFFF, 0, RGB(31, 0, 0));
-        r5->unk138.unk0 = 0;
+        r5->unk136.unk0 = 0;
         break;
     case 2:
-        if (!sub_80218D4(r5, &r5->unk138))
+        if (!sub_80218D4(r5, &r5->unk136))
             return 0;
         Rfu_SetLinkStandbyCallback();
         r5->unk10 = 0;
@@ -2753,19 +2731,19 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
 
 static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
 {
-    u8 r8, r4_;
+    u8 r8, r4_, r3;
     s32 r2;
     s32 r4;
-    u8 r6; // ???
+    u16 r6;
 
     switch (r7->unkC)
     {
     case 0:
-        memset(r7->unk40.unk2, 0, 2 * sizeof(u16));
-        if (r7->unk68.as_four_players.others[r7->unk8].unk4.as_hwords[5] > r7->unk28)
-            r7->unk68.as_four_players.others[r7->unk8].unk4.as_hwords[5] = r7->unk28;
-        r7->unk40.unk2[0] = r7->unk68.as_four_players.others[r7->unk8].unk4.as_hwords[5];
-        SendBlock(0, r7->unk40.unk2, 2);
+        memset(r7->unk40, 0, sizeof(r7->unk40));
+        if (r7->unk96[r7->unk8].unk1A > r7->unk28)
+            r7->unk96[r7->unk8].unk1A = r7->unk28;
+        r7->unk40[0] = r7->unk96[r7->unk8].unk1A;
+        SendBlock(0, r7->unk40, 2);
         break;
     case 1:
         if (!IsLinkTaskFinished())
@@ -2776,9 +2754,9 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
         if (GetBlockReceivedStatus() != gUnknown_082F4448[r7->unk9 - 2])
             return 0;
         for (r8 = 0; r8 < r7->unk9; ++r8)
-            r7->unk68.as_four_players.others[r8].unk4.as_hwords[5] = gBlockRecvBuffer[r8][0];
+            r7->unk96[r8].unk1A = gBlockRecvBuffer[r8][0];
         r7->unk10 = 0;
-        r7->unk40.unk2[0] = 0;
+        r7->unk40[0] = 0;
         ResetBlockReceivedFlags();
         if (r7->unk8 == 0)
             r7->unkC = 3;
@@ -2786,38 +2764,34 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
             r7->unkC = 6;
         return 0;
     case 3:
-        memset(
-            &r7->unk68,
-            0,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
-        );
-        r7->unk68.as_four_players.unk00.unk04 = r7->unk28;
-        r7->unk68.as_four_players.unk00.unk06 = r7->unk18 / (r7->unk28 / 60);
+        memset(&r7->unk66, 0, sizeof(struct BerryCrushGame_66));
+        r7->unk66.unk04 = r7->unk28;
+        r7->unk66.unk06 = r7->unk18 / (r7->unk28 / 60);
         r2 = MathUtil_Mul32(Q_24_8(r7->unk30), Q_24_8(50));
         r2 = MathUtil_Div32(r2, Q_24_8(r7->unk32)) + Q_24_8(50);
         r2 = Q_24_8_TO_INT(r2);
-        r7->unk68.as_four_players.unk00.unk08 = r2 & 0x7F;
+        r7->unk66.unk08 = r2 & 0x7F;
         r2 = Q_24_8(r2);
         r2 = MathUtil_Div32(r2, Q_24_8(100));
         r4 = Q_24_8(r7->unk1C * r7->unk9);
         r4 = MathUtil_Mul32(r4, r2);
-        r7->unk68.as_four_players.unk00.unk00 = r4 >> 8;
-        r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[0][7] = Random() % 3;
-        for (r6 = 0, r8 = 0; r8 < r7->unk9; ++r8)
+        r7->unk66.unk00 = r4 >> 8;
+        r7->unk66.filler20[0][7] = Random() % 3;
+        for (r8 = 0; r8 < r7->unk9; ++r8)
         {
-            r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[0][r8] = r8;
-            r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[1][r8] = r8;
-            r7->unk68.as_four_players.unk00.unk0C[0][r8] = r7->unk68.as_four_players.others[r8].unk4.as_hwords[3];
-            r7->unk68.as_four_players.unk00.unk0A += r7->unk68.as_four_players.unk00.unk0C[0][r8];
-            switch (r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[0][7])
+            r7->unk66.filler20[0][r8] = r8;
+            r7->unk66.filler20[1][r8] = r8;
+            r7->unk66.unk0C[0][r8] = r7->unk96[r8].unk16;
+            r7->unk66.unk0A += r7->unk66.unk0C[0][r8];
+            switch (r7->unk66.filler20[0][7])
             {
             case 0:
-                if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[3] != 0)
+                if (r7->unk96[r8].unk16 != 0)
                 {
-                    r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[2];
+                    r2 = r7->unk96[r8].unk14;
                     r2 = Q_24_8(r2);
                     r2 = MathUtil_Mul32(r2, Q_24_8(100));
-                    r4 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[3];
+                    r4 = r7->unk96[r8].unk16;
                     r4 = Q_24_8(r4);
                     r4 = MathUtil_Div32(r2, r4);
                 }
@@ -2827,12 +2801,12 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 }
                 break;
             case 1:
-                if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[3] != 0)
+                if (r7->unk96[r8].unk16 != 0)
                 {
-                    r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[4];
+                    r2 = r7->unk96[r8].unk18;
                     r2 = Q_24_8(r2);
                     r2 = MathUtil_Mul32(r2, Q_24_8(100));
-                    r4 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[3];
+                    r4 = r7->unk96[r8].unk16;
                     r4 = Q_24_8(r4);
                     r4 = MathUtil_Div32(r2, r4);
                 }
@@ -2842,17 +2816,17 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 }
                 break;
             case 2:
-                if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[3] == 0)
+                if (r7->unk96[r8].unk16 == 0)
                 {
                     r4 = 0;
                 }
-                else if (r7->unk68.as_four_players.others[r8].unk4.as_hwords[5] >= r7->unk28)
+                else if (r7->unk96[r8].unk1A >= r7->unk28)
                 {
                     r4 = 0x6400;
                 }
                 else
                 {
-                    r2 = r7->unk68.as_four_players.others[r8].unk4.as_hwords[5];
+                    r2 = r7->unk96[r8].unk1A;
                     r2 = Q_24_8(r2);
                     r2 = MathUtil_Mul32(r2, Q_24_8(100));
                     r4 = r7->unk28;
@@ -2862,51 +2836,35 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                 break;
             }
             r4 >>= 4;
-            r7->unk68.as_four_players.unk00.unk0C[1][r8] = r4;
+            r7->unk66.unk0C[1][r8] = r4;
         }
         break;
     case 4:
-        for (r6 = 0, r8 = 0; r8 < r7->unk9 - 1; ++r8)
+        for (r8 = 0; r8 < r7->unk9 - 1; ++r8)
         {
             for (r4_ = r7->unk9 - 1; r4_ > r8; --r4_)
             {
-                u16 r0;
-                u8 r3;
-                u16 *sp00 = r7->unk68.as_four_players.unk00.unk0C[0];
-                u8 *sp04 = r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[0];
-                u8 *r10 = r7->unk68.as_five_players.unk1C[0].unk4.as_2d_bytes[1];
-                u16 *r9 = r7->unk68.as_four_players.unk00.unk0C[1];
-                s32 r12 = r4_ - 1;
-                u16 *p1 = sp00 + r12; // these have to be here
-                u16 *p2 = sp00 + r4_; // to swap operands. macro? 
-
-                if (*p1 < *p2)
+                if (r7->unk66.unk0C[0][r4_ - 1] < r7->unk66.unk0C[0][r4_])
                 {
-                    r0 = sp00[r4_];
-                    sp00[r4_] = sp00[r12];
-                    sp00[r12] = r0;
-                    r3 = sp04[r4_];
-                    sp04[r4_] = sp04[r12];
-                    sp04[r12] = r3;
+                    r6 = r7->unk66.unk0C[0][r4_];
+                    r7->unk66.unk0C[0][r4_] = r7->unk66.unk0C[0][r4_ - 1];
+                    r7->unk66.unk0C[0][r4_ - 1] = r6;
+                    r3 = r7->unk66.filler20[0][r4_];
+                    r7->unk66.filler20[0][r4_] = r7->unk66.filler20[0][r4_ - 1];
+                    r7->unk66.filler20[0][r4_ - 1] = r3;
                 }
-                p1 = r9 + r12;
-                p2 = r9 + r4_;
-                if (*p1 < *p2)
+                if (r7->unk66.unk0C[1][r4_ - 1] < r7->unk66.unk0C[1][r4_])
                 {
-                    r0 = r9[r4_];
-                    r9[r4_] = r9[r12];
-                    r9[r12] = r0;
-                    r3 = r10[r4_];
-                    r10[r4_] = r10[r12];
-                    r10[r12] = r3;
+                    r6 = r7->unk66.unk0C[1][r4_];
+                    r7->unk66.unk0C[1][r4_] = r7->unk66.unk0C[1][r4_ - 1];
+                    r7->unk66.unk0C[1][r4_ - 1] = r6;
+                    r3 = r7->unk66.filler20[1][r4_];
+                    r7->unk66.filler20[1][r4_] = r7->unk66.filler20[1][r4_ - 1];
+                    r7->unk66.filler20[1][r4_ - 1] = r3;
                 }
             }
         }
-        SendBlock(
-            0,
-            &r7->unk68,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
-        );
+        SendBlock(0,&r7->unk66, sizeof(struct BerryCrushGame_66));
         break;
     case 5:
         if (!IsLinkTaskFinished())
@@ -2916,16 +2874,8 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
     case 6:
         if (GetBlockReceivedStatus() != 1)
             return 0;
-        memset(
-            &r7->unk68,
-            0,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
-        );
-        memcpy(
-            &r7->unk68,
-            gBlockRecvBuffer,
-            sizeof(struct BerryCrushGame_68_x_SubStruct)
-        );
+        memset(&r7->unk66, 0, sizeof(struct BerryCrushGame_66));
+        memcpy(&r7->unk66, gBlockRecvBuffer, sizeof(struct BerryCrushGame_66));
         ResetBlockReceivedFlags();
         r7->unk10 = 0;
         break;
@@ -2946,17 +2896,17 @@ static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
     switch (r5->unkC)
     {
     case 0:
-        if (!sub_8022070(r5, &r5->unk138))
+        if (!sub_8022070(r5, &r5->unk136))
             return 0;
         break;
     case 1:
         CopyBgTilemapBufferToVram(0);
-        r5->unk138.unk0 = 30;
+        r5->unk136.unk0 = 30;
         break;
     case 2:
-        if (r5->unk138.unk0 != 0)
+        if (r5->unk136.unk0 != 0)
         {
-            --r5->unk138.unk0;
+            --r5->unk136.unk0;
             return 0;
         }
         if (!(JOY_NEW(A_BUTTON)))
@@ -2991,7 +2941,7 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
     {
     case 0:
         if (r5->unk28 >= 36000)
-            sub_8022554(&r5->unk138);
+            sub_8022554(&r5->unk136);
         sub_8024644(r4, 8, 0, 0, 1);
         r5->unkE = 19;
         sub_8022BEC(3, 1, NULL);
@@ -3024,12 +2974,7 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
 
 static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
 {
-    s32 r4;
-#ifndef NONMATCHING
-    register s32 r0 asm("r0");
-#else
-    s32 r0;
-#endif
+    s8 r4;
 
     switch (r5->unkC)
     {
@@ -3037,16 +2982,16 @@ static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
         sub_8024644(r6, 4, 0, 0, 1);
         r5->unkE = 20;
         sub_8022BEC(3, 1, NULL);
-        r0 = 0;
-        r5->unkC = r0; // dunno what it's doing because it's already in case 0
+        r5->unkC = 0; // dunno what it's doing because it's already in case 0
         return 0;
     case 1:
         DisplayYesNoMenuDefaultYes();
         break;
     case 2:
-        if ((r4 = Menu_ProcessInputNoWrapClearOnChoose()) != -2)
+        r4 = Menu_ProcessInputNoWrapClearOnChoose();
+        if (r4 != -2)
         {
-            memset(r5->unk40.unk2, 0, sizeof(r5->unk40.unk2));
+            memset(r5->unk40, 0, sizeof(r5->unk40));
             if (r4 == 0)
             {
                 if (HasAtLeastOneBerry())
@@ -3082,9 +3027,9 @@ static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        r4->unk40.unk2[0] = r4->unk14;
-        r4->unk40.unkE.unk0 = 0;
-        SendBlock(0, r4->unk40.unk2, sizeof(u16));
+        r4->unk40[0] = r4->unk14;
+        r4->unk4C[0] = 0;
+        SendBlock(0, r4->unk40, sizeof(u16));
         break;
     case 2:
         if (!IsLinkTaskFinished())
@@ -3095,14 +3040,14 @@ static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
         if (GetBlockReceivedStatus() != gUnknown_082F4448[r4->unk9 - 2])
             return 0;
         for (; r5 < r4->unk9; ++r5)
-            r4->unk40.unkE.unk0 += gBlockRecvBuffer[r5][0];
-        if (r4->unk40.unkE.unk0 != 0)
+            r4->unk4C[0] += gBlockRecvBuffer[r5][0];
+        if (r4->unk4C != 0)
             sub_8022BEC(23, 1, NULL);
         else
             sub_8022BEC(22, 1, NULL);
         ResetBlockReceivedFlags();
-        r4->unk40.unk2[0] = 0;
-        r4->unk40.unkE.unk0 = 0;
+        r4->unk40[0] = 0;
+        r4->unk4C[0] = 0;
         r4->unk10 = 0;
         r4->unkC = 0;
         return 0;
@@ -3156,11 +3101,11 @@ static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     case 1:
         if (IsTextPrinterActive(0))
             return 0;
-        r5->unk138.unk0 = 120;
+        r5->unk136.unk0 = 120;
         break;
     case 2:
-        if (r5->unk138.unk0 != 0)
-            --r5->unk138.unk0;
+        if (r5->unk136.unk0 != 0)
+            --r5->unk136.unk0;
         else
         {
             sub_8022BEC(24, 1, NULL);
@@ -3202,11 +3147,6 @@ static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attr
     return 0;
 }
 
-#if MODERN
-// TODO remove this as soon as the code below is understood
-// add a UBFIX if required (code buggy?)
-__attribute__((optimize("no-aggressive-loop-optimizations")))
-#endif
 void sub_8024578(struct BerryCrushGame *r4)
 {
     u8 r5 = 0;
@@ -3233,18 +3173,18 @@ void sub_8024578(struct BerryCrushGame *r4)
     r4->unk32 = -1;
     r4->unk30 = 0;
     r4->unk34 = 0;
-    for (; r5 < 5; ++r5) // why is it 5 instead of 4? fillerBC isn't sufficient for one player
+    for (; r5 < 5; ++r5)
     {
-        r4->unk68.as_four_players.others[r5].unk0 = -1;
-        r4->unk68.as_four_players.others[r5].unk2 = 0;
-        r4->unk68.as_four_players.others[r5].unk4.as_hwords[0] = 0;
-        r4->unk68.as_four_players.others[r5].unk4.as_hwords[1] = 1;
-        r4->unk68.as_four_players.others[r5].unk4.as_hwords[2] = 0;
-        r4->unk68.as_four_players.others[r5].unk4.as_hwords[3] = 0;
-        r4->unk68.as_four_players.others[r5].unk4.as_hwords[4] = 0;
-        r4->unk68.as_four_players.others[r5].unk4.as_hwords[5] = 0;
-        r4->unk68.as_four_players.others[r5].unk4.as_2d_bytes[1][4] = 0;
-        r4->unk68.as_four_players.others[r5].unk4.as_2d_bytes[1][5] = 0;
+        r4->unk96[r5].unkC = -1;
+        r4->unk96[r5].unkE = 0;
+        r4->unk96[r5].unk10 = 0;
+        r4->unk96[r5].unk12 = 1;
+        r4->unk96[r5].unk14 = 0;
+        r4->unk96[r5].unk16 = 0;
+        r4->unk96[r5].unk18 = 0;
+        r4->unk96[r5].unk1A = 0;
+        r4->unk96[r5].unk1B = 0;
+        r4->unk96[r5].unk1C = 0;
     }
 }
 
