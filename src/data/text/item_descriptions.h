@@ -2831,7 +2831,7 @@ static const u8 sOvalCharmDesc[] = _(
 
 static const u8 sZRingDesc[] = _(
     "A strange ring\n"
-    "that enables"
+    "that enables\n"
     "Z-Move usage.");
 
 static const u8 sNormaliumZDesc[] = _(
@@ -3005,6 +3005,6 @@ static const u8 sTapuniumZDesc[] = _(
     "into a Z-Move.");
 
 static const u8 sUltranecroziumZDesc[] = _(
-    "Upgrade Necrozma's\n"
-    "Photon Geyser\n"
-    "into a Z-Move.");
+    "A crystal to\n"
+    "turn fused Necrozma\n"
+    "into a new form.");
