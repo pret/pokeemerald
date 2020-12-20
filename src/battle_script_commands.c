@@ -8323,6 +8323,9 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_DESTROY_ABILITY_POPUP:
+        DestroyAbilityPopUp(gActiveBattler);
+        break;
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
         if (ItemBattleEffects(1, gActiveBattler, FALSE))
             return;
@@ -10219,9 +10222,18 @@ static void Cmd_tryspiteppreduce(void)
                 break;
         }
 
+    #if B_CAN_SPITE_FAIL <= GEN_3
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > 1)
+    #else
+        if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] != 0)
+    #endif
         {
+        #if B_PP_REDUCED_BY_SPITE <= GEN_3
             s32 ppToDeduct = (Random() & 3) + 2;
+        #else
+            s32 ppToDeduct = 4;
+        #endif
+
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
 

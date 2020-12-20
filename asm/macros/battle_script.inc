@@ -1755,6 +1755,10 @@
 	various \battler, VARIOUS_JUMP_IF_ABSENT
 	.4byte \ptr
 	.endm
+
+	.macro destroyabilitypopup
+	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
+	.endm
 	
 	.macro activateitemeffects battler:req
 	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
