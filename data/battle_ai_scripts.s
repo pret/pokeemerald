@@ -3356,37 +3356,9 @@ AI_PreferStrongestMove_End:
 	end
 
 AI_Risky:
-	if_target_is_ally AI_Ret
-	get_considered_move_effect
-	if_move_flag FLAG_HIGH_CRIT, AI_Risky_RandChance
-	if_not_in_bytes AI_Risky_EffectsToEncourage, AI_Risky_End
-AI_Risky_RandChance:
-	if_random_less_than 128, AI_Risky_End
-	score +2
-AI_Risky_End:
 	end
 
-AI_Risky_EffectsToEncourage:
-    .byte EFFECT_SLEEP
-    .byte EFFECT_EXPLOSION
-    .byte EFFECT_MIRROR_MOVE
-    .byte EFFECT_OHKO
-    .byte EFFECT_CONFUSE
-    .byte EFFECT_METRONOME
-    .byte EFFECT_PSYWAVE
-    .byte EFFECT_COUNTER
-    .byte EFFECT_DESTINY_BOND
-    .byte EFFECT_SWAGGER
-    .byte EFFECT_ATTRACT
-    .byte EFFECT_PRESENT
-    .byte EFFECT_ALL_STATS_UP_HIT
-    .byte EFFECT_BELLY_DRUM
-    .byte EFFECT_MIRROR_COAT
-    .byte EFFECT_FOCUS_PUNCH
-    .byte EFFECT_REVENGE
-    .byte EFFECT_TEETER_DANCE
-    .byte -1
-	
+
 .align 1
 sMovesTable_ProtectMoves:
     .2byte MOVE_PROTECT

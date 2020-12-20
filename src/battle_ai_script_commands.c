@@ -5918,7 +5918,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (IsTargetingPartner(battlerAtk, battlerDef)
       || gBattleResults.battleTurnCounter != 0)
         return score;
-    switch (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect)
+    switch (gBattleMoves[move].effect)
     {
     case EFFECT_ATTACK_UP:
     case EFFECT_DEFENSE_UP:
@@ -6009,6 +6009,40 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 
 static s16 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
+    if (IsTargetingPartner(battlerAtk, battlerDef))
+        return score;
+    
+    if (TestMoveFlags(move, FLAG_HIGH_CRIT))
+        score += 2;
+    
+    switch (gBattleMoves[move].effect)
+    {
+    case EFFECT_SLEEP:
+    case EFFECT_EXPLOSION:
+    case EFFECT_MIRROR_MOVE:
+    case EFFECT_OHKO:
+    case EFFECT_CONFUSE:
+    case EFFECT_METRONOME:
+    case EFFECT_PSYWAVE:
+    case EFFECT_COUNTER:
+    case EFFECT_DESTINY_BOND:
+    case EFFECT_SWAGGER:
+    case EFFECT_ATTRACT:
+    case EFFECT_PRESENT:
+    case EFFECT_ALL_STATS_UP_HIT:
+    case EFFECT_BELLY_DRUM:
+    case EFFECT_MIRROR_COAT:
+    case EFFECT_FOCUS_PUNCH:
+    case EFFECT_REVENGE:
+    case EFFECT_TEETER_DANCE:
+        if (Random() & 1)
+            score += 2;
+        break;
+    default:
+        break;
+    }
+    
+    return score;
 }
 
 static s16 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
