@@ -3005,6 +3005,6 @@ static const u8 sTapuniumZDesc[] = _(
     "into a Z-Move.");
 
 static const u8 sUltranecroziumZDesc[] = _(
-    "A crystal to\n"
-    "turn fused Necrozma\n"
+    "A crystal to turn\n"
+    "fused Necrozma\n"
     "into a new form.");
