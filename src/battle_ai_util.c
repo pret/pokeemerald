@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_util.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
 #include "battle_ai_switch_items.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
@@ -603,6 +603,31 @@ bool32 IsBattlerTrapped(u8 battler, bool8 checkSwitch)
     return FALSE;
 }
 
+u32 GetTotalBaseStat(u32 species)
+{
+    return gBaseStats[species].baseHP
+        + gBaseStats[species].baseAttack
+        + gBaseStats[species].baseDefense
+        + gBaseStats[species].baseSpeed
+        + gBaseStats[species].baseSpAttack
+        + gBaseStats[species].baseSpDefense;
+}
+
+bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler)
+{
+    int i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u32 move = gBattleResources->battleHistory->usedMoves[opposingBattler][i];
+        if (gBattleMoves[move].effect == EFFECT_PROTECT && move != MOVE_ENDURE)
+            return TRUE;
+        if (gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE && GetWhoStrikesFirst(battlerAI, opposingBattler, TRUE) == 1)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 // move checks
 bool32 IsAffectedByPowder(u8 battler, u16 ability, u16 holdEffect)
 {
@@ -1028,15 +1053,15 @@ u16 AI_GetHoldEffect(u32 battlerId)
     else
         holdEffect = GetBattlerHoldEffect(battlerId, FALSE);
     
-    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_AWARE)
-    {
-        if (gStatuses3[battlerId] & STATUS3_EMBARGO)
-            return HOLD_EFFECT_NONE;
-        if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
-            return HOLD_EFFECT_NONE;
-        if (AI_GetAbility(battlerId) == ABILITY_KLUTZ && !(gStatuses3[battlerId] & STATUS3_GASTRO_ACID))
-            return HOLD_EFFECT_NONE;
-    }
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
+        return holdEffect;
+    
+    if (gStatuses3[battlerId] & STATUS3_EMBARGO)
+        return HOLD_EFFECT_NONE;
+    if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
+        return HOLD_EFFECT_NONE;
+    if (AI_GetAbility(battlerId) == ABILITY_KLUTZ && !(gStatuses3[battlerId] & STATUS3_GASTRO_ACID))
+        return HOLD_EFFECT_NONE;
 }
 
 // different from IsBattlerGrounded in that we don't always know battler's hold effect or ability
@@ -1070,7 +1095,7 @@ bool32 DoesBattlerIgnoreAbilityChecks(u16 atkAbility, u16 move)
 {
     u32 i;
     
-    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_AWARE))
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
         return FALSE;   // AI doesn't understand ability suppression concept
     
     for (i = 0; i < ARRAY_COUNT(sIgnoreMoldBreakerMoves); i++)
@@ -1089,7 +1114,7 @@ bool32 DoesBattlerIgnoreAbilityChecks(u16 atkAbility, u16 move)
 
 bool32 AI_WeatherHasEffect(void)
 {
-    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_AWARE))
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
         return FALSE;   // AI doesn't understand ability suppression concept
     
     return WEATHER_HAS_EFFECT;
@@ -1183,7 +1208,7 @@ bool32 IsHazardMoveEffect(u16 moveEffect)
 
 bool32 IsMoveRedirectionPrevented(u16 move, u16 atkAbility)
 {
-    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_AWARE))
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
         return FALSE;
     
     if (move == MOVE_SKY_DROP
@@ -1844,6 +1869,95 @@ bool32 HasThawingMove(u8 battlerId)
     return FALSE;
 }
 
+bool32 IsAttackBoostMoveEffect(u16 effect)
+{
+    switch (effect)
+    {
+    case EFFECT_ATTACK_UP:
+	case EFFECT_ATTACK_UP_2:
+    case EFFECT_ATTACK_ACCURACY_UP:
+    case EFFECT_ATTACK_SPATK_UP:
+    case EFFECT_DRAGON_DANCE:
+    case EFFECT_COIL:
+    case EFFECT_BELLY_DRUM:
+    case EFFECT_BULK_UP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+bool32 IsStatRaisingEffect(u16 effect)
+{
+    switch (effect)
+    {
+    case EFFECT_ATTACK_UP:
+	case EFFECT_ATTACK_UP_2:
+	case EFFECT_DEFENSE_UP:
+	case EFFECT_DEFENSE_UP_2:
+    case EFFECT_DEFENSE_UP_3:
+	case EFFECT_SPEED_UP:
+	case EFFECT_SPEED_UP_2:
+	case EFFECT_SPECIAL_ATTACK_UP:
+	case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
+	case EFFECT_SPECIAL_DEFENSE_UP:
+	case EFFECT_SPECIAL_DEFENSE_UP_2:
+    case EFFECT_ACCURACY_UP:
+    case EFFECT_ACCURACY_UP_2:
+    case EFFECT_EVASION_UP:
+    case EFFECT_EVASION_UP_2:
+    case EFFECT_MINIMIZE:
+    case EFFECT_DEFENSE_CURL:
+    case EFFECT_CHARGE:
+	case EFFECT_CALM_MIND:
+    case EFFECT_COSMIC_POWER:
+	case EFFECT_DRAGON_DANCE:
+	case EFFECT_ACUPRESSURE:
+	case EFFECT_SHELL_SMASH:
+	case EFFECT_SHIFT_GEAR:
+	case EFFECT_ATTACK_ACCURACY_UP:
+	case EFFECT_ATTACK_SPATK_UP:
+	case EFFECT_GROWTH:
+	case EFFECT_COIL:
+	case EFFECT_QUIVER_DANCE:
+    case EFFECT_BULK_UP:
+    case EFFECT_GEOMANCY:
+    case EFFECT_STOCKPILE:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+bool32 IsStatLoweringEffect(u16 effect)
+{
+    // ignore other potentially-beneficial effects like defog, gravity
+    switch (effect)
+    {
+    case EFFECT_ATTACK_DOWN:
+    case EFFECT_DEFENSE_DOWN:
+    case EFFECT_SPEED_DOWN:
+    case EFFECT_SPECIAL_ATTACK_DOWN:
+    case EFFECT_SPECIAL_DEFENSE_DOWN:
+    case EFFECT_ACCURACY_DOWN:
+    case EFFECT_EVASION_DOWN:
+    case EFFECT_ATTACK_DOWN_2:
+    case EFFECT_DEFENSE_DOWN_2:
+    case EFFECT_SPEED_DOWN_2:
+    case EFFECT_SPECIAL_ATTACK_DOWN_2:
+    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+    case EFFECT_ACCURACY_DOWN_2:
+    case EFFECT_EVASION_DOWN_2:
+    case EFFECT_TICKLE:
+    case EFFECT_CAPTIVATE:
+    case EFFECT_NOBLE_ROAR:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 bool32 HasDamagingMove(u8 battlerId)
 {
     u32 i;
@@ -2438,11 +2552,18 @@ bool32 AI_CanParalyze(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u1
     return TRUE;
 }
 
+bool32 CanBeConfused(u8 battler, u16 ability)
+{
+    if ((gBattleMons[battler].status2 & STATUS2_CONFUSION)
+      || (ability == ABILITY_OWN_TEMPO)
+      || (IsBattlerGrounded(battler) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)))
+        return FALSE;
+    return TRUE;
+}
+
 bool32 AI_CanConfuse(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove)
 {
-    if ((gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
-      || (!DoesBattlerIgnoreAbilityChecks(battlerAtk, move) && defAbility == ABILITY_OWN_TEMPO)
-      || (IsBattlerGrounded(battlerDef) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
+    if (CanBeConfused(battlerDef, defAbility)
       || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || DoesPartnerHaveSameMoveEffect(battlerAtkPartner, battlerDef, move, partnerMove))

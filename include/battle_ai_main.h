@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
-#define GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
+#ifndef GUARD_BATTLE_AI_MAIN_H
+#define GUARD_BATTLE_AI_MAIN_H
 
 // return values for BattleAI_ChooseMoveOrAction
 // 0 - 3 are move idx
@@ -11,10 +11,7 @@ void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void BattleAI_SetupAIData(u8 defaultScoreMoves);
 u8 BattleAI_ChooseMoveOrAction(void);
-bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
-bool32 IsBattlerAIControlled(u32 battlerId);
-void ClearBattlerMoveHistory(u8 battlerId);
 
 extern u8 sBattler_AI;
 
-#endif // GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
+#endif // GUARD_BATTLE_AI_MAIN_H

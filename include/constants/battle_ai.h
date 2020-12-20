@@ -43,12 +43,13 @@
 #define AI_FLAG_RISKY                   (1 << 4)
 #define AI_FLAG_PREFER_STRONGEST_MOVE   (1 << 5)
 #define AI_FLAG_PREFER_BATON_PASS       (1 << 6)
-#define AI_FLAG_DOUBLE_BATTLE           (1 << 7)
+#define AI_FLAG_DOUBLE_BATTLE           (1 << 7)    // removed, split between AI_FLAG_CHECK_BAD_MOVE & AI_FLAG_CHECK_GOOD_MOVE
 #define AI_FLAG_HP_AWARE                (1 << 8)
-// Flags that don't run specific checks themselves, but are used in other score functions
-#define AI_FLAG_NEGATE_AWARE            (1 << 9)   // AI is aware of negating effects like wonder room, mold breaker, etc (eg. smart trainers). TODO unfinished
-#define AI_FLAG_HELP_PARTNER            (1 << 10)  // AI can try to help partner. If not set, will tend not to target partner
-#define AI_FLAG_WILL_SUICIDE            (1 << 11)  // AI will use explosion / self destruct / final gambit / etc
+// New, Trainer Handicap Flags
+#define AI_FLAG_NEGATE_UNAWARE          (1 << 9)   // AI is NOT aware of negating effects like wonder room, mold breaker, etc
+#define AI_FLAG_WILL_SUICIDE            (1 << 10)  // AI will use explosion / self destruct / final gambit / etc
+// New, Trainer Strategy Flags
+#define AI_FLAG_HELP_PARTNER            (1 << 11)  // AI can try to help partner. If not set, will tend not to target partner
 #define AI_FLAG_PREFER_STATUS_MOVES     (1 << 12)  // AI gets a score bonus for status moves. Should be combined with AI_FLAG_CHECK_BAD_MOVE to prevent using only status moves
 #define AI_FLAG_STALL                   (1 << 13)  // AI stalls battle and prefers secondary damage/trapping/etc. TODO not finished
 #define AI_FLAG_SCREENER                (1 << 14)  // AI prefers screening effects like reflect, mist, etc. TODO unfinished

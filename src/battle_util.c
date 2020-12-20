@@ -23,7 +23,7 @@
 #include "trig.h"
 #include "window.h"
 #include "battle_message.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "event_data.h"
 #include "link.h"

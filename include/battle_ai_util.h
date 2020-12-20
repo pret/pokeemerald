@@ -20,6 +20,8 @@ void SaveBattlerData(u8 battlerId);
 void SetBattlerData(u8 battlerId);
 void RestoreBattlerData(u8 battlerId);
 
+u32 GetTotalBaseStat(u32 species);
+bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u8 battler);
 u32 GetHealthPercentage(u8 battler);
 bool32 IsBattlerTrapped(u8 battler, bool8 switching);
@@ -105,12 +107,17 @@ bool32 HasHealingEffect(u32 battler);
 bool32 ShouldFakeOut(u8 battlerAtk, u8 battlerDef, u16 move);
 bool32 IsThawingMove(u16 move);
 bool32 HasThawingMove(u8 battlerId);
+bool32 IsStatRaisingEffect(u16 effect);
+bool32 IsStatLoweringEffect(u16 effect);
+bool32 IsStatRaisingEffect(u16 effect);
+bool32 IsAttackBoostMoveEffect(u16 effect);
 
 // status checks
 bool32 CanBeBurned(u8 battler, u16 ability);
 bool32 CanBePoisoned(u8 battler, u16 ability);
-bool32 IsBattlerIncapacitated(u8 battler, u16 ability);
+bool32 CanBeConfused(u8 battler, u16 ability);
 bool32 CanSleep(u8 battler, u16 ability);
+bool32 IsBattlerIncapacitated(u8 battler, u16 ability);
 bool32 AI_CanPutToSleep(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove);
 bool32 ShouldPoisonSelf(u8 battler, u16 ability);
 bool32 AI_CanPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove);

@@ -4,7 +4,7 @@
 #include "constants/battle_script_commands.h"
 #include "battle_message.h"
 #include "battle_anim.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "battle_scripts.h"
 #include "constants/moves.h"
