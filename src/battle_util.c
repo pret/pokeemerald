@@ -5858,9 +5858,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                   && IsBattlerAlive(gBattlerAttacker)
                   && gBattleMons[gBattlerAttacker].item == ITEM_NONE)
                 {
-                    //no sticky hold checks. item is already known so no CanStealItem checks
-                    gEffectBattler = battlerId; //effect battler = target
-                    StealTargetItem(gBattlerAttacker, gBattlerTarget);  //attacker takes target's barb
+                    // No sticky hold checks. item is already known so no CanStealItem checks
+                    gEffectBattler = battlerId; // gEffectBattler = target
+                    StealTargetItem(gBattlerAttacker, gBattlerTarget);  // Attacker takes target's barb
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_StickyBarbTransfer;
                     effect = ITEM_EFFECT_OTHER;
@@ -5894,7 +5894,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 RecordItemEffectBattle(battlerId, battlerHoldEffect);
             }
             break;
-        case HOLD_EFFECT_STICKY_BARB:   //not an orb per-say, but similar effect, and needs to NOT activate with pickpocket
+        case HOLD_EFFECT_STICKY_BARB:   // Not an orb per se, but similar effect, and needs to NOT activate with pickpocket
             if (GetBattlerAbility(battlerId) != ABILITY_MAGIC_GUARD)
             {
                 gBattleMoveDamage = gBattleMons[battlerId].maxHP / 8;
@@ -7859,8 +7859,8 @@ u8 GetBattleMoveSplit(u32 moveId)
         return SPLIT_SPECIAL;
 }
 
-// sort an array of battlers by speed
-//  useful for effects like pickpocket, eject button, red card, dancer
+// Sort an array of battlers by speed
+// Useful for effects like pickpocket, eject button, red card, dancer
 void SortBattlersBySpeed(u8 *battlers, bool8 slowToFast)
 {
     int i, j, currSpeed, currBattler;
@@ -7918,7 +7918,7 @@ void TryRestoreStolenItems(void)
         {
             stolenItem = gBattleStruct->itemStolen[i].originalItem;
             if (stolenItem != ITEM_NONE && ItemId_GetPocket(stolenItem) != POCKET_BERRIES)
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &stolenItem);  //restore stolen non-berry items
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &stolenItem);  // Restore stolen non-berry items
         }
     }
 }
@@ -7930,7 +7930,7 @@ bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item)
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         return FALSE;
     
-    // check if the battler trying to steal should be able to
+    // Check if the battler trying to steal should be able to
     if (stealerSide == B_SIDE_OPPONENT
         && !(gBattleTypeFlags &
              (BATTLE_TYPE_EREADER_TRAINER
@@ -7956,14 +7956,17 @@ bool32 CanStealItem(u8 battlerStealing, u8 battlerItem, u16 item)
         return FALSE;
     }
     
-    // check if battler with the item can lose it
-    return CanBattlerGetOrLoseItem(battlerItem, item);
+    if (!CanBattlerGetOrLoseItem(battlerItem, item)      // Battler with item cannot have it stolen
+      ||!CanBattlerGetOrLoseItem(battlerStealing, item)) // Stealer cannot take the item
+        return FALSE;
+    
+    return TRUE;
 }
 
 void TrySaveExchangedItem(u8 battlerId, u16 stolenItem)
 {
-    // because BtlController_EmitSetMonData does SetMonData, we need to save the stolen item only if it matches the battler's original
-    // so, if the player steals an item during battle and has it stolen from it, it will not end the battle with it (naturally)
+    // Because BtlController_EmitSetMonData does SetMonData, we need to save the stolen item only if it matches the battler's original
+    // So, if the player steals an item during battle and has it stolen from it, it will not end the battle with it (naturally)
     #if B_TRAINERS_KNOCK_OFF_ITEMS == TRUE
     // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
