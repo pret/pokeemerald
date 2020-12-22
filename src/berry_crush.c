@@ -1756,12 +1756,11 @@ void sub_8022600(struct BerryCrushGame *r6)
 void sub_80226D0(struct BerryCrushGame *r6)
 {
     u8 r5 = 0;
-    u16 * r4;
+    u8 * r4;
 
     LZ77UnCompWram(gUnknown_08DE3FD4, gDecompressionBuffer);
-    r4 = (u16 *)gDecompressionBuffer;
 
-    for (; r5 < r6->unk9; ++r5)
+    for (r4 = gDecompressionBuffer; r5 < r6->unk9; ++r5)
     {
         CopyToBgTilemapBufferRect(
             3,
@@ -2331,77 +2330,77 @@ void sub_802339C(struct BerryCrushGame *r4)
 {
     u8 r8 = 0;
     u8 r7 = 0;
-    u16 r3 = 0;
+    u16 r3;
     s32 r2_ = 0;
     struct BerryCrushGame_4E *r2;
 
     for (r7 = 0; r7 < r4->unk9; r7++)
     {
         r2 = (struct BerryCrushGame_4E *)gRecvCmds[r7];
-        if ((r2->unk0 & 0xFF00) == RFUCMD_SEND_PACKET
-         && r2->filler2 == 2)
+        if ((r2->unk0 & 0xFF00) != RFUCMD_SEND_PACKET)
+            continue;
+        if (r2->filler2 != 2)
+            continue;
+        
+        if (r2->unk4_2)
         {
-            if (r2->unk4_2)
+            r4->unk5C.unk02_3 |= gUnknown_082F325C[r7];
+            r4->unk98[r7].unk1C = 1;
+            ++r4->unk98[r7].unk16;
+            ++r8;
+            r3 = r4->unk28 - r4->unk98[r7].unkE;
+            if (r3 >= r4->unk98[r7].unk12 - 1 && r3 <= r4->unk98[r7].unk12 + 1)
             {
-                r4->unk5C.unk02_3 |= gUnknown_082F325C[r7];
-                r4->unk98[r7].unk1C = 1;
-                ++r4->unk98[r7].unk16;
-                ++r8;
-                r3 = r4->unk28 - r4->unk98[r7].unkE;
-                if (r3 >= r4->unk98[r7].unk12 - 1 && r3 <= r4->unk98[r7].unk12 + 1)
-                {
-                    ++r4->unk98[r7].unk10;
-                    r4->unk98[r7].unk12 = r3;
-                    if (r4->unk98[r7].unk10 > r4->unk98[r7].unk14)
-                        r4->unk98[r7].unk14 = r4->unk98[r7].unk10;
-                }
-                else
-                {
-                    r4->unk98[r7].unk10 = 0;
-                    r4->unk98[r7].unk12 = r3;
-                }
-                r4->unk98[r7].unkE = r4->unk28;
-                ++r4->unk98[r7].unk1B;
-                if (r4->unk98[r7].unk1B > 2)
-                    r4->unk98[r7].unk1B = 0;
+                ++r4->unk98[r7].unk10;
+                r4->unk98[r7].unk12 = r3;
+                if (r4->unk98[r7].unk10 > r4->unk98[r7].unk14)
+                    r4->unk98[r7].unk14 = r4->unk98[r7].unk10;
             }
             else
             {
-                r4->unk98[r7].unk1C = 0;
+                r4->unk98[r7].unk10 = 0;
+                r4->unk98[r7].unk12 = r3;
             }
+            r4->unk98[r7].unkE = r4->unk28;
+            ++r4->unk98[r7].unk1B;
+            if (r4->unk98[r7].unk1B > 2)
+                r4->unk98[r7].unk1B = 0;
         }
+        else
+        {
+            r4->unk98[r7].unk1C = 0;
+        }
+        
     }
     if (r8 > 1)
     {
         for (r7 = 0; r7 < r4->unk9; ++r7)
         {
-            if (r4->unk98[r7].unk1C != 0)
-            {
-                r4->unk98[r7].unk1C |= 2;
-                ++r4->unk98[r7].unk18;
-            }
+            if (!r4->unk98[r7].unk1C)
+                continue;
+            r4->unk98[r7].unk1C |= 2;
+            ++r4->unk98[r7].unk18;
         }
     }
-    if (r8 != 0)
+    if (r8 == 0)
+        return;
+
+    r4->unk2E += r8;
+    r8 += gUnknown_082F3264[r8 - 1];
+    r4->unk34 += r8;
+    r4->unk1A += r8;
+    if (r4->unk18 - r4->unk1A > 0)
     {
-        r4->unk2E += r8;
-        r8 += gUnknown_082F3264[r8 - 1];
-        r4->unk34 += r8;
-        r4->unk1A += r8;
-        if (r4->unk18 - r4->unk1A > 0)
-        {
-            r2_ = (s32)r4->unk1A;
-            r2_ <<= 8;
-            r2_ = MathUtil_Div32(r2_, r4->unk20);
-            r2_ >>= 8;
-            r4->unk24 = (u8)r2_;
-        }
-        else
-        {
-            r4->unk24 = 32;
-            r4->unk5C.unk02_0 = 1;
-        }
+        r2_ = (s32)r4->unk1A;
+        r2_ <<= 8;
+        r2_ = MathUtil_Div32(r2_, r4->unk20);
+        r2_ >>= 8;
+        r4->unk24 = (u8)r2_;
+        return;
     }
+
+    r4->unk24 = 32;
+    r4->unk5C.unk02_0 = 1;    
 }
 
 void sub_8023558(struct BerryCrushGame *r3)
@@ -2739,7 +2738,7 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
     switch (r7->unkC)
     {
     case 0:
-        memset(r7->unk42, 0, sizeof(r7->unk42));
+        memset(r7->unk42, 0, 2 * sizeof(u16));
         if (r7->unk98[r7->unk8].unk1A > r7->unk28)
             r7->unk98[r7->unk8].unk1A = r7->unk28;
         r7->unk42[0] = r7->unk98[r7->unk8].unk1A;
@@ -2974,7 +2973,7 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
 
 static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
 {
-    s8 r4;
+    s8 r4 = 0;
 
     switch (r5->unkC)
     {
@@ -3041,7 +3040,7 @@ static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
             return 0;
         for (; r5 < r4->unk9; ++r5)
             r4->unk4E[0] += gBlockRecvBuffer[r5][0];
-        if (r4->unk4E != 0)
+        if (r4->unk4E[0] != 0)
             sub_8022BEC(23, 1, NULL);
         else
             sub_8022BEC(22, 1, NULL);
