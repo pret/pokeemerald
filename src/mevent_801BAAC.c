@@ -420,7 +420,7 @@ void sub_801C4C0(void)
     sWonderCardData->unk_017C = 0xFF;
     if (sWonderCardData->unk_014C.unk_06 != SPECIES_NONE)
     {
-        sWonderCardData->unk_017C = sub_80D2D78(sub_80D2E84(sWonderCardData->unk_014C.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0, FALSE);
+        sWonderCardData->unk_017C = sub_80D2D78(sub_80D2E84(sWonderCardData->unk_014C.unk_06), SpriteCallbackDummy, 0xDC, 0x14, 0);
         gSprites[sWonderCardData->unk_017C].oam.priority = 2;
     }
     if (sWonderCardData->unk_0000.unk_09 != 0 && sWonderCardData->unk_0000.unk_08_0 == 1)
@@ -434,7 +434,7 @@ void sub_801C4C0(void)
             sWonderCardData->unk_017D[r7][0] = CreateSprite(&gUnknown_082F1D48, 0xd8 - 32 * r7, 0x90, 8);
             if (sWonderCardData->unk_014C.unk_08[0][r7] != 0)
             {
-                sWonderCardData->unk_017D[r7][1] = sub_80D2D78(sub_80D2E84(sWonderCardData->unk_014C.unk_08[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0, 0);
+                sWonderCardData->unk_017D[r7][1] = sub_80D2D78(sub_80D2E84(sWonderCardData->unk_014C.unk_08[0][r7]), SpriteCallbackDummy, 0xd8 - 32 * r7, 0x88, 0);
             }
         }
     }
