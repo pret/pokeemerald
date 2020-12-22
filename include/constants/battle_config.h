@@ -142,8 +142,7 @@
 #define B_CATCHING_CHARM_BOOST      20    // % boost in Critical Capture odds if player has the Catching Charm.
 
 // Item Theft Settings
-#define B_TRAINERS_KNOCK_OFF_ITEMS      TRUE  // If TRUE, trainers can steal/swap your items (non-berries are restored after battle). In vanilla games trainers cannot steal items.
-#define B_KEEP_STOLEN_TRAINER_ITEMS     GEN_5 // In Gen5+, you do not keep items stolen from trainers. Wild Pokemon still always have their items permanently stolen.
+#define B_TRAINERS_KNOCK_OFF_ITEMS  TRUE  // If TRUE, trainers can steal/swap your items (non-berries are restored after battle). In vanilla games trainers cannot steal items.
 
 // Other
 #define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.

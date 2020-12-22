@@ -5856,9 +5856,10 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                   && IsMoveMakingContact(gCurrentMove, gBattlerAttacker)
                   && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battlerId)
                   && IsBattlerAlive(gBattlerAttacker)
+                  && CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item)
                   && gBattleMons[gBattlerAttacker].item == ITEM_NONE)
                 {
-                    // No sticky hold checks. item is already known so no CanStealItem checks
+                    // No sticky hold checks.
                     gEffectBattler = battlerId; // gEffectBattler = target
                     StealTargetItem(gBattlerAttacker, gBattlerTarget);  // Attacker takes target's barb
                     BattleScriptPushCursor();
