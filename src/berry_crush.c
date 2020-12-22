@@ -56,7 +56,7 @@ struct BerryCrushGame_Player
 struct BerryCrushGame_4E
 {
     u16 unk0;
-    u16 filler2;
+    u16 unk2;
     u8 unk4_0:1;
     u8 unk4_1:1;
     u8 unk4_2:1;
@@ -102,7 +102,7 @@ struct BerryCrushGame_68
     u16 unk08;
     u16 unk0A;
     u16 unk0C[2][5];
-    u8 filler20[2][8];
+    u8 unk20[2][8];
 };
 
 struct BerryCrushGame_138_C
@@ -1415,14 +1415,14 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
         switch (sp10)
         {
         case 0:
-            sp1C = sp24->filler20[sp10][r8];
+            sp1C = sp24->unk20[sp10][r8];
             if (r8 != 0 && sp24->unk0C[sp10][r8] != sp24->unk0C[sp10][r8 - 1])
                 sp20 = r8;
             ConvertIntToDecimalStringN(gStringVar4, sp24->unk0C[sp10][r8], STR_CONV_MODE_RIGHT_ALIGN, 4);
             StringAppend(gStringVar4, gUnknown_082F43B4[sp10]);
             break;
         case 1:
-            sp1C = sp24->filler20[sp10][r8];
+            sp1C = sp24->unk20[sp10][r8];
             if (r8 != 0 && sp24->unk0C[sp10][r8] != sp24->unk0C[sp10][r8 - 1])
                 sp20 = r8;
             ConvertIntToDecimalStringN(gStringVar1, sp24->unk0C[sp10][r8] >> 4, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -1539,7 +1539,7 @@ bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
             r6->unk80 = 5;
             return FALSE;
         case 12:
-            sub_80219C8(r6->unk82, 20, 4, gUnknown_082F43B4[r4->unk68.filler20[0][7] + 3]);
+            sub_80219C8(r6->unk82, 20, 4, gUnknown_082F43B4[r4->unk68.unk20[0][7] + 3]);
             sub_8021A28(r4, 1, 0xA0, 8 * gUnknown_082F3344[0][r5]);
             r6->unk80 = 5;
             return FALSE;
@@ -2339,7 +2339,7 @@ void sub_802339C(struct BerryCrushGame *r4)
         r2 = (struct BerryCrushGame_4E *)gRecvCmds[r7];
         if ((r2->unk0 & 0xFF00) != RFUCMD_SEND_PACKET)
             continue;
-        if (r2->filler2 != 2)
+        if (r2->unk2 != 2)
             continue;
         
         if (r2->unk4_2)
@@ -2370,7 +2370,6 @@ void sub_802339C(struct BerryCrushGame *r4)
         {
             r4->unk98[r7].unk1C = 0;
         }
-        
     }
     if (r8 > 1)
     {
@@ -2775,14 +2774,14 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
         r4 = Q_24_8(r7->unk1C * r7->unk9);
         r4 = MathUtil_Mul32(r4, r2);
         r7->unk68.unk00 = r4 >> 8;
-        r7->unk68.filler20[0][7] = Random() % 3;
+        r7->unk68.unk20[0][7] = Random() % 3;
         for (r8 = 0; r8 < r7->unk9; ++r8)
         {
-            r7->unk68.filler20[0][r8] = r8;
-            r7->unk68.filler20[1][r8] = r8;
+            r7->unk68.unk20[0][r8] = r8;
+            r7->unk68.unk20[1][r8] = r8;
             r7->unk68.unk0C[0][r8] = r7->unk98[r8].unk16;
             r7->unk68.unk0A += r7->unk68.unk0C[0][r8];
-            switch (r7->unk68.filler20[0][7])
+            switch (r7->unk68.unk20[0][7])
             {
             case 0:
                 if (r7->unk98[r8].unk16 != 0)
@@ -2848,18 +2847,18 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
                     r6 = r7->unk68.unk0C[0][r4_];
                     r7->unk68.unk0C[0][r4_] = r7->unk68.unk0C[0][r4_ - 1];
                     r7->unk68.unk0C[0][r4_ - 1] = r6;
-                    r3 = r7->unk68.filler20[0][r4_];
-                    r7->unk68.filler20[0][r4_] = r7->unk68.filler20[0][r4_ - 1];
-                    r7->unk68.filler20[0][r4_ - 1] = r3;
+                    r3 = r7->unk68.unk20[0][r4_];
+                    r7->unk68.unk20[0][r4_] = r7->unk68.unk20[0][r4_ - 1];
+                    r7->unk68.unk20[0][r4_ - 1] = r3;
                 }
                 if (r7->unk68.unk0C[1][r4_ - 1] < r7->unk68.unk0C[1][r4_])
                 {
                     r6 = r7->unk68.unk0C[1][r4_];
                     r7->unk68.unk0C[1][r4_] = r7->unk68.unk0C[1][r4_ - 1];
                     r7->unk68.unk0C[1][r4_ - 1] = r6;
-                    r3 = r7->unk68.filler20[1][r4_];
-                    r7->unk68.filler20[1][r4_] = r7->unk68.filler20[1][r4_ - 1];
-                    r7->unk68.filler20[1][r4_ - 1] = r3;
+                    r3 = r7->unk68.unk20[1][r4_];
+                    r7->unk68.unk20[1][r4_] = r7->unk68.unk20[1][r4_ - 1];
+                    r7->unk68.unk20[1][r4_ - 1] = r3;
                 }
             }
         }
