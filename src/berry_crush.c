@@ -1388,7 +1388,193 @@ void sub_80219C8(u8 windowId, u8 left, u8 colorId, const u8 *string)
     AddTextPrinterParameterized3(windowId, 2, left, 0, sBerryCrushTextColorTable[colorId], 0, string);
 }
 
-void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18) ////////
+#include "global.h"
+#include "battle_anim.h"
+#include "berry.h"
+#include "berry_powder.h"
+#include "bg.h"
+#include "decompress.h"
+#include "dynamic_placeholder_text_util.h"
+#include "event_data.h"
+#include "gpu_regs.h"
+#include "graphics.h"
+#include "international_string_util.h"
+#include "item_icon.h"
+#include "item_menu.h"
+#include "link.h"
+#include "link_rfu.h"
+#include "main.h"
+#include "malloc.h"
+#include "math_util.h"
+#include "menu.h"
+#include "overworld.h"
+#include "palette.h"
+#include "random.h"
+#include "save.h"
+#include "scanline_effect.h"
+#include "script.h"
+#include "sound.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
+#include "text.h"
+#include "text_window.h"
+#include "trig.h"
+#include "window.h"
+#include "constants/items.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+
+struct BerryCrushGame_Player
+{
+    u8 unk0[PLAYER_NAME_LENGTH + 1 + 4];
+    u16 unkC;
+    u16 unkE;
+    u16 unk10;
+    u16 unk12;
+    u16 unk14;
+    u16 unk16;
+    u16 unk18;
+    u16 unk1A;
+    u8 unk1B;
+    u8 unk1C;
+};
+
+struct BerryCrushGame_4E
+{
+    u16 unk0;
+    u16 filler2;
+    u8 unk4_0:1;
+    u8 unk4_1:1;
+    u8 unk4_2:1;
+    u8 unk4_3:5;
+    s8 unk5;
+    u16 unk6;
+    u16 unk8;
+    u16 unkA;
+    u16 unkC;
+};
+
+struct BerryCrushGame_40
+{
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+    s16 unkC;
+    s16 unkE;
+};
+
+struct BerryCrushGame_5C
+{
+    u16 unk00;
+    u8 unk02_0:1;
+    u8 unk02_1:1;
+    u8 unk02_2:1;
+    u8 unk02_3:5;
+    s8 unk03;
+    u16 unk04;
+    u16 unk06;
+    u16 unk08;
+    u16 unk0A;
+};
+
+struct BerryCrushGame_68
+{
+    u32 unk00;
+    u16 unk04;
+    u16 unk06;
+    u16 unk08;
+    u16 unk0A;
+    u16 unk0C[2][5];
+    u8 filler20[2][8];
+};
+
+struct BerryCrushGame_138_C
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+};
+
+struct BerryCrushGame_138
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    const struct BerryCrushGame_138_C *unkC[5];
+    struct Sprite *unk20;
+    struct Sprite *unk24[5];
+    struct Sprite *unk38[5];
+    struct Sprite *unk4C[11];
+    struct Sprite *unk78[2];
+    u8 unk80;
+    u8 filler81;
+    u8 unk82;
+    u8 unk83[5];
+    u16 unk88[4][0x800];
+};
+
+struct BerryCrushGame
+{
+    MainCallback unk0;
+    u32 (* unk4)(struct BerryCrushGame *, u8 *);
+    u8 unk8;
+    u8 unk9;
+    u8 mainTask;
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u16 unk10;
+    u16 unk12;
+    u16 unk14;
+    u16 unk16;
+    s16 unk18;
+    s16 unk1A;
+    s32 unk1C;
+    s32 unk20;
+    u8 unk24;
+    u8 unk25_0:1;
+    u8 unk25_1:1;
+    u8 unk25_2:1;
+    u8 unk25_3:1;
+    u8 unk25_4:1;
+    u8 unk25_5:3;
+    u16 unk26;
+    u16 unk28;
+    s16 unk2A;
+    s16 unk2C;
+    s16 unk2E;
+    s16 unk30;
+    s16 unk32;
+    s16 unk34;
+    u8 unk36[0xC];
+    u16 unk42[6];
+    u16 unk4E[7];
+    struct BerryCrushGame_5C unk5C;
+    struct BerryCrushGame_68 unk68;
+    struct BerryCrushGame_Player unk98[5];
+    struct BerryCrushGame_138 unk138;
+};
+
+extern const u8 *const gUnknown_082F43B4[];
+extern const u32 sPressingSpeedConversionTable[]; 
+extern const u8 sBerryCrushTextColorTable[][3];
+
+void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
 {
     u8 r8;
     u8 sp1C = 0;
@@ -1426,12 +1612,12 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18) //////
             if (r8 != 0 && sp24->unk0C[sp10][r8] != sp24->unk0C[sp10][r8 - 1])
                 sp20 = r8;
             ConvertIntToDecimalStringN(gStringVar1, sp24->unk0C[sp10][r8] >> 4, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            r3 = 0;
+            xOffset = 0;
             r7 = sp24->unk0C[sp10][r8] & 15;
             for (r2 = 0; r2 < 4; ++r2)
                 if ((r7 >> (3 - r2)) & 1)
-                    r3 += sPressingSpeedConversionTable[r2];
-            r7 = r3 / 1000000u;
+                    xOffset += sPressingSpeedConversionTable[r2];
+            r7 = xOffset / 1000000u;
             ConvertIntToDecimalStringN(gStringVar2, r7, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gUnknown_082F43B4[sp10]);
             break;
@@ -1442,11 +1628,11 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18) //////
             if (r2 >= LAST_BERRY_INDEX - FIRST_BERRY_INDEX + 2)
                 r2 = 0;
             StringCopy(gStringVar1, gBerries[r2].name);
-            StringExpandPlaceholders(gStringVar4, gUnknown_082F43B4[2]);
+            StringExpandPlaceholders(gStringVar4, gUnknown_082F43B4[sp10]);
             break;
         }
-        xOffset = GetStringRightAlignXOffset(2, gStringVar4, sp14 - 4);
-        AddTextPrinterParameterized3(sp0C->unk138.unk82, 2, xOffset, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
+        r3 = GetStringRightAlignXOffset(2, gStringVar4, sp14 - 4);
+        AddTextPrinterParameterized3(sp0C->unk138.unk82, 2, r3, r6, sBerryCrushTextColorTable[0], 0, gStringVar4);
         if (sp1C == sp0C->unk8)
             StringCopy(gStringVar3, gText_1DotBlueF700);
         else
