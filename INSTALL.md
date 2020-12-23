@@ -12,7 +12,7 @@ Windows has instructions for building with three possible terminals, if users en
 
 Unscientific benchmarks suggest **msys2 is 2x slower** than WSL1, and **Cygwin is 5-6x slower** than WSL1.
 
-> Note for advanced users: **WSL2** is an option and is even faster than **WSL1** if files are stored on the WSL2 file system, but some tools may have trouble interacting with the WSL2 file system over the network drive.
+> Note for advanced users: **WSL2** is an option and is even faster than **WSL1** if files are stored on the WSL2 file system, but some tools may have trouble interacting with the WSL2 file system over the network drive. For example, tools which use Qt versions before 6.0 such as [porymap](https://github.com/huderlem/porymap) may [have problems with parsing the `\\wsl$` network drive path](https://bugreports.qt.io/browse/QTBUG-86277).
 
 All of the Windows instructions assume that the default drive is C:\\. If this differs to your actual drive letter, then replace C with the correct drive letter when reading the instructions.
 
