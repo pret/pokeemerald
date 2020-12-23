@@ -167,6 +167,6 @@
 
 #define HIDE_HEALTHBOXES_DURING_ANIMS   TRUE    // If set to TRUE, hides healthboxes during move animations
 #define B_TERRAIN_BG_CHANGE             TRUE    // If set to TRUE, terrain moves permanently change the default battle background until the effect fades.
-#define USE_BATTLE_DEBUG                TRUE    // If set to TRUE, enables a debug menu to use in battles by pressing the Select button.
+#define B_ENABLE_DEBUG                  TRUE    // If set to TRUE, enables a debug menu to use in battles by pressing the Select button.
 
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
