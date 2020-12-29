@@ -65,10 +65,10 @@ static void PlayerPartnerHandleTwoReturnValues(void);
 static void PlayerPartnerHandleChosenMonReturnValue(void);
 static void PlayerPartnerHandleOneReturnValue(void);
 static void PlayerPartnerHandleOneReturnValue_Duplicate(void);
-static void PlayerPartnerHandleCmd37(void);
-static void PlayerPartnerHandleCmd38(void);
-static void PlayerPartnerHandleCmd39(void);
-static void PlayerPartnerHandleCmd40(void);
+static void PlayerPartnerHandleClearUnkVar(void);
+static void PlayerPartnerHandleSetUnkVar(void);
+static void PlayerPartnerHandleClearUnkFlag(void);
+static void PlayerPartnerHandleToggleUnkFlag(void);
 static void PlayerPartnerHandleHitAnimation(void);
 static void PlayerPartnerHandleCmd42(void);
 static void PlayerPartnerHandlePlaySE(void);
@@ -105,67 +105,67 @@ static void sub_81BE498(void);
 
 static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    PlayerPartnerHandleGetMonData,
-    PlayerPartnerHandleGetRawMonData,
-    PlayerPartnerHandleSetMonData,
-    PlayerPartnerHandleSetRawMonData,
-    PlayerPartnerHandleLoadMonSprite,
-    PlayerPartnerHandleSwitchInAnim,
-    PlayerPartnerHandleReturnMonToBall,
-    PlayerPartnerHandleDrawTrainerPic,
-    PlayerPartnerHandleTrainerSlide,
-    PlayerPartnerHandleTrainerSlideBack,
-    PlayerPartnerHandleFaintAnimation,
-    PlayerPartnerHandlePaletteFade,
-    PlayerPartnerHandleSuccessBallThrowAnim,
-    PlayerPartnerHandleBallThrowAnim,
-    PlayerPartnerHandlePause,
-    PlayerPartnerHandleMoveAnimation,
-    PlayerPartnerHandlePrintString,
-    PlayerPartnerHandlePrintSelectionString,
-    PlayerPartnerHandleChooseAction,
-    PlayerPartnerHandleUnknownYesNoBox,
-    PlayerPartnerHandleChooseMove,
-    PlayerPartnerHandleChooseItem,
-    PlayerPartnerHandleChoosePokemon,
-    PlayerPartnerHandleCmd23,
-    PlayerPartnerHandleHealthBarUpdate,
-    PlayerPartnerHandleExpUpdate,
-    PlayerPartnerHandleStatusIconUpdate,
-    PlayerPartnerHandleStatusAnimation,
-    PlayerPartnerHandleStatusXor,
-    PlayerPartnerHandleDataTransfer,
-    PlayerPartnerHandleDMA3Transfer,
-    PlayerPartnerHandlePlayBGM,
-    PlayerPartnerHandleCmd32,
-    PlayerPartnerHandleTwoReturnValues,
-    PlayerPartnerHandleChosenMonReturnValue,
-    PlayerPartnerHandleOneReturnValue,
-    PlayerPartnerHandleOneReturnValue_Duplicate,
-    PlayerPartnerHandleCmd37,
-    PlayerPartnerHandleCmd38,
-    PlayerPartnerHandleCmd39,
-    PlayerPartnerHandleCmd40,
-    PlayerPartnerHandleHitAnimation,
-    PlayerPartnerHandleCmd42,
-    PlayerPartnerHandlePlaySE,
-    PlayerPartnerHandlePlayFanfareOrBGM,
-    PlayerPartnerHandleFaintingCry,
-    PlayerPartnerHandleIntroSlide,
-    PlayerPartnerHandleIntroTrainerBallThrow,
-    PlayerPartnerHandleDrawPartyStatusSummary,
-    PlayerPartnerHandleHidePartyStatusSummary,
-    PlayerPartnerHandleEndBounceEffect,
-    PlayerPartnerHandleSpriteInvisibility,
-    PlayerPartnerHandleBattleAnimation,
-    PlayerPartnerHandleLinkStandbyMsg,
-    PlayerPartnerHandleResetActionMoveSelection,
-    PlayerPartnerHandleCmd55,
-    PlayerPartnerCmdEnd
+    [CONTROLLER_GETMONDATA]               = PlayerPartnerHandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = PlayerPartnerHandleGetRawMonData,
+    [CONTROLLER_SETMONDATA]               = PlayerPartnerHandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = PlayerPartnerHandleSetRawMonData,
+    [CONTROLLER_LOADMONSPRITE]            = PlayerPartnerHandleLoadMonSprite,
+    [CONTROLLER_SWITCHINANIM]             = PlayerPartnerHandleSwitchInAnim,
+    [CONTROLLER_RETURNMONTOBALL]          = PlayerPartnerHandleReturnMonToBall,
+    [CONTROLLER_DRAWTRAINERPIC]           = PlayerPartnerHandleDrawTrainerPic,
+    [CONTROLLER_TRAINERSLIDE]             = PlayerPartnerHandleTrainerSlide,
+    [CONTROLLER_TRAINERSLIDEBACK]         = PlayerPartnerHandleTrainerSlideBack,
+    [CONTROLLER_FAINTANIMATION]           = PlayerPartnerHandleFaintAnimation,
+    [CONTROLLER_PALETTEFADE]              = PlayerPartnerHandlePaletteFade,
+    [CONTROLLER_SUCCESSBALLTHROWANIM]     = PlayerPartnerHandleSuccessBallThrowAnim,
+    [CONTROLLER_BALLTHROWANIM]            = PlayerPartnerHandleBallThrowAnim,
+    [CONTROLLER_PAUSE]                    = PlayerPartnerHandlePause,
+    [CONTROLLER_MOVEANIMATION]            = PlayerPartnerHandleMoveAnimation,
+    [CONTROLLER_PRINTSTRING]              = PlayerPartnerHandlePrintString,
+    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = PlayerPartnerHandlePrintSelectionString,
+    [CONTROLLER_CHOOSEACTION]             = PlayerPartnerHandleChooseAction,
+    [CONTROLLER_UNKNOWNYESNOBOX]          = PlayerPartnerHandleUnknownYesNoBox,
+    [CONTROLLER_CHOOSEMOVE]               = PlayerPartnerHandleChooseMove,
+    [CONTROLLER_OPENBAG]                  = PlayerPartnerHandleChooseItem,
+    [CONTROLLER_CHOOSEPOKEMON]            = PlayerPartnerHandleChoosePokemon,
+    [CONTROLLER_23]                       = PlayerPartnerHandleCmd23,
+    [CONTROLLER_HEALTHBARUPDATE]          = PlayerPartnerHandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = PlayerPartnerHandleExpUpdate,
+    [CONTROLLER_STATUSICONUPDATE]         = PlayerPartnerHandleStatusIconUpdate,
+    [CONTROLLER_STATUSANIMATION]          = PlayerPartnerHandleStatusAnimation,
+    [CONTROLLER_STATUSXOR]                = PlayerPartnerHandleStatusXor,
+    [CONTROLLER_DATATRANSFER]             = PlayerPartnerHandleDataTransfer,
+    [CONTROLLER_DMA3TRANSFER]             = PlayerPartnerHandleDMA3Transfer,
+    [CONTROLLER_PLAYBGM]                  = PlayerPartnerHandlePlayBGM,
+    [CONTROLLER_32]                       = PlayerPartnerHandleCmd32,
+    [CONTROLLER_TWORETURNVALUES]          = PlayerPartnerHandleTwoReturnValues,
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerPartnerHandleChosenMonReturnValue,
+    [CONTROLLER_ONERETURNVALUE]           = PlayerPartnerHandleOneReturnValue,
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerPartnerHandleOneReturnValue_Duplicate,
+    [CONTROLLER_CLEARUNKVAR]              = PlayerPartnerHandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = PlayerPartnerHandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = PlayerPartnerHandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = PlayerPartnerHandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = PlayerPartnerHandleHitAnimation,
+    [CONTROLLER_42]                       = PlayerPartnerHandleCmd42,
+    [CONTROLLER_PLAYSE]                   = PlayerPartnerHandlePlaySE,
+    [CONTROLLER_PLAYFANFAREORBGM]         = PlayerPartnerHandlePlayFanfareOrBGM,
+    [CONTROLLER_FAINTINGCRY]              = PlayerPartnerHandleFaintingCry,
+    [CONTROLLER_INTROSLIDE]               = PlayerPartnerHandleIntroSlide,
+    [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerPartnerHandleIntroTrainerBallThrow,
+    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerPartnerHandleDrawPartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = PlayerPartnerHandleHidePartyStatusSummary,
+    [CONTROLLER_ENDBOUNCE]                = PlayerPartnerHandleEndBounceEffect,
+    [CONTROLLER_SPRITEINVISIBILITY]       = PlayerPartnerHandleSpriteInvisibility,
+    [CONTROLLER_BATTLEANIMATION]          = PlayerPartnerHandleBattleAnimation,
+    [CONTROLLER_LINKSTANDBYMSG]           = PlayerPartnerHandleLinkStandbyMsg,
+    [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerPartnerHandleResetActionMoveSelection,
+    [CONTROLLER_55]                       = PlayerPartnerHandleCmd55,
+    [CONTROLLER_TERMINATOR_NOP]           = PlayerPartnerCmdEnd
 };
 
 // unknown unused data
-static const u8 sUnknown_08617254[] =
+static const u8 sUnused[] =
 {
     0x83, 0x4d, 0xf3, 0x5f, 0x6f, 0x4f, 0xeb, 0x3e,
     0x67, 0x2e, 0x10, 0x46, 0x8c, 0x3d, 0x28, 0x35,
@@ -1679,27 +1679,27 @@ static void PlayerPartnerHandleOneReturnValue_Duplicate(void)
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleCmd37(void)
+static void PlayerPartnerHandleClearUnkVar(void)
 {
-    gUnknown_02022D0C.field_0 = 0;
+    gUnusedControllerStruct.unk = 0;
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleCmd38(void)
+static void PlayerPartnerHandleSetUnkVar(void)
 {
-    gUnknown_02022D0C.field_0 = gBattleBufferA[gActiveBattler][1];
+    gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleCmd39(void)
+static void PlayerPartnerHandleClearUnkFlag(void)
 {
-    gUnknown_02022D0C.flag_x80 = 0;
+    gUnusedControllerStruct.flag = 0;
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleCmd40(void)
+static void PlayerPartnerHandleToggleUnkFlag(void)
 {
-    gUnknown_02022D0C.flag_x80 ^= 1;
+    gUnusedControllerStruct.flag ^= 1;
     PlayerPartnerBufferExecCompleted();
 }
 
