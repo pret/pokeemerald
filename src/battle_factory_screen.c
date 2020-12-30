@@ -43,21 +43,25 @@
 
 #define SELECTABLE_MONS_COUNT 6
 
-#define PALTAG_BALL_GRAY     0x64
-#define PALTAG_BALL_SELECTED 0x65
-#define PALTAG_INTERFACE     0x66
-#define PALTAG_MON_PIC_BG    0x67
+enum {
+    PALTAG_BALL_GRAY = 100,
+    PALTAG_BALL_SELECTED,
+    PALTAG_INTERFACE,
+    PALTAG_MON_PIC_BG,
+};
 
-#define GFXTAG_BALL                    0x64
-#define GFXTAG_ARROW                   0x65
-#define GFXTAG_MENU_HIGHLIGHT_LEFT     0x66
-#define GFXTAG_MENU_HIGHLIGHT_RIGHT    0x67
-#define GFXTAG_ACTION_BOX_LEFT         0x68
-#define GFXTAG_ACTION_BOX_RIGHT        0x69
-#define GFXTAG_ACTION_HIGHLIGHT_LEFT   0x6A
-#define GFXTAG_ACTION_HIGHLIGHT_MIDDLE 0x6B
-#define GFXTAG_ACTION_HIGHLIGHT_RIGHT  0x6C
-#define GFXTAG_MON_PIC_BG_ANIM         0x6D
+enum {
+    GFXTAG_BALL = 100,
+    GFXTAG_ARROW,
+    GFXTAG_MENU_HIGHLIGHT_LEFT,
+    GFXTAG_MENU_HIGHLIGHT_RIGHT,
+    GFXTAG_ACTION_BOX_LEFT,
+    GFXTAG_ACTION_BOX_RIGHT,
+    GFXTAG_ACTION_HIGHLIGHT_LEFT,
+    GFXTAG_ACTION_HIGHLIGHT_MIDDLE,
+    GFXTAG_ACTION_HIGHLIGHT_RIGHT,
+    GFXTAG_MON_PIC_BG_ANIM,
+};
 
 // Tasks in this file universally use data[0] as a state for switches
 #define tState   data[0]
@@ -67,6 +71,14 @@ enum {
     FADESTATE_INIT,
     FADESTATE_RUN,
     FADESTATE_DELAY
+};
+
+// Return states for the Select Actions
+enum {
+    SELECT_SUMMARY,
+    SELECT_CONTINUE_CHOOSING,
+    SELECT_CONFIRM_MONS,
+    SELECT_INVALID_MON,
 };
 
 struct FactorySelectableMon
@@ -129,7 +141,7 @@ struct FactorySwapScreen
     u8 yesNoCursorPos;
     u8 actionsCount;
     const struct SwapScreenAction *actionsData;
-    u8 unused1C[4];
+    u8 unused[4];
     bool8 monSwapped;
     u8 fadeSpeciesNameTaskId;
     bool8 fadeSpeciesNameActive;
@@ -161,22 +173,22 @@ static void Select_PrintMonSpecies(void);
 static void Select_PrintMonCategory(void);
 static void Select_PrintRentalPkmnString(void);
 static void Select_CopyMonsToPlayerParty(void);
-static void sub_819C4B4(void);
+static void Select_ShowChosenMons(void);
 static void Select_ShowYesNoOptions(void);
-static void sub_819C568(void);
+static void Select_HideChosenMons(void);
 static void Select_ShowMenuOptions(void);
 static void Select_PrintMenuOptions(void);
 static void Select_PrintYesNoOptions(void);
 static void Select_Task_FadeSpeciesName(u8);
-static void sub_819C1D0(u8);
+static void Select_Task_OpenChosenMonPics(u8);
 static void Select_Task_HandleChooseMons(u8);
 static void Select_Task_HandleMenu(u8);
 static void CreateFrontierFactorySelectableMons(u8);
 static void CreateSlateportTentSelectableMons(u8);
 static void Select_SetBallSpritePaletteNum(u8);
-static void sub_819B958(u8);
+static void Select_ErasePopupMenu(u8);
 static u8 Select_RunMenuOptionFunc(void);
-static u8 sub_819BC9C(void);
+static u8 Select_DeclineChosenMons(void);
 static u8 Select_OptionSummary(void);
 static u8 Select_OptionOthers(void);
 static u8 Select_OptionRentDeselect(void);
@@ -226,7 +238,6 @@ static void Swap_ActionMon(u8);
 static void Swap_ActionCancel(u8);
 static void Swap_ActionPkmnForSwap(u8);
 
-// Ewram variables
 static EWRAM_DATA u8 *sSelectMenuTilesetBuffer = NULL;
 static EWRAM_DATA u8 *sSelectMonPicBgTilesetBuffer = NULL;
 static EWRAM_DATA u8 *sSelectMenuTilemapBuffer = NULL;
@@ -1092,6 +1103,26 @@ void DoBattleFactorySelectScreen(void)
     SetMainCallback2(CB2_InitSelectScreen);
 }
 
+// States for the main tasks of the Select_ functions after initialization, including:
+// Select_Task_OpenSummaryScreen, Select_Task_HandleYesNo, Select_Task_HandleMenu, and Select_Task_HandleChooseMons
+// Unnecessarily complicated, could easily have just kept states numbered in each task always starting at 0
+// There's only one instance (Select_Task_HandleChooseMons) where a non-initial case is used
+// Select_Task_Exit has its own straightforward states
+#define STATE_CHOOSE_MONS_INIT 0
+#define STATE_CHOOSE_MONS_HANDLE_INPUT 1
+#define STATE_MENU_INIT 2
+#define STATE_MENU_HANDLE_INPUT 3
+#define STATE_YESNO_SHOW_OPTIONS 4
+#define STATE_YESNO_HANDLE_INPUT 5
+#define STATE_SUMMARY_FADE 6
+#define STATE_SUMMARY_CLEAN 7
+#define STATE_SUMMARY_SHOW 8
+#define STATE_MENU_SHOW_OPTIONS 9
+#define STATE_YESNO_SHOW_MONS 10
+#define STATE_CHOOSE_MONS_INVALID 11
+#define STATE_MENU_REINIT 12
+#define STATE_MENU_RESHOW 13
+
 static void CB2_InitSelectScreen(void)
 {
     u8 taskId;
@@ -1217,14 +1248,14 @@ static void CB2_InitSelectScreen(void)
         {
             gTasks[sFactorySelectScreen->fadeSpeciesNameTaskId].tState = 0;
             taskId = CreateTask(Select_Task_HandleChooseMons, 0);
-            gTasks[taskId].tState = 0;
+            gTasks[taskId].tState = STATE_CHOOSE_MONS_INIT;
         }
         else
         {
             gTasks[sFactorySelectScreen->fadeSpeciesNameTaskId].tState = 1;
             sFactorySelectScreen->fadeSpeciesNameActive = FALSE;
             taskId = CreateTask(Select_Task_HandleMenu, 0);
-            gTasks[taskId].tState = 13;
+            gTasks[taskId].tState = STATE_MENU_RESHOW;
         }
         SetMainCallback2(CB2_SelectScreen);
         break;
@@ -1360,11 +1391,12 @@ static void Select_HandleMonSelectionChange(void)
     if (sFactorySelectScreen->mons[cursorPos].selectedId) // Deselect a mon.
     {
         paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_GRAY);
-        if (sFactorySelectScreen->selectingMonsState == 3 && sFactorySelectScreen->mons[cursorPos].selectedId == 1)
+        if (sFactorySelectScreen->selectingMonsState == FRONTIER_PARTY_SIZE 
+         && sFactorySelectScreen->mons[cursorPos].selectedId == 1)
         {
             for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
             {
-                if (sFactorySelectScreen->mons[i].selectedId == 2)
+                if (sFactorySelectScreen->mons[i].selectedId == FRONTIER_PARTY_SIZE - 1)
                     break;
             }
             if (i == SELECTABLE_MONS_COUNT)
@@ -1404,12 +1436,12 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
 
     switch (gTasks[taskId].tState)
     {
-    case 6:
+    case STATE_SUMMARY_FADE:
         gPlttBufferUnfaded[228] = gPlttBufferFaded[228];
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].tState = 7;
+        gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
-    case 7:
+    case STATE_SUMMARY_CLEAN:
         if (!gPaletteFade.active)
         {
             DestroyTask(sFactorySelectScreen->fadeSpeciesNameTaskId);
@@ -1420,10 +1452,10 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
             FREE_AND_SET_NULL(sSelectMenuTilemapBuffer);
             FREE_AND_SET_NULL(sSelectMonPicBgTilemapBuffer);
             FreeAllWindowBuffers();
-            gTasks[taskId].tState = 8;
+            gTasks[taskId].tState = STATE_SUMMARY_SHOW;
         }
         break;
-    case 8:
+    case STATE_SUMMARY_SHOW:
         sFactorySelectScreen->speciesNameColorBackup = gPlttBufferUnfaded[228];
         DestroyTask(taskId);
         sFactorySelectScreen->fromSummaryScreen = TRUE;
@@ -1465,6 +1497,7 @@ static void Select_Task_Exit(u8 taskId)
     }
 }
 
+// Handles the Yes/No prompt when confirming the 3 selected rental pokemon
 static void Select_Task_HandleYesNo(u8 taskId)
 {
     if (sFactorySelectScreen->monPicAnimating == TRUE)
@@ -1472,42 +1505,43 @@ static void Select_Task_HandleYesNo(u8 taskId)
 
     switch (gTasks[taskId].tState)
     {
-    case 10:
-        sub_819C4B4();
-        gTasks[taskId].tState = 4;
+    case STATE_YESNO_SHOW_MONS:
+        Select_ShowChosenMons();
+        gTasks[taskId].tState = STATE_YESNO_SHOW_OPTIONS;
         break;
-    case 4:
+    case STATE_YESNO_SHOW_OPTIONS:
         Select_ShowYesNoOptions();
-        gTasks[taskId].tState = 5;
+        gTasks[taskId].tState = STATE_YESNO_HANDLE_INPUT;
         break;
-    case 5:
+    case STATE_YESNO_HANDLE_INPUT:
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (sFactorySelectScreen->yesNoCursorPos == 0)
             {
-                // Selected Yes
-                sub_819C568();
+                // Selected Yes, confirmed selected pokemon
+                Select_HideChosenMons();
                 gTasks[taskId].tState = 0;
                 gTasks[taskId].func = Select_Task_Exit;
             }
             else
             {
-                // Selected No
-                sub_819B958(SELECT_WIN_YES_NO);
-                sub_819BC9C();
+                // Selected No, continue choosing pokemon
+                Select_ErasePopupMenu(SELECT_WIN_YES_NO);
+                Select_DeclineChosenMons();
                 sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
-                gTasks[taskId].tState = 1;
+                gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
                 gTasks[taskId].func = Select_Task_HandleChooseMons;
             }
         }
         else if (JOY_NEW(B_BUTTON))
         {
+            // Pressed B, Continue choosing pokemon
             PlaySE(SE_SELECT);
-            sub_819B958(SELECT_WIN_YES_NO);
-            sub_819BC9C();
+            Select_ErasePopupMenu(SELECT_WIN_YES_NO);
+            Select_DeclineChosenMons();
             sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
-            gTasks[taskId].tState = 1;
+            gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
             gTasks[taskId].func = Select_Task_HandleChooseMons;
         }
         else if (JOY_REPEAT(DPAD_UP))
@@ -1524,48 +1558,49 @@ static void Select_Task_HandleYesNo(u8 taskId)
     }
 }
 
+// Handles the popup menu that shows when a pokemon is selected
 static void Select_Task_HandleMenu(u8 taskId)
 {
     switch (gTasks[taskId].tState)
     {
-    case 2:
+    case STATE_MENU_INIT:
         if (!sFactorySelectScreen->fromSummaryScreen)
             OpenMonPic(&sFactorySelectScreen->monPics[1].bgSpriteId, &sFactorySelectScreen->monPicAnimating, FALSE);
-        gTasks[taskId].tState = 9;
+        gTasks[taskId].tState = STATE_MENU_SHOW_OPTIONS;
         break;
-    case 9:
+    case STATE_MENU_SHOW_OPTIONS:
         if (sFactorySelectScreen->monPicAnimating != TRUE)
         {
             Select_ShowMenuOptions();
             sFactorySelectScreen->fromSummaryScreen = FALSE;
-            gTasks[taskId].tState = 3;
+            gTasks[taskId].tState = STATE_MENU_HANDLE_INPUT;
         }
         break;
-    case 3:
+    case STATE_MENU_HANDLE_INPUT:
         if (JOY_NEW(A_BUTTON))
         {
             u8 retVal;
             PlaySE(SE_SELECT);
             retVal = Select_RunMenuOptionFunc();
-            if (retVal == 1)
+            if (retVal == SELECT_CONTINUE_CHOOSING)
             {
                 sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
-                gTasks[taskId].tState = 1;
+                gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
                 gTasks[taskId].func = Select_Task_HandleChooseMons;
             }
-            else if (retVal == 2)
+            else if (retVal == SELECT_CONFIRM_MONS)
             {
-                gTasks[taskId].tState = 10;
+                gTasks[taskId].tState = STATE_YESNO_SHOW_MONS;
                 gTasks[taskId].func = Select_Task_HandleYesNo;
             }
-            else if (retVal == 3)
+            else if (retVal == SELECT_INVALID_MON)
             {
-                gTasks[taskId].tState = 11;
+                gTasks[taskId].tState = STATE_CHOOSE_MONS_INVALID;
                 gTasks[taskId].func = Select_Task_HandleChooseMons;
             }
-            else
+            else // SELECT_SUMMARY
             {
-                gTasks[taskId].tState = 6;
+                gTasks[taskId].tState = STATE_SUMMARY_FADE;
                 gTasks[taskId].func = Select_Task_OpenSummaryScreen;
             }
         }
@@ -1573,9 +1608,9 @@ static void Select_Task_HandleMenu(u8 taskId)
         {
             PlaySE(SE_SELECT);
             CloseMonPic(sFactorySelectScreen->monPics[1], &sFactorySelectScreen->monPicAnimating, FALSE);
-            sub_819B958(SELECT_WIN_OPTIONS);
+            Select_ErasePopupMenu(SELECT_WIN_OPTIONS);
             sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
-            gTasks[taskId].tState = 1;
+            gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
             gTasks[taskId].func = Select_Task_HandleChooseMons;
         }
         else if (JOY_REPEAT(DPAD_UP))
@@ -1589,7 +1624,7 @@ static void Select_Task_HandleMenu(u8 taskId)
             Select_UpdateMenuCursorPosition(1);
         }
         break;
-    case 12:
+    case STATE_MENU_REINIT:
         if (!gPaletteFade.active)
         {
             if (sFactorySelectScreen->fromSummaryScreen == TRUE)
@@ -1598,16 +1633,17 @@ static void Select_Task_HandleMenu(u8 taskId)
                 gPlttBufferUnfaded[228] = gPlttBufferUnfaded[244];
             }
             sFactorySelectScreen->fromSummaryScreen = FALSE;
-            gTasks[taskId].tState = 3;
+            gTasks[taskId].tState = STATE_MENU_HANDLE_INPUT;
         }
         break;
-    case 13:
+    case STATE_MENU_RESHOW:
         Select_ShowMenuOptions();
-        gTasks[taskId].tState = 12;
+        gTasks[taskId].tState = STATE_MENU_REINIT;
         break;
     }
 }
 
+// Handles input on the main selection screen, when no popup menu is open
 static void Select_Task_HandleChooseMons(u8 taskId)
 {
     if (sFactorySelectScreen->monPicAnimating == TRUE)
@@ -1615,19 +1651,19 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 
     switch (gTasks[taskId].tState)
     {
-    case 0:
+    case STATE_CHOOSE_MONS_INIT:
         if (!gPaletteFade.active)
         {
-            gTasks[taskId].tState = 1;
+            gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
             sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
         }
         break;
-    case 1:
+    case STATE_CHOOSE_MONS_HANDLE_INPUT:
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             sFactorySelectScreen->fadeSpeciesNameActive = FALSE;
-            gTasks[taskId].tState = 2;
+            gTasks[taskId].tState = STATE_MENU_INIT;
             gTasks[taskId].func = Select_Task_HandleMenu;
         }
         else if (JOY_REPEAT(DPAD_LEFT))
@@ -1645,14 +1681,14 @@ static void Select_Task_HandleChooseMons(u8 taskId)
             Select_PrintMonSpecies();
         }
         break;
-    case 11:
+    case STATE_CHOOSE_MONS_INVALID:
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             CloseMonPic(sFactorySelectScreen->monPics[1], &sFactorySelectScreen->monPicAnimating, FALSE);
             Select_PrintSelectMonString();
             sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
-            gTasks[taskId].tState = 1;
+            gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
         }
         break;
     }
@@ -1785,7 +1821,7 @@ static void Select_ShowYesNoOptions(void)
     Select_PrintYesNoOptions();
 }
 
-static void sub_819B958(u8 windowId)
+static void Select_ErasePopupMenu(u8 windowId)
 {
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = TRUE;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = TRUE;
@@ -1878,29 +1914,29 @@ static u8 Select_OptionRentDeselect(void)
     if (selectedId == 0 && !Select_AreSpeciesValid(monId))
     {
         Select_PrintCantSelectSameMon();
-        sub_819B958(SELECT_WIN_OPTIONS);
-        return 3;
+        Select_ErasePopupMenu(SELECT_WIN_OPTIONS);
+        return SELECT_INVALID_MON;
     }
     else
     {
         CloseMonPic(sFactorySelectScreen->monPics[1], &sFactorySelectScreen->monPicAnimating, FALSE);
         Select_HandleMonSelectionChange();
         Select_PrintSelectMonString();
-        sub_819B958(SELECT_WIN_OPTIONS);
-        if (sFactorySelectScreen->selectingMonsState > 3)
-            return 2;
+        Select_ErasePopupMenu(SELECT_WIN_OPTIONS);
+        if (sFactorySelectScreen->selectingMonsState > FRONTIER_PARTY_SIZE)
+            return SELECT_CONFIRM_MONS;
         else
-            return 1;
+            return SELECT_CONTINUE_CHOOSING;
     }
 }
 
-static u8 sub_819BC9C(void)
+static u8 Select_DeclineChosenMons(void)
 {
-    sub_819C568();
+    Select_HideChosenMons();
     Select_HandleMonSelectionChange();
     Select_PrintSelectMonString();
-    sub_819B958(SELECT_WIN_OPTIONS);
-    if (sFactorySelectScreen->selectingMonsState > 3)
+    Select_ErasePopupMenu(SELECT_WIN_OPTIONS);
+    if (sFactorySelectScreen->selectingMonsState > FRONTIER_PARTY_SIZE)
         return 2;
     else
         return 1;
@@ -1908,14 +1944,14 @@ static u8 sub_819BC9C(void)
 
 static u8 Select_OptionSummary(void)
 {
-    return 0;
+    return SELECT_SUMMARY;
 }
 
 static u8 Select_OptionOthers(void)
 {
     CloseMonPic(sFactorySelectScreen->monPics[1], &sFactorySelectScreen->monPicAnimating, FALSE);
-    sub_819B958(SELECT_WIN_OPTIONS);
-    return 1;
+    Select_ErasePopupMenu(SELECT_WIN_OPTIONS);
+    return SELECT_CONTINUE_CHOOSING;
 }
 
 static void Select_PrintMonCategory(void)
@@ -1977,7 +2013,7 @@ static void Select_ReshowMonSprite(void)
     gSprites[sFactorySelectScreen->monPics[1].bgSpriteId].invisible = TRUE;
 }
 
-static void Select_ShowChosenMonsSprites(void)
+static void Select_CreateChosenMonsSprites(void)
 {
     u8 i, j;
 
@@ -2002,10 +2038,11 @@ static void Select_ShowChosenMonsSprites(void)
     sFactorySelectScreen->monPicAnimating = FALSE;
 }
 
-static void sub_819C040(struct Sprite *sprite)
+static void SpriteCB_OpenChosenMonPics(struct Sprite *sprite)
 {
     u8 taskId;
 
+    // Current sprite is monPics[1]
     if (sprite->affineAnimEnded
         && gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].affineAnimEnded
         && gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].affineAnimEnded)
@@ -2014,15 +2051,16 @@ static void sub_819C040(struct Sprite *sprite)
         gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].invisible = TRUE;
         gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].invisible = TRUE;
 
-        taskId = CreateTask(sub_819C1D0, 1);
+        taskId = CreateTask(Select_Task_OpenChosenMonPics, 1);
         gTasks[taskId].func(taskId);
 
         sprite->callback = SpriteCallbackDummy;
     }
 }
 
-static void sub_819C100(struct Sprite *sprite)
+static void SpriteCB_CloseChosenMonPics(struct Sprite *sprite)
 {
+    // Current sprite is monPics[1]
     if (sprite->affineAnimEnded
         && gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].affineAnimEnded
         && gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].affineAnimEnded)
@@ -2039,7 +2077,7 @@ static void sub_819C100(struct Sprite *sprite)
     }
 }
 
-// Task data for sub_819C1D0, sub_819C2D4, Task_CloseMonPic, and Task_OpenMonPic
+// Task data for Select_Task_OpenChosenMonPics, Select_Task_CloseChosenMonPics, Task_CloseMonPic, and Task_OpenMonPic
 #define tWinLeft      data[3]
 #ifndef UBFIX
 #define tWinRight     data[24] // UB: Typo? Likely meant data[4], 24 is out of bounds
@@ -2051,7 +2089,7 @@ static void sub_819C100(struct Sprite *sprite)
 #define tSpriteId     data[6] // TODO: Clarify, what sprite
 #define tIsSwapScreen data[7]
 
-static void sub_819C1D0(u8 taskId)
+static void Select_Task_OpenChosenMonPics(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->tState)
@@ -2087,31 +2125,17 @@ static void sub_819C1D0(u8 taskId)
         break;
     default:
         DestroyTask(taskId);
-        Select_ShowChosenMonsSprites();
+        Select_CreateChosenMonsSprites();
         return;
     }
     task->tState++;
 }
 
-static void sub_819C2D4(u8 taskId)
+static void Select_Task_CloseChosenMonPics(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->tState)
     {
-    default:
-        HideBg(3);
-        gSprites[sFactorySelectScreen->monPics[1].bgSpriteId].invisible = FALSE;
-        gSprites[sFactorySelectScreen->monPics[1].bgSpriteId].callback = sub_819C100;
-        gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].invisible = FALSE;
-        gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].callback = SpriteCallbackDummy;
-        gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].invisible = FALSE;
-        gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].callback = SpriteCallbackDummy;
-        StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[1].bgSpriteId], 1);
-        StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[0].bgSpriteId], 1);
-        StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[2].bgSpriteId], 1);
-        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        DestroyTask(taskId);
-        break;
     case 0:
         task->tWinLeft = 16;
         task->tWinRight = DISPLAY_WIDTH - 16;
@@ -2136,23 +2160,37 @@ static void sub_819C2D4(u8 taskId)
         if (task->tWinTop == 64)
             task->tState++;
         break;
+    default:
+        HideBg(3);
+        gSprites[sFactorySelectScreen->monPics[1].bgSpriteId].invisible = FALSE;
+        gSprites[sFactorySelectScreen->monPics[1].bgSpriteId].callback = SpriteCB_CloseChosenMonPics;
+        gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].invisible = FALSE;
+        gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].callback = SpriteCallbackDummy;
+        gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].invisible = FALSE;
+        gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].callback = SpriteCallbackDummy;
+        StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[1].bgSpriteId], 1);
+        StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[0].bgSpriteId], 1);
+        StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[2].bgSpriteId], 1);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        DestroyTask(taskId);
+        break;
     }
 }
 
-static void sub_819C4B4(void)
+static void Select_ShowChosenMons(void)
 {
     sFactorySelectScreen->monPics[1].bgSpriteId = CreateSprite(&sSpriteTemplate_Select_MonPicBgAnim, 120, 64, 1);
     sFactorySelectScreen->monPics[0].bgSpriteId = CreateSprite(&sSpriteTemplate_Select_MonPicBgAnim,  44, 64, 1);
     sFactorySelectScreen->monPics[2].bgSpriteId = CreateSprite(&sSpriteTemplate_Select_MonPicBgAnim, 196, 64, 1);
 
-    gSprites[sFactorySelectScreen->monPics[1].bgSpriteId].callback = sub_819C040;
+    gSprites[sFactorySelectScreen->monPics[1].bgSpriteId].callback = SpriteCB_OpenChosenMonPics;
     gSprites[sFactorySelectScreen->monPics[0].bgSpriteId].callback = SpriteCallbackDummy;
     gSprites[sFactorySelectScreen->monPics[2].bgSpriteId].callback = SpriteCallbackDummy;
 
     sFactorySelectScreen->monPicAnimating = TRUE;
 }
 
-static void sub_819C568(void)
+static void Select_HideChosenMons(void)
 {
     u8 taskId;
 
@@ -2160,7 +2198,7 @@ static void sub_819C568(void)
     FreeAndDestroyMonPicSprite(sFactorySelectScreen->monPics[1].monSpriteId);
     FreeAndDestroyMonPicSprite(sFactorySelectScreen->monPics[2].monSpriteId);
 
-    taskId = CreateTask(sub_819C2D4, 1);
+    taskId = CreateTask(Select_Task_CloseChosenMonPics, 1);
     gTasks[taskId].func(taskId);
 
     sFactorySelectScreen->monPicAnimating = TRUE;
@@ -2194,7 +2232,6 @@ static bool32 Select_AreSpeciesValid(u16 monId)
             }
         }
     }
-
     return TRUE;
 }
 
@@ -2494,6 +2531,9 @@ static void Swap_AskAcceptMon(u8 taskId)
     }
 }
 
+#undef STATE_SHOW_YES_NO
+#undef STATE_HANDLE_INPUT
+
 static void Swap_Task_HandleMenu(u8 taskId)
 {
     switch (gTasks[taskId].tState)
@@ -2688,6 +2728,7 @@ static void Swap_Task_FadeSpeciesName2(u8 taskId)
     }
 }
 
+// TODO
 static void sub_819D12C(u8 taskId)
 {
     s8 i;
@@ -4031,7 +4072,7 @@ static void SpriteCB_OpenMonPic(struct Sprite *sprite)
     }
 }
 
-static void sub_819F654(struct Sprite *sprite)
+static void SpriteCB_CloseMonPic(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
@@ -4050,6 +4091,7 @@ static void Task_OpenMonPic(u8 taskId)
     switch (task->tState)
     {
     case 0:
+        // Init
         task->tWinLeft = 88;
         task->tWinRight = DISPLAY_WIDTH - 88;
         task->tWinTop = 64;
@@ -4061,11 +4103,13 @@ static void Task_OpenMonPic(u8 taskId)
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_CLR | WINOUT_WIN01_OBJ);
         break;
     case 1:
+        // Show mon pic bg
         ShowBg(3);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_OBJ);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
         break;
     case 2:
+        // Animate mon pic bg
         task->tWinTop -= 4;
         task->tWinBottom += 4;
         if (task->tWinTop <= 32 || task->tWinBottom >= 96)
@@ -4094,16 +4138,8 @@ static void Task_CloseMonPic(u8 taskId)
     struct Task *task = &gTasks[taskId];
     switch (task->tState)
     {
-    default:
-        HideBg(3);
-        gSprites[task->tSpriteId].sIsSwapScreen = task->tIsSwapScreen;
-        gSprites[task->tSpriteId].invisible = FALSE;
-        gSprites[task->tSpriteId].callback = sub_819F654;
-        StartSpriteAffineAnim(&gSprites[task->tSpriteId], 1);
-        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        DestroyTask(taskId);
-        break;
     case 0:
+        // Init
         task->tWinLeft = 88;
         task->tWinRight = DISPLAY_WIDTH - 88;
         task->tWinTop = 32;
@@ -4116,6 +4152,7 @@ static void Task_CloseMonPic(u8 taskId)
         task->tState++;
         break;
     case 1:
+        // Animate bg
         task->tWinTop += 4;
         task->tWinBottom -= 4;
         if (task->tWinTop >= 64 || task->tWinBottom <= 65)
@@ -4126,6 +4163,16 @@ static void Task_CloseMonPic(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->tWinTop, task->tWinBottom));
         if (task->tWinTop == 64)
             task->tState++;
+        break;
+    default:
+        // Hide bg
+        HideBg(3);
+        gSprites[task->tSpriteId].sIsSwapScreen = task->tIsSwapScreen;
+        gSprites[task->tSpriteId].invisible = FALSE;
+        gSprites[task->tSpriteId].callback = SpriteCB_CloseMonPic;
+        StartSpriteAffineAnim(&gSprites[task->tSpriteId], 1);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        DestroyTask(taskId);
         break;
     }
 }
