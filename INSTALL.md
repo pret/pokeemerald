@@ -219,7 +219,7 @@ cd c:/Users/<user>/Desktop/decomps
 Note that the directory **must exist** in Windows. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Windows Explorer) before executing the `cd` command.
 
 > Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "c:/users/<user>/Desktop/decomp folder"`.  
-> Note 2: Windows path names are case-insensitive so adhering to capitalization isn't needed
+> Note 2: Windows path names are case-insensitive so adhering to capitalization isn't needed  
 > Note 3: If pokeemerald is already installed, then run the following command instead (for the provided example path):
 > ```bash
 > cd c:/Users/<user>/Desktop/decomps/pokeemerald
@@ -270,7 +270,7 @@ cd Desktop/decomps
 ```
 Note that the directory **must exist** in the folder system. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Finder) before executing the `cd` command.
 
-> Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Desktop/decomp folder"`
+> Note 1: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "Desktop/decomp folder"`  
 > Note 2: If pokeemerald is already installed, then run the following command instead (for the provided example path:
 > ```bash
 > cd Desktop/decomps/pokeemerald
