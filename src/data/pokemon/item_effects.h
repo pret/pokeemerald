@@ -36,12 +36,12 @@ const u8 gItemEffect_MaxPotion[7] = {
 
 const u8 gItemEffect_HyperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 200,
+    [6] = 120,
 };
 
 const u8 gItemEffect_SuperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 50,
+    [6] = 60,
 };
 
 const u8 gItemEffect_FullHeal[6] = {
@@ -60,17 +60,17 @@ const u8 gItemEffect_MaxRevive[7] = {
 
 const u8 gItemEffect_FreshWater[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 50,
+    [6] = 30,
 };
 
 const u8 gItemEffect_SodaPop[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 60,
+    [6] = 50,
 };
 
 const u8 gItemEffect_Lemonade[7] = {
     [4] = ITEM4_HEAL_HP,
-    [6] = 80,
+    [6] = 70,
 };
 
 const u8 gItemEffect_MoomooMilk[7] = {
@@ -81,7 +81,7 @@ const u8 gItemEffect_MoomooMilk[7] = {
 const u8 gItemEffect_EnergyPowder[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
-    [6] = 50,
+    [6] = 60,
     [7] = -5,
     [8] = -5,
     [9] = -10,
@@ -90,7 +90,7 @@ const u8 gItemEffect_EnergyPowder[10] = {
 const u8 gItemEffect_EnergyRoot[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
-    [6] = 200,
+    [6] = 120,
     [7] = -10,
     [8] = -10,
     [9] = -15,
