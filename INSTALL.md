@@ -130,7 +130,7 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
 5. Run the following commands to uncompress and install libpng.
 
     ```bash
-    tar xf libpng-1.6.37
+    tar xf libpng-1.6.37.tar.xz
     cd libpng-1.6.37
     ./configure --prefix=/usr
     make check
@@ -342,7 +342,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ./install.sh ../pokeemerald
     ```
 
-- If agbcc has been built before (e.g. if the git clone above fails), but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald:
+- **Otherwise**, if agbcc has been built before (e.g. if the git clone above fails), but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald:
 
     ```bash
     cd agbcc
@@ -351,7 +351,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ./install.sh ../pokeemerald
     ```
 
-- Otherwise, run the following commands to install agbcc into pokeemerald:
+- **Otherwise**, run the following commands to install agbcc into pokeemerald:
 
     ```bash
     cd agbcc
