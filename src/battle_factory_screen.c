@@ -1179,7 +1179,7 @@ static void CB2_InitSelectScreen(void)
         LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
         LoadPalette(sSelectText_Pal, 0xF0, 8);
         LoadPalette(sSelectText_Pal, 0xE0, 10);
-#if UBFIX
+#ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
 #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
@@ -1205,7 +1205,7 @@ static void CB2_InitSelectScreen(void)
         SetVBlankCallback(VBlankCB_SelectScreen);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
-#if UBFIX
+#ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
 #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
@@ -1223,7 +1223,7 @@ static void CB2_InitSelectScreen(void)
         gMain.state++;
         break;
     case 5:
-#if UBFIX
+#ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
 #else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
@@ -3330,7 +3330,7 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 5:
-#if UBFIX
+#ifdef UBFIX
         if (sFactorySwapScreen && sFactorySwapScreen->fromSummaryScreen)
 #else
         if (sFactorySwapScreen->fromSummaryScreen == TRUE)
