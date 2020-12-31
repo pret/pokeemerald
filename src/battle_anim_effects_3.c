@@ -21,7 +21,6 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/weather.h"
 
 extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
@@ -2291,7 +2290,7 @@ void AnimTask_TransformMon(u8 taskId)
         else
             position = GetBattlerPosition(gBattleAnimAttacker);
 
-        src = gMonSpritesGfxPtr->sprites[position] + (gBattleMonForms[gBattleAnimAttacker] << 11);
+        src = gMonSpritesGfxPtr->sprites.ptr[position] + (gBattleMonForms[gBattleAnimAttacker] << 11);
         dest = animBg.bgTiles;
         CpuCopy32(src, dest, 0x800);
         LoadBgTiles(1, animBg.bgTiles, 0x800, animBg.tilesOffset);
@@ -5007,7 +5006,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     int otId;
     u16 species;
     u8 subpriority;
-    u8 isBackPic;
+    bool8 isBackPic;
     s16 x;
 
     switch (gTasks[taskId].data[0])
@@ -5035,7 +5034,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             otId = gContestResources->moveAnim->otId;
             species = gContestResources->moveAnim->species;
             subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
-            isBackPic = 0;
+            isBackPic = FALSE;
             x = -32;
         }
         else
@@ -5050,7 +5049,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                     species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
 
                 subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
-                isBackPic = 0;
+                isBackPic = FALSE;
                 x = 272;
             }
             else
@@ -5063,7 +5062,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                     species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
 
                 subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
-                isBackPic = 1;
+                isBackPic = TRUE;
                 x = -32;
             }
         }
@@ -5138,7 +5137,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 gSprites[spriteId].pos2.x = 0;
         }
 
-        gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1];
+        gTasks[taskId].data[1] &= 0xFF;
         if (gSprites[spriteId].pos2.x == 0)
             DestroyAnimVisualTask(taskId);
         break;

@@ -25,7 +25,6 @@
 #include "window.h"
 #include "constants/berry.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "gba/io_reg.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -320,7 +319,7 @@ void sub_81D1EC0(void)
     Free(sUnknown_0203CF4C);
 }
 
-void sub_81D1ED4(struct ConditionGraph *a0)
+void InitConditionGraphData(struct ConditionGraph *graph)
 {
     u8 i, j;
 
@@ -328,22 +327,22 @@ void sub_81D1ED4(struct ConditionGraph *a0)
     {
         for (i = 0; i < 10; i++)
         {
-            a0->unk64[i][j].unk0 = 0;
-            a0->unk64[i][j].unk2 = 0;
+            graph->unk64[i][j].unk0 = 0;
+            graph->unk64[i][j].unk2 = 0;
         }
         for (i = 0; i < 4; i++)
         {
-            a0->unk0[i][j] = 0;
-            a0->unk14[i][j].unk0 = 0x9B;
-            a0->unk14[i][j].unk2 = 0x5B;
+            graph->stat[i][j] = 0;
+            graph->unk14[i][j].unk0 = 155;
+            graph->unk14[i][j].unk2 = 91;
         }
 
-        a0->unk12C[j].unk0 = 0;
-        a0->unk12C[j].unk2 = 0;
+        graph->unk12C[j].unk0 = 0;
+        graph->unk12C[j].unk2 = 0;
     }
 
-    a0->unk354 = 0;
-    a0->unk352 = 0;
+    graph->unk354 = 0;
+    graph->unk352 = 0;
 }
 
 void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *arg1, struct UnknownSubStruct_81D1ED4 *arg2)
@@ -351,7 +350,7 @@ void sub_81D1F84(struct ConditionGraph *graph, struct UnknownSubStruct_81D1ED4 *
     u16 i, j;
     s32 r5, r6;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < FLAVOR_COUNT; i++)
     {
         r5 = arg1[i].unk0 << 8;
         r6 = ((arg2[i].unk0 - arg1[i].unk0) << 8) / 10;
@@ -388,25 +387,25 @@ bool32 TransitionConditionGraph(struct ConditionGraph *graph)
     }
 }
 
-void sub_81D20AC(struct ConditionGraph *a0)
+void InitConditionGraphState(struct ConditionGraph *graph)
 {
-    a0->unk355 = 0;
+    graph->state = 0;
 }
 
-bool8 sub_81D20BC(struct ConditionGraph *graph)
+bool8 SetupConditionGraphScanlineParams(struct ConditionGraph *graph)
 {
     struct ScanlineEffectParams params;
 
-    switch (graph->unk355)
+    switch (graph->state)
     {
     case 0:
         ScanlineEffect_Clear();
-        graph->unk355++;
+        graph->state++;
         return TRUE;
     case 1:
         params = sConditionGraphScanline;
         ScanlineEffect_SetParams(params);
-        graph->unk355++;
+        graph->state++;
         return FALSE;
     default:
         return FALSE;
@@ -432,7 +431,7 @@ void sub_81D2108(struct ConditionGraph *graph)
     graph->unk354 = 0;
 }
 
-void sub_81D21DC(u8 bg)
+void SetConditionGraphIOWindows(u8 bg)
 {
     u32 flags;
 
@@ -881,34 +880,30 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
 // Gets the name/gender/level string for the condition menu
 static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
 {
-    u16 species, level, gender;
+    u16 box, mon, species, level, gender;
     struct BoxPokemon *boxMon;
     u8 *str;
 
+    box = boxId;
+    mon = monId;
     *(dst++) = EXT_CTRL_CODE_BEGIN;
     *(dst++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
     *(dst++) = TEXT_COLOR_BLUE;
     *(dst++) = TEXT_COLOR_TRANSPARENT;
     *(dst++) = TEXT_COLOR_LIGHT_BLUE;
-    if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
-    {
+    if (GetBoxOrPartyMonData(box, mon, MON_DATA_IS_EGG, NULL))
         return StringCopyPadded(dst, gText_EggNickname, 0, 12);
-    }
-    GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, dst);
+    GetBoxOrPartyMonData(box, mon, MON_DATA_NICKNAME, dst);
     StringGetEnd10(dst);
-    species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES, NULL);
-    if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+    species = GetBoxOrPartyMonData(box, mon, MON_DATA_SPECIES, NULL);
+    if (box == TOTAL_BOXES_COUNT) // Party mon.
     {
-        level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
-        gender = GetMonGender(&gPlayerParty[monId]);
+        level = GetMonData(&gPlayerParty[mon], MON_DATA_LEVEL);
+        gender = GetMonGender(&gPlayerParty[mon]);
     }
     else
     {
-        // Needed to match, feel free to remove.
-        boxId++, boxId--;
-        monId++, monId--;
-
-        boxMon = GetBoxedMonPtr(boxId, monId);
+        boxMon = GetBoxedMonPtr(box, mon);
         gender = GetBoxMonGender(boxMon);
         level = GetLevelFromBoxMonExp(boxMon);
     }
@@ -981,6 +976,8 @@ static u8 *BufferConditionMenuSpacedStringN(u8 *dst, const u8 *src, s16 n)
 void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
+    u16 box = boxId;
+    u16 mon = monId;
 
     // In this and the below 2 functions, numMons is passed as the number of menu selections (which includes Cancel)
     // To indicate that the Cancel needs to be subtracted they pass an additional bool
@@ -990,21 +987,16 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
 
     if (partyId != numMons)
     {
-        GetConditionMenuMonString(nameDst, boxId, monId);
+        GetConditionMenuMonString(nameDst, box, mon);
         locationDst[0] = EXT_CTRL_CODE_BEGIN;
         locationDst[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         locationDst[2] = TEXT_COLOR_BLUE;
         locationDst[3] = TEXT_COLOR_TRANSPARENT;
         locationDst[4] = TEXT_COLOR_LIGHT_BLUE;
-        if (boxId == TOTAL_BOXES_COUNT) // Party mon.
-        {
+        if (box == TOTAL_BOXES_COUNT) // Party mon.
             BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, 8);
-        }
         else
-        {
-            boxId++;boxId--; // Again...Someone fix this maybe?
-            BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(boxId), 8);
-        }
+            BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(box), 8);
     }
     else
     {
@@ -1026,23 +1018,23 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 
 
     if (partyId != numMons)
     {
-        graph->unk0[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        graph->unk0[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        graph->unk0[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        graph->unk0[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        graph->unk0[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        graph->stat[id][0] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
+        graph->stat[id][1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
+        graph->stat[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
+        graph->stat[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
+        graph->stat[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
 
         sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
                  ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
                  : 9;
 
-        sub_81D2754(graph->unk0[id], graph->unk14[id]);
+        sub_81D2754(graph->stat[id], graph->unk14[id]);
     }
     else
     {
         for (i = 0; i < FLAVOR_COUNT; i++)
         {
-            graph->unk0[id][i] = 0;
+            graph->stat[id][i] = 0;
             graph->unk14[id][i].unk0 = 155;
             graph->unk14[id][i].unk2 = 91;
         }

@@ -1179,7 +1179,11 @@ static void CB2_InitSelectScreen(void)
         LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
         LoadPalette(sSelectText_Pal, 0xF0, 8);
         LoadPalette(sSelectText_Pal, 0xE0, 10);
+#if UBFIX
+        if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+#else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+#endif
             gPlttBufferUnfaded[228] = sFactorySelectScreen->speciesNameColorBackup;
         LoadPalette(sMonPicBg_Pal, 0x20, 4);
         gMain.state++;
@@ -1201,7 +1205,11 @@ static void CB2_InitSelectScreen(void)
         SetVBlankCallback(VBlankCB_SelectScreen);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
+#if UBFIX
+        if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+#else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+#endif
         {
             Select_SetWinRegs(88, 152, 32, 96);
             ShowBg(3);
@@ -1215,7 +1223,11 @@ static void CB2_InitSelectScreen(void)
         gMain.state++;
         break;
     case 5:
+#if UBFIX
+        if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+#else
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+#endif
             sFactorySelectScreen->cursorPos = gLastViewedMonIndex;
         Select_InitMonsData();
         Select_InitAllSprites();
@@ -3318,7 +3330,11 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 5:
+#if UBFIX
+        if (sFactorySwapScreen && sFactorySwapScreen->fromSummaryScreen)
+#else
         if (sFactorySwapScreen->fromSummaryScreen == TRUE)
+#endif
             sFactorySwapScreen->cursorPos = gLastViewedMonIndex;
         gMain.state++;
         break;
@@ -4055,7 +4071,11 @@ static void Swap_ShowSummaryMonSprite(void)
     personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
 
-    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite_HandleDeoxys(species, personality, otId, TRUE, 88, 32, 15, 0xFFFF); // BUG: otId and personality should be switched.
+#ifdef BUGFIX
+    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+#else
+    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite_HandleDeoxys(species, personality, otId, TRUE, 88, 32, 15, 0xFFFF);
+#endif
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecY = 0;
 

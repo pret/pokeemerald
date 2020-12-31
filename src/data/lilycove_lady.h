@@ -1,7 +1,6 @@
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
-#include "constants/species.h"
 #include "constants/moves.h"
 
 static const u16 sContestLadyMonGfxId[] =
@@ -9,7 +8,7 @@ static const u16 sContestLadyMonGfxId[] =
     OBJ_EVENT_GFX_ZIGZAGOON_1,
     OBJ_EVENT_GFX_SKITTY,
     OBJ_EVENT_GFX_POOCHYENA,
-    OBJ_EVENT_GFX_KECLEON_1,
+    OBJ_EVENT_GFX_KECLEON,
     OBJ_EVENT_GFX_PIKACHU
 };
 

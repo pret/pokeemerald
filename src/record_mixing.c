@@ -5,7 +5,6 @@
 #include "text.h"
 #include "item.h"
 #include "task.h"
-#include "constants/species.h"
 #include "save.h"
 #include "load_save.h"
 #include "pokemon.h"
@@ -870,22 +869,17 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
             sp24[j][0] = i;
             var1 = sub_80E7A9C(&_src->mail[0]);
             var2 = sub_80E7A9C(&_src->mail[1]);
-            if (!var1 && var2)
+            if (!(var1 || var2) || (var1 && var2))
             {
-                #ifndef NONMATCHING
-                    register u8 one asm("r0") = 1; // boo, a fakematch
-                    sp24[j][1] = one;
-                #else
-                    sp24[j][1] = 1;
-                #endif
-            }
-            else if ((var1 && var2) || (!var1 && !var2))
-            {
-                 sp24[j][1] = Random2() % 2;
+                sp24[j][1] = Random2() % 2;
             }
             else if (var1 && !var2)
             {
                 sp24[j][1] = 0;
+            }
+            else if (!var1 && var2)
+            {
+                 sp24[j][1] = 1;
             }
             j++;
         }

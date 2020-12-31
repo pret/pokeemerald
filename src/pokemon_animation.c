@@ -8,7 +8,6 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
-#include "constants/species.h"
 
 struct UnkAnimStruct
 {
@@ -1042,6 +1041,14 @@ static void sub_817F77C(struct Sprite *sprite)
         sprite->oam.matrixNum |= (sprite->hFlip << 3);
         sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
     }
+#ifdef BUGFIX
+    else
+    {
+        // FIX: Reset these back to normal after they were changed so Poké Ball catch/release
+        // animations without a screen transition in between don't break
+        sprite->affineAnims = gUnknown_082FF694;
+    }
+#endif // BUGFIX
 }
 
 static void pokemonanimfunc_01(struct Sprite *sprite)
@@ -2884,13 +2891,9 @@ static void sub_8181C2C(struct Sprite *sprite)
     }
     else
     {
-        #ifndef NONMATCHING
-            register s32 var asm("r4") = sUnknown_03001240[sprite->data[0]].field_8;
-        #else
-            s32 var = sUnknown_03001240[sprite->data[0]].field_8;
-        #endif
+        s32 var = sUnknown_03001240[sprite->data[0]].field_8;
 
-        sprite->pos2.x = (var << 3) * (counter % 128) / 128 - (sUnknown_03001240[sprite->data[0]].field_8 * 8);
+        sprite->pos2.x = var * ((counter % 128) * 8) / 128 + 8 * -var;
         sprite->pos2.y = -(Sin(counter % 128, 8));
     }
 

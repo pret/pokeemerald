@@ -626,32 +626,30 @@ static void ASCIIToPkmnStr(u8 *pkmnStr, const u8 *asciiStr)
 static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     u8 flagCount = 0;
-    u8 flags = gRfuLinkStatus->connSlotFlag;
+    u32 flags = gRfuLinkStatus->connSlotFlag;
     u8 i;
 
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < 4; flags >>= 1, i++)
         {
             if (flags & 1)
             {
                 if (maxFlags == flagCount + 1)
                 {
                     return gRfuLinkStatus->strength[i];
-                    break; // This break is needed to match
+                    break;
                 }
                 flagCount++;
             }
-            flags >>= 1;
         }
     }
     else
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < 4; flags >>= 1, i++)
         {
             if (flags & 1)
                 return gRfuLinkStatus->strength[i];
-             flags >>= 1;
         }
     }
     return 0;

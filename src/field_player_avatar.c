@@ -29,7 +29,6 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainer_types.h"
 
 static EWRAM_DATA u8 gUnknown_0203734C = 0;
@@ -343,10 +342,6 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
 
 static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEvent, u8 direction)
 {
-    u8 r5 = direction;
-    u8 r6 = direction;
-    r6++; r6--;
-
     if (ObjectEventIsMovementOverridden(playerObjEvent)
      && !ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
@@ -358,13 +353,13 @@ static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEve
                 return TRUE;
             }
 
-            if (playerObjEvent->movementDirection != r5)
+            if (playerObjEvent->movementDirection != direction)
             {
                 ObjectEventClearHeldMovement(playerObjEvent);
                 return FALSE;
             }
 
-            if (!sub_808B028(r6))
+            if (!sub_808B028(direction))
             {
                 ObjectEventClearHeldMovement(playerObjEvent);
                 return FALSE;
@@ -1789,7 +1784,7 @@ static bool8 Fishing_ShowDots(struct Task *task)
 
     AlignFishingAnimationFrames();
     task->tFrameCounter++;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         task->tStep = FISHING_NO_BITE;
         if (task->tRoundsPlayed != 0)
@@ -1878,7 +1873,7 @@ static bool8 Fishing_WaitForA(struct Task *task)
     task->tFrameCounter++;
     if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
         task->tStep = FISHING_GOT_AWAY;
-    else if (gMain.newKeys & A_BUTTON)
+    else if (JOY_NEW(A_BUTTON))
         task->tStep++;
     return FALSE;
 }
@@ -2086,7 +2081,7 @@ static void sub_808D094(u8 taskId)
             sub_808D074(object->facingDirection);
             data[1] = 0;
             data[2] = 1;
-            data[3] = (u16)(sprite->pos1.y + sprite->pos2.y) * 16;
+            data[3] = (u16)(sprite->pos1.y + sprite->pos2.y) << 4;
             sprite->pos2.y = 0;
             CameraObjectReset2();
             object->fixedPriority = TRUE;

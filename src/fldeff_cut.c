@@ -227,9 +227,9 @@ bool8 SetUpFieldMove_Cut(void)
                 y = gPlayerFacingPosition.y + sHyperCutStruct[i].y;
                 tileCuttable = TRUE;
 
-                for (j = 0; j < 2; ++j) {
-                    if (sHyperCutStruct[i].unk2[j] == 0)
-                        break;
+                for (j = 0; j < 2; ++j)
+                {
+                    if (sHyperCutStruct[i].unk2[j] == 0) break; // one line required to match -g
                     if (cutTiles[(u8)(sHyperCutStruct[i].unk2[j] - 1)] == FALSE)
                     {
                         tileCuttable = FALSE;
@@ -251,8 +251,11 @@ bool8 SetUpFieldMove_Cut(void)
                             sHyperCutTiles[tileArrayId] = TRUE;
                             ret = TRUE;
                         }
-                        else if (MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
-                            sHyperCutTiles[tileArrayId] = TRUE;
+                        else
+                        {
+                            if (MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
+                                sHyperCutTiles[tileArrayId] = TRUE;
+                        }
                     }
                 }
             }

@@ -30,7 +30,6 @@
 #include "constants/coins.h"
 #include "constants/rgb.h"
 #include "constants/roulette.h"
-#include "constants/species.h"
 #include "constants/songs.h"
 
 #define BALLS_PER_ROUND 6
@@ -464,8 +463,9 @@ static const struct WindowTemplate sWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 0xC5
     },
-    // BUG: Array not terminated properly
-    //DUMMY_WIN_TEMPLATE
+    #ifdef UBFIX
+    DUMMY_WIN_TEMPLATE,
+    #endif
 };
 
 static const struct GridSelection sGridSelections[NUM_GRID_SELECTIONS + 1] =

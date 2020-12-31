@@ -1217,13 +1217,12 @@ const u32 gBattleAnimSpriteGfx_WhiteFeather[] = INCBIN_U32("graphics/battle_anim
 const u32 gBattleAnimSpritePal_Sparkle6[] = INCBIN_U32("graphics/battle_anims/sprites/sparkle_6.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_Sparkle6[] = INCBIN_U32("graphics/battle_anims/sprites/sparkle_6.4bpp.lz");
 
-const u16 gUnknown_08DBA518[] = INCBIN_U16("graphics/misc/cable_car_bg.gbapal");
-const u16 gCableCar_Pal[] = INCBIN_U16("graphics/misc/cable_car.gbapal");
-
-const u32 gUnknown_08DBA5B8[] = INCBIN_U32("graphics/misc/cable_car_bg.4bpp.lz");
-const u32 gCableCar_Gfx[] = INCBIN_U32("graphics/misc/cable_car.4bpp.lz");
-const u32 gCableCarDoor_Gfx[] = INCBIN_U32("graphics/misc/cable_car_door.4bpp.lz");
-const u32 gCableCarCord_Gfx[] = INCBIN_U32("graphics/misc/cable_car_cord.4bpp.lz");
+const u16 gCableCarBg_Pal[]    = INCBIN_U16("graphics/cable_car/bg.gbapal");
+const u16 gCableCar_Pal[]      = INCBIN_U16("graphics/cable_car/cable_car.gbapal");
+const u32 gCableCarBg_Gfx[]    = INCBIN_U32("graphics/cable_car/bg.4bpp.lz");
+const u32 gCableCar_Gfx[]      = INCBIN_U32("graphics/cable_car/cable_car.4bpp.lz");
+const u32 gCableCarDoor_Gfx[]  = INCBIN_U32("graphics/cable_car/door.4bpp.lz");
+const u32 gCableCarCable_Gfx[] = INCBIN_U32("graphics/cable_car/cable.4bpp.lz");
 
 // Roulette
 const u32 gRouletteMenu_Gfx[] = INCBIN_U32("graphics/roulette/window.4bpp.lz");
@@ -1374,11 +1373,11 @@ const u16 gEasyChatMode_Pal[] = INCBIN_U16("graphics/easy_chat/mode.gbapal");
 const u32 gEasyChatWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/window.4bpp.lz"); // uses mode pal
 const u32 gEasyChatWindow_Tilemap[] = INCBIN_U32("graphics/easy_chat/window.bin.lz");
 
-const u16 gWallclockMale_Pal[] = INCBIN_U16("graphics/interface/wallclock_male.gbapal");
-const u16 gWallclockFemale_Pal[] = INCBIN_U16("graphics/interface/wallclock_female.gbapal");
-const u32 gWallclock_Gfx[] = INCBIN_U32("graphics/interface/wallclock.4bpp.lz");
-const u32 gUnknown_08DCC648[] = INCBIN_U32("graphics/interface/wallclock1.bin.lz");
-const u32 gUnknown_08DCC908[] = INCBIN_U32("graphics/interface/wallclock2.bin.lz");
+const u16 gWallClockMale_Pal[]      = INCBIN_U16("graphics/wallclock/male.gbapal");
+const u16 gWallClockFemale_Pal[]    = INCBIN_U16("graphics/wallclock/female.gbapal");
+const u32 gWallClock_Gfx[]          = INCBIN_U32("graphics/wallclock/clock.4bpp.lz");
+const u32 gWallClockStart_Tilemap[] = INCBIN_U32("graphics/wallclock/clock_start.bin.lz");
+const u32 gWallClockView_Tilemap[]  = INCBIN_U32("graphics/wallclock/clock_view.bin.lz");
 
 const u16 gUsePokeblockCondition_Pal[] = INCBIN_U16("graphics/pokeblock/use_screen/condition.gbapal");
 const u32 gUsePokeblockCondition_Gfx[] = INCBIN_U32("graphics/pokeblock/use_screen/condition.4bpp.lz");

@@ -271,13 +271,6 @@
 
 enum
 {
-    COLOR_FOREGROUND,
-    COLOR_SHADOW,
-    COLOR_BACKGROUND
-};
-
-enum
-{
     FONTATTR_MAX_LETTER_WIDTH,
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
@@ -329,7 +322,7 @@ struct TextPrinter
     u8 delayCounter;
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
-    bool8 japanese;
+    u8 japanese;
 };
 
 struct FontInfo
@@ -373,13 +366,13 @@ struct Struct_03002F90
     u32 unk20[8];
     u32 unk40[8];
     u32 unk60[8];
-    u8 unk80;
-    u8 unk81;
+    u8 width;
+    u8 height;
 };
 
 extern TextFlags gTextFlags;
 
-extern bool8 gUnknown_03002F84;
+extern u8 gUnknown_03002F84;
 extern struct Struct_03002F90 gUnknown_03002F90;
 
 void SetFontsPointer(const struct FontInfo *fonts);

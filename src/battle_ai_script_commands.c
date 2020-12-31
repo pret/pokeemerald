@@ -14,7 +14,6 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
-#include "constants/species.h"
 
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
@@ -451,7 +450,16 @@ static u8 ChooseMoveOrAction_Doubles(void)
 {
     s32 i;
     s32 j;
+#ifndef BUGFIX
     s32 scriptsToRun;
+#else
+    // the value assigned to this is a u32 (aiFlags)
+    // this becomes relevant because aiFlags can have bit 31 set
+    // and scriptsToRun is shifted
+    // this never happens in the vanilla game because bit 31 is
+    // only set when it's the first battle
+    u32 scriptsToRun;
+#endif
     s16 bestMovePointsForTarget[MAX_BATTLERS_COUNT];
     s8 mostViableTargetsArray[MAX_BATTLERS_COUNT];
     u8 actionOrMoveIndex[MAX_BATTLERS_COUNT];
@@ -616,8 +624,8 @@ static void RecordLastUsedMoveByTarget(void)
     {
         if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
-        if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] != gLastMoves[gBattlerTarget]  // HACK: This redundant condition is a hack to make the asm match.
-         && BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == MOVE_NONE)
+
+        if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == MOVE_NONE)
         {
             BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] = gLastMoves[gBattlerTarget];
             break;
@@ -1605,8 +1613,10 @@ static void Cmd_if_status_not_in_party(void)
 
         if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
         {
-            gAIScriptPtr += 10; // UB: Still bugged in Emerald. Uncomment the return statement to fix.
-            // return;
+            gAIScriptPtr += 10;
+            #ifdef UBFIX
+            return;
+            #endif
         }
     }
 

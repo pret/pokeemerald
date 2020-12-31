@@ -32,7 +32,6 @@
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 
 struct MatchCallState
@@ -1253,7 +1252,7 @@ static bool32 sub_81962D8(u8 taskId)
 static bool32 sub_8196330(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
-    if (!ExecuteMatchCallTextPrinter(taskData[2]) && !IsSEPlaying() && gMain.newKeys & (A_BUTTON | B_BUTTON))
+    if (!ExecuteMatchCallTextPrinter(taskData[2]) && !IsSEPlaying() && JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(taskData[2], PIXEL_FILL(8));
         CopyWindowToVram(taskData[2], 2);
@@ -1346,7 +1345,7 @@ static void InitMatchCallTextPrinter(int windowId, const u8 *str)
 
 static bool32 ExecuteMatchCallTextPrinter(int windowId)
 {
-    if (gMain.heldKeys & A_BUTTON)
+    if (JOY_HELD(A_BUTTON))
         gTextFlags.canABSpeedUpPrint = 1;
     else
         gTextFlags.canABSpeedUpPrint = 0;
@@ -1818,10 +1817,13 @@ static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
         }
         *topicTextId = 3;
         break;
+    #ifdef BUGFIX
+    case FRONTIER_FACILITY_PIKE:
+    #else
     case FRONTIER_FACILITY_FACTORY:
+    #endif
         for (i = 0; i < 2; i++)
         {
-            // BUG: should be looking at battle factory records.
             if (streak < gSaveBlock2Ptr->frontier.pikeRecordStreaks[i])
                 streak = gSaveBlock2Ptr->frontier.pikeRecordStreaks[i];
         }
@@ -1849,12 +1851,15 @@ static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
         }
         *topicTextId = 2;
         break;
+    #ifdef BUGFIX
+    case FRONTIER_FACILITY_FACTORY:
+    #else
     case FRONTIER_FACILITY_PIKE:
+    #endif
         for (i = 0; i < 2; i++)
         {
             for (j = 0; j < 2; j++)
             {
-                // BUG: should be looking at battle pike records.
                 if (streak < gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[i][j])
                     streak = gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[i][j];
             }

@@ -168,8 +168,8 @@ struct BerryBlender
     u16 progressBarValue;
     u16 maxProgressBarValue;
     u16 centerScale;
-    s16 bg_X;
-    s16 bg_Y;
+    u16 bg_X;
+    u16 bg_Y;
     u8 opponentTaskIds[BLENDER_MAX_PLAYERS - 1];
     u8 perfectOpponents; // for debugging, NPCs will always hit Best
     u16 scores[BLENDER_MAX_PLAYERS][NUM_SCORE_TYPES];
@@ -1852,7 +1852,9 @@ static void Task_HandleOpponent1(u8 taskId)
                         gRecvCmds[1][BLENDER_COMM_SCORE] = LINKCMD_BLENDER_SCORE_GOOD;
 
                     // BUG: Overrwrote above assignment. Opponent 1 can't get Best at low speed
+                    #ifndef BUGFIX
                     gRecvCmds[1][BLENDER_COMM_SCORE] = LINKCMD_BLENDER_SCORE_GOOD;
+                    #endif
                 }
                 else if (sBerryBlender->speed < 1500)
                 {
@@ -2131,11 +2133,17 @@ static void UpdateOpponentScores(void)
                     sBerryBlender->scores[i][SCORE_MISS]++;
             }
 
-            // BUG: Should [i][BLENDER_COMM_SCORE] below, not [BLENDER_COMM_SCORE][i]
+            // BUG: Should be [i][BLENDER_COMM_SCORE] below, not [BLENDER_COMM_SCORE][i]
             // As a result the music tempo updates if any player misses, but only if 1 specific player hits
+            #ifdef BUGFIX
+            if (gRecvCmds[i][BLENDER_COMM_SCORE] == LINKCMD_BLENDER_SCORE_MISS 
+             || gRecvCmds[i][BLENDER_COMM_SCORE] == LINKCMD_BLENDER_SCORE_BEST 
+             || gRecvCmds[i][BLENDER_COMM_SCORE] == LINKCMD_BLENDER_SCORE_GOOD)
+            #else
             if (gRecvCmds[i][BLENDER_COMM_SCORE] == LINKCMD_BLENDER_SCORE_MISS 
              || gRecvCmds[BLENDER_COMM_SCORE][i] == LINKCMD_BLENDER_SCORE_BEST 
              || gRecvCmds[BLENDER_COMM_SCORE][i] == LINKCMD_BLENDER_SCORE_GOOD)
+            #endif
             {
                 if (sBerryBlender->speed > 1500)
                     m4aMPlayTempoControl(&gMPlayInfo_BGM, ((sBerryBlender->speed - 750) / 20) + 256);
@@ -3387,13 +3395,13 @@ static void RestoreBgCoord(s16* coord)
 // For "unshaking" the screen after ShakeBgCoordForHit is called
 static void RestoreBgCoords(void)
 {
-    RestoreBgCoord((s16 *)&sBerryBlender->bg_X);
-    RestoreBgCoord((s16 *)&sBerryBlender->bg_Y);
+    RestoreBgCoord(&sBerryBlender->bg_X);
+    RestoreBgCoord(&sBerryBlender->bg_Y);
 }
 
 static void BlenderLandShakeBgCoord(s16* coord, u16 timer)
 {
-    u8 strength;
+    s32 strength;
 
     if (timer < 10)
         strength = 16;

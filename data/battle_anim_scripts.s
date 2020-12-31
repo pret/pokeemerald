@@ -416,7 +416,7 @@ gBattleAnims_Special::
 	.4byte Special_SwitchOutPlayerMon       @ B_ANIM_SWITCH_OUT_PLAYER_MON
 	.4byte Special_SwitchOutOpponentMon     @ B_ANIM_SWITCH_OUT_OPPONENT_MON
 	.4byte Special_BallThrow                @ B_ANIM_BALL_THROW
-	.4byte Special_SafariBallThrow          @ B_ANIM_SAFARI_BALL_THROW
+	.4byte Special_BallThrowWithTrainer     @ B_ANIM_BALL_THROW_WITH_TRAINER
 	.4byte Special_SubstituteToMon          @ B_ANIM_SUBSTITUTE_TO_MON
 	.4byte Special_MonToSubstitute          @ B_ANIM_MON_TO_SUBSTITUTE
 
@@ -10738,7 +10738,7 @@ BallThrowTrainerBlock:
 	blendoff
 	goto BallThrowEnd
 
-Special_SafariBallThrow:
+Special_BallThrowWithTrainer:
 	createvisualtask AnimTask_LoadBallGfx, 2
 	delay 0
 	createvisualtask AnimTask_ThrowBall_StandingTrainer, 2

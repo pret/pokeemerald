@@ -44,7 +44,6 @@
 #include "constants/songs.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 
@@ -1565,8 +1564,7 @@ static s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 tra
     {
         for (j = 0; j < REMATCHES_COUNT; j++)
         {
-            if (table[i].trainerIds[j] == 0)
-                break;
+            if (table[i].trainerIds[j] == 0) break; // one line required to match -g
             if (table[i].trainerIds[j] == trainerId)
                 return i;
         }

@@ -42,7 +42,6 @@
 #include "constants/moves.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/tv.h"
 
 // This file's functions.
@@ -951,39 +950,39 @@ const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[CONTESTA
 
 static const s8 gContestExcitementTable[CONTEST_CATEGORIES_COUNT][CONTEST_CATEGORIES_COUNT] =
 {
-    [CONTEST_CATEGORY_COOL] = { 
-        [CONTEST_CATEGORY_COOL]   = +1,  
-        [CONTEST_CATEGORY_BEAUTY] =  0, 
-        [CONTEST_CATEGORY_CUTE]   = -1, 
-        [CONTEST_CATEGORY_SMART]  = -1,  
+    [CONTEST_CATEGORY_COOL] = {
+        [CONTEST_CATEGORY_COOL]   = +1,
+        [CONTEST_CATEGORY_BEAUTY] =  0,
+        [CONTEST_CATEGORY_CUTE]   = -1,
+        [CONTEST_CATEGORY_SMART]  = -1,
         [CONTEST_CATEGORY_TOUGH]  =  0
     },
-    [CONTEST_CATEGORY_BEAUTY] = { 
-        [CONTEST_CATEGORY_COOL]   =  0,  
-        [CONTEST_CATEGORY_BEAUTY] = +1,  
-        [CONTEST_CATEGORY_CUTE]   =  0, 
-        [CONTEST_CATEGORY_SMART]  = -1, 
+    [CONTEST_CATEGORY_BEAUTY] = {
+        [CONTEST_CATEGORY_COOL]   =  0,
+        [CONTEST_CATEGORY_BEAUTY] = +1,
+        [CONTEST_CATEGORY_CUTE]   =  0,
+        [CONTEST_CATEGORY_SMART]  = -1,
         [CONTEST_CATEGORY_TOUGH]  = -1
     },
     [CONTEST_CATEGORY_CUTE] = {
-        [CONTEST_CATEGORY_COOL]   = -1,  
-        [CONTEST_CATEGORY_BEAUTY] =  0,  
-        [CONTEST_CATEGORY_CUTE]   = +1,  
-        [CONTEST_CATEGORY_SMART]  =  0, 
+        [CONTEST_CATEGORY_COOL]   = -1,
+        [CONTEST_CATEGORY_BEAUTY] =  0,
+        [CONTEST_CATEGORY_CUTE]   = +1,
+        [CONTEST_CATEGORY_SMART]  =  0,
         [CONTEST_CATEGORY_TOUGH]  = -1
     },
     [CONTEST_CATEGORY_SMART] = {
-        [CONTEST_CATEGORY_COOL]   = -1, 
-        [CONTEST_CATEGORY_BEAUTY] = -1,  
-        [CONTEST_CATEGORY_CUTE]   =  0,  
-        [CONTEST_CATEGORY_SMART]  = +1,  
+        [CONTEST_CATEGORY_COOL]   = -1,
+        [CONTEST_CATEGORY_BEAUTY] = -1,
+        [CONTEST_CATEGORY_CUTE]   =  0,
+        [CONTEST_CATEGORY_SMART]  = +1,
         [CONTEST_CATEGORY_TOUGH]  =  0
     },
-    [CONTEST_CATEGORY_TOUGH] = { 
-        [CONTEST_CATEGORY_COOL]   =  0, 
-        [CONTEST_CATEGORY_BEAUTY] = -1, 
-        [CONTEST_CATEGORY_CUTE]   = -1,  
-        [CONTEST_CATEGORY_SMART]  =  0,  
+    [CONTEST_CATEGORY_TOUGH] = {
+        [CONTEST_CATEGORY_COOL]   =  0,
+        [CONTEST_CATEGORY_BEAUTY] = -1,
+        [CONTEST_CATEGORY_CUTE]   = -1,
+        [CONTEST_CATEGORY_SMART]  =  0,
         [CONTEST_CATEGORY_TOUGH]  = +1
     }
 };
@@ -1493,7 +1492,7 @@ static void Task_DisplayAppealNumberText(u8 taskId)
 static void Task_TryShowMoveSelectScreen(u8 taskId)
 {
     // Wait for button press to show move select screen
-    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
+    if ((JOY_NEW(A_BUTTON)) || (gMain.newKeys == B_BUTTON))
     {
         PlaySE(SE_SELECT);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
@@ -1559,7 +1558,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
             numMoves++;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].func = Task_SelectedMove;
@@ -3119,9 +3118,9 @@ static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 ind
     species = SanitizeSpecies(species);
 
     if (index == gContestPlayerMonIndex)
-        HandleLoadSpecialPokePic_2(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites[0], species, personality);
+        HandleLoadSpecialPokePic_2(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[0], species, personality);
     else
-        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites[0], species, personality);
+        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites.ptr[0], species, personality);
 
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x120, 0x20);
     SetMultiuseSpriteTemplateToPokemon(species, 0);
@@ -3408,7 +3407,8 @@ static void GetAllChosenMoves(void)
 
 static void RankContestants(void)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
     s16 arr[CONTESTANT_COUNT];
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -3483,7 +3483,8 @@ static bool8 ContestantCanUseTurn(u8 contestant)
 {
     if (eContestantStatus[contestant].numTurnsSkipped != 0 || eContestantStatus[contestant].noMoreTurns)
         return FALSE;
-    return TRUE;
+    else
+        return TRUE;
 }
 
 static void SetContestantStatusesForNextRound(void)
@@ -3537,7 +3538,8 @@ bool8 Contest_IsMonsTurnDisabled(u8 contestant)
 {
     if (eContestantStatus[contestant].numTurnsSkipped != 0 || eContestantStatus[contestant].noMoreTurns)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static void CalculateTotalPointsForContestant(u8 contestant)
@@ -4137,12 +4139,12 @@ static u8 CreateContestantBoxBlinkSprites(u8 contestant)
     CpuFill32(0, gContestResources->boxBlinkTiles2 + 0x500, 0x300);
 
     RequestDma3Copy(gContestResources->boxBlinkTiles1,
-                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId1].oam.tileNum * 32),
+                    (u8 *)(OBJ_VRAM0 + gSprites[spriteId1].oam.tileNum * 32),
                     0x800,
                     1);
 
     RequestDma3Copy(gContestResources->boxBlinkTiles2,
-                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId2].oam.tileNum * 32),
+                    (u8 *)(OBJ_VRAM0 + gSprites[spriteId2].oam.tileNum * 32),
                     0x800,
                     1);
 
@@ -4480,14 +4482,17 @@ static void CalculateAppealMoveImpact(u8 contestant)
             eContestantStatus[contestant].comboAppealBonus = eContestantStatus[contestant].baseAppeal * eContestantStatus[contestant].completedCombo;
             eContestantStatus[contestant].completedComboFlag = TRUE; // Redundant with completedCombo, used by AI
         }
-        else if (gContestMoves[eContestantStatus[contestant].currMove].comboStarterId != 0)
-        {
-            eContestantStatus[contestant].hasJudgesAttention = TRUE;
-            eContestantStatus[contestant].usedComboMove = TRUE;
-        }
         else
         {
-            eContestantStatus[contestant].hasJudgesAttention = FALSE;
+            if (gContestMoves[eContestantStatus[contestant].currMove].comboStarterId != 0)
+            {
+                eContestantStatus[contestant].hasJudgesAttention = TRUE;
+                eContestantStatus[contestant].usedComboMove = TRUE;
+            }
+            else
+            {
+                eContestantStatus[contestant].hasJudgesAttention = FALSE;
+            }
         }
     }
     if (eContestantStatus[contestant].repeatedMove)
@@ -4728,8 +4733,8 @@ static void UpdateApplauseMeter(void)
             src = &gContestApplauseMeterGfx[64];
         else
             src = gContestApplauseMeterGfx;
-        CpuCopy32(src, (void *)(VRAM + 0x10000 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
-        CpuCopy32(src + 32, (void *)(VRAM + 0x10000 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
+        CpuCopy32(src, (void *)(OBJ_VRAM0 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
+        CpuCopy32(src + 32, (void *)(OBJ_VRAM0 + (gSprites[eContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
 
         if (eContest.applauseLevel > 4)
             StartApplauseOverflowAnimation();
@@ -5010,7 +5015,7 @@ static void ShowHideNextTurnGfx(bool8 show)
     {
         if (eContestantStatus[i].turnOrderMod != 0 && show)
         {
-            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(VRAM + 0x10000 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 6) * 32), 32);
+            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(OBJ_VRAM0 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 6) * 32), 32);
             gSprites[eContestGfxState[i].nextTurnSpriteId].pos1.y = sNextTurnSpriteYPositions[gContestantTurnOrder[i]];
             gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = FALSE;
         }
@@ -6092,5 +6097,4 @@ void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 langua
         name[PLAYER_NAME_LENGTH] = EOS;
     }
 }
-
 

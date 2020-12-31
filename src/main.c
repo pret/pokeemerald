@@ -85,25 +85,9 @@ void EnableVCountIntrAtLine150(void);
 
 void AgbMain()
 {
-#if MODERN
     // Modern compilers are liberal with the stack on entry to this function,
     // so RegisterRamReset may crash if it resets IWRAM.
-    RegisterRamReset(RESET_ALL & ~RESET_IWRAM);
-    asm("mov\tr1, #0xC0\n"
-        "\tlsl\tr1, r1, #0x12\n"
-        "\tmov r2, #0xFC\n"
-        "\tlsl r2, r2, #0x7\n"
-        "\tadd\tr2, r1, r2\n"
-        "\tmov\tr0, #0\n"
-        "\tmov\tr3, r0\n"
-        "\tmov\tr4, r0\n"
-        "\tmov\tr5, r0\n"
-        ".LCU0:\n"
-        "\tstmia r1!, {r0, r3, r4, r5}\n"
-        "\tcmp\tr1, r2\n"
-        "\tbcc\t.LCU0\n"
-    );
-#else
+#if !MODERN
     RegisterRamReset(RESET_ALL);
 #endif //MODERN
     *(vu16 *)BG_PLTT = 0x7FFF;
@@ -282,10 +266,10 @@ static void ReadKeys(void)
     // Remap L to A if the L=A option is enabled.
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
     {
-        if (gMain.newKeys & L_BUTTON)
+        if (JOY_NEW(L_BUTTON))
             gMain.newKeys |= A_BUTTON;
 
-        if (gMain.heldKeys & L_BUTTON)
+        if (JOY_HELD(L_BUTTON))
             gMain.heldKeys |= A_BUTTON;
     }
 

@@ -985,7 +985,7 @@ static void PlaySlotMachine_Internal(u8 slotMachineIndex, MainCallback exitCallb
 {
     struct Task *task = &gTasks[CreateTask(SlotMachineDummyTask, 0xFF)];
     task->data[0] = slotMachineIndex;
-    StoreWordInTwoHalfwords((u16 *)&task->data[1], (intptr_t)exitCallback);
+    StoreWordInTwoHalfwords(&task->data[1], (intptr_t)exitCallback);
 }
 
 
@@ -1945,7 +1945,7 @@ static bool8 AwardPayoutAction_GivePayoutToPlayer(struct Task *task)
         if (sSlotMachine->coins < MAX_COINS)
             sSlotMachine->coins++;
         task->data[1] = 8;
-        if (gMain.heldKeys & A_BUTTON)
+        if (JOY_HELD(A_BUTTON))
             task->data[1] = 4;
     }
     if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))

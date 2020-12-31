@@ -25,7 +25,7 @@
 #define STD_WINDOW_PALETTE_NUM 14
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
-struct MoveMenuInfoIcon
+struct MenuInfoIcon
 {
     u8 width;
     u8 height;
@@ -98,34 +98,34 @@ const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
 const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
 
 // Table of move info icon offsets in graphics/interface_fr/menu.png
-const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
+static const struct MenuInfoIcon sMenuInfoIcons[] =
 {   // { width, height, offset }
-    { 12, 12, 0x00 },       // Unused
-    { 32, 12, 0x20 },       // Normal icon
-    { 32, 12, 0x64 },       // Fight icon
-    { 32, 12, 0x60 },       // Flying icon
-    { 32, 12, 0x80 },       // Poison icon
-    { 32, 12, 0x48 },       // Ground icon
-    { 32, 12, 0x44 },       // Rock icon
-    { 32, 12, 0x6C },       // Bug icon
-    { 32, 12, 0x68 },       // Ghost icon
-    { 32, 12, 0x88 },       // Steel icon
-    { 32, 12, 0xA4 },       // ??? (Mystery) icon
-    { 32, 12, 0x24 },       // Fire icon
-    { 32, 12, 0x28 },       // Water icon
-    { 32, 12, 0x2C },       // Grass icon
-    { 32, 12, 0x40 },       // Electric icon
-    { 32, 12, 0x84 },       // Psychic icon
-    { 32, 12, 0x4C },       // Ice icon
-    { 32, 12, 0xA0 },       // Dragon icon
-    { 32, 12, 0x8C },       // Dark icon
-    { 42, 12, 0xA8 },       // -Type- icon
-    { 42, 12, 0xC0 },       // -Power- icon
-    { 42, 12, 0xC8 },       // -Accuracy- icon
-    { 42, 12, 0xE0 },       // -PP- icon
-    { 42, 12, 0xE8 },       // -Effect- icon
-    {  8,  8, 0xAE },       // Unused (Small white pokeball)
-    {  8,  8, 0xAF },       // Unused (Small dark pokeball)
+    { 12, 12, 0x00 },  // Unused
+    [TYPE_NORMAL + 1]   = { 32, 12, 0x20 },
+    [TYPE_FIGHTING + 1] = { 32, 12, 0x64 },
+    [TYPE_FLYING + 1]   = { 32, 12, 0x60 },
+    [TYPE_POISON + 1]   = { 32, 12, 0x80 },
+    [TYPE_GROUND + 1]   = { 32, 12, 0x48 },
+    [TYPE_ROCK + 1]     = { 32, 12, 0x44 },
+    [TYPE_BUG + 1]      = { 32, 12, 0x6C },
+    [TYPE_GHOST + 1]    = { 32, 12, 0x68 },
+    [TYPE_STEEL + 1]    = { 32, 12, 0x88 },
+    [TYPE_MYSTERY + 1]  = { 32, 12, 0xA4 },
+    [TYPE_FIRE + 1]     = { 32, 12, 0x24 },
+    [TYPE_WATER + 1]    = { 32, 12, 0x28 },
+    [TYPE_GRASS + 1]    = { 32, 12, 0x2C },
+    [TYPE_ELECTRIC + 1] = { 32, 12, 0x40 },
+    [TYPE_PSYCHIC + 1]  = { 32, 12, 0x84 },
+    [TYPE_ICE + 1]      = { 32, 12, 0x4C },
+    [TYPE_DRAGON + 1]   = { 32, 12, 0xA0 },
+    [TYPE_DARK + 1]     = { 32, 12, 0x8C },
+    [MENU_INFO_ICON_TYPE]      = { 42, 12, 0xA8 },
+    [MENU_INFO_ICON_POWER]     = { 42, 12, 0xC0 },
+    [MENU_INFO_ICON_ACCURACY]  = { 42, 12, 0xC8 },
+    [MENU_INFO_ICON_PP]        = { 42, 12, 0xE0 },
+    [MENU_INFO_ICON_EFFECT]    = { 42, 12, 0xE8 }, // Unused
+    [MENU_INFO_ICON_BALL_RED]  = {  8,  8, 0xAE }, // For placed decorations in Secret Base
+    [MENU_INFO_ICON_BALL_BLUE] = {  8,  8, 0xAF }, // For placed decorations in player's room
 };
 
 
@@ -981,23 +981,23 @@ u8 Menu_GetCursorPos(void)
 
 s8 Menu_ProcessInput(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (!sMenu.APressMuted)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -1011,23 +1011,23 @@ s8 Menu_ProcessInputNoWrap(void)
 {
     u8 oldPos = sMenu.cursorPos;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (!sMenu.APressMuted)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
             PlaySE(SE_SELECT);
@@ -1039,23 +1039,23 @@ s8 Menu_ProcessInputNoWrap(void)
 
 s8 ProcessMenuInput_other(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (!sMenu.APressMuted)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -1069,23 +1069,23 @@ s8 Menu_ProcessInputNoWrapAround_other(void)
 {
     u8 oldPos = sMenu.cursorPos;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (!sMenu.APressMuted)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
             PlaySE(SE_SELECT);
@@ -1407,34 +1407,34 @@ u8 ChangeGridMenuCursorPosition(s8 deltaX, s8 deltaY)
 
 s8 sub_8199284(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
+    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
+    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1448,34 +1448,34 @@ s8 Menu_ProcessInputGridLayout(void)
 {
     u8 oldPos = sMenu.cursorPos;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_LEFT || GetLRKeysPressed() == MENU_L_PRESSED)
+    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysPressed() == MENU_R_PRESSED)
+    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -1487,34 +1487,34 @@ s8 Menu_ProcessInputGridLayout(void)
 
 s8 sub_81993D8(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1529,34 +1529,34 @@ s8 sub_8199484(void)
 {
     u8 oldPos = sMenu.cursorPos;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -2016,7 +2016,7 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
 {
     int loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
     const u8 *pixelsSrc;
-    u16 *pixelsDst;
+    u8 *pixelsDst;
     u16 toOrr;
 
     if (dst->width - dstX < width)
@@ -2037,53 +2037,52 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
         for (loopSrcX = srcX, loopDstX = dstX; loopSrcX < xEnd; loopSrcX++, loopDstX++)
         {
             pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 0x1d) >> 0x1B);
-            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)( loopDstY << 0x1d) >> 0x1B);
+            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 0x1d) >> 0x1B);
 
-            if ((uintptr_t )pixelsDst & 0x1)
+            if ((uintptr_t)pixelsDst & 0x1)
             {
-                pixelsDst = (void*)(pixelsDst) - 1;
+                pixelsDst--;
                 if (loopDstX & 0x1)
                 {
-                    toOrr = *pixelsDst & 0x0fff;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0x0fff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 8);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 8);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 12);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 12);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xf0ff;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xf0ff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 8);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 8);
                 }
             }
             else
             {
                 if (loopDstX & 1)
                 {
-                    toOrr = *pixelsDst & 0xff0f;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xff0f;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 0);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 0);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 4);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 4);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xfff0;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xfff0;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) >> 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) >> 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) >> 0);
+                        toOrr |= ((*pixelsSrc & 0x0f) >> 0);
                 }
             }
-
-            // Needed to match, urgh.
-            #ifndef NONMATCHING
-            asm("":::"r4");
-            pixelsDst++;pixelsDst--;
-            #endif // NONMATCHING
+            *(vu16*)pixelsDst = toOrr;
         }
     }
 }
@@ -2119,9 +2118,9 @@ void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
     LoadPalette(palette, palOffset, 0x20);
 }
 
-void blit_move_info_icon(u8 windowId, u8 iconId, u16 x, u16 y)
+void BlitMenuInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y)
 {
-    BlitBitmapRectToWindow(windowId, gFireRedMenuElements_Gfx + gMoveMenuInfoIcons[iconId].offset * 32, 0, 0, 128, 128, x, y, gMoveMenuInfoIcons[iconId].width, gMoveMenuInfoIcons[iconId].height);
+    BlitBitmapRectToWindow(windowId, gFireRedMenuElements_Gfx + sMenuInfoIcons[iconId].offset * 32, 0, 0, 128, 128, x, y, sMenuInfoIcons[iconId].width, sMenuInfoIcons[iconId].height);
 }
 
 void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)

@@ -390,11 +390,11 @@ void sub_811FAF8(void)
     }
 }
 
-bool8 sub_811FBA4(void)
+bool8 MonMarkingsMenuHandleInput(void)
 {
     u16 i;
 
-    if (gMain.newKeys & DPAD_UP)
+    if (JOY_NEW(DPAD_UP))
     {
         s8 pos;
         PlaySE(SE_SELECT);
@@ -404,7 +404,7 @@ bool8 sub_811FBA4(void)
         return TRUE;
     }
 
-    if (gMain.newKeys & DPAD_DOWN)
+    if (JOY_NEW(DPAD_DOWN))
     {
         s8 pos;
         PlaySE(SE_SELECT);
@@ -414,7 +414,7 @@ bool8 sub_811FBA4(void)
         return TRUE;
     }
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
 
@@ -433,7 +433,7 @@ bool8 sub_811FBA4(void)
         return TRUE;
     }
 
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         return FALSE;
@@ -564,7 +564,7 @@ static void sub_811FF7C(struct Sprite *sprite)
     sprite->pos1.y = (16 * sMenu->cursorPos) + sprite->data[0];
 }
 
-struct Sprite *sub_811FF94(u16 tileTag, u16 paletteTag, const u16 *palette)
+struct Sprite *CreateMonMarkingsSpriteWithPal(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (!palette)
         palette = gUnknown_0859E65C;
