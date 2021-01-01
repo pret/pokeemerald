@@ -1133,6 +1133,11 @@ static void sub_80767D4(struct Sprite *sprite)
         AnimateBallOpenParticlesForPokeball(sprite->pos1.x, sprite->pos1.y - 5, sprite->oam.priority, r6);
         sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, r8, r5);
         sprite->callback = sub_807687C;
+#ifdef BUGFIX
+        // FIX: If this is used on a sprite that has previously had an affine animation, it will not
+        // play the shrink anim properly due to being paused. Works together with the fix to `sub_817F77C`.
+        gSprites[r7].affineAnimPaused = FALSE;
+#endif // BUGFIX
         StartSpriteAffineAnim(&gSprites[r7], 2);
         AnimateSprite(&gSprites[r7]);
         gSprites[r7].data[1] = 0;
