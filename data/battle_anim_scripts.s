@@ -768,6 +768,14 @@ gBattleAnims_Moves::
 	.4byte Move_JUNGLE_HEALING
 	.4byte Move_WICKED_BLOW
 	.4byte Move_SURGING_STRIKES
+	.4byte Move_THUNDER_CAGE
+	.4byte Move_DRAGON_ENERGY
+	.4byte Move_FREEZING_GLARE
+	.4byte Move_FIERY_WRATH
+	.4byte Move_THUNDEROUS_KICK
+	.4byte Move_GLACIAL_LANCE
+	.4byte Move_ASTRAL_BARRAGE
+	.4byte Move_EERIE_SPELL
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -2838,28 +2846,42 @@ Move_FIRE_FANG:
 	end
 
 Move_SHADOW_SNEAK:
-	loadspritegfx ANIM_TAG_LICK
-	setalpha 0, 16
-	delay 1
-	createvisualtask AnimTask_InitMementoShadow, 2
-	delay 1
-	createvisualtask AnimTask_MoveAttackerMementoShadow, 5
-	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
-	delay 48
-	playsewithpan SE_M_PSYBEAM2, SOUND_PAN_ATTACKER
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_WHITE_SHADOW @Destiny Bond
+	loadspritegfx ANIM_TAG_QUICK_GUARD_HAND @Black Colour
+	loadspritegfx ANIM_TAG_POISON_BUBBLE @Poison
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET
+	monbg ANIM_ATTACKER
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0x0 0x7 0x0000
 	waitforvisualfinish
-	createvisualtask sub_8114470, 2
-	setalpha 0, 16
-	delay 1
-	playsewithpan SE_M_LICK, SOUND_PAN_TARGET
-	createsprite gLickSpriteTemplate, ANIM_TARGET, 2, 0, 0
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 16, 1
+	playsewithpan SE_M_FAINT_ATTACK, SOUND_PAN_ATTACKER
+	launchtask AnimTask_TranslateMonEllipticalRespectSide 0x2 0x5 0x0 0x12 0x6 0x1 0x3
+	launchtask AnimTask_AttackerFadeToInvisible 0x2 0x1 0x1
 	waitforvisualfinish
-	clearmonbg_23 ANIM_TARGET
-	delay 1
-	blendoff
-	delay 1
+	clearmonbg ANIM_ATTACKER
+	invisible ANIM_ATTACKER
+	delay 0x1
+	launchtask AnimTask_DestinyBondWhiteShadow 0x5 0x2 0x0 0x30
+	delay 0x30
+	launchtask AnimTask_BlendColorCycle 0x2 0x6 ANIM_PAL_DEF 0x2 0x2 0x0 0xF 0x0
+	createsprite gShadowSneakImpactSpriteTemplate, ANIM_TARGET, 2, 0xfff6, 0xfff6, 0x0
+	call ShadowSneakMovement
+	createsprite gShadowSneakImpactSpriteTemplate, ANIM_TARGET, 2, 0xa, 0x14, 0x0
+	call ShadowSneakMovement
+	createsprite gShadowSneakImpactSpriteTemplate, ANIM_TARGET, 2, 0xfffb, 0xa, 0x0
+	call ShadowSneakMovement
+	createsprite gShadowSneakImpactSpriteTemplate, ANIM_TARGET, 2, 0x11, 0xfff4, 0x0
+	call ShadowSneakMovement
+	waitforvisualfinish
+	visible ANIM_ATTACKER
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0x7 0x0 0x0000
+	waitforvisualfinish
 	end
+ShadowSneakMovement:
+	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
+	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_TARGET 0x3 0x0 0x6 0x1
+	delay 0x4
+	return
 
 Move_MUD_BOMB:
 	loadspritegfx ANIM_TAG_MUD_SAND
@@ -14045,6 +14067,30 @@ Move_WICKED_BLOW::
 Move_SURGING_STRIKES::
 	end @to do:
 
+Move_THUNDER_CAGE::
+	end @to do:
+
+Move_DRAGON_ENERGY::
+	end @to do:
+
+Move_FREEZING_GLARE::
+	end @to do:
+
+Move_FIERY_WRATH::
+	end @to do:
+
+Move_THUNDEROUS_KICK::
+	end @to do:
+
+Move_GLACIAL_LANCE::
+	end @to do:
+
+Move_ASTRAL_BARRAGE::
+	end @to do:
+
+Move_EERIE_SPELL::
+	end @to do:
+
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
 Move_NONE:
 Move_MIRROR_MOVE:
@@ -23979,6 +24025,7 @@ General_TurnTrap:
 	jumpargeq 0, TRAP_ANIM_WHIRLPOOL, Status_Whirlpool
 	jumpargeq 0, TRAP_ANIM_CLAMP,     Status_Clamp
 	jumpargeq 0, TRAP_ANIM_SAND_TOMB, Status_SandTomb
+	jumpargeq 0, TRAP_ANIM_INFESTATION, Status_Infestation
 	goto Status_BindWrap
 Status_BindWrap:
 	loadspritegfx ANIM_TAG_TENDRILS
@@ -24050,6 +24097,22 @@ Status_SandTomb:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 4, 2, 7, 0, RGB(19, 17, 0)
 	waitforvisualfinish
 	stopsound
+	end
+
+Status_Infestation:
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET @black color
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES @circle particles
+	monbg ANIM_DEF_PARTNER
+	monbgprio_28 ANIM_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_DEF, 0x2, 0x0, 0x9, 0x7320
+	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_TARGET 0x3 0x0 30 0x1
+	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0x0, 30
+	call InfestationVortex
+	call InfestationVortex
+	waitforvisualfinish
+	launchtask AnimTask_BlendBattleAnimPal 0xA 0x5 ANIM_PAL_DEF 0x2 0x9 0x0 0x7320
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
 	end
 
 General_HeldItemEffect:

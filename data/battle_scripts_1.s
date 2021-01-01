@@ -1084,16 +1084,15 @@ BattleScript_EffectFinalGambit:
 	waitstate
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
-	critmessage
-	waitmessage 0x40
 	resultmessage
 	waitmessage 0x40
-	seteffectwithchance
-	tryfaintmon BS_TARGET, FALSE, NULL
-	jumpifmovehadnoeffect BattleScript_MoveEnd
+	dmgtocurrattackerhp
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
+	seteffectwithchance
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+	tryfaintmon BS_TARGET, FALSE, NULL
+	jumpifmovehadnoeffect BattleScript_MoveEnd
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectHitSwitchTarget:

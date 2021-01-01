@@ -83,6 +83,18 @@ static const union AffineAnimCmd sSquishTargetAffineAnimCmds[] =
 };
 
 //// GEN 4
+// shadow sneak
+const struct SpriteTemplate gShadowSneakImpactSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_IceCrystalHit,
+    .callback = AnimIceEffectParticle
+};
+
 // power trick
 const struct SpriteTemplate gPowerTrickSpriteTemplate = 
 {
