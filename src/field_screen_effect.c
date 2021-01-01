@@ -446,7 +446,7 @@ bool8 FieldCB_ReturnToFieldOpenStartMenu(void)
     return FALSE;
 }
 
-static void task_mpl_807E3C8(u8 taskId)
+static void Task_ReturnToFieldNoScript(u8 taskId)
 {
     if (WaitForWeatherFadeIn() == 1)
     {
@@ -456,19 +456,19 @@ static void task_mpl_807E3C8(u8 taskId)
     }
 }
 
-void sub_80AF6D4(void)
+void FieldCB_ReturnToFieldNoScript(void)
 {
     ScriptContext2_Enable();
     FadeInFromBlack();
-    CreateTask(task_mpl_807E3C8, 10);
+    CreateTask(Task_ReturnToFieldNoScript, 10);
 }
 
-void sub_80AF6F0(void)
+void FieldCB_ReturnToFieldNoScriptCheckMusic(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
-    CreateTask(task_mpl_807E3C8, 10);
+    CreateTask(Task_ReturnToFieldNoScript, 10);
 }
 
 static bool32 PaletteFadeActive(void)
