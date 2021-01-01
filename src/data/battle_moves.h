@@ -7986,7 +7986,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FINAL_GAMBIT] =
     {
-        .effect = EFFECT_HIT_SWITCH_TARGET,
+        .effect = EFFECT_FINAL_GAMBIT,
         .power = 1,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
@@ -7994,7 +7994,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGSROCK_AFFECTED,
         .split = SPLIT_SPECIAL,
     },
 
