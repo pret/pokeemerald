@@ -13360,4 +13360,5 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .zMovePower = 0,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = 0
+    },
 };
