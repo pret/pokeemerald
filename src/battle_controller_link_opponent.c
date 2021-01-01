@@ -69,10 +69,10 @@ static void LinkOpponentHandleTwoReturnValues(void);
 static void LinkOpponentHandleChosenMonReturnValue(void);
 static void LinkOpponentHandleOneReturnValue(void);
 static void LinkOpponentHandleOneReturnValue_Duplicate(void);
-static void LinkOpponentHandleCmd37(void);
-static void LinkOpponentHandleCmd38(void);
-static void LinkOpponentHandleCmd39(void);
-static void LinkOpponentHandleCmd40(void);
+static void LinkOpponentHandleClearUnkVar(void);
+static void LinkOpponentHandleSetUnkVar(void);
+static void LinkOpponentHandleClearUnkFlag(void);
+static void LinkOpponentHandleToggleUnkFlag(void);
 static void LinkOpponentHandleHitAnimation(void);
 static void LinkOpponentHandleCmd42(void);
 static void LinkOpponentHandlePlaySE(void);
@@ -104,63 +104,63 @@ static void sub_806782C(void);
 
 static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    LinkOpponentHandleGetMonData,
-    LinkOpponentHandleGetRawMonData,
-    LinkOpponentHandleSetMonData,
-    LinkOpponentHandleSetRawMonData,
-    LinkOpponentHandleLoadMonSprite,
-    LinkOpponentHandleSwitchInAnim,
-    LinkOpponentHandleReturnMonToBall,
-    LinkOpponentHandleDrawTrainerPic,
-    LinkOpponentHandleTrainerSlide,
-    LinkOpponentHandleTrainerSlideBack,
-    LinkOpponentHandleFaintAnimation,
-    LinkOpponentHandlePaletteFade,
-    LinkOpponentHandleSuccessBallThrowAnim,
-    LinkOpponentHandleBallThrowAnim,
-    LinkOpponentHandlePause,
-    LinkOpponentHandleMoveAnimation,
-    LinkOpponentHandlePrintString,
-    LinkOpponentHandlePrintSelectionString,
-    LinkOpponentHandleChooseAction,
-    LinkOpponentHandleUnknownYesNoBox,
-    LinkOpponentHandleChooseMove,
-    LinkOpponentHandleChooseItem,
-    LinkOpponentHandleChoosePokemon,
-    LinkOpponentHandleCmd23,
-    LinkOpponentHandleHealthBarUpdate,
-    LinkOpponentHandleExpUpdate,
-    LinkOpponentHandleStatusIconUpdate,
-    LinkOpponentHandleStatusAnimation,
-    LinkOpponentHandleStatusXor,
-    LinkOpponentHandleDataTransfer,
-    LinkOpponentHandleDMA3Transfer,
-    LinkOpponentHandlePlayBGM,
-    LinkOpponentHandleCmd32,
-    LinkOpponentHandleTwoReturnValues,
-    LinkOpponentHandleChosenMonReturnValue,
-    LinkOpponentHandleOneReturnValue,
-    LinkOpponentHandleOneReturnValue_Duplicate,
-    LinkOpponentHandleCmd37,
-    LinkOpponentHandleCmd38,
-    LinkOpponentHandleCmd39,
-    LinkOpponentHandleCmd40,
-    LinkOpponentHandleHitAnimation,
-    LinkOpponentHandleCmd42,
-    LinkOpponentHandlePlaySE,
-    LinkOpponentHandlePlayFanfareOrBGM,
-    LinkOpponentHandleFaintingCry,
-    LinkOpponentHandleIntroSlide,
-    LinkOpponentHandleIntroTrainerBallThrow,
-    LinkOpponentHandleDrawPartyStatusSummary,
-    LinkOpponentHandleHidePartyStatusSummary,
-    LinkOpponentHandleEndBounceEffect,
-    LinkOpponentHandleSpriteInvisibility,
-    LinkOpponentHandleBattleAnimation,
-    LinkOpponentHandleLinkStandbyMsg,
-    LinkOpponentHandleResetActionMoveSelection,
-    LinkOpponentHandleCmd55,
-    LinkOpponentCmdEnd
+    [CONTROLLER_GETMONDATA]               = LinkOpponentHandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = LinkOpponentHandleGetRawMonData,
+    [CONTROLLER_SETMONDATA]               = LinkOpponentHandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = LinkOpponentHandleSetRawMonData,
+    [CONTROLLER_LOADMONSPRITE]            = LinkOpponentHandleLoadMonSprite,
+    [CONTROLLER_SWITCHINANIM]             = LinkOpponentHandleSwitchInAnim,
+    [CONTROLLER_RETURNMONTOBALL]          = LinkOpponentHandleReturnMonToBall,
+    [CONTROLLER_DRAWTRAINERPIC]           = LinkOpponentHandleDrawTrainerPic,
+    [CONTROLLER_TRAINERSLIDE]             = LinkOpponentHandleTrainerSlide,
+    [CONTROLLER_TRAINERSLIDEBACK]         = LinkOpponentHandleTrainerSlideBack,
+    [CONTROLLER_FAINTANIMATION]           = LinkOpponentHandleFaintAnimation,
+    [CONTROLLER_PALETTEFADE]              = LinkOpponentHandlePaletteFade,
+    [CONTROLLER_SUCCESSBALLTHROWANIM]     = LinkOpponentHandleSuccessBallThrowAnim,
+    [CONTROLLER_BALLTHROWANIM]            = LinkOpponentHandleBallThrowAnim,
+    [CONTROLLER_PAUSE]                    = LinkOpponentHandlePause,
+    [CONTROLLER_MOVEANIMATION]            = LinkOpponentHandleMoveAnimation,
+    [CONTROLLER_PRINTSTRING]              = LinkOpponentHandlePrintString,
+    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = LinkOpponentHandlePrintSelectionString,
+    [CONTROLLER_CHOOSEACTION]             = LinkOpponentHandleChooseAction,
+    [CONTROLLER_UNKNOWNYESNOBOX]          = LinkOpponentHandleUnknownYesNoBox,
+    [CONTROLLER_CHOOSEMOVE]               = LinkOpponentHandleChooseMove,
+    [CONTROLLER_OPENBAG]                  = LinkOpponentHandleChooseItem,
+    [CONTROLLER_CHOOSEPOKEMON]            = LinkOpponentHandleChoosePokemon,
+    [CONTROLLER_23]                       = LinkOpponentHandleCmd23,
+    [CONTROLLER_HEALTHBARUPDATE]          = LinkOpponentHandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = LinkOpponentHandleExpUpdate,
+    [CONTROLLER_STATUSICONUPDATE]         = LinkOpponentHandleStatusIconUpdate,
+    [CONTROLLER_STATUSANIMATION]          = LinkOpponentHandleStatusAnimation,
+    [CONTROLLER_STATUSXOR]                = LinkOpponentHandleStatusXor,
+    [CONTROLLER_DATATRANSFER]             = LinkOpponentHandleDataTransfer,
+    [CONTROLLER_DMA3TRANSFER]             = LinkOpponentHandleDMA3Transfer,
+    [CONTROLLER_PLAYBGM]                  = LinkOpponentHandlePlayBGM,
+    [CONTROLLER_32]                       = LinkOpponentHandleCmd32,
+    [CONTROLLER_TWORETURNVALUES]          = LinkOpponentHandleTwoReturnValues,
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = LinkOpponentHandleChosenMonReturnValue,
+    [CONTROLLER_ONERETURNVALUE]           = LinkOpponentHandleOneReturnValue,
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = LinkOpponentHandleOneReturnValue_Duplicate,
+    [CONTROLLER_CLEARUNKVAR]              = LinkOpponentHandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = LinkOpponentHandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = LinkOpponentHandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = LinkOpponentHandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = LinkOpponentHandleHitAnimation,
+    [CONTROLLER_42]                       = LinkOpponentHandleCmd42,
+    [CONTROLLER_PLAYSE]                   = LinkOpponentHandlePlaySE,
+    [CONTROLLER_PLAYFANFAREORBGM]         = LinkOpponentHandlePlayFanfareOrBGM,
+    [CONTROLLER_FAINTINGCRY]              = LinkOpponentHandleFaintingCry,
+    [CONTROLLER_INTROSLIDE]               = LinkOpponentHandleIntroSlide,
+    [CONTROLLER_INTROTRAINERBALLTHROW]    = LinkOpponentHandleIntroTrainerBallThrow,
+    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = LinkOpponentHandleDrawPartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = LinkOpponentHandleHidePartyStatusSummary,
+    [CONTROLLER_ENDBOUNCE]                = LinkOpponentHandleEndBounceEffect,
+    [CONTROLLER_SPRITEINVISIBILITY]       = LinkOpponentHandleSpriteInvisibility,
+    [CONTROLLER_BATTLEANIMATION]          = LinkOpponentHandleBattleAnimation,
+    [CONTROLLER_LINKSTANDBYMSG]           = LinkOpponentHandleLinkStandbyMsg,
+    [CONTROLLER_RESETACTIONMOVESELECTION] = LinkOpponentHandleResetActionMoveSelection,
+    [CONTROLLER_55]                       = LinkOpponentHandleCmd55,
+    [CONTROLLER_TERMINATOR_NOP]           = LinkOpponentCmdEnd
 };
 
 static void nullsub_28(void)
@@ -1604,27 +1604,27 @@ static void LinkOpponentHandleOneReturnValue_Duplicate(void)
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleCmd37(void)
+static void LinkOpponentHandleClearUnkVar(void)
 {
-    gUnknown_02022D0C.field_0 = 0;
+    gUnusedControllerStruct.unk = 0;
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleCmd38(void)
+static void LinkOpponentHandleSetUnkVar(void)
 {
-    gUnknown_02022D0C.field_0 = gBattleBufferA[gActiveBattler][1];
+    gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleCmd39(void)
+static void LinkOpponentHandleClearUnkFlag(void)
 {
-    gUnknown_02022D0C.flag_x80 = 0;
+    gUnusedControllerStruct.flag = 0;
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleCmd40(void)
+static void LinkOpponentHandleToggleUnkFlag(void)
 {
-    gUnknown_02022D0C.flag_x80 ^= 1;
+    gUnusedControllerStruct.flag ^= 1;
     LinkOpponentBufferExecCompleted();
 }
 

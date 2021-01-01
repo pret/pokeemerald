@@ -17,7 +17,7 @@
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
 static EWRAM_DATA u8 sUnknown_02022D0A = 0;
-EWRAM_DATA struct UnusedControllerStruct gUnknown_02022D0C = {};
+EWRAM_DATA struct UnusedControllerStruct gUnusedControllerStruct = {}; // Debug? Unused code that writes to it, never read
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
 // this file's funcionts
@@ -1282,7 +1282,7 @@ void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *unusedDumbDataPara
 {
     s32 i;
 
-    sBattleBuffersTransferData[0] = CONTROLLER_31;
+    sBattleBuffersTransferData[0] = CONTROLLER_PLAYBGM;
     sBattleBuffersTransferData[1] = songId;
     sBattleBuffersTransferData[2] = (songId & 0xFF00) >> 8;
     for (i = 0; i < songId; i++) // ????
@@ -1340,37 +1340,37 @@ void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitCmd37(u8 bufferId)
+void BtlController_EmitClearUnkVar(u8 bufferId)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_37;
-    sBattleBuffersTransferData[1] = CONTROLLER_37;
-    sBattleBuffersTransferData[2] = CONTROLLER_37;
-    sBattleBuffersTransferData[3] = CONTROLLER_37;
+    sBattleBuffersTransferData[0] = CONTROLLER_CLEARUNKVAR;
+    sBattleBuffersTransferData[1] = CONTROLLER_CLEARUNKVAR;
+    sBattleBuffersTransferData[2] = CONTROLLER_CLEARUNKVAR;
+    sBattleBuffersTransferData[3] = CONTROLLER_CLEARUNKVAR;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitCmd38(u8 bufferId, u8 b)
+void BtlController_EmitSetUnkVar(u8 bufferId, u8 b)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_38;
+    sBattleBuffersTransferData[0] = CONTROLLER_SETUNKVAR;
     sBattleBuffersTransferData[1] = b;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 2);
 }
 
-void BtlController_EmitCmd39(u8 bufferId)
+void BtlController_EmitClearUnkFlag(u8 bufferId)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_39;
-    sBattleBuffersTransferData[1] = CONTROLLER_39;
-    sBattleBuffersTransferData[2] = CONTROLLER_39;
-    sBattleBuffersTransferData[3] = CONTROLLER_39;
+    sBattleBuffersTransferData[0] = CONTROLLER_CLEARUNKFLAG;
+    sBattleBuffersTransferData[1] = CONTROLLER_CLEARUNKFLAG;
+    sBattleBuffersTransferData[2] = CONTROLLER_CLEARUNKFLAG;
+    sBattleBuffersTransferData[3] = CONTROLLER_CLEARUNKFLAG;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitCmd40(u8 bufferId)
+void BtlController_EmitToggleUnkFlag(u8 bufferId)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_40;
-    sBattleBuffersTransferData[1] = CONTROLLER_40;
-    sBattleBuffersTransferData[2] = CONTROLLER_40;
-    sBattleBuffersTransferData[3] = CONTROLLER_40;
+    sBattleBuffersTransferData[0] = CONTROLLER_TOGGLEUNKFLAG;
+    sBattleBuffersTransferData[1] = CONTROLLER_TOGGLEUNKFLAG;
+    sBattleBuffersTransferData[2] = CONTROLLER_TOGGLEUNKFLAG;
+    sBattleBuffersTransferData[3] = CONTROLLER_TOGGLEUNKFLAG;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
@@ -1394,7 +1394,7 @@ void BtlController_EmitCmd42(u8 bufferId)
 
 void BtlController_EmitPlaySE(u8 bufferId, u16 songId)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_EFFECTIVENESSSOUND;
+    sBattleBuffersTransferData[0] = CONTROLLER_PLAYSE;
     sBattleBuffersTransferData[1] = songId;
     sBattleBuffersTransferData[2] = (songId & 0xFF00) >> 8;
     sBattleBuffersTransferData[3] = 0;
