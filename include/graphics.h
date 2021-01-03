@@ -5014,6 +5014,11 @@ extern const u16 gPokenavMessageBox_Pal[];
 extern const u32 gPokenavOptions_Gfx[];
 extern const u16 gPokenavOptions_Pal[];
 
+// Battle Factory Screen
+extern const u8 gFrontierFactorySelectMenu_Gfx[];
+extern const u8 gFrontierFactorySelectMenu_Tilemap[];
+extern const u16 gFrontierFactorySelectMenu_Pal[];
+
 // Object event pals
 extern const u16 gObjectEventPal_Brendan[];
 extern const u16 gObjectEventPal_May[];
