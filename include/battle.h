@@ -520,6 +520,7 @@ struct BattleStruct
     u8 savedBattlerTarget;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u8 activeAbilityPopUps; // as bits for each battler
+    u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
     const u8 *trainerSlideMsg;
@@ -611,6 +612,7 @@ struct BattleScripting
     u16 moveEffect;
     u16 multihitMoveEffect;
     u8 illusionNickHack; // To properly display nick in STRINGID_ENEMYABOUTTOSWITCHPKMN.
+    bool8 fixedPopup;   // force ability popup to stick until manually called back
 };
 
 // rom_80A5C6C

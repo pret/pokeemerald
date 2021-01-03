@@ -109,12 +109,14 @@
 #define B_DISABLE_TURNS             GEN_6 // Disable's turns. See Cmd_disablelastusedattack.
 #define B_INCINERATE_GEMS           GEN_6 // In Gen6+, Incinerate can destroy Gems.
 #define B_MINIMIZE_DMG_ACC          GEN_6 // In Gen6+, moves that causes double damage to minimized Pokémon will also skip accuracy checks.
+#define B_PP_REDUCED_BY_SPITE       GEN_6 // In Gen4+, Spite reduces the foe's last move's PP by 4, instead of 2 to 5.
+#define B_CAN_SPITE_FAIL            GEN_6 // In Gen4+, Spite can no longer fail if the foe's last move only has 1 remaining PP.
 #define B_CRASH_IF_TARGET_IMMUNE    GEN_6 // In Gen4+, The user of Jump Kick or Hi Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
 
 // Ability settings
-#define B_ABILITY_WEATHER           GEN_6 // In Gen5+, weather caused by abilities lasts the same amount of turns as induced from a move. Before, they lasted till the battle's end or weather change by a move.
+#define B_ABILITY_WEATHER           GEN_6 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move.
 #define B_GALE_WINGS                GEN_6 // In Gen7+ requires full HP to trigger.
-#define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7+, Aegislash's form change does not happen, if the Pokémon cannot use a move, because of confusion, paralysis, etc. In gen6, the form change occurs despite not being able to move.
+#define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7+, Stance Change fails if the Pokémon is unable to use a move because of confusion, paralysis, etc. In Gen6, it doesn't.
 #define B_GHOSTS_ESCAPE             GEN_6 // In Gen6+, ghosts can escape even when blocked by abilities such as Shadow Tag.
 #define B_MOODY_ACC_EVASION         GEN_6 // In Gen8+, Moody CANNOT raise Accuray and Evasion any more.
 #define B_FLASH_FIRE_FROZEN         GEN_6 // In Gen5+, Flash Fire can trigger even when frozen, when it couldn't before.
@@ -125,8 +127,9 @@
 #define B_HP_BERRIES                GEN_6 // In Gen4+, berries which restore hp activate immediately after hp drops to half. In gen3, the effect occurs at the end of the turn.
 #define B_BERRIES_INSTANT           GEN_6 // In Gen4+, most berries activate on battle start/switch-in if applicable. In gen3, they only activate either at the move end or turn end.
 
-// Flag settings.
-// To use the following features in scripting, replace the 0s with the flag ID you're assigning it to. Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag for toggling the feature.
+// Flag settings
+// To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
+// Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
 #define B_FLAG_INVERSE_BATTLE       0     // If this flag is set, the battle's type effectiveness are inversed. For example, fire is super effective against water.
 #define B_FLAG_FORCE_DOUBLE_WILD    0     // If this flag is set, all land and surfing wild battles will be double battles.
 
