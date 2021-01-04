@@ -6,7 +6,7 @@ COMPARE ?= 0
 # with when we want to use $(CC) to preprocess files
 # thus, manually create the variables for the bin
 # files, or use arm-none-eabi binaries on the system
-# if dkP is not installed on tihs system
+# if dkP is not installed on this system
 
 ifneq (,$(TOOLCHAIN))
 ifneq ($(wildcard $(TOOLCHAIN)/bin),)
@@ -36,10 +36,21 @@ MAKER_CODE  := 01
 REVISION    := 0
 MODERN      ?= 0
 
+# use arm-none-eabi-cpp for macOS
+# as macOS's default compiler is clang
+# and clang's preprocessor will warn on \u
+# when preprocessing asm files, expecting a unicode literal
+# we can't unconditionally use arm-none-eabi-cpp
+# as installations which install binutils-arm-none-eabi
+# don't come with it
 ifneq ($(MODERN),1)
-CPP := $(CC) -E
+  ifeq ($(shell uname -s),Darwin)
+    CPP := $(PREFIX)cpp
+  else
+    CPP := $(CC) -E
+  endif
 else
-CPP := $(PREFIX)cpp
+  CPP := $(PREFIX)cpp
 endif
 
 ROM_NAME := pokeemerald.gba
@@ -362,7 +373,7 @@ modern: ; @$(MAKE) MODERN=1
 berry_fix/berry_fix.gba: berry_fix
 
 berry_fix:
-	@$(MAKE) -C berry_fix COMPARE=$(COMPARE) TOOLCHAIN=$(TOOLCHAIN)
+	@$(MAKE) -C berry_fix COMPARE=$(COMPARE) TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
 libagbsyscall:
-	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
+	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
