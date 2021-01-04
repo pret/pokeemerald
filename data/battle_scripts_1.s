@@ -1082,16 +1082,15 @@ BattleScript_EffectFinalGambit:
 	waitstate
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
-	critmessage
-	waitmessage 0x40
 	resultmessage
 	waitmessage 0x40
-	seteffectwithchance
-	tryfaintmon BS_TARGET, FALSE, NULL
-	jumpifmovehadnoeffect BattleScript_MoveEnd
+	dmgtocurrattackerhp
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
+	seteffectwithchance
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+	tryfaintmon BS_TARGET, FALSE, NULL
+	jumpifmovehadnoeffect BattleScript_MoveEnd
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectHitSwitchTarget:
@@ -2806,6 +2805,10 @@ BattleScript_EffectDoubleHit::
 BattleScript_EffectRecoilIfMiss::
 	attackcanceler
 	accuracycheck BattleScript_MoveMissedDoDamage, ACC_CURR_MOVE
+.if B_CRASH_IF_TARGET_IMMUNE >= GEN_4
+	typecalc
+	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveMissedDoDamage
+.endif
 	goto BattleScript_HitFromAtkString
 BattleScript_MoveMissedDoDamage::
 	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_PrintMoveMissed
@@ -2814,19 +2817,33 @@ BattleScript_MoveMissedDoDamage::
 	pause 0x40
 	resultmessage
 	waitmessage 0x40
+.if B_CRASH_IF_TARGET_IMMUNE < GEN_4
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
+.endif
 	printstring STRINGID_PKMNCRASHED
 	waitmessage 0x40
 	damagecalc
 	typecalc
 	adjustdamage
+.if B_CRASH_IF_TARGET_IMMUNE == GEN_4
+	manipulatedamage DMG_RECOIL_FROM_IMMUNE
+.else
 	manipulatedamage DMG_RECOIL_FROM_MISS
+.endif
+.if B_CRASH_IF_TARGET_IMMUNE >= GEN_4
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
+.else
 	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED
+.endif
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+.if B_CRASH_IF_TARGET_IMMUNE >= GEN_4
+	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
+.else
 	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED
+.endif
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectMist::

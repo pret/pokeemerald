@@ -8555,7 +8555,9 @@ static void Cmd_manipulatedamage(void)
         gBattleMoveDamage /= 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
-        if (B_RECOIL_IF_MISS_DMG >= GEN_5 || ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage))
+        if (B_RECOIL_IF_MISS_DMG >= GEN_5)
+            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        if ((B_RECOIL_IF_MISS_DMG <= GEN_4) && ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage))
             gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
         break;
     case DMG_DOUBLED:
@@ -8577,6 +8579,9 @@ static void Cmd_manipulatedamage(void)
         break;
     case DMG_1_2_ATTACKER_HP:
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        break;
+    case DMG_RECOIL_FROM_IMMUNE:
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
         break;
     }
 
