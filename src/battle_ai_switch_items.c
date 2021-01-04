@@ -773,7 +773,7 @@ static u8 GetAI_ItemType(u16 itemId, const u8 *itemEffect)
         return AI_ITEM_HEAL_HP;
     else if (itemEffect[3] & ITEM3_STATUS_ALL)
         return AI_ITEM_CURE_CONDITION;
-#if X_ITEMS_REWORK == TRUE
+#ifdef ITEM_EXPANSION
     else if ((itemEffect[0] & ITEM0_DIRE_HIT) || itemEffect[1])
 #else
     else if (itemEffect[0] & (ITEM0_DIRE_HIT | ITEM0_X_ATTACK) || itemEffect[1] != 0 || itemEffect[2] != 0)
@@ -887,7 +887,7 @@ static bool8 ShouldUseItem(void)
             *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) = 0;
             if (gDisableStructs[gActiveBattler].isFirstTurn == 0)
                 break;
-        #if X_ITEMS_REWORK == FALSE
+        #ifndef ITEM_EXPANSION
             if (itemEffects[0] & ITEM0_X_ATTACK)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x1;
             if (itemEffects[1] & ITEM1_X_DEFEND)

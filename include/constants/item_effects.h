@@ -2,7 +2,7 @@
 #define GUARD_CONSTANTS_ITEM_EFFECTS_H
 
 // field 0 masks
-#if X_ITEMS_REWORK == FALSE
+#ifndef ITEM_EXPANSION
 #define ITEM0_X_ATTACK          0x0F
 #endif
 #define ITEM0_DIRE_HIT          0x30 // Works the same way as the move Focus Energy.
@@ -10,7 +10,7 @@
 #define ITEM0_INFATUATION       0x80
 
 // field 1 masks
-#if X_ITEMS_REWORK == FALSE
+#ifndef ITEM_EXPANSION
 #define ITEM1_X_SPEED           0x0F
 #define ITEM1_X_DEFEND          0xF0
 
@@ -20,7 +20,7 @@
 #endif
 
 // alt field 1 masks
-#if X_ITEMS_REWORK == TRUE
+#ifdef ITEM_EXPANSION
 #define ITEM1_X_ATTACK          0x1
 #define ITEM1_X_DEFEND          0x2
 #define ITEM1_X_SPEED           0x4
