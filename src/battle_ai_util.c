@@ -859,23 +859,36 @@ u8 GetMoveDamageResult(u16 move)
 
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    u16 typeEffectiveness, moveType;
+    u8 damageVar;
+    u32 effectivenessMultiplier;
 
-    SaveBattlerData(battlerAtk);
-    SaveBattlerData(battlerDef);
+    gMoveResultFlags = 0;
+    gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
+    effectivenessMultiplier = AI_GetTypeEffectiveness(gCurrentMove, sBattler_AI, gBattlerTarget);
+    switch (effectivenessMultiplier)
+    {
+    case UQ_4_12(0.0):
+    default:
+        damageVar = AI_EFFECTIVENESS_x0;
+        break;
+    case UQ_4_12(0.25):
+        damageVar = AI_EFFECTIVENESS_x0_25;
+        break;
+    case UQ_4_12(0.5):
+        damageVar = AI_EFFECTIVENESS_x0_5;
+        break;
+    case UQ_4_12(1.0):
+        damageVar = AI_EFFECTIVENESS_x1;
+        break;
+    case UQ_4_12(2.0):
+        damageVar = AI_EFFECTIVENESS_x2;
+        break;
+    case UQ_4_12(4.0):
+        damageVar = AI_EFFECTIVENESS_x4;
+        break;
+    }
 
-    SetBattlerData(battlerAtk);
-    SetBattlerData(battlerDef);
-
-    gBattleStruct->dynamicMoveType = 0;
-    SetTypeBeforeUsingMove(move, battlerAtk);
-    GET_MOVE_TYPE(move, moveType);
-    typeEffectiveness = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
-
-    RestoreBattlerData(battlerAtk);
-    RestoreBattlerData(battlerDef);
-
-    return typeEffectiveness;
+    return damageVar;
 }
 
 u8 AI_GetMoveEffectiveness(u16 move)
@@ -1096,7 +1109,7 @@ bool32 DoesBattlerIgnoreAbilityChecks(u16 atkAbility, u16 move)
     u32 i;
     
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
-        return FALSE;   // AI doesn't understand ability suppression concept
+        return FALSE;   // AI handicap flag: doesn't understand ability suppression concept
     
     for (i = 0; i < ARRAY_COUNT(sIgnoreMoldBreakerMoves); i++)
     {
@@ -1331,7 +1344,7 @@ bool32 IsMoveEncouragedToHit(u8 battlerAtk, u8 battlerDef, u16 move)
 bool32 ShouldTryOHKO(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u32 accuracy, u16 move)
 {
     u32 holdEffect = AI_GetHoldEffect(battlerDef);
-    
+        
     gPotentialItemEffectBattler = battlerDef;
     if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < GetBattlerHoldEffectParam(battlerDef))
         return FALSE;   //probabilistically speaking, focus band should activate so dont OHKO
@@ -1499,11 +1512,19 @@ void ProtectChecks(u8 battlerAtk, u8 battlerDef, u16 move, u16 predictedMove, s1
 }
 
 // stat stages
-bool32 BattlerStatCanFall(u8 battler, u16 battlerAbility, u8 stat)
+bool32 ShouldLowerStat(u8 battler, u16 battlerAbility, u8 stat)
 {
     if ((gBattleMons[battler].statStages[stat] > MIN_STAT_STAGE && battlerAbility != ABILITY_CONTRARY)
       || (battlerAbility == ABILITY_CONTRARY && gBattleMons[battler].statStages[stat] < MAX_STAT_STAGE))
+    {
+        if (battlerAbility == ABILITY_CLEAR_BODY
+         || battlerAbility == ABILITY_WHITE_SMOKE
+         || battlerAbility == ABILITY_FULL_METAL_BODY)
+            return FALSE;
+            
         return TRUE;
+    }
+    
     return FALSE;
 }
 
@@ -1560,18 +1581,6 @@ u32 CountNegativeStatStages(u8 battlerId)
             count++;
     }
     return count;
-}
-
-// checks for growth, gear up, work up
-bool32 BattlerShouldRaiseAttacks(u8 battlerId, u16 ability)
-{
-    if (((!BattlerStatCanRise(battlerId, ability, STAT_ATK)|| !HasMoveWithSplit(battlerId, SPLIT_PHYSICAL))
-      && (!BattlerStatCanRise(battlerId, ability, STAT_SPATK) || !HasMoveWithSplit(battlerId, SPLIT_SPECIAL)))
-      || ability == ABILITY_CONTRARY)
-    {
-        return FALSE;
-    }
-    return TRUE;
 }
 
 bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
@@ -2521,7 +2530,7 @@ bool32 ShouldPoisonSelf(u8 battler, u16 ability)
       || (ability == ABILITY_GUTS && HasMoveWithSplit(battler, SPLIT_PHYSICAL))
       || HasMoveEffect(battler, EFFECT_FACADE)
       || HasMoveEffect(battler, EFFECT_PSYCHO_SHIFT)))
-        return TRUE;
+        return TRUE;    // battler can be poisoned and has move/ability that synergizes with being poisoned
     return FALSE;
 }
 
@@ -2539,12 +2548,19 @@ bool32 AI_CanPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 
     return TRUE;
 }
 
-bool32 AI_CanParalyze(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
+static bool32 CanBeParayzed(battlerDef, defAbility)
 {
     if (defAbility == ABILITY_LIMBER
       || IS_BATTLER_OF_TYPE(battlerDef, TYPE_ELECTRIC)
       || gBattleMons[battlerDef].status1 & STATUS1_ANY
-      || IsAbilityStatusProtected(battlerDef)
+      || IsAbilityStatusProtected(battlerDef))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 AI_CanParalyze(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 partnerMove)
+{
+    if (!CanBeParayzed(battlerDef, defAbility)
       || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || PartnerMoveEffectIsStatusSameTarget(BATTLE_PARTNER(battlerAtk), battlerDef, partnerMove))
@@ -2563,7 +2579,7 @@ bool32 CanBeConfused(u8 battler, u16 ability)
 
 bool32 AI_CanConfuse(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPartner, u16 move, u16 partnerMove)
 {
-    if (CanBeConfused(battlerDef, defAbility)
+    if (!CanBeConfused(battlerDef, defAbility)
       || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || DoesPartnerHaveSameMoveEffect(battlerAtkPartner, battlerDef, move, partnerMove))
@@ -2613,13 +2629,12 @@ bool32 AI_CanBurn(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtkPar
 
 bool32 AI_CanBeInfatuated(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 atkGender, u8 defGender)
 {
-    if (IsBattlerAlive(battlerDef)
-      && !(gBattleMons[battlerDef].status2 & STATUS2_INFATUATION)
-      && defAbility != ABILITY_OBLIVIOUS
-      && atkGender != defGender
-      && atkGender != MON_GENDERLESS
-      && defGender != MON_GENDERLESS
-      && !IsAbilityOnSide(battlerDef, ABILITY_AROMA_VEIL))
+    if ((gBattleMons[battlerDef].status2 & STATUS2_INFATUATION)
+      || defAbility == ABILITY_OBLIVIOUS
+      || atkGender == defGender
+      || atkGender == MON_GENDERLESS
+      || defGender == MON_GENDERLESS
+      || !IsAbilityOnSide(battlerDef, ABILITY_AROMA_VEIL))
         return FALSE;
     return TRUE;
 }
@@ -2628,7 +2643,7 @@ u32 ShouldTryToFlinch(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbili
 {
     if (defAbility == ABILITY_INNER_FOCUS
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
-      || GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 1)
+      || GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 1) // opponent goes first
     {
         return 0;   // don't try to flinch
     }
@@ -2863,7 +2878,7 @@ bool32 IsTargetingPartner(u8 battlerAtk, u8 battlerDef)
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         return FALSE;
 
-    if (battlerDef == BATTLE_PARTNER(battlerAtk))
+    if ((battlerAtk & BIT_SIDE) == (battlerDef & BIT_SIDE))
         return TRUE;
     
     return FALSE;

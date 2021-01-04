@@ -55,13 +55,12 @@ s8 GetAbilityRating(u16 ability);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u8 battlerId);
-bool32 BattlerStatCanFall(u8 battler, u16 battlerAbility, u8 stat);
+bool32 ShouldLowerStat(u8 battler, u16 battlerAbility, u8 stat);
 bool32 BattlerStatCanRise(u8 battler, u16 battlerAbility, u8 stat);
 bool32 AreBattlersStatsMaxed(u8 battler);
 bool32 BattlerHasAnyStatRaised(u8 battlerId);
 u32 CountPositiveStatStages(u8 battlerId);
 u32 CountNegativeStatStages(u8 battlerId);
-bool32 BattlerShouldRaiseAttacks(u8 battlerId, u16 ability);
 bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
 bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
 bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);

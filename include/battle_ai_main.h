@@ -7,6 +7,19 @@
 #define AI_CHOICE_WATCH 5
 #define AI_CHOICE_SWITCH 7
 
+#define RETURN_SCORE_PLUS(val)      \
+{                                   \
+    score += val;                   \
+    return score;                   \
+}
+
+#define RETURN_SCORE_MINUS(val)     \
+{                                   \
+    score -= val;                   \
+    return score;                   \
+}
+
+
 void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void BattleAI_SetupAIData(u8 defaultScoreMoves);
