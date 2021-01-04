@@ -35,6 +35,7 @@
 #define sMOVE_EFFECT gBattleScripting + 0x2E
 #define sMULTIHIT_EFFECT gBattleScripting + 0x30
 #define sILLUSION_NICK_HACK gBattleScripting + 0x32
+#define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 
@@ -165,6 +166,7 @@
 #define VARIOUS_SET_LAST_USED_ITEM              99
 #define VARIOUS_PARALYZE_TYPE_IMMUNITY          100
 #define VARIOUS_JUMP_IF_ABSENT                  101
+#define VARIOUS_DESTROY_ABILITY_POPUP           102
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -175,6 +177,7 @@
 #define DMG_CURR_ATTACKER_HP       5
 #define DMG_BIG_ROOT               6
 #define DMG_1_2_ATTACKER_HP        7
+#define DMG_RECOIL_FROM_IMMUNE     8 // Used to calculate recoil for the Gen 4 version of Jump Kick
 
 // Cmd_jumpifcantswitch
 #define SWITCH_IGNORE_ESCAPE_PREVENTION   0x80
