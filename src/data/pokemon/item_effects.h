@@ -325,7 +325,7 @@ const u8 gItemEffect_DireHit[8] = {
 };
 
 const u8 gItemEffect_XAttack[8] = {
-#if X_ITEMS_REWORK == TRUE
+#ifdef BATTLE_ENGINE
     [1] = ITEM1_X_ATTACK,
 #else
     [0] = 1,
@@ -336,7 +336,7 @@ const u8 gItemEffect_XAttack[8] = {
 };
 
 const u8 gItemEffect_XDefend[8] = {
-#if X_ITEMS_REWORK == TRUE
+#ifdef BATTLE_ENGINE
     [1] = ITEM1_X_DEFEND,
 #else
     [1] = 1 << 4,
@@ -347,7 +347,7 @@ const u8 gItemEffect_XDefend[8] = {
 };
 
 const u8 gItemEffect_XSpeed[8] = {
-#if X_ITEMS_REWORK == TRUE
+#ifdef BATTLE_ENGINE
     [1] = ITEM1_X_SPEED,
 #else
     [1] = 1,
@@ -358,7 +358,7 @@ const u8 gItemEffect_XSpeed[8] = {
 };
 
 const u8 gItemEffect_XAccuracy[8] = {
-#if X_ITEMS_REWORK == TRUE
+#ifdef BATTLE_ENGINE
     [1] = ITEM1_X_ACCURACY,
 #else
     [2] = 1 << 4,
@@ -369,7 +369,7 @@ const u8 gItemEffect_XAccuracy[8] = {
 };
 
 const u8 gItemEffect_XSpecialAttack[8] = {
-#if X_ITEMS_REWORK == TRUE
+#ifdef BATTLE_ENGINE
     [1] = ITEM1_X_SPATK,
 #else
     [2] = 1,
@@ -380,7 +380,7 @@ const u8 gItemEffect_XSpecialAttack[8] = {
 };
 
 const u8 gItemEffect_XSpecialDefense[8] = {
-#if X_ITEMS_REWORK == TRUE
+#ifdef BATTLE_ENGINE
     [1] = ITEM1_X_SPDEF,
 #else
     [2] = 1,
