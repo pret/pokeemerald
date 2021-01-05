@@ -3042,7 +3042,7 @@ static void SpriteCB_PokedexListMonSprite(struct Sprite *sprite)
         if (gSineTable[sprite->data[5] + 64] != 0)
             var = 0x10000 / gSineTable[sprite->data[5] + 64];
         else
-            var = 0xFFFF;
+            var = 0;
 #else
         var = 0x10000 / gSineTable[sprite->data[5] + 64];
 #endif //UBFIX
