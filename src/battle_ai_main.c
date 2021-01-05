@@ -48,7 +48,7 @@ EWRAM_DATA u8 sBattler_AI = 0;
 // const rom data
 static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
-static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
+static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_Risky(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_PreferStrongestMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
@@ -63,7 +63,7 @@ static s16 (*const sBattleAiFuncTable[])(u8, u8, u16, s16) =
 {
     [0] = AI_CheckBadMove,           // AI_FLAG_CHECK_BAD_MOVE
     [1] = AI_TryToFaint,             // AI_FLAG_TRY_TO_FAINT
-    [2] = AI_CheckGoodMove,          // AI_FLAG_CHECK_GOOD_MOVE
+    [2] = AI_CheckViability,         // AI_FLAG_CHECK_VIABILITY
     [3] = AI_SetupFirstTurn,         // AI_FLAG_SETUP_FIRST_TURN
     [4] = AI_Risky,                  // AI_FLAG_RISKY
     [5] = AI_PreferStrongestMove,    // AI_FLAG_PREFER_STRONGEST_MOVE
@@ -136,7 +136,7 @@ void BattleAI_SetupFlags(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
         AI_THINKING_STRUCT->aiFlags = GetAiScriptsInBattleFactory();
     else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
-        AI_THINKING_STRUCT->aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_GOOD_MOVE | AI_FLAG_TRY_TO_FAINT;
+        AI_THINKING_STRUCT->aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags | gTrainers[gTrainerBattleOpponent_B].aiFlags;
     else
@@ -278,13 +278,13 @@ static u8 ChooseMoveOrAction_Singles(void)
         && !(gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
         && !(gStatuses3[gActiveBattler] & STATUS3_ROOTED)
         && !(gBattleTypeFlags & (BATTLE_TYPE_ARENA | BATTLE_TYPE_PALACE))
-        && AI_THINKING_STRUCT->aiFlags & (AI_FLAG_CHECK_GOOD_MOVE | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_PREFER_BATON_PASS))
+        && AI_THINKING_STRUCT->aiFlags & (AI_FLAG_CHECK_VIABILITY | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_PREFER_BATON_PASS))
     {
         // Consider switching if all moves are worthless to use.
         if (GetTotalBaseStat(gBattleMons[sBattler_AI].species) >= 310 // Mon is not weak.
             && gBattleMons[sBattler_AI].hp >= gBattleMons[sBattler_AI].maxHP / 2)
         {
-            s32 cap = AI_THINKING_STRUCT->aiFlags & (AI_FLAG_CHECK_GOOD_MOVE) ? 95 : 93;
+            s32 cap = AI_THINKING_STRUCT->aiFlags & (AI_FLAG_CHECK_VIABILITY) ? 95 : 93;
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 if (AI_THINKING_STRUCT->score[i] > cap)
@@ -2094,7 +2094,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             }
             else
             {
-                if (GetBattlerSideSpeedAverage(battlerAtk) > GetBattlerSideSpeedAverage(battlerDef)) // Attacker side faster than target side
+                if (GetBattlerSideSpeedAverage(battlerAtk) >= GetBattlerSideSpeedAverage(battlerDef)) // Attacker side faster than target side
                     score -= 10; // Keep the Trick Room down
             }
             break;
@@ -2392,27 +2392,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;*/
     } // move effect checks
-    
-    // substitute check
-    if (IS_MOVE_STATUS(move) && DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
-        score -= 10;
-        
-    // damage check
-    if (!IS_MOVE_STATUS(move))
-    {
-        if (gMoveResultFlags & (MOVE_RESULT_NO_EFFECT | MOVE_RESULT_MISSED))
-            score -= 15;
-        
-        if (effectiveness < AI_EFFECTIVENESS_x1 || GetMoveDamageResult(move) <= MOVE_POWER_WEAK)
-            score -= 4;
-    }
-    
-    // helping hand check
-    if (isDoubleBattle
-      && AI_DATA->partnerMove != MOVE_NONE
-      && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_HELPING_HAND
-      && IS_MOVE_STATUS(move))
-        score -= 10; // Don't use a status move if partner helping
     
     if (score < 0)
         score = 0;
@@ -2721,51 +2700,66 @@ static s16 AI_TryOnAlly(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     RETURN_SCORE_MINUS(30);    // otherwise, we do not want to target our ally
 }
 
-// AI_FLAG_CHECK_GOOD_MOVE - increases move scores
-static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
+// AI_FLAG_CHECK_VIABILITY - a weird mix of increasing and decreasing scores
+static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     // move data
     u16 moveEffect = gBattleMoves[move].effect;
     u8 effectiveness = AI_GetMoveEffectiveness(move);
+    u8 typeEffectiveness = AI_GetTypeEffectiveness(move, battlerAtk, battlerDef);
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 predictedMove = gLastMoves[battlerDef]; //for now
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
+    u8 atkHpPercent = GetHealthPercentage(battlerAtk);
+    u8 defHpPercent = GetHealthPercentage(battlerDef);
     
     // Targeting partner, check benefits of doing that instead
     if (IsTargetingPartner(battlerAtk, battlerDef))
         return score;
     
-    // check move results
-    if (gMoveResultFlags & (MOVE_RESULT_NO_EFFECT | MOVE_RESULT_MISSED))
-        return 0;   // don't use ineffective moves
-    
-    // if target goes first and can kill us, lets try to use a priority move to at least do something
-    if (!(gBattleMons[battlerDef].status2 & (STATUS2_RECHARGE | STATUS2_BIDE))
-      && CanTargetFaintAi(battlerAtk, battlerDef)
-      && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 1 // opponent should go first
-      && atkPriority > 0)
-        score += 5;
-    
-    // if target is evasive (or we have low accuracy)) and this move always hits, boost its score
+    // check always hits
     if (!IS_MOVE_STATUS(move) && gBattleMoves[move].accuracy == 0)
     {
-        if (gBattleMons[battlerDef].statStages[STAT_EVASION] >= 8)
+        if (gBattleMons[battlerDef].statStages[STAT_EVASION] >= 10 || gBattleMons[battlerAtk].statStages[STAT_ACC] <= 2)
             score++;
-        else if (gBattleMons[battlerAtk].statStages[STAT_ACC] <= 4)
+        if (AI_RandLessThan(100) && (gBattleMons[battlerDef].statStages[STAT_EVASION] >= 8 || gBattleMons[battlerAtk].statStages[STAT_ACC] <= 4))
             score++;
     }
     
-    // prefer good damaging moves
-    if (GetMoveDamageResult(move) == MOVE_POWER_BEST)
-        score += 2;
+    // check high crit
+    if (TestMoveFlags(move, FLAG_HIGH_CRIT) && effectiveness >= AI_EFFECTIVENESS_x2 && AI_RandLessThan(128))
+        score++;
+    
+    // check already dead
+    if (!IsBattlerIncapacitated(battlerDef, AI_DATA->defAbility)
+      && CanTargetFaintAi(battlerAtk, battlerDef)
+      && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 1) // opponent should go first
+    {
+        if (atkPriority > 0) 
+            score++;
+        else
+            score--;
+    }
+    
+    // check damage
+    if (gBattleMoves[move].power != 0 && GetMoveDamageResult(move) == MOVE_POWER_WEAK)
+        score--;
+    
+    /*if (CountUsablePartyMons(battlerAtk) != 0
+     && GetMoveDamageResult(move) != 0 && !HasMoveWithSplit(battlerAtk, SPLIT_STATUS)
+     && GetCurrDamageHpPercent(battlerAtk, battlerDef) < 30)
+    {
+        if (GetCurrDamageHpPercent(battlerAtk, battlerDef) > 20)
+            score--;
+        else if (GetMoveDamageResult(move) == MOVE_POWER_BEST)
+            score -= 2;
+        else
+            score -= 3;
+    }*/  
 
     // check status move preference
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_PREFER_STATUS_MOVES && IS_MOVE_STATUS(move))
-        score++;
-    
-    // check high crit
-    if (TestMoveFlags(move, FLAG_HIGH_CRIT) && effectiveness >= AI_EFFECTIVENESS_x2)
         score++;
     
     // check thawing moves
@@ -2783,71 +2777,257 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 8; // prioritize killing target for stat boost
         }
         break;
-    } // ability checks
+    case ABILITY_MAGIC_GUARD:
+        switch (moveEffect)
+        {
+        case EFFECT_POISON:
+        case EFFECT_WILL_O_WISP:
+        case EFFECT_TOXIC:
+        case EFFECT_LEECH_SEED:
+            score -= 5;
+            break;
+        case EFFECT_CURSE:
+            if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST))
+                score -= 5;
+            break;
+        }
+        break;
+    } // ability checks    
     
     // move effect checks
     switch (moveEffect)
     {
+        
     case EFFECT_HIT:
         break;
     case EFFECT_SLEEP:
     case EFFECT_YAWN:
-        IncreaseSleepScore(battlerAtk, battlerDef, move, &score);
+        if (AI_RandLessThan(128))
+            IncreaseSleepScore(battlerAtk, battlerDef, move, &score);
+        break;
+	case EFFECT_ABSORB:
+        if (AI_DATA->atkHoldEffect == HOLD_EFFECT_BIG_ROOT)
+            score++;
+        if (typeEffectiveness <= AI_EFFECTIVENESS_x0_5 && AI_RandLessThan(50))
+            score -= 3;
+        break;
+    case EFFECT_EXPLOSION:
+    case EFFECT_MEMENTO:
+        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_WILL_SUICIDE && gBattleMons[battlerDef].statStages[STAT_EVASION] < 7)
+        {
+            if (atkHpPercent < 50 && AI_RandLessThan(128))
+                score++;
+        }
+        break;
+	case EFFECT_MIRROR_MOVE:
+        if (predictedMove != MOVE_NONE)
+            return AI_CheckViability(battlerAtk, battlerDef, gLastMoves[battlerDef], score);
+        break;
+// stat raising effects
+	case EFFECT_ATTACK_UP:
+    case EFFECT_ATTACK_UP_2:
+        if (MovesWithSplitUnusable(battlerAtk, battlerDef, SPLIT_PHYSICAL))
+        {
+            score -= 8;
+            break;
+        }
+        else if (gBattleMons[battlerAtk].statStages[STAT_ATK] < 9)
+        {
+            if (atkHpPercent > 90 && AI_RandLessThan(128))
+            {
+                score += 2;
+                break;
+            }
+        }
+        
+        if (!AI_RandLessThan(100))
+        {
+            score--;
+        }
+        break;
+	case EFFECT_DEFENSE_UP:
+    case EFFECT_DEFENSE_UP_2:
+    case EFFECT_DEFENSE_UP_3:
+        if (!HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL))
+            score -= 2;
+        if (atkHpPercent > 90 && AI_RandLessThan(128))
+            score += 2;
+        else if (atkHpPercent > 70 && AI_RandLessThan(200))
+            break;
+        else if (atkHpPercent < 40)
+            score -= 2;
+        break;
+	case EFFECT_SPEED_UP:
+    case EFFECT_SPEED_UP_2:
+        if (IsAiFaster(AI_CHECK_SLOWER))
+        {
+            if (!AI_RandLessThan(70))
+                score += 3;
+        }
+        else
+        {
+            score -= 3;
+        }
+        break;
+	case EFFECT_SPECIAL_ATTACK_UP:
+    case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
+        if (MovesWithSplitUnusable(battlerAtk, battlerDef, SPLIT_SPECIAL))
+        {
+            score -= 8;
+            break;
+        }
+        else if (gBattleMons[battlerAtk].statStages[STAT_SPATK] < 9)
+        {
+            if (atkHpPercent > 90 && AI_RandLessThan(128))
+            {
+                score += 2;
+                break;
+            }
+        }
+        
+        if (!AI_RandLessThan(100))
+        {
+            score--;
+        }
+        break;
+	case EFFECT_SPECIAL_DEFENSE_UP:
+    case EFFECT_SPECIAL_DEFENSE_UP_2:
+        if (!HasMoveWithSplit(battlerDef, SPLIT_SPECIAL))
+            score -= 2;
+        if (atkHpPercent > 90 && AI_RandLessThan(128))
+            score += 2;
+        else if (GetHealthPercentage(battlerAtk) > 70 && AI_RandLessThan(200))
+            break;
+        else if (GetHealthPercentage(battlerAtk) < 40)
+            score -= 2;
+        break;
+	case EFFECT_ACCURACY_UP:
+    case EFFECT_ACCURACY_UP_2:
+        if (gBattleMons[battlerAtk].statStages[STAT_ACC] >= 9 && !AI_RandLessThan(50))
+            score -= 2;
+        else if (atkHpPercent <= 70)
+            score -= 2;
+        else 
+            score++;
+        break;
+	case EFFECT_EVASION_UP:
+    case EFFECT_EVASION_UP_2:
+        if (atkHpPercent > 90 && !AI_RandLessThan(100))
+            score += 3;
+        if (gBattleMons[battlerAtk].statStages[STAT_EVASION] > 9 && AI_RandLessThan(128))
+            score--;
+        if ((gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY) && atkHpPercent >= 50 && !AI_RandLessThan(80))
+            score += 3;
+        if (gStatuses3[battlerDef] & STATUS3_LEECHSEED && !AI_RandLessThan(70))
+            score += 3;
+        if (gStatuses3[battlerAtk] & STATUS3_ROOTED && AI_RandLessThan(128))
+            score += 2;
+        if (gBattleMons[battlerDef].status2 & STATUS2_CURSED && !AI_RandLessThan(70))
+            score += 3;
+        if (atkHpPercent < 70 || gBattleMons[battlerAtk].statStages[STAT_EVASION] == DEFAULT_STAT_STAGE)
+            break;
+        else if (atkHpPercent < 40 || defHpPercent < 40)
+            score -= 2;
+        else if (!AI_RandLessThan(70))
+            score -= 2;
+        break;
+// stat lowering effects
+	case EFFECT_ATTACK_DOWN:
+    case EFFECT_ATTACK_DOWN_2:
+        if (!ShouldLowerAttack(battlerAtk, battlerDef, AI_DATA->defAbility))
+            score -= 2;
+        if (gBattleMons[battlerDef].statStages[STAT_ATK] < DEFAULT_STAT_STAGE)
+            score--;
+        else if (atkHpPercent <= 90)
+            score--;
+        if (gBattleMons[battlerDef].statStages[STAT_ATK] > 3 && !AI_RandLessThan(50))
+            score -= 2;
+        else if (defHpPercent < 70)
+            score -= 2;
+        break;
+	case EFFECT_DEFENSE_DOWN:
+    case EFFECT_DEFENSE_DOWN_2:
+        if (!ShouldLowerDefense(battlerAtk, battlerDef, AI_DATA->defAbility))
+            score -= 2;
+        if ((atkHpPercent < 70 && !AI_RandLessThan(50)) || (gBattleMons[battlerDef].statStages[STAT_DEF] <= 3 && !AI_RandLessThan(50)))
+            score -= 2;
+        if (defHpPercent <= 70)
+            score -= 2;
+        break;
+	case EFFECT_SPEED_DOWN:
+    case EFFECT_SPEED_DOWN_2:
+        if (IsAiFaster(AI_CHECK_FASTER))
+            score -= 3;
+        else if (!AI_RandLessThan(70))
+            score += 2;
+        break;
+	case EFFECT_SPECIAL_ATTACK_DOWN:
+    case EFFECT_SPECIAL_ATTACK_DOWN_2:
+        if (!ShouldLowerSpAtk(battlerAtk, battlerDef, AI_DATA->defAbility))
+            score -= 2;
+        if (gBattleMons[battlerDef].statStages[STAT_SPATK] < DEFAULT_STAT_STAGE)
+            score--;
+        else if (atkHpPercent <= 90)
+            score--;
+        if (gBattleMons[battlerDef].statStages[STAT_SPATK] > 3 && !AI_RandLessThan(50))
+            score -= 2;
+        else if (defHpPercent < 70)
+            score -= 2;
+        break;
+	case EFFECT_SPECIAL_DEFENSE_DOWN:
+    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+        if (!ShouldLowerSpDef(battlerAtk, battlerDef, AI_DATA->defAbility))
+            score -= 2;
+        if ((atkHpPercent < 70 && !AI_RandLessThan(50))
+          || (gBattleMons[battlerDef].statStages[STAT_SPDEF] <= 3 && !AI_RandLessThan(50)))
+            score -= 2;
+        if (defHpPercent <= 70)
+            score -= 2;
+        break;
+	case EFFECT_ACCURACY_DOWN:
+    case EFFECT_ACCURACY_DOWN_2:
+        if (ShouldLowerAccuracy(battlerAtk, battlerDef, AI_DATA->defAbility))
+            score -= 2;
+        if ((atkHpPercent < 70 || defHpPercent < 70) && AI_RandLessThan(100))
+            score--;
+        if (gBattleMons[battlerDef].statStages[STAT_ACC] <= 4 && !AI_RandLessThan(80))
+            score -= 2;
+        if (gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY && !AI_RandLessThan(70))
+            score += 2;
+        if (gStatuses3[battlerDef] & STATUS3_LEECHSEED && !AI_RandLessThan(70))
+            score += 2;
+        if (gStatuses3[battlerDef] & STATUS3_ROOTED && AI_RandLessThan(128))
+            score++;
+        if (gBattleMons[battlerDef].status2 & STATUS2_CURSED && !AI_RandLessThan(70))
+            score += 2;
+        if (atkHpPercent > 70 || gBattleMons[battlerDef].statStages[STAT_ACC] < DEFAULT_STAT_STAGE)
+            break;
+        else if (atkHpPercent < 40 || defHpPercent < 40 || !AI_RandLessThan(70))
+            score -= 2;
+        break;
+	case EFFECT_EVASION_DOWN:
+    case EFFECT_EVASION_DOWN_2:
+        if (!ShouldLowerEvasion(battlerAtk, battlerDef, AI_DATA->defAbility))
+            score -= 2;
+        if ((atkHpPercent < 70 || gBattleMons[battlerDef].statStages[STAT_EVASION] <= 3) && !AI_RandLessThan(50))
+            score -= 2;
+        if (defHpPercent <= 70)
+            score -= 2;
+        if (gBattleMons[battlerAtk].statStages[STAT_ACC] < DEFAULT_STAT_STAGE)
+            score++;
+        if (gBattleMons[battlerDef].statStages[STAT_EVASION] < 7 || AI_DATA->atkAbility == ABILITY_NO_GUARD)
+            score -= 2;
+        break;
+	case EFFECT_BIDE:
+        if (atkHpPercent < 90)
+            score -= 2;
         break;
     case EFFECT_DREAM_EATER:
         if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP))
             break;
         score++;    // if target is asleep, dream eater is a pretty good move even without draining
         // fallthrough
-    case EFFECT_ABSORB:
-        if (ShouldAbsorb(battlerAtk, battlerDef, move, AI_THINKING_STRUCT->simulatedDmg[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex]))
-            score += 2;
-        if (AI_DATA->atkHoldEffect == HOLD_EFFECT_BIG_ROOT)
-            score++;
-        break;
-    case EFFECT_EXPLOSION:
-    case EFFECT_MEMENTO:
-        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_WILL_SUICIDE && gBattleMons[battlerDef].statStages[STAT_EVASION] < 7)
-        {
-            if (GetHealthPercentage(battlerAtk) < 50 && (Random() % 2))
-                score++;
-        }
-        break;
-    case EFFECT_MIRROR_MOVE:
-        if (gLastMoves[battlerDef] != MOVE_NONE)
-            return AI_CheckGoodMove(battlerAtk, battlerDef, gLastMoves[battlerDef], score);
-        break;    
-    case EFFECT_ATTACK_UP:
-    case EFFECT_ATTACK_UP_2:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, &score);
-        break;
-    case EFFECT_DEFENSE_UP:
-    case EFFECT_DEFENSE_UP_2:
-    case EFFECT_DEFENSE_UP_3:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_DEF, &score);
-        break;
-    case EFFECT_SPEED_UP:
-    case EFFECT_SPEED_UP_2:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPEED, &score);
-        break;
-    case EFFECT_SPECIAL_ATTACK_UP:
-    case EFFECT_SPECIAL_ATTACK_UP_2:
-    case EFFECT_SPECIAL_ATTACK_UP_3:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
-        break;
-    case EFFECT_SPECIAL_DEFENSE_UP:
-    case EFFECT_SPECIAL_DEFENSE_UP_2:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPDEF, &score);
-        break;
-    case EFFECT_ACCURACY_UP:
-    case EFFECT_ACCURACY_UP_2:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ACC, &score);
-        break;
-    case EFFECT_EVASION_UP:
-    case EFFECT_EVASION_UP_2:
-    case EFFECT_MINIMIZE:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_EVASION, &score);
-        break;
     case EFFECT_ACUPRESSURE:
         break;
     case EFFECT_ATTACK_ACCURACY_UP: // hone claws
@@ -2864,51 +3044,10 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         else if (HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
             IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
         break;
-    case EFFECT_ATTACK_DOWN:
-    case EFFECT_ATTACK_DOWN_2:
-        if (ShouldLowerAttack(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-            score += 2;
-        break;
-    case EFFECT_DEFENSE_DOWN:
-    case EFFECT_DEFENSE_DOWN_2:
-        if (ShouldLowerDefense(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-            score += 2;
-        break;
-    case EFFECT_SPEED_DOWN:
-    case EFFECT_SPEED_DOWN_2:
-        if (ShouldLowerSpeed(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-            score += 3;
-        break;
-    case EFFECT_SPECIAL_ATTACK_DOWN:
-    case EFFECT_SPECIAL_ATTACK_DOWN_2:
-        if (ShouldLowerSpAtk(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-            score += 2;
-        break;
-    case EFFECT_SPECIAL_DEFENSE_DOWN:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
-        if (ShouldLowerSpDef(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-            score += 2;
-        break;
-    case EFFECT_ACCURACY_DOWN:
-    case EFFECT_ACCURACY_DOWN_2:
-        if (ShouldLowerAccuracy(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-            score += 4;
-        break;
-    case EFFECT_EVASION_DOWN:
-    case EFFECT_EVASION_DOWN_2:
-        if (ShouldLowerEvasion(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-        {
-            // kinda meh effect, so let's make sure we really want to
-            if (gBattleMons[battlerDef].statStages[STAT_EVASION] > 7
-              || HasMoveWithLowAccuracy(battlerAtk, battlerDef, 90, TRUE, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect))
-                score += 2; // encourage lowering evasion if they are evasive or we have a move with low accuracy
-            else
-                score++;
-        }
-        break;
     case EFFECT_HAZE:
         if (AnyStatIsRaised(AI_DATA->battlerAtkPartner)
           || PartnerHasSameMoveEffectWithoutTarget(AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
+            score -= 3;
             break;
         // fallthrough
     case EFFECT_ROAR:
@@ -2917,8 +3056,6 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += min(CountPositiveStatStages(battlerDef) + CountPositiveStatStages(AI_DATA->battlerDefPartner), 7);
         else
             score += min(CountPositiveStatStages(battlerDef), 4);
-        break;
-    case EFFECT_BIDE:
         break;
     case EFFECT_MULTI_HIT:
     case EFFECT_DOUBLE_HIT:
@@ -3057,13 +3194,12 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 2;
         break;
     case EFFECT_SPEED_DOWN_HIT:
-        if (ShouldLowerSpeed(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
-        {
-            if (AI_DATA->atkAbility == ABILITY_SERENE_GRACE && AI_DATA->defAbility != ABILITY_CONTRARY)
-                score += 4;
-            else
-                score += 2;
-        }
+        if (IsAiFaster(AI_CHECK_FASTER))
+            score -= 2;
+        else if (!AI_RandLessThan(70))
+            score++;
+        if (AI_DATA->atkAbility == ABILITY_SERENE_GRACE && AI_DATA->defAbility != ABILITY_CONTRARY)
+            score++;
         break;
     case EFFECT_SUBSTITUTE:
         if (gStatuses3[battlerDef] & STATUS3_PERISH_SONG)
@@ -3085,7 +3221,7 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 0)
         {
             if (gLastMoves[battlerDef] != MOVE_NONE && gLastMoves[battlerDef] != 0xFFFF)
-                return AI_CheckGoodMove(battlerAtk, battlerDef, gLastMoves[battlerDef], score);
+                return AI_CheckViability(battlerAtk, battlerDef, gLastMoves[battlerDef], score);
         }
         break;
     case EFFECT_LEECH_SEED:
@@ -3605,7 +3741,7 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 }
                 
                 // check defog lowering evasion
-                if (ShouldLowerEvasion(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
+                if (ShouldLowerEvasion(battlerAtk, battlerDef, AI_DATA->defAbility))
                 {
                     if (gBattleMons[battlerDef].statStages[STAT_EVASION] > 7
                       || HasMoveWithLowAccuracy(battlerAtk, battlerDef, 90, TRUE, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect))
@@ -3639,7 +3775,7 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         break;
     case EFFECT_NATURE_POWER:
-        return AI_CheckGoodMove(battlerAtk, battlerDef, GetNaturePowerMove(), score);
+        return AI_CheckViability(battlerAtk, battlerDef, GetNaturePowerMove(), score);
     case EFFECT_CHARGE:
         if (HasDamagingMoveOfType(battlerAtk, TYPE_ELECTRIC))
             score += 2;
@@ -3850,11 +3986,11 @@ static s16 AI_CheckGoodMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_TICKLE:
         if (gBattleMons[battlerDef].statStages[STAT_DEF] > 4 && HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL)
-          && AI_DATA->defAbility != ABILITY_CONTRARY && ShouldLowerDefense(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
+          && AI_DATA->defAbility != ABILITY_CONTRARY && ShouldLowerDefense(battlerAtk, battlerDef, AI_DATA->defAbility))
         {
             score += 2;
         }
-        else if (ShouldLowerAttack(battlerAtk, battlerDef, AI_DATA->defAbility, AI_THINKING_STRUCT->movesetIndex))
+        else if (ShouldLowerAttack(battlerAtk, battlerDef, AI_DATA->defAbility))
         {
             score += 2;
         }

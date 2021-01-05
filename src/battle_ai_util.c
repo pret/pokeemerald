@@ -436,6 +436,13 @@ static const u16 sOtherMoveCallingMoves[] =
 };
 
 // Functions
+bool32 AI_RandLessThan(u8 val)
+{
+    if ((Random() % 0xFF) < val)
+        return TRUE;
+    return FALSE;
+}
+
 void RecordLastUsedMoveByTarget(void)
 {
     RecordKnownMove(gBattlerTarget, gLastMoves[gBattlerTarget]);
@@ -855,6 +862,13 @@ u8 GetMoveDamageResult(u16 move)
     }
 
     return AI_THINKING_STRUCT->funcResult;
+}
+
+u32 GetCurrDamageHpPercent(u8 battlerAtk, u8 battlerDef)
+{
+    int bestDmg = AI_THINKING_STRUCT->simulatedDmg[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex];
+
+    return (bestDmg * 100) / gBattleMons[battlerDef].maxHP;
 }
 
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
@@ -1583,9 +1597,9 @@ u32 CountNegativeStatStages(u8 battlerId)
     return count;
 }
 
-bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_ATK] > 4
@@ -1599,9 +1613,9 @@ bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIn
     return FALSE;
 }
 
-bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_DEF] > 4
@@ -1615,9 +1629,9 @@ bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveI
     return FALSE;
 }
 
-bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (IsAiFaster(AI_CHECK_SLOWER)
@@ -1629,9 +1643,9 @@ bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveInd
     return FALSE;
 }
 
-bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPATK] > 4
@@ -1644,9 +1658,9 @@ bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveInd
     return FALSE;
 }
 
-bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_SPDEF] > 4
@@ -1659,9 +1673,9 @@ bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveInd
     return FALSE;
 }
 
-bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (defAbility != ABILITY_CONTRARY
@@ -1673,9 +1687,9 @@ bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 move
     return FALSE;
 }
 
-bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex)
+bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility)
 {
-    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, moveIndex, 0))
+    if (IsAiFaster(AI_CHECK_FASTER) && CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         return FALSE; // Don't bother lowering stats if can kill enemy.
 
     if (gBattleMons[battlerDef].statStages[STAT_EVASION] > DEFAULT_STAT_STAGE
@@ -3228,6 +3242,9 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
     if (AI_DATA->atkAbility == ABILITY_CONTRARY)
         return;
     
+    if (GetHealthPercentage(battlerAtk) < 80 && AI_RandLessThan(128))
+        return;
+    
     switch (statId)
     {
     case STAT_ATK:
@@ -3304,16 +3321,16 @@ void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
         if (!HasDamagingMove(battlerDef))
             *score += 2;
         
-        if (HasMoveEffect(battlerAtk, EFFECT_PROTECT))
+        if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL && HasMoveEffect(battlerAtk, EFFECT_PROTECT))
             (*score)++;    // stall tactic
         
         if (HasMoveEffect(battlerAtk, EFFECT_VENOSHOCK)
           || HasMoveEffect(battlerAtk, EFFECT_HEX)
           || HasMoveEffect(battlerAtk, EFFECT_VENOM_DRENCH)
           || AI_DATA->atkAbility == ABILITY_MERCILESS)
-            *score += 4;
+            *(score) += 2;
         else
-            *score += 2;
+            *(score)++;
     }
 }
 
@@ -3354,8 +3371,10 @@ void IncreaseParalyzeScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 void IncreaseSleepScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
 {
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
-        *score += 3;
-    
+        *score += 2;
+    else
+        return;
+      
     if ((HasMoveEffect(battlerAtk, EFFECT_DREAM_EATER) || HasMoveEffect(battlerAtk, EFFECT_NIGHTMARE))
       && !(HasMoveEffect(battlerDef, EFFECT_SNORE) || HasMoveEffect(battlerDef, EFFECT_SLEEP_TALK)))
         (*score)++;

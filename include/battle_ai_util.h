@@ -7,6 +7,7 @@
 
 #define FOE(battler) ((battler ^ BIT_SIDE) & BIT_SIDE)
 
+bool32 AI_RandLessThan(u8 val);
 void RecordLastUsedMoveByTarget(void);
 bool32 IsBattlerAIControlled(u32 battlerId);
 void ClearBattlerMoveHistory(u8 battlerId);
@@ -61,19 +62,20 @@ bool32 AreBattlersStatsMaxed(u8 battler);
 bool32 BattlerHasAnyStatRaised(u8 battlerId);
 u32 CountPositiveStatStages(u8 battlerId);
 u32 CountNegativeStatStages(u8 battlerId);
-bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
-bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
-bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
-bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
-bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
-bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
-bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 moveIndex);
+bool32 ShouldLowerAttack(u8 battlerAtk, u8 battlerDef, u16 defAbility);
+bool32 ShouldLowerDefense(u8 battlerAtk, u8 battlerDef, u16 defAbility);
+bool32 ShouldLowerSpeed(u8 battlerAtk, u8 battlerDef, u16 defAbility);
+bool32 ShouldLowerSpAtk(u8 battlerAtk, u8 battlerDef, u16 defAbility);
+bool32 ShouldLowerSpDef(u8 battlerAtk, u8 battlerDef, u16 defAbility);
+bool32 ShouldLowerAccuracy(u8 battlerAtk, u8 battlerDef, u16 defAbility);
+bool32 ShouldLowerEvasion(u8 battlerAtk, u8 battlerDef, u16 defAbility);
 
 // move checks
 bool32 IsAffectedByPowder(u8 battler, u16 ability, u16 holdEffect);
 bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split);
 s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef);
 u8 GetMoveDamageResult(u16 move);
+u32 GetCurrDamageHpPercent(u8 battlerAtk, u8 battlerDef);
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
 u8 AI_GetMoveEffectiveness(u16 move);
 u16 *GetMovesArray(u32 battler);
