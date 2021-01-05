@@ -516,7 +516,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u8 moveTarget = gBattleMoves[move].target;
     u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect, move);
     u8 effectiveness = AI_GetMoveEffectiveness(move);
-    u8 typeEffectiveness = AI_GetTypeEffectiveness(move, battlerAtk, battlerDef);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
     u16 predictedMove = gLastMoves[battlerDef]; // TODO better move prediction
@@ -548,7 +547,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
                 
         // check if negates type
-        if (!IS_MOVE_STATUS(move) && (effectiveness == AI_EFFECTIVENESS_x0 || typeEffectiveness == AI_EFFECTIVENESS_x0))
+        if (!IS_MOVE_STATUS(move) && (effectiveness == AI_EFFECTIVENESS_x0 || effectiveness == AI_EFFECTIVENESS_x0))
             score -= 10;
         
         // target ability checks
@@ -756,7 +755,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_WILL_SUICIDE))
                 score -= 2;
             
-            if (typeEffectiveness == AI_EFFECTIVENESS_x0)
+            if (effectiveness == AI_EFFECTIVENESS_x0)
             {
                 score -= 10;
             }
@@ -775,7 +774,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_DREAM_EATER:
             if (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP) || AI_DATA->defAbility == ABILITY_COMATOSE)
                 score -= 8;
-            else if (typeEffectiveness == AI_EFFECTIVENESS_x0)
+            else if (effectiveness == AI_EFFECTIVENESS_x0)
                 score -= 10;
             break;
     // stat raising effects
@@ -1112,7 +1111,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         //case EFFECT_ENDEAVOR:
         case EFFECT_LOW_KICK:
             // AI_CBM_HighRiskForDamage
-            if (AI_DATA->defAbility == ABILITY_WONDER_GUARD && typeEffectiveness < AI_EFFECTIVENESS_x2)
+            if (AI_DATA->defAbility == ABILITY_WONDER_GUARD && effectiveness < AI_EFFECTIVENESS_x2)
                 score -= 10;            
             break;
         case EFFECT_COUNTER:
@@ -1652,7 +1651,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 6;
             break;
         case EFFECT_RECHARGE:
-            if (AI_DATA->defAbility == ABILITY_WONDER_GUARD && typeEffectiveness < AI_EFFECTIVENESS_x2)
+            if (AI_DATA->defAbility == ABILITY_WONDER_GUARD && effectiveness < AI_EFFECTIVENESS_x2)
                 score -= 10;
             else if (AI_DATA->atkAbility != ABILITY_TRUANT
               && !CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
@@ -2706,7 +2705,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // move data
     u16 moveEffect = gBattleMoves[move].effect;
     u8 effectiveness = AI_GetMoveEffectiveness(move);
-    u8 typeEffectiveness = AI_GetTypeEffectiveness(move, battlerAtk, battlerDef);
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 predictedMove = gLastMoves[battlerDef]; //for now
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
@@ -2808,7 +2806,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 	case EFFECT_ABSORB:
         if (AI_DATA->atkHoldEffect == HOLD_EFFECT_BIG_ROOT)
             score++;
-        if (typeEffectiveness <= AI_EFFECTIVENESS_x0_5 && AI_RandLessThan(50))
+        if (effectiveness <= AI_EFFECTIVENESS_x0_5 && AI_RandLessThan(50))
             score -= 3;
         break;
     case EFFECT_EXPLOSION:
@@ -3200,6 +3198,14 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score++;
         if (AI_DATA->atkAbility == ABILITY_SERENE_GRACE && AI_DATA->defAbility != ABILITY_CONTRARY)
             score++;
+        break;
+        if (ShouldLowerSpeed(battlerAtk, battlerDef, AI_DATA->defAbility))
+        {
+            if (AI_DATA->atkAbility == ABILITY_SERENE_GRACE && AI_DATA->defAbility != ABILITY_CONTRARY)
+                score += 4;
+            else
+                score += 2;
+        }
         break;
     case EFFECT_SUBSTITUTE:
         if (gStatuses3[battlerDef] & STATUS3_PERISH_SONG)

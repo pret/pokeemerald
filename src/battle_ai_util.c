@@ -873,36 +873,23 @@ u32 GetCurrDamageHpPercent(u8 battlerAtk, u8 battlerDef)
 
 u16 AI_GetTypeEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    u8 damageVar;
-    u32 effectivenessMultiplier;
+    u16 typeEffectiveness, moveType;
 
-    gMoveResultFlags = 0;
-    gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-    effectivenessMultiplier = AI_GetTypeEffectiveness(gCurrentMove, sBattler_AI, gBattlerTarget);
-    switch (effectivenessMultiplier)
-    {
-    case UQ_4_12(0.0):
-    default:
-        damageVar = AI_EFFECTIVENESS_x0;
-        break;
-    case UQ_4_12(0.25):
-        damageVar = AI_EFFECTIVENESS_x0_25;
-        break;
-    case UQ_4_12(0.5):
-        damageVar = AI_EFFECTIVENESS_x0_5;
-        break;
-    case UQ_4_12(1.0):
-        damageVar = AI_EFFECTIVENESS_x1;
-        break;
-    case UQ_4_12(2.0):
-        damageVar = AI_EFFECTIVENESS_x2;
-        break;
-    case UQ_4_12(4.0):
-        damageVar = AI_EFFECTIVENESS_x4;
-        break;
-    }
+    SaveBattlerData(battlerAtk);
+    SaveBattlerData(battlerDef);
 
-    return damageVar;
+    SetBattlerData(battlerAtk);
+    SetBattlerData(battlerDef);
+
+    gBattleStruct->dynamicMoveType = 0;
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+    typeEffectiveness = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, FALSE);
+
+    RestoreBattlerData(battlerAtk);
+    RestoreBattlerData(battlerDef);
+
+    return typeEffectiveness;
 }
 
 u8 AI_GetMoveEffectiveness(u16 move)
@@ -3298,17 +3285,17 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
         break;
     case STAT_ACC:
         if (HasMoveWithLowAccuracy(battlerAtk, battlerDef, 80, TRUE, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect))
-            *score += 3; // has moves with less than 80% accuracy
+            *score += 2; // has moves with less than 80% accuracy
         else if (HasMoveWithLowAccuracy(battlerAtk, battlerDef, 90, TRUE, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect))
-            *score += 2;
+            *(score)++;
         break;
     case STAT_EVASION:
         if (!BattlerWillFaintFromWeather(battlerAtk, AI_DATA->atkAbility))
         {
             if (!GetBattlerSecondaryDamage(battlerAtk) && !(gStatuses3[battlerAtk] & STATUS3_ROOTED))
-                *score += 3;
-            else
                 *score += 2;
+            else
+                *(score)++;
         }
         break;
     }
