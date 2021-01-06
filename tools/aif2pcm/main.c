@@ -449,7 +449,7 @@ int get_delta_index(uint8_t sample, uint8_t prev_sample)
 	{
 		uint8_t new_sample = prev_sample + gDeltaEncodingTable[i];
 		int new_sample_signed = U8_TO_S8(new_sample);
-		error = ABS(new_sample_signed - sample_signed);
+		int error = ABS(new_sample_signed - sample_signed);
 
 		if (error < best_error)
 		{
