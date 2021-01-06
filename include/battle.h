@@ -429,7 +429,7 @@ struct Illusion
 
 struct PinchBerry
 {
-    u8 micleBerry:1;
+    u8 micle:1;
     u8 custap:1;    // also quick claw
     
 };

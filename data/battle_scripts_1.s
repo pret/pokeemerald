@@ -7729,3 +7729,28 @@ BattleScript_CustapBerryActivation::
 	waitmessage 0x40
 	removeitem BS_ATTACKER
 	end2
+
+BattleScript_MicleBerryActivateEnd2::
+	jumpifability BS_ATTACKER, ABILITY_RIPEN, BattleScript_MicleBerryActivateEnd2_Ripen
+	goto BattleScript_MicleBerryActivateEnd2_Anim
+BattleScript_MicleBerryActivateEnd2_Ripen:
+	call BattleScript_AbilityPopUp
+BattleScript_MicleBerryActivateEnd2_Anim:
+	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
+	printstring STRINGID_MICLEBERRYACTIVATES
+	waitmessage 0x40
+	removeitem BS_ATTACKER
+	end2
+
+BattleScript_MicleBerryActivateRet::
+	jumpifability BS_SCRIPTING, ABILITY_RIPEN, BattleScript_MicleBerryActivateRet_Ripen
+	goto BattleScript_MicleBerryActivateRet_Anim
+BattleScript_MicleBerryActivateRet_Ripen:
+	call BattleScript_AbilityPopUp
+BattleScript_MicleBerryActivateRet_Anim:
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
+	printstring STRINGID_MICLEBERRYACTIVATES
+	waitmessage 0x40
+	removeitem BS_SCRIPTING
+	return
+

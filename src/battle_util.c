@@ -5073,6 +5073,26 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId)
     return 0;
 }
 
+static u8 TrySetMicleBerry(u32 battlerId, u32 itemId, bool32 end2)
+{
+    if (HasEnoughHpToEatBerry(battlerId, 4, itemId))
+    {
+        gBattleStruct->pinchBerry[battlerId].micle = TRUE;  // battler's next attack has increased accuracy
+        
+        if (end2)
+        {
+            BattleScriptExecute(BattleScript_MicleBerryActivateEnd2);
+        }
+        else
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_MicleBerryActivateRet;
+        }
+        return ITEM_EFFECT_OTHER;
+    }
+    return 0;
+}
+
 static u8 ItemHealHp(u32 battlerId, u32 itemId, bool32 end2, bool32 percentHeal)
 {
     if (HasEnoughHpToEatBerry(battlerId, 2, itemId))
@@ -5569,6 +5589,10 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
+            case HOLD_EFFECT_MICLE_BERRY:
+                if (!moveTurn)
+                    effect = TrySetMicleBerry(battlerId, gLastUsedItem, TRUE);
+                break;
             }
 
             if (effect)
@@ -5595,6 +5619,10 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             battlerHoldEffect = GetBattlerHoldEffect(battlerId, TRUE);
             switch (battlerHoldEffect)
             {
+            case HOLD_EFFECT_MICLE_BERRY:
+                if (B_HP_BERRIES >= GEN_4)
+                    effect = TrySetMicleBerry(battlerId, gLastUsedItem, FALSE);
+                break;
             case HOLD_EFFECT_RESTORE_HP:
                 if (B_HP_BERRIES >= GEN_4)
                     effect = ItemHealHp(battlerId, gLastUsedItem, FALSE, FALSE);

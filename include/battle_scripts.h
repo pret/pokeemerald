@@ -352,5 +352,7 @@ extern const u8 BattleScript_CheekPouchActivates[];
 extern const u8 BattleScript_AnnounceAirLockCloudNine[];
 extern const u8 BattleScript_QuickClawActivation[];
 extern const u8 BattleScript_CustapBerryActivation[];
+extern const u8 BattleScript_MicleBerryActivateEnd2[];
+extern const u8 BattleScript_MicleBerryActivateRet[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
