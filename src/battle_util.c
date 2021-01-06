@@ -5138,6 +5138,33 @@ static u8 TrySetMicleBerry(u32 battlerId, u32 itemId, bool32 end2)
     return 0;
 }
 
+static u8 DamagedStatBoostBerryEffect(u8 battlerId, u8 statId, u8 split)
+{
+    if (IsBattlerAlive(battlerId)
+      && TARGET_TURN_DAMAGED
+      && gBattleMons[battlerId].statStages[statId] < MAX_STAT_STAGE
+      && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
+      && GetBattleMoveSplit(gCurrentMove) == split)
+    {
+        
+        PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+        PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
+
+        gEffectBattler = battlerId;
+        if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
+            SET_STATCHANGER(statId, 2, FALSE);
+        else
+            SET_STATCHANGER(statId, 1, FALSE);
+        
+        gBattleScripting.animArg1 = 0xE + statId;
+        gBattleScripting.animArg2 = 0;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_BerryStatRaiseRet;
+        return ITEM_STATS_CHANGE;
+    }
+    return 0;
+}
+
 static u8 ItemHealHp(u32 battlerId, u32 itemId, bool32 end2, bool32 percentHeal)
 {
     if (HasEnoughHpToEatBerry(battlerId, 2, itemId))
@@ -5991,11 +6018,11 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPATK, 1, FALSE);
                 }
                 break;
-            case HOLD_EFFECT_RETALIATE_BERRY:
+            case HOLD_EFFECT_JABOCA_BERRY:  // consume and damage attacker if used physical move
                 if (IsBattlerAlive(battlerId)
                   && TARGET_TURN_DAMAGED
                   && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
-                  && GetBattleMoveSplit(gCurrentMove) == ItemId_GetHoldEffectParam(gLastUsedItem))
+                  && IS_MOVE_PHYSICAL(gCurrentMove))
                 {
                     gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
                     if (gBattleMoveDamage == 0)
@@ -6009,6 +6036,31 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
                     RecordItemEffectBattle(battlerId, HOLD_EFFECT_ROCKY_HELMET);
                 }
+                break;
+            case HOLD_EFFECT_ROWAP_BERRY:  // consume and damage attacker if used special move
+                if (IsBattlerAlive(battlerId)
+                  && TARGET_TURN_DAMAGED
+                  && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
+                  && IS_MOVE_SPECIAL(gCurrentMove))
+                {
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
+                        gBattleMoveDamage *= 2;
+                    
+                    effect = ITEM_HP_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_JabocaRowapBerryActivates;
+                    PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
+                    RecordItemEffectBattle(battlerId, HOLD_EFFECT_ROCKY_HELMET);
+                }
+                break;
+            case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
+                effect = DamagedStatBoostBerryEffect(battlerId, STAT_DEF, SPLIT_PHYSICAL);
+                break;
+            case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
+                effect = DamagedStatBoostBerryEffect(battlerId, STAT_SPDEF, SPLIT_SPECIAL);
                 break;
             }
         }
