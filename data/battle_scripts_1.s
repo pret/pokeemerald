@@ -7474,8 +7474,9 @@ BattleScript_ItemHealHP_RemoveItemRet_Anim:
 	datahpupdate BS_SCRIPTING
 	removeitem BS_SCRIPTING
 	return
+
 BattleScript_ItemHealHP_RemoveItemEnd2::
-	jumpifability BS_ATTACKER, ABILITY_RIPEN BattleScript_ItemHealHP_RemoveItemEnd2_AbilityPopUp
+	jumpifability BS_ATTACKER, ABILITY_RIPEN, BattleScript_ItemHealHP_RemoveItemEnd2_AbilityPopUp
 	goto BattleScript_ItemHealHP_RemoveItemEnd2_Anim
 BattleScript_ItemHealHP_RemoveItemEnd2_AbilityPopUp:
 	call BattleScript_AbilityPopUp
@@ -7490,6 +7491,11 @@ BattleScript_ItemHealHP_RemoveItemEnd2_Anim:
 	end2
 
 BattleScript_BerryPPHealEnd2::
+	jumpifability BS_ATTACKER, ABILITY_RIPEN, BattleScript_BerryPPHealEnd2_AbilityPopup
+	goto BattleScript_BerryPPHealEnd2_Anim
+BattleScript_BerryPPHealEnd2_AbilityPopup:
+	call BattleScript_AbilityPopUp
+BattleScript_BerryPPHealEnd2_Anim:
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_PKMNSITEMRESTOREDPP
 	waitmessage 0x40
@@ -7553,6 +7559,11 @@ BattleScript_HangedOnMsgRet:
 	return
 
 BattleScript_BerryConfuseHealEnd2::
+	jumpifability BS_ATTACKER, ABILITY_RIPEN, BattleScript_BerryConfuseHealEnd2_AbilityPopup
+	goto BattleScript_BerryConfuseHealEnd2_Anim
+BattleScript_BerryConfuseHealEnd2_AbilityPopup:
+	call BattleScript_AbilityPopUp
+BattleScript_BerryConfuseHealEnd2_Anim:
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage 0x40
@@ -7566,7 +7577,31 @@ BattleScript_BerryConfuseHealEnd2::
 	removeitem BS_ATTACKER
 	end2
 
+BattleScript_BerryConfuseHealRet::
+	jumpifability BS_SCRIPTING, ABILITY_RIPEN, BattleScript_BerryConfuseHealRet_AbilityPopup
+	goto BattleScript_BerryConfuseHealRet_Anim
+BattleScript_BerryConfuseHealRet_AbilityPopup:
+	call BattleScript_AbilityPopUp
+BattleScript_BerryConfuseHealRet_Anim:
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
+	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
+	waitmessage 0x40
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
+	printstring STRINGID_FORXCOMMAYZ
+	waitmessage 0x40
+	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
+	seteffectprimary
+	removeitem BS_SCRIPTING
+	return
+
 BattleScript_BerryStatRaiseEnd2::
+	jumpifability BS_ATTACKER, ABILITY_RIPEN, BattleScript_BerryStatRaiseEnd2_AbilityPopup
+	goto BattleScript_BerryStatRaiseEnd2_Anim
+BattleScript_BerryStatRaiseEnd2_AbilityPopup:
+	call BattleScript_AbilityPopUp
+BattleScript_BerryStatRaiseEnd2_Anim:
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_82DB85B
 BattleScript_82DB85B::
@@ -7574,6 +7609,20 @@ BattleScript_82DB85B::
 	call BattleScript_StatUp
 	removeitem BS_ATTACKER
 	end2
+
+BattleScript_BerryStatRaiseRet::
+	jumpifability BS_SCRIPTING, ABILITY_RIPEN, BattleScript_BerryStatRaiseRet_AbilityPopup
+	goto BattleScript_BerryStatRaiseRet_Anim
+BattleScript_BerryStatRaiseRet_AbilityPopup:
+	call BattleScript_AbilityPopUp
+BattleScript_BerryStatRaiseRet_Anim:
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_BerryStatRaiseRet_End
+BattleScript_BerryStatRaiseRet_End:
+	setbyte cMULTISTRING_CHOOSER, 0x4
+	call BattleScript_StatUp
+	removeitem BS_SCRIPTING
+	return
 
 BattleScript_BerryFocusEnergyEnd2::
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
