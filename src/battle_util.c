@@ -54,6 +54,7 @@ functions instead of at the top of the file with the other declarations.
 */
 
 static bool32 TryRemoveScreens(u8 battler);
+static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];
@@ -3701,6 +3702,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_AS_ONE_ICE_RIDER:
+        case ABILITY_AS_ONE_SHADOW_RIDER:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_ASONE;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
         case ABILITY_ANTICIPATION:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
@@ -4986,7 +4997,7 @@ static bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
     if (gBattleMons[battlerId].hp == 0)
         return FALSE;
     // Unnerve prevents consumption of opponents' berries.
-    if (isBerry && IsAbilityOnOpposingSide(battlerId, ABILITY_UNNERVE))
+    if (isBerry && IsUnnerveAbilityOnOpposingSide(battlerId))
         return FALSE;
     if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / hpFraction)
         return TRUE;
@@ -5100,7 +5111,7 @@ static u8 ItemHealHp(u32 battlerId, u32 itemId, bool32 end2, bool32 percentHeal)
 
 static bool32 UnnerveOn(u32 battlerId, u32 itemId)
 {
-    if (ItemId_GetPocket(itemId) == POCKET_BERRIES && IsAbilityOnOpposingSide(battlerId, ABILITY_UNNERVE))
+    if (ItemId_GetPocket(itemId) == POCKET_BERRIES && IsUnnerveAbilityOnOpposingSide(battlerId))
         return TRUE;
     return FALSE;
 }
@@ -7870,4 +7881,13 @@ static bool32 TryRemoveScreens(u8 battler)
     }
      
     return removed;
+}
+
+static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId)
+{
+    if (IsAbilityOnOpposingSide(battlerId, ABILITY_UNNERVE)
+      || IsAbilityOnOpposingSide(battlerId, ABILITY_AS_ONE_ICE_RIDER)
+      || IsAbilityOnOpposingSide(battlerId, ABILITY_AS_ONE_SHADOW_RIDER))
+        return TRUE;
+    return FALSE;
 }

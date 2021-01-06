@@ -685,9 +685,11 @@ static const u8 sText_FairyAuraActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} 
 static const u8 sText_AuraBreakActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} reversed all\nother POKéMON's auras!");
 static const u8 sText_ComatoseActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is drowsing!");
 static const u8 sText_ScreenCleanerActivates[] = _("All screens on the field were\ncleansed!");
+static const u8 sText_AsOneEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} has two Abilities!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_ASONEENTERS - 12] = sText_AsOneEnters,
     [STRINGID_STATWASNOTLOWERED - 12] = sText_StatWasNotLowered,
     [STRINGID_CLOAKEDINAFREEZINGLIGHT - 12] = sText_CloakedInAFreezingLight,
     [STRINGID_DESTINYKNOTACTIVATES - 12] = sText_DestinyKnotActivates,
@@ -1275,6 +1277,7 @@ const u16 gSwitchInAbilityStringIds[] =
     [MULTI_SWITCHIN_AURABREAK] = STRINGID_AURABREAKENTERS,
     [MULTI_SWITCHIN_COMATOSE] = STRINGID_COMATOSEENTERS,
     [MULTI_SWITCHIN_SCREENCLEANER] = STRINGID_SCREENCLEANERENTERS,
+    [MULTI_SWITCHIN_ASONE] = STRINGID_ASONEENTERS,
 };
 
 const u16 gMissStringIds[] =

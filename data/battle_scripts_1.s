@@ -4965,8 +4965,9 @@ BattleScript_FaintTarget::
 	tryactivatefellstinger BS_ATTACKER
 	tryactivatesoulheart
 	tryactivatereceiver BS_TARGET
-	tryactivatemoxie BS_ATTACKER
+	tryactivatemoxie BS_ATTACKER		@ and chilling neigh, as one ice rider
 	tryactivatebeastboost BS_ATTACKER
+	tryactivategrimneigh BS_ATTACKER	@ and as one shadow rider
 	trytrainerslidefirstdownmsg BS_TARGET
 	return
 

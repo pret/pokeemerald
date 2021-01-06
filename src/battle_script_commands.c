@@ -7527,15 +7527,32 @@ static void Cmd_various(void)
         BtlController_EmitSetMonData(0, REQUEST_PP_DATA_BATTLE, 0, 5, data);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
-    case VARIOUS_TRY_ACTIVATE_MOXIE:
-        if (GetBattlerAbility(gActiveBattler) == ABILITY_MOXIE
-            && HasAttackerFaintedTarget()
-            && !NoAliveMonsForEitherParty()
-            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
+    case VARIOUS_TRY_ACTIVATE_MOXIE:    // and chilling neigh + as one ice rider
+        if ((GetBattlerAbility(gActiveBattler) == ABILITY_MOXIE
+         || GetBattlerAbility(gActiveBattler) == ABILITY_CHILLING_NEIGH
+         || GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_ICE_RIDER)
+          && HasAttackerFaintedTarget()
+          && !NoAliveMonsForEitherParty()
+          && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
             SET_STATCHANGER(STAT_ATK, 1, FALSE);
             PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+            BattleScriptPush(gBattlescriptCurrInstr + 3);
+            gBattlescriptCurrInstr = BattleScript_AttackerAbilityStatRaise;
+            return;
+        }
+        break;
+    case VARIOUS_TRY_ACTIVATE_GRIM_NEIGH:   // and as one shadow rider
+        if ((GetBattlerAbility(gActiveBattler) == ABILITY_GRIM_NEIGH
+         || GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_SHADOW_RIDER)
+          && HasAttackerFaintedTarget()
+          && !NoAliveMonsForEitherParty()
+          && gBattleMons[gBattlerAttacker].statStages[STAT_SPATK] != 12)
+        {
+            gBattleMons[gBattlerAttacker].statStages[STAT_SPATK]++;
+            SET_STATCHANGER(STAT_SPATK, 1, FALSE);
+            PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPATK);
             BattleScriptPush(gBattlescriptCurrInstr + 3);
             gBattlescriptCurrInstr = BattleScript_AttackerAbilityStatRaise;
             return;
