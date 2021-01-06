@@ -5006,6 +5006,19 @@ static void Cmd_moveend(void)
             RecordLastUsedMoveBy(gBattlerAttacker, gCurrentMove);
             gBattleScripting.moveendState++;
             break;
+        case MOVEEND_EJECT_BUTTON:
+            if (gCurrentMove != MOVE_DRAGON_TAIL && gCurrentMove != MOVE_CIRCLE_THROW)
+            {
+                u8 battlers[4] = {0, 1, 2, 3};
+                SortBattlersBySpeed
+            }
+            
+            BattleScript_ForceRandomSwitch
+        
+        case MOVEEND_RED_CARD:
+        
+        case MOVEEND_EJECT_PACK:
+        
         case MOVEEND_LIFE_ORB:
             if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIFE_ORB
                 && IsBattlerAlive(gBattlerAttacker)
