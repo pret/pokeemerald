@@ -7714,3 +7714,18 @@ BattleScript_AnnounceAirLockCloudNine::
 	waitmessage 0x40
 	call BattleScript_WeatherFormChanges
 	end3
+
+BattleScript_QuickClawActivation::
+	playanimation BS_ATTACKER, B_ANIM_FOCUS_PUNCH_SETUP, NULL
+	waitanimation
+	printstring STRINGID_CANACTFASTERTHANKSTO
+	waitmessage 0x40
+	end2
+
+BattleScript_CustapBerryActivation::
+	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
+	waitanimation
+	printstring STRINGID_CANACTFASTERTHANKSTO
+	waitmessage 0x40
+	removeitem BS_ATTACKER
+	end2
