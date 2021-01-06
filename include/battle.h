@@ -427,6 +427,13 @@ struct Illusion
     struct Pokemon *mon;
 };
 
+struct PinchBerry
+{
+    u8 micle:1;
+    u8 custap:1;    // also quick claw
+    
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -542,6 +549,8 @@ struct BattleStruct
     u8 sameMoveTurns[MAX_BATTLERS_COUNT]; // For Metronome, number of times the same moves has been SUCCESFULLY used.
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
+    struct PinchBerry pinchBerry[MAX_BATTLERS_COUNT];
+    u8 quickClawBattlerId;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
