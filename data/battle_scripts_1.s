@@ -7461,6 +7461,11 @@ BattleScript_WhiteHerbRet::
 	return
 	
 BattleScript_ItemHealHP_RemoveItemRet::
+	jumpifability BS_SCRIPTING, ABILITY_RIPEN, BattleScript_ItemHealHP_RemoveItemRet_AbilityPopUp
+	goto BattleScript_ItemHealHP_RemoveItemRet_Anim
+BattleScript_ItemHealHP_RemoveItemRet_AbilityPopUp:
+	call BattleScript_AbilityPopUp
+BattleScript_ItemHealHP_RemoveItemRet_Anim:
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage 0x40
@@ -7470,6 +7475,11 @@ BattleScript_ItemHealHP_RemoveItemRet::
 	removeitem BS_SCRIPTING
 	return
 BattleScript_ItemHealHP_RemoveItemEnd2::
+	jumpifability BS_ATTACKER, ABILITY_RIPEN BattleScript_ItemHealHP_RemoveItemEnd2_AbilityPopUp
+	goto BattleScript_ItemHealHP_RemoveItemEnd2_Anim
+BattleScript_ItemHealHP_RemoveItemEnd2_AbilityPopUp:
+	call BattleScript_AbilityPopUp
+BattleScript_ItemHealHP_RemoveItemEnd2_Anim:
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_PKMNSITEMRESTOREDHEALTH
 	waitmessage 0x40
