@@ -7407,7 +7407,10 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
         if (moveType == GetBattlerHoldEffectParam(battlerDef)
             && (moveType == TYPE_NORMAL || typeEffectivenessModifier >= UQ_4_12(2.0)))
         {
-            MulModifier(&finalModifier, UQ_4_12(0.5));
+            if (abilityDef == ABILITY_RIPEN)
+                MulModifier(&finalModifier, UQ_4_12(0.25));
+            else
+                MulModifier(&finalModifier, UQ_4_12(0.5));
             if (updateFlags)
                 gSpecialStatuses[battlerDef].berryReduced = 1;
         }
