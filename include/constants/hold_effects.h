@@ -107,6 +107,7 @@
 #define HOLD_EFFECT_MICLE_BERRY    101
 #define HOLD_EFFECT_JABOCA_BERRY   102
 #define HOLD_EFFECT_CUSTAP_BERRY   103
+#define HOLD_EFFECT_RETALIATE_BERRY 104  // rowap, jaboca
 
 // Gen5 hold effects
 #define HOLD_EFFECT_FLOAT_STONE    115

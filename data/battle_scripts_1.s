@@ -7754,3 +7754,17 @@ BattleScript_MicleBerryActivateRet_Anim:
 	removeitem BS_SCRIPTING
 	return
 
+BattleScript_JabocaRowapBerryActivates::
+	jumpifability BS_TARGET, ABILITY_RIPEN, BattleScript_JabocaRowapBerryActivate_Ripen
+	goto BattleScript_JabocaRowapBerryActivate_Anim
+BattleScript_JabocaRowapBerryActivate_Ripen:
+	call BattleScript_AbilityPopUp
+BattleScript_JabocaRowapBerryActivate_Anim:
+	jumpifabsent BS_TARGET, BattleScript_JabocaRowapBerryActivate_Dmg	@ dont play the animation for a fainted target
+	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT, NULL
+	waitanimation
+BattleScript_JabocaRowapBerryActivate_Dmg:
+	call BattleScript_HurtAttacker
+	removeitem BS_TARGET
+	return
+

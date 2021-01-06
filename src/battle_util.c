@@ -5890,6 +5890,25 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     gBattleScripting.statChanger = SET_STATCHANGER(STAT_SPATK, 1, FALSE);
                 }
                 break;
+            case HOLD_EFFECT_RETALIATE_BERRY:
+                if (IsBattlerAlive(battlerId)
+                  && TARGET_TURN_DAMAGED
+                  && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
+                  && GetBattleMoveSplit(gCurrentMove) == ItemId_GetHoldEffectParam(gLastUsedItem))
+                {
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    if (GetBattlerAbility(battlerId) == ABILITY_RIPEN)
+                        gBattleMoveDamage *= 2;
+                    
+                    effect = ITEM_HP_CHANGE;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_JabocaRowapBerryActivates;
+                    PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
+                    RecordItemEffectBattle(battlerId, HOLD_EFFECT_ROCKY_HELMET);
+                }
+                break;
             }
         }
         break;
