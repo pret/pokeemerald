@@ -9074,17 +9074,22 @@ static void Cmd_statbuffchange(void)
         gBattlescriptCurrInstr = jumpPtr;
 }
 
+void ResetBattlerStatChanges(u8 battler)
+{
+    u32 j;
+    
+    gDisableStructs[battler].stockpileDef = 0;
+    gDisableStructs[battler].stockpileSpDef = 0;
+    for (j = 0; j < NUM_BATTLE_STATS; j++)
+        gBattleMons[battler].statStages[j] = DEFAULT_STAT_STAGE;
+}
+
 static void Cmd_normalisebuffs(void) // haze
 {
     s32 i, j;
 
     for (i = 0; i < gBattlersCount; i++)
-    {
-        gDisableStructs[i].stockpileDef = 0;
-        gDisableStructs[i].stockpileSpDef = 0;
-        for (j = 0; j < NUM_BATTLE_STATS; j++)
-            gBattleMons[i].statStages[j] = DEFAULT_STAT_STAGE;
-    }
+        ResetBattlerStatChanges(i);
 
     gBattlescriptCurrInstr++;
 }

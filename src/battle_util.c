@@ -3712,6 +3712,18 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_CURIOUS_MEDICINE:
+            if (!gSpecialStatuses[battler].switchInAbilityDone && IsDoubleBattle() && IsBattlerAlive(BATTLE_PARTNER(battler)))
+            {
+                u32 i;
+                gEffectBattler = BATTLE_PARTNER(battler);
+                ResetBattlerStatChanges(gEffectBattler);
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_CURIOUS_MEDICINE;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
         case ABILITY_ANTICIPATION:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
@@ -7891,3 +7903,4 @@ static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId)
         return TRUE;
     return FALSE;
 }
+
