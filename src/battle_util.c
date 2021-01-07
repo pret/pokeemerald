@@ -4644,9 +4644,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && gBattleMons[battler].statStages[STAT_SPEED] != 12
              && (moveType == TYPE_FIRE || moveType == TYPE_WATER))
             {
-                SET_STATCHANGER(STAT_SPEED, 12 - gBattleMons[battler].statStages[STAT_SPEED], FALSE);
+                SET_STATCHANGER(STAT_SPEED, 6, FALSE);
                 BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_TargetsStatWasMaxedOut;
+                gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseOnMoveEnd;
                 effect++;
             }
             break;
