@@ -9,18 +9,16 @@
 #define ITEM0_SACRED_ASH        0x40
 #define ITEM0_INFATUATION       0x80
 
-// field 1 masks
 #ifndef ITEM_EXPANSION
+// field 1 masks
 #define ITEM1_X_SPEED           0x0F
 #define ITEM1_X_DEFEND          0xF0
 
 // field 2 masks
 #define ITEM2_X_SPATK           0x0F
 #define ITEM2_X_ACCURACY        0xF0
-#endif
-
-// alt field 1 masks
-#ifdef ITEM_EXPANSION
+#else
+// new field 1 masks
 #define ITEM1_X_ATTACK          0x1
 #define ITEM1_X_DEFEND          0x2
 #define ITEM1_X_SPEED           0x4
