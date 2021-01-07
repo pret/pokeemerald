@@ -333,11 +333,12 @@ struct BattleDomeTrainer
 };
 
 #define DOME_TOURNAMENT_TRAINERS_COUNT 16
+#define BATTLE_TOWER_RECORD_COUNT 5
 
 struct BattleFrontier
 {
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
-    /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[5]; // From record mixing.
+    /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
     /*0xBEB*/ struct BattleTowerInterview towerInterview;
     /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0xCA8*/ u8 challengeStatus;

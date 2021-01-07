@@ -586,7 +586,7 @@ void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *ar
     int i, j;
     u8 battler = GetBattlerAtPosition(battlerPosition);
     int offset = tilesOffset;
-    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], arg5, BG_SCREEN_SIZE);
+    CpuCopy16(gMonSpritesGfxPtr->sprites.ptr[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], arg5, BG_SCREEN_SIZE);
     LoadBgTiles(bgId, arg5, 0x1000, tilesOffset);
     for (i = arg2; i < arg2 + 8; i++)
     {
@@ -604,7 +604,7 @@ void unref_sub_8119094(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, u
 {
     int i, j, offset;
 
-    DmaCopy16(3, gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
+    DmaCopy16(3, gMonSpritesGfxPtr->sprites.ptr[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
     offset = (arg5 >> 5) - (arg7 << 9);
     for (i = arg1; i < arg1 + 8; i++)
     {
