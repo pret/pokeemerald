@@ -1842,6 +1842,39 @@ BattleScript_EffectMagnetRise:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTrickRoom:
+	attackcanceler
+	attackstring
+	ppreduce
+	setroom
+	attackanimation
+	waitanimation
+	printfromtable gRoomsStringIds
+	waitmessage 0x40
+	savetarget
+	setbyte gBattlerTarget, 0
+RoomServiceLoop:
+	copybyte sBATTLER, gBattlerTarget
+	jumpifnoholdeffect BS_TARGET, HOLD_EFFECT_ROOM_SERVICE, RoomServiceLoop_NextBattler
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPEED, MIN_STAT_STAGE, RoomServiceLoop_NextBattler
+	setstatchanger STAT_SPEED, 1, TRUE
+	statbuffchange 0, RoomServiceLoop_NextBattler
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, RoomServiceLoop_NextBattler
+	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT, NULL
+	waitanimation
+	playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_NEGATIVE
+	
+@	setgraphicalstatchangevalues
+@	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+@	waitanimation
+	printstring STRINGID_USINGXTHEYOFZN
+	waitmessage 0x40
+	removeitem BS_TARGET
+RoomServiceLoop_NextBattler:
+	addbyte gBattlerTarget, 0x1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, RoomServiceLoop
+	restoretarget
+	goto BattleScript_MoveEnd
+	
 BattleScript_EffectWonderRoom:
 BattleScript_EffectMagicRoom:
 	attackcanceler
