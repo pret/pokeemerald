@@ -28,14 +28,14 @@
 // gbafix.c
 //---------------------------------------------------------------------------------
 /*
-    Gameboy Advance ROM fixer (by Dark Fader / BlackThunder / WinterMute / Diegoisawesome)
+    Gameboy Advance ROM fixer (by Dark Fader / BlackThunder / WinterMute / Sierraffinity)
     Validates header of GBA roms.
 
     History
     -------
     v1.07 - added support for ELF input, (PikalaxALT)
-    v1.06 - added output silencing, (Diegoisawesome)
-    v1.05 - added debug offset argument, (Diegoisawesome)
+    v1.06 - added output silencing, (Sierraffinity)
+    v1.05 - added debug offset argument, (Sierraffinity)
     v1.04 - converted to plain C, (WinterMute)
     v1.03 - header.fixed, header.device_type
     v1.02 - redefined the options (rgbfix style), checksum=0
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
     // show syntax
     if (argc <= 1)
     {
-        printf("GBA ROM fixer v"VER" by Dark Fader / BlackThunder / WinterMute / Diegoisawesome \n");
+        printf("GBA ROM fixer v"VER" by Dark Fader / BlackThunder / WinterMute / Sierraffinity \n");
         printf("Syntax: gbafix <rom.gba> [-p] [-t[title]] [-c<game_code>] [-m<maker_code>] [-r<version>] [-d<debug>] [--silent]\n");
         printf("\n");
         printf("parameters:\n");
