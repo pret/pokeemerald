@@ -7168,7 +7168,7 @@ BattleScript_TargetAbilityStatRaiseOnMoveEnd::
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
-	printstring STRINGID_TARGETABILITYSTATRAISE
+	printstring STRINGID_ABILITYRAISEDSTATDRASTICALLY
 	waitmessage 0x40
 	return
 	
