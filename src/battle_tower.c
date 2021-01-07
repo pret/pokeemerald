@@ -775,7 +775,7 @@ struct
 {
     {
         .species = SPECIES_METANG,
-        .fixedIV = 31,
+        .fixedIV = MAX_PER_STAT_IVS,
         .level = 42,
         .nature = NATURE_BRAVE,
         .evs = {0, 252, 252, 0, 6, 0},
@@ -783,7 +783,7 @@ struct
     },
     {
         .species = SPECIES_SKARMORY,
-        .fixedIV = 31,
+        .fixedIV = MAX_PER_STAT_IVS,
         .level = 43,
         .nature = NATURE_IMPISH,
         .evs = {252, 0, 0, 0, 6, 252},
@@ -791,7 +791,7 @@ struct
     },
     {
         .species = SPECIES_AGGRON,
-        .fixedIV = 31,
+        .fixedIV = MAX_PER_STAT_IVS,
         .level = 44,
         .nature = NATURE_ADAMANT,
         .evs = {0, 252, 0, 0, 252, 6},
@@ -1854,7 +1854,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     }
     else
     {
-        fixedIV = 31;
+        fixedIV = MAX_PER_STAT_IVS;
     }
 
     level = SetFacilityPtrsGetLevel();
@@ -3295,7 +3295,7 @@ static u8 GetFrontierTrainerFixedIvs(u16 trainerId)
     else if (trainerId <= FRONTIER_TRAINER_TESS)    // 200 - 219
         fixedIv = 21;
     else                                            // 220+ (- 299)
-        fixedIv = 31;
+        fixedIv = MAX_PER_STAT_IVS;
 
     return fixedIv;
 }
