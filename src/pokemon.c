@@ -4571,6 +4571,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             break;
         // formerly used by the item effects of the X Sp. Atk and the X Accuracy
         case 2:
+            break;
         #endif
         case 3:
             if ((itemEffect[cmdIndex] & ITEM3_GUARD_SPEC)
