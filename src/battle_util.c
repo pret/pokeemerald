@@ -5073,6 +5073,33 @@ static u8 RandomStatRaiseBerry(u32 battlerId, u32 itemId)
     return 0;
 }
 
+u8 TryHandleSeed(u8 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute)
+{
+    if (gFieldStatuses & terrainFlag && gBattleMons[battler].statStages[statId] < MAX_STAT_STAGE)
+    {
+        PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+        PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE);
+
+        gLastUsedItem = itemId; // for surge abilities
+        gEffectBattler = battler;
+        gBattleScripting.battler = battler;
+        SET_STATCHANGER(statId, 1, FALSE);
+        gBattleScripting.animArg1 = 0xE + statId;
+        gBattleScripting.animArg2 = 0;
+        if (execute)
+        {
+            BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
+        }
+        else
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_BerryStatRaiseRet;
+        }
+        return ITEM_STATS_CHANGE;
+    }
+    return 0;
+}
+
 static u8 ItemHealHp(u32 battlerId, u32 itemId, bool32 end2, bool32 percentHeal)
 {
     if (HasEnoughHpToEatBerry(battlerId, 2, itemId))
@@ -5311,6 +5338,23 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     gBattleScripting.animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
+                }
+            case HOLD_EFFECT_SEEDS:
+                switch (GetBattlerHoldEffectParam(battlerId))
+                {
+                case HOLD_EFFECT_PARAM_ELECTRIC_TERRAIN:
+                    effect = TryHandleSeed(battlerId, STATUS_FIELD_ELECTRIC_TERRAIN, STAT_DEF, gLastUsedItem, TRUE);
+                    break;
+                case HOLD_EFFECT_PARAM_GRASSY_TERRAIN:
+                    effect = TryHandleSeed(battlerId, STATUS_FIELD_GRASSY_TERRAIN, STAT_DEF, gLastUsedItem, TRUE);
+                    break;
+                case HOLD_EFFECT_PARAM_MISTY_TERRAIN:
+                    effect = TryHandleSeed(battlerId, STATUS_FIELD_MISTY_TERRAIN, STAT_SPDEF, gLastUsedItem, TRUE);
+                    break;
+                case HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN:
+                    effect = TryHandleSeed(battlerId, STATUS_FIELD_PSYCHIC_TERRAIN, STAT_SPDEF, gLastUsedItem, TRUE);
+                    break;
+                    
                 }
                 break;
             }

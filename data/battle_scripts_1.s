@@ -1520,6 +1520,7 @@ BattleScript_EffectPsychicTerrain:
 	waitanimation
 	printfromtable gTerrainStringIds
 	waitmessage 0x40
+	call BattleScript_TerrainSeedLoop
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTopsyTurvy:
@@ -1862,10 +1863,6 @@ RoomServiceLoop:
 	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT, NULL
 	waitanimation
 	playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_NEGATIVE
-	
-@	setgraphicalstatchangevalues
-@	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-@	waitanimation
 	printstring STRINGID_USINGXTHEYOFZN
 	waitmessage 0x40
 	removeitem BS_TARGET
@@ -6882,6 +6879,19 @@ BattleScript_SnowWarningActivates::
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES, NULL
 	call BattleScript_WeatherFormChanges
 	end3
+	
+BattleScript_TerrainSeedLoop:	
+	savetarget
+	setbyte gBattlerTarget, 0
+TerrainSeedLoop:
+	copybyte sBATTLER, gBattlerTarget
+	doterrainseed BS_TARGET, TerrainSeedLoop_NextBattler
+	removeitem BS_TARGET
+TerrainSeedLoop_NextBattler:
+	addbyte gBattlerTarget, 0x1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, TerrainSeedLoop
+	restoretarget
+	return
 
 BattleScript_ElectricSurgeActivates::
 	pause 0x20
@@ -6889,6 +6899,7 @@ BattleScript_ElectricSurgeActivates::
 	printstring STRINGID_TERRAINBECOMESELECTRIC
 	waitstate
 	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_ELECTRIC, NULL
+	call BattleScript_TerrainSeedLoop
 	end3
 
 BattleScript_MistySurgeActivates::
@@ -6897,6 +6908,7 @@ BattleScript_MistySurgeActivates::
 	printstring STRINGID_TERRAINBECOMESMISTY
 	waitstate
 	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_MISTY, NULL
+	call BattleScript_TerrainSeedLoop
 	end3
 
 BattleScript_GrassySurgeActivates::
@@ -6905,6 +6917,7 @@ BattleScript_GrassySurgeActivates::
 	printstring STRINGID_TERRAINBECOMESGRASSY
 	waitstate
 	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_GRASSY, NULL
+	call BattleScript_TerrainSeedLoop
 	end3
 
 BattleScript_PsychicSurgeActivates::
@@ -6913,6 +6926,7 @@ BattleScript_PsychicSurgeActivates::
 	printstring STRINGID_TERRAINBECOMESPSYCHIC
 	waitstate
 	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_PSYCHIC, NULL
+	call BattleScript_TerrainSeedLoop
 	end3
 
 BattleScript_BadDreamsActivates::
@@ -7612,6 +7626,20 @@ BattleScript_82DB85B::
 	call BattleScript_StatUp
 	removeitem BS_ATTACKER
 	end2
+	
+BattleScript_BerryStatRaiseRet::
+	jumpifability BS_SCRIPTING, ABILITY_RIPEN, BattleScript_BerryStatRaiseRet_AbilityPopup
+	goto BattleScript_BerryStatRaiseRet_Anim
+BattleScript_BerryStatRaiseRet_AbilityPopup:
+	call BattleScript_AbilityPopUp
+BattleScript_BerryStatRaiseRet_Anim:
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_BerryStatRaiseRet_End
+BattleScript_BerryStatRaiseRet_End:
+	setbyte cMULTISTRING_CHOOSER, 0x4
+	call BattleScript_StatUp
+	removeitem BS_SCRIPTING
+	return
 
 BattleScript_BerryFocusEnergyEnd2::
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT, NULL
