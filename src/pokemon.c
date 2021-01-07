@@ -5121,8 +5121,7 @@ static void BufferStatRoseMessage(s32 arg0)
     StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[arg0]]);
     if (B_X_ITEMS_BUFF == GEN_7)
     {
-        StringCopy(gBattleTextBuff2, gText_EmptyString3);
-        StringAppend(gBattleTextBuff2, gText_StatSharply);
+        StringCopy(gBattleTextBuff2, gText_StatSharply);
         StringAppend(gBattleTextBuff2, gText_StatRose);
     }
     else
