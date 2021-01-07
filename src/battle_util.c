@@ -4131,7 +4131,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 break;
             case ABILITY_BALL_FETCH:
                 if (gBattleMons[battler].item == ITEM_NONE
-                    && gBattleResults.catchAttempts[gLastUsedBall] >= 1
+                    && gBattleResults.catchAttempts[gLastUsedBall - ITEM_ULTRA_BALL] >= 1
                     && !gHasFetchedBall)
                 {
                     gBattleScripting.battler = battler;

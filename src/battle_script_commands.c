@@ -12008,10 +12008,8 @@ static void Cmd_handleballthrow(void)
             else // not caught
             {
                 if (!gHasFetchedBall)
-                {
                     gLastUsedBall = gLastUsedItem;
-                    gBattleResults.catchAttempts[gLastUsedBall]++;
-                }
+
                 if (IsCriticalCapture())
                     gBattleCommunication[MULTISTRING_CHOOSER] = shakes + 3;
                 else

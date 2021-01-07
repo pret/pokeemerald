@@ -7154,7 +7154,7 @@ BattleScript_TargetsStatWasMaxedOut::
 BattleScript_BattlerAbilityStatRaiseOnSwitchIn::
 	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
-	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
 	setgraphicalstatchangevalues
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
