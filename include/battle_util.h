@@ -131,5 +131,6 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battlerId);
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 u8 GetBattleMoveSplit(u32 moveId);
 u8 TryHandleSeed(u8 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
+bool32 IsBattlerAffectedByHazards(u8 battlerId, bool32 toxicSpikes);
 
 #endif // GUARD_BATTLE_UTIL_H
