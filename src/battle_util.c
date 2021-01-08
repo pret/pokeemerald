@@ -5357,6 +5357,23 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     
                 }
                 break;
+            case HOLD_EFFECT_EJECT_PACK:
+                if (gSpecialStatuses[battlerId].statFell)
+                {
+                    gSpecialStatuses[battlerId].statFell = FALSE;
+                    gActiveBattler = gBattleScripting.battler = battlerId;
+                    effect = ITEM_STATS_CHANGE;
+                    if (moveTurn)
+					{
+						BattleScriptPushCursor();
+						gBattlescriptCurrInstr = BattleScript_EjectPackActivate_Ret;
+					}
+					else
+                    {
+						BattleScriptExecute(BattleScript_EjectPackActivate_End2);
+                    }
+                }
+                break;
             }
 
             if (effect)

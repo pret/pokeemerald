@@ -148,6 +148,7 @@ struct ProtectStruct
 
 struct SpecialStatus
 {
+    u8 statFell:1;
     u8 statLowered:1;
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;

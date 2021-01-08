@@ -5027,7 +5027,7 @@ static void Cmd_moveend(void)
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_BUTTON
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)
                       && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
-                      && CountUsablePartyMons(battler) > 0)
+                      && CountUsablePartyMons(battler) > 0)  // has mon to switch into
                     {
                         gActiveBattler = gBattleScripting.battler = battler;
                         gLastUsedItem = gBattleMons[battler].item;
@@ -5061,7 +5061,7 @@ static void Cmd_moveend(void)
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_RED_CARD
                       && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
-                      && CountUsablePartyMons(battler) > 0)
+                      && CountUsablePartyMons(battler) > 0)  // has mon to switch into
                     {
                         gLastUsedItem = gBattleMons[battler].item;
                         gActiveBattler = gBattleScripting.battler = battler;    // battler with red card
@@ -5078,6 +5078,27 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_EJECT_PACK:
+            {
+                u8 battlers[4] = {0, 1, 2, 3};
+                SortBattlersBySpeed(battlers, FALSE);
+                for (i = 0; i < gBattlersCount; i++)
+                {
+                    u8 battler = battlers[i];
+                    if (IsBattlerAlive(battler)
+                     && gSpecialStatuses[battler].statFell
+                     && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_PACK
+                     && CountUsablePartyMons(battler) > 0)  // has mon to switch into
+                    {
+                        gSpecialStatuses[battler].statFell = FALSE;
+                        gActiveBattler = gBattleScripting.battler = battler;
+                        gLastUsedItem = gBattleMons[battler].item;
+                        BattleScriptPushCursor();
+						gBattlescriptCurrInstr = BattleScript_EjectPackActivates;
+                        effect = TRUE;
+                        break;  // only fastest eject pack activates
+                    }
+                }
+            }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_LIFE_ORB:
@@ -9095,6 +9116,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             index++;
             gBattleTextBuff2[index] = B_BUFF_EOS;
 
+            gSpecialStatuses[gActiveBattler].statFell = TRUE;   // for eject pack
             if (gBattleMons[gActiveBattler].statStages[statId] == MIN_STAT_STAGE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             else
