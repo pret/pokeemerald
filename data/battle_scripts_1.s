@@ -7803,7 +7803,7 @@ BattleScript_AnnounceAirLockCloudNine::
 	end3
 
 BattleScript_RedCardActivates::
-	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_RedCardEnd
+	jumpifcantswitch BS_ATTACKER, BattleScript_RedCardEnd
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_REDCARDACTIVATE
 	waitmessage 0x40
@@ -7829,3 +7829,24 @@ BattleScript_RedCardSuctionCups:
 	swapattackerwithtarget
 	return
 
+BattleScript_EjectButtonActivates::
+	jumpifcantswitch BS_SCRIPTING, BattleScript_EjectButtonEnd
+	makevisible BS_ATTACKER
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
+	printstring STRINGID_EJECTBUTTONACTIVATE
+	waitmessage 0x40
+	removeitem BS_SCRIPTING
+	openpartyscreen BS_SCRIPTING, BattleScript_EjectButtonEnd
+	switchoutabilities BS_SCRIPTING
+	waitstate
+	switchhandleorder BS_SCRIPTING 0x2
+	returntoball BS_SCRIPTING
+	getswitchedmondata BS_SCRIPTING
+	switchindataupdate BS_SCRIPTING
+	hpthresholds BS_SCRIPTING
+	printstring 0x3
+	switchinanim BS_SCRIPTING 0x1
+	waitstate
+	switchineffects BS_SCRIPTING
+BattleScript_EjectButtonEnd:
+	return

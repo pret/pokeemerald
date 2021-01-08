@@ -5010,6 +5010,36 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_EJECT_BUTTON:
+            if (gCurrentMove != MOVE_DRAGON_TAIL
+              && gCurrentMove != MOVE_CIRCLE_THROW
+              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+              && IsBattlerAlive(gBattlerAttacker)
+              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
+              && (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
+            {
+                u8 battlers[4] = {0, 1, 2, 3};
+                SortBattlersBySpeed(battlers, FALSE);
+                for (i = 0; i < gBattlersCount; i++)
+                {
+                    u8 battler = battlers[i];
+                    // attacker is the damage-dealer, battler is mon to be switched out
+                    if (IsBattlerAlive(battler)
+                      && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_BUTTON
+                      && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)
+                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
+                      && CountUsablePartyMons(battler) > 0)
+                    {
+                        gActiveBattler = gBattleScripting.battler = battler;
+                        gLastUsedItem = gBattleMons[battler].item;
+                        if (gBattleMoves[gCurrentMove].effect == EFFECT_HIT_ESCAPE)
+                            gBattlescriptCurrInstr = BattleScript_MoveEnd;  // prevent user switch-in selection
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_EjectButtonActivates;
+                        effect = TRUE;
+                        break; // only the fastest Eject Button activates
+                    }
+                }
+            }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_RED_CARD:
@@ -5030,7 +5060,8 @@ static void Cmd_moveend(void)
                       && IsBattlerAlive(battler)
                       && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_RED_CARD
-                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0))
+                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
+                      && CountUsablePartyMons(battler) > 0)
                     {
                         gLastUsedItem = gBattleMons[battler].item;
                         gActiveBattler = gBattleScripting.battler = battler;    // battler with red card
