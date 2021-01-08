@@ -5010,22 +5010,47 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_EJECT_BUTTON:
-            /*if (gCurrentMove != MOVE_DRAGON_TAIL && gCurrentMove != MOVE_CIRCLE_THROW)
-            {
-                u8 battlers[4] = {0, 1, 2, 3};
-                SortBattlersBySpeed
-            }
-            
-            BattleScript_ForceRandomSwitch*/
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_RED_CARD:
+            if (gCurrentMove != MOVE_DRAGON_TAIL
+              && gCurrentMove != MOVE_CIRCLE_THROW
+              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+              && IsBattlerAlive(gBattlerAttacker)
+              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
+              && (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
+            {
+                u8 battlers[4] = {0, 1, 2, 3};
+                SortBattlersBySpeed(battlers, FALSE);
+                for (i = 0; i < gBattlersCount; i++)
+                {
+                    u8 battler = battlers[i];
+                    // attacker is the one to be switched out, battler is one with red card
+                    if (battler != gBattlerAttacker
+                      && IsBattlerAlive(battler)
+                      && !DoesSubstituteBlockMove(gCurrentMove, gBattlerAttacker, battler)
+                      && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_RED_CARD
+                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0))
+                    {
+                        gLastUsedItem = gBattleMons[battler].item;
+                        gActiveBattler = gBattleScripting.battler = battler;    // battler with red card
+                        gEffectBattler = gBattlerAttacker;
+                        if (gBattleMoves[gCurrentMove].effect == EFFECT_HIT_ESCAPE)
+                            gBattlescriptCurrInstr = BattleScript_MoveEnd;  // prevent user switch-in selection
+                        BattleScriptPushCursor();
+						gBattlescriptCurrInstr = BattleScript_RedCardActivates;
+						effect = TRUE;
+                        break;  // only fastest red card activates
+                    }
+                }
+            }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_EJECT_PACK:
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_LIFE_ORB:
+            // TODO shell bell goes here too
             if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIFE_ORB
                 && IsBattlerAlive(gBattlerAttacker)
                 && !(GetBattlerAbility(gBattlerAttacker) == ABILITY_SHEER_FORCE && gBattleMoves[gCurrentMove].flags & FLAG_SHEER_FORCE_BOOST)
@@ -7981,6 +8006,7 @@ static void Cmd_various(void)
             && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
             && TARGET_TURN_DAMAGED)
         {
+            gBattleScripting.switchCase = B_SWITCH_HIT;
             gBattlescriptCurrInstr = BattleScript_ForceRandomSwitch;
         }
         else

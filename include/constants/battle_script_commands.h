@@ -36,6 +36,7 @@
 #define sMULTIHIT_EFFECT gBattleScripting + 0x30
 #define sILLUSION_NICK_HACK gBattleScripting + 0x32
 #define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
+#define sSWITCH_CASE gBattleScripting + 0x34
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 
@@ -233,5 +234,10 @@
 #define BIT_SPDEF                   0x20
 #define BIT_ACC                     0x40
 #define BIT_EVASION                 0x80
+
+// switch cases
+#define B_SWITCH_NORMAL     0
+#define B_SWITCH_HIT        1   // dragon tail, circle throw
+#define B_SWITCH_RED_CARD   2
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
