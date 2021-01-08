@@ -169,6 +169,7 @@
 #define VARIOUS_JUMP_IF_ABSENT                  101
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TERRAIN_SEED                    103
+#define VARIOUS_MAKE_INVISIBLE                  104
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

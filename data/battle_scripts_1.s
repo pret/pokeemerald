@@ -7895,6 +7895,7 @@ BattleScript_EjectButtonActivates::
 	printstring STRINGID_EJECTBUTTONACTIVATE
 	waitmessage 0x40
 	removeitem BS_SCRIPTING
+	makeinvisible BS_SCRIPTING
 	openpartyscreen BS_SCRIPTING, BattleScript_EjectButtonEnd
 	switchoutabilities BS_SCRIPTING
 	waitstate
