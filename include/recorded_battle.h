@@ -30,7 +30,7 @@ void sub_818603C(u8 arg0);
 u32 GetAiScriptsInRecordedBattle(void);
 void sub_8186444(void);
 bool8 sub_8186450(void);
-void sub_8186468(u8 *dst);
+void GetRecordedBattleRecordMixFriendName(u8 *dst);
 u8 GetRecordedBattleRecordMixFriendClass(void);
 u8 GetRecordedBattleApprenticeId(void);
 u8 GetRecordedBattleRecordMixFriendLanguage(void);
