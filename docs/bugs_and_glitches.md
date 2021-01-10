@@ -1,7 +1,7 @@
 
 # Bugs and Glitches
 
-These are known bugs and glitches in the original Pokémon Emerald game: code that clearly does not work as intended, or that only works in limited circumstances but has the possibility to fail or crash.
+These are known bugs and glitches in the original Pokémon Emerald game: code that clearly does not work as intended, or that only works in limited circumstances but has the possibility to fail or crash. Defining the `BUGFIX` preprocessor variable will fix some of these automatically.
 
 Fixes are written in the `diff` format. If you've used Git before, this should look familiar:
 
@@ -60,7 +60,7 @@ void CB2_InitTitleScreen(void)
 		SetGpuReg(REG_OFFSET_BLDY, 0);
 		...
 ```
-This matches with the code of FR/LG and does what GF originally wanted to do.
+This matches what FRLG does and obtains the seed differently than RS, independently of the RTC.
 
 ## Scrolling through items in the bag causes the image to flicker
 
@@ -94,4 +94,22 @@ Then edit `BagMenu_MoveCursorCallback` in [src/item_menu.c](https://github.com/p
 +	RemoveBagItemIconSprite(gBagMenu->unk81B_1);
 	if (a != -2)
 	...
+```
+
+## Pokémon that have an affine transform as part of their entry animation glitch when going in and out of Poké Balls without a screen transition in between
+
+**Fix:** Edit `sub_817F77C` in [src/pokemon_animation.c](https://github.com/pret/pokeemerald/blob/master/src/pokemon_animation.c#L1028):
+
+```diff
+    ...
+-#ifdef BUGFIX
+    else
+    {
+        // FIX: Reset these back to normal after they were changed so Poké Ball catch/release
+        // animations without a screen transition in between don't break
+        sprite->affineAnimPaused = FALSE;
+        sprite->affineAnims = gUnknown_082FF694;
+    }
+-#endif // BUGFIX
+}
 ```
