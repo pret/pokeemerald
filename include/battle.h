@@ -702,7 +702,11 @@ struct BattleSpriteData
 struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
-    void* sprites[4];
+    union
+    {
+	void* ptr[4];
+	u8* byte[4];
+    } sprites;
     struct SpriteTemplate templates[4];
     struct SpriteFrameImage field_74[4][4];
     u8 field_F4[0x80];
@@ -829,5 +833,7 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
+extern bool8 gHasFetchedBall;
+extern u8 gLastUsedBall;
 
 #endif // GUARD_BATTLE_H
