@@ -903,7 +903,7 @@ static bool8 ShouldUseItem(void)
         #else
             if (itemEffects[1] & ITEM1_X_ATTACK)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x1;
-            if (itemEffects[1] & ITEM1_X_DEFEND)
+            if (itemEffects[1] & ITEM1_X_DEFENSE)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x2;
             if (itemEffects[1] & ITEM1_X_SPEED)
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= 0x4;

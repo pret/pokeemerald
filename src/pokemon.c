@@ -4513,7 +4513,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     gBattleMons[gActiveBattler].statStages[STAT_ATK] = MAX_STAT_STAGE;
                 retVal = FALSE;
             }
-            if ((itemEffect[cmdIndex] & ITEM1_X_DEFEND)
+            if ((itemEffect[cmdIndex] & ITEM1_X_DEFENSE)
              && gBattleMons[gActiveBattler].statStages[STAT_DEF] < MAX_STAT_STAGE)
             {
                 if (B_X_ITEMS_BUFF == GEN_7)
@@ -5188,7 +5188,7 @@ u8 *UseStatIncreaseItem(u16 itemId)
         case ITEM1_X_ATTACK:
             BufferStatRoseMessage(STAT_ATK);
             break;
-        case ITEM1_X_DEFEND:
+        case ITEM1_X_DEFENSE:
             BufferStatRoseMessage(STAT_DEF);
             break;
         case ITEM1_X_SPEED:

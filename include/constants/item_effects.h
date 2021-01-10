@@ -20,7 +20,7 @@
 #else
 // new field 1 masks
 #define ITEM1_X_ATTACK          0x1
-#define ITEM1_X_DEFEND          0x2
+#define ITEM1_X_DEFENSE         0x2
 #define ITEM1_X_SPEED           0x4
 #define ITEM1_X_SPATK           0x8
 #define ITEM1_X_SPDEF           0x10
