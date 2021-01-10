@@ -342,10 +342,6 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
 
 static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEvent, u8 direction)
 {
-    u8 r5 = direction;
-    u8 r6 = direction;
-    r6++; r6--;
-
     if (ObjectEventIsMovementOverridden(playerObjEvent)
      && !ObjectEventClearHeldMovementIfFinished(playerObjEvent))
     {
@@ -357,13 +353,13 @@ static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEve
                 return TRUE;
             }
 
-            if (playerObjEvent->movementDirection != r5)
+            if (playerObjEvent->movementDirection != direction)
             {
                 ObjectEventClearHeldMovement(playerObjEvent);
                 return FALSE;
             }
 
-            if (!sub_808B028(r6))
+            if (!sub_808B028(direction))
             {
                 ObjectEventClearHeldMovement(playerObjEvent);
                 return FALSE;
@@ -2085,7 +2081,7 @@ static void sub_808D094(u8 taskId)
             sub_808D074(object->facingDirection);
             data[1] = 0;
             data[2] = 1;
-            data[3] = (u16)(sprite->pos1.y + sprite->pos2.y) * 16;
+            data[3] = (u16)(sprite->pos1.y + sprite->pos2.y) << 4;
             sprite->pos2.y = 0;
             CameraObjectReset2();
             object->fixedPriority = TRUE;
