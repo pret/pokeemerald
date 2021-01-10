@@ -382,8 +382,6 @@ const u8 gItemEffect_XSpecialAttack[8] = {
 const u8 gItemEffect_XSpecialDefense[8] = {
 #ifdef BATTLE_ENGINE
     [1] = ITEM1_X_SPDEF,
-#else
-    [2] = 1,
 #endif
     [5] = ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID,
     [6] = 1,
