@@ -1136,7 +1136,7 @@ bool32 AI_WeatherHasEffect(void)
     for (i = 0; i < gBattlersCount; i++)
     {
         if (IsBattlerAlive(i)
-          && (AI_GetAbility(i) == ABILITY_AIR_LOCK || AI_GetAbility(i) == ABILITY_CLOUD_NINE)
+          && (AI_GetAbility(i) == ABILITY_AIR_LOCK || AI_GetAbility(i) == ABILITY_CLOUD_NINE))
             return TRUE;
     }
     return FALSE;
