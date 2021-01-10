@@ -382,7 +382,7 @@ const struct Item gItems[] =
     {
         .name = _("Beast Ball"),
         .itemId = ITEM_BEAST_BALL,
-        .price = 1000,
+        .price = 0,
         .description = sBeastBallDesc,
         .pocket = POCKET_POKE_BALLS,
         .type = 11,
