@@ -16,11 +16,9 @@
 #define P_UPDATED_EGG_GROUPS    GEN_8 // Since Gen 8, certain Pokémon have gained new egg groups.
 
 #ifndef ITEM_EXPANSION
-
 //Item Definitions for gEvolutionTable
 
 //EVO_MEGA_EVOLUTION
-
 #define ITEM_VENUSAURITE         ITEM_NONE
 #define ITEM_CHARIZARDITE_X      ITEM_NONE
 #define ITEM_CHARIZARDITE_Y      ITEM_NONE
@@ -70,7 +68,6 @@
 #define ITEM_DIANCITE            ITEM_NONE
 
 //EVO_TRADE_ITEM
-
 #define ITEM_PROTECTOR           ITEM_NONE
 #define ITEM_ELECTIRIZER         ITEM_NONE
 #define ITEM_MAGMARIZER          ITEM_NONE
@@ -80,8 +77,7 @@
 #define ITEM_SACHET              ITEM_NONE
 #define ITEM_WHIPPED_DREAM       ITEM_NONE
 
-//EVO_ITEM*
-
+//EVO_ITEM
 #define ITEM_ICE_STONE           ITEM_NONE
 #define ITEM_SHINY_STONE         ITEM_NONE
 #define ITEM_DUSK_STONE          ITEM_NONE
@@ -93,13 +89,10 @@
 #define ITEM_GALARICA_WREATH     ITEM_NONE
 #define ITEM_CHIPPED_POT         ITEM_NONE
 
-//EVO_ITEM_HOLD*
-
+//EVO_ITEM_HOLD
 #define ITEM_RAZOR_FANG          ITEM_NONE
 #define ITEM_RAZOR_CLAW          ITEM_NONE
 #define ITEM_OVAL_STONE          ITEM_NONE
-
-
 #endif
 
 #endif // GUARD_CONSTANTS_POKEMON_CONFIG_H
