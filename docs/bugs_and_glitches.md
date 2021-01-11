@@ -13,54 +13,8 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 
 ## Contents
 
-- [RNG does not get seeded](#rng-does-not-get-seeded)
 - [Scrolling through items in the bag causes the image to flicker](#scrolling-through-items-in-the-bag-causes-the-image-to-flicker)
 
-
-## RNG does not get seeded
-
-**Fix:** Add the following function to [src/main.c](https://github.com/pret/pokeemerald/blob/master/src/main.c):
-```diff
-+static void SeedRngWithRtc(void)
-+{
-+	u32 seed = RtcGetMinuteCount();
-+	seed = (seed >> 16) ^ (seed & 0xFFFF);
-+	SeedRng(seed);
-+}
-```
-
-And edit `AgbMain`:
-
-```diff
-	...
-	RtcInit();
-	CheckForFlashMemory();
-	InitMainCallbacks();
-	InitMapMusic();
-+	SeedRngWithRtc();
-	ClearDma3Requests();
-	...
-```
-
-This restores the code of Ruby/Sapphire.
-
-**Alternate Fix:** Edit the following function in [src/title_screen.c](https://github.com/pret/pokeemerald/blob/master/src/title_screen.c):
-
-```diff
-void CB2_InitTitleScreen(void)
-{
-	switch (gMain.state)
-	{
-	default:
-	case 0:
-		SetVBlankCallback(NULL);
-+		StartTimer1();
-		SetGpuReg(REG_OFFSET_BLDCNT, 0);
-		SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-		SetGpuReg(REG_OFFSET_BLDY, 0);
-		...
-```
-This matches what FRLG does and obtains the seed differently than RS, independently of the RTC.
 
 ## Scrolling through items in the bag causes the image to flicker
 
