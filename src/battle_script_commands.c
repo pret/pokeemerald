@@ -8298,6 +8298,41 @@ static void Cmd_various(void)
     case VARIOUS_DESTROY_ABILITY_POPUP:
         DestroyAbilityPopUp(gActiveBattler);
         break;
+    case VARIOUS_TOTEM_BOOST:
+        gActiveBattler = gBattlerAttacker;
+        if (gTotemBoosts[gActiveBattler].stats == 0)
+        {
+            gBattlescriptCurrInstr += 7;    // stats done, exit
+        }
+        else
+        {
+            for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
+            {
+                if (gTotemBoosts[gActiveBattler].stats & (1 << i))
+                {
+                    if (gTotemBoosts[gActiveBattler].statChanges[i] <= -1)
+                        SET_STATCHANGER(i + 1, abs(gTotemBoosts[gActiveBattler].statChanges[i]), TRUE);
+                    else
+                        SET_STATCHANGER(i + 1, gTotemBoosts[gActiveBattler].statChanges[i], FALSE);
+                    
+                    gTotemBoosts[gActiveBattler].stats &= ~(1 << i);
+                    gBattleScripting.battler = gActiveBattler;
+                    gBattlerTarget = gActiveBattler;
+                    if (gTotemBoosts[gActiveBattler].stats & 0x80)
+                    {
+                        gTotemBoosts[gActiveBattler].stats &= ~0x80; // set 'aura flared to life' flag
+                        gBattlescriptCurrInstr = BattleScript_TotemFlaredToLife;
+                    }
+                    else
+                    {
+                        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // do boost
+                    }
+                    return;
+                }
+            }
+            gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
