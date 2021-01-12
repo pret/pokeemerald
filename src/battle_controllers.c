@@ -62,7 +62,20 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     ClearBattleMonForms();
     BattleAI_SetupItems();
 	BattleAI_SetupFlags();
-	BattleAI_SetupAIData(0xF);
+    // this isn't necessary, and is dangerous
+    // if we just finished a double battle
+    // as this function modifies array elements
+    // by using gActiveBattler as the index
+    // and gActiveBattler isn't reset upon
+    // entering a battle
+
+    // this bug affects vanilla as well, but vanilla
+    // does not perform any array element writes
+    // and any garbage values due to the result of
+    // reading an invalid array element are reset
+    // when the AI chooses its move
+
+    // BattleAI_SetupAIData(0xF);
 
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
