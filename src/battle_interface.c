@@ -969,6 +969,7 @@ static void TryToggleHealboxVisibility(u8 priority, u8 healthboxLeftSpriteId, u8
         case B_ANIM_TERRAIN_GRASSY:
         case B_ANIM_TERRAIN_ELECTRIC:
         case B_ANIM_TERRAIN_PSYCHIC:
+        case B_ANIM_GULP_MISSILE:
             break;
         }
         return; //all other special anims dont hide

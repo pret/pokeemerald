@@ -826,6 +826,7 @@ gBattleAnims_General::
 	.4byte General_SlideOffScreen
 	.4byte General_RestoreBg
 	.4byte General_TotemFlare
+	.4byte General_GulpMissile
 
 	.align 2
 gBattleAnims_Special::
@@ -24418,6 +24419,22 @@ General_TotemFlare::
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_ATTACKER
+	end
+
+General_GulpMissile: @ Modified Tackle anim (placeholder)
+	loadspritegfx ANIM_TAG_IMPACT
+	monbg ANIM_ATTACKER
+	setalpha 12, 8
+	createsprite gHorizontalLungeSpriteTemplate, ANIM_TARGET, 2, 4, 4
+	delay 6
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, ANIM_ATTACKER, 2
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 3, 0, 6, 1
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 10
+	playse SE_EFFECTIVE
+	clearmonbg ANIM_ATTACKER
+	blendoff
 	end
 
 RainbowEndureEffect:
