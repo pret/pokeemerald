@@ -1,6 +1,6 @@
-.set LOCALID_INVISIBLE_BRIDGE_KECLEON, 30
+.set LOCALID_BRIDGE_KECLEON, 30
 .set LOCALID_STEVEN, 31
-.set LOCALID_VISIBLE_BRIDGE_KECLEON, 36
+.set LOCALID_BRIDGE_KECLEON_SHADOW, 36  @ They use a second object which is identical to Kecleon but has a reflection palette tag for the bridge shadow
 
 Route120_MapScripts:: @ 81F53EC
 	map_script MAP_SCRIPT_ON_RESUME, Route120_OnResume
@@ -31,8 +31,8 @@ Route120_EventScript_RemoveBridgeKecleon:: @ 81F5449
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject LOCALID_INVISIBLE_BRIDGE_KECLEON
-	removeobject LOCALID_VISIBLE_BRIDGE_KECLEON
+	removeobject LOCALID_BRIDGE_KECLEON
+	removeobject LOCALID_BRIDGE_KECLEON_SHADOW
 	return
 
 Route120_EventScript_RemoveKecleon:: @ 81F5460
@@ -61,7 +61,7 @@ Route120_EventScript_SetBridgeClearMetatiles:: @ 81F54A3
 	return
 
 Route120_EventScript_SetBridgeKecleonMovement:: @ 81F54C8
-	setobjectmovementtype LOCALID_VISIBLE_BRIDGE_KECLEON, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype LOCALID_BRIDGE_KECLEON_SHADOW, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 Route120_OnTransition: @ 81F54CD
@@ -205,9 +205,9 @@ Route120_EventScript_StevenBattleKecleon:: @ 81F568B
 	delay 20
 	msgbox Route120_Text_StevenUsedDevonScope, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_INVISIBLE_BRIDGE_KECLEON, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_BRIDGE_KECLEON, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement LOCALID_INVISIBLE_BRIDGE_KECLEON, Movement_KecleonAppears
+	applymovement LOCALID_BRIDGE_KECLEON, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, 2
@@ -230,8 +230,8 @@ Route120_EventScript_StevenBattleKecleon:: @ 81F568B
 
 Route120_EventScript_RemoveBridgeKecleonPostBattle:: @ 81F571C
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_INVISIBLE_BRIDGE_KECLEON
-	removeobject LOCALID_VISIBLE_BRIDGE_KECLEON
+	removeobject LOCALID_BRIDGE_KECLEON
+	removeobject LOCALID_BRIDGE_KECLEON_SHADOW
 	fadescreenswapbuffers FADE_FROM_BLACK
 	goto Route120_EventScript_StevenGiveDeconScope
 	end
@@ -276,7 +276,7 @@ Route120_Movement_ApproachKecleonWest: @ 81F57B9
 	walk_left
 	step_end
 
-Route120_EventScript_InvisibleBridgeKecleon:: @ 81F57BC
+Route120_EventScript_BridgeKecleon:: @ 81F57BC
 	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_NPC
 	end
 
