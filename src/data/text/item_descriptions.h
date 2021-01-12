@@ -1127,19 +1127,19 @@ static const u8 sDragonScaleDesc[] = _(
     "type Pokémon.");
 
 static const u8 sOvalStoneDesc[] = _(
-    "Helps a certain\n"
-    "Pokémon to evolve.\n"
-    "Looks like an egg.");
+    "Makes a certain\n"
+    "Pokémon evolve. It's\n"
+    "shaped like an egg.");
 
 static const u8 sProtectorDesc[] = _(
     "Loved by a certain\n"
-    "Pokémon. It's quite\n"
-    "heavy.");
+    "Pokémon. It's stiff\n"
+    "and heavy.");
 
 static const u8 sElectirizerDesc[] = _(
     "Loved by a certain\n"
     "Pokémon. It's full\n"
-    "of electricity.");
+    "of electric energy.");
 
 static const u8 sMagmarizerDesc[] = _(
     "Loved by a certain\n"
@@ -1147,29 +1147,29 @@ static const u8 sMagmarizerDesc[] = _(
     "of magma energy.");
 
 static const u8 sDubiousDiscDesc[] = _(
-    "Loved by a certain\n"
-    "Pokémon. It's over-\n"
-    "flowing with data.");
+    "A transparent device\n"
+    "overflowing with\n"
+    "dubious data.");
 
 static const u8 sReaperClothDesc[] = _(
     "Loved by a certain\n"
-    "Pokémon. Imbued\n"
-    "with strong energy.");
+    "Pokémon. Imbued with\n"
+    "spiritual energy.");
 
 static const u8 sRazorClawDesc[] = _(
-    "Helps a certain\n"
-    "Pokémon to evolve.\n"
-    "It's a sharp claw.");
+    "A hooked claw that\n"
+    "ups the holder's\n"
+    "critical-hit ratio.");
 
 static const u8 sRazorFangDesc[] = _(
-    "Helps a certain\n"
-    "Pokémon to evolve.\n"
-    "It's a sharp fang.");
+    "A hold item that\n"
+    "may cause flinching\n"
+    "when the foe is hit.");
 
 static const u8 sPrismScaleDesc[] = _(
-    "A mysterious scale.\n"
-    "It helps a certain\n"
-    "Pokémon to evolve.");
+    "A mysterious scale\n"
+    "that evolves certain\n"
+    "Pokémon. It shines.");
 
 static const u8 sWhippedDreamDesc[] = _(
     "A soft and sweet\n"
