@@ -4880,6 +4880,8 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_BULK_UP:
             case EFFECT_CALM_MIND:
             case EFFECT_DRAGON_DANCE:
+            case EFFECT_DEFENSE_UP_3:
+            case EFFECT_SPECIAL_ATTACK_UP_3:
                 score -= 2;
                 break;
             default:
