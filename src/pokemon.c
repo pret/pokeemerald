@@ -2685,7 +2685,7 @@ static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
     u16 statValue = 0;
     u8 nature;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_20 || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
         return 0;
 
     ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
@@ -2729,8 +2729,8 @@ u16 GetUnionRoomTrainerPic(void)
     u8 linkId;
     u32 arrId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
-        linkId = gUnknown_0203C7B4 ^ 1;
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+        linkId = gRecordedBattleMultiplayerId ^ 1;
     else
         linkId = GetMultiplayerId() ^ 1;
 
@@ -2744,8 +2744,8 @@ u16 GetUnionRoomTrainerClass(void)
     u8 linkId;
     u32 arrId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
-        linkId = gUnknown_0203C7B4 ^ 1;
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+        linkId = gRecordedBattleMultiplayerId ^ 1;
     else
         linkId = GetMultiplayerId() ^ 1;
 
@@ -3367,7 +3367,7 @@ u8 CountAliveMonsInBattle(u8 caseId)
 
 static bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
 {
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
         return FALSE;
     else if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
         return FALSE;
@@ -6267,7 +6267,7 @@ u16 GetBattleBGM(void)
         return MUS_VS_KYOGRE_GROUDON;
     else if (gBattleTypeFlags & BATTLE_TYPE_REGI)
         return MUS_VS_REGI;
-    else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+    else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return MUS_VS_TRAINER;
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
@@ -6627,7 +6627,7 @@ static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
 
 void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3)
 {
-    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
+    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
         DoMonFrontSpriteAnimation(sprite, species, noCry, arg3 | 0x80);
     else
         DoMonFrontSpriteAnimation(sprite, species, noCry, arg3);
@@ -6705,7 +6705,7 @@ void StopPokemonAnimationDelayTask(void)
 
 void BattleAnimateBackSprite(struct Sprite* sprite, u16 species)
 {
-    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
+    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
     {
         sprite->callback = SpriteCallbackDummy;
     }
