@@ -526,7 +526,8 @@
 #define B_ANIM_FORM_CHANGE              0x1D
 #define B_ANIM_SLIDE_OFFSCREEN          0x1E // for Emergency Exit
 #define B_ANIM_RESTORE_BG               0x1F // for Terrain Endings
-#define B_ANIM_ZMOVE_ACTIVATE           0x20
+#define B_ANIM_TOTEM_FLARE              0x20 // Totem boosts aura flare
+#define B_ANIM_ZMOVE_ACTIVATE           0x21
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0

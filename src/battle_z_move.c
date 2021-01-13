@@ -179,7 +179,7 @@ bool32 IsViableZMove(u8 battlerId, u16 move)
             return FALSE;   //partner has mega evolved or is about to mega evolve
     }
     
-    if (USE_BATTLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
+    if (B_ENABLE_DEBUG && gBattleStruct->debugHoldEffects[battlerId])
         holdEffect = gBattleStruct->debugHoldEffects[battlerId];
     else if (item == ITEM_ENIGMA_BERRY)
         return FALSE;   //holdEffect = gEnigmaBerries[battlerId].holdEffect; 
