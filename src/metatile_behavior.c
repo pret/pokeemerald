@@ -970,10 +970,13 @@ bool8 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
 {
     // BUG: The player is unintentionally able to emerge on water doors.
     // Also the narrower underwater door in the underwater tileset has the wrong metatile behavior. This causes the dive glitch.
-    // To fix that add || metatileBehavior == MB_WATER_DOOR to the if statement below and 
-    // change the metatile behavior of the narrower water door with porymaps tileset editor.
+    // To fix change the metatile behavior of the narrower water door with porymap's tileset editor.
     if (metatileBehavior == MB_NO_SURFACING
-     || metatileBehavior == MB_SEAWEED_NO_SURFACING)
+     || metatileBehavior == MB_SEAWEED_NO_SURFACING
+     #ifdef BUGFIX
+     || metatileBehavior == MB_WATER_DOOR
+     #endif
+     )
         return TRUE;
     else
         return FALSE;

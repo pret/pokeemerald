@@ -228,6 +228,9 @@ EWRAM_DATA u32 gFieldStatuses = 0;
 EWRAM_DATA struct FieldTimer gFieldTimers = {0};
 EWRAM_DATA u8 gBattlerAbility = 0;
 EWRAM_DATA u16 gPartnerSpriteId = 0;
+EWRAM_DATA struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA bool8 gHasFetchedBall = FALSE;
+EWRAM_DATA u8 gLastUsedBall = 0;
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -1220,7 +1223,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
     case 16:
         if (BattleInitAllSprites(&gBattleCommunication[SPRITES_INIT_STATE1], &gBattleCommunication[SPRITES_INIT_STATE2]))
         {
-            sub_8166188();
+            TrySetLinkBattleTowerEnemyPartyLevel();
             gPreBattleCallback1 = gMain.callback1;
             gMain.callback1 = BattleMainCB1;
             SetMainCallback2(BattleMainCB2);
@@ -2621,7 +2624,7 @@ static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite)
         }
         else // Erase bottom part of the sprite to create a smooth illusion of mon falling down.
         {
-            u8 *dst = (u8 *)gMonSpritesGfxPtr->sprites[GetBattlerPosition(sprite->sBattler)] + (gBattleMonForms[sprite->sBattler] << 11) + (sprite->data[3] << 8);
+            u8* dst = gMonSpritesGfxPtr->sprites.byte[GetBattlerPosition(sprite->sBattler)] + (gBattleMonForms[sprite->sBattler] << 11) + (sprite->data[3] << 8);
 
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
@@ -2885,6 +2888,9 @@ static void BattleStartClearSetData(void)
 
     gLastUsedMove = 0;
     gFieldStatuses = 0;
+
+    gHasFetchedBall = FALSE;
+    gLastUsedBall = 0;
 
     gBattlerAttacker = 0;
     gBattlerTarget = 0;
@@ -3489,6 +3495,18 @@ static void TryDoEventsBeforeFirstTurn(void)
         return;
     }
     
+    // Totem boosts
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gTotemBoosts[i].stats != 0)
+        {
+            gBattlerAttacker = i;
+            BattleScriptExecute(BattleScript_TotemVar);
+            return;
+        }
+    }
+    memset(gTotemBoosts, 0, sizeof(gTotemBoosts));  // erase all totem boosts just to be safe
+    
     // Check all switch in abilities happening from the fastest mon to slowest.
     while (gBattleStruct->switchInAbilitiesCounter < gBattlersCount)
     {
@@ -3506,6 +3524,7 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBattlerByTurnOrder[gBattleStruct->switchInItemsCounter++], FALSE))
             return;
     }
+    
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
@@ -5053,5 +5072,25 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     {
         gSpecialStatuses[battlerAtk].gemParam = GetBattlerHoldEffectParam(battlerAtk);
         gSpecialStatuses[battlerAtk].gemBoost = 1;
+    }
+}
+
+// special to set a field's totem boost(s)
+// inputs:
+//  var8000: battlerId  
+//  var8001 - var8007: stat changes
+void SetTotemBoost(void)
+{
+    u8 battlerId = gSpecialVar_0x8000;
+    u8 i;
+    
+    for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
+    {
+        if (*(&gSpecialVar_0x8001 + i))
+        {
+            gTotemBoosts[battlerId].stats |= (1 << i);
+            gTotemBoosts[battlerId].statChanges[i] = *(&gSpecialVar_0x8001 + i);
+            gTotemBoosts[battlerId].stats |= 0x80;  // used as a flag for the "totem flared to life" script
+        }
     }
 }
