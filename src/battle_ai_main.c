@@ -363,7 +363,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
             if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
                 BattleAI_SetupAIData(gBattleStruct->palaceFlags >> 4);
             else
-                BattleAI_SetupAIData((1 << MAX_MON_MOVES) - 1);
+                BattleAI_SetupAIData(0xF);
             
             gBattlerTarget = i;
             GetAiLogicData(sBattler_AI, gBattlerTarget);
@@ -1741,18 +1741,17 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 
                 if (decreased)
                     break;
-                if (gBattleMons[battlerDef].status2 & STATUS2_RECHARGE)
+                if (IsBattlerIncapacitated(battlerDef, AI_DATA->defAbility))
                 {
                     score -= 10;
                     break;
                 }
 
-                if (gBattleMoves[gLastResultingMoves[battlerAtk]].effect == EFFECT_PROTECT
-                  && move != MOVE_QUICK_GUARD
+                if (move != MOVE_QUICK_GUARD
                   && move != MOVE_WIDE_GUARD
                   && move != MOVE_CRAFTY_SHIELD) //These moves have infinite usage
                 {
-                    if (GetBattlerSecondaryDamage(battlerAtk)
+                    if (GetBattlerSecondaryDamage(battlerAtk) >= gBattleMons[battlerAtk].hp
                       && AI_DATA->defAbility != ABILITY_MOXIE
                       && AI_DATA->defAbility != ABILITY_BEAST_BOOST)
                     {

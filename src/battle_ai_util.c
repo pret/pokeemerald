@@ -2643,7 +2643,7 @@ bool32 AI_CanBeInfatuated(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 atkGe
       || atkGender == defGender
       || atkGender == MON_GENDERLESS
       || defGender == MON_GENDERLESS
-      || !IsAbilityOnSide(battlerDef, ABILITY_AROMA_VEIL))
+      || IsAbilityOnSide(battlerDef, ABILITY_AROMA_VEIL))
         return FALSE;
     return TRUE;
 }
