@@ -1854,6 +1854,35 @@ bool32 HasHealingEffect(u32 battlerId)
     return FALSE;
 }
 
+bool32 IsTrappingMoveEffect(u16 effect)
+{
+    switch (effect)
+    {
+    case EFFECT_MEAN_LOOK:
+    case EFFECT_TRAP:
+    case EFFECT_HIT_PREVENT_ESCAPE:
+    case EFFECT_FAIRY_LOCK:
+    //case EFFECT_NO_RETREAT:   // TODO
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+bool32 HasTrappingMoveEffect(u8 battler)
+{
+    s32 i;
+    u16 *moves = GetMovesArray(battler);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && IsTrappingMoveEffect(gBattleMoves[moves[i]].effect))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 bool32 IsThawingMove(u16 move)
 {
     switch (move)
@@ -1887,6 +1916,18 @@ bool32 HasThawingMove(u8 battlerId)
     return FALSE;
 }
 
+bool32 IsUngroundingEffect(u16 effect)
+{
+    switch (effect)
+    {
+    case EFFECT_MAGNET_RISE:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+// for anger point
 bool32 IsAttackBoostMoveEffect(u16 effect)
 {
     switch (effect)
@@ -1899,6 +1940,7 @@ bool32 IsAttackBoostMoveEffect(u16 effect)
     case EFFECT_COIL:
     case EFFECT_BELLY_DRUM:
     case EFFECT_BULK_UP:
+    case EFFECT_GROWTH:
         return TRUE;
     default:
         return FALSE;
@@ -2884,9 +2926,6 @@ u16 GetAllyChosenMove(void)
 
 bool32 IsTargetingPartner(u8 battlerAtk, u8 battlerDef)
 {
-    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return FALSE;
-
     if ((battlerAtk & BIT_SIDE) == (battlerDef & BIT_SIDE))
         return TRUE;
     
@@ -3196,6 +3235,7 @@ bool32 IsAbilityOfRating(u16 ability, s8 rating)
 {
     if (sAiAbilityRatings[ability] >= rating)
         return TRUE;
+    return FALSE;
 }
 
 s8 GetAbilityRating(u16 ability)
