@@ -7588,4 +7588,438 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
     },
+    [ITEM_Z_RING] = 
+    {
+        .name = _("Z-Ring"),
+        .itemId = ITEM_Z_RING,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_NONE,
+        .description = sZRingDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_NORMALIUM_Z] = 
+    {
+        .name = _("Normalium Z"),
+        .itemId = ITEM_NORMALIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sNormaliumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_NORMAL
+    }, 
+    [ITEM_FIGHTINIUM_Z] = 
+    {
+        .name = _("Fightinium Z"),
+        .itemId = ITEM_FIGHTINIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sFightiniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_FIGHTING
+    }, 
+    [ITEM_FLYINIUM_Z] = 
+    {
+        .name = _("Flyinium Z"),
+        .itemId = ITEM_FLYINIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sFlyiniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_FLYING
+    }, 
+    [ITEM_POISONIUM_Z] = 
+    {
+        .name = _("Poisinium Z"),
+        .itemId = ITEM_POISONIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sPoisoniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_POISON
+    }, 
+    [ITEM_GROUNDIUM_Z] = 
+    {
+        .name = _("Groundium Z"),
+        .itemId = ITEM_GROUNDIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sGroundiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_GROUND
+    }, 
+    [ITEM_ROCKIUM_Z] = 
+    {
+        .name = _("Rockium Z"),
+        .itemId = ITEM_ROCKIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sRockiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_ROCK
+    }, 
+    [ITEM_BUGINIUM_Z] = 
+    {
+        .name = _("Buginium Z"),
+        .itemId = ITEM_BUGINIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sBuginiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_BUG
+    }, 
+    [ITEM_GHOSTIUM_Z] = 
+    {
+        .name = _("Ghostium Z"),
+        .itemId = ITEM_GHOSTIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sGhostiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_GHOST
+    }, 
+    [ITEM_STEELIUM_Z] = 
+    {
+        .name = _("Steelium Z"),
+        .itemId = ITEM_STEELIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sSteeliumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_STEEL
+    }, 
+    [ITEM_FIRIUM_Z] = 
+    {
+        .name = _("Firium Z"),
+        .itemId = ITEM_FIRIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sFiriumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_FIRE
+    }, 
+    [ITEM_WATERIUM_Z] = 
+    {
+        .name = _("Waterium Z"),
+        .itemId = ITEM_WATERIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sWateriumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_WATER
+    }, 
+    [ITEM_GRASSIUM_Z] = 
+    {
+        .name = _("Grassium Z"),
+        .itemId = ITEM_GRASSIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sGrassiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_GRASS
+    }, 
+    [ITEM_ELECTRIUM_Z] = 
+    {
+        .name = _("Electrium Z"),
+        .itemId = ITEM_ELECTRIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sElectriumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_ELECTRIC
+    }, 
+    [ITEM_PSYCHIUM_Z] = 
+    {
+        .name = _("Psychium Z"),
+        .itemId = ITEM_PSYCHIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sPsychiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_PSYCHIC
+    }, 
+    [ITEM_ICIUM_Z] = 
+    {
+        .name = _("Icium Z"),
+        .itemId = ITEM_ICIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sIciumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_ICE
+    }, 
+    [ITEM_DRAGONIUM_Z] = 
+    {
+        .name = _("Dragonium Z"),
+        .itemId = ITEM_DRAGONIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sDragoniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_DRAGON
+    }, 
+    [ITEM_DARKINIUM_Z] = 
+    {
+        .name = _("Darkinium Z"),
+        .itemId = ITEM_DARKINIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sDarkiniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_DARK
+    }, 
+    [ITEM_FAIRIUM_Z] = 
+    {
+        .name = _("Fairium Z"),
+        .itemId = ITEM_FAIRIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sFairiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_FAIRY
+    }, 
+    [ITEM_ALORAICHIUM_Z] = 
+    {
+        .name = _("Aloraichium Z"),
+        .itemId = ITEM_ALORAICHIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sAloraichiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_DECIDIUM_Z] = 
+    {
+        .name = _("Decidium Z"),
+        .itemId = ITEM_DECIDIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sDecidiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_EEVIUM_Z] = 
+    {
+        .name = _("Eevium Z"),
+        .itemId = ITEM_EEVIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sEeviumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_INCINIUM_Z] = 
+    {
+        .name = _("Incinium Z"),
+        .itemId = ITEM_INCINIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sInciniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_KOMMONIUM_Z] = 
+    {
+        .name = _("Kommonium Z"),
+        .itemId = ITEM_KOMMONIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sKommoniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_LUNALIUM_Z] = 
+    {
+        .name = _("Lunalium Z"),
+        .itemId = ITEM_LUNALIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sLunaliumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_LYCANIUM_Z] = 
+    {
+        .name = _("Lycanium Z"),
+        .itemId = ITEM_LYCANIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sLycaniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_MARSHADIUM_Z] = 
+    {
+        .name = _("Marshadium Z"),
+        .itemId = ITEM_MARSHADIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sMarshadiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_MEWNIUM_Z] = 
+    {
+        .name = _("Mewnium Z"),
+        .itemId = ITEM_MEWNIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sMewniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_MIMIKIUM_Z] = 
+    {
+        .name = _("Mimikium Z"),
+        .itemId = ITEM_MIMIKIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sMimikiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_PIKANIUM_Z] = 
+    {
+        .name = _("Pikanium Z"),
+        .itemId = ITEM_PIKANIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sPikaniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_PIKASHUNIUM_Z] = 
+    {
+        .name = _("Pikashunium Z"),
+        .itemId = ITEM_PIKASHUNIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sPikashuniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_PRIMARIUM_Z] = 
+    {
+        .name = _("Primarium Z"),
+        .itemId = ITEM_PRIMARIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sPrimariumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_SNORLIUM_Z] = 
+    {
+        .name = _("Snorlium Z"),
+        .itemId = ITEM_SNORLIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sSnorliumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_SOLGANIUM_Z] = 
+    {
+        .name = _("Solganium Z"),
+        .itemId = ITEM_SOLGANIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sSolganiumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  // signature z move
+    }, 
+    [ITEM_TAPUNIUM_Z] = 
+    {
+        .name = _("Tapunium Z"),
+        .itemId = ITEM_TAPUNIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sTapuniumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  //signature z move
+    },
+    [ITEM_ULTRANECROZIUM_Z] = 
+    {
+        .name = _("U-Necrozium Z"),
+        .itemId = ITEM_ULTRANECROZIUM_Z,
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = sUltranecroziumZDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 255  //signature z move
+    },
+        
+    
 };

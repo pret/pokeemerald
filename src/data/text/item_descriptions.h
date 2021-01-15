@@ -2829,3 +2829,182 @@ static const u8 sOvalCharmDesc[] = _(
     "of finding eggs\n"
     "at the daycare.");
 
+static const u8 sZRingDesc[] = _(
+    "A strange ring\n"
+    "that enables\n"
+    "Z-Move usage.");
+
+static const u8 sNormaliumZDesc[] = _(
+    "Upgrade Normal-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sFightiniumZDesc[] = _(
+    "Upgrade Fighting-\n"
+    "type moves into\n"
+    "Z-Moves.");
+    
+static const u8 sFlyiniumZDesc[] = _(
+    "Upgrade Flying-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sPoisoniumZDesc[] = _(
+    "Upgrade Poison-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sGroundiumZDesc[] = _(
+    "Upgrade Ground-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sRockiumZDesc[] = _(
+    "Upgrade Rock-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sBuginiumZDesc[] = _(
+    "Upgrade Bug-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sGhostiumZDesc[] = _(
+    "Upgrade Ghost-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sSteeliumZDesc[] = _(
+    "Upgrade Steel-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sFiriumZDesc[] = _(
+    "Upgrade Fire-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sWateriumZDesc[] = _(
+    "Upgrade Water-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sGrassiumZDesc[] = _(
+    "Upgrade Grass-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sElectriumZDesc[] = _(
+    "Upgrade Electric-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sPsychiumZDesc[] = _(
+    "Upgrade Psychic-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sIciumZDesc[] = _(
+    "Upgrade Ice-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sDragoniumZDesc[] = _(
+    "Upgrade Dragon-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sDarkiniumZDesc[] = _(
+    "Upgrade Dark-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sFairiumZDesc[] = _(
+    "Upgrade Fairy-\n"
+    "type moves into\n"
+    "Z-Moves.");
+
+static const u8 sAloraichiumZDesc[] = _(
+    "Upgrade Alolan\n"
+    "Raichu's Thunder-\n"
+    "bolt into a Z-Move.");
+
+static const u8 sDecidiumZDesc[] = _(
+    "Upgrade Decidu-\n"
+    "eye's Spirit Sha-\n"
+    "ckle into a Z-Move.");
+
+static const u8 sEeviumZDesc[] = _(
+    "Upgrade Eevee's\n"
+    "Last Resort\n"
+    "into a Z-Move.");
+
+static const u8 sInciniumZDesc[] = _(
+    "Upgrade Incine-\n"
+    "roar's Darkest La-\n"
+    "riat into a Z-Move.");
+
+static const u8 sKommoniumZDesc[] = _(
+    "Upgrade Kommo-o's\n"
+    "Clanging Scales\n"
+    "into a Z-Move.");
+
+static const u8 sLunaliumZDesc[] = _(
+    "Upgrade Lunala's\n"
+    "Moongeist Beam\n"
+    "into a Z-Move.");
+
+static const u8 sLycaniumZDesc[] = _(
+    "Upgrade Lycanroc's\n"
+    "Stone Edge\n"
+    "into a Z-Move.");
+
+static const u8 sMarshadiumZDesc[] = _(
+    "Upgrade Marsha-\n"
+    "dow's Spectral Thi-\n"
+    "ef into a Z-Move.");
+
+static const u8 sMewniumZDesc[] = _(
+    "Upgrade Mew's\n"
+    "Psychic into\n"
+    "a Z-Move.");
+
+static const u8 sMimikiumZDesc[] = _(
+    "Upgrade Mimikyu's\n"
+    "Play Rough\n"
+    "into a Z-Move.");
+
+static const u8 sPikaniumZDesc[] = _(
+    "Upgrade Pikachu's\n"
+    "Volt Tackle\n"
+    "into a Z-Move.");
+
+static const u8 sPikashuniumZDesc[] = _(
+    "Upgrade Pikachu w/\n"
+    "a cap's Thunderbolt\n"
+    "into a Z-Move.");
+
+static const u8 sPrimariumZDesc[] = _(
+    "Upgrade Primarina's\n"
+    "Sparkling Aria\n"
+    "into a Z-Move.");
+
+static const u8 sSnorliumZDesc[] = _(
+    "Upgrade Snorlax's\n"
+    "Giga Impact\n"
+    "into a Z-Move.");
+
+static const u8 sSolganiumZDesc[] = _(
+    "Upgrade Solgaleo's\n"
+    "Sunsteel Strike\n"
+    "into a Z-Move.");
+
+static const u8 sTapuniumZDesc[] = _(
+    "Upgrade the tapu's\n"
+    "Nature's Madness\n"
+    "into a Z-Move.");
+
+static const u8 sUltranecroziumZDesc[] = _(
+    "A crystal to turn\n"
+    "fused Necrozma\n"
+    "into a new form.");

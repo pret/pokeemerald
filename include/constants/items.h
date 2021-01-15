@@ -656,7 +656,45 @@
 #define ITEM_SHINY_CHARM 566
 #define ITEM_OVAL_CHARM 567
 
-#define ITEMS_COUNT 568
+// Z Crystals
+#define ITEM_Z_RING                   568
+#define ITEM_NORMALIUM_Z              569
+#define ITEM_FIGHTINIUM_Z             570
+#define ITEM_FLYINIUM_Z               571
+#define ITEM_POISONIUM_Z              572
+#define ITEM_GROUNDIUM_Z              573
+#define ITEM_ROCKIUM_Z                574
+#define ITEM_BUGINIUM_Z               575
+#define ITEM_GHOSTIUM_Z               576
+#define ITEM_STEELIUM_Z               577
+#define ITEM_FIRIUM_Z                 578
+#define ITEM_WATERIUM_Z               579
+#define ITEM_GRASSIUM_Z               580
+#define ITEM_ELECTRIUM_Z              581
+#define ITEM_PSYCHIUM_Z               582
+#define ITEM_ICIUM_Z                  583
+#define ITEM_DRAGONIUM_Z              584
+#define ITEM_DARKINIUM_Z              585
+#define ITEM_FAIRIUM_Z                586
+#define ITEM_ALORAICHIUM_Z            587
+#define ITEM_DECIDIUM_Z               588
+#define ITEM_EEVIUM_Z                 589
+#define ITEM_INCINIUM_Z               590
+#define ITEM_KOMMONIUM_Z              591
+#define ITEM_LUNALIUM_Z               592
+#define ITEM_LYCANIUM_Z               593
+#define ITEM_MARSHADIUM_Z             594
+#define ITEM_MEWNIUM_Z                595
+#define ITEM_MIMIKIUM_Z               596
+#define ITEM_PIKANIUM_Z               597
+#define ITEM_PIKASHUNIUM_Z            598
+#define ITEM_PRIMARIUM_Z              599
+#define ITEM_SNORLIUM_Z               600
+#define ITEM_SOLGANIUM_Z              601
+#define ITEM_TAPUNIUM_Z               602
+#define ITEM_ULTRANECROZIUM_Z         603
+
+#define ITEMS_COUNT 604
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 #define FIRST_BERRY_INDEX             ITEM_CHERI_BERRY
