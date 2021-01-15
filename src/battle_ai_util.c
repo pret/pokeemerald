@@ -2599,12 +2599,12 @@ bool32 AI_CanPoison(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u16 
     return TRUE;
 }
 
-static bool32 CanBeParayzed(battlerDef, defAbility)
+static bool32 CanBeParayzed(u8 battler, u16 ability)
 {
-    if (defAbility == ABILITY_LIMBER
-      || IS_BATTLER_OF_TYPE(battlerDef, TYPE_ELECTRIC)
-      || gBattleMons[battlerDef].status1 & STATUS1_ANY
-      || IsAbilityStatusProtected(battlerDef))
+    if (ability == ABILITY_LIMBER
+      || IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC)
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityStatusProtected(battler))
         return FALSE;
     return TRUE;
 }
