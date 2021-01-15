@@ -2341,9 +2341,9 @@ u8 DoBattlerEndTurnEffects(void)
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[gActiveBattler]);
                     gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                     if (GetBattlerHoldEffect(gBattleStruct->wrappedBy[gActiveBattler], TRUE) == HOLD_EFFECT_BINDING_BAND)
-                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (B_BINDING_DAMAGE >= GEN_6) ? 6 : 8;
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / ((B_BINDING_DAMAGE >= GEN_6) ? 6 : 8);
                     else
-                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (B_BINDING_DAMAGE >= GEN_6) ? 8 : 16;
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / ((B_BINDING_DAMAGE >= GEN_6) ? 8 : 16);
 
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
