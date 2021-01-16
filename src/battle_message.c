@@ -691,9 +691,15 @@ static const u8 sText_BattlerAbilityRaisedStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PR
 static const u8 sText_ASandstormKickedUp[] = _("A sandstorm kicked up!");
 static const u8 sText_PkmnsWillPerishIn3Turns[] = _("Both Pokémon will perish\nin three turns!");
 static const u8 sText_AbilityRaisedStatDrastically[] = _("{B_DEF_ABILITY} raised {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} drastically!");
+static const u8 sText_AttackerGotOverInfatuation[] =_("{B_ATK_NAME_WITH_PREFIX} got over\nits infatuation!");
+static const u8 sText_TormentedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is\ntormented no more!");
+static const u8 sText_HealBlockedNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is cured of\nits heal block!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_HEALBLOCKEDNOMORE - 12] = sText_HealBlockedNoMore,
+    [STRINGID_TORMENTEDNOMORE - 12] = sText_TormentedNoMore,
+    [STRINGID_ATKGOTOVERINFATUATION - 12] = sText_AttackerGotOverInfatuation,
     [STRINGID_ABILITYRAISEDSTATDRASTICALLY - 12] = sText_AbilityRaisedStatDrastically,
     [STRINGID_PKMNSWILLPERISHIN3TURNS - 12] = sText_PkmnsWillPerishIn3Turns,
     [STRINGID_ASANDSTORMKICKEDUP - 12] = sText_ASandstormKickedUp,
@@ -1245,6 +1251,16 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_AURABREAKENTERS - 12] = sText_AuraBreakActivates,
     [STRINGID_COMATOSEENTERS - 12] = sText_ComatoseActivates,
     [STRINGID_SCREENCLEANERENTERS - 12] = sText_ScreenCleanerActivates,
+};
+
+const u16 gMentalHerbCureStringIds[] = 
+{
+    [MULTI_CUREINFATUATION] = STRINGID_ATKGOTOVERINFATUATION,
+    [MULTI_CURETAUNT]       = STRINGID_BUFFERENDS,
+    [MULTI_CUREENCORE]      = STRINGID_PKMNENCOREENDED,
+    [MULTI_CURETORMENT]     = STRINGID_TORMENTEDNOMORE,
+    [MULTI_CUREHEALBLOCK]   = STRINGID_HEALBLOCKEDNOMORE,
+    [MULTI_CUREDISABLE]     = STRINGID_PKMNMOVEDISABLEDNOMORE,
 };
 
 const u16 gTerrainStringIds[] =
