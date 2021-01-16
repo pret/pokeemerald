@@ -5213,44 +5213,46 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
         StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
         ret = TRUE;
     }
-    // check taunt
-    if (gDisableStructs[gBattlerTarget].tauntTimer != 0)
-    {
-        gDisableStructs[gBattlerTarget].tauntTimer = gDisableStructs[gBattlerTarget].tauntTimer2 = 0;
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CURETAUNT;
-        PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
-        ret = TRUE;
-    }
-    // check encore
-    if (gDisableStructs[gBattlerTarget].encoreTimer != 0)
-    {
-        gDisableStructs[gActiveBattler].encoredMove = 0;
-        gDisableStructs[gBattlerTarget].encoreTimerStartValue = gDisableStructs[gBattlerTarget].encoreTimer = 0;
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREENCORE;   //STRINGID_PKMNENCOREENDED
-        ret = TRUE;
-    }
-    // check torment
-    if (gBattleMons[battlerId].status2 & STATUS2_TORMENT)
-    {
-        gBattleMons[battlerId].status2 &= ~(STATUS2_TORMENT);
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CURETORMENT;
-        ret = TRUE;
-    }
-    // check heal block
-    if (gStatuses3[battlerId] & STATUS3_HEAL_BLOCK)
-    {
-        gStatuses3[battlerId] & ~(STATUS3_HEAL_BLOCK);
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREHEALBLOCK;
-        ret = TRUE;
-    }
-    // disable
-    if (gDisableStructs[gBattlerTarget].disableTimer != 0)
-    {
-        gDisableStructs[gBattlerTarget].disableTimer = gDisableStructs[gBattlerTarget].disableTimerStartValue = 0;
-        gDisableStructs[gBattlerTarget].disabledMove = 0;
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREDISABLE;
-        ret = TRUE;
-    }
+    #if B_MENTAL_HERB >= GEN_5
+        // check taunt
+        if (gDisableStructs[gBattlerTarget].tauntTimer != 0)
+        {
+            gDisableStructs[gBattlerTarget].tauntTimer = gDisableStructs[gBattlerTarget].tauntTimer2 = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CURETAUNT;
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
+            ret = TRUE;
+        }
+        // check encore
+        if (gDisableStructs[gBattlerTarget].encoreTimer != 0)
+        {
+            gDisableStructs[gActiveBattler].encoredMove = 0;
+            gDisableStructs[gBattlerTarget].encoreTimerStartValue = gDisableStructs[gBattlerTarget].encoreTimer = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREENCORE;   //STRINGID_PKMNENCOREENDED
+            ret = TRUE;
+        }
+        // check torment
+        if (gBattleMons[battlerId].status2 & STATUS2_TORMENT)
+        {
+            gBattleMons[battlerId].status2 &= ~(STATUS2_TORMENT);
+            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CURETORMENT;
+            ret = TRUE;
+        }
+        // check heal block
+        if (gStatuses3[battlerId] & STATUS3_HEAL_BLOCK)
+        {
+            gStatuses3[battlerId] & ~(STATUS3_HEAL_BLOCK);
+            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREHEALBLOCK;
+            ret = TRUE;
+        }
+        // disable
+        if (gDisableStructs[gBattlerTarget].disableTimer != 0)
+        {
+            gDisableStructs[gBattlerTarget].disableTimer = gDisableStructs[gBattlerTarget].disableTimerStartValue = 0;
+            gDisableStructs[gBattlerTarget].disabledMove = 0;
+            gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREDISABLE;
+            ret = TRUE;
+        }
+    #endif
     return ret;
 }
 
