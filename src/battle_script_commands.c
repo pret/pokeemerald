@@ -4994,6 +4994,7 @@ static void Cmd_moveend(void)
                     MoveValuesCleanUp();
                     gBattleScripting.moveEffect = gBattleScripting.savedMoveEffect;
                     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
+                    gBattleStruct->atkCancellerTracker = 0; // run all cancellers on next target
                     gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
                     return;
                 }

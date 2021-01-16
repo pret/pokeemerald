@@ -7792,3 +7792,12 @@ BattleScript_AnnounceAirLockCloudNine::
 	waitmessage 0x40
 	call BattleScript_WeatherFormChanges
 	end3
+	
+BattleScript_DarkTypePreventsPrankster::
+	attackstring
+	ppreduce
+	pause 0x20
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage 0x40
+	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	goto BattleScript_MoveEnd

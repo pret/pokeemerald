@@ -2849,6 +2849,7 @@ enum
     CANCELLER_POWDER_MOVE,
     CANCELLER_POWDER_STATUS,
     CANCELLER_THROAT_CHOP,
+    CANCELLER_PRANKSTER,
     CANCELLER_END,
     CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_END2,
@@ -3185,6 +3186,23 @@ u8 AtkCanceller_UnableToUseMove(void)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
+        case CANCELLER_PRANKSTER:
+            #if B_PRANKSTER >= GEN_7
+                if (GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER
+                  && IS_MOVE_STATUS(gCurrentMove)
+                  && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_OPPONENTS_FIELD)
+                  && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DARK)
+                  && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
+                {
+                    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(gBattleMoves[gCurrentMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
+                        CancelMultiTurnMoves(gBattlerAttacker); // don't cancel moves that can hit two targets bc one target might not be protected
+                    gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
+                    gBattlescriptCurrInstr = BattleScript_DarkTypePreventsPrankster;
+                    effect = 1;
+                }
+            #endif
+			gBattleStruct->atkCancellerTracker++;
+			break;
         case CANCELLER_END:
             break;
         }
