@@ -1130,16 +1130,16 @@ bool32 AI_WeatherHasEffect(void)
 {
     u32 i;
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_NEGATE_UNAWARE)
-        return FALSE;   // AI doesn't understand weather supression (handicap)
+        return TRUE;   // AI doesn't understand weather supression (handicap)
     
     // need to manually check since we don't necessarily know opponent ability
     for (i = 0; i < gBattlersCount; i++)
     {
         if (IsBattlerAlive(i)
           && (AI_GetAbility(i) == ABILITY_AIR_LOCK || AI_GetAbility(i) == ABILITY_CLOUD_NINE))
-            return TRUE;
+            return FALSE;
     }
-    return FALSE;
+    return TRUE;
 }
 
 bool32 IsAromaVeilProtectedMove(u16 move)
