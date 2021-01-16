@@ -5059,6 +5059,16 @@ enum
     ITEM_STATS_CHANGE, // 5
 };
 
+bool32 IsBattlerTerrainAffected(u8 battlerId, u32 terrainFlag)
+{
+    if (!(gFieldStatuses & terrainFlag))
+        return FALSE;
+    else if (gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
+        return FALSE;
+    
+    return IsBattlerGrounded(battlerId);
+}
+
 bool32 CanSleep(u8 battlerId)
 {
     u16 ability = GetBattlerAbility(battlerId);
@@ -5069,7 +5079,7 @@ bool32 CanSleep(u8 battlerId)
       || gBattleMons[battlerId].status1 & STATUS1_ANY
       || IsAbilityOnSide(battlerId, ABILITY_SWEET_VEIL)
       || IsAbilityStatusProtected(battlerId)
-      || gFieldStatuses & (STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_MISTY_TERRAIN))
+      || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
     return TRUE;
 }
@@ -5085,7 +5095,7 @@ bool32 CanBePoisoned(u8 battlerId)
      || ability == ABILITY_COMATOSE
      || gBattleMons[battlerId].status1 & STATUS1_ANY
      || IsAbilityStatusProtected(battlerId)
-     || gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+     || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
     return TRUE;
 }
@@ -5099,7 +5109,7 @@ bool32 CanBeBurned(u8 battlerId)
       || ability == ABILITY_WATER_VEIL
       || ability == ABILITY_COMATOSE
       || IsAbilityStatusProtected(battlerId)
-      || gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+      || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
     return TRUE;
 }
@@ -5113,7 +5123,7 @@ bool32 CanBeParalyzed(u8 battlerId)
       || ability == ABILITY_COMATOSE
       || gBattleMons[battlerId].status1 & STATUS1_ANY
       || IsAbilityStatusProtected(battlerId)
-      || gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+      || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
     return TRUE;
 }
@@ -5128,7 +5138,7 @@ bool32 CanBeFrozen(u8 battlerId)
       || ability == ABILITY_COMATOSE
       || gBattleMons[battlerId].status1 & STATUS1_ANY
       || IsAbilityStatusProtected(battlerId)
-      || gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
+      || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
     return TRUE;
 }
