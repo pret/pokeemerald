@@ -5143,6 +5143,15 @@ bool32 CanBeFrozen(u8 battlerId)
     return TRUE;
 }
 
+bool32 CanBeConfused(u8 battlerId)
+{
+    if (GetBattlerAbility(gEffectBattler) == ABILITY_OWN_TEMPO
+      || gBattleMons[gEffectBattler].status2 & STATUS2_CONFUSION
+      || IsBattlerTerrainAffected(battlerId, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
 // second argument is 1/X of current hp compared to max hp
 static bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
 {
