@@ -138,18 +138,18 @@ void TaskDummy(u8 taskId)
 
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
-    u8 taskNum = NUM_TASK_DATA - 2; // Should be const.
+    u8 followupFuncDataIndex = NUM_TASK_DATA - 2; // Should be const.
 
-    gTasks[taskId].data[taskNum] = (s16)((u32)followupFunc);
-    gTasks[taskId].data[taskNum + 1] = (s16)((u32)followupFunc >> 16);
+    gTasks[taskId].data[followupFuncDataIndex] = (s16)((u32)followupFunc);
+    gTasks[taskId].data[followupFuncDataIndex + 1] = (s16)((u32)followupFunc >> 16);
     gTasks[taskId].func = func;
 }
 
 void SwitchTaskToFollowupFunc(u8 taskId)
 {
-    u8 taskNum = NUM_TASK_DATA - 2; // Should be const.
+    u8 followupFuncDataIndex = NUM_TASK_DATA - 2; // Should be const.
 
-    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[taskNum]) | (gTasks[taskId].data[taskNum + 1] << 16));
+    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[followupFuncDataIndex]) | (gTasks[taskId].data[followupFuncDataIndex + 1] << 16));
 }
 
 bool8 FuncIsActiveTask(TaskFunc func)
