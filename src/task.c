@@ -198,7 +198,7 @@ void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
     if (dataElem < NUM_TASK_DATA - 1)
-        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16); // Merge the two adjacent indexes back
+        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
     else
         return 0;
 }
