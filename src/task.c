@@ -136,32 +136,17 @@ void TaskDummy(u8 taskId)
 {
 }
 
-#define TASK_DATA_OP(taskId, offset, op)                    \
-{                                                           \
-    u32 tasksAddr = (u32)gTasks;                            \
-    u32 addr = taskId * sizeof(struct Task) + offset;       \
-    u32 dataAddr = tasksAddr + offsetof(struct Task, data); \
-    addr += dataAddr;                                       \
-    op;                                                     \
-}
-
+#define TASK_SPACE NUM_TASKS - 2 // So we can insert the two tasks at the last two array elements
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
-    TASK_DATA_OP(taskId, 28, *((u16 *)addr) = (u32)followupFunc)
-    TASK_DATA_OP(taskId, 30, *((u16 *)addr) = (u32)followupFunc >> 16)
+    gTasks[taskId].data[TASK_SPACE] = (s16)((u32)followupFunc);
+    gTasks[taskId].data[TASK_SPACE + 1] = (s16)((u32)followupFunc >> 16);
     gTasks[taskId].func = func;
 }
 
 void SwitchTaskToFollowupFunc(u8 taskId)
 {
-    s32 func;
-
-    gTasks[taskId].func = NULL;
-
-    TASK_DATA_OP(taskId, 28, func = *((u16 *)addr))
-    TASK_DATA_OP(taskId, 30, func |= *((s16 *)addr) << 16)
-
-    gTasks[taskId].func = (TaskFunc)func;
+    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[TASK_SPACE]) | (gTasks[taskId].data[TASK_SPACE + 1] << 16));
 }
 
 bool8 FuncIsActiveTask(TaskFunc func)
@@ -183,7 +168,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return 0xFF;
+    return TAIL_SENTINEL; //No task found
 }
 
 u8 GetTaskCount(void)
@@ -200,7 +185,7 @@ u8 GetTaskCount(void)
 
 void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 {
-    if (dataElem < NUM_TASK_DATA - 1)
+    if (dataElem <= TASK_SPACE)
     {
         gTasks[taskId].data[dataElem] = value;
         gTasks[taskId].data[dataElem + 1] = value >> 16;
@@ -209,7 +194,7 @@ void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
-    if (dataElem < NUM_TASK_DATA - 1)
+    if (dataElem <= TASK_SPACE)
         return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
     else
         return 0;
