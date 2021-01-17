@@ -141,7 +141,7 @@ void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc
     u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
 
     gTasks[taskId].data[followupFuncIndex] = (s16)((u32)followupFunc);
-    gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16);
+    gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16); // So we can store the followupFunc in two adjacent indexes.
     gTasks[taskId].func = func;
 }
 
@@ -198,7 +198,7 @@ void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
     if (dataElem < NUM_TASK_DATA - 1)
-        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
+        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16); // Merge the two adjacent indexes back
     else
         return 0;
 }
