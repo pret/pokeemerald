@@ -138,7 +138,7 @@ void TaskDummy(u8 taskId)
 
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
-    u8 taskNum = NUM_TASKS - 2; // Should be const
+    u8 taskNum = NUM_TASK_DATA - 2; // Should be const
 
     gTasks[taskId].data[taskNum] = (s16)((u32)followupFunc);
     gTasks[taskId].data[taskNum + 1] = (s16)((u32)followupFunc >> 16);
@@ -147,7 +147,7 @@ void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc
 
 void SwitchTaskToFollowupFunc(u8 taskId)
 {
-    u8 taskNum = NUM_TASKS - 2; // Should be const
+    u8 taskNum = NUM_TASK_DATA - 2; // Should be const
 
     gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[taskNum]) | (gTasks[taskId].data[taskNum + 1] << 16));
 }
@@ -188,7 +188,7 @@ u8 GetTaskCount(void)
 
 void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 {
-    if (dataElem < NUM_TASKS - 1)
+    if (dataElem < NUM_TASK_DATA - 1)
     {
         gTasks[taskId].data[dataElem] = value;
         gTasks[taskId].data[dataElem + 1] = value >> 16;
@@ -197,7 +197,7 @@ void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
-    if (dataElem < NUM_TASKS - 1)
+    if (dataElem < NUM_TASK_DATA - 1)
         return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
     else
         return 0;
