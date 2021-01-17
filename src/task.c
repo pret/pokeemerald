@@ -139,14 +139,18 @@ void TaskDummy(u8 taskId)
 #define TASK_SPACE NUM_TASKS - 2 // So we can insert the two tasks at the last two array elements
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
-    gTasks[taskId].data[TASK_SPACE] = (s16)((u32)followupFunc);
-    gTasks[taskId].data[TASK_SPACE + 1] = (s16)((u32)followupFunc >> 16);
+    u8 taskNum = TASK_SPACE; // Should be const
+
+    gTasks[taskId].data[taskNum] = (s16)((u32)followupFunc);
+    gTasks[taskId].data[taskNum + 1] = (s16)((u32)followupFunc >> 16);
     gTasks[taskId].func = func;
 }
 
 void SwitchTaskToFollowupFunc(u8 taskId)
 {
-    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[TASK_SPACE]) | (gTasks[taskId].data[TASK_SPACE + 1] << 16));
+    u8 taskNum = TASK_SPACE; // Should be const
+
+    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[taskNum]) | (gTasks[taskId].data[taskNum + 1] << 16));
 }
 
 bool8 FuncIsActiveTask(TaskFunc func)
@@ -168,7 +172,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return TAIL_SENTINEL; //No task found
+    return TAIL_SENTINEL; // No task found
 }
 
 u8 GetTaskCount(void)
