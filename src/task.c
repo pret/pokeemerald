@@ -136,7 +136,7 @@ void TaskDummy(u8 taskId)
 {
 }
 
-#define TASK_SPACE NUM_TASKS - 2 // So we can insert the two tasks at the last two array elements
+#define TASK_SPACE NUM_TASKS - 2 // So we can reserve space for the last array element
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
     u8 taskNum = TASK_SPACE; // Should be const
