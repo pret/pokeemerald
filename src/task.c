@@ -138,7 +138,7 @@ void TaskDummy(u8 taskId)
 
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
-    u8 taskNum = NUM_TASK_DATA - 2; // Should be const
+    u8 taskNum = NUM_TASK_DATA - 2; // Should be const.
 
     gTasks[taskId].data[taskNum] = (s16)((u32)followupFunc);
     gTasks[taskId].data[taskNum + 1] = (s16)((u32)followupFunc >> 16);
@@ -147,7 +147,7 @@ void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc
 
 void SwitchTaskToFollowupFunc(u8 taskId)
 {
-    u8 taskNum = NUM_TASK_DATA - 2; // Should be const
+    u8 taskNum = NUM_TASK_DATA - 2; // Should be const.
 
     gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[taskNum]) | (gTasks[taskId].data[taskNum + 1] << 16));
 }
@@ -171,7 +171,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return 0xFF; // No task found
+    return TAIL_SENTINEL; // No task found.
 }
 
 u8 GetTaskCount(void)
