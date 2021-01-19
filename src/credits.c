@@ -1305,8 +1305,6 @@ static void sub_8175808(u8 taskIdA)
 
 static void c2_080C9BFC(u8 taskIdA)
 {
-    u16 backup;
-
     SetVBlankCallback(NULL);
 
     if (sub_8176AB0(gTasks[taskIdA].data[TDA_7], taskIdA))
