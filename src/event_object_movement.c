@@ -87,7 +87,7 @@ static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
-static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent*);
+static u8 GetObjEventReflectionType(struct ObjectEvent*);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
 static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
 static void ObjectEventUpdateSubpriority(struct ObjectEvent*, struct Sprite*);
@@ -7514,21 +7514,23 @@ static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *objEvent)
 
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *flags)
 {
-    u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
-    u8 type = ObjectEventCheckForReflectiveSurface(objEvent);
+    u32 reflectionFlags[NUM_REFLECTION_TYPES] = { 
+        [REFL_TYPE_ICE   - 1] = GROUND_EFFECT_FLAG_ICE_REFLECTION,
+        [REFL_TYPE_WATER - 1] = GROUND_EFFECT_FLAG_WATER_REFLECTION
+    };
+    u8 reflType = GetObjEventReflectionType(objEvent);
 
-    if (type)
+    if (reflType)
     {
         if (!objEvent->hasReflection)
         {
-            objEvent->hasReflection = 0;
-            objEvent->hasReflection = 1;
-            *flags |= reflectionFlags[type - 1];
+            objEvent->hasReflection |= TRUE;
+            *flags |= reflectionFlags[reflType - 1];
         }
     }
     else
     {
-        objEvent->hasReflection = 0;
+        objEvent->hasReflection = FALSE;
     }
 }
 
@@ -7701,7 +7703,7 @@ static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *
     }
 }
 
-static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
+static u8 GetObjEventReflectionType(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
@@ -7740,11 +7742,11 @@ static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
 static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {
     if (MetatileBehavior_IsIce(behavior))
-        return 1;
+        return REFL_TYPE_ICE;
     else if (MetatileBehavior_IsReflective(behavior))
-        return 2;
+        return REFL_TYPE_WATER;
     else
-        return 0;
+        return REFL_TYPE_NONE;
 }
 
 u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
@@ -8117,8 +8119,8 @@ static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct S
     GroundEffect_StepOnTallGrass,       // GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE
     GroundEffect_SpawnOnLongGrass,      // GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN
     GroundEffect_StepOnLongGrass,       // GROUND_EFFECT_FLAG_LONG_GRASS_ON_MOVE
-    GroundEffect_WaterReflection,       // GROUND_EFFECT_FLAG_ICE_REFLECTION
-    GroundEffect_IceReflection,         // GROUND_EFFECT_FLAG_REFLECTION
+    GroundEffect_WaterReflection,       // GROUND_EFFECT_FLAG_WATER_REFLECTION
+    GroundEffect_IceReflection,         // GROUND_EFFECT_FLAG_ICE_REFLECTION
     GroundEffect_FlowingWater,          // GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER
     GroundEffect_SandTracks,            // GROUND_EFFECT_FLAG_SAND
     GroundEffect_DeepSandTracks,        // GROUND_EFFECT_FLAG_DEEP_SAND
