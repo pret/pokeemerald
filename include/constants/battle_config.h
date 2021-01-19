@@ -136,7 +136,7 @@
 // Var Settings
 // To use the following features in scripting, replace the 0s with the var ID you're assigning it to.
 // Eg: Replace with VAR_UNUSED_0x40F7 so you can use VAR_TERRAIN for that feature.
-#define VAR_TERRAIN                 0 // If this var has a value, assigning a STATUS_FIELD_xx_TERRAIN to it before battle causes the battle to start with that terrain active
+#define VAR_TERRAIN                 0     // If this var has a value, assigning a STATUS_FIELD_xx_TERRAIN to it before battle causes the battle to start with that terrain active
 
 // Interface settings
 #define B_ABILITY_POP_UP            TRUE  // In Gen5+, the Pokémon abilities are displayed in a pop-up, when they activate in battle.
