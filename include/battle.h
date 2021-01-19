@@ -263,7 +263,7 @@ struct AiLogicData
 
 struct AI_ThinkingStruct
 {
-    struct AiLogicData *data;
+    struct AiLogicData data;
     u8 aiState;
     u8 movesetIndex;
     u16 moveConsidered;
@@ -321,7 +321,7 @@ struct BattleResources
 };
 
 #define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
-#define AI_DATA ((struct AiLogicData *)(gBattleResources->ai->data))
+#define AI_DATA ((struct AiLogicData *)(&gBattleResources->ai->data))
 #define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
 
 struct BattleResults

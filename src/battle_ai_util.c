@@ -1076,6 +1076,8 @@ u16 AI_GetHoldEffect(u32 battlerId)
         return HOLD_EFFECT_NONE;
     if (AI_GetAbility(battlerId) == ABILITY_KLUTZ && !(gStatuses3[battlerId] & STATUS3_GASTRO_ACID))
         return HOLD_EFFECT_NONE;
+    
+    return holdEffect;
 }
 
 // different from IsBattlerGrounded in that we don't always know battler's hold effect or ability
