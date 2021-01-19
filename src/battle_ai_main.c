@@ -551,7 +551,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score -= 10;
         
         // target ability checks
-        if (!DoesBattlerIgnoreAbilityChecks(battlerAtk, move))
+        if (!DoesBattlerIgnoreAbilityChecks(AI_DATA->battlerAtk, move))
         {
             switch (AI_DATA->defAbility)
             {
@@ -1630,11 +1630,11 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_TEETER_DANCE:
             if (((gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
-              || (!DoesBattlerIgnoreAbilityChecks(battlerAtk, move) && AI_DATA->defAbility == ABILITY_OWN_TEMPO)
+              || (!DoesBattlerIgnoreAbilityChecks(AI_DATA->battlerAtk, move) && AI_DATA->defAbility == ABILITY_OWN_TEMPO)
               || (IsBattlerGrounded(battlerDef) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
               || (DoesSubstituteBlockMove(battlerAtk, battlerDef, move)))
              && ((gBattleMons[AI_DATA->battlerDefPartner].status2 & STATUS2_CONFUSION)
-              || (!DoesBattlerIgnoreAbilityChecks(battlerAtk, move) && AI_DATA->defPartnerAbility == ABILITY_OWN_TEMPO)
+              || (!DoesBattlerIgnoreAbilityChecks(AI_DATA->battlerAtk, move) && AI_DATA->defPartnerAbility == ABILITY_OWN_TEMPO)
               || (IsBattlerGrounded(AI_DATA->battlerDefPartner) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
               || (DoesSubstituteBlockMove(battlerAtk, AI_DATA->battlerDefPartner, move))))
             {
@@ -2551,7 +2551,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (GetMoveDamageResult(move) == MOVE_POWER_DISCOURAGED)
         {
             // partner ability checks
-            if (!partnerProtecting && gBattleMoves[move].target != MOVE_TARGET_BOTH && !DoesBattlerIgnoreAbilityChecks(battlerAtk, move))
+            if (!partnerProtecting && gBattleMoves[move].target != MOVE_TARGET_BOTH && !DoesBattlerIgnoreAbilityChecks(AI_DATA->battlerAtk, move))
             {
                 switch (atkPartnerAbility)
                 {
