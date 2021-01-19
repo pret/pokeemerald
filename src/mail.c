@@ -254,7 +254,7 @@ void ReadMail(struct MailStruct *mail, void (*callback)(void), bool8 flag)
     sMailRead->parserMultiple = ConvertEasyChatWordsToString;
     if (IS_ITEM_MAIL(mail->itemId))
     {
-        sMailRead->mailType = mail->itemId - ITEM_ORANGE_MAIL;
+        sMailRead->mailType = mail->itemId - FIRST_MAIL_INDEX;
     }
     else
     {
@@ -279,10 +279,10 @@ void ReadMail(struct MailStruct *mail, void (*callback)(void), bool8 flag)
             default:
                 sMailRead->animsActive = 0;
                 break;
-            case ITEM_BEAD_MAIL - ITEM_ORANGE_MAIL:
+            case ITEM_BEAD_MAIL - FIRST_MAIL_INDEX:
                 sMailRead->animsActive = 1;
                 break;
-            case ITEM_DREAM_MAIL - ITEM_ORANGE_MAIL:
+            case ITEM_DREAM_MAIL - FIRST_MAIL_INDEX:
                 sMailRead->animsActive = 2;
                 break;
         }
