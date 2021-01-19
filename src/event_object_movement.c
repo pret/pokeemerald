@@ -7947,12 +7947,12 @@ void GroundEffect_StepOnLongGrass(struct ObjectEvent *objEvent, struct Sprite *s
 
 void GroundEffect_WaterReflection(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    SetUpReflection(objEvent, sprite, 0);
+    SetUpReflection(objEvent, sprite, FALSE);
 }
 
 void GroundEffect_IceReflection(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    SetUpReflection(objEvent, sprite, 1);
+    SetUpReflection(objEvent, sprite, TRUE);
 }
 
 void GroundEffect_FlowingWater(struct ObjectEvent *objEvent, struct Sprite *sprite)
@@ -8651,14 +8651,14 @@ static void DestroyObjectEventSprites(void)
     }
 }
 
-static int GetObjectEventSpriteId(u8 var) // this should return a u8, because all that call this shifts to u8, but it wont match because it doesnt shift u8 at the end.
+static int GetObjectEventSpriteId(u8 objectEventId) // this should return a u8, because all that call this shifts to u8, but it wont match because it doesnt shift u8 at the end.
 {
     int i;
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        if(sprite->inUse && sprite->callback == UpdateObjectEventSprite && (u8)sprite->data[0] == var)
+        if (sprite->inUse && sprite->callback == UpdateObjectEventSprite && (u8)sprite->data[0] == objectEventId)
             return i;
     }
     return MAX_SPRITES;
@@ -8790,9 +8790,9 @@ static void UpdateObjectEventSpritePosition(struct Sprite *sprite)
     }
 }
 
-bool32 IsObjectEventSpriteAnimating(u8 var)
+bool32 IsObjectEventSpriteAnimating(u8 objectEventId)
 {
-    u8 spriteId = GetObjectEventSpriteId(var);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
 
     if (spriteId == MAX_SPRITES)
         return FALSE;
