@@ -877,7 +877,7 @@ void StartBerryCrush(MainCallback callback)
 static void GetBerryFromBag(void)
 {
     if (gSpecialVar_ItemId < FIRST_BERRY_INDEX || gSpecialVar_ItemId > LAST_BERRY_INDEX + 1)
-        gSpecialVar_ItemId = ITEM_CHERI_BERRY;
+        gSpecialVar_ItemId = FIRST_BERRY_INDEX;
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 

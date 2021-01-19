@@ -865,7 +865,7 @@ void GetItemName(s8 *dest, u16 itemId)
             }
             break;
         case BERRIES_POCKET:
-            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_CHERI_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+            ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
             CopyItemName(itemId, gStringVar2);
             StringExpandPlaceholders(dest, gText_NumberVar1Clear7Var2);
             break;

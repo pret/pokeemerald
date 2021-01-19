@@ -20,10 +20,10 @@ const struct Item gItems[] =
         .price = 0,
         .description = sMasterBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_MASTER_BALL - 1,
+        .type = ITEM_MASTER_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_MASTER_BALL - 1,
+        .secondaryId = ITEM_MASTER_BALL - FIRST_BALL,
     },
 
     [ITEM_ULTRA_BALL] =
@@ -33,10 +33,10 @@ const struct Item gItems[] =
         .price = 1200,
         .description = sUltraBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_ULTRA_BALL - 1,
+        .type = ITEM_ULTRA_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_ULTRA_BALL - 1,
+        .secondaryId = ITEM_ULTRA_BALL - FIRST_BALL,
     },
 
     [ITEM_GREAT_BALL] =
@@ -46,10 +46,10 @@ const struct Item gItems[] =
         .price = 600,
         .description = sGreatBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_GREAT_BALL - 1,
+        .type = ITEM_GREAT_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_GREAT_BALL - 1,
+        .secondaryId = ITEM_GREAT_BALL - FIRST_BALL,
     },
 
     [ITEM_POKE_BALL] =
@@ -59,10 +59,10 @@ const struct Item gItems[] =
         .price = 200,
         .description = sPokeBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_POKE_BALL - 1,
+        .type = ITEM_POKE_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_POKE_BALL - 1,
+        .secondaryId = ITEM_POKE_BALL - FIRST_BALL,
     },
 
     [ITEM_SAFARI_BALL] =
@@ -72,10 +72,10 @@ const struct Item gItems[] =
         .price = 0,
         .description = sSafariBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_SAFARI_BALL - 1,
+        .type = ITEM_SAFARI_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_SAFARI_BALL - 1,
+        .secondaryId = ITEM_SAFARI_BALL - FIRST_BALL,
     },
 
     [ITEM_NET_BALL] =
@@ -85,10 +85,10 @@ const struct Item gItems[] =
         .price = 1000,
         .description = sNetBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_NET_BALL - 1,
+        .type = ITEM_NET_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_NET_BALL - 1,
+        .secondaryId = ITEM_NET_BALL - FIRST_BALL,
     },
 
     [ITEM_DIVE_BALL] =
@@ -98,10 +98,10 @@ const struct Item gItems[] =
         .price = 1000,
         .description = sDiveBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_DIVE_BALL - 1,
+        .type = ITEM_DIVE_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_DIVE_BALL - 1,
+        .secondaryId = ITEM_DIVE_BALL - FIRST_BALL,
     },
 
     [ITEM_NEST_BALL] =
@@ -111,10 +111,10 @@ const struct Item gItems[] =
         .price = 1000,
         .description = sNestBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_NEST_BALL - 1,
+        .type = ITEM_NEST_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_NEST_BALL - 1,
+        .secondaryId = ITEM_NEST_BALL - FIRST_BALL,
     },
 
     [ITEM_REPEAT_BALL] =
@@ -124,10 +124,10 @@ const struct Item gItems[] =
         .price = 1000,
         .description = sRepeatBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_REPEAT_BALL - 1,
+        .type = ITEM_REPEAT_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_REPEAT_BALL - 1,
+        .secondaryId = ITEM_REPEAT_BALL - FIRST_BALL,
     },
 
     [ITEM_TIMER_BALL] =
@@ -137,10 +137,10 @@ const struct Item gItems[] =
         .price = 1000,
         .description = sTimerBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_TIMER_BALL - 1,
+        .type = ITEM_TIMER_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_TIMER_BALL - 1,
+        .secondaryId = ITEM_TIMER_BALL - FIRST_BALL,
     },
 
     [ITEM_LUXURY_BALL] =
@@ -150,10 +150,10 @@ const struct Item gItems[] =
         .price = 1000,
         .description = sLuxuryBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_LUXURY_BALL - 1,
+        .type = ITEM_LUXURY_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_LUXURY_BALL - 1,
+        .secondaryId = ITEM_LUXURY_BALL - FIRST_BALL,
     },
 
     [ITEM_PREMIER_BALL] =
@@ -163,10 +163,10 @@ const struct Item gItems[] =
         .price = 200,
         .description = sPremierBallDesc,
         .pocket = POCKET_POKE_BALLS,
-        .type = ITEM_PREMIER_BALL - 1,
+        .type = ITEM_PREMIER_BALL - FIRST_BALL,
         .battleUsage = ITEM_B_USE_OTHER,
         .battleUseFunc = ItemUseInBattle_PokeBall,
-        .secondaryId = ITEM_PREMIER_BALL - 1,
+        .secondaryId = ITEM_PREMIER_BALL - FIRST_BALL,
     },
 
 // Medicine
