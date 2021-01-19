@@ -35,7 +35,7 @@ u8 CreateTask(TaskFunc func, u8 priority)
             gTasks[i].func = func;
             gTasks[i].priority = priority;
             InsertTask(i);
-            memset(gTasks[i].data, 0, sizeof(gTasks[i].data));
+            gTasks[i].data = { 0 };
             gTasks[i].isActive = TRUE;
             return i;
         }
@@ -141,7 +141,7 @@ void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc
     u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
 
     gTasks[taskId].data[followupFuncIndex] = (s16)((u32)followupFunc);
-    gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16); // So we can store followupFunc as two half-words in the data array.
+    gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16); // Store followupFunc as two half-words in the data array.
     gTasks[taskId].func = func;
 }
 
