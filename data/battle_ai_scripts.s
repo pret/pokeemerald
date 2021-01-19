@@ -462,18 +462,18 @@ AI_CBM_Attract: @ 82DC5F5
 	get_ability AI_TARGET
 	if_equal ABILITY_OBLIVIOUS, Score_Minus10
 	get_gender AI_USER
-	if_equal 0, AI_CBM_Attract_CheckIfTargetIsFemale
-	if_equal 254, AI_CBM_Attract_CheckIfTargetIsMale
+	if_equal MON_MALE, AI_CBM_Attract_CheckIfTargetIsFemale
+	if_equal MON_FEMALE, AI_CBM_Attract_CheckIfTargetIsMale
 	goto Score_Minus10
 
 AI_CBM_Attract_CheckIfTargetIsFemale: @ 82DC61A
 	get_gender AI_TARGET
-	if_equal 254, AI_CBM_Attract_End
+	if_equal MON_FEMALE, AI_CBM_Attract_End
 	goto Score_Minus10
 
 AI_CBM_Attract_CheckIfTargetIsMale: @ 82DC627
 	get_gender AI_TARGET
-	if_equal 0, AI_CBM_Attract_End
+	if_equal MON_MALE, AI_CBM_Attract_End
 	goto Score_Minus10
 
 AI_CBM_Attract_End: @ 82DC634
