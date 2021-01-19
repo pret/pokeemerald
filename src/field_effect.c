@@ -934,43 +934,43 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
 // r, g, b are between 0 and 16
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
-    int curRed;
-    int curGreen;
-    int curBlue;
-    u16 outPal;
-
-    outPal = gPlttBufferUnfaded[i];
-    curRed = outPal & 0x1f;
-    curGreen = (outPal & (0x1f << 5)) >> 5;
-    curBlue = (outPal & (0x1f << 10)) >> 10;
-    curRed += (((0x1f - curRed) * r) >> 4);
-    curGreen += (((0x1f - curGreen) * g) >> 4);
-    curBlue += (((0x1f - curBlue) * b) >> 4);
-    outPal = curRed;
-    outPal |= curGreen << 5;
-    outPal |= curBlue << 10;
-    gPlttBufferFaded[i] = outPal;
+    int curRed, curGreen, curBlue;
+    u16 palette = gPlttBufferUnfaded[i];
+    
+    curRed   = (palette & RGB_RED);
+    curGreen = (palette & RGB_GREEN) >>  5;
+    curBlue  = (palette & RGB_BLUE)  >> 10;
+    
+    curRed   += (((0x1F - curRed)   * r) >> 4);
+    curGreen += (((0x1F - curGreen) * g) >> 4);
+    curBlue  += (((0x1F - curBlue)  * b) >> 4);
+    
+    palette  = curRed;
+    palette |= (curGreen <<  5);
+    palette |= (curBlue  << 10);
+    
+    gPlttBufferFaded[i] = palette;
 }
 
 // r, g, b are between 0 and 16
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
-    int curRed;
-    int curGreen;
-    int curBlue;
-    u16 outPal;
-
-    outPal = gPlttBufferUnfaded[i];
-    curRed = outPal & 0x1f;
-    curGreen = (outPal & (0x1f << 5)) >> 5;
-    curBlue = (outPal & (0x1f << 10)) >> 10;
-    curRed -= ((curRed * r) >> 4);
+    int curRed, curGreen, curBlue;
+    u16 palette = gPlttBufferUnfaded[i];
+    
+    curRed   = (palette & RGB_RED);
+    curGreen = (palette & RGB_GREEN) >>  5;
+    curBlue  = (palette & RGB_BLUE)  >> 10;
+    
+    curRed   -= ((curRed   * r) >> 4);
     curGreen -= ((curGreen * g) >> 4);
-    curBlue -= ((curBlue * b) >> 4);
-    outPal = curRed;
-    outPal |= curGreen << 5;
-    outPal |= curBlue << 10;
-    gPlttBufferFaded[i] = outPal;
+    curBlue  -= ((curBlue  * b) >> 4);
+    
+    palette  = curRed;
+    palette |= curGreen <<  5;
+    palette |= curBlue  << 10;
+    
+    gPlttBufferFaded[i] = palette;
 }
 
 // Task data for Task_PokecenterHeal and Task_HallOfFameRecord
