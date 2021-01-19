@@ -125,7 +125,7 @@ static void CB2_ExitMailReadFreeVars(void);
 
 // .rodata
 
-static const struct BgTemplate sUnknown_0859F290[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -336,7 +336,7 @@ static bool8 MailReadBuildGraphics(void)
             break;
         case 6:
             ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, sUnknown_0859F290, 3);
+            InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
             SetBgTilemapBuffer(1, sMailRead->bg1TilemapBuffer);
             SetBgTilemapBuffer(2, sMailRead->bg2TilemapBuffer);
             break;
