@@ -7703,6 +7703,12 @@ static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *
     }
 }
 
+#define RETURN_REFLECTION_TYPE_AT(x, y)              \
+    b = MapGridGetMetatileBehaviorAt(x, y);          \
+    result = GetReflectionTypeByMetatileBehavior(b); \
+    if (result != REFL_TYPE_NONE)                    \
+        return result;
+
 static u8 GetObjEventReflectionType(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
@@ -7716,12 +7722,6 @@ static u8 GetObjEventReflectionType(struct ObjectEvent *objEvent)
     u8 b;
     s16 one;
 
-#define RETURN_REFLECTION_TYPE_AT(x, y)              \
-    b = MapGridGetMetatileBehaviorAt(x, y);          \
-    result = GetReflectionTypeByMetatileBehavior(b); \
-    if (result != 0)                                 \
-        return result;
-
     for (i = 0, one = 1; i < height; i++)
     {
         RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x, objEvent->currentCoords.y + one + i)
@@ -7734,10 +7734,11 @@ static u8 GetObjEventReflectionType(struct ObjectEvent *objEvent)
             RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x - j, objEvent->previousCoords.y + one + i)
         }
     }
-    return 0;
+    
+    return REFL_TYPE_NONE;
+}
 
 #undef RETURN_REFLECTION_TYPE_AT
-}
 
 static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {
