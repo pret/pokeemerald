@@ -478,7 +478,11 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         // BUG: sPlayerActivityGroupSize was meant below, not gPlayerCurrActivity
         //      This will be false for all but ACTIVITY_BATTLE_DOUBLE and ACTIVITY_DECLINE
         //      All this changes is which of two texts gets printed
+        #ifdef BUGFIX
+        id = (GROUP_MAX(sPlayerActivityGroupSize) == 2) ? 0 : 1;
+        #else
         id = (GROUP_MAX(gPlayerCurrActivity) == 2) ? 1 : 0;
+        #endif
         if (PrintOnTextbox(&data->textState, sPlayerUnavailableTexts[id]))
         {
             data->playerCount = sub_8013398(data->field_0);
@@ -1320,7 +1324,11 @@ static bool32 IsPartnerActivityAcceptable(u32 activity, u32 linkGroup)
     if (linkGroup == 0xFF)
         return TRUE;
 
-    if (linkGroup <= ARRAY_COUNT(sAcceptedActivityIds)) // UB: <= may access data outside the array
+    #ifdef UBFIX
+    if (linkGroup < ARRAY_COUNT(sAcceptedActivityIds))
+    #else
+    if (linkGroup <= ARRAY_COUNT(sAcceptedActivityIds))
+    #endif
     {
         const u8 *bytes = sAcceptedActivityIds[linkGroup];
 
