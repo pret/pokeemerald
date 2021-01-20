@@ -1573,7 +1573,6 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
     u8 i = 0, j, xPos, yPos;
     u32 score = 0;
     s16 *data = gTasks[taskId].data;
-    u8 *str;
     
     switch (data[0])
     {
@@ -1714,8 +1713,7 @@ void sub_8022588(struct BerryCrushGame *r5)
 
 void sub_8022600(struct BerryCrushGame *r6)
 {
-    u8 r7, r2;
-    u8 *r4;
+    u8 r7;
 
     for (r7 = 0; r7 < r6->unk9; ++r7)
     {

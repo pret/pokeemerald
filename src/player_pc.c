@@ -1058,7 +1058,6 @@ static void ItemStorage_ProcessWithdrawTossInput(u8 taskId)
     s16 *data;
     bool32 toss;
     u32 i, x;
-    u8 windowId;
     const u8* text;
 
     data = gTasks[taskId].data;

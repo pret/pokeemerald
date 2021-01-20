@@ -470,8 +470,6 @@ static void SafariHandleChooseMove(void)
 
 static void SafariHandleChooseItem(void)
 {
-    s32 i;
-
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = SafariOpenPokeblockCase;
     gBattlerInMenuId = gActiveBattler;

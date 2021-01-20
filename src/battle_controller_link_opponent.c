@@ -1693,7 +1693,6 @@ static void LinkOpponentHandleIntroSlide(void)
 
 static void LinkOpponentHandleIntroTrainerBallThrow(void)
 {
-    u8 paletteNum;
     u8 taskId;
 
     SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
