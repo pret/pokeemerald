@@ -87,7 +87,7 @@ static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
-static u8 GetObjEventReflectionType(struct ObjectEvent*);
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent*);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
 static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
 static void ObjectEventUpdateSubpriority(struct ObjectEvent*, struct Sprite*);
@@ -7518,13 +7518,13 @@ static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *f
         [REFL_TYPE_ICE   - 1] = GROUND_EFFECT_FLAG_ICE_REFLECTION,
         [REFL_TYPE_WATER - 1] = GROUND_EFFECT_FLAG_WATER_REFLECTION
     };
-    u8 reflType = GetObjEventReflectionType(objEvent);
+    u8 reflType = ObjectEventGetNearbyReflectionType(objEvent);
 
     if (reflType)
     {
-        if (!objEvent->hasReflection)
+        if (objEvent->hasReflection == 0)
         {
-            objEvent->hasReflection |= TRUE;
+            objEvent->hasReflection++;
             *flags |= reflectionFlags[reflType - 1];
         }
     }
@@ -7709,20 +7709,18 @@ static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *
     if (result != REFL_TYPE_NONE)                    \
         return result;
 
-static u8 GetObjEventReflectionType(struct ObjectEvent *objEvent)
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
     // ceil div by tile width?
     s16 width = (info->width + 8) >> 4;
     s16 height = (info->height + 8) >> 4;
-    s16 i;
-    s16 j;
-    u8 result;
-    u8 b;
-    s16 one;
+    s16 i, j;
+    u8 result, b; // used by RETURN_REFLECTION_TYPE_AT
+    s16 one = 1;
 
-    for (i = 0, one = 1; i < height; i++)
+    for (i = 0; i < height; i++)
     {
         RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x, objEvent->currentCoords.y + one + i)
         RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x, objEvent->previousCoords.y + one + i)
