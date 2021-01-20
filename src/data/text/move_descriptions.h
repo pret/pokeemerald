@@ -41,7 +41,7 @@ static const u8 sScratchDescription[] = _(
     "Scratches the foe with\n"
     "sharp claws.");
 
-static const u8 sViceGripDescription[] = _(
+static const u8 sViseGripDescription[] = _(
     "Grips the foe with large and\n"
     "powerful pincers.");
 
@@ -541,7 +541,7 @@ static const u8 sSoftBoiledDescription[] = _(
     "Recovers up to half the\n"
     "user's maximum HP.");
 
-static const u8 sHiJumpKickDescription[] = _(
+static const u8 sHighJumpKickDescription[] = _(
     "A jumping knee kick. If it\n"
     "misses, the user is hurt.");
 
@@ -737,7 +737,7 @@ static const u8 sScaryFaceDescription[] = _(
     "Frightens with a scary face\n"
     "to sharply reduce SPEED.");
 
-static const u8 sFaintAttackDescription[] = _(
+static const u8 sFeintAttackDescription[] = _(
     "Draws the foe close, then\n"
     "strikes without fail.");
 
@@ -1057,7 +1057,7 @@ static const u8 sFocusPunchDescription[] = _(
     "A powerful loyalty attack.\n"
     "The user flinches if hit.");
 
-static const u8 sSmellingSaltDescription[] = _(
+static const u8 sSmellingSaltsDescription[] = _(
     "Powerful against paralyzed\n"
     "foes, but also heals them.");
 
@@ -2910,6 +2910,38 @@ static const u8 sSURGING_STRIKESDescription[] = _(
     "Mastering the Water style,\n"
     "strikes with 3 critical hits.");
 
+static const u8 sTHUNDER_CAGEDescription[] = _(
+    "Traps the foe in a cage of\n"
+    "electricity for 2 to 5 turns.");
+
+static const u8 sDRAGON_ENERGYDescription[] = _(
+    "The higher the user's HP\n"
+    "the more damage caused.");
+
+static const u8 sFREEZING_GLAREDescription[] = _(
+    "Shoots psychic power from\n"
+    "the eyes. May freeze the foe.");
+
+static const u8 sFIERY_WRATHDescription[] = _(
+    "An attack fueled by your\n"
+    "wrath. May cause flinching.");
+
+static const u8 sTHUNDEROUS_KICKDescription[] = _(
+    "Uses a lightning-like kick\n"
+    "to hit. Lowers foe's Defense.");
+
+static const u8 sGLACIAL_LANCEDescription[] = _(
+    "Strikes by hurling a blizzard-\n"
+    "cloaked icicle lance at a foe.");
+
+static const u8 sASTRAL_BARRAGEDescription[] = _(
+    "Strikes by sending a frightful\n"
+    "amount of ghosts at a foe.");
+
+static const u8 sEERIE_SPELLDescription[] = _(
+    "Attacks with psychic power.\n"
+    "Foe's last move has 3 PP cut.");
+
 static const u8 sNotDoneYetDescription[] = _(
     "Not done yet.");
 
@@ -2926,7 +2958,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_ICE_PUNCH - 1] = sIcePunchDescription,
     [MOVE_THUNDER_PUNCH - 1] = sThunderPunchDescription,
     [MOVE_SCRATCH - 1] = sScratchDescription,
-    [MOVE_VICE_GRIP - 1] = sViceGripDescription,
+    [MOVE_VISE_GRIP - 1] = sViseGripDescription,
     [MOVE_GUILLOTINE - 1] = sGuillotineDescription,
     [MOVE_RAZOR_WIND - 1] = sRazorWindDescription,
     [MOVE_SWORDS_DANCE - 1] = sSwordsDanceDescription,
@@ -3051,7 +3083,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_AMNESIA - 1] = sAmnesiaDescription,
     [MOVE_KINESIS - 1] = sKinesisDescription,
     [MOVE_SOFT_BOILED - 1] = sSoftBoiledDescription,
-    [MOVE_HI_JUMP_KICK - 1] = sHiJumpKickDescription,
+    [MOVE_HIGH_JUMP_KICK - 1] = sHighJumpKickDescription,
     [MOVE_GLARE - 1] = sGlareDescription,
     [MOVE_DREAM_EATER - 1] = sDreamEaterDescription,
     [MOVE_POISON_GAS - 1] = sPoisonGasDescription,
@@ -3100,7 +3132,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_PROTECT - 1] = sProtectDescription,
     [MOVE_MACH_PUNCH - 1] = sMachPunchDescription,
     [MOVE_SCARY_FACE - 1] = sScaryFaceDescription,
-    [MOVE_FAINT_ATTACK - 1] = sFaintAttackDescription,
+    [MOVE_FEINT_ATTACK - 1] = sFeintAttackDescription,
     [MOVE_SWEET_KISS - 1] = sSweetKissDescription,
     [MOVE_BELLY_DRUM - 1] = sBellyDrumDescription,
     [MOVE_SLUDGE_BOMB - 1] = sSludgeBombDescription,
@@ -3180,7 +3212,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_MEMENTO - 1] = sMementoDescription,
     [MOVE_FACADE - 1] = sFacadeDescription,
     [MOVE_FOCUS_PUNCH - 1] = sFocusPunchDescription,
-    [MOVE_SMELLING_SALT - 1] = sSmellingSaltDescription,
+    [MOVE_SMELLING_SALTS - 1] = sSmellingSaltsDescription,
     [MOVE_FOLLOW_ME - 1] = sFollowMeDescription,
     [MOVE_NATURE_POWER - 1] = sNaturePowerDescription,
     [MOVE_CHARGE - 1] = sChargeDescription,
@@ -3664,5 +3696,12 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_JUNGLE_HEALING - 1] = sJUNGLE_HEALINGDescription,
     [MOVE_WICKED_BLOW - 1] = sWICKED_BLOWDescription,
     [MOVE_SURGING_STRIKES - 1] = sSURGING_STRIKESDescription,
-
+    [MOVE_THUNDER_CAGE - 1] = sTHUNDER_CAGEDescription,
+    [MOVE_DRAGON_ENERGY - 1] = sDRAGON_ENERGYDescription,
+    [MOVE_FREEZING_GLARE - 1] = sFREEZING_GLAREDescription,
+    [MOVE_FIERY_WRATH - 1] = sFIERY_WRATHDescription,
+    [MOVE_THUNDEROUS_KICK - 1] = sTHUNDEROUS_KICKDescription,
+    [MOVE_GLACIAL_LANCE - 1] = sGLACIAL_LANCEDescription,
+    [MOVE_ASTRAL_BARRAGE - 1] = sASTRAL_BARRAGEDescription,
+    [MOVE_EERIE_SPELL - 1] = sEERIE_SPELLDescription,
 };
