@@ -7116,9 +7116,8 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
     switch (GetBattlerHoldEffect(battlerAtk, TRUE))
     {
     case HOLD_EFFECT_THICK_CLUB:
-        if ((gBattleMons[battlerAtk].species == SPECIES_CUBONE
-         || gBattleMons[battlerAtk].species == SPECIES_MAROWAK
-         || gBattleMons[battlerAtk].species == SPECIES_MAROWAK_ALOLAN)
+        if ((GET_BASE_SPECIES_ID(battlerAtk) == SPECIES_CUBONE
+         || GET_BASE_SPECIES_ID(battlerAtk) == SPECIES_MAROWAK)
          && IS_MOVE_PHYSICAL(move))
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
