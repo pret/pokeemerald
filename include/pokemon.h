@@ -4,6 +4,8 @@
 #include "constants/pokemon.h"
 #include "sprite.h"
 
+#define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
+
 struct PokemonSubstruct0
 {
     /*0x00*/ u16 species;
@@ -419,5 +421,7 @@ bool8 HasTwoFramesAnimation(u16 species);
 struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1);
 void sub_806F47C(u8 id);
 u8 *sub_806F4F8(u8 id, u8 arg1);
+u16 GetFormSpeciesId(u16 speciesId, u8 formId);
+u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 
 #endif // GUARD_POKEMON_H
