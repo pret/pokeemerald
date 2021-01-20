@@ -2304,14 +2304,14 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
 {
     u32 personality;
 
-    if ((u8)(unownLetter - 1) < 28)
+    if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
     {
         u16 actualLetter;
 
         do
         {
             personality = Random32();
-            actualLetter = ((((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 0x3)) % 28);
+            actualLetter = GET_UNOWN_LETTER(personality);
         }
         while (nature != GetNatureFromPersonality(personality)
             || gender != GetGenderFromSpeciesAndPersonality(species, personality)

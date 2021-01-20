@@ -462,18 +462,18 @@ AI_CBM_Attract: @ 82DC5F5
 	get_ability AI_TARGET
 	if_equal ABILITY_OBLIVIOUS, Score_Minus10
 	get_gender AI_USER
-	if_equal 0, AI_CBM_Attract_CheckIfTargetIsFemale
-	if_equal 254, AI_CBM_Attract_CheckIfTargetIsMale
+	if_equal MON_MALE, AI_CBM_Attract_CheckIfTargetIsFemale
+	if_equal MON_FEMALE, AI_CBM_Attract_CheckIfTargetIsMale
 	goto Score_Minus10
 
 AI_CBM_Attract_CheckIfTargetIsFemale: @ 82DC61A
 	get_gender AI_TARGET
-	if_equal 254, AI_CBM_Attract_End
+	if_equal MON_FEMALE, AI_CBM_Attract_End
 	goto Score_Minus10
 
 AI_CBM_Attract_CheckIfTargetIsMale: @ 82DC627
 	get_gender AI_TARGET
-	if_equal 0, AI_CBM_Attract_End
+	if_equal MON_MALE, AI_CBM_Attract_End
 	goto Score_Minus10
 
 AI_CBM_Attract_End: @ 82DC634
@@ -2057,12 +2057,22 @@ AI_CV_Protect_ScoreDown2:
 AI_CV_Protect_End:
 	end
 
+@ BUG: Foresight is only encouraged if the user is Ghost type or
+@      has high evasion, but should check target instead
 AI_CV_Foresight:
+.ifdef BUGFIX
+	get_target_type1
+	if_equal TYPE_GHOST, AI_CV_Foresight2
+	get_target_type2
+	if_equal TYPE_GHOST, AI_CV_Foresight2
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, AI_CV_Foresight3
+.else
 	get_user_type1
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	get_user_type2
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	if_stat_level_more_than AI_USER, STAT_EVASION, 8, AI_CV_Foresight3
+.endif
 	score -2
 	goto AI_CV_Foresight_End
 
@@ -2329,13 +2339,13 @@ AI_CV_SemiInvulnerable2:
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_SemiInvulnerable_TryEncourage
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_SemiInvulnerable_TryEncourage
 	get_weather
-	.ifdef BUGFIX
+.ifdef BUGFIX
 	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckIceType
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckSandstormTypes
-	.else
+.else
 	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckSandstormTypes
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckIceType
-	.endif
+.endif
 	goto AI_CV_SemiInvulnerable5
 
 AI_CV_SemiInvulnerable_CheckSandstormTypes:
@@ -2404,11 +2414,11 @@ AI_CV_Hail_End:
 
 @ BUG: Facade score is increased if the target is statused, but should be if the user is
 AI_CV_Facade:
-	.ifdef BUGFIX
+.ifdef BUGFIX
 	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-	.else
+.else
 	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-	.endif
+.endif
 	score +1
 AI_CV_Facade_End:
 	end

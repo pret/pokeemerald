@@ -1513,9 +1513,9 @@ static void ShowLinkContestResultsWindow(void)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Smart, x, 89, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Tough, x, 105, TEXT_SPEED_FF, NULL);
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
     {
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             ConvertIntToDecimalStringN(gStringVar4, gSaveBlock2Ptr->contestLinkResults[i][j], STR_CONV_MODE_RIGHT_ALIGN, 4);
             AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, (j * 38) + 64, (i * 16) + 41, TEXT_SPEED_FF, NULL);

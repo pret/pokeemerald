@@ -238,6 +238,15 @@ struct Evolution
     u16 targetSpecies;
 };
 
+#define NUM_UNOWN_FORMS 28
+
+#define GET_UNOWN_LETTER(personality) ((   \
+      (((personality) & 0x03000000) >> 18) \
+    | (((personality) & 0x00030000) >> 12) \
+    | (((personality) & 0x00000300) >> 6)  \
+    | (((personality) & 0x00000003) >> 0)  \
+) % NUM_UNOWN_FORMS)
+
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
