@@ -20,9 +20,9 @@ enum ReflectionTypes
 {
     REFL_TYPE_NONE,
     REFL_TYPE_ICE,
-    REFL_TYPE_WATER
+    REFL_TYPE_WATER,
+    NUM_REFLECTION_TYPES
 };
-#define NUM_REFLECTION_TYPES 2
 
 #define FIGURE_8_LENGTH 72
 
