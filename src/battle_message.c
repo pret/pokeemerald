@@ -305,7 +305,7 @@ static const u8 sText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}'s 
 static const u8 sText_PkmnsXPreventsYsZ[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!");
 static const u8 sText_PkmnsXCuredItsYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!");
 static const u8 sText_PkmnsXHadNoEffectOnY[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!");
-static const u8 sText_StatSharply[] = _("sharply ");
+const u8 gText_StatSharply[] = _("sharply ");
 const u8 gText_StatRose[] = _("rose!");
 static const u8 sText_StatHarshly[] = _("harshly ");
 static const u8 sText_StatFell[] = _("fell!");
@@ -678,6 +678,7 @@ static const u8 sText_NoOneWillBeAbleToRun[] = _("No one will be able to run awa
 static const u8 sText_DestinyKnotActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} fell in love\nfrom the {B_LAST_ITEM}!");
 static const u8 sText_CloakedInAFreezingLight[] = _("{B_ATK_NAME_WITH_PREFIX} became cloaked\nin a freezing light!");
 static const u8 sText_StatWasNotLowered[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas not lowered!");
+static const u8 sText_AuraFlaredToLife[] = _("{B_DEF_NAME_WITH_PREFIX}'s aura flared to life!");
 static const u8 sText_AirLockActivates[] = _("The effects of weather\ndisappeared.");
 static const u8 sText_PressureActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is exerting its\npressure!");
 static const u8 sText_DarkAuraActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is radiating\na dark aura!");
@@ -928,7 +929,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PKMNPREVENTSSTATLOSSWITH - 12] = sText_PkmnPreventsStatLossWith,
     [STRINGID_PKMNHURTSWITH - 12] = sText_PkmnHurtsWith,
     [STRINGID_PKMNTRACED - 12] = sText_PkmnTraced,
-    [STRINGID_STATSHARPLY - 12] = sText_StatSharply,
+    [STRINGID_STATSHARPLY - 12] = gText_StatSharply,
     [STRINGID_STATROSE - 12] = gText_StatRose,
     [STRINGID_STATHARSHLY - 12] = sText_StatHarshly,
     [STRINGID_STATFELL - 12] = sText_StatFell,
@@ -1240,6 +1241,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_GRASSYTERRAINHEALS - 12] = sText_GrassyTerrainHeals,
     [STRINGID_ELECTRICTERRAINPREVENTS - 12] = sText_ElectricTerrainPreventsSleep,
     [STRINGID_PSYCHICTERRAINPREVENTS - 12] = sText_PsychicTerrainPreventsPriority,
+    [STRINGID_AURAFLAREDTOLIFE - 12] = sText_AuraFlaredToLife,
     [STRINGID_AIRLOCKACTIVATES - 12] = sText_AirLockActivates,
     [STRINGID_PRESSUREENTERS - 12] = sText_PressureActivates,
     [STRINGID_DARKAURAENTERS - 12] = sText_DarkAuraActivates,
@@ -1790,7 +1792,7 @@ static const u16 sGrammarMoveUsedTable[] =
     MOVE_FEATHER_DANCE, MOVE_TEETER_DANCE, MOVE_MUD_SPORT,
     MOVE_FAKE_TEARS, MOVE_WATER_SPORT, MOVE_CALM_MIND, 0,
 
-    MOVE_POUND, MOVE_SCRATCH, MOVE_VICE_GRIP,
+    MOVE_POUND, MOVE_SCRATCH, MOVE_VISE_GRIP,
     MOVE_WING_ATTACK, MOVE_FLY, MOVE_BIND, MOVE_SLAM,
     MOVE_HORN_ATTACK, MOVE_WRAP, MOVE_THRASH, MOVE_TAIL_WHIP,
     MOVE_LEER, MOVE_BITE, MOVE_GROWL, MOVE_ROAR,

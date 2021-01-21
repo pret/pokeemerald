@@ -349,6 +349,8 @@ extern const u8 BattleScript_EmergencyExitNoPopUp[];
 extern const u8 BattleScript_EmergencyExitWild[];
 extern const u8 BattleScript_EmergencyExitWildNoPopUp[];
 extern const u8 BattleScript_CheekPouchActivates[];
+extern const u8 BattleScript_TotemVar[];
+extern const u8 BattleScript_TotemFlaredToLife[];
 extern const u8 BattleScript_AnnounceAirLockCloudNine[];
 extern const u8 BattleScript_BattlerAbilityStatRaiseOnSwitchIn[];
 extern const u8 BattleScript_CottonDownActivates[];
