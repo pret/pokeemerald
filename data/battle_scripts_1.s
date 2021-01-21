@@ -5754,6 +5754,13 @@ BattleScript_PerishSongTakesLife::
 	tryfaintmon BS_ATTACKER, FALSE, NULL
 	end2
 
+BattleScript_PerishBodyActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSWILLPERISHIN3TURNS
+	waitmessage 0x40
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	return
+
 BattleScript_PerishSongCountGoesDown::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
 	waitmessage 0x40
@@ -6186,6 +6193,12 @@ BattleScript_AttackerFormChangeEnd3::
 	call BattleScript_AttackerFormChange
 	end3
 
+BattleScript_BallFetch::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_FETCHEDPOKEBALL
+	waitmessage 0x40
+	end3
+
 BattleScript_TargetFormChange::
 	pause 0x5
 	copybyte gBattlerAbility, gBattlerTarget
@@ -6208,6 +6221,32 @@ BattleScript_IllusionOff::
 	spriteignore0hp FALSE
 	printstring STRINGID_ILLUSIONWOREOFF
 	waitmessage 0x40
+	return
+
+BattleScript_CottonDownActivates::
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	call BattleScript_AbilityPopUp
+	copybyte gEffectBattler, gBattlerTarget
+	savetarget
+	setbyte gBattlerTarget, 0x0
+BattleScript_CottonDownLoop:
+	setstatchanger STAT_SPEED, 1, TRUE
+	jumpifbyteequal gBattlerTarget, gEffectBattler, BattleScript_CottonDownLoopIncrement
+	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_CottonDownTargetSpeedCantGoLower
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+	goto BattleScript_CottonDownLoopIncrement
+BattleScript_CottonDownTargetSpeedCantGoLower:
+	printstring STRINGID_STATSWONTDECREASE
+	waitmessage 0x40
+BattleScript_CottonDownLoopIncrement:
+	addbyte gBattlerTarget, 0x1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CottonDownLoop
+BattleScript_CottonDownReturn:
+	restoretarget
+	destroyabilitypopup
 	return
 
 BattleScript_AnticipationActivates::
@@ -6729,6 +6768,15 @@ BattleScript_SandstreamActivates::
 	call BattleScript_WeatherFormChanges
 	end3
 
+BattleScript_SandSpitActivates::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ASANDSTORMKICKEDUP
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES, NULL
+	call BattleScript_WeatherFormChanges
+	return
+
 BattleScript_ShedSkinActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNSXCUREDYPROBLEM
@@ -6789,12 +6837,12 @@ BattleScript_IntimidateActivatesLoop:
 	jumpifability BS_TARGET, ABILITY_CLEAR_BODY, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_HYPER_CUTTER, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_WHITE_SMOKE, BattleScript_IntimidatePrevented
-#if B_UPDATED_INTIMIDATE >= GEN_8
+.if B_UPDATED_INTIMIDATE >= GEN_8
 	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_SCRAPPY, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_IntimidatePrevented
 	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IntimidatePrevented
-#endif
+.endif
 	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | STAT_BUFF_ALLOW_PTR, BattleScript_IntimidateActivatesLoopIncrement
 	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, 0x1, BattleScript_IntimidateActivatesLoopIncrement
 	setgraphicalstatchangevalues
@@ -7094,22 +7142,33 @@ BattleScript_MummyActivates::
 	waitmessage 0x40
 	return
 
-BattleScript_AngryPointActivates::
+BattleScript_TargetsStatWasMaxedOut::
 	call BattleScript_AbilityPopUp
 	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring STRINGID_ANGRYPOINTACTIVATES
+	printstring STRINGID_TARGETSSTATWASMAXEDOUT
 	waitmessage 0x40
 	return
 
-BattleScript_TargetAbilityStatRaise::
+BattleScript_BattlerAbilityStatRaiseOnSwitchIn::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_BATTLERABILITYRAISEDSTAT
+	waitmessage 0x40
+	end3
+
+BattleScript_TargetAbilityStatRaiseOnMoveEnd::
 	call BattleScript_AbilityPopUp
 	statbuffchange STAT_BUFF_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
 	setgraphicalstatchangevalues
 	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
-	printstring STRINGID_TARGETABILITYSTATRAISE
+	printstring STRINGID_ABILITYRAISEDSTATDRASTICALLY
 	waitmessage 0x40
 	return
 	
@@ -7766,6 +7825,25 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	atk57
 	waitmessage 0x40
 	end2
+
+BattleScript_TotemFlaredToLife::
+	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
+	printstring STRINGID_AURAFLAREDTOLIFE
+	waitmessage 0x40
+	goto BattleScript_ApplyTotemVarBoost
+
+BattleScript_TotemVar::
+	gettotemboost BattleScript_ApplyTotemVarBoost
+BattleScript_TotemVarEnd:
+	end2
+BattleScript_ApplyTotemVarBoost:
+	statbuffchange STAT_BUFF_ALLOW_PTR, BattleScript_TotemVarEnd
+	setgraphicalstatchangevalues
+	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_TotemVarPrintStatMsg:
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+	goto BattleScript_TotemVar  @loop until stats bitfield is empty
 
 BattleScript_AnnounceAirLockCloudNine::
 	call BattleScript_AbilityPopUp

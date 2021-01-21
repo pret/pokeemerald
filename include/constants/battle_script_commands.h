@@ -167,6 +167,7 @@
 #define VARIOUS_PARALYZE_TYPE_IMMUNITY          100
 #define VARIOUS_JUMP_IF_ABSENT                  101
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
+#define VARIOUS_TOTEM_BOOST                     103
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

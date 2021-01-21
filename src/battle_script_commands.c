@@ -1273,7 +1273,7 @@ static void Cmd_attackcanceler(void)
 
     // Check Protean activation.
     GET_MOVE_TYPE(gCurrentMove, moveType);
-    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_PROTEAN
+    if ((GetBattlerAbility(gBattlerAttacker) == ABILITY_PROTEAN || GetBattlerAbility(gBattlerAttacker) == ABILITY_LIBERO)
         && (gBattleMons[gBattlerAttacker].type1 != moveType || gBattleMons[gBattlerAttacker].type2 != moveType ||
             (gBattleMons[gBattlerAttacker].type3 != moveType && gBattleMons[gBattlerAttacker].type3 != TYPE_MYSTERY))
         && gCurrentMove != MOVE_STRUGGLE)
@@ -1328,7 +1328,7 @@ static void Cmd_attackcanceler(void)
     }
 
     if (gProtectStructs[gBattlerTarget].bounceMove
-        && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED
+        && gBattleMoves[gCurrentMove].flags & FLAG_MAGIC_COAT_AFFECTED
         && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
     {
         PressurePPLose(gBattlerAttacker, gBattlerTarget, MOVE_MAGIC_COAT);
@@ -1340,7 +1340,7 @@ static void Cmd_attackcanceler(void)
         return;
     }
     else if (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE
-             && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED
+             && gBattleMoves[gCurrentMove].flags & FLAG_MAGIC_COAT_AFFECTED
              && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
     {
         RecordAbilityBattle(gBattlerTarget, ABILITY_MAGIC_BOUNCE);
@@ -5270,11 +5270,11 @@ bool32 CanBattlerSwitch(u32 battlerId)
         else
             party = gPlayerParty;
 
-        i = 0;
+        lastMonId = 0;
         if (battlerId & 2)
-            i = 3;
+            lastMonId = 3;
 
-        for (lastMonId = i + 3; i < lastMonId; i++)
+        for (i = lastMonId; i < lastMonId + 3; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -5283,7 +5283,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
                 break;
         }
 
-        ret = (i != lastMonId);
+        ret = (i != lastMonId + 3);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -5293,18 +5293,18 @@ bool32 CanBattlerSwitch(u32 battlerId)
             {
                 party = gPlayerParty;
 
-                i = 0;
+                lastMonId = 0;
                 if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battlerId)) == TRUE)
-                    i = 3;
+                    lastMonId = 3;
             }
             else
             {
                 party = gEnemyParty;
 
                 if (battlerId == 1)
-                    i = 0;
+                    lastMonId = 0;
                 else
-                    i = 3;
+                    lastMonId = 3;
             }
         }
         else
@@ -5314,12 +5314,12 @@ bool32 CanBattlerSwitch(u32 battlerId)
             else
                 party = gPlayerParty;
 
-            i = 0;
+            lastMonId = 0;
             if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battlerId)) == TRUE)
-                i = 3;
+                lastMonId = 3;
         }
 
-        for (lastMonId = i + 3; i < lastMonId; i++)
+        for (i = lastMonId; i < lastMonId + 3; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -5328,17 +5328,17 @@ bool32 CanBattlerSwitch(u32 battlerId)
                 break;
         }
 
-        ret = (i != lastMonId);
+        ret = (i != lastMonId + 3);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
     {
         party = gEnemyParty;
 
-        i = 0;
+        lastMonId = 0;
         if (battlerId == B_POSITION_OPPONENT_RIGHT)
-            i = 3;
+            lastMonId = 3;
 
-        for (lastMonId = i + 3; i < lastMonId; i++)
+        for (i = lastMonId; i < lastMonId + 3; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
@@ -5347,7 +5347,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
                 break;
         }
 
-        ret = (i != lastMonId);
+        ret = (i != lastMonId + 3);
     }
     else
     {
@@ -5636,14 +5636,9 @@ static void Cmd_openpartyscreen(void)
         hitmarkerFaintBits = gHitMarker >> 0x1C;
 
         gBattlerFainted = 0;
-        while (1)
-        {
-            if (gBitTable[gBattlerFainted] & hitmarkerFaintBits)
-                break;
-            if (gBattlerFainted >= gBattlersCount)
-                break;
+        while (!(gBitTable[gBattlerFainted] & hitmarkerFaintBits)
+               && gBattlerFainted < gBattlersCount)
             gBattlerFainted++;
-        }
 
         if (gBattlerFainted == gBattlersCount)
             gBattlescriptCurrInstr = jumpPtr;
@@ -8312,6 +8307,41 @@ static void Cmd_various(void)
     case VARIOUS_DESTROY_ABILITY_POPUP:
         DestroyAbilityPopUp(gActiveBattler);
         break;
+    case VARIOUS_TOTEM_BOOST:
+        gActiveBattler = gBattlerAttacker;
+        if (gTotemBoosts[gActiveBattler].stats == 0)
+        {
+            gBattlescriptCurrInstr += 7;    // stats done, exit
+        }
+        else
+        {
+            for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
+            {
+                if (gTotemBoosts[gActiveBattler].stats & (1 << i))
+                {
+                    if (gTotemBoosts[gActiveBattler].statChanges[i] <= -1)
+                        SET_STATCHANGER(i + 1, abs(gTotemBoosts[gActiveBattler].statChanges[i]), TRUE);
+                    else
+                        SET_STATCHANGER(i + 1, gTotemBoosts[gActiveBattler].statChanges[i], FALSE);
+                    
+                    gTotemBoosts[gActiveBattler].stats &= ~(1 << i);
+                    gBattleScripting.battler = gActiveBattler;
+                    gBattlerTarget = gActiveBattler;
+                    if (gTotemBoosts[gActiveBattler].stats & 0x80)
+                    {
+                        gTotemBoosts[gActiveBattler].stats &= ~0x80; // set 'aura flared to life' flag
+                        gBattlescriptCurrInstr = BattleScript_TotemFlaredToLife;
+                    }
+                    else
+                    {
+                        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // do boost
+                    }
+                    return;
+                }
+            }
+            gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
+        }
+        return;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -12016,6 +12046,9 @@ static void Cmd_handleballthrow(void)
             }
             else // not caught
             {
+                if (!gHasFetchedBall)
+                    gLastUsedBall = gLastUsedItem;
+
                 if (IsCriticalCapture())
                     gBattleCommunication[MULTISTRING_CHOOSER] = shakes + 3;
                 else
