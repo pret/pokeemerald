@@ -1379,7 +1379,7 @@ static void LoadMonIconGfx(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (sData->trainerCard.monSpecies[i])
-            LoadBgTiles(3, GetMonIconTiles(sData->trainerCard.monSpecies[i], FALSE, 0), 512, 16 * i + 32);
+            LoadBgTiles(3, GetMonIconTiles(sData->trainerCard.monSpecies[i], 0), 512, 16 * i + 32);
     }
 }
 
