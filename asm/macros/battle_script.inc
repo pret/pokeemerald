@@ -1759,6 +1759,11 @@
 	.macro destroyabilitypopup
 	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
 	.endm
+
+	.macro gettotemboost ptr:req
+	various BS_ATTACKER, VARIOUS_TOTEM_BOOST
+	.4byte \ptr
+	.endm
 	
 	.macro doterrainseed battler:req, ptr:req
 	various \battler, VARIOUS_TERRAIN_SEED
