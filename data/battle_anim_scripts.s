@@ -2412,8 +2412,8 @@ Move_FOCUS_BLAST:
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
 	loadspritegfx ANIM_TAG_METEOR
 	loadspritegfx ANIM_TAG_FLAT_ROCK
-	monbg ANIM_TARGET
-	monbgprio_28 ANIM_TARGET
+	monbg ANIM_ATK_PARTNER
+	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
 	call SetHighSpeedBg
 	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 2, 0
@@ -2423,7 +2423,7 @@ Move_FOCUS_BLAST:
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
 	waitforvisualfinish
 	call UnsetHighSpeedBg
-	clearmonbg ANIM_TARGET
+	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	delay 1
 	end
