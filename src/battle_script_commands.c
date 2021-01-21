@@ -10952,9 +10952,16 @@ static void Cmd_sethail(void)
 
 static void Cmd_jumpifattackandspecialattackcannotfall(void) // memento
 {
+    #if B_MEMENTO_FAIL == GEN_3
     if (gBattleMons[gBattlerTarget].statStages[STAT_ATK] == MIN_STAT_STAGE
         && gBattleMons[gBattlerTarget].statStages[STAT_SPATK] == MIN_STAT_STAGE
         && gBattleCommunication[6] != 1)
+    #else
+    if (gBattleCommunication[6] != 1
+      || gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE
+      || IsBattlerProtected(gBattlerTarget, gCurrentMove)
+      || DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
+    #endif
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
