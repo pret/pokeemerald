@@ -399,12 +399,12 @@ static void IntrDummy(void)
 
 static void WaitForVBlank(void)
 {
-    gMain.intrCheck &= ~INTR_FLAG_VBLANK;
+    gMain.intrCheck &= ~INTR_FLAG_VBLANK; 
 
     #ifdef BUGFIX
-    VBlankIntrWait():
+    VBlankIntrWait(); // Please see https://github.com/pret/pokeemerald/wiki/Improving-the-WaitForVBlank-function for more details
     #else
-    while (!(gMain.intrCheck & INTR_FLAG_VBLANK)) // Very inefficent loop. Calling VBlankIntrWait is more efficient
+    while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
         ;
     #endif
 }
