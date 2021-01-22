@@ -7857,9 +7857,9 @@ bool32 CanBattlerGetOrLoseItem(u8 battlerId, u16 itemId)
     // Mail can be stolen now
     if (itemId == ITEM_ENIGMA_BERRY)
         return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_KYOGRE && (itemId == ITEM_BLUE_ORB || holdEffect == HOLD_EFFECT_PRIMAL_ORB))
+    else if (GET_BASE_SPECIES_ID(species) == SPECIES_KYOGRE && itemId == ITEM_BLUE_ORB) // includes primal
         return FALSE;
-    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GROUDON && (itemId == ITEM_BLUE_ORB || holdEffect == HOLD_EFFECT_PRIMAL_ORB))
+    else if (GET_BASE_SPECIES_ID(species) == SPECIES_GROUDON && itemId == ITEM_RED_ORB) // includes primal
         return FALSE;
     // Mega stone cannot be lost if pokemon can mega evolve with it or is already mega evolved.
     else if (holdEffect == HOLD_EFFECT_MEGA_STONE
