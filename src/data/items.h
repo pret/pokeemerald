@@ -1459,7 +1459,7 @@ const struct Item gItems[] =
 
     [ITEM_YELLOW_APRICORN] =
     {
-        .name = _("YelowApricorn"),
+        .name = _("YellwApricorn"),
         .itemId = ITEM_YELLOW_APRICORN,
         .price = 200,
         .description = sYellowApricornDesc,
