@@ -401,8 +401,12 @@ static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
 
-    while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
+    #ifdef BUGFIX
+    VBlankIntrWait():
+    #else
+    while (!(gMain.intrCheck & INTR_FLAG_VBLANK)) // Very inefficent loop. Calling VBlankIntrWait is more efficient
         ;
+    #endif
 }
 
 void SetTrainerHillVBlankCounter(u32 *counter)
