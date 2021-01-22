@@ -76,9 +76,9 @@ EWRAM_DATA u32 gRecordedBattleRngSeed = 0;
 EWRAM_DATA u32 gBattlePalaceMoveSelectionRngValue = 0;
 EWRAM_DATA static u8 sBattleRecords[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE] = {0};
 EWRAM_DATA static u16 sRecordedBytesNo[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA static u16 sUnknown_0203C79C[4] = {0};
-EWRAM_DATA static u16 sUnknown_0203C7A4[4] = {0};
-EWRAM_DATA static u8 sUnknown_0203C7AC = 0;
+EWRAM_DATA static u16 sPrevRecordedBytesNo[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u16 sUnknown_0203C7A4[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u8 sRecordMode = 0;
 EWRAM_DATA static u8 sLvlMode = 0;
 EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
@@ -93,7 +93,7 @@ EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
 EWRAM_DATA static u16 sPlayerMonMoves[2][MAX_MON_MOVES] = {0};
 EWRAM_DATA static struct PlayerInfo sPlayers[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA static u8 sUnknown_0203CCD0 = 0;
+EWRAM_DATA static bool8 sUnknown_0203CCD0 = 0;
 EWRAM_DATA static u8 sRecordMixFriendName[PLAYER_NAME_LENGTH + 1] = {0};
 EWRAM_DATA static u8 sRecordMixFriendClass = 0;
 EWRAM_DATA static u8 sApprenticeId = 0;
@@ -104,25 +104,25 @@ static u8 sRecordMixFriendLanguage;
 static u8 sApprenticeLanguage;
 
 // this file's functions
-static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2);
-static bool32 CopyRecordedBattleFromSave(struct RecordedBattleSave *dst);
+static u8 sub_8185278(u8 *, u8 *, u8 *);
+static bool32 CopyRecordedBattleFromSave(struct RecordedBattleSave *);
 static void RecordedBattle_RestoreSavedParties(void);
 static void CB2_RecordedBattle(void);
 
-void sub_8184DA4(u8 arg0)
+void RecordedBattle_Init(u8 mode)
 {
     s32 i, j;
 
-    sUnknown_0203C7AC = arg0;
-    sUnknown_0203CCD0 = 0;
+    sRecordMode = mode;
+    sUnknown_0203CCD0 = FALSE;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         sRecordedBytesNo[i] = 0;
-        sUnknown_0203C79C[i] = 0;
+        sPrevRecordedBytesNo[i] = 0;
         sUnknown_0203C7A4[i] = 0;
 
-        if (arg0 == 1)
+        if (mode == B_RECORD_MODE_RECORDING)
         {
             for (j = 0; j < BATTLER_RECORD_SIZE; j++)
             {
@@ -138,13 +138,13 @@ void sub_8184E58(void)
 {
     s32 i, j;
 
-    if (sUnknown_0203C7AC == 1)
+    if (sRecordMode == B_RECORD_MODE_RECORDING)
     {
         gRecordedBattleRngSeed = gRngValue;
         sFrontierFacility = VarGet(VAR_FRONTIER_FACILITY);
         sFrontierBrainSymbol = GetFronterBrainSymbol();
     }
-    else if (sUnknown_0203C7AC == 2)
+    else if (sRecordMode == B_RECORD_MODE_PLAYBACK)
     {
         gRngValue = gRecordedBattleRngSeed;
     }
@@ -195,7 +195,7 @@ void sub_8184E58(void)
 
 void RecordedBattle_SetBattlerAction(u8 battlerId, u8 action)
 {
-    if (sRecordedBytesNo[battlerId] < BATTLER_RECORD_SIZE && sUnknown_0203C7AC != 2)
+    if (sRecordedBytesNo[battlerId] < BATTLER_RECORD_SIZE && sRecordMode != B_RECORD_MODE_PLAYBACK)
     {
         sBattleRecords[battlerId][sRecordedBytesNo[battlerId]++] = action;
     }
@@ -231,33 +231,34 @@ u8 RecordedBattle_GetBattlerAction(u8 battlerId)
     }
 }
 
-u8 sub_81850D0(void)
+// Unused
+static u8 GetRecordedBattleMode(void)
 {
-    return sUnknown_0203C7AC;
+    return sRecordMode;
 }
 
-u8 sub_81850DC(u8 *arg0)
+u8 RecordedBattle_GetAllNewBattlerData(u8 *dst)
 {
     u8 i, j;
-    u8 ret = 0;
+    u8 idx = 0;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        if (sRecordedBytesNo[i] != sUnknown_0203C79C[i])
+        if (sRecordedBytesNo[i] != sPrevRecordedBytesNo[i])
         {
-            arg0[ret++] = i;
-            arg0[ret++] = sRecordedBytesNo[i] - sUnknown_0203C79C[i];
+            dst[idx++] = i;
+            dst[idx++] = sRecordedBytesNo[i] - sPrevRecordedBytesNo[i];
 
-            for (j = 0; j < sRecordedBytesNo[i] - sUnknown_0203C79C[i]; j++)
+            for (j = 0; j < sRecordedBytesNo[i] - sPrevRecordedBytesNo[i]; j++)
             {
-                arg0[ret++] = sBattleRecords[i][sUnknown_0203C79C[i] + j];
+                dst[idx++] = sBattleRecords[i][sPrevRecordedBytesNo[i] + j];
             }
 
-            sUnknown_0203C79C[i] = sRecordedBytesNo[i];
+            sPrevRecordedBytesNo[i] = sRecordedBytesNo[i];
         }
     }
 
-    return ret;
+    return idx;
 }
 
 void sub_81851A8(u8 *arg0)
@@ -720,7 +721,7 @@ void RecordedBattle_CopyBattlerMoves(void)
         return;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
-    if (sUnknown_0203C7AC == 2)
+    if (sRecordMode == B_RECORD_MODE_PLAYBACK)
         return;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -841,12 +842,12 @@ u32 GetAiScriptsInRecordedBattle(void)
 
 void sub_8186444(void)
 {
-    sUnknown_0203CCD0 = 1;
+    sUnknown_0203CCD0 = TRUE;
 }
 
 bool8 sub_8186450(void)
 {
-    return (sUnknown_0203CCD0 == 0);
+    return (sUnknown_0203CCD0 == FALSE);
 }
 
 void GetRecordedBattleRecordMixFriendName(u8 *dst)

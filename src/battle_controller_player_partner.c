@@ -47,7 +47,7 @@ static void PlayerPartnerHandleMoveAnimation(void);
 static void PlayerPartnerHandlePrintString(void);
 static void PlayerPartnerHandlePrintSelectionString(void);
 static void PlayerPartnerHandleChooseAction(void);
-static void PlayerPartnerHandleUnknownYesNoBox(void);
+static void PlayerPartnerHandleYesNoBox(void);
 static void PlayerPartnerHandleChooseMove(void);
 static void PlayerPartnerHandleChooseItem(void);
 static void PlayerPartnerHandleChoosePokemon(void);
@@ -83,7 +83,7 @@ static void PlayerPartnerHandleSpriteInvisibility(void);
 static void PlayerPartnerHandleBattleAnimation(void);
 static void PlayerPartnerHandleLinkStandbyMsg(void);
 static void PlayerPartnerHandleResetActionMoveSelection(void);
-static void PlayerPartnerHandleCmd55(void);
+static void PlayerPartnerHandleEndLinkBattle(void);
 static void PlayerPartnerCmdEnd(void);
 
 static void PlayerPartnerBufferRunCommand(void);
@@ -124,7 +124,7 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_PRINTSTRING]              = PlayerPartnerHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = PlayerPartnerHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = PlayerPartnerHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = PlayerPartnerHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = PlayerPartnerHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = PlayerPartnerHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = PlayerPartnerHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = PlayerPartnerHandleChoosePokemon,
@@ -160,7 +160,7 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_BATTLEANIMATION]          = PlayerPartnerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = PlayerPartnerHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerPartnerHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = PlayerPartnerHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = PlayerPartnerHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = PlayerPartnerCmdEnd
 };
 
@@ -1497,7 +1497,7 @@ static void PlayerPartnerHandleChooseAction(void)
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleUnknownYesNoBox(void)
+static void PlayerPartnerHandleYesNoBox(void)
 {
     PlayerPartnerBufferExecCompleted();
 }
@@ -1602,7 +1602,7 @@ static void PlayerPartnerHandleExpUpdate(void)
         gTasks[taskId].tExpTask_monId = monId;
         gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
         gTasks[taskId].tExpTask_bank = gActiveBattler;
-        gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
+        gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
     }
 }
 
@@ -1913,7 +1913,7 @@ static void PlayerPartnerHandleResetActionMoveSelection(void)
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleCmd55(void)
+static void PlayerPartnerHandleEndLinkBattle(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);

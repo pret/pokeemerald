@@ -47,7 +47,7 @@ static void RecordedPlayerHandleMoveAnimation(void);
 static void RecordedPlayerHandlePrintString(void);
 static void RecordedPlayerHandlePrintSelectionString(void);
 static void RecordedPlayerHandleChooseAction(void);
-static void RecordedPlayerHandleUnknownYesNoBox(void);
+static void RecordedPlayerHandleYesNoBox(void);
 static void RecordedPlayerHandleChooseMove(void);
 static void RecordedPlayerHandleChooseItem(void);
 static void RecordedPlayerHandleChoosePokemon(void);
@@ -83,7 +83,7 @@ static void RecordedPlayerHandleSpriteInvisibility(void);
 static void RecordedPlayerHandleBattleAnimation(void);
 static void RecordedPlayerHandleLinkStandbyMsg(void);
 static void RecordedPlayerHandleResetActionMoveSelection(void);
-static void RecordedPlayerHandleCmd55(void);
+static void RecordedPlayerHandleEndLinkBattle(void);
 static void RecordedPlayerCmdEnd(void);
 
 static void RecordedPlayerBufferRunCommand(void);
@@ -118,7 +118,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_PRINTSTRING]              = RecordedPlayerHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = RecordedPlayerHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = RecordedPlayerHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = RecordedPlayerHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = RecordedPlayerHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = RecordedPlayerHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = RecordedPlayerHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = RecordedPlayerHandleChoosePokemon,
@@ -154,7 +154,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     [CONTROLLER_BATTLEANIMATION]          = RecordedPlayerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = RecordedPlayerHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = RecordedPlayerHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = RecordedPlayerHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = RecordedPlayerHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = RecordedPlayerCmdEnd
 };
 
@@ -1425,7 +1425,7 @@ static void RecordedPlayerHandleChooseAction(void)
     }
 }
 
-static void RecordedPlayerHandleUnknownYesNoBox(void)
+static void RecordedPlayerHandleYesNoBox(void)
 {
     RecordedPlayerBufferExecCompleted();
 }
@@ -1791,7 +1791,7 @@ static void RecordedPlayerHandleResetActionMoveSelection(void)
     RecordedPlayerBufferExecCompleted();
 }
 
-static void RecordedPlayerHandleCmd55(void)
+static void RecordedPlayerHandleEndLinkBattle(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);

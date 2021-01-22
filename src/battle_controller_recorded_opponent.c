@@ -51,7 +51,7 @@ static void RecordedOpponentHandleMoveAnimation(void);
 static void RecordedOpponentHandlePrintString(void);
 static void RecordedOpponentHandlePrintSelectionString(void);
 static void RecordedOpponentHandleChooseAction(void);
-static void RecordedOpponentHandleUnknownYesNoBox(void);
+static void RecordedOpponentHandleYesNoBox(void);
 static void RecordedOpponentHandleChooseMove(void);
 static void RecordedOpponentHandleChooseItem(void);
 static void RecordedOpponentHandleChoosePokemon(void);
@@ -87,7 +87,7 @@ static void RecordedOpponentHandleSpriteInvisibility(void);
 static void RecordedOpponentHandleBattleAnimation(void);
 static void RecordedOpponentHandleLinkStandbyMsg(void);
 static void RecordedOpponentHandleResetActionMoveSelection(void);
-static void RecordedOpponentHandleCmd55(void);
+static void RecordedOpponentHandleEndLinkBattle(void);
 static void RecordedOpponentCmdEnd(void);
 
 static void RecordedOpponentBufferRunCommand(void);
@@ -123,7 +123,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     [CONTROLLER_PRINTSTRING]              = RecordedOpponentHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = RecordedOpponentHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = RecordedOpponentHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = RecordedOpponentHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = RecordedOpponentHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = RecordedOpponentHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = RecordedOpponentHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = RecordedOpponentHandleChoosePokemon,
@@ -159,7 +159,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     [CONTROLLER_BATTLEANIMATION]          = RecordedOpponentHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = RecordedOpponentHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = RecordedOpponentHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = RecordedOpponentHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = RecordedOpponentHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = RecordedOpponentCmdEnd
 };
 
@@ -1409,7 +1409,7 @@ static void RecordedOpponentHandleChooseAction(void)
     RecordedOpponentBufferExecCompleted();
 }
 
-static void RecordedOpponentHandleUnknownYesNoBox(void)
+static void RecordedOpponentHandleYesNoBox(void)
 {
     RecordedOpponentBufferExecCompleted();
 }
@@ -1773,7 +1773,7 @@ static void RecordedOpponentHandleResetActionMoveSelection(void)
     RecordedOpponentBufferExecCompleted();
 }
 
-static void RecordedOpponentHandleCmd55(void)
+static void RecordedOpponentHandleEndLinkBattle(void)
 {
     if (gBattleBufferA[gActiveBattler][1] == B_OUTCOME_DREW)
         gBattleOutcome = gBattleBufferA[gActiveBattler][1];

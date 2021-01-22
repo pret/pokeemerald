@@ -56,7 +56,7 @@ static void OpponentHandleMoveAnimation(void);
 static void OpponentHandlePrintString(void);
 static void OpponentHandlePrintSelectionString(void);
 static void OpponentHandleChooseAction(void);
-static void OpponentHandleUnknownYesNoBox(void);
+static void OpponentHandleYesNoBox(void);
 static void OpponentHandleChooseMove(void);
 static void OpponentHandleChooseItem(void);
 static void OpponentHandleChoosePokemon(void);
@@ -92,7 +92,7 @@ static void OpponentHandleSpriteInvisibility(void);
 static void OpponentHandleBattleAnimation(void);
 static void OpponentHandleLinkStandbyMsg(void);
 static void OpponentHandleResetActionMoveSelection(void);
-static void OpponentHandleCmd55(void);
+static void OpponentHandleEndLinkBattle(void);
 static void OpponentCmdEnd(void);
 
 static void OpponentBufferRunCommand(void);
@@ -128,7 +128,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_PRINTSTRING]              = OpponentHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = OpponentHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = OpponentHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = OpponentHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = OpponentHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = OpponentHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = OpponentHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = OpponentHandleChoosePokemon,
@@ -164,7 +164,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_BATTLEANIMATION]          = OpponentHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = OpponentHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = OpponentHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = OpponentHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = OpponentHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = OpponentCmdEnd
 };
 
@@ -1535,7 +1535,7 @@ static void OpponentHandleChooseAction(void)
     OpponentBufferExecCompleted();
 }
 
-static void OpponentHandleUnknownYesNoBox(void)
+static void OpponentHandleYesNoBox(void)
 {
     OpponentBufferExecCompleted();
 }
@@ -2003,7 +2003,7 @@ static void OpponentHandleResetActionMoveSelection(void)
     OpponentBufferExecCompleted();
 }
 
-static void OpponentHandleCmd55(void)
+static void OpponentHandleEndLinkBattle(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
     {

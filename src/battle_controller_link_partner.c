@@ -49,7 +49,7 @@ static void LinkPartnerHandleMoveAnimation(void);
 static void LinkPartnerHandlePrintString(void);
 static void LinkPartnerHandlePrintSelectionString(void);
 static void LinkPartnerHandleChooseAction(void);
-static void LinkPartnerHandleUnknownYesNoBox(void);
+static void LinkPartnerHandleYesNoBox(void);
 static void LinkPartnerHandleChooseMove(void);
 static void LinkPartnerHandleChooseItem(void);
 static void LinkPartnerHandleChoosePokemon(void);
@@ -85,7 +85,7 @@ static void LinkPartnerHandleSpriteInvisibility(void);
 static void LinkPartnerHandleBattleAnimation(void);
 static void LinkPartnerHandleLinkStandbyMsg(void);
 static void LinkPartnerHandleResetActionMoveSelection(void);
-static void LinkPartnerHandleCmd55(void);
+static void LinkPartnerHandleEndLinkBattle(void);
 static void LinkPartnerCmdEnd(void);
 
 static void LinkPartnerBufferRunCommand(void);
@@ -120,7 +120,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_PRINTSTRING]              = LinkPartnerHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = LinkPartnerHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = LinkPartnerHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = LinkPartnerHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = LinkPartnerHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = LinkPartnerHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = LinkPartnerHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = LinkPartnerHandleChoosePokemon,
@@ -156,7 +156,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_BATTLEANIMATION]          = LinkPartnerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = LinkPartnerHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = LinkPartnerHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = LinkPartnerHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = LinkPartnerHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = LinkPartnerCmdEnd
 };
 
@@ -1306,7 +1306,7 @@ static void LinkPartnerHandleChooseAction(void)
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleUnknownYesNoBox(void)
+static void LinkPartnerHandleYesNoBox(void)
 {
     LinkPartnerBufferExecCompleted();
 }
@@ -1672,7 +1672,7 @@ static void LinkPartnerHandleResetActionMoveSelection(void)
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleCmd55(void)
+static void LinkPartnerHandleEndLinkBattle(void)
 {
     sub_81851A8(&gBattleBufferA[gActiveBattler][4]);
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];

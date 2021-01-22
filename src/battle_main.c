@@ -147,7 +147,7 @@ EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA static u32 sUnusedUnknownArray[25] = {0};
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
-EWRAM_DATA u32 gUnknown_02022FF4 = 0;
+EWRAM_DATA u32 gUnusedFirstBattleVar1 = 0; // Never read
 EWRAM_DATA struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE] = {0};
 EWRAM_DATA static struct UnknownPokemonStruct4* sMultiPartnerPartyBuffer = NULL;
 EWRAM_DATA u8 *gUnknown_0202305C = NULL;
@@ -200,7 +200,7 @@ EWRAM_DATA u8 gMoveResultFlags = 0;
 EWRAM_DATA u32 gHitMarker = 0;
 EWRAM_DATA static u8 sUnusedBattlersArray[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u8 gUnknown_0202428C = 0;
+EWRAM_DATA u8 gUnusedFirstBattleVar2 = 0; // Never read
 EWRAM_DATA u16 gSideStatuses[2] = {0};
 EWRAM_DATA struct SideTimer gSideTimers[2] = {0};
 EWRAM_DATA u32 gStatuses3[MAX_BATTLERS_COUNT] = {0};
@@ -1065,7 +1065,7 @@ static void CB2_HandleStartBattle(void)
         }
         break;
     case 15:
-        sub_8032768();
+        InitBattleControllers();
         sub_8184E58();
         gBattleCommunication[SPRITES_INIT_STATE1] = 0;
         gBattleCommunication[SPRITES_INIT_STATE2] = 0;
@@ -1325,7 +1325,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 13:
-        sub_8032768();
+        InitBattleControllers();
         sub_8184E58();
         gBattleCommunication[SPRITES_INIT_STATE1] = 0;
         gBattleCommunication[SPRITES_INIT_STATE2] = 0;
@@ -1762,7 +1762,7 @@ static void CB2_HandleStartMultiBattle(void)
         }
         break;
     case 7:
-        sub_8032768();
+        InitBattleControllers();
         sub_8184E58();
         gBattleCommunication[SPRITES_INIT_STATE1] = 0;
         gBattleCommunication[SPRITES_INIT_STATE2] = 0;
@@ -2967,7 +2967,7 @@ void sub_8039E9C(struct Sprite *sprite)
         sprite->centerToCornerVecX = gUnknown_0831ACE0[sprite->animCmdIndex];
 }
 
-void nullsub_20(void)
+void BeginBattleIntroDummy(void)
 {
 
 }
@@ -4393,7 +4393,11 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CONFIRMED_STANDBY:
-            if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
+            if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) 
+                                                | (0xF0000000) 
+                                                | (gBitTable[gActiveBattler] << 4) 
+                                                | (gBitTable[gActiveBattler] << 8) 
+                                                | (gBitTable[gActiveBattler] << 12))))
             {
                 if (AllAtActionConfirmed())
                     i = TRUE;
@@ -4962,7 +4966,7 @@ static void HandleEndTurn_BattleLost(void)
             }
             else
             {
-                gBattlescriptCurrInstr = BattleScript_82DAA0B;
+                gBattlescriptCurrInstr = BattleScript_FrontierLinkBattleLost;
                 gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
             }
         }

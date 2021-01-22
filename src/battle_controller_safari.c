@@ -44,7 +44,7 @@ static void SafariHandleMoveAnimation(void);
 static void SafariHandlePrintString(void);
 static void SafariHandlePrintSelectionString(void);
 static void SafariHandleChooseAction(void);
-static void SafariHandleUnknownYesNoBox(void);
+static void SafariHandleYesNoBox(void);
 static void SafariHandleChooseMove(void);
 static void SafariHandleChooseItem(void);
 static void SafariHandleChoosePokemon(void);
@@ -80,7 +80,7 @@ static void SafariHandleSpriteInvisibility(void);
 static void SafariHandleBattleAnimation(void);
 static void SafariHandleLinkStandbyMsg(void);
 static void SafariHandleResetActionMoveSelection(void);
-static void SafariHandleCmd55(void);
+static void SafariHandleEndLinkBattle(void);
 static void SafariCmdEnd(void);
 
 static void SafariBufferRunCommand(void);
@@ -108,7 +108,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_PRINTSTRING]              = SafariHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = SafariHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = SafariHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = SafariHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = SafariHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = SafariHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = SafariHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = SafariHandleChoosePokemon,
@@ -144,7 +144,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_BATTLEANIMATION]          = SafariHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = SafariHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = SafariHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = SafariHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = SafariHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = SafariCmdEnd
 };
 
@@ -458,7 +458,7 @@ static void SafariHandleChooseAction(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 
-static void SafariHandleUnknownYesNoBox(void)
+static void SafariHandleYesNoBox(void)
 {
     SafariBufferExecCompleted();
 }
@@ -673,7 +673,7 @@ static void SafariHandleResetActionMoveSelection(void)
     SafariBufferExecCompleted();
 }
 
-static void SafariHandleCmd55(void)
+static void SafariHandleEndLinkBattle(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);

@@ -69,7 +69,7 @@ void SpriteCb_PlayerMonFromBall(struct Sprite *sprite);
 void sub_8039E60(struct Sprite *sprite);
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void sub_8039E9C(struct Sprite *sprite);
-void nullsub_20(void);
+void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(void);
 void FaintClearSetData(void);

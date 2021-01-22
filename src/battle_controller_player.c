@@ -57,7 +57,7 @@ static void PlayerHandleMoveAnimation(void);
 static void PlayerHandlePrintString(void);
 static void PlayerHandlePrintSelectionString(void);
 static void PlayerHandleChooseAction(void);
-static void PlayerHandleUnknownYesNoBox(void);
+static void PlayerHandleYesNoBox(void);
 static void PlayerHandleChooseMove(void);
 static void PlayerHandleChooseItem(void);
 static void PlayerHandleChoosePokemon(void);
@@ -93,7 +93,7 @@ static void PlayerHandleSpriteInvisibility(void);
 static void PlayerHandleBattleAnimation(void);
 static void PlayerHandleLinkStandbyMsg(void);
 static void PlayerHandleResetActionMoveSelection(void);
-static void PlayerHandleCmd55(void);
+static void PlayerHandleEndLinkBattle(void);
 static void PlayerCmdEnd(void);
 
 static void PlayerBufferRunCommand(void);
@@ -144,7 +144,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_PRINTSTRING]              = PlayerHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = PlayerHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = PlayerHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = PlayerHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = PlayerHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = PlayerHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = PlayerHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = PlayerHandleChoosePokemon,
@@ -180,7 +180,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_BATTLEANIMATION]          = PlayerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = PlayerHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = PlayerHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = PlayerHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = PlayerCmdEnd
 };
 
@@ -189,7 +189,7 @@ static const u8 sTargetIdentities[] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER
 // unknown unused data
 static const u8 sUnused[] = {0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58};
 
-void nullsub_21(void)
+void BattleControllerDummy(void)
 {
 }
 
@@ -1400,7 +1400,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
     }
 }
 
-static void PlayerHandleUnknownYesNoInput(void)
+static void PlayerHandleYesNoInput(void)
 {
     if (JOY_NEW(DPAD_UP) && gMultiUsePlayerCursor != 0)
     {
@@ -2560,7 +2560,7 @@ static void PlayerHandleChooseAction(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 
-static void PlayerHandleUnknownYesNoBox(void)
+static void PlayerHandleYesNoBox(void)
 {
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
@@ -2568,7 +2568,7 @@ static void PlayerHandleUnknownYesNoBox(void)
         BattlePutTextOnWindow(gText_BattleYesNoChoice, 12);
         gMultiUsePlayerCursor = 1;
         BattleCreateYesNoCursorAt(1);
-        gBattlerControllerFuncs[gActiveBattler] = PlayerHandleUnknownYesNoInput;
+        gBattlerControllerFuncs[gActiveBattler] = PlayerHandleYesNoInput;
     }
     else
     {
@@ -2715,7 +2715,7 @@ static void PlayerHandleExpUpdate(void)
         gTasks[taskId].tExpTask_monId = monId;
         gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
         gTasks[taskId].tExpTask_battler = gActiveBattler;
-        gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
+        gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
     }
 }
 
@@ -2936,7 +2936,7 @@ static void PlayerHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
+    gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
 }
 
 void sub_805CC00(struct Sprite *sprite)
@@ -3087,7 +3087,7 @@ static void PlayerHandleResetActionMoveSelection(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd55(void)
+static void PlayerHandleEndLinkBattle(void)
 {
     sub_81851A8(&gBattleBufferA[gActiveBattler][4]);
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];

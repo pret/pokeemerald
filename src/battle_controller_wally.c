@@ -52,7 +52,7 @@ static void WallyHandleMoveAnimation(void);
 static void WallyHandlePrintString(void);
 static void WallyHandlePrintSelectionString(void);
 static void WallyHandleChooseAction(void);
-static void WallyHandleUnknownYesNoBox(void);
+static void WallyHandleYesNoBox(void);
 static void WallyHandleChooseMove(void);
 static void WallyHandleChooseItem(void);
 static void WallyHandleChoosePokemon(void);
@@ -88,7 +88,7 @@ static void WallyHandleSpriteInvisibility(void);
 static void WallyHandleBattleAnimation(void);
 static void WallyHandleLinkStandbyMsg(void);
 static void WallyHandleResetActionMoveSelection(void);
-static void WallyHandleCmd55(void);
+static void WallyHandleEndLinkBattle(void);
 static void WallyCmdEnd(void);
 
 static void WallyBufferRunCommand(void);
@@ -121,7 +121,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_PRINTSTRING]              = WallyHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = WallyHandlePrintSelectionString,
     [CONTROLLER_CHOOSEACTION]             = WallyHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = WallyHandleUnknownYesNoBox,
+    [CONTROLLER_YESNOBOX]                 = WallyHandleYesNoBox,
     [CONTROLLER_CHOOSEMOVE]               = WallyHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = WallyHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = WallyHandleChoosePokemon,
@@ -157,7 +157,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_BATTLEANIMATION]          = WallyHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = WallyHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = WallyHandleResetActionMoveSelection,
-    [CONTROLLER_55]                       = WallyHandleCmd55,
+    [CONTROLLER_ENDLINKBATTLE]            = WallyHandleEndLinkBattle,
     [CONTROLLER_TERMINATOR_NOP]           = WallyCmdEnd
 };
 
@@ -1211,7 +1211,7 @@ static void WallyHandleChooseAction(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 1);
 }
 
-static void WallyHandleUnknownYesNoBox(void)
+static void WallyHandleYesNoBox(void)
 {
     WallyBufferExecCompleted();
 }
@@ -1449,7 +1449,7 @@ static void WallyHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
-    gBattlerControllerFuncs[gActiveBattler] = nullsub_21;
+    gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
 }
 
 static void sub_816AA80(u8 battlerId)
@@ -1548,7 +1548,7 @@ static void WallyHandleResetActionMoveSelection(void)
     WallyBufferExecCompleted();
 }
 
-static void WallyHandleCmd55(void)
+static void WallyHandleEndLinkBattle(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);
