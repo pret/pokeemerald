@@ -298,7 +298,7 @@ void InitIntrHandlers(void)
 
     REG_IME = 1;
 
-    EnableInterrupts(0x1);
+    EnableInterrupts(INTR_FLAG_VBLANK);
 }
 
 void SetVBlankCallback(IntrCallback callback)
@@ -399,7 +399,7 @@ static void IntrDummy(void)
 
 static void WaitForVBlank(void)
 {
-    gMain.intrCheck &= ~INTR_FLAG_VBLANK; 
+    gMain.intrCheck &= ~INTR_FLAG_VBLANK;
 
     #ifdef BUGFIX
     VBlankIntrWait(); // Please see https://github.com/pret/pokeemerald/wiki/Improving-the-WaitForVBlank-function for more details
