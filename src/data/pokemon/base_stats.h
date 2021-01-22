@@ -3123,7 +3123,12 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        #ifdef BATTLE_ENGINE
+            .abilities = {ABILITY_LEVITATE, ABILITY_NEUTRALIZING_GAS},
+        #else
+            .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        #endif
+        .abilityHidden = ABILITY_STENCH,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
@@ -3148,7 +3153,12 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        #ifdef BATTLE_ENGINE
+            .abilities = {ABILITY_LEVITATE, ABILITY_NEUTRALIZING_GAS},
+        #else
+            .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        #endif
+        .abilityHidden = ABILITY_STENCH,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
@@ -17265,7 +17275,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_FLASH_FIRE, ABILITY_FLAME_BODY},
-        #if P_UPDATED_ABILITY >= GEN_6
+        #if P_UPDATED_ABILITIES >= GEN_6
             #ifdef BATTLE_ENGINE
                 .abilityHidden = ABILITY_INFILTRATOR,
             #endif
@@ -17296,7 +17306,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_FLASH_FIRE, ABILITY_FLAME_BODY},
-        #if P_UPDATED_ABILITY >= GEN_6
+        #if P_UPDATED_ABILITIES >= GEN_6
             #ifdef BATTLE_ENGINE
                 .abilityHidden = ABILITY_INFILTRATOR,
             #endif
@@ -17327,7 +17337,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
         .abilities = {ABILITY_FLASH_FIRE, ABILITY_FLAME_BODY},
-        #if P_UPDATED_ABILITY >= GEN_6
+        #if P_UPDATED_ABILITIES >= GEN_6
             #ifdef BATTLE_ENGINE
                 .abilityHidden = ABILITY_INFILTRATOR,
             #endif
@@ -29334,7 +29344,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
         .abilities = {ABILITY_SHED_SKIN, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 
@@ -29358,7 +29368,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
         .abilities = {ABILITY_SHED_SKIN, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
 
@@ -30275,7 +30285,7 @@ const struct BaseStats gBaseStats[] =
             .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE},
         #endif
         .abilityHidden = ABILITY_SERENE_GRACE,
-        .bodyColor = BODY_COLOR_PINK,
+        .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
@@ -30304,7 +30314,7 @@ const struct BaseStats gBaseStats[] =
             .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE},
         #endif
         .abilityHidden = ABILITY_SERENE_GRACE,
-        .bodyColor = BODY_COLOR_PINK,
+        .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
 
@@ -30333,7 +30343,7 @@ const struct BaseStats gBaseStats[] =
             .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE},
         #endif
         .abilityHidden = ABILITY_SERENE_GRACE,
-        .bodyColor = BODY_COLOR_PINK,
+        .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 
@@ -30813,7 +30823,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
 
@@ -30842,7 +30852,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
 
@@ -30871,7 +30881,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
     },
 
@@ -30900,7 +30910,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
@@ -30929,7 +30939,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
 
@@ -30958,7 +30968,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
 
@@ -30987,7 +30997,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
 
@@ -31016,7 +31026,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
 
@@ -31045,7 +31055,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 
@@ -31074,7 +31084,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 
@@ -31103,7 +31113,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 
@@ -31132,7 +31142,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 
@@ -31161,7 +31171,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
 
@@ -31190,7 +31200,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
@@ -31219,7 +31229,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
 
@@ -31248,7 +31258,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
 
@@ -31277,7 +31287,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
@@ -31306,7 +31316,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
 
@@ -31335,7 +31345,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef BATTLE_ENGINE
             .abilityHidden = ABILITY_FRIEND_GUARD,
         #endif
-        .bodyColor = BODY_COLOR_WHITE,
+        .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
 
