@@ -2337,7 +2337,7 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
     task->data[2] = 0;
     task->data[3] = 0;
     gSprites[task->data[0]].pos2.x -= task->data[0];
-    task->data[4] = AllocSpritePalette(10097);
+    task->data[4] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
     task->data[5] = 0;
 
     dest = (task->data[4] + 0x10) * 0x10;

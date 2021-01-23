@@ -75,9 +75,9 @@ struct RecordedBattleSave
 EWRAM_DATA u32 gRecordedBattleRngSeed = 0;
 EWRAM_DATA u32 gBattlePalaceMoveSelectionRngValue = 0;
 EWRAM_DATA static u8 sBattleRecords[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE] = {0};
-EWRAM_DATA static u16 sRecordedBytesNo[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA static u16 sPrevRecordedBytesNo[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA static u16 sUnknown_0203C7A4[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sRecordMode = 0;
 EWRAM_DATA static u8 sLvlMode = 0;
 EWRAM_DATA static u8 sFrontierFacility = 0;
@@ -103,8 +103,7 @@ EWRAM_DATA static u8 sBattleOutcome = 0;
 static u8 sRecordMixFriendLanguage;
 static u8 sApprenticeLanguage;
 
-// this file's functions
-static u8 sub_8185278(u8 *, u8 *, u8 *);
+static u8 GetNextRecordedDataByte(u8 *, u8 *, u8 *);
 static bool32 CopyRecordedBattleFromSave(struct RecordedBattleSave *);
 static void RecordedBattle_RestoreSavedParties(void);
 static void CB2_RecordedBattle(void);
@@ -118,9 +117,9 @@ void RecordedBattle_Init(u8 mode)
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        sRecordedBytesNo[i] = 0;
-        sPrevRecordedBytesNo[i] = 0;
-        sUnknown_0203C7A4[i] = 0;
+        sBattlerRecordSizes[i] = 0;
+        sBattlerPrevRecordSizes[i] = 0;
+        sBattlerSavedRecordSizes[i] = 0;
 
         if (mode == B_RECORD_MODE_RECORDING)
         {
@@ -195,9 +194,9 @@ void sub_8184E58(void)
 
 void RecordedBattle_SetBattlerAction(u8 battlerId, u8 action)
 {
-    if (sRecordedBytesNo[battlerId] < BATTLER_RECORD_SIZE && sRecordMode != B_RECORD_MODE_PLAYBACK)
+    if (sBattlerRecordSizes[battlerId] < BATTLER_RECORD_SIZE && sRecordMode != B_RECORD_MODE_PLAYBACK)
     {
-        sBattleRecords[battlerId][sRecordedBytesNo[battlerId]++] = action;
+        sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]++] = action;
     }
 }
 
@@ -207,9 +206,9 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
 
     for (i = 0; i < bytesToClear; i++)
     {
-        sRecordedBytesNo[battlerId]--;
-        sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] = 0xFF;
-        if (sRecordedBytesNo[battlerId] == 0)
+        sBattlerRecordSizes[battlerId]--;
+        sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]] = 0xFF;
+        if (sBattlerRecordSizes[battlerId] == 0)
             break;
     }
 }
@@ -217,7 +216,7 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
 u8 RecordedBattle_GetBattlerAction(u8 battlerId)
 {
     // Trying to read past array or invalid action byte, battle is over.
-    if (sRecordedBytesNo[battlerId] >= BATTLER_RECORD_SIZE || sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] == 0xFF)
+    if (sBattlerRecordSizes[battlerId] >= BATTLER_RECORD_SIZE || sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]] == 0xFF)
     {
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED; // hah
         ResetPaletteFadeControl();
@@ -227,7 +226,7 @@ u8 RecordedBattle_GetBattlerAction(u8 battlerId)
     }
     else
     {
-        return sBattleRecords[battlerId][sRecordedBytesNo[battlerId]++];
+        return sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]++];
     }
 }
 
@@ -237,35 +236,35 @@ static u8 GetRecordedBattleMode(void)
     return sRecordMode;
 }
 
-u8 RecordedBattle_GetAllNewBattlerData(u8 *dst)
+u8 RecordedBattle_BufferNewBattlerData(u8 *dst)
 {
     u8 i, j;
     u8 idx = 0;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        if (sRecordedBytesNo[i] != sPrevRecordedBytesNo[i])
+        if (sBattlerRecordSizes[i] != sBattlerPrevRecordSizes[i])
         {
             dst[idx++] = i;
-            dst[idx++] = sRecordedBytesNo[i] - sPrevRecordedBytesNo[i];
+            dst[idx++] = sBattlerRecordSizes[i] - sBattlerPrevRecordSizes[i];
 
-            for (j = 0; j < sRecordedBytesNo[i] - sPrevRecordedBytesNo[i]; j++)
+            for (j = 0; j < sBattlerRecordSizes[i] - sBattlerPrevRecordSizes[i]; j++)
             {
-                dst[idx++] = sBattleRecords[i][sPrevRecordedBytesNo[i] + j];
+                dst[idx++] = sBattleRecords[i][sBattlerPrevRecordSizes[i] + j];
             }
 
-            sPrevRecordedBytesNo[i] = sRecordedBytesNo[i];
+            sBattlerPrevRecordSizes[i] = sBattlerRecordSizes[i];
         }
     }
 
     return idx;
 }
 
-void sub_81851A8(u8 *arg0)
+void RecordedBattle_RecordAllBattlerData(u8 *src)
 {
     s32 i;
-    u8 var1 = 2;
-    u8 var2;
+    u8 idx = 2;
+    u8 size;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
         return;
@@ -278,23 +277,23 @@ void sub_81851A8(u8 *arg0)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
     {
-        for (var2 = *arg0; var2 != 0;)
+        for (size = *src; size != 0;)
         {
-            u8 unkVar = sub_8185278(arg0, &var1, &var2);
-            u8 unkVar2 = sub_8185278(arg0, &var1, &var2);
+            u8 battlerId = GetNextRecordedDataByte(src, &idx, &size);
+            u8 numActions = GetNextRecordedDataByte(src, &idx, &size);
 
-            for (i = 0; i < unkVar2; i++)
+            for (i = 0; i < numActions; i++)
             {
-                sBattleRecords[unkVar][sUnknown_0203C7A4[unkVar]++] = sub_8185278(arg0, &var1, &var2);
+                sBattleRecords[battlerId][sBattlerSavedRecordSizes[battlerId]++] = GetNextRecordedDataByte(src, &idx, &size);
             }
         }
     }
 }
 
-static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2)
+static u8 GetNextRecordedDataByte(u8 *data, u8 *idx, u8 *size)
 {
-    (*arg2)--;
-    return arg0[(*arg1)++];
+    (*size)--;
+    return data[(*idx)++];
 }
 
 bool32 CanCopyRecordedBattleSaveData(void)
@@ -768,7 +767,7 @@ void sub_818603C(u8 arg0)
             }
             else
             {
-                if (sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] == ACTION_MOVE_CHANGE)
+                if (sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]] == ACTION_MOVE_CHANGE)
                 {
                     u8 ppBonuses[MAX_MON_MOVES];
                     u8 array1[MAX_MON_MOVES];

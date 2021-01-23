@@ -1437,13 +1437,13 @@ void BtlController_EmitIntroTrainerBallThrow(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2)
+void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 flags)
 {
     s32 i;
 
     sBattleBuffersTransferData[0] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
-    sBattleBuffersTransferData[1] = arg2 & 0x7F;
-    sBattleBuffersTransferData[2] = (arg2 & 0x80) >> 7;
+    sBattleBuffersTransferData[1] = flags & 0x7F;
+    sBattleBuffersTransferData[2] = (flags & 0x80) >> 7; // If true, skip delay after drawing. True during intro
     sBattleBuffersTransferData[3] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
     for (i = 0; i < (s32)(sizeof(struct HpAndStatus) * PARTY_SIZE); i++)
         sBattleBuffersTransferData[4 + i] = *(i + (u8*)(hpAndStatus));
@@ -1493,7 +1493,7 @@ void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 record)
     sBattleBuffersTransferData[1] = arg1;
 
     if (record_)
-        sBattleBuffersTransferData[3] = sBattleBuffersTransferData[2] = RecordedBattle_GetAllNewBattlerData(&sBattleBuffersTransferData[4]);
+        sBattleBuffersTransferData[3] = sBattleBuffersTransferData[2] = RecordedBattle_BufferNewBattlerData(&sBattleBuffersTransferData[4]);
     else
         sBattleBuffersTransferData[3] = sBattleBuffersTransferData[2] = 0;
 
@@ -1513,6 +1513,6 @@ void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome)
     sBattleBuffersTransferData[1] = battleOutcome;
     sBattleBuffersTransferData[2] = gSaveBlock2Ptr->frontier.disableRecordBattle;
     sBattleBuffersTransferData[3] = gSaveBlock2Ptr->frontier.disableRecordBattle;
-    sBattleBuffersTransferData[5] = sBattleBuffersTransferData[4] = RecordedBattle_GetAllNewBattlerData(&sBattleBuffersTransferData[6]);
+    sBattleBuffersTransferData[5] = sBattleBuffersTransferData[4] = RecordedBattle_BufferNewBattlerData(&sBattleBuffersTransferData[6]);
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, sBattleBuffersTransferData[4] + 6);
 }
