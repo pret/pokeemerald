@@ -94,11 +94,11 @@ static void WallyCmdEnd(void);
 static void WallyBufferRunCommand(void);
 static void WallyBufferExecCompleted(void);
 static void CompleteOnChosenItem(void);
-static void sub_8168818(void);
+static void Intro_WaitForShinyAnimAndHealthbox(void);
 static u32 CopyWallyMonData(u8 monId, u8 *dst);
 static void SetWallyMonData(u8 monId);
 static void WallyDoMoveAnimation(void);
-static void sub_816AC04(u8 taskId);
+static void Task_StartSendOutAnim(u8 taskId);
 
 static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -283,7 +283,7 @@ static void CompleteOnChosenItem(void)
     }
 }
 
-static void sub_816864C(void)
+static void Intro_TryShinyAnimShowHealthbox(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim 
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
@@ -311,19 +311,19 @@ static void sub_816864C(void)
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
         gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
-        gBattlerControllerFuncs[gActiveBattler] = sub_8168818;
+        gBattlerControllerFuncs[gActiveBattler] = Intro_WaitForShinyAnimAndHealthbox;
     }
 
 }
 
-static void sub_8168818(void)
+static void Intro_WaitForShinyAnimAndHealthbox(void)
 {
-    bool32 r4 = FALSE;
+    bool32 healthboxAnimDone = FALSE;
 
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        r4 = TRUE;
+        healthboxAnimDone = TRUE;
 
-    if (r4 && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim
+    if (healthboxAnimDone && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim
         && gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].finishedShinyMonAnim)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
@@ -378,7 +378,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
     }
 }
 
-static void sub_8168A20(void)
+static void DoSwitchOutAnimation(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
     {
@@ -1019,7 +1019,7 @@ static void WallyHandleReturnMonToBall(void)
     if (gBattleBufferA[gActiveBattler][1] == 0)
     {
         InitAndLaunchSpecialAnimation(gActiveBattler, gActiveBattler, gActiveBattler, B_ANIM_SWITCH_OUT_PLAYER_MON);
-        gBattlerControllerFuncs[gActiveBattler] = sub_8168A20;
+        gBattlerControllerFuncs[gActiveBattler] = DoSwitchOutAnimation;
     }
     else
     {
@@ -1446,7 +1446,7 @@ static void WallyHandleIntroTrainerBallThrow(void)
     LoadCompressedPalette(gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_WALLY].data, 0x100 + paletteNum * 16, 32);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
 
-    taskId = CreateTask(sub_816AC04, 5);
+    taskId = CreateTask(Task_StartSendOutAnim, 5);
     gTasks[taskId].data[0] = gActiveBattler;
 
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
@@ -1456,7 +1456,7 @@ static void WallyHandleIntroTrainerBallThrow(void)
     gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
 }
 
-static void sub_816AA80(u8 battlerId)
+static void StartSendOutAnim(u8 battlerId)
 {
     u16 species;
 
@@ -1483,7 +1483,7 @@ static void sub_816AA80(u8 battlerId)
     gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
-static void sub_816AC04(u8 taskId)
+static void Task_StartSendOutAnim(u8 taskId)
 {
     if (gTasks[taskId].data[1] < 31)
     {
@@ -1495,8 +1495,8 @@ static void sub_816AC04(u8 taskId)
 
         gActiveBattler = gTasks[taskId].data[0];
         gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
-        sub_816AA80(gActiveBattler);
-        gBattlerControllerFuncs[gActiveBattler] = sub_816864C;
+        StartSendOutAnim(gActiveBattler);
+        gBattlerControllerFuncs[gActiveBattler] = Intro_TryShinyAnimShowHealthbox;
         gActiveBattler = savedActiveBank;
         DestroyTask(taskId);
     }

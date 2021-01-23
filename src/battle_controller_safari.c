@@ -251,7 +251,7 @@ static void CompleteOnHealthboxSpriteCallbackDummy(void)
         SafariBufferExecCompleted();
 }
 
-static void sub_81595E4(void)
+static void SafariSetBattleEndCallbacks(void)
 {
     if (!gPaletteFade.active)
     {
@@ -684,7 +684,7 @@ static void SafariHandleEndLinkBattle(void)
     BeginFastPaletteFade(3);
     SafariBufferExecCompleted();
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
-        gBattlerControllerFuncs[gActiveBattler] = sub_81595E4;
+        gBattlerControllerFuncs[gActiveBattler] = SafariSetBattleEndCallbacks;
 }
 
 static void SafariCmdEnd(void)
