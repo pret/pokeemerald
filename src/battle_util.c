@@ -3190,6 +3190,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             #if B_PRANKSTER >= GEN_7
                 if (GetBattlerAbility(gBattlerAttacker) == ABILITY_PRANKSTER
                   && IS_MOVE_STATUS(gCurrentMove)
+                  && gBattlerAttacker != gBattlerTarget
                   && !(gBattleMoves[gCurrentMove].target & MOVE_TARGET_OPPONENTS_FIELD)
                   && IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DARK)
                   && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
