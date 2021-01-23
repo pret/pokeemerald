@@ -1784,7 +1784,7 @@ static void AnimCoinThrow(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = r6;
     sprite->data[4] = r7;
-    sprite->callback = sub_80A7000;
+    sprite->callback = InitAnimLinearTranslationWithSpeedAndPos;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -2569,7 +2569,7 @@ static void AnimBlendThinRing(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void sub_8105284(struct Sprite *sprite)
+static void AnimHyperVoiceRing_WaitEnd(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
     {
@@ -2659,7 +2659,7 @@ static void AnimHyperVoiceRing(struct Sprite *sprite)
     sprite->data[4] = sp1;
     sprite->data[0] = gBattleAnimArgs[0];
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_8105284;
+    sprite->callback = AnimHyperVoiceRing_WaitEnd;
     sprite->callback(sprite);
 }
 
@@ -3523,7 +3523,7 @@ static void AnimAngel(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_8106A64(struct Sprite *sprite)
+static void AnimPinkHeart_Step(struct Sprite *sprite)
 {
     sprite->data[5]++;
     sprite->pos2.x = Sin(sprite->data[3], 5);
@@ -3552,7 +3552,7 @@ static void AnimPinkHeart(struct Sprite *sprite)
         sprite->data[3] = (sprite->data[3] + 3) & 0xFF;
         if (sprite->data[3] > 70)
         {
-            sprite->callback = sub_8106A64;
+            sprite->callback = AnimPinkHeart_Step;
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;
             sprite->pos2.x = 0;

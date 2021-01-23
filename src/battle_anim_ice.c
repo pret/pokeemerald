@@ -710,7 +710,7 @@ static void AnimSwirlingSnowball(struct Sprite *sprite)
     for (i = 0; i < 8; i++)
         sprite->data[i] = tempDataHolder[i];
 
-    sprite->callback = sub_80A718C;
+    sprite->callback = InitAnimFastLinearTranslationWithSpeedAndPos;
     StoreSpriteCallbackInData6(sprite, AnimSwirlingSnowball_Step1);
 }
 
@@ -1311,7 +1311,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
 
             sprite->data[7]++;
             sprite->pos2.x = sprite->pos2.y = 0;
-            sub_80A6FD4(sprite);
+            InitAnimLinearTranslationWithSpeed(sprite);
         }
         break;
     case 2:

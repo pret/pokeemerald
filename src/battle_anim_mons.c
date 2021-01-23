@@ -21,15 +21,15 @@
 extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
 static void sub_80A6FB4(struct Sprite *sprite);
-static void sub_80A7144(struct Sprite *sprite);
+static void AnimFastTranslateLinearWaitEnd(struct Sprite *sprite);
 static void AnimThrowProjectile_Step(struct Sprite *sprite);
 static void sub_80A8DFC(struct Sprite *sprite);
-static void sub_80A8E88(struct Sprite *sprite);
+static void AnimWeatherBallUp_Step(struct Sprite *sprite);
 static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId);
 static void AnimTask_BlendPalInAndOutSetup(struct Task *task);
-static void sub_80A7AFC(u8 taskId);
-static void sub_80A8CAC(u8 taskId);
-static void AnimTask_BlendMonInAndOutStep(u8 taskId);
+static void AnimTask_AlphaFadeIn_Step(u8 taskId);
+static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId);
+static void AnimTask_BlendMonInAndOut_Step(u8 taskId);
 static bool8 sub_80A7238(void);
 static void sub_80A8D78(struct Task *task, u8 taskId);
 
@@ -1036,7 +1036,7 @@ void StartAnimLinearTranslation(struct Sprite *sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     InitAnimLinearTranslation(sprite);
-    sprite->callback = sub_80A6F98;
+    sprite->callback = AnimTranslateLinear_WaitEnd;
     sprite->callback(sprite);
 }
 
@@ -1079,7 +1079,7 @@ bool8 AnimTranslateLinear(struct Sprite *sprite)
     return FALSE;
 }
 
-void sub_80A6F98(struct Sprite *sprite)
+void AnimTranslateLinear_WaitEnd(struct Sprite *sprite)
 {
     if (AnimTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
@@ -1092,19 +1092,19 @@ static void sub_80A6FB4(struct Sprite *sprite)
         SetCallbackToStoredInData6(sprite);
 }
 
-void sub_80A6FD4(struct Sprite *sprite)
+void InitAnimLinearTranslationWithSpeed(struct Sprite *sprite)
 {
     int v1 = abs(sprite->data[2] - sprite->data[1]) << 8;
     sprite->data[0] = v1 / sprite->data[0];
     InitAnimLinearTranslation(sprite);
 }
 
-void sub_80A7000(struct Sprite *sprite)
+void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sub_80A6FD4(sprite);
-    sprite->callback = sub_80A6F98;
+    InitAnimLinearTranslationWithSpeed(sprite);
+    sprite->callback = AnimTranslateLinear_WaitEnd;
     sprite->callback(sprite);
 }
 
@@ -1141,7 +1141,7 @@ void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     InitAnimFastLinearTranslation(sprite);
-    sprite->callback = sub_80A7144;
+    sprite->callback = AnimFastTranslateLinearWaitEnd;
     sprite->callback(sprite);
 }
 
@@ -1175,7 +1175,7 @@ bool8 AnimFastTranslateLinear(struct Sprite *sprite)
     return FALSE;
 }
 
-static void sub_80A7144(struct Sprite *sprite)
+static void AnimFastTranslateLinearWaitEnd(struct Sprite *sprite)
 {
     if (AnimFastTranslateLinear(sprite))
         SetCallbackToStoredInData6(sprite);
@@ -1188,12 +1188,12 @@ void InitAnimFastLinearTranslationWithSpeed(struct Sprite *sprite)
     InitAnimFastLinearTranslation(sprite);
 }
 
-void sub_80A718C(struct Sprite *sprite)
+void InitAnimFastLinearTranslationWithSpeedAndPos(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     InitAnimFastLinearTranslationWithSpeed(sprite);
-    sprite->callback = sub_80A7144;
+    sprite->callback = AnimFastTranslateLinearWaitEnd;
     sprite->callback(sprite);
 }
 
@@ -1442,9 +1442,10 @@ u32 sub_80A76C4(u8 a1, u8 a2, u8 a3, u8 a4)
     return var;
 }
 
-u8 sub_80A77AC(u8 a1)
+// Presumably something commented here, just returns arg
+u8 AnimDummyReturnArg(u8 battler)
 {
-    return a1;
+    return battler;
 }
 
 static u8 GetBattlerAtPosition_(u8 position)
@@ -1615,10 +1616,10 @@ void AnimTask_AlphaFadeIn(u8 taskId)
     gTasks[taskId].data[7] = gBattleAnimArgs[2];
     gTasks[taskId].data[8] = gBattleAnimArgs[3];
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gBattleAnimArgs[0], gBattleAnimArgs[1]));
-    gTasks[taskId].func = sub_80A7AFC;
+    gTasks[taskId].func = AnimTask_AlphaFadeIn_Step;
 }
 
-static void sub_80A7AFC(u8 taskId)
+static void AnimTask_AlphaFadeIn_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1672,10 +1673,10 @@ static void AnimTask_BlendPalInAndOutSetup(struct Task *task)
     task->data[5] = gBattleAnimArgs[3];
     task->data[6] = 0;
     task->data[7] = gBattleAnimArgs[4];
-    task->func = AnimTask_BlendMonInAndOutStep;
+    task->func = AnimTask_BlendMonInAndOut_Step;
 }
 
-static void AnimTask_BlendMonInAndOutStep(u8 taskId)
+static void AnimTask_BlendMonInAndOut_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -2354,10 +2355,10 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
         task->data[6] = 3;
     CpuCopy32(&gPlttBufferUnfaded[src], &gPlttBufferFaded[dest], 0x20);
     BlendPalette(dest, 16, gBattleAnimArgs[1], gBattleAnimArgs[0]);
-    task->func = sub_80A8CAC;
+    task->func = AnimTask_AttackerPunchWithTrace_Step;
 }
 
-static void sub_80A8CAC(u8 taskId)
+static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[2])
@@ -2424,10 +2425,10 @@ void AnimWeatherBallUp(struct Sprite *sprite)
     else
         sprite->data[0] = -10;
     sprite->data[1] = -40;
-    sprite->callback = sub_80A8E88;
+    sprite->callback = AnimWeatherBallUp_Step;
 }
 
-static void sub_80A8E88(struct Sprite *sprite)
+static void AnimWeatherBallUp_Step(struct Sprite *sprite)
 {
     sprite->data[2] += sprite->data[0];
     sprite->data[3] += sprite->data[1];

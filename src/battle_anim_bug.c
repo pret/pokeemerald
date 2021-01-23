@@ -274,7 +274,7 @@ static void AnimTranslateWebThread(struct Sprite *sprite)
         SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->data[2], &sprite->data[4]);
     }
 
-    sub_80A6FD4(sprite);
+    InitAnimLinearTranslationWithSpeed(sprite);
     sprite->data[5] = gBattleAnimArgs[3];
     sprite->callback = AnimTranslateWebThread_Step;
 }

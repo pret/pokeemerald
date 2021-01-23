@@ -1115,7 +1115,7 @@ static void AnimWillOWispOrb(struct Sprite *sprite)
             sprite->data[3] = sprite->pos1.y;
             sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
 
-            sub_80A6FD4(sprite);
+            InitAnimLinearTranslationWithSpeed(sprite);
             sprite->callback = AnimWillOWispOrb_Step;
         }
         break;
