@@ -8,12 +8,11 @@
 #include "constants/trainers.h"
 #include "constants/battle_ai.h"
 
-const u16 gUnknown_082FF1D8[] = INCBIN_U16("graphics/link/minigame_digits.gbapal");
-const u32 gUnknown_082FF1F8[] = INCBIN_U32("graphics/link/minigame_digits.4bpp.lz");
-// unused
-const u32 gUnknown_082FF2B8[] = INCBIN_U32("graphics/link/minigame_digits2.4bpp.lz");
+const u16 gMinigameDigits_Pal[] = INCBIN_U16("graphics/link/minigame_digits.gbapal");
+const u32 gMinigameDigits_Gfx[] = INCBIN_U32("graphics/link/minigame_digits.4bpp.lz");
+static const u32 sMinigameDigitsThin_Gfx[] = INCBIN_U32("graphics/link/minigame_digits2.4bpp.lz"); // Unused
 
-const struct SpriteFrameImage gUnknown_082FF3A8[] =
+const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[] =
 {
     gHeap + 0x8000, 0x800,
     gHeap + 0x8800, 0x800,
@@ -21,7 +20,7 @@ const struct SpriteFrameImage gUnknown_082FF3A8[] =
     gHeap + 0x9800, 0x800,
 };
 
-const struct SpriteFrameImage gUnknown_082FF3C8[] =
+const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[] =
 {
     gHeap + 0xA000, 0x800,
     gHeap + 0xA800, 0x800,
@@ -29,7 +28,7 @@ const struct SpriteFrameImage gUnknown_082FF3C8[] =
     gHeap + 0xB800, 0x800,
 };
 
-const struct SpriteFrameImage gUnknown_082FF3E8[] =
+const struct SpriteFrameImage gBattlerPicTable_PlayerRight[] =
 {
     gHeap + 0xC000, 0x800,
     gHeap + 0xC800, 0x800,
@@ -37,7 +36,7 @@ const struct SpriteFrameImage gUnknown_082FF3E8[] =
     gHeap + 0xD800, 0x800,
 };
 
-const struct SpriteFrameImage gUnknown_082FF408[] =
+const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
 {
     gHeap + 0xE000, 0x800,
     gHeap + 0xE800, 0x800,
@@ -189,7 +188,7 @@ static const union AffineAnimCmd gUnknown_082FF600[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_082FF618[] =
+const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[] =
 {
     gUnknown_082FF548,
     gUnknown_082FF568,
@@ -229,7 +228,7 @@ static const union AffineAnimCmd gUnknown_082FF684[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gUnknown_082FF694[] =
+const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[] =
 {
     gUnknown_082FF548,
     gUnknown_082FF568,
@@ -313,8 +312,7 @@ const union AnimCmd *const gUnknown_082FF70C[] =
 #include "data/pokemon_graphics/front_pic_anims.h"
 #include "data/pokemon_graphics/front_pic_table.h"
 
-// unused
-const u32 gUnknown830AF4C[] =
+static const u32 sUnused[] =
 {
     0x00000888, 0x00000888, 0x00000888, 0x00000888,
     0x00000088, 0x00000888, 0x00000888, 0x00000886,

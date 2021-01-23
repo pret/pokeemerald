@@ -3426,8 +3426,8 @@ static void sub_802DB8C(void)
 
 static const u8 gUnknown_082FE1DF[] = {2, 2, 0, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0};
 
-static const struct CompressedSpriteSheet gUnknown_082FE1EC = {gUnknown_082FF1F8, 0, 0x320};
-static const struct SpritePalette gUnknown_082FE1F4 = {gUnknown_082FF1D8, 0x320};
+static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits_Gfx, 0, 0x320};
+static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, 0x320};
 
 static const u16 gUnknown_082FE1FC[] = {0x06, 0x08, 0x10, 0x08};
 static const u16 gUnknown_082FE204[] = {0x06, 0x08, 0x0b, 0x06, 0x10, 0x08};
@@ -3513,8 +3513,8 @@ static void sub_802DD08(void)
     ptr->xDelta = 8;
     ptr->x = 108;
     ptr->y = 6;
-    ptr->spriteSheet = (void*) &gUnknown_082FE1EC;
-    ptr->spritePal = &gUnknown_082FE1F4;
+    ptr->spriteSheet = (void*) &sSpriteSheet_Digits;
+    ptr->spritePal = &sSpritePalette_Digits;
 
     DigitObjUtil_Init(2);
     DigitObjUtil_CreatePrinter(0, 0, ptr);

@@ -5,7 +5,6 @@ void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
 u16 ChooseMoveAndTargetInBattlePalace(void);
 void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite);
-void sub_805D770(struct Sprite *sprite, bool8 arg1);
 void SpriteCB_TrainerSlideIn(struct Sprite *sprite);
 void InitAndLaunchChosenStatusAnimation(bool8 isStatus2, u32 status);
 bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattlerId, u8 attacker, u8 target, u8 tableId, u16 argument);

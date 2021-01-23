@@ -421,8 +421,8 @@ struct BattleStruct
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 field_180; // weird field, used in battle_main.c, once accessed as an array of u32 overwriting the field below
     u8 field_181;
-    u8 field_182;
-    u8 field_183;
+    u8 vsScreenHealthFlagsLo;
+    u8 vsScreenHealthFlagsHi; // Last bit is 'has frontier pass'
     struct BattleEnigmaBerry battleEnigmaBerry;
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;

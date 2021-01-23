@@ -3135,7 +3135,7 @@ static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 ind
     if (IsSpeciesNotUnown(species))
         gSprites[spriteId].affineAnims = gUnknown_082FF6C0;
     else
-        gSprites[spriteId].affineAnims = gUnknown_082FF694;
+        gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteOpponentSide;
     StartSpriteAffineAnim(gSprites + spriteId, 0);
 
     return spriteId;
