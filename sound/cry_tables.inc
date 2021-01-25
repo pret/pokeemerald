@@ -986,10 +986,10 @@ gCryTable:: @ 869DCF4
 	cry Cry_Corsola
 	cry Cry_Zigzagoon
 	cry Cry_Linoone
-	cry_uncomp Cry_Darumaka
-	cry_uncomp Cry_Darmanitan
-	cry_uncomp Cry_Yamask
-	cry_uncomp Cry_Stunfisk
+	cry Cry_Darumaka
+	cry Cry_Darmanitan
+	cry Cry_Yamask
+	cry Cry_Stunfisk
 	@ Misc Forms
 	@ Cosplay Pikachu
 	cry Cry_Pikachu  @ 869DE14
@@ -2260,10 +2260,10 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Corsola
 	cry2 Cry_Zigzagoon
 	cry2 Cry_Linoone
-	cry2_uncomp Cry_Darumaka
-	cry2_uncomp Cry_Darmanitan
-	cry2_uncomp Cry_Yamask
-	cry2_uncomp Cry_Stunfisk
+	cry2 Cry_Darumaka
+	cry2 Cry_Darmanitan
+	cry2 Cry_Yamask
+	cry2 Cry_Stunfisk
 	@ Misc Forms
 	@ Cosplay Pikachu
 	cry2 Cry_Pikachu  @ 869DE14
