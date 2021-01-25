@@ -772,6 +772,8 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
 
 static const u8 sAbilitiesNotTraced[ABILITIES_COUNT] =
 {
+    [ABILITY_AS_ONE_ICE_RIDER] = 1,
+    [ABILITY_AS_ONE_SHADOW_RIDER] = 1,
     [ABILITY_BATTLE_BOND] = 1,
     [ABILITY_COMATOSE] = 1,
     [ABILITY_DISGUISE] = 1,
