@@ -1888,13 +1888,13 @@ static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *objectEvent)
     }
 }
 
-void npc_by_local_id_and_map_set_field_1_bit_x20(u8 localId, u8 mapNum, u8 mapGroup, u8 state)
+void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, bool8 invisible)
 {
     u8 objectEventId;
 
     if (!TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId))
     {
-        gObjectEvents[objectEventId].invisible = state;
+        gObjectEvents[objectEventId].invisible = invisible;
     }
 }
 
@@ -1918,7 +1918,7 @@ void sub_808E75C(s16 x, s16 y)
     }
 }
 
-void sub_808E78C(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
+void SetObjectPriority(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
@@ -1933,7 +1933,7 @@ void sub_808E78C(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
     }
 }
 
-void sub_808E7E4(u8 localId, u8 mapNum, u8 mapGroup)
+void ResetObjectPriority(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
     struct ObjectEvent *objectEvent;

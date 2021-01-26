@@ -1,5 +1,5 @@
 EventScript_271354:: @ 8271354
-	cmdD8
+	selectapproachingtrainer
 	cmdD9
 
 EventScript_ShowSecondTrainerIntro:: @ 8271356
