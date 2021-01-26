@@ -189,7 +189,7 @@ void DestroyExtraMovementTask(u8);
 void UnfreezeObjectEvents(void);
 void FreezeObjectEventsExceptOne(u8 objectEventId);
 void TurnObjectEventSprite(u8, u8);
-void sub_8098074(u8 var1, u8 var2);
+void FreezeObjectEventsExceptTwo(u8 objectEventId1, u8 objectEventId2);
 void FreezeObjectEvents(void);
 bool8 FreezeObjectEvent(struct ObjectEvent *objectEvent);
 u8 GetMoveDirectionFastAnimNum(u8);

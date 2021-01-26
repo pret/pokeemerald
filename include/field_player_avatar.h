@@ -34,7 +34,7 @@ u8 PlayerGetZCoord(void);
 void SetPlayerAvatarTransitionFlags(u16 a);
 void sub_808BCE8(void);
 void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);
-void sub_808B864(void);
+void PlayerFreeze(void);
 void sub_808BCF4(void);
 void SetSpinStartFacingDir(u8);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);

@@ -1565,7 +1565,7 @@
 	.byte 0xd8
 	.endm
 
-	.macro cmdD9
+	.macro lockfortrainer
 	.byte 0xd9
 	.endm
 

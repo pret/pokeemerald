@@ -1212,7 +1212,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
     else
     {
         ScriptFreezeObjectEvents();
-        SetupNativeScript(ctx, sub_80983C4);
+        SetupNativeScript(ctx, IsFreezePlayerFinished);
         return TRUE;
     }
 }
@@ -1228,12 +1228,12 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
         if (gObjectEvents[gSelectedObjectEvent].active)
         {
             LockSelectedObjectEvent();
-            SetupNativeScript(ctx, sub_809847C);
+            SetupNativeScript(ctx, IsFreezeSelectedObjectAndPlayerFinished);
         }
         else
         {
             ScriptFreezeObjectEvents();
-            SetupNativeScript(ctx, sub_80983C4);
+            SetupNativeScript(ctx, IsFreezePlayerFinished);
         }
         return TRUE;
     }
@@ -2190,7 +2190,7 @@ bool8 ScrCmd_selectapproachingtrainer(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdD9(struct ScriptContext *ctx)
+bool8 ScrCmd_lockfortrainer(struct ScriptContext *ctx)
 {
     if (IsUpdateLinkStateCBActive())
     {
@@ -2200,8 +2200,8 @@ bool8 ScrCmd_cmdD9(struct ScriptContext *ctx)
     {
         if (gObjectEvents[gSelectedObjectEvent].active)
         {
-            sub_8098630();
-            SetupNativeScript(ctx, sub_8098734);
+            FreezeForApproachingTrainers();
+            SetupNativeScript(ctx, IsFreezeObjectAndPlayerFinished);
         }
         return TRUE;
     }

@@ -217,7 +217,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_freerotatingtilepuzzle    @ 0xd6
 	.4byte ScrCmd_warpmossdeepgym           @ 0xd7
 	.4byte ScrCmd_selectapproachingtrainer  @ 0xd8
-	.4byte ScrCmd_cmdD9                     @ 0xd9
+	.4byte ScrCmd_lockfortrainer            @ 0xd9
 	.4byte ScrCmd_closebraillemessage       @ 0xda
 	.4byte ScrCmd_messageinstant            @ 0xdb
 	.4byte ScrCmd_fadescreenswapbuffers     @ 0xdc

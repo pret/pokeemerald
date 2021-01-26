@@ -6579,7 +6579,7 @@ bool8 MovementAction_RevealTrainer_Step0(struct ObjectEvent *objectEvent, struct
 {
     if (objectEvent->movementType == MOVEMENT_TYPE_HIDDEN)
     {
-        sub_80B4578(objectEvent);
+        SetHiddenTrainerMovement(objectEvent);
         return FALSE;
     }
     if (objectEvent->movementType != MOVEMENT_TYPE_TREE_DISGUISE && objectEvent->movementType != MOVEMENT_TYPE_MOUNTAIN_DISGUISE)
@@ -8971,13 +8971,14 @@ void DestroyExtraMovementTask(u8 taskId)
     DestroyTask(taskId);
 }
 
-void sub_8098074(u8 var1, u8 var2)
+// Used to freeze other objects except two trainers approaching for battle
+void FreezeObjectEventsExceptTwo(u8 objectEventId1, u8 objectEventId2)
 {
     u8 i;
 
     for(i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if(i != var1 && i != var2 &&
+        if(i != objectEventId1 && i != objectEventId2 &&
             gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)
                 FreezeObjectEvent(&gObjectEvents[i]);
     }
