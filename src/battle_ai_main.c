@@ -515,7 +515,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u8 moveType = gBattleMoves[move].type;
     u8 moveTarget = gBattleMoves[move].target;
     u16 accuracy = AI_GetMoveAccuracy(battlerAtk, battlerDef, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect, move);
-    u8 effectiveness = AI_GetMoveEffectiveness(move);
+    u8 effectiveness = AI_GetMoveEffectiveness(move, battlerAtk, battlerDef);
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
     u32 i;
     u16 predictedMove = gLastMoves[battlerDef]; // TODO better move prediction
@@ -547,8 +547,21 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
                 
         // check if negates type
-        if (!IS_MOVE_STATUS(move) && (effectiveness == AI_EFFECTIVENESS_x0 || effectiveness == AI_EFFECTIVENESS_x0))
-            score -= 10;
+        if (!(gBattleMoves[move].target & MOVE_TARGET_USER))
+        {
+            if (gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) != 1)
+                RETURN_SCORE_MINUS(20);    // if target off screen and we go first, don't use move
+            
+            switch (effectiveness)
+            {
+            case AI_EFFECTIVENESS_x0:
+                RETURN_SCORE_MINUS(20);
+                break;
+            case AI_EFFECTIVENESS_x0_25:
+                RETURN_SCORE_MINUS(10);
+                break;
+            }
+        }
         
         // target ability checks
         if (!DoesBattlerIgnoreAbilityChecks(AI_DATA->atkAbility, move))
@@ -2421,7 +2434,7 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (GetMoveDamageResult(move) == MOVE_POWER_DISCOURAGED)
             score--;
         
-        if (AI_GetMoveEffectiveness(move) == AI_EFFECTIVENESS_x4)
+        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x4)
         {
             // AI_TryToFaint_DoubleSuperEffective
             if ((Random() % 256) >= 80)
@@ -2506,7 +2519,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_MAGNET_RISE:
         if (IsBattlerGrounded(battlerAtk)
           && (HasMove(battlerAtkPartner, MOVE_EARTHQUAKE) || HasMove(battlerAtkPartner, MOVE_MAGNITUDE))
-          && (AI_GetMoveEffectiveness(MOVE_EARTHQUAKE) != AI_EFFECTIVENESS_x0)) // Doesn't resist ground move
+          && (AI_GetMoveEffectiveness(MOVE_EARTHQUAKE, battlerAtk, battlerAtkPartner) != AI_EFFECTIVENESS_x0)) // Doesn't resist ground move
         {
             RETURN_SCORE_PLUS(2);   // partner has earthquake or magnitude -> good idea to use magnet rise
         }
@@ -2808,7 +2821,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     // move data
     u16 moveEffect = gBattleMoves[move].effect;
-    u8 effectiveness = AI_GetMoveEffectiveness(move);
+    u8 effectiveness = AI_GetMoveEffectiveness(move, battlerAtk, battlerDef);
     u8 atkPriority = GetMovePriority(battlerAtk, move);
     u16 predictedMove = gLastMoves[battlerDef]; //for now
     bool32 isDoubleBattle = IsValidDoubleBattle(battlerAtk);
@@ -2861,7 +2874,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     }*/  
 
     // check status move preference
-    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_PREFER_STATUS_MOVES && IS_MOVE_STATUS(move))
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_PREFER_STATUS_MOVES && IS_MOVE_STATUS(move) && effectiveness != AI_EFFECTIVENESS_x0)
         score++;
     
     // check thawing moves
