@@ -545,22 +545,20 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         {
             score -= 10;
         }
-                
+        
+        // check off screen
+        if (gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) != 1)
+            RETURN_SCORE_MINUS(20);    // if target off screen and we go first, don't use move
+        
         // check if negates type
-        if (!(gBattleMoves[move].target & MOVE_TARGET_USER))
+        switch (effectiveness)
         {
-            if (gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) != 1)
-                RETURN_SCORE_MINUS(20);    // if target off screen and we go first, don't use move
-            
-            switch (effectiveness)
-            {
-            case AI_EFFECTIVENESS_x0:
-                RETURN_SCORE_MINUS(20);
-                break;
-            case AI_EFFECTIVENESS_x0_25:
-                RETURN_SCORE_MINUS(10);
-                break;
-            }
+        case AI_EFFECTIVENESS_x0:
+            RETURN_SCORE_MINUS(20);
+            break;
+        case AI_EFFECTIVENESS_x0_25:
+            RETURN_SCORE_MINUS(10);
+            break;
         }
         
         // target ability checks
@@ -2422,7 +2420,7 @@ static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     {
         // this move can faint the target
         if (GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 0 || GetMovePriority(battlerAtk, move) > 0)
-            score += 4;
+            score += 4; // we go first or we're using priority move
         else
             score += 2;
     }
