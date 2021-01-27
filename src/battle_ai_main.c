@@ -2411,34 +2411,41 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 }
 
 static s16 AI_TryToFaint(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
-{
-    s32 dmg;
-    u8 result;
-    
+{    
     if (IsTargetingPartner(battlerAtk, battlerDef))
-        return score;   // don't try to faint your ally ever
+        return score;
     
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power == 0)
+    if (gBattleMoves[move].power == 0)
         return score;   // can't make anything faint with no power
     
     if (CanAttackerFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0) && gBattleMoves[move].effect != EFFECT_EXPLOSION)
     {
-        // AI_TryToFaint_Can
-        if (IsAiFaster(AI_CHECK_FASTER) || TestMoveFlags(move, FLAG_HIGH_CRIT))
+        // this move can faint the target
+        if (GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 0 || GetMovePriority(battlerAtk, move) > 0)
             score += 4;
         else
             score += 2;
     }
     else
     {
+        // this move isn't expected to faint the target
+        if (TestMoveFlags(move, FLAG_HIGH_CRIT))
+            score += 2; // crit makes it more likely to make them faint
+        
         if (GetMoveDamageResult(move) == MOVE_POWER_DISCOURAGED)
             score--;
         
-        if (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x4)
+        switch (AI_GetMoveEffectiveness(move, battlerAtk, battlerDef))
         {
-            // AI_TryToFaint_DoubleSuperEffective
-            if ((Random() % 256) >= 80)
+        case AI_EFFECTIVENESS_x4:
+            score += 4;
+            break;
+        case AI_EFFECTIVENESS_x2:
+            if (AI_RandLessThan(176))
                 score += 2;
+            else
+                score++;
+            break;
         }
     }
     
