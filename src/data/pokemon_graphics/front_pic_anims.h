@@ -9077,6 +9077,7 @@ static const union AnimCmd sAnim_DEOXYS_ATTACK_1[] =
     ANIMCMD_FRAME(0, 26),
     ANIMCMD_FRAME(1, 16),
     ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_DEOXYS_ATTACK_2[] =
