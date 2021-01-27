@@ -243,6 +243,13 @@ struct Evolution
     u16 targetSpecies;
 };
 
+struct FormChange {
+    u16 method;
+    u16 targetSpecies;
+    u16 param1;
+    u16 param2;
+};
+
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;

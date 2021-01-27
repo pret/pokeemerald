@@ -307,6 +307,14 @@
 
 #define EVOS_PER_MON 10
 
+// Form change types
+#define FORM_ITEM_HOLD        1
+#define FORM_ITEM_USE         2
+#define FORM_ITEM_USE_ONE_WAY 3
+#define FORM_MOVE             4
+#define FORM_STATUS           5
+#define FORM_ELAPSED_DAYS     6
+
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
 
