@@ -1765,6 +1765,21 @@
 	.4byte \ptr
 	.endm
 	
+	.macro eeriespellppreduce ptr:req
+	various BS_TARGET, VARIOUS_EERIE_SPELL_PP_REDUCE
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifteamhealthy battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_TEAM_HEALTHY
+	.4byte \ptr
+	.endm
+	
+	.macro tryhealquarterhealth battler:req, ptr:req
+	various \battler, VARIOUS_TRY_HEAL_QUARTER_HP
+	.4byte \ptr
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7

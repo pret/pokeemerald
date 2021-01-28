@@ -1711,7 +1711,8 @@ s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbi
     }
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
              || gBattleMoves[move].effect == EFFECT_ALWAYS_CRIT
-             || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
+             || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+             || move == MOVE_SURGING_STRIKES)
     {
         critChance = -2;
     }
@@ -8332,6 +8333,79 @@ static void Cmd_various(void)
             }
             gBattlescriptCurrInstr += 7;    // exit if loop failed (failsafe)
         }
+        return;
+    case VARIOUS_EERIE_SPELL_PP_REDUCE:
+        if (gLastMoves[gActiveBattler] != 0 && gLastMoves[gActiveBattler] != 0xFFFF)
+        {
+            s32 i;
+
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (gLastMoves[gActiveBattler] == gBattleMons[gActiveBattler].moves[i])
+                    break;
+            }
+
+            if (i != MAX_MON_MOVES && gBattleMons[gActiveBattler].pp[i] != 0)
+            {
+                s32 ppToDeduct = 3;
+
+                if (gBattleMons[gActiveBattler].pp[i] < ppToDeduct)
+                    ppToDeduct = gBattleMons[gActiveBattler].pp[i];
+
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastMoves[gActiveBattler])
+                ConvertIntToDecimalStringN(gBattleTextBuff2, ppToDeduct, STR_CONV_MODE_LEFT_ALIGN, 1);
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 1, ppToDeduct)
+                gBattleMons[gActiveBattler].pp[i] -= ppToDeduct;
+                if (!(gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[i])
+                    && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
+                {
+                    BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + i, 0, 1, &gBattleMons[gActiveBattler].pp[i]);
+                    MarkBattlerForControllerExec(gActiveBattler);
+                }
+                
+                if (gBattleMons[gActiveBattler].pp[i] == 0)
+                    CancelMultiTurnMoves(gActiveBattler);
+                
+                gBattlescriptCurrInstr += 7;    // continue
+            }
+            else
+            {
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // cant reduce pp
+            }
+        }
+        else
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // cant reduce pp
+        }
+        return;
+    case VARIOUS_JUMP_IF_TEAM_HEALTHY:
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsBattlerAlive(BATTLE_PARTNER(gActiveBattler)))
+        {
+            u8 partner = BATTLE_PARTNER(gActiveBattler);
+            if ((gBattleMons[gActiveBattler].hp == gBattleMons[gActiveBattler].maxHP && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY))
+             && (gBattleMons[partner].hp == gBattleMons[partner].maxHP && !(gBattleMons[partner].status1 & STATUS1_ANY)))
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // fail
+            else
+                gBattlescriptCurrInstr += 7;
+        }
+        else // single battle
+        {
+            if (gBattleMons[gActiveBattler].hp == gBattleMons[gActiveBattler].maxHP && !(gBattleMons[gActiveBattler].status1 & STATUS1_ANY))
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // fail
+            else
+                gBattlescriptCurrInstr += 7;
+        }
+        return;
+    case VARIOUS_TRY_HEAL_QUARTER_HP:
+        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 4;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        gBattleMoveDamage *= -1;
+
+        if (gBattleMons[gActiveBattler].hp == gBattleMons[gActiveBattler].maxHP)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);    // fail
+        else
+            gBattlescriptCurrInstr += 7;   // can heal
         return;
     }
 

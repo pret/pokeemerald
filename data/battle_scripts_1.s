@@ -365,6 +365,40 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectFairyLock
 	.4byte BattleScript_EffectAllySwitch
 	.4byte BattleScript_EffectSleepHit
+	.4byte BattleScript_EffectEerieSpell
+	.4byte BattleScript_EffectJungleHealing
+
+BattleScript_EffectJungleHealing:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifteamhealthy BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	copybyte gBattlerTarget, gBattlerAttacker
+	setbyte gBattleCommunication, 0
+JungleHealing_RestoreTargetHealth:
+	copybyte gBattlerAttacker, gBattlerTarget
+	tryhealquarterhealth BS_TARGET, JungleHealing_TryCureStatus
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage 0x40
+JungleHealing_TryCureStatus:
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_JungleHealingCureStatus
+	goto JungleHealingTryRestoreAlly
+BattleScript_JungleHealingCureStatus:
+	curestatus BS_TARGET
+	updatestatusicon BS_TARGET
+	printstring STRINGID_PKMNSTATUSNORMAL
+	waitmessage 0x40
+JungleHealingTryRestoreAlly:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_MoveEnd
+	addbyte gBattleCommunication, 1
+	jumpifnoally BS_TARGET, BattleScript_MoveEnd
+	setallytonexttarget JungleHealing_RestoreTargetHealth
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectSleepHit:
 	setmoveeffect MOVE_EFFECT_SLEEP
@@ -3441,6 +3475,32 @@ BattleScript_EffectDestinyBond::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectEerieSpell::
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	tryfaintmon BS_TARGET, FALSE, NULL
+	eeriespellppreduce BattleScript_MoveEnd
+	printstring STRINGID_PKMNREDUCEDPP
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectSpite::
 	attackcanceler
 	attackstring
@@ -3491,7 +3551,13 @@ BattleScript_TripleKickLoop::
 BattleScript_DoTripleKickAttack::
 	accuracycheck BattleScript_TripleKickNoMoreHits, ACC_CURR_MOVE
 	movevaluescleanup
-	addbyte sTRIPLE_KICK_POWER, 10
+	jumpifmove MOVE_SURGING_STRIKES, EffectTripleKick_DoDmgCalcs	@ no power boost each hit
+	jumpifmove MOVE_TRIPLE_AXEL, EffectTripleKick_TripleAxelBoost	@ triple axel gets +20 power
+	addbyte sTRIPLE_KICK_POWER, 10									@ triple kick gets +10 power
+	goto EffectTripleKick_DoDmgCalcs
+EffectTripleKick_TripleAxelBoost:
+	addbyte sTRIPLE_KICK_POWER, 20
+EffectTripleKick_DoDmgCalcs:
 	addbyte sMULTIHIT_STRING + 4, 0x1
 	critcalc
 	damagecalc

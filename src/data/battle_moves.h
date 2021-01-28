@@ -11306,7 +11306,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TRIPLE_AXEL] =
     {
-        .effect = EFFECT_TRIPLE_KICK,   //TODO: Increase damage by 20 instead of 10
+        .effect = EFFECT_TRIPLE_KICK,
         .power = 20,
         .type = TYPE_ICE,
         .accuracy = 90,
@@ -11348,7 +11348,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_JUNGLE_HEALING] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_JUNGLE_HEALING,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 0,
@@ -11375,7 +11375,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SURGING_STRIKES] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO (Multi hit + Always Crit)
+        .effect = EFFECT_TRIPLE_KICK,
         .power = 25,
         .type = TYPE_WATER,
         .accuracy = 100,
@@ -11487,7 +11487,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_EERIE_SPELL] =
     {
-        .effect = EFFECT_HIT, // To do. It's a copy of Spite that inflicts damage and reduced the target's last move's PP by 3 instead of 4.
+        .effect = EFFECT_EERIE_SPELL,
         .power = 80,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,

@@ -14022,7 +14022,7 @@ Move_SCORCHING_SANDS::
 	end @to do:
 
 Move_JUNGLE_HEALING::
-	end @to do:
+	goto Move_AROMATHERAPY
 
 Move_WICKED_BLOW::
 	end @to do:
