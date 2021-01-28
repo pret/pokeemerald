@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "bard_music.h"
 #include "constants/easy_chat.h"
@@ -21,7 +19,7 @@ const struct BardSound *GetWordSounds(u16 word)
     u32 subword;
     const struct BardSound (*ptr)[6];
 
-    if (ECWord_CheckIfOutsideOfValidRange(word))
+    if (IsBardWordInvalid(word))
     {
         return gBardSound_InvalidWord;
     }

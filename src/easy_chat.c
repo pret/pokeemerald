@@ -4876,7 +4876,7 @@ bool8 sub_811EAA4(u16 easyChatWord)
     }
 }
 
-bool8 ECWord_CheckIfOutsideOfValidRange(u16 easyChatWord)
+bool8 IsBardWordInvalid(u16 easyChatWord)
 {
     int numWordsInGroup;
     u8 groupId = EC_GROUP(easyChatWord);
@@ -4888,11 +4888,11 @@ bool8 ECWord_CheckIfOutsideOfValidRange(u16 easyChatWord)
     {
     case EC_GROUP_POKEMON:
     case EC_GROUP_POKEMON_2:
-        numWordsInGroup = gNumSpeciesNames;
+        numWordsInGroup = gNumBardWords_Species;
         break;
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
-        numWordsInGroup = gUnknown_085FA1D4;
+        numWordsInGroup = gNumBardWords_Moves;
         break;
     default:
         numWordsInGroup = gEasyChatGroups[groupId].numWords;
