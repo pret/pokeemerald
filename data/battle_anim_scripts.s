@@ -13995,7 +13995,7 @@ Move_SKITTER_SMACK::
 	end @to do:
 
 Move_BURNING_JEALOUSY::
-	end @to do:
+	goto Move_OVERHEAT
 
 Move_LASH_OUT::
 	end @to do:

@@ -6686,6 +6686,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (gBattleMoves[gLastUsedMove].effect == EFFECT_FUSION_COMBO && move != gLastUsedMove)
             basePower *= 2;
         break;
+    case EFFECT_LASH_OUT:
+        if (gProtectStructs[battlerAtk].statFell == 1)
+            basePower *= 2;
+        break;
     }
 
     if (basePower == 0)

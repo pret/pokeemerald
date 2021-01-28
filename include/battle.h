@@ -144,6 +144,8 @@ struct ProtectStruct
     u32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
+    u8 statFell:1;  // placed here since cleared at end of round
+    u8 statRaised:1;
 };
 
 struct SpecialStatus
