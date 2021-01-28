@@ -13492,7 +13492,7 @@ Move_BODY_PRESS::
 	end
 
 Move_DECORATE::
-	end @to do:
+	goto Move_FLOWER_SHIELD
 
 Move_DRUM_BEATING::
 	loadspritegfx ANIM_TAG_MUSIC_NOTES 
@@ -13968,7 +13968,7 @@ Move_EXPANDING_FORCE::
 	end @to do:
 
 Move_STEEL_ROLLER::
-	end @to do:
+	goto Move_GYRO_BALL
 
 Move_SCALE_SHOT::
 	end @to do:

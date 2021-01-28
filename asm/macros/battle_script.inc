@@ -1780,6 +1780,10 @@
 	.4byte \ptr
 	.endm
 	
+	.macro removeterrain
+	various BS_ATTACKER, VARIOUS_REMOVE_TERRAIN
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7

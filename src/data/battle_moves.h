@@ -10605,7 +10605,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SNIPE_SHOT] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_SNIPE_SHOT,
         .power = 80,
         .type = TYPE_WATER,
         .accuracy = 100,
@@ -10613,7 +10613,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRIT,
         .split = SPLIT_SPECIAL,
     },
 
@@ -10802,7 +10802,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DECORATE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   // TODO .. EFFECT_DECORATE
+        .effect = EFFECT_DECORATE,
         .power = 0,
         .type = TYPE_FAIRY,
         .accuracy = 0,
@@ -10858,7 +10858,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEHEMOTH_BLADE] =
     {
-        .effect = EFFECT_HIT,   //TODO: 2x damage if dynamaxed? meh...
+        .effect = EFFECT_BEHEMOTH,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -10872,7 +10872,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BEHEMOTH_BASH] =
     {
-        .effect = EFFECT_HIT,   //TODO: 2x damage if dynamaxed? meh...
+        .effect = EFFECT_BEHEMOTH,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -11012,7 +11012,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_OBSTRUCT] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO. EFFECT_PROTECT?
+        .effect = EFFECT_PROTECT,
         .power = 0,
         .type = TYPE_DARK,
         .accuracy = 100,
@@ -11096,7 +11096,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STEEL_ROLLER] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_REMOVE_TERRAIN,
         .power = 130,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -11152,7 +11152,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MISTY_EXPLOSION] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_EXPLOSION,
         .power = 100,
         .type = TYPE_FAIRY,
         .accuracy = 100,
@@ -11166,7 +11166,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GRASSY_GLIDE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_GRASSY_GLIDE,
         .power = 70,
         .type = TYPE_GRASS,
         .accuracy = 100,

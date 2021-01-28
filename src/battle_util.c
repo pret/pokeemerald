@@ -141,6 +141,7 @@ void HandleAction_UseMove(void)
         && gBattleMoves[gCurrentMove].target == MOVE_TARGET_SELECTED
         && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gSideTimers[side].followmeTarget)
         && gBattleMons[gSideTimers[side].followmeTarget].hp != 0
+        && gBattleMoves[gCurrentMove].effect != EFFECT_SNIPE_SHOT
         && (GetBattlerAbility(gBattlerAttacker) != ABILITY_PROPELLER_TAIL
             || GetBattlerAbility(gBattlerAttacker) != ABILITY_STALWART))
     {
@@ -162,6 +163,7 @@ void HandleAction_UseMove(void)
                 && ((GetBattlerAbility(gActiveBattler) == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
                     || (GetBattlerAbility(gActiveBattler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
                 && GetBattlerTurnOrderNum(gActiveBattler) < var
+                && gBattleMoves[gCurrentMove].effect != EFFECT_SNIPE_SHOT
                 && (GetBattlerAbility(gBattlerAttacker) != ABILITY_PROPELLER_TAIL
                     || GetBattlerAbility(gBattlerAttacker) != ABILITY_STALWART))
             {
@@ -6689,6 +6691,16 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     case EFFECT_LASH_OUT:
         if (gProtectStructs[battlerAtk].statFell == 1)
             basePower *= 2;
+        break;
+    case EFFECT_EXPLOSION:
+        if (move == MOVE_MISTY_EXPLOSION && gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && IsBattlerGrounded(battlerAtk))
+            basePower = 150;
+        break;
+    case EFFECT_BEHEMOTH:
+        #ifdef B_DYNAMAX
+        if (IsDynamaxed(battlerDef))/
+            basePower *= 2;
+        #endif
         break;
     }
 

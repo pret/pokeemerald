@@ -1171,12 +1171,14 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         return FALSE;
     else if (gBattleMoves[move].effect == MOVE_EFFECT_FEINT)
         return FALSE;
-    else if (gProtectStructs[battlerId].protected)
+    else if (gProtectStructs[battlerId].protected && move != MOVE_DECORATE)
         return TRUE;
     else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD
              && gBattleMoves[move].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
         return TRUE;
     else if (gProtectStructs[battlerId].banefulBunkered)
+        return TRUE;
+    else if (gProtectStructs[battlerId].obstruct && !IS_MOVE_STATUS(move))
         return TRUE;
     else if (gProtectStructs[battlerId].spikyShielded)
         return TRUE;
@@ -3126,7 +3128,8 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_MAT_BLOCK
                     || gProtectStructs[gBattlerTarget].spikyShielded
                     || gProtectStructs[gBattlerTarget].kingsShielded
-                    || gProtectStructs[gBattlerTarget].banefulBunkered)
+                    || gProtectStructs[gBattlerTarget].banefulBunkered
+                    || gProtectStructs[gBattlerTarget].obstruct)
                 {
                     gProtectStructs[gBattlerTarget].protected = 0;
                     gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_WIDE_GUARD);
@@ -3136,6 +3139,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gProtectStructs[gBattlerTarget].spikyShielded = 0;
                     gProtectStructs[gBattlerTarget].kingsShielded = 0;
                     gProtectStructs[gBattlerTarget].banefulBunkered = 0;
+                    gProtectStructs[gBattlerTarget].obstruct = 0;
                     if (gCurrentMove == MOVE_FEINT)
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
@@ -4720,6 +4724,16 @@ static void Cmd_moveend(void)
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_BANEFUL_BUNKER);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_BanefulBunkerEffect;
+                    effect = 1;
+                }
+                else if (gProtectStructs[gBattlerTarget].obstruct && gCurrentMove != MOVE_SUCKER_PUNCH)
+                {
+                    i = gBattlerAttacker;
+                    gBattlerAttacker = gBattlerTarget;
+                    gBattlerTarget = i; // gBattlerTarget and gBattlerAttacker are swapped in order to activate Defiant, if applicable
+                    gBattleScripting.moveEffect = MOVE_EFFECT_DEF_MINUS_2;
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_KingsShieldEffect;
                     effect = 1;
                 }
             }
@@ -6951,7 +6965,7 @@ static void HandleTerrainMove(u32 moveEffect)
     }
     else
     {
-        gFieldStatuses &= ~STATUS_TERRAIN_ANY;
+        gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
         gFieldStatuses |= statusFlag;
         if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
             *timer = 8;
@@ -8410,6 +8424,27 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;   // can heal
         return;
+    case VARIOUS_REMOVE_TERRAIN:        
+        switch (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+        {
+        case STATUS_FIELD_MISTY_TERRAIN:
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            break;
+        case STATUS_FIELD_GRASSY_TERRAIN:
+            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            break;
+        case STATUS_FIELD_ELECTRIC_TERRAIN:
+            gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            break;
+        case STATUS_FIELD_PSYCHIC_TERRAIN:
+            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+            break;
+        default:
+            gBattleCommunication[MULTISTRING_CHOOSER] = 4;  // failsafe
+            break;
+        }
+        gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
+        break;
     }
 
     gBattlescriptCurrInstr += 3;
@@ -8453,6 +8488,11 @@ static void Cmd_setprotectlike(void)
             else if (gCurrentMove == MOVE_BANEFUL_BUNKER)
             {
                 gProtectStructs[gBattlerAttacker].banefulBunkered = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_OBSTRUCT)
+            {
+                gProtectStructs[gBattlerAttacker].obstruct = 1;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             }
 

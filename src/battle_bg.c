@@ -1422,7 +1422,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
 
 void DrawTerrainTypeBattleBackground(void)
 {
-    switch (gFieldStatuses & STATUS_TERRAIN_ANY)
+    switch (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
     {
     case STATUS_FIELD_GRASSY_TERRAIN:
         LoadMoveBg(BG_GRASSY_TERRAIN);

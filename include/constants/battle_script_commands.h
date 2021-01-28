@@ -171,6 +171,7 @@
 #define VARIOUS_EERIE_SPELL_PP_REDUCE           104
 #define VARIOUS_JUMP_IF_TEAM_HEALTHY            105
 #define VARIOUS_TRY_HEAL_QUARTER_HP             106
+#define VARIOUS_REMOVE_TERRAIN                  107
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

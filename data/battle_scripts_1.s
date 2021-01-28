@@ -369,6 +369,62 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectJungleHealing
 	.4byte BattleScript_EffectCoaching
 	.4byte BattleScript_EffectLashOut
+	.4byte BattleScript_EffectGrassyGlide
+	.4byte BattleScript_EffectRemoveTerrain
+	.4byte BattleScript_EffectBehemoth
+	.4byte BattleScript_EffectDecorate
+
+BattleScript_EffectDecorate:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_ATK, 12, BattleScript_DecorateBoost
+	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_SPATK, 12, BattleScript_DecorateBoost
+	goto BattleScript_ButItFailed
+BattleScript_DecorateBoost:
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, 0x0
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange STAT_BUFF_ALLOW_PTR | STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_DecorateBoostSpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_DecorateBoostSpAtk
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_DecorateBoostSpAtk:
+	setstatchanger STAT_SPATK, 2, FALSE
+	statbuffchange STAT_BUFF_ALLOW_PTR | STAT_BUFF_NOT_PROTECT_AFFECTED, BattleScript_MoveEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_MoveEnd
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectRemoveTerrain:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifword CMP_NO_COMMON_BITS, gFieldStatuses, STATUS_FIELD_TERRAIN_ANY, BattleScript_ButItFailed
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage 0x40
+	resultmessage
+	waitmessage 0x40
+	removeterrain
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 4, BattleScript_MoveEnd
+	printfromtable gTerrainEndingStringIds
+	waitmessage 0x40
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG, NULL
+	tryfaintmon BS_TARGET, FALSE, NULL
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectCoaching:
 	attackcanceler
@@ -383,6 +439,8 @@ EffectCoaching_CheckAllyStats:
 	jumpifstat BS_TARGET, CMP_NOT_EQUAL, STAT_DEF, 12, BattleScript_CoachingWorks
 	goto BattleScript_ButItFailed	@ ally at max atk, def
 BattleScript_CoachingWorks:
+	attackanimation
+	waitanimation
 	setbyte sSTAT_ANIM_PLAYED, FALSE
 	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_DEF, 0x0
 	setstatchanger STAT_ATK, 1, FALSE
@@ -2113,6 +2171,8 @@ BattleScript_EffectFusionCombo:
 BattleScript_EffectRevelationDance:
 BattleScript_EffectBelch:
 BattleScript_EffectLashOut:
+BattleScript_EffectGrassyGlide:
+BattleScript_EffectBehemoth:
 
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
