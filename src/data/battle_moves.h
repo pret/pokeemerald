@@ -1951,9 +1951,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FIRE_BLAST] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_6
-            .power = 120,
-        #else
             .power = 110,
+        #else
+            .power = 120,
         #endif
         .effect = EFFECT_BURN_HIT,
         .type = TYPE_FIRE,
