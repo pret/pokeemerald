@@ -227,6 +227,8 @@ static const struct ListMenuTemplate sItemListMenu =
 static const u8 sMenuText_ByName[] = _("Name");
 static const u8 sMenuText_ByType[] = _("Type");
 static const u8 sMenuText_ByAmount[] = _("Amount");
+static const u8 sMenuText_ByNumber[] = _("Number");
+static const u8 sText_NothingToSort[] = _("There's nothing to sort!");
 static const struct MenuAction sItemMenuActions[] = {
     [ITEMMENUACTION_USE] =          {gMenuText_Use, ItemMenu_UseOutOfBattle},
     [ITEMMENUACTION_TOSS] =         {gMenuText_Toss, ItemMenu_Toss},
@@ -1196,10 +1198,23 @@ void Task_BagMenu_HandleInput(u8 taskId)
                         BagMenu_SwapItems(taskId);
                     }
                 }
-                return;
             }
             else if (JOY_NEW(START_BUTTON))
             {
+                if ((gBagMenu->numItemStacks[gBagPositionStruct.pocket] - 1) <= 1) //can't sort with 0 or 1 item in bag
+                {
+                    PlaySE(SE_FAILURE);
+                    DisplayItemMessage(taskId, 1, sText_NothingToSort, sub_81AD350);
+                    break;
+                }
+                
+                data[1] = GetItemListPosition(gBagPositionStruct.pocket);
+                data[2] = BagGetQuantityByPocketPosition(gBagPositionStruct.pocket + 1, data[1]);
+                if (gBagPositionStruct.cursorPosition[gBagPositionStruct.pocket] == gBagMenu->numItemStacks[gBagPositionStruct.pocket] - 1)
+                    break;
+                else
+                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gBagPositionStruct.pocket + 1, data[1]);
+                
                 PlaySE(SE_SELECT);
                 sub_81AB824();
                 BagMenu_PrintCursor_(data[0], 2);
@@ -3125,7 +3140,7 @@ static void Task_SortFinish(u8 taskId)
     {
         //BagPrintTextOnWindow(ShowBagWindow(6, 3), 2, gStringVar4, 0, 2, 1, 0, 0, 1);
         SortItemsInBag(gBagPositionStruct.pocket, tSortType);
-        bag_menu_RemoveBagItem_message_window(4);
+        BagMenu_RemoveBagItemMessageindow(4);
         DestroyListMenuTask(data[0], scrollPos, cursorPos);
         SetInitialScrollAndCursorPositions(gBagPositionStruct.pocket);
         LoadBagItemListBuffers(gBagPositionStruct.pocket);
