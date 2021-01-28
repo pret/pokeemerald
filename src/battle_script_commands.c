@@ -8428,15 +8428,19 @@ static void Cmd_various(void)
         switch (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
         {
         case STATUS_FIELD_MISTY_TERRAIN:
+            gFieldTimers.mistyTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             break;
         case STATUS_FIELD_GRASSY_TERRAIN:
+            gFieldTimers.grassyTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
             break;
         case STATUS_FIELD_ELECTRIC_TERRAIN:
+            gFieldTimers.electricTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             break;
         case STATUS_FIELD_PSYCHIC_TERRAIN:
+            gFieldTimers.psychicTerrainTimer = 0;
             gBattleCommunication[MULTISTRING_CHOOSER] = 3;
             break;
         default:
