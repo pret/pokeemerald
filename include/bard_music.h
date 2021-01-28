@@ -1,9 +1,6 @@
 #ifndef GUARD_BARD_MUSIC_H
 #define GUARD_BARD_MUSIC_H
 
-// Exported type declarations
-
-
 struct BardSound
 {
     /*0x00*/ u8 var00;
