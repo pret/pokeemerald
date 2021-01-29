@@ -211,7 +211,6 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
 
 void task_add_00_ereader(void)
 {
-    int value;
     struct Unk81D5014 *data;
     u8 taskId = CreateTask(sub_81D5084, 0);
     data = (struct Unk81D5014 *)gTasks[taskId].data;
