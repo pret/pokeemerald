@@ -7529,8 +7529,8 @@ extern const u32 gConfetti_Gfx[];
 extern const u32 gConfetti_Pal[];
 
 extern const u32 gUnknown_08C093F0[];
-extern const u32 gSubstituteDollTilemap[];
-extern const u32 gSubstituteDollGfx[];
+extern const u32 gSubstituteDollBackGfx[];
+extern const u32 gSubstituteDollFrontGfx[];
 extern const u32 gSubstituteDollPal[];
 extern const u32 gHealthboxSinglesPlayerGfx[];
 extern const u32 gHealthboxSinglesOpponentGfx[];
@@ -8455,6 +8455,11 @@ extern const u32 gPokenavMessageBox_Tilemap[];
 extern const u16 gPokenavMessageBox_Pal[];
 extern const u32 gPokenavOptions_Gfx[];
 extern const u16 gPokenavOptions_Pal[];
+
+// Battle Factory Screen
+extern const u8 gFrontierFactorySelectMenu_Gfx[];
+extern const u8 gFrontierFactorySelectMenu_Tilemap[];
+extern const u16 gFrontierFactorySelectMenu_Pal[];
 
 // Object event pals
 extern const u16 gObjectEventPal_Brendan[];

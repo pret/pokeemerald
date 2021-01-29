@@ -4947,7 +4947,6 @@ static void AnimTask_OdorSleuthMovementWaitFinish(u8 taskId)
 
 static void MoveOdorSleuthClone(struct Sprite *sprite)
 {
-    int zero = 0;
     if (++sprite->data[1] > 1)
     {
         sprite->data[1] = 0;

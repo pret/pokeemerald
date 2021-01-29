@@ -1159,7 +1159,7 @@ static void CB2_RunCreditsSequence(void)
 static void sub_8175548(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sBackgroundTemplates, 1);
+    InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
     LoadPalette(gUnknown_085E56F0, 0x80, 0x40);
     InitWindows(sWindowTemplates);
@@ -1306,8 +1306,6 @@ static void sub_8175808(u8 taskIdA)
 
 static void c2_080C9BFC(u8 taskIdA)
 {
-    u16 backup;
-
     SetVBlankCallback(NULL);
 
     if (sub_8176AB0(gTasks[taskIdA].data[TDA_7], taskIdA))

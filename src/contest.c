@@ -4419,7 +4419,6 @@ static void CalculateAppealMoveImpact(u8 contestant)
     u16 move;
     u8 effect;
     u8 rnd;
-    bool8 canUseTurn;
     s32 i;
 
     eContestantStatus[contestant].appeal = 0;

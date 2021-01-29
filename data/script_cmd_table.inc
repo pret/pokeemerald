@@ -209,7 +209,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_checkmonobedience         @ 0xce
 	.4byte ScrCmd_gotoram                   @ 0xcf
 	.4byte ScrCmd_nop1                      @ 0xd0
-	.4byte ScrCmd_warpD1                    @ 0xd1
+	.4byte ScrCmd_warpspinenter             @ 0xd1
 	.4byte ScrCmd_setmonmetlocation         @ 0xd2
 	.4byte ScrCmd_moverotatingtileobjects   @ 0xd3
 	.4byte ScrCmd_turnrotatingtileobjects   @ 0xd4

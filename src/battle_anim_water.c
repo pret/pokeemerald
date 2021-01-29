@@ -881,8 +881,6 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
     u16 rgbBuffer;
     u16 *BGptrX = &gBattle_BG1_X;
     u16 *BGptrY = &gBattle_BG1_Y;
-    u32 palOffset;
-    u16 palNum;
 
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];

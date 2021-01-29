@@ -61,7 +61,6 @@ static void HandleInitWindows(void);
 static void LaunchPokeblockFeedTask(void);
 static void SetPokeblockSpritePal(u8 pokeblockCaseId);
 static void sub_817A5CC(void);
-static void sub_8148108(u8 spriteId, bool8 a1);
 static void DoPokeblockCaseThrowEffect(u8 spriteId, bool8 arg1);
 static void PrepareMonToMoveToPokeblock(u8 spriteId);
 static void Task_HandleMonAtePokeblock(u8 taskId);
