@@ -13,9 +13,8 @@ struct PokemonSubstruct0
     /*0x04*/ u32 experience;
     /*0x08*/ u8 ppBonuses;
     /*0x09*/ u8 friendship;
-    /*0x0A*/ u8 pokeball:5; //31 balls
-             u8 unused0_A:3;
-    /*0x0B*/ u8 unused0_B;
+    /*0x0A*/ u16 pokeball:5; //31 balls
+             u16 filler:11;
 }; /* size = 12 */
 
 struct PokemonSubstruct1
@@ -241,6 +240,15 @@ struct Evolution
     u16 param;
     u16 targetSpecies;
 };
+
+#define NUM_UNOWN_FORMS 28
+
+#define GET_UNOWN_LETTER(personality) ((   \
+      (((personality) & 0x03000000) >> 18) \
+    | (((personality) & 0x00030000) >> 12) \
+    | (((personality) & 0x00000300) >> 6)  \
+    | (((personality) & 0x00000003) >> 0)  \
+) % NUM_UNOWN_FORMS)
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];

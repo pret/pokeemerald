@@ -87,7 +87,7 @@ static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
 static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
-static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent*);
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent*);
 static u8 GetReflectionTypeByMetatileBehavior(u32);
 static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
 static void ObjectEventUpdateSubpriority(struct ObjectEvent*, struct Sprite*);
@@ -130,7 +130,6 @@ static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, 
 static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
 static void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
-static void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *);
 static void InitSpriteForFigure8Anim(struct Sprite *sprite);
 static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
 static void UpdateObjectEventSprite(struct Sprite *);
@@ -7514,21 +7513,23 @@ static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *objEvent)
 
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *flags)
 {
-    u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
-    u8 type = ObjectEventCheckForReflectiveSurface(objEvent);
+    u32 reflectionFlags[NUM_REFLECTION_TYPES - 1] = { 
+        [REFL_TYPE_ICE   - 1] = GROUND_EFFECT_FLAG_ICE_REFLECTION,
+        [REFL_TYPE_WATER - 1] = GROUND_EFFECT_FLAG_WATER_REFLECTION
+    };
+    u8 reflType = ObjectEventGetNearbyReflectionType(objEvent);
 
-    if (type)
+    if (reflType)
     {
-        if (!objEvent->hasReflection)
+        if (objEvent->hasReflection == 0)
         {
-            objEvent->hasReflection = 0;
-            objEvent->hasReflection = 1;
-            *flags |= reflectionFlags[type - 1];
+            objEvent->hasReflection++;
+            *flags |= reflectionFlags[reflType - 1];
         }
     }
     else
     {
-        objEvent->hasReflection = 0;
+        objEvent->hasReflection = FALSE;
     }
 }
 
@@ -7701,26 +7702,24 @@ static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *
     }
 }
 
-static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
+#define RETURN_REFLECTION_TYPE_AT(x, y)              \
+    b = MapGridGetMetatileBehaviorAt(x, y);          \
+    result = GetReflectionTypeByMetatileBehavior(b); \
+    if (result != REFL_TYPE_NONE)                    \
+        return result;
+
+static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
     // ceil div by tile width?
     s16 width = (info->width + 8) >> 4;
     s16 height = (info->height + 8) >> 4;
-    s16 i;
-    s16 j;
-    u8 result;
-    u8 b;
-    s16 one;
+    s16 i, j;
+    u8 result, b; // used by RETURN_REFLECTION_TYPE_AT
+    s16 one = 1;
 
-#define RETURN_REFLECTION_TYPE_AT(x, y)              \
-    b = MapGridGetMetatileBehaviorAt(x, y);          \
-    result = GetReflectionTypeByMetatileBehavior(b); \
-    if (result != 0)                                 \
-        return result;
-
-    for (i = 0, one = 1; i < height; i++)
+    for (i = 0; i < height; i++)
     {
         RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x, objEvent->currentCoords.y + one + i)
         RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x, objEvent->previousCoords.y + one + i)
@@ -7732,19 +7731,20 @@ static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
             RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x - j, objEvent->previousCoords.y + one + i)
         }
     }
-    return 0;
+    
+    return REFL_TYPE_NONE;
+}
 
 #undef RETURN_REFLECTION_TYPE_AT
-}
 
 static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {
     if (MetatileBehavior_IsIce(behavior))
-        return 1;
+        return REFL_TYPE_ICE;
     else if (MetatileBehavior_IsReflective(behavior))
-        return 2;
+        return REFL_TYPE_WATER;
     else
-        return 0;
+        return REFL_TYPE_NONE;
 }
 
 u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
@@ -7945,12 +7945,12 @@ void GroundEffect_StepOnLongGrass(struct ObjectEvent *objEvent, struct Sprite *s
 
 void GroundEffect_WaterReflection(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    SetUpReflection(objEvent, sprite, 0);
+    SetUpReflection(objEvent, sprite, FALSE);
 }
 
 void GroundEffect_IceReflection(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    SetUpReflection(objEvent, sprite, 1);
+    SetUpReflection(objEvent, sprite, TRUE);
 }
 
 void GroundEffect_FlowingWater(struct ObjectEvent *objEvent, struct Sprite *sprite)
@@ -8117,8 +8117,8 @@ static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct S
     GroundEffect_StepOnTallGrass,       // GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE
     GroundEffect_SpawnOnLongGrass,      // GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN
     GroundEffect_StepOnLongGrass,       // GROUND_EFFECT_FLAG_LONG_GRASS_ON_MOVE
-    GroundEffect_WaterReflection,       // GROUND_EFFECT_FLAG_ICE_REFLECTION
-    GroundEffect_IceReflection,         // GROUND_EFFECT_FLAG_REFLECTION
+    GroundEffect_WaterReflection,       // GROUND_EFFECT_FLAG_WATER_REFLECTION
+    GroundEffect_IceReflection,         // GROUND_EFFECT_FLAG_ICE_REFLECTION
     GroundEffect_FlowingWater,          // GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER
     GroundEffect_SandTracks,            // GROUND_EFFECT_FLAG_SAND
     GroundEffect_DeepSandTracks,        // GROUND_EFFECT_FLAG_DEEP_SAND
@@ -8649,14 +8649,14 @@ static void DestroyObjectEventSprites(void)
     }
 }
 
-static int GetObjectEventSpriteId(u8 var) // this should return a u8, because all that call this shifts to u8, but it wont match because it doesnt shift u8 at the end.
+static int GetObjectEventSpriteId(u8 objectEventId) // this should return a u8, because all that call this shifts to u8, but it wont match because it doesnt shift u8 at the end.
 {
     int i;
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        if(sprite->inUse && sprite->callback == UpdateObjectEventSprite && (u8)sprite->data[0] == var)
+        if (sprite->inUse && sprite->callback == UpdateObjectEventSprite && (u8)sprite->data[0] == objectEventId)
             return i;
     }
     return MAX_SPRITES;
@@ -8788,9 +8788,9 @@ static void UpdateObjectEventSpritePosition(struct Sprite *sprite)
     }
 }
 
-bool32 IsObjectEventSpriteAnimating(u8 var)
+bool32 IsObjectEventSpriteAnimating(u8 objectEventId)
 {
-    u8 spriteId = GetObjectEventSpriteId(var);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
 
     if (spriteId == MAX_SPRITES)
         return FALSE;
