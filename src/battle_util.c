@@ -3155,7 +3155,7 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_THAW: // move thawing
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
             {
-                if (IsThawingMove(gBattlerAttacker, gBattleMoves[gCurrentMove].effect))
+                if (IsThawingMove(gBattlerAttacker, gCurrentMove))
                 {
                     gBattleMons[gBattlerAttacker].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
