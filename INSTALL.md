@@ -253,7 +253,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 4. After the tools are installed, devkitPro must now be made accessible from anywhere by the system. To do so, run the following commands:
 
     ```bash
-    export DEVKITPRO=$HOME/devkitpro
+    export DEVKITPRO=/opt/devkitpro
     echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
     export DEVKITARM=$DEVKITPRO/devkitARM
     echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
