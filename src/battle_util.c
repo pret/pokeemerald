@@ -2849,6 +2849,7 @@ static bool32 IsThawingMove(u8 battlerId, u16 move)
     case MOVE_SACRED_FIRE:
     case MOVE_SCALD:
     case MOVE_SCORCHING_SANDS:
+    case MOVE_SIZZLY_SLIDE:
     case MOVE_STEAM_ERUPTION:
         return TRUE;
     default:
