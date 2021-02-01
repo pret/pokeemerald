@@ -633,13 +633,13 @@ static void GetOpponentMostCommonMonType(void)
             }
             else
             {
-                gSpecialVar_Result = NUMBER_OF_MON_TYPES; // No result found
+                gSpecialVar_Result = NUMBER_OF_MON_TYPES; // Has no singular type
             }
         }
     }
     else
     {
-        gSpecialVar_Result = NUMBER_OF_MON_TYPES; // No result found
+        gSpecialVar_Result = NUMBER_OF_MON_TYPES; // Has no singular type
     }
 }
 
