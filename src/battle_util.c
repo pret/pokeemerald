@@ -5221,7 +5221,7 @@ static u8 TrySetMicleBerry(u32 battlerId, u32 itemId, bool32 end2)
 {
     if (HasEnoughHpToEatBerry(battlerId, 4, itemId))
     {
-        gBattleStruct->pinchBerry[battlerId].micle = TRUE;  // battler's next attack has increased accuracy
+        gProtectStructs[battlerId].micle = TRUE;  // battler's next attack has increased accuracy
         
         if (end2)
         {

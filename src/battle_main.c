@@ -4353,7 +4353,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
      || (!IsAbilityOnOpposingSide(battler1, ABILITY_UNNERVE)
       && holdEffectBattler1 == HOLD_EFFECT_CUSTAP_BERRY
       && HasEnoughHpToEatBerry(battler1, 4, gBattleMons[battler1].item)))
-        gBattleStruct->pinchBerry[battler1].custap = TRUE;
+        gProtectStructs[battler1].custap = TRUE;
 
     speedBattler2 = GetBattlerTotalSpeedStat(battler2);
     holdEffectBattler2 = GetBattlerHoldEffect(battler2, TRUE);
@@ -4361,7 +4361,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
      || (!IsAbilityOnOpposingSide(battler2, ABILITY_UNNERVE)
       && holdEffectBattler2 == HOLD_EFFECT_CUSTAP_BERRY
       && HasEnoughHpToEatBerry(battler2, 4, gBattleMons[battler2].item)))
-        gBattleStruct->pinchBerry[battler2].custap = TRUE;
+        gProtectStructs[battler2].custap = TRUE;
 
     if (!ignoreChosenMoves)
     {
@@ -4377,9 +4377,9 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         // LAGGING TAIL - always last
         // STALL - always last
 
-        if (gBattleStruct->pinchBerry[battler1].custap && !gBattleStruct->pinchBerry[battler2].custap)
+        if (gProtectStructs[battler1].custap && !gProtectStructs[battler2].custap)
             strikesFirst = 0;
-        else if (gBattleStruct->pinchBerry[battler2].custap && !gBattleStruct->pinchBerry[battler1].custap)
+        else if (gProtectStructs[battler2].custap && !gProtectStructs[battler1].custap)
             strikesFirst = 1;
         else if (holdEffectBattler1 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler2 != HOLD_EFFECT_LAGGING_TAIL)
             strikesFirst = 1;
@@ -4630,12 +4630,14 @@ static void CheckQuickClaw_CustapBerryActivation(void)
         {
             gActiveBattler = gBattlerAttacker = gBattleStruct->quickClawBattlerId;
             gBattleStruct->quickClawBattlerId++;
-            if (gBattleStruct->pinchBerry[gActiveBattler].custap
+            if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
+              && gChosenMoveByBattler[gActiveBattler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
+              && gProtectStructs[gActiveBattler].custap
               && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
               && !(gDisableStructs[gBattlerAttacker].truantCounter)
               && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                gBattleStruct->pinchBerry[gActiveBattler].custap = FALSE;
+                gProtectStructs[gActiveBattler].custap = FALSE;
                 gLastUsedItem = gBattleMons[gActiveBattler].item;
                 if (GetBattlerHoldEffect(gActiveBattler, FALSE) == HOLD_EFFECT_CUSTAP_BERRY)
                 {

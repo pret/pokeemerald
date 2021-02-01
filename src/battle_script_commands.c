@@ -1564,9 +1564,9 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move)
     else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef));
         calc = (calc * (100 + atkParam)) / 100;
     
-    if (gBattleStruct->pinchBerry[battlerAtk].micle)
+    if (gProtectStructs[battlerAtk].micle)
     {
-        gBattleStruct->pinchBerry[battlerAtk].micle = FALSE;
+        gProtectStructs[battlerAtk].micle = FALSE;
         if (atkAbility == ABILITY_RIPEN)
             calc = (calc * 140) / 100;  // ripen gives 40% acc boost
         else
