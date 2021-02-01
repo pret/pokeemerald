@@ -127,7 +127,7 @@ u8 * CopyEasyChatWord(u8 *dest, u16 word);
 bool32 sub_811F8D8(int word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
-bool8 ECWord_CheckIfOutsideOfValidRange(u16 word);
+bool8 IsBardWordInvalid(u16 word);
 u16 GetRandomEasyChatWordFromGroup(u16 group);
 u16 GetNewHipsterPhraseToTeach(void);
 u16 EasyChat_GetNumWordsInGroup(u8);
