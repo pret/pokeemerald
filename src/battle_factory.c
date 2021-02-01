@@ -623,7 +623,7 @@ static void GetOpponentMostCommonMonType(void)
     if (typesCount[usedType[0]] != 0)
     {
         // Compare the first and second most used type candidates. If the numbers are the same, the ratio is the same.
-        if ((typesCount[usedType[0]] > typesCount[usedType[1]])
+        if (typesCount[usedType[0]] > typesCount[usedType[1]])
             gSpecialVar_Result = usedType[0]; //Out of the two types, use the one that has the higher count
         else 
         {
@@ -641,11 +641,6 @@ static void GetOpponentMostCommonMonType(void)
     {
         gSpecialVar_Result = NUMBER_OF_MON_TYPES;
     }
-
-    if (typesCount[usedType[0]] != 0 && (typesCount[usedType[0]] > typesCount[usedType[1]] || usedType[0] == usedType[1]))
-        gSpecialVar_Result = usedType[0];
-    else
-        gSpecialVar_Result = NUMBER_OF_MON_TYPES;
 }
 
 static void GetOpponentBattleStyle(void)
