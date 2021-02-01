@@ -11234,15 +11234,20 @@ static void Cmd_setgastroacid(void)
 {
     switch (gBattleMons[gBattlerTarget].ability)
     {
-    case ABILITY_MULTITYPE:
-    case ABILITY_STANCE_CHANGE:
-    case ABILITY_SCHOOLING:
-    case ABILITY_COMATOSE:
-    case ABILITY_SHIELDS_DOWN:
-    case ABILITY_DISGUISE:
-    case ABILITY_RKS_SYSTEM:
+    case ABILITY_AS_ONE_ICE_RIDER:
+    case ABILITY_AS_ONE_SHADOW_RIDER:
     case ABILITY_BATTLE_BOND:
+    case ABILITY_COMATOSE:
+    case ABILITY_DISGUISE:
+    case ABILITY_GULP_MISSILE:
+    case ABILITY_ICE_FACE:
+    case ABILITY_MULTITYPE:
     case ABILITY_POWER_CONSTRUCT:
+    case ABILITY_RKS_SYSTEM:
+    case ABILITY_SCHOOLING:
+    case ABILITY_SHIELDS_DOWN:
+    case ABILITY_STANCE_CHANGE:
+    case ABILITY_ZEN_MODE:
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         break;
     default:
