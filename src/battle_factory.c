@@ -620,7 +620,28 @@ static void GetOpponentMostCommonMonType(void)
             usedType[1] = i;
     }
 
-    gSpecialVar_Result = gSpecialVar_Result; // Needed to match. Don't ask me why.
+    if (typesCount[usedType[0]] != 0)
+    {
+        // Compare the first and second most used type candidates. If the numbers are the same, the ratio is the same.
+        if ((typesCount[usedType[0]] > typesCount[usedType[1]])
+            gSpecialVar_Result = usedType[0]; //Out of the two types, use the one that has the higher count
+        else 
+        {
+            if (usedType[0] == usedType[1]) 
+            {
+                gSpecialVar_Result = usedType[0]; // Only has one type, so this is the most common type
+            }
+            else
+            {
+                gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+            }
+        }
+    }
+    else
+    {
+        gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+    }
+
     if (typesCount[usedType[0]] != 0 && (typesCount[usedType[0]] > typesCount[usedType[1]] || usedType[0] == usedType[1]))
         gSpecialVar_Result = usedType[0];
     else
