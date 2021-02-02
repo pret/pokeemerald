@@ -6438,7 +6438,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWAGGER)),
 
-    [SPECIES_MIME_JR]        = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
+    [SPECIES_MIME_JR]       = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_ICY_WIND)
                                             | TUTOR(MOVE_MIMIC)
@@ -10371,9 +10371,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_THUNDER_WAVE)),
 
-    [SPECIES_BURMY_SANDY_CLOAK]   = TUTOR_LEARNSET(TUTOR(MOVE_SNORE)),
+    [SPECIES_BURMY_SANDY_CLOAK]= TUTOR_LEARNSET(TUTOR(MOVE_SNORE)),
 
-    [SPECIES_BURMY_TRASH_CLOAK]   = TUTOR_LEARNSET(TUTOR(MOVE_SNORE)),
+    [SPECIES_BURMY_TRASH_CLOAK]= TUTOR_LEARNSET(TUTOR(MOVE_SNORE)),
 
     [SPECIES_WORMADAM_SANDY_CLOAK]= TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
                                             | TUTOR(MOVE_ENDURE)
@@ -10448,13 +10448,6 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWIFT)
                                             | TUTOR(MOVE_THUNDER_WAVE)),
 
-    [SPECIES_KYUREM_BLACK]  = TUTOR_LEARNSET(TUTOR(MOVE_ICY_WIND)
-                                            | TUTOR(MOVE_ROCK_SLIDE)
-                                            | TUTOR(MOVE_SLEEP_TALK)
-                                            | TUTOR(MOVE_SNORE)
-                                            | TUTOR(MOVE_SUBSTITUTE)
-                                            | TUTOR(MOVE_SWAGGER)),
-
     [SPECIES_KYUREM_WHITE]  = TUTOR_LEARNSET(TUTOR(MOVE_ICY_WIND)
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -10462,7 +10455,14 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWAGGER)),
 
-    [SPECIES_MEOWSTIC_FEMALE]    = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
+    [SPECIES_KYUREM_BLACK]  = TUTOR_LEARNSET(TUTOR(MOVE_ICY_WIND)
+                                            | TUTOR(MOVE_ROCK_SLIDE)
+                                            | TUTOR(MOVE_SLEEP_TALK)
+                                            | TUTOR(MOVE_SNORE)
+                                            | TUTOR(MOVE_SUBSTITUTE)
+                                            | TUTOR(MOVE_SWAGGER)),
+
+    [SPECIES_MEOWSTIC_FEMALE]= TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
                                             | TUTOR(MOVE_PSYCH_UP)
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
