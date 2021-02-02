@@ -622,7 +622,6 @@ static void GetOpponentMostCommonMonType(void)
 
     if (typesCount[usedType[0]] != 0)
     {
-        // Compare the first and second most used type candidates.
         if (typesCount[usedType[0]] > typesCount[usedType[1]])
             gSpecialVar_Result = usedType[0]; // Out of the two types, use the one that has the higher count
         else 
