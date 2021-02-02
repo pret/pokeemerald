@@ -1185,7 +1185,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(HOOPA_UNBOUND, gMonBackPic_HoopaUnbound),
 
     SPECIES_SPRITE(ORICORIO_POM_POM, gMonBackPic_OricorioPomPom),
-    SPECIES_SPRITE(ORICORIO_PA_U, gMonBackPic_OricorioPau),
+    SPECIES_SPRITE(ORICORIO_PAU, gMonBackPic_OricorioPau),
     SPECIES_SPRITE(ORICORIO_SENSU, gMonBackPic_OricorioSensu),
 
     SPECIES_SPRITE(ROCKRUFF_OWN_TEMPO, gMonBackPic_Rockruff),

@@ -23878,7 +23878,7 @@ const u32 gTMHMLearnsets[][2] =
                                             | TMHM(TM12_TAUNT)
                                             | TMHM(TM06_TOXIC)),
 
-    [SPECIES_ORICORIO_PA_U]    = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
+    [SPECIES_ORICORIO_PAU]    = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                             | TMHM(TM45_ATTRACT)
                                             | TMHM(TM04_CALM_MIND)
                                             | TMHM(TM32_DOUBLE_TEAM)

@@ -430,7 +430,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_HOOPA_UNBOUND] = sHoopaFormSpeciesIdTable,
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] = sOricorioFormSpeciesIdTable,
-    [SPECIES_ORICORIO_PA_U] = sOricorioFormSpeciesIdTable,
+    [SPECIES_ORICORIO_PAU] = sOricorioFormSpeciesIdTable,
     [SPECIES_ORICORIO_SENSU] = sOricorioFormSpeciesIdTable,
     // Rockruff
     [SPECIES_ROCKRUFF_OWN_TEMPO] = sRockruffFormSpeciesIdTable,

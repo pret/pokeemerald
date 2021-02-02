@@ -1185,7 +1185,7 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(HOOPA_UNBOUND, gMonFrontPic_HoopaUnbound),
 
     SPECIES_SPRITE(ORICORIO_POM_POM, gMonFrontPic_OricorioPomPom),
-    SPECIES_SPRITE(ORICORIO_PA_U, gMonFrontPic_OricorioPau),
+    SPECIES_SPRITE(ORICORIO_PAU, gMonFrontPic_OricorioPau),
     SPECIES_SPRITE(ORICORIO_SENSU, gMonFrontPic_OricorioSensu),
 
     SPECIES_SPRITE(ROCKRUFF_OWN_TEMPO, gMonFrontPic_Rockruff),

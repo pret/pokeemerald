@@ -1188,7 +1188,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_HOOPA_UNBOUND] = _("Hoopa"),
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] = _("Oricorio"),
-    [SPECIES_ORICORIO_PA_U] = _("Oricorio"),
+    [SPECIES_ORICORIO_PAU] = _("Oricorio"),
     [SPECIES_ORICORIO_SENSU] = _("Oricorio"),
     // Rockruff
     [SPECIES_ROCKRUFF_OWN_TEMPO] = _("Rockruff"),

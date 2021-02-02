@@ -1185,7 +1185,7 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(HOOPA_UNBOUND, gMonShinyPalette_HoopaUnbound),
 
     SPECIES_SHINY_PAL(ORICORIO_POM_POM, gMonShinyPalette_OricorioPomPom),
-    SPECIES_SHINY_PAL(ORICORIO_PA_U, gMonShinyPalette_OricorioPau),
+    SPECIES_SHINY_PAL(ORICORIO_PAU, gMonShinyPalette_OricorioPau),
     SPECIES_SHINY_PAL(ORICORIO_SENSU, gMonShinyPalette_OricorioSensu),
 
     SPECIES_SHINY_PAL(ROCKRUFF_OWN_TEMPO, gMonShinyPalette_Rockruff),

@@ -846,7 +846,7 @@ static const u16 sHoopaFormSpeciesIdTable[] = {
 static const u16 sOricorioFormSpeciesIdTable[] = {
     SPECIES_ORICORIO,
     SPECIES_ORICORIO_POM_POM,
-    SPECIES_ORICORIO_PA_U,
+    SPECIES_ORICORIO_PAU,
     SPECIES_ORICORIO_SENSU,
     FORM_SPECIES_END,
 };

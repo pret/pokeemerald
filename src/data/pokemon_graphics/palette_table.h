@@ -1185,7 +1185,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(HOOPA_UNBOUND, gMonPalette_HoopaUnbound),
 
     SPECIES_PAL(ORICORIO_POM_POM, gMonPalette_OricorioPomPom),
-    SPECIES_PAL(ORICORIO_PA_U, gMonPalette_OricorioPau),
+    SPECIES_PAL(ORICORIO_PAU, gMonPalette_OricorioPau),
     SPECIES_PAL(ORICORIO_SENSU, gMonPalette_OricorioSensu),
 
     SPECIES_PAL(ROCKRUFF_OWN_TEMPO, gMonPalette_Rockruff),
