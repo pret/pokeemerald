@@ -2,7 +2,7 @@
 
 static void *sHeapStart;
 static u32 sHeapSize;
-static u32 malloc_c_unused_0300000c; // needed to align dma3_manager.o(.bss)
+static u32 sFiller; // needed to align dma3_manager.o(.bss)
 
 #define MALLOC_SYSTEM_ID 0xA3A3
 
