@@ -5256,7 +5256,7 @@ static const union AnimCmd sAnim_BONSLY_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_MIMEJR_1[] =
+static const union AnimCmd sAnim_MIME_JR_1[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 10),
@@ -11526,9 +11526,9 @@ static const union AnimCmd *const sAnims_BONSLY[] ={
     sAnim_BONSLY_1,
 };
 
-static const union AnimCmd *const sAnims_MIMEJR[] ={
+static const union AnimCmd *const sAnims_MIME_JR[] ={
     sAnim_GeneralFrame0,
-    sAnim_MIMEJR_1,
+    sAnim_MIME_JR_1,
 };
 
 static const union AnimCmd *const sAnims_HAPPINY[] ={
@@ -14843,7 +14843,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(BRONZOR),
     ANIM_CMD(BRONZONG),
     ANIM_CMD(BONSLY),
-    ANIM_CMD(MIMEJR),
+    ANIM_CMD(MIME_JR),
     ANIM_CMD(HAPPINY),
     ANIM_CMD(CHATOT),
     ANIM_CMD(SPIRITOMB),

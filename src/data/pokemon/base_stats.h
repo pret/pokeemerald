@@ -12408,7 +12408,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_MIMEJR] =
+    [SPECIES_MIME_JR] =
     {
         .baseHP        = 20,
         .baseAttack    = 25,

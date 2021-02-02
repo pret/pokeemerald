@@ -2195,7 +2195,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = 0x55,
         .y_offset = 9,
     },
-    [SPECIES_MIMEJR] =
+    [SPECIES_MIME_JR] =
     {
         .size = 0x77,
         .y_offset = 9,

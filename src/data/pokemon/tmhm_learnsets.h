@@ -10829,7 +10829,7 @@ const u32 gTMHMLearnsets[][2] =
                                             | TMHM(TM46_THIEF)
                                             | TMHM(TM06_TOXIC)),
 
-    [SPECIES_MIMEJR]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+    [SPECIES_MIME_JR]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                             | TMHM(TM31_BRICK_BREAK)
                                             | TMHM(TM04_CALM_MIND)
                                             | TMHM(TM32_DOUBLE_TEAM)

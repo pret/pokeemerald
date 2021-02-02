@@ -5268,7 +5268,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_MIMEJR] =
+    [NATIONAL_DEX_MIME_JR] =
     {
         .categoryName = _("Mime"),
         .height = 6,

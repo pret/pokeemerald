@@ -6438,7 +6438,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWAGGER)),
 
-    [SPECIES_MIMEJR]        = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
+    [SPECIES_MIME_JR]        = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_ICY_WIND)
                                             | TUTOR(MOVE_MIMIC)
