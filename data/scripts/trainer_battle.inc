@@ -1,10 +1,9 @@
-EventScript_271354:: @ 8271354
-	cmdD8
-	cmdD9
-
-EventScript_ShowSecondTrainerIntro:: @ 8271356
-	special SetUpTrainerEncounterMusic
-	special EndTrainerApproach
+EventScript_StartTrainerApproach:: @ 8271354
+	selectapproachingtrainer
+	lockfortrainer
+EventScript_TrainerApproach:: @ 8271356
+	special PlayTrainerEncounterMusic
+	special DoTrainerApproach
 	waitstate
 	goto EventScript_ShowTrainerIntroMsg
 
@@ -14,11 +13,12 @@ EventScript_TryDoNormalTrainerBattle:: @ 8271362
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
 	specialvar VAR_RESULT, GetTrainerFlag
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_ne EventScript_NoNormalTrainerBattle
-	special SetUpTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special PlayTrainerEncounterMusic
+	special SetTrainerFacingDirection
 	goto EventScript_ShowTrainerIntroMsg
+
 EventScript_NoNormalTrainerBattle:: @ 8271389
 	gotopostbattlescript
 
@@ -27,27 +27,29 @@ EventScript_TryDoDoubleTrainerBattle:: @ 827138A
 	faceplayer
 	call EventScript_RevealTrainer
 	specialvar VAR_RESULT, GetTrainerFlag
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_ne EventScript_NoDoubleTrainerBattle
 	special HasEnoughMonsForDoubleBattle
 	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne EventScript_NotEnoughMonsForDoubleBattle
-	special SetUpTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special PlayTrainerEncounterMusic
+	special SetTrainerFacingDirection
 	goto EventScript_ShowTrainerIntroMsg
+
 EventScript_NotEnoughMonsForDoubleBattle:: @ 82713BA
 	special ShowTrainerCantBattleSpeech
 	waitmessage
 	waitbuttonpress
 	release
 	end
+
 EventScript_NoDoubleTrainerBattle:: @ 82713C1
 	gotopostbattlescript
 
 EventScript_DoNoIntroTrainerBattle:: @ 82713C2
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
-	special SetUpTrainerEncounterMusic
+	special PlayTrainerEncounterMusic
 	trainerbattlebegin
 	gotopostbattlescript
 
@@ -56,8 +58,8 @@ EventScript_TryDoRematchBattle:: @ 82713D1
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_NoRematchTrainerBattle
-	special SetUpTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special PlayTrainerEncounterMusic
+	special SetTrainerFacingDirection
 	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
@@ -65,6 +67,7 @@ EventScript_TryDoRematchBattle:: @ 82713D1
 	waitstate
 	releaseall
 	end
+
 EventScript_NoRematchTrainerBattle:: @ 82713F7
 	gotopostbattlescript
 
@@ -75,8 +78,8 @@ EventScript_TryDoDoubleRematchBattle:: @ 82713F8
 	special HasEnoughMonsForDoubleBattle
 	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne EventScript_NotEnoughMonsForDoubleRematchBattle
-	special SetUpTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special PlayTrainerEncounterMusic
+	special SetTrainerFacingDirection
 	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
@@ -84,8 +87,10 @@ EventScript_TryDoDoubleRematchBattle:: @ 82713F8
 	waitstate
 	releaseall
 	end
+
 EventScript_NoDoubleRematchTrainerBattle:: @ 8271427
 	gotopostbattlescript
+
 EventScript_NotEnoughMonsForDoubleRematchBattle:: @ 8271428
 	special ShowTrainerCantBattleSpeech
 	waitmessage
@@ -108,7 +113,7 @@ EventScript_ShowTrainerIntroMsg:: @ 827143C
 	waitbuttonpress
 	special TryPrepareSecondApproachingTrainer
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_ShowSecondTrainerIntro
+	goto_if_eq EventScript_TrainerApproach
 	goto EventScript_DoTrainerBattle
 
 EventScript_DoTrainerBattle:: @ 8271454

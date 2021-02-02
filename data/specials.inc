@@ -66,8 +66,8 @@ gSpecials:: @ 81DBA64
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
 	def_special GetTrainerFlag
-	def_special EndTrainerApproach
-	def_special SetUpTrainerEncounterMusic
+	def_special DoTrainerApproach
+	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
 	def_special IsTrainerReadyForRematch
 	def_special BattleSetup_StartRematchBattle
@@ -324,7 +324,7 @@ gSpecials:: @ 81DBA64
 	def_special StartGroudonKyogreBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
-	def_special SetUpTrainerMovement
+	def_special SetTrainerFacingDirection
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
 	def_special StartDroughtWeatherBlend

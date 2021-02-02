@@ -1971,7 +1971,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         {
             ScriptContext2_Enable();
             FreezeObjectEvents();
-            sub_808B864();
+            PlayerFreeze();
             sub_808BCF4();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);

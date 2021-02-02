@@ -923,7 +923,7 @@ static void Script_PrintApprenticeMessage(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
-    sub_808B864();
+    PlayerFreeze();
     sub_808BCF4();
     DrawDialogueFrame(0, 1);
     PrintApprenticeMessage();
