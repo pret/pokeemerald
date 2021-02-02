@@ -62,7 +62,7 @@ static const struct OamData sClockOamData =
     .affineParam = 0
 };
 
-static const struct BgTemplate gUnknown_085EFD88[3] =
+static const struct BgTemplate sBgTemplates[3] =
 {
     {
         .bg = 0,
@@ -212,7 +212,7 @@ static void CB2_SaveFailedScreen(void)
         LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(15)));
         LZ77UnCompVram(sSaveFailedClockGfx, (void *)(VRAM + 0x10020));
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_085EFD88, 3);
+        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
         CpuFill32(0, &gDecompressionBuffer[0x2000], 0x800);
         LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
