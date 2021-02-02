@@ -3714,16 +3714,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_ASONE;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
-                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                BattleScriptPushCursorAndCallback(BattleScript_ActivateAsOne);
                 effect++;
             }
             break;
         case ABILITY_CURIOUS_MEDICINE:
-            if (!gSpecialStatuses[battler].switchInAbilityDone && IsDoubleBattle() && IsBattlerAlive(BATTLE_PARTNER(battler)))
+            if (!gSpecialStatuses[battler].switchInAbilityDone && IsDoubleBattle()
+              && IsBattlerAlive(BATTLE_PARTNER(battler)) && TryResetBattlerStatChanges(BATTLE_PARTNER(battler)))
             {
                 u32 i;
                 gEffectBattler = BATTLE_PARTNER(battler);
-                ResetBattlerStatChanges(gEffectBattler);
                 gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_CURIOUS_MEDICINE;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
@@ -7998,6 +7998,9 @@ static bool32 TryRemoveScreens(u8 battler)
     if (gSideStatuses[battlerSide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL))
     {
         gSideStatuses[battlerSide] &= ~(SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL);
+        gSideTimers[battlerSide].reflectTimer = 0;
+        gSideTimers[battlerSide].lightscreenTimer = 0;
+        gSideTimers[battlerSide].auroraVeilTimer = 0;
         removed = TRUE;
     }
     
@@ -8005,6 +8008,9 @@ static bool32 TryRemoveScreens(u8 battler)
     if (gSideStatuses[enemySide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL))
     {
         gSideStatuses[enemySide] &= ~(SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL);
+        gSideTimers[enemySide].reflectTimer = 0;
+        gSideTimers[enemySide].lightscreenTimer = 0;
+        gSideTimers[enemySide].auroraVeilTimer = 0;
         removed = TRUE;
     }
      

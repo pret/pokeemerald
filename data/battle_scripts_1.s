@@ -6628,6 +6628,7 @@ BattleScript_AbilityPopUp:
 	showabilitypopup BS_ABILITY_BATTLER
 	recordability BS_ABILITY_BATTLER
 	pause 40
+	sethword sABILITY_OVERWRITE, 0
 	return
 
 BattleScript_SpeedBoostActivates::
@@ -7219,6 +7220,16 @@ BattleScript_WeakArmorSpeedAnim:
 BattleScript_WeakArmorActivatesEnd:
 	return
 
+BattleScript_RaiseStatOnFaintingTarget::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_LASTABILITYRAISEDSTAT
+	waitmessage 0x40
+	return	
+
 BattleScript_AttackerAbilityStatRaise::
 	copybyte gBattlerAbility, gBattlerAttacker
 	call BattleScript_AbilityPopUp
@@ -7244,6 +7255,18 @@ BattleScript_AttackerAbilityStatRaiseEnd3::
 	end3
 
 BattleScript_SwitchInAbilityMsg::
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage 0x40
+	end3
+
+BattleScript_ActivateAsOne::
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage 0x40
+	@ show unnerve
+	sethword sABILITY_OVERWRITE, ABILITY_UNNERVE
+	setbyte cMULTISTRING_CHOOSER, MULTI_SWITCHIN_UNNERVE
 	call BattleScript_AbilityPopUp
 	printfromtable gSwitchInAbilityStringIds
 	waitmessage 0x40

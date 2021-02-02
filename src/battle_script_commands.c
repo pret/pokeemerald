@@ -7534,7 +7534,10 @@ static void Cmd_various(void)
             SET_STATCHANGER(STAT_ATK, 1, FALSE);
             PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
             BattleScriptPush(gBattlescriptCurrInstr + 3);
-            gBattlescriptCurrInstr = BattleScript_AttackerAbilityStatRaise;
+            gLastUsedAbility = GetBattlerAbility(gActiveBattler);
+            if (GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_ICE_RIDER)
+                gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_CHILLING_NEIGH;
+            gBattlescriptCurrInstr = BattleScript_RaiseStatOnFaintingTarget;
             return;
         }
         break;
@@ -7549,7 +7552,10 @@ static void Cmd_various(void)
             SET_STATCHANGER(STAT_SPATK, 1, FALSE);
             PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPATK);
             BattleScriptPush(gBattlescriptCurrInstr + 3);
-            gBattlescriptCurrInstr = BattleScript_AttackerAbilityStatRaise;
+            gLastUsedAbility = GetBattlerAbility(gActiveBattler);
+            if (GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_SHADOW_RIDER)
+                gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_GRIM_NEIGH;
+            gBattlescriptCurrInstr = BattleScript_RaiseStatOnFaintingTarget;
             return;
         }
         break;
@@ -9104,14 +9110,22 @@ static void Cmd_statbuffchange(void)
         gBattlescriptCurrInstr = jumpPtr;
 }
 
-void ResetBattlerStatChanges(u8 battler)
+bool32 TryResetBattlerStatChanges(u8 battler)
 {
     u32 j;
+    bool32 ret = FALSE;
     
     gDisableStructs[battler].stockpileDef = 0;
     gDisableStructs[battler].stockpileSpDef = 0;
     for (j = 0; j < NUM_BATTLE_STATS; j++)
+    {
+        if (gBattleMons[battler].statStages[j] != DEFAULT_STAT_STAGE)
+            ret = TRUE; // returns TRUE if any stat was reset
+        
         gBattleMons[battler].statStages[j] = DEFAULT_STAT_STAGE;
+    }
+    
+    return ret;
 }
 
 static void Cmd_normalisebuffs(void) // haze
@@ -9119,7 +9133,7 @@ static void Cmd_normalisebuffs(void) // haze
     s32 i, j;
 
     for (i = 0; i < gBattlersCount; i++)
-        ResetBattlerStatChanges(i);
+        TryResetBattlerStatChanges(i);
 
     gBattlescriptCurrInstr++;
 }
