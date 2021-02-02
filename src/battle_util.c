@@ -514,7 +514,7 @@ void HandleAction_Run(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
     {
         gCurrentTurnActionNumber = gBattlersCount;
 
@@ -778,14 +778,20 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
 
 static const u8 sAbilitiesNotTraced[ABILITIES_COUNT] =
 {
+    [ABILITY_AS_ONE_ICE_RIDER] = 1,
+    [ABILITY_AS_ONE_SHADOW_RIDER] = 1,
     [ABILITY_BATTLE_BOND] = 1,
     [ABILITY_COMATOSE] = 1,
     [ABILITY_DISGUISE] = 1,
     [ABILITY_FLOWER_GIFT] = 1,
     [ABILITY_FORECAST] = 1,
+    [ABILITY_GULP_MISSILE] = 1,
+    [ABILITY_HUNGER_SWITCH] = 1,
+    [ABILITY_ICE_FACE] = 1,
     [ABILITY_ILLUSION] = 1,
     [ABILITY_IMPOSTER] = 1,
     [ABILITY_MULTITYPE] = 1,
+    [ABILITY_NEUTRALIZING_GAS] = 1,
     [ABILITY_NONE] = 1,
     [ABILITY_POWER_CONSTRUCT] = 1,
     [ABILITY_POWER_OF_ALCHEMY] = 1,
@@ -2347,9 +2353,9 @@ u8 DoBattlerEndTurnEffects(void)
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[gActiveBattler]);
                     gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                     if (GetBattlerHoldEffect(gBattleStruct->wrappedBy[gActiveBattler], TRUE) == HOLD_EFFECT_BINDING_BAND)
-                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (B_BINDING_DAMAGE >= GEN_6) ? 6 : 8;
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / ((B_BINDING_DAMAGE >= GEN_6) ? 6 : 8);
                     else
-                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (B_BINDING_DAMAGE >= GEN_6) ? 8 : 16;
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / ((B_BINDING_DAMAGE >= GEN_6) ? 8 : 16);
 
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
@@ -2834,6 +2840,29 @@ void TryClearRageAndFuryCutter(void)
     }
 }
 
+static bool32 IsThawingMove(u8 battlerId, u16 move)
+{
+    switch (move)
+    {
+    case MOVE_BURN_UP:
+        if (!IS_BATTLER_OF_TYPE(battlerId, TYPE_FIRE))
+            return FALSE;
+        //fallthrough
+    case MOVE_FLAME_WHEEL:
+    case MOVE_FLARE_BLITZ:
+    case MOVE_FUSION_FLARE:
+    case MOVE_PYRO_BALL:
+    case MOVE_SACRED_FIRE:
+    case MOVE_SCALD:
+    case MOVE_SCORCHING_SANDS:
+    case MOVE_SIZZLY_SLIDE:
+    case MOVE_STEAM_ERUPTION:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 enum
 {
     CANCELLER_FLAGS,
@@ -3134,8 +3163,7 @@ u8 AtkCanceller_UnableToUseMove(void)
         case CANCELLER_THAW: // move thawing
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
             {
-                if (gBattleMoves[gCurrentMove].effect == EFFECT_THAW_HIT
-                    || (gBattleMoves[gCurrentMove].effect == EFFECT_BURN_UP && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
+                if (IsThawingMove(gBattlerAttacker, gCurrentMove))
                 {
                     gBattleMons[gBattlerAttacker].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
@@ -3317,7 +3345,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_x800000)
+        if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
         {
             if (GetBattlerSide(battler) == B_SIDE_PLAYER)
             {
@@ -6167,7 +6195,7 @@ u8 IsMonDisobedient(void)
     s32 calc;
     u8 obedienceLevel = 0;
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return 0;
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
         return 0;
@@ -6760,7 +6788,8 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
            MulModifier(&modifier, UQ_4_12(1.3));
         break;
     case ABILITY_SAND_FORCE:
-        if (moveType == TYPE_STEEL || moveType == TYPE_ROCK || moveType == TYPE_GROUND)
+        if ((moveType == TYPE_STEEL || moveType == TYPE_ROCK || moveType == TYPE_GROUND)
+            && WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SANDSTORM_ANY)
            MulModifier(&modifier, UQ_4_12(1.3));
         break;
     case ABILITY_RIVALRY:
@@ -7965,7 +7994,7 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battlerId)
 {
     if (B_BADGE_BOOST != GEN_3)
         return FALSE;
-    else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
+    else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
         return FALSE;
     else if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
         return FALSE;

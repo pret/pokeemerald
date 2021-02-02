@@ -2085,7 +2085,6 @@ static void sub_80EDE98(TVShow *show)
     u16 k;
     u8 n;
     u8 deco;
-    u8 x;
 
     for (i = 0; i < DECOR_MAX_SECRET_BASE; i ++)
     {
@@ -2307,7 +2306,7 @@ void TryPutLotteryWinnerReportOnAir(void)
     }
 }
 
-void sub_80EE35C(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u16 betterMove)
+void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u16 betterMove)
 {
     TVShow *show;
     u8 i;
@@ -4095,7 +4094,6 @@ static void sub_80F0E58(PokeNews *dest[16], PokeNews *src[16])
 static bool8 sub_80F0E84(PokeNews *dest, PokeNews *src, s8 slot)
 {
     u8 i;
-    u8 kind;
 
     if (src->kind == POKENEWS_NONE)
     {
@@ -6602,7 +6600,6 @@ static void DoTVShowSpotTheCuties(void)
 {
     TVShow *show;
     u8 state;
-    u32 playerId;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6707,7 +6704,6 @@ static void DoTVShowPokemonNewsBattleFrontier(void)
 {
     TVShow *show;
     u8 state;
-    u32 playerId;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;
@@ -6856,7 +6852,6 @@ static void DoTVShowWhatsNo1InHoennToday(void)
 {
     TVShow *show;
     u8 state;
-    u32 playerId;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gSpecialVar_Result = FALSE;

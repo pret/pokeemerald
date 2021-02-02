@@ -23,7 +23,7 @@ void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
     {
         *firstId = 0, *lastId = 6;
     }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_x800000))
+    else if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((battlerId & BIT_FLANK) == B_FLANK_LEFT)
             *firstId = 0, *lastId = 3;

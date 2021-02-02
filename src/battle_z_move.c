@@ -411,7 +411,6 @@ bool32 MoveSelectionDisplayZMove(u16 zmove)
             BattlePutTextOnWindow(gDisplayedStringBattle, i + 3); 
         }
 
-        //if (zmove == MOVE_Z_STATUS)
         if (IS_MOVE_STATUS(move))
         {
             u8 zEffect = gBattleMoves[move].zMoveEffect;
@@ -701,9 +700,9 @@ bool32 ShouldAIUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
     {
         #ifdef POKEMON_EXPANSION
         if (defAbility == ABILITY_DISGUISE && defSpecies == SPECIES_MIMIKYU)
-            return 0; //Don't waste a Z-Move busting Mimikyu's disguise
+            return 0; // Don't waste a Z-Move busting Mimikyu's disguise
         if (defAbility == ABILITY_ICEFACE && defSpecies == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
-            return 0; //Don't waste a Z-Move busting Eiscue's Ice Face
+            return 0; // Don't waste a Z-Move busting Eiscue's Ice Face
         #endif
         
         if (IS_MOVE_STATUS(chosenMove) && !IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
@@ -719,4 +718,3 @@ bool32 ShouldAIUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
     
     return FALSE;
 }
-

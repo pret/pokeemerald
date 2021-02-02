@@ -18,7 +18,7 @@
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
 
-//// function declarations
+// function declarations
 static void SpriteCB_SpriteToCentreOfSide(struct Sprite* sprite);
 static void SpriteCB_SpriteOnMonForDuration(struct Sprite *sprite);
 static void SpriteCB_ToxicThreadWrap(struct Sprite *sprite);
@@ -72,8 +72,8 @@ static void AnimSoulStealingStar(struct Sprite *sprite);
 static void AnimSoulStealingStar_Step1(struct Sprite *sprite);
 static void AnimSoulStealingStar_Step2(struct Sprite *sprite);
 
-//////// const data
-//// general
+// const data
+// general
 static const union AffineAnimCmd sSquishTargetAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 64, 0, 16), //Flatten
@@ -82,7 +82,7 @@ static const union AffineAnimCmd sSquishTargetAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-//// GEN 4
+// GEN 4
 // shadow sneak
 const struct SpriteTemplate gShadowSneakImpactSpriteTemplate = 
 {
@@ -108,7 +108,7 @@ const struct SpriteTemplate gPowerTrickSpriteTemplate =
 };
 
 
-//// GEN 5
+// GEN 5
 //wide guard
 const struct SpriteTemplate gWideGuardBlueConversionTemplate =
 {
@@ -378,7 +378,7 @@ const struct SpriteTemplate gQuickGuardArmImpactTemplate =
 //sky drop
 static const union AffineAnimCmd sSkyDropFlyBallAffineAnimCmd_0[] = 
 {
-    AFFINEANIMCMD_FRAME(0xa0, 0x100, 0x50, 0x0),    //.hword 0xa0, 0x100, 0x50, 0x0, 
+    AFFINEANIMCMD_FRAME(0xa0, 0x100, 0x50, 0x0), 
     AFFINEANIMCMD_END
 };
 static const union AffineAnimCmd *const sSkyDropFlyBallAffineAnimCmds[] = 
@@ -1164,13 +1164,13 @@ const struct SpriteTemplate gFusionFlareRedRingTemplate =
 //fusion bolt
 static const union AffineAnimCmd sSpriteAffineAnim_DrakeStrikePlayer[] =
 {
-    AFFINEANIMCMD_FRAME(0, 0, 0xb9, 1),        //.hword 0,0,0x01b9
-    AFFINEANIMCMD_END,      //.hword 0,0x7fff,0,0,0
+    AFFINEANIMCMD_FRAME(0, 0, 0xb9, 1),
+    AFFINEANIMCMD_END,
 };
 static const union AffineAnimCmd sSpriteAffineAnim_DrakeStrikeOpponent[] = 
 {
-    AFFINEANIMCMD_FRAME(0, 0, 0x50, 1),    //.hword 0,0,0x0150,0,
-    AFFINEANIMCMD_END,      //.hword 0x7fff,0,0,0
+    AFFINEANIMCMD_FRAME(0, 0, 0x50, 1),
+    AFFINEANIMCMD_END,
 };
 static const union AffineAnimCmd* const sAffineAnimCmdTable_DrakeStriking[] =  //devestating drake, fusion bolt
 {
@@ -1188,7 +1188,7 @@ const struct SpriteTemplate gFusionBoltBallTemplate =
     .callback = AnimFlyBallAttack
 };
 
-//// GEN 6
+// GEN 6
 //mat block
 const struct SpriteTemplate gMatBlockGreenConversionTemplate =
 {
@@ -1235,10 +1235,6 @@ const struct SpriteTemplate gForestsCurseIngrainTemplate =
 };
 
 //petal blizzard
-/*
-PB_TEMPLATE_1: .hword 0x0,0xa,0xfffe,0x0
-                        00 00 00 0A FE FF 00 00
-*/
 static const union AnimCmd sAnimCmd_PetalBlizzard1_0[] = 
 {
     ANIMCMD_FRAME(0, 10),
@@ -2075,7 +2071,7 @@ const struct SpriteTemplate gHyperspaceFuryImpactTemplate =
     .callback = AnimHitSplatRandom
 };
 
-//// GEN 7
+// GEN 7
 //first impression
 const struct SpriteTemplate gFirstImpressionPoundTemplate =
 {
@@ -3539,7 +3535,7 @@ const struct SpriteTemplate gPhotonGeyserZapBallTemplate =
 };
 
 
-//// GEN 8
+// GEN 8
 //snipe shot
 static const union AffineAnimCmd sSpriteAffineAnim_LargeSpikePointedLeft[] =
 {
@@ -4078,7 +4074,7 @@ const struct SpriteTemplate gSteelBeamSpikeShardTemplate =
     .callback = AnimDirtScatter
 };
 
-//// Z MOVES
+// Z MOVES
 //activate
 const struct SpriteTemplate gZMoveSymbolSpriteTemplate = 
 {
@@ -5054,13 +5050,11 @@ const struct SpriteTemplate gTargetTwinkleSpriteTemplate =
 
 // twinkle tackle
 static const union AffineAnimCmd sTwinkleTackleStarPlayerAffineAnims[] = {
-    //.hword 0x8,0x8,0x0,0x0, 0x10,0x10,0x1e00,0x0, 0x7fff,0x1,0x0,0x0
     AFFINEANIMCMD_FRAME(8, 8, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0x0, 0x1e),
     AFFINEANIMCMD_END_ALT(1),
 };
 static const union AffineAnimCmd sTwinkleTackleStarOpponentAffineAnims[] = {
-    //.hword 0x8,0x8,0x0,0x0, 0x20,0x20,0x0f00,0x0, 0x7fff,0x1,0x0,0x0
     AFFINEANIMCMD_FRAME(8, 8, 0, 0),
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 0xf),
     AFFINEANIMCMD_END_ALT(1),
@@ -6150,7 +6144,6 @@ const struct SpriteTemplate gGuardianOfAlolaDirtGeyserSpriteTemplate =
 
 // seering sunraze smash
 static const union AffineAnimCmd sSearingSunrazeSmashWormholeGrowingAffineAnims[] = {
-    //.hword 0x100,0x100,0x0,0x0, 0x0,0x0,0x88f6,0x0, 0x7fff,0x0,0x0,0x0
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 0xf8, 0x88),
     AFFINEANIMCMD_END
@@ -6351,7 +6344,6 @@ const struct SpriteTemplate gMoonrazeMaelstromShockwaveSpriteTemplate =
     .callback = AnimGrowingShockWaveOrbOnTarget
 };
 static const union AffineAnimCmd sMoonrazeMaelstromWormholeAffineAnims[] = {
-    //.hword 0x100,0x100,0x0,0x0, 0x0,0x0,0x88f6,0x0, 0x7fff,0x0,0x0,0x0
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 0xf6, 0x88),
     AFFINEANIMCMD_END
@@ -6393,11 +6385,11 @@ const struct SpriteTemplate gLightThatBurnsTheSkyBlastBurnSpriteTemplate =
 };
 static const struct OamData sGeyserOam =
 {
-	.affineMode = ST_OAM_AFFINE_OFF,
-	.objMode = ST_OAM_OBJ_NORMAL,
-	.shape = SPRITE_SHAPE(32x32),
-	.size = SPRITE_SIZE(32x32),
-	.priority = 1, //Above sprites
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .priority = 1, //Above sprites
 };
 const struct SpriteTemplate gLightThatBurnsTheSkyExplosionSpriteTemplate = 
 {
@@ -6492,54 +6484,54 @@ const struct SpriteTemplate gSoulStealZStarSpriteTemplate =
     .callback = AnimCrossImpact
 };
 
-//// functions
+// functions
 //general
 void AnimTask_IsTargetPartner(u8 taskId)
 {
-	if (gBattleAnimTarget == (gBattleAnimAttacker ^ BIT_FLANK))
-		gBattleAnimArgs[0] = 1;
-	else
-		gBattleAnimArgs[0] = 0;
+    if (gBattleAnimTarget == (gBattleAnimAttacker ^ BIT_FLANK))
+        gBattleAnimArgs[0] = 1;
+    else
+        gBattleAnimArgs[0] = 0;
 
-	DestroyAnimVisualTask(taskId);
+    DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_AllBanksInvisible(u8 taskId)
 {
     u32 i;
-	for (i = 0; i < gBattlersCount; i++)
-	{
-		u8 spriteId = gBattlerSpriteIds[i];
-		if (spriteId != 0xFF)
-			gSprites[spriteId].invisible = TRUE;
-	}
-	DestroyAnimVisualTask(taskId);
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        u8 spriteId = gBattlerSpriteIds[i];
+        if (spriteId != 0xFF)
+            gSprites[spriteId].invisible = TRUE;
+    }
+    DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_AllBanksVisible(u8 taskId)
 {
     u32 i;
-	for (i = 0; i < gBattlersCount; i++)
-	{
-		u8 spriteId = gBattlerSpriteIds[i];
-		if (spriteId != 0xFF)
-			gSprites[spriteId].invisible = FALSE;
-	}
-	DestroyAnimVisualTask(taskId);
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        u8 spriteId = gBattlerSpriteIds[i];
+        if (spriteId != 0xFF)
+            gSprites[spriteId].invisible = FALSE;
+    }
+    DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_AllBanksInvisibleExceptAttackerAndTarget(u8 taskId)
 {
     u32 i;
-	for (i = 0; i < gBattlersCount; ++i)
-	{
-		u8 spriteId = gBattlerSpriteIds[i];
-		if (spriteId == GetAnimBattlerSpriteId(ANIM_ATTACKER) || spriteId == GetAnimBattlerSpriteId(ANIM_TARGET))
-			continue;
-		if (spriteId != 0xFF || !IsBattlerSpriteVisible(i)) //Pokemon that are already hidden
-			gSprites[spriteId].invisible = TRUE;
-	}
-	DestroyAnimVisualTask(taskId);
+    for (i = 0; i < gBattlersCount; ++i)
+    {
+        u8 spriteId = gBattlerSpriteIds[i];
+        if (spriteId == GetAnimBattlerSpriteId(ANIM_ATTACKER) || spriteId == GetAnimBattlerSpriteId(ANIM_TARGET))
+            continue;
+        if (spriteId != 0xFF || !IsBattlerSpriteVisible(i)) //Pokemon that are already hidden
+            gSprites[spriteId].invisible = TRUE;
+    }
+    DestroyAnimVisualTask(taskId);
 }
 
 static u8 LoadBattleAnimTarget(u8 arg)
@@ -6627,15 +6619,15 @@ static void InitSpritePosToAnimAttackersCentre(struct Sprite *sprite, bool8 resp
     sprite->pos1.y += gBattleAnimArgs[1];
 }
 
-////sprite callbacks
+//sprite callbacks
 static void AnimSoulStealingStar(struct Sprite *sprite)
 {
-	sprite->pos1.x += gBattleAnimArgs[0];
-	sprite->pos1.y += gBattleAnimArgs[1];
-	sprite->data[0] = gBattleAnimArgs[3];
-	sprite->data[1] = gBattleAnimArgs[4];
-	sprite->data[2] = gBattleAnimArgs[5];
-	sprite->callback = AnimSoulStealingStar_Step1;
+    sprite->pos1.x += gBattleAnimArgs[0];
+    sprite->pos1.y += gBattleAnimArgs[1];
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = gBattleAnimArgs[4];
+    sprite->data[2] = gBattleAnimArgs[5];
+    sprite->callback = AnimSoulStealingStar_Step1;
 }
 
 static void AnimSoulStealingStar_Step1(struct Sprite *sprite)
@@ -6661,11 +6653,11 @@ static void AnimSoulStealingStar_Step2(struct Sprite *sprite)
 //Creates The Extreme Evoboost Circles
 static void AnimExtremeEvoboostCircle(struct Sprite *sprite)
 {
-	InitSpritePosToAnimAttacker(sprite, FALSE);
-	sprite->pos1.y += 20;
-	sprite->data[1] = 191;
-	sprite->callback = AnimExtremeEvoboostCircle_Step;
-	sprite->callback(sprite);
+    InitSpritePosToAnimAttacker(sprite, FALSE);
+    sprite->pos1.y += 20;
+    sprite->data[1] = 191;
+    sprite->callback = AnimExtremeEvoboostCircle_Step;
+    sprite->callback(sprite);
 }
 
 static void AnimExtremeEvoboostCircle_Step(struct Sprite *sprite)
@@ -7565,7 +7557,7 @@ static void SpriteCB_GeyserTarget(struct Sprite* sprite)
     sprite->callback = AnimMudSportDirtRising;
 }
 
-//// Anim Tasks Functions
+// Anim Tasks Functions
 #define tSpriteId data[0]
 #define tTimer data[1]
 #define tInitialXPos data[2]
@@ -7574,95 +7566,95 @@ static void SpriteCB_GeyserTarget(struct Sprite* sprite)
 #define tAnimLengthTime data[5]
 static const s8 sHomerunEnemyHorizontalMovement[] =
 {
-	3, 3, 3, 3,
-	3, 3, 2, 2,
-	1, 1, 1, 1,
-	1, 1, 1, 1,
-	0, 1, 0, 1,
-	0, 1, 0, 0,
-	1, 0, 0, 1,
-	0, 0, 0, 1,
-	0, 0, 0, 1,
+    3, 3, 3, 3,
+    3, 3, 2, 2,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    0, 1, 0, 1,
+    0, 1, 0, 0,
+    1, 0, 0, 1,
+    0, 0, 0, 1,
+    0, 0, 0, 1,
 };
 
 static const s8 sHomerunEnemyVerticalMovement[] =
 {
-	-4, -4, -4, -4,
-	-4, -3, -3, -2,
-	-2, -1, -1, -1,
-	-1, -1, -1, -1,
-	 0, -1,  0, -1,
-	 0, -1,  0,  0,
-	 0,  0, -1,  0,
-	 0, -1,  0,  0,
-	-1,  0,  0,  0,
+    -4, -4, -4, -4,
+    -4, -3, -3, -2,
+    -2, -1, -1, -1,
+    -1, -1, -1, -1,
+     0, -1,  0, -1,
+     0, -1,  0,  0,
+     0,  0, -1,  0,
+     0, -1,  0,  0,
+    -1,  0,  0,  0,
 };
 
 void AnimTask_TwinkleTackleLaunchStep(u8 taskId)
 {
-	u16 rotation;
-	s16 xScale, yScale;
-	struct Task* task = &gTasks[taskId];
-	struct Sprite* sprite = &gSprites[task->tSpriteId];
+    u16 rotation;
+    s16 xScale, yScale;
+    struct Task* task = &gTasks[taskId];
+    struct Sprite* sprite = &gSprites[task->tSpriteId];
 
-	if (task->tTimer > task->tAnimLengthTime)
-	{
-		if (task->tTimer > task->tAnimLengthTime + 5) //Wait an extra few frames so the glint can be placed on the target
-		{
-			sprite->pos1.x = task->tInitialXPos;
-			sprite->pos1.y = task->tInitialYPos;
-			ResetSpriteRotScale(task->tSpriteId);
-			DestroyAnimVisualTask(taskId);
-		}
-		else
-			++task->tTimer;
-		return;
-	}
-	else if ((u16) task->tTimer < NELEMS(sHomerunEnemyHorizontalMovement))
-	{
-		s8 movement = sHomerunEnemyHorizontalMovement[task->tTimer];
-		if (task->tSide == B_SIDE_PLAYER)
-			movement *= -1;
-		sprite->pos1.x += movement;
+    if (task->tTimer > task->tAnimLengthTime)
+    {
+        if (task->tTimer > task->tAnimLengthTime + 5) //Wait an extra few frames so the glint can be placed on the target
+        {
+            sprite->pos1.x = task->tInitialXPos;
+            sprite->pos1.y = task->tInitialYPos;
+            ResetSpriteRotScale(task->tSpriteId);
+            DestroyAnimVisualTask(taskId);
+        }
+        else
+            ++task->tTimer;
+        return;
+    }
+    else if ((u16) task->tTimer < NELEMS(sHomerunEnemyHorizontalMovement))
+    {
+        s8 movement = sHomerunEnemyHorizontalMovement[task->tTimer];
+        if (task->tSide == B_SIDE_PLAYER)
+            movement *= -1;
+        sprite->pos1.x += movement;
 
-		movement = sHomerunEnemyVerticalMovement[task->tTimer];
-		if (task->tSide == B_SIDE_PLAYER)
-			movement *= -1;
-		sprite->pos1.y += movement;
-	}
+        movement = sHomerunEnemyVerticalMovement[task->tTimer];
+        if (task->tSide == B_SIDE_PLAYER)
+            movement *= -1;
+        sprite->pos1.y += movement;
+    }
 
-	xScale = 0x180;
-	yScale = 0x180;
-	rotation = (task->tTimer << 4) + (task->tTimer << 3);
+    xScale = 0x180;
+    yScale = 0x180;
+    rotation = (task->tTimer << 4) + (task->tTimer << 3);
 
-	xScale += rotation;
-	yScale += rotation;
-	rotation <<= 7;
+    xScale += rotation;
+    yScale += rotation;
+    rotation <<= 7;
 
-	if (task->tSide == B_SIDE_OPPONENT)
-		rotation *= -1;
+    if (task->tSide == B_SIDE_OPPONENT)
+        rotation *= -1;
 
-	SetSpriteRotScale(task->tSpriteId, xScale, yScale, rotation);
+    SetSpriteRotScale(task->tSpriteId, xScale, yScale, rotation);
 
-	if (++task->tTimer > task->tAnimLengthTime)
-		sprite->invisible = TRUE;
+    if (++task->tTimer > task->tAnimLengthTime)
+        sprite->invisible = TRUE;
 }
 
 //Launches the target in Twinkle Tackle
 //arg 0: Anim time
 void AnimTask_TwinkleTackleLaunch(u8 taskId)
 {
-	struct Task* task = &gTasks[taskId];
+    struct Task* task = &gTasks[taskId];
 
-	task->tSpriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
-	task->tSide = GetBattlerSide(gBattleAnimTarget);
-	task->tAnimLengthTime = gBattleAnimArgs[0];
-	task->tInitialXPos = gSprites[task->tSpriteId].pos1.x;
-	task->tInitialYPos = gSprites[task->tSpriteId].pos1.y;
-	task->tTimer = 0;
-	task->func = AnimTask_TwinkleTackleLaunchStep;
+    task->tSpriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+    task->tSide = GetBattlerSide(gBattleAnimTarget);
+    task->tAnimLengthTime = gBattleAnimArgs[0];
+    task->tInitialXPos = gSprites[task->tSpriteId].pos1.x;
+    task->tInitialYPos = gSprites[task->tSpriteId].pos1.y;
+    task->tTimer = 0;
+    task->func = AnimTask_TwinkleTackleLaunchStep;
 
-	PrepareBattlerSpriteForRotScale(task->tSpriteId, ST_OAM_OBJ_NORMAL);
+    PrepareBattlerSpriteForRotScale(task->tSpriteId, ST_OAM_OBJ_NORMAL);
 }
 #undef tSpriteId
 #undef tTimer
@@ -7673,7 +7665,7 @@ void AnimTask_TwinkleTackleLaunch(u8 taskId)
 
 void AnimTask_GetTimeOfDay(u8 taskId)
 {
-	gBattleAnimArgs[0] = 0; //Daytime is default
+    gBattleAnimArgs[0] = 0; //Daytime is default
 
     RtcCalcLocalTime();
     if (gLocalTime.hours >= 20 || gLocalTime.hours < 4)
@@ -7681,21 +7673,21 @@ void AnimTask_GetTimeOfDay(u8 taskId)
     else if (gLocalTime.hours >= 17 && gLocalTime.hours < 20)
         gBattleAnimArgs[0] = 2;
     
-	DestroyAnimVisualTask(taskId);
+    DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_GetLycanrocForm(u8 taskId)
 {
-	/* TODO - lycanroc forms
-    #ifdef SPECIES_LYCANROC_MIDNIGHT
-	if (GetIllusionPartyData(gBattleAnimAttacker)->species == SPECIES_LYCANROC_MIDNIGHT)
-		gBattleAnimArgs[0] = 1;
-	else
-	#endif
-		gBattleAnimArgs[0] = 0;*/
+
+    #ifdef POKEMON_EXPANSION
+    if (GetIllusionPartyData(gBattleAnimAttacker)->species == SPECIES_LYCANROC_MIDNIGHT)
+        gBattleAnimArgs[0] = 1;
+    else
+    #endif
+        gBattleAnimArgs[0] = 0;
     
     gBattleAnimArgs[0] = 0;
-	DestroyAnimVisualTask(taskId);
+    DestroyAnimVisualTask(taskId);
 }
 
 // Scales up the target mon sprite
@@ -7703,20 +7695,20 @@ void AnimTask_GetLycanrocForm(u8 taskId)
 // No args.
 void AnimTask_GrowTarget(u8 taskId)
 {
-	u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
-	PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_BLEND);
-	SetSpriteRotScale(spriteId, 208, 208, 0);
-	gTasks[taskId].data[0] = 120;
-	gTasks[taskId].func = AnimTask_GrowStep;
+    u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+    PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_BLEND);
+    SetSpriteRotScale(spriteId, 208, 208, 0);
+    gTasks[taskId].data[0] = 120;
+    gTasks[taskId].func = AnimTask_GrowStep;
 }
 static void AnimTask_GrowStep(u8 taskId)
 {
-	if (--gTasks[taskId].data[0] == -1)
-	{
-		u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
-		ResetSpriteRotScale(spriteId);
-		DestroyAnimVisualTask(taskId);
-	}
+    if (--gTasks[taskId].data[0] == -1)
+    {
+        u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+        ResetSpriteRotScale(spriteId);
+        DestroyAnimVisualTask(taskId);
+    }
 }
 
 // Uses a spotlight sprite as a light mask to illuminate the attacker. The spotlight grows and shrinks.
@@ -7815,16 +7807,16 @@ void AnimTask_TechnoBlast(u8 taskId)
 //Creates a twinkle at the location the target was knocked too in Twinkle Tackle
 static void SpriteCB_TwinkleOnBattler(struct Sprite *sprite)
 {
-	struct Sprite* monSprite;
+    struct Sprite* monSprite;
 
-	if (gBattleAnimArgs[2] == ANIM_TARGET)
-		monSprite = &gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)];
-	else
-		monSprite = &gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)];
+    if (gBattleAnimArgs[2] == ANIM_TARGET)
+        monSprite = &gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)];
+    else
+        monSprite = &gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)];
 
-	sprite->pos1 = monSprite->pos1;
-	sprite->pos2 = monSprite->pos2;
-	sprite->callback = RunStoredCallbackWhenAnimEnds;
-	StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+    sprite->pos1 = monSprite->pos1;
+    sprite->pos2 = monSprite->pos2;
+    sprite->callback = RunStoredCallbackWhenAnimEnds;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 

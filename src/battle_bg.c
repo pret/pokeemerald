@@ -761,7 +761,7 @@ void LoadBattleMenuWindowGfx(void)
 
 void DrawMainBattleBackground(void)
 {
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_x2000000))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK))
     {
         LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
         LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
@@ -1146,7 +1146,7 @@ void DrawBattleEntryBackground(void)
         gBattle_BG2_Y = 0xFF5C;
         LoadCompressedSpriteSheetUsingHeap(&sVsLettersSpriteSheet);
     }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_EREADER_TRAINER))
+    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_EREADER_TRAINER))
     {
         if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || gPartnerTrainerId == TRAINER_STEVEN_PARTNER || gPartnerTrainerId >= TRAINER_CUSTOM_PARTNER)
         {
@@ -1227,7 +1227,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
         break;
     case 3:
-        if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_EREADER_TRAINER))
+        if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_EREADER_TRAINER))
         {
             LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
         }
@@ -1286,7 +1286,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         break;
     case 4:
-        if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_EREADER_TRAINER))
+        if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_EREADER_TRAINER))
         {
             LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
         }
@@ -1348,7 +1348,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         break;
     case 5:
-        if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_EREADER_TRAINER))
+        if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_EREADER_TRAINER))
         {
             LoadCompressedPalette(gBattleTerrainPalette_Frontier, 0x20, 0x60);
         }
