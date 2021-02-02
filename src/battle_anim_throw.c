@@ -1805,8 +1805,6 @@ static void SpriteCB_Ball_Block_Step(struct Sprite *sprite)
 
 static void LoadBallParticleGfx(u8 ballId)
 {
-    u8 taskId;
-
     if (GetSpriteTileStartByTag(sBallParticleSpriteSheets[ballId].tag) == 0xFFFF)
     {
         LoadCompressedSpriteSheetUsingHeap(&sBallParticleSpriteSheets[ballId]);

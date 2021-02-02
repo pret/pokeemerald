@@ -25,8 +25,8 @@ const struct BardSound *GetWordSounds(u16 word)
     {
         return gBardSound_InvalidWord;
     }
-    category = word >> 9;
-    subword = word & 0x1ff;
+    category = EC_GROUP(word);
+    subword = EC_INDEX(word);
     switch (category)
     {
         case EC_GROUP_POKEMON:
