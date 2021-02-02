@@ -8998,6 +8998,12 @@ static const union AnimCmd sAnim_LANDORUS_THERIAN_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_KELDEO_RESOLUTE_1[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_MELOETTA_PIROUETTE_1[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -14322,6 +14328,11 @@ static const union AnimCmd *const sAnims_LANDORUS_THERIAN[] ={
     sAnim_LANDORUS_THERIAN_1,
 };
 
+static const union AnimCmd *const sAnims_KELDEO_RESOLUTE[] ={
+    sAnim_GeneralFrame0,
+    sAnim_KELDEO_RESOLUTE_1,
+};
+
 static const union AnimCmd *const sAnims_MELOETTA_PIROUETTE[] ={
     sAnim_GeneralFrame0,
     sAnim_MELOETTA_PIROUETTE_1,
@@ -15485,7 +15496,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(KYUREM_WHITE),
     ANIM_CMD(KYUREM_BLACK),
     ANIM_CMD(MELOETTA_PIROUETTE),
-    ANIM_CMD_FULL(KELDEO_RESOLUTE, sAnims_KELDEO),
+    ANIM_CMD(KELDEO_RESOLUTE),
     ANIM_CMD_FULL(GENESECT_DOUSE_DRIVE, sAnims_GENESECT),
     ANIM_CMD_FULL(GENESECT_SHOCK_DRIVE, sAnims_GENESECT),
     ANIM_CMD_FULL(GENESECT_BURN_DRIVE, sAnims_GENESECT),
