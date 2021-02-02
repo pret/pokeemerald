@@ -36,7 +36,7 @@ CaveOfOrigin_EventScript_Shake:: @ 82722A7
 	releaseall
 	end
 
-CaveOfOrigin_EventScript_SetTempVars:: @ 82722C1
+CaveOfOrigin_EventScript_DisableTriggers:: @ 82722C1
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_2, 1
 	setvar VAR_TEMP_3, 1
