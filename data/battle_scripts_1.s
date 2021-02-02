@@ -2860,7 +2860,7 @@ BattleScript_FaintedMonTryChooseAnother::
 	switchhandleorder BS_FAINTED, 0x2
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonChooseAnother
-	jumpifbattletype BATTLE_TYPE_x2000000, BattleScript_FaintedMonChooseAnother
+	jumpifbattletype BATTLE_TYPE_RECORDED_LINK, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_FaintedMonChooseAnother
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonChooseAnother
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonChooseAnother
@@ -2978,7 +2978,7 @@ BattleScript_LocalBattleLostPrintTrainersWinText::
 	trainerslidein BS_ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
-	jumpifbattletype BATTLE_TYPE_x800000, BattleScript_LocalBattleLostDoTrainer2WinText
+	jumpifbattletype BATTLE_TYPE_TOWER_LINK_MULTI, BattleScript_LocalBattleLostDoTrainer2WinText
 	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostDoTrainer2WinText::
 	trainerslideout B_POSITION_OPPONENT_LEFT
@@ -3834,7 +3834,7 @@ BattleScript_MoveUsedIsConfusedNoMore::
 	return
 
 BattleScript_PrintPayDayMoneyString::
-	printstring STRINGID_PKMNPICKEDUPITEM
+	printstring STRINGID_PLAYERPICKEDUPMONEY
 	waitmessage 0x40
 	return
 

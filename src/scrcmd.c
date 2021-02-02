@@ -2235,7 +2235,9 @@ bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
+// Unused
+// For the warp used by the Aqua Hideout, see DoTeleportTileWarp
+bool8 ScrCmd_warpspinenter(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -2244,8 +2246,8 @@ bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_808D074(GetPlayerFacingDirection());
-    sub_80B0244();
+    SetSpinStartFacingDir(GetPlayerFacingDirection());
+    DoSpinEnterWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
