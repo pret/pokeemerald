@@ -133,7 +133,7 @@ enum
     CONTROLLER_PRINTSTRING,
     CONTROLLER_PRINTSTRINGPLAYERONLY,
     CONTROLLER_CHOOSEACTION,
-    CONTROLLER_UNKNOWNYESNOBOX,
+    CONTROLLER_YESNOBOX,
     CONTROLLER_CHOOSEMOVE,
     CONTROLLER_OPENBAG,
     CONTROLLER_CHOOSEPOKEMON,
@@ -169,7 +169,7 @@ enum
     CONTROLLER_BATTLEANIMATION,
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
-    CONTROLLER_55,
+    CONTROLLER_ENDLINKBATTLE,
     /*new controllers should go here*/
     CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
@@ -180,8 +180,8 @@ extern struct UnusedControllerStruct gUnusedControllerStruct;
 // general functions
 void HandleLinkBattleSetup(void);
 void SetUpBattleVarsAndBirchZigzagoon(void);
-void sub_8032768(void);
-void sub_8033648(void);
+void InitBattleControllers(void);
+void TryReceiveLinkBattleData(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
 
 // emitters
@@ -204,7 +204,7 @@ void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 m
 void BtlController_EmitPrintString(u8 bufferId, u16 stringId);
 void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringId);
 void BtlController_EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
-void BtlController_EmitUnknownYesNoBox(u8 bufferId);
+void BtlController_EmitYesNoBox(u8 bufferId);
 void BtlController_EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
 void BtlController_EmitChooseItem(u8 bufferId, u8* arg1);
 void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4);
@@ -238,19 +238,19 @@ void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
 void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
-void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 arg2);
+void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 record);
 void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
-void BtlController_EmitCmd55(u8 bufferId, u8 battleOutcome);
+void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);
 
 // player controller
 void SetControllerToPlayer(void);
-void nullsub_21(void);
+void BattleControllerDummy(void);
 void PlayerHandleGetRawMonData(void);
-void sub_80587B0(void);
-void sub_805CC00(struct Sprite *sprite);
+void SetBattleEndCallbacks(void);
+void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);
-void c3_0802FDF4(u8 taskId);
+void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
 void InitMoveSelectionsVarsAndStrings(void);

@@ -40,10 +40,10 @@ static void AnimTask_WaitAndRestoreVisibility(u8);
 
 const u16 gUnknown_08597418 = RGB(31, 31, 31);
 
-// These belong in battle_intro.c, but there putting them there causes 2 bytes of alignment padding
+// These belong in battle_intro.c, but putting them there causes 2 bytes of alignment padding
 // between the two .rodata segments. Perhaps battle_intro.c actually belongs in this file, too.
-const u8 gUnknown_0859741A[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
-const u8 gUnknown_0859741E[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
+const u8 gBattleAnimBgCntSet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
+const u8 gBattleAnimBgCntGet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
 void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
@@ -97,7 +97,7 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
         if (battler != animBattlers[0] && battler != animBattlers[1] && IsBattlerSpriteVisible(battler))
-            selectedPalettes |= 0x10000 << sub_80A77AC(battler);
+            selectedPalettes |= 0x10000 << AnimDummyReturnArg(battler);
     }
 
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
