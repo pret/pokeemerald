@@ -1232,7 +1232,7 @@
 
 // Oricorio
 #define SPECIES_ORICORIO_POM_POM             FORMS_START + 244
-#define SPECIES_ORICORIO_PA_U                FORMS_START + 245
+#define SPECIES_ORICORIO_PAU                 FORMS_START + 245
 #define SPECIES_ORICORIO_SENSU               FORMS_START + 246
 
 // Rockruff

@@ -5758,7 +5758,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = 0x88,
         .y_offset = 0,
     },
-    [SPECIES_ORICORIO_PA_U] =
+    [SPECIES_ORICORIO_PAU] =
     {
         .size = 0x88,
         .y_offset = 0,

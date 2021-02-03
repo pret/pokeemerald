@@ -5759,7 +5759,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = 0x45,
         .y_offset = 2,
     },
-    [SPECIES_ORICORIO_PA_U] =
+    [SPECIES_ORICORIO_PAU] =
     {
         .size = 0x45,
         .y_offset = 2,
