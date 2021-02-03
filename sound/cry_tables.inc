@@ -474,7 +474,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Glaceon
 	cry Cry_Gliscor
 	cry Cry_Mamoswine
-	cry Cry_PorygonZ
+	cry Cry_Porygon_Z
 	cry Cry_Gallade
 	cry Cry_Probopass
 	cry Cry_Dusknoir
@@ -866,7 +866,7 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Perrserker
 	cry_uncomp Cry_Cursola
 	cry_uncomp Cry_Sirfetchd
-	cry_uncomp Cry_MrRime
+	cry_uncomp Cry_Mr_Rime
 	cry_uncomp Cry_Runerigus
 	cry_uncomp Cry_Milcery
 	cry_uncomp Cry_Alcremie
@@ -978,7 +978,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Slowbro
 	cry Cry_Farfetchd
 	cry Cry_Weezing
-	cry Cry_MrMime
+	cry Cry_Mr_Mime
 	cry Cry_Articuno
 	cry Cry_Zapdos
 	cry Cry_Moltres
@@ -1303,10 +1303,10 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Raichu  @ 869F050
 	cry2 Cry_Sandshrew  @ 869F05C
 	cry2 Cry_Sandslash  @ 869F068
-	cry2 Cry_NidoranF  @ 869F074
+	cry2 Cry_Nidoran_F  @ 869F074
 	cry2 Cry_Nidorina  @ 869F080
 	cry2 Cry_Nidoqueen  @ 869F08C
-	cry2 Cry_NidoranM  @ 869F098
+	cry2 Cry_Nidoran_M  @ 869F098
 	cry2 Cry_Nidorino  @ 869F0A4
 	cry2 Cry_Nidoking  @ 869F0B0
 	cry2 Cry_Clefairy  @ 869F0BC
@@ -1396,7 +1396,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Seaking  @ 869F4AC
 	cry2 Cry_Staryu  @ 869F4B8
 	cry2 Cry_Starmie  @ 869F4C4
-	cry2 Cry_MrMime  @ 869F4D0
+	cry2 Cry_Mr_Mime  @ 869F4D0
 	cry2 Cry_Scyther  @ 869F4DC
 	cry2 Cry_Jynx  @ 869F4E8
 	cry2 Cry_Electabuzz  @ 869F4F4
@@ -1713,7 +1713,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Bronzor
 	cry2 Cry_Bronzong
 	cry2 Cry_Bonsly
-	cry2 Cry_Mimejr
+	cry2 Cry_Mime_Jr
 	cry2 Cry_Happiny
 	cry2 Cry_Chatot
 	cry2 Cry_Spiritomb
@@ -2059,10 +2059,10 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Jangmo_o
 	cry2_uncomp Cry_Hakamo_o
 	cry2_uncomp Cry_Kommo_o
-	cry2_uncomp Cry_Tapu_koko
-	cry2_uncomp Cry_Tapu_lele
-	cry2_uncomp Cry_Tapu_bulu
-	cry2_uncomp Cry_Tapu_fini
+	cry2_uncomp Cry_Tapu_Koko
+	cry2_uncomp Cry_Tapu_Lele
+	cry2_uncomp Cry_Tapu_Bulu
+	cry2_uncomp Cry_Tapu_Fini
 	cry2_uncomp Cry_Cosmog
 	cry2_uncomp Cry_Cosmoem
 	cry2_uncomp Cry_Solgaleo
@@ -2252,7 +2252,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Slowbro
 	cry2 Cry_Farfetchd
 	cry2 Cry_Weezing
-	cry2 Cry_MrMime
+	cry2 Cry_Mr_Mime
 	cry2 Cry_Articuno
 	cry2 Cry_Zapdos
 	cry2 Cry_Moltres
@@ -2460,7 +2460,7 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Hoopa_Unbound
 	@ Oricorio
 	cry2_uncomp Cry_Oricorio_Pom_Pom
-	cry2_uncomp Cry_Oricorio_Pa_u
+	cry2_uncomp Cry_Oricorio_Pau
 	cry2_uncomp Cry_Oricorio_Sensu
 	@ Rockruff
 	cry2_uncomp Cry_Rockruff
