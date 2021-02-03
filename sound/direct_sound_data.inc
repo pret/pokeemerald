@@ -4015,23 +4015,23 @@ Cry_GengarMega::
 	.incbin "sound/direct_sound_samples/cries/uncomp_mega_gengar.bin"
 
 	.align 2
-CryKangaskhanMega::
+Cry_KangaskhanMega::
 	.incbin "sound/direct_sound_samples/cries/uncomp_mega_kangaskhan.bin"
 
 	.align 2
-CryPinsirMega::
+Cry_PinsirMega::
 	.incbin "sound/direct_sound_samples/cries/uncomp_mega_pinsir.bin"
 
 	.align 2
-CryGyaradosMega::
+Cry_GyaradosMega::
 	.incbin "sound/direct_sound_samples/cries/uncomp_mega_gyarados.bin"
 
 	.align 2
-CryAerodactylMega::
+Cry_AerodactylMega::
 	.incbin "sound/direct_sound_samples/cries/uncomp_mega_aerodactyl.bin"
 
 	.align 2
-CryMewtwoMegaX::
+Cry_MewtwoMegaX::
 	.incbin "sound/direct_sound_samples/cries/uncomp_mega_mewtwo_x.bin"
 
 	.align 2
@@ -4271,7 +4271,7 @@ Cry_ToxtricityLowKey::
 	.incbin "sound/direct_sound_samples/cries/uncomp_toxtricity_low_key.bin"
 
 	.align 2
-Cry_Eiscue_NoiceFace::
+Cry_EiscueNoiceFace::
 	.incbin "sound/direct_sound_samples/cries/uncomp_eiscue_noice_face.bin"
 
 	.align 2
