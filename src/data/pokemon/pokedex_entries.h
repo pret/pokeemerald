@@ -1469,7 +1469,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .categoryName = _("Barrier"),
         .height = 13,
         .weight = 545,
-        .description = gMrmimePokedexText,
+        .description = gMrMimePokedexText,
         .pokemonScale = 258,
         .pokemonOffset = 6,
         .trainerScale = 256,
@@ -5268,7 +5268,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_MIMEJR] =
+    [NATIONAL_DEX_MIME_JR] =
     {
         .categoryName = _("Mime"),
         .height = 6,
