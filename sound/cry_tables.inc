@@ -29,10 +29,10 @@ gCryTable:: @ 869DCF4
 	cry Cry_Raichu  @ 869DE20
 	cry Cry_Sandshrew  @ 869DE2C
 	cry Cry_Sandslash  @ 869DE38
-	cry Cry_Nidoran_F  @ 869DE44
+	cry Cry_NidoranF  @ 869DE44
 	cry Cry_Nidorina  @ 869DE50
 	cry Cry_Nidoqueen  @ 869DE5C
-	cry Cry_Nidoran_M  @ 869DE68
+	cry Cry_NidoranM  @ 869DE68
 	cry Cry_Nidorino  @ 869DE74
 	cry Cry_Nidoking  @ 869DE80
 	cry Cry_Clefairy  @ 869DE8C
@@ -122,7 +122,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Seaking  @ 869E27C
 	cry Cry_Staryu  @ 869E288
 	cry Cry_Starmie  @ 869E294
-	cry Cry_Mr_Mime  @ 869E2A0
+	cry Cry_MrMime  @ 869E2A0
 	cry Cry_Scyther  @ 869E2AC
 	cry Cry_Jynx  @ 869E2B8
 	cry Cry_Electabuzz  @ 869E2C4
@@ -439,7 +439,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Bronzor
 	cry Cry_Bronzong
 	cry Cry_Bonsly
-	cry Cry_Mime_Jr
+	cry Cry_MimeJr
 	cry Cry_Happiny
 	cry Cry_Chatot
 	cry Cry_Spiritomb
@@ -474,7 +474,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Glaceon
 	cry Cry_Gliscor
 	cry Cry_Mamoswine
-	cry Cry_Porygon_Z
+	cry Cry_PorygonZ
 	cry Cry_Gallade
 	cry Cry_Probopass
 	cry Cry_Dusknoir
@@ -772,7 +772,7 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Sandygast
 	cry_uncomp Cry_Palossand
 	cry_uncomp Cry_Pyukumuku
-	cry_uncomp Cry_Type_null
+	cry_uncomp Cry_TypeNull
 	cry_uncomp Cry_Silvally
 	cry_uncomp Cry_Minior
 	cry_uncomp Cry_Komala
@@ -782,13 +782,13 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Bruxish
 	cry_uncomp Cry_Drampa
 	cry_uncomp Cry_Dhelmise
-	cry_uncomp Cry_Jangmo_o
-	cry_uncomp Cry_Hakamo_o
-	cry_uncomp Cry_Kommo_o
-	cry_uncomp Cry_Tapu_Koko
-	cry_uncomp Cry_Tapu_Lele
-	cry_uncomp Cry_Tapu_Bulu
-	cry_uncomp Cry_Tapu_Fini
+	cry_uncomp Cry_Jangmoo
+	cry_uncomp Cry_Hakamoo
+	cry_uncomp Cry_Kommoo
+	cry_uncomp Cry_TapuKoko
+	cry_uncomp Cry_TapuLele
+	cry_uncomp Cry_TapuBulu
+	cry_uncomp Cry_TapuFini
 	cry_uncomp Cry_Cosmog
 	cry_uncomp Cry_Cosmoem
 	cry_uncomp Cry_Solgaleo
@@ -866,7 +866,7 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Perrserker
 	cry_uncomp Cry_Cursola
 	cry_uncomp Cry_Sirfetchd
-	cry_uncomp Cry_Mr_Rime
+	cry_uncomp Cry_MrRime
 	cry_uncomp Cry_Runerigus
 	cry_uncomp Cry_Milcery
 	cry_uncomp Cry_Alcremie
@@ -900,57 +900,57 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Spectrier
 	cry_uncomp Cry_Calyrex
 	@ Megas
-	cry_uncomp Cry_Venusaur_Mega
-	cry_uncomp Cry_Charizard_Mega_X
-	cry_uncomp Cry_Charizard_Mega_Y
-	cry_uncomp Cry_Blastoise_Mega
-	cry_uncomp Cry_Beedrill_Mega
-	cry_uncomp Cry_Pidgeot_Mega
-	cry_uncomp Cry_Alakazam_Mega
-	cry_uncomp Cry_Slowbro_Mega
-	cry_uncomp Cry_Gengar_Mega
-	cry_uncomp Cry_Kangaskhan_Mega
-	cry_uncomp Cry_Pinsir_Mega
-	cry_uncomp Cry_Gyarados_Mega
-	cry_uncomp Cry_Aerodactyl_Mega
-	cry_uncomp Cry_Mewtwo_Mega_X
-	cry_uncomp Cry_Mewtwo_Mega_Y
-	cry_uncomp Cry_Ampharos_Mega
-	cry_uncomp Cry_Steelix_Mega
-	cry_uncomp Cry_Scizor_Mega
-	cry_uncomp Cry_Heracross_Mega
-	cry_uncomp Cry_Houndoom_Mega
-	cry_uncomp Cry_Tyranitar_Mega
-	cry_uncomp Cry_Sceptile_Mega
-	cry_uncomp Cry_Blaziken_Mega
-	cry_uncomp Cry_Swampert_Mega
-	cry_uncomp Cry_Gardevoir_Mega
-	cry_uncomp Cry_Sableye_Mega
-	cry_uncomp Cry_Mawile_Mega
-	cry_uncomp Cry_Aggron_Mega
-	cry_uncomp Cry_Medicham_Mega
-	cry_uncomp Cry_Manectric_Mega
-	cry_uncomp Cry_Sharpedo_Mega
-	cry_uncomp Cry_Camerupt_Mega
-	cry_uncomp Cry_Altaria_Mega
-	cry_uncomp Cry_Banette_Mega
-	cry_uncomp Cry_Absol_Mega
-	cry_uncomp Cry_Glalie_Mega
-	cry_uncomp Cry_Salamence_Mega
-	cry_uncomp Cry_Metagross_Mega
-	cry_uncomp Cry_Latias_Mega
-	cry_uncomp Cry_Latios_Mega
-	cry_uncomp Cry_Lopunny_Mega
-	cry_uncomp Cry_Garchomp_Mega
-	cry_uncomp Cry_Lucario_Mega
-	cry_uncomp Cry_Abomasnow_Mega
-	cry_uncomp Cry_Gallade_Mega
-	cry_uncomp Cry_Audino_Mega
-	cry_uncomp Cry_Diancie_Mega
+	cry_uncomp Cry_VenusaurMega
+	cry_uncomp Cry_CharizardMegaX
+	cry_uncomp Cry_CharizardMegaY
+	cry_uncomp Cry_BlastoiseMega
+	cry_uncomp Cry_BeedrillMega
+	cry_uncomp Cry_PidgeotMega
+	cry_uncomp Cry_AlakazamMega
+	cry_uncomp Cry_SlowbroMega
+	cry_uncomp Cry_GengarMega
+	cry_uncomp Cry_KangaskhanMega
+	cry_uncomp Cry_PinsirMega
+	cry_uncomp Cry_GyaradosMega
+	cry_uncomp Cry_AerodactylMega
+	cry_uncomp Cry_MewtwoMegaX
+	cry_uncomp Cry_MewtwoMegaY
+	cry_uncomp Cry_AmpharosMega
+	cry_uncomp Cry_SteelixMega
+	cry_uncomp Cry_ScizorMega
+	cry_uncomp Cry_HeracrossMega
+	cry_uncomp Cry_HoundoomMega
+	cry_uncomp Cry_TyranitarMega
+	cry_uncomp Cry_SceptileMega
+	cry_uncomp Cry_BlazikenMega
+	cry_uncomp Cry_SwampertMega
+	cry_uncomp Cry_GardevoirMega
+	cry_uncomp Cry_SableyeMega
+	cry_uncomp Cry_MawileMega
+	cry_uncomp Cry_AggronMega
+	cry_uncomp Cry_MedichamMega
+	cry_uncomp Cry_ManectricMega
+	cry_uncomp Cry_SharpedoMega
+	cry_uncomp Cry_CameruptMega
+	cry_uncomp Cry_AltariaMega
+	cry_uncomp Cry_BanetteMega
+	cry_uncomp Cry_AbsolMega
+	cry_uncomp Cry_GlalieMega
+	cry_uncomp Cry_SalamenceMega
+	cry_uncomp Cry_MetagrossMega
+	cry_uncomp Cry_LatiasMega
+	cry_uncomp Cry_LatiosMega
+	cry_uncomp Cry_LopunnyMega
+	cry_uncomp Cry_GarchompMega
+	cry_uncomp Cry_LucarioMega
+	cry_uncomp Cry_AbomasnowMega
+	cry_uncomp Cry_GalladeMega
+	cry_uncomp Cry_AudinoMega
+	cry_uncomp Cry_DiancieMega
 	@ Special Mega + Primals
-	cry_uncomp Cry_Rayquaza_Mega
-	cry_uncomp Cry_Kyogre_Primal
-	cry_uncomp Cry_Groudon_Primal
+	cry_uncomp Cry_RayquazaMega
+	cry_uncomp Cry_KyogrePrimal
+	cry_uncomp Cry_GroudonPrimal
 	@ Alolan Forms
 	cry Cry_Rattata
 	cry Cry_Raticate
@@ -974,11 +974,11 @@ gCryTable:: @ 869DCF4
 	cry Cry_Meowth
 	cry Cry_Ponyta
 	cry Cry_Rapidash
-	cry_uncomp Cry_Slowpoke_Galarian
+	cry_uncomp Cry_SlowpokeGalarian
 	cry Cry_Slowbro
 	cry Cry_Farfetchd
 	cry Cry_Weezing
-	cry Cry_Mr_Mime
+	cry Cry_MrMime
 	cry Cry_Articuno
 	cry Cry_Zapdos
 	cry Cry_Moltres
@@ -1066,7 +1066,7 @@ gCryTable:: @ 869DCF4
 	@ Giratina
 	cry Cry_Giratina
 	@ Shaymin
-	cry Cry_Shaymin_Sky
+	cry Cry_ShayminSky
 	@ Arceus
 	cry Cry_Arceus
 	cry Cry_Arceus
@@ -1099,12 +1099,12 @@ gCryTable:: @ 869DCF4
 	cry Cry_Sawsbuck
 	cry Cry_Sawsbuck
 	@ Therian Forms
-	cry Cry_Tornadus_Therian
-	cry Cry_Thundurus_Therian
-	cry Cry_Landorus_Therian
+	cry Cry_TornadusTherian
+	cry Cry_ThundurusTherian
+	cry Cry_LandorusTherian
 	@ Kyurem
-	cry Cry_Kyurem_White
-	cry Cry_Kyurem_Black
+	cry Cry_KyuremWhite
+	cry Cry_KyuremBlack
 	@ Keldeo
 	cry Cry_Keldeo
 	@ Meloetta
@@ -1147,7 +1147,7 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Floette
 	cry_uncomp Cry_Floette
 	cry_uncomp Cry_Floette
-	cry_uncomp Cry_Floette_Eternal_Flower
+	cry_uncomp Cry_FloetteEternalFlower
 	@ Florges
 	cry_uncomp Cry_Florges
 	cry_uncomp Cry_Florges
@@ -1170,31 +1170,31 @@ gCryTable:: @ 869DCF4
 	@ Pumpkaboo
 	cry_uncomp Cry_Pumpkaboo
 	cry_uncomp Cry_Pumpkaboo
-	cry_uncomp Cry_Pumpkaboo_Super
+	cry_uncomp Cry_PumpkabooSuper
 	@ Gourgeist
 	cry_uncomp Cry_Gourgeist
 	cry_uncomp Cry_Gourgeist
-	cry_uncomp Cry_Gourgeist_Super
+	cry_uncomp Cry_GourgeistSuper
 	@ Xerneas
 	cry_uncomp Cry_Xerneas
 	@ Zygarde
-	cry_uncomp Cry_Zygarde_10
-	cry_uncomp Cry_Zygarde_10
+	cry_uncomp Cry_Zygarde10
+	cry_uncomp Cry_Zygarde10
 	cry_uncomp Cry_Zygarde
-	cry_uncomp Cry_Zygarde_Complete
+	cry_uncomp Cry_ZygardeComplete
 	@ Hoopa
-	cry_uncomp Cry_Hoopa_Unbound
+	cry_uncomp Cry_HoopaUnbound
 	@ Oricorio
-	cry_uncomp Cry_Oricorio_Pom_Pom
-	cry_uncomp Cry_Oricorio_Pau
-	cry_uncomp Cry_Oricorio_Sensu
+	cry_uncomp Cry_OricorioPomPom
+	cry_uncomp Cry_OricorioPau
+	cry_uncomp Cry_OricorioSensu
 	@ Rockruff
 	cry_uncomp Cry_Rockruff
 	@ Lycanroc
-	cry_uncomp Cry_Lycanroc_Midnight
-	cry_uncomp Cry_Lycanroc_Dusk
+	cry_uncomp Cry_LycanrocMidnight
+	cry_uncomp Cry_LycanrocDusk
 	@ Wishiwashi
-	cry_uncomp Cry_Wishiwashi_School
+	cry_uncomp Cry_WishiwashiSchool
 	@ Silvally
 	cry_uncomp Cry_Silvally
 	cry_uncomp Cry_Silvally
@@ -1230,16 +1230,16 @@ gCryTable:: @ 869DCF4
 	@ Mimikyu
 	cry_uncomp Cry_Mimikyu
 	@ Necrozma
-	cry_uncomp Cry_Necrozma_Dusk_Mane
-	cry_uncomp Cry_Necrozma_Dawn_Wings
-	cry_uncomp Cry_Necrozma_Ultra
+	cry_uncomp Cry_NecrozmaDuskMane
+	cry_uncomp Cry_NecrozmaDawnWings
+	cry_uncomp Cry_NecrozmaUltra
 	@ Magearna
 	cry_uncomp Cry_Magearna
 	@ Cramorant
 	cry_uncomp Cry_Cramorant
 	cry_uncomp Cry_Cramorant
 	@ Toxtricity
-	cry_uncomp Cry_Toxtricity_Low_Key
+	cry_uncomp Cry_ToxtricityLowKey
 	@ Sinistea
 	cry_uncomp Cry_Sinistea
 	@ Polteageist
@@ -1254,24 +1254,24 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Alcremie
 	cry_uncomp Cry_Alcremie
 	@ Eiscue
-	cry_uncomp Cry_Eiscue_Noice_Face
+	cry_uncomp Cry_EiscueNoiceFace
 	@ Indeedee
-	cry_uncomp Cry_Indeedee_Female
+	cry_uncomp Cry_IndeedeeFemale
 	@ Morpeko
-	cry_uncomp Cry_Morpeko_Hangry
+	cry_uncomp Cry_MorpekoHangry
 	@ Zacian
-	cry_uncomp Cry_Zacian_Crowned_Sword
+	cry_uncomp Cry_ZacianCrownedSword
 	@ Zamazenta
-	cry_uncomp Cry_Zamazenta_Crowned_Shield
+	cry_uncomp Cry_ZamazentaCrownedShield
 	@ Eternatus
-	cry_uncomp Cry_Eternatus_Eternamax
+	cry_uncomp Cry_EternatusEternamax
 	@ Urshifu
-	cry_uncomp Cry_Urshifu_Rapid_Strike_Style
+	cry_uncomp Cry_UrshifuRapidStrikeStyle
 	@ Zarude
 	cry_uncomp Cry_Zarude
 	@ Calyrex
-	cry_uncomp Cry_Calyrex_Ice_Rider
-	cry_uncomp Cry_Calyrex_Shadow_Rider
+	cry_uncomp Cry_CalyrexIceRider
+	cry_uncomp Cry_CalyrexShadowRider
 
 	.align 2
 gCryTable2:: @ 869EF24
@@ -1303,10 +1303,10 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Raichu  @ 869F050
 	cry2 Cry_Sandshrew  @ 869F05C
 	cry2 Cry_Sandslash  @ 869F068
-	cry2 Cry_Nidoran_F  @ 869F074
+	cry2 Cry_NidoranF  @ 869F074
 	cry2 Cry_Nidorina  @ 869F080
 	cry2 Cry_Nidoqueen  @ 869F08C
-	cry2 Cry_Nidoran_M  @ 869F098
+	cry2 Cry_NidoranM  @ 869F098
 	cry2 Cry_Nidorino  @ 869F0A4
 	cry2 Cry_Nidoking  @ 869F0B0
 	cry2 Cry_Clefairy  @ 869F0BC
@@ -1396,7 +1396,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Seaking  @ 869F4AC
 	cry2 Cry_Staryu  @ 869F4B8
 	cry2 Cry_Starmie  @ 869F4C4
-	cry2 Cry_Mr_Mime  @ 869F4D0
+	cry2 Cry_MrMime  @ 869F4D0
 	cry2 Cry_Scyther  @ 869F4DC
 	cry2 Cry_Jynx  @ 869F4E8
 	cry2 Cry_Electabuzz  @ 869F4F4
@@ -1713,7 +1713,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Bronzor
 	cry2 Cry_Bronzong
 	cry2 Cry_Bonsly
-	cry2 Cry_Mime_Jr
+	cry2 Cry_MimeJr
 	cry2 Cry_Happiny
 	cry2 Cry_Chatot
 	cry2 Cry_Spiritomb
@@ -1748,7 +1748,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Glaceon
 	cry2 Cry_Gliscor
 	cry2 Cry_Mamoswine
-	cry2 Cry_Porygon_Z
+	cry2 Cry_PorygonZ
 	cry2 Cry_Gallade
 	cry2 Cry_Probopass
 	cry2 Cry_Dusknoir
@@ -2046,7 +2046,7 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Sandygast
 	cry2_uncomp Cry_Palossand
 	cry2_uncomp Cry_Pyukumuku
-	cry2_uncomp Cry_Type_null
+	cry2_uncomp Cry_TypeNull
 	cry2_uncomp Cry_Silvally
 	cry2_uncomp Cry_Minior
 	cry2_uncomp Cry_Komala
@@ -2056,13 +2056,13 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Bruxish
 	cry2_uncomp Cry_Drampa
 	cry2_uncomp Cry_Dhelmise
-	cry2_uncomp Cry_Jangmo_o
-	cry2_uncomp Cry_Hakamo_o
-	cry2_uncomp Cry_Kommo_o
-	cry2_uncomp Cry_Tapu_Koko
-	cry2_uncomp Cry_Tapu_Lele
-	cry2_uncomp Cry_Tapu_Bulu
-	cry2_uncomp Cry_Tapu_Fini
+	cry2_uncomp Cry_Jangmoo
+	cry2_uncomp Cry_Hakamoo
+	cry2_uncomp Cry_Kommoo
+	cry2_uncomp Cry_TapuKoko
+	cry2_uncomp Cry_TapuLele
+	cry2_uncomp Cry_TapuBulu
+	cry2_uncomp Cry_TapuFini
 	cry2_uncomp Cry_Cosmog
 	cry2_uncomp Cry_Cosmoem
 	cry2_uncomp Cry_Solgaleo
@@ -2140,7 +2140,7 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Perrserker
 	cry2_uncomp Cry_Cursola
 	cry2_uncomp Cry_Sirfetchd
-	cry2_uncomp Cry_Mr_Rime
+	cry2_uncomp Cry_MrRime
 	cry2_uncomp Cry_Runerigus
 	cry2_uncomp Cry_Milcery
 	cry2_uncomp Cry_Alcremie
@@ -2174,57 +2174,57 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Spectrier
 	cry2_uncomp Cry_Calyrex
 	@ Megas
-	cry2_uncomp Cry_Venusaur_Mega
-	cry2_uncomp Cry_Charizard_Mega_X
-	cry2_uncomp Cry_Charizard_Mega_Y
-	cry2_uncomp Cry_Blastoise_Mega
-	cry2_uncomp Cry_Beedrill_Mega
-	cry2_uncomp Cry_Pidgeot_Mega
-	cry2_uncomp Cry_Alakazam_Mega
-	cry2_uncomp Cry_Slowbro_Mega
-	cry2_uncomp Cry_Gengar_Mega
-	cry2_uncomp Cry_Kangaskhan_Mega
-	cry2_uncomp Cry_Pinsir_Mega
-	cry2_uncomp Cry_Gyarados_Mega
-	cry2_uncomp Cry_Aerodactyl_Mega
-	cry2_uncomp Cry_Mewtwo_Mega_X
-	cry2_uncomp Cry_Mewtwo_Mega_Y
-	cry2_uncomp Cry_Ampharos_Mega
-	cry2_uncomp Cry_Steelix_Mega
-	cry2_uncomp Cry_Scizor_Mega
-	cry2_uncomp Cry_Heracross_Mega
-	cry2_uncomp Cry_Houndoom_Mega
-	cry2_uncomp Cry_Tyranitar_Mega
-	cry2_uncomp Cry_Sceptile_Mega
-	cry2_uncomp Cry_Blaziken_Mega
-	cry2_uncomp Cry_Swampert_Mega
-	cry2_uncomp Cry_Gardevoir_Mega
-	cry2_uncomp Cry_Sableye_Mega
-	cry2_uncomp Cry_Mawile_Mega
-	cry2_uncomp Cry_Aggron_Mega
-	cry2_uncomp Cry_Medicham_Mega
-	cry2_uncomp Cry_Manectric_Mega
-	cry2_uncomp Cry_Sharpedo_Mega
-	cry2_uncomp Cry_Camerupt_Mega
-	cry2_uncomp Cry_Altaria_Mega
-	cry2_uncomp Cry_Banette_Mega
-	cry2_uncomp Cry_Absol_Mega
-	cry2_uncomp Cry_Glalie_Mega
-	cry2_uncomp Cry_Salamence_Mega
-	cry2_uncomp Cry_Metagross_Mega
-	cry2_uncomp Cry_Latias_Mega
-	cry2_uncomp Cry_Latios_Mega
-	cry2_uncomp Cry_Lopunny_Mega
-	cry2_uncomp Cry_Garchomp_Mega
-	cry2_uncomp Cry_Lucario_Mega
-	cry2_uncomp Cry_Abomasnow_Mega
-	cry2_uncomp Cry_Gallade_Mega
-	cry2_uncomp Cry_Audino_Mega
-	cry2_uncomp Cry_Diancie_Mega
+	cry2_uncomp Cry_VenusaurMega
+	cry2_uncomp Cry_CharizardMegaX
+	cry2_uncomp Cry_CharizardMegaY
+	cry2_uncomp Cry_BlastoiseMega
+	cry2_uncomp Cry_BeedrillMega
+	cry2_uncomp Cry_PidgeotMega
+	cry2_uncomp Cry_AlakazamMega
+	cry2_uncomp Cry_SlowbroMega
+	cry2_uncomp Cry_GengarMega
+	cry2_uncomp Cry_KangaskhanMega
+	cry2_uncomp Cry_PinsirMega
+	cry2_uncomp Cry_GyaradosMega
+	cry2_uncomp Cry_AerodactylMega
+	cry2_uncomp Cry_MewtwoMegaX
+	cry2_uncomp Cry_MewtwoMegaY
+	cry2_uncomp Cry_AmpharosMega
+	cry2_uncomp Cry_SteelixMega
+	cry2_uncomp Cry_ScizorMega
+	cry2_uncomp Cry_HeracrossMega
+	cry2_uncomp Cry_HoundoomMega
+	cry2_uncomp Cry_TyranitarMega
+	cry2_uncomp Cry_SceptileMega
+	cry2_uncomp Cry_BlazikenMega
+	cry2_uncomp Cry_SwampertMega
+	cry2_uncomp Cry_GardevoirMega
+	cry2_uncomp Cry_SableyeMega
+	cry2_uncomp Cry_MawileMega
+	cry2_uncomp Cry_AggronMega
+	cry2_uncomp Cry_MedichamMega
+	cry2_uncomp Cry_ManectricMega
+	cry2_uncomp Cry_SharpedoMega
+	cry2_uncomp Cry_CameruptMega
+	cry2_uncomp Cry_AltariaMega
+	cry2_uncomp Cry_BanetteMega
+	cry2_uncomp Cry_AbsolMega
+	cry2_uncomp Cry_GlalieMega
+	cry2_uncomp Cry_SalamenceMega
+	cry2_uncomp Cry_MetagrossMega
+	cry2_uncomp Cry_LatiasMega
+	cry2_uncomp Cry_LatiosMega
+	cry2_uncomp Cry_LopunnyMega
+	cry2_uncomp Cry_GarchompMega
+	cry2_uncomp Cry_LucarioMega
+	cry2_uncomp Cry_AbomasnowMega
+	cry2_uncomp Cry_GalladeMega
+	cry2_uncomp Cry_AudinoMega
+	cry2_uncomp Cry_DiancieMega
 	@ Special Mega + Primals
-	cry2_uncomp Cry_Rayquaza_Mega
-	cry2_uncomp Cry_Kyogre_Primal
-	cry2_uncomp Cry_Groudon_Primal
+	cry2_uncomp Cry_RayquazaMega
+	cry2_uncomp Cry_KyogrePrimal
+	cry2_uncomp Cry_GroudonPrimal
 	@ Alolan Forms
 	cry2 Cry_Rattata
 	cry2 Cry_Raticate
@@ -2248,11 +2248,11 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Meowth
 	cry2 Cry_Ponyta
 	cry2 Cry_Rapidash
-	cry2_uncomp Cry_Slowpoke_Galarian
+	cry2_uncomp Cry_SlowpokeGalarian
 	cry2 Cry_Slowbro
 	cry2 Cry_Farfetchd
 	cry2 Cry_Weezing
-	cry2 Cry_Mr_Mime
+	cry2 Cry_MrMime
 	cry2 Cry_Articuno
 	cry2 Cry_Zapdos
 	cry2 Cry_Moltres
@@ -2340,7 +2340,7 @@ gCryTable2:: @ 869EF24
 	@ Giratina
 	cry2 Cry_Giratina
 	@ Shaymin
-	cry2 Cry_Shaymin_Sky
+	cry2 Cry_ShayminSky
 	@ Arceus
 	cry2 Cry_Arceus
 	cry2 Cry_Arceus
@@ -2373,12 +2373,12 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Sawsbuck
 	cry2 Cry_Sawsbuck
 	@ Therian Forms
-	cry2 Cry_Tornadus_Therian
-	cry2 Cry_Thundurus_Therian
-	cry2 Cry_Landorus_Therian
+	cry2 Cry_TornadusTherian
+	cry2 Cry_ThundurusTherian
+	cry2 Cry_LandorusTherian
 	@ Kyurem
-	cry2 Cry_Kyurem_White
-	cry2 Cry_Kyurem_Black
+	cry2 Cry_KyuremWhite
+	cry2 Cry_KyuremBlack
 	@ Keldeo
 	cry2 Cry_Keldeo
 	@ Meloetta
@@ -2421,7 +2421,7 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Floette
 	cry2_uncomp Cry_Floette
 	cry2_uncomp Cry_Floette
-	cry2_uncomp Cry_Floette_Eternal_Flower
+	cry2_uncomp Cry_FloetteEternalFlower
 	@ Florges
 	cry2_uncomp Cry_Florges
 	cry2_uncomp Cry_Florges
@@ -2444,31 +2444,31 @@ gCryTable2:: @ 869EF24
 	@ Pumpkaboo
 	cry2_uncomp Cry_Pumpkaboo
 	cry2_uncomp Cry_Pumpkaboo
-	cry2_uncomp Cry_Pumpkaboo_Super
+	cry2_uncomp Cry_PumpkabooSuper
 	@ Gourgeist
 	cry2_uncomp Cry_Gourgeist
 	cry2_uncomp Cry_Gourgeist
-	cry2_uncomp Cry_Gourgeist_Super
+	cry2_uncomp Cry_GourgeistSuper
 	@ Xerneas
 	cry2_uncomp Cry_Xerneas
 	@ Zygarde
-	cry2_uncomp Cry_Zygarde_10
-	cry2_uncomp Cry_Zygarde_10
+	cry2_uncomp Cry_Zygarde10
+	cry2_uncomp Cry_Zygarde10
 	cry2_uncomp Cry_Zygarde
-	cry2_uncomp Cry_Zygarde_Complete
+	cry2_uncomp Cry_ZygardeComplete
 	@ Hoopa
-	cry2_uncomp Cry_Hoopa_Unbound
+	cry2_uncomp Cry_HoopaUnbound
 	@ Oricorio
-	cry2_uncomp Cry_Oricorio_Pom_Pom
-	cry2_uncomp Cry_Oricorio_Pau
-	cry2_uncomp Cry_Oricorio_Sensu
+	cry2_uncomp Cry_OricorioPomPom
+	cry2_uncomp Cry_OricorioPau
+	cry2_uncomp Cry_OricorioSensu
 	@ Rockruff
 	cry2_uncomp Cry_Rockruff
 	@ Lycanroc
-	cry2_uncomp Cry_Lycanroc_Midnight
-	cry2_uncomp Cry_Lycanroc_Dusk
+	cry2_uncomp Cry_LycanrocMidnight
+	cry2_uncomp Cry_LycanrocDusk
 	@ Wishiwashi
-	cry2_uncomp Cry_Wishiwashi_School
+	cry2_uncomp Cry_WishiwashiSchool
 	@ Silvally
 	cry2_uncomp Cry_Silvally
 	cry2_uncomp Cry_Silvally
@@ -2504,16 +2504,16 @@ gCryTable2:: @ 869EF24
 	@ Mimikyu
 	cry2_uncomp Cry_Mimikyu
 	@ Necrozma
-	cry2_uncomp Cry_Necrozma_Dusk_Mane
-	cry2_uncomp Cry_Necrozma_Dawn_Wings
-	cry2_uncomp Cry_Necrozma_Ultra
+	cry2_uncomp Cry_NecrozmaDuskMane
+	cry2_uncomp Cry_NecrozmaDawnWings
+	cry2_uncomp Cry_NecrozmaUltra
 	@ Magearna
 	cry2_uncomp Cry_Magearna
 		@ Cramorant
 	cry2_uncomp Cry_Cramorant
 	cry2_uncomp Cry_Cramorant
 	@ Toxtricity
-	cry2_uncomp Cry_Toxtricity_Low_Key
+	cry2_uncomp Cry_ToxtricityLowKey
 	@ Sinistea
 	cry2_uncomp Cry_Sinistea
 	@ Polteageist
@@ -2528,21 +2528,21 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Alcremie
 	cry2_uncomp Cry_Alcremie
 	@ Eiscue
-	cry2_uncomp Cry_Eiscue_Noice_Face
+	cry2_uncomp Cry_EiscueNoiceFace
 	@ Indeedee
-	cry2_uncomp Cry_Indeedee_Female
+	cry2_uncomp Cry_IndeedeeFemale
 	@ Morpeko
-	cry2_uncomp Cry_Morpeko_Hangry
+	cry2_uncomp Cry_MorpekoHangry
 	@ Zacian
-	cry2_uncomp Cry_Zacian_Crowned_Sword
+	cry2_uncomp Cry_ZacianCrownedSword
 	@ Zamazenta
-	cry2_uncomp Cry_Zamazenta_Crowned_Shield
+	cry2_uncomp Cry_ZamazentaCrownedShield
 	@ Eternatus
-	cry2_uncomp Cry_Eternatus_Eternamax
+	cry2_uncomp Cry_EternatusEternamax
 	@ Urshifu
-	cry2_uncomp Cry_Urshifu_Rapid_Strike_Style
+	cry2_uncomp Cry_UrshifuRapidStrikeStyle
 	@ Zarude
 	cry2_uncomp Cry_Zarude
 	@ Calyrex
-	cry2_uncomp Cry_Calyrex_Ice_Rider
-	cry2_uncomp Cry_Calyrex_Shadow_Rider
+	cry2_uncomp Cry_CalyrexIceRider
+	cry2_uncomp Cry_CalyrexShadowRider
