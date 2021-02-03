@@ -29,10 +29,10 @@ gCryTable:: @ 869DCF4
 	cry Cry_Raichu  @ 869DE20
 	cry Cry_Sandshrew  @ 869DE2C
 	cry Cry_Sandslash  @ 869DE38
-	cry Cry_NidoranF  @ 869DE44
+	cry Cry_Nidoran_F  @ 869DE44
 	cry Cry_Nidorina  @ 869DE50
 	cry Cry_Nidoqueen  @ 869DE5C
-	cry Cry_NidoranM  @ 869DE68
+	cry Cry_Nidoran_M  @ 869DE68
 	cry Cry_Nidorino  @ 869DE74
 	cry Cry_Nidoking  @ 869DE80
 	cry Cry_Clefairy  @ 869DE8C
@@ -122,7 +122,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Seaking  @ 869E27C
 	cry Cry_Staryu  @ 869E288
 	cry Cry_Starmie  @ 869E294
-	cry Cry_MrMime  @ 869E2A0
+	cry Cry_Mr_Mime  @ 869E2A0
 	cry Cry_Scyther  @ 869E2AC
 	cry Cry_Jynx  @ 869E2B8
 	cry Cry_Electabuzz  @ 869E2C4
@@ -439,7 +439,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Bronzor
 	cry Cry_Bronzong
 	cry Cry_Bonsly
-	cry Cry_Mimejr
+	cry Cry_Mime_Jr
 	cry Cry_Happiny
 	cry Cry_Chatot
 	cry Cry_Spiritomb
@@ -785,10 +785,10 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Jangmo_o
 	cry_uncomp Cry_Hakamo_o
 	cry_uncomp Cry_Kommo_o
-	cry_uncomp Cry_Tapu_koko
-	cry_uncomp Cry_Tapu_lele
-	cry_uncomp Cry_Tapu_bulu
-	cry_uncomp Cry_Tapu_fini
+	cry_uncomp Cry_Tapu_Koko
+	cry_uncomp Cry_Tapu_Lele
+	cry_uncomp Cry_Tapu_Bulu
+	cry_uncomp Cry_Tapu_Fini
 	cry_uncomp Cry_Cosmog
 	cry_uncomp Cry_Cosmoem
 	cry_uncomp Cry_Solgaleo
@@ -1186,7 +1186,7 @@ gCryTable:: @ 869DCF4
 	cry_uncomp Cry_Hoopa_Unbound
 	@ Oricorio
 	cry_uncomp Cry_Oricorio_Pom_Pom
-	cry_uncomp Cry_Oricorio_Pa_u
+	cry_uncomp Cry_Oricorio_Pau
 	cry_uncomp Cry_Oricorio_Sensu
 	@ Rockruff
 	cry_uncomp Cry_Rockruff
@@ -1748,7 +1748,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Glaceon
 	cry2 Cry_Gliscor
 	cry2 Cry_Mamoswine
-	cry2 Cry_PorygonZ
+	cry2 Cry_Porygon_Z
 	cry2 Cry_Gallade
 	cry2 Cry_Probopass
 	cry2 Cry_Dusknoir
@@ -2140,7 +2140,7 @@ gCryTable2:: @ 869EF24
 	cry2_uncomp Cry_Perrserker
 	cry2_uncomp Cry_Cursola
 	cry2_uncomp Cry_Sirfetchd
-	cry2_uncomp Cry_MrRime
+	cry2_uncomp Cry_Mr_Rime
 	cry2_uncomp Cry_Runerigus
 	cry2_uncomp Cry_Milcery
 	cry2_uncomp Cry_Alcremie

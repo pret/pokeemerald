@@ -499,7 +499,7 @@ Cry_Sandslash::
 	.incbin "sound/direct_sound_samples/cries/sandslash.bin"
 
 	.align 2
-Cry_NidoranF::
+Cry_Nidoran_F::
 	.incbin "sound/direct_sound_samples/cries/nidoran_f.bin"
 
 	.align 2
@@ -511,7 +511,7 @@ Cry_Nidoqueen::
 	.incbin "sound/direct_sound_samples/cries/nidoqueen.bin"
 
 	.align 2
-Cry_NidoranM::
+Cry_Nidoran_M::
 	.incbin "sound/direct_sound_samples/cries/nidoran_m.bin"
 
 	.align 2
@@ -871,7 +871,7 @@ Cry_Starmie::
 	.incbin "sound/direct_sound_samples/cries/starmie.bin"
 
 	.align 2
-Cry_MrMime::
+Cry_Mr_Mime::
 	.incbin "sound/direct_sound_samples/cries/mr_mime.bin"
 
 	.align 2
@@ -2139,8 +2139,8 @@ Cry_Bonsly::
 	.incbin "sound/direct_sound_samples/cries/bonsly.bin"
 
 	.align 2
-Cry_Mimejr::
-	.incbin "sound/direct_sound_samples/cries/mimejr.bin"
+Cry_Mime_Jr::
+	.incbin "sound/direct_sound_samples/cries/mime_jr.bin"
 
 	.align 2
 Cry_Happiny::
@@ -2279,8 +2279,8 @@ Cry_Mamoswine::
 	.incbin "sound/direct_sound_samples/cries/mamoswine.bin"
 
 	.align 2
-Cry_PorygonZ::
-	.incbin "sound/direct_sound_samples/cries/porygonZ.bin"
+Cry_Porygon_Z::
+	.incbin "sound/direct_sound_samples/cries/porygon_z.bin"
 
 	.align 2
 Cry_Gallade::
@@ -3523,19 +3523,19 @@ Cry_Kommo_o::
 	.incbin "sound/direct_sound_samples/cries/uncomp_kommo_o.bin"
 
 	.align 2
-Cry_Tapu_koko::
+Cry_Tapu_Koko::
 	.incbin "sound/direct_sound_samples/cries/uncomp_tapu_koko.bin"
 
 	.align 2
-Cry_Tapu_lele::
+Cry_Tapu_Lele::
 	.incbin "sound/direct_sound_samples/cries/uncomp_tapu_lele.bin"
 
 	.align 2
-Cry_Tapu_bulu::
+Cry_Tapu_Bulu::
 	.incbin "sound/direct_sound_samples/cries/uncomp_tapu_bulu.bin"
 
 	.align 2
-Cry_Tapu_fini::
+Cry_Tapu_Fini::
 	.incbin "sound/direct_sound_samples/cries/uncomp_tapu_fini.bin"
 
 	.align 2
@@ -3847,7 +3847,7 @@ Cry_Sirfetchd::
 	.incbin "sound/direct_sound_samples/cries/uncomp_sirfetchd.bin"
 
 	.align 2
-Cry_MrRime::
+Cry_Mr_Rime::
 	.incbin "sound/direct_sound_samples/cries/uncomp_mr_rime.bin"
 
 	.align 2
@@ -4235,8 +4235,8 @@ Cry_Oricorio_Pom_Pom::
 	.incbin "sound/direct_sound_samples/cries/uncomp_oricorio_pom_pom.bin"
 
 	.align 2
-Cry_Oricorio_Pa_u::
-	.incbin "sound/direct_sound_samples/cries/uncomp_oricorio_pa_u.bin"
+Cry_Oricorio_Pau::
+	.incbin "sound/direct_sound_samples/cries/uncomp_oricorio_pau.bin"
 
 	.align 2
 Cry_Oricorio_Sensu::
