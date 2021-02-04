@@ -1,5 +1,8 @@
 #include "global.h"
 #include "battle_main.h"
+#ifdef BATTLE_ENGINE
+#include "battle_util.h"
+#endif
 #include "bg.h"
 #include "contest_effect.h"
 #include "data.h"
@@ -23,6 +26,9 @@
 #include "pokedex_cry_screen.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
+#ifdef POKEMON_EXPANSION
+#include "region_map.h"
+#endif
 #include "scanline_effect.h"
 #include "shop.h"
 #include "sound.h"
@@ -40,9 +46,6 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#ifdef BATTLE_ENGINE
-#include "battle_util.h"
-#endif
 
 enum
 {
