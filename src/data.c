@@ -295,9 +295,12 @@ const union AnimCmd *const gUnknown_082FF70C[] =
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
-#include "data/pokemon_graphics/unknown_anims.h"
+const bool8 SpeciesHasGenderDifference[NUM_SPECIES] =
+{
+    [SPECIES_EEVEE] = TRUE,
+};
+
 #include "data/pokemon_graphics/front_pic_coordinates.h"
-#include "data/pokemon_graphics/still_front_pic_table.h"
 #include "data/pokemon_graphics/back_pic_coordinates.h"
 
 #include "data/pokemon_graphics/back_pic_table.h"

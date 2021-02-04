@@ -3,6 +3,9 @@
 
 #include "constants/pokemon.h"
 #include "sprite.h"
+#include "constants/region_map_sections.h"
+#include "constants/pokemon_config.h"
+#include "constants/map_groups.h"
 
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
 
@@ -55,7 +58,6 @@ struct PokemonSubstruct3
  /* 0x05 */ u32 spAttackIV:5;
  /* 0x06 */ u32 spDefenseIV:5;
  /* 0x07 */ u32 isEgg:1;
- /* 0x07 */ u32 abilityNum:1;
 
  /* 0x08 */ u32 coolRibbon:3;
  /* 0x08 */ u32 beautyRibbon:3;
@@ -74,7 +76,8 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 giftRibbon5:1;
  /* 0x0B */ u32 giftRibbon6:1;
  /* 0x0B */ u32 giftRibbon7:1;
- /* 0x0B */ u32 fatefulEncounter:4;
+ /* 0x0B */ u32 fatefulEncounter:2;
+ /* 0x0B */ u32 abilityNum:2;
  /* 0x0B */ u32 obedient:1;
 };
 
@@ -186,7 +189,7 @@ struct BaseStats
  /* 0x06 */ u8 type1;
  /* 0x07 */ u8 type2;
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 expYield;
+ /* 0x09 */ u16 expYield;
  /* 0x0A */ u16 evYield_HP:2;
  /* 0x0A */ u16 evYield_Attack:2;
  /* 0x0A */ u16 evYield_Defense:2;
@@ -208,6 +211,7 @@ struct BaseStats
             u8 safariZoneFleeRate;
             u8 bodyColor : 7;
             u8 noFlip : 1;
+ /* 0x1B */ u8 flags;
 };
 
 #include "constants/battle_config.h"
@@ -295,7 +299,6 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
 void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 bool8 sub_80688F8(u8 caseId, u8 battlerId);
-void SetDeoxysStats(void);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
 void CreateObedientEnemyMon(void);
@@ -322,6 +325,7 @@ u8 GetDefaultMoveTarget(u8 battlerId);
 u8 GetMonGender(struct Pokemon *mon);
 u8 GetBoxMonGender(struct BoxPokemon *boxMon);
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
+u32 GetUnownSpeciesId(u32 personality);
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition);
@@ -362,14 +366,13 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
 u8 *UseStatIncreaseItem(u16 itemId);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u16 tradePartnerSpecies);
 u16 HoennPokedexNumToSpecies(u16 hoennNum);
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
 u16 SpeciesToHoennPokedexNum(u16 species);
 u16 HoennToNationalOrder(u16 hoennNum);
-u16 SpeciesToCryId(u16 species);
 void sub_806D544(u16 species, u32 personality, u8 *dest);
 void DrawSpindaSpots(u16 species, u32 personality, u8 *dest, u8 a4);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);

@@ -296,25 +296,42 @@
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 
 // Evolution types
-#define EVO_MEGA_EVOLUTION      0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
-#define EVO_MOVE_MEGA_EVOLUTION 0xfffe // Mega Evolution that checks for a move instead of held item.
-#define EVO_FRIENDSHIP       1      // Pokémon levels up with friendship ≥ 220
-#define EVO_FRIENDSHIP_DAY   2      // Pokémon levels up during the day with friendship ≥ 220
-#define EVO_FRIENDSHIP_NIGHT 3      // Pokémon levels up at night with friendship ≥ 220
-#define EVO_LEVEL            4      // Pokémon reaches the specified level
-#define EVO_TRADE            5      // Pokémon is traded
-#define EVO_TRADE_ITEM       6      // Pokémon is traded while it's holding the specified item
-#define EVO_ITEM             7      // specified item is used on Pokémon
-#define EVO_LEVEL_ATK_GT_DEF 8      // Pokémon reaches the specified level with attack > defense
-#define EVO_LEVEL_ATK_EQ_DEF 9      // Pokémon reaches the specified level with attack = defense
-#define EVO_LEVEL_ATK_LT_DEF 10     // Pokémon reaches the specified level with attack < defense
-#define EVO_LEVEL_SILCOON    11     // Pokémon reaches the specified level with a Silcoon personality value
-#define EVO_LEVEL_CASCOON    12     // Pokémon reaches the specified level with a Cascoon personality value
-#define EVO_LEVEL_NINJASK    13     // Pokémon reaches the specified level (special value for Ninjask)
-#define EVO_LEVEL_SHEDINJA   14     // Pokémon reaches the specified level (special value for Shedinja)
-#define EVO_BEAUTY           15     // Pokémon levels up with beauty ≥ specified value
+#define EVO_MEGA_EVOLUTION                0xffff // Not an actual evolution, used to temporarily mega evolve in battle.
+#define EVO_MOVE_MEGA_EVOLUTION           0xfffe // Mega Evolution that checks for a move instead of held item.
+#define EVO_FRIENDSHIP                    1      // Pokémon levels up with friendship ≥ 220
+#define EVO_FRIENDSHIP_DAY                2      // Pokémon levels up during the day with friendship ≥ 220
+#define EVO_FRIENDSHIP_NIGHT              3      // Pokémon levels up at night with friendship ≥ 220
+#define EVO_LEVEL                         4      // Pokémon reaches the specified level
+#define EVO_TRADE                         5      // Pokémon is traded
+#define EVO_TRADE_ITEM                    6      // Pokémon is traded while it's holding the specified item
+#define EVO_ITEM                          7      // specified item is used on Pokémon
+#define EVO_LEVEL_ATK_GT_DEF              8      // Pokémon reaches the specified level with attack > defense
+#define EVO_LEVEL_ATK_EQ_DEF              9      // Pokémon reaches the specified level with attack = defense
+#define EVO_LEVEL_ATK_LT_DEF              10     // Pokémon reaches the specified level with attack < defense
+#define EVO_LEVEL_SILCOON                 11     // Pokémon reaches the specified level with a Silcoon personality value
+#define EVO_LEVEL_CASCOON                 12     // Pokémon reaches the specified level with a Cascoon personality value
+#define EVO_LEVEL_NINJASK                 13     // Pokémon reaches the specified level (special value for Ninjask)
+#define EVO_LEVEL_SHEDINJA                14     // Pokémon reaches the specified level (special value for Shedinja)
+#define EVO_BEAUTY                        15     // Pokémon levels up with beauty ≥ specified value
+#define EVO_LEVEL_FEMALE                  16     // Pokémon reaches the specified level, is female
+#define EVO_LEVEL_MALE                    17     // Pokémon reaches the specified level, is male
+#define EVO_LEVEL_NIGHT                   18     // Pokémon reaches the specified level, is night
+#define EVO_LEVEL_DAY                     19     // Pokémon reaches the specified level, is day
+#define EVO_LEVEL_DUSK                    20     // Pokémon reaches the specified level, is dusk (5-6 P.M)
+#define EVO_ITEM_HOLD_DAY                 21     // Pokémon levels up, holds specified item at day
+#define EVO_ITEM_HOLD_NIGHT               22     // Pokémon levels up, holds specified item at night
+#define EVO_MOVE                          23     // Pokémon levels up, knows specified move
+#define EVO_MOVE_TYPE                     24     // Pokémon levels up, knows move with specified type
+#define EVO_MAPSEC                        25     // Pokémon levels up on specified mapsec
+#define EVO_ITEM_MALE                     26     // specified item is used on a male Pokémon
+#define EVO_ITEM_FEMALE                   27     // specified item is used on a female Pokémon
+#define EVO_LEVEL_RAIN                    28     // Pokémon reaches the specified level while it's raining
+#define EVO_SPECIFIC_MON_IN_PARTY         29     // Pokémon levels up with a specified Pokémon in party
+#define EVO_LEVEL_DARK_TYPE_MON_IN_PARTY  30     // Pokémon reaches the specified level with a Dark Type Pokémon in party
+#define EVO_TRADE_SPECIFIC_MON            31     // Pokémon is traded for a specified Pokémon
+#define EVO_SPECIFIC_MAP                  32     // Pokémon levels up on specified map
 
-#define EVOS_PER_MON 5
+#define EVOS_PER_MON 10
 
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8

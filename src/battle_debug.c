@@ -739,7 +739,7 @@ static void Task_ShowAiPoints(u8 taskId)
             {
                 data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
                                                          SpriteCallbackDummy,
-                                                         95 + (count * 60), 17, 0, 0, FALSE);
+                                                         95 + (count * 60), 17, 0, 0);
                 gSprites[data->aiIconSpriteIds[i]].data[0] = i; // battler id
                 count++;
             }
@@ -748,7 +748,7 @@ static void Task_ShowAiPoints(u8 taskId)
                 data->aiIconSpriteIds[i] = 0xFF;
             }
         }
-        data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
+        data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,

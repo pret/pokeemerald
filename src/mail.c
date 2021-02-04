@@ -404,11 +404,11 @@ static bool8 MailReadBuildGraphics(void)
             {
                 case 1:
                     LoadMonIconPalette(icon);
-                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0, 0);
+                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0);
                     break;
                 case 2:
                     LoadMonIconPalette(icon);
-                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0, 0);
+                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0);
                     break;
             }
             break;
