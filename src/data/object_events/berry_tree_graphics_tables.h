@@ -418,6 +418,160 @@ const struct SpriteFrameImage gObjectEventPicTable_TamatoBerryTree[] = {
 
 const u8 gBerryTreePaletteSlotTable_Tamato[] = {3, 4, 2, 2, 2};
 
+const struct SpriteFrameImage gObjectEventPicTable_OccaBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_OccaBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_OccaBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_OccaBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_OccaBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_OccaBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_OccaBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Occa[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gObjectEventPicTable_YacheBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_YacheBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_YacheBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_YacheBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_YacheBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_YacheBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_YacheBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Yache[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gObjectEventPicTable_ChopleBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_ChopleBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_ChopleBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_ChopleBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_ChopleBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_ChopleBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_ChopleBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Chople[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gObjectEventPicTable_KebiaBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_KebiaBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_KebiaBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_KebiaBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_KebiaBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_KebiaBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_KebiaBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Kebia[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gObjectEventPicTable_ShucaBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_ShucaBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_ShucaBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_ShucaBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_ShucaBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_ShucaBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_ShucaBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Shuca[] = {3, 4, 5, 5, 5};
+
+const struct SpriteFrameImage gObjectEventPicTable_PayapaBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_PayapaBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_PayapaBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_PayapaBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_PayapaBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_PayapaBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_PayapaBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Payapa[] = {3, 4, 5, 5, 5};
+
+const struct SpriteFrameImage gObjectEventPicTable_TangaBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_TangaBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TangaBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TangaBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TangaBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TangaBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TangaBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Tanga[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gObjectEventPicTable_KasibBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_KasibBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_KasibBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_KasibBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_KasibBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_KasibBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_KasibBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Kasib[] = {3, 4, 4, 4, 4};
+
+const struct SpriteFrameImage gObjectEventPicTable_HabanBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_HabanBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_HabanBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_HabanBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_HabanBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_HabanBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_HabanBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Haban[] = {3, 4, 3, 3, 3};
+
+const struct SpriteFrameImage gObjectEventPicTable_ColburBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_ColburBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_ColburBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_ColburBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_ColburBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_ColburBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_ColburBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Colbur[] = {3, 4, 5, 5, 5};
+
+const struct SpriteFrameImage gObjectEventPicTable_RoseliBerryTree[] = {
+    overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
+    overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 1),
+    overworld_frame(gObjectEventPic_RoseliBerryTree, 2, 4, 0),
+    overworld_frame(gObjectEventPic_RoseliBerryTree, 2, 4, 1),
+    overworld_frame(gObjectEventPic_RoseliBerryTree, 2, 4, 2),
+    overworld_frame(gObjectEventPic_RoseliBerryTree, 2, 4, 3),
+    overworld_frame(gObjectEventPic_RoseliBerryTree, 2, 4, 4),
+    overworld_frame(gObjectEventPic_RoseliBerryTree, 2, 4, 5)
+};
+
+const u8 gBerryTreePaletteSlotTable_Roseli[] = {3, 4, 4, 4, 4};
+
 const u8 gDeadBerryTreeObjectEventGraphicsIdTable[] = {OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES};
 
 const u8 gBerryTreeObjectEventGraphicsIdTable[] = {OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES, OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES};
@@ -466,6 +620,30 @@ const struct SpriteFrameImage *const gBerryTreePicTablePointers[] = {
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_LansatBerryTree,
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_CornnBerryTree,
     [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_DurinBerryTree,
+    [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_OccaBerryTree,
+    [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_CornnBerryTree,
+    [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_RazzBerryTree,
+    [ITEM_RINDO_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_TamatoBerryTree,
+    [ITEM_YACHE_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_YacheBerryTree,
+    [ITEM_CHOPLE_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_ChopleBerryTree,
+    [ITEM_KEBIA_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_KebiaBerryTree,
+    [ITEM_SHUCA_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_ShucaBerryTree,
+    [ITEM_COBA_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_RawstBerryTree,
+    [ITEM_PAYAPA_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_PayapaBerryTree,
+    [ITEM_TANGA_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_TangaBerryTree,
+    [ITEM_CHARTI_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_LansatBerryTree,
+    [ITEM_KASIB_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_KasibBerryTree,
+    [ITEM_HABAN_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_HabanBerryTree,
+    [ITEM_COLBUR_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_ColburBerryTree,
+    [ITEM_BABIRI_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_LiechiBerryTree,
+    [ITEM_CHILAN_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_GrepaBerryTree,
+    [ITEM_ROSELI_BERRY - FIRST_BERRY_INDEX] = gObjectEventPicTable_RoseliBerryTree,
+    [ITEM_MICLE_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_CUSTAP_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_JABOCA_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] = NULL,
 };
 
 const u8 *const gBerryTreePaletteSlotTablePointers[] = {
@@ -512,6 +690,30 @@ const u8 *const gBerryTreePaletteSlotTablePointers[] = {
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Lansat,
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Cornn,
     [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Durin,
+    [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Occa,
+    [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Cornn,
+    [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Razz,
+    [ITEM_RINDO_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Tamato,
+    [ITEM_YACHE_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Yache,
+    [ITEM_CHOPLE_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Chople,
+    [ITEM_KEBIA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Kebia,
+    [ITEM_SHUCA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Shuca,
+    [ITEM_COBA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Rawst,
+    [ITEM_PAYAPA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Payapa,
+    [ITEM_TANGA_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Tanga,
+    [ITEM_CHARTI_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Lansat,
+    [ITEM_KASIB_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Kasib,
+    [ITEM_HABAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Haban,
+    [ITEM_COLBUR_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Colbur,
+    [ITEM_BABIRI_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Liechi,
+    [ITEM_CHILAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Grepa,
+    [ITEM_ROSELI_BERRY - FIRST_BERRY_INDEX] = gBerryTreePaletteSlotTable_Roseli,
+    [ITEM_MICLE_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_CUSTAP_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_JABOCA_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] = NULL,
+    [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] = NULL,
 };
 
 const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
@@ -558,8 +760,28 @@ const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
-    // 3 unused berries.
-    [ITEM_0B0 - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
-    [ITEM_0B1 - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
-    [ITEM_0B2 - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_RINDO_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_YACHE_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_CHOPLE_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_KEBIA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_SHUCA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_COBA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_PAYAPA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_TANGA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_CHARTI_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_KASIB_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_HABAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_COLBUR_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_BABIRI_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_CHILAN_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_ROSELI_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_MICLE_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_CUSTAP_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_JABOCA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
+    [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
 };

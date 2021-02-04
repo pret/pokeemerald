@@ -61,7 +61,9 @@
 
 #define ITEM5_FRIENDSHIP_ALL    (ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID | ITEM5_FRIENDSHIP_HIGH)
 
-// fields 6 and onwards are item-specific arguments
+// fields 6 - 9 are item-specific arguments
+
+#define ITEM10_IS_VITAMIN       0x1
 
 // Special HP recovery amounts for ITEM4_HEAL_HP
 #define ITEM6_HEAL_FULL   ((u8) -1)

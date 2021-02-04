@@ -34,4 +34,49 @@ const u32 gInterfacePal_LuxuryBall[] = INCBIN_U32("graphics/interface/ball/luxur
 const u32 gInterfaceGfx_PremierBall[] = INCBIN_U32("graphics/interface/ball/premier.4bpp.lz");
 const u32 gInterfacePal_PremierBall[] = INCBIN_U32("graphics/interface/ball/premier.gbapal.lz");
 
+const u32 gInterfaceGfx_LevelBall[] = INCBIN_U32("graphics/interface/ball/level.4bpp.lz");
+const u32 gInterfacePal_LevelBall[] = INCBIN_U32("graphics/interface/ball/level.gbapal.lz");
+
+const u32 gInterfaceGfx_LureBall[] = INCBIN_U32("graphics/interface/ball/lure.4bpp.lz");
+const u32 gInterfacePal_LureBall[] = INCBIN_U32("graphics/interface/ball/lure.gbapal.lz");
+
+const u32 gInterfaceGfx_MoonBall[] = INCBIN_U32("graphics/interface/ball/moon.4bpp.lz");
+const u32 gInterfacePal_MoonBall[] = INCBIN_U32("graphics/interface/ball/moon.gbapal.lz");
+
+const u32 gInterfaceGfx_FriendBall[] = INCBIN_U32("graphics/interface/ball/friend.4bpp.lz");
+const u32 gInterfacePal_FriendBall[] = INCBIN_U32("graphics/interface/ball/friend.gbapal.lz");
+
+const u32 gInterfaceGfx_LoveBall[] = INCBIN_U32("graphics/interface/ball/love.4bpp.lz");
+const u32 gInterfacePal_LoveBall[] = INCBIN_U32("graphics/interface/ball/love.gbapal.lz");
+
+const u32 gInterfaceGfx_HeavyBall[] = INCBIN_U32("graphics/interface/ball/heavy.4bpp.lz");
+const u32 gInterfacePal_HeavyBall[] = INCBIN_U32("graphics/interface/ball/heavy.gbapal.lz");
+
+const u32 gInterfaceGfx_FastBall[] = INCBIN_U32("graphics/interface/ball/fast.4bpp.lz");
+const u32 gInterfacePal_FastBall[] = INCBIN_U32("graphics/interface/ball/fast.gbapal.lz");
+
+const u32 gInterfaceGfx_SportBall[] = INCBIN_U32("graphics/interface/ball/sport.4bpp.lz");
+const u32 gInterfacePal_SportBall[] = INCBIN_U32("graphics/interface/ball/sport.gbapal.lz");
+
+const u32 gInterfaceGfx_DuskBall[] = INCBIN_U32("graphics/interface/ball/dusk.4bpp.lz");
+const u32 gInterfacePal_DuskBall[] = INCBIN_U32("graphics/interface/ball/dusk.gbapal.lz");
+
+const u32 gInterfaceGfx_QuickBall[] = INCBIN_U32("graphics/interface/ball/quick.4bpp.lz");
+const u32 gInterfacePal_QuickBall[] = INCBIN_U32("graphics/interface/ball/quick.gbapal.lz");
+
+const u32 gInterfaceGfx_HealBall[] = INCBIN_U32("graphics/interface/ball/heal.4bpp.lz");
+const u32 gInterfacePal_HealBall[] = INCBIN_U32("graphics/interface/ball/heal.gbapal.lz");
+
+const u32 gInterfaceGfx_CherishBall[] = INCBIN_U32("graphics/interface/ball/cherish.4bpp.lz");
+const u32 gInterfacePal_CherishBall[] = INCBIN_U32("graphics/interface/ball/cherish.gbapal.lz");
+
+const u32 gInterfaceGfx_ParkBall[] = INCBIN_U32("graphics/interface/ball/park.4bpp.lz");
+const u32 gInterfacePal_ParkBall[] = INCBIN_U32("graphics/interface/ball/park.gbapal.lz");
+
+const u32 gInterfaceGfx_DreamBall[] = INCBIN_U32("graphics/interface/ball/dream.4bpp.lz");
+const u32 gInterfacePal_DreamBall[] = INCBIN_U32("graphics/interface/ball/dream.gbapal.lz");
+
+const u32 gInterfaceGfx_BeastBall[] = INCBIN_U32("graphics/interface/ball/beast.4bpp.lz");
+const u32 gInterfacePal_BeastBall[] = INCBIN_U32("graphics/interface/ball/beast.gbapal.lz");
+
 const u32 gOpenPokeballGfx[] = INCBIN_U32("graphics/interface/ball_open.4bpp.lz");

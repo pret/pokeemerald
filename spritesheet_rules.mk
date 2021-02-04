@@ -563,6 +563,38 @@ $(OBJEVENTGFXDIR)/berry_trees/wepear.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/berry_trees/wiki.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(OBJEVENTGFXDIR)/berry_trees/occa.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/yache.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/chople.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/kebia.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/shuca.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/payapa.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/tanga.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/kasib.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/haban.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/colbur.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/berry_trees/roseli.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 
 $(OBJEVENTGFXDIR)/misc/breakable_rock.4bpp: %.4bpp: %.png

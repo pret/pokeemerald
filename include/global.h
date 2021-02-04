@@ -124,6 +124,7 @@
 //      then both BATTLE_ENGINE and POKEMON_EXPANSION must be defined here.
 #define BATTLE_ENGINE
 #define POKEMON_EXPANSION
+#define ITEM_EXPANSION
 
 #define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
 

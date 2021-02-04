@@ -19,6 +19,7 @@
 #include "party_menu.h"
 #include "list_menu.h"
 #include "overworld.h"
+#include "item.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
@@ -28,6 +29,7 @@ static void ClearDaycareMonMail(struct DayCareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, s32 daycareSlotId, u8 y);
+static u8 ModifyBreedingScoreForOvalCharm(u8 score);
 
 // RAM buffers used to assist with BuildEggMoveset()
 EWRAM_DATA static u16 sHatchedEggLevelUpMoves[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
@@ -736,20 +738,41 @@ void RejectEggFromDayCare(void)
 static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare)
 {
     u16 motherItem, fatherItem;
-    if (*species == SPECIES_WYNAUT || *species == SPECIES_AZURILL)
-    {
-        motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
-        fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
-        if (*species == SPECIES_WYNAUT && motherItem != ITEM_LAX_INCENSE && fatherItem != ITEM_LAX_INCENSE)
-        {
-            *species = SPECIES_WOBBUFFET;
-        }
+    motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
+    fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
 
-        if (*species == SPECIES_AZURILL && motherItem != ITEM_SEA_INCENSE && fatherItem != ITEM_SEA_INCENSE)
-        {
-            *species = SPECIES_MARILL;
-        }
-    }
+    if (*species == SPECIES_WYNAUT && motherItem != ITEM_LAX_INCENSE && fatherItem != ITEM_LAX_INCENSE)
+        *species = SPECIES_WOBBUFFET;
+    else if (*species == SPECIES_AZURILL && motherItem != ITEM_SEA_INCENSE && fatherItem != ITEM_SEA_INCENSE)
+        *species = SPECIES_MARILL;
+    #ifdef SPECIES_MUNCHLAX
+        else if (*species == SPECIES_MUNCHLAX && motherItem != ITEM_FULL_INCENSE && fatherItem != ITEM_FULL_INCENSE)
+            *species = SPECIES_SNORLAX;
+    #endif
+    #ifdef SPECIES_HAPPINY
+        else if (*species == SPECIES_HAPPINY && motherItem != ITEM_LUCK_INCENSE && fatherItem != ITEM_LUCK_INCENSE)
+            *species = SPECIES_CHANSEY;
+    #endif
+    #ifdef SPECIES_MIMEJR
+        else if (*species == SPECIES_MIMEJR && motherItem != ITEM_ODD_INCENSE && fatherItem != ITEM_ODD_INCENSE)
+            *species = SPECIES_MR_MIME;
+    #endif
+    #ifdef SPECIES_CHINGLING
+        else if (*species == SPECIES_CHINGLING && motherItem != ITEM_PURE_INCENSE && fatherItem != ITEM_PURE_INCENSE)
+            *species = SPECIES_CHIMECHO;
+    #endif
+    #ifdef SPECIES_BONSLY
+        else if (*species == SPECIES_BONSLY && motherItem != ITEM_ROCK_INCENSE && fatherItem != ITEM_ROCK_INCENSE)
+            *species = SPECIES_SUDOWOODO;
+    #endif
+    #ifdef SPECIES_BUDEW
+        else if (*species == SPECIES_BUDEW && motherItem != ITEM_ROSE_INCENSE && fatherItem != ITEM_ROSE_INCENSE)
+            *species = SPECIES_ROSELIA;
+    #endif
+    #ifdef SPECIES_MANTYKE
+        else if (*species == SPECIES_MANTYKE && motherItem != ITEM_WAVE_INCENSE && fatherItem != ITEM_WAVE_INCENSE)
+            *species = SPECIES_MANTINE;
+    #endif
 }
 
 static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *daycare)
@@ -894,7 +917,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     // Check if an egg should be produced
     if (daycare->offspringPersonality == 0 && validEggs == DAYCARE_MON_COUNT && (daycare->mons[1].steps & 0xFF) == 0xFF)
     {
-        u8 compatability = GetDaycareCompatibilityScore(daycare);
+        u8 compatability = ModifyBreedingScoreForOvalCharm(GetDaycareCompatibilityScore(daycare));
         if (compatability > (Random() * 100u) / USHRT_MAX)
             TriggerPendingDaycareEgg();
     }
@@ -1302,3 +1325,22 @@ void ChooseSendDaycareMon(void)
     ChooseMonForDaycare();
     gMain.savedCallback = CB2_ReturnToField;
 }
+
+static u8 ModifyBreedingScoreForOvalCharm(u8 score)
+{
+    if (CheckBagHasItem(ITEM_OVAL_CHARM, 1))
+    {
+        switch (score)
+        {
+        case 20:
+            return 40;
+        case 50:
+            return 80;
+        case 70:
+            return 88;
+        }
+    }
+    
+    return score;
+}
+
