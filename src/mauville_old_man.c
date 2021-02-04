@@ -1324,7 +1324,6 @@ static void PrintStoryList(void)
 {
     s32 i;
     s32 width = GetStringWidth(1, gText_Exit, 0);
-    u8 tileWidth;
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         s32 curWidth;

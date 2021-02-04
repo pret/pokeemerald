@@ -1494,7 +1494,6 @@ static const struct MatchCallText *GetGeneralMatchCallText(int matchCallId, u8 *
     int count;
     u32 topic, id;
     u16 rand;
-    u16 var3;
 
     rand = Random();
     if (!(rand & 1))
@@ -1817,10 +1816,13 @@ static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
         }
         *topicTextId = 3;
         break;
+    #ifdef BUGFIX
+    case FRONTIER_FACILITY_PIKE:
+    #else
     case FRONTIER_FACILITY_FACTORY:
+    #endif
         for (i = 0; i < 2; i++)
         {
-            // BUG: should be looking at battle factory records.
             if (streak < gSaveBlock2Ptr->frontier.pikeRecordStreaks[i])
                 streak = gSaveBlock2Ptr->frontier.pikeRecordStreaks[i];
         }
@@ -1848,12 +1850,15 @@ static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
         }
         *topicTextId = 2;
         break;
+    #ifdef BUGFIX
+    case FRONTIER_FACILITY_FACTORY:
+    #else
     case FRONTIER_FACILITY_PIKE:
+    #endif
         for (i = 0; i < 2; i++)
         {
             for (j = 0; j < 2; j++)
             {
-                // BUG: should be looking at battle pike records.
                 if (streak < gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[i][j])
                     streak = gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[i][j];
             }

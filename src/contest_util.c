@@ -166,11 +166,6 @@ static void SpriteCB_Confetti(struct Sprite *sprite);
 static void Task_ShowContestEntryMonPic(u8 taskId);
 static void Task_LinkContestWaitForConnection(u8 taskId);
 
-extern const u16 gObjectEventPalette8[];
-extern const u16 gObjectEventPalette17[];
-extern const u16 gObjectEventPalette33[];
-extern const u16 gObjectEventPalette34[];
-
 static const u16 sUnknown_0858D6B0[] = INCBIN_U16("graphics/unknown/unknown_58D6B0.gbapal");
 static const u8 sUnknown_0858D6D0[] = INCBIN_U8("graphics/unknown/unknown_58D6D0.4bpp");
 static const u16 sMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
@@ -876,22 +871,11 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         species = gContestMons[i].species;
         personality = gContestMons[i].personality;
         otId = gContestMons[i].otId;
-        if (i == gContestPlayerMonIndex)
-        {
-            HandleLoadSpecialPokePic_2(
-                &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites[1],
-                species,
-                personality);
-        }
-        else
-        {
-            HandleLoadSpecialPokePic_DontHandleDeoxys(
-                &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites[1],
-                species,
-                personality);
-        }
+        HandleLoadSpecialPokePic(
+            &gMonFrontPicTable[species],
+            gMonSpritesGfxPtr->sprites.ptr[1],
+            species,
+            personality);
 
         pokePal = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
         LoadCompressedSpritePalette(pokePal);
@@ -1090,14 +1074,9 @@ static void Task_FlashStarsAndHearts(u8 taskId)
 static void LoadContestMonIcon(u16 species, u8 monIndex, u8 srcOffset, u8 useDmaNow, u32 personality)
 {
     const u8 *iconPtr;
-    u16 var0, var1, frameNum;
+    u16 var0, var1;
 
-    if (monIndex == gContestPlayerMonIndex)
-        frameNum = 1;
-    else
-        frameNum = 0;
-
-    iconPtr = GetMonIconPtr(species, personality, frameNum);
+    iconPtr = GetMonIconPtr(species, personality);
     iconPtr += srcOffset * 0x200 + 0x80;
     if (useDmaNow)
     {
@@ -2488,16 +2467,16 @@ void LoadLinkContestPlayerPalettes(void)
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPalette33, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x160 + i * 0x10, 0x20);
                 else
-                    LoadPalette(gObjectEventPalette34, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_RubySapphireMay, 0x160 + i * 0x10, 0x20);
             }
             else
             {
                 if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPalette8, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_Brendan, 0x160 + i * 0x10, 0x20);
                 else
-                    LoadPalette(gObjectEventPalette17, 0x160 + i * 0x10, 0x20);
+                    LoadPalette(gObjectEventPal_May, 0x160 + i * 0x10, 0x20);
             }
         }
     }
@@ -2551,10 +2530,7 @@ void ShowContestEntryMonPic(void)
         taskId = CreateTask(Task_ShowContestEntryMonPic, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
-        if (gSpecialVar_0x8006 == gContestPlayerMonIndex)
-            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
-        else
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
 
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
         LoadCompressedSpritePalette(palette);

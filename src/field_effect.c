@@ -902,7 +902,7 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
-    s32 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
+    s32 spriteId = CreateMonPicSprite(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
@@ -913,7 +913,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, 1, x, y, 0, spritePalette->tag);
+    u16 spriteId = CreateMonPicSprite(species, otId, personality, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
@@ -934,43 +934,43 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
 // r, g, b are between 0 and 16
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
-    int curRed;
-    int curGreen;
-    int curBlue;
-    u16 outPal;
-
-    outPal = gPlttBufferUnfaded[i];
-    curRed = outPal & 0x1f;
-    curGreen = (outPal & (0x1f << 5)) >> 5;
-    curBlue = (outPal & (0x1f << 10)) >> 10;
-    curRed += (((0x1f - curRed) * r) >> 4);
-    curGreen += (((0x1f - curGreen) * g) >> 4);
-    curBlue += (((0x1f - curBlue) * b) >> 4);
-    outPal = curRed;
-    outPal |= curGreen << 5;
-    outPal |= curBlue << 10;
-    gPlttBufferFaded[i] = outPal;
+    int curRed, curGreen, curBlue;
+    u16 color = gPlttBufferUnfaded[i];
+    
+    curRed   = (color & RGB_RED);
+    curGreen = (color & RGB_GREEN) >>  5;
+    curBlue  = (color & RGB_BLUE)  >> 10;
+    
+    curRed   += (((0x1F - curRed)   * r) >> 4);
+    curGreen += (((0x1F - curGreen) * g) >> 4);
+    curBlue  += (((0x1F - curBlue)  * b) >> 4);
+    
+    color  = curRed;
+    color |= (curGreen <<  5);
+    color |= (curBlue  << 10);
+    
+    gPlttBufferFaded[i] = color;
 }
 
 // r, g, b are between 0 and 16
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
-    int curRed;
-    int curGreen;
-    int curBlue;
-    u16 outPal;
-
-    outPal = gPlttBufferUnfaded[i];
-    curRed = outPal & 0x1f;
-    curGreen = (outPal & (0x1f << 5)) >> 5;
-    curBlue = (outPal & (0x1f << 10)) >> 10;
-    curRed -= ((curRed * r) >> 4);
+    int curRed, curGreen, curBlue;
+    u16 color = gPlttBufferUnfaded[i];
+    
+    curRed   = (color & RGB_RED);
+    curGreen = (color & RGB_GREEN) >>  5;
+    curBlue  = (color & RGB_BLUE)  >> 10;
+    
+    curRed   -= ((curRed   * r) >> 4);
     curGreen -= ((curGreen * g) >> 4);
-    curBlue -= ((curBlue * b) >> 4);
-    outPal = curRed;
-    outPal |= curGreen << 5;
-    outPal |= curBlue << 10;
-    gPlttBufferFaded[i] = outPal;
+    curBlue  -= ((curBlue  * b) >> 4);
+    
+    color  = curRed;
+    color |= curGreen <<  5;
+    color |= curBlue  << 10;
+    
+    gPlttBufferFaded[i] = color;
 }
 
 // Task data for Task_PokecenterHeal and Task_HallOfFameRecord
@@ -3846,7 +3846,6 @@ bool8 FldEff_MoveDeoxysRock(struct Sprite* sprite)
 
 static void Task_MoveDeoxysRock(u8 taskId)
 {
-    // BUG: Possible divide by zero
     s16 *data = gTasks[taskId].data;
     struct Sprite *sprite = &gSprites[data[1]];
     switch (data[0])
@@ -3854,8 +3853,16 @@ static void Task_MoveDeoxysRock(u8 taskId)
         case 0:
             data[4] = sprite->pos1.x << 4;
             data[5] = sprite->pos1.y << 4;
-            data[6] = (data[2] * 16 - data[4]) / data[8];
-            data[7] = (data[3] * 16 - data[5]) / data[8];
+
+            // UB: Possible divide by zero
+            #ifdef UBFIX
+            #define DIVISOR (data[8] ? data[8] : 1);
+            #else
+            #define DIVISOR (data[8])
+            #endif
+
+            data[6] = (data[2] * 16 - data[4]) / DIVISOR;
+            data[7] = (data[3] * 16 - data[5]) / DIVISOR;
             data[0]++;
         case 1:
             if (data[8] != 0)

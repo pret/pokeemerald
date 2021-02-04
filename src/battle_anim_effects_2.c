@@ -26,7 +26,6 @@ static void sub_8103680(struct Sprite *);
 static void AnimKinesisZapEnergy(struct Sprite *);
 static void AnimSwordsDanceBlade(struct Sprite *);
 static void AnimSwordsDanceBlade_Step(struct Sprite *);
-static void AnimSonicBoomProjectile(struct Sprite *);
 static void AnimAirWaveProjectile(struct Sprite *);
 static void AnimAirWaveProjectile_Step1(struct Sprite *sprite);
 static void AnimAirWaveProjectile_Step2(struct Sprite *sprite);
@@ -46,12 +45,9 @@ static void AnimGuillotinePincer_Step1(struct Sprite *);
 static void AnimGuillotinePincer_Step2(struct Sprite *);
 static void AnimGuillotinePincer_Step3(struct Sprite *);
 static void AnimBreathPuff(struct Sprite *);
-static void AnimAngerMark(struct Sprite *);
 static void AnimPencil(struct Sprite *);
 static void AnimPencil_Step(struct Sprite *);
 static void AnimBlendThinRing(struct Sprite *);
-static void AnimHyperVoiceRing(struct Sprite *);
-static void AnimUproarRing(struct Sprite *);
 static void AnimSoftBoiledEgg(struct Sprite *);
 static void AnimSoftBoiledEgg_Step1(struct Sprite *);
 static void AnimSoftBoiledEgg_Step2(struct Sprite *);
@@ -67,9 +63,7 @@ static void AnimRedHeartProjectile(struct Sprite *);
 static void AnimRedHeartProjectile_Step(struct Sprite *);
 static void AnimRedHeartRising(struct Sprite *);
 static void AnimRedHeartRising_Step(struct Sprite *);
-static void AnimOrbitFast(struct Sprite *);
 static void AnimOrbitFast_Step(struct Sprite *);
-static void AnimOrbitScatter(struct Sprite *);
 static void AnimOrbitScatter_Step(struct Sprite *);
 static void AnimSpitUpOrb(struct Sprite *);
 static void AnimSpitUpOrb_Step(struct Sprite *sprite);
@@ -985,6 +979,28 @@ const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
     .callback = AnimOrbitScatter,
 };
 
+const struct SpriteTemplate gPowerGemOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gHiddenPowerOrbAffineAnimTable,
+    .callback = AnimOrbitFast,
+};
+
+const struct SpriteTemplate gPowerGemOrbScatterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POWER_GEM,
+    .paletteTag = ANIM_TAG_POWER_GEM,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gHiddenPowerOrbAffineAnimTable,
+    .callback = AnimOrbitScatter,
+};
+
 const union AffineAnimCmd gSpitUpOrbAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
@@ -1210,7 +1226,6 @@ const union AffineAnimCmd *const gPerishSongMusicNoteAffineAnimTable[] =
     gPerishSongMusicNoteAffineAnimCmds3,
 };
 
-extern const union AnimCmd *const gMusicNotesAnimTable[];
 const struct SpriteTemplate gPerishSongMusicNoteSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MUSIC_NOTES_2,
@@ -1260,6 +1275,28 @@ const struct SpriteTemplate gGuardRingSpriteTemplate =
     .images = NULL,
     .affineAnims = gGuardRingAffineAnimTable,
     .callback = AnimGuardRing,
+};
+
+const struct SpriteTemplate gCrushGripExplosionTemplate =
+{
+    .tileTag = ANIM_TAG_EXPLOSION,
+    .paletteTag = ANIM_TAG_EXPLOSION,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gExplosionAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpriteOnMonPos
+};
+
+const struct SpriteTemplate gRoarOfTimeBombTemplate =
+{
+    .tileTag = ANIM_TAG_EXPLOSION,
+    .paletteTag = ANIM_TAG_WATER_GUN,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gExplosionAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpriteOnMonPos
 };
 
 static void sub_8103448(struct Sprite *sprite)
@@ -1480,7 +1517,7 @@ static void AnimSwordsDanceBlade_Step(struct Sprite *sprite)
 // arg 2: target x pixel offset
 // arg 3: target y pixel offset
 // arg 4: duration
-static void AnimSonicBoomProjectile(struct Sprite *sprite)
+void AnimSonicBoomProjectile(struct Sprite *sprite)
 {
     s16 targetXPos;
     s16 targetYPos;
@@ -2268,7 +2305,7 @@ static void AnimBreathPuff(struct Sprite *sprite)
 // arg 0: target mon (0 = attacker, 1 = target)
 // arg 1: x pixel offset
 // arg 2: y pixel offset
-static void AnimAngerMark(struct Sprite *sprite)
+void AnimAngerMark(struct Sprite *sprite)
 {
     u8 battler;
     if (!gBattleAnimArgs[0])
@@ -2578,7 +2615,7 @@ void sub_8105284(struct Sprite *sprite)
     }
 }
 
-static void AnimHyperVoiceRing(struct Sprite *sprite)
+void AnimHyperVoiceRing(struct Sprite *sprite)
 {
     u16 r9 = 0;
     u16 r6 = 0;
@@ -2663,7 +2700,7 @@ static void AnimHyperVoiceRing(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-static void AnimUproarRing(struct Sprite *sprite)
+void AnimUproarRing(struct Sprite *sprite)
 {
     u8 index = IndexOfSpritePaletteTag(ANIM_TAG_THIN_RING);
     if (index != 0xFF)
@@ -3400,7 +3437,7 @@ static void AnimTask_ScaryFace_Step(u8 taskId)
 // Used by MOVE_HIDDEN_POWER
 // arg 0: duration
 // arg 1: initial wave offset
-static void AnimOrbitFast(struct Sprite *sprite)
+void AnimOrbitFast(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
@@ -3451,7 +3488,7 @@ static void AnimOrbitFast_Step(struct Sprite *sprite)
 // Moves orbs away from the mon, based on where they are in their orbit.
 // Used in MOVE_HIDDEN_POWER.
 // arg 0: initial wave offset
-static void AnimOrbitScatter(struct Sprite *sprite)
+void AnimOrbitScatter(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);

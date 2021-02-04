@@ -55,7 +55,7 @@ struct RecordedBattleSave
     u16 opponentA;
     u16 opponentB;
     u16 partnerId;
-    u16 field_4FA;
+    u16 multiplayerId;
     u8 lvlMode;
     u8 frontierFacility;
     u8 frontierBrainSymbol;
@@ -83,7 +83,7 @@ EWRAM_DATA static u8 sLvlMode = 0;
 EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
 EWRAM_DATA static MainCallback sCallback2_AfterRecordedBattle = NULL;
-EWRAM_DATA u8 gUnknown_0203C7B4 = 0;
+EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;
 EWRAM_DATA static u8 sUnknown_0203C7B5 = 0;
 EWRAM_DATA static u8 sBattleScene = 0;
 EWRAM_DATA static u8 sTextSpeed = 0;
@@ -154,7 +154,7 @@ void sub_8184E58(void)
         u8 linkPlayersCount;
         u8 text[30];
 
-        gUnknown_0203C7B4 = GetMultiplayerId();
+        gRecordedBattleMultiplayerId = GetMultiplayerId();
         linkPlayersCount = GetLinkPlayerCount();
 
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -362,11 +362,14 @@ bool32 MoveRecordedBattleToSaveData(void)
 
     if (sBattleFlags & BATTLE_TYPE_LINK)
     {
-        battleSave->battleFlags = (sBattleFlags & ~(BATTLE_TYPE_LINK | BATTLE_TYPE_20)) | BATTLE_TYPE_x2000000;
+        battleSave->battleFlags = (sBattleFlags & ~(BATTLE_TYPE_LINK | BATTLE_TYPE_LINK_IN_BATTLE)) | BATTLE_TYPE_RECORDED_LINK;
 
+        // BATTLE_TYPE_RECORDED_IS_MASTER set indicates battle will play
+        // out from player's perspective (i.e. player with back to camera)
+        // Otherwise player will appear on "opponent" side
         if (sBattleFlags & BATTLE_TYPE_IS_MASTER)
         {
-            battleSave->battleFlags |= BATTLE_TYPE_x80000000;
+            battleSave->battleFlags |= BATTLE_TYPE_RECORDED_IS_MASTER;
         }
         else if (sBattleFlags & BATTLE_TYPE_MULTI)
         {
@@ -374,13 +377,13 @@ bool32 MoveRecordedBattleToSaveData(void)
             {
             case 0:
             case 2:
-                if (!(sPlayers[gUnknown_0203C7B4].battlerId & 1))
-                    battleSave->battleFlags |= BATTLE_TYPE_x80000000;
+                if (!(sPlayers[gRecordedBattleMultiplayerId].battlerId & 1))
+                    battleSave->battleFlags |= BATTLE_TYPE_RECORDED_IS_MASTER;
                 break;
             case 1:
             case 3:
-                if ((sPlayers[gUnknown_0203C7B4].battlerId & 1))
-                    battleSave->battleFlags |= BATTLE_TYPE_x80000000;
+                if ((sPlayers[gRecordedBattleMultiplayerId].battlerId & 1))
+                    battleSave->battleFlags |= BATTLE_TYPE_RECORDED_IS_MASTER;
                 break;
             }
         }
@@ -393,7 +396,7 @@ bool32 MoveRecordedBattleToSaveData(void)
     battleSave->opponentA = gTrainerBattleOpponent_A;
     battleSave->opponentB = gTrainerBattleOpponent_B;
     battleSave->partnerId = gPartnerTrainerId;
-    battleSave->field_4FA = gUnknown_0203C7B4;
+    battleSave->multiplayerId = gRecordedBattleMultiplayerId;
     battleSave->lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleSave->frontierFacility = sFrontierFacility;
     battleSave->frontierBrainSymbol = sFrontierBrainSymbol;
@@ -573,7 +576,7 @@ static void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
     gTrainerBattleOpponent_A = src->opponentA;
     gTrainerBattleOpponent_B = src->opponentB;
     gPartnerTrainerId = src->partnerId;
-    gUnknown_0203C7B4 = src->field_4FA;
+    gRecordedBattleMultiplayerId = src->multiplayerId;
     sLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     sFrontierFacility = src->frontierFacility;
     sFrontierBrainSymbol = src->frontierBrainSymbol;
@@ -715,7 +718,7 @@ void RecordedBattle_CopyBattlerMoves(void)
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
         return;
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
     if (sUnknown_0203C7AC == 2)
         return;
@@ -732,7 +735,7 @@ void sub_818603C(u8 arg0)
 {
     s32 battlerId, j, k;
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
 
     for (battlerId = 0; battlerId < gBattlersCount; battlerId++)
@@ -846,7 +849,7 @@ bool8 sub_8186450(void)
     return (sUnknown_0203CCD0 == 0);
 }
 
-void sub_8186468(u8 *dst)
+void GetRecordedBattleRecordMixFriendName(u8 *dst)
 {
     s32 i;
 

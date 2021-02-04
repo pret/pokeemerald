@@ -2,6 +2,7 @@
 #include "constants/battle_script_commands.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_string_ids.h"
+#include "constants/battle_config.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
@@ -25,6 +26,21 @@ gBattlescriptsForBallThrow:: @ 82DBD08
 	.4byte BattleScript_BallThrow        @ ITEM_REPEAT_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_TIMER_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_LUXURY_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_DUSK_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_HEAL_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_QUICK_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_CHERISH_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_FAST_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_LEVEL_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_LURE_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_HEAVY_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_LOVE_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_FRIEND_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_MOON_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_SPORT_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_PARK_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_DREAM_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_BEAST_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_PREMIER_BALL
 
 	.align 2
@@ -62,10 +78,16 @@ BattleScript_SafariBallThrow::
 	handleballthrow
 
 BattleScript_SuccessBallThrow::
+	setbyte sMON_CAUGHT, TRUE
 	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_PrintCaughtMonInfo
 	incrementgamestat GAME_STAT_POKEMON_CAPTURES
 BattleScript_PrintCaughtMonInfo::
 	printstring STRINGID_GOTCHAPKMNCAUGHT
+	jumpifbyte CMP_NOT_EQUAL, sEXP_CATCH, TRUE, BattleScript_TryPrintCaughtMonInfo
+	setbyte sGIVEEXP_STATE, 0x0
+	getexp BS_TARGET
+	sethword gBattle_BG2_X, 0x0
+BattleScript_TryPrintCaughtMonInfo:
 	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
 	printstring STRINGID_PKMNDATAADDEDTODEX
 	waitstate
@@ -121,6 +143,7 @@ BattleScript_OpponentUsesHealItem::
 	playse SE_USE_ITEM
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	useitemonopponent
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
@@ -204,4 +227,18 @@ BattleScript_ActionWallyThrow:
 	waitstate
 	printstring STRINGID_YOUTHROWABALLNOWRIGHT
 	waitmessage 0x40
+	end2
+
+BattleScript_TrainerSlideMsgRet::
+	handletrainerslidemsg BS_SCRIPTING, 0
+	trainerslidein 1
+	handletrainerslidemsg BS_SCRIPTING, 1
+	waitstate
+	trainerslideout 1
+	handletrainerslidemsg BS_SCRIPTING, 2
+	waitstate
+	return
+
+BattleScript_TrainerSlideMsgEnd2::
+	call BattleScript_TrainerSlideMsgRet
 	end2

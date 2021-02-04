@@ -119,6 +119,7 @@ static const struct MenuInfoIcon sMenuInfoIcons[] =
     [TYPE_ICE + 1]      = { 32, 12, 0x4C },
     [TYPE_DRAGON + 1]   = { 32, 12, 0xA0 },
     [TYPE_DARK + 1]     = { 32, 12, 0x8C },
+    [TYPE_FAIRY + 1]    = { 32, 12, 0x4  },
     [MENU_INFO_ICON_TYPE]      = { 42, 12, 0xA8 },
     [MENU_INFO_ICON_POWER]     = { 42, 12, 0xC0 },
     [MENU_INFO_ICON_ACCURACY]  = { 42, 12, 0xC8 },
@@ -2016,7 +2017,7 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
 {
     int loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
     const u8 *pixelsSrc;
-    u16 *pixelsDst;
+    u8 *pixelsDst;
     u16 toOrr;
 
     if (dst->width - dstX < width)
@@ -2037,53 +2038,52 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
         for (loopSrcX = srcX, loopDstX = dstX; loopSrcX < xEnd; loopSrcX++, loopDstX++)
         {
             pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 0x1d) >> 0x1B);
-            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)( loopDstY << 0x1d) >> 0x1B);
+            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 0x1d) >> 0x1B);
 
-            if ((uintptr_t )pixelsDst & 0x1)
+            if ((uintptr_t)pixelsDst & 0x1)
             {
-                pixelsDst = (void*)(pixelsDst) - 1;
+                pixelsDst--;
                 if (loopDstX & 0x1)
                 {
-                    toOrr = *pixelsDst & 0x0fff;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0x0fff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 8);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 8);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 12);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 12);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xf0ff;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xf0ff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 8);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 8);
                 }
             }
             else
             {
                 if (loopDstX & 1)
                 {
-                    toOrr = *pixelsDst & 0xff0f;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xff0f;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 0);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 0);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 4);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 4);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xfff0;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xfff0;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) >> 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) >> 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) >> 0);
+                        toOrr |= ((*pixelsSrc & 0x0f) >> 0);
                 }
             }
-
-            // Needed to match, urgh.
-            #ifndef NONMATCHING
-            asm("":::"r4");
-            pixelsDst++;pixelsDst--;
-            #endif // NONMATCHING
+            *(vu16*)pixelsDst = toOrr;
         }
     }
 }
@@ -2095,7 +2095,7 @@ void sub_819A25C(u8 palOffset, u16 speciesId)
 
 void sub_819A27C(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
 {
-    BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality, 1), x, y, 32, 32);
+    BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality), x, y, 32, 32);
 }
 
 void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)

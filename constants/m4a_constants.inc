@@ -1,11 +1,42 @@
 	.equiv ID_NUMBER, 0x68736d53
 
 	.equiv PCM_DMA_BUF_SIZE, 1584
+	.equiv MAX_DIRECTSOUND_CHANNELS, 12
+
+	.equiv C_V, 0x40
 
 	.equiv TONEDATA_TYPE_CGB, 0x07
 	.equiv TONEDATA_TYPE_FIX, 0x08
+	.equiv TONEDATA_TYPE_REV, 0x10
+	.equiv TONEDATA_TYPE_CMP, 0x20
 	.equiv TONEDATA_TYPE_SPL, 0x40 @ key split
 	.equiv TONEDATA_TYPE_RHY, 0x80 @ rhythm
+
+	.equiv TONEDATA_P_S_PAN,  0xc0
+
+	.equiv SOUND_CHANNEL_SF_START,       0x80
+	.equiv SOUND_CHANNEL_SF_STOP,        0x40
+	.equiv SOUND_CHANNEL_SF_SPECIAL,     0x20
+	.equiv SOUND_CHANNEL_SF_LOOP,        0x10
+	.equiv SOUND_CHANNEL_SF_IEC,         0x04
+	.equiv SOUND_CHANNEL_SF_ENV,         0x03
+	.equiv SOUND_CHANNEL_SF_ENV_ATTACK,  0x03
+	.equiv SOUND_CHANNEL_SF_ENV_DECAY,   0x02
+	.equiv SOUND_CHANNEL_SF_ENV_SUSTAIN, 0x01
+	.equiv SOUND_CHANNEL_SF_ENV_RELEASE, 0x00
+	.equiv SOUND_CHANNEL_SF_ON, (SOUND_CHANNEL_SF_START | SOUND_CHANNEL_SF_STOP | SOUND_CHANNEL_SF_IEC | SOUND_CHANNEL_SF_ENV)
+
+	.equiv CGB_CHANNEL_MO_PIT, 0x02
+	.equiv CGB_CHANNEL_MO_VOL, 0x01
+
+	.equiv WAVE_DATA_FLAG_LOOP, 0xC0
+
+	.equiv MPT_FLG_VOLSET, 0x01
+	.equiv MPT_FLG_VOLCHG, 0x03
+	.equiv MPT_FLG_PITSET, 0x04
+	.equiv MPT_FLG_PITCHG, 0x0C
+	.equiv MPT_FLG_START,  0x40
+	.equiv MPT_FLG_EXIST,  0x80
 
 	.macro struct_begin
 	.struct 0
@@ -15,6 +46,28 @@
 \name:
 	.struct \name + \size
 	.endm
+
+	struct_begin
+	struct_field o_WaveData_type, 2
+	struct_field o_WaveData_d1, 1
+	struct_field o_WaveData_flags, 1
+	struct_field o_WaveData_freq, 4
+	struct_field o_WaveData_loopStart, 4
+	struct_field o_WaveData_size, 4
+	struct_field o_WaveData_data, 0
+	struct_field WaveData_size, 0
+
+	struct_begin
+	struct_field o_ToneData_type, 1
+	struct_field o_ToneData_key, 1
+	struct_field o_ToneData_length, 1
+	struct_field o_ToneData_pan_sweep, 1
+	struct_field o_ToneData_wav, 4
+	struct_field o_ToneData_attack, 1
+	struct_field o_ToneData_decay, 1
+	struct_field o_ToneData_sustain, 1
+	struct_field o_ToneData_release, 1
+	struct_field ToneData_size, 0
 
 	struct_begin
 	struct_field o_SoundInfo_ident, 4
@@ -32,8 +85,8 @@
 	struct_field o_SoundInfo_pcmFreq, 4
 	struct_field o_SoundInfo_divFreq, 4
 	struct_field o_SoundInfo_cgbChans, 4
-	struct_field o_SoundInfo_func, 4
-	struct_field o_SoundInfo_intp, 4
+	struct_field o_SoundInfo_MPlayMainHead, 4
+	struct_field o_SoundInfo_musicPlayerHead, 4
 	struct_field o_SoundInfo_CgbSound, 4
 	struct_field o_SoundInfo_CgbOscOff, 4
 	struct_field o_SoundInfo_MidiKeyToCgbFreq, 4
@@ -41,12 +94,12 @@
 	struct_field o_SoundInfo_plynote, 4
 	struct_field o_SoundInfo_ExtVolPit, 4
 	struct_field o_SoundInfo_gap2, 16
-	struct_field o_SoundInfo_chans, 768
+	struct_field o_SoundInfo_chans, MAX_DIRECTSOUND_CHANNELS * 64
 	struct_field o_SoundInfo_pcmBuffer, PCM_DMA_BUF_SIZE * 2
 	struct_field SoundInfo_size, 0
 
 	struct_begin
-	struct_field o_SoundChannel_status, 1
+	struct_field o_SoundChannel_statusFlags, 1
 	struct_field o_SoundChannel_type, 1
 	struct_field o_SoundChannel_rightVolume, 1
 	struct_field o_SoundChannel_leftVolume, 1
@@ -54,29 +107,29 @@
 	struct_field o_SoundChannel_decay, 1
 	struct_field o_SoundChannel_sustain, 1
 	struct_field o_SoundChannel_release, 1
-	struct_field o_SoundChannel_ky, 1
-	struct_field o_SoundChannel_ev, 1
-	struct_field o_SoundChannel_er, 1
-	struct_field o_SoundChannel_el, 1
-	struct_field o_SoundChannel_iev, 1
-	struct_field o_SoundChannel_iel, 1
-	struct_field o_SoundChannel_d1, 1
-	struct_field o_SoundChannel_d2, 1
-	struct_field o_SoundChannel_gt, 1
-	struct_field o_SoundChannel_mk, 1
-	struct_field o_SoundChannel_ve, 1
-	struct_field o_SoundChannel_pr, 1
-	struct_field o_SoundChannel_rp, 1
-	struct_field o_SoundChannel_d3, 3
-	struct_field o_SoundChannel_ct, 4
+	struct_field o_SoundChannel_key, 1
+	struct_field o_SoundChannel_envelopeVolume, 1
+	struct_field o_SoundChannel_envelopeVolumeRight, 1
+	struct_field o_SoundChannel_envelopeVolumeLeft, 1
+	struct_field o_SoundChannel_pseudoEchoVolume, 1
+	struct_field o_SoundChannel_pseudoEchoLength, 1
+	struct_field o_SoundChannel_dummy1, 1
+	struct_field o_SoundChannel_dummy2, 1
+	struct_field o_SoundChannel_gateTime, 1
+	struct_field o_SoundChannel_midiKey, 1
+	struct_field o_SoundChannel_velocity, 1
+	struct_field o_SoundChannel_priority, 1
+	struct_field o_SoundChannel_rhythmPan, 1
+	struct_field o_SoundChannel_dummy3, 3
+	struct_field o_SoundChannel_count, 4
 	struct_field o_SoundChannel_fw, 4
-	struct_field o_SoundChannel_freq, 4
+	struct_field o_SoundChannel_frequency, 4
 	struct_field o_SoundChannel_wav, 4
-	struct_field o_SoundChannel_cp, 4
+	struct_field o_SoundChannel_currentPointer, 4
 	struct_field o_SoundChannel_track, 4
-	struct_field o_SoundChannel_pp, 4
-	struct_field o_SoundChannel_np, 4
-	struct_field o_SoundChannel_d4, 4
+	struct_field o_SoundChannel_prevChannelPointer, 4
+	struct_field o_SoundChannel_nextChannelPointer, 4
+	struct_field o_SoundChannel_dummy4, 4
 	struct_field o_SoundChannel_xpi, 2
 	struct_field o_SoundChannel_xpc, 2
 	struct_field SoundChannel_size, 0
@@ -112,8 +165,8 @@
 	struct_field o_MusicPlayerTrack_lfoDelay, 1
 	struct_field o_MusicPlayerTrack_lfoDelayC, 1
 	struct_field o_MusicPlayerTrack_priority, 1
-	struct_field o_MusicPlayerTrack_echoVolume, 1
-	struct_field o_MusicPlayerTrack_echoLength, 1
+	struct_field o_MusicPlayerTrack_pseudoEchoVolume, 1
+	struct_field o_MusicPlayerTrack_pseudoEchoLength, 1
 	struct_field o_MusicPlayerTrack_chan, 4
 	struct_field o_MusicPlayerTrack_ToneData_type, 1
 	struct_field o_MusicPlayerTrack_ToneData_key, 1
@@ -159,41 +212,41 @@
 	struct_field MusicPlayerInfo_size, 0
 
 	struct_begin
-	struct_field o_CgbChannel_sf, 1
-	struct_field o_CgbChannel_ty, 1
+	struct_field o_CgbChannel_statusFlags, 1
+	struct_field o_CgbChannel_type, 1
 	struct_field o_CgbChannel_rightVolume, 1
 	struct_field o_CgbChannel_leftVolume, 1
-	struct_field o_CgbChannel_at, 1
-	struct_field o_CgbChannel_de, 1
-	struct_field o_CgbChannel_su, 1
-	struct_field o_CgbChannel_re, 1
-	struct_field o_CgbChannel_ky, 1
-	struct_field o_CgbChannel_ev, 1
-	struct_field o_CgbChannel_eg, 1
-	struct_field o_CgbChannel_ec, 1
-	struct_field o_CgbChannel_echoVolume, 1
-	struct_field o_CgbChannel_echoLength, 1
-	struct_field o_CgbChannel_d1, 1
-	struct_field o_CgbChannel_d2, 1
-	struct_field o_CgbChannel_gt, 1
-	struct_field o_CgbChannel_mk, 1
-	struct_field o_CgbChannel_ve, 1
-	struct_field o_CgbChannel_pr, 1
-	struct_field o_CgbChannel_rp, 1
-	struct_field o_CgbChannel_d3, 3
-	struct_field o_CgbChannel_d5, 1
-	struct_field o_CgbChannel_sg, 1
+	struct_field o_CgbChannel_attack, 1
+	struct_field o_CgbChannel_decay, 1
+	struct_field o_CgbChannel_sustain, 1
+	struct_field o_CgbChannel_release, 1
+	struct_field o_CgbChannel_key, 1
+	struct_field o_CgbChannel_envelopeVolume, 1
+	struct_field o_CgbChannel_envelopeGoal, 1
+	struct_field o_CgbChannel_envelopeCounter, 1
+	struct_field o_CgbChannel_pseudoEchoVolume, 1
+	struct_field o_CgbChannel_pseudoEchoLength, 1
+	struct_field o_CgbChannel_dummy1, 1
+	struct_field o_CgbChannel_dummy2, 1
+	struct_field o_CgbChannel_gateTime, 1
+	struct_field o_CgbChannel_midiKey, 1
+	struct_field o_CgbChannel_velocity, 1
+	struct_field o_CgbChannel_priority, 1
+	struct_field o_CgbChannel_rhythmPan, 1
+	struct_field o_CgbChannel_dummy3, 3
+	struct_field o_CgbChannel_dummy5, 1
+	struct_field o_CgbChannel_sustainGoal, 1
 	struct_field o_CgbChannel_n4, 1
 	struct_field o_CgbChannel_pan, 1
 	struct_field o_CgbChannel_panMask, 1
-	struct_field o_CgbChannel_mo, 1
-	struct_field o_CgbChannel_le, 1
-	struct_field o_CgbChannel_sw, 1
-	struct_field o_CgbChannel_fr, 4
-	struct_field o_CgbChannel_wp, 4
-	struct_field o_CgbChannel_cp, 4
-	struct_field o_CgbChannel_tp, 4
-	struct_field o_CgbChannel_pp, 4
-	struct_field o_CgbChannel_np, 4
-	struct_field o_CgbChannel_d4, 8
+	struct_field o_CgbChannel_modify, 1
+	struct_field o_CgbChannel_length, 1
+	struct_field o_CgbChannel_sweep, 1
+	struct_field o_CgbChannel_frequency, 4
+	struct_field o_CgbChannel_wavePointer, 4
+	struct_field o_CgbChannel_currentPointer, 4
+	struct_field o_CgbChannel_track, 4
+	struct_field o_CgbChannel_prevChannelPointer, 4
+	struct_field o_CgbChannel_nextChannelPointer, 4
+	struct_field o_CgbChannel_dummy4, 8
 	struct_field CgbChannel_size, 0

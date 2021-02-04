@@ -9,6 +9,7 @@
 #include "sound.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/moves.h"
 
 static void AnimConfuseRayBallBounce(struct Sprite *);
 static void AnimConfuseRayBallBounce_Step1(struct Sprite *);
@@ -18,7 +19,6 @@ static void AnimConfuseRayBallSpiral(struct Sprite *);
 static void AnimConfuseRayBallSpiral_Step(struct Sprite *);
 static void AnimTask_NightShadeClone_Step1(u8 taskId);
 static void AnimTask_NightShadeClone_Step2(u8 taskId);
-static void AnimShadowBall(struct Sprite *);
 static void AnimShadowBall_Step(struct Sprite *);
 static void AnimLick(struct Sprite *);
 static void AnimLick_Step(struct Sprite *);
@@ -35,9 +35,7 @@ static void AnimCurseNail(struct Sprite *);
 static void AnimCurseNail_Step1(struct Sprite *);
 static void AnimCurseNail_Step2(struct Sprite *);
 static void AnimCurseNail_End(struct Sprite *);
-static void AnimGhostStatusSprite(struct Sprite *);
 static void AnimGhostStatusSprite_Step(struct Sprite *);
-static void AnimTask_GrudgeFlames_Step(u8 taskId);
 static void AnimGrudgeFlame(struct Sprite *);
 static void sub_8112F60(struct Sprite *);
 static void sub_8112FB8(struct Sprite *);
@@ -82,7 +80,7 @@ static const union AffineAnimCmd sAffineAnim_ShadowBall[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-static const union AffineAnimCmd *const sAffineAnims_ShadowBall[] =
+const union AffineAnimCmd *const gAffineAnims_ShadowBall[] =
 {
     sAffineAnim_ShadowBall,
 };
@@ -94,8 +92,41 @@ const struct SpriteTemplate gShadowBallSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sAffineAnims_ShadowBall,
+    .affineAnims = gAffineAnims_ShadowBall,
     .callback = AnimShadowBall,
+};
+
+const struct SpriteTemplate gEnergyBallSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ENERGY_BALL,
+    .paletteTag = ANIM_TAG_ENERGY_BALL,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_ShadowBall,
+    .callback = AnimShadowBall,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm =
+{
+    .tileTag = ANIM_TAG_RAZOR_LEAF,
+    .paletteTag = ANIM_TAG_RAZOR_LEAF,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
+    .anims = gAffineAnims_AirWaveCrescent,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimAirWaveCrescent,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm2 =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = gRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_PoisonProjectile,
+    .callback = AnimNeedleArmSpike,
 };
 
 static const union AnimCmd sAnim_Lick[] =
@@ -145,6 +176,17 @@ const struct SpriteTemplate gDestinyBondWhiteShadowSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDestinyBondWhiteShadow,
+};
+
+const struct SpriteTemplate gDarkVoidBlackHoleTemplate =
+{
+    .tileTag = ANIM_TAG_WHITE_SHADOW,
+    .paletteTag = ANIM_TAG_QUICK_GUARD_HAND,
+    .oam = &gOamData_AffineOff_ObjBlend_64x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDestinyBondWhiteShadow
 };
 
 const struct SpriteTemplate gCurseNailSpriteTemplate =
@@ -215,6 +257,17 @@ const struct SpriteTemplate gUnknown_08596E48 =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_8112F60,
+};
+
+const struct SpriteTemplate gFlashCannonBallMovementTemplate =
+{
+    .tileTag = ANIM_TAG_FLASH_CANNON_BALL,
+    .paletteTag = ANIM_TAG_FLASH_CANNON_BALL,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_ShadowBall,
+    .callback = AnimShadowBall
 };
 
 static void AnimConfuseRayBallBounce(struct Sprite *sprite)
@@ -400,7 +453,7 @@ static void AnimTask_NightShadeClone_Step2(u8 taskId)
 // arg 0: duration step 1 (attacker -> center)
 // arg 1: duration step 2 (spin center)
 // arg 2: duration step 3 (center -> target)
-static void AnimShadowBall(struct Sprite *sprite)
+void AnimShadowBall(struct Sprite *sprite)
 {
     s16 oldPosX = sprite->pos1.x;
     s16 oldPosY = sprite->pos1.y;
@@ -822,7 +875,11 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
              && battler != (gBattleAnimAttacker ^ 2)
              && IsBattlerSpriteVisible(battler))
             {
-                spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
+                if (gAnimMoveIndex == MOVE_DARK_VOID)
+                    spriteId = CreateSprite(&gDarkVoidBlackHoleTemplate, baseX, baseY, 55);   //dark void
+                else
+                    spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);   //destiny bond
+                
                 if (spriteId != MAX_SPRITES)
                 {
                     x = GetBattlerSpriteCoord(battler, 2);
@@ -844,7 +901,11 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
     }
     else
     {
-        spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
+        if (gAnimMoveIndex == MOVE_DARK_VOID)
+            spriteId = CreateSprite(&gDarkVoidBlackHoleTemplate, baseX, baseY, 55);   //dark void
+        else
+            spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);   //destiny bond
+        
         if (spriteId != MAX_SPRITES)
         {
             x = 48;
@@ -1125,7 +1186,7 @@ static void AnimCurseNail_End(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-static void AnimGhostStatusSprite(struct Sprite *sprite)
+void AnimGhostStatusSprite(struct Sprite *sprite)
 {
     u16 coeffB;
     u16 coeffA;
@@ -1194,7 +1255,7 @@ void AnimTask_GrudgeFlames(u8 taskId)
     task->func = AnimTask_GrudgeFlames_Step;
 }
 
-static void AnimTask_GrudgeFlames_Step(u8 taskId)
+void AnimTask_GrudgeFlames_Step(u8 taskId)
 {
     u16 i;
     u8 spriteId;

@@ -3,7 +3,7 @@
 
 extern u32 gRecordedBattleRngSeed;
 extern u32 gBattlePalaceMoveSelectionRngValue;
-extern u8 gUnknown_0203C7B4;
+extern u8 gRecordedBattleMultiplayerId;
 
 void sub_8184DA4(u8 arg0);
 void sub_8184E58(void);
@@ -30,7 +30,7 @@ void sub_818603C(u8 arg0);
 u32 GetAiScriptsInRecordedBattle(void);
 void sub_8186444(void);
 bool8 sub_8186450(void);
-void sub_8186468(u8 *dst);
+void GetRecordedBattleRecordMixFriendName(u8 *dst);
 u8 GetRecordedBattleRecordMixFriendClass(void);
 u8 GetRecordedBattleApprenticeId(void);
 u8 GetRecordedBattleRecordMixFriendLanguage(void);

@@ -61,7 +61,6 @@ static void HandleInitWindows(void);
 static void LaunchPokeblockFeedTask(void);
 static void SetPokeblockSpritePal(u8 pokeblockCaseId);
 static void sub_817A5CC(void);
-static void sub_8148108(u8 spriteId, bool8 a1);
 static void DoPokeblockCaseThrowEffect(u8 spriteId, bool8 arg1);
 static void PrepareMonToMoveToPokeblock(u8 spriteId);
 static void Task_HandleMonAtePokeblock(u8 taskId);
@@ -646,7 +645,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
     case 0:
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:

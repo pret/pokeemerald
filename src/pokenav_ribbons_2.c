@@ -912,7 +912,7 @@ u16 DrawRibbonsMonFrontPic(s32 unused0, s32 unused1)
     u32 personality, otId;
 
     GetCurrMonInfo2(&species, &personality, &otId);
-    spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, 40, 104, 15, 0xFFFF);
+    spriteId = CreateMonPicSprite(species, otId, personality, TRUE, 40, 104, 15, 0xFFFF);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }

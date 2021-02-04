@@ -8,7 +8,7 @@ static const u16 sContestLadyMonGfxId[] =
     OBJ_EVENT_GFX_ZIGZAGOON_1,
     OBJ_EVENT_GFX_SKITTY,
     OBJ_EVENT_GFX_POOCHYENA,
-    OBJ_EVENT_GFX_KECLEON_1,
+    OBJ_EVENT_GFX_KECLEON,
     OBJ_EVENT_GFX_PIKACHU
 };
 
@@ -35,7 +35,7 @@ static const u16 sQuizLadyQuestion1[] =
 
 static const u16 sQuizLadyQuestion2[] =
 {
-    EC_WORD_WHICH, 
+    EC_WORD_WHICH,
     EC_WORD_ISN_T,
     EC_WORD_A,
     EC_WORD_GAME,
@@ -118,7 +118,7 @@ static const u16 sQuizLadyQuestion8[] =
     EC_MOVE2(BLOCK),
     EC_WORD_ESCAPE,
     EC_WORD_QUES,
-    0xFFFF, 
+    0xFFFF,
     EC_WORD_RUN_AWAY,
     EC_WORD_SHADOW_TAG,
     EC_WORD_WONDER_GUARD
@@ -361,7 +361,7 @@ static const u16 sFavorLadyAcceptedItems_Shiny[] =
     ITEM_HEAL_POWDER,
     ITEM_X_SPEED,
     ITEM_X_ATTACK,
-    ITEM_X_DEFEND,
+    ITEM_X_DEFENSE,
     ITEM_BLUE_FLUTE,
     ITEM_YELLOW_FLUTE,
     ITEM_RED_FLUTE,

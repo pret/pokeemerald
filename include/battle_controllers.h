@@ -82,11 +82,12 @@ enum
 
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
+#define RET_MEGA_EVOLUTION 0x80
 
 struct UnusedControllerStruct
 {
-    u8 field_0:7;
-    u8 flag_x80:1;
+    u8 unk:7;
+    u8 flag:1;
 };
 
 struct HpAndStatus
@@ -110,6 +111,8 @@ struct ChooseMoveStruct
     u16 species;
     u8 monType1;
     u8 monType2;
+    u8 monType3;
+    struct MegaEvolutionData mega;
 };
 
 enum
@@ -145,19 +148,19 @@ enum
     CONTROLLER_STATUSXOR,
     CONTROLLER_DATATRANSFER,
     CONTROLLER_DMA3TRANSFER,
-    CONTROLLER_31,
+    CONTROLLER_PLAYBGM,
     CONTROLLER_32,
     CONTROLLER_TWORETURNVALUES,
     CONTROLLER_CHOSENMONRETURNVALUE,
     CONTROLLER_ONERETURNVALUE,
     CONTROLLER_ONERETURNVALUE_DUPLICATE,
-    CONTROLLER_37,
-    CONTROLLER_38,
-    CONTROLLER_39,
-    CONTROLLER_40,
+    CONTROLLER_CLEARUNKVAR,
+    CONTROLLER_SETUNKVAR,
+    CONTROLLER_CLEARUNKFLAG,
+    CONTROLLER_TOGGLEUNKFLAG,
     CONTROLLER_HITANIMATION,
     CONTROLLER_42,
-    CONTROLLER_EFFECTIVENESSSOUND,
+    CONTROLLER_PLAYSE,
     CONTROLLER_PLAYFANFAREORBGM,
     CONTROLLER_FAINTINGCRY,
     CONTROLLER_INTROSLIDE,
@@ -170,12 +173,13 @@ enum
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
     CONTROLLER_55,
+    CONTROLLER_DEBUGMENU,
     /*new controllers should go here*/
     CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
 };
 
-extern struct UnusedControllerStruct gUnknown_02022D0C;
+extern struct UnusedControllerStruct gUnusedControllerStruct;
 
 // general functions
 void HandleLinkBattleSetup(void);
@@ -207,7 +211,7 @@ void BtlController_EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
 void BtlController_EmitUnknownYesNoBox(u8 bufferId);
 void BtlController_EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
 void BtlController_EmitChooseItem(u8 bufferId, u8* arg1);
-void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4);
+void BtlController_EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u16 abilityId, u8* arg4);
 void BtlController_EmitCmd23(u8 bufferId); // unused
 void BtlController_EmitHealthBarUpdate(u8 bufferId, u16 hpValue);
 void BtlController_EmitExpUpdate(u8 bufferId, u8 partyId, u16 expPoints);
@@ -222,10 +226,10 @@ void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2);
 void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c);
 void BtlController_EmitOneReturnValue(u8 bufferId, u16 arg1);
 void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b);
-void BtlController_EmitCmd37(u8 bufferId); // unused
-void BtlController_EmitCmd38(u8 bufferId, u8 b); // unused
-void BtlController_EmitCmd39(u8 bufferId); // unused
-void BtlController_EmitCmd40(u8 bufferId); // unused
+void BtlController_EmitClearUnkVar(u8 bufferId); // unused
+void BtlController_EmitSetUnkVar(u8 bufferId, u8 b); // unused
+void BtlController_EmitClearUnkFlag(u8 bufferId); // unused
+void BtlController_EmitToggleUnkFlag(u8 bufferId); // unused
 void BtlController_EmitHitAnimation(u8 bufferId);
 void BtlController_EmitCmd42(u8 bufferId);
 void BtlController_EmitPlaySE(u8 bufferId, u16 songId);
@@ -241,6 +245,7 @@ void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument
 void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 arg2);
 void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitCmd55(u8 bufferId, u8 battleOutcome);
+void BtlController_EmitDebugMenu(u8 bufferId);
 
 // player controller
 void SetControllerToPlayer(void);

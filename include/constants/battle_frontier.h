@@ -47,11 +47,12 @@
 #define SPECIAL_BATTLE_STEVEN 8
 #define SPECIAL_BATTLE_PIKE_DOUBLE 9
 #define SPECIAL_BATTLE_PYRAMID 10
+#define SPECIAL_BATTLE_MULTI 11
 
 #define MAX_BATTLE_FRONTIER_POINTS 9999
 #define MAX_STREAK 9999
 
-// These sets of facility ids would be redunant if the order was consistent
+// These sets of facility ids would be redundant if the order was consistent
 // The order is important for this set so that all the non-link records can be continuous
 #define RANKING_HALL_BATTLE_TOWER_SINGLES   0
 #define RANKING_HALL_BATTLE_TOWER_DOUBLES   1

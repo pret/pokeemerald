@@ -125,7 +125,7 @@ static void CB2_ExitMailReadFreeVars(void);
 
 // .rodata
 
-static const struct BgTemplate sUnknown_0859F290[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -254,7 +254,7 @@ void ReadMail(struct MailStruct *mail, void (*callback)(void), bool8 flag)
     sMailRead->parserMultiple = ConvertEasyChatWordsToString;
     if (IS_ITEM_MAIL(mail->itemId))
     {
-        sMailRead->mailType = mail->itemId - ITEM_ORANGE_MAIL;
+        sMailRead->mailType = mail->itemId - FIRST_MAIL_INDEX;
     }
     else
     {
@@ -279,10 +279,10 @@ void ReadMail(struct MailStruct *mail, void (*callback)(void), bool8 flag)
             default:
                 sMailRead->animsActive = 0;
                 break;
-            case ITEM_BEAD_MAIL - ITEM_ORANGE_MAIL:
+            case ITEM_BEAD_MAIL - FIRST_MAIL_INDEX:
                 sMailRead->animsActive = 1;
                 break;
-            case ITEM_DREAM_MAIL - ITEM_ORANGE_MAIL:
+            case ITEM_DREAM_MAIL - FIRST_MAIL_INDEX:
                 sMailRead->animsActive = 2;
                 break;
         }
@@ -336,7 +336,7 @@ static bool8 MailReadBuildGraphics(void)
             break;
         case 6:
             ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, sUnknown_0859F290, 3);
+            InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
             SetBgTilemapBuffer(1, sMailRead->bg1TilemapBuffer);
             SetBgTilemapBuffer(2, sMailRead->bg2TilemapBuffer);
             break;
@@ -404,11 +404,11 @@ static bool8 MailReadBuildGraphics(void)
             {
                 case 1:
                     LoadMonIconPalette(icon);
-                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0, 0);
+                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0);
                     break;
                 case 2:
                     LoadMonIconPalette(icon);
-                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0, 0);
+                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0);
                     break;
             }
             break;

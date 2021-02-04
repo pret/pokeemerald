@@ -128,8 +128,6 @@ static void UpdateLinkPlayerCountDisplay(u8 taskId, u8 numPlayers)
 
 static u32 ExchangeDataAndGetLinkupStatus(u8 minPlayers, u8 maxPlayers)
 {
-    int playerCount;
-
     switch (GetLinkPlayerDataExchangeStatusTimed(minPlayers, maxPlayers))
     {
     case EXCHANGE_COMPLETE:
@@ -511,7 +509,6 @@ static void FinishLinkup(u16 *linkupStatus, u32 taskId)
 static void Task_LinkupAwaitTrainerCardData(u8 taskId)
 {
     u8 index;
-    struct TrainerCard *trainerCards;
 
     if (CheckLinkErrored(taskId) == TRUE)
         return;
@@ -993,7 +990,7 @@ static void CB2_ReturnFromUnionRoomBattle(void)
 
 void CB2_ReturnFromCableClubBattle(void)
 {
-    gBattleTypeFlags &= ~BATTLE_TYPE_20;
+    gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
     Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();

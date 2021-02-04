@@ -28,7 +28,7 @@ EWRAM_DATA static u16 gBackupMapData[MAX_MAP_DATA_SIZE] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};
 EWRAM_DATA static struct ConnectionFlags gMapConnectionFlags = {0};
-EWRAM_DATA static u32 sFiller_02037344 = 0; // without this, the next file won't align properly
+EWRAM_DATA static u32 sFiller = 0; // without this, the next file won't align properly
 
 struct BackupMapLayout gBackupMapLayout;
 
@@ -797,15 +797,33 @@ bool8 CameraMove(int x, int y)
 struct MapConnection *sub_8088950(u8 direction, int x, int y)
 {
     int count;
-    struct MapConnection *connection;
     int i;
-    count = gMapHeader.connections->count;
-    connection = gMapHeader.connections->connections;
+    struct MapConnection *connection;
+    const struct MapConnections *connections = gMapHeader.connections;
+    // UB: Multiple possible null dereferences
+#ifdef UBFIX
+    if (connections != NULL)
+    {
+        count = connections->count;
+        connection = connections->connections;
+        if (connection != NULL)
+        {
+            for (i = 0; i < count; i++, connection++)
+            {
+                if (connection->direction == direction && sub_80889A8(direction, x, y, connection) == TRUE)
+                    return connection;
+            }
+        }
+    }
+#else
+    count = connections->count;
+    connection = connections->connections;
     for (i = 0; i < count; i++, connection++)
     {
         if (connection->direction == direction && sub_80889A8(direction, x, y, connection) == TRUE)
             return connection;
     }
+#endif
     return NULL;
 }
 
