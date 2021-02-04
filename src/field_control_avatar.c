@@ -219,7 +219,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
 
-#if DEBUG
+#if DEBUGGING
     if (input->input_field_1_2)
     {
         PlaySE(SE_WIN_OPEN);
