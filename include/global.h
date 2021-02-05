@@ -500,7 +500,7 @@ struct SecretBaseParty
 struct SecretBase
 {
     /*0x1A9C*/ u8 secretBaseId;
-    /*0x1A9D*/ u8 sbr_field_1_0:4;
+    /*0x1A9D*/ bool8 toRegister:4;
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 battledOwnerToday:1;
     /*0x1A9D*/ u8 registryStatus:2;
@@ -509,7 +509,7 @@ struct SecretBase
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 numSecretBasesReceived;
     /*0x1AAC*/ u8 numTimesEntered;
-    /*0x1AAD*/ u8 sbr_field_11;
+    /*0x1AAD*/ u8 unused;
     /*0x1AAE*/ u8 decorations[DECOR_MAX_SECRET_BASE];
     /*0x1ABE*/ u8 decorationPositions[DECOR_MAX_SECRET_BASE];
     /*0x1AD0*/ struct SecretBaseParty party;
