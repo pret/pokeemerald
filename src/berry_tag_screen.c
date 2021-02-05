@@ -26,7 +26,6 @@
 #include "item_menu_icons.h"
 #include "decompress.h"
 #include "international_string_util.h"
-#include "constants/berry.h"
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"

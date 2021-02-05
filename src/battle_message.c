@@ -21,7 +21,6 @@
 #include "window.h"
 #include "constants/battle_dome.h"
 #include "constants/battle_string_ids.h"
-#include "constants/berry.h"
 #include "constants/frontier_util.h"
 #include "constants/items.h"
 #include "constants/moves.h"
