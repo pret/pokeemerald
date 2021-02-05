@@ -1894,8 +1894,8 @@ const u8 gText_EVO_LEVEL_ATK_EQ_DEF[]               = _("Lvl up to {STR_VAR_2} w
 const u8 gText_EVO_LEVEL_ATK_LT_DEF[]               = _("Lvl up to {STR_VAR_2} with attack < defense");
 const u8 gText_EVO_LEVEL_SILCOON[]                  = _("Lvl up to {STR_VAR_2} with Silcoon persona");
 const u8 gText_EVO_LEVEL_CASCOON[]                  = _("Lvl up to {STR_VAR_2} with Cascoon persona");
-const u8 gText_EVO_LEVEL_NINJASK[]                  = _("Lvl up to {STR_VAR_2} (special value for Ninjask)");
-const u8 gText_EVO_LEVEL_SHEDINJA[]                 = _("Lvl up to {STR_VAR_2} (special value for Shedinja)");
+const u8 gText_EVO_LEVEL_NINJASK[]                  = _("Lvl up to {STR_VAR_2}");
+const u8 gText_EVO_LEVEL_SHEDINJA[]                 = _("Lvl up to {STR_VAR_2}, party<6, 1x POKéBALL");
 const u8 gText_EVO_BEAUTY[]                         = _("Lvl up with beauty >= {STR_VAR_2}");
 const u8 gText_EVO_LEVEL_FEMALE[]                   = _("Lvl up to {STR_VAR_2}, is female");
 const u8 gText_EVO_LEVEL_MALE[]                     = _("Lvl up to {STR_VAR_2}, is male");
