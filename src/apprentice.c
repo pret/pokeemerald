@@ -1083,7 +1083,7 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data));
         break;
     case APPRENTICE_BUFF_NAME:
-        TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(PLAYER_APPRENTICE.id, LANGUAGE_ENGLISH), LANGUAGE_ENGLISH);
+        TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(PLAYER_APPRENTICE.id, GAME_LANGUAGE), GAME_LANGUAGE);
         StringCopy(stringDst, text);
         break;
     case APPRENTICE_BUFF_LEVEL:

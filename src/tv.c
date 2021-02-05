@@ -1665,7 +1665,7 @@ void PutLilycoveContestLadyShowOnTheAir(void)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         BufferContestLadyLanguage(&show->contestLiveUpdates2.language);
-        show->contestLiveUpdates2.pokemonNameLanguage = LANGUAGE_ENGLISH;
+        show->contestLiveUpdates2.pokemonNameLanguage = GAME_LANGUAGE;
         show->contestLiveUpdates2.kind = TVSHOW_CONTEST_LIVE_UPDATES_2;
         show->contestLiveUpdates2.active = TRUE;
         BufferContestLadyPlayerName(show->contestLiveUpdates2.playerName);
@@ -3144,7 +3144,7 @@ static bool8 IsPartyMonNicknamedOrNotEnglish(u8 monIdx)
     pokemon = &gPlayerParty[monIdx];
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
     language = GetMonData(pokemon, MON_DATA_LANGUAGE, &language);
-    if (language == LANGUAGE_ENGLISH && !StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1))
+    if (language == GAME_LANGUAGE && !StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1))
     {
         return FALSE;
     }
@@ -4254,7 +4254,7 @@ static void sub_80F1254(TVShow *shows)
             }
             else
             {
-                curShow->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_ENGLISH;
+                curShow->bravoTrainerTower.pokemonNameLanguage = GAME_LANGUAGE;
             }
         }
     }
@@ -4262,7 +4262,7 @@ static void sub_80F1254(TVShow *shows)
 
 u8 TV_GetStringLanguage(u8 *str)
 {
-    return IsStringJapanese(str) ? LANGUAGE_JAPANESE : LANGUAGE_ENGLISH;
+    return IsStringJapanese(str) ? LANGUAGE_JAPANESE : GAME_LANGUAGE;
 }
 
 static void sub_80F12A4(TVShow *shows)

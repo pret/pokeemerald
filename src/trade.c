@@ -2920,7 +2920,7 @@ static void CB2_InGameTrade(void)
         StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
         GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
         StringCopy(gLinkPlayers[1].name, otName);
-        gLinkPlayers[0].language = LANGUAGE_ENGLISH;
+        gLinkPlayers[0].language = GAME_LANGUAGE;
         gLinkPlayers[1].language = GetMonData(&gEnemyParty[0], MON_DATA_LANGUAGE);
         sTradeData = AllocZeroed(sizeof(*sTradeData));
         AllocateMonSpritesGfx();

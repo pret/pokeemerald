@@ -5998,7 +5998,7 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
     u8 ret = GAME_LANGUAGE;
 
     if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
-        return LANGUAGE_ENGLISH;
+        return GAME_LANGUAGE;
 
     if (StringLength(nickname) < PLAYER_NAME_LENGTH - 1)
     {
