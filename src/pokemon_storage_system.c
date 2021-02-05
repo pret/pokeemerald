@@ -5898,12 +5898,12 @@ static bool8 sub_80CD554(void)
     return TRUE;
 }
 
-static void sub_80CD6AC(u8 newCurosrArea, u8 newCursorPosition)
+static void sub_80CD6AC(u8 newCursorArea, u8 newCursorPosition)
 {
     u16 x, y;
 
-    sub_80CD444(newCurosrArea, newCursorPosition, &x, &y);
-    sPSSData->field_CD4 = newCurosrArea;
+    sub_80CD444(newCursorArea, newCursorPosition, &x, &y);
+    sPSSData->field_CD4 = newCursorArea;
     sPSSData->field_CD5 = newCursorPosition;
     sPSSData->field_CCC = x;
     sPSSData->field_CCE = y;
@@ -5955,9 +5955,9 @@ static void sub_80CD70C(void)
     sPSSData->field_CC0 = sPSSData->field_CB4->pos1.y << 8;
 }
 
-static void sub_80CD894(u8 newCurosrArea, u8 newCursorPosition)
+static void sub_80CD894(u8 newCursorArea, u8 newCursorPosition)
 {
-    sub_80CD6AC(newCurosrArea, newCursorPosition);
+    sub_80CD6AC(newCursorArea, newCursorPosition);
     sub_80CD70C();
     if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
@@ -5977,19 +5977,19 @@ static void sub_80CD894(u8 newCurosrArea, u8 newCursorPosition)
         else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
             sub_80D0E50(CURSOR_AREA_IN_PARTY, sBoxCursorPosition);
 
-        if (newCurosrArea == CURSOR_AREA_IN_BOX)
-            sub_80D0D8C(newCurosrArea, newCursorPosition);
-        else if (newCurosrArea == CURSOR_AREA_IN_PARTY)
-            sub_80D0D8C(newCurosrArea, newCursorPosition);
+        if (newCursorArea == CURSOR_AREA_IN_BOX)
+            sub_80D0D8C(newCursorArea, newCursorPosition);
+        else if (newCursorArea == CURSOR_AREA_IN_PARTY)
+            sub_80D0D8C(newCursorArea, newCursorPosition);
     }
 
-    if (newCurosrArea == CURSOR_AREA_IN_PARTY && sBoxCursorArea != CURSOR_AREA_IN_PARTY)
+    if (newCursorArea == CURSOR_AREA_IN_PARTY && sBoxCursorArea != CURSOR_AREA_IN_PARTY)
     {
-        sPSSData->field_CD6 = newCurosrArea;
+        sPSSData->field_CD6 = newCursorArea;
         sPSSData->field_CB8->invisible = TRUE;
     }
 
-    switch (newCurosrArea)
+    switch (newCursorArea)
     {
     case CURSOR_AREA_IN_PARTY:
     case CURSOR_AREA_BOX:
