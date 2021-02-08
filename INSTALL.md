@@ -93,13 +93,13 @@ Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or conti
 
 ## Windows (msys2)
 
-- If devkitPro is **not installed**, or is installed but without the GBA Development component, then go to [Installing devkitPro](#installing-devkitpro).
-- If devkitPro is installed, but msys2 **hasn't previously been set up for another decompilation project**, then go to [Setting up msys2](#setting-up-msys2).
+- If devkitARM is **not installed**, then go to [Installing devkitARM](#installing-devkitarm).
+- If devkitARM is installed, but msys2 **hasn't previously been set up for another decompilation project**, then go to [Setting up msys2](#setting-up-msys2).
 - Otherwise, **open msys2** and go to [Choosing where to store pokeemerald (msys2)](#choosing-where-to-store-pokeemerald-msys2).
 
-### Installing devkitPro
+### Installing devkitARM
 1. Download the devkitPro installer [here](https://github.com/devkitPro/installer/releases).
-2. Run the devkitPro installer. In the "Choose Components" screen, uncheck everything except GBA Development unless if you plan to use devkitPro for other purposes. Keep the install location as C:\devkitPro and leave the Start Menu option unchanged.
+2. Run the devkitPro installer. In the "Choose Components" screen, uncheck everything except GBA Development unless if you plan to install other devkitPro components for other purposes. Keep the install location as C:\devkitPro and leave the Start Menu option unchanged.
 
 ### Setting up msys2
 
@@ -164,11 +164,11 @@ If this works, then proceed to [Installation](#installation).
 Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or continue reading below for [Windows instructions using Cygwin](#windows-cygwin).
 
 ## Windows (Cygwin)
-1. If devkitPro is **not installed**, or is installed but without the GBA Development component, then follow the instructions used to [install devkitPro](#installing-devkitpro) for the msys2 setup before continuing. *Remember to not continue following the msys2 instructions by mistake!*
+1. If devkitARM is **not installed**, then follow the instructions used to [install devkitARM](#installing-devkitarm) for the msys2 setup before continuing. *Remember to not continue following the msys2 instructions by mistake!*
 
 2.
     - If Cygwin is **not installed**, or does not have all of the required packages installed, then go to [Installing Cygwin](#installing-cygwin).
-    - If Cygwin is installed, but **is not configured to work with devkitPro**, then go to [Configuring devkitPro for Cygwin](#configuring-devkitpro-for-cygwin).
+    - If Cygwin is installed, but **is not configured to work with devkitARM**, then go to [Configuring devkitARM for Cygwin](#configuring-devkitarm-for-cygwin).
     - Otherwise, **open Cygwin** and go to [Choosing where to store pokeemerald (Cygwin)](#choosing-where-to-store-pokeemerald-cygwin)
 
 ### Installing Cygwin
@@ -191,7 +191,7 @@ Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or conti
 
 6. Once all required packages have been selected, finish the installation.
 
-### Configuring devkitPro for Cygwin
+### Configuring devkitARM for Cygwin
 
 Note that in Cygwin, Copy is Ctrl+Insert and Paste is Shift+Insert.
 
@@ -235,7 +235,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
 
 2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
-    - If devkitPro is **not installed**, then go to [Installing devkitPro (macOS)](#installing-devkitpro-macos).
+    - If devkitARM is **not installed**, then go to [Installing devkitARM (macOS)](#installing-devkitarm-macos).
     - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos)
 
 ### Installing libpng (macOS)
@@ -250,12 +250,12 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
     libpng is now installed.
 
-    Continue to [Installing devkitPro (macOS)](#installing-devkitpro-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos).
+    Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos).
 
-### Installing devkitPro (macOS)
+### Installing devkitARM (macOS)
 1. Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
 2. Open the package to install devkitPro pacman.
-3. devkitPro must be configured with the tools required for GBA development. In the Terminal, run the following commands:
+3. In the Terminal, run the following commands to install devkitARM:
 
     ```bash
     sudo dkp-pacman -Sy
@@ -265,7 +265,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
     The command with gba-dev will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
 
-4. After the tools are installed, devkitPro must now be made accessible from anywhere by the system. To do so, run the following commands:
+4. After the tools are installed, devkitARM must now be made accessible from anywhere by the system. To do so, run the following commands:
 
     ```bash
     export DEVKITPRO=/opt/devkitpro
@@ -313,7 +313,7 @@ _(Specific instructions for other distributions would be greatly appreciated!)_
     - `git`
     - `libpng-dev`
 
-2. Follow the instructions [here](https://devkitpro.org/wiki/devkitPro_pacman) to install devkitPro's pacman installer. As a reminder, the goal is to configure an existing pacman installation to recognize devkitPro's repositories.
+2. Follow the instructions [here](https://devkitpro.org/wiki/devkitPro_pacman) to install devkitPro pacman. As a reminder, the goal is to configure an existing pacman installation to recognize devkitPro's repositories.
 3. Once devkitPro pacman is configured, run the following commands:
 
     ```bash
@@ -433,21 +433,21 @@ make modern
 Otherwise, follow the instructions below to install devkitARM.
 ### Installing devkitARM on WSL1
 
-1. `gdebi-core` must be installed beforehand in order to install devkitPro (which facilitates the installation of devkitARM). Install this with the following command:
+1. `gdebi-core` must be installed beforehand in order to install devkitPro pacman (which facilitates the installation of devkitARM). Install this with the following command:
 
     ```bash
     sudo apt install gdebi-core
     ```
     > Note: If the above command does not work, try the above command but replacing `apt` with `apt-get`.
 
-2. Once `gdebi-core` is done installing, download the devkitPro software package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
+2. Once `gdebi-core` is done installing, download the devkitPro pacman package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
 3. Change directory to where the package was downloaded. For example, if the package file was saved to **C:\Users\\_\<user>_\Downloads** (the Downloads location for most users), enter this command, where *\<user> is your **Windows** username:
 
     ```bash
     cd /mnt/c/Users/<user>/Downloads
     ```
 
-4. Once the directory has been changed to the folder containing the devkitPro package, run the following commands to install devkitPro.
+4. Once the directory has been changed to the folder containing the devkitPro pacman package, run the following commands to install devkitPro pacman.
 
     ```bash
     sudo gdebi devkitpro-pacman.amd64.deb
@@ -472,7 +472,7 @@ devkitARM is now installed.
     ```bash
     sudo apt install gdebi-core
     ```
-2. Download the devkitPro software package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
+2. Download the devkitPro pacman package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
 3. Change directory to where the package was downloaded. Then, run the following commands to install devkitARM:
 
     ```bash
