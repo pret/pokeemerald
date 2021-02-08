@@ -447,7 +447,7 @@ Otherwise, follow the instructions below to install devkitARM.
     cd /mnt/c/Users/<user>/Downloads
     ```
 
-4. Once the directory has been changed to the folder containing the devkitPro pacman package, run the following commands to install devkitPro pacman.
+4. Once the directory has been changed to the folder containing the devkitPro pacman package, run the following commands to install devkitARM.
 
     ```bash
     sudo gdebi devkitpro-pacman.amd64.deb
