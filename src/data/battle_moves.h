@@ -2259,7 +2259,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-
         .split = SPLIT_PHYSICAL,
         .argument = MOVE_EFFECT_FLINCH,
     },
@@ -2724,8 +2723,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 50,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_SOUND,
+        #elif B_UPDATED_MOVE_DATA == GEN_5
+            .power = 40,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_SOUND,
         #else
             .power = 40,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_SOUND,
         #endif
         .effect = EFFECT_SNORE,
         .type = TYPE_NORMAL,
@@ -2734,7 +2738,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_SOUND,
         .split = SPLIT_SPECIAL,
     },
 
@@ -3752,6 +3755,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TWISTER] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_5
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_DMG_IN_AIR,
+        #else
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_DMG_IN_AIR,
+        #endif
         .effect = EFFECT_TWISTER,
         .power = 40,
         .type = TYPE_DRAGON,
@@ -3760,7 +3768,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 20,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_DMG_IN_AIR,
         .split = SPLIT_SPECIAL,
     },
 
@@ -6284,6 +6291,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DARK_PULSE] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_5
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_MEGA_LAUNCHER_BOOST,
+        #else
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_MEGA_LAUNCHER_BOOST,
+        #endif
         .effect = EFFECT_FLINCH_HIT,
         .power = 80,
         .type = TYPE_DARK,
@@ -6292,7 +6304,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_MEGA_LAUNCHER_BOOST,
         .split = SPLIT_SPECIAL,
     },
 
@@ -6406,8 +6417,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_6
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_DMG_MINIMIZE,
-        #else
+        #elif B_UPDATED_MOVE_DATA == GEN_5
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+        #else
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
         #endif
         .effect = EFFECT_FLINCH_HIT,
         .power = 100,
@@ -6942,6 +6955,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_IRON_HEAD] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_5
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+        #else
+            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
+        #endif
         .effect = EFFECT_FLINCH_HIT,
         .power = 80,
         .type = TYPE_STEEL,
@@ -6950,7 +6968,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_PHYSICAL,
     },
 
