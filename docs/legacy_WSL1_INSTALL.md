@@ -7,7 +7,7 @@
     ```
     > Note: If the above command does not work, try the above command but replacing `apt` with `apt-get`.
 
-2. Once the packages have finished installing, download the devkitPro software package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
+2. Once the packages have finished installing, download the devkitPro pacman package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
 
 3. WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. To install the devkitPro package, you'll need to change to the **current working directory** where the package file was saved.
 
@@ -21,7 +21,7 @@
     > Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd     "/mnt/c/users/<user>/Downloads folder"`.  
     > Note 3: Windows path names are case-insensitive so adhering to capitalization isn't needed
 
-4. Once the directory has been changed to the folder containing the devkitPro package, run the following commands to install devkitPro.
+4. Once the directory has been changed to the folder containing the devkitPro pacman package, run the following commands to install devkitARM.
 
     ```bash
     sudo gdebi devkitpro-pacman.amd64.deb
