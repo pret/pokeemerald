@@ -234,13 +234,28 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     xcode-select --install
     ```
 
-2. - If devkitPro is **not installed**, then go to [Installing devkitPro (macOS)](#installing-devkitpro-macos).
-   - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos)
+2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
+    - If devkitPro is **not installed**, then go to [Installing devkitPro (macOS)](#installing-devkitpro-macos).
+    - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos)
+
+### Installing libpng (macOS)
+> Note for advanced users: This guide installs libpng via Homebrew as it is the easiest method, however advanced users can install libpng through other means if they so desire.
+
+1. Open the Terminal.
+2. If Homebrew is not installed, then install [Homebrew](https://brew.sh/) by following the instructions on the website.
+3. Run the following command to install libpng.
+
+    ```bash
+    brew install libpng
+    ```
+    libpng is now installed.
+
+    Continue to [Installing devkitPro (macOS)](#installing-devkitpro-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos).
 
 ### Installing devkitPro (macOS)
 1. Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
 2. Open the package to install devkitPro pacman.
-3. devkitPro must be configured with the tools required for GBA development. Run the following commands:
+3. devkitPro must be configured with the tools required for GBA development. In the Terminal, run the following commands:
 
     ```bash
     sudo dkp-pacman -Sy
