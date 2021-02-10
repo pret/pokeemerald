@@ -5,7 +5,7 @@ These instructions explain how to set up the tools required to build **pokeemera
 If you run into trouble, ask for help on Discord or IRC (see [README.md](README.md)).
 
 ## Windows
-Windows has instructions for building with three possible terminals, if users encounter unexpected errors in following instructions for one of the terminals. These instructions are:
+Windows has instructions for building with three possible terminals, providing 3 different options in case the user stumbled upon unexpected errors.
 - [Windows 10 (WSL1)](#windows-10-wsl1) (**Fastest, highly recommended**, Windows 10 only)
 - [Windows (msys2)](#windows-msys2) (Second fastest)
 - [Windows (Cygwin)](#windows-cygwin) (Slowest)
@@ -35,7 +35,7 @@ WSL1 is the preferred terminal to build **pokeemerald**. The following instructi
 
 3. The next step is to choose and install a Linux distribution from the Microsoft Store. The following instructions will assume Ubuntu as the Linux distribution of choice.
 
-    > Note for advanced users: Advanced users can pick a preferred Linux distribution, but setup instructions may differ. Debian should work with the given instructions, but has not been tested. 
+    > Note for advanced users: You can pick a preferred Linux distribution, but setup instructions may differ. Debian should work with the given instructions, but has not been tested. 
 
 4. Open the [Microsoft Store Linux Selection](https://aka.ms/wslstore), click Ubuntu, then click Get, which will install the Ubuntu distribution.
 
@@ -61,7 +61,7 @@ Some tips before proceeding:
     ```
     > Note: These commands will likely take a long time to finish.
 
-> *Note: If the repository you plan to build was created before 2020/XX/YY (e.g. modifications of pokeemerald that haven't updated) then follow the [legacy WSL1 instructions](docs/legacy_WSL1_INSTALL.md). These repositories can be identified by the [older revision](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md) of the INSTALL.md*
+> Note: If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**, then follow the [legacy WSL1 instructions](docs/legacy_WSL1_INSTALL.md) from here.
 
 4. Certain packages are required to build pokeemerald. Install these packages by running the following command:
 
@@ -330,7 +330,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
 ## Installation
 
-**Windows users:** Consider adding an exception for the `pokeemerald` and/or `decomps` folder in Windows Security using [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from scanning them which might improve performance while building.
+> Windows users: Consider adding an exception for the `pokeemerald` and/or `decomps` folder in Windows Security using [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from scanning them which might improve performance while building.
 
 1. If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
 
