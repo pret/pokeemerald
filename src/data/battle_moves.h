@@ -2179,13 +2179,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_6
             .accuracy = 90,
-            .target = MOVE_TARGET_FOES_AND_ALLY,
+            .target = MOVE_TARGET_BOTH,
         #elif B_UPDATED_MOVE_DATA == GEN_5
             .accuracy = 80,
-            .target = MOVE_TARGET_FOES_AND_ALLY,
+            .target = MOVE_TARGET_BOTH,
         #else
             .accuracy = 55,
-            .target = MOVE_TARGET_BOTH,
+            .target = MOVE_TARGET_SELECTED,
         #endif
         .effect = EFFECT_POISON,
         .power = 0,
@@ -2776,9 +2776,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_CONVERSION_2] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_5
-            .target = MOVE_TARGET_USER,
+            .target = MOVE_TARGET_SELECTED,
         #else
-            .target = MOVE_TARGET_FOES_AND_ALLY,
+            .target = MOVE_TARGET_USER,
         #endif
         .effect = EFFECT_CONVERSION_2,
         .power = 0,
