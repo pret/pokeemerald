@@ -7180,7 +7180,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species)
     int i;
     #ifdef POKEMON_EXPANSION
         int j;
-        u16 currentMap;
+        const struct MapHeader *mapHeader;
     #endif
     u16 targetSpecies = 0;
 
@@ -7446,8 +7446,8 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species)
                 PrintInfoScreenTextSmall(gStringVar4, base_x+base_x_offset, base_y + base_offset*base_i);
                 break;
             case EVO_SPECIFIC_MAP:
-                //currentMap = ((gSaveBlock1Ptr->location.mapGroup) << 8 | gSaveBlock1Ptr->location.mapNum);	
-                GetMapName(gStringVar2, gEvolutionTable[species][i].param, 0);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gEvolutionTable[species][i].param >> 8, gEvolutionTable[species][i].param & 0xFF);
+                GetMapName(gStringVar2, mapHeader->regionMapSectionId, 0);
                 targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 handleTargetSpeciesPrint(taskId, targetSpecies, base_x, base_y, base_offset, base_i); //evolution mon name
                 StringExpandPlaceholders(gStringVar4, gText_EVO_SPECIFIC_MAP );
