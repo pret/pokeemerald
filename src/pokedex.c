@@ -7207,9 +7207,8 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species)
             if(gEvolutionTable[species][i].method != 0 && gEvolutionTable[species][i].method != EVO_MEGA_EVOLUTION)
                 times += 1;
         #endif
-            times += 1;
-        gTasks[taskId].data[3] = times;
     }
+    gTasks[taskId].data[3] = times;
 
     //If there are no evolutions print text
     if (times == 0)
