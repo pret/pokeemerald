@@ -1915,3 +1915,4 @@ const u8 gText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[]   = _("Lvl up with with dark t
 const u8 gText_EVO_TRADE_SPECIFIC_MON[]             = _("is traded for a {STR_VAR_2}");
 const u8 gText_EVO_SPECIFIC_MAP[]                   = _("Lvl up on {STR_VAR_2}");
 const u8 gText_EVO_NONE[]                           = _("There is no evolution for {STR_VAR_1}.");
+const u8 gText_FORMS_NONE[]                          = _("No alternate forms for {STR_VAR_1}.");

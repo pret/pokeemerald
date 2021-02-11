@@ -3298,6 +3298,8 @@ extern const u16 gPokedexBgNational_Pal[];
 extern const u8 gPokedexInfoScreen_Tilemap[];
 extern const u8 gPokedexStatsScreen_Tilemap[];
 extern const u8 gPokedexEvolutionScreen_Tilemap[];
+extern const u8 gPokedexEvolutionScreen_Tilemap_PE[];
+extern const u8 gPokedexFormsScreen_Tilemap[];
 extern const u8 gPokedexCryScreen_Tilemap[];
 extern const u8 gPokedexSizeScreen_Tilemap[];
 extern const u8 gPokedexScreenSelectBarMain_Tilemap[];
