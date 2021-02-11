@@ -5354,13 +5354,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HOWL] =
     {
+        #if B_UPDATED_MOVE_DATA >= GEN_8
+            .target = MOVE_TARGET_SELECTED,
+        #else
+            .target = MOVE_TARGET_USER,
+        #endif
         .effect = EFFECT_ATTACK_UP,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
         .pp = 40,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_USER,
         .priority = 0,
         .flags = FLAG_SNATCH_AFFECTED | FLAG_SOUND,
         .split = SPLIT_STATUS,
@@ -9303,7 +9307,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WATER_SHURIKEN] =
     {
-        #if B_WATER_SHURIKEN_SPLIT >= GEN_7
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .split = SPLIT_SPECIAL,
         #else
             .split = SPLIT_PHYSICAL,
