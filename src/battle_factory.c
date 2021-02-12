@@ -25,8 +25,8 @@ static void InitFactoryChallenge(void);
 static void GetBattleFactoryData(void);
 static void SetBattleFactoryData(void);
 static void SaveFactoryChallenge(void);
-static void nullsub_75(void);
-static void nullsub_123(void);
+static void FactoryDummy1(void);
+static void FactoryDummy2(void);
 static void SelectInitialRentalMons(void);
 static void SwapRentalMons(void);
 static void SetPerformedRentalSwap(void);
@@ -41,8 +41,16 @@ static void RestorePlayerPartyHeldItems(void);
 static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 arg2);
 static u8 GetMoveBattleStyle(u16 move);
 
-// Const rom data.
-static const u8 sRequiredMoveCounts[] = {3, 3, 3, 2, 2, 2, 2};
+// Number of moves needed on the team to be considered using a certain battle style
+static const u8 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
+    [FACTORY_STYLE_PREPARATION - 1]   = 3, 
+    [FACTORY_STYLE_SLOW_STEADY - 1]   = 3, 
+    [FACTORY_STYLE_ENDURANCE - 1]     = 3, 
+    [FACTORY_STYLE_HIGH_RISK - 1]     = 2, 
+    [FACTORY_STYLE_WEAKENING - 1]     = 2, 
+    [FACTORY_STYLE_UNPREDICTABLE - 1] = 2, 
+    [FACTORY_STYLE_WEATHER - 1]       = 2
+};
 
 static const u16 sMoves_TotalPreparation[] =
 {
@@ -119,8 +127,8 @@ static void (* const sBattleFactoryFunctions[])(void) =
     [BATTLE_FACTORY_FUNC_GET_DATA]               = GetBattleFactoryData,
     [BATTLE_FACTORY_FUNC_SET_DATA]               = SetBattleFactoryData,
     [BATTLE_FACTORY_FUNC_SAVE]                   = SaveFactoryChallenge,
-    [BATTLE_FACTORY_FUNC_NULL]                   = nullsub_75,
-    [BATTLE_FACTORY_FUNC_NULL2]                  = nullsub_123,
+    [BATTLE_FACTORY_FUNC_NULL]                   = FactoryDummy1,
+    [BATTLE_FACTORY_FUNC_NULL2]                  = FactoryDummy2,
     [BATTLE_FACTORY_FUNC_SELECT_RENT_MONS]       = SelectInitialRentalMons,
     [BATTLE_FACTORY_FUNC_SWAP_RENT_MONS]         = SwapRentalMons,
     [BATTLE_FACTORY_FUNC_SET_SWAPPED]            = SetPerformedRentalSwap,
@@ -266,12 +274,12 @@ static void SaveFactoryChallenge(void)
     SaveGameFrontier();
 }
 
-static void nullsub_75(void)
+static void FactoryDummy1(void)
 {
 
 }
 
-static void nullsub_123(void)
+static void FactoryDummy2(void)
 {
 
 }
@@ -376,10 +384,10 @@ static void SetRentalsToOpponentParty(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].monId = gFrontierTempParty[i];
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
-        gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityNum = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ABILITY_NUM, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId = gFrontierTempParty[i];
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ABILITY_NUM, NULL);
         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[gFrontierTempParty[i]].itemTableId]);
     }
 }
@@ -455,13 +463,13 @@ static void SetPlayerAndOpponentParties(void)
     case 2:
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
-            monId = gSaveBlock2Ptr->frontier.rentalMons[i + 3].monId;
-            ivs = gSaveBlock2Ptr->frontier.rentalMons[i + 3].ivs;
+            monId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
+            ivs = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
             CreateMon(&gEnemyParty[i],
                       gFacilityTrainerMons[monId].species,
                       monLevel,
                       ivs,
-                      TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality,
+                      TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality,
                       OT_ID_PLAYER_ID, 0);
 
             count = 0;
@@ -484,7 +492,7 @@ static void SetPlayerAndOpponentParties(void)
             for (k = 0; k < MAX_MON_MOVES; k++)
                 SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monId].moves[k], k);
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
-            SetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i + 3].abilityNum);
+            SetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum);
         }
         break;
     }
@@ -639,7 +647,7 @@ static void GetOpponentBattleStyle(void)
         }
     }
 
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FACTORY_STYLE_NONE;
     for (i = 1; i < FACTORY_NUM_STYLES; i++)
     {
         if (stylePoints[i] >= sRequiredMoveCounts[i - 1])

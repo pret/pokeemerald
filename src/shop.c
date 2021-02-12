@@ -489,7 +489,6 @@ static void BuyMenuFreeMemory(void)
 static void BuyMenuBuildListMenuTemplate(void)
 {
     u16 i;
-    u16 itemCount;
 
     gUnknown_02039F74 = Alloc((gMartInfo.itemCount + 1) * sizeof(*gUnknown_02039F74));
     gUnknown_02039F78 = Alloc((gMartInfo.itemCount + 1) * sizeof(*gUnknown_02039F78));
