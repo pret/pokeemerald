@@ -3283,33 +3283,42 @@ extern const u32 gBattleTerrainPalette_StadiumDrake[];
 extern const u32 gBattleTerrainPalette_StadiumWallace[];
 
 // pokedex
-extern const u32 gPokedexInterface_Gfx[];
-extern const u16 gPokedexBgHoenn_Pal[];
-extern const u32 gPokedexMenuRest_Gfx[];
-extern const u32 gPokedexEvo_Gfx[];
-extern const u32 gPokedexMenuList_Gfx[];
-extern const u32 gPokedexMenu_Gfx[];
-extern const u8 gPokedexList_Tilemap[];
-extern const u8 gPokedexListUnderlay_Tilemap[];
-extern const u8 gPokedexStartMenuMain_Tilemap[];
-extern const u8 gPokedexStartMenuSearchResults_Tilemap[];
+extern const u16 gPokedexDefault_Pal[];
+extern const u16 gPokedexNational_Pal[];
+extern const u16 gPokedexMenuSearch_Pal[];
 extern const u16 gPokedexSearchResults_Pal[];
-extern const u16 gPokedexBgNational_Pal[];
-extern const u8 gPokedexInfoScreen_Tilemap[];
-extern const u8 gPokedexStatsScreen_Tilemap[];
-extern const u8 gPokedexEvolutionScreen_Tilemap[];
-extern const u8 gPokedexEvolutionScreen_Tilemap_PE[];
-extern const u8 gPokedexFormsScreen_Tilemap[];
-extern const u8 gPokedexCryScreen_Tilemap[];
-extern const u8 gPokedexSizeScreen_Tilemap[];
-extern const u8 gPokedexScreenSelectBarMain_Tilemap[];
-extern const u8 gPokedexScreenSelectBarSubmenu_Tilemap[];
-extern const u8 gPokedexScreenSelectBarSubmenu_Tilemap_Clear[];
-extern const u16 gPokedexCaughtScreen_Pal[];
-extern const u32 gPokedexSearchMenu_Gfx[];
-extern const u32 gPokedexSearchMenuHoenn_Tilemap[];
-extern const u32 gPokedexSearchMenuNational_Tilemap[];
-extern const u16 gPokedexSearchMenu_Pal[];
+extern const u16 gPokedexDefault_dark_Pal[];
+extern const u16 gPokedexNational_dark_Pal[];
+extern const u16 gPokedexMenuSearch_dark_Pal[];
+extern const u16 gPokedexSearchResults_dark_Pal[];
+
+extern const u32 gPokedexMenuList_Gfx[];
+extern const u32 gPokedexMenuList_DECA_Gfx[];
+extern const u32 gPokedexInterface_Gfx[];
+extern const u32 gPokedexInterface_DECA_Gfx[];
+extern const u32 gPokedexMenu_1_Gfx[];
+extern const u32 gPokedexMenu_2_Gfx[];
+extern const u32 gPokedexMenu_3_Gfx[];
+extern const u32 gPokedexMenuSearch_Gfx[];
+extern const u32 gPokedexMenuSearch_DECA_Gfx[];
+extern const u32 gPokedexStartMenuMain_Tilemap[];
+extern const u32 gPokedexStartMenuSearchResults_Tilemap[];
+extern const u32 gUnused_PokedexNoBall[];
+extern const u32 gPokedexScreenSelectBarSubmenu_Tilemap[];
+extern const u32 gPokedexScreenSelectBarSubmenu_Tilemap_Clear[];
+
+extern const u32 gPokedexScreenList_Tilemap[];
+extern const u32 gPokedexScreenListUnderlay_Tilemap[];
+extern const u32 gPokedexScreenInfo_Tilemap[];
+extern const u32 gPokedexScreenStats_Tilemap[];
+extern const u32 gPokedexScreenEvolution_Tilemap[];
+extern const u32 gPokedexScreenEvolution_Tilemap_PE[];
+extern const u32 gPokedexScreenForms_Tilemap[];
+extern const u32 gPokedexScreenCry_Tilemap[];
+extern const u32 gPokedexScreenSize_Tilemap[];
+extern const u32 gPokedexScreenSearchHoenn_Tilemap[];
+extern const u32 gPokedexScreenSearchNational_Tilemap[];
+
 
 // berry tag screen
 extern const u32 gBerryCheck_Gfx[];
