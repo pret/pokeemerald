@@ -1339,16 +1339,23 @@ u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbil
     return calc;
 }
 
+bool32 IsSemiInvulnerable(u8 battlerDef, u16 move)
+{
+    if (gStatuses3[battlerDef] & STATUS3_PHANTOM_FORCE)
+        return TRUE;
+    else if (!TestMoveFlags(move, FLAG_HIT_IN_AIR) && gStatuses3[battlerDef] & STATUS3_ON_AIR)
+        return TRUE;
+    else if (!TestMoveFlags(move, FLAG_DMG_UNDERWATER) && gStatuses3[battlerDef] & STATUS3_UNDERWATER)
+        return TRUE;
+    else if (!TestMoveFlags(move, FLAG_DMG_UNDERGROUND) && gStatuses3[battlerDef] & STATUS3_UNDERGROUND)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool32 IsMoveEncouragedToHit(u8 battlerAtk, u8 battlerDef, u16 move)
 {
-    // never hits
-    if (gStatuses3[battlerDef] & (STATUS3_SEMI_INVULNERABLE))
-        return FALSE;
-    
-    if ((gStatuses3[battlerDef] & STATUS3_PHANTOM_FORCE)
-      || (!TestMoveFlags(move, FLAG_HIT_IN_AIR) && gStatuses3[battlerDef] & STATUS3_ON_AIR)
-      || (!TestMoveFlags(move, FLAG_DMG_UNDERGROUND) && gStatuses3[battlerDef] & STATUS3_UNDERGROUND)
-      || (!TestMoveFlags(move, FLAG_DMG_UNDERWATER) && gStatuses3[battlerDef] & STATUS3_UNDERWATER))
+    if (IsSemiInvulnerable(battlerDef, move))
         return FALSE;
     
     //TODO - anticipate protect move?

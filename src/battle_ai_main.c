@@ -547,7 +547,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         
         // check off screen
-        if (gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) != 1)
+        if (IsSemiInvulnerable(battlerDef, move) && effect != EFFECT_SEMI_INVULNERABLE && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) != 1)
             RETURN_SCORE_MINUS(20);    // if target off screen and we go first, don't use move
         
         // check if negates type

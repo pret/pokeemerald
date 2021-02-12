@@ -115,6 +115,7 @@ bool32 IsStatLoweringEffect(u16 effect);
 bool32 IsStatRaisingEffect(u16 effect);
 bool32 IsAttackBoostMoveEffect(u16 effect);
 bool32 IsUngroundingEffect(u16 effect);
+bool32 IsSemiInvulnerable(u8 battlerDef, u16 move);
 
 // status checks
 bool32 CanBeBurned(u8 battler, u16 ability);
