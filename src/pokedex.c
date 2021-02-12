@@ -2357,7 +2357,7 @@ static bool8 LoadPokedexListPage(u8 page)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[HGSS_DARK_MODE]);
+        LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[HGSS_DECAPPED]);
         LoadSpritePalettes(sInterfaceSpritePalette);
         LoadSpritePalettes(sStatBarSpritePal); //HGSS_Ui
         CreateInterfaceSprites(page);
