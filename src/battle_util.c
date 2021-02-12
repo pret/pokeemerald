@@ -2963,7 +2963,7 @@ void TryClearRageAndFuryCutter(void)
     }
 }
 
-static bool32 IsThawingMove(u8 battlerId, u16 move)
+bool32 IsThawingMove(u8 battlerId, u16 move)
 {
     switch (move)
     {

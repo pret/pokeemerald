@@ -1922,25 +1922,6 @@ bool32 HasTrappingMoveEffect(u8 battler)
     return FALSE;
 }
 
-bool32 IsThawingMove(u16 move)
-{
-    switch (move)
-    {
-    case MOVE_FLAME_WHEEL:
-    case MOVE_SACRED_FIRE:
-    case MOVE_FLARE_BLITZ:
-    case MOVE_SCALD:
-    case MOVE_SCORCHING_SANDS:
-    case MOVE_FUSION_FLARE:
-    case MOVE_STEAM_ERUPTION:
-    case MOVE_BURN_UP:
-    case MOVE_PYRO_BALL:
-        return TRUE;
-    default:
-        return FALSE;
-    }
-}
-
 bool32 HasThawingMove(u8 battlerId)
 {
     s32 i;
@@ -1948,7 +1929,7 @@ bool32 HasThawingMove(u8 battlerId)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && IsThawingMove(moves[i]))
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && IsThawingMove(battlerId, moves[i]))
             return TRUE;
     }
 
@@ -2545,7 +2526,7 @@ bool32 CanKnockOffItem(u8 battler, u16 item)
     if (!(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
       | BATTLE_TYPE_FRONTIER
       | BATTLE_TYPE_LINK
-      | BATTLE_TYPE_x2000000
+      | BATTLE_TYPE_RECORDED_LINK
       | BATTLE_TYPE_SECRET_BASE
       #if defined B_TRAINERS_KNOCK_OFF_ITEMS
       | BATTLE_TYPE_TRAINER
