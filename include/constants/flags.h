@@ -829,7 +829,7 @@
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM          0x310
 #define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_MOM              0x311
 #define FLAG_HIDE_ROUTE_119_SCOTT                                   0x312
-#define FLAG_HIDE_LILCOVE_MOTEL_SCOTT                               0x313
+#define FLAG_HIDE_LILYCOVE_MOTEL_SCOTT                              0x313
 #define FLAG_HIDE_MOSSDEEP_CITY_SCOTT                               0x314
 #define FLAG_HIDE_FANCLUB_OLD_LADY                                  0x315
 #define FLAG_HIDE_FANCLUB_BOY                                       0x316
@@ -967,7 +967,7 @@
 #define FLAG_HIDE_ROUTE_110_RIVAL_ON_BIKE                           0x39A
 #define FLAG_HIDE_ROUTE_119_RIVAL_ON_BIKE                           0x39B
 #define FLAG_HIDE_AQUA_HIDEOUT_GRUNTS                               0x39C
-#define FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS                      0x39D
+#define FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS                     0x39D
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA                              0x39E
 #define FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA                             0x39F
 #define FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO                        0x3A0

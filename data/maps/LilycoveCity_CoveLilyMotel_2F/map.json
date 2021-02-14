@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner",
-      "flag": "FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS"
+      "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist",
-      "flag": "FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS"
+      "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
@@ -51,7 +51,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan",
-      "flag": "FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS"
+      "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
@@ -64,7 +64,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_Programmer",
-      "flag": "FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS"
+      "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GAMEBOY_KID",
@@ -77,7 +77,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_GameBoyKid",
-      "flag": "FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS"
+      "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
@@ -90,7 +90,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_Woman",
-      "flag": "FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS"
+      "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCOTT",
@@ -103,7 +103,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LilycoveCity_CoveLilyMotel_2F_EventScript_Scott",
-      "flag": "FLAG_HIDE_LILCOVE_MOTEL_SCOTT"
+      "flag": "FLAG_HIDE_LILYCOVE_MOTEL_SCOTT"
     }
   ],
   "warp_events": [
