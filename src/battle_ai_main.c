@@ -4533,6 +4533,15 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (IsTargetingPartner(battlerAtk, battlerDef)
       || gBattleResults.battleTurnCounter != 0)
         return score;
+    
+    if (GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 1
+      && CanTargetFaintAi(battlerDef, battlerAtk)
+      && GetMovePriority(battlerAtk, move) == 0)
+    {
+        RETURN_SCORE_MINUS(20);    // No point in setting up if you will faint. Should just switch if possible..
+    }
+    
+    // check effects to prioritize first turn
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_ATTACK_UP:
