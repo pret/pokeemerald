@@ -967,8 +967,8 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
     curBlue  -= ((curBlue  * b) >> 4);
     
     color  = curRed;
-    color |= curGreen <<  5;
-    color |= curBlue  << 10;
+    color |= (curGreen <<  5);
+    color |= (curBlue  << 10);
     
     gPlttBufferFaded[i] = color;
 }
