@@ -2864,18 +2864,6 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // check damage
     if (gBattleMoves[move].power != 0 && GetMoveDamageResult(move) == MOVE_POWER_WEAK)
         score--;
-    
-    /*if (CountUsablePartyMons(battlerAtk) != 0
-     && GetMoveDamageResult(move) != 0 && !HasMoveWithSplit(battlerAtk, SPLIT_STATUS)
-     && GetCurrDamageHpPercent(battlerAtk, battlerDef) < 30)
-    {
-        if (GetCurrDamageHpPercent(battlerAtk, battlerDef) > 20)
-            score--;
-        else if (GetMoveDamageResult(move) == MOVE_POWER_BEST)
-            score -= 2;
-        else
-            score -= 3;
-    }*/  
 
     // check status move preference
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_PREFER_STATUS_MOVES && IS_MOVE_STATUS(move) && effectiveness != AI_EFFECTIVENESS_x0)
@@ -2884,6 +2872,25 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     // check thawing moves
     if ((gBattleMons[battlerAtk].status1 & STATUS1_FREEZE) && IsThawingMove(battlerAtk, move))
         score += (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) ? 20 : 10;
+    
+    // check burn
+    if (gBattleMons[battlerAtk].status1 & STATUS1_BURN)
+    {
+        switch (AI_DATA->atkAbility)
+        {
+        case ABILITY_GUTS:
+            break;
+        case ABILITY_NATURAL_CURE:
+            if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING
+             && HasOnlyMovesWithSplit(battlerAtk, SPLIT_PHYSICAL, TRUE))
+                score = 90; // Force switch if all your attacking moves are physical and you have Natural Cure.
+            break;
+        default:
+            if (IS_MOVE_PHYSICAL(move) && gBattleMoves[move].effect != EFFECT_FACADE)
+                score -= 2;
+            break;
+        }
+    }
     
     // ability checks
     switch (AI_DATA->atkAbility)
@@ -4534,7 +4541,8 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
       || gBattleResults.battleTurnCounter != 0)
         return score;
     
-    if (GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 1
+    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING 
+      && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 1
       && CanTargetFaintAi(battlerDef, battlerAtk)
       && GetMovePriority(battlerAtk, move) == 0)
     {

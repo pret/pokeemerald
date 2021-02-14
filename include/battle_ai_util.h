@@ -81,6 +81,7 @@ u8 AI_GetMoveEffectiveness(u16 move, u8 battlerAtk, u8 battlerDef);
 u16 *GetMovesArray(u32 battler);
 bool32 IsConfusionMoveEffect(u16 moveEffect);
 bool32 HasMove(u32 battlerId, u32 move);
+bool32 HasOnlyMovesWithSplit(u32 battlerId, u32 split, bool32 onlyOffensive);
 bool32 HasMoveWithSplit(u32 battler, u32 split);
 bool32 HasMoveWithType(u32 battler, u8 type);
 bool32 HasMoveWithTypeAndSplit(u32 battler, u8 type, u8 split);

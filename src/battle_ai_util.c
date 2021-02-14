@@ -1755,6 +1755,22 @@ u16 *GetMovesArray(u32 battler)
         return gBattleResources->battleHistory->usedMoves[battler];
 }
 
+bool32 HasOnlyMovesWithSplit(u32 battlerId, u32 split, bool32 onlyOffensive)
+{
+    u32 i;
+    u16 *moves = GetMovesArray(battlerId);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (onlyOffensive && IS_MOVE_STATUS(moves[i]))
+            continue;
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && GetBattleMoveSplit(moves[i]) != split)
+            return FALSE;
+    }
+    
+    return TRUE;
+}
+
 bool32 HasMoveWithSplit(u32 battler, u32 split)
 {
     u32 i;
