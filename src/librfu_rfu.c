@@ -1393,11 +1393,12 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     u8 bm_slot_id, sendSlotFlag;
     u8 frameSize;
     u8 *llFrameSize_p;
-    u8 sending;
     u8 i;
     u16 imeBak;
-    struct RfuSlotStatusUNI *slotStatus_UNI;
+    u8 sending;
+
     struct RfuSlotStatusNI *slotStatus_NI;
+    struct RfuSlotStatusUNI *slotStatus_UNI;
 
     if (gRfuLinkStatus->parentChild == MODE_NEUTRAL)
         return ERR_MODE_NOT_CONNECTED;
@@ -1409,10 +1410,16 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         sendSlotFlag = gRfuLinkStatus->sendSlotUNIFlag;
     else
         sendSlotFlag = gRfuLinkStatus->sendSlotNIFlag;
+
     if (sendSlotFlag & bmSendSlot)
         return ERR_SLOT_BUSY;
-    for (bm_slot_id = 0; bm_slot_id < RFU_CHILD_MAX && !((bmSendSlot >> bm_slot_id) & 1); ++bm_slot_id)
-        ;
+
+    for (bm_slot_id = 0; bm_slot_id < RFU_CHILD_MAX; ++bm_slot_id)
+    {
+        if ((bmSendSlot >> bm_slot_id) & 1)
+            break;
+    }
+    
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
         llFrameSize_p = &gRfuLinkStatus->remainLLFrameSizeParent;
     else if (gRfuLinkStatus->parentChild == MODE_CHILD)
@@ -1425,35 +1432,42 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     sending = ni_or_uni & 0x20;
     if (sending || ni_or_uni == 0x40)
     {
-        u8 *dataType_p; // a hack to swap instructions
-
         slotStatus_NI = gRfuSlotStatusNI[bm_slot_id];
-        slotStatus_UNI = NULL;
+        slotStatus_UNI = NULL; // Needed to match. TODO: Is this actually needed
         slotStatus_NI->send.errorCode = 0;
-        *slotStatus_NI->send.now_p = dataType_p = &slotStatus_NI->send.dataType;
+        slotStatus_NI->send.now_p[0] = &slotStatus_NI->send.dataType;
         slotStatus_NI->send.remainSize = 7;
         slotStatus_NI->send.bmSlotOrg = bmSendSlot;
         slotStatus_NI->send.bmSlot = bmSendSlot;
         slotStatus_NI->send.payloadSize = subFrameSize - frameSize;
-        if (sending != 0)
-            *dataType_p = 0;
+
+        if (sending)
+            slotStatus_NI->send.dataType = 0;
         else
-            *dataType_p = 1;
+            slotStatus_NI->send.dataType = 1;
+
         slotStatus_NI->send.dataSize = dataSize;
         slotStatus_NI->send.src = src;
+
         slotStatus_NI->send.ack = 0;
         slotStatus_NI->send.phase = 0;
-    #ifndef NONMATCHING // to fix r2, r3, r4, r5 register roulette
-        asm("":::"r2");
-    #endif
+
         for (i = 0; i < WINDOW_COUNT; ++i)
         {
             slotStatus_NI->send.recvAckFlag[i] = 0;
             slotStatus_NI->send.n[i] = 1;
         }
+
         for (bm_slot_id = 0; bm_slot_id < RFU_CHILD_MAX; ++bm_slot_id)
-            if ((bmSendSlot >> bm_slot_id) & 1)
-                gRfuSlotStatusNI[bm_slot_id]->send.failCounter = 0;
+        {
+            do
+            { 
+                if ((bmSendSlot >> bm_slot_id) & 1) {
+                    gRfuSlotStatusNI[bm_slot_id]->send.failCounter = 0;
+                } 
+            } while (0); //Needed to match
+        }
+
         gRfuLinkStatus->sendSlotNIFlag |= bmSendSlot;
         *llFrameSize_p -= subFrameSize;
         slotStatus_NI->send.state = SLOT_STATE_SEND_START;

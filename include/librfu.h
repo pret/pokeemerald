@@ -341,7 +341,7 @@ struct UNISend
                        //   Set with rfu_UNI_re_setSendData or rfu_UNI_readySendData, cleared when data is sent with rfu_REQ_sendData.
     u8 bmSlot;         // Expresses transmission destination slot as bits
     u16 payloadSize;   // Payload size of 1 transmission. "size" specified by rfu_UNI_setSendData or rfu_UNI_re_setSendData is used.
-    const void *src;   // Beginning address of transmission data
+    const u8 *src;   // Beginning address of transmission data
 };
 
 // Data Structure for Receiving UNI Data
@@ -360,7 +360,7 @@ struct RfuSlotStatusUNI
 {
     struct UNISend send;    // Transmission Status
     struct UNIRecv recv;    // Reception Status
-    void *recvBuffer;       // Reception Buffer Address
+    u8 *recvBuffer;         // Reception Buffer Address
     u32 recvBufferSize;     // Reception Buffer Size
 };
 
@@ -381,7 +381,7 @@ struct NIComm
     u8 phase;
     u8 n[WINDOW_COUNT];
     // Parameters indicating the current communication content
-    const void *src;               // Start address transmission data (valid only for transmitting device)
+    const u8 *src;                 // Start address transmission data (valid only for transmitting device)
     u8 bmSlotOrg;                  // Expresses the communication source slot at the beginning of the transmission in bits (valid only for transmitting device)
     u8 dataType;                   // Transmission/reception data type (0: User data; 1: Game identification information)
     u16 payloadSize;               // Payload size for one transmission
