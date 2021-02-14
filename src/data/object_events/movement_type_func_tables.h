@@ -407,8 +407,8 @@ u8 (*const gMovementTypeFuncs_CopyPlayerInGrass[])(struct ObjectEvent *, struct 
     MovementType_CopyPlayer_Step2,
 };
 
-u8 (*const gMovementTypeFuncs_Hidden[])(struct ObjectEvent *, struct Sprite *) = {
-    MovementType_Hidden_Step0,
+u8 (*const gMovementTypeFuncs_Buried[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_Buried_Step0,
 };
 
 u8 (*const gMovementTypeFuncs_WalkInPlace[])(struct ObjectEvent *, struct Sprite *) = {

@@ -101,7 +101,7 @@ static void DoGroundEffects_OnFinishStep(struct ObjectEvent*, struct Sprite*);
 static void UpdateObjectEventSpritePosition(struct Sprite*);
 static void ApplyLevitateMovement(u8);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementType_Hidden_Callback(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
 static void CreateReflectionEffectSprites(void);
 static u8 GetObjectEventIdByLocalId(u8);
 static u8 GetObjectEventIdByLocalIdAndMapInternal(u8, u8, u8);
@@ -212,7 +212,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
     [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = MovementType_CopyPlayerInGrass,
     [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = MovementType_CopyPlayerInGrass,
     [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = MovementType_CopyPlayerInGrass,
-    [MOVEMENT_TYPE_HIDDEN] = MovementType_Hidden,
+    [MOVEMENT_TYPE_BURIED] = MovementType_Buried,
     [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN] = MovementType_WalkInPlace,
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = MovementType_WalkInPlace,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = MovementType_WalkInPlace,
@@ -296,7 +296,7 @@ const u8 gRangedMovementTypes[] = {
     [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = 1,
     [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = 1,
     [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = 1,
-    [MOVEMENT_TYPE_HIDDEN] = 0,
+    [MOVEMENT_TYPE_BURIED] = 0,
     [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN] = 0,
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = 0,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = 0,
@@ -380,7 +380,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
     [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = DIR_SOUTH,
     [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = DIR_WEST,
     [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = DIR_EAST,
-    [MOVEMENT_TYPE_HIDDEN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_BURIED] = DIR_SOUTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN] = DIR_SOUTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = DIR_WEST,
@@ -4467,7 +4467,7 @@ void MovementType_MountainDisguise(struct Sprite *sprite)
     UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_Disguise_Callback);
 }
 
-void MovementType_Hidden(struct Sprite *sprite)
+void MovementType_Buried(struct Sprite *sprite)
 {
     if (!sprite->data[7])
     {
@@ -4476,15 +4476,15 @@ void MovementType_Hidden(struct Sprite *sprite)
         sprite->oam.priority = 3;
         sprite->data[7]++;
     }
-    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_Hidden_Callback);
+    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, MovementType_Buried_Callback);
 }
 
-static bool8 MovementType_Hidden_Callback(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool8 MovementType_Buried_Callback(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    return gMovementTypeFuncs_Hidden[sprite->data[1]](objectEvent, sprite);
+    return gMovementTypeFuncs_Buried[sprite->data[1]](objectEvent, sprite);
 }
 
-bool8 MovementType_Hidden_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementType_Buried_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
     return FALSE;
@@ -6600,9 +6600,9 @@ bool8 MovementAction_EmoteHeart_Step0(struct ObjectEvent *objectEvent, struct Sp
 
 bool8 MovementAction_RevealTrainer_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (objectEvent->movementType == MOVEMENT_TYPE_HIDDEN)
+    if (objectEvent->movementType == MOVEMENT_TYPE_BURIED)
     {
-        SetHiddenTrainerMovement(objectEvent);
+        SetBuriedTrainerMovement(objectEvent);
         return FALSE;
     }
     if (objectEvent->movementType != MOVEMENT_TYPE_TREE_DISGUISE && objectEvent->movementType != MOVEMENT_TYPE_MOUNTAIN_DISGUISE)
