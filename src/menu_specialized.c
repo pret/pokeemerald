@@ -23,7 +23,6 @@
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
-#include "constants/berry.h"
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
