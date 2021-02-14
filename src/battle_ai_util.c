@@ -2891,41 +2891,28 @@ bool32 ShouldRecover(u8 battlerAtk, u8 battlerDef, u16 move, u8 healPercent)
 bool32 ShouldSetScreen(u8 battlerAtk, u8 battlerDef, u16 moveEffect)
 {
     u8 atkSide = GetBattlerSide(battlerAtk);
-    
-    if (gSideTimers[atkSide].auroraVeilTimer != 0)
+    switch (moveEffect)
     {
-        bool8 defHasPhysical = HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL);
-        bool8 defHasSpecial = HasMoveWithSplit(battlerDef, SPLIT_SPECIAL);
-            
-        switch (moveEffect)
-        {
-        case EFFECT_AURORA_VEIL:
-            if (gBattleWeather & WEATHER_HAIL_ANY
-              && !((gSideStatuses[atkSide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN))))
-                return TRUE;
-            break;
-        case EFFECT_REFLECT:
-            if (SideHasMoveSplit(battlerDef, SPLIT_PHYSICAL))
-            {
-                if (!defHasPhysical && !defHasSpecial)
-                    return TRUE; // Target has no attacking moves so no point in doing Light Screen check
-
-                if (defHasPhysical || !HasMoveEffect(battlerAtk, EFFECT_LIGHT_SCREEN) || !defHasSpecial)
-                    return TRUE;
-            }
-            break;
-        case EFFECT_LIGHT_SCREEN:
-            if (SideHasMoveSplit(battlerDef, SPLIT_SPECIAL))
-            {
-                if (!defHasPhysical && !defHasSpecial)
-                    return TRUE; //Target has no attacking moves so no point in doing Light Screen check
-
-                if (defHasSpecial || !HasMoveEffect(battlerAtk, EFFECT_REFLECT) || !defHasPhysical)
-                    return TRUE;
-            }
-            break;
-        }
+    case EFFECT_AURORA_VEIL:
+        // Use only in Hail and only if AI doesn't already have Reflect, Light Screen or Aurora Veil itself active.
+        if (gBattleWeather & WEATHER_HAIL_ANY
+            && !(gSideStatuses[atkSide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)))
+            return TRUE;
+        break;
+    case EFFECT_REFLECT:
+        // Use only if the player has a physical move and AI doesn't already have Reflect itself active.
+        if (HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL)
+            && !(gSideStatuses[atkSide] & SIDE_STATUS_REFLECT))
+            return TRUE;
+        break;
+    case EFFECT_LIGHT_SCREEN:
+        // Use only if the player has a special move and AI doesn't already have Light Screen itself active.
+        if (HasMoveWithSplit(battlerDef, SPLIT_SPECIAL)
+            && !(gSideStatuses[atkSide] & SIDE_STATUS_LIGHTSCREEN))
+            return TRUE;
+        break;
     }
+
     return FALSE;
 }
 

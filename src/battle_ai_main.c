@@ -3232,7 +3232,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_LIGHT_SCREEN:
     case EFFECT_REFLECT:
     case EFFECT_AURORA_VEIL:
-        if (ShouldSetScreen(battlerAtk, battlerDef, move))
+        if (ShouldSetScreen(battlerAtk, battlerDef, moveEffect))
         {
             score += 5;
             if (AI_DATA->atkHoldEffect == HOLD_EFFECT_LIGHT_CLAY)
