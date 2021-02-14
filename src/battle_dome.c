@@ -5794,8 +5794,8 @@ static void InitRandomTourneyTreeResults(void)
     zero1 = 0;
     zero2 = 0;
     
-    gSaveBlock2Ptr->frontier.domeLvlMode = tmp1 + 1;
-    gSaveBlock2Ptr->frontier.domeBattleMode = tmp2 + 1;
+    gSaveBlock2Ptr->frontier.domeLvlMode = zero1 + 1;
+    gSaveBlock2Ptr->frontier.domeBattleMode = zero2 + 1;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
