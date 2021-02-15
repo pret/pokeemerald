@@ -2615,12 +2615,12 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
 
-void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    bool32 obedient = TRUE;
+    bool32 isEventLegal = TRUE;
 
     CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
-    SetMonData(mon, MON_DATA_OBEDIENCE, &obedient);
+    SetMonData(mon, MON_DATA_EVENT_LEGAL, &isEventLegal);
 }
 
 // If FALSE, should load this game's Deoxys form. If TRUE, should load normal Deoxys form
@@ -2755,14 +2755,14 @@ u16 GetUnionRoomTrainerClass(void)
     return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
 }
 
-void CreateObedientEnemyMon(void)
+void CreateEventLegalEnemyMon(void)
 {
     s32 species = gSpecialVar_0x8004;
     s32 level = gSpecialVar_0x8005;
     s32 itemId = gSpecialVar_0x8006;
 
     ZeroEnemyPartyMons();
-    CreateObedientMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, 0, 0);
+    CreateEventLegalMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, 0, 0);
     if (itemId)
     {
         u8 heldItem[2];
@@ -3907,32 +3907,32 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_EFFORT_RIBBON:
         retVal = substruct3->effortRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_1:
-        retVal = substruct3->giftRibbon1;
+    case MON_DATA_MARINE_RIBBON:
+        retVal = substruct3->marineRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_2:
-        retVal = substruct3->giftRibbon2;
+    case MON_DATA_LAND_RIBBON:
+        retVal = substruct3->landRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_3:
-        retVal = substruct3->giftRibbon3;
+    case MON_DATA_SKY_RIBBON:
+        retVal = substruct3->skyRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_4:
-        retVal = substruct3->giftRibbon4;
+    case MON_DATA_COUNTRY_RIBBON:
+        retVal = substruct3->countryRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_5:
-        retVal = substruct3->giftRibbon5;
+    case MON_DATA_NATIONAL_RIBBON:
+        retVal = substruct3->nationalRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_6:
-        retVal = substruct3->giftRibbon6;
+    case MON_DATA_EARTH_RIBBON:
+        retVal = substruct3->earthRibbon;
         break;
-    case MON_DATA_GIFT_RIBBON_7:
-        retVal = substruct3->giftRibbon7;
+    case MON_DATA_WORLD_RIBBON:
+        retVal = substruct3->worldRibbon;
         break;
-    case MON_DATA_FATEFUL_ENCOUNTER:
-        retVal = substruct3->fatefulEncounter;
+    case MON_DATA_FILLER:
+        retVal = substruct3->filler;
         break;
-    case MON_DATA_OBEDIENCE:
-        retVal = substruct3->obedient;
+    case MON_DATA_EVENT_LEGAL:
+        retVal = substruct3->eventLegal;
         break;
     case MON_DATA_SPECIES2:
         retVal = substruct0->species;
@@ -3974,13 +3974,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal += substruct3->victoryRibbon;
             retVal += substruct3->artistRibbon;
             retVal += substruct3->effortRibbon;
-            retVal += substruct3->giftRibbon1;
-            retVal += substruct3->giftRibbon2;
-            retVal += substruct3->giftRibbon3;
-            retVal += substruct3->giftRibbon4;
-            retVal += substruct3->giftRibbon5;
-            retVal += substruct3->giftRibbon6;
-            retVal += substruct3->giftRibbon7;
+            retVal += substruct3->marineRibbon;
+            retVal += substruct3->landRibbon;
+            retVal += substruct3->skyRibbon;
+            retVal += substruct3->countryRibbon;
+            retVal += substruct3->nationalRibbon;
+            retVal += substruct3->earthRibbon;
+            retVal += substruct3->worldRibbon;
         }
         break;
     case MON_DATA_RIBBONS:
@@ -3997,13 +3997,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (substruct3->victoryRibbon << 17)
                 | (substruct3->artistRibbon << 18)
                 | (substruct3->effortRibbon << 19)
-                | (substruct3->giftRibbon1 << 20)
-                | (substruct3->giftRibbon2 << 21)
-                | (substruct3->giftRibbon3 << 22)
-                | (substruct3->giftRibbon4 << 23)
-                | (substruct3->giftRibbon5 << 24)
-                | (substruct3->giftRibbon6 << 25)
-                | (substruct3->giftRibbon7 << 26);
+                | (substruct3->marineRibbon << 20)
+                | (substruct3->landRibbon << 21)
+                | (substruct3->skyRibbon << 22)
+                | (substruct3->countryRibbon << 23)
+                | (substruct3->nationalRibbon << 24)
+                | (substruct3->earthRibbon << 25)
+                | (substruct3->worldRibbon << 26);
         }
         break;
     default:
@@ -4286,32 +4286,32 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_EFFORT_RIBBON:
         SET8(substruct3->effortRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_1:
-        SET8(substruct3->giftRibbon1);
+    case MON_DATA_MARINE_RIBBON:
+        SET8(substruct3->marineRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_2:
-        SET8(substruct3->giftRibbon2);
+    case MON_DATA_LAND_RIBBON:
+        SET8(substruct3->landRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_3:
-        SET8(substruct3->giftRibbon3);
+    case MON_DATA_SKY_RIBBON:
+        SET8(substruct3->skyRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_4:
-        SET8(substruct3->giftRibbon4);
+    case MON_DATA_COUNTRY_RIBBON:
+        SET8(substruct3->countryRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_5:
-        SET8(substruct3->giftRibbon5);
+    case MON_DATA_NATIONAL_RIBBON:
+        SET8(substruct3->nationalRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_6:
-        SET8(substruct3->giftRibbon6);
+    case MON_DATA_EARTH_RIBBON:
+        SET8(substruct3->earthRibbon);
         break;
-    case MON_DATA_GIFT_RIBBON_7:
-        SET8(substruct3->giftRibbon7);
+    case MON_DATA_WORLD_RIBBON:
+        SET8(substruct3->worldRibbon);
         break;
-    case MON_DATA_FATEFUL_ENCOUNTER:
-        SET8(substruct3->fatefulEncounter);
+    case MON_DATA_FILLER:
+        SET8(substruct3->filler);
         break;
-    case MON_DATA_OBEDIENCE:
-        SET8(substruct3->obedient);
+    case MON_DATA_EVENT_LEGAL:
+        SET8(substruct3->eventLegal);
         break;
     case MON_DATA_IVS:
     {

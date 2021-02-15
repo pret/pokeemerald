@@ -205,8 +205,8 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_nop1                      @ 0xca
 	.4byte ScrCmd_nop1                      @ 0xcb
 	.4byte ScrCmd_nop1                      @ 0xcc
-	.4byte ScrCmd_setmonobedient            @ 0xcd
-	.4byte ScrCmd_checkmonobedience         @ 0xce
+	.4byte ScrCmd_setmoneventlegal          @ 0xcd
+	.4byte ScrCmd_checkmoneventlegal        @ 0xce
 	.4byte ScrCmd_gotoram                   @ 0xcf
 	.4byte ScrCmd_nop1                      @ 0xd0
 	.4byte ScrCmd_warpspinenter             @ 0xd1

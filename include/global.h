@@ -898,6 +898,41 @@ struct MysteryEventStruct
     /*0x344 0x3570*/ u32 unk_344[2][5];
 }; // 0x36C 0x3598
 
+// For external event data storage. The majority of these may have never been used.
+struct ExternalEventData
+{
+    u8 unknownExternalDataFields1[7]; // if actually used, may be broken up into different fields.
+    u32 currentPokeCoupons; // PokéCoupons stored by Pokémon Colosseum and XD from Mt. Battle runs. Earned PokéCoupons are also added to totalEarnedPokeCoupons.
+    u32 totalEarnedPokeCoupons; // Used by the JP Colosseum bonus disc. Determines PokéCoupon rank to distribute rewards. Unread in International games.
+    u8 unknownExternalDataFields2[5]; // if actually used, may be broken up into different fields.
+} __attribute__((packed)); /*size = 0x14*/
+
+// For external event flags. The majority of these may have never been used.
+struct ExternalEventFlags
+{
+    u8 unknownFlag1;
+    u8 receivedWishmakerJirachi; // may also be used for Ageto Celebi?
+    u8 unknownFlag3;
+    u8 unknownFlag4;
+    u8 unknownFlag5;
+    u8 unknownFlag6;
+    u8 unknownFlag7;
+    u8 unknownFlag8;
+    u8 unknownFlag9;
+    u8 unknownFlag10;
+    u8 unknownFlag11;
+    u8 unknownFlag12;
+    u8 unknownFlag13;
+    u8 unknownFlag14;
+    u8 unknownFlag15;
+    u8 unknownFlag16;
+    u8 unknownFlag17;
+    u8 unknownFlag18;
+    u8 unknownFlag19;
+    u8 unknownFlag20;
+
+};/*size = 0x14*/
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -971,7 +1006,9 @@ struct SaveBlock1
     /*0x2e90*/ struct ContestWinner contestWinners[NUM_CONTEST_WINNERS]; // see CONTEST_WINNER_*
     /*0x3030*/ struct DayCare daycare;
     /*0x3150*/ struct LinkBattleRecords linkBattleRecords;
-    /*0x31A8*/ u8 giftRibbons[52];
+    /*0x31A8*/ u8 giftRibbons[11];
+    /*0x31B3*/ struct ExternalEventData externalEventData;
+    /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MEventBuffers unk_322C;
