@@ -65,15 +65,15 @@ struct PokemonSubstruct3
  /* 0x0A */ u32 victoryRibbon:1;
  /* 0x0A */ u32 artistRibbon:1;
  /* 0x0A */ u32 effortRibbon:1;
- /* 0x0A */ u32 giftRibbon1:1;
- /* 0x0A */ u32 giftRibbon2:1;
- /* 0x0A */ u32 giftRibbon3:1;
- /* 0x0A */ u32 giftRibbon4:1;
- /* 0x0B */ u32 giftRibbon5:1;
- /* 0x0B */ u32 giftRibbon6:1;
- /* 0x0B */ u32 giftRibbon7:1;
- /* 0x0B */ u32 fatefulEncounter:4;
- /* 0x0B */ u32 obedient:1;
+ /* 0x0A */ u32 marineRibbon:1; //never distributed
+ /* 0x0A */ u32 landRibbon:1; //never distributed
+ /* 0x0A */ u32 skyRibbon:1; //never distributed
+ /* 0x0A */ u32 countryRibbon:1; //distributed during Pokémon Festa '04 and '05 to tournament winners
+ /* 0x0B */ u32 nationalRibbon:1;
+ /* 0x0B */ u32 earthRibbon:1;
+ /* 0x0B */ u32 worldRibbon:1; //distributed during Pokémon Festa '04 and '05 to tournament winners
+ /* 0x0B */ u32 filler:4;
+ /* 0x0B */ u32 fatefulEncounter:1; //controls Mew and Deoxys obedience
 };
 
 union PokemonSubstruct
@@ -286,12 +286,12 @@ void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, 
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
-void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void CreateFatefulEncounterMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
 void SetDeoxysStats(void);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
-void CreateObedientEnemyMon(void);
+void CreateFatefulEncounterEnemyMon(void);
 void CalculateMonStats(struct Pokemon *mon);
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
