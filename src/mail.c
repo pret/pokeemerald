@@ -248,7 +248,7 @@ void ReadMail(struct MailStruct *mail, void (*callback)(void), bool8 flag)
     u16 species;
 
     sMailRead = calloc(1, sizeof(*sMailRead));
-    sMailRead->language = LANGUAGE_ENGLISH;
+    sMailRead->language = GAME_LANGUAGE;
     sMailRead->playerIsSender = TRUE;
     sMailRead->parserSingle = CopyEasyChatWord;
     sMailRead->parserMultiple = ConvertEasyChatWordsToString;
