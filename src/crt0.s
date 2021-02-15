@@ -76,8 +76,8 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0x00000008 @ offsetof(struct SaveBlock2, playerGender)
 	.4byte 0x00000ca8 @ offsetof(struct SaveBlock2, frontier.challengeStatus)
 	.4byte 0x00000ca8 @ offsetof(struct SaveBlock2, frontier.challengeStatus)
-	.4byte 0x000031c7 @ offsetof(struct SaveBlock1, ? part-way into giftRibbons)
-	.4byte 0x000031b3 @ offsetof(struct SaveBlock1, ? part-way into giftRibbons)
+	.4byte 0x000031c7 @ offsetof(struct SaveBlock1, externalEventFlags)
+	.4byte 0x000031b3 @ offsetof(struct SaveBlock1, externalEventData)
 	.4byte 0x00000000
 
 	.4byte gBaseStats
