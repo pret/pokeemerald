@@ -490,7 +490,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813AF48
 	def_special DoDeoxysRockInteraction
 	def_special SetDeoxysRockPalette
-	def_special CreateFatefulEncounterEnemyMon
+	def_special CreateEventLegalEnemyMon
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink

@@ -2615,12 +2615,12 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
 
-void CreateFatefulEncounterMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    bool32 isFatefulEncounter = TRUE;
+    bool32 isEventLegal = TRUE;
 
     CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
-    SetMonData(mon, MON_DATA_FATEFUL_ENCOUNTER, &isFatefulEncounter);
+    SetMonData(mon, MON_DATA_EVENT_LEGAL, &isEventLegal);
 }
 
 // If FALSE, should load this game's Deoxys form. If TRUE, should load normal Deoxys form
@@ -2755,14 +2755,14 @@ u16 GetUnionRoomTrainerClass(void)
     return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
 }
 
-void CreateFatefulEncounterEnemyMon(void)
+void CreateEventLegalEnemyMon(void)
 {
     s32 species = gSpecialVar_0x8004;
     s32 level = gSpecialVar_0x8005;
     s32 itemId = gSpecialVar_0x8006;
 
     ZeroEnemyPartyMons();
-    CreateFatefulEncounterMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, 0, 0);
+    CreateEventLegalMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, 0, 0);
     if (itemId)
     {
         u8 heldItem[2];
@@ -3931,8 +3931,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_FILLER:
         retVal = substruct3->filler;
         break;
-    case MON_DATA_FATEFUL_ENCOUNTER:
-        retVal = substruct3->fatefulEncounter;
+    case MON_DATA_EVENT_LEGAL:
+        retVal = substruct3->eventLegal;
         break;
     case MON_DATA_SPECIES2:
         retVal = substruct0->species;
@@ -4310,8 +4310,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_FILLER:
         SET8(substruct3->filler);
         break;
-    case MON_DATA_FATEFUL_ENCOUNTER:
-        SET8(substruct3->fatefulEncounter);
+    case MON_DATA_EVENT_LEGAL:
+        SET8(substruct3->eventLegal);
         break;
     case MON_DATA_IVS:
     {

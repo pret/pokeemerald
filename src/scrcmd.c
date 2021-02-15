@@ -2207,21 +2207,21 @@ bool8 ScrCmd_lockfortrainer(struct ScriptContext *ctx)
     }
 }
 
-// This command will set a Pokémon's Fateful Encounter bit; there is no similar command to clear it.
-bool8 ScrCmd_setmonfatefulencounter(struct ScriptContext *ctx)
+// This command will set a Pokémon's eventLegal bit; there is no similar command to clear it.
+bool8 ScrCmd_setmoneventlegal(struct ScriptContext *ctx)
 {
-    bool8 isFatefulEncounter = TRUE;
+    bool8 isEventLegal = TRUE;
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
-    SetMonData(&gPlayerParty[partyIndex], MON_DATA_FATEFUL_ENCOUNTER, &isFatefulEncounter);
+    SetMonData(&gPlayerParty[partyIndex], MON_DATA_EVENT_LEGAL, &isEventLegal);
     return FALSE;
 }
 
-bool8 ScrCmd_checkmonfatefulencounter(struct ScriptContext *ctx)
+bool8 ScrCmd_checkmoneventlegal(struct ScriptContext *ctx)
 {
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_FATEFUL_ENCOUNTER, NULL);
+    gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_EVENT_LEGAL, NULL);
     return FALSE;
 }
 

@@ -2421,12 +2421,12 @@ u8 TV_MonDataIdxToRibbon(u8 monDataIdx)
     if (monDataIdx == MON_DATA_ARTIST_RIBBON)   return 23;
     if (monDataIdx == MON_DATA_EFFORT_RIBBON)   return 24;
     if (monDataIdx == MON_DATA_MARINE_RIBBON)   return 25;
-    if (monDataIdx == MON_DATA_LAND_RIBBON)   return 26;
-    if (monDataIdx == MON_DATA_SKY_RIBBON)   return 27;
-    if (monDataIdx == MON_DATA_COUNTRY_RIBBON)   return 28;
-    if (monDataIdx == MON_DATA_NATIONAL_RIBBON)   return 29;
-    if (monDataIdx == MON_DATA_EARTH_RIBBON)   return 30;
-    if (monDataIdx == MON_DATA_WORLD_RIBBON)   return 31;
+    if (monDataIdx == MON_DATA_LAND_RIBBON)     return 26;
+    if (monDataIdx == MON_DATA_SKY_RIBBON)      return 27;
+    if (monDataIdx == MON_DATA_COUNTRY_RIBBON)  return 28;
+    if (monDataIdx == MON_DATA_NATIONAL_RIBBON) return 29;
+    if (monDataIdx == MON_DATA_EARTH_RIBBON)    return 30;
+    if (monDataIdx == MON_DATA_WORLD_RIBBON)    return 31;
     return 0;
 }
 
