@@ -5774,6 +5774,8 @@ static void InitRandomTourneyTreeResults(void)
     int monTypesBits;
     int trainerId;
     int monId;
+    int zero1;
+    int zero2;
     u8 lvlMode;
     u16 *statSums;
     int *statValues;
@@ -5789,12 +5791,11 @@ static void InitRandomTourneyTreeResults(void)
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
-    // This one, I'd like to call a 'C fakematching'.
-    {
-        u8 one;
-        gSaveBlock2Ptr->frontier.domeLvlMode = (one = 1);
-        gSaveBlock2Ptr->frontier.domeBattleMode = one;
-    }
+    zero1 = 0;
+    zero2 = 0;
+    
+    gSaveBlock2Ptr->frontier.domeLvlMode = zero1 + 1;
+    gSaveBlock2Ptr->frontier.domeBattleMode = zero2 + 1;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
