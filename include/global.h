@@ -899,19 +899,27 @@ struct MysteryEventStruct
 }; // 0x36C 0x3598
 
 // For external event data storage. The majority of these may have never been used.
+// In Emerald, the only known used fields are the PokeCoupon ones, but hacking the distribution discs allows Emerald to receive events and set the others
 struct ExternalEventData
 {
     u8 unknownExternalDataFields1[7]; // if actually used, may be broken up into different fields.
-    u32 currentPokeCoupons; // PokéCoupons stored by Pokémon Colosseum and XD from Mt. Battle runs. Earned PokéCoupons are also added to totalEarnedPokeCoupons.
-    u32 totalEarnedPokeCoupons; // Used by the JP Colosseum bonus disc. Determines PokéCoupon rank to distribute rewards. Unread in International games.
-    u8 unknownExternalDataFields2[5]; // if actually used, may be broken up into different fields.
+    u32 unknownExternalDataFields2:8;
+    u32 currentPokeCoupons:24; // PokéCoupons stored by Pokémon Colosseum and XD from Mt. Battle runs. Earned PokéCoupons are also added to totalEarnedPokeCoupons. Colosseum/XD caps this at 9,999,999, but will read up to 16,777,215.
+    u32 gotGoldPokeCouponTitleReward:1; // PP Max from JP Colosseum Bonus Disc; for reaching 2500 totalEarnedPokeCoupons
+    u32 gotSilverPokeCouponTitleReward:1; // Light Ball Pikachu from JP Colosseum Bonus Disc; for reaching 5000 totalEarnedPokeCoupons
+    u32 gotBronzePokeCouponTitleReward:1; // Master Ball from Jp Colosseum Bonus Disc; for reaching 30,000 totalEarnedPokeCoupons
+    u32 receivedAgetoCelebi:1; // from JP Colosseum Bonus Disc
+    u32 unknownExternalDataFields3:4;
+    u32 totalEarnedPokeCoupons:24; // Used by the JP Colosseum bonus disc. Determines PokéCoupon rank to distribute rewards. Unread in International games. Colosseum/XD caps this at 9,999,999.
+    u8 unknownExternalDataFields4[5]; // if actually used, may be broken up into different fields.
 } __attribute__((packed)); /*size = 0x14*/
 
 // For external event flags. The majority of these may have never been used.
+// In Emerald, Jirachi cannot normally be received, but hacking the distribution discs allows Emerald to receive Jirachi and set the flag
 struct ExternalEventFlags
 {
     u8 unknownFlag1;
-    u8 receivedWishmakerJirachi; // may also be used for Ageto Celebi?
+    u8 receivedGCNJirachi; // Both the US Colosseum Bonus Disc and PAL/AUS Pokémon Channel use this field. One cannot receive a WISHMKR Jirachi and CHANNEL Jirachi with the same savefile.
     u8 unknownFlag3;
     u8 unknownFlag4;
     u8 unknownFlag5;
