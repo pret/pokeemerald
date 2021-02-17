@@ -3928,8 +3928,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_WORLD_RIBBON:
         retVal = substruct3->worldRibbon;
         break;
-    case MON_DATA_FILLER:
-        retVal = substruct3->filler;
+    case MON_DATA_UNUSED_RIBBONS:
+        retVal = substruct3->unusedRibbons;
         break;
     case MON_DATA_EVENT_LEGAL:
         retVal = substruct3->eventLegal;
@@ -4307,8 +4307,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_WORLD_RIBBON:
         SET8(substruct3->worldRibbon);
         break;
-    case MON_DATA_FILLER:
-        SET8(substruct3->filler);
+    case MON_DATA_UNUSED_RIBBONS:
+        SET8(substruct3->unusedRibbons);
         break;
     case MON_DATA_EVENT_LEGAL:
         SET8(substruct3->eventLegal);

@@ -110,7 +110,7 @@ static EWRAM_DATA struct {
     /*0x007F*/ u8 unused_7F;
     /*0x0080*/ u16 linkData[20];
     /*0x00A8*/ u8 timer;
-    /*0x00A9*/ u8 giftRibbons[11];
+    /*0x00A9*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
     /*0x00B4*/ u8 filler_B4[0x8D0-0xB4];
     /*0x08D0*/ struct {
         bool8 queued;
