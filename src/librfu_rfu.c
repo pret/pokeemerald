@@ -1462,9 +1462,8 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         {
             do
             { 
-                if ((bmSendSlot >> bm_slot_id) & 1) {
+                if ((bmSendSlot >> bm_slot_id) & 1)
                     gRfuSlotStatusNI[bm_slot_id]->send.failCounter = 0;
-                } 
             } while (0); //Needed to match
         }
 
