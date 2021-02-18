@@ -37,6 +37,8 @@ struct WindowTemplate
     0,                              \
 }
 
+#define WINDOW_NONE 0xFF
+
 struct Window
 {
     struct WindowTemplate window;
