@@ -1736,7 +1736,7 @@ gTVTrainerFanClubText11:: @ 08286B4F
 	.string "FANS: {STR_VAR_2}!\p"
 	.string "FANS: {STR_VAR_3}!$"
 
-gTVCutiesText00:: @ 08286D8F
+TVSpotTheCuties_Text_Intro:: @ 08286D8F
 	.string "SPOT THE CUTIES!\n"
 	.string "POKéMON IN RIBBONS!\p"
 	.string "Hello, my sweet viewers!\p"
@@ -1748,29 +1748,29 @@ gTVCutiesText00:: @ 08286D8F
 	.string "Today's featured pretty POKéMON\n"
 	.string "is {STR_VAR_1}'s {STR_VAR_2}.$"
 
-gTVCutiesText01:: @ 08286E9D
+TVSpotTheCuties_Text_RibbonsLow:: @ 08286E9D
 	.string "The number of RIBBONS that\n"
 	.string "{STR_VAR_2} wears is {STR_VAR_3}.\p"
 	.string "It says a lot about how much\n"
 	.string "{STR_VAR_1} adores the POKéMON.$"
 
-gTVCutiesText02:: @ 08286EFC
+TVSpotTheCuties_Text_RibbonsMid:: @ 08286EFC
 	.string "{STR_VAR_2} wears an amazing\n"
 	.string "{STR_VAR_3} RIBBONS!\p"
 	.string "It speaks volumes about {STR_VAR_1}'s\n"
 	.string "commitment to the POKéMON!$"
 
-gTVCutiesText03:: @ 08286F54
+TVSpotTheCuties_Text_RibbonsHigh:: @ 08286F54
 	.string "{STR_VAR_2} wears an incredible\n"
 	.string "{STR_VAR_3} RIBBONS!\p"
 	.string "It shows you {STR_VAR_1}'s total\n"
 	.string "dedication as a collector!$"
 
-gTVCutiesText04:: @ 08286FAA
+TVSpotTheCuties_Text_RibbonIntro:: @ 08286FAA
 	.string "Let us take a closer look at the many\n"
 	.string "RIBBONS worn by {STR_VAR_2}.$"
 
-gTVCutiesText05:: @ 08286FE4
+TVSpotTheCuties_Text_RibbonChampion:: @ 08286FE4
 	.string "The CHAMPION RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it upon entering\n"
@@ -1780,7 +1780,7 @@ gTVCutiesText05:: @ 08286FE4
 	.string "{STR_VAR_2} and the CHAMP RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText06:: @ 082870A3
+TVSpotTheCuties_Text_RibbonCool:: @ 082870A3
 	.string "The COOL RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for winning\n"
@@ -1790,7 +1790,7 @@ gTVCutiesText06:: @ 082870A3
 	.string "{STR_VAR_2} and the COOL RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText07:: @ 0828715A
+TVSpotTheCuties_Text_RibbonBeauty:: @ 0828715A
 	.string "The BEAUTY RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for winning\n"
@@ -1800,7 +1800,7 @@ gTVCutiesText07:: @ 0828715A
 	.string "{STR_VAR_2} and the BEAUTY RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText08:: @ 08287215
+TVSpotTheCuties_Text_RibbonCute:: @ 08287215
 	.string "The CUTE RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for winning\n"
@@ -1810,7 +1810,7 @@ gTVCutiesText08:: @ 08287215
 	.string "{STR_VAR_2} and the CUTE RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText09:: @ 082872CC
+TVSpotTheCuties_Text_RibbonSmart:: @ 082872CC
 	.string "The SMART RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for winning\n"
@@ -1820,7 +1820,7 @@ gTVCutiesText09:: @ 082872CC
 	.string "{STR_VAR_2} and the SMART RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText10:: @ 08287387
+TVSpotTheCuties_Text_RibbonTough:: @ 08287387
 	.string "The TOUGH RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for winning\n"
@@ -1830,7 +1830,7 @@ gTVCutiesText10:: @ 08287387
 	.string "{STR_VAR_2} and the TOUGH RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText11:: @ 08287442
+TVSpotTheCuties_Text_RibbonWinning:: @ 08287442
 	.string "The WINNING RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for its feats\n"
@@ -1840,7 +1840,7 @@ gTVCutiesText11:: @ 08287442
 	.string "{STR_VAR_2} and the WINNING RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText12:: @ 08287508
+TVSpotTheCuties_Text_RibbonVictory:: @ 08287508
 	.string "The VICTORY RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for its feats\n"
@@ -1850,7 +1850,7 @@ gTVCutiesText12:: @ 08287508
 	.string "{STR_VAR_2} and the VICTORY RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText13:: @ 082875D9
+TVSpotTheCuties_Text_RibbonArtist:: @ 082875D9
 	.string "The ARTIST RIBBON is especially\n"
 	.string "fetching.\p"
 	.string "{STR_VAR_2} received it for being\n"
@@ -1860,7 +1860,7 @@ gTVCutiesText13:: @ 082875D9
 	.string "{STR_VAR_2} and the ARTIST RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText14:: @ 082876A1
+TVSpotTheCuties_Text_RibbonEffort:: @ 082876A1
 	.string "The Hard Worker RIBBON is\n"
 	.string "especially fetching.\p"
 	.string "{STR_VAR_2} received it for being\n"
@@ -1870,7 +1870,7 @@ gTVCutiesText14:: @ 082876A1
 	.string "{STR_VAR_2} and the Hard Worker RIBBON!\n"
 	.string "The combination is super effective!$"
 
-gTVCutiesText15:: @ 08287779
+TVSpotTheCuties_Text_Outro:: @ 08287779
 	.string "…Sigh…\p"
 	.string "RIBBONS and POKéMON…\n"
 	.string "They go so wonderfully together!\p"

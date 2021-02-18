@@ -182,6 +182,55 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+// Ribbon IDs used by TV and Pokénav
+#define CHAMPION_RIBBON       0
+#define COOL_RIBBON_NORMAL    1
+#define COOL_RIBBON_SUPER     2
+#define COOL_RIBBON_HYPER     3
+#define COOL_RIBBON_MASTER    4
+#define BEAUTY_RIBBON_NORMAL  5
+#define BEAUTY_RIBBON_SUPER   6
+#define BEAUTY_RIBBON_HYPER   7
+#define BEAUTY_RIBBON_MASTER  8
+#define CUTE_RIBBON_NORMAL    9
+#define CUTE_RIBBON_SUPER    10
+#define CUTE_RIBBON_HYPER    11
+#define CUTE_RIBBON_MASTER   12
+#define SMART_RIBBON_NORMAL  13
+#define SMART_RIBBON_SUPER   14
+#define SMART_RIBBON_HYPER   15
+#define SMART_RIBBON_MASTER  16
+#define TOUGH_RIBBON_NORMAL  17
+#define TOUGH_RIBBON_SUPER   18
+#define TOUGH_RIBBON_HYPER   19
+#define TOUGH_RIBBON_MASTER  20
+#define WINNING_RIBBON       21
+#define VICTORY_RIBBON       22
+#define ARTIST_RIBBON        23
+#define EFFORT_RIBBON        24
+#define MARINE_RIBBON        25
+#define LAND_RIBBON          26
+#define SKY_RIBBON           27
+#define COUNTRY_RIBBON       28
+#define NATIONAL_RIBBON      29
+#define EARTH_RIBBON         30
+#define WORLD_RIBBON         31
+
+#define FIRST_GIFT_RIBBON MARINE_RIBBON
+#define LAST_GIFT_RIBBON  WORLD_RIBBON
+#define NUM_GIFT_RIBBONS  (1 + LAST_GIFT_RIBBON - FIRST_GIFT_RIBBON)
+
+// The above gift ribbons (Marine - World) are
+// special distribution ribbons that correspond to
+// 1 bit each in the Pokémon struct. Gen 4 hard-codes
+// each of these to the given name. In Gen 3 they're
+// used to get an index into giftRibbons in the save block,
+// which can have a value 0-64 (0 is 'no ribbon') that 
+// corresponds to one of the special ribbons listed
+// in gGiftRibbonDescriptionPointers. Most of these were
+// never distributed
+#define MAX_GIFT_RIBBON 64
+
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100
 

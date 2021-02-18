@@ -198,10 +198,10 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
     s32 i;
     bool32 gotRibbon = FALSE;
     u8 data = 1;
-    u8 array[8];
+    u8 array[ARRAY_COUNT(sGiftRibbonsMonDataIds)];
     memcpy(array, sGiftRibbonsMonDataIds, sizeof(sGiftRibbonsMonDataIds));
 
-    if (index < GIFT_RIBBONS_COUNT && ribbonId < 65)
+    if (index < GIFT_RIBBONS_COUNT && ribbonId <= MAX_GIFT_RIBBON)
     {
         gSaveBlock1Ptr->giftRibbons[index] = ribbonId;
         for (i = 0; i < PARTY_SIZE; i++)

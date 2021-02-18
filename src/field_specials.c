@@ -1408,7 +1408,7 @@ void GiveLeadMonEffortRibbon(void)
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
     if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
     {
-        TryPutSpotTheCutiesOnAir(leadMon, 0x47);
+        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
     }
 }
 
