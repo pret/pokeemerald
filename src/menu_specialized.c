@@ -216,14 +216,14 @@ bool8 sub_81D1C44(u8 count)
         return FALSE;
 
     for (i = 0; i < ARRAY_COUNT(sUnknown_0203CF48); i++)
-        sUnknown_0203CF48[i] = 0xFF;
+        sUnknown_0203CF48[i] = WINDOW_NONE;
 
     return TRUE;
 }
 
 u8 sub_81D1C84(u8 a0)
 {
-    if (sUnknown_0203CF48[a0] == 0xFF)
+    if (sUnknown_0203CF48[a0] == WINDOW_NONE)
     {
         if (a0 == 2)
         {
@@ -245,7 +245,7 @@ void sub_81D1D04(u8 a0)
     ClearStdWindowAndFrameToTransparent(sUnknown_0203CF48[a0], 0);
     ClearWindowTilemap(sUnknown_0203CF48[a0]);
     RemoveWindow(sUnknown_0203CF48[a0]);
-    sUnknown_0203CF48[a0] = 0xFF;
+    sUnknown_0203CF48[a0] = WINDOW_NONE;
 }
 
 static u8 sub_81D1D34(u8 a0)

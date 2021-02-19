@@ -2680,7 +2680,7 @@ static void ResetWindows(void)
     for (i = 0; i < PSS_LABEL_WINDOW_END; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     for (i = 0; i < ARRAY_COUNT(sMonSummaryScreen->windowIds); i++)
-        sMonSummaryScreen->windowIds[i] = 0xFF;
+        sMonSummaryScreen->windowIds[i] = WINDOW_NONE;
 }
 
 static void PrintTextOnWindow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId)
@@ -2938,7 +2938,7 @@ static void ClearPageWindowTilemaps(u8 page)
 static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId)
 {
     u8 *windowIdPtr = &sMonSummaryScreen->windowIds[templateId];
-    if (*windowIdPtr == 0xFF)
+    if (*windowIdPtr == WINDOW_NONE)
     {
         *windowIdPtr = AddWindow(&template[templateId]);
         FillWindowPixelBuffer(*windowIdPtr, PIXEL_FILL(0));
@@ -2949,11 +2949,11 @@ static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 te
 static void RemoveWindowByIndex(u8 windowIndex)
 {
     u8 *windowIdPtr = &sMonSummaryScreen->windowIds[windowIndex];
-    if (*windowIdPtr != 0xFF)
+    if (*windowIdPtr != WINDOW_NONE)
     {
         ClearWindowTilemap(*windowIdPtr);
         RemoveWindow(*windowIdPtr);
-        *windowIdPtr = 0xFF;
+        *windowIdPtr = WINDOW_NONE;
     }
 }
 
@@ -2962,7 +2962,7 @@ static void PrintPageSpecificText(u8 pageIndex)
     u16 i;
     for (i = 0; i < ARRAY_COUNT(sMonSummaryScreen->windowIds); i++)
     {
-        if (sMonSummaryScreen->windowIds[i] != 0xFF)
+        if (sMonSummaryScreen->windowIds[i] != WINDOW_NONE)
             FillWindowPixelBuffer(sMonSummaryScreen->windowIds[i], PIXEL_FILL(0));
     }
     sTextPrinterFunctions[pageIndex]();

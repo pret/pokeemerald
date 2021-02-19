@@ -2724,7 +2724,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
     template.paletteNum = 14;
     template.baseBlock = 0x52;
     sDisplay->yesNoMenuWindowId = AddWindow(&template);
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sDisplay->yesNoMenuWindowId, PIXEL_FILL(1));
         PutWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2778,7 +2778,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
     sDisplay->messageWindowId = AddWindow(&template);
     windowId = sDisplay->messageWindowId;
-    if (sDisplay->messageWindowId == 0xFF)
+    if (sDisplay->messageWindowId == WINDOW_NONE)
         return;
 
     if (sDisplayStdMessages[msgId].hasPlaceholders)

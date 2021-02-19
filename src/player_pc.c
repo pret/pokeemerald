@@ -889,7 +889,7 @@ static void sub_816BC58(void)
 static u8 sub_816BC7C(u8 a)
 {
     u8 *windowIdLoc = &(gUnknown_0203BCC4->windowIds[a]);
-    if (*windowIdLoc == 0xFF)
+    if (*windowIdLoc == WINDOW_NONE)
     {
         *windowIdLoc = AddWindow(&gUnknown_085DFF5C[a]);
         DrawStdFrameWithCustomTileAndPalette(*windowIdLoc, FALSE, 0x214, 0xE);
@@ -901,13 +901,13 @@ static u8 sub_816BC7C(u8 a)
 static void sub_816BCC4(u8 a)
 {
     u8 *windowIdLoc = &(gUnknown_0203BCC4->windowIds[a]);
-    if (*windowIdLoc != 0xFF)
+    if (*windowIdLoc != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*windowIdLoc, FALSE);
         ClearWindowTilemap(*windowIdLoc);
         ScheduleBgCopyTilemapToVram(0);
         RemoveWindow(*windowIdLoc);
-        *windowIdLoc = 0xFF;
+        *windowIdLoc = WINDOW_NONE;
     }
 }
 

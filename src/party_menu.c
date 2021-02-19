@@ -443,7 +443,7 @@ static void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCurs
         for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->data); i++)
             sPartyMenuInternal->data[i] = 0;
         for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->windowId); i++)
-            sPartyMenuInternal->windowId[i] = 0xFF;
+            sPartyMenuInternal->windowId[i] = WINDOW_NONE;
 
         if (!keepCursorPos)
             gPartyMenu.slotId = 0;
@@ -2371,11 +2371,11 @@ static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox 
 
 static void PartyMenuRemoveWindow(u8 *ptr)
 {
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*ptr, 0);
         RemoveWindow(*ptr);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
         ScheduleBgCopyTilemapToVram(2);
     }
 }
@@ -2384,7 +2384,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
 {
     u8 *windowPtr = &sPartyMenuInternal->windowId[1];
 
-    if (*windowPtr != 0xFF)
+    if (*windowPtr != WINDOW_NONE)
         PartyMenuRemoveWindow(windowPtr);
 
     if (stringId != PARTY_MSG_NONE)

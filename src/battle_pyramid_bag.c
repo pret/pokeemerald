@@ -1428,7 +1428,7 @@ static u8 sub_81C6D08(u8 windowArrayId)
 static u8 sub_81C6D24(u8 windowArrayId)
 {
     u8 *windowId = &gPyramidBagResources->windowIds[windowArrayId];
-    if (*windowId == 0xFF)
+    if (*windowId == WINDOW_NONE)
     {
         *windowId = AddWindow(&gUnknown_0861F350[windowArrayId]);
         DrawStdFrameWithCustomTileAndPalette(*windowId, FALSE, 1, 0xE);
@@ -1440,13 +1440,13 @@ static u8 sub_81C6D24(u8 windowArrayId)
 static void sub_81C6D6C(u8 windowArrayId)
 {
     u8 *windowId = &gPyramidBagResources->windowIds[windowArrayId];
-    if (*windowId != 0xFF)
+    if (*windowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*windowId, FALSE);
         ClearWindowTilemap(*windowId);
         RemoveWindow(*windowId);
         ScheduleBgCopyTilemapToVram(1);
-        *windowId = 0xFF;
+        *windowId = WINDOW_NONE;
     }
 }
 

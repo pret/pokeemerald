@@ -2390,7 +2390,7 @@ u8 sub_81AE124(u8 which)
 u8 BagMenu_AddWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr == 0xFF)
+    if (*ptr == WINDOW_NONE)
     {
         *ptr = AddWindow(&sContextMenuWindowTemplates[which]);
         DrawStdFrameWithCustomTileAndPalette(*ptr, 0, 1, 14);
@@ -2402,20 +2402,20 @@ u8 BagMenu_AddWindow(u8 which)
 void BagMenu_RemoveWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         ScheduleBgCopyTilemapToVram(1);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
     }
 }
 
 u8 AddItemMessageWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr == 0xFF)
+    if (*ptr == WINDOW_NONE)
         *ptr = AddWindow(&sContextMenuWindowTemplates[which]);
     return *ptr;
 }
@@ -2423,14 +2423,14 @@ u8 AddItemMessageWindow(u8 which)
 void BagMenu_RemoveBagItemMessageWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearDialogWindowAndFrameToTransparent(*ptr, FALSE);
         // This ClearWindowTilemap call is redundant, since ClearDialogWindowAndFrameToTransparent already calls it.
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         ScheduleBgCopyTilemapToVram(1);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
     }
 }
 

@@ -613,7 +613,7 @@ static void ClearStarterLabel(void)
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
     ClearWindowTilemap(sStarterLabelWindowId);
     RemoveWindow(sStarterLabelWindowId);
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
     SetGpuReg(REG_OFFSET_WIN0H, 0);
     SetGpuReg(REG_OFFSET_WIN0V, 0);
     ScheduleBgCopyTilemapToVram(0);
