@@ -389,10 +389,10 @@ void GoToBattlePyramidBagMenu(u8 a0, void (*callback)(void))
 
     gPyramidBagResources->callback2 = NULL;
     gPyramidBagResources->unk814 = 0xFF;
-    gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
+    gPyramidBagResources->scrollIndicatorsTaskId = TASK_NONE;
 
     memset(gPyramidBagResources->itemsSpriteIds, 0xFF, sizeof(gPyramidBagResources->itemsSpriteIds));
-    memset(gPyramidBagResources->windowIds, 0xFF, sizeof(gPyramidBagResources->windowIds));
+    memset(gPyramidBagResources->windowIds, WINDOW_NONE, sizeof(gPyramidBagResources->windowIds));
 
     SetMainCallback2(sub_81C504C);
 }
@@ -657,16 +657,16 @@ static void PrintItemDescription(s32 listMenuId)
 
 static void AddScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollIndicatorsTaskId == 0xFF)
+    if (gPyramidBagResources->scrollIndicatorsTaskId == TASK_NONE)
         gPyramidBagResources->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(2, 172, 12, 148, gPyramidBagResources->listMenuCount - gPyramidBagResources->listMenuMaxShown, 0xB5E, 0xB5E, &gPyramidBagCursorData.scrollPosition);
 }
 
 static void RemoveScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollIndicatorsTaskId != 0xFF)
+    if (gPyramidBagResources->scrollIndicatorsTaskId != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gPyramidBagResources->scrollIndicatorsTaskId);
-        gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
+        gPyramidBagResources->scrollIndicatorsTaskId = TASK_NONE;
     }
 }
 

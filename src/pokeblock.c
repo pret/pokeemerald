@@ -432,7 +432,7 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void))
     sPokeblockMenu = Alloc(sizeof(*sPokeblockMenu));
     sPokeblockMenu->caseId = caseId;
     sPokeblockMenu->callbackOnUse = NULL;
-    sPokeblockMenu->unkTaskId = 0xFF;
+    sPokeblockMenu->unkTaskId = TASK_NONE;
     sPokeblockMenu->isSwapping = FALSE;
     sSavedPokeblockData.callback = callback;
 
@@ -898,7 +898,7 @@ static void sub_8136344(void)
 
 static void sub_81363BC(void)
 {
-    if (sPokeblockMenu->unkTaskId == 0xFF)
+    if (sPokeblockMenu->unkTaskId == TASK_NONE)
     {
         sPokeblockMenu->unkTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xB0, 8, 0x98, sPokeblockMenu->itemsNo - sPokeblockMenu->maxShowed,
                                                                             0x456, 0x456, &sSavedPokeblockData.lastItemPage);
@@ -907,10 +907,10 @@ static void sub_81363BC(void)
 
 static void sub_8136418(void)
 {
-    if (sPokeblockMenu->unkTaskId != 0xFF)
+    if (sPokeblockMenu->unkTaskId != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(sPokeblockMenu->unkTaskId);
-        sPokeblockMenu->unkTaskId = 0xFF;
+        sPokeblockMenu->unkTaskId = TASK_NONE;
     }
 }
 

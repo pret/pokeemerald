@@ -1814,8 +1814,8 @@ void ClearBattleAnimationVars(void)
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
 
-    sMonAnimTaskIdArray[0] = 0xFF;
-    sMonAnimTaskIdArray[1] = 0xFF;
+    sMonAnimTaskIdArray[0] = TASK_NONE;
+    sMonAnimTaskIdArray[1] = TASK_NONE;
     gAnimMoveTurn = 0;
     sAnimBackgroundFadeState = 0;
     sAnimMoveIndex = 0;
@@ -1861,8 +1861,8 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
 
-    sMonAnimTaskIdArray[0] = 0xFF;
-    sMonAnimTaskIdArray[1] = 0xFF;
+    sMonAnimTaskIdArray[0] = TASK_NONE;
+    sMonAnimTaskIdArray[1] = TASK_NONE;
     sBattleAnimScriptPtr = animsTable[tableId];
     gAnimScriptActive = TRUE;
     gAnimFramesToWait = 0;
@@ -2106,7 +2106,7 @@ static void ScriptCmd_end(void)
 
     // Keep waiting as long as there are animations to be done.
     if (gAnimVisualTaskCount != 0 || gAnimSoundTaskCount != 0
-     || sMonAnimTaskIdArray[0] != 0xFF || sMonAnimTaskIdArray[1] != 0xFF)
+     || sMonAnimTaskIdArray[0] != TASK_NONE || sMonAnimTaskIdArray[1] != TASK_NONE)
     {
         sSoundAnimFramesToWait = 0;
         gAnimFramesToWait = 1;
@@ -2482,9 +2482,9 @@ static void ScriptCmd_clearmonbg(void)
     else
         battlerId = gBattleAnimTarget;
 
-    if (sMonAnimTaskIdArray[0] != 0xFF)
+    if (sMonAnimTaskIdArray[0] != TASK_NONE)
         gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
-    if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != 0xFF)
+    if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != TASK_NONE)
         gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = FALSE;
     else
         animBattlerId = 0;
@@ -2508,17 +2508,17 @@ static void sub_80A4980(u8 taskId)
         else
             to_BG2 = TRUE;
 
-        if (sMonAnimTaskIdArray[0] != 0xFF)
+        if (sMonAnimTaskIdArray[0] != TASK_NONE)
         {
             sub_80A477C(to_BG2);
             DestroyTask(sMonAnimTaskIdArray[0]);
-            sMonAnimTaskIdArray[0] = 0xFF;
+            sMonAnimTaskIdArray[0] = TASK_NONE;
         }
         if (gTasks[taskId].data[0] > 1)
         {
             sub_80A477C(to_BG2 ^ 1);
             DestroyTask(sMonAnimTaskIdArray[1]);
-            sMonAnimTaskIdArray[1] = 0xFF;
+            sMonAnimTaskIdArray[1] = TASK_NONE;
         }
         DestroyTask(taskId);
     }

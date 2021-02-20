@@ -826,7 +826,7 @@ static void Task_HandlePageSwapAnim(u8 taskId)
 
 static bool8 IsPageSwapAnimNotInProgress(void)
 {
-    if (FindTaskIdByFunc(Task_HandlePageSwapAnim) == 0xFF)
+    if (FindTaskIdByFunc(Task_HandlePageSwapAnim) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

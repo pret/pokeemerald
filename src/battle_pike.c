@@ -1235,7 +1235,7 @@ static void StartStatusInflictionScreenFlash(s16 fadeOutDelay, s16 fadeInDelay, 
 
 static bool8 IsStatusInflictionScreenFlashTaskFinished(void)
 {
-    if (FindTaskIdByFunc(DoStatusInflictionScreenFlash) == 0xFF)
+    if (FindTaskIdByFunc(DoStatusInflictionScreenFlash) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

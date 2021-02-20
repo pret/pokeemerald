@@ -2535,7 +2535,7 @@ void ShowContestEntryMonPic(void)
     u8 taskId;
     u8 left, top;
 
-    if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == 0xFF)
+    if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
     {
         AllocateMonSpritesGfx();
         left = 10;
@@ -2578,7 +2578,7 @@ void ShowContestEntryMonPic(void)
 void HideContestEntryMonPic(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ShowContestEntryMonPic);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         gTasks[taskId].data[0]++;
         FreeMonSpritesGfx();

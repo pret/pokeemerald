@@ -1588,7 +1588,7 @@ static void FlipTrainerCard(void)
 
 static bool8 IsCardFlipTaskActive(void)
 {
-    if (FindTaskIdByFunc(Task_DoCardFlipTask) == 0xFF)
+    if (FindTaskIdByFunc(Task_DoCardFlipTask) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

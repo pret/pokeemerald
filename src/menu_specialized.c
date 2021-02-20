@@ -310,7 +310,7 @@ static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 
 void sub_81D1E90(struct PlayerPCItemPageStruct *page)
 {
-    page->scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(2, 0xC8, 12, 0x94, page->count - page->pageItems + 1, 0x6E, 0x6E, &page->itemsAbove);
+    page->scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(2, 0xC8, 12, 0x94, page->count - page->pageItems + 1, 0x6E, 0x6E, &page->itemsAbove);
 }
 
 void sub_81D1EC0(void)

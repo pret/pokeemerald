@@ -3409,7 +3409,7 @@ static void OpenInfoBox(u8 digDisplayId)
 
 static bool8 IsInfoBoxClosed(void)
 {
-    if (FindTaskIdByFunc(RunInfoBoxActions) == 0xFF)
+    if (FindTaskIdByFunc(RunInfoBoxActions) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

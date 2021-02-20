@@ -1646,7 +1646,7 @@ static void PauseBgPaletteAnim(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_UpdateBgPalette);
 
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
         gTasks[taskId].tPaused = TRUE;
 
     FillPalette(0, 0xA0, 0x20);
@@ -1658,9 +1658,9 @@ static void StopBgAnimation(void)
 {
     u8 taskId;
 
-    if ((taskId = FindTaskIdByFunc(Task_UpdateBgPalette)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_UpdateBgPalette)) != TASK_NONE)
         DestroyTask(taskId);
-    if ((taskId = FindTaskIdByFunc(Task_AnimateBg)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_AnimateBg)) != TASK_NONE)
         DestroyTask(taskId);
 
     FillPalette(0, 0xA0, 0x20);

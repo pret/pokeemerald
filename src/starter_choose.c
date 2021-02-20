@@ -464,7 +464,7 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 2;
 
-    sStarterLabelWindowId = 0xFF;
+    sStarterLabelWindowId = WINDOW_NONE;
 }
 
 static void CB2_StarterChoose(void)

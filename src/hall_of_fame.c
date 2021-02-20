@@ -1433,7 +1433,7 @@ void DoDomeConfetti(void)
 
     gSpecialVar_0x8004 = 180;
     taskId = CreateTask(Task_DoDomeConfetti, 0);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
     {
         gTasks[taskId].tTimer = gSpecialVar_0x8004;
         gSpecialVar_0x8005 = taskId;
@@ -1444,7 +1444,7 @@ static void StopDomeConfetti(void)
 {
     u8 taskId;
 
-    if ((taskId = FindTaskIdByFunc(Task_DoDomeConfetti)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_DoDomeConfetti)) != TASK_NONE)
         DestroyTask(taskId);
 
     ConfettiUtil_Free();

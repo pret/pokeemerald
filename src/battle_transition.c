@@ -991,7 +991,7 @@ static bool8 Transition_Phase1(struct Task *task)
 
 static bool8 Transition_WaitForPhase1(struct Task *task)
 {
-    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == TASK_NONE)
     {
         task->tState++;
         return TRUE;
@@ -1012,7 +1012,7 @@ static bool8 Transition_Phase2(struct Task *task)
 static bool8 Transition_WaitForPhase2(struct Task *task)
 {
     task->tTransitionDone = FALSE;
-    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == TASK_NONE)
         task->tTransitionDone = TRUE;
     return FALSE;
 }
@@ -3612,7 +3612,7 @@ static void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 
 static bool8 IsPhase1Done(void)
 {
-    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == 0xFF)
+    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == TASK_NONE)
         return TRUE;
     else
         return FALSE;

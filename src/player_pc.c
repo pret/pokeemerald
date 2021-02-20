@@ -398,7 +398,7 @@ static void PlayerPC_Mailbox(u8 taskId)
     {
         playerPCItemPageInfo.cursorPos = 0;
         playerPCItemPageInfo.itemsAbove = 0;
-        playerPCItemPageInfo.scrollIndicatorId = 0xFF;
+        playerPCItemPageInfo.scrollIndicatorTaskId = TASK_NONE;
         Mailbox_UpdateMailList();
         ItemStorage_SetItemAndMailCount(taskId);
         if (sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
@@ -554,7 +554,7 @@ static void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss)
     sub_816B4DC(taskId);
     playerPCItemPageInfo.cursorPos = 0;
     playerPCItemPageInfo.itemsAbove = 0;
-    playerPCItemPageInfo.scrollIndicatorId = 0xFF;
+    playerPCItemPageInfo.scrollIndicatorTaskId = TASK_NONE;
     ItemStorage_SetItemAndMailCount(taskId);
     sub_816BC14();
     FreeAndReserveObjectSpritePalettes();
@@ -647,7 +647,7 @@ static void Mailbox_ProcessInput(u8 taskId)
                 break;
             case LIST_CANCEL:
                 PlaySE(SE_SELECT);
-                RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
+                RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorTaskId);
                 Mailbox_ReturnToPlayerPC(taskId);
                 break;
             default:
@@ -656,7 +656,7 @@ static void Mailbox_ProcessInput(u8 taskId)
                 sub_81D1D04(1);
                 DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
                 ScheduleBgCopyTilemapToVram(0);
-                RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
+                RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorTaskId);
                 gTasks[taskId].func = Mailbox_PrintWhatToDoWithPlayerMailText;
                 break;
         }
@@ -983,16 +983,16 @@ static void sub_816BEF0(s32 id)
 
 static void ItemStorage_StartScrollIndicator(void)
 {
-    if (playerPCItemPageInfo.scrollIndicatorId == 0xFF)
-        playerPCItemPageInfo.scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xB0, 0xC, 0x94, playerPCItemPageInfo.count - playerPCItemPageInfo.pageItems, 0x13F8, 0x13F8, &(playerPCItemPageInfo.itemsAbove));
+    if (playerPCItemPageInfo.scrollIndicatorTaskId == TASK_NONE)
+        playerPCItemPageInfo.scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xB0, 0xC, 0x94, playerPCItemPageInfo.count - playerPCItemPageInfo.pageItems, 0x13F8, 0x13F8, &(playerPCItemPageInfo.itemsAbove));
 }
 
 static void ItemStorage_RemoveScrollIndicator(void)
 {
-    if (playerPCItemPageInfo.scrollIndicatorId != 0xFF)
+    if (playerPCItemPageInfo.scrollIndicatorTaskId != TASK_NONE)
     {
-        RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
-        playerPCItemPageInfo.scrollIndicatorId = 0xFF;
+        RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorTaskId);
+        playerPCItemPageInfo.scrollIndicatorTaskId = TASK_NONE;
     }
 }
 

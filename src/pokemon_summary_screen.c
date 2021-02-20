@@ -2401,7 +2401,7 @@ static void HandlePowerAccTilemap(u16 a, s16 b)
     else
     {
         u8 taskId = FindTaskIdByFunc(Task_ShowPowerAccWindow);
-        if (taskId == 0xFF)
+        if (taskId == TASK_NONE)
             taskId = CreateTask(Task_ShowPowerAccWindow, 8);
         gTasks[taskId].data[0] = b;
         gTasks[taskId].data[1] = a;
@@ -2453,7 +2453,7 @@ static void HandleAppealJamTilemap(u16 a, s16 b, u16 move)
     else
     {
         u8 taskId = FindTaskIdByFunc(Task_ShowAppealJamWindow);
-        if (taskId == 0xFF)
+        if (taskId == TASK_NONE)
             taskId = CreateTask(Task_ShowAppealJamWindow, 8);
         gTasks[taskId].data[0] = b;
         gTasks[taskId].data[1] = a;
@@ -3940,10 +3940,10 @@ void SummaryScreen_SetUnknownTaskId(u8 taskId)
 
 void SummaryScreen_DestroyUnknownTask(void)
 {
-    if (sUnknownTaskId != 0xFF)
+    if (sUnknownTaskId != TASK_NONE)
     {
         DestroyTask(sUnknownTaskId);
-        sUnknownTaskId = 0xFF;
+        sUnknownTaskId = TASK_NONE;
     }
 }
 

@@ -6706,7 +6706,7 @@ void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneF
 void StopPokemonAnimationDelayTask(void)
 {
     u8 delayTaskId = FindTaskIdByFunc(Task_PokemonSummaryAnimateAfterDelay);
-    if (delayTaskId != 0xFF)
+    if (delayTaskId != TASK_NONE)
         DestroyTask(delayTaskId);
 }
 

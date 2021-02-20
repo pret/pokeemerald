@@ -448,7 +448,7 @@ static void CB2_InitBuyMenu(void)
         ResetTasks();
         ClearScheduledBgCopiesToVram();
         gShopDataPtr = AllocZeroed(sizeof(struct ShopData));
-        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
+        gShopDataPtr->scrollIndicatorsTaskId = TASK_NONE;
         gShopDataPtr->itemSpriteIds[0] = 0xFF;
         gShopDataPtr->itemSpriteIds[1] = 0xFF;
         BuyMenuBuildListMenuTemplate();
@@ -581,7 +581,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
 
 static void BuyMenuAddScrollIndicatorArrows(void)
 {
-    if (gShopDataPtr->scrollIndicatorsTaskId == 0xFF && gMartInfo.itemCount + 1 > 8)
+    if (gShopDataPtr->scrollIndicatorsTaskId == TASK_NONE && gMartInfo.itemCount + 1 > 8)
     {
         gShopDataPtr->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
@@ -597,10 +597,10 @@ static void BuyMenuAddScrollIndicatorArrows(void)
 
 static void BuyMenuRemoveScrollIndicatorArrows(void)
 {
-    if (gShopDataPtr->scrollIndicatorsTaskId != 0xFF)
+    if (gShopDataPtr->scrollIndicatorsTaskId != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gShopDataPtr->scrollIndicatorsTaskId);
-        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
+        gShopDataPtr->scrollIndicatorsTaskId = TASK_NONE;
     }
 }
 

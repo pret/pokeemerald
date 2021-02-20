@@ -73,7 +73,7 @@ struct PlayerPCItemPageStruct
     u8 pageItems;
     u8 count;
     u8 filler[3];
-    u8 scrollIndicatorId;
+    u8 scrollIndicatorTaskId;
 };
 
 // Exported type declarations

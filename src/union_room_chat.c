@@ -2157,8 +2157,8 @@ static void FreeDisplay(void)
 
 static void InitDisplay(struct UnionRoomChatDisplay *display)
 {
-    display->yesNoMenuWindowId = 0xFF;
-    display->messageWindowId = 0xFF;
+    display->yesNoMenuWindowId = WINDOW_NONE;
+    display->messageWindowId = WINDOW_NONE;
     display->currLine = 0;
 }
 
@@ -2737,7 +2737,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
 
 static void HideYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->yesNoMenuWindowId, FALSE);
         ClearWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2746,10 +2746,10 @@ static void HideYesNoMenuWindow(void)
 
 static void DestroyYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->yesNoMenuWindowId);
-        sDisplay->yesNoMenuWindowId = 0xFF;
+        sDisplay->yesNoMenuWindowId = WINDOW_NONE;
     }
 }
 
@@ -2828,7 +2828,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
 static void HideStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->messageWindowId, FALSE);
         ClearWindowTilemap(sDisplay->messageWindowId);
@@ -2839,10 +2839,10 @@ static void HideStdMessageWindow(void)
 
 static void DestroyStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->messageWindowId);
-        sDisplay->messageWindowId = 0xFF;
+        sDisplay->messageWindowId = WINDOW_NONE;
     }
 }
 

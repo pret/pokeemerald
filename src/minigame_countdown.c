@@ -125,7 +125,7 @@ static u32 sub_802E63C(u8 funcSetId, u8 taskPriority)
 static bool32 sub_802E688(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_802E6D0);
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
         return FALSE;
 
     gTasks[taskId].data[0] = 2;

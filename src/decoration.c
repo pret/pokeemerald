@@ -925,7 +925,7 @@ static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, s32 itemIndex,
 
 static void AddDecorationItemsScrollIndicators(void)
 {
-    if (sDecorationItemsMenu->scrollIndicatorsTaskId == 0xFF)
+    if (sDecorationItemsMenu->scrollIndicatorsTaskId == TASK_NONE)
     {
         sDecorationItemsMenu->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
@@ -941,10 +941,10 @@ static void AddDecorationItemsScrollIndicators(void)
 
 static void RemoveDecorationItemsScrollIndicators(void)
 {
-    if (sDecorationItemsMenu->scrollIndicatorsTaskId != 0xFF)
+    if (sDecorationItemsMenu->scrollIndicatorsTaskId != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(sDecorationItemsMenu->scrollIndicatorsTaskId);
-        sDecorationItemsMenu->scrollIndicatorsTaskId = 0xFF;
+        sDecorationItemsMenu->scrollIndicatorsTaskId = TASK_NONE;
     }
 }
 
@@ -960,7 +960,7 @@ static void InitDecorationItemsWindow(u8 taskId)
     AddDecorationWindow(WINDOW_DECORATION_CATEGORY_ITEMS);
     ShowDecorationCategorySummaryWindow(sCurDecorationCategory);
     sDecorationItemsMenu = AllocZeroed(sizeof(*sDecorationItemsMenu));
-    sDecorationItemsMenu->scrollIndicatorsTaskId = 0xFF;
+    sDecorationItemsMenu->scrollIndicatorsTaskId = TASK_NONE;
     InitDecorationItemsMenuLimits();
     InitDecorationItemsMenuScrollAndCursor();
     InitDecorationItemsMenuScrollAndCursor2();

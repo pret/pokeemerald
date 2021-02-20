@@ -844,8 +844,8 @@ static void CreateUISprites(void)
 {
     int i;
 
-    sMoveRelearnerStruct->moveDisplayArrowTask = 0xFF;
-    sMoveRelearnerStruct->moveListScrollArrowTask = 0xFF;
+    sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
+    sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
     AddScrollArrows();
 
     // These are the appeal hearts.
@@ -870,12 +870,12 @@ static void CreateUISprites(void)
 
 static void AddScrollArrows(void)
 {
-    if (sMoveRelearnerStruct->moveDisplayArrowTask == 0xFF)
+    if (sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
     {
         sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
     }
 
-    if (sMoveRelearnerStruct->moveListScrollArrowTask == 0xFF)
+    if (sMoveRelearnerStruct->moveListScrollArrowTask == TASK_NONE)
     {
         gTempScrollArrowTemplate = sMoveListScrollArrowsTemplate;
         gTempScrollArrowTemplate.fullyDownThreshold = sMoveRelearnerStruct->numMenuChoices - sMoveRelearnerStruct->numToShowAtOnce;
@@ -885,16 +885,16 @@ static void AddScrollArrows(void)
 
 static void RemoveScrollArrows(void)
 {
-    if (sMoveRelearnerStruct->moveDisplayArrowTask != 0xFF)
+    if (sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
-        sMoveRelearnerStruct->moveDisplayArrowTask = 0xFF;
+        sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
     }
 
-    if (sMoveRelearnerStruct->moveListScrollArrowTask != 0xFF)
+    if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
-        sMoveRelearnerStruct->moveListScrollArrowTask = 0xFF;
+        sMoveRelearnerStruct->moveListScrollArrowTask = TASK_NONE;
     }
 }
 

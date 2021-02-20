@@ -594,8 +594,8 @@ void GoToBagMenu(u8 location, u8 pocket, void ( *postExitMenuMainCallback2)())
             gBagMenu->pocketSwitchDisabled = TRUE;
         gBagMenu->exitCallback = NULL;
         gBagMenu->itemOriginalLocation = 0xFF;
-        gBagMenu->pocketScrollArrowsTask = 0xFF;
-        gBagMenu->pocketSwitchArrowsTask = 0xFF;
+        gBagMenu->pocketScrollArrowsTask = TASK_NONE;
+        gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
         memset(gBagMenu->spriteId, 0xFF, sizeof(gBagMenu->spriteId));
         memset(gBagMenu->windowPointers, 0xFF, 10);
         SetMainCallback2(CB2_Bag);
@@ -971,7 +971,7 @@ void BagMenu_PrintCursor(u8 y, u8 colorIndex)
 
 void CreatePocketScrollArrowPair(void)
 {
-    if (gBagMenu->pocketScrollArrowsTask == 0xFF)
+    if (gBagMenu->pocketScrollArrowsTask == TASK_NONE)
         gBagMenu->pocketScrollArrowsTask = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
             172,
@@ -985,26 +985,26 @@ void CreatePocketScrollArrowPair(void)
 
 void BagDestroyPocketScrollArrowPair(void)
 {
-    if (gBagMenu->pocketScrollArrowsTask != 0xFF)
+    if (gBagMenu->pocketScrollArrowsTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gBagMenu->pocketScrollArrowsTask);
-        gBagMenu->pocketScrollArrowsTask = 0xFF;
+        gBagMenu->pocketScrollArrowsTask = TASK_NONE;
     }
     BagDestroyPocketSwitchArrowPair();
 }
 
 void CreatePocketSwitchArrowPair(void)
 {
-    if (gBagMenu->pocketSwitchDisabled != TRUE && gBagMenu->pocketSwitchArrowsTask == 0xFF)
+    if (gBagMenu->pocketSwitchDisabled != TRUE && gBagMenu->pocketSwitchArrowsTask == TASK_NONE)
         gBagMenu->pocketSwitchArrowsTask = AddScrollIndicatorArrowPair(&sBagScrollArrowsTemplate, &gBagPositionStruct.unk6);
 }
 
 void BagDestroyPocketSwitchArrowPair(void)
 {
-    if (gBagMenu->pocketSwitchArrowsTask != 0xFF)
+    if (gBagMenu->pocketSwitchArrowsTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gBagMenu->pocketSwitchArrowsTask);
-        gBagMenu->pocketSwitchArrowsTask = 0xFF;
+        gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
     }
 }
 
