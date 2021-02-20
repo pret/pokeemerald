@@ -5578,10 +5578,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ROCK_BLAST] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_5
+        #if B_UPDATED_MOVE_DATA >= GEN_7
             .accuracy = 90,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BALLISTIC,
+        #if B_UPDATED_MOVE_DATA == GEN_5 || B_UPDATED_MOVE_DATA == GEN_6
+            .accuracy = 90,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         #else
             .accuracy = 80,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         #endif
         .effect = EFFECT_MULTI_HIT,
         .power = 25,
@@ -5590,7 +5595,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_BALLISTIC,
         .split = SPLIT_PHYSICAL,
     },
 
