@@ -5025,4 +5025,42 @@ extern const u16 gObjectEventPal_May[];
 extern const u16 gObjectEventPal_RubySapphireBrendan[];
 extern const u16 gObjectEventPal_RubySapphireMay[];
 
+// Mail
+extern const u16 gMailPalette_Orange[];
+extern const u16 gMailPalette_Harbor[];
+extern const u16 gMailPalette_Glitter[];
+extern const u16 gMailPalette_Mech[];
+extern const u16 gMailPalette_Wood[];
+extern const u16 gMailPalette_Wave[];
+extern const u16 gMailPalette_Bead[];
+extern const u16 gMailPalette_Shadow[];
+extern const u16 gMailPalette_Tropic[];
+extern const u16 gMailPalette_Dream[];
+extern const u16 gMailPalette_Fab[];
+extern const u16 gMailPalette_Retro[];
+extern const u8 gMailTiles_Orange[];
+extern const u8 gMailTilemap_Orange[];
+extern const u8 gMailTiles_Harbor[];
+extern const u8 gMailTilemap_Harbor[];
+extern const u8 gMailTiles_Glitter[];
+extern const u8 gMailTilemap_Glitter[];
+extern const u8 gMailTiles_Mech[];
+extern const u8 gMailTilemap_Mech[];
+extern const u8 gMailTiles_Wood[];
+extern const u8 gMailTilemap_Wood[];
+extern const u8 gMailTiles_Wave[];
+extern const u8 gMailTilemap_Wave[];
+extern const u8 gMailTiles_Bead[];
+extern const u8 gMailTilemap_Bead[];
+extern const u8 gMailTiles_Shadow[];
+extern const u8 gMailTilemap_Shadow[];
+extern const u8 gMailTiles_Tropic[];
+extern const u8 gMailTilemap_Tropic[];
+extern const u8 gMailTiles_Dream[];
+extern const u8 gMailTilemap_Dream[];
+extern const u8 gMailTiles_Fab[];
+extern const u8 gMailTilemap_Fab[];
+extern const u8 gMailTiles_Retro[];
+extern const u8 gMailTilemap_Retro[];
+
 #endif //GUARD_GRAPHICS_H

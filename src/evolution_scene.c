@@ -32,6 +32,7 @@
 #include "constants/battle_string_ids.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/items.h"
 
 struct EvoInfo
 {
@@ -565,7 +566,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
 
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_STATUS, &data);
-        data = 0xFF;
+        data = MAIL_NONE;
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MAIL, &data);
 
         CalculateMonStats(&gPlayerParty[gPlayerPartyCount]);

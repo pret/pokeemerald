@@ -593,8 +593,8 @@ static u8 GetMailboxMailCount(void)
 {
     u8 i, j;
 
-    for(i = 0, j = 6; j < 16; j++)
-        if (gSaveBlock1Ptr->mail[j].itemId != 0)
+    for(i = 0, j = PARTY_SIZE; j < MAIL_COUNT; j++)
+        if (gSaveBlock1Ptr->mail[j].itemId != ITEM_NONE)
             i++;
 
     return i;
@@ -605,9 +605,9 @@ static void Mailbox_UpdateMailList(void)
     struct MailStruct mailBuffer;
     u8 i, j;
 
-    for (i=6; i<15; i++)
+    for (i = PARTY_SIZE; i < MAIL_COUNT - 1; i++)
     {
-        for (j=i+1; j<16; j++)
+        for (j = i + 1; j < MAIL_COUNT; j++)
         {
             if (gSaveBlock1Ptr->mail[i].itemId == 0)
             {
@@ -665,8 +665,8 @@ static void Mailbox_ProcessInput(u8 taskId)
 
 static void Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)
 {
-    StringCopy(gStringVar1, gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos].playerName);
-    sub_81DB554(gStringVar1, 0);
+    StringCopy(gStringVar1, gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + PARTY_SIZE + playerPCItemPageInfo.cursorPos].playerName);
+    ConvertInternationalPlayerNameStripChar(gStringVar1, CHAR_SPACE);
     StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithVar1sMail);
     DisplayItemMessageOnField(taskId, gStringVar4, Mailbox_PrintMailOptions);
 }
@@ -724,7 +724,7 @@ static void Mailbox_FadeAndReadMail(u8 taskId)
     {
         sub_81D1EC0();
         CleanupOverworldWindowsAndTilemaps();
-        ReadMail(&(gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos]), Mailbox_ReturnToFieldFromReadMail, TRUE);
+        ReadMail(&(gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + PARTY_SIZE + playerPCItemPageInfo.cursorPos]), Mailbox_ReturnToFieldFromReadMail, TRUE);
         DestroyTask(taskId);
     }
 }
@@ -785,7 +785,7 @@ static void Mailbox_MoveToBagYesNoPrompt(u8 taskId)
 
 static void Mailbox_DoMailMoveToBag(u8 taskId)
 {
-    struct MailStruct *mailStruct = &(gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos]);
+    struct MailStruct *mailStruct = &(gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + PARTY_SIZE + playerPCItemPageInfo.cursorPos]);
     if (!AddBagItem(mailStruct->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, gText_BagIsFull, Mailbox_Cancel);

@@ -3024,7 +3024,7 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
     struct Pokemon *partnerMon = &gEnemyParty[partnerPartyIdx];
     u16 partnerMail = GetMonData(partnerMon, MON_DATA_MAIL);
 
-    if (playerMail != 0xFF)
+    if (playerMail != MAIL_NONE)
         ClearMailStruct(&gSaveBlock1Ptr->mail[playerMail]);
 
     sTradeData->mon = *playerMon;
@@ -3035,7 +3035,7 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
     if (!GetMonData(playerMon, MON_DATA_IS_EGG))
         SetMonData(playerMon, MON_DATA_FRIENDSHIP, &friendship);
 
-    if (partnerMail != 0xFF)
+    if (partnerMail != MAIL_NONE)
         GiveMailToMon2(playerMon, &gTradeMail[partnerMail]);
 
     UpdatePokedexForReceivedMon(playerPartyIdx);
