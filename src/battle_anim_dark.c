@@ -764,7 +764,7 @@ static void sub_8114374(u8 priority)
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         u8 spriteId = GetAnimBattlerSpriteId(i);
-        if (spriteId != 0xFF)
+        if (spriteId != SPRITE_NONE)
             gSprites[spriteId].oam.priority = priority;
     }
 }
@@ -960,7 +960,7 @@ void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
         calcSpriteId = TRUE;
         break;
     default:
-        spriteId = 0xFF;
+        spriteId = SPRITE_NONE;
         break;
     }
 
@@ -970,10 +970,10 @@ void AnimTask_SetGreyscaleOrOriginalPal(u8 taskId)
         if (IsBattlerSpriteVisible(battler))
             spriteId = gBattlerSpriteIds[battler];
         else
-            spriteId = 0xFF;
+            spriteId = SPRITE_NONE;
     }
 
-    if (spriteId != 0xFF)
+    if (spriteId != SPRITE_NONE)
         SetGreyscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, gBattleAnimArgs[1]);
 
     DestroyAnimVisualTask(taskId);

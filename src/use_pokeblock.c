@@ -486,7 +486,7 @@ static void LoadUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        sMenu->curMonSpriteId = 0xFF;
+        sMenu->curMonSpriteId = SPRITE_NONE;
         InitConditionGraphData(&sMenu->graph);
         sInfo->mainState++;
         break;
@@ -853,7 +853,7 @@ static void CloseUsePokeblockMenu(void)
         for (i = 0; i < ARRAY_COUNT(sMenu->condition); i++)
             DestroySprite(sMenu->condition[i]);
 
-        if (sMenu->curMonSpriteId != 0xFF)
+        if (sMenu->curMonSpriteId != SPRITE_NONE)
             DestroySprite(&gSprites[sMenu->curMonSpriteId]);
 
         SetVBlankCallback(NULL);
@@ -1215,7 +1215,7 @@ static void UpdateMonPic(u8 loadId)
     struct SpriteSheet spriteSheet;
     struct SpritePalette spritePal;
 
-    if (sMenu->curMonSpriteId == 0xFF)
+    if (sMenu->curMonSpriteId == SPRITE_NONE)
     {
         LoadConditionMonPicTemplate(&spriteSheet, &spriteTemplate, &spritePal);
         spriteSheet.data = sMenu->partySheets[loadId];
@@ -1228,7 +1228,7 @@ static void UpdateMonPic(u8 loadId)
         {
             FreeSpriteTilesByTag(TAG_CONDITION_MON);
             FreeSpritePaletteByTag(TAG_CONDITION_MON);
-            sMenu->curMonSpriteId = 0xFF;
+            sMenu->curMonSpriteId = SPRITE_NONE;
         }
         else
         {

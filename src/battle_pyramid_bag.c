@@ -1475,13 +1475,13 @@ static void CloseBattlePyramidBagTextWindow(void)
 static void sub_81C6E38(u8 itemSpriteArrayId)
 {
     u8 *spriteId = &gPyramidBagResources->itemsSpriteIds[itemSpriteArrayId];
-    if (*spriteId != 0xFF)
+    if (*spriteId != SPRITE_NONE)
     {
         FreeSpriteTilesByTag(ITEM_IMAGE_TAG + itemSpriteArrayId);
         FreeSpritePaletteByTag(ITEM_IMAGE_TAG + itemSpriteArrayId);
         FreeSpriteOamMatrix(&gSprites[*spriteId]);
         DestroySprite(&gSprites[*spriteId]);
-        *spriteId = 0xFF;
+        *spriteId = SPRITE_NONE;
     }
 }
 
@@ -1526,7 +1526,7 @@ static void ShowItemImage(u16 itemId, u8 itemSpriteArrayId)
 {
     u8 itemSpriteId;
     u8 *spriteId = &gPyramidBagResources->itemsSpriteIds[itemSpriteArrayId + 1];
-    if (*spriteId == 0xFF)
+    if (*spriteId == SPRITE_NONE)
     {
         FreeSpriteTilesByTag(ITEM_IMAGE_TAG + 1 + itemSpriteArrayId);
         FreeSpritePaletteByTag(ITEM_IMAGE_TAG + 1 + itemSpriteArrayId);

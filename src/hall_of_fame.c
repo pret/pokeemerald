@@ -464,11 +464,11 @@ static void Task_Hof_InitMonData(u8 taskId)
 
     sHofFadePalettes = 0;
     gTasks[taskId].tDisplayedMonId = 0;
-    gTasks[taskId].tPlayerSpriteID = 0xFF;
+    gTasks[taskId].tPlayerSpriteID = SPRITE_NONE;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        gTasks[taskId].tMonSpriteId(i) = 0xFF;
+        gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
     }
 
     if (gTasks[taskId].tDontSaveData)
@@ -642,7 +642,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
     BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0, RGB_BLACK);
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gTasks[taskId].tMonSpriteId(i) != 0xFF)
+        if (gTasks[taskId].tMonSpriteId(i) != SPRITE_NONE)
             gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 0;
     }
 
@@ -668,7 +668,7 @@ static void Task_Hof_DoConfetti(u8 taskId)
         u16 i;
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (gTasks[taskId].tMonSpriteId(i) != 0xFF)
+            if (gTasks[taskId].tMonSpriteId(i) != SPRITE_NONE)
                 gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 1;
         }
         BeginNormalPaletteFade(sHofFadePalettes, 0, 12, 12, RGB(16, 29, 24));
@@ -752,7 +752,7 @@ static void Task_Hof_HandleExit(u8 taskId)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             u8 spriteId = gTasks[taskId].tMonSpriteId(i);
-            if (spriteId != 0xFF)
+            if (spriteId != SPRITE_NONE)
             {
                 FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
                 FreeAndDestroyMonPicSprite(spriteId);
@@ -847,7 +847,7 @@ void CB2_DoHallOfFamePC(void)
 
             for (i = 0; i < PARTY_SIZE; i++)
             {
-                gTasks[taskId].tMonSpriteId(i) = 0xFF;
+                gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
             }
 
             sHofMonPtr = AllocZeroed(0x2000);
@@ -937,7 +937,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
         }
         else
         {
-            gTasks[taskId].tMonSpriteId(i) = 0xFF;
+            gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
         }
     }
 
@@ -967,7 +967,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 spriteId = gTasks[taskId].tMonSpriteId(i);
-        if (spriteId != 0xFF)
+        if (spriteId != SPRITE_NONE)
             gSprites[spriteId].oam.priority = 1;
     }
 
@@ -999,10 +999,10 @@ static void Task_HofPC_HandleInput(u8 taskId)
             for (i = 0; i < PARTY_SIZE; i++)
             {
                 u8 spriteId = gTasks[taskId].tMonSpriteId(i);
-                if (spriteId != 0xFF)
+                if (spriteId != SPRITE_NONE)
                 {
                     FreeAndDestroyMonPicSprite(spriteId);
-                    gTasks[taskId].tMonSpriteId(i) = 0xFF;
+                    gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
                 }
             }
             if (gTasks[taskId].tCurrPageNo != 0)
@@ -1060,10 +1060,10 @@ static void Task_HofPC_HandleExit(u8 taskId)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 spriteId = gTasks[taskId].tMonSpriteId(i);
-            if (spriteId != 0xFF)
+            if (spriteId != SPRITE_NONE)
             {
                 FreeAndDestroyMonPicSprite(spriteId);
-                gTasks[taskId].tMonSpriteId(i) = 0xFF;
+                gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
             }
         }
 

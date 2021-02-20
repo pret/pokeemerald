@@ -410,13 +410,13 @@ static const struct SpriteTemplate gBerryCheckCircleSpriteTemplate =
 void RemoveBagSprite(u8 id)
 {
     u8 *spriteId = &gBagMenu->spriteId[id];
-    if (*spriteId != 0xFF)
+    if (*spriteId != SPRITE_NONE)
     {
         FreeSpriteTilesByTag(id + 100);
         FreeSpritePaletteByTag(id + 100);
         FreeSpriteOamMatrix(&gSprites[*spriteId]);
         DestroySprite(&gSprites[*spriteId]);
-        *spriteId = 0xFF;
+        *spriteId = SPRITE_NONE;
     }
 }
 
@@ -516,7 +516,7 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite)
 void AddBagItemIconSprite(u16 itemId, u8 id)
 {
     u8 *spriteId = &gBagMenu->spriteId[id + 2];
-    if (*spriteId == 0xFF)
+    if (*spriteId == SPRITE_NONE)
     {
         u8 iconSpriteId;
 

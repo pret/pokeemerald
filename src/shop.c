@@ -449,8 +449,8 @@ static void CB2_InitBuyMenu(void)
         ClearScheduledBgCopiesToVram();
         gShopDataPtr = AllocZeroed(sizeof(struct ShopData));
         gShopDataPtr->scrollIndicatorsTaskId = TASK_NONE;
-        gShopDataPtr->itemSpriteIds[0] = 0xFF;
-        gShopDataPtr->itemSpriteIds[1] = 0xFF;
+        gShopDataPtr->itemSpriteIds[0] = SPRITE_NONE;
+        gShopDataPtr->itemSpriteIds[1] = SPRITE_NONE;
         BuyMenuBuildListMenuTemplate();
         BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
@@ -614,7 +614,7 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
 {
     u8 spriteId;
     u8 *spriteIdPtr = &gShopDataPtr->itemSpriteIds[iconSlot];
-    if (*spriteIdPtr != 0xFF)
+    if (*spriteIdPtr != SPRITE_NONE)
         return;
 
     if (gMartInfo.martType == MART_TYPE_NORMAL || item == 0xFFFF)
@@ -638,13 +638,13 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
 static void BuyMenuRemoveItemIcon(u16 item, u8 iconSlot)
 {
     u8 *spriteIdPtr = &gShopDataPtr->itemSpriteIds[iconSlot];
-    if (*spriteIdPtr == 0xFF)
+    if (*spriteIdPtr == SPRITE_NONE)
         return;
 
     FreeSpriteTilesByTag(iconSlot + 2110);
     FreeSpritePaletteByTag(iconSlot + 2110);
     DestroySprite(&gSprites[*spriteIdPtr]);
-    *spriteIdPtr = 0xFF;
+    *spriteIdPtr = SPRITE_NONE;
 }
 
 static void BuyMenuInitBgs(void)

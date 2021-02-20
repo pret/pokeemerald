@@ -1569,7 +1569,7 @@ s16 CloneBattlerSpriteWithBlend(u8 animBattler)
     u16 i;
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
 
-    if (spriteId != 0xFF)
+    if (spriteId != SPRITE_NONE)
     {
         for (i = 0; i < MAX_SPRITES; i++)
         {
@@ -1655,7 +1655,7 @@ static void AnimTask_AlphaFadeIn_Step(u8 taskId)
 void AnimTask_BlendMonInAndOut(u8 task)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-    if (spriteId == 0xff)
+    if (spriteId == SPRITE_NONE)
     {
         DestroyAnimVisualTask(task);
         return;

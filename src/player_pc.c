@@ -874,7 +874,7 @@ static void sub_816BC14(void)
     gUnknown_0203BCC4 = AllocZeroed(sizeof(struct Struct203BCC4));
     memset(gUnknown_0203BCC4->windowIds, 0xFF, 0x6);
     gUnknown_0203BCC4->unk666 = 0xFF;
-    gUnknown_0203BCC4->spriteId = 0xFF;
+    gUnknown_0203BCC4->spriteId = SPRITE_NONE;
 }
 
 static void sub_816BC58(void)
@@ -1015,7 +1015,7 @@ static void sub_816C060(u16 itemId)
     u8 spriteId;
     u8* spriteIdLoc = &(gUnknown_0203BCC4->spriteId);
 
-    if (*spriteIdLoc == 0xFF)
+    if (*spriteIdLoc == SPRITE_NONE)
     {
         FreeSpriteTilesByTag(0x13F6);
         FreeSpritePaletteByTag(0x13F6);
@@ -1033,12 +1033,12 @@ static void sub_816C060(u16 itemId)
 static void sub_816C0C8(void)
 {
     u8* spriteIdLoc = &(gUnknown_0203BCC4->spriteId);
-    if (*spriteIdLoc != 0xFF)
+    if (*spriteIdLoc != SPRITE_NONE)
     {
         FreeSpriteTilesByTag(0x13F6);
         FreeSpritePaletteByTag(0x13F6);
         DestroySprite(&(gSprites[*spriteIdLoc]));
-        *spriteIdLoc = 0xFF;
+        *spriteIdLoc = SPRITE_NONE;
     }
 }
 
