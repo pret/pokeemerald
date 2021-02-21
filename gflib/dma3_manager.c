@@ -10,8 +10,8 @@
 
 struct Dma3Request
 {
-    const void *src;
-    void *dest;
+    const u8 *src;
+    u8 *dest;
     u16 size;
     u16 mode;
     u32 value;
