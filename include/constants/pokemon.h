@@ -290,6 +290,12 @@
 
 #define EVOS_PER_MON 5
 
+// Evolution 'modes,' for GetEvolutionTargetSpecies
+#define EVO_MODE_NORMAL     0
+#define EVO_MODE_TRADE      1
+#define EVO_MODE_ITEM_USE   2
+#define EVO_MODE_ITEM_CHECK 3 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
+
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
 
