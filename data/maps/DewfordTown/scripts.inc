@@ -624,15 +624,15 @@ DewfordTown_EventScript_RejectTrendyPhrase:: @ 81E9952
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq DewfordTown_EventScript_GiveNewTrendyPhrase
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq DewfordTown_EventScript_CancelNewTrendyPhrase
 	end
 
 DewfordTown_EventScript_GiveNewTrendyPhrase:: @ 81E997D
 	incrementgamestat GAME_STAT_STARTED_TRENDS
-	compare VAR_0x8004, 0
+	compare VAR_0x8004, FALSE
 	goto_if_eq DewfordTown_EventScript_PhraseNotTrendyEnough
 	msgbox DewfordTown_Text_OfCourseIKnowAboutThat, MSGBOX_DEFAULT
 	release

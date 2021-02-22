@@ -4977,10 +4977,10 @@ extern const u32 gEasyChatWindow_Gfx[];
 extern const u32 gEasyChatWindow_Tilemap[];
 extern const u32 gEasyChatMode_Gfx[];
 extern const u16 gEasyChatMode_Pal[];
-extern const u32 gEasyChatCursor_Gfx[];
-extern const u16 gEasyChatCursor_Pal[];
-extern const u32 gEasyChatRightWindow_Gfx[];
-extern const u16 gEasyChatRightWindow_Pal[];
+extern const u32 gEasyChatRectangleCursor_Gfx[];
+extern const u16 gEasyChatRectangleCursor_Pal[];
+extern const u32 gEasyChatButtonWindow_Gfx[];
+extern const u16 gEasyChatButtonWindow_Pal[];
 
 // Use Pokeblock
 extern const u32 gUsePokeblockCondition_Gfx[];

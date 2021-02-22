@@ -5,6 +5,7 @@
 #include "pokemon_icon.h"
 #include "text.h"
 #include "international_string_util.h"
+#include "constants/easy_chat.h"
 
 void ClearMailData(void)
 {
@@ -19,7 +20,7 @@ void ClearMailStruct(struct MailStruct *mail)
     s32 i;
 
     for (i = 0; i < MAIL_WORDS_COUNT; i++)
-        mail->words[i] = 0xFFFF;
+        mail->words[i] = EC_EMPTY_WORD;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         mail->playerName[i] = EOS;
@@ -55,7 +56,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
         if (gSaveBlock1Ptr->mail[id].itemId == ITEM_NONE)
         {
             for (i = 0; i < MAIL_WORDS_COUNT; i++)
-                gSaveBlock1Ptr->mail[id].words[i] = 0xFFFF;
+                gSaveBlock1Ptr->mail[id].words[i] = EC_EMPTY_WORD;
 
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
                 gSaveBlock1Ptr->mail[id].playerName[i] = gSaveBlock2Ptr->playerName[i];

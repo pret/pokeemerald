@@ -379,7 +379,7 @@ u8 GetQuizAuthor(void)
     struct LilycoveLadyQuiz *quiz;
 
     quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (sub_811F8D8(quiz->correctAnswer) == 0)
+    if (IsEasyChatAnswerUnlocked(quiz->correctAnswer) == FALSE)
     {
         i = quiz->questionId;
         do
@@ -388,7 +388,7 @@ u8 GetQuizAuthor(void)
             {
                 i = 0;
             }
-        } while (sub_811F8D8(sQuizLadyQuizAnswers[i]) == 0);
+        } while (IsEasyChatAnswerUnlocked(sQuizLadyQuizAnswers[i]) == FALSE);
         for (j = 0; j < QUIZ_QUESTION_LEN; j ++)
         {
             quiz->question[j] = sQuizLadyQuizQuestions[i][j];

@@ -28,7 +28,7 @@ const struct BardSound *GetWordSounds(u16 word)
     switch (category)
     {
         case EC_GROUP_POKEMON:
-        case EC_GROUP_POKEMON_2:
+        case EC_GROUP_POKEMON_NATIONAL:
             ptr = gBardSounds_Pokemon;
             break;
         case EC_GROUP_MOVE_1:

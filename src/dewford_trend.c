@@ -90,7 +90,7 @@ void UpdateDewfordTrendPerDay(u16 a)
 }
 
 
-bool8 sub_81226D8(u16 *a)
+bool8 IsPhraseTrendy(u16 *a)
 {
     struct EasyChatPair s = {0};
     u16 i;

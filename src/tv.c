@@ -1016,7 +1016,7 @@ bool8 IsTVShowInSearchOfTrainersAiring(void)
 
 bool8 GabbyAndTyGetLastQuote(void)
 {
-    if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == 0xFFFF)
+    if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == EC_EMPTY_WORD)
     {
         return FALSE;
     }
@@ -3299,14 +3299,11 @@ void TV_FanClubLetter_RandomWordToStringVar3(TVShow *show)
     while (TRUE)
     {
         if (i == 6)
-        {
             i = 0;
-        }
-        if (show->fanclubLetter.words[i] != 0xFFFF)
-        {
+
+        if (show->fanclubLetter.words[i] != EC_EMPTY_WORD)
             break;
-        }
-        i ++;
+        i++;
     }
     CopyEasyChatWord(gStringVar3, show->fanclubLetter.words[i]);
 }
