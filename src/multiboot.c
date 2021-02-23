@@ -449,7 +449,7 @@ static void MultiBootWaitCycles(u32 cycles)
     cmp  r2, 8\n\
     beq  MultiBootWaitCyclesLoop\n\
     movs r1, 4\n\
-MultiBootWaitCyclesLoop:\n\
+    MultiBootWaitCyclesLoop:\n\
     subs r0, r1\n\
     bgt  MultiBootWaitCyclesLoop\n\
     bx   lr\n");
