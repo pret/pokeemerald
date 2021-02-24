@@ -72,7 +72,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
         return FALSE;
     case SCRIPT_MODE_NATIVE:
         // Try to call a function in C
-        // Continue to bytecode if no function it returns TRUE
+        // Continue to bytecode if no function or it returns TRUE
         if (ctx->nativePtr)
         {
             if (ctx->nativePtr() == TRUE)
