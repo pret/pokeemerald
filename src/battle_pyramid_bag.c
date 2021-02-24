@@ -493,11 +493,11 @@ static bool8 sub_81C5078(void)
             gMain.state++;
             break;
         case 15:
-            BlendPalettes(0xFFFFFFFF, 0x10, 0);
+            BlendPalettes(PALETTES_ALL, 0x10, 0);
             gMain.state++;
             break;
         case 16:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
             gPaletteFade.bufferTransferDisabled = FALSE;
             gMain.state++;
             break;
@@ -811,7 +811,7 @@ static void sub_81C5AB8(u8 y, u8 arg1)
 
 void CloseBattlePyramidBagAndSetCallback(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = sub_81C5B4C;
 }
 

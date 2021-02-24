@@ -2711,7 +2711,7 @@ static void Task_TryCommunicateFinalStandings(u8 taskId)
         }
         else
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_ContestReturnToField;
         }
     }
@@ -2730,7 +2730,7 @@ static void Task_CommunicateFinalStandings(u8 taskId)
 static void Task_EndCommunicateFinalStandings(u8 taskId)
 {
     DestroyTask(taskId);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[eContest.mainTaskId].func = Task_ContestReturnToField;
 }
 

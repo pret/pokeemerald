@@ -186,7 +186,7 @@ s32 FadeToWonderCardMenu(void)
     switch(sWonderCardData->unk_0174)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -231,7 +231,7 @@ s32 FadeToWonderCardMenu(void)
             ShowBg(2);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sub_801C4C0();
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             UpdatePaletteFade();
             break;
         default:
@@ -251,7 +251,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
     switch (sWonderCardData->unk_0174)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -279,7 +279,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
         case 5:
             PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, flag);
             CopyBgTilemapBufferToVram(0);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             break;
         default:
             if (UpdatePaletteFade())
@@ -575,7 +575,7 @@ s32 FadeToWonderNewsMenu(void)
     switch (sWonderNewsData->unk_01C0_1)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -629,7 +629,7 @@ s32 FadeToWonderNewsMenu(void)
             ShowBg(3);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sWonderNewsData->unk_01C1 = AddScrollIndicatorArrowPair(&sWonderNewsData->unk_0394, &sWonderNewsData->unk_01C6);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             UpdatePaletteFade();
             break;
         default:
@@ -650,7 +650,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
     switch (sWonderNewsData->unk_01C0_1)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -692,7 +692,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
             MG_DrawCheckerboardPattern(3);
             CopyBgTilemapBufferToVram(0);
             CopyBgTilemapBufferToVram(3);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             break;
         default:
             if (UpdatePaletteFade())

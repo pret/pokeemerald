@@ -3389,7 +3389,7 @@ static void Task_AcceptMinBet(u8 taskId)
     ClearStdWindowAndFrame(0, TRUE);
     HideCoinsWindow();
     FreeAllWindowBuffers();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
     UpdatePaletteFade();
     gTasks[taskId].func = Task_FadeToRouletteGame;

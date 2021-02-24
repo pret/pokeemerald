@@ -3393,7 +3393,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
     case STATE_FADE_IN:
         if (!gPaletteFade.active)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
             gTasks[taskId].tState = STATE_WAIT_FADE;
         }
         break;
@@ -3406,7 +3406,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
         switch (i)
         {
         case INFOCARD_INPUT_AB:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_CLOSE_CARD;
             break;
         case TRAINERCARD_INPUT_UP ... TRAINERCARD_INPUT_RIGHT:
@@ -4946,7 +4946,7 @@ static void Task_HandleTourneyTreeInput(u8 taskId)
     case STATE_FADE_IN:
         if (!gPaletteFade.active)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
             gTasks[taskId].tState = STATE_WAIT_FADE;
             StartSpriteAnim(&gSprites[spriteId], 1);
         }
@@ -4960,17 +4960,17 @@ static void Task_HandleTourneyTreeInput(u8 taskId)
         {
         case TOURNEY_TREE_SELECTED_CLOSE:
         default:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_CLOSE_TOURNEY_TREE;
             break;
         case TOURNEY_TREE_NO_SELECTION:
             break;
         case TOURNEY_TREE_SELECTED_TRAINER:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_SHOW_INFOCARD_TRAINER;
             break;
         case TOURNEY_TREE_SELECTED_MATCH:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_SHOW_INFOCARD_MATCH;
             break;
         }
@@ -5509,7 +5509,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_FADE_IN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         gTasks[taskId].tState = STATE_SHOW_RESULTS;
         break;
     case STATE_SHOW_RESULTS:
@@ -5559,7 +5559,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
     case STATE_WAIT_FOR_INPUT:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_CLOSE_TOURNEY_TREE;
         }
         break;

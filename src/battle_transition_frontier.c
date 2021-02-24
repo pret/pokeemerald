@@ -373,7 +373,7 @@ static bool8 FadeInCenterLogoCircle(struct Task *task)
     {
         if (task->data[3] == 31)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 0x10, RGB_BLACK);
             task->tState++;
         }
         else
