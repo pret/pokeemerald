@@ -37,6 +37,8 @@ struct WindowTemplate
     0,                              \
 }
 
+#define WINDOW_NONE 0xFF
+
 struct Window
 {
     struct WindowTemplate window;
@@ -70,9 +72,9 @@ void BlitBitmapRectToWindow4BitTo8Bit(u8 windowId, const u8 *pixels, u16 srcX, u
 void CopyWindowToVram8Bit(u8 windowId, u8 mode);
 
 extern struct Window gWindows[];
-extern void* gUnknown_03002F70[];
-extern u32 filler_03002F58;
-extern u32 filler_03002F5C;
-extern u32 filler_03002F64;
+extern void* gWindowBgTilemapBuffers[];
+extern u32 gUnusedWindowVar1;
+extern u32 gUnusedWindowVar2;
+extern u32 gUnusedWindowVar3;
 
 #endif // GUARD_WINDOW_H
