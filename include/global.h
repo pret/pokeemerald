@@ -175,13 +175,13 @@ struct Pokedex
     /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
-struct PokemonJumpResults
+struct PokemonJumpRecords
 {
     u16 jumpsInRow;
-    u16 field2;
+    u16 unused1; // Set to 0, never read
     u16 excellentsInRow;
-    u16 field6;
-    u32 field8;
+    u16 gamesWithMaxPlayers;
+    u32 unused2; // Set to 0, never read
     u32 bestJumpScore;
 };
 
@@ -478,7 +478,7 @@ struct SaveBlock2
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
     /*0x1EC*/ struct BerryCrush berryCrush;
-    /*0x1FC*/ struct PokemonJumpResults pokeJump;
+    /*0x1FC*/ struct PokemonJumpRecords pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][2][3]; // From record mixing.
     /*0x57C*/ struct RankingHall2P hallRecords2P[2][3]; // From record mixing.
