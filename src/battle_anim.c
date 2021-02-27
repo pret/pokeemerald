@@ -2300,7 +2300,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
             RequestDma3Fill(0xFF, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 0);
         }
 
-        sub_80A6B30(&animBg);
+        GetDefaultBattleAnimBgData(&animBg);
         CpuFill16(0, animBg.bgTiles, 0x1000);
         CpuFill16(0xFF, animBg.bgTilemap, 0x800);
 
@@ -2371,7 +2371,7 @@ static void sub_80A46A0(void)
 
     if (IsSpeciesNotUnown(gContestResources->moveAnim->species))
     {
-        sub_80A6B30(&animBg);
+        GetDefaultBattleAnimBgData(&animBg);
         ptr = animBg.bgTilemap;
         for (i = 0; i < 8; i++)
         {
@@ -2411,7 +2411,7 @@ void sub_80A4720(u16 a, u16 *b, u32 c, u8 d)
 void sub_80A477C(bool8 to_BG2)
 {
     struct BattleAnimBgData animBg;
-    sub_80A6B30(&animBg);
+    GetDefaultBattleAnimBgData(&animBg);
 
     if (!to_BG2 || IsContest())
     {
@@ -2435,7 +2435,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
-    sub_80A6B30(&animBg);
+    GetDefaultBattleAnimBgData(&animBg);
     x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
     y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
 

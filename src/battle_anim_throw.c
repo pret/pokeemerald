@@ -464,7 +464,7 @@ void unref_sub_8170478(u8 taskId)
     gSprites[spriteId3].callback = SpriteCallbackDummy;
     gSprites[spriteId4].callback = SpriteCallbackDummy;
 
-    sub_80A6B30(&unknownStruct);
+    GetDefaultBattleAnimBgData(&unknownStruct);
     AnimLoadCompressedBgTilemap(unknownStruct.bgId, gUnknown_08C2EA9C);
     AnimLoadCompressedBgGfx(unknownStruct.bgId, gUnknown_08C2EA50, unknownStruct.tilesOffset);
     LoadCompressedPalette(gCureBubblesPal, unknownStruct.paletteId << 4, 32);
