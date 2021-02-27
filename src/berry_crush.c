@@ -210,21 +210,21 @@ static u32 BerryCrushCommand_AskPickBerry(struct BerryCrushGame *r4, u8 *r5);
 static u32 BerryCrushCommand_GoToBerryPouch(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
 static u32 BerryCrushCommand_WaitForOthersToPickBerries(struct BerryCrushGame *r5, u8 *r2);
 static u32 BerryCrushCommand_DropBerriesIntoCrusher(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
-static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
-static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
-static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6);
-static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1);
-static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6);
-static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4);
-static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6);
-static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
-static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
-static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
-static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_DropLid(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_Countdown(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_PlayGame_Master(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_PlayGame_Slave(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_FinishGame(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame *r5, u8 *r6);
+static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame *r5, u8 *r6);
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame *r5, u8 *r4);
+static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame *r5, u8 *r6);
+static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_FadeOutToPlayAgain(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_PlayAgainFailureMessage(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_GracefulExit(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_Quit(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
 
 static EWRAM_DATA struct BerryCrushGame *sBerryCrushGamePtr = NULL;
 
@@ -771,21 +771,21 @@ static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame *, u8 *) =
     BerryCrushCommand_GoToBerryPouch,
     BerryCrushCommand_WaitForOthersToPickBerries,
     BerryCrushCommand_DropBerriesIntoCrusher,
-    sub_80231B8,
-    sub_80232EC,
-    sub_80238F0,
-    sub_8023998,
-    sub_8023A30,
-    sub_8023BC0,
-    sub_8023CAC,
-    sub_8024048,
-    sub_8024134,
-    sub_8024228,
-    sub_80242E0,
-    sub_80243BC,
-    sub_8024444,
-    sub_8024508,
-    sub_8024568,
+    BerryCrushCommand_DropLid,
+    BerryCrushCommand_Countdown,
+    BerryCrushCommand_PlayGame_Master,
+    BerryCrushCommand_PlayGame_Slave,
+    BerryCrushCommand_FinishGame,
+    BerryCrushCommand_HandleTimeUp,
+    BerryCrushCommand_TabulateResults,
+    BerryCrushCommand_ShowResults,
+    BerryCrushCommand_SaveGame,
+    BerryCrushCommand_AskPlayAgain,
+    BerryCrushCommand_CommunicatePlayAgainResponses,
+    BerryCrushCommand_FadeOutToPlayAgain,
+    BerryCrushCommand_PlayAgainFailureMessage,
+    BerryCrushCommand_GracefulExit,
+    BerryCrushCommand_Quit,
 };
 
 static const u8 gUnknown_082F4434[][4] =
@@ -2241,7 +2241,7 @@ static u32 BerryCrushCommand_DropBerriesIntoCrusher(struct BerryCrushGame *r4,  
     return 0;
 }
 
-static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_DropLid(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2288,7 +2288,7 @@ static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     return 0;
 }
 
-static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_Countdown(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4-> unkC)
     {
@@ -2565,7 +2565,7 @@ void sub_802385C(struct BerryCrushGame *r5)
     }
 }
 
-static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_PlayGame_Master(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     memset(&r4->unk5C, 0, sizeof(r4->unk5C));
     memset(&r4->unk4E, 0, sizeof(r4->unk4E));
@@ -2598,7 +2598,7 @@ static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     }
 }
 
-static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_PlayGame_Slave(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     memset(&r4->unk5C, 0, sizeof(r4->unk5C));
     memset(&r4->unk4E, 0, sizeof(r4->unk4E));
@@ -2628,7 +2628,7 @@ static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     }
 }
 
-static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_FinishGame(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2685,7 +2685,7 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
+static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame *r5, u8 *r6)
 {
     switch (r5->unkC)
     {
@@ -2725,7 +2725,7 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
 {
     u8 r8, r4_, r3;
     s32 r2;
@@ -2887,7 +2887,7 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
+static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame *r5, u8 *r6)
 {
     switch (r5->unkC)
     {
@@ -2931,7 +2931,7 @@ static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame *r5, u8 *r4)
 {
     switch (r5->unkC)
     {
@@ -2968,7 +2968,7 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
     return 0;
 }
 
-static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
+static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame *r5, u8 *r6)
 {
     s8 r4 = 0;
 
@@ -3011,7 +3011,7 @@ static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     u8 r5 = 0;
 
@@ -3052,7 +3052,7 @@ static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_FadeOutToPlayAgain(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3082,7 +3082,7 @@ static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_PlayAgainFailureMessage(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3113,7 +3113,7 @@ static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_GracefulExit(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3137,7 +3137,7 @@ static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_Quit(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
 {
     QuitBerryCrush(NULL);
     return 0;
