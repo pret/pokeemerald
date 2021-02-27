@@ -849,7 +849,7 @@ bool8 IsDoubleBattle(void)
     return IS_DOUBLE_BATTLE();
 }
 
-void GetDefaultBattleAnimBgData(struct BattleAnimBgData *out)
+void GetBattleAnimBg1Data(struct BattleAnimBgData *out)
 {
     if (IsContest())
     {
@@ -871,68 +871,68 @@ void GetDefaultBattleAnimBgData(struct BattleAnimBgData *out)
     }
 }
 
-void sub_80A6B90(struct BattleAnimBgData *unk, u32 arg1)
+void GetBattleAnimBgData(struct BattleAnimBgData *out, u32 bgId)
 {
     if (IsContest())
     {
-        unk->bgTiles = gUnknown_0202305C;
-        unk->bgTilemap = (u16 *)gUnknown_02023060;
-        unk->paletteId = 14;
-        unk->bgId = 1;
-        unk->tilesOffset = 0;
-        unk->unused = 0;
+        out->bgTiles = gUnknown_0202305C;
+        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->paletteId = 14;
+        out->bgId = 1;
+        out->tilesOffset = 0;
+        out->unused = 0;
     }
-    else if (arg1 == 1)
+    else if (bgId == 1)
     {
-        GetDefaultBattleAnimBgData(unk);
+        GetBattleAnimBg1Data(out);
     }
     else
     {
-        unk->bgTiles = gUnknown_0202305C;
-        unk->bgTilemap = (u16 *)gUnknown_02023060;
-        unk->paletteId = 9;
-        unk->bgId = 2;
-        unk->tilesOffset = 0x300;
-        unk->unused = 0;
+        out->bgTiles = gUnknown_0202305C;
+        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->paletteId = 9;
+        out->bgId = 2;
+        out->tilesOffset = 0x300;
+        out->unused = 0;
     }
 }
 
-void sub_80A6BFC(struct BattleAnimBgData *unk, u8 unused)
+void sub_80A6BFC(struct BattleAnimBgData *out, u8 unused)
 {
-    unk->bgTiles = gUnknown_0202305C;
-    unk->bgTilemap = (u16 *)gUnknown_02023060;
+    out->bgTiles = gUnknown_0202305C;
+    out->bgTilemap = (u16 *)gUnknown_02023060;
     if (IsContest())
     {
-        unk->paletteId = 14;
-        unk->bgId = 1;
-        unk->tilesOffset = 0;
-        unk->unused = 0;
+        out->paletteId = 14;
+        out->bgId = 1;
+        out->tilesOffset = 0;
+        out->unused = 0;
     }
     else if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
-        unk->paletteId = 8;
-        unk->bgId = 1;
-        unk->tilesOffset = 0x200;
-        unk->unused = 0;
+        out->paletteId = 8;
+        out->bgId = 1;
+        out->tilesOffset = 0x200;
+        out->unused = 0;
     }
     else
     {
-        unk->paletteId = 9;
-        unk->bgId = 2;
-        unk->tilesOffset = 0x300;
-        unk->unused = 0;
+        out->paletteId = 9;
+        out->bgId = 2;
+        out->tilesOffset = 0x300;
+        out->unused = 0;
     }
 }
 
-void sub_80A6C68(u32 bgId)
+void ClearBattleAnimBg(u32 bgId)
 {
-    struct BattleAnimBgData unkStruct;
+    struct BattleAnimBgData bgAnimData;
 
-    sub_80A6B90(&unkStruct, bgId);
-    CpuFill32(0, unkStruct.bgTiles, 0x2000);
-    LoadBgTiles(unkStruct.bgId, unkStruct.bgTiles, 0x2000, unkStruct.tilesOffset);
-    FillBgTilemapBufferRect(unkStruct.bgId, 0, 0, 0, 32, 64, 17);
-    CopyBgTilemapBufferToVram(unkStruct.bgId);
+    GetBattleAnimBgData(&bgAnimData, bgId);
+    CpuFill32(0, bgAnimData.bgTiles, 0x2000);
+    LoadBgTiles(bgAnimData.bgId, bgAnimData.bgTiles, 0x2000, bgAnimData.tilesOffset);
+    FillBgTilemapBufferRect(bgAnimData.bgId, 0, 0, 0, 32, 64, 17);
+    CopyBgTilemapBufferToVram(bgAnimData.bgId);
 }
 
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset)
@@ -1339,7 +1339,7 @@ void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
     }
 }
 
-u32 sub_80A75AC(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7)
+u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7)
 {
     u32 selectedPalettes = 0;
     u32 shift;
@@ -1392,54 +1392,54 @@ u32 sub_80A75AC(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner,
     return selectedPalettes;
 }
 
-u32 sub_80A76C4(u8 a1, u8 a2, u8 a3, u8 a4)
+u32 GetBattleMonSpritePalettesMask(u8 playerLeft, u8 playerRight, u8 opponentLeft, u8 opponentRight)
 {
-    u32 var = 0;
+    u32 selectedPalettes = 0;
     u32 shift;
 
     if (IsContest())
     {
-        if (a1)
+        if (playerLeft)
         {
-            var |= 1 << 18;
-            return var;
+            selectedPalettes |= 1 << 18;
+            return selectedPalettes;
         }
     }
     else
     {
-        if (a1)
+        if (playerLeft)
         {
             if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)))
             {
-                var |= 1 << (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) + 16);
+                selectedPalettes |= 1 << (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) + 16);
             }
         }
-        if (a2)
+        if (playerRight)
         {
             if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)))
             {
                 shift = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT) + 16;
-                var |= 1 << shift;
+                selectedPalettes |= 1 << shift;
             }
         }
-        if (a3)
+        if (opponentLeft)
         {
             if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)))
             {
                 shift = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT) + 16;
-                var |= 1 << shift;
+                selectedPalettes |= 1 << shift;
             }
         }
-        if (a4)
+        if (opponentRight)
         {
             if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
             {
                 shift = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT) + 16;
-                var |= 1 << shift;
+                selectedPalettes |= 1 << shift;
             }
         }
     }
-    return var;
+    return selectedPalettes;
 }
 
 // Presumably something commented here, just returns arg
@@ -2261,7 +2261,7 @@ void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x
     *y = (battlerY + partnerY) / 2;
 }
 
-u8 sub_80A89C8(int battlerId, u8 spriteId, int species)
+u8 CreateInvisibleSpriteCopy(int battlerId, u8 spriteId, int species)
 {
     u8 newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     gSprites[newSpriteId] = gSprites[spriteId];
@@ -2273,7 +2273,7 @@ u8 sub_80A89C8(int battlerId, u8 spriteId, int species)
     return newSpriteId;
 }
 
-void sub_80A8A6C(struct Sprite *sprite)
+void AnimUnused_80A8A6C(struct Sprite *sprite)
 {
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     if (GetBattlerSide(gBattleAnimAttacker))
@@ -2295,7 +2295,8 @@ void sub_80A8A6C(struct Sprite *sprite)
     sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
-void sub_80A8AEC(struct Sprite *sprite)
+// Used by three different unused battle anim sprite templates.
+void AnimUnused_80A8AEC(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
