@@ -3894,8 +3894,8 @@ static void DrawPlayerNameWindows(void)
 static void ShowBonus(u8 bonusId)
 {
     sPokemonJumpGfx->bonusTimer = 0;
-    ChangeBgX(BG_BONUSES, (bonusId / 2) << 16, 0);
-    ChangeBgY(BG_BONUSES, (((bonusId % 2) << 8) - 40) << 8, 0);
+    ChangeBgX(BG_BONUSES, (bonusId / 2) * 256 * 256, 0);
+    ChangeBgY(BG_BONUSES, (((bonusId % 2) * 256) - 40) * 256, 0);
     ShowBg(BG_BONUSES);
     CreateTask(Task_UpdateBonus, 4);
 }
