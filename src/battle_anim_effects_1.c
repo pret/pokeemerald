@@ -4338,7 +4338,7 @@ static void AnimLockOnTarget_Step4(struct Sprite* sprite)
         sprite->data[1] = 0;
     }
 
-    BlendPalettes(sub_80A75AC(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB(31, 31, 31));
+    BlendPalettes(GetBattleBgPalettesMask(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB(31, 31, 31));
     if (sprite->data[1] == 16)
     {
         int pal;
@@ -4991,7 +4991,7 @@ static void AnimMoonlightSparkle_Step(struct Sprite* sprite)
 
 void AnimTask_MoonlightEndFade(u8 taskId)
 {
-    int a = sub_80A75AC(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    int a = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
     int b;
     int c;
     int d;
@@ -5006,7 +5006,7 @@ void AnimTask_MoonlightEndFade(u8 taskId)
     gTasks[taskId].data[7] = 13;
     gTasks[taskId].data[8] = 14;
     gTasks[taskId].data[9] = 15;
-    b = sub_80A76C4(1, 1, 1, 1);
+    b = GetBattleMonSpritePalettesMask(1, 1, 1, 1);
     c = a | b;
     StorePointerInVars(&gTasks[taskId].data[14], &gTasks[taskId].data[15], (void*)c);
     b = b | (0x10000 << IndexOfSpritePaletteTag(ANIM_TAG_MOON));
