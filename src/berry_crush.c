@@ -226,7 +226,7 @@ static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
 static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
 static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
 
-static EWRAM_DATA struct BerryCrushGame *gBerryCrushGame = NULL;
+static EWRAM_DATA struct BerryCrushGame *sBerryCrushGamePtr = NULL;
 
 static const u8 gUnknown_082F325C[] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 static const u8 gUnknown_082F3264[] = { 0, 1, 2, 3, 5, 0, 0, 0 };
@@ -801,19 +801,19 @@ static const u8 gUnknown_082F4448[] = {3, 7, 15, 31};
 
 struct BerryCrushGame * GetBerryCrushGame(void)
 {
-    return gBerryCrushGame;
+    return sBerryCrushGamePtr;
 }
 
 u32 QuitBerryCrush(MainCallback callback)
 {
-    if (!gBerryCrushGame)
+    if (!sBerryCrushGamePtr)
         return 2;
 
     if (!callback)
-        callback = gBerryCrushGame->unk0;
+        callback = sBerryCrushGamePtr->unk0;
 
-    DestroyTask(gBerryCrushGame->mainTask);
-    FREE_AND_SET_NULL(gBerryCrushGame);
+    DestroyTask(sBerryCrushGamePtr->mainTask);
+    FREE_AND_SET_NULL(sBerryCrushGamePtr);
     SetMainCallback2(callback);
     if (callback == CB2_ReturnToField)
     {
@@ -850,8 +850,8 @@ void StartBerryCrush(MainCallback callback)
         return;
     }
 
-    gBerryCrushGame = AllocZeroed(sizeof(*gBerryCrushGame));
-    if (!gBerryCrushGame)
+    sBerryCrushGamePtr = AllocZeroed(sizeof(*sBerryCrushGamePtr));
+    if (!sBerryCrushGamePtr)
     {
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
@@ -860,17 +860,17 @@ void StartBerryCrush(MainCallback callback)
         return;
     }
 
-    gBerryCrushGame->unk0 = callback;
-    gBerryCrushGame->unk8 = multiplayerId;
-    gBerryCrushGame->unk9 = playerCount;
-    ParseName_Options(gBerryCrushGame);
-    gBerryCrushGame->unk12 = 1;
-    gBerryCrushGame->unkE = 1;
-    gBerryCrushGame->unkF = 6;
-    BerryCrush_SetPaletteFadeParams(gBerryCrushGame->unk36, 1, -1, 0, 16, 0, 0);
-    sub_8022BEC(4, 1, gBerryCrushGame->unk36);
+    sBerryCrushGamePtr->unk0 = callback;
+    sBerryCrushGamePtr->unk8 = multiplayerId;
+    sBerryCrushGamePtr->unk9 = playerCount;
+    ParseName_Options(sBerryCrushGamePtr);
+    sBerryCrushGamePtr->unk12 = 1;
+    sBerryCrushGamePtr->unkE = 1;
+    sBerryCrushGamePtr->unkF = 6;
+    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->unk36, 1, -1, 0, 16, 0, 0);
+    sub_8022BEC(4, 1, sBerryCrushGamePtr->unk36);
     SetMainCallback2(MainCB);
-    gBerryCrushGame->mainTask = CreateTask(MainTask, 8);
+    sBerryCrushGamePtr->mainTask = CreateTask(MainTask, 8);
     gTextFlags.autoScroll = 0;
 }
 
@@ -881,18 +881,18 @@ static void GetBerryFromBag(void)
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
-    gBerryCrushGame->unk98[gBerryCrushGame->unk8].unkC = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
-    gBerryCrushGame->unkE = 1;
-    gBerryCrushGame->unkF = 9;
-    BerryCrush_SetPaletteFadeParams(gBerryCrushGame->unk36, 0, -1, 0, 16, 0, 0);
-    sub_8022BEC(4, 1, gBerryCrushGame->unk36);
-    gBerryCrushGame->mainTask = CreateTask(MainTask, 8);
+    sBerryCrushGamePtr->unk98[sBerryCrushGamePtr->unk8].unkC = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
+    sBerryCrushGamePtr->unkE = 1;
+    sBerryCrushGamePtr->unkF = 9;
+    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->unk36, 0, -1, 0, 16, 0, 0);
+    sub_8022BEC(4, 1, sBerryCrushGamePtr->unk36);
+    sBerryCrushGamePtr->mainTask = CreateTask(MainTask, 8);
     SetMainCallback2(MainCB);
 }
 
 static void BerryCrush_SetupMainTask(void)
 {
-    DestroyTask(gBerryCrushGame->mainTask);
+    DestroyTask(sBerryCrushGamePtr->mainTask);
     ChooseBerryForMachine(GetBerryFromBag);
 }
 
@@ -910,50 +910,50 @@ static void BerryCrush_SaveResults(void)
 {
     u32 var0, var1;
 
-    var0 = gBerryCrushGame->unk68.unk04;
+    var0 = sBerryCrushGamePtr->unk68.unk04;
     var0 = Q_24_8(var0);
     var0 = MathUtil_Div32(var0, Q_24_8(60));
-    var1 = gBerryCrushGame->unk68.unk0A;
+    var1 = sBerryCrushGamePtr->unk68.unk0A;
     var1 = Q_24_8(var1);
     var1 = MathUtil_Div32(var1, var0) & 0xFFFF;
-    gBerryCrushGame->unk16 = var1;
-    switch (gBerryCrushGame->unk9)
+    sBerryCrushGamePtr->unk16 = var1;
+    switch (sBerryCrushGamePtr->unk9)
     {
     case 2:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = sBerryCrushGamePtr->unk16;
         }
         break;
     case 3:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = sBerryCrushGamePtr->unk16;
         }
         break;
     case 4:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = sBerryCrushGamePtr->unk16;
         }
         break;
     case 5:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = sBerryCrushGamePtr->unk16;
         }
         break;
     }
 
-    gBerryCrushGame->unk1C = gBerryCrushGame->unk68.unk00;
-    if (GiveBerryPowder(gBerryCrushGame->unk1C))
+    sBerryCrushGamePtr->unk1C = sBerryCrushGamePtr->unk68.unk00;
+    if (GiveBerryPowder(sBerryCrushGamePtr->unk1C))
         return;
 
-    gBerryCrushGame->unk25_0 = 1;
+    sBerryCrushGamePtr->unk25_0 = 1;
 }
 
 static void VBlankCB(void)
@@ -973,10 +973,10 @@ static void MainCB(void)
 
 static void MainTask(u8 taskId)
 {
-    if (gBerryCrushGame->unk4)
-        gBerryCrushGame->unk4(gBerryCrushGame, gBerryCrushGame->unk36);
+    if (sBerryCrushGamePtr->unk4)
+        sBerryCrushGamePtr->unk4(sBerryCrushGamePtr, sBerryCrushGamePtr->unk36);
 
-    sub_8021450(gBerryCrushGame);
+    sub_8021450(sBerryCrushGamePtr);
 }
 
 static void ParseName_Options(struct BerryCrushGame *arg0)
