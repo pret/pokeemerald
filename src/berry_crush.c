@@ -141,7 +141,7 @@ struct BerryCrushGame_138
 struct BerryCrushGame
 {
     MainCallback unk0;
-    u32 (* unk4)(struct BerryCrushGame *, u8 *);
+    u32 (*unk4)(struct BerryCrushGame *, u8 *);
     u8 unk8;
     u8 unk9;
     u8 mainTask;
