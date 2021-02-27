@@ -998,7 +998,7 @@ void AnimTask_HazeScrollingFog(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&animBg);
+    GetDefaultBattleAnimBgData(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
     LoadPalette(&gUnknown_083970E8, animBg.paletteId * 16, 32);
@@ -1052,7 +1052,7 @@ static void AnimTask_Haze2(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
+        GetDefaultBattleAnimBgData(&animBg);
         sub_80A6C68(1);
         sub_80A6C68(2);
 
@@ -1105,7 +1105,7 @@ void AnimTask_LoadMistTiles(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&animBg);
+    GetDefaultBattleAnimBgData(&animBg);
     LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimFogTilemap, 0);
     LoadPalette(&gUnknown_083970E8, animBg.paletteId * 16, 32);
@@ -1154,7 +1154,7 @@ static void AnimTask_OverlayFogTiles(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
+        GetDefaultBattleAnimBgData(&animBg);
         sub_80A6C68(1);
         sub_80A6C68(2);
 

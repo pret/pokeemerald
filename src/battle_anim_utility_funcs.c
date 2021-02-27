@@ -330,7 +330,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
 
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = sub_80A89C8(gBattleAnimAttacker, spriteId, species);
-    sub_80A6B30(&unknownStruct);
+    GetDefaultBattleAnimBgData(&unknownStruct);
     AnimLoadCompressedBgTilemapHandleContest(&unknownStruct, gUnknown_08C20684, 0);
     AnimLoadCompressedBgGfx(unknownStruct.bgId, gUnknown_08C20668, unknownStruct.tilesOffset);
     LoadPalette(&gUnknown_08597418, unknownStruct.paletteId * 16 + 1, 2);
@@ -377,7 +377,7 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
             sprite = &gSprites[gTasks[taskId].data[0]];
             DestroySprite(sprite);
 
-            sub_80A6B30(&unknownStruct);
+            GetDefaultBattleAnimBgData(&unknownStruct);
             sub_80A6C68(unknownStruct.bgId);
             if (gTasks[taskId].data[6] == 1)
                 gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority++;
@@ -468,7 +468,7 @@ static void sub_81170EC(u8 taskId)
         spriteId2 = sub_80A89C8(sAnimStatsChangeData->battler2, battlerSpriteId, sAnimStatsChangeData->species);
     }
 
-    sub_80A6B30(&unknownStruct);
+    GetDefaultBattleAnimBgData(&unknownStruct);
     if (sAnimStatsChangeData->data[0] == 0)
         AnimLoadCompressedBgTilemapHandleContest(&unknownStruct, gBattleStatMask1_Tilemap, 0);
     else
@@ -705,7 +705,7 @@ void AnimTask_StartSlidingBg(u8 taskId)
 {
     u8 newTaskId;
 
-    sub_80A6DAC(0);
+    UpdateAnimBg3ScreenSize(FALSE);
     newTaskId = CreateTask(AnimTask_UpdateSlidingBg, 5);
     if (gBattleAnimArgs[2] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -733,7 +733,7 @@ static void AnimTask_UpdateSlidingBg(u8 taskId)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
-        sub_80A6DAC(1);
+        UpdateAnimBg3ScreenSize(TRUE);
         DestroyTask(taskId);
     }
 }
@@ -824,7 +824,7 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
     if (arg4)
         spriteId2 = sub_80A89C8(battler2, gBattlerSpriteIds[battler2], species);
 
-    sub_80A6B30(&unknownStruct);
+    GetDefaultBattleAnimBgData(&unknownStruct);
     AnimLoadCompressedBgTilemapHandleContest(&unknownStruct, tilemap, 0);
     AnimLoadCompressedBgGfx(unknownStruct.bgId, gfx, unknownStruct.tilesOffset);
     LoadCompressedPalette(palette, unknownStruct.paletteId * 16, 32);
