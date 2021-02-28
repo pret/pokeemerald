@@ -1346,8 +1346,8 @@ const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/cancel.4bpp");
 
-const u16 gPokenavConditionMarker_Pal[] = INCBIN_U16("graphics/pokenav/condition/marker.gbapal");
-const u8 gPokenavConditionMarker_Gfx[] = INCBIN_U8("graphics/pokenav/condition/marker.4bpp");
+const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/misc/mon_markings_menu.gbapal");
+const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/misc/mon_markings_menu.4bpp");
 
 const u16 gBerryBlenderMiscPalette[] = INCBIN_U16("graphics/berry_blender/misc.gbapal");
 const u16 gBerryBlenderArrowPalette[] = INCBIN_U16("graphics/berry_blender/arrow.gbapal");

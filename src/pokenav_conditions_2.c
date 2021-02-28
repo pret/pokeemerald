@@ -514,7 +514,7 @@ u32 LoopedTask_OpenMonMarkingsWindow(s32 state)
     switch (state)
     {
     case 0:
-        sub_811FAA4(TryGetMonMarkId(), 176, 32);
+        OpenMonMarkingsMenu(TryGetMonMarkId(), 176, 32);
         return LT_INC_AND_CONTINUE;
     case 1:
         PrintHelpBarText(HELPBAR_CONDITION_MARKINGS);
@@ -533,7 +533,7 @@ u32 LoopedTask_CloseMonMarkingsWindow(s32 state)
     switch (state)
     {
     case 0:
-        sub_811FAF8();
+        FreeMonMarkingsMenu();
         return LT_INC_AND_CONTINUE;
     case 1:
         PrintHelpBarText(HELPBAR_CONDITION_MON_STATUS);
@@ -668,9 +668,9 @@ void CreateMonMarkingsOrPokeballIndicators(void)
     {
         structPtr->monMarks.baseTileTag = 0x6A;
         structPtr->monMarks.basePaletteTag = 0x6A;
-        sub_811F90C(&structPtr->monMarks);
-        sub_811FA90();
-        sprite = CreateMonMarkingsSpriteWithPal(0x69, 0x69, sConditionGraphMonMarkingsPal);
+        InitMonMarkingsMenu(&structPtr->monMarks);
+        BufferMonMarkingsMenuTiles();
+        sprite = CreateMonMarkingAllCombosSprite(0x69, 0x69, sConditionGraphMonMarkingsPal);
         sprite->oam.priority = 3;
         sprite->pos1.x = 192;
         sprite->pos1.y = 32;

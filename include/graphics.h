@@ -4015,8 +4015,6 @@ extern const u32 gPokenavCondition_Tilemap[];
 extern const u16 gPokenavOptions_Tilemap[];
 extern const u32 gPokenavOptions_Gfx[];
 extern const u16 gPokenavOptions_Pal[];
-extern const u8 gPokenavConditionMarker_Gfx[];
-extern const u16 gPokenavConditionMarker_Pal[];
 extern const u16 gPokenavLeftHeader_Pal[];
 extern const u16 gPokenavHeader_Pal[];
 extern const u32 gPokenavHeader_Gfx[];
@@ -5062,5 +5060,8 @@ extern const u8 gMailTiles_Fab[];
 extern const u8 gMailTilemap_Fab[];
 extern const u8 gMailTiles_Retro[];
 extern const u8 gMailTilemap_Retro[];
+
+extern const u8 gMonMarkingsMenu_Gfx[];
+extern const u16 gMonMarkingsMenu_Pal[];
 
 #endif //GUARD_GRAPHICS_H
