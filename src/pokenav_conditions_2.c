@@ -132,7 +132,7 @@ struct Pokenav7Struct
     u8 listIndexWindowId;
     u8 unusedWindowId1;
     u8 unusedWindowId2;
-    struct PokemonMarkMenu monMarks;
+    struct MonMarkingsMenu monMarks;
     struct Sprite *monMarksSprite;
     struct Sprite *conditionSparkleSprites[MAX_CONDITION_SPARKLES];
     u8 windowModeState;

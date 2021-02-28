@@ -3,7 +3,7 @@
 
 #define NUM_MON_MARKINGS 4
 
-struct PokemonMarkMenu
+struct MonMarkingsMenu
 {
     u16 baseTileTag;
     u16 basePaletteTag;
@@ -23,7 +23,7 @@ struct PokemonMarkMenu
     u8 tileLoadState;
 };
 
-void InitMonMarkingsMenu(struct PokemonMarkMenu *ptr);
+void InitMonMarkingsMenu(struct MonMarkingsMenu *ptr);
 void BufferMonMarkingsMenuTiles(void);
 void OpenMonMarkingsMenu(u8 markings, s16 x, s16 y);
 void FreeMonMarkingsMenu(void);

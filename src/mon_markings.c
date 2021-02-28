@@ -285,9 +285,9 @@ static const union AnimCmd *const sAnims_MarkingCombo[] =
     sAnim_MarkingCombo_AllOn,
 };
 
-static EWRAM_DATA struct PokemonMarkMenu *sMenu = NULL;
+static EWRAM_DATA struct MonMarkingsMenu *sMenu = NULL;
 
-void InitMonMarkingsMenu(struct PokemonMarkMenu *ptr)
+void InitMonMarkingsMenu(struct MonMarkingsMenu *ptr)
 {
     sMenu = ptr;
 }
