@@ -1089,7 +1089,7 @@ s32 InitBerryCrushDisplay(void)
         break;
     case 9:
         gPaletteFade.bufferTransferDisabled = FALSE;
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
@@ -1121,7 +1121,7 @@ int sub_802130C(void)
         // fall through. The original author forgot to use "break" here
         // because this will call BeginNormalPaletteFade() twice.
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         UpdatePaletteFade();
         break;
     case 3:
@@ -2635,13 +2635,13 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     case 0:
         r4->unk12 = 8;
         PlaySE(SE_M_STRENGTH);
-        BlendPalettes(0xFFFFFFFF, 8, RGB(31, 31, 0));
+        BlendPalettes(PALETTES_ALL, 8, RGB(31, 31, 0));
         r4->unk138.unk0 = 2;
         break;
     case 1:
         if (--r4->unk138.unk0 != 255)
             return 0;
-        BlendPalettes(0xFFFFFFFF, 0, RGB(31, 31, 0));
+        BlendPalettes(PALETTES_ALL, 0, RGB(31, 31, 0));
         r4->unk138.unk1 = 4;
         r4->unk138.unk0 = 0;
         r4->unk138.unk2 = gUnknown_082F326C[r4->unk138.unk1][0];
@@ -2692,13 +2692,13 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     case 0:
         r5->unk12 = 9;
         PlaySE(SE_FAILURE);
-        BlendPalettes(0xFFFFFFFF, 8, RGB(31, 0, 0));
+        BlendPalettes(PALETTES_ALL, 8, RGB(31, 0, 0));
         r5->unk138.unk0 = 4;
         break;
     case 1:
         if (--r5->unk138.unk0 != 255)
             return 0;
-        BlendPalettes(0xFFFFFFFF, 0, RGB(31, 0, 0));
+        BlendPalettes(PALETTES_ALL, 0, RGB(31, 0, 0));
         r5->unk138.unk0 = 0;
         break;
     case 2:
@@ -3057,7 +3057,7 @@ static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     switch (r5->unkC)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 1, 0, 0x10, RGB_BLACK);
         UpdatePaletteFade();
         break;
     case 1:
@@ -3067,7 +3067,7 @@ static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     case 2:
         ClearDialogWindowAndFrame(0, 1);
         sub_8021488(r5);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         UpdatePaletteFade();
         break;
     case 3:

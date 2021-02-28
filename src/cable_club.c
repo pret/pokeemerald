@@ -82,7 +82,7 @@ static void Task_ReestablishLinkAwaitConfirmation(u8 taskId);
 
 static void CreateLinkupTask(u8 minPlayers, u8 maxPlayers)
 {
-    if (FindTaskIdByFunc(Task_LinkupStart) == 0xFF)
+    if (FindTaskIdByFunc(Task_LinkupStart) == TASK_NONE)
     {
         u8 taskId1;
 
@@ -627,7 +627,7 @@ void ValidateMixingGameLanguage(void)
 {
     u32 taskId = FindTaskIdByFunc(Task_ValidateMixingGameLanguage);
 
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
     {
         taskId = CreateTask(Task_ValidateMixingGameLanguage, 80);
         gTasks[taskId].tState = 0;

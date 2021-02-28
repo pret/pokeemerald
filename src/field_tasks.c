@@ -174,7 +174,7 @@ void SetUpFieldTasks(void)
 void ActivatePerStepCallback(u8 callbackId)
 {
     u8 taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
-    if (taskId != 0xff)
+    if (taskId != TASK_NONE)
     {
         s32 i;
         s16 *data = gTasks[taskId].data;
@@ -199,12 +199,12 @@ void ResetFieldTasksArgs(void)
     s16 *data;
 
     taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
-    if (taskId != 0xff)
+    if (taskId != TASK_NONE)
     {
         data = gTasks[taskId].data;
     }
     taskId = FindTaskIdByFunc(Task_RunTimeBasedEvents);
-    if (taskId != 0xff)
+    if (taskId != TASK_NONE)
     {
         data = gTasks[taskId].data;
         data[1] = 0;

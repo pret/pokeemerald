@@ -691,7 +691,7 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
             CreateAreaUnknownSprites();
             break;
         case 9:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 16, 0, RGB(0, 0, 0));
+            BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 16, 0, RGB(0, 0, 0));
             break;
         case 10:
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_ALL);
@@ -736,7 +736,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
             return;
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 16, RGB_BLACK);
         break;
     case 3:
         if (gPaletteFade.active)

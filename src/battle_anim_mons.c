@@ -849,25 +849,25 @@ bool8 IsDoubleBattle(void)
     return IS_DOUBLE_BATTLE();
 }
 
-void sub_80A6B30(struct BattleAnimBgData *unk)
+void GetDefaultBattleAnimBgData(struct BattleAnimBgData *out)
 {
     if (IsContest())
     {
-        unk->bgTiles = gUnknown_0202305C;
-        unk->bgTilemap = (u16 *)gUnknown_02023060;
-        unk->paletteId = 14;
-        unk->bgId = 1;
-        unk->tilesOffset = 0;
-        unk->unused = 0;
+        out->bgTiles = gUnknown_0202305C;
+        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->paletteId = 14;
+        out->bgId = 1;
+        out->tilesOffset = 0;
+        out->unused = 0;
     }
     else
     {
-        unk->bgTiles = gUnknown_0202305C;
-        unk->bgTilemap = (u16 *)gUnknown_02023060;
-        unk->paletteId = 8;
-        unk->bgId = 1;
-        unk->tilesOffset = 0x200;
-        unk->unused = 0;
+        out->bgTiles = gUnknown_0202305C;
+        out->bgTilemap = (u16 *)gUnknown_02023060;
+        out->paletteId = 8;
+        out->bgId = 1;
+        out->tilesOffset = 0x200;
+        out->unused = 0;
     }
 }
 
@@ -884,7 +884,7 @@ void sub_80A6B90(struct BattleAnimBgData *unk, u32 arg1)
     }
     else if (arg1 == 1)
     {
-        sub_80A6B30(unk);
+        GetDefaultBattleAnimBgData(unk);
     }
     else
     {
@@ -970,9 +970,9 @@ u8 GetBattleBgPaletteNum(void)
         return 2;
 }
 
-void sub_80A6DAC(bool8 arg0)
+void UpdateAnimBg3ScreenSize(bool8 largeScreenSize)
 {
-    if (!arg0 || IsContest())
+    if (!largeScreenSize || IsContest())
     {
         SetAnimBgAttribute(3, BG_ANIM_SCREEN_SIZE, 0);
         SetAnimBgAttribute(3, BG_ANIM_AREA_OVERFLOW_MODE, 1);
@@ -1292,7 +1292,7 @@ void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 x
     }
 }
 
-void sub_80A749C(struct Sprite *sprite)
+void ResetSpriteRotScale_PreserveAffine(struct Sprite *sprite)
 {
     TrySetSpriteRotScale(sprite, TRUE, 0x100, 0x100, 0);
     sprite->affineAnimPaused = FALSE;
@@ -1569,7 +1569,7 @@ s16 CloneBattlerSpriteWithBlend(u8 animBattler)
     u16 i;
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
 
-    if (spriteId != 0xFF)
+    if (spriteId != SPRITE_NONE)
     {
         for (i = 0; i < MAX_SPRITES; i++)
         {
@@ -1655,7 +1655,7 @@ static void AnimTask_AlphaFadeIn_Step(u8 taskId)
 void AnimTask_BlendMonInAndOut(u8 task)
 {
     u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-    if (spriteId == 0xff)
+    if (spriteId == SPRITE_NONE)
     {
         DestroyAnimVisualTask(task);
         return;
@@ -1896,19 +1896,19 @@ void *LoadPointerFromVars(s16 lo, s16 hi)
     return (void *)((u16)lo | ((u16)hi << 16));
 }
 
-void sub_80A805C(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7)
+void PrepareEruptAnimTaskData(struct Task *task, u8 spriteId, s16 xScaleStart, s16 yScaleStart, s16 xScaleEnd, s16 yScaleEnd, u16 duration)
 {
-    task->data[8] = a7;
-    task->data[15] = a2; // spriteId
-    task->data[9] = a3;
-    task->data[10] = a4;
-    task->data[13] = a5;
-    task->data[14] = a6;
-    task->data[11] = (a5 - a3) / a7;
-    task->data[12] = (a6 - a4) / a7;
+    task->data[8] = duration;
+    task->data[15] = spriteId;
+    task->data[9] = xScaleStart;
+    task->data[10] = yScaleStart;
+    task->data[13] = xScaleEnd;
+    task->data[14] = yScaleEnd;
+    task->data[11] = (xScaleEnd - xScaleStart) / duration;
+    task->data[12] = (yScaleEnd - yScaleStart) / duration;
 }
 
-u8 sub_80A80C8(struct Task *task)
+u8 UpdateEruptAnimTask(struct Task *task)
 {
     if (!task->data[8])
         return 0;

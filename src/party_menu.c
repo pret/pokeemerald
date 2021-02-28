@@ -443,7 +443,7 @@ static void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCurs
         for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->data); i++)
             sPartyMenuInternal->data[i] = 0;
         for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->windowId); i++)
-            sPartyMenuInternal->windowId[i] = 0xFF;
+            sPartyMenuInternal->windowId[i] = WINDOW_NONE;
 
         if (!keepCursorPos)
             gPartyMenu.slotId = 0;
@@ -589,12 +589,12 @@ static bool8 ShowPartyMenu(void)
         gMain.state++;
         break;
     case 21:
-        BlendPalettes(0xFFFFFFFF, 16, 0);
+        BlendPalettes(PALETTES_ALL, 16, 0);
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     default:
@@ -607,7 +607,7 @@ static bool8 ShowPartyMenu(void)
 
 static void ExitPartyMenu(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_ExitPartyMenu, 0);
     SetVBlankCallback(VBlankCB_PartyMenu);
     SetMainCallback2(CB2_UpdatePartyMenu);
@@ -731,10 +731,10 @@ static void InitPartyMenuBoxes(u8 layout)
         sPartyMenuBoxes[i].infoRects = &sPartyBoxInfoRects[PARTY_BOX_RIGHT_COLUMN];
         sPartyMenuBoxes[i].spriteCoords = sPartyMenuSpriteCoords[layout][i];
         sPartyMenuBoxes[i].windowId = i;
-        sPartyMenuBoxes[i].monSpriteId = 0xFF;
-        sPartyMenuBoxes[i].itemSpriteId = 0xFF;
-        sPartyMenuBoxes[i].pokeballSpriteId = 0xFF;
-        sPartyMenuBoxes[i].statusSpriteId = 0xFF;
+        sPartyMenuBoxes[i].monSpriteId = SPRITE_NONE;
+        sPartyMenuBoxes[i].itemSpriteId = SPRITE_NONE;
+        sPartyMenuBoxes[i].pokeballSpriteId = SPRITE_NONE;
+        sPartyMenuBoxes[i].statusSpriteId = SPRITE_NONE;
     }
     // The first party mon goes in the left column
     sPartyMenuBoxes[0].infoRects = &sPartyBoxInfoRects[PARTY_BOX_LEFT_COLUMN];
@@ -955,7 +955,7 @@ static void DisplayPartyPokemonDataForMultiBattle(u8 slot)
         menuBox->infoRects->blitFunc(menuBox->windowId, 0, 0, 0, 0, FALSE);
         StringCopy(gStringVar1, gMultiPartnerParty[actualSlot].nickname);
         StringGetEnd10(gStringVar1);
-        sub_81DB52C(gStringVar1);
+        ConvertInternationalPlayerName(gStringVar1);
         DisplayPartyPokemonBarDetail(menuBox->windowId, gStringVar1, 0, menuBox->infoRects->dimensions);
         DisplayPartyPokemonLevel(gMultiPartnerParty[actualSlot].level, menuBox);
         DisplayPartyPokemonGender(gMultiPartnerParty[actualSlot].gender, gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].nickname, menuBox);
@@ -1148,7 +1148,7 @@ static void SwapPartyPokemon(struct Pokemon *mon1, struct Pokemon *mon2)
 
 static void Task_ClosePartyMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePartyMenuAndSetCB2;
 }
 
@@ -2371,11 +2371,11 @@ static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox 
 
 static void PartyMenuRemoveWindow(u8 *ptr)
 {
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*ptr, 0);
         RemoveWindow(*ptr);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
         ScheduleBgCopyTilemapToVram(2);
     }
 }
@@ -2384,7 +2384,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
 {
     u8 *windowPtr = &sPartyMenuInternal->windowId[1];
 
-    if (*windowPtr != 0xFF)
+    if (*windowPtr != WINDOW_NONE)
         PartyMenuRemoveWindow(windowPtr);
 
     if (stringId != PARTY_MSG_NONE)

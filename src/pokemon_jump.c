@@ -710,8 +710,8 @@ static void Task_StartPokemonJump(u8 taskId)
     case 3:
         if (IsLinkTaskFinished())
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback(VBlankCB_PokemonJump);
             sPokemonJump->mainState++;
         }
@@ -1591,7 +1591,7 @@ static bool32 ClosePokeJumpLink(void)
     case 3:
         if (++sPokemonJump->timer > 120)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
             sPokemonJump->helperState++;
         }
         break;
