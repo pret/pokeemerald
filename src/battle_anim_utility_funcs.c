@@ -38,7 +38,7 @@ static void AnimTask_UpdateSlidingBg(u8);
 static void UpdateMonScrollingBgMask(u8);
 static void AnimTask_WaitAndRestoreVisibility(u8);
 
-static const u16 wCurseLinesPalette[] = { RGB_WHITE };
+static const u16 sCurseLinesPalette[] = { RGB_WHITE };
 
 // These belong in battle_intro.c, but putting them there causes 2 bytes of alignment padding
 // between the two .rodata segments. Perhaps battle_intro.c actually belongs in this file, too.
@@ -333,7 +333,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemapHandleContest(&animBgData, gBattleAnimMaskTilemap_Curse, 0);
     AnimLoadCompressedBgGfx(animBgData.bgId, gBattleAnimMaskImage_Curse, animBgData.tilesOffset);
-    LoadPalette(wCurseLinesPalette, animBgData.paletteId * 16 + 1, 2);
+    LoadPalette(sCurseLinesPalette, animBgData.paletteId * 16 + 1, 2);
 
     gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
     gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;

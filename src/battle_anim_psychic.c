@@ -836,7 +836,7 @@ static void AnimTask_ImprisonOrbs_Step(u8 taskId)
     }
 }
 
-static void AnimRedx_Step(struct Sprite *sprite)
+static void AnimRedX_Step(struct Sprite *sprite)
 {
     if (sprite->data[1] > sprite->data[0] - 10)
         sprite->invisible = sprite->data[1] & 1;
@@ -856,7 +856,7 @@ static void AnimRedX(struct Sprite *sprite)
     }
 
     sprite->data[0] = gBattleAnimArgs[1];
-    sprite->callback = AnimRedx_Step;
+    sprite->callback = AnimRedX_Step;
 }
 
 void AnimTask_SkillSwap(u8 taskId)
