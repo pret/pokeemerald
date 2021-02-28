@@ -24,7 +24,6 @@ struct PokemonMarkMenu
 };
 
 void InitMonMarkingsMenu(struct PokemonMarkMenu *ptr);
-void BufferMonMarkingsMenuWindowTiles(void);
 void BufferMonMarkingsMenuTiles(void);
 void OpenMonMarkingsMenu(u8 markings, s16 x, s16 y);
 void FreeMonMarkingsMenu(void);
