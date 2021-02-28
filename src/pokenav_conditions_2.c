@@ -161,7 +161,7 @@ bool32 OpenPartyConditionMenu(void)
     if (structPtr == NULL)
         return FALSE;
 
-    structPtr->monPicSpriteId = 0xFF;
+    structPtr->monPicSpriteId = SPRITE_NONE;
     structPtr->loopedTaskId = CreateLoopedTask(LoopedTask_OpenPartyConditionGraph, 1);
     structPtr->callback = GetPartyConditionLoopedTaskActive;
     structPtr->windowModeState = 0;
@@ -694,7 +694,7 @@ void CreateMonMarkingsOrPokeballIndicators(void)
             }
             else
             {
-                structPtr->partyPokeballSpriteIds[i] = 0xFF;
+                structPtr->partyPokeballSpriteIds[i] = SPRITE_NONE;
             }
         }
 
@@ -710,7 +710,7 @@ void CreateMonMarkingsOrPokeballIndicators(void)
             }
             else
             {
-                structPtr->partyPokeballSpriteIds[i] = 0xFF;
+                structPtr->partyPokeballSpriteIds[i] = SPRITE_NONE;
             }
         }
 
@@ -725,7 +725,7 @@ void CreateMonMarkingsOrPokeballIndicators(void)
         }
         else
         {
-            structPtr->partyPokeballSpriteIds[i] = 0xFF;
+            structPtr->partyPokeballSpriteIds[i] = SPRITE_NONE;
         }
     }
 
@@ -759,7 +759,7 @@ void sub_81CEBF4(struct Pokenav7Struct *structPtr)
         FreeSpritePaletteByTag(0x66);
     }
 
-    if (structPtr->monPicSpriteId != 0xFF)
+    if (structPtr->monPicSpriteId != SPRITE_NONE)
     {
         DestroySprite(&gSprites[structPtr->monPicSpriteId]);
         FreeSpriteTilesByTag(0x64);
@@ -803,7 +803,7 @@ void CreateConditionMonPic(u8 id)
     u8 spriteId;
     struct Pokenav7Struct *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_MARK_MENU);
 
-    if (structPtr->monPicSpriteId == 0xFF)
+    if (structPtr->monPicSpriteId == SPRITE_NONE)
     {
         LoadConditionMonPicTemplate(&sprSheet, &sprTemplate, &sprPal);
         sprSheet.data = GetConditionMonPicGfx(id);
@@ -816,7 +816,7 @@ void CreateConditionMonPic(u8 id)
         {
             FreeSpriteTilesByTag(0x64);
             FreeSpritePaletteByTag(0x64);
-            structPtr->monPicSpriteId = 0xFF;
+            structPtr->monPicSpriteId = SPRITE_NONE;
         }
         else
         {

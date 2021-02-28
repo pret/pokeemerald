@@ -731,7 +731,7 @@ static void AnimRolloutParticle(struct Sprite *sprite)
     if (TranslateAnimHorizontalArc(sprite))
     {
         u8 taskId = FindTaskIdByFunc(AnimTask_Rollout_Step);
-        if (taskId != 0xFF)
+        if (taskId != TASK_NONE)
             gTasks[taskId].data[11]--;
 
         DestroySprite(sprite);

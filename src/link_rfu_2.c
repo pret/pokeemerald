@@ -2643,7 +2643,7 @@ static void sub_8011E2C(u8 taskId)
 static void sub_8011E94(u32 a0, u32 a1)
 {
     u8 taskId = FindTaskIdByFunc(sub_8011E2C);
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
     {
         taskId = CreateTask(sub_8011E2C, 5);
         gTasks[taskId].data[0] = a0;
@@ -2792,12 +2792,12 @@ void sub_8012188(const u8 *name, struct GFtgtGname *structPtr, u8 activity)
     taskId2 = FindTaskIdByFunc(Task_LinkRfu_UnionRoomListen);
     if (activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
-        if (taskId2 != 0xFF)
+        if (taskId2 != TASK_NONE)
             gTasks[taskId2].data[7] = 1;
     }
     else
     {
-        if (taskId2 != 0xFF)
+        if (taskId2 != TASK_NONE)
             gTasks[taskId2].data[7] = 0;
     }
 }

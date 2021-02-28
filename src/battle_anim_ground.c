@@ -603,7 +603,7 @@ void AnimTask_HorizontalShake(u8 taskId)
         break;
     default: // Shake specific battler
         task->tbattlerSpriteIds(0) = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-        if (task->tbattlerSpriteIds(0) == 0xFF)
+        if (task->tbattlerSpriteIds(0) == SPRITE_NONE)
         {
             DestroyAnimVisualTask(taskId);
         }

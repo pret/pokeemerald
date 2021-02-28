@@ -1235,7 +1235,7 @@ void CB2_StartCreditsSequence(void)
     gTasks[taskIdB].data[TDB_TASK_A_ID] = taskIdA;
     gTasks[taskIdA].data[TDA_TASK_B_ID] = taskIdB;
 
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetVBlankCallback(CreditsVBlankCallback);
     m4aSongNumStart(MUS_CREDITS);
@@ -1281,14 +1281,14 @@ static void Task_ProgressCreditTasks(u8 taskIdA)
     {
         gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskIdA].func = sub_8175808;
     }
     else if (gTasks[taskIdA].data[TDA_11] == 2)
     {
         gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskIdA].func = sub_81758A4;
     }
 }
@@ -1309,7 +1309,7 @@ static void c2_080C9BFC(u8 taskIdA)
 
     if (sub_8176AB0(gTasks[taskIdA].data[TDA_7], taskIdA))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(CreditsVBlankCallback);
         gTasks[taskIdA].func = Task_WaitPaletteFade;
@@ -1369,7 +1369,7 @@ static void Task_CreditsLoadGrassScene(u8 taskIdA)
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_TASK_A_ID] = taskIdA;
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_2] = gTasks[taskIdA].data[TDA_7];
 
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_BG3HOFS, 0);
         SetGpuReg(REG_OFFSET_BG3VOFS, 32);
         SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
@@ -1398,7 +1398,7 @@ static void Task_CreditsTheEnd1(u8 taskIdA)
         return;
     }
 
-    BeginNormalPaletteFade(0xFFFFFFFF, 12, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 12, 0, 16, RGB_BLACK);
     gTasks[taskIdA].func = Task_CreditsTheEnd2;
 }
 
@@ -1418,7 +1418,7 @@ static void Task_CreditsTheEnd3(u8 taskIdA)
     LoadTheEndScreen(0, 0x3800, 0);
     ResetSpriteData();
     FreeAllSpritePalettes();
-    BeginNormalPaletteFade(0xFFFFFFFF, 8, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 8, 16, 0, RGB_BLACK);
 
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
                                | BGCNT_CHARBASE(0)
@@ -1442,7 +1442,7 @@ static void Task_CreditsTheEnd4(u8 taskIdA)
         return;
     }
 
-    BeginNormalPaletteFade(0xFFFFFFFF, 6, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 6, 0, 16, RGB_BLACK);
     gTasks[taskIdA].func = Task_CreditsTheEnd5;
 }
 
@@ -1452,7 +1452,7 @@ static void Task_CreditsTheEnd5(u8 taskIdA)
     {
         sub_8176E40(0x3800, 0);
 
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0, RGB_BLACK);
         gTasks[taskIdA].data[TDA_0] = 7200;
         gTasks[taskIdA].func = Task_CreditsTheEnd6;
     }
@@ -1465,7 +1465,7 @@ static void Task_CreditsTheEnd6(u8 taskIdA)
         if (gTasks[taskIdA].data[TDA_0] == 0 || gMain.newKeys)
         {
             FadeOutBGM(4);
-            BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(PALETTES_ALL, 8, 0, 16, RGB_WHITEALPHA);
             gTasks[taskIdA].func = Task_CreditsSoftReset;
             return;
         }

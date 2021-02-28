@@ -1260,14 +1260,14 @@ static void AnimTask_WaterSpoutRain_Step(u8 taskId)
             gBattleAnimArgs[1] = 0;
             gBattleAnimArgs[2] = 12;
             taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
-            if (taskId2 != 0xFF)
+            if (taskId2 != TASK_NONE)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;
             }
             gBattleAnimArgs[0] = ANIM_DEF_PARTNER;
             taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
-            if (taskId2 != 0xFF)
+            if (taskId2 != TASK_NONE)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;

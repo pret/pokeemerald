@@ -590,8 +590,8 @@ static void sub_8024BC8(u8 taskId)
         gUnknown_02022C98->unk0C++;
         break;
     case 6:
-        BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BlendPalettes(PALETTES_ALL, 0x10, 0x00);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
         SetVBlankCallback(sub_80261E4);
         gUnknown_02022C98->unk0C++;
         break;
@@ -1110,7 +1110,7 @@ static void sub_80256AC(void)
     switch (gUnknown_02022C98->unk10)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
         gUnknown_02022C98->unk10++;
         break;
     case 1:
@@ -1147,7 +1147,7 @@ static void sub_8025758(void)
     {
     case 0:
         sub_80292E0(9);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, 0);
         gUnknown_02022C98->unk10++;
         break;
     case 1:
@@ -1178,8 +1178,8 @@ static void sub_8025758(void)
         gUnknown_02022C98->unk10++;
         break;
     case 5:
-        BlendPalettes(0xFFFFFFFF, 16, 0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BlendPalettes(PALETTES_ALL, 16, 0);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
         gUnknown_02022C98->unk10++;
         break;
     case 6:

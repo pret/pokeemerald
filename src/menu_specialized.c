@@ -216,14 +216,14 @@ bool8 sub_81D1C44(u8 count)
         return FALSE;
 
     for (i = 0; i < ARRAY_COUNT(sUnknown_0203CF48); i++)
-        sUnknown_0203CF48[i] = 0xFF;
+        sUnknown_0203CF48[i] = WINDOW_NONE;
 
     return TRUE;
 }
 
 u8 sub_81D1C84(u8 a0)
 {
-    if (sUnknown_0203CF48[a0] == 0xFF)
+    if (sUnknown_0203CF48[a0] == WINDOW_NONE)
     {
         if (a0 == 2)
         {
@@ -245,7 +245,7 @@ void sub_81D1D04(u8 a0)
     ClearStdWindowAndFrameToTransparent(sUnknown_0203CF48[a0], 0);
     ClearWindowTilemap(sUnknown_0203CF48[a0]);
     RemoveWindow(sUnknown_0203CF48[a0]);
-    sUnknown_0203CF48[a0] = 0xFF;
+    sUnknown_0203CF48[a0] = WINDOW_NONE;
 }
 
 static u8 sub_81D1D34(u8 a0)
@@ -261,10 +261,10 @@ static void sub_81D1D44(u8 windowId, s32 itemId, u8 y)
     if (itemId == LIST_CANCEL)
         return;
 
-    StringCopy(buffer, gSaveBlock1Ptr->mail[6 + itemId].playerName);
-    sub_81DB52C(buffer);
+    StringCopy(buffer, gSaveBlock1Ptr->mail[PARTY_SIZE + itemId].playerName);
+    ConvertInternationalPlayerName(buffer);
     length = StringLength(buffer);
-    if (length <= 5)
+    if (length < PLAYER_NAME_LENGTH - 1)
         ConvertInternationalString(buffer, LANGUAGE_JAPANESE);
     AddTextPrinterParameterized4(windowId, 1, 8, y, 0, 0, sPlayerNameTextColors, -1, buffer);
 }
@@ -310,7 +310,7 @@ static void sub_81D1E7C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 
 void sub_81D1E90(struct PlayerPCItemPageStruct *page)
 {
-    page->scrollIndicatorId = AddScrollIndicatorArrowPairParameterized(2, 0xC8, 12, 0x94, page->count - page->pageItems + 1, 0x6E, 0x6E, &page->itemsAbove);
+    page->scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(2, 0xC8, 12, 0x94, page->count - page->pageItems + 1, 0x6E, 0x6E, &page->itemsAbove);
 }
 
 void sub_81D1EC0(void)

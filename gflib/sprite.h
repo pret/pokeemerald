@@ -2,6 +2,7 @@
 #define GUARD_SPRITE_H
 
 #define MAX_SPRITES 64
+#define SPRITE_NONE 0xFF
 #define SPRITE_INVALID_TAG 0xFFFF
 
 struct SpriteSheet

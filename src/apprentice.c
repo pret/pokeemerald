@@ -144,7 +144,7 @@ void ResetApprenticeStruct(struct Apprentice *apprentice)
     u8 i;
 
     for (i = 0; i < ARRAY_COUNT(apprentice->speechWon); i++)
-        apprentice->speechWon[i] = 0xFFFF;
+        apprentice->speechWon[i] = EC_EMPTY_WORD;
 
     apprentice->playerName[0] = EOS;
     apprentice->id = NUM_APPRENTICES;
@@ -158,7 +158,7 @@ void ResetAllApprenticeData(void)
     for (i = 0; i < APPRENTICE_COUNT; i++)
     {
         for (j = 0; j < ARRAY_COUNT(gSaveBlock2Ptr->apprentices[i].speechWon); j++)
-            gSaveBlock2Ptr->apprentices[i].speechWon[j] = 0xFFFF;
+            gSaveBlock2Ptr->apprentices[i].speechWon[j] = EC_EMPTY_WORD;
         gSaveBlock2Ptr->apprentices[i].id = NUM_APPRENTICES;
         gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
