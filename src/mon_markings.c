@@ -16,8 +16,6 @@
 #define SELECTION_OK NUM_MON_MARKINGS
 #define SELECTION_CANCEL (SELECTION_OK + 1)
 
-#define MENU_TEXT_SPRITE_X_OFFSET 32
-
 static void CreateMonMarkingsMenuSprites(s16, s16, u16, u16);
 static void SpriteCB_Dummy(struct Sprite *);
 static void SpriteCB_Marking(struct Sprite *);
@@ -528,7 +526,7 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
         sMenu->textSprite->oam.shape = SPRITE_SHAPE(32x32);
         sMenu->textSprite->oam.size = SPRITE_SIZE(32x32);
         StartSpriteAnim(sMenu->textSprite, ANIM_TEXT);
-        sMenu->textSprite->pos1.x = x + MENU_TEXT_SPRITE_X_OFFSET;
+        sMenu->textSprite->pos1.x = x + 32;
         sMenu->textSprite->pos1.y = y + 80;
         CalcCenterToCornerVec(sMenu->textSprite, SPRITE_SHAPE(32x16), SPRITE_SIZE(32x16), ST_OAM_AFFINE_OFF);
     }
