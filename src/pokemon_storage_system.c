@@ -231,7 +231,7 @@ struct PokemonStorageSystemData
     struct Sprite *field_D94;
     struct Sprite *field_D98[2];
     u16 *field_DA0;
-    struct PokemonMarkMenu markMenu;
+    struct MonMarkingsMenu markMenu;
     struct UnkPSSStruct_2002370 field_1E5C;
     struct Pokemon movingMon;
     struct Pokemon field_2108;
