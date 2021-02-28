@@ -51,7 +51,7 @@ extern const u8 EventScript_ResetAllMapFlags[];
 // this file's functions
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
-static void ResetMiniGamesResults(void);
+static void ResetMiniGamesRecords(void);
 
 // EWRAM vars
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
@@ -196,7 +196,7 @@ void NewGameInitData(void)
     ResetLotteryCorner();
     WarpToTruck();
     ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
-    ResetMiniGamesResults();
+    ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
     ResetAllApprenticeData();
@@ -208,10 +208,10 @@ void NewGameInitData(void)
     ResetContestLinkResults();
 }
 
-static void ResetMiniGamesResults(void)
+static void ResetMiniGamesRecords(void)
 {
     CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
     SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
-    ResetPokeJumpResults();
+    ResetPokemonJumpRecords();
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }
