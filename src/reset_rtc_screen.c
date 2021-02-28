@@ -642,7 +642,7 @@ static void Task_ResetRtcScreen(u8 taskId)
     switch (tState)
     {
     case MAINSTATE_FADE_IN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 1, 0x10, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETTES_ALL, 1, 0x10, 0, RGB_WHITEALPHA);
         tState = MAINSTATE_CHECK_SAVE;
         break;
     case MAINSTATE_CHECK_SAVE:
@@ -716,7 +716,7 @@ static void Task_ResetRtcScreen(u8 taskId)
     case MAINSTATE_WAIT_EXIT:
         if (JOY_NEW(A_BUTTON))
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 0x10, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(PALETTES_ALL, 1, 0, 0x10, RGB_WHITEALPHA);
             tState = MAINSTATE_EXIT;
             // fallthrough
         }

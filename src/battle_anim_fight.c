@@ -6,7 +6,7 @@
 #include "trig.h"
 #include "constants/rgb.h"
 
-static void unc_080B08A0(struct Sprite *);
+static void AnimUnused_080B08A0(struct Sprite *);
 static void AnimSlideHandOrFootToTarget(struct Sprite *);
 static void AnimJumpKick(struct Sprite *);
 static void AnimBasicFistOrFoot(struct Sprite *);
@@ -40,7 +40,7 @@ static void AnimSpinningKickOrPunchFinish(struct Sprite *);
 extern struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 
 // Unused
-const struct SpriteTemplate gUnknown_08595E14 =
+const struct SpriteTemplate gUnusedSpriteTemplate_08595E14 =
 {
     .tileTag = ANIM_TAG_HUMANOID_FOOT,
     .paletteTag = ANIM_TAG_HUMANOID_FOOT,
@@ -48,7 +48,7 @@ const struct SpriteTemplate gUnknown_08595E14 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = unc_080B08A0,
+    .callback = AnimUnused_080B08A0,
 };
 
 static const union AnimCmd sAnim_HandOrFoot[] =
@@ -417,7 +417,7 @@ const struct SpriteTemplate gFocusPunchFistSpriteTemplate =
     .callback = AnimFocusPunchFist,
 };
 
-static void unc_080B08A0(struct Sprite *sprite)
+static void AnimUnused_080B08A0(struct Sprite *sprite)
 {
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -1008,7 +1008,7 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_80A6DAC(0);
+        UpdateAnimBg3ScreenSize(FALSE);
         task->data[8] = gBattleAnimArgs[0];
         task->data[0]++;
         break;
@@ -1037,7 +1037,7 @@ void AnimTask_MoveSkyUppercutBg(u8 taskId)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
-        sub_80A6DAC(1);
+        UpdateAnimBg3ScreenSize(TRUE);
         DestroyAnimVisualTask(taskId);
     }
 }

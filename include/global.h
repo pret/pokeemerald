@@ -893,7 +893,7 @@ struct MysteryEventStruct
     /*0x000 0x322C*/ struct WonderNewsSaveStruct wonderNews;
     /*0x1c0 0x33EC*/ struct WonderCardSaveStruct wonderCard;
     /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
-    /*0x338 0x3564*/ u16 unk_338[4];
+    /*0x338 0x3564*/ u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
     /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
     /*0x344 0x3570*/ u32 unk_344[2][5];
 }; // 0x36C 0x3598

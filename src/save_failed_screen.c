@@ -225,7 +225,7 @@ static void CB2_SaveFailedScreen(void)
         CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], 2); // again?
         CopyWindowToVram(sWindowIds[TEXT_WIN_ID], 1);
         SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         EnableInterrupts(1);
         SetVBlankCallback(VBlankCB);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
@@ -310,7 +310,7 @@ static void CB2_FadeAndReturnToTitleScreen(void)
 
     if (JOY_NEW(A_BUTTON))
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(CB2_ReturnToTitleScreen);
     }

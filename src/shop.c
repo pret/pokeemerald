@@ -448,9 +448,9 @@ static void CB2_InitBuyMenu(void)
         ResetTasks();
         ClearScheduledBgCopiesToVram();
         gShopDataPtr = AllocZeroed(sizeof(struct ShopData));
-        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
-        gShopDataPtr->itemSpriteIds[0] = 0xFF;
-        gShopDataPtr->itemSpriteIds[1] = 0xFF;
+        gShopDataPtr->scrollIndicatorsTaskId = TASK_NONE;
+        gShopDataPtr->itemSpriteIds[0] = SPRITE_NONE;
+        gShopDataPtr->itemSpriteIds[1] = SPRITE_NONE;
         BuyMenuBuildListMenuTemplate();
         BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
@@ -470,8 +470,8 @@ static void CB2_InitBuyMenu(void)
         BuyMenuAddScrollIndicatorArrows();
         taskId = CreateTask(Task_BuyMenu, 8);
         gTasks[taskId].tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
-        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_BuyMenu);
         SetMainCallback2(CB2_BuyMenu);
         break;
@@ -581,7 +581,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, s32 item, u8 y)
 
 static void BuyMenuAddScrollIndicatorArrows(void)
 {
-    if (gShopDataPtr->scrollIndicatorsTaskId == 0xFF && gMartInfo.itemCount + 1 > 8)
+    if (gShopDataPtr->scrollIndicatorsTaskId == TASK_NONE && gMartInfo.itemCount + 1 > 8)
     {
         gShopDataPtr->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
@@ -597,10 +597,10 @@ static void BuyMenuAddScrollIndicatorArrows(void)
 
 static void BuyMenuRemoveScrollIndicatorArrows(void)
 {
-    if (gShopDataPtr->scrollIndicatorsTaskId != 0xFF)
+    if (gShopDataPtr->scrollIndicatorsTaskId != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gShopDataPtr->scrollIndicatorsTaskId);
-        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
+        gShopDataPtr->scrollIndicatorsTaskId = TASK_NONE;
     }
 }
 
@@ -614,7 +614,7 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
 {
     u8 spriteId;
     u8 *spriteIdPtr = &gShopDataPtr->itemSpriteIds[iconSlot];
-    if (*spriteIdPtr != 0xFF)
+    if (*spriteIdPtr != SPRITE_NONE)
         return;
 
     if (gMartInfo.martType == MART_TYPE_NORMAL || item == 0xFFFF)
@@ -638,13 +638,13 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
 static void BuyMenuRemoveItemIcon(u16 item, u8 iconSlot)
 {
     u8 *spriteIdPtr = &gShopDataPtr->itemSpriteIds[iconSlot];
-    if (*spriteIdPtr == 0xFF)
+    if (*spriteIdPtr == SPRITE_NONE)
         return;
 
     FreeSpriteTilesByTag(iconSlot + 2110);
     FreeSpritePaletteByTag(iconSlot + 2110);
     DestroySprite(&gSprites[*spriteIdPtr]);
-    *spriteIdPtr = 0xFF;
+    *spriteIdPtr = SPRITE_NONE;
 }
 
 static void BuyMenuInitBgs(void)
@@ -1152,7 +1152,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 static void ExitBuyMenu(u8 taskId)
 {
     gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ExitBuyMenu;
 }
 

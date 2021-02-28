@@ -594,8 +594,8 @@ void GoToBagMenu(u8 location, u8 pocket, void ( *postExitMenuMainCallback2)())
             gBagMenu->pocketSwitchDisabled = TRUE;
         gBagMenu->exitCallback = NULL;
         gBagMenu->itemOriginalLocation = 0xFF;
-        gBagMenu->pocketScrollArrowsTask = 0xFF;
-        gBagMenu->pocketSwitchArrowsTask = 0xFF;
+        gBagMenu->pocketScrollArrowsTask = TASK_NONE;
+        gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
         memset(gBagMenu->spriteId, 0xFF, sizeof(gBagMenu->spriteId));
         memset(gBagMenu->windowPointers, 0xFF, 10);
         SetMainCallback2(CB2_Bag);
@@ -720,11 +720,11 @@ bool8 SetupBagMenu(void)
         gMain.state++;
         break;
     case 19:
-        BlendPalettes(0xFFFFFFFF, 16, 0);
+        BlendPalettes(PALETTES_ALL, 16, 0);
         gMain.state++;
         break;
     case 20:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
@@ -971,7 +971,7 @@ void BagMenu_PrintCursor(u8 y, u8 colorIndex)
 
 void CreatePocketScrollArrowPair(void)
 {
-    if (gBagMenu->pocketScrollArrowsTask == 0xFF)
+    if (gBagMenu->pocketScrollArrowsTask == TASK_NONE)
         gBagMenu->pocketScrollArrowsTask = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
             172,
@@ -985,26 +985,26 @@ void CreatePocketScrollArrowPair(void)
 
 void BagDestroyPocketScrollArrowPair(void)
 {
-    if (gBagMenu->pocketScrollArrowsTask != 0xFF)
+    if (gBagMenu->pocketScrollArrowsTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gBagMenu->pocketScrollArrowsTask);
-        gBagMenu->pocketScrollArrowsTask = 0xFF;
+        gBagMenu->pocketScrollArrowsTask = TASK_NONE;
     }
     BagDestroyPocketSwitchArrowPair();
 }
 
 void CreatePocketSwitchArrowPair(void)
 {
-    if (gBagMenu->pocketSwitchDisabled != TRUE && gBagMenu->pocketSwitchArrowsTask == 0xFF)
+    if (gBagMenu->pocketSwitchDisabled != TRUE && gBagMenu->pocketSwitchArrowsTask == TASK_NONE)
         gBagMenu->pocketSwitchArrowsTask = AddScrollIndicatorArrowPair(&sBagScrollArrowsTemplate, &gBagPositionStruct.unk6);
 }
 
 void BagDestroyPocketSwitchArrowPair(void)
 {
-    if (gBagMenu->pocketSwitchArrowsTask != 0xFF)
+    if (gBagMenu->pocketSwitchArrowsTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(gBagMenu->pocketSwitchArrowsTask);
-        gBagMenu->pocketSwitchArrowsTask = 0xFF;
+        gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
     }
 }
 
@@ -1018,7 +1018,7 @@ void FreeBagItemListBuffers(void)
 
 void Task_FadeAndCloseBagMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = TaskCloseBagMenu_2;
 }
 
@@ -2390,7 +2390,7 @@ u8 sub_81AE124(u8 which)
 u8 BagMenu_AddWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr == 0xFF)
+    if (*ptr == WINDOW_NONE)
     {
         *ptr = AddWindow(&sContextMenuWindowTemplates[which]);
         DrawStdFrameWithCustomTileAndPalette(*ptr, 0, 1, 14);
@@ -2402,20 +2402,20 @@ u8 BagMenu_AddWindow(u8 which)
 void BagMenu_RemoveWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(*ptr, FALSE);
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         ScheduleBgCopyTilemapToVram(1);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
     }
 }
 
 u8 AddItemMessageWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr == 0xFF)
+    if (*ptr == WINDOW_NONE)
         *ptr = AddWindow(&sContextMenuWindowTemplates[which]);
     return *ptr;
 }
@@ -2423,14 +2423,14 @@ u8 AddItemMessageWindow(u8 which)
 void BagMenu_RemoveBagItemMessageWindow(u8 which)
 {
     u8 *ptr = &gBagMenu->windowPointers[which];
-    if (*ptr != 0xFF)
+    if (*ptr != WINDOW_NONE)
     {
         ClearDialogWindowAndFrameToTransparent(*ptr, FALSE);
         // This ClearWindowTilemap call is redundant, since ClearDialogWindowAndFrameToTransparent already calls it.
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         ScheduleBgCopyTilemapToVram(1);
-        *ptr = 0xFF;
+        *ptr = WINDOW_NONE;
     }
 }
 

@@ -32,6 +32,7 @@
 #include "constants/battle_string_ids.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/items.h"
 
 struct EvoInfo
 {
@@ -171,7 +172,7 @@ static void Task_BeginEvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -368,7 +369,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     SetVBlankCallback(VBlankCB_EvolutionScene);
     SetMainCallback2(CB2_EvolutionSceneUpdate);
 
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
 
     ShowBg(0);
     ShowBg(1);
@@ -448,11 +449,11 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
         }
-        BlendPalettes(-1,0x10, 0);
+        BlendPalettes(PALETTES_ALL, 0x10, 0);
         gMain.state++;
         break;
     case 7:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         InitTradeSequenceBgGpuRegs();
         ShowBg(0);
         ShowBg(1);
@@ -565,7 +566,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
 
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_STATUS, &data);
-        data = 0xFF;
+        data = MAIL_NONE;
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MAIL, &data);
 
         CalculateMonStats(&gPlayerParty[gPlayerPartyCount]);
@@ -652,7 +653,7 @@ static void Task_EvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case EVOSTATE_FADE_IN:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         gSprites[sEvoStructPtr->preEvoSpriteId].invisible = FALSE;
         gTasks[taskId].tState++;
         ShowBg(0);
@@ -801,7 +802,7 @@ static void Task_EvolutionScene(u8 taskId)
             }
             else // no move to learn, or evolution was canceled
             {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
                 gTasks[taskId].tState++;
             }
         }
@@ -945,7 +946,7 @@ static void Task_EvolutionScene(u8 taskId)
                     // YES
                     gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveYesState;
                     if (gTasks[taskId].tLearnMoveState == MVSTATE_SHOW_MOVE_SELECT)
-                        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+                        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
                 }
             }
             if (JOY_NEW(B_BUTTON))
@@ -1322,7 +1323,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveYesState;
                 if (gTasks[taskId].tLearnMoveState == T_MVSTATE_SHOW_MOVE_SELECT)
-                    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+                    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
                 break;
             case 1: // NO
             case MENU_B_PRESSED:
@@ -1646,7 +1647,7 @@ static void PauseBgPaletteAnim(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_UpdateBgPalette);
 
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
         gTasks[taskId].tPaused = TRUE;
 
     FillPalette(0, 0xA0, 0x20);
@@ -1658,9 +1659,9 @@ static void StopBgAnimation(void)
 {
     u8 taskId;
 
-    if ((taskId = FindTaskIdByFunc(Task_UpdateBgPalette)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_UpdateBgPalette)) != TASK_NONE)
         DestroyTask(taskId);
-    if ((taskId = FindTaskIdByFunc(Task_AnimateBg)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(Task_AnimateBg)) != TASK_NONE)
         DestroyTask(taskId);
 
     FillPalette(0, 0xA0, 0x20);

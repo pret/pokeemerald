@@ -1203,7 +1203,7 @@ static void CB2_InitSelectScreen(void)
         ShowBg(0);
         ShowBg(1);
         SetVBlankCallback(VBlankCB_SelectScreen);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
 #ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
@@ -1451,7 +1451,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
     {
     case STATE_SUMMARY_FADE:
         gPlttBufferUnfaded[228] = gPlttBufferFaded[228];
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
     case STATE_SUMMARY_CLEAN:
@@ -1489,7 +1489,7 @@ static void Select_Task_Exit(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -2369,7 +2369,7 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_SUMMARY_FADE:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
     case STATE_SUMMARY_CLEAN:
@@ -2425,7 +2425,7 @@ static void Swap_Task_Exit(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 3:
@@ -3381,7 +3381,7 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 14:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         ShowBg(0);
         ShowBg(1);
