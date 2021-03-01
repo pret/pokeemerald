@@ -168,7 +168,7 @@ static const u32 sWirelessLinkDisplayTilemap[] = INCBIN_U32("graphics/interface/
 static const u16 sLinkTestDigitsPal[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
 static const u16 sLinkTestDigitsGfx[] = INCBIN_U16("graphics/interface/link_test_digits.4bpp");
 static const u8 sUnusedTransparentWhite[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE}");
-static const u16 s2BlankTilesGfx[] = INCBIN_U16("graphics/interface/blank_1x2.4bpp");
+static const u16 sCommErrorBg_Gfx[] = INCBIN_U16("graphics/interface/comm_error_bg.4bpp");
 static const struct BlockRequest sBlockRequests[] = {
     {gBlockSendBuffer, 200},
     {gBlockSendBuffer, 200},
@@ -1680,9 +1680,9 @@ void CB2_LinkError(void)
     }
 }
 
-static void sub_800B080(void)
+static void ErrorMsg_MoveCloserToPartner(void)
 {
-    LoadBgTiles(0, s2BlankTilesGfx, 0x20, 0);
+    LoadBgTiles(0, sCommErrorBg_Gfx, 0x20, 0);
     DecompressAndLoadBgGfxUsingHeap(1, sWirelessLinkDisplayGfx, FALSE, 0, 0);
     CopyToBgTilemapBuffer(1, sWirelessLinkDisplayTilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
@@ -1697,9 +1697,9 @@ static void sub_800B080(void)
     CopyWindowToVram(2, 3);
 }
 
-static void sub_800B138(void)
+static void ErrorMsg_CheckConnections(void)
 {
-    LoadBgTiles(0, s2BlankTilesGfx, 0x20, 0);
+    LoadBgTiles(0, sCommErrorBg_Gfx, 0x20, 0);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
     AddTextPrinterParameterized3(1, 3, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
@@ -1715,20 +1715,14 @@ static void CB2_PrintErrorMessage(void)
     {
         case  00:
             if (sLinkErrorBuffer.unk_06)
-            {
-                sub_800B080();
-            }
+                ErrorMsg_MoveCloserToPartner();
             else
-            {
-                sub_800B138();
-            }
+                ErrorMsg_CheckConnections();
             break;
         case  02:
             ShowBg(0);
             if (sLinkErrorBuffer.unk_06)
-            {
                 ShowBg(1);
-            }
             break;
         case  30:
             PlaySE(SE_BOO);
@@ -1741,13 +1735,9 @@ static void CB2_PrintErrorMessage(void)
             break;
         case 130:
             if (gWirelessCommType == 2)
-            {
                 AddTextPrinterParameterized3(0, 3, 2, 20, sTextColors, 0, gText_ABtnTitleScreen);
-            }
             else if (gWirelessCommType == 1)
-            {
                 AddTextPrinterParameterized3(0, 3, 2, 20, sTextColors, 0, gText_ABtnRegistrationCounter);
-            }
             break;
     }
     if (gMain.state == 160)

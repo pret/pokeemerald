@@ -2516,12 +2516,12 @@ void sub_80236B8(struct BerryCrushGame *r5)
         {
             if (r5->unk10 > 70)
             {
-                sub_8011AC8();
+                ClearRecvCommands();
                 r5->unk10 = 0;
             }
             else if (r5->unk5C.unk02_3 == 0)
             {
-                sub_8011AC8();
+                ClearRecvCommands();
                 r5->unk10 = 0;
             }
         }
