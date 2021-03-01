@@ -1520,6 +1520,7 @@ BattleScript_EffectPsychicTerrain:
 	waitanimation
 	printfromtable gTerrainStringIds
 	waitmessage 0x40
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTopsyTurvy:
@@ -5403,6 +5404,12 @@ BattleScript_OverworldWeatherStarts::
 	playanimation2 BS_ATTACKER, sB_ANIM_ARG1, NULL
 	end3
 
+BattleScript_OverworldTerrain::
+	printfromtable gTerrainStringIds
+	waitmessage 0x40
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
+	end3
+
 BattleScript_SideStatusWoreOff::
 	printstring STRINGID_PKMNSXWOREOFF
 	waitmessage 0x40
@@ -6887,32 +6894,32 @@ BattleScript_ElectricSurgeActivates::
 	pause 0x20
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESELECTRIC
-	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_ELECTRIC, NULL
+	waitmessage 0x40
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_MistySurgeActivates::
 	pause 0x20
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESMISTY
-	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_MISTY, NULL
+	waitmessage 0x40
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_GrassySurgeActivates::
 	pause 0x20
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESGRASSY
-	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_GRASSY, NULL
+	waitmessage 0x40
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_PsychicSurgeActivates::
 	pause 0x20
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_TERRAINBECOMESPSYCHIC
-	waitstate
-	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_PSYCHIC, NULL
+	waitmessage 0x40
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG, NULL
 	end3
 
 BattleScript_BadDreamsActivates::
@@ -7100,7 +7107,9 @@ BattleScript_GrassyTerrainLoopIncrement::
 	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_GrassyTerrainLoop
 BattleScript_GrassyTerrainLoopEnd::
 	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_TERRAIN_PERMANENT, BattleScript_GrassyTerrainHealEnd
 	jumpifbyte CMP_EQUAL, gFieldTimers + 5, 0x0, BattleScript_GrassyTerrainEnds
+BattleScript_GrassyTerrainHealEnd:
 	end2
 
 BattleScript_AbilityNoSpecificStatLoss::

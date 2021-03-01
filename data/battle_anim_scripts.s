@@ -817,10 +817,6 @@ gBattleAnims_General::
 	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
 	.4byte General_MegaEvolution            @ B_ANIM_MEGA_EVOLUTION
-	.4byte General_TerrainMisty             @ B_ANIM_TERRAIN_MISTY
-	.4byte General_TerrainGrassy            @ B_ANIM_TERRAIN_GRASSY
-	.4byte General_TerrainElectric          @ B_ANIM_TERRAIN_ELECTRIC
-	.4byte General_TerrainPsychic           @ B_ANIM_TERRAIN_PSYCHIC
 	.4byte General_IllusionOff              @ B_ANIM_ILLUSION_OFF
 	.4byte General_FormChange               @ B_ANIM_FORM_CHANGE
 	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
@@ -8478,8 +8474,6 @@ Move_GRASSY_TERRAIN::
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(31, 24, 31)
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
 	end
 
 Move_MISTY_TERRAIN::
@@ -8518,8 +8512,6 @@ Move_MISTY_TERRAIN::
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 7, 0, RGB(31, 24, 31)
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
 	end
 
 Move_ELECTRIFY::
@@ -9403,8 +9395,6 @@ Move_ELECTRIC_TERRAIN::
 	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(28, 28, 0)
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
 	end
 
 Move_DAZZLING_GLEAM::
@@ -11060,8 +11050,6 @@ Move_PSYCHIC_TERRAIN::
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, ANIM_PAL_BG, 3, 4, 0, RGB(27, 0, 13)
 	waitforvisualfinish
-	restorebg
-	waitbgfadein
 	end
 
 Move_LUNGE::
@@ -24383,18 +24371,6 @@ MegaEvolutionParticles:
 	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
 	delay 3
 	return
-
-General_TerrainMisty:
-	end
-
-General_TerrainGrassy:
-	end
-
-General_TerrainElectric:
-	end
-
-General_TerrainPsychic:
-	end
 
 General_RestoreBg:
 	restorebg
