@@ -1,4 +1,5 @@
 #include "global.h"
+#include "defines.h"
 #include "crt0.h"
 #include "malloc.h"
 #include "link.h"
@@ -90,7 +91,7 @@ void AgbMain()
 #if !MODERN
     RegisterRamReset(RESET_ALL);
 #endif //MODERN
-    *(vu16 *)BG_PLTT = 0x7FFF;
+    *(vu16 *)BG_PLTT = RGB_WHITE; // Set the palette to white on startup
     InitGpuRegManager();
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
     InitKeys();
