@@ -1,17 +1,20 @@
 name: Build ROM
 
-on:
-  push:
-      tags:
-        - 'v*'
+on: push
+  # push:
+      # tags:
+      #   - 'v*'
 
 jobs:
   build_rom:
     runs-on: ubuntu-latest
-    container:
-      image: arantonitis/devkitgba
+    # container:
+    #   image: arantonitis/devkitgba
     steps:
       - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo apt-get install binutils-arm-none-eabi gcc-arm-none-eabi
       - name: Build & install agbcc
         run: |
           cd ..

@@ -4,6 +4,7 @@
 
 set +v
 set -e
+git_branch=$(git branch --show-current)
 git push build --force # ssh://merrbot:/home/ubuntu/pokeemerald
-ssh merrbot "source /etc/profile.d/devkit-env.sh && cd pokeemerald && git reset --hard && git checkout dexnav && make"
+ssh merrbot "cd pokeemerald && git reset --hard && git checkout $git_branch && make"
 scp merrbot:pokeemerald/pokeemerald.gba romhack.gba
