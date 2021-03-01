@@ -700,9 +700,9 @@ bool32 ShouldAIUseZMove(u8 battlerAtk, u8 battlerDef, u16 chosenMove)
     if (IsViableZMove(battlerAtk, chosenMove))
     {
         #ifdef POKEMON_EXPANSION
-        if (defAbility == ABILITY_DISGUISE && defSpecies == SPECIES_MIMIKYU)
+        if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE && gBattleMons[battlerDef].species == SPECIES_MIMIKYU)
             return 0; // Don't waste a Z-Move busting Mimikyu's disguise
-        if (defAbility == ABILITY_ICEFACE && defSpecies == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
+        if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE && IS_MOVE_PHYSICAL(chosenMove))
             return 0; // Don't waste a Z-Move busting Eiscue's Ice Face
         #endif
         
