@@ -130,8 +130,14 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
 
         // Object is on a metatile before the puzzle tile section
         // UB: Because this is not if (metatile < puzzleTileStart), for the trick house (metatile - puzzleTileStart) below can result in casting a negative value to u8 
+
+        #ifdef UBFIX
+        if (metatile < puzzleTileStart)
+            continue;
+        #else
         if (metatile < METATILE_MossdeepGym_YellowArrow_Right)
             continue;
+        #endif
 
         // Object is on a metatile after the puzzle tile section (never occurs, in both cases the puzzle tiles are last)
         if ((u8)((metatile - puzzleTileStart) / 8) >= 5)
