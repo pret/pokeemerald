@@ -58,7 +58,7 @@ static u8 GetZMoveScore(u8 battlerAtk, u8 battlerDef, u16 baseMove, u16 zMove);
 static const struct SignatureZMove sSignatureZMoves[] =
 {
     #ifdef POKEMON_EXPANSION
-    {SPECIES_RAICHU_A,              ITEM_ALORAICHIUM_Z,        MOVE_THUNDERBOLT,         MOVE_STOKED_SPARKSURFER},
+    {SPECIES_RAICHU_ALOLAN,         ITEM_ALORAICHIUM_Z,        MOVE_THUNDERBOLT,         MOVE_STOKED_SPARKSURFER},
     {SPECIES_DECIDUEYE,             ITEM_DECIDIUM_Z,           MOVE_SPIRIT_SHACKLE,      MOVE_SINISTER_ARROW_RAID},
     {SPECIES_INCINEROAR,            ITEM_INCINIUM_Z,           MOVE_DARKEST_LARIAT,      MOVE_MALICIOUS_MOONSAULT},
     {SPECIES_KOMMO_O,               ITEM_KOMMONIUM_Z,          MOVE_CLANGING_SCALES,     MOVE_CLANGOROUS_SOULBLAZE},
