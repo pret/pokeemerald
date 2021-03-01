@@ -427,7 +427,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
     switch (state)
     {
     case 0:
-        InitBgTemplates(sMonRibbonListBgTemplates, NELEMS(sMonRibbonListBgTemplates));
+        InitBgTemplates(sMonRibbonListBgTemplates, ARRAY_COUNT(sMonRibbonListBgTemplates));
         DecompressAndCopyTileDataToVram(1, sMonRibbonListFrameTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, monMenu->buff);
         CopyToBgTilemapBuffer(1, sMonRibbonListFrameTilemap, 0, 0);

@@ -1380,7 +1380,7 @@ static void WaitAllReadyToCloseLink(void)
     if (count == playerCount)
     {
         // All ready, close link
-        gBattleTypeFlags &= ~BATTLE_TYPE_20;
+        gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
         if (Rfu.parentChild == MODE_CHILD)
         {
             Rfu.errorState = 3;

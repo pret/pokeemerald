@@ -1724,7 +1724,6 @@ static void rfu_constructSendLLFrame(void)
     u32 pakcketSize, currSize;
     u8 i;
     u8 *llf_p;
-    struct RfuSlotStatusNI *slotStatusNI;
 
     if (gRfuLinkStatus->parentChild != MODE_NEUTRAL
      && gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag | gRfuLinkStatus->sendSlotUNIFlag)

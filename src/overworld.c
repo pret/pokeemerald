@@ -174,7 +174,6 @@ static u8 sPlayerTradingStates[MAX_LINK_PLAYERS];
 static u16 (*sPlayerKeyInterceptCallback)(u32);
 static bool8 sUnknown_03000E18;
 static u8 sRfuKeepAliveTimer;
-static u32 sUnusedVar;
 
 // IWRAM common
 u16 *gBGTilemapBuffers1;

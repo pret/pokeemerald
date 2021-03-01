@@ -1008,7 +1008,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
         if (indicatorSpriteId != 0xFF)
             gSprites[indicatorSpriteId].oam.priority = priority;
         
-        #if HIDE_HEALTHBOXES_DURING_ANIMS
+        #if B_HIDE_HEALTHBOXES_DURING_ANIMS
         if (IsBattlerAlive(i))
             TryToggleHealboxVisibility(priority, healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId, indicatorSpriteId);
         #endif
@@ -2056,7 +2056,6 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     void *ptr;
-    const u8 *genderTxt;
     u32 windowId, spriteTileNum, species;
     u8 *windowTileData;
     u8 gender;
