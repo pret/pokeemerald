@@ -210,7 +210,7 @@ struct ObjectEvent
     /*0x22*/ union __attribute__((packed)) {
         u8 playerCopyableMovement;
         struct __attribute__((packed)) {
-            u16 species:11; // 11 bits for 2048 species
+            u16 species:11; // 11 bits; 2048 species
             u16 form:4;
             u16 shiny:1;
         } mon;

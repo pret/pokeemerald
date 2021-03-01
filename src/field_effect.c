@@ -1415,7 +1415,7 @@ void FieldCB_FallWarpExit(void)
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
     ScriptContext2_Enable();
-    FreezeObjectEvents();
+    FreezeObjectEvents();  // TODO: How does this interact with follower pokemon?
     CreateTask(Task_FallWarpFieldEffect, 0);
     gFieldCallback = NULL;
 }
@@ -1567,7 +1567,7 @@ static void Task_EscalatorWarpOut(u8 taskId)
 
 static bool8 EscalatorWarpOut_Init(struct Task *task)
 {
-    FreezeObjectEvents();
+    FreezeObjectEvents(); // TODO: Follower pokemon interaction
     CameraObjectReset2();
     StartEscalator(task->tGoingUp);
     task->tState++;
@@ -1945,7 +1945,7 @@ static void Task_LavaridgeGymB1FWarp(u8 taskId)
 
 static bool8 LavaridgeGymB1FWarpEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    FreezeObjectEvents();
+    FreezeObjectEvents(); // TODO: Follower pokemon interaction
     CameraObjectReset2();
     SetCameraPanningCallback(NULL);
     gPlayerAvatar.preventStep = TRUE;
@@ -2062,7 +2062,7 @@ static void Task_LavaridgeGymB1FWarpExit(u8 taskId)
 static bool8 LavaridgeGymB1FWarpExitEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     CameraObjectReset2();
-    FreezeObjectEvents();
+    FreezeObjectEvents(); // TODO: Follower pokemon interaction
     gPlayerAvatar.preventStep = TRUE;
     objectEvent->invisible = TRUE;
     task->data[0]++;
@@ -2138,7 +2138,7 @@ static void Task_LavaridgeGym1FWarp(u8 taskId)
 
 static bool8 LavaridgeGym1FWarpEffect_Init(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    FreezeObjectEvents();
+    FreezeObjectEvents(); // TODO: Follower pokemon interaction
     CameraObjectReset2();
     gPlayerAvatar.preventStep = TRUE;
     objectEvent->fixedPriority = 1;
@@ -2227,7 +2227,7 @@ void SpriteCB_AshPuff(struct Sprite *sprite)
 void StartEscapeRopeFieldEffect(void)
 {
     ScriptContext2_Enable();
-    FreezeObjectEvents();
+    FreezeObjectEvents();  // TODO: Follower pokemon interaction
     CreateTask(Task_EscapeRopeWarpOut, 80);
 }
 
@@ -3071,7 +3071,7 @@ u8 FldEff_RayquazaSpotlight(void)
     struct Sprite *sprite = &gSprites[spriteId];
 
     sprite->oam.priority = 1;
-    sprite->oam.paletteNum = 4; // TODO: What palette should this Raquaza use?
+    sprite->oam.paletteNum = 4; // TODO: What (dynamic) palette should this Raquaza use?
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 0;

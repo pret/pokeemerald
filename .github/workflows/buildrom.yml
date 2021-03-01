@@ -1,0 +1,24 @@
+name: Build ROM
+
+on:
+  push:
+      tags:
+        - 'v*'
+
+jobs:
+  build_rom:
+    runs-on: ubuntu-latest
+    container:
+      image: arantonitis/devkitgba
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build & install agbcc
+        run: |
+          cd ..
+          git clone --depth 1 https://github.com/pret/agbcc
+          cd agbcc
+          ./build.sh
+          ./install.sh ../pokeemerald
+      - name: Build ROM
+        run: |
+          make

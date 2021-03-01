@@ -1,5 +1,5 @@
 gText_FollowerLovesYou::
-  .string "{STR_VAR_1} jumps and grins at you.\pIts expression is welling up with love!$"
+  .string "{STR_VAR_1} is regarding you with\nadoration!$"
 
 gText_FollowerLostInThought::
   .string "{STR_VAR_1} seems lost in thought.$"
@@ -7,8 +7,8 @@ gText_FollowerLostInThought::
 gText_FollowerDefault::
   .string "ERROR 404: Script not found.$"
 
-gText_FollowerHasWetFeet::
-  .string "{STR_VAR_1} frowns at you. It shuffles\nits wet feet.$"
+gText_FollowerUnhappyToBeWet::
+  .string "{STR_VAR_1} looks unhappy to be wet.$"
 
 gText_FollowerSplashesAround::
   .string "{STR_VAR_1} splashes around happily!$"
@@ -23,16 +23,28 @@ gText_FollowerHappyRain::
   .string "{STR_VAR_1} seems to be happy\nabout the rain!$"
 
 gText_FollowerMetLocation::
-  .string "{STR_VAR_1} is looking around fondly.\pIt seems familiar with this place.$"
+  .string "{STR_VAR_1} looks around fondly.\nIt seems familiar with this place.$"
 
 gText_FollowerSkeptical::
-  .string "{STR_VAR_1} gives you a skeptical look...\pWhat could it mean?$"
+  .string "{STR_VAR_1} looks skeptical...\pWhat could it mean?$"
 
 gText_FollowerAppraising::
-  .string "{STR_VAR_1} looks you up and down...\pIt carefully follows\nbehind you.$"
+  .string "{STR_VAR_1} carefully follows behind.$"
 
 gText_FollowerHappyWalk::
   .string "{STR_VAR_1} skips happily behind you!$"
+
+gText_FollowerAboutToFall::
+  .string "{STR_VAR_1} seems to be about\nto fall over!$"
+
+gText_FollowerTryingToKeepUp::
+  .string "{STR_VAR_1} is trying very hard\nto keep up with you...$"
+
+gText_FollowerIsShivering::
+  .string "{STR_VAR_1} is shivering.$"
+
+gText_FollowerBurnPainful::
+  .string "{STR_VAR_1}'s burn looks painful!$'"
 
 .macro playfirstmoncry
 callfunc ScrFunc_playfirstmoncry
@@ -46,6 +58,8 @@ callfunc ScrFunc_bufferlivemonspeciesname
 EventScript_Follower::
   lock
   faceplayer
+  bufferlivemonspeciesname 0
+  playfirstmoncry
   callfunc ScrFunc_getfolloweraction
   checkpartymove MOVE_FLY
   compare VAR_RESULT 6
@@ -63,29 +77,21 @@ EventScript_FollowerEnd::
   end
 
 EventScript_FollowerHappyWalk::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
   msgbox gText_FollowerHappyWalk, MSGBOX_DEFAULT
   waitmoncry
   return
 
 EventScript_FollowerAppraising::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
   msgbox gText_FollowerAppraising, MSGBOX_DEFAULT
   waitmoncry
   return
 
 EventScript_FollowerSkeptical::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
   msgbox gText_FollowerSkeptical, MSGBOX_DEFAULT
   waitmoncry
   return
 
 EventScript_FollowerMetLocation::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
   applymovement 0xFE Common_Movement_QuestionMark
   waitmoncry
   waitmovement 0xFE
@@ -93,49 +99,60 @@ EventScript_FollowerMetLocation::
   return
 
 EventScript_FollowerUnhappyFace::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
   msgbox gText_FollowerUnhappyFace, MSGBOX_DEFAULT
   waitmoncry
   return
 
 EventScript_FollowerHappyRain::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
   msgbox gText_FollowerHappyRain, MSGBOX_DEFAULT
   waitmoncry
   return
 
-EventScript_FollowerHasWetFeet::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
-  msgbox gText_FollowerHasWetFeet, MSGBOX_DEFAULT
+EventScript_FollowerUnhappyToBeWet::
+  msgbox gText_FollowerUnhappyToBeWet, MSGBOX_DEFAULT
   waitmoncry
   return
 
 EventScript_FollowerSplashesAbout::
-  bufferlivemonspeciesname 0
-  playfirstmoncry
   applymovement 0xFE FollowerSplashMovement
   waitmovement 0xFE
   msgbox gText_FollowerSplashesAround, MSGBOX_DEFAULT
   return
 
 EventScript_FollowerLovesYou::
-  playfirstmoncry
   applymovement 0xFE ContestHall_Movement_Heart
   waitmovement 0xFE
   waitmoncry
-  bufferlivemonspeciesname 0
   msgbox gText_FollowerLovesYou, MSGBOX_DEFAULT
+  return
+
+EventScript_FollowerAboutToFall::
+  msgbox gText_FollowerAboutToFall, MSGBOX_DEFAULT
+  waitmoncry
+  return
+
+EventScript_FollowerTryingToKeepUp::
+  msgbox gText_FollowerTryingToKeepUp, MSGBOX_DEFAULT
+  waitmoncry
+  return
+
+EventScript_FollowerIsShivering::
+  msgbox gText_FollowerIsShivering, MSGBOX_DEFAULT
+  waitmoncry
+  return
+
+EventScript_FollowerBurnPainful::
+  msgbox gText_FollowerBurnPainful, MSGBOX_DEFAULT
+  waitmoncry
   return
 
 EnterPokeballMovement::
   .byte 0x9F @ EnterPokeball
   step_end
 
-FollowerSplashMovement::
-  jump_in_place_left_right
-  jump_in_place_left_right
+FollowerSplashMovement:: @ defined in movement.inc
+  jump_in_place_down
+  delay_4
+  jump_in_place_down
   face_player
   step_end

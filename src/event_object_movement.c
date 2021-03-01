@@ -1622,7 +1622,7 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
   return graphicsInfo->tileTag != 0xFFFF ? &gObjectEventGraphicsInfo_Dusclops : graphicsInfo;
 }
 
-// Set graphics & sprite for a follower object event by species
+// Set graphics & sprite for a follower object event by species & shininess.
 static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species, u8 form, bool8 shiny) {
   const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, form);
   objectEvent->graphicsId = OBJ_EVENT_GFX_OW_MON;
@@ -1708,51 +1708,65 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   u16 value;
   u16 species;
   u32 behavior;
+  s16 health_percent;
+  u8 map_region;
   u8 friendship;
+  const u8 *message_choices[10] = {0};
+  u8 n_choices = 0;
   struct ObjectEvent *objEvent = GetFollowerObject();
   struct Pokemon *mon = GetFirstLiveMon();
   if (mon == NULL) {
     ScriptCall(ctx, EventScript_FollowerLovesYou);
     return FALSE;
   }
-  if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)) // only return to flying if map type is relevant
+  // If map is not flyable, set the script to jump past the fly check
+  if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType))
     ScriptJump(ctx, EventScript_FollowerEnd);
   behavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
   species = GetMonData(mon, MON_DATA_SPECIES);
-  // Puddle splash or wet feet
+  // 1. Puddle splash or wet feet
   if (MetatileBehavior_IsPuddle(behavior) || MetatileBehavior_IsShallowFlowingWater(behavior)) {
-    if (SpeciesHasType(species, TYPE_FIRE)) {
-      ScriptCall(ctx, EventScript_FollowerHasWetFeet);
-      return FALSE;
-    } else if (SpeciesToGraphicsInfo(species, 0)->tracks) { // if follower is grounded
-      ScriptCall(ctx, EventScript_FollowerSplashesAbout);
-      return FALSE;
-    }
+    if (SpeciesHasType(species, TYPE_FIRE))
+      message_choices[n_choices++] = EventScript_FollowerUnhappyToBeWet;
+    else if (SpeciesToGraphicsInfo(species, 0)->tracks) // if follower is grounded
+      message_choices[n_choices++] = EventScript_FollowerSplashesAbout;
   }
-  // Weather-based messages
+  // 2. Weather-based messages
   if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
-    if (SpeciesHasType(species, TYPE_FIRE)) {
-      ScriptCall(ctx, EventScript_FollowerUnhappyFace);
-      return FALSE;
-    } else if (SpeciesHasType(species, TYPE_WATER) || SpeciesHasType(species, TYPE_GRASS)) {
-      ScriptCall(ctx, EventScript_FollowerHappyRain);
-      return FALSE;
-    }
+    if (SpeciesHasType(species, TYPE_FIRE))
+      message_choices[n_choices++] = EventScript_FollowerUnhappyFace;
+    else if (SpeciesHasType(species, TYPE_WATER) || SpeciesHasType(species, TYPE_GRASS))
+      message_choices[n_choices++] = EventScript_FollowerHappyRain;
   }
-  // Location-based messages
-  if (GetMonData(mon, MON_DATA_MET_LOCATION) == GetCurrentRegionMapSectionId()) {
-    ScriptCall(ctx, EventScript_FollowerMetLocation);
-    return FALSE;
-  }
+  // 3. Health & status-based messages
+  health_percent = mon->hp * 100 / mon->maxHP;
+  if (health_percent <= 20)
+    message_choices[n_choices++] = EventScript_FollowerAboutToFall;
+  else if (health_percent < 50 || mon->status & 0x40) // STATUS1_PARALYSIS
+    message_choices[n_choices++] = EventScript_FollowerTryingToKeepUp;
+  // 4. More status messages
+  if (mon->status & (0x20 | 0x8)) // STATUS1_FREEZE | STATUS1_POISON
+    message_choices[n_choices++] = EventScript_FollowerIsShivering;
+  else if (mon->status & 0x10) // STATUS1_BURN
+    message_choices[n_choices++] = EventScript_FollowerBurnPainful;
+  // 5. Location-based messages
+  map_region = GetCurrentRegionMapSectionId(); // defined in region_map_sections.h
+  if (GetMonData(mon, MON_DATA_MET_LOCATION) == map_region)
+    message_choices[n_choices++] = EventScript_FollowerMetLocation;
+  // 6. Friendship-based messages
   friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
   if (friendship <= 80)
-    ScriptCall(ctx, EventScript_FollowerSkeptical);
+    message_choices[n_choices++] = EventScript_FollowerSkeptical;
   else if (friendship <= 170)
-    ScriptCall(ctx, EventScript_FollowerAppraising);
+    message_choices[n_choices++] = EventScript_FollowerAppraising;
   else if (friendship < 255)
-    ScriptCall(ctx, EventScript_FollowerHappyWalk);
+    message_choices[n_choices++] = EventScript_FollowerHappyWalk;
   else // Max friendship
-    ScriptCall(ctx, EventScript_FollowerLovesYou);
+    message_choices[n_choices++] = EventScript_FollowerLovesYou;
+  if (!n_choices)
+    ScriptCall(ctx, EventScript_FollowerLovesYou); // Default in case of no choices
+  else
+    ScriptCall(ctx, message_choices[Random() % min(n_choices, ARRAY_COUNT(message_choices))]);
   return FALSE;
 }
 
