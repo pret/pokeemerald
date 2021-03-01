@@ -877,7 +877,7 @@ void StartBerryCrush(MainCallback callback)
 static void GetBerryFromBag(void)
 {
     if (gSpecialVar_ItemId < FIRST_BERRY_INDEX || gSpecialVar_ItemId > LAST_BERRY_INDEX + 1)
-        gSpecialVar_ItemId = ITEM_CHERI_BERRY;
+        gSpecialVar_ItemId = FIRST_BERRY_INDEX;
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
@@ -1573,7 +1573,6 @@ static void Task_ShowBerryCrushRankings(u8 taskId)
     u8 i = 0, j, xPos, yPos;
     u32 score = 0;
     s16 *data = gTasks[taskId].data;
-    u8 *str;
     
     switch (data[0])
     {
@@ -1714,8 +1713,7 @@ void sub_8022588(struct BerryCrushGame *r5)
 
 void sub_8022600(struct BerryCrushGame *r6)
 {
-    u8 r7, r2;
-    u8 *r4;
+    u8 r7;
 
     for (r7 = 0; r7 < r6->unk9; ++r7)
     {

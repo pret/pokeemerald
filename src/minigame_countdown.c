@@ -14,7 +14,6 @@ static void sub_802E83C(u8 taskId);
 static void sub_802E8C8(u8 taskId);
 static void sub_802EA50(u8 taskId);
 static void sub_802EAB0(u8 taskId);
-static void sub_802EB98(u8 taskId);
 static void Task_MinigameCountdown(u8 taskId);
 static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId);
 static bool32 IsStartGraphicAnimRunning(u8 spriteId);

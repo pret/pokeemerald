@@ -493,62 +493,62 @@
 #define BG_DYNAMAX_CANNON                       76
 #define BG_AURA_SPHERE                          77
 
-// table ids for general animations
-#define B_ANIM_CASTFORM_CHANGE          0x0
-#define B_ANIM_STATS_CHANGE             0x1
-#define B_ANIM_SUBSTITUTE_FADE          0x2
-#define B_ANIM_SUBSTITUTE_APPEAR        0x3
-#define B_ANIM_POKEBLOCK_THROW          0x4
-#define B_ANIM_ITEM_KNOCKOFF            0x5
-#define B_ANIM_TURN_TRAP                0x6
-#define B_ANIM_HELD_ITEM_EFFECT         0x7
-#define B_ANIM_SMOKEBALL_ESCAPE         0x8
-#define B_ANIM_HANGED_ON                0x9
-#define B_ANIM_RAIN_CONTINUES           0xA
-#define B_ANIM_SUN_CONTINUES            0xB
-#define B_ANIM_SANDSTORM_CONTINUES      0xC
-#define B_ANIM_HAIL_CONTINUES           0xD
-#define B_ANIM_LEECH_SEED_DRAIN         0xE
-#define B_ANIM_MON_HIT                  0xF
-#define B_ANIM_ITEM_STEAL               0x10
-#define B_ANIM_SNATCH_MOVE              0x11
-#define B_ANIM_FUTURE_SIGHT_HIT         0x12
-#define B_ANIM_DOOM_DESIRE_HIT          0x13
-#define B_ANIM_FOCUS_PUNCH_SETUP        0x14
-#define B_ANIM_INGRAIN_HEAL             0x15
-#define B_ANIM_WISH_HEAL                0x16
-#define B_ANIM_MEGA_EVOLUTION           0x17
-#define B_ANIM_TERRAIN_MISTY            0x18
-#define B_ANIM_TERRAIN_GRASSY           0x19
-#define B_ANIM_TERRAIN_ELECTRIC         0x1A
-#define B_ANIM_TERRAIN_PSYCHIC          0x1B
-#define B_ANIM_ILLUSION_OFF             0x1C
-#define B_ANIM_FORM_CHANGE              0x1D
-#define B_ANIM_SLIDE_OFFSCREEN          0x1E // for Emergency Exit
-#define B_ANIM_RESTORE_BG               0x1F // for Terrain Endings
-#define B_ANIM_TOTEM_FLARE              0x20 // Totem boosts aura flare
+// table ids for general animations (gBattleAnims_General)
+#define B_ANIM_CASTFORM_CHANGE          0
+#define B_ANIM_STATS_CHANGE             1
+#define B_ANIM_SUBSTITUTE_FADE          2
+#define B_ANIM_SUBSTITUTE_APPEAR        3
+#define B_ANIM_POKEBLOCK_THROW          4
+#define B_ANIM_ITEM_KNOCKOFF            5
+#define B_ANIM_TURN_TRAP                6
+#define B_ANIM_HELD_ITEM_EFFECT         7
+#define B_ANIM_SMOKEBALL_ESCAPE         8
+#define B_ANIM_HANGED_ON                9
+#define B_ANIM_RAIN_CONTINUES           10
+#define B_ANIM_SUN_CONTINUES            11
+#define B_ANIM_SANDSTORM_CONTINUES      12
+#define B_ANIM_HAIL_CONTINUES           13
+#define B_ANIM_LEECH_SEED_DRAIN         14
+#define B_ANIM_MON_HIT                  15
+#define B_ANIM_ITEM_STEAL               16
+#define B_ANIM_SNATCH_MOVE              17
+#define B_ANIM_FUTURE_SIGHT_HIT         18
+#define B_ANIM_DOOM_DESIRE_HIT          19
+#define B_ANIM_FOCUS_PUNCH_SETUP        20
+#define B_ANIM_INGRAIN_HEAL             21
+#define B_ANIM_WISH_HEAL                22
+#define B_ANIM_MEGA_EVOLUTION           23
+#define B_ANIM_TERRAIN_MISTY            24
+#define B_ANIM_TERRAIN_GRASSY           25
+#define B_ANIM_TERRAIN_ELECTRIC         26
+#define B_ANIM_TERRAIN_PSYCHIC          27
+#define B_ANIM_ILLUSION_OFF             28
+#define B_ANIM_FORM_CHANGE              29
+#define B_ANIM_SLIDE_OFFSCREEN          30 // for Emergency Exit
+#define B_ANIM_RESTORE_BG               31 // for Terrain Endings
+#define B_ANIM_TOTEM_FLARE              32 // Totem boosts aura flare
 
-// special animations table
-#define B_ANIM_LVL_UP                   0x0
-#define B_ANIM_SWITCH_OUT_PLAYER_MON    0x1
-#define B_ANIM_SWITCH_OUT_OPPONENT_MON  0x2
-#define B_ANIM_BALL_THROW               0x3
-#define B_ANIM_BALL_THROW_WITH_TRAINER  0x4
-#define B_ANIM_SUBSTITUTE_TO_MON        0x5
-#define B_ANIM_MON_TO_SUBSTITUTE        0x6
-#define B_ANIM_CRITICAL_CAPTURE_THROW   0x7
+// special animations table (gBattleAnims_Special)
+#define B_ANIM_LVL_UP                   0
+#define B_ANIM_SWITCH_OUT_PLAYER_MON    1
+#define B_ANIM_SWITCH_OUT_OPPONENT_MON  2
+#define B_ANIM_BALL_THROW               3
+#define B_ANIM_BALL_THROW_WITH_TRAINER  4
+#define B_ANIM_SUBSTITUTE_TO_MON        5
+#define B_ANIM_MON_TO_SUBSTITUTE        6
+#define B_ANIM_CRITICAL_CAPTURE_THROW   7
 
-// status animation table
-#define B_ANIM_STATUS_PSN               0x0
-#define B_ANIM_STATUS_CONFUSION         0x1
-#define B_ANIM_STATUS_BRN               0x2
-#define B_ANIM_STATUS_INFATUATION       0x3
-#define B_ANIM_STATUS_SLP               0x4
-#define B_ANIM_STATUS_PRZ               0x5
-#define B_ANIM_STATUS_FRZ               0x6
-#define B_ANIM_STATUS_CURSED            0x7
-#define B_ANIM_STATUS_NIGHTMARE         0x8
-#define B_ANIM_STATUS_WRAPPED           0x9 // does not actually exist
+// status animation table (gBattleAnims_StatusConditions)
+#define B_ANIM_STATUS_PSN               0
+#define B_ANIM_STATUS_CONFUSION         1
+#define B_ANIM_STATUS_BRN               2
+#define B_ANIM_STATUS_INFATUATION       3
+#define B_ANIM_STATUS_SLP               4
+#define B_ANIM_STATUS_PRZ               5
+#define B_ANIM_STATUS_FRZ               6
+#define B_ANIM_STATUS_CURSED            7
+#define B_ANIM_STATUS_NIGHTMARE         8
+#define B_ANIM_STATUS_WRAPPED           9 // does not actually exist
 
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
