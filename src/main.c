@@ -1,5 +1,4 @@
 #include "global.h"
-#include "defines.h"
 #include "crt0.h"
 #include "malloc.h"
 #include "link.h"
@@ -24,6 +23,7 @@
 #include "intro.h"
 #include "main.h"
 #include "trainer_hill.h"
+#include "constants/rgb.h"
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
