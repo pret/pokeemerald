@@ -4410,6 +4410,15 @@ static void Cmd_playanimation(void)
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
+    
+    #if B_TERRAIN_BG_CHANGE == FALSE
+    if (gBattlescriptCurrInstr[2] == B_ANIM_RESTORE_BG)
+    {
+        // workaround for .if not working
+        gBattlescriptCurrInstr += 7;
+        return;
+    }
+    #endif
 
     if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
         || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
@@ -7570,17 +7579,40 @@ static void Cmd_various(void)
         BtlController_EmitSetMonData(0, REQUEST_PP_DATA_BATTLE, 0, 5, data);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
-    case VARIOUS_TRY_ACTIVATE_MOXIE:
-        if (GetBattlerAbility(gActiveBattler) == ABILITY_MOXIE
-            && HasAttackerFaintedTarget()
-            && !NoAliveMonsForEitherParty()
-            && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
+    case VARIOUS_TRY_ACTIVATE_MOXIE:    // and chilling neigh + as one ice rider
+        if ((GetBattlerAbility(gActiveBattler) == ABILITY_MOXIE
+         || GetBattlerAbility(gActiveBattler) == ABILITY_CHILLING_NEIGH
+         || GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_ICE_RIDER)
+          && HasAttackerFaintedTarget()
+          && !NoAliveMonsForEitherParty()
+          && gBattleMons[gBattlerAttacker].statStages[STAT_ATK] != 12)
         {
             gBattleMons[gBattlerAttacker].statStages[STAT_ATK]++;
             SET_STATCHANGER(STAT_ATK, 1, FALSE);
             PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
             BattleScriptPush(gBattlescriptCurrInstr + 3);
-            gBattlescriptCurrInstr = BattleScript_AttackerAbilityStatRaise;
+            gLastUsedAbility = GetBattlerAbility(gActiveBattler);
+            if (GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_ICE_RIDER)
+                gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_CHILLING_NEIGH;
+            gBattlescriptCurrInstr = BattleScript_RaiseStatOnFaintingTarget;
+            return;
+        }
+        break;
+    case VARIOUS_TRY_ACTIVATE_GRIM_NEIGH:   // and as one shadow rider
+        if ((GetBattlerAbility(gActiveBattler) == ABILITY_GRIM_NEIGH
+         || GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_SHADOW_RIDER)
+          && HasAttackerFaintedTarget()
+          && !NoAliveMonsForEitherParty()
+          && gBattleMons[gBattlerAttacker].statStages[STAT_SPATK] != 12)
+        {
+            gBattleMons[gBattlerAttacker].statStages[STAT_SPATK]++;
+            SET_STATCHANGER(STAT_SPATK, 1, FALSE);
+            PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPATK);
+            BattleScriptPush(gBattlescriptCurrInstr + 3);
+            gLastUsedAbility = GetBattlerAbility(gActiveBattler);
+            if (GetBattlerAbility(gActiveBattler) == ABILITY_AS_ONE_SHADOW_RIDER)
+                gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_GRIM_NEIGH;
+            gBattlescriptCurrInstr = BattleScript_RaiseStatOnFaintingTarget;
             return;
         }
         break;
@@ -9138,17 +9170,30 @@ static void Cmd_statbuffchange(void)
         gBattlescriptCurrInstr = jumpPtr;
 }
 
+bool32 TryResetBattlerStatChanges(u8 battler)
+{
+    u32 j;
+    bool32 ret = FALSE;
+    
+    gDisableStructs[battler].stockpileDef = 0;
+    gDisableStructs[battler].stockpileSpDef = 0;
+    for (j = 0; j < NUM_BATTLE_STATS; j++)
+    {
+        if (gBattleMons[battler].statStages[j] != DEFAULT_STAT_STAGE)
+            ret = TRUE; // returns TRUE if any stat was reset
+        
+        gBattleMons[battler].statStages[j] = DEFAULT_STAT_STAGE;
+    }
+    
+    return ret;
+}
+
 static void Cmd_normalisebuffs(void) // haze
 {
     s32 i, j;
 
     for (i = 0; i < gBattlersCount; i++)
-    {
-        gDisableStructs[i].stockpileDef = 0;
-        gDisableStructs[i].stockpileSpDef = 0;
-        for (j = 0; j < NUM_BATTLE_STATS; j++)
-            gBattleMons[i].statStages[j] = DEFAULT_STAT_STAGE;
-    }
+        TryResetBattlerStatChanges(i);
 
     gBattlescriptCurrInstr++;
 }
@@ -10259,7 +10304,7 @@ static void Cmd_settailwind(void)
     {
         gSideStatuses[side] |= SIDE_STATUS_TAILWIND;
         gSideTimers[side].tailwindBattlerId = gBattlerAttacker;
-        gSideTimers[side].tailwindTimer = 3;
+        gSideTimers[side].tailwindTimer = (B_TAILWIND_TIMER >= GEN_5) ? 4 : 3;
         gBattlescriptCurrInstr += 5;
     }
     else

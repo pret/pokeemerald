@@ -53,6 +53,9 @@ match the ROM; this is also why sSoundMovesTable's declaration is in the middle 
 functions instead of at the top of the file with the other declarations.
 */
 
+static bool32 TryRemoveScreens(u8 battler);
+static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
+
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
@@ -2006,16 +2009,18 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_ELECTRIC_TERRAIN:
-            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && --gFieldTimers.electricTerrainTimer == 0)
+            if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN
+              && ((!gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.electricTerrainTimer == 0))
             {
-                gFieldStatuses &= ~(STATUS_FIELD_ELECTRIC_TERRAIN);
+                gFieldStatuses &= ~(STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
                 BattleScriptExecute(BattleScript_ElectricTerrainEnds);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_MISTY_TERRAIN:
-            if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && --gFieldTimers.mistyTerrainTimer == 0)
+            if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN
+              && ((!gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.mistyTerrainTimer == 0))
             {
                 gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN);
                 BattleScriptExecute(BattleScript_MistyTerrainEnds);
@@ -2026,15 +2031,18 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_GRASSY_TERRAIN:
             if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
             {
-                if (gFieldTimers.grassyTerrainTimer == 0 || --gFieldTimers.grassyTerrainTimer == 0)
+                if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT)
+                  && (gFieldTimers.grassyTerrainTimer == 0 || --gFieldTimers.grassyTerrainTimer == 0))
                     gFieldStatuses &= ~(STATUS_FIELD_GRASSY_TERRAIN);
+
                 BattleScriptExecute(BattleScript_GrassyTerrainHeals);
                 effect++;
             }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_PSYCHIC_TERRAIN:
-            if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN && --gFieldTimers.psychicTerrainTimer == 0)
+            if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN
+              && ((!gFieldStatuses & STATUS_FIELD_TERRAIN_PERMANENT) && --gFieldTimers.psychicTerrainTimer == 0))
             {
                 gFieldStatuses &= ~(STATUS_FIELD_PSYCHIC_TERRAIN);
                 BattleScriptExecute(BattleScript_PsychicTerrainEnds);
@@ -3670,6 +3678,41 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
         gBattleScripting.battler = battler;
         switch (gLastUsedAbility)
         {
+        case ABILITYEFFECT_SWITCH_IN_TERRAIN:
+            if (VarGet(VAR_TERRAIN) & STATUS_TERRAIN_ANY)
+            {
+                u16 terrainFlags = VarGet(VAR_TERRAIN) & STATUS_TERRAIN_ANY;    // only works for status flag (1 << 15)
+                gFieldStatuses = terrainFlags | STATUS_FIELD_TERRAIN_PERMANENT; // terrain is permanent
+                switch (VarGet(VAR_TERRAIN) & STATUS_TERRAIN_ANY)
+                {
+                case STATUS_FIELD_ELECTRIC_TERRAIN:
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                    break;
+                case STATUS_FIELD_MISTY_TERRAIN:
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                    break;
+                case STATUS_FIELD_GRASSY_TERRAIN:
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    break;
+                case STATUS_FIELD_PSYCHIC_TERRAIN:
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                    break;
+                }
+                
+                BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
+                effect++;
+            }
+            #if B_THUNDERSTORM_TERRAIN == TRUE
+            else if (GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM && !(gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN))
+            {
+                // overworld weather started rain, so just do electric terrain anim
+                gFieldStatuses = (STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_TERRAIN_PERMANENT);
+                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
+                effect++;
+            }
+            #endif
+            break;
         case ABILITYEFFECT_SWITCH_IN_WEATHER:
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
             {
@@ -3762,6 +3805,28 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_UNNERVE;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
+                effect++;
+            }
+            break;
+        case ABILITY_AS_ONE_ICE_RIDER:
+        case ABILITY_AS_ONE_SHADOW_RIDER:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_ASONE;
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                BattleScriptPushCursorAndCallback(BattleScript_ActivateAsOne);
+                effect++;
+            }
+            break;
+        case ABILITY_CURIOUS_MEDICINE:
+            if (!gSpecialStatuses[battler].switchInAbilityDone && IsDoubleBattle()
+              && IsBattlerAlive(BATTLE_PARTNER(battler)) && TryResetBattlerStatChanges(BATTLE_PARTNER(battler)))
+            {
+                u32 i;
+                gEffectBattler = BATTLE_PARTNER(battler);
+                gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_CURIOUS_MEDICINE;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -3898,7 +3963,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_SCREEN_CLEANER:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && TryRemoveScreens(battler))
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_SWITCHIN_SCREENCLEANER;
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
@@ -5145,7 +5210,7 @@ static bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
     if (gBattleMons[battlerId].hp == 0)
         return FALSE;
     // Unnerve prevents consumption of opponents' berries.
-    if (isBerry && IsAbilityOnOpposingSide(battlerId, ABILITY_UNNERVE))
+    if (isBerry && IsUnnerveAbilityOnOpposingSide(battlerId))
         return FALSE;
     if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / hpFraction)
         return TRUE;
@@ -5259,7 +5324,7 @@ static u8 ItemHealHp(u32 battlerId, u32 itemId, bool32 end2, bool32 percentHeal)
 
 static bool32 UnnerveOn(u32 battlerId, u32 itemId)
 {
-    if (ItemId_GetPocket(itemId) == POCKET_BERRIES && IsAbilityOnOpposingSide(battlerId, ABILITY_UNNERVE))
+    if (ItemId_GetPocket(itemId) == POCKET_BERRIES && IsUnnerveAbilityOnOpposingSide(battlerId))
         return TRUE;
     return FALSE;
 }
@@ -6851,6 +6916,18 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         if (gBattleMoves[move].flags & FLAG_SOUND)
             MulModifier(&modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_STEELY_SPIRIT:
+        if (moveType == TYPE_STEEL)
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case ABILITY_TRANSISTOR:
+        if (moveType == TYPE_ELECTRIC)
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case ABILITY_DRAGONS_MAW:
+        if (moveType == TYPE_DRAGON)
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
     }
 
     // field abilities
@@ -6874,6 +6951,10 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             break;
         case ABILITY_POWER_SPOT:
             MulModifier(&modifier, UQ_4_12(1.3));
+            break;
+        case ABILITY_STEELY_SPIRIT:
+            if (moveType == TYPE_STEEL)
+                MulModifier(&modifier, UQ_4_12(1.5));
             break;
         }
     }
@@ -8018,6 +8099,44 @@ u8 GetBattleMoveSplit(u32 moveId)
         return SPLIT_SPECIAL;
 }
 
+static bool32 TryRemoveScreens(u8 battler)
+{
+    bool32 removed = FALSE;
+    u8 battlerSide = GetBattlerSide(battler);
+    u8 enemySide = GetBattlerSide(BATTLE_OPPOSITE(battler));
+    
+    // try to remove from battler's side
+    if (gSideStatuses[battlerSide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL))
+    {
+        gSideStatuses[battlerSide] &= ~(SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL);
+        gSideTimers[battlerSide].reflectTimer = 0;
+        gSideTimers[battlerSide].lightscreenTimer = 0;
+        gSideTimers[battlerSide].auroraVeilTimer = 0;
+        removed = TRUE;
+    }
+    
+    // try to remove from battler opponent's side
+    if (gSideStatuses[enemySide] & (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL))
+    {
+        gSideStatuses[enemySide] &= ~(SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL);
+        gSideTimers[enemySide].reflectTimer = 0;
+        gSideTimers[enemySide].lightscreenTimer = 0;
+        gSideTimers[enemySide].auroraVeilTimer = 0;
+        removed = TRUE;
+    }
+     
+    return removed;
+}
+
+static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId)
+{
+    if (IsAbilityOnOpposingSide(battlerId, ABILITY_UNNERVE)
+      || IsAbilityOnOpposingSide(battlerId, ABILITY_AS_ONE_ICE_RIDER)
+      || IsAbilityOnOpposingSide(battlerId, ABILITY_AS_ONE_SHADOW_RIDER))
+        return TRUE;
+    return FALSE;
+}
+
 //photon geyser & light that burns the sky
 u8 GetSplitBasedOnStats(u8 battlerId)
 {
@@ -8035,3 +8154,4 @@ u8 GetSplitBasedOnStats(u8 battlerId)
     else
         return SPLIT_PHYSICAL;
 }
+

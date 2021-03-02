@@ -3490,6 +3490,12 @@ static void TryDoEventsBeforeFirstTurn(void)
         return;
     }
 
+    if (!gBattleStruct->terrainDone && AbilityBattleEffects(0, 0, 0, ABILITYEFFECT_SWITCH_IN_TERRAIN, 0) != 0)
+    {
+        gBattleStruct->terrainDone = TRUE;
+        return;
+    }
+
     // Totem boosts
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -4268,7 +4274,7 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     }
 
     // item effects
-    if (GetBattlerHoldEffect(battlerId, FALSE) == HOLD_EFFECT_MACHO_BRACE || GetBattlerHoldEffect(battlerId, FALSE) == HOLD_EFFECT_POWER_ITEM)
+    if (holdEffect == HOLD_EFFECT_MACHO_BRACE || holdEffect == HOLD_EFFECT_POWER_ITEM)
         speed /= 2;
     else if (holdEffect == HOLD_EFFECT_IRON_BALL)
         speed /= 2;
