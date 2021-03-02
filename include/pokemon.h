@@ -250,6 +250,7 @@ struct FormChange {
     u16 param1;
     u16 param2;
 };
+
 #define NUM_UNOWN_FORMS 28
 
 #define GET_UNOWN_LETTER(personality) ((   \
