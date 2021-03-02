@@ -607,7 +607,7 @@ static void CB2_EndWildBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToField);
-        gFieldCallback = sub_80AF6F0;
+        gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
     }
 }
 

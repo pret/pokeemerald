@@ -438,7 +438,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_BRONZOR] = _("Bronzor"),
     [SPECIES_BRONZONG] = _("Bronzong"),
     [SPECIES_BONSLY] = _("Bonsly"),
-    [SPECIES_MIMEJR] = _("Mime jr."),
+    [SPECIES_MIME_JR] = _("Mime Jr."),
     [SPECIES_HAPPINY] = _("Happiny"),
     [SPECIES_CHATOT] = _("Chatot"),
     [SPECIES_SPIRITOMB] = _("Spiritomb"),
@@ -473,7 +473,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_GLACEON] = _("Glaceon"),
     [SPECIES_GLISCOR] = _("Gliscor"),
     [SPECIES_MAMOSWINE] = _("Mamoswine"),
-    [SPECIES_PORYGON_Z] = _("Porygon-z"),
+    [SPECIES_PORYGON_Z] = _("Porygon-Z"),
     [SPECIES_GALLADE] = _("Gallade"),
     [SPECIES_PROBOPASS] = _("Probopass"),
     [SPECIES_DUSKNOIR] = _("Dusknoir"),
@@ -1188,7 +1188,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_HOOPA_UNBOUND] = _("Hoopa"),
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] = _("Oricorio"),
-    [SPECIES_ORICORIO_PA_U] = _("Oricorio"),
+    [SPECIES_ORICORIO_PAU] = _("Oricorio"),
     [SPECIES_ORICORIO_SENSU] = _("Oricorio"),
     // Rockruff
     [SPECIES_ROCKRUFF_OWN_TEMPO] = _("Rockruff"),

@@ -374,41 +374,41 @@ gBattleAnims_Moves::
 
 	.align 2
 gBattleAnims_StatusConditions::
-	.4byte Status_Poison
-	.4byte Status_Confusion
-	.4byte Status_Burn
-	.4byte Status_Infatuation
-	.4byte Status_Sleep
-	.4byte Status_Paralysis
-	.4byte Status_Freeze
-	.4byte Status_Curse
-	.4byte Status_Nightmare
+	.4byte Status_Poison                    @ B_ANIM_STATUS_PSN
+	.4byte Status_Confusion                 @ B_ANIM_STATUS_CONFUSION
+	.4byte Status_Burn                      @ B_ANIM_STATUS_BRN
+	.4byte Status_Infatuation               @ B_ANIM_STATUS_INFATUATION
+	.4byte Status_Sleep                     @ B_ANIM_STATUS_SLP
+	.4byte Status_Paralysis                 @ B_ANIM_STATUS_PRZ
+	.4byte Status_Freeze                    @ B_ANIM_STATUS_FRZ
+	.4byte Status_Curse                     @ B_ANIM_STATUS_CURSED
+	.4byte Status_Nightmare                 @ B_ANIM_STATUS_NIGHTMARE
 
 	.align 2
 gBattleAnims_General::
-	.4byte General_CastformChange
-	.4byte General_StatsChange
-	.4byte General_SubstituteFade
-	.4byte General_SubstituteAppear
-	.4byte General_PokeblockThrow
-	.4byte General_ItemKnockoff
-	.4byte General_TurnTrap
-	.4byte General_HeldItemEffect
-	.4byte General_SmokeballEscape
-	.4byte General_FocusBand
-	.4byte General_Rain
-	.4byte General_Sun
-	.4byte General_Sandstorm
-	.4byte General_Hail
-	.4byte General_LeechSeedDrain
-	.4byte General_MonHit
-	.4byte General_ItemSteal
-	.4byte General_SnatchMove
-	.4byte General_FutureSightHit
-	.4byte General_DoomDesireHit
-	.4byte General_FocusPunchSetUp
-	.4byte General_IngrainHeal
-	.4byte General_WishHeal
+	.4byte General_CastformChange           @ B_ANIM_CASTFORM_CHANGE
+	.4byte General_StatsChange              @ B_ANIM_STATS_CHANGE
+	.4byte General_SubstituteFade           @ B_ANIM_SUBSTITUTE_FADE
+	.4byte General_SubstituteAppear         @ B_ANIM_SUBSTITUTE_APPEAR
+	.4byte General_PokeblockThrow           @ B_ANIM_POKEBLOCK_THROW
+	.4byte General_ItemKnockoff             @ B_ANIM_ITEM_KNOCKOFF
+	.4byte General_TurnTrap                 @ B_ANIM_TURN_TRAP
+	.4byte General_HeldItemEffect           @ B_ANIM_HELD_ITEM_EFFECT
+	.4byte General_SmokeballEscape          @ B_ANIM_SMOKEBALL_ESCAPE
+	.4byte General_FocusBand                @ B_ANIM_FOCUS_BAND
+	.4byte General_Rain                     @ B_ANIM_RAIN_CONTINUES
+	.4byte General_Sun                      @ B_ANIM_SUN_CONTINUES
+	.4byte General_Sandstorm                @ B_ANIM_SANDSTORM_CONTINUES
+	.4byte General_Hail                     @ B_ANIM_HAIL_CONTINUES
+	.4byte General_LeechSeedDrain           @ B_ANIM_LEECH_SEED_DRAIN
+	.4byte General_MonHit                   @ B_ANIM_MON_HIT
+	.4byte General_ItemSteal                @ B_ANIM_ITEM_STEAL
+	.4byte General_SnatchMove               @ B_ANIM_SNATCH_MOVE
+	.4byte General_FutureSightHit           @ B_ANIM_FUTURE_SIGHT_HIT
+	.4byte General_DoomDesireHit            @ B_ANIM_DOOM_DESIRE_HIT
+	.4byte General_FocusPunchSetUp          @ B_ANIM_FOCUS_PUNCH_SETUP
+	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
+	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
 
 	.align 2
 gBattleAnims_Special::

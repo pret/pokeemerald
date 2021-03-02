@@ -67,10 +67,10 @@ static void LinkPartnerHandleTwoReturnValues(void);
 static void LinkPartnerHandleChosenMonReturnValue(void);
 static void LinkPartnerHandleOneReturnValue(void);
 static void LinkPartnerHandleOneReturnValue_Duplicate(void);
-static void LinkPartnerHandleCmd37(void);
-static void LinkPartnerHandleCmd38(void);
-static void LinkPartnerHandleCmd39(void);
-static void LinkPartnerHandleCmd40(void);
+static void LinkPartnerHandleClearUnkVar(void);
+static void LinkPartnerHandleSetUnkVar(void);
+static void LinkPartnerHandleClearUnkFlag(void);
+static void LinkPartnerHandleToggleUnkFlag(void);
 static void LinkPartnerHandleHitAnimation(void);
 static void LinkPartnerHandleCmd42(void);
 static void LinkPartnerHandlePlaySE(void);
@@ -101,63 +101,63 @@ static void sub_814DE9C(void);
 
 static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
-    LinkPartnerHandleGetMonData,
-    LinkPartnerHandleGetRawMonData,
-    LinkPartnerHandleSetMonData,
-    LinkPartnerHandleSetRawMonData,
-    LinkPartnerHandleLoadMonSprite,
-    LinkPartnerHandleSwitchInAnim,
-    LinkPartnerHandleReturnMonToBall,
-    LinkPartnerHandleDrawTrainerPic,
-    LinkPartnerHandleTrainerSlide,
-    LinkPartnerHandleTrainerSlideBack,
-    LinkPartnerHandleFaintAnimation,
-    LinkPartnerHandlePaletteFade,
-    LinkPartnerHandleSuccessBallThrowAnim,
-    LinkPartnerHandleBallThrowAnim,
-    LinkPartnerHandlePause,
-    LinkPartnerHandleMoveAnimation,
-    LinkPartnerHandlePrintString,
-    LinkPartnerHandlePrintSelectionString,
-    LinkPartnerHandleChooseAction,
-    LinkPartnerHandleUnknownYesNoBox,
-    LinkPartnerHandleChooseMove,
-    LinkPartnerHandleChooseItem,
-    LinkPartnerHandleChoosePokemon,
-    LinkPartnerHandleCmd23,
-    LinkPartnerHandleHealthBarUpdate,
-    LinkPartnerHandleExpUpdate,
-    LinkPartnerHandleStatusIconUpdate,
-    LinkPartnerHandleStatusAnimation,
-    LinkPartnerHandleStatusXor,
-    LinkPartnerHandleDataTransfer,
-    LinkPartnerHandleDMA3Transfer,
-    LinkPartnerHandlePlayBGM,
-    LinkPartnerHandleCmd32,
-    LinkPartnerHandleTwoReturnValues,
-    LinkPartnerHandleChosenMonReturnValue,
-    LinkPartnerHandleOneReturnValue,
-    LinkPartnerHandleOneReturnValue_Duplicate,
-    LinkPartnerHandleCmd37,
-    LinkPartnerHandleCmd38,
-    LinkPartnerHandleCmd39,
-    LinkPartnerHandleCmd40,
-    LinkPartnerHandleHitAnimation,
-    LinkPartnerHandleCmd42,
-    LinkPartnerHandlePlaySE,
-    LinkPartnerHandlePlayFanfareOrBGM,
-    LinkPartnerHandleFaintingCry,
-    LinkPartnerHandleIntroSlide,
-    LinkPartnerHandleIntroTrainerBallThrow,
-    LinkPartnerHandleDrawPartyStatusSummary,
-    LinkPartnerHandleHidePartyStatusSummary,
-    LinkPartnerHandleEndBounceEffect,
-    LinkPartnerHandleSpriteInvisibility,
-    LinkPartnerHandleBattleAnimation,
-    LinkPartnerHandleLinkStandbyMsg,
-    LinkPartnerHandleResetActionMoveSelection,
-    LinkPartnerHandleCmd55,
-    LinkPartnerCmdEnd
+    [CONTROLLER_GETMONDATA]               = LinkPartnerHandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = LinkPartnerHandleGetRawMonData,
+    [CONTROLLER_SETMONDATA]               = LinkPartnerHandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = LinkPartnerHandleSetRawMonData,
+    [CONTROLLER_LOADMONSPRITE]            = LinkPartnerHandleLoadMonSprite,
+    [CONTROLLER_SWITCHINANIM]             = LinkPartnerHandleSwitchInAnim,
+    [CONTROLLER_RETURNMONTOBALL]          = LinkPartnerHandleReturnMonToBall,
+    [CONTROLLER_DRAWTRAINERPIC]           = LinkPartnerHandleDrawTrainerPic,
+    [CONTROLLER_TRAINERSLIDE]             = LinkPartnerHandleTrainerSlide,
+    [CONTROLLER_TRAINERSLIDEBACK]         = LinkPartnerHandleTrainerSlideBack,
+    [CONTROLLER_FAINTANIMATION]           = LinkPartnerHandleFaintAnimation,
+    [CONTROLLER_PALETTEFADE]              = LinkPartnerHandlePaletteFade,
+    [CONTROLLER_SUCCESSBALLTHROWANIM]     = LinkPartnerHandleSuccessBallThrowAnim,
+    [CONTROLLER_BALLTHROWANIM]            = LinkPartnerHandleBallThrowAnim,
+    [CONTROLLER_PAUSE]                    = LinkPartnerHandlePause,
+    [CONTROLLER_MOVEANIMATION]            = LinkPartnerHandleMoveAnimation,
+    [CONTROLLER_PRINTSTRING]              = LinkPartnerHandlePrintString,
+    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = LinkPartnerHandlePrintSelectionString,
+    [CONTROLLER_CHOOSEACTION]             = LinkPartnerHandleChooseAction,
+    [CONTROLLER_UNKNOWNYESNOBOX]          = LinkPartnerHandleUnknownYesNoBox,
+    [CONTROLLER_CHOOSEMOVE]               = LinkPartnerHandleChooseMove,
+    [CONTROLLER_OPENBAG]                  = LinkPartnerHandleChooseItem,
+    [CONTROLLER_CHOOSEPOKEMON]            = LinkPartnerHandleChoosePokemon,
+    [CONTROLLER_23]                       = LinkPartnerHandleCmd23,
+    [CONTROLLER_HEALTHBARUPDATE]          = LinkPartnerHandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = LinkPartnerHandleExpUpdate,
+    [CONTROLLER_STATUSICONUPDATE]         = LinkPartnerHandleStatusIconUpdate,
+    [CONTROLLER_STATUSANIMATION]          = LinkPartnerHandleStatusAnimation,
+    [CONTROLLER_STATUSXOR]                = LinkPartnerHandleStatusXor,
+    [CONTROLLER_DATATRANSFER]             = LinkPartnerHandleDataTransfer,
+    [CONTROLLER_DMA3TRANSFER]             = LinkPartnerHandleDMA3Transfer,
+    [CONTROLLER_PLAYBGM]                  = LinkPartnerHandlePlayBGM,
+    [CONTROLLER_32]                       = LinkPartnerHandleCmd32,
+    [CONTROLLER_TWORETURNVALUES]          = LinkPartnerHandleTwoReturnValues,
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = LinkPartnerHandleChosenMonReturnValue,
+    [CONTROLLER_ONERETURNVALUE]           = LinkPartnerHandleOneReturnValue,
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = LinkPartnerHandleOneReturnValue_Duplicate,
+    [CONTROLLER_CLEARUNKVAR]              = LinkPartnerHandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = LinkPartnerHandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = LinkPartnerHandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = LinkPartnerHandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = LinkPartnerHandleHitAnimation,
+    [CONTROLLER_42]                       = LinkPartnerHandleCmd42,
+    [CONTROLLER_PLAYSE]                   = LinkPartnerHandlePlaySE,
+    [CONTROLLER_PLAYFANFAREORBGM]         = LinkPartnerHandlePlayFanfareOrBGM,
+    [CONTROLLER_FAINTINGCRY]              = LinkPartnerHandleFaintingCry,
+    [CONTROLLER_INTROSLIDE]               = LinkPartnerHandleIntroSlide,
+    [CONTROLLER_INTROTRAINERBALLTHROW]    = LinkPartnerHandleIntroTrainerBallThrow,
+    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = LinkPartnerHandleDrawPartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = LinkPartnerHandleHidePartyStatusSummary,
+    [CONTROLLER_ENDBOUNCE]                = LinkPartnerHandleEndBounceEffect,
+    [CONTROLLER_SPRITEINVISIBILITY]       = LinkPartnerHandleSpriteInvisibility,
+    [CONTROLLER_BATTLEANIMATION]          = LinkPartnerHandleBattleAnimation,
+    [CONTROLLER_LINKSTANDBYMSG]           = LinkPartnerHandleLinkStandbyMsg,
+    [CONTROLLER_RESETACTIONMOVESELECTION] = LinkPartnerHandleResetActionMoveSelection,
+    [CONTROLLER_55]                       = LinkPartnerHandleCmd55,
+    [CONTROLLER_TERMINATOR_NOP]           = LinkPartnerCmdEnd
 };
 
 static void SpriteCB_Null2(void)
@@ -1427,27 +1427,27 @@ static void LinkPartnerHandleOneReturnValue_Duplicate(void)
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleCmd37(void)
+static void LinkPartnerHandleClearUnkVar(void)
 {
-    gUnknown_02022D0C.field_0 = 0;
+    gUnusedControllerStruct.unk = 0;
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleCmd38(void)
+static void LinkPartnerHandleSetUnkVar(void)
 {
-    gUnknown_02022D0C.field_0 = gBattleBufferA[gActiveBattler][1];
+    gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleCmd39(void)
+static void LinkPartnerHandleClearUnkFlag(void)
 {
-    gUnknown_02022D0C.flag_x80 = 0;
+    gUnusedControllerStruct.flag = 0;
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleCmd40(void)
+static void LinkPartnerHandleToggleUnkFlag(void)
 {
-    gUnknown_02022D0C.flag_x80 ^= 1;
+    gUnusedControllerStruct.flag ^= 1;
     LinkPartnerBufferExecCompleted();
 }
 

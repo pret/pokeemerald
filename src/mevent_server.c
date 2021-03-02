@@ -288,8 +288,8 @@ static u32 (*const func_tbl[])(struct mevent_srv_common *) = {
 static u32 mevent_srv_exec_common(struct mevent_srv_common * svr)
 {
     u32 response;
-    AGB_ASSERT(svr->mainseqno < NELEMS(func_tbl));
+    AGB_ASSERT(svr->mainseqno < ARRAY_COUNT(func_tbl));
     response = func_tbl[svr->mainseqno](svr);
-    AGB_ASSERT(svr->mainseqno < NELEMS(func_tbl));
+    AGB_ASSERT(svr->mainseqno < ARRAY_COUNT(func_tbl));
     return response;
 }

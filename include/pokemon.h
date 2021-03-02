@@ -16,6 +16,7 @@ struct PokemonSubstruct0
     u32 experience;
     u8 ppBonuses;
     u8 friendship;
+    u16 filler;
 };
 
 struct PokemonSubstruct1
@@ -243,12 +244,23 @@ struct Evolution
     u16 targetSpecies;
 };
 
+<<<<<<< HEAD
 struct FormChange {
     u16 method;
     u16 targetSpecies;
     u16 param1;
     u16 param2;
 };
+=======
+#define NUM_UNOWN_FORMS 28
+
+#define GET_UNOWN_LETTER(personality) ((   \
+      (((personality) & 0x03000000) >> 18) \
+    | (((personality) & 0x00030000) >> 12) \
+    | (((personality) & 0x00000300) >> 6)  \
+    | (((personality) & 0x00000003) >> 0)  \
+) % NUM_UNOWN_FORMS)
+>>>>>>> b2a541a33b2a5116f6780f1830f2606a5dbc065e
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];

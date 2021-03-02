@@ -2678,7 +2678,7 @@ const u16 gEggMoves[] = {
         MOVE_CURSE,
         MOVE_ENDURE),
 
-    egg_moves(MIMEJR,
+    egg_moves(MIME_JR,
         MOVE_FUTURE_SIGHT,
         MOVE_HYPNOSIS,
         MOVE_MIMIC,

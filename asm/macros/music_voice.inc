@@ -151,13 +151,13 @@
 	.byte 0xff, 0, 0xff, 0
 	.endm
 	
-	.macro cry_not sample @ not compressed
+	.macro cry_uncomp sample @ not compressed
 	.byte 0x0, 60, 0, 0
 	.4byte \sample
 	.byte 0xff, 0, 0xff, 0
 	.endm
 	
-	.macro cry2_not sample @ not compressed
+	.macro cry2_uncomp sample @ not compressed
 	.byte 0x10, 60, 0, 0
 	.4byte \sample
 	.byte 0xff, 0, 0xff, 0

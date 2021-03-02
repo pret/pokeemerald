@@ -378,7 +378,6 @@ static void VblankCB_StarterChoose(void)
 
 void CB2_ChooseStarter(void)
 {
-    u16 savedIme;
     u8 taskId;
     u8 spriteId;
 

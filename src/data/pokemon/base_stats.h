@@ -12408,7 +12408,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_MIMEJR] =
+    [SPECIES_MIME_JR] =
     {
         .baseHP        = 20,
         .baseAttack    = 25,
@@ -32414,7 +32414,7 @@ const struct BaseStats gBaseStats[] =
         .noFlip = FALSE,
     },
 
-    [SPECIES_ORICORIO_PA_U] =
+    [SPECIES_ORICORIO_PAU] =
     {
         .baseHP        = 75,
         .baseAttack    = 70,

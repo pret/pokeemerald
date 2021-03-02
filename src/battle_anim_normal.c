@@ -564,8 +564,6 @@ static void AnimTask_BlendColorCycleExcludeLoop(u8 taskId)
 // See AnimTask_BlendColorCycle. Same, but selects palette by ANIM_TAG_*
 void AnimTask_BlendColorCycleByTag(u8 taskId)
 {
-    u8 paletteIndex;
-
     gTasks[taskId].tPalTag = gBattleAnimArgs[0];
     gTasks[taskId].tDelay = gBattleAnimArgs[1];
     gTasks[taskId].tNumBlends = gBattleAnimArgs[2];

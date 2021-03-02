@@ -1897,7 +1897,6 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     void *ptr;
-    const u8 *genderTxt;
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
     u16 species;

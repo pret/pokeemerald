@@ -6,6 +6,7 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "data.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 
