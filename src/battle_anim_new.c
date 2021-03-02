@@ -7680,7 +7680,7 @@ void AnimTask_GetLycanrocForm(u8 taskId)
 {
 
     #ifdef POKEMON_EXPANSION
-    if (GetIllusionMonPtr(gBattleAnimAttacker)->species == SPECIES_LYCANROC_MIDNIGHT)
+    if (GetMonData(GetIllusionMonPtr(gBattleAnimAttacker), MON_DATA_SPECIES) == SPECIES_LYCANROC_MIDNIGHT)
         gBattleAnimArgs[0] = 1;
     else
     #endif
