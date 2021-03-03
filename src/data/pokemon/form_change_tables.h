@@ -22,26 +22,25 @@ FORM_WITHDRAW:
     no parameters
 */
 
-#define FORM_CHANGE_END 0
 #define WHEN_LEARNED    FALSE
 #define WHEN_FORGOTTEN  TRUE
 
-const struct FormChange sGiratinaFormChangeTable[] = {
+static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sShayminFormChangeTable[] = {
+static const struct FormChange sShayminFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_SHAYMIN_SKY, ITEM_GRACIDEA},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sShayminSkyFormChangeTable[] = {
+static const struct FormChange sShayminSkyFormChangeTable[] = {
     {FORM_WITHDRAW, SPECIES_SHAYMIN},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sArceusFormChangeTable[] = {
+static const struct FormChange sArceusFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_ARCEUS,          ITEM_NONE,         ABILITY_MULTITYPE},
     {FORM_ITEM_HOLD, SPECIES_ARCEUS_FIGHTING, ITEM_FIST_PLATE,   ABILITY_MULTITYPE},
     {FORM_ITEM_HOLD, SPECIES_ARCEUS_FIGHTING, ITEM_FIGHTINIUM_Z, ABILITY_MULTITYPE},
@@ -80,47 +79,47 @@ const struct FormChange sArceusFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sTornadusFormChangeTable[] = {
+static const struct FormChange sTornadusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sTornadusTherianFormChangeTable[] = {
+static const struct FormChange sTornadusTherianFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sThundurusFormChangeTable[] = {
+static const struct FormChange sThundurusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_THUNDURUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sThundurusTherianFormChangeTable[] = {
+static const struct FormChange sThundurusTherianFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_THUNDURUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sLandorusFormChangeTable[] = {
+static const struct FormChange sLandorusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_LANDORUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sLandorusTherianFormChangeTable[] = {
+static const struct FormChange sLandorusTherianFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_LANDORUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sKeldeoFormChangeTable[] = {
+static const struct FormChange sKeldeoFormChangeTable[] = {
     {FORM_MOVE, SPECIES_KELDEO_RESOLUTE, MOVE_SECRET_SWORD, WHEN_LEARNED},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sKeldeoResoluteFormChangeTable[] = {
+static const struct FormChange sKeldeoResoluteFormChangeTable[] = {
     {FORM_MOVE, SPECIES_KELDEO, MOVE_SECRET_SWORD, WHEN_FORGOTTEN},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sGenesectFormChangeTable[] = {
+static const struct FormChange sGenesectFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GENESECT,             ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GENESECT_DOUSE_DRIVE, ITEM_DOUSE_DRIVE},
     {FORM_ITEM_HOLD, SPECIES_GENESECT_SHOCK_DRIVE, ITEM_SHOCK_DRIVE},
@@ -128,17 +127,17 @@ const struct FormChange sGenesectFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GENESECT_CHILL_DRIVE, ITEM_CHILL_DRIVE},
 };
 
-const struct FormChange sHoopaFormChangeTable[] = {
+static const struct FormChange sHoopaFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sHoopaUnboundFormChangeTable[] = {
+static const struct FormChange sHoopaUnboundFormChangeTable[] = {
     {FORM_WITHDRAW, SPECIES_HOOPA},
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sOricorioFormChangeTable[] = {
+static const struct FormChange sOricorioFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_ORICORIO,         ITEM_RED_NECTAR},
     {FORM_ITEM_USE, SPECIES_ORICORIO_POM_POM, ITEM_YELLOW_NECTAR},
     {FORM_ITEM_USE, SPECIES_ORICORIO_PAU,     ITEM_PINK_NECTAR},
@@ -146,7 +145,7 @@ const struct FormChange sOricorioFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 
-const struct FormChange sSilvallyFormChangeTable[] = {
+static const struct FormChange sSilvallyFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_SILVALLY,          ITEM_NONE,            ABILITY_RKS_SYSTEM},
     {FORM_ITEM_HOLD, SPECIES_SILVALLY_BUG,      ITEM_BUG_MEMORY,      ABILITY_RKS_SYSTEM},
     {FORM_ITEM_HOLD, SPECIES_SILVALLY_DARK,     ITEM_DARK_MEMORY,     ABILITY_RKS_SYSTEM},
@@ -167,6 +166,5 @@ const struct FormChange sSilvallyFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_SILVALLY_WATER,    ITEM_WATER_MEMORY,    ABILITY_RKS_SYSTEM},
 };
 
-#undef FORM_CHANGE_END
 #undef WHEN_LEARNED
 #undef WHEN_FORGOTTEN

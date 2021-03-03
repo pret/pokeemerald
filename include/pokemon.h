@@ -440,5 +440,5 @@ void sub_806F47C(u8 id);
 u8 *sub_806F4F8(u8 id, u8 arg1);
 u16 GetFormSpeciesId(u16 speciesId, u8 formId);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
-
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
 #endif // GUARD_POKEMON_H

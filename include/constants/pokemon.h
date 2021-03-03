@@ -311,6 +311,7 @@
 #define EVOS_PER_MON 10
 
 // Form change types
+#define FORM_CHANGE_END       0
 #define FORM_ITEM_HOLD        1
 #define FORM_ITEM_USE         2
 #define FORM_MOVE             3

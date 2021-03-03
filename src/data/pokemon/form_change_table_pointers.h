@@ -1,4 +1,4 @@
-const struct FormChange *gFormChangeTablePointers[POKEMON_SLOTS_NUMBER] = 
+const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] = 
 {
     [SPECIES_GIRATINA] = sGiratinaFormChangeTable,
     [SPECIES_SHAYMIN] = sShayminFormChangeTable,
