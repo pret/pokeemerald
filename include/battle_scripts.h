@@ -365,5 +365,4 @@ extern const u8 BattleScript_MicleBerryActivateEnd2[];
 extern const u8 BattleScript_MicleBerryActivateRet[];
 extern const u8 BattleScript_JabocaRowapBerryActivates[];
 
-
 #endif // GUARD_BATTLE_SCRIPTS_H
