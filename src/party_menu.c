@@ -409,6 +409,8 @@ static bool8 SetUpFieldMove_Dive(void);
 #include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"
 
+static const u8 ChangedForm[] = _("{STR_VAR_1} changed Forme!{PAUSE_UNTIL_PRESS}");
+
 // code
 static void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
 {
@@ -5162,6 +5164,38 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
         FreePartyPointers();
+    }
+}
+
+void ItemUseCB_FormChange(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_USE, gSpecialVar_ItemId);
+    if (targetSpecies != SPECIES_NONE)
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_USE_ITEM);
+        PlayCry2(targetSpecies, 0, 0x7D, 0xA);
+        SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+        FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId]);
+        CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 0);
+        CalculateMonStats(mon);
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, ChangedForm);
+        DisplayPartyMenuMessage(gStringVar4, FALSE);
+        if (gTasks[taskId].data[0] == TRUE)
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
     }
 }
 
