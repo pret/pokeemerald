@@ -6146,9 +6146,9 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 break;
             case HOLD_EFFECT_JABOCA_BERRY:  // consume and damage attacker if used physical move
                 if (IsBattlerAlive(battlerId)
-                  && TARGET_TURN_DAMAGED
-                  && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
-                  && IS_MOVE_PHYSICAL(gCurrentMove))
+                 && TARGET_TURN_DAMAGED
+                 && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
+                 && IS_MOVE_PHYSICAL(gCurrentMove))
                 {
                     gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
                     if (gBattleMoveDamage == 0)
