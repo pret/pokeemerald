@@ -1338,7 +1338,7 @@ static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 fldEffObj, u8 paletteNum)
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
-        UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[templateIdx], sprite);
+        UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[fldEffObj], sprite);
         sprite->coordOffsetEnabled ++;
         sprite->data[1] = fldEff;
         sprite->data[2] = gFieldEffectArguments[0];

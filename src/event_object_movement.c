@@ -498,7 +498,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-    {gObjectEventPalette0, OBJ_EVENT_PAL_TAG_DYNAMIC},
+    {gObjectEventPal_Npc1, OBJ_EVENT_PAL_TAG_DYNAMIC},
     {gObjectEventPaletteLight, OBJ_EVENT_PAL_TAG_LIGHT},
     {NULL,                  0x0000},
 };
@@ -1631,7 +1631,7 @@ static void FollowerSetGraphics(struct ObjectEvent *objectEvent, u16 species, u8
   objectEvent->extra.mon.species = species;
   objectEvent->extra.mon.form = form;
   objectEvent->extra.mon.shiny = shiny;
-  if (graphicsInfo->paletteTag1 == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
+  if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
@@ -2061,7 +2061,7 @@ u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate * template, struct 
 // Set graphics *by info*
 static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct ObjectEventGraphicsInfo *graphicsInfo) {
   struct Sprite *sprite = &gSprites[objectEvent->spriteId];
-  u8 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag1);
+  u8 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag);
   if (i != 0xFF)
     UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
   sprite->oam.shape = graphicsInfo->oam->shape;
@@ -3417,7 +3417,7 @@ void MovementType_BerryTreeGrowth(struct Sprite *sprite)
     objectEvent = &gObjectEvents[sprite->sObjEventId];
     if (!(sprite->sBerryTreeFlags & BERRY_FLAG_SET_GFX))
     {
-        SetBerryTreeGraphics(objectEvent, sprite);
+        get_berry_tree_graphics(objectEvent, sprite);
         sprite->sBerryTreeFlags |= BERRY_FLAG_SET_GFX;
     }
     UpdateObjectEventCurrentMovement(objectEvent, sprite, ObjectEventCB2_BerryTree);
@@ -3456,7 +3456,7 @@ bool8 MovementType_BerryTreeGrowth_Normal(struct ObjectEvent *objectEvent, struc
         sprite->sFuncId = BERRYTREEFUNC_SPARKLE_START;
         return TRUE;
     }
-    SetBerryTreeGraphics(objectEvent, sprite);
+    get_berry_tree_graphics(objectEvent, sprite);
     ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
     sprite->sFuncId = BERRYTREEFUNC_MOVE;
     return TRUE;
@@ -3496,7 +3496,7 @@ bool8 MovementType_BerryTreeGrowth_Sparkle(struct ObjectEvent *objectEvent, stru
     sprite->animPaused = TRUE;
     if (sprite->sTimer > 64)
     {
-        SetBerryTreeGraphics(objectEvent, sprite);
+        get_berry_tree_graphics(objectEvent, sprite);
         sprite->sFuncId = BERRYTREEFUNC_SPARKLE_END;
         sprite->sTimer = 0;
         return TRUE;
