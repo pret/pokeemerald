@@ -1,7 +1,4 @@
 /*
-All form changes are checked for the base species!
-Putting a form change on a form has no effect
-
 FORM_ITEM_USE:
     Changes any pokemon with a matching base species (even if
     it is a form) to the target species. 
