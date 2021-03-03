@@ -965,10 +965,7 @@ static void TryToggleHealboxVisibility(u8 priority, u8 healthboxLeftSpriteId, u8
         case B_ANIM_WISH_HEAL:
         //new
         case B_ANIM_MEGA_EVOLUTION:
-        case B_ANIM_TERRAIN_MISTY:
-        case B_ANIM_TERRAIN_GRASSY:
-        case B_ANIM_TERRAIN_ELECTRIC:
-        case B_ANIM_TERRAIN_PSYCHIC:
+        case B_ANIM_RESTORE_BG:
             break;
         }
         return; //all other special anims dont hide
@@ -2059,7 +2056,6 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     void *ptr;
-    const u8 *genderTxt;
     u32 windowId, spriteTileNum, species;
     u8 *windowTileData;
     u8 gender;
@@ -3018,6 +3014,9 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if (!B_ABILITY_POP_UP)
         return;
+    
+    if (gBattleScripting.abilityPopupOverwrite != 0)
+        ability = gBattleScripting.abilityPopupOverwrite;
 
     if (!gBattleStruct->activeAbilityPopUps)
     {

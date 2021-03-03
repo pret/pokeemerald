@@ -48,6 +48,7 @@ extern const u8 BattleScript_SandStormHailEnds[];
 extern const u8 BattleScript_SunlightContinues[];
 extern const u8 BattleScript_SunlightFaded[];
 extern const u8 BattleScript_OverworldWeatherStarts[];
+extern const u8 BattleScript_OverworldTerrain[];
 extern const u8 BattleScript_SideStatusWoreOff[];
 extern const u8 BattleScript_SafeguardProtected[];
 extern const u8 BattleScript_SafeguardEnds[];
@@ -359,10 +360,13 @@ extern const u8 BattleScript_CottonDownActivates[];
 extern const u8 BattleScript_BallFetch[];
 extern const u8 BattleScript_SandSpitActivates[];
 extern const u8 BattleScript_PerishBodyActivates[];
+extern const u8 BattleScript_ActivateAsOne[];
+extern const u8 BattleScript_RaiseStatOnFaintingTarget[];
 extern const u8 BattleScript_QuickClawActivation[];
 extern const u8 BattleScript_CustapBerryActivation[];
 extern const u8 BattleScript_MicleBerryActivateEnd2[];
 extern const u8 BattleScript_MicleBerryActivateRet[];
 extern const u8 BattleScript_JabocaRowapBerryActivates[];
+
 
 #endif // GUARD_BATTLE_SCRIPTS_H
