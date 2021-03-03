@@ -4631,11 +4631,11 @@ static void CheckQuickClaw_CustapBerryActivation(void)
             gActiveBattler = gBattlerAttacker = gBattleStruct->quickClawBattlerId;
             gBattleStruct->quickClawBattlerId++;
             if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
-              && gChosenMoveByBattler[gActiveBattler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
-              && gProtectStructs[gActiveBattler].custap
-              && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
-              && !(gDisableStructs[gBattlerAttacker].truantCounter)
-              && !(gProtectStructs[gActiveBattler].noValidMoves))
+             && gChosenMoveByBattler[gActiveBattler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
+             && gProtectStructs[gActiveBattler].custap
+             && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
+             && !(gDisableStructs[gBattlerAttacker].truantCounter)
+             && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
                 gProtectStructs[gActiveBattler].custap = FALSE;
                 gLastUsedItem = gBattleMons[gActiveBattler].item;
