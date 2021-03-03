@@ -5172,6 +5172,7 @@ enum
 bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId)
 {
     bool32 isBerry = (ItemId_GetPocket(itemId) == POCKET_BERRIES);
+
     if (gBattleMons[battlerId].hp == 0)
         return FALSE;
     // Unnerve prevents consumption of opponents' berries.
@@ -8298,4 +8299,3 @@ static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId)
         return TRUE;
     return FALSE;
 }
-
