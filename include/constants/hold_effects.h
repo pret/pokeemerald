@@ -111,7 +111,6 @@
 #define HOLD_EFFECT_KEE_BERRY      105
 #define HOLD_EFFECT_MARANGA_BERRY  106
 
-
 // Gen5 hold effects
 #define HOLD_EFFECT_FLOAT_STONE    115
 #define HOLD_EFFECT_EVIOLITE       116
