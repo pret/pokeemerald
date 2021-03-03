@@ -5267,10 +5267,10 @@ static u8 TrySetMicleBerry(u32 battlerId, u32 itemId, bool32 end2)
 static u8 DamagedStatBoostBerryEffect(u8 battlerId, u8 statId, u8 split)
 {
     if (IsBattlerAlive(battlerId)
-      && TARGET_TURN_DAMAGED
-      && gBattleMons[battlerId].statStages[statId] < MAX_STAT_STAGE
-      && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
-      && GetBattleMoveSplit(gCurrentMove) == split)
+     && TARGET_TURN_DAMAGED
+     && gBattleMons[battlerId].statStages[statId] < MAX_STAT_STAGE
+     && !DoesSubstituteBlockMove(gBattlerAttacker, battlerId, gCurrentMove)
+     && GetBattleMoveSplit(gCurrentMove) == split)
     {
         
         PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
