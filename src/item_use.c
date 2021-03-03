@@ -1127,7 +1127,7 @@ void ItemUseOutOfBattle_FormChange(u8 taskId)
 
 void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_FormChange;
+    gItemUseCB = ItemUseCB_FormChange_ConsumedOnUse;
     gTasks[taskId].data[0] = TRUE;
     SetUpItemUseCallback(taskId);
 }

@@ -5167,7 +5167,7 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
     }
 }
 
-void ItemUseCB_FormChange(u8 taskId, TaskFunc task)
+bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -5184,10 +5184,9 @@ void ItemUseCB_FormChange(u8 taskId, TaskFunc task)
         GetMonNickname(mon, gStringVar1);
         StringExpandPlaceholders(gStringVar4, ChangedForm);
         DisplayPartyMenuMessage(gStringVar4, FALSE);
-        if (gTasks[taskId].data[0] == TRUE)
-            RemoveBagItem(gSpecialVar_ItemId, 1);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
+        return TRUE;
     }
     else
     {
@@ -5196,6 +5195,20 @@ void ItemUseCB_FormChange(u8 taskId, TaskFunc task)
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
+        return FALSE;
+    }
+}
+
+void ItemUseCB_FormChange(u8 taskId, TaskFunc task)
+{
+    TryItemUseFormChange(taskId, task);
+}
+
+void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task)
+{
+    if (TryItemUseFormChange(taskId, task))
+    {
+        RemoveBagItem(gSpecialVar_ItemId, 1);
     }
 }
 
