@@ -44,7 +44,7 @@ static void PrintContestPaintingCaption(u8, u8);
 static void VBlankCB_ContestPainting(void);
 static void _InitContestMonPixels(u8 *spriteGfx, u16 *palette, u16 (*destPixels)[64][64]);
 
-extern const u8 gUnknown_0827EA0C[];
+extern const u8 gContestPaintingCaption[];
 extern const u8 gContestCoolness[];
 extern const u8 gContestBeauty[];
 extern const u8 gContestCuteness[];
@@ -297,7 +297,7 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 arg1)
         StringCopy(gStringVar2, gContestPaintingWinner->trainerName);
         sub_81DB5AC(gStringVar2);
         StringCopy(gStringVar3, gContestPaintingWinner->monName);
-        StringExpandPlaceholders(gStringVar4, gUnknown_0827EA0C);
+        StringExpandPlaceholders(gStringVar4, gContestPaintingCaption);
     }
     else
     {
