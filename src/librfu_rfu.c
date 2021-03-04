@@ -1411,12 +1411,8 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         sendSlotFlag = gRfuLinkStatus->sendSlotNIFlag;
     if (sendSlotFlag & bmSendSlot)
         return ERR_SLOT_BUSY;
-    for (bm_slot_id = 0; bm_slot_id < RFU_CHILD_MAX; ++bm_slot_id)
-    {
-        if ((bmSendSlot >> bm_slot_id) & 1)
-            break;
-    }
-    
+    for (bm_slot_id = 0; bm_slot_id < RFU_CHILD_MAX && !((bmSendSlot >> bm_slot_id) & 1); ++bm_slot_id)
+        ;
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
         llFrameSize_p = &gRfuLinkStatus->remainLLFrameSizeParent;
     else if (gRfuLinkStatus->parentChild == MODE_CHILD)
@@ -1437,7 +1433,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         slotStatus_NI->send.bmSlotOrg = bmSendSlot;
         slotStatus_NI->send.bmSlot = bmSendSlot;
         slotStatus_NI->send.payloadSize = subFrameSize - frameSize;
-        if (sending)
+        if (sending != 0)
             slotStatus_NI->send.dataType = 0;
         else
             slotStatus_NI->send.dataType = 1;
