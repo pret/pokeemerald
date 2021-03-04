@@ -81,7 +81,7 @@ EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
 // Never occurs in vanilla, but can occur with improperly created items
 static const MainCallback sItemUseCallbacks[] =
 {
-    [ITEM_USE_PARTY_MENU - 1]  = CB2_ShowPartyMenuForItemUse,
+    [ITEM_USE_OPEN_PARTY_MENU - 1]  = CB2_ShowPartyMenuForItemUse,
     [ITEM_USE_FIELD - 1]       = CB2_ReturnToField,
     [ITEM_USE_PBLOCK_CASE - 1] = NULL,
 };
@@ -1064,24 +1064,24 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
     case ITEM_EFFECT_SPDEF_EV:
     case ITEM_EFFECT_SPEED_EV:
     case ITEM_EFFECT_DEF_EV:
-        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_OPEN_PARTY_MENU;
         ItemUseOutOfBattle_Medicine(taskId);
         break;
     case ITEM_EFFECT_SACRED_ASH:
-        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_OPEN_PARTY_MENU;
         ItemUseOutOfBattle_SacredAsh(taskId);
         break;
     case ITEM_EFFECT_RAISE_LEVEL:
-        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_OPEN_PARTY_MENU;
         ItemUseOutOfBattle_RareCandy(taskId);
         break;
     case ITEM_EFFECT_PP_UP:
     case ITEM_EFFECT_PP_MAX:
-        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_OPEN_PARTY_MENU;
         ItemUseOutOfBattle_PPUp(taskId);
         break;
     case ITEM_EFFECT_HEAL_PP:
-        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_OPEN_PARTY_MENU;
         ItemUseOutOfBattle_PPRecovery(taskId);
         break;
     default:

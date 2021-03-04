@@ -520,11 +520,11 @@
 #define ACRO_BIKE 1
 
 // Item type IDs (used to determine the exit callback)
-#define ITEM_USE_MAIL        0
-#define ITEM_USE_PARTY_MENU  1
-#define ITEM_USE_FIELD       2
-#define ITEM_USE_PBLOCK_CASE 3
-#define ITEM_USE_BAG_MENU    4 // No exit callback, stays in bag menu
+#define ITEM_USE_MAIL             0
+#define ITEM_USE_OPEN_PARTY_MENU  1
+#define ITEM_USE_FIELD            2
+#define ITEM_USE_PBLOCK_CASE      3
+#define ITEM_USE_BAG_MENU         4 // No exit callback, stays in bag menu
 
 // Item battle usage IDs (only checked to see if nonzero)
 #define ITEM_B_USE_MEDICINE 1
