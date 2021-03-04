@@ -143,7 +143,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RestoreParty:: @ 8249121
 	special LoadPlayerParty
 	frontier_setpartyorder FRONTIER_MULTI_PARTY_SIZE
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
-	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_249514
+	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReconnectLink
 	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
@@ -383,9 +383,8 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetireChallengeLink:: @ 82
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost
 	end
 
-@ Some link function. Sets battle type flags at least
-BattleFrontier_BattleTowerMultiBattleRoom_EventScript_249514:: @ 8249514
-	special sub_813B534
+BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReconnectLink:: @ 8249514
+	special BattleTowerReconnectLink
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_PlayerEnterRoom: @ 8249518

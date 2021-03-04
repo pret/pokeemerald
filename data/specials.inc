@@ -514,7 +514,7 @@ gSpecials:: @ 81DBA64
 	def_special SetMewAboveGrass
 	def_special ShouldDistributeEonTicket
 	def_special LinkRetireStatusWithBattleTowerPartner
-	def_special sub_813B534
+	def_special BattleTowerReconnectLink
 	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene @ Listed twice
 	def_special LoopWingFlapSE
