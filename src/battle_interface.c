@@ -984,7 +984,7 @@ static void SpriteCB_HealthBar(struct Sprite *sprite)
         sprite->pos1.x = gSprites[healthboxSpriteId].pos1.x + 16;
         sprite->pos1.y = gSprites[healthboxSpriteId].pos1.y;
         break;
-    case 2: //Opponent health bar
+    case 2: // Opponent health bar
     default:
         sprite->pos1.x = gSprites[healthboxSpriteId].pos1.x + 8;
         sprite->pos1.y = gSprites[healthboxSpriteId].pos1.y;

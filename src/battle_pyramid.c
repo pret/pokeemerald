@@ -40,8 +40,6 @@
 extern const struct MapLayout *const gMapLayouts[];
 extern const u16 gUnknown_08D856C8[][16];
 
-
-
 struct PyramidWildMon
 {
     u16 species;
@@ -784,7 +782,7 @@ static const u8 sHintTextTypes[] =
     HINT_EXIT_SHORT_REMAINING_ITEMS,
 };
 
-static void (* const sBattlePyramidFunctions[])(void) =
+static void (*const sBattlePyramidFunctions[])(void) =
 {
     [BATTLE_PYRAMID_FUNC_INIT]              = InitPyramidChallenge,
     [BATTLE_PYRAMID_FUNC_GET_DATA]          = GetBattlePyramidData,
@@ -1277,21 +1275,22 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
                         else
                             textIndex = 1;
                     }
-                    else {
-                    if (x < 0)
-                    {
-                        if (x + y > 0)
-                            textIndex = 3;
-                        else
-                            textIndex = 1;
-                    }
                     else
                     {
-                        if (x + y >= 0)
-                            textIndex = 2;
+                        if (x < 0)
+                        {
+                            if (x + y > 0)
+                                textIndex = 3;
+                            else
+                                textIndex = 1;
+                        }
                         else
-                            textIndex = 0;
-                    }
+                        {
+                            if (x + y >= 0)
+                                textIndex = 2;
+                            else
+                                textIndex = 0;
+                        }
                     }
                     *hintType = HINT_EXIT_DIRECTION;
                 }
@@ -1591,7 +1590,7 @@ void LoadBattlePyramidObjectEventTemplates(void)
 
         if (i == OBJ_TRAINERS)
             objectPositionsType = sPyramidFloorTemplates[id].trainerPositions;
-        else  // OBJ_ITEMS
+        else // OBJ_ITEMS
             objectPositionsType = sPyramidFloorTemplates[id].itemPositions;
 
         switch (objectPositionsType)
@@ -1640,7 +1639,7 @@ static void GetPyramidEntranceAndExitSquareIds(u8 *entranceSquareId, u8 *exitSqu
 
     if (*entranceSquareId == *exitSquareId)
     {
-        *entranceSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[3] + 1 ) % 16;
+        *entranceSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[3] + 1) % 16;
         *exitSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[0] + 15) % 16;
     }
 }
