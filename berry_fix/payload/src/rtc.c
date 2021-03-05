@@ -268,7 +268,7 @@ u32 hex_to_bcd(u8 a0)
     if (a0 > 99)
         return 0xFF;
     r4 = Div(a0, 10) << 4;
-    r4 |= Mod(a0, 10);
+    r4 |= DivRem(a0, 10);
     return r4;
 }
 
