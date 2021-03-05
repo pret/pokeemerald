@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # Only run this script if it's the master branch build.
-if [[ "$GITHUB_REF" != "refs/heads/master" || "$GITHUB_EVENT_NAME" != "false" ]]; then
+if [[ "$GITHUB_REF" != "refs/heads/master" || "$GITHUB_EVENT_NAME" != "push" ]]; then
   exit 0
 fi
 
