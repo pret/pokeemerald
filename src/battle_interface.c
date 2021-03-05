@@ -25,6 +25,8 @@
 #include "data.h"
 #include "pokemon_summary_screen.h"
 
+#define HP_WORK_INIT_VALUE	(-32768)
+
 struct TestingBar
 {
     s32 maxValue;
@@ -173,7 +175,7 @@ static void RemoveWindowOnHealthbox(u32 windowId);
 static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId);
 
-static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth);
+static void TextIntoHealthboxObject(void *dest, const u8 *windowTileData, s32 windowWidth);
 static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
 static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
 static void FillHealthboxObject(void *dest, u32 arg1, u32 arg2);
@@ -982,7 +984,7 @@ static void SpriteCB_HealthBar(struct Sprite *sprite)
         sprite->pos1.x = gSprites[healthboxSpriteId].pos1.x + 16;
         sprite->pos1.y = gSprites[healthboxSpriteId].pos1.y;
         break;
-    case 2:
+    case 2: //Opponent health bar
     default:
         sprite->pos1.x = gSprites[healthboxSpriteId].pos1.x + 8;
         sprite->pos1.y = gSprites[healthboxSpriteId].pos1.y;
@@ -1096,42 +1098,35 @@ void InitBattlerHealthboxCoords(u8 battler)
 
 static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
 {
-    u32 windowId, spriteTileNum;
-    u8 *windowTileData;
+    u8 *pointer;
+    const u8* windowTileData;
     u8 text[16];
-    u32 xPos, var1;
-    void *objVram;
+    s32 xPos;
+    u32 windowId;
 
     text[0] = 0xF9;
     text[1] = 5;
 
-    xPos = (u32) ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
-    // Alright, that part was unmatchable. It's basically doing:
-    // xPos = 5 * (3 - (u32)(&text[2]));
-    xPos--;
-    xPos--;
-    xPos -= ((u32)(text));
-    var1 = (3 - xPos);
-    xPos = 4 * var1;
-    xPos += var1;
+    pointer = ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+
+    xPos = 5 * (3 - (pointer - (text + 2)));
 
     windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, 2, &windowId);
-    spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
+
+    pointer = (void*)OBJ_VRAM0 + gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
 
     if (GetBattlerSide(gSprites[healthboxSpriteId].hMain_Battler) == B_SIDE_PLAYER)
     {
-        objVram = (void*)(OBJ_VRAM0);
         if (!IsDoubleBattle())
-            objVram += spriteTileNum + 0x820;
+            pointer += 0x820;
         else
-            objVram += spriteTileNum + 0x420;
+            pointer += 0x420;
     }
     else
     {
-        objVram = (void*)(OBJ_VRAM0);
-        objVram += spriteTileNum + 0x400;
+        pointer += 0x400;
     }
-    TextIntoHealthboxObject(objVram, windowTileData, 3);
+    TextIntoHealthboxObject(pointer, windowTileData, 3);
     RemoveWindowOnHealthbox(windowId);
 }
 
@@ -2320,7 +2315,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     s32 ret, newValue;
     scale *= 8;
 
-    if (*currValue == -32768) // first function call
+    if (*currValue == HP_WORK_INIT_VALUE) // first function call
     {
         if (maxValue < scale)
             *currValue = Q_24_8(oldValue);
@@ -2566,7 +2561,7 @@ static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 window
     CpuCopy32(windowTileData + 256, dest, windowWidth * TILE_SIZE_4BPP);
 }
 
-static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth)
+static void TextIntoHealthboxObject(void *dest, const u8 *windowTileData, s32 windowWidth)
 {
     CpuCopy32(windowTileData + 256, dest + 256, windowWidth * TILE_SIZE_4BPP);
 // + 256 as that prevents the top 4 blank rows of sHealthboxWindowTemplate from being copied
