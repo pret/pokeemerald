@@ -3874,8 +3874,8 @@ extern const u32 gBagPalette[];
 extern const u32 gBerryCheckCircle_Gfx[];
 
 //intro graphics
-extern const u32 gIntro1SparkleGfx[];
-extern const u32 gIntro1FlygonGfx[];
+extern const u32 gIntro1Sparkle_Gfx[];
+extern const u32 gIntro1Flygon_Gfx[];
 extern const u16 gIntro3LightningPal[];
 extern const u32 gIntroCopyright_Gfx[];
 extern const u32 gIntroCopyright_Tilemap[];
@@ -3886,8 +3886,8 @@ extern const u32 gIntro2ManectricGfx[];
 extern const u16 gIntro2VolbeatPal[];
 extern const u16 gIntro2TorchicPal[];
 extern const u16 gIntro2ManectricPal[];
-extern const u32 gIntro2BubblesGfx[];
-extern const u16 gIntro2BubblesPal[];
+extern const u32 gIntro3Bubbles_Gfx[];
+extern const u16 gIntro3Bubbles_Pal[];
 extern const u32 gIntro3LightningGfx[];
 extern const u32 gIntro3GroudonGfx[];
 extern const u32 gIntro3GroudonTilemap[];
@@ -3907,11 +3907,9 @@ extern const u32 gIntro3RayquazaTilemap[];
 extern const u32 gIntro3RayquazaGfx[];
 extern const u32 gIntro3Clouds2Gfx[];
 extern const u16 gIntro1GameFreakTextFadePal[];
-
-//intro/credits graphics
-extern const u32 gIntro2BrendanNoTurnGfx[];
-extern const u32 gIntro2MayNoTurnGfx[];
-extern const u16 gIntro2BrendanNoTurnPal[];
+extern const u32 gIntro2BrendanGfx[];
+extern const u32 gIntro2MayGfx[];
+extern const u16 gIntro2PlayerPal[];
 extern const u16 gIntro2FlygonPal[];
 extern const u32 gIntro2FlygonGfx[];
 
