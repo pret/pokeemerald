@@ -396,14 +396,19 @@ static void SerialIntr(void)
 }
 
 static void IntrDummy(void)
-{}
+{
+}
 
 static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
 
+    #if defined(NONMATCHING) || MODERN
+    VBlankIntrWait(); // Please see https://github.com/pret/pokeemerald/wiki/Improving-the-WaitForVBlank-function for more details
+    #else
     while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
         ;
+    #endif
 }
 
 void SetTrainerHillVBlankCounter(u32 *counter)
