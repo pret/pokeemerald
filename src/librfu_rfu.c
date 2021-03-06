@@ -1557,7 +1557,11 @@ u16 rfu_NI_stopReceivingData(u8 slotStatusIndex)
         return ERR_SLOT_NO;
     NI_comm = &gRfuSlotStatusNI[slotStatusIndex]->recv;
     imeBak = REG_IME;
+
+    #ifndef NONMATCHING
     ++imeBak; --imeBak; // fix imeBak, NI_comm register swap
+    #endif
+
     REG_IME = 0;
     if (gRfuSlotStatusNI[slotStatusIndex]->recv.state & SLOT_BUSY_FLAG)
     {
