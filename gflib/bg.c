@@ -4,14 +4,16 @@
 #include "dma3.h"
 #include "gpu_regs.h"
 
-#define MODE_BIT 0x7
+#define MODE_MASK 0x7
 
-#define DISPCNT_ALL_BG_AND_MODE_BITS    (DISPCNT_BG_ALL_ON | MODE_BIT)
+#define DISPCNT_ALL_BG_AND_MODE_MASK_BITS (DISPCNT_BG_ALL_ON | MODE_MASK)
 
 struct BgControl
 {
-    struct BgConfig {
-        bool8 isVisible:1; // Only set to false during initialization. In vanilla, once it is true, it can never be false unless entire struct is reset
+    struct BgConfig
+    {
+        bool8 isVisible:1; // In vanilla, only false prior to its fields being called in SetBgControlAttributes.
+                           // Afterwarss, it never be false again until the struct is set back to all zeros.
         u8 dummy:1;
         u8 screenSize:2;
         u8 priority:2;
@@ -35,7 +37,7 @@ struct BgConfig2
     u32 basePalette:4;
     u32 unk_3:18;
 
-    void* tilemap;
+    void *tilemap;
     s32 bg_x;
     s32 bg_y;
 };
@@ -57,18 +59,18 @@ void ResetBgs(void)
 
 static void SetBgModeInternal(u8 bgMode)
 {
-    sGpuBgConfigs.bgVisibilityAndMode &= ~MODE_BIT;
+    sGpuBgConfigs.bgVisibilityAndMode &= ~MODE_MASK;
     sGpuBgConfigs.bgVisibilityAndMode |= bgMode;
 }
 
 u8 GetBgMode(void)
 {
-    return sGpuBgConfigs.bgVisibilityAndMode & MODE_BIT;
+    return sGpuBgConfigs.bgVisibilityAndMode & MODE_MASK;
 }
 
 void ResetBgControlStructs(void)
 {
-    struct BgConfig* bgConfigs = &sGpuBgConfigs.configs[0];
+    struct BgConfig *bgConfigs = &sGpuBgConfigs.configs[0];
     struct BgConfig zeroedConfig = sZeroedBgControlStruct;
     int i;
 
@@ -181,7 +183,7 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     {
         return -1;
     }
-    
+
     switch (mode)
     {
     default:
@@ -226,7 +228,7 @@ static void ShowBgInternal(u8 bg)
         SetGpuReg((bg << 1) + REG_OFFSET_BG0CNT, value);
 
         sGpuBgConfigs.bgVisibilityAndMode |= 1 << (bg + 8);
-        sGpuBgConfigs.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_BITS;
+        sGpuBgConfigs.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_MASK_BITS;
     }
 }
 
@@ -235,18 +237,18 @@ static void HideBgInternal(u8 bg)
     if (!IsInvalidBg(bg))
     {
         sGpuBgConfigs.bgVisibilityAndMode &= ~(1 << (bg + 8));
-        sGpuBgConfigs.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_BITS;
+        sGpuBgConfigs.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_MASK_BITS;
     }
 }
 
 static void SyncBgVisibilityAndMode(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, (GetGpuReg(REG_OFFSET_DISPCNT) & ~DISPCNT_ALL_BG_AND_MODE_BITS) | sGpuBgConfigs.bgVisibilityAndMode);
+    SetGpuReg(REG_OFFSET_DISPCNT, (GetGpuReg(REG_OFFSET_DISPCNT) & ~DISPCNT_ALL_BG_AND_MODE_MASK_BITS) | sGpuBgConfigs.bgVisibilityAndMode);
 }
 
 void SetTextModeAndHideBgs(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) & ~DISPCNT_ALL_BG_AND_MODE_BITS);
+    SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) & ~DISPCNT_ALL_BG_AND_MODE_MASK_BITS);
 }
 
 static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
@@ -254,7 +256,7 @@ static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispC
     struct BgAffineSrcData src;
     struct BgAffineDstData dest;
 
-    switch (sGpuBgConfigs.bgVisibilityAndMode & MODE_BIT)
+    switch (sGpuBgConfigs.bgVisibilityAndMode & MODE_MASK)
     {
     default:
     case 0:
@@ -431,7 +433,7 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
     if (!IsInvalidBg32(bg))
     {
         u16 paletteOffset = (sGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
-        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, 0);
+        cursor = RequestDma3Copy(src, (void *)(paletteOffset + BG_PLTT), size, 0);
 
         if (cursor == -1)
         {
@@ -741,7 +743,6 @@ s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
         {
             temp1 = sGpuBgConfigs2[2].bg_y >> 8;
             SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, temp1);
-
         }
         else
         {
@@ -860,7 +861,7 @@ void SetBgTilemapBuffer(u8 bg, const void *tilemap)
 {
     if (!IsInvalidBg32(bg) && GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
     {
-        sGpuBgConfigs2[bg].tilemap = (void*)tilemap;
+        sGpuBgConfigs2[bg].tilemap = (void *)tilemap;
     }
 }
 
@@ -915,7 +916,7 @@ void CopyBgTilemapBufferToVram(u8 bg)
     }
 }
 
-void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 width, u8 height)
+void CopyToBgTilemapBufferRect(u8 bg, const void *src, u8 destX, u8 destY, u8 width, u8 height)
 {
     u16 destX16;
     u16 destY16;
@@ -927,7 +928,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
         {
         case 0:
         {
-            const u16 * srcCopy = src;
+            const u16 *srcCopy = src;
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {
                 for (destX16 = destX; destX16 < (destX + width); destX16++)
@@ -939,7 +940,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
         }
         case 1:
         {
-            const u8 * srcCopy = src;
+            const u8 *srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {
@@ -969,8 +970,8 @@ void CopyRectToBgTilemapBufferRect(u8 bg, const void *src, u8 srcX, u8 srcY, u8 
     if (!IsInvalidBg32(bg) && !IsTileMapOutsideWram(bg))
     {
         screenSize = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
-        screenWidth = GetBgMetricTextMode(bg, 0x1) * 0x20;
-        screenHeight = GetBgMetricTextMode(bg, 0x2) * 0x20;
+        screenWidth = GetBgMetricTextMode(bg, 1) * 0x20;
+        screenHeight = GetBgMetricTextMode(bg, 2) * 0x20;
         switch (GetBgType(bg))
         {
         case 0:
@@ -1249,7 +1250,7 @@ bool32 IsInvalidBg32(u8 bg)
 
 bool32 IsTileMapOutsideWram(u8 bg)
 {
-    if (sGpuBgConfigs2[bg].tilemap > (void*)IWRAM_END)
+    if (sGpuBgConfigs2[bg].tilemap > (void *)IWRAM_END)
         return TRUE;
     else if (sGpuBgConfigs2[bg].tilemap == NULL)
         return TRUE;
