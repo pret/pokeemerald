@@ -1775,7 +1775,7 @@ bool8 ScrFunc_followerfly(struct ScriptContext *ctx) {
   return FALSE;
 }
 
-// Callback for light sprites
+// Sprite callback for light sprites
 void UpdateLightSprite(struct Sprite *sprite) {
   s16 left =   gSaveBlock1Ptr->pos.x - 2;
   s16 right =  gSaveBlock1Ptr->pos.x + 17;
@@ -1790,9 +1790,6 @@ void UpdateLightSprite(struct Sprite *sprite) {
   if (x >= left && x <= right
    && y >= top && y <= bottom)
       finished = FALSE;
-  if (x >= left && x <= right
-   && y >= top && y <= bottom)
-      finished = FALSE;
   finished = finished ? finished : gTimeOfDay != TIME_OF_DAY_NIGHT;
   if (finished) {
     sheetTileStart = sprite->sheetTileStart;
@@ -1803,7 +1800,7 @@ void UpdateLightSprite(struct Sprite *sprite) {
     return;
   }
 
-  if (gPlayerAvatar.tileTransitionState) {
+  if (gPlayerAvatar.tileTransitionState) { // As long as the second coefficient stays 12, shadows will not change
     Weather_SetBlendCoeffs(7, 12);
     sprite->invisible = FALSE;
   } else {
@@ -1843,14 +1840,17 @@ void TrySpawnLightSprites(s16 camX, s16 camY) {
   s16 right = gSaveBlock1Ptr->pos.x + 17;
   s16 top = gSaveBlock1Ptr->pos.y;
   s16 bottom = gSaveBlock1Ptr->pos.y + 16;
+  u8 i = 0;
   s16 x, y;
   u32 behavior;
   if (gTimeOfDay != TIME_OF_DAY_NIGHT)
     return;
-  for (x = left; x <= right; x++) {
-    for (y = top; y <= bottom; y++) {
+  for (i = 0; gLightMetatiles[i].x > 0; i++) {
+    x = gLightMetatiles[i].x;
+    y = gLightMetatiles[i].y;
+    if (x >= left && x <= right && y >= top && y <= bottom) {
       behavior = MapGridGetMetatileBehaviorAt(x, y);
-      if (behavior == 0x04) // TODO: Use an actual constant
+      if (behavior == 0x04) // TODO: Use an actual constant for light metatiles
         SpawnLightSprite(x, y, camX, camY, behavior);
     }
   }

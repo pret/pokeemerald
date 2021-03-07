@@ -47,6 +47,7 @@ struct LinkPlayerObjectEvent
 // Exported RAM declarations
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
+extern struct Coords16 gLightMetatiles[32];
 
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;
