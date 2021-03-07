@@ -390,14 +390,14 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     },
 };
 
-static u8 sub_81D38D4(void)
+static u8 GetNewTrainerHillTrainerID(void)
 {
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
 }
 
 static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(struct EReaderTrainerHillTrainer *arg0)
 {
-    int checksum = CalcByteArraySum((u8 *)arg0, 0x270);
+    u32 checksum = CalcByteArraySum((u8 *)arg0, sizeof(struct EReaderTrainerHillTrainer) - sizeof(arg0->checksum));
     if (checksum != arg0->checksum)
         return FALSE;
 
@@ -448,7 +448,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
 
     memset(buffer2, 0, 0x1000);
     buffer2->numTrainers = ttdata->count;
-    buffer2->unused1 = sub_81D38D4();
+    buffer2->unused1 = GetNewTrainerHillTrainerID();
     buffer2->numFloors = (ttdata->count + 1) / 2;
 
     for (i = 0; i < ttdata->count; i++)
