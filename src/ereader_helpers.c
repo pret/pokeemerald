@@ -26,10 +26,10 @@ struct Unknown030012C8
 
 static void EReader_KeyRead(void);
 static u16 sub_81D3EE8(u8);
-static void sub_81D413C(void);
-static void sub_81D414C(void);
+static void EnableSio(void);
+static void EReader_StopTimer(void);
 static void sub_81D3F1C(u32, u32*, u32*);
-static void sub_81D3F68(void);
+static void EReader_SetTimer(void);
 
 static struct Unknown030012C8 gUnknown_030012C8;
 static u16 gUnknown_030012E0;
@@ -646,7 +646,7 @@ int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
         break;
     case 1:
         if (sub_81D3EE8(arg0))
-            sub_81D413C();
+            EnableSio();
 
         if (gShouldAdvanceLinkState == 2)
         {
@@ -679,12 +679,12 @@ int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
             {
                 if (gUnknown_030012C8.unk0[0] && gUnknown_030012E6 > 2)
                 {
-                    sub_81D413C();
+                    EnableSio();
                     gUnknown_030012C8.unk0[2] = 2;
                 }
                 else
                 {
-                    sub_81D413C();
+                    EnableSio();
                     gUnknown_030012C8.unk0[2] = 2;
                 }
             }
@@ -696,7 +696,7 @@ int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
         break;
     case 5:
         if (gUnknown_030012C8.unk0[0] == 1 && gUnknown_030012E6 > 2)
-            sub_81D413C();
+            EnableSio();
 
         if (++gUnknown_030012E6 > 60)
         {
@@ -739,7 +739,7 @@ static void sub_81D3F1C(u32 arg0, u32 *arg1, u32 *arg2)
         gUnknown_030012C8.unk8 = arg1;
         REG_SIODATA32 = arg0;
         gUnknown_030012C8.unk10 = arg0 / 4 + 1;
-        sub_81D3F68();
+        EReader_SetTimer();
     }
     else
     {
@@ -748,7 +748,7 @@ static void sub_81D3F1C(u32 arg0, u32 *arg1, u32 *arg2)
     }
 }
 
-static void sub_81D3F68(void)
+static void EReader_SetTimer(void)
 {
     REG_TM3CNT_L = 0xFDA7;
     REG_TM3CNT_H = TIMER_INTR_ENABLE;
@@ -759,8 +759,8 @@ static void sub_81D3F68(void)
 
 void sub_81D3F9C(void)
 {
-    sub_81D414C();
-    sub_81D413C();
+    EReader_StopTimer();
+    EnableSio();
 }
 
 void sub_81D3FAC(void)
@@ -826,7 +826,7 @@ void sub_81D3FAC(void)
             if (gUnknown_030012C8.unk0[0])
                 REG_TM3CNT_H |= TIMER_ENABLE;
             else
-                sub_81D413C();
+                EnableSio();
         }
         else
         {
@@ -851,12 +851,12 @@ void sub_81D3FAC(void)
     }
 }
 
-static void sub_81D413C(void)
+static void EnableSio(void)
 {
     REG_SIOCNT |= SIO_ENABLE;
 }
 
-static void sub_81D414C(void)
+static void EReader_StopTimer(void)
 {
     REG_TM3CNT_H &= ~TIMER_ENABLE;
     REG_TM3CNT_L = 0xFDA7;
