@@ -24,7 +24,7 @@ struct Unknown030012C8
     int unk14;
 };
 
-static void sub_81D4170(void);
+static void EReader_KeyRead(void);
 static u16 sub_81D3EE8(u8);
 static void sub_81D413C(void);
 static void sub_81D414C(void);
@@ -395,7 +395,7 @@ static u8 GetNewTrainerHillTrainerID(void)
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
 }
 
-static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(struct EReaderTrainerHillTrainer *arg0)
+static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(const struct EReaderTrainerHillTrainer *arg0)
 {
     u32 checksum = CalcByteArraySum((u8 *)arg0, sizeof(struct EReaderTrainerHillTrainer) - sizeof(arg0->checksum));
     if (checksum != arg0->checksum)
@@ -408,8 +408,8 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 {
     u32 i;
     u32 checksum;
-    int var0 = buffer->count;
-    if (var0 < 1 || var0 > 8)
+    u32 var0 = buffer->count;
+    if (var0 == 0 || var0 > 8)
         return FALSE;
 
     for (i = 0; i < var0; i++)
@@ -428,8 +428,8 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
 {
     u32 checksum;
-    int var0 = buffer->count;
-    if (var0 < 1 || var0 > 8)
+    u32 var0 = buffer->count;
+    if (var0 == 0 || var0 > 8)
         return FALSE;
 
     checksum = CalcByteArraySum((u8 *)buffer->unk_8, sizeof(struct EReaderTrainerHillSet) - offsetof(struct EReaderTrainerHillSet, unk_8));
@@ -439,7 +439,7 @@ static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct TrHillTag *buffer2)
+static bool32 TryWriteTrainerHill_r(const struct EReaderTrainerHillSet *ttdata, struct TrHillTag *buffer2)
 {
     int i;
 
@@ -523,7 +523,7 @@ int EReader_Send(int arg0, u32 *arg1)
     EReaderHelper_SaveRegsState();
     while (1)
     {
-        sub_81D4170();
+        EReader_KeyRead();
         if (gUnknown_030012E2 & 2)
             gShouldAdvanceLinkState = 2;
 
@@ -560,14 +560,14 @@ int EReader_Send(int arg0, u32 *arg1)
 int EReader_Recv(u32 *arg0)
 {
     int result;
-    u16 var0;
+
     int var1;
 
     EReaderHelper_SaveRegsState();
     while (1)
     {
-        sub_81D4170();
-        if (gUnknown_030012E2 & 2)
+        EReader_KeyRead();
+        if (gUnknown_030012E2 & B_BUTTON)
             gShouldAdvanceLinkState = 2;
 
         var1 = EReaderHandleTransfer(0, 0, NULL, arg0);
@@ -584,14 +584,13 @@ int EReader_Recv(u32 *arg0)
             break;
         }
 
-        var0 = gUnknown_030012E4 & 0x4;
-        if (var0)
+        if (gUnknown_030012E4 & 0x4)
         {
             result = 2;
             break;
         }
 
-        gShouldAdvanceLinkState = var0;
+        gShouldAdvanceLinkState = 0;
         VBlankIntrWait();
     }
 
@@ -600,7 +599,7 @@ int EReader_Recv(u32 *arg0)
     return result;
 }
 
-static void sub_81D3C7C(void)
+static void EReader_Stop(void)
 {
     REG_IME = 0;
     REG_IE &= ~(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
@@ -708,7 +707,7 @@ int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
     case 6:
         if (gUnknown_030012C8.unk0[2])
         {
-            sub_81D3C7C();
+            EReader_Stop();
             gUnknown_030012C8.unk0[2] = 0;
         }
         break;
@@ -863,9 +862,9 @@ static void sub_81D414C(void)
     REG_TM3CNT_L = 0xFDA7;
 }
 
-static void sub_81D4170(void)
+static void EReader_KeyRead(void)
 {
-    int keysMask = REG_KEYINPUT ^ KEYS_MASK;
+    u16 keysMask = REG_KEYINPUT ^ KEYS_MASK;
     gUnknown_030012E2 = keysMask & ~gUnknown_030012E0;
     gUnknown_030012E0 = keysMask;
 }
