@@ -517,8 +517,6 @@ bool32 ReadTrainerHillAndValidate(void)
 int EReader_Send(int arg0, u32 *arg1)
 {
     int result;
-    u16 var0;
-    int var1;
 
     EReaderHelper_SaveRegsState();
     while (1)
@@ -527,9 +525,9 @@ int EReader_Send(int arg0, u32 *arg1)
         if (gUnknown_030012E2 & 2)
             gShouldAdvanceLinkState = 2;
 
-        var1 = EReaderHandleTransfer(1, arg0, arg1, NULL);
-        gUnknown_030012E4 = var1;
-        if ((gUnknown_030012E4 & 0x13) == 0x10)
+        gUnknown_030012E4 = EReaderHandleTransfer(1, arg0, arg1, NULL);
+
+        if ((gUnknown_030012E4 & 0x3) == 0 && (gUnknown_030012E4 & 0x10))
         {
             result = 0;
             break;
@@ -541,14 +539,13 @@ int EReader_Send(int arg0, u32 *arg1)
             break;
         }
 
-        var0 = gUnknown_030012E4 & 0x4;
-        if (var0)
+        if (gUnknown_030012E4 & 0x4)
         {
             result = 2;
             break;
         }
 
-        gShouldAdvanceLinkState = var0;
+        gShouldAdvanceLinkState = 0;
         VBlankIntrWait();
     }
 
@@ -561,8 +558,6 @@ int EReader_Recv(u32 *arg0)
 {
     int result;
 
-    int var1;
-
     EReaderHelper_SaveRegsState();
     while (1)
     {
@@ -570,8 +565,7 @@ int EReader_Recv(u32 *arg0)
         if (gUnknown_030012E2 & B_BUTTON)
             gShouldAdvanceLinkState = 2;
 
-        var1 = EReaderHandleTransfer(0, 0, NULL, arg0);
-        gUnknown_030012E4 = var1;
+        gUnknown_030012E4 = EReaderHandleTransfer(0, 0, NULL, arg0);
         if ((gUnknown_030012E4 & 0x13) == 0x10)
         {
             result = 0;
@@ -635,7 +629,7 @@ static void sub_81D3D34(void)
     gUnknown_030012E8 = 0;
 }
 
-int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
+u16 EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
 {
     switch (gUnknown_030012C8.unk0[1])
     {
