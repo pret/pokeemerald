@@ -177,36 +177,36 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     u16 offset;
     s8 cursor;
 
-    if (!IsInvalidBg(bg) && sGpuBgConfigs.configs[bg].isVisible)
+    if (IsInvalidBg(bg) || !sGpuBgConfigs.configs[bg].isVisible)
     {
-        switch (mode)
-        {
-        case 0x1:
-            offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
-            break;
-        case 0x2:
-            offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
-            break;
-        default:
-            cursor = -1;
-            goto end;
-        }
-
-        offset = destOffset + offset;
-
-        cursor = RequestDma3Copy(src, (void*)(offset + BG_VRAM), size, 0);
+        return -1;
+    }
+    
+    switch (mode)
+    {
+    default:
+        cursor = -1;
+        break;
+    case 1:
+        offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE + destOffset;
+        cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
 
         if (cursor == -1)
         {
             return -1;
         }
-    }
-    else
-    {
-       return -1;
+        break;
+    case 2:
+        offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE + destOffset;
+        cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
+
+        if (cursor == -1)
+        {
+            return -1;
+        }
+        break;
     }
 
-end:
     return cursor;
 }
 
@@ -589,7 +589,7 @@ s32 ChangeBgX(u8 bg, s32 value, u8 op)
     case 2:
         if (mode == 0)
         {
-            temp1 = sGpuBgConfigs2[2].bg_x >> 0x8;
+            temp1 = sGpuBgConfigs2[2].bg_x >> 8;
             SetGpuReg(REG_OFFSET_BG2HOFS, temp1);
         }
         else
@@ -729,23 +729,23 @@ s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
     switch (bg)
     {
     case 0:
-        temp1 = sGpuBgConfigs2[0].bg_y >> 0x8;
+        temp1 = sGpuBgConfigs2[0].bg_y >> 8;
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, temp1);
         break;
     case 1:
-        temp1 = sGpuBgConfigs2[1].bg_y >> 0x8;
+        temp1 = sGpuBgConfigs2[1].bg_y >> 8;
         SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, temp1);
         break;
     case 2:
         if (mode == 0)
         {
-            temp1 = sGpuBgConfigs2[2].bg_y >> 0x8;
+            temp1 = sGpuBgConfigs2[2].bg_y >> 8;
             SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, temp1);
 
         }
         else
         {
-            temp1 = sGpuBgConfigs2[2].bg_y >> 0x10;
+            temp1 = sGpuBgConfigs2[2].bg_y >> 16;
             temp2 = sGpuBgConfigs2[2].bg_y & 0xFFFF;
             SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, temp1);
             SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, temp2);
@@ -754,12 +754,12 @@ s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
     case 3:
         if (mode == 0)
         {
-            temp1 = sGpuBgConfigs2[3].bg_y >> 0x8;
+            temp1 = sGpuBgConfigs2[3].bg_y >> 8;
             SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, temp1);
         }
         else if (mode == 2)
         {
-            temp1 = sGpuBgConfigs2[3].bg_y >> 0x10;
+            temp1 = sGpuBgConfigs2[3].bg_y >> 16;
             temp2 = sGpuBgConfigs2[3].bg_y & 0xFFFF;
             SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, temp1);
             SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, temp2);
