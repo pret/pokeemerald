@@ -6657,6 +6657,7 @@ static void sub_80CE8E4(void)
         sBoxCursorPosition = gLastViewedMonIndex;
 }
 
+// 排列玩家精灵槽
 s16 CompactPartySlots(void)
 {
     s16 retVal = -1;

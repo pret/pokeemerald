@@ -190,7 +190,7 @@ static void StorePokemonInEmptyDaycareSlot(struct Pokemon *mon, struct DayCare *
     s8 slotId = Daycare_FindEmptySpot(daycare);
     StorePokemonInDaycare(mon, &daycare->mons[slotId]);
 }
-
+//将选中的精灵放置日托
 void StoreSelectedPokemonInDaycare(void)
 {
     u8 monId = GetCursorSelectionMonId();
@@ -213,7 +213,7 @@ static void ShiftDaycareSlots(struct DayCare *daycare)
         ClearDaycareMonMail(&daycare->mons[1].mail);
     }
 }
-
+//应用所有经验值
 static void ApplyDaycareExperience(struct Pokemon *mon)
 {
     s32 i;
@@ -230,7 +230,7 @@ static void ApplyDaycareExperience(struct Pokemon *mon)
             while ((learnedMove = MonTryLearningNewMove(mon, firstMove)) != 0)
             {
                 firstMove = FALSE;
-                if (learnedMove == MON_HAS_MAX_MOVES)
+                if (learnedMove == MON_HAS_MAX_MOVES)//技能满就删除第一个技能
                     DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
             }
         }
@@ -243,7 +243,7 @@ static void ApplyDaycareExperience(struct Pokemon *mon)
     // Re-calculate the mons stats at its new level.
     CalculateMonStats(mon);
 }
-
+//从日托取出
 static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
 {
     u16 species;
@@ -254,6 +254,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     species = GetBoxMonData(&daycareMon->mon, MON_DATA_SPECIES);
     BoxMonToMon(&daycareMon->mon, &pokemon);
 
+    //如果为满级则增加daycareMon->steps点经验值
     if (GetMonData(&pokemon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
         experience = GetMonData(&pokemon, MON_DATA_EXP) + daycareMon->steps;
@@ -274,7 +275,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     CalculatePlayerPartyCount();
     return species;
 }
-
+//取出并把第二个槽的精灵移动至第一个槽
 static u16 TakeSelectedPokemonMonFromDaycareShiftSlots(struct DayCare *daycare, u8 slotId)
 {
     u16 species = TakeSelectedPokemonFromDaycare(&daycare->mons[slotId]);
@@ -880,7 +881,7 @@ void GiveEggFromDaycare(void)
 {
     _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
 }
-
+//尝试生蛋和孵蛋
 static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
 {
     u32 i, validEggs = 0;
@@ -932,7 +933,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
 
     return FALSE;
 }
-
+//应该孵化蛋
 bool8 ShouldEggHatch(void)
 {
     return TryProduceOrHatchEgg(&gSaveBlock1Ptr->daycare);
@@ -1084,6 +1085,7 @@ static u8 GetDaycareCompatibilityScoreFromSave(void)
     return GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare);
 }
 
+//根据相性设置字符串
 void SetDaycareCompatibilityString(void)
 {
     u8 whichString;
@@ -1273,6 +1275,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     }
 }
 
+//显示日托等级菜单
 void ShowDaycareLevelMenu(void)
 {
     struct ListMenuTemplate menuTemplate;
@@ -1297,6 +1300,7 @@ void ShowDaycareLevelMenu(void)
 #undef tMenuListTaskId
 #undef tWindowId
 
+//选择交给日托的精灵
 void ChooseSendDaycareMon(void)
 {
     ChooseMonForDaycare();

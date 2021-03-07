@@ -1772,7 +1772,7 @@ static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBa
 
     return TRUE;
 }
-
+// /至少有5个徽章
 static bool32 HasAtLeastFiveBadges(void)
 {
     s32 i, count;
@@ -1790,7 +1790,7 @@ static bool32 HasAtLeastFiveBadges(void)
 }
 
 #define STEP_COUNTER_MAX 255
-
+// 每次计步器+1 不超过255 需要至少五枚徽章
 void IncrementRematchStepCounter(void)
 {
     if (HasAtLeastFiveBadges())

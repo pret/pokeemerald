@@ -4396,6 +4396,7 @@ u8 SendMonToPC(struct Pokemon* mon)
     return MON_CANT_GIVE;
 }
 
+//计算玩家携带精灵数量
 u8 CalculatePlayerPartyCount(void)
 {
     gPlayerPartyCount = 0;
@@ -5831,7 +5832,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
                 mod = (150 * mod) / 100;
             friendship += mod;
-            if (mod > 0)
+            if (mod > 0)//亲密度增加的情况下幸运球相遇地再额外增加一点亲密度
             {
                 if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
                     friendship++;
@@ -6086,7 +6087,7 @@ void PartySpreadPokerus(struct Pokemon *party)
         }
     }
 }
-
+//升级程序 等级达到最大返回false
 bool8 TryIncrementMonLevel(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);

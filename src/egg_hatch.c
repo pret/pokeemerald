@@ -456,11 +456,11 @@ static void VBlankCB_EggHatch(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
-
+// 孵化蛋
 void EggHatch(void)
 {
     ScriptContext2_Enable();
-    CreateTask(Task_EggHatch, 10);
+    CreateTask(Task_EggHatch, 10);// 创建任务
     FadeScreen(FADE_TO_BLACK, 0);
 }
 
@@ -469,12 +469,12 @@ static void Task_EggHatch(u8 taskID)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_EggHatch_0);
+        SetMainCallback2(CB2_EggHatch_0);//设置callback2;
         gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskID);
     }
 }
-
+// 孵化蛋主程序
 static void CB2_EggHatch_0(void)
 {
     switch (gMain.state)

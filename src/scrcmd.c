@@ -1949,7 +1949,7 @@ bool8 ScrCmd_choosecontestmon(struct ScriptContext *ctx)
     return TRUE;
 }
 
-
+//华丽大赛胜利后的绘画
 bool8 ScrCmd_startcontest(struct ScriptContext *ctx)
 {
     StartContest();

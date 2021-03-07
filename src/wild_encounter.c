@@ -334,6 +334,7 @@ static u8 PickWildMonNature(void)
     return Random() % NUM_NATURES;
 }
 
+// 创建野生宝可梦
 static void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
@@ -427,7 +428,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
     return wildMonInfo->wildPokemon[wildMonIndex].species;
 }
-
+//设置大规模爆发遭遇？
 static bool8 SetUpMassOutbreakEncounter(u8 flags)
 {
     u16 i;
@@ -509,7 +510,7 @@ static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 
     return FlagGet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
 }
-
+// 标准野生遭遇
 bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavior)
 {
     u16 headerId;
@@ -553,6 +554,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
     }
     else
     {
+      // 地面
         if (MetatileBehavior_IsLandWildEncounter(currMetaTileBehavior) == TRUE)
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
@@ -589,6 +591,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 return FALSE;
             }
         }
+        // 水面https://blog.csdn.net
         else if (MetatileBehavior_IsWaterWildEncounter(currMetaTileBehavior) == TRUE
                  || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(currMetaTileBehavior) == TRUE))
         {
@@ -737,7 +740,7 @@ bool8 DoesCurrentMapHaveFishingMons(void)
     else
         return FALSE;
 }
-
+// 钓鱼遭遇
 void FishingWildEncounter(u8 rod)
 {
     u16 species;

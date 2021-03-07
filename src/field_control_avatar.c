@@ -87,6 +87,7 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->dpadDirection = 0;
 }
 
+// 获取玩家输入
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 {
     u8 tileTransitionState = gPlayerAvatar.tileTransitionState;
@@ -480,7 +481,7 @@ static bool32 TrySetupDiveEmergeScript(void)
     }
     return FALSE;
 }
-
+// 尝试开始基于步骤的脚本
 static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileBehavior, u16 direction)
 {
     if (TryStartCoordEventScript(position) == TRUE)
@@ -534,6 +535,7 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
     return FALSE;
 }
 
+// 尝试启动步骤计数脚本
 static bool8 TryStartStepCountScript(u16 metatileBehavior)
 {
     if (InUnionRoom() == TRUE)
@@ -666,6 +668,7 @@ void RestartWildEncounterImmunitySteps(void)
     sWildEncounterImmunitySteps = 0;
 }
 
+// 检查标准的野生遭遇
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
     if (sWildEncounterImmunitySteps < 4)

@@ -9741,6 +9741,7 @@ static void Cmd_removelightscreenreflect(void) // brick break
     gBattlescriptCurrInstr++;
 }
 
+// 投球
 static void Cmd_handleballthrow(void)
 {
     u8 ballMultiplier = 0;
@@ -9766,7 +9767,7 @@ static void Cmd_handleballthrow(void)
     else
     {
         u32 odds;
-        u8 catchRate;
+        u8 catchRate;// 逃跑度
 
         if (gLastUsedItem == ITEM_SAFARI_BALL)
             catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;

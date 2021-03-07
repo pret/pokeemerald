@@ -1,3 +1,4 @@
+//道具列表
 const struct Item gItems[] =
 {
     [ITEM_NONE] =
