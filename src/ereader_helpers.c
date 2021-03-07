@@ -17,15 +17,19 @@
 
 struct Unknown030012C8
 {
-    u8 unk0[8];
+    bool8 isParent;
+    u8 state;
+    u8 isSio;
+    u8 downloadSuccessful;
+    u8 error;
     u32 *unk8;
-    int unkC;
-    int unk10;
-    int unk14;
+    s32 unkC;
+    s32 unk10;
+    u32 unk14;
 };
 
 static void EReader_KeyRead(void);
-static u16 sub_81D3EE8(u8);
+static bool16 isParentLink(u8);
 static void EnableSio(void);
 static void EReader_StopTimer(void);
 static void sub_81D3F1C(u32, u32*, u32*);
@@ -514,7 +518,7 @@ bool32 ReadTrainerHillAndValidate(void)
     return result;
 }
 
-int EReader_Send(int arg0, u32 *arg1)
+int Unused_EReader_Send(u32 arg0, u32 *arg1)
 {
     int result;
 
@@ -522,7 +526,7 @@ int EReader_Send(int arg0, u32 *arg1)
     while (1)
     {
         EReader_KeyRead();
-        if (gUnknown_030012E2 & 2)
+        if (gUnknown_030012E2 & B_BUTTON)
             gShouldAdvanceLinkState = 2;
 
         gUnknown_030012E4 = EReaderHandleTransfer(1, arg0, arg1, NULL);
@@ -554,7 +558,7 @@ int EReader_Send(int arg0, u32 *arg1)
     return result;
 }
 
-int EReader_Recv(u32 *arg0)
+int Unused_EReader_Recv(u32 *arg0)
 {
     int result;
 
@@ -615,7 +619,7 @@ static void sub_81D3CBC(void)
     REG_IE |= INTR_FLAG_SERIAL;
     REG_IME = 1;
 
-    if (!gUnknown_030012C8.unk0[1])
+    if (!gUnknown_030012C8.state)
         CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
 }
 
@@ -631,103 +635,103 @@ static void sub_81D3D34(void)
 
 u16 EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
 {
-    switch (gUnknown_030012C8.unk0[1])
+    switch (gUnknown_030012C8.state)
     {
     case 0:
         sub_81D3CBC();
-        gUnknown_030012C8.unk0[2] = 1;
-        gUnknown_030012C8.unk0[1] = 1;
+        gUnknown_030012C8.isSio = 1;
+        gUnknown_030012C8.state = 1;
         break;
     case 1:
-        if (sub_81D3EE8(arg0))
+        if (isParentLink(arg0))
             EnableSio();
 
         if (gShouldAdvanceLinkState == 2)
         {
-            gUnknown_030012C8.unk0[4] = 2;
-            gUnknown_030012C8.unk0[1] = 6;
+            gUnknown_030012C8.error = 2;
+            gUnknown_030012C8.state = 6;
         }
         break;
     case 2:
         sub_81D3D34();
         sub_81D3F1C(arg1, arg2, arg3);
-        gUnknown_030012C8.unk0[1] = 3;
+        gUnknown_030012C8.state = 3;
         // fall through
     case 3:
         if (gShouldAdvanceLinkState == 2)
         {
-            gUnknown_030012C8.unk0[4] = 2;
-            gUnknown_030012C8.unk0[1] = 6;
+            gUnknown_030012C8.error = 2;
+            gUnknown_030012C8.state = 6;
         }
         else
         {
             gUnknown_030012E6++;
             gUnknown_030012E8++;
-            if (!gUnknown_030012C8.unk0[0] && gUnknown_030012E8 > 60)
+            if (!gUnknown_030012C8.isParent && gUnknown_030012E8 > 60)
             {
-                gUnknown_030012C8.unk0[4] = 1;
-                gUnknown_030012C8.unk0[1] = 6;
+                gUnknown_030012C8.error = 1;
+                gUnknown_030012C8.state = 6;
             }
 
-            if (gUnknown_030012C8.unk0[2] != 2)
+            if (gUnknown_030012C8.isSio != 2)
             {
-                if (gUnknown_030012C8.unk0[0] && gUnknown_030012E6 > 2)
+                if (gUnknown_030012C8.isParent && gUnknown_030012E6 > 2)
                 {
                     EnableSio();
-                    gUnknown_030012C8.unk0[2] = 2;
+                    gUnknown_030012C8.isSio = 2;
                 }
                 else
                 {
                     EnableSio();
-                    gUnknown_030012C8.unk0[2] = 2;
+                    gUnknown_030012C8.isSio = 2;
                 }
             }
         }
         break;
     case 4:
         sub_81D3CBC();
-        gUnknown_030012C8.unk0[1] = 5;
+        gUnknown_030012C8.state = 5;
         break;
     case 5:
-        if (gUnknown_030012C8.unk0[0] == 1 && gUnknown_030012E6 > 2)
+        if (gUnknown_030012C8.isParent == TRUE && gUnknown_030012E6 > 2)
             EnableSio();
 
         if (++gUnknown_030012E6 > 60)
         {
-            gUnknown_030012C8.unk0[4] = 1;
-            gUnknown_030012C8.unk0[1] = 6;
+            gUnknown_030012C8.error = 1;
+            gUnknown_030012C8.state = 6;
         }
         break;
     case 6:
-        if (gUnknown_030012C8.unk0[2])
+        if (gUnknown_030012C8.isSio)
         {
             EReader_Stop();
-            gUnknown_030012C8.unk0[2] = 0;
+            gUnknown_030012C8.isSio = 0;
         }
         break;
     }
 
-    return gUnknown_030012C8.unk0[2] | (gUnknown_030012C8.unk0[4] << 2) | (gUnknown_030012C8.unk0[3] << 4);
+    return gUnknown_030012C8.isSio | (gUnknown_030012C8.error << 2) | (gUnknown_030012C8.downloadSuccessful << 4);
 }
 
-static u16 sub_81D3EE8(u8 arg0)
+static bool16 isParentLink(u8 arg0)
 {
     u16 terminal = (*(vu32 *)REG_ADDR_SIOCNT) & (SIO_MULTI_SI | SIO_MULTI_SD);
     if (terminal == SIO_MULTI_SD && arg0)
     {
-        gUnknown_030012C8.unk0[0] = 1;
-        return 1;
+        gUnknown_030012C8.isParent = TRUE;
+        return TRUE;
     }
     else
     {
-        gUnknown_030012C8.unk0[0] = 0;
-        return 0;
+        gUnknown_030012C8.isParent = FALSE;
+        return FALSE;
     }
 }
 
 static void sub_81D3F1C(u32 arg0, u32 *arg1, u32 *arg2)
 {
-    if (gUnknown_030012C8.unk0[0])
+    if (gUnknown_030012C8.isParent)
     {
         REG_SIOCNT |= SIO_38400_BPS;
         gUnknown_030012C8.unk8 = arg1;
@@ -764,7 +768,7 @@ void sub_81D3FAC(void)
     u16 var0;
     u16 recvBuffer[4];
 
-    switch (gUnknown_030012C8.unk0[1])
+    switch (gUnknown_030012C8.state)
     {
     case 1:
         REG_SIOMLT_SEND = 0xCCD0; // Handshake id
@@ -778,14 +782,14 @@ void sub_81D3FAC(void)
         }
 
         if (playerCount == 2 && k == 0)
-            gUnknown_030012C8.unk0[1] = 2;
+            gUnknown_030012C8.state = 2;
         break;
     case 3:
         value = REG_SIODATA32;
-        if (!gUnknown_030012C8.unkC && !gUnknown_030012C8.unk0[0])
+        if (!gUnknown_030012C8.unkC && !gUnknown_030012C8.isParent)
             gUnknown_030012C8.unk10 = value / 4 + 1;
 
-        if (gUnknown_030012C8.unk0[0] == 1)
+        if (gUnknown_030012C8.isParent == TRUE)
         {
             if (gUnknown_030012C8.unkC < gUnknown_030012C8.unk10)
             {
@@ -807,9 +811,9 @@ void sub_81D3FAC(void)
             else if (gUnknown_030012C8.unkC)
             {
                 if (gUnknown_030012C8.unk14 == value)
-                    gUnknown_030012C8.unk0[3] = 1;
+                    gUnknown_030012C8.downloadSuccessful = 1;
                 else
-                    gUnknown_030012C8.unk0[3] = 2;
+                    gUnknown_030012C8.downloadSuccessful = 2;
             }
 
             gUnknown_030012E8 = 0;
@@ -817,29 +821,29 @@ void sub_81D3FAC(void)
 
         if (++gUnknown_030012C8.unkC < gUnknown_030012C8.unk10 + 2)
         {
-            if (gUnknown_030012C8.unk0[0])
+            if (gUnknown_030012C8.isParent)
                 REG_TM3CNT_H |= TIMER_ENABLE;
             else
                 EnableSio();
         }
         else
         {
-            gUnknown_030012C8.unk0[1] = 4;
+            gUnknown_030012C8.state = 4;
             gUnknown_030012E6 = 0;
         }
         break;
     case 5:
-        if (!gUnknown_030012C8.unk0[0])
-            REG_SIOMLT_SEND = gUnknown_030012C8.unk0[3];
+        if (!gUnknown_030012C8.isParent)
+            REG_SIOMLT_SEND = gUnknown_030012C8.downloadSuccessful;
 
         *(u64 *)recvBuffer = REG_SIOMLT_RECV;
         var0 = recvBuffer[1] - 1;
         if (var0 < 2)
         {
-            if (gUnknown_030012C8.unk0[0] == 1)
-                gUnknown_030012C8.unk0[3] = recvBuffer[1];
+            if (gUnknown_030012C8.isParent == TRUE)
+                gUnknown_030012C8.downloadSuccessful = recvBuffer[1];
 
-            gUnknown_030012C8.unk0[1] = 6;
+            gUnknown_030012C8.state = 6;
         }
         break;
     }
