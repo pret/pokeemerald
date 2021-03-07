@@ -13,7 +13,7 @@ struct BgControl
     struct BgConfig
     {
         bool8 isVisible:1; // In vanilla, only false prior to its fields being called in SetBgControlAttributes.
-                           // Afterwarss, it never be false again until the struct is set back to all zeros.
+                           // Afterwards, it never be false again until the struct is set back to all zeros.
         u8 dummy:1;
         u8 screenSize:2;
         u8 priority:2;
