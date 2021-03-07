@@ -37,4 +37,6 @@ jobs:
         run: make -j${nproc} modern
 
       - name: Webhook
+        shell: bash
+        if: ${{ github.event_name == 'push' }}
         run: sh .github/calcrom/webhook.sh pokeemerald
