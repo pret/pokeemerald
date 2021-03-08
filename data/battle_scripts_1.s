@@ -7326,6 +7326,7 @@ BattleScript_RockyHelmetActivatesDmg:
 	return
 
 BattleScript_SpikyShieldEffect::
+	jumpifabsent BS_ATTACKER, BattleScript_SpikyShieldRet
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	healthbarupdate BS_ATTACKER
@@ -7333,6 +7334,7 @@ BattleScript_SpikyShieldEffect::
 	printstring STRINGID_PKMNHURTSWITH
 	waitmessage 0x40
 	tryfaintmon BS_ATTACKER, FALSE, NULL
+BattleScript_SpikyShieldRet::
 	return
 
 BattleScript_KingsShieldEffect::
