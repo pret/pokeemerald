@@ -36,16 +36,16 @@ static void SetUpTransferManager(u32, const u32*, u32*);
 static void EReader_SetTimer(void);
 
 static struct SendRecvMgr sSendRecvMgr;
-static u16 gUnknown_030012E0;
+static u16 sJoyNewOrRepeated;
 static u16 sJoyNew;
 static u16 sSendRecvStatus;
 static u16 sCounter1;
 static u32 sCounter2;
-static u16 gUnknown_030012EC;
-static u16 gUnknown_030012EE;
-static u16 gUnknown_030012F0;
-static u16 gUnknown_030012F2;
-static u16 gUnknown_030012F4;
+static u16 sSavedIme;
+static u16 sSavedIe;
+static u16 sSavedTm3Cnt;
+static u16 sSavedSioCnt;
+static u16 sSavedRCnt;
 
 static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     [0] = {
@@ -719,7 +719,8 @@ u16 EReaderHandleTransfer(u8 arg0, u32 arg1, const u32 *arg2, u32 *arg3)
 
 static bool16 DetermineSendRecvState(u8 arg0)
 {
-    if ((*(vu32 *)REG_ADDR_SIOCNT & (SIO_MULTI_SI | SIO_MULTI_SD)) == SIO_MULTI_SD && arg0)
+    const struct SioMultiCnt sioMultiCnt = *(struct SioMultiCnt *)REG_ADDR_SIOCNT;
+    if (!sioMultiCnt.si && sioMultiCnt.sd && arg0)
     {
         sSendRecvMgr.master_slave = TRUE;
         return TRUE;
@@ -757,7 +758,7 @@ static void EReader_SetTimer(void)
     REG_IME = 1;
 }
 
-void sub_81D3F9C(void)
+void EReaderHelper_Timer3Callback(void)
 {
     EReader_StopTimer();
     EnableSio();
@@ -845,7 +846,7 @@ void sub_81D3FAC(void)
                 // EReader has (in)validated the payload
                 sSendRecvMgr.checksumResult = recvBuffer[1];
 
-            sSendRecvMgr.state = 6;
+            sSendRecvMgr.state = EREADER_XFR_STATE_DONE;
         }
         break;
     }
@@ -859,35 +860,35 @@ static void EnableSio(void)
 static void EReader_StopTimer(void)
 {
     REG_TM3CNT_H &= ~TIMER_ENABLE;
-    REG_TM3CNT_L = 0xFDA7;
+    REG_TM3CNT_L = -601;
 }
 
 static void GetKeyInput(void)
 {
-    u16 keysMask = REG_KEYINPUT ^ KEYS_MASK;
-    sJoyNew = keysMask & ~gUnknown_030012E0;
-    gUnknown_030012E0 = keysMask;
+    u16 rawKeys = REG_KEYINPUT ^ KEYS_MASK;
+    sJoyNew = rawKeys & ~sJoyNewOrRepeated;
+    sJoyNewOrRepeated = rawKeys;
 }
 
 void EReaderHelper_SaveRegsState(void)
 {
-    gUnknown_030012EC = REG_IME;
-    gUnknown_030012EE = REG_IE;
-    gUnknown_030012F0 = REG_TM3CNT_H;
-    gUnknown_030012F2 = REG_SIOCNT;
-    gUnknown_030012F4 = REG_RCNT;
+    sSavedIme = REG_IME;
+    sSavedIe = REG_IE;
+    sSavedTm3Cnt = REG_TM3CNT_H;
+    sSavedSioCnt = REG_SIOCNT;
+    sSavedRCnt = REG_RCNT;
 }
 
 void EReaderHelper_RestoreRegsState(void)
 {
-    REG_IME = gUnknown_030012EC;
-    REG_IE = gUnknown_030012EE;
-    REG_TM3CNT_H = gUnknown_030012F0;
-    REG_SIOCNT = gUnknown_030012F2;
-    REG_RCNT = gUnknown_030012F4;
+    REG_IME = sSavedIme;
+    REG_IE = sSavedIe;
+    REG_TM3CNT_H = sSavedTm3Cnt;
+    REG_SIOCNT = sSavedSioCnt;
+    REG_RCNT = sSavedRCnt;
 }
 
-void sub_81D4238(void)
+void EReaderHelper_ClearsSendRecvMgr(void)
 {
     CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
 }

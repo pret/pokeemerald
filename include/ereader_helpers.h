@@ -50,10 +50,10 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer);
 bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0);
 bool32 ReadTrainerHillAndValidate(void);
 u16 EReaderHandleTransfer(u8, u32, const u32*, u32*);
-void sub_81D3F9C(void);
+void EReaderHelper_Timer3Callback(void);
 void sub_81D3FAC(void);
 void EReaderHelper_SaveRegsState(void);
 void EReaderHelper_RestoreRegsState(void);
-void sub_81D4238(void);
+void EReaderHelper_ClearsSendRecvMgr(void);
 
 #endif // GUARD_EREADER_HELPERS_H
