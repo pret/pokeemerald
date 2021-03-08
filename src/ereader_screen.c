@@ -340,19 +340,18 @@ static void Task_EReaderComm(u8 taskId)
         SendUnknownSerialData_Teardown(&sMEventSendToEReaderManager);
         if (data->initialSendResult == 3)
         {
-                // Error
-                data->state = 20;
+            // Error
+            data->state = 20;
+            break;
         }
-        else if (data->initialSendResult == 1)
+        if (data->initialSendResult == 1)
         {
             ResetDelayTimer(&data->stateAdvanceDelay);
             AddTextPrinterToWindow1(gJPText_PleaseWaitAMoment);
             data->state = 11;
+            break;
         }
-        else
-        {
-            data->state = 0;
-        }
+        data->state = 0;
         break;
     case 11:
         if (AdvanceDelayTimerCheckTimeout(&data->stateAdvanceDelay, 840))
@@ -393,8 +392,9 @@ static void Task_EReaderComm(u8 taskId)
         {
             CloseLink();
             data->state = 20;
+            break;
         }
-        else if (GetBlockReceivedStatus())
+        if (GetBlockReceivedStatus())
         {
             ResetBlockReceivedFlags();
             data->state = 15;
