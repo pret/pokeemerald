@@ -95,7 +95,7 @@ static void OpenEReaderLink(void)
 
 static bool32 sub_81D4E60(void)
 {
-    volatile u16 backupIME;
+    vu16 backupIME;
     u16 sp4[4];
 
     backupIME = REG_IME;
@@ -239,7 +239,7 @@ static bool32 AdvanceDelayTimerCheckTimeout(u16 *arg0, u16 arg1)
         *arg0 = 0;
         return TRUE;
     }
-    
+
     return FALSE;
 }
 
@@ -365,26 +365,26 @@ static void Task_EReaderComm(u8 taskId)
     case 13:
         switch (EReaderReceive(&data->textOrReceiveState, &data->stateAdvanceDelay))
         {
-            case 0:
-                break;
-            case 2:
-                AddTextPrinterToWindow1(gJPText_Connecting);
-                data->state = 14;
-                break;
-            case 1:
-                PlaySE(SE_SELECT);
-                CloseLink();
-                data->state = 23;
-                break;
-            case 5:
-                CloseLink();
-                data->state = 21;
-                break;
-            case 3:
-            case 4:
-                CloseLink();
-                data->state = 20;
-                break;
+        case 0:
+            break;
+        case 2:
+            AddTextPrinterToWindow1(gJPText_Connecting);
+            data->state = 14;
+            break;
+        case 1:
+            PlaySE(SE_SELECT);
+            CloseLink();
+            data->state = 23;
+            break;
+        case 5:
+            CloseLink();
+            data->state = 21;
+            break;
+        case 3:
+        case 4:
+            CloseLink();
+            data->state = 20;
+            break;
         }
         break;
     case 14:
