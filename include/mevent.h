@@ -4,8 +4,8 @@
 struct MEvent_Str_1
 {
     u16 unk_000;
-    size_t unk_004;
-    const void * unk_008;
+    u32 unk_004;
+    const void *unk_008;
 };
 
 struct MEvent_Str_2

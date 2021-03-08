@@ -764,7 +764,7 @@ void EReaderHelper_Timer3Callback(void)
     EnableSio();
 }
 
-void sub_81D3FAC(void)
+void EReaderHelper_SerialCallback(void)
 {
     u16 i, playerCount, k;
     u32 value;
