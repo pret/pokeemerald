@@ -5,11 +5,6 @@ on:
     branches: [ master ]
   pull_request:
 
-env:
-  CALCROM_DISCORD_WEBHOOK_USERNAME: ${{ secrets.CALCROM_DISCORD_WEBHOOK_USERNAME }}
-  CALCROM_DISCORD_WEBHOOK_AVATAR_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_AVATAR_URL }}
-  CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
-
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -37,6 +32,9 @@ jobs:
         run: make -j${nproc} modern
 
       - name: Webhook
-        shell: bash
         if: ${{ github.event_name == 'push' }}
+        env:
+          CALCROM_DISCORD_WEBHOOK_USERNAME: OK
+          CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
+          CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
         run: sh .github/calcrom/webhook.sh pokeemerald
