@@ -224,7 +224,7 @@ void task_add_00_ereader(void)
     data->t04 = 0;
     data->t06 = 0;
     data->initialSendResult = 0;
-    data->t10 = AllocZeroed(0x40); //sizeof(struct MEvent_Str_2)
+    data->t10 = AllocZeroed(0x40); // sizeof(struct MEvent_Str_2)
 }
 
 static void ResetDelayTimer(u16 *arg0)
