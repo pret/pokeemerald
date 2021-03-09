@@ -16,13 +16,6 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 
-#define GET_UNOWN_LETTER(personality) ((        \
-      (((personality & 0x03000000) >> 24) << 6) \
-    | (((personality & 0x00030000) >> 16) << 4) \
-    | (((personality & 0x00000300) >> 8) << 2)  \
-    | (((personality & 0x00000003) >> 0) << 0)  \
-) % 28)
-
 #define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
 
 extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;

@@ -8389,7 +8389,7 @@ static u8 sub_80D0894(void)
 
 static void sub_80D08CC(void)
 {
-    s32 i, j, r8, r9;
+    s32 i, j;
     s32 rowCount, columnCount;
     u8 boxId;
     u8 monArrayId;

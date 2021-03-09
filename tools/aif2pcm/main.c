@@ -351,6 +351,12 @@ const int gDeltaEncodingTable[] = {
 	-64, -49, -36, -25, -16, -9, -4, -1,
 };
 
+#define POSITIVE_DELTAS_START 0
+#define POSITIVE_DELTAS_END 8
+
+#define NEGATIVE_DELTAS_START 8
+#define NEGATIVE_DELTAS_END 16
+
 struct Bytes *delta_decompress(struct Bytes *delta, unsigned int expected_length)
 {
 	struct Bytes *pcm = malloc(sizeof(struct Bytes));
@@ -418,15 +424,32 @@ struct Bytes *delta_decompress(struct Bytes *delta, unsigned int expected_length
 	return pcm;
 }
 
+#define U8_TO_S8(value) ((value) < 128 ? (value) : (value) - 256)
+#define ABS(value) ((value) >= 0 ? (value) : -(value))
+
 int get_delta_index(uint8_t sample, uint8_t prev_sample)
 {
 	int best_error = INT_MAX;
 	int best_index = -1;
+	int delta_table_start_index;
+	int delta_table_end_index;
+	int sample_signed = U8_TO_S8(sample);
+	int prev_sample_signed = U8_TO_S8(prev_sample);
 
-	for (int i = 0; i < 16; i++)
+    // if we're going up (or equal), only choose positive deltas
+	if (prev_sample_signed <= sample_signed) {
+		delta_table_start_index = POSITIVE_DELTAS_START;
+		delta_table_end_index = POSITIVE_DELTAS_END;
+	} else {
+		delta_table_start_index = NEGATIVE_DELTAS_START;
+		delta_table_end_index = NEGATIVE_DELTAS_END;
+	}
+
+	for (int i = delta_table_start_index; i < delta_table_end_index; i++)
 	{
 		uint8_t new_sample = prev_sample + gDeltaEncodingTable[i];
-		int error = sample > new_sample ? sample - new_sample : new_sample - sample;
+		int new_sample_signed = U8_TO_S8(new_sample);
+		int error = ABS(new_sample_signed - sample_signed);
 
 		if (error < best_error)
 		{

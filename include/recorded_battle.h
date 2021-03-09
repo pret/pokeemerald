@@ -3,7 +3,7 @@
 
 extern u32 gRecordedBattleRngSeed;
 extern u32 gBattlePalaceMoveSelectionRngValue;
-extern u8 gUnknown_0203C7B4;
+extern u8 gRecordedBattleMultiplayerId;
 
 void sub_8184DA4(u8 arg0);
 void sub_8184E58(void);

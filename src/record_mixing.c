@@ -94,7 +94,6 @@ static void *sApprenticesSave;
 static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
 static u8 gUnknown_03001160;
-static u32 filler_03001164;
 static struct PlayerHallRecords *gUnknown_03001168[3];
 
 static EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {0};
