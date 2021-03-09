@@ -141,7 +141,7 @@ struct BerryCrushGame_138
 struct BerryCrushGame
 {
     MainCallback unk0;
-    u32 (* unk4)(struct BerryCrushGame *, u8 *);
+    u32 (*unk4)(struct BerryCrushGame *, u8 *);
     u8 unk8;
     u8 unk9;
     u8 mainTask;
@@ -186,47 +186,47 @@ static void VBlankCB(void);
 static void MainCB(void);
 static void MainTask(u8);
 static void ParseName_Options(struct BerryCrushGame *);
-void sub_8022BEC(u16, u8, u8 *);
+static void BerryCrush_RunOrScheduleCommand(u16, u8, u8 *);
 static void BerryCrush_SetPaletteFadeParams(u8 *, bool8, u32, s8, u8, u8, u16);
-static int sub_8021450(struct BerryCrushGame *);
-void sub_8022588(struct BerryCrushGame *);
-void sub_8022600(struct BerryCrushGame *);
-void sub_80226D0(struct BerryCrushGame *);
-void sub_8022730(struct BerryCrushGame *);
-void sub_8022960(struct BerryCrushGame *);
-void sub_8022524(struct BerryCrushGame_138 *, u16);
-void sub_8022B28(struct Sprite *);
-void sub_8022554(struct BerryCrushGame_138 *r0);
-void sub_8024578(struct BerryCrushGame *);
-void sub_8024644(u8 *, u32, u32, u32, u32);
-static void sub_8022A20(struct Sprite *sprite);
+static s32 sub_8021450(struct BerryCrushGame *);
+static void sub_8022588(struct BerryCrushGame *);
+static void sub_8022600(struct BerryCrushGame *);
+static void sub_80226D0(struct BerryCrushGame *);
+static void sub_8022730(struct BerryCrushGame *);
+static void sub_8022960(struct BerryCrushGame *);
+static void BerryCrush_PrintTimeOnSprites(struct BerryCrushGame_138 *, u16);
+static void sub_8022B28(struct Sprite *);
+static void BerryCrush_HideTimerSprites(struct BerryCrushGame_138 *r0);
+static void sub_8024578(struct BerryCrushGame *);
+static void BerryCrush_SetShowMessageParams(u8 *, u32, u32, u32, u32);
+static void SpriteCB_BerryCrushImpact(struct Sprite *sprite);
 static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *r6, u8 *r1);
-static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5);
-static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5);
-static u32 sub_8022E1C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8022E3C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5);
-static u32 sub_8022F04(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
-static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2);
-static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
-static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
-static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
-static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6);
-static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1);
-static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6);
-static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4);
-static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6);
-static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
-static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
-static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
-static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
-static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_WaitPaletteFade(struct BerryCrushGame *r4, u8 *r5);
+static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame *r7, u8 *r5);
+static u32 BerryCrushCommand_InitGfx(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_TeardownGfx(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_SignalReadyToBegin(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_AskPickBerry(struct BerryCrushGame *r4, u8 *r5);
+static u32 BerryCrushCommand_GoToBerryPouch(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_WaitForOthersToPickBerries(struct BerryCrushGame *r5, u8 *r2);
+static u32 BerryCrushCommand_DropBerriesIntoCrusher(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_DropLid(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_Countdown(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_PlayGame_Master(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_PlayGame_Slave(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_FinishGame(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame *r5, u8 *r6);
+static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame *r5, u8 *r6);
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame *r5, u8 *r4);
+static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame *r5, u8 *r6);
+static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_FadeOutToPlayAgain(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_PlayAgainFailureMessage(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_GracefulExit(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1);
+static u32 BerryCrushCommand_Quit(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1);
 
-static EWRAM_DATA struct BerryCrushGame *gBerryCrushGame = NULL;
+static EWRAM_DATA struct BerryCrushGame *sBerryCrushGamePtr = NULL;
 
 static const u8 gUnknown_082F325C[] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 static const u8 gUnknown_082F3264[] = { 0, 1, 2, 3, 5, 0, 0, 0 };
@@ -518,7 +518,7 @@ static const s8 gUnknown_082F41D2[][2] =
     { 40, -16},
 };
 
-static const u16 gUnknown_082F41E8[] = {5, 6, 7, 8, 9, 0};
+static const u16 sPlayerBerrySpriteTags[] = {5, 6, 7, 8, 9, 0};
 
 static const struct CompressedSpriteSheet gUnknown_082F41F4[] = 
 {
@@ -672,7 +672,7 @@ static const struct SpriteTemplate gUnknown_082F4324 =
     .anims = gUnknown_082F42EC, 
     .images = NULL, 
     .affineAnims = gDummySpriteAffineAnimTable, 
-    .callback = sub_8022A20
+    .callback = SpriteCB_BerryCrushImpact
 };
 
 static const struct SpriteTemplate gUnknown_082F433C =
@@ -697,7 +697,7 @@ static const struct SpriteTemplate gUnknown_082F4354 =
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_082F436C =
+static const struct SpriteTemplate sSpriteTemplate_PlayerBerry =
 {
     .tileTag = 5, 
     .paletteTag = 5, 
@@ -758,34 +758,34 @@ static const u8 *const gUnknown_082F43B4[] =
     gText_PressingPowerRankings,
 };
 
-static u32 (*const gUnknown_082F43CC[])(struct BerryCrushGame *, u8 *) =
+static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame *, u8 *) =
 {
     NULL,
     BerryCrushCommand_BeginNormalPaletteFade,
-    sub_8022CB0,
-    sub_8022D14,
-    sub_8022E1C,
-    sub_8022E3C,
-    sub_8022E5C,
-    sub_8022EAC,
-    sub_8022F04,
-    sub_8022F1C,
-    sub_8023070,
-    sub_80231B8,
-    sub_80232EC,
-    sub_80238F0,
-    sub_8023998,
-    sub_8023A30,
-    sub_8023BC0,
-    sub_8023CAC,
-    sub_8024048,
-    sub_8024134,
-    sub_8024228,
-    sub_80242E0,
-    sub_80243BC,
-    sub_8024444,
-    sub_8024508,
-    sub_8024568,
+    BerryCrushCommand_WaitPaletteFade,
+    BerryCrushCommand_PrintMessage,
+    BerryCrushCommand_InitGfx,
+    BerryCrushCommand_TeardownGfx,
+    BerryCrushCommand_SignalReadyToBegin,
+    BerryCrushCommand_AskPickBerry,
+    BerryCrushCommand_GoToBerryPouch,
+    BerryCrushCommand_WaitForOthersToPickBerries,
+    BerryCrushCommand_DropBerriesIntoCrusher,
+    BerryCrushCommand_DropLid,
+    BerryCrushCommand_Countdown,
+    BerryCrushCommand_PlayGame_Master,
+    BerryCrushCommand_PlayGame_Slave,
+    BerryCrushCommand_FinishGame,
+    BerryCrushCommand_HandleTimeUp,
+    BerryCrushCommand_TabulateResults,
+    BerryCrushCommand_ShowResults,
+    BerryCrushCommand_SaveGame,
+    BerryCrushCommand_AskPlayAgain,
+    BerryCrushCommand_CommunicatePlayAgainResponses,
+    BerryCrushCommand_FadeOutToPlayAgain,
+    BerryCrushCommand_PlayAgainFailureMessage,
+    BerryCrushCommand_GracefulExit,
+    BerryCrushCommand_Quit,
 };
 
 static const u8 gUnknown_082F4434[][4] =
@@ -801,19 +801,19 @@ static const u8 gUnknown_082F4448[] = {3, 7, 15, 31};
 
 struct BerryCrushGame * GetBerryCrushGame(void)
 {
-    return gBerryCrushGame;
+    return sBerryCrushGamePtr;
 }
 
 u32 QuitBerryCrush(MainCallback callback)
 {
-    if (!gBerryCrushGame)
+    if (!sBerryCrushGamePtr)
         return 2;
 
     if (!callback)
-        callback = gBerryCrushGame->unk0;
+        callback = sBerryCrushGamePtr->unk0;
 
-    DestroyTask(gBerryCrushGame->mainTask);
-    FREE_AND_SET_NULL(gBerryCrushGame);
+    DestroyTask(sBerryCrushGamePtr->mainTask);
+    FREE_AND_SET_NULL(sBerryCrushGamePtr);
     SetMainCallback2(callback);
     if (callback == CB2_ReturnToField)
     {
@@ -850,8 +850,8 @@ void StartBerryCrush(MainCallback callback)
         return;
     }
 
-    gBerryCrushGame = AllocZeroed(sizeof(*gBerryCrushGame));
-    if (!gBerryCrushGame)
+    sBerryCrushGamePtr = AllocZeroed(sizeof(struct BerryCrushGame));
+    if (!sBerryCrushGamePtr)
     {
         SetMainCallback2(callback);
         Rfu.unk_10 = 0;
@@ -860,17 +860,17 @@ void StartBerryCrush(MainCallback callback)
         return;
     }
 
-    gBerryCrushGame->unk0 = callback;
-    gBerryCrushGame->unk8 = multiplayerId;
-    gBerryCrushGame->unk9 = playerCount;
-    ParseName_Options(gBerryCrushGame);
-    gBerryCrushGame->unk12 = 1;
-    gBerryCrushGame->unkE = 1;
-    gBerryCrushGame->unkF = 6;
-    BerryCrush_SetPaletteFadeParams(gBerryCrushGame->unk36, 1, -1, 0, 16, 0, 0);
-    sub_8022BEC(4, 1, gBerryCrushGame->unk36);
+    sBerryCrushGamePtr->unk0 = callback;
+    sBerryCrushGamePtr->unk8 = multiplayerId;
+    sBerryCrushGamePtr->unk9 = playerCount;
+    ParseName_Options(sBerryCrushGamePtr);
+    sBerryCrushGamePtr->unk12 = 1;
+    sBerryCrushGamePtr->unkE = 1;
+    sBerryCrushGamePtr->unkF = 6;
+    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->unk36, 1, -1, 0, 16, 0, 0);
+    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->unk36);
     SetMainCallback2(MainCB);
-    gBerryCrushGame->mainTask = CreateTask(MainTask, 8);
+    sBerryCrushGamePtr->mainTask = CreateTask(MainTask, 8);
     gTextFlags.autoScroll = 0;
 }
 
@@ -881,18 +881,18 @@ static void GetBerryFromBag(void)
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
-    gBerryCrushGame->unk98[gBerryCrushGame->unk8].unkC = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
-    gBerryCrushGame->unkE = 1;
-    gBerryCrushGame->unkF = 9;
-    BerryCrush_SetPaletteFadeParams(gBerryCrushGame->unk36, 0, -1, 0, 16, 0, 0);
-    sub_8022BEC(4, 1, gBerryCrushGame->unk36);
-    gBerryCrushGame->mainTask = CreateTask(MainTask, 8);
+    sBerryCrushGamePtr->unk98[sBerryCrushGamePtr->unk8].unkC = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
+    sBerryCrushGamePtr->unkE = 1;
+    sBerryCrushGamePtr->unkF = 9;
+    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->unk36, 0, -1, 0, 16, 0, 0);
+    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->unk36);
+    sBerryCrushGamePtr->mainTask = CreateTask(MainTask, 8);
     SetMainCallback2(MainCB);
 }
 
 static void BerryCrush_SetupMainTask(void)
 {
-    DestroyTask(gBerryCrushGame->mainTask);
+    DestroyTask(sBerryCrushGamePtr->mainTask);
     ChooseBerryForMachine(GetBerryFromBag);
 }
 
@@ -910,50 +910,50 @@ static void BerryCrush_SaveResults(void)
 {
     u32 var0, var1;
 
-    var0 = gBerryCrushGame->unk68.unk04;
+    var0 = sBerryCrushGamePtr->unk68.unk04;
     var0 = Q_24_8(var0);
     var0 = MathUtil_Div32(var0, Q_24_8(60));
-    var1 = gBerryCrushGame->unk68.unk0A;
+    var1 = sBerryCrushGamePtr->unk68.unk0A;
     var1 = Q_24_8(var1);
     var1 = MathUtil_Div32(var1, var0) & 0xFFFF;
-    gBerryCrushGame->unk16 = var1;
-    switch (gBerryCrushGame->unk9)
+    sBerryCrushGamePtr->unk16 = var1;
+    switch (sBerryCrushGamePtr->unk9)
     {
     case 2:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[0])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[0] = sBerryCrushGamePtr->unk16;
         }
         break;
     case 3:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[1])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[1] = sBerryCrushGamePtr->unk16;
         }
         break;
     case 4:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[2])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[2] = sBerryCrushGamePtr->unk16;
         }
         break;
     case 5:
-        if (gBerryCrushGame->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
+        if (sBerryCrushGamePtr->unk16 > gSaveBlock2Ptr->berryCrush.berryCrushResults[3])
         {
-            gBerryCrushGame->unk25_1 = 1;
-            gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = gBerryCrushGame->unk16;
+            sBerryCrushGamePtr->unk25_1 = 1;
+            gSaveBlock2Ptr->berryCrush.berryCrushResults[3] = sBerryCrushGamePtr->unk16;
         }
         break;
     }
 
-    gBerryCrushGame->unk1C = gBerryCrushGame->unk68.unk00;
-    if (GiveBerryPowder(gBerryCrushGame->unk1C))
+    sBerryCrushGamePtr->unk1C = sBerryCrushGamePtr->unk68.unk00;
+    if (GiveBerryPowder(sBerryCrushGamePtr->unk1C))
         return;
 
-    gBerryCrushGame->unk25_0 = 1;
+    sBerryCrushGamePtr->unk25_0 = 1;
 }
 
 static void VBlankCB(void)
@@ -973,10 +973,10 @@ static void MainCB(void)
 
 static void MainTask(u8 taskId)
 {
-    if (gBerryCrushGame->unk4)
-        gBerryCrushGame->unk4(gBerryCrushGame, gBerryCrushGame->unk36);
+    if (sBerryCrushGamePtr->unk4)
+        sBerryCrushGamePtr->unk4(sBerryCrushGamePtr, sBerryCrushGamePtr->unk36);
 
-    sub_8021450(gBerryCrushGame);
+    sub_8021450(sBerryCrushGamePtr);
 }
 
 static void ParseName_Options(struct BerryCrushGame *arg0)
@@ -1104,7 +1104,7 @@ s32 InitBerryCrushDisplay(void)
     return 0;
 }
 
-int sub_802130C(void)
+static s32 BerryCrush_TeardownBgs(void)
 {
     struct BerryCrushGame *var0 = GetBerryCrushGame();
     if (!var0)
@@ -1164,13 +1164,13 @@ int sub_802130C(void)
     return 0;
 }
 
-static int sub_8021450(struct BerryCrushGame *arg0)
+static s32 sub_8021450(struct BerryCrushGame *arg0)
 {
     gSpriteCoordOffsetY = arg0->unk2A + arg0->unk2C;
     SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);
     if (arg0->unk12 == 7)
     {
-        sub_8022524(&arg0->unk138, arg0->unk28);
+        BerryCrush_PrintTimeOnSprites(&arg0->unk138, arg0->unk28);
     }
 
     return 0;
@@ -1184,23 +1184,23 @@ void sub_8021488(struct BerryCrushGame *arg0)
     gSpriteCoordOffsetY = -104;
 }
 
-void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
+static void BerryCrush_CreateBerrySprites(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
 {
     u8 i;
     u8 spriteId;
     s16 var0, var1;
     s16 *data;
-    int var3;
+    s32 var3;
     s16 var5;
     u32 var6;
 
     for (i = 0; i < arg0->unk9; i++)
     {
         spriteId = AddCustomItemIconSprite(
-            &gUnknown_082F436C,
-            gUnknown_082F41E8[i],
-            gUnknown_082F41E8[i],
-            arg0->unk98[i].unkC + 133);
+            &sSpriteTemplate_PlayerBerry,
+            sPlayerBerrySpriteTags[i],
+            sPlayerBerrySpriteTags[i],
+            arg0->unk98[i].unkC + FIRST_BERRY_INDEX);
         arg1->unk38[i] = &gSprites[spriteId];
         arg1->unk38[i]->oam.priority = 3;
         arg1->unk38[i]->affineAnimPaused = TRUE;
@@ -1232,7 +1232,7 @@ void sub_80214A8(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
     }
 }
 
-void sub_8021608(struct Sprite *sprite)
+static void SpriteCB_DropBerryIntoCrusher(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
 
@@ -1259,13 +1259,13 @@ void sub_8021608(struct Sprite *sprite)
     }
 }
 
-void sub_80216A8(struct BerryCrushGame *arg0, __attribute__((unused)) struct BerryCrushGame_138 *arg1)
+void BerryCrushFreeBerrySpriteGfx(struct BerryCrushGame *arg0, __attribute__((unused)) struct BerryCrushGame_138 *arg1)
 {
     u8 i;
     for (i = 0; i < arg0->unk9; i++)
     {
-        FreeSpritePaletteByTag(gUnknown_082F41E8[i]);
-        FreeSpriteTilesByTag(gUnknown_082F41E8[i]);
+        FreeSpritePaletteByTag(sPlayerBerrySpriteTags[i]);
+        FreeSpriteTilesByTag(sPlayerBerrySpriteTags[i]);
     }
 }
 
@@ -1363,10 +1363,10 @@ bool32 sub_80218D4(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1)
     return TRUE;
 }
 
-void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
+static void FramesToMinSec(struct BerryCrushGame_138 *arg0, u16 arg1)
 {
     u8 i = 0;
-    u32 r7 = 0;
+    u32 fractionalFrames = 0;
     s16 r3 = 0;
 
     arg0->unk4 = arg1 / 3600;
@@ -1376,19 +1376,19 @@ void sub_8021944(struct BerryCrushGame_138 *arg0, u16 arg1)
     for (i = 0; i < 8; i++)
     {
         if ((r3 >> (7 - i)) & 1)
-            r7 += sPressingSpeedConversionTable[i];
+            fractionalFrames += sPressingSpeedConversionTable[i];
     }
 
-    arg0->unk8 = r7 / 1000000;
+    arg0->unk8 = fractionalFrames / 1000000;
 }
 
-void sub_80219C8(u8 windowId, u8 left, u8 colorId, const u8 *string)
+static void PrintTextCentered(u8 windowId, u8 left, u8 colorId, const u8 *string)
 {
     left = (left * 4) - (GetStringWidth(2, string, -1) / 2u);
     AddTextPrinterParameterized3(windowId, 2, left, 0, sBerryCrushTextColorTable[colorId], 0, string);
 }
 
-void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
+static void PrintBerryCrushResultWindow(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
 {
     u8 r8;
     u8 sp1C = 0;
@@ -1458,7 +1458,7 @@ void sub_8021A28(struct BerryCrushGame * sp0C, u8 sp10, u8 sp14, u8 sp18)
     }
 }
 
-void sub_8021D34(struct BerryCrushGame *r8)
+static void sub_8021D34(struct BerryCrushGame *r8)
 {
     u8 r10 = 0;
     u8 r6 = 0;
@@ -1466,7 +1466,7 @@ void sub_8021D34(struct BerryCrushGame *r8)
     struct BerryCrushGame_68 *sp10 = &r8->unk68;
     u8 r7 = GetWindowAttribute(r8->unk138.unk82, WINDOW_HEIGHT) * 8 - 42;
 
-    sub_8021944(&r8->unk138, sp10->unk04);
+    FramesToMinSec(&r8->unk138, sp10->unk04);
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_TimeColon);
     r6 = 176 - (u8)GetStringWidth(2, gText_SpaceSec, -1);
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gText_SpaceSec);
@@ -1504,7 +1504,7 @@ void sub_8021D34(struct BerryCrushGame *r8)
     AddTextPrinterParameterized3(r8->unk138.unk82, 2, r6, r7, sBerryCrushTextColorTable[0], 0, gStringVar4);
 }
 
-bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
+static bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
 {
     u8 r5;
     struct WindowTemplate template;
@@ -1513,7 +1513,7 @@ bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
     {
     case 0:
         r5 = r4->unk9 - 2;
-        sub_8022554(r6);
+        BerryCrush_HideTimerSprites(r6);
         memcpy(&template, &gUnknown_082F3324[r4->unk12 - 11], sizeof(struct WindowTemplate));
         if (r4->unk12 == 13)
             template.height = gUnknown_082F3344[1][r5];
@@ -1534,18 +1534,18 @@ bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
         switch (r4->unk12)
         {
         case 11:
-            sub_80219C8(r6->unk82, 20, 3, gText_PressesRankings);
-            sub_8021A28(r4, 0, 0xA0, 8 * gUnknown_082F3344[0][r5]);
+            PrintTextCentered(r6->unk82, 20, 3, gText_PressesRankings);
+            PrintBerryCrushResultWindow(r4, 0, 0xA0, 8 * gUnknown_082F3344[0][r5]);
             r6->unk80 = 5;
             return FALSE;
         case 12:
-            sub_80219C8(r6->unk82, 20, 4, gUnknown_082F43B4[r4->unk68.unk20[0][7] + 3]);
-            sub_8021A28(r4, 1, 0xA0, 8 * gUnknown_082F3344[0][r5]);
+            PrintTextCentered(r6->unk82, 20, 4, gUnknown_082F43B4[r4->unk68.unk20[0][7] + 3]);
+            PrintBerryCrushResultWindow(r4, 1, 0xA0, 8 * gUnknown_082F3344[0][r5]);
             r6->unk80 = 5;
             return FALSE;
         case 13:
-            sub_80219C8(r6->unk82, 22, 3, gText_CrushingResults);
-            sub_8021A28(r4, 2, 0xB0, 8 * gUnknown_082F3344[1][r5]);
+            PrintTextCentered(r6->unk82, 22, 3, gText_CrushingResults);
+            PrintBerryCrushResultWindow(r4, 2, 0xB0, 8 * gUnknown_082F3344[1][r5]);
             break;
         }
         break;
@@ -1561,7 +1561,7 @@ bool32 sub_8022070(struct BerryCrushGame *r4, struct BerryCrushGame_138 *r6)
     return FALSE;
 }
 
-void sub_802222C(struct BerryCrushGame *r4)
+static void sub_802222C(struct BerryCrushGame *r4)
 {
     ClearStdWindowAndFrameToTransparent(r4->unk138.unk82, 1);
     RemoveWindow(r4->unk138.unk82);
@@ -1681,15 +1681,15 @@ void ShowBerryCrushRankings(void)
     gTasks[taskId].data[5] = gSaveBlock2Ptr->berryCrush.berryCrushResults[3];
 }
 
-void sub_8022524(struct BerryCrushGame_138 *r4, u16 r1)
+static void BerryCrush_PrintTimeOnSprites(struct BerryCrushGame_138 *r4, u16 r1)
 {
-    sub_8021944(r4, r1);
+    FramesToMinSec(r4, r1);
     DigitObjUtil_PrintNumOn(0, r4->unk4);
     DigitObjUtil_PrintNumOn(1, r4->unk6);
     DigitObjUtil_PrintNumOn(2, r4->unk8);
 }
 
-void sub_8022554(struct BerryCrushGame_138 *r0)
+static void BerryCrush_HideTimerSprites(struct BerryCrushGame_138 *r0)
 {
     r0->unk78[0]->invisible = TRUE;
     r0->unk78[1]->invisible = TRUE;
@@ -1698,7 +1698,7 @@ void sub_8022554(struct BerryCrushGame_138 *r0)
     DigitObjUtil_HideOrShow(0, 1);
 }
 
-void sub_8022588(struct BerryCrushGame *r5)
+static void sub_8022588(struct BerryCrushGame *r5)
 {
     u8 r6;
 
@@ -1711,7 +1711,7 @@ void sub_8022588(struct BerryCrushGame *r5)
     }
 }
 
-void sub_8022600(struct BerryCrushGame *r6)
+static void sub_8022600(struct BerryCrushGame *r6)
 {
     u8 r7;
 
@@ -1751,7 +1751,7 @@ void sub_8022600(struct BerryCrushGame *r6)
     CopyBgTilemapBufferToVram(0);
 }
 
-void sub_80226D0(struct BerryCrushGame *r6)
+static void sub_80226D0(struct BerryCrushGame *r6)
 {
     u8 r5 = 0;
     u8 * r4;
@@ -1772,7 +1772,7 @@ void sub_80226D0(struct BerryCrushGame *r6)
     CopyBgTilemapBufferToVram(3);
 }
 
-void sub_8022730(struct BerryCrushGame *r6)
+static void sub_8022730(struct BerryCrushGame *r6)
 {
     u8 r5 = 0;
     u8 r2;
@@ -1834,10 +1834,10 @@ void sub_8022730(struct BerryCrushGame *r6)
     DigitObjUtil_CreatePrinter(1, 0, &gUnknown_082F4384[1]);
     DigitObjUtil_CreatePrinter(2, 0, &gUnknown_082F4384[2]);
     if (r6->unk12 == 1)
-        sub_8022554(&r6->unk138);
+        BerryCrush_HideTimerSprites(&r6->unk138);
 }
 
-void sub_8022960(struct BerryCrushGame *r5)
+static void sub_8022960(struct BerryCrushGame *r5)
 {
     u8 r4 = 0;
 
@@ -1861,7 +1861,7 @@ void sub_8022960(struct BerryCrushGame *r5)
         DestroySprite(r5->unk138.unk20);
 }
 
-static void sub_8022A20(struct Sprite *sprite)
+static void SpriteCB_BerryCrushImpact(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -1870,7 +1870,7 @@ static void sub_8022A20(struct Sprite *sprite)
     }
 }
 
-void sub_8022A4C(struct Sprite *sprite)
+static void sub_8022A4C(struct Sprite *sprite)
 {
     u8 r1 = 0;
     SpriteCallback r5 = SpriteCallbackDummy;
@@ -1884,7 +1884,7 @@ void sub_8022A4C(struct Sprite *sprite)
     sprite->callback = r5;
 }
 
-void sub_8022A94(struct Sprite *sprite)
+static void sub_8022A94(struct Sprite *sprite)
 {
     s16 *r4 = sprite->data;
 
@@ -1906,7 +1906,7 @@ void sub_8022A94(struct Sprite *sprite)
         sprite->callback = sub_8022A4C;
 }
 
-void sub_8022B28(struct Sprite *sprite)
+static void sub_8022B28(struct Sprite *sprite)
 {
     s16 *r7 = sprite->data;
     s16 r4, r5;
@@ -1933,23 +1933,23 @@ void sub_8022B28(struct Sprite *sprite)
     sprite->invisible = FALSE;
 }
 
-void sub_8022BEC(u16 r5, u8 r4, u8 *r7)
+static void BerryCrush_RunOrScheduleCommand(u16 r5, u8 r4, u8 *r7)
 {
     struct BerryCrushGame *r6 = GetBerryCrushGame();
 
-    if (r5 > 25)
+    if (r5 >= ARRAY_COUNT(sBerryCrushCommands))
         r5 = 0;
     switch (r4)
     {
     case 0:
         if (r5 != 0)
-            gUnknown_082F43CC[r5](r6, r7);
-        if (r6->unkE > 25)
+            sBerryCrushCommands[r5](r6, r7);
+        if (r6->unkE >= ARRAY_COUNT(sBerryCrushCommands))
             r6->unkE = r4;
-        r6->unk4 = gUnknown_082F43CC[r6->unkE];
+        r6->unk4 = sBerryCrushCommands[r6->unkE];
         break;
     case 1:
-        r6->unk4 = gUnknown_082F43CC[r5];
+        r6->unk4 = sBerryCrushCommands[r5];
         break;
     }
 }
@@ -1993,7 +1993,7 @@ static u32 BerryCrushCommand_BeginNormalPaletteFade(struct BerryCrushGame *game,
     return 0;
 }
 
-static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5)
+static u32 BerryCrushCommand_WaitPaletteFade(struct BerryCrushGame *r4, u8 *r5)
 {
     switch (r4->unkC)
     {
@@ -2017,7 +2017,7 @@ static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5)
         }
         return 0;
     case 3:
-        sub_8022BEC(r4->unkF, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(r4->unkF, 1, NULL);
         r4->unkC = 0;
         return 0;
     default:
@@ -2026,7 +2026,7 @@ static u32 sub_8022CB0(struct BerryCrushGame *r4, u8 *r5)
     }
 }
 
-static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5)
+static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame *r7, u8 *r5)
 {
     u16 r4 = r5[3];
 
@@ -2062,7 +2062,7 @@ static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5)
     case 3:
         if (r5[1] & 1)
             ClearDialogWindowAndFrame(0, 1);
-        sub_8022BEC(r7->unkE, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(r7->unkE, 1, NULL);
         r7->unkC = r5[4];
         return 0;
     }
@@ -2070,21 +2070,21 @@ static u32 sub_8022D14(struct BerryCrushGame *r7, u8 *r5)
     return 0;
 }
 
-static u32 sub_8022E1C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_InitGfx(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     if (InitBerryCrushDisplay() != 0)
-        sub_8022BEC(r4->unkE, 0, r4->unk36);
+        BerryCrush_RunOrScheduleCommand(r4->unkE, 0, r4->unk36);
     return 0;
 }
 
-static u32 sub_8022E3C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_TeardownGfx(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
-    if (sub_802130C() != 0)
-        sub_8022BEC(r4->unkE, 0, r4->unk36);
+    if (BerryCrush_TeardownBgs() != 0)
+        BerryCrush_RunOrScheduleCommand(r4->unkE, 0, r4->unk36);
     return 0;
 }
 
-static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_SignalReadyToBegin(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2095,7 +2095,7 @@ static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
         if (IsLinkTaskFinished())
         {
             PlayNewMapMusic(MUS_RG_GAME_CORNER);
-            sub_8022BEC(7, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(7, 1, NULL);
             r4->unk12 = 3;
             r4->unkC = 0;
         }
@@ -2105,7 +2105,7 @@ static u32 sub_8022E5C(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5)
+static u32 BerryCrushCommand_AskPickBerry(struct BerryCrushGame *r4, u8 *r5)
 {
     switch (r4->unkC)
     {
@@ -2114,36 +2114,36 @@ static u32 sub_8022EAC(struct BerryCrushGame *r4, u8 *r5)
         break;
     case 0:
         sub_8024578(r4);
-        sub_8024644(r5, 0, 1, 0, 1);
+        BerryCrush_SetShowMessageParams(r5, 0, 1, 0, 1);
         r4->unkE = 7;
-        sub_8022BEC(3, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(3, 1, NULL);
         break;
     case 1:
         r4->unkE = 8;
-        sub_8022BEC(5, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(5, 1, NULL);
         r4->unkC = 2;
         break;
     }
     return 0;
 }
 
-static u32 sub_8022F04(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_GoToBerryPouch(struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
 {
     r0->unk4 = NULL;
     SetMainCallback2(BerryCrush_SetupMainTask);
     return 0;
 }
 
-static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
+static u32 BerryCrushCommand_WaitForOthersToPickBerries(struct BerryCrushGame *r5, u8 *r2)
 {
     u8 r3;
 
     switch (r5->unkC)
     {
     case 0:
-        sub_8024644(r2, 1, 0, 0, 1);
+        BerryCrush_SetShowMessageParams(r2, 1, 0, 0, 1);
         r5->unkE = 9;
-        sub_8022BEC(3, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(3, 1, NULL);
         return 0;
     case 1:
         Rfu_SetLinkStandbyCallback();
@@ -2177,7 +2177,7 @@ static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
         break;
     case 5:
         ClearDialogWindowAndFrame(0, 1);
-        sub_8022BEC(10, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(10, 1, NULL);
         r5->unk12 = 4;
         r5->unkC = 0;
         return 0;
@@ -2186,12 +2186,12 @@ static u32 sub_8022F1C(struct BerryCrushGame *r5, u8 *r2)
     return 0;
 }
 
-static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_DropBerriesIntoCrusher(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
     case 0:
-        sub_80214A8(r4, &r4->unk138);
+        BerryCrush_CreateBerrySprites(r4, &r4->unk138);
         Rfu_SetLinkStandbyCallback();
         break;
     case 1:
@@ -2203,12 +2203,12 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         r4->unk138.unk3 = 0;
         break;
     case 2:
-        r4->unk138.unk38[r4->unk138.unk0]->callback = sub_8021608;
+        r4->unk138.unk38[r4->unk138.unk0]->callback = SpriteCB_DropBerryIntoCrusher;
         r4->unk138.unk38[r4->unk138.unk0]->affineAnimPaused = FALSE;
         PlaySE(SE_BALL_THROW);
         break;
     case 3:
-        if (r4->unk138.unk38[r4->unk138.unk0]->callback == sub_8021608)
+        if (r4->unk138.unk38[r4->unk138.unk0]->callback == SpriteCB_DropBerryIntoCrusher)
             return 0;
         r4->unk138.unk38[r4->unk138.unk0] = NULL;
         ++r4->unk138.unk0;
@@ -2225,14 +2225,14 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         r4->unk138.unk0 = 0;
         break;
     case 5:
-        sub_80216A8(r4, &r4->unk138);
+        BerryCrushFreeBerrySpriteGfx(r4, &r4->unk138);
         Rfu_SetLinkStandbyCallback();
         break;
     case 6:
         if (!IsLinkTaskFinished())
             return 0;
         PlaySE(SE_FALL);
-        sub_8022BEC(11, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(11, 1, NULL);
         r4->unk12 = 5;
         r4->unkC = 0;
         return 0;
@@ -2241,7 +2241,7 @@ static u32 sub_8023070(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     return 0;
 }
 
-static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_DropLid(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2279,7 +2279,7 @@ static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 3:
         if (!IsLinkTaskFinished())
             return 0;
-        sub_8022BEC(12, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(12, 1, NULL);
         r4->unk12 = 6;
         r4->unkC = 0;
         return 0;
@@ -2288,7 +2288,7 @@ static u32 sub_80231B8(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     return 0;
 }
 
-static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_Countdown(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r1)
 {
     switch (r4-> unkC)
     {
@@ -2313,9 +2313,9 @@ static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
         r4->unk138.unk3 = 0;
         r4->unk10 = 0;
         if (r4->unk8 == 0)
-            sub_8022BEC(13, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(13, 1, NULL);
         else
-            sub_8022BEC(14, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(14, 1, NULL);
         r4->unk12 = 7;
         r4->unkC = 0;
         return 0;
@@ -2565,7 +2565,7 @@ void sub_802385C(struct BerryCrushGame *r5)
     }
 }
 
-static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_PlayGame_Master(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     memset(&r4->unk5C, 0, sizeof(r4->unk5C));
     memset(&r4->unk4E, 0, sizeof(r4->unk4E));
@@ -2578,11 +2578,11 @@ static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
         if (r4->unk28 >= 36000)
         {
             r4->unk28 = 36000;
-            sub_8022BEC(16, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(16, 1, NULL);
         }
         else
         {
-            sub_8022BEC(15, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(15, 1, NULL);
         }
         r4->unk10 = 0;
         r4->unkC = 0;
@@ -2598,7 +2598,7 @@ static u32 sub_80238F0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     }
 }
 
-static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_PlayGame_Slave(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     memset(&r4->unk5C, 0, sizeof(r4->unk5C));
     memset(&r4->unk4E, 0, sizeof(r4->unk4E));
@@ -2611,11 +2611,11 @@ static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
         if (r4->unk28 >= 36000)
         {
             r4->unk28 = 36000;
-            sub_8022BEC(16, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(16, 1, NULL);
         }
         else
         {
-            sub_8022BEC(15, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(15, 1, NULL);
         }
         r4->unk10 = 0;
         r4->unkC = 0;
@@ -2628,7 +2628,7 @@ static u32 sub_8023998(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     }
 }
 
-static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_FinishGame(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     switch (r4->unkC)
     {
@@ -2676,7 +2676,7 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     case 5:
         if (!IsLinkTaskFinished())
             return 0;
-        sub_8022BEC(17, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(17, 1, NULL);
         r4->unk10 = 0;
         r4->unkC = 0;
         return 0;
@@ -2685,7 +2685,7 @@ static u32 sub_8023A30(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
+static u32 BerryCrushCommand_HandleTimeUp(struct BerryCrushGame *r5, u8 *r6)
 {
     switch (r5->unkC)
     {
@@ -2714,9 +2714,9 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
         if (!IsLinkTaskFinished())
             return 0;
         ConvertIntToDecimalStringN(gStringVar1, r5->unk1C, STR_CONV_MODE_LEFT_ALIGN, 6);
-        sub_8024644(r6, 7, 1, 0, 0);
+        BerryCrush_SetShowMessageParams(r6, 7, 1, 0, 0);
         r5->unkE = 19;
-        sub_8022BEC(3, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(3, 1, NULL);
         r5->unk10 = 0;
         r5->unkC = 0;
         return 0;
@@ -2725,7 +2725,7 @@ static u32 sub_8023BC0(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1)
 {
     u8 r8, r4_, r3;
     s32 r2;
@@ -2877,7 +2877,7 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
         break;
     case 7:
         BerryCrush_SaveResults();
-        sub_8022BEC(18, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(18, 1, NULL);
         r7->unk12 = 11;
         r7->unkC = 0;
         r7->unk24 = 0;
@@ -2887,7 +2887,7 @@ static u32 sub_8023CAC(struct BerryCrushGame *r7, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
+static u32 BerryCrushCommand_ShowResults(struct BerryCrushGame *r5, u8 *r6)
 {
     switch (r5->unkC)
     {
@@ -2921,9 +2921,9 @@ static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
     case 4:
         ConvertIntToDecimalStringN(gStringVar1, r5->unk1C, STR_CONV_MODE_LEFT_ALIGN, 6);
         ConvertIntToDecimalStringN(gStringVar2, GetBerryPowder(), STR_CONV_MODE_LEFT_ALIGN, 6);
-        sub_8024644(r6, 2, 3, 0, 0);
+        BerryCrush_SetShowMessageParams(r6, 2, 3, 0, 0);
         r5->unkE = 19;
-        sub_8022BEC(3, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(3, 1, NULL);
         r5->unkC = 0;
         return 0;
     }
@@ -2931,16 +2931,16 @@ static u32 sub_8024048(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
+static u32 BerryCrushCommand_SaveGame(struct BerryCrushGame *r5, u8 *r4)
 {
     switch (r5->unkC)
     {
     case 0:
         if (r5->unk28 >= 36000)
-            sub_8022554(&r5->unk138);
-        sub_8024644(r4, 8, 0, 0, 1);
+            BerryCrush_HideTimerSprites(&r5->unk138);
+        BerryCrush_SetShowMessageParams(r4, 8, 0, 0, 1);
         r5->unkE = 19;
-        sub_8022BEC(3, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(3, 1, NULL);
         r5->unkC = 0;
         return 0;
     case 1:
@@ -2959,7 +2959,7 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
             return 0;
         break;
     case 4:
-        sub_8022BEC(20, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(20, 1, NULL);
         r5->unk12 = 15;
         r5->unkC = 0;
         return 0;
@@ -2968,16 +2968,16 @@ static u32 sub_8024134(struct BerryCrushGame *r5, u8 *r4)
     return 0;
 }
 
-static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
+static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame *r5, u8 *r6)
 {
     s8 r4 = 0;
 
     switch (r5->unkC)
     {
     case 0:
-        sub_8024644(r6, 4, 0, 0, 1);
+        BerryCrush_SetShowMessageParams(r6, 4, 0, 0, 1);
         r5->unkE = 20;
-        sub_8022BEC(3, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(3, 1, NULL);
         r5->unkC = 0; // dunno what it's doing because it's already in case 0
         return 0;
     case 1:
@@ -3000,9 +3000,9 @@ static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
                 r5->unk14 = 1;
             }
             ClearDialogWindowAndFrame(0, 1);
-            sub_8024644(r6, 8, 0, 0, 0);
+            BerryCrush_SetShowMessageParams(r6, 8, 0, 0, 0);
             r5->unkE = 21;
-            sub_8022BEC(3, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(3, 1, NULL);
             r5->unkC = 0;
         }
         return 0;
@@ -3011,7 +3011,7 @@ static u32 sub_8024228(struct BerryCrushGame *r5, u8 *r6)
     return 0;
 }
 
-static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     u8 r5 = 0;
 
@@ -3038,9 +3038,9 @@ static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
         for (; r5 < r4->unk9; ++r5)
             r4->unk4E[0] += gBlockRecvBuffer[r5][0];
         if (r4->unk4E[0] != 0)
-            sub_8022BEC(23, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(23, 1, NULL);
         else
-            sub_8022BEC(22, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(22, 1, NULL);
         ResetBlockReceivedFlags();
         r4->unk42[0] = 0;
         r4->unk4E[0] = 0;
@@ -3052,7 +3052,7 @@ static u32 sub_80242E0(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_FadeOutToPlayAgain(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3073,7 +3073,7 @@ static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     case 3:
         if (UpdatePaletteFade())
             return 0;
-        sub_8022BEC(7, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(7, 1, NULL);
         r5->unk12 = 3;
         r5->unkC = 0;
         return 0;
@@ -3082,7 +3082,7 @@ static u32 sub_80243BC(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_PlayAgainFailureMessage(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3104,7 +3104,7 @@ static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
             --r5->unk138.unk0;
         else
         {
-            sub_8022BEC(24, 1, NULL);
+            BerryCrush_RunOrScheduleCommand(24, 1, NULL);
             r5->unkC = 0;
         }
         return 0;
@@ -3113,7 +3113,7 @@ static u32 sub_8024444(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_GracefulExit(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1)
 {
     switch (r5->unkC)
     {
@@ -3129,7 +3129,7 @@ static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
         if (gReceivedRemoteLinkPlayers != 0)
             return 0;
         r5->unkE = 25;
-        sub_8022BEC(5, 1, NULL);
+        BerryCrush_RunOrScheduleCommand(5, 1, NULL);
         r5->unkC = 2; // ???
         return 0;
     }
@@ -3137,13 +3137,13 @@ static u32 sub_8024508(struct BerryCrushGame *r5, __attribute__((unused)) u8 *r1
     return 0;
 }
 
-static u32 sub_8024568(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
+static u32 BerryCrushCommand_Quit(__attribute__((unused)) struct BerryCrushGame *r0, __attribute__((unused)) u8 *r1)
 {
     QuitBerryCrush(NULL);
     return 0;
 }
 
-void sub_8024578(struct BerryCrushGame *r4)
+static void sub_8024578(struct BerryCrushGame *r4)
 {
     u8 r5 = 0;
 
@@ -3198,7 +3198,7 @@ static void BerryCrush_SetPaletteFadeParams(u8 *params, bool8 communicateAfter, 
     params[9] = communicateAfter;
 }
 
-void sub_8024644(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
+static void BerryCrush_SetShowMessageParams(u8 *r0, u32 r1, u32 r2, u32 r3, u32 r5)
 {
     u8 sp[4];
 

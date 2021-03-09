@@ -2276,7 +2276,7 @@ static void EndLinkBattleInSteps(void)
                 }
                 else if (gReceivedRemoteLinkPlayers == 0)
                 {
-                    CreateTask(sub_80B3AF8, 5);
+                    CreateTask(Task_ReconnectWithLinkPlayers, 5);
                     gBattleCommunication[MULTIUSE_STATE]++;
                 }
                 else
@@ -2307,7 +2307,7 @@ static void EndLinkBattleInSteps(void)
             gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 5:
-        if (!FuncIsActiveTask(sub_80B3AF8))
+        if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
             gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 6:
@@ -2430,11 +2430,11 @@ static void sub_803939C(void)
         break;
     case 1:
         if (gMain.field_439_x4 && gReceivedRemoteLinkPlayers == 0)
-            CreateTask(sub_80B3AF8, 5);
+            CreateTask(Task_ReconnectWithLinkPlayers, 5);
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 2:
-        if (!FuncIsActiveTask(sub_80B3AF8))
+        if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
             gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 3:
