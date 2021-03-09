@@ -437,7 +437,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         task->data[10] = gBattle_BG2_Y;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
         FillPalette(0, 144, 32);
-        scanlineParams.dmaDest = (void *)&REG_BG2VOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG2VOFS;
         var0 = WINOUT_WIN01_BG2;
         if (!IsContest())
             gBattle_BG1_X += 240;
@@ -598,9 +598,9 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
         break;
     case 3:
         if (task->data[3] == 1)
-            scanlineParams.dmaDest = (void *)&REG_BG1VOFS;
+            scanlineParams.dmaDest = (void *)REG_ADDR_BG1VOFS;
         else
-            scanlineParams.dmaDest = (void *)&REG_BG2VOFS;
+            scanlineParams.dmaDest = (void *)REG_ADDR_BG2VOFS;
 
         for (i = 0; i < 112; i++)
         {
