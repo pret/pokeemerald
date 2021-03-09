@@ -7908,7 +7908,7 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
                 if (MonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
                     targetSpecies = formChanges[i].targetSpecies;
                 break;
-            case FORM_WITHDRAW:
+            default:
                 targetSpecies = formChanges[i].targetSpecies; 
                 break;
             }
