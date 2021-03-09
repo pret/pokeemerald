@@ -77,32 +77,32 @@ static const struct FormChange sArceusFormChangeTable[] = {
 };
 
 static const struct FormChange sTornadusFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
+    // {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sTornadusTherianFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_TORNADUS, ITEM_REVEAL_GLASS},
+    // {FORM_ITEM_USE, SPECIES_TORNADUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sThundurusFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_THUNDURUS_THERIAN, ITEM_REVEAL_GLASS},
+    // {FORM_ITEM_USE, SPECIES_THUNDURUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sThundurusTherianFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_THUNDURUS, ITEM_REVEAL_GLASS},
+    // {FORM_ITEM_USE, SPECIES_THUNDURUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sLandorusFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_LANDORUS_THERIAN, ITEM_REVEAL_GLASS},
+    // {FORM_ITEM_USE, SPECIES_LANDORUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
 static const struct FormChange sLandorusTherianFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_LANDORUS, ITEM_REVEAL_GLASS},
+    // {FORM_ITEM_USE, SPECIES_LANDORUS, ITEM_REVEAL_GLASS},
     {FORM_CHANGE_END},
 };
 
@@ -125,7 +125,7 @@ static const struct FormChange sGenesectFormChangeTable[] = {
 };
 
 static const struct FormChange sHoopaFormChangeTable[] = {
-    {FORM_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
+    // {FORM_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA},
     {FORM_CHANGE_END},
 };
 
