@@ -113,6 +113,7 @@
 #define B_CAN_SPITE_FAIL            GEN_6 // In Gen4+, Spite can no longer fail if the foe's last move only has 1 remaining PP.
 #define B_CRASH_IF_TARGET_IMMUNE    GEN_6 // In Gen4+, The user of Jump Kick or Hi Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
 #define B_TAILWIND_TIMER            GEN_5 // In Gen5+, Tailwind lasts 4 turns instead of 3.
+#define B_MEMENTO_FAIL              GEN_4 // In Gen4+, memento fails if there is no target or if the target is protected or behind substitute. But not if atk/sp.atk are at -6
 
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_6 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move.
