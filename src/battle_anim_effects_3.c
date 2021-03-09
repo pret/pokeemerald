@@ -1819,9 +1819,9 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
     }
 
     if (toBG2 == 1)
-        scanlineParams.dmaDest = &REG_BG1HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG1HOFS;
     else
-        scanlineParams.dmaDest = &REG_BG2HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG2HOFS;
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
     scanlineParams.initState = 1;
@@ -3328,14 +3328,14 @@ void AnimTask_AcidArmor(u8 taskId)
     task->data[15] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
     if (GetBattlerSpriteBGPriorityRank(battler) == 1)
     {
-        scanlineParams.dmaDest = &REG_BG1HOFS;
+        scanlineParams.dmaDest = (void *)&REG_BG1HOFS;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
         bgX = gBattle_BG1_X;
         bgY = gBattle_BG1_Y;
     }
     else
     {
-        scanlineParams.dmaDest = &REG_BG2HOFS;
+        scanlineParams.dmaDest = (void *)&REG_BG2HOFS;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
         bgX = gBattle_BG2_X;
         bgY = gBattle_BG2_Y;

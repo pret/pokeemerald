@@ -3106,7 +3106,7 @@ static void InitScanlineEffect(void)
 {
     struct ScanlineEffectParams params;
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    params.dmaDest = &REG_BG1HOFS;
+    params.dmaDest = (void *)REG_ADDR_BG1HOFS;
     params.initState = 1;
     params.unused9 = 0;
     sDisplay->bg1hofs = 0;
