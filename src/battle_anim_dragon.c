@@ -334,12 +334,12 @@ void AnimTask_DragonDanceWaver(u8 taskId)
     u8 y;
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
-        scanlineParams.dmaDest = &REG_BG1HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG1HOFS;
         task->data[2] = gBattle_BG1_X;
     }
     else
     {
-        scanlineParams.dmaDest = &REG_BG2HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG2HOFS;
         task->data[2] = gBattle_BG2_X;
     }
 
