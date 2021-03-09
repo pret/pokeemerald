@@ -36,6 +36,7 @@
 #define sMULTIHIT_EFFECT gBattleScripting + 0x30
 #define sILLUSION_NICK_HACK gBattleScripting + 0x32
 #define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
+#define sABILITY_OVERWRITE gBattleScripting + 0x34
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 
@@ -168,6 +169,7 @@
 #define VARIOUS_JUMP_IF_ABSENT                  101
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
+#define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
