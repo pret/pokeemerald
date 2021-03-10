@@ -173,10 +173,10 @@ static void sub_80A95F4(void)
 {
     struct BGCntrlBitfield *regBgcnt1, *regBgcnt2;
 
-    regBgcnt1 = (struct BGCntrlBitfield *)(&REG_BG1CNT);
+    regBgcnt1 = (struct BGCntrlBitfield *)(REG_ADDR_BG1CNT);
     regBgcnt1->charBaseBlock = 0;
 
-    regBgcnt2 = (struct BGCntrlBitfield *)(&REG_BG2CNT);
+    regBgcnt2 = (struct BGCntrlBitfield *)(REG_ADDR_BG2CNT);
     regBgcnt2->charBaseBlock = 0;
 }
 

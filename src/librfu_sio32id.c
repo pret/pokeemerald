@@ -79,7 +79,7 @@ static s32 Sio32IDMain(void)
         REG_IE |= INTR_FLAG_SERIAL;
         REG_IME = 1;
         gRfuSIO32Id.state = 1;
-        *(vu8 *)&REG_SIOCNT |= SIO_ENABLE;
+        *(vu8 *)REG_ADDR_SIOCNT |= SIO_ENABLE;
         break;
     case 1:
         if (gRfuSIO32Id.lastId == 0)
