@@ -139,18 +139,16 @@ struct MapHeader
     /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;
     /* 0x18 */ u8 filler_18[2];
-    /* 0x1A */ u8 flags;
+    /* 0x1A */ bool8 canCycle:1;
+               bool8 canEscape:1;
+               bool8 canRun:1;
+               bool8 showMap:5;
     /* 0x1B */ u8 battleType;
 };
 
-// Flags for gMapHeader.flags, as defined in the map_header_flags macro
-#define MAP_ALLOW_CYCLING      (1 << 0)
-#define MAP_ALLOW_ESCAPING     (1 << 1) // Escape Rope and Dig
-#define MAP_ALLOW_RUNNING      (1 << 2)
-#define MAP_SHOW_MAP_NAME      (1 << 3)
-#define UNUSED_MAP_FLAGS       (1 << 4 | 1 << 5 | 1 << 6 | 1 << 7)
+// All checking for if the Map name is enabled MUST compare the flag to TRUE to match
 
-#define SHOW_MAP_NAME_ENABLED  ((gMapHeader.flags & (MAP_SHOW_MAP_NAME | UNUSED_MAP_FLAGS)) == MAP_SHOW_MAP_NAME)
+#define SHOW_MAP_NAME_ENABLED  (gMapHeader.showMap == TRUE)
 
 
 struct ObjectEvent
