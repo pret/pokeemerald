@@ -489,7 +489,6 @@ static bool8 MonListHasMon(const struct WildPokemonInfo *info, u16 species, u16 
 static void BuildAreaGlowTilemap(void)
 {
     u16 i, y, x, j;
-    u16 val;
 
     for (i = 0; i < ARRAY_COUNT(sPokedexAreaScreen->areaGlowTilemap); i++)
         sPokedexAreaScreen->areaGlowTilemap[i] = 0;

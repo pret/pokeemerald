@@ -944,40 +944,6 @@ static void TryToggleHealboxVisibility(u8 priority, u8 healthboxLeftSpriteId, u8
     u8 spriteIds[4] = {healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId, indicatorSpriteId};
     int i;
     
-    switch (gBattleResources->bufferA[gBattleAnimAttacker][0])
-    {
-    case CONTROLLER_MOVEANIMATION:
-        if (gBattleResources->bufferA[gBattleAnimAttacker][1] == MOVE_TRANSFORM)
-            return;
-        break;
-    case CONTROLLER_BALLTHROWANIM:
-        return;   //throwing ball does not hide hp boxes
-    case CONTROLLER_BATTLEANIMATION:
-        //check special anims that hide health boxes
-        switch (gBattleResources->bufferA[gBattleAnimAttacker][1])
-        {
-        case B_ANIM_TURN_TRAP:
-        case B_ANIM_LEECH_SEED_DRAIN:
-        case B_ANIM_MON_HIT:
-        case B_ANIM_SNATCH_MOVE:
-        case B_ANIM_FUTURE_SIGHT_HIT:
-        case B_ANIM_DOOM_DESIRE_HIT:
-        case B_ANIM_WISH_HEAL:
-        //new
-        case B_ANIM_MEGA_EVOLUTION:
-        case B_ANIM_TERRAIN_MISTY:
-        case B_ANIM_TERRAIN_GRASSY:
-        case B_ANIM_TERRAIN_ELECTRIC:
-        case B_ANIM_TERRAIN_PSYCHIC:
-        case B_ANIM_GULP_MISSILE:
-            break;
-        }
-        return; //all other special anims dont hide
-    default:
-        return;
-    }
-    
-    // if we've reached here, we should hide hp boxes
     for (i = 0; i < NELEMS(spriteIds); i++)
     {
         if (spriteIds[i] == 0xFF)
@@ -995,7 +961,7 @@ static void TryToggleHealboxVisibility(u8 priority, u8 healthboxLeftSpriteId, u8
     }
 }
 
-void UpdateOamPriorityInAllHealthboxes(u8 priority)
+void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
 {
     s32 i;
     
@@ -1012,8 +978,8 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
         if (indicatorSpriteId != 0xFF)
             gSprites[indicatorSpriteId].oam.priority = priority;
         
-        #if HIDE_HEALTHBOXES_DURING_ANIMS
-        if (IsBattlerAlive(i))
+        #if B_HIDE_HEALTHBOXES_DURING_ANIMS
+        if (hideHPBoxes && IsBattlerAlive(i))
             TryToggleHealboxVisibility(priority, healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId, indicatorSpriteId);
         #endif
     }
@@ -2060,7 +2026,6 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     void *ptr;
-    const u8 *genderTxt;
     u32 windowId, spriteTileNum, species;
     u8 *windowTileData;
     u8 gender;
@@ -3019,6 +2984,9 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if (!B_ABILITY_POP_UP)
         return;
+    
+    if (gBattleScripting.abilityPopupOverwrite != 0)
+        ability = gBattleScripting.abilityPopupOverwrite;
 
     if (!gBattleStruct->activeAbilityPopUps)
     {
