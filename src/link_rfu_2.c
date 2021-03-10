@@ -2472,7 +2472,7 @@ void RfuVSync(void)
     rfu_LMAN_syncVBlank();
 }
 
-void sub_8011AC8(void)
+void ClearRecvCommands(void)
 {
     CpuFill32(0, gRecvCmds, sizeof(gRecvCmds));
 }

@@ -2646,13 +2646,13 @@ static const struct OamData sOamData_Star =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpriteAnim_82FBFE0[] =
+static const union AnimCmd sAnim_Star_Still[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBFE8[] =
+static const union AnimCmd sAnim_Star_Spinning[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(4, 4),
@@ -2665,8 +2665,8 @@ static const union AnimCmd sSpriteAnim_82FBFE8[] =
 
 static const union AnimCmd *const sAnims_Star[] =
 {
-    sSpriteAnim_82FBFE0,
-    sSpriteAnim_82FBFE8
+    sAnim_Star_Still,
+    sAnim_Star_Spinning
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Star =
