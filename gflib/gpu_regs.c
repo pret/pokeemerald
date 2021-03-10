@@ -10,7 +10,7 @@
 
 static u8 sGpuRegBuffer[GPU_REG_BUF_SIZE];
 static u8 sGpuRegWaitingList[GPU_REG_BUF_SIZE];
-static bool8 sGpuRegBufferLocked;
+static vbool8 sGpuRegBufferLocked; // Must be volatile to avoid gcc from optimizing out this check
 static bool8 sShouldSyncRegIE;
 static u16 sRegIE;
 
