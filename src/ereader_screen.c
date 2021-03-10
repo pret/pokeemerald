@@ -13,76 +13,76 @@
 #include "util.h"
 #include "constants/songs.h"
 
-struct Unk81D5014
+struct MEventTaskData1
 {
-    u16 unk0;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 *unk10;
+    u16 stateAdvanceDelay;
+    u16 t02;
+    u16 t04;
+    u16 t06;
+    u8 state;
+    u8 textOrReceiveState;
+    u8 t0A;
+    u8 t0B;
+    u8 t0C;
+    u8 t0D;
+    u8 initialSendResult;
+    struct MEvent_Str_2 *t10;
 };
 
-struct Unk03006370
+struct MEvent_Str_1
 {
-    u16 unk0;
-    u32 unk4;
-    u32 *unk8;
+    u16 status;
+    u32 size;
+    const u32 *data;
 };
 
-static void sub_81D5084(u8);
+static void Task_EReaderComm(u8);
 
-struct Unk03006370 gUnknown_03006370;
+struct MEvent_Str_1 sMEventSendToEReaderManager;
 
 extern const u8 gUnknown_089A3470[];
 extern const u8 gMultiBootProgram_BerryGlitchFix_Start[];
 
-static void sub_81D4D50(struct Unk03006370 *arg0, int arg1, u32 *arg2)
+static void SendUnknownSerialData_Init(struct MEvent_Str_1 *arg0, u32 arg1, u32 *arg2)
 {
     volatile u16 backupIME = REG_IME;
     REG_IME = 0;
-    gIntrTable[1] = sub_81D3FAC;
-    gIntrTable[2] = sub_81D3F9C;
+    gIntrTable[1] = EReaderHelper_SerialCallback;
+    gIntrTable[2] = EReaderHelper_Timer3Callback;
     EReaderHelper_SaveRegsState();
-    sub_81D4238();
+    EReaderHelper_ClearsSendRecvMgr();
     REG_IE |= INTR_FLAG_VCOUNT;
     REG_IME = backupIME;
-    arg0->unk0 = 0;
-    arg0->unk4 = arg1;
-    arg0->unk8 = arg2;
+    arg0->status = 0;
+    arg0->size = arg1;
+    arg0->data = arg2;
 }
 
-static void sub_81D4DB8(struct Unk03006370 *arg0)
+static void SendUnknownSerialData_Teardown(struct MEvent_Str_1 *arg0)
 {
-    volatile u16 backupIME = REG_IME;
+    vu16 backupIME = REG_IME;
     REG_IME = 0;
-    sub_81D4238();
+    EReaderHelper_ClearsSendRecvMgr();
     EReaderHelper_RestoreRegsState();
     RestoreSerialTimer3IntrHandlers();
     REG_IME = backupIME;
 }
 
-static u8 sub_81D4DE8(struct Unk03006370 *arg0)
+static u8 SendUnknownSerialData_Run(struct MEvent_Str_1 *arg0)
 {
-    u8 var0 = 0;
-    arg0->unk0 = EReaderHandleTransfer(1, arg0->unk4, arg0->unk8, NULL);
-    if ((arg0->unk0 & 0x13) == 0x10)
-        var0 = 1;
+    u8 retVar = 0;
+    arg0->status = EReaderHandleTransfer(1, arg0->size, arg0->data, NULL);
+    if ((arg0->status & 0x13) == 0x10)
+        retVar = 1;
 
-    if (arg0->unk0 & 0x8)
-        var0 = 2;
+    if (arg0->status & 0x8)
+        retVar = 2;
 
-    if (arg0->unk0 & 0x4)
-        var0 = 3;
+    if (arg0->status & 0x4)
+        retVar = 3;
 
     gShouldAdvanceLinkState = 0;
-    return var0;
+    return retVar;
 }
 
 static void OpenEReaderLink(void)
@@ -95,7 +95,7 @@ static void OpenEReaderLink(void)
 
 static bool32 sub_81D4E60(void)
 {
-    volatile u16 backupIME;
+    vu16 backupIME;
     u16 sp4[4];
 
     backupIME = REG_IME;
@@ -111,7 +111,7 @@ static bool32 sub_81D4E60(void)
     return FALSE;
 }
 
-static bool32 sub_81D4EC0(void)
+static bool32 IsEReaderConnectionSane(void)
 {
     if (IsLinkMaster() && GetLinkPlayerCount_2() == 2)
         return TRUE;
@@ -119,7 +119,7 @@ static bool32 sub_81D4EC0(void)
     return FALSE;
 }
 
-static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
+static u32 EReaderReceive(u8 *arg0, u16 *arg1)
 {
     u8 var0;
 
@@ -211,87 +211,86 @@ static u32 sub_81D4EE4(u8 *arg0, u16 *arg1)
 
 void task_add_00_ereader(void)
 {
-    struct Unk81D5014 *data;
-    u8 taskId = CreateTask(sub_81D5084, 0);
-    data = (struct Unk81D5014 *)gTasks[taskId].data;
-    data->unk8 = 0;
-    data->unk9 = 0;
-    data->unkA = 0;
-    data->unkB = 0;
-    data->unkC = 0;
-    data->unkD = 0;
-    data->unk0 = 0;
-    data->unk2 = 0;
-    data->unk4 = 0;
-    data->unk6 = 0;
-    data->unkE = 0;
-    data->unk10 = AllocZeroed(0x40);
+    u8 taskId = CreateTask(Task_EReaderComm, 0);
+    struct MEventTaskData1 *data = (struct MEventTaskData1 *)gTasks[taskId].data;
+    data->state = 0;
+    data->textOrReceiveState = 0;
+    data->t0A = 0;
+    data->t0B = 0;
+    data->t0C = 0;
+    data->t0D = 0;
+    data->stateAdvanceDelay = 0;
+    data->t02 = 0;
+    data->t04 = 0;
+    data->t06 = 0;
+    data->initialSendResult = 0;
+    data->t10 = AllocZeroed(0x40); // sizeof(struct MEvent_Str_2)
 }
 
-static void sub_81D505C(u16 *arg0)
+static void ResetDelayTimer(u16 *arg0)
 {
     *arg0 = 0;
 }
 
-static bool32 sub_81D5064(u16 *arg0, u16 arg1)
+static bool32 AdvanceDelayTimerCheckTimeout(u16 *arg0, u16 arg1)
 {
     if (++(*arg0) > arg1)
     {
         *arg0 = 0;
         return TRUE;
     }
-    
+
     return FALSE;
 }
 
-static void sub_81D5084(u8 taskId)
+static void Task_EReaderComm(u8 taskId)
 {
-    struct Unk81D5014 *data = (struct Unk81D5014 *)gTasks[taskId].data;
-    switch (data->unk8)
+    struct MEventTaskData1 *data = (struct MEventTaskData1 *)gTasks[taskId].data;
+    switch (data->state)
     {
     case 0:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ReceiveMysteryGiftWithEReader))
-            data->unk8 = 1;
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_ReceiveMysteryGiftWithEReader))
+            data->state = 1;
         break;
     case 1:
         OpenEReaderLink();
-        sub_81D505C(&data->unk0);
-        data->unk8 = 2;
+        ResetDelayTimer(&data->stateAdvanceDelay);
+        data->state = 2;
         break;
     case 2:
-        if (sub_81D5064(&data->unk0, 10))
-            data->unk8 = 3;
+        if (AdvanceDelayTimerCheckTimeout(&data->stateAdvanceDelay, 10))
+            data->state = 3;
         break;
     case 3:
-        if (!sub_81D4EC0())
+        if (!IsEReaderConnectionSane())
         {
             CloseLink();
-            data->unk8 = 4;
+            data->state = 4;
         }
         else
         {
-            data->unk8 = 13;
+            data->state = 13;
         }
         break;
     case 4:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_SelectConnectFromEReaderMenu))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_SelectConnectFromEReaderMenu))
         {
             AddTextPrinterToWindow1(gJPText_SelectConnectWithGBA);
-            sub_81D505C(&data->unk0);
-            data->unk8 = 5;
+            ResetDelayTimer(&data->stateAdvanceDelay);
+            data->state = 5;
         }
         break;
     case 5:
-        if (sub_81D5064(&data->unk0, 90))
+        if (AdvanceDelayTimerCheckTimeout(&data->stateAdvanceDelay, 90))
         {
             OpenEReaderLink();
-            data->unk8 = 6;
+            data->state = 6;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            sub_81D505C(&data->unk0);
+            ResetDelayTimer(&data->stateAdvanceDelay);
             PlaySE(SE_SELECT);
-            data->unk8 = 23;
+            data->state = 23;
         }
         break;
     case 6:
@@ -299,163 +298,164 @@ static void sub_81D5084(u8 taskId)
         {
             PlaySE(SE_SELECT);
             CloseLink();
-            sub_81D505C(&data->unk0);
-            data->unk8 = 23;
+            ResetDelayTimer(&data->stateAdvanceDelay);
+            data->state = 23;
         }
         else if (GetLinkPlayerCount_2() > 1)
         {
-            sub_81D505C(&data->unk0);
+            ResetDelayTimer(&data->stateAdvanceDelay);
             CloseLink();
-            data->unk8 = 7;
+            data->state = 7;
         }
         else if (sub_81D4E60())
         {
             PlaySE(SE_SELECT);
             CloseLink();
-            sub_81D505C(&data->unk0);
-            data->unk8 = 8;
+            ResetDelayTimer(&data->stateAdvanceDelay);
+            data->state = 8;
         }
-        else if (sub_81D5064(&data->unk0, 10))
+        else if (AdvanceDelayTimerCheckTimeout(&data->stateAdvanceDelay, 10))
         {
             CloseLink();
             OpenEReaderLink();
-            sub_81D505C(&data->unk0);
+            ResetDelayTimer(&data->stateAdvanceDelay);
         }
         break;
     case 7:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_LinkIsIncorrect))
-            data->unk8 = 4;
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_LinkIsIncorrect))
+            data->state = 4;
         break;
     case 8:
         AddTextPrinterToWindow1(gJPText_Connecting);
         // XXX: This (u32*) cast is discarding the const qualifier from gUnknown_089A3470
-        sub_81D4D50(&gUnknown_03006370, gMultiBootProgram_BerryGlitchFix_Start - gUnknown_089A3470, (u32*)gUnknown_089A3470);
-        data->unk8 = 9;
+        SendUnknownSerialData_Init(&sMEventSendToEReaderManager, gMultiBootProgram_BerryGlitchFix_Start - gUnknown_089A3470, (u32*)gUnknown_089A3470);
+        data->state = 9;
         break;
     case 9:
-        data->unkE = sub_81D4DE8(&gUnknown_03006370);
-        if (data->unkE)
-            data->unk8 = 10;
+        data->initialSendResult = SendUnknownSerialData_Run(&sMEventSendToEReaderManager);
+        if (data->initialSendResult != 0)
+            data->state = 10;
         break;
     case 10:
-        sub_81D4DB8(&gUnknown_03006370);
-        if (data->unkE == 3)
+        SendUnknownSerialData_Teardown(&sMEventSendToEReaderManager);
+        if (data->initialSendResult == 3)
         {
-            data->unk8 = 20;
+            // Error
+            data->state = 20;
+            break;
         }
-        else if (data->unkE == 1)
+        if (data->initialSendResult == 1)
         {
-            sub_81D505C(&data->unk0);
+            ResetDelayTimer(&data->stateAdvanceDelay);
             AddTextPrinterToWindow1(gJPText_PleaseWaitAMoment);
-            data->unk8 = 11;
+            data->state = 11;
+            break;
         }
-        else
-        {
-            data->unk8 = 0;
-        }
+        data->state = 0;
         break;
     case 11:
-        if (sub_81D5064(&data->unk0, 840))
-            data->unk8 = 12;
+        if (AdvanceDelayTimerCheckTimeout(&data->stateAdvanceDelay, 840))
+            data->state = 12;
         break;
     case 12:
         OpenEReaderLink();
         AddTextPrinterToWindow1(gJPText_AllowEReaderToLoadCard);
-        data->unk8 = 13;
+        data->state = 13;
         break;
     case 13:
-        switch (sub_81D4EE4(&data->unk9, &data->unk0))
+        switch (EReaderReceive(&data->textOrReceiveState, &data->stateAdvanceDelay))
         {
-            case 0:
-                break;
-            case 2:
-                AddTextPrinterToWindow1(gJPText_Connecting);
-                data->unk8 = 14;
-                break;
-            case 1:
-                PlaySE(SE_SELECT);
-                CloseLink();
-                data->unk8 = 23;
-                break;
-            case 5:
-                CloseLink();
-                data->unk8 = 21;
-                break;
-            case 3:
-            case 4:
-                CloseLink();
-                data->unk8 = 20;
-                break;
+        case 0:
+            break;
+        case 2:
+            AddTextPrinterToWindow1(gJPText_Connecting);
+            data->state = 14;
+            break;
+        case 1:
+            PlaySE(SE_SELECT);
+            CloseLink();
+            data->state = 23;
+            break;
+        case 5:
+            CloseLink();
+            data->state = 21;
+            break;
+        case 3:
+        case 4:
+            CloseLink();
+            data->state = 20;
+            break;
         }
         break;
     case 14:
         if (HasLinkErrorOccurred())
         {
             CloseLink();
-            data->unk8 = 20;
+            data->state = 20;
+            break;
         }
-        else if (GetBlockReceivedStatus())
+        if (GetBlockReceivedStatus())
         {
             ResetBlockReceivedFlags();
-            data->unk8 = 15;
+            data->state = 15;
         }
         break;
     case 15:
-        data->unkE = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
-        SetCloseLinkCallbackAndType(data->unkE);
-        data->unk8 = 16;
+        data->initialSendResult = EReader_IsReceivedDataValid((struct EReaderTrainerHillSet *)gDecompressionBuffer);
+        SetCloseLinkCallbackAndType(data->initialSendResult);
+        data->state = 16;
         break;
     case 16:
         if (!gReceivedRemoteLinkPlayers)
         {
-            if (data->unkE == 1)
-                data->unk8 = 17;
+            if (data->initialSendResult == 1)
+                data->state = 17;
             else
-                data->unk8 = 20;
+                data->state = 20;
         }
         break;
     case 17:
         if (TryWriteTrainerHill((struct EReaderTrainerHillSet *)&gDecompressionBuffer))
         {
             AddTextPrinterToWindow1(gJPText_ConnectionComplete);
-            sub_81D505C(&data->unk0);
-            data->unk8 = 18;
+            ResetDelayTimer(&data->stateAdvanceDelay);
+            data->state = 18;
         }
         else
         {
-            data->unk8 = 22;
+            data->state = 22;
         }
         break;
     case 18:
-        if (sub_81D5064(&data->unk0, 120))
+        if (AdvanceDelayTimerCheckTimeout(&data->stateAdvanceDelay, 120))
         {
             AddTextPrinterToWindow1(gJPText_NewTrainerHasComeToHoenn);
             PlayFanfare(MUS_OBTAIN_ITEM);
-            data->unk8 = 19;
+            data->state = 19;
         }
         break;
     case 19:
         if (IsFanfareTaskInactive() && (JOY_NEW(A_BUTTON | B_BUTTON)))
-            data->unk8 = 26;
+            data->state = 26;
         break;
     case 23:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_CardReadingHasBeenHalted))
-            data->unk8 = 26;
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_CardReadingHasBeenHalted))
+            data->state = 26;
         break;
     case 20:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ConnectionErrorCheckLink))
-            data->unk8 = 0;
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_ConnectionErrorCheckLink))
+            data->state = 0;
         break;
     case 21:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_ConnectionErrorTryAgain))
-            data->unk8 = 0;
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_ConnectionErrorTryAgain))
+            data->state = 0;
         break;
     case 22:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->unk9, gJPText_WriteErrorUnableToSaveData))
-            data->unk8 = 0;
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textOrReceiveState, gJPText_WriteErrorUnableToSaveData))
+            data->state = 0;
         break;
     case 26:
-        Free(data->unk10);
+        Free(data->t10);
         DestroyTask(taskId);
         SetMainCallback2(MainCB_FreeAllBuffersAndReturnToInitTitleScreen);
         break;

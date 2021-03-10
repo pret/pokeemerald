@@ -15,33 +15,37 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 
-struct Unknown030012C8
+struct SendRecvMgr
 {
-    u8 unk0[8];
-    u32 *unk8;
-    int unkC;
-    int unk10;
-    int unk14;
+    u8 master_slave;       // 0: clock slave; 1: clock master
+    u8 state;              // EREADER_XFR_STATE_*
+    u8 xferState;          // EREADER_XFER_*
+    u8 checksumResult;     // EREADER_CHECKSUM_*
+    u8 cancellationReason; // EREADER_CANCEL_*
+    u32 *dataptr;          // Payload source or destination
+    s32 cursor;            // Index of the next word
+    s32 size;              // Last word index
+    u32 checksum;          // Validation checksum
 };
 
-static void sub_81D4170(void);
-static u16 sub_81D3EE8(u8);
-static void sub_81D413C(void);
-static void sub_81D414C(void);
-static void sub_81D3F1C(u32, u32*, u32*);
-static void sub_81D3F68(void);
+static void GetKeyInput(void);
+static bool16 DetermineSendRecvState(u8);
+static void EnableSio(void);
+static void EReader_StopTimer(void);
+static void SetUpTransferManager(u32, const u32*, u32*);
+static void EReader_SetTimer(void);
 
-static struct Unknown030012C8 gUnknown_030012C8;
-static u16 gUnknown_030012E0;
-static u16 gUnknown_030012E2;
-static u16 gUnknown_030012E4;
-static u16 gUnknown_030012E6;
-static u32 gUnknown_030012E8;
-static u16 gUnknown_030012EC;
-static u16 gUnknown_030012EE;
-static u16 gUnknown_030012F0;
-static u16 gUnknown_030012F2;
-static u16 gUnknown_030012F4;
+static struct SendRecvMgr sSendRecvMgr;
+static u16 sJoyNewOrRepeated;
+static u16 sJoyNew;
+static u16 sSendRecvStatus;
+static u16 sCounter1;
+static u32 sCounter2;
+static u16 sSavedIme;
+static u16 sSavedIe;
+static u16 sSavedTm3Cnt;
+static u16 sSavedSioCnt;
+static u16 sSavedRCnt;
 
 static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     [0] = {
@@ -390,14 +394,14 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     },
 };
 
-static u8 sub_81D38D4(void)
+static u8 GetNewTrainerHillTrainerID(void)
 {
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
 }
 
-static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(struct EReaderTrainerHillTrainer *arg0)
+static bool32 Struct_EReaderTrainerHillTrainer_ValidateChecksum(const struct EReaderTrainerHillTrainer *arg0)
 {
-    int checksum = CalcByteArraySum((u8 *)arg0, 0x270);
+    u32 checksum = CalcByteArraySum((u8 *)arg0, sizeof(struct EReaderTrainerHillTrainer) - sizeof(arg0->checksum));
     if (checksum != arg0->checksum)
         return FALSE;
 
@@ -408,8 +412,8 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 {
     u32 i;
     u32 checksum;
-    int var0 = buffer->count;
-    if (var0 < 1 || var0 > 8)
+    u32 var0 = buffer->count;
+    if (var0 == 0 || var0 > 8)
         return FALSE;
 
     for (i = 0; i < var0; i++)
@@ -428,8 +432,8 @@ bool8 EReader_IsReceivedDataValid(struct EReaderTrainerHillSet *buffer)
 static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
 {
     u32 checksum;
-    int var0 = buffer->count;
-    if (var0 < 1 || var0 > 8)
+    u32 var0 = buffer->count;
+    if (var0 == 0 || var0 > 8)
         return FALSE;
 
     checksum = CalcByteArraySum((u8 *)buffer->unk_8, sizeof(struct EReaderTrainerHillSet) - offsetof(struct EReaderTrainerHillSet, unk_8));
@@ -439,7 +443,7 @@ static bool32 TrainerHill_VerifyChecksum(struct EReaderTrainerHillSet *buffer)
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct TrHillTag *buffer2)
+static bool32 TryWriteTrainerHill_r(const struct EReaderTrainerHillSet *ttdata, struct TrHillTag *buffer2)
 {
     int i;
 
@@ -448,7 +452,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
 
     memset(buffer2, 0, 0x1000);
     buffer2->numTrainers = ttdata->count;
-    buffer2->unused1 = sub_81D38D4();
+    buffer2->unused1 = GetNewTrainerHillTrainerID();
     buffer2->numFloors = (ttdata->count + 1) / 2;
 
     for (i = 0; i < ttdata->count; i++)
@@ -480,7 +484,7 @@ static bool32 TryWriteTrainerHill_r(struct EReaderTrainerHillSet *ttdata, struct
 
 bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *arg0)
 {
-    void *var0 = AllocZeroed(0x1000);
+    struct TrHillTag *var0 = AllocZeroed(0x1000);
     bool32 result = TryWriteTrainerHill_r(arg0, var0);
     Free(var0);
     return result;
@@ -514,93 +518,86 @@ bool32 ReadTrainerHillAndValidate(void)
     return result;
 }
 
-int EReader_Send(int arg0, u32 *arg1)
+int Unused_EReader_Send(u32 arg0, u32 *arg1)
 {
     int result;
-    u16 var0;
-    int var1;
 
     EReaderHelper_SaveRegsState();
     while (1)
     {
-        sub_81D4170();
-        if (gUnknown_030012E2 & 2)
+        GetKeyInput();
+        if (TEST_BUTTON(sJoyNew, B_BUTTON))
             gShouldAdvanceLinkState = 2;
 
-        var1 = EReaderHandleTransfer(1, arg0, arg1, NULL);
-        gUnknown_030012E4 = var1;
-        if ((gUnknown_030012E4 & 0x13) == 0x10)
+        sSendRecvStatus = EReaderHandleTransfer(1, arg0, arg1, NULL);
+
+        if ((sSendRecvStatus & 0x13) == 0x10)
         {
             result = 0;
             break;
         }
 
-        if (gUnknown_030012E4 & 0x8)
+        if (sSendRecvStatus & 0x8)
         {
             result = 1;
             break;
         }
 
-        var0 = gUnknown_030012E4 & 0x4;
-        if (var0)
+        if (sSendRecvStatus & 0x4)
         {
             result = 2;
             break;
         }
 
-        gShouldAdvanceLinkState = var0;
+        gShouldAdvanceLinkState = 0;
         VBlankIntrWait();
     }
 
-    CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
+    CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
     EReaderHelper_RestoreRegsState();
     return result;
 }
 
-int EReader_Recv(u32 *arg0)
+int Unused_EReader_Recv(u32 *arg0)
 {
     int result;
-    u16 var0;
-    int var1;
 
     EReaderHelper_SaveRegsState();
     while (1)
     {
-        sub_81D4170();
-        if (gUnknown_030012E2 & 2)
+        GetKeyInput();
+        if (TEST_BUTTON(sJoyNew, B_BUTTON))
             gShouldAdvanceLinkState = 2;
 
-        var1 = EReaderHandleTransfer(0, 0, NULL, arg0);
-        gUnknown_030012E4 = var1;
-        if ((gUnknown_030012E4 & 0x13) == 0x10)
+        sSendRecvStatus = EReaderHandleTransfer(0, 0, NULL, arg0);
+        if ((sSendRecvStatus & 0x13) == 0x10)
         {
             result = 0;
             break;
         }
 
-        if (gUnknown_030012E4 & 0x8)
+        if (sSendRecvStatus & 0x8)
         {
             result = 1;
             break;
         }
 
-        var0 = gUnknown_030012E4 & 0x4;
-        if (var0)
+        if (sSendRecvStatus & 0x4)
         {
             result = 2;
             break;
         }
 
-        gShouldAdvanceLinkState = var0;
+        gShouldAdvanceLinkState = 0;
         VBlankIntrWait();
     }
 
-    CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
+    CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
     EReaderHelper_RestoreRegsState();
     return result;
 }
 
-static void sub_81D3C7C(void)
+static void CloseSerial(void)
 {
     REG_IME = 0;
     REG_IE &= ~(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
@@ -610,7 +607,7 @@ static void sub_81D3C7C(void)
     REG_IF = INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL;
 }
 
-static void sub_81D3CBC(void)
+static void OpenSerialMulti(void)
 {
     REG_IME = 0;
     REG_IE &= ~(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
@@ -622,134 +619,137 @@ static void sub_81D3CBC(void)
     REG_IE |= INTR_FLAG_SERIAL;
     REG_IME = 1;
 
-    if (!gUnknown_030012C8.unk0[1])
-        CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
+    if (sSendRecvMgr.state == 0)
+        CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
 }
 
-static void sub_81D3D34(void)
+static void OpenSerial32(void)
 {
     REG_RCNT = 0;
-    REG_SIOCNT = SIO_32BIT_MODE | SIO_INTR_ENABLE;
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE;
     REG_SIOCNT |= SIO_MULTI_SD;
     gShouldAdvanceLinkState = 0;
-    gUnknown_030012E6 = 0;
-    gUnknown_030012E8 = 0;
+    sCounter1 = 0;
+    sCounter2 = 0;
 }
 
-int EReaderHandleTransfer(u8 arg0, u32 arg1, u32 *arg2, u32 *arg3)
+u16 EReaderHandleTransfer(u8 arg0, u32 arg1, const u32 *arg2, u32 *arg3)
 {
-    switch (gUnknown_030012C8.unk0[1])
+    switch (sSendRecvMgr.state)
     {
-    case 0:
-        sub_81D3CBC();
-        gUnknown_030012C8.unk0[2] = 1;
-        gUnknown_030012C8.unk0[1] = 1;
+    case EREADER_XFR_STATE_INIT:
+        OpenSerialMulti();
+        sSendRecvMgr.xferState = EREADER_XFER_EXE;
+        sSendRecvMgr.state = EREADER_XFR_STATE_HANDSHAKE;
         break;
     case 1:
-        if (sub_81D3EE8(arg0))
-            sub_81D413C();
+        if (DetermineSendRecvState(arg0))
+            EnableSio();
 
         if (gShouldAdvanceLinkState == 2)
         {
-            gUnknown_030012C8.unk0[4] = 2;
-            gUnknown_030012C8.unk0[1] = 6;
+            sSendRecvMgr.cancellationReason = EREADER_CANCEL_KEY;
+            sSendRecvMgr.state = EREADER_XFR_STATE_DONE;
         }
+        // Progression is handled by the serial callback
         break;
-    case 2:
-        sub_81D3D34();
-        sub_81D3F1C(arg1, arg2, arg3);
-        gUnknown_030012C8.unk0[1] = 3;
+    case EREADER_XFR_STATE_START:
+        OpenSerial32();
+        SetUpTransferManager(arg1, arg2, arg3);
+        sSendRecvMgr.state = EREADER_XFR_STATE_TRANSFER;
         // fall through
-    case 3:
+    case EREADER_XFR_STATE_TRANSFER:
         if (gShouldAdvanceLinkState == 2)
         {
-            gUnknown_030012C8.unk0[4] = 2;
-            gUnknown_030012C8.unk0[1] = 6;
+            sSendRecvMgr.cancellationReason = EREADER_CANCEL_KEY;
+            sSendRecvMgr.state = EREADER_XFR_STATE_DONE;
         }
         else
         {
-            gUnknown_030012E6++;
-            gUnknown_030012E8++;
-            if (!gUnknown_030012C8.unk0[0] && gUnknown_030012E8 > 60)
+            sCounter1++;
+            sCounter2++;
+            if (sSendRecvMgr.master_slave == 0 && sCounter2 > 60)
             {
-                gUnknown_030012C8.unk0[4] = 1;
-                gUnknown_030012C8.unk0[1] = 6;
+                sSendRecvMgr.cancellationReason = EREADER_CANCEL_TIMEOUT;
+                sSendRecvMgr.state = EREADER_XFR_STATE_DONE;
             }
 
-            if (gUnknown_030012C8.unk0[2] != 2)
+            if (sSendRecvMgr.xferState != EREADER_XFER_CHK)
             {
-                if (gUnknown_030012C8.unk0[0] && gUnknown_030012E6 > 2)
+                if (sSendRecvMgr.master_slave != 0 && sCounter1 > 2)
                 {
-                    sub_81D413C();
-                    gUnknown_030012C8.unk0[2] = 2;
+                    EnableSio();
+                    sSendRecvMgr.xferState = EREADER_XFER_CHK;
                 }
                 else
                 {
-                    sub_81D413C();
-                    gUnknown_030012C8.unk0[2] = 2;
+                    EnableSio();
+                    sSendRecvMgr.xferState = EREADER_XFER_CHK;
                 }
             }
         }
+        // Progression is handled by the serial callback
         break;
-    case 4:
-        sub_81D3CBC();
-        gUnknown_030012C8.unk0[1] = 5;
+    case EREADER_XFR_STATE_TRANSFER_DONE:
+        OpenSerialMulti();
+        sSendRecvMgr.state = EREADER_XFR_STATE_CHECKSUM;
         break;
-    case 5:
-        if (gUnknown_030012C8.unk0[0] == 1 && gUnknown_030012E6 > 2)
-            sub_81D413C();
+    case EREADER_XFR_STATE_CHECKSUM:
+        if (sSendRecvMgr.master_slave == 1 && sCounter1 > 2)
+            EnableSio();
 
-        if (++gUnknown_030012E6 > 60)
+        if (++sCounter1 > 60)
         {
-            gUnknown_030012C8.unk0[4] = 1;
-            gUnknown_030012C8.unk0[1] = 6;
+            sSendRecvMgr.cancellationReason = EREADER_CANCEL_TIMEOUT;
+            sSendRecvMgr.state = EREADER_XFR_STATE_DONE;
         }
         break;
-    case 6:
-        if (gUnknown_030012C8.unk0[2])
+        // Progression is handled by the serial callback
+    case EREADER_XFR_STATE_DONE:
+        if (sSendRecvMgr.xferState != 0)
         {
-            sub_81D3C7C();
-            gUnknown_030012C8.unk0[2] = 0;
+            CloseSerial();
+            sSendRecvMgr.xferState = 0;
         }
         break;
     }
 
-    return gUnknown_030012C8.unk0[2] | (gUnknown_030012C8.unk0[4] << 2) | (gUnknown_030012C8.unk0[3] << 4);
+    return (sSendRecvMgr.xferState << EREADER_XFER_SHIFT) | (sSendRecvMgr.cancellationReason << EREADER_CANCEL_SHIFT) | (sSendRecvMgr.checksumResult << EREADER_CHECKSUM_SHIFT);
 }
 
-static u16 sub_81D3EE8(u8 arg0)
+static bool16 DetermineSendRecvState(u8 arg0)
 {
-    u16 terminal = (*(vu32 *)REG_ADDR_SIOCNT) & (SIO_MULTI_SI | SIO_MULTI_SD);
-    if (terminal == SIO_MULTI_SD && arg0)
+    const struct SioMultiCnt sioMultiCnt = *(struct SioMultiCnt *)REG_ADDR_SIOCNT;
+    if (!sioMultiCnt.si && sioMultiCnt.sd && arg0)
     {
-        gUnknown_030012C8.unk0[0] = 1;
-        return 1;
+        sSendRecvMgr.master_slave = TRUE;
+        return TRUE;
     }
     else
     {
-        gUnknown_030012C8.unk0[0] = 0;
-        return 0;
+        sSendRecvMgr.master_slave = FALSE;
+        return FALSE;
     }
 }
 
-static void sub_81D3F1C(u32 arg0, u32 *arg1, u32 *arg2)
+static void SetUpTransferManager(u32 arg0, const u32 *arg1, u32 *arg2)
 {
-    if (gUnknown_030012C8.unk0[0])
+    if (sSendRecvMgr.master_slave != 0)
     {
         REG_SIOCNT |= SIO_38400_BPS;
-        gUnknown_030012C8.unk8 = arg1;
+        sSendRecvMgr.dataptr = (u32 *)arg1;
         REG_SIODATA32 = arg0;
-        gUnknown_030012C8.unk10 = arg0 / 4 + 1;
-        sub_81D3F68();
+        sSendRecvMgr.size = arg0 / 4 + 1;
+        EReader_SetTimer();
     }
     else
     {
         REG_SIOCNT = REG_SIOCNT;
-        gUnknown_030012C8.unk8 = arg2;
+        sSendRecvMgr.dataptr = arg2;
     }
 }
 
-static void sub_81D3F68(void)
+static void EReader_SetTimer(void)
 {
     REG_TM3CNT_L = 0xFDA7;
     REG_TM3CNT_H = TIMER_INTR_ENABLE;
@@ -758,22 +758,21 @@ static void sub_81D3F68(void)
     REG_IME = 1;
 }
 
-void sub_81D3F9C(void)
+void EReaderHelper_Timer3Callback(void)
 {
-    sub_81D414C();
-    sub_81D413C();
+    EReader_StopTimer();
+    EnableSio();
 }
 
-void sub_81D3FAC(void)
+void EReaderHelper_SerialCallback(void)
 {
     u16 i, playerCount, k;
     u32 value;
-    u16 var0;
     u16 recvBuffer[4];
 
-    switch (gUnknown_030012C8.unk0[1])
+    switch (sSendRecvMgr.state)
     {
-    case 1:
+    case EREADER_XFR_STATE_HANDSHAKE:
         REG_SIOMLT_SEND = 0xCCD0; // Handshake id
         *(u64 *)recvBuffer = REG_SIOMLT_RECV;
         for (i = 0, playerCount = 0, k = 0; i < 4; i++)
@@ -785,110 +784,111 @@ void sub_81D3FAC(void)
         }
 
         if (playerCount == 2 && k == 0)
-            gUnknown_030012C8.unk0[1] = 2;
+            sSendRecvMgr.state = EREADER_XFR_STATE_START;
         break;
-    case 3:
+    case EREADER_XFR_STATE_TRANSFER:
         value = REG_SIODATA32;
-        if (!gUnknown_030012C8.unkC && !gUnknown_030012C8.unk0[0])
-            gUnknown_030012C8.unk10 = value / 4 + 1;
+        // The first value sent by the EReader is the payload size
+        if (!sSendRecvMgr.cursor && !sSendRecvMgr.master_slave)
+            sSendRecvMgr.size = value / 4 + 1;
 
-        if (gUnknown_030012C8.unk0[0] == 1)
+        if (sSendRecvMgr.master_slave == 1)
         {
-            if (gUnknown_030012C8.unkC < gUnknown_030012C8.unk10)
+            if (sSendRecvMgr.cursor < sSendRecvMgr.size)
             {
-                REG_SIODATA32 = gUnknown_030012C8.unk8[gUnknown_030012C8.unkC];
-                gUnknown_030012C8.unk14 += gUnknown_030012C8.unk8[gUnknown_030012C8.unkC];
+                REG_SIODATA32 = sSendRecvMgr.dataptr[sSendRecvMgr.cursor];
+                sSendRecvMgr.checksum += sSendRecvMgr.dataptr[sSendRecvMgr.cursor];
             }
             else
             {
-                REG_SIODATA32 = gUnknown_030012C8.unk14;
+                REG_SIODATA32 = sSendRecvMgr.checksum;
             }
         }
         else
         {
-            if (gUnknown_030012C8.unkC > 0 && gUnknown_030012C8.unkC < gUnknown_030012C8.unk10 + 1)
+            if (sSendRecvMgr.cursor > 0 && sSendRecvMgr.cursor < sSendRecvMgr.size + 1)
             {
-                gUnknown_030012C8.unk8[gUnknown_030012C8.unkC - 1] = value;
-                gUnknown_030012C8.unk14 += value;
+                sSendRecvMgr.dataptr[sSendRecvMgr.cursor - 1] = value;
+                sSendRecvMgr.checksum += value;
             }
-            else if (gUnknown_030012C8.unkC)
+            else if (sSendRecvMgr.cursor)
             {
-                if (gUnknown_030012C8.unk14 == value)
-                    gUnknown_030012C8.unk0[3] = 1;
+                if (sSendRecvMgr.checksum == value)
+                    sSendRecvMgr.checksumResult = EREADER_CHECKSUM_OK;
                 else
-                    gUnknown_030012C8.unk0[3] = 2;
+                    sSendRecvMgr.checksumResult = EREADER_CHECKSUM_ERR;
             }
 
-            gUnknown_030012E8 = 0;
+            sCounter2 = 0;
         }
 
-        if (++gUnknown_030012C8.unkC < gUnknown_030012C8.unk10 + 2)
+        if (++sSendRecvMgr.cursor < sSendRecvMgr.size + 2)
         {
-            if (gUnknown_030012C8.unk0[0])
+            if (sSendRecvMgr.master_slave)
                 REG_TM3CNT_H |= TIMER_ENABLE;
             else
-                sub_81D413C();
+                EnableSio();
         }
         else
         {
-            gUnknown_030012C8.unk0[1] = 4;
-            gUnknown_030012E6 = 0;
+            sSendRecvMgr.state = EREADER_XFR_STATE_TRANSFER_DONE;
+            sCounter1 = 0;
         }
         break;
-    case 5:
-        if (!gUnknown_030012C8.unk0[0])
-            REG_SIOMLT_SEND = gUnknown_030012C8.unk0[3];
+    case EREADER_XFR_STATE_CHECKSUM:
+        if (sSendRecvMgr.master_slave == 0)
+            REG_SIOMLT_SEND = sSendRecvMgr.checksumResult;
 
         *(u64 *)recvBuffer = REG_SIOMLT_RECV;
-        var0 = recvBuffer[1] - 1;
-        if (var0 < 2)
+        if (recvBuffer[1] == EREADER_CHECKSUM_OK || recvBuffer[1] == EREADER_CHECKSUM_ERR)
         {
-            if (gUnknown_030012C8.unk0[0] == 1)
-                gUnknown_030012C8.unk0[3] = recvBuffer[1];
+            if (sSendRecvMgr.master_slave == 1)
+                // EReader has (in)validated the payload
+                sSendRecvMgr.checksumResult = recvBuffer[1];
 
-            gUnknown_030012C8.unk0[1] = 6;
+            sSendRecvMgr.state = EREADER_XFR_STATE_DONE;
         }
         break;
     }
 }
 
-static void sub_81D413C(void)
+static void EnableSio(void)
 {
     REG_SIOCNT |= SIO_ENABLE;
 }
 
-static void sub_81D414C(void)
+static void EReader_StopTimer(void)
 {
     REG_TM3CNT_H &= ~TIMER_ENABLE;
-    REG_TM3CNT_L = 0xFDA7;
+    REG_TM3CNT_L = -601;
 }
 
-static void sub_81D4170(void)
+static void GetKeyInput(void)
 {
-    int keysMask = REG_KEYINPUT ^ KEYS_MASK;
-    gUnknown_030012E2 = keysMask & ~gUnknown_030012E0;
-    gUnknown_030012E0 = keysMask;
+    u16 rawKeys = REG_KEYINPUT ^ KEYS_MASK;
+    sJoyNew = rawKeys & ~sJoyNewOrRepeated;
+    sJoyNewOrRepeated = rawKeys;
 }
 
 void EReaderHelper_SaveRegsState(void)
 {
-    gUnknown_030012EC = REG_IME;
-    gUnknown_030012EE = REG_IE;
-    gUnknown_030012F0 = REG_TM3CNT_H;
-    gUnknown_030012F2 = REG_SIOCNT;
-    gUnknown_030012F4 = REG_RCNT;
+    sSavedIme = REG_IME;
+    sSavedIe = REG_IE;
+    sSavedTm3Cnt = REG_TM3CNT_H;
+    sSavedSioCnt = REG_SIOCNT;
+    sSavedRCnt = REG_RCNT;
 }
 
 void EReaderHelper_RestoreRegsState(void)
 {
-    REG_IME = gUnknown_030012EC;
-    REG_IE = gUnknown_030012EE;
-    REG_TM3CNT_H = gUnknown_030012F0;
-    REG_SIOCNT = gUnknown_030012F2;
-    REG_RCNT = gUnknown_030012F4;
+    REG_IME = sSavedIme;
+    REG_IE = sSavedIe;
+    REG_TM3CNT_H = sSavedTm3Cnt;
+    REG_SIOCNT = sSavedSioCnt;
+    REG_RCNT = sSavedRCnt;
 }
 
-void sub_81D4238(void)
+void EReaderHelper_ClearsSendRecvMgr(void)
 {
-    CpuFill32(0, &gUnknown_030012C8, sizeof(struct Unknown030012C8));
+    CpuFill32(0, &sSendRecvMgr, sizeof(struct SendRecvMgr));
 }
