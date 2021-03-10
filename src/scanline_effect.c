@@ -100,12 +100,12 @@ void ScanlineEffect_InitHBlankDmaTransfer(void)
 
 static void CopyValue16Bit(void)
 {
-    (vu16 *)gScanlineEffect.dmaDest = (vu16 *)&gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
+    *(vu16 *)gScanlineEffect.dmaDest = *(vu16 *)gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
 }
 
 static void CopyValue32Bit(void)
 {
-    (vu32 *)gScanlineEffect.dmaDest = (vu32 *)&gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
+    *(vu32 *)gScanlineEffect.dmaDest = *(vu32 *)gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
 }
 
 #define tStartLine            data[0]
