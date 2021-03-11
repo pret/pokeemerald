@@ -352,10 +352,10 @@ void SoundInit(struct SoundInfo *soundInfo)
                    | SOUND_ALL_MIX_FULL;
     REG_SOUNDBIAS_H = (REG_SOUNDBIAS_H & 0x3F) | 0x40;
 
-    REG_DMA1SAD = (s32)soundInfo->pcmBuffer;
-    REG_DMA1DAD = (s32)&REG_FIFO_A;
-    REG_DMA2SAD = (s32)soundInfo->pcmBuffer + PCM_DMA_BUF_SIZE;
-    REG_DMA2DAD = (s32)&REG_FIFO_B;
+    REG_DMA1SAD = (u32)soundInfo->pcmBuffer;
+    REG_DMA1DAD = (u32)&REG_FIFO_A;
+    REG_DMA2SAD = (u32)soundInfo->pcmBuffer + PCM_DMA_BUF_SIZE;
+    REG_DMA2DAD = (u32)&REG_FIFO_B;
 
     SOUND_INFO_PTR = soundInfo;
     CpuFill32(0, soundInfo, sizeof(struct SoundInfo));
@@ -591,58 +591,57 @@ void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader)
 {
     s32 i;
-    u8 unk_B;
     struct MusicPlayerTrack *track;
 
     if (mplayInfo->ident != ID_NUMBER)
         return;
 
-    unk_B = mplayInfo->unk_B;
-
-    if (!unk_B
-        || ((!mplayInfo->songHeader || !(mplayInfo->tracks[0].flags & MPT_FLG_START))
-            && ((mplayInfo->status & MUSICPLAYER_STATUS_TRACK) == 0
-                || (mplayInfo->status & MUSICPLAYER_STATUS_PAUSE)))
-        || (mplayInfo->priority <= songHeader->priority))
+    if (mplayInfo->unk_B 
+        && ((mplayInfo->songHeader && (mplayInfo->tracks[0].flags & MPT_FLG_START))
+            || ((mplayInfo->status & MUSICPLAYER_STATUS_TRACK) 
+                && !(mplayInfo->status & MUSICPLAYER_STATUS_PAUSE))) 
+        && (mplayInfo->priority > songHeader->priority))
     {
-        mplayInfo->ident++;
-        mplayInfo->status = 0;
-        mplayInfo->songHeader = songHeader;
-        mplayInfo->tone = songHeader->tone;
-        mplayInfo->priority = songHeader->priority;
-        mplayInfo->clock = 0;
-        mplayInfo->tempoD = 150;
-        mplayInfo->tempoI = 150;
-        mplayInfo->tempoU = 0x100;
-        mplayInfo->tempoC = 0;
-        mplayInfo->fadeOI = 0;
-
-        i = 0;
-        track = mplayInfo->tracks;
-
-        while (i < songHeader->trackCount && i < mplayInfo->trackCount)
-        {
-            TrackStop(mplayInfo, track);
-            track->flags = MPT_FLG_EXIST | MPT_FLG_START;
-            track->chan = 0;
-            track->cmdPtr = songHeader->part[i];
-            i++;
-            track++;
-        }
-
-        while (i < mplayInfo->trackCount)
-        {
-            TrackStop(mplayInfo, track);
-            track->flags = 0;
-            i++;
-            track++;
-        }
-
-        if (songHeader->reverb & SOUND_MODE_REVERB_SET)
-            m4aSoundMode(songHeader->reverb);
-
-        mplayInfo->ident = ID_NUMBER;
+        return;
     }
+
+    mplayInfo->ident++;
+    mplayInfo->status = 0;
+    mplayInfo->songHeader = songHeader;
+    mplayInfo->tone = songHeader->tone;
+    mplayInfo->priority = songHeader->priority;
+    mplayInfo->clock = 0;
+    mplayInfo->tempoD = 150;
+    mplayInfo->tempoI = 150;
+    mplayInfo->tempoU = 0x100;
+    mplayInfo->tempoC = 0;
+    mplayInfo->fadeOI = 0;
+
+    i = 0;
+    track = mplayInfo->tracks;
+
+    while (i < songHeader->trackCount && i < mplayInfo->trackCount)
+    {
+        TrackStop(mplayInfo, track);
+        track->flags = MPT_FLG_EXIST | MPT_FLG_START;
+        track->chan = 0;
+        track->cmdPtr = songHeader->part[i];
+        i++;
+        track++;
+    }
+
+    while (i < mplayInfo->trackCount)
+    {
+        TrackStop(mplayInfo, track);
+        track->flags = 0;
+        i++;
+        track++;
+    }
+
+    if (songHeader->reverb & SOUND_MODE_REVERB_SET)
+        m4aSoundMode(songHeader->reverb);
+
+    mplayInfo->ident = ID_NUMBER;
 }
 
 void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo)
@@ -1711,14 +1710,14 @@ void SetPokemonCryProgress(u32 val)
     gPokemonCrySong.unkCmd0DParam = val;
 }
 
-int IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo)
+bool32 IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo)
 {
     struct MusicPlayerTrack *track = mplayInfo->tracks;
 
     if (track->chan && track->chan->track == track)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 void SetPokemonCryChorus(s8 val)

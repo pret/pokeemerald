@@ -40,8 +40,6 @@
 extern const struct MapLayout *const gMapLayouts[];
 extern const u16 gUnknown_08D856C8[][16];
 
-
-
 struct PyramidWildMon
 {
     u16 species;
@@ -784,7 +782,7 @@ static const u8 sHintTextTypes[] =
     HINT_EXIT_SHORT_REMAINING_ITEMS,
 };
 
-static void (* const sBattlePyramidFunctions[])(void) =
+static void (*const sBattlePyramidFunctions[])(void) =
 {
     [BATTLE_PYRAMID_FUNC_INIT]              = InitPyramidChallenge,
     [BATTLE_PYRAMID_FUNC_GET_DATA]          = GetBattlePyramidData,
@@ -1012,7 +1010,7 @@ static void HidePyramidItem(void)
     struct ObjectEventTemplate *events = gSaveBlock1Ptr->objectEventTemplates;
     int i = 0;
 
-    for (;;)
+    do
     {
         if (events[i].localId == gSpecialVar_LastTalked)
         {
@@ -1023,9 +1021,7 @@ static void HidePyramidItem(void)
             break;
         }
         i++;
-        if (events[i].localId == 0)
-            break;
-    }
+    } while (events[i].localId != 0);
 }
 
 static void SetPyramidFacilityTrainers(void)
@@ -1054,7 +1050,7 @@ static void ShowPostBattleHintText(void)
 
     hintType = sHintTextTypes[gObjectEvents[gSelectedObjectEvent].localId - 1];
     i = 0;
-    while (!i)
+    do
     {
         switch (hintType)
         {
@@ -1099,13 +1095,13 @@ static void ShowPostBattleHintText(void)
             GetPostBattleDirectionHintTextIndex(&hintType, 24, HINT_REMAINING_ITEMS);
             break;
         }
-    }
+    } while (i == 0);
     ShowFieldMessage(sPostBattleTexts[textGroup][hintType][textIndex]);
 }
 
 static void UpdatePyramidWinStreak(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] < 999)
         gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode]++;
@@ -1237,7 +1233,7 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
     u16 *map = gBackupMapLayout.map;
     map += gBackupMapLayout.width * 7 + 7;
 
-    for (y = 0; y < 32; map += 47, y++)
+    for (y = 0; y < 32; y++)
     {
         for (x = 0; x < 32; x++)
         {
@@ -1279,16 +1275,22 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
                         else
                             textIndex = 1;
                     }
-                    else if (x < 0)
-                    {
-                        if (x + y > 0)
-                            textIndex = 3;
-                        else
-                            textIndex = 1;
-                    }
                     else
                     {
-                        textIndex = (~(x + y) >= 0) ? 0 : 2;
+                        if (x < 0)
+                        {
+                            if (x + y > 0)
+                                textIndex = 3;
+                            else
+                                textIndex = 1;
+                        }
+                        else
+                        {
+                            if (x + y >= 0)
+                                textIndex = 2;
+                            else
+                                textIndex = 0;
+                        }
                     }
                     *hintType = HINT_EXIT_DIRECTION;
                 }
@@ -1299,6 +1301,7 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
                 return textIndex;
             }
         }
+        map += 47;
     }
 
     return textIndex;
@@ -1587,7 +1590,7 @@ void LoadBattlePyramidObjectEventTemplates(void)
 
         if (i == OBJ_TRAINERS)
             objectPositionsType = sPyramidFloorTemplates[id].trainerPositions;
-        else  // OBJ_ITEMS
+        else // OBJ_ITEMS
             objectPositionsType = sPyramidFloorTemplates[id].itemPositions;
 
         switch (objectPositionsType)
@@ -1636,7 +1639,7 @@ static void GetPyramidEntranceAndExitSquareIds(u8 *entranceSquareId, u8 *exitSqu
 
     if (*entranceSquareId == *exitSquareId)
     {
-        *entranceSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[3] + 1 ) % 16;
+        *entranceSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[3] + 1) % 16;
         *exitSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[0] + 15) % 16;
     }
 }
