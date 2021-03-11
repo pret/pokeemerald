@@ -479,7 +479,7 @@ void SoundClear(void)
     soundInfo->ident++;
 
     i = MAX_DIRECTSOUND_CHANNELS;
-    chan = soundInfo->chans;
+    chan = &soundInfo->chans[0];
 
     while (i > 0)
     {
