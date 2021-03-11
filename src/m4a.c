@@ -591,15 +591,12 @@ void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader)
 {
     s32 i;
-    u8 unk_B;
     struct MusicPlayerTrack *track;
 
     if (mplayInfo->ident != ID_NUMBER)
         return;
 
-    unk_B = mplayInfo->unk_B;
-
-    if (unk_B && ((mplayInfo->songHeader && (mplayInfo->tracks[0].flags & MPT_FLG_START)) || ((mplayInfo->status & MUSICPLAYER_STATUS_TRACK) && !(mplayInfo->status & MUSICPLAYER_STATUS_PAUSE))) && (mplayInfo->priority > songHeader->priority))
+    if (mplayInfo->unk_B && ((mplayInfo->songHeader && (mplayInfo->tracks[0].flags & MPT_FLG_START)) || ((mplayInfo->status & MUSICPLAYER_STATUS_TRACK) && !(mplayInfo->status & MUSICPLAYER_STATUS_PAUSE))) && (mplayInfo->priority > songHeader->priority))
         return;
 
     mplayInfo->ident++;
