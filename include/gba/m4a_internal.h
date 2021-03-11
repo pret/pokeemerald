@@ -108,7 +108,7 @@ struct CgbChannel
     u8 priority;
     u8 rhythmPan;
     u8 dummy3[3];
-    u8 dummy5;
+    u8 dummy4;
     u8 sustainGoal;
     u8 n4;                  // NR[1-4]4 register (initial, length bit)
     u8 pan;
@@ -122,7 +122,7 @@ struct CgbChannel
     struct MusicPlayerTrack *track;
     void *prevChannelPointer;
     void *nextChannelPointer;
-    u8 dummy4[8];
+    u8 dummy5[8];
 };
 
 struct MusicPlayerTrack;
