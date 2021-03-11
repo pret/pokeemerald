@@ -38,6 +38,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#define TAG_COUNTDOWN 0x1000
+
 struct BerryCrushGame_Player
 {
     u8 unk0[PLAYER_NAME_LENGTH + 1 + 4];
@@ -2295,7 +2297,7 @@ static u32 sub_80232EC(struct BerryCrushGame *r4,  __attribute__((unused)) u8 *r
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        StartMinigameCountdown(0x1000, 0x1000, 120, 80, 0);
+        StartMinigameCountdown(TAG_COUNTDOWN, TAG_COUNTDOWN, 120, 80, 0);
         break;
     case 2:
         if (IsMinigameCountdownRunning())

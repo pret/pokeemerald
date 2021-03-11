@@ -131,14 +131,16 @@ enum {
 #define TAG_MON4 3
 #define TAG_MON5 4
 
-#define GFXTAG_VINE1 5
-#define GFXTAG_VINE2 6
-#define GFXTAG_VINE3 7
-#define GFXTAG_VINE4 8
-#define GFXTAG_STAR  10
+#define GFXTAG_VINE1     5
+#define GFXTAG_VINE2     6
+#define GFXTAG_VINE3     7
+#define GFXTAG_VINE4     8
+#define GFXTAG_COUNTDOWN 9
+#define GFXTAG_STAR      10
 
-#define PALTAG_1 5
-#define PALTAG_2 6
+#define PALTAG_1         5
+#define PALTAG_2         6
+#define PALTAG_COUNTDOWN 7
 
 #define TAG_DIGITS 800
 
@@ -3007,7 +3009,7 @@ static void UpdateVineAnim(struct PokemonJumpGfx *jumpGfx, int vineState)
 
 static void StartPokeJumpCountdown(struct PokemonJumpGfx *jumpGfx)
 {
-    StartMinigameCountdown(9, 7, 120, 80, 0);
+    StartMinigameCountdown(GFXTAG_COUNTDOWN, PALTAG_COUNTDOWN, 120, 80, 0);
     Gfx_ResetMonSpriteSubpriorities(jumpGfx);
 }
 

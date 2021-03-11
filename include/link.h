@@ -62,7 +62,7 @@
 #define LINKCMD_0x6666                  0x6666
 #define LINKCMD_0x7777                  0x7777
 #define LINKCMD_BLENDER_PLAY_AGAIN      0x7779
-#define LINKCMD_0x7FFF                  0x7FFF
+#define LINKCMD_COUNTDOWN               0x7FFF
 #define LINKCMD_CONT_BLOCK              0x8888
 #define LINKCMD_BLENDER_NO_BERRIES      0x9999
 #define LINKCMD_BLENDER_NO_PBLOCK_SPACE 0xAAAA
