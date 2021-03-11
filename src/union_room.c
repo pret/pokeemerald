@@ -319,7 +319,7 @@ static void StringExpandPlaceholders_AwaitingCommFromAnother(u8 *dst, u8 caseId)
     case ACTIVITY_CONTEST_CUTE:
     case ACTIVITY_CONTEST_SMART:
     case ACTIVITY_CONTEST_TOUGH:
-        // UB: argument *dst isn't used, instead it always prints to gStringVar4
+        // BUG: always prints to gStringVar4. Not a problem in vanila since the *dst parameter is always gStringVar4 anyway
         StringExpandPlaceholders(gStringVar4, sText_AwaitingCommunication);
         break;
     }

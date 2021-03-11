@@ -463,12 +463,12 @@ static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
     if (useBG1 == 1)
     {
         bgX = gBattle_BG1_X;
-        scanlineParams.dmaDest = &REG_BG1HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG1HOFS;
     }
     else
     {
         bgX = gBattle_BG2_X;
-        scanlineParams.dmaDest = &REG_BG2HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG2HOFS;
     }
 
     if (y < 0)

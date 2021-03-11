@@ -236,7 +236,12 @@ static void Task_MoveDeoxysRock(u8 taskId);
 static u8 sActiveList[32];
 
 // External declarations
+#if defined(NONMATCHING) || MODERN
+extern const struct CompressedSpritePalette gMonPaletteTable[];
+#else
 extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
+#endif
+
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern u8 *gFieldEffectScriptPointers[];

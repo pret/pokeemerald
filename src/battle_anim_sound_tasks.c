@@ -136,7 +136,12 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
         else
+        {
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
+            #ifdef UBFIX
+            return;
+            #endif
+        }
     }
     else
     {
@@ -180,7 +185,12 @@ void SoundTask_PlayDoubleCry(u8 taskId)
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->moveAnim->species;
         else
+        {
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
+            #ifdef UBFIX
+            return;
+            #endif
+        }
     }
     else
     {

@@ -1878,8 +1878,13 @@ static void Cmd_if_has_move_with_effect(void)
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             // UB: checks sBattler_AI instead of gBattlerTarget.
+            #ifdef UBFIX
+            if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+                break;
+            #else
             if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
                 break;
+            #endif
         }
         if (i == MAX_MON_MOVES)
             gAIScriptPtr += 7;

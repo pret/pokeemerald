@@ -989,12 +989,12 @@ void AnimTask_ExtrasensoryDistortion(u8 taskId)
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimTarget) == 1)
     {
         task->data[10] = gBattle_BG1_X;
-        scanlineParams.dmaDest = &REG_BG1HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG1HOFS;
     }
     else
     {
         task->data[10] = gBattle_BG2_X;
-        scanlineParams.dmaDest = &REG_BG2HOFS;
+        scanlineParams.dmaDest = (void *)REG_ADDR_BG2HOFS;
     }
 
     i = task->data[14];
