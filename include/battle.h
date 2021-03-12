@@ -346,8 +346,8 @@ struct BattleTvMovePoints
 
 struct MultiPartnerEnigmaBerry
 {
-    u8 field_0;
-    u8 field_1;
+    u8 versionSignatureLo;
+    u8 versionSignatureHi;
     u8 vsScreenHealthFlagsLo;
     u8 vsScreenHealthFlagsHi;
     struct BattleEnigmaBerry battleEnigmaBerry;
