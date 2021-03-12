@@ -2089,12 +2089,7 @@ static void Cmd_get_used_held_item(void)
     else
         battlerId = gBattlerTarget;
 
-    // This is likely a leftover from Ruby's code and its ugly ewram access.
-    #ifdef NONMATCHING
-        AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[battlerId];
-    #else
-        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + offsetof(struct BattleStruct, usedHeldItems) + (battlerId * 2));
-    #endif // NONMATCHING
+    AI_THINKING_STRUCT->funcResult = *(u8 *)&gBattleStruct->usedHeldItems[battlerId];
 
     gAIScriptPtr += 2;
 }

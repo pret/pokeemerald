@@ -165,9 +165,6 @@ static EWRAM_DATA struct {
     /*0xFE*/ u8 wirelessWinBottom;
 } *sTradeData = {NULL};
 
-#if !defined(NONMATCHING) && MODERN
-#define static
-#endif
 static bool32 IsWirelessTrade(void);
 static void CB2_CreateTradeMenu(void);
 static void VBlankCB_TradeMenu(void);
