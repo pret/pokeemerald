@@ -18,6 +18,7 @@
 #include "task.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_config.h"
+#include "constants/battle_moves.h"
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
@@ -2198,11 +2199,32 @@ void DoMoveAnim(u16 move)
 void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
 {
     s32 i;
+    bool32 hideHpBoxes = (tableId == MOVE_TRANSFORM) ? FALSE : TRUE;
+    
+    if (!isMoveAnim)
+    {
+        switch (tableId)
+        {
+        case B_ANIM_TURN_TRAP:
+        case B_ANIM_LEECH_SEED_DRAIN:
+        case B_ANIM_MON_HIT:
+        case B_ANIM_SNATCH_MOVE:
+        case B_ANIM_FUTURE_SIGHT_HIT:
+        case B_ANIM_DOOM_DESIRE_HIT:
+        case B_ANIM_WISH_HEAL:
+        case B_ANIM_MEGA_EVOLUTION:
+            hideHpBoxes = TRUE;
+            break;
+        default:
+            hideHpBoxes = FALSE;
+            break;
+        }
+    }
 
     if (!IsContest())
     {
         sub_80A8278();
-        UpdateOamPriorityInAllHealthboxes(0);
+        UpdateOamPriorityInAllHealthboxes(0, hideHpBoxes);
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
             if (GetBattlerSide(i) != B_SIDE_PLAYER)
@@ -2511,7 +2533,7 @@ static void ScriptCmd_end(void)
         if (!IsContest())
         {
             sub_80A8278();
-            UpdateOamPriorityInAllHealthboxes(1);
+            UpdateOamPriorityInAllHealthboxes(1, TRUE);
         }
         gAnimScriptActive = FALSE;
     }
