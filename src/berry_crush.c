@@ -137,6 +137,7 @@ struct BerryCrushGame_138
     u8 filler81;
     u8 unk82;
     u8 unk83[5];
+    u16 bgBuffers[4][0x800];
 };
 
 struct BerryCrushGame
@@ -181,10 +182,6 @@ struct BerryCrushGame
     struct BerryCrushGame_68 unk68;
     struct BerryCrushGame_Player unk98[5];
     struct BerryCrushGame_138 unk138;
-    u8 bg1Buffer[0x1000];
-    u8 unk11C0[0x1000];
-    u8 bg2Buffer[0x1000];
-    u8 bg3Buffer[0x1000];
 };
 
 static void VBlankCB(void);
@@ -1037,9 +1034,9 @@ s32 InitBerryCrushDisplay(void)
     case 3:
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_082F32C8, ARRAY_COUNT(gUnknown_082F32C8));
-        SetBgTilemapBuffer(1, game->bg1Buffer);
-        SetBgTilemapBuffer(2, game->bg2Buffer);
-        SetBgTilemapBuffer(3, game->bg3Buffer);
+        SetBgTilemapBuffer(1, game->unk138.bgBuffers[0]);
+        SetBgTilemapBuffer(2, game->unk138.bgBuffers[2]);
+        SetBgTilemapBuffer(3, game->unk138.bgBuffers[3]);
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
         ChangeBgX(2, 0, 0);
