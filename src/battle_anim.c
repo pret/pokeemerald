@@ -18,7 +18,7 @@
 #include "task.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_config.h"
-#include "constants/battle_moves.h"
+#include "constants/moves.h"
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
