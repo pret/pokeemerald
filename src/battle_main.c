@@ -733,16 +733,16 @@ static void BufferPartyVsScreenHealth_AtStart(void)
     s32 i;
 
     BUFFER_PARTY_VS_SCREEN_STATUS(gPlayerParty, flags, i);
-    gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsLo = flags;
-    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsHi) = flags >> 8;
-    gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsHi |= FlagGet(FLAG_SYS_FRONTIER_PASS) << 7;
+    gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsLo = flags;
+    *(&gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsHi) = flags >> 8;
+    gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsHi |= FlagGet(FLAG_SYS_FRONTIER_PASS) << 7;
 }
 
 static void SetPlayerBerryDataInBattleStruct(void)
 {
     s32 i;
     struct BattleStruct *battleStruct = gBattleStruct;
-    struct BattleEnigmaBerry *battleBerry = &battleStruct->multiBuffer.multiPartnerEnigmaBerry.battleEnigmaBerry;
+    struct BattleEnigmaBerry *battleBerry = &battleStruct->multiBuffer.linkBattlerHeader.battleEnigmaBerry;
 
     if (IsEnigmaBerryValid() == TRUE)
     {
@@ -975,8 +975,8 @@ static void CB2_HandleStartBattle(void)
                 if (IsLinkTaskFinished())
                 {
                     // 0x300
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureLo) = 0;
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureHi) = 3;
+                    *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureLo) = 0;
+                    *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureHi) = 3;
                     BufferPartyVsScreenHealth_AtStart();
                     SetPlayerBerryDataInBattleStruct();
 
@@ -986,7 +986,7 @@ static void CB2_HandleStartBattle(void)
                         gLinkPlayers[1].id = 1;
                     }
 
-                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.multiPartnerEnigmaBerry, sizeof(gBattleStruct->multiBuffer.multiPartnerEnigmaBerry));
+                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
                 if (gWirelessCommType)
@@ -1013,7 +1013,7 @@ static void CB2_HandleStartBattle(void)
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
-            gTasks[taskId].data[3] = gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsLo | (gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.vsScreenHealthFlagsHi << 8);
+            gTasks[taskId].data[3] = gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsLo | (gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsHi << 8);
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyMultiplayerId][1];
             RecordedBattle_SetFrontierPassFlagFromHword(gBlockRecvBuffer[playerMultiplayerId][1]);
             RecordedBattle_SetFrontierPassFlagFromHword(gBlockRecvBuffer[enemyMultiplayerId][1]);
@@ -1184,11 +1184,11 @@ static void CB2_HandleStartMultiPartnerBattle(void)
                 if (IsLinkTaskFinished())
                 {
                     // 0x300
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureLo) = 0;
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureHi) = 3;
+                    *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureLo) = 0;
+                    *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureHi) = 3;
                     BufferPartyVsScreenHealth_AtStart();
                     SetPlayerBerryDataInBattleStruct();
-                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.multiPartnerEnigmaBerry, sizeof(gBattleStruct->multiBuffer.multiPartnerEnigmaBerry));
+                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
 
@@ -1572,12 +1572,12 @@ static void CB2_HandleStartMultiBattle(void)
                 if (IsLinkTaskFinished())
                 {
                     // 0x300
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureLo) = 0;
-                    *(&gBattleStruct->multiBuffer.multiPartnerEnigmaBerry.versionSignatureHi) = 3;
+                    *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureLo) = 0;
+                    *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureHi) = 3;
                     BufferPartyVsScreenHealth_AtStart();
                     SetPlayerBerryDataInBattleStruct();
 
-                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.multiPartnerEnigmaBerry, sizeof(gBattleStruct->multiBuffer.multiPartnerEnigmaBerry));
+                    SendBlock(bitmask_all_link_players_but_self(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE]++;
                 }
                 if (gWirelessCommType)
@@ -2255,7 +2255,7 @@ static void EndLinkBattleInSteps(void)
         {
             u8 monsCount;
 
-            gMain.isFrontierBattle = RecordedBattle_GetFrontierPassFlag();
+            gMain.anyLinkBattlerHasFrontierPass = RecordedBattle_GetFrontierPassFlag();
 
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                 monsCount = 4;
@@ -2271,7 +2271,7 @@ static void EndLinkBattleInSteps(void)
                     FreeAllWindowBuffers();
                     SetMainCallback2(sub_80392A8);
                 }
-                else if (!gMain.isFrontierBattle)
+                else if (!gMain.anyLinkBattlerHasFrontierPass)
                 {
                     SetMainCallback2(gMain.savedCallback);
                     FreeBattleResources();
@@ -2335,9 +2335,9 @@ static void EndLinkBattleInSteps(void)
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 9:
-        if (!gMain.isFrontierBattle || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
+        if (!gMain.anyLinkBattlerHasFrontierPass || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
         {
-            gMain.isFrontierBattle = 0;
+            gMain.anyLinkBattlerHasFrontierPass = 0;
             SetMainCallback2(gMain.savedCallback);
             FreeBattleResources();
             FreeBattleSpritesData();
@@ -2433,7 +2433,7 @@ static void sub_803939C(void)
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 1:
-        if (gMain.isFrontierBattle && gReceivedRemoteLinkPlayers == 0)
+        if (gMain.anyLinkBattlerHasFrontierPass && gReceivedRemoteLinkPlayers == 0)
             CreateTask(Task_ReconnectWithLinkPlayers, 5);
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
@@ -2503,7 +2503,7 @@ static void sub_803939C(void)
         if (IsLinkTaskFinished() == TRUE)
         {
             HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
-            if (gMain.isFrontierBattle)
+            if (gMain.anyLinkBattlerHasFrontierPass)
             {
                 SetLinkStandbyCallback();
                 BattlePutTextOnWindow(gText_LinkStandby3, 0);
@@ -2514,15 +2514,15 @@ static void sub_803939C(void)
     case 8:
         if (--gBattleCommunication[1] == 0)
         {
-            if (gMain.isFrontierBattle && !gWirelessCommType)
+            if (gMain.anyLinkBattlerHasFrontierPass && !gWirelessCommType)
                 SetCloseLinkCallback();
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 9:
-        if (!gMain.isFrontierBattle || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
+        if (!gMain.anyLinkBattlerHasFrontierPass || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
         {
-            gMain.isFrontierBattle = 0;
+            gMain.anyLinkBattlerHasFrontierPass = 0;
             if (!gPaletteFade.active)
             {
                 SetMainCallback2(gMain.savedCallback);
@@ -2552,7 +2552,7 @@ static void sub_803939C(void)
     case 11:
         if (IsLinkTaskFinished() == TRUE && !IsTextPrinterActive(0) && --gBattleCommunication[1] == 0)
         {
-            if (gMain.isFrontierBattle)
+            if (gMain.anyLinkBattlerHasFrontierPass)
             {
                 SetLinkStandbyCallback();
                 BattlePutTextOnWindow(gText_LinkStandby3, 0);
@@ -2564,7 +2564,7 @@ static void sub_803939C(void)
     case 7:
         if (!IsTextPrinterActive(0))
         {
-            if (gMain.isFrontierBattle)
+            if (gMain.anyLinkBattlerHasFrontierPass)
             {
                 if (IsLinkTaskFinished() == TRUE)
                 {

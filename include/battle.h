@@ -344,7 +344,7 @@ struct BattleTvMovePoints
     s16 points[2][PARTY_SIZE * 4];
 };
 
-struct MultiPartnerEnigmaBerry
+struct LinkBattlerHeader
 {
     u8 versionSignatureLo;
     u8 versionSignatureHi;
@@ -429,7 +429,7 @@ struct BattleStruct
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2]; // a 3-D array [target][attacker][byte]
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
     union {
-        struct MultiPartnerEnigmaBerry multiPartnerEnigmaBerry;
+        struct LinkBattlerHeader linkBattlerHeader;
         u32 battleVideo[2];
     } multiBuffer;
     u8 wishPerishSongState;
