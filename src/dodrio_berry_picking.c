@@ -145,16 +145,18 @@ enum {
 // the values 0-9 are unique 'valid' columns
 #define NUM_BERRY_COLUMNS 11
 
-#define GFXTAG_DODRIO  0
-#define GFXTAG_STATUS  1
-#define GFXTAG_BERRIES 2
-#define GFXTAG_CLOUD   5
+#define GFXTAG_DODRIO    0
+#define GFXTAG_STATUS    1
+#define GFXTAG_BERRIES   2
+#define GFXTAG_CLOUD     5
+#define GFXTAG_COUNTDOWN 7
 
 #define PALTAG_DODRIO_NORMAL 0
 #define PALTAG_DODRIO_SHINY  1
 #define PALTAG_STATUS        2
 #define PALTAG_BERRIES       3
 #define PALTAG_CLOUD         6
+#define PALTAG_COUNTDOWN     8
 
 #define NUM_CLOUDS 2
 
@@ -871,7 +873,7 @@ static void DoCountdown(void)
     switch (sGame->state)
     {
     case 0:
-        StartMinigameCountdown(7, 8, 120, 80, 0);
+        StartMinigameCountdown(GFXTAG_COUNTDOWN, PALTAG_COUNTDOWN, 120, 80, 0);
         sGame->state++;
         break;
     case 1:
