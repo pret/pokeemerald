@@ -177,8 +177,8 @@ struct BerryCrushGame
     s16 unk30;
     s16 unk32;
     s16 unk34;
-    u8 unk36[0xC];
-    u16 unk42[6];
+    u8 commandParams[0xC];
+    u16 sendCmd[6];
     u16 recvCmd[7];
     struct BerryCrushGame_5C localState;
     struct BerryCrushGame_68 unk68;
@@ -869,8 +869,8 @@ void StartBerryCrush(MainCallback callback)
     sBerryCrushGamePtr->gameState = 1;
     sBerryCrushGamePtr->nextCmd = 1;
     sBerryCrushGamePtr->afterPalFadeCmd = 6;
-    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->unk36, 1, -1, 0, 16, 0, 0);
-    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->unk36);
+    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->commandParams, 1, -1, 0, 16, 0, 0);
+    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->commandParams);
     SetMainCallback2(MainCB);
     sBerryCrushGamePtr->mainTask = CreateTask(MainTask, 8);
     gTextFlags.autoScroll = 0;
@@ -886,8 +886,8 @@ static void GetBerryFromBag(void)
     sBerryCrushGamePtr->unk98[sBerryCrushGamePtr->localId].unkC = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
     sBerryCrushGamePtr->nextCmd = 1;
     sBerryCrushGamePtr->afterPalFadeCmd = 9;
-    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->unk36, 0, -1, 0, 16, 0, 0);
-    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->unk36);
+    BerryCrush_SetPaletteFadeParams(sBerryCrushGamePtr->commandParams, 0, -1, 0, 16, 0, 0);
+    BerryCrush_RunOrScheduleCommand(4, 1, sBerryCrushGamePtr->commandParams);
     sBerryCrushGamePtr->mainTask = CreateTask(MainTask, 8);
     SetMainCallback2(MainCB);
 }
@@ -976,7 +976,7 @@ static void MainCB(void)
 static void MainTask(u8 taskId)
 {
     if (sBerryCrushGamePtr->cmdCallback)
-        sBerryCrushGamePtr->cmdCallback(sBerryCrushGamePtr, sBerryCrushGamePtr->unk36);
+        sBerryCrushGamePtr->cmdCallback(sBerryCrushGamePtr, sBerryCrushGamePtr->commandParams);
 
     sub_8021450(sBerryCrushGamePtr);
 }
@@ -2075,14 +2075,14 @@ static u32 BerryCrushCommand_PrintMessage(struct BerryCrushGame *r7, u8 *r5)
 static u32 BerryCrushCommand_InitGfx(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     if (InitBerryCrushDisplay() != 0)
-        BerryCrush_RunOrScheduleCommand(r4->nextCmd, 0, r4->unk36);
+        BerryCrush_RunOrScheduleCommand(r4->nextCmd, 0, r4->commandParams);
     return 0;
 }
 
 static u32 BerryCrushCommand_TeardownGfx(struct BerryCrushGame *r4, __attribute__((unused)) u8 *r1)
 {
     if (BerryCrush_TeardownBgs() != 0)
-        BerryCrush_RunOrScheduleCommand(r4->nextCmd, 0, r4->unk36);
+        BerryCrush_RunOrScheduleCommand(r4->nextCmd, 0, r4->commandParams);
     return 0;
 }
 
@@ -2153,9 +2153,9 @@ static u32 BerryCrushCommand_WaitForOthersToPickBerries(struct BerryCrushGame *r
     case 2:
         if (!IsLinkTaskFinished())
             return 0;
-        memset(r5->unk42, 0, sizeof(r5->unk42));
-        r5->unk42[0] = r5->unk98[r5->localId].unkC;
-        SendBlock(0, r5->unk42, 2);
+        memset(r5->sendCmd, 0, sizeof(r5->sendCmd));
+        r5->sendCmd[0] = r5->unk98[r5->localId].unkC;
+        SendBlock(0, r5->sendCmd, 2);
         break;
     case 3:
         if (!IsLinkTaskFinished())
@@ -2533,8 +2533,8 @@ void BerryCrush_HandlePlayerInput(struct BerryCrushGame *r5)
         r5->localState.unk02_0 = 1;
     r5->localState.unk02_1 = r5->unk25_4;
     r5->localState.unk0A = r5->unk25_5;
-    memcpy(r5->unk42, &r5->localState, sizeof(r5->unk42));
-    Rfu_SendPacket(r5->unk42);
+    memcpy(r5->sendCmd, &r5->localState, sizeof(r5->sendCmd));
+    Rfu_SendPacket(r5->sendCmd);
 }
 
 void BerryCrush_UpdateGameState(struct BerryCrushGame *r5)
@@ -2737,11 +2737,11 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame *r7, __attrib
     switch (r7->cmdState)
     {
     case 0:
-        memset(r7->unk42, 0, 2 * sizeof(u16));
+        memset(r7->sendCmd, 0, 2 * sizeof(u16));
         if (r7->unk98[r7->localId].unk1A > r7->timer)
             r7->unk98[r7->localId].unk1A = r7->timer;
-        r7->unk42[0] = r7->unk98[r7->localId].unk1A;
-        SendBlock(0, r7->unk42, 2);
+        r7->sendCmd[0] = r7->unk98[r7->localId].unk1A;
+        SendBlock(0, r7->sendCmd, 2);
         break;
     case 1:
         if (!IsLinkTaskFinished())
@@ -2754,7 +2754,7 @@ static u32 BerryCrushCommand_TabulateResults(struct BerryCrushGame *r7, __attrib
         for (r8 = 0; r8 < r7->playerCount; ++r8)
             r7->unk98[r8].unk1A = gBlockRecvBuffer[r8][0];
         r7->unk10 = 0;
-        r7->unk42[0] = 0;
+        r7->sendCmd[0] = 0;
         ResetBlockReceivedFlags();
         if (r7->localId == 0)
             r7->cmdState = 3;
@@ -2989,7 +2989,7 @@ static u32 BerryCrushCommand_AskPlayAgain(struct BerryCrushGame *r5, u8 *r6)
         r4 = Menu_ProcessInputNoWrapClearOnChoose();
         if (r4 != -2)
         {
-            memset(r5->unk42, 0, sizeof(r5->unk42));
+            memset(r5->sendCmd, 0, sizeof(r5->sendCmd));
             if (r4 == 0)
             {
                 if (HasAtLeastOneBerry())
@@ -3025,9 +3025,9 @@ static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        r4->unk42[0] = r4->unk14;
+        r4->sendCmd[0] = r4->unk14;
         r4->recvCmd[0] = 0;
-        SendBlock(0, r4->unk42, sizeof(u16));
+        SendBlock(0, r4->sendCmd, sizeof(u16));
         break;
     case 2:
         if (!IsLinkTaskFinished())
@@ -3044,7 +3044,7 @@ static u32 BerryCrushCommand_CommunicatePlayAgainResponses(struct BerryCrushGame
         else
             BerryCrush_RunOrScheduleCommand(22, 1, NULL);
         ResetBlockReceivedFlags();
-        r4->unk42[0] = 0;
+        r4->sendCmd[0] = 0;
         r4->recvCmd[0] = 0;
         r4->unk10 = 0;
         r4->cmdState = 0;
