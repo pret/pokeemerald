@@ -84,7 +84,7 @@ EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
 EWRAM_DATA static MainCallback sCallback2_AfterRecordedBattle = NULL;
 EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;
-EWRAM_DATA static u8 sUnknown_0203C7B5 = 0;
+EWRAM_DATA static u8 sFrontierPassFlag = 0;
 EWRAM_DATA static u8 sBattleScene = 0;
 EWRAM_DATA static u8 sTextSpeed = 0;
 EWRAM_DATA static u32 sBattleFlags = 0;
@@ -687,19 +687,20 @@ u8 GetActiveBattlerLinkPlayerGender(void)
     return 0;
 }
 
-void sub_8185F84(void)
+void RecordedBattle_ClearFrontierPassFlag(void)
 {
-    sUnknown_0203C7B5 = 0;
+    sFrontierPassFlag = 0;
 }
 
-void sub_8185F90(u16 arg0)
+// Set sFrontierPassFlag to received state of FLAG_SYS_FRONTIER_PASS
+void RecordedBattle_SetFrontierPassFlagFromHword(u16 arg0)
 {
-    sUnknown_0203C7B5 |= (arg0 & 0x8000) >> 0xF;
+    sFrontierPassFlag |= (arg0 & 0x8000) >> 15;
 }
 
-u8 sub_8185FAC(void)
+u8 RecordedBattle_GetFrontierPassFlag(void)
 {
-    return sUnknown_0203C7B5;
+    return sFrontierPassFlag;
 }
 
 u8 GetBattleSceneInRecordedBattle(void)
