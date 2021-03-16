@@ -1619,7 +1619,7 @@ struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or
 // Return graphicsInfo for a pokemon species
 static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species, u8 form) {
   const struct ObjectEventGraphicsInfo *graphicsInfo = &gPokemonObjectGraphics[species];
-  return graphicsInfo->tileTag != 0xFFFF ? &gObjectEventGraphicsInfo_Dusclops : graphicsInfo;
+  return graphicsInfo->tileTag == 0xFFFF ? graphicsInfo : &gPokemonObjectGraphics[SPECIES_PORYGON];
 }
 
 // Set graphics & sprite for a follower object event by species & shininess.
