@@ -1280,7 +1280,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 default:
                     return 0;
             }
-        case CHAR_SPECIAL_F7:
+        case CHAR_DYNAMIC:
             if (bufferPointer == NULL)
                 bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
             while (*bufferPointer != EOS)
