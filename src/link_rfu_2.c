@@ -1697,7 +1697,7 @@ static void sub_801084C(u8 taskId)
         if (AreNoPlayersReceiving())
         {
             ResetBlockReceivedFlags();
-            sub_800B348();
+            LocalLinkPlayerToBlock();
             gTasks[taskId].data[0]++;
         }
         break;
@@ -1786,7 +1786,7 @@ static void ReceiveRfuLinkPlayers(const struct SioInfo *sioInfo)
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         gLinkPlayers[i] = sioInfo->linkPlayers[i];
-        sub_800B524(gLinkPlayers + i);
+        ConvertLinkPlayerName(gLinkPlayers + i);
     }
 }
 
@@ -1831,7 +1831,7 @@ static void Task_ExchangeLinkPlayers(u8 taskId)
             ResetBlockReceivedFlag(r4);
             r2 = (struct LinkPlayerBlock *)gBlockRecvBuffer[r4];
             gLinkPlayers[r4] = r2->linkPlayer;
-            sub_800B524(gLinkPlayers + r4);
+            ConvertLinkPlayerName(gLinkPlayers + r4);
             gTasks[taskId].data[0]++;
         }
         break;
@@ -1887,7 +1887,7 @@ static void sub_8010D0C(u8 taskId)
     case 0:
         if (Rfu.playerCount)
         {
-            sub_800B348();
+            LocalLinkPlayerToBlock();
             SendBlock(0, gBlockSendBuffer, sizeof(struct LinkPlayerBlock));
             gTasks[taskId].data[0]++;
         }

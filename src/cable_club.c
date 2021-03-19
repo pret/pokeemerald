@@ -904,7 +904,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             {
                 struct LinkPlayer *player = (struct LinkPlayer *)gBlockRecvBuffer[i];
                 gLinkPlayers[i] = *player;
-                sub_800B524(&gLinkPlayers[i]);
+                ConvertLinkPlayerName(&gLinkPlayers[i]);
                 ResetBlockReceivedFlag(i);
             }
             tState = 4;
