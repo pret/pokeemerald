@@ -1280,7 +1280,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 default:
                     return 0;
             }
-        case CHAR_DYNAMIC:
+        case CHAR_SPECIAL_F7:
             if (bufferPointer == NULL)
                 bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
             while (*bufferPointer != EOS)
@@ -1398,8 +1398,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 
     if (lineWidth > width)
         return lineWidth;
-    else
-        return width;
+    return width;
 }
 
 u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
