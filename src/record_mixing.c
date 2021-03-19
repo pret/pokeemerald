@@ -46,7 +46,7 @@ struct RecordMixingHallRecords
 
 struct PlayerRecordsRS
 {
-    struct SecretBase secretBases[SECRET_BASES_COUNT];
+    struct SecretBase secretBases[LINKED_SECRET_BASES_COUNT];
     TVShow tvShows[TV_SHOWS_COUNT];
     PokeNews pokeNews[POKE_NEWS_COUNT];
     OldMan oldMan;
@@ -59,7 +59,7 @@ struct PlayerRecordsRS
 
 struct PlayerRecordsEmerald
 {
-    /* 0x0000 */ struct SecretBase secretBases[SECRET_BASES_COUNT];
+    /* 0x0000 */ struct SecretBase secretBases[LINKED_SECRET_BASES_COUNT];
     /* 0x0c80 */ TVShow tvShows[TV_SHOWS_COUNT];
     /* 0x1004 */ PokeNews pokeNews[POKE_NEWS_COUNT];
     /* 0x1044 */ OldMan oldMan;

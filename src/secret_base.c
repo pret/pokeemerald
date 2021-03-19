@@ -230,7 +230,7 @@ static void ClearSecretBase(struct SecretBase *secretBase)
 void ClearSecretBases(void)
 {
     u16 i;
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
         ClearSecretBase(&gSaveBlock1Ptr->secretBases[i]);
 }
 
@@ -244,7 +244,7 @@ void TrySetCurSecretBaseIndex(void)
     u16 i;
 
     gSpecialVar_Result = FALSE;
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (sCurSecretBaseId == gSaveBlock1Ptr->secretBases[i].secretBaseId)
         {
@@ -387,7 +387,7 @@ void SetOccupiedSecretBaseEntranceMetatiles(struct MapEvents const *events)
     {
         if (events->bgEvents[bgId].kind == BG_EVENT_SECRET_BASE)
         {
-            for (j = 0; j < SECRET_BASES_COUNT; j++)
+            for (j = 0; j < LINKED_SECRET_BASES_COUNT; j++)
             {
                 if (gSaveBlock1Ptr->secretBases[j].secretBaseId == events->bgEvents[bgId].bgUnion.secretBaseId)
                 {
@@ -864,7 +864,7 @@ static u8 GetNumRegisteredSecretBases(void)
 {
     s16 i;
     u8 count = 0;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
+    for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (IsSecretBaseRegistered(i) == TRUE)
             count++;
@@ -939,7 +939,7 @@ static void BuildRegistryMenuItems(u8 taskId)
 
     data = gTasks[taskId].data;
     count = 0;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
+    for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (IsSecretBaseRegistered(i))
         {
@@ -1176,7 +1176,7 @@ void GetSecretBaseOwnerAndState(void)
     secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
     if (!FlagGet(FLAG_DAILY_SECRET_BASE))
     {
-        for (i = 0; i < SECRET_BASES_COUNT; i++)
+        for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
             gSaveBlock1Ptr->secretBases[i].battledOwnerToday = FALSE;
 
         FlagSet(FLAG_DAILY_SECRET_BASE);
@@ -1393,7 +1393,7 @@ static bool8 SecretBasesBelongToSamePlayer(struct SecretBase *secretBase1, struc
 static s16 GetSecretBaseIndexFromId(u8 secretBaseId)
 {
     s16 i;
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (gSaveBlock1Ptr->secretBases[i].secretBaseId == secretBaseId)
             return i;
@@ -1405,7 +1405,7 @@ static s16 GetSecretBaseIndexFromId(u8 secretBaseId)
 static u8 FindAvailableSecretBaseIndex(void)
 {
     s16 i;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
+    for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (gSaveBlock1Ptr->secretBases[i].secretBaseId == 0)
             return i;
@@ -1417,7 +1417,7 @@ static u8 FindAvailableSecretBaseIndex(void)
 static u8 FindUnregisteredSecretBaseIndex(void)
 {
     s16 i;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
+    for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (gSaveBlock1Ptr->secretBases[i].registryStatus == UNREGISTERED && gSaveBlock1Ptr->secretBases[i].toRegister == FALSE)
             return i;
@@ -1487,9 +1487,9 @@ static void SortSecretBasesByRegistryStatus(void)
     struct SecretBase *secretBases;
 
     secretBases = gSaveBlock1Ptr->secretBases;
-    for (i = 1; i < SECRET_BASES_COUNT - 1; i++)
+    for (i = 1; i < LINKED_SECRET_BASES_COUNT - 1; i++)
     {
-        for (j = i + 1; j < SECRET_BASES_COUNT; j++)
+        for (j = i + 1; j < LINKED_SECRET_BASES_COUNT; j++)
         {
             if ((secretBases[i].registryStatus == UNREGISTERED && secretBases[j].registryStatus == REGISTERED) 
              || (secretBases[i].registryStatus == NEW && secretBases[j].registryStatus != NEW))
@@ -1506,7 +1506,7 @@ static void SortSecretBasesByRegistryStatus(void)
 static void TrySaveFriendsSecretBases(struct SecretBaseRecordMixer *mixer, u8 registryStatus)
 {
     u16 i;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
+    for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (mixer->secretBases[i].registryStatus == registryStatus)
             TrySaveFriendsSecretBase(&mixer->secretBases[i], mixer->version, mixer->language);
@@ -1548,7 +1548,7 @@ static void DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(struct Secr
     u8 i;
     u8 sbFlags = 0;
 
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (!(sbFlags & DELETED_BASE_A))
         {
@@ -1593,7 +1593,7 @@ static bool8 ClearDuplicateOwnedSecretBase(struct SecretBase *secretBase, struct
 {
     u8 i;
 
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (secretBases[i].secretBaseId != 0)
         {
@@ -1625,7 +1625,7 @@ static void ClearDuplicateOwnedSecretBases(struct SecretBase *playersBases, stru
 {
     u8 i;
 
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
+    for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (playersBases[i].secretBaseId)
         {
@@ -1644,7 +1644,7 @@ static void ClearDuplicateOwnedSecretBases(struct SecretBase *playersBases, stru
             }
         }
     }
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (friendsBasesA[i].secretBaseId)
         {
@@ -1655,7 +1655,7 @@ static void ClearDuplicateOwnedSecretBases(struct SecretBase *playersBases, stru
             }
         }
     }
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (friendsBasesB[i].secretBaseId)
         {
@@ -1682,7 +1682,7 @@ static void TrySaveRegisteredDuplicates(struct SecretBaseRecordMixer *mixers)
 {
     u16 i;
 
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         TrySaveRegisteredDuplicate(&mixers[0].secretBases[i], mixers[0].version, mixers[0].language);
         TrySaveRegisteredDuplicate(&mixers[1].secretBases[i], mixers[1].version, mixers[1].language);
@@ -1761,7 +1761,7 @@ void ReceiveSecretBasesData(void *secretBases, size_t recordSize, u8 linkIdx)
 
         SaveRecordMixBases(mixers);
 
-        for (i = 1; i < SECRET_BASES_COUNT; i++)
+        for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
         {
             // In the process of deleting duplicate bases, if a base the player has registered is deleted it is
             // flagged with the temporary toRegister flag, so it can be re-registered after it has been newly saved
@@ -1773,7 +1773,7 @@ void ReceiveSecretBasesData(void *secretBases, size_t recordSize, u8 linkIdx)
         }
 
         SortSecretBasesByRegistryStatus();
-        for (i = 1; i < SECRET_BASES_COUNT; i++)
+        for (i = 1; i < LINKED_SECRET_BASES_COUNT; i++)
         {
             // Unmark "new" bases, they've been saved now and are no longer important
             if (gSaveBlock1Ptr->secretBases[i].registryStatus == NEW)
@@ -1791,7 +1791,7 @@ void ReceiveSecretBasesData(void *secretBases, size_t recordSize, u8 linkIdx)
 void ClearJapaneseSecretBases(struct SecretBase *bases)
 {
     u32 i;
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
+    for (i = 0; i < LINKED_SECRET_BASES_COUNT; i++)
     {
         if (bases[i].language == LANGUAGE_JAPANESE)
             ClearSecretBase(&bases[i]);

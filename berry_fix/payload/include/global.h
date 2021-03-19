@@ -89,23 +89,23 @@ enum LanguageId
 };
 
 // capacities of various saveblock objects
-#define DAYCARE_MON_COUNT   2
-#define POKEBLOCKS_COUNT    40
-#define PARTY_SIZE          6
-#define EVENT_OBJECTS_COUNT 16
-#define BERRY_TREES_COUNT   128
-#define FLAGS_COUNT         288
-#define VARS_COUNT          256
-#define MAIL_COUNT          16
-#define SECRET_BASES_COUNT  20
-#define TV_SHOWS_COUNT      25
-#define POKE_NEWS_COUNT     16
-#define PC_ITEMS_COUNT      50
-#define BAG_ITEMS_COUNT     20
-#define BAG_KEYITEMS_COUNT  20
-#define BAG_POKEBALLS_COUNT 16
-#define BAG_TMHM_COUNT      64
-#define BAG_BERRIES_COUNT   46
+#define DAYCARE_MON_COUNT         2
+#define POKEBLOCKS_COUNT          40
+#define PARTY_SIZE                6
+#define EVENT_OBJECTS_COUNT       16
+#define BERRY_TREES_COUNT         128
+#define FLAGS_COUNT               288
+#define VARS_COUNT                256
+#define MAIL_COUNT                16
+#define LINKED_SECRET_BASES_COUNT 20
+#define TV_SHOWS_COUNT            25
+#define POKE_NEWS_COUNT           16
+#define PC_ITEMS_COUNT            50
+#define BAG_ITEMS_COUNT           20
+#define BAG_KEYITEMS_COUNT        20
+#define BAG_POKEBALLS_COUNT       16
+#define BAG_TMHM_COUNT            64
+#define BAG_BERRIES_COUNT         46
 
 enum
 {
@@ -672,7 +672,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x1340*/ u16 vars[VARS_COUNT];
     /*0x1540*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1608*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
-    /*0x1A08*/ struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
+    /*0x1A08*/ struct SecretBaseRecord secretBases[LINKED_SECRET_BASES_COUNT];
     /*0x2688*/ u8 playerRoomDecor[12];
     /*0x2694*/ u8 playerRoomDecorPos[12];
     /*0x26A0*/ u8 decorDesk[10];
