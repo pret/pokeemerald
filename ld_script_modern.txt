@@ -50,6 +50,15 @@ SECTIONS {
         asm/*.o(.text);
     } =0
 
+    .text.unlikely :
+    ALIGN(4)
+    {
+        src/crt0.o(.text.unlikely);
+        src/*.o(.text.unlikely);
+        gflib/*.o(.text.unlikely);
+        asm/*.o(.text.unlikely);
+    } =0
+
     script_data :
     ALIGN(4)
     {

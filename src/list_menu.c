@@ -467,8 +467,6 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
     }
 }
 
-#define TASK_NONE 0xFF
-
 void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow)
 {
     struct ListMenu *list = (void*) gTasks[listTaskId].data;

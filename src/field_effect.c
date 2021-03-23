@@ -967,8 +967,8 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
     curBlue  -= ((curBlue  * b) >> 4);
     
     color  = curRed;
-    color |= curGreen <<  5;
-    color |= curBlue  << 10;
+    color |= (curGreen <<  5);
+    color |= (curBlue  << 10);
     
     gPlttBufferFaded[i] = color;
 }
@@ -3703,8 +3703,8 @@ static void DestroyDeoxysRockEffect_RockFragments(s16* data, u8 taskId)
     {
         struct Sprite *sprite = &gSprites[gObjectEvents[tObjectEventId].spriteId];
         gObjectEvents[tObjectEventId].invisible = TRUE;
-        BlendPalettes(0x0000FFFF, 0x10, RGB_WHITE);
-        BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITE);
+        BlendPalettes(PALETTES_BG, 0x10, RGB_WHITE);
+        BeginNormalPaletteFade(PALETTES_BG, 0, 0x10, 0, RGB_WHITE);
         CreateDeoxysRockFragments(sprite);
         PlaySE(SE_THUNDER);
         StartEndingDeoxysRockCameraShake(tCameraTaskId);
@@ -3853,16 +3853,8 @@ static void Task_MoveDeoxysRock(u8 taskId)
         case 0:
             data[4] = sprite->pos1.x << 4;
             data[5] = sprite->pos1.y << 4;
-
-            // UB: Possible divide by zero
-            #ifdef UBFIX
-            #define DIVISOR (data[8] ? data[8] : 1);
-            #else
-            #define DIVISOR (data[8])
-            #endif
-
-            data[6] = (data[2] * 16 - data[4]) / DIVISOR;
-            data[7] = (data[3] * 16 - data[5]) / DIVISOR;
+            data[6] = SAFE_DIV(data[2] * 16 - data[4], data[8]);
+            data[7] = SAFE_DIV(data[3] * 16 - data[5], data[8]);
             data[0]++;
         case 1:
             if (data[8] != 0)

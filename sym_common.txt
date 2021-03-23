@@ -9,7 +9,7 @@ gUnneededFireRedVariable:
 gTransparentTileNumber:
     .space 1
     .align 4
-gUnknown_03002F70:
+gWindowBgTilemapBuffers:
     .space 16
     @ ../gflib/text.o
     .align 4

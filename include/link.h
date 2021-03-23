@@ -56,17 +56,17 @@
 #define LINKCMD_BLENDER_SEND_KEYS       0x4444
 #define LINKCMD_BLENDER_SCORE_BEST      0x4523
 #define LINKCMD_BLENDER_SCORE_GOOD      0x5432
-#define LINKCMD_0x5555                  0x5555
-#define LINKCMD_0x5566                  0x5566
+#define LINKCMD_DUMMY_1                 0x5555
+#define LINKCMD_DUMMY_2                 0x5566
 #define LINKCMD_READY_CLOSE_LINK        0x5FFF
-#define LINKCMD_0x6666                  0x6666
-#define LINKCMD_0x7777                  0x7777
+#define LINKCMD_SEND_EMPTY              0x6666
+#define LINKCMD_SEND_0xEE               0x7777
 #define LINKCMD_BLENDER_PLAY_AGAIN      0x7779
-#define LINKCMD_0x7FFF                  0x7FFF
+#define LINKCMD_COUNTDOWN               0x7FFF
 #define LINKCMD_CONT_BLOCK              0x8888
 #define LINKCMD_BLENDER_NO_BERRIES      0x9999
 #define LINKCMD_BLENDER_NO_PBLOCK_SPACE 0xAAAA
-#define LINKCMD_0xAAAB                  0xAAAB
+#define LINKCMD_SEND_ITEM               0xAAAB
 #define LINKCMD_READY_TO_TRADE          0xAABB
 #define LINKCMD_READY_FINISH_TRADE      0xABCD
 #define LINKCMD_INIT_BLOCK              0xBBBB
@@ -76,17 +76,18 @@
 #define LINKCMD_START_TRADE             0xCCDD
 #define LINKCMD_CONFIRM_FINISH_TRADE    0xDCBA
 #define LINKCMD_SET_MONS_TO_TRADE       0xDDDD 
-#define LINKCMD_0xDDEE                  0xDDEE
+#define LINKCMD_PLAYER_CANCEL_TRADE     0xDDEE
 #define LINKCMD_REQUEST_CANCEL          0xEEAA
-#define LINKCMD_CANCEL_TRADE            0xEEBB
-#define LINKCMD_0xEECC                  0xEECC
+#define LINKCMD_BOTH_CANCEL_TRADE       0xEEBB
+#define LINKCMD_PARTNER_CANCEL_TRADE    0xEECC
+#define LINKCMD_NONE                    0xEFFF
 
 #define LINKTYPE_TRADE                 0x1111
 #define LINKTYPE_TRADE_CONNECTING      0x1122
 #define LINKTYPE_TRADE_SETUP           0x1133
 #define LINKTYPE_TRADE_DISCONNECTED    0x1144
 #define LINKTYPE_BATTLE                0x2211
-#define LINKTYPE_0x2222                0x2222  // unused battle?
+#define LINKTYPE_UNUSED_BATTLE         0x2222 // Unused, inferred from gap
 #define LINKTYPE_SINGLE_BATTLE         0x2233
 #define LINKTYPE_DOUBLE_BATTLE         0x2244
 #define LINKTYPE_MULTI_BATTLE          0x2255
@@ -98,7 +99,7 @@
 #define LINKTYPE_BERRY_BLENDER_SETUP   0x4411
 #define LINKTYPE_BERRY_BLENDER         0x4422
 #define LINKTYPE_MYSTERY_EVENT         0x5501
-#define LINKTYPE_0x5502                0x5502  // unused?
+#define LINKTYPE_UNUSED_EREADER        0x5502 // Unused, inferred from gap
 #define LINKTYPE_EREADER               0x5503
 #define LINKTYPE_CONTEST_GMODE         0x6601
 #define LINKTYPE_CONTEST_EMODE         0x6602
@@ -290,17 +291,17 @@ bool8 HandleLinkConnection(void);
 void SetLinkDebugValues(u32 seed, u32 flags);
 void SetBerryBlenderLinkCallback(void);
 void SetSuppressLinkErrorMessage(bool8 flag);
-void sub_800B524(struct LinkPlayer *linkPlayer);
+void ConvertLinkPlayerName(struct LinkPlayer *linkPlayer);
 u8 GetSioMultiSI(void);
 void ClearSavedLinkPlayers(void);
-void BufferLinkErrorInfo(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
-void sub_800B348(void);
+void BufferLinkErrorInfo(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, bool8 disconnected);
+void LocalLinkPlayerToBlock(void);
 void LinkPlayerFromBlock(u32 who);
 bool32 Link_AnyPartnersPlayingFRLG_JP(void);
 void ResetLinkPlayerCount(void);
 void SaveLinkPlayers(u8 a0);
 void SetWirelessCommType0(void);
-bool32 sub_800B504(void);
+bool32 IsLinkRecvQueueLengthAtLeast3(void);
 
 extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;
