@@ -1114,7 +1114,7 @@ static void StartMatchCall(void)
     {
         ScriptContext2_Enable();
         FreezeObjectEvents();
-        sub_808B864();
+        PlayerFreeze();
         sub_808BCF4();
     }
 
@@ -1168,7 +1168,7 @@ static bool32 LoadMatchCallWindowGfx(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
     taskData[2] = AddWindow(&sMatchCallTextWindow);
-    if (taskData[2] == 0xFF)
+    if (taskData[2] == WINDOW_NONE)
     {
         DestroyTask(taskId);
         return FALSE;

@@ -165,6 +165,8 @@
 
 // gTileset_Cave
 #define METATILE_Cave_EntranceCover                     0x229
+#define METATILE_Cave_CrackedFloor_Hole                 0x206
+#define METATILE_Cave_CrackedFloor                      0x22F
 #define METATILE_Cave_SealedChamberEntrance_TopLeft     0x22A
 #define METATILE_Cave_SealedChamberEntrance_TopMid      0x22B
 #define METATILE_Cave_SealedChamberEntrance_TopRight    0x22C
@@ -191,6 +193,7 @@
 #define METATILE_Pacifidlog_HalfSubmergedLogs_Vertical1   0x261
 #define METATILE_Pacifidlog_SubmergedLogs_Vertical0       0x25A
 #define METATILE_Pacifidlog_SubmergedLogs_Vertical1       0x262
+#define METATILE_Pacifidlog_SkyPillar_CrackedFloor_Hole   0x237
 #define METATILE_Pacifidlog_SkyPillar_DoorOpen_Top        0x2AA
 #define METATILE_Pacifidlog_SkyPillar_DoorOpen_Bottom     0x2B2
 

@@ -1697,7 +1697,7 @@ static void sub_801084C(u8 taskId)
         if (AreNoPlayersReceiving())
         {
             ResetBlockReceivedFlags();
-            sub_800B348();
+            LocalLinkPlayerToBlock();
             gTasks[taskId].data[0]++;
         }
         break;
@@ -1786,7 +1786,7 @@ static void ReceiveRfuLinkPlayers(const struct SioInfo *sioInfo)
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         gLinkPlayers[i] = sioInfo->linkPlayers[i];
-        sub_800B524(gLinkPlayers + i);
+        ConvertLinkPlayerName(gLinkPlayers + i);
     }
 }
 
@@ -1831,7 +1831,7 @@ static void Task_ExchangeLinkPlayers(u8 taskId)
             ResetBlockReceivedFlag(r4);
             r2 = (struct LinkPlayerBlock *)gBlockRecvBuffer[r4];
             gLinkPlayers[r4] = r2->linkPlayer;
-            sub_800B524(gLinkPlayers + r4);
+            ConvertLinkPlayerName(gLinkPlayers + r4);
             gTasks[taskId].data[0]++;
         }
         break;
@@ -1887,7 +1887,7 @@ static void sub_8010D0C(u8 taskId)
     case 0:
         if (Rfu.playerCount)
         {
-            sub_800B348();
+            LocalLinkPlayerToBlock();
             SendBlock(0, gBlockSendBuffer, sizeof(struct LinkPlayerBlock));
             gTasks[taskId].data[0]++;
         }
@@ -2472,7 +2472,7 @@ void RfuVSync(void)
     rfu_LMAN_syncVBlank();
 }
 
-void sub_8011AC8(void)
+void ClearRecvCommands(void)
 {
     CpuFill32(0, gRecvCmds, sizeof(gRecvCmds));
 }
@@ -2643,7 +2643,7 @@ static void sub_8011E2C(u8 taskId)
 static void sub_8011E94(u32 a0, u32 a1)
 {
     u8 taskId = FindTaskIdByFunc(sub_8011E2C);
-    if (taskId == 0xFF)
+    if (taskId == TASK_NONE)
     {
         taskId = CreateTask(sub_8011E2C, 5);
         gTasks[taskId].data[0] = a0;
@@ -2792,12 +2792,12 @@ void sub_8012188(const u8 *name, struct GFtgtGname *structPtr, u8 activity)
     taskId2 = FindTaskIdByFunc(Task_LinkRfu_UnionRoomListen);
     if (activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
-        if (taskId2 != 0xFF)
+        if (taskId2 != TASK_NONE)
             gTasks[taskId2].data[7] = 1;
     }
     else
     {
-        if (taskId2 != 0xFF)
+        if (taskId2 != TASK_NONE)
             gTasks[taskId2].data[7] = 0;
     }
 }

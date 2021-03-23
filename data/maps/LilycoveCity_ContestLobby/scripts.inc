@@ -783,7 +783,7 @@ LilycoveCity_ContestLobby_EventScript_TrySetUpLinkContest:: @ 821AA15
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkError
 	compare VAR_RESULT, LINKUP_FAILED_CONTEST_GMODE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelLinkModeDifference
-	message3 LilycoveCity_ContestLobby_Text_Transmitting
+	messageinstant LilycoveCity_ContestLobby_Text_Transmitting
 	contestlinktransfer
 	switch VAR_0x8004
 	case 0, LilycoveCity_ContestLobby_EventScript_StartLinkContest
@@ -926,7 +926,7 @@ LilycoveCity_ContestLobby_EventScript_TryJoinLinkGroup:: @ 821AC38
 	return
 
 LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided:: @ 821AC3D
-	message3 LilycoveCity_ContestLobby_Text_Transmitting
+	messageinstant LilycoveCity_ContestLobby_Text_Transmitting
 	contestlinktransfer
 	goto LilycoveCity_ContestLobby_EventScript_StartLinkContest
 	end

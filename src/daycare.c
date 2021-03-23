@@ -170,7 +170,7 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
         StringCopy(daycareMon->mail.OT_name, gSaveBlock2Ptr->playerName);
         GetMonNickname2(mon, daycareMon->mail.monName);
         StripExtCtrlCodes(daycareMon->mail.monName);
-        daycareMon->mail.gameLanguage = LANGUAGE_ENGLISH;
+        daycareMon->mail.gameLanguage = GAME_LANGUAGE;
         daycareMon->mail.monLanguage = GetMonData(mon, MON_DATA_LANGUAGE);
         mailId = GetMonData(mon, MON_DATA_MAIL);
         daycareMon->mail.message = gSaveBlock1Ptr->mail[mailId];
@@ -894,8 +894,8 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     // Check if an egg should be produced
     if (daycare->offspringPersonality == 0 && validEggs == DAYCARE_MON_COUNT && (daycare->mons[1].steps & 0xFF) == 0xFF)
     {
-        u8 compatability = GetDaycareCompatibilityScore(daycare);
-        if (compatability > (Random() * 100u) / USHRT_MAX)
+        u8 compatibility = GetDaycareCompatibilityScore(daycare);
+        if (compatibility > (Random() * 100u) / USHRT_MAX)
             TriggerPendingDaycareEgg();
     }
 
@@ -1050,7 +1050,7 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         if (trainerIds[0] == trainerIds[1])
             return PARENTS_LOW_COMPATIBILITY;
 
-        return PARENTS_MED_COMPATABILITY;
+        return PARENTS_MED_COMPATIBILITY;
     }
     // neither parent is Ditto
     else
@@ -1065,14 +1065,14 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         if (species[0] == species[1])
         {
             if (trainerIds[0] == trainerIds[1])
-                return PARENTS_MED_COMPATABILITY; // same species, same trainer
+                return PARENTS_MED_COMPATIBILITY; // same species, same trainer
 
-            return PARENTS_MAX_COMPATABILITY; // same species, different trainers
+            return PARENTS_MAX_COMPATIBILITY; // same species, different trainers
         }
         else
         {
             if (trainerIds[0] != trainerIds[1])
-                return PARENTS_MED_COMPATABILITY; // different species, different trainers
+                return PARENTS_MED_COMPATIBILITY; // different species, different trainers
 
             return PARENTS_LOW_COMPATIBILITY; // different species, same trainer
         }
@@ -1095,9 +1095,9 @@ void SetDaycareCompatibilityString(void)
         whichString = 3;
     if (relationshipScore == PARENTS_LOW_COMPATIBILITY)
         whichString = 2;
-    if (relationshipScore == PARENTS_MED_COMPATABILITY)
+    if (relationshipScore == PARENTS_MED_COMPATIBILITY)
         whichString = 1;
-    if (relationshipScore == PARENTS_MAX_COMPATABILITY)
+    if (relationshipScore == PARENTS_MAX_COMPATIBILITY)
         whichString = 0;
 
     StringCopy(gStringVar4, sCompatibilityMessages[whichString]);
