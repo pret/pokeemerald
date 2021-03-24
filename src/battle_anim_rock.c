@@ -24,7 +24,7 @@ static void AnimRockScatter_Step(struct Sprite *sprite);
 static void AnimParticleInVortex(struct Sprite *);
 static void AnimParticleInVortex_Step(struct Sprite *sprite);
 static void AnimTask_LoadSandstormBackground_Step(u8 taskId);
-static void sub_8111214(struct Task *task);
+static void CreateRolloutDirtSprite(struct Task *task);
 static u8 GetRolloutCounter(void);
 
 static const union AnimCmd sAnim_FlyingRock_0[] =
@@ -411,7 +411,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-    sub_80A6B30(&animBg);
+    GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Sandstorm, animBg.tilesOffset);
     AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_Sandstorm, 0);
     LoadCompressedPalette(gBattleAnimSpritePal_FlyingDirt, animBg.paletteId * 16, 32);
@@ -470,8 +470,8 @@ static void AnimTask_LoadSandstormBackground_Step(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&animBg);
-        sub_80A6C68(animBg.bgId);
+        GetBattleAnimBg1Data(&animBg);
+        ClearBattleAnimBg(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
     case 4:
@@ -659,7 +659,7 @@ static void AnimTask_Rollout_Step(u8 taskId)
         if (++task->data[9] >= task->data[10])
         {
             task->data[9] = 0;
-            sub_8111214(task);
+            CreateRolloutDirtSprite(task);
             task->data[13] += task->data[14];
             PlaySE12WithPanning(SE_M_DIG, task->data[13]);
         }
@@ -676,7 +676,7 @@ static void AnimTask_Rollout_Step(u8 taskId)
     }
 }
 
-static void sub_8111214(struct Task *task)
+static void CreateRolloutDirtSprite(struct Task *task)
 {
     const struct SpriteTemplate *spriteTemplate;
     int tileOffset;
@@ -731,7 +731,7 @@ static void AnimRolloutParticle(struct Sprite *sprite)
     if (TranslateAnimHorizontalArc(sprite))
     {
         u8 taskId = FindTaskIdByFunc(AnimTask_Rollout_Step);
-        if (taskId != 0xFF)
+        if (taskId != TASK_NONE)
             gTasks[taskId].data[11]--;
 
         DestroySprite(sprite);
@@ -833,7 +833,7 @@ void AnimTask_MoveSeismicTossBg(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        sub_80A6DAC(FALSE);
+        UpdateAnimBg3ScreenSize(FALSE);
         gTasks[taskId].data[1] = 200;
     }
 
@@ -842,7 +842,7 @@ void AnimTask_MoveSeismicTossBg(u8 taskId)
 
     if (gTasks[taskId].data[0] == 120)
     {
-        sub_80A6DAC(TRUE);
+        UpdateAnimBg3ScreenSize(TRUE);
         DestroyAnimVisualTask(taskId);
     }
 
@@ -853,7 +853,7 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        sub_80A6DAC(FALSE);
+        UpdateAnimBg3ScreenSize(FALSE);
         gTasks[taskId].data[0]++;
         gTasks[taskId].data[2] = gBattle_BG3_Y;
     }
@@ -865,7 +865,7 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
     if (gBattleAnimArgs[7] == 0xFFF)
     {
         gBattle_BG3_Y = 0;
-        sub_80A6DAC(TRUE);
+        UpdateAnimBg3ScreenSize(TRUE);
         DestroyAnimVisualTask(taskId);
     }
 }

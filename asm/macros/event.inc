@@ -930,6 +930,17 @@
 	.4byte \text
 	.endm
 
+	@ Formatting for the braille window, to be put at the start of a pointer used by braillemessage.
+	@ These are from RS and are ignored in Emerald (see ScrCmd_braillemessage, and comment above)
+	.macro brailleformat winLeft:req, winTop:req, winRight:req, winBottom:req, textLeft:req, textTop:req
+	.byte \winLeft
+	.byte \winTop
+	.byte \winRight
+	.byte \winBottom
+	.byte \textLeft
+	.byte \textTop
+	.endm
+
 	@ Gives the player one of the specified (species) Pokemon at level level holding item. The trailing 0s are unused parameters
 	.macro givemon species:req, level:req, item:req
 	.byte 0x79
@@ -1475,15 +1486,15 @@
 	.4byte \value
 	.endm
 
-	@ Makes the Pokemon in the specified slot of the player's party obedient. It will not randomly disobey orders in battle.
-	.macro setmonobedient slot:req
+	@ Sets the Pokemon in the specified slot of the player party's eventLegal bit.
+	.macro setmoneventlegal slot:req
 	.byte 0xcd
 	.2byte \slot
 	.endm
 
-	@ Checks if the Pokemon in the specified slot of the player's party is obedient. If the Pokemon is disobedient,
-	@ VAR_RESULT is TRUE. If the Pokemon is obedient (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmonobedience slot:req
+	@ Checks if the Pokemon in the specified slot of the player's party has its eventLegal bit set. If it isn't set,
+	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
+	.macro checkmoneventlegal slot:req
 	.byte 0xce
 	.2byte \slot
 	.endm
@@ -1550,11 +1561,11 @@
 	.2byte \y
 	.endm
 
-	.macro cmdD8
+	.macro selectapproachingtrainer
 	.byte 0xd8
 	.endm
 
-	.macro cmdD9
+	.macro lockfortrainer
 	.byte 0xd9
 	.endm
 
@@ -1562,7 +1573,7 @@
 	.byte 0xda
 	.endm
 
-	.macro message3 pointer:req
+	.macro messageinstant pointer:req
 	.byte 0xdb
 	.4byte \pointer
 	.endm

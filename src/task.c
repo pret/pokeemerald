@@ -171,7 +171,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return TAIL_SENTINEL; // No task was found.
+    return TASK_NONE; // No task was found.
 }
 
 u8 GetTaskCount(void)

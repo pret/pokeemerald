@@ -2765,7 +2765,11 @@ static void AwardBattleTowerRibbons(void)
 {
     s32 i;
     u32 partyIndex;
+#ifdef BUGFIX
+    struct RibbonCounter ribbons[MAX_FRONTIER_PARTY_SIZE];
+#else
     struct RibbonCounter ribbons[3]; // BUG: 4 Pokemon can receive ribbons in a double battle mode.
+#endif
     u8 ribbonType = 0;
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);

@@ -890,7 +890,7 @@ static void sub_81CBC1C(void)
 static void sub_81CBC38(int arg0)
 {
     u8 taskId = FindTaskIdByFunc(sub_81CBC64);
-    if (taskId != 0xFF)
+    if (taskId != TASK_NONE)
         gTasks[taskId].data[15] = arg0;
 }
 

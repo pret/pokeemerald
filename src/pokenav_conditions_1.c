@@ -123,7 +123,7 @@ u32 ConditionMenu_OpenMarkingsMenu(struct PokenavSub11 *structPtr)
     u8 markings;
     u32 ret = PARTY_CONDITION_FUNC_NONE, boxId, monId;
 
-    if (!MonMarkingsMenuHandleInput())
+    if (!HandleMonMarkingsMenuInput())
     {
         structPtr->monMarks[structPtr->mark] = GetMonMarkingsData();
         monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
