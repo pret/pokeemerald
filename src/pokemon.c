@@ -4649,7 +4649,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     {                                                                                                   \
         friendshipChange = itemEffect[itemEffectParam];                                                 \
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);                                        \
-        if (friendshipChange > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)                             \
+        if (friendshipChange > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)                            \
             friendship += 150 * friendshipChange / 100;                                                 \
         else                                                                                            \
             friendship += friendshipChange;                                                             \
@@ -5828,7 +5828,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
          && (event != FRIENDSHIP_EVENT_LEAGUE_BATTLE || IS_LEAGUE_BATTLE))
         {
             s8 mod = sFriendshipEventModifiers[event][friendshipLevel];
-            if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
+            if (mod > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)
                 mod = (150 * mod) / 100;
             friendship += mod;
             if (mod > 0)

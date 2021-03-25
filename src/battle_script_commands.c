@@ -258,7 +258,7 @@ static void Cmd_trysetperishsong(void);
 static void Cmd_rolloutdamagecalculation(void);
 static void Cmd_jumpifconfusedandstatmaxed(void);
 static void Cmd_furycuttercalc(void);
-static void Cmd_happinesstodamagecalculation(void);
+static void Cmd_friendshiptodamagecalculation(void);
 static void Cmd_presentdamagecalculation(void);
 static void Cmd_setsafeguard(void);
 static void Cmd_magnitudedamagecalculation(void);
@@ -510,7 +510,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_rolloutdamagecalculation,                //0xB3
     Cmd_jumpifconfusedandstatmaxed,              //0xB4
     Cmd_furycuttercalc,                          //0xB5
-    Cmd_happinesstodamagecalculation,            //0xB6
+    Cmd_friendshiptodamagecalculation,           //0xB6
     Cmd_presentdamagecalculation,                //0xB7
     Cmd_setsafeguard,                            //0xB8
     Cmd_magnitudedamagecalculation,              //0xB9
@@ -8471,7 +8471,7 @@ static void Cmd_furycuttercalc(void)
     }
 }
 
-static void Cmd_happinesstodamagecalculation(void)
+static void Cmd_friendshiptodamagecalculation(void)
 {
     if (gBattleMoves[gCurrentMove].effect == EFFECT_RETURN)
         gDynamicBasePower = 10 * (gBattleMons[gBattlerAttacker].friendship) / 25;
