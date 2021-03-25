@@ -1310,9 +1310,12 @@ static void DebugAction_Vars_SetValue(u8 taskId)
 {
     if(gMain.newKeys & DPAD_UP)
     {
-        gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
-        if(gTasks[taskId].data[6] >= 100){
-            gTasks[taskId].data[6] = 99;
+        if (gTasks[taskId].data[6] + sPowersOfTen[gTasks[taskId].data[4]] <= 32000)
+            gTasks[taskId].data[6] += sPowersOfTen[gTasks[taskId].data[4]];
+        else
+            gTasks[taskId].data[6] = 32000-1;
+        if(gTasks[taskId].data[6] >= 32000){
+            gTasks[taskId].data[6] = 32000-1;
         }
     }
     if(gMain.newKeys & DPAD_DOWN)
@@ -1333,16 +1336,16 @@ static void DebugAction_Vars_SetValue(u8 taskId)
     if(gMain.newKeys & DPAD_RIGHT)
     {
         gTasks[taskId].data[4] += 1;
-        if(gTasks[taskId].data[4] > 2)
+        if(gTasks[taskId].data[4] > 4)
         {
-            gTasks[taskId].data[4] = 2;
+            gTasks[taskId].data[4] = 4;
         }
     }
 
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        VarSet(gTasks[taskId].data[3], gTasks[taskId].data[5]);
+        VarSet(gTasks[taskId].data[3], gTasks[taskId].data[6]);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
