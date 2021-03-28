@@ -23,6 +23,7 @@
 #define ABILITYEFFECT_TRACE1                     0xC
 #define ABILITYEFFECT_TRACE2                     0xD
 #define ABILITYEFFECT_MOVE_END_OTHER             0xE
+#define ABILITYEFFECT_SWITCH_IN_TERRAIN          0xFE
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ITEMEFFECT_ON_SWITCH_IN                 0x0
@@ -136,6 +137,7 @@ bool32 CanFling(u8 battlerId);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 IsThawingMove(u8 battlerId, u16 move);
+bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
 
 // ability checks
 bool32 IsRolePlayBannedAbilityAtk(u16 ability);
