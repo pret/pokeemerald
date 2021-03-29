@@ -3,7 +3,7 @@
 
 // States for gIntroCredits_MovingSceneryState
 enum {
-    INTROCRED_SCENERY_MOVING,
+    INTROCRED_SCENERY_NORMAL,
     INTROCRED_SCENERY_DESTROY,
     INTROCRED_SCENERY_FROZEN,
 };

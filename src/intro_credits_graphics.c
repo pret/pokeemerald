@@ -442,7 +442,7 @@ static const struct IntroCreditsSpriteMetadata sSpriteMetadata_HouseSilhouette[]
 
 static const struct OamData sOamData_Player =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64),
     .priority = 1
@@ -486,7 +486,7 @@ static const struct SpriteTemplate sSpriteTemplate_May =
 
 static const struct OamData sOamData_Bicycle =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .shape = SPRITE_SHAPE(64x32),
     .size = SPRITE_SIZE(64x32),
     .priority = 1
@@ -530,7 +530,7 @@ static const struct SpriteTemplate sSpriteTemplate_MayBicycle =
 
 static const struct OamData sOamData_Flygon =
 {
-    .y = 160,
+    .y = DISPLAY_HEIGHT,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64),
     .priority = 1
@@ -538,13 +538,13 @@ static const struct OamData sOamData_Flygon =
 
 static const union AnimCmd sAnim_FlygonLeft[] =
 {
-    ANIMCMD_FRAME(  0, 16),
+    ANIMCMD_FRAME(0, 16),
     ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_FlygonRight[] =
 {
-    ANIMCMD_FRAME( 64, 16),
+    ANIMCMD_FRAME(64, 16),
     ANIMCMD_END
 };
 
@@ -753,7 +753,7 @@ void LoadIntroPart2Graphics(u8 scene)
         CreateTreeSprites();
         break;
     }
-    gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_MOVING;
+    gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_NORMAL;
     gReservedSpritePaletteCount = 8;
 }
 
@@ -884,7 +884,7 @@ void LoadCreditsSceneGraphics(u8 scene)
         break;
     }
     gReservedSpritePaletteCount = 8;
-    gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_MOVING;
+    gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_NORMAL;
 }
 
 void SetCreditsSceneBgCnt(u8 scene)
@@ -1043,7 +1043,7 @@ static void SpriteCB_MovingScenery(struct Sprite *sprite)
         default: // INTROCRED_SCENERY_DESTROY
             DestroySprite(sprite);
             break;
-        case INTROCRED_SCENERY_MOVING:
+        case INTROCRED_SCENERY_NORMAL:
             x = ((sprite->pos1.x << 16) | (u16)sprite->data[2]) + (u16)sprite->data[1];
             sprite->pos1.x = x >> 16;
             sprite->data[2] = x;
