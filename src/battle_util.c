@@ -5209,7 +5209,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
     if (gBattleMons[battlerId].status2 & STATUS2_INFATUATION)
     {
         gBattleMons[battlerId].status2 &= ~(STATUS2_INFATUATION);
-        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREINFATUATION;  //STRINGID_TARGETGOTOVERINFATUATION
+        gBattleCommunication[MULTISTRING_CHOOSER] = MULTI_CUREINFATUATION;  // STRINGID_TARGETGOTOVERINFATUATION
         StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
         ret = TRUE;
     }
