@@ -5222,7 +5222,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_TAUNT);
             ret = TRUE;
         }
-        // check encore
+        // Check encore
         if (gDisableStructs[gBattlerTarget].encoreTimer != 0)
         {
             gDisableStructs[gActiveBattler].encoredMove = 0;
