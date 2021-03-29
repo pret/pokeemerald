@@ -1791,15 +1791,14 @@ bool8 HandleLinkConnection(void)
     {
         gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
         LinkMain2(&gMain.heldKeys);
-
-        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && sub_808766C() == TRUE)
+        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && IsSendingKeysOverCable() == TRUE)
             return TRUE;
     }
     else
     {
         r4 = sub_8010EC0();
         r5 = sub_8010F1C();
-        if (sub_808766C() == TRUE)
+        if (IsSendingKeysOverCable() == TRUE)
         {
             if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
                 return TRUE;
