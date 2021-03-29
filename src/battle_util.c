@@ -5214,7 +5214,7 @@ static bool32 GetMentalHerbEffect(u8 battlerId)
         ret = TRUE;
     }
     #if B_MENTAL_HERB >= GEN_5
-        // check taunt
+        // Check taunt
         if (gDisableStructs[gBattlerTarget].tauntTimer != 0)
         {
             gDisableStructs[gBattlerTarget].tauntTimer = gDisableStructs[gBattlerTarget].tauntTimer2 = 0;
