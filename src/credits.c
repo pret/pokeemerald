@@ -288,7 +288,7 @@ static const union AnimCmd *const sAnims_Rival[] =
     sAnim_Rival_Still,
 };
 
-#define MONBG_OFFSET (0x800 * 3)
+#define MONBG_OFFSET (MON_PIC_SIZE * 3)
 static const struct SpriteSheet sSpriteSheet_MonBg[] = {
     { gDecompressionBuffer, MONBG_OFFSET, TAG_MON_BG },
     {},
@@ -566,12 +566,12 @@ static void Task_CreditsLoadGrassScene(u8 taskIdA)
         LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(7)));
         LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
 
-        for (i = 0; i < 0x800; i++)
+        for (i = 0; i < MON_PIC_SIZE; i++)
             gDecompressionBuffer[i] = 0x11;
-        for (i = 0; i < 0x800; i++)
-            (gDecompressionBuffer + 0x800)[i] = 0x22;
-        for (i = 0; i < 0x800; i++)
-            (gDecompressionBuffer + 0x800 * 2)[i] = 0x33;
+        for (i = 0; i < MON_PIC_SIZE; i++)
+            (gDecompressionBuffer + MON_PIC_SIZE)[i] = 0x22;
+        for (i = 0; i < MON_PIC_SIZE; i++)
+            (gDecompressionBuffer + MON_PIC_SIZE * 2)[i] = 0x33;
 
         temp = (u16 *)(&gDecompressionBuffer[MONBG_OFFSET]);
         temp[0] = RGB_BLACK;
